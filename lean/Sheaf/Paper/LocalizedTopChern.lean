@@ -405,7 +405,10 @@ Proof following all eleven DAG steps:
 2. On the total space E(F), the zero section has coordinate ideal (x_1,...,x_r).
    Variables are a regular sequence over any ring. Affine-space smoothness and the
    nonzerodivisor dimension-drop lemma give the required relative smooth pair.
-   Lem-pur-relative-support-bottom-descent gives vanishing below degree 2r.
+   The total space is locally of finite type over k. Its local rings are Noetherian
+   local rings, hence have finite Krull dimension by Krull's height theorem. Thus the
+   hfinite hypothesis of lem-pur-relative-support-bottom-descent holds at the zero
+   section, and that theorem gives vanishing below degree 2r.
 3. Lem-pur-supported-bottom-gluing identifies this lowest supported group with
    sections of its local-cohomology sheaf. Lem-pur-frame-independence identifies
    the coordinate classes on overlaps. Glue the universal class u_F there.

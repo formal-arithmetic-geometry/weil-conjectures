@@ -59,6 +59,8 @@ def frameClassOnPullback (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}}
       (pullback.snd i F.e) F.isPullback.isoPullback F.isPullback.isoPullback_hom_snd).inv ≫
     P.frameClass b v i c hcodim F
 
+-- STATEMENT-DISPUTED: the former codimension convention allowed infinite ambient
+-- stalk dimensions. The returned E2 repair adds hfinite before using that convention.
 /-- The concrete class depends only on the closed pair, not its ordered tuple
 of equations. Both tuples present the same scheme-theoretic pullback of `Z` on
 an arbitrary common etale neighbourhood `U`. In particular, no equality of
@@ -68,6 +70,9 @@ etale fibre product and the restrictions of their functions in this statement.
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-prop-an,
 lem-pur-frame-independence (blueprint: lem-pur-frame-independence).
+
+The ambient stalks along Z are assumed finite-dimensional so the Krull-dimension
+codimension convention can be used in bottom-degree descent.
 
 Proof (the seven steps of the DAG node):
 1. Compare two length-c frames on the same etale neighbourhood; different
@@ -103,6 +108,7 @@ theorem frameClass_independent (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}
     [Smooth (i ≫ v)] (c : ℕ)
     (hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) =
       ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞))
+    (hfinite : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) ≠ ⊤)
     (U : Scheme.{u}) (e : U ⟶ V) [Etale e] (f g : Fin c → Γ(U, ⊤))
     (tf : U.zeroLocusSubscheme (Set.range f) ⟶ Z)
     (tg : U.zeroLocusSubscheme (Set.range g) ⟶ Z)

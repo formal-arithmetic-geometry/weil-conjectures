@@ -1,0 +1,235 @@
+{
+ "id": "lem-pur-relative-support-vanishing",
+ "kind": "statement",
+ "title": "Lower supported-degree vanishing for a smooth pair",
+ "statement": "Use the finite coefficient datum k, ell, E, n, A of [def-pur-conventions], with n at least one and signed finite Tate sheaves A(r) of [def-coefficient-twists-detailed]. Let B be a k-scheme, V -> B smooth of a fixed finite relative dimension [def-sbc-smooth-morphisms], and i:Z -> V a closed immersion [def-weil-closed-immersion] with Z -> B smooth. Let c be a natural number and suppose dim O_{V,i(z)} = dim O_{Z,z} + c for every z in Z, with Krull dimension the supremum of lengths of strict prime chains. Assume also that dim O_{V,i(z)} is finite for every z in Z. For any etale e:U -> V [def-weil-etale-morphism], let Z_U=Z times_V U. On the small etale site [def-weil-pbc-etale-site], form the sheaf-of-sections functor with support in Z_U [def-pur-etale-supported-kernel], i.e. the kernel of F -> j_* j^* F for the open complement j. For every signed twist r and every integer q<2c, the q-th cohomology sheaf of R underline-Gamma_{Z_U}(A(r)) is zero. The underlying abelian coefficient is sectionwise scalar forgetting [def-pur-etale-module-abelian-forget]. No global equations for the support, no frame, and no orientation are assumed or chosen.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-pur-etale-supported-kernel",
+  "def-pur-etale-module-abelian-forget"
+ ],
+ "proof": [
+  {
+   "text": "Negative cohomology is zero because a sheaf in degree zero has an injective resolution in nonnegative degrees, and right deriving the left-exact supported-sections functor uses that resolution. Thus c=0 needs no frame or support assumption. For positive codimension, the remaining steps prove vanishing at every geometric point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+   }
+  },
+  {
+   "text": "At a geometric point on Z_U, choose the simultaneous etale smooth-pair coordinates of [lem-pur-smooth-pair-local-coordinates] on an open U_0 in V. Pull this chart back to T=U times_V U_0. Exact etale restriction, which preserves injectives by [lem-weil-pbc-etale-restriction-injectives], commutes with the underived restriction kernel and hence its derived functor. It leaves the stalk unchanged. In the module coefficient category apply [lem-pur-relative-support-coordinate-model] to this chart, with X=V, Y=Z and S=B. Its dimension clause makes the normal rank b equal to c whenever the chart meets the support; the ambient stalk dimensions at all support points are finite by hypothesis, so the displayed dimension equation is used only at finite values. The coordinate-model dimension clause then identifies the normal rank with c. The model identifies the actual supported stalk with global origin-supported cohomology on affine c-space over k.",
+   "uses": [
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-pur-relative-support-coordinate-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-finite-type-coordinate-support-orientation] over Spec k. The field orientation identifies the origin-supported complex with a free coefficient line in degree 2c, by its iterated affine-line Kummer and supported-product route. To compare its universal ell-power exponent with the coefficient-ring characteristic used here, use the positive-characteristic and invertibility clauses of [lem-pur-relative-support-coordinate-model] and the exponent-change clause of [lem-asd-etale-finite-twist-pullback]. The characteristic divides the annihilating ell-power; both exponents are invertible on every k-scheme. This gives the same signed finite Tate coefficient for every integer r, including negative twists. The field complex, and therefore the supported module stalk, has zero cohomology in degrees below 2c.",
+   "uses": [
+    "lem-pur-finite-type-coordinate-support-orientation",
+    "lem-pur-relative-support-coordinate-model",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+   }
+  },
+  {
+   "text": "Scalar forgetting is exact and preserves the support kernels. An injective module sheaf has acyclic underlying abelian evaluations by [det-pbc-conventions-module-cohomology]. Restriction along the monic complementary-open arrow is split surjective on these evaluations. The supported-section exact sequence and [lem-weil-pbc-right-derived-injective-sequence], with the zero-degree identification [lem-weil-pbc-right-derived-zero-transformation], show acyclicity for abelian supported sections. Induct on the cohomology degree: when all lower support sheaves vanish, the interval exact sequences of the support/evaluation Grothendieck spectral object [lem-sp-grothendieck-edge-maps] identify evaluations of the next support sheaf with the already zero supported groups. Thus the underlying module injectives are also acyclic for the abelian support sheaf functor. Exact forgetting therefore commutes with its right-derived functor on the module coefficient. Exact geometric stalks commute with cohomology [lem-kun-stalks-of-cohomology]. Outside Z_U the open unit is locally invertible, so every supported derived stalk is zero there. All stalks of the claimed abelian cohomology sheaf are now zero; [lemma-weil-pbc-geometric-stalk-conservative] implies that the sheaf itself is zero. Empty support is included.",
+   "uses": [
+    "det-pbc-conventions-module-cohomology",
+    "lem-weil-pbc-right-derived-injective-sequence",
+    "lem-weil-pbc-right-derived-zero-transformation",
+    "lem-kun-stalks-of-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pbc-conventions-module-cohomology",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-kun-stalks-of-cohomology",
+  "lem-pur-finite-type-coordinate-support-orientation",
+  "lem-pur-relative-support-coordinate-model",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-sp-grothendieck-edge-maps",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-right-derived-injective-sequence",
+  "lem-weil-pbc-right-derived-zero-transformation",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth closed pair of schemes over an arbitrary base, etale local cohomology sheaves of invertible torsion coefficients vanish below twice the codimension",
+   "results": "Eight hits, including IsSmooth.recOn, smallEtaleTopology, etale-locus and cotangent statements; none is supported etale purity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"local cohomology\", \"support\", \"smooth\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedKernel|sectionsWithSupport|localCohomology",
+   "results": "Five hits in Mathlib/Algebra/Homology/LocalCohomology.lean, about algebraic ideal-supported local cohomology; none concerns etale sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeSupportBottomDescent",
+  "date": "2026-10-22",
+  "group": "A3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "First two proof sentences, normal-coordinate lower-vanishing argument, before the local-to-global equality test.",
+   "via": [
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeSupportVanishing",
+  "file": "lean/Sheaf/Paper/RelativeSupportVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.relative_support_vanishing",
+  "statement": "theorem relative_support_vanishing\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (c d : ℕ)\n    {B V Z U : Scheme.{u}}\n    (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B)\n    [SmoothOfRelativeDimension d v] (i : Z ⟶ V) [IsClosedImmersion i]\n    [Smooth (i ≫ v)]\n    (hcodim : ∀ z : Z,\n      ringKrullDim (V.presheaf.stalk (i.base z)) =\n        ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞))\n    (hfinite : ∀ z : Z,\n      ringKrullDim (V.presheaf.stalk (i.base z)) ≠ ⊤)\n    (e : U ⟶ V) [Etale e] (r : ℤ) :\n    ∀ q : ℤ, q < 2 * (c : ℤ) →\n      IsZero ((DerivedCategory.Plus.homologyFunctor\n        (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj\n          ((sectionsWithSupport AddCommGrpCat.{u + 1}\n            (pullback.snd i e).openComplement.ι).rightDerivedFunctorPlus.obj\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj\n              ((P.forgetEtale U).obj\n                (Scheme.finiteEtaleTateSheaf P.Coefficient (ringChar P.Coefficient) U\n                  (CharP.cast_eq_zero P.Coefficient (ringChar P.Coefficient)) r)))))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-22"
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "A3 stage 2",
+  "old_statement": "Use the finite coefficient datum k, ell, E, n, A of [def-pur-conventions], with n at least one and signed finite Tate sheaves A(r) of [def-coefficient-twists-detailed]. Let B be a k-scheme, V -> B smooth of a fixed finite relative dimension [def-sbc-smooth-morphisms], and i:Z -> V a closed immersion [def-weil-closed-immersion] with Z -> B smooth. Let c be a natural number and suppose dim O_{V,i(z)} = dim O_{Z,z} + c for every z in Z, with Krull dimension the supremum of lengths of strict prime chains. For any etale e:U -> V [def-weil-etale-morphism], let Z_U=Z times_V U. On the small etale site [def-weil-pbc-etale-site], form the sheaf-of-sections functor with support in Z_U [def-pur-etale-supported-kernel], i.e. the kernel of F -> j_* j^* F for the open complement j. For every signed twist r and every integer q<2c, the q-th cohomology sheaf of R underline-Gamma_{Z_U}(A(r)) is zero. The underlying abelian coefficient is sectionwise scalar forgetting [def-pur-etale-module-abelian-forget]. No global equations for the support, no frame, and no orientation are assumed or chosen.",
+  "what": "STATEMENT-DISPUTED: the previous codimension convention allowed infinite ambient stalk dimensions. Implement reviewer C-c9702 E2 by explicitly requiring finite Krull dimension along the support; retain all conclusions.",
+  "source": {
+   "document": "coord/returns/A3.md",
+   "place": "Sheaf.Paper.RelativeSupportBottomDescent, reviewer C-c9702 E2, 2026-10-21: explicit finite-dimensional stalk repair."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-relative-support-bottom-descent",
+    "holds": true,
+    "note": "The parent theorem is repaired in this packet with the identical finite ambient-stalk hypothesis and passes it directly to relative_support_vanishing."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Negative cohomology is zero because a sheaf in degree zero has an injective resolution in nonnegative degrees, and right deriving the left-exact supported-sections functor uses that resolution. Thus c=0 needs no frame or support assumption. For positive codimension, the remaining steps prove vanishing at every geometric point.",
+    "uses": [],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+    }
+   },
+   {
+    "text": "At a geometric point on Z_U, choose the simultaneous etale smooth-pair coordinates of [lem-pur-smooth-pair-local-coordinates] on an open U_0 in V. Pull this chart back to T=U times_V U_0. Exact etale restriction, which preserves injectives by [lem-weil-pbc-etale-restriction-injectives], commutes with the underived restriction kernel and hence its derived functor. It leaves the stalk unchanged. In the module coefficient category apply [lem-pur-relative-support-coordinate-model] to this chart, with X=V, Y=Z and S=B. Its dimension clause makes the normal rank b equal to c whenever the chart meets the support; this uses the supplied equality at every point of Z, without cancellation of infinite Krull dimensions. The model identifies the actual supported stalk with global origin-supported cohomology on affine c-space over k.",
+    "uses": [
+     "lem-pur-smooth-pair-local-coordinates",
+     "lem-weil-pbc-etale-restriction-injectives",
+     "lem-pur-relative-support-coordinate-model"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+    }
+   },
+   {
+    "text": "Apply [lem-pur-finite-type-coordinate-support-orientation] over Spec k. The field orientation identifies the origin-supported complex with a free coefficient line in degree 2c, by its iterated affine-line Kummer and supported-product route. To compare its universal ell-power exponent with the coefficient-ring characteristic used here, use the positive-characteristic and invertibility clauses of [lem-pur-relative-support-coordinate-model] and the exponent-change clause of [lem-asd-etale-finite-twist-pullback]. The characteristic divides the annihilating ell-power; both exponents are invertible on every k-scheme. This gives the same signed finite Tate coefficient for every integer r, including negative twists. The field complex, and therefore the supported module stalk, has zero cohomology in degrees below 2c.",
+    "uses": [
+     "lem-pur-finite-type-coordinate-support-orientation",
+     "lem-pur-relative-support-coordinate-model",
+     "lem-asd-etale-finite-twist-pullback"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+    }
+   },
+   {
+    "text": "Scalar forgetting is exact and preserves the support kernels. An injective module sheaf has acyclic underlying abelian evaluations by [det-pbc-conventions-module-cohomology]. Restriction along the monic complementary-open arrow is split surjective on these evaluations. The supported-section exact sequence and [lem-weil-pbc-right-derived-injective-sequence], with the zero-degree identification [lem-weil-pbc-right-derived-zero-transformation], show acyclicity for abelian supported sections. Induct on the cohomology degree: when all lower support sheaves vanish, the interval exact sequences of the support/evaluation Grothendieck spectral object [lem-sp-grothendieck-edge-maps] identify evaluations of the next support sheaf with the already zero supported groups. Thus the underlying module injectives are also acyclic for the abelian support sheaf functor. Exact forgetting therefore commutes with its right-derived functor on the module coefficient. Exact geometric stalks commute with cohomology [lem-kun-stalks-of-cohomology]. Outside Z_U the open unit is locally invertible, so every supported derived stalk is zero there. All stalks of the claimed abelian cohomology sheaf are now zero; [lemma-weil-pbc-geometric-stalk-conservative] implies that the sheaf itself is zero. Empty support is included.",
+    "uses": [
+     "det-pbc-conventions-module-cohomology",
+     "lem-weil-pbc-right-derived-injective-sequence",
+     "lem-weil-pbc-right-derived-zero-transformation",
+     "lem-kun-stalks-of-cohomology",
+     "lemma-weil-pbc-geometric-stalk-conservative",
+     "lem-sp-grothendieck-edge-maps"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Tags 09XP, 09XQ and 0FUE; lower-vanishing part of the relative smooth-pair normal-coordinate argument. This is an agent-formulated relative refinement, not a quotation of purity over an arbitrary base from these tags."
+    }
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-b96f8",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261022T013344-L-3550290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-b96f8",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261022T013344-L-3550290",
+  "kind": "interface",
+  "note": "independent cc review: item relative_support_bottom_descent (+hfinite) and new relative_support_vanishing against nodes lem-pur-relative-support-bottom-descent / lem-pur-relative-support-vanishing, frameClass_independent against lem-pur-frame-independence, change records A3-relative-support-finite-stalks and -explicit-result-types, E2 return of C-c9702"
+ }
+}

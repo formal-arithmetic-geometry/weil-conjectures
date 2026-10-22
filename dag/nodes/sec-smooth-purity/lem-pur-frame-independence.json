@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Independence of the frame",
- "statement": "In the situation of [def-pur-frame-class], the class\n$\\operatorname{cl}(f)$ of [def-pur-frame-class] depends only on\nthe ideal of $Z$, i.e. only on the pair, not on the frame.",
+ "statement": "In the situation of [def-pur-frame-class], the class\n$\\operatorname{cl}(f)$ of [def-pur-frame-class] depends only on\nthe ideal of $Z$, i.e. only on the pair, not on the frame. Assume in addition that the ambient stalk $\\mathcal O_{V,i(z)}$ has finite Krull dimension for every $z\\in Z$, as required by the bottom-degree descent step.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-frame-independence.md",
   "place": "node lem-pur-frame-independence, order 1943"
@@ -29,7 +29,7 @@
    }
   },
   {
-   "text": "Apply [lem-pur-relative-support-bottom-descent] directly to the displayed frame data $(V,B,Z,U,c)$, with $r=c$, to test equality of our degree-$2c$ supported classes on an etale cover; a Zariski cover suffices. At any point $x\\in U$, the germs of $f,g$ generate the same finite module $I_x$ over the local ring $\\mathcal O_{U,x}$. By [lem-pur-local-generating-tuples], a finite succession of permutations, unit multiples and shears transforms these germs into one another. This finite succession spreads to an affine open neighborhood $N$ of $x$ in $U$ (no finiteness hypothesis on $V$ or $B$ is used or needed): represent every coefficient and unit inverse as a section on a neighborhood; the finitely many equalities hold after shrinking because equality in a stalk means equality on a smaller neighborhood. $N\\to U\\to V$ is etale, so each intermediate tuple is again a frame on $N$. On that neighborhood every operation is invertible, preserves the generated ideal, and transforms the actual sections $f$ into $g$. Thus it remains to check these three operations on an open neighborhood. The pullback and boundary/product compatibilities of [lem-pur-supported-cup-functoriality] identify the restriction of each frame class with the same construction on that neighborhood. No strictly henselian local scheme is treated as an etale neighborhood, and no general Smith normal form is used.",
+   "text": "Apply [lem-pur-relative-support-bottom-descent] directly to the displayed frame data $(V,B,Z,U,c)$, with $r=c$ and the finite-dimensional ambient-stalk hypothesis, to test equality of our degree-$2c$ supported classes on an etale cover; a Zariski cover suffices. At any point $x\\in U$, the germs of $f,g$ generate the same finite module $I_x$ over the local ring $\\mathcal O_{U,x}$. By [lem-pur-local-generating-tuples], a finite succession of permutations, unit multiples and shears transforms these germs into one another. This finite succession spreads to an affine open neighborhood $N$ of $x$ in $U$ (spreading the finite generator changes needs no further finiteness hypothesis): represent every coefficient and unit inverse as a section on a neighborhood; the finitely many equalities hold after shrinking because equality in a stalk means equality on a smaller neighborhood. $N\\to U\\to V$ is etale, so each intermediate tuple is again a frame on $N$. On that neighborhood every operation is invertible, preserves the generated ideal, and transforms the actual sections $f$ into $g$. Thus it remains to check these three operations on an open neighborhood. The pullback and boundary/product compatibilities of [lem-pur-supported-cup-functoriality] identify the restriction of each frame class with the same construction on that neighborhood. No strictly henselian local scheme is treated as an etale neighborhood, and no general Smith normal form is used.",
    "uses": [
     "def-pur-frame-class",
     "lem-pur-relative-support-bottom-descent",
@@ -207,10 +207,154 @@
    "WeilConjectures.PurityFiniteSetting.frameClass_independent"
   ],
   "file": "lean/Sheaf/Paper/PurityFrameIndependence.lean",
-  "statement": "theorem frameClass_independent (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B) [SmoothOfRelativeDimension P.level v] (i : Z ⟶ V) [IsClosedImmersion i] [Smooth (i ≫ v)] (c : ℕ) (hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) = ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)) (U : Scheme.{u}) (e : U ⟶ V) [Etale e] (f g : Fin c → Γ(U, ⊤)) (tf : U.zeroLocusSubscheme (Set.range f) ⟶ Z) (tg : U.zeroLocusSubscheme (Set.range g) ⟶ Z) (hf : IsPullback tf (U.zeroLocusSubschemeι (Set.range f)) i e) (hg : IsPullback tg (U.zeroLocusSubschemeι (Set.range g)) i e) : P.frameClassOnPullback b v i c hcodim { U := U, e := e, etale := inferInstance, f := f, toZ := tf, isPullback := hf } = P.frameClassOnPullback b v i c hcodim { U := U, e := e, etale := inferInstance, f := g, toZ := tg, isPullback := hg }",
+  "statement": "theorem frameClass_independent (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}}\n    (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B)\n    [SmoothOfRelativeDimension P.level v] (i : Z ⟶ V) [IsClosedImmersion i]\n    [Smooth (i ≫ v)] (c : ℕ)\n    (hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) =\n      ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞))\n    (hfinite : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) ≠ ⊤)\n    (U : Scheme.{u}) (e : U ⟶ V) [Etale e] (f g : Fin c → Γ(U, ⊤))\n    (tf : U.zeroLocusSubscheme (Set.range f) ⟶ Z)\n    (tg : U.zeroLocusSubscheme (Set.range g) ⟶ Z)\n    (hf : IsPullback tf (U.zeroLocusSubschemeι (Set.range f)) i e)\n    (hg : IsPullback tg (U.zeroLocusSubschemeι (Set.range g)) i e) :\n    P.frameClassOnPullback b v i c hcodim\n      { U := U, e := e, etale := inferInstance, f := f, toZ := tf, isPullback := hf } =\n    P.frameClassOnPullback b v i c hcodim\n      { U := U, e := e, etale := inferInstance, f := g, toZ := tg, isPullback := hg }",
   "branch": "newtargets-dag",
   "by": "Q64",
   "date": "2026-10-18",
   "existing": false
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "A3 stage 2",
+  "old_statement": "In the situation of [def-pur-frame-class], the class\n$\\operatorname{cl}(f)$ of [def-pur-frame-class] depends only on\nthe ideal of $Z$, i.e. only on the pair, not on the frame.",
+  "what": "STATEMENT-DISPUTED: the previous codimension convention allowed infinite ambient stalk dimensions. Implement reviewer C-c9702 E2 by explicitly requiring finite Krull dimension along the support; retain all conclusions.",
+  "source": {
+   "document": "coord/returns/A3.md",
+   "place": "Sheaf.Paper.RelativeSupportBottomDescent, reviewer C-c9702 E2, 2026-10-21: explicit finite-dimensional stalk repair."
+  },
+  "citers": [
+   {
+    "id": "def-pur-regular-immersion-class-data",
+    "holds": true,
+    "note": "The ambient X is smooth separated finite type over k; its stalks are Noetherian local rings, hence finite-dimensional."
+   },
+   {
+    "id": "lem-pur-divisor-class",
+    "holds": true,
+    "note": "T is separated finite type over k in both the node and divisor_class; its Noetherian local stalks satisfy hfinite."
+   },
+   {
+    "id": "prop-pur-regular-immersion-purity-compatibilities",
+    "holds": true,
+    "note": "The ambient schemes and the smooth-base-changed/product schemes are smooth over k, hence locally of finite type and locally Noetherian; their stalk dimensions are finite."
+   },
+   {
+    "id": "sk-thm-regular",
+    "holds": true,
+    "note": "X and each etale frame are smooth over k, so their local rings are Noetherian local rings of finite dimension. The constant-relative-dimension pieces preserve this property."
+   },
+   {
+    "id": "thm-pur-localized-top-chern",
+    "holds": true,
+    "note": "The universal total-space pairs are locally of finite type over k; their Noetherian local rings have finite Krull dimension. Its theorem is unchanged."
+   },
+   {
+    "id": "thm-pur-regular-immersion-purity",
+    "holds": true,
+    "note": "The ambient X is smooth over k, hence locally of finite type over k; every stalk is a Noetherian local ring of finite Krull dimension."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Work with two length-$c$ frames $f,g$ on the same etale neighborhood $U$, generating the same ideal $I$ of $Z_U$. This is the meaning of frame independence; for frames on different etale neighborhoods compare their restrictions on the fibre product over $V$, which is an object of the small etale site by [def-weil-pbc-etale-site]. Use exactly the individual-boundary, ordered-product construction of [def-pur-frame-class]. If $c=0$, both classes are the specified empty product $1$ in $H^0(U,A)$, so they agree. Henceforth $c>0$.",
+    "uses": [
+     "def-pur-frame-class",
+     "def-weil-pbc-etale-site"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "First sentence; specify the equality and the empty-frame case."
+    }
+   },
+   {
+    "text": "Apply [lem-pur-relative-support-bottom-descent] directly to the displayed frame data $(V,B,Z,U,c)$, with $r=c$, to test equality of our degree-$2c$ supported classes on an etale cover; a Zariski cover suffices. At any point $x\\in U$, the germs of $f,g$ generate the same finite module $I_x$ over the local ring $\\mathcal O_{U,x}$. By [lem-pur-local-generating-tuples], a finite succession of permutations, unit multiples and shears transforms these germs into one another. This finite succession spreads to an affine open neighborhood $N$ of $x$ in $U$ (no finiteness hypothesis on $V$ or $B$ is used or needed): represent every coefficient and unit inverse as a section on a neighborhood; the finitely many equalities hold after shrinking because equality in a stalk means equality on a smaller neighborhood. $N\\to U\\to V$ is etale, so each intermediate tuple is again a frame on $N$. On that neighborhood every operation is invertible, preserves the generated ideal, and transforms the actual sections $f$ into $g$. Thus it remains to check these three operations on an open neighborhood. The pullback and boundary/product compatibilities of [lem-pur-supported-cup-functoriality] identify the restriction of each frame class with the same construction on that neighborhood. No strictly henselian local scheme is treated as an etale neighborhood, and no general Smith normal form is used.",
+    "uses": [
+     "def-pur-frame-class",
+     "lem-pur-relative-support-bottom-descent",
+     "lem-pur-local-generating-tuples",
+     "lem-pur-supported-cup-functoriality"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Local-ring reduction, matrix paragraph, and local equality test; gaps repaired explicitly."
+    }
+   },
+   {
+    "text": "For a unit multiple $f_i'=u f_i$, the divisor $D_i$ and its complement $W_i$ are unchanged. By [lem-pur-supported-cup-functoriality], $\\kappa_{W_i}(u f_i)=\\kappa_{W_i}(u)+\\kappa_{W_i}(f_i)$ and $\\kappa_{W_i}(u)$ is the restriction of $\\kappa_U(u)$. Exactness of [thm-pur-with-support-exactness] shows that its boundary in $H^2_{D_i}(U,A(1))$ is zero. Additivity of that boundary therefore leaves $\\alpha_i$ unchanged, and hence leaves its ordered product with the other factors, the class of [def-pur-frame-class], unchanged.",
+    "uses": [
+     "lem-pur-supported-cup-functoriality",
+     "thm-pur-with-support-exactness",
+     "def-pur-frame-class"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "'Unit multiples': Kummer additivity and exactness for the individual support."
+    }
+   },
+   {
+    "text": "For an adjacent transposition, the corresponding supported factors in [def-pur-frame-class] both have cohomological degree $2$ and twist $1$. Associativity and graded symmetry in [lem-pur-supported-cup-functoriality] give sign $(-1)^{2\\cdot2}=1$, after the canonical support-intersection and twist identifications. For the twists: $A(1)$ is locally free of rank one over $A$ (as recorded in [def-pur-frame-class]), and on a cover where $A(1)\\cong A$ with local generator $e$ the swap sends $ae\\otimes be\\mapsto be\\otimes ae=ab\\,e\\otimes e$, so the swap of two adjacent factors of $A(1)^{\\otimes c}$ is the identity and the identification with $A(c)$ is unaffected. The supports $D_i\\times_UD_{i+1}$ and $D_{i+1}\\times_UD_i$ are the same closed subscheme of $U$. Thus the class is unchanged. Every permutation is a succession of adjacent transpositions (move the entry in the first desired position to the front, then repeat on the remaining list), so all permutations preserve the class.",
+    "uses": [
+     "def-pur-frame-class",
+     "lem-pur-supported-cup-functoriality"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "'Permutations': supported graded commutativity, not a bare Kunneth symmetry."
+    }
+   },
+   {
+    "text": "For the shear $f_i'=f_i+a f_j$, where $i\\ne j$, put $T=\\mathbf A^1_U$ with projection $p$ and coordinate $t$. The tuple $F(t)$ obtained by replacing $f_i$ by $f_i+t a f_j$ has ideal $I\\mathcal O_T$: containment in one direction is immediate, and in the other direction recover $f_i$ by subtracting $t a f_j$. Its common zero scheme is therefore $Z_T=p^{-1}Z_U$. Construct $\\eta\\in H^{2c}_{Z_T}(T,A(c))$ by the same explicit formula as [def-pur-frame-class]: on the complement of each individual zero scheme take the Kummer class of that function, its localization boundary, then the ordered supported product. This formula is available for functions on $T$ by [lem-pur-supported-cup-functoriality] and [thm-pur-with-support-exactness]. We do not assert that $T\\to V$ is etale or call it an etale frame. Pullback along the zero and unit sections, using those same compatibility laws, gives respectively $s_0^*\\eta=\\operatorname{cl}(f)$ and $s_1^*\\eta=\\operatorname{cl}(f')$.",
+    "uses": [
+     "def-pur-frame-class",
+     "lem-pur-supported-cup-functoriality",
+     "thm-pur-with-support-exactness"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "'Elementary shears': interpolation tuple, its fixed total support, and endpoint naturality."
+    }
+   },
+   {
+    "text": "Apply [lem-pur-supported-affine-line-homotopy] to $(U,Z_U)$ in degree $2c$ and twist $c$. Write $\\eta=p^*\\xi$ using its canonical isomorphism. Since $p s_0=p s_1=\\mathrm{id}_U$, pullback composition from [lem-pur-supported-cup-functoriality] gives $s_0^*\\eta=\\xi=s_1^*\\eta$. Combined with step 5 this proves shear invariance. This uses projection invariance of supported cohomology, not a claim that a global cohomology group is a constant sheaf on $\\mathbf A^1_U$.",
+    "uses": [
+     "lem-pur-supported-affine-line-homotopy",
+     "lem-pur-supported-cup-functoriality"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Shear paragraph: replace the false constant-sheaf inference by projection invariance and its inverse sections."
+    }
+   },
+   {
+    "text": "On each of the neighborhoods from step 2, successively apply steps 3--6 along the finite sequence of generator changes to obtain equality of the two frame classes. By [lem-pur-relative-support-bottom-descent] these local equalities give equality in $H^{2c}_{Z_U}(U,A(c))$. In the comparison of different neighborhoods from step 1, the common fibre product is an etale object by [def-weil-pbc-etale-site] and its pulled-back tuples define the pulled-back frame classes by [lem-pur-supported-cup-functoriality]. The equality just proved applies there as well. Thus the class depends only on the defining ideal, with the canonical etale-restriction interpretation of [def-pur-frame-class].",
+    "uses": [
+     "lem-pur-relative-support-bottom-descent",
+     "lem-pur-supported-cup-functoriality",
+     "def-pur-frame-class",
+     "def-weil-pbc-etale-site"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+     "place": "Final two sentences: compose the local operations and descend equality."
+    }
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-b96f8",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261022T013344-L-3550290",
+  "kind": "interface",
+  "note": "independent cc review: item relative_support_bottom_descent (+hfinite) and new relative_support_vanishing against nodes lem-pur-relative-support-bottom-descent / lem-pur-relative-support-vanishing, frameClass_independent against lem-pur-frame-independence, change records A3-relative-support-finite-stalks and -explicit-result-types, E2 return of C-c9702"
  }
 }

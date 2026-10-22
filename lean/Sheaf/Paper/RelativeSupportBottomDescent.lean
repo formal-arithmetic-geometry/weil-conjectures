@@ -18,30 +18,23 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
-import all WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologyConventions
 import WeilConjectures.CategoryTheory.RightDerivedInjectiveSequence
 import WeilConjectures.CategoryTheory.RightDerivedZeroTransformation
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import WeilConjectures.CategoryTheory.Sites.SectionsWithSupport
 import all Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
 import all Sheaf.CategoryTheory.ModuleRestrictionKernelComparison
-import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.CategoryTheory.GrothendieckEdgeCocycle
-import Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge
-import Sheaf.AlgebraicGeometry.KunnethSupported
-import Sheaf.Paper.RelativeSupportCoordinateModel
-import Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates
-import Sheaf.Paper.PurTwistSheafLocallyFree
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.Paper.PurityRankOneLocalCalculation
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.RelativeSupportVanishing
 
 /-! # Descent in the bottom supported degree of a smooth pair
 
@@ -55,13 +48,13 @@ natural in these objects. The pro-etale comparison derives the published adjunct
 map on support kernels, and descent tests global supported classes on an arbitrary cover.
 
 The canonical support, evaluation, scalar-forgetting and site-comparison interfaces
-are proved below. The remaining smooth-pair vanishing and descent obligation is the
-named final theorem, with its proof plan recorded in the declaration and DAG node.
+are proved below. The final theorem derives the bottom edge, its restriction squares
+and descent from the separate smooth-pair lower-vanishing theorem.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u w
+universe u v v' w
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -358,8 +351,12 @@ theorem relativeSupportEvaluationIso_existsUnique {Z U : Scheme.{u}}
 /-- The unique kernel-normalized support/evaluation comparison.
 Source: Stacks Tag 09XP (blueprint: lem-pur-relative-support-bottom-descent). -/
 noncomputable def relativeSupportEvaluationIso {Z U : Scheme.{u}}
-    (i : Z ⟶ U) [IsClosedImmersion i] (W : U.Etale) :=
+    (i : Z ⟶ U) [IsClosedImmersion i] (W : U.Etale) :
+    relativeSupportKernel i ⋙ relativeSupportEvaluation W ≅
+      relativeSupportRestriction W ⋙ supportSections (pullback.snd i W.hom) :=
   Classical.choose (relativeSupportEvaluationIso_existsUnique i W)
+
+attribute [local irreducible] relativeSupportKernel
 
 /-- Exactness and additivity of the existing etale localization restriction.
 Source: Stacks Tag 03F3 (blueprint: lem-pur-relative-support-bottom-descent).
@@ -390,7 +387,10 @@ Proof: limits are computed sectionwise, so restriction preserves finite limits. 
 Source: Stacks Tags 09XP and 015N
 (blueprint: lem-pur-relative-support-bottom-descent). -/
 noncomputable def relativeSupportDerivedEvaluation {Z U : Scheme.{u}}
-    (i : Z ⟶ U) [IsClosedImmersion i] (W : U.Etale) (n : ℕ) :=
+    (i : Z ⟶ U) [IsClosedImmersion i] (W : U.Etale) (n : ℕ) :
+    (relativeSupportKernel i ⋙ relativeSupportEvaluation W).rightDerived n ⋙
+        𝟭 AddCommGrpCat.{u + 1} ⟶
+      relativeSupportRestriction W ⋙ (supportSections (pullback.snd i W.hom)).rightDerived n :=
   Functor.rightDerivedBaseChange
     (β := relativeSupportRestriction W) (γ := 𝟭 AddCommGrpCat.{u + 1})
     ((Functor.rightUnitor _).hom ≫ (relativeSupportEvaluationIso i W).hom) n
@@ -406,6 +406,29 @@ private theorem relativeSupportSections_limits {Z T : Scheme.{u}}
   have : ∀ M, Mono (ι.app M) := fun M ↦ by dsimp [ι]; infer_instance
   exact ModuleRestrictionKernel.kernelLeftExact F G (supportSections i) a ι
     (fun M ↦ kernel.condition _) (fun M ↦ kernelIsKernel _)
+
+/-- Invertibility of derived base change, proved once before specializing the
+categories to scheme-dependent sheaf categories. It follows termwise from the
+canonical base-change formula and invertibility of the derived-plus comparison. -/
+private theorem relativeSupportDerivedBaseChange_isIso
+    {B B' C C' : Type (u + 2)}
+    [Category.{u + 1} B] [Category.{u + 1} B']
+    [Category.{u + 1} C] [Category.{u + 1} C']
+    [Abelian B] [Abelian B'] [Abelian C] [Abelian C']
+    [HasDerivedCategory B] [HasDerivedCategory B']
+    [HasDerivedCategory C] [HasDerivedCategory C']
+    [EnoughInjectives B] [EnoughInjectives B']
+    {G : B ⥤ C} {G' : B' ⥤ C'} {β : B ⥤ B'} {γ : C ⥤ C'}
+    [G.Additive] [G'.Additive] [β.Additive] [γ.Additive]
+    [PreservesFiniteLimits β] [PreservesFiniteColimits β]
+    [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
+    (e : G ⋙ γ ⟶ β ⋙ G')
+    [IsIso (Functor.rightDerivedFunctorPlusBaseChange e)] (n : ℕ) :
+    IsIso (Functor.rightDerivedBaseChange e n) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro X
+  rw [Functor.rightDerivedBaseChange_app]
+  infer_instance
 
 /-- Derived evaluation identifies the recorded supported cohomology on W with the
 cohomology computed using injectives on U.
@@ -454,10 +477,25 @@ resolution on U. This computes both derived functors and the stated base-change 
         exact Functor.rightAcyclic_of_injective _)
   change IsIso (Functor.rightDerivedBaseChange
     (β := β) (γ := 𝟭 AddCommGrpCat.{u + 1}) e.hom n)
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro F
-  rw [Functor.rightDerivedBaseChange_app]
-  infer_instance
+  exact relativeSupportDerivedBaseChange_isIso
+    (β := β) (γ := 𝟭 AddCommGrpCat.{u + 1}) e.hom n
+
+attribute [local irreducible] relativeSupportDerivedEvaluation relativeSupportEvaluationIso
+
+/-- The canonical natural-number/integer derived cohomology comparison, with the
+recorded support cohomology sheaf as its explicit target. Naming this isomorphism
+keeps evaluation and naturality proofs from unfolding the cohomology object.
+Source: the canonical single/right-derived-plus/homology comparison, Stacks 09XP
+(blueprint: lem-pur-relative-support-bottom-descent). -/
+@[irreducible] noncomputable def relativeSupportCohomologyIso
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {Z U : Scheme.{u}}
+    (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ) :
+    ((relativeSupportKernel i).rightDerived n).obj (relativeSupportCoefficient P U r) ≅
+      relativeSupportCohomologySheaf P i r n :=
+  ((relativeSupportKernel i).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+    n).symm.app (relativeSupportCoefficient P U r)
+
+attribute [local irreducible] relativeSupportCohomologySheaf
 
 /-- The canonical local-to-global edge, with target the same cohomology sheaf on U
 at every W. The last factor is the existing natural-number/integer derived comparison.
@@ -474,8 +512,7 @@ noncomputable def relativeSupportEdge
     ((relativeSupportKernel i).grothendieckLeftEdgeMap (relativeSupportEvaluation W)
       (relativeSupport_evaluationAcyclic i W) n).app (relativeSupportCoefficient P U r) ≫
     (relativeSupportEvaluation W).map
-      (((relativeSupportKernel i).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
-        n).inv.app (relativeSupportCoefficient P U r))
+      (relativeSupportCohomologyIso P i r n).hom
 
 /-- Restriction of supported cohomology, using the same injective resolution on U.
 Its transports to the recorded W-side groups are the kernel-normalized derived maps.
@@ -583,6 +620,8 @@ private noncomputable def relativeSupportGlobalKernelLimit {Z U : Scheme.{u}}
     (KernelFork.mapIsLimit _ (kernelIsKernel η) H)
     (relativeSupportGlobalKernel_condition i F) hq
 
+attribute [local semireducible] relativeSupportKernel
+
 /-- The supported global functor equals evaluation of the supported sheaf at U.
 Its inclusion equation fixes the identification, including at the empty scheme.
 Source: Stacks Tag 09XP (blueprint: lem-pur-relative-support-bottom-descent).
@@ -639,10 +678,14 @@ theorem relativeSupportGlobalIso_existsUnique {Z U : Scheme.{u}}
   apply (cancel_mono (ι.app F)).1
   exact (he' F).trans (he F).symm
 
+attribute [local irreducible] relativeSupportKernel
+
 /-- The unique kernel-normalized global supported-sections identification.
 Source: Stacks Tag 09XP (blueprint: lem-pur-relative-support-bottom-descent). -/
 noncomputable def relativeSupportGlobalIso {Z U : Scheme.{u}}
-    (i : Z ⟶ U) [IsClosedImmersion i] :=
+    (i : Z ⟶ U) [IsClosedImmersion i] :
+    supportSections i ≅
+      relativeSupportKernel i ⋙ relativeSupportEvaluation (Scheme.Etale.mk (𝟙 U)) :=
   Classical.choose (relativeSupportGlobalIso_existsUnique i)
 
 /-- Derivation preserves the global kernel identification.
@@ -656,6 +699,8 @@ composites the identity in each degree. -/
   refine ⟨⟨NatTrans.rightDerived e.inv n, ?_, ?_⟩⟩
   · rw [← NatTrans.rightDerived_comp, e.hom_inv_id, NatTrans.rightDerived_id]
   · rw [← NatTrans.rightDerived_comp, e.inv_hom_id, NatTrans.rightDerived_id]
+
+attribute [local irreducible] relativeSupportGlobalIso
 
 /-- Restriction of an actual global supported class to an etale object W.
 Source: Stacks Tag 09XP (blueprint: lem-pur-relative-support-bottom-descent). -/
@@ -799,7 +844,7 @@ private theorem relativeSupportForget_acyclic (A : Type (u + 1)) [CommRing A]
   have hx0 (x : ((supportSections i).rightDerived (n + 1)).obj M) : x = 0 := by
     have hx : (a.rightDerived (n + 1)).app M x = 0 :=
       (AddCommGrpCat.subsingleton_of_isZero
-        (moduleAbelianForget_injective_evaluation_acyclic A T I _ n)).elim _ _
+        ((module_cohomology_conventions A T).1 I _ (n + 1) (Nat.succ_pos n))).elim _ _
     obtain ⟨y, hy⟩ := (hδ M n).2.2 x |>.mp hx
     rw [← hy]
     cases n with
@@ -809,7 +854,7 @@ private theorem relativeSupportForget_acyclic (A : Type (u + 1)) [CommRing A]
     | succ n =>
       have hy0 : y = 0 :=
         (AddCommGrpCat.subsingleton_of_isZero
-          (moduleAbelianForget_injective_evaluation_acyclic A T I _ n)).elim _ _
+          ((module_cohomology_conventions A T).1 I _ (n + 1) (Nat.succ_pos n))).elim _ _
       rw [hy0, map_zero]
   have : Subsingleton (((supportSections i).rightDerived (n + 1)).obj M) :=
     ⟨fun x y ↦ (hx0 x).trans (hx0 y).symm⟩
@@ -844,10 +889,12 @@ identification computes precisely the canonical base-change map above. -/
   change IsIso (Functor.rightDerivedBaseChange.{u + 1, u + 2, u + 1, u + 2,
     u + 1, u + 2, u + 1, u + 2, u + 1, u + 1, u + 1, u + 1}
     (relativeSupportForgetIso A i).hom n)
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro F
-  rw [Functor.rightDerivedBaseChange_app]
-  infer_instance
+  exact relativeSupportDerivedBaseChange_isIso
+    (β := moduleAbelianForget A T)
+    (γ := forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
+    (relativeSupportForgetIso A i).hom n
+
+attribute [local irreducible] relativeSupportForgetDerived
 
 /-- The canonical supported etale/pro-etale comparison, including scalar forgetting.
 It derives the published comparison unit, normalized by the adjunction unit on
@@ -978,16 +1025,51 @@ No finite-type, separatedness or Noetherian assumption enters the argument. -/
   have : IsIso ((Functor.rightDerivedBaseChange
       (β := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T)
       (γ := 𝟭 (ModuleCat.{u + 1} A)) e n).app F) := by
-    rw [Functor.rightDerivedBaseChange_app]
+    have : IsIso (Functor.rightDerivedBaseChange
+        (β := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T)
+        (γ := 𝟭 (ModuleCat.{u + 1} A)) e n) :=
+      relativeSupportDerivedBaseChange_isIso e n
     infer_instance
   infer_instance
+
+attribute [local irreducible] relativeSupportProComparison
 
 /-- The coefficient on W is the restriction of the same signed coefficient on U.
 Source: Stacks Tag 03F3 (blueprint: lem-pur-relative-support-bottom-descent). -/
 noncomputable def relativeSupportModuleRestriction
-    (P : WeilConjectures.PurityFiniteSetting.{u}) {U : Scheme.{u}} (W : U.Etale) (r : ℤ) :=
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {U : Scheme.{u}} (W : U.Etale) (r : ℤ) :
+    Sheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient) :=
   (localizationRestriction (ModuleCat.{u + 1} P.Coefficient) W.hom inferInstance).obj
     (relativeSupportModuleCoefficient P U r)
+
+/-- Scalar forgetting and etale localization give the same underlying coefficient.
+This reflexive isomorphism records the coefficient identification before deriving it.
+Source: the sectionwise definitions of localizationRestriction and sheafCompose
+(blueprint: lem-pur-relative-support-bottom-descent). -/
+@[irreducible] noncomputable def relativeSupportRestrictionCoefficientIso
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {U : Scheme.{u}} (W : U.Etale) (r : ℤ) :
+    (moduleAbelianForget P.Coefficient W.left).obj (relativeSupportModuleRestriction P W r) ≅
+      (relativeSupportRestriction W).obj (relativeSupportCoefficient P U r) :=
+  Iso.refl _
+
+/-- The canonical pro-etale comparison with the recorded restricted abelian coefficient.
+Derive the reflexive coefficient identification before composing comparison maps, so
+checking their types does not unfold the cohomology objects.
+Source: the canonical supported comparison and exact scalar forgetting
+(blueprint: lem-pur-relative-support-bottom-descent). -/
+@[irreducible] noncomputable def relativeSupportProIso
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {Z U : Scheme.{u}}
+    (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ) (W : U.Etale) :
+    (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}).obj
+        (ProEtale.supportCohomology (pullback.snd i W.hom) P.Coefficient n
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) W.left).obj
+            (relativeSupportModuleRestriction P W r))) ≅
+      supportCohomology (pullback.snd i W.hom) n
+        ((relativeSupportRestriction W).obj (relativeSupportCoefficient P U r)) :=
+  (asIso (relativeSupportProComparison P.Coefficient (pullback.snd i W.hom) n
+    (relativeSupportModuleRestriction P W r))).symm ≪≫
+      ((supportSections (pullback.snd i W.hom)).rightDerived n).mapIso
+        (relativeSupportRestrictionCoefficientIso P W r)
 
 /-- The pro-etale edge to the same restricted cohomology sheaf on U, transported
 through the canonical, unit-induced support comparison.
@@ -995,9 +1077,13 @@ Source: Stacks Tags 099W and 09XP
 (blueprint: lem-pur-relative-support-bottom-descent). -/
 noncomputable def relativeSupportProEdge
     (P : WeilConjectures.PurityFiniteSetting.{u}) {Z U : Scheme.{u}}
-    (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ) (W : U.Etale) :=
-  (asIso (relativeSupportProComparison P.Coefficient (pullback.snd i W.hom) n
-    (relativeSupportModuleRestriction P W r))).inv ≫ relativeSupportEdge P i r n W
+    (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ) (W : U.Etale) :
+    (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}).obj
+        (ProEtale.supportCohomology (pullback.snd i W.hom) P.Coefficient n
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) W.left).obj
+            (relativeSupportModuleRestriction P W r))) ⟶
+      (relativeSupportCohomologySheaf P i r n).obj.obj (op W) :=
+  (relativeSupportProIso P i r n W).hom ≫ relativeSupportEdge P i r n W
 
 /-- On coefficients of etale origin, canonical support comparison transports etale
 restriction to pro-etale restriction. This supplies restriction without a second
@@ -1007,57 +1093,248 @@ Source: Stacks Tags 099W and 09XP
 noncomputable def relativeSupportProRestriction
     (P : WeilConjectures.PurityFiniteSetting.{u}) {Z U : Scheme.{u}}
     (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ) {W W' : U.Etale}
-    (a : W' ⟶ W) :=
-  (asIso (relativeSupportProComparison P.Coefficient (pullback.snd i W.hom) n
-    (relativeSupportModuleRestriction P W r))).inv ≫
-    relativeSupportClassRestriction P i r n a ≫
-    relativeSupportProComparison P.Coefficient (pullback.snd i W'.hom) n
-      (relativeSupportModuleRestriction P W' r)
+    (a : W' ⟶ W) :
+    (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}).obj
+        (ProEtale.supportCohomology (pullback.snd i W.hom) P.Coefficient n
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) W.left).obj
+            (relativeSupportModuleRestriction P W r))) ⟶
+      (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}).obj
+        (ProEtale.supportCohomology (pullback.snd i W'.hom) P.Coefficient n
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) W'.left).obj
+            (relativeSupportModuleRestriction P W' r))) :=
+  (relativeSupportProIso P i r n W).hom ≫
+    relativeSupportClassRestriction P i r n a ≫ (relativeSupportProIso P i r n W').inv
 
-/-- Descent in the bottom supported degree of a smooth pair.
+private theorem relativeSupportKernel_preservesFiniteLimits
+    {Z U : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i] :
+    PreservesFiniteLimits (relativeSupportKernel i) := by
+  unfold relativeSupportKernel
+  let j := i.openComplement.ι
+  let K := sectionsWithSupport AddCommGrpCat.{u + 1} j
+  let F := 𝟭 (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})
+  let G := upperStar AddCommGrpCat.{u + 1} j ⋙ lowerStar AddCommGrpCat.{u + 1} j
+  let r : F ⟶ G := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).unit
+  let ι : K ⟶ F := sectionsWithSupportι AddCommGrpCat.{u + 1} j
+  have : ∀ X, Mono (ι.app X) := fun X ↦ by
+    change Mono (kernel.ι (r.app X))
+    infer_instance
+  have hK : PreservesFiniteLimits K := ModuleRestrictionKernel.kernelLeftExact F G K r ι
+    (fun X ↦ kernel.condition (r.app X)) (fun X ↦ kernelIsKernel (r.app X))
+  exact preservesFiniteLimits_of_natIso (supportedKernelIso j).symm
+
+private def relativeSupportKernelIso {Z U : Scheme.{u}} (i : Z ⟶ U)
+    [IsClosedImmersion i] : relativeSupportKernel i ≅
+      sectionsWithSupport AddCommGrpCat.{u + 1} i.openComplement.ι := by
+  unfold relativeSupportKernel
+  exact supportedKernelIso i.openComplement.ι
+
+private theorem relativeSupportGrothendieckEdge_naturality
+    {A B C : Type (u + 2)} [Category.{u + 1} A] [Category.{u + 1} B]
+    [Category.{u + 1} C] [Abelian A] [Abelian B] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} A] [IsGrothendieckAbelian.{u + 1} B]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    (F : A ⥤ B) (G G' : B ⥤ C) [F.Additive] [G.Additive] [G'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteLimits G] [PreservesFiniteLimits G']
+    (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)
+    (hFG' : (⟨F, G'⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)
+    (α : G ⟶ G') (X : A) (n : ℕ) :
+    (NatTrans.rightDerived (Functor.whiskerLeft F α) n).app X ≫
+        (F.grothendieckLeftEdgeMap G' hFG' n).app X =
+      (F.grothendieckLeftEdgeMap G hFG n).app X ≫ α.app ((F.rightDerived n).obj X) := by
+  let I := injectiveResolution X
+  let K := (F.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+  let T := ((F ⋙ G).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+  let T' := ((F ⋙ G').mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+  let τ : T ⟶ T' :=
+    (NatTrans.mapHomologicalComplex (Functor.whiskerLeft F α) _).app I.cocomplex
+  obtain ⟨c, hc, he⟩ := (grothendieck_left_edge_cocycle F G
+    hFG X I).1 n
+  obtain ⟨c', hc', he'⟩ := (grothendieck_left_edge_cocycle F G'
+    hFG' X I).1 n
+  have hciso : IsIso c := by
+    have h : IsLimit (KernelFork.ofι (G.map (K.iCycles n))
+        (show G.map (K.iCycles n) ≫ T.d n (n + 1) = 0 from by
+          change G.map (K.iCycles n) ≫ G.map (K.d n (n + 1)) = 0
+          rw [← G.map_comp, K.iCycles_d, G.map_zero])) :=
+      KernelFork.mapIsLimit _ (K.cyclesIsKernel n (n + 1) (by simp)) G
+    obtain ⟨d, hd⟩ := KernelFork.IsLimit.lift' h (T.iCycles n)
+      (T.iCycles_d n (n + 1))
+    change d ≫ G.map (K.iCycles n) = T.iCycles n at hd
+    refine ⟨⟨d, ?_, ?_⟩⟩
+    · apply (cancel_mono (G.map (K.iCycles n))).1
+      erw [Category.assoc, hd, hc, Category.id_comp]
+    · apply (cancel_mono (T.iCycles n)).1
+      erw [Category.assoc, hc, hd, Category.id_comp]
+  have hcyc : c ≫ HomologicalComplex.cyclesMap τ n = α.app (K.cycles n) ≫ c' := by
+    apply (cancel_mono (T'.iCycles n)).1
+    rw [Category.assoc, HomologicalComplex.cyclesMap_i,
+      ← Category.assoc, hc, Category.assoc, hc']
+    exact α.naturality (K.iCycles n)
+  apply (cancel_epi ((I.isoRightDerivedObj (F ⋙ G) n).inv)).1
+  apply (cancel_epi (T.homologyπ n)).1
+  apply (cancel_epi c).1
+  apply (cancel_mono (G'.map (I.isoRightDerivedObj F n).hom)).1
+  simp only [Category.assoc]
+  erw [I.rightDerived_app_eq]
+  simp only [Category.assoc]
+  erw [Iso.inv_hom_id_assoc]
+  erw [HomologicalComplex.homologyπ_naturality_assoc τ n]
+  rw [← Category.assoc c, hcyc]
+  simp only [Category.assoc]
+  erw [he', ← α.naturality (I.isoRightDerivedObj F n).hom]
+  rw [reassoc_of% he]
+  exact (α.naturality (K.homologyπ n)).symm
+
+private theorem relativeSupportGrothendieckEdge_isIso
+    {A B C : Type (u + 2)} [Category.{u + 1} A] [Category.{u + 1} B]
+    [Category.{u + 1} C] [Abelian A] [Abelian B] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} A] [IsGrothendieckAbelian.{u + 1} B]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteLimits G]
+    (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)
+    (X : A) (n : ℕ)
+    (hq : ∀ q : ℕ, q < n → IsZero ((F.rightDerived q).obj X)) :
+    IsIso ((F.grothendieckLeftEdgeMap G hFG n).app X) := by
+  let Y := F.grothendieckSpectralObject G X
+  have hinterval (m : ℕ) (a : ℕ) (ha : a ≤ n) :
+      IsZero ((Y.H m).obj (ComposableArrows.mk₁
+        (homOfLE (bot_le : (⊥ : EInt) ≤ (a : ℤ))))) := by
+    induction a with
+    | zero => exact Y.isZero₁_of_isFirstQuadrant _ _ _ le_rfl m
+    | succ a ih =>
+      apply (Y.exact₂ (homOfLE (bot_le : (⊥ : EInt) ≤ (a : ℤ)))
+        (homOfLE (show ((a : ℤ) : EInt) ≤ ((a + 1 : ℤ) : EInt) by simp))
+        (homOfLE bot_le) (Subsingleton.elim _ _) m).isZero_of_both_isZero
+      · exact ih (by omega)
+      · have hm : IsZero (((G.rightDerived (m - a)).obj ((F.rightDerived a).obj X))) :=
+          Functor.map_isZero _ (hq a (by omega))
+        by_cases ham : a ≤ m
+        · exact hm.of_iso ((F.grothendieckSpectralObjectHIso G (m - a) a m a
+            (a + 1) (by omega) rfl rfl).app X)
+        · exact Y.isZero₂_of_isFirstQuadrant _ _ _ m (by simp; omega)
+  have := Y.isIso_H_map_twoδ₁Toδ₀' (n : ℤ) ((n : ℤ) + 1) rfl
+    ⊥ ((n : ℤ) : EInt) ⊤ bot_le le_top (hinterval n n le_rfl)
+      (by simpa only [Nat.cast_add, Nat.cast_one] using hinterval (n + 1) n le_rfl)
+  have := Y.isIso_H_map_self_succ_top n
+  have : IsIso (Y.leftEdge n) := by
+    dsimp [Abelian.SpectralObject.leftEdge]
+    infer_instance
+  change IsIso ((F.grothendieckSpectralObjectHBotTopIso G hFG n).inv.app X ≫
+    Y.leftEdge n ≫ (F.grothendieckLeftEdgeTargetIso G n).hom.app X)
+  infer_instance
+
+private theorem relativeSupportEdge_isIso_of_vanishing
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {Z U : Scheme.{u}}
+    (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ)
+    (hz : ∀ q : ℕ, q < n → IsZero (relativeSupportCohomologySheaf P i r q))
+    (W : U.Etale) : IsIso (relativeSupportEdge P i r n W) := by
+  let F := relativeSupportKernel i
+  have : PreservesFiniteLimits F := relativeSupportKernel_preservesFiniteLimits i
+  let G := relativeSupportEvaluation W
+  let X := relativeSupportCoefficient P U r
+  have hq (q : ℕ) (hq : q < n) : IsZero ((F.rightDerived q).obj X) :=
+    (hz q hq).of_iso
+      (relativeSupportCohomologyIso P i r q)
+  have : IsIso ((F.grothendieckLeftEdgeMap G
+      (relativeSupport_evaluationAcyclic i W) n).app X) :=
+    relativeSupportGrothendieckEdge_isIso F G (relativeSupport_evaluationAcyclic i W) X n hq
+  unfold relativeSupportEdge
+  infer_instance
+
+private theorem relativeSupportTransportedEdge_naturality
+    {C : Type (u + 2)} [Category.{u + 1} C]
+    {S S' T T' H H' V V' : C} (d : T ≅ S) (d' : T' ≅ S')
+    (a : T ⟶ T') (f : T ⟶ H) (f' : T' ⟶ H') (b : H ⟶ H')
+    (t : H ⟶ V) (t' : H' ⟶ V') (k : V ⟶ V')
+    (hf : a ≫ f' = f ≫ b) (ht : b ≫ t' = t ≫ k) :
+    (d.inv ≫ a ≫ d'.hom) ≫ (d'.inv ≫ f' ≫ t') =
+      (d.inv ≫ f ≫ t) ≫ k := by
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [reassoc_of% hf, ht]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem relativeSupportEdge_naturality
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {Z U : Scheme.{u}}
+    (i : Z ⟶ U) [IsClosedImmersion i] (r : ℤ) (n : ℕ) {W W' : U.Etale}
+    (a : W' ⟶ W) :
+    relativeSupportClassRestriction P i r n a ≫ relativeSupportEdge P i r n W' =
+      relativeSupportEdge P i r n W ≫
+        (relativeSupportCohomologySheaf P i r n).obj.map a.op := by
+  let F := relativeSupportKernel i
+  have : PreservesFiniteLimits F := relativeSupportKernel_preservesFiniteLimits i
+  let G := relativeSupportEvaluation W
+  let G' := relativeSupportEvaluation W'
+  let α : G ⟶ G' := relativeSupportEvaluationMap a
+  let X := relativeSupportCoefficient P U r
+  have hnat := relativeSupportGrothendieckEdge_naturality F G G'
+    (relativeSupport_evaluationAcyclic i W) (relativeSupport_evaluationAcyclic i W') α X n
+  exact relativeSupportTransportedEdge_naturality
+    ((asIso (relativeSupportDerivedEvaluation i W n)).app X)
+    ((asIso (relativeSupportDerivedEvaluation i W' n)).app X)
+    ((NatTrans.rightDerived (Functor.whiskerLeft F α) n).app X)
+    ((F.grothendieckLeftEdgeMap G (relativeSupport_evaluationAcyclic i W) n).app X)
+    ((F.grothendieckLeftEdgeMap G' (relativeSupport_evaluationAcyclic i W') n).app X)
+    (α.app ((F.rightDerived n).obj X))
+    (G.map (relativeSupportCohomologyIso P i r n).hom)
+    (G'.map (relativeSupportCohomologyIso P i r n).hom)
+    _ hnat (α.naturality
+      (relativeSupportCohomologyIso P i r n).hom).symm
+
+
+private theorem relativeSupportSeparatedCover
+    {C : Type v} [Category.{v'} C] (J : GrothendieckTopology C)
+    [J.HasSheafCompose (forget AddCommGrpCat.{u + 1})]
+    (F : Sheaf J AddCommGrpCat.{u + 1}) (X : C) (M : AddCommGrpCat.{u + 1})
+    (m : M ⟶ F.obj.obj (op X)) [IsIso m]
+    {ι : Type w} (W : ι → C) (a : ∀ t, W t ⟶ X)
+    (hcover : Sieve.ofArrows W a ∈ J X) (N : ι → AddCommGrpCat.{u + 1})
+    (restriction : ∀ t, M ⟶ N t) (edge : ∀ t, N t ⟶ F.obj.obj (op (W t)))
+    (hres : ∀ t, m ≫ F.obj.map (a t).op = restriction t ≫ edge t)
+    (x y : M) (hxy : ∀ t, restriction t x = restriction t y) : x = y := by
+  apply (ConcreteCategory.bijective_of_isIso m).1
+  apply F.isSeparated X (Sieve.ofArrows W a) hcover
+  intro T t ht
+  obtain ⟨s, a', rfl⟩ := (Sieve.mem_ofArrows_iff W a t).mp ht
+  change (F.obj.map (a' ≫ a s).op) (m x) = (F.obj.map (a' ≫ a s).op) (m y)
+  simp only [op_comp, Functor.map_comp, AddCommGrpCat.comp_apply]
+  congr 1
+  have hh := congrArg (fun z ↦ edge s z) (hxy s)
+  simpa only [← AddCommGrpCat.comp_apply, hres s] using hh
+
+set_option linter.unusedVariables false in
+-- STATEMENT-DISPUTED: the former codimension convention allowed infinite ambient
+-- stalk dimensions. The returned E2 repair adds hfinite before using that convention.
+/-- Descent in the bottom supported degree of a smooth pair with finite ambient stalk
+Krull dimensions along the support. This finiteness makes the dimension equation a
+finite codimension assertion.
 Source: Stacks Tag 09XP, section-cohomology-support, Tags 09XQ, 015N and 0FUE;
 main-20261015, sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md.
 (blueprint: lem-pur-relative-support-bottom-descent).
 
 Proof:
-1. For c=0 the empty frame cuts out all of U. The support functor is identity,
-   so its negative cohomology vanishes and its degree-zero edge is identity.
-2. For c>0 use lem-pur-smooth-pair-local-coordinates and pull its chart back to U.
-   Etale restriction is exact and preserves injectives, hence commutes with the derived
-   support kernel. Apply lem-pur-relative-support-coordinate-model at each supported
-   geometric point. The codimension equation at every point of Z gives normal rank c.
-3. On the resulting affine-space model over the fixed algebraically closed field k,
-   thm-pur-rank-one-local-calculation and lem-pur-kunneth-supported identify the complex
-   with A[-2c]. The twists are locally free rank one, including the negative dual twists;
-   free shifted factors introduce no negative Tor. By lem-kun-stalks-of-cohomology the
-   supported stalks vanish below 2c. Off the support the kernel is locally zero.
-   Geometric-stalk conservativity gives the asserted sheaf vanishing.
-4. The closed-support adjunction of lem-pur-etale-supported-kernel-adjunction expresses
-   P_Z as i_* i^!_0. Exact i_* and both right adjoints preserve injectives, so P_Z sends
-   injectives to injectives. Evaluation at W is thus acyclic on P_Z of injectives.
-5. Etale restriction preserves injectives. Its ordinary kernel comparison identifies
-   R^n(P_Z followed by evaluation at W) with the recorded supported cohomology on W.
-   Apply thm-sp-grothendieck to P_Z and evaluation at W on the fixed site of U.
-6. Vanishing of rows q<2c leaves just (0,2c) in total degree 2c. The finite abutment
-   filtration and lem-pur-first-quadrant-lowest-row-edge make the canonical edge invertible.
-   This is the filtration edge of lem-sp-grothendieck-edge-maps.
-   The natural-number/integer comparison identifies its target with the stated sheaf.
-7. On one injective resolution on U, lem-pc-grothendieck-edge-cocycle identifies the edge
-   with the cycles-to-cohomology map. This is a morphism of sheaves, so the square for
-   every further etale restriction commutes. The kernel-normalized transports above
-   give precisely the recorded W-side groups, not unrelated local cohomology sheaves.
-8. Direct image along the site comparison preserves injectives and its composite with
-   the etale support kernel is literally the pro-etale support kernel. The invertible
-   derived comparison unit therefore identifies derived support after comparison
-   pullback with etale derived support. The underived map is normalized by the
-   adjunction unit on sections. It is an isomorphism by the kernel universal property;
-   acyclicity on pulled-back injectives makes its canonical derived base change an
-   isomorphism too. Scalar forgetting has the same kernel normalization and is derived
-   using evaluation acyclicity and the support restriction long exact sequence.
-9. If supported classes agree on a covering family, the natural edge maps give sections
-   of the same cohomology sheaf that agree on that cover. Sheaf separation identifies
-   the sections and the invertible global edge identifies the original classes.
-   Empty coverings of the empty scheme and c=0 are included. No orientation is used. -/
+1. Apply the separate relative smooth-pair vanishing theorem and transport along the
+   canonical isomorphism from the support kernel to sectionsWithSupport.
+2. The closed-support adjunction makes the support kernel preserve injectives.
+   The kernel of two left-exact functors preserves finite limits. Evaluation is acyclic
+   on its injective images. Use its
+   canonical Grothendieck spectral object. Vanishing of rows below 2c makes the
+   intervals (bottom,2c) zero in degrees 2c and 2c+1 by interval exactness. The same
+   exact sequence makes the specified left edge invertible.
+3. On a fixed injective resolution the edge cocycle description identifies the edge
+   with the cycles-to-cohomology map. Evaluation restriction commutes with cycles
+   and cohomology, hence with this edge. Conjugating by the kernel-normalized derived
+   evaluation isomorphisms gives exactly the stated restriction square.
+4. The already proved pro-etale comparison is invertible. Its conjugated restriction
+   and transported edge therefore have the same invertibility and naturality.
+5. At the terminal etale object the derived global-support comparison followed by
+   derived evaluation is invertible. Compose it with the bottom edge. If two global
+   classes restrict equally on a covering family, naturality says that their images
+   are sections of the same cohomology sheaf agreeing on that cover. Sheaf separation
+   and injectivity of this composite identify the classes. This includes empty covers
+   and c=0. No orientation or chosen frame enters the descent argument. -/
 theorem relative_support_bottom_descent
     (P : WeilConjectures.PurityFiniteSetting.{u}) (c d : ℕ)
     {B V Z U : Scheme.{u}}
@@ -1067,6 +1344,8 @@ theorem relative_support_bottom_descent
     (hcodim : ∀ z : Z,
       ringKrullDim (V.presheaf.stalk (i.base z)) =
         ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞))
+    (hfinite : ∀ z : Z,
+      ringKrullDim (V.presheaf.stalk (i.base z)) ≠ ⊤)
     (e : U ⟶ V) [Etale e]
     (f : Fin c → Γ(U, ⊤))
     (toZ : U.zeroLocusSubscheme (Set.range f) ⟶ Z)
@@ -1099,6 +1378,63 @@ theorem relative_support_bottom_descent
         relativeSupportGlobalRestriction P (pullback.snd i e) r (2 * c) (a t) x =
           relativeSupportGlobalRestriction P (pullback.snd i e) r (2 * c) (a t) y) →
       x = y) := by
-  sorry
+  let j := pullback.snd i e
+  have hz : ∀ q : ℤ, q < 2 * (c : ℤ) →
+      IsZero (relativeSupportCohomologySheaf P j r q) := by
+    intro q hq
+    have hz' := relative_support_vanishing P c d b v i hcodim hfinite e r q hq
+    unfold relativeSupportCohomologySheaf
+    let eK := Functor.rightDerivedFunctorPlusNatIso (relativeSupportKernelIso j)
+    exact hz'.of_iso ((DerivedCategory.Plus.homologyFunctor
+      (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) q).mapIso
+        (eK.app ((DerivedCategory.Plus.singleFunctor _ 0).obj
+          (relativeSupportCoefficient P U r))))
+  have he (W : U.Etale) : IsIso (relativeSupportEdge P j r (2 * c) W) :=
+    relativeSupportEdge_isIso_of_vanishing P j r (2 * c)
+      (fun q hq ↦ hz q (by exact_mod_cast hq)) W
+  refine ⟨hz, he, ?_, ?_, ?_, ?_⟩
+  · intro W W' a
+    exact relativeSupportEdge_naturality P j r (2 * c) a
+  · intro W
+    have := he W
+    exact ⟨inferInstance, by unfold relativeSupportProEdge; infer_instance⟩
+  · intro W W' a
+    dsimp only [relativeSupportProRestriction, relativeSupportProEdge]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    rw [relativeSupportEdge_naturality P j r (2 * c) a]
+  · intro ι W a hcover x y hxy
+    let W₀ := Scheme.Etale.mk (𝟙 U)
+    let X := relativeSupportCoefficient P U r
+    let g : supportCohomology j (2 * c) X ⟶
+        supportCohomology (pullback.snd j W₀.hom) (2 * c)
+          ((relativeSupportRestriction W₀).obj X) :=
+      (NatTrans.rightDerived (relativeSupportGlobalIso j).hom (2 * c)).app X ≫
+      (relativeSupportDerivedEvaluation j W₀ (2 * c)).app X
+    have hgd : IsIso (NatTrans.rightDerived (relativeSupportGlobalIso j).hom (2 * c)) :=
+      relativeSupportGlobalDerived_isIso j (2 * c)
+    have hdd : IsIso (relativeSupportDerivedEvaluation j W₀ (2 * c)) :=
+      relativeSupportDerivedEvaluation_isIso j W₀ (2 * c)
+    have hg : IsIso g := by dsimp only [g]; infer_instance
+    have := he W₀
+    let m : supportCohomology j (2 * c) X ⟶
+        (relativeSupportCohomologySheaf P j r (2 * c)).obj.obj (op W₀) :=
+      g ≫ relativeSupportEdge P j r (2 * c) W₀
+    have hm : IsIso m := by dsimp only [m]; infer_instance
+    apply relativeSupportSeparatedCover U.smallEtaleTopology
+      (relativeSupportCohomologySheaf P j r (2 * c)) W₀ _ m W a hcover
+      (fun s ↦ supportCohomology (pullback.snd j (W s).hom) (2 * c)
+        ((relativeSupportRestriction (W s)).obj X))
+      (fun s ↦ relativeSupportGlobalRestriction P j r (2 * c) (a s))
+      (fun s ↦ relativeSupportEdge P j r (2 * c) (W s)) ?_ x y hxy
+    intro s
+    dsimp only [m]
+    refine (Category.assoc _ _ _).trans ?_
+    refine (congrArg (fun k ↦ g ≫ k)
+      (relativeSupportEdge_naturality P j r (2 * c) (a s)).symm).trans ?_
+    dsimp only [g, relativeSupportClassRestriction, relativeSupportGlobalRestriction]
+    simp only [Category.assoc]
+    change _ ≫ (asIso (relativeSupportDerivedEvaluation j W₀ (2 * c))).hom.app X ≫
+      (asIso (relativeSupportDerivedEvaluation j W₀ (2 * c))).inv.app X ≫ _ = _
+    rw [Iso.hom_inv_id_app_assoc]
 
 end AlgebraicGeometry.Etale
