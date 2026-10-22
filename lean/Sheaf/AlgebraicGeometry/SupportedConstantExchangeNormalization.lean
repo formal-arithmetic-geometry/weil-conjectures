@@ -9,7 +9,8 @@ public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.SupportCohomology
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerBoundary
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
@@ -26,9 +27,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
 import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
-import WeilConjectures.SixFunctors.BaseChange.Square
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Basic
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
@@ -145,7 +144,9 @@ Source: Stacks 03S6, 095L; Milne, Section 9
 def restriction (pro : Bool) {Z X : Scheme.{u}} (i : Z ⟶ X) :
     constant A pro X ⟶ supported A pro i :=
   match pro with
-  | false => Etale.supportedConstantUnit A i
+  | false => (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).homEquiv _ _
+      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).app
+        (ModuleCat.of A A)).hom
   | true => Scheme.proEtaleConstantDirectImageMap i (ModuleCat.{u + 1} A)
       (ModuleCat.of A A)
 
@@ -193,7 +194,10 @@ def exchange (pro : Bool) {Z' Z X' X : Scheme.{u}}
     (sq : ChosenCartesianSquare g i' i h) :
     (pull A pro h).obj (supported A pro i) ⟶ supported A pro i' :=
   match pro with
-  | false => Etale.supportedConstantExchange A i i' h g sq.toCommSq
+  | false => (Etale.baseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app
+      (constant A false Z) ≫ (Etale.lowerStar (ModuleCat.{u + 1} A) i').map
+        ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) g).app
+          (ModuleCat.of A A)).hom
   | true => (adj A true i').homEquiv _ _
       ((square A true sq).hom.app (supported A true i) ≫
         (pull A true g).map ((adj A true i).counit.app (constant A true Z)) ≫

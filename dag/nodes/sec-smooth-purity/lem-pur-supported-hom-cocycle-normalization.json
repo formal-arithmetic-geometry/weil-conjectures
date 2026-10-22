@@ -295,6 +295,8 @@
   "module": "Sheaf.Paper.SupportedHomCocycleNormalization",
   "declaration": "AlgebraicGeometry.supportedHom_cocycle_normalization",
   "declarations": [
+   "AlgebraicGeometry.supportedHomLocalizedCocycle",
+   "AlgebraicGeometry.supportedHomLocalizedCocycle_eq",
    "AlgebraicGeometry.supportedHomResolutionIso",
    "AlgebraicGeometry.SupportedHomEvaluationIso",
    "AlgebraicGeometry.SupportedHomEvaluation",
@@ -321,7 +323,7 @@
   "by": "Q21",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The single interface fixes theta by the actual evaluation after rho, chi on every injective resolution by the canonical derived-unit comparison and the localized cocycle roof, and etale cone agreement by the explicit kernel-to-shifted-cone map. The two ordinary constant-module presentations use the same finite coefficient ring. No dependency statement or mathematical statement is changed."
+  "note": "The single interface fixes theta by the actual evaluation after rho, chi on every injective resolution by the canonical derived-unit comparison and the localized cocycle roof, and etale cone agreement by the explicit kernel-to-shifted-cone map. The two ordinary constant-module presentations use the same finite coefficient ring. No dependency statement or mathematical statement is changed. The shared irreducible localized cocycle and its proved equation name the original single-complex construction; SupportedHomChiCocycle uses that map with a definitionally equal formula."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -330,5 +332,15 @@
   "group": "Q21",
   "result": "pass",
   "note": "Statement field verbatim; all 19 declarations present; single sorry. θ pinned by evaluation (kernel.ι monic) as (constantSheafAdj.homEquiv (ρ≫f)) 1; χ is a ≃+ on supportHypercohomologyFunctor (derived module-valued kernel functor), pinned on every class by SupportedHomChiCocycle (∀ bounded-below injective I, qis e, a, cycle x: θ f = iCycles x, transport through supportSequenceModelIso with the actual derived unit, value ShiftedHom.map(fromSingleMk f) Q ≫ quotientCompQhIso⁻¹[a] ≫ ι(resIso⁻¹)[a], directions checked) plus naturality, so the ∃ is effectively unique. Étale/pro-étale ρ, open constant maps and counits are canonical sheafified/adjoint maps (upperStarConstantSheafIso, proEtaleConstantDirectImageMap, proEtaleFixedOpenConstantMap); the open-evaluation clauses are the right true statements. No extra hypotheses or universe equalities; edge cases Z=∅, Z=X, a<0, non-qc U ok; no duplicate (supported_*_hom are Nonempty only; pullback is downstream). Advisory: étale ConeAgreement (qis of closedConeLift and of κ∘θ_I) is implied by closedConeLift_quasiIso and does not relate χ to Etale.closedSupportHom's e, which is existential with an existential α in the dependency; the only citer (supported-hom-pullback) does not use it. Maintainer note: a §1(B) repair exposing α = θ ≫ kernel inclusion would make it substantive. Compile not reproduced per instruction; no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7efe4",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261022T025316-L-1272250",
+  "kind": "interface",
+  "note": "independent cc review: supportedHom_pullback proof and new moduleSupportedHom_transport vs node lem-pur-supported-hom-pullback and new node; 8 change records vs live definitions (all unfold to the old bodies); 4 delivered modules + 6 direct importers compiled in a sandbox; #print axioms"
  }
 }

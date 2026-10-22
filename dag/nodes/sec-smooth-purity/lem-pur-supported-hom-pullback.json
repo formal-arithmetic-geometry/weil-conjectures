@@ -46,10 +46,10 @@
    }
   },
   {
-   "text": "Apply [lem-pur-derived-representable-transport] with these $P,P',S=\\Gamma_Z,S'=\\Gamma_{Z'},\\theta,\\theta',L,d,\\lambda$. Its normalized injective comparison computes canonical derived pullback and gives $\\chi'(h^*\\alpha)=L(\\chi(\\alpha))d^{-1}$ in every integer degree, including $L=\\nu_X^{-1}$. The functorial localization pullback in [thm-pur-with-support-exactness] is this derived kernel map: the open and total-section maps inducing it are precisely the inverse-image section maps defining $\\lambda$. Hence the three instances give the required etale, pro-etale and site-comparison equalities for the stated $F$.",
+   "text": "Apply [lem-pur-module-supported-hom-transport] to each of the four exact inverse-image functors, using the evaluation square of step 2. This theorem works with the actual module-valued derived support functors and the given cocycle-normalized identifications; it yields precisely the displayed pullback/precomposition formulas. The definition of derivedMap is the normalized rightDerivedFunctorPlusBaseChange, so no separate identification of an arbitrary derived map is needed. The canonical Hom-map uses the existing representableTransportHom definition of [lem-pur-derived-representable-transport], without applying its abelian-group-valued transport theorem.",
    "uses": [
-    "lem-pur-derived-representable-transport",
-    "thm-pur-with-support-exactness"
+    "lem-pur-module-supported-hom-transport",
+    "lem-pur-derived-representable-transport"
    ],
    "elementary": false,
    "source": {
@@ -58,10 +58,10 @@
    }
   },
   {
-   "text": "The underived constant-exchange square and supported-section square commute by [lem-pur-supported-constant-exchange-normalization]. Apply the composition and coherent-identification clause of [lem-pur-derived-representable-transport] to these squares. It identifies their derived pullbacks under $\\nu_{X'}^{-1}h_{\\mathrm{et}}^{-1}\\cong h_{\\mathrm{proet}}^{-1}\\nu_X^{-1}$ and makes the Hom formulas commute as well. Thus comparison carries the etale equality to the pro-etale one on both $X$ and $X'$. No finiteness or purity hypothesis has entered.",
+   "text": "Use the constant-exchange square and supported-section square of [lem-pur-supported-constant-exchange-normalization]. The closed-constant square is conjugated by the canonical comparison of the ordinary pro-etale constant with the transported etale constant. Apply [lem-weil-pbc-right-derived-plus-cube] to the supported-section square and cancel the two exact identity-functor normalizations. This gives the displayed derived square. All four Hom compatibilities then use the same global choices of normalized identifications.",
    "uses": [
     "lem-pur-supported-constant-exchange-normalization",
-    "lem-pur-derived-representable-transport"
+    "lem-weil-pbc-right-derived-plus-cube"
    ],
    "elementary": false,
    "source": {
@@ -73,13 +73,14 @@
  "proof_deps": [
   "lem-pur-supported-constant-exchange-normalization",
   "lem-pur-supported-hom-cocycle-normalization",
+  "lem-pur-module-supported-hom-transport",
   "lem-pur-derived-representable-transport",
-  "thm-pur-with-support-exactness"
+  "lem-weil-pbc-right-derived-plus-cube"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-  "place": "Milne Section 9, Theorem 9.4 and Example 9.5; Q55 re-split of the existing argument into canonical exchange, geometric normalization and abstract derived transport"
+  "place": "Milne Section 9, Theorem 9.4 and Example 9.5; B8 module-valued cocycle transport and canonical right-derived cube assembly, 2026-10-22"
  },
  "mathlib_searches": [
   {
@@ -173,24 +174,7 @@
   "blueprint": "thm-pur-affine-line-orientation, geometric-fibre restriction of the supported coordinate boundary and final etale-origin transport; same unit route, no purity or SGA input.",
   "tool_uses": []
  },
- "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-cbc-proetale-extension-zero",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sc-p1-rhom-hom-derived-roof",
-  "lem-amb-closed-support-hom",
-  "lem-sc-bounded-below-injective-resolution",
-  "lem-sp-kinjective-comparison-principle",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-pur-kinjective-degreewise-existence"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -208,6 +192,7 @@
    "AlgebraicGeometry.SupportHomPair.group",
    "AlgebraicGeometry.SupportHomPair.complex",
    "AlgebraicGeometry.SupportHomPair.cycleClass",
+   "AlgebraicGeometry.SupportHomPair.derivedHom",
    "AlgebraicGeometry.SupportHomPair.cocycleMorphism",
    "AlgebraicGeometry.SupportHomPair.Identification",
    "AlgebraicGeometry.supportHomConstantDirectImage",
@@ -230,7 +215,7 @@
   "by": "Q108",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The canonical identifications and transports are introduced together with their evaluation-at-one, constant-unit and kernel-inclusion normalizations. The derived map is the existing rightDerivedFunctorPlusBaseChange; closed exchange is fixed by the epic constant restriction. The four compatibility clauses and both comparison squares are explicit. No statement correction, extra hypothesis, arbitrary-map parameter, or purity assumption."
+  "note": "The canonical identifications and transports are introduced together with their evaluation-at-one, constant-unit and kernel-inclusion normalizations. The derived map is the existing rightDerivedFunctorPlusBaseChange; closed exchange is fixed by the epic constant restriction. The four compatibility clauses and both comparison squares are explicit. No statement correction, extra hypothesis, arbitrary-map parameter, or purity assumption. The group body reuses the existing supportHypercohomologyFunctor, definitionally equal to the original expanded composition. Identification chi and naturality fields use the existing definitionally equal SupportedHomChi and SupportedHomChiNatural type aliases; the normalization clause is unchanged. The transparent derivedHom type name is the original derived Hom space and is used in the Hom-map signature to avoid repeated localization universe computation."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -240,5 +225,15 @@
   "result": "pass",
   "note": "Read node, 12 stmt deps and their lean records, report, module, and the used declarations (supportSequenceModelIso, rightDerivedFunctorPlusBaseChange, comparisonUpperStar/Adjunction = recorded proEtaleSiteComparisonModules, ProEtale.upperStar = recorded proEtaleSheafInverseImage construction, supportSiteComparisonCoefficientPullbackIso, comparisonUpperStarUnitIso, P.constant). Every node clause is rendered with no extra hypotheses; h arbitrary, a in Z, universes u/u+1 unrestricted. Existential chi/transport data are uniquely pinned (cocycle normalization + naturality + enough injectives; homEquiv injective; L rho epi; kernel.iota mono; monic site arrows), so the statement is not weakened. No hollow definitions, a single sorry, docstrings with source and blueprint on all 20 declarations, lean.statement verbatim, node unchanged apart from lean, report has Worker report and Second reading by Q108. nt_compile on the snapshot: clean, 30.7 s, rc 0. Observations only: module-coefficient use of the generic supportedSectionsFunctor; the second reading is the author's own."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7efe4",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261022T025316-L-1272250",
+  "kind": "interface",
+  "note": "independent cc review: supportedHom_pullback proof and new moduleSupportedHom_transport vs node lem-pur-supported-hom-pullback and new node; 8 change records vs live definitions (all unfold to the old bodies); 4 delivered modules + 6 direct importers compiled in a sandbox; #print axioms"
+ }
 }

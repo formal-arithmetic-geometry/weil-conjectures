@@ -39,6 +39,28 @@ open CochainComplex.HomComplex
 
 namespace AlgebraicGeometry
 
+/-- Localize the canonical single-object cocycle without exposing its cochain construction.
+Source: Stacks 070I (blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+@[irreducible] def supportedHomLocalizedCocycle.{uC, vC, wC}
+    {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
+    {B : C} (I : CochainComplex C ℤ) (a : ℤ) (f : B ⟶ I.X a)
+    (hf : f ≫ I.d a (a + 1) = 0) :
+    (DerivedCategory.singleFunctor C 0).obj B ⟶ (DerivedCategory.Q.obj I)⟦a⟧ :=
+  ShiftedHom.map (Cocycle.equivHomShift.symm
+    (Cocycle.fromSingleMk f (zero_add a) (a + 1) rfl hf)) DerivedCategory.Q
+
+/-- The localized cocycle is the original shifted single-complex map.
+Source: Stacks 070I (blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+theorem supportedHomLocalizedCocycle_eq.{uC, vC, wC}
+    {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
+    {B : C} (I : CochainComplex C ℤ) (a : ℤ) (f : B ⟶ I.X a)
+    (hf : f ≫ I.d a (a + 1) = 0) :
+    supportedHomLocalizedCocycle I a f hf =
+      ShiftedHom.map (Cocycle.equivHomShift.symm
+        (Cocycle.fromSingleMk f (zero_add a) (a + 1) rfl hf)) DerivedCategory.Q := by
+  with_unfolding_all rfl
+
+
 section Site
 
 variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
@@ -86,7 +108,8 @@ Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
 abbrev SupportedHomChi :=
   ∀ (F : DerivedCategory.Plus (Sheaf J (ModuleCat.{u + 1} A))) (a : ℤ),
     (Sheaf.supportHypercohomologyFunctor J (ModuleCat.{u + 1} A) j a).obj F ≃+
-      ((DerivedCategory.singleFunctor (Sheaf J (ModuleCat.{u + 1} A)) 0).obj B ⟶ F.obj⟦a⟧)
+      ((DerivedCategory.singleFunctor (Sheaf J (ModuleCat.{u + 1} A)) 0).obj
+        B ⟶ F.obj⟦a⟧)
 
 /-- Naturality of the comparison on the bounded-below derived category.
 Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
@@ -119,8 +142,7 @@ def SupportedHomChiCocycle
             (DerivedCategory.Plus.Q.obj K) (supportedHomResolutionIso J A K I e).symm a).hom
               (((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).mapHomologicalComplex
                 (ComplexShape.up ℤ) |>.obj I.obj).homologyπ a x)) =
-          ShiftedHom.map (Cocycle.equivHomShift.symm
-            (Cocycle.fromSingleMk f (zero_add a) (a + 1) rfl hf)) DerivedCategory.Q ≫
+          supportedHomLocalizedCocycle I.obj a f hf ≫
             ((DerivedCategory.quotientCompQhIso _).inv.app I.obj)⟦a⟧' ≫
             (DerivedCategory.Plus.ι.map (supportedHomResolutionIso J A K I e).inv)⟦a⟧'
 

@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-module-supported-hom-transport",
+ "kind": "statement",
+ "title": "Exact transport of module-valued normalized supported Hom",
+ "statement": "Let A be a commutative ring, let (C,J) and (D,J') be sites with terminal objects and restriction arrows j and j', and assume the categories of sheaves of A-modules are Grothendieck abelian. Let B, B' be supported representing sheaves, with constant restrictions rho, rho', and evaluation- and cocycle-normalized supported-Hom comparisons N,N' as in [lem-pur-supported-hom-cocycle-normalization]. Let L be an additive exact functor between these sheaf categories, d:LB ≅ B', and tau:Gamma_j → L Gamma_j'. Suppose evaluation satisfies theta'(d^-1 Lf)=tau(theta(f)) for every morphism f:B→M. For every bounded-below derived object K and every integer a, the module-valued right-derived support map b induced by tau satisfies chi'(H^a(b)(x))=single(d^-1)·(L single)^-1·DL(chi(x))·shift_L. Here b is precisely rightDerivedFunctorPlusBaseChange with both exact identity-functor normalizations; all comparisons are the canonical single-complex and shift comparisons.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Ext proof of Theorem 9.4 and Example 9.5; module-valued refinement of the transport step of lem-pur-supported-hom-pullback; Stacks derived.tex Tags 05TI and 070I for injective resolutions and roof formulas"
+ },
+ "stmt_deps": [
+  "lem-pur-supported-hom-cocycle-normalization",
+  "lem-pur-derived-representable-transport"
+ ],
+ "proof": [
+  {
+   "text": "For an injective representative I of K, choose an injective resolution e:LI→R. The defining unit factorization for rightDerivedFunctorPlusBaseChange identifies the support pullback, after the canonical derived isomorphism DL(QI)≅QR, with the cohomology of tau_I followed by Gamma_j'(e).",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusBaseChange.lean",
+    "place": "CochainComplex.Plus.exists_quasiIso_injective; Functor.rightDerivedFunctorPlusBaseChange_fac and rightDerivedFunctorPlusBaseChangeAux"
+   }
+  },
+  {
+   "text": "Represent a cohomology class by a cycle y. The normalized comparison gives its unique f:B→I^a. Naturality of evaluation and its assumed compatibility with tau identify the transported cycle with d^-1 Lf e^a. Normalize on the injective complex R. Exact termwise transport sends the single-complex cocycle of f to that of d^-1 Lf e^a, by checking its degree-zero component. Cancel the canonical derived resolution isomorphism. The Hom-map is the existing representableTransportHom construction of [lem-pur-derived-representable-transport]; its abelian-group-valued transport theorem is not applied.",
+   "uses": [
+    "lem-pur-supported-hom-cocycle-normalization",
+    "lem-pur-derived-representable-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every bounded-below derived object has an injective representative. Use naturality of the two normalized identifications, of the base-change transformation, and of the exact functor shift comparison to transfer the identity to K. No preservation of injectives by L is required.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+    "place": "DerivedCategory.Plus.exists_injective_nonempty_iso, line 84"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-pur-supported-hom-cocycle-normalization",
+  "lem-pur-derived-representable-transport",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9 Ext proof, with direct module-valued derived-unit and cocycle calculation by B8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image functor transports the cocycle normalized identification of module valued derived supported sections with derived morphisms from a representing sheaf",
+   "results": "8 hits: CategoryTheory.Functor.inv; SheafOfModules.pullback; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app; CategoryTheory.Equivalence.transportAndSheafify; CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map; SheafOfModules.pullbackPushforwardAdjunction; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux. The pullback and adjunction signatures in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean describe underived module-sheaf pullback; none supplies the normalized derived supported-Hom transport formula.",
+   "date": "2026-10-22",
+   "verdict": "no matching derived supported-Hom compatibility theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor transports the evaluation-normalized comparison of derived supported module sections with derived morphisms from a representing sheaf",
+   "results": "8 hits, including CategoryTheory.Abelian.Ext.mapExactFunctor_hom and mapExactFunctor; these provide exact transport of Ext, not compatibility with the actual module-valued derived support functor.",
+   "date": "2026-10-22",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorPlusBaseChange",
+   "results": "0 hits; identifier absent from search index. Local source search finds its proved defining unit factorization in WeilConjectures.",
+   "date": "2026-10-22",
+   "verdict": "use source factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedSupportTransport|moduleSupportedHom_transport",
+   "results": "0 hits. Existing DerivedRepresentableTransport concerns AddCommGrpCat-valued derived functors; its signature does not cover the published ModuleCat-valued support functor.",
+   "date": "2026-10-22",
+   "verdict": "module-valued lemma needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedHomPullback",
+  "date": "2026-10-22",
+  "group": "B8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-supported-hom-pullback",
+   "place": "Proof step 3: module-valued normalized representability transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.ModuleSupportedHomTransport",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/ModuleSupportedHomTransport.lean",
+  "declaration": "AlgebraicGeometry.moduleSupportedHom_transport",
+  "statement": "theorem moduleSupportedHom_transport\n    {A : Type (u + 1)} [CommRing A]\n    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]\n    (J : GrothendieckTopology C) (J' : GrothendieckTopology D)\n    [HasSheafify J (ModuleCat.{u + 1} A)]\n    [HasSheafify J' (ModuleCat.{u + 1} A)]\n    [IsGrothendieckAbelian.{u + 1} (Sheaf J (ModuleCat.{u + 1} A))]\n    [IsGrothendieckAbelian.{u + 1} (Sheaf J' (ModuleCat.{u + 1} A))]\n    {T W : C} (hT : IsTerminal T) (j : W ⟶ T)\n    {T' W' : D} (hT' : IsTerminal T') (j' : W' ⟶ T')\n    (B : Sheaf J (ModuleCat.{u + 1} A)) (B' : Sheaf J' (ModuleCat.{u + 1} A))\n    (rho : (constantSheaf J (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A) ⟶ B)\n    (rho' : (constantSheaf J' (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A) ⟶ B')\n    (N : SupportedHomCocycleNormalization J A hT j B rho)\n    (N' : SupportedHomCocycleNormalization J' A hT' j' B' rho')\n    (L : Sheaf J (ModuleCat.{u + 1} A) ⥤ Sheaf J' (ModuleCat.{u + 1} A))\n    [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    (d : L.obj B ≅ B')\n    (tau : Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j ⟶\n      L ⋙ Sheaf.supportedSectionsFunctor J' (ModuleCat.{u + 1} A) j')\n    (heval : ∀ (M : Sheaf J (ModuleCat.{u + 1} A)) (f : B ⟶ M),\n      N'.theta.hom.app (L.obj M) (d.inv ≫ L.map f) = tau.app M (N.theta.hom.app M f))\n    (K : DerivedCategory.Plus (Sheaf J (ModuleCat.{u + 1} A))) (a : ℤ) :\n    let S := Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j\n    let S' := Sheaf.supportedSectionsFunctor J' (ModuleCat.{u + 1} A) j'\n    let b : S.rightDerivedFunctorPlus ⟶ L.mapDerivedCategoryPlus ⋙ S'.rightDerivedFunctorPlus :=\n      (Functor.rightUnitor _).inv ≫\n        (Functor.isoWhiskerLeft _\n          (Functor.mapDerivedCategoryPlusIdIso (ModuleCat.{u + 1} A))).inv ≫\n        Functor.rightDerivedFunctorPlusBaseChange\n          (G := S) (G' := S') (β := L) (γ := 𝟭 (ModuleCat.{u + 1} A))\n          ((Functor.rightUnitor _).hom ≫ tau)\n    moduleSupportedHomCompatible J J' j j' B B' N.chi N'.chi L d b K a",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.moduleSupportedHomCompatible",
+   "AlgebraicGeometry.moduleSupportedHom_transport"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7efe4",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261022T025316-L-1272250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7efe4",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261022T025316-L-1272250",
+  "kind": "interface",
+  "note": "independent cc review: supportedHom_pullback proof and new moduleSupportedHom_transport vs node lem-pur-supported-hom-pullback and new node; 8 change records vs live definitions (all unfold to the old bodies); 4 delivered modules + 6 direct importers compiled in a sandbox; #print axioms"
+ }
+}
