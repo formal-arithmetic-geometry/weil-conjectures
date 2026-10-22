@@ -24288,3 +24288,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:07 L: returned deliver/C2/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (reviewer C-870ff, head 870ff0b86) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.RingedProjecti)
 - 02:08 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 02:08 L: returned deliver/ND/lem-sfb-proper-wcontractible-closed-fibre-rigidity (reviewer RETURN: D1/D4 (with E): the new node lem-sfb-henselian-comparison-image-stability restates the item's own conclusion. It says th)
+- 02:08 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
