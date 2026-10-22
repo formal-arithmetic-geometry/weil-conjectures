@@ -110,7 +110,8 @@ end Coherence
 
 /-- Forgetting the supports of a restricted class: the restriction of supports followed by the
 counit is the restriction of the class with forgotten supports. -/
-lemma restrictSupportedClass_comp_counit {Λ : Type (u + 1)} [CommRing Λ] {U X Z Z' : Scheme.{u}}
+lemma restrictSupportedClass_comp_counit {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    {U X Z Z' : Scheme.{u}}
     (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i']
     (g : Z' ⟶ Z) (hg : IsPullback g i' i e) {K L : DerivedCategoryModule Λ X}
     {K' L' : DerivedCategoryModule Λ U} (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K)
