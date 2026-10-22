@@ -81,6 +81,39 @@ theorem nonempty_restrict_higherDirectImage_iso_homology {U : T.Opens}
   exact ⟨e₁.symm ≪≫ (higherDirectImage (f' ∣_ V) q).mapIso
     ((Modules.pullbackComp _ _).app ℱ) ≪≫ e₂.symm⟩
 
+omit [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation] in
+/-- The derived form of `nonempty_restrict_higherDirectImage_iso_homology`. Let `P` be a complex
+over an open `U` of the base with `g^* P ≅ R f'_* g'^* ℱ` in the derived category for every base
+change `f'` of `f` along a morphism `g` into `U`. Let `f' : X' ⟶ T'` be the base change of `f`
+along `g : T' ⟶ T`, and `V` an open of `T'` which `g` maps into `U`. Then the restriction of
+`R f'_* ℱ'` to `V` is isomorphic to the pullback of `P` to `V` in `D(𝒪_V)`.
+
+This depends on `AlgebraicGeometry.Scheme.Modules.nonempty_derivedPushforward_iso_restrict`,
+which is stated with `sorry`. -/
+theorem nonempty_restrict_derivedPushforward_iso {U : T.Opens}
+    {P : CochainComplex U.toScheme.Modules ℤ}
+    (hbc : ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T'),
+      IsPullback g' f' f (g ≫ U.ι) →
+        Nonempty (DerivedCategory.Q.obj (((Modules.pullback g).mapHomologicalComplex _).obj P) ≅
+          (derivedPushforward f').obj
+            ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ))))
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    (sq : IsPullback g' f' f g) (V : T'.Opens)
+    (gV : V.toScheme ⟶ U.toScheme) (hgV : gV ≫ U.ι = V.ι ≫ g) :
+    Nonempty ((restrictFunctor V.ι).mapDerivedCategory.obj ((derivedPushforward f').obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ))) ≅
+      DerivedCategory.Q.obj (((Modules.pullback gV).mapHomologicalComplex _).obj P)) := by
+  have sq' : IsPullback (f' ⁻¹ᵁ V).ι (f' ∣_ V) f' V.ι := (isPullback_morphismRestrict f' V).flip
+  obtain ⟨e₁⟩ := nonempty_derivedPushforward_iso_restrict f' ((Modules.pullback g').obj ℱ) V.ι _ _
+    sq'
+  have sq'' : IsPullback ((f' ⁻¹ᵁ V).ι ≫ g') (f' ∣_ V) f (gV ≫ U.ι) := by
+    rw [hgV]
+    exact sq'.paste_horiz sq
+  obtain ⟨e₂⟩ := hbc gV _ _ sq''
+  exact ⟨e₁.symm ≪≫ (derivedPushforward (f' ∣_ V)).mapIso
+    ((DerivedCategory.singleFunctor _ 0).mapIso ((Modules.pullbackComp _ _).app ℱ)) ≪≫ e₂.symm⟩
+
 /-- **`R f'_* ℱ'` is locally finite locally free in one degree over `U_{i,r}`.** Let `f' : X' ⟶ T'`
 be the base change of `f` along `g : T' ⟶ T`, and `t'` a point of `T'` mapped into the rank-`r`
 perfect locus `U_{i,r}`. Then `t'` has an open neighbourhood `V` over which `R f'_* ℱ'` is a finite
