@@ -19,9 +19,105 @@
   "def-pc-scheme",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=\\Gamma(C,\\mathcal O_C)$. For $c\\in C$, every prime of $R$ is maximal, so $R_c$ has only one prime, its maximal ideal. Localization preserves reducedness: if $(a/s)^n=0$, choose $t\\notin c$ with $ta^n=0$; then $(ta)^n=0$, hence $ta=0$, hence $a/s=0$. Thus the nilradical of $R_c$ is zero; as it is also the unique prime ideal, the maximal ideal is zero. Consequently $R_c=\\kappa(c)$ is a separably closed field. The algebraic strict henselization of a separably closed field is the field itself: by the equivalence between étale schemes over a field and discrete Galois sets, every pointed étale algebra has its selected factor equal to that field, and localization at the selected point gives the field. These selected-factor maps give the colimit in the definition of strict henselization. The affine strict-local comparison therefore identifies $C_{(\\bar c)}$ over $C$ with $\\operatorname{Spec}\\kappa(c)$ for a geometric point defined using an algebraic closure of $\\kappa(c)$. This uses separable closure, not an identification of an imperfect separably closed field with its algebraic closure.",
+   "uses": [
+    "lem-exc-etale-field-gsets",
+    "def-sc-ring-strict-henselization",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, strict-local base; elementary reduced zero-dimensional local-ring calculation followed by the pointed-étale colimit identification"
+   }
+  },
+  {
+   "text": "Fix an affine étale test object $v:V\\to U$. Both schemes are affine. The étale ring-map lemma makes its coordinate algebra finite type over that of $U$, so $h=gv:V\\to C$ is finite type. For each algebraically closed geometric point $\\bar c$, $V_{\\bar c}\\to U_{\\bar c}$ is étale. The equality of dimensions of local rings under an étale map implies $\\dim V_{\\bar c}\\leq\\dim U_{\\bar c}\\leq e$: any prime chain in the affine source lies in the localization at its largest prime, whose dimension equals the corresponding target localization. This argument does not require surjectivity of $v$. Affineness also makes $h$ quasi-compact and separated, hence quasi-separated, as required for the strict-henselization stalk formula.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "def-weil-finite-type-morphism",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP, lemma-dimension-etale-extension; finite-type composition and base change on affine coordinate rings"
+   }
+  },
+  {
+   "text": "For every $c\\in C$ put $k_c=\\kappa(c)$ and choose an algebraic closure $\\overline{k_c}$. The ordinary fibre $V_c$ is affine of finite type over $k_c$. Invariance of dimension under field extension gives $\\dim V_c=\\dim V_{\\overline{k_c}}\\leq e$ by Step 2. The field $k_c$ is separably closed, so its torsion étale cohomological dimension is zero. The affine torsion theorem applied to $V_c/k_c$ therefore gives $H^q((V_c)_{\\mathrm{et}},G)=0$ for every torsion abelian étale sheaf $G$ and every $q>e$. Its separate empty-scheme clause covers an empty fibre.",
+   "uses": [
+    "lem-kun-dimension-extension",
+    "lem-sf-separably-closed-torsion-cd",
+    "thm-sc-affine-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0V, proposition-cd-affine; algebra.tex Tag 00P3, lemma-dimension-preserved-field-extension"
+   }
+  },
+  {
+   "text": "Let $F$ be an arbitrary torsion abelian étale sheaf on $V$. For each $c$ and a geometric point over it, the strict-henselization stalk formula for the quasi-compact quasi-separated $h$ gives\n$$(R^qh_*F)_{\\bar c}\\cong H^q((V\\times_C C_{(\\bar c)})_{\\mathrm{et}},F|).$$\nStep 1 identifies this strict-local scheme with $V_c$, and inverse image preserves local torsion. Thus Step 3 makes every such stalk zero for $q>e$. Conservativity of geometric stalks applied to $0\\to R^qh_*F$ yields $R^qh_*F=0$. There is one chosen geometric point over every point of $C$, and changing its algebraically closed target does not change the strict-local construction.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, applied to h:V→C; étale geometric stalk detection"
+   }
+  },
+  {
+   "text": "All points of $C$ are closed and its residue fields are separably closed. The affine zero-dimensional étale acyclicity lemma applies to every abelian sheaf on $C$, and in particular makes global sections exact: for a surjection the obstruction to lifting a global section lies in $H^1$ of its kernel, which vanishes. The exact-global-sections Leray identification now gives\n$$H^q(V_{\\mathrm{et}},F)\\cong\\Gamma(C_{\\mathrm{et}},R^qh_*F)=0\\qquad(q>e).$$\nTogether with Steps 2–4 this proves the uniform torsion bound on every affine étale $V\\to U$ and every torsion $F$, without assuming finite presentation of $U\\to C$ or properness.",
+   "uses": [
+    "lem-cbc-affine-sepclosed-etale-acyclic",
+    "def-weil-pbc-exact-global-sections-leray"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, lemma-affine-only-closed-points; exact-sections Leray composition"
+   }
+  },
+  {
+   "text": "Apply the topological-coefficient torsion-dimension transfer with $X=U$ and $d=e$. The preceding steps establish exactly its hypothesis for every affine étale test object and every locally torsion abelian étale sheaf. Its coefficient choices, induced norm topology on $\\Omega$, internal uncompleted module category, indexing universe, finite constant scalar-model generators and all four weak-Serre/coproduct closure operations are identical to those in the item. Hence its class $\\mathcal P_X$ is precisely $\\mathcal P_U$, and it gives $H^qR\\Gamma(U_{\\mathrm{pro\\acute et}},N[0])=0$ for every $N\\in\\mathcal P_U$ and $q>e+2$. This last input is an unsplit coefficient theorem, with its exact source explicitly WANTED; the torsion theorem is not being applied directly to a non-torsion module. The transfer includes the empty scheme and the zero coefficient ring.",
+   "uses": [
+    "lem-sfb-torsion-cd-topological-serre-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement proof (2), first paragraph; agent-formulated coefficient transfer after the affine torsion geometry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-gsets",
+  "def-sc-ring-strict-henselization",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "def-weil-finite-type-morphism",
+  "lem-sc-etale-local-dimension",
+  "lem-kun-dimension-extension",
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-sc-affine-torsion-cd",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-cbc-affine-sepclosed-etale-acyclic",
+  "def-weil-pbc-exact-global-sections-leray",
+  "lem-sfb-torsion-cd-topological-serre-transfer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement proof (2), first paragraph; affine torsion bound via strict-local fibres and exact étale sections on C, followed by a separately exposed coefficient-transfer obligation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +153,45 @@
    "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.IsArtinianScheme, AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj",
    "date": "2026-10-22",
    "verdict": "no match: hits do not state this affine pro-etale bound or the stated coefficient-independent affine-to-global implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine pro etale cohomological dimension bound for weak Serre coproduct closure of constructible topological ell adic module sheaves over a zero dimensional weakly contractible base with separably closed residue fields",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.HasInjectiveDimensionLE, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.Scheme.etaleTopology, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the ordinary pro-etale topological-coefficient weak-Serre cohomological dimension transfer or its geometric affine specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pro etale cohomology vanishes above fibre dimension plus two for the weak Serre coproduct closure of constructible ell adic modules",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineHomDescScheme, Algebra.formallyEtale_iff, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.sourceAffineLocally, Algebra.FormallyEtale.recOn, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the ordinary pro-etale topological-coefficient weak-Serre cohomological dimension transfer or its geometric affine specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, DerivedCategory.IsLE",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the ordinary pro-etale topological-coefficient weak-Serre cohomological dimension transfer or its geometric affine specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*cohomological|weakSerreCoproductClosure|affine.*Artin",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the ordinary pro-etale topological-coefficient weak-Serre cohomological dimension transfer or its geometric affine specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin vanishing over a reduced absolutely flat base with separably closed residue fields and ordinary continuous topological coefficient modules",
+   "results": "8 hits: Module.free_of_flat_of_finrank_eq, Module.finite_of_isArtinianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.QuasiFinite.instIsArtinianRingFiber, AdicCompletion.flat_of_isNoetherian, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the ordinary pro-etale topological-coefficient weak-Serre cohomological dimension transfer or its geometric affine specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-geometric-family-heart-cd",
@@ -83,5 +214,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-affine-profinite-family-serre-cd",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Proved the uniform affine-etale torsion bound geometrically using reduced zero-dimensional strict-local fibres, Artin vanishing and exact etale sections on the base. Exposed the independent coefficient transfer from this torsion bound to the actual topological weak-Serre coproduct hull as one statement-only unsplit node; its all-continuous norm-topological algebraic-closure case has an explicit WANTED source.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-gsets",
+    "why": "Classifies pointed étale algebras over a separably closed field for the strict-local identification."
+   },
+   {
+    "node": "def-sc-ring-strict-henselization",
+    "why": "Provides the algebraic pointed-etale colimit whose selected-factor cocone is used."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies scheme-theoretic and algebraic strict henselization, including the map to C."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic affine/étale finite-type geometry used to check the hypotheses of the fibre computation; no compactification-coherence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Generic affine/étale finite-type geometry used to check the hypotheses of the fibre computation; no compactification-coherence step is replaced."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic affine/étale finite-type geometry used to check the hypotheses of the fibre computation; no compactification-coherence step is replaced."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Bounds dimensions of affine etale test fibres without imposing surjectivity."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Passes from the stipulated algebraically closed geometric fibre bound to the separably closed residue-field fibre."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Supplies the field contribution zero in Artin vanishing."
+   },
+   {
+    "node": "thm-sc-affine-torsion-cd",
+    "why": "Supplies the affine finite-type torsion cohomology estimate on the actual residue-field fibre."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Computes higher direct-image stalks for qcqs h without properness."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Turns the computed stalk vanishing into vanishing of higher direct-image sheaves."
+   },
+   {
+    "node": "lem-cbc-affine-sepclosed-etale-acyclic",
+    "why": "Makes all positive etale cohomology on the given base zero, without Noetherianity."
+   },
+   {
+    "node": "def-weil-pbc-exact-global-sections-leray",
+    "why": "Identifies total etale cohomology with sections of higher direct image for this exact base-sections functor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-gsets",
+  "def-sc-ring-strict-henselization",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "def-weil-finite-type-morphism",
+  "lem-sc-etale-local-dimension",
+  "lem-kun-dimension-extension",
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-sc-affine-torsion-cd",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-cbc-affine-sepclosed-etale-acyclic",
+  "def-weil-pbc-exact-global-sections-leray"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NC-a5d5af77d",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-a5d5af77d (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-sfb-torsion-cd-topological-serre-transfer in full, the statement of every node they cite (including the blueprint_update texts of the stalk formula, stalk conservativity and finite-type nodes) and the cited place in the blueprint, main-20261015 det-sf-comp-coherence-refinement proof (2). The item's statement and stmt_deps are byte-identical to its base copy in the NA snapshot, where its proof was empty. Step 1: R_c is a reduced ring with a single prime, so it is the field kappa(c); the pair (kappa(c), id) is terminal in the pointed-etale category, so the strict henselization is kappa(c); the affine comparison lemma gives C_(c) -> C = Spec kappa(c) -> C. Step 2: the etale ring map is of finite type; lem-sc-etale-local-dimension bounds every prime chain of the affine V_cbar by e without needing surjectivity; h is affine, hence qcqs. Step 3: dimension is invariant under field extension, the residue field has torsion cd 0, and the affine torsion theorem applies to V_c (with its empty clause). Steps 4-5: the stalk formula's hypotheses (qcqs h, torsion F) hold, conservativity at one geometric point per point gives R^q h_* F = 0, lem-cbc-affine-sepclosed-etale-acyclic makes global sections on C exact without Noetherianity, and the exact-sections Leray node gives H^q(V,F) = 0 for q > e and every affine etale V. Step 6 applies the new node with X = U and d = e; its coefficients, topologies, generators and closure operations match the item's word for word. proof_deps equals the union of the uses. The new node carries a statement only, is self-contained, and its stmt_deps exist. It is not a relabelling (D1/D2): it has no geometric family, no base and no fibre hypothesis, and the geometric work stays in Steps 1-5. My rg search over dag/nodes (weak-Serre and torsion-cd nodes) found no duplicate; the closest are lem-sfb-higher-direct-image-affine-etale-bound, -zero-dimensional-base-affine-global, -noetherian-proper-heart-uniform-bound, -integral-proper-cohomological-bounds, -finite-classical-localizing and -etale-module-affine-bound. Edge cases: A = 0 and empty X are vacuous; a separably closed point is w-contractible; for finite A everything is classical and the bound is d; for Spec F_q with Z_ell coefficients the bound is d+1 = 2 < 4 (the claim is q > d+2). I found no counterexample. Its source is honestly marked WANTED, and the report avoids the false shortcut that a vanishing class is closed under kernels. The 14 off-unit tool_uses are generic etale-cohomology black boxes; accepted. No SGA is cited. No fixes."
  }
 }
