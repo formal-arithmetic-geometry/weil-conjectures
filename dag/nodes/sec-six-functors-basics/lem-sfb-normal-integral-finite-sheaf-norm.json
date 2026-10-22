@@ -15,9 +15,109 @@
   "def-pc-integral-scheme",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a nonempty affine open $U=\\operatorname{Spec}B\\subseteq Z$, write $p^{-1}U=\\operatorname{Spec}A$. Finiteness supplies this affine inverse image and makes $A$ a finite $B$-module. Surjectivity makes it nonempty, and integrality of the schemes makes $A,B$ domains. The map $B\\to A$ is injective: a point above the prime $(0)\\subset B$ exists by surjectivity, its prime in $A$ contracts to zero, and the kernel is contained in that contraction. Thus the fraction fields form a finite extension by the cited finite-domain lemma. These fields identify with the generic stalks $K=k(Y)$ and $L=k(Z)$ by the affine-fraction-field lemma. The map $p$ sends the generic point of $Y$ to that of $Z$: its image is dense since $p$ is continuous and surjective. The fraction-field embeddings on every affine are therefore the same map $L\\hookrightarrow K$ on generic stalks, because they extend the same section maps and fractions have a unique extension. Fix $d=\\dim_L K\\geq1$; it is independent of the affine open.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-surjective-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-trf-finite-domain-fraction-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph, affine rings and their fraction fields"
+   }
+  },
+  {
+   "text": "The affine ring $B$ is integrally closed in $L$. Indeed, if $c\\in L$ satisfies a monic polynomial over $B$, that polynomial maps to a monic polynomial over each $\\mathcal O_{Z,z}$, $z\\in U$. The stalk embeds in $L$ and has $L$ as fraction field, so normality of that stalk puts $c$ in its image. The cited section-gluing statement then supplies $b\\in\\Gamma(U,\\mathcal O_Z)=B$ with generic germ $c$. Hence $B$ is integrally closed, without any Noetherian hypothesis.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), normality needed for the application of the minimal-polynomial lemma"
+   }
+  },
+  {
+   "text": "Let $N=N_{K/L}$ be the field norm. Every $a\\in A$ is integral over $B$ by finite-algebra integrality. The minimal-polynomial descent lemma gives a monic $Q_a\\in B[T]$, annihilating $a$ in $A$, whose image in $L[T]$ is its minimal polynomial. If $m=\\deg Q_a$ and $e=\\dim_{L(a)}K\\geq1$, the field-norm formula says $N(a)=((-1)^mQ_a(0))^e\\in B$. Define $\\nu_U(a)$ to be this element of $B$, equivalently the unique element with image $N(a)$ in $L$. Since the field norm preserves multiplication and one, injectivity of $B\\to L$ proves the same for $\\nu_U$. Its scalar formula gives $\\nu_U(p^\\sharp b)=b^d$ for $b\\in B$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sfb-integral-minpoly-fraction-descent",
+    "lem-sfb-finite-field-norm-minpoly",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph, minimal polynomial and construction on affine sections"
+   }
+  },
+  {
+   "text": "If $W\\subseteq U$ is another nonempty affine open, the sections $a$ and $a|_{p^{-1}W}$ have the same generic germ in $K$. Both $\\nu_U(a)|_W$ and $\\nu_W(a|_{p^{-1}W})$ consequently have germ $N(a)$ in $L$, so they are equal by injectivity of the germ map on $W$. For two affine opens $U,U^{\\prime}$, cover $U\\cap U^{\\prime}$ by affine opens $W$ and apply this equality twice. Thus the affine norms agree on overlaps. This uses no assumption that the intersection itself is affine.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), compatible system of maps on affine sections"
+   }
+  },
+  {
+   "text": "For any nonempty open $V\\subseteq Z$ and $a\\in\\Gamma(p^{-1}V,\\mathcal O_Y)$, choose an affine cover $(U_i)$ of $V$. The sections $\\nu_{U_i}(a|_{p^{-1}U_i})$ agree on overlaps by the preceding step, so the structure-sheaf axiom glues them uniquely to $\\nu_V(a)$. Uniqueness of gluing proves compatibility with restriction to every open subset. Multiplicativity, preservation of one, and $\\nu_V(p^\\sharp b)=b^d$ hold after restricting to every $U_i$, hence hold on $V$ by the uniqueness part of the same sheaf axiom. For $V=\\varnothing$ both section rings have one element; use the unique map. This also verifies restrictions to the empty open.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), global norm map and property (1)"
+   }
+  },
+  {
+   "text": "For property (2), take $y\\in p^{-1}V$ with $a(y)=0$, and choose an affine neighbourhood $U=\\operatorname{Spec}B\\subseteq V$ of $p(y)$. Write $p^{-1}U=\\operatorname{Spec}A$ and $a_U=a|_{p^{-1}U}$. The point $y$ corresponds to a prime $\\mathfrak q\\subset A$, and $a_U\\in\\mathfrak q$ by the affine vanishing criterion. Its image point has prime $\\mathfrak r=\\mathfrak q\\cap B$. From step 3 write $Q_{a_U}(T)=T^m+\\sum_{i<m}b_iT^i$ in $B[T]$, with $Q_{a_U}(a_U)=0$. Thus $b_0=-a_U(a_U^{m-1}+\\sum_{1\\leq i<m}b_i a_U^{i-1})\\in\\mathfrak q$, so $b_0\\in\\mathfrak r$. The signed norm formula gives $\\nu_U(a_U)=((-1)^mb_0)^e\\in\\mathfrak r$ since $e\\geq1$. The affine vanishing criterion says this section vanishes at $p(y)$, and restriction compatibility gives $\\nu_V(a)(p(y))=0$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "lem-sfb-integral-minpoly-fraction-descent",
+    "lem-sfb-finite-field-norm-minpoly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), final paragraph, vanishing at the image point; constant coefficient is b_0 and the sign is retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-map-residue-field-naturality",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-trf-finite-domain-fraction-degree",
+  "def-weil-pbc-normal-ring",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-function-field-sections-glue",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-sfb-integral-minpoly-fraction-descent",
+  "lem-sfb-finite-field-norm-minpoly",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), with the affine compatibility and sheaf gluing spelled out and the signed constant-term formula of Tag 0BIH."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +153,45 @@
    "results": "Read returned hits: Algebra.algebraMap_intNorm, Algebra.intNorm, Algebra.intNorm_intNorm, Algebra.intNormAux, Algebra.map_intNormAux, Algebra.intNorm_eq_of_isLocalization, prod_galRestrict_eq_norm, Algebra.intNorm_eq_norm",
    "date": "2026-10-22",
    "verdict": "no match: normalization declarations do not construct this sheaf norm; Algebra.intNorm and intNormAux concern integral-closure rings, not this theorem for arbitrary integral source schemes with its restriction and vanishing conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite surjective morphism of integral schemes to a normal scheme admits a multiplicative norm on the structure sheaf compatible with restrictions",
+   "results": "{\"t\": \"2026-10-22T01:23:17Z\", \"tool\": \"leanfinder\", \"query\": \"Finite surjective morphism of integral schemes to a normal scheme admits a multiplicative norm on the structure sheaf compatible with restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"Algebra.intNorm_intNorm\", \"Algebra.intNorm\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"66f07e484d9f8e6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide normalization, finite morphism definitions or integral ring norms; none gives a restriction-compatible structure-sheaf norm with its point-vanishing clause for arbitrary integral sources."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*[Ss]heaf|[Ss]heaf.*[Nn]orm",
+   "results": "{\"t\": \"2026-10-22T01:23:28Z\", \"tool\": \"grep\", \"query\": \"norm.*[Ss]heaf|[Ss]heaf.*[Nn]orm\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"b00c72ed2061e771\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide normalization, finite morphism definitions or integral ring norms; none gives a restriction-compatible structure-sheaf norm with its point-vanishing clause for arbitrary integral sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism onto an integral normal scheme has a norm on sections of its structure sheaf",
+   "results": "{\"t\": \"2026-10-22T01:23:28Z\", \"tool\": \"leansearch\", \"query\": \"A finite morphism onto an integral normal scheme has a norm on sections of its structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.IsFinite.casesOn\"], \"digest\": \"dd8f9e2e8d2454a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide normalization, finite morphism definitions or integral ring norms; none gives a restriction-compatible structure-sheaf norm with its point-vanishing clause for arbitrary integral sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, \"norm\"",
+   "results": "{\"t\": \"2026-10-22T01:23:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, \\\"norm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide normalization, finite morphism definitions or integral ring norms; none gives a restriction-compatible structure-sheaf norm with its point-vanishing clause for arbitrary integral sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Field norm of a finite extension restricts to regular functions on a normal integral scheme",
+   "results": "{\"t\": \"2026-10-22T01:23:29Z\", \"tool\": \"leanfinder\", \"query\": \"Field norm of a finite extension restricts to regular functions on a normal integral scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.algebraMap_intNorm\", \"spectralAlgNorm_of_finiteDimensional_normal\", \"prod_galRestrict_eq_norm\", \"spectralAlgNorm_of_finiteDimensional_normal_def\", \"Algebra.intNormAux\", \"spectralNorm_extends_of_finiteDimensional\", \"Algebra.intNorm\", \"Algebra.map_intNormAux\"], \"digest\": \"49b932467f59be83\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide normalization, finite morphism definitions or integral ring norms; none gives a restriction-compatible structure-sheaf norm with its point-vanishing clause for arbitrary integral sources."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-normal-ample-descent",
@@ -82,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-integral-finite-sheaf-norm",
+  "worker": "stage1",
+  "summary": "Read Tag 0BD3 and norm conditions in 0BCX. Constructed the field norm on finite affine charts; verified affine normality from the given stalk hypothesis, fraction-field compatibility, gluing on arbitrary opens and vanishing via the signed minimal-polynomial constant coefficient. Two searched Mathlib leaves isolate the algebraic inputs. The statement is unchanged. Corrected the source proof's b_m/b_0 typo and omitted sign.",
+  "blueprint": "Auxiliary norm input below det-thm-sf-ctf-stability-direct-images proof (3), through finite-normal ample descent; inherited null nearest blueprint ancestor as returned by blueprint_refs.py ancestor. The six steps realize the full proof of 0BD3 used at that place.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-function-field-sections-glue",
+    "why": "Generic tool: realizes a rational function regular in each stalk as a section, to deduce normality of the affine coordinate ring. The current unit has no such algebraic-geometric sections lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-function-field-sections-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-83f86a8ce",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-83f86a8ce (reviewer sub-agent of L); spot-checked: I read the item, both new leaves and every cited node in full. The item matches Stacks 0BD3 together with the definition of a norm of degree d at the start of section-norms. The delivery's sign correction is right: the norm is ((-1)^m b_0)^e (0BIH), which the a=1, Q/Q example confirms. Step 1: B→A is injective because a prime lies over (0), the generic point maps to the generic point, and Frac(A)/Frac(B) is finite. Step 2: B is integrally closed, using stalk normality and lem-sc-function-field-sections-glue; the generic-tool tool_use is accepted. Step 3: the norm lands in B via 00H7 and the minimal-polynomial norm formula. Steps 4-5: the charts agree through the injective generic germ, gluing works on overlaps that are only covered by affines, and the empty open is handled. Step 6: b_0 lies in the prime q contracted to B, and e≥1. In the pinned Mathlib, Algebra.norm_eq_norm_adjoin (Transitivity.lean 229) needs no separability, and the remaining declarations are at the cited lines. A purely inseparable test case gives the right norm. Both new leaves are pure algebra, not clauses of the parent, and the duplicate search found nothing. Batch-5: lem-trf-finite-domain-fraction-degree is a Mathlib leaf with empty proof_deps (fraction-field finiteness for module-finite domains). It is general algebra outside the trace-formula and Poincaré-duality assumptions, so it is accepted. No changes."
  }
 }
