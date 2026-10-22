@@ -1,0 +1,66 @@
+## Worker report
+
+Item: lem-sfb-quasi-compact-restriction-acyclicity. Group NM. Stage 1 only, 2026-10-22.
+
+Files written:
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-quasi-compact-restriction-acyclicity.json: existing statement, now split in four steps; statement and statement dependencies unchanged; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-cech-vanishing-surjective-unions.json: one new statement-only, unsplit node, Stacks 0A36; no Mathlib match.
+- citations.json: verbatim statement excerpts for all four node citations across the four proof steps.
+- report.md: this report and signed self-review.
+
+Attachments: none. I searched lean/WeilConjectures for the exact blueprint tag and for quasi-compact restriction acyclicity, surjective restrictions, and the Cech/flasque vocabulary. The item tag is absent. The project has CechCriterion.lean, which gives a Cech-to-derived criterion, not acyclicity from quasi-compact-open surjectivity; Cech.lean gives injective/Godement acyclicity and contraction when there is a distinguished covering member, not Ravi's cover-relative hypothesis. None is an exact finished declaration of the item or new lemma. No Lean files were written or compiled.
+
+WANTED: none.
+
+What was wrong or incomplete: the item had its correct statement and source, but no proof or proof dependencies. No statement dispute or correction was necessary. An important gap to avoid was applying 0A36 after checking only individual intersections: its hypothesis concerns every union of finite intersections. For a finite cover the number of distinct nonempty subsets of its index set is finite, regardless of tuple length or repetitions; this supplies precisely the needed quasi-compactness. The proof now writes that argument out.
+
+What remains: the one new 0A36 lemma is deliberately not split here, as required by the one-level stage-1 brief. Nothing in the item's split is left unwritten. No axiom/proof-completion claim about Lean is made.
+
+## Sources and route
+
+I read the item, its parent's use in lem-sfb-spectral-space-cohomology-dimension (in particular its reviewed acyclicity paragraph), the chapter record sec-six-functors-basics, and the unit record sk-prop-sf-comp-coherence. I also read the current main-20261015 unit _section.md and det-sf-comp-coherence-cocycle.proof.md. The item inherits the local geometric input for the heart cohomological-dimension bound recorded in blueprint.from.place; this work does not alter that unit or the compactification route above it. The unit record's historical chapter differs from the new snapshot path; I did not modify that record.
+
+The mathematical source read is literature/stacks-project/cohomology.tex: Tag 0A36, label lemma-vanishing-ravi, statement and proof at lines 1999-2086; Tag 01EW, label lemma-cech-vanish-basis, statement and dimension-shifting proof; and Tag 0A3G, label proposition-cohomological-dimension-spectral, especially the paragraph at lines 4006-4034 that applies 0A36 and 01EW to finite quasi-compact-open covers. Tags 0A36 and 01EW were checked against tags/tags. I also read literature/stacks-project/sites-cohomology.tex, Tag 03F9, label lemma-cech-vanish-collection, statement at lines 1565-1584. This is the existing abelian-sheaf, general-site form of the basis criterion. It avoids replacing abelian sheaves by scheme module sheaves or assuming an unproved agreement between two coefficient categories.
+
+The proof is the same finite-cover argument as 0A3G. Applying the criterion on the space V, rather than on X and then identifying cohomology over an object with cohomology of a restricted sheaf, avoids a separate non-elementary restriction-comparison lemma. Ordinary restriction is explicitly F(W)=G(W).
+
+## New nodes
+
+lem-sfb-cech-vanishing-surjective-unions states exactly 0A36: a topological abelian sheaf, a set-indexed cover of an open, and surjectivity from sections on the covered open to sections on every union of finite nonempty intersections imply vanishing of positive Cech cohomology. It does not assume finiteness or a compact basis, and it concludes Cech vanishing for one cover, not derived vanishing on all quasi-compact opens. All objects and the ordered-tuple complex are introduced. Its two statement dependencies define abelian sheaves on sites and Cech cohomology. It has no proof sketch in its statement, no proof, no proof dependencies and no proof origin. It is strictly an input to the item's argument, not a relabelled clause.
+
+I searched all dag/nodes by 0A36, lemma-vanishing-ravi, union/intersection/surjectivity and Cech vocabulary; only the item and its dimension parent mention that tag. I checked other Cech candidates by opening their statements, especially lem-weil-pbc-site-cech-vanishing-criterion, lem-weil-pbc-module-cech-vanishing-basis and lem-sc-topological-filtered-injective-cech-acyclic. The latter has a filtered-colimit-of-injectives hypothesis, which is not available for G. The module-basis node concerns O_X-modules on a scheme. The general-site criterion is reused, not duplicated.
+
+Whole-blueprint searches run with tools/blueprint_refs.py included 'acyclic', 'surjective restrictions', 'vanishing-ravi', 'Cech vanishing', 'unions of intersections', and 'quasi-compact opens'. No blueprint node states the new 0A36 lemma or the item's qc-restriction criterion. The new node's blueprint.from is det-sf-comp-coherence-cocycle, found by the ancestor command, with the existing via chain prefixed by this item; its place records the finite-cover acyclicity input. same_as is empty for the item and new node.
+
+## Mathlib searches
+
+All searches newly recorded in the delivered nodes were run with the mandated batch2/msearch.py command and read as returned; searches.jsonl contains the exact queries, service status and result summaries. The item retains its existing searches as well. For the new lemma, I used both phrasings 'Cech cohomology of an abelian sheaf vanishes when restrictions to unions of intersections of cover members are surjective' and 'A sheaf whose restriction to each union of intersections of a fixed open cover is surjective has exact positive degree Cech complex'; also LeanSearch's cover/intersection query, Loogle TopCat.Sheaf.IsFlasque, and greps in CategoryTheory/Sites and Topology/Sheaves. For the item I additionally ran the explicit quasi-compact-open restriction/derived-cohomology query.
+
+LeanFinder returned Mayer-Vietoris sheaf short-complex lemmas and coherent-topology local-surjectivity results. Their displayed types concern exactness in sheaves or local surjectivity, not positive Cech cohomology of the chosen coefficient sheaf. LeanSearch returned gluing/sheaf-condition and scheme cover facts. Loogle returned the flasque definition and short-exact-sequence consequences. I read Mathlib/Topology/Sheaves/Flasque.lean: IsFlasque requires all open restriction maps to be epi; epi_of_shortExact and of_shortExact_of_isFlasque₁₂ do not establish the lemma or the item. The greps returned no cover-relative Cech vanishing theorem. None is a one-line specialization of either statement. All services used here answered; no unavailable query is misreported as a no-match result.
+
+## Not duplicates
+
+lem-sfb-cech-vanishing-surjective-unions vs lem-sfb-quasi-compact-restriction-acyclicity: the new 0A36 lemma concludes Cech vanishing for one arbitrary cover from surjectivity to all unions of its intersections; the item instead proves derived vanishing on every qc open from surjectivity only between qc opens, using finite refinements and the independent existing basis criterion.
+
+lem-sfb-cech-vanishing-surjective-unions vs lem-sfb-spectral-space-cohomology-dimension: the dimension theorem bounds derived cohomology of arbitrary abelian sheaves on finite-dimensional spectral spaces; the new lemma assumes cover-relative section surjectivity and concludes only Cech vanishing, with no spectral or dimension hypothesis.
+
+lem-sfb-cech-vanishing-surjective-unions vs lem-weil-pbc-site-cech-vanishing-criterion: the new lemma supplies the Cech-vanishing hypothesis for one cover; the existing 03F9 tool assumes Cech vanishing on a cofinal collection and concludes derived vanishing. They are consecutive different implications.
+
+lem-sfb-cech-vanishing-surjective-unions vs lem-weil-pbc-module-cech-vanishing-basis: the latter is the 01EW criterion for scheme modules, assuming Cech vanishing; the new lemma is 0A36 for abelian sheaves on arbitrary topological spaces, establishing Cech vanishing from cover-relative section surjectivity.
+
+## Review by NM
+
+I compared the unchanged item's hypotheses and conclusion with the 0A3G paragraph and with the two invoked Stacks lemmas open. A compact basis and stability under pairwise intersections suffice. There is no need for X itself to be quasi-compact, for a Noetherian assumption, or for a scheme structure. The quantifier on every quasi-compact V is retained. I compared the new node with the complete statement of 0A36: arbitrary index sets and arbitrary unions are retained, and the use of nonempty finite subsets rather than tuples removes repetitions without changing the family of opens. The statement has no proof text masquerading as a hypothesis.
+
+Step 1 uses only the defining open-site/sheaf convention from def-weil-pbc-sites-and-cohomology; I opened its statement and copied the abelian-sheaf functor clause into citations.json. Restriction of a sheaf is a sheaf here directly because a cover inside V is a cover of the same ambient open and all section groups/maps are unchanged. The cofinality argument is elementary: refine pointwise by basis neighbourhoods and select a finite subcover of the fixed qc W. Finite ordinal indexing gives a set of permitted covers. This argument never selects a finite cover of all X. The empty W admits the empty refinement.
+
+Step 2 is elementary and needs no new topology node: pairwise stability gives finite nonempty intersection stability by induction; among finitely many covering members there are finitely many distinct subsets and hence finitely many distinct intersections. A union of those intersections is a finite union. The explicit finite-subcover argument shows it is quasi-compact, including the empty union. All opens involved are opens in X, contained in W, so the precise hypothesis of G applies to G(W) -> G(W_S). No claim that an infinite union of arbitrary qc opens is quasi-compact is used.
+
+Step 3 cites the new lemma, whose statement I reread: it takes surjectivity from F(W) onto every union of finite nonempty intersections of this cover and returns positive Cech vanishing. Step 2 verifies exactly that, even for arbitrarily many tuple repetitions/degrees. This is non-elementary and is marked so. No source tag is used as a substitute for a node citation.
+
+Step 4 cites the existing general-site criterion, whose statement I opened in full. It allows any site and abelian sheaf, has the three intersection/cofinality/Cech hypotheses individually verified in Steps 1-3, and concludes R^q evaluation vanishing over each basis object. Using the open site of V makes its terminal object V itself a basis object by the fixed hypothesis on V. I reread def-sc-topological-abelian-cohomology: it defines H^q(V,F) as right-derived global sections of abelian sheaves on V, precisely the functor just used. Thus this step does not take a restricted-space comparison from a node that only defines cohomology. Both cited clauses are quoted verbatim. The 03F9 criterion is declared in split_report.tool_uses as a generic tool from another unit; it realizes the prescribed 01EW route and replaces no compactification step. Its dependencies do not involve this item.
+
+For small cases I checked X empty, V empty and the empty covering (the positive Cech groups of the zero complex vanish, and the empty-refinement argument still applies); a singleton cover with all repeated indices; two opens, where the union/intersection condition supplies the surjection onto their overlap; and an infinite discrete space, whose qc opens are finite, illustrating why global compactness is unnecessary. For the new lemma I also checked empty/one-member covers and a constant abelian sheaf on a circle covered by two arcs: the overlap may be disconnected and restriction to it need not be surjective, so the lemma does not falsely force constant-sheaf acyclicity there. No separation hypothesis was inserted.
+
+I checked B-E against the written JSON and source: one self-contained statement-only node, single-escaped TeX, definition dependencies that really define the notions, exact Stacks label/tag, searched blueprint provenance, and no unwritten Mathlib match. The proof has two genuinely elementary steps and two cited non-elementary applications, so its content is not moved into a single new node. Every cited statement has a verbatim quote in citations.json. The longest step is 932 characters, below the 2000-character review threshold. Corrections made during drafting were to spell out all unions of distinct intersections, use the abelian general-site criterion instead of the scheme-module version, and apply that criterion on V itself to avoid hiding a cohomology-restriction comparison. No mathematical obstacle remains for this split.

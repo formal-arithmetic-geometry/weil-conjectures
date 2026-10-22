@@ -10,9 +10,62 @@
  "stmt_deps": [
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a quasi-compact open $V\\subseteq X$ and put $F=G|_V$, so $F(W)=G(W)$ for each open $W\\subseteq V$. Work on the open site of the subspace $V$ [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal B_V$ be the opens of $V$ whose images are quasi-compact opens of $X$, including $\\varnothing$. These form a basis: an open of $V$ is open in $X$, so each of its points has a quasi-compact open neighbourhood contained in it. Let $\\mathrm{Cov}_V$ consist of all finite covers $W=\\bigcup_{i\\in I}W_i$ with $W,W_i\\in\\mathcal B_V$, using finite ordinal index sets (including the empty one). This is a set of covers. Given any open cover of $W\\in\\mathcal B_V$, choose for every point a basis neighbourhood contained in a cover member and then take a finite subcover by quasi-compactness of $W$. Thus $\\mathrm{Cov}_V$ is cofinal among covers of every $W\\in\\mathcal B_V$. For $W=\\varnothing$ the empty cover gives the same refinement statement.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EW, lemma-cech-vanish-basis, hypotheses (1)-(2); Tag 0A3G, proof of (1) assuming (2), finite coverings by quasi-compact opens"
+   }
+  },
+  {
+   "text": "For a cover $\\mathcal W=(W_i)_{i\\in I}$ in $\\mathrm{Cov}_V$, every nonempty finite intersection $W_J=\\bigcap_{j\\in J}W_j$ is a quasi-compact open of $X$, by induction using the pairwise-intersection hypothesis. In particular all tuple intersections, with repetitions allowed, belong to $\\mathcal B_V$. There are only finitely many nonempty subsets of the finite set $I$. Hence an arbitrary union $W_{\\mathcal S}=\\bigcup_{J\\in\\mathcal S}W_J$ of these intersections is a finite union of quasi-compact opens, and is quasi-compact: for any open cover take a finite subcover on each of the finitely many pieces and join these subcovers. The empty union is quasi-compact as well. Since $W_{\\mathcal S}\\subseteq W$ and both are quasi-compact opens in $X$, the hypothesis on $G$ gives a surjection $F(W)=G(W)\\longrightarrow G(W_{\\mathcal S})=F(W_{\\mathcal S})$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof of (1) assuming (2), verification of the hypotheses of Tag 0A36 for finite quasi-compact-open covers"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cech-vanishing-surjective-unions] to the topological space $V$, its abelian sheaf $F$, and each cover $\\mathcal W\\in\\mathrm{Cov}_V$. Step 2 verifies surjectivity for every union of its finite nonempty intersections, not merely for individual intersections. We obtain $\\check H^p(\\mathcal W,F)=0$ for every $p>0$ and every such finite cover, with the ordinary ordered-tuple Cech complex.",
+   "uses": [
+    "lem-sfb-cech-vanishing-surjective-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi; applied as in Tag 0A3G, proof of (1) assuming (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] to the open site of $V$, $\\mathcal B_V$, $\\mathrm{Cov}_V$ and $F$. Its condition (1) holds by the finite-intersection calculation of Step 2, condition (2) by the cofinality proof in Step 1, and condition (3) by Step 3. It follows that $R^q\\Gamma(W,-)(F)=0$ for every $q>0$ and $W\\in\\mathcal B_V$. In particular $V\\in\\mathcal B_V$ by the chosen quasi-compactness of $V$. On its open site, evaluation at the terminal open $V$ is global sections of abelian sheaves on $V$; by [def-sc-topological-abelian-cohomology] its right derived groups are precisely $H^q(V,G|_V)$. This proves the assertion for every quasi-compact open $V$. The same argument includes the empty space and empty open; no compactness of $X$ was used.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9, lemma-cech-vanish-collection (general-site abelian version of Cohomology Tag 01EW), applied on the open site of V"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-cech-vanishing-surjective-unions",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, proof of (1) assuming (2), applying Tags 0A36 and 01EW; use the general-site abelian version 03F9 of the latter on each open subspace V."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +101,59 @@
    "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, LightProfinite.hasSheafify_type, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instIsGrothendieckAbelian, SheafOfModules.isQuasicoherent, CategoryTheory.Sheaf.H, CategoryTheory.SheafOfTypes.balanced",
    "date": "2026-10-22",
    "verdict": "no match: the hits define flasqueness or cohomology, or prove vanishing for injectives; none proves acyclicity from surjectivity only between quasi-compact opens. Full flasqueness is a stronger hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|flabby|[Rr]avi|surjective.*[Cc]ech",
+   "results": "0 hits:  (subdirectory CategoryTheory/Sites)",
+   "date": "2026-10-22",
+   "verdict": "no match: only basic flasqueness definitions/properties in Topology/Sheaves/Flasque.lean (read), or no hits in CategoryTheory/Sites; no cover-relative Cech acyclicity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology vanishes for a covering if restriction to unions of finite intersections is surjective",
+   "results": "8 hits: AlgebraicGeometry.Scheme.OpenCover.restrict_I₀, TopCat.Presheaf.isSheaf_iff_isSheafPairwiseIntersections, AlgebraicGeometry.Scheme.instSmallPrecoverage, TopCat.Presheaf.IsCompatible, TopCat.Presheaf.IsSheafPairwiseIntersections, AlgebraicGeometry.Scheme.Cover.nonempty_of_nonempty, TopCat.Presheaf.isSheafOpensLeCover_iff_isSheafPairwiseIntersections, TopCat.Presheaf.SheafCondition.pairwiseCoconeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sheaf gluing, local surjectivity, Mayer-Vietoris sheaf short complexes or unrelated qcqs localization; none asserts Cech vanishing from surjectivity onto unions of intersections, nor derived vanishing from qc-open restrictions."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.IsFlasque",
+   "results": "6 hits: TopCat.Sheaf.IsFlasque, TopCat.Sheaf.IsFlasque.pushforward_isFlasque, isFlasque_skyscraperSheaf_of_hasZeroObject, isFlasque_skyscraperSheaf_of_epi_from, TopCat.Sheaf.IsFlasque.of_shortExact_of_isFlasque₁₂, TopCat.Sheaf.IsFlasque.epi_of_shortExact",
+   "date": "2026-10-22",
+   "verdict": "no match: full flasqueness and its short-exact-sequence consequences do not give the cover-relative Cech vanishing statement; Flasque.lean read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology of an abelian sheaf vanishes when restrictions to unions of intersections of cover members are surjective",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sheaf gluing, local surjectivity, Mayer-Vietoris sheaf short complexes or unrelated qcqs localization; none asserts Cech vanishing from surjectivity onto unions of intersections, nor derived vanishing from qc-open restrictions."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech|[Ff]lasque|[Ff]labby",
+   "results": "5 hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean (subdirectory Topology/Sheaves)",
+   "date": "2026-10-22",
+   "verdict": "no match: only basic flasqueness definitions/properties in Topology/Sheaves/Flasque.lean (read), or no hits in CategoryTheory/Sites; no cover-relative Cech acyclicity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf whose restriction to each union of intersections of a fixed open cover is surjective has exact positive degree Cech complex",
+   "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.extensiveTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sheaf gluing, local surjectivity, Mayer-Vietoris sheaf short complexes or unrelated qcqs localization; none asserts Cech vanishing from surjectivity onto unions of intersections, nor derived vanishing from qc-open restrictions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective restrictions between quasi compact opens of a coherent topological space imply vanishing higher sheaf cohomology",
+   "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, Condensed.epi_iff_locallySurjective_on_compHaus, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff, TopCat.toSheafCompHausLike, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, SheafOfModules.QuasicoherentData.coversTop",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sheaf gluing, local surjectivity, Mayer-Vietoris sheaf short complexes or unrelated qcqs localization; none asserts Cech vanishing from surjectivity onto unions of intersections, nor derived vanishing from qc-open restrictions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-spectral-space-cohomology-dimension",
@@ -76,5 +178,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-quasi-compact-restriction-acyclicity",
+  "worker": "stage1",
+  "summary": "Proved the finite-cover hypothesis carefully using finiteness of distinct intersections, then applied Ravi Cech vanishing and the existing general-site criterion on each V itself. One statement-only node for 0A36; no new criterion or cohomology restriction comparison. Item statement unchanged.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage. Specifically the Zariski cohomological dimension input in the affine-to-global local heart estimate. Supporting the spectral-space dimension estimate: Surjective restrictions on quasi-compact opens imply acyclicity. Realizes the subsidiary topological acyclicity input: finite qc covers, 0A36 Cech vanishing, then 01EW/03F9 derived vanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "Generic abelian-sheaf Cech-to-derived vanishing criterion 03F9 on the open site of V; the unit has no separate such tool and this retains the prescribed 01EW route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-9cd39d6d5",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-9cd39d6d5 (reviewer sub-agent of L); spot-checked: Read the item, the one new node lem-sfb-cech-vanishing-surjective-unions, and all cited statements in full: def-weil-pbc-sites-and-cohomology, def-weil-pbc-site-cech-complex, def-sc-topological-abelian-cohomology, lem-weil-pbc-site-cech-vanishing-criterion (03F9). The new node states exactly Stacks 0A36 (cohomology.tex lemma-vanishing-ravi, statement and proof checked): taking unions over families of finite nonempty J ⊆ I gives the same opens as unions of tuple intersections. The empty family is harmless, and no finiteness or separation hypothesis is added. The node is not a clause of the item and duplicates nothing: rg -L for 0A36, 0A3G, flasque and unions of intersections finds only the parent sfb nodes, the Noetherian pbc top-degree nodes and lem-sc-topological-flasque-acyclic, which needs full flasqueness. The item proof follows the 0A3G proof of (1) from (2). Step 1: the qc opens of X inside V form a basis B_V, and finite ordinal-indexed covers in B_V are cofinal (pointwise basis refinement plus a finite subcover), giving 03F9(2). Step 2: finite intersections are qc by pairwise stability, so 03F9(1) holds, and with finitely many J any union W_S is a finite union of qc opens, hence qc and inside W, so the hypothesis on G gives surjectivity. Step 3: the new node gives Čech vanishing, 03F9(3). Step 4: 03F9 on the open site of V, with V in B_V, and def-sc identifies R^qΓ(V,-) with H^q(V,G|_V), so no restriction comparison is hidden. Tested on Z on an irreducible spectral space, discrete spaces, empty V and empty covers, and Z on S^1 with two arcs (the new node's hypothesis correctly fails there). Accepted the declared tool_use of lem-weil-pbc-site-cech-vanishing-criterion as a generic black box that realises the prescribed 01EW step. No SGA is cited. review_split.py reports 'no such node' for four cited ids, but all of them exist through the symlinked chapter directories, so this is a tooling artefact. No changes made."
  }
 }
