@@ -1,6 +1,6 @@
 # Work queue
 
-50 items; claim with `tools/claim.py next <group> [--stage N]`.
+53 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (9 clusters, 352 modules)
 
@@ -20,25 +20,28 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
-## Stage 1: nodes to split (5)
+## Stage 1: nodes to split (7)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
-| `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
+| `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
+| `lem-sfb-semilinear-sylow-good-components` | 4012 | none |
+| `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (3)
+## Stage 2: nodes to state (4)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-pur-affine-space-comparison` | 1 | state | 10 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
+| `cor-pur-affine-space-zero-section-purity` | 1 | state | 3 |
+| `lem-pur-projection-purity-agreement` | 1 | state | 3 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 
-Not open yet: 371 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up), 4 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 371 nodes that below a finished node, not needed, 89 nodes that wait for a statement dependency (bottom-up), 6 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (28)
 
