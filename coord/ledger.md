@@ -24241,3 +24241,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:41 L: returned deliver/ND/lem-sfb-finite-norm-invertible-sections (reviewer RETURN: L: independent stage-2 immutable head bcbe744ef723: S2-lane delivery with no stage-2 content: snapshot has no .lean file)
 - 01:43 L: merged deliver/NP/lem-sfb-qcqs-proper-serre-heart-bound (stage 2; reviewer PASS; parallel immutable checks)
 - 01:43 L: returned deliver/S1/Sheaf.Algebra.Homology.KFlatResolution (reviewer RETURN: (reviewer C-69276, head 69276862f) H4/A1: drop the restored quarantined twins lean/Sheaf/AlgebraicGeometry/RelativelyFla)
+- 01:44 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
