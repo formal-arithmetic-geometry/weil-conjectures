@@ -24259,3 +24259,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:54 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 01:55 L: returned deliver/NK/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C1/F + C5/B9 + G4. This is the 8th push of this item; the seven before it were all RETURNed for the same fault (NM 96665)
 - 01:55 L: returned deliver/NH/lem-pur-adic-projection-shift-coherence (reviewer RETURN: L: independent stage-2 immutable head 3fe5bb70672f: H2: stmt_deps added two theorem nodes that carry only plain defs. (1)
+- 01:56 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
