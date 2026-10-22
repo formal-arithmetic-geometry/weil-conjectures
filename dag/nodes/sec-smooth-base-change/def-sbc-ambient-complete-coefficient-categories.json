@@ -31,9 +31,62 @@
   "lem-sbc-coherent-pair-functor-descent",
   "def-sbc-ambient-complete-raw-scalar-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Extend the original raw tensor associators by Mathlib’s Karoubi mapIso construction. Abstract projector calculations show that this construction preserves the two raw pentagons and the normalized raw unitors. Apply these proved generic formulas to the ambient raw system and the constructible scalar system; keep the original complete-system constructors.",
+   "uses": [
+    "def-sbc-ambient-complete-raw-scalar-system",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The complete integral inclusion commutes with tensor and sends the constructible associator to the complete ambient associator, because both have the specified ambient tensor image. Localize this equality; uniquely normalized factorization functors commute with the localized inclusion. Identity comparison components determine the raw inclusion comparisons uniquely. For arbitrary raw stage systems, separate repeated indices from strict towers: use their unitors in the repeated cases and the localized integral associator equation otherwise. Apply this generic raw tower lemma. Abstract functoriality of Mathlib’s Karoubi extension then gives the inclusion unit and tower laws for every projector.",
+   "uses": [
+    "def-sbc-ambient-complete-raw-scalar-system",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-linear-scalar-localization",
+    "def-weil-karoubi-envelope",
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion functor is additive. Its unit-isomorphism locus is closed under finite coproducts, since the unit is an isomorphism on every object of the finite diagram and additive functors preserve its colimit. Thus complete integral objects have finite biproducts. Raw localization inherits finite biproducts by its additive, object-surjective localization functor; the constructible stage has the existing finite biproducts. Karoubi completion preserves them. Raw additive scalar extensions also remain additive under Karoubi extension, as their underlying arrow maps are the original additive maps.",
+   "uses": [
+    "lem-weil-pbc-exact-completion-data",
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coherent common-stage pair functor descent to the finite-stage inclusions. Its representative formula and additivity of finite-stage inclusions give additivity on pair morphisms. For the raw-to-complete embedding, use the canonical identity-projector comparison and its naturality with the extended tensor associator. Take the final outer Karoubi extension, retaining both projectors.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-karoubi-envelope",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ambient-complete-raw-scalar-system",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-karoubi-envelope",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-pbc-exact-completion-data",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-pbc-qbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Lines 1191–1228, 1291–1345 and 1412–1438: explicit integral/localized inclusion compatibility, inherited tensor coherence under Karoubi extension, finite biproducts, and common-stage functor descent. Implemented by P5 using abstract projector calculations and a generic raw-system unit/tower lemma, retaining the original complete systems."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -241,6 +294,8 @@
   "declaration": "AlgebraicGeometry.Scheme.pbcConstructibleCompleteQbarInclusion",
   "declarations": [
    "CategoryTheory.Idempotents.coefficientCompositionIso",
+   "CategoryTheory.Idempotents.coefficientInclusionComparisonIso",
+   "CategoryTheory.Idempotents.coefficientAssociatorIso",
    "AlgebraicGeometry.Scheme.pbcConstructibleCompleteStage",
    "AlgebraicGeometry.Scheme.pbcAmbientCompleteKaroubiStage",
    "AlgebraicGeometry.Scheme.pbcConstructibleCompleteKaroubiStage",
@@ -295,5 +350,15 @@
   "result": "pass",
   "note": "Wrote review.md. Checked all snapshot modules, statement dependencies, source clauses, universes, canonical constructions, both Karoubi layers, records, and edge cases. All three per-file compiles passed through scompile.py. No delivery errors found; branch and clones unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-ab21f",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261022T002427-L-1928742",
+  "kind": "interface",
+  "note": "independent cc review: delivered item vs live: theorem headers byte-identical, changed def bodies equal values (coefficientCompositionIso = Iso.refl, explicit witnesses of the ∃! specs, pbcStageCategory ≡ PbcRationalConstructible); direct importers FiniteStageRationalExchangeData, QbarCoefficientSmoothBaseChange and adapted FiniteStageKaroubiExtension compiled against the delivered item; original FiniteStageKaroubiExtension fails at 58:10 as reported; #print axioms: sorryAx only inherited from upstream raw transitions"
+ }
 }

@@ -55,7 +55,8 @@ theorem karSystem_eq (W : Scheme.{u}) [IsNoetherian W]
     apply heq_of_eq
     funext E M N a b
     unfold pbcAmbientCompleteKaroubiAssociator
-    exact composition_adapter _ _ _ _
+    unfold coefficientAssociatorIso
+    rfl
 
 /-- The supported morphism and its formulas on the actual coefficient systems. -/
 theorem completeKarMorphism_exists
