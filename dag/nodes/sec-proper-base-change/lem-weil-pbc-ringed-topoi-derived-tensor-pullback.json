@@ -36,9 +36,11 @@
    "elementary": false
   },
   {
-   "text": "The complex comparison is the composite of the quotient comparison, the specified counit, the mapHomotopyCategory factorization, and the target quotient comparison. The K-flat computation lemma makes it invertible on representatives and their tensor products.",
+   "text": "The complex comparison is the composite of quotient comparisons and the specified counit. For the independent-site-universe interface, use the published K-flat tensor computation. For the older equal-universe interface, that module imports the interface being proved: instead the existing ringedTopoiDerivedPullback theorem supplies a derived pullback with invertible counit on K-flat flat-term representatives. Uniqueness of left-derived functors transports this to the supplied LF and epsilon. The total tensor model supplies K-flatness and flat terms for tensors. In both interfaces, transport flatness along siteSheafTensorRightIso without assuming the coefficient map is flat.",
    "uses": [
-    "lem-weil-pbc-kflat-tensor-pullback-computation-universes"
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-kflat-total-tensor-model"
    ],
    "elementary": false
   },
@@ -70,6 +72,8 @@
  "proof_deps": [
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-kflat-total-tensor-model",
   "def-weil-pbc-canonical-ringed-tensor-comparison",
   "def-pc-tensor-complex-sheaves",
   "lem-pc-kflat-resolution",
@@ -80,7 +84,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 and 0G7E: explicit representative square, localization descent; B4 formalization, 2026-10-18"
+  "place": "Tags 07A4, 0G7E and 06YY: explicit representative square and resolving-class descent; B4 independent-universe proof reused and adapted privately to the original equal-universe interface by F4, 2026-10-22."
  },
  "mathlib_searches": [
   {
@@ -195,13 +199,13 @@
   "note": "Full review recorded in review.md. Mathematics, canonical normalizations, universes and signatures are correct. Complete fixes repair H9 missing proof-dependency imports and update the report. Original and replacement modules compile cleanly through scompile.py. Branch head unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261019T002506-L-2141445",
-  "kind": "interface",
+  "landing": "20261022T002404-L-1924392",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
