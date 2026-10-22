@@ -37,11 +37,13 @@
    }
   },
   {
-   "text": "The transported module inverse images $h_A^*,h_B^*$ of step 1 are algebraic inverse-image presentations of $h^{-1}$ for $A_Y$ in $A_X$ and $B_Y$ in $B_X$: the geometric module construction gives functors $I$ with $|I(M)|\\cong h^{-1}|M|$ transporting addition and scalar action through the ring identification. Use the inverse-image tensor comparison with $R=A_Y$, $M=B_Y$ (regarded as an $A_Y$-module), and $N=P^n$ in each degree. Its generalized-pairing formula is\n$h^{-1}(b\\otimes p)\\mapsto h^{-1}b\\otimes h^{-1}p$.\nIt is precisely the specified balanced coequalizer comparison: inverse image transports the action maps, and preserves their coequalizer, a cokernel of their difference, by step 1. Its tensor comparison identifies the two balancing diagrams. The $B_X$-action on either tensor is induced by multiplication on the first factor; the displayed pairing takes multiplication by $b'$ to multiplication by $h^{-1}b'$. Hence the comparison is $B_X$-linear, so its inverse as an $A_X$-linear isomorphism is also $B_X$-linear. The same formula with $b=1$ gives $\\chi_h h_A^*(\\iota_Y)=\\iota_X$, after $a_h$, where $\\iota_T(p)=1\\otimes p$. Naturality in $P^n$ makes these maps commute with differentials. This proves the ordinary assertion, including its unit normalization, for every complex, not just K-flat ones. Here formulas mean morphisms on generalized pairings, followed by sheafification, rather than a claim that inverse image is sectionwise evaluation.",
+   "text": "Use the existing restricted extension/tensor presentation for each ordinary scalar model. Its pure formula survives the object equality transports. The specified algebraic inverse image preserves the tensor pairing; remove and reinsert the trivial ULift using the existing underlying-sheaf isomorphisms. Identify the inverse image of the regular B_Y-module with the regular B_X-module using the normalized inverse-image unit isomorphism. Together with the canonical action square these give an A_X-linear isomorphism delta from the restriction of I_B E_Y(M) to the restriction of E_X I_A(M), with the required generalized pure-tensor formula. Define beta : E_X I_A -> I_B E_Y as the inverse mate of the ordinary action square. Its unit equation and B_X-linearity give its formula on every local pure tensor. The generalized scalar-operation graph of I_B identifies beta of the transported pure tensor with its original transported section. Test delta followed by restricted beta on the inverse image of B_Y tensor M. The inverse-image tensor comparison and tensor extensionality show that these maps are inverses. Forgetting module actions reflects isomorphisms, so beta is a natural isomorphism. Its inverse is chi and has delta's generalized pure formula. Apply this formula at coefficient one and use the underlying graph descriptions to obtain the ordinary unit square. This construction includes zero rings, zero modules and empty sites; it never assumes that arbitrary sheaf sections are pure.",
    "uses": [
-    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-extension-tensor-comparison",
     "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback-unit-existence",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false,
    "source": {
@@ -50,10 +52,11 @@
    }
   },
   {
-   "text": "Let $P$ now be K-flat with flat terms. Apply preservation of flat-term K-flat complexes to the ringed-topos morphism $(h,A_X=h^{-1}A_Y)$ with identity structural ring map. It gives that $h_A^*P$ is K-flat with flat terms. Derived change of rings therefore computes $T_Y(QP)$ by $Q(B_Y\\otimes_{A_Y}P)$ and $T_X(h_A^*QP)$ by $Q(B_X\\otimes_{A_X}h_A^*P)$. Combined with the exact localization comparisons of step 1, these are the canonical representative identifications on the two ends of $Q(\\chi_h)_P$. The derived change-of-rings computation is natural on these models and compatible with changing K-flat resolution; no exactness or flatness of $B_T\\otimes_{A_T}-$ is used.",
+   "text": "Let $P$ now be K-flat with flat terms. Apply preservation of flat-term K-flat complexes to the ringed-topos morphism $(h,A_X=h^{-1}A_Y)$ with identity structural ring map. It gives that $h_A^*P$ is K-flat with flat terms. Derived change of rings therefore computes $T_Y(QP)$ by $Q(B_Y\\otimes_{A_Y}P)$ and $T_X(h_A^*QP)$ by $Q(B_X\\otimes_{A_X}h_A^*P)$. Combined with the exact localization comparisons of step 1, these are the canonical representative identifications on the two ends of $Q(\\chi_h)_P$. The derived change-of-rings computation is natural on these models and compatible with changing K-flat resolution; no exactness or flatness of $B_T\\otimes_{A_T}-$ is used. In Lean, reuse the proved kFlat_inverseImage_independent helper of the independent-universe ringed derived-pullback module. It specializes the K-flat pullback theorem to the identity structural ring map and cancels its normalized scalar-extension identity isomorphism. The model computes field then gives invertibility of the actual prescribed cochain counit.",
    "uses": [
     "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
    ],
    "elementary": false,
    "source": {
@@ -62,9 +65,13 @@
    }
   },
   {
-   "text": "Write $c_{Y,P}$ and $c_{X,h_A^*P}$ for the representative identifications of step 3, with tensor factors reversed by $p\\otimes b\\mapsto b\\otimes p$ if necessary. Under them the scalar-adjunction units are $Q(\\iota_Y)$ and $Q(\\iota_X)$, by the normalized derived coefficient adjunction. Let $\\alpha_P:T_Xh_A^*(QP)\\to h_B^*T_Y(QP)$ be $Q(\\chi_h^{-1})_P$ transported by these identifications. The unit equation in step 2 gives\n$$r_X(\\alpha_P)\\circ\\eta_{X,h_A^*(QP)}=(a_h)_{T_Y(QP)}\\circ h_A^*(\\eta_{Y,QP}).$$\nThe left side is the $T_X\\dashv r_X$ transpose of $\\alpha_P$. By the defining inverse mate formula, the right side is the transpose of $\\theta_{h,QP}$: insert the $Y$-unit, apply $a_h$, then transpose under $T_X\\dashv r_X$. The adjunction Hom bijection is injective, so $\\alpha_P=\\theta_{h,QP}$. This identifies the specified mate, not just some isomorphism between its endpoints.",
+   "text": "Descend each prescribed cochain left-derived comparison through the homotopy quotient, preserving its universal property and its component on every complex. Apply the normalized ordinary coefficient adjunction and the derived Hom comparison, then the cochain-adjunction compatibility theorem. Transposing the identity map gives the all-complex derived unit equation, and hence AdjunctionNormalized. The existing mate_computes lemma of the derived-cokernel exchange module applies to any four abelian categories, two exact horizontal functors, normalized coefficient adjunctions and an ordinary unit square; its proof does not use the cokernel specialization. Apply that lemma to the canonical action square and chi, and cancel Q(chi). This gives exactly the displayed representative equation for theta_h with the prescribed cochain counits and exact-localization comparisons.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-cochain-homotopy-derived-comparison",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pur-sheaf-ring-derived-hom-comparison",
+    "lem-pur-cochain-adjunction-compatibility",
+    "lem-sfb-derived-cokernel-adjoint-exchange",
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false,
@@ -119,22 +126,28 @@
   "def-weil-pbc-adjunction-mate",
   "lem-pc-kflat-resolution",
   "lem-pod-derived-exact-square-composition",
+  "lem-pur-cochain-adjunction-compatibility",
+  "lem-pur-cochain-homotopy-derived-comparison",
   "lem-pur-derived-change-of-rings",
   "lem-pur-exact-restriction-composition",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-sheaf-ring-derived-hom-comparison",
   "lem-pur-site-algebraic-composition-unit",
+  "lem-sfb-derived-cokernel-adjoint-exchange",
   "lem-trf-geometric-inverse-image-exact",
   "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-extension-tensor-comparison",
   "lem-weil-pbc-flat-restriction-ordinary-comparisons",
-  "lem-weil-pbc-geometric-module-construction",
   "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback-unit-existence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting; V1 ordinary action proof reuses the proved generalized-graph helper inverse_change_hom after removing trivial ULift presentations; X7 proves identity normalization by explicit algebraic identity transport, exact-localization unit coherence, and the adjunction Hom equivalence. X7 also proves composition by concrete composite algebraic presentations, the pinned action formula, exact-square composition localization, and injectivity of the scalar adjunction Hom equivalence."
+  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting; V1 ordinary action proof reuses the proved generalized-graph helper inverse_change_hom after removing trivial ULift presentations; X7 proves identity normalization by explicit algebraic identity transport, exact-localization unit coherence, and the adjunction Hom equivalence. X7 also proves composition by concrete composite algebraic presentations, the pinned action formula, exact-square composition localization, and injectivity of the scalar adjunction Hom equivalence. K3 fills the remaining main theorem: restricted extension/tensor presentations plus normalized regular-module inverse image construct the ordinary comparison; its inverse is the actual ordinary mate, tested by transported tensor extensionality. Cochain/homotopy comparison and derived Hom normalization give the prescribed adjunction units. The existing generic mate_computes helper identifies the representative map, and flat-term K-flat resolutions propagate invertibility to all derived objects."
  },
  "mathlib_searches": [
   {
@@ -326,13 +339,13 @@
   "note": "Re-delivery repairs both RETURN findings of c8ca664. F1: θ_h is now a def (mateEquiv.symm of aD_h). a_h is chosen from an ∃! pinned via moduleUnderlying; aD_h comes from mapDerivedCategoryNatIso/CompIso. θ_composition uses actual geometric Lg⊣Rg, Lf⊣Rf, Lh⊣Rf⋙Rg with the leftAdjointUniq composite, pinned ring equations and underlying-pinned cA/cB; its equation is exactly θ_gf=(f_B^*θ_g)(θ_f g_A^*) with associators. It holds for arbitrary adjunctions (mateEquiv_vcomp). θ_identity uses the 𝟭 topos with pinned iA/iB and unitors. F2: stmt_deps now carry the landed def-sfb-derived-change-of-rings-cochain-model and def-weil-pbc-algebraic-inverse-image (both reviewed_lean pass); the theorem dep is dropped and kept in proof_deps. Node differs from live only in lean/stmt_deps; statement verbatim. Clauses checked: χ pairing formula, unit equation, AdjunctionNormalized, K-flat representative equation (types checked), global IsIso, mate direction, no flatness/boundedness, universes u/w. 4 sorrys, all theorems; no hollow defs; docstrings present. nt_compile --json: 40.2 s, exit 0, clean. Advisory: AdjunctionNormalized restates the coefficient-adjunction normalization."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X7",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261021T225238-L-3805585",
-  "kind": "proof",
+  "landing": "20261022T020104-L-15317",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
