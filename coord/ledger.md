@@ -24119,3 +24119,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:45 L: returned deliver/ND/lem-sfb-semilinear-sylow-good-components (reviewer RETURN: C1/F + G1; this is the third RETURN, so G4 applies. The item is live, but the proof cites two nodes that are on the 2026)
 - 00:47 L: returned deliver/NE/lem-sfb-equivariant-smooth-galois-model (reviewer RETURN: C1/F (2026-10-19 route drop) + G1/G3/G4. The item is live: it is not on route-pivot-dropped.txt. Step 8 of the delivery )
 - 00:47 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 00:49 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
