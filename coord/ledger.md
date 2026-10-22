@@ -24067,3 +24067,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:18 L: merged deliver/NN/prop-pur-affine-space-composition-law (stage 2; reviewer PASS; parallel immutable checks)
 - 00:18 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 2026-10-22T00:18:30Z L: superseded stage-1 delivery NE/lem-sfb-proper-pair-radicial-preparation at 77ab81e439518d0e49e40798052e726acb7f3f5c; current completion retained; packet archived at refs/superseded/NE/lem-sfb-proper-pair-radicial-preparation/77ab81e439518d0e49e40798052e726acb7f3f5c; stale return retired.
+- 00:19 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
