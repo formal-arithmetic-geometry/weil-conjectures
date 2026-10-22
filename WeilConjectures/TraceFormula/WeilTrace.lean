@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.FrobeniusIterate
@@ -239,6 +241,32 @@ section Unit
 variable [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (e : X ≅ X)
+
+omit [Finite k] in
+/-- The homology sheaves `Hʲ(ℚ̲̄_ℓ,X)` of the canonical Weil unit vanish in degrees `j ≠ 0`: the
+unit of the derived category is the unit module object placed in degree `0`. -/
+lemma isZero_homologyFunctor_unit_carrier {j : ℤ} (hj : j ≠ 0) :
+    Limits.IsZero ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj
+      (WeilBoundedConstructible.unit ℓ e.hom)).carrier := by
+  rw [WeilBoundedConstructible.homologyFunctor_obj_carrier]
+  exact DerivedCategory.isZero_homologyFunctor_obj_of_iso_singleFunctor
+    (DerivedCategory.singleFunctorObjUnitIso _).symm hj
+
+/-- The local trace of the canonical Weil unit is the trace of the Frobenius on the stalk of its
+homology sheaf `H⁰(ℚ̲̄_ℓ,X)`, the other homology sheaves being zero. -/
+lemma weilStalkSupertrace_unit_eq_weilSheafStalkTrace (n : ℕ)
+    (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
+    (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
+    weilStalkSupertrace ℓ n x hx (WeilBoundedConstructible.unit ℓ e.hom) =
+      weilSheafStalkTrace ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e 0).obj
+        (WeilBoundedConstructible.unit ℓ e.hom)) := by
+  rw [weilStalkSupertrace_eq]
+  refine (finsum_eq_single _ 0 fun j hj ↦ ?_).trans ?_
+  · refine smul_eq_zero_of_right _ (categoricalTrace_eq_zero_of_isZero ?_ _)
+    rw [Functor.id_obj, WeilSheaf.frobeniusStalk, WeilSheaf.powSuccStalkFunctor, Functor.comp_obj,
+      WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powSuccFunctor_obj_carrier]
+    exact Functor.map_isZero _ (isZero_homologyFunctor_unit_carrier ℓ e hj)
+  · rw [Int.negOnePow_zero, Units.val_one, one_smul]
 
 /-- The canonical Weil unit `ℚ̲̄_ℓ,X` (`WeilBoundedConstructible.unit`) has local trace `1` at every
 point: its stalk is `ℚ̄_ℓ` in degree `0`, on which the Frobenius acts trivially (normalization
