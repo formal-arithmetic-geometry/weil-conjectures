@@ -24050,3 +24050,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:03 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 00:05 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head e59d2cd7b479: A7/A6/H2 credit-only re-delivery, third NC head (G4). e59d2cd7b479 i)
 - 00:05 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 00:06 L: returned deliver/ND/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: F (route lock) + E1. I read all nine steps; the statement is unchanged; the base item was unsplit with no proof, and the)
