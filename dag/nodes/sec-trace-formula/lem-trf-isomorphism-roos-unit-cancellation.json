@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-isomorphism-roos-unit-cancellation",
+ "kind": "statement",
+ "title": "Cancellation on both coordinates of the comparison cone",
+ "statement": "Fix prime l, finite E/Q_l, a scheme isomorphism g and any unbounded complex P. Let a be a natural map from its pullback quotient tower to inverse image of its quotient tower, normalized on unit generators. Let e be an isomorphism from inverse image of its quotient cone to the cone of its inverse-image quotient tower, with the specified first and shifted coordinate equations. The specified Roos comparison followed by H(a) and e inverse equals exact inverse image of the actual strict quotient-cone augmentation as a whole chain map. No K-flatness, flat terms, completion calculus or completedness assumption is needed for this chain calculation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clause (2), pullback commutes with reductions, and clause (3), second paragraph: agent-formulated identification of the specified inverse-image comparison with the completion unit. Compare Stacks derived.tex Tag 08TC (definition-derived-limit) and the explicit cone map of def-weil-inverse-image-pullback-comparison (b)."
+ },
+ "stmt_deps": [
+  "def-trf-multiplication-generator-normalized",
+  "def-trf-strict-quotient-cone-augmentation",
+  "lem-pur-integral-ambient-operation-models",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For each quotient index, evaluate the finite comparison followed by multiplication on every degree and site section. The defining generator formula for the specified finite comparison and the normalization of multiplication return the original section. The actual quotient unit has precisely this pure-tensor section formula. Extensionality therefore gives theta_n followed by a_n equals G of the actual quotient unit, directly in the quotient tower presentation.",
+   "uses": [
+    "def-trf-multiplication-generator-normalized",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write v for the actual strict quotient-cone augmentation. Its first coordinate is the actual unit tuple and its shifted coordinate is zero. The finite identities and eta first-coordinate equation identify the first coordinates of the specified comparison followed by H(a) and G(v) followed by eta. The shifted-coordinate equations show both vanish. The mapping-cocone decomposition of the identity makes the chain maps equal. Cancel eta to obtain the asserted whole chain-map identity.",
+   "uses": [
+    "def-trf-strict-quotient-cone-augmentation",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-multiplication-generator-normalized",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-trf-strict-quotient-cone-augmentation",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clauses (2)–(3), explicit strict quotient augmentation and multiplication cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(lift_fst|id_X|lift_f_snd_v)",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"top\": [\"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\"], \"digest\": \"eedb96324998fe49\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the ordinary tensor-unit section formula and general cone/product identities. The project quotient units, finite generators and normalized completion comparison still require their stated interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.lift, CategoryTheory.Limits.Pi.map",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"top\": [\"CategoryTheory.Limits.FormalCoproduct.evalOp_map_app\"], \"digest\": \"b66b7b56f840a060\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the ordinary tensor-unit section formula and general cone/product identities. The project quotient units, finite generators and normalized completion comparison still require their stated interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Roos cone augmentation quotient tensor unit compatible with tower transition and adjunction completion unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.functorialityUnit'\", \"CategoryTheory.Adjunction.derived\\u03b5\", \"CategoryTheory.Adjunction.functorialityUnit'_app_hom\", \"CategoryTheory.Limits.coneOfAdj\", \"CategoryTheory.Adjunction.functorialityCounit'\", \"CategoryTheory.Adjunction.conesIsoComponentInv\", \"CategoryTheory.Adjunction.derived\\u03b5_fac_app\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"7e66a81262704edd\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the ordinary tensor-unit section formula and general cone/product identities. The project quotient units, finite generators and normalized completion comparison still require their stated interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*unit|unit.*restrictScalars|tensor.*unit_app",
+   "results": "{\"ok\": true, \"n_hits\": 20, \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/Analysis/Normed/Module/Basic.lean\", \"Mathlib/Analysis/Normed/Module/Basic.lean\", \"Mathlib/Analysis/Normed/Module/Basic.lean\", \"Mathlib/Analysis/Normed/Module/Basic.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"Mathlib/RingTheory/Bialgebra/Quotient.lean\", \"Mathlib/RingTheory/Bialgebra/TensorProduct.lean\"], \"digest\": \"7a1cffd9486254ab\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the ordinary tensor-unit section formula and general cone/product identities. The project quotient units, finite generators and normalized completion comparison still require their stated interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CategoryTheory.Adjunction.unit",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the ordinary tensor-unit section formula and general cone/product identities. The project quotient units, finite generators and normalized completion comparison still require their stated interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension adjunction unit on sheaf module sections is tensor with one, compatible with restriction to a quotient and inverse image",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"SheafOfModules.unitHomEquiv_symm_comp\"], \"digest\": \"f62b32d2c3e10671\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the ordinary tensor-unit section formula and general cone/product identities. The project quotient units, finite generators and normalized completion comparison still require their stated interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms to a mapping cocone agree when both coordinates agree and scalar extension multiplication cancels pure tensor unit generators",
+   "results": "Mathlib.Algebra.Homology.HomotopyCategory.MappingCone: CochainComplex.mappingCone.ext_to and ext_to_iff; {\"n_hits\": 8, \"top\": [\"CochainComplex.mappingCone.ext_to_iff\", \"CategoryTheory.Limits.CoconeMorphism.ext_iff\", \"CochainComplex.mappingCone.ext_to\", \"CategoryTheory.Limits.CoconeMorphism.ext\", \"CategoryTheory.Limits.CoconeMorphism.mk.congr_simp\", \"CategoryTheory.Limits.CoconeMorphism.mk\", \"CochainComplex.mappingCone.desc.congr_simp\", \"ModuleCat.HasColimit.colimitCocone\"], \"digest\": \"842a86735fb07a8d\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the entire comparison identity: Mathlib provides mapping-cone extensionality. The project statement additionally identifies the scalar unit generators and both product-comparison coordinates; the proof uses the mapping-cocone identity decomposition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization",
+  "date": "2026-10-21",
+  "group": "H7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+   "place": "Strict quotient cone and unit normalization in proof steps 1–3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.IsomorphismRoosUnitCancellation",
+  "file": "lean/Sheaf/TraceFormula/IsomorphismRoosUnitCancellation.lean",
+  "declaration": "WeilConjectures.isomorphismRoosUnitCancellation",
+  "statement": "theorem isomorphismRoosUnitCancellation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]\n    (P : CochainComplex (integralTowerModules l E Y) ℤ)\n    (a : (integralOperationsPullbackTowerFunctor l E g).obj P ⟶\n      (trfInverseImageTower l E g).obj ((trfQuotientTowerFunctor l E Y).obj P))\n    (e : (trfInverseImageComplex l E g).obj\n        (integralOperationsRoos ((trfQuotientTowerFunctor l E Y).obj P)) ≅\n      integralOperationsRoos ((trfInverseImageTower l E g).obj\n        ((trfQuotientTowerFunctor l E Y).obj P)))\n    (hj : TrfMultiplicationGeneratorNormalized l E g P a)\n    (heta_fst : e.hom ≫ CochainComplex.mappingCocone.fst\n        (trfInverseQuotientDifference l E g P) =\n      (trfInverseImageComplex l E g).map\n        (CochainComplex.mappingCocone.fst (trfQuotientDifference l E Y P)) ≫\n      trfQuotientProductComparison l E g P)\n    (heta_snd : ∀ p : ℤ, e.hom.f (p + 1) ≫\n        (CochainComplex.mappingCocone.snd (trfInverseQuotientDifference l E g P)).v\n          (p + 1) p (add_neg_cancel_right p 1) =\n      (inverseImageIntegralModules l E g).map\n        ((CochainComplex.mappingCocone.snd (trfQuotientDifference l E Y P)).v\n          (p + 1) p (add_neg_cancel_right p 1)) ≫\n      (trfQuotientProductComparison l E g P).f p) :\n    inverseImageRoosComparisonComplex l E g P ≫ integralOperationsRoosFunctor.map a ≫\n        e.inv =\n      (trfInverseImageComplex l E g).map (trfStrictQuotientConeAugmentation l E Y P)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261022T022041-L-432706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261022T022041-L-432706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
