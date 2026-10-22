@@ -11,9 +11,88 @@
   "def-weil-spectral-space",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=X\\setminus Z$. The closed subset $Z$ is quasi-compact: extend any open cover of $Z$ by $U$ to a cover of the quasi-compact space $X$, and take a finite subcover. Apply [lem-weil-pbc-spectral-generalizations-of-quasi-compact] with $E=Z$. It gives $W=\\bigcap_{N\\in I}N$, where $I$ is the set of all quasi-compact open neighborhoods $N$ of $Z$. Order $I$ by reverse inclusion. It is nonempty because $X\\in I$; it is directed because $N\\cap M\\in I$ by quasi-separatedness in [def-weil-spectral-space]. Consequently $S=\\bigcap_{N\\in I}(N\\cap U)$.",
+   "uses": [
+    "def-weil-spectral-space",
+    "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A31, lemma-make-spectral-space, (3) implies (4); Tag 0AP0, lemma-make-spectral-space-minus, neighborhood construction"
+   }
+  },
+  {
+   "text": "Set $X_N=N\\cap U$. It is quasi-compact open in $X$, since $N,U$ are quasi-compact open. Check spectrality directly from [def-weil-spectral-space]. The quasi-compact opens of $X_N$ are exactly the quasi-compact ambient opens contained in $X_N$: openness is transitive for open subspaces, and the subspace topology preserves quasi-compactness of a subset. Thus the ambient basis and finite-intersection property restrict to $X_N$. For sobriety, let $C$ be nonempty irreducible closed in $X_N$. Its ambient closure $D$ is irreducible: if $D\\subseteq A\\cup B$ for ambient closed $A,B$, irreducibility of $C$ puts $C$, and hence $D$, in one of them. Let $\\eta$ be the unique generic point of $D$ in $X$. The open $X_N$ meets $D=\\overline{\\{\\eta\\}}$, so contains $\\eta$; then $C=X_N\\cap D=\\overline{\\{\\eta\\}}^{X_N}$. A second generic point of $C$ would also be generic for $D$, proving uniqueness. This proves spectrality of $X_N$. For $M\\subseteq N$, the inclusion $X_M\\hookrightarrow X_N$ is spectral: a quasi-compact open $B$ of $X_N$ is ambient quasi-compact open, so its inverse image $B\\cap X_M$ is quasi-compact by quasi-separatedness of $X$.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0902, lemma-spectral-sub, quasi-compact-open case, and definition Tag 08YG; direct verification"
+   }
+  },
+  {
+   "text": "Use the inclusion maps $X_M\\hookrightarrow X_N$ for $M\\subseteq N$; identity and composition hold as identities of inclusions. The inclusions $p_N:S\\hookrightarrow X_N$ exhibit $S$ as their topological limit. Indeed any compatible tuple consists of one ambient point: given $M,N$, compare both coordinates with the coordinate at $M\\cap N$. Such a point lies in every $X_N$, hence in $S$ by step 1, and conversely a point of $S$ supplies a unique compatible tuple. All $p_N$ are continuous for the subspace topology. The coordinate at $N=X$ is the inclusion $S\\hookrightarrow U$ and alone induces this topology, so the subspace topology is also the initial topology of all coordinates. The index is a set and is nonempty directed by step 1; all factors and transition maps are spectral by step 2. Thus [lem-weil-pbc-spectral-directed-limit-spectral] applies and proves that $S$ is spectral.",
+   "uses": [
+    "lem-weil-pbc-spectral-directed-limit-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0AP0, lemma-make-spectral-space-minus, intersection-limit argument; Tag 0A2Z, lemma-directed-inverse-limit-spectral-spaces"
+   }
+  },
+  {
+   "text": "Consider any chain $C_0\\subsetneq\\cdots\\subsetneq C_m$ of nonempty irreducible closed subsets of $S$, as in [def-kun-topological-krull-dimension]. Sobriety of $S$, proved in step 3 and defined in [def-weil-spectral-space], supplies generic points $\\eta_i\\in S$ with $C_i=\\overline{\\{\\eta_i\\}}^S$. Put $D_i=\\overline{\\{\\eta_i\\}}^X$. Each $D_i$ is nonempty irreducible closed: if it is covered by two closed sets, one contains $\\eta_i$ and therefore all of $D_i$. The subspace closure identity gives $S\\cap D_i=C_i$. Since $\\eta_i\\in C_{i+1}\\subseteq D_{i+1}$, closedness gives $D_i\\subseteq D_{i+1}$; equality would give $C_i=C_{i+1}$ on intersecting with $S$. We have therefore obtained a strict chain $D_0\\subsetneq\\cdots\\subsetneq D_m$ in $X$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, induction step for (2): expansion of the specialization-chain dimension estimate"
+   }
+  },
+  {
+   "text": "Because $\\eta_0\\in S\\subseteq W$, there is $z\\in Z\\cap\\overline{\\{\\eta_0\\}}^X$. Put $D_{-1}=\\overline{\\{z\\}}^X$. This is nonempty irreducible closed by the singleton argument of step 4. Since $D_0$ and $Z$ are closed and contain $z$, we have $D_{-1}\\subseteq D_0\\cap Z$. This inclusion in $D_0$ is strict, because $\\eta_0\\in D_0$ but $\\eta_0\\notin Z$. Thus $D_{-1}\\subsetneq D_0\\subsetneq\\cdots\\subsetneq D_m$ has length $m+1$. The definition [def-kun-topological-krull-dimension] and $\\dim X\\le n$ give $m+1\\le n$, hence $m\\le n-1$. Every chain in $S$ has this bound, so $\\dim S\\le n-1$. If there are no chains, the same bound holds because $\\dim\\varnothing=-\\infty$.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, induction step proving (2), dimension drop by appending a specialization in Z"
+   }
+  },
+  {
+   "text": "For $Z=\\varnothing$ we have $W=\\varnothing$ and $S=\\varnothing$. For $Z=X$, reflexivity of closure gives $W=X$ and again $S=\\varnothing$. If $X=\\varnothing$ then also $S=\\varnothing$. These cases are already covered by the nonempty directed system above (the index still contains $X$, even when it is empty); no step required a point of $S$ except when testing a nonempty chain. The empty space satisfies all four spectral conditions vacuously, and its dimension is $-\\infty$ by [def-kun-topological-krull-dimension].",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YG, definition-spectral-space; empty cases of Tags 0A31 and 0AP0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 0A31 (lemma-make-spectral-space), 0902 (lemma-spectral-sub), 0AP0 (lemma-make-spectral-space-minus), 0A2Z (lemma-directed-inverse-limit-spectral-spaces); dimension argument expanded from cohomology.tex Tag 0A3G (proposition-cohomological-dimension-spectral), induction step (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +128,45 @@
    "results": "8 hits: SpectralSpace.toQuasiSeparatedSpace, SpectralSpace.toPrespectralSpace, SpectralSpace.toQuasiSober, PrimeSpectrum.instSpectralSpace, PrimeSpectrum.instPrespectralSpace, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, SpectralSpace, PrimeSpectrum.instQuasiSeparatedSpace",
    "date": "2026-10-22",
    "verdict": "no match: Topology.IsOpenEmbedding.spectralSpace needs an already compact open source; it does not supply compactness or spectrality of this generally non-open subspace. Constructibility on PrimeSpectrum and dimension monotonicity do not give the strict dimension drop."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generalizations of a closed subset with compact open complement in a spectral space, minus that subset, form a spectral space of smaller Krull dimension",
+   "results": "8 hits: SpectralSpace.toPrespectralSpace, SpectralSpace.toQuasiSeparatedSpace, PrimeSpectrum.instPrespectralSpace, SpectralSpace.toQuasiSober, SpectralSpace.toCompactSpace, PrimeSpectrum.instSpectralSpace, SpectralSpace, Topology.IsOpenEmbedding.spectralSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give spectral-space axioms, compact open inheritance, or non-strict subspace dimension monotonicity; none states spectrality and the strict dimension bound for this generalization subspace."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSpace|topologicalKrullDim|Specializes",
+   "results": "25 hits: Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/Sequences.lean, Mathlib/Topology/Sequences.lean, Mathlib/Topology/Defs/Filter.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give spectral-space axioms, compact open inheritance, or non-strict subspace dimension monotonicity; none states spectrality and the strict dimension bound for this generalization subspace."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact open subspace of a spectral space is spectral, and specialization chains compute its Krull dimension",
+   "results": "8 hits: topologicalKrullDim, Topology.IsOpenEmbedding.spectralSpace, ringKrullDim, topologicalKrullDim_subspace_le, SpectralSpace.toCompactSpace, PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, SpectralSpace.toQuasiSober",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give spectral-space axioms, compact open inheritance, or non-strict subspace dimension monotonicity; none states spectrality and the strict dimension bound for this generalization subspace."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, Topology.IsOpenEmbedding",
+   "results": "1 hits: Topology.IsOpenEmbedding.spectralSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give spectral-space axioms, compact open inheritance, or non-strict subspace dimension monotonicity; none states spectrality and the strict dimension bound for this generalization subspace."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofiltered intersection of compact open subsets of a spectral space is spectral",
+   "results": "8 hits: SpectralSpace.toPrespectralSpace, SpectralSpace.toQuasiSeparatedSpace, PrespectralSpace, SpectralSpace, PrespectralSpace.of_isTopologicalBasis', SpectralSpace.toCompactSpace, PrespectralSpace.of_isOpenCover, PrimeSpectrum.instPrespectralSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give spectral-space axioms, compact open inheritance, or non-strict subspace dimension monotonicity; none states spectrality and the strict dimension bound for this generalization subspace."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-spectral-space-cohomology-dimension",
@@ -77,5 +191,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-punctured-spectral-neighborhood-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the punctured-neighborhood spectrality and dimension argument in six steps without changing the statement. Reused the existing generalization-hull and directed-spectral-limit nodes; verified compact-open inheritance and the initial-topology limit explicitly. The dimension proof extends each chain of irreducible closed subsets by the closure of a specialization in Z. Checked empty and endpoint cases, source tags, all cited statements and Mathlib candidates. No new nodes.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage. Specifically the Zariski cohomological dimension input in the affine-to-global local heart estimate. Supporting the spectral-space dimension estimate: Punctured generalization neighborhoods are spectral and lose one dimension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+    "why": "Generic topological description of the generalization hull of a quasi-compact subset as an intersection of quasi-compact opens; the compactification-coherence unit supplies no substitute for this local dimension input."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-directed-limit-spectral",
+    "why": "Generic directed inverse-limit theorem for spectral spaces and spectral maps, used for the punctured open neighborhoods; no node in the compactification-coherence unit states this topology theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "lem-weil-pbc-spectral-directed-limit-spectral"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NL-8dbbe1664",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-8dbbe1664 (reviewer sub-agent of L); spot-checked: Proof-only split of an unchanged statement (stmt_deps unchanged, no new nodes, no re-split note in coord). I read all six steps in full and found no faults. (1) Z is closed in quasi-compact X, so it is quasi-compact. lem-weil-pbc-spectral-generalizations-of-quasi-compact with E=Z gives W as the intersection of the quasi-compact open neighbourhoods N of Z. These N form a nonempty directed set: X belongs to it and quasi-separatedness closes it under intersection. (2) Each N∩U is quasi-compact open and spectral, checked directly: it inherits the basis and quasi-separatedness, and it is sober because generic points of ambient closures lie in the open. The inclusions between them are spectral maps. (3) S is the limit of the N∩U: a compatible tuple is a single point of S, and the coordinate at N=X already induces the subspace topology. All hypotheses of lem-weil-pbc-spectral-directed-limit-spectral hold, so S is spectral. (4)-(5) A chain in S lifts to a strict chain of closures in X. Appending cl{z} for some z in Z∩cl{η_0} makes it strictly longer by one, because η_0 is not in Z. Hence dim S ≤ n−1. (6) The empty cases are correct. Sources match: topology.tex 0A31 (5004ff), 0AP0 (5068ff, the closed-constructible case, proved directly in step 2 without citing 0902), 0A2Z; cohomology.tex 0A3G induction step (2). No SGA. Small cases: the three-point chain η→y→z with Z={z} gives dim S=1 against dim X=2, so the bound is sharp; Spec of a DVR with n=1 gives dim S=0. No duplicate: the punctured cohomology-colimit node and the closed-subspace node state different results. I accept both tool_uses, which are generic spectral-space topology."
  }
 }
