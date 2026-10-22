@@ -794,7 +794,7 @@ The natural transformation sends `ℒ` to the zero scheme of its adjunction morp
 
 (blueprint: `sk-the-subsheaf-ff-and-its-representability--remark-1`,
 `the-subsheaf-ff-and-its-representability--remark-1`) -/
-theorem exists_injective_natTrans_hilbertPresheaf
+theorem exists_injective_natTrans_hilbertPresheaf [IsSepClosed k]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules] :
@@ -895,7 +895,7 @@ the class `R(a) ∈ F(T)` corresponding to `a` is sent by `Φ` to the point `e(j
 
 (blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`,
 `sk-the-subsheaf-ff-and-its-representability--remark-1`) -/
-theorem exists_representableBy_invertibleDirectImageToHilbert
+theorem exists_representableBy_invertibleDirectImageToHilbert [IsSepClosed k]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
@@ -1022,7 +1022,7 @@ representing `Hilb^g_{X/k}`, there are a scheme `W` and an open immersion `j : W
 of this representation with the zero-scheme dictionary `F ⟶ Hilb^g_{X/k}`.
 
 (blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`) -/
-theorem isRepresentable_picardFunctorInvertibleDirectImage
+theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
