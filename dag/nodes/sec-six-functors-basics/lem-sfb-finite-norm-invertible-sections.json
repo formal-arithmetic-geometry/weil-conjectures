@@ -245,5 +245,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-c11c75396 (reviewer sub-agent of L); spot-checked: I read Stacks divisors.tex 0BCX/0BUT/0BCY/0BCZ/0BD0 (lines 3585-3770). The item faithfully bundles 0BCY and 0BCZ, with one N for every n and s; this is exactly what the citer lem-sfb-finite-normal-ample-descent needs in its Steps 3 and 6. The statement is unchanged; it is still unsplit on side-live, has no repair note, and nothing in it or its closure is on the drop list. Step 1 uses the new 0BUT node, with the frames fixed before n and s. Step 2 checks the u-cocycle and its ν-image, with units via ν(1)=1. Step 3 is cocycle gluing; the node's proof has e_a=g_ab e_b, and the units commute, so either convention works. Step 4 checks b_j=b_i u_ij^n, so ν(b_i)f_i^n agree on overlaps and glue. Step 5 uses condition (2) to get Z_t ⊆ Z∖p(Y∖Y_s). Step 6 gets 01CY openness and finite⇒closed, then W=V_i∖p(Y∖Y_s), a unit b_i on p^{-1}W, and ν of a unit is a unit; all are stated conclusions of the cited nodes. Step 7 is set theory. The new 0BUT node is the Stacks statement verbatim and is statement-only. It is a real lemma (nonvanishing section at a finite set on an affine, plus closedness), not a clause of the item, and rg -L found no duplicate in the DAG. Small cases tested: identity map (N=M^d, Z_t=Y_s), two disjoint sheets (product norm), s=0, empty fibres and nilpotents. I accept the four generic tool uses. No faults and no changes; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormInvertibleSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_invertible_norm_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormInvertibleSections.lean",
+  "statement": "theorem exists_invertible_norm_sections {Y Z : Scheme.{u}} (p : Y ⟶ Z) [IsFinite p] [Surjective p] (d : ℕ) (hd : 1 ≤ d) (ν : ∀ V : Z.Opens, Γ(Y, p ⁻¹ᵁ V) →* Γ(Z, V)) (hν_restrict : ∀ (V W : Z.Opens) (h : W ≤ V) (b : Γ(Y, p ⁻¹ᵁ V)), ν W (Y.presheaf.map (homOfLE (p.preimage_mono h)).op b) = Z.presheaf.map (homOfLE h).op (ν V b)) (hν_power : ∀ (V : Z.Opens) (a : Γ(Z, V)), ν V (p.app V a) = a ^ d) (hν_vanish : ∀ (V : Z.Opens) (b : Γ(Y, p ⁻¹ᵁ V)) (y : Y) (hy : y ∈ p ⁻¹ᵁ V), Y.evaluation (p ⁻¹ᵁ V) y hy b = 0 → Z.evaluation V (p y) hy (ν V b) = 0) (M : Y.Modules) [M.IsInvertible] : ∃ N : Z.Modules, N.IsInvertible ∧ ∀ (n : ℕ), 1 ≤ n → ∀ (s : Γ(M.tensorPow n, ⊤)), ∃ t : Γ(N.tensorPow n, ⊤), nonvanishingLocus (N.tensorPow n) t = (p '' (nonvanishingLocus (M.tensorPow n) s)ᶜ)ᶜ ∧ nonvanishingLocus (N.tensorPow n) t = {z : Z | p ⁻¹' {z} ⊆ nonvanishingLocus (M.tensorPow n) s}",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f605f4f2f",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery repairs the H1/H2/H11/A6-A7 return of bcbe744ef723. Node identical to live except lean; statement verbatim. Hypotheses match Stacks 0BCX and the node: MonoidHom map_one follows from hν_power; surjectivity is stated in the node; residue-field evaluation used. N is quantified before n and s; both set equalities use the recorded tensorPow and the Set-valued nonvanishingLocus. Norm hypotheses match the live NormalIntegralFiniteSheafNorm conclusion exactly. Edge cases ok; no duplicate found; sorry-only theorem with source/blueprint docstrings and the 7 proof steps; Worker report and Second reading present. Advisory: private proof-dep imports unused until stage 3. No compile run, per instruction."
  }
 }
