@@ -20,13 +20,11 @@
  ],
  "proof": [
   {
-   "text": "Work in the abelian category $\\operatorname{Mod}(R)$, which exists with the asserted abelian structure because the site is small [def-weil-sheaf-of-modules-category]. Tensor is additive in both variables [lem-pc-sheaf-modules-tensor-closed]. Thus $1\\otimes f$ and $f\\otimes1$, on the direct-sum total complexes of [def-pc-tensor-complex-sheaves], preserve identities, composition and sums, giving the two additive functors. An additive functor distributes over a binary biproduct: tensor the inclusions and projections and use $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i\\pi_i=1$. This gives the distributions over $Y^q\\oplus X^{q+1}$ used below. All component maps below are balanced over $R(U)$ and commute with restriction in $U$. The universal property of module sheafification [def-weil-presheaf-modules-sheafification], applied to the presheaf tensor defining [def-pur-sheaf-tensor-product], therefore gives their sheaf maps and carries the component identities to sheaf identities. Maps on the total direct sums are then specified by their restrictions to summands; only reindexing direct sums and binary distribution are used.",
+   "text": "Use the existing module-sheaf category [def-weil-sheaf-of-modules-category] and localization tensor with its independent-universe monoidal preadditive instances [def-pur-sheaf-tensor-product]. The generic additive bifunctor instances in WeilConjectures.FromJoel.Algebra.Homology.Bifunctor give additivity of the direct-sum total functors [def-pc-tensor-complex-sheaves]. Keep tensor and total as regular named definitions with their original bodies, and expose their proved additive and totalization instances. This avoids repeated expansion of the same functor data during specialization. The local Abelian structure retains the native fields and explicitly shares the same pointwise preadditive field. All constructions are those of the existing sheafified balanced tensor; no new sheaf maps are chosen.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false,
    "source": {
@@ -118,10 +116,10 @@
    }
   },
   {
-   "text": "For $b\\in B^i$, $a\\in A^j$, set $\\tau(b\\otimes a)=(-1)^{ij}a\\otimes b$. The total differential [def-pc-tensor-complex-sheaves] gives\n$$\\tau d(b\\otimes a)=(-1)^{ij+j}a\\otimes d_Bb+(-1)^{ij}d_Aa\\otimes b=d\\tau(b\\otimes a).$$\nIndeed the two source differential terms have exponents $(i+1)j=ij+j$ and $i+i(j+1)\\equiv ij\\pmod2$. The composite with the reverse signed swap is identity because $(-1)^{ij+ji}=1$. Tensor symmetry on sheaves is the one induced by ordinary module symmetry [lem-pc-sheaf-modules-tensor-closed]; these component maps descend as in step 1 and reindex the direct sums. Degree-zero chain maps preserve $i,j$, so the displayed swap commutes with them, proving naturality.",
+   "text": "For $b\\in B^i$, $a\\in A^j$, set $\\tau(b\\otimes a)=(-1)^{ij}a\\otimes b$. The total differential [def-pc-tensor-complex-sheaves] gives\n$$\\tau d(b\\otimes a)=(-1)^{ij+j}a\\otimes d_Bb+(-1)^{ij}d_Aa\\otimes b=d\\tau(b\\otimes a).$$\nIndeed the two source differential terms have exponents $(i+1)j=ij+j$ and $i+i(j+1)\\equiv ij\\pmod2$. The composite with the reverse signed swap is identity because $(-1)^{ij+ji}=1$. Tensor symmetry on sheaves is the one induced by ordinary module symmetry [def-pur-sheaf-tensor-product]; these component maps descend as in step 1 and reindex the direct sums. Degree-zero chain maps preserve $i,j$, so the displayed swap commutes with them, proving naturality. In Lean, specialize the generic braidingBicomplexIso and mapBifunctorFlipIso. The formula follows from ιTotal_map and ι_mapBifunctorFlipIso_hom; total-summand extensionality, symmetry of the sheaf tensor and Int.units_mul_self give the inverse and naturality identities.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
@@ -158,10 +156,8 @@
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-presheaf-modules-sheafification",
   "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
   "lem-pur-homotopy-category-triangulated",
   "lem-weil-pbc-total-tensor-integer-shifts",
   "def-weil-abstract-derived-category",
@@ -173,7 +169,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YM and 06YP, expanded using derived.tex Tag 0G6E and the cone convention, and more-algebra.tex Tags 0FNH and 0GWR"
+  "place": "Tags 06YM and 06YP, expanded using derived.tex Tag 0G6E and the cone convention, and more-algebra.tex Tags 0FNH and 0GWR; specialized through existing generic Mathlib and adopted Joël Riou bifunctor APIs (U5, 2026-10-21)"
  },
  "mathlib_searches": [
   {
@@ -287,7 +283,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sheaf-modules-tensor-closed",
   "lem-pur-quasi-iso-cone-acyclic"
  ],
  "reviewed": {
@@ -314,7 +309,15 @@
    "SheafOfModules.TotalTensorSigns.homotopyRight",
    "SheafOfModules.TotalTensorSigns.shiftLeft",
    "SheafOfModules.TotalTensorSigns.shiftRight",
-   "SheafOfModules.TotalTensorSigns.totalTensorHomotopyConeSigns"
+   "SheafOfModules.TotalTensorSigns.totalTensorHomotopyConeSigns",
+   "SheafOfModules.TotalTensorSigns.coefficientCompose",
+   "SheafOfModules.TotalTensorSigns.modulesAbelian",
+   "SheafOfModules.TotalTensorSigns.Generic.genericTotalExists",
+   "SheafOfModules.TotalTensorSigns.tensorAdditive",
+   "SheafOfModules.TotalTensorSigns.tensorObjAdditive",
+   "SheafOfModules.TotalTensorSigns.totalExists",
+   "SheafOfModules.TotalTensorSigns.totalObjAdditive",
+   "SheafOfModules.TotalTensorSigns.totalFlipObjAdditive"
   ],
   "file": "lean/Sheaf/Algebra/Homology/TotalTensorHomotopyConeSigns.lean",
   "statement": "theorem totalTensorHomotopyConeSigns : (∀ A : CochainComplex (Modules R) ℤ, ((total R).obj A).Additive ∧ ((total R).flip.obj A).Additive ∧ (((homotopyTensor R).obj ((HomotopyCategory.quotient _ _).obj A)).Additive ∧ ((homotopyTensor R).flip.obj ((HomotopyCategory.quotient _ _).obj A)).Additive) ∧ (((homotopyTensor R).obj ((HomotopyCategory.quotient _ _).obj A)).IsTriangulated ∧ ((homotopyTensor R).flip.obj ((HomotopyCategory.quotient _ _).obj A)).IsTriangulated) ∧ (NatTrans.CommShift ((tensor R).quotientCompBifunctorMapHomotopyObjIso (.up ℤ) (.up ℤ) (.up ℤ) A).hom ℤ ∧ NatTrans.CommShift ((tensor R).quotientCompBifunctorMapHomotopyFlipObjIso (.up ℤ) (.up ℤ) (.up ℤ) A).hom ℤ)) ∧ (∀ (A X Y : CochainComplex (Modules R) ℤ) (f g : X ⟶ Y) (h : Homotopy f g) (p q n : ℤ) (hpq : p + q = n), (ι R A X p q n hpq ≫ (homotopyLeft R A h).hom n (n - 1) = p.negOnePow • (A.X p ◁ h.hom q (q - 1) ≫ ι R A Y p (q - 1) (n - 1) (by omega))) ∧ (ι R X A q p n (by omega) ≫ (homotopyRight R A h).hom n (n - 1) = h.hom q (q - 1) ▷ A.X p ≫ ι R Y A (q - 1) p (n - 1) (by omega))) ∧ (∀ (A X Y : CochainComplex (Modules R) ℤ) (f : X ⟶ Y), (((total R).obj A).map (mappingCone.inr f) ≫ (coneLeft R A f).hom = mappingCone.inr (((total R).obj A).map f)) ∧ (((total R).flip.obj A).map (mappingCone.inr f) ≫ (coneRight R A f).hom = mappingCone.inr (((total R).flip.obj A).map f)) ∧ (∀ (p q n : ℤ) (hpq : p + q = n), (A.X p ◁ (mappingCone.inl f).v (q + 1) q (by omega) ≫ ι R A (mappingCone f) p q n hpq ≫ (coneLeft R A f).hom.f n = p.negOnePow • (ι R A X p (q + 1) (n + 1) (by omega) ≫ (mappingCone.inl (((total R).obj A).map f)).v (n + 1) n (by omega))) ∧ ((mappingCone.inl f).v (q + 1) q (by omega) ▷ A.X p ≫ ι R (mappingCone f) A q p n (by omega) ≫ (coneRight R A f).hom.f n = ι R X A (q + 1) p (n + 1) (by omega) ≫ (mappingCone.inl (((total R).flip.obj A).map f)).v (n + 1) n (by omega))) ∧ ((coneLeft R A f).hom ≫ (-(mappingCone.triangle (((total R).obj A).map f)).mor₃) = ((total R).obj A).map (-(mappingCone.triangle f).mor₃) ≫ (shiftLeft R A X 1).hom) ∧ ((coneRight R A f).hom ≫ (-(mappingCone.triangle (((total R).flip.obj A).map f)).mor₃) = ((total R).flip.obj A).map (-(mappingCone.triangle f).mor₃) ≫ (shiftRight R A X 1).hom) ∧ ((coneLeft R A f).hom ≫ (mappingCone.triangle (((total R).obj A).map f)).mor₃ = ((total R).obj A).map (mappingCone.triangle f).mor₃ ≫ (shiftLeft R A X 1).hom) ∧ ((coneRight R A f).hom ≫ (mappingCone.triangle (((total R).flip.obj A).map f)).mor₃ = ((total R).flip.obj A).map (mappingCone.triangle f).mor₃ ≫ (shiftRight R A X 1).hom)) ∧ (∀ (A X Y X' Y' : CochainComplex (Modules R) ℤ) (f : X ⟶ Y) (f' : X' ⟶ Y') (a : X ⟶ X') (b : Y ⟶ Y') (comm : f ≫ b = a ≫ f'), (((total R).obj A).map (mappingCone.map f f' a b comm) ≫ (coneLeft R A f').hom = (coneLeft R A f).hom ≫ mappingCone.map (((total R).obj A).map f) (((total R).obj A).map f') (((total R).obj A).map a) (((total R).obj A).map b) (by rw [← Functor.map_comp, comm, Functor.map_comp])) ∧ (((total R).flip.obj A).map (mappingCone.map f f' a b comm) ≫ (coneRight R A f').hom = (coneRight R A f).hom ≫ mappingCone.map (((total R).flip.obj A).map f) (((total R).flip.obj A).map f') (((total R).flip.obj A).map a) (((total R).flip.obj A).map b) (by rw [← Functor.map_comp, comm, Functor.map_comp]))) ∧ (∀ (A B : CochainComplex (Modules R) ℤ), (swap R B A).inv = (swap R A B).hom ∧ ∀ (i j n : ℤ) (hij : i + j = n), ι R B A i j n hij ≫ (swap R B A).hom.f n = (i * j).negOnePow • ((β_ (B.X i) (A.X j)).hom ≫ ι R A B j i n (by omega))) ∧ (∀ (A A' B B' : CochainComplex (Modules R) ℤ) (a : A ⟶ A') (b : B ⟶ B'), HomologicalComplex.mapBifunctorMap b a (tensor R) (.up ℤ) ≫ (swap R B' A').hom = (swap R B A).hom ≫ HomologicalComplex.mapBifunctorMap a b (tensor R) (.up ℤ)) ∧ (∀ (A : CochainComplex (Modules R) ℤ), CochainComplex.IsKFlatIndependentCoefficients A → (∀ (X Y : CochainComplex (Modules R) ℤ) (f : X ⟶ Y), QuasiIso f → QuasiIso (((total R).obj A).map f) ∧ QuasiIso (((total R).flip.obj A).map f)) ∧ ∀ n : ℤ, CochainComplex.IsKFlatIndependentCoefficients (A⟦n⟧)) ∧ (∀ (A : CochainComplex (Modules R) ℤ), (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (A.X i)) → ∀ n i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) ((A⟦n⟧).X i))",
@@ -330,5 +333,15 @@
   "group": "Q32",
   "result": "pass",
   "note": "Every clause matches the node, checked against the upstream code. Homotopy signs: Mathlib ιMapBifunctor_hom₂ gives (−1)^p (ε₂ for up ℤ), hom₁ is unsigned. Cone isos: Joel mapBifunctorMappingCone₂Iso inl_inv gives (−1)^p on the left, ₁Iso is unsigned, inr is preserved upstream. The mor₃ and −mor₃ projection clauses are the third square of Joel's cone-triangle isos with mapBifunctorShift₂/₁Iso. Naturality is stated over all commuting squares. swap is exactly Monoidal.braiding with summand (−1)^{ij}β; its inverse clause holds by cochainModulesSymmetric. The K-flat predicate uses monoidalCategory R with a Prop witness, definitionally the item's cochainModulesMonoidal; quasi-iso preservation has arbitrary endpoints on both sides; A⟦n⟧ is K-flat for all n; termwise flatness is a separate clause. The K(R) functors are additive and IsTriangulated, and NatTrans.CommShift pins the inherited shifts. Universes: only EssentiallySmall.{r}. Wrappers have exactly the canonical bodies, nothing hollow; one sorry; docstrings carry source, blueprint and all 11 steps; statement verbatim; all 13 declarations present; the node equals side-live apart from lean; no new nodes or dep changes; both report sections present. Not recompiled (no changes); worker scompile clean at 50.8 s. Advisory only: the mor₃/−mor₃ clause pair is redundant; partial overlap with lem-pur-kflat-tensor-quasiiso-independent is a stage-1 matter."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-20bfc",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261022T013442-L-3584909",
+  "kind": "interface",
+  "note": "independent cc review: Delivered TotalTensorHomotopyConeSigns proof and node proof fields vs node lem-weil-pbc-total-tensor-homotopy-cone-signs statement/steps and the live module; reader gate: delivered module built in sandbox, importer NormalizedErrorTowerData compiled clean (59.5 s vs base control 58.8 s); axioms clean"
  }
 }
