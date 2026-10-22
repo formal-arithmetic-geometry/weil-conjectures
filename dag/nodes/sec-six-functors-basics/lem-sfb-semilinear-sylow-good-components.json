@@ -22,12 +22,231 @@
   "def-kun-projective",
   "def-weil-finite-integral-morphism",
   "def-weil-universal-homeomorphism",
-  "def-weil-open-immersion",
   "def-pc-field-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=K^G$, $H=\\operatorname{im}(G\\to\\operatorname{Aut}_eK)$ and $J=\\operatorname{im}(L\\to\\operatorname{Aut}_eK)$. These image groups act faithfully. The finite-field-action theorem gives $[K:E]=|H|$ and $[K:F]=|J|$, and makes $K/F$ finite Galois. Its automorphism group has order $[K:F]=|J|$ by the finite-Galois theorem, so the inclusion of $J$ into that group is equality. This proves the asserted Galois-group clause without assuming the original action of $L$ faithful.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151: K/K^L, with the kernel of the constants action removed."
+   }
+  },
+  {
+   "text": "Let $N=\\ker(G\\to H)$. Counting cosets gives $[G:L]=[H:J][N:N\\cap L]$: the map $G/L\\to H/J$ is onto and each fibre has cardinal $[N:N\\cap L]$. Thus $[H:J]$ is prime to $\\ell$. The degree tower $E\\subseteq F\\subseteq K$ gives $[F:E]=|H|/|J|=[H:J]$. In positive characteristic $p$, the finite purely inseparable extension $E/e$ is normal (each minimal polynomial has only its one root), and has exactly one embedding into an algebraic closure; the normal-field-degree-factors theorem therefore makes $[E:e]$ a power of $p$. In characteristic zero $E=e$ by the meaning of purely inseparable. As $p\\ne\\ell$, the second degree tower gives $[F:e]=[F:E][E:e]$ prime to $\\ell$. All towers are finite since their fields lie in the given finite extension $K/e$.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "lem-exc-normal-field-degree-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151: the prime-to-ell constants degree; inseparable degree is a characteristic power (Stacks 09HI)."
+   }
+  },
+  {
+   "text": "Smoothness over $K$ makes $Y$ regular and locally Noetherian, hence normal. Projectivity makes $Y/K$ proper, hence finite type; since a field is Noetherian, the finite-type theorem makes $Y$ Noetherian. The normal-component theorem decomposes $Y$ as a finite disjoint union of open-and-closed normal integral components. This applies even when the components are not geometrically integral.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal",
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151: normality and components of the smooth projective model; Stacks 056S, 033M."
+   }
+  },
+  {
+   "text": "For $k=e$ and for $k=F$, the morphism $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is finite because $K/k$ is finite-dimensional. The finite-projective-bundle theorem followed by the ample-base conversion makes it H-projective: the trivial line on $\\operatorname{Spec}k$ is ample, since its unit section has the whole affine scheme as nonvanishing locus. Compose with the given H-projective $Y/K$ to obtain $Y/k$ H-projective, hence proper. The invariant map $Y\\to\\operatorname{Spec}F$ descends by the categorical property of $q_L$, and gives $Q$ its $F$-structure; the descended map agrees with the original $e$-structure. Likewise the $G$-invariant structure map $Y\\to\\operatorname{Spec}e$ descends through $q_G$ and gives $Z=Y/G$ its $e$-structure, so $q_G$ is a morphism of $e$-schemes and $q_L$ a morphism of $F$-schemes; uniqueness in the categorical property shows that an invariant $e$- (resp. $F$-)morphism factors through a morphism of $e$- (resp. $F$-)schemes. Apply the normal-proper-quotient lemma to $(Y,G,e)$ and $(Y,L,F)$. Thus $Z=Y/G$ is normal proper finite type over $e$, and $Q=Y/L$ is normal proper finite type over $F$; both are Noetherian.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition",
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-finite-quotient-normal-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, diagram (2.c), printed p.151. Constants descent by the assumed categorical quotient; finite structural maps are projective by Stacks 0B3I and 087S."
+   }
+  },
+  {
+   "text": "Decompose $Q$ into its finitely many clopen normal integral components $C$. For each $C$, its inverse image $X_C=q_L^{-1}C$ is clopen in $Y$. A clopen subscheme is also a closed subscheme, as the defining ideal is zero on it and the unit ideal on its complement. Compose this closed inclusion with a projective embedding of $Y/F$ to obtain a projective embedding of $X_C/F$, and hence an ample invertible sheaf on $X_C$. The restricted map $X_C\\to C$ is finite surjective: on an affine open of $C$ it is the same finite algebra as for $q_L$. Apply finite-normal ample descent to obtain an ample invertible sheaf on $C$. Glue these sheaves on the disjoint components to an invertible sheaf on $Q$. It is ample: extend an affine-nonvanishing section on a chosen component by zero on all other components; its nonvanishing locus is the original affine open. Quasi-compactness holds because there are finitely many components. This uses the definition of ample, without descending a chosen linearization.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-finite-normal-ample-descent",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4(2), applied to each normal integral target component; finite disjoint gluing of ample sheaves is the defining affine-nonvanishing criterion."
+   }
+  },
+  {
+   "text": "The ample-immersion theorem, applicable since $Q/F$ is finite type, gives an immersion $Q\\to\\mathbf P^n_F$. The target is separated over $F$ and $Q$ is proper over $F$, so the proper-to-separated-target theorem makes the immersion proper. A proper immersion is closed. Thus $Q$ is projective over $F$ in the required finite-projective-space convention.",
+   "uses": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-proper-immersion-closed",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VS and 01VT (ample immersion over an affine base), Constructions 01NH (projective space separated), 01W6 (map from a proper scheme to a separated target), and Schemes 01IQ (immersion with closed image is closed)."
+   }
+  },
+  {
+   "text": "Fix a generic point $b$ of $B$. It lies in the specified dense open $U$. The finite universal homeomorphism $Z_U\\to U$ has exactly one point $t$ over $b$, which is generic: on the component containing $b$ it is a homeomorphism. Its residue extension $T=\\kappa(t)/\\kappa(b)$ is finite by finiteness of this morphism and purely inseparable because a universal homeomorphism is universally injective, hence radicial. The generic-field comparison for $q_G:Y\\to Z$ identifies the components above $t$ as one $G$-orbit. Choose a generic point $\\eta$ in this orbit, put $M=\\kappa(\\eta)$ and $D=\\operatorname{Stab}_G(\\eta)$. The same comparison gives $T=M^D$ with its canonical embedding in $M$. All components of $Z$ meet $Z_U$: every generic of $Y$ maps to a generic of $B$ by hypothesis, and the quotient comparison maps these onto the generic points of $Z$.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-weil-radicial-morphism",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-finite-quotient-generic-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151: the dense-open radicial quotient. Generic-field identification is applied without freeness; Stacks 01S4 gives inseparable residue extensions."
+   }
+  },
+  {
+   "text": "Choose an $\\ell$-Sylow subgroup $P$ of the finite stabilizer $D$. Regard $P$ as an $\\ell$-subgroup of $G$ and apply Sylow conjugate containment to obtain $g$ with $gPg^{-1}\\subseteq L$. Replace $\\eta$ by $\\eta'=g\\eta$, and write $D'=gDg^{-1}$ and $M'=\\kappa(\\eta')$. Put $S=D'\\cap L$. It contains the $\\ell$-Sylow subgroup $gPg^{-1}$ of $D'$, while it is itself an $\\ell$-group as a subgroup of $L$. Hence $|S|=|P|$ and $[D':S]$ is prime to $\\ell$. The point $\\eta'$ still maps to $b$ because $h$ is invariant. This chooses a conjugate separately for this generic point of $B$, rather than imposing a simultaneous containment on all stabilizers.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index",
+    "lem-sfb-sylow-conjugate-containment"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151, explicit stabilizer-wise Sylow selection for the all-generic-points convention."
+   }
+  },
+  {
+   "text": "Let $c=q_L(\\eta')$, a generic point of $Q$. The quotient comparison gives $\\kappa(c)=(M')^S$ and $T=(M')^{D'}$. Let $A$ and $A_0$ be the images of $D'$ and $S$ in $\\operatorname{Aut}(M')$. The faithful finite-action theorem gives $[M':T]=|A|$ and $[M':\\kappa(c)]=|A_0|$. The tower law gives $[\\kappa(c):T]=[A:A_0]$. Counting fibres of $D'/S\\to A/A_0$ shows that this index divides $[D':S]$, so it is prime to $\\ell$. Since $T/\\kappa(b)$ is finite purely inseparable, its degree is a characteristic power (or one in characteristic zero), by the normal-field-degree-factors theorem as in step 2. Multiplying degrees now proves that $[\\kappa(c):\\kappa(b)]$ is finite and prime to $\\ell$. The field-action theorem is applied to image groups, so generic inertia is allowed.",
+   "uses": [
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "lem-exc-normal-field-degree-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, diagram (2.c), printed p.151: intermediate invariant-field degrees, with decomposition groups and possible generic inertia made explicit."
+   }
+  },
+  {
+   "text": "Do this for each of the finitely many generic points $b$ of $B$, choosing one resulting component of $Q$ over each. Let $Q^\\circ$ be the union of those components. By the normal-component theorem it is open and closed, normal, and its generic points are precisely the finitely many selected generic points; each has the finite prime-to-$\\ell$ residue degree proved in step 9. It meets every generic fibre of $B$. Its closed inclusion into the projective $F$-scheme $Q$, composed with the projective embedding of $Q$, makes $Q^\\circ/F$ projective. No condition is inferred for any component omitted from this union.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151, retaining good components for the every-generic-point definition of prime-to-ell alteration."
+   }
+  },
+  {
+   "text": "The finite map $\\operatorname{Spec}F\\to\\operatorname{Spec}e$ is H-projective by the finite-projective-bundle theorem and the ample-base conversion, again using the unit section of the trivial line on the affine base. Composition therefore gives a closed immersion $i:Q^\\circ\\hookrightarrow\\mathbf P^N_e$. Let $d:Q^\\circ\\to B$ be the descended map, restricted to this union. The diagonal of $B/e$ is closed because $B/e$ is proper. Its base change is the graph $Q^\\circ\\to Q^\\circ\\times_eB$, so the graph is closed. The map $Q^\\circ\\times_eB\\to\\mathbf P^N_e\\times_eB$ is the base change of $i$, hence closed. Their composite is a closed immersion over $B$, exhibiting $d$ as H-projective, and thus also projective in the projective-bundle convention (the ambient bundle is that of $\\mathcal O_B^{N+1}$).",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-kun-projective",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I, 087S, 01W9 for finite structural maps and projective composition; closed graph is base change of the diagonal, with closed immersions stable under base change and composition."
+   }
+  },
+  {
+   "text": "Projectivity makes $d$ proper, so its image is closed by the definition of universally closed applied to the identity base change. This image contains every generic point of $B$ by construction. A closed subset containing the generic point of every irreducible component contains every component, so the image is all of $B$. Thus $d$ is surjective. The generic-point and residue-degree clauses were established for every component retained in $Q^\\circ$, not just for their total degree.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151: proper dominant components give the desired projective surjection."
+   }
+  },
+  {
+   "text": "Set $Y^\\circ=q_L^{-1}(Q^\\circ)$. It is clopen and $L$-stable. The restricted quotient is finite and surjective, has the same orbit geometric fibres, and has invariant structure sheaf by restricting the corresponding statements for $q_L$ to the open $Q^\\circ$; on each affine open the same finite algebra occurs. Its categorical property can be checked directly. Given an invariant morphism $f:Y^\\circ\\to T$, extend it on the disjoint complement by $q_L$ to obtain an invariant map $Y\\to T\\amalg(Q\\setminus Q^\\circ)$. Descend it through $q_L$, then restrict to $Q^\\circ$: surjectivity on points forces this restriction to land in the summand $T$. This gives the required factorization; uniqueness follows either from the categorical uniqueness for the extended map or from that same descent construction. Hence $Y^\\circ\\to Q^\\circ$ is the finite quotient by $L$ claimed in the statement.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151: restriction to the selected clopen union; categorical restriction proved by extension to a disjoint-union target."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-exc-normal-field-degree-factors",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-sfb-finite-quotient-normal-proper",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sfb-finite-normal-ample-descent",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-kun-projective",
+  "def-weil-universal-homeomorphism",
+  "def-weil-radicial-morphism",
+  "lem-sfb-finite-quotient-generic-fields",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-sfb-sylow-conjugate-containment",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 2, printed p.151; the generic-stabilizer selection and the norm-based projectivity argument are written out by NJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,7 +285,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-gabber-global-snc-alteration",
@@ -90,5 +309,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved constants degrees through faithful image groups and inseparable degrees; obtained normal proper quotients, descended ample existence by norms onto normal components, and selected one good Sylow quotient component over every generic point using its stabilizer. All-generic residue degrees are computed separately. Four auxiliary nodes, one Mathlib leaf; no quotient-existence or dropped route node is cited.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-finite-field-action-fixed-degree",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-field-degree-multiplicativity",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-exc-normal-field-degree-factors",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-proj-separated",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-sylow-subgroup-prime-index",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "General field, group, or projective-scheme tool used in this stabilizer-wise quotient argument; the constructible-finite-Tor unit supplies no replacement for its statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-exc-normal-field-degree-factors",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-94fc7d444",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-94fc7d444 (reviewer sub-agent of L); spot-checked: Read in full: the item (13 steps, statement byte-identical to live; the item is still unsplit in live and side-live), the 4 new nodes, every cited statement, and the sources. ILO X 2.3 Step 2 p.151 / (2.c) matches. Stacks divisors 0BD4(2) (l.3893) is verbatim the new ample-descent node. morphisms 09MQ(4)/03GN, algebra 00IS and groupoids 03BK checked. The Mathlib Sylow.lean lines 195/300/343 exist as quoted. The three earlier RETURNs (NK 4134, NJ ffc1, ND dff3) were for the dropped 1814 quotient-projectivity node. This delivery cites no dropped node: the transitive closure has 384 nodes and none is on the drop list. Projectivity now comes from a genuinely different route: the quotient is given by hypothesis; a new lemma gives normal + proper (Artin–Tate, 09MQ, 03GN); 0BD4(2) gives an ample sheaf on each normal integral component, glued over the finite disjoint union; then 01VS immersion, proper into separated, and a proper immersion is closed. This does not re-create 1814. Math checked: step 2 [G:L]=[H:J][N:N∩L], with the p-power of [E:e] from the normal-degree node with s=1. Steps 7-9: unique radicial t over b, T=M^D, Sylow conjugate per generic point, S=D'∩L Sylow in D'. [κ(c):T]=[A:A0] divides [D':S] because D'/S→A/A0 is an equivariant map of transitive sets, so inertia is fine. Step 11 graph is the base change of B's closed diagonal. Step 13 categorical restriction via the T⊔(Q∖Q°) extension is fine. Small cases checked: G=1, G=L, a swapped pair, a trivial action, S3 with ℓ=2. New nodes are true and not duplicates (vs dropped 1814/generic-degree/artin-tate, lem-dl-a1-finite-invariant-prime-orbits-residues, lem-weil-pbc-sylow-subgroup-prime-index, the pbc image/proper lemmas); none restates the item. FIX: lem-sfb-finite-quotient-normal-proper called q only 'a morphism' to a k-scheme. 09MQ/03GN need a morphism over k, and an exotic k-structure (k=C(t1,t2,...), shift embedding, q=id) breaks finite type. The corrected statement requires a k-morphism and a categorical property in k-schemes. Item step 4 gains one sentence: Z gets its e-structure by descent, so q_G and q_L are k-morphisms. Batch-5 flags lem-trf-finite-projective-bundle (0B3I), lem-trf-projective-bundle-to-h-projective (087S) and lem-trf-h-projective-composition (01WE) are generic projective-morphism facts, neither steps of the trace formula/PD nor given by the assumptions. Their closure adds only two generic trf Proj lemmas and no nt-assume, sk-thm-trace-transport or Poincaré duality node, so accepted. No SGA citation. stmt_dep def-weil-open-immersion moved to proof_deps; it is not cited inline, so harmless.; 2 file(s) fixed by the reviewer"
  }
 }

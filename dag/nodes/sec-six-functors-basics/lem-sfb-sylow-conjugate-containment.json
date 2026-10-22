@@ -1,0 +1,92 @@
+{
+ "id": "lem-sfb-sylow-conjugate-containment",
+ "kind": "statement",
+ "title": "Conjugating a prime-power subgroup into a fixed Sylow subgroup",
+ "statement": "Let $G$ be a finite group, $p$ a prime, $P\\leq G$ a subgroup of $p$-power order, and $L\\leq G$ a $p$-Sylow subgroup, that is, $L$ has $p$-power order and $[G:L]$ is prime to $p$. Then there exists $g\\in G$ such that $gPg^{-1}\\subseteq L$. Finiteness refers to the underlying set, in the sense of [def-sfb-finite-infinite-set].",
+ "source": {
+  "document": "Mathlib/GroupTheory/Sylow.lean",
+  "place": "IsPGroup.exists_le_sylow, line 195; Sylow.isPretransitive_of_finite, line 343, for the conjugation action defined at lines 290-301. Sylow theory is used in ILO X 2.3 Step 2, printed p.151."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every p subgroup of a finite group is conjugate to a subgroup of any fixed Sylow p subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Sylow.isPretransitive_of_finite\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [hp : Fact (Nat.Prime p)] [Finite (Sylow p G)],\\n  MulAction.IsPretransitive G (Sylow p G)\", \"doc\": \"For a prime number $ p $ and a group $ G $, if the set of Sylow $ p $-subgroups of $ G $ is finite, then the action of $ G $ on its Sylow $ p $-subgroups is transitive.\"}\n  {\"name\": \"IsPGroup.sylow_mem_fixedPoints_iff\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] {P : Subgroup G},\\n  IsPGroup p ↥P → ∀ {Q : Sylow p G}, Q ∈ MulAction.fixedPoints (↥P) (Sylow p G) ↔ P ≤ ↑Q\", \"doc\": \"For a $ p $-group $ P $ and a Sylow $ p $-subgroup $ Q $ of $ G $, the Sylow $ p $-subgroup $ Q $ is fixed under the conjugation action of $ P $ on the set of Sylow $ p $-subgroups if and only if $ P \"}\n  {\"name\": \"Sylow.orbit_eq_top\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [Fact (Nat.Prime p)] [Finite (Sylow p G)] (P : Sylow p G),\\n  MulAction.orbit G P = ⊤\", \"doc\": \"For a prime $ p $, a finite group $ G $, and a Sylow $ p $-subgroup $ P $ of $ G $, the orbit of $ P $ under the conjugation action of $ G $ is equal to the entire set of Sylow $ p $-subgroups of $ G \"}\n  {\"name\": \"IsPGroup.mem_toSylow\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [inst_1 : Fact (Nat.Prime p)] {P : Subgroup G} (hP1 : IsPGroup p ↥P)\\n  (hP2 : ¬p ∣ P.index) {g : G}, g ∈ hP1.toSylow hP2 ↔ g ∈ P\", \"doc\": \"For a prime $p$, a group $G$, and a $p$-subgroup $P$ of $G$ such that the index $[G : P]$ is not divisible by $p$, an element $g$ of $G$ belongs to the Sylow $p$-subgroup constructed from $P$ if and o\"}\n  {\"name\": \"IsPGroup.toSylow\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"{p : ℕ} →\\n  {G : Type u_1} → [inst : Group G] → [Fact (Nat.Prime p)] → {P : Subgroup G} → IsPGroup p ↥P → ¬p ∣ P.index → Sylow p G\", \"doc\": \"Given a prime $ p $, a group $ G $, and a $ p $-subgroup $ P $ of $ G $ such that the index $ [G : P] $ is not divisible by $ p $, the subgroup $ P $ is a Sylow $ p $-subgroup of $ G $. This follows b\"}\n  {\"name\": \"IsPGroup.toSylow_coe\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [inst_1 : Fact (Nat.Prime p)] {P : Subgroup G} (hP1 : IsPGroup p ↥P)\\n  (hP2 : ¬p ∣ P.index), ↑(hP1.toSylow hP2) = P\", \"doc\": \"If $ P $ is a $ p $-subgroup of a group $ G $ with index not divisible by $ p $, then the Sylow $ p $-subgroup constructed from $ P $ is equal to $ P $ itself, i.e., $ \\\\text{toSylow}(P) = P $.\"}\n  {\"name\": \"IsPGroup.exists_le_sylow\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] {P : Subgroup G}, IsPGroup p ↥P → ∃ Q, P ≤ ↑Q\", \"doc\": \"For any group $G$ and any $p$-subgroup $P$ of $G$, there exists a Sylow $p$-subgroup $Q$ of $G$ such that $P$ is a subgroup of $Q$.\"}\n  {\"name\": \"Sylow.instSubgroupClass\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G], SubgroupClass (Sylow p G) G\", \"doc\": \"The type of Sylow $ p $-subgroups of a group $ G $ is equipped with a subgroup structure, meaning each Sylow $ p $-subgroup is a subgroup of $ G $. This instance asserts that the collection of Sylow $\"}",
+   "date": "2026-10-22",
+   "verdict": "match: IsPGroup.exists_le_sylow supplies containment in a Sylow subgroup; Sylow.isPretransitive_of_finite supplies conjugacy with the fixed Sylow subgroup. Sylow.coe_smul identifies this action with conjugation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a p subgroup H and a Sylow p subgroup P there exists g with conjugate of H contained in P",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsPGroup.exists_le_sylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{P : Subgroup G} (hP : IsPGroup p P) : ∃ Q : Sylow p G, P ≤ Q\", \"doc\": \"For any group $G$ and any $p$-subgroup $P$ of $G$, there exists a Sylow $p$-subgroup $Q$ of $G$ such that $P$ is a subgroup of $Q$.\"}\n  {\"name\": \"Sylow.nonempty\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \": Nonempty (Sylow p G)\", \"doc\": \"For any prime number $p$ and finite group $G$, there exists at least one Sylow $p$-subgroup of $G$.\"}\n  {\"name\": \"Sylow.exists_subgroup_card_pow_succ\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Finite G] {p : ℕ} {n : ℕ} [hp : Fact p.Prime] (hdvd : p ^ (n + 1) ∣ Nat.card G) {H : Subgroup G}\\n  (hH : Nat.card H = p ^ n) : ∃ K : Subgroup G, Nat.card K = p ^ (n + 1) ∧ H ≤ K\", \"doc\": \"For a finite group $ G $, a prime $ p $, and a natural number $ n $, if $ p^{n+1} $ divides the order of $ G $, and there exists a subgroup $ H $ of $ G $ with order $ p^n $, then there exists a subgr\"}\n  {\"name\": \"Sylow.is_maximal'\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] (self : Sylow p G) {Q : Subgroup G}, IsPGroup p ↥Q → ↑self ≤ Q → Q = ↑self\", \"doc\": \"If a Sylow $ p $-subgroup $ P $ of a group $ G $ is contained in a $ p $-subgroup $ Q $ of $ G $, then $ Q = P $. This establishes that Sylow $ p $-subgroups are maximal among the $ p $-subgroups of $\"}\n  {\"name\": \"Sylow.coe_smul\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{g : G} {P : Sylow p G} : ↑(g • P) = MulAut.conj g • (P : Set G)\", \"doc\": \"For any element $g$ in a group $G$ and any Sylow $p$-subgroup $P$ of $G$, the image of $P$ under the action of $g$ is equal to the conjugate subgroup $gPg^{-1}$, i.e., $g \\\\cdot P = gPg^{-1}$ as subset\"}\n  {\"name\": \"Sylow.isPretransitive_of_finite\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[hp : Fact p.Prime] [Finite (Sylow p G)] : IsPretransitive G (Sylow p G)\", \"doc\": \"For a prime number $ p $ and a group $ G $, if the set of Sylow $ p $-subgroups of $ G $ is finite, then the action of $ G $ on its Sylow $ p $-subgroups is transitive.\"}\n  {\"name\": \"Sylow.ofCard\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Finite G] {p : ℕ} [Fact p.Prime] (H : Subgroup G) (card_eq : Nat.card H = p ^ (Nat.card G).factorization p) :\\n  Sylow p G\", \"doc\": \"Given a finite group $G$, a prime $p$, and a subgroup $H$ of $G$ such that the order of $H$ equals $p^{k}$ where $k$ is the exponent of $p$ in the prime factorization of $|G|$, then $H$ is a Sylow $p$\"}\n  {\"name\": \"IsPGroup.toSylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] {P : Subgroup G} (hP1 : IsPGroup p P) (hP2 : ¬p ∣ P.index) : Sylow p G\", \"doc\": \"Given a prime $ p $, a group $ G $, and a $ p $-subgroup $ P $ of $ G $ such that the index $ [G : P] $ is not divisible by $ p $, the subgroup $ P $ is a Sylow $ p $-subgroup of $ G $. This follows b\"}",
+   "date": "2026-10-22",
+   "verdict": "match: IsPGroup.exists_le_sylow supplies containment in a Sylow subgroup; Sylow.isPretransitive_of_finite supplies conjugacy with the fixed Sylow subgroup. Sylow.coe_smul identifies this action with conjugation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sylow, IsPGroup",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Sylow.isPGroup\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] (P : Sylow p G) : IsPGroup p ↥↑P\", \"doc\": \"\"}\n  {\"name\": \"Sylow.isPGroup'\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] (P : Sylow p G) : IsPGroup p ↥↑P\", \"doc\": \"**Alias** of `Sylow.isPGroup`.\"}\n  {\"name\": \"IsPGroup.toSylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] [Fact (Nat.Prime p)] {P : Subgroup G} (hP1 : IsPGroup p ↥P) (hP2 : ¬p ∣ P.index) : Sylow p G\", \"doc\": \"A `p`-subgroup with index indivisible by `p` is a Sylow subgroup.\"}\n  {\"name\": \"Sylow.mk\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] (toSubgroup : Subgroup G) (maximal_isPGroup : Maximal (fun x => IsPGroup p ↥x) toSubgroup) : Sylow p G\", \"doc\": \"\"}\n  {\"name\": \"Sylow.is_maximal'\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] (self : Sylow p G) : Maximal (fun x => IsPGroup p ↥x) ↑self\", \"doc\": \"**Alias** of `Sylow.maximal_isPGroup`.\"}\n  {\"name\": \"Sylow.maximal_isPGroup\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] (self : Sylow p G) : Maximal (fun x => IsPGroup p ↥x) ↑self\", \"doc\": \"\"}\n  {\"name\": \"IsPGroup.le_sylow_of_normal\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] {N : Subgroup G} [N.Normal] (h : IsPGroup p ↥N) (H : Sylow p G) : N ≤ ↑H\", \"doc\": \"\"}\n  {\"name\": \"IsPGroup.exists_le_sylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] {P : Subgroup G} (hP : IsPGroup p ↥P) : ∃ Q, P ≤ ↑Q\", \"doc\": \"A generalization of **Sylow's first theorem**.\\nEvery `p`-subgroup is contained in a Sylow `p`-subgroup.\"}\n  {\"name\": \"IsPGroup.inf_normalizer_sylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] {P : Subgroup G} (hP : IsPGroup p ↥P) (Q : Sylow p G) : P ⊓ Subgroup.normalizer ↑Q = P ⊓ ↑Q\", \"doc\": \"\"}\n  {\"name\": \"Sylow.finite_of_ker_is_pGroup\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] {H : Type u_2} [Group H] {f : H →* G} (hf : IsPGroup p ↥f.ker) [Finite (Sylow p G)] : Finite (Sylow p H)\", \"doc\": \"If the kernel of `f : H →* G` is a `p`-group,\\nthen `Finite (Sylow p G)` implies `Finite (Sylow p H)`.\"}\n  {\"name\": \"IsPGroup.mem_toSylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] [Fact (Nat.Prime p)] {P : Subgroup G} (hP1 : IsPGroup p ↥P) (hP2 : ¬p ∣ P.index) {g : G} : g ∈ hP1.toSylow hP2 ↔ g ∈ P\", \"doc\": \"\"}\n  {\"name\": \"Sylow.exists_comap_eq_of_ker_isPGroup\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \" {p : ℕ} {G : Type u_1} [Group G] {H : Type u_2} [Group H] (P : Sylow p H) {f : H →* G} (hf : IsPGroup p ↥f.ker) : ∃ Q, Subgroup.comap f ↑Q = ↑P\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "match: IsPGroup.exists_le_sylow supplies containment in a Sylow subgroup; Sylow.isPretransitive_of_finite supplies conjugacy with the fixed Sylow subgroup. Sylow.coe_smul identifies this action with conjugation."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ss]mul.*le|exists.*le.*[Ss]mul|exists.*conj|exists_smul_eq",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"400\", \"line\": \"  rw [← Classical.choose_spec (exists_smul_eq G P Q)]\", \"text\": \"\"}\n  {\"file\": \"401\", \"line\": \"  exact P.equivSMul (Classical.choose (exists_smul_eq G P Q))\", \"text\": \"\"}\n  {\"file\": \"405\", \"line\": \"  top_le_iff.mp fun Q _ => exists_smul_eq G P Q\", \"text\": \"\"}\n  {\"file\": \"423\", \"line\": \"    exists_smul_eq (centralizer (zpowers x \", \"text\": \" Set G)) ((g • P).subtype h2) (P.subtype h1)\"}\n  {\"file\": \"532\", \"line\": \"  obtain ⟨n, hn⟩ \", \"text\": \"= exists_smul_eq N ((MulAut.conjNormal g : MulAut N) • P) P\"}",
+   "date": "2026-10-22",
+   "verdict": "match: IsPGroup.exists_le_sylow supplies containment in a Sylow subgroup; Sylow.isPretransitive_of_finite supplies conjugacy with the fixed Sylow subgroup. Sylow.coe_smul identifies this action with conjugation."
+  },
+  {
+   "tool": "grep",
+   "query": "instance isPretransitive_of_finite|instance Sylow.isPretransitive_of_finite",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"343\", \"text\": \"instance Sylow.isPretransitive_of_finite [hp : Fact p.Prime] [Finite (Sylow p G)] :\"}",
+   "date": "2026-10-22",
+   "verdict": "match: the conjugation action on Sylow subgroups is pretransitive. Read lines 290-355."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isPretransitive_of_finite|theorem coe_smul|theorem IsPGroup.exists_le_sylow",
+   "results": "[grep] OK 7 hit(s); Mathlib/GroupTheory/Sylow.lean:195 theorem IsPGroup.exists_le_sylow; Mathlib/GroupTheory/Sylow.lean:300 theorem coe_smul. Read these statements and the conjugation action definition.",
+   "date": "2026-10-22",
+   "verdict": "match: containment and the conjugation interpretation; pretransitivity is an instance, found by the additional instance search."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsPGroup.exists_le_sylow",
+  "file": "Mathlib/GroupTheory/Sylow.lean",
+  "line": 195,
+  "how": "one Mathlib lemma per clause: apply IsPGroup.exists_le_sylow to put P in a Sylow S, then Sylow.isPretransitive_of_finite (line 343) with S and L gives g with g • S = L; Sylow.coe_smul (line 300) identifies • with conjugation. Finite G supplies Finite (Sylow p G); IsPGroup.toSylow identifies the stated order/index convention for L."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Conjugating a prime-power subgroup into a fixed Sylow subgroup.",
+   "via": [
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
