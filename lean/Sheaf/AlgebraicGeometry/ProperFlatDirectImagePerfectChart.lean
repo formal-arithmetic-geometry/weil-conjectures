@@ -86,8 +86,8 @@ theorem exists_properFlatDirectImagePerfectChart
   obtain ⟨D, d, hDge, hDle, hDflat, hDqc, hperfect, hcompare⟩ :=
     Modules.exists_proper_flat_affine_cech_perfect_model f F
       (Modules.isFlatOver_of_isFiniteLocallyFree f F) V hV
-  have : D.IsStrictlyGE 0 := hDge
-  have : D.IsStrictlyLE (d : ℤ) := hDle
+  have hDge0 : D.IsStrictlyGE 0 := hDge
+  have hDled : D.IsStrictlyLE (d : ℤ) := hDle
   have hD : CochainComplex.IsAcyclicTensorKFlat (R := V.toScheme.sheaf) D :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace V.toScheme.toRingedSpace D
       ⟨d, fun i hi ↦ D.isZero_of_isStrictlyLE d i hi⟩
