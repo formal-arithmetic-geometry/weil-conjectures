@@ -24,7 +24,10 @@
   "def-pur-affine-line-datum",
   "def-pur-supported-cup",
   "def-pur-affine-space-comparison",
-  "def-pur-affine-line-purity-comparison"
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-supported-class-operations",
+  "def-pur-affine-space-thom-map"
  ],
  "proof": [
   {
@@ -434,5 +437,49 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-af6843131 (reviewer sub-agent of L); spot-checked: FIX: one repair; review in review.md. Read the full item (8 steps), the master and main-20261015 blueprint text, unit sk-prop-an, the statement of every cited node, the proofs of thm-pur-affine-line-orientation, thm-pur-affine-line-purity and lem-amb-cartier-kummer-map, and the three citers. Statement: the delivery's all-level change is a strengthening that keeps every blueprint clause (canonical isomorphism, base change, inverse of Rz^!gamma plus composition, integration of the class to 1). def-pur-affine-line-datum really assumes e|n while the corollary allows every n; the counterexample e=2, n=1 is valid. lem-amb-cartier-kummer-map explicitly covers arbitrary m and is independent of r. Coefficient category is pro-etale D^b_ctf(-,A_{E,n}); the base-change map is the closed exceptional mate, with no flatness assumed. Steps: Step 2 is a valid all-level version of the etale adjunction argument in thm-pur-affine-line-purity steps 2-4. Step 3: O_P(D_0)=O_P(1) (checked against the chart transitions), and t_q h=1 by def-amb-p1-trace. Steps 4-6: the induction matches unit Step 1, cancels via lem-pur-immersion-twist and naturality of the rank-one comparison, and starts from 1 at c=0. Step 7 is the mate formula. Step 8 is the transpose. Edge cases checked: c=0, c=1, empty, disconnected or nonreduced B, l=2. The identification with pur_s on e|n is only asserted, as in the already-reviewed thm-pur-affine-line-purity step 6 and thm-pur-finite-reduction-of-purity step 3. A sign convention between the two Kummer boundaries should be fixed across the DAG, not in this item. No cycle. Off-route statements lem-kun-dimension-finite-type, lem-pur-vector-integration-site-comparison, lem-weil-finite-compact-projection-formula and lem-pur-immersion-twist are declared tools and accepted. No duplicate: pur9-def-thom-class-affine is only a definition. No SGA cited. No new nodes. Fix: added def-pur-affine-line-datum to the item's stmt_deps, because the statement names that datum's domain (B3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineSpaceZeroSectionPurity",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineZeroPurity.zeroSection_purity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.unitPullback",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.targetSourceRaw",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.targetSourceRaw_left",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.targetSourceRaw_right",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.targetSourceIso",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.unit_finiteTor",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.gamma",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zero_proj",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.identityUnit",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.identityUnit_isIso",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.collapse",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zero_zero",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.normalizationRaw",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.normalizationRaw_left",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.normalizationRaw_right",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.normalization",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zeroSection_purity",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zeroSection_purity_untwisted",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.spaceMap",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zero_square",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zeroSquare",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.targetPullbackIso",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.classBaseChange",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.zeroSection_purity_baseChange"
+  ],
+  "file": "lean/Sheaf/Paper/AffineSpaceZeroSectionPurity.lean",
+  "statement": "theorem zeroSection_purity (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (c : ℕ) : IsIso (thom P n B aB c) ∧ thom P n B aB c ≫ normalization P n B aB c = 𝟙 _ ∧ normalization P n B aB c ≫ thom P n B aB c = 𝟙 _",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d276a37e7",
+  "group": "NH",
+  "result": "fix",
+  "note": "Re-delivery after RETURN 0fa11caf: the requested H2/H13 repair is exact (item and def-pur-affine-space-thom-map now cite def-pur-supported-class-operations, whose live existing:true record lists all 5 functorialCup* operations used); the 3 Lean modules are byte-identical. New finding, H13: new node def-pur-affine-space-coordinate-boundaries cites the theorem lem-pur-vector-integration-site-comparison for the site comparison, but the Lean uses `comparison A X` = VectorIntegrationSite.comparison (FiniteSiteCoordinates.lean:33), owned by def-pur-finite-site-coordinates; no declaration of the lemma's module is used. FIX: fixes/def-pur-affine-space-coordinate-boundaries.json swaps that stmt_dep and the statement citation to def-pur-finite-site-coordinates; no cycle (closure check). Substance checked independently: level n+1 covers all n>=1 with no e|n; B separated finite type, c=0 included; boundaries = the unique Cartier-Kummer family at l^(n+2) realized by closed exchange plus site comparison; product via the published supportedCup (reverse order, sign +1, advisory); supportIso unique over X; thom = exceptional adjunct; normalization = Rz^!(gamma) then collapse; IsIso plus both inverse equations; untwisted clause is a derived iso; base change for arbitrary g without flatness; no hollow definitions; statements verbatim; no existing dependency record changed. No compile: no .lean file changed (worker's runs clean: 38.2/49.9/30.7 s)."
  }
 }

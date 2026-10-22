@@ -24178,3 +24178,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:20 L: merged deliver/NK/lem-sfb-finite-normal-ample-descent (reviewer PASS; first push; new nodes: 2)
 - 01:20 L: merged deliver/NM/lem-sfb-finite-quotient-generic-fields (reviewer PASS; first push; new nodes: 0)
 - 01:20 L: merged deliver/NN/lem-sfb-finite-quotient-normal-proper (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 01:21 L: merged deliver/NH/cor-pur-affine-space-zero-section-purity (stage 2; reviewer FIX; parallel immutable checks)
