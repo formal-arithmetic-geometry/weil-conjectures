@@ -11,9 +11,90 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the auxiliary space $P=\\{A\\subseteq I\\mid A\\ne\\varnothing\\}$. For finite nonempty $J\\subseteq I$ set $B_J=\\{A\\in P\\mid J\\subseteq A\\}$. These sets cover $P$, since every $A$ contains some $i$; and $B_J\\cap B_K=B_{J\\cup K}$, so their arbitrary unions form a topology. Moreover $B_J\\subseteq B_K$ iff $K\\subseteq J$: necessity follows by testing the point $A=J$, and sufficiency follows from inclusion transitivity. In particular, if an open $W$ contains the point $J$, then $B_J\\subseteq W$: choose a basic neighborhood $B_K$ of $J$ inside $W$, so $K\\subseteq J$. This also proves that $B_J\\subseteq\\bigcup_s W_s$ iff $B_J\\subseteq W_s$ for some $s$, by testing the point $J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+   }
+  },
+  {
+   "text": "For any open $W\\subseteq P$ define $T(W)=\\bigcup_{J\\text{ finite nonempty},\\ B_J\\subseteq W}U_J$, an open of $Y$ contained in $U$. It is monotone. The inclusion criterion from step 1 gives $T(B_K)=U_K$: the union in its definition ranges exactly over $J\\supseteq K$, and contains the term $J=K$. Also $T(\\varnothing)=\\varnothing$ because $B_J$ contains $J$, and $T(P)=U$ because the singleton terms are $U_i$ and all other terms lie in $U$. These identities remain valid when $I$ is empty: then $P=U=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+   }
+  },
+  {
+   "text": "The functor $T$ preserves arbitrary unions: the last criterion of step 1 says that a finite nonempty $J$ contributes to $T(\\bigcup_s W_s)$ exactly when it contributes to some $T(W_s)$. It preserves binary intersections as well. Monotonicity gives $T(W\\cap Z)\\subseteq T(W)\\cap T(Z)$. Conversely a point in the latter lies in $U_J\\cap U_K=U_{J\\cup K}$ with $B_J\\subseteq W$ and $B_K\\subseteq Z$; but $B_{J\\cup K}=B_J\\cap B_K\\subseteq W\\cap Z$, giving the other inclusion. Consequently $T$ sends an open covering $W=\\bigcup_s W_s$ to the covering $T(W)=\\bigcup_s T(W_s)$, and sends $W_s\\cap Z$ to $T(W_s)\\cap T(Z)$ for every $Z\\subseteq W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-continuous-pushforward-sheaf] to $T:\\operatorname{Open}(P)\\to\\operatorname{Open}(Y)$ and $F$. Both sites are small in a universe containing the underlying sets $I,Y$ and their power sets, their arrows are inclusions and coverings are open families. Step 3 verifies both hypotheses of that lemma: image families cover and pullbacks along covering inclusions (intersections) are preserved. Thus $G(W)=F(T(W))$, with restriction maps inherited from $F$, is an abelian sheaf on $P$. No continuous map of underlying topological spaces is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, auxiliary sheaf construction; Sites Tag 00WW, lemma-pushforward-sheaf"
+   }
+  },
+  {
+   "text": "For opens $Z\\subseteq W\\subseteq P$ and $s\\in G(Z)=F(T(Z))$, the hypothesis of the item applied to the family of all finite nonempty $J$ with $B_J\\subseteq Z$ gives $t\\in F(U)$ restricting to $s$ on $T(Z)$. Restrict $t$ to $T(W)$; this is an element of $G(W)$ restricting to $s$, by functoriality of $F$ and $T(Z)\\subseteq T(W)\\subseteq U$. Hence every restriction of $G$ is surjective, so $G$ is flasque by [def-sc-zariski-flasque]. This uses the empty-family hypothesis when $Z=\\varnothing$.",
+   "uses": [
+    "def-sc-zariski-flasque"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+   }
+  },
+  {
+   "text": "The family $\\mathcal B=(B_{\\{i\\}})_{i\\in I}$ covers $P$. For any tuple $(i_0,\\ldots,i_p)$, let $J=\\{i_0,\\ldots,i_p\\}$. Then $\\bigcap_k B_{\\{i_k\\}}=B_J$, $T(B_J)=U_J=\\bigcap_k U_{i_k}$, so $G(\\bigcap_k B_{\\{i_k\\}})=F(\\bigcap_k U_{i_k})$. For each omitted entry, the restriction between these groups is exactly the restriction of $F$ between the corresponding intersections, since $G$ was defined by precomposition with $T$. Therefore the identity on every tuple component identifies the two products and commutes term by term with each summand $(-1)^k$ in the differential of [def-weil-pbc-site-cech-complex]. It gives an isomorphism of cochain complexes $\\check C^\\bullet(\\mathcal B,G)\\cong\\check C^\\bullet(\\mathcal U,F)$, including tuples with repetitions.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flasque-open-cover-cech-acyclic] to the topological space $P$, the abelian sheaf $G$ of step 4, its flasqueness from step 5, and the set-indexed open cover $\\mathcal B$ of step 6. It gives $\\check H^p(\\mathcal B,G)=0$ for $p>0$. The cochain isomorphism in step 6 identifies kernels and images of the differentials, hence identifies these groups with $\\check H^p(\\mathcal U,F)$, proving the assertion.",
+   "uses": [
+    "lem-sfb-flasque-open-cover-cech-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A36, lemma-vanishing-ravi, last paragraph, invoking Tag 09SZ, lemma-flasque-acyclic-cech"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "def-sc-zariski-flasque",
+  "def-weil-pbc-site-cech-complex",
+  "lem-sfb-flasque-open-cover-cech-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +137,45 @@
    "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.extensiveTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition",
    "date": "2026-10-22",
    "verdict": "no match: hits concern sheaf gluing, local surjectivity, Mayer-Vietoris sheaf short complexes or unrelated qcqs localization; none asserts Cech vanishing from surjectivity onto unions of intersections, nor derived vanishing from qc-open restrictions."
+  },
+  {
+   "tool": "grep",
+   "query": "cech|flasque|flabby",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean (Mathlib/CategoryTheory/Sites)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give definitions of flasqueness, general exactness or Cech constructions, sheaf gluing, Mayer-Vietoris squares, or unrelated statements; none proves the requested cover acyclicity. Read Mathlib/Topology/Sheaves/Flasque.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech vanishing from surjectivity of restrictions to unions of intersections",
+   "results": "8 hits: AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ, TopCat.Presheaf.IsGluing, AlgebraicGeometry.instSurjectiveDescI₀SchemeF, PrimeSpectrum.vanishingIdeal_union, Opens.mayerVietorisSquare', ProjectiveSpectrum.vanishingIdeal_union, TopCat.Sheaf.interUnionPullbackConeLift_left, TopCat.Presheaf.SheafConditionEqualizerProducts.w",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give definitions of flasqueness, general exactness or Cech constructions, sheaf gluing, Mayer-Vietoris squares, or unrelated statements; none proves the requested cover acyclicity. Read Mathlib/Topology/Sheaves/Flasque.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\"",
+   "results": "12 hits: Lean.MessageData.maxTraceChildren, Lean.Widget.LazyTraceChildren, Lean.Widget.instTypeNameLazyTraceChildren, Lean.Widget.LazyTraceChildren.indent, Lean.Widget.LazyTraceChildren.children, Lean.Widget.LazyTraceChildren.mk, CategoryTheory.cechNerveTerminalFrom, CategoryTheory.CechNerveTerminalFrom.wideCospan",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give definitions of flasqueness, general exactness or Cech constructions, sheaf gluing, Mayer-Vietoris squares, or unrelated statements; none proves the requested cover acyclicity. Read Mathlib/Topology/Sheaves/Flasque.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cover-relative flasqueness implies acyclicity of the full tuple Cech complex",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give definitions of flasqueness, general exactness or Cech constructions, sheaf gluing, Mayer-Vietoris squares, or unrelated statements; none proves the requested cover acyclicity. Read Mathlib/Topology/Sheaves/Flasque.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology vanishes if global sections surject onto sections on unions of finite intersections of a cover",
+   "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as, CategoryTheory.coherentTopology.isLocallySurjective_iff, TopCat.Sheaf.existsUnique_gluing', TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, TopCat.Sheaf.existsUnique_gluing, AlgebraicGeometry.Scheme.zero_of_zero_cover, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give definitions of flasqueness, general exactness or Cech constructions, sheaf gluing, Mayer-Vietoris squares, or unrelated statements; none proves the requested cover acyclicity. Read Mathlib/Topology/Sheaves/Flasque.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-quasi-compact-restriction-acyclicity",
@@ -85,5 +201,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cech-vanishing-surjective-unions",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0A36: constructed the nonempty-subset auxiliary space and its union/intersection-preserving map on opens; used existing continuous-functor sheaf precomposition; proved global extendability implies full flasqueness on the auxiliary space; identified full tuple complexes componentwise; applied the flasque Cech theorem, now a statement-only child with an existing proved project attachment candidate. Item statement unchanged.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage. Specifically the Zariski cohomological dimension input in the affine-to-global local heart estimate. Supporting the spectral-space dimension estimate: Surjective restrictions on quasi-compact opens imply acyclicity. Finite-cover Cech vanishing input (Stacks 0A36) in the quasi-compact-open acyclicity argument. Realized its cover-relative Cech vanishing input by the seven steps of Stacks 0A36.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic sheaf precomposition theorem on small open sites, used only to validate the auxiliary sheaf in the prescribed Stacks 0A36 argument; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-80e24fe3b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-80e24fe3b (reviewer sub-agent of L); spot-checked: Read Stacks 0A36 (lemma-vanishing-ravi, cohomology.tex 1999-2087) and 09SZ (lemma-flasque-acyclic-cech) in full. The item statement and stmt_deps match the unsplit base. No re-split note, no dropped-list entry and no SGA citation. Steps 1-3 are correct set arithmetic. The basis on P comes from B_J∩B_K=B_{J∪K}. B_J⊆B_K iff K⊆J, checked at the point J. An open containing J contains B_J, which gives the union criterion. T(B_K)=U_K, T(∅)=∅, T(P)=U, and T preserves unions and binary intersections. Using the canonical family {J: B_J⊆W} gives the same T as Stacks' minimal presentation. Step 4: (a) and (b) of lem-weil-pbc-site-continuous-pushforward-sheaf (00WW) are exactly step 3 on open sites, and its conclusion covers abelian sheaves. This is an off-unit generic tool used as a black box, and I accept the tool_use. Step 5: S={J: B_J⊆Z} gives surjectivity F(U)→F(T(Z)), hence flasque in the sense of def-sc-zariski-flasque; Z=∅ uses S=∅. Step 6: the Čech complexes agree component by component and face by face, repetitions included. Step 7 applies the new node to P, G, B. New node lem-sfb-flasque-open-cover-cech-acyclic: statement-only and self-contained, the true abelian specialization of 09SZ. Checked on I=∅, |I|=1 (alternating 0/id differentials) and infinite I. It is a strictly smaller special case of the item, not a restatement. Searching the DAG for flasque Čech nodes and 09SZ/0A36 sources found only finite-ordered scheme/module versions, so there is no duplicate. Its blueprint ancestry agrees with the item's. The attachment candidate TopCat.Sheaf.exactAt_cechComplex_of_isFlasque (CechFlasque.lean:41) matches the node's statement. No fixes."
  }
 }
