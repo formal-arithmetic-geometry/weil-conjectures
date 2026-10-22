@@ -1,15 +1,17 @@
 # Work queue
 
-43 items; claim with `tools/claim.py next <group> [--stage N]`.
+40 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (2 clusters, 269 modules)
+## Rework: quarantined by the upstream sync (4 clusters, 267 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.SmoothProperPrimeSpecialization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
@@ -37,13 +39,13 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 8 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (22)
+## Stage 3: modules to prove (18)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 1 | repair | route |
+| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 0 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | disputed | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 2 | proof | route |
@@ -61,10 +63,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PulledReductionNormalizationComparison` | - | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel` | - | 1 | proof | 15 |
-| `Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages` | - | 1 | proof | 16 |
-| `Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization` | - | 1 | proof | 17 |
-| `Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge` | - | 1 | proof | 17 |
 
 ## Stage 3: held for an open upstream PR (2)
 
