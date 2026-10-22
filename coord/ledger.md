@@ -24054,3 +24054,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:07 L: returned deliver/NK/lem-sfb-semilinear-sylow-good-components (reviewer RETURN: C1/F. The item lem-sfb-semilinear-sylow-good-components is live (not on the drop list), but Step 2 cites lem-per-project)
 - 00:07 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 00:08 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 00:09 L: returned deliver/NJ/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C1/F + C5/B9 + G4. The item is live (unsplit, created by NB 2026-10-22) and is not itself dropped. The drop list (clones)
