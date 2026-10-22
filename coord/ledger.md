@@ -24354,3 +24354,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:34 L: merged deliver/J4/Sheaf.Paper.DerivedFiniteQuotientCoherence (stage 3; reviewer FIX; first push; landing 20261022T023437-L-822290 (interface); batch 20261022T023430; modules 4; new nodes 2; change records: coord/changes/J4-finite-transition-route.md)
 - 02:35 L: merged deliver/NL/lem-sfb-punctured-spectral-neighborhood-dimension (reviewer PASS; first push; new nodes: 0)
 - 02:35 L: merged deliver/NM/lem-sfb-quasi-compact-restriction-acyclicity (reviewer PASS; first push; new nodes: 1)
+- 02:35 L: merged deliver/NE/lem-sfb-spectral-space-cohomology-dimension (stage 2; reviewer PASS; parallel immutable checks)

@@ -322,5 +322,23 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-9d65b6795 (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps and the three new nodes against Stacks cohomology.tex Tag 0A3G (lines 3940-4036), Topology 0905 and 0AP0, and Cohomology 0A36 and 01EW (tags checked in tags/tags). Statement: byte-identical to the NM delivery's item. It is correct against 0A3G(1): the upper bound d is equivalent, the empty space is included, there is no Noetherian hypothesis and the coefficients are abelian sheaves. Proof: follows the source's simultaneous induction on parts (1) and (2). Step 1 identifies Ab(X) with Mod(Z_X), which lets the ringed-space Mayer-Vietoris and restrict-injective-resolution nodes apply. Steps 4-6 (punctured S, the colimit node's exact setting, filtered-colimit zero, MV with (xi,0)) are checked. The step 7-8 diagram chase is checked in full, with injective mono-restriction replacing flasqueness. Step 9 (exactness of the truncated resolution including n=1, Leray parts 1 and 2, enough injectives on both sides) is checked. New nodes: the punctured spectral dimension node is true (0AP0 for spectrality; specialization-chain argument for the dimension drop; tested on Z empty, Z=X and a DVR spectrum) and is not stated by any node. The qc-restriction acyclicity node is true (finite qc covers are cofinal, 0A36 surjectivities hold, 01EW applies) and is not a duplicate (the 01EW scheme node assumes Cech vanishing; no 0A36 node exists). Fault C5: lem-sfb-specialization-free-spectral-profinite is a two-line special case of existing det-pe-wlocal-components clause 1 (T^c closed implies T^c profinite; its Lean gives Compact, T2 and TotallyDisconnected). With no specializations T^c = T, and qc opens are closed because compact subsets of a Hausdorff space are closed. Fix: step 3 rewritten to cite det-pe-wlocal-components, which is added to tool_uses (no cycle); proof_deps recomputed; the node is dropped and nothing else cites it. Declared tool uses accepted as generic. No SGA cited. One fault in total; no false statement, restated clause or gap.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralSpaceCohomologyDimension",
+  "declaration": "TopCat.Sheaf.subsingleton_H'_top_of_spectralSpace_of_dimension_le",
+  "file": "lean/Sheaf/Topology/SpectralSpaceCohomologyDimension.lean",
+  "statement": "theorem subsingleton_H'_top_of_spectralSpace_of_dimension_le (T : Type u) [TopologicalSpace T] [SpectralSpace T] (d : ℕ) (hd : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (F : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) (hq : d < q) : Subsingleton (@CategoryTheory.Sheaf.H'.{u, u, u} (Opens T) inferInstance (Opens.grothendieckTopology T) inferInstance (@hasExt_of_enoughInjectives _ _ _ inferInstance (@IsGrothendieckAbelian.enoughInjectives _ _ _ (CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u} (Opens.grothendieckTopology T) AddCommGrpCat.{u}))) F q ⊤)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c247e53f",
+  "group": "NE",
+  "result": "pass",
+  "note": "The signature is identical to the node's lean.statement and matches Stacks 0A3G(1) clause by clause: SpectralSpace T, a natural-number bound d with topologicalKrullDim T ≤ d (upper bound, ⊥ allowed, so the empty space is included), every abelian sheaf F, Sheaf.H' F q ⊤ with the same explicit HasExt instance as subsingleton_H'_top_of_profinite, q > d, Subsingleton. No Noetherian, Nonempty or sheaf assumptions; space and coefficients share universe u, the established convention. The delivered node differs from the live node only in lean, and there was no prior lean record. No definitions or helpers, only sorry; docstrings carry the source place, the blueprint id and the 9 proof steps; all 11 project imports exist. The only nearby project theorem (GrothendieckVanishing) needs a Noetherian space. Report has the Worker report and Second reading sections. No compile run, since no file was changed. No findings."
  }
 }

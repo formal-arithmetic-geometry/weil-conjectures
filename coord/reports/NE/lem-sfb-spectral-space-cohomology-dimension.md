@@ -1,122 +1,101 @@
-# Stage-1 report: lem-sfb-spectral-space-cohomology-dimension
+## Worker report
 
-## Files written
+The module `Sheaf.Topology.SpectralSpaceCohomologyDimension` states
+`TopCat.Sheaf.subsingleton_H'_top_of_spectralSpace_of_dimension_le`.
+Its only theorem proof is `by sorry`; it introduces no definition, instance, or helper theorem.
+The declaration docstring contains all nine steps of the node's proof.
 
-- `dag/nodes/sec-six-functors-basics/lem-sfb-spectral-space-cohomology-dimension.json`: split statement; kept every hypothesis and conclusion, including the empty case and arbitrary, possibly non-Noetherian spectral spaces.
-- `dag/nodes/sec-six-functors-basics/lem-sfb-specialization-free-spectral-profinite.json`: new statement-only lemma, unsplit; no Mathlib match.
-- `dag/nodes/sec-six-functors-basics/lem-sfb-punctured-spectral-neighborhood-dimension.json`: new statement-only lemma, unsplit; no Mathlib match.
-- `dag/nodes/sec-six-functors-basics/lem-sfb-quasi-compact-restriction-acyclicity.json`: new statement-only lemma, unsplit; no Mathlib match.
-- `citations.json`: verbatim statements, or the relevant clauses of the acyclic-resolution theorem, for every node cited by every item step.
-- `searches.jsonl`: unmodified output log of the required search command. Sandbox-only authoring scripts retain the write procedure.
+Statement correspondence, hypothesis by hypothesis and clause by clause:
 
-## Attachments
+- A topological space T is `(T : Type u) [TopologicalSpace T]`.
+- Spectrality is the recorded Mathlib class `[SpectralSpace T]`.
+- The nonnegative integer bound is `(d : ℕ)`; this parametrizes exactly the integers d ≥ 0.
+- The upper bound on topological Krull dimension is
+  `(hd : topologicalKrullDim T ≤ (d : WithBot ℕ∞))`. This is an upper bound, not an
+  equality, and the bottom value for the empty space is retained.
+- Every abelian sheaf is covered by the arbitrary binder
+  `(F : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u})`.
+- Every cohomological degree above d is `(q : ℕ) (hq : d < q)`.
+- The cohomology group is the recorded `CategoryTheory.Sheaf.H' F q ⊤`, on the
+  site of opens of T, with an explicit, canonically supplied HasExt instance.
+  The top open computes global cohomology. As explained in the recorded dependency,
+  Ext from its free abelian sheaf computes the right-derived global sections.
+- Vanishing is `Subsingleton` of this abelian group: a group has a zero element, so
+  subsingleton is exactly the assertion that every class is zero.
+- The empty space is included: there is no Nonempty binder, and the dimension
+  hypothesis allows bottom. No NoetherianSpace assumption occurs.
 
-None. Searched the live `lean/WeilConjectures/` tree by item id, spectral/cohomology/dimension terminology, and the new lemmas' concepts. The project Grothendieck vanishing theorem requires Noetherianity; it does not attach to this item. The project profinite-to-spectral instances prove the reverse of the new profinite characterization. No Lean files were written and no compiler or Lake command was run.
+Dependency declarations read and used:
 
-## Literature wanted
+- `Mathlib.Topology.Spectral.Basic`, `SpectralSpace`: T0, compact, quasi-sober,
+  quasi-separated, and a compact-open basis. T0 plus quasi-sober gives the node's sobriety.
+- `Mathlib.Topology.KrullDimension`, `topologicalKrullDim`: `Order.krullDim` on
+  `IrreducibleCloseds T`, valued in `WithBot ℕ∞`.
+- `Mathlib.CategoryTheory.Sites.SheafCohomology.Basic`, `CategoryTheory.Sheaf.H'`:
+  the cohomology presheaf evaluated at an object, here the top open. The full signature,
+  its cohomology-presheaf definition, and surrounding docstrings were read.
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf`,
+  `CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall'`, together with
+  `CategoryTheory.IsGrothendieckAbelian.enoughInjectives` and
+  `CategoryTheory.hasExt_of_enoughInjectives`, supplies the Ext instance as an explicit
+  term. These are consequences for the site, not extra hypotheses on T or F.
 
-None. All necessary sources are present in `literature/stacks-project/`.
+All recorded proof-dependency modules are imported, with ordinary imports for proof-only
+material. The Mathlib matches for enough injectives on sites and module categories are
+also imported. The two proof-only nodes
+`lem-sfb-punctured-spectral-neighborhood-dimension` and
+`lem-sfb-quasi-compact-restriction-acyclicity` have no recorded Lean declaration at this
+writing; their proof steps remain documented, and they do not supply any object needed
+by this theorem's signature. No import was omitted for a cycle.
 
-## Problems found and changes
+Edge cases checked mathematically before drafting:
 
-The imported statement is correct against Stacks Tag 0A3G(1); there is no statement dispute. Its proof was empty. A proof of (1) alone cannot simply invoke top-degree restriction surjectivity: the source proves that surjectivity in the same induction, before deriving the vanishing. The split therefore proves A_n and B_n simultaneously and quantifies over dimension at most n, not only dimension exactly n. It does not create B_n as a replacement node for the item. The source's part (3), cohomology with support, is unnecessary here.
+- Empty T has dimension bottom, so satisfies every natural upper bound; all sheaf
+  cohomology is zero, and the signature excludes no such T.
+- d = 0 gives positive-degree vanishing on a dimension-zero spectral space, agreeing
+  with profinite cohomology vanishing. It does not assert vanishing of global sections.
+- q = 0 cannot satisfy d < q. q = d is also excluded, as the source requires.
+- A dimension strictly below d still satisfies hd; no dimension-realizing chain is required.
+- The zero sheaf is allowed. No finiteness or torsion constraint is imposed on F.
+- Space and coefficient universes use the established common universe convention for
+  topological abelian sheaves and `H'`. The theorem is universe-polymorphic; a larger
+  common universe accommodates a given space and its coefficient groups. There is no
+  independently undersized universe for test objects or indexing sets.
 
-The ringed-space versions of Mayer–Vietoris and restriction of resolutions already exist in the DAG. They are used with the constant integer structure, and step 1 explicitly checks why the module and abelian-sheaf computations coincide, including maps and injectivity. This avoids adding abelian duplicates of more general existing results. Existence of resolutions and the target enough-injectives hypothesis are cited as statements in steps 7 and 9, not taken merely from a definition.
+Searches for an existing statement (2026-10-22):
 
-## Unfinished work
+- `msearch.py` leanfinder, query “Cohomology of abelian sheaves on a spectral topological
+  space vanishes above its Krull dimension”: 8 hits, including `Sheaf.H`,
+  `Sheaf.cohomologyPresheaf`, derived-category t-structure vanishing and injective-dimension
+  criteria. None gives the spectral-space dimension bound.
+- `msearch.py` loogle, query `topologicalKrullDim, CategoryTheory.Sheaf.H`: 0 hits.
+- `msearch.py` grep, query
+  `spectral.*cohomolog|cohomolog.*Krull|cohomologicalDimension`: 9 hits, all spectral-sequence
+  or spectral-object infrastructure, not spectral topological spaces.
+- `msearch.py` leansearch, query “Spectral space cohomology vanishes in degrees above
+  topological Krull dimension”: 8 hits consisting of dimension/spectral-space definitions,
+  scheme spectrum facts, and the locally Artinian criterion. No matching theorem.
+- `rg` of `lean/WeilConjectures` and `lean/Sheaf` with the same concepts found spectral-limit
+  continuity, profinite vanishing and Noetherian vanishing. The signature of
+  `TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt` in
+  `WeilConjectures.Topology.Sheaves.GrothendieckVanishing` was read: it requires
+  `[NoetherianSpace X] [QuasiSober X]`, so does not state this node.
+- `rg` for the item id in `lean/WeilConjectures` found no declaration. Project hits in
+  `ZeroDimensionalBaseAffineGlobal` only cite the item in a proof docstring.
+- `rg` in `dag/lean_names_upstream.json` and the topology source directories found no
+  declaration of this spectral-space cohomology bound.
 
-The item's natural-language proof is complete. The three new lemmas intentionally remain statement-only, with no proof or proof dependencies: this is a one-level stage-1 split. Their future splits are separate items. There are no new Mathlib leaves. Independent maintainer review remains the normal next stage after delivery.
+Source checked: `literature/stacks-project/cohomology.tex`, proposition
+`proposition-cohomological-dimension-spectral` (Tag 0A3G), including its simultaneous
+induction proof. Part (1) agrees with the node; an upper bound d yields the stated form.
+No statement correction or disputed statement is needed. No new nodes or dependency
+repairs are needed.
 
-## Review by NE
+Validation: the delivered file compiled cleanly both as a sandbox module and at its
+library module path through the prescribed `scompile.py`; no warnings or errors were
+reported. The node changes only in `lean`, whose signature is copied verbatim from the
+file. All variables and the universe are explicit; `autoImplicit` is disabled.
 
-I read the item's chapter, its recorded unit `sk-prop-sf-comp-coherence`, the main-20261015 ancestor `det-sf-comp-coherence-cocycle`, and the current source in `cohomology.tex`, from `lemma-cohomology-of-neighbourhoods-of-closed` through the entire proof of `proposition-cohomological-dimension-spectral`. The item supplies the Zariski/topological input in the existing affine-to-global branch of the compactification-coherence proof; it does not change that branch's route. The off-unit generic tools are declared in `split_report.tool_uses`.
+## Second reading by NE
 
-For the new profinite characterization I read `topology.tex`, Tag 0905, `lemma-characterize-profinite-spectral`, including the equivalence of no specializations, profiniteness and clopen quasi-compact opens. For the punctured geometry lemma I read Tag 0AP0, `lemma-make-spectral-space-minus`, and the preceding Tag 0A31, together with the dimension argument in the induction step of 0A3G. Z is constructible because its complement is quasi-compact open; the lemma does not assert the generally false claim that the punctured generalization neighborhood is open in X. Spectrality of S makes its irreducible closed subsets have generic points: a strict chain of their generic points is a strict specialization chain in X. Its most special point has a further specialization in Z, outside S. Appending that point gives one additional strict step in X, so dimension drops by one. Neither a finite number of irreducible components nor Noetherianity is used.
-
-For the new acyclicity criterion I read Tag 0A36, `lemma-vanishing-ravi`, and Tag 01EW, `lemma-cech-vanish-basis`, with their hypotheses. Every finite intersection of quasi-compact basis opens is quasi-compact, as is every union of the finitely many distinct such intersections of a finite cover. Thus all restriction maps required in 0A36 are surjective. All open covers of a quasi-compact basis member have finite refinements by quasi-compact basis members. These finite coverings satisfy the basis criterion 01EW. This justifies the statement for arbitrary abelian G, without assuming G is a filtered colimit of injectives and without assuming global flasqueness. No proof of this new lemma is put into its statement.
-
-I opened every cited node and checked the following uses against its statement:
-
-1. The constant-sheaf, module-sheaf, module-cohomology and abelian-cohomology definitions give the coefficient convention. Integer multiplication on sections is forced, and glues locally; additive morphisms, their lifting tests for injectivity, and section complexes are the same. The comparison here is an elementary identity of these descriptions, not a new derived comparison theorem.
-2. The Krull-dimension convention explicitly gives dimension minus infinity exactly for the empty space. Its only sheaf has zero sections, so the empty case does not enter a positive-dimensional induction. The two inductive claims are written with every space and sheaf universally quantified.
-3. The new characterization supplies profiniteness and clopen quasi-compact opens. `lem-cbc-profinite-topological-cohomology-vanishing` says vanishing for every abelian sheaf in every positive degree, exactly the base case needed. Strictness of closures in the specialization argument uses sobriety/T0 from the spectral-space definition. Top-degree degree zero surjectivity is proved by the sheaf axiom and zero extension across a clopen, not assumed.
-4. The punctured geometry node supplies both spectrality and dimension at most n-1 for precisely the closed Z and quasi-compact complement U. A_n-1 applies to F restricted to S in degree n. There is no appeal to the conclusion at the current dimension.
-5. The existing punctured-neighborhood cohomology node states the canonical restriction isomorphism, for closed Z with quasi-compact complement, in all nonnegative degrees; it also states the actual directed index. `lem-sc-filtered-colimit-map-zero` says a zero class dies at a stage. Starting with the class at N=X therefore gives V containing Z, not an arbitrary small open. All indices form a set of subsets of X; coefficient and indexing universes can be chosen to contain this small site.
-6. The existing ringed-space Mayer–Vietoris node states exactness with the pair and difference of restrictions for an arbitrary ringed space and any module. With step 1 it applies to (xi,0). The overlap restriction is zero and X=U union V, which are exactly the needed hypotheses. No scheme or quasi-coherence hypothesis is imported from the narrower scheme node.
-7. The site-enough-injectives statement permits choosing the resolution; the resolution definition supplies its exactness. The existing ringed-space restriction lemma says that the restricted complex remains an injective resolution, so the same rows compute H^n on X and U. The module definition says kernels are sectionwise. The image equals the kernel by exactness of this resolution, not by claiming that images of arbitrary sheaf maps are computed sectionwise. The index n-1 is used only after n>=1.
-8. The injective-sheaf monomorphism-restriction statement applies on the opens site: U to X is a monomorphism and I^(n-1) is injective. The proof writes out the lift of c, the correction b, and h+d(b). This checks the whole diagram chase and its sign, rather than hiding it under that name. Surjectivity between two quasi-compact opens follows by first lifting to X.
-9. The acyclicity node needs only the quasi-compact basis and the surjectivity just proved, and X itself is quasi-compact. The existing Leray acyclicity statement explicitly contains both injectives being acyclic and computation from an acyclic resolution. Its source enough-injectives assumption is the site theorem; its target assumption follows from the ring-module theorem at the integers. The truncated complex is exact through G because I^(n-1) maps onto its image as a sheaf. It has terms only in degrees 0 through n, so it proves all q>n, with no convergence or unbounded derived-category issue.
-
-I checked small cases explicitly. The profinite lemma includes the empty space, a singleton, and infinite Stone spaces; it does not claim an infinite Stone space is discrete. In a two-point specialization chain, taking Z to be the closed point makes S the generic point, so the strict dimension estimate is the expected 1-to-0 drop. Z empty or Z=X gives S empty. The geometry statement assumes n>=1, so it never subtracts one from the empty-space convention or a zero bound. For the acyclicity node, G=0 and V empty give zero cohomology, and a discrete (possibly infinite) space satisfies the compact-basis assumptions. No compactness of the whole space is needed for that lemma. The item includes F=0 and d greater than the actual dimension.
-
-Against delivery-errors B: all new objects and hypotheses are introduced, the new nodes have empty proofs, TeX is singly escaped after JSON decoding, tags and labels were checked in `tags/tags`, and blueprint ancestry is inherited exactly. Against C: no source-proof internals are used as a cited statement, every non-elementary input is a cited node, and citations.json quotes the actual statements. Against D: the top-degree surjectivity induction and final dimension shift stay in the item; none of the new nodes states its cohomological dimension bound or a clause of it. The new acyclicity criterion has no dimension hypothesis and is a separate reusable sheaf lemma, not a relabelled conclusion. Against E: no affine-intersection, Noetherian, quasi-coherent, or torsion-coefficient assumption enters. Every step is below 2000 characters; I also checked them for hidden comparisons and recorded the one real coefficient identification explicitly.
-
-I ran the searches through the required msearch.py command, read their actual results, and tried a second semantic wording for each new lemma and the item. The topological Krull dimension and derived t-structure hits are definitions or vanishing under a supplied t-structure bound, not Scheiderer's bound. Profinite.of assumes the separation properties we need to prove. The open-embedding spectral-space theorem requires compactness of its source and does not handle the punctured subspace. Full flasqueness and injective cohomology vanishing do not state the quasi-compact restriction criterion. Whole-DAG and whole-blueprint searches by tag and concept found the reusable nodes used above; the additional same-tag comparisons follow.
-
-## Not duplicates
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-coef-infinity-right-fibration-fibers: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing node concerns equivalences of simplicial fibrations; its 01EW is a Kerodon tag, unrelated to the Stacks tag for sheaf acyclicity.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-sfb-spectral-space-cohomology-dimension: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The item instead assumes a finite Krull dimension and makes no restriction-surjectivity assumption on the input sheaf.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-sfb-zero-dimensional-base-affine-global: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing node concerns an affine-to-global pro-etale bound for internal modules on a scheme; it has neither these input hypotheses nor this criterion.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-weil-pbc-top-degree-abelian-neighborhood-zero: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing 'Top-degree abelian class eventually vanishes near closed complement' concerns top-degree restriction of arbitrary sheaves on Noetherian spaces or schemes, not this acyclicity criterion.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-weil-pbc-module-cech-vanishing-basis: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing node concerns module cohomology on a scheme and assumes Cech vanishing; deriving that hypothesis from restriction surjectivity requires the separate Ravi lemma 0A36, so this is not a one-line specialization.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-weil-pbc-top-degree-module-restriction-surjective: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing 'Top-degree module cohomology restriction is surjective' concerns top-degree restriction of arbitrary sheaves on Noetherian spaces or schemes, not this acyclicity criterion.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-weil-pbc-top-degree-abelian-open-restriction: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing 'Top-degree abelian cohomology restriction is surjective' concerns top-degree restriction of arbitrary sheaves on Noetherian spaces or schemes, not this acyclicity criterion.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-weil-pbc-top-degree-open-restriction-surjective: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing 'Restriction of top-degree module cohomology to an open is surjective' concerns top-degree restriction of arbitrary sheaves on Noetherian spaces or schemes, not this acyclicity criterion.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-cbc-left-fibration-equivalence-lift: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing node concerns equivalences of simplicial fibrations; its 01EW is a Kerodon tag, unrelated to the Stacks tag for sheaf acyclicity.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-sc-topological-filtered-injective-cech-acyclic: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing node assumes the sheaf is a directed colimit of injectives. An arbitrary sheaf with the new restriction property is not supplied with such a presentation; those extra hypotheses cannot be assumed.
-
-lem-sfb-quasi-compact-restriction-acyclicity vs lem-sc-directed-injective-derived-sections-acyclic: The new node assumes surjectivity of ordinary section restrictions between quasi-compact opens of an arbitrary coherent topological space and concludes higher cohomology vanishing for any such sheaf. The existing node assumes the sheaf is a directed colimit of injectives. An arbitrary sheaf with the new restriction property is not supplied with such a presentation; those extra hypotheses cannot be assumed.
-
-lem-sfb-punctured-spectral-neighborhood-dimension vs lem-sfb-spectral-space-cohomology-dimension: The new node is purely topological: spectrality and a strict Krull dimension drop for W minus Z. The item is sheaf cohomology vanishing; it asserts neither the spectrality of this subspace nor its dimension.
-
-lem-sfb-punctured-spectral-neighborhood-dimension vs lem-sfb-zero-dimensional-base-affine-global: The new node is purely topological: spectrality and a strict Krull dimension drop for W minus Z. The existing node is an affine-to-global bound in pro-etale internal modules for a scheme over a zero-dimensional base; it gives no punctured-subspace geometry.
-
-lem-sfb-punctured-spectral-neighborhood-dimension vs lem-weil-pbc-top-degree-abelian-neighborhood-zero: The new node is purely topological: spectrality and a strict Krull dimension drop for W minus Z. The existing 'Top-degree abelian class eventually vanishes near closed complement' is a statement about top-degree cohomology restriction on Noetherian spaces or schemes; it gives no spectrality or dimension estimate for this subspace.
-
-lem-sfb-punctured-spectral-neighborhood-dimension vs lem-weil-pbc-top-degree-module-restriction-surjective: The new node is purely topological: spectrality and a strict Krull dimension drop for W minus Z. The existing 'Top-degree module cohomology restriction is surjective' is a statement about top-degree cohomology restriction on Noetherian spaces or schemes; it gives no spectrality or dimension estimate for this subspace.
-
-lem-sfb-punctured-spectral-neighborhood-dimension vs lem-weil-pbc-top-degree-abelian-open-restriction: The new node is purely topological: spectrality and a strict Krull dimension drop for W minus Z. The existing 'Top-degree abelian cohomology restriction is surjective' is a statement about top-degree cohomology restriction on Noetherian spaces or schemes; it gives no spectrality or dimension estimate for this subspace.
-
-lem-sfb-punctured-spectral-neighborhood-dimension vs lem-weil-pbc-top-degree-open-restriction-surjective: The new node is purely topological: spectrality and a strict Krull dimension drop for W minus Z. The existing 'Restriction of top-degree module cohomology to an open is surjective' is a statement about top-degree cohomology restriction on Noetherian spaces or schemes; it gives no spectrality or dimension estimate for this subspace.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-regular-hilbert-coefficient-data: The new node characterizes profinite spectral topological spaces. The existing node states 'Regular coefficient data with division and Jacobian conditions', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs def-trf-admissible-embedded-history: The new node characterizes profinite spectral topological spaces. The existing node states 'Finite ordinary embedded histories and admissibility relative to local values', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-smooth-local-tangent-cone-extension: The new node characterizes profinite spectral topological spaces. The existing node states 'Tangent cone and minimal-prime dimensions of an essentially smooth local extension', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-hilbert-samuel-local-presentations: The new node characterizes profinite spectral topological spaces. The existing node states 'Local Hilbert--Samuel presentations and their admissible transforms', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-smooth-embedding-etale-comparison: The new node characterizes profinite spectral topological spaces. The existing node states 'Minimal smooth envelopes and etale comparisons', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-hilbert-samuel-equality-component-rigidity: The new node characterizes profinite spectral topological spaces. The existing node states 'Component-dimension rigidity at a Hilbert--Samuel near point of a blowup', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-hilbert-samuel-resolution-invariant-calculus: The new node characterizes profinite spectral topological spaces. The existing node states 'Local dimension-corrected resolution invariant: maximum-stratum calculus and termination', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-marked-ideal-numerical-resolution-engine: The new node characterizes profinite spectral topological spaces. The existing node states 'Numerical invariant and termination for marked ideals', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-marked-ideal-transverse-suspension: The new node characterizes profinite spectral topological spaces. The existing node states 'Transverse suspension of a marked ideal', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs def-trf-labeled-embedded-resolution: The new node characterizes profinite spectral topological spaces. The existing node states 'Finite labeled embedded blowup towers and synchronized comparison data', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-jet-diagram-hilbert-control: The new node characterizes profinite spectral topological spaces. The existing node states 'Taylor modules, initial diagrams and finite local variation', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs def-trf-resolution-invariant-calculus-data: The new node characterizes profinite spectral topological spaces. The existing node states 'Data of a simultaneous local resolution invariant calculus', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-formal-coefficient-transform-criterion: The new node characterizes profinite spectral topological spaces. The existing node states 'Formal coefficient strata and one-step blowup formulas', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-lem-sfb-specialization-free-spectral-profinite vs lem-trf-hilbert-samuel-smooth-dimension-profile: The new node characterizes profinite spectral topological spaces. The existing node states 'Smooth-stable Hilbert--Samuel head and component-dimension correction', a characteristic-zero resolution statement or definition. Its 0905 match comes from an arXiv identifier in its source; it gives no such topological characterization.
-
-## Validation
-
-The initial server review_split check passed. The full required delivery dry run passed at b346d511f24 and saved its durable receipt. A subsequent report-only correction identifies the unrelated 01EW source as Kerodon, so the final dry run is repeated before pushing; terminal results are recorded by the delivery tools. No local check_dag, review_split, preflight_delivery, Lean compiler, Lake, or git command is run by this worker.
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.
