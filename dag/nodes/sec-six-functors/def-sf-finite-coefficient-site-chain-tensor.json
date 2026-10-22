@@ -14,9 +14,27 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
   "place": "last paragraph: transport the specified internal-Hom comparison to the pro-etale site; Stacks 00YV, 06YN, 07A4, 08J9"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient quotient is finite. Specialize the normalized total tensor comparison for finite rings to this quotient. Its summand normalization is equivalent to the original local-section normalization: the recorded etale total representative is the inclusion of the sheaf pure tensor, comparison units are natural, and the ordinary tensor comparison has the specified pure-section formula. The reverse implication is equality of summand maps by the two adjunctions and sheaf-tensor extensionality. The canonical map remains the uniquely normalized one.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-sf-etale-finite-coefficient-hom-arrow",
+    "lem-sf-finite-intrinsic-chain-tensor-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "lem-sf-finite-intrinsic-chain-tensor-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Normalized ordinary and chain tensor comparison, then positive-level coefficient specialization"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -131,5 +149,15 @@
   "group": "Q59",
   "result": "pass",
   "note": "Read all 5 modules, all 5 node records (chain-tensor node missing from snapshot; read from commit 5470a8b8 by read-only git show), dependency declarations and blueprint source. All node clauses rendered on both sites, ends checked: evaluation-defined v (étale etaleFiniteHomCanonical and pro-étale finiteIntrinsicReductionHom unfold to coefficientBaseChangeHom with the uniqueness clause's data), both ends in ctf plus IsIso, FiniteHomEvaluation identity and uniqueness, CoefficientEvaluationCompatible, both r<=m cocycles, beta/nu site square. Hypotheses exact (separated finite type over k, l != p, n>=m>=1 via n+1, m+1); single universe; edge cases (empty X, n=m, residue field, zero objects) covered. No sorry data in defs, no Nonempty.some, published étale and intrinsic pro-étale categories used, new files only; records, verbatim statements, declaration lists, H12 fields, report sections OK. nt_compile.py on all 5 files: exit 0, no messages (EtaleFiniteCoefficientHomArrow 42-49 s, near the 60 s limit). Notes: snapshot omitted the chain-tensor node; stage 3 needs a lemma identifying the thick-locus lemma's tensor comparison with ExceptionalCoefficients.tensorIso."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-e3e85",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T002344-L-1920030",
+  "kind": "interface",
+  "note": "independent cc review: item node def-sf-finite-coefficient-site-chain-tensor + new nodes lem-sf-finite-intrinsic-(chain-)tensor-generators vs the 3 delivered modules; old vs new FiniteHomNuChainTensorNormalization checked equivalent against finiteHomNuSection/finiteHomEtaleTotalSection/coefficientTensorGenerator; importer FiniteCoefficientSiteHomArrow compiled rc 0"
  }
 }
