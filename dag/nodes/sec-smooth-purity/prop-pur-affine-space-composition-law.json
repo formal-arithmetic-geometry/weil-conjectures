@@ -438,5 +438,47 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-aa4531cb2 (reviewer sub-agent of L); spot-checked: Read the whole item, all ten steps, both new nodes and every cited statement. Also read the sk-prop-an unit and the blueprint source in master and in main-20261015, which are identical; the item has no blueprint_update. The repair answers the one returned point. Old Step 7 is now two statement-only nodes and three short steps (7-9); Steps 1-6 are unchanged and old Step 8 is now Step 10. Statement, stmt_deps, lean_audit and import flags are unchanged. proof_deps equals the union of the step uses. Every cited id exists and is unmerged, there is no cycle and no SGA source. lem-pur-affine-space-product-domain: the base coefficients of the two inverse projection maps in kappa_{m,1} are M on X and V_m on B, as the statement says; the projection map of def-exchange-projection needs a finite-Tor base coefficient, so the induction is needed. It is true by Kunneth: V_{m+1} = V_m tensor Rf_!M = A tensor A = A_B, which is flat, so Tor amplitude [0,0]. I tested m=1, f=id with M=A, and empty B. lem-pur-affine-space-trace-factorization: I_1 = t_Y holds by the identity conventions. The recurrence I_{m+1} = (I_m tensor t) kappa_{m,1} is a Fubini identity that uses base change of I_m along a; the hypothesis that line traces commute with base change over every base Y' covers that. All shifts are even, so there are no signs, and there is no permutation claim, so it is not circular. Neither node restates a parent clause. Neither duplicates thm-sf-kunneth-relative, lem-sf-kunneth-coherence, lem-amb-affine-space-top-trace, lem-pur-vector-integration-site-comparison, det-sp-composition-factors or det-sp-trace-basic. Step 7: lem-amb-affine-space-top-trace applies with S=Y, d=1, N=ell^r, A finite with NA=0, N invertible and Y Noetherian; with the compact-support comparison it gives U = A_Y. Steps 8-9 meet their hypotheses from Steps 5 and 7. The tensor-power induction and lem-sf-kunneth-coherence clauses (ii) and (iv) are correct, and so is the Step 10 sign and symmetry argument. I accept 17 off-unit tool uses, listed in review.md. The split_report still declares thm-sf-kunneth-relative, which no proof step cites now; that is harmless and unchanged. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineSpacePurityComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpacePurity.affineSpacePurityComposition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.actionAddIso",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.projectionSource",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.twistPullbackIso",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockSourceIso",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.isoExceptional",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockSchemeEq",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockProjection",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateMap",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateMap_isIso",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateIso",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateProjection",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockPermutation",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.purityProjectionCompactification",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptionalPositive_obj_eq",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.positiveComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.positiveComparison",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateSourceIso",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.transportedComparison",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockProjectionCompactification",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockComposite",
+   "AlgebraicGeometry.ProEtale.AffineSpacePurity.affineSpacePurityComposition"
+  ],
+  "file": "lean/Sheaf/Paper/AffineSpacePurityComposition.lean",
+  "statement": "theorem affineSpacePurityComposition (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y) (hKe : etaleFiniteTor (Ring P) Y Ke) (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) (d e : ℕ) : HEq (transportedComparison P Y aY K Ke hKe eK ((e + 1) + d) (eqToIso (blockSchemeEq Y (e + 1) (d + 1))) (iteratedAffineLineProj (iteratedAffineLine Y (e + 1)) (d + 1) ≫ iteratedAffineLineProj Y (e + 1)) (hg' := blockProjectionCompactification Y (d + 1) (e + 1)) (blockProjection Y (d + 1) (e + 1))) (blockComposite P Y aY K Ke hKe eK d e) ∧ (-1 : ℤ) ^ ((2 * (d + 1)) * (2 * (e + 1))) = 1 ∧ HEq (transportedComparison P Y aY K Ke hKe eK ((e + 1) + d) (coordinateIso Y ((e + 1) + (d + 1)) (blockPermutation (d + 1) (e + 1))) (iteratedAffineLineProj Y ((e + 1) + (d + 1))) (hg' := purityProjectionCompactification Y ((e + 1) + (d + 1))) (coordinateProjection Y ((e + 1) + (d + 1)) (blockPermutation (d + 1) (e + 1)))) (positiveComparison P Y aY K Ke hKe eK ((e + 1) + d))",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The first conjunct is the displayed block-composition equation in canonical coordinates, the second is the even Koszul sign, and the third is invariance under the actual block coordinate permutation. Positive dimensions are parameterized by d+1 and e+1. All coordinate transports are actual compositions; positiveComparison is uniquely fixed by HEq to the recorded comparison. Both morphism equations use HEq in the fixed canonical endpoint coordinates, avoiding expensive elaborator normalization; HEq is ordinary equality once these identical coordinates are identified."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40d560de8",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read packet, check-brief2, full module (545 lines), live AffineSpacePurityComparison and upstream UpperShriekIso, UpperShriekFiniteness, UpperShriekCongr, AffineSpace coord and toIteratedAffineLine. Node diff vs live is the lean field only; the 5 dep nodes are identical to live; statement verbatim; 21 declarations exact; imports exist; sorry-only proofs with blueprint docstrings and the 10-step proof plan. Hypotheses equal the affineSpacePurityComparison domain (P, Y sep. finite type over k, K Plus + etale finite-Tor representative); d+1, e+1 cover every d,e>=1. Conjunct 1: the total gamma transported along the literal blockSchemeEq regrouping equals blockComposite = blockSourceIso then F_{p_d}(gamma_{e+1}) then gamma_{d+1} at Rp_e^!K (dependency stage witnesses) then compositionInverse, the node's display factor by factor. Conjunct 3: gamma is invariant under the genuine polynomial block-interchange automorphism (toIteratedAffineLine with coord after sigma, sigma = finCongr then finAddFlip). Transports are canonical (rightDerivedUpperShriekIsoOfIso is the adjoint-uniqueness iso, pullback compositor, twist pullback, congr = subst refl). positiveComparison is an exists-unique choice pinned by HEq with equal types, not hollow; the HEq sides are definitionally equal types and compactification instances are Props. Edge cases d=e=0, empty Y, level 1, universes u/u+1 checked. Advisories: the Koszul conjunct is an arithmetic tautology matching the node's parity sentence; some helper declarations come from modules outside stmt_deps but serve the dependencies' notions. No compile, no fixes."
  }
 }
