@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Put $R=A_T$, $S_n=(P_n)_T$, and write $J=e_!$. The slice equivalence $W_{\\mathrm{proet}}\\simeq T_{\\mathrm{proet}}/W$ is [lem-weil-proetale-weakly-etale-localization] (1), and restriction is $F|_W(V)=F(V\\to T)$ by its part (3). By [def-weil-pbc-adic-coefficient-datum], $(P_n)_T$ is the ring sheafification of the presheaf $C_{n,T}:U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),P_n)$; since $C_{n,T}(V\\to T)$ depends only on the scheme $V$, the restricted presheaf $C_{n,T}|_W$ is $C_{n,W}$ under this equivalence. The natural isomorphism $(C_{n,T}|_W)^\\#\\cong(C_{n,T}^\\#)|_W$ of [lem-pur-ring-presheaf-sheafification-localization] gives $S_n|_W=(P_n)_W$; its naturality in the presheaf, applied to the postcomposition maps $C_{b,T}\\to C_{a,T}$, shows that it carries $q_{b,a}|_W$ to $q_{b,a}$. Restriction is sectionwise and $A_T$ is the sectionwise limit of compatible families, so $R|_W=\\varprojlim_n S_n|_W=A_W$ with the same projections. Thus these are the same localized ringed sites with all their ring maps, not discrete constant $A$-coefficient categories. By [lem-pur-site-restriction-module-adjunction-exact], $J$ is exact. Choose a termwise surjective flat-term K-flat resolution $P\\to C$ by [lem-pc-kflat-resolution]. By [lem-cbc-ringed-open-flat-resolution], $JP\\to JC$ is again such a resolution. Applying exact $J$ levelwise is exact on towers, since kernels and cokernels are levelwise [lem-weil-tower-category-levelwise-abelian]; its termwise derived functor is therefore available by [lem-sf-exact-functor-derived-triangulated]. Consequently both sides of the desired comparison can be computed from this single $P$.",
+   "text": "Put $R=A_T$, $S_n=(P_n)_T$, and write $J=e_!$. The slice equivalence $W_{\\mathrm{proet}}\\simeq T_{\\mathrm{proet}}/W$ is [lem-weil-proetale-weakly-etale-localization] (1), and restriction is $F|_W(V)=F(V\\to T)$ by its part (3). By [def-weil-pbc-adic-coefficient-datum], $(P_n)_T$ is the ring sheafification of the presheaf $C_{n,T}:U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),P_n)$; since $C_{n,T}(V\\to T)$ depends only on the scheme $V$, the restricted presheaf $C_{n,T}|_W$ is $C_{n,W}$ under this equivalence. The natural isomorphism $(C_{n,T}|_W)^\\#\\cong(C_{n,T}^\\#)|_W$ of [lem-pur-ring-presheaf-sheafification-localization] gives $S_n|_W=(P_n)_W$; its naturality in the presheaf, applied to the postcomposition maps $C_{b,T}\\to C_{a,T}$, shows that it carries $q_{b,a}|_W$ to $q_{b,a}$. Restriction is sectionwise and $A_T$ is the sectionwise limit of compatible families, so $R|_W=\\varprojlim_n S_n|_W=A_W$ with the same projections. Thus these are the same localized ringed sites with all their ring maps, not discrete constant $A$-coefficient categories. By [lem-pur-site-restriction-module-adjunction-exact], $J$ is exact. Choose a termwise surjective flat-term K-flat resolution $P\\to C$ by [lem-pc-kflat-resolution]. By [lem-cbc-ringed-open-flat-resolution], $JP\\to JC$ is again such a resolution. Applying exact $J$ levelwise is exact on towers, since kernels and cokernels are levelwise [lem-weil-tower-category-levelwise-abelian]; its termwise derived functor is therefore available by [lem-sf-exact-functor-derived-triangulated]. Consequently both sides of the desired comparison can be computed from this single $P$. For the concrete site-equivalence transport used in Lean, first reindex ring and module sheaves sectionwise. This is an algebraic inverse image. Scalar extension along the coefficient-ring isomorphism is the same module transport by [lem-weil-sheaf-scalar-extension-ring-iso]. The ringed-topos K-flat pullback theorem [lem-weil-pbc-ringed-topos-kflat-pullback] proves that this transport preserves K-flatness and flat terms, so the ringed-slice resolution theorem applies to the actual functor used here.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
     "def-weil-pbc-adic-coefficient-datum",
@@ -26,7 +26,9 @@
     "lem-pc-kflat-resolution",
     "lem-cbc-ringed-open-flat-resolution",
     "lem-weil-tower-category-levelwise-abelian",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
    "elementary": false,
    "source": {
@@ -35,11 +37,12 @@
    }
   },
   {
-   "text": "For a flat $R|_W$-module $G$ and an $R$-module $B$, use the ringed slice tensor formula [lem-weil-pbc-ringed-slice-extension-tensor]. Fix its canonical direction $JG\\otimes_R B\\to J(G\\otimes_{R|_W}B|_W)$ as follows. The inverse is the $J\\dashv e^*$-adjunct of the open unit tensored with identity, exactly the normalization of $\\gamma^{-1}$ in [lem-sf-open-tensor-normalization]. Because $G$ and $JG$ are flat by Step 1, tensor with either is exact, so each, concentrated in degree zero, is K-flat and these derived tensors are the ordinary tensors. On the extension summand over $V\\to W$, this inverse sends $[g\\otimes b]$ to $[g]\\otimes b$: the unit sends $g$ to that same section on the open. The forward map is therefore $[g]\\otimes b\\mapsto[g\\otimes b|_W]$. These formulas respect $(rg)\\otimes b=g\\otimes rb$, addition and restrictions. The two composites are identities on the displayed tensors and hence on the sheaf morphisms by the tensor and module-sheafification universal properties [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification], with extension summands as in [def-weil-extension-by-zero-presheaf]. Apply this with $G=P^q$ and $B=S_n$. Naturality in $G$ makes it commute with $d_P^q$, so these maps give actual chain isomorphisms $\\delta_{P,n}:JP\\otimes_R S_n\\to J(P\\otimes_{R|_W}S_n|_W)$.",
+   "text": "Construct the coefficient-linear ordinary comparison using the normalized scalar-extension/restriction adjunctions of the coefficient datum and the normalized localized extension/restriction adjunction. Transport module sheaves along the concrete slice equivalence and cR,cB. The commuting ring square gives the identity-on-sections natural isomorphism between the two composite right adjoints. Uniqueness of left adjoints therefore gives an isomorphism J_R followed by scalar extension to B, versus scalar extension to C followed by J_B. Independently transpose J_R of the scalar-extension unit through scalar extension on T, using the scalar-restriction comparison. On an extension summand the resulting map sends [x] tensor 1 to [x tensor 1]; B-linearity gives [x] tensor b to [x tensor cB(b)]. The normalized localized adjunction identifies this map with the left-adjoint uniqueness isomorphism. The two adjunction Hom bijections and generation by extension summands prove uniqueness. Apply its naturality degreewise to obtain actual chain isomorphisms. This supplies the same tensor comparison required by the unit route without invoking a separate projection-formula isomorphism.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-sf-open-tensor-normalization",
-    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-sheaf-restrict-scalars",
     "def-weil-presheaf-modules-sheafification",
     "def-weil-extension-by-zero-presheaf"
    ],
@@ -50,7 +53,7 @@
    }
   },
   {
-   "text": "For any $b\\ge a$, the two composites in the transition square for $\\delta_P$ send $[p]\\otimes r$ to $[p\\otimes q_{b,a}(r)|_W]$. Thus the $\\delta_{P,n}$ and their inverses form inverse maps of actual strict tower complexes, with the specified quotient transitions of [def-weil-pbc-adic-coefficient-datum]. For $s\\in S_n$ the equality $\\delta_{P,n}([p]\\otimes rs)=[p\\otimes r|_Ws|_W]=s\\delta_{P,n}([p]\\otimes r)$ proves $S_n$-linearity. Applying extension using $S_n$ as coefficient ring or extending the same sheaf after restriction to $R$ gives the same underlying abelian sheafification; its action is uniquely extended from the same presheaf action [def-weil-presheaf-modules-sheafification]. Hence this is already a comparison of $S_n$-module complexes, and only afterwards of $R$-module complexes by [def-pc-sheaf-restrict-scalars].",
+   "text": "For any $b\\ge a$, the two composites in the transition square for $\\delta_P$ send $[p]\\otimes r$ to $[p\\otimes q_{b,a}(r)|_W]$. Thus the $\\delta_{P,n}$ and their inverses form inverse maps of actual strict tower complexes, with the specified quotient transitions of [def-weil-pbc-adic-coefficient-datum]. For $s\\in S_n$ the equality $\\delta_{P,n}([p]\\otimes rs)=[p\\otimes r|_Ws|_W]=s\\delta_{P,n}([p]\\otimes r)$ proves $S_n$-linearity. Applying extension using $S_n$ as coefficient ring or extending the same sheaf after restriction to $R$ gives the same underlying abelian sheafification; its action is uniquely extended from the same presheaf action [def-weil-presheaf-modules-sheafification]. Hence this is already a comparison of $S_n$-module complexes, and only afterwards of $R$-module complexes by [def-pc-sheaf-restrict-scalars]. In Lean, construct the inverse level maps first. Equality of maps out of the extended restricted tensor follows by the open-extension adjunction and pure-tensor generation. On a generator the transition square is exactly the inverse form of the finite coefficient quotient square. NatTrans.ofOpSequence assembles these maps; they are objectwise isomorphisms. Inverting gives the prescribed forward level maps and their uniqueness.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
     "def-weil-presheaf-modules-sheafification",
@@ -75,13 +78,12 @@
    }
   },
   {
-   "text": "For $b\\ge a$, the coefficient complex $Q_b=P\\otimes_{A_W}(P_b)_W$ is K-flat with flat terms over $(P_b)_W$ by [lem-pur-kflat-change-of-rings]. Apply [lem-cbc-ringed-open-flat-resolution] again with coefficient ring $(P_b)_T$: $JQ_b$ is K-flat over that ring. Thus both successive reductions in the normalization square are computed by ordinary tensor complexes. The normalization of [def-weil-pbc-adic-coefficient-datum] sends $(p\\otimes r)\\otimes s$ to $p\\otimes q_{b,a}(r)s$. Starting with $([p]\\otimes r)\\otimes s$, the path using $\\delta_{P,b}$, then the comparison of Step 2 over the ring $(P_b)_T$ with $G=Q_b^q$ (flat over $(P_b)_W$) and $B=(P_a)_T$, and then $J$ of normalization gives $[p\\otimes q_{b,a}(r)|_Ws|_W]$. Normalizing first on $T$ and then using $\\delta_{P,a}$ gives the identical expression. Tensor and sheafification uniqueness give equality of the chain maps. When $b=a$ this is the tensor unit $(p\\otimes r)\\otimes s\\mapsto p\\otimes rs$. For $c\\ge b\\ge a$, both composites give $[p\\otimes q_{c,a}(r)|_Wq_{b,a}(s)|_Wt|_W]$ on $(([p]\\otimes r)\\otimes s)\\otimes t$. This proves compatibility with the equal-index unit and three-index cocycle, with the quotient coefficient actions retained.",
+   "text": "The quotient normalization is proved on actual complexes, for every P and every degree, without imposing K-flatness: precompose with the inverse balancing isomorphism and use the scalar-extension adjunction to reduce to the generators with scalar 1. Both paths send (([p] tensor r) tensor s) to [p tensor q(r)|W*s|W]. The normalized scalar comparisons and the datum's balancing formula identify these expressions. Equal indices give the tensor unit. For three indices, naturality of the intermediate scalar comparison and the datum's three-index balancing cocycle give the two parenthesizations; applying the same normalized comparison preserves that cocycle. These are actual chain-map equations and remain true after localization. No separate K-flat change-of-rings theorem is needed for these ordinary normalization statements.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-cbc-ringed-open-flat-resolution",
     "def-weil-pbc-adic-coefficient-datum",
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero-presheaf"
    ],
    "elementary": false,
    "source": {
@@ -90,13 +92,16 @@
    }
   },
   {
-   "text": "For every chain map $f:P\\to P'$ between flat-term K-flat complexes, both naturality-square paths send $[p]\\otimes r$ to $[f(p)\\otimes r|_W]$. Thus $\\delta_P$ is a natural chain isomorphism on this class and induces one on its homotopy category. If $f$ is a quasi-isomorphism, $Jf$ is one by exactness, and $JP,JP'$ are K-flat by Step 1. By [lem-pur-derived-change-of-rings], tensoring either $f$ or $Jf$ with each quotient gives a quasi-isomorphism; the tower maps are quasi-isomorphisms by levelwise cohomology [lem-weil-tower-category-levelwise-abelian]. The first assertion of [lem-weil-pbc-site-derived-tensor-descent] identifies the localization of the flat-term K-flat homotopy category with $D(\\operatorname{Mod}(A_W))$. The localization universal property [lem-weil-pbc-localization-universal-property] therefore descends $\\delta$ and its inverse to a natural isomorphism $\\rho_{e,K}$. On a representative $P$ its endpoints are precisely the two reduction constructions of [def-weil-pbc-adic-coefficient-datum], since $JP$ is K-flat. This also proves independence of all representatives: comparison along any inverted quasi-isomorphism is forced by the naturality square, and these comparisons compose. The strict augmentation equality of Step 4 and the coefficient/normalization equalities of Steps 3 and 5 remain equalities under localization. No step used completeness of $K$ or quasi-compactness of $e$.",
+   "text": "Naturality of the strict module comparison gives a natural isomorphism on complexes and homotopy categories. Use the generic modelPull_existsUnique argument from [def-sp-constant-reduction-models] with ordinary reduction towers, exact open extension, exact extension on towers and the inverse strict comparison. Package the actual reduction functors, their existing counits, universal properties and computation laws as [def-weil-pbc-derived-reduction-model-data]; this changes none of those objects or maps. The generic helper is instantiated with the actual completed-coefficient module categories. Its resolving class is the flat-term K-flat complexes supplied by [lem-pc-kflat-resolution]. Their localization computes the derived category by [lem-trf-right-fraction-dense-subcategory] and the localization universal property [lem-weil-pbc-localization-universal-property]. The reduction tower counits of [def-weil-pbc-adic-coefficient-datum] are invertible on K-flat complexes; Step 1 supplies K-flatness after open extension. The two normalized counit transformations therefore determine a unique descended natural isomorphism. Invert it and compose its equation with the strict chain isomorphism to obtain rho in the stated direction and exactly the required computation equation. This operation also transfers uniqueness. Exactness of extension supplies both endpoint computation isomorphisms. The strict augmentation and normalization equations already proved remain equalities under localization. No completeness or quasi-compactness assumption is used. The two endpoint computations and the strict degreewise comparison specialize generic constructions, definitionally equal to their original formulas; generic ring-sheaf packaging checks category conversions before the completed coefficient limit is substituted.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pc-kflat-resolution",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-trf-right-fraction-dense-subcategory",
     "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-sp-constant-reduction-models",
+    "def-weil-pbc-derived-reduction-model-data"
    ],
    "elementary": false,
    "source": {
@@ -114,21 +119,21 @@
   "lem-cbc-ringed-open-flat-resolution",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-sf-open-tensor-normalization",
-  "def-pur-sheaf-tensor-product",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-pc-sheaf-restrict-scalars",
   "def-weil-presheaf-modules-sheafification",
   "def-weil-extension-by-zero-presheaf",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-localization-universal-property"
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-weil-pbc-localization-universal-property",
+  "def-sp-constant-reduction-models",
+  "def-weil-pbc-derived-reduction-model-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+  "place": "Tag 0GL1, using Modules on Sites 03DI, 03DJ and 03EK. C1 implements normalized adjunctions, strict transition compatibility, and resolving-class localization through the generic model comparison in ProEtaleConstantReductionModels with DerivedReductionModelData built from the actual completed-coefficient functors and counits. All thirteen original proof bodies are supplied, without changing statements. The two endpoint computation bodies and the strict degreewise comparison specialize generic constructions and are checked definitionally equal to their originals; all other existing definition bodies are unchanged."
  },
  "mathlib_searches": [
   {
@@ -349,5 +354,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Clause-by-clause check of RingedOpenStrictReduction.lean against the node. Open immersion = W : T.ProEt with [IsOpenImmersion W.hom], no extra hypothesis. e_! = existing cbcOpenShriek (extension presheaf then module sheafification); coefficient identifications = asIso of the existing normalized slice maps. ρ is a unique natural iso pinned on every flat-term K-flat P to the strict map [p]⊗b ↦ [p⊗b|_W] via the datum's completedReductionTowerComplexCounit; that map's ∃! choices (cbcOpenScalarIso, cbcOpenRestrictIso, cbcStrictReductionIso) are fixed by generator formulas. Transitions, augmentations (completedReductionModuleUnit), the level-n (P_n)_T-linear comparison, normalization for a ≤ b (b = a included) and the cocycle are all present. No completeness, quasi-compactness or universe restriction. Edge cases W empty, W = T, K = 0, I = A, a = b checked. lean.statement verbatim; declarations list equals the file; only the lean field changed; no name collisions; item not dropped. All proofs sorry; source/blueprint docstrings and the six proof steps present. nt_compile --json: 60 s timeout at load 155, then clean in 42.6 s at load 137. Advisory: (1) no import cycle despite the report's caveat, since the item's transitive imports exclude the parent's module CompletedOpenExchangeTransport; the helpers from the legacy CompletedExtensionZeroComparison (cbcOpenShriek, slice maps) have no owning def node; (2) completedReductionModuleUnit's owner def-weil-pbc-completed-pullback is not in stmt_deps; (3) cocycle conjuncts 3-4 restate the datum's reductionBalance_cocycle."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261022T023431-L-821663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
