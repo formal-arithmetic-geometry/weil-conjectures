@@ -24147,3 +24147,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:15 L: merged deliver/NJ/lemma-nagata-proper-to-separated-target (reviewer PASS; first push; new nodes: 0)
 - 01:15 L: returned deliver/ND/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: 6th push after five RETURNs (NM 966655f0, NJ ca6120ce, NC 08353e52, NK 00a16f01, ND cd6dfa56). The drop list is unchange)
 - 01:15 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 01:16 L: returned deliver/A2/Sheaf.SecSmoothPurity.ScalarExtensionFunctor (reviewer RETURN: (the landing tools, head d35f796b7) the delivery did not land: lean/Sheaf/SecSmoothPurity/ScalarExtensionFunctor.lean: <)
