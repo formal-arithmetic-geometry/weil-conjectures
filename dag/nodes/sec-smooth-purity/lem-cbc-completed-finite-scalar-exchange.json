@@ -1,0 +1,138 @@
+{
+ "id": "lem-cbc-completed-finite-scalar-exchange",
+ "kind": "statement",
+ "title": "Completed-to-finite scalar compatibility of ordinary open exchange",
+ "statement": "Let d be an adic coefficient datum and sq a cartesian square of schemes with open horizontal arrows, using the completed-ring ordinary exchange [def-cbc-completed-strict-open-exchange] and normalized finite scalar coordinates [def-cbc-completed-finite-exchange-coordinates]. For every positive finite level n+1 and every module M over the finite constant coefficient ring on U, cbcFiniteTargetRes.hom at M followed by scalar restriction of singleBetaInv [lem-cbc-proetale-extension-zero-base-change] equals cbcUnderivedInverseExchange at the scalar-restricted M followed by cbcFiniteSourceRes.hom at M. These are equal morphisms of completed-ring modules on X-prime. This is an ordinary module assertion, with no complexes, resolutions, derived categories, reductions of derived objects, or inverse limits.",
+ "stmt_deps": [
+  "def-cbc-completed-strict-open-exchange",
+  "def-cbc-completed-finite-exchange-coordinates",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange identification before Rlim, ordinary coefficient compatibility in Step 8 of lem-cbc-completed-ring-strict-finite-exchange; Stacks 03DI, 03D7 and 04J0."
+ },
+ "proof": [
+  {
+   "text": "Use the two composite adjunctions for open extension followed by pullback, at finite and completed coefficients. By the mates composition identities, the mates of cbcFiniteSourceRes and cbcFiniteTargetRes are the composites of the normalized direct-image and open-restriction comparisons. The definition of cbcUnderivedInverseExchange is the inverse conjugate of cbcRightExchange. Transposing singleBetaInv gives the finite cartesian comparison: its defining open-unit adjunct and moduleSquareG are respectively the unit and pullback-composition formulas for these same composite adjunctions. Thus injectivity of the mates equivalence reduces the assertion to the square of right-adjoint comparisons. The section-normalized moduleRComp compositor and its inverse identify this finite direct-image square with restriction along the pullback-pasting site isomorphism.",
+   "uses": [
+    "def-cbc-completed-strict-open-exchange",
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-completed-finite-exchange-coordinates",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the right square on pullback-unit generators. The prescribed finite direct-image comparison is identity on each section. The prescribed finite open-restriction comparison sends the restriction of a pullback-unit generator along f to the original section restricted along the adjoint of f. The right exchange restricts along the canonical cartesian comparison from V times_U U-prime to V times_X X-prime. Therefore both composites restrict the original section along the same arrow: their two projections agree, and the fibre-product property identifies the arrows. The finite projection equations identify the completed scalar actions.",
+   "uses": [
+    "def-cbc-completed-finite-exchange-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an open immersion, choose Z to be the image of V under the open site functor and let f be the adjoint of the identity of Z. The normalized open-restriction isomorphism sends the corresponding pullback-unit generator of a section m back to m, since the presheaf map of the identity is the identity on elements. Since this comparison is an isomorphism, applying its inverse shows that every finite pullback section is this distinguished unit generator for its image. Thus the generator equality from the preceding step proves equality on every section, with no additional tensor-generation or sheafification argument. Sectionwise extensionality gives the right natural-transformation square. Apply injectivity of the mates equivalence from the first step and evaluate at M. Zero modules, the empty open, identity maps and the zero finite coefficient ring satisfy the same argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-completed-strict-open-exchange",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-completed-finite-exchange-coordinates",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange identification before Rlim, ordinary coefficient compatibility in Step 8 of lem-cbc-completed-ring-strict-finite-exchange; Stacks 03DI, 03D7 and 04J0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of an open immersion base change map commutes with restriction of scalars between sheaves of modules",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.Scheme.Modules.restrict, PresheafOfModules.pushforward.",
+   "date": "2026-10-22",
+   "verdict": "Restriction and pushforward constructions only; no normalized completed-to-finite exchange compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of canonical finite coefficient comparison with open immersion base change exchange on derived categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality",
+   "date": "2026-10-21",
+   "verdict": "Generic naturality or mates identities only; no completed-to-finite normalized exchange square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "Generic naturality or mates identities only; no completed-to-finite normalized exchange square."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|whisker)|conjugateEquiv.*(comp|whisker)",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-21",
+   "verdict": "Generic naturality or mates identities only; no completed-to-finite normalized exchange square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedRingStrictFiniteExchange",
+  "date": "2026-10-21",
+  "group": "M3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Finite-exchange identification before derived inverse limits, restricted to the ordinary coefficient-change square.",
+   "via": [
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedFiniteScalarExchange",
+  "file": "lean/Sheaf/Paper/CompletedFiniteScalarExchange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcFiniteScalarExchange_inverse",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcFiniteScalarExchange_inverse"
+  ],
+  "statement": "theorem cbcFiniteScalarExchange_inverse (n : ℕ)\n    (M : ProEtale.StrictTower.Modules (cbcFiniteRing d n) U) :\n    (cbcFiniteTargetRes d sq n).hom.app M ≫\n      (cbcFiniteRes d X' n).map\n        ((@singleBetaInv.{u} (cbcFiniteRing d n) _ U' U X' X gU j' j g\n          sq.isOpenImmersion sq.isOpenImmersion' sq.w).app M) =\n    (cbcUnderivedInverseExchange d sq).app ((cbcFiniteRes d U n).obj M) ≫\n      (cbcFiniteSourceRes d sq n).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261022T025334-L-1284842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261022T025334-L-1284842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
