@@ -42,8 +42,9 @@ cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
 
 The cohomology `Hⁱ(Y, Λ(m)) = Hⁱ(RΓ(Y, Λ_Y(m)))` of a scheme `Y` with coefficients in the Tate
 twist `Λ(m)`: the étale cohomology (`AlgebraicGeometry.Etale.cohomology`) of the twisting object
-`Λ_Y(m)` (`AlgebraicGeometry.Etale.tateTwistObject`). The exponent of `Λ` is assumed invertible on `Y`:
-otherwise `AlgebraicGeometry.Etale.tateTwistObject` is the untwisted `Λ_Y`. -/
+`Λ_Y(m)` (`AlgebraicGeometry.Etale.tateTwistObject`). The exponent of `Λ` is assumed
+invertible on `Y`: otherwise `AlgebraicGeometry.Etale.tateTwistObject` is the untwisted
+`Λ_Y`. -/
 noncomputable def cohomologyTateTwist (Y : Scheme.{u}) [HasInvertibleExponent Λ Y] (m i : ℤ) :
     ModuleCat.{u + 1} Λ :=
   (cohomology (ModuleCat.{u + 1} Λ) Y i).obj (tateTwistObject Λ Y m)

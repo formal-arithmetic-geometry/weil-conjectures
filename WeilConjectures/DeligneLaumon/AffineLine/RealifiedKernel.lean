@@ -167,13 +167,15 @@ noncomputable def realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseO
     fourierKernelTensor ψ⁻¹ (D.twistedDual b).extensionByZero
 
 /-- **The twisted dual has the conjugate traces.** If `M` is punctually `ι`-pure of a rational
-weight `w` and `ι b = q ^ w`, then at every closed point `x` of the line the traces of the powers of the
+weight `w` and `ι b = q ^ w`, then at every closed point `x` of the line the traces of the powers
+of the
 local Frobenius of `j_!M† = j_!(M^∨ ⊗ 𝓑_b)` are the complex conjugates of those of `j_!M`.
 (blueprint: `lem-fd-realified-kernel-real`, step 1) -/
 theorem map_trace_frobeniusEnd_pow_stalk_extensionByZero_twistedDual
     (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℚ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
-    (hb : ι b = (((Nat.card k₀ : ℝ) ^ (w : ℝ) : ℝ) : ℂ)) (x : (affineLine k₀).finitePoints) (m : ℕ) :
+    (hb : ι b = (((Nat.card k₀ : ℝ) ^ (w : ℝ) : ℝ) : ℂ)) (x : (affineLine k₀).finitePoints)
+    (m : ℕ) :
     ι (LinearMap.trace (PadicAlgCl l) _
         (((D.twistedDual b).extensionByZero.stalk x).frobeniusEnd ^ m)) =
       starRingEnd ℂ (ι (LinearMap.trace (PadicAlgCl l) _

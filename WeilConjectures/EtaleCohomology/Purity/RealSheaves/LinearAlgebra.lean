@@ -105,8 +105,7 @@ end EigenvalueWeight
 
 section FrobeniusModule
 
-variable {E : Type*} [Field E] [IsAlgClosed E] (ι : E →+* ℂ) (q : ℕ) {V : Type*} [AddCommGroup V]
-  [Module E V]
+variable {E : Type*} [Field E] (ι : E →+* ℂ) (q : ℕ) {V : Type*} [AddCommGroup V] [Module E V]
 
 /-- Blueprint `def-weil-frobenius-module-weights`: Weights of finite-dimensional Frobenius
 modules.
@@ -114,7 +113,7 @@ modules.
 A vector space `V` with an automorphism `F` is `ι`-pure of weight `w` if every eigenvalue `α`
 of `F` satisfies `|ι α| = q ^ (w / 2)`. The field `E` is algebraically closed, so that every
 eigenvalue of `F` lies in `E`. -/
-def IsPureFrobeniusModule (F : V ≃ₗ[E] V) (w : ℝ) : Prop :=
+def IsPureFrobeniusModule [IsAlgClosed E] (F : V ≃ₗ[E] V) (w : ℝ) : Prop :=
   ∀ α : E, Module.End.HasEigenvalue (F : Module.End E V) α → IsOfWeight ι q w α
 
 /-- Blueprint `def-weil-frobenius-module-weights`: Weights of finite-dimensional Frobenius
@@ -126,7 +125,7 @@ integer `m ≥ 0`, an `F`-stable filtration `0 = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m =
 `α` is an eigenvalue of the automorphism induced by `F` on `V_r / V_{r-1}` exactly when there
 is `v ∈ V_r` outside `V_{r-1}` with `F v - α v ∈ V_{r-1}`; the filtration is indexed by `ℕ`,
 with `V i` and `w (i + 1)` for `i < m`. -/
-def IsMixedFrobeniusModule (F : V ≃ₗ[E] V) (w : ℝ) : Prop :=
+def IsMixedFrobeniusModule [IsAlgClosed E] (F : V ≃ₗ[E] V) (w : ℝ) : Prop :=
   ∃ (m : ℕ) (Fil : ℕ → Submodule E V) (wt : ℕ → ℝ), Fil 0 = ⊥ ∧ Fil m = ⊤ ∧
     (∀ i < m, Fil i ≤ Fil (i + 1)) ∧ (∀ i, ∀ v ∈ Fil i, F v ∈ Fil i) ∧
     ∀ i < m, wt (i + 1) ≤ w ∧ ∀ (α : E) (v : V), v ∈ Fil (i + 1) → v ∉ Fil i →
@@ -136,7 +135,7 @@ variable {ι q}
 
 /-- A pure Frobenius module of weight `w` is mixed of weights at most `w`, with the filtration
 `0 ⊆ V`. -/
-theorem IsPureFrobeniusModule.isMixedFrobeniusModule {F : V ≃ₗ[E] V} {w : ℝ}
+theorem IsPureFrobeniusModule.isMixedFrobeniusModule [IsAlgClosed E] {F : V ≃ₗ[E] V} {w : ℝ}
     (h : IsPureFrobeniusModule ι q F w) : IsMixedFrobeniusModule ι q F w := by
   refine ⟨1, fun i ↦ if i = 0 then ⊥ else ⊤, fun _ ↦ w, rfl, rfl, fun i hi ↦ ?_, fun i v hv ↦ ?_,
     fun i hi ↦ ⟨le_rfl, fun α v _ hv0 hFv ↦ h α ?_⟩⟩
@@ -154,7 +153,7 @@ theorem IsPureFrobeniusModule.isMixedFrobeniusModule {F : V ≃ₗ[E] V} {w : �
     exact sub_eq_zero.1 ((Submodule.mem_bot E).1 hFv)
 
 /-- Being mixed of weights at most `w` is monotone in `w`. -/
-theorem IsMixedFrobeniusModule.mono {F : V ≃ₗ[E] V} {w w' : ℝ}
+theorem IsMixedFrobeniusModule.mono [IsAlgClosed E] {F : V ≃ₗ[E] V} {w w' : ℝ}
     (h : IsMixedFrobeniusModule ι q F w) (hw : w ≤ w') : IsMixedFrobeniusModule ι q F w' := by
   obtain ⟨m, Fil, wt, h0, hm, hle, hF, hw'⟩ := h
   exact ⟨m, Fil, wt, h0, hm, hle, hF, fun i hi ↦ ⟨(hw' i hi).1.trans hw, (hw' i hi).2⟩⟩
@@ -162,7 +161,7 @@ theorem IsMixedFrobeniusModule.mono {F : V ≃ₗ[E] V} {w w' : ℝ}
 /-- Every eigenvalue `α` of an `ι`-mixed Frobenius module of weights at most `w` satisfies
 `|ι α| ≤ q ^ (w / 2)`, for `q ≥ 1`: an eigenvector lies in a first step `V_r` of the
 filtration, and then `α` is an eigenvalue on `V_r / V_{r-1}`. -/
-theorem IsMixedFrobeniusModule.norm_le (hq : 1 ≤ q) {F : V ≃ₗ[E] V} {w : ℝ}
+theorem IsMixedFrobeniusModule.norm_le [IsAlgClosed E] (hq : 1 ≤ q) {F : V ≃ₗ[E] V} {w : ℝ}
     (h : IsMixedFrobeniusModule ι q F w) {α : E}
     (hα : Module.End.HasEigenvalue (F : Module.End E V) α) :
     ‖ι α‖ ≤ (q : ℝ) ^ (w / 2) := by

@@ -54,7 +54,8 @@ every purity map satisfying the stated coherences. Two choices of `γ` differ by
 `H⁰(X, Λ)`, and so do their traces; the canonical purity map and trace over a separably closed
 field, pinned down by the normalization on fundamental classes of points, are
 `AlgebraicGeometry.Etale.normalizedSmoothPurityIso` and `AlgebraicGeometry.Etale.smoothTrace`
-(`WeilConjectures.EtaleCohomology.Purity.Smooth.NormalizedTrace`). Likewise the composition law of `R_!` is only known to exist
+(`WeilConjectures.EtaleCohomology.Purity.Smooth.NormalizedTrace`). Likewise the composition law
+of `R_!` is only known to exist
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`), so it is an argument of
 the transitivity statement, and the composition isomorphism of `R^!` is its conjugate, as in
 the blueprint.
