@@ -241,5 +241,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-83f86a8ce (reviewer sub-agent of L); spot-checked: I read the item, both new leaves and every cited node in full. The item matches Stacks 0BD3 together with the definition of a norm of degree d at the start of section-norms. The delivery's sign correction is right: the norm is ((-1)^m b_0)^e (0BIH), which the a=1, Q/Q example confirms. Step 1: B→A is injective because a prime lies over (0), the generic point maps to the generic point, and Frac(A)/Frac(B) is finite. Step 2: B is integrally closed, using stalk normality and lem-sc-function-field-sections-glue; the generic-tool tool_use is accepted. Step 3: the norm lands in B via 00H7 and the minimal-polynomial norm formula. Steps 4-5: the charts agree through the injective generic germ, gluing works on overlaps that are only covered by affines, and the empty open is handled. Step 6: b_0 lies in the prime q contracted to B, and e≥1. In the pinned Mathlib, Algebra.norm_eq_norm_adjoin (Transitivity.lean 229) needs no separability, and the remaining declarations are at the cited lines. A purely inseparable test case gives the right norm. Both new leaves are pure algebra, not clauses of the parent, and the duplicate search found nothing. Batch-5: lem-trf-finite-domain-fraction-degree is a Mathlib leaf with empty proof_deps (fraction-field finiteness for module-finite domains). It is general algebra outside the trace-formula and Poincaré-duality assumptions, so it is accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalIntegralFiniteSheafNorm",
+  "declaration": "AlgebraicGeometry.exists_normalIntegralFiniteSheafNorm",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalIntegralFiniteSheafNorm.lean",
+  "statement": "theorem exists_normalIntegralFiniteSheafNorm {Y Z : Scheme.{u}} (p : Y ⟶ Z) [IsFinite p] [Surjective p] [IsIntegral Y] [IsIntegral Z] (hZ : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) : ∃ d : ℕ, 1 ≤ d ∧ ∃ ν : ∀ V : Z.Opens, Γ(Y, p ⁻¹ᵁ V) →* Γ(Z, V), (∀ (V W : Z.Opens) (h : W ≤ V) (b : Γ(Y, p ⁻¹ᵁ V)), ν W (Y.presheaf.map (homOfLE (p.preimage_mono h)).op b) = Z.presheaf.map (homOfLE h).op (ν V b)) ∧ (∀ (V : Z.Opens) (a : Γ(Z, V)), ν V (p.app V a) = a ^ d) ∧ (∀ (V : Z.Opens) (b : Γ(Y, p ⁻¹ᵁ V)) (y : Y) (hy : y ∈ p ⁻¹ᵁ V), Y.evaluation (p ⁻¹ᵁ V) y hy b = 0 → Z.evaluation V (p y) hy (ν V b) = 0)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90045c22e",
+  "group": "NS",
+  "result": "pass",
+  "note": "Lean exists_normalIntegralFiniteSheafNorm matches the node and Stacks 0BD3/0BCX clause by clause: IsFinite, Surjective, IsIntegral Y Z, stalks IsDomain∧IsIntegrallyClosed (recorded inline normal-domain form; IsDomain redundant, not stronger); ∃ d:ℕ, 1≤d, one MonoidHom family ν_V on all opens, restriction law in the right direction via preimage_mono, ν V (p.app V a)=a^d, vanishing via Scheme.evaluation (germ≫residue, ResidueField.lean:96) with hy defeq to p y ∈ V. Edge cases: empty open trivial, empty schemes excluded, no separability/Noetherian/affine assumption, single universe u. Node differs from the live side node only in lean (the live node has no lean record yet); statement field is verbatim the file signature; one sorry; docstrings cite 0BD3/0BCX and the blueprint id with the 6 proof steps. Duplicate search (Mathlib AG, WeilConjectures, Sheaf live/side) found nothing. No change, so no compile; worker reports a clean compile. Advisory only: plain proof-plan imports are unused by the statement."
  }
 }
