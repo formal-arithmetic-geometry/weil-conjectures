@@ -20,14 +20,35 @@
    "text": "Naturality and the unit mate equation give the first square. The coherent pullback cube, right-adjoint naturality, and theta_e naturality give the second. The counit mate equation, inverse cancellation and the last pullback comparison naturality give the third.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Re-express the same proved comparison with its two exchange diagrams retained as arguments. Each diagram field is definitionally the original corresponding factor, so the existing theorem gives this conclusion directly.",
+   "uses": [
+    "def-weil-pbc-three-step-chain-comparison",
+    "def-weil-pbc-adjunction-exchange-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a square in a coherent family, evaluate FunctorComparisonSquare at that square and apply the diagram-indexed theorem, keeping the family arguments and their category instances fixed. This is a direct specialization of the same unit, counit and cube equations.",
+   "uses": [
+    "def-weil-pbc-coefficient-derived-functor-api",
+    "def-weil-pbc-three-step-chain-comparison",
+    "def-weil-pbc-adjunction-exchange-chain"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-three-step-chain-comparison",
+  "def-weil-pbc-adjunction-exchange-chain",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
   "place": "unit_mateEquiv and mateEquiv_counit; explicit naturality calculation",
-  "note": "H2: constructive encoding and explicit categorical assembly; any remaining geometric theorem is separately identified."
+  "note": "V5: retain the original theorem and its proof, and add its fully proved diagram-indexed and coherent-family interfaces. No new coherence hypothesis or proof obligation."
  },
  "mathlib_searches": [
   {
@@ -111,7 +132,12 @@
   "statement": "theorem threeStepComparison\n    (θ : G ⋙ V ≅ U ⋙ H) (θe : Ge ⋙ Ve ≅ Ue ⋙ He)\n    (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)\n    (αG : G ⋙ T₃ ≅ T₁ ⋙ Ge) (αH : H ⋙ T₄ ≅ T₂ ⋙ He)\n    (δ : R ⋙ T₁ ≅ T₂ ⋙ Re) (δ' : S ⋙ T₃ ≅ T₄ ⋙ Se)\n    (hunit : ∀ K, T₃.map (b.unit.app K) ≫ δ'.hom.app (V.obj K) ≫\n      Se.map (αV.hom.app K) = be.unit.app (T₃.obj K))\n    (hcounit : ∀ K, Ue.map (δ.hom.app K) ≫ ae.counit.app (T₂.obj K) =\n      αU.inv.app (R.obj K) ≫ T₂.map (a.counit.app K))\n    (hcube : ∀ K, T₄.map (θ.hom.app K) ≫ αH.hom.app (U.obj K) ≫\n        He.map (αU.hom.app K) =\n      αV.hom.app (G.obj K) ≫ Ve.map (αG.hom.app K) ≫ θe.hom.app (T₁.obj K))\n    (K : C₂) :\n    Nonempty (FiniteDiscreteThreeStepComparison\n      (T₃.map (b.unit.app (G.obj (R.obj K))))\n      (T₃.map (S.map (θ.hom.app (R.obj K))))\n      (T₃.map (S.map (H.map (a.counit.app K))))\n      (be.unit.app (Ge.obj (Re.obj (T₂.obj K))))\n      (Se.map (θe.hom.app (Re.obj (T₂.obj K))))\n      (Se.map (He.map (ae.counit.app (T₂.obj K)))))",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-16"
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.Adjunction.threeStepComparison",
+   "CategoryTheory.Adjunction.threeStepComparison_chains",
+   "CategoryTheory.Adjunction.threeStepComparison_family"
+  ]
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -124,16 +150,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "V5",
   "result": "pass",
-  "landing": "20261021T021008-L-2689687",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261022T011939-L-3235863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }

@@ -15,23 +15,28 @@
  ],
  "proof": [
   {
-   "text": "The two vertical maps are qcqs: a separated finite-type scheme over Spec k has compact underlying space, so the maps are quasi-compact; their composites with the separated structure maps are separated, so the maps are separated and hence quasi-separated. Specialize the proved categorical threeStepComparison to the two etale and two internal derived adjunctions. Its coherence hypotheses are exactly P.unit, P.counit and P.square. Reverse its four vertex isomorphisms, proving the reversed square equations by inverse cancellation.",
+   "text": "The vertical maps are quasi-compact because their composites with the structure morphisms are the quasi-compact structure morphisms. They are separated because these composites are separated, hence quasi-separated. Identify the eta-expanded pullback projection family with the whole original family by reflexivity and transport P.square along that function equality while its CoefficientPullbackSquare predicate stays folded. Apply threeStepComparison_family to the actual etale functors and coefficientDerived functors, with the category families and instances fixed explicitly. The hypotheses are exactly P.unit, P.counit and the transported P.square; no derived construction is changed.",
    "uses": [
-    "lem-weil-pbc-three-step-adjunction-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the fully faithful restriction formulas for the unit and counit. The inclusion-compatibility isomorphisms are identities. Identify the underlying restricted pullback-composition isomorphisms with leftDerivedUpperStarComp. Work at the isomorphism level to transport inverses, composition and eqToIso across the inclusion; the cached square component equation identifies the result with coefficientAmbientSquare. Project this isomorphism equality to forward maps. The unit, squareTransport and counit component formulas give the three restricted step identities. Use the cached adjunction equation, unfolding the cached functors explicitly so all rewritten terms remain type-correct. In the Sheaf interface, cache the three existing restricted steps as aliases and use their proved defining equations. The equalities coefficientExchangeUnitStep_eq_original, coefficientExchangeSquareStep_eq_original, and coefficientExchangeCounitStep_eq_original certify exactly the original factors, while their implementations remain folded during the comparison check.",
-   "uses": [
+    "lem-weil-pbc-three-step-adjunction-comparison",
     "def-weil-pbc-coefficient-derived-functor-api"
    ],
    "elementary": false
   },
   {
-   "text": "Substitute the etale step component lemmas and the three restricted cached-step identities in the reversed categorical comparison. Supply the realized bounded object explicitly to the square equation. Project coefficientExchange_factorization to underlying components for the source factorization; this equation follows from boundedConstructibleBaseChange_eq_unit_square_counit and the three cache equalities. Apply F to Etale.baseChange_app and use map_comp twice for the target factorization. The total internal and etale morphisms remain the specified original exchange maps. No exchange invertibility is asserted.",
+   "text": "Prove equality of the whole internal diagrams: residueExchangeAdjunction equals coefficientDerivedAdjunction, and residueExchangeSquare equals coefficientAmbientSquare by the inverse composition, equality transport, and forward composition formulas. Rewrite the diagram argument by this equality, and reverse the four vertex isomorphisms by inverse cancellation in each of the three squares.",
    "uses": [
-    "def-weil-pbc-derived-exchange"
+    "def-weil-pbc-adjunction-exchange-chain",
+    "def-weil-pbc-three-step-chain-comparison",
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use coefficientAmbientBoundedExchange_factorization for the source total and coefficientEtaleExchange_map_factorization for the target total. These are the original total maps by their defining equations. Work at arbitrary Lambda first and specialize to the continuous-function ring with the given torsion finiteness instance.",
+   "uses": [
+    "def-weil-pbc-ambient-typed-bounded-exchange",
+    "def-weil-pbc-ambient-typed-etale-exchange",
+    "def-weil-pbc-coefficient-exchange-diagram"
    ],
    "elementary": false
   }
@@ -39,13 +44,17 @@
  "proof_deps": [
   "lem-weil-pbc-three-step-adjunction-comparison",
   "def-weil-pbc-coefficient-derived-functor-api",
-  "def-weil-pbc-derived-exchange"
+  "def-weil-pbc-adjunction-exchange-chain",
+  "def-weil-pbc-three-step-chain-comparison",
+  "def-weil-pbc-ambient-typed-bounded-exchange",
+  "def-weil-pbc-ambient-typed-etale-exchange",
+  "def-weil-pbc-coefficient-exchange-diagram"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
-  "place": "map_restrictFullyFaithful_unit_app, map_restrictFullyFaithful_counit_app; threeStepComparison and the specified exchange component formulas",
-  "note": "E3, 2026-10-17: coefficientComparisonData_exchangeSteps is fully proved by the retained three-step route, with no new holes. The existing Sheaf FiniteDiscreteRealizationFunctor interface caches the original three specified steps as no_expose aliases, proves their defining equations and equalities to the original steps, and uses these equal aliases in finiteDiscreteExchangeSteps. The original total exchange maps, every public signature, and every adopted-source file are unchanged. The node statement has exactly its previous mathematical meaning; the definition preservation certificates are included for independent review."
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean; lean/Sheaf/Paper/BoundedExchangeAmbient.lean",
+  "place": "threeStepComparison_family; equality of whole comparison families and exchange diagrams; original total-map factorizations",
+  "note": "V5 complete diagram representation repair; all attached declarations have complete proofs and no sorry. All four vertices, three squares, original total maps, and original public theorem signatures are retained."
  },
  "mathlib_searches": [
   {
@@ -163,12 +172,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "V5",
   "result": "pass",
-  "landing": "20261017T053257-L-3673023",
+  "landing": "20261022T011939-L-3235863",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

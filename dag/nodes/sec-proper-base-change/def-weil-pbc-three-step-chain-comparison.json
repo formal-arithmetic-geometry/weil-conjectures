@@ -1,0 +1,125 @@
+{
+ "id": "def-weil-pbc-three-step-chain-comparison",
+ "kind": "definition",
+ "title": "Factored comparison indexed by its diagrams",
+ "statement": "For two three-arrow diagrams s and t in a category, a comparison means precisely four vertex isomorphisms making all three arrow squares commute. For actual arrows eta from s.obj0 to s.obj3 and theta from t.obj0 to t.obj3, a factored comparison consists of this comparison and equations eta=s.composite and theta=t.composite. It converts to the original FiniteDiscreteFactoredComparison with exactly the same vertices, arrows and equalities, and gives an isomorphism between the total arrows.",
+ "source": {
+  "document": "lean/Sheaf/Paper/FiniteDiscreteRealizationFunctor.lean",
+  "place": "Factored comparison indexed by its diagrams"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-exchange-chain",
+  "lem-weil-pbc-three-step-arrow-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Define Comparison by the existing FiniteDiscreteThreeStepComparison on the diagram fields. Store the total equations with the composite function rather than its expanded term. Recover the original record by keeping its three fields; its existing nonemptyArrowIso theorem gives the total arrow isomorphism. This is a record representation change, without any existentially chosen data or omitted square.",
+   "uses": [
+    "def-weil-pbc-adjunction-exchange-chain",
+    "lem-weil-pbc-three-step-arrow-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-exchange-chain",
+  "lem-weil-pbc-three-step-arrow-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FiniteDiscreteRealizationFunctor.lean",
+  "place": "Factored comparison indexed by its diagrams",
+  "note": "V5 complete representation API. No new proof obligations or chosen witnesses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "verdict": "Generic mates and restriction APIs found. The project already proves the whole bounded-exchange identification; the new declarations only cache actual existing data."
+  },
+  {
+   "tool": "grep",
+   "query": "map_restrictFullyFaithful_.*app|mateEquiv_counit",
+   "date": "2026-10-21",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "verdict": "Generic mates and restriction APIs found. The project already proves the whole bounded-exchange identification; the new declarations only cache actual existing data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying morphism of a restricted adjunction mate equals the ambient mate for a fully faithful subcategory inclusion",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply",
+   "verdict": "Generic mates and restriction APIs found. The project already proves the whole bounded-exchange identification; the new declarations only cache actual existing data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component of an adjunction mate is the composite of the unit, the transported square, and the counit; functors preserve this three-arrow composite",
+   "date": "2026-10-22",
+   "results": "8 hits: CategoryTheory.unit_mateEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit; CategoryTheory.mateEquiv_square; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.comp_unit; CategoryTheory.Bicategory.mateEquiv; CategoryTheory.Bicategory.mateEquiv_square.",
+   "verdict": "Mathlib supplies mate and adjunction component identities. The new diagram and typed original-total APIs retain the project-specific endpoints and use those existing identities; no existing exact endpoint-retaining project interface was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExchangeFromComparisons",
+  "date": "2026-10-22",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coefficient-exchange-from-comparisons",
+   "place": "Factored comparison indexed by its diagrams",
+   "via": [
+    "lem-weil-pbc-finite-discrete-coefficient-realization",
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteRealizationFunctor",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteRealizationFunctor.lean",
+  "declaration": "ExchangeChain.Comparison",
+  "statement": "def Comparison {C : Type*} [Category C] (s t : ExchangeChain C)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-22",
+  "declarations": [
+   "ExchangeChain.Comparison",
+   "ExchangeChain.FactoredComparison",
+   "ExchangeChain.FactoredComparison.toOriginal",
+   "ExchangeChain.FactoredComparison.nonemptyArrowIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261022T011939-L-3235863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261022T011939-L-3235863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

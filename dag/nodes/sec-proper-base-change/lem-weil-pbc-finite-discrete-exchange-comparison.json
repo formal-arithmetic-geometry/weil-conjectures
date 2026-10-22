@@ -32,23 +32,23 @@
    "elementary": true
   },
   {
-   "text": "Transport bounded constructibility to F0(L). Compose the three commuting comparison squares using the generic three-step comparison structure. The defining three-factor formulas for the specified exchange maps give their arrow isomorphism at F0(L). Naturality of the internal exchange transports it along F0(L) isomorphic to N.",
+   "text": "Transport bounded constructibility to F0(L). Apply finiteDiscreteExchangeSteps_arrowIso: compose the three comparison squares using the original generic comparison record, then rewrite both entire arrow objects by the proved original-total cache equations. Naturality of internal exchange transports the resulting isomorphism along F0(L) isomorphic to N.",
    "uses": [
-    "lem-weil-pbc-three-step-arrow-comparison"
+    "def-weil-pbc-coefficient-exchange-diagram"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-constant-internal-module-sheaf-equivalence",
   "lem-weil-pbc-finite-discrete-exchange-step-realization",
-  "lem-weil-pbc-three-step-arrow-comparison",
-  "lem-weil-pbc-constant-internal-module-sheaf-equivalence"
+  "def-weil-pbc-coefficient-exchange-diagram"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin",
-  "note": "E4: discharge the redundant coefficient-encoding hypothesis using the proved constant-ring internal-module/sheaf equivalence. The existing bounded-devissage and actual exchange-arrow proof is retained."
+  "note": "E4: discharge the redundant coefficient-encoding hypothesis using the proved constant-ring internal-module/sheaf equivalence. The existing bounded-devissage and actual exchange-arrow proof is retained. V5: restore the quarantined source, preserving its existing discharged-encoding statement, and adapt only the total-arrow consumer to the repaired diagram API. The stale lean.statement attachment is synchronized with the unchanged actual source signature."
  },
  "mathlib_searches": [
   {
@@ -100,10 +100,10 @@
   "module": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
   "file": "lean/Sheaf/Paper/FiniteDiscreteExchangeComparison.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteExchange_comparison",
-  "statement": "theorem finiteDiscreteExchange_comparison\n    (hB : (ℓ : B) = 0)\n    (sq : CommSq g' f' f g)\n    (N : ProEtale.BoundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X))\n    (hEncoding : ∀ T : Scheme.{u},\n      ∃ G : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n          (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))) ⥤\n            Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} B)),\n        G.IsEquivalence ∧ Nonempty (G ⋙\n          sheafCompose (Scheme.ProEt.topology T)\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ≅\n          Mod.forget (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n            (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n              ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :\n    ∃ (F : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology\n          (ModuleCat.{u + 1} (ULift.{u + 1} B))) ⥤\n        DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} B) Y')))\n      (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} B)))),\n      Nonempty (Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} B) ℓ (sq.asOver (Spec (.of k)))).app N).hom ≅\n        Arrow.mk (F.map ((Etale.baseChange\n          (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L)))",
+  "statement": "theorem finiteDiscreteExchange_comparison\n    (hB : (ℓ : B) = 0)\n    (sq : CommSq g' f' f g)\n    (N : ProEtale.BoundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X)) :\n    haveI : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=\n      .torsion B 1 (by rw [pow_one]; exact hB)\n    ∃ (F : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology\n          (ModuleCat.{u + 1} (ULift.{u + 1} B))) ⥤\n        DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} B) Y')))\n      (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} B)))),\n      Nonempty (Arrow.mk ((boundedConstructibleBaseChange\n        (Profinite.continuousMapRingObj.{u} B) ℓ (sq.asOver (Spec (.of k)))).app N).hom ≅\n        Arrow.mk (F.map ((Etale.baseChange\n          (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L)))",
   "branch": "sheaf-dag",
-  "by": "C2",
-  "date": "2026-10-16"
+  "by": "V5",
+  "date": "2026-10-22"
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -116,14 +116,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-db049",
-  "group": "E4",
+  "reviewer": "COMPILER",
+  "group": "V5",
   "result": "pass",
-  "landing": "20261016T064222-L-582365",
+  "landing": "20261022T011939-L-3235863",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node; both delivered modules compiled, and the original importer failed exactly on the removed argument while the adapted importer compiled."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-16",

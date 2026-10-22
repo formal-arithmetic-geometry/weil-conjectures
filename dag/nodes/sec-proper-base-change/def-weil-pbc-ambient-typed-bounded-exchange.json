@@ -1,0 +1,140 @@
+{
+ "id": "def-weil-pbc-ambient-typed-bounded-exchange",
+ "kind": "definition",
+ "title": "The original bounded exchange and its actual three-arrow diagram",
+ "statement": "For a condensed commutative coefficient ring Lambda and a square of schemes, form its actual ambient exchange diagram from residueExchangeAdjunction and residueExchangeSquare, retaining all four vertices. In the field and separated finite-type context of boundedConstructibleBaseChange, cache its original underlying component at a bounded constructible K with the endpoints of this diagram. The defining equation is reflexivity. The original total equals the diagram composite by the existing bounded-exchange ambient-mate theorem and the generic mate component formula. No properness, Cartesianity, or invertibility hypothesis is added.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean; lean/Sheaf/Paper/BoundedExchangeAmbient.lean",
+  "place": "Actual total derived functors; boundedConstructibleBaseChange_hom_eq_ambient"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-exchange-chain",
+  "def-weil-pbc-residue-exchange-ambient"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ambient diagram directly from the actual residue adjunctions and square. Define the typed total to be precisely the original bounded exchange component; its defining equation is reflexivity.",
+   "uses": [
+    "def-weil-pbc-adjunction-exchange-chain",
+    "def-weil-pbc-residue-exchange-ambient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use boundedConstructibleBaseChange_hom_eq_ambient for the original total and mate_eq_exchangeChain_composite for the actual mate. Transitivity gives the specified three-arrow factorization.",
+   "uses": [
+    "lem-weil-pbc-bounded-exchange-ambient",
+    "def-weil-pbc-adjunction-exchange-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold only the cached endpoints and their named functors to prove equality of entire Arrow objects with the original bounded exchange arrow; the exchange component itself remains unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-exchange-chain",
+  "def-weil-pbc-residue-exchange-ambient",
+  "lem-weil-pbc-bounded-exchange-ambient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Lean library definitions and adjunction restriction",
+  "place": "Data cache and defining equations",
+  "note": "V5 complete diagram representation repair; all attached declarations have complete proofs and no sorry. All four vertices, three squares, original total maps, and original public theorem signatures are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "verdict": "Generic mates and restriction APIs found. The project already proves the whole bounded-exchange identification; the new declarations only cache actual existing data."
+  },
+  {
+   "tool": "grep",
+   "query": "map_restrictFullyFaithful_.*app|mateEquiv_counit",
+   "date": "2026-10-21",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "verdict": "Generic mates and restriction APIs found. The project already proves the whole bounded-exchange identification; the new declarations only cache actual existing data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying morphism of a restricted adjunction mate equals the ambient mate for a fully faithful subcategory inclusion",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply",
+   "verdict": "Generic mates and restriction APIs found. The project already proves the whole bounded-exchange identification; the new declarations only cache actual existing data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component of an adjunction mate is the composite of the unit, the transported square, and the counit; functors preserve this three-arrow composite",
+   "date": "2026-10-22",
+   "results": "8 hits: CategoryTheory.unit_mateEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit; CategoryTheory.mateEquiv_square; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.comp_unit; CategoryTheory.Bicategory.mateEquiv; CategoryTheory.Bicategory.mateEquiv_square.",
+   "verdict": "Mathlib supplies mate and adjunction component identities. The new diagram and typed original-total APIs retain the project-specific endpoints and use those existing identities; no existing exact endpoint-retaining project interface was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExchangeFromComparisons",
+  "date": "2026-10-22",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coefficient-exchange-from-comparisons",
+   "place": "The original bounded exchange with explicit ambient endpoints",
+   "via": [
+    "lem-weil-pbc-finite-discrete-coefficient-realization",
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteRealizationFunctor",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteRealizationFunctor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientBoundedExchange",
+  "statement": "def coefficientAmbientBoundedExchange (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ] (sq : CommSq g' f' f g) (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) : (coefficientInternalExchangeChain Λ sq K.obj).obj0 ⟶ (coefficientInternalExchangeChain Λ sq K.obj).obj3",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientInternalExchangeChain",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientBoundedExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientBoundedExchange_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientBoundedExchange_factorization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientBoundedExchange_arrow_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261022T011939-L-3235863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261022T011939-L-3235863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
