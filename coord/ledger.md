@@ -24411,3 +24411,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:58 L: returned deliver/NI/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: C1/F + G4. I read the item in full: 8 steps, no new nodes, statement unchanged from NI 2494e9c9. Step 4 is the only step)
 - 02:58 L: returned deliver/ND/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: This is the 12th push of the live, still-unsplit item; all 11 earlier pushes (NM 9666, NJ ca61, NC 0835, NK 00a1, ND cd6)
 - 02:59 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 03:00 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
