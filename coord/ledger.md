@@ -24269,3 +24269,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:59 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (reviewer RETURN: (reviewer C-8c972, head 8c97217f5) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
 - 01:59 L: merged deliver/NB/lem-sfb-affine-invertible-finite-set-section (stage 2; reviewer PASS; parallel immutable checks)
 - 02:00 L: returned deliver/H1/Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData (reviewer RETURN: (the landing tools, head eb36b8c58) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.StrictLocalSmallModel.St)
+- 02:00 L: returned deliver/NO/lem-pur-diagonal-dnc-chart-normalization (reviewer RETURN: L: independent stage-2 immutable head d9ede3d4c4ff: H3/H5 (unrepaired from 4724fdef RETURN): the Lean module is unchange)
