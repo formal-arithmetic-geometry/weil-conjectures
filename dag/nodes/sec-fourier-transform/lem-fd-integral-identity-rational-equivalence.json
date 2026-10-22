@@ -17,10 +17,11 @@
  ],
  "proof": [
   {
-   "text": "Fix $E$ and write $A=\\mathcal O_E$, $\\varpi=\\varpi_E$. Apply [lem-weil-pbc-integral-coefficient-presentation-comparison] to obtain the unique coefficient isomorphism $e_T:B_T^p\\xrightarrow{\\sim}R_{E,T}$ with $\\pi_n^s e_T=\\bar e_n\\pi_n^p$. Restriction along $e_T$ goes from the framework presentation to the PBC presentation; restriction along $e_T^{-1}$ goes back. These derived equivalences identify all finite reductions and quotient transitions. To restrict their domains, apply [lem-weil-pbc-integral-stratified-perfect-characterization]: after this coefficient identification its conditions describe exactly both integral categories, including the PBC compatible etale-origin witnesses. Its hypotheses are precisely the assumed noetherian, finite-dimensional $T$ with $\\ell$ invertible, and finite $E/\\mathbf Q_\\ell$. Thus the restrictions are defined in both directions. In the common $D(\\operatorname{Mod}(R_{E,T}))$ realization they are identity on objects and arrows. Call the forward restriction $I_{T,E}$; it preserves the prescribed finite reductions, without choosing an arbitrary equivalence of their targets.",
+   "text": "Fix $E$ and write $A=\\mathcal O_E$, $\\varpi=\\varpi_E$. Apply [lem-weil-pbc-integral-coefficient-presentation-comparison] to obtain the unique coefficient isomorphism $e_T:B_T^p\\xrightarrow{\\sim}R_{E,T}$ with $\\pi_n^s e_T=\\bar e_n\\pi_n^p$. Restriction along $e_T$ goes from the framework presentation to the PBC presentation; restriction along $e_T^{-1}$ goes back. These derived equivalences identify all finite reductions and quotient transitions. To restrict their domains, apply [lem-weil-pbc-integral-stratified-perfect-characterization]: after this coefficient identification its conditions describe exactly both integral categories, including the PBC compatible etale-origin witnesses. Its hypotheses are precisely the assumed noetherian, finite-dimensional $T$ with $\\ell$ invertible, and finite $E/\\mathbf Q_\\ell$. Thus the restrictions are defined in both directions. In the common $D(\\operatorname{Mod}(R_{E,T}))$ realization they are identity on objects and arrows. Call the forward restriction $I_{T,E}$; it preserves the prescribed finite reductions, without choosing an arbitrary equivalence of their targets. In Lean reuse purCoefficientModel from def-pur-completed-coefficient-presentation-transport, reverse it, and apply Equivalence.congrFullSubcategory using integralStratifiedPerfectDetailed. This retains the prescribed integralDetailedTransport and inverse restriction functors definitionally. Extract the normalized finite reductions from IntegralCoefficientPresentation.comparison.",
    "uses": [
     "lem-weil-pbc-integral-coefficient-presentation-comparison",
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-pur-completed-coefficient-presentation-transport"
    ],
    "elementary": false,
    "source": {
@@ -29,13 +30,14 @@
    }
   },
   {
-   "text": "The integral shifts and triangles on each side are inherited from the ambient derived categories by [lem-weil-integral-constructible-triangulated] and [lem-weil-pbc-uniform-complete-triangulated]. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact coefficient restrictions of [lem-weil-pbc-integral-coefficient-presentation-comparison]. It gives triangulated derived functors and shift comparisons induced by degreewise identities: restricting a complex and shifting it gives the same terms and signed differentials as shifting first. Restriction also carries the cone with differential matrix $\\left(\\begin{smallmatrix}d_L&f\\\\0&-d_K\\end{smallmatrix}\\right)$ to the cone of the restricted $f$ with that same matrix. It preserves quasi-isomorphisms by exactness. Consequently the identity comparisons descend to the ambient derived categories and preserve their distinguished triangles, and then those in the full integral subcategories, in both directions. By [lem-weil-integral-constructible-linear], the $A$-action on the framework Hom groups is the constant-section action. The quotient formula for $e_T$ sends each constant scalar $a$ to that same scalar at every finite quotient, so its inverse does too. The coefficient restrictions therefore commute with the $A$-action on complexes and derived arrows. Hence $I_{T,E}$ and its inverse are exact $A$-linear functors with the stated identity-induced shifts.",
+   "text": "The integral shifts and triangles on each side are inherited from the ambient derived categories by [lem-weil-integral-constructible-triangulated] and [lem-weil-pbc-uniform-complete-triangulated]. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact coefficient restrictions of [lem-weil-pbc-integral-coefficient-presentation-comparison]. It gives triangulated derived functors and shift comparisons induced by degreewise identities: restricting a complex and shifting it gives the same terms and signed differentials as shifting first. Restriction also carries the cone with differential matrix $\\left(\\begin{smallmatrix}d_L&f\\\\0&-d_K\\end{smallmatrix}\\right)$ to the cone of the restricted $f$ with that same matrix. It preserves quasi-isomorphisms by exactness. Consequently the identity comparisons descend to the ambient derived categories and preserve their distinguished triangles, and then those in the full integral subcategories, in both directions. By [lem-weil-integral-constructible-linear], the $A$-action on the framework Hom groups is the constant-section action. The quotient formula for $e_T$ sends each constant scalar $a$ to that same scalar at every finite quotient, so its inverse does too. The coefficient restrictions therefore commute with the $A$-action on complexes and derived arrows. Hence $I_{T,E}$ and its inverse are exact $A$-linear functors with the stated identity-induced shifts. Descend the scalar chain action through DerivedCategory.Q. The coefficient projection equations and sheafification naturality identify completed constant sections, so the restricted chain action is the scalar multiple of the identity. Full faithfulness then gives inverse semilinearity. Use CommShift.ofComp and its compatibility theorem for all integer shift pins.",
    "uses": [
     "lem-weil-integral-constructible-triangulated",
     "lem-weil-pbc-uniform-complete-triangulated",
     "lem-weil-pbc-integral-coefficient-presentation-comparison",
     "lem-weil-integral-constructible-linear",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-integral-scalar-extension-well-defined"
    ],
    "elementary": false,
    "source": {
@@ -44,12 +46,13 @@
    }
   },
   {
-   "text": "Use the two raw rationalization definitions [def-weil-rationalization-karoubi], [def-weil-pbc-rational-category] and their scalar-localization operations [def-weil-linear-scalar-localization]. Define $J_{T,E}(K)=I_{T,E}K$ and $J_{T,E}(f\\otimes x)=I_{T,E}(f)\\otimes x$. This is balanced: $I(af)\\otimes x=aI(f)\\otimes x=I(f)\\otimes ax$; additivity gives a map on finite sums of pure tensors. It preserves identities because $I(\\mathrm{id}_K)\\otimes1=\\mathrm{id}_{IK}\\otimes1$. For composable $f,g$, its value on $(g\\otimes y)\\circ(f\\otimes x)=(gf)\\otimes yx$ is $I(g)I(f)\\otimes yx$, the composite of their images; bilinearity gives the assertion for arbitrary arrows. Also $J(z(f\\otimes x))=I(f)\\otimes zx=zJ(f\\otimes x)$ for $z\\in E$, hence $J$ is $E$-linear. Perform the identical construction with $I^{-1}$. In the common integral realization both composites are identity on objects and pure tensors, hence on all morphisms. In the concrete presentations the unit and counit are the localized restriction round trips, identity on the underlying modules. This proves equivalence and the inverse formulas. In the common realization $I(f)=f$, so these are exactly $K\\mapsto K$, $f\\otimes x\\mapsto f\\otimes x$ and the integral-object and tensor pins of [def-fd-coefficient-comparison-datum]. The definitions retain exactly the integral objects; no retracts are adjoined.",
+   "text": "Use the two raw rationalization definitions [def-weil-rationalization-karoubi], [def-weil-pbc-rational-category] and their scalar-localization operations [def-weil-linear-scalar-localization]. Define $J_{T,E}(K)=I_{T,E}K$ and $J_{T,E}(f\\otimes x)=I_{T,E}(f)\\otimes x$. This is balanced: $I(af)\\otimes x=aI(f)\\otimes x=I(f)\\otimes ax$; additivity gives a map on finite sums of pure tensors. It preserves identities because $I(\\mathrm{id}_K)\\otimes1=\\mathrm{id}_{IK}\\otimes1$. For composable $f,g$, its value on $(g\\otimes y)\\circ(f\\otimes x)=(gf)\\otimes yx$ is $I(g)I(f)\\otimes yx$, the composite of their images; bilinearity gives the assertion for arbitrary arrows. Also $J(z(f\\otimes x))=I(f)\\otimes zx=zJ(f\\otimes x)$ for $z\\in E$, hence $J$ is $E$-linear. Perform the identical construction with $I^{-1}$. In the common integral realization both composites are identity on objects and pure tensors, hence on all morphisms. In the concrete presentations the unit and counit are the localized restriction round trips, identity on the underlying modules. This proves equivalence and the inverse formulas. In the common realization $I(f)=f$, so these are exactly $K\\mapsto K$, $f\\otimes x\\mapsto f\\otimes x$ and the integral-object and tensor pins of [def-fd-coefficient-comparison-datum]. The definitions retain exactly the integral objects; no retracts are adjoined. Use extension and extensionNatIso from lem-pur-semilinear-scalar-localization with the ULift coefficient ring equivalence and its inverse. Their composition equations and localized integral unit/counit give the rational equivalence. The localization universal property identifies both coefficient maps with the displayed canonical field comparisons.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-pbc-rational-category",
     "def-weil-linear-scalar-localization",
-    "def-fd-coefficient-comparison-datum"
+    "def-fd-coefficient-comparison-datum",
+    "lem-pur-semilinear-scalar-localization"
    ],
    "elementary": true,
    "source": {
@@ -58,10 +61,11 @@
    }
   },
   {
-   "text": "Apply [lem-weil-linear-scalar-localization-triangulated] to the two integral categories: step 2 supplies their $A$-linear shifts. Their rational shifts act by $(f\\otimes x)[1]=f[1]\\otimes x$, as specified in [def-weil-linear-scalar-localization]. Thus the identity-induced integral shift comparison of step 2 localizes to the shift comparison for $J$, and likewise for its inverse. For any distinguished rational triangle $\\Delta$, the cited triangulated-localization statement gives a distinguished integral triangle $\\Delta_0$ and an isomorphism $\\Delta\\simeq Q_s\\Delta_0$. The formulas of step 3 give $JQ_s=Q_pI$ with these shift comparisons. Step 2 makes $I\\Delta_0$ distinguished; the same localization statement makes $Q_pI\\Delta_0$ distinguished. Applying $J$ to the displayed isomorphism shows that $J\\Delta$ is distinguished. Repeat with $I^{-1}$ and $J^{-1}$ to obtain exactness of the inverse. This proves all rational exactness and shift assertions while retaining the raw categories of step 3.",
+   "text": "Apply [lem-weil-linear-scalar-localization-triangulated] to the two integral categories: step 2 supplies their $A$-linear shifts. Their rational shifts act by $(f\\otimes x)[1]=f[1]\\otimes x$, as specified in [def-weil-linear-scalar-localization]. Thus the identity-induced integral shift comparison of step 2 localizes to the shift comparison for $J$, and likewise for its inverse. For any distinguished rational triangle $\\Delta$, the cited triangulated-localization statement gives a distinguished integral triangle $\\Delta_0$ and an isomorphism $\\Delta\\simeq Q_s\\Delta_0$. The formulas of step 3 give $JQ_s=Q_pI$ with these shift comparisons. Step 2 makes $I\\Delta_0$ distinguished; the same localization statement makes $Q_pI\\Delta_0$ distinguished. Applying $J$ to the displayed isomorphism shows that $J\\Delta$ is distinguished. Repeat with $I^{-1}$ and $J^{-1}$ to obtain exactness of the inverse. This proves all rational exactness and shift assertions while retaining the raw categories of step 3. For the published PBC shift use the image-triangle criterion of def-weil-pbc-common-stage-cones. Descend the shift structure through localization and its normalized functor equality; NatTrans.shift_app_comm yields the required pins for every integer, in both directions.",
    "uses": [
     "lem-weil-linear-scalar-localization-triangulated",
-    "def-weil-linear-scalar-localization"
+    "def-weil-linear-scalar-localization",
+    "def-weil-pbc-common-stage-cones"
    ],
    "elementary": false,
    "source": {
@@ -81,12 +85,16 @@
   "def-weil-pbc-rational-category",
   "def-weil-linear-scalar-localization",
   "def-fd-coefficient-comparison-datum",
-  "lem-weil-linear-scalar-localization-triangulated"
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-pbc-common-stage-cones"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-  "place": "Final sentence: coefficient comparison needed to interpret the trace function. Expanded old parent proof steps 1–2 using the existing normalized presentation lemma, integral characterization and Stacks 05R6."
+  "place": "Final sentence: coefficient comparison needed to interpret the trace function. Expanded old parent proof steps 1–2 using the existing normalized presentation lemma, integral characterization and Stacks 05R6. R6 implements the four steps using the existing completed-coefficient model, full-subcategory equivalence, derived scalar-action descent, and semilinear scalar localization; no new intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -212,5 +220,15 @@
   "group": "N7",
   "result": "pass",
   "note": "Read item node, module, report and all 6 stmt_deps plus their Lean (FdRationalStageComparison fields, integralDetailedCoefficientComparison/Transport, IntegralCoefficientPresentation level/restrictedComparison/DerivedCompatible, FiniteStagePairCategory, linear instances). Node unchanged except lean; statement verbatim; sorry-only. Hypotheses exactly the datum's (noetherian, finite Krull dim, l unit), universes d/u/w independent. I pinned by integral_identity and e (forget.mapIso e = normalized comparison); inverse = Res along e.inv (direction checked); O_E-linearity both ways; exactness both ways with inverse shift pinned to (pbcRestrict e.inv).mapDerivedCategory; finite reductions via identity-on-sections r and a unit-equation-pinned α (restriction of DerivedCompatible, not a tautology). J: objects/tensors both ways, E-linearity via fdRawScale, rational exact both ways, inverse shift tied to si; raw ScalarLocalization, no Karoubi. Docstrings, imports (public = stmt_deps, plain = proof_deps) and width OK. Advisory: unit/counit isos unpinned (as in the landed datum); second reading is a self-review. No recompile per the human's instruction; worker reports clean 6.1/6.3 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261022T013434-L-3580282",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
