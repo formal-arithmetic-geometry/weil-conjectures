@@ -17,55 +17,63 @@
  ],
  "proof": [
   {
-   "text": "Restrict the ring and modules along the canonical equivalence from the small model in the coefficient universe. This is an exact equivalence, so it preserves products and derived products. Transport scalar multiplication and the actual quotient maps. The normalized sheafification comparison ensures that sectionwise tensor maps retain their pure-tensor formulas.",
-   "uses": [
-    "def-sf-koszul-small-model-completed-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The completed exact sequence identifies the cokernel of t^(n+1) with the actual constant residue module, preserving its quotient map and transitions. Tensor the comparison with a flat-term K-flat representative. Exact countable products preserve the resulting quasi-isomorphisms and the signed Roos cone, and preserve the zero shifted-coordinate unit.",
+   "text": "Work on the actual pro-etale site, with independent site and coefficient universes. The completed exact sequence identifies the categorical cokernel of each positive uniformizer power with the restricted actual finite coefficient sheaf. Collapse the tensor with its degree-zero complex using the single-complex tensor isomorphism. The normalized independent-universe extension-tensor comparison sends the quotient unit to the actual scalar-extension augmentation x mapped to 1 tensor x. Check this equality on sections, including the casts from the normalized reduction functor.",
    "uses": [
     "lem-a1-principal-koszul-strict-replacement",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-pur-kflat-tensor-quasiiso-independent"
+    "lem-cbc-extension-tensor-comparison-independent",
+    "def-cbc-regular-quotient-cone-basic",
+    "def-pur-principal-koszul-quotient-towers",
+    "def-pur-integral-derived-operations"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the regular quotient completion unit criterion on the small model. Its distinguished triangle with the prescribed quotient components transports to exactly the defining derived-limit triangle of actual integral derived completeness. Refine to a flat-term K-flat resolution and transport along its derived isomorphism. The auxiliary finite-field datum changes none of the rings or maps; choose characteristic 2 or 3 different from l.",
+   "text": "Tensor preserves colimits, so every degree of the quotient augmentation is an epimorphism. Cancel those epimorphisms to show that the levelwise comparisons commute with differentials and with the quotient transitions. This constructs an augmentation-compatible strict tower isomorphism. Apply the Roos functor. Its biproduct-coordinate formula and the Model coordinates identify the resulting augmentation with the actual integral Roos unit on both coordinates, including its zero shifted coordinate.",
    "uses": [
-    "lem-pur-regular-quotient-completion-unit",
-    "def-weil-derived-complete",
-    "lem-pc-kflat-resolution"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-principal-quotient-completion-model",
+    "def-weil-strict-roos-model",
+    "def-pur-integral-derived-operations"
    ],
    "elementary": false
   },
   {
-   "text": "Universal left-derived uniqueness compares the given Model with this normalized quotient construction. On K-flat representatives, the two cone coordinates determine the augmentation and its unit comparison. The localization universal property extends the resulting unit equation to all derived objects. Isomorphism of those unit maps transports the criterion to the supplied Model.",
+   "text": "Choose a flat-term K-flat representative using the good-complex localization already supplied by the integral operations. Obtain the adic coefficient datum from the strict-replacement theorem, and choose an auxiliary prime larger than l. Conditions (i) and (v) of the existing independent-universe intrinsic/Roos completeness equivalence identify actual unrestricted derived completeness with invertibility of the actual integral completion unit.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the chosen K-flat representative the supplied Model counit is invertible. Its unit-computes equation, the augmentation-compatible Roos isomorphism, and the normalized actual completion comparison identify the two units after invertible postcompositions. Naturality at the representative isomorphism gives the same comparison for K. Cancel the invertible postcompositions to obtain the stated criterion. No universal derived-functor uniqueness theorem or transport to a small model is needed.",
    "uses": [
     "def-pur-principal-quotient-completion-model",
-    "lem-weil-pbc-localization-universal-property"
+    "def-pur-integral-derived-operations"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sf-koszul-small-model-completed-tensor",
   "lem-a1-principal-koszul-strict-replacement",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pur-kflat-tensor-quasiiso-independent",
-  "lem-pur-regular-quotient-completion-unit",
-  "def-weil-derived-complete",
-  "lem-pc-kflat-resolution",
+  "lem-cbc-extension-tensor-comparison-independent",
+  "def-cbc-regular-quotient-cone-basic",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pur-integral-derived-operations",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "def-pur-principal-quotient-completion-model",
-  "lem-weil-pbc-localization-universal-property"
+  "def-weil-strict-roos-model",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "def-weil-derived-complete"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
+  "group": "F2",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 3.5.1, p. 24, and Lemma 3.4.12, pp. 22-23; Stacks Tags 093M, 099B and 0A0E. This is the normalization and independent-universe specialization needed in parent proof step 3."
+  "place": "Proposition 3.5.1, p. 24, and Lemma 3.4.12, pp. 22-23; Stacks Tags 093M, 099B and 0A0E. This is the normalization and independent-universe specialization needed in parent proof step 3.",
+  "note": "Direct comparison with the existing independent-universe integral completion and its representative-normalized unit; routine categorical glue is proved privately in the item module."
  },
  "mathlib_searches": [
   {
@@ -140,9 +148,9 @@
   "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261022T013407-L-3561985",
+  "landing": "20261022T025325-L-1277513",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
