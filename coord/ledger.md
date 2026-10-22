@@ -24332,3 +24332,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:26 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 02:26 L: merged deliver/NE/lem-sfb-spectral-space-cohomology-dimension (reviewer FIX; first push; new nodes: 2)
 - 2026-10-22T02:26:49Z L: superseded stage-1 delivery NM/lem-sfb-zero-dimensional-base-affine-global at cc2370c1bfd98428820ea425b19a872e54768a54; current completion retained; packet archived at refs/superseded/NM/lem-sfb-zero-dimensional-base-affine-global/cc2370c1bfd98428820ea425b19a872e54768a54; stale return retired.
+- 02:26 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
