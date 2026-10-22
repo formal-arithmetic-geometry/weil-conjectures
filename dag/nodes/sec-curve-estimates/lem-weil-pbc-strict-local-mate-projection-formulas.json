@@ -2,13 +2,13 @@
  "id": "lem-weil-pbc-strict-local-mate-projection-formulas",
  "kind": "statement",
  "title": "StrictLocalMateProjectionFormulas",
- "statement": "For every f:X→S, geometric point s, K in D⁺(Ab(X_et)), integer n, and Q as in [def-weil-pbc-strict-local-neighbourhood-geometry], stage hypercohomology identifications compatible with neighbourhood transitions and the canonical mate projection restrictions exist [def-weil-pbc-strict-local-mate-projection-data]. No colimit or invertibility assertion is made.",
+ "statement": "For every f:X→S, geometric point s, K in D⁺(Ab(X_et)), integer n, and Q as in [def-weil-pbc-strict-local-neighbourhood-geometry], stage hypercohomology identifications compatible with neighbourhood transitions and the canonical mate projection restrictions exist [def-weil-pbc-small-model-mate-projection-data]. No colimit or invertibility assertion is made. All mate target comparisons in this statement use the small coordinate-ring colimit model of [def-weil-pbc-small-model-mate-projection-data].",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
  },
  "stmt_deps": [
-  "def-weil-pbc-strict-local-mate-projection-data"
+  "def-weil-pbc-small-model-mate-projection-data"
  ],
  "proof": [
   {
@@ -26,7 +26,7 @@
    "elementary": false
   },
   {
-   "text": "Obtain invertible canonical termwise-sections-to-hypercohomology comparisons c_i and their transition and projection squares. Define e_i as A_i followed by asIso c_i. Substitute the squares and cancel c_i followed by its inverse to prove transitions. Precompose the projection square with A_i and postcompose with the inverse strict-local target isomorphism to prove restriction. Assemble StrictLocalMateProjectionData.",
+   "text": "Obtain invertible canonical termwise-sections-to-hypercohomology comparisons c_i and their transition and projection squares. Define e_i as A_i followed by asIso c_i. Substitute the squares and cancel c_i followed by its inverse to prove transitions. Precompose the projection square with A_i and postcompose with the inverse strict-local target isomorphism to prove restriction. Assemble SmallModelStrictLocalMateProjectionData.",
    "uses": [
     "lem-weil-pbc-injective-sections-pullback-comparison",
     "lem-weil-pbc-strict-local-injective-source-sections"
@@ -96,7 +96,7 @@
   "declarations": [
    "AlgebraicGeometry.Etale.smallModel_nonempty_strictLocalMateProjectionData"
   ],
-  "statement": "theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) : Nonempty (StrictLocalMateProjectionData f s K n Q)",
+  "statement": "theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) : Nonempty (SmallModelStrictLocalMateProjectionData f s K n Q)",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
@@ -113,14 +113,58 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-a9e15",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261020T233100-L-891847",
+  "landing": "20261022T025328-L-1279972",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "H1 stage 2",
+  "old_statement": "For every f:X→S, geometric point s, K in D⁺(Ab(X_et)), integer n, and Q as in [def-weil-pbc-strict-local-neighbourhood-geometry], stage hypercohomology identifications compatible with neighbourhood transitions and the canonical mate projection restrictions exist [def-weil-pbc-strict-local-mate-projection-data]. No colimit or invertibility assertion is made.",
+  "what": "Name the same small-model target comparison explicitly and redirect its definition-node citation after retiring the ambiguous twin; all objects, maps, hypotheses and conclusions remain unchanged.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph and remark-stalk-fibre; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "holds": true,
+    "note": "The actual small-model objects, canonical maps and hypotheses are preserved exactly; consumers needing the small-model comparison cite def-weil-pbc-small-model-mate-projection-data, and the other consumers retain the same expanded formulas."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-strict-local-mate-projection-data"
+  ],
+  "old_proof": [
+   {
+    "text": "Choose an injective representative J of K with the existing Mathlib theorem, and pass its isomorphism through the bounded-below inclusion.",
+    "uses": [
+     "lem-weil-pbc-dplus-injective-representative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Obtain source-to-termwise-sections isomorphisms A and their transition and mate-restriction formulas on J.",
+    "uses": [
+     "lem-weil-pbc-strict-local-injective-source-sections"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Obtain invertible canonical termwise-sections-to-hypercohomology comparisons c_i and their transition and projection squares. Define e_i as A_i followed by asIso c_i. Substitute the squares and cancel c_i followed by its inverse to prove transitions. Precompose the projection square with A_i and postcompose with the inverse strict-local target isomorphism to prove restriction. Assemble StrictLocalMateProjectionData.",
+    "uses": [
+     "lem-weil-pbc-injective-sections-pullback-comparison",
+     "lem-weil-pbc-strict-local-injective-source-sections"
+    ],
+    "elementary": true
+   }
+  ]
+ }
 }

@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
-import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.DerivedCohomologyGermIso
+import WeilConjectures.AlgebraicGeometry.DerivedCohomologyGermIso
 
 /-! # Canonical derived sections and strict-local cohomology germs
 
@@ -53,7 +53,7 @@ theorem smallModel_isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}}
       ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P)
   let u := (Scheme.pointSmallEtale s).presheafFiber.map
     (strictLocalCohomologyGermMap L n) ≫ (smallModel_strictLocalCohomologySourceIso s L n).hom
-  have := smallModel_isIso_strictLocalCohomologyGermMap s L n
+  have := isIso_strictLocalCohomologyGermMap s L n
   have : IsIso u := by dsimp [u]; infer_instance
   refine ⟨hc.ofIsoColimit (Cocone.ext (asIso u) (fun j ↦ ?_))⟩
   exact (Category.assoc _ _ _).symm

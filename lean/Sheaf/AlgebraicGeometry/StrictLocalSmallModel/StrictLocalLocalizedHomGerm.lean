@@ -10,7 +10,6 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.SourceCocycleExactRestriction
-import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Localized Hom classes and restriction of a complex on the base
 

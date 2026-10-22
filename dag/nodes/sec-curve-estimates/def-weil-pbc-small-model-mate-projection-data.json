@@ -1,0 +1,133 @@
+{
+ "kind": "definition",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "def-weil-pbc-small-model-mate-projection-data",
+ "title": "Mate projection data on the small coordinate-ring colimit model",
+ "statement": "For f:X→S, a geometric point s, K in D⁺(Ab(X_et)), integer n and canonical geometry Q [def-weil-pbc-strict-local-neighbourhood-geometry], use the section homology map of the derived base-change mate and define its exact-sections Leray target isomorphism on T=strictHenselizationScheme(s) using [def-weil-pbc-exact-global-sections-leray]. SmallModelStrictLocalMateProjectionData gives stage identifications from derived sections of Rf_*K [def-weil-pbc-canonical-derived-cohomology-germs] to neighbourhood hypercohomology, compatible with transition pullbacks, and identifies each canonical small-model source leg [def-weil-pbc-small-model-cohomology-germs] followed by the mate with projection pullback along the transported legs Q.smallModelLegs of [lem-weil-pbc-strict-local-small-model-geometry-transport] followed by the inverse target isomorphism. It does not include a source or target colimit assertion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph and remark-stalk-fibre; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-small-model-cohomology-germs",
+  "def-weil-pbc-exact-global-sections-leray",
+  "lem-weil-pbc-strict-local-small-model-geometry-transport"
+ ],
+ "proof": [
+  {
+   "text": "Construct smallModel_strictLocalBaseChangeTargetIso by applying exactGlobalSectionsLerayHomologyIso to the small-model base-change projection, with the proved exactness of global sections on strictHenselizationScheme. This is the same explicit composite as before, with no choice or new proof obligation.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+    "def-weil-pbc-exact-global-sections-leray"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the stage isomorphisms, their transition equations, and the equality between each small-model source leg followed by the sections homology map of the derived mate and projection restriction followed by the inverse target comparison. Use the canonical neighbourhood geometry transported to the small model. Every field has the previous type verbatim up to the explicit small-model target-isomorphism name. This defines data, not its existence, and has no colimit or invertibility-of-mate assertion. No positivity or nonzero-complex assumption is introduced.",
+   "uses": [
+    "lem-weil-pbc-strict-local-small-model-geometry-transport",
+    "def-weil-pbc-small-model-cohomology-germs"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "def-weil-pbc-exact-global-sections-leray",
+  "lem-weil-pbc-strict-local-small-model-geometry-transport",
+  "def-weil-pbc-small-model-cohomology-germs"
+ ],
+ "proof_origin": {
+  "by": "H1 preserving the existing concrete small-model construction",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph and remark-stalk-fibre; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical projection restriction data for the derived base change mate with exact global sections on a strict henselization",
+   "results": "CategoryTheory.Sheaf.ΓRes, Sheaf.coneΓ_π_app, and generic scheme restriction lemmas. No strict-local mate projection package.",
+   "date": "2026-10-22",
+   "verdict": "No match; use the project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization global sections derived base change mate projection restriction data",
+   "results": "Generic scheme global sections, Proj.fromOfGlobalSections and spectrum pullback formulas; no derived mate projection package.",
+   "date": "2026-10-22",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "strictLocalBaseChangeTargetIso",
+   "results": "Unknown identifier in the search index; no hits.",
+   "date": "2026-10-22",
+   "verdict": "Use local source inspection."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|Leray|strictLocalBaseChange",
+   "results": "Mathlib supplies CategoryTheory.mateEquiv and its equations. The adopted projection data uses strictLocalization; the original Sheaf package is specific to strictHenselizationScheme. No existing separately named small-model data package.",
+   "date": "2026-10-22",
+   "verdict": "Preserve the necessary distinct model under explicit names."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData",
+  "date": "2026-10-22",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Neighbourhood-colimit and final injective-complex paragraphs: projection restriction formulas on the spectrum of the small pointed-affine coordinate-ring colimit.",
+   "via": [
+    "def-weil-pbc-strict-local-mate-projection-data",
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/MateProjectionData.lean",
+  "declaration": "AlgebraicGeometry.Etale.SmallModelStrictLocalMateProjectionData",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smallModel_strictLocalBaseChangeTargetIso",
+   "AlgebraicGeometry.Etale.SmallModelStrictLocalMateProjectionData"
+  ],
+  "statement": "structure SmallModelStrictLocalMateProjectionData\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-a9e15",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261022T025328-L-1279972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-a9e15",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261022T025328-L-1279972",
+  "kind": "interface",
+  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
+ }
+}

@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceDerivedRestriction
@@ -51,7 +52,7 @@ followed by upperStarComp.inv. Taking homology gives termwiseSectionsRestriction
 At the limit the derived-sections unit is retained, rather than inverted, which
 is exactly representativeSectionsComparison after transport by q. Exact inverse
 image commutes with homology. Exact strict-local sections and the Leray comparison
-identify the target by strictLocalBaseChangeTargetIso. These identifications give
+identify the target by smallModel_strictLocalBaseChangeTargetIso. These identifications give
 the displayed equation after its inverse. Naturality transports every step from
 J to K. This argument uses neither continuity nor injectivity of the limit
 pullback of J; negative degrees and zero complexes are covered without alteration. -/
@@ -85,9 +86,9 @@ theorem smallModel_strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}}
                 (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
               representativeSectionsComparison
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫
-              (strictLocalBaseChangeTargetIso f s K n).inv := by
+              (smallModel_strictLocalBaseChangeTargetIso f s K n).inv := by
   intro i
-  apply (cancel_mono (strictLocalBaseChangeTargetIso f s K n).hom).1
+  apply (cancel_mono (smallModel_strictLocalBaseChangeTargetIso f s K n).hom).1
   rw [Category.assoc]
   rw [smallModel_strictLocalInjectiveSourceIso_derivedRestriction f s K n Q J q i]
   have h := (injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i

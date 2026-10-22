@@ -72,18 +72,18 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.DerivedCohomologyGermIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/DerivedCohomologyGermIso.lean",
-  "declaration": "AlgebraicGeometry.Etale.smallModel_isIso_strictLocalCohomologyGermMap",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedCohomologyGermIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedCohomologyGermIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_strictLocalCohomologyGermMap",
   "declarations": [
-   "AlgebraicGeometry.Etale.smallModel_isIso_strictLocalCohomologyGermMap"
+   "AlgebraicGeometry.Etale.isIso_strictLocalCohomologyGermMap"
   ],
-  "statement": "theorem smallModel_isIso_strictLocalCohomologyGermMap {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : IsIso ((Scheme.pointSmallEtale s).presheafFiber.map (strictLocalCohomologyGermMap L n))",
+  "statement": "theorem isIso_strictLocalCohomologyGermMap {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : IsIso ((Scheme.pointSmallEtale s).presheafFiber.map (strictLocalCohomologyGermMap L n))",
   "branch": "sheaf-dag",
-  "by": "C3",
-  "date": "2026-10-21",
-  "note": "Fully proved original small-colimit-model realization. The canonical upstream realization uses strictLocalization instead of strictHenselizationScheme and cannot be imported with the original Sheaf interfaces. Restores the proved StrictLocalSmallModel dependency chain previously landed in c03b8450536."
+  "by": "H1",
+  "date": "2026-10-22",
+  "note": "The generic geometric-stalk statement is exactly the adopted source theorem after the canonical germ definitions were shared. It contains no choice of strict-local scheme model. The only consumer uses the source theorem directly; the duplicate small-model proof is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -96,14 +96,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-a9e15",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261020T233100-L-891847",
+  "landing": "20261022T025328-L-1279972",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
  },
  "lean_audit": {}
 }

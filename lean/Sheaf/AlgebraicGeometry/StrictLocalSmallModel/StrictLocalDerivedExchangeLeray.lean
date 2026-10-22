@@ -11,7 +11,6 @@ public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.InjectiveExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalSectionsUnitLeray
-import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Derived exchange and Leray before taking homology
 

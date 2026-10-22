@@ -8,7 +8,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.SourceLocalizedCocycleHomology
-import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Restriction of a cocycle through exact strict-local functors
 

@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalUnderivedSectionsMate
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedExchangeGlobalSections
@@ -79,7 +80,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Schem
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                 |>.natTrans.app K))) ≫
-        (strictLocalBaseChangeTargetIso f s K n).hom =
+        (smallModel_strictLocalBaseChangeTargetIso f s K n).hom =
     (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
       ((NatTrans.mapHomologicalComplex (smallModel_strictLocalUnderivedMateSections f s i)
         (.up ℤ)).app M) ≫

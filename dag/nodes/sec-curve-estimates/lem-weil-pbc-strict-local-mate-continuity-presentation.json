@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-strict-local-mate-continuity-presentation",
  "kind": "statement",
  "title": "Neighbourhood presentation of the strict-local derived mate",
- "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization map [def-weil-pbc-strict-henselization-limit], $X'=X\\times_S S_{(s)}$, $p:X'\\to X$, and $f':X'\\to S_{(s)}$. For every $K\\in D^+(\\operatorname{Ab}(X_{et}))$ and $n\\in\\mathbf Z$, the map $m=\\Gamma(S_{(s)},H^n(\\mathrm{mate}_K))$ has a global cohomology continuity presentation with base $T=X$, object $K$, and degree $n$ [def-weil-pbc-global-cohomology-continuity-presentation]. The source cocone, using the small-model source legs [def-weil-pbc-small-model-cohomology-germs], is colimiting and the composite of each source leg with $m$ is the canonical projection pullback. No target colimit or invertibility assertion is made.",
+ "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization map [def-weil-pbc-strict-henselization-limit], $X'=X\\times_S S_{(s)}$, $p:X'\\to X$, and $f':X'\\to S_{(s)}$. For every $K\\in D^+(\\operatorname{Ab}(X_{et}))$ and $n\\in\\mathbf Z$, the map $m=\\Gamma(S_{(s)},H^n(\\mathrm{mate}_K))$ has a global cohomology continuity presentation with base $T=X$, object $K$, and degree $n$ [def-weil-pbc-global-cohomology-continuity-presentation]. The source cocone, using the small-model source legs [def-weil-pbc-small-model-cohomology-germs], is colimiting and the composite of each source leg with $m$ is the canonical projection pullback. No target colimit or invertibility assertion is made. All mate target comparisons in this statement use the small coordinate-ring colimit model of [def-weil-pbc-small-model-mate-projection-data].",
  "source": {
   "document": "Stacks Project, etale-cohomology.tex",
   "place": "Tags 03Q9 (theorem-higher-direct-images), 03Q8 and 0GIT; presentation of neighbourhood restriction maps"
@@ -25,7 +25,7 @@
    "uses": [
     "lem-weil-pbc-strict-local-neighbourhood-geometry",
     "lem-weil-pbc-strict-local-mate-projection-formulas",
-    "def-weil-pbc-strict-local-mate-projection-data"
+    "def-weil-pbc-small-model-mate-projection-data"
    ],
    "elementary": false
   },
@@ -55,7 +55,7 @@
  "proof_deps": [
   "lem-weil-pbc-strict-local-neighbourhood-geometry",
   "lem-weil-pbc-strict-local-mate-projection-formulas",
-  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-small-model-mate-projection-data",
   "lem-weil-pbc-strict-local-cohomology-source-colimit",
   "def-weil-pbc-canonical-derived-cohomology-germs",
   "def-weil-pbc-strict-henselization-limit",
@@ -136,44 +136,33 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-a538c",
-  "group": "T2",
+  "reviewer": "C-a9e15",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261022T002439-L-1931164",
+  "landing": "20261022T025328-L-1279972",
   "kind": "interface",
-  "note": "independent cc review: 6 retired defs byte-identical to WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms; small-model sourceIso/sourceLegs moved verbatim to StrictLocalSmallModel.CohomologyGerms (smallModel_ names, iso @[irreducible]); 8 consumer adaptations = rename/import swap + exact-alias geometry theorem; 7 node statement_changes vs live statements; 10 delivered + 20 downstream modules + axioms probe compiled rc 0"
+  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
  },
  "lean_audit": {},
  "statement_change": {
   "date": "2026-10-22",
-  "by": "T2 stage 2",
-  "old_statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization map [def-weil-pbc-strict-henselization-limit], $X'=X\\times_S S_{(s)}$, $p:X'\\to X$, and $f':X'\\to S_{(s)}$. For every $K\\in D^+(\\operatorname{Ab}(X_{et}))$ and $n\\in\\mathbf Z$, the map $m=\\Gamma(S_{(s)},H^n(\\mathrm{mate}_K))$ has a global cohomology continuity presentation with base $T=X$, object $K$, and degree $n$ [def-weil-pbc-global-cohomology-continuity-presentation]. The source cocone is colimiting and the composite of each source leg with $m$ is the canonical projection pullback. No target colimit or invertibility assertion is made.",
-  "what": "Make the already used small coordinate-ring colimit model explicit after retiring the ambiguous twin module; no hypothesis, object or conclusion changes.",
+  "by": "H1 stage 2",
+  "old_statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization map [def-weil-pbc-strict-henselization-limit], $X'=X\\times_S S_{(s)}$, $p:X'\\to X$, and $f':X'\\to S_{(s)}$. For every $K\\in D^+(\\operatorname{Ab}(X_{et}))$ and $n\\in\\mathbf Z$, the map $m=\\Gamma(S_{(s)},H^n(\\mathrm{mate}_K))$ has a global cohomology continuity presentation with base $T=X$, object $K$, and degree $n$ [def-weil-pbc-global-cohomology-continuity-presentation]. The source cocone, using the small-model source legs [def-weil-pbc-small-model-cohomology-germs], is colimiting and the composite of each source leg with $m$ is the canonical projection pullback. No target colimit or invertibility assertion is made.",
+  "what": "Name the same small-model target comparison explicitly and redirect its definition-node citation after retiring the ambiguous twin; all objects, maps, hypotheses and conclusions remain unchanged.",
   "source": {
    "document": "literature/stacks-project/etale-cohomology.tex",
-   "place": "Tags 03Q8 (lemma-higher-direct-images), 03Q9 (theorem-higher-direct-images, neighbourhood-colimit and injective-complex paragraphs), and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph and remark-stalk-fibre; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
   },
   "citers": [
    {
     "id": "lem-weil-pbc-strict-local-base-change-global-homology",
     "holds": true,
-    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+    "note": "The actual small-model objects, canonical maps and hypotheses are preserved exactly; consumers needing the small-model comparison cite def-weil-pbc-small-model-mate-projection-data, and the other consumers retain the same expanded formulas."
    }
-  ],
-  "old_stmt_deps": [
-   "def-weil-pbc-scheme-conventions",
-   "def-weil-pbc-etale-sheaves",
-   "def-weil-pbc-strict-henselization-limit",
-   "def-weil-pbc-strict-henselization-restriction",
-   "def-weil-pbc-geometric-stalks",
-   "def-weil-pbc-inverse-image",
-   "def-weil-pbc-bounded-derived-subcategories",
-   "def-weil-pbc-direct-image",
-   "def-weil-pbc-global-cohomology-continuity-presentation"
   ],
   "old_proof": [
    {
-    "text": "Choose the original small-colimit neighbourhood geometry with smallModel_nonempty_strictLocalNeighbourhoodGeometry, and its projection identifications with smallModel_nonempty_strictLocalMateProjectionData. The domain diagram and source legs are the explicit derived-sections presheaf and germ map. The canonical strictLocalization implementations are a different model and are not imported.",
+    "text": "Choose canonical StrictLocalNeighbourhoodGeometry using the adopted nonempty_strictLocalNeighbourhoodGeometry theorem directly; the small-model existence wrapper is an exact alias and is unnecessary. Its smallModelLegs and smallModelIsLimit API transports the cone onto the original small coordinate-ring colimit. Choose the projection identifications with smallModel_nonempty_strictLocalMateProjectionData. The cohomology domain diagram and source legs are the explicit small-model constructions, not the canonical strictLocalization source maps.",
     "uses": [
      "lem-weil-pbc-strict-local-neighbourhood-geometry",
      "lem-weil-pbc-strict-local-mate-projection-formulas",
@@ -186,7 +175,8 @@
     "uses": [
      "lem-weil-pbc-strict-local-cohomology-source-colimit",
      "def-weil-pbc-canonical-derived-cohomology-germs",
-     "def-weil-pbc-strict-henselization-limit"
+     "def-weil-pbc-strict-henselization-limit",
+     "def-weil-pbc-small-model-cohomology-germs"
     ],
     "elementary": false
    },
@@ -210,7 +200,77 @@
    "lem-weil-pbc-strict-local-cohomology-source-colimit",
    "def-weil-pbc-canonical-derived-cohomology-germs",
    "def-weil-pbc-strict-henselization-limit",
-   "lem-weil-pbc-strict-local-small-model-geometry-transport"
-  ]
+   "lem-weil-pbc-strict-local-small-model-geometry-transport",
+   "def-weil-pbc-small-model-cohomology-germs"
+  ],
+  "previous": {
+   "date": "2026-10-22",
+   "by": "T2 stage 2",
+   "old_statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization map [def-weil-pbc-strict-henselization-limit], $X'=X\\times_S S_{(s)}$, $p:X'\\to X$, and $f':X'\\to S_{(s)}$. For every $K\\in D^+(\\operatorname{Ab}(X_{et}))$ and $n\\in\\mathbf Z$, the map $m=\\Gamma(S_{(s)},H^n(\\mathrm{mate}_K))$ has a global cohomology continuity presentation with base $T=X$, object $K$, and degree $n$ [def-weil-pbc-global-cohomology-continuity-presentation]. The source cocone is colimiting and the composite of each source leg with $m$ is the canonical projection pullback. No target colimit or invertibility assertion is made.",
+   "what": "Make the already used small coordinate-ring colimit model explicit after retiring the ambiguous twin module; no hypothesis, object or conclusion changes.",
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q8 (lemma-higher-direct-images), 03Q9 (theorem-higher-direct-images, neighbourhood-colimit and injective-complex paragraphs), and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   },
+   "citers": [
+    {
+     "id": "lem-weil-pbc-strict-local-base-change-global-homology",
+     "holds": true,
+     "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+    }
+   ],
+   "old_stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-restriction",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-global-cohomology-continuity-presentation"
+   ],
+   "old_proof": [
+    {
+     "text": "Choose the original small-colimit neighbourhood geometry with smallModel_nonempty_strictLocalNeighbourhoodGeometry, and its projection identifications with smallModel_nonempty_strictLocalMateProjectionData. The domain diagram and source legs are the explicit derived-sections presheaf and germ map. The canonical strictLocalization implementations are a different model and are not imported.",
+     "uses": [
+      "lem-weil-pbc-strict-local-neighbourhood-geometry",
+      "lem-weil-pbc-strict-local-mate-projection-formulas",
+      "def-weil-pbc-strict-local-mate-projection-data"
+     ],
+     "elementary": false
+    },
+    {
+     "text": "Apply smallModel_isColimit_strictLocalCohomologySourceLegs to the derived direct image. Assemble every field of GlobalCohomologyContinuityPresentation using this source colimit, the original geometry, the projection equations and the exact strict-local Leray target isomorphism. No continuity or invertibility theorem is used.",
+     "uses": [
+      "lem-weil-pbc-strict-local-cohomology-source-colimit",
+      "def-weil-pbc-canonical-derived-cohomology-germs",
+      "def-weil-pbc-strict-henselization-limit"
+     ],
+     "elementary": false
+    },
+    {
+     "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
+     "uses": [],
+     "elementary": false
+    },
+    {
+     "text": "The geometry parameter is now the official canonical strictLocalization model. Use [lem-weil-pbc-strict-local-small-model-geometry-transport] to express its cone on the original small colimit model. Replace legs, limit and the two component equations by smallModelLegs, smallModelIsLimit, smallModelFirst and smallModelOver. All cohomology objects, structural morphisms, source and target maps remain those in the original statement; the rest of the existing proof is unchanged.",
+     "uses": [
+      "lem-weil-pbc-strict-local-small-model-geometry-transport"
+     ],
+     "elementary": true
+    }
+   ],
+   "old_proof_deps": [
+    "lem-weil-pbc-strict-local-neighbourhood-geometry",
+    "lem-weil-pbc-strict-local-mate-projection-formulas",
+    "def-weil-pbc-strict-local-mate-projection-data",
+    "lem-weil-pbc-strict-local-cohomology-source-colimit",
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-local-small-model-geometry-transport"
+   ]
+  }
  }
 }

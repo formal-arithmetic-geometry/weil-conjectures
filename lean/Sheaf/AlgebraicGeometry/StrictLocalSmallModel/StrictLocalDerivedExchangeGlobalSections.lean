@@ -6,11 +6,11 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedExchangeLeray
-import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
 
 /-! # Derived exchange on global sections before neighbourhood restriction
 
@@ -39,7 +39,7 @@ adjunction factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`.
 (blueprint: lem-weil-pbc-strict-local-derived-exchange-global-sections).
 
 Proof: apply naturality of the exact strict-local sections/homology comparison
-isomorphism to the derived mate. Expand strictLocalBaseChangeTargetIso and
+isomorphism to the derived mate. Expand smallModel_strictLocalBaseChangeTargetIso and
 strictHenselizationLerayHomologyIso. The bounded-below exact homology comparison
 is the unbounded comparison at the underlying object, so it cancels its inverse.
 Apply degree-n homology to smallModel_strictLocalDerivedExchange_leray. Functoriality of
@@ -85,7 +85,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
               (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).natTrans.app K)) ≫
-      (strictLocalBaseChangeTargetIso f s K n).hom =
+      (smallModel_strictLocalBaseChangeTargetIso f s K n).hom =
     H.map (DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex b (.up ℤ)).app M)) ≫
       representativeSectionsComparison
@@ -109,7 +109,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
     dsimp only [Functor.comp_map] at hn
     change _ ≫ _ ≫ G.map ((DerivedCategory.homologyFunctor _ n).map
       (DerivedCategory.Plus.ι.map m)) ≫ _ = _
-    unfold strictLocalBaseChangeTargetIso exactGlobalSectionsLerayHomologyIso
+    unfold smallModel_strictLocalBaseChangeTargetIso exactGlobalSectionsLerayHomologyIso
     simp only [Iso.trans_hom, Functor.mapIso_hom]
     erw [← reassoc_of% hn]
     let T := (upperStar AddCommGrpCat.{v + 1}

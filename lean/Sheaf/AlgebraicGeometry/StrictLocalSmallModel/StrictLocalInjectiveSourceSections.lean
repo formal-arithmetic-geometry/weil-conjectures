@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
 public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceTransition
@@ -56,7 +57,7 @@ comparison. It sends a section on V times_S X to its inverse image on the limit.
 The canonical derived Hom-to-homology germ map takes that section to its homology
 class; the first leg equation of Q identifies its geometric germ with this inverse
 image. Exact inverse image commutes with homology, while exact strict-local
-sections and Leray give strictLocalBaseChangeTargetIso. The comparison from the
+sections and Leray give smallModel_strictLocalBaseChangeTargetIso. The comparison from the
 complex of sections at the limit to its derived sections is precisely the
 right-derived sections unit, even if the pulled-back J is not injective there.
 This proves the restriction formula. Naturality with q identifies all maps with
@@ -111,7 +112,7 @@ theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
                 (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
               representativeSectionsComparison
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫
-              (strictLocalBaseChangeTargetIso f s K n).inv)  := by
+              (smallModel_strictLocalBaseChangeTargetIso f s K n).inv)  := by
   let e := smallModel_strictLocalInjectiveSourceIso f s K n J q
   refine ⟨e, ?_, ?_⟩
   · intro i j a

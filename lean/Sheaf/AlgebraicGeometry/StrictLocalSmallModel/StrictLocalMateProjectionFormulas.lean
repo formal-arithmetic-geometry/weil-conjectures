@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceSections
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 
@@ -48,7 +48,7 @@ inverse-image restriction along the pullback square. The canonical cohomology ge
 map is taking the homology class of that same section. The first leg equation for Q
 identifies the representative germ restriction with the limit projection. Exact
 inverse image commutes with homology, and exact strict-local sections followed by
-Leray give strictLocalBaseChangeTargetIso. Thus the two composites agree on every
+Leray give smallModel_strictLocalBaseChangeTargetIso. Thus the two composites agree on every
 derived section, proving restriction. Naturality of all the comparisons transports
 the formulas from J to K. No continuity or invertibility of the mate is used. -/
 theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}}
@@ -56,7 +56,7 @@ theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) :
-    Nonempty (StrictLocalMateProjectionData f s K n Q) := by
+    Nonempty (SmallModelStrictLocalMateProjectionData f s K n Q) := by
   classical
   obtain ⟨b, hb⟩ := K.property
   let : K.IsGE b := (K.isGE_ι_obj_iff b).1 hb

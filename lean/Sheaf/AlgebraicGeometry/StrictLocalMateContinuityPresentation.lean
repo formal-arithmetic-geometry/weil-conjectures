@@ -100,7 +100,7 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
     sourceLegs := smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
     sourceIsColimit := hsource
-    limitIso := strictLocalBaseChangeTargetIso f s K n
+    limitIso := smallModel_strictLocalBaseChangeTargetIso f s K n
     restriction := fun i ↦ E.restriction i }⟩
 
 end AlgebraicGeometry.Etale

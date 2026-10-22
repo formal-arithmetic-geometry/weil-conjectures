@@ -2,14 +2,14 @@
  "id": "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
  "kind": "statement",
  "title": "Derived mate and the underived sections map",
- "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, K∈D⁺(Ab(X_et)), n∈ℤ, J a bounded-below complex of injective abelian etale sheaves on X and q:K≅Q(ιJ). Put M=ιJ and L=f_*M; identify Rf_*K with QL by sourceInjectiveDirectImageIso [def-weil-pbc-strict-local-injective-source-comparison]. For every pointed neighbourhood i, the composite of strictLocalComplexSectionRestriction [lem-weil-pbc-strict-local-localized-hom-germ], global sections of H^n of the derived mate, and strictLocalBaseChangeTargetIso [def-weil-pbc-strict-local-mate-projection-data] equals H^n of the chain map obtained by applying strictLocalUnderivedMateSections f s i degreewise [lem-weil-pbc-strict-local-underived-sections-mate], followed by the inverse localization/homology factorization and representativeSectionsComparison for p:X×_S S_(s)→X [lem-weil-pbc-injective-sections-pullback-comparison]. No neighbourhood cone geometry is chosen and no identification of the underived map with cone restriction is asserted.",
+ "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, K∈D⁺(Ab(X_et)), n∈ℤ, J a bounded-below complex of injective abelian etale sheaves on X and q:K≅Q(ιJ). Put M=ιJ and L=f_*M; identify Rf_*K with QL by sourceInjectiveDirectImageIso [def-weil-pbc-strict-local-injective-source-comparison]. For every pointed neighbourhood i, the composite of strictLocalComplexSectionRestriction [lem-weil-pbc-strict-local-localized-hom-germ], global sections of H^n of the derived mate, and smallModel_strictLocalBaseChangeTargetIso [def-weil-pbc-small-model-mate-projection-data] equals H^n of the chain map obtained by applying strictLocalUnderivedMateSections f s i degreewise [lem-weil-pbc-strict-local-underived-sections-mate], followed by the inverse localization/homology factorization and representativeSectionsComparison for p:X×_S S_(s)→X [lem-weil-pbc-injective-sections-pullback-comparison]. No neighbourhood cone geometry is chosen and no identification of the underived map with cone restriction is asserted. All mate target comparisons in this statement use the small coordinate-ring colimit model of [def-weil-pbc-small-model-mate-projection-data].",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
  },
  "stmt_deps": [
   "def-weil-pbc-strict-local-injective-source-comparison",
-  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-small-model-mate-projection-data",
   "def-weil-pbc-underived-exchange",
   "lem-weil-pbc-strict-local-localized-hom-germ",
   "lem-weil-pbc-injective-sections-pullback-comparison",
@@ -99,7 +99,7 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedMateSectionsFactorization",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/StrictLocalDerivedMateSectionsFactorization.lean",
   "declaration": "AlgebraicGeometry.Etale.smallModel_strictLocalComplexSectionRestriction_derivedMate",
-  "statement": "theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (J : CochainComplex.Plus (InjectiveObject (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))) (q : K.obj ≅ DerivedCategory.Q.obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M strictLocalComplexSectionRestriction s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) L (smallModel_sourceInjectiveDirectImageIso f K J q) n i ≫ ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))) ≫ (strictLocalBaseChangeTargetIso f s K n).hom = (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map ((NatTrans.mapHomologicalComplex (smallModel_strictLocalUnderivedMateSections f s i) (.up ℤ)).app M) ≫ (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫ representativeSectionsComparison (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n",
+  "statement": "theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (J : CochainComplex.Plus (InjectiveObject (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))) (q : K.obj ≅ DerivedCategory.Q.obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M strictLocalComplexSectionRestriction s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) L (smallModel_sourceInjectiveDirectImageIso f K J q) n i ≫ ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))) ≫ (smallModel_strictLocalBaseChangeTargetIso f s K n).hom = (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map ((NatTrans.mapHomologicalComplex (smallModel_strictLocalUnderivedMateSections f s i) (.up ℤ)).app M) ≫ (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫ representativeSectionsComparison (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
@@ -119,14 +119,40 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-651cf",
-  "group": "M2",
+  "reviewer": "C-a9e15",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261021T022438-L-2847349",
+  "landing": "20261022T025328-L-1279972",
   "kind": "interface",
-  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
+  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "H1 stage 2",
+  "old_statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, K∈D⁺(Ab(X_et)), n∈ℤ, J a bounded-below complex of injective abelian etale sheaves on X and q:K≅Q(ιJ). Put M=ιJ and L=f_*M; identify Rf_*K with QL by sourceInjectiveDirectImageIso [def-weil-pbc-strict-local-injective-source-comparison]. For every pointed neighbourhood i, the composite of strictLocalComplexSectionRestriction [lem-weil-pbc-strict-local-localized-hom-germ], global sections of H^n of the derived mate, and strictLocalBaseChangeTargetIso [def-weil-pbc-strict-local-mate-projection-data] equals H^n of the chain map obtained by applying strictLocalUnderivedMateSections f s i degreewise [lem-weil-pbc-strict-local-underived-sections-mate], followed by the inverse localization/homology factorization and representativeSectionsComparison for p:X×_S S_(s)→X [lem-weil-pbc-injective-sections-pullback-comparison]. No neighbourhood cone geometry is chosen and no identification of the underived map with cone restriction is asserted.",
+  "what": "Name the same small-model target comparison explicitly and redirect its definition-node citation after retiring the ambiguous twin; all objects, maps, hypotheses and conclusions remain unchanged.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph and remark-stalk-fibre; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-strict-local-complex-sections-mate",
+    "holds": true,
+    "note": "The actual small-model objects, canonical maps and hypotheses are preserved exactly; consumers needing the small-model comparison cite def-weil-pbc-small-model-mate-projection-data, and the other consumers retain the same expanded formulas."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-strict-local-injective-source-comparison",
+   "def-weil-pbc-strict-local-mate-projection-data",
+   "def-weil-pbc-underived-exchange",
+   "lem-weil-pbc-strict-local-localized-hom-germ",
+   "lem-weil-pbc-injective-sections-pullback-comparison",
+   "prop-weil-pbc-derived-inverse-image-adjunction",
+   "lem-weil-pbc-strict-local-underived-sections-mate"
+  ]
+ }
 }

@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 import WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality

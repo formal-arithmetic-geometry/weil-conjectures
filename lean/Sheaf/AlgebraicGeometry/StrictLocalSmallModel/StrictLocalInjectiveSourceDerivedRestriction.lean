@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalComplexSectionsMate
@@ -27,7 +28,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency true in
 /-- The germ leg and derived mate agree with restriction of stage hypercohomology.
 This identity stops before replacing derived restriction by termwise restriction:
 that replacement is the separate theorem `injectiveSections_strictLocal_comparison`.
@@ -51,7 +52,7 @@ Q.smallModelLegs.app i. Q.smallModelOver identifies the composite inverse image 
 projection. The resulting map to limit hypercohomology is therefore the derived
 unit, Leray, and inverse composition comparison displayed on the right.
 Exact inverse image commutes with homology; exact sections on the strict local
-base and Leray supply the target transport strictLocalBaseChangeTargetIso.hom.
+base and Leray supply the target transport smallModel_strictLocalBaseChangeTargetIso.hom.
 Naturality of localization and all these comparisons transports from M to K
 along q. No acyclicity at the limit or continuity assertion is used. The argument
 uses only functorial maps and adjunction identities, so also applies to zero
@@ -64,7 +65,8 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
     (J : CochainComplex.Plus (InjectiveObject
       (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))
     (q : K.obj ≅ DerivedCategory.Q.obj
-      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :
+      (((InjectiveObject.ι (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})).mapHomologicalComplex
+        (.up ℤ)).obj J.obj)) :
     ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
         ((smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫
@@ -78,7 +80,7 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                 |>.natTrans.app K))) ≫
-        (strictLocalBaseChangeTargetIso f s K n).hom =
+        (smallModel_strictLocalBaseChangeTargetIso f s K n).hom =
             (smallModel_strictLocalInjectiveSourceIso f s K n J q i).hom ≫
               representativeSectionsComparison
                 ((strictLocalNeighbourhoodProjection f s).app i) q n ≫
@@ -105,31 +107,32 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
           Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
             (Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i))).inv.app K.obj) := by
-  intro i
-  let M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
-    ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
-  let F := lowerStar AddCommGrpCat.{v + 1} f
-  let L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
-    (F.mapHomologicalComplex (.up ℤ)).obj M
-  have : F.PreservesInjectiveObjects :=
-    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
-      (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)
-  have (k : ℤ) : Injective (L.X k) :=
-    F.injective_obj ((InjectiveObject.ι _).obj (J.obj.X k))
-  have : L.IsKInjective := by
-    obtain ⟨b, hb⟩ := J.property
-    let : J.obj.IsStrictlyGE b := hb
-    have : L.IsStrictlyGE b := by dsimp [L, M]; infer_instance
-    exact CochainComplex.isKInjective_of_injective L b
-  let r := smallModel_sourceInjectiveDirectImageIso f K J q
-  rw [smallModel_sourceLocalizedSectionsIso_germ s _ L r n i]
-  simp only [Category.assoc]
-  have hm := smallModel_strictLocalComplexSectionRestriction_mate f s K n Q J q i
-  erw [hm]
-  have h := (injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
-  rw [h]
-  delta sourceLocalizedSectionsIso smallModel_strictLocalInjectiveSourceIso
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
-  rfl
+  set_option backward.isDefEq.respectTransparency false in
+    intro i
+    let M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
+      ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+    let F := lowerStar AddCommGrpCat.{v + 1} f
+    let L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
+      (F.mapHomologicalComplex (.up ℤ)).obj M
+    have : F.PreservesInjectiveObjects :=
+      Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+        (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)
+    have (k : ℤ) : Injective (L.X k) :=
+      F.injective_obj ((InjectiveObject.ι _).obj (J.obj.X k))
+    have : L.IsKInjective := by
+      obtain ⟨b, hb⟩ := J.property
+      let : J.obj.IsStrictlyGE b := hb
+      have : L.IsStrictlyGE b := by dsimp [L, M]; infer_instance
+      exact CochainComplex.isKInjective_of_injective L b
+    let r := smallModel_sourceInjectiveDirectImageIso f K J q
+    rw [smallModel_sourceLocalizedSectionsIso_germ s _ L r n i]
+    simp only [Category.assoc]
+    have hm := smallModel_strictLocalComplexSectionRestriction_mate f s K n Q J q i
+    erw [hm]
+    have h := (injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
+    rw [h]
+    delta sourceLocalizedSectionsIso smallModel_strictLocalInjectiveSourceIso
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+    rfl
 
 end AlgebraicGeometry.Etale
