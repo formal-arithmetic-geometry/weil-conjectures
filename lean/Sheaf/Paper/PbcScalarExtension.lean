@@ -30,6 +30,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.Linear
 import Sheaf.CategoryTheory.SemilinearScalarLocalization
+import all Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift
+import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+
+import all Sheaf.Paper.PbcActualScalarPullback
+
+import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Finite scalar extension on the actual proper-base-change categories
 
@@ -1131,6 +1138,167 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
 instance pbcAmbientScalarShift : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ :=
   (pbcAmbientScalarShift_exists l E F i T).exists.choose
 
+section NormalizedScalarAdjunctionShift
+attribute [local irreducible] completedAdicDerivedChange pbcDerivedScalarAdjunction
+
+private local instance scalarRestrictionShift
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
+    (pbcDerivedRestrict φ).CommShift ℤ :=
+  inferInstanceAs ((pbcRestrict φ).mapDerivedCategory.CommShift ℤ)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarAdjunction_complexUnit
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (L : A ⥤ B) (R : B ⥤ A) [L.Additive] [R.Additive]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (adj : L ⊣ R) (LD : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LD ⟶ L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (d : LD ⊣ R.mapDerivedCategory)
+    (hd : ∀ H, d.unit.app (DerivedCategory.Qh.obj H) ≫ R.mapDerivedCategory.map (ε.app H) ≫
+      R.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj H) =
+      DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).unit.app H))
+    (P : CochainComplex A ℤ) :
+    d.unit.app (DerivedCategory.Q.obj P) ≫
+        R.mapDerivedCategory.map
+          (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+            ε.app ((HomotopyCategory.quotient _ _).obj P) ≫
+            DerivedCategory.Qh.map
+              ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+            (DerivedCategory.quotientCompQhIso _).hom.app
+              ((L.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj P) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app P) := by
+  have hp := hd ((HomotopyCategory.quotient _ _).obj P)
+  change d.unit.app (DerivedCategory.Qh.obj
+      ((HomotopyCategory.quotient A (.up ℤ)).obj P)) ≫
+    R.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P)) ≫
+    R.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient B (.up ℤ)).obj
+      ((L.mapHomologicalComplex (.up ℤ)).obj P)) = _ at hp
+  simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
+    Adjunction.mapHomotopyCategory_unit_app_quotient] at hp
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+    Functor.mapHomotopyCategoryFactors, Functor.map_id,
+    Category.id_comp, Category.comp_id] at hp ⊢
+  erw [LD.map_id, DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp]
+  erw [R.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id, Category.comp_id,
+    Category.comp_id] at hp
+  erw [Category.comp_id]
+  erw [Category.id_comp] at hp
+  exact hp
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarAdjunction_shift :
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i T)).CommShift ℤ := by
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcScalarCoefficientMap l E F i T
+  let L := pbcExtend φ
+  let R := pbcRestrict φ
+  let LD := pbcDerivedExtend φ
+  let ε := pbcExtensionCounit φ
+  let adj := pbcScalarAdjunction φ
+  have hLD := pbcDerivedExtension_universal φ
+  have hr (X : HomotopyCategory (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E)))
+      (.up ℤ)) :
+      ∃ (K : HomotopyCategory (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E)))
+          (.up ℤ)) (f : K ⟶ X),
+        IsIso (ε.app K) ∧ HomotopyCategory.quasiIso _ (.up ℤ) f := by
+    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨K, f, hK, hf⟩ :=
+      ScalarReductionDerivedProof.kFlatResolutions.{u + 1, u, u + 1}
+        (J := ProEt.topology T) (O := pbcAdicCompletion T (pbcIntegralDatum l E)) P
+    exact ⟨_, (HomotopyCategory.quotient _ _).map f,
+      pbcExtensionCounit_isIso φ K hK,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hf⟩
+  obtain ⟨d, hd⟩ := ScalarReductionDerivedProof.derivedAdjunction_of_resolutions
+    L R adj LD ε hLD hr
+  have hn (P : CochainComplex (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :
+      d.unit.app (DerivedCategory.Q.obj P) ≫
+        (pbcDerivedRestrict φ).map (pbcComplexCounit φ P) ≫
+        R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj P) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app P) := by
+    exact scalarAdjunction_complexUnit L R adj LD ε d hd P
+  have he : d = pbcDerivedScalarAdjunction φ := by
+    unfold pbcDerivedScalarAdjunction
+    exact (pbcDerivedScalarAdjunction_exists φ).unique
+      (fun P _ ↦ hn P) (pbcDerivedScalarAdjunction_exists φ).exists.choose_spec
+  have : LD.IsRightKanExtension ε :=
+    Functor.IsLeftDerivedFunctor.isRightKanExtension LD ε
+      (HomotopyCategory.quasiIso _ (.up ℤ))
+  have : NatTrans.CommShift ε ℤ :=
+    (pbcAmbientScalarShift_exists l E F i T).exists.choose_spec
+  have hu : NatTrans.CommShift d.unit ℤ := by
+    apply CategoryTheory.normalized_unit_commShift DerivedCategory.Qh DerivedCategory.Qh
+      (L.mapHomotopyCategory (.up ℤ)) (R.mapHomotopyCategory (.up ℤ))
+      LD R.mapDerivedCategory (adj.mapHomotopyCategory (.up ℤ)) d
+      ε R.mapDerivedCategoryFactorsh.inv
+    intro H
+    apply (cancel_mono (R.mapDerivedCategoryFactorsh.hom.app
+      ((L.mapHomotopyCategory (.up ℤ)).obj H))).mp
+    simpa only [Functor.comp_obj, Functor.id_obj, Category.assoc,
+      Iso.inv_hom_id_app, Category.comp_id] using hd H
+  rw [he] at hu
+  exact Adjunction.CommShift.mk' _ ℤ hu
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarInverseConjugate_shift
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    [L₁.CommShift ℤ] [L₂.CommShift ℤ] [R₁.CommShift ℤ] [R₂.CommShift ℤ]
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) [a₁.CommShift ℤ] [a₂.CommShift ℤ]
+    (δ : R₁ ⟶ R₂) [NatTrans.CommShift δ ℤ] :
+    NatTrans.CommShift ((conjugateEquiv a₁ a₂).symm δ) ℤ := by
+  dsimp [conjugateEquiv, mateEquiv, Iso.homCongr, TwoSquare.equivNatTrans,
+    TwoSquare.natTrans, TwoSquare.mk]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarAmbientComp_shift
+    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]
+    (j : F →ₐ[Padic l] G) :
+    NatTrans.CommShift (pbcAmbientScalarComp l E F G i j T).hom ℤ := by
+  let φ := pbcScalarCoefficientMap l E F i T
+  let ψ := pbcScalarCoefficientMap l F G j T
+  let χ := pbcScalarCoefficientMap l E G (j.comp i) T
+  let h := pbcScalarCoefficientMap_comp l E F G i j T
+  let a := pbcDerivedScalarAdjunction φ
+  let b := pbcDerivedScalarAdjunction ψ
+  let c := pbcDerivedScalarAdjunction χ
+  have : a.CommShift ℤ := scalarAdjunction_shift l E F i T
+  have : b.CommShift ℤ := scalarAdjunction_shift l F G j T
+  have : c.CommShift ℤ := scalarAdjunction_shift l E G (j.comp i) T
+  have : NatTrans.CommShift (pbcDerivedRestrictComp φ ψ χ h).inv ℤ := by
+    dsimp only [pbcDerivedRestrictComp, Iso.trans_inv, Iso.symm_inv]
+    infer_instance
+  let e := Adjunction.leftAdjointCompIso a b c (pbcDerivedRestrictComp φ ψ χ h)
+  have he : pbcAmbientScalarComp l E F G i j T = e := by
+    unfold pbcAmbientScalarComp
+    apply Iso.ext
+    ext M
+    change (pbcReductionNormalization φ ψ χ h M).hom = e.hom.app M
+    dsimp [pbcReductionNormalization, pbcReductionNormalizationHom,
+      pbcReductionTransition, e]
+    simp only [Adjunction.leftAdjointCompIso_hom_app,
+      Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+    rfl
+  rw [he]
+  change NatTrans.CommShift
+    ((conjugateEquiv c (a.comp b)).symm (pbcDerivedRestrictComp φ ψ χ h).inv) ℤ
+  exact scalarInverseConjugate_shift c (a.comp b) (pbcDerivedRestrictComp φ ψ χ h).inv
+
+end NormalizedScalarAdjunctionShift
+
 variable [IsNoetherian T]
 variable [dim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
 variable [inv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
@@ -1307,6 +1475,124 @@ instance pbcRationalScalarShift :
     (pbcRationalScalarExtension l E F i T dim.out inv.out).CommShift ℤ :=
   (pbcRationalScalarShift_exists l E F i T).exists.choose
 
+attribute [local irreducible] pbcRationalScalarHom
+
+private def scalarIntegralComp
+    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]
+    (j : F →ₐ[Padic l] G) :
+    pbcEmbeddingIntegralTensor l E F i T dim.out inv.out ⋙
+        pbcEmbeddingIntegralTensor l F G j T dim.out inv.out ≅
+      pbcEmbeddingIntegralTensor l E G (j.comp i) T dim.out inv.out :=
+  NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk
+    (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l G))
+      ((pbcAmbientScalarComp l E F G i j T).app K.obj)) (fun f ↦ by
+    apply ObjectProperty.hom_ext
+    exact (pbcAmbientScalarComp l E F G i j T).hom.naturality f.hom)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarIntegralComp_shift
+    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]
+    (j : F →ₐ[Padic l] G) :
+    NatTrans.CommShift (scalarIntegralComp l E F i T G j).hom ℤ := by
+  let IEF := pbcEmbeddingIntegralTensor l E F i T dim.out inv.out
+  let IFG := pbcEmbeddingIntegralTensor l F G j T dim.out inv.out
+  let IEG := pbcEmbeddingIntegralTensor l E G (j.comp i) T dim.out inv.out
+  let JG := ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l G))
+  let JF := ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l F))
+  let JE := ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))
+  let AEF := pbcEmbeddingAmbientTensor l E F i T
+  let AFG := pbcEmbeddingAmbientTensor l F G j T
+  let eEF := pbcIntegralScalarInclusionIso l E F i T
+  let eFG := pbcIntegralScalarInclusionIso l F G j T
+  let eEG := pbcIntegralScalarInclusionIso l E G (j.comp i) T
+  have : NatTrans.CommShift eEF.hom ℤ :=
+    (pbcIntegralScalarShift_exists l E F i T).exists.choose_spec
+  have : NatTrans.CommShift eFG.hom ℤ :=
+    (pbcIntegralScalarShift_exists l F G j T).exists.choose_spec
+  have : NatTrans.CommShift eEG.hom ℤ :=
+    (pbcIntegralScalarShift_exists l E G (j.comp i) T).exists.choose_spec
+  have : NatTrans.CommShift (pbcAmbientScalarComp l E F G i j T).hom ℤ :=
+    scalarAmbientComp_shift l E F i T G j
+  have he : whiskerRight (scalarIntegralComp l E F i T G j).hom JG =
+      (Functor.associator IEF IFG JG).hom ≫ whiskerLeft IEF eFG.hom ≫
+      (Functor.associator IEF JF AFG).inv ≫ whiskerRight eEF.hom AFG ≫
+      (Functor.associator JE AEF AFG).hom ≫
+      whiskerLeft JE (pbcAmbientScalarComp l E F G i j T).hom ≫ eEG.inv := by
+    ext K
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      eEF, eFG, eEG, pbcIntegralScalarInclusionIso, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app]
+    change (pbcAmbientScalarComp l E F G i j T).hom.app K.obj =
+      𝟙 _ ≫ 𝟙 _ ≫ 𝟙 _ ≫ AFG.map (𝟙 _) ≫ 𝟙 _ ≫
+        (pbcAmbientScalarComp l E F G i j T).hom.app K.obj ≫ 𝟙 _
+    rw [AFG.map_id]
+    simp only [Category.id_comp, Category.comp_id]
+  have : NatTrans.CommShift
+      (whiskerRight (scalarIntegralComp l E F i T G j).hom JG) ℤ := by
+    rw [he]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerRight _ JG
+
+private theorem scalarMapIdComposite
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (X : C)
+    {Y : D} (f : F.obj X ⟶ Y) :
+    𝟙 _ ≫ F.map (𝟙 X) ≫ 𝟙 _ ≫ 𝟙 _ ≫ 𝟙 _ ≫ f ≫ 𝟙 _ = f := by
+  rw [F.map_id]
+  simp only [Category.id_comp, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarRationalComp_shift
+    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]
+    (j : F →ₐ[Padic l] G) :
+    NatTrans.CommShift (pbcRationalScalarComp l E F G i j T dim.out inv.out).hom ℤ := by
+  let IEF := pbcEmbeddingIntegralTensor l E F i T dim.out inv.out
+  let IFG := pbcEmbeddingIntegralTensor l F G j T dim.out inv.out
+  let QE := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+  let QF := pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)
+  let QG := pbcRationalization T (pbcIntegralDatum l G) (pbcUniformizer l G)
+  let REF := pbcRationalScalarExtension l E F i T dim.out inv.out
+  let RFG := pbcRationalScalarExtension l F G j T dim.out inv.out
+  let eEF := pbcScalarLocalizationIso l E F i T
+  let eFG := pbcScalarLocalizationIso l F G j T
+  let eEG := pbcScalarLocalizationIso l E G (j.comp i) T
+  have : NatTrans.CommShift eEF.hom ℤ :=
+    (pbcRationalScalarShift_exists l E F i T).exists.choose_spec
+  have : NatTrans.CommShift eFG.hom ℤ :=
+    (pbcRationalScalarShift_exists l F G j T).exists.choose_spec
+  have : NatTrans.CommShift eEG.hom ℤ :=
+    (pbcRationalScalarShift_exists l E G (j.comp i) T).exists.choose_spec
+  have : NatTrans.CommShift (scalarIntegralComp l E F i T G j).hom ℤ :=
+    scalarIntegralComp_shift l E F i T G j
+  have he : whiskerLeft QE
+      (pbcRationalScalarComp l E F G i j T dim.out inv.out).hom =
+      (Functor.associator QE REF RFG).inv ≫ whiskerRight eEF.inv RFG ≫
+      (Functor.associator IEF QF RFG).hom ≫ whiskerLeft IEF eFG.inv ≫
+      (Functor.associator IEF IFG QG).inv ≫
+      whiskerRight (scalarIntegralComp l E F i T G j).hom QG ≫ eEG.hom := by
+    ext K
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      eEF, eFG, eEG, pbcScalarLocalizationIso, NatIso.ofComponents_hom_app,
+      NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv]
+    change (pbcRationalScalarComp l E F G i j T dim.out inv.out).hom.app (QE.obj K) =
+      𝟙 _ ≫ RFG.map (𝟙 ((IEF ⋙ QF).obj K)) ≫ 𝟙 _ ≫ 𝟙 _ ≫ 𝟙 _ ≫
+        QG.map ((scalarIntegralComp l E F i T G j).hom.app K) ≫ 𝟙 _
+    calc
+      _ = QG.map ((scalarIntegralComp l E F i T G j).hom.app K) := by
+        unfold pbcRationalScalarComp pbcRationalScalarCompComponent scalarIntegralComp
+        rfl
+      _ = _ := (scalarMapIdComposite RFG ((IEF ⋙ QF).obj K)
+        (QG.map ((scalarIntegralComp l E F i T G j).hom.app K))).symm
+  have : NatTrans.CommShift (whiskerLeft QE
+      (pbcRationalScalarComp l E F G i j T dim.out inv.out).hom) ℤ := by
+    rw [he]
+    infer_instance
+  refine NatTrans.CommShift.of_whiskerLeft _ QE (fun K ↦ ?_)
+  exact ⟨K.obj, 𝟙 _, by infer_instance⟩
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 omit [IsNoetherian T] dim inv in
@@ -1315,6 +1601,11 @@ private theorem pbcAmbientScalarExact :
       (pbcEmbeddingAmbientTensor l E F i T).IsTriangulated := by
   let φ := pbcScalarCoefficientMap l E F i T
   have := pbcDerivedExtension_universal φ
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
   obtain ⟨σ, hσ, huniq, hadd, htri⟩ :=
     SheafOfModules.derivedScalarExtension_counitShift.{u + 1, u, u + 1, u + 2, u + 2}
       φ (pbcExtend φ)
@@ -1329,8 +1620,16 @@ private theorem pbcAmbientScalarExact :
     intro P
     simpa only [CategoryTheory.Functor.commShiftIso_comp_hom_app, Category.assoc] using
       NatTrans.shift_app_comm (pbcExtensionCounit φ) (1 : ℤ) P
-  refine ⟨hadd, ⟨fun Δ hΔ ↦ ?_⟩⟩
-  simpa only [CategoryTheory.Functor.mapTriangle_obj, he] using htri Δ hΔ
+  constructor
+  · exact hadd
+  · constructor
+    intro Δ hΔ
+    simpa only [CategoryTheory.Functor.mapTriangle_obj, he] using htri Δ hΔ
+
+private theorem scalarRationalization_triangulated :
+    (pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).IsTriangulated := by
+  exact ((pbcRationalTriangulationData l E T dim.out inv.out).choose_spec.choose_spec.2
+    ).choose_spec.choose_spec.2.choose_spec.2.1
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1358,18 +1657,16 @@ theorem pbcRationalScalarExact :
     (CategoryTheory.Functor.isTriangulated_iff_comp_right
       (pbcIntegralScalarInclusionIso l E F i T)).2 inferInstance
   have hQ : Q.IsTriangulated :=
-    ((pbcRationalTriangulationData l E T dim.out inv.out).choose_spec.choose_spec.2
-      ).choose_spec.choose_spec.2.choose_spec.2.1
+    scalarRationalization_triangulated l E T
   have hP : P.IsTriangulated :=
-    ((pbcRationalTriangulationData l F T dim.out inv.out).choose_spec.choose_spec.2
-      ).choose_spec.choose_spec.2.choose_spec.2.1
+    scalarRationalization_triangulated l F T
   let W := Rationalization.W (Submonoid.powers (pbcUniformizer l E))
     (PbcIntegralCategory l E T dim.out inv.out)
   have : Q.IsLocalization W := ScalarLocalization.pbcScalarLocalization_isLocalization _ _ _
   have := Localization.essSurj_mapArrow Q W
   have : NatTrans.CommShift (pbcScalarLocalizationIso l E F i T).hom ℤ :=
     (pbcRationalScalarShift_exists l E F i T).exists.choose_spec
-  refine ⟨?_, ?_⟩
+  constructor
   · constructor
     intros K L f g
     exact (pbcRationalScalarHom l E F i T dim.out inv.out K.obj L.obj).map_add f g
@@ -1392,6 +1689,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 section NestedFields
+attribute [local irreducible] pbcRationalScalarHom
 variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
 variable (T : Scheme.{u}) [IsNoetherian T]
 variable [dim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
@@ -1511,6 +1809,16 @@ theorem pbcStageExact {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
   exact ⟨Functor.additive_of_iso (pbcStageNormalization l Ω T h),
     Functor.isTriangulated_of_iso (pbcStageNormalization l Ω T h)⟩
 
+private theorem scalarEqToIso_shift
+    {C D I : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    (F : I → C ⥤ D) (s : ∀ i, (F i).CommShift ℤ) {i j : I} (h : i = j) :
+    letI := s i
+    letI := s j
+    NatTrans.CommShift (eqToIso (congrArg F h)).hom ℤ := by
+  subst j
+  change NatTrans.CommShift (𝟙 (F i)) ℤ
+  infer_instance
+
 /-- The specified associators commute with every integer shift.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: balancing is multiplication on shifted tensor terms, with the same signs
@@ -1519,7 +1827,26 @@ the equation. Conjugation by the tensor units preserves it. -/
 theorem pbcStageAssociatorShift {E F G : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ F) (h' : F ≤ G) :
     NatTrans.CommShift (pbcStageAssociator l Ω T h h').hom ℤ := by
-  sorry
+  have : NatTrans.CommShift (pbcStageNormalization l Ω T h).hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (pbcStageNormalization l Ω T h) ℤ
+  have : NatTrans.CommShift (pbcStageNormalization l Ω T h').hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (pbcStageNormalization l Ω T h') ℤ
+  have : NatTrans.CommShift (pbcStageNormalization l Ω T (h.trans h')).hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (pbcStageNormalization l Ω T (h.trans h')) ℤ
+  have : NatTrans.CommShift (pbcRationalScalarComp l E.val F.val G.val
+      (pbcSubfieldInclusion l Ω h) (pbcSubfieldInclusion l Ω h') T dim.out inv.out).hom ℤ :=
+    scalarRationalComp_shift l E.val F.val (pbcSubfieldInclusion l Ω h) T
+      G.val (pbcSubfieldInclusion l Ω h')
+  have : NatTrans.CommShift (eqToIso (congrArg
+      (fun i ↦ pbcRationalScalarExtension l E.val G.val i T dim.out inv.out)
+      (pbcSubfieldInclusion_comp l Ω h h'))).hom ℤ := by
+    exact scalarEqToIso_shift
+      (fun i ↦ pbcRationalScalarExtension l E.val G.val i T dim.out inv.out)
+      (fun i ↦ pbcRationalScalarShift l E.val G.val i T)
+      (pbcSubfieldInclusion_comp l Ω h h')
+  unfold pbcStageAssociator
+  simp only [Iso.trans_hom, isoWhiskerLeft_hom, isoWhiskerRight_hom, Iso.symm_hom]
+  infer_instance
 end NestedFields
 end AlgebraicGeometry.Scheme
 
@@ -1786,6 +2113,42 @@ private theorem pbcScalarCompletedPullIso_hom
   unfold pbcScalarCompletedPullIso
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarCompletedPull_unit
+    (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) :
+    (pbcActualCompletedPullUnit g (pbcIntegralDatum l F)).app
+        ((pbcEmbeddingAmbientTensor l E F i Y).obj K) ≫
+      (pbcScalarCompletedPullIso l E F i g).hom.app K =
+    (pbcScalarOrdinaryPullIso l E F i g).hom.app K ≫
+      (pbcEmbeddingAmbientTensor l E F i X).map
+        ((pbcActualCompletedPullUnit g (pbcIntegralDatum l E)).app K) := by
+  let LE := pbcActualDerivedPull g (pbcIntegralDatum l E)
+  let LF := pbcActualDerivedPull g (pbcIntegralDatum l F)
+  let CY := pbcEmbeddingAmbientTensor l E F i Y
+  let CX := pbcEmbeddingAmbientTensor l E F i X
+  let ΛF := pbcActualCompletion (pbcIntegralDatum l F) X
+  let η := pbcActualCompletionUnit (pbcIntegralDatum l F) X
+  let θ := (pbcScalarOrdinaryPullIso l E F i g).hom.app K
+  let c := pbcScalarCompletionIso l E F i X
+  have hn : η.app (LF.obj (CY.obj K)) ≫ ΛF.map θ =
+      θ ≫ η.app (CX.obj (LE.obj K)) := (η.naturality θ).symm
+  have hc : η.app (CX.obj (LE.obj K)) ≫ c.hom.app (LE.obj K) =
+      CX.map ((pbcActualCompletionUnit (pbcIntegralDatum l E) X).app (LE.obj K)) := by
+    dsimp only [c]
+    unfold pbcScalarCompletionIso
+    exact (pbcScalarCompletionIso_exists l E F i X).exists.choose_spec (LE.obj K)
+  rw [pbcScalarCompletedPullIso_hom]
+  change η.app (LF.obj (CY.obj K)) ≫ (ΛF.map θ ≫ c.hom.app (LE.obj K)) =
+    θ ≫ CX.map ((pbcActualCompletionUnit (pbcIntegralDatum l E) X).app (LE.obj K))
+  calc
+    _ = (η.app (LF.obj (CY.obj K)) ≫ ΛF.map θ) ≫ c.hom.app (LE.obj K) :=
+      (Category.assoc _ _ _).symm
+    _ = θ ≫ (η.app (CX.obj (LE.obj K)) ≫ c.hom.app (LE.obj K)) := by
+      rw [hn]
+      simp only [Category.assoc]
+    _ = _ := by rw [hc]
+
 variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {a : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f a)
 
@@ -1869,6 +2232,358 @@ theorem pbcScalarCompletedExchange_rational
         ((pbcScalarExchangeRight l E F i sq).app K)) := by
   rw [pbcScalarCompletedExchange l E F i sq]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcCompletion_hom_ext (W : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K L : PbcCompletedDerived W d) (hL : PbcIsIntrinsicallyComplete W d L)
+    (f g : (pbcActualCompletion d W).obj K ⟶ L)
+    (h : (pbcActualCompletionUnit d W).app K ≫ f =
+      (pbcActualCompletionUnit d W).app K ≫ g) : f = g := by
+  let I := ObjectProperty.ι (PbcIsIntrinsicallyComplete W d)
+  let adj := Adjunction.ofIsRightAdjoint I
+  let N : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W d) := ⟨L, hL⟩
+  let a : I.leftAdjoint.obj K ⟶ N := ObjectProperty.homMk f
+  let b : I.leftAdjoint.obj K ⟶ N := ObjectProperty.homMk g
+  have hab : adj.homEquiv K N a = adj.homEquiv K N b := by
+    change adj.unit.app K ≫ I.map a = adj.unit.app K ≫ I.map b at h
+    simpa only [Adjunction.homEquiv_unit] using h
+  exact congrArg (fun z ↦ z.hom) ((adj.homEquiv K N).injective hab)
+
+section ScalarOperationShifts
+attribute [local irreducible] completedAdicDerivedChange
+
+private theorem scalarDenseComparison_shift
+    {A B E : Type*} [Category A] [Category B] [Category E]
+    [HasShift A ℤ] [HasShift B ℤ] [HasShift E ℤ]
+    (Q : A ⥤ B) [Q.CommShift ℤ] (G L : B ⥤ E)
+    [G.CommShift ℤ] [L.CommShift ℤ] (F : A ⥤ E) [F.CommShift ℤ]
+    (α : Q ⋙ L ⟶ F) [NatTrans.CommShift α ℤ] (t : G ⟶ L)
+    [NatTrans.CommShift (whiskerLeft Q t ≫ α) ℤ]
+    (dense : ∀ Y : B, ∃ (X : A) (_e : Q.obj X ≅ Y), IsIso (α.app X)) :
+    NatTrans.CommShift t ℤ := by
+  constructor
+  intro n
+  let s : shiftFunctor B n ⋙ G ⟶ L ⋙ shiftFunctor E n :=
+    (G.commShiftIso n).hom ≫ whiskerRight t (shiftFunctor E n)
+  let u : shiftFunctor B n ⋙ G ⟶ L ⋙ shiftFunctor E n :=
+    whiskerLeft (shiftFunctor B n) t ≫ (L.commShiftIso n).hom
+  have good (X : A) [IsIso (α.app X)] : s.app (Q.obj X) = u.app (Q.obj X) := by
+    apply (cancel_mono ((shiftFunctor E n).mapIso (asIso (α.app X))).hom).1
+    change s.app (Q.obj X) ≫ (α.app X)⟦n⟧' =
+      u.app (Q.obj X) ≫ (α.app X)⟦n⟧'
+    apply (cancel_epi (G.mapIso ((Q.commShiftIso n).app X)).hom).1
+    change G.map ((Q.commShiftIso n).hom.app X) ≫ s.app (Q.obj X) ≫
+      (α.app X)⟦n⟧' = G.map ((Q.commShiftIso n).hom.app X) ≫ u.app (Q.obj X) ≫
+      (α.app X)⟦n⟧'
+    have ht := NatTrans.shift_app_comm (whiskerLeft Q t ≫ α) n X
+    have ha := NatTrans.shift_app_comm α n X
+    simp only [NatTrans.comp_app, whiskerLeft_app, Functor.map_comp,
+      Functor.commShiftIso_comp_hom_app, Category.assoc] at ht ha
+    rw [← ha, ← t.naturality_assoc] at ht
+    simpa only [s, u, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Category.assoc] using ht
+  ext Y
+  obtain ⟨X, e, hX⟩ := dense Y
+  let := hX
+  have h := congrArg (fun f ↦ f ≫ (L ⋙ shiftFunctor E n).map e.hom) (good X)
+  rw [← s.naturality, ← u.naturality] at h
+  exact (cancel_epi (((shiftFunctor B n) ⋙ G).mapIso e).hom).1 h
+
+private theorem scalarComplexComp_shift
+    {A B E : Type*} [Category A] [Category B] [Category E]
+    [Preadditive A] [Preadditive B] [Preadditive E]
+    {F : A ⥤ B} {G : B ⥤ E} {H : A ⥤ E}
+    [F.Additive] [G.Additive] [H.Additive] (e : F ⋙ G ≅ H) :
+    NatTrans.CommShift (Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom ℤ := by
+  infer_instance
+
+private theorem scalarComplexCounit_shift
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (LF : DerivedCategory C ⥤ DerivedCategory D)
+    [LF.CommShift ℤ]
+    (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [NatTrans.CommShift ε ℤ] : NatTrans.CommShift (complexCounit F LF ε) ℤ := by
+  have he : complexCounit F LF ε =
+      whiskerRight (DerivedCategory.quotientCompQhIso C).inv LF ≫
+      (Functor.associator _ _ _).hom ≫
+      whiskerLeft (HomotopyCategory.quotient C (.up ℤ)) ε ≫
+      (Functor.associator _ _ _).inv ≫
+      whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh ≫
+      (Functor.associator _ _ _).hom ≫
+      whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+        (DerivedCategory.quotientCompQhIso D).hom := by
+    ext P
+    simp only [complexCounit, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp]
+    rfl
+  rw [he]
+  infer_instance
+
+private theorem scalarComplexNatIso_shift
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F G : C ⥤ D) [F.Additive] [G.Additive] (e : F ≅ G) :
+    NatTrans.CommShift (NatIso.mapHomologicalComplex e (.up ℤ)).hom ℤ := by
+  change NatTrans.CommShift (NatTrans.mapHomologicalComplex e.hom (.up ℤ)) ℤ
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarOrdinaryPull_shift_of_counits
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (dE : AdicCoefficientDatum A) (dF : AdicCoefficientDatum B)
+    (φY : pbcAdicCompletion Y dE ⟶ pbcAdicCompletion Y dF)
+    (φX : pbcAdicCompletion X dE ⟶ pbcAdicCompletion X dF)
+    (hφ : pbcActualCoefficientRingMap Y φY ≫ pbcActualStructureMap g dF =
+      pbcActualStructureMap g dE ≫
+        (proEtaleSheafDirectImage g RingCat.{u + 1}).map
+          (pbcActualCoefficientRingMap X φX))
+    [(pbcDerivedExtend φY).CommShift ℤ] [(pbcDerivedExtend φX).CommShift ℤ]
+    [NatTrans.CommShift (pbcExtensionCounit φY) ℤ]
+    [NatTrans.CommShift (pbcExtensionCounit φX) ℤ] :
+    NatTrans.CommShift (pbcActualScalarDerivedPullIso g dE dF φY φX hφ).hom ℤ := by
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} X
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} X
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
+  let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let FY := (pbcExtend φY).mapHomologicalComplex (.up ℤ)
+  let FX := (pbcExtend φX).mapHomologicalComplex (.up ℤ)
+  let GA := (pbcActualModulePull g dE).mapHomologicalComplex (.up ℤ)
+  let GB := (pbcActualModulePull g dF).mapHomologicalComplex (.up ℤ)
+  let LY := pbcDerivedExtend φY
+  let LX := pbcDerivedExtend φX
+  let LA := pbcActualDerivedPull g dE
+  let LB := pbcActualDerivedPull g dF
+  let cy := complexCounit (pbcExtend φY) LY (pbcExtensionCounit φY)
+  let cx := complexCounit (pbcExtend φX) LX (pbcExtensionCounit φX)
+  let ca := complexCounit (pbcActualModulePull g dE) LA (pbcActualPullCounit g dE)
+  let cb := complexCounit (pbcActualModulePull g dF) LB (pbcActualPullCounit g dF)
+  let b := pbcActualScalarOrdinaryPullComplexIso g dE dF φY φX
+    hφ
+  let t := (pbcActualScalarDerivedPullIso g dE dF φY φX hφ).hom
+  let α : DerivedCategory.Q ⋙ (LA ⋙ LX) ⟶ (GA ⋙ FX) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).inv ≫ whiskerRight ca LX ≫
+      (Functor.associator _ _ _).hom ≫ whiskerLeft GA cx ≫
+        (Functor.associator _ _ _).inv
+  let β : DerivedCategory.Q ⋙ (LY ⋙ LB) ⟶ (GA ⋙ FX) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).inv ≫ whiskerRight cy LB ≫
+      (Functor.associator _ _ _).hom ≫ whiskerLeft FY cb ≫
+        (Functor.associator _ _ _).inv ≫ whiskerRight b.hom DerivedCategory.Q
+  let hcA : NatTrans.CommShift (pbcActualPullCounit g dE) ℤ :=
+    (pbcActualPullShift_exists g dE).exists.choose_spec
+  let hcB : NatTrans.CommShift (pbcActualPullCounit g dF) ℤ :=
+    (pbcActualPullShift_exists g dF).exists.choose_spec
+  let : NatTrans.CommShift cy ℤ := by
+    exact scalarComplexCounit_shift (pbcExtend φY) LY (pbcExtensionCounit φY)
+  let : NatTrans.CommShift cx ℤ := by
+    exact scalarComplexCounit_shift (pbcExtend φX) LX (pbcExtensionCounit φX)
+  let : NatTrans.CommShift ca ℤ := by
+    exact scalarComplexCounit_shift (pbcActualModulePull g dE) LA (pbcActualPullCounit g dE)
+  let : NatTrans.CommShift cb ℤ := by
+    exact scalarComplexCounit_shift (pbcActualModulePull g dF) LB (pbcActualPullCounit g dF)
+  let : NatTrans.CommShift b.hom ℤ := by
+    dsimp only [b, pbcActualScalarOrdinaryPullComplexIso, Iso.trans_hom, Iso.symm_hom]
+    let := scalarComplexNatIso_shift _ _
+      (pbcActualScalarOrdinaryPullIso g dE dF φY φX
+        hφ)
+    let := scalarComplexComp_shift
+      (Iso.refl ((pbcExtend φY) ⋙ pbcActualModulePull g dF))
+    let := scalarComplexComp_shift
+      (Iso.refl ((pbcActualModulePull g dE) ⋙ pbcExtend φX))
+    infer_instance
+  let : NatTrans.CommShift α ℤ := by dsimp only [α]; infer_instance
+  let : NatTrans.CommShift β ℤ := by dsimp only [β]; infer_instance
+  have norm : whiskerLeft DerivedCategory.Q t ≫ α = β := by
+    let t' := whiskerLeft DerivedCategory.Q t ≫ α
+    have flat (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y dE)) ℤ)
+        (hp : P.IsKFlatIndependentCoefficients)
+        (hf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+          (R := pbcAdicCompletion Y dE) (P.X n)) :
+        t'.app P = β.app P := by
+      simp only [t', α, β, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+        Functor.associator_hom_app, Functor.associator_inv_app,
+        Category.id_comp, Category.comp_id]
+      erw [Category.id_comp]
+      change t.app (DerivedCategory.Q.obj P) ≫ LX.map (pbcActualPullComplexCounit g dE P) ≫
+        pbcComplexCounit φX (GA.obj P) =
+        LB.map (pbcComplexCounit φY P) ≫ pbcActualPullComplexCounit g dF (FY.obj P) ≫
+          DerivedCategory.Q.map (b.hom.app P)
+      dsimp only [t]
+      unfold pbcActualScalarDerivedPullIso
+      exact (pbcActualScalarDerivedPullIso_exists g dE dF φY φX
+        hφ).exists.choose_spec P hp hf
+    ext P₀
+    obtain ⟨P, f, hp, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u} P₀
+    have hf' (n : ℤ) : SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+        (R := pbcAdicCompletion Y dE) (P.X n) :=
+      ObjectProperty.prop_of_iso (exactFunctor _ _)
+        (SheafOfModules.siteSheafTensorRightIso _ _).symm (hf n)
+    let : IsIso (DerivedCategory.Q.map f) :=
+      Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) f hq
+    apply (cancel_epi (((LY ⋙ LB).mapIso (asIso (DerivedCategory.Q.map f))).hom)).mp
+    change (DerivedCategory.Q ⋙ (LY ⋙ LB)).map f ≫ t'.app P₀ =
+      (DerivedCategory.Q ⋙ (LY ⋙ LB)).map f ≫ β.app P₀
+    rw [t'.naturality, β.naturality, flat P hp hf']
+  let : NatTrans.CommShift (whiskerLeft DerivedCategory.Q t ≫ α) ℤ := norm ▸ inferInstance
+  apply scalarDenseComparison_shift
+    DerivedCategory.Q (LY ⋙ LB) (LA ⋙ LX) ((GA ⋙ FX) ⋙ DerivedCategory.Q) α t
+  intro M
+  let P₀ := DerivedCategory.Q.objPreimage M
+  obtain ⟨P, f, hp, hf, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u} P₀
+  have hf' (n : ℤ) : SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pbcAdicCompletion Y dE) (P.X n) :=
+    ObjectProperty.prop_of_iso (exactFunctor _ _)
+      (SheafOfModules.siteSheafTensorRightIso _ _).symm (hf n)
+  let : IsIso (DerivedCategory.Q.map f) :=
+    Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) f hq
+  refine ⟨P, asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso M, ?_⟩
+  have := pull_counit_iso g dE P hp
+  have := scalar_counit_iso X φX (GA.obj P) (pull_good g dE P hp hf').1
+  simp only [α, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id]
+  change IsIso (LX.map (pbcActualPullComplexCounit g dE P) ≫ pbcComplexCounit φX (GA.obj P))
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarOrdinaryPull_shift :
+    NatTrans.CommShift (pbcScalarOrdinaryPullIso l E F i g).hom ℤ := by
+  let : NatTrans.CommShift (pbcExtensionCounit (pbcScalarCoefficientMap l E F i Y)) ℤ :=
+    (pbcAmbientScalarShift_exists l E F i Y).exists.choose_spec
+  let : NatTrans.CommShift (pbcExtensionCounit (pbcScalarCoefficientMap l E F i X)) ℤ :=
+    (pbcAmbientScalarShift_exists l E F i X).exists.choose_spec
+  unfold pbcScalarOrdinaryPullIso
+  exact scalarOrdinaryPull_shift_of_counits g (pbcIntegralDatum l E) (pbcIntegralDatum l F)
+    (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+    (pbcScalarCoefficientStructureSquare l E F i g)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarActualAdjunction_shift
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    (pbcActualDerivedAdjunction g d).CommShift ℤ := by
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} X
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} X
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
+  let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  have := pbcActualPullUniversal g d
+  have : (pbcActualDerivedPull g d).IsRightKanExtension (pbcActualPullCounit g d) :=
+    Functor.IsLeftDerivedFunctor.isRightKanExtension _ _
+      (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
+  let : NatTrans.CommShift (pbcActualPullCounit g d) ℤ :=
+    (pbcActualPullShift_exists g d).exists.choose_spec
+  let : NatTrans.CommShift (pbcActualPushUnit g d) ℤ :=
+    (pbcActualPushShift_exists g d).exists.choose_spec
+  apply Adjunction.CommShift.mk' _ ℤ
+  apply CategoryTheory.normalized_unit_commShift DerivedCategory.Qh DerivedCategory.Qh
+    ((pbcActualModulePull g d).mapHomotopyCategory (.up ℤ))
+    ((pbcActualModulePush g d).mapHomotopyCategory (.up ℤ))
+    (pbcActualDerivedPull g d) (pbcActualDerivedPush g d)
+    ((pbcActualModuleAdjunction g d).mapHomotopyCategory (.up ℤ))
+    (pbcActualDerivedAdjunction g d) (pbcActualPullCounit g d) (pbcActualPushUnit g d)
+  intro M
+  exact ((pbcActualModuleAdjunction g d).mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+    (HomotopyCategory.quasiIso _ (.up ℤ))
+    (pbcActualPullCounit g d) (pbcActualPushUnit g d) M
+
+private theorem scalarReflectionMap_shift
+    {A B : Type*} [Category A] [Category B] [HasShift A ℤ] [HasShift B ℤ]
+    (C : A ⥤ B) [C.CommShift ℤ] (L : A ⥤ A) [L.CommShift ℤ]
+    (M : B ⥤ B) [M.CommShift ℤ]
+    (η : 𝟭 A ⟶ L) [NatTrans.CommShift η ℤ]
+    (ε : 𝟭 B ⟶ M) [NatTrans.CommShift ε ℤ]
+    (κ : C ⋙ M ⟶ L ⋙ C)
+    (hn : ∀ K, ε.app (C.obj K) ≫ κ.app K = C.map (η.app K))
+    (ext : ∀ (n : ℤ) (K : A)
+      (a b : M.obj (C.obj (K⟦n⟧)) ⟶ (C.obj (L.obj K))⟦n⟧),
+      ε.app (C.obj (K⟦n⟧)) ≫ a = ε.app (C.obj (K⟦n⟧)) ≫ b → a = b) :
+    NatTrans.CommShift κ ℤ := by
+  constructor
+  intro n
+  ext K
+  apply ext n K
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+    commShiftIso_comp_hom_app, Category.assoc]
+  have hε (N : B) : ε.app (N⟦n⟧) ≫ (M.commShiftIso n).hom.app N =
+      (shiftFunctor B n).map (ε.app N) := by
+    simpa only [Functor.comp_obj, Functor.id_obj,
+      Functor.commShiftIso_id_hom_app, Category.id_comp] using
+      (NatTrans.shift_app_comm ε n N).symm
+  have hη : (shiftFunctor A n).map (η.app K) =
+      η.app (K⟦n⟧) ≫ (L.commShiftIso n).hom.app K := by
+    simpa only [Functor.comp_obj, Functor.id_obj,
+      Functor.commShiftIso_id_hom_app, Category.id_comp] using
+      NatTrans.shift_app_comm η n K
+  have hcn := (C.commShiftIso n).hom.naturality (η.app K)
+  have hen := (ε.naturality ((C.commShiftIso n).hom.app K)).symm
+  change ε.app (C.obj (K⟦n⟧)) ≫ M.map ((C.commShiftIso n).hom.app K) =
+      (C.commShiftIso n).hom.app K ≫ ε.app ((C.obj K)⟦n⟧) at hen
+  calc
+    _ = (C.commShiftIso n).hom.app K ≫
+        (ε.app ((C.obj K)⟦n⟧) ≫ (M.commShiftIso n).hom.app (C.obj K)) ≫
+          (shiftFunctor B n).map (κ.app K) := by
+      rw [← Category.assoc, hen]
+      simp only [Category.assoc]
+    _ = (C.commShiftIso n).hom.app K ≫
+        (shiftFunctor B n).map (ε.app (C.obj K) ≫ κ.app K) := by
+      rw [hε, Functor.map_comp]
+    _ = (C.commShiftIso n).hom.app K ≫ (shiftFunctor B n).map (C.map (η.app K)) := by
+      rw [hn]
+    _ = C.map ((shiftFunctor A n).map (η.app K)) ≫
+        (C.commShiftIso n).hom.app (L.obj K) := hcn.symm
+    _ = C.map (η.app (K⟦n⟧)) ≫ C.map ((L.commShiftIso n).hom.app K) ≫
+        (C.commShiftIso n).hom.app (L.obj K) := by
+      rw [hη, Functor.map_comp]
+      simp only [Category.assoc]
+    _ = _ := by rw [← hn]; simp only [Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarCompletion_shift (W : Scheme.{u}) :
+    NatTrans.CommShift (pbcScalarCompletionIso l E F i W).hom ℤ := by
+  let C := pbcEmbeddingAmbientTensor l E F i W
+  let L := pbcActualCompletion (pbcIntegralDatum l E) W
+  let M := pbcActualCompletion (pbcIntegralDatum l F) W
+  let η := pbcActualCompletionUnit (pbcIntegralDatum l E) W
+  let ε := pbcActualCompletionUnit (pbcIntegralDatum l F) W
+  let κ := pbcScalarCompletionIso l E F i W
+  let : NatTrans.CommShift η ℤ :=
+    (pbcActualCompletionShift_exists (pbcIntegralDatum l E) W).exists.choose_spec
+  let : NatTrans.CommShift ε ℤ :=
+    (pbcActualCompletionShift_exists (pbcIntegralDatum l F) W).exists.choose_spec
+  apply scalarReflectionMap_shift C L M η ε κ.hom
+  · intro K
+    dsimp only [κ]
+    unfold pbcScalarCompletionIso
+    exact (pbcScalarCompletionIso_exists l E F i W).exists.choose_spec K
+  · intro n K a b hab
+    have := pbcComplete_iso W (pbcIntegralDatum l F)
+    let e : M.obj (C.obj (K⟦n⟧)) ≅ (C.obj (L.obj K))⟦n⟧ :=
+      ((C ⋙ M).commShiftIso n).app K ≪≫
+        (shiftFunctor _ n).mapIso (κ.app K)
+    have hComplete : PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F)
+        ((C.obj (L.obj K))⟦n⟧) :=
+      ObjectProperty.prop_of_iso _ e
+        (((ObjectProperty.ι (PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F))).leftAdjoint.obj
+          (C.obj (K⟦n⟧))).property)
+    exact pbcCompletion_hom_ext W (pbcIntegralDatum l F) _ _ hComplete a b hab
+
 /-- Both ambient scalar comparisons preserve the canonical derived shift structures.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: the ordinary tensor comparisons commute with shifts term by term. The
@@ -1878,7 +2593,48 @@ Thus both natural transformations satisfy the displayed CommShift equations. -/
 theorem pbcScalarOperations_shift :
     NatTrans.CommShift (pbcScalarDirectImageIso l E F i g).hom ℤ ∧
       NatTrans.CommShift (pbcScalarCompletedPullIso l E F i g).hom ℤ := by
-  sorry
+  let : NatTrans.CommShift (pbcScalarOrdinaryPullIso l E F i g).hom ℤ :=
+    scalarOrdinaryPull_shift l E F i g
+  have hθ := scalarOrdinaryPull_shift l E F i g
+  unfold pbcScalarOrdinaryPullIso at hθ
+  let := hθ
+  let : (pbcActualDerivedAdjunction g (pbcIntegralDatum l E)).CommShift ℤ :=
+    scalarActualAdjunction_shift g (pbcIntegralDatum l E)
+  let : (pbcActualDerivedAdjunction g (pbcIntegralDatum l F)).CommShift ℤ :=
+    scalarActualAdjunction_shift g (pbcIntegralDatum l F)
+  let : NatTrans.CommShift (pbcScalarCompletionIso l E F i X).hom ℤ :=
+    scalarCompletion_shift l E F i X
+  constructor
+  · rw [pbcScalarDirectImageIso_hom]
+    unfold pbcScalarDirectImageMap
+    unfold pbcActualScalarDirectImageMap
+    exact NatTrans.CommShift.mateEquiv _ _ _
+  · have hs : NatTrans.CommShift (
+        (Functor.associator _ _ _).inv ≫
+        whiskerRight (pbcScalarOrdinaryPullIso l E F i g).hom
+          (pbcActualCompletion (pbcIntegralDatum l F) X) ≫
+        (Functor.associator _ _ _).hom ≫
+        whiskerLeft (pbcActualDerivedPull g (pbcIntegralDatum l E))
+          (pbcScalarCompletionIso l E F i X).hom ≫
+        (Functor.associator _ _ _).inv) ℤ := by
+      infer_instance
+    have he : (pbcScalarCompletedPullIso l E F i g).hom =
+        (Functor.associator _ _ _).inv ≫
+        whiskerRight (pbcScalarOrdinaryPullIso l E F i g).hom
+          (pbcActualCompletion (pbcIntegralDatum l F) X) ≫
+        (Functor.associator _ _ _).hom ≫
+        whiskerLeft (pbcActualDerivedPull g (pbcIntegralDatum l E))
+          (pbcScalarCompletionIso l E F i X).hom ≫
+        (Functor.associator _ _ _).inv := by
+      ext K
+      simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+        Functor.associator_hom_app, Functor.associator_inv_app,
+        Category.id_comp, Category.comp_id]
+      rw [pbcScalarCompletedPullIso_hom]
+    rw [he]
+    exact hs
+
+end ScalarOperationShifts
 
 /-- The scalar comparisons respect identity scheme morphisms with their canonical units.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -1901,23 +2657,136 @@ theorem pbcScalarOperations_identity (W : Scheme.{u})
         ((pbcEmbeddingAmbientTensor l E F i W).obj K)) := by
   sorry
 
+/-- Pasting calculations for abstract functors before specializing completion and pullback. -/
+private theorem scalarNaturalityPasting
+    {C D : Type*} [Category C] [Category D] (F G : C ⥤ D) (η : F ⟶ G)
+    {X Y Z : C} (a : X ⟶ Y) (b : Y ⟶ Z) {W : D} (c : G.obj Z ⟶ W) :
+    F.map a ≫ η.app Y ≫ (G.map b ≫ c) =
+      F.map (a ≫ b) ≫ (η.app Z ≫ c) := by
+  rw [F.map_comp]
+  simp only [Category.assoc]
+  rw [← η.naturality_assoc b]
+
+private theorem scalarMapTwoSquares
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y Z U : C} {V W V' : D}
+    {a : X ⟶ Y} {b : Y ⟶ Z} {c : X ⟶ U} {d : U ⟶ Z}
+    {v : F.obj Z ⟶ V} {w : V ⟶ W} {v' : F.obj Z ⟶ V'} {w' : V' ⟶ W}
+    (hab : a ≫ b = c ≫ d) (hvw : v ≫ w = v' ≫ w') :
+    F.map (a ≫ b) ≫ (v ≫ w) = F.map c ≫ F.map d ≫ v' ≫ w' := by
+  rw [hab, hvw, F.map_comp]
+  simp only [Category.assoc]
+
+private theorem scalarMapThreeComposite
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X₀ X₁ X₂ X₃ X₄ : C}
+    {a : X₀ ⟶ X₁} {b : X₁ ⟶ X₂} {c : X₂ ⟶ X₄}
+    {d : X₀ ⟶ X₃} {e : X₃ ⟶ X₄}
+    (h : a ≫ b ≫ c = d ≫ e)
+    {Y Z : D} (t : Y ⟶ Z) (v : Z ⟶ F.obj X₀) :
+    (t ≫ v ≫ F.map a) ≫ F.map b ≫ F.map c =
+      t ≫ v ≫ F.map d ≫ F.map e := by
+  simp only [Category.assoc]
+  rw [← F.map_comp, ← F.map_comp, h, F.map_comp]
+
+private theorem scalarCompletedPasting
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (F G : A ⥤ B) (η : F ⟶ G) (H : C ⥤ B)
+    {X₀ X₁ X₂ X₃ : A}
+    {a : X₀ ⟶ X₁} {b : X₁ ⟶ X₃} {t : X₀ ⟶ X₂} {c : X₂ ⟶ X₃}
+    {Y₀ Y₁ Y₂ Y₃ Y₄ : C}
+    {d : Y₁ ⟶ Y₄} {e : Y₀ ⟶ Y₁} {f : Y₂ ⟶ Y₀}
+    {u : Y₂ ⟶ Y₃} {v : Y₃ ⟶ Y₄}
+    {θ : F.obj X₃ ⟶ H.obj Y₁} {s : F.obj X₂ ⟶ H.obj Y₀}
+    {Z₀ Z₁ : B} {r : F.obj X₀ ⟶ Z₀} {q : Z₀ ⟶ H.obj Y₂}
+    {k : G.obj X₃ ⟶ H.obj Y₄} {ε : Z₀ ⟶ Z₁} {γ : Z₁ ⟶ H.obj Y₃}
+    {eF : G.obj X₁ ⟶ Z₁}
+    (hg : a ≫ b = t ≫ c) (hh : η.app X₃ ≫ k = θ ≫ H.map d)
+    (hn : F.map c ≫ θ = s ≫ H.map e)
+    (ho : F.map t ≫ s = r ≫ q ≫ H.map f)
+    (huE : f ≫ e ≫ d = u ≫ v)
+    (hhg : q ≫ H.map u = ε ≫ γ)
+    (huF : F.map a ≫ η.app X₁ ≫ eF = r ≫ ε) :
+    F.map a ≫ η.app X₁ ≫ (G.map b ≫ k) =
+      F.map a ≫ η.app X₁ ≫ (eF ≫ γ ≫ H.map v) := by
+  calc
+    _ = F.map (a ≫ b) ≫ (η.app X₃ ≫ k) :=
+      scalarNaturalityPasting F G η a b k
+    _ = F.map t ≫ F.map c ≫ θ ≫ H.map d := scalarMapTwoSquares F hg hh
+    _ = (F.map t ≫ s) ≫ H.map e ≫ H.map d := by
+      simpa only [Category.assoc] using congrArg (fun z ↦ F.map t ≫ z ≫ H.map d) hn
+    _ = (r ≫ q ≫ H.map f) ≫ H.map e ≫ H.map d :=
+      congrArg (fun z ↦ z ≫ H.map e ≫ H.map d) ho
+    _ = r ≫ q ≫ H.map u ≫ H.map v := scalarMapThreeComposite H huE r q
+    _ = (r ≫ ε) ≫ γ ≫ H.map v := by
+      simpa only [Category.assoc] using congrArg (fun z ↦ r ≫ z ≫ H.map v) hhg
+    _ = _ := by
+      simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ γ ≫ H.map v) huF.symm
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-private theorem pbcCompletion_hom_ext (W : Scheme.{u})
+private theorem scalarCompletedComp_unit_left
+    {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-    (K L : PbcCompletedDerived W d) (hL : PbcIsIntrinsicallyComplete W d L)
-    (f g : (pbcActualCompletion d W).obj K ⟶ L)
-    (h : (pbcActualCompletionUnit d W).app K ≫ f =
-      (pbcActualCompletionUnit d W).app K ≫ g) : f = g := by
-  let I := ObjectProperty.ι (PbcIsIntrinsicallyComplete W d)
-  let adj := Adjunction.ofIsRightAdjoint I
-  let N : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W d) := ⟨L, hL⟩
-  let a : I.leftAdjoint.obj K ⟶ N := ObjectProperty.homMk f
-  let b : I.leftAdjoint.obj K ⟶ N := ObjectProperty.homMk g
-  have hab : adj.homEquiv K N a = adj.homEquiv K N b := by
-    change adj.unit.app K ≫ I.map a = adj.unit.app K ≫ I.map b at h
-    simpa only [Adjunction.homEquiv_unit] using h
-  exact congrArg (fun z ↦ z.hom) ((adj.homEquiv K N).injective hab)
+    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Y d)) :
+    (pbcActualDerivedPullCompIso h g d).hom.app K.obj ≫
+      (pbcActualDerivedPull h d).map ((pbcActualCompletedPullUnit g d).app K.obj) ≫
+        (pbcActualCompletedPullUnit h d).app ((pbcActualCompletedPull g d).obj K.obj) =
+      (pbcActualCompletedPullUnit (h ≫ g) d).app K.obj ≫
+        (pbcActualCompletedPullCompIso h g d).inv.app K := by
+  have he := (pbcActualCompletedPullCompIso_exists h g d).exists.choose_spec K
+  change (pbcActualDerivedPullCompIso h g d).hom.app K.obj ≫ _ ≫ _ ≫
+    (pbcActualCompletedPullCompIso h g d).hom.app K = _ at he
+  exact (Iso.eq_comp_inv ((pbcActualCompletedPullCompIso h g d).app K)).2 (by
+    simpa only [Category.assoc, Iso.app_hom] using he)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarCompletedComp_unit_right
+    {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Y d)) :
+    (pbcActualDerivedPull h d).map ((pbcActualCompletedPullUnit g d).app K.obj) ≫
+      (pbcActualCompletedPullUnit h d).app ((pbcActualCompletedPull g d).obj K.obj) ≫
+        (pbcActualCompletedPullCompIso h g d).hom.app K =
+      (pbcActualDerivedPullCompIso h g d).inv.app K.obj ≫
+        (pbcActualCompletedPullUnit (h ≫ g) d).app K.obj := by
+  apply (Iso.eq_inv_comp ((pbcActualDerivedPullCompIso h g d).app K.obj)).2
+  have he := (pbcActualCompletedPullCompIso_exists h g d).exists.choose_spec K
+  change (pbcActualDerivedPullCompIso h g d).hom.app K.obj ≫ _ ≫ _ ≫
+    (pbcActualCompletedPullCompIso h g d).hom.app K = _ at he
+  exact he
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarCompletedComp_ext
+    {V W Z : Scheme.{u}} (g : W ⟶ V) (h : Z ⟶ W)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete V d))
+    (L : PbcCompletedDerived Z d) (hL : PbcIsIntrinsicallyComplete Z d L)
+    (a b : (pbcActualCompletedPull h d).obj ((pbcActualCompletedPull g d).obj K.obj) ⟶ L)
+    (hab : (pbcActualDerivedPull h d).map ((pbcActualCompletedPullUnit g d).app K.obj) ≫
+        (pbcActualCompletedPullUnit h d).app ((pbcActualCompletedPull g d).obj K.obj) ≫ a =
+      (pbcActualDerivedPull h d).map ((pbcActualCompletedPullUnit g d).app K.obj) ≫
+        (pbcActualCompletedPullUnit h d).app ((pbcActualCompletedPull g d).obj K.obj) ≫ b) :
+    a = b := by
+  let e := pbcActualCompletedPullCompIso h g d
+  have he := (pbcActualCompletedPullCompIso_exists h g d).exists.choose_spec K
+  change (pbcActualDerivedPullCompIso h g d).hom.app K.obj ≫ _ ≫ _ ≫
+    e.hom.app K = _ at he
+  have hu : (pbcActualCompletedPullUnit (h ≫ g) d).app K.obj ≫ e.inv.app K =
+      (pbcActualDerivedPullCompIso h g d).hom.app K.obj ≫
+        (pbcActualDerivedPull h d).map ((pbcActualCompletedPullUnit g d).app K.obj) ≫
+        (pbcActualCompletedPullUnit h d).app ((pbcActualCompletedPull g d).obj K.obj) := by
+    exact (Iso.comp_inv_eq (e.app K)).2 (by
+      simpa only [Category.assoc, Iso.app_hom] using he.symm)
+  apply (cancel_epi (e.inv.app K)).mp
+  apply pbcCompletion_hom_ext Z d _ _ hL
+  change (pbcActualCompletedPullUnit (h ≫ g) d).app K.obj ≫ (e.inv.app K ≫ a) =
+    (pbcActualCompletedPullUnit (h ≫ g) d).app K.obj ≫ (e.inv.app K ≫ b)
+  rw [← Category.assoc, ← Category.assoc, hu]
+  simpa only [Category.assoc] using congrArg
+    (fun f ↦ (pbcActualDerivedPullCompIso h g d).hom.app K.obj ≫ f) hab
 
 private theorem pbcCompletedPullId_unit (W : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -2117,6 +2986,93 @@ theorem pbcScalarDirectImage_comp
     pbcActualScalarDirectImageMap, pbcScalarOrdinaryPullIso,
     pbcActualDerivedDirectCompIso] using hm
 
+section
+attribute [local irreducible] pbcActualCompletedPull pbcActualCompletion
+  reductionDerivedChange completedAdicDerivedChange
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarCompletedComparison_comp
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (dE : AdicCoefficientDatum A) (dF : AdicCoefficientDatum B)
+    (CY : PbcCompletedDerived Y dE ⥤ PbcCompletedDerived Y dF)
+    (CX : PbcCompletedDerived X dE ⥤ PbcCompletedDerived X dF)
+    (CZ : PbcCompletedDerived Z dE ⥤ PbcCompletedDerived Z dF)
+    (θg : CY ⋙ pbcActualDerivedPull g dF ≅ pbcActualDerivedPull g dE ⋙ CX)
+    (θh : CX ⋙ pbcActualDerivedPull h dF ≅ pbcActualDerivedPull h dE ⋙ CZ)
+    (θhg : CY ⋙ pbcActualDerivedPull (h ≫ g) dF ≅
+      pbcActualDerivedPull (h ≫ g) dE ⋙ CZ)
+    (γg : CY ⋙ pbcActualCompletedPull g dF ≅ pbcActualCompletedPull g dE ⋙ CX)
+    (γh : CX ⋙ pbcActualCompletedPull h dF ≅ pbcActualCompletedPull h dE ⋙ CZ)
+    (γhg : CY ⋙ pbcActualCompletedPull (h ≫ g) dF ≅
+      pbcActualCompletedPull (h ≫ g) dE ⋙ CZ)
+    (hCY : ∀ K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Y dE),
+      PbcIsIntrinsicallyComplete Y dF (CY.obj K.obj))
+    (hCZ : ∀ K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Z dE),
+      PbcIsIntrinsicallyComplete Z dF (CZ.obj K.obj))
+    (hg : ∀ K, (pbcActualCompletedPullUnit g dF).app (CY.obj K) ≫ γg.hom.app K =
+      θg.hom.app K ≫ CX.map ((pbcActualCompletedPullUnit g dE).app K))
+    (hh : ∀ K, (pbcActualCompletedPullUnit h dF).app (CX.obj K) ≫ γh.hom.app K =
+      θh.hom.app K ≫ CZ.map ((pbcActualCompletedPullUnit h dE).app K))
+    (hhg : ∀ K, (pbcActualCompletedPullUnit (h ≫ g) dF).app (CY.obj K) ≫ γhg.hom.app K =
+      θhg.hom.app K ≫ CZ.map ((pbcActualCompletedPullUnit (h ≫ g) dE).app K))
+    (ho : ∀ K, (pbcActualDerivedPull h dF).map (θg.hom.app K) ≫
+      θh.hom.app ((pbcActualDerivedPull g dE).obj K) =
+      (pbcActualDerivedPullCompIso h g dF).inv.app (CY.obj K) ≫
+        θhg.hom.app K ≫ CZ.map ((pbcActualDerivedPullCompIso h g dE).hom.app K))
+    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Y dE)) :
+    (pbcActualCompletedPull h dF).map (γg.hom.app K.obj) ≫
+      γh.hom.app ((pbcActualCompletedPull g dE).obj K.obj) =
+    (pbcActualCompletedPullCompIso h g dF).hom.app ⟨CY.obj K.obj, hCY K⟩ ≫
+      γhg.hom.app K.obj ≫ CZ.map ((pbcActualCompletedPullCompIso h g dE).inv.app K) := by
+  let LEg := pbcActualDerivedPull g dE
+  let LFh := pbcActualDerivedPull h dF
+  let PEg := pbcActualCompletedPull g dE
+  let PEh := pbcActualCompletedPull h dE
+  let PFg := pbcActualCompletedPull g dF
+  let PFh := pbcActualCompletedPull h dF
+  let eE := pbcActualCompletedPullCompIso h g dE
+  let eF := pbcActualCompletedPullCompIso h g dF
+  let cE := pbcActualDerivedPullCompIso h g dE
+  let cF := pbcActualDerivedPullCompIso h g dF
+  let ηEg := pbcActualCompletedPullUnit g dE
+  let ηEh := pbcActualCompletedPullUnit h dE
+  let ηFg := pbcActualCompletedPullUnit g dF
+  let ηFh := pbcActualCompletedPullUnit h dF
+  apply scalarCompletedComp_ext g h dF
+    ⟨CY.obj K.obj, hCY K⟩ _
+    (hCZ ⟨_,
+      pbcActualCompletedPull_isComplete h dE (PEg.obj K.obj)⟩)
+  let KF : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Y dF) :=
+    ⟨CY.obj K.obj, hCY K⟩
+  have huE : cE.hom.app K.obj ≫
+      (pbcActualDerivedPull h dE).map (ηEg.app K.obj) ≫
+        ηEh.app (PEg.obj K.obj) =
+      (pbcActualCompletedPullUnit (h ≫ g) dE).app K.obj ≫ eE.inv.app K :=
+    scalarCompletedComp_unit_left g h dE K
+  have huF : LFh.map (ηFg.app (CY.obj K.obj)) ≫
+      ηFh.app (PFg.obj (CY.obj K.obj)) ≫ eF.hom.app KF =
+      cF.inv.app (CY.obj K.obj) ≫
+        (pbcActualCompletedPullUnit (h ≫ g) dF).app (CY.obj K.obj) :=
+    scalarCompletedComp_unit_right g h dF KF
+  have hn₂ : LFh.map (CX.map (ηEg.app K.obj)) ≫ θh.hom.app (PEg.obj K.obj) =
+      θh.hom.app (LEg.obj K.obj) ≫
+        CZ.map ((pbcActualDerivedPull h dE).map (ηEg.app K.obj)) :=
+    θh.hom.naturality (ηEg.app K.obj)
+  have hg := hg K.obj
+  have hh := hh (PEg.obj K.obj)
+  have hhg := hhg K.obj
+  have ho := ho K.obj
+  change LFh.map (ηFg.app (CY.obj K.obj)) ≫
+      ηFh.app (PFg.obj (CY.obj K.obj)) ≫
+        (PFh.map (γg.hom.app K.obj) ≫ γh.hom.app (PEg.obj K.obj)) =
+    LFh.map (ηFg.app (CY.obj K.obj)) ≫
+      ηFh.app (PFg.obj (CY.obj K.obj)) ≫
+        (eF.hom.app KF ≫ γhg.hom.app K.obj ≫ CZ.map (eE.inv.app K))
+  exact scalarCompletedPasting LFh PFh ηFh CZ hg hh hn₂ ho huE hhg.symm huF
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Completed pullback comparison respects composition with its actual unit pasting.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: the ordinary composition equation holds on resolving tensor models.
@@ -2136,7 +3092,20 @@ theorem pbcScalarCompletedPull_comp
       (pbcScalarCompletedPullIso l E F i (h ≫ g)).hom.app K.obj ≫
       (pbcEmbeddingAmbientTensor l E F i Z).map
         ((pbcActualCompletedPullCompIso h g (pbcIntegralDatum l E)).inv.app K) := by
-  sorry
+  exact scalarCompletedComparison_comp g h (pbcIntegralDatum l E) (pbcIntegralDatum l F)
+    (pbcEmbeddingAmbientTensor l E F i Y) (pbcEmbeddingAmbientTensor l E F i X)
+    (pbcEmbeddingAmbientTensor l E F i Z)
+    (pbcScalarOrdinaryPullIso l E F i g) (pbcScalarOrdinaryPullIso l E F i h)
+    (pbcScalarOrdinaryPullIso l E F i (h ≫ g))
+    (pbcScalarCompletedPullIso l E F i g) (pbcScalarCompletedPullIso l E F i h)
+    (pbcScalarCompletedPullIso l E F i (h ≫ g))
+    (pbcScalarPreservesComplete l E F i Y) (pbcScalarPreservesComplete l E F i Z)
+    (scalarCompletedPull_unit l E F i g) (scalarCompletedPull_unit l E F i h)
+    (scalarCompletedPull_unit l E F i (h ≫ g))
+    (pbcScalarOrdinaryPull_comp l E F i g h) K
+
+end
+
 
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
     (j : F →ₐ[ℚ_[l]] G)

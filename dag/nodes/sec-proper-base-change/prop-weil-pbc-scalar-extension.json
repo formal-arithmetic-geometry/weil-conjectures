@@ -62,11 +62,12 @@
    }
   },
   {
-   "text": "Use normalized derived tensor units and associators; K-flat scalar change computes successive tensors. Both pentagon routes send $(((p\\otimes s)\\otimes u)\\otimes z)$ to $p\\otimes suz$; unit routes multiply by one. Normalize repeated fields literally to identity. The associator-shift theorem gives shift compatibility.",
+   "text": "Use normalized derived tensor units and associators; K-flat scalar change computes successive tensors. Both pentagon routes send $(((p\\otimes s)\\otimes u)\\otimes z)$ to $p\\otimes suz$; unit routes multiply by one. Normalize repeated fields literally to identity. For shift compatibility, identify the chosen scalar adjunction with the adjunction normalized by its unit on K-flat resolutions. The normalized-unit right Kan argument makes this adjunction commute with shifts. Exact derived restriction composition commutes with shifts, hence its inverse adjunction conjugate, the actual ambient associator, does too. The faithful full integral inclusion and scalar localization, which is surjective on objects, detect this equation. Conjugation by the specified normalization isomorphisms gives the stated literal-stage associator shift equation.",
    "uses": [
     "lem-pur-system-scalar-coherence",
     "lem-pur-kflat-change-of-rings",
-    "lem-pur-coefficient-associator-shifts"
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-sp-canonical-right-derived-adjunction-shift"
    ],
    "elementary": false,
    "source": {
@@ -100,14 +101,17 @@
    }
   },
   {
-   "text": "Apply strict-tower tensor transport to augmented Koszul towers, including connecting maps and units. Completion transport gives the unit-normalized $\\kappa:C\\Lambda_R\\cong\\Lambda_SC$. Ringed monoidal composition and the K-flat scalar-comparison theorem give the invertible ordinary balancing $Lg_S^*C\\cong CLg_R^*$ and its composition law; the balancing-coherence theorem normalizes its towers. Follow it by $\\kappa^{-1}$ for the completed pull square.",
+   "text": "Apply strict-tower tensor transport to augmented Koszul towers, including connecting maps and units. Completion transport gives the unit-normalized $\\kappa:C\\Lambda_R\\cong\\Lambda_SC$. Ringed monoidal composition and the K-flat scalar-comparison theorem give the invertible ordinary balancing $Lg_S^*C\\cong CLg_R^*$ and its composition law; the balancing-coherence theorem normalizes its towers. Follow it by $\\kappa^{-1}$ for the completed pull square. For shift compatibility of the actual comparisons, first prove the ordinary derived scalar/pullback comparison commutes with shifts by its counit normalization on flat-term K-flat resolutions. Resolve arbitrary complexes and use density to detect the shift equation. The normalized-unit right Kan argument makes the actual derived pull/push adjunction commute with shifts, so taking its mate proves the direct-image shift equation. The scalar completion comparison commutes with shifts because its unit-normalization equation does, and completion units detect arrows into complete objects. Pasting these shift-compatible maps proves the completed-pull shift equation.",
    "uses": [
     "lem-weil-pbc-finite-free-strict-tower-transport",
     "lem-weil-pbc-finite-free-completion-transport",
     "lem-sp-finite-free-balancing-coherence",
     "def-weil-pbc-completed-pullback",
     "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sfb-kflat-scalar-comparison-normalization"
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-sp-canonical-right-derived-adjunction-shift"
    ],
    "elementary": false,
    "source": {
@@ -116,7 +120,7 @@
    }
   },
   {
-   "text": "Ringed monoidal composition and the composition law $\\theta_{gf}=(f^*\\theta_g)(\\theta_fg^*)$ of the K-flat scalar comparison give the ordinary pull cube and composition laws; mate pasting gives push composition and identities. The reflected-adjunction-square theorem, with the completed adjunctions and unit-normalized $\\kappa$, carries these equations to completed pullback and preserves shifts and coefficient towers.",
+   "text": "Ringed monoidal composition and the composition law $\\theta_{gf}=(f^*\\theta_g)(\\theta_fg^*)$ of the K-flat scalar comparison give the ordinary pull cube and composition laws; mate pasting gives push composition and identities. The reflected-adjunction-square theorem, with the completed adjunctions and unit-normalized $\\kappa$, carries these equations to completed pullback and preserves shifts and coefficient towers. In particular, for completed pullback composition, precompose with the two ordinary-to-completed pullback units. Naturality, scalar unit normalization and ordinary pullback composition identify both resulting arrows. The universal property of completion, transported through the specified completed composition isomorphism, cancels these units and proves the completed composition equation.",
    "uses": [
     "lem-sfb-ringed-derived-monoidal-comparisons",
     "lem-sfb-kflat-scalar-comparison-normalization",
@@ -167,7 +171,6 @@
   "lem-weil-pbc-uniform-complete-triangulated",
   "lem-pur-system-scalar-coherence",
   "lem-pur-kflat-change-of-rings",
-  "lem-pur-coefficient-associator-shifts",
   "lem-pur-semilinear-scalar-localization",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-sp-finite-free-direct-image-coherence",
@@ -183,12 +186,16 @@
   "lem-weil-pbc-reflected-adjunction-coefficient-squares",
   "lem-sbc-completed-operations-linear-natural-exchange",
   "lem-weil-pbc-coefficient-exchange-mates",
-  "def-weil-pbc-ambient-ringed-exchange"
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-  "place": "Finer assembly of the reviewed ambient-scalar proof; source blueprint finite scalar extension, with Stacks-based input lemmas."
+  "place": "Finer assembly of the reviewed ambient-scalar proof; source blueprint finite scalar extension, with Stacks-based input lemmas. M1 proves associator shift by normalized adjunctions and faithful/localized detection, operations shift by normalized derived counits, mates and reflection, and completed pullback composition by the actual completion units. The remaining clauses retain their existing proof plans."
  },
  "mathlib_searches": [
   {
@@ -531,44 +538,13 @@
   "note": "Item statement matches node lem-weil-pbc-distinguished-diagram-lifting clause by clause: l, Ω : Type c, T noetherian, finite-dim, l invertible; finite vertices, arrows with shift occurrences, Expr equations with shift = σ_X ≫ u[1] ≫ σ_Y⁻¹, rows distinguished via pbcCommonStageDistinguished; ∃ M ≥ M0 and all E_X, raw reps on shared T_{M/E}K, equations at M, rows in distTriang with σ-corrected last arrow, recovery via mkHom/isoToStage and a row iso with exact components. Probe compiled inside the item file: distTriang uses pbcRationalHasShift/qbarStagePretriangulated (rfl verified), not the PbcScalarExtension adapters. No hollow defs, docstrings ok, only sorry, statement verbatim, no duplicate found. Edge cases (empty families, M=M0, empty scheme, shifted row vertices, independent universes) covered. Dependency repair: three Prop-valued adapters in PbcScalarExtension postponed to sorry with identical binders and types, data untouched, dep record now verbatim — accepted as §1(B); harmless though not strictly needed here, since the original has a cached OK override. Compiles: item clean in 17.9 s against the cached dependency; delivered PbcScalarExtension timed out at 60 s on three attempts at load ~170 (the original also timed out fresh), so its compile rests on the delivery's recorded clean compile and dry run. Minor: pbcDiagramIteratedSigma unused, universe w unused."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X5",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261021T233808-L-863486",
+  "landing": "20261022T025330-L-1282126",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.pbcActualOperations_linear",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor_preserves",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarCoefficientStructureSquare",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedExchange",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_comp",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletionIso_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImageMap_isIso",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_coefficients",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_comp",
-   "AlgebraicGeometry.Scheme.pbcScalarOperations_identity",
-   "AlgebraicGeometry.Scheme.pbcScalarOperations_shift",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_coefficients",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_comp",
-   "AlgebraicGeometry.Scheme.pbcStageAssociatorShift",
-   "AlgebraicGeometry.Scheme.pbcStageAssociator_laws"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor_preserves",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedExchange",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_comp",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletionIso_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImageMap_isIso",
-   "AlgebraicGeometry.Scheme.pbcScalarOperations_identity",
-   "AlgebraicGeometry.Scheme.pbcScalarOperations_shift",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_coefficients",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_comp",
-   "AlgebraicGeometry.Scheme.pbcStageAssociatorShift",
-   "AlgebraicGeometry.Scheme.pbcStageAssociator_laws"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
