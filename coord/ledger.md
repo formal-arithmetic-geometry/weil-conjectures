@@ -24375,3 +24375,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-22 02:46 UTC: maintenance retired NF duplicate claim/return for def-pur-affine-line-purity-comparison; NI landing b0742fd8f9 and reviewed Lean preserved byte-for-byte; see coord/changes/20261022-NF-affine-line-duplicate-retired.md.
 - 02:46 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 02:47 L: merged deliver/NB/lem-sfb-admissible-finite-type-field-quotient (reviewer PASS; first push; new nodes: 0)
+- 02:48 L: merged deliver/ND/lem-sfb-common-field-semilinear-induction (reviewer FIX; first push; new nodes: 2)

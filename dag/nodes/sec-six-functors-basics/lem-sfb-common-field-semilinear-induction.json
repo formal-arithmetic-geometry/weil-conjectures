@@ -2,7 +2,7 @@
  "id": "lem-sfb-common-field-semilinear-induction",
  "kind": "statement",
  "title": "Common normal constants and induction of finite semilinear scheme actions",
- "statement": "Let $e$ be a field [def-weil-field], and let $I$ be a nonempty finite set. For each $i\\in I$ let $F_i/e$ be a finite field extension [def-pc-field-extension] [def-pc-field-tower], let a finite group $J_i$ act on $F_i$ by $e$-automorphisms, and let $V_i$ be a finite-type $F_i$-scheme with a compatible semilinear $J_i$-action. Let $B_i$ be an $e$-scheme and $v_i:V_i\\to B_i$ a $J_i$-invariant $e$-morphism [def-pc-scheme] [def-weil-finite-type-morphism]. There are a finite normal extension $K/e$ with embeddings $F_i\\hookrightarrow K$, a finite group $G$ with a surjection $G\\to A=\\operatorname{Aut}_e(K)$, and subgroups $\\Gamma_i\\leq G$ with surjections $\\Gamma_i\\to J_i$. The two actions on $F_i$ agree, so $\\Gamma_i$ acts diagonally on $W_i=V_i\\times_{F_i}K$ [def-pc-fibre-product]. The extension $K^G/e$ is purely inseparable. The induced scheme $Y_i=G\\times^{\\Gamma_i}W_i$ exists: it is the disjoint union of copies of $W_i$ indexed by left cosets of $\\Gamma_i$, with scalar structure on the copy represented by $g$ twisted by the image of $g$ in $A$; the relation is $(g\\gamma,w)\\sim(g,\\gamma w)$. Left multiplication gives a semilinear $G$-action, and $[g,w]\\mapsto v_i(\\operatorname{pr}_1w)$ defines an invariant $e$-morphism $Y_i\\to B_i$. For every geometric point $b$ of $B_i$, if the geometric fibre of $v_i$ at $b$ is a nonempty single $J_i$-orbit, then the geometric fibre of $Y_i\\to B_i$ at $b$ is a nonempty single $G$-orbit. If $v_i$ sends every generic point to a generic point with finite residue extension, the same is true of $Y_i\\to B_i$. Finite morphisms and generic points use [def-weil-finite-integral-morphism], [def-sc-generic-point], [def-weil-residue-field]; geometric fibres use [def-weil-geometric-fibre]. Normal for a finite field extension means that every irreducible polynomial over $e$ with a root in $K$ splits in $K$; no separability is assumed.",
+ "statement": "Let $e$ be a field [def-weil-field], and let $I$ be a nonempty finite set. For each $i\\in I$ let $F_i/e$ be a finite field extension [def-pc-field-extension] [def-pc-field-tower], let a finite group $J_i$ act on $F_i$ by $e$-automorphisms, and let $V_i$ be a finite-type $F_i$-scheme with a compatible semilinear $J_i$-action. Let $B_i$ be an $e$-scheme and $v_i:V_i\\to B_i$ a $J_i$-invariant $e$-morphism [def-pc-scheme] [def-weil-finite-type-morphism]. There are a finite normal extension $K/e$ with embeddings $F_i\\hookrightarrow K$, a finite group $G$ with a surjection $G\\to A=\\operatorname{Aut}_e(K)$, and subgroups $\\Gamma_i\\leq G$ with surjections $\\Gamma_i\\to J_i$. The two actions on $F_i$ agree, so $\\Gamma_i$ acts diagonally on $W_i=V_i\\times_{F_i}K$ [def-pc-fibre-product]. The extension $K^G/e$ is purely inseparable. The induced scheme $Y_i=G\\times^{\\Gamma_i}W_i$ exists: it is the disjoint union of copies of $W_i$ indexed by left cosets of $\\Gamma_i$, with scalar structure on the copy represented by $g$ twisted by the image of $g$ in $A$; the relation is $(g\\gamma,w)\\sim(g,\\gamma w)$. Left multiplication gives a semilinear $G$-action, and $[g,w]\\mapsto v_i(\\operatorname{pr}_1w)$ defines an invariant $e$-morphism $Y_i\\to B_i$. For every geometric point $b:\\operatorname{Spec}\\Omega\\to B_i$ of $B_i$ [def-weil-geometric-point], if the underlying points of the geometric fibre $V_i\\times_{B_i}\\operatorname{Spec}\\Omega$ of $v_i$ at $b$ form a nonempty single $J_i$-orbit, then the underlying points of the geometric fibre $Y_i\\times_{B_i}\\operatorname{Spec}\\Omega$ of $Y_i\\to B_i$ at $b$ form a nonempty single $G$-orbit. If $v_i$ sends every generic point to a generic point with finite residue extension, the same is true of $Y_i\\to B_i$. Finite morphisms and generic points use [def-weil-finite-integral-morphism], [def-sc-generic-point], [def-weil-residue-field]; geometric fibres use [def-weil-geometric-fibre]. Normal for a finite field extension means that every irreducible polynomial over $e$ with a root in $K$ splits in $K$; no separability is assumed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b). Agent-formulated finite-family semilinear version: take a common finite normal K/e and use the groups of compatible pairs in Aut_e(K) times J_i before induction. This formulation makes the common field and its action explicit; it is a general induction construction, with no alteration, resolution or SNC existence conclusion."
@@ -17,11 +17,150 @@
   "def-weil-finite-integral-morphism",
   "def-sc-generic-point",
   "def-weil-residue-field",
-  "def-weil-geometric-fibre"
+  "def-weil-geometric-fibre",
+  "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Enumerate the finite family. Construct finite extensions $L_r/e$ containing the first $r$ fields: start with $L_0=e$; put $L_r$ and $F_{r+1}$ in a common field and replace that field by their compositum. The compositum degree bound gives $[L_{r+1}:L_r]\\leq[F_{r+1}:e]$, so $L_{r+1}/e$ is finite (multiply spanning sets along the tower). Apply the finite normal-extension lemma to the final $L_r/e$, obtaining a finite normal $K/e$ and the required embeddings $F_i\\hookrightarrow K$. Identify each $F_i$ with its image.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-weil-pbc-compositum-degree-bound",
+    "lem-weil-pbc-finite-extension-in-finite-normal-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, common constants before induction; finite-family elaboration using Fields 0H7K, 09ID, 09DT."
+   }
+  },
+  {
+   "text": "Put $A=\\operatorname{Aut}_e(K)$. It is finite: choose a finite $e$-basis of $K$; an automorphism is determined by the images of these basis elements, each of which must be a root of its nonzero minimal polynomial, so there are finitely many choices. Put $G=A\\times\\prod_{j\\in I}J_j$, with its surjection $\\pi:G\\to A$. Define $\\Gamma_i=\\{(a,(j_t)_t):a|_{F_i}=j_i\\}$. Compatibility is preserved under multiplication and inversion, hence this is a subgroup. Its map to $J_i$ is surjective: given $j\\in J_i$, lift the $e$-automorphism of $F_i$ by which $j$ acts (the action need not be faithful) to $a\\in A$ by the intermediate-isomorphism lifting lemma, and take $(a,(j_t)_t)$ with $j_i=j$ and all other $j_t=1$. No normality of $F_i/e$ is used. The action of $G$ on $K$ has image $A$, so $K^G=K^A$; the normal fixed-field lemma makes this extension of $e$ purely inseparable.",
+   "uses": [
+    "lem-sfb-normal-intermediate-isomorphism-lifts",
+    "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, graph enlargement of finite groups; Fields 0BME(2), 030M(2) for the common-normal-field version."
+   }
+  },
+  {
+   "text": "Fix $i$, and abbreviate $\\Gamma=\\Gamma_i$, $V=V_i$, $F=F_i$, $B=B_i$. Form $W=V\\times_F K$. For $\\gamma=(a,(j_t))\\in\\Gamma$, the actions of $j_i$ on $V$ and $a$ on $K$ agree over $F$, so the fibre-product universal property gives an automorphism $\\gamma_W$ of $W$. Uniqueness gives $(\\gamma\\delta)_W=\\gamma_W\\delta_W$ and $1_W=\\mathrm{id}$. Use the convention that a left action by field automorphisms induces $a\\mapsto\\operatorname{Spec}(a^{-1})$ on the base scheme. Thus if $p:W\\to\\operatorname{Spec}K$, then $p\\gamma_W=\\operatorname{Spec}(a^{-1})p$. This is precisely the diagonal semilinear action required by the statement.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, equivariant scalar extension in diagram (2.b); explicit universal-property construction."
+   }
+  },
+  {
+   "text": "Choose representatives $s(c)$ of the left cosets $c\\in G/\\Gamma$, with $s(\\Gamma)=1$, and form the coproduct $Y=\\coprod_c W_c$ in schemes. On the copy represented by $g=s(c)$ give the scalar structure $p_g=\\operatorname{Spec}(\\pi(g)^{-1})p$. This represents the contracted product: replace an arbitrary pair $(g\\gamma,w)$ by $(g,\\gamma_Ww)$. The two scalar structures agree, since $p_g\\gamma_W=\\operatorname{Spec}(\\pi(g)^{-1})\\operatorname{Spec}(\\pi(\\gamma)^{-1})p=\\operatorname{Spec}((\\pi(g)\\pi(\\gamma))^{-1})p=p_{g\\gamma}$. Each pair has a unique representative in a chosen copy, and changing representatives gives these scheme isomorphisms, which compose by the action law. Consequently this finite coproduct realizes the relation $(g\\gamma,w)\\sim(g,\\gamma w)$ as a scheme, without any quotient-existence hypothesis on $V$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, contracted products before (2.b); explicit coset construction with Schemes 01JB–01JC."
+   }
+  },
+  {
+   "text": "For $h\\in G$ and $g=s(c)$ write $hg=s(hc)\\gamma(h,c)$. On the copy $c$ send $w$ to $\\gamma(h,c)_Ww$ in the copy $hc$; the coproduct universal property makes this a scheme morphism $h_Y$. The identity $\\gamma(h_2h_1,c)=\\gamma(h_2,h_1c)\\gamma(h_1,c)$ proves the group law, and $h^{-1}_Y$ is the inverse. For semilinearity the scalar structure of its value is $p_{s(hc)}\\gamma(h,c)_W=p_{hg}=\\operatorname{Spec}(\\pi(h)^{-1})p_g$. Thus the action is left multiplication on classes $[g,w]$ and is semilinear for $\\pi$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, induced actions in (2.b); coset cocycle and scalar calculation."
+   }
+  },
+  {
+   "text": "On each copy of $W$ use $q=v_i\\operatorname{pr}_1:W\\to B$. It is $\\Gamma$-invariant because $v_i$ is $J_i$-invariant. The coproduct universal property gives $Y\\to B$. The relation changes $w$ by an element of $\\Gamma$, so the formula $[g,w]\\mapsto v_i(\\operatorname{pr}_1w)$ is well defined. The action just constructed changes the component and applies such an element to $w$, so this map is $G$-invariant. All its maps are over $e$, since each scalar twist fixes $e$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, induced morphisms in (2.b)."
+   }
+  },
+  {
+   "text": "Let $b:\\operatorname{Spec}\\Omega\\to B$ be geometric, and suppose the underlying points of $V_b$ form a nonempty single $J_i$-orbit. These points are all $\\Omega$-rational. Indeed, $V_b$ is locally of finite type over $\\Omega$: on affine charts the algebra $R\\otimes_S\\Omega$ is generated over $\\Omega$ by finite generators of $R/e$, since $V$ is finite type over the finite extension $F/e$. A nonempty finite-type affine chart has a maximal ideal, whose residue field is finite over $\\Omega$ by Zariski\\textquotesingle s lemma and hence equals $\\Omega$. Its $J_i$-translates exhaust $V_b$ and stay rational because the action on the fibre is over $\\Omega$. Above each rational $x\\in V_b$, the projection $W_b\\to V_b$ has fibre $\\operatorname{Spec}(\\Omega\\otimes_{F,x}K)$. This algebra is nonzero and finite-dimensional over $\\Omega$ (a basis of $K/F$ remains a basis after tensoring). Its prime quotients are finite-dimensional domains and hence fields; being finite extensions of the algebraically closed $\\Omega$, they equal $\\Omega$. Its points therefore correspond exactly to embeddings $\\alpha:K\\hookrightarrow\\Omega$ extending the scalar map $F\\to\\Omega$ of $x$. A maximal ideal proves this set is nonempty, including when the tensor algebra has nilpotents.",
+   "uses": [
+    "def-weil-geometric-point",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 (2.b), geometric-orbit verification; Algebra 00FV and finite-dimensional algebra argument."
+   }
+  },
+  {
+   "text": "The points of $W_b$ form one $\\Gamma$-orbit. Given two such points, first choose $j\\in J_i$ carrying the first image in $V_b$ to the second and lift $j$ to $\\gamma\\in\\Gamma$. After applying $\\gamma$ the two points lie over the same rational $x$. The extension $K/F$ is normal by normality over intermediate fields. Its embeddings in $\\Omega$ extending this $F$-structure differ by an element of $\\operatorname{Aut}_F(K)$, by the normal-embeddings lemma. Every $a\\in\\operatorname{Aut}_F(K)$ gives $(a,(1)_t)\\in\\Gamma$, acting over $V$; on these embeddings its action is $\\alpha\\mapsto\\alpha\\circ a^{-1}$. As $a$ ranges through the group, this is transitive on the embeddings. This gives the second move between the two points without assuming separability of $K/F$.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-normal-over-intermediate",
+    "lem-sfb-normal-embeddings-automorphism-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, transitive induced fibres; Fields 09HN and 0BR4."
+   }
+  },
+  {
+   "text": "Base change the coproduct description along $b$. Its points are the disjoint union of the points in the copies of $W_b$: fibre products distribute over a disjoint open cover, as can be checked by restricting the fibre-product universal property to each open copy. Given two points of $Y_b$, multiply by the inverses of their component representatives to move each into the identity component. There the preceding $\\Gamma$-orbit argument joins them. Composing these three elements of $G$ joins the original points. The identity component contains a point by the preceding tensor calculation, so $Y_b$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 p.150, contracted product and orbit transfer in (2.b)."
+   }
+  },
+  {
+   "text": "Finally consider a generic point $y$ of a component of $W$. On an affine chart $\\operatorname{Spec}R$ of $V$, the projection is $\\operatorname{Spec}(R\\otimes_F K)\\to\\operatorname{Spec}R$. This ring extension is finite free. It is flat because tensoring an $R$-module with it is a finite direct sum of that module, and hence preserves exact sequences. If the prime $\\mathfrak q$ of $y$ contracts to $\\mathfrak p$ and $\\mathfrak p_0\\subseteq\\mathfrak p$, flat going-down gives $\\mathfrak q_0\\subseteq\\mathfrak q$ above $\\mathfrak p_0$. Minimality of $\\mathfrak q$ forces equality, hence $\\mathfrak p$ is minimal and $x=\\operatorname{pr}_1(y)$ is generic in $V$. The algebra $\\kappa(x)\\otimes_F K$ is finite-dimensional; its quotient at the prime of $y$ is a finite-dimensional domain, hence a field, and equals $\\kappa(y)$. Thus $\\kappa(y)/\\kappa(x)$ is finite. By the hypothesis on $v_i$, $v_i(x)$ is generic in $B_i$ and $\\kappa(x)/\\kappa(v_i(x))$ is finite; multiplying finite spanning sets proves the same for $\\kappa(y)/\\kappa(v_i(x))$. The clopen copies in $Y_i$ have exactly the generic points of their copies of $W$; scalar twists do not change the underlying $e$-scheme or the map to $B_i$. This proves the generic-point clause.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2 diagram (2.b), maximal domination and generic finiteness; Algebra 00HS and the finite-dimensional-domain lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "lem-sc-flat-going-down",
+  "lem-sfb-normal-embeddings-automorphism-transitive",
+  "lem-sfb-normal-intermediate-isomorphism-lifts",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+  "lem-weil-pbc-normal-extension-normal-over-intermediate",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150, contracted products and (2.b); explicit finite-family common-normal-field elaboration, using the cited Stacks field and commutative-algebra lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +196,31 @@
    "results": "OK 8 hits: CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, Ideal.isPretransitive_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois",
    "date": "2026-10-22",
    "verdict": "no match: inspected the returned signatures; none constructs this scheme-theoretic object or gives a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induce finite semilinear actions on schemes to a common finite normal field with transitive geometric fibres",
+   "results": "OK 8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.Scheme.Hom.discrete_fiber",
+   "date": "2026-10-22",
+   "verdict": "no match: returned statements do not construct induced semilinear schemes with common constants and all the stated fibre and generic-point clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|contractedProduct|contracted_product",
+   "results": "OK 4 hits: Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned statements do not construct induced semilinear schemes with common constants and all the stated fibre and generic-point clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common normal field extensions and induction of finite group actions on schemes preserve single geometric orbits",
+   "results": "OK 8 hits: Ideal.isPretransitive_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, Algebra.IsInvariant.orbit_eq_primesOver, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: returned statements do not construct induced semilinear schemes with common constants and all the stated fibre and generic-point clauses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-equivariant-smooth-galois-model",
@@ -85,5 +245,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-common-field-semilinear-induction",
+  "worker": "stage1",
+  "summary": "Explicit construction of the common normal field, compatible-pair subgroups of a single finite product group, scalar-twisted coproducts and cocycle action, invariant maps, geometric orbit transfer and generic residue finiteness. Two exact Mathlib field-theory leaves; all other inputs reused. No statement correction, Lean writing or compilation.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), through the existing via chain and the parent model Step 6: ILO X 2.3 Step 2 p.150, group enlargement, contracted products and (2.b). The ancestor command returns None on this inherited chain, as for the parent: retain null and prepend this item to the new nodes' via lists.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic field-theory amalgamation used only to place two finite fields in a common ambient field before taking their finite compositum; it preserves the ILO common-constants induction route."
+   },
+   {
+    "node": "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+    "why": "Generic normal-extension fixed-field fact for K^{Aut_e(K)}/e; it supplies the inseparable-constants clause in the ILO graph-enlargement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-139c70ecb",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-139c70ecb (reviewer sub-agent of L); spot-checked: ILO X 2.3 Step 2 read (PDF p.156, printed p.150): contracted products X0 = Y0 ×^H G and the graph enlargement H1 → G1, which give (2.b). The item is an agent-formulated finite-family version: G = A × ∏J_j, with Γ_i the compatible pairs. Its statement is unchanged from base and the item is still unsplit live. Neither the item nor its citer or chain is on route-pivot-dropped, and there is no repair note. All 10 steps are true and their citations say what the steps use. Step 1: common-extension, compositum bound [L_rF:L_r] ≤ [F:e], finite normal closure. Step 2: A finite, Γ_i → J_i surjective by the new 0BME(2) leaf (only K/e normal is needed), K^G = K^A purely inseparable. Steps 3-6: I recomputed the fibre-product diagonal action, the scalar twists p_gγ_W = p_{gγ}, the cocycle and semilinearity, and the invariant e-map. Step 7: Zariski lemma plus J_i over Ω makes every point of V_b rational, and points of Ω⊗_{F,x}K are the embeddings K → Ω. Step 8: K/F_i is normal, the 0BR4 leaf applies, and (σ^{-1},1) ∈ Γ. Step 9: copies are moved to the identity copy. Step 10: flat going-down plus the finite-dimensional-domain lemma. New leaves: lem-sfb-normal-intermediate-isomorphism-lifts (AlgEquiv.liftNormal, Basic.lean:216/220, verified) and lem-sfb-normal-embeddings-automorphism-transitive (Normal.algHomEquivAut, Defs.lean:207, verified). Both are true, were tested on Q(∛2) and purely inseparable cases, and are not duplicates; rg -L found only weaker or different nodes (normal-subextension-automorphism-extends needs M normal). Tool uses accepted: common-extension-fields and normal fixed-field purely inseparable, both generic. FIX in the item only. (1) B3: the geometric fibre at an arbitrary geometric point b was cited only to def-weil-geometric-fibre. I added [def-weil-geometric-point] to the statement and stmt_deps, and wrote the fibres as V_i×_{B_i}Spec Ω and Y_i×_{B_i}Spec Ω as orbits of underlying points, which is exactly what Steps 7-9 prove and the citer uses. (2) Step 2 now lifts the automorphism by which j acts, since the J_i-action need not be faithful.; 1 file(s) fixed by the reviewer"
  }
 }
