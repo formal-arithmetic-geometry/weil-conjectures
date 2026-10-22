@@ -120,9 +120,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
-/-- The **trace map** `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a morphism `f` smooth of pure
-relative dimension `d` (SGA 4, Exposé XVIII, Théorème 2.9). Its construction is not formalized:
-see the module docstring for the properties that are assumed. -/
+/-- Blueprint `sk-def-sp-trace`: the **trace map** `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a
+morphism `f` smooth of pure relative dimension `d` (SGA 4, Exposé XVIII, Théorème 2.9). Its
+construction is not formalized: see the module docstring for the properties that are assumed. -/
 @[no_expose]
 noncomputable def smoothTrace :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
@@ -138,8 +138,8 @@ noncomputable def smoothPurityMap :
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   (boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
 
-/-- **Smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the adjoint of the trace,
-`ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism. -/
+/-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
+adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism. -/
 instance isIso_smoothPurityMap : IsIso (smoothPurityMap ℓ f d) :=
   sorry
 
@@ -154,10 +154,11 @@ noncomputable def smoothPurityIso :
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   (ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ f d)).symm
 
-/-- **Normalization of purity in relative dimension zero**: for an open immersion `j`, the
-purity isomorphism `Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is the canonical identification
-`Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ` (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`); equivalently,
-the trace of `j` is the counit `Rj_! Rj^! ℚ̄_ℓ ⟶ ℚ̄_ℓ` read through it. -/
+/-- Blueprint `sk-thm-purity-transport`, étale case: **normalization of purity in relative
+dimension zero**: for an open immersion `j`, the purity isomorphism `Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is
+the canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
+(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`); equivalently, the trace of `j` is the
+counit `Rj_! Rj^! ℚ̄_ℓ ⟶ ℚ̄_ℓ` read through it. -/
 theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j.left] :
     smoothPurityIso ℓ j 0 =
       (ObjectProperty.ι _).mapIso (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j) ≪≫
@@ -165,9 +166,9 @@ theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j
         ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm :=
   sorry
 
-/-- **Compatibility of purity with composition with an open immersion**: for `f` smooth of
-pure relative dimension `d` and an open immersion `j` on its target, the purity isomorphism of
-`f ≫ j` is that of `f` precomposed with
+/-- Blueprint `sk-prop-sp-composition`, case of an open immersion: **compatibility of purity
+with composition with an open immersion**: for `f` smooth of pure relative dimension `d` and an
+open immersion `j` on its target, the purity isomorphism of `f ≫ j` is that of `f` precomposed with
 `R(f ≫ j)^! ℚ̄_ℓ ≅ Rf^! Rj^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`, the composition isomorphism of the exceptional
 inverse images followed by purity for `j` (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`). -/
 theorem smoothPurityIso_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
