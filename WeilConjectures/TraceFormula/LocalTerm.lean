@@ -294,8 +294,8 @@ lemma clopenIdempotent_app (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.le
         K := by
   rw [clopenIdempotent, NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl, Iso.symm_inv,
-    conjugateIsoEquiv_apply_hom, Adjunction.clopenSection]
+    boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl, conjugateIsoEquiv_apply_inv,
+    Iso.symm_inv, Adjunction.clopenSection]
   simp only [Category.assoc]
 
 /-- The pushforward of the restriction `j^* α` of a Borel–Moore section to an open and closed
@@ -304,14 +304,17 @@ lemma BorelMooreSection.pushforward_restrict (j : B ⟶ X) [IsOpenImmersion j.le
     [IsProper j.left] (α : BorelMooreSection ℓ X) :
     BorelMooreSection.pushforward j (α.restrict j) =
       α ≫ (clopenIdempotent ℓ j).app (dualizingComplex' ℓ X) := by
-  rw [BorelMooreSection.pushforward, BorelMooreSection.restrict, clopenIdempotent]
+  have hα := (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).inv.naturality α
+  rw [BorelMooreSection.pushforward, BorelMooreSection.restrict, clopenIdempotent,
+    boundedConstructibleUpperShriekUnitIso_padicAlgCl, Iso.trans_inv, Iso.symm_inv, Iso.app_inv,
+    Category.assoc, ← reassoc_of% hα]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Iso.inv_hom_id_assoc, Functor.map_comp, Category.assoc]
   rw [(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).inv.naturality_assoc
-      (dualizingComplexComp ℓ j).hom,
-    ← (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map_comp_assoc,
-    Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
-    Adjunction.unit_naturality_assoc]
+      (dualizingComplexComp ℓ j).hom]
+  simp only [Iso.map_hom_inv_id_assoc]
+  exact (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    j).unit_naturality_assoc α _
 
 end Clopen
 

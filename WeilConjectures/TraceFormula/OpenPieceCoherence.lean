@@ -111,7 +111,7 @@ lemma counit_app_ofNatIsoRight_upperShriekIsoUpperStar
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom M
   simp only [Adjunction.ofNatIsoRight_counit, NatTrans.comp_app, Functor.whiskerRight_app]
   rw [boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl,
-    Iso.symm_inv, conjugateIsoEquiv_apply_hom]
+    conjugateIsoEquiv_apply_inv, Iso.symm_inv]
   exact h
 
 omit [Fact (Nat.Prime (ringChar k))] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

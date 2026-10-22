@@ -213,7 +213,7 @@ property by `AlgebraicGeometry.relative_isOpenImmersion_of_exists_opens`. The mo
 flat, being smooth.
 
 (blueprint: `sk-lem-picard-f-open`, `lem-pc-f-open-subfunctor`) -/
-theorem isOpenImmersion_picardFunctorInvertibleDirectImage_ι
+theorem isOpenImmersion_picardFunctorInvertibleDirectImage_ι [IsSepClosed k]
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules] :

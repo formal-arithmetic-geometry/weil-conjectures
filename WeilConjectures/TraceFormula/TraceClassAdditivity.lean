@@ -66,6 +66,7 @@ variable {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.h
 /-- The restriction of Borel–Moore sections along an open immersion is additive. -/
 lemma restrict_add (j : U ⟶ X) [IsOpenImmersion j.left] (α β : BorelMooreSection ℓ X) :
     (α + β).restrict j = α.restrict j + β.restrict j := by
+  have := Functor.additive_of_iso (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).symm
   simp only [restrict, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 omit [LocallyOfFiniteType U.hom] [IsSeparated U.hom] in

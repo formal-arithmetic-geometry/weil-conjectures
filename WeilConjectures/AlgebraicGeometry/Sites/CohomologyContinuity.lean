@@ -11,6 +11,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
+import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 
 /-!
 # Continuity of étale cohomology at inverse limits
@@ -20,9 +22,11 @@ affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. The
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection `sk-prop-h2`. For
 abelian sheaves it is proved here in elementwise form (`cohomologyMap_isColimit_of_isLimit`), by
-specialising `nonempty_isColimit_cofiltered_fixed_base_cohomology`. The vanishing form for a
-general Grothendieck abelian coefficient category
-(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`) is not formalised here.
+specialising `nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vanishing form
+follows (`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`). The vanishing
+form for a general Grothendieck abelian coefficient category
+(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`), which goes beyond the abelian
+sheaves of [Stacks, Tag 09YQ], is not formalised here.
 
 ## Main definitions
 
@@ -51,7 +55,11 @@ noncomputable abbrev sectionsFunctor (X : Scheme.{u}) : Sheaf X.smallEtaleTopolo
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
 transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S`. Then
 `H^q(X, F|_X) = colimᵢ H^q(Dᵢ, F|_{Dᵢ})`; in particular `H^q(X, F|_X)` vanishes as soon as all
-the `H^q(Dᵢ, F|_{Dᵢ})` do. -/
+the `H^q(Dᵢ, F|_{Dᵢ})` do.
+
+This is stated for a general Grothendieck abelian coefficient category `A`, beyond the abelian
+sheaves of [Stacks, Tag 09YQ]; for `A = AddCommGrpCat` it is proved as
+`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`. -/
 theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology A) {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
@@ -174,5 +182,33 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     rw [← key (D.map f.unop).left (D.obj i).hom (D.obj k.unop).hom (hπ f.unop) y]
     change Sheaf.H.map _ q (H.map f y) = 0
     rw [hfg, map_zero]
+
+/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, vanishing
+form for abelian sheaves.
+
+Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
+transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf on `S`. If all the
+`H^q(Dᵢ, F|_{Dᵢ})` vanish, then so does `H^q(X, F|_X)`: every class on `X` comes from some `Dᵢ`
+(`cohomologyMap_isColimit_of_isLimit`). -/
+theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat {S : Scheme.{u}}
+    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
+    [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
+    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
+    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ)
+    (h : ∀ i, IsZero (((sectionsFunctor AddCommGrpCat.{u + 1} (D.obj i).left).rightDerived q).obj
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F))) :
+    IsZero (((sectionsFunctor AddCommGrpCat.{u + 1} c.pt.left).rightDerived q).obj
+      ((Etale.upperStar AddCommGrpCat.{u + 1} c.pt.hom).obj F)) := by
+  refine (Sheaf.subsingleton_H_iff_isZero_rightDerived c.pt.left.smallEtaleTopology
+    (Scheme.isTerminalEtaleMkId c.pt.left) q _).1 (subsingleton_of_forall_eq 0 fun x ↦ ?_)
+  obtain ⟨i, y, hy⟩ := (cohomologyMap_isColimit_of_isLimit F D c hc q).1 x
+  have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q) :=
+    (Sheaf.subsingleton_H_iff_isZero_rightDerived (D.obj i).left.smallEtaleTopology
+      (Scheme.isTerminalEtaleMkId (D.obj i).left) q _).2 (h i)
+  rw [Subsingleton.elim y 0, map_zero] at hy
+  have := congrArg (Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left
+    (D.obj i).hom c.pt.hom (Over.w (c.π.app i)).symm).inv.app F) q) hy
+  rw [← Sheaf.H.map_comp_apply, map_zero] at this
+  simpa using this.symm
 
 end AlgebraicGeometry.Etale

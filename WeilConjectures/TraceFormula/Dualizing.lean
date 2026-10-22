@@ -38,9 +38,11 @@ of pure dimension `d` over `s`,
 ```
 (`ProEtale.CondensedRing.dualizingComplexSmoothIso`); in particular `ω_C ≅ ℚ̄_ℓ,C(1)[2]` for a
 smooth curve `C`, which is what makes the local terms of the Frobenius correspondence on a curve
-computable (`WeilConjectures.TraceFormula.Correspondence`). In relative dimension zero, for an
-étale morphism `j : U ⟶ X` such as the inclusion of an open and closed subscheme, purity is the
-identification `Rj^! ℚ̄_ℓ,X ≅ ℚ̄_ℓ,U` (`ProEtale.CondensedRing.etalePurityIso`).
+computable (`WeilConjectures.TraceFormula.Correspondence`). For an open immersion `j : U ⟶ X`, such
+as the inclusion of an open and closed subscheme, no chosen purity isomorphism is used: the
+identification `Rj^! ℚ̄_ℓ,X ≅ j^* ℚ̄_ℓ,X ≅ ℚ̄_ℓ,U` is canonical
+(`ProEtale.CondensedRing.boundedConstructibleUpperShriekUnitIso_padicAlgCl`), from
+`Rj_! ≅ j_!` and the adjunction `j_! ⊣ j^*`.
 
 For the base point no purity is needed: `a_s` is the identity of `s`, and
 `ω_s = R(𝟙 s)^! ℚ̄_ℓ,s ≅ ℚ̄_ℓ,s` is the identity isomorphism of the exceptional inverse image
@@ -52,9 +54,9 @@ A *Borel–Moore section* of `X` is a morphism `α : ℚ̄_ℓ,X ⟶ ω_X`
 (`ProEtale.CondensedRing.BorelMooreSection`, blueprint `sk-d-integral`). Along an open immersion
 `j : U ⟶ X` it restricts to
 ```
-j^* α : ℚ̄_ℓ,U ≅ Lj^* ℚ̄_ℓ,X --Lj^* α--> Lj^* ω_X ≅ Rj^! ω_X ≅ ω_U
+j^* α : ℚ̄_ℓ,U ≅ Rj^! ℚ̄_ℓ,X --Rj^! α--> Rj^! ω_X ≅ ω_U
 ```
-through the canonical identification `Rj^! ≅ Lj^*` for open immersions
+by the canonical purity for open immersions
 (`ProEtale.CondensedRing.BorelMooreSection.restrict`). For `X` proper over `s`
 its *integral* is
 ```
@@ -79,8 +81,7 @@ the monoidal pullback `L(𝟙 s)^*`
   exceptional inverse image; its composition isomorphism is
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`.
 - `ProEtale.CondensedRing.dualizingComplex'`, `ProEtale.CondensedRing.dualizingComplexComp`.
-- `ProEtale.CondensedRing.etalePurityIso`, `ProEtale.CondensedRing.dualizingComplexSmoothIso`:
-  smooth purity for the dualizing complexes.
+- `ProEtale.CondensedRing.dualizingComplexSmoothIso`: smooth purity for the dualizing complexes.
 - `ProEtale.CondensedRing.dualizingComplexPointIso`: `ω_s ≅ ℚ̄_ℓ,s`.
 - `ProEtale.CondensedRing.BorelMooreSection`, `BorelMooreSection.restrict`,
   `BorelMooreSection.integral`, `BorelMooreSection.localTerm`.
@@ -153,24 +154,6 @@ noncomputable def dualizingComplexComp (f : X ⟶ Y) :
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
 
-/-- The Tate twist `ℚ̄_ℓ,X(0)`, placed in degree `0`, is the unit of `D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def tateTwistDerivedZeroIso (T : Scheme.{u}) :
-    tateTwistDerived T ℓ 0 ≅ 𝟙_ _ :=
-  DerivedCategory.singleFunctorObjUnitIso _
-
-/-- **Étale purity**, smooth purity in relative dimension zero: for a morphism `f` smooth of
-relative dimension `0`, that is étale, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X`. This is
-`ProEtale.CondensedRing.smoothPurityIso` for `d = 0`, lifted along the fully faithful inclusion
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def etalePurityIso (f : X ⟶ Y) [SmoothOfRelativeDimension 0 f.left] :
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≅
-      𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  (ObjectProperty.fullyFaithfulι _).preimageIso
-    (smoothPurityIso ℓ f 0 ≪≫
-      (shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _ ≪≫
-      tateTwistDerivedZeroIso ℓ X.left)
-
 variable (X) in
 /-- **Smooth purity for the dualizing complex**: for `X` smooth of pure dimension `d` over `s`,
 `ω_X ≅ ℚ̄_ℓ,X(d)[2d]`, after the inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. This is
@@ -214,17 +197,15 @@ variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] [LocallyOfFiniteType U.
 /-- The *restriction* of a Borel–Moore section along an open immersion `j : U ⟶ X`, for
 instance the inclusion of an open and closed subscheme:
 ```
-j^* α : ℚ̄_ℓ,U ≅ Lj^* ℚ̄_ℓ,X --Lj^* α--> Lj^* ω_X ≅ Rj^! ω_X ≅ ω_U,
+j^* α : ℚ̄_ℓ,U ≅ Rj^! ℚ̄_ℓ,X --Rj^! α--> Rj^! ω_X ≅ ω_U,
 ```
-through the unit isomorphism of the monoidal functor `Lj^*`, the identification
-`Rj^! ≅ Lj^*` for the open immersion `j` (`boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl`)
-and `dualizingComplexComp` (blueprint `def-trf-local-term`, restricted sections). -/
+through the canonical identification `Rj^! ℚ̄_ℓ,X ≅ j^* ℚ̄_ℓ,X ≅ ℚ̄_ℓ,U`
+(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`) and `dualizingComplexComp` (blueprint
+`def-trf-local-term`, restricted sections). -/
 noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
     (α : BorelMooreSection ℓ X) : BorelMooreSection ℓ U :=
-  (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).hom ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map α ≫
-    (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).inv.app _ ≫
+  (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
+    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map α ≫
     (dualizingComplexComp ℓ j).hom
 
 /-- The *integral* `∫_X α ∈ End ℚ̄_ℓ,s` of a Borel–Moore section of a scheme proper over `s`:

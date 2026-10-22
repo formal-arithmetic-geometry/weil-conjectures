@@ -360,8 +360,6 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
         (Functor.leftUnitor _).hom := by
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (isPullback_openImmersionProperRefinementHom j)
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
-    (isPullback_openImmersionCompactificationHom j)
   have := (openImmersionProperRefinement j).isProper
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (openImmersionProperRefinement j).isPullback
@@ -371,20 +369,13 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
       (Compactification.ofIsProper j.left))
   have hr := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
     ℓ (openImmersionProperRefinement j))
-  have ht := congrArg Iso.hom (boundedConstructibleLowerShriekRefinementIso'_trans
-    (Profinite.padicAlgClRingObj ℓ) ℓ
-    (isPullback_openImmersionProperRefinementHom j) (isPullback_openImmersionCompactificationHom j)
-    (openImmersionProperRefinement j).isPullback rfl (openImmersionProperRefinementHom_comp_id j)
-    (openImmersionCompactificationHom_comp_overG j) (openImmersionProperRefinement j).hom_overG)
-  rw [Iso.trans_hom] at hc ht
+  rw [Iso.trans_hom] at hc
   rw [boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq,
     boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl,
     boundedConstructibleLowerShriekOfCompactificationOfIsProperIso]
   simp only [Iso.trans_inv, Iso.trans_hom, Category.assoc, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_hom]
   simp only [← hc, Category.assoc, Iso.inv_hom_id_assoc, hr]
-  have ht' := (Iso.inv_comp_eq _).2 ht.symm
-  simp only [reassoc_of% ht']
 
 /-- Composing with an identity and the image of an identity does nothing. -/
 lemma id_comp_map_id_comp {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (X : C) {Y : D}
