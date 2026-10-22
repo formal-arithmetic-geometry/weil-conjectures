@@ -24044,3 +24044,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:58 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 00:00 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 00:01 L: merged deliver/NJ/lem-sfb-proper-pair-radicial-preparation (reviewer FIX; first push; new nodes: 0)
+- 2026-10-22T00:02:25Z L: superseded stage-1 delivery NC/def-pur-affine-space-comparison at e5a06212cccb460b61cb29b7c8bfb87cfdb7ff0b; current completion retained; packet archived at refs/superseded/NC/def-pur-affine-space-comparison/e5a06212cccb460b61cb29b7c8bfb87cfdb7ff0b; stale return retired.
