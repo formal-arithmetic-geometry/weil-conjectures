@@ -24099,3 +24099,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/V7/Sheaf.Paper.TateTwistLocallyFree (stage 3; reviewer PASS; first push; landing 20261022T002501-L-1933458 (interface); batch 20261022T002343; modules 3; new nodes 2; change records: coord/changes/v7-tate-twist-proof-local-instances.md)
 - 00:28 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 00:28 L: returned deliver/NC/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C1/F + C5/B9 + G4. This is the third push of this item, after NM 966655f0 and NJ ca6120ce were RETURNed for the same pro)
+- 00:28 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
