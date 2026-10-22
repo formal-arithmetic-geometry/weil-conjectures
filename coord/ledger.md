@@ -24237,3 +24237,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:40 L: merged deliver/NS/lem-sfb-normal-integral-finite-sheaf-norm (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-22T01:41:06Z L: superseded stage-1 delivery NJ/lem-sfb-finite-normal-ample-descent at 5e1ae6e19866383c7008eae5b73bf2c0c8c11afc; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-finite-normal-ample-descent/5e1ae6e19866383c7008eae5b73bf2c0c8c11afc; stale return retired.
 - 01:41 L: merged deliver/NU/lem-sfb-finite-trivialize-invertible-upstairs (reviewer PASS; first push; new nodes: 1)
+- 01:41 L: returned deliver/R2/Sheaf.Paper.IntegralOperationsWellDefined (reviewer RETURN: (reviewer C-d7dad, head d7dad401e) Brief point 2 (no delivery-errors.md letter fits): the new non-reducible public resul)
