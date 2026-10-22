@@ -76,8 +76,7 @@ point `s₀` of `S` lies in a basic open `D(a)` over which there is a bounded co
 free modules such that for every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` there
 is an isomorphism `g^* P ≅ R p'_* g'^* 𝒢` in `D(𝒪_{T'})`.
 
-The per-degree form is
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
+The per-degree form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
 This derived form is stated with `sorry`: its proof needs the comparison of the Čech complex
 `Č(U, g'^* 𝒢)` with `R p'_* g'^* 𝒢` as objects of the derived category, while this file only has
 the comparison on cohomology sheaves.
