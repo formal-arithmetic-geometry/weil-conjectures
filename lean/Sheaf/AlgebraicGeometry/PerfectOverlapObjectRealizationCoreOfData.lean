@@ -37,15 +37,12 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
-private theorem existsPinned {α : Sort*} (a : α) : ∃ b : α, b = a := ⟨a, rfl⟩
-
 /-- Cache a constructed comparison, specified uniquely by equality. -/
-@[irreducible] private noncomputable def pinned {α : Sort*} (a : α) : α :=
-  Classical.choose (existsPinned a)
+@[irreducible] private def pinned {α : Sort*} (a : α) : α := a
 
 private theorem pinned_eq {α : Sort*} (a : α) : pinned a = a := by
   unfold pinned
-  exact Classical.choose_spec (existsPinned a)
+  rfl
 
 /-- Use the equation API of the transport map before instantiating the geometry. -/
 private theorem homMap_formula

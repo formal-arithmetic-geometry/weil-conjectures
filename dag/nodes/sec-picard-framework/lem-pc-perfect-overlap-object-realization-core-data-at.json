@@ -112,13 +112,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreData.lean",
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreCanonicalFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreCanonicalFamily.lean",
   "declaration": "AlgebraicGeometry.perfect_overlap_object_realization_core_data_at",
   "statement": "theorem perfect_overlap_object_realization_core_data_at {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} ((SheafOfModules.{u}) ((moduleRings Z.toRingedSpace).over U))] (j : I) (hij : i ≤ j) (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens), ∃ k : I, j ≤ k) (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens) (hcover : U ⊔ V = ⊤) (hU : IsCompact (U : Set (↥(pullback t (Spec.map (R.map (homOfLE hij))))))) (hV : IsCompact (V : Set (↥(pullback t (Spec.map (R.map (homOfLE hij))))))) (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme) (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B) (E : schemeDerivedCategory (pullback t (Spec.map (c.ι.app i)))) (φU : (derivedPullback (baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ U)).obj A ≅ (schemeOpenRestriction _ _).mapDerivedCategory.obj E) (φV : (derivedPullback (baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅ (schemeOpenRestriction _ _).mapDerivedCategory.obj E) (k : I) (hjk : j ≤ k) : Nonempty (perfectOverlapComparisonDataType R c hc i Z t j hij hstage U V hcover hU hV A B hA hB E φU φV k hjk)",
   "branch": "sheaf-dag",
-  "by": "S4",
-  "date": "2026-10-15"
+  "by": "A2",
+  "date": "2026-10-22"
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -131,14 +131,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-22ce9",
-  "group": "K1",
+  "reviewer": "C-be38e",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261014T234607-L-1023500",
+  "landing": "20261022T025311-L-1269528",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean module compiles cleanly; pointwise theorem, DAG node, imports, and report agree with the stated delivery and interface checks."
+  "note": "independent cc review: delivered CoreOfData/CoreData vs live and quarantine copies; Sheaf vs WC perfectOverlapObjectRealizationCoreStatement (differ only in a Prop proof argument); node lean records vs CanonicalFamily module; scratch compile + #print axioms of both theorems; importer PerfectOverlapObjectRealization against the delivered set"
  },
  "lean_audit": {}
 }

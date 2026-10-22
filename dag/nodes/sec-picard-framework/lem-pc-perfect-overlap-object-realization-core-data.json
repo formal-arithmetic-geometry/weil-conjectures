@@ -18,61 +18,35 @@
  ],
  "proof": [
   {
-   "text": "Use the stagewise comparison-data family theorem to obtain the prescribed comparison data at every later index.",
+   "text": "Use the explicitly constructed perfectOverlapCanonicalComparisonFamily from the single-stage comparison module. This gives the prescribed family itself, rather than an independently chosen family from its nonemptiness theorem.",
    "uses": [
-    "lem-pc-perfect-overlap-object-realization-core-data-family"
+    "lem-pc-perfect-overlap-object-realization-core-data-at"
    ],
    "elementary": false
   },
   {
-   "text": "Use the already constructed stage and apex equivalences, stage and apex object isomorphisms, transition pullbacks, and pinned composition comparisons. They require no further choices.",
-   "uses": [
-    "def-pc-perfect-overlap-stage-equivalence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each k construct HU, HV and HW as pullback along the restricted limit morphisms followed by the inverse derived open-site equivalences. Use restriction comparisons for beta and gamma, the fixed composition comparison for kappa, and the site counit for site. On K-flat representatives the coherence paths are the same tensor pullback restricted to the intersection. Define theta as kappa followed by the image of the supplied phi followed by site; the theta equations are reflexive.",
-   "uses": [
-    "def-pc-two-open-comparison-diagram",
-    "def-pc-perfect-overlap-hom-continuity-data",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Cartesian composition yields eta between HW followed by the fixed apex equivalence and the fixed stage equivalence followed by overlapLimitTransition. Expand psi and substitute theta. The site unit/counit cancel; restriction coherence cancels gamma and tau. Associativity of the fixed counit-pinned comparison gives object_pin with exactly the constructed stageObj, apexObj and overlapLimitBaseComparison. No Hom-morphism naturality argument is included here. Empty, equal and total opens and arbitrary unbounded objects use the same argument.",
-   "uses": [
-    "lem-pc-perfect-hom-transport",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-open-restriction-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the core-of-data assembly theorem to the stagewise family obtained from Hom continuity, yielding the required core realization package.",
+   "text": "Apply perfect_overlap_object_realization_core_of_data to this canonical family, supplying its canonicality equation by reflexivity. This provides all seven fields of the core, with the exact fixed stage and apex equivalences and prescribed object pin.",
    "uses": [
     "lem-pc-perfect-overlap-object-realization-core-of-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "Package the canonical family together with a core from the proved nonemptiness result into the required dependent pair. The obsolete hstage argument is not applied to the adopted source core proposition, which already has type Prop after hij; proof irrelevance identifies hstage with the trivial witness used by that proposition.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-open-restriction-maps",
-  "def-pc-perfect-overlap-hom-continuity-data",
-  "def-pc-perfect-overlap-stage-equivalence",
-  "def-pc-two-open-comparison-diagram",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-perfect-overlap-object-realization-core-data-family",
-  "lem-pc-perfect-overlap-object-realization-core-of-data",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-perfect-overlap-object-realization-core-data-at",
+  "lem-pc-perfect-overlap-object-realization-core-of-data"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "A4",
-  "date": "2026-10-15",
+  "agent": "A2",
+  "date": "2026-10-22",
   "document": "https://stacks.math.columbia.edu/tag/09RE",
-  "note": "The stagewise family is supplied by Hom continuity; the remaining core assembly is isolated in a named intermediate theorem."
+  "note": "Restore the quarantined canonical-family packaging proof against the adopted source core proposition. Use the explicit canonical family and core-of-data theorem; no new holes or mathematical assumptions."
  },
  "mathlib_searches": [
   {
@@ -133,15 +107,13 @@
   "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData",
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreData.lean",
   "declaration": "AlgebraicGeometry.perfect_overlap_object_realization_core_data",
-  "statement": "theorem perfect_overlap_object_realization_core_data\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapObjectRealizationCoreStatement R c hc i Z t j hij hstage",
+  "statement": "theorem perfect_overlap_object_realization_core_data\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapObjectRealizationCoreStatement R c hc i Z t j hij",
   "declarations": [
-   "AlgebraicGeometry.PerfectHomObjectRealizationCore",
-   "AlgebraicGeometry.perfectOverlapObjectRealizationCoreStatement",
    "AlgebraicGeometry.perfect_overlap_object_realization_core_data"
   ],
   "branch": "sheaf-dag",
-  "by": "W4",
-  "date": "2026-10-15"
+  "by": "A2",
+  "date": "2026-10-22"
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -154,21 +126,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-22ce9",
-  "group": "K1",
+  "reviewer": "C-be38e",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261014T234607-L-1023500",
+  "landing": "20261022T025311-L-1269528",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean module compiles cleanly; pointwise theorem, DAG node, imports, and report agree with the stated delivery and interface checks.",
-  "sorry_before": [
-   "AlgebraicGeometry.perfect_overlap_object_realization_core_data_at",
-   "AlgebraicGeometry.perfect_overlap_object_realization_core_of_data"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.perfect_overlap_object_realization_core_of_data"
-  ]
+  "note": "independent cc review: delivered CoreOfData/CoreData vs live and quarantine copies; Sheaf vs WC perfectOverlapObjectRealizationCoreStatement (differ only in a Prop proof argument); node lean records vs CanonicalFamily module; scratch compile + #print axioms of both theorems; importer PerfectOverlapObjectRealization against the delivered set"
  },
  "lean_audit": {}
 }
