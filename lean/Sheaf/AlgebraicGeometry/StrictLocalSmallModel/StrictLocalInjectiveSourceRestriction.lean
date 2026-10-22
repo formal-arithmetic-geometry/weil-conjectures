@@ -65,7 +65,7 @@ theorem smallModel_strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}}
     (q : K.obj ≅ DerivedCategory.Q.obj
       (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :
     ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
-        ((strictLocalCohomologySourceLegs s
+        ((smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫
         ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{v + 1}).map

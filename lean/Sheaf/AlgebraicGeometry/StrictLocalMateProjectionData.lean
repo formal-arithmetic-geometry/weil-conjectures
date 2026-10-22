@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ExactGlobalSectionsLeray
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
-public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Projection restriction formulas for the strict-local mate
@@ -129,7 +129,7 @@ structure StrictLocalMateProjectionData
         a))).inv.app K.obj) ≫
       (e i).inv
   restriction : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
-        ((strictLocalCohomologySourceLegs s
+        ((smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫
         ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{v + 1}).map

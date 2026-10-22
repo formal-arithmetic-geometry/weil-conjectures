@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-strict-local-injective-source-sections",
  "kind": "statement",
  "title": "StrictLocalInjectiveSourceSections",
- "statement": "Let $f:X\\to S$, $s:\\operatorname{Spec}\\Omega\\to S$, $K\\in D^+(\\operatorname{Ab}(X_{\\mathrm{et}}))$, $n\\in\\mathbf Z$, and $Q$ be as in [def-weil-pbc-strict-local-neighbourhood-geometry]. Let $J$ be a specified bounded-below injective complex on $X$ and $q:K\\cong QJ$ a specified isomorphism [lem-weil-pbc-dplus-injective-representative]. Use the actual termwise sections cohomology $B_g$, chain-level restrictions $r_{a,g,h}$, and canonical sections comparisons $c_g$ defined in [lem-weil-pbc-injective-sections-pullback-comparison]. Let $F_i=\\operatorname{Hom}(\\mathbf Z[V_i][0],(Rf_*K)[n])$, with precomposition transitions, and $\\ell_i$ its canonical germ source leg [def-weil-pbc-canonical-derived-cohomology-germs]. There exist isomorphisms $A_i:F_i\\cong B_{t_i}$ such that $F(a)=A_j\\,r_{D(a),t_j,t_i}\\,A_i^{-1}$ for every $a:i\\to j$. Moreover, $\\ell_i$ followed by the sections homology map of the strict-local mate equals $A_i$ followed by $r_{Q_i,t_i,p}$, $c_p$, and the inverse of the exact-sections Leray target isomorphism [def-weil-pbc-strict-local-mate-projection-data]. These are comparisons with the concrete complex of sections of $J$, not the stage hypercohomology isomorphisms of the item. No colimit, continuity, or invertibility of the mate or of $c_p$ is asserted.",
+ "statement": "Let $f:X\\to S$, $s:\\operatorname{Spec}\\Omega\\to S$, $K\\in D^+(\\operatorname{Ab}(X_{\\mathrm{et}}))$, $n\\in\\mathbf Z$, and $Q$ be as in [def-weil-pbc-strict-local-neighbourhood-geometry]. Let $J$ be a specified bounded-below injective complex on $X$ and $q:K\\cong QJ$ a specified isomorphism [lem-weil-pbc-dplus-injective-representative]. Use the actual termwise sections cohomology $B_g$, chain-level restrictions $r_{a,g,h}$, and canonical sections comparisons $c_g$ defined in [lem-weil-pbc-injective-sections-pullback-comparison]. Let $F_i=\\operatorname{Hom}(\\mathbf Z[V_i][0],(Rf_*K)[n])$, with precomposition transitions, and $\\ell_i$ its canonical germ source leg [def-weil-pbc-small-model-cohomology-germs]. There exist isomorphisms $A_i:F_i\\cong B_{t_i}$ such that $F(a)=A_j\\,r_{D(a),t_j,t_i}\\,A_i^{-1}$ for every $a:i\\to j$. Moreover, $\\ell_i$ followed by the sections homology map of the strict-local mate equals $A_i$ followed by $r_{Q_i,t_i,p}$, $c_p$, and the inverse of the exact-sections Leray target isomorphism [def-weil-pbc-strict-local-mate-projection-data]. These are comparisons with the concrete complex of sections of $J$, not the stage hypercohomology isomorphisms of the item. No colimit, continuity, or invertibility of the mate or of $c_p$ is asserted.",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 03Q9 (theorem-higher-direct-images), final injective-complex paragraph; 03Q8 (lemma-higher-direct-images), derived variant"
@@ -12,7 +12,8 @@
   "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-injective-sections-pullback-comparison",
   "def-weil-pbc-canonical-derived-cohomology-germs",
-  "def-weil-pbc-strict-local-mate-projection-data"
+  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof": [
   {
@@ -42,13 +43,21 @@
     "lem-weil-pbc-strict-local-small-model-geometry-transport"
    ],
    "elementary": true
+  },
+  {
+   "text": "Use the small-model germ legs without changing their component maps. The adopted six common derived-sections constructions are definitionally identical to the former local copies.",
+   "uses": [
+    "def-weil-pbc-small-model-cohomology-germs"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-local-injective-source-comparison",
   "lem-weil-pbc-strict-local-injective-source-transition",
   "lem-weil-pbc-strict-local-injective-source-restriction",
-  "lem-weil-pbc-strict-local-small-model-geometry-transport"
+  "lem-weil-pbc-strict-local-small-model-geometry-transport",
+  "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof_origin": {
   "by": "T6 adapting the complete existing proof along the canonical colimit-model comparison",
@@ -116,7 +125,7 @@
   "declarations": [
    "AlgebraicGeometry.Etale.smallModel_exists_strictLocalInjectiveSourceSections"
   ],
-  "statement": "theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) (J : CochainComplex.Plus (InjectiveObject (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))) (q : K.obj ≅ DerivedCategory.Q.obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) : ∃ e : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), (strictLocalCohomologyNeighbourhoodFunctor s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).obj (op i) ≅ termwiseSectionsCohomology ((strictLocalNeighbourhoodDiagram f s).obj i) (((upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i)).mapHomologicalComplex (.up ℤ)).obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) n, (∀ {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j), (strictLocalCohomologyNeighbourhoodFunctor s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).map a.op = (e j).hom ≫ termwiseSectionsRestriction ((strictLocalNeighbourhoodDiagram f s).map a) ((strictLocalNeighbourhoodProjection f s).app j) ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id _).symm.trans ((strictLocalNeighbourhoodProjection f s).naturality a).symm) (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫ (e i).inv) ∧ (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), ((strictLocalCohomologySourceLegs s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫ ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))) = (e i).hom ≫ termwiseSectionsRestriction (Q.smallModelLegs.app i) ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.smallModelOver i).symm (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫ representativeSectionsComparison (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫ (strictLocalBaseChangeTargetIso f s K n).inv)",
+  "statement": "theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) (J : CochainComplex.Plus (InjectiveObject (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))) (q : K.obj ≅ DerivedCategory.Q.obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) : ∃ e : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), (strictLocalCohomologyNeighbourhoodFunctor s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).obj (op i) ≅ termwiseSectionsCohomology ((strictLocalNeighbourhoodDiagram f s).obj i) (((upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i)).mapHomologicalComplex (.up ℤ)).obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) n, (∀ {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j), (strictLocalCohomologyNeighbourhoodFunctor s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).map a.op = (e j).hom ≫ termwiseSectionsRestriction ((strictLocalNeighbourhoodDiagram f s).map a) ((strictLocalNeighbourhoodProjection f s).app j) ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id _).symm.trans ((strictLocalNeighbourhoodProjection f s).naturality a).symm) (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫ (e i).inv) ∧ (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), ((smallModel_strictLocalCohomologySourceLegs s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫ ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))) = (e i).hom ≫ termwiseSectionsRestriction (Q.smallModelLegs.app i) ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.smallModelOver i).symm (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫ representativeSectionsComparison (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫ (strictLocalBaseChangeTargetIso f s K n).inv)",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
@@ -133,14 +142,74 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-ba0a4",
-  "group": "T6",
-  "result": "fix",
-  "landing": "20261021T214902-L-1880019",
+  "reviewer": "C-a538c",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261022T002439-L-1931164",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf StrictLocalNeighbourhoodGeometry twin (retire-items row 593, DIFFERENT) against the WeilConjectures twin, the new SmallModel.NeighbourhoodGeometry transport API, the 8 adapted unclaimed consumers, the change record and 11 node files. The 12 delivered modules plus the 18 downstream modules (all importers and the closure) compiled rc 0 in a sandbox; axioms clean."
+  "note": "independent cc review: 6 retired defs byte-identical to WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms; small-model sourceIso/sourceLegs moved verbatim to StrictLocalSmallModel.CohomologyGerms (smallModel_ names, iso @[irreducible]); 8 consumer adaptations = rename/import swap + exact-alias geometry theorem; 7 node statement_changes vs live statements; 10 delivered + 20 downstream modules + axioms probe compiled rc 0"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "T2 stage 2",
+  "old_statement": "Let $f:X\\to S$, $s:\\operatorname{Spec}\\Omega\\to S$, $K\\in D^+(\\operatorname{Ab}(X_{\\mathrm{et}}))$, $n\\in\\mathbf Z$, and $Q$ be as in [def-weil-pbc-strict-local-neighbourhood-geometry]. Let $J$ be a specified bounded-below injective complex on $X$ and $q:K\\cong QJ$ a specified isomorphism [lem-weil-pbc-dplus-injective-representative]. Use the actual termwise sections cohomology $B_g$, chain-level restrictions $r_{a,g,h}$, and canonical sections comparisons $c_g$ defined in [lem-weil-pbc-injective-sections-pullback-comparison]. Let $F_i=\\operatorname{Hom}(\\mathbf Z[V_i][0],(Rf_*K)[n])$, with precomposition transitions, and $\\ell_i$ its canonical germ source leg [def-weil-pbc-canonical-derived-cohomology-germs]. There exist isomorphisms $A_i:F_i\\cong B_{t_i}$ such that $F(a)=A_j\\,r_{D(a),t_j,t_i}\\,A_i^{-1}$ for every $a:i\\to j$. Moreover, $\\ell_i$ followed by the sections homology map of the strict-local mate equals $A_i$ followed by $r_{Q_i,t_i,p}$, $c_p$, and the inverse of the exact-sections Leray target isomorphism [def-weil-pbc-strict-local-mate-projection-data]. These are comparisons with the concrete complex of sections of $J$, not the stage hypercohomology isomorphisms of the item. No colimit, continuity, or invertibility of the mate or of $c_p$ is asserted.",
+  "what": "Make the already used small coordinate-ring colimit model explicit after retiring the ambiguous twin module; no hypothesis, object or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tags 03Q8 (lemma-higher-direct-images), 03Q9 (theorem-higher-direct-images, neighbourhood-colimit and injective-complex paragraphs), and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-strict-local-mate-projection-formulas",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-strict-local-neighbourhood-geometry",
+   "lem-weil-pbc-dplus-injective-representative",
+   "lem-weil-pbc-injective-sections-pullback-comparison",
+   "def-weil-pbc-canonical-derived-cohomology-germs",
+   "def-weil-pbc-strict-local-mate-projection-data"
+  ],
+  "old_proof": [
+   {
+    "text": "Construct e_i by the explicit injective direct-image, Hom-complex and free-generator sections comparison. All isomorphisms in this construction are proved using the right-derived unit, K-injective localization and Yoneda.",
+    "uses": [
+     "def-weil-pbc-strict-local-injective-source-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use the uncancelled transition square F(a) e_i.hom = e_j.hom r_a. Cancel e_i.hom and simplify its inverse-hom identity to obtain the conjugation formula. This cancellation is written in Lean.",
+    "uses": [
+     "lem-weil-pbc-strict-local-injective-source-transition"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Use the cone-leg compatibility of this same explicitly constructed e, and assemble it with the transition formula and the family of isomorphisms.",
+    "uses": [
+     "lem-weil-pbc-strict-local-injective-source-restriction"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "The geometry parameter is now the official canonical strictLocalization model. Use [lem-weil-pbc-strict-local-small-model-geometry-transport] to express its cone on the original small colimit model. Replace legs, limit and the two component equations by smallModelLegs, smallModelIsLimit, smallModelFirst and smallModelOver. All cohomology objects, structural morphisms, source and target maps remain those in the original statement; the rest of the existing proof is unchanged.",
+    "uses": [
+     "lem-weil-pbc-strict-local-small-model-geometry-transport"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-strict-local-injective-source-comparison",
+   "lem-weil-pbc-strict-local-injective-source-transition",
+   "lem-weil-pbc-strict-local-injective-source-restriction",
+   "lem-weil-pbc-strict-local-small-model-geometry-transport"
+  ]
+ }
 }

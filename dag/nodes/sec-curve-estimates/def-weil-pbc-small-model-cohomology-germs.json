@@ -1,0 +1,136 @@
+{
+ "id": "def-weil-pbc-small-model-cohomology-germs",
+ "kind": "definition",
+ "title": "Source cohomology germs for the small coordinate-ring colimit model",
+ "statement": "Let S be a scheme, s:Spec Ω→S a geometric point with Ω algebraically closed, L∈D⁺(Ab(S_et)), and n∈ℤ. Use the adopted derived-sections presheaf, homology germ map and affine representative functor of [def-weil-pbc-canonical-derived-cohomology-germs]. On the small coordinate-ring-colimit scheme T=strictHenselizationScheme(s) with g=strictHenselizationStructuralMap(s), define a source isomorphism from the geometric stalk of Hⁿ(L) to Γ(T,Hⁿ(g⁻¹L)): take the uniquely characterized germ restriction of [def-weil-pbc-small-strict-local-section-cone], prove it invertible, and compose with exact-inverse-image homology. Define the source legs on the identical affine representative diagram as presheaf germs followed by the stalk map of the adopted homology germ comparison and this source isomorphism. All these definitions apply in every integer degree, with no qcqs assumption. The target uses the small model T, not the adopted strictLocalization(s).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8 (lemma-higher-direct-images), 03Q9 (theorem-higher-direct-images, neighbourhood-colimit and injective-complex paragraphs), and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-small-strict-local-section-cone"
+ ],
+ "proof": [
+  {
+   "text": "Apply existsUnique_restriction to the homology sheaf using the existing small-model pointed section cone. The uniquely specified residue identification gives a geometric lift y compatible with every cone leg and the base map. The prime-comap formula for the residue map puts y over the closed point. On a strictly henselian local scheme the identity-neighbourhood germ computes global sections, so PointedEtaleSectionCone.isIso_restriction makes this very same chosen restriction an isomorphism. Compose it with global sections of the exact inverse-image/homology comparison. Mark the source-isomorphism definition irreducible for efficient use and prove its explicit forward-map equation by unfolding it once.",
+   "uses": [
+    "def-weil-pbc-small-strict-local-section-cone",
+    "def-weil-pbc-pointed-etale-section-cone",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-pointed-section-cone-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the adopted presheaf, homology germ map and affine-neighbourhood functor. Follow each presheaf germ by its induced stalk homology map and the small-model source isomorphism constructed above. The presheaf-fibre cocone equation proves naturality. For the defining source-leg equation, move the homology comparison through the germ by presheaf-fibre naturality, then apply the uniquely characterized restriction equation. This gives the section restriction followed by exact inverse-image homology, without requiring consumers to unfold the source-isomorphism construction.",
+   "uses": [
+    "def-weil-pbc-canonical-derived-cohomology-germs"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-small-strict-local-section-cone",
+  "def-weil-pbc-pointed-etale-section-cone",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-pointed-section-cone-stalk-iso",
+  "def-weil-pbc-canonical-derived-cohomology-germs"
+ ],
+ "proof_origin": {
+  "by": "T2, preserve the existing small-model germ maps while reusing the adopted common constructions",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8, 03Q9 and 03QO; the unique pointed-cone restriction and exact inverse-image homology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.Γ",
+   "results": "Hits: CategoryTheory.Sheaf.Γ, CategoryTheory.Sheaf.instIsRightAdjointΓ, CategoryTheory.constantSheafΓAdj, CategoryTheory.Sheaf.ΓRes, CategoryTheory.Sheaf.coneΓ_pt, CategoryTheory.Sheaf.ΓObjEquivSections, CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.Sheaf.ΓHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "No strict-local small-colimit-model cohomology source construction among these results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of inverse image of an etale sheaf under an isomorphism of schemes are canonically isomorphic to global sections of the sheaf",
+   "results": "Hits: AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.Scheme.Hom.inv_appTop, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.stalkMap_hom_inv_apply, AlgebraicGeometry.Scheme.Hom.stalkMap_hom_inv_apply, AlgebraicGeometry.Scheme.stalkMap_inv_hom_apply, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp",
+   "date": "2026-10-21",
+   "verdict": "No strict-local small-colimit-model cohomology source construction among these results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pointed etale section cone identifies a geometric stalk with global sections of inverse image and this identification commutes with derived homology",
+   "results": "Hits: CategoryTheory.Sheaf.coneΓ, CategoryTheory.Sheaf.isLimitConeΓ, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply, TopCat.Presheaf.Γgerm",
+   "date": "2026-10-21",
+   "verdict": "No strict-local small-colimit-model cohomology source construction among these results."
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber|mapDerivedCategoryPlusHomologyFunctorIso",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean",
+   "date": "2026-10-21",
+   "verdict": "No strict-local small-colimit-model cohomology source construction among these results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms",
+  "date": "2026-10-22",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Neighbourhood-colimit and final injective-complex paragraphs: the original small-model source germ maps into cohomology of inverse image.",
+   "via": [
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/CohomologyGerms.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_strictLocalCohomologySourceLegs",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smallModel_strictLocalCohomologySourceIso",
+   "AlgebraicGeometry.Etale.smallModel_strictLocalCohomologySourceIso_hom",
+   "AlgebraicGeometry.Etale.smallModel_strictLocalCohomologySourceLegs",
+   "AlgebraicGeometry.Etale.smallModel_strictLocalCohomologySourceLegs_app"
+  ],
+  "statement": "def smallModel_strictLocalCohomologySourceLegs {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (n : ℤ) :\n    strictLocalCohomologyNeighbourhoodFunctor s L n ⟶\n      (Functor.const _).obj\n        ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n          AddCommGrpCat.{v + 1}).obj\n          ((DerivedCategory.Plus.homologyFunctor _ n).obj\n            ((upperStar AddCommGrpCat.{v + 1}\n              (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlus.obj L)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-a538c",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261022T002439-L-1931164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-a538c",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261022T002439-L-1931164",
+  "kind": "interface",
+  "note": "independent cc review: 6 retired defs byte-identical to WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms; small-model sourceIso/sourceLegs moved verbatim to StrictLocalSmallModel.CohomologyGerms (smallModel_ names, iso @[irreducible]); 8 consumer adaptations = rename/import swap + exact-alias geometry theorem; 7 node statement_changes vs live statements; 10 delivered + 20 downstream modules + axioms probe compiled rc 0"
+ }
+}

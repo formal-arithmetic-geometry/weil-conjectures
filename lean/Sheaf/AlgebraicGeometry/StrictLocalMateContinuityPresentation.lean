@@ -8,9 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
-import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalNeighbourhoodGeometryExistence
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
+import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalCohomologySourceColimit
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceSections
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalMateProjectionFormulas
 
 /-! # Presenting the strict-local mate as projection restriction
@@ -76,7 +77,7 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                 |>.natTrans.app K)))) := by
   classical
-  obtain ⟨Q⟩ := smallModel_nonempty_strictLocalNeighbourhoodGeometry f s
+  obtain ⟨Q⟩ := nonempty_strictLocalNeighbourhoodGeometry f s
   obtain ⟨E⟩ := smallModel_nonempty_strictLocalMateProjectionData f s K n Q
   let := (Scheme.strictHenselization_properties s).2.1
   obtain ⟨hsource⟩ := smallModel_isColimit_strictLocalCohomologySourceLegs s
@@ -96,7 +97,7 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
     e := E.e
     transition := E.transition
-    sourceLegs := strictLocalCohomologySourceLegs s
+    sourceLegs := smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
     sourceIsColimit := hsource
     limitIso := strictLocalBaseChangeTargetIso f s K n

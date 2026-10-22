@@ -14,35 +14,22 @@
  ],
  "proof": [
   {
-   "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
+   "text": "Use the adopted source definitions of the free abelian sheaf, generator evaluation, derived Hom comparison, shifted cohomology presheaf, germ map and small-neighbourhood functor. For the source comparison on strictLocalization, choose the uniquely characterized stalk restriction, use its invertibility, and compose with exact-inverse-image homology. Its source legs are the presheaf germs followed by this comparison; naturality is the stalk cocone equation. The separate small-coordinate-ring-colimit realization is not part of this attachment.",
    "uses": [
-    "def-weil-pbc-pointed-etale-section-cone",
-    "def-weil-pbc-small-strict-local-section-cone"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the unchanged small-colimit model, use the uniquely characterized residue equivalence of [lem-weil-pbc-strict-henselization-functoriality] to obtain its closed lift y over the original geometric point. The residue prime-comap formula puts y above the closed point. By [lem-weil-pbc-strictly-henselian-sections-stalk], the identity-neighbourhood germ is invertible. The residue factorization at every representative limit leg proves compatibility of y with strictLocalSectionCone. Apply [lem-weil-pbc-pointed-section-cone-stalk-iso] to the very same chosen restriction r. Only the proof of IsIso r changes; r, its characterization, and the resulting isomorphisms and source legs are unchanged.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "lem-weil-pbc-pointed-section-cone-stalk-iso",
-    "def-weil-pbc-small-strict-local-section-cone"
+    "def-weil-pbc-strict-henselization-restriction",
+    "lem-weil-pbc-strict-local-germ-restriction-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-pointed-etale-section-cone",
-  "def-weil-pbc-small-strict-local-section-cone",
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "lem-weil-pbc-pointed-section-cone-stalk-iso"
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-strict-local-germ-restriction-iso"
  ],
  "proof_origin": {
-  "by": "agent P4, preserve the small-model construction using the general germ criterion",
+  "by": "T2, attach the canonical definition to the adopted library",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03QO and 03Q9; canonical derived cohomology germs"
+  "place": "Tags 03Q8 and 03Q9, canonical derived sections and germ restriction"
  },
  "mathlib_searches": [
   {
@@ -89,9 +76,9 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalCohomologyGerms.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictLocalCohomologyGerms.lean",
   "declaration": "AlgebraicGeometry.Etale.strictLocalCohomologySourceLegs",
   "declarations": [
    "AlgebraicGeometry.Etale.strictLocalFreeSheaf",
@@ -103,10 +90,10 @@
    "AlgebraicGeometry.Etale.strictLocalCohomologyNeighbourhoodFunctor",
    "AlgebraicGeometry.Etale.strictLocalCohomologySourceLegs"
   ],
-  "statement": "def strictLocalCohomologySourceLegs {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : strictLocalCohomologyNeighbourhoodFunctor s L n ⟶ (Functor.const _).obj ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).obj ((DerivedCategory.Plus.homologyFunctor _ n).obj ((upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlus.obj L)))",
+  "statement": "def strictLocalCohomologySourceLegs {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (n : ℤ) :\n    strictLocalCohomologyNeighbourhoodFunctor s L n ⟶\n      (Functor.const _).obj\n        ((Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology\n          AddCommGrpCat.{v + 1}).obj\n          ((DerivedCategory.Plus.homologyFunctor _ n).obj\n            ((upperStar AddCommGrpCat.{v + 1}\n              (Scheme.strictLocalizationToBase s)).mapDerivedCategoryPlus.obj L)))",
   "branch": "sheaf-dag",
-  "by": "G2",
-  "date": "2026-10-12"
+  "by": "T2",
+  "date": "2026-10-22"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -119,14 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-c5761",
-  "group": "P4",
+  "reviewer": "C-a538c",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261021T061620-L-1800401",
+  "landing": "20261022T002439-L-1931164",
   "kind": "interface",
-  "note": "independent cc review: Withdrawn twin stub + item node redirected (existing:true) to the adopted WeilConjectures theorem (signature verbatim), new proved PointedEtaleSectionCone.isIso_restriction with its node, two forced 36-line consumer adaptations (same r, signatures unchanged) against the live library, the change record and coord/retire-items.tsv:592; 4 delivered files, 5 direct importers and an axioms probe compiled clean"
+  "note": "independent cc review: 6 retired defs byte-identical to WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms; small-model sourceIso/sourceLegs moved verbatim to StrictLocalSmallModel.CohomologyGerms (smallModel_ names, iso @[irreducible]); 8 consumer adaptations = rename/import swap + exact-alias geometry theorem; 7 node statement_changes vs live statements; 10 delivered + 20 downstream modules + axioms probe compiled rc 0"
  },
  "lean_audit": {}
 }

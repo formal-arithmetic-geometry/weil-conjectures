@@ -144,7 +144,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
-    (strictLocalCohomologySourceLegs s K n).app (op i) =
+    (smallModel_strictLocalCohomologySourceLegs s K n).app (op i) =
       (strictLocalCohomologyGermMap K n).app (op ((strictLocalNeighbourhoods s).obj i)) ≫
         (strictLocalSectionCone s).restriction
           ((DerivedCategory.Plus.homologyFunctor _ n).obj K) i ≫
@@ -153,15 +153,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
           (((upperStar AddCommGrpCat.{v + 1}
             (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlusHomologyFunctorIso
               n).hom.app K) := by
-  classical
-  dsimp only [strictLocalCohomologySourceLegs, strictLocalCohomologySourceIso,
-    Iso.trans_hom, Functor.mapIso_hom]
-  erw [(Scheme.pointSmallEtale s).toPresheafFiber_naturality_assoc]
-  have hr := (Classical.choose_spec ((strictLocalSectionCone s).existsUnique_restriction
-    ((DerivedCategory.Plus.homologyFunctor _ n).obj K))).1 i
-  change _ ≫ ( _ ≫ Classical.choose _ ) ≫ _ = _ at ⊢
-  erw [hr]
-  rfl
+  exact smallModel_strictLocalCohomologySourceLegs_app s K n i
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Localizing Hom into a K-injective representative and then restricting its sections
@@ -192,7 +184,7 @@ theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
     [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
-    (strictLocalCohomologySourceLegs s K n).app (op i) =
+    (smallModel_strictLocalCohomologySourceLegs s K n).app (op i) =
       (sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫
         strictLocalComplexSectionRestriction s K L r n i := by
   rw [sourceLeg_eq_sectionRestriction]

@@ -2,13 +2,14 @@
  "id": "lem-weil-pbc-strict-local-cohomology-source-colimit",
  "kind": "statement",
  "title": "StrictLocalCohomologySourceColimit",
- "statement": "For a scheme S, geometric point s, L in D⁺(Ab(S_et)) and n an integer, the cocone with the canonical source legs [def-weil-pbc-canonical-derived-cohomology-germs] is colimiting. Its vertex is Γ(S_(s),H^n(g^*L)); its domain is the derived-sections presheaf restricted to small affine pointed neighbourhoods.",
+ "statement": "For a scheme S, geometric point s, L in D⁺(Ab(S_et)) and n an integer, the cocone with the canonical source legs [def-weil-pbc-small-model-cohomology-germs] is colimiting. Its vertex is Γ(S_(s),H^n(g^*L)); its domain is the derived-sections presheaf restricted to small affine pointed neighbourhoods.",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
  },
  "stmt_deps": [
-  "def-weil-pbc-canonical-derived-cohomology-germs"
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof": [
   {
@@ -16,7 +17,8 @@
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "lem-weil-pbc-derived-cohomology-germ-isomorphism",
-    "def-weil-pbc-canonical-derived-cohomology-germs"
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "def-weil-pbc-small-model-cohomology-germs"
    ],
    "elementary": false
   }
@@ -24,7 +26,8 @@
  "proof_deps": [
   "def-weil-pbc-strict-henselization-limit",
   "lem-weil-pbc-derived-cohomology-germ-isomorphism",
-  "def-weil-pbc-canonical-derived-cohomology-germs"
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof_origin": {
   "by": "G2 following document",
@@ -83,7 +86,7 @@
   "declarations": [
    "AlgebraicGeometry.Etale.smallModel_isColimit_strictLocalCohomologySourceLegs"
   ],
-  "statement": "theorem smallModel_isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : Nonempty (IsColimit (Cocone.mk _ (strictLocalCohomologySourceLegs s L n)))",
+  "statement": "theorem smallModel_isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : Nonempty (IsColimit (Cocone.mk _ (smallModel_strictLocalCohomologySourceLegs s L n)))",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
@@ -100,14 +103,50 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-a538c",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261020T233100-L-891847",
+  "landing": "20261022T002439-L-1931164",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 6 retired defs byte-identical to WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms; small-model sourceIso/sourceLegs moved verbatim to StrictLocalSmallModel.CohomologyGerms (smallModel_ names, iso @[irreducible]); 8 consumer adaptations = rename/import swap + exact-alias geometry theorem; 7 node statement_changes vs live statements; 10 delivered + 20 downstream modules + axioms probe compiled rc 0"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "T2 stage 2",
+  "old_statement": "For a scheme S, geometric point s, L in D⁺(Ab(S_et)) and n an integer, the cocone with the canonical source legs [def-weil-pbc-canonical-derived-cohomology-germs] is colimiting. Its vertex is Γ(S_(s),H^n(g^*L)); its domain is the derived-sections presheaf restricted to small affine pointed neighbourhoods.",
+  "what": "Make the already used small coordinate-ring colimit model explicit after retiring the ambiguous twin module; no hypothesis, object or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tags 03Q8 (lemma-higher-direct-images), 03Q9 (theorem-higher-direct-images, neighbourhood-colimit and injective-complex paragraphs), and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-canonical-derived-cohomology-germs"
+  ],
+  "old_proof": [
+   {
+    "text": "initiality of the small affine pointed representatives makes the restricted\npresheaf germ cocone colimiting. The derived-sections-to-homology-sheaf map induces\nan isomorphism on stalks. Compose it with the strict-local germ restriction and the\nexact-inverse-image homology isomorphism. Transport the germ cocone through this\ncomposite isomorphism; its legs are exactly the displayed canonical source legs.",
+    "uses": [
+     "def-weil-pbc-strict-henselization-limit",
+     "lem-weil-pbc-derived-cohomology-germ-isomorphism",
+     "def-weil-pbc-canonical-derived-cohomology-germs"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-strict-henselization-limit",
+   "lem-weil-pbc-derived-cohomology-germ-isomorphism",
+   "def-weil-pbc-canonical-derived-cohomology-germs"
+  ]
+ }
 }

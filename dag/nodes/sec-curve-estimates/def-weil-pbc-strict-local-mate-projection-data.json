@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-strict-local-mate-projection-data",
  "kind": "definition",
  "title": "StrictLocalMateProjectionData",
- "statement": "For f:X→S, a geometric point s, K in D⁺(Ab(X_et)), integer n and canonical geometry Q [def-weil-pbc-strict-local-neighbourhood-geometry], define the section homology map of the derived base-change mate and its exact-sections Leray target isomorphism. StrictLocalMateProjectionData gives stage identifications from derived sections of Rf_*K [def-weil-pbc-canonical-derived-cohomology-germs] to neighbourhood hypercohomology, compatible with transition pullbacks, and identifies each canonical source leg followed by the mate with projection pullback followed by the inverse target isomorphism. It does not include a source or target colimit assertion.",
+ "statement": "For f:X→S, a geometric point s, K in D⁺(Ab(X_et)), integer n and canonical geometry Q [def-weil-pbc-strict-local-neighbourhood-geometry], define the section homology map of the derived base-change mate and its exact-sections Leray target isomorphism. StrictLocalMateProjectionData gives stage identifications from derived sections of Rf_*K [def-weil-pbc-canonical-derived-cohomology-germs] to neighbourhood hypercohomology, compatible with transition pullbacks, and identifies each canonical small-model source leg [def-weil-pbc-small-model-cohomology-germs] followed by the mate with projection pullback followed by the inverse target isomorphism. It does not include a source or target colimit assertion.",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-strict-local-neighbourhood-geometry",
   "def-weil-pbc-canonical-derived-cohomology-germs",
-  "def-weil-pbc-strict-henselization-restriction"
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof": [
   {
@@ -27,12 +28,20 @@
     "lem-weil-pbc-strict-local-small-model-geometry-transport"
    ],
    "elementary": true
+  },
+  {
+   "text": "Use the small-model germ legs without changing their component maps. The adopted six common derived-sections constructions are definitionally identical to the former local copies.",
+   "uses": [
+    "def-weil-pbc-small-model-cohomology-germs"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-strict-henselization-scheme-sections-exact",
   "def-weil-pbc-exact-global-sections-leray",
-  "lem-weil-pbc-strict-local-small-model-geometry-transport"
+  "lem-weil-pbc-strict-local-small-model-geometry-transport",
+  "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof_origin": {
   "by": "T6 adapting the complete existing proof along the canonical colimit-model comparison",
@@ -109,14 +118,103 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-ba0a4",
-  "group": "T6",
-  "result": "fix",
-  "landing": "20261021T214902-L-1880019",
+  "reviewer": "C-a538c",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261022T002439-L-1931164",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf StrictLocalNeighbourhoodGeometry twin (retire-items row 593, DIFFERENT) against the WeilConjectures twin, the new SmallModel.NeighbourhoodGeometry transport API, the 8 adapted unclaimed consumers, the change record and 11 node files. The 12 delivered modules plus the 18 downstream modules (all importers and the closure) compiled rc 0 in a sandbox; axioms clean."
+  "note": "independent cc review: 6 retired defs byte-identical to WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms; small-model sourceIso/sourceLegs moved verbatim to StrictLocalSmallModel.CohomologyGerms (smallModel_ names, iso @[irreducible]); 8 consumer adaptations = rename/import swap + exact-alias geometry theorem; 7 node statement_changes vs live statements; 10 delivered + 20 downstream modules + axioms probe compiled rc 0"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "T2 stage 2",
+  "old_statement": "For f:X→S, a geometric point s, K in D⁺(Ab(X_et)), integer n and canonical geometry Q [def-weil-pbc-strict-local-neighbourhood-geometry], define the section homology map of the derived base-change mate and its exact-sections Leray target isomorphism. StrictLocalMateProjectionData gives stage identifications from derived sections of Rf_*K [def-weil-pbc-canonical-derived-cohomology-germs] to neighbourhood hypercohomology, compatible with transition pullbacks, and identifies each canonical source leg followed by the mate with projection pullback followed by the inverse target isomorphism. It does not include a source or target colimit assertion.",
+  "what": "Make the already used small coordinate-ring colimit model explicit after retiring the ambiguous twin module; no hypothesis, object or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tags 03Q8 (lemma-higher-direct-images), 03Q9 (theorem-higher-direct-images, neighbourhood-colimit and injective-complex paragraphs), and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-injective-sections-pullback-comparison",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-derived-exchange-leray",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-injective-source-restriction",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-mate-projection-formulas",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-derived-exchange-global-sections",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-injective-source-derived-restriction",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-complex-sections-mate",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-injective-source-sections",
+    "holds": true,
+    "note": "The original small-model maps and conclusions are unchanged; only their unambiguous API names and definition-node citations change."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-strict-local-neighbourhood-geometry",
+   "def-weil-pbc-canonical-derived-cohomology-germs",
+   "def-weil-pbc-strict-henselization-restriction"
+  ],
+  "old_proof": [
+   {
+    "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
+    "uses": [
+     "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+     "def-weil-pbc-exact-global-sections-leray"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The geometry parameter is now the official canonical strictLocalization model. Use [lem-weil-pbc-strict-local-small-model-geometry-transport] to express its cone on the original small colimit model. Replace legs, limit and the two component equations by smallModelLegs, smallModelIsLimit, smallModelFirst and smallModelOver. All cohomology objects, structural morphisms, source and target maps remain those in the original statement; the rest of the existing proof is unchanged.",
+    "uses": [
+     "lem-weil-pbc-strict-local-small-model-geometry-transport"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+   "def-weil-pbc-exact-global-sections-leray",
+   "lem-weil-pbc-strict-local-small-model-geometry-transport"
+  ]
+ }
 }

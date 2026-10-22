@@ -9,6 +9,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalComplexSectionsMate
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalLocalizedHomGerm
 
 /-! # The derived mate on a neighbourhood germ -/
 
@@ -65,7 +66,7 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
     (q : K.obj ≅ DerivedCategory.Q.obj
       (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :
     ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
-        ((strictLocalCohomologySourceLegs s
+        ((smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫
         ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{v + 1}).map

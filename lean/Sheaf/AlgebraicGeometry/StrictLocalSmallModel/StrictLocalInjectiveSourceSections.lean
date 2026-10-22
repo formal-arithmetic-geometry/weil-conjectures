@@ -91,7 +91,7 @@ theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
               (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
             (e i).inv) ∧
       (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
-        ((strictLocalCohomologySourceLegs s
+        ((smallModel_strictLocalCohomologySourceLegs s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫
         ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{v + 1}).map

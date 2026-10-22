@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.DerivedCohomologyGermIso
 
 /-! # Canonical derived sections and strict-local cohomology germs
@@ -41,7 +41,7 @@ theorem smallModel_isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) :
-    Nonempty (IsColimit (Cocone.mk _ (strictLocalCohomologySourceLegs s L n))) := by
+    Nonempty (IsColimit (Cocone.mk _ (smallModel_strictLocalCohomologySourceLegs s L n))) := by
   let N := (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
     Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
       (fun q : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine q.1.left)
@@ -52,7 +52,7 @@ theorem smallModel_isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}}
     (Functor.Final.isColimitWhiskerEquiv N.op _).symm
       ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P)
   let u := (Scheme.pointSmallEtale s).presheafFiber.map
-    (strictLocalCohomologyGermMap L n) ≫ (strictLocalCohomologySourceIso s L n).hom
+    (strictLocalCohomologyGermMap L n) ≫ (smallModel_strictLocalCohomologySourceIso s L n).hom
   have := smallModel_isIso_strictLocalCohomologyGermMap s L n
   have : IsIso u := by dsimp [u]; infer_instance
   refine ⟨hc.ofIsoColimit (Cocone.ext (asIso u) (fun j ↦ ?_))⟩

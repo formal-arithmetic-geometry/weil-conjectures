@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.CategoryTheory.Sites.EpiMono
 
