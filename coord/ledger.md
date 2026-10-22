@@ -24427,3 +24427,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:07 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 03:09 L: returned deliver/NB/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: I read all eight steps. The item is live: it was created 2026-10-22 by NV for its live citer lem-sfb-root-coordinate-sup)
 - 03:10 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 03:10 L: returned deliver/NE/lem-sfb-equivariant-nodal-smooth-pair-resolution (reviewer RETURN: I read the item's 12 steps and both new nodes in full, and checked ILO X 2.2 on printed pp.149-150. The item is live: it)
