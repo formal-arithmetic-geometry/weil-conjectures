@@ -1,6 +1,6 @@
 # Work queue
 
-45 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (2 clusters, 298 modules)
 
@@ -13,11 +13,10 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
-## Stage 1: nodes to split (9)
+## Stage 1: nodes to split (8)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-sfb-profinite-geometric-family-heart-cd` | 2008 | none |
 | `lem-sfb-proper-wcontractible-closed-fibre-rigidity` | 2008 | none |
 | `lem-sfb-affine-profinite-family-serre-cd` | 2009 | none |
 | `lem-sfb-zero-dimensional-base-affine-global` | 2009 | none |
@@ -35,9 +34,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-diagonal-dnc-chart-normalization` | 1 | state | 1 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-pur-adic-projection-shift-coherence` | 1 | state | 0 |
-| `lem-sfb-affine-invertible-finite-set-section` | 1 | state | 0 |
+| `lem-sfb-profinite-geometric-family-heart-cd` | 1 | state | 0 |
 
-Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 8 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (23)
 
