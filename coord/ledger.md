@@ -24189,3 +24189,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:27 L: merged deliver/NK/lem-sfb-finite-normal-ample-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 01:27 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head 9ba3de0af4a6: A7/A6 (H2 credit): head 9ba3de0af4a6 is byte-identical (module sha a)
 - 01:28 L: merged deliver/NM/lem-sfb-finite-quotient-generic-fields (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-22T01:29:25Z L: superseded stage-1 delivery NP/cor-pur-affine-space-zero-section-purity at a47542561b4c47d19e327c35caed9923785faddc; current completion retained; packet archived at refs/superseded/NP/cor-pur-affine-space-zero-section-purity/a47542561b4c47d19e327c35caed9923785faddc; stale return retired.
