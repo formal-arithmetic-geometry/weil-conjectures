@@ -24074,3 +24074,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:23 L: returned deliver/C2/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head b2e2aba09) the delivery did not land: (d) user Sheaf.Paper.AffineSpacePurityComparison (mention)
 - 00:23 L: returned deliver/D2/Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso (reviewer RETURN: (the landing tools, head 6b4754f01) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Pr)
 - 00:23 L: returned deliver/D3/Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin (reviewer RETURN: (the landing tools, head 3db2ea1c1) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Pe)
+- 00:23 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 65ec6ee51) the delivery did not land: (d) user Sheaf.Paper.VectorBundleThom (mentions WeilConje)
