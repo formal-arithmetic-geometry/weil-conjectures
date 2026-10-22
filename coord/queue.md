@@ -1,33 +1,33 @@
 # Work queue
 
-47 items; claim with `tools/claim.py next <group> [--stage N]`.
+45 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (3 clusters, 298 modules)
+## Rework: quarantined by the upstream sync (2 clusters, 298 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
-## Stage 1: nodes to split (8)
+## Stage 1: nodes to split (9)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-profinite-geometric-family-heart-cd` | 2008 | none |
 | `lem-sfb-proper-wcontractible-closed-fibre-rigidity` | 2008 | none |
+| `lem-sfb-affine-profinite-family-serre-cd` | 2009 | none |
+| `lem-sfb-zero-dimensional-base-affine-global` | 2009 | none |
 | `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
 | `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
-| `lem-sfb-finite-trivialize-invertible-upstairs` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (7)
+## Stage 2: nodes to state (5)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -35,11 +35,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-diagonal-dnc-chart-normalization` | 1 | state | 1 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-pur-adic-projection-shift-coherence` | 1 | state | 0 |
-| `lem-sfb-finite-norm-invertible-sections` | 1 | state | 0 |
-| `lem-sfb-normal-integral-finite-sheaf-norm` | 1 | state | 0 |
-| `lem-sfb-qcqs-proper-serre-heart-bound` | 1 | state | 0 |
+| `lem-sfb-affine-invertible-finite-set-section` | 1 | state | 0 |
 
-Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 8 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (23)
 
