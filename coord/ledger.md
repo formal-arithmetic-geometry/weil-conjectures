@@ -24141,3 +24141,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:10 L: merged deliver/NI/lem-pur-projection-purity-agreement (stage 2; reviewer FIX; parallel immutable checks)
 - 01:10 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 01:10 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 01:10 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (reviewer C-6785a, head 6785a8548) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedOpera)
