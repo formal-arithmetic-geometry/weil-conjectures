@@ -24228,3 +24228,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-22T01:36:05Z L: superseded stage-1 delivery NM/lem-sfb-semilinear-sylow-good-components at 497cbdd22ec817a39c059451880fed1725379104; current completion retained; packet archived at refs/superseded/NM/lem-sfb-semilinear-sylow-good-components/497cbdd22ec817a39c059451880fed1725379104; stale return retired.
 - 01:36 L: returned deliver/ND/def-per-support-condition (reviewer RETURN: C1/F (dropped route node). The delivery has no new nodes and changes only the item. It takes D_X from lem-per-qbar-arbit)
 - 01:36 L: returned deliver/NK/def-per-support-condition (reviewer RETURN: I read the whole delivery. It has 0 new nodes, it is a definition, and its displayed predicates are faithful to blueprin)
+- 01:38 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
