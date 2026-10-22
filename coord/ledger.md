@@ -24143,3 +24143,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:10 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:10 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (reviewer C-6785a, head 6785a8548) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedOpera)
 - 01:11 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head 73224163b5cd: A7/A6 (H2 credit): eleventh NC head 73224163b5cd of lem-sfb-ultramet)
+- 01:12 L: returned deliver/NH/cor-pur-affine-space-zero-section-purity (reviewer RETURN: L: independent stage-2 immutable head 0fa11caf2d20: H2/H13: item cor-pur-affine-space-zero-section-purity (newly added) )
