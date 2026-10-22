@@ -109,9 +109,9 @@
   "same_as": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/MixedPullbackSquareTensorCoherence.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.MixedPullbackSquareTensorCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MixedPullbackSquareTensorCoherence.lean",
   "declaration": "AlgebraicGeometry.mixedPullbackSquareComparison_tensor",
   "declarations": [
    "AlgebraicGeometry.mixedPullbackSquareComparison",
@@ -119,8 +119,9 @@
   ],
   "statement": "theorem mixedPullbackSquareComparison_tensor\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (P Q : schemeDerivedCategory Y) :\n    (derivedPullback (pullback.snd f g)).map\n        ((mixedHomTensorPullbackIso g).hom.app (P, Q)) ≫\n      (mixedHomTensorPullbackIso (pullback.snd f g)).hom.app\n        ((derivedPullback g).obj P, (derivedPullback g).obj Q) ≫\n      ((mixedPullbackSquareComparison f g).hom.app P ⊗ₘ\n        (mixedPullbackSquareComparison f g).hom.app Q) =\n    (mixedPullbackSquareComparison f g).hom.app (P ⊗ Q) ≫\n      (derivedPullback (pullback.fst f g)).map\n        ((mixedHomTensorPullbackIso f).hom.app (P, Q)) ≫\n      (mixedHomTensorPullbackIso (pullback.fst f g)).hom.app\n        ((derivedPullback f).obj P, (derivedPullback f).obj Q)",
   "branch": "sheaf-dag",
-  "by": "S2",
-  "date": "2026-10-13"
+  "by": "B2",
+  "date": "2026-10-22",
+  "note": "Restored the quarantined Sheaf import path by publicly re-exporting the complete adopted source implementation. Every declaration and proof from mixedPullbackSquareComparison onward is byte-identical to the archive. The obsolete local irreducibility attribute on derivedPullback is not replayed. All statements, definitions, dependencies, proof steps and unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -133,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-edb84",
-  "group": "H1",
+  "reviewer": "C-97a83",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T172654-L-2099053",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged square statement and definition, K-flat lemma, DAG records, and report; both delivered modules and direct importer MixedTensorPairingBaseChangeTransport compile cleanly, with only permitted axioms and expected sorryAx dependencies."
+  "landing": "20261022T022942-L-765954",
+  "kind": "proof",
+  "note": "independent cc review: quarantined Sheaf MixedPullbackSquareTensorCoherence (def onward) vs WeilConjectures source module: byte-identical; node lean record vs source theorem signature; stmt/proof fields unchanged vs live node"
  },
  "lean_audit": {}
 }
