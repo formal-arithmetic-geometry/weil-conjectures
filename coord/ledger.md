@@ -24185,3 +24185,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:25 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 01:25 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 01:26 L: merged deliver/NB/lem-sfb-artin-tate-subalgebra-finite-type (reviewer PASS; first push; new nodes: 0)
+- 2026-10-22T01:26:16Z L: superseded stage-1 delivery ND/lemma-nagata-proper-to-separated-target at afce80bdad65c160492d07e20d8169e836478e9f; current completion retained; packet archived at refs/superseded/ND/lemma-nagata-proper-to-separated-target/afce80bdad65c160492d07e20d8169e836478e9f; stale return retired.
