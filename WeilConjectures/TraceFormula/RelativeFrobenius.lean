@@ -111,11 +111,11 @@ theorem IsModelFrobenius.isPullback_relativeFrobenius_left (hX : IsModelFrobeniu
   obtain ⟨FY, hFY, hpY⟩ := hY.exists_isFrobenius
   have hXm : (frobeniusIterate ΦX m).left ≫ pX = pX ≫ End.asHom (End.of FX ^ m) := by
     rw [frobeniusIterate_left]
-    exact End.asHom_pow_comp_of_comp hpX m
+    exact End.asHom_pow_comp_eq_comp_asHom_pow hpX m
   have hYm : IsPullback (frobeniusIterate ΦY m).left pY pY (End.asHom (End.of FY ^ m)) := by
     rw [frobeniusIterate_left]
     exact isPullback_frobenius_pow_of_isFrobenius hY.isPullback hFY (Over.w ΦY) hpY m
-  have h₀ := End.asHom_pow_comp_of_comp (hFX.comp_eq_comp fX₀ hFY f₀).symm m
+  have h₀ := End.asHom_pow_comp_eq_comp_asHom_pow (hFX.comp_eq_comp fX₀ hFY f₀).symm m
   have hfl : (frobeniusIterate ΦX m).left ≫ f.left = f.left ≫ (frobeniusIterate ΦY m).left := by
     rw [← Over.comp_left, frobeniusIterate_comp_of_comp hf m, Over.comp_left]
   let e := (isPullback_left_pullback f (frobeniusIterate ΦY m)).isoPullback

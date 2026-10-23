@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness
@@ -17,7 +17,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 This file formalises the coefficient setup of the trace formula (blueprint `sk-d-setup`): the
 subcategories `Dᵇctf(X, A) ⊂ D(X_proét, A)` of bounded constructible complexes of finite Tor
 amplitude are triangulated, closed under isomorphisms, stable under `Lf^*` for every morphism
-`f` and under `Rf_!` for every compactifiable morphism `f`.
+`f` and under `Rf_!` for compactifiable quasi-compact morphisms to schemes of finite type over
+the base field (the blueprint asks for every compactifiable morphism).
 
 The blueprint fixes `A = 𝒪_E/ϖ_Eⁿ` for a finite extension `E/ℚ_ℓ` and `ℓ` invertible on the base
 field `k`. Here `A` is generalised to an arbitrary finite commutative ring `Λ` whose exponent is
@@ -30,8 +31,6 @@ invertible on `k` (`AlgebraicGeometry.HasInvertibleExponent`).
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_finiteTorAmplitude`: finite Tor
-  amplitude is a triangulated property of objects of `D(X_proét)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_constructibleFiniteTor`:
   `Dᵇctf(X, Λ)` is a triangulated subcategory of `D(X_proét, Λ)`.
 - `AlgebraicGeometry.ProEtale.isCoefficientSetup_constructibleFiniteTor`: the family
@@ -41,64 +40,15 @@ invertible on `k` (`AlgebraicGeometry.HasInvertibleExponent`).
 
 @[expose] public section
 
-universe u' u
+universe u
 
-open CategoryTheory Limits MonoidalCategory ZeroObject
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
-
-section FiniteTorAmplitude
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
-
-/-- Finite Tor amplitude is a triangulated property of objects of `D(X_proét)`: the derived
-tensor product `- ⊗ᴸ F` is a triangulated functor, and concentration in an interval is stable
-under shifts and under extensions, with the interval shifted and widened. -/
-instance DerivedCategory.isTriangulated_finiteTorAmplitude :
-    (DerivedCategory.finiteTorAmplitude A X).IsTriangulated where
-  exists_zero := ⟨0, isZero_zero _, 0, 0, fun F ↦ by
-    have h : IsZero ((0 : _root_.DerivedCategory (Sheaf (ProEt.topology X) A)) ⊗
-        (_root_.DerivedCategory.singleFunctor _ 0).obj F) :=
-      Functor.map_isZero
-        ((curriedTensor (_root_.DerivedCategory (Sheaf (ProEt.topology X) A))).flip.obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) (isZero_zero _)
-    exact ⟨(_root_.DerivedCategory.isGE_iff _ _).2 fun q _ ↦ Functor.map_isZero _ h,
-      (_root_.DerivedCategory.isLE_iff _ _).2 fun q _ ↦ Functor.map_isZero _ h⟩⟩
-  isStableUnderShiftBy n := ⟨fun M ⟨a, b, h⟩ ↦ ⟨a - n, b - n, fun F ↦ by
-    let := _root_.DerivedCategory.commShiftTensorRight
-      (K := (_root_.DerivedCategory.singleFunctor (Sheaf (ProEt.topology X) A) 0).obj F)
-    obtain ⟨h₁, h₂⟩ := h F
-    let e := (((curriedTensor (_root_.DerivedCategory (Sheaf (ProEt.topology X) A))).flip.obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).commShiftIso n).app M
-    have hge := _root_.DerivedCategory.TStructure.t.isGE_shift (M ⊗
-      (_root_.DerivedCategory.singleFunctor (Sheaf (ProEt.topology X) A) 0).obj F) a n (a - n)
-    have hle := _root_.DerivedCategory.TStructure.t.isLE_shift (M ⊗
-      (_root_.DerivedCategory.singleFunctor (Sheaf (ProEt.topology X) A) 0).obj F) b n (b - n)
-    exact ⟨@Triangulated.TStructure.isGE_of_iso _ _ _ _ _ _ _ _root_.DerivedCategory.TStructure.t
-        _ _ e.symm (a - n) hge,
-      @Triangulated.TStructure.isLE_of_iso _ _ _ _ _ _ _ _root_.DerivedCategory.TStructure.t
-        _ _ e.symm (b - n) hle⟩⟩⟩
-  ext₂' T hT := by
-    rintro ⟨a, b, h₁⟩ ⟨c, d, h₃⟩
-    refine ObjectProperty.le_isoClosure _ _ ⟨min a c, max b d, fun F ↦ ?_⟩
-    let G := (curriedTensor (_root_.DerivedCategory (Sheaf (ProEt.topology X) A))).flip.obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
-    let := _root_.DerivedCategory.commShiftTensorRight
-      (K := (_root_.DerivedCategory.singleFunctor (Sheaf (ProEt.topology X) A) 0).obj F)
-    have : G.IsTriangulated := _root_.DerivedCategory.isTriangulated_tensorRight
-      (K := (_root_.DerivedCategory.singleFunctor (Sheaf (ProEt.topology X) A) 0).obj F)
-    obtain ⟨g₁, l₁⟩ := (h₁ F).mono (min_le_left a c) (le_max_left b d)
-    obtain ⟨g₃, l₃⟩ := (h₃ F).mono (min_le_right a c) (le_max_right b d)
-    exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ (G.map_distinguished _ hT) _ g₁ g₃,
-      _root_.DerivedCategory.TStructure.t.isLE₂ _ (G.map_distinguished _ hT) _ l₁ l₃⟩
-
-end FiniteTorAmplitude
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
@@ -132,7 +82,9 @@ structure IsCoefficientSetup (k : Type u) [Field k]
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))} (hK : P X K) :
     P Y (L((g)^*[ModuleCat.{u + 1} Λ]).obj K)
   /-- Stability under the compact-support direct image `Rf_!` along a compactifiable
-  morphism `f` over a finite-type `k`-scheme. -/
+  quasi-compact morphism `f` whose target is locally of finite type and quasi-compact over
+  `Spec k`. This deviates from the blueprint, which asks for every compactifiable `f`; the
+  geometric schemes of the blueprint are of finite type over `k`, so this is the case used. -/
   rightDerivedLowerShriek_obj {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [HasCompactification f]
     [QuasiCompact f]

@@ -61,7 +61,7 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace CategoryTheory.PullbackFamily
+namespace CategoryTheory
 
 /-- An abstract coherence of composition isomorphisms of families of pullback functors, used for
 the composition law of the Frobenius comparisons of the lower shriek: for maps
@@ -69,7 +69,7 @@ the composition law of the Frobenius comparisons of the lower shriek: for maps
 `p_a ≫ r_b = t ≫ q`, the two identifications of `U r_a ⋙ U t ⋙ U q ⋙ U p_b` (applied in the
 contravariant order) with the functor along `(r_a ≫ t) ≫ q ≫ p_b = (r_a ≫ p_a) ≫ r_b ≫ p_b`
 agree. Stating it for abstract families keeps the computation cheap. -/
-lemma comp_inv_app_coherence {𝒞 : Type*} [Category 𝒞] {A B C D : 𝒞}
+private lemma comp_inv_app_coherence {𝒞 : Type*} [Category 𝒞] {A B C D : 𝒞}
     {DA DB DC DD : Type*} [Category DA] [Category DB] [Category DC] [Category DD]
     (UAB : (A ⟶ B) → DB ⥤ DA) (UBC : (B ⟶ C) → DC ⥤ DB) (UCD : (C ⟶ D) → DD ⥤ DC)
     (UDA : (D ⟶ A) → DA ⥤ DD) (UBA : (B ⟶ A) → DA ⥤ DB) (UAD : (A ⟶ D) → DD ⥤ DA)
@@ -145,7 +145,7 @@ lemma comp_inv_app_coherence {𝒞 : Type*} [Category 𝒞] {A B C D : 𝒞}
 /-- The diagram chase of the composition law of the Frobenius comparisons, for opaque morphisms
 of a category: the hypotheses are the pasting and base-change laws, the naturality squares and
 the coherence of the composition isomorphisms, and the conclusion is the composition law. -/
-lemma frobeniusComparison_comp_aux {E : Type*} [Category E]
+private lemma frobeniusComparison_comp_aux {E : Type*} [Category E]
     {o₀ o₁ o₂ o₃ o₄ o₅ o₆ o₇ p₁ p₂ p₃ p₄ p₅ q₁ r₁ r₂ s₁ : E}
     {c₀ : o₀ ⟶ o₁} {GEb : o₁ ⟶ o₂} {EQ : o₂ ⟶ o₃} {Sabc : o₃ ⟶ o₄} {R₁ : o₄ ⟶ o₅}
     {SfC₁ : o₅ ⟶ o₆} {Sfe₁ : o₆ ⟶ o₇} {e₀ : o₀ ⟶ o₀} {GRb : o₂ ⟶ p₁} {GSfCb : p₁ ⟶ p₂}
@@ -163,7 +163,8 @@ lemma frobeniusComparison_comp_aux {E : Type*} [Category E]
   simp only [Category.id_comp, Category.comp_id]
   rw [reassoc_of% N₃, C, Category.assoc, Category.assoc, R₆, reassoc_of% N₁, reassoc_of% R₄]
   rw [reassoc_of% N₂]
-end CategoryTheory.PullbackFamily
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -444,7 +445,7 @@ lemma boundedConstructibleUpperStarComp_relativeFrobenius_aux (ra : X ⟶ X'a)
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (ra ≫ pa)
         (rb ≫ pb)).inv.app K := by
   rw [boundedConstructiblePullbackSquareComparison_hom_app]
-  exact CategoryTheory.PullbackFamily.comp_inv_app_coherence
+  exact comp_inv_app_coherence
     (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
     (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
     (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
@@ -544,7 +545,7 @@ theorem weilLowerShriekFrobeniusComparison_comp (aX bX abX : X ⟶ X) (aY bY abY
     (rb ≫ f'b)).map (boundedConstructibleUpperStarComp_relativeFrobenius_aux ℓ ra hT.toCommSq pb K)
   simp only [Functor.map_comp
     (self := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (rb ≫ f'b))] at hR6
-  exact CategoryTheory.PullbackFamily.frobeniusComparison_comp_aux (eqToHom_refl _ _)
+  exact frobeniusComparison_comp_aux (eqToHom_refl _ _)
     (by rw [eqToHom_refl, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id])
     (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])
     (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])

@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Composition
 
 /-!
 # The relative Frobenius
@@ -49,34 +51,6 @@ and the relative Frobenius `r_m = (f, Φ_X ^ m)` is the base change of the relat
 universe v u
 
 open CategoryTheory Limits
-
-/-- A morphism intertwining two endomorphisms intertwines their `m`-th powers. -/
-lemma CategoryTheory.End.asHom_pow_comp_of_comp {C : Type*} [Category* C] {Z W : C}
-    {F : Z ⟶ Z} {G : W ⟶ W} {g : Z ⟶ W} (hg : F ≫ g = g ≫ G) (m : ℕ) :
-    End.asHom (End.of F ^ m) ≫ g = g ≫ End.asHom (End.of G ^ m) := by
-  induction m with
-  | zero => simp [End.one_def]
-  | succ m ih =>
-    rw [pow_succ, pow_succ, End.mul_def, End.mul_def]
-    simp only [End.asHom, End.of, Category.assoc] at ih ⊢
-    rw [ih, reassoc_of% hg]
-
-/-- If `F ≫ g = g`, then `F ^ m ≫ g = g` for every `m`. -/
-lemma CategoryTheory.End.asHom_pow_comp_of_comp_eq {C : Type*} [Category* C] {Z W : C}
-    {F : Z ⟶ Z} {g : Z ⟶ W} (hg : F ≫ g = g) (m : ℕ) : End.asHom (End.of F ^ m) ≫ g = g := by
-  refine (End.asHom_pow_comp_of_comp (G := 𝟙 W) (hg.trans (Category.comp_id g).symm) m).trans ?_
-  rw [show End.of (𝟙 W) ^ m = 1 from one_pow m]
-  exact Category.comp_id g
-
-/-- A multiplicative morphism property containing an endomorphism contains its powers. -/
-lemma CategoryTheory.MorphismProperty.endAsHom_pow_mem {C : Type*} [Category* C]
-    (P : MorphismProperty C) [P.IsMultiplicative] {Z : C} {Φ : Z ⟶ Z} (hΦ : P Φ) (m : ℕ) :
-    P (End.asHom (End.of Φ ^ m)) := by
-  induction m with
-  | zero => exact P.id_mem Z
-  | succ m ih =>
-    rw [pow_succ, End.mul_def]
-    exact P.comp_mem _ _ hΦ ih
 
 namespace AlgebraicGeometry
 
@@ -177,7 +151,7 @@ theorem comp_frobenius_pow_eq_of_isFrobenius (gX : X₀ ⟶ Spec (.of k))
     (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY) (hΦX : ΦX ≫ pX = pX ≫ FX)
     (hΦY : ΦY ≫ pY = pY ≫ FY) (hfp : f ≫ pY = pX ≫ f₀) (hfa : f ≫ aY = aX) (m : ℕ) :
     End.asHom (End.of ΦX ^ m) ≫ f = f ≫ End.asHom (End.of ΦY ^ m) :=
-  End.asHom_pow_comp_of_comp (comp_eq_comp_of_isPullback hY
+  End.asHom_pow_comp_eq_comp_asHom_pow (comp_eq_comp_of_isPullback hY
     (hFX.comp_eq_comp gX hFY f₀).symm hΦXa hΦYa hΦX hΦY hfp hfa) m
 
 /-- For the base change `Φ_Y = F_Y ×_k 𝟙` of the `#k`-power Frobenius `F_Y` of a scheme over a
@@ -186,7 +160,7 @@ finite field `k`, the square `Φ_Y ^ m ≫ p_Y = p_Y ≫ F_Y ^ m` is cartesian
 theorem isPullback_frobenius_pow_of_isFrobenius (hY : IsPullback pY aY gY σ)
     (hFY : FY.IsFrobenius (Nat.card k)) (hΦYa : ΦY ≫ aY = aY) (hΦY : ΦY ≫ pY = pY ≫ FY)
     (m : ℕ) : IsPullback (End.asHom (End.of ΦY ^ m)) pY pY (End.asHom (End.of FY ^ m)) := by
-  refine IsPullback.of_right ?_ (End.asHom_pow_comp_of_comp hΦY m) hY.flip
+  refine IsPullback.of_right ?_ (End.asHom_pow_comp_eq_comp_asHom_pow hΦY m) hY.flip
   rw [End.asHom_pow_comp_of_comp_eq hΦYa m, End.asHom_pow_comp_of_comp_eq (hFY.comp_eq gY) m]
   exact hY.flip
 
@@ -213,11 +187,11 @@ theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ
         IsPullback (relativeFrobenius f _ _ (comp_frobenius_pow_eq_of_isFrobenius gX hY hFX
           hFY hΦXa hΦYa hΦX hΦY hfp hfa m)) pX (pullback.map _ f _ f₀ pY pX pY hm hfp)
           (relativeFrobenius f₀ _ _ h₀) := by
-  have h₀ := End.asHom_pow_comp_of_comp (hFX.comp_eq_comp gX hFY f₀).symm m
+  have h₀ := End.asHom_pow_comp_eq_comp_asHom_pow (hFX.comp_eq_comp gX hFY f₀).symm m
   have hYm := isPullback_frobenius_pow_of_isFrobenius hY hFY hΦYa hΦY m
   exact ⟨hFX.pow gX m, hFY.pow gY m, h₀, hYm.w, isPullback_pullbackMap hX hfp hYm,
     isPullback_relativeFrobenius hX hfp h₀ (End.asHom_pow_comp_of_comp_eq (hFX.comp_eq gX) m)
-      _ (End.asHom_pow_comp_of_comp_eq hΦXa m) (End.asHom_pow_comp_of_comp hΦX m) hYm⟩
+      _ (End.asHom_pow_comp_of_comp_eq hΦXa m) (End.asHom_pow_comp_eq_comp_asHom_pow hΦX m) hYm⟩
 
 end Model
 

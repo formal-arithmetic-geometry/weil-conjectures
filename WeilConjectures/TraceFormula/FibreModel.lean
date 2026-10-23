@@ -276,7 +276,7 @@ theorem IsModelFrobenius.isModelFrobenius_fibreFrobenius {m : ℕ} [NeZero m] [I
   refine ⟨hX.isPullback_fibreModelMap hY hfp h₀ y hy, ?_⟩
   obtain ⟨FX, hFX, hpX⟩ := hX.exists_isFrobenius
   obtain ⟨FY, hFY, -⟩ := hY.exists_isFrobenius
-  have h₁ := (End.asHom_pow_comp_of_comp (hFX.comp_eq_comp fX₀ hFY f₀).symm m).symm
+  have h₁ := (End.asHom_pow_comp_eq_comp_asHom_pow (hFX.comp_eq_comp fX₀ hFY f₀).symm m).symm
   have h₂ : hY.descendedPoint y hy ≫ End.asHom (End.of FY ^ m) =
       𝟙 _ ≫ hY.descendedPoint y hy := by
     rw [hFY.pow fY₀ m _ (𝟙 _) fun r ↦ (frobeniusFixedField_pow_eq r).symm, Spec.map_id]
