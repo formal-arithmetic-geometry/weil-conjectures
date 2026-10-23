@@ -8,10 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.IdIso
 public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 
@@ -21,12 +21,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 On the unbounded derived categories of module objects over a condensed ring `Λ` on the
 pro-étale sites, the derived pullback `L((f)^*⟦Λ⟧)` carries the shift structure of the levelwise
 functor `D((f)^*⟦Λ⟧)` (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift`)
-and the derived pushforward `R((f)_*⟦Λ⟧)` the canonical shift structure of a right derived
-functor. This file shows that the structural isomorphisms and adjunctions between them commute
-with the shifts:
+and the derived pushforward `R((f)_*⟦Λ⟧)` the shift structure making the derived adjunction
+`Lf^* ⊣ Rf_*` commute with the shifts
+(`ProEtale.CondensedRing.commShift_derivedUpperStarLowerStarAdjunction`, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing`). This file shows that
+the remaining structural isomorphisms and adjunctions commute with the shifts:
 
-* the derived adjunction `Lf^* ⊣ Rf_*`
-  (`ProEtale.CondensedRing.commShift_derivedUpperStarLowerStarAdjunction`);
 * the composition and identity isomorphisms of the derived pullbacks
   (`ProEtale.CondensedRing.commShift_leftDerivedUpperStarComp_hom`,
   `ProEtale.CondensedRing.commShift_leftDerivedUpperStarId_hom`);
@@ -56,22 +56,6 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y)
 instance commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom :
     NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory Λ f).hom ℤ :=
   NatTrans.CommShift.of_iso_inv (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
-
-/-- The derived adjunction `Lf^* ⊣ Rf_*` is the adjunction `D(f^*) ⊣ Rf_*` transported along
-`Lf^* ≅ D(f^*)`. -/
-lemma derivedUpperStarLowerStarAdjunction_eq :
-    derivedUpperStarLowerStarAdjunction Λ f =
-      (upperStarLowerStarAdjunction Λ f).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoLeft
-        (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm :=
-  Adjunction.derived_eq_ofNatIsoLeft _ _ _ _ _ _
-    (leftDerivedUpperStarIsoMapDerivedCategory Λ f)
-    ((f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory_hom_fac).symm
-
-/-- The derived adjunction `Lf^* ⊣ Rf_*` on module objects commutes with the shifts. -/
-instance commShift_derivedUpperStarLowerStarAdjunction :
-    (derivedUpperStarLowerStarAdjunction Λ f).CommShift ℤ := by
-  rw [derivedUpperStarLowerStarAdjunction_eq]
-  exact Adjunction.commShift_ofNatIsoLeft _ _
 
 /-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` commutes with the shifts. -/
 instance commShift_leftDerivedUpperStarComp_hom (g : Y ⟶ Z) :
