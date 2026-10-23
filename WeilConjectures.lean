@@ -5934,6 +5934,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartBoundary
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
@@ -7360,6 +7361,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
+public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
@@ -8616,6 +8618,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerRelativeBaseCh
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.OrientationGeometricPoint
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
@@ -11437,6 +11440,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
