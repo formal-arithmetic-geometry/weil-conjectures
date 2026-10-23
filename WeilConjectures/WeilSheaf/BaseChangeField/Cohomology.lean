@@ -13,6 +13,7 @@ public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
 public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
 public import WeilConjectures.WeilSheaf.BaseChangeField.GlobalSections
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.StalkFrobeniusPow
 
 /-!
 # Cohomology under a finite extension of the base field
@@ -95,7 +96,7 @@ def transportRightDerivedLowerStarIso :
     (AdicSheaf l (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) ℤ
   have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
     (AdicSheaf l (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) ℤ
-  (IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIso (transport θ r hθ)
+  (IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfIso (transport θ r hθ)
     (transportCompForgetIso θ r hθ)
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ' (comp_over φ' _))).symm ≪≫
   Functor.rightDerivedFunctorNatIso (transportLowerStarIso θ r hθ θY hθY φ φ' hsq) ≪≫
@@ -118,15 +119,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
     (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
   (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
     ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
-
-omit [Fact (ringChar k₀ ≠ l)] [Fact (ringChar k₀' ≠ l)] in
-private lemma toModuleCat_map_comp_apply {M N P : WeilCoefficients.{u} l} (f : M ⟶ N)
-    (g : N ⟶ P) (x : (WeilCoefficients.toModuleCat l).obj M) :
-    ((WeilCoefficients.toModuleCat l).map (f ≫ g)).hom x =
-      ((WeilCoefficients.toModuleCat l).map g).hom
-        (((WeilCoefficients.toModuleCat l).map f).hom x) := by
-  rw [CategoryTheory.Functor.map_comp]
-  rfl
 
 set_option maxRecDepth 10000 in
 -- the Frobenius of the global sections unfolds through deep composites of isomorphisms

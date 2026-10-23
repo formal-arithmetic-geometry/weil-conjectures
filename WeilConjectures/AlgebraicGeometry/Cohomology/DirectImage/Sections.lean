@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBou
 
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -23,6 +24,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolutio
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
+public import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-!
 # Sections of higher direct images over an affine base
@@ -490,6 +493,63 @@ theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Ty
     (smul_H_eq_globalSectionsRingHom_smul K ℱ q c (e y)).symm)
 
 section BaseChange
+
+/-- **The derived direct image commutes with restriction to an open subscheme of the base.** Let
+`g : T' ⟶ T` be an open immersion, and let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be the base change
+of `f` along `g`, in the cartesian square `sq`
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+T' --g---> T
+```
+Then `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in `D(𝒪_{T'})`.
+
+The base change `g'` is an open immersion, and restriction along an open immersion is exact and
+preserves K-injective complexes (`AlgebraicGeometry.openImmersion_restriction_derived_properties`).
+Hence deriving the underived isomorphism `f_* ⋙ (-)|_{T'} ≅ (-)|_{X'} ⋙ f'_*`
+(`AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`) gives
+`R f_* ⋙ (-)|_{T'} ≅ (-)|_{X'} ⋙ R f'_*`. The per-degree form is
+`AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`; the same argument for
+the restriction `f ∣_ V` to an open `V` of the base, with `schemeDerivedDirectImage`, is
+`AlgebraicGeometry.schemeDerivedDirectImage_openRestriction`. -/
+noncomputable def derivedPushforwardIsoRestrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
+    [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
+    (derivedPushforward f').obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ)) ≅
+      (restrictFunctor g).mapDerivedCategory.obj
+        ((derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ)) :=
+  have : IsOpenImmersion g' :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback (P := @IsOpenImmersion) sq.flip ‹_›
+  have : PreservesFiniteLimits (restrictFunctor g') :=
+    (openImmersion_restriction_derived_properties g').1
+  have : (restrictFunctor g').PreservesKInjectiveComplexes :=
+    (openImmersion_restriction_derived_properties g').2
+  have : PreservesColimitsOfSize.{u, u} (restrictFunctor g') :=
+    (restrictAdjunction g').leftAdjoint_preservesColimits
+  -- `D((-)|_{X'}) ⋙ R f'_* ≅ R((-)|_{X'} ⋙ f'_*) ≅ R(f_* ⋙ (-)|_{T'}) ≅ R f_* ⋙ D((-)|_{T'})`
+  let e : (restrictFunctor g').mapDerivedCategory ⋙ derivedPushforward f' ≅
+      derivedPushforward f ⋙ (restrictFunctor g).mapDerivedCategory :=
+    Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm _ ≪≫
+      (Functor.rightDerivedFunctorCompIso _ _).symm ≪≫
+      Functor.rightDerivedFunctorNatIso (pushforwardRestrictIso sq).symm ≪≫
+      Functor.rightDerivedFunctorCompMapDerivedCategoryIso _ _
+  (derivedPushforward f').mapIso ((DerivedCategory.singleFunctor _ 0).mapIso
+      ((restrictFunctorIsoPullback g').app ℱ).symm ≪≫
+    ((restrictFunctor g').mapDerivedCategorySingleFunctor 0).symm.app ℱ) ≪≫
+    e.app _
+
+/-- **The derived direct image commutes with restriction to an open subscheme of the base**: for
+the base change `f'` of `f` along an open immersion `g`, `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in
+`D(𝒪_{T'})` (`AlgebraicGeometry.Scheme.Modules.derivedPushforwardIsoRestrict`). -/
+theorem nonempty_derivedPushforward_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
+    [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
+    Nonempty ((derivedPushforward f').obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ)) ≅
+      (restrictFunctor g).mapDerivedCategory.obj
+        ((derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ))) :=
+  ⟨derivedPushforwardIsoRestrict f ℱ g g' f' sq⟩
 
 variable [HasInjectiveResolutions X.Modules]
 

@@ -90,7 +90,7 @@ each `i`, every element `z` of a generating set of `P(Y i)` is the restriction o
 `W` whose restrictions to the other `Y k` vanish, then every family of sections over the `Y i`
 is the family of restrictions of a section over `W`. -/
 lemma exists_map_eq_of_exists_map_eq_single {P : Cᵒᵖ ⥤ ModuleCat.{w} R} {W : C} {ι : Type*}
-    [Fintype ι] [DecidableEq ι] {Y : ι → C} (f : ∀ i, Y i ⟶ W)
+    [Finite ι] [DecidableEq ι] {Y : ι → C} (f : ∀ i, Y i ⟶ W)
     (G : ∀ i, Set (P.obj (op (Y i)))) (hG : ∀ i, Submodule.span R (G i) = ⊤)
     (h : ∀ i, ∀ z ∈ G i, ∃ x : P.obj (op W), ∀ k,
       P.map (f k).op x = Pi.single (M := fun k ↦ P.obj (op (Y k))) i z k)
@@ -103,6 +103,7 @@ lemma exists_map_eq_of_exists_map_eq_single {P : Cᵒᵖ ⥤ ModuleCat.{w} R} {W
     intro z hz
     obtain ⟨x, hx⟩ := h i z hz
     exact ⟨x, funext hx⟩
+  have := Fintype.ofFinite ι
   obtain ⟨x, hx⟩ : t ∈ LinearMap.range res := by
     rw [← Finset.univ_sum_single t]
     exact Submodule.sum_mem _ fun i _ ↦ key i Submodule.mem_top

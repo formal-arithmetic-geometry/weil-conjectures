@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale

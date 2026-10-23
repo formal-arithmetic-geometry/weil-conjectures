@@ -17,10 +17,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
-public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
+public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology
@@ -129,7 +128,8 @@ noncomputable def Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus :
 
 /-- The functor `N ↦ Hom(A[0], N[0]⟦q⟧)` on sheaves of `Λ`-modules on `Z_ét`; for `A = Λ` it is
 the étale cohomology `N ↦ Hᵠ(Z, N)` with coefficients in `Λ`-modules. -/
-noncomputable abbrev Etale.shiftedHomFunctor {Z : Scheme.{u}}
+@[reducible]
+noncomputable def Etale.shiftedHomFunctor {Z : Scheme.{u}}
     (A : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
     Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ AddCommGrpCat.{u + 1} :=
   DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
@@ -152,9 +152,18 @@ noncomputable def Etale.etaleLowerShriekShiftedHomEquiv
     (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ((Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M) q).obj
       N) ≃+ ((Etale.shiftedHomFunctor Λ M q).obj ((v)^*[ModuleCat.{u + 1} Λ].obj N)) :=
-  (Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv).homAddEquivOfIso
-    (((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
-      0).app M) ((Etale.upperStarSingleShiftIso Λ v hv q).app N)
+  let i₁ := ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
+    0).app M
+  let i₂ := (Etale.upperStarSingleShiftIso Λ v hv q).app N
+  let adj := Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv
+  AddEquiv.mk'
+    { toFun f := adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom
+      invFun g := i₁.inv ≫ (adj.homEquiv _ _).symm (g ≫ i₂.inv)
+      left_inv f := by simp
+      right_inv g := by simp }
+    (fun a b ↦ by
+      simp only [Equiv.coe_fn_mk, Adjunction.homEquiv_unit]
+      erw [Preadditive.comp_add, Functor.map_add, Preadditive.comp_add, Preadditive.add_comp])
 
 lemma Etale.etaleLowerShriekShiftedHomEquiv_apply
     (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -177,8 +186,14 @@ noncomputable def Etale.etaleLowerShriekShiftedHomIso
     (fun N ↦ (Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N).toAddCommGrpIso)
     (fun {N N'} g ↦ by
       ext f
-      exact Adjunction.homAddEquivOfIso_comp _ _ _ _ _ _
-        ((Etale.upperStarSingleShiftIso Λ v hv q).hom.naturality g) f)
+      change Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N'
+          (f ≫ (shiftFunctor _ q).map ((DerivedCategory.Plus.singleFunctor _ 0).map g)) =
+        Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N f ≫ (shiftFunctor _ q).map
+          ((DerivedCategory.Plus.singleFunctor _ 0).map ((v)^*[ModuleCat.{u + 1} Λ].map g))
+      rw [Etale.etaleLowerShriekShiftedHomEquiv_apply, Etale.etaleLowerShriekShiftedHomEquiv_apply,
+        ← Category.assoc, Adjunction.homEquiv_naturality_right, Category.assoc, Category.assoc]
+      congr 1
+      exact (Etale.upperStarSingleShiftIso Λ v hv q).hom.naturality g)
 
 end Restriction
 
@@ -191,18 +206,42 @@ noncomputable def Etale.isTerminalFinalObject (Z : Scheme.{u}) :
     IsTerminal (Etale.finalObject Z) :=
   MorphismProperty.Over.mkIdTerminal _ Z
 
+section Acyclicity
+
+open Presheaf
+
 /-- On a quasi-compact quasi-separated scheme `Z`, the underlying abelian sheaf of an injective
-sheaf of `Λ`-modules has no higher cohomology: this is
-`CategoryTheory.Sheaf.subsingleton_H_succ_forget₂_of_injective` for the class of quasi-compact
-quasi-separated étale `Z`-schemes. -/
+sheaf of `Λ`-modules has no higher cohomology, by the Čech criterion
+`CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` and
+`CategoryTheory.Sheaf.exactAt_cechComplex_forget₂_of_injective`. -/
 theorem Etale.subsingleton_H_forget₂_succ_of_injective (Z : Scheme.{u}) [CompactSpace Z]
     [QuasiSeparatedSpace Z] (I : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I]
     (q : ℕ) :
     Subsingleton (Sheaf.H ((sheafCompose Z.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I) (q + 1)) :=
-  Sheaf.subsingleton_H_succ_forget₂_of_injective (Etale.isTerminalFinalObject Z) _
-    ⟨‹CompactSpace Z›, ‹QuasiSeparatedSpace Z›⟩
-    exists_finite_cechNerveObj_of_mem_smallEtaleTopology I q
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I) (q + 1)) := by
+  let B : Z.Etale → Prop := fun W ↦ CompactSpace W.left ∧ QuasiSeparatedSpace W.left
+  have hcov (V : Z.Etale) (hV : B V) (R : Sieve V) (hR : R ∈ Z.smallEtaleTopology V) :
+      ∃ (n : ℕ) (U : Fin n → Over V),
+        (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (cechNerveObj U y).left) ∧ (∀ a, R (U a).hom) ∧
+        Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ Z.smallEtaleTopology V := by
+    obtain ⟨_, _⟩ := hV
+    obtain ⟨n, U, g, hRg, hU, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+    refine ⟨n, fun a ↦ Over.mk (g a), fun k y ↦ ?_, hRg,
+      (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
+    refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_
+    have := hU (y l)
+    exact ⟨inferInstanceAs (CompactSpace (U (y l)).left),
+      inferInstanceAs (QuasiSeparatedSpace (U (y l)).left)⟩
+  let T : Z.Etale := MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))
+  have hT : IsTerminal T :=
+    MorphismProperty.Over.mkIdTerminal _ Z
+  have key := Sheaf.subsingleton_H_succ_of_exactAt_cechComplex hT B
+    ⟨‹CompactSpace Z›, ‹QuasiSeparatedSpace Z›⟩ hcov ((sheafCompose Z.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I)
+    (fun _ _ _ U _ _ q ↦ Sheaf.exactAt_cechComplex_forget₂_of_injective I U q) q
+  exact key
+
+end Acyclicity
 
 section Comparison
 

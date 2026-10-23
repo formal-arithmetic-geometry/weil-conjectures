@@ -14,12 +14,10 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapBijectiveA
 /-!
 # Sections of sheaves of modules and of their underlying abelian sheaves
 
-Let `T` be a terminal object of a site, `Λ` a ring and `Λ_X`, `ℤ_X` the constant sheaves.
-Morphisms `ℤ_X ⟶ G` of abelian sheaves are the global sections `G(T)`
-(`CategoryTheory.Sheaf.constantHomEquiv`). For a sheaf `Y` of `Λ`-modules, morphisms
-`Λ_X ⟶ Y` and morphisms `ℤ_X ⟶ Y` of abelian sheaves are thus both the global sections `Y(T)`.
-The class `u : ℤ_X ⟶ Λ_X` of `1 ∈ Λ` identifies them: `f ↦ u ≫ f` is bijective
-(`CategoryTheory.Sheaf.bijective_comp_forget₂_map`).
+Let `T` be a terminal object of a site, `Λ` a ring and `Λ_X`, `ℤ_X` the constant sheaves. For a
+sheaf `Y` of `Λ`-modules, morphisms `Λ_X ⟶ Y` and morphisms `ℤ_X ⟶ Y` of abelian sheaves are
+both the global sections `Y(T)`. The class `u : ℤ_X ⟶ Λ_X` of `1 ∈ Λ` identifies them:
+`f ↦ u ≫ f` is bijective (`CategoryTheory.Sheaf.bijective_comp_forget₂_map`).
 
 Together with `CategoryTheory.Functor.bijective_mapExtComp` this identifies `Ext^n(Λ_X, Y)`
 (cohomology computed with sheaves of `Λ`-modules) with `Hⁿ(Y)` (cohomology of the underlying
@@ -34,28 +32,38 @@ open CategoryTheory Limits Opposite Abelian
 
 namespace CategoryTheory.Sheaf
 
-section ConstantInt
+section constantHomEquiv
 
 variable {C : Type*} [Category.{v} C] {J : GrothendieckTopology C}
-  [HasSheafify J AddCommGrpCat.{u}] {T : C} (hT : IsTerminal T)
+  [HasSheafify J AddCommGrpCat.{w}] {T : C} (hT : IsTerminal T)
 
 /-- Morphisms out of the constant sheaf `ℤ` are global sections: the value at `1` over the
 terminal object. -/
-noncomputable def constantHomEquiv (F : Sheaf J AddCommGrpCat.{u}) :
-    ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) ≃
+noncomputable def constantHomEquiv (F : Sheaf J AddCommGrpCat.{w}) :
+    ((constantSheaf J AddCommGrpCat.{w}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) ≃
       F.obj.obj (op T) :=
-  ((constantSheafAdj J AddCommGrpCat.{u} hT).homEquiv _ F).trans
+  ((constantSheafAdj J AddCommGrpCat.{w} hT).homEquiv _ F).trans
     (AddCommGrpCat.uliftZMultiplesAddEquiv _).toEquiv
 
-lemma constantHomEquiv_comp {F G : Sheaf J AddCommGrpCat.{u}}
-    (f : (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F)
+lemma constantHomEquiv_comp {F G : Sheaf J AddCommGrpCat.{w}}
+    (f : (constantSheaf J AddCommGrpCat.{w}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F)
     (g : F ⟶ G) :
     constantHomEquiv hT G (f ≫ g) = g.hom.app (op T) (constantHomEquiv hT F f) := by
   simp only [constantHomEquiv, Equiv.trans_apply, AddEquiv.toEquiv_eq_coe,
     Adjunction.homEquiv_naturality_right]
   rfl
 
-end ConstantInt
+lemma constantHomEquiv_naturality {F : Sheaf J AddCommGrpCat.{w}}
+    (f : (constantSheaf J AddCommGrpCat.{w}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) {W : C}
+    (ρ : W ⟶ T) :
+    f.hom.app (op W) (((constantSheaf J AddCommGrpCat.{w}).obj
+        (AddCommGrpCat.of (ULift ℤ))).obj.map ρ.op
+          (constantHomEquiv hT _ (𝟙 _))) =
+      F.obj.map ρ.op (constantHomEquiv hT F f) := by
+  rw [← ConcreteCategory.comp_apply, f.hom.naturality, ConcreteCategory.comp_apply,
+    ← constantHomEquiv_comp, Category.id_comp]
+
+end constantHomEquiv
 
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {T : C} (hT : IsTerminal T)
   (Λ : Type w) [CommRing Λ] [HasWeakSheafify J (ModuleCat.{w} Λ)]

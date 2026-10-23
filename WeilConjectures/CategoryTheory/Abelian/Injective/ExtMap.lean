@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveResolution
 
 /-!
 # Maps between `Ext` groups induced by maps of cocycles
@@ -27,26 +28,6 @@ namespace CategoryTheory.InjectiveResolution
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] {X Y : C}
   (R : InjectiveResolution Y)
-
-/-- In degree `0`, the class `R.extMk f` of a cocycle vanishes only if `f` does. -/
-lemma extMk_eq_zero_iff_of_zero (f : X ⟶ R.cocomplex.X 0) (hf : f ≫ R.cocomplex.d 0 1 = 0) :
-    R.extMk f 1 rfl hf = 0 ↔ f = 0 := by
-  refine ⟨fun h ↦ ?_, fun h ↦ by subst h; simp⟩
-  rw [← R.extEquivCohomologyClass.apply_eq_iff_eq, extEquivCohomologyClass_extMk,
-    extEquivCohomologyClass_zero, CohomologyClass.mk_eq_zero_iff,
-    mem_coboundaries_iff _ (-1) (by simp)] at h
-  obtain ⟨β, hβ⟩ := h
-  obtain ⟨g, rfl⟩ := Cochain.fromSingleMk_surjective β (-1) (by simp)
-  have hg : g = 0 := (CochainComplex.isZero_of_isStrictlyGE R.cochainComplex 0 (-1)
-    (by simp)).eq_of_tgt _ _
-  subst hg
-  rw [Cochain.fromSingleMk_zero, δ_zero] at hβ
-  rw [Cocycle.fromSingleMk_coe] at hβ
-  have h₀ := congrArg (Cochain.fromSingleEquiv (K := R.cochainComplex) (X := X)
-    (p := 0) (q := ((0 : ℕ) : ℤ)) (n := ((0 : ℕ) : ℤ)) (by simp)) hβ
-  rw [map_zero, Cochain.fromSingleEquiv_fromSingleMk] at h₀
-  rw [← cancel_mono (R.cochainComplexXIso 0 0 rfl).inv, zero_comp]
-  exact h₀.symm
 
 /-- A cocycle whose class vanishes is a coboundary, in every degree. -/
 lemma extMk_eq_zero_iff_exists {n : ℕ} (f : X ⟶ R.cocomplex.X n)

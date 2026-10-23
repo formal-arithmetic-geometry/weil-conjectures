@@ -44,9 +44,13 @@ In this repository the stages are realised as follows.
   `𝒪_E`-linear fully faithful triangulated functor is fully faithful
   (`CategoryTheory.Rationalization.full_map`), which is the blueprint's argument that
   bijectivity persists after tensoring with `E`.
-* `ℚ̄_ℓ`: pro-étale sheaves of `ℚ̄_ℓ`-modules (`AlgebraicGeometry.WeilCoefficients`), the
-  coefficients of the Weil sheaves of `WeilConjectures.WeilSheaf.Category`. Again `Ri_*` is fully
-  faithful on the whole derived category.
+* `ℚ̄_ℓ`: the bounded constructible objects `Dᵇc(X, ℚ̄_ℓ)` of the derived category of `ℓ`-adic
+  sheaves `AlgebraicGeometry.ProEtale.AdicSheaf l X`, i.e. pro-étale sheaves of modules over the
+  constant `ℓ`-adic sheaf `ℚ̄_ℓ,X`
+  (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic`). The `ℓ`-adic `i_*` is
+  fully faithful and preserves K-injective complexes, so `Ri_*` is fully faithful on the whole
+  derived category
+  (`AlgebraicGeometry.ProEtale.full_boundedConstructibleAdic_ι_comp_rightDerivedLowerStar`).
 
 At each stage the full faithfulness is stated for the inclusion of the stage category followed by
 `Ri_*`, which is full faithfulness of `i_* : Dᵇc(Z, Λ) ⥤ Dᵇc(X, Λ)` whatever the target
@@ -237,34 +241,6 @@ theorem Etale.isIso_unit_app_rightDerivedLowerStarDerivedCompleteRational
   inferInstance
 
 end Integral
-
-section AlgebraicClosure
-
-variable (l : ℕ) [Fact l.Prime]
-
-/-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image `Ri_*` along a
-closed immersion is fully faithful on the derived category of pro-étale sheaves of
-`ℚ̄_ℓ`-modules, hence on any full subcategory of constructible objects. -/
-instance ProEtale.full_rightDerivedFunctor_lowerStar_weilCoefficients :
-    (ProEtale.lowerStar (WeilCoefficients.{u} l) i).rightDerivedFunctor.Full :=
-  inferInstance
-
-instance ProEtale.faithful_rightDerivedFunctor_lowerStar_weilCoefficients :
-    (ProEtale.lowerStar (WeilCoefficients.{u} l) i).rightDerivedFunctor.Faithful :=
-  inferInstance
-
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the stage `ℚ̄_ℓ`: for any right adjoint
-`Ri^!` of `Ri_*` on pro-étale sheaves of `ℚ̄_ℓ`-modules, the unit `Q ⟶ Ri^! Ri_* Q` is an
-isomorphism. -/
-theorem ProEtale.isIso_unit_app_weilCoefficients
-    {G : DerivedCategory (Sheaf (ProEt.topology X) (WeilCoefficients.{u} l)) ⥤
-      DerivedCategory (Sheaf (ProEt.topology Z) (WeilCoefficients.{u} l))}
-    (adj : (ProEtale.lowerStar (WeilCoefficients.{u} l) i).rightDerivedFunctor ⊣ G)
-    (Q : DerivedCategory (Sheaf (ProEt.topology Z) (WeilCoefficients.{u} l))) :
-    IsIso (adj.unit.app Q) :=
-  inferInstance
-
-end AlgebraicClosure
 
 section BoundedConstructible
 

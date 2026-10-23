@@ -14,11 +14,13 @@ Let `Φ : IsoAlgebra F ⥤ IsoAlgebra F'` be an exact functor between categories
 invertible structure morphism whose underlying functor `L` preserves K-injective complexes, in
 the sense that `Φ ⋙ For ≅ For ⋙ L`. Then the right derived functor of `Φ ⋙ mapOfNatIso e` is
 `Φ ⋙ R(mapOfNatIso e)`
-(`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIso`): the complexes
-of algebras with K-injective underlying complex are acyclic for `R(mapOfNatIso e)`
+(`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfIso`): the
+complexes of algebras with K-injective underlying complex are acyclic for `R(mapOfNatIso e)`
 (`CategoryTheory.Endofunctor.IsoAlgebra.isIso_rightDerivedFunctorUnit_app_mapOfNatIso`).
 This generalises `CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso`,
-where `Φ` is itself a transport `mapOfNatIso`.
+where `Φ` is itself a transport `mapOfNatIso`, and
+`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIso`, where `Φ` is an
+endofunctor of `IsoAlgebra F`.
 -/
 
 @[expose] public section
@@ -80,7 +82,7 @@ lemma isRightDerivedFunctor_rightDerivedFunctor_comp_mapOfNatIso_of_iso :
 
 /-- The composition isomorphism `R(Φ ⋙ mapOfNatIso e₂) ≅ Φ ⋙ R(mapOfNatIso e₂)` for an exact
 functor `Φ` of algebras whose underlying functor preserves K-injective complexes. -/
-noncomputable def rightDerivedFunctorCompMapOfNatIsoIso [PreservesFiniteLimits Φ]
+noncomputable def rightDerivedFunctorCompMapOfNatIsoIsoOfIso [PreservesFiniteLimits Φ]
     [PreservesFiniteColimits Φ] :
     (Φ ⋙ mapOfNatIso e₂).rightDerivedFunctor ≅
       Φ.mapDerivedCategory ⋙ (mapOfNatIso e₂).rightDerivedFunctor :=

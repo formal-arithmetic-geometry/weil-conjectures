@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.Algebra.Module.Injective
 public import Mathlib.RingTheory.Localization.FractionRing
-public import WeilConjectures.Algebra.Homology.DerivedCategory.HomToInjective
+public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
@@ -27,6 +27,9 @@ invertibly (`DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor`): in the te
 - `Module.exists_comp_eq_of_bijective_smul`: for a short exact sequence `0 ⟶ R ⟶ K ⟶ Q ⟶ 0` of
   `R`-modules, every map `V ⟶ Q` from a module on which `ϖ` acts bijectively lifts to `K`. This
   is where the completeness of `R` enters: it says `Ext¹_R(V, R) ⟶ Ext¹_R(V, K)` is injective.
+- `DerivedCategory.eq_zero_of_homologyFunctor_map_eq_zero`,
+  `DerivedCategory.exists_homologyFunctor_map_eq`: for an injective object `J`, morphisms
+  `L ⟶ J[0]` of the derived category are the morphisms `H⁰(L) ⟶ J`.
 - `DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor`: the statement above.
 
 ## Implementation notes
@@ -164,6 +167,53 @@ end Module
 
 namespace DerivedCategory
 
+section Injective
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
+
+open TStructure
+
+variable {J : C} [Injective J]
+
+/-- A morphism `L ⟶ J[0]` to an injective object placed in degree `0` is determined by its
+effect on `H⁰`. -/
+lemma eq_zero_of_homologyFunctor_map_eq_zero {L : DerivedCategory C}
+    (φ : L ⟶ (singleFunctor C 0).obj J) (h : (homologyFunctor C 0).map φ = 0) : φ = 0 := by
+  have h₁ : (t.truncLTι 1).app L ≫ φ = 0 := by
+    have : ((t.truncLT 1).obj L).IsLE 0 := t.isLE_truncLT_obj _ _ _
+    refine (homologyFunctor_map_bijective_of_isLE_of_isGE (X := (t.truncLT 1).obj L)
+      (Y := (singleFunctor C 0).obj J) 0).1 ?_
+    simp only [Functor.map_comp, h, comp_zero, Functor.map_zero]
+  obtain ⟨g, hg⟩ := Triangle.yoneda_exact₂ _ (t.triangleLTGE_distinguished 1 L) φ h₁
+  have : ((t.truncGE 1).obj L).IsGE 1 := t.isGE_truncGE_obj _ _ _
+  rw [hg, eq_zero_of_isGE_one_of_injective g, comp_zero]
+
+/-- Every morphism `H⁰(L) ⟶ H⁰(J[0])` to the cohomology of an injective object placed in degree
+`0` is the effect on `H⁰` of a morphism `L ⟶ J[0]`. -/
+lemma exists_homologyFunctor_map_eq (L : DerivedCategory C)
+    (g : (homologyFunctor C 0).obj L ⟶ (homologyFunctor C 0).obj ((singleFunctor C 0).obj J)) :
+    ∃ φ : L ⟶ (singleFunctor C 0).obj J, (homologyFunctor C 0).map φ = g := by
+  let ι := (t.truncLTι 1).app L
+  have : IsIso ((homologyFunctor C 0).map ι) := isIso_homologyFunctor_map_truncLTι_app L 1 0
+    (by lia)
+  have : ((t.truncLT 1).obj L).IsLE 0 := t.isLE_truncLT_obj _ _ _
+  obtain ⟨ψ, hψ⟩ := (homologyFunctor_map_bijective_of_isLE_of_isGE (X := (t.truncLT 1).obj L)
+    (Y := (singleFunctor C 0).obj J) 0).2 ((homologyFunctor C 0).map ι ≫ g)
+  have hT := inv_rot_of_distTriang _ (t.triangleLTGE_distinguished 1 L)
+  have : (((t.triangleLTGE 1).obj L).invRotate.obj₁).IsGE 1 := by
+    have : ((t.truncGE 1).obj L).IsGE 1 := t.isGE_truncGE_obj _ _ _
+    have : t.IsGE (((t.triangleLTGE 1).obj L).invRotate.obj₁) 2 :=
+      t.isGE_shift ((t.truncGE 1).obj L) 1 (-1) 2
+    exact t.isGE_of_ge _ 1 2
+  obtain ⟨φ, hφ⟩ := Triangle.yoneda_exact₂ _ hT ψ (eq_zero_of_isGE_one_of_injective _)
+  refine ⟨φ, ?_⟩
+  rw [← cancel_epi ((homologyFunctor C 0).map ι), ← Functor.map_comp]
+  simp only at hψ
+  rw [← hψ, hφ]
+  rfl
+
+end Injective
+
 section Complete
 
 variable {R : Type u} [CommRing R] [IsDomain R] [IsPrincipalIdealRing R]
@@ -224,9 +274,7 @@ theorem eq_zero_of_isIso_smul_of_singleFunctor {L : DerivedCategory (ModuleCat.{
   have hnat₂ : (homologyFunctor (ModuleCat.{u} R) 0).map T.mor₂ ≫ ε.hom.app S.X₃ =
       ε.hom.app S.X₂ ≫ S.g := ε.hom.naturality S.g
   have h₁ : f ≫ T.mor₁ = 0 := by
-    refine (bijective_homologyFunctor_map_singleFunctor_of_injective _ _).1 ?_
-    dsimp only
-    rw [Functor.map_zero]
+    refine eq_zero_of_homologyFunctor_map_eq_zero _ ?_
     have h0 : (homologyFunctor (ModuleCat.{u} R) 0).map f ≫ ε.hom.app S.X₁ = 0 :=
       ModuleCat.hom_ext
         (Module.eq_zero_of_bijective_smul (W := R) (bijective_smul_homologyFunctor_obj hL 0) _)
@@ -242,14 +290,11 @@ theorem eq_zero_of_isIso_smul_of_singleFunctor {L : DerivedCategory (ModuleCat.{
   obtain ⟨h₀, hh₀⟩ := Module.exists_comp_eq_of_bijective_smul ι π hι hπ hex
     (bijective_smul_homologyFunctor_obj hL1 0)
     ((homologyFunctor (ModuleCat.{u} R) 0).map G ≫ ε.hom.app S.X₃).hom
-  obtain ⟨φ, hφ⟩ := (bijective_homologyFunctor_map_singleFunctor_of_injective (L⟦(1 : ℤ)⟧)
-    S.X₂).2 (ModuleCat.ofHom h₀ ≫ ε.inv.app S.X₂)
-  dsimp only at hφ
+  obtain ⟨φ, hφ⟩ := exists_homologyFunctor_map_eq (J := S.X₂) (L⟦(1 : ℤ)⟧)
+    (ModuleCat.ofHom h₀ ≫ ε.inv.app S.X₂)
   have hφG : φ ≫ T.mor₂ = G := by
     rw [← sub_eq_zero]
-    refine (bijective_homologyFunctor_map_singleFunctor_of_injective _ _).1 ?_
-    dsimp only
-    rw [Functor.map_zero]
+    refine eq_zero_of_homologyFunctor_map_eq_zero _ ?_
     rw [Functor.map_sub, sub_eq_zero, Functor.map_comp, hφ, ← cancel_mono (ε.hom.app S.X₃),
       Category.assoc, Category.assoc, hnat₂, Iso.inv_hom_id_app_assoc]
     exact ModuleCat.hom_ext hh₀

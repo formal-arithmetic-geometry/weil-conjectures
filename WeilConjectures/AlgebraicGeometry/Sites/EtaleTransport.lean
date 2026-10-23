@@ -52,16 +52,6 @@ namespace CategoryTheory.Sheaf
 variable {C : Type*} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}]
   {T : C} (hT : IsTerminal T)
 
-lemma constantHomEquiv_naturality {F : Sheaf J AddCommGrpCat.{u}}
-    (f : (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) {W : C}
-    (ρ : W ⟶ T) :
-    f.hom.app (op W) (((constantSheaf J AddCommGrpCat.{u}).obj
-        (AddCommGrpCat.of (ULift ℤ))).obj.map ρ.op
-          (constantHomEquiv hT _ (𝟙 _))) =
-      F.obj.map ρ.op (constantHomEquiv hT F f) := by
-  rw [← ConcreteCategory.comp_apply, f.hom.naturality, ConcreteCategory.comp_apply,
-    ← constantHomEquiv_comp, Category.id_comp]
-
 lemma H.equiv₀_eq_constantHomEquiv (F : Sheaf J AddCommGrpCat.{u}) [HasExt.{u} (Sheaf J
     AddCommGrpCat.{u})] (x : H F 0) :
     H.equiv₀ F hT x = constantHomEquiv hT F (Ext.addEquiv₀ x) :=

@@ -24,8 +24,8 @@ exact and reflects isomorphisms. This file shows:
 
 ## Main results
 
-- `CategoryTheory.Endofunctor.IsoAlgebra.strNatIso`: the structure isomorphisms `F X ≅ X` of the
-  algebras, as a natural isomorphism `forget F ⋙ F ≅ forget F`.
+- `CategoryTheory.Endofunctor.IsoAlgebra.strNatIso`: the structure isomorphisms as a natural
+  isomorphism `forget F ⋙ F ≅ forget F`.
 - `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso`.
 - `CategoryTheory.Endofunctor.IsoAlgebra.preservesFiniteLimits_mapOfNatIso` and
   `CategoryTheory.Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso`.

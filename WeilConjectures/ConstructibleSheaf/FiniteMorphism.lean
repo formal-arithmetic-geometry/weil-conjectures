@@ -10,6 +10,14 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.Counit
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import WeilConjectures.AlgebraicGeometry.GenericFinitePushforward
+import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
 
 /-!
 # Finite direct images of constructible sheaves on Noetherian schemes
@@ -71,8 +79,42 @@ theorem Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar {S Z : Scheme.
     (E : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf E] :
     ∃ U : S.Opens, Dense (U : Set S) ∧
       IsFiniteLocallyConstantSheaf
-        ((U.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)) :=
-  sorry
+        ((U.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)) := by
+  -- the generic lissity of finite direct images of constructible abelian sheaves, applied to
+  -- the underlying sheaf of abelian groups of `E`
+  have hE := isConstructibleEtaleSheafOfSets_of_module Λ E
+    ((isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf E).2 inferInstance)
+  obtain ⟨U, hU, hlisse⟩ := exists_dense_open_lisse_finite_directImage S g _ hE
+  refine ⟨U, hU, ?_⟩
+  let H := (g)_*[ModuleCat.{u + 1} Λ].obj E
+  let G := (U.ι)^*[ModuleCat.{u + 1} Λ].obj H
+  -- inverse image commutes with forgetting the module structure
+  obtain ⟨em⟩ := Etale.pullback_forget_modules_iso Λ U.ι H
+  have hL : PreservesFiniteLimits (etaleSetPullback U.ι) := by
+    unfold etaleSetPullback Functor.sheafPullbackConstruction.sheafPullback
+    let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+      AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} (Type (u + 1))
+    infer_instance
+  obtain ⟨ea, -⟩ := etaleInverseImageAbelianLift_hom U S U.ι hL
+  let e : (sheafForget U.toScheme.smallEtaleTopology).obj G ≅ _ :=
+    (sheafCompose U.toScheme.smallEtaleTopology (forget AddCommGrpCat.{u + 1})).mapIso em ≪≫
+      ea.app ((sheafCompose S.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj H)
+  -- so the underlying sheaf of sets of `G` is finite locally constant
+  have hT : IsFiniteLocallyConstantSheafOfTypes
+      ((sheafForget U.toScheme.smallEtaleTopology).obj G) := by
+    obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hlisse
+    refine ⟨⟨𝒰, fun j ↦ ?_⟩, isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_⟩
+    · exact @Sheaf.isConstant_congr _ _ _ _ _ _ _ _
+        ((U.toScheme.smallEtaleTopology.overPullback (Type (u + 1)) _).mapIso e.symm) (h𝒰 j)
+    · exact @Finite.of_equiv _ _ ((ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+          (hfin.isFinitelyGenerated_sheafFiber Ω s))
+        ((pointSmallEtale s).sheafFiber.mapIso e.symm).toEquiv
+  -- over the finite ring `Λ` this makes `G` itself finite locally constant
+  obtain ⟨𝒰, h𝒰⟩ := (lisseModuleSheaf_iff_underlying_finiteLocallyConstant G).2 hT
+  refine (finite_locally_constant_module_values_iff G).1.1 ⟨⟨𝒰, fun i ↦ ?_⟩, h𝒰⟩
+  obtain ⟨M, _, ⟨e⟩⟩ := h𝒰 i
+  exact Sheaf.isConstant_of_iso _ e
 
 /-- The generic step of `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite`:
 a nonempty closed subset `Z` of the Noetherian base has a nonempty relatively open subset

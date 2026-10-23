@@ -9,8 +9,8 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.WeilSheaf.BaseChangeField.Coherence
 public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
 public import WeilConjectures.WeilSheaf.Constant
-public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.Isotypic
+public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!
 # Transport of Weil sheaves commutes with pushforward and preserves `ℚ̄_ℓ`
@@ -131,6 +131,14 @@ section LowerStar
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
 
+/-- The exchange isomorphism `Fr_Y^* φ̄_* ≅ φ̄_* Fr_X^*` is the exchange isomorphism of the
+commutative square `φ̄ ≫ Fr_Y⁻¹ = Fr_X⁻¹ ≫ φ̄`. -/
+lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_eq :
+    adicLowerStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ _) =
+      adicLowerStarSquareIso l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv
+        φ (comp_over φ (Spec (CommRingCat.of k₀)))) :=
+  rfl
+
 set_option maxHeartbeats 1600000 in
 -- The Weil structures of pushforwards unfold through several module-object isomorphisms.
 /-- The iterated Weil structure `φ_m : (Frᵐ)^* φ_* K ≅ φ_* K` of a pushforward is the pushforward
@@ -154,7 +162,7 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
     ext1
     rw [frobeniusPowIso_succ _ _ (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]),
       frobeniusPowIso_succ _ _ (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]), ih,
-      lowerStar_obj_str, ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso_eq]
+      lowerStar_obj_str, adicLowerStarGeometricFiberMapCompFrobeniusIso_eq]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
       Category.assoc]
     have nat := (adicLowerStarSquareIso l
@@ -210,9 +218,8 @@ def transportLowerStarIso :
     (by
       dsimp only [Functor.comp_obj]
       rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, transport_obj_str, lowerStar_obj_str,
-        ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso_eq,
-        transport_obj_str, lowerStar_obj_frobeniusPowIso, transportCommIso_eq,
-        transportCommIso_eq]
+        adicLowerStarGeometricFiberMapCompFrobeniusIso_eq, transport_obj_str,
+        lowerStar_obj_frobeniusPowIso, transportCommIso_eq, transportCommIso_eq]
       simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
         Category.assoc]
       have nat := (adicLowerStarSquareIso l hsq).hom.naturality (K.frobeniusPowIso r).hom

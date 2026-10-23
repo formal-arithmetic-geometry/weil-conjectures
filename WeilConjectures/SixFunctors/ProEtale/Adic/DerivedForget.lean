@@ -67,20 +67,17 @@ instance (X : Scheme.{u}) : (AdicSheaf.forget (l := l) X).PreservesKInjectiveCom
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 variable (l) in
-/-- The pushforward of sheaves of `ℚ̄_ℓ,Z`-modules is the pushforward of the underlying sheaves. -/
-noncomputable def adicLowerStarCompForgetIso :
-    AdicSheaf.forget Z ⋙ (g)_*[WeilCoefficients.{u} l] ≅ (g)_*ᵃ[l] ⋙ AdicSheaf.forget Y :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _)
-
-variable (l) in
 /-- The total derived pushforward of sheaves of `ℚ̄_ℓ,Z`-modules is the derived pushforward of
-the underlying sheaves: `Rg_* (K.X) ≅ (Rg_* K).X`. -/
+the underlying sheaves: `Rg_* (K.X) ≅ (Rg_* K).X`, since the pushforward of sheaves of
+`ℚ̄_ℓ,Z`-modules is the pushforward of the underlying sheaves. -/
 noncomputable def mapDerivedCategoryForgetCompRightDerivedLowerStarIso :
     (AdicSheaf.forget Z).mapDerivedCategory ⋙ ((g)_*[WeilCoefficients.{u} l]).rightDerivedFunctor ≅
       ((g)_*ᵃ[l]).rightDerivedFunctor ⋙ (AdicSheaf.forget Y).mapDerivedCategory :=
   Functor.isoWhiskerRight (AdicSheaf.forget Z).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
     (Functor.rightDerivedFunctorCompIso (AdicSheaf.forget Z) _).symm ≪≫
-    Functor.rightDerivedFunctorNatIso (adicLowerStarCompForgetIso l g) ≪≫
+    Functor.rightDerivedFunctorNatIso
+      (NatIso.ofComponents (fun _ ↦ Iso.refl _) :
+        AdicSheaf.forget Z ⋙ (g)_*[WeilCoefficients.{u} l] ≅ (g)_*ᵃ[l] ⋙ AdicSheaf.forget Y) ≪≫
     Functor.rightDerivedFunctorCompMapDerivedCategoryIso _ _
 
 end AlgebraicGeometry.ProEtale

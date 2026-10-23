@@ -5,11 +5,13 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.Ulift
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.Point.Conservative
 public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.AlgebraicGeometry.Sites.FilteredColimitSections
-public import WeilConjectures.CategoryTheory.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.CategoryTheory.Sites.CohomologyFilteredColimit
 
 /-!
 # Étale cohomology of a qcqs scheme commutes with filtered colimits
@@ -20,9 +22,6 @@ bijective for every `q` ([Stacks 03Q6]).
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.exists_finite_cechNerveObj_of_mem_smallEtaleTopology`: covering
-  sieves of quasi-compact quasi-separated étale `X`-schemes contain finite covering families
-  whose Čech nerves are quasi-compact and quasi-separated.
 - `AlgebraicGeometry.Scheme.exists_app_eq_of_isColimit_ab`,
   `AlgebraicGeometry.Scheme.exists_map_eq_of_isColimit_ab`: sections over a quasi-compact
   quasi-separated étale `X`-scheme commute with filtered colimits of abelian étale sheaves.
@@ -37,11 +36,16 @@ bijective for every `q` ([Stacks 03Q6]).
 
 ## Implementation notes
 
-For `u + 1`-small filtered categories, we specialise the site-generic results of
-`WeilConjectures.CategoryTheory.Sites.CohomologyFilteredColimit` (e.g.
-`CategoryTheory.Sheaf.H_map_isColimit_of_isFiltered_small`) to the class of quasi-compact
-quasi-separated étale `X`-schemes, which is stable under the Čech nerves of finite covering
-families (`AlgebraicGeometry.Scheme.exists_finite_cechNerveObj_of_mem_smallEtaleTopology`).
+The small case is the site-generic `CategoryTheory.Sheaf.H_map_isColimit_of_isFiltered_small`
+applied to the quasi-compact quasi-separated étale `X`-schemes. Its proof is the one sketched in
+[Stacks 03Q6]. Sections over quasi-compact quasi-separated
+étale `X`-schemes commute with filtered colimits, hence so do the Čech complexes on finite
+families of such schemes. A filtered colimit of injective sheaves (which need not be injective)
+therefore has exact Čech complexes in positive degrees, so it has no higher cohomology by the
+Čech criterion `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex`. Embedding the
+diagram functorially into a diagram of injective sheaves (by the functorial factorization of
+`CategoryTheory.IsGrothendieckAbelian`), filtered colimits being exact, we conclude by dimension
+shifting along the long exact cohomology sequences.
 
 For filtered categories which are not `u + 1`-small, colimits of other diagrams of that shape
 need not exist, so dimension shifting is not available directly. Instead we use that the stalk
@@ -164,27 +168,26 @@ end CategoryTheory.GrothendieckTopology
 
 namespace AlgebraicGeometry.Scheme
 
-section Small
+section Sections
 
 open Presheaf
 
 variable {X : Scheme.{u}}
 
-/-- Every covering sieve of an étale `X`-scheme with quasi-compact underlying space contains a
-finite family generating a covering sieve. -/
+/-- Every covering sieve of a quasi-compact étale `X`-scheme `W` contains a finite family
+generating a covering sieve. -/
 lemma exists_finite_ofArrows_mem_smallEtaleTopology {W : X.Etale} [CompactSpace W.left]
-    {R : Sieve W} (hR : R ∈ X.smallEtaleTopology W) :
+    (R : Sieve W) (hR : R ∈ X.smallEtaleTopology W) :
     ∃ (n : ℕ) (U : Fin n → Over W), (∀ a, R (U a).hom) ∧
       Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology W := by
   obtain ⟨n, U, g, hRg, -, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
   exact ⟨n, fun a ↦ Over.mk (g a), hRg, (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
 
-/-- Every covering sieve of a quasi-compact quasi-separated étale `X`-scheme `V` contains a finite
-family generating a covering sieve, whose Čech nerve consists of quasi-compact quasi-separated
-étale `X`-schemes. This is the hypothesis of the Čech criterion
-`CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` for the class of quasi-compact
-quasi-separated étale `X`-schemes. -/
-lemma exists_finite_cechNerveObj_of_mem_smallEtaleTopology (V : X.Etale)
+/-- The quasi-compact quasi-separated étale `X`-schemes satisfy the hypothesis of the Čech
+criterion `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex`: every covering
+sieve of such a `V` contains a finite family generating a covering sieve, whose Čech nerve has
+quasi-compact quasi-separated members. -/
+lemma exists_finite_cechNerve_qcqs (V : X.Etale)
     (hV : CompactSpace V.left ∧ QuasiSeparatedSpace V.left) (R : Sieve V)
     (hR : R ∈ X.smallEtaleTopology V) :
     ∃ (n : ℕ) (U : Fin n → Over V),
@@ -197,8 +200,8 @@ lemma exists_finite_cechNerveObj_of_mem_smallEtaleTopology (V : X.Etale)
     (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
   refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_
   have := hU (y l)
-  exact ⟨Scheme.compactSpace_of_isAffine (U (y l)).left,
-    quasiSeparatedSpace_of_isAffine (U (y l)).left⟩
+  exact ⟨inferInstanceAs (CompactSpace (U (y l)).left),
+    inferInstanceAs (QuasiSeparatedSpace (U (y l)).left)⟩
 
 variable {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
   {F : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
@@ -210,8 +213,8 @@ theorem exists_map_eq_of_isColimit_ab (hc : IsColimit c) {W : X.Etale} [CompactS
     {k : K} (t t' : (F.obj k).obj.obj (op W))
     (h : (c.ι.app k).hom.app (op W) t = (c.ι.app k).hom.app (op W) t') :
     ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = (F.map a).hom.app (op W) t' :=
-  Sheaf.exists_map_eq_of_isColimit_of_finite hc
-    (fun _ hR ↦ exists_finite_ofArrows_mem_smallEtaleTopology hR) t t' h
+  Sheaf.exists_map_eq_of_isColimit_of_finite hc exists_finite_ofArrows_mem_smallEtaleTopology
+    t t' h
 
 /-- **Sections over a quasi-compact `W` of a filtered colimit of abelian sheaves vanish at a
 finite stage.** A section of `F k` over `W` which vanishes in `c.pt` vanishes in some later
@@ -221,7 +224,7 @@ theorem exists_map_eq_zero_of_isColimit_ab (hc : IsColimit c) {W : X.Etale}
     (h : (c.ι.app k).hom.app (op W) t = 0) :
     ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = 0 :=
   Sheaf.exists_map_eq_zero_of_isColimit_of_finite hc
-    (fun _ hR ↦ exists_finite_ofArrows_mem_smallEtaleTopology hR) t h
+    exists_finite_ofArrows_mem_smallEtaleTopology t h
 
 /-- **Sections over a quasi-compact quasi-separated `W` of a filtered colimit of abelian
 sheaves come from a finite stage.** Every section of `c.pt` over `W` is the image of a section
@@ -229,54 +232,29 @@ of some `F k` (Stacks 0738). -/
 theorem exists_app_eq_of_isColimit_ab (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
     [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
     ∃ (k : K) (t : (F.obj k).obj.obj (op W)), (c.ι.app k).hom.app (op W) t = s :=
-  Sheaf.exists_app_eq_of_isColimit_of_finite hc _
-    exists_finite_cechNerveObj_of_mem_smallEtaleTopology ⟨‹_›, ‹_›⟩ s
-
-/-- Let `c` be a colimit of a filtered diagram of abelian étale sheaves `F k` whose Čech
-complexes on a finite family `U` of étale `X`-schemes over `V` are exact in positive degrees.
-If the Čech nerve of `U` has quasi-compact quasi-separated members, then the Čech complex of
-`c.pt` on `U` is exact in positive degrees. -/
-lemma exactAt_cechComplex_of_isColimit (hc : IsColimit c) {V : X.Etale} {n : ℕ}
-    (U : Fin n → Over V)
-    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n),
-      CompactSpace (cechNerveObj U y).left.left ∧ QuasiSeparatedSpace (cechNerveObj U y).left.left)
-    (q : ℕ) (hF : ∀ k, ((cechComplex U).obj (F.obj k).obj).ExactAt (q + 1)) :
-    ((cechComplex U).obj c.pt.obj).ExactAt (q + 1) :=
-  Sheaf.exactAt_cechComplex_of_isColimit hc _
-    exists_finite_cechNerveObj_of_mem_smallEtaleTopology U hU q hF
+  Sheaf.exists_app_eq_of_isColimit_of_finite hc _ exists_finite_cechNerve_qcqs
+    ⟨‹_›, ‹_›⟩ s
 
 variable (X) in
 /-- On a quasi-compact quasi-separated scheme `X`, a filtered colimit of injective abelian étale
-sheaves has no higher cohomology. -/
+sheaves has no higher cohomology. This is
+`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective` for the étale `X`-schemes
+with quasi-compact quasi-separated underlying scheme. -/
 theorem subsingleton_H_succ_of_isColimit_of_injective [CompactSpace X]
     [QuasiSeparatedSpace X] [∀ k, Injective (F.obj k)] (hc : IsColimit c) (q : ℕ) :
     Subsingleton (Sheaf.H c.pt (q + 1)) :=
-  Sheaf.subsingleton_H_succ_of_isColimit_of_injective (MorphismProperty.Over.mkIdTerminal _ X) _
-    ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩
-    exists_finite_cechNerveObj_of_mem_smallEtaleTopology hc q
+  Sheaf.subsingleton_H_succ_of_isColimit_of_injective
+    (MorphismProperty.Over.mkIdTerminal _ X : IsTerminal (Etale.mk (𝟙 X))) _
+    ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩ exists_finite_cechNerve_qcqs hc q
 
-variable (X) in
-/-- **Global sections of a qcqs scheme commute with filtered colimits**, in terms of `H⁰`. -/
-lemma H_zero_map_isColimit [CompactSpace X] [QuasiSeparatedSpace X]
-    {D : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
-    (hc : IsColimit c) :
-    (∀ x : Sheaf.H c.pt 0, ∃ (k : K) (y : Sheaf.H (D.obj k) 0),
-      Sheaf.H.map (c.ι.app k) 0 y = x) ∧
-    ∀ (k : K) (y : Sheaf.H (D.obj k) 0), Sheaf.H.map (c.ι.app k) 0 y = 0 →
-      ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (D.map a) 0 y = 0 :=
-  Sheaf.H_zero_map_isColimit (MorphismProperty.Over.mkIdTerminal _ X) _
-    ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩
-    exists_finite_cechNerveObj_of_mem_smallEtaleTopology hc
-
-end Small
+end Sections
 
 /-- **Étale cohomology commutes with `u + 1`-small filtered colimits on a qcqs scheme.** Let
 `X` be quasi-compact and quasi-separated and let `c` be a colimit cocone of a filtered diagram
 `D : K ⥤ Sh(X_ét, Ab)` indexed by a `u + 1`-small category. Then for every `q` the canonical
-map `colim_k Hᵠ(X, D_k) ⟶ Hᵠ(X, c.pt)` is bijective, spelled out elementwise.
-
-This is `CategoryTheory.Sheaf.H_map_isColimit_of_isFiltered_small` for the class of
-quasi-compact quasi-separated étale `X`-schemes. -/
+map `colim_k Hᵠ(X, D_k) ⟶ Hᵠ(X, c.pt)` is bijective, spelled out elementwise. This is
+`CategoryTheory.Sheaf.H_map_isColimit_of_isFiltered_small` for the étale `X`-schemes with
+quasi-compact quasi-separated underlying scheme. -/
 @[stacks 03Q6]
 theorem H_map_isColimit_of_isFiltered_small (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
@@ -286,9 +264,9 @@ theorem H_map_isColimit_of_isFiltered_small (X : Scheme.{u}) [CompactSpace X]
       Sheaf.H.map (c.ι.app k) q y = x) ∧
     ∀ (k : K) (y : Sheaf.H (D.obj k) q), Sheaf.H.map (c.ι.app k) q y = 0 →
       ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (D.map a) q y = 0 :=
-  Sheaf.H_map_isColimit_of_isFiltered_small (MorphismProperty.Over.mkIdTerminal _ X) _
-    ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩
-    exists_finite_cechNerveObj_of_mem_smallEtaleTopology hc q
+  Sheaf.H_map_isColimit_of_isFiltered_small
+    (MorphismProperty.Over.mkIdTerminal _ X : IsTerminal (Etale.mk (𝟙 X))) _
+    ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩ exists_finite_cechNerve_qcqs hc q
 
 section DirectedUnion
 

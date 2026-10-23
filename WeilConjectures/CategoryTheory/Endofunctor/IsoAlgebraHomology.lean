@@ -30,6 +30,7 @@ open CategoryTheory Limits
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {C : Type u} [Category.{v} C] (G : C ⥤ C)
+
 variable [Abelian C] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
 
 /-- **The structure isomorphism of a homology object.** For a short complex `S` of algebras of

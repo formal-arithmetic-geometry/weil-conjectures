@@ -8,7 +8,6 @@ module
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
-public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMap
 
 /-!
 # Computing the cohomology presheaves with an injective resolution
@@ -42,6 +41,20 @@ namespace CategoryTheory.InjectiveResolution
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] {X Y : C}
   (R : InjectiveResolution Y)
+
+/-- In degree `0`, the class `R.extMk f` vanishes only if `f` does. -/
+lemma extMk_eq_zero_iff_of_zero (f : X ⟶ R.cocomplex.X 0) (hf : f ≫ R.cocomplex.d 0 1 = 0) :
+    R.extMk f 1 rfl hf = 0 ↔ f = 0 := by
+  refine ⟨fun h ↦ ?_, fun h ↦ by subst h; exact R.extMk_zero 1 rfl⟩
+  simp only [← R.extEquivCohomologyClass.apply_eq_iff_eq, extEquivCohomologyClass_extMk,
+    extEquivCohomologyClass_zero, CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff] at h
+  rw [CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff _ _ _ _ _ (-1)
+    (by lia)] at h
+  obtain ⟨g, hg⟩ := h
+  have hg0 : g = 0 :=
+    (CochainComplex.isZero_of_isStrictlyGE R.cochainComplex 0 (-1) (by lia)).eq_of_tgt _ _
+  rw [hg0, zero_comp] at hg
+  simpa using hg.symm
 
 variable {M : CochainComplex AddCommGrpCat.{w} ℕ} (θ : ∀ n, M.X n ≃+ (X ⟶ R.cocomplex.X n))
   (hθ : ∀ n (m : M.X n), θ (n + 1) (M.d n (n + 1) m) = θ n m ≫ R.cocomplex.d n (n + 1))

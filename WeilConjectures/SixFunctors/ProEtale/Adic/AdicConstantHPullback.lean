@@ -57,10 +57,10 @@ lemma lowerStar_map_adicScalar_comp_adicConstantSheafAbLowerStarIso (c : PadicAl
   rfl
 
 /-- The pullback is compatible with the inclusion `C(-, ℤ_ℓ) ⊆ ℚ̄_ℓ`. -/
-lemma lowerStar_map_integralToAdicConstantSheaf_comp :
-    (ProEtale.lowerStar AddCommGrpCat.{u + 1} e.inv).map (integralToAdicConstantSheaf l Y) ≫
+lemma lowerStar_map_continuousSheafToAdicConstantSheaf_comp :
+    (ProEtale.lowerStar AddCommGrpCat.{u + 1} e.inv).map (continuousSheafToAdicConstantSheaf l Y) ≫
         (adicConstantSheafAbLowerStarIso l e).hom =
-      (continuousSheafIsoLowerStar e ℤ_[l]).inv ≫ integralToAdicConstantSheaf l X := by
+      (continuousSheafIsoLowerStar e ℤ_[l]).inv ≫ continuousSheafToAdicConstantSheaf l X := by
   rw [Iso.eq_inv_comp]
   ext V f
   rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
@@ -106,12 +106,12 @@ lemma adicConstantHPullback_integralToAdicConstantH (n : ℕ) (a : IntegralAdicH
     adicConstantHPullback l e n (integralToAdicConstantH l Y n a) =
       integralToAdicConstantH l X n (integralAdicHPullback e l n a) := by
   have h₁ : integralToAdicConstantH l Y n a = Ext.comp (a : Sheaf.H (continuousSheaf Y ℤ_[l]) n)
-      (Ext.mk₀ (integralToAdicConstantSheaf l Y)) (add_zero n) := rfl
+      (Ext.mk₀ (continuousSheafToAdicConstantSheaf l Y)) (add_zero n) := rfl
   have h₂ : integralToAdicConstantH l X n (integralAdicHPullback e l n a) =
       Ext.comp (continuousSheafHPullback e ℤ_[l] n a)
-        (Ext.mk₀ (integralToAdicConstantSheaf l X)) (add_zero n) := rfl
+        (Ext.mk₀ (continuousSheafToAdicConstantSheaf l X)) (add_zero n) := rfl
   rw [h₁, h₂, adicConstantHPullback_apply, continuousSheafHPullback_apply, Ext.mk₀_comp_comp_mk₀,
     Ext.mk₀CompMk₀_comp_mk₀, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀,
-    Ext.mk₀CompMk₀_comp_mk₀_right, lowerStar_map_integralToAdicConstantSheaf_comp]
+    Ext.mk₀CompMk₀_comp_mk₀_right, lowerStar_map_continuousSheafToAdicConstantSheaf_comp]
 
 end AlgebraicGeometry.ProEtale

@@ -12,6 +12,8 @@ public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
+public import WeilConjectures.WeilSheaf.TraceCupAdicConstant
+public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 
 /-!
@@ -71,8 +73,9 @@ groups vanish and perfectness is automatic.
 `k₀'` is `F^r`, proved by transporting Weil structures along the base change) and
 `AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace isomorphism and perfectness at
 the coefficient stage `ℚ̄_ℓ`, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
-`sk-thm-frobenius`), which is still `sorry`: it needs the cup product and trace of `ℚ̄_ℓ`-Weil
-cohomology, transported from the finite levels.
+`sk-thm-frobenius`). The last is built from the cup product of `ℚ̄_ℓ`-cohomology transported from
+the finite levels, and its only open input is
+`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`.
 -/
 
 @[expose] public section
@@ -97,19 +100,6 @@ section Ingredients
 
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `sk-lem-finite` (constant-sheaf clause, `prop-cohomological-finiteness`): the
-cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth `k₀`-scheme of finite type and pure dimension `d`
-vanishes for `i ∉ [0, 2d]`: the fibrewise cohomological dimension of `X ⊗ k̄` over the
-algebraically closed field `k̄` is `2d`. -/
-theorem subsingleton_cohomology_adicConstant (d : ℕ)
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}
-    (hi : i < 0 ∨ 2 * d < i) :
-    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=
-  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X d
-    (topologicalKrullDim_geometricFiber_le_of_smoothOfRelativeDimension _ d) hi
-
 /-- Blueprint `sk-cor-trace`, `sk-thm-derived-duality` (degreewise, with `K = ℚ̄_ℓ`, via
 `sk-thm-transport`) and `sk-thm-frobenius` (a), at the coefficient stage `ℚ̄_ℓ`: for `X`
 smooth proper geometrically connected of pure dimension `d` over `k₀`, the cohomology
@@ -121,8 +111,10 @@ theorem exists_traceCup_isPerfect (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.o
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
     ∃ T : FrobeniusModule.TraceCup.{u + 1} (adicConstant k₀ l X).cohomology (2 * d)
-      ((Nat.card k₀ : PadicAlgCl l) ^ d), T.IsPerfect :=
-  sorry
+      ((Nat.card k₀ : PadicAlgCl l) ^ d), T.IsPerfect := by
+  obtain ⟨-, -, -, hprop⟩ := traceIsomorphism_adicConstant k₀ l X d
+  obtain ⟨tr, htr⟩ := hprop ‹_›
+  exact exists_traceCup_isPerfect_of_linearEquiv X d tr htr
 
 /-- Blueprint `def-weil-frobenius-detailed` (the geometric-Frobenius convention
 `Frob_{q^r} = Frob_q^r`), for the Weil structures of `sk-def-sf-weil-complexes` and the Frobenius

@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
-public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
@@ -172,16 +172,6 @@ noncomputable def adicLowerStarSquareIso {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {
     (p)_*ᵃ[l] ⋙ (q)_*ᵃ[l] ≅ (p')_*ᵃ[l] ⋙ (q')_*ᵃ[l] :=
   adicLowerStarComp l p q ≪≫ adicLowerStarCongr l h ≪≫ (adicLowerStarComp l p' q').symm
 
-/-- The exchange isomorphism of the pushforward along a base change `φ̄` with the Frobenius
-pullbacks is the square isomorphism of `φ̄ ≫ Fr_Y⁻¹ = Fr_X⁻¹ ≫ φ̄`. -/
-lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_eq {k : Type u} [Field k] [Finite k]
-    {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀)
-    (h : φ ≫ g = f) :
-    adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h =
-      adicLowerStarSquareIso l
-        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) :=
-  rfl
-
 lemma adicLowerStarSquareIso_hom_app_hom {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {q : Y ⟶ X}
     {p' : Z ⟶ Y'} {q' : Y' ⟶ X} (h : p ≫ q = p' ≫ q') (M : AdicSheaf l Z) :
     ((adicLowerStarSquareIso l h).hom.app M).hom =
@@ -198,11 +188,6 @@ lemma adicLowerStarCongr_hom_app_comp_adicLowerStarComp_inv_app_hom {X Y Z : Sch
       (lowerStarFactor _ h.symm).inv.app M.X := by
   rw [Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
     lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq]
-
-lemma adicLowerStarId_hom_app_hom (X : Scheme.{u}) (M : AdicSheaf l X) :
-    ((adicLowerStarId l X).hom.app M).hom = (lowerStarId _ X).hom.app M.X := by
-  simp only [adicLowerStarId, Iso.trans_hom, NatTrans.comp_app, Mod.comp_hom']
-  exact Category.comp_id _
 
 /-- Exchange isomorphisms are compatible with composition of the horizontal morphisms. -/
 lemma adicLowerStarSquareIso_comp {Z P : Scheme.{u}} (p : Z ⟶ P) (a₁ a₂ a₃ : Z ⟶ Z)
