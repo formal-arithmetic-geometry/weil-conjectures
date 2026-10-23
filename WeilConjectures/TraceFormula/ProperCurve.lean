@@ -28,7 +28,7 @@ tr(T_{c_m}(φ_m) | RΓ(X, K)) = ∑_{x ∈ X(k), Φ_m x = x} tr(F_{x,m} | K_x)
 ```
 (`ProEtale.CondensedRing.WeilBoundedConstructible.trace_globalOperator_graph_eq_sum`), and the
 same for the global Frobenius of the compactly supported cohomology of the Weil object
-(`ProEtale.CondensedRing.WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one`).
+(`WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one`).
 This is
 the curve case in Step 2 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`,
 for the proper curve itself.
