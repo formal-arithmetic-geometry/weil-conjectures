@@ -337,7 +337,8 @@ noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where
   right_unitality := by
     intro M
     have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
+        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom =
+          (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
       change Mod.tensorObjπ Q (Mod.regular (R)) ≫
         (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)
         (Mod.toBimodRegularIso (R := R)).hom).hom ≫
@@ -417,7 +418,8 @@ lemma tensorπ_comap_balanced (M N : Mod C R) :
 actions of `R`, `ψ` being an isomorphism. -/
 lemma comap_tensorπ_balanced (M N : Mod C R) :
     ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) := by
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫
+        tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) := by
   have _ := (inferInstance : IsCommMonObj R)
   rw [← cancel_epi ((M.X ◁ ψ) ▷ N.X)]
   simp only [comp_whiskerRight, Category.assoc]
@@ -567,7 +569,8 @@ noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoi
   right_unitality := by
     intro M
     have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
+        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom =
+          (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
       change Mod.tensorObjπ Q (Mod.regular (R)) ≫
         (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)
         (Mod.toBimodRegularIso (R := R)).hom).hom ≫
@@ -580,7 +583,8 @@ noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoi
         Category.id_comp]
       exact coequalizer.π_desc _ _
     have hπD (Q : Mod C (S)) :
-        Mod.tensorObjπ Q (Mod.regular (S)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (S)).hom ≫ γ[S,Q.X] := by
+        Mod.tensorObjπ Q (Mod.regular (S)) ≫ (ρ_ Q).hom.hom =
+          (β_ Q.X (S)).hom ≫ γ[S,Q.X] := by
       change Mod.tensorObjπ Q (Mod.regular (S)) ≫
         (Bimod.whiskerLeft ((Mod.toBimod (S)).obj Q)
         (Mod.toBimodRegularIso (R := S)).hom).hom ≫
