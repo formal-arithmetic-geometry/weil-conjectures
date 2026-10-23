@@ -153,8 +153,7 @@ variable [HasSheafify J (ModuleCat.{max w v} R)]
 lemma isCechAcyclic_of_injective [∀ V : C, HasFiniteProducts (Over V)]
     (I : Sheaf J (ModuleCat.{max w v} R)) [Injective I] :
     IsCechAcyclic J (I.obj ⋙ forget₂ _ AddCommGrpCat) := fun _ _ U _ q ↦
-  have : Injective I.obj := (sheafificationAdjunction _ _).map_injective I inferInstance
-  exactAt_cechComplex_forget₂_of_injective U I.obj q
+  exactAt_cechComplex_forget₂_of_injective I U q
 
 section
 
