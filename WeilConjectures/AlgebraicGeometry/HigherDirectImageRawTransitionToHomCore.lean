@@ -254,8 +254,6 @@ theorem higherDirectImageRawTransition_toHom_core
           (lowerStarPlusTransition Λ a h (a ≫ h) rfl K ≫
             R+((a ≫ h)_*[ModuleCat.{u + 1} Λ]).map v)
     rw [eh', eh]
-    dsimp only [homologyShiftComparison, moduleDerivedAdjunction, moduleUpperStar,
-      moduleLowerStar]
     run_tac
       let goal ← Lean.Elab.Tactic.getMainGoal
       goal.withContext do

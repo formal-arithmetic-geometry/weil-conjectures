@@ -498,6 +498,73 @@ noncomputable def Etale.homotopyOfSingle {A : Sheaf X.smallEtaleTopology (Module
             eqToHom (by congr 1; lia)
         else 0))).trans (Homotopy.nullHomotopy' _)
 
+/-- The degree-`0` cycle class of a lift `f` of a class `β` that induces the zero section of
+`H⁰`: it vanishes in the homology sheaf. Auxiliary for
+`AlgebraicGeometry.Etale.isLocallyInjective_derivedHomToHomology`, stated separately so that
+its kernel check does not share caches with the rest of that proof. -/
+private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_hz {W : X.Etaleᵒᵖ}
+    (β : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
+      DerivedCategory.Plus.Q.obj M)
+    (hβ : (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M) ≫
+      Etale.moduleFreeSheafSections Λ
+        ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).app W β =
+      0)
+    (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
+      M.obj)
+    (hf : DerivedCategory.Plus.ι.map β =
+      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
+    (DerivedCategory.singleCyclesHom ((Etale.moduleFreeSheaf Λ X).obj W.unop) ≫
+      HomologicalComplex.cyclesMap f 0) ≫ M.obj.homologyπ 0 = 0 := by
+  let z := DerivedCategory.singleCyclesHom ((Etale.moduleFreeSheaf Λ X).obj W.unop) ≫
+    HomologicalComplex.cyclesMap f 0
+  have hm : IsIso (Etale.homologyComparison M) := by
+    dsimp only [Etale.homologyComparison]
+    infer_instance
+  have h2 : z ≫ M.obj.homologyπ 0 ≫ Etale.homologyComparison M = 0 := by
+    apply (Etale.moduleFreeSheafHomEquiv Λ W.unop
+      ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).injective
+    rw [Etale.moduleFreeSheafHomEquiv_apply, Etale.moduleFreeSheafHomEquiv_apply, map_zero]
+    have := Etale.derivedHomToHomology_app_eq M β f hf
+    simp only [z, Category.assoc]
+    rw [← this]
+    exact hβ
+  calc z ≫ M.obj.homologyπ 0 =
+      (z ≫ M.obj.homologyπ 0 ≫ Etale.homologyComparison M) ≫
+        inv (Etale.homologyComparison M) := by
+        simp only [Category.assoc, IsIso.hom_inv_id]; erw [Category.comp_id]
+    _ = 0 := by rw [h2, Limits.zero_comp]
+
+/-- A class `β` whose lift `f` has cycle class locally a boundary vanishes locally.
+Auxiliary for `AlgebraicGeometry.Etale.isLocallyInjective_derivedHomToHomology`. -/
+private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_cover {W : X.Etaleᵒᵖ}
+    {V : X.Etale} (g : V ⟶ W.unop)
+    (β : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
+      DerivedCategory.Plus.Q.obj M)
+    (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
+      M.obj)
+    (hf : DerivedCategory.Plus.ι.map β =
+      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+    (b' : (Etale.moduleFreeSheaf Λ X).obj V ⟶ M.obj.X (-1))
+    (hφz : (Etale.moduleFreeSheaf Λ X).map g ≫
+      (DerivedCategory.singleCyclesHom ((Etale.moduleFreeSheaf Λ X).obj W.unop) ≫
+        HomologicalComplex.cyclesMap f 0) = b' ≫ M.obj.toCycles (-1) 0) :
+    (DerivedCategory.Plus.singleFunctor _ 0).map ((Etale.moduleFreeSheaf Λ X).map g) ≫ β = 0 := by
+  let φ := (Etale.moduleFreeSheaf Λ X).map g
+  let A' := (Etale.moduleFreeSheaf Λ X).obj V
+  let f' := (HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f
+  have hf'z : DerivedCategory.singleCyclesHom A' ≫ HomologicalComplex.cyclesMap f' 0 =
+      b' ≫ M.obj.toCycles (-1) 0 := by
+    rw [HomologicalComplex.cyclesMap_comp, ← Category.assoc,
+      DerivedCategory.singleCyclesHom_naturality, Category.assoc]
+    exact hφz
+  have hβ' : DerivedCategory.Plus.ι.map
+      ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
+        DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
+    rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
+    rfl
+  exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
+    (homotopyOfSingleCycles M.obj f' b' hf'z)
+
 theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
     Presheaf.IsLocallyInjective X.smallEtaleTopology
       (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M) ≫
@@ -521,23 +588,8 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
   let A := (Etale.moduleFreeSheaf Λ X).obj W.unop
   obtain ⟨f, hf⟩ := DerivedCategory.Plus.exists_ι_map_eq M β
   let z := DerivedCategory.singleCyclesHom A ≫ HomologicalComplex.cyclesMap f 0
-  have hz : z ≫ M.obj.homologyπ 0 = (0 : A ⟶ M.obj.homology 0) := by
-    have hm : IsIso (Etale.homologyComparison M) := by
-      dsimp only [Etale.homologyComparison]
-      infer_instance
-    have h2 : z ≫ M.obj.homologyπ 0 ≫ Etale.homologyComparison M = 0 := by
-      apply (Etale.moduleFreeSheafHomEquiv Λ W.unop
-        ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).injective
-      rw [Etale.moduleFreeSheafHomEquiv_apply, Etale.moduleFreeSheafHomEquiv_apply, map_zero]
-      have := Etale.derivedHomToHomology_app_eq M β f hf
-      simp only [z, Category.assoc]
-      rw [← this]
-      exact hβ
-    calc z ≫ M.obj.homologyπ 0 =
-        (z ≫ M.obj.homologyπ 0 ≫ Etale.homologyComparison M) ≫
-          inv (Etale.homologyComparison M) := by
-          simp only [Category.assoc, IsIso.hom_inv_id]; erw [Category.comp_id]
-      _ = 0 := by rw [h2, Limits.zero_comp]
+  have hz : z ≫ M.obj.homologyπ 0 = (0 : A ⟶ M.obj.homology 0) :=
+    Etale.isLocallyInjective_derivedHomToHomology_aux_hz M β hβ f hf
   let S := ShortComplex.mk (M.obj.toCycles (-1) 0) (M.obj.homologyπ 0) (by simp)
   have hS : S.Exact :=
     ShortComplex.exact_of_g_is_cokernel S (M.obj.homologyIsCokernel (-1) 0 (by simp))
@@ -550,7 +602,6 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
     (Presheaf.imageSieve_mem X.smallEtaleTopology S.toCycles.hom k)
   rintro V g ⟨b, hb⟩
   let φ := (Etale.moduleFreeSheaf Λ X).map g
-  let A' := (Etale.moduleFreeSheaf Λ X).obj V
   let b' := (Etale.moduleFreeSheafHomEquiv Λ V (M.obj.X (-1))).symm b
   have hφz : φ ≫ z = b' ≫ M.obj.toCycles (-1) 0 := by
     apply (Etale.moduleFreeSheafHomEquiv Λ V _).injective
@@ -560,25 +611,8 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
     erw [← NatTrans.naturality_apply S.iCycles.hom g.op k, ← hb,
       ← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, S.toCycles_i]
-  let f' := (HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f
-  have hf'z : DerivedCategory.singleCyclesHom A' ≫ HomologicalComplex.cyclesMap f' 0 =
-      b' ≫ M.obj.toCycles (-1) 0 := by
-    rw [HomologicalComplex.cyclesMap_comp, ← Category.assoc,
-      DerivedCategory.singleCyclesHom_naturality, Category.assoc]
-    exact hφz
-  have hβ' : DerivedCategory.Plus.ι.map
-      ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
-        DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
-    rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
-    rfl
-  have h0 := DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
-    (homotopyOfSingleCycles M.obj f' b' hf'z)
-  simp only [Presheaf.equalizerSieve_apply, map_zero, map_sub]
-  have h0' : (ConcreteCategory.hom (((Etale.moduleFreeSheaf Λ X ⋙
-      DerivedCategory.Plus.singleFunctor _ 0).op ⋙
-        preadditiveYoneda.obj (DerivedCategory.Plus.Q.obj M)).map g.op)) (x - y) = 0 := h0
-  rw [map_sub] at h0'
-  exact h0'
+  simp only [Presheaf.equalizerSieve_apply, map_zero]
+  exact Etale.isLocallyInjective_derivedHomToHomology_aux_cover M g β f hf b' hφz
 
 end Key
 
@@ -793,9 +827,7 @@ lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y �
           ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homEquiv _ _
             ((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
               ((Etale.freeSheaf Λ X).obj W.unop) ≫ β)) ≫
-        Etale.homologyShiftComparison Λ h q K := by
-  simp only [Etale.higherDirectImagePresheafToHom, NatTrans.comp_app, ConcreteCategory.comp_apply,
-    Etale.derivedHomToHomology_app_apply]
+        Etale.homologyShiftComparison Λ h q K :=
   rfl
 
 /-- Naturality of the shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)` in `K`: for

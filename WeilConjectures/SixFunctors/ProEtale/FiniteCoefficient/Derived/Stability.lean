@@ -125,52 +125,6 @@ end Pullback
 
 section DirectImage
 
-section General
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [hA' : ConcreteCategory.FinitelyGeneratedOfMono A]
-  {k : Type u} [Field k] (N : ℕ) (hN : (N : k) ≠ 0) (hA : ∀ M : A, N • 𝟙 M = 0)
-  {X Y : Scheme.{u}} (s : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType s] [QuasiCompact s]
-  (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-
-include hN hA hA' s
-
-/-- Blueprint `sk-cor-sf-direct-image-ctf`: Direct image preserves bounded constructibility on
-the pro-étale site.
-
-Let `Y` be of finite type over a field `k`, let `A` be killed by an integer `N` invertible in
-`k` and noetherian, subobjects of finitely generated objects being finitely generated
-(`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`, which holds for `ModuleCat Λ` with
-`Λ` noetherian), and let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded
-constructible complex on `X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`.
-
-Write `K ≅ ν^* K'` for a bounded constructible étale complex `K'`. Then
-`Rf_* K ≅ ν^* Rf_* K'` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`),
-and `Rf_* K'` is bounded constructible
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`). -/
-theorem boundedConstructible_rightDerivedLowerStar
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hbc : DerivedCategory.boundedConstructible A X K) :
-    DerivedCategory.boundedConstructible A Y ((R(ProEtale.lowerStar A f)).obj K) := by
-  obtain ⟨K', hK', ⟨e⟩⟩ := hbc
-  have : NeZero N := ⟨by rintro rfl; exact hN Nat.cast_zero⟩
-  -- `N` is invertible on the `k`-scheme `Y`
-  have hNY : IsUnit (N : Γ(Y, ⊤)) := by
-    simpa using (Ne.isUnit hN).map ((Scheme.ΓSpecIso (.of k)).inv ≫ s.appTop).hom
-  exact (DerivedCategory.boundedConstructible A Y).prop_of_iso
-    ((R(ProEtale.lowerStar A f)).mapIso e.symm ≪≫
-      rightDerivedLowerStarMapDerivedCategoryObjIso A f K' hK'.1.1).symm
-    (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
-      (Etale.boundedConstructible_rightDerivedLowerStar A (f ≫ s) s f rfl N
-        (_root_.DerivedCategory.nsmul_id_eq_zero_of_forall
-          (Sheaf.nsmul_id_eq_zero_of_forall hA) K') hNY hK'))
-
-end General
-
 section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -179,6 +133,36 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
 include hN hA s
+
+/-- Blueprint `sk-cor-sf-direct-image-ctf`: Direct image preserves bounded constructibility on
+the pro-étale site.
+
+Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
+invertible in `k`, and let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded
+constructible complex on `X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`.
+
+Write `K ≅ ν^* K'` for a bounded constructible étale complex `K'`. Then
+`Rf_* K ≅ ν^* Rf_* K'` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`),
+and `Rf_* K'` is bounded constructible
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_finite`). -/
+theorem boundedConstructible_rightDerivedLowerStar
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hbc : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).obj K) := by
+  obtain ⟨K', hK', ⟨e⟩⟩ := hbc
+  -- `N` vanishes in `Λ` and is invertible on the `k`-scheme `Y`
+  have hNΛ : (N : Λ) = 0 := by
+    simpa using congrArg (fun g ↦ g.hom (1 : Λ)) (hA (ModuleCat.of Λ Λ))
+  have hNY : IsUnit (N : Γ(Y, ⊤)) := by
+    simpa using (Ne.isUnit hN).map ((Scheme.ΓSpecIso (.of k)).inv ≫ s.appTop).hom
+  have : HasInvertibleExponent Λ Y :=
+    ⟨N, Nat.pos_of_ne_zero (by rintro rfl; exact hN Nat.cast_zero), hNΛ, hNY⟩
+  exact (DerivedCategory.boundedConstructible _ Y).prop_of_iso
+    ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).mapIso e.symm ≪≫
+      rightDerivedLowerStarMapDerivedCategoryObjIso _ f K' hK'.1.1).symm
+    (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
+      (Etale.boundedConstructible_rightDerivedLowerStar_of_finite Λ (f ≫ s) s f rfl hK'))
 
 /-- Blueprint `cor-sf-direct-image-ctf-etale-origin`: The pro-étale direct image for objects of
 étale origin.
@@ -210,7 +194,7 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerived
   have hNY : IsUnit (N : Γ(Y, ⊤)) := by
     simpa using (Ne.isUnit hN).map ((Scheme.ΓSpecIso (.of k)).inv ≫ s.appTop).hom
   have e := rightDerivedLowerStarMapDerivedCategoryObjIso (ModuleCat.{u + 1} Λ) f K' hbc.1.1
-  refine ⟨boundedConstructible_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) N hN hA s f
+  refine ⟨boundedConstructible_rightDerivedLowerStar Λ N hN hA s f
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hbc),
     (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))).prop_of_iso
       e.symm ?_⟩

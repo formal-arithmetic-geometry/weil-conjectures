@@ -36,7 +36,7 @@ The unit `Λ_X` with its canonical datum is the strict Weil complex
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -80,14 +80,51 @@ theorem constructibleFiniteTor_coefficientDual
 
 namespace WeilComplex
 
+section Coefficients
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [UpperStarPreservesFlat A] {Y : Scheme.{u}} (g : Y ≅ Y)
+
+/-- The unit `Λ_Y` with its canonical datum `φ_Λ : Lg^* Λ_Y ≅ Λ_Y`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`), as a strict Weil complex, for a
+coefficient category in which the unit lies in `Dctf(Y, A)`. -/
+noncomputable def unitOfConstructibleFiniteTor (h : constructibleFiniteTor A Y (𝟙_ _)) :
+    WeilComplex A g where
+  obj := ⟨𝟙_ _, h⟩
+  frobenius := ObjectProperty.isoMk _ (leftDerivedUpperStarUnitIso A g.hom)
+
+/-- The internal-Hom Frobenius of `(K, φ_K)` and the unit is the contragredient datum `φ_{K^∨}`.
+It is stated over an arbitrary coefficient category, in the form of
+`AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius_hom_hom`, so that its instance at
+`ModuleCat Λ` is checked by the kernel without unfolding the derived internal hom. -/
+lemma comp_map_unitOfConstructibleFiniteTor_frobenius_hom_hom (K : WeilComplex A g)
+    (h : constructibleFiniteTor A Y (𝟙_ _)) :
+    leftDerivedUpperStarDerivedHomComparison A g.hom K.obj.obj
+        (unitOfConstructibleFiniteTor g h).obj.obj ≫
+      (RHom(Y)[A].map K.frobenius.inv.hom.op).app _ ≫
+        (RHom(Y)[A].obj (op K.obj.obj)).map (unitOfConstructibleFiniteTor g h).frobenius.hom.hom =
+      contragredientWeilDatum A g.hom ((DerivedCategoryFiniteTor.ι A Y).mapIso K.frobenius) :=
+  congrArg (leftDerivedUpperStarDerivedHomComparison A g.hom K.obj.obj (𝟙_ _) ≫ ·)
+    ((RHom(Y)[A].map K.frobenius.inv.hom.op).naturality
+      (leftDerivedUpperStarUnitIso A g.hom).hom).symm
+
+end Coefficients
+
 variable {Λ} (g : X ≅ X)
 
 variable (Λ) in
 /-- The unit strict Weil complex: `Λ_X` with its canonical datum `φ_Λ : Lg^* Λ_X ≅ Λ_X`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`). -/
-noncomputable def unit : WeilComplex (ModuleCat.{u + 1} Λ) g where
-  obj := ⟨𝟙_ _, constructibleFiniteTor_unit Λ⟩
-  frobenius := ObjectProperty.isoMk _ (leftDerivedUpperStarUnitIso _ g.hom)
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`).
+
+It is an instance of `AlgebraicGeometry.Etale.WeilComplex.unitOfConstructibleFiniteTor`, made
+over an arbitrary coefficient category, so that no proof nested in its body is abstracted (see
+the implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom`). -/
+noncomputable def unit : WeilComplex (ModuleCat.{u + 1} Λ) g :=
+  unitOfConstructibleFiniteTor g (constructibleFiniteTor_unit Λ)
 
 omit [Finite Λ] [HasInvertibleExponent Λ X] in
 lemma unit_frobenius_hom_hom :
@@ -118,12 +155,9 @@ The Weil structure of the dual strict Weil complex is the contragredient datum `
 `φ_{K^∨}` defines a strict Weil complex `(K^∨, φ_{K^∨})`. -/
 theorem coefficientDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientDual aX K).frobenius.hom.hom =
-      contragredientWeilDatum _ g.hom ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) := by
-  refine (internalHomFrobenius_hom_hom aX K (unit Λ g)).trans ?_
-  rw [unit_frobenius_hom_hom, contragredientWeilDatum]
-  exact congrArg (leftDerivedUpperStarDerivedHomComparison _ g.hom K.obj.obj (𝟙_ _) ≫ ·)
-    ((RHom(X)[ModuleCat.{u + 1} Λ].map K.frobenius.inv.hom.op).naturality
-      (leftDerivedUpperStarUnitIso _ g.hom).hom).symm
+      contragredientWeilDatum _ g.hom ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) :=
+  (internalHomFrobenius_hom_hom aX K (unit Λ g)).trans
+    (comp_map_unitOfConstructibleFiniteTor_frobenius_hom_hom g K (constructibleFiniteTor_unit Λ))
 
 /-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
 

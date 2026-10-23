@@ -41,8 +41,8 @@ affine étale `X`-scheme `V` lying over an affine open of `X`, a section over
 section `φ^* g` of `pᵢ^* pᵢ_* F` vanishing in `F` vanishes in `pⱼ^* pⱼ_* F` as soon as the
 morphism `φ` descends to the stage `Dⱼ` (`AlgebraicGeometry.Etale.exists_hasStageModel`).
 The cohomology of `pᵢ^* pᵢ_* F` is computed by the continuity of étale cohomology
-(`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`, blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`).
+(`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`,
+blueprint `lemma-weil-pbc-etale-cohomology-continuity`).
 -/
 
 @[expose] public section
@@ -565,7 +565,7 @@ lemma subsingleton_H_pushPullDiagram_obj (h : ∀ i, (D.obj i).HasTorsionCohomol
     inferInstanceAs (QuasiSeparatedSpace (D.obj j.left))
   have : ∀ {j j'} (g : j ⟶ j'), IsAffineHom (Dov.map g).left := fun g ↦
     inferInstanceAs (IsAffineHom (D.map g.left))
-  have key := isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit AddCommGrpCat.{u + 1} G
+  have key := isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat G
     Dov cov hcov q fun j ↦ (Sheaf.subsingleton_H_iff_isZero_rightDerived
       (Dov.obj j).left.smallEtaleTopology (isTerminalEtaleMkId (D.obj j.left)) q _).1
       (h j.left _ (isTorsion_upperStar (D.map j.hom) hG) q hq)
