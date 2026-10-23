@@ -96,7 +96,7 @@ back, it is tensoring with a constant sheaf. -/
 lemma preservesKFlatQuasiIso_extendScalars :
     (Sheaf.extendScalars X.smallEtaleTopology φ).PreservesKFlatQuasiIso where
   quasiIso_map hK hL f _ :=
-    have := Sheaf.reflectsIsomorphisms_restrictScalars X.smallEtaleTopology hφ
+    have := Sheaf.reflectsIsomorphisms_restrictScalars_of_surjective X.smallEtaleTopology hφ
     CochainComplex.quasiIso_map_of_iso_tensorRight _ _
       (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) f hK hL
 

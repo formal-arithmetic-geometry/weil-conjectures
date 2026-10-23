@@ -57,7 +57,7 @@ complexes (`CategoryTheory.Limits.shortExact_sequenceShift`), whose distinguishe
 `D(C)` is the defining triangle of the homotopy colimit, the coproduct of complexes being a
 coproduct in `D(C)` (`DerivedCategory.isColimitCofanMkQObj`). -/
 theorem isHomotopyColimit_mapCocone_Q (F : ℕ ⥤ CochainComplex C ℤ) {c : Cocone F}
-    (hc : IsColimit c) : IsHomotopyColimit (Q.mapCocone c) := by
+    (hc : IsColimit c) : IsHomotopyColimitCocone (Q.mapCocone c) := by
   let P : Cofan fun n : ℕ ↦ F.obj n := Cofan.mk (∐ fun n ↦ F.obj n) (Sigma.ι _)
   let hP : IsColimit P := coproductIsCoproduct _
   have hS := shortExact_sequenceShift F hP hc
@@ -191,10 +191,10 @@ so `Q(K)` is the homotopy colimit of the `Q(τ^{≤ N} K) = τ^{≤ N} E`
 (`DerivedCategory.isHomotopyColimit_mapCocone_Q`, `lem-kun-complex-colimit-hocolim`). -/
 theorem isHomotopyColimit_truncLECocone [Abelian.HasKInjectiveResolutions C]
     [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] [HasCoproductsOfShape ℕ C]
-    (E : DerivedCategory C) : IsHomotopyColimit (truncLECocone E) := by
+    (E : DerivedCategory C) : IsHomotopyColimitCocone (truncLECocone E) := by
   let K := Q.objPreimage E
   let e : Q.obj K ≅ E := Q.objObjPreimageIso E
-  have h₁ : IsHomotopyColimit (truncLECocone (Q.obj K)) :=
+  have h₁ : IsHomotopyColimitCocone (truncLECocone (Q.obj K)) :=
     (isHomotopyColimit_mapCocone_Q _ (isColimitComplexTruncLECocone K)).of_iso
       (complexTruncLESequenceCompQIso K) _ (Iso.refl _) fun n ↦ by
         simp [complexTruncLESequenceCompQIso, complexTruncLESequenceCompQHom, complexTruncLECocone]

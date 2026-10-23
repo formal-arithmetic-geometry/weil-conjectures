@@ -416,7 +416,7 @@ theorem boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_one
     exact ⟨DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero
         (J := Ideal.span {ϖ} ^ (n + 1 + 1)) hT h.1 ih.1
         fun r hr ↦ smul_id_reductionModIdeal_obj_eq_zero hr M,
-      torAmplitudeIn_obj₂_of_distTriang hT h.2 ih.2⟩
+      torAmplitudeIn_obj₂_of_distTriang_of_sheaf hT h.2 ih.2⟩
 
 include hϖ hI in
 /-- Blueprint `det-sfb-coefficient-comparisons-exceptional`: Coefficient comparison for `f^!`,

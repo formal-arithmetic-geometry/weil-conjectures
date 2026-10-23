@@ -24,7 +24,7 @@ monoidal left adjoint of restriction of scalars. We show:
   it sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms and computes the
   derived base change on K-flat complexes;
 - with scalars restricted back to `A`, it is the tensor product with the constant sheaf
-  `A ⧸ (a)` (`CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsIso`);
+  `A ⧸ (a)` (`CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsIsoQuotient`);
 - it preserves flat objects (`CategoryTheory.Sheaf.preservesFlat_extendScalars`): with
   scalars restricted to `A`, tensoring with `A' ⊗_A P` is tensoring with `P`.
 
@@ -146,7 +146,7 @@ lemma extendScalarsAdjunction_unit_app (F : Sheaf J (ModuleCat.{u + 1} A)) :
 
 /-- With scalars restricted back to `A`, the extension of scalars of `F` is
 `F ⊗ A ⧸ ker f`. -/
-noncomputable def extendScalarsCompRestrictScalarsIso :
+noncomputable def extendScalarsCompRestrictScalarsIsoQuotient :
     extendScalars J f ⋙ restrictScalars J f ≅
       tensorRight ((constantSheaf J (ModuleCat.{u + 1} A)).obj
         (ModuleCat.of A (A ⧸ RingHom.ker f))) :=
@@ -156,7 +156,8 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
 omit [EssentiallySmall.{u + 1} C] in
 include hf in
 /-- Restriction of scalars along a surjective ring morphism reflects isomorphisms. -/
-lemma reflectsIsomorphisms_restrictScalars : (restrictScalars J f).ReflectsIsomorphisms :=
+lemma reflectsIsomorphisms_restrictScalars_of_surjective :
+    (restrictScalars J f).ReflectsIsomorphisms :=
   have := restrictScalars_full J f hf
   reflectsIsomorphisms_of_full_and_faithful _
 
@@ -192,9 +193,9 @@ noncomputable def extendScalarsReductionDatum :
       ((restrictScalars J f).mapIso ((extendScalarsIsoReductionFunctor J hf ha).app F).symm)
       (by simp) (by simp [extendScalarsAdjunction_unit_app J hf ha])
   quasiIso_map φ _ h₁ h₂ := by
-    have := reflectsIsomorphisms_restrictScalars J hf
+    have := reflectsIsomorphisms_restrictScalars_of_surjective J hf
     exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
-      (extendScalarsCompRestrictScalarsIso J hf ha) φ h₁ h₂
+      (extendScalarsCompRestrictScalarsIsoQuotient J hf ha) φ h₁ h₂
 
 include hf ha in
 /-- With scalars restricted to `A`, tensoring with the extension of scalars `A' ⊗_A P` is
@@ -208,7 +209,7 @@ lemma nonempty_tensorLeft_extendScalars_obj_comp_restrictScalars_iso
   let Fe := extendScalars J f
   let Res := restrictScalars J f
   let c := (constantSheaf J (ModuleCat.{u + 1} A)).obj (ModuleCat.of A (A ⧸ RingHom.ker f))
-  let T : Fe ⋙ Res ≅ tensorRight c := extendScalarsCompRestrictScalarsIso J hf ha
+  let T : Fe ⋙ Res ≅ tensorRight c := extendScalarsCompRestrictScalarsIsoQuotient J hf ha
   let ε : Res ⋙ Fe ≅ 𝟭 _ := asIso (extendScalarsAdjunction J f).counit
   let assoc : tensorLeft P ⋙ tensorRight c ≅ tensorRight c ⋙ tensorLeft P :=
     NatIso.ofComponents (fun X ↦ α_ P X c) (fun g ↦ by simp)
@@ -229,7 +230,7 @@ include hf ha in
 objects. -/
 lemma preservesFlat_extendScalars : (extendScalars J f).PreservesFlat where
   flat_obj {P} hP := by
-    have := reflectsIsomorphisms_restrictScalars J hf
+    have := reflectsIsomorphisms_restrictScalars_of_surjective J hf
     have := hP.tensorLeft.preservesFiniteLimits
     have := hP.tensorLeft.preservesFiniteColimits
     obtain ⟨e⟩ := nonempty_tensorLeft_extendScalars_obj_comp_restrictScalars_iso J hf ha P

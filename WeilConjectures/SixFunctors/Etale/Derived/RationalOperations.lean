@@ -24,7 +24,7 @@ This file proves the parts of blueprint `lem-coef-rational-operations` that this
 express:
 
 - **the exceptional adjunction.** The integral `Rf^!` preserves derived completeness
-  (`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`), and on
+  (`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek_of_adjunction`), and on
   `D_comp(-, 𝒪_E)` it is right adjoint to the integral compact support `(Rf_! -)^`
   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekUpperShriekDerivedCompleteIntegralAdjunction`).
   Localizing this adjunction gives the adjunction `Rf_{!,E} ⊣ Rf_E^!` at `E`, whose unit and
@@ -104,7 +104,7 @@ local instance : (R(f)^![𝐌]).Linear (Shrink.{u + 1} (PadicAlgCl.integers l E)
 it is right adjoint to the `𝒪_E`-linear `Rf_!`, which preserves the objects on which a
 uniformizer acts invertibly, and the derived complete objects are those right orthogonal to
 these. -/
-theorem derivedCompleteIntegral_rightDerivedUpperShriek (L : 𝐃(Y))
+theorem derivedCompleteIntegral_rightDerivedUpperShriek_of_adjunction (L : 𝐃(Y))
     (hL : DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L) :
     DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E ((R(f)^![𝐌]).obj L) := by
   obtain ⟨ϖ, hϖ, hI⟩ := PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
@@ -126,11 +126,11 @@ noncomputable abbrev rightDerivedUpperShriekDerivedCompleteIntegralAux :
       (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).FullSubcategory :=
   (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).lift
     ((DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι ⋙ R(f)^![𝐌])
-    (fun L ↦ derivedCompleteIntegral_rightDerivedUpperShriek l E f _ L.property)
+    (fun L ↦ derivedCompleteIntegral_rightDerivedUpperShriek_of_adjunction l E f _ L.property)
 
 /-- Blueprint `prop-coef-integral-exceptional-adjoint` (the functor): the integral exceptional
 inverse image `Rf^! : D_comp(Y_ét, 𝒪_E) ⥤ D_comp(X_ét, 𝒪_E)`, the restriction of `Rf^!`
-(`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`). -/
+(`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek_of_adjunction`). -/
 noncomputable def rightDerivedUpperShriekDerivedCompleteIntegral :
     DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E :=

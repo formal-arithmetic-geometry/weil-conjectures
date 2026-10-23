@@ -179,7 +179,7 @@ Over `S = s = Spec k` the category `D(s_ét)` is the point category, in which `R
 `Ra_{X*} K` are `RΓ_c(X, K)` and `RΓ(X, K)` (blueprint `lem-sf-point`); so this is
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, natural in `K`. Applying the evaluation at the geometric point
 gives the same isomorphism in `D(Λ)`
-(`AlgebraicGeometry.Etale.nonempty_iso_ihom_compactlySupportedGlobalSections`).
+(`AlgebraicGeometry.Etale.nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual`).
 Its compatibility with shifts is
 `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekShiftIso`, with changes of
 coefficients `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso_inv_app_comp`,
@@ -286,7 +286,7 @@ the point category to the dual over `Λ`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`,
 `lem-sf-point`), `RΓ(s, Ra_{X!} K)` to `RΓ_c(X, K)` (by definition) and `RΓ(s, Ra_{X*} -)` to
 `RΓ(X, -)` (the Leray isomorphism). For `K = Λ_X` it reads `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`. -/
-theorem nonempty_iso_ihom_compactlySupportedGlobalSections {k : Type u} [Field k]
+theorem nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual {k : Type u} [Field k]
     [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [HasCompactification aX]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj

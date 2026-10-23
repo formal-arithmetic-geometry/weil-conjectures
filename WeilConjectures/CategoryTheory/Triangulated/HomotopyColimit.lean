@@ -25,12 +25,12 @@ This is dual to `CategoryTheory.Pretriangulated.IsHomotopyLimit`.
 ## Main definitions
 
 - `CategoryTheory.Limits.sequenceShift`: the map `t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ`.
-- `CategoryTheory.Pretriangulated.IsHomotopyColimit`: a cocone over a sequence is a homotopy
+- `CategoryTheory.Pretriangulated.IsHomotopyColimitCocone`: a cocone over a sequence is a homotopy
   colimit cocone if its legs fit into a distinguished triangle as above.
 
 ## Main statements
 
-- `CategoryTheory.Pretriangulated.IsHomotopyColimit.of_iso`: being a homotopy colimit cocone is
+- `CategoryTheory.Pretriangulated.IsHomotopyColimitCocone.of_iso`: being a homotopy colimit cocone is
   invariant under isomorphisms of sequences and of cocone points.
 -/
 
@@ -78,20 +78,20 @@ cocone if, for a coproduct `∐ₙ Fₙ`, the triangle
 
 is distinguished for some `δ`, where `t` is `CategoryTheory.Limits.sequenceShift`. The point of
 a homotopy colimit cocone is then `hocolim F`, determined up to non-unique isomorphism. -/
-def IsHomotopyColimit {F : ℕ ⥤ C} (c : Cocone F) : Prop :=
+def IsHomotopyColimitCocone {F : ℕ ⥤ C} (c : Cocone F) : Prop :=
   ∃ (P : Cofan fun n : ℕ ↦ F.obj n) (hP : IsColimit P) (δ : c.pt ⟶ P.pt⟦(1 : ℤ)⟧),
     Triangle.mk (𝟙 P.pt - sequenceShift hP) (Cofan.IsColimit.desc hP fun n ↦ c.ι.app n) δ ∈
       distTriang C
 
-namespace IsHomotopyColimit
+namespace IsHomotopyColimitCocone
 
 /-- Being a homotopy colimit cocone is invariant under isomorphisms: if `c` is a homotopy
 colimit cocone over `F`, `e : F ≅ G` and `eι : c.pt ≅ c'.pt` are compatible with the legs, then
 `c'` is a homotopy colimit cocone over `G`. -/
-lemma of_iso {F G : ℕ ⥤ C} (e : F ≅ G) {c : Cocone F} (hc : IsHomotopyColimit c)
+lemma of_iso {F G : ℕ ⥤ C} (e : F ≅ G) {c : Cocone F} (hc : IsHomotopyColimitCocone c)
     (c' : Cocone G) (eι : c.pt ≅ c'.pt)
     (h : ∀ n : ℕ, c.ι.app n ≫ eι.hom = e.hom.app n ≫ c'.ι.app n) :
-    IsHomotopyColimit c' := by
+    IsHomotopyColimitCocone c' := by
   obtain ⟨P, hP, δ, hT⟩ := hc
   let P' : Cofan fun n : ℕ ↦ G.obj n := Cofan.mk P.pt fun n ↦ e.inv.app n ≫ P.inj n
   have hP' : IsColimit P' := Cofan.IsColimit.mk _
@@ -115,7 +115,7 @@ lemma of_iso {F G : ℕ ⥤ C} (e : F ≅ G) {c : Cocone F} (hc : IsHomotopyColi
     simp [h]
   · simp
 
-end IsHomotopyColimit
+end IsHomotopyColimitCocone
 
 end Pretriangulated
 

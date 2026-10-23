@@ -318,7 +318,7 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 
 variable {A} in
 /-- Tor amplitude in `[a, b]` is closed under extensions. -/
-lemma torAmplitudeIn_obj₂_of_distTriang
+lemma torAmplitudeIn_obj₂_of_distTriang_of_sheaf
     {T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))} (hT : T ∈ distTriang _)
     {a b : ℤ} (h₁ : DerivedCategory.torAmplitudeIn A X a b T.obj₁)
     (h₃ : DerivedCategory.torAmplitudeIn A X a b T.obj₃) :

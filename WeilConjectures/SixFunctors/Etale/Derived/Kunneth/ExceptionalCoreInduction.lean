@@ -46,8 +46,8 @@ open Scheme
 /-- An affine scheme of finite type over a field `k` is a closed subscheme of an affine space
 `𝔸ⁿ_k` over `k`: a finite set of generators of its ring of functions as a `k`-algebra gives a
 closed immersion `V ⟶ 𝔸ⁿ_k` over `k`. -/
-theorem exists_isClosedImmersion_affineSpace_of_isAffine {k : Type u} [Field k] {V : Scheme.{u}}
-    [IsAffine V] (aV : V ⟶ Spec (.of k)) [LocallyOfFiniteType aV] :
+theorem exists_isClosedImmersion_affineSpace_of_isAffine_of_field {k : Type u} [Field k]
+    {V : Scheme.{u}} [IsAffine V] (aV : V ⟶ Spec (.of k)) [LocallyOfFiniteType aV] :
     ∃ (n : Type u) (_ : Finite n) (ι : V ⟶ 𝔸(n; Spec (.of k))),
       IsClosedImmersion ι ∧ ι ≫ 𝔸(n; Spec (.of k)) ↘ Spec (.of k) = aV := by
   have hft : aV.appTop.hom.FiniteType :=
@@ -183,11 +183,11 @@ theorem coreProp_affineSpace (n : Type u) [Finite n] :
 
 /-- **Affine schemes.** The canonical maps of `AlgebraicGeometry.Etale.CoreProp` are
 isomorphisms for affine `X` of finite type over `k`, a closed subscheme of an affine space
-(`AlgebraicGeometry.exists_isClosedImmersion_affineSpace_of_isAffine`). -/
+(`AlgebraicGeometry.exists_isClosedImmersion_affineSpace_of_isAffine_of_field`). -/
 theorem coreProp_of_isAffine (hE : RightDerivedLowerShriekCompCoherence Λ) {X : Scheme.{u}}
     [IsAffine X] (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
     [QuasiCompact a] : CoreProp Λ b a _ _ (IsPullback.of_hasPullback a b) := by
-  obtain ⟨n, _, ι, _, h⟩ := exists_isClosedImmersion_affineSpace_of_isAffine a
+  obtain ⟨n, _, ι, _, h⟩ := exists_isClosedImmersion_affineSpace_of_isAffine_of_field a
   subst h
   exact coreProp_comp_of_isClosedImmersion Λ b _ ι hE (coreProp_affineSpace Λ b n)
 
