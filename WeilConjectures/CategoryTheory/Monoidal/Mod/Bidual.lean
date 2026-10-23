@@ -57,15 +57,15 @@ lemma bidual_comp_ihom_map (M : Mod C A) {N N' : Mod C A} (f : N ⟶ N') :
   rw [uncurryHom_comp_ihom_map, uncurryHom_comp_ihomMap, uncurryHom_bidual, uncurryHom_bidual,
     BraidedCategory.braiding_naturality_right_assoc, evaluation_naturality, Category.assoc]
 
-lemma isIso_ihomMap_app {M M' : Mod C A} (g : M ⟶ M') [IsIso g] (N : Mod C A) :
+lemma isIso_ihomMap_app_of_isIso {M M' : Mod C A} (g : M ⟶ M') [IsIso g] (N : Mod C A) :
     IsIso ((ihomMap g).app N) :=
   inferInstanceAs (IsIso ((ihomMapIso (asIso g)).hom.app N))
 
 /-- The biduality morphism of `M'` is invertible if that of an isomorphic `M` is. -/
 lemma isIso_bidual_of_iso {M M' : Mod C A} (e : M ≅ M') (N : Mod C A) [IsIso (bidual M N)] :
     IsIso (bidual M' N) := by
-  have := isIso_ihomMap_app e.inv N
-  have := isIso_ihomMap_app ((ihomMap e.inv).app N) N
+  have := isIso_ihomMap_app_of_isIso e.inv N
+  have := isIso_ihomMap_app_of_isIso ((ihomMap e.inv).app N) N
   have h := bidual_naturality e.inv N
   have : IsIso (bidual M' N ≫ (ihomMap ((ihomMap e.inv).app N)).app N) := by
     rw [← h]
@@ -75,7 +75,7 @@ lemma isIso_bidual_of_iso {M M' : Mod C A} (e : M ≅ M') (N : Mod C A) [IsIso (
 /-- The biduality morphism into `N'` is invertible if that into an isomorphic `N` is. -/
 lemma isIso_bidual_of_iso_right (M : Mod C A) {N N' : Mod C A} (e : N ≅ N')
     [IsIso (bidual M N)] : IsIso (bidual M N') := by
-  have := isIso_ihomMap_app ((ihom M).map e.hom) N'
+  have := isIso_ihomMap_app_of_isIso ((ihom M).map e.hom) N'
   have h := bidual_comp_ihom_map M e.hom
   have : IsIso (bidual M N' ≫ (ihomMap ((ihom M).map e.hom)).app N') := by
     rw [← h]
@@ -86,7 +86,7 @@ attribute [local instance] Mod.isGrothendieckAbelian Abelian.hasFiniteBiproducts
 
 /-- The biduality morphism `A ⟶ Hom_A(Hom_A(A, A), A)` is invertible. -/
 lemma isIso_bidual_regular : IsIso (bidual (regular A) (regular A)) := by
-  have := isIso_ihomMap_app ((ihomRegularIso (A := A)).inv.app (regular A)) (regular A)
+  have := isIso_ihomMap_app_of_isIso ((ihomRegularIso (A := A)).inv.app (regular A)) (regular A)
   have h : bidual (regular A) (regular A) ≫
       (ihomMap ((ihomRegularIso (A := A)).inv.app (regular A))).app (regular A) =
         (ihomRegularIso (A := A)).inv.app (regular A) := by

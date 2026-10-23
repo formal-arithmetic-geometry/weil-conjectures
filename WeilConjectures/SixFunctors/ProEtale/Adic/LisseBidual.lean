@@ -75,7 +75,7 @@ theorem IsAdicLisseSheaf.isIso_bidual {F : AdicSheaf l X} (hF : IsAdicLisseSheaf
   refine isIso_of_isIso_adicUpperStar l f hR _ fun i ↦ ?_
   obtain ⟨n, ⟨e⟩⟩ := h (f i) (.mk i)
   have := Mod.isIso_bidual_of_iso_biproduct e (adicUpperStarUnitIso l (f i)).symm
-  have := Mod.isIso_ihomMap_app ((adicUpperStarIhomIso l (f i) F).inv.app (AdicSheaf.unit l X))
+  have := Mod.isIso_ihomMap_app_of_isIso ((adicUpperStarIhomIso l (f i) F).inv.app (AdicSheaf.unit l X))
     ((f i)^*ᵃ[l].obj (AdicSheaf.unit l X))
   have h' := adicUpperStar_map_bidual (f i) F (AdicSheaf.unit l X)
   rw [← Category.assoc] at h'
