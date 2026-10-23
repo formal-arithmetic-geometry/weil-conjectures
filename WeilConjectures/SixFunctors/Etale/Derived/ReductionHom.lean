@@ -98,7 +98,7 @@ lemma preservesKFlatQuasiIso_extendScalars :
   quasiIso_map hK hL f _ :=
     have := Sheaf.reflectsIsomorphisms_restrictScalars_of_surjective X.smallEtaleTopology hφ
     CochainComplex.quasiIso_map_of_iso_tensorRight _ _
-      (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) f hK hL
+      (Sheaf.extendScalarsCompRestrictScalarsIsoQuotient X.smallEtaleTopology hφ ha) f hK hL
 
 /-- The derived extension of scalars `K ↦ K ⊗ᴸ_Λ Λ'`, from `D(X_ét, Λ)` to `D(X_ét, Λ')`, along
 a surjective ring morphism `φ : Λ →+* Λ'` with principal kernel: the total left derived functor
@@ -219,7 +219,7 @@ lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ))
         (_root_.DerivedCategory.quotientCompQhIso _).app ((F.mapHomologicalComplex _).obj P'))
   let i4 := R.mapDerivedCategoryFactors.app ((F.mapHomologicalComplex _).obj P')
   let i5 := (Functor.mapHomologicalComplexCompIso
-          (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) _).app P'
+          (Sheaf.extendScalarsCompRestrictScalarsIsoQuotient X.smallEtaleTopology hφ ha) _).app P'
   let i6 := ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor _) c).app
           P').symm
   let i7 := ((_root_.DerivedCategory.quotientCompQhIso _).app (P' ⊗ S)).symm
