@@ -134,6 +134,27 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
 
 end WeilSheafPullback
 
+/-! ### Naturality of the transported connecting morphisms -/
+
+section ConnectingNaturality
+
+variable {Cx Cs Dx Ds : Type*} [Category Cx] [Category Cs] [Category Dx] [Category Ds]
+  [HasShift Dx ℤ] [HasShift Ds ℤ] (A : Cx ⥤ Cs) (ιs : Cs ⥤ Ds) (ι : Cx ⥤ Dx) (R : Dx ⥤ Ds)
+  [R.CommShift ℤ] (e : A ⋙ ιs ≅ ι ⋙ R)
+
+/-- The connecting morphism of `connectingOfIso` is natural in its source. -/
+lemma connectingOfIso_comp {a c c' : Cx} (g : c' ⟶ c)
+    (δ : ι.obj c ⟶ (shiftFunctor Dx (1 : ℤ)).obj (ι.obj a)) :
+    connectingOfIso A ιs ι R e (ι.map g ≫ δ) =
+      ιs.map (A.map g) ≫ connectingOfIso A ιs ι R e δ := by
+  have h := e.hom.naturality g
+  simp only [Functor.comp_map] at h
+  simp only [connectingOfIso, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h]
+
+
+end ConnectingNaturality
+
 /-! ### Distinguished triangles of Weil objects -/
 
 section Triangle
@@ -274,20 +295,183 @@ variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U
   {j : U ⟶ X} {i : Z ⟶ X} [IsOpenImmersion j.left] [IsClosedImmersion i.left]
   (hj : eU.hom ≫ j = j ≫ eX.hom) (hi : eZ.hom ≫ i = i ≫ eX.hom)
 
-/-- **The localization triangle of Weil objects** (standard input, still `sorry`, blueprint
+omit [Finite k] in
+include hj in
+/-- The counit of `Rj_! ⊣ Lj^*` is compatible with the Frobenius base changes. -/
+lemma map_counit_app_eq_weilLowerShriekComparison
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map
+        ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K) =
+      (weilLowerShriekComparison ℓ eU eX hj).hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          ((weilUpperStarComparison ℓ eU.hom eX.hom j hj).hom.app K) ≫
+        (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).obj K) := by
+  have sq := isPullback_of_comp_eq_of_isOpenImmersion j hj
+  have hC1 := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
+  have hEx := Adjunction.exchangeLeft_app_comp_map_counit_app
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq.flip) K
+  rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft
+    (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq] at hEx
+  have hn := (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ
+      j).hom.naturality ((boundedConstructiblePullbackSquareComparison
+        (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq.flip).hom.app K)
+  rw [boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl,
+    counit_app_ofNatIsoRight_upperShriekIsoUpperStar,
+    counit_app_ofNatIsoRight_upperShriekIsoUpperStar,
+    weilUpperStarComparison_hom_app_eq ℓ j hj sq.toCommSq.flip, weilLowerShriekComparison_hom,
+    Functor.map_comp, ← hC1]
+  simp only [Category.assoc]
+  rw [hEx, reassoc_of% hn]
+
+
+omit [Finite k] in
+/-- The counit `Rj_! Lj^* K ⟶ K` is a morphism of Weil objects. -/
+lemma counit_comm_weilStr (K : WeilBoundedConstructible ℓ eX.hom) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map
+        ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
+          K.carrier) ≫ K.str.hom =
+      ((weilLowerShriek ℓ eU eX hj).obj ((weilUpperStar ℓ eU.hom eX.hom j hj).obj K)).str.hom ≫
+        (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
+          K.carrier := by
+  rw [map_counit_app_eq_weilLowerShriekComparison ℓ eX eU hj K.carrier,
+    weilLowerShriek_obj_str, weilUpperStar_obj_str]
+  have hn := (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.naturality
+    K.str.hom
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  change _ = ((weilLowerShriekComparison ℓ eU eX hj).hom.app _ ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+        ((weilUpperStarComparison ℓ eU.hom eX.hom j hj).hom.app K.carrier ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)) ≫
+      (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K.carrier
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hn]
+
+omit [Finite k] [IsClosedImmersion i.left] in
+/-- The Frobenius comparison of the pullback is the inverse of the pullback comparison of any
+proof of the commutativity of the Frobenius square. -/
+lemma weilUpperStarComparison_eq_symm (sq : CommSq eZ.hom i i eX.hom) :
+    weilUpperStarComparison ℓ eZ.hom eX.hom i hi =
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).symm :=
+  rfl
+
+omit [Finite k] [IsClosedImmersion i.left] in
+/-- The pullback comparison of the Frobenius square of `i` is inverse to the Frobenius comparison
+of the pullback along `i`. -/
+lemma pullbackSquareComparison_hom_app_comp_weilUpperStarComparison_hom_app
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      (weilFrobeniusSquare eZ eX hi).toCommSq).hom.app K ≫
+      (weilUpperStarComparison ℓ eZ.hom eX.hom i hi).hom.app K = 𝟙 _ := by
+  rw [weilUpperStarComparison_eq_symm ℓ eX eZ hi (weilFrobeniusSquare eZ eX hi).toCommSq,
+    Iso.symm_hom, Iso.hom_inv_id_app]
+
+omit [Finite k] in
+/-- The unit `K ⟶ Ri_! Li^* K` is a morphism of Weil objects. -/
+lemma unit_comm_weilStr (K : WeilBoundedConstructible ℓ eX.hom) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map
+        ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ i).unit.app K.carrier) ≫
+      ((weilLowerShriek ℓ eZ eX hi).obj ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)).str.hom =
+        K.str.hom ≫
+          (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ i).unit.app
+            K.carrier := by
+  rw [weilLowerShriek_obj_str, weilUpperStar_obj_str]
+  change _ ≫ (weilLowerShriekComparison ℓ eZ eX hi).hom.app _ ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i).map
+        ((weilUpperStarComparison ℓ eZ.hom eX.hom i hi).hom.app K.carrier ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom) = _
+  rw [weilLowerShriekComparison_hom, reassoc_of%
+    (map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app ℓ
+      (weilFrobeniusSquare eZ eX hi) K.carrier), ← Functor.map_comp,
+    reassoc_of% (pullbackSquareComparison_hom_app_comp_weilUpperStarComparison_hom_app ℓ eX eZ hi
+      K.carrier)]
+  exact ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ i).unit.naturality
+    K.str.hom).symm
+
+omit [Finite k] in
+/-- **The localization triangle of Weil objects** (blueprint
 `prop-sf-open-closed-triangle-all-stages` and `prop-trf-trace-additivity-open-closed`, Step 2):
 for an open immersion `j` with closed complement `i`, both stable under `e_X`, the counit
-`Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_* Li^* K = Ri_! Li^* K` are morphisms of Weil objects and
-extend to a distinguished triangle of Weil objects. The triangle is
-`ProEtale.CondensedRing.exists_distTriang_openClosed`; the Frobenius compatibility of the
-connecting morphism is `ProEtale.CondensedRing.map_comp_connecting_eq_of_isCompl`. -/
+`Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_! Li^* K` are morphisms of Weil objects
+(`counit_comm_weilStr`, `unit_comm_weilStr`) and extend to a distinguished triangle of Weil
+objects. The triangle is `ProEtale.CondensedRing.exists_distTriang_openClosed`, through
+`Ri_! ≅ Ri_*`; the Frobenius compatibility of its connecting morphism is
+`ProEtale.CondensedRing.map_comp_connecting_eq_of_isCompl`. -/
 theorem exists_isDistTriang_openClosed
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : WeilBoundedConstructible ℓ eX.hom) :
     ∃ (α : (weilLowerShriek ℓ eU eX hj).obj ((weilUpperStar ℓ eU.hom eX.hom j hj).obj K) ⟶ K)
       (β : K ⟶ (weilLowerShriek ℓ eZ eX hi).obj ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)),
-      WeilBoundedConstructible.IsDistTriang ℓ α β :=
-  sorry
+      WeilBoundedConstructible.IsDistTriang ℓ α β := by
+  have : IsIso eX.hom.left := inferInstanceAs (IsIso ((Over.forget _).map eX.hom))
+  have : IsIso eU.hom.left := inferInstanceAs (IsIso ((Over.forget _).map eU.hom))
+  let e := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i).app
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
+  have hunit : (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ i).unit.app
+      K.carrier ≫ e.hom = (boundedConstructibleUpperStarLowerStarAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K.carrier := by
+    simp [e, boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl]
+  obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed ℓ j i hcompl K.carrier
+  refine ⟨ObjectProperty.homMk ⟨_, (counit_comm_weilStr ℓ eX eU hj K).trans (by rfl)⟩,
+    ObjectProperty.homMk ⟨_, unit_comm_weilStr ℓ eX eZ hi K⟩,
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map e.hom ≫
+      δ, ?_, ?_⟩
+  · refine Pretriangulated.isomorphic_distinguished _ hδ _
+      (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
+        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+          X.left)).ι.mapIso e) ?_ ?_ ?_)
+    all_goals first
+      | exact (Category.comp_id _).trans (Category.id_comp _).symm
+      | exact ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+          X.left)).ι.map_comp _ _).symm.trans ((congrArg (boundedConstructible
+            (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map hunit).trans
+              (Category.id_comp _).symm)
+      | exact (congrArg (((boundedConstructible (condensedRingObj
+          (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map e.hom ≫ δ) ≫ ·)
+            ((shiftFunctor _ (1 : ℤ)).map_id _)).trans (Category.comp_id _)
+  · have hb : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          i).unit.app K.carrier) ≫
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map e.inv ≫
+          ((weilLowerShriek ℓ eZ eX hi).obj ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)).str.hom ≫
+            e.hom) =
+        K.str.hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K.carrier := by
+      rw [← hunit]
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← Functor.map_comp_assoc _ e.hom e.inv, e.hom_inv_id, CategoryTheory.Functor.map_id,
+        Category.id_comp]
+      exact ((Category.assoc _ _ _).symm.trans ((unit_comm_weilStr ℓ eX eZ hi K) =≫ e.hom)).trans
+        (Category.assoc _ _ _)
+    have key := map_comp_connecting_eq_of_isCompl ℓ hcompl hj K.carrier δ hδ _ _ _
+      (counit_comm_weilStr ℓ eX eU hj K) hb
+    have h1 := connectingOfIso_comp
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom)
+      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι _
+      (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom) e.hom δ
+    have h2 : ((weilLowerShriek ℓ eZ eX hi).obj
+        ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)).str.hom ≫
+        e.hom =
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map e.hom ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map e.inv ≫
+            ((weilLowerShriek ℓ eZ eX hi).obj
+              ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)).str.hom ≫
+              e.hom := by
+      rw [← Functor.map_comp_assoc, e.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    exact ((Functor.map_comp_assoc _ _ _ _).symm.trans
+      ((congrArg (fun x ↦ (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        X.left)).ι.map x ≫ δ) h2).trans (Functor.map_comp_assoc _ _ _ _))).trans
+      ((congrArg (_ ≫ ·) key).trans
+        ((Category.assoc _ _ _).symm.trans (congrArg (· ≫ _) h1.symm)))
+
 
 /-- **Additivity of the local trace along an open–closed decomposition**: for
 an open immersion `j` with closed complement `i`, both stable under `e_X`,
