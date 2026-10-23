@@ -60,8 +60,18 @@ direct-image base change for proper vertical maps
 (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`). -/
 theorem nonempty_weilLowerShriek_iso_weilLowerStar [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
-    Nonempty ((weilLowerShriek ℓ eX eY hf).obj K ≅ (weilLowerStar ℓ eX eY f hf).obj K) :=
-  sorry
+    Nonempty ((weilLowerShriek ℓ eX eY hf).obj K ≅ (weilLowerStar ℓ eX eY f hf).obj K) := by
+  refine ⟨IsoAlgebra.isoMk ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).app
+    K.carrier) ?_⟩
+  rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, weilLowerShriek_obj_str, weilLowerStar_obj_str]
+  have nat := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.naturality
+    K.str.hom
+  have hp := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper ℓ
+    (weilFrobeniusSquare eX eY hf) K.carrier
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, asIso_hom, Category.assoc,
+    weilLowerShriekComparison_hom]
+  rw [nat, reassoc_of% hp]
+  rfl
 
 /-- **Homology of the pushforward of Weil objects along a finite morphism**: for finite `f`, the
 Weil sheaf `Hʲ(Rf_*^Weil K)` for `e_Y` is the pushforward `f_* Hʲ(K)` of the Weil sheaf `Hʲ(K)`.
