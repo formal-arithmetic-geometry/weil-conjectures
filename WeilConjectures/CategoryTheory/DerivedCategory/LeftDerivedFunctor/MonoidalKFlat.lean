@@ -112,60 +112,6 @@ noncomputable def leftDerivedDerivedTensorCounitOfKFlat :
 
 variable [F.PreservesFlat] [PreservesColimitsOfShape ℤ F]
 
-/-- The K-flat complexes whose image under `F` is K-flat form a left derivability structure on
-`K(C)` for the quasi-isomorphisms: the functorial flat resolutions are such complexes. -/
-instance isLeftDerivabilityStructure_kFlatInterKFlatMap :
-    (HomotopyCategory.quasiIsoLocalizerMorphism
-      F.kFlatInterKFlatMap).IsLeftDerivabilityStructure :=
-  let Λ := (inferInstance : HasFunctorialFlatResolution C).some
-  HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism _
-    Λ.reduced.resolutionNatTrans (fun _ ↦ inferInstance)
-    (fun K ↦ ⟨(HomotopyCategory.kFlat_quotient_obj_iff _).2
-      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K),
-      F.kFlatMap_quotient_obj_resolutionFunctor_obj Λ.reduced K⟩)
-
-end
-
-section Comparison
-
-variable (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
-
-/-- The bifunctor `(K, M) ↦ LF K ⊗ᴸ LF M`, of type `D(C) ⥤ D(C) ⥤ D(D)`. -/
-noncomputable abbrev derivedTensorLeftDerivedOfKFlat :
-    DerivedCategory C ⥤ DerivedCategory C ⥤ DerivedCategory D :=
-  (((whiskeringLeft₂ _).obj F.leftDerivedFunctor).obj F.leftDerivedFunctor).obj
-    (curriedTensor _)
-
-/-- The bifunctor `(K, M) ↦ LF(K ⊗ᴸ M)`, of type `D(C) ⥤ D(C) ⥤ D(D)`. -/
-noncomputable abbrev leftDerivedDerivedTensorOfKFlat :
-    DerivedCategory C ⥤ DerivedCategory C ⥤ DerivedCategory D :=
-  (postcompose₂.obj F.leftDerivedFunctor).obj (curriedTensor _)
-
-/-- The counit exhibiting `(K, M) ↦ LF K ⊗ᴸ LF M` as the total left derived functor of
-`(A, B) ↦ F A ⊗ F B`: the counits of `LF` on both factors followed by the lax monoidal
-structure of `Qh : K(D) ⥤ D(D)`. -/
-noncomputable def derivedTensorLeftDerivedCounitOfKFlat :
-    (((whiskeringLeft₂ _).obj (Qh (C := C))).obj Qh).obj (derivedTensorLeftDerivedOfKFlat F) ⟶
-      (((whiskeringLeft₂ _).obj (F.mapHomotopyCategory (.up ℤ))).obj
-        (F.mapHomotopyCategory (.up ℤ))).obj
-          ((postcompose₂.obj Qh).obj (curriedTensor _)) :=
-  (((whiskeringLeft₂ _).map F.leftDerivedFunctorCounit).app
-      (Qh ⋙ F.leftDerivedFunctor)).app (curriedTensor _) ≫
-    (((whiskeringLeft₂ _).obj (F.mapHomotopyCategory (.up ℤ) ⋙ Qh)).map
-      F.leftDerivedFunctorCounit).app (curriedTensor _) ≫
-    (((whiskeringLeft₂ _).obj (F.mapHomotopyCategory (.up ℤ))).obj
-        (F.mapHomotopyCategory (.up ℤ))).map (LaxMonoidal.μNatTrans Qh)
-
-/-- The counit exhibiting `(K, M) ↦ LF(K ⊗ᴸ M)` as the total left derived functor of
-`(A, B) ↦ F(A ⊗ B)`: `LF(μ Qh)` followed by the counit of `LF`. -/
-noncomputable def leftDerivedDerivedTensorCounitOfKFlat :
-    (((whiskeringLeft₂ _).obj (Qh (C := C))).obj Qh).obj (leftDerivedDerivedTensorOfKFlat F) ⟶
-      (postcompose₂.obj (F.mapHomotopyCategory (.up ℤ) ⋙ Qh)).obj (curriedTensor _) :=
-  (postcompose₂.obj F.leftDerivedFunctor).map (LaxMonoidal.μNatTrans Qh) ≫
-    (postcompose₂.map F.leftDerivedFunctorCounit).app (curriedTensor _)
-
-variable [F.PreservesFlat] [PreservesColimitsOfShape ℤ F]
-
 /-- `(K, M) ↦ LF K ⊗ᴸ LF M` is the total left derived functor of `(A, B) ↦ F A ⊗ F B`. It is
 computed on pairs `(K, M)` with `K` K-flat and `M`, `F M` K-flat. -/
 instance isLeftDerivedFunctor₂_derivedTensorLeftDerivedOfKFlat :
