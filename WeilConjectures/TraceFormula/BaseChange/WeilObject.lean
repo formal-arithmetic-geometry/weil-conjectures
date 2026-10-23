@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.TraceFormula.BaseChange.Basic
 public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.TraceFormula.BaseChange.Coherence
 
 /-!
 
@@ -71,6 +72,20 @@ universe u
 open CategoryTheory Endofunctor
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace CategoryTheory.Iso
+
+variable {C E : Type*} [Category C] [Category E] {A C' : C ⥤ E} {B : C ⥤ C}
+
+/-- The isomorphism `A ≅ C'` obtained from `A ≅ B ⋙ C'` and a trivialization `B ≅ 𝟭`. -/
+def compIsoOfIsoId (c : A ≅ B ⋙ C') (κ : B ≅ 𝟭 C) : A ≅ C' :=
+  c ≪≫ Functor.isoWhiskerRight κ C' ≪≫ C'.leftUnitor
+
+lemma compIsoOfIsoId_hom_app (c : A ≅ B ⋙ C') (κ : B ≅ 𝟭 C) (M : C) :
+    (compIsoOfIsoId c κ).hom.app M = c.hom.app M ≫ C'.map (κ.hom.app M) := by
+  simp [compIsoOfIsoId]
+
+end CategoryTheory.Iso
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -240,14 +255,35 @@ noncomputable def leftDerivedUpperStarModelFrobeniusIso :
         Profinite.padicAlgClRingObj ℓ⟧) ≅
       L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L((geometricBaseChangeProj X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  eqToIso (congrArg (fun t : ((geometricBaseChange k Ω).obj X).left ⟶ X.left ↦
-      L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧)) (modelFrobenius_left_comp_proj' X N g)) ≪≫
+  pullbackCongrIso (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
+      (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
+      (modelFrobenius_left_comp_proj' X N g) ≪≫
     leftDerivedUpperStarComp _ (geometricBaseChangeProj X)
       (g.left ≫ (frobeniusIterate (overFrobenius X) N).left) ≪≫
-    Functor.isoWhiskerRight (leftDerivedUpperStarComp _ g.left
-      (frobeniusIterate (overFrobenius X) N).left ≪≫
-      Functor.isoWhiskerRight (leftDerivedUpperStarFrobeniusIso ℓ X N) _ ≪≫
-      Functor.leftUnitor _) _
+    Functor.isoWhiskerRight (Iso.compIsoOfIsoId
+      (leftDerivedUpperStarComp _ g.left (frobeniusIterate (overFrobenius X) N).left)
+      (leftDerivedUpperStarFrobeniusIso ℓ X N)) _
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar Ω).Prime]
+  [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- The components of `leftDerivedUpperStarModelFrobeniusIso`. -/
+lemma leftDerivedUpperStarModelFrobeniusIso_hom_app
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))) :
+    (leftDerivedUpperStarModelFrobeniusIso Ω ℓ X N g).hom.app M =
+      eqToHom (congrArg (fun t : ((geometricBaseChange k Ω).obj X).left ⟶ X.left ↦
+          L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj M) (modelFrobenius_left_comp_proj' X N g)) ≫
+        (leftDerivedUpperStarComp _ (geometricBaseChangeProj X)
+          (g.left ≫ (frobeniusIterate (overFrobenius X) N).left)).hom.app M ≫
+        L((geometricBaseChangeProj X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          ((leftDerivedUpperStarComp _ g.left (frobeniusIterate (overFrobenius X) N).left).hom.app
+              M ≫
+            L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+              ((leftDerivedUpperStarFrobeniusIso ℓ X N).hom.app M)) := by
+  simp only [leftDerivedUpperStarModelFrobeniusIso, Iso.trans_hom, NatTrans.comp_app,
+    pullbackCongrIso_hom_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Iso.compIsoOfIsoId_hom_app]
 
 variable (Ω) in
 /-- The Frobenius comparison `Lπ^* ⋙ LΦ^* ≅ Lg^* ⋙ Lπ^*` of the base change on the ambient

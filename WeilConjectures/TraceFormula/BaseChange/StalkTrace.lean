@@ -95,14 +95,34 @@ lemma left_comp_modelFrobenius_left [Finite k]
     x'.left ≫ (modelFrobenius Ω X N g).left = x'.left :=
   (Over.comp_left _ _ _ x' (modelFrobenius Ω X N g)).symm.trans (congrArg Over.Hom.left hx')
 
-/-- On the ambient derived category, the local Frobenius at a rational point `x̄'` fixed by the
-model Frobenius `Φ` of the base change `Lπ^* L` of a Weil object `(L, φ)` is the composite
-`modelFrobeniusAux` of the derived pullbacks. -/
-lemma weilStalk_weilGeometricBaseChange_frobenius_hom_hom [IsSepClosed Ω]
+
+variable {X N g} in
+/-- The local Frobenius at a rational point `x̄'` fixed by the model Frobenius `Φ` of the base
+change of `(a, ψ)`, as an explicit composite on `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`:
+`Lx̄'^* Lπ^* a = L(x̄' ≫ Φ)^* Lπ^* a ≅ Lx̄'^* LΦ^* Lπ^* a --b--> Lx̄'^* Lπ^* Lg^* a --ψ--> Lx̄'^* Lπ^* a`. -/
+noncomputable def modelStalkFrobenius (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
+    (hx' : x' ≫ modelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x').obj
+        ((geometricBaseChangeUpperStar Ω ℓ X).obj a) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x').obj
+        ((geometricBaseChangeUpperStar Ω ℓ X).obj a) :=
+  eqToHom (congrArg (fun f ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+      ℓ f).obj ((geometricBaseChangeUpperStar Ω ℓ X).obj a)) hx'.symm) ≫
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x'
+      (modelFrobenius Ω X N g)).hom.app ((geometricBaseChangeUpperStar Ω ℓ X).obj a) ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x').map
+      ((weilGeometricBaseChangeComparison Ω ℓ X N g).hom.app a ≫
+        (geometricBaseChangeUpperStar Ω ℓ X).map ψ)
+
+variable {X N g} in
+/-- On the ambient derived category, the explicit local Frobenius of the base change is the
+composite `modelFrobeniusAux` of the derived pullbacks. -/
+lemma modelStalkFrobenius_hom [IsSepClosed Ω]
     (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
-    (hx' : x' ≫ modelFrobenius Ω X N g = x') (L : WeilBoundedConstructible ℓ g) :
-    (((weilStalk ℓ (modelFrobenius Ω X N g) x' hx').obj
-        ((weilGeometricBaseChange Ω ℓ X N g).obj L)).frobenius.hom).hom =
+    (hx' : x' ≫ modelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
+    (modelStalkFrobenius ℓ x' hx' a ψ).hom =
       modelFrobeniusAux (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S)
           Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
         (fun a ↦ L((a)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
@@ -110,18 +130,17 @@ lemma weilStalk_weilGeometricBaseChange_frobenius_hom_hom [IsSepClosed Ω]
         (modelFrobenius Ω X N g).left (geometricBaseChangeProj X) g.left
         (frobeniusIterate (overFrobenius X) N).left (left_comp_modelFrobenius_left hx')
         (modelFrobenius_left_comp_proj' X N g) (leftDerivedUpperStarFrobeniusIso ℓ X N)
-        L.carrier.obj L.str.hom.hom := by
-  rw [WeilBoundedConstructible.weilStalk_obj_frobenius_hom_eq, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.eqToHom_hom',
-    boundedConstructibleUpperStarComp_hom_app_hom_eq, boundedConstructibleUpperStar_map_hom,
-    weilGeometricBaseChange_obj_str, Iso.trans_hom, ObjectProperty.FullSubcategory.comp_hom,
-    Iso.app_hom, weilGeometricBaseChangeComparison_hom_app_hom,
-    leftDerivedUpperStarModelFrobeniusComparison_hom_app, Functor.mapIso_hom,
-    geometricBaseChangeUpperStar_map_hom]
-  simp only [modelFrobeniusAux, leftDerivedUpperStarModelFrobeniusIso, Iso.trans_hom,
-    NatTrans.comp_app, eqToIso.hom, eqToHom_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Functor.map_comp, Category.assoc,
-    Category.comp_id, eqToHom_trans_assoc, Functor.id_obj]
+        a.obj ψ.hom := by
+  rw [modelStalkFrobenius]
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  simp only [ObjectProperty.FullSubcategory.eqToHom_hom']
+  simp only [boundedConstructibleUpperStarComp_hom_app_hom_eq]
+  simp only [boundedConstructibleUpperStar_map_hom]
+  simp only [ObjectProperty.FullSubcategory.comp_hom, weilGeometricBaseChangeComparison_hom_app_hom,
+    geometricBaseChangeUpperStar_map_hom, leftDerivedUpperStarModelFrobeniusComparison_hom_app]
+  simp only [modelFrobeniusAux, leftDerivedUpperStarModelFrobeniusIso_hom_app, Functor.map_comp,
+    Category.assoc]
+  simp only [eqToHom_trans_assoc]
   rfl
 
 end Model

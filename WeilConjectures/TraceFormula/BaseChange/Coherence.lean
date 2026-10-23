@@ -148,6 +148,18 @@ lemma map_inv_app_comp_inv_app_aux {A B C C' : 𝒞} (a : A ⟶ B) (b : B ⟶ C)
   rw [reassoc_of% hassoc]
   simp [← Functor.map_comp_assoc]
 
+/-- The isomorphism `U t ≅ U t'` of the pullback functors along equal morphisms, with components
+`eqToHom`. Unlike `eqToIso` of an equality of functors, its components are equalities of
+objects, which is cheap for the kernel. -/
+def pullbackCongrIso {A B : 𝒞} {t t' : A ⟶ B} (h : t = t') : U t ≅ U t' :=
+  NatIso.ofComponents (fun M ↦ eqToIso (congrArg (fun s ↦ (U s).obj M) h))
+    (fun f ↦ (eqToHom_comp_map_aux U h f).symm)
+
+@[simp]
+lemma pullbackCongrIso_hom_app {A B : 𝒞} {t t' : A ⟶ B} (h : t = t') (M : D B) :
+    (pullbackCongrIso U h).hom.app M = eqToHom (congrArg (fun s ↦ (U s).obj M) h) :=
+  rfl
+
 end Pullback
 
 section Homology
