@@ -504,6 +504,7 @@ public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonTriangle
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonUnit
 public import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
 public import WeilConjectures.Algebra.Homology.LowerTruncationTransitionKernel
+public import WeilConjectures.Algebra.Homology.MapHomologicalComplexHomologyIso
 public import WeilConjectures.Algebra.Homology.MappingCylinderSplitFactorization
 public import WeilConjectures.Algebra.Homology.MatrixComplex
 public import WeilConjectures.Algebra.Homology.MatrixComplexTower
@@ -7615,6 +7616,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedExactOfL
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.HomologyFunctorCoherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
@@ -9052,6 +9054,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
