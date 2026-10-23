@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.TraceFormula.WeilSheafUpperStar
-public import WeilConjectures.TraceFormula.WeilTriangle
+public import WeilConjectures.TraceFormula.WeilTriangleLowerShriek
 
 /-!
 

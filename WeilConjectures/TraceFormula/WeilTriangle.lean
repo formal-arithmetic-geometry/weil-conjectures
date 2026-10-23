@@ -19,7 +19,8 @@ triangle of the ambient derived category whose connecting morphism commutes with
 structures. The local trace is additive along such triangles
 (`ProEtale.CondensedRing.weilStalkSupertrace_eq_add_of_isDistTriang`), the lower shriek of Weil
 objects preserves them
-(`ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map`), and the
+(`ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map`, in
+`WeilConjectures.TraceFormula.WeilTriangleLowerShriek`), and the
 localization triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` is one
 (`ProEtale.CondensedRing.exists_isDistTriang_openClosed`).
 
@@ -44,7 +45,6 @@ variable {X Y W : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) (eW : W ≅ W)
-
 
 /-- A triangle `A ⟶ B ⟶ C` of Weil objects for `Φ` is *distinguished* if it extends to a
 distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of the ambient derived category `D(Mod_{ℚ̲̄_ℓ,X})`
@@ -90,19 +90,6 @@ theorem weilStalkSupertrace_eq_add_of_isDistTriang {e : Y ≅ Y} (n : ℕ)
     weilStalkSupertrace ℓ n x hx B =
       weilStalkSupertrace ℓ n x hx A + weilStalkSupertrace ℓ n x hx C :=
   sorry
-
-/-- **The lower shriek of Weil objects preserves distinguished triangles** (standard input, still
-`sorry`): `Rf_!` is a triangulated functor (`R(f)_!` on the ambient derived categories commutes
-with the shifts and is triangulated), and the compact-support base change isomorphism giving the
-Frobenius structure of `Rf_!^Weil` commutes with the shifts, so the image of the connecting
-morphism commutes with the Frobenius structures. -/
-theorem WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map {f : X ⟶ Y}
-    (hf : eX.hom ≫ f = f ≫ eY.hom) {A B C : WeilBoundedConstructible ℓ eX.hom} {a : A ⟶ B}
-    {b : B ⟶ C} (h : WeilBoundedConstructible.IsDistTriang ℓ a b) :
-    WeilBoundedConstructible.IsDistTriang ℓ ((weilLowerShriek ℓ eX eY hf).map a)
-      ((weilLowerShriek ℓ eX eY hf).map b) :=
-  sorry
-
 
 variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
   [IsSeparated U.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
