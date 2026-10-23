@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.Algebra.Homology.ShortComplex.MapHomologyIsoComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 
 /-!
@@ -28,9 +29,8 @@ commutative condensed ring `Λ`.
 
 ## Main results
 
-- `CategoryTheory.ShortComplex.mapHomologyIso_comp`,
-  `CategoryTheory.ShortComplex.mapHomologyIso_id`: the isomorphisms
-  `(S.map F).homology ≅ F.obj S.homology` for composite and identity functors.
+- `CategoryTheory.ShortComplex.mapHomologyIso_id`: the isomorphism
+  `(S.map (𝟭 C)).homology ≅ S.homology` is the identity.
 - `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso_comp_hom_app`,
   `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso_id_hom_app`: the compatibility
   of `Functor.mapDerivedCategoryHomologyFunctorIso` with `Functor.mapDerivedCategoryCompIso` and
@@ -55,24 +55,6 @@ namespace CategoryTheory.ShortComplex
 variable {C D E : Type*} [Category C] [Category D] [Category E]
   [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroMorphisms E]
   [CategoryWithHomology C]
-
-/-- The isomorphism `(S.map (F ⋙ G)).homology ≅ G.obj (F.obj S.homology)` is the composite of
-the isomorphisms for `G` and for `F`. -/
-lemma mapHomologyIso_comp (S : ShortComplex C) (F : C ⥤ D) (G : D ⥤ E)
-    [F.PreservesZeroMorphisms] [G.PreservesZeroMorphisms]
-    [F.PreservesHomology] [G.PreservesHomology] [(F ⋙ G).PreservesHomology] :
-    S.mapHomologyIso (F ⋙ G) = (S.map F).mapHomologyIso G ≪≫ G.mapIso (S.mapHomologyIso F) := by
-  rw [LeftHomologyData.mapHomologyIso_eq (S.homologyData.left.map F) G]
-  ext
-  simp only [mapHomologyIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
-    ← G.map_comp, Iso.inv_hom_id, G.map_id]
-  refine Eq.trans ?_ (Category.comp_id _).symm
-  refine (cancel_epi (S.map (F ⋙ G)).homologyπ).1 ?_
-  refine ((S.homologyData.left.map (F ⋙ G)).homologyπ_comp_homologyIso_hom).trans
-    (Eq.trans ?_ ((S.homologyData.left.map F).map G).homologyπ_comp_homologyIso_hom.symm)
-  refine congrArg (· ≫ _) ((cancel_mono (S.homologyData.left.map (F ⋙ G)).i).1 ?_)
-  exact (LeftHomologyData.cyclesIso_hom_comp_i _).trans
-    (LeftHomologyData.cyclesIso_hom_comp_i _).symm
 
 /-- The isomorphism `(S.map (𝟭 C)).homology ≅ S.homology` is the identity. -/
 lemma mapHomologyIso_id (S : ShortComplex C) :
