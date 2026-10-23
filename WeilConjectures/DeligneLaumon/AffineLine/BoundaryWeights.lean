@@ -149,6 +149,9 @@ theorem isZero_upperStar_boundarySheaf :
       infer_instance
     exact IsIso.of_isIso_comp_left
       ((ProEtale.adicOpenImmersionLowerShriekAdjunction l jb).unit.app D.sheaf.obj.carrier) _
+  have : Epi ((jb)^*ᵃ[l].map
+      ((ProEtale.adicOpenImmersionLowerShriekToLowerStar l jb).app D.sheaf.obj.carrier)) :=
+    IsIso.epi_of_iso _
   change IsZero ((jb)^*ᵃ[l].obj (Φ.obj (cokernel
     ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf))))
   refine IsZero.of_iso (isZero_cokernel_of_epi ((jb)^*ᵃ[l].map

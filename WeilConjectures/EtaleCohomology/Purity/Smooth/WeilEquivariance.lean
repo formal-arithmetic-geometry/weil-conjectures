@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusDatum
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualWeil
 
 /-!
@@ -16,9 +17,11 @@ Let `f : X ⟶ Y` be smooth of relative dimension `d`, and let `g_X`, `g_Y` be e
 and `Y` forming a cartesian square `g_X ≫ f = f ≫ g_Y` (in the blueprint, the geometric-Galois
 Frobenii of `def-pur-scheme-geometric-frobenius`). A Weil datum `φ_K : Lg_Y^* K ⟶ K` induces
 data on the source and on the target of the smooth purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`
-(`def-pur-tate-datum`), and on compactly supported direct images
-(`def-pur-compact-support-transport`). This file proves that purity, the exceptional counit and
-the smooth trace are morphisms of Weil objects
+(`def-pur-tate-datum`: `AlgebraicGeometry.Etale.smoothPurityWeilDatum` and
+`AlgebraicGeometry.Etale.upperShriekWeilDatum`, constructed in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum`), and on compactly supported direct
+images (`def-pur-compact-support-transport`). This file proves that purity, the exceptional counit
+and the smooth trace are morphisms of Weil objects
 (`thm-pur-weil-equivariance-of-purity-and-trace`), that the same holds for the scheme-Frobenius
 forms of the data (`prop-pur-weil-equivariance-scheme-frobenius`), and that these equivariances
 are transported by every functor commuting with the Frobenius pullbacks
@@ -26,8 +29,6 @@ are transported by every functor commuting with the Frobenius pullbacks
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.tateWeilDatum`, `AlgebraicGeometry.Etale.purityWeilDatum`,
-  `AlgebraicGeometry.Etale.upperShriekWeilDatum` (`def-pur-tate-datum`).
 - `AlgebraicGeometry.Etale.compactSupportWeilTransport`,
   `AlgebraicGeometry.Etale.schemeFrobeniusWeilDatum` (`def-pur-compact-support-transport`).
 - `AlgebraicGeometry.Etale.smoothCoefficientTrace` (`def-pur-smooth-trace`).
@@ -122,50 +123,6 @@ lemma smoothPurityIso_hom_naturality {K K' : DerivedCategoryModule Λ Y} (v : K 
 
 variable {gX : X ⟶ X} {gY : Y ⟶ Y}
 
-variable {Λ} in
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
-
-The Tate datum `τ_m : Lg^* Λ_X(m) ≅ Λ_X(m)`, the pullback identification of the Tate twist datum
-(`AlgebraicGeometry.Etale.HasTateTwist`); for the normalized twist datum of the geometric
-Frobenius, geometric Frobenius acts on `Λ(m)` by `q^{-m}`. -/
-noncomputable def tateWeilDatum (g : X ⟶ X) (m : ℤ) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ X m) ⟶ tateObject Λ X m :=
-  (leftDerivedUpperStarTateObjectIso g m).hom
-
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
-
-The datum `φ^pur_{f,K}` on the source of smooth purity induced by a Weil datum
-`φ_K : Lg_Y^* K ⟶ K` (a strict geometric-Weil datum when it is an isomorphism, as for the strict
-Weil complexes `AlgebraicGeometry.Etale.WeilComplex`):
-```
-Lg_X^*(Lf^* K(d)[2d]) ≅ (Lf^* Lg_Y^* K)(d)[2d] ──(Lf^* φ_K)(d)[2d]──▶ Lf^* K(d)[2d],
-```
-the first map being the base-change identification of the source of purity, which contains the
-Tate datum `τ_d` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTwistShiftBaseChangeIso`). -/
-noncomputable def purityWeilDatum (sq : CommSq gX f f gY) {K : DerivedCategoryModule Λ Y}
-    (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
-    (L((gX)^*[ModuleCat.{u + 1} Λ])).obj
-        ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ⟶
-      (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq K).hom ≫
-    (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φK)
-
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
-
-The datum `φ^!_{f,K}` on the exceptional inverse image induced by a Weil datum
-`φ_K : Lg_Y^* K ⟶ K`:
-```
-Lg_X^* Rf^! K ──Ex^{!,sm}──▶ Rf^! Lg_Y^* K ──Rf^! φ_K──▶ Rf^! K,
-```
-through the smooth pullback exchange `AlgebraicGeometry.Etale.smoothPullbackExchange` of the
-cartesian square. -/
-noncomputable def upperShriekWeilDatum (sq : IsPullback gX f f gY)
-    {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
-    (L((gX)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ⟶
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K :=
-  (smoothPullbackExchange Λ f sq K θ (Φ.app K) θ (Φ.app _)).hom ≫
-    (R(f)^![ModuleCat.{u + 1} Λ]).map φK
-
 /-- Blueprint `thm-pur-weil-equivariance-of-purity-and-trace`: Weil equivariance of purity and
 trace, the purity square.
 
@@ -181,9 +138,10 @@ Lg_X^* Lf^* K(d)[2d] ──Lg_X^* γ──▶ Lg_X^* Rf^! K
 -/
 theorem isWeilMorphism_smoothPurityIso_hom (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
-    IsWeilMorphism gX (purityWeilDatum Λ f sq.toCommSq φK) (upperShriekWeilDatum Λ f θ Φ sq φK)
+    IsWeilMorphism gX (smoothPurityWeilDatum Λ d f sq.toCommSq φK)
+      (upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _))
       (smoothPurityIso Λ f K θ (Φ.app K)).hom := by
-  unfold IsWeilMorphism purityWeilDatum upperShriekWeilDatum
+  unfold IsWeilMorphism smoothPurityWeilDatum upperShriekWeilDatum
   rw [reassoc_of% (leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom Λ f sq K θ (Φ.app K)
     θ (Φ.app _)), ← smoothPurityIso_hom_naturality, Category.assoc]
 
@@ -224,7 +182,8 @@ lemma upperShriekWeilDatum_eq (sq : IsPullback gX f f gY) {K : DerivedCategoryMo
     (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (hcoh : (smoothPullbackExchange Λ f sq K θ (Φ.app K) θ (Φ.app _)).hom =
       (upperShriekBaseChangeMap Λ sq).app K) :
-    upperShriekWeilDatum Λ f θ Φ sq φK = upperShriekMateWeilDatum sq φK := by
+    upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _) =
+      upperShriekMateWeilDatum sq φK := by
   rw [upperShriekWeilDatum, upperShriekMateWeilDatum, hcoh]
 
 /-- Blueprint `thm-pur-weil-equivariance-of-purity-and-trace`: Weil equivariance of purity and
@@ -238,7 +197,8 @@ theorem isWeilMorphism_counit (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (hcoh : (smoothPullbackExchange Λ f sq K θ (Φ.app K) θ (Φ.app _)).hom =
       (upperShriekBaseChangeMap Λ sq).app K) :
-    IsWeilMorphism gY (compactSupportWeilTransport sq (upperShriekWeilDatum Λ f θ Φ sq φK)) φK
+    IsWeilMorphism gY
+      (compactSupportWeilTransport sq (upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _))) φK
       ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) := by
   rw [upperShriekWeilDatum_eq Λ f θ Φ sq φK hcoh]
   exact isWeilMorphism_counit_upperShriekMateWeilDatum Λ sq φK
@@ -254,7 +214,8 @@ theorem isWeilMorphism_smoothCoefficientTrace (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (hcoh : (smoothPullbackExchange Λ f sq K θ (Φ.app K) θ (Φ.app _)).hom =
       (upperShriekBaseChangeMap Λ sq).app K) :
-    IsWeilMorphism gY (compactSupportWeilTransport sq (purityWeilDatum Λ f sq.toCommSq φK)) φK
+    IsWeilMorphism gY
+      (compactSupportWeilTransport sq (smoothPurityWeilDatum Λ d f sq.toCommSq φK)) φK
       (smoothCoefficientTrace Λ f θ K (Φ.app K)) :=
   ((isWeilMorphism_smoothPurityIso_hom Λ f θ Φ sq φK).rightDerivedLowerShriek_map sq).comp
     (isWeilMorphism_counit Λ f θ Φ sq φK hcoh)
@@ -316,10 +277,12 @@ Frobenius datum, the smooth purity map is a morphism of Weil objects for the sch
 `Φ_X`. -/
 theorem isWeilMorphism_schemeFrobenius_smoothPurityIso_hom :
     IsWeilMorphism D.schemeFrobeniusX
-      (schemeFrobeniusWeilDatum D.κX.hom (purityWeilDatum Λ (Hom.geometricFiberMap f₀ hf₀)
-        (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀).toCommSq φK))
-      (schemeFrobeniusWeilDatum D.κX.hom (upperShriekWeilDatum Λ _ θ Φ
-        (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀) φK))
+      (schemeFrobeniusWeilDatum D.κX.hom
+        (smoothPurityWeilDatum Λ d (Hom.geometricFiberMap f₀ hf₀)
+          (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀).toCommSq φK))
+      (schemeFrobeniusWeilDatum D.κX.hom (upperShriekWeilDatum Λ _
+        (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀) φK θ (Φ.app K)
+        (Φ.app _)))
       (smoothPurityIso Λ (Hom.geometricFiberMap f₀ hf₀) K θ (Φ.app K)).hom :=
   (isWeilMorphism_smoothPurityIso_hom Λ _ θ Φ _ φK).schemeFrobeniusWeilDatum D.κX.hom
 
@@ -339,8 +302,9 @@ theorem isWeilMorphism_schemeFrobenius_counit
     IsWeilMorphism D.schemeFrobeniusY
       (schemeFrobeniusWeilDatum D.κY.hom (compactSupportWeilTransport
         (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀)
-        (upperShriekWeilDatum Λ _ θ Φ
-          (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀) φK)))
+        (upperShriekWeilDatum Λ _
+          (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀) φK θ (Φ.app K)
+          (Φ.app _))))
       (schemeFrobeniusWeilDatum D.κY.hom φK)
       ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
         (Hom.geometricFiberMap f₀ hf₀)).counit.app K) :=
@@ -360,7 +324,7 @@ theorem isWeilMorphism_schemeFrobenius_smoothCoefficientTrace
     IsWeilMorphism D.schemeFrobeniusY
       (schemeFrobeniusWeilDatum D.κY.hom (compactSupportWeilTransport
         (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀)
-        (purityWeilDatum Λ (Hom.geometricFiberMap f₀ hf₀)
+        (smoothPurityWeilDatum Λ d (Hom.geometricFiberMap f₀ hf₀)
           (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀).toCommSq φK)))
       (schemeFrobeniusWeilDatum D.κY.hom φK)
       (smoothCoefficientTrace Λ _ θ K (Φ.app K)) :=
@@ -389,8 +353,8 @@ coefficients, or a pullback along a Frobenius-compatible base change: `T γ_{f,K
 of Weil objects for the transported data. -/
 theorem isWeilEquivariant_map_smoothPurityIso_hom {𝒟 : Type*} [Category* 𝒟] {G' : 𝒟 ⥤ 𝒟}
     (T : DerivedCategoryModule Λ X ⥤ 𝒟) (c : L((gX)^*[ModuleCat.{u + 1} Λ]) ⋙ T ≅ T ⋙ G') :
-    IsWeilEquivariant G' (transportWeilDatum T c (purityWeilDatum Λ f sq.toCommSq φK))
-      (transportWeilDatum T c (upperShriekWeilDatum Λ f θ Φ sq φK))
+    IsWeilEquivariant G' (transportWeilDatum T c (smoothPurityWeilDatum Λ d f sq.toCommSq φK))
+      (transportWeilDatum T c (upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _)))
       (T.map (smoothPurityIso Λ f K θ (Φ.app K)).hom) :=
   IsWeilEquivariant.map T c (isWeilMorphism_smoothPurityIso_hom Λ f θ Φ sq φK)
 
@@ -407,7 +371,7 @@ theorem isWeilEquivariant_map_counit {𝒟 : Type*} [Category* 𝒟] {G' : 𝒟 
       (upperShriekBaseChangeMap Λ sq).app K) :
     IsWeilEquivariant G'
       (transportWeilDatum T c
-        (compactSupportWeilTransport sq (upperShriekWeilDatum Λ f θ Φ sq φK)))
+        (compactSupportWeilTransport sq (upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _))))
       (transportWeilDatum T c φK)
       (T.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K)) :=
   IsWeilEquivariant.map T c (isWeilMorphism_counit Λ f θ Φ sq φK hcoh)
@@ -423,7 +387,7 @@ theorem isWeilEquivariant_map_smoothCoefficientTrace {𝒟 : Type*} [Category* �
       (upperShriekBaseChangeMap Λ sq).app K) :
     IsWeilEquivariant G'
       (transportWeilDatum T c
-        (compactSupportWeilTransport sq (purityWeilDatum Λ f sq.toCommSq φK)))
+        (compactSupportWeilTransport sq (smoothPurityWeilDatum Λ d f sq.toCommSq φK)))
       (transportWeilDatum T c φK) (T.map (smoothCoefficientTrace Λ f θ K (Φ.app K))) :=
   IsWeilEquivariant.map T c (isWeilMorphism_smoothCoefficientTrace Λ f θ Φ sq φK hcoh)
 
