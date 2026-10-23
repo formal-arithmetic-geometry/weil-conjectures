@@ -18,7 +18,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
 canonical map `RΓ(X_ét, E) ⊗ᴸ K ⟶ RΓ(X_ét, E ⊗ᴸ K_X)` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`, blueprint `lem-kun-0f0e`,
-[Stacks 0F0E]). Abelian sheaves are sheaves of modules over `ULift ℤ`, and the map is
+[Stacks 0F0E]). More generally this holds over any principal ideal domain
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isPrincipalIdealRing`). Abelian sheaves
+are sheaves of modules over `ULift ℤ`, and the map is
 `AlgebraicGeometry.Etale.constantProjectionMap`.
 
 More generally, for any commutative ring `Λ`, the map is an isomorphism for `E` bounded below
@@ -28,7 +30,7 @@ map of the adjunction `c_X ⊣ RΓ_X`, which is an isomorphism at flat modules p
 because `RᵠΓ(X, -)` commutes with filtered colimits on a qcqs scheme, hence at every `K` of Tor
 amplitude bounded below
 (`CategoryTheory.Functor.isIso_mapDerivedCategoryProjectionMap_app_of_torAmplitudeGE`).
-Over `ℤ`, every `K ∈ D^{≥ b}` has Tor amplitude in `[b - 1, ∞)`.
+Over a principal ideal domain such as `ℤ`, every `K ∈ D^{≥ b}` has Tor amplitude in `[b - 1, ∞)`.
 -/
 
 @[expose] public section
@@ -83,6 +85,16 @@ theorem isIso_constantProjectionMap_of_torAmplitudeGE
     (fun Y n _ ↦ Functor.isGE_rightDerivedFunctor_obj _ Y n) E a
     (fun M hM ↦ Functor.isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat adj hΓ
       E a M hM) K b hK
+
+/-- Over a principal ideal domain `Λ`, on a quasi-compact quasi-separated scheme `X`, the
+constant-tensor comparison `RΓ_X E ⊗ᴸ K ⟶ RΓ_X (E ⊗ᴸ c_X K)` is an isomorphism for `E` and `K`
+bounded below: every complex concentrated in degrees `≥ b` has Tor amplitude in `[b - 1, ∞)`. -/
+theorem isIso_constantProjectionMap_of_isPrincipalIdealRing [IsDomain Λ] [IsPrincipalIdealRing Λ]
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) [E.IsGE a]
+    (K : DerivedCategory (ModuleCat.{u + 1} Λ)) (b : ℤ) [K.IsGE b] :
+    IsIso (constantProjectionMap Λ X E K) :=
+  isIso_constantProjectionMap_of_torAmplitudeGE Λ X E a K (b - 1)
+    (torAmplitudeGE_of_isGE_of_isPrincipalIdealRing K b)
 
 /-- Blueprint `lem-kun-0f0e`: tensor with a constant complex over `ℤ` ([Stacks 0F0E]).
 

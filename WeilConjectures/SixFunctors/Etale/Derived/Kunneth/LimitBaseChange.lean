@@ -66,7 +66,11 @@ and let `sq₀ : IsPullback e₀ h₀ g₀ p₀` be a Cartesian
 square of limits (the four limit cones being compatible with the four morphisms), with `g₀`
 quasi-compact quasi-separated. Let `G` be a sheaf on a scheme `W` to which the system `T` maps.
 If for a fixed degree `q` every base-change map `pᵢ⁻¹ R^q gᵢ_* (G|_{Tᵢ}) ⟶ R^q hᵢ_* eᵢ⁻¹ (G|_{Tᵢ})`
-is an isomorphism, then so is `p₀⁻¹ R^q g₀_* (G|_T) ⟶ R^q h₀_* e₀⁻¹ (G|_T)`. -/
+is an isomorphism, then so is `p₀⁻¹ R^q g₀_* (G|_T) ⟶ R^q h₀_* e₀⁻¹ (G|_T)`.
+
+The hypotheses that the `Sᵢ` and `Xᵢ` are quasi-compact and quasi-separated are not in the
+blueprint. They could be removed by localising on `S_{i₀}` and `X_{i₀}`, and every use of this
+lemma satisfies them. -/
 @[stacks 0EZT]
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} I]
     [IsCofiltered I] {S X T Y : I ⥤ Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (e : Y ⟶ T)
