@@ -12485,6 +12485,7 @@ public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
 public import WeilConjectures.WeilSheaf.FieldCoefficientForget
 public import WeilConjectures.WeilSheaf.FieldCoefficientFrobeniusTwist
 public import WeilConjectures.WeilSheaf.FieldCoefficientKaroubian
+public import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
 public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
 public import WeilConjectures.WeilSheaf.FieldCoefficientTriangulated
 public import WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit
