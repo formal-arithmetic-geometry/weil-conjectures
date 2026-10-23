@@ -18,6 +18,7 @@ public import WeilConjectures.WeilSheaf.ProperBaseChange
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Weights
+public import WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLisse
 
 /-!
 # Relative purity for smooth proper morphisms
@@ -54,17 +55,15 @@ fibre `X_y`) give purity of the stalk of `Rⁱf₀*F` at `y`.
 
 ## Implementation notes
 
-The local constancy of Step 1 is stated separately, with `sorry`:
-`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`, for the
-`ℓ`-adic sheaves on the geometric fibres (the Weil-level
+The local constancy of Step 1 is
+`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`
+(`WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLisse`), for the `ℓ`-adic sheaves on the
+geometric fibres (the Weil-level
 `AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper` is derived from it).
-Its blueprint proof uses the finite-level nodes `prop-weil-proet-finite-proper-base-change`,
-`sbc-thm-smooth-base-change` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`)
-and `thm-fin-proper-constructibility-complete` on a lattice of `F`, and
-`cor-weil-pbc-geometric-fiber-qbar` to pass to the limit. The repository has no functor from
-finite-level étale sheaves, or from the lattice categories `D^b_c(X, ℚ̄_ℓ)` of the blueprint, to
-the pro-étale `ℓ`-adic sheaves `AlgebraicGeometry.ProEtale.AdicSheaf` underlying Weil sheaves, so
-neither lattices of lisse `ℓ`-adic sheaves nor the limit comparison exist yet.
+Following the blueprint, a lattice of `F` exists étale locally on the base: on the regular
+geometric fibres by the finite orbits of lattices, and nearby by proper base change in degree
+zero for the sheaf of lattices; on a lattice the finite-level smooth proper base change theorems
+apply.
 -/
 
 @[expose] public section
@@ -80,21 +79,6 @@ namespace AlgebraicGeometry
 namespace ProEtale
 
 variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
-
-/-- **Local constancy of smooth proper direct images** (Step 1 of
-`prop-zl-smooth-proper-relative-purity`, at the level of `ℓ`-adic sheaves on the geometric
-fibres): over an algebraically closed field `K` of characteristic `≠ ℓ`, the higher direct
-images `Rⁿf_* F` of a lisse `ℓ`-adic sheaf along a smooth proper morphism `f` are lisse.
-
-The blueprint proof chooses a lattice of `F`, shows that the torsion direct images
-`R^q f_* F_m` have bijective specialization maps by proper base change to strict henselizations
-and smooth base change along the closed fibre, and passes to the limit. -/
-theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper
-    (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y) (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
-    [Smooth f] [IsProper f] {F : AdicSheaf l X} (hF : IsAdicLisseSheaf F) (n : ℤ) :
-    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
-      ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
-  sorry
 
 /-- **Local constancy over a point.** Over an algebraically closed field `K` of characteristic
 `≠ ℓ`, the higher direct images of a lisse `ℓ`-adic sheaf along any quasi-compact quasi-separated
