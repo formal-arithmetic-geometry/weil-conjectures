@@ -258,9 +258,8 @@ lemma integralStageTransition_map_smul (r : StageInt.{u} l E) {X Y} (f : X ⟶ Y
 `def-weil-rationalization-karoubi` over `s = Spec k`: the functor induced on the
 rationalizations by the derived base change along `𝒪_E ⟶ 𝒪_F`. -/
 noncomputable def rationalStageTransition : RationalPointStage l k E ⥤ RationalPointStage l k F :=
-  let φ := integersStageMap.{u} h
-  let T := integralStageTransition k h
-  Rationalization.mapOfRingHom φ (integersStageMap_nonZeroDivisors_le h) T
+  Rationalization.mapOfRingHom (R := StageInt.{u} l E) (R' := StageInt.{u} l F)
+    (integersStageMap.{u} h) (integersStageMap_nonZeroDivisors_le h) (integralStageTransition k h)
     (integralStageTransition_map_smul k h)
 
 lemma algebraMap_comp_integersStageMap :
@@ -305,9 +304,12 @@ noncomputable def pointFiberRationalAuxTransitionIso :
       derivedExtendScalarsCongr (algebraMap_comp_integersStageMap h) _
         (haE.comp (flat_of_field _)) ≪≫
       ModuleCat.derivedExtendScalarsComp aE (stageMap l h) haE (flat_of_field _) _
-  exact Functor.isoWhiskerLeft (ObjectProperty.ι _)
-    ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₁ _ ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ e₂)
+  exact Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (ObjectProperty.liftCompιIso _ _ _) _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (ObjectProperty.ι _)
+      ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₁ _ ≪≫
+        Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ e₂) ≪≫
+    (Functor.associator _ _ _).symm ≪≫ (Functor.associator _ _ _).symm
 
 /-- `- ⊗_E F` on the rational stages is induced by `- ⊗ᴸ 𝒪_F` on the integral stages. -/
 noncomputable def rationalStageTransitionFac :
@@ -351,11 +353,21 @@ noncomputable def pointFiberStageTransitionIso :
     (integralStageTransition k h ⋙ ΦF) (ΦE ⋙ stageDerived l h)
     (rationalStageTransition k h ⋙ HF) (HE ⋙ stageDerived l h)
     (pointFiberRationalAuxTransitionIso k h)
-  exact NatIso.ofComponents
-    (fun X ↦ (_root_.DerivedCategory.boundedFiniteCohomology _).isoMk (β.app X))
-    fun f ↦ by
-      ext
-      exact β.hom.naturality f
+  -- Build the isomorphism after composing with the inclusion `Dᵇ_fd(F) ⥤ D(F)` and pull it back
+  -- along the fully faithful whiskering, so that no comparison of components is needed.
+  let γF : (pointFiberStageEquivalence l k F).functor ⋙
+      (_root_.DerivedCategory.boundedFiniteCohomology _).ι ≅ HF :=
+    ObjectProperty.liftCompιIso _ _ _
+  let γE : (pointFiberStageEquivalence l k E).functor ⋙
+      (_root_.DerivedCategory.boundedFiniteCohomology _).ι ≅ HE :=
+    ObjectProperty.liftCompιIso _ _ _
+  let δ : fdTransition l h ⋙ (_root_.DerivedCategory.boundedFiniteCohomology _).ι ≅
+      (_root_.DerivedCategory.boundedFiniteCohomology _).ι ⋙ stageDerived l h :=
+    ObjectProperty.liftCompιIso _ _ _
+  exact ((_root_.DerivedCategory.boundedFiniteCohomology _).fullyFaithfulι.whiskeringRight
+    _).preimageIso (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ γF ≪≫ β ≪≫
+      Functor.isoWhiskerRight γE.symm _ ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ δ.symm ≪≫ (Functor.associator _ _ _).symm)
 
 end Compatibility
 
