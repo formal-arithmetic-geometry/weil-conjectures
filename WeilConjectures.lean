@@ -5843,6 +5843,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineFiniteLimits
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineLift
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheafPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
@@ -8089,7 +8091,10 @@ public import WeilConjectures.CategoryTheory.SiteSystemStrictificationRefuted
 public import WeilConjectures.CategoryTheory.Sites.CechBaseChange
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
+public import WeilConjectures.CategoryTheory.Sites.CechComplexRelativeLimit
+public import WeilConjectures.CategoryTheory.Sites.CechComplexTransport
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
+public import WeilConjectures.CategoryTheory.Sites.CechCriterionLift
 public import WeilConjectures.CategoryTheory.Sites.CechFreeResolution
 public import WeilConjectures.CategoryTheory.Sites.CechInjective
 public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
@@ -9217,6 +9222,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
@@ -11902,6 +11908,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.InjectiveAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Linear
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyClosedUpperStarHomotopyLimit
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyConstantWContractible
