@@ -117,14 +117,13 @@ lemma map_ofUnitMatrix_comp_descentMapSnd :
     (f)_*ᵃ[l].map (ofUnitMatrix A) ≫ descentMapSnd (n := m) f =
       descentMapSnd (n := n) f ≫ (pullback.fst f f ≫ f)_*ᵃ[l].map (ofUnitMatrix
         (A.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.snd f f).base.hom))) := by
-  rw [descentMapSnd, descentMapSnd, ← Category.assoc, ← Functor.map_comp,
-    ofUnitMatrix_comp_freePull, Functor.map_comp, Category.assoc, Category.assoc, Category.assoc]
-  congr 1
-  rw [← Category.assoc, ← Category.assoc]
-  erw [(adicLowerStarComp l (pullback.snd f f) f).hom.naturality]
-  rw [Category.assoc, Category.assoc]
-  congr 1
-  exact (adicLowerStarCongr l pullback.condition.symm).hom.naturality _
+  have h₁ := (adicLowerStarComp l (pullback.snd f f) f).hom.naturality (ofUnitMatrix
+    (A.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.snd f f).base.hom)))
+  have h₂ := (adicLowerStarCongr l (pullback.condition (f := f) (g := f)).symm).hom.naturality
+    (ofUnitMatrix (A.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.snd f f).base.hom)))
+  dsimp only [Functor.comp_map] at h₁
+  rw [descentMapSnd, descentMapSnd, ← Functor.map_comp_assoc, ofUnitMatrix_comp_freePull,
+    Functor.map_comp, Category.assoc, Category.assoc, Category.assoc, reassoc_of% h₁, h₂]
 
 /-- **The descent map is natural in intertwining matrices**: if `γ₂ · p₁^* A = p₂^* A · γ₁`,
 then `A` carries the kernel of the descent map of `γ₁` to that of `γ₂`. -/
@@ -165,10 +164,10 @@ lemma descentSheafMap_comp_descentSheafMap {B : Matrix (Fin n) (Fin m)
       B.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.snd f f).base.hom) * γ₂)
     (hBA : B * A = 1) :
     descentSheafMap f γ₁ γ₂ A hA ≫ descentSheafMap f γ₂ γ₁ B hB = 𝟙 _ := by
-  refine kernel.hom_ext _ ?_
-  rw [Category.assoc, descentSheafMap_ι, ← Category.assoc, descentSheafMap_ι, Category.assoc,
-    ← Functor.map_comp, ← ofUnitMatrix_mul, hBA, ofUnitMatrix_one, Functor.map_id,
-    Category.comp_id, Category.id_comp]
+  rw [← cancel_mono (kernel.ι (descentMap f γ₁)), Category.assoc, descentSheafMap_ι,
+    ← Category.assoc, descentSheafMap_ι, Category.assoc,
+    ← Functor.map_comp, ← ofUnitMatrix_mul, hBA, ofUnitMatrix_one]
+  simp
 
 end DescentMap
 

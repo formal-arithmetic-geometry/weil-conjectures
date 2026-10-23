@@ -57,7 +57,7 @@ lemma towerEquiv_towerFactor {k k' : ℕ} (h : k' ≤ k)
   have e₁ : towerFactor.{u} l h (Ideal.Quotient.mk _ a) = towerReduce l k' a.down := rfl
   have e₂ : (Ideal.Quotient.mk (towerIdeal.{u} l k) a) = towerReduce l k a.down := rfl
   rw [e₁, e₂, padicIntQuotientSpanPowAddEquiv_towerReduce,
-    padicIntQuotientSpanPowAddEquiv_towerReduce, ZMod.castHom_apply, PadicInt.cast_toZModPow]
+    padicIntQuotientSpanPowAddEquiv_towerReduce, ZMod.castHom_apply, PadicInt.cast_toZModPow _ _ h]
 
 section Maps
 
@@ -69,6 +69,8 @@ noncomputable def frameCoord (k : ℕ) (i : Fin N) (U : V.ProEt)
     (σ : twistedSubmodule f (levelCocycleInt γ k) (U.hom ≫ f)) : ↥U.left → ZMod (l ^ k) :=
   fun u ↦ towerEquiv l k (frameEval f U.hom rfl σ.1 u i)
 
+omit hf in
+/-- The coordinates of a twisted section are locally constant. -/
 lemma isLocallyConstant_frameCoord (k : ℕ) (i : Fin N) (U : V.ProEt)
     (σ : twistedSubmodule f (levelCocycleInt γ k) (U.hom ≫ f)) :
     IsLocallyConstant (frameCoord k i U σ) :=
@@ -88,8 +90,8 @@ noncomputable def frameEvalHom (k : ℕ) (i : Fin N) :
         ext σ
         refine ULift.ext _ _ (ContinuousMap.ext fun u ↦ ?_)
         have := congrFun (frameEval_comp_eq (f := f) U.unop.hom rfl g.unop.left
-          (by rw [Category.assoc]) (a' := U'.unop.hom) rfl (MorphismProperty.Over.w g.unop)
-          σ.1) u
+          ((Category.assoc _ _ _).symm.trans (congrArg (· ≫ f) (MorphismProperty.Over.w g.unop)))
+          (a' := U'.unop.hom) rfl (MorphismProperty.Over.w g.unop) σ.1) u
         exact congrArg (fun v ↦ towerEquiv l k (v i)) this }
 
 lemma frameEvalHom_hom_app_apply (k : ℕ) (i : Fin N) (U : V.ProEtᵒᵖ)
@@ -108,30 +110,29 @@ noncomputable def frameExtSection (k : ℕ) (i : Fin N) (U : V.ProEt) (x : C(U.l
       (fun u ↦ Pi.single i ((towerEquiv l k).symm (x u))),
     (mem_twistedSubmodule f _).2 (isTwistedSection_frameExt U.hom rfl
       (hγ.isDescentCocycle_int k) (((IsLocallyConstant.iff_continuous x).2 x.continuous).comp
-        fun a ↦ Pi.single i ((towerEquiv l k).symm a)))⟩
+        fun a : ZMod (l ^ k) ↦ (Pi.single i ((towerEquiv l k).symm a) : LevelModule.{u} l N k)))⟩
 
-include hγ in
 /-- The extension of the `i`-th coordinate functions modulo `ℓᵏ` to twisted sections. -/
 noncomputable def frameExtHom (k : ℕ) (i : Fin N) :
     (zmodPowAbSheafDiagram V l).obj (op k) ⟶ (frameTower f γ).obj (op k) :=
   (fullyFaithfulSheafToPresheaf _ _).preimage
     { app U := AddCommGrpCat.ofHom
         { toFun x := frameExtSection hγ k i U.unop x.down
-          map_zero' := Subtype.ext (by
-            change frameExt f _ _ _ _ = 0
-            convert frameExt_zero (f := f) U.unop.hom rfl (levelCocycleInt γ k) using 2
-            funext u
-            simp)
-          map_add' x y := Subtype.ext (by
-            change frameExt f _ _ _ _ = frameExt f _ _ _ _ + frameExt f _ _ _ _
-            rw [← frameExt_add]
-            congr 1
-            funext u
-            simp [Pi.single_add]) }
+          map_zero' := Subtype.ext ((congrArg
+            (frameExt f U.unop.hom rfl (fun z ↦ levelCocycleInt γ k z)) (by
+              funext u
+              simp)).trans (frameExt_zero U.unop.hom rfl (levelCocycleInt γ k)))
+          map_add' x y := Subtype.ext ((congrArg
+            (frameExt f U.unop.hom rfl (fun z ↦ levelCocycleInt γ k z)) (by
+              funext u
+              simp [Pi.single_add])).trans (frameExt_add U.unop.hom rfl (levelCocycleInt γ k)
+                (fun u ↦ Pi.single i ((towerEquiv l k).symm (x.down u)))
+                (fun u ↦ Pi.single i ((towerEquiv l k).symm (y.down u))))) }
       naturality U U' g := by
         ext x
         refine Subtype.ext ?_
-        exact frameExt_comp_eq (f := f) U.unop.hom rfl g.unop.left (by rw [Category.assoc])
+        exact frameExt_comp_eq (f := f) U.unop.hom rfl g.unop.left
+          ((Category.assoc _ _ _).symm.trans (congrArg (· ≫ f) (MorphismProperty.Over.w g.unop)))
           (a' := U'.unop.hom) rfl (MorphismProperty.Over.w g.unop) _ }
 
 lemma frameExtHom_hom_app_apply (k : ℕ) (i : Fin N) (U : V.ProEtᵒᵖ)

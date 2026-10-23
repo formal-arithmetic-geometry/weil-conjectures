@@ -35,17 +35,19 @@ variable {l : ℕ} [Fact l.Prime] {T V : Scheme.{u}} {f : V ⟶ T} [WeaklyEtale 
   {F : AdicSheaf l T} {n : ℕ} (ε : (f)^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin n ↦ unit l V)
   {E : IntermediateField ℚ_[l] (PadicAlgCl l)}
 
+omit [WeaklyEtale f] in
 /-- The transition matrices `T(p₂, p₁)` and `T(p₁, p₂)` are inverse. -/
 lemma transitionMatrix_snd_fst_mul :
     transitionMatrix ε (pullback.snd f f) (pullback.fst f f) pullback.condition.symm *
       transitionMatrix ε (pullback.fst f f) (pullback.snd f f) pullback.condition = 1 := by
-  rw [← transitionMatrix_trans, transitionMatrix_self]
+  rw [← transitionMatrix_trans ε _ _ _ _ _ rfl, transitionMatrix_self]
 
+omit [WeaklyEtale f] in
 /-- The transition matrices `T(p₁, p₂)` and `T(p₂, p₁)` are inverse. -/
 lemma transitionMatrix_fst_snd_mul :
     transitionMatrix ε (pullback.fst f f) (pullback.snd f f) pullback.condition *
       transitionMatrix ε (pullback.snd f f) (pullback.fst f f) pullback.condition.symm = 1 := by
-  rw [← transitionMatrix_trans, transitionMatrix_self]
+  rw [← transitionMatrix_trans ε _ _ _ _ _ rfl, transitionMatrix_self]
 
 /-- The embedding `E ⊆ ℚ̄_ℓ` is injective on matrices. -/
 lemma map_algebraMap_injective {ι κ : Type*} :
@@ -88,6 +90,7 @@ lemma _root_.PadicAlgCl.continuous_of_coe_eq {X : Type*} [TopologicalSpace X] {c
   rw [this]
   exact a.1.continuous.subtype_mk _
 
+omit [WeaklyEtale f] in
 /-- The entries of a cocycle with transition values are continuous. -/
 lemma continuous_apply (hγ : IsTransitionValues ε γ) (i j : Fin n) :
     Continuous fun z ↦ ((γ z : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i j :=
@@ -137,8 +140,8 @@ lemma cocycle (hγ : IsTransitionValues ε γ) (w : ↥(tripleProduct f)) :
     ← map_locallyFiniteFunctionsComp_map_eval _ q₂₃.base.hom, ← Matrix.map_mul,
     ← transitionMatrix_comp ε q₁₃ _ _ _ (by rw [Category.assoc, Category.assoc, hA]),
     ← transitionMatrix_comp ε q₂₃ _ _ _ e₂, ← transitionMatrix_comp ε q₁₂ _ _ _ e₁,
-    transitionMatrix_congr ε h₁₃s h₁₃f _ (e₃.trans e₁), transitionMatrix_congr ε rfl hB _ e₃,
-    ← transitionMatrix_trans]
+    transitionMatrix_congr ε h₁₃s h₁₃f _ (e₃.trans e₁), transitionMatrix_congr ε rfl hB.symm e₂ e₃,
+    ← transitionMatrix_trans ε _ _ _ e₃ e₁ (e₃.trans e₁)]
 
 end IsTransitionValues
 

@@ -37,8 +37,8 @@ variable {l : ℕ} [Fact l.Prime] {X W : Scheme.{u}} (f : W ⟶ X) [WeaklyEtale 
 
 open PadicAlgCl
 
-omit [WeaklyEtale f] in
 set_option maxHeartbeats 2000000 in
+omit [WeaklyEtale f] in
 -- The kernel unfolds the composites of sheaf morphisms in the descent map.
 /-- **The adjoint of a trivialisation lands in the kernel of the descent map** of its transition
 matrix. -/
@@ -145,13 +145,6 @@ lemma transitionMatrix_map_tripleProj₁₃ :
     ← transitionMatrix_comp ε q₂₃ _ _ _ e₂, ← transitionMatrix_comp ε q₁₂ _ _ _ e₁,
     transitionMatrix_congr ε h₁₃f h₁₃s _ (e₁.trans e₃), transitionMatrix_congr ε hB.symm rfl _ e₃]
   exact transitionMatrix_trans ε _ _ _ e₁ e₃ _
-
-omit [Surjective f] [QuasiCompact f] in
-lemma transitionMatrix_comp_descentMap_eq_zero :
-    (adicUpperStarLowerStarAdjunction l f).homEquiv _ _ ε.hom ≫
-      descentMap f (transitionMatrix ε (pullback.fst f f) (pullback.snd f f)
-        pullback.condition) = 0 :=
-  homEquiv_comp_descentMap_eq_zero f ε
 
 /-- **A trivialised sheaf is the descent of its transition matrix.** -/
 lemma nonempty_iso_descentSheaf :

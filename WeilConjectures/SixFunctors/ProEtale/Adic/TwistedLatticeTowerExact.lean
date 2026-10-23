@@ -36,14 +36,6 @@ namespace CategoryTheory
 
 variable {C : Type*} [Category C] {J : GrothendieckTopology C} {R : Type*} [Ring R]
 
-/-- A morphism of sheaves of modules which is injective on sections is a monomorphism. -/
-lemma Sheaf.mono_of_injective {F G : Sheaf J (ModuleCat.{w} R)} (φ : F ⟶ G)
-    (h : ∀ U, Function.Injective (φ.hom.app U)) : Mono φ := by
-  have : Mono φ.hom := by
-    rw [NatTrans.mono_iff_mono_app]
-    exact fun U ↦ (ModuleCat.mono_iff_injective _).2 (h U)
-  exact (sheafToPresheaf J _).mono_of_mono_map this
-
 /-- A short complex of sheaves of modules which is exact on sections is exact. -/
 lemma Sheaf.exact_of_sectionwise [HasSheafify J (ModuleCat.{w} R)]
     (S : ShortComplex (Sheaf J (ModuleCat.{w} R)))
@@ -70,12 +62,10 @@ variable {Y V : Scheme.{u}} {f : V ⟶ Y} {Λ : Type (u + 1)} [CommRing Λ]
   {φ : M₁ →ₗ[Λ] M₂} (hφ : ∀ z m, φ (c₁ z m) = c₂ z (φ m))
   {ψ : M₂ →ₗ[Λ] M₃} (hψ : ∀ z m, ψ (c₂ z m) = c₃ z (ψ m))
 
-include hφ in
 lemma twistedSubmoduleMap_injective (hinj : Function.Injective φ) {T : Scheme.{u}}
-    (π : T ⟶ Y) : Function.Injective (twistedSubmoduleMap φ hφ π) := fun σ τ h ↦
+    (π : T ⟶ Y) : Function.Injective (twistedSubmoduleMap φ hφ π) := fun _ _ h ↦
   Subtype.ext (funext fun x ↦ hinj (congrFun (congrArg Subtype.val h) x))
 
-include hφ hψ in
 /-- **Exactness of twisted sections at the middle**, for `0 → M₁ → M₂ → M₃` exact. -/
 lemma exists_twistedSubmoduleMap_eq_of_exact (hinj : Function.Injective φ)
     (hex : ∀ m, ψ m = 0 → ∃ m', φ m' = m) {T : Scheme.{u}} (π : T ⟶ Y)
@@ -95,11 +85,10 @@ lemma exists_twistedSubmoduleMap_eq_of_exact (hinj : Function.Injective φ)
 
 variable [WeaklyEtale f] [Surjective f] [QuasiCompact f]
 
-include hψ in
 /-- **Twisted sections lift pro-étale locally along a surjection**: over the pro-étale cover
 `V ×_Y W ⟶ W`, which factors through `V`, twisted sections are locally constant functions. -/
-lemma isLocallySurjective_proEtTwistedModuleSheafMap (hc₂ : IsDescentCocycle f (fun z ↦ c₂ z))
-    (hc₃ : IsDescentCocycle f (fun z ↦ c₃ z)) (hsurj : Function.Surjective ψ) :
+lemma isLocallySurjective_proEtTwistedModuleSheafMap
+    (hc₂ : IsDescentCocycle f (fun z ↦ c₂ z)) (hsurj : Function.Surjective ψ) :
     Sheaf.IsLocallySurjective (proEtTwistedModuleSheafMap ψ hψ) := by
   refine ⟨fun {W} s ↦ ?_⟩
   let p := pullback.snd f W.hom
@@ -109,10 +98,13 @@ lemma isLocallySurjective_proEtTwistedModuleSheafMap (hc₂ : IsDescentCocycle f
     rw [Scheme.ProEt.mem_topology_iff]
     refine ⟨Presieve.singleton q, ?_, Sieve.le_generate _⟩
     rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_singleton]
-    exact Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale)
+    have : Surjective p := inferInstanceAs (Surjective (pullback.snd f W.hom))
+    have : QuasiCompact p := inferInstanceAs (QuasiCompact (pullback.snd f W.hom))
+    exact Scheme.Hom.singleton_mem_propQCPrecoverage (f := p) (P := @WeaklyEtale)
       (inferInstanceAs (WeaklyEtale p))
   refine (Scheme.ProEt.topology Y).superset_covering ?_ hcov
-  rw [Sieve.generate_le_iff, Presieve.singleton_le_iff]
+  rw [Sieve.generate_le_iff]
+  rintro _ _ ⟨⟩
   have ha : pullback.fst f W.hom ≫ f = W'.hom := pullback.condition
   set s' := (proEtTwistedModuleSheaf f c₃).obj.map q.op s
   have hs' := (mem_twistedSubmodule f c₃).1 s'.2
@@ -152,12 +144,12 @@ lemma towerMul_injective (n m : ℕ) : Function.Injective (towerMul.{u} l n m) :
   ring
 
 
-lemma levelMul_injective (n m : ℕ) : Function.Injective (levelMul l N n m) := fun v w h ↦
+lemma levelMul_injective (n m : ℕ) : Function.Injective (levelMul.{u} l N n m) := fun _ _ h ↦
   funext fun i ↦ towerMul_injective n m (congrFun h i)
 
 /-- The kernel of the reduction `(ℤ_ℓ ⧸ ℓⁿ⁺ᵐ)ᴺ → (ℤ_ℓ ⧸ ℓᵐ)ᴺ` is `ℓᵐ (ℤ_ℓ ⧸ ℓⁿ⁺ᵐ)ᴺ`. -/
-lemma exists_levelMul_eq (n m : ℕ) (v : LevelModule l N (n + m))
-    (hv : levelReduce l N (Nat.le_add_left m n) v = 0) : ∃ w, levelMul l N n m w = v := by
+lemma exists_levelMul_eq (n m : ℕ) (v : LevelModule.{u} l N (n + m))
+    (hv : levelReduce.{u} l N (Nat.le_add_left m n) v = 0) : ∃ w, levelMul.{u} l N n m w = v := by
   have (i : Fin N) : ∃ x, towerMul.{u} l n m x = v i := by
     obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (v i)
     have h0 := congrFun hv i
@@ -170,15 +162,15 @@ lemma exists_levelMul_eq (n m : ℕ) (v : LevelModule l N (n + m))
   choose w hw using this
   exact ⟨w, funext hw⟩
 
-lemma levelReduce_levelMul (n m : ℕ) (v : LevelModule l N n) :
-    levelReduce l N (Nat.le_add_left m n) (levelMul l N n m v) = 0 := by
+lemma levelReduce_levelMul (n m : ℕ) (v : LevelModule.{u} l N n) :
+    levelReduce.{u} l N (Nat.le_add_left m n) (levelMul.{u} l N n m v) = 0 := by
   funext i
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (v i)
   rw [levelReduce_apply, levelMul_apply, ← ha, towerMul_mk]
   refine (Ideal.Quotient.eq_zero_iff_mem).2 (Ideal.mem_span_singleton'.2 ⟨a, mul_comm _ _⟩)
 
-lemma levelMul_levelReduce (n m : ℕ) (v : LevelModule l N (n + m)) :
-    levelMul l N n m (levelReduce l N (Nat.le_add_right n m) v) = (l ^ m : ℕ) • v := by
+lemma levelMul_levelReduce (n m : ℕ) (v : LevelModule.{u} l N (n + m)) :
+    levelMul.{u} l N n m (levelReduce.{u} l N (Nat.le_add_right n m) v) = (l ^ m : ℕ) • v := by
   funext i
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (v i)
   rw [levelMul_apply, levelReduce_apply, ← ha, Pi.smul_apply, ← ha]
@@ -186,10 +178,10 @@ lemma levelMul_levelReduce (n m : ℕ) (v : LevelModule l N (n + m)) :
   rw [nsmul_eq_mul, map_mul, Nat.cast_pow, map_pow, map_natCast]
 
 lemma levelReduce_surjective {k k' : ℕ} (h : k' ≤ k) :
-    Function.Surjective (levelReduce l N h) := fun v ↦ by
+    Function.Surjective (levelReduce.{u} l N h) := fun v ↦ by
   have (i : Fin N) : ∃ x, towerFactor.{u} l h x = v i := by
-    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective (v i)
-    exact ⟨Ideal.Quotient.mk _ a, rfl⟩
+    obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (v i)
+    exact ⟨Ideal.Quotient.mk _ a, ha⟩
   choose w hw using this
   exact ⟨w, funext hw⟩
 
@@ -200,9 +192,10 @@ pro-étale ones, being pro-étale locally surjective, and the comparison pullbac
 lemma epi_integralCocycleTower_map (hγ : IsIntegralCocycle f γ) {k k' : ℕ} (h : k' ≤ k) :
     Epi ((integralCocycleTower γ).map (homOfLE h).op) := by
   have : Epi ((proEtIntegralCocycleTower γ).map (homOfLE h).op) := by
-    have := isLocallySurjective_proEtTwistedModuleSheafMap
+    have : Sheaf.IsLocallySurjective ((proEtIntegralCocycleTower γ).map (homOfLE h).op) :=
+      isLocallySurjective_proEtTwistedModuleSheafMap
       (levelReduce_levelCocycleInt γ (leOfHom (homOfLE h)))
-      (hγ.isDescentCocycle_int k) (hγ.isDescentCocycle_int k') (levelReduce_surjective _)
+      (hγ.isDescentCocycle_int k) (levelReduce_surjective _)
     exact Sheaf.epi_of_isLocallySurjective _
   set e := comparisonUpperStarIntegralCocycleTowerIso hγ
   have hnat := e.hom.naturality (homOfLE h).op
@@ -221,7 +214,7 @@ lemma epi_integralCocycleTower_map (hγ : IsIntegralCocycle f γ) {k k' : ℕ} (
 /-- **The tower of an integral cocycle is an `ℓ`-adic tower.** -/
 noncomputable def integralCocycleTowerAdicTowerStructure (hγ : IsIntegralCocycle f γ) :
     AdicTowerStructure (integralCocycleTower γ) l where
-  ι n m := twistedModuleSheafMap (levelMul l N n m) (levelMul_levelCocycleInt γ n m)
+  ι n m := twistedModuleSheafMap (levelMul.{u} l N n m) (levelMul_levelCocycleInt γ n m)
   map_ι n m := by
     ext U σ
     refine Subtype.ext (funext fun x ↦ ?_)
@@ -231,7 +224,7 @@ noncomputable def integralCocycleTowerAdicTowerStructure (hγ : IsIntegralCocycl
     refine Subtype.ext (funext fun x ↦ ?_)
     exact levelReduce_levelMul n m _
   shortExact n m := by
-    refine ShortComplex.ShortExact.mk' ?_ ?_ (epi_integralCocycleTower_map hγ _)
+    refine ShortComplex.ShortExact.mk' ?_ ?_ (epi_integralCocycleTower_map hγ (Nat.le_add_left m n))
     · refine Sheaf.exact_of_sectionwise _ fun U ↦ ?_
       rw [ShortComplex.moduleCat_exact_iff]
       intro σ hσ
@@ -262,12 +255,16 @@ noncomputable def integralCocycleTowerObjIso (k : ℕ) :
         (levelTwistedModuleSheaf f γ k) :=
   (fullyFaithfulSheafToPresheaf _ _).preimageIso
     (NatIso.ofComponents (fun U ↦ LinearEquiv.toModuleIso
+      (X₁ := ((integralCocycleTower γ).obj (op k)).obj.obj U)
+      (X₂ := ((Sheaf.restrictScalars Y.smallEtaleTopology (Ideal.Quotient.mk (towerIdeal.{u} l k))).obj
+        (levelTwistedModuleSheaf f γ k)).obj.obj U)
       { toFun σ := ⟨σ.1, σ.2⟩
         invFun σ := ⟨σ.1, σ.2⟩
         map_add' _ _ := rfl
-        map_smul' _ _ := rfl
+        map_smul' a σ := Subtype.ext (funext fun x ↦ funext fun i ↦ Algebra.smul_def a (σ.1 x i))
         left_inv _ := rfl
-        right_inv _ := rfl }) fun _ ↦ rfl)
+        right_inv _ := rfl })
+      fun _ ↦ rfl)
 
 variable [WeaklyEtale f] [Surjective f] [QuasiCompact f] [QuasiSeparatedSpace Y]
 

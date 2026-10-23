@@ -139,10 +139,10 @@ noncomputable def integralCocycleTower :
   obj k := twistedModuleSheaf f (levelCocycleInt γ k.unop)
   map h := twistedModuleSheafMap (levelReduce l N (leOfHom h.unop))
     (levelReduce_levelCocycleInt γ (leOfHom h.unop))
-  map_id k := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ ModuleCat.hom_ext
-    (LinearMap.ext fun σ ↦ Subtype.ext (funext fun x ↦ levelReduce_id _))))
-  map_comp h h' := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ ModuleCat.hom_ext
-    (LinearMap.ext fun σ ↦ Subtype.ext (funext fun x ↦ (levelReduce_comp _ _ _).symm))))
+  map_id _ := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun _ ↦ ModuleCat.hom_ext
+    (LinearMap.ext fun _ ↦ Subtype.ext (funext fun _ ↦ levelReduce_id _))))
+  map_comp _ _ := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun _ ↦ ModuleCat.hom_ext
+    (LinearMap.ext fun _ ↦ Subtype.ext (funext fun _ ↦ (levelReduce_comp _ _ _).symm))))
 
 /-- **The pro-étale tower of an integral cocycle.** -/
 noncomputable def proEtIntegralCocycleTower :
@@ -150,10 +150,10 @@ noncomputable def proEtIntegralCocycleTower :
   obj k := proEtTwistedModuleSheaf f (levelCocycleInt γ k.unop)
   map h := proEtTwistedModuleSheafMap (levelReduce l N (leOfHom h.unop))
     (levelReduce_levelCocycleInt γ (leOfHom h.unop))
-  map_id k := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ ModuleCat.hom_ext
-    (LinearMap.ext fun σ ↦ Subtype.ext (funext fun x ↦ levelReduce_id _))))
-  map_comp h h' := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ ModuleCat.hom_ext
-    (LinearMap.ext fun σ ↦ Subtype.ext (funext fun x ↦ (levelReduce_comp _ _ _).symm))))
+  map_id _ := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun _ ↦ ModuleCat.hom_ext
+    (LinearMap.ext fun _ ↦ Subtype.ext (funext fun _ ↦ levelReduce_id _))))
+  map_comp _ _ := ObjectProperty.hom_ext _ (NatTrans.ext (funext fun _ ↦ ModuleCat.hom_ext
+    (LinearMap.ext fun _ ↦ Subtype.ext (funext fun _ ↦ (levelReduce_comp _ _ _).symm))))
 
 variable {γ}
 
@@ -166,7 +166,7 @@ noncomputable def comparisonUpperStarIntegralCocycleTowerIso [QuasiCompact f] [Q
     @asIso _ _ _ _ (comparisonUpperStarTwistedModuleSheafHom f (levelCocycleInt γ k.unop))
       (isIso_comparisonUpperStarTwistedModuleSheafHom f (levelCocycleInt γ k.unop)
         (hγ.isDescentCocycle_int k.unop)))
-    fun h ↦ comparisonUpperStar_map_twistedModuleSheafMap_comp _ _
+    fun _ ↦ comparisonUpperStar_map_twistedModuleSheafMap_comp _ _
 
 end Tower
 
