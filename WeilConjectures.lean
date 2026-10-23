@@ -12380,6 +12380,7 @@ public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FibreCoherence
+public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
