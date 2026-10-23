@@ -1,295 +1,261 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Weil conjectures project. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Weil conjectures project
 -/
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-
-/-!
-# Functoriality of the base change morphism of bounded below right derived functors
-
-For a square `e : G ⋙ γ ⟶ β ⋙ G'` with `β`, `γ` exact, `Functor.rightDerivedFunctorPlusBaseChange`
-is the base change morphism `R⁺G ⋙ γ⁺ ⟶ β⁺ ⋙ R⁺G'`. We record two of its functoriality
-properties:
-
-- `Functor.rightDerivedFunctorPlusBaseChange_naturality`: it is natural in the exact functors
-  `β` and `γ`, for isomorphisms `γ ≅ γ₂`, `β ≅ β₂` compatible with the squares;
-- `Functor.rightDerivedFunctorPlusBaseChange_paste`: the base change morphism of two squares
-  pasted along `G'` (`Functor.baseChangePaste`) is the composite of the two base change
-  morphisms, modulo `Functor.mapDerivedCategoryPlusCompIso`.
-
-Both are proved by the uniqueness of natural transformations out of a right derived functor
-(`Functor.rightDerived_ext`), the base change morphism being computed on complexes by
-`Functor.rightDerivedFunctorPlusBaseChange_fac_app`.
--/
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 
 @[expose] public section
 
+/-!
+# Base change for bounded below right derived functors: identity and composition
+
+The base change morphism `R⁺G ⋙ γ⁺ ⟶ β⁺ ⋙ R⁺G'` of
+`CategoryTheory.Functor.rightDerivedFunctorPlusBaseChange` is compatible with the identity and
+composition isomorphisms of bounded below right derived functors:
+
+- `CategoryTheory.Functor.rightDerivedFunctorPlusBaseChange_comp`: the base change morphism of a
+  pasted square is the pasting of the base change morphisms, modulo the composition isomorphisms
+  `Functor.rightDerivedFunctorPlusCompIso'`;
+- `CategoryTheory.Functor.rightDerivedFunctorPlusBaseChange_id`: for a square whose horizontal
+  functors are identified with identity functors, the base change morphism is the composite of
+  the induced identifications `R⁺G ≅ 𝟭`.
+
+Both are proved by the uniqueness of morphisms out of a right derived functor
+(`CategoryTheory.Functor.rightDerived_ext`), comparing the two sides after precomposition with
+the unit.
+-/
+
 open CategoryTheory Category Limits
 
-namespace CategoryTheory.NatTrans
-
-variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
-  [Preadditive C] [Preadditive D] [Preadditive E]
-
-/-- `NatTrans.mapHomotopyCategoryPlus` of a right whiskering is the image of
-`NatTrans.mapHomotopyCategoryPlus`, modulo `Functor.mapHomotopyCategoryPlusCompIso`. -/
-lemma mapHomotopyCategoryPlusCompIso_whiskerRight_app {F₁ F₂ : C ⥤ D} [F₁.Additive] [F₂.Additive]
-    (τ : F₁ ⟶ F₂) (G : D ⥤ E) [G.Additive] (K : HomotopyCategory.Plus C) :
-    (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F₁ ⋙ G))).hom.app K ≫
-        (NatTrans.mapHomotopyCategoryPlus (Functor.whiskerRight τ G)).app K =
-      G.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus τ).app K) ≫
-        (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F₂ ⋙ G))).hom.app K := by
-  rw [Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app]
-  apply (HomotopyCategory.Plus.ι E).map_injective
-  obtain ⟨⟨X⟩, hK⟩ := K
-  rw [Functor.map_comp, Functor.map_comp, ι_map_mapHomotopyCategoryPlus_app]
-  erw [Functor.map_id, Functor.map_id, id_comp, comp_id]
-  have h : (HomotopyCategory.Plus.ι E).map (G.mapHomotopyCategoryPlus.map
-      ((NatTrans.mapHomotopyCategoryPlus τ).app ⟨⟨X⟩, hK⟩)) =
-      (G.mapHomotopyCategory _).map ((HomotopyCategory.Plus.ι D).map
-        ((NatTrans.mapHomotopyCategoryPlus τ).app ⟨⟨X⟩, hK⟩)) := rfl
-  rw [h, ι_map_mapHomotopyCategoryPlus_app]
-  rfl
-
-/-- `NatTrans.mapHomotopyCategoryPlus` of a left whiskering, modulo the composition
-isomorphisms `Functor.mapHomotopyCategoryPlusCompIso`. -/
-lemma mapHomotopyCategoryPlusCompIso_whiskerLeft_app (F : C ⥤ D) [F.Additive] {G₁ G₂ : D ⥤ E}
-    [G₁.Additive] [G₂.Additive] (τ : G₁ ⟶ G₂) (K : HomotopyCategory.Plus C) :
-    (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G₁))).hom.app K ≫
-        (NatTrans.mapHomotopyCategoryPlus (Functor.whiskerLeft F τ)).app K =
-      (NatTrans.mapHomotopyCategoryPlus τ).app (F.mapHomotopyCategoryPlus.obj K) ≫
-        (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G₂))).hom.app K := by
-  rw [Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app]
-  apply (HomotopyCategory.Plus.ι E).map_injective
-  obtain ⟨⟨X⟩, hK⟩ := K
-  rw [Functor.map_comp, Functor.map_comp, ι_map_mapHomotopyCategoryPlus_app,
-    ι_map_mapHomotopyCategoryPlus_app]
-  erw [Functor.map_id, Functor.map_id, id_comp, comp_id]
-  rfl
-
-variable {E' : Type*} [Category* E'] [Preadditive E']
-
-/-- `NatTrans.mapHomotopyCategoryPlus` sends an associator to the identity. -/
-lemma mapHomotopyCategoryPlus_associator_hom_app (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E')
-    [F.Additive] [G.Additive] [H.Additive] (K : HomotopyCategory.Plus C) :
-    (NatTrans.mapHomotopyCategoryPlus (Functor.associator F G H).hom).app K = 𝟙 _ := by
-  apply (HomotopyCategory.Plus.ι E').map_injective
-  obtain ⟨⟨X⟩, hK⟩ := K
-  rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
-  erw [CategoryTheory.Functor.map_id]
-  change (HomotopyCategory.quotient _ _).map _ = 𝟙 ((HomotopyCategory.quotient _ _).obj _)
-  rw [← (HomotopyCategory.quotient _ _).map_id]
-  congr 1
-
-/-- `NatTrans.mapHomotopyCategoryPlus` sends the inverse of an associator to the identity. -/
-lemma mapHomotopyCategoryPlus_associator_inv_app (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E')
-    [F.Additive] [G.Additive] [H.Additive] (K : HomotopyCategory.Plus C) :
-    (NatTrans.mapHomotopyCategoryPlus (Functor.associator F G H).inv).app K = 𝟙 _ := by
-  apply (HomotopyCategory.Plus.ι E').map_injective
-  obtain ⟨⟨X⟩, hK⟩ := K
-  rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
-  erw [CategoryTheory.Functor.map_id]
-  change (HomotopyCategory.quotient _ _).map _ = 𝟙 ((HomotopyCategory.quotient _ _).obj _)
-  rw [← (HomotopyCategory.quotient _ _).map_id]
-  congr 1
-
-end CategoryTheory.NatTrans
-
 namespace CategoryTheory.Functor
 
-section
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
 
-variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Category* C']
-  [Abelian B] [Abelian B'] [Abelian C] [Abelian C']
-  [HasDerivedCategory B] [HasDerivedCategory B'] [HasDerivedCategory C] [HasDerivedCategory C']
-  [EnoughInjectives B] [EnoughInjectives B']
-  {G : B ⥤ C} {G' : B' ⥤ C'} {β : B ⥤ B'} {γ : C ⥤ C'}
-  [G.Additive] [G'.Additive] [β.Additive] [γ.Additive]
+variable {B C D B' C' D' : Type*} [Category* B] [Category* C] [Category* D] [Category* B']
+  [Category* C'] [Category* D'] [Abelian B] [Abelian C] [Abelian D] [Abelian B'] [Abelian C']
+  [Abelian D'] [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]
+  [HasDerivedCategory B'] [HasDerivedCategory C'] [HasDerivedCategory D']
+  [EnoughInjectives B] [EnoughInjectives C] [EnoughInjectives B'] [EnoughInjectives C']
+  {G₁ : B ⥤ C} {G₂ : C ⥤ D} {H : B ⥤ D} {G₁' : B' ⥤ C'} {G₂' : C' ⥤ D'} {H' : B' ⥤ D'}
+  {β : B ⥤ B'} {γ : C ⥤ C'} {δ : D ⥤ D'}
+  [G₁.Additive] [G₂.Additive] [H.Additive] [G₁'.Additive] [G₂'.Additive] [H'.Additive]
+  [β.Additive] [γ.Additive] [δ.Additive]
   [PreservesFiniteLimits β] [PreservesFiniteColimits β]
   [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
+  [PreservesFiniteLimits δ] [PreservesFiniteColimits δ]
+  [G₁.PreservesInjectiveObjects] [G₁'.PreservesInjectiveObjects]
 
-/-- The base change morphism on the image of a bounded below complex `K`: it is computed by
-`e` and the unit of the right derived functor of `G'`. -/
+/-- The unit of `R⁺H` followed by the inverse of the composition isomorphism
+`R⁺F ⋙ R⁺G ≅ R⁺H` is `e⁻¹` followed by the composite unit. -/
 @[reassoc]
-lemma rightDerivedFunctorPlusBaseChange_fac_app (e : G ⋙ γ ⟶ β ⋙ G')
-    (K : HomotopyCategory.Plus B) :
-    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnit.app K) ≫
-        (rightDerivedFunctorPlusBaseChange e).app (DerivedCategory.Plus.Qh.obj K) =
-      γ.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj K) ≫
-        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e).app K) ≫
-        G'.rightDerivedFunctorPlusUnit.app (β.mapHomotopyCategoryPlus.obj K) ≫
-        G'.rightDerivedFunctorPlus.map (β.mapDerivedCategoryPlusFactorsh.inv.app K) := by
-  have h := congr_app (rightDerivedFunctorPlusBaseChange_fac e) K
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.whiskerLeft_app, comp_id] at h
-  refine h.trans ?_
-  simp only [rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app, id_comp, comp_id]
-  simp
+lemma rightDerivedFunctorPlusUnit_app_comp_rightDerivedFunctorPlusCompIso'_inv_app
+    {C D E : Type*} [Category* C] [Category* D] [Category* E] [Abelian C] [Abelian D]
+    [Abelian E] [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [EnoughInjectives C] [EnoughInjectives D] (F : C ⥤ D) (G : D ⥤ E) {H : C ⥤ E}
+    [F.Additive] [G.Additive] [H.Additive] [F.PreservesInjectiveObjects] (e : F ⋙ G ≅ H)
+    (M : HomotopyCategory.Plus C) :
+    H.rightDerivedFunctorPlusUnit.app M ≫
+        (rightDerivedFunctorPlusCompIso' F G e).inv.app (DerivedCategory.Plus.Qh.obj M) =
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e.inv).app M) ≫
+        (rightDerivedFunctorPlusCompUnit F G).app M := by
+  have hf := congr_app (rightDerivedFunctorPlusCompIso'_fac F G e) M
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at hf
+  rw [← cancel_mono ((rightDerivedFunctorPlusCompIso' F G e).hom.app
+    (DerivedCategory.Plus.Qh.obj M)), Category.assoc, Category.assoc, hf]
+  simp only [← Category.assoc, ← Functor.map_comp,
+    ← NatTrans.comp_app, ← NatTrans.mapHomotopyCategoryPlus_comp, Iso.inv_hom_id,
+    NatTrans.mapHomotopyCategoryPlus_id, NatTrans.id_app, Functor.map_id]
+  exact (Category.comp_id _).trans (Category.id_comp _).symm
 
-variable {β₂ : B ⥤ B'} {γ₂ : C ⥤ C'} [β₂.Additive] [γ₂.Additive]
-  [PreservesFiniteLimits β₂] [PreservesFiniteColimits β₂]
-  [PreservesFiniteLimits γ₂] [PreservesFiniteColimits γ₂]
-
-/-- **Naturality of the base change morphism** in the exact functors: if `u : γ ≅ γ₂` and
-`v : β ≅ β₂` relate the squares `e` and `e₂`, then the base change morphisms of `e` and `e₂`
-are related by the induced isomorphisms `γ⁺ ≅ γ₂⁺` and `β⁺ ≅ β₂⁺`. -/
-lemma rightDerivedFunctorPlusBaseChange_naturality (e : G ⋙ γ ⟶ β ⋙ G')
-    (e₂ : G ⋙ γ₂ ⟶ β₂ ⋙ G') (u : γ ≅ γ₂) (v : β ≅ β₂)
-    (h : e ≫ Functor.whiskerRight v.hom G' = Functor.whiskerLeft G u.hom ≫ e₂)
+/-- **Base change and composition.** Given squares `e₁ : G₁ ⋙ γ ⟶ β ⋙ G₁'` and
+`e₂ : G₂ ⋙ δ ⟶ γ ⋙ G₂'` and a square `e : H ⋙ δ ⟶ β ⋙ H'` which is their pasting modulo
+isomorphisms `G₁ ⋙ G₂ ≅ H` and `G₁' ⋙ G₂' ≅ H'`, the base change morphism of `e` is the
+pasting of those of `e₁` and `e₂`, modulo the composition isomorphisms of the right derived
+functors. -/
+theorem rightDerivedFunctorPlusBaseChange_comp (eH : G₁ ⋙ G₂ ≅ H) (eH' : G₁' ⋙ G₂' ≅ H')
+    (e₁ : G₁ ⋙ γ ⟶ β ⋙ G₁') (e₂ : G₂ ⋙ δ ⟶ γ ⋙ G₂') (e : H ⋙ δ ⟶ β ⋙ H')
+    (h : ∀ X : B, δ.map (eH.inv.app X) ≫ e₂.app (G₁.obj X) ≫ G₂'.map (e₁.app X) =
+      e.app X ≫ eH'.inv.app (β.obj X))
     (K : DerivedCategory.Plus B) :
-    (rightDerivedFunctorPlusBaseChange e).app K ≫
-        G'.rightDerivedFunctorPlus.map ((mapDerivedCategoryPlusNatIso v).hom.app K) =
-      (mapDerivedCategoryPlusNatIso u).hom.app (G.rightDerivedFunctorPlus.obj K) ≫
-        (rightDerivedFunctorPlusBaseChange e₂).app K := by
-  suffices key : rightDerivedFunctorPlusBaseChange e ≫
-      Functor.whiskerRight (mapDerivedCategoryPlusNatIso v).hom G'.rightDerivedFunctorPlus =
-      Functor.whiskerLeft G.rightDerivedFunctorPlus (mapDerivedCategoryPlusNatIso u).hom ≫
-        rightDerivedFunctorPlusBaseChange e₂ from congr_app key K
-  refine Functor.rightDerived_ext _ (Functor.whiskerRight G.rightDerivedFunctorPlusUnit
-    γ.mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom)
-    (HomotopyCategory.Plus.quasiIso B) _ _ _ (NatTrans.ext (funext fun K => ?_))
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, comp_id, Functor.comp_obj]
-  -- the components of `e` and `e₂` on `K`, related by `h`
-  have hK : (NatTrans.mapHomotopyCategoryPlus e).app K ≫
-      G'.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus v.hom).app K) =
-      (NatTrans.mapHomotopyCategoryPlus u.hom).app (G.mapHomotopyCategoryPlus.obj K) ≫
-        (NatTrans.mapHomotopyCategoryPlus e₂).app K := by
-    have h₁ := congr_app (congrArg NatTrans.mapHomotopyCategoryPlus h) K
-    simp only [NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.comp_app] at h₁
-    have h₂ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerRight_app v.hom G' K
-    have h₃ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerLeft_app G u.hom K
-    rw [Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
-      Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app] at h₂ h₃
-    erw [id_comp, comp_id] at h₂ h₃
-    rw [h₂, h₃] at h₁
-    exact h₁
-  have hv : β.mapDerivedCategoryPlusFactorsh.inv.app K ≫
-      (mapDerivedCategoryPlusNatIso v).hom.app (DerivedCategory.Plus.Qh.obj K) =
-      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus v.hom).app K) ≫
-        β₂.mapDerivedCategoryPlusFactorsh.inv.app K := by
-    rw [← cancel_epi (β.mapDerivedCategoryPlusFactorsh.hom.app K),
-      ← cancel_mono (β₂.mapDerivedCategoryPlusFactorsh.hom.app K)]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
-    exact (mapDerivedCategoryPlusNatIso_hom_app_factorsh v K).trans (by erw [comp_id])
-  have hu := (mapDerivedCategoryPlusNatIso u).hom.naturality
-    (G.rightDerivedFunctorPlusUnit.app K)
-  have hu' := mapDerivedCategoryPlusNatIso_hom_app_factorsh u (G.mapHomotopyCategoryPlus.obj K)
-  have hη := G'.rightDerivedFunctorPlusUnit.naturality
-    ((NatTrans.mapHomotopyCategoryPlus v.hom).app K)
-  simp only [Functor.comp_obj, Functor.comp_map] at hu hη
-  simp only [rightDerivedFunctorPlusBaseChange_fac_app_assoc, reassoc_of% hu,
-    rightDerivedFunctorPlusBaseChange_fac_app, reassoc_of% hu']
-  simp only [← Functor.map_comp, hv]
-  simp only [Functor.map_comp, ← reassoc_of% hη]
-  simp only [← Functor.map_comp_assoc, hK]
+    δ.mapDerivedCategoryPlus.map ((rightDerivedFunctorPlusCompIso' G₁ G₂ eH).inv.app K) ≫
+        (rightDerivedFunctorPlusBaseChange e₂).app (G₁.rightDerivedFunctorPlus.obj K) ≫
+        G₂'.rightDerivedFunctorPlus.map ((rightDerivedFunctorPlusBaseChange e₁).app K) =
+      (rightDerivedFunctorPlusBaseChange e).app K ≫
+        (rightDerivedFunctorPlusCompIso' G₁' G₂' eH').inv.app
+          (β.mapDerivedCategoryPlus.obj K) := by
+  let L : H.rightDerivedFunctorPlus ⋙ δ.mapDerivedCategoryPlus ⟶
+      β.mapDerivedCategoryPlus ⋙ G₁'.rightDerivedFunctorPlus ⋙ G₂'.rightDerivedFunctorPlus :=
+    Functor.whiskerRight (rightDerivedFunctorPlusCompIso' G₁ G₂ eH).inv
+        δ.mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft G₁.rightDerivedFunctorPlus (rightDerivedFunctorPlusBaseChange e₂) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (rightDerivedFunctorPlusBaseChange e₁) G₂'.rightDerivedFunctorPlus ≫
+      (Functor.associator _ _ _).hom
+  let R : H.rightDerivedFunctorPlus ⋙ δ.mapDerivedCategoryPlus ⟶
+      β.mapDerivedCategoryPlus ⋙ G₁'.rightDerivedFunctorPlus ⋙ G₂'.rightDerivedFunctorPlus :=
+    rightDerivedFunctorPlusBaseChange e ≫
+      Functor.whiskerLeft β.mapDerivedCategoryPlus
+        (rightDerivedFunctorPlusCompIso' G₁' G₂' eH').inv
+  have heq : L = R := by
+    apply Functor.rightDerived_ext (H.rightDerivedFunctorPlus ⋙ δ.mapDerivedCategoryPlus)
+      (Functor.whiskerRight H.rightDerivedFunctorPlusUnit δ.mapDerivedCategoryPlus ≫
+        (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B)
+    apply NatTrans.ext
+    funext M
+    have he := congr_app (rightDerivedFunctorPlusBaseChange_fac e) M
+    have he₁ := congr_app (rightDerivedFunctorPlusBaseChange_fac e₁) M
+    have he₂ := congr_app (rightDerivedFunctorPlusBaseChange_fac e₂)
+      (G₁.mapHomotopyCategoryPlus.obj M)
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      Functor.associator_hom_app, Category.comp_id, Functor.comp_obj] at he he₁ he₂
+    have hc := rightDerivedFunctorPlusUnit_app_comp_rightDerivedFunctorPlusCompIso'_inv_app
+      G₁ G₂ eH M
+    have hc' := rightDerivedFunctorPlusUnit_app_comp_rightDerivedFunctorPlusCompIso'_inv_app
+      G₁' G₂' eH' (β.mapHomotopyCategoryPlus.obj M)
+    have hn₂ := (rightDerivedFunctorPlusBaseChange e₂).naturality
+      (G₁.rightDerivedFunctorPlusUnit.app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hn₂
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id, Functor.comp_obj, L, R,
+      Category.assoc]
+    rw [reassoc_of% he, ← D+(δ).map_comp_assoc, hc, rightDerivedFunctorPlusCompUnit_app]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% hn₂, reassoc_of% he₂, ← R+(G₂').map_comp, he₁]
+    simp only [rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
+      whiskerRight_app, whiskerLeft_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+      Functor.map_comp, Category.assoc, mapHomotopyCategoryPlusCompIso_refl_hom_app,
+      mapHomotopyCategoryPlusCompIso_refl_inv_app, Functor.map_id, Functor.comp_obj]
+    have hRn := (rightDerivedFunctorPlusCompIso' G₁' G₂' eH').inv.naturality
+      (β.mapDerivedCategoryPlusFactorsh.inv.app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hRn
+    rw [hRn, reassoc_of% hc', rightDerivedFunctorPlusCompUnit_app]
+    have hδ := δ.mapDerivedCategoryPlusFactorsh.hom.naturality
+      ((NatTrans.mapHomotopyCategoryPlus eH.inv).app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hδ
+    erw [reassoc_of% hδ]
+    have hcancel : R+(G₂').map (γ.mapDerivedCategoryPlusFactorsh.inv.app
+          (G₁.mapHomotopyCategoryPlus.obj M)) ≫
+        R+(G₂').map (γ.mapDerivedCategoryPlusFactorsh.hom.app
+          (G₁.mapHomotopyCategoryPlus.obj M)) = 𝟙 _ := by
+      rw [← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id]
+    rw [reassoc_of% hcancel]
+    have hu := G₂'.rightDerivedFunctorPlusUnit.naturality
+      ((NatTrans.mapHomotopyCategoryPlus e₁).app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hu
+    erw [← reassoc_of% hu]
+    let l : H ⋙ δ ⟶ β ⋙ G₁' ⋙ G₂' :=
+      Functor.whiskerRight eH.inv δ ≫ Functor.whiskerLeft G₁ e₂ ≫ Functor.whiskerRight e₁ G₂'
+    let r : H ⋙ δ ⟶ β ⋙ G₁' ⋙ G₂' := e ≫ Functor.whiskerLeft β eH'.inv
+    have hlr : l = r := by
+      ext X
+      simpa [l, r] using h X
+    have hh : δ.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus eH.inv).app M) ≫
+          (NatTrans.mapHomotopyCategoryPlus e₂).app (G₁.mapHomotopyCategoryPlus.obj M) ≫
+          G₂'.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus e₁).app M) =
+        (NatTrans.mapHomotopyCategoryPlus e).app M ≫
+          (NatTrans.mapHomotopyCategoryPlus eH'.inv).app (β.mapHomotopyCategoryPlus.obj M) := by
+      have ht := congr_app (congrArg NatTrans.mapHomotopyCategoryPlus hlr) M
+      simp only [l, r, NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.comp_app] at ht
+      exact ht
+    have hqh := congrArg DerivedCategory.Plus.Qh.map hh
+    simp only [Functor.map_comp] at hqh
+    erw [reassoc_of% hqh]
+    simp only [Category.assoc]
+    rfl
+  simpa [L, R] using congr_app heq K
 
-end
+/-- The isomorphism `R⁺G ≅ 𝟭` induced by an isomorphism `G ≅ 𝟭` turns the unit of `R⁺G` into
+the levelwise image of the isomorphism. -/
+lemma rightDerivedFunctorPlusUnit_app_comp_natIso_trans_idIso_hom_app
+    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] [EnoughInjectives C]
+    {G : C ⥤ C} [G.Additive] (ε : G ≅ 𝟭 C) (M : HomotopyCategory.Plus C) :
+    G.rightDerivedFunctorPlusUnit.app M ≫
+        (rightDerivedFunctorPlusNatIso ε ≪≫ rightDerivedFunctorPlusIdIso C).hom.app
+          (DerivedCategory.Plus.Qh.obj M) =
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus ε.hom).app M) := by
+  have hn : (rightDerivedFunctorPlusNatIso ε).hom = rightDerivedFunctorPlusNatTrans ε.hom := rfl
+  rw [Iso.trans_hom, NatTrans.comp_app, hn, ← Category.assoc,
+    rightDerivedFunctorPlusNatTrans_app, Category.assoc, rightDerivedFunctorPlusIdIso_fac_app,
+    mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
+  erw [DerivedCategory.Plus.Qh.map_id, Category.comp_id]
 
-end CategoryTheory.Functor
+section Identity
 
-namespace CategoryTheory.Functor
+variable {B B' : Type*} [Category* B] [Category* B'] [Abelian B] [Abelian B']
+  [HasDerivedCategory B] [HasDerivedCategory B'] [EnoughInjectives B] [EnoughInjectives B']
+  {G : B ⥤ B} {G' : B' ⥤ B'} {β : B ⥤ B'} [G.Additive] [G'.Additive] [β.Additive]
+  [PreservesFiniteLimits β] [PreservesFiniteColimits β]
 
-section Paste
+/-- The base change morphism attached to a square whose horizontal functors are identified
+with identity functors is the composite of the induced identifications `R⁺G ≅ 𝟭`. -/
+theorem rightDerivedFunctorPlusBaseChange_id (ε : G ≅ 𝟭 B) (ε' : G' ≅ 𝟭 B')
+    (e : G ⋙ β ⟶ β ⋙ G') (h : ∀ X : B, e.app X = β.map (ε.hom.app X) ≫ ε'.inv.app (β.obj X))
+    (K : DerivedCategory.Plus B) :
+    (rightDerivedFunctorPlusBaseChange e).app K =
+      β.mapDerivedCategoryPlus.map
+          ((rightDerivedFunctorPlusNatIso ε ≪≫ rightDerivedFunctorPlusIdIso B).hom.app K) ≫
+        (rightDerivedFunctorPlusNatIso ε' ≪≫ rightDerivedFunctorPlusIdIso B').inv.app
+          (β.mapDerivedCategoryPlus.obj K) := by
+  let ι := rightDerivedFunctorPlusNatIso ε ≪≫ rightDerivedFunctorPlusIdIso B
+  let ι' := rightDerivedFunctorPlusNatIso ε' ≪≫ rightDerivedFunctorPlusIdIso B'
+  let R : G.rightDerivedFunctorPlus ⋙ β.mapDerivedCategoryPlus ⟶
+      β.mapDerivedCategoryPlus ⋙ G'.rightDerivedFunctorPlus :=
+    Functor.whiskerRight ι.hom β.mapDerivedCategoryPlus ≫
+      Functor.whiskerLeft β.mapDerivedCategoryPlus ι'.inv
+  have heq : rightDerivedFunctorPlusBaseChange e = R := by
+    apply Functor.rightDerived_ext (G.rightDerivedFunctorPlus ⋙ β.mapDerivedCategoryPlus)
+      (Functor.whiskerRight G.rightDerivedFunctorPlusUnit β.mapDerivedCategoryPlus ≫
+        (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B)
+    apply NatTrans.ext
+    funext M
+    have he := congr_app (rightDerivedFunctorPlusBaseChange_fac e) M
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      Functor.associator_hom_app, Category.comp_id, Functor.comp_obj] at he
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, Functor.associator_hom_app,
+      Category.comp_id, Functor.comp_obj, R]
+    rw [he, ← D+(β).map_comp_assoc]
+    erw [rightDerivedFunctorPlusUnit_app_comp_natIso_trans_idIso_hom_app ε M]
+    rw [← cancel_mono (ι'.hom.app (D+(β).obj (DerivedCategory.Plus.Qh.obj M))),
+      Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    simp only [rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
+      whiskerRight_app, whiskerLeft_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+      Category.assoc, mapHomotopyCategoryPlusCompIso_refl_hom_app,
+      mapHomotopyCategoryPlusCompIso_refl_inv_app, Functor.map_id, Functor.comp_obj]
+    have hn := ι'.hom.naturality (β.mapDerivedCategoryPlusFactorsh.inv.app M)
+    simp only [Functor.id_map, Functor.id_obj] at hn
+    erw [hn]
+    erw [reassoc_of% (rightDerivedFunctorPlusUnit_app_comp_natIso_trans_idIso_hom_app ε'
+      (β.mapHomotopyCategoryPlus.obj M))]
+    have hδ := β.mapDerivedCategoryPlusFactorsh.hom.naturality
+      ((NatTrans.mapHomotopyCategoryPlus ε.hom).app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hδ
+    rw [← cancel_mono (β.mapDerivedCategoryPlusFactorsh.hom.app M)]
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    erw [hδ]
+    erw [Category.comp_id]
+    have hlr : e ≫ Functor.whiskerLeft β ε'.hom = Functor.whiskerRight ε.hom β := by
+      ext X
+      simp [h X]
+    have hh : (NatTrans.mapHomotopyCategoryPlus e).app M ≫
+          (NatTrans.mapHomotopyCategoryPlus ε'.hom).app (β.mapHomotopyCategoryPlus.obj M) =
+        β.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus ε.hom).app M) := by
+      have ht := congr_app (congrArg NatTrans.mapHomotopyCategoryPlus hlr) M
+      simp only [NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.comp_app] at ht
+      exact ht
+    have hqh := congrArg DerivedCategory.Plus.Qh.map hh
+    simp only [Functor.map_comp] at hqh
+    erw [hqh]
+  exact congr_app heq K
 
-variable {B₁ B₂ B₃ C₁ C₂ C₃ : Type*} [Category* B₁] [Category* B₂] [Category* B₃]
-  [Category* C₁] [Category* C₂] [Category* C₃]
-  [Abelian B₁] [Abelian B₂] [Abelian B₃] [Abelian C₁] [Abelian C₂] [Abelian C₃]
-  [HasDerivedCategory B₁] [HasDerivedCategory B₂] [HasDerivedCategory B₃]
-  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory C₃]
-  [EnoughInjectives B₁] [EnoughInjectives B₂] [EnoughInjectives B₃]
-  {G₁ : B₁ ⥤ C₁} {G₂ : B₂ ⥤ C₂} {G₃ : B₃ ⥤ C₃} {β₁ : B₁ ⥤ B₂} {γ₁ : C₁ ⥤ C₂}
-  {β₂ : B₂ ⥤ B₃} {γ₂ : C₂ ⥤ C₃}
-  [G₁.Additive] [G₂.Additive] [G₃.Additive] [β₁.Additive] [γ₁.Additive]
-  [β₂.Additive] [γ₂.Additive]
-  [PreservesFiniteLimits β₁] [PreservesFiniteColimits β₁]
-  [PreservesFiniteLimits γ₁] [PreservesFiniteColimits γ₁]
-  [PreservesFiniteLimits β₂] [PreservesFiniteColimits β₂]
-  [PreservesFiniteLimits γ₂] [PreservesFiniteColimits γ₂]
-
-/-- The pasting of two squares `e₁ : G₁ ⋙ γ₁ ⟶ β₁ ⋙ G₂` and `e₂ : G₂ ⋙ γ₂ ⟶ β₂ ⋙ G₃`
-along `G₂`. -/
-def baseChangePaste (e₁ : G₁ ⋙ γ₁ ⟶ β₁ ⋙ G₂) (e₂ : G₂ ⋙ γ₂ ⟶ β₂ ⋙ G₃) :
-    G₁ ⋙ γ₁ ⋙ γ₂ ⟶ (β₁ ⋙ β₂) ⋙ G₃ :=
-  (Functor.associator G₁ γ₁ γ₂).inv ≫ Functor.whiskerRight e₁ γ₂ ≫
-    (Functor.associator β₁ G₂ γ₂).hom ≫ Functor.whiskerLeft β₁ e₂ ≫
-    (Functor.associator β₁ β₂ G₃).inv
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-/-- **Pasting law for the base change morphism**: the base change morphism of the pasting of
-`e₁` and `e₂` is the composite of `γ₂⁺` of the base change morphism of `e₁` with the base
-change morphism of `e₂`, modulo the composition isomorphisms of the exact functors. -/
-lemma rightDerivedFunctorPlusBaseChange_paste (e₁ : G₁ ⋙ γ₁ ⟶ β₁ ⋙ G₂)
-    (e₂ : G₂ ⋙ γ₂ ⟶ β₂ ⋙ G₃) (K : DerivedCategory.Plus B₁) :
-    (rightDerivedFunctorPlusBaseChange (baseChangePaste e₁ e₂)).app K ≫
-        G₃.rightDerivedFunctorPlus.map ((mapDerivedCategoryPlusCompIso β₁ β₂).hom.app K) =
-      (mapDerivedCategoryPlusCompIso γ₁ γ₂).hom.app (G₁.rightDerivedFunctorPlus.obj K) ≫
-        γ₂.mapDerivedCategoryPlus.map ((rightDerivedFunctorPlusBaseChange e₁).app K) ≫
-        (rightDerivedFunctorPlusBaseChange e₂).app (β₁.mapDerivedCategoryPlus.obj K) := by
-  suffices key : rightDerivedFunctorPlusBaseChange (baseChangePaste e₁ e₂) ≫
-      Functor.whiskerRight (mapDerivedCategoryPlusCompIso β₁ β₂).hom
-        G₃.rightDerivedFunctorPlus =
-      Functor.whiskerLeft G₁.rightDerivedFunctorPlus (mapDerivedCategoryPlusCompIso γ₁ γ₂).hom ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (rightDerivedFunctorPlusBaseChange e₁) γ₂.mapDerivedCategoryPlus ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft β₁.mapDerivedCategoryPlus (rightDerivedFunctorPlusBaseChange e₂) ≫
-        (Functor.associator _ _ _).inv by
-    simpa using congr_app key K
-  refine Functor.rightDerived_ext _ (Functor.whiskerRight G₁.rightDerivedFunctorPlusUnit
-    (γ₁ ⋙ γ₂).mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom)
-    (HomotopyCategory.Plus.quasiIso B₁) _ _ _ (NatTrans.ext (funext fun K => ?_))
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, comp_id, id_comp, Functor.comp_obj]
-  -- the components of the pasted square
-  have hK : (NatTrans.mapHomotopyCategoryPlus (baseChangePaste e₁ e₂)).app K =
-      γ₂.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus e₁).app K) ≫
-        (NatTrans.mapHomotopyCategoryPlus e₂).app (β₁.mapHomotopyCategoryPlus.obj K) := by
-    have h₂ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerRight_app e₁ γ₂ K
-    have h₃ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerLeft_app β₁ e₂ K
-    rw [Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
-      Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app] at h₂ h₃
-    erw [id_comp, comp_id] at h₂ h₃
-    simp only [baseChangePaste, NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.comp_app,
-      NatTrans.mapHomotopyCategoryPlus_associator_hom_app,
-      NatTrans.mapHomotopyCategoryPlus_associator_inv_app]
-    erw [id_comp, comp_id, id_comp, h₂, h₃]
-  have hβ : (β₁ ⋙ β₂).mapDerivedCategoryPlusFactorsh.inv.app K ≫
-      (mapDerivedCategoryPlusCompIso β₁ β₂).hom.app (DerivedCategory.Plus.Qh.obj K) =
-      β₂.mapDerivedCategoryPlusFactorsh.inv.app (β₁.mapHomotopyCategoryPlus.obj K) ≫
-        β₂.mapDerivedCategoryPlus.map (β₁.mapDerivedCategoryPlusFactorsh.inv.app K) := by
-    have h := mapDerivedCategoryPlusCompIso_hom_app_factorsh β₁ β₂ K
-    rw [← cancel_epi ((β₁ ⋙ β₂).mapDerivedCategoryPlusFactorsh.hom.app K)]
-    simp only [Iso.hom_inv_id_app_assoc]
-    simp only [← h, Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp,
-      Iso.hom_inv_id_app]
-    erw [Functor.map_id, comp_id]
-  have hγ := mapDerivedCategoryPlusCompIso_hom_app_factorsh γ₁ γ₂
-    (G₁.mapHomotopyCategoryPlus.obj K)
-  have hn := (mapDerivedCategoryPlusCompIso γ₁ γ₂).hom.naturality
-    (G₁.rightDerivedFunctorPlusUnit.app K)
-  have hbc := (rightDerivedFunctorPlusBaseChange e₂).naturality
-    (β₁.mapDerivedCategoryPlusFactorsh.inv.app K)
-  have hf := γ₂.mapDerivedCategoryPlusFactorsh.hom.naturality
-    ((NatTrans.mapHomotopyCategoryPlus e₁).app K)
-  simp only [Functor.comp_obj, Functor.comp_map] at hn hbc hf
-  simp only [rightDerivedFunctorPlusBaseChange_fac_app_assoc, reassoc_of% hn,
-    ← Functor.map_comp_assoc, rightDerivedFunctorPlusBaseChange_fac_app]
-  simp only [← Functor.map_comp, hβ]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [hbc, rightDerivedFunctorPlusBaseChange_fac_app_assoc]
-  erw [reassoc_of% hf, reassoc_of% hγ, hK, Functor.map_comp, Category.assoc]
-  rfl
-
-end Paste
+end Identity
 
 end CategoryTheory.Functor

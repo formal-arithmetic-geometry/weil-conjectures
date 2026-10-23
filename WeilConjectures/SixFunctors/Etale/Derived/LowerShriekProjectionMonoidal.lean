@@ -301,7 +301,9 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_associativity
       D((j)_!open[A]).map ((α_ _ _ _).hom ≫
           K ◁ inv (((leftDerivedUpperStarTensorComparison A j).app N).app N')) ≫
         ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app (N ⊗ N') := by
-    rw [← reassoc_of% h₀, Iso.inv_hom_id, Category.comp_id, Functor.map_comp, Category.assoc]
+    rw [← reassoc_of% h₀]
+    erw [Iso.inv_hom_id]
+    rw [Category.comp_id, Functor.map_comp, Category.assoc]
   rw [← derivedOpenImmersionLowerShriekProjectionIso_hom] at h
   rw [← cancel_mono (((derivedOpenImmersionLowerShriekProjectionIso A j).hom.app
       (K ⊗ L((j)^*[A]).obj N)).app N' ≫
@@ -314,6 +316,7 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_associativity
   simp only [Category.assoc, Iso.inv_hom_id_assoc, ← whiskerLeft_comp, IsIso.hom_inv_id,
     whiskerLeft_id]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_app, Category.comp_id]
+  rfl
 
 /-- **Unitality of the inverse projection formula** for an open immersion `j`: the composite
 `j_!K ⊗ᴸ Λ ⟶ j_!(K ⊗ᴸ Lj^*Λ) ≅ j_!(K ⊗ᴸ Λ) ≅ j_!K` of the inverse projection formula, the unit

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.AdicBaseChangeTower
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.TorsionSmoothBaseChange
+public import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 
 /-!
 # Adic, rational and `ℚ̄_ℓ`-coefficient smooth base change on the pro-étale site
@@ -61,29 +62,6 @@ namespace PadicAlgCl
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
 
-/-- The prime `ℓ` lies in the maximal ideal of the ring of integers `𝒪_E`. -/
-lemma natCast_mem_maximalIdeal_integers :
-    (l : integers l E) ∈ IsLocalRing.maximalIdeal (integers l E) := by
-  refine (IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 fun hu ↦ ?_)
-  obtain ⟨v, hv⟩ := hu.exists_right_inv
-  have h₁ : ‖algebraMap E (PadicAlgCl l) (v : E)‖₊ ≤ 1 := v.2
-  have h₂ : algebraMap E (PadicAlgCl l) (l : E) * algebraMap E (PadicAlgCl l) (v : E) = 1 := by
-    rw [← map_mul, ← map_one (algebraMap E (PadicAlgCl l))]
-    congr 1
-    exact_mod_cast congrArg (fun x : integers l E ↦ (x : E)) hv
-  have h₃ : ‖algebraMap E (PadicAlgCl l) (l : E)‖₊ = 1 / (l : NNReal) := by
-    rw [map_natCast]
-    exact valuation_p l
-  have h₄ := congrArg (‖·‖₊) h₂
-  simp only [nnnorm_mul, nnnorm_one, h₃] at h₄
-  have hl : (1 : NNReal) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
-  have : 1 / (l : NNReal) * ‖algebraMap E (PadicAlgCl l) (v : E)‖₊ < 1 :=
-    calc 1 / (l : NNReal) * ‖algebraMap E (PadicAlgCl l) (v : E)‖₊ ≤ 1 / (l : NNReal) * 1 :=
-          by gcongr
-      _ < 1 := by
-          rw [mul_one, div_lt_one (by positivity)]
-          exact hl
-  exact this.ne h₄
 
 /-- The prime `ℓ` lies in the maximal ideal `𝔪_E`, read inside the universe `u + 1` copy
 `Shrink 𝒪_E`. -/
