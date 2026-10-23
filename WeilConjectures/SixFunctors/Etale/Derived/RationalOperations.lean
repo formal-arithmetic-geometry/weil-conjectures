@@ -192,10 +192,10 @@ section InternalHom
 
 variable {X : Scheme.{u}} (K : 𝐃(X))
 
-local instance : ((derivedHom 𝐌 X).obj (op K)).CommShift ℤ :=
+noncomputable local instance : ((derivedHom 𝐌 X).obj (op K)).CommShift ℤ :=
   (derivedTensorHomAdjunction 𝐌 K).rightAdjointCommShift ℤ
 
-local instance : (derivedTensorHomAdjunction 𝐌 K).CommShift ℤ :=
+noncomputable local instance : (derivedTensorHomAdjunction 𝐌 K).CommShift ℤ :=
   (derivedTensorHomAdjunction 𝐌 K).commShift_of_leftAdjoint ℤ
 
 local instance : ((derivedHom 𝐌 X).obj (op K)).IsTriangulated :=
