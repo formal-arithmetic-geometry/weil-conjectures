@@ -64,6 +64,7 @@ namespace IsTransitionValues
 
 variable {ε} {γ : ↥(pullback f f) → GL (Fin n) E}
 
+omit [WeaklyEtale f] in
 /-- The inverses of the values of `γ` are the transition matrices `T(p₁, p₂)`. -/
 lemma inv_map (hγ : IsTransitionValues ε γ) (z : ↥(pullback f f)) :
     (((γ z)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E).map (algebraMap E (PadicAlgCl l)) =
@@ -96,6 +97,7 @@ lemma continuous_apply (hγ : IsTransitionValues ε γ) (i j : Fin n) :
     Continuous fun z ↦ ((γ z : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i j :=
   continuous_of_coe_eq _ fun z ↦ congrFun (congrFun (hγ z) i) j
 
+omit [WeaklyEtale f] in
 /-- The entries of the inverse of a cocycle with transition values are continuous. -/
 lemma continuous_inv_apply (hγ : IsTransitionValues ε γ) (i j : Fin n) :
     Continuous fun z ↦ (((γ z)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i j :=

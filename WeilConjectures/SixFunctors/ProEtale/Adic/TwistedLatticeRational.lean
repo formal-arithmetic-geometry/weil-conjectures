@@ -385,7 +385,12 @@ lemma toZModPow_upperStarIntegralCocycleLatticeXIso (hγ : IsIntegralCocycle f �
   have hn := NatTrans.naturality_apply g.hom q.op s
   have hm : frameSection f U.hom rfl ≫ pullbackMapRight f q.left (MorphismProperty.Over.w q) =
       (pullbackSymmetry T'.hom f).hom := by
-    apply pullback.hom_ext <;> simp [q, U] <;> exact Category.id_comp _
+    apply pullback.hom_ext
+    · simp [q, U]
+    · simp only [q, U, Functor.id_obj, Functor.comp_obj, Category.assoc, limit.lift_π,
+        PullbackCone.mk_π_app, limit.lift_π_assoc, Functor.const_obj_obj,
+        pullbackSymmetry_hom_comp_snd]
+      exact Category.id_comp (pullback.fst T'.hom f)
   have hpt := congrArg (fun φ ↦ φ.base u) hm
   simp only [Scheme.Hom.comp_apply] at hpt
   erw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply,

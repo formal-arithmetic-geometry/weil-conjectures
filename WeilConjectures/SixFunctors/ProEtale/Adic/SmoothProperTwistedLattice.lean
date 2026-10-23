@@ -24,8 +24,9 @@ Let `K` be a field, `Y` locally of finite type over `K`, `g : T ⟶ Y` smooth an
 a lisse `ℓ`-adic sheaf on `T`, trivialised on a pro-étale cover `f₀ : V ⟶ T` with transition
 cocycle `γ : V ×_T V → GL_n(E)` for a finite extension `E` of `ℚ_ℓ`. A *lattice* of `F` is a
 twisted section of the cocycle `γ` acting on the discrete set of `ℤ_ℓ`-lattices in `Eⁿ`, its
-compact open subgroups (`PadicAlgCl.CompactOpenLattice`). If `F` has a lattice, every `Hᵏ(Rg_* F[0])` is lisse
-(`AlgebraicGeometry.ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection`).
+compact open subgroups (`PadicAlgCl.CompactOpenLattice`). If `F` has a lattice, every
+`Hᵏ(Rg_* F[0])` is lisse
+(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection`).
 -/
 
 @[expose] public section
@@ -70,17 +71,17 @@ lemma nonempty_retract_descentSheaf_integralCocycleInvMatrix {T V : Scheme.{u}} 
     {γ : ↥(pullback f f) → GL (Fin n) E} (hγ : IsTransitionValues ε γ)
     {h : V → GL (Fin (latticeRank E n)) ℚ_[l]} (hh : IsLocallyConstant h)
     {γ' : ↥(pullback f f) → GL (Fin (latticeRank E n)) ℤ_[l]} (hγ' : IsIntegralCocycle f γ')
-    (hrel : ∀ z, (γ' z : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℤ_[l]).map (algebraMap ℤ_[l] ℚ_[l]) =
-      (((h ((pullback.fst f f).base z))⁻¹ : GL _ ℚ_[l]) : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l]) *
+    (hrel : ∀ z, (γ' z).val.map (algebraMap ℤ_[l] ℚ_[l]) =
+      (h ((pullback.fst f f).base z))⁻¹.val *
         restrictScalarsMatrix (γ z : Matrix (Fin n) (Fin n) E) *
-          (h ((pullback.snd f f).base z) : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l])) :
+          (h ((pullback.snd f f).base z)).val) :
     Nonempty (Retract (descentSheaf f (transitionMatrix ε (pullback.fst f f) (pullback.snd f f)
       pullback.condition)) (descentSheaf f (integralCocycleInvMatrix l hγ'))) := by
   set ιQ := algebraMap ℚ_[l] (PadicAlgCl l)
   set M : V → Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) (PadicAlgCl l) :=
-    fun v ↦ (h v : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l]).map ιQ
+    fun v ↦ (h v).val.map ιQ
   set Mi : V → Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) (PadicAlgCl l) :=
-    fun v ↦ (((h v)⁻¹ : GL _ ℚ_[l]) : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l]).map ιQ
+    fun v ↦ (h v)⁻¹.val.map ιQ
   have hM (v : V) : M v * Mi v = 1 := by
     simp only [M, Mi, ← Matrix.map_mul, ← Units.val_mul, mul_inv_cancel, Units.val_one,
       Matrix.map_one _ (map_zero _) (map_one _)]
@@ -89,7 +90,7 @@ lemma nonempty_retract_descentSheaf_integralCocycleInvMatrix {T V : Scheme.{u}} 
       Matrix.map_one _ (map_zero _) (map_one _)]
   -- the values of `γ'⁻¹`
   have hinv (z : ↥(pullback f f)) :
-      (((γ' z)⁻¹ : GL _ ℤ_[l]) : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℤ_[l]).map (padicIntToPadicAlgCl l) =
+      (γ' z)⁻¹.val.map (padicIntToPadicAlgCl l) =
         Mi ((pullback.snd f f).base z) *
           (restrictScalarsMatrix (((γ z)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E)).map ιQ *
             M ((pullback.fst f f).base z) := by
@@ -101,15 +102,15 @@ lemma nonempty_retract_descentSheaf_integralCocycleInvMatrix {T V : Scheme.{u}} 
     have hφ' : φ (γ' z)⁻¹ = (h ((pullback.snd f f).base z))⁻¹ *
         restrictScalarsGL E n (γ z)⁻¹ * h ((pullback.fst f f).base z) := by
       rw [map_inv, hφ, map_inv, mul_inv_rev, mul_inv_rev, inv_inv, mul_assoc]
-    have := congrArg (fun A : GL _ ℚ_[l] ↦ (A : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l]).map ιQ) hφ'
+    have := congrArg (fun A : GL (Fin (latticeRank E n)) ℚ_[l] ↦ A.val.map ιQ) hφ'
     simp only [Units.val_mul, Matrix.map_mul, coe_restrictScalarsGL] at this
     exact this
   set Γ₁ := transitionMatrix ε (pullback.fst f f) (pullback.snd f f) pullback.condition
   set Γ₂ := integralCocycleInvMatrix l hγ'
   set A := lfMatrixOfLocallyConstant (fun v ↦ Mi v * latticeP E n)
-    (hh.comp fun g ↦ (((g⁻¹ : GL _ ℚ_[l]) : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l]).map ιQ) * latticeP E n)
+    (hh.comp fun g ↦ g⁻¹.val.map ιQ * latticeP E n)
   set B := lfMatrixOfLocallyConstant (fun v ↦ latticeQ E n * M v)
-    (hh.comp fun g ↦ latticeQ E n * ((g : GL _ ℚ_[l]) : Matrix (Fin (latticeRank E n)) (Fin (latticeRank E n)) ℚ_[l]).map ιQ)
+    (hh.comp fun g ↦ latticeQ E n * g.val.map ιQ)
   have hA : Γ₂ * A.map (locallyFiniteFunctionsComp l (pullback.fst f f).base.hom) =
       A.map (locallyFiniteFunctionsComp l (pullback.snd f f).base.hom) * Γ₁ := by
     refine matrix_ext_locallyFiniteFunctionsEval fun z ↦ ?_

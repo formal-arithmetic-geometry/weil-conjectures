@@ -283,7 +283,7 @@ theorem exists_isIntegralCocycle_of_isTwistedSection
             Matrix (Fin n) (Fin n) E) * (h ((pullback.fst f f).base z) : 𝕄 ℚ_[l]) := by
       have := congrArg (fun A : GL (Fin (latticeRank E n)) ℚ_[l] ↦ (A⁻¹ : GL _ ℚ_[l]).val)
         (hmap z)
-      simp only [map_inv, γQ, _root_.mul_inv_rev, inv_inv] at this
+      simp only [γQ, _root_.mul_inv_rev, inv_inv] at this
       rw [← mul_assoc] at this
       exact this
     simp only [this]

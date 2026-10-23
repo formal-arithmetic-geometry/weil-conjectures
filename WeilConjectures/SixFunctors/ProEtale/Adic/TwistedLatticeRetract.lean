@@ -38,8 +38,8 @@ variable {l : ℕ} [Fact l.Prime] {X W : Scheme.{u}} (f : W ⟶ X) [WeaklyEtale 
 open PadicAlgCl
 
 set_option maxHeartbeats 2000000 in
-omit [WeaklyEtale f] in
 -- The kernel unfolds the composites of sheaf morphisms in the descent map.
+omit [WeaklyEtale f] in
 /-- **The adjoint of a trivialisation lands in the kernel of the descent map** of its transition
 matrix. -/
 lemma homEquiv_comp_descentMap_eq_zero {G : AdicSheaf l X} {n : ℕ}
