@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleUpperShriek
 
 /-!
 # The exceptional adjunction at the integral and rational stages
@@ -32,7 +32,7 @@ exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adju
   units and counits;
 * the rational `Rf_E^!` is computed by coefficient passage from the integral formula
   `Rf^! L ≅ 𝔻_X f^*_comp 𝔻_Y L` of `prop-coef-integral-exceptional-adjoint`
-  (`AlgebraicGeometry.Etale.nonempty_iso_boundedConstructibleRationalExceptionalInverseImage`).
+  (`AlgebraicGeometry.Etale.nonempty_iso_boundedConstructibleRationalUpperShriek`).
 
 ## Implementation notes
 
@@ -42,6 +42,12 @@ introduced as separate functors here, and the formula for `Rf_E^!` is stated on 
 from the integral stage, which are all the objects of `Dᵇc(X, E)`. The compatibilities of the
 identifications with evaluations, units and counits under finite scalar extension are not
 recorded.
+
+The exceptional inverse images at both stages are
+`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek` and
+`AlgebraicGeometry.Etale.boundedConstructibleRationalUpperShriek`. As there, the lower shrieks on
+`D(-_ét, Λ)` along `f` and the structure morphisms are assumed to be left adjoints, which is how
+`Rf^!` on `D(-_ét, Λ)` is defined.
 -/
 
 @[expose] public section
@@ -127,34 +133,21 @@ noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X
     have ⟨_, hϖ, hI⟩ := hϖI.out
     (boundedConstructibleIntegral_rightDerivedLowerShriek hϖ hI aX aY f hf hK).1
 
-variable (I) in
-/-- The exceptional inverse image `Rf^! : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)` at the integral stage, the
-restriction of `Rf^!`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`,
-blueprint `prop-coef-integral-exceptional-adjoint`). -/
-noncomputable abbrev boundedConstructibleIntegralExceptionalInverseImage
-    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
-    [HasCompactification aX] [HasCompactification aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    [QuasiCompact f] [HasCompactification f] :
-    (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory ⥤
-      (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory :=
-  ObjectProperty.liftFullSubcategory _ _ (R(f)^![ModuleCat.{u + 1} Λ]) fun _ hL ↦
-    have ⟨_, hϖ, hI⟩ := hϖI.out
-    boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aX aY f hf hL
-
 /-- Blueprint `lem-coef-rational-operations`, the integral exceptional adjunction: the adjunction
 `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the integral constructible categories
 (blueprint `prop-coef-integral-exceptional-adjoint`). -/
 noncomputable def boundedConstructibleIntegralLowerShriekUpperShriekAdjunction
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
-    [HasCompactification aX] [HasCompactification aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    [QuasiCompact f] [HasCompactification f] :
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
     boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf ⊣
-      boundedConstructibleIntegralExceptionalInverseImage I aX aY f hf :=
+      boundedConstructibleIntegralUpperShriek I aX aY f hf :=
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
+
 end Integral
 
 section Rational
@@ -164,14 +157,10 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
-  [HasCompactification aX] [HasCompactification aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-  [QuasiCompact f] [HasCompactification f]
-
-/-- The exceptional inverse image `Rf^!` is triangulated, being right adjoint to the triangulated
-`Rf_!` (`AlgebraicGeometry.Etale.isTriangulated_rightDerivedUpperShriek`). -/
-local instance {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
-    (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated :=
-  isTriangulated_rightDerivedUpperShriek f
+  [HasCompactification aX] [HasCompactification aY]
+  [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+  (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+  [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
 variable (I) in
 /-- The compact-support direct image `Rf_{!,E} : Dᵇc(X, E) ⥤ Dᵇc(Y, E)` at the rational stage,
@@ -179,13 +168,6 @@ induced by the integral `Rf_!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralRightDerivedLowerShriek`). -/
 noncomputable abbrev boundedConstructibleRationalRightDerivedLowerShriek :=
   Rationalization.map M (boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf)
-
-variable (I) in
-/-- The exceptional inverse image `Rf_E^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)` at the rational stage, induced
-by the integral `Rf^!`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegralExceptionalInverseImage`). -/
-noncomputable abbrev boundedConstructibleRationalExceptionalInverseImage :=
-  Rationalization.map M (boundedConstructibleIntegralExceptionalInverseImage I aX aY f hf)
 
 /-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
 exceptional inverse image, the adjunction.
@@ -198,7 +180,7 @@ localization (`CategoryTheory.Rationalization.mapAdjunction`) of the integral ad
 (`prop-coef-integral-exceptional-adjoint`). -/
 noncomputable def boundedConstructibleRationalLowerShriekUpperShriekAdjunction :
     boundedConstructibleRationalRightDerivedLowerShriek M I aX aY f hf ⊣
-      boundedConstructibleRationalExceptionalInverseImage M I aX aY f hf :=
+      boundedConstructibleRationalUpperShriek (M := M) I aX aY f hf :=
   Rationalization.mapAdjunction M
     (boundedConstructibleIntegralLowerShriekUpperShriekAdjunction (I := I) aX aY f hf)
 
@@ -214,7 +196,7 @@ isomorphisms on all reductions), the rational exceptional inverse image of the i
 `prop-coef-integral-exceptional-adjoint`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) under the
 localization functor; every object of `Dᵇc(Y, E)` is the image of some `L`. -/
-theorem nonempty_iso_boundedConstructibleRationalExceptionalInverseImage
+theorem nonempty_iso_boundedConstructibleRationalUpperShriek
     (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory)
     (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
       R(aX)^![ModuleCat.{u + 1} Λ])) (hωX : Pretriangulated.IsHomotopyLimit ωX)
@@ -227,7 +209,7 @@ theorem nonempty_iso_boundedConstructibleRationalExceptionalInverseImage
     (hφ : ∀ n : ℕ, IsIso ((reductionModIdeal Λ X (I ^ n)).map φ)) :
     ∃ hD : DerivedCategory.boundedConstructibleIntegral I X
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N.obj)).obj ωX.pt),
-      Nonempty ((boundedConstructibleRationalExceptionalInverseImage M I aX aY f hf).obj
+      Nonempty ((boundedConstructibleRationalUpperShriek (M := M) I aX aY f hf).obj
           ((Rationalization.Q M _).obj L) ≅
         (Rationalization.Q M _).obj ⟨_, hD⟩) := by
   obtain ⟨ϖ, hϖ, hI⟩ := hϖI.out

@@ -104,7 +104,7 @@ structure OrientationComparisonData where
   dimension `d`. -/
   upperShriekTateShift {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-    (e : ℤ) :
+    [HasInvertibleExponent Λ Y] (e : ℤ) :
     (R(f)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ Y e)⟦2 * e⟧) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X e)⟦2 * e⟧)).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f)
@@ -129,7 +129,7 @@ composition law. Compatibility of an orientation datum with composition says tha
 noncomputable def OrientationComparisonData.compIso (C : OrientationComparisonData Λ)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-    [HasCompactification g] [HasCompactification (f ≫ g)]
+    [HasInvertibleExponent Λ Y] [HasCompactification g] [HasCompactification (f ≫ g)]
     (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f)
     (γg : (tateObject Λ Y e)⟦(2 * e : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) g) :
     (tateObject Λ X (d + e : ℕ))⟦(2 * (d + e : ℕ) : ℤ)⟧ ≅

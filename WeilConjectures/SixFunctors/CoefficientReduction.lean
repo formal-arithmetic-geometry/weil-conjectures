@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
-public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
@@ -112,7 +112,9 @@ restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ I�
 that the comparisons preserve the units, counits and associativity maps out of which the
 projection map is built. The exceptional inverse image `Rf^!` (the right adjoint of `Rf_!`)
 commutes with reduction, and the reductions of the unit and counit of `Rf_! ⊣ Rf^!` are, as
-arrows, the restrictions of scalars of the unit and counit over `Λ ⧸ Iⁿ`. -/
+arrows, the restrictions of scalars of the unit and counit over `Λ ⧸ Iⁿ`; these are stated
+whenever `Rf_!` is a left adjoint over `Λ` and over `Λ ⧸ Iⁿ`, which is how `Rf^!` is defined
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriek`). -/
 structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ) (n : ℕ) :
     Prop where
   /-- Every object has a reduction modulo `Iⁿ`. -/
@@ -161,33 +163,38 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
   /-- The exceptional inverse image `Rf^!`, the right adjoint of `Rf_!`, commutes with
   reduction modulo `Iⁿ`. -/
   rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    [(R(f)_![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).IsLeftAdjoint]
     (L : 𝐃(Y, Λ)) (Ln : 𝐃(Y, Λ ⧸ I ^ n)) (η : L ⟶ 𝐑𝐞𝐬[Y, I, n].obj Ln)
     (hη : IsDerivedBaseChange η) :
-    ∃ θ : (CompactificationUpperShriek.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj L ⟶
-      𝐑𝐞𝐬[X, I, n].obj ((CompactificationUpperShriek.rightDerivedUpperShriek
-        (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).obj Ln),
+    ∃ θ : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ⟶
+      𝐑𝐞𝐬[X, I, n].obj ((R(f)^![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).obj Ln),
       IsDerivedBaseChange θ
   /-- The reduction of the counit `Rf_! Rf^! L ⟶ L` of `Rf_! ⊣ Rf^!` is the counit over
   `Λ ⧸ Iⁿ` at the reduction `L_n`. -/
   upperShriekCounit {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    [(R(f)_![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).IsLeftAdjoint]
     (L : 𝐃(Y, Λ)) (Ln : 𝐃(Y, Λ ⧸ I ^ n)) (η : L ⟶ 𝐑𝐞𝐬[Y, I, n].obj Ln)
     (hη : IsDerivedBaseChange η) :
     Nonempty (Arrow.mk ((reductionModIdeal Λ Y (I ^ n)).map
-        ((CompactificationUpperShriek.rightDerivedUpperShriekAdjunction
+        ((rightDerivedUpperShriekAdjunction
           (ModuleCat.{u + 1} Λ) f).counit.app L)) ≅
       Arrow.mk (𝐑𝐞𝐬[Y, I, n].map
-        ((CompactificationUpperShriek.rightDerivedUpperShriekAdjunction
+        ((rightDerivedUpperShriekAdjunction
           (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).counit.app Ln)))
   /-- The reduction of the unit `K ⟶ Rf^! Rf_! K` of `Rf_! ⊣ Rf^!` is the unit over `Λ ⧸ Iⁿ`
   at the reduction `K_n`. -/
   upperShriekUnit {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    [(R(f)_![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).IsLeftAdjoint]
     (K : 𝐃(X, Λ)) (Kn : 𝐃(X, Λ ⧸ I ^ n)) (η : K ⟶ 𝐑𝐞𝐬[X, I, n].obj Kn)
     (hη : IsDerivedBaseChange η) :
     Nonempty (Arrow.mk ((reductionModIdeal Λ X (I ^ n)).map
-        ((CompactificationUpperShriek.rightDerivedUpperShriekAdjunction
+        ((rightDerivedUpperShriekAdjunction
           (ModuleCat.{u + 1} Λ) f).unit.app K)) ≅
       Arrow.mk (𝐑𝐞𝐬[X, I, n].map
-        ((CompactificationUpperShriek.rightDerivedUpperShriekAdjunction
+        ((rightDerivedUpperShriekAdjunction
           (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).unit.app Kn)))
 
 /-- Compatibility of the derived base change along a ring morphism `φ : Λ →+* Λ'` with the basic
@@ -380,6 +387,8 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
       Sheaf.IsDerivedBaseChange θ
   /-- The exceptional inverse image commutes with reduction modulo `Iⁿ`. -/
   rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [(Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).IsLeftAdjoint]
+    [(Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).IsLeftAdjoint]
     (L : 𝐃(Y, Λ)) (Ln : 𝐃(Y, Λ ⧸ I ^ n)) (η : L ⟶ 𝐑𝐞𝐬[Y, I, n].obj Ln)
     (hη : Sheaf.IsDerivedBaseChange η) :
     ∃ θ : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ⟶

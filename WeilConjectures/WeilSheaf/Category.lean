@@ -161,17 +161,19 @@ noncomputable abbrev WeilComplex.objectProperty :
 
 end Frobenius
 
-/-- The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`
-(blueprint: `def-weil-weil-sheaf-complex`): constructible `ℓ`-adic sheaves `F` on the
-pro-étale site of the geometric fiber `X̄` with an isomorphism `Fr_X^* F ≅ F`, where `Fr_X` is
-the geometric Galois Frobenius of `X̄`. -/
+/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex.
+
+The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`: constructible
+`ℓ`-adic sheaves `F` on the pro-étale site of the geometric fiber `X̄` with an isomorphism
+`Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`. -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (WeilSheaf.objectProperty k₀ l X).FullSubcategory
 
-/-- The triangulated category of Weil complexes on a `k₀`-scheme `X`
-(blueprint: `def-weil-weil-sheaf-complex`): the objects of the derived category of pro-étale
-Weil sheaves on `X̄` which are bounded with constructible cohomology. -/
+/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex.
+
+The triangulated category of Weil complexes on a `k₀`-scheme `X`: the objects of the derived
+category of pro-étale Weil sheaves on `X̄` which are bounded with constructible cohomology. -/
 def WeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (WeilComplex.objectProperty k₀ l X).FullSubcategory

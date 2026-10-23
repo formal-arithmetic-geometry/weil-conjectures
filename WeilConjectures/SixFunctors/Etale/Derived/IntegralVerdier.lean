@@ -30,6 +30,10 @@ the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` is measured over `Λ`, after restrict
 restriction of an `A_n`-complex is the interval `[a + 1, b]` over `A_n`, and conversely `[α, β]`
 over `A_n` gives `[α - 1, β]` over `Λ`. The finite-stage dual interval `[-b - 2d, -a]` of the
 blueprint therefore reads `[-b - 2d - 1, -a - 1]` in this convention.
+
+The exceptional inverse image `Ra_X^!` over `Λ` is the right adjoint of `Ra_{X!}`, so it is defined
+under the hypothesis that `Ra_{X!}` is a left adjoint, taken as an instance argument (it is a
+theorem for torsion coefficients, `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`).
 -/
 
 @[expose] public section
@@ -80,6 +84,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [IsAlgClosed k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
+  [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
 include hϖ hI in
 /-- Blueprint `prop-coef-integral-dualizing`: The integral dualizing object and its adjunction.
