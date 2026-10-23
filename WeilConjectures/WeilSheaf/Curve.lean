@@ -50,10 +50,6 @@ attribute [local instance 1100] CategoryTheory.instOverClass
 
 attribute [local instance] Compactification.over
 
--- `Spec k₀` is over itself through the identity, not through `specOverSpec`: the instance search
--- would otherwise depend on the order in which the two instances were imported.
-attribute [local instance high] CategoryTheory.instOverClass
-
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
