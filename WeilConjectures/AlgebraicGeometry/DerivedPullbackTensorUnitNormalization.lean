@@ -57,6 +57,9 @@ private theorem inverse_unit_comparison
       L.map eX.hom ≫ ε ≫ eF.inv := by
   simp [Category.assoc]
 
+set_option maxHeartbeats 400000 in
+-- The unfolding of `derivedPullback_tensorUnitIso` against the lax unit of `Q` goes through
+-- the derived monoidal structure; it needs slightly more than the default budget.
 /-- Normalize the explicitly constructed unit comparison before any tensor comparison is used.
 Source: Stacks Project, Cohomology, Tag 079U, parent unit proof, step 1;
 the explicit construction in `derivedPullback_tensorUnitIso`.

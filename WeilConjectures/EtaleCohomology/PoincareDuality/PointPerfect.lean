@@ -171,7 +171,7 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
   have : IsNoetherianRing Λ := inferInstance
   have hK' : DerivedCategory.boundedConstructibleFiniteTor Λ c.Z
       ((R((c.i)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-    ⟨boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm N hN hNY hbc,
+    ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX c.g c.i c.comm.symm hbc,
       a, b + 2 * (d : ℤ),
       torAmplitudeIn_rightDerivedLowerStar _ aX c.g c.i c.comm.symm d hd a b N hN hNY hbc hta⟩
   exact (isPerfect_compactlySupportedGlobalSections Λ c.g _ hK').of_iso
@@ -354,7 +354,7 @@ instance the map to the derived completion of `Ra_! K`). Then `RΓ(Spec k, N)` i
 The reduction of `φ` is an isomorphism, so the reduction of `N` is
 `Ra_! K ⊗ᴸ Λ/I ≅ Ra_!(K ⊗ᴸ Λ/I)`, whose global sections are perfect by the finite stage
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero`. -/
-theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
+theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ} [Finite (Λ ⧸ I)]
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hϖI : I = Ideal.span {ϖ}) [IsAdicComplete (Ideal.span {ϖ}) Λ]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
     [HasCompactification aX]
@@ -400,8 +400,8 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
     rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
     exact hmΛ
   have : NeZero m := ⟨hm0.ne'⟩
-  exact (isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero Λ aX _ m
-    (nsmul_id_reductionModIdeal hmI K) hmk ⟨hK, a, b, hKt⟩).of_iso
+  exact (isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero Λ aX _ I m hmI
+    (fun _ hr ↦ smul_id_reductionModIdeal' hr K) hmk ⟨hK, a, b, hKt⟩).of_iso
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso
       ((e₂.app K).symm ≪≫ asIso (F.map φ) ≪≫ e₁.symm))
 
@@ -521,8 +521,11 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
       rw [Nat.cast_pow]; exact hmY.pow _
     have hN := nsmul_id_reductionModIdeal (J := I ^ (n + 1)) (N := m ^ (n + 1))
       (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) K
+    have : Finite (Λ ⧸ I ^ (n + 1)) := Ideal.finite_quotient_pow (IsNoetherian.noetherian I) _
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
-        (boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm _ hN hNY hbc),
+        (boundedConstructible_rightDerivedLowerStar Λ (I ^ (n + 1)) aX c.g c.i c.comm.symm _
+          (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) hNY
+          (fun r hr ↦ smul_id_reductionModIdeal hr K) hbc),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
         (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX c.g c.i c.comm.symm d hd a b
           _ hN hNY hbc hta)⟩

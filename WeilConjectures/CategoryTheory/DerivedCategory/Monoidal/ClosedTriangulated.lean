@@ -257,9 +257,12 @@ instance isIso_qhInternalHomToIhom (P I : CochainComplex C ℤ) [I.IsKInjective]
     apply uncurry_injective
     rw [qhInternalHomToIhom, uncurry_curry, uncurry_eq, MonoidalCategory.whiskerLeft_comp,
       assoc]
-    erw [Adjunction.rightAdjointUniq_hom_app_counit]
+    erw [Adjunction.rightAdjointUniq_hom_app_counit (tensorHomAdjunctionQhObj P')
+      (ihom.adjunction (Qh.obj P'))]
     dsimp only [tensorHomAdjunctionQhObj]
-    erw [Adjunction.derived_counit, Adjunction.derivedε_fac_app]
+    erw [Adjunction.derived_counit]
+    erw [Adjunction.derivedε_fac_app (W₂ := quasiIso C (ComplexShape.up ℤ))
+      (α := tensorLeftQhObjCounit P') (β := internalHomQhObjUnit P')]
     erw [tensorHomAdjunction_counit_app]
     rfl
   rw [h]
