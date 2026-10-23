@@ -45,7 +45,10 @@ The construction follows the chain
    natural in both variables, so it descends along the quotient functor
    (`HomotopyCategory.MonoidalCategory.braiding`, via `Quotient.natIsoLift₂`). The hexagons
    and the symmetry relation are equalities of chain maps, preserved by the quotient functor;
-   they are `sorry`ed (`HomotopyCategory.MonoidalCategory.braidedCategory`).
+   they are `sorry`ed (`HomotopyCategory.MonoidalCategory.braidedCategory`). The braided
+   structure is only declared for `ComplexShape.up ℤ` with the Koszul sign: for a general
+   complex shape the sign `σ` is only determined up to a global sign, and replacing `σ` by
+   `-σ` breaks the hexagons.
 3. **Transport through the derived tensor.** Write `T := curriedTensor K(C)` and
    `T^L := curriedTensor D(C)`, so that `T^L` is the binary left derived functor of `T`. A
    morphism `τ : T.flip ⟶ T` lifts to `T^L.flip ⟶ T^L` by the binary left derived lifting
@@ -237,11 +240,35 @@ noncomputable def braiding : bifunctor C c ≅ (bifunctor C c).flip :=
         (HomologicalComplex.braiding_hom_naturality f₁ (𝟙 K₂))).trans
           ((quotient C c).map_comp _ _))))
 
-/-- The homotopy category `K(C)` of a braided category `C` is braided. The hexagon identities
-are `sorry`ed: they hold already for the Koszul braiding on complexes, by the hexagons in `C`
-and `(-1) ^ (p * (q + r)) = (-1) ^ (p * q) * (-1) ^ (p * r)`. -/
-noncomputable instance braidedCategory : BraidedCategory (HomotopyCategory C c) :=
-  .ofBifunctor (braiding C c) sorry sorry
+end HomotopyCategory.MonoidalCategory
+
+namespace HomotopyCategory.MonoidalCategory
+
+variable (C : Type*) [Category C] [Preadditive C] [MonoidalCategory C] [HasZeroObject C]
+  [(curriedTensor C).Additive]
+  [∀ (X₁ : C), ((curriedTensor C).obj X₁).Additive]
+  [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ (X₁ : C), PreservesColimit (Functor.empty C) ((curriedTensor C).obj X₁)]
+  [∀ (X₂ : C), PreservesColimit (Functor.empty C) ((curriedTensor C).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (K₁ K₂ : CochainComplex C ℤ),
+    HomologicalComplex.HasMapBifunctor K₁ K₂ (curriedTensor C) (ComplexShape.up ℤ)]
+  [BraidedCategory C] [MonoidalPreadditive C]
+
+/-- The homotopy category `K(C) = HomotopyCategory C (ComplexShape.up ℤ)` of a braided
+category `C` is braided, for the Koszul sign `σ (p, q) = (-1) ^ (p * q)` of the instance
+`TotalComplexShapeSymmetry (up ℤ) (up ℤ) (up ℤ)`. The hexagon identities are `sorry`ed: they
+hold already for the Koszul braiding on complexes, by the hexagons in `C` and
+`(-1) ^ (p * (q + r)) = (-1) ^ (p * q) * (-1) ^ (p * r)`.
+
+This is not claimed for a general complex shape `c`: `TotalComplexShapeSymmetry c c c` only
+determines `σ` up to a global sign (`-σ` satisfies the same axioms), and with `-σ` the hexagons
+fail, e.g. at `X = Y = Z = 𝟙_` concentrated in degree `0` when `𝟙_ C` is nonzero. -/
+noncomputable instance braidedCategory :
+    BraidedCategory (HomotopyCategory C (ComplexShape.up ℤ)) :=
+  .ofBifunctor (braiding C (ComplexShape.up ℤ)) sorry sorry
 
 end HomotopyCategory.MonoidalCategory
 
