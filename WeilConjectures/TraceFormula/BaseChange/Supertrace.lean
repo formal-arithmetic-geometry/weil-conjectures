@@ -80,8 +80,8 @@ theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsS
     (P : Dᵇc((point Ω).left)⟦Profinite.padicAlgClRingObj ℓ⟧) [HasRightDual P] (v : P ⟶ P) :
     trace v = homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point Ω)
       (superTrace
-        (fun j ↦ ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ j).obj P)
-        (fun j ↦ ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ j).map v)) :=
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).obj P.obj)
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).map v.hom)) :=
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

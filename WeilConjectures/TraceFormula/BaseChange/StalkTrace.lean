@@ -367,6 +367,20 @@ theorem categoricalTrace_stalkFunctor_homologyFunctor_eq (L : WeilBoundedConstru
       (j := j) (τ := upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
       (hτ := isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso ℓ X N Ω σ hσ x))
 
+/-- `categoricalTrace_stalkFunctor_homologyFunctor_eq` for the stalk functor along a morphism
+`σ'` equal to `σ.hom` (for instance with a different presentation of `Spec Ω`). -/
+theorem categoricalTrace_stalkFunctor_homologyFunctor_eq_of_hom_eq
+    (σ' : Spec (.of Ω) ⟶ Spec (.of Ω)) (hσ' : σ.hom = σ') (hx' : x ≫ e.hom.left = σ' ≫ x)
+    (L : WeilBoundedConstructible ℓ e.hom) (j : ℤ) :
+    categoricalTrace (((WeilSheaf.stalkFunctor ℓ e σ' x hx').obj
+        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L)).str.hom) =
+      categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
+        ((weilStalk ℓ (modelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
+          ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
+          ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
+  subst hσ'
+  exact categoricalTrace_stalkFunctor_homologyFunctor_eq ℓ N e σ hσ x hxk hx L j
+
 end Comparison
 
 end AlgebraicGeometry.ProEtale.CondensedRing

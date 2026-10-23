@@ -80,6 +80,27 @@ theorem powSuccStr_hom_eq_of_comp (P : (X ⟶ X) → D ⥤ D)
     rw [ih, Functor.map_comp_assoc, reassoc_of% nat, Functor.map_comp, Functor.map_comp,
       reassoc_of% (hcomp (e.powSucc n).hom e.hom a)]
 
+/-- The transport along `H` of the iterate of an algebra is the iterate of its transport: for an
+algebra `(a, φ)` for `P e`, the iterate for `Q e^{n+1}` of `(H a, (h e).app a ≪≫ H φ)` is
+isomorphic, through the identity of `H a`, to the transport `(H a, (h e^{n+1}).app a ≪≫ H φ^{(n+1)})`
+of the iterate `(a, φ^{(n+1)})` (`powSuccStr_hom_eq_of_comp`). -/
+noncomputable def mapOfNatIsoPowSuccIso (P : (X ⟶ X) → D ⥤ D)
+    (compP : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) (Q : (X ⟶ X) → E ⥤ E)
+    (compQ : ∀ f g : X ⟶ X, Q (f ≫ g) ≅ Q g ⋙ Q f) (H : D ⥤ E)
+    (h : ∀ g : X ⟶ X, H ⋙ Q g ≅ P g ⋙ H)
+    (hcomp : ∀ (f g : X ⟶ X) (a : D), (h (f ≫ g)).hom.app a ≫ H.map ((compP f g).hom.app a) =
+      (compQ f g).hom.app (H.obj a) ≫ (Q f).map ((h g).hom.app a) ≫
+        (h f).hom.app ((P g).obj a))
+    (A : IsoAlgebra (P e.hom)) (n : ℕ) :
+    IsoAlgebra.mk ((IsoAlgebra.mapOfNatIso (h e.hom)).obj A).carrier
+        (e.powSuccStr Q compQ ((IsoAlgebra.mapOfNatIso (h e.hom)).obj A).str n) ≅
+      (IsoAlgebra.mapOfNatIso (h (e.powSucc n).hom)).obj
+        (IsoAlgebra.mk A.carrier (e.powSuccStr P compP A.str n)) :=
+  IsoAlgebra.isoMk (Iso.refl _) (by
+    rw [Iso.refl_hom, Functor.map_id, Category.id_comp, Category.comp_id, ← IsoAlgebra.str_hom,
+      ← IsoAlgebra.str_hom, IsoAlgebra.mk_str, IsoAlgebra.mapOfNatIso_obj_str]
+    exact (powSuccStr_hom_eq_of_comp e P compP Q compQ H h hcomp A.str n).symm)
+
 end CategoryTheory.Iso
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
