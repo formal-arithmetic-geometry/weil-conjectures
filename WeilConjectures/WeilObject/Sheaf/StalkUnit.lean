@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.WeilObject.Sheaf.Stalk
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 
 /-!
@@ -25,13 +26,19 @@ the unit coherence of `ProEtale.CondensedRing.upperStarFromPointModComp`.
 
 - `CategoryTheory.Functor.isoWhiskerLeft_counitIso_hom_app_functor_obj`,
   `CategoryTheory.Iso.hom_app_eq_inv_of_hom_app_eq`: the abstract reduction.
-
-## Sorried input
-
 - `ProEtale.CondensedRing.upperStarFromPointModComp_hom_app_unit`: the comparison
-  `P_Y ⋙ f^* ≅ P_X` is compatible with the unit comparisons.
-- `ProEtale.CondensedRing.upperStarIsoIdOfIsSepClosed_hom_app_unit`: `σ^* Λ ≅ Λ` is `ε_σ⁻¹`
-  (see its docstring for the kernel timeout of the reduction).
+  `P_Y ⋙ f^* ≅ P_X` is compatible with the unit comparisons. On underlying sheaves, after the
+  unit of the extension of scalars along `α_f`, both sides are `α_f`.
+- `ProEtale.CondensedRing.upperStarIsoIdOfIsSepClosed_hom_app_unit`: `σ^* Λ ≅ Λ` is `ε_σ⁻¹`.
+
+## Implementation notes
+
+The unit of a category of module objects occurs in two syntactic forms: `𝟙_ _` elaborates to the
+unit of the instance `Mod.monoidalCategoryStruct`, while the unit comparisons `ε` of monoidal
+functors are stated with the unit of `Mod.monoidalCategory`. The two are definitionally equal,
+but the kernel only identifies them after unfolding the pullbacks when they occur as arguments
+of a component of a concrete natural transformation. The statements here therefore leave the
+unit to be inferred from the type of `ε`.
 -/
 
 @[expose] public section
@@ -100,32 +107,83 @@ noncomputable instance monoidal_upperStarFromPointMod (X : Scheme.{u}) :
     (upperStarFromPointMod Λ X).Monoidal :=
   inferInstanceAs ((upperStarFromPoint X).mapMod Λ).Monoidal
 
+/-- The comparison `upperStarFromPointModComp f`, written out as the composite of
+`Functor.mapModCompIso` with the identification of the extension of scalars along the isomorphism
+`α_f` with a restriction of scalars. It is definitionally `upperStarFromPointModComp f`; rewriting
+to this reducible form before applying lemmas about the composite keeps the kernel from unfolding
+the comparison of pullbacks, see the implementation notes of
+`WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit`. Its type is left to be inferred,
+in the form of the composite; ascribing the type of `upperStarFromPointModComp f` brings the kernel
+timeouts back. -/
+noncomputable abbrev upperStarFromPointModCompComposite {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (Functor.mapModCompIso (upperStarFromPoint Y) (f)^*[Ab.{u + 1}]
+        (upperStarFromPointComp f).hom Λ)
+      (Mod.extendScalars (Functor.compAlgHom (upperStarFromPoint Y) (f)^*[Ab.{u + 1}]
+        (upperStarFromPointComp f).hom Λ)) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      (Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (Functor.compAlgHom
+          (upperStarFromPoint Y) (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ)) ≪≫
+        (Mod.comapEquivalenceOfIsIso (Functor.compAlgHom (upperStarFromPoint Y)
+          (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ)).unitIso.symm) ≪≫
+    Functor.rightUnitor _
+
+/-- At the unit `Λ`, the comparison `p_Y^* ⋙ f^* ≅ p_X^*` is `α_f` on underlying sheaves after
+the unit `f^* p_Y^* Λ ⟶ Λ_X ⊗_{f^* Λ_Y} f^* p_Y^* Λ` of the extension of scalars. -/
+lemma extendUnitHom_upperStarFromPointModComp_hom_app_unit_hom {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    Mod.extendUnitHom (condensedPullbackHom Λ f)
+        (((f)^*[Ab.{u + 1}].mapMod _).obj ((upperStarFromPointMod Λ Y).obj
+          (@MonoidalCategoryStruct.tensorUnit (Mod _ Λ) _
+            MonoidalCategory.toMonoidalCategoryStruct))) ≫
+      ((upperStarFromPointModComp Λ f).hom.app
+        (@MonoidalCategoryStruct.tensorUnit (Mod _ Λ) _
+          MonoidalCategory.toMonoidalCategoryStruct)).hom = condensedPullbackHom Λ f := by
+  rw [show upperStarFromPointModComp Λ f = upperStarFromPointModCompComposite Λ f from rfl]
+  exact Functor.extendUnitHom_hom_app_unit_hom_of_eq_mapModCompExtendScalarsIso _ _ _ _
+    (upperStarFromPointModCompComposite Λ f) rfl
+
 /-- The comparison `p_Y^* ⋙ f^* ≅ p_X^*` on module objects is compatible with the unit
 comparisons: at the unit it is `f^*(ε_{p_Y^*}⁻¹) ≫ ε_f⁻¹ ≫ ε_{p_X^*}`.
 
-On underlying sheaves both sides are `α_f⁻¹ ≫ α_f = 𝟙`; a direct proof by unfolding hits
-expensive definitional unfoldings of the sheaf pullbacks (see the report), so this is left
-as sorried input. -/
+On underlying sheaves, after the unit of the extension of scalars along `α_f`, both sides are
+`α_f` (`extendUnitHom_upperStarFromPointModComp_hom_app_unit_hom` and
+`extendUnitHom_η_upperStar`). The unit of `Mod_Λ` is the one of the type of `ε_{p_Y^*}`. -/
 lemma upperStarFromPointModComp_hom_app_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (upperStarFromPointModComp Λ f).hom.app (𝟙_ _) =
+    (upperStarFromPointModComp Λ f).hom.app _ =
       (f)^*⟦Λ⟧.map (Functor.Monoidal.εIso (upperStarFromPointMod Λ Y)).inv ≫
         (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv ≫
-          (Functor.Monoidal.εIso (upperStarFromPointMod Λ X)).hom :=
-  sorry
+          (Functor.Monoidal.εIso (upperStarFromPointMod Λ X)).hom := by
+  apply Mod.extendScalarsObj_hom_ext'
+  rw [extendUnitHom_upperStarFromPointModComp_hom_app_unit_hom, Mod.comp_hom', Mod.comp_hom']
+  erw [Mod.extendUnitHom_extendScalarsMap_assoc]
+  rw [Functor.mapMod_map_hom, Functor.Monoidal.εIso_inv (upperStarFromPointMod Λ Y),
+    Functor.Monoidal.εIso_inv (f)^*⟦Λ⟧]
+  erw [reassoc_of% (extendUnitHom_η_upperStar Λ f)]
+  have h₁ : (Functor.OplaxMonoidal.η (upperStarFromPointMod Λ Y)).hom = 𝟙 _ := rfl
+  have h₂ : (Functor.Monoidal.εIso (upperStarFromPointMod Λ X)).hom.hom = 𝟙 _ := rfl
+  rw [h₁, h₂]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- The isomorphism `σ^* ≅ 𝟭` is, at the unit, the inverse of the unit comparison of `σ^*`.
-
-Mathematically this follows from `Functor.isoWhiskerLeft_counitIso_hom_app_functor_obj`,
-`Iso.hom_app_eq_inv_of_hom_app_eq` and `upperStarFromPointModComp_hom_app_unit`, but
-that term hits a kernel deterministic timeout: the strong monoidal structure
-`monoidal_upperStarFromPointMod` lives over the coefficient ring with the algebra structure
-transported along the `Braided` instance of `p_X^*`, while `upperStarFromPointMod` uses the
-`LaxBraided` one, and unifying the two units unfolds the sheaf pullbacks. -/
+/-- The isomorphism `σ^* ≅ 𝟭` is, at the unit, the inverse of the unit comparison of `σ^*`: by
+`Iso.hom_app_eq_inv_of_hom_app_eq` it suffices to compute it at `p^* Λ`, where it is the
+comparison `p^* ⋙ σ^* ≅ p^*` (`Functor.isoWhiskerLeft_counitIso_hom_app_functor_obj`), given at
+the unit by `upperStarFromPointModComp_hom_app_unit`. The unit of `Mod_{Spec Ω}` is the one of
+the type of `ε_σ`. -/
 lemma upperStarIsoIdOfIsSepClosed_hom_app_unit (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) :
-    (upperStarIsoIdOfIsSepClosed Λ σ).hom.app (𝟙_ _) =
-      (Functor.Monoidal.εIso (σ)^*⟦Λ⟧).inv :=
-  sorry
+    (upperStarIsoIdOfIsSepClosed Λ σ).hom.app _ =
+      (Functor.Monoidal.εIso (σ)^*⟦Λ⟧).inv := by
+  refine Iso.hom_app_eq_inv_of_hom_app_eq _
+    (Functor.Monoidal.εIso (upperStarFromPointMod Λ (Spec (.of Ω)))) _ ?_
+  rw [show upperStarIsoIdOfIsSepClosed Λ σ = (Functor.leftUnitor _).symm ≪≫
+      Functor.isoWhiskerRight
+        (upperStarFromPointMod Λ (Spec (.of Ω))).asEquivalence.counitIso.symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (upperStarFromPointModComp Λ σ) ≪≫
+      (upperStarFromPointMod Λ (Spec (.of Ω))).asEquivalence.counitIso from rfl,
+    Functor.isoWhiskerLeft_counitIso_hom_app_functor_obj]
+  exact upperStarFromPointModComp_hom_app_unit Λ σ
 
 end AlgebraicGeometry.ProEtale.CondensedRing

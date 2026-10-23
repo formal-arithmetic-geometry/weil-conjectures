@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRationalization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficientLimit
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-!
 # The rationalization formula for `ℤ_ℓ,X`
@@ -43,22 +44,6 @@ universe u
 open CategoryTheory MonoidalCategory MonObj Limits Opposite
 
 open scoped Obj
-
-namespace CategoryTheory.Mod
-
-variable {C : Type*} [Category* C] [MonoidalCategory C] [HasCoequalizers C]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
-  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ]
-
-/-- The naturality of the unit `M ⟶ S ⊗_R M`, `m ↦ 1 ⊗ m`. -/
-@[reassoc]
-lemma extendUnitHom_extendScalarsMap {M N : Mod C R} (f : M ⟶ N) :
-    extendUnitHom φ M ≫ (extendScalarsMap φ f).hom = f.hom ≫ extendUnitHom φ N := by
-  simp only [extendUnitHom, Category.assoc, extendπ_extendScalarsMap]
-  rw [← whisker_exchange_assoc, leftUnitor_inv_naturality_assoc]
-
-end CategoryTheory.Mod
 
 namespace CategoryTheory.Sheaf
 
