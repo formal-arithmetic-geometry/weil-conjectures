@@ -24,6 +24,12 @@ chapter transports through the purity isomorphism:
 * the *Tate datum* `τ_r : Lg^* Λ_Y(r) ≅ Λ_Y(r)` of the Tate twist
   (`AlgebraicGeometry.Etale.tateWeilDatum`): the identification of the twist datum with its
   pullback along `g`;
+* the Tate line `(Λ_X(r), τ_r)` as a strict Weil complex
+  (`AlgebraicGeometry.Etale.WeilComplex.tate`),
+  the twisted dual `(K^∨(r), φ_{K^∨} ⊗ τ_r)` of a strict Weil complex
+  (`AlgebraicGeometry.Etale.WeilComplex.twistedDual`), and the identification of `τ_0` with the
+  canonical Weil structure `φ_Λ` of `Λ_X`
+  (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_twistObjectZeroIso_hom`);
 * the datum `φ^pur_{f,K}` on the source `Lf^* K(d)[2d]` of smooth purity
   (`AlgebraicGeometry.Etale.smoothPurityWeilDatum`): the base change identification followed by
   `Lf^* φ_K`, the Tate datum `τ_d` entering through the base change identification;
