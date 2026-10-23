@@ -132,7 +132,7 @@ lemma exists_algebraMap_sub_algebraMap_mul_mem [IsReduced A] (q : Ideal A)
       by_cases hgq : g ∈ MulAction.stabilizer G q
       · refine absurd ?_ hg
         rw [smul_mul', htH g hgq, ← sub_eq_zero, ← mul_sub]
-        refine IsReduced.eq_zero_of_forall_mem_minimalPrimes fun q' hq' ↦ ?_
+        refine Ideal.eq_zero_of_forall_mem_minimalPrimes _ fun q' hq' ↦ ?_
         by_cases h : q' = q
         · exact h ▸ q.mul_mem_left _ (ha g hgq)
         · exact q'.mul_mem_right _ (htq' q' hq' h)

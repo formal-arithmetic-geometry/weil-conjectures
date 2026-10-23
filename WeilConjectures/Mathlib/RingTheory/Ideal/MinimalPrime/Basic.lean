@@ -11,18 +11,16 @@ public import Mathlib.RingTheory.Nilpotent.Defs
 /-!
 # Minimal primes of reduced rings
 
-- `IsReduced.eq_zero_of_forall_mem_minimalPrimes`: in a reduced ring, an element lying in every
+- `Ideal.eq_zero_of_forall_mem_minimalPrimes`: in a reduced ring, an element lying in every
   minimal prime is zero.
 -/
 
 @[expose] public section
 
-/-- In a reduced ring, an element lying in every minimal prime is zero: the intersection of the
-minimal primes is the nilradical. -/
-lemma IsReduced.eq_zero_of_forall_mem_minimalPrimes {A : Type*} [CommRing A] [IsReduced A]
-    {x : A} (hx : ∀ q ∈ minimalPrimes A, x ∈ q) : x = 0 := by
-  have : x ∈ (⊥ : Ideal A).radical := by
-    rw [← Ideal.sInf_minimalPrimes]
-    exact Submodule.mem_sInf.2 hx
-  obtain ⟨n, hn⟩ := Ideal.mem_radical_iff.1 this
-  exact IsReduced.eq_zero x ⟨n, Ideal.mem_bot.1 hn⟩
+/-- In a reduced ring, an element lying in every minimal prime is zero. -/
+theorem Ideal.eq_zero_of_forall_mem_minimalPrimes {A : Type*} [CommRing A] [IsReduced A]
+    (x : A) (hx : ∀ P ∈ minimalPrimes A, x ∈ P) : x = 0 := by
+  have : x ∈ sInf (minimalPrimes A) := Submodule.mem_sInf.2 fun P hP ↦ hx P hP
+  rw [minimalPrimes, Ideal.sInf_minimalPrimes] at this
+  obtain ⟨n, hn⟩ := this
+  exact IsReduced.eq_zero x ⟨n, by simpa using hn⟩
