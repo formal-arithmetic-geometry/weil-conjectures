@@ -6317,6 +6317,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatOpenScalarRestriction
+public import WeilConjectures.AlgebraicGeometry.RelativeFrobenius
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersection
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionBaseChange
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
@@ -7654,6 +7655,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.FiniteFree
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.FreeAwayBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.LocalRing
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.ResidueField
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
@@ -11968,6 +11970,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Amb
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CoefficientSetup
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactSupportCandidate
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactWeilDatum
@@ -12398,6 +12401,7 @@ public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
+public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
