@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.WeilDistTriang
+public import WeilConjectures.TraceFormula.WeilDistTriangHomology
 public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.Sheaf.StalkFiniteFree
 
@@ -38,6 +39,67 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
 variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+/-- The stalk at `x̄` of a Weil sheaf, with its Frobenius operator, is finite free as soon as the
+pullback `x̄^* F` is. The ring structure on `k̄` is that of `AlgebraicClosure.instCommRing` in
+`x̄^* F` and that of the field `k̄` in the stalk; the transport between the two is done through
+an equation of ring structures, the kernel being unable to identify them inside the pullbacks. -/
+lemma isFiniteFree_frobeniusStalk_carrier {e : Y ≅ Y} (n : ℕ)
+    (x : Spec (.of (AlgebraicClosure k)) ⟶ Y.left)
+    (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)
+    (F : WeilSheaf ℓ e)
+    (hF : letI := Abelian.hasFiniteBiproducts (C := GeometricPointMod ℓ (AlgebraicClosure k))
+      IsFiniteFree ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj F.carrier)) :
+    letI := Abelian.hasFiniteBiproducts (C := GeometricPointMod ℓ (AlgebraicClosure k))
+    IsFiniteFree (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier := by
+  have key (R : CommRing (AlgebraicClosure k)) (_ : R = AlgebraicClosure.instCommRing k)
+      (x' : Spec (@CommRingCat.of (AlgebraicClosure k) R) ⟶ Y.left) (_ : HEq x' x) :
+      IsFiniteFree ((x')^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj F.carrier) := by
+    subst R
+    obtain rfl := eq_of_heq ‹HEq x' x›
+    exact hF
+  rw [WeilSheaf.frobeniusStalk, WeilSheaf.powSuccStalkFunctor, Functor.comp_obj,
+    WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powSuccFunctor_obj_carrier]
+  exact key Field.toCommRing rfl x HEq.rfl
+
+section Stalk
+
+variable {e : Y ≅ Y} (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ Y.left)
+  (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+/-- The stalk at `x̄` of a Weil sheaf with zero underlying sheaf is zero. -/
+lemma isZero_frobeniusStalk_carrier {F : WeilSheaf ℓ e} (hF : IsZero F.carrier) :
+    IsZero (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier := by
+  rw [WeilSheaf.frobeniusStalk, WeilSheaf.powSuccStalkFunctor, Functor.comp_obj,
+    WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powSuccFunctor_obj_carrier]
+  exact Functor.map_isZero _ hF
+
+/-- The stalk functor at `x̄` preserves exact sequences of Weil sheaves. -/
+lemma exists_exact_powSuccStalkFunctor_map {F G H : WeilSheaf ℓ e} (f : F ⟶ G) (g : G ⟶ H)
+    {w : f.hom.f ≫ g.hom.f = 0} (hS : (ShortComplex.mk _ _ w).Exact) :
+    ∃ w' : ((WeilSheaf.powSuccStalkFunctor ℓ n x hx).map f).hom.f ≫
+      ((WeilSheaf.powSuccStalkFunctor ℓ n x hx).map g).hom.f = 0,
+      (ShortComplex.mk _ _ w').Exact :=
+  ⟨(ShortComplex.map (ShortComplex.mk _ _ w) (@upperStar (Profinite.padicAlgClRingObj ℓ) _ _
+    (Spec (@CommRingCat.of (AlgebraicClosure k) Field.toCommRing)) Y.left x)).zero,
+    hS.map (@upperStar (Profinite.padicAlgClRingObj ℓ) _ _
+      (Spec (@CommRingCat.of (AlgebraicClosure k) Field.toCommRing)) Y.left x)⟩
+
+/-- The Frobenius operators on the stalks at `x̄` commute with the morphisms induced by
+morphisms of Weil sheaves. -/
+lemma frobeniusStalk_str_hom_comp {F G : WeilSheaf ℓ e} (φ : F ⟶ G) :
+    (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom ≫
+        ((WeilSheaf.powSuccStalkFunctor ℓ n x hx).map φ).hom.f =
+      ((WeilSheaf.powSuccStalkFunctor ℓ n x hx).map φ).hom.f ≫
+        (WeilSheaf.frobeniusStalk ℓ n x hx G).str.hom :=
+  ((WeilSheaf.powSuccStalkFunctor ℓ n x hx).map φ).hom.h.symm
+
+end Stalk
+
 /-- **Additivity of the local trace along distinguished triangles, for finite free stalks.**
 Assume that `End (𝟙_ Mod_{Spec k̄})` is a field and that the stalks at `x̄` of the homology sheaves
 of Weil objects are finite free. Then for a distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of Weil
@@ -56,8 +118,50 @@ theorem weilStalkSupertrace_eq_add_of_isDistTriang_of_isFiniteFree {e : Y ≅ Y}
     {A B C : WeilBoundedConstructible ℓ e.hom} {a : A ⟶ B} {b : B ⟶ C}
     (h : WeilBoundedConstructible.IsDistTriang ℓ a b) :
     weilStalkSupertrace ℓ n x hx B =
-      weilStalkSupertrace ℓ n x hx A + weilStalkSupertrace ℓ n x hx C :=
-  sorry
+      weilStalkSupertrace ℓ n x hx A + weilStalkSupertrace ℓ n x hx C := by
+  obtain ⟨δ, hT, hδ⟩ := h
+  obtain ⟨⟨a₁, b₁, hbA⟩, -⟩ := (mem_boundedConstructible_iff _ _).1 A.carrier.property
+  obtain ⟨⟨a₂, b₂, hbB⟩, -⟩ := (mem_boundedConstructible_iff _ _).1 B.carrier.property
+  obtain ⟨⟨a₃, b₃, hbC⟩, -⟩ := (mem_boundedConstructible_iff _ _).1 C.carrier.property
+  have e₁ (j : ℤ) := exists_exact_powSuccStalkFunctor_map ℓ n x hx
+    ((WeilBoundedConstructible.homologyFunctor ℓ e j).map a)
+    ((WeilBoundedConstructible.homologyFunctor ℓ e j).map b)
+    (DerivedCategory.HomologySequence.exact₂ _ hT j)
+  have e₂ (j : ℤ) := exists_exact_powSuccStalkFunctor_map ℓ n x hx
+    ((WeilBoundedConstructible.homologyFunctor ℓ e j).map b)
+    (WeilBoundedConstructible.homologyδ ℓ δ hδ j (j + 1) (add_comm 1 j))
+    (DerivedCategory.HomologySequence.exact₃ _ hT j (j + 1) rfl)
+  have e₃ (j : ℤ) := exists_exact_powSuccStalkFunctor_map ℓ n x hx
+    (WeilBoundedConstructible.homologyδ ℓ δ hδ j (j + 1) (add_comm 1 j))
+    ((WeilBoundedConstructible.homologyFunctor ℓ e (j + 1)).map a)
+    (DerivedCategory.HomologySequence.exact₁ _ hT j (j + 1) rfl)
+  exact superTrace_eq_add_of_exact hK h₁
+    (A := fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj A)).carrier)
+    (B := fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj B)).carrier)
+    (D := fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj C)).carrier)
+    (fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj A)).str.hom)
+    (fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj B)).str.hom)
+    (fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj C)).str.hom)
+    _ _ _
+    (fun j ↦ frobeniusStalk_str_hom_comp ℓ n x hx _)
+    (fun j ↦ frobeniusStalk_str_hom_comp ℓ n x hx _)
+    (fun j ↦ frobeniusStalk_str_hom_comp ℓ n x hx
+      (WeilBoundedConstructible.homologyδ ℓ δ hδ j (j + 1) (add_comm 1 j)))
+    (fun j ↦ (e₁ j).fst) (fun j ↦ (e₂ j).fst) (fun j ↦ (e₃ j).fst)
+    (fun j ↦ (e₁ j).snd) (fun j ↦ (e₂ j).snd) (fun j ↦ (e₃ j).snd)
+    (fun j ↦ isFiniteFree_frobeniusStalk_carrier ℓ n x hx _ (hfree A j))
+    (fun j ↦ isFiniteFree_frobeniusStalk_carrier ℓ n x hx _ (hfree B j))
+    (fun j ↦ isFiniteFree_frobeniusStalk_carrier ℓ n x hx _ (hfree C j))
+    ⟨min a₁ (min a₂ a₃), max b₁ (max b₂ b₃), fun j hj ↦
+      ⟨isZero_frobeniusStalk_carrier ℓ n x hx (hbA j (by omega)),
+        isZero_frobeniusStalk_carrier ℓ n x hx (hbB j (by omega)),
+        isZero_frobeniusStalk_carrier ℓ n x hx (hbC j (by omega))⟩⟩
 
 /-- **Additivity of the local trace along distinguished triangles of Weil objects** (standard
 input, still `sorry`): for a distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of Weil objects for `e`,

@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.TraceFormula.CategoricalTraceExact
 public import WeilConjectures.WeilObject.Sheaf.Stalk
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 
 /-!
 
@@ -22,6 +24,16 @@ form the field `ℚ̄_ℓ`
 bounded constructible complex along a geometric point `x̄ : Spec Ω ⟶ X` is a finite free module,
 a finite direct sum of copies of the unit
 (`ProEtale.CondensedRing.isFiniteFree_upperStar_homology`).
+
+The first two statements are transported, along the equivalence `p^*` from condensed
+`ℚ̲̄_ℓ`-modules (`ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`, a sorried input
+stating blueprint node `sk-prop-pe-condensed-point`), from the regular module `ℚ̲̄_ℓ`, whose
+endomorphisms are the constants `ℚ̄_ℓ` (`Profinite.PadicAlgCl.isIso_of_ne_zero_end_regular`,
+`Profinite.PadicAlgCl.one_ne_zero_end_regular`). The third combines the finite presentation of
+the stalks of constructible module objects
+(`ProEtale.CondensedRing.isFinitelyPresented_upperStar_of_isConstructibleModuleObject`) with the
+rank normal form of morphisms between finite powers of the unit
+(`CategoryTheory.Limits.exists_iso_biproduct_cokernel`).
 
 -/
 
@@ -54,14 +66,21 @@ include hΩ hsep
 theorem isIso_of_ne_zero_end_tensorUnit
     (t : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω)))))) (ht : t ≠ 0) :
-    IsIso t :=
-  sorry
+    IsIso t := by
+  let := hΩ.toField
+  have := isEquivalence_upperStarFromPointMod (Ω := Ω) (Profinite.padicAlgClRingObj ℓ)
+  exact (upperStarFromPointMod _ _).isIso_of_ne_zero_end (Iso.refl _)
+    (Profinite.PadicAlgCl.isIso_of_ne_zero_end_regular ℓ) t ht
 
 /-- The unit of `Mod_{Spec Ω}` is not zero. -/
 theorem one_ne_zero_end_tensorUnit :
     (1 : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω)))))) ≠ 0 :=
-  sorry
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω)))))) ≠ 0 := by
+  let := hΩ.toField
+  have := isEquivalence_upperStarFromPointMod (Ω := Ω) (Profinite.padicAlgClRingObj ℓ)
+  exact (upperStarFromPointMod _ _).one_ne_zero_end
+    (X := Mod.regular (Profinite.padicAlgClRingObj ℓ)) (Iso.refl _)
+    (Profinite.PadicAlgCl.one_ne_zero_end_regular ℓ)
 
 /-- The pullback of a homology sheaf `Hʲ(K)` of a bounded constructible complex along a
 geometric point `x̄ : Spec Ω ⟶ X` is finite free: its restriction to the stratum through `x̄` is
@@ -75,7 +94,12 @@ theorem isFiniteFree_upperStar_homology {k : Type u} [Field k] [Fact (ringChar k
       (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω))))
     IsFiniteFree ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj
-      ((DerivedCategory.homologyFunctor _ j).obj K.obj)) :=
-  sorry
+      ((DerivedCategory.homologyFunctor _ j).obj K.obj)) := by
+  obtain ⟨n, m, f, ⟨e⟩⟩ := isFinitelyPresented_upperStar_of_isConstructibleModuleObject
+    (Profinite.padicAlgClRingObj ℓ) hΩ hsep
+    (((mem_boundedConstructible_iff _ _).1 K.property).2 j) x
+  obtain ⟨k, ⟨e'⟩⟩ := Limits.exists_iso_biproduct_cokernel
+    (isIso_of_ne_zero_end_tensorUnit ℓ hΩ hsep) (Iso.refl _) (Iso.refl _) f
+  exact ⟨k, ⟨e ≪≫ e'⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
