@@ -44,6 +44,10 @@ namespace WeilSheaf
 
 open ProEtale
 
+/- Through `Mathlib.AlgebraicGeometry.Group.Affine`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 attribute [local instance] Compactification.over
 
 -- `Spec k₀` is over itself through the identity, not through `specOverSpec`: the instance search
