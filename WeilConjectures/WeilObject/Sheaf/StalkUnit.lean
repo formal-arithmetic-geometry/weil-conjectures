@@ -64,7 +64,8 @@ lemma isoWhiskerLeft_counitIso_hom_app_functor_obj {A B : Type*} [Category A] [C
 
 /-- Let `τ : S ≅ 𝟭` and `e : b ≅ b'`. If `τ` at `b'` is `S e⁻¹ ≫ ε⁻¹ ≫ e` for an isomorphism
 `ε : b ≅ S b`, then `τ` at `b` is `ε⁻¹`. -/
-lemma _root_.CategoryTheory.Iso.hom_app_eq_inv_of_hom_app_eq {B : Type*} [Category B] {S : B ⥤ B} (τ : S ≅ 𝟭 B)
+lemma _root_.CategoryTheory.Iso.hom_app_eq_inv_of_hom_app_eq {B : Type*} [Category B] {S : B ⥤ B}
+    (τ : S ≅ 𝟭 B)
     {b b' : B} (e : b ≅ b') (ε : b ≅ S.obj b)
     (h : τ.hom.app b' = S.map e.inv ≫ ε.inv ≫ e.hom) : τ.hom.app b = ε.inv := by
   have hn := τ.hom.naturality e.hom
