@@ -157,7 +157,7 @@ theorem exists_isIso_comp_map_counit_eq_chernPowMap {X S Z : Scheme.{u}}
   let N := ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
     ((R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z))).obj T
   have hφ : IsIso φ := by
-    rw [← supportedClassMap_eq_supportedTranspose]
+    rw [supportedClassMap_eq_supportedTranspose] at hγ
     exact hγ
   have hγ' : u ≫ (R(i)_![ModuleCat.{u + 1} Λ]).map φ = γ :=
     supportedRestrictionMap_comp_map_supportedTranspose Λ i γ
@@ -192,7 +192,7 @@ theorem exists_isIso_comp_map_counit_eq_chernPowMap {X S Z : Scheme.{u}}
       (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X T).inv ≫
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (chernPow h a)).app T ≫ e₂ := by
     rw [← hforget, ← hγ']
-    simp only [y, Category.assoc, hθ, χ', χ, Functor.map_comp, NatTrans.comp_app]
+    simp only [y, Category.assoc, hθ, χ', χ, M, Functor.map_comp, NatTrans.comp_app]
   have hLy : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map y) := by
     have := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ i
     have hn := leftDerivedUpperStarTensorIso_hom_naturality_left i u T
@@ -208,6 +208,7 @@ theorem exists_isIso_comp_map_counit_eq_chernPowMap {X S Z : Scheme.{u}}
     infer_instance
   refine ⟨_, isIso_homEquiv_of_isIso_leftDerivedUpperStar_map Λ q i y hLy, ?_⟩
   rw [← Adjunction.homEquiv_naturality_right, hy, chernPowMap]
+  rfl
 
 end TopClass
 
@@ -221,28 +222,23 @@ lemma isIso_biproduct_desc_of_isIso_biprod_desc {N : ℕ} {F : Fin (N + 1) → C
     (g : ∀ a, F a ⟶ Y)
     (h : IsIso (biprod.desc (g (Fin.last N)) (biproduct.desc fun a : Fin N ↦ g a.castSucc))) :
     IsIso (biproduct.desc g) := by
+  have hne (a : Fin N) : Fin.last N ≠ a.castSucc := (Fin.castSucc_ne_last a).symm
   let e : (⨁ F) ≅ F (Fin.last N) ⊞ ⨁ (fun a : Fin N ↦ F a.castSucc) :=
     { hom := biprod.lift (biproduct.π F _) (biproduct.lift fun a ↦ biproduct.π F a.castSucc)
       inv := biprod.desc (biproduct.ι F _) (biproduct.desc fun a ↦ biproduct.ι F a.castSucc)
       hom_inv_id := by
         rw [biprod.lift_desc, biproduct.lift_desc, ← biproduct.total (f := F),
-          Fin.sum_univ_castSucc, add_comm]
+          Fin.sum_univ_castSucc]
+        exact add_comm _ _
       inv_hom_id := by
-        ext
-        · simp
-        · simp [biproduct.ι_π, Fin.castSucc_ne_last]
-        · refine biproduct.hom_ext' _ _ fun a ↦ ?_
-          simp [biproduct.ι_π, (Fin.castSucc_ne_last a).symm]
-        · refine biproduct.hom_ext' _ _ fun a ↦ biproduct.hom_ext _ _ fun b ↦ ?_
-          simp [biproduct.ι_π, Fin.castSucc_inj] }
+        ext <;> simp [biproduct.ι_π, hne, Fin.castSucc_inj] }
   have : biproduct.desc g = e.hom ≫
       biprod.desc (g (Fin.last N)) (biproduct.desc fun a : Fin N ↦ g a.castSucc) := by
-    refine biproduct.hom_ext' _ _ fun b ↦ ?_
-    induction b using Fin.lastCases with
-    | last => simp [e, biproduct.ι_π, Fin.castSucc_ne_last]
-    | cast a => simp [e, biproduct.ι_π, (Fin.castSucc_ne_last a).symm, Fin.castSucc_inj]
+    dsimp only [e]
+    rw [biprod.lift_desc, biproduct.lift_desc, biproduct.desc_eq, Fin.sum_univ_castSucc]
+    exact add_comm _ _
   rw [this]
-  infer_instance
+  exact IsIso.comp_isIso' (Iso.isIso_hom e) h
 
 end Biproduct
 

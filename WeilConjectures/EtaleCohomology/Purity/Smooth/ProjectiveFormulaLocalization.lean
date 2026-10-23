@@ -102,7 +102,6 @@ theorem isIso_biproduct_desc_chernPowMap_comp_unit {n : Type u} [Fintype n]
         ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
           (twistBundleOpen (Option n) S).ι).unit.app
             (constantComplex Λ ℙ(Option (Option n); S)))) := by
-  set A := ModuleCat.{u + 1} Λ
   set q := ℙ(Option (Option n); S) ↘ S
   set qH := ℙ(Option n; S) ↘ S
   set j := (twistBundleOpen (Option n) S).ι
@@ -112,24 +111,27 @@ theorem isIso_biproduct_desc_chernPowMap_comp_unit {n : Type u} [Fintype n]
   have hc : j ≫ q = π ≫ qH := (twistBundleπ_over (Option n) S).symm
   have hW : VectorBundle.classRestriction Λ (r := 1) j hP =
       VectorBundle.classRestriction Λ (r := 1) π hH := by
+    simp only [hP, hH]
     rw [← classRestriction_hyperplane_hyperplaneChernClass_eq aS (m := n),
       VectorBundle.classRestriction_comp Λ (twistBundleZero (Option n) S) j
         (hyperplane (Option n) S) (twistBundleZero_ι (Option n) S).symm,
-      ← twistBundle_zero, (twistBundle (Option n) S).classRestriction_classRestriction_zero
-        (qH ≫ aS)]
+      ← twistBundle_zero,
+      VectorBundle.classRestriction_classRestriction_zero (twistBundle (Option n) S) (qH ≫ aS)]
   -- the unit `Λ_H ⟶ Rπ_* Λ_W` is invertible
   have hu : IsIso (constantComplexUnit Λ π) := by
     have h₀ := (twistBundle (Option n) S).isIso_unit_tateObjectShift Λ (qH ≫ aS) 0
-    have := isIso_unit_app_of_iso (derivedUpperStarLowerStarAdjunction A π)
+    have := isIso_unit_app_of_iso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π)
       (tateObjectShiftZeroIso' (Λ := Λ) (X := ℙ(Option n; S))) h₀
-    unfold constantComplexUnit
-    infer_instance
-  let Z₁ := (R((q)_*[A])).map ((R((j)_*[A])).map (leftDerivedUpperStarConstantComplexIso Λ j).hom) ≫
+    exact IsIso.comp_isIso' this inferInstance
+  let Z₁ := (R((q)_*[ModuleCat.{u + 1} Λ])).map ((R((j)_*[ModuleCat.{u + 1} Λ])).map
+      (leftDerivedUpperStarConstantComplexIso Λ j).hom) ≫
     (rightDerivedLowerStarCompIso j q (j ≫ q) rfl).hom.app _
-  let Z₂ := (R((qH)_*[A])).map (constantComplexUnit Λ π) ≫
+  let Z₂ := (R((qH)_*[ModuleCat.{u + 1} Λ])).map (constantComplexUnit Λ π) ≫
     (rightDerivedLowerStarCompIso π qH (j ≫ q) hc).hom.app _
   have key : (biproduct.desc (fun a : Fin (Fintype.card n + 1) ↦ chernPowMap q hP a) ≫
-      (R((q)_*[A])).map ((derivedUpperStarLowerStarAdjunction A j).unit.app _)) ≫ Z₁ =
+      (R((q)_*[ModuleCat.{u + 1} Λ])).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
+          (constantComplex Λ ℙ(Option (Option n); S)))) ≫ Z₁ =
       projectiveFormulaMap qH hH (Fintype.card n) ≫ Z₂ := by
     refine biproduct.hom_ext' _ _ fun a ↦ ?_
     have h₁ := chernPowMap_comp j q (j ≫ q) rfl hP a
@@ -138,8 +140,16 @@ theorem isIso_biproduct_desc_chernPowMap_comp_unit {n : Type u} [Fintype n]
     simp only [projectiveFormulaMap, biproduct.ι_desc_assoc, Category.assoc, Z₁, Z₂]
     rw [h₁, ← Functor.map_comp_assoc]
     rfl
+  have : IsIso Z₁ := by
+    dsimp only [Z₁]
+    infer_instance
+  have : IsIso Z₂ := by
+    dsimp only [Z₂]
+    infer_instance
   have : IsIso ((biproduct.desc (fun a : Fin (Fintype.card n + 1) ↦ chernPowMap q hP a) ≫
-      (R((q)_*[A])).map ((derivedUpperStarLowerStarAdjunction A j).unit.app _)) ≫ Z₁) := by
+      (R((q)_*[ModuleCat.{u + 1} Λ])).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
+          (constantComplex Λ ℙ(Option (Option n); S)))) ≫ Z₁) := by
     rw [key]
     infer_instance
   exact IsIso.of_isIso_comp_right _ Z₁
@@ -161,26 +171,33 @@ lemma projectiveFormula_option {n : Type u} [Fintype n] (h : ProjectiveFormula �
     ProjectiveFormula Λ S (Option n) := by
   intro γ hγ
   obtain rfl := eq_hyperplaneClass aS hγ
-  set A := ModuleCat.{u + 1} Λ
-  set q := ℙ(Option (Option n); S) ↘ S
-  set hP := hyperplaneChernClass (hyperplaneClass Λ (Option n) aS)
-  set K := constantComplex Λ ℙ(Option (Option n); S)
-  set j := (twistBundleOpen (Option n) S).ι
   obtain ⟨D⟩ := nonempty_pointClassData Λ (Option n) aS
   have := D.isIso_comp
-  obtain ⟨ψ, hψ, hψε⟩ := exists_isIso_comp_map_counit_eq_chernPowMap q D.i hP _ D.γ
-    D.isIso_supportedClassMap D.forget_eq
-  have hT := supportedLocalizationTriangle_mem_distTriang A D.i j D.range_eq K
-  have : (R((q)_*[A])).IsTriangulated :=
-    (mapDerivedUpperStarLowerStarAdjunction A q).isTriangulated_rightAdjoint
-  have hT' := (R((q)_*[A])).map_distinguished _ hT
-  have hG := isIso_biproduct_desc_chernPowMap_comp_unit aS (h _ (isHyperplaneClass_hyperplaneClass aS))
-  have hiso := isIso_biprod_desc_of_distTriang _ _ _ hT' ψ
-    (biproduct.desc fun a : Fin (Fintype.card n + 1) ↦ chernPowMap q hP a)
-  erw [hψε] at hiso
-  revert hiso
-  rw [Fintype.card_option]
-  exact fun hiso ↦ isIso_biproduct_desc_of_isIso_biprod_desc _ hiso
+  obtain ⟨ψ, hψ, hψε⟩ := exists_isIso_comp_map_counit_eq_chernPowMap
+    (ℙ(Option (Option n); S) ↘ S) D.i _ _ D.γ D.isIso_supportedClassMap D.forget_eq
+  have hT := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) D.i
+    (twistBundleOpen (Option n) S).ι D.range_eq (constantComplex Λ ℙ(Option (Option n); S))
+  have : (R((ℙ(Option (Option n); S) ↘ S)_*[ModuleCat.{u + 1} Λ])).IsTriangulated :=
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (ℙ(Option (Option n); S) ↘ S)).isTriangulated_rightAdjoint
+  have := isIso_biproduct_desc_chernPowMap_comp_unit aS
+    (h _ (isHyperplaneClass_hyperplaneClass aS))
+  have hiso := isIso_biprod_desc_of_distTriang
+    ((R((ℙ(Option (Option n); S) ↘ S)_*[ModuleCat.{u + 1} Λ])).map
+      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) D.i).counit.app
+        (constantComplex Λ ℙ(Option (Option n); S))))
+    ((R((ℙ(Option (Option n); S) ↘ S)_*[ModuleCat.{u + 1} Λ])).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (twistBundleOpen (Option n) S).ι).unit.app (constantComplex Λ ℙ(Option (Option n); S))))
+    _ ((R((ℙ(Option (Option n); S) ↘ S)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hT) ψ
+    (biproduct.desc fun a : Fin (Fintype.card n + 1) ↦ chernPowMap (ℙ(Option (Option n); S) ↘ S)
+      (hyperplaneChernClass (hyperplaneClass Λ (Option n) aS)) a)
+  rw [hψε, Fintype.card_option] at hiso
+  suffices key : ∀ r, r = Fintype.card n + 1 → IsIso (projectiveFormulaMap
+      (ℙ(Option (Option n); S) ↘ S) (hyperplaneChernClass (hyperplaneClass Λ (Option n) aS)) r) from
+    key _ Fintype.card_option
+  rintro r rfl
+  exact isIso_biproduct_desc_of_isIso_biprod_desc (fun a ↦ chernPowMap _ _ a) hiso
 
 end Etale
 

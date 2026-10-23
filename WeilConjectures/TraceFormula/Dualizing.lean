@@ -159,7 +159,8 @@ variable (X) in
 `ProEtale.CondensedRing.smoothPurityIso` for the structure morphism `a_X`. -/
 noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
     (dualizingComplex' ℓ X).obj ≅
-      (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
+      (shiftFunctor _ (2 * d : ℤ)).obj
+        (tateTwistDerived X.left (Profinite.padicIntRingObjToPadicAlgCl ℓ) d) :=
   haveI : SmoothOfRelativeDimension d (toPoint X).left :=
     inferInstanceAs (SmoothOfRelativeDimension d X.hom)
   smoothPurityIso ℓ (toPoint X) d

@@ -118,8 +118,6 @@ namespace WeilSheaf.LisseOnDenseOpen
 
 variable (D : LisseOnDenseOpen k₀ l)
 
-set_option synthInstance.maxHeartbeats 100000 in
--- the `Epi` instance of the restricted comparison map is found only after unfolding the restriction
 /-- **The boundary sheaf vanishes on `U₀`**: the restriction of `j_!M ⟶ j_*M` to `U₀` is an
 isomorphism, and the restriction is exact. -/
 theorem isZero_upperStar_boundarySheaf :
@@ -153,10 +151,20 @@ theorem isZero_upperStar_boundarySheaf :
       ((ProEtale.adicOpenImmersionLowerShriekAdjunction l jb).unit.app D.sheaf.obj.carrier) _
   change IsZero ((jb)^*ᵃ[l].obj (Φ.obj (cokernel
     ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf))))
-  refine IsZero.of_iso (isZero_cokernel_of_epi ((jb)^*ᵃ[l].map
-      ((ProEtale.adicOpenImmersionLowerShriekToLowerStar l jb).app D.sheaf.obj.carrier)))
-    ((jb)^*ᵃ[l].mapIso (PreservesCokernel.iso Φ _ ≪≫ cokernel.mapIso _ _ (Iso.refl _)
-      (Iso.refl _) (by rw [hc]; simp)) ≪≫ PreservesCokernel.iso _ _)
+  -- the `Epi` instance is given explicitly: instance search gets stuck on universe constraints
+  have hepi : Epi ((jb)^*ᵃ[l].map
+      ((ProEtale.adicOpenImmersionLowerShriekToLowerStar l jb).app D.sheaf.obj.carrier)) :=
+    IsIso.epi_of_iso _
+  have hz := isZero_cokernel_of_epi ((jb)^*ᵃ[l].map
+      ((ProEtale.adicOpenImmersionLowerShriekToLowerStar l jb).app D.sheaf.obj.carrier))
+  have e₁ := PreservesCokernel.iso Φ ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf)
+  have e₂ := cokernel.mapIso (Φ.map ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf))
+    ((ProEtale.adicOpenImmersionLowerShriekToLowerStar l jb).app D.sheaf.obj.carrier)
+    (Iso.refl _) (Iso.refl _)
+    (by simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]; exact hc)
+  have e₃ := PreservesCokernel.iso (jb)^*ᵃ[l]
+    ((ProEtale.adicOpenImmersionLowerShriekToLowerStar l jb).app D.sheaf.obj.carrier)
+  exact IsZero.of_iso hz ((jb)^*ᵃ[l].mapIso (e₁ ≪≫ e₂) ≪≫ e₃)
 
 /-- A rational point of the affine line whose closed point lies in `U₀` comes from `U₀`. -/
 private lemma exists_mapFieldPoints_eq {K : Type u} [Field K] [Algebra k₀ K]

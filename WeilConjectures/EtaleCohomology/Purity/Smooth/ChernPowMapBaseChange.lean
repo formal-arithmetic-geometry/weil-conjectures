@@ -122,11 +122,13 @@ theorem isIso_leftDerivedUpperStar_map_projectiveFormulaMap_iff (sq : IsPullback
   have := isIso_derivedBaseChangeMap_app_constantComplex_of_etale Λ sq
   have hb : IsIso (biproduct.map
       (fun a : Fin (r + 1) ↦ (leftDerivedUpperStarTateShiftIso Λ g (-(a : ℤ))).hom)) :=
-    (biproduct.mapIso fun a : Fin (r + 1) ↦ leftDerivedUpperStarTateShiftIso Λ g (-(a : ℤ))).isIso_hom
+    (biproduct.mapIso fun a : Fin (r + 1) ↦
+      leftDerivedUpperStarTateShiftIso Λ g (-(a : ℤ))).isIso_hom
   have e := mapBiproduct_inv_comp_leftDerivedUpperStar_map_projectiveFormulaMap sq.toCommSq h r
   constructor
   · intro
-    rw [← isIso_comp_left_iff (biproduct.map _), ← e]
+    rw [← isIso_comp_left_iff (biproduct.map
+      fun a : Fin (r + 1) ↦ (leftDerivedUpperStarTateShiftIso Λ g (-(a : ℤ))).hom), ← e]
     infer_instance
   · intro
     rw [← isIso_comp_left_iff ((L((g)^*[ModuleCat.{u + 1} Λ])).mapBiproduct _).inv,

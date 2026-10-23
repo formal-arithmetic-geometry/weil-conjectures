@@ -32,6 +32,10 @@ universe u
 
 open CategoryTheory Limits
 
+-- The imports bring in `AlgebraicGeometry.specOverSpec` of `(Spec A).Over (Spec R)`, under which
+-- the structure morphism of `Spec k₀` over itself is not the identity: prefer the identity.
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

@@ -12165,10 +12165,13 @@ public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
+public import WeilConjectures.SmoothPurity.Adjunction
+public import WeilConjectures.SmoothPurity.CoefficientChange
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.TateTwist.ProEtaleConstructible
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
 public import WeilConjectures.Topology.AbelianIntegerExtensionMono

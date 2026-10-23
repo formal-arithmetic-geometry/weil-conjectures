@@ -81,14 +81,15 @@ the adjoint `ProEtale.CondensedRing.smoothPurityMap` of the trace. No new choice
 the only normalization entering the trace and Poincaré duality below. -/
 noncomputable def boundedConstructibleSmoothPurityIso :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ≅
-      boundedConstructibleTateTwist ℓ X d (2 * d) :=
+      boundedConstructibleTateTwist (Profinite.padicIntRingObjToPadicAlgCl ℓ) X d (2 * d) :=
   (asIso (smoothPurityMap ℓ p d)).symm
 
 /-- The **trace** `Tr_p : Rp_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of a smooth morphism `p : X ⟶ S` of pure
 relative dimension `d`: `Rp_!(pur_p⁻¹)` followed by the counit of `Rp_! ⊣ Rp^!`. -/
 noncomputable def trace :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-      (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶ 𝟙_ _ :=
+      (boundedConstructibleTateTwist (Profinite.padicIntRingObjToPadicAlgCl ℓ) X d (2 * d)) ⟶
+        𝟙_ _ :=
   Verdier.trace (boundedConstructibleUpperShriekAdjunction _ ℓ p)
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
@@ -97,7 +98,7 @@ noncomputable def trace :
 `Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)`, and the Verdier exchange morphism. -/
 noncomputable def poincareMap :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-        (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
+        (boundedConstructibleTateTwist (Profinite.padicIntRingObjToPadicAlgCl ℓ) X d (2 * d)) ⟶
       (ihom ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
         (𝟙_ _))).obj (𝟙_ _) :=
   Verdier.poincareMap (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
@@ -111,13 +112,12 @@ projection morphism `PF^!`, the counit `Lp^* Rp_* ⟶ 𝟭` and the left unitor.
 noncomputable def cupProduct :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ⊗
         (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-          (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
+          (boundedConstructibleTateTwist (Profinite.padicIntRingObjToPadicAlgCl ℓ) X d (2 * d)) ⟶
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-        (boundedConstructibleTateTwist ℓ X d (2 * d)) :=
+        (boundedConstructibleTateTwist (Profinite.padicIntRingObjToPadicAlgCl ℓ) X d (2 * d)) :=
   Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
     (boundedConstructibleExceptionalProjection _ ℓ p)
 
-omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality is the trace–cup pairing**: the transpose
 `Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of the Poincaré duality morphism is the cup product
 followed by the trace. -/
@@ -125,7 +125,6 @@ theorem uncurry_poincareMap :
     uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d :=
   Verdier.uncurry_poincareMap _ _ _ _
 
-omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality**: the Poincaré duality morphism
 `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` is an isomorphism, by Verdier duality. -/
 theorem isIso_poincareMap : IsIso (poincareMap ℓ p d) := by

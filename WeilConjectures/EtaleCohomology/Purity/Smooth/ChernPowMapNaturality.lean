@@ -44,16 +44,13 @@ lemma homEquiv_conjugateIsoEquiv (adj : F ⊣ G) (adj' : F' ⊣ G') (adj'' : F''
       adj.homEquiv A B x ≫ G.map (adj'.homEquiv B Z y) ≫
         (conjugateIsoEquiv (adj.comp adj') adj'' φ).hom.app Z := by
   have hu := unit_conjugateEquiv (adj.comp adj') adj'' φ.hom A
-  have hn := (conjugateIsoEquiv (adj.comp adj') adj'' φ).hom.naturality (F'.map x ≫ y)
+  have hn := (conjugateEquiv (adj.comp adj') adj'' φ.hom).naturality (F'.map x ≫ y)
   have hx := adj'.unit.naturality x
   rw [comp_unit_app] at hu
   simp only [Functor.comp_map, Functor.id_map, Functor.comp_obj] at hn hx
-  rw [homEquiv_unit, homEquiv_unit, homEquiv_unit, Functor.map_comp, Functor.map_comp,
-    Functor.map_comp, ← Functor.map_comp_assoc G x, hx, Functor.map_comp, Category.assoc,
-    ← Functor.map_comp_assoc G' (F'.map x), reassoc_of% hn]
-  simp only [Category.assoc]
-  rw [← reassoc_of% hu, Functor.map_comp]
-  rfl
+  simp only [homEquiv_unit, Functor.map_comp, Category.assoc, conjugateIsoEquiv_apply_hom]
+  rw [← reassoc_of% hu, ← Functor.map_comp G'', ← hn, ← Functor.map_comp_assoc G x, hx]
+  simp only [Functor.map_comp, Category.assoc]
 
 end CategoryTheory.Adjunction
 
@@ -91,9 +88,7 @@ lemma tateObjectShiftAddNegIso_eq (m : ℤ) :
     tateObjectShiftAddNegIso (Λ := Λ) (X := X) m =
       eqToIso (by rw [add_neg_cancel]) ≪≫ (tateObjectShiftZeroIso' (Λ := Λ) (X := X)).symm := by
   have key (k : ℤ) (hk : k = 0) (h₁ : 2 * k = 0)
-      (h₂ : (shiftFunctor (_root_.DerivedCategory
-        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) 0).obj (tateObject Λ X k) =
-          HasTateTwist.twistObject X 0)
+      (h₂ : tateObject Λ X k = HasTateTwist.twistObject (Λ := Λ) X 0)
       (h₃ : (tateObject Λ X k)⟦2 * k⟧ = (tateObject Λ X 0)⟦2 * (0 : ℤ)⟧) :
       (shiftFunctorZero' _ (2 * k) h₁).app _ ≪≫ eqToIso h₂ ≪≫
           HasTateTwist.twistObjectZeroIso X =
@@ -126,28 +121,22 @@ omit [Finite Λ] in
 lemma leftDerivedUpperStar_map_derivedTensorLeftUnitor_inv (f : X ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) Y K).inv ≫
-        (leftDerivedUpperStarTensorIso _ f _ K).hom =
+        (leftDerivedUpperStarTensorIso _ f (constantComplex Λ Y) K).hom =
       (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X _).inv ≫
         derivedTensorHom _ (leftDerivedUpperStarConstantComplexIso Λ f).inv (𝟙 _) := by
   have h : (leftDerivedUpperStarTensorIso _ f _ K).hom ≫
       derivedTensorHom _ (leftDerivedUpperStarConstantComplexIso Λ f).hom (𝟙 _) ≫
         (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X _).hom =
-      (L((f)^*[ModuleCat.{u + 1} Λ])).map (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) Y K).hom := by
+      (L((f)^*[ModuleCat.{u + 1} Λ])).map
+        (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) Y K).hom := by
     rw [leftDerivedUpperStar_map_derivedTensorLeftUnitor_hom, derivedTensorHom,
       CategoryTheory.Functor.map_id, Category.comp_id]
     rfl
-  calc _ = (L((f)^*[ModuleCat.{u + 1} Λ])).map
-          (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) Y K).inv ≫
-        ((leftDerivedUpperStarTensorIso _ f _ K).hom ≫
-          derivedTensorHom _ (leftDerivedUpperStarConstantComplexIso Λ f).hom (𝟙 _) ≫
-            (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X _).hom) ≫
-          (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X _).inv ≫
-            derivedTensorHom _ (leftDerivedUpperStarConstantComplexIso Λ f).inv (𝟙 _) := by
-        simp only [Category.assoc, Iso.hom_inv_id_assoc, derivedTensorHom_comp, Iso.hom_inv_id,
-          Category.comp_id, derivedTensorHom_id]
-    _ = _ := by
-        rw [h, ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
-          Category.id_comp]
+  rw [← cancel_epi ((L((f)^*[ModuleCat.{u + 1} Λ])).map
+      (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) Y K).hom), ← Functor.map_comp_assoc,
+    Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp, ← h]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, derivedTensorHom_comp, Iso.hom_inv_id,
+    Category.comp_id, derivedTensorHom_id]
 
 /-- **Cup product with a class and the unit class commute with pullback**: for
 `x ∈ H^{2m}(Y, Λ(m))`, the map `Λ(-m)[-2m] ≅ Λ ⊗ Λ(-m)[-2m] ⟶ Λ(m)[2m] ⊗ Λ(-m)[-2m] ≅ Λ`
@@ -178,17 +167,17 @@ lemma leftDerivedUpperStar_map_cupTateShift (f : X ⟶ Y) (m : ℤ)
       (g : M ⟶ M₁) :
       ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj K).map g = derivedTensorHom _ (𝟙 K) g := by
     simp [derivedTensorHom]
-  have hλ := (derivedTensorLeftUnitorNatIso (ModuleCat.{u + 1} Λ) X).inv.naturality
+  have hlu := (derivedTensorLeftUnitorNatIso (ModuleCat.{u + 1} Λ) X).inv.naturality
     (leftDerivedUpperStarTateShiftIso Λ f (-m)).hom
-  simp only [derivedTensorLeftUnitorNatIso, NatIso.ofComponents_inv_app, Functor.id_map] at hλ
+  simp only [derivedTensorLeftUnitorNatIso, NatIso.ofComponents_inv_app, Functor.id_map] at hlu
   simp only [Functor.map_comp, Category.assoc,
     leftDerivedUpperStar_map_tateObjectShiftAddNegIso_hom]
   rw [reassoc_of% (leftDerivedUpperStar_map_shiftTateObjectAddIso Λ f m (-m))]
   simp only [hx]
   rw [leftDerivedUpperStarTensorIso_hom_naturality_assoc,
-    leftDerivedUpperStar_map_derivedTensorLeftUnitor_inv_assoc, reassoc_of% hλ]
-  simp only [hy, derivedTensorHom_comp_assoc, CategoryTheory.Functor.map_id, Category.id_comp,
-    Category.comp_id, Category.assoc]
+    leftDerivedUpperStar_map_derivedTensorLeftUnitor_inv_assoc, reassoc_of% hlu]
+  simp only [hx, hy, NatTrans.comp_app, derivedTensorHom_comp_assoc,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
 
 end Unit
 
@@ -318,11 +307,18 @@ lemma projectiveFormula_of_equiv {n n' : Type u} [Fintype n] [Fintype n'] (e : n
   intro γ hγ
   have : IsIso (reindexHom S (Equiv.optionCongr e)) :=
     (reindexIso S (Equiv.optionCongr e)).isIso_hom
-  rw [eq_hyperplaneClass aS hγ, ← Fintype.card_congr e,
+  have hcard (r r' : ℕ) (hr : r = r')
+      (hi : IsIso (projectiveFormulaMap (ℙ(Option n; S) ↘ S)
+        (hyperplaneChernClass (hyperplaneClass Λ n aS)) r)) :
+      IsIso (projectiveFormulaMap (ℙ(Option n; S) ↘ S)
+        (hyperplaneChernClass (hyperplaneClass Λ n aS)) r') := by
+    subst hr
+    exact hi
+  rw [eq_hyperplaneClass aS hγ,
     ← isIso_projectiveFormulaMap_comp_iff (reindexHom S (Equiv.optionCongr e))
       (ℙ(Option n'; S) ↘ S) (ℙ(Option n; S) ↘ S) (reindexHom_over S _).symm,
     classRestriction_reindex_hyperplaneChernClass aS e]
-  exact h _ (isHyperplaneClass_hyperplaneClass aS)
+  exact hcard _ _ (Fintype.card_congr e) (h _ (isHyperplaneClass_hyperplaneClass aS))
 
 end Etale
 
