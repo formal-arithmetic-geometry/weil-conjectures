@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 
 /-!
