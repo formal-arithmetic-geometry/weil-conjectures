@@ -1809,6 +1809,10 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.CupProduct
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Pullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.BaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.ExtendScalars
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.Pullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedGlobalSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
