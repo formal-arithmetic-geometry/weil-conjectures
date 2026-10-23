@@ -11,43 +11,47 @@ public import WeilConjectures.TraceFormula.ModelExtension
 
 /-!
 
-# The base change from a finite field to its algebraic closure
+# The base change from a finite field to an algebraically closed field
 
-Let `k = 𝔽_q` be a finite field with algebraic closure `k̄`, `s : Spec k̄ ⟶ Spec k` the geometric
-point (`specAlgebraicClosure k`) and `X` a scheme over `Spec k`. This file sets up the geometry
-of the base change `X̄ = X ×_k k̄`, an object of `Over (Spec k̄)`, which connects the Weil objects
-of `WeilConjectures.TraceFormula.Statement`, living over `k` with an automorphism `e`, and the
-model-Frobenius setting of the Lefschetz–Verdier formula, living over `k̄` with an endomorphism
-`Φ` over `Spec k̄`.
+Let `k = 𝔽_q` be a finite field, `Ω` a field containing `k` (in the applications the algebraic
+closure `k̄`) and `X` a scheme over `Spec k`. This file sets up the geometry of the base change
+`X̄ = X ×_k Ω`, an object of `Over (Spec Ω)`, which connects the Weil objects of
+`WeilConjectures.TraceFormula.Statement`, living over `k` with an automorphism `e`, and the
+model-Frobenius setting of the Lefschetz–Verdier formula, living over `Ω` with an endomorphism
+`Φ` over `Spec Ω`.
 
 * The `q`-power Frobenius `F_X : X ⟶ X` (`ProEtale.CondensedRing.overFrobenius`) is a morphism
   over `Spec k`, since `k = 𝔽_q`, and commutes with every morphism of schemes over `Spec k`.
 * For an endomorphism `g` of `X` over `Spec k` and `N : ℕ`, the *model Frobenius*
-  `Φ = (F_X^N ≫ g) ×_k k̄` of `X̄` (`ProEtale.CondensedRing.modelFrobenius N g`) is an
-  endomorphism over `Spec k̄`. For `g = 𝟙` it is the base change of the `q^N`-power Frobenius,
+  `Φ = (g ≫ F_X^N) ×_k Ω` of `X̄` (`ProEtale.CondensedRing.modelFrobenius N g`) is an
+  endomorphism over `Spec Ω`. For `g = 𝟙` it is the base change of the `q^N`-power Frobenius,
   the model Frobenius of `IsModelFrobenius` for a model of `X̄` over `𝔽_{q^N}`
   (`ProEtale.CondensedRing.exists_isModelFrobenius_modelFrobenius_id`). For an automorphism `e`,
-  `Φ = (F_X^{n+1} ≫ e^{n+1}) ×_k k̄` is the Frobenius `σ^{n+1}` twisted by `e^{n+1}`.
-* A geometric point `x̄ : Spec k̄ ⟶ X` over `s` is the same as a `k̄`-rational point
-  `x̄' = (x̄, 𝟙)` of `X̄` (`ProEtale.CondensedRing.geometricBaseChangePoint`), and
-  `x̄ ≫ g = σ^{n+1} ≫ x̄` if and only if `x̄'` is fixed by `Φ = (F_X^{n+1} ≫ g) ×_k k̄`
-  (`ProEtale.CondensedRing.geometricBaseChangePoint_comp_modelFrobenius_eq_iff`): the Galois
-  Frobenius `σ` of `Spec k̄` is the inverse of the `q`-power Frobenius of `Spec k̄`, and
-  `F_X ∘ x̄ = x̄ ∘ F_{k̄}`. In particular the points of degree `n + 1` for `e`
+  `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` is the Frobenius `σ^{n+1}` twisted by `e^{n+1}`.
+* A morphism `x̄ : Spec Ω ⟶ X` over `Spec k` is the same as an `Ω`-rational point
+  `x̄' = (x̄, 𝟙)` of `X̄` (`ProEtale.CondensedRing.geometricBaseChangePoint`). Let `σ` be an
+  automorphism of `Spec Ω` inverse to `Spec(y ↦ y ^ (q ^ N))`; for `Ω = k̄` this is `σ^N` for the
+  Galois Frobenius `σ` (`ProEtale.CondensedRing.geometricFrobeniusField_powSucc_inv`). Then
+  `x̄ ≫ g = σ ≫ x̄` if and only if `x̄'` is fixed by `Φ = (g ≫ F_X^N) ×_k Ω`
+  (`ProEtale.CondensedRing.geometricBaseChangePoint_comp_modelFrobenius_eq_iff`), since
+  `x̄ ≫ F_X^N = Spec(y ↦ y ^ (q ^ N)) ≫ x̄`. In particular the points of degree `n + 1` for `e`
   (`ProEtale.CondensedRing.frobeniusFixedPoints e n`) are the rational points of `X̄` fixed by
-  `Φ = (F_X^{n+1} ≫ e^{n+1}) ×_k k̄` (`ProEtale.CondensedRing.frobeniusFixedPointsEquiv`).
+  `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` (`ProEtale.CondensedRing.frobeniusFixedPointsEquiv`).
+
+The statements are made for a general field `Ω` and specialized to `Ω = k̄` only at the end:
+statements about the categories of sheaves on the concrete scheme `Spec k̄` hit kernel timeouts.
 
 ## Main definitions
 
 - `ProEtale.CondensedRing.overFrobenius`: the `q`-power Frobenius of a scheme over `Spec k`.
 - `ProEtale.CondensedRing.geometricBaseChange`: the base change functor
-  `Over (Spec k) ⥤ Over (Spec k̄)`, with projection
+  `Over (Spec k) ⥤ Over (Spec Ω)`, with projection
   `ProEtale.CondensedRing.geometricBaseChangeProj : X̄ ⟶ X`.
-- `ProEtale.CondensedRing.modelFrobenius`: the model Frobenius `(F_X^N ≫ g) ×_k k̄` of `X̄`.
+- `ProEtale.CondensedRing.modelFrobenius`: the model Frobenius `(g ≫ F_X^N) ×_k Ω` of `X̄`.
 - `ProEtale.CondensedRing.geometricBaseChangePoint`: the rational point of `X̄` attached to a
-  geometric point of `X` over `s`.
+  morphism `Spec Ω ⟶ X` over `Spec k`.
 - `ProEtale.CondensedRing.frobeniusFixedPointsEquiv`: the points of degree `n + 1` for `e` are
-  the rational points of `X̄` fixed by the model Frobenius.
+  the rational points of `X̄ = X ×_k k̄` fixed by the model Frobenius.
 
 -/
 
@@ -95,19 +99,21 @@ lemma isFrobenius_frobeniusIterate_overFrobenius_left (N : ℕ) :
 
 end Frobenius
 
-/-! ### The Galois Frobenius of `Spec k̄` -/
+/-! ### The Frobenius of `Spec Ω` -/
 
-section Galois
+section PowCard
 
-variable (k) in
-/-- The ring endomorphism `y ↦ y ^ (#k ^ N)` of `k̄`. -/
-noncomputable def powCardPowRingHom (N : ℕ) :
-    CommRingCat.of (AlgebraicClosure k) ⟶ CommRingCat.of (AlgebraicClosure k) :=
+variable (k) (Ω : Type u) [Field Ω] [Algebra k Ω]
+
+/-- The ring endomorphism `y ↦ y ^ (#k ^ N)` of a field `Ω` containing `k`. -/
+noncomputable def powCardPowRingHom (N : ℕ) : CommRingCat.of Ω ⟶ CommRingCat.of Ω :=
   letI := Fintype.ofFinite k
-  CommRingCat.ofHom ((FiniteField.frobeniusAlgHom k (AlgebraicClosure k)).toRingHom ^ N)
+  CommRingCat.ofHom ((FiniteField.frobeniusAlgHom k Ω).toRingHom ^ N)
 
-lemma powCardPowRingHom_apply (N : ℕ) (y : AlgebraicClosure k) :
-    (powCardPowRingHom k N).hom y = y ^ (Nat.card k ^ N) := by
+variable {k Ω}
+
+lemma powCardPowRingHom_apply (N : ℕ) (y : Ω) :
+    (powCardPowRingHom k Ω N).hom y = y ^ (Nat.card k ^ N) := by
   let := Fintype.ofFinite k
   simp only [powCardPowRingHom, CommRingCat.hom_ofHom, RingHom.coe_pow]
   induction N generalizing y with
@@ -115,6 +121,10 @@ lemma powCardPowRingHom_apply (N : ℕ) (y : AlgebraicClosure k) :
   | succ N ih =>
     rw [Function.iterate_succ_apply, ih, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
       FiniteField.frobeniusAlgHom_apply, Nat.card_eq_fintype_card, ← pow_mul, pow_succ']
+
+end PowCard
+
+section Galois
 
 /-- The `N`-th power of the geometric Frobenius of `k̄` is a left inverse of the
 `#k ^ N`-power map. -/
@@ -126,26 +136,26 @@ lemma geometricFrobenius_pow_apply_pow (N : ℕ) (y : AlgebraicClosure k) :
     rw [pow_succ, AlgEquiv.mul_apply, pow_succ, pow_mul,
       (FiniteField.geometricFrobenius_eq_iff k (AlgebraicClosure k)).2 rfl, ih]
 
-
 /-- The `N`-th power of the geometric Frobenius `σ` of `Spec k̄` is inverse to `Spec` of the
 `#k ^ N`-power map of `k̄`: `σ^N ≫ Spec(y ↦ y ^ (#k ^ N)) = 𝟙`. -/
 lemma geometricFrobeniusField_powSucc_hom_comp_specMap (n : ℕ) :
-    ((geometricFrobeniusField k).powSucc n).hom ≫ Spec.map (powCardPowRingHom k (n + 1)) =
-      𝟙 _ := by
+    ((geometricFrobeniusField k).powSucc n).hom ≫
+      Spec.map (powCardPowRingHom k (AlgebraicClosure k) (n + 1)) = 𝟙 _ := by
   rw [Iso.powSucc_hom_eq_pow, geometricFrobeniusField_hom_pow, ← Spec.map_comp, ← Spec.map_id]
   congr 1
   ext y
   change ((FiniteField.geometricFrobenius k (AlgebraicClosure k)) ^ (n + 1))
-    ((powCardPowRingHom k (n + 1)).hom y) = y
+    ((powCardPowRingHom k (AlgebraicClosure k) (n + 1)).hom y) = y
   rw [powCardPowRingHom_apply]
   exact geometricFrobenius_pow_apply_pow (n + 1) y
 
-/-- `Spec(y ↦ y ^ (#k ^ N)) ≫ σ^N = 𝟙`. -/
-lemma specMap_comp_geometricFrobeniusField_powSucc_hom (n : ℕ) :
-    Spec.map (powCardPowRingHom k (n + 1)) ≫ ((geometricFrobeniusField k).powSucc n).hom =
-      𝟙 _ := by
-  rw [← cancel_epi ((geometricFrobeniusField k).powSucc n).hom, ← Category.assoc,
-    geometricFrobeniusField_powSucc_hom_comp_specMap, Category.id_comp, Category.comp_id]
+/-- The inverse of the `N`-th power of the geometric Frobenius `σ` of `Spec k̄` is `Spec` of the
+`#k ^ N`-power map of `k̄`. -/
+lemma geometricFrobeniusField_powSucc_inv (n : ℕ) :
+    ((geometricFrobeniusField k).powSucc n).inv =
+      Spec.map (powCardPowRingHom k (AlgebraicClosure k) (n + 1)) := by
+  rw [← cancel_epi ((geometricFrobeniusField k).powSucc n).hom, Iso.hom_inv_id,
+    geometricFrobeniusField_powSucc_hom_comp_specMap]
 
 end Galois
 
@@ -153,33 +163,38 @@ end Galois
 
 section BaseChange
 
-variable (k) in
-/-- The base change functor `X ↦ X̄ = X ×_k k̄` from schemes over `Spec k` to schemes over
-`Spec k̄`, along the geometric point `s : Spec k̄ ⟶ Spec k`. -/
-noncomputable abbrev geometricBaseChange :
-    Over (Spec (.of k)) ⥤ Over (Spec (.of (AlgebraicClosure k))) :=
-  Over.pullback (specAlgebraicClosure k)
+variable (k) (Ω : Type u) [Field Ω] [Algebra k Ω]
 
-variable (X : Over (Spec (.of k)))
+/-- The base change functor `X ↦ X̄ = X ×_k Ω` from schemes over `Spec k` to schemes over
+`Spec Ω`. -/
+noncomputable abbrev geometricBaseChange : Over (Spec (.of k)) ⥤ Over (Spec (.of Ω)) :=
+  Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))
+
+variable {Ω} (X : Over (Spec (.of k)))
 
 instance [LocallyOfFiniteType X.hom] :
-    LocallyOfFiniteType ((geometricBaseChange k).obj X).hom :=
-  inferInstanceAs (LocallyOfFiniteType (pullback.snd X.hom (specAlgebraicClosure k)))
+    LocallyOfFiniteType ((geometricBaseChange k Ω).obj X).hom :=
+  inferInstanceAs (LocallyOfFiniteType
+    (pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))))
 
-instance [QuasiCompact X.hom] : QuasiCompact ((geometricBaseChange k).obj X).hom :=
-  inferInstanceAs (QuasiCompact (pullback.snd X.hom (specAlgebraicClosure k)))
+instance [QuasiCompact X.hom] : QuasiCompact ((geometricBaseChange k Ω).obj X).hom :=
+  inferInstanceAs (QuasiCompact
+    (pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))))
 
-instance [IsSeparated X.hom] : IsSeparated ((geometricBaseChange k).obj X).hom :=
-  inferInstanceAs (IsSeparated (pullback.snd X.hom (specAlgebraicClosure k)))
+instance [IsSeparated X.hom] : IsSeparated ((geometricBaseChange k Ω).obj X).hom :=
+  inferInstanceAs (IsSeparated
+    (pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))))
+
+variable {k}
 
 /-- The projection `π : X̄ ⟶ X` of the base change. -/
-noncomputable def geometricBaseChangeProj : ((geometricBaseChange k).obj X).left ⟶ X.left :=
-  pullback.fst X.hom (specAlgebraicClosure k)
+noncomputable def geometricBaseChangeProj : ((geometricBaseChange k Ω).obj X).left ⟶ X.left :=
+  pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))
 
 omit [Finite k] in
 lemma isPullback_geometricBaseChangeProj :
-    IsPullback (geometricBaseChangeProj X) ((geometricBaseChange k).obj X).hom X.hom
-      (specAlgebraicClosure k) :=
+    IsPullback (geometricBaseChangeProj (Ω := Ω) X) ((geometricBaseChange k Ω).obj X).hom X.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) :=
   IsPullback.of_hasPullback _ _
 
 omit [Finite k] in
@@ -187,51 +202,51 @@ variable {X} in
 /-- The base change of a morphism `f` lies over `f`: `f̄ ≫ π = π ≫ f`. -/
 @[reassoc (attr := simp)]
 lemma geometricBaseChange_map_left_comp_proj {Y : Over (Spec (.of k))} (f : X ⟶ Y) :
-    ((geometricBaseChange k).map f).left ≫ geometricBaseChangeProj Y =
+    ((geometricBaseChange k Ω).map f).left ≫ geometricBaseChangeProj Y =
       geometricBaseChangeProj X ≫ f.left := by
   simp [geometricBaseChangeProj]
 
-/-- The model Frobenius `Φ = (F_X^N ≫ g) ×_k k̄` of the base change `X̄`, for an endomorphism `g`
-of `X` over `Spec k`: an endomorphism of `X̄` over `Spec k̄`. For an automorphism `e`, the model
-Frobenius `(F_X^{n+1} ≫ e^{n+1}) ×_k k̄` is the Frobenius `σ^{n+1}` twisted by `e^{n+1}`. -/
+variable (Ω) in
+/-- The model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω` of the base change `X̄`, for an endomorphism `g`
+of `X` over `Spec k`: an endomorphism of `X̄` over `Spec Ω`. For an automorphism `e`, the model
+Frobenius `(e^{n+1} ≫ F_X^{n+1}) ×_k k̄` is the Frobenius `σ^{n+1}` twisted by `e^{n+1}`. -/
 noncomputable def modelFrobenius (N : ℕ) (g : X ⟶ X) :
-    (geometricBaseChange k).obj X ⟶ (geometricBaseChange k).obj X :=
-  (geometricBaseChange k).map (frobeniusIterate (overFrobenius X) N ≫ g)
+    (geometricBaseChange k Ω).obj X ⟶ (geometricBaseChange k Ω).obj X :=
+  (geometricBaseChange k Ω).map (g ≫ frobeniusIterate (overFrobenius X) N)
 
-/-- `Φ ≫ π = π ≫ F_X^N ≫ g`. -/
+/-- `Φ ≫ π = π ≫ g ≫ F_X^N`. -/
 @[reassoc]
 lemma modelFrobenius_left_comp_proj (N : ℕ) (g : X ⟶ X) :
-    (modelFrobenius X N g).left ≫ geometricBaseChangeProj X =
-      geometricBaseChangeProj X ≫ (frobeniusIterate (overFrobenius X) N ≫ g).left :=
+    (modelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X =
+      geometricBaseChangeProj X ≫ (g ≫ frobeniusIterate (overFrobenius X) N).left :=
   geometricBaseChange_map_left_comp_proj _
 
-/-- For `g = 𝟙`, the model Frobenius `F_X^N ×_k k̄` is the `N`-th iterate of `F_X ×_k k̄`. -/
+/-- For `g = 𝟙`, the model Frobenius `F_X^N ×_k Ω` is the `N`-th iterate of `F_X ×_k Ω`. -/
 lemma modelFrobenius_id (N : ℕ) :
-    modelFrobenius X N (𝟙 X) = frobeniusIterate (modelFrobenius X 1 (𝟙 X)) N := by
-  simp only [modelFrobenius, Category.comp_id, frobeniusIterate_one]
+    modelFrobenius Ω X N (𝟙 X) = frobeniusIterate (modelFrobenius Ω X 1 (𝟙 X)) N := by
+  simp only [modelFrobenius, Category.id_comp, frobeniusIterate_one]
   induction N with
   | zero => simp
   | succ N ih => rw [frobeniusIterate_succ, frobeniusIterate_succ, Functor.map_comp, ih]
 
-/-- For `g = 𝟙`, the model Frobenius `F_X ×_k k̄` is the model Frobenius of the model `X` of
+/-- For `g = 𝟙`, the model Frobenius `F_X ×_k Ω` is the model Frobenius of the model `X` of
 `X̄` over `k` (blueprint `sk-d-weil`). -/
 theorem isModelFrobenius_modelFrobenius_one :
-    IsModelFrobenius (modelFrobenius X 1 (𝟙 X)) X.hom (geometricBaseChangeProj X) where
+    IsModelFrobenius (modelFrobenius Ω X 1 (𝟙 X)) X.hom (geometricBaseChangeProj X) where
   isPullback := isPullback_geometricBaseChangeProj X
   exists_isFrobenius := ⟨(overFrobenius X).left, isFrobenius_overFrobenius_left X, by
-    rw [modelFrobenius_left_comp_proj, Category.comp_id, frobeniusIterate_one]⟩
+    rw [modelFrobenius_left_comp_proj, Category.id_comp, frobeniusIterate_one]⟩
 
-/-- For `g = 𝟙` and `N ≠ 0`, the model Frobenius `F_X^N ×_k k̄` is the model Frobenius of a model
-of `X̄` over the subfield `𝔽_{q^N}` of `k̄` (blueprint `sk-d-weil`). -/
-theorem exists_isModelFrobenius_modelFrobenius_id [LocallyOfFiniteType X.hom] {N : ℕ}
-    (hN : N ≠ 0) :
-    ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₁ (AlgebraicClosure k))
+/-- For `g = 𝟙`, `Ω` algebraically closed and `N ≠ 0`, the model Frobenius `F_X^N ×_k Ω` is the
+model Frobenius of a model of `X̄` over the subfield `𝔽_{q^N}` of `Ω` (blueprint `sk-d-weil`). -/
+theorem exists_isModelFrobenius_modelFrobenius_id [IsAlgClosed Ω] [LocallyOfFiniteType X.hom]
+    {N : ℕ} (hN : N ≠ 0) :
+    ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₁ Ω)
       (X₁ : Scheme.{u}) (f₁ : X₁ ⟶ Spec (.of k₁)) (_ : LocallyOfFiniteType f₁)
-      (p₁ : ((geometricBaseChange k).obj X).left ⟶ X₁),
-      Nat.card k₁ = Nat.card k ^ N ∧ IsModelFrobenius (modelFrobenius X N (𝟙 X)) f₁ p₁ := by
-  obtain ⟨k₁, _, _, _, _, _, hcard⟩ :=
-    exists_finiteField_natCard_eq_pow k (AlgebraicClosure k) hN
-  have h := (isModelFrobenius_modelFrobenius_one X).fieldChange (k₁ := k₁) hcard
+      (p₁ : ((geometricBaseChange k Ω).obj X).left ⟶ X₁),
+      Nat.card k₁ = Nat.card k ^ N ∧ IsModelFrobenius (modelFrobenius Ω X N (𝟙 X)) f₁ p₁ := by
+  obtain ⟨k₁, _, _, _, _, _, hcard⟩ := exists_finiteField_natCard_eq_pow k Ω hN
+  have h := (isModelFrobenius_modelFrobenius_one (Ω := Ω) X).fieldChange (k₁ := k₁) hcard
   rw [← modelFrobenius_id] at h
   exact ⟨k₁, inferInstance, inferInstance, inferInstance, _, modelFieldChange X.hom k₁,
     inferInstance, _, hcard, h⟩
@@ -242,24 +257,25 @@ end BaseChange
 
 section Points
 
-variable {X : Over (Spec (.of k))}
+variable {Ω : Type u} [Field Ω] [Algebra k Ω] {X : Over (Spec (.of k))}
 
-/-- The `k̄`-rational point `x̄' = (x̄, 𝟙)` of `X̄ = X ×_k k̄` attached to a geometric point
-`x̄ : Spec k̄ ⟶ X` over the geometric point `s` of the base. -/
-noncomputable def geometricBaseChangePoint (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ X.hom = specAlgebraicClosure k) : RationalPoint ((geometricBaseChange k).obj X) :=
+/-- The `Ω`-rational point `x̄' = (x̄, 𝟙)` of `X̄ = X ×_k Ω` attached to a morphism
+`x̄ : Spec Ω ⟶ X` over `Spec k`. -/
+noncomputable def geometricBaseChangePoint (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω))) :
+    RationalPoint ((geometricBaseChange k Ω).obj X) :=
   Over.homMk (pullback.lift x (𝟙 _) (by rw [hx, Category.id_comp])) (by simp)
 
 omit [Finite k] in
 @[reassoc (attr := simp)]
-lemma geometricBaseChangePoint_left_comp_proj (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ X.hom = specAlgebraicClosure k) :
+lemma geometricBaseChangePoint_left_comp_proj (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω))) :
     (geometricBaseChangePoint x hx).left ≫ geometricBaseChangeProj X = x :=
   pullback.lift_fst _ _ _
 
 omit [Finite k] in
 /-- A rational point of `X̄` is determined by its image in `X`. -/
-lemma rationalPoint_ext {y y' : RationalPoint ((geometricBaseChange k).obj X)}
+lemma rationalPoint_ext {y y' : RationalPoint ((geometricBaseChange k Ω).obj X)}
     (h : y.left ≫ geometricBaseChangeProj X = y'.left ≫ geometricBaseChangeProj X) : y = y' := by
   ext1
   refine pullback.hom_ext h ?_
@@ -269,37 +285,39 @@ lemma rationalPoint_ext {y y' : RationalPoint ((geometricBaseChange k).obj X)}
   exact hy.trans hy'.symm
 
 omit [Finite k] in
-/-- The rational point of `X̄` attached to the image `y ≫ π` of a rational point `y` is `y`. -/
-lemma geometricBaseChangePoint_left_comp_proj_eq (y : RationalPoint ((geometricBaseChange k).obj X))
-    (hy : (y.left ≫ geometricBaseChangeProj X) ≫ X.hom = specAlgebraicClosure k) :
-    geometricBaseChangePoint (y.left ≫ geometricBaseChangeProj X) hy = y :=
-  rationalPoint_ext (geometricBaseChangePoint_left_comp_proj _ _)
-
-omit [Finite k] in
-/-- The image `y ≫ π` of a rational point `y` of `X̄` lies over the geometric point `s`. -/
-lemma rationalPoint_left_comp_proj_comp (y : RationalPoint ((geometricBaseChange k).obj X)) :
-    (y.left ≫ geometricBaseChangeProj X) ≫ X.hom = specAlgebraicClosure k := by
+/-- The image `y ≫ π` of a rational point `y` of `X̄` lies over `Spec k`. -/
+lemma rationalPoint_left_comp_proj_comp (y : RationalPoint ((geometricBaseChange k Ω).obj X)) :
+    (y.left ≫ geometricBaseChangeProj X) ≫ X.hom =
+      Spec.map (CommRingCat.ofHom (algebraMap k Ω)) := by
   have hy := Over.w y
   simp only [Over.pullback_obj_hom] at hy
   rw [Category.assoc, geometricBaseChangeProj, pullback.condition, ← Category.assoc, hy]
   exact Category.id_comp _
 
-/-- The geometric point `x̄` satisfies `x̄ ≫ g = σ^{n+1} ≫ x̄` if and only if the rational point
-`x̄' = (x̄, 𝟙)` of `X̄` is fixed by the model Frobenius `Φ = (F_X^{n+1} ≫ g) ×_k k̄`: since
-`x̄ ≫ F_X^{n+1} = Spec(y ↦ y ^ (#k ^ (n + 1))) ≫ x̄` and `Spec(y ↦ y ^ (#k ^ (n + 1)))` is the
-inverse of `σ^{n+1}`. -/
-theorem geometricBaseChangePoint_comp_modelFrobenius_eq_iff
-    (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left) (hx : x ≫ X.hom = specAlgebraicClosure k)
-    (n : ℕ) (g : X ⟶ X) :
-    geometricBaseChangePoint x hx ≫ modelFrobenius X (n + 1) g = geometricBaseChangePoint x hx ↔
-      x ≫ g.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x := by
-  have hF : x ≫ (frobeniusIterate (overFrobenius X) (n + 1)).left =
-      Spec.map (powCardPowRingHom k (n + 1)) ≫ x :=
-    isFrobenius_frobeniusIterate_overFrobenius_left X (n + 1) x _
-      (powCardPowRingHom_apply (n + 1))
-  have key : geometricBaseChangePoint x hx ≫ modelFrobenius X (n + 1) g =
+omit [Finite k] in
+/-- The rational point of `X̄` attached to the image `y ≫ π` of a rational point `y` is `y`. -/
+lemma geometricBaseChangePoint_left_comp_proj_eq
+    (y : RationalPoint ((geometricBaseChange k Ω).obj X)) :
+    geometricBaseChangePoint (y.left ≫ geometricBaseChangeProj X)
+      (rationalPoint_left_comp_proj_comp y) = y :=
+  rationalPoint_ext (geometricBaseChangePoint_left_comp_proj _ _)
+
+/-- Let `σ` be an automorphism of `Spec Ω` whose inverse is `Spec(y ↦ y ^ (#k ^ N))`. A morphism
+`x̄ : Spec Ω ⟶ X` over `Spec k` satisfies `x̄ ≫ g = σ ≫ x̄` if and only if the rational point
+`x̄' = (x̄, 𝟙)` of `X̄` is fixed by the model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω`: since
+`(x̄ ≫ g) ≫ F_X^N = Spec(y ↦ y ^ (#k ^ N)) ≫ x̄ ≫ g`. -/
+theorem geometricBaseChangePoint_comp_modelFrobenius_eq_iff (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω))) (N : ℕ) (g : X ⟶ X)
+    (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) :
+    geometricBaseChangePoint x hx ≫ modelFrobenius Ω X N g = geometricBaseChangePoint x hx ↔
+      x ≫ g.left = σ.hom ≫ x := by
+  have hF : (x ≫ g.left) ≫ (frobeniusIterate (overFrobenius X) N).left =
+      Spec.map (powCardPowRingHom k Ω N) ≫ x ≫ g.left :=
+    isFrobenius_frobeniusIterate_overFrobenius_left X N (x ≫ g.left) _
+      (powCardPowRingHom_apply N)
+  have key : geometricBaseChangePoint x hx ≫ modelFrobenius Ω X N g =
       geometricBaseChangePoint x hx ↔
-      x ≫ (frobeniusIterate (overFrobenius X) (n + 1) ≫ g).left = x := by
+      x ≫ (g ≫ frobeniusIterate (overFrobenius X) N).left = x := by
     constructor
     · intro h
       have := congrArg (fun y ↦ y.left ≫ geometricBaseChangeProj X) h
@@ -307,31 +325,32 @@ theorem geometricBaseChangePoint_comp_modelFrobenius_eq_iff
     · intro h
       refine rationalPoint_ext ?_
       simpa [modelFrobenius_left_comp_proj] using h
-  rw [Over.comp_left, ← Category.assoc, hF, Category.assoc] at key
+  rw [Over.comp_left, ← Category.assoc, hF, ← hσ] at key
   rw [key]
   constructor
   · intro h
     conv_rhs => rw [← h]
-    rw [← Category.assoc, geometricFrobeniusField_powSucc_hom_comp_specMap, Category.id_comp]
+    rw [Iso.hom_inv_id_assoc]
   · intro h
-    rw [h, ← Category.assoc, specMap_comp_geometricFrobeniusField_powSucc_hom, Category.id_comp]
+    rw [h, Iso.inv_hom_id_assoc]
 
 /-- The points of degree `n + 1` of `X` for the Frobenius twisted by `e` are the rational points
 of the base change `X̄ = X ×_k k̄` fixed by the model Frobenius
-`Φ = (F_X^{n+1} ≫ e^{n+1}) ×_k k̄`: `x̄ ↦ (x̄, 𝟙)`. -/
+`Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄`: `x̄ ↦ (x̄, 𝟙)`. -/
 noncomputable def frobeniusFixedPointsEquiv (e : X ≅ X) (n : ℕ) :
     frobeniusFixedPoints e n ≃
-      {y : RationalPoint ((geometricBaseChange k).obj X) //
-        y ≫ modelFrobenius X (n + 1) (e.powSucc n).hom = y} where
+      {y : RationalPoint ((geometricBaseChange k (AlgebraicClosure k)).obj X) //
+        y ≫ modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom = y} where
   toFun x := ⟨geometricBaseChangePoint x.1 x.2.1,
-    (geometricBaseChangePoint_comp_modelFrobenius_eq_iff _ _ _ _).2 x.2.2⟩
+    (geometricBaseChangePoint_comp_modelFrobenius_eq_iff _ _ _ _ _
+      (geometricFrobeniusField_powSucc_inv n)).2 x.2.2⟩
   invFun y := ⟨y.1.left ≫ geometricBaseChangeProj X, rationalPoint_left_comp_proj_comp y.1, by
     rw [← geometricBaseChangePoint_comp_modelFrobenius_eq_iff _
-      (rationalPoint_left_comp_proj_comp y.1), geometricBaseChangePoint_left_comp_proj_eq]
+      (rationalPoint_left_comp_proj_comp y.1) _ _ _ (geometricFrobeniusField_powSucc_inv n),
+      geometricBaseChangePoint_left_comp_proj_eq]
     exact y.2⟩
   left_inv x := Subtype.ext (geometricBaseChangePoint_left_comp_proj _ x.2.1)
-  right_inv y := Subtype.ext
-    (geometricBaseChangePoint_left_comp_proj_eq _ (rationalPoint_left_comp_proj_comp y.1))
+  right_inv y := Subtype.ext (geometricBaseChangePoint_left_comp_proj_eq y.1)
 
 end Points
 
