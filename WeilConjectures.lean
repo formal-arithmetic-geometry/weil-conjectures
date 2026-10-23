@@ -11488,6 +11488,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedLimitEpimorphicTower
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedLowerStarDerivedLimit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.EtaleLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension

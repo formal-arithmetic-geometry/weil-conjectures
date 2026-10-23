@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLatticeAdic
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CompactOpenLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedModule
@@ -17,8 +17,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedModule
 Let `K` be a field, `Y` locally of finite type over `K`, `g : T ⟶ Y` smooth and proper and `F`
 a lisse `ℓ`-adic sheaf on `T`, trivialised on a pro-étale cover `f₀ : V ⟶ T` with transition
 cocycle `γ : V ×_T V → GL_n(E)` for a finite extension `E` of `ℚ_ℓ`. A *lattice* of `F` is a
-twisted section of the cocycle `γ` acting on the discrete set `GL_n(E) ⧸ GL_n(𝒪_E)` of
-`𝒪_E`-lattices in `Eⁿ`. If `F` has a lattice, every `Hᵏ(Rg_* F[0])` is lisse
+twisted section of the cocycle `γ` acting on the discrete set of `ℤ_ℓ`-lattices in `Eⁿ`, its
+compact open subgroups (`PadicAlgCl.CompactOpenLattice`). If `F` has a lattice, every `Hᵏ(Rg_* F[0])` is lisse
 (`AlgebraicGeometry.ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection`).
 -/
 
@@ -45,8 +45,8 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwisted
     (hγ : ∀ z, ((γ z : GL (Fin n) E) : Matrix (Fin n) (Fin n) E).map
       (algebraMap E (PadicAlgCl l)) = (transitionMatrix ε (pullback.snd f₀ f₀)
         (pullback.fst f₀ f₀) pullback.condition.symm).map (locallyFiniteFunctionsEval z))
-    (σ : ↥(pullback f₀ (𝟙 T)) → GL (Fin n) E ⧸ congruenceSubgroup E n 0)
-    (hσ : IsTwistedSection f₀ (fun z s ↦ γ z • s) (𝟙 T) σ) (k : ℤ) :
+    (σ : ↥(pullback f₀ (𝟙 T)) → CompactOpenLattice E n)
+    (hσ : IsTwistedSection f₀ (fun z L ↦ γ z • L) (𝟙 T) σ) (k : ℤ) :
     IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ k).obj
       ((g)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
   sorry

@@ -40,13 +40,17 @@ def twistedSubmodule {T : Scheme.{u}} (π : T ⟶ Y) : Submodule Λ (↥(pullbac
   smul_mem' a σ hσ := ⟨hσ.1.comp (a • ·), fun w ↦ by
     simp only [Pi.smul_apply, hσ.2 w, map_smul]⟩
 
+lemma mem_twistedSubmodule {T : Scheme.{u}} {π : T ⟶ Y} {σ : ↥(pullback f π) → M} :
+    σ ∈ twistedSubmodule f c π ↔ IsTwistedSection f (fun z ↦ c z) π σ :=
+  Iff.rfl
+
 /-- The presheaf of `Λ`-modules of twisted sections of a linear cocycle on the small étale site
 of `Y`. -/
 noncomputable def twistedModulePresheaf : Y.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ where
   obj U := ModuleCat.of Λ (twistedSubmodule f c U.unop.hom)
   map {U U'} g := ModuleCat.ofHom
     { toFun σ := ⟨σ.1 ∘ (pullbackMapRight f g.unop.left (MorphismProperty.Over.w g.unop)).base,
-        σ.2.comp g.unop.left (MorphismProperty.Over.w g.unop)⟩
+        ((mem_twistedSubmodule f c).1 σ.2).comp g.unop.left (MorphismProperty.Over.w g.unop)⟩
       map_add' _ _ := rfl
       map_smul' _ _ := rfl }
   map_id U := by
@@ -81,7 +85,7 @@ noncomputable def twistedModuleSheaf : Sheaf Y.smallEtaleTopology (ModuleCat.{u 
 
 section PullbackComparison
 
-variable {f c}
+variable {f}
 
 /-- The pullback of a linear cocycle along `π : T ⟶ Y`, a cocycle for the cover
 `V ×_Y T ⟶ T`. -/
@@ -94,7 +98,7 @@ sections of `c` is the sheaf of twisted sections of the pulled back cocycle. -/
 noncomputable def upperStarTwistedModuleSheafIso [WeaklyEtale f] [Surjective f] [QuasiCompact f]
     (hc : IsDescentCocycle f (fun z ↦ c z)) {T : Scheme.{u}} (π : T ⟶ Y) :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) π).obj (twistedModuleSheaf f c) ≅
-      twistedModuleSheaf (pullback.snd f π) (pullbackCocycle π) :=
+      twistedModuleSheaf (pullback.snd f π) (pullbackCocycle c π) :=
   sorry
 
 /-- **Global sections of pulled back twisted sheaves.** If the pullback of global sections
@@ -106,7 +110,7 @@ theorem bijective_twistedRestrict_of_isIso_globalSectionsUpperStarMap [WeaklyEta
     (h : IsIso (Etale.globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) p).obj (twistedModuleSheaf f c)))) :
     Function.Bijective (fun σ : twistedSubmodule f c p ↦
-      (⟨σ.1 ∘ (pullbackMapRight f q rfl).base, σ.2.comp q rfl⟩ :
+      (⟨σ.1 ∘ (pullbackMapRight f q rfl).base, ((mem_twistedSubmodule f c).1 σ.2).comp q rfl⟩ :
         twistedSubmodule f c (q ≫ p))) :=
   sorry
 
