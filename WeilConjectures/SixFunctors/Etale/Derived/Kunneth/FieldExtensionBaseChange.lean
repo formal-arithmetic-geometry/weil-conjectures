@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.LimitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.PerfectSeparable
-public import WeilConjectures.FieldTheory.SeparableSmoothSubalgebra
+public import WeilConjectures.FieldTheory.SeparableSmoothColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleLimitDescent
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniversalHomeomorphism
 
@@ -67,13 +67,13 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension {K L : Type u}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of K)) F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  let 𝒜 := {A : Subalgebra K L | Algebra.Smooth K A ∧ Algebra.FiniteType K A}
-  have : IsFiltered 𝒜 := Algebra.isFiltered_smooth_finiteType_subalgebra_of_isSeparableExtension hKL
-  have hcol := Algebra.isColimitSmoothFiniteTypeSubalgebraOfIsSeparableExtension hKL
-  let D₀ : 𝒜ᵒᵖ ⥤ Scheme.{u} := (Subalgebra.diagram 𝒜).op ⋙ Scheme.Spec
-  have : PreservesLimitsOfSize.{u, u} Scheme.Spec.{u} :=
-    ΓSpec.adjunction.rightAdjoint_preservesLimits
-  have hD₀ := isLimitOfPreserves Scheme.Spec.{u} hcol.op
+  let 𝒜 := {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}
+  obtain ⟨hne, hdir, -, -, ⟨hD₀⟩, -, -⟩ :=
+    FieldTheory.separable_extension_is_filtered_colimit_smooth hKL
+  have : IsDirected 𝒜 (· ≤ ·) := ⟨hdir⟩
+  have : IsFiltered 𝒜 := isFiltered_of_directed_le_nonempty 𝒜
+  let D₀ : 𝒜ᵒᵖ ⥤ Scheme.{u} :=
+    (FieldTheory.smoothSubalgebraDiagram K L).op ⋙ Scheme.Spec
   let π : D₀ ⟶ (Functor.const 𝒜ᵒᵖ).obj (Spec (.of K)) :=
     { app A := Spec.map (CommRingCat.ofHom (algebraMap K A.unop.1))
       naturality A B f := by
@@ -81,13 +81,15 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension {K L : Type u}
           Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id]
         rw [Scheme.Spec_map, ← Spec.map_comp]
         rfl }
-  have hP (A : 𝒜ᵒᵖ) : (Scheme.Spec.mapCone (Subalgebra.cocone 𝒜).op).π.app A ≫ π.app A =
+  have hP (A : 𝒜ᵒᵖ) :
+      (Scheme.Spec.mapCone (FieldTheory.smoothSubalgebraCocone K L).op).π.app A ≫ π.app A =
       Spec.map (CommRingCat.ofHom (algebraMap K L)) := by
     simp only [Functor.mapCone_π_app, Cocone.op_π, NatTrans.op_app, Scheme.Spec_map, π]
     rw [← Spec.map_comp]
     rfl
   let X := baseChangeOverDiagram D₀ π σ
-  let c := baseChangeOverCone D₀ π (Scheme.Spec.mapCone (Subalgebra.cocone 𝒜).op)
+  let c := baseChangeOverCone D₀ π
+    (Scheme.Spec.mapCone (FieldTheory.smoothSubalgebraCocone K L).op)
     (Spec.map (CommRingCat.ofHom (algebraMap K L))) (fun A ↦ (hP A).symm) σ
   have hc : IsLimit c := isLimitBaseChangeOverCone D₀ π _ _ (fun A ↦ (hP A).symm) σ hD₀
   let c' := c.extend hS.isoPullback.hom
@@ -189,7 +191,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Fiel
   have hC : IsIso (Etale.baseChangeHomologyMap Λ sqC q F) :=
     Etale.isIso_baseChangeHomologyMap_of_paste_horiz Λ sq₁ sq₂ sqC (pullback.lift_fst _ _ _)
       hr₁ q F (Etale.baseChangeProperty_of_isUniversalHomeomorphism Λ p₁ q g e₁ g₁ sq₁ F)
-      (Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension Λ hsep σ₁ g₁ r σ₂ hS₁ sq₂ q _)
+      (Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension Λ hsep σ₁ g₁ r σ₂ hS₁
+        sq₂ q _)
   -- cancel the base change along the universal homeomorphism `p₂`
   rw [Etale.isIso_baseChangeHomologyMap_iff] at hC ⊢
   rw [Etale.baseChange_app_paste_horiz Λ sq.toCommSq sq₃.toCommSq sqC.toCommSq] at hC

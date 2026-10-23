@@ -54,4 +54,27 @@ theorem flat_pullback_torIndependent {X S T : Scheme.{u}}
     exact Module.Flat.rTensor_shortComplex_exact A _ (P.exact_succ n)
   exact hz.of_iso ((e.app A).app B)
 
+/-- Flatness of the right morphism makes every pair of stalks Tor independent.
+Source: Stacks Project, Algebra, Tag 00M3, and perfect.tex, Tag 08IB. -/
+theorem flat_right_pullback_torIndependent {X S T : Scheme.{u}}
+    (f : X ⟶ S) (g : T ⟶ S) [Flat g] :
+    PullbackStalkTensor.IsTorIndependent f g := by
+  intro x t h
+  let := (f.stalkMap x).hom.toAlgebra
+  let := ((S.presheaf.stalkCongr (.of_eq h)).hom ≫ g.stalkMap t).hom.toAlgebra
+  have hflat : ((S.presheaf.stalkCongr (.of_eq h)).hom ≫ g.stalkMap t).hom.Flat := by
+    rw [CommRingCat.hom_comp]
+    exact RingHom.Flat.comp
+      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) (Flat.stalkMap g t)
+  have : Module.Flat (S.presheaf.stalk (f x)) (T.presheaf.stalk t) := hflat
+  intro i hi
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_zero_of_lt hi)
+  let A := ModuleCat.of (S.presheaf.stalk (f x)) (X.presheaf.stalk x)
+  let B := ModuleCat.of (S.presheaf.stalk (f x)) (T.presheaf.stalk t)
+  let P := projectiveResolution A
+  apply IsZero.of_iso _ (P.isoLeftDerivedObj (tensorRight B) (n + 1))
+  erw [← HomologicalComplex.exactAt_iff_isZero_homology]
+  rw [HomologicalComplex.exactAt_iff' _ (n + 2) (n + 1) n (by simp) (by simp)]
+  exact Module.Flat.rTensor_shortComplex_exact B _ (P.exact_succ n)
+
 end AlgebraicGeometry
