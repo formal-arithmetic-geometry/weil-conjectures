@@ -142,7 +142,7 @@ theorem not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety
   obtain ⟨φ, hφ⟩ := hF n
   refine ⟨φ ≫ ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).commShiftIso ((n + 1 : ℕ) : ℤ)).inv.app _,
     fun h ↦ hφ ?_⟩
-  simpa using h =≫ ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).commShiftIso ((n + 1 : ℕ) : ℤ)).hom.app _
+  exact (cancel_mono _).1 (h.trans zero_comp.symm)
 
 /-- Blueprint `sk-rem-sf-fullcd-scope` (ii), `open-sf-ambient-adjoint-input`: for the structure
 morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
