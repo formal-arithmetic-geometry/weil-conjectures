@@ -321,7 +321,7 @@ instance the map to the derived completion of `Ra_! K`). Then `RΓ(Spec k, N)` i
 The reduction of `φ` is an isomorphism, so the reduction of `N` is
 `Ra_! K ⊗ᴸ Λ/I ≅ Ra_!(K ⊗ᴸ Λ/I)`, whose global sections are perfect by the finite stage
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero`. -/
-theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
+theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ} [Finite (Λ ⧸ I)]
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hϖI : I = Ideal.span {ϖ}) [IsAdicComplete (Ideal.span {ϖ}) Λ]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
     [HasCompactification aX]
@@ -367,8 +367,8 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
     rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
     exact hmΛ
   have : NeZero m := ⟨hm0.ne'⟩
-  exact (isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero Λ aX _ m
-    (nsmul_id_reductionModIdeal hmI K) hmk ⟨hK, a, b, hKt⟩).of_iso
+  exact (isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero Λ aX _ I m hmI
+    (fun _ hr ↦ smul_id_reductionModIdeal' hr K) hmk ⟨hK, a, b, hKt⟩).of_iso
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso
       ((e₂.app K).symm ≪≫ asIso (F.map φ) ≪≫ e₁.symm))
 
