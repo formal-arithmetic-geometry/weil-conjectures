@@ -134,6 +134,7 @@ lemma leftDerivedUpperStarComp_hom_app_map_counit_comp_derivedSquareUpperStarIso
     ← (leftDerivedUpperStarComp A p j (p ≫ j) rfl).hom.naturality_assoc]
   simp
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `lem-kun-bc-kunneth-compat`: compatibility of the Künneth maps with the exchange
 map of the square
 
@@ -197,6 +198,7 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
     exact this
 
 
+omit [HasSmallSiteSheafify A] in
 /-- The exchange map `β : Lq^* Rj_* F ⟶ Rh_* Lp^* F` of the square of
 `AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap` becomes an isomorphism after `Rc_*`
 as soon as the Künneth maps of `(X, Y)` at `(Rj_* F, Λ_Y)` and of `(U, Y)` at `(F, Λ_Y)` are

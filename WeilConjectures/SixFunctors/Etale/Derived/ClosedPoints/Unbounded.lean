@@ -191,33 +191,6 @@ theorem isIso_homologyFunctor_map_π_of_isHomotopyLimit_of_isIso
 
 end DerivedCategory
 
-namespace CategoryTheory.Pretriangulated
-
-variable {𝒯 : Type*} [Category 𝒯] [HasZeroObject 𝒯] [HasShift 𝒯 ℤ] [Preadditive 𝒯]
-  [∀ n : ℤ, (shiftFunctor 𝒯 n).Additive] [Pretriangulated 𝒯]
-
-/-- Every tower in a pretriangulated category with countable products has a homotopy limit
-cone: complete `1 - t : ∏ Fₙ ⟶ ∏ Fₙ` to a distinguished triangle. -/
-lemma exists_isHomotopyLimit [HasLimitsOfShape (Discrete ℕ) 𝒯] (F : ℕᵒᵖ ⥤ 𝒯) :
-    ∃ c : Cone F, IsHomotopyLimit c := by
-  let P := Fan.mk (∏ᶜ fun n : ℕ ↦ F.obj (op n)) (Pi.π fun n : ℕ ↦ F.obj (op n))
-  let hP : IsLimit P := productIsProduct _
-  obtain ⟨M, p, δ, hT⟩ := distinguished_cocone_triangle₁ (𝟙 P.pt - towerShift hP)
-  have hp : p ≫ towerShift hP = p := by
-    have : p ≫ (𝟙 P.pt - towerShift hP) = 0 := comp_distTriang_mor_zero₁₂ _ hT
-    rw [Preadditive.comp_sub, comp_id, sub_eq_zero] at this
-    exact this.symm
-  let c : Cone F := Cone.mk M (NatTrans.ofOpSequence (fun n ↦ p ≫ P.proj n) fun n ↦ by
-    dsimp
-    rw [id_comp, assoc, ← towerShift_proj hP n, ← assoc, hp])
-  have hlift : Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) = p :=
-    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
-      rw [Fan.IsLimit.fac]
-      rfl
-  exact ⟨c, P, hP, δ, by rwa [hlift]⟩
-
-end CategoryTheory.Pretriangulated
-
 namespace DerivedCategory
 
 variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]

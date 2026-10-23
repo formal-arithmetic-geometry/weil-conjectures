@@ -54,6 +54,10 @@ adjunction `Rf_! ⊣ Rf^!` is the adjunction `Rf_!(c) ⊣ Rf^!(c)`.
 
 ## Sorried input
 
+These are the proper cases of the constructible exceptional adjunctions of blueprint
+`prop-coef-integral-exceptional-adjoint` (`𝒪_E`), `lem-coef-rational-operations` (`E`) and
+`thm-coef-qbar-verdier` (`ℚ̄_ℓ`), where `Rg_! = Rg_*`.
+
 - `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`:
   for `g` proper, `Rg_*` on bounded constructible `E`-sheaves is a left adjoint.
 - `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`:
@@ -150,7 +154,14 @@ variable [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).ov
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
 complexes: the functor `boundedConstructibleUpperShriekOfCompactification` attached to the chosen
-compactification `compactificationOverField f`. -/
+compactification `compactificationOverField f`.
+
+For the `ℓ`-adic coefficients `Λ ∈ {𝒪_E, E, ℚ̄_ℓ}` this is the module-object exceptional inverse
+image `Rf^!_T = D(j^*) ∘ Rp^!_T` of blueprint `pur713-def-upper-shriek-module`, characterized by
+the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on bounded constructible complexes
+(`ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`). The same functor at the
+stage `ℚ̄_ℓ` in the Bhatt–Scholze model of `Dᵇc(-, ℚ̄_ℓ)` is
+`AlgebraicGeometry.ProEtale.boundedConstructibleAdicUpperShriekOfCompactification`. -/
 noncomputable def boundedConstructibleUpperShriek : Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   boundedConstructibleUpperShriekOfCompactification Λ ℓ (compactificationOverField f)
 
@@ -184,26 +195,34 @@ variable {Z Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y) [IsProper g.left]
 
-/-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E` of `ℚ_ℓ`, the derived
-pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
-adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
+/-- Blueprint `lem-coef-rational-operations` (the constructible adjunction `Rf_{!,E} ⊣ Rf_E^!`,
+for a proper morphism `g`, where `Rg_! = Rg_*`; this is the module-object proper-adjoint input of
+blueprint `pur713-def-upper-shriek-module`). For a proper morphism `g : Z ⟶ Y` and a finite
+extension `E` of `ℚ_ℓ`, the derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded
+constructible `E`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image
+`Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g).IsLeftAdjoint :=
   sorry
 
-/-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
-pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
-left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
+/-- Blueprint `prop-coef-integral-exceptional-adjoint` (the integral `Rf_!` on constructible
+complexes has a right adjoint, for a proper morphism `g`, where `Rg_! = Rg_*`; this is the
+module-object proper-adjoint input of blueprint `pur713-def-upper-shriek-module`). For a proper
+morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
+`Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a left adjoint;
+its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).IsLeftAdjoint :=
   sorry
 
-/-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward
-`Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible `ℚ̄_ℓ`-sheaves is a left adjoint;
-its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
+/-- Blueprint `thm-coef-qbar-verdier` (the constructible adjunction `Rf_! ⊣ Rf^!` at the stage
+`ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`; this is the module-object proper-adjoint
+input of blueprint `pur713-def-upper-shriek-module`). For a proper morphism `g : Z ⟶ Y`, the
+derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible `ℚ̄_ℓ`-sheaves
+is a left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).IsLeftAdjoint :=
   sorry

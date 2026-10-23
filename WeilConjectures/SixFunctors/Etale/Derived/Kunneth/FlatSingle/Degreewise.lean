@@ -16,6 +16,7 @@ public import WeilConjectures.ConstructibleSheaf.FilteredColimit
 public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.FiniteDirectImageKunneth
+public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 
 /-!

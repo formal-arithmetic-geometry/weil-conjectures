@@ -5,9 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.PerfectPairing.Basic
+public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.TateTwist
-public import WeilConjectures.WeilSheaf.TraceIsomorphism
 
 /-!
 # Degreewise Poincaré duality for lisse Weil sheaves

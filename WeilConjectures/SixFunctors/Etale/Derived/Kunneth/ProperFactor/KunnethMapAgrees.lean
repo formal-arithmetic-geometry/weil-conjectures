@@ -177,6 +177,7 @@ lemma tensorBaseChangeMap_eq_projectionMap (q : W ⟶ X) (r : W ⟶ Y) (aX : X �
     leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (q ≫ aX) (r ≫ aY)
       rfl w w.symm rfl]
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `lem-kun-kunneth-map-agrees`: the Künneth map is the composite of the canonical
 maps.
 
@@ -209,6 +210,7 @@ lemma kunnethMap_eq_of_isPullback (q : W ⟶ X) (r : W ⟶ Y) (aX : X ⟶ S) (aY
   rw [kunnethMap_eq, tensorBaseChangeMap_eq_projectionMap]
   rfl
 
+omit [HasSmallSiteSheafify A] in
 /-- The Künneth map is an isomorphism as soon as the projection map of `a_X`, the derived base
 change map of the square and the projection map of `q` are isomorphisms
 (`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`). -/
