@@ -419,6 +419,97 @@ lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
   rw [this] at h
   exact h
 
+set_option synthInstance.maxHeartbeats 200000 in
+/-- **The trace is the supertrace on the graded pieces**: for an object `Y` of `D(Mod_{ℚ̲̄_ℓ,s})`
+which is a finite direct sum of shifts `𝟙⟦nⱼ⟧` of the unit, the categorical trace of an
+endomorphism `w` of `Y` is the alternating sum `∑ₙ (-1)ⁿ tr(w | Hⁿ(Y))` of the traces on the
+graded pieces `Hⁿ(Y) = Hom(𝟙⟦n⟧, Y)` (blueprint `prop-trf-trace-formal-laws`, item (4)). -/
+theorem trace_eq_pointScalar_sum {Y : DerivedCategory (PointMod ℓ k)} [HasRightDual Y]
+    (D : ShiftDecomposition (𝟙_ _) Y) (s : Finset ℤ) (hs : ∀ j, D.deg j ∈ s)
+    [∀ n, FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj Y)] (w : Y ⟶ Y) :
+    trace w = pointScalar ℓ k (∑ n ∈ s, (n.negOnePow : ℤ) •
+      LinearMap.trace (PadicAlgCl ℓ) _ ((gradedHom ℓ k n).map w).hom) := by
+  let c : D.ι → PadicAlgCl ℓ := fun j ↦
+    (shiftedUnitEquiv ℓ k (D.deg j)).symm (gradedHomMk ℓ k (D.incl j ≫ w ≫ D.proj j))
+  have hc (j : D.ι) : D.incl j ≫ w ≫ D.proj j =
+      gradedHomHom ℓ k (shiftedUnitEquiv ℓ k (D.deg j) (c j)) := by
+    simp only [c, LinearEquiv.apply_symm_apply]
+    rfl
+  rw [D.trace_eq_sum w]
+  simp_rw [D.linearMapTrace_eq_sum (gradedHom ℓ k _) w, hc,
+    trace_gradedHomHom_shiftedUnitEquiv, linearMapTrace_gradedHom_map_shiftedUnitEquiv,
+    Finset.smul_sum, smul_ite, smul_zero]
+  rw [Finset.sum_comm]
+  simp only [Finset.sum_ite_eq', hs, if_true]
+  rw [map_sum]
+  simp only [map_zsmul]
+
 end TraceFormula
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+section Additivity
+
+/-- The shift `Hⁿ⁻¹(Y) ⟶ Hⁿ(Y⟦1⟧)`, `x ↦ x⟦1⟧` through `𝟙⟦n⟧ ≅ 𝟙⟦n - 1⟧⟦1⟧`. -/
+noncomputable def gradedHomShift (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) :
+    (gradedHom ℓ k (n - 1)).obj Y →ₗ[PadicAlgCl ℓ]
+      (gradedHom ℓ k n).obj ((shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).obj Y) where
+  toFun x := gradedHomMk ℓ k
+    ((shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.app (𝟙_ _) ≫
+      (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).map (gradedHomHom ℓ k x))
+  map_add' x y := by
+    change _ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x + gradedHomHom ℓ k y) =
+      _ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x) +
+        _ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k y)
+    rw [Functor.map_add, Preadditive.comp_add]
+  map_smul' c x := by
+    change _ ≫ (shiftFunctor _ (1 : ℤ)).map ((shiftFunctor _ (n - 1)).map (pointScalar ℓ k c) ≫
+        gradedHomHom ℓ k x) = (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ _ ≫
+        (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x)
+    have h := (shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.naturality
+      (pointScalar ℓ k c)
+    simp only [Functor.comp_map] at h
+    rw [Functor.map_comp, reassoc_of% h]
+
+lemma gradedHomHom_gradedHomShift (n : ℤ) (Y : DerivedCategory (PointMod ℓ k))
+    (x : (gradedHom ℓ k (n - 1)).obj Y) :
+    gradedHomHom ℓ k (gradedHomShift ℓ k n Y x) =
+      (shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.app (𝟙_ _) ≫
+        (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).map (gradedHomHom ℓ k x) :=
+  rfl
+
+lemma bijective_gradedHomShift (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) :
+    Function.Bijective (gradedHomShift ℓ k n Y) := by
+  constructor
+  · intro x y h
+    have h' := congrArg (gradedHomHom ℓ k) h
+    rw [gradedHomHom_gradedHomShift, gradedHomHom_gradedHomShift, cancel_epi] at h'
+    exact (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).map_injective h'
+  · intro u
+    refine ⟨gradedHomMk ℓ k ((shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).preimage
+      ((shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).inv.app (𝟙_ _) ≫
+        gradedHomHom ℓ k u)), ?_⟩
+    change gradedHomHom ℓ k (gradedHomShift ℓ k n Y _) = gradedHomHom ℓ k u
+    rw [gradedHomHom_gradedHomShift]
+    change _ ≫ (shiftFunctor _ (1 : ℤ)).map ((shiftFunctor _ (1 : ℤ)).preimage _) = _
+    rw [Functor.map_preimage, Iso.hom_inv_id_app_assoc]
+
+/-- `gradedHomShift` is compatible with the maps induced by morphisms. -/
+lemma gradedHomShift_map (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} (h : Y ⟶ Y')
+    (x : (gradedHom ℓ k (n - 1)).obj Y) :
+    gradedHomShift ℓ k n Y' (((gradedHom ℓ k (n - 1)).map h).hom x) =
+      ((gradedHom ℓ k n).map ((shiftFunctor _ (1 : ℤ)).map h)).hom (gradedHomShift ℓ k n Y x) := by
+  change _ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x ≫ h) =
+    (_ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x)) ≫ (shiftFunctor _ (1 : ℤ)).map h
+  rw [Functor.map_comp, Category.assoc]
+
+end Additivity
 
 end AlgebraicGeometry.ProEtale.CondensedRing

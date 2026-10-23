@@ -69,6 +69,34 @@ theorem linearMapTrace_eq_sum [FiniteDimensional K (F.obj P)]
         rw [F.map_comp, ModuleCat.hom_comp, LinearMap.trace_comp_comm', ← ModuleCat.hom_comp,
           ← F.map_comp, Category.assoc]
 
+/-- An element of `F(⨁ⱼ E⟦nⱼ⟧)` is the sum of its components. -/
+lemma sum_map_incl_map_proj (z : F.obj P) :
+    ∑ j, (F.map (D.incl j)).hom ((F.map (D.proj j)).hom z) = z := by
+  have h := congrArg (fun φ ↦ (F.map φ).hom z) D.total
+  simp only [F.map_sum, ModuleCat.hom_sum, LinearMap.sum_apply, F.map_comp,
+    ModuleCat.hom_comp, LinearMap.comp_apply, F.map_id, ModuleCat.hom_id,
+    LinearMap.id_apply] at h
+  exact h
+
+include D in
+/-- An additive functor to vector spaces takes finite-dimensional values on `⨁ⱼ E⟦nⱼ⟧` if it does
+on the shifts of `E`. -/
+lemma finiteDimensional_obj [∀ n : ℤ, FiniteDimensional K (F.obj ((shiftFunctor C n).obj E))] :
+    FiniteDimensional K (F.obj P) :=
+  Module.Finite.of_injective (LinearMap.pi fun j ↦ (F.map (D.proj j)).hom) fun x y h ↦ by
+    rw [← D.sum_map_incl_map_proj F x, ← D.sum_map_incl_map_proj F y]
+    exact Finset.sum_congr rfl fun j _ ↦ by
+      rw [show (F.map (D.proj j)).hom x = (F.map (D.proj j)).hom y from congrFun h j]
+
+include D in
+/-- An additive functor to vector spaces vanishes on `⨁ⱼ E⟦nⱼ⟧` if it vanishes on the summands. -/
+lemma subsingleton_obj (h : ∀ j, Subsingleton (F.obj ((shiftFunctor C (D.deg j)).obj E))) :
+    Subsingleton (F.obj P) := by
+  refine ⟨fun x y ↦ ?_⟩
+  rw [← D.sum_map_incl_map_proj F x, ← D.sum_map_incl_map_proj F y]
+  exact Finset.sum_congr rfl fun j _ ↦ by
+    rw [Subsingleton.elim ((F.map (D.proj j)).hom x) ((F.map (D.proj j)).hom y)]
+
 end Linear
 
 end CategoryTheory.ShiftDecomposition
