@@ -7,6 +7,10 @@ module
 
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Adjunction.Whiskering
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Equivalence
 
 /-!
 # Adjunctions between categories of sheaves induced by adjunctions of coefficients
@@ -76,5 +80,15 @@ instance sheafCompose_additive : (sheafCompose J F).Additive where
     exact F.map_add
 
 end Additive
+
+/-- Composing sheaves with an equivalence of coefficient categories is an equivalence. -/
+lemma isEquivalence_sheafCompose_of_isEquivalence {C A B : Type*} [Category C] [Category A]
+    [Category B] (J : GrothendieckTopology C) (E : A ⥤ B) [E.IsEquivalence]
+    [J.HasSheafCompose E] [J.HasSheafCompose E.inv] :
+    (sheafCompose J E).IsEquivalence :=
+  ((E.adjunction.whiskerRight Cᵒᵖ).restrictFullyFaithful
+    (fullyFaithfulSheafToPresheaf J A) (fullyFaithfulSheafToPresheaf J B)
+    (L := sheafCompose J E) (R := sheafCompose J E.inv)
+    (Iso.refl _) (Iso.refl _)).toEquivalence.isEquivalence_functor
 
 end CategoryTheory

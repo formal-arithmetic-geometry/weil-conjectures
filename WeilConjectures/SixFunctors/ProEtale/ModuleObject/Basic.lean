@@ -8,9 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.Topology.LocallyConstant.Algebra
+public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantPushout
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
@@ -105,37 +108,27 @@ derived functors on module objects need.
 
 ## Main results
 
+* `AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme`: `Spec LC(S, ℤ) ⟶ Spec ℤ`
+  is weakly étale, `LC(S, ℤ)` being weakly étale over `ℤ` (`LocallyConstant.weaklyEtale`).
+* `AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt`: the functor
+  `S ↦ Spec LC(S, ℤ)` preserves finite limits: `LC(-, ℤ)` sends a fibre product of profinite
+  sets to a pushout of rings (`Profinite.isPushout_locallyConstant_pullback`), and the point
+  to `ℤ`.
+* `AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt`: it sends a finite jointly
+  surjective family to a pro-étale covering, the underlying space of `Spec LC(S, ℤ)` being
+  `S × Spec ℤ` (`LocallyConstant.homeomorphPrimeSpectrum`). This is Lemma 4.2 of the notes.
+* `AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar` and
+  `AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar`: `p^*` is strong monoidal, being the
+  sheafification of a left Kan extension along a representably flat functor.
+* `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
+  `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is built from the conjugate of
+  the composition isomorphism of pushforwards, which is monoidal by
+  `ProEtale.isMonoidal_lowerStarComp`.
 * `AlgebraicGeometry.ProEtale.condensedPushforwardHom_id` and
   `AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp`: `η` is compatible with the identity
   and composition isomorphisms of the pushforwards. These are the cases `F = p^* Λ` of the general
   coherences `ProEtale.unitCompUpperStarComp_id` and `ProEtale.unitCompUpperStarComp_comp` of
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence`.
-
-## Sorried input
-
-* `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat resolutions,
-  by free abelian groups; it is what makes the derived functors with values in `Ab` available.
-* `AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme`: `Spec LC(S, ℤ) ⟶ Spec ℤ`
-  is weakly étale, `LC(S, ℤ)` being ind-Zariski over `ℤ` (the filtered colimit of the finite
-  products `ℤ^{S_i}`), and ind-Zariski algebras being weakly étale.
-* `AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt` and
-  `AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt`: the functor
-  `S ↦ Spec LC(S, ℤ)` preserves finite limits (`LC(-, ℤ)` sends a fibre product of profinite
-  sets to the tensor product, and the point to `ℤ`), and sends a finite jointly surjective
-  family to a pro-étale covering (the map on underlying spaces of `Spec LC(S, ℤ)` is the
-  projection `S × Spec ℤ → S`, so surjectivity is preserved, and the morphisms are weakly
-  étale and affine). This is Lemma 4.2 of the notes.
-* `AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt`: the left Kan
-  extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist, both sites being essentially
-  small in `u + 1` and `Ab.{u + 1}` being cocomplete for `u + 1`-small diagrams, exactly as
-  for `SmallSite.hasLeftKanExtension_op_overPullback`.
-* `AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar` and
-  `AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar`: `p^*` is strong monoidal, being the
-  sheafification of a left Kan extension along a finite limit preserving functor, which
-  commutes with the objectwise tensor product (as for `ProEtale.isIso_δ_upperStar`).
-* `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
-  `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is the mate of the composition
-  isomorphism of pushforwards, which is monoidal by `ProEtale.isMonoidal_lowerStarComp`.
 
 -/
 
@@ -145,8 +138,10 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal Functor.OplaxMonoidal
 
-/-- Abelian groups admit functorial flat resolutions, by free abelian groups: the free abelian
-group on the underlying set of `M` is flat, and surjects functorially onto `M`. -/
+/-- Abelian groups admit functorial flat resolutions: the unit `ℤ` of the tensor product is a
+flat separator of `Ab`, so `∐_{ℤ ⟶ M} ℤ`, the free abelian group on `M`, is flat and surjects
+functorially onto `M`. This is the instance of `WeilConjectures.CategoryTheory.RingObjects.Ab`.
+-/
 instance AddCommGrpCat.hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution Ab.{u} := by
   infer_instance
@@ -372,8 +367,9 @@ instance isContinuous_profiniteToProEt :
   Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
     coverPreserving_profiniteToProEt
 
-/-- The left Kan extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist. See the module
-docstring. -/
+/-- The left Kan extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist: the indexing comma
+categories are essentially small in `u + 1` and `Ab.{u + 1}` has colimits of that size
+(`Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`). -/
 instance hasLeftKanExtension_op_profiniteToProEt (F : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}) :
     profiniteToProEt.op.HasLeftKanExtension F := by
   infer_instance
