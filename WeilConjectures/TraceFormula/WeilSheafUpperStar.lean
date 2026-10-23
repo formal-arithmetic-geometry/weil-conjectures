@@ -128,22 +128,22 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
         (frobeniusFixedPointsMap eW eX hg n w).2.2 F := by
   have I := Classical.choice
     (IsoAlgebra.nonempty_obj_obj_iso_of_eq
-    (c := fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
-      upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
-    (pullbackAssoc_upperStar ℓ) eX eW hg F n
-    (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
-      ((geometricFrobeniusField k).powSucc n).hom) w.1 w.2.2
-    (x := (frobeniusFixedPointsMap eW eX hg n w).1) rfl
-    (frobeniusFixedPointsMap eW eX hg n w).2.2 (weilSheafUpperStar ℓ eX eW hg)
-    (weilSheafUpperStar_eq ℓ eX eW hg) (WeilSheaf.powSuccStalkFunctor ℓ n w.1 w.2.2)
-    (WeilSheaf.powSuccStalkFunctor_eq ℓ eW n _ _)
-    (WeilSheaf.powSuccStalkFunctor ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
-      (frobeniusFixedPointsMap eW eX hg n w).2.2)
-    (WeilSheaf.powSuccStalkFunctor_eq ℓ eX n _ _))
+      (c := fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+        upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+      (pullbackAssoc_upperStar ℓ) eX eW hg n
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
+        ((geometricFrobeniusField k).powSucc n).hom) w.1 w.2.2
+      (x := (frobeniusFixedPointsMap eW eX hg n w).1) rfl
+      (frobeniusFixedPointsMap eW eX hg n w).2.2 (WeilSheaf ℓ eX) (WeilSheaf ℓ eW)
+      (IsoAlgebra (𝟭 (GeometricPointMod ℓ (AlgebraicClosure k)))) F
+      (weilSheafUpperStar ℓ eX eW hg) (WeilSheaf.powSuccStalkFunctor ℓ n w.1 w.2.2)
+      (WeilSheaf.powSuccStalkFunctor ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
+        (frobeniusFixedPointsMap eW eX hg n w).2.2) rfl rfl rfl
+      (heq_of_eq (weilSheafUpperStar_eq ℓ eX eW hg))
+      (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eW n _ _))
+      (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eX n _ _)))
 
-  have I' := (I : @Iso (IsoAlgebra (𝟭 (GeometricPointMod ℓ (AlgebraicClosure k)))) _
-    ((WeilSheaf.powSuccStalkFunctor ℓ n w.1 w.2.2).obj ((weilSheafUpperStar ℓ eX eW hg).obj F)) _)
-  sorry
+  exact weilSheafStalkTrace_eq_of_iso ℓ eX eW n I
 
 end WeilSheafPullback
 

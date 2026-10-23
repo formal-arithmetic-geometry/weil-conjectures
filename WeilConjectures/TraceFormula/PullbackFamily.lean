@@ -374,17 +374,27 @@ theorem IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso (hc : PullbackAss
 this form lets concrete instances use their own functors. -/
 theorem IsoAlgebra.nonempty_obj_obj_iso_of_eq (hc : PullbackAssoc P c) {X W : Over T}
     (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
-    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
+    (n : ℕ) {S : C} {s : S ⟶ S}
     (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
     {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x)
-    (Λ₁ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (P eW.hom.left))
-    (hΛ₁ : Λ₁ = IsoAlgebra.overPullback c eX eW hg)
-    (Φ : Endofunctor.IsoAlgebra (P eW.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
-    (hΦ : Φ = IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw)
-    (Ψ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
-    (hΨ : Ψ = IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg) :
+    (𝒜X 𝒜W ℬ : Type _) {i𝒜X : Category 𝒜X} {i𝒜W : Category 𝒜W} {iℬ : Category ℬ}
+    (F : 𝒜X) (Λ₁ : 𝒜X ⥤ 𝒜W) (Φ : 𝒜W ⥤ ℬ) (Ψ : 𝒜X ⥤ ℬ)
+    (h𝒜X : (⟨𝒜X, i𝒜X⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra (P eX.hom.left), inferInstance⟩)
+    (h𝒜W : (⟨𝒜W, i𝒜W⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra (P eW.hom.left), inferInstance⟩)
+    (hℬ : (⟨ℬ, iℬ⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra (𝟭 (D S)), inferInstance⟩)
+    (hΛ₁ : HEq Λ₁ (IsoAlgebra.overPullback c eX eW hg))
+    (hΦ : HEq Φ (IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw))
+    (hΨ : HEq Ψ (IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg)) :
     Nonempty (Φ.obj (Λ₁.obj F) ≅ Ψ.obj F) := by
-  subst hΛ₁ hΦ hΨ
+  cases h𝒜X
+  cases h𝒜W
+  cases hℬ
+  cases hΛ₁
+  cases hΦ
+  cases hΨ
   exact IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg
 
 /-- The traces of the structure isomorphisms of the Frobenius stalks of `IsoAlgebra.overPullback`
