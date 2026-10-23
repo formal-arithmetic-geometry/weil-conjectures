@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 
 /-!
 
@@ -59,7 +59,9 @@ automorphism `σ` in place of `Spec k` and the identity.
 ## Main results
 
 - `ProEtale.CondensedRing.weilShriekTraceFunction`: the sheaf–function compatibility of the Weil
-  lower shriek, the deep sorried input.
+  lower shriek, deduced by Noetherian induction
+  (`ProEtale.CondensedRing.weilShriekTraceFunction_of_genericallyHolds`) from the base cases of
+  `WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases`.
 - `ProEtale.CondensedRing.weilTraceFormula`: the trace formula, deduced from the relative form.
 - `ProEtale.CondensedRing.weilPointCount`: the point count `L_{n+1}(X, ℚ̲̄_ℓ) = #X(𝔽_{q^{n+1}})`
   for the canonical Weil unit, deduced from the trace formula and the normalization of the local
@@ -115,7 +117,8 @@ theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
     weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
       ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
         weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K :=
-  sorry
+  weilShriekTraceFunction_of_genericallyHolds ℓ (shriekTraceFunctionGenericallyHolds ℓ k) eX eY hf
+    he K n y
 
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] (e : X ≅ X)

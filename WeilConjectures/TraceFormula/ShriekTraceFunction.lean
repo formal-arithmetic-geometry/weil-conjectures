@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
-public import WeilConjectures.TraceFormula.Statement
+public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 
 /-!
 
