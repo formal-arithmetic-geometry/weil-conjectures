@@ -34,13 +34,13 @@ monoidal closed structure on `Dᵇc` is that of
 
 - `ProEtale.CondensedRing.verdierExchange`: the Verdier exchange morphism
   `Φ_{f,K,L} : Rf_* RHom(K, Rf^! L) ⟶ RHom(Rf_! K, L)`.
-- `ProEtale.CondensedRing.dualizingComplex`: for a structure morphism `a : X ⟶ S`, the
-  dualizing complex `ω_X = Ra^! ℚ̄_ℓ,S`, and `ProEtale.CondensedRing.verdierDual`: the Verdier
-  dual `𝔻_X K = RHom(K, ω_X)`.
+- `ProEtale.CondensedRing.dualizingComplex`: the absolute dualizing complex
+  `ω_X = Ra_X^! ℚ̄_ℓ` of `X`, for its structure morphism `a_X : X ⟶ Spec k`, and
+  `ProEtale.CondensedRing.verdierDual`: the Verdier dual `𝔻_X K = RHom(K, ω_X)`.
 - `ProEtale.CondensedRing.verdierBiduality`: the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`.
-- `ProEtale.CondensedRing.upperShriekDualizingComplexIso`: for `f : X ⟶ Y` and `a_Y : Y ⟶ S`,
-  the identification `γ : Rf^! ω_Y ≅ ω_X` with `ω_X` relative to `f ≫ a_Y`, the composition
-  isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!`
+- `ProEtale.CondensedRing.upperShriekDualizingComplexIso`: for `f : X ⟶ Y`, the identification
+  `γ : Rf^! ω_Y ≅ ω_X`, from `f ≫ a_Y = a_X` and the composition isomorphism
+  `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!`
   (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`) at the unit.
 - `ProEtale.CondensedRing.absoluteVerdierExchange` and
   `ProEtale.CondensedRing.dualVerdierExchange`: the absolute exchange
@@ -114,35 +114,49 @@ theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj �
 
 end Exchange
 
-/-! ### The dualizing complex and the double-dual morphism -/
+/-! ### The absolute dualizing complex and the double-dual morphism -/
 
 section Dualizing
 
-variable {X S : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
-  [QuasiCompact S.hom] [IsSeparated S.hom]
-  (a : X ⟶ S)
+instance : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (𝟙 _))
 
-/-- The **dualizing complex** `ω_X = Ra^! ℚ̄_ℓ,S` of `X` relative to the structure morphism
-`a : X ⟶ S`. -/
+instance : QuasiCompact (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (QuasiCompact (𝟙 _))
+
+instance : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (IsSeparated (𝟙 _))
+
+variable (X : Over (Spec (.of k)))
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- The **dualizing complex** `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k`-scheme of finite type `X`, for
+its structure morphism `a_X : X ⟶ Spec k`, the morphism `Over.mkIdTerminal.from X` to the
+terminal object `Over.mk (𝟙 (Spec k))` of `Over (Spec k)`. -/
 noncomputable def dualizingComplex : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleUpperShriek _ ℓ a).obj (𝟙_ _)
+  (boundedConstructibleUpperShriek _ ℓ (Over.mkIdTerminal.from X)).obj (𝟙_ _)
 
-/-- The **Verdier dual** `𝔻_X K = RHom(K, ω_X)` relative to the structure morphism `a : X ⟶ S`. -/
+variable {X}
+
+/-- The **Verdier dual** `𝔻_X K = RHom(K, ω_X)`. -/
 noncomputable def verdierDual (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (ihom K).obj (dualizingComplex ℓ a)
+  (ihom K).obj (dualizingComplex ℓ X)
 
 /-- The **double-dual morphism** `δ_K : K ⟶ 𝔻_X 𝔻_X K`: the transpose of the evaluation pairing
 `𝔻_X K ⊗ᴸ K ⟶ K ⊗ᴸ 𝔻_X K ⟶ ω_X`. -/
 noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    K ⟶ verdierDual ℓ a (verdierDual ℓ a K) :=
-  Verdier.bidualityMap (dualizingComplex ℓ a) K
+    K ⟶ verdierDual ℓ (verdierDual ℓ K) :=
+  Verdier.bidualityMap (dualizingComplex ℓ X) K
 
-/-- **Constructible Verdier biduality**: the double-dual morphism `δ_K` is an isomorphism for
-`K` bounded constructible. See the module docstring. -/
+/-- **Constructible Verdier biduality**: the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an
+isomorphism for `K` bounded constructible. See the module docstring.
+
+The dualizing complex must be taken relative to `Spec k` (or at least to a regular base): for the
+complex `Ra^! ℚ̄_ℓ = ℚ̄_ℓ` relative to `a = 𝟙` on a nodal curve and `K` the skyscraper `ℚ̄_ℓ` at
+the node, `𝔻𝔻K` has rank `9`. -/
 theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (verdierBiduality ℓ a K) :=
+    IsIso (verdierBiduality ℓ K) :=
   sorry
 
 end Dualizing
@@ -151,44 +165,41 @@ end Dualizing
 
 section Absolute
 
-variable {X Y S : Over (Spec (.of k))}
+variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
-  [IsSeparated S.hom]
-  (f : X ⟶ Y) (aY : Y ⟶ S)
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
 
-/-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes `ω_Y = Ra_Y^! ℚ̄_ℓ,S` and
-`ω_X = R(f ≫ a_Y)^! ℚ̄_ℓ,S`: the composition isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
-`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl` at the unit. -/
+/-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes: the composition
+isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
+`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl` at the unit, followed by
+the equality `f ≫ a_Y = a_X` of morphisms to the terminal object. -/
 noncomputable def upperShriekDualizingComplexIso :
-    (boundedConstructibleUpperShriek _ ℓ f).obj (dualizingComplex ℓ aY) ≅
-      dualizingComplex ℓ (f ≫ aY) :=
-  ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f aY).app (𝟙_ _)).symm
+    (boundedConstructibleUpperShriek _ ℓ f).obj (dualizingComplex ℓ Y) ≅ dualizingComplex ℓ X :=
+  ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (Over.mkIdTerminal.from Y)).app
+      (𝟙_ _)).symm ≪≫
+    eqToIso (by rw [Over.mkIdTerminal.comp_from]; rfl)
 
-/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`, with `𝔻_X` relative to
-`f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the exchange morphism `Φ_{f,K,ω_Y}` precomposed with the
-inverse of `γ = upperShriekDualizingComplexIso`. -/
+/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`: the exchange morphism
+`Φ_{f,K,ω_Y}` precomposed with the inverse of `γ = upperShriekDualizingComplexIso`. -/
 noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (f ≫ aY) K) ⟶
-      verdierDual ℓ aY ((boundedConstructibleLowerShriek _ ℓ f).obj K) :=
+    (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ K) ⟶
+      verdierDual ℓ ((boundedConstructibleLowerShriek _ ℓ f).obj K) :=
   Verdier.absoluteExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleExceptionalProjection _ ℓ f)
-    (dualizingComplex ℓ (f ≫ aY)) (dualizingComplex ℓ aY)
-    (upperShriekDualizingComplexIso ℓ f aY) K
+    (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
 
-/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, with `𝔻_X`
-relative to `f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the double-dual morphism of `Rf_! 𝔻_X K`,
-followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`. The familiar
-`𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
+/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`: the double-dual
+morphism of `Rf_! 𝔻_X K`, followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`.
+The familiar `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
 noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ f).obj (verdierDual ℓ (f ≫ aY) K) ⟶
-      verdierDual ℓ aY ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
+    (boundedConstructibleLowerShriek _ ℓ f).obj (verdierDual ℓ K) ⟶
+      verdierDual ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
   Verdier.dualExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleExceptionalProjection _ ℓ f)
-    (dualizingComplex ℓ (f ≫ aY)) (dualizingComplex ℓ aY)
-    (upperShriekDualizingComplexIso ℓ f aY) K
+    (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
 
 end Absolute
 
