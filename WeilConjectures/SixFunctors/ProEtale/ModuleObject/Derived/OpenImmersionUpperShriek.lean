@@ -44,12 +44,44 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
-  {U X : Over (Spec (.of k))}
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] {U X : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
+
+/-- The identification of `X` with the middle object of the compactification
+`U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`. -/
+noncomputable def openImmersionCompactificationHom :
+    X ⟶ (Compactification.ofIsOpenImmersion j.left).overObj :=
+  Over.homMk (𝟙 X.left) (by
+    change 𝟙 X.left ≫ 𝟙 X.left ≫ X.hom = X.hom
+    simp)
+
+instance : IsIso (openImmersionCompactificationHom j) := by
+  have : IsIso ((Over.forget _).map (openImmersionCompactificationHom j)) :=
+    inferInstanceAs (IsIso (𝟙 X.left))
+  exact isIso_of_reflects_iso _ (Over.forget _)
+
+instance : IsProper (openImmersionCompactificationHom j).left :=
+  inferInstanceAs (IsProper (𝟙 X.left))
+
+omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+lemma isPullback_openImmersionCompactificationHom :
+    IsPullback (𝟙 U) j (Compactification.ofIsOpenImmersion j.left).overI
+      (openImmersionCompactificationHom j) :=
+  IsPullback.of_horiz_isIso ⟨by ext; simp [openImmersionCompactificationHom]; rfl⟩
+
+omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+lemma openImmersionCompactificationHom_comp_overG :
+    openImmersionCompactificationHom j ≫ (Compactification.ofIsOpenImmersion j.left).overG =
+      𝟙 X := by
+  ext
+  simp [openImmersionCompactificationHom, Compactification.overG]
+  rfl
+
+variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- The lower shriek along an open immersion is the extension by zero, `Rj_! ≅ j_!`, on bounded
 constructible `ℚ̄_ℓ`-complexes: by independence of the compactification

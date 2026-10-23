@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SmoothPurity.Defs
@@ -241,20 +242,6 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
     [IsProper U.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   (α.restrict j).integral
-
-/-- **Decomposition of the integral into local terms** (blueprint
-`lem-trf-integration-component-sum`, `prop-trf-pairing-local-decomposition`): if a scheme `X`
-proper over `s` is the disjoint union of finitely many open and closed subschemes
-`j_β : B_β ⟶ X`, the integral of a Borel–Moore section is the sum of its local terms,
-`∫_X α = ∑_β LT_{B_β}(α)`. -/
-theorem integral_eq_sum_localTerm [IsProper X.hom] {ι : Type*} [Fintype ι]
-    (B : ι → Over (Spec (.of k))) [∀ i, QuasiCompact (B i).hom] [∀ i, IsProper (B i).hom]
-    (j : ∀ i, B i ⟶ X) [∀ i, IsOpenImmersion (j i).left] [∀ i, IsClosedImmersion (j i).left]
-    (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).left.base)
-      (Set.range (j i').left.base))
-    (hcover : ⋃ i, Set.range (j i).left.base = Set.univ) (α : BorelMooreSection ℓ X) :
-    α.integral = ∑ i, α.localTerm (j i) :=
-  sorry
 
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
