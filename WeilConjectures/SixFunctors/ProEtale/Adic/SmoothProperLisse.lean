@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.EtaleBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperTwistedLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.RegularLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TransitionCocycle
--- TODO-IMPORT TwistedProperBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedProperBaseChange
 
 /-!
 # Higher direct images of lisse sheaves along smooth proper morphisms are lisse
@@ -76,22 +76,6 @@ lemma transitionMatrix_trivBaseChange_eval {X T V : Scheme.{u}} {G : AdicSheaf l
   simp only [map_locallyFiniteFunctionsComp_map_eval]
 
 end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry
-
--- TEMPORARY STUB (to be provided by `TwistedProperBaseChange`)
-theorem exists_etale_isTwistedSection_of_isProper
-    {X Y V : Scheme.{u}} (p : X ⟶ Y) [IsProper p] [Smooth p]
-    (f : V ⟶ X) [WeaklyEtale f] [Surjective f] [QuasiCompact f]
-    {S : Type} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
-    (hZ : ∀ (Z : Scheme.{u}) (π : Z ⟶ X), IsRegular Z → IsLocallyNoetherian Z → CompactSpace Z →
-      ∃ σ, IsTwistedSection f c π σ)
-    (y : Y) :
-    ∃ (U : Scheme.{u}) (j : U ⟶ Y), Etale j ∧ IsAffine U ∧ y ∈ Set.range j.base ∧
-      ∃ σ, IsTwistedSection f c (pullback.fst p j) σ :=
-  sorry
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 

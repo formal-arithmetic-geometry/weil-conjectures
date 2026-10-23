@@ -11535,6 +11535,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Trivialization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedDescent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedFiniteEtale
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedGerm
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedProperBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedProperFree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseDenseOpen
