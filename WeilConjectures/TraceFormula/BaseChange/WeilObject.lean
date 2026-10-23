@@ -112,6 +112,27 @@ section Frobenius
 
 variable (X : Over (Spec (.of k))) (N : ℕ)
 
+/-- The compatibility at a geometric point `ȳ : Spec Ω ⟶ X` of a trivialization `κ : F^* ≅ 𝟭` of
+the pullback along the `#k ^ N`-power Frobenius `F` with a trivialization `τ : σ^* ≅ 𝟭` of the
+pullback along the automorphism `σ` of `Spec Ω` inverse to the `#k ^ N`-power Frobenius: writing
+`ȳ = (σ ≫ ȳ) ≫ F`, the two identifications `ȳ^* M ≅ σ^* ȳ^* M ≅ (σ ≫ ȳ)^* M` and
+`ȳ^* M = ((σ ≫ ȳ) ≫ F)^* M ≅ (σ ≫ ȳ)^* F^* M --κ--> (σ ≫ ȳ)^* M` agree. -/
+def IsGaloisCompatibleFrobeniusIsoAt
+    (κ : ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
+    {Ω : Type u} [Field Ω] [Algebra k Ω] (σ : Spec (.of Ω) ≅ Spec (.of Ω))
+    (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) (y : Spec (.of Ω) ⟶ X.left)
+    (τ : (σ.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _) : Prop :=
+  ∀ M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left),
+    τ.inv.app ((y)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom y).inv.app M =
+      eqToHom (congrArg (fun t : Spec (.of Ω) ⟶ X.left ↦
+          (t)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M)
+          (comp_comp_frobeniusIterate_overFrobenius_left hσ y).symm) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) (σ.hom ≫ y)
+          (frobeniusIterate (overFrobenius X) N).left).hom.app M ≫
+        (σ.hom ≫ y)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (κ.hom.app M)
+
 /-- **Galois compatibility of a trivialization of the Frobenius pullback** (blueprint
 `lem-trf-absolute-frobenius-site`, with its comparison with the Galois pullbacks at geometric
 points, blueprint `prop-trf-scheme-galois-comparison`). Let `X` be a scheme over the finite field
@@ -137,19 +158,10 @@ which are all sheaves on `Spec Ω`. -/
 def IsGaloisCompatibleFrobeniusIso
     (κ : ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _) :
     Prop :=
-      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] [Algebra k Ω] (σ : Spec (.of Ω) ≅ Spec (.of Ω))
-        (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) (y : Spec (.of Ω) ⟶ X.left)
-        (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)),
-        (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
-            ((y)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) ≫
-          (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom y).inv.app M =
-        eqToHom (congrArg (fun t : Spec (.of Ω) ⟶ X.left ↦
-            (t)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M)
-            (comp_comp_frobeniusIterate_overFrobenius_left hσ y).symm) ≫
-          (upperStarComp (Profinite.padicAlgClRingObj ℓ) (σ.hom ≫ y)
-            (frobeniusIterate (overFrobenius X) N).left).hom.app M ≫
-          (σ.hom ≫ y)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (κ.hom.app M)
+  ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] [Algebra k Ω] (σ : Spec (.of Ω) ≅ Spec (.of Ω))
+    (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) (y : Spec (.of Ω) ⟶ X.left),
+    IsGaloisCompatibleFrobeniusIsoAt ℓ X N κ σ hσ y
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
 
 /-- **The trivialization of the Frobenius pullback** (blueprint `lem-trf-absolute-frobenius-site`
 and `prop-trf-scheme-galois-comparison`): the pullback along the `#k ^ N`-power Frobenius on

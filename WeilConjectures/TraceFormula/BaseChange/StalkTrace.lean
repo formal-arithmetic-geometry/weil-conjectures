@@ -211,6 +211,162 @@ lemma stalkFunctor_obj_str_hom (W : WeilSheaf ℓ e) :
       (upperStarEqToIso_hom_app _ hx.symm W.carrier)).trans ?_))
   simp only [Category.assoc]
 
+omit [Finite k] [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k Ω]
+  [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] [IsSepClosed Ω] in
+/-- The transport of the pullback of module objects along an equality of morphisms is
+`upperStarEqToIso`. -/
+lemma upperStarCongr_eq_upperStarEqToIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
+    upperStarCongr Λ h = upperStarEqToIso Λ h := by
+  subst h
+  ext M
+  rw [upperStarEqToIso_hom_app]
+  simp [upperStarCongr]
+
+omit [Finite k] [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k Ω]
+  [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] [IsSepClosed Ω] in
+/-- The associativity law of the composition isomorphisms of the pullbacks of module objects, with
+the transport written through `eqToHom` of objects. -/
+lemma upperStarComp_assoc_app_eqToHom
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {W' X' Y' Z' : Scheme.{u}} (f : W' ⟶ X') (g : X' ⟶ Y') (h : Y' ⟶ Z') (M) :
+    (upperStarComp Λ (f ≫ g) h).hom.app M ≫ (upperStarComp Λ f g).hom.app ((h)^*⟦Λ⟧.obj M) =
+      eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) (Category.assoc f g h)) ≫
+        (upperStarComp Λ f (g ≫ h)).hom.app M ≫
+          (f)^*⟦Λ⟧.map ((upperStarComp Λ g h).hom.app M) := by
+  rw [upperStarComp_hom_app_comp_upperStarComp_hom_app, upperStarCongr_eq_upperStarEqToIso,
+    upperStarEqToIso_hom_app]
+
 end Galois
+
+/-! ### The comparison of the local traces -/
+
+section Comparison
+
+variable {X} [IsSepClosed Ω] (e : X ≅ X) (σ : Spec (.of Ω) ≅ Spec (.of Ω))
+  (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) (x : Spec (.of Ω) ⟶ X.left)
+  (hxk : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω)))
+  (hx : x ≫ e.hom.left = σ.hom ≫ x)
+
+omit [Finite k] [Algebra k Ω] [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- The components of the Frobenius comparison of the stalk. -/
+lemma weilStalkComparison_hom_app' (M) :
+    (weilStalkComparison ℓ e σ.hom x hx).hom.app M =
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app M ≫
+        eqToHom (congrArg (fun s : Spec (.of Ω) ⟶ X.left ↦
+          (s)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) hx.symm) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app M :=
+  (congrArg (fun i ↦ i.hom.app M) (weilStalkComparison_eq ℓ e σ x hx)).trans
+    ((isoWhiskerLeft_symm_trans_hom_app_aux ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
+      (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x)
+      (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm)
+      (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left) M).trans
+      (congrArg (fun z ↦
+        (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app M ≫ z ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app M)
+        (upperStarEqToIso_hom_app _ hx.symm M)))
+
+/-- `categoricalTrace_stalkFunctor_homologyFunctor_eq` for an abstract trivialization `τ` of the
+Galois pullback compatible with the trivialization of the Frobenius pullback. -/
+lemma categoricalTrace_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ e.hom) (j : ℤ)
+    (τ : (σ.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
+    (hτ : IsGaloisCompatibleFrobeniusIsoAt ℓ X N (upperStarFrobeniusIso ℓ X N) σ hσ x τ) :
+    categoricalTrace (τ.inv.app ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj
+          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app
+          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier ≫
+        eqToHom (congrArg (fun t : Spec (.of Ω) ⟶ X.left ↦
+          (t)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj
+            ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier) hx.symm) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app
+          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
+          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).str.hom) =
+      categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
+        ((weilStalk ℓ (modelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
+          ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
+          ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
+  have hW : ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).str.hom =
+      (leftDerivedUpperStarHomologyIso (Profinite.padicAlgClRingObj ℓ) e.hom.left j).hom.app
+          L.carrier.obj ≫
+        (DerivedCategory.homologyFunctor _ j).map L.str.hom.hom := by
+    have h1 := congrArg Iso.hom (IsoAlgebra.mapOfNatIso_obj_str (weilHomologyComparison ℓ e j) L)
+    have h2 := weilHomologyComparisonOfHom_hom_app ℓ j e.hom L.carrier
+    exact h1.trans (congrArg (· ≫ _) h2)
+  have hc := WeilBoundedConstructible.homologyFunctor_obj_carrier ℓ e j L
+  have hT := eqToHom_comp_galois_comp_eqToHom_heq_aux
+    (E := fun S ↦ Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S))
+    (fun a ↦ (a)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun a b ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) a b) e.hom.left σ.hom x hx
+    τ hc _ _ (heq_of_eq hW)
+  have hx' := (geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx
+  have hconj := galoisFrobeniusAux_eq_conj (P := Spec (.of Ω))
+    (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
+    (E := fun S ↦ Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S))
+    (fun a ↦ L((a)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (fun a b ↦ leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a b)
+    (fun a b c M ↦ leftDerivedUpperStarComp_assoc_app _ a b c M)
+    (fun a ↦ (a)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun a b ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) a b)
+    (fun a b c M ↦ upperStarComp_assoc_app_eqToHom _ a b c M)
+    (fun S ↦ DerivedCategory.homologyFunctor _ j)
+    (fun a ↦ leftDerivedUpperStarHomologyIso (Profinite.padicAlgClRingObj ℓ) a j)
+    (fun a b M ↦ leftDerivedUpperStarHomologyIso_comp_hom_app _ a b j M)
+    (geometricBaseChangePoint x hxk).left (modelFrobenius Ω X N e.hom).left
+    (geometricBaseChangeProj X) e.hom.left (frobeniusIterate (overFrobenius X) N).left σ.hom x
+    (geometricBaseChangePoint_left_comp_proj x hxk) (left_comp_modelFrobenius_left hx')
+    (modelFrobenius_left_comp_proj' X N e.hom) hx
+    (comp_comp_frobeniusIterate_overFrobenius_left hσ x)
+    (leftDerivedUpperStarFrobeniusIso ℓ X N) (upperStarFrobeniusIso ℓ X N)
+    (fun M ↦ leftDerivedUpperStarHomologyIso_hom_app_idIso _ _ (upperStarFrobeniusIso ℓ X N) j M)
+    τ hτ L.carrier.obj L.str.hom.hom
+  have hF := (congrArg InducedCategory.Hom.hom
+    (weilStalk_weilGeometricBaseChange_frobenius_hom ℓ (geometricBaseChangePoint x hxk)
+      ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx) L)).trans
+    (modelStalkFrobenius_hom ℓ (geometricBaseChangePoint x hxk) hx' L.carrier L.str.hom)
+  refine (categoricalTrace_conj (eqToIso (congrArg ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+    hc)) _).symm.trans ?_
+  refine (congrArg categoricalTrace (hT.trans hconj)).trans ((categoricalTrace_conj _ _).trans ?_)
+  have hG := congrArg categoricalTrace (congrArg (DerivedCategory.homologyFunctor _ j).map hF)
+  exact hG.symm
+
+/-- **The comparison of the local traces of a Weil object and of its base change.** Let
+`(L, φ)` be a Weil object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for an automorphism `e`, `σ` an automorphism of
+`Spec Ω` inverse to the `#k ^ N`-power Frobenius and `x̄ : Spec Ω ⟶ X` a geometric point with
+`x̄ ≫ e = σ ≫ x̄`, so that `x̄' = (x̄, 𝟙)` is fixed by the model Frobenius
+`Φ = (e ≫ F_X^N) ×_k Ω`. Then the trace of the Frobenius on the stalk at `x̄` of the Weil sheaf
+`Hʲ(L)`, for the Frobenius `σ` twisted by `e`, is the trace of the `j`-th homology of the local
+Frobenius at `x̄'` of the base change `Lπ^* L` for the model Frobenius:
+```
+Tr(Fr_{x̄} | Hʲ(L)_x̄) = Tr(Hʲ(F_{x̄'}) | Hʲ((Lπ^* L)_x̄')).
+```
+-/
+theorem categoricalTrace_stalkFunctor_homologyFunctor_eq (L : WeilBoundedConstructible ℓ e.hom)
+    (j : ℤ) :
+    categoricalTrace (((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj
+        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L)).str.hom) =
+      categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
+        ((weilStalk ℓ (modelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
+          ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
+          ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
+  exact (congrArg categoricalTrace (stalkFunctor_obj_str_hom ℓ e σ x hx _)).trans
+    (categoricalTrace_galoisFrobenius_eq_aux (ℓ := ℓ) (hσ := hσ) (hxk := hxk) (hx := hx) (L := L)
+      (j := j) (τ := upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
+      (hτ := isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso ℓ X N Ω σ hσ x))
+
+end Comparison
 
 end AlgebraicGeometry.ProEtale.CondensedRing
