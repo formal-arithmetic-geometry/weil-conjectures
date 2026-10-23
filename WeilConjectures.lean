@@ -7631,6 +7631,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycleOfIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatFiniteResolution
@@ -8635,6 +8636,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficientBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerGenerator
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerGeneratorSheaf
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
@@ -11355,6 +11357,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChangeCharts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLine
@@ -12448,6 +12451,3 @@ public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 public import WeilConjectures.ZetaSeries
-public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycleOfIso
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerGeneratorSheaf
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualizing
