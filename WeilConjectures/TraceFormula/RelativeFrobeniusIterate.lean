@@ -242,4 +242,125 @@ theorem frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient
     · rw [lowerShriekFrobeniusCoefficient] at ih
       convert ih using 3
 
+
+/-! ### The global operators -/
+
+/-- **The global operators of the pushforward** (blueprint `sk-i-relative-frob` (3),
+`lem-trf-weil-shriek-operator-fibres` (1)): the composition isomorphism
+`c_f : RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)` intertwines the global operators `F_{c,m}(ψ')` of the
+pushforward `ψ' = Rf_! ψ ∘ θ_{f,1}` and `F_{c,m}(ψ)` of the Frobenius coefficient morphism `ψ`,
+for every `m`. -/
+theorem frobeniusCompactOperator_lowerShriekFrobeniusCoefficient
+    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K)
+    (m : ℕ) :
+    frobeniusCompactOperator ℓ (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) m ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K =
+      (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K ≫
+        frobeniusCompactOperator ℓ ψ m := by
+  have h₁ : frobeniusCompactOperator ℓ (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) 1 ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K =
+      (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K ≫
+        frobeniusCompactOperator ℓ ψ 1 := by
+    have hn := (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.naturality ψ
+    simp only [Functor.comp_map] at hn
+    rw [frobeniusCompactOperator_one, frobeniusCompactOperator_one,
+      lowerShriekFrobeniusCoefficient, Functor.map_comp, Category.assoc, Category.assoc, hn]
+    exact compactPullback_comp_weilLowerShriekFrobeniusComparison_assoc ℓ _ _ _ K _
+  rw [frobeniusCompactOperator_eq_pow ℓ (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) m,
+    frobeniusCompactOperator_eq_pow ℓ ψ m]
+  exact End.asHom_pow_comp_of_comp h₁ m
+
+/-! ### The stalks at fixed points -/
+
+section Stalk
+
+variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
+  [IsSeparated Z.hom]
+
+set_option maxHeartbeats 1000000 in
+-- the defeq of the carriers of the lower shriek with `Rf_! K` is slow
+omit [IsFinite ΦX.left] [IsUniversalHomeomorphism ΦX.left] [IsFinite ΦY.left]
+  [IsUniversalHomeomorphism ΦY.left] in
+/-- The stalk of the pushforward of a Frobenius coefficient morphism at a fixed point, for an
+arbitrary cartesian square and relative Frobenius (blueprint
+`lem-trf-weil-shriek-operator-fibres` (2)): for `y` fixed by `Φ_Y` with fibre `Z = X ×_Y y`
+carrying a Frobenius `Φ_Z` compatible with `Φ_X`, proper base change
+`β : (Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)` carries the stalk map of `Rf_! v ∘ θ_f` to the degree-one global
+operator of the restriction `v|_Z` of `v`. -/
+lemma stalk_weilLowerShriekFrobeniusComparison_comp {X' : Over (Spec (.of k))}
+    [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] {ΦX ΦY}
+    {p : X' ⟶ X} {f' : X' ⟶ Y} (sq : IsPullback p f' f ΦY) (r : X ⟶ X') (hrp : r ≫ p = ΦX)
+    (hrf : r ≫ f' = f) [IsFinite r.left] [IsUniversalHomeomorphism r.left] {ΦZ : Z ⟶ Z}
+    [IsProper ΦZ.left] {i : Z ⟶ X} (hi : ΦZ ≫ i = i ≫ ΦX) {y : RationalPoint Y}
+    (hy : y ≫ ΦY = y) (hZ : IsPullback i (toPoint Z) f y)
+    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K) :
+    (eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+        hy.symm) ≫
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y ΦY).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).hom.app K ≫
+          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map v)) ≫
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K =
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K ≫
+      frobeniusCompactOperator ℓ (Φ := ΦZ)
+        (K := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)
+        ((weilUpperStarComparison ℓ ΦZ ΦX i hi).hom.app K ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map v) 1 := by
+  obtain ⟨j, hj₁, hj₂⟩ : ∃ j : Z ⟶ X', j ≫ p = i ∧ j ≫ f' = toPoint Z ≫ y :=
+    ⟨sq.lift i (toPoint Z ≫ y) (by rw [hZ.w, Category.assoc, hy]), sq.lift_fst _ _ _,
+      sq.lift_snd _ _ _⟩
+  subst hj₁ hrp hrf
+  have hL : IsPullback j (toPoint Z) f' y := IsPullback.of_right (by rw [hy]; exact hZ) hj₂ sq
+  have hTw : (j ≫ p) ≫ r = ΦZ ≫ j := sq.hom_ext
+    (by simp only [Category.assoc] at hi ⊢; exact hi.symm)
+    (by rw [Category.assoc, hZ.w, Category.assoc, hj₂, ← Category.assoc, comp_toPoint])
+  have hT : IsPullback (j ≫ p) ΦZ r j :=
+    IsPullback.of_bot (by rw [comp_toPoint]; exact hZ) hTw hL
+  have hn := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).naturality v
+  simp only [Functor.comp_map] at hn
+  rw [frobeniusCompactOperator_one, Functor.map_comp, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [hn]
+  exact baseChange_comp_weilLowerShriekFrobeniusComparison_stalk_assoc ℓ sq hy hZ hL hT hi K _
+
+/-- **The stalks of the pushforward at fixed points** (blueprint `sk-i-relative-frob` (4),
+`lem-trf-weil-shriek-operator-fibres` (2)): let `m ≥ 1`, let `y` be a rational point of `Y`
+fixed by `Φ_Y^m`, and let `Z = X ×_Y y` be its fibre, with `i : Z ⟶ X`, carrying the
+restriction `Φ_Z` of `Φ_X^m` (for model Frobenii, `Z` is the base change of a scheme over
+`𝔽_{q^m}` with `Φ_Z` its `q^m`-power Frobenius:
+`ProEtale.CondensedRing.IsModelFrobenius.isModelFrobenius_fibreFrobenius`). Then proper base
+change `β : (Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)` identifies the stalk map of the iterate `ψ'_m` of the
+pushforward with the degree-one global operator `F_{c,1}(ψ_m|_Z)` of the restriction of `ψ_m`. -/
+theorem stalk_lowerShriekFrobeniusCoefficient_iterate
+    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K)
+    {m : ℕ} (hm : 1 ≤ m) {ΦZ : Z ⟶ Z} [IsProper ΦZ.left] {i : Z ⟶ X}
+    (hi : ΦZ ≫ i = i ≫ frobeniusIterate ΦX m) {y : RationalPoint Y}
+    (hy : y ≫ frobeniusIterate ΦY m = y) (hZ : IsPullback i (toPoint Z) f y) :
+    (eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+        hy.symm) ≫
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y
+        (frobeniusIterate ΦY m)).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        (frobeniusCoefficientIterate (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) m)) ≫
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K =
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K ≫
+      frobeniusCompactOperator ℓ (Φ := ΦZ)
+        (K := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)
+        ((weilUpperStarComparison ℓ ΦZ (frobeniusIterate ΦX m) i hi).hom.app K ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
+            (frobeniusCoefficientIterate ψ m)) 1 := by
+  rw [frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ hm,
+    lowerShriekFrobeniusComparison]
+  convert stalk_weilLowerShriekFrobeniusComparison_comp ℓ (isPullback_frobeniusIterate ΦY m)
+    (relativeFrobenius f _ _ (frobeniusIterate_comp_of_comp hf m)) (relativeFrobenius_snd ..)
+    (relativeFrobenius_fst ..) hi hy hZ _ using 3
+
+end Stalk
 end AlgebraicGeometry.ProEtale.CondensedRing
