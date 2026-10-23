@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtens
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.TraceFormula.PointTrace
 
 /-!
 
@@ -403,7 +404,7 @@ the inclusion into `D(Mod_{ℚ̲̄_ℓ,s})`) and an endomorphism `(v₁, v₂, v
 `tr v₂ = tr v₁ + tr v₃`. Over the field `ℚ̄_ℓ` the filtered origin required in item (2) is
 automatic: by item (4) the trace is the alternating sum of the traces on the cohomology, which is
 additive along the long exact cohomology sequence of an endomorphism of a triangle. -/
-theorem trace_eq_trace_add_trace_of_distTriang
+theorem trace_eq_trace_add_trace_of_distTriang [IsSepClosed k]
     {P₁ P₂ P₃ : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} [HasRightDual P₁]
     [HasRightDual P₂] [HasRightDual P₃] (f : P₁ ⟶ P₂) (g : P₂ ⟶ P₃)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -423,8 +424,30 @@ theorem trace_eq_trace_add_trace_of_distTriang
       δ ≫ (shiftFunctor _ (1 : ℤ)).map
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           (point k).left)).ι.map v₁)) :
-    trace v₂ = trace v₁ + trace v₃ :=
-  sorry
+    trace v₂ = trace v₁ + trace v₃ := by
+  let ι := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+    (point k).left)).ι
+  letI := DerivedCategory.braidedCategory' (PointMod ℓ k)
+  let : HasRightDual (ι.obj P₁) :=
+    @HasRightDual.mk _ _ _ _ (ι.obj (P₁ᘁ)) (ExactPairing.map ι P₁ (P₁ᘁ))
+  let : HasRightDual (ι.obj P₂) :=
+    @HasRightDual.mk _ _ _ _ (ι.obj (P₂ᘁ)) (ExactPairing.map ι P₂ (P₂ᘁ))
+  let : HasRightDual (ι.obj P₃) :=
+    @HasRightDual.mk _ _ _ _ (ι.obj (P₃ᘁ)) (ExactPairing.map ι P₃ (P₃ᘁ))
+  have key {P : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} [HasRightDual P]
+      [HasRightDual (ι.obj P)] (v : P ⟶ P) : trace (ι.map v) = ι.unitEndRingHom (trace v) :=
+    ι.trace_eq_unitEndRingHom_trace v (ι.map v) (Iso.refl _) (by simp)
+  have hinj : Function.Injective ι.unitEndRingHom := fun a b h ↦ by
+    rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
+    exact ι.map_injective ((cancel_mono _).1 (by simpa [ι] using h))
+  apply hinj
+  rw [RingHom.map_add, ← key, ← key, ← key]
+  exact trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition ℓ k
+    ((nonempty_shiftDecomposition_point ℓ k P₁).some.map ι)
+    ((nonempty_shiftDecomposition_point ℓ k P₂).some.map ι)
+    ((nonempty_shiftDecomposition_point ℓ k P₃).some.map ι) (ι.map f) (ι.map g) δ hT
+    (ι.map v₁) (ι.map v₂) (ι.map v₃) (by rw [← ι.map_comp, ← ι.map_comp, h₁])
+    (by rw [← ι.map_comp, ← ι.map_comp, h₂]) h₃
 
 /-! ### The Frobenius endomorphisms of the triangle -/
 
@@ -1046,7 +1069,7 @@ theorem compactFrobenius_connecting_compat
 (blueprint `prop-trf-trace-additivity-open-closed`, `sk-i-global-additivity`): for an open
 immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius,
 `tr(F_c | RΓ_c(X, K)) = tr(F_c | RΓ_c(U, K|_U)) + tr(F_c | RΓ_c(Z, K|_Z))`. -/
-theorem trace_compactFrobenius_eq_add_of_isCompl
+theorem trace_compactFrobenius_eq_add_of_isCompl [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
     [HasRightDual
