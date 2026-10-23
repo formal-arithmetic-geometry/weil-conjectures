@@ -98,7 +98,8 @@ lemma left_comp_modelFrobenius_left [Finite k]
     {x' : RationalPoint ((geometricBaseChange k Ω).obj X)}
     (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') :
     x'.left ≫ (baseChangeModelFrobenius Ω X N g).left = x'.left :=
-  (Over.comp_left _ _ _ x' (baseChangeModelFrobenius Ω X N g)).symm.trans (congrArg Over.Hom.left hx')
+  (Over.comp_left _ _ _ x' (baseChangeModelFrobenius Ω X N g)).symm.trans (congrArg Over.Hom.left
+      hx')
 
 
 variable {X N g} in
@@ -110,7 +111,8 @@ Lx̄'^* Lπ^* a = L(x̄' ≫ Φ)^* Lπ^* a ≅ Lx̄'^* LΦ^* Lπ^* a
 ```
 -/
 noncomputable def modelStalkFrobenius (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
-    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (a :
+        Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x').obj
         ((geometricBaseChangeUpperStar Ω ℓ X).obj a) ⟶
@@ -129,7 +131,8 @@ variable {X N g} in
 composite `modelFrobeniusAux` of the derived pullbacks. -/
 lemma modelStalkFrobenius_hom [IsSepClosed Ω]
     (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
-    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (a :
+        Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
     (modelStalkFrobenius ℓ x' hx' a ψ).hom =
       modelFrobeniusAux (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S)

@@ -100,6 +100,19 @@ lemma isFrobenius_frobeniusIterate_overFrobenius_left (N : ℕ) :
   rw [frobeniusIterate_left]
   exact (isFrobenius_overFrobenius_left X).pow X.hom N
 
+/-- The `N`-th iterate of the Frobenius is the absolute `p ^ (a * N)`-power Frobenius, where
+`#k = p ^ a`. -/
+lemma frobeniusIterate_overFrobenius_left (N : ℕ) :
+    (frobeniusIterate (overFrobenius X) N).left =
+      X.left.iterateFrobenius (FiniteField.ringChar_prime k) (isOfCharacteristic_of_hom_spec X.hom)
+        (FiniteField.frobeniusExponent k * N) := by
+  induction N with
+  | zero => rw [frobeniusIterate_zero, mul_zero, Scheme.iterateFrobenius_zero]; rfl
+  | succ N ih =>
+    rw [frobeniusIterate_succ, Over.comp_left, ih, overFrobenius_left, Nat.mul_succ, add_comm,
+      Scheme.iterateFrobenius_add]
+    rfl
+
 end Frobenius
 
 /-! ### The Frobenius of `Spec Ω` -/
@@ -226,7 +239,8 @@ lemma modelFrobenius_left_comp_proj (N : ℕ) (g : X ⟶ X) :
 
 /-- For `g = 𝟙`, the model Frobenius `F_X^N ×_k Ω` is the `N`-th iterate of `F_X ×_k Ω`. -/
 lemma modelFrobenius_id (N : ℕ) :
-    baseChangeModelFrobenius Ω X N (𝟙 X) = frobeniusIterate (baseChangeModelFrobenius Ω X 1 (𝟙 X)) N := by
+    baseChangeModelFrobenius Ω X N (𝟙 X) = frobeniusIterate (baseChangeModelFrobenius Ω X 1 (𝟙 X))
+        N := by
   simp only [baseChangeModelFrobenius, Category.id_comp, frobeniusIterate_one]
   induction N with
   | zero => simp
@@ -247,7 +261,8 @@ theorem exists_isModelFrobenius_modelFrobenius_id [IsAlgClosed Ω] [LocallyOfFin
     ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₁ Ω)
       (X₁ : Scheme.{u}) (f₁ : X₁ ⟶ Spec (.of k₁)) (_ : LocallyOfFiniteType f₁)
       (p₁ : ((geometricBaseChange k Ω).obj X).left ⟶ X₁),
-      Nat.card k₁ = Nat.card k ^ N ∧ IsModelFrobenius (baseChangeModelFrobenius Ω X N (𝟙 X)) f₁ p₁ := by
+      Nat.card k₁ = Nat.card k ^ N ∧ IsModelFrobenius (baseChangeModelFrobenius Ω X N (𝟙 X)) f₁ p₁
+          := by
   obtain ⟨k₁, _, _, _, _, _, hcard⟩ := exists_finiteField_natCard_eq_pow k Ω hN
   have h := (isModelFrobenius_modelFrobenius_one (Ω := Ω) X).fieldChange (k₁ := k₁) hcard
   rw [← modelFrobenius_id] at h
@@ -312,7 +327,8 @@ lemma geometricBaseChangePoint_left_comp_proj_eq
 theorem geometricBaseChangePoint_comp_modelFrobenius_eq_iff (x : Spec (.of Ω) ⟶ X.left)
     (hx : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω))) (N : ℕ) (g : X ⟶ X)
     (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) :
-    geometricBaseChangePoint x hx ≫ baseChangeModelFrobenius Ω X N g = geometricBaseChangePoint x hx ↔
+    geometricBaseChangePoint x hx ≫ baseChangeModelFrobenius Ω X N g = geometricBaseChangePoint x
+        hx ↔
       x ≫ g.left = σ.hom ≫ x := by
   have hF : (x ≫ g.left) ≫ (frobeniusIterate (overFrobenius X) N).left =
       Spec.map (powCardPowRingHom k Ω N) ≫ x ≫ g.left :=

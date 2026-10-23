@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.TraceFormula.BaseChange.Basic
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.BaseChange.Coherence
@@ -36,13 +37,15 @@ where `κ : (F_X^N)^* ≅ 𝟭` is the trivialization of the pullback along the 
 The absolute Frobenius of a scheme of characteristic `p` acts trivially on its pro-étale topos:
 the relative Frobenius of a weakly étale `V ⟶ X` is an isomorphism, so the base change along the
 absolute Frobenius is isomorphic to the identity on the pro-étale site (blueprint
-`lem-trf-absolute-frobenius-site`). This gives `κ : (F_X^N)^* ≅ 𝟭` on `ℚ̲̄_ℓ`-modules. At a
+`lem-trf-absolute-frobenius-site`, `ProEtale.upperStarIterateFrobeniusIso`). Writing
+`#k = p ^ a`, the Frobenius `F_X^N` is the absolute `p ^ (a N)`-power Frobenius. Its
+trivialization on abelian sheaves is monoidal and fixes the coefficient ring `Λ_X`, which is
+pulled back from the point, so it gives `κ : (F_X^N)^* ≅ 𝟭` on `ℚ̲̄_ℓ`-modules
+(`ProEtale.CondensedRing.upperStarFrobeniusIso`). At a
 geometric point `ȳ : Spec Ω ⟶ X`, the trivialization `κ` restricts to the trivialization
 `(σ)^* ≅ 𝟭` of the pullback along the automorphism `σ` of `Spec Ω` inverse to the
-`q^N`-power Frobenius of `Spec Ω` (`upperStarIsoIdOfIsSepClosed`): this is the comparison of the
-scheme and Galois Frobenius pullbacks (blueprint `prop-trf-scheme-galois-comparison`), since
-`(σ ≫ ȳ) ≫ F_X^N = ȳ`. Both are stated together as the input
-`ProEtale.CondensedRing.exists_upperStarFrobeniusIso`.
+`q^N`-power Frobenius of `Spec Ω` (`upperStarIsoIdOfIsSepClosed`), since `(σ ≫ ȳ) ≫ F_X^N = ȳ`
+(`ProEtale.CondensedRing.isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso`).
 
 ## Main definitions
 
@@ -51,13 +54,13 @@ scheme and Galois Frobenius pullbacks (blueprint `prop-trf-scheme-galois-compari
 - `ProEtale.CondensedRing.geometricBaseChangeUpperStar`: the derived pullback
   `Lπ^* : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X̄)⟦ℚ̲̄_ℓ⟧` along the base change.
 - `ProEtale.CondensedRing.weilGeometricBaseChange`: the base change of Weil objects
-  `WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (baseChangeModelFrobenius Ω X (n + 1) g)`.
+  `WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (baseChangeModelFrobenius Ω X (n + 1)
+      g)`.
 
 ## Sorried inputs
 
-- `ProEtale.CondensedRing.exists_upperStarFrobeniusIso` (blueprint
-  `lem-trf-absolute-frobenius-site` and `prop-trf-scheme-galois-comparison`, section
-  `sec-six-functors-basics`).
+- `ProEtale.CondensedRing.isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso`: the Galois
+  compatibility of the Frobenius trivialization at geometric points (unfinished).
 - `ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj`:
   the pullback along `π` preserves bounded constructible complexes (blueprint
   `sk-thm-sf-ctf-stability`, section `sec-six-functors-basics`, with the pullback of
@@ -81,6 +84,11 @@ variable {C E : Type*} [Category C] [Category E] {A C' : C ⥤ E} {B : C ⥤ C}
 def compIsoOfIsoId (c : A ≅ B ⋙ C') (κ : B ≅ 𝟭 C) : A ≅ C' :=
   c ≪≫ Functor.isoWhiskerRight κ C' ≪≫ C'.leftUnitor
 
+/-- The components of `compIsoOfIsoId c κ` are the composites
+```
+A M --c--> C' (B M) --C' κ_M--> C' M.
+```
+-/
 lemma compIsoOfIsoId_hom_app (c : A ≅ B ⋙ C') (κ : B ≅ 𝟭 C) (M : C) :
     (compIsoOfIsoId c κ).hom.app M = c.hom.app M ≫ C'.map (κ.hom.app M) := by
   simp [compIsoOfIsoId]
@@ -163,26 +171,25 @@ def IsGaloisCompatibleFrobeniusIso
     IsGaloisCompatibleFrobeniusIsoAt ℓ X N κ σ hσ y
       (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
 
-/-- **The trivialization of the Frobenius pullback** (blueprint `lem-trf-absolute-frobenius-site`
-and `prop-trf-scheme-galois-comparison`): the pullback along the `#k ^ N`-power Frobenius on
-`ℚ̲̄_ℓ`-modules on the pro-étale site of `X` has a trivialization compatible with the Galois
-pullbacks at geometric points (`IsGaloisCompatibleFrobeniusIso`). -/
-theorem exists_upperStarFrobeniusIso :
-    ∃ κ : ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _,
-      IsGaloisCompatibleFrobeniusIso ℓ X N κ :=
-  sorry
-
-/-- The trivialization `κ : (F_X^N)^* ≅ 𝟭` of the pullback along the `#k ^ N`-power Frobenius on
-`ℚ̲̄_ℓ`-modules (`exists_upperStarFrobeniusIso`). -/
+/-- **The trivialization of the Frobenius pullback** (blueprint `lem-trf-absolute-frobenius-site`):
+the pullback along the `#k ^ N`-power Frobenius `F = F_X^N` on `ℚ̲̄_ℓ`-modules on the pro-étale
+site of `X` is trivialized by the relative Frobenius isomorphisms. Writing `#k = p ^ a`, the
+Frobenius `F` is the absolute `p ^ (a N)`-power Frobenius (`frobeniusIterate_overFrobenius_left`),
+whose pullback of abelian sheaves has the monoidal trivialization
+`ProEtale.upperStarIterateFrobeniusIso`; it fixes the coefficient ring `Λ_X`, which is pulled back
+from the point (`ProEtale.upperStarIterateFrobeniusIso_hom_app_upperStarFromPoint`), so it
+induces a trivialization on `Λ_X`-modules (`upperStarIterateFrobeniusIso`). -/
 noncomputable def upperStarFrobeniusIso :
     ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _ :=
-  (exists_upperStarFrobeniusIso ℓ X N).choose
+  upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (frobeniusIterate_overFrobenius_left X N) ≪≫
+    upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
+      (isOfCharacteristic_of_hom_spec X.hom) (FiniteField.frobeniusExponent k * N)
 
 /-- At geometric points, the trivialization of the Frobenius pullback is the trivialization of
-the Galois pullback. -/
-lemma isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso :
+the Galois pullback (`IsGaloisCompatibleFrobeniusIso`). -/
+theorem isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso :
     IsGaloisCompatibleFrobeniusIso ℓ X N (upperStarFrobeniusIso ℓ X N) :=
-  (exists_upperStarFrobeniusIso ℓ X N).choose_spec
+  sorry
 
 /-- The trivialization `Lκ : L(F_X^N)^* ≅ 𝟭` of the derived pullback along the `#k ^ N`-power
 Frobenius: the derived functor of `upperStarFrobeniusIso`. -/
@@ -305,7 +312,8 @@ noncomputable def leftDerivedUpperStarModelFrobeniusComparison :
         L(((baseChangeModelFrobenius Ω X N g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
       L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L((geometricBaseChangeProj X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  (leftDerivedUpperStarComp _ (baseChangeModelFrobenius Ω X N g).left (geometricBaseChangeProj X)).symm ≪≫
+  (leftDerivedUpperStarComp _ (baseChangeModelFrobenius Ω X N g).left (geometricBaseChangeProj
+      X)).symm ≪≫
     leftDerivedUpperStarModelFrobeniusIso Ω ℓ X N g
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar Ω).Prime]
@@ -325,7 +333,8 @@ constructible complexes, for the model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω`: t
 `(leftDerivedUpperStarComp Φ π)⁻¹ ≫ leftDerivedUpperStarModelFrobeniusIso`. -/
 noncomputable def weilGeometricBaseChangeComparison :
     geometricBaseChangeUpperStar Ω ℓ X ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (baseChangeModelFrobenius Ω X N g) ≅
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (baseChangeModelFrobenius
+            Ω X N g) ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
         geometricBaseChangeUpperStar Ω ℓ X :=
   NatIso.ofComponents

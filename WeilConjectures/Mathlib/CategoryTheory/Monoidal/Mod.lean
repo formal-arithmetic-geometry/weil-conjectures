@@ -447,6 +447,20 @@ lemma act_comp_app_of_isMonoidal_id {F : C ⥤ C} [F.LaxMonoidal] (e : F ⟶ �
   erw [Category.assoc, ← whisker_exchange_assoc]
   rfl
 
+/-- A monoidal natural isomorphism `κ : F ≅ 𝟭` identifies the functor `F.mapMod A` with the
+restriction of scalars along a monoid morphism `α : F A ⟶ A` agreeing with `κ` at `A`: the
+component at `M` is `κ_M : F M ≅ M`. -/
+@[simps!]
+def mapModIsoComapOfIsoId {F : C ⥤ C} [F.LaxMonoidal] (κ : F ≅ 𝟭 C) [NatTrans.IsMonoidal κ.hom]
+    (A : C) [MonObj A] (α : F.obj A ⟶ A) [IsMonHom α] (hα : κ.hom.app A = α) :
+    F.mapMod A ≅ comap α :=
+  NatIso.ofComponents (fun M ↦ isoMk (M := (F.mapMod A).obj M) (N := (comap α).obj M)
+      (κ.app M.X) (by
+        have h := act_comp_app_of_isMonoidal_id κ.hom (𝟙 _) α (by rw [Category.id_comp, hα]) M
+        simp only [act_comap_obj, id_whiskerRight, Category.id_comp] at h
+        exact h))
+    fun f ↦ Mod.hom_ext _ _ (κ.hom.naturality f.hom)
+
 end CategoryTheory.Functor
 
 namespace CategoryTheory.Mod

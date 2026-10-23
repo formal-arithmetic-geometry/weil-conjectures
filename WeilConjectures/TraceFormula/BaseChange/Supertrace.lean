@@ -74,7 +74,12 @@ attribute [local instance] boundedConstructibleBraiding in
 /-- **The trace as a supertrace over a field** (blueprint `prop-trf-trace-formal-laws`,
 item (4)): for a separably closed field `Ω` and an endomorphism `v` of a dualizable object `P` of
 `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`, the categorical trace of `v` is the alternating sum
-`∑ⱼ (-1)ʲ Tr(Hʲ(v) | Hʲ(P))` of the traces on the homology sheaves, placed in degree `0`. -/
+`∑ⱼ (-1)ʲ Tr(Hʲ(v) | Hʲ(P))` of the traces on the homology sheaves, placed in degree `0`.
+
+This is item (4) of the node read through the fibre functor `Fib_s` identifying `Dᵇc(Spec Ω)` with
+`D^b_{fd}(ℚ̄_ℓ)` (blueprint `def-weil-finite-coefficient-point`). The corresponding statement in
+`D(ModuleCat Λ)` is `DerivedCategory.trace_eq_algebraMap_sum_negOnePow_trace_homologyMap`; the
+proof should come from it together with `Fib_s`. -/
 theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)]
     (P : Dᵇc((point Ω).left)⟦Profinite.padicAlgClRingObj ℓ⟧) [HasRightDual P] (v : P ⟶ P) :

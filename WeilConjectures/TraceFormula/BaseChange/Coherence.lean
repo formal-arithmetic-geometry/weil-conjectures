@@ -117,7 +117,16 @@ lemma map_eqToHom_comp_inv_app_aux {A B C : 𝒞} (a : A ⟶ B) {b b' : B ⟶ C}
   subst h
   simp
 
-/-- The associativity law of the composition isomorphisms, in a mixed form. -/
+/-- The associativity law of the composition isomorphisms, in a mixed form: from the
+associativity square `hassoc`, the square
+```
+U a U (b ≫ c) M --U a (cU b c)--> U a U b U c M
+      |                                   |
+(cU a (b ≫ c))⁻¹                     (cU a b)⁻¹
+      v                                   v
+U (a ≫ (b ≫ c)) M = U ((a ≫ b) ≫ c) M --cU (a ≫ b) c--> U (a ≫ b) U c M
+```
+commutes. -/
 @[reassoc]
 lemma map_hom_app_comp_inv_app_aux {A B C C' : 𝒞} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ C')
     (M : D C')
@@ -134,7 +143,16 @@ lemma map_hom_app_comp_inv_app_aux {A B C C' : 𝒞} (a : A ⟶ B) (b : B ⟶ C)
   rw [← reassoc_of% hassoc]
   simp
 
-/-- The associativity law of the composition isomorphisms, in inverse form. -/
+/-- The associativity law of the composition isomorphisms, in inverse form: from the
+associativity square `hassoc`, the square
+```
+U a U b U c M --U a (cU b c)⁻¹--> U a U (b ≫ c) M
+      |                                   |
+(cU a b)⁻¹                      (cU a (b ≫ c))⁻¹
+      v                                   v
+U (a ≫ b) U c M --(cU (a ≫ b) c)⁻¹--> U ((a ≫ b) ≫ c) M = U (a ≫ (b ≫ c)) M
+```
+commutes. -/
 @[reassoc]
 lemma map_inv_app_comp_inv_app_aux {A B C C' : 𝒞} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ C')
     (M : D C')

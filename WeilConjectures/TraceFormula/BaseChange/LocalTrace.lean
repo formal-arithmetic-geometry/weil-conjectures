@@ -134,13 +134,13 @@ theorem weilStalkSupertrace_eq_superTrace (K : WeilBoundedConstructible ℓ e.ho
     (finsum_congr fun j ↦ congrArg (fun t ↦ (j.negOnePow : ℤ) • t)
       (weilSheafStalkTrace_homologyFunctor_eq ℓ n x hxk hx K j))
 
-
 attribute [local instance] boundedConstructibleBraiding in
 /-- **The local trace of a Weil object as the trace of the model local Frobenius**: placed in
 degree `0`, the local trace `t_{n+1}(K; x̄)` is the trace of the local Frobenius `F_{x̄'}` at
 `x̄' = (x̄, 𝟙)` of the base change `Lπ^* K` of the iterate `(K, φ^{(n+1)})`, a Weil object for the
 model Frobenius `(e^{n+1} ≫ F_X^{n+1}) ×_k k̄`, on the dualizable stalk `(Lπ^* K)_x̄'`
-(blueprint `prop-trf-trace-formal-laws`, item (4)). -/
+(blueprint `prop-trf-trace-formal-laws`, item (4)). The dualizability of the stalk is a
+hypothesis until the dualizability of stalks of objects of `Dᵇc` is available. -/
 theorem homologyUnitEndRingHom_weilStalkSupertrace (K : WeilBoundedConstructible ℓ e.hom)
     [HasRightDual
       ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
@@ -152,7 +152,8 @@ theorem homologyUnitEndRingHom_weilStalkSupertrace (K : WeilBoundedConstructible
           (K.powSucc ℓ n))).carrier] :
     homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point (AlgebraicClosure k))
         (weilStalkSupertrace ℓ n x hx K) =
-      trace ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
+      trace ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc
+          n).hom)
         (geometricBaseChangePoint x hxk)
         ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1)
           (e.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
@@ -161,6 +162,5 @@ theorem homologyUnitEndRingHom_weilStalkSupertrace (K : WeilBoundedConstructible
           (K.powSucc ℓ n))).frobenius.hom := by
   rw [weilStalkSupertrace_eq_superTrace ℓ n x hxk hx K]
   exact (trace_eq_homologyUnitEndRingHom_superTrace ℓ (AlgebraicClosure k) _ _).symm
-
 
 end AlgebraicGeometry.ProEtale.CondensedRing
