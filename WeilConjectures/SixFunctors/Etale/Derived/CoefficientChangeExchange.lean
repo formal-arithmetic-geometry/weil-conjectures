@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 
 /-!
 # Coefficient comparisons and the compact-support exchange map
@@ -227,7 +227,8 @@ lemma coeffCompatible_derivedBaseChangeMap {X' X Y' Y : Scheme.{u}} {g' : X' ⟶
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ') sq) :=
   sorry
 
-/-- **Unfinished (B).**
+omit [Finite Λ] in
+/-- **(B)**
 The base change isomorphism `Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*` of the extension by
 zero is compatible with the coefficient comparisons. -/
 lemma coeffCompatible_derivedOpenImmersionLowerShriekBaseChangeIso {U' U X' X : Scheme.{u}}
@@ -240,7 +241,7 @@ lemma coeffCompatible_derivedOpenImmersionLowerShriekBaseChangeIso {U' U X' X : 
         (leftDerivedUpperStarRestrictScalarsIso ρ g''))
       (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ) hsq).hom
       (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ') hsq).hom :=
-  sorry
+  fun K ↦ derivedOpenImmersionLowerShriekBaseChangeIso_hom_app_restrictScalars ρ hsq K
 
 variable [Finite Λ'] {X Y : Scheme.{u}} {f : X ⟶ Y} [CompactSpace Y]
 
