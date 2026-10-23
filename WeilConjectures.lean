@@ -6326,6 +6326,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatOpenScalarRestriction
+public import WeilConjectures.AlgebraicGeometry.RelativeFrobenius
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersection
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionBaseChange
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
@@ -7735,6 +7736,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDeri
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidue
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTest
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceLaws
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceScalarExtension
 public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
@@ -11185,7 +11187,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedUpperShriekCoproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitDerived
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitMate
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
@@ -12075,6 +12085,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Amb
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CoefficientSetup
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactSupportCandidate
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactWeilDatum
@@ -12498,6 +12509,7 @@ public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FibreCoherence
+public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
@@ -12521,6 +12533,9 @@ public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperCurve
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
+public import WeilConjectures.TraceFormula.RelativeFrobenius
+public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
+public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
