@@ -99,8 +99,9 @@ The unit `ℚ̲̄_ℓ,X` with its canonical Weil structure is
 - `ProEtale.CondensedRing.finite_frobeniusFixedPoints`: there are finitely many points of degree
   `n + 1`: they are the `k`-points of the fixed-point scheme of `σ^{n+1}` twisted by `e^{n+1}`,
   which is of finite type and unramified over `k`.
-- `ProEtale.CondensedRing.weilStalkSupertrace_unit`: the canonical Weil unit has local trace
-  `1` at every point, the normalization test N1.
+- `ProEtale.CondensedRing.weilSheafStalkTrace_unit`: the unit Weil sheaf has trace `1` at every
+  point; this gives `weilStalkSupertrace_unit`, the normalization test N1 (see its docstring
+  for the reduction and the kernel timeout it hits).
 
 -/
 
@@ -384,13 +385,36 @@ lemma weilStalkSupertrace_unit_eq_weilSheafStalkTrace (n : ℕ)
     exact Functor.map_isZero _ (isZero_homologyFunctor_unit_carrier ℓ e hj)
   · rw [Int.negOnePow_zero, Units.val_one, one_smul]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- The unit Weil sheaf `ℚ̲̄_ℓ,X` has trace `1` at every point: its stalk is the unit, on which the
+Frobenius acts trivially.
+
+Proof sketch: by `WeilSheaf.powSucc_unit` the stalk is that of the unit Weil sheaf for
+`e^{n+1}`, whose Frobenius, conjugated by the unit comparison `ε : 𝟙 ≅ x̄^* 𝟙`, is `τ⁻¹ ≫ ε_σ⁻¹`
+at the unit (`Iso.hom_comp_whiskerLeft_comp_inv_eq`, fed by `upperStarComp_hom_app_unit` and
+`eqToHom_comp_upperStar_εIso_inv`), for `τ = upperStarIsoIdOfIsSepClosed σ`. This is the identity
+by `upperStarIsoIdOfIsSepClosed_hom_app_unit`, of trace `1` by `categoricalTrace_conj` and
+`categoricalTrace_id_tensorUnit`. Each step elaborates, but the assembled term hits a kernel
+deterministic timeout: the unit of `Mod_{Spec k̄}` occurs both as the `tensorUnit` of
+`Mod.monoidalCategoryStruct` (in `upperStarIsoIdOfIsSepClosed_hom_app_unit` and in
+`weilSheafStalkTrace`) and through `Mod.monoidalCategory` (in the unit comparisons `ε` and in
+`categoricalTrace`), and the kernel identifies the two only after unfolding
+`upperStarIsoIdOfIsSepClosed` or the pullbacks. -/
+lemma weilSheafStalkTrace_unit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
+    (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
+    weilSheafStalkTrace ℓ n x hx (WeilSheaf.unit ℓ e) = 1 :=
+  sorry
+
 /-- The canonical Weil unit `ℚ̲̄_ℓ,X` (`WeilBoundedConstructible.unit`) has local trace `1` at every
 point: its stalk is `ℚ̄_ℓ` in degree `0`, on which the Frobenius acts trivially (normalization
 test N1). This is the unit stalk trace used in the proof of blueprint `cor-trf-point-counting`. -/
 theorem weilStalkSupertrace_unit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
     (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
-    weilStalkSupertrace ℓ n x hx (WeilBoundedConstructible.unit ℓ e.hom) = 1 :=
-  sorry
+    weilStalkSupertrace ℓ n x hx (WeilBoundedConstructible.unit ℓ e.hom) = 1 := by
+  rw [weilStalkSupertrace_unit_eq_weilSheafStalkTrace,
+    weilSheafStalkTrace_congr ℓ n x hx (WeilBoundedConstructible.homologyFunctorZeroUnitIso ℓ e)]
+  exact weilSheafStalkTrace_unit ℓ e n x hx
 
 end Unit
 
