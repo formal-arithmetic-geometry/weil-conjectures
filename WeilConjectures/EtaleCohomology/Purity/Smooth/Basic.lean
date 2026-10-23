@@ -431,14 +431,13 @@ over a field. Then
 The coefficient ring is not reduced to `ℤ/ℓⁿ`, so there is no choice of `n` to be independent
 of. -/
 theorem exists_smoothPurityNatIso [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
-    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiSeparatedSpace Y] :
     ∃ θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
         (twistShift Λ X d).obj (constantComplex Λ X),
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         ((smoothPurityNatIso Λ (d := d) f θ).app K).hom = (twistShiftObjIso Λ X d _).hom ≫
           ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
             ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K := by
-  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   exact ⟨θ, fun K ↦ rfl⟩
 
@@ -480,7 +479,7 @@ orientation (`thm-pur-diagonal-dualizing-object`,
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`); the statement holds for
 every such `θ`. -/
 theorem isIso_smoothPurityMap [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
-    (_aY : Y ⟶ Spec (.of k)) [IsSeparated _aY] [LocallyOfFiniteType _aY]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

@@ -124,7 +124,7 @@ isomorphisms of the dualizing complexes of `g̃` and `g` along `𝔾_{m,B} ⟶ �
 being only known to exist, one such composite is chosen. -/
 noncomputable def puncturedTrivialization (hs : s ≫ g = 𝟙 B)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
-    [HasInvertibleExponent Λ s.ker.deformationSpace] :
+    [HasInvertibleExponent Λ s.ker.deformationSpace] [QuasiSeparatedSpace B] [QuasiCompact g] :
     (L(((Scheme.Hom.puncturedLine B).ι)^*[ModuleCat.{u + 1} Λ])).obj
         (sectionInvariant Λ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection) ≅
       (L(((Scheme.Hom.puncturedLine B).ι)^*[ModuleCat.{u + 1} Λ])).obj

@@ -62,7 +62,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} (d : �
 free of rank one (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), so `L` is a
 finite locally constant, hence constructible, flat sheaf. -/
 theorem boundedConstructibleFiniteTor_dualizingComplex (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] [HasCompactification g] [HasInvertibleExponent Λ V] :
+    [SmoothOfRelativeDimension d g] [HasCompactification g] [HasInvertibleExponent Λ V]
+    [QuasiSeparatedSpace B] :
     DerivedCategory.boundedConstructibleFiniteTor Λ V
       (dualizingComplex (ModuleCat.{u + 1} Λ) g) := by
   obtain ⟨L, hL, hstalk, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ g d
@@ -91,7 +92,7 @@ section `s` of `g`, the section invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ
 and `Ls^*` preserves `D^b_{ctf}`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g]
-    [HasInvertibleExponent Λ V] (s : B ⟶ V) :
+    [HasInvertibleExponent Λ V] (s : B ⟶ V) [QuasiSeparatedSpace B] :
     DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) ∧
       DerivedCategory.boundedConstructibleFiniteTor Λ B (sectionInvariant Λ g s) :=
   ⟨isInvertible_sectionInvariant Λ d g s,
@@ -104,13 +105,16 @@ For `g : V ⟶ B` smooth of pure relative dimension `d` and a closed section `s`
 object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of `s` is an object of
 `Pic(D^b_{ctf}(𝔸¹_B, Λ))`: it lies in `D^b_{ctf}(𝔸¹_B, Λ)` and is ⊗-invertible. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_deformationFamilyObject
-    [HasInvertibleExponent Λ B] (g : V ⟶ B) [SmoothOfRelativeDimension d g] (s : B ⟶ V)
+    [HasInvertibleExponent Λ B] [QuasiSeparatedSpace B] (g : V ⟶ B)
+    [SmoothOfRelativeDimension d g] (s : B ⟶ V)
     [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] :
     DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); B) (deformationFamilyObject Λ g s) ∧
       DerivedCategory.boundedConstructibleFiniteTor Λ 𝔸(ULift.{u} (Fin 1); B)
         (deformationFamilyObject Λ g s) :=
   have := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   have : HasInvertibleExponent Λ s.ker.deformationSpace :=
     .of_hom (Scheme.Hom.deformationSpaceProj g s ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)
   isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant Λ d _ _
@@ -165,7 +169,7 @@ is (`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`,
 are local on `V`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smooth (g : V ⟶ B)
     [Smooth g] [HasCompactification g] [HasInvertibleExponent Λ V]
-    [TopologicalSpace.NoetherianSpace V] :
+    [TopologicalSpace.NoetherianSpace V] [QuasiSeparatedSpace B] :
     DerivedCategory.isInvertible Λ V (dualizingComplex (ModuleCat.{u + 1} Λ) g) ∧
       DerivedCategory.boundedConstructibleFiniteTor Λ V
         (dualizingComplex (ModuleCat.{u + 1} Λ) g) := by
@@ -236,7 +240,7 @@ and lies in `D^b_{ctf}(B, Λ)`, since `ω_g` does
 and `Ls^*` preserves both properties. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant_of_smooth (g : V ⟶ B)
     [Smooth g] [HasCompactification g] [HasInvertibleExponent Λ V]
-    [TopologicalSpace.NoetherianSpace V] (s : B ⟶ V) :
+    [TopologicalSpace.NoetherianSpace V] [QuasiSeparatedSpace B] (s : B ⟶ V) :
     DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) ∧
       DerivedCategory.boundedConstructibleFiniteTor Λ B (sectionInvariant Λ g s) :=
   have h := isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smooth Λ g
