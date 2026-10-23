@@ -262,7 +262,8 @@ theorem boundedConstructibleFiniteTor_tateObject [HasInvertibleExponent Λ X] (m
     DerivedCategory.boundedConstructibleFiniteTor Λ X (tateObject Λ X m) :=
   HasTateTwist.boundedConstructibleFiniteTor_twistObject X m
 
-/-- Blueprint `def-pur-conventions`: Purity coefficient conventions
+/-- Blueprint `def-pur-conventions`: Purity coefficient conventions; blueprint `pur9-def-tate-twist`:
+Tate twists.
 
 The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, `K(m) = K ⊗^L_{Λ_X} Λ_X(m)`, tensoring with the
 twisting object `Λ_X(m)`.

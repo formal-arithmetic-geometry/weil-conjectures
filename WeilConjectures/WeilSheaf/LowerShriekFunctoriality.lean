@@ -22,12 +22,12 @@ the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
 - *composition* (clause 3): `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`, and the distinguished triangle
   `R(j ≫ f)₀! j^*K ⟶ Rf₀!K ⟶ R(i ≫ f)₀! i^*K ⟶` obtained by applying `Rf₀!` to the
   localization triangle of an open immersion `j` and its closed complement `i`;
-- *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square;
+- *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square.
 
-as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex
-(`prop-sf-open-closed-triangle-all-stages`). These belong to the six-functor chapter and are
-stated here with `sorry`, each with the blueprint statement it renders. The identification of
-`Rf₀!` with `Rf₀*` for proper `f` is proved here.
+These clauses belong to the six-functor chapter and are stated here with `sorry`, each with
+the blueprint statement it renders. The identification of `Rf₀!` with `Rf₀*` for proper `f` is
+proved here. The open–closed triangle of a Weil complex
+(`prop-sf-open-closed-triangle-all-stages`) is in `WeilConjectures.WeilSheaf.OpenClosedTriangle`.
 
 ## Main statements
 
@@ -38,8 +38,6 @@ stated here with `sorry`, each with the blueprint statement it renders. The iden
   `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` and
   `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: clauses 2, 3 and 4 of
   `prop-functor-package`.
-- `AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed`: the open–closed triangle
-  (`prop-sf-open-closed-triangle-all-stages`).
 -/
 
 @[expose] public section
@@ -159,27 +157,6 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
     Nonempty ((derivedLowerShriek k₀ l j).obj (WeilSheaf.toComplex.obj G) ≅
       WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) :=
   sorry
-
-/-- **The open–closed triangle** (blueprint: `prop-sf-open-closed-triangle-all-stages`): for a
-quasi-compact open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K`
-on `X`, the open counit and the closed unit extend to a distinguished triangle of Weil complexes
-`j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`.
-
-This is a weakening of the blueprint node: the vertices of the triangle are only identified up
-to some isomorphism, and the first two arrows are not asserted to be the canonical counit and
-unit. -/
-theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
-    [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i]
-    [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range j.base) (Set.range i.base))
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l X) :
-    ∃ T ∈ distTriang (WeilComplex k₀ l X),
-      Nonempty (T.obj₁ ≅ (derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) ∧
-      Nonempty (T.obj₂ ≅ K) ∧
-      Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) :=
-  sorry
-
 
 /-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,
 clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `lem-zl-shriek-composition` of

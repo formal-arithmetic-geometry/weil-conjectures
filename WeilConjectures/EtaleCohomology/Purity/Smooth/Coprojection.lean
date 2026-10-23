@@ -91,6 +91,21 @@ end General
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Z : Scheme.{u}}
 
+omit [Finite Λ] [HasTateTwist Λ] in
+/-- Blueprint `pur9-cs-def-invertible`: Invertible object
+
+An object `L` of `D(X_ét, Λ)` is *invertible*
+(`AlgebraicGeometry.DerivedCategory.isInvertible`) if and only if there are an object `L'` and
+an isomorphism `e : L ⊗^L L' ≅ Λ_X`: the two-sided condition of the definition follows from
+the one-sided one by the symmetry of the derived tensor product. -/
+theorem DerivedCategory.isInvertible_iff_exists_derivedTensor_iso
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    DerivedCategory.isInvertible Λ X L ↔ ∃ L', Nonempty
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj L' ≅ constantComplex Λ X) := by
+  refine ⟨fun ⟨M, h, _⟩ ↦ ⟨M, h⟩, fun ⟨M, ⟨e⟩⟩ ↦ ⟨M, ⟨e⟩, ?_⟩⟩
+  obtain ⟨σ⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
+  exact ⟨(σ.app M).app L ≪≫ e⟩
+
 section Coprojection
 
 variable {Y : Scheme.{u}}

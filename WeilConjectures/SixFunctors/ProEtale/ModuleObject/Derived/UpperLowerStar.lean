@@ -21,7 +21,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 
 Let `Λ` be a commutative condensed ring and `f : X ⟶ Y` a morphism of schemes. The derived
 pullback and pushforward on the derived categories `D(Mod_{Λ_X})` of module objects over
-`Λ_X = p_X^* Λ` are *not* given definitions of their own: as in
+`Λ_X = p_X^* Λ` are *not* constructions of their own (only the abbreviations
+`ProEtale.CondensedRing.rightDerivedLowerStar` and `ProEtale.CondensedRing.leftDerivedUpperStar`
+are given): as in
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar`, they are the
 *total* derived functors, i.e. the generic derived-functor constructions of the folder
 `WeilConjectures.CategoryTheory.DerivedCategory` applied to the underived functors `(f)^*⟦Λ⟧`
@@ -127,13 +129,16 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 section DerivedLowerStar
 
-/-- The total right derived functor `Rf_* : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_Y})` of the
+/-- Blueprint `pur713-def-derived-push-module`: Module-object derived direct image.
+
+The total right derived functor `Rf_* : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_Y})` of the
 pushforward `f_*` on module objects over `Λ`, on the unbounded derived categories,
 computed on K-injective resolutions.
 
-It is not a definition of its own: it is the generic `Functor.rightDerivedFunctor`, written
-`R(-)`, applied to the underived pushforward `(f)_*⟦Λ⟧`. -/
-noncomputable example :
+It is an abbreviation, not a construction of its own: the generic
+`Functor.rightDerivedFunctor`, written `R(-)`, applied to the underived pushforward
+`(f)_*⟦Λ⟧`. -/
+noncomputable abbrev rightDerivedLowerStar :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤
       DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
         (condensedRingObj Λ Y)) :=
@@ -185,13 +190,16 @@ instance preservesKFlatQuasiIso_upperStar : (f)^*⟦Λ⟧.PreservesKFlatQuasiIso
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalars (condensedPullbackHom Λ f))
 
-/-- The total left derived functor `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` of the pullback
+/-- Blueprint `pur713-def-derived-pull-module`: Module-object derived inverse image.
+
+The total left derived functor `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` of the pullback
 `f^*` on module objects over `Λ`, on the unbounded derived categories, computed on K-flat
 resolutions: `Lf^* M = Λ_X ⊗ᴸ_{f^* Λ_Y} f^* M`.
 
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`, written
-`L(-)`, applied to the underived pullback `(f)^*⟦Λ⟧`. -/
-noncomputable example :
+It is an abbreviation, not a construction of its own: the generic
+`Functor.leftDerivedFunctor`, written `L(-)`, applied to the underived pullback
+`(f)^*⟦Λ⟧`. -/
+noncomputable abbrev leftDerivedUpperStar :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
       DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj Λ X)) :=

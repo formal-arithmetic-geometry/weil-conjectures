@@ -126,7 +126,9 @@ section Kummer
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Blueprint `pur9-def-kummer-class`: Kummer classes
+
+Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
 The *Kummer class* `κ(u) ∈ H¹(X, Λ(1)) = Hom(Λ_X, Λ_X(1)[1])` of a unit `u ∈ Γ(X, 𝒪_X)ˣ`,
 from the rank-one datum `AlgebraicGeometry.Etale.HasKummerClass`. In the concrete model,

@@ -70,9 +70,11 @@ the resulting canonical identification
 is independent of the compactification.
 
 At the level of sheaves this is `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`, which
-states that the *canonical comparison* `f_! ⟶ f_*` is an isomorphism; the derived comparison
-map has not been constructed, so only the existence of the derived isomorphism is recorded
-here. -/
+states that the *canonical comparison* `f_! ⟶ f_*` is an isomorphism. The canonical derived
+identification, the forget-supports map, and its independence of the compactification are
+`Etale.isIso_rightDerivedLowerShriekOfCompactificationToLowerStar_and_independent`;
+the compatibility of the exchange maps is
+`AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_ofIsProper`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
     [HasCompactification f] [IsProper f] :
     Nonempty (R(f)_![A] ≅ R((f)_*[A])) := by

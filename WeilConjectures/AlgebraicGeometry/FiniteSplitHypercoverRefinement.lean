@@ -6,24 +6,143 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
-
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverLocalLifts
+public import WeilConjectures.AlgebraicGeometry.SemiRepresentableLocalLifts
+public import WeilConjectures.AlgebraicTopology.SimplicialObject.PathSpaceBoundary
 
 /-!
-# Blueprint statements
+# Refinements of finite split étale hypercovers
 
-lem-weil-pbc-hypercover-refinement.
+Blueprint `lem-weil-pbc-hypercover-refinement`: finite split étale hypercovers of a
+quasi-compact quasi-separated scheme exist, any two have a common refinement, parallel
+refinements become homotopic after refinement, finitely many local lifting requirements can be
+solved after refinement, and semi-representable hypercovers are refined through any finite
+degree. The constructions use `AlgebraicGeometry.FiniteSplitHypercoverEngine.exists_hypercover`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits Opposite Simplicial
 
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+lemma _root_.CategoryTheory.GrothendieckTopology.iInf_mem_of_finite {C : Type*} [Category* C]
+    (J : GrothendieckTopology C) {T : C} {ι : Type*} [Finite ι] (s : ι → Sieve T)
+    (h : ∀ i, s i ∈ J T) : ⨅ i, s i ∈ J T := by
+  classical
+  have := Fintype.ofFinite ι
+  rw [← Finset.inf_univ_eq_iInf]
+  induction (Finset.univ : Finset ι) using Finset.induction_on with
+  | empty => simp only [Finset.inf_empty]; exact J.top_mem T
+  | insert a s _ ih =>
+    rw [Finset.inf_insert]
+    exact J.intersection_covering (h a) ih
+
+/-- A coproduct of coproducts is a coproduct. -/
+def _root_.CategoryTheory.Limits.isColimitCofanSigma {C : Type*} [Category* C] {I : Type*}
+    {J : I → Type*} {P : (Σ i, J i) → C} {N : I → C} (ιN : ∀ a : Σ i, J i, P a ⟶ N a.1)
+    (hN : ∀ i, IsColimit (Cofan.mk (N i) fun j : J i ↦ ιN ⟨i, j⟩)) {Z : C} (c : ∀ i, N i ⟶ Z)
+    (hc : IsColimit (Cofan.mk Z c)) : IsColimit (Cofan.mk Z fun a ↦ ιN a ≫ c a.1) :=
+  Cofan.IsColimit.mk _
+    (fun t ↦ Cofan.IsColimit.desc hc fun i ↦ Cofan.IsColimit.desc (hN i) fun j ↦ t.inj ⟨i, j⟩)
+    (fun t a ↦ by
+      obtain ⟨i, j⟩ := a
+      have e := Cofan.IsColimit.fac hc
+        (fun i ↦ Cofan.IsColimit.desc (hN i) fun j ↦ t.inj ⟨i, j⟩) i
+      have e' := Cofan.IsColimit.fac (hN i) (fun j ↦ t.inj ⟨i, j⟩) j
+      simp only [cofan_mk_inj] at e e' ⊢
+      rw [Category.assoc, e, e'])
+    (fun t m hm ↦ by
+      refine Cofan.IsColimit.hom_ext hc _ _ fun i ↦ ?_
+      refine Cofan.IsColimit.hom_ext (hN i) _ _ fun j ↦ ?_
+      have e := Cofan.IsColimit.fac hc
+        (fun i ↦ Cofan.IsColimit.desc (hN i) fun j ↦ t.inj ⟨i, j⟩) i
+      have e' := Cofan.IsColimit.fac (hN i) (fun j ↦ t.inj ⟨i, j⟩) j
+      simp only [cofan_mk_inj] at hm e e' ⊢
+      rw [← Category.assoc, hm ⟨i, j⟩, e, e'])
+
+variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+
+open Scheme.Etale in
+/-- Blueprint `lem-weil-pbc-hypercover-refinement`: finite split étale hypercovers exist. -/
+theorem nonempty (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
+    Nonempty (FiniteSplitEtaleHypercover X) := by
+  obtain ⟨V, -, -⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    hasLocalLifts_const_terminal (fun _ ↦ ⊤) (fun m ↦ X.smallEtaleTopology.top_mem _)
+  exact ⟨V⟩
+
+open Scheme.Etale in
+/-- Blueprint `lem-weil-pbc-hypercover-refinement`: two finite split étale hypercovers have a
+common refinement. -/
+theorem exists_common_refinement (U V : FiniteSplitEtaleHypercover X) :
+    ∃ W : FiniteSplitEtaleHypercover X, Nonempty (W.Refinement U) ∧ Nonempty (W.Refinement V) := by
+  obtain ⟨W, ℓ, -⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    (hasLocalLifts_prod U.hasLocalLifts V.hasLocalLifts) (fun _ ↦ ⊤)
+    (fun m ↦ X.smallEtaleTopology.top_mem _)
+  exact ⟨W, ⟨ℓ ≫ prodSimplicialFst _ _⟩, ⟨ℓ ≫ prodSimplicialSnd _ _⟩⟩
+
+lemma _root_.CategoryTheory.Sieve.iInf_apply' {C : Type*} [Category* C] {X Y : C} {ι : Type*}
+    (S : ι → Sieve X) (f : Y ⟶ X) : (⨅ i, S i) f ↔ ∀ i, S i f :=
+  ⟨fun h i ↦ (Sieve.sInf_apply f).1 h _ ⟨i, rfl⟩,
+    fun h ↦ (Sieve.sInf_apply f).2 (by rintro _ ⟨i, rfl⟩; exact h i)⟩
+
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
+open Scheme.Etale SimplicialObject PathSpaceBoundary in
+/-- The simplicial object of homotopies between two maps of simplicial objects with local lifts
+has local lifts. -/
+lemma _root_.AlgebraicGeometry.Scheme.Etale.hasLocalLifts_pathSpace
+    {U V : SimplicialObject X.Etale} (a b : U ⟶ V) (hU : HasLocalLifts U)
+    (hV : HasLocalLifts V) : HasLocalLifts (pathSpace a b) := by
+  intro N T p
+  let S₁ : Sieve T :=
+    { arrows := fun T₁ g ↦ ∃ (u : T₁ ⟶ U _⦋N⦌) (τ : Fin (N + 2) → (T₁ ⟶ V _⦋N⦌)),
+        BoundaryCone.ofSimplex u = (p.precomp g).postcomp (pathProj a b) ∧
+          ∀ s, BoundaryCone.ofSimplex (τ s) = tauCone (p.precomp g) s
+      downward_closed := by
+        rintro T₁ T₂ g ⟨u, τ, hu, hτ⟩ f
+        refine ⟨f ≫ u, fun s ↦ f ≫ τ s, ?_, fun s ↦ ?_⟩
+        · rw [← BoundaryCone.ofSimplex_precomp, hu, ← BoundaryCone.precomp_postcomp,
+            BoundaryCone.precomp_precomp]
+        · rw [← BoundaryCone.ofSimplex_precomp, hτ, tauCone_precomp,
+            BoundaryCone.precomp_precomp] }
+  have hS₁ : S₁ ∈ X.smallEtaleTopology T := by
+    refine X.smallEtaleTopology.superset_covering ?_
+      (X.smallEtaleTopology.intersection_covering (hU N T (p.postcomp (pathProj a b)))
+        (X.smallEtaleTopology.iInf_mem_of_finite _ fun s ↦ hV N T (tauCone p s)))
+    rintro T₁ g ⟨⟨u, hu⟩, hτ⟩
+    rw [Sieve.iInf_apply'] at hτ
+    choose τ hτ using hτ
+    refine ⟨u, τ, ?_, fun s ↦ ?_⟩
+    · rw [hu, BoundaryCone.precomp_postcomp]
+    · rw [hτ s, tauCone_precomp]
+  refine X.smallEtaleTopology.superset_covering ?_ (X.smallEtaleTopology.bind_covering hS₁
+    (R := fun T₁ g (H : S₁ g) ↦ ⨅ k : Fin (N + 1),
+      liftSieve (prismCone H.choose_spec.choose_spec.1 H.choose_spec.choose_spec.2 k))
+    (fun T₁ g H ↦ X.smallEtaleTopology.iInf_mem_of_finite _ fun k ↦ hV _ _ _))
+  rintro T₂ _ ⟨T₁, f, g, H, hf, rfl⟩
+  rw [Sieve.iInf_apply'] at hf
+  choose h hh using hf
+  obtain ⟨z, hz⟩ := exists_ofSimplex_eq_precomp H.choose_spec.choose_spec.1
+    H.choose_spec.choose_spec.2 f h fun k ↦ (hh k).trans (by rfl)
+  exact ⟨z, by rw [hz, BoundaryCone.precomp_precomp]⟩
+
+open Scheme.Etale SimplicialObject in
+/-- Blueprint `lem-weil-pbc-hypercover-refinement`: parallel refinements become homotopic after
+refinement. -/
+theorem exists_homotopic_refinement (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V) :
+    ∃ (W : FiniteSplitEtaleHypercover X) (c : W.Refinement U),
+      isRefinementHomotopic (c ≫ a) (c ≫ b) := by
+  obtain ⟨W, ℓ, -⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    (hasLocalLifts_pathSpace a b U.hasLocalLifts V.hasLocalLifts) (fun _ ↦ ⊤)
+    (fun m ↦ X.smallEtaleTopology.top_mem _)
+  refine ⟨W, ℓ ≫ pathProj a b, Relation.EqvGen.rel _ _ ⟨?_⟩⟩
+  simpa only [Category.assoc] using (pathHomotopy a b).precomp ℓ
+
+/-- Blueprint `lem-weil-pbc-hypercover-refinement`: finite split étale hypercovers exist, and
+their homotopy category is cofiltered. -/
 theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
     Nonempty (FiniteSplitEtaleHypercover X) ∧
       (∀ U V : FiniteSplitEtaleHypercover X,
@@ -31,10 +150,12 @@ theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedS
           Nonempty (W.Refinement V)) ∧
       (∀ (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V),
         ∃ (W : FiniteSplitEtaleHypercover X) (c : W.Refinement U),
-          isRefinementHomotopic (c ≫ a) (c ≫ b)) := by
-  sorry
+          isRefinementHomotopic (c ≫ a) (c ≫ b)) :=
+  ⟨nonempty X, exists_common_refinement, exists_homotopic_refinement⟩
 
-/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+/-- Blueprint `lem-weil-pbc-hypercover-refinement`: finitely many local lifting requirements on
+the terms of a finite split étale hypercover in finitely many degrees are solved by a
+refinement. -/
 theorem exists_refinement_solving_local_requirements
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : FiniteSplitEtaleHypercover X) (r k : ℕ) (degree : Fin k → Fin (r + 1))
@@ -49,9 +170,39 @@ theorem exists_refinement_solving_local_requirements
             R j (ι i ≫ f.app (op (SimplexCategory.mk n.val)) ≫
               eqToHom (congrArg (fun m : Fin (r + 1) ↦
                 U.simplicial.obj (op (SimplexCategory.mk m.val))) h.symm)) := by
-  sorry
+  classical
+  let S : ∀ m : ℕ, Sieve (U.simplicial _⦋m⦌) := fun m ↦
+    ⨅ x : Σ j : Fin k, (⦋(degree j).val⦌ ⟶ ⦋m⦌), (R x.1).pullback (U.simplicial.map x.2.op)
+  have hS : ∀ m, S m ∈ X.smallEtaleTopology (U.simplicial _⦋m⦌) := fun m ↦
+    X.smallEtaleTopology.iInf_mem_of_finite _ fun x ↦
+      X.smallEtaleTopology.pullback_stable _ (hR x.1)
+  obtain ⟨V, ℓ, hV⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    U.toSplitEtaleHypercover.hasLocalLifts S hS
+  choose kk P ιP hP hgood using hV
+  refine ⟨V, ℓ, fun n ↦ ?_⟩
+  let I := Σ A : SimplicialObject.Splitting.IndexSet (op ⦋n.val⦌), Fin (kk A.1.unop.len)
+  let e := (Fintype.equivFin I).symm
+  have hcol : IsColimit (Cofan.mk (V.simplicial.obj (op ⦋n.val⦌))
+      fun a : I ↦ ιP _ a.2 ≫ (V.splitting.cofan (op ⦋n.val⦌)).inj a.1) :=
+    isColimitCofanSigma (fun a : I ↦ ιP _ a.2) (fun A ↦ (hP _).some) _
+      (V.splitting.isColimit (op ⦋n.val⦌))
+  refine ⟨Fintype.card I, fun i ↦ P _ (e i).2,
+    fun i ↦ ιP _ (e i).2 ≫ (V.splitting.cofan (op ⦋n.val⦌)).inj (e i).1,
+    ⟨Cofan.isColimitEquivOfEquiv e _ hcol⟩, fun j h i ↦ ?_⟩
+  subst h
+  simp only [eqToHom_refl, Category.comp_id]
+  obtain ⟨A, i'⟩ := e i
+  rw [SimplicialObject.Splitting.cofan_inj_eq]
+  dsimp only
+  rw [Category.assoc, Category.assoc, ℓ.naturality, ← Category.assoc, ← Category.assoc]
+  have hmem := hgood _ i'
+  have hle : S A.1.unop.len ≤ (R j).pullback (U.simplicial.map A.e.op) :=
+    iInf_le (fun x : Σ j : Fin k, (⦋(degree j).val⦌ ⟶ ⦋A.1.unop.len⦌) ↦
+      (R x.1).pullback (U.simplicial.map x.2.op)) ⟨j, A.e⟩
+  exact hle _ (by simpa [Category.assoc] using hmem)
 
-/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+/-- Blueprint `lem-weil-pbc-hypercover-refinement`: a semi-representable hypercover is refined,
+through any finite degree, by a finite split étale hypercover. -/
 theorem exists_truncated_refinement
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)
@@ -60,6 +211,9 @@ theorem exists_truncated_refinement
     ∃ V : FiniteSplitEtaleHypercover X,
       Nonempty ((SimplicialObject.truncation r).obj V.simplicial ⟶
           (SimplicialObject.truncation r).obj K) := by
-  sorry
+  obtain ⟨V, ℓ, -⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    (Scheme.hasLocalLifts_of_isSemiRepresentableHypercover K hK) (fun _ ↦ ⊤)
+    (fun _ ↦ X.smallEtaleTopology.top_mem _)
+  exact ⟨V, ⟨(SimplicialObject.truncation r).map ℓ⟩⟩
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover

@@ -133,7 +133,9 @@ instance preservesFiniteColimits_linearOpenImmersionLowerShriek :
     ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
       (condensedRingObj Λ X)))
 
-/-- The extension by zero `j_! : Mod_{Λ_U} ⥤ Mod_{Λ_X}` along an open immersion
+/-- Blueprint `pur713-def-open-shriek-module`: Module-object extension by zero.
+
+The extension by zero `j_! : Mod_{Λ_U} ⥤ Mod_{Λ_X}` along an open immersion
 `j : U ⟶ X` on module objects over `Λ`: the restriction of scalars along
 `α_j : j^* Λ_X ⟶ Λ_U` followed by the linear extension by zero. Its underlying sheaf is
 the extension by zero `j_! M` of the underlying sheaf, with the `Λ_X`-action induced by the

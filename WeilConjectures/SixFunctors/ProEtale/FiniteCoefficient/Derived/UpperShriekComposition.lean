@@ -245,6 +245,7 @@ end Composition
 section LowerShriek
 
 variable {A} {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  [Etale.HasCohomologyContinuity A]
 
 /-- The pro-étale `Rf_!` carries an object bounded below of étale origin to an object bounded
 below of étale origin, by the compact-support comparison `Rf_! ν^* ≅ ν^* Rf^{ét}_!` on `D⁺`
@@ -438,6 +439,7 @@ theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff {f : X ⟶ Y} {g
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  [Etale.HasCohomologyContinuity A]
 
 /-- Blueprint `sk-lem-sf-mate`: when the ambient datum of clause (a) holds, clause (b) is its
 restriction. For any right adjoint `G` of the pro-étale `Rf_!` (for instance the ambient `Rf^×`

@@ -405,6 +405,21 @@ theorem exists_isPullback_deformationSpace_baseChange (d : ℕ) [SmoothOfRelativ
     exists_isPushout_extendedReesAlgebraMap_baseChange g s hs b d x
   exact ⟨U', U, hU, hx, H⟩
 
+/-- Blueprint `sk-lem-geometry` (5), étale localization of the base: for `g : V ⟶ B` smooth of
+relative dimension `d` with a closed section `s` and an étale `b : B' ⟶ B` (no open immersion
+needed), the deformation space of the restricted section is the restriction of the deformation
+space, `D_{s'} V' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}`, compatibly with the sections and with the maps to
+`V`. This is the special case of `exists_isPullback_deformationSpace_baseChange`, which holds for
+an arbitrary `b`. -/
+theorem exists_isPullback_deformationSpace_baseChange_of_etale (d : ℕ)
+    [SmoothOfRelativeDimension d g] [IsClosedImmersion s] [Etale b] :
+    ∃ φ : (baseChangeSection g s hs b).ker.deformationSpace ⟶ s.ker.deformationSpace,
+      IsPullback φ (deformationSpaceProj (pullback.snd g b) (baseChangeSection g s hs b))
+        (deformationSpaceProj g s) (AffineSpace.map _ b) ∧
+      (baseChangeSection g s hs b).deformationSpaceSection ≫ φ =
+        AffineSpace.map _ b ≫ s.deformationSpaceSection :=
+  exists_isPullback_deformationSpace_baseChange g s hs b d
+
 end Hom
 
 end AlgebraicGeometry.Scheme

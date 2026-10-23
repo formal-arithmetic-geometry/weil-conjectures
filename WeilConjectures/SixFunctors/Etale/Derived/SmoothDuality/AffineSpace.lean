@@ -140,7 +140,7 @@ def AffineLineSmoothDuality : Prop :=
 
 /-- Smooth duality for an isomorphism, in degree `0`, from smooth duality for étale morphisms. -/
 theorem satisfiesSmoothDuality_of_isIso (hE : EtaleSmoothDuality Λ) {V W : Scheme.{u}}
-    (e : V ⟶ W) [IsIso e] : SatisfiesSmoothDuality Λ e 0 := by
+    (e : V ⟶ W) [IsIso e] [HasInvertibleExponent Λ V] : SatisfiesSmoothDuality Λ e 0 := by
   intro _
   obtain ⟨hθ, ⟨hω⟩⟩ := hE e
   exact ⟨(isShiftedRankOneLocalSystem_unit V).of_iso hω.symm, hθ⟩
@@ -161,6 +161,9 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
   induction d with
   | zero =>
     rw [Nat.cast_zero, mul_zero]
+    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 0); S) :=
+      .of_hom (𝔸(ULift.{u} (Fin 0); S) ↘ S)
+    intro _
     exact satisfiesSmoothDuality_of_isIso hE (𝔸(ULift.{u} (Fin 0); S) ↘ S)
   | succ d ih =>
     intro _
@@ -174,6 +177,8 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
       rw [Category.assoc, Iso.trans_hom, Category.assoc, AffineSpace.sumIso_hom_over_over,
         AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
     have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin d); S) := .of_hom p
+    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin (d + 1)); S) :=
+      .of_hom (𝔸(ULift.{u} (Fin (d + 1)); S) ↘ S)
     obtain ⟨hωφ, hθφ⟩ := satisfiesSmoothDuality_of_isIso hE φ.hom
     obtain ⟨hωq, hθq⟩ := h₁ 𝔸(ULift.{u} (Fin d); S)
     obtain ⟨hωp, hθp⟩ := ih
@@ -200,12 +205,15 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
 blueprint `thm-asd-smooth-tensor` and `cor-amb-affine-space-adjunction`): if étale morphisms and
 the affine-line projections over affine bases satisfy smooth duality
 (`AlgebraicGeometry.Etale.EtaleSmoothDuality`, `AlgebraicGeometry.Etale.AffineLineSmoothDuality`),
+as do open immersions (`AlgebraicGeometry.Etale.OpenImmersionSmoothDuality`),
 then for every smooth `f : X ⟶ Y` of relative dimension `d` admitting a compactification, with the
 exponent of `Λ` invertible on `X`, `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free
 rank-one `Λ`-modules and `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`;
 this is the statement of `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine
-    (hE : EtaleSmoothDuality Λ) (h₁ : AffineLineSmoothDuality Λ) {X Y : Scheme.{u}}
+    (hO : OpenImmersionSmoothDuality Λ) (hE : EtaleSmoothDuality Λ)
+    (h₁ : AffineLineSmoothDuality Λ)
+    {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
@@ -215,7 +223,7 @@ theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) :=
-  exists_dualizingComplex_iso_and_tensor_of_etale_of_affineSpace hE
+  exists_dualizingComplex_iso_and_tensor_of_etale_of_affineSpace hO hE
     (affineSpaceSmoothDuality_of_affineLineSmoothDuality hE h₁) f d
 
 end Etale

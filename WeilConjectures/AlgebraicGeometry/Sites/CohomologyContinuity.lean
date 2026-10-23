@@ -10,6 +10,10 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.Cartesian
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyModuleForget
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuityDefs
+public import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
 import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
@@ -20,18 +24,10 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. Then
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection `sk-prop-h2`. For
-abelian sheaves it is proved here in elementwise form (`cohomologyMap_isColimit_of_isLimit`), by
-specialising `nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vanishing form
-follows (`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`). The vanishing
-form for a general Grothendieck abelian coefficient category
-(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`), which goes beyond the abelian
-sheaves of [Stacks, Tag 09YQ], is not formalised here.
+`lemma-weil-pbc-etale-cohomology-continuity`, proved for abelian sheaves in
+`AlgebraicGeometry.Etale.cohomologyMap_isColimit_of_isLimit` (elementwise form) and extended to
+module coefficients through the class `AlgebraicGeometry.Etale.HasCohomologyContinuity`.
 
-## Main definitions
-
-- `AlgebraicGeometry.Etale.sectionsFunctor`: the global sections functor of the small étale
-  site, the sections over the terminal object.
 -/
 
 @[expose] public section
@@ -43,33 +39,6 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-/-- The global sections functor `Γ(X, -)` on étale sheaves: the sections over the terminal
-object `X` of the small étale site. -/
-noncomputable abbrev sectionsFunctor (X : Scheme.{u}) : Sheaf X.smallEtaleTopology A ⥤ A :=
-  sheafToPresheaf _ A ⋙
-    (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X)))
-
-/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity.
-
-Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
-transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S`. Then
-`H^q(X, F|_X) = colimᵢ H^q(Dᵢ, F|_{Dᵢ})`; in particular `H^q(X, F|_X)` vanishes as soon as all
-the `H^q(Dᵢ, F|_{Dᵢ})` do.
-
-This is stated for a general Grothendieck abelian coefficient category `A`, beyond the abelian
-sheaves of [Stacks, Tag 09YQ]; for `A = AddCommGrpCat` it is proved as
-`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`. -/
-theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}}
-    (F : Sheaf S.smallEtaleTopology A) {I : Type u} [SmallCategory I] [IsCofiltered I]
-    (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
-    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
-    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ)
-    (h : ∀ i, IsZero (((sectionsFunctor A (D.obj i).left).rightDerived q).obj
-      ((Etale.upperStar A (D.obj i).hom).obj F))) :
-    IsZero (((sectionsFunctor A c.pt.left).rightDerived q).obj
-      ((Etale.upperStar A c.pt.hom).obj F)) :=
-  sorry
 
 /-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
 form of an elementwise colimit statement for the pullback maps.
@@ -210,5 +179,80 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat {
     (D.obj i).hom c.pt.hom (Over.w (c.π.app i)).symm).inv.app F) q) hy
   rw [← Sheaf.H.map_comp_apply, map_zero] at this
   simpa using this.symm
+
+/-- The coefficient categories `A` for which étale cohomology with values in `A` is continuous
+at cofiltered limits of quasi-compact quasi-separated schemes with affine transition maps, in the
+vanishing form of
+`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`.
+Instances: abelian groups and modules over a ring. -/
+class HasCohomologyContinuity : Prop where
+  isZero_rightDerived_of_isLimit : ∀ {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)
+    {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
+    [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
+    [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left] (c : Cone D)
+    (_ : IsLimit ((Over.forget S).mapCone c)) (q : ℕ),
+    (∀ i, IsZero (((sectionsFunctor A (D.obj i).left).rightDerived q).obj
+      ((Etale.upperStar A (D.obj i).hom).obj F))) →
+    IsZero (((sectionsFunctor A c.pt.left).rightDerived q).obj
+      ((Etale.upperStar A c.pt.hom).obj F))
+
+/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity.
+
+Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
+transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S` with coefficients in
+abelian groups or in modules over a ring (`AlgebraicGeometry.Etale.HasCohomologyContinuity`).
+Then `H^q(X, F|_X) = colimᵢ H^q(Dᵢ, F|_{Dᵢ})`; in particular `H^q(X, F|_X)` vanishes as soon as all
+the `H^q(Dᵢ, F|_{Dᵢ})` do. -/
+theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit [HasCohomologyContinuity A]
+    {S : Scheme.{u}}
+    (F : Sheaf S.smallEtaleTopology A) {I : Type u} [SmallCategory I] [IsCofiltered I]
+    (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
+    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
+    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ)
+    (h : ∀ i, IsZero (((sectionsFunctor A (D.obj i).left).rightDerived q).obj
+      ((Etale.upperStar A (D.obj i).hom).obj F))) :
+    IsZero (((sectionsFunctor A c.pt.left).rightDerived q).obj
+      ((Etale.upperStar A c.pt.hom).obj F)) :=
+  HasCohomologyContinuity.isZero_rightDerived_of_isLimit F D c hc q h
+
+instance hasCohomologyContinuity_addCommGrpCat :
+    HasCohomologyContinuity AddCommGrpCat.{u + 1} where
+  isZero_rightDerived_of_isLimit := by
+    intro S F I _ _ D _ _ _ c hc q h
+    refine (Sheaf.subsingleton_H_iff_isZero_rightDerived c.pt.left.smallEtaleTopology
+      (MorphismProperty.Over.mkIdTerminal _ c.pt.left) q _).1 ?_
+    refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+    obtain ⟨i, y, hy⟩ := (cohomologyMap_isColimit_of_isLimit' F D c hc q).1 x
+    have : Subsingleton
+        (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q) :=
+      (Sheaf.subsingleton_H_iff_isZero_rightDerived (D.obj i).left.smallEtaleTopology
+        (MorphismProperty.Over.mkIdTerminal _ (D.obj i).left) q _).2 (h i)
+    rw [Subsingleton.elim y 0, map_zero] at hy
+    exact eq_zero_of_sheafH_map_eq_zero _ hy.symm
+
+instance hasCohomologyContinuity_moduleCat (Λ : Type (u + 1)) [CommRing Λ] :
+    HasCohomologyContinuity (ModuleCat.{u + 1} Λ) where
+  isZero_rightDerived_of_isLimit := by
+    intro S F I _ _ D _ _ _ c hc q h
+    have : IsCofiltered I := inferInstance
+    obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := I)
+    have (i : I) : CompactSpace ((D ⋙ Over.forget S).obj i) :=
+      inferInstanceAs (CompactSpace (D.obj i).left)
+    have {i j : I} (g : i ⟶ j) : IsAffineHom ((D ⋙ Over.forget S).map g) :=
+      inferInstanceAs (IsAffineHom (D.map g).left)
+    have (i : I) : QuasiSeparatedSpace ((D ⋙ Over.forget S).obj i) :=
+      inferInstanceAs (QuasiSeparatedSpace (D.obj i).left)
+    have : CompactSpace c.pt.left := Scheme.compactSpace_of_isLimit _ _ hc
+    have := isAffineHom_π_app _ _ hc
+    have : QuasiSeparatedSpace c.pt.left :=
+      quasiSeparatedSpace_of_quasiSeparated (((Over.forget S).mapCone c).π.app i₀)
+    rw [isZero_rightDerived_sectionsFunctor_iff_forget₂]
+    obtain ⟨e⟩ := pullback_forget_modules_iso Λ c.pt.hom F
+    refine IsZero.of_iso ?_ (((sectionsFunctor _ _).rightDerived q).mapIso e)
+    refine HasCohomologyContinuity.isZero_rightDerived_of_isLimit (A := AddCommGrpCat.{u + 1})
+      _ D c hc q fun i ↦ ?_
+    obtain ⟨e'⟩ := pullback_forget_modules_iso Λ (D.obj i).hom F
+    exact ((isZero_rightDerived_sectionsFunctor_iff_forget₂ _ q).1 (h i)).of_iso
+      (((sectionsFunctor _ _).rightDerived q).mapIso e'.symm)
 
 end AlgebraicGeometry.Etale

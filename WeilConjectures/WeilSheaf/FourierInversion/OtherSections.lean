@@ -84,9 +84,13 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
   obtain ⟨M, ⟨e⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hc K hK
   exact (WeilComplex.upperStarDerivedLowerStarAdjunction i).isIso_unit_app_of_iso e.symm
 
-/-- Blueprint `thm-pur-rank-one-thom` (and its vector-bundle form `thm-pur-vector-bundle-thom`),
-combined with the projection formula of `prop-weil-operations` for the constant sheaf: for the
-trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, `Rπ₀! π^* P ≅ P(-1)[-2]` naturally in the Weil
+/-- The Weil-complex form, used by Fourier inversion, of the rank-one Thom isomorphism: the
+consequence for Weil complexes of the finite-coefficient rank-one Thom isomorphism (blueprint
+node thm-pur-rank-one-thom, formalized as
+`AlgebraicGeometry.VectorBundle.isIso_rightDerivedLowerShriek_map_thom`) combined with the
+projection formula of `prop-weil-operations` for the constant sheaf. It is an input from other
+sections of the proof of Fourier inversion, not itself a blueprint node: for the trivial line
+bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, `Rπ₀! π^* P ≅ P(-1)[-2]` naturally in the Weil
 complex `P` on `X`. The trivial line bundle is given by a cartesian square
 `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. -/
 theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback

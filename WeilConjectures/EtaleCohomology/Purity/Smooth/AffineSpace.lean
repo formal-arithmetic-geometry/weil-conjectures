@@ -162,8 +162,15 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
     ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj _).mapIso
       (leftDerivedUpperStarTateShiftIso Λ _ m) ≪≫ derivedTensorLeftUnitor _ Y _⟩
 
-/-- The identification `𝔸^{c+1}_B ≅ 𝔸¹_{𝔸^c_B}` of `AlgebraicGeometry.AffineSpace.sumIso`,
-the last coordinate becoming the coordinate of the affine line. -/
+/-- Blueprint `pur9-def-affine-space`: Affine space over a base
+
+Relative affine space `𝔸^c_B` is Mathlib's `𝔸(ULift (Fin c); B)`, with coordinates
+`AffineSpace.coord`, projection `p_c = 𝔸^c_B ↘ B` and zero section `AffineSpace.zeroSection`.
+This is the identification `𝔸^{c+1}_B ≅ 𝔸¹_{B'}`, `B' = 𝔸^c_B`, of
+`AlgebraicGeometry.AffineSpace.sumIso`, the last coordinate becoming the coordinate of the
+affine line; under it `p_{c+1} = p_c ∘ p'`
+(`AlgebraicGeometry.Etale.affineSpaceSuccIso_hom_over_over`) and `z_{c+1} = s' ∘ z_c`
+(`AlgebraicGeometry.Etale.zeroSection_comp_affineSpaceSuccIso_hom`). -/
 noncomputable def affineSpaceSuccIso (c : ℕ) (B : Scheme.{u}) :
     𝔸(ULift.{u} (Fin (c + 1)); B) ≅ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin c); B)) :=
   AffineSpace.reindexIso B

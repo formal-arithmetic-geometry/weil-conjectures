@@ -199,6 +199,7 @@ origin, with `K₀` bounded and `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below. If th
 pro-étale one
 (`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`). -/
 theorem hasProjectionFormulaOfCompactification_of_comparison [Etale.UpperStarPreservesFlat A]
+    [Etale.HasCohomologyContinuity A]
     [∀ X : Scheme.{u}, (ν^*(X)[A]).PreservesFlat] {f : X ⟶ Y} (c : Compactification f)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}

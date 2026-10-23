@@ -11,6 +11,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekTensorComparison
 
 /-!
 # Finite-coefficient smooth purity
@@ -44,13 +45,15 @@ six-functor bookkeeping is downstream of this file.
 
 ## Implementation notes
 
-The blueprint asserts that each isomorphism below is *canonical*: `sk-thm-smooth-purity` is
-about the normalized comparison, built from the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the
-projection formula. That map does not exist in the repository — the projection map itself is a
-TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement records the
-existence of the isomorphism only, with a `TODO(unify)` marker. For the same reason the smooth
-purity map `γ_{f,K}` and the smooth pullback exchange are built from their constituent
-isomorphisms, which are arguments of the constructions.
+The blueprint asserts that each isomorphism below is *canonical*. The tensor comparison
+`φ_{f,K} : Lf^* K ⊗ ω_f ⟶ Rf^! K` of `pur9-cs-def-phi`, the mate of the projection formula, is
+the canonical map `AlgebraicGeometry.Etale.tensorComparison`, and the smooth purity maps built
+from it form a natural isomorphism (`AlgebraicGeometry.Etale.smoothPurityNatIso`). The
+identification `θ : ω_f ≅ Λ_X(d)[2d]` of `thm-pur-diagonal-dualizing-object` is only known to
+exist, so it is an argument of the constructions. The smooth purity map
+`AlgebraicGeometry.Etale.smoothPurityIso` and the smooth pullback exchange also accept an
+arbitrary tensor isomorphism `φ`, so that the compatibilities with a change of coefficients can
+be stated for the constituents.
 
 Statements whose type does not mention the relative dimension `d` carry `include d in`;
 without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dropped.
@@ -61,6 +64,10 @@ without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dr
   `M(m)[2m] ≅ M ⊗ Λ_X(m)[2m]`.
 - `AlgebraicGeometry.Etale.smoothPurityIso`: the smooth purity map
   `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`.
+- `AlgebraicGeometry.Etale.smoothTensorIso`: the tensor comparison `Lf^* K ⊗ ω_f ≅ Rf^! K` of a
+  smooth morphism.
+- `AlgebraicGeometry.Etale.smoothPurityNatIso`: the smooth purity maps with the canonical tensor
+  comparison, as a natural isomorphism `Lf^*(-)(d)[2d] ≅ Rf^!`.
 - `AlgebraicGeometry.Etale.smoothPullbackExchange`: the smooth pullback exchange
   `Lg^* Rf^! K ≅ Rf'^! Lv^* K`.
 
@@ -70,6 +77,9 @@ without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dr
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`: `ω_f ≅ Λ_X(d)[2d]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`:
   `Rf^! K ≅ Lf^* K(d)[2d]`.
+- `AlgebraicGeometry.Etale.smoothPurityIso_hom_naturality`: naturality of `γ_{f,K}` in `K`.
+- `AlgebraicGeometry.Etale.exists_smoothPurityNatIso`: smooth purity over an arbitrary finite
+  coefficient ring, as a natural isomorphism.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp`: `ω_{g ≫ f} ≅ ω_g ⊗ Lg^* ω_f`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom`: smooth
   base-change coherence.
@@ -112,6 +122,26 @@ noncomputable def twistShiftObjIso (m : ℤ)
   ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).commShiftIso (2 * m)).app
       (tateObject Λ X m)).symm ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).mapIso (twistShiftConstantComplexIso Λ X m).symm
+
+variable (X) in
+omit [Finite Λ] [HasInvertibleExponent Λ X] in
+/-- The twist reassociation `M(m)[2m] ≅ M ⊗ Λ_X(m)[2m]` is natural in `M`. -/
+@[reassoc]
+lemma twistShiftObjIso_hom_naturality (m : ℤ)
+    {M M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (g : M ⟶ M') :
+    (twistShift Λ X m).map g ≫ (twistShiftObjIso Λ X m M').hom =
+      (twistShiftObjIso Λ X m M).hom ≫
+        ((derivedTensor (ModuleCat.{u + 1} Λ) X).map g).app
+          ((twistShift Λ X m).obj (constantComplex Λ X)) := by
+  have h := (derivedTensorRightShiftIso (ModuleCat.{u + 1} Λ) (tateObject Λ X m)
+    (2 * m)).inv.naturality g
+  simp only [twistShiftObjIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  rw [← Category.assoc]
+  erw [h]
+  rw [Category.assoc, Category.assoc]
+  congr 1
+  exact (((derivedTensor (ModuleCat.{u + 1} Λ) X).map g).naturality _).symm
 end Twist
 
 /-! ### The diagonal -/
@@ -169,46 +199,55 @@ theorem nonempty_iso_sectionInvariant_diagonal [QuasiSeparatedSpace Y] [QuasiCom
   exact ⟨(L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫
     (leftDerivedUpperStarCompSectionIso _ _ _ (pullback.diagonal_snd f)).app _⟩
 
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+/-- Blueprint `thm-pur-diagonal-dualizing-object`: The smooth dualizing object is the Tate twist
 
-**Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
-dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
-whose exponent is invertible on `X`,
+In the purity conventions (`sk-def-purity-conv`), let `f : X ⟶ Y` be smooth, separated, of pure
+relative dimension `d`, with `Y` separated of finite type over a field. Then there is a canonical
+isomorphism
 
-`ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`,
+`ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`.
 
-canonically, compatibly with base change and additively in the twist under composition of
-smooth morphisms.
-
-This is also blueprint `thm-pur-diagonal-dualizing-object`. The proof is the blueprint's
-diagonal argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the
-smooth projection `p₁`.
+For `Λ = ℤ/ℓⁿ` this is the orientation of blueprint `sk-prop-sp-orientation`, to whose
+subsection this statement belongs. The proof there is the diagonal argument: with
+`W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the smooth projection `p₁`,
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
-2. The deformation to the normal cone of `Δ` (`sk-thm-dnc`,
+   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`);
+2. the deformation to the normal cone of `Δ` (`sk-thm-dnc`,
    `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
-   with the section invariant of its normal bundle, a rank-`d` vector bundle.
-3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
-   finite type over the field.
-
-The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
-trivial of rank `d` (`sk-lem-diag-reg`), so that step 3 is affine-space purity étale-locally.
-Mathlib has neither vector bundles nor `T_{X/Y}`, and the normal cone datum
-`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet tied to the immersion, so the proof is
-left as a TODO. -/
-theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
+   with the section invariant of the normal bundle of `Δ`, the relative tangent bundle `T_{X/Y}`;
+3. that section invariant is `Λ_X(d)[2d]` by vector-bundle purity (`sk-prop-an`). -/
+theorem nonempty_iso_dualizingComplex_twistShift_of_diagonal [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) :=
   -- TODO: step 2 needs a deformation to the normal cone of `Δ` whose normal cone datum is the
   -- normal bundle `T_{X/Y}` (`nonempty_iso_sectionInvariant_normalCone`), and step 3
-  -- vector-bundle purity for it. `NormalConeData` does not yet tie the datum to the immersion,
-  -- and the existence of a deformation datum (`nonempty_deformationToNormalConeData`) is false
-  -- for an arbitrary one, so the proof waits for the normal bundle
-  -- (`prove2/sk-thm-smooth-purity-2`).
+  -- vector-bundle purity for it (`sk-prop-sp-orientation-charts`,
+  -- `sk-prop-sp-orientation-vector-bundle`).
   sorry
+
+/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+
+**Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
+dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
+whose exponent is invertible on `X`,
+
+`ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`.
+
+This is also clause (1) of blueprint `det-sp-finite-general-ring`: the relative dualizing
+complex over an arbitrary finite coefficient ring `Λ` has an orientation. The proof is the
+blueprint's: the calculation of the orientation (`sk-prop-sp-orientation`, in the form
+`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift_of_diagonal`) works with the
+coefficient ring `Λ` throughout (clause (2) of `det-sp-finite-general-ring`). Combined with the
+tensor formula of `sk-prop-cohsm` it gives `Rf^! K ≅ Lf^* K(d)[2d]`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`). -/
+theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X)) :=
+  nonempty_iso_dualizingComplex_twistShift_of_diagonal Λ f aY
 
 /-! ### The smooth purity map -/
 
@@ -223,10 +262,10 @@ of the twist reassociation (`AlgebraicGeometry.Etale.twistShiftObjIso`), the inv
 identification `θ : ω_f ≅ Λ_X(d)[2d]` of `thm-pur-diagonal-dualizing-object`, and the tensor
 formula `φ : Lf^* K ⊗ ω_f ≅ Rf^! K` of `sk-prop-cohsm` (b).
 
-The blueprint's `θ` and `φ` are canonical maps; the library only provides their existence
-(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`,
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`), so they
-are arguments of the construction. -/
+The blueprint's `θ` and `φ` are canonical maps. The library only provides the existence of `θ`
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), so it is an argument of
+the construction; the canonical `φ` is `AlgebraicGeometry.Etale.smoothTensorIso`, and the
+resulting natural isomorphism is `AlgebraicGeometry.Etale.smoothPurityNatIso`. -/
 noncomputable def smoothPurityIso
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
@@ -241,6 +280,167 @@ noncomputable def smoothPurityIso
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).mapIso
       θ.symm ≪≫ φ
 
+omit [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
+/-- Blueprint `rem-ptr-pur-smooth-purity-map-4`: Pointer to the properties of the smooth purity
+map
+
+In the notation of `def-pur-smooth-purity-map`, the second factor of the smooth purity map
+`γ_{f,K}` is the *inverse* `1 ⊗ θ⁻¹` of the identification `θ : ω_f ≅ Λ_X(d)[2d]` of
+`thm-pur-diagonal-dualizing-object`. -/
+lemma smoothPurityIso_hom
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X))
+    (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :
+    (smoothPurityIso Λ f K θ φ).hom = (twistShiftObjIso Λ X d _).hom ≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ φ.hom :=
+  rfl
+
+omit [HasTateTwist Λ] [IsSeparated f] in
+include d in
+/-- The tensor comparison `φ_{f,K} : Lf^* K ⊗ᴸ ω_f ≅ Rf^! K` of `pur9-cs-def-phi`
+(`AlgebraicGeometry.Etale.tensorComparison`) of a smooth morphism, as an isomorphism: it is the
+tensor formula of `sk-prop-cohsm` (b)
+(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`). -/
+noncomputable def smoothTensorIso
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+        (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K :=
+  have := (isIso_tensorComparison_iff Λ f K).2
+    (isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := d) f K)
+  asIso (tensorComparison Λ f K)
+
+omit [HasTateTwist Λ] [IsSeparated f] in
+@[simp]
+lemma smoothTensorIso_hom
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (smoothTensorIso Λ (d := d) f K).hom = tensorComparison Λ f K :=
+  rfl
+
+omit [IsSeparated f] in
+/-- Blueprint `def-pur-smooth-purity-map`: Smooth purity map
+
+*The canonical smooth purity map, as a natural isomorphism.* For an identification
+`θ : ω_f ≅ Λ_X(d)[2d]`, the smooth purity maps
+`γ_{f,K} = smoothPurityIso f K θ φ_{f,K}` built with the tensor comparison `φ_{f,K}` of
+`pur9-cs-def-phi` (`AlgebraicGeometry.Etale.smoothTensorIso`) are the components of a natural
+isomorphism `Lf^*(-)(d)[2d] ≅ Rf^!` of functors `D(Y_ét, Λ) ⥤ D(X_ét, Λ)`. -/
+noncomputable def smoothPurityNatIso
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X)) :
+    L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅
+      rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f :=
+  NatIso.ofComponents (fun K ↦ smoothPurityIso Λ f K θ (smoothTensorIso Λ (d := d) f K))
+    (fun {K K'} g ↦ by
+      simp only [Functor.comp_map, smoothPurityIso_hom, smoothTensorIso_hom]
+      rw [twistShiftObjIso_hom_naturality_assoc, ← NatTrans.naturality_assoc,
+        tensorComparison_naturality]
+      simp only [Category.assoc])
+
+omit [IsSeparated f] in
+@[simp]
+lemma smoothPurityNatIso_app
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X))
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (smoothPurityNatIso Λ f θ).app K = smoothPurityIso Λ f K θ (smoothTensorIso Λ (d := d) f K) :=
+  rfl
+
+omit [IsSeparated f] in
+/-- Blueprint `prop-pur-smooth-purity-naturality-cover`: Naturality and independence of the
+smooth purity map
+
+The smooth purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` of `def-pur-smooth-purity-map`, built
+with the tensor comparison `φ_{f,K}` of `pur9-cs-def-phi`, is natural in `K`: for every
+`g : K ⟶ K'` the square
+
+```
+Lf^* K(d)[2d] ──γ_{f,K}──▶ Rf^! K
+      │                       │
+Lf^* g(d)[2d]              Rf^! g
+      ▼                       ▼
+Lf^* K'(d)[2d] ─γ_{f,K'}─▶ Rf^! K'
+```
+
+commutes. Its three factors (the twist reassociation, `1 ⊗ θ⁻¹` and `φ_{f,K}`) are canonical:
+apart from the identification `θ : ω_f ≅ Λ_X(d)[2d]` itself, the construction involves no
+choice. -/
+@[reassoc]
+theorem smoothPurityIso_hom_naturality
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X))
+    {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (g : K ⟶ K') :
+    (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map g) ≫
+        (smoothPurityIso Λ f K' θ (smoothTensorIso Λ (d := d) f K')).hom =
+      (smoothPurityIso Λ f K θ (smoothTensorIso Λ (d := d) f K)).hom ≫
+        (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).map g :=
+  (smoothPurityNatIso Λ f θ).hom.naturality g
+
+omit [IsSeparated f] in
+/-- Blueprint `lem-pur-projection-purity-agreement`: Agreement with the affine-line route on
+affine space
+
+Let `∫_f : Rf_!(Λ_X(d)[2d]) ⟶ Λ_Y` be an integration map whose adjunct
+`θ_∫ : Λ_X(d)[2d] ⟶ ω_f` is an isomorphism. Then the smooth purity map `γ_{f,K}` of
+`def-pur-smooth-purity-map` formed with the orientation `θ_∫⁻¹` is the *trace comparison* of
+`∫_f`: after the twist reassociation it is the exceptional adjoint of
+
+`Rf_!(Lf^* K ⊗ᴸ Λ_X(d)[2d]) ≅ K ⊗ᴸ Rf_!(Λ_X(d)[2d]) ⟶ K`
+
+(`AlgebraicGeometry.Etale.traceComparisonSymmOfIsIso`), formed with the projection formula and
+`1 ⊗ ∫_f`. This is the content of the blueprint lemma for `f = p_d : 𝔸^d_Y ⟶ Y`: the
+affine-space purity comparison of `cor-pur-affine-space-purity` is the exceptional adjoint of
+the projection-formula composite with the integration map of `p_d`, so `γ_{p_d,K}` equals it.
+The library does not define the affine-line and affine-space comparisons as maps (only their
+existence, `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`), so the
+statement is made for an arbitrary integration map. -/
+theorem smoothPurityIso_hom_eq_traceComparison
+    (tr : (R(f)_![ModuleCat.{u + 1} Λ]).obj ((twistShift Λ X d).obj (constantComplex Λ X)) ⟶
+      𝟙_ _)
+    [IsIso (traceAdjunct f tr)]
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (smoothPurityIso Λ f K (asIso (traceAdjunct f tr)).symm
+        (smoothTensorIso Λ (d := d) f K)).hom =
+      (twistShiftObjIso Λ X d _).hom ≫ traceComparisonSymmOfIsIso f tr K := by
+  rw [smoothPurityIso_hom, traceComparisonSymmOfIsIso_eq]
+  rfl
+
+/-- Blueprint `det-sp-finite-general-ring`: Smooth purity over an arbitrary finite coefficient
+ring
+
+Let `Λ` be a finite coefficient ring whose exponent is invertible on `X`, and let
+`f : X ⟶ Y` be smooth separated of pure relative dimension `d`, `Y` separated of finite type
+over a field. Then
+1. the relative dualizing complex `ω_f = Rf^! Λ_Y` has an orientation `θ : ω_f ≅ Λ_X(d)[2d]`
+   (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`);
+2. the orientation is the one obtained by running the diagonal and deformation construction
+   directly with `Λ`-coefficients
+   (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift_of_diagonal`);
+3. for every `K` the composite
+   `γ_{f,Λ}(K) : Lf^* K(d)[2d] ≅ Lf^* K ⊗ᴸ Λ_X(d)[2d] ≅ Lf^* K ⊗ᴸ ω_f ≅ Rf^! K`
+   of the twist reassociation, the inverse orientation and the tensor comparison is an
+   isomorphism, natural in `K`: it is the component at `K` of a natural isomorphism
+   `Lf^*(-)(d)[2d] ≅ Rf^!`.
+
+The coefficient ring is not reduced to `ℤ/ℓⁿ`, so there is no choice of `n` to be independent
+of. -/
+theorem exists_smoothPurityNatIso [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
+    ∃ θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+        (twistShift Λ X d).obj (constantComplex Λ X),
+      ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        ((smoothPurityNatIso Λ (d := d) f θ).app K).hom = (twistShiftObjIso Λ X d _).hom ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K := by
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
+  exact ⟨θ, fun K ↦ rfl⟩
+
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
 **The purity isomorphism on all coefficients.** Combining the tensor formula of
@@ -249,9 +449,9 @@ dimension `d` and every `K ∈ D^b_{ctf}(Y, Λ)`,
 
 `Rf^! K ≅ (Lf^* K)(d)[2d]`.
 
-This is also blueprint `thm-pur-finite-coefficient-smooth-purity` and
-`cor-pur-dualizing-object-purity`: the isomorphism is the smooth purity map
-`AlgebraicGeometry.Etale.smoothPurityIso` built from the two identifications. -/
+The isomorphism is the smooth purity map `AlgebraicGeometry.Etale.smoothPurityIso` built from
+the two identifications (`thm-pur-finite-coefficient-smooth-purity`,
+`AlgebraicGeometry.Etale.isIso_smoothPurityMap`). -/
 theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
@@ -263,6 +463,31 @@ theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormaliz
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
   exact ⟨(smoothPurityIso Λ (d := d) f K θ φ).symm⟩
 
+omit [IsSeparated f] in
+/-- Blueprint `thm-pur-finite-coefficient-smooth-purity`: Finite-coefficient smooth purity
+
+In the purity conventions, let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `Y`
+separated of finite type over a field, and `K ∈ D^b_{ctf}(Y, Λ)`. Then the smooth purity map
+of `def-pur-smooth-purity-map`
+
+`γ_{f,K} : Lf^* K(d)[2d] ⟶ Lf^* K ⊗ Λ_X(d)[2d] ⟶ Lf^* K ⊗ ω_f ⟶ Rf^! K`,
+
+the twist reassociation followed by `1 ⊗ θ⁻¹` and the canonical tensor comparison
+`φ_{f,K}` of `pur9-cs-def-phi`, is an isomorphism. Here `θ : ω_f ≅ Λ_X(d)[2d]` is an
+orientation (`thm-pur-diagonal-dualizing-object`,
+`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`); the statement holds for
+every such `θ`. -/
+theorem isIso_smoothPurityMap [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
+    (_aY : Y ⟶ Spec (.of k)) [IsSeparated _aY] [LocallyOfFiniteType _aY]
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X))
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    IsIso ((twistShiftObjIso Λ X d _).hom ≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K) := by
+  rw [← smoothTensorIso_hom Λ (d := d) f K, ← smoothPurityIso_hom]
+  infer_instance
 include d in
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
@@ -296,6 +521,50 @@ theorem nonempty_iso_dualizingComplex_comp [HasTateTwist.IsNormalized Λ]
     ((derivedTensor _ W).obj (dualizingComplex _ g)).mapIso
       ((L((g)^*[ModuleCat.{u + 1} Λ])).mapIso (θf ≪≫ twistShiftConstantComplexIso Λ X d) ≪≫
         leftDerivedUpperStarTateShiftIso Λ g d).symm⟩
+
+include d in
+/-- Blueprint `cor-pur-dualizing-object-purity`: Smooth purity
+
+In the purity conventions, let `f : X ⟶ Y` be smooth separated of pure relative dimension `d`,
+`Y` separated of finite type over a field. Substituting an identification
+`θ : ω_f ≅ Λ_X(d)[2d]` of `thm-pur-diagonal-dualizing-object` into the tensor formula of
+`thm-pur-cohomological-smoothness` gives, for every `K ∈ D^b_{ctf}(Y, Λ)`, the isomorphism
+
+`γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`
+
+whose underlying map is the twist reassociation, `1 ⊗ θ⁻¹` and the tensor comparison. The
+dualizing objects are compatible with arbitrary base change, `Lg'^* ω_f ≅ ω_{f'}` for a
+cartesian square `g' ≫ f = f' ≫ v`, and with composition, `ω_{g ≫ f} ≅ ω_g ⊗ Lg^* ω_f`. -/
+theorem exists_smoothPurityIso_baseChange_comp [HasTateTwist.IsNormalized Λ] {k : Type u}
+    [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
+    ∃ θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+        (twistShift Λ X d).obj (constantComplex Λ X),
+      (∀ (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+        DerivedCategory.boundedConstructibleFiniteTor Λ Y K →
+          ∃ γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+              (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K,
+            γ.hom = (twistShiftObjIso Λ X d _).hom ≫
+              ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+                ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K) ∧
+      (∀ {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {v : Y' ⟶ Y}
+          (_ : IsPullback g' f' f v) [HasCompactification f'],
+        Nonempty ((L((g')^*[ModuleCat.{u + 1} Λ])).obj
+            (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+          dualizingComplex (ModuleCat.{u + 1} Λ) f')) ∧
+      (∀ {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X) [IsSeparated g] [SmoothOfRelativeDimension e g]
+          [HasCompactification g] [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W],
+        Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (g ≫ f) ≅
+          ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
+              (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
+            ((L((g)^*[ModuleCat.{u + 1} Λ])).obj
+              (dualizingComplex (ModuleCat.{u + 1} Λ) f)))) := by
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
+  refine ⟨θ, fun K _ ↦ ⟨smoothPurityIso Λ f K θ (smoothTensorIso Λ (d := d) f K), rfl⟩,
+    fun {X' Y' g' f' v} sq _ ↦ ?_, fun {W e} g _ _ _ _ _ ↦
+      nonempty_iso_dualizingComplex_comp Λ (d := d) f aY (e := e) g⟩
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
+  obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) v
+  exact ⟨e.app (𝟙_ _) ≪≫ (rightDerivedUpperShriek _ f').mapIso ι⟩
 
 /-! ### Base change -/
 

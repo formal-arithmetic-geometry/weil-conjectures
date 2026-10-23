@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 
 /-!
 # Blueprint statements
@@ -22,7 +22,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent. -/
+/-- Blueprint `lemma-weil-pbc-finite-hypercover-descent`: truncated finite split étale
+hypercovers of the limit, morphisms between them and equalities of such morphisms descend to a
+finite stage. -/
 theorem finite_hypercover_descent
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -58,7 +60,8 @@ theorem finite_hypercover_descent
         Functor.whiskerRight ψ (Over.pullback (c.π.app i)) →
       ∃ (j : Iᵒᵖ) (h : j ⟶ i),
         Functor.whiskerRight φ (Over.pullback (D.map h)) =
-          Functor.whiskerRight ψ (Over.pullback (D.map h))) := by
-  sorry
+          Functor.whiskerRight ψ (Over.pullback (D.map h))) :=
+  ⟨finite_hypercover_descent_objects D c hc, finite_hypercover_descent_morphisms D c hc,
+    finite_hypercover_descent_equalities D c hc⟩
 
 end AlgebraicGeometry

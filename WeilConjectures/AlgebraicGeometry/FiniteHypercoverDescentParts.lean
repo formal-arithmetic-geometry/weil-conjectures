@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentObjects
 
 /-!
 # Blueprint statements
@@ -19,7 +19,9 @@ universe w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-objects. -/
+/-- Blueprint `lemma-weil-pbc-finite-hypercover-descent-objects`: every truncated finite split
+étale hypercover of the limit is the base change of one at a stage whose matching maps stay
+surjective after any further base change. -/
 theorem finite_hypercover_descent_objects
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -33,9 +35,13 @@ theorem finite_hypercover_descent_objects
           ∀ (j : Iᵒᵖ) (h : j ⟶ i) (n : Fin (r + 1)),
             Surjective ((Over.pullback (D.map h)).map
               ((Scheme.Etale.forget (D.obj i)).map (Ui.matchingMap n))).left := by
-  sorry
+  intro r U
+  obtain ⟨i, Ui, hUi⟩ := exists_truncatedFiniteSplitEtaleHypercover_isBaseChange hc U
+  exact ⟨i, Ui, hUi, fun j h n ↦ surjective_overPullback_map_left _ _ (Ui.matching_cover n)⟩
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-morphisms. -/
+/-- Blueprint `lemma-weil-pbc-finite-hypercover-descent-morphisms`: a morphism between the base
+changes to the limit of two truncated finite split étale hypercovers over a stage descends to a
+later stage. -/
 theorem finite_hypercover_descent_morphisms
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -58,9 +64,14 @@ theorem finite_hypercover_descent_morphisms
             (((Over.pullbackComp (c.π.app j) (D.map h)).symm ≪≫
               eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f)
                 (c.w h))).app (U.diagram.obj Δ)).hom ≫ φ.app Δ := by
-  sorry
+  intro r i U V φ
+  obtain ⟨j, h, ψ, hψ⟩ := exists_natTrans_descent D hc U.isQcqsEtale_diagram_obj
+    V.isQcqsEtale_diagram_obj φ
+  exact ⟨j, h, ψ, hψ⟩
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-equalities. -/
+/-- Blueprint `lemma-weil-pbc-finite-hypercover-descent-equalities`: two morphisms of truncated
+finite split étale hypercovers over a stage which agree after base change to the limit agree at a
+later stage. -/
 theorem finite_hypercover_descent_equalities
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -76,6 +87,8 @@ theorem finite_hypercover_descent_equalities
       ∃ (j : Iᵒᵖ) (h : j ⟶ i),
         Functor.whiskerRight φ (Over.pullback (D.map h)) =
           Functor.whiskerRight ψ (Over.pullback (D.map h)) := by
-  sorry
+  intro r i U V φ ψ hφψ
+  exact (stageEventually_whiskerRight_eq D hc U.isQcqsEtale_diagram_obj
+    V.isQcqsEtale_diagram_obj φ ψ hφψ).exists_hom
 
 end AlgebraicGeometry

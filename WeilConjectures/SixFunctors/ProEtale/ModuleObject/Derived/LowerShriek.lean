@@ -119,7 +119,9 @@ section Chosen
 
 variable (f : X ⟶ Y) [HasCompactification f]
 
-/-- The derived lower shriek `Rf_! : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_Y})` along a morphism
+/-- Blueprint `pur713-def-lower-shriek-module`: Module-object compact-support direct image.
+
+The derived lower shriek `Rf_! : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_Y})` along a morphism
 `f : X ⟶ Y` admitting a compactification, on the unbounded derived categories of module
 objects: the functor `rightDerivedLowerShriekOfCompactification` attached to the chosen
 compactification `HasCompactification.compactification f`. -/

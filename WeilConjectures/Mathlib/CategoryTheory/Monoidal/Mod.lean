@@ -157,7 +157,13 @@ def modObjObj (X : C) [ModObj A X] : ModObj (F.obj A) (F.obj X) :=
         μ_natural_right_assoc])
 
 variable (A) in
-/-- A lax monoidal functor `F : C ⥤ D` takes `A`-module objects to `F A`-module objects. -/
+/-- Blueprint `pur713-def-mapmod`: Transport of module objects.
+
+A lax monoidal functor `F : C ⥤ D` takes `A`-module objects to `F A`-module objects: `M` goes to
+`F M` with the action `F A ⊗ F M ⟶ F (A ⊗ M) ⟶ F M` (`Functor.modObjObj`), and morphisms are
+sent by `F`. Here `F A` is the ring object with multiplication `F μ ∘ μ_{A,A}` and unit
+`F η ∘ ε` (`Functor.monObjObj`), commutative when `A` is and `F` is lax braided
+(`Functor.isCommMonObj_obj`). -/
 @[simps]
 def mapMod : Mod C A ⥤ Mod D (F.obj A) where
   obj M :=

@@ -64,6 +64,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- definitions of the derived tensor product.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
+/-- The unit `Λ_X` of `D(X_ét, Λ)` is invertible. -/
+lemma DerivedCategory.isInvertible_unit (X : Scheme.{u}) :
+    DerivedCategory.isInvertible Λ X (𝟙_ _) :=
+  ⟨𝟙_ _, ⟨derivedTensorLeftUnitor _ X _⟩, ⟨derivedTensorLeftUnitor _ X _⟩⟩
+
 section Descent
 
 variable {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ X)
@@ -290,6 +295,28 @@ theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ 
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   exact isIso_dualizingComplexTensorMapOfIsIso_comp a b h w (E a b h w) (hPF a b h w)
     (projectionMapAssociativity Λ a) K (ha _) hb ((isInvertible_iff_exists_derivedTensor _).2 hω)
+
+/-- The canonical tensor maps of equal morphisms are isomorphisms together, whatever the
+instances of `HasCompactification`. -/
+theorem isIso_dualizingComplexTensorMap_iff_of_eq {X Y : Scheme.{u}} {f g : X ⟶ Y} (hfg : f = g)
+    [HasCompactification f] [HasCompactification g]
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (dualizingComplexTensorMap Λ f K) ↔ IsIso (dualizingComplexTensorMap Λ g K) := by
+  subst hfg
+  rfl
+
+/-- **Descent of the canonical tensor maps along a composite.** For `h = a ≫ b` admitting
+compactifications: if `θ_a` is invertible at every object and `θ_{h,K}` is invertible, then so is
+`Ra^! θ_{b,K}` (`lem-pur-co-smooth-etale-locality`, step 3). -/
+theorem isIso_rightDerivedUpperShriek_map_dualizingComplexTensorMap_of_comp (a : X ⟶ Y)
+    (b : Y ⟶ Z) (h : X ⟶ Z) (w : a ≫ b = h) [HasCompactification a] [HasCompactification b]
+    [HasCompactification h] (ha : ∀ P, IsIso (dualizingComplexTensorMap Λ a P))
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hh : IsIso (dualizingComplexTensorMap Λ h K)) :
+    IsIso ((R(a)^![ModuleCat.{u + 1} Λ]).map (dualizingComplexTensorMap Λ b K)) := by
+  obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
+  exact isIso_map_dualizingComplexTensorMapOfIsIso_of_comp a b h w (E a b h w) (hPF a b h w)
+    (projectionMapAssociativity Λ a) ha K hh
 
 /-- **Descent of the canonical tensor maps.** Let `u_i : U_i ⟶ X` be a jointly surjective family
 of étale morphisms with `θ_{u_i}` invertible at every object and `ω_{u_i}` invertible, and let

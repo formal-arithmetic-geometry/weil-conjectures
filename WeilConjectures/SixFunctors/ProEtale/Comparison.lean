@@ -91,7 +91,8 @@ comparison commutes with direct images:
 commutes up to isomorphism, `ν_V^* ∘ R u_{ét,*} ≅ R u_{proét,*} ∘ ν_U^*`. Exactness of `ν^*`,
 which is what allows it to be applied degreewise to complexes, is
 `AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`. -/
-theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Scheme.{u}}
+theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar
+    [Etale.HasCohomologyContinuity A] {U V : Scheme.{u}}
     (u : U ⟶ V) [QuasiCompact u] [QuasiSeparated u] :
     Nonempty (R+(Etale.lowerStar A u) ⋙ D+(comparisonUpperStar A V) ≅
       D+(comparisonUpperStar A U) ⋙ R+(ProEtale.lowerStar A u)) :=
@@ -107,6 +108,10 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
 section Unit
 
 open MonoidalCategory Functor.OplaxMonoidal
+
+-- Instance search for `GrothendieckTopology.W.IsMonoidal` through enough points of the site times
+-- out; prefer the direct instance.
+attribute [local instance high] GrothendieckTopology.W.monoidal
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 

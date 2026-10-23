@@ -53,6 +53,7 @@ namespace ProEtale
 section Comparison
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
 
 variable (f) in
 /-- Blueprint `prop-weil-pbc-comparison-direct-image`: for `f` quasi-compact and

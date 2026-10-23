@@ -99,6 +99,58 @@ theorem exists_iso_fromIntegral_realization_twistShiftPullbackLevel
     ⟨ObjectProperty.homMk e.inv, by ext; exact e.hom_inv_id, by ext; exact e.inv_hom_id⟩
   exact Functor.map_isIso _ _
 
+section TraceCoherence
+
+variable {CX CY DX DY : Type*} [Category* CX] [Category* CY] [Category* DX] [Category* DY]
+  {L : CX ⥤ CY} {R H : CY ⥤ CX} {L' : DX ⥤ DY} {R' H' : DY ⥤ DX}
+
+/-- Blueprint `prop-pur-rational-purity-trace-coherence`: Trace and coherence compatibilities of
+rational purity
+
+Let `Rf_! = L ⊣ R = Rf^!` be the exceptional adjunction at the integral stage and
+`L' ⊣ R'` the one at the rational stage, `H = Lf^*(-)(d)[2d]` and `H'` the twisted pullbacks,
+and `γ : H ≅ R`, `γ' : H' ≅ R'` the purity isomorphisms, so that the smooth traces are
+`Tr^sm_K = ε_K ∘ L(γ_K)` and `Tr'^sm_K = ε'_K ∘ L'(γ'_K)` (`def-pur-smooth-trace`). Let `Φ` be
+the exact functor `- ⊗ᴸ_{𝒪_E} E` (or the extension of coefficient fields), commuting with `Rf_!`
+(`ψ`), with `Rf^!` (`vS`, compatible with the counits: `hS`) and with the twisted pullbacks
+(`v₀`), and suppose the rational purity isomorphism is the transport of the integral one
+(`hγ`, `thm-pur-rational-and-qbar-purity`). Then
+
+1. the rational smooth trace is the transport of the integral smooth trace:
+   `Φ(Tr^sm_K) = Tr'^sm_{Φ K} ∘ L'(v₀) ∘ ψ`;
+2. the trace of a direct summand `N` of `Φ K` (with `i : N ⟶ Φ K`, `r : Φ K ⟶ N`,
+   `i ≫ r = 𝟙`) is the summand of the trace: `Tr'^sm_N = r ∘ Tr'^sm_{Φ K} ∘ L'(H'(i))`, by
+   naturality of `γ'`.
+
+The composition and base-change coherence squares at the rational stage are, likewise, the
+images under `Φ` of the integral ones (`AlgebraicGeometry.Etale.smoothPurityTrace_comp` and
+`AlgebraicGeometry.Etale.smoothPurityTrace_baseChange` at the finite levels, realized by
+`prop-pur-adic-reconstruction-trace-coherence`), restricted to summands as in (2). -/
+theorem map_comp_counit_eq_of_transport (adj : L ⊣ R) (adj' : L' ⊣ R') (ΦX : CX ⥤ DX)
+    (ΦY : CY ⥤ DY) (ψ : L ⋙ ΦY ≅ ΦX ⋙ L') (γ : H ≅ R) (γ' : H' ≅ R')
+    (vS : R ⋙ ΦX ≅ ΦY ⋙ R') (v₀ : H ⋙ ΦX ≅ ΦY ⋙ H')
+    (hS : ∀ K : CY, L'.map (vS.hom.app K) ≫ adj'.counit.app (ΦY.obj K) =
+      ψ.inv.app (R.obj K) ≫ ΦY.map (adj.counit.app K))
+    (hγ : ∀ K : CY, ΦX.map (γ.hom.app K) ≫ vS.hom.app K = v₀.hom.app K ≫ γ'.hom.app (ΦY.obj K)) :
+    (∀ K : CY, ΦY.map (L.map (γ.hom.app K) ≫ adj.counit.app K) =
+      ψ.hom.app (H.obj K) ≫ L'.map (v₀.hom.app K) ≫
+        L'.map (γ'.hom.app (ΦY.obj K)) ≫ adj'.counit.app (ΦY.obj K)) ∧
+    ∀ (K : CY) (N : DY) (i : N ⟶ ΦY.obj K) (r : ΦY.obj K ⟶ N), i ≫ r = 𝟙 N →
+      L'.map (γ'.hom.app N) ≫ adj'.counit.app N =
+        L'.map (H'.map i) ≫ (L'.map (γ'.hom.app (ΦY.obj K)) ≫ adj'.counit.app (ΦY.obj K)) ≫ r := by
+  refine ⟨fun K ↦ ?_, fun K N i r hir ↦ ?_⟩
+  · have hψ := ψ.hom.naturality (γ.hom.app K)
+    simp only [Functor.comp_obj, Functor.comp_map] at hψ
+    rw [← L'.map_comp_assoc, ← hγ K, L'.map_comp_assoc, hS K, ← reassoc_of% hψ,
+      Iso.hom_inv_id_app_assoc, Functor.map_comp]
+  · simp only [Category.assoc]
+    rw [← L'.map_comp_assoc, γ'.hom.naturality i, L'.map_comp_assoc]
+    have h₂ := adj'.counit.naturality i
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₂
+    rw [reassoc_of% h₂, hir, Category.comp_id]
+
+end TraceCoherence
+
 end Etale
 
 end AlgebraicGeometry
