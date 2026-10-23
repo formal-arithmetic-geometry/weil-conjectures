@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.Stalk
@@ -24,18 +25,22 @@ This file states the comparison between the two settings
 formula for Weil complexes from `ProEtale.CondensedRing.weilTraceFormula`
 (`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison`).
 
+The comparison is proved from the bijection between the points of degree `n + 1` for `e = 𝟙`
+and the `𝔽_{q^{n+1}}`-rational points
+(`ProEtale.CondensedRing.fieldPointsEquivFrobeniusFixedPointsRefl`) and the sorried input below.
+
 ## Sorried input
 
-- `AlgebraicGeometry.WeilComplex.exists_weilBoundedConstructible_comparison`: every Weil complex
-  `K` on `X₀` comes from a Weil object `K'` for `𝟙 X₀`, compatibly with the traces. There is an
-  additive map `ι : End (𝟙 Mod_{Spec k̄}) ⟶ ℚ̄_ℓ` identifying
+- `AlgebraicGeometry.WeilComplex.exists_weilBoundedConstructible_traces_eq`: every Weil complex
+  `K` on `X₀` has the traces of a Weil object `K'` for `𝟙 X₀`. There is an additive map
+  `ι : End (𝟙 Mod_{Spec k̄}) ⟶ ℚ̄_ℓ` identifying
   * the global trace of `K'` in degree `n + 1` with the alternating sum of the traces of `F^{n+1}`
     on the compactly supported cohomology of `K`, and
-  * the local trace of `K'` at a point of degree `n + 1` with the trace function of `K` at the
-    corresponding `𝔽_{q^{n+1}}`-rational point, through a bijection between the two sets of
-    points.
-  It is the comparison of the Weil complexes of the zeta-function chapter with the bounded
-  constructible Weil objects of the trace formula chapter.
+  * the local trace of `K'` at the geometric point `Spec ι ≫ y` over an `𝔽_{q^{n+1}}`-rational
+    point `y` with the trace function of `K` at `y`.
+  It compares the Weil complexes of the zeta-function chapter, which live on the geometric fiber
+  `X₀ ⊗ k̄`, with the bounded constructible Weil objects of the trace formula chapter, which live
+  on `X₀`. No functor between the two settings exists yet.
 -/
 
 @[expose] public section
@@ -74,15 +79,47 @@ instance : IsSeparated (WeilComplex.overSpec (k₀ := k₀) X).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
 
 open ProEtale.CondensedRing in
+/-- **Weil complexes have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`** (sorried): a Weil complex
+`K` on `X₀` has the same traces as a Weil object `K'` for `𝟙 X₀`. There is an additive map
+`ι : End (𝟙 Mod_{Spec k̄}) ⟶ ℚ̄_ℓ` such that, for every `n`,
+* `ι` of the global trace of `K'` in degree `n + 1` is
+  `∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_c^i(X₀ ⊗ k̄, K))`, and
+* for every `𝔽_{q^{n+1}}`-rational point `y` of `X₀`, `ι` of the local trace of `K'` at the
+  geometric point `Spec ι ≫ y` (for the embedding `ι : 𝔽_{q^{n+1}} ↪ k̄` chosen by
+  `IsAlgClosed.lift`) is the trace function `t_K(y)` of `K` in degree `n + 1`, which is the
+  Frobenius trace on the stalks of `K` at the geometric point of `X₀ ⊗ k̄` over `Spec ι ≫ y`.
+
+The Weil sheaves of the zeta-function chapter live on the geometric fiber `X₀ ⊗ k̄`, while the Weil
+objects of the trace formula chapter live on `X₀` itself, with an extra automorphism. A Weil sheaf
+need not descend to `X₀`, so `K'` is not a descent of `K`: by Deligne (Weil II, 1.3.14) every
+irreducible Weil sheaf is the twist of an étale sheaf on `X₀` by a character of `W(k̄/k₀)`, which
+becomes the automorphism of `K'`, and the traces only depend on the semisimplification. -/
+theorem WeilComplex.exists_weilBoundedConstructible_traces_eq (K : WeilComplex k₀ l X) :
+    ∃ (K' : WeilBoundedConstructible l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)).hom)
+      (ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l),
+      (∀ n : ℕ, ι (weilGlobalSupertrace l (Iso.refl _) K' n) =
+        ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
+          ((K.compactlySupportedCohomology i).frobeniusEnd ^ (n + 1))) ∧
+      ∀ (n : ℕ)
+        (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ (n + 1))),
+        ι (weilStalkSupertrace l n _
+          (frobeniusFixedPointsReflOfFieldPoint (X := WeilComplex.overSpec X) n y).2.2 K') =
+          K.traceFunction (n + 1) y :=
+  sorry
+
+open ProEtale.CondensedRing in
 /-- **Weil complexes are Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`** (comparison of the zeta-function chapter
-with the trace formula chapter, sorried): a Weil complex `K` on `X₀` comes from a Weil object `K'`
+with the trace formula chapter): a Weil complex `K` on `X₀` comes from a Weil object `K'`
 for `𝟙 X₀` with the same traces. There is an additive map `ι : End (𝟙 Mod_{Spec k̄}) ⟶ ℚ̄_ℓ` such
 that, for every `n`,
 * `ι` of the global trace of `K'` in degree `n + 1` is
   `∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_c^i(X₀ ⊗ k̄, K))`, and
 * there is a bijection between the points of `X₀` of degree `n + 1` for `e = 𝟙` and the
   `𝔽_{q^{n+1}}`-rational points of `X₀`, along which `ι` of the local trace of `K'` is the trace
-  function `t_K` of `K` in degree `n + 1`. -/
+  function `t_K` of `K` in degree `n + 1`.
+
+The bijection is `fieldPointsEquivFrobeniusFixedPointsRefl`, and the traces are compared by
+`WeilComplex.exists_weilBoundedConstructible_traces_eq`. -/
 theorem WeilComplex.exists_weilBoundedConstructible_comparison (K : WeilComplex k₀ l X) :
     ∃ (K' : WeilBoundedConstructible l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)).hom)
       (ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l),
@@ -91,8 +128,12 @@ theorem WeilComplex.exists_weilBoundedConstructible_comparison (K : WeilComplex 
           ((K.compactlySupportedCohomology i).frobeniusEnd ^ (n + 1))) ∧
       ∀ n : ℕ, ∃ eqv : frobeniusFixedPoints (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)) n ≃
           (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ (n + 1)),
-        ∀ x, ι (weilStalkSupertrace l n x.1 x.2.2 K') = K.traceFunction (n + 1) (eqv x) :=
-  sorry
+        ∀ x, ι (weilStalkSupertrace l n x.1 x.2.2 K') = K.traceFunction (n + 1) (eqv x) := by
+  obtain ⟨K', ι, hglob, hloc⟩ := K.exists_weilBoundedConstructible_traces_eq
+  refine ⟨K', ι, hglob, fun n ↦ ⟨(fieldPointsEquivFrobeniusFixedPointsRefl n).symm, fun x ↦ ?_⟩⟩
+  obtain ⟨y, rfl⟩ := (fieldPointsEquivFrobeniusFixedPointsRefl n).surjective x
+  exact (hloc n y).trans (congrArg (K.traceFunction (n + 1))
+    ((fieldPointsEquivFrobeniusFixedPointsRefl n).symm_apply_apply y).symm)
 
 open ProEtale.CondensedRing in
 /-- **The Grothendieck–Lefschetz trace formula for Weil complexes**, deduced from the trace formula
