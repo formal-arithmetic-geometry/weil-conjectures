@@ -19,7 +19,9 @@ isomorphism. This is the notion of finite generation of the stalks of a construc
 any concrete coefficient category:
 
 - for modules over a ring `R` it is finite generation, `Module.Finite R M`
-  (`ModuleCat.isFinitelyGenerated_iff`); over a finite ring it is finiteness of `M`
+  (`ModuleCat.isFinitelyGenerated_iff`), equivalently the existence of an epimorphism
+  `R^n ⟶ M` from a finite free module (`ModuleCat.isFinitelyGenerated_iff_exists_epi`); over a
+  finite ring it is finiteness of `M`
   (`ModuleCat.finite_of_isFinitelyGenerated`);
 - for types it is finiteness (`CategoryTheory.ConcreteCategory.isFinitelyGenerated_iff_finite`).
 
@@ -129,5 +131,21 @@ lemma finite_of_isFinitelyGenerated [Finite R] {M : ModuleCat.{v} R}
     (h : IsFinitelyGenerated M) : Finite M :=
   have := (isFinitelyGenerated_iff M).1 h
   Module.finite_of_finite R
+
+/-- **Finite generation as an epimorphism from a finite free module.** A module `M` is finitely
+generated, as an object of the concrete category of modules, if and only if there is an
+epimorphism `R^n ⟶ M` from a finite free module. This is the form in which finite generation can
+be stated without reference to elements, see
+`AlgebraicGeometry.Scheme.isFiniteSheaf_iff_exists_epi`. -/
+lemma isFinitelyGenerated_iff_exists_epi (M : ModuleCat.{u} R) :
+    IsFinitelyGenerated M ↔
+      ∃ (n : ℕ) (f : ModuleCat.of R (Fin n → R) ⟶ M), Epi f := by
+  rw [isFinitelyGenerated_iff]
+  constructor
+  · intro _
+    obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' R M
+    exact ⟨n, ModuleCat.ofHom f, (ModuleCat.epi_iff_surjective _).2 hf⟩
+  · rintro ⟨n, f, hf⟩
+    exact Module.Finite.of_surjective f.hom ((ModuleCat.epi_iff_surjective f).1 hf)
 
 end ModuleCat
