@@ -298,10 +298,10 @@ public import WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration
 public import WeilConjectures.Algebra.Homology.ExactCouple.TotalComplexFiltration
 public import WeilConjectures.Algebra.Homology.ExactCouple.Triangulated
 public import WeilConjectures.Algebra.Homology.ExactCouple.TruncationCouple
-public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
 public import WeilConjectures.Algebra.Homology.ExtInjectiveEdgeQuasiIso
 public import WeilConjectures.Algebra.Homology.ExtInjectiveResolutionComparison
 public import WeilConjectures.Algebra.Homology.ExtResolutionDoubleComplex
+public import WeilConjectures.Algebra.Homology.ExtWithAction
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import WeilConjectures.Algebra.Homology.FilteredColimitCochainHomology
 public import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
@@ -1814,6 +1814,10 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.CupProduct
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Pullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.BaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.ExtendScalars
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.Pullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedGlobalSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
