@@ -5,28 +5,30 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.PullbackFamily
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 
 /-!
 
-# Coherence of pullbacks along intertwining morphisms
+# Iterated structure isomorphisms and stalks of pullbacks of algebras
 
-Let `P` be a family of functors `P f : D Y ⥤ D X`, indexed by the morphisms `f : X ⟶ Y` of a
-category `C`, contravariant up to composition isomorphisms `c f g : P (f ≫ g) ≅ P g ⋙ P f`
-satisfying the associativity law (a pseudofunctor `Cᵒᵖ ⥤ Cat`, without unit). The pullbacks of
-module objects on the pro-étale sites (`ProEtale.CondensedRing.upperStar`, with
-`ProEtale.CondensedRing.upperStarComp`) are such a family.
-
-For a morphism `g : W ⟶ X` intertwining endomorphisms `e_W` and `e_X` (`e_W ≫ g = g ≫ e_X`), an
-object `F` of `D X` with an isomorphism `φ : P e_X F ≅ F` is sent to `P g F` with the isomorphism
-`P e_W (P g F) ≅ P g (P e_X F) ≅ P g F` given by the comparison `pullbackComparison` and
-`P g φ`. This file proves the two coherences behind the pullback of Weil sheaves:
+For a family of pullbacks `P` with composition isomorphisms `c` (`CategoryTheory.PullbackAssoc`),
+this file proves the two coherences behind the pullback of Weil sheaves:
 
 - `CategoryTheory.Iso.powSuccStr_pullbackComparison`: the iterated structure isomorphism of the
-  pullback is the pullback of the iterated structure isomorphism, along `e_W^{n+1}`, `e_X^{n+1}`;
-- `CategoryTheory.pullbackComparison_stalkComparison`: for a point `w : S ⟶ W` fixed by `e_W` up
-  to an endomorphism `s` of `S` with `τ : P s ≅ 𝟭`, the composition isomorphism
-  `P (w ≫ g) F ≅ P w (P g F)` intertwines the two stalk structures.
+  pullback of an algebra along `g` with `e_W ≫ g = g ≫ e_X` is the pullback of the iterated
+  structure isomorphism, along `e_W^{n+1}` and `e_X^{n+1}`;
+- `CategoryTheory.IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso`: the composition
+  isomorphism `P w (P g F) ≅ P (w ≫ g) F` is an isomorphism between the stalk at `w` of the
+  `(n + 1)`-st iterate of the pullback of `F`, and the stalk at `w ≫ g` of the `(n + 1)`-st iterate
+  of `F` (`CategoryTheory.IsoAlgebra.nonempty_obj_obj_iso_of_eq` is the form used for concrete
+  instances, whose functors are given through equations).
+
+## Implementation notes
+
+The statements are generic in the family of pullbacks. Instantiated directly for the pullbacks
+of module objects, the elaborator and the kernel unfold the pullbacks while comparing terms that
+are equal only up to unfolding; in the generic setting these comparisons are cheap.
 
 -/
 
@@ -36,98 +38,14 @@ universe v u
 
 open CategoryTheory
 
-namespace CategoryTheory.Over
-
-/-- An equation `a ≫ b = c ≫ d` in `Over T` holds for the underlying morphisms. -/
-lemma left_comp_left_eq_of_comp_eq {S : Type*} [Category S] {T : S} {A B C D : Over T}
-    {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D} (h : a ≫ b = c ≫ d) :
-    a.left ≫ b.left = c.left ≫ d.left := by
-  rw [← Over.comp_left, h, Over.comp_left]
-
-end CategoryTheory.Over
-
 namespace CategoryTheory
 
 variable {C : Type u} [Category.{v} C] {D : C → Type*} [∀ X, Category (D X)]
   (P : ∀ {X Y : C}, (X ⟶ Y) → D Y ⥤ D X)
   (c : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), P (f ≫ g) ≅ P g ⋙ P f)
 
-/-- The associativity law of the composition isomorphisms `c f g : P (f ≫ g) ≅ P g ⋙ P f` of a
-family of pullbacks. -/
-def PullbackAssoc : Prop :=
-  ∀ {X Y Z V : C} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V),
-    c f (g ≫ h) ≪≫ Functor.isoWhiskerRight (c g h) (P f) ≪≫ (P h).associator (P g) (P f) =
-      eqToIso (congrArg (fun x ↦ P x) (Category.assoc f g h).symm) ≪≫ c (f ≫ g) h ≪≫
-        Functor.isoWhiskerLeft (P h) (c f g)
-
 variable {P c}
 
-/-- The associativity law of a family of pullbacks, at an object. -/
-lemma PullbackAssoc.hom_app (hc : PullbackAssoc P c) {X Y Z V : C} (f : X ⟶ Y) (g : Y ⟶ Z)
-    (h : Z ⟶ V) (M : D V) :
-    (c (f ≫ g) h).hom.app M ≫ (c f g).hom.app ((P h).obj M) =
-      eqToHom (by rw [Category.assoc]) ≫ (c f (g ≫ h)).hom.app M ≫
-        (P f).map ((c g h).hom.app M) := by
-  have := congrArg (fun e ↦ e.hom.app M) (hc f g h)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Category.comp_id, eqToIso.hom, eqToHom_app] at this
-  rw [this, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-
-/-- The associativity law, solved for `c f (g ≫ h)` followed by `P f (c g h)`. -/
-@[reassoc]
-lemma PullbackAssoc.hom_app_comp_map_hom_app (hc : PullbackAssoc P c) {X Y Z V : C} (f : X ⟶ Y)
-    (g : Y ⟶ Z) (h : Z ⟶ V) (M : D V) :
-    (c f (g ≫ h)).hom.app M ≫ (P f).map ((c g h).hom.app M) =
-      eqToHom (by rw [Category.assoc]) ≫ (c (f ≫ g) h).hom.app M ≫
-        (c f g).hom.app ((P h).obj M) := by
-  rw [hc.hom_app f g h M, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-
-section Transport
-
-variable {X Y Z : C}
-
-include c in
-/-- Transport of the composition isomorphism along an equation of its first morphism. -/
-@[reassoc]
-lemma pullbackComp_hom_app_comp_eqToHom_left {f f' : X ⟶ Y} (h : f = f') (g : Y ⟶ Z)
-    (M : D Z) :
-    (c f g).hom.app M ≫ eqToHom (by rw [h]) =
-      eqToHom (by rw [h]) ≫ (c f' g).hom.app M := by
-  subst h
-  simp
-
-include c in
-/-- Transport of the composition isomorphism along an equation of its second morphism. -/
-@[reassoc]
-lemma pullbackComp_hom_app_comp_eqToHom_right {g g' : Y ⟶ Z} (f : X ⟶ Y) (h : g = g')
-    (M : D Z) :
-    (c f g).hom.app M ≫ eqToHom (by rw [h]) =
-      eqToHom (by rw [h]) ≫ (c f g').hom.app M := by
-  subst h
-  simp
-
-/-- Transport of the image of a morphism along an equation of morphisms. -/
-@[reassoc]
-lemma map_comp_eqToHom_of_eq {f f' : X ⟶ Y} (h : f = f') {M N : D Y} (u : M ⟶ N) :
-    (P f).map u ≫ eqToHom (by rw [h]) = eqToHom (by rw [h]) ≫ (P f').map u := by
-  subst h
-  simp
-
-end Transport
-
-/-- The comparison `P g ⋙ P e_W ≅ P e_X ⋙ P g` for a morphism `g : W ⟶ X` with
-`e_W ≫ g = g ≫ e_X`: the composite of the composition isomorphisms and the transport along
-`e_W ≫ g = g ≫ e_X`. -/
-def pullbackComparison {W X : C} (g : W ⟶ X) (eW : W ⟶ W) (eX : X ⟶ X)
-    (hg : eW ≫ g = g ≫ eX) : P g ⋙ P eW ≅ P eX ⋙ P g :=
-  (c eW g).symm ≪≫ eqToIso (congrArg (fun f ↦ P f) hg) ≪≫ c g eX
-
-lemma pullbackComparison_hom_app {W X : C} (g : W ⟶ X) (eW : W ⟶ W) (eX : X ⟶ X)
-    (hg : eW ≫ g = g ≫ eX) (M : D X) :
-    (pullbackComparison (c := c) g eW eX hg).hom.app M =
-      (c eW g).inv.app M ≫ eqToHom (by rw [hg]) ≫ (c g eX).hom.app M := by
-  simp [pullbackComparison, eqToHom_app]
 
 /-- The key identity behind `Iso.powSuccStr_pullbackComparison`: for `E ≫ g = g ≫ E'` and
 `e ≫ g = g ≫ e'`, the two ways of identifying `P (E ≫ e) (P g F)` with
@@ -185,7 +103,8 @@ theorem Iso.powSuccStr_pullbackComparison (hc : PullbackAssoc P c) {W X : C} (eW
     rw [reassoc_of% nat₁, map_comp_eqToHom_of_eq_assoc hn, reassoc_of% nat₂,
       pullbackComparison_comp_aux_assoc hc g _ _ _ _ hn hg F]
 
-/-- A version of `Iso.powSuccStr_pullbackComparison` for a structure isomorphism `ψ` of `P g F` given
+/-- A version of `Iso.powSuccStr_pullbackComparison` for a structure isomorphism `ψ` of `P g F`
+given
 through its underlying morphism. -/
 theorem Iso.powSuccStr_hom_eq_of_hom_eq (hc : PullbackAssoc P c) {W X : C} (eW : W ≅ W)
     (eX : X ≅ X) (g : W ⟶ X) (hg : eW.hom ≫ g = g ≫ eX.hom) {F : D X}
@@ -200,74 +119,6 @@ theorem Iso.powSuccStr_hom_eq_of_hom_eq (hc : PullbackAssoc P c) {W X : C} (eW :
     Iso.ext hψ
   exact Iso.powSuccStr_pullbackComparison hc eW eX g hg φ n
 
-section Stalk
-
-variable {S : C} {s : S ⟶ S}
-
-/-- The stalk comparison `P x ≅ P e ⋙ P x` at a point `x : S ⟶ V` fixed by `e : V ⟶ V` up to an
-endomorphism `s` of `S` with `τ : P s ≅ 𝟭` (`x ≫ e = s ≫ x`): the composite
-`P x ≅ P x ⋙ P s ≅ P (s ≫ x) = P (x ≫ e) ≅ P e ⋙ P x`. -/
-def stalkComparison (τ : P s ≅ 𝟭 (D S)) {V : C} (x : S ⟶ V) (e : V ⟶ V) (h : x ≫ e = s ≫ x) :
-    P x ⋙ 𝟭 (D S) ≅ P e ⋙ P x :=
-  Functor.isoWhiskerLeft _ τ.symm ≪≫ (c s x).symm ≪≫ eqToIso (congrArg (fun f ↦ P f) h.symm) ≪≫
-    c x e
-
-lemma stalkComparison_hom_app (τ : P s ≅ 𝟭 (D S)) {V : C} (x : S ⟶ V) (e : V ⟶ V)
-    (h : x ≫ e = s ≫ x) (M : D V) :
-    (stalkComparison (c := c) τ x e h).hom.app M =
-      τ.inv.app ((P x).obj M) ≫ (c s x).inv.app M ≫ eqToHom (by rw [h]) ≫ (c x e).hom.app M := by
-  simp [stalkComparison, eqToHom_app]
-
-/-- **Stalks of a pullback**: for `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`, an object `F` of `D X`
-with `φ : P e_X F ≅ F` and a point `w : S ⟶ W` with `w ≫ e_W = s ≫ w`, the composition
-isomorphism `P w (P g F) ≅ P (w ≫ g) F` intertwines the stalk structure of the pullback
-`(P g F, pullbackComparison ≫ P g φ)` at `w` with the stalk structure of `(F, φ)` at `w ≫ g`. -/
-theorem stalkComparison_pullbackComparison (hc : PullbackAssoc P c) (τ : P s ≅ 𝟭 (D S))
-    {W X : C} (g : W ⟶ X) (eW : W ⟶ W) (eX : X ⟶ X) (hg : eW ≫ g = g ≫ eX) {F : D X}
-    (φ : (P eX).obj F ≅ F) (w : S ⟶ W) (hw : w ≫ eW = s ≫ w)
-    (hwg : (w ≫ g) ≫ eX = s ≫ (w ≫ g)) :
-    (stalkComparison (c := c) τ w eW hw).hom.app ((P g).obj F) ≫
-        (P w).map ((pullbackComparison (c := c) g eW eX hg).hom.app F ≫ (P g).map φ.hom) ≫
-        (c w g).inv.app F =
-      (c w g).inv.app F ≫ (stalkComparison (c := c) τ (w ≫ g) eX hwg).hom.app F ≫
-        (P (w ≫ g)).map φ.hom := by
-  have nat₁ := (c w g).inv.naturality φ.hom
-  have nat₂ := τ.inv.naturality ((c w g).inv.app F)
-  simp only [Functor.comp_map, Functor.id_map] at nat₁ nat₂
-  simp only [stalkComparison_hom_app, pullbackComparison_hom_app, Functor.map_comp,
-    Category.assoc]
-  rw [nat₁, reassoc_of% nat₂]
-  refine congrArg (τ.inv.app _ ≫ ·) ?_
-  simp only [← Category.assoc]
-  refine congrArg (· ≫ (P (w ≫ g)).map φ.hom) ?_
-  simp only [Category.assoc]
-  rw [← cancel_epi ((c (s ≫ w) g).hom.app F ≫ (c s w).hom.app ((P g).obj F))]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-  have k₁ : (P s).map ((c w g).hom.app F) ≫ (P s).map ((c w g).inv.app F) = 𝟙 _ := by
-    rw [← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
-  have k₂ : (P w).map ((c eW g).hom.app F) ≫ (P w).map ((c eW g).inv.app F) = 𝟙 _ := by
-    rw [← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
-  rw [reassoc_of% (hc.hom_app s w g F), reassoc_of% k₁, Iso.hom_inv_id_app_assoc,
-    pullbackComp_hom_app_comp_eqToHom_left_assoc (c := c) hw.symm,
-    reassoc_of% (hc.hom_app w eW g F), reassoc_of% k₂, eqToHom_map, pullbackComp_hom_app_comp_eqToHom_right_assoc (c := c) w hg,
-    hc.hom_app_comp_map_hom_app_assoc, Iso.hom_inv_id_app, Category.comp_id]
-  simp only [eqToHom_trans_assoc]
-
-/-- `stalkComparison_pullbackComparison`, for a structure isomorphism `ψ` of the pullback given
-through its underlying morphism, bracketed as the condition on a morphism of algebras. -/
-theorem stalkComparison_pullbackComparison' (hc : PullbackAssoc P c) (τ : P s ≅ 𝟭 (D S))
-    {W X : C} (g : W ⟶ X) (eW : W ⟶ W) (eX : X ⟶ X) (hg : eW ≫ g = g ≫ eX) {F : D X}
-    (φ : (P eX).obj F ≅ F) (ψ : (P eW).obj ((P g).obj F) ⟶ (P g).obj F)
-    (hψ : ψ = (pullbackComparison (c := c) g eW eX hg).hom.app F ≫ (P g).map φ.hom)
-    (w : S ⟶ W) (hw : w ≫ eW = s ≫ w) (hwg : (w ≫ g) ≫ eX = s ≫ (w ≫ g)) :
-    (c w g).inv.app F ≫ ((stalkComparison (c := c) τ (w ≫ g) eX hwg).hom.app F ≫
-        (P (w ≫ g)).map φ.hom) =
-      ((stalkComparison (c := c) τ w eW hw).hom.app ((P g).obj F) ≫ (P w).map ψ) ≫
-        (c w g).inv.app F := by
-  rw [hψ, Category.assoc]
-  exact (stalkComparison_pullbackComparison hc τ g eW eX hg φ w hw hwg).symm
-
-end Stalk
 
 /-! ### Algebras over the overcategory -/
 
@@ -303,7 +154,8 @@ noncomputable def IsoAlgebra.overPowSucc {X : Over T} (e : X ≅ X) (n : ℕ)
 
 variable (c) in
 /-- The stalk of algebras at a point `x : S ⟶ V` with `x ≫ e = s ≫ x`, for `τ : P s ≅ 𝟭`. -/
-noncomputable def IsoAlgebra.stalk {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S)) {V : C} (x : S ⟶ V) (e : V ⟶ V)
+noncomputable def IsoAlgebra.stalk {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S)) {V : C} (x : S ⟶ V)
+    (e : V ⟶ V)
     (h : x ≫ e = s ≫ x) :
     Endofunctor.IsoAlgebra (P e) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (stalkComparison (c := c) τ x e h)
@@ -335,7 +187,8 @@ noncomputable def IsoAlgebra.frobeniusStalk {S : C} {s : S ⟶ S} (τ : P s ≅ 
   (IsoAlgebra.frobeniusStalkFunctor c τ e n x hx).obj G
 
 variable (c) in
-/-- The Frobenius stalk at `w` of the pullback of an algebra along `g` (`IsoAlgebra.overPullback`). -/
+/-- The Frobenius stalk at `w` of the pullback of an algebra along `g`
+(`IsoAlgebra.overPullback`). -/
 noncomputable def IsoAlgebra.pullbackFrobeniusStalk {X W : Over T} (eX : X ≅ X) (eW : W ≅ W)
     {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom) (n : ℕ) {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S))
     (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
@@ -397,38 +250,6 @@ theorem IsoAlgebra.nonempty_obj_obj_iso_of_eq (hc : PullbackAssoc P c) {X W : Ov
   cases hΨ
   exact IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg
 
-/-- The traces of the structure isomorphisms of the Frobenius stalks of `IsoAlgebra.overPullback`
-agree (`IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso`). -/
-theorem IsoAlgebra.categoricalTrace_frobeniusStalkFunctor_overPullback (hc : PullbackAssoc P c)
-    {X W : Over T} (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
-    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
-    (τ : P s ≅ 𝟭 (D S)) {instM : MonoidalCategory (D S)} {instB : BraidedCategory (D S)}
-    {instP : Preadditive (D S)} (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
-    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x) :
-    categoricalTrace ((IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw).obj
-        ((IsoAlgebra.overPullback c eX eW hg).obj F)).str.hom =
-      categoricalTrace ((IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg).obj F).str.hom :=
-  (Endofunctor.IsoAlgebra.categoricalTrace_str_congr (Classical.choice
-    (IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg))).symm
-
-/-- The traces of the Frobenius stalks of `IsoAlgebra.overPullback`, for functors given through
-equations, so that concrete instances can use their own functors. -/
-theorem IsoAlgebra.categoricalTrace_obj_obj_eq_of_eq (hc : PullbackAssoc P c) {X W : Over T}
-    (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
-    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
-    (τ : P s ≅ 𝟭 (D S)) {instM : MonoidalCategory (D S)} {instB : BraidedCategory (D S)}
-    {instP : Preadditive (D S)} (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
-    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x)
-    (Λ₁ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (P eW.hom.left))
-    (hΛ₁ : Λ₁ = IsoAlgebra.overPullback c eX eW hg)
-    (Φ : Endofunctor.IsoAlgebra (P eW.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
-    (hΦ : Φ = IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw)
-    (Ψ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
-    (hΨ : Ψ = IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg) :
-    categoricalTrace (Φ.obj (Λ₁.obj F)).str.hom = categoricalTrace (Ψ.obj F).str.hom := by
-  subst hΛ₁ hΦ hΨ
-  exact (Endofunctor.IsoAlgebra.categoricalTrace_str_congr (Classical.choice
-    (IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg))).symm
 
 end Over
 

@@ -8016,6 +8016,7 @@ public import WeilConjectures.CategoryTheory.Pro.Basic
 public import WeilConjectures.CategoryTheory.Pro.Generating
 public import WeilConjectures.CategoryTheory.Pro.HypercoverColimit
 public import WeilConjectures.CategoryTheory.Pro.PresheafColimit
+public import WeilConjectures.CategoryTheory.PullbackFamily
 public import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 public import WeilConjectures.CategoryTheory.RepleteSheafTopos
 public import WeilConjectures.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
@@ -12464,6 +12465,7 @@ public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
+public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
@@ -12473,6 +12475,7 @@ public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.SupportedPairing
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
+public import WeilConjectures.TraceFormula.WeilSheafUpperStar
 public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology

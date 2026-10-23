@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 
 /-!
 
@@ -113,7 +114,7 @@ lemma weilSheafStalkTrace_eq_of_iso (n : ℕ) {x : Spec (.of (AlgebraicClosure k
       (WeilSheaf.powSuccStalkFunctor ℓ n x' hx').obj F) :
     weilSheafStalkTrace ℓ n x hx G = weilSheafStalkTrace ℓ n x' hx' F :=
   (IsoAlgebra.categoricalTrace_str_congr i).symm
-
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **Stalks of a pullback of Weil sheaves**: for `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`, a Weil
 sheaf `F` for `e_X` and a point `w̄` of `W` of degree `n + 1`, the trace of the `(n + 1)`-st
 Frobenius on the stalk of `g^* F` at `w̄` is its trace on the stalk of `F` at `w̄ ≫ g`. The
@@ -142,8 +143,32 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
       (heq_of_eq (weilSheafUpperStar_eq ℓ eX eW hg))
       (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eW n _ _))
       (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eX n _ _)))
-
   exact weilSheafStalkTrace_eq_of_iso ℓ eX eW n I
+
+/-- **The homology sheaves of a pullback of Weil objects** (still `sorry`): for `g : W ⟶ X` with
+`e_W ≫ g = g ≫ e_X`, the Weil sheaf `Hʲ(Lg^* K)` is isomorphic to the pullback `g^* Hʲ(K)` of the
+Weil sheaf `Hʲ(K)`.
+
+The isomorphism is the commutation `θ_g : Hʲ ⋙ g^* ≅ Lg^* ⋙ Hʲ` of the exact functor `g^*` with
+homology. It is compatible with the Weil structures because `θ` is pseudonatural, and the
+formal part of the argument is proved:
+`CategoryTheory.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso` gives the isomorphism from
+pseudonaturality (`CategoryTheory.PullbackPseudonatural`), and
+`CategoryTheory.PullbackPseudonatural.lifted` reduces pseudonaturality on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` to
+pseudonaturality on the derived categories of module objects. The latter is the composition
+law of `CategoryTheory.Functor.leftDerivedFunctorHomologyFunctorIso`
+(`Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorNatIso` and
+`Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorCompIso`) applied
+to the composition isomorphisms `upperStarComp`. What is missing is the instantiation of these
+generic statements for the pullbacks of module objects. -/
+theorem nonempty_homologyFunctor_weilUpperStar_iso [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom]
+    [IsSeparated W.hom] (K : WeilBoundedConstructible ℓ eX.hom) (j : ℤ) :
+    Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eW j).obj
+        ((weilUpperStar ℓ eW.hom eX.hom g hg).obj K) ≅
+      (weilSheafUpperStar ℓ eX eW hg).obj
+        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) :=
+  sorry
 
 end WeilSheafPullback
 
