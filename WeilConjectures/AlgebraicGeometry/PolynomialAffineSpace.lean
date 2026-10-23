@@ -16,6 +16,14 @@ For a field `k`, `AlgebraicGeometry.polyAffine k N = Spec k[X₀, …, X_{N-1}]`
 the first coordinate, which is smooth of relative dimension one. Every affine scheme of finite type
 over `k` is a closed subscheme of some `𝔸ᴺ_k`
 (`AlgebraicGeometry.exists_isClosedImmersion_polyAffine`), and `𝔸⁰_k = Spec k`.
+
+## Implementation notes
+
+The underlying scheme of `polyAffine k N` is isomorphic to `Mathlib`'s `𝔸(Fin N; Spec k)`
+(`AlgebraicGeometry.AffineSpace.SpecIso`), which is defined as a base change of `𝔸(Fin N; Spec ℤ)`.
+The spectrum of the polynomial ring is used here because the arguments are ring-theoretic
+(presentations of finitely generated `k`-algebras, the morphism `MvPolynomial.rename Fin.succ`), and
+morphisms out of it are `Spec.map` of ring homomorphisms.
 -/
 
 @[expose] public section

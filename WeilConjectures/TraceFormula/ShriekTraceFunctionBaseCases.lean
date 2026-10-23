@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
 public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
+public import WeilConjectures.TraceFormula.WeilBaseChange
 
 /-!
 
@@ -60,8 +61,11 @@ they have finite order, so that `shriekTraceFunctionAt_comp` composes the base c
 ## Sorried inputs
 
 - `ProEtale.CondensedRing.shriekTraceFunctionAt_of_isFinite_of_etale`;
-- `ProEtale.CondensedRing.shriekTraceFunctionAt_of_smoothOfRelativeDimension_one`;
-- `ProEtale.CondensedRing.shriekTraceFunctionAt_of_isClosedImmersion`.
+- `ProEtale.CondensedRing.shriekTraceFunctionAt_of_smoothOfRelativeDimension_one`.
+
+The closed-immersion case is proved here from the dimension-zero case (for the identity of `X`)
+and compactly supported base change of Weil objects
+(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar_weilLowerShriek`).
 
 -/
 
@@ -71,41 +75,70 @@ universe u
 
 open CategoryTheory Limits
 
+namespace AlgebraicGeometry
+
+/-! ### The open complement of a stable closed immersion -/
+
+section Complement
+
+variable {S : Scheme.{u}}
+
+/-- If `a ≫ f = f ≫ b'` with `b ≫ b' = 𝟙`, then `b` preserves the complement of the image of
+`f`. -/
+lemma notMem_range_of_comp_eq {X Y : Over S} (f : X ⟶ Y) {a : X ⟶ X} {b b' : Y ⟶ Y}
+    (hb : b ≫ b' = 𝟙 Y) (h : a ≫ f = f ≫ b') {y : Y.left} (hy : y ∉ Set.range f.left.base) :
+    b.left.base y ∉ Set.range f.left.base := by
+  rintro ⟨x, hx⟩
+  refine hy ⟨a.left.base x, ?_⟩
+  have h₁ : f.left.base (a.left.base x) = b'.left.base (f.left.base x) := congr(($h).left.base x)
+  have h₂ : b'.left.base (b.left.base y) = y := congr(($hb).left.base y)
+  rw [h₁, hx, h₂]
+
+/-- The open complement `V` of a closed immersion `f : X ⟶ Y` stable under automorphisms
+`e_X`, `e_Y`, as a scheme over `S` with the restriction `e_V` of `e_Y`. -/
+lemma exists_isOpenImmersion_range_eq_compl {X Y : Over S} [IsLocallyNoetherian Y.left]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (eX : X ≅ X)
+    (eY : Y ≅ Y) (f : X ⟶ Y) (hf : eX.hom ≫ f = f ≫ eY.hom) [IsClosedImmersion f.left] :
+    ∃ (V : Over S) (_ : LocallyOfFiniteType V.hom) (_ : QuasiCompact V.hom)
+      (_ : IsSeparated V.hom) (eV : V ≅ V) (j : V ⟶ Y) (_ : IsOpenImmersion j.left)
+      (_ : eV.hom ≫ j = j ≫ eY.hom), Set.range j.left.base = (Set.range f.left.base)ᶜ := by
+  have hinv : eX.inv ≫ f = f ≫ eY.inv := by
+    rw [Iso.inv_comp_eq, reassoc_of% hf, Iso.hom_inv_id, Category.comp_id]
+  let U : Y.left.Opens :=
+    ⟨(Set.range f.left.base)ᶜ, f.left.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hU₁ : U ≤ eY.hom.left ⁻¹ᵁ U := fun z hz ↦ notMem_range_of_comp_eq f eY.hom_inv_id hinv hz
+  have hU₂ : U ≤ eY.inv.left ⁻¹ᵁ U := fun z hz ↦ notMem_range_of_comp_eq f eY.inv_hom_id hf hz
+  refine ⟨Over.mk (U.ι ≫ Y.hom), inferInstanceAs (LocallyOfFiniteType (U.ι ≫ Y.hom)),
+    inferInstanceAs (QuasiCompact (U.ι ≫ Y.hom)), inferInstanceAs (IsSeparated (U.ι ≫ Y.hom)),
+    Over.isoMk ⟨eY.hom.left.resLE U U hU₁, eY.inv.left.resLE U U hU₂, ?_, ?_⟩ ?_,
+    Over.homMk U.ι rfl, inferInstanceAs (IsOpenImmersion U.ι), ?_, ?_⟩
+  · simp [← cancel_mono U.ι, ← Over.comp_left]
+  · simp [← cancel_mono U.ι, ← Over.comp_left]
+  · simp
+  · ext1
+    simp
+  · exact U.range_ι
+
+/-- The square of the empty scheme over two morphisms with disjoint images is cartesian. -/
+lemma isPullback_emptyOverTo {X Y V : Over S} (f : X ⟶ Y) (j : V ⟶ Y)
+    (h : Disjoint (Set.range f.left.base) (Set.range j.left.base)) :
+    IsPullback (Scheme.emptyOverTo X) (Scheme.emptyOverTo V) f j := by
+  have hE (s : PullbackCone f j) : IsEmpty s.pt.left :=
+    Scheme.isEmpty_of_commSq ⟨by rw [← Over.comp_left, s.condition, Over.comp_left]⟩ h
+  refine IsPullback.of_isLimit (PullbackCone.IsLimit.mk (Scheme.emptyOverTo_ext _ _)
+    (fun s ↦ Over.homMk ((@isInitialOfIsEmpty _ (hE s)).to _)
+      ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _))
+    (fun s ↦ Over.OverMorphism.ext ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _))
+    (fun s ↦ Over.OverMorphism.ext ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _))
+    (fun s _ _ _ ↦ Over.OverMorphism.ext ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _)))
+
+end Complement
+
+end AlgebraicGeometry
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-! ### The empty scheme -/
-
-section Empty
-
-variable {k : Type u} [Field k]
-
-/-- The empty scheme over `Spec k`. -/
-noncomputable def emptyOver : Over (Spec (.of k)) := Over.mk (Scheme.emptyTo _)
-
-instance : IsEmpty (emptyOver (k := k)).left := inferInstanceAs (IsEmpty (∅ : Scheme))
-
-instance : LocallyOfFiniteType (emptyOver (k := k)).hom :=
-  inferInstanceAs (LocallyOfFiniteType (Scheme.emptyTo _))
-
-instance : QuasiCompact (emptyOver (k := k)).hom :=
-  inferInstanceAs (QuasiCompact (Scheme.emptyTo _))
-
-instance : IsSeparated (emptyOver (k := k)).hom :=
-  inferInstanceAs (IsSeparated (Scheme.emptyTo _))
-
-/-- The morphism from the empty scheme. -/
-noncomputable def emptyOverTo (X : Over (Spec (.of k))) : emptyOver ⟶ X :=
-  Over.homMk (Scheme.emptyTo _) (Scheme.empty_ext _ _)
-
-instance (X : Over (Spec (.of k))) : IsOpenImmersion (emptyOverTo X).left :=
-  inferInstanceAs (IsOpenImmersion (Scheme.emptyTo _))
-
-lemma emptyOverTo_ext {X : Over (Spec (.of k))} (f g : emptyOver ⟶ X) : f = g :=
-  Over.OverMorphism.ext (Scheme.empty_ext _ _)
-
-end Empty
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Finite k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
@@ -165,20 +198,69 @@ theorem shriekTraceFunctionAt_of_smoothOfRelativeDimension_one {X Y : Over (Spec
     ShriekTraceFunctionAt ℓ eX eY hf :=
   sorry
 
-/-- **Closed immersions** (still `sorry`): the sheaf–function compatibility holds along a closed
+/-- **Closed immersions**: the sheaf–function compatibility holds along a closed
 immersion `i : X ⟶ Y`. For a point `ȳ` of `Y` of degree `n + 1`: if `ȳ = x̄ ≫ i`, then
-`t(Ri_! K; ȳ) = t(Li^* Ri_! K; x̄) = t(K; x̄)` by the stalks of pullbacks
-(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar`) and the isomorphism
-`Li^* Ri_! K ≅ K` of Weil objects, the compactly supported base change along the cartesian square
-`(𝟙, 𝟙, i, i)` (`i` is a monomorphism); otherwise `ȳ` lies on the open complement `V`, and
+`t(Ri_! K; ȳ) = t(Li^* Ri_! K; x̄)` by the stalks of pullbacks
+(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar`), `= t(R𝟙_! L𝟙^* K; x̄)` by compactly
+supported base change along the cartesian square `(𝟙, 𝟙, i, i)` (`i` is a monomorphism), and
+`= t(K; x̄)` by the dimension-zero case for `𝟙_X`; the sum on the right has the single term `x̄`.
+Otherwise `ȳ` lies on the open complement `V`, and
 `Lj^* Ri_! K = 0` by base change along the empty square `V ×_Y X = ∅`. -/
 theorem shriekTraceFunctionAt_of_isClosedImmersion {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
     [IsClosedImmersion f.left] (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
-    ShriekTraceFunctionAt ℓ eX eY hf :=
-  sorry
+    ShriekTraceFunctionAt ℓ eX eY hf := by
+  intro K n y
+  by_cases hy : y.1.base default ∈ Set.range f.left.base
+  · -- `ȳ = x̄ ≫ f`: base change along the cartesian square `(𝟙, 𝟙, f, f)`
+    have : Mono f := Over.mono_of_mono_left f
+    have hsub : f.left.ker ≤ y.1.ker := by
+      rw [Scheme.IdealSheafData.le_ker_iff_range_subset_support, Scheme.Hom.support_ker,
+        f.left.isClosedMap.isClosed_range.closure_eq]
+      rintro _ ⟨a, rfl⟩
+      rwa [Subsingleton.elim a default]
+    obtain ⟨v, rfl⟩ := exists_frobeniusFixedPointsMap_eq eY hf y
+      (IsClosedImmersion.lift f.left y.1 hsub) (IsClosedImmersion.lift_fac _ _ _)
+    have hid : eX.hom ≫ 𝟙 X = 𝟙 X ≫ eX.hom := by simp
+    have : IsFinite (𝟙 X : X ⟶ X).left := by rw [Over.id_left]; infer_instance
+    have : Etale (𝟙 X : X ⟶ X).left := by rw [Over.id_left]; infer_instance
+    rw [← weilStalkSupertrace_weilUpperStar ℓ eY eX hf,
+      weilStalkSupertrace_weilUpperStar_weilLowerShriek ℓ ((mono_iff_isPullback f).1 ‹_›) hid
+        hid hf hf,
+      shriekTraceFunctionAt_of_isFinite_of_etale ℓ k eX eX hid he _ n v]
+    have hv : frobeniusFixedPointsMap eX eX hid n v = v :=
+      Subtype.ext (by simp [frobeniusFixedPointsMap])
+    refine (finsum_eq_single _ ⟨v, by simp⟩ fun x hx ↦
+        (hx (by exact Subtype.ext (Subtype.ext (by simpa using x.2)))).elim).trans
+      ((finsum_eq_single _ ⟨v, rfl⟩ fun x hx ↦
+        (hx (by exact Subtype.ext (Subtype.ext ((cancel_mono f.left).1 x.2)))).elim).trans
+        ?_).symm
+    rw [weilStalkSupertrace_weilUpperStar ℓ eX eX hid K n v, hv]
+  · -- `ȳ` on the open complement `V`: base change along the empty square `∅ = V ×_Y X`
+    have : IsEmpty {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1} :=
+      ⟨fun x ↦ hy ⟨x.1.1.base default, by
+        have h := congrArg (fun g ↦ g.base default) x.2; exact h⟩⟩
+    rw [finsum_of_isEmpty]
+    have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+    obtain ⟨V, _, _, _, eV, j, _, hj, hrange⟩ :=
+      exists_isOpenImmersion_range_eq_compl eX eY f hf
+    have hyV : y.1.base default ∈ Set.range j.left.base := hrange ▸ hy
+    have hsub : Set.range y.1.base ⊆ Set.range j.left.base := by
+      rintro _ ⟨a, rfl⟩
+      rwa [Subsingleton.elim a default]
+    obtain ⟨v, rfl⟩ := exists_frobeniusFixedPointsMap_eq eY hj y
+      (IsOpenImmersion.lift j.left y.1 hsub) (IsOpenImmersion.lift_fac _ _ _)
+    have h₀ : (Iso.refl emptyOver).hom ≫ emptyOverTo X = emptyOverTo X ≫ eX.hom :=
+      emptyOverTo_ext _ _
+    have h₀' : (Iso.refl emptyOver).hom ≫ emptyOverTo V = emptyOverTo V ≫ eV.hom :=
+      emptyOverTo_ext _ _
+    rw [← weilStalkSupertrace_weilUpperStar ℓ eY eV hj,
+      weilStalkSupertrace_weilUpperStar_weilLowerShriek ℓ
+        (isPullback_emptyOverTo f j (hrange ▸ disjoint_compl_right)) h₀ h₀' hf hj,
+      shriekTraceFunctionAt_of_isEmpty ℓ (Iso.refl _) eV h₀' _ n v]
+    exact finsum_eq_zero_of_forall_eq_zero fun x ↦ isEmptyElim (x.1.1.base default)
 
 variable {ℓ k}
 

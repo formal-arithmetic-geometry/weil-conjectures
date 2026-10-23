@@ -24,7 +24,16 @@ under base change.
 
 For an endomorphism `φ` of a scheme `Y` separated over `S`, `Scheme.fixedLocus φ` is the closed
 subscheme of `Y` where `φ` is the identity (the equalizer of `𝟙` and `φ`); an automorphism `e`
-commuting with `φ` restricts to it (`Scheme.fixedLocusIso`).
+commuting with `φ` restricts to it (`Scheme.fixedLocusIso`). The empty scheme over `S` is
+`Scheme.emptyOver`, with its morphisms `Scheme.emptyOverTo`.
+
+## Implementation notes
+
+`Scheme.overProd W T` is isomorphic to the binary product `W ⨯ T` in `Over S` (a pullback over
+`S`), but is defined directly as `pullback W.hom T.hom` over `S`: its underlying scheme is then
+literally a pullback of schemes, so that the instances of `Mathlib` for pullbacks (finiteness,
+étaleness, smoothness, separatedness of the projections) apply to `(overProd W T).left` and to
+`(overProdMap a b).left` without transport along the forgetful functor `Over S ⥤ Scheme`.
 -/
 
 @[expose] public section
@@ -215,5 +224,35 @@ lemma fixedLocusIso_hom_ι :
   simp [fixedLocusIso]
 
 end FixedLocus
+
+/-! ### The empty scheme -/
+
+section Empty
+
+/-- The empty scheme over `S`. -/
+noncomputable def emptyOver : Over S := Over.mk (Scheme.emptyTo S)
+
+instance : IsEmpty (emptyOver (S := S)).left := inferInstanceAs (IsEmpty (∅ : Scheme))
+
+instance : LocallyOfFiniteType (emptyOver (S := S)).hom :=
+  inferInstanceAs (LocallyOfFiniteType (Scheme.emptyTo _))
+
+instance : QuasiCompact (emptyOver (S := S)).hom :=
+  inferInstanceAs (QuasiCompact (Scheme.emptyTo _))
+
+instance : IsSeparated (emptyOver (S := S)).hom :=
+  inferInstanceAs (IsSeparated (Scheme.emptyTo _))
+
+/-- The morphism from the empty scheme. -/
+noncomputable def emptyOverTo (X : Over S) : emptyOver ⟶ X :=
+  Over.homMk (Scheme.emptyTo _) (Scheme.empty_ext _ _)
+
+instance (X : Over S) : IsOpenImmersion (emptyOverTo X).left :=
+  inferInstanceAs (IsOpenImmersion (Scheme.emptyTo _))
+
+lemma emptyOverTo_ext {X : Over S} (f g : emptyOver ⟶ X) : f = g :=
+  Over.OverMorphism.ext (Scheme.empty_ext _ _)
+
+end Empty
 
 end AlgebraicGeometry.Scheme
