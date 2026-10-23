@@ -29,6 +29,8 @@ We derive the properties of the morphisms involved in a compactification:
   and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
   hence a closed immersion with clopen range;
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
+- `Compactification.ofIsOpenImmersion`: an open immersion is compactified by the identity of
+  its target.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
 `Nonempty (Compactification f)`. Nagata's compactification theorem asserts
@@ -73,6 +75,15 @@ def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   g := f
   i := 𝟙 X
   comm := (Category.id_comp f).symm
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+/-- An open immersion is compactified by the identity of its target. -/
+def ofIsOpenImmersion (f : X ⟶ Y) [IsOpenImmersion f] : Compactification f where
+  Z := Y
+  g := 𝟙 Y
+  i := f
+  comm := (Category.comp_id f).symm
   isProper := inferInstance
   isOpenImmersion := inferInstance
 

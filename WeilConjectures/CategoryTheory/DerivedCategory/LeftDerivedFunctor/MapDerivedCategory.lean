@@ -31,11 +31,11 @@ the two constructions agree:
 From this compatibility we derive, still for exact functors, the isomorphisms expressing
 that left derivation commutes with the constructions preserved by `mapDerivedCategory`
 (themselves in `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`:
-`Functor.mapDerivedCategoryNatIso`, `Functor.mapDerivedCategoryCompIso` and
-`Functor.mapDerivedCategoryHomologyFunctorIso`):
+`Functor.mapDerivedCategoryNatIso`, `Functor.mapDerivedCategoryIdIso`,
+`Functor.mapDerivedCategoryCompIso` and `Functor.mapDerivedCategoryHomologyFunctorIso`):
 
-- `Functor.leftDerivedFunctorNatIso`, `Functor.leftDerivedFunctorCompIso`,
-  `Functor.leftDerivedFunctorHomologyFunctorIso`,
+- `Functor.leftDerivedFunctorNatIso`, `Functor.leftDerivedFunctorIdIso`,
+  `Functor.leftDerivedFunctorCompIso`, `Functor.leftDerivedFunctorHomologyFunctorIso`,
   `Functor.singleFunctorCompLeftDerivedFunctorIso`: the corresponding statements for the
   total left derived functor, obtained by transport along the compatibility isomorphism.
 - `Functor.PreservesKFlatComplexes` and `Functor.leftDerivedFunctorCompMapDerivedCategoryIso`:
@@ -150,6 +150,14 @@ noncomputable def leftDerivedFunctorNatIso {G : C ⥤ D} [G.Additive]
     F.leftDerivedFunctor ≅ G.leftDerivedFunctor :=
   F.leftDerivedFunctorIsoMapDerivedCategory ≪≫ mapDerivedCategoryNatIso e ≪≫
     G.leftDerivedFunctorIsoMapDerivedCategory.symm
+
+/-- An isomorphism `I ≅ 𝟭` of exact endofunctors induces an isomorphism
+`I.leftDerivedFunctor ≅ 𝟭` of the total left derived functor with the identity: the derived
+functor of the isomorphism, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`. -/
+noncomputable def leftDerivedFunctorIdIso {I : C ⥤ C} [I.Additive] [PreservesFiniteLimits I]
+    [PreservesFiniteColimits I] (e : I ≅ 𝟭 C) : I.leftDerivedFunctor ≅ 𝟭 _ :=
+  I.leftDerivedFunctorNatIso e ≪≫ (𝟭 C).leftDerivedFunctorIsoMapDerivedCategory ≪≫
+    mapDerivedCategoryIdIso C
 
 /-- The total left derived functor of an exact functor commutes with the homology
 functors: the canonical isomorphism

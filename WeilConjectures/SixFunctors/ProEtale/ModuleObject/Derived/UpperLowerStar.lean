@@ -80,6 +80,8 @@ The two displayed formulas are theorems about the total derived functors, not de
   `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, obtained from the underived
   `ProEtale.CondensedRing.upperStarComp` through the levelwise functors.
 
+- `ProEtale.CondensedRing.leftDerivedUpperStarId`: the identity isomorphism `L(𝟙 X)^* ≅ 𝟭`.
+
 - `ProEtale.CondensedRing.rightDerivedLowerStarIso` and
   `ProEtale.CondensedRing.leftDerivedUpperStarIso`: the computations of `Rf_*` and `Lf^*`
   described above.
@@ -227,6 +229,13 @@ noncomputable def leftDerivedUpperStarComp {Z : Scheme.{u}} (g : Y ⟶ Z) :
     L((f ≫ g)^*⟦Λ⟧) ≅ L((g)^*⟦Λ⟧) ⋙ L((f)^*⟦Λ⟧) :=
   Functor.leftDerivedFunctorNatIso _ (upperStarComp Λ f g) ≪≫
     Functor.leftDerivedFunctorCompIso (g)^*⟦Λ⟧ (f)^*⟦Λ⟧
+
+variable (X) in
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of derived pullbacks on module objects over `Λ`:
+the derived functor of the underived identity isomorphism
+`ProEtale.CondensedRing.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`. -/
+noncomputable def leftDerivedUpperStarId : L((𝟙 X)^*⟦Λ⟧) ≅ 𝟭 _ :=
+  Functor.leftDerivedFunctorIdIso (upperStarId Λ X)
 
 end DerivedUpperStar
 

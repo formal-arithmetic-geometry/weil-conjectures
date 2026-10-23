@@ -90,6 +90,18 @@ noncomputable def mapDerivedCategoryCompIso (F : C ⥤ D) (G : D ⥤ E)
     (F ⋙ G).mapDerivedCategory (F.mapDerivedCategory ⋙ G.mapDerivedCategory)
     (Iso.refl _)
 
+variable (C) in
+/-- The functor induced on derived categories by the identity functor is isomorphic to the
+identity functor: both are induced by `(𝟭 C).mapHomologicalComplex ≅ 𝟭` on the localizations.
+This is the derived category counterpart of `CategoryTheory.Functor.mapHomologicalComplexIdIso`. -/
+noncomputable def mapDerivedCategoryIdIso :
+    (𝟭 C).mapDerivedCategory ≅ 𝟭 (DerivedCategory C) :=
+  Localization.liftNatIso DerivedCategory.Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+    ((𝟭 C).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) DerivedCategory.Q
+    (𝟭 C).mapDerivedCategory (𝟭 (DerivedCategory C))
+    (isoWhiskerRight (mapHomologicalComplexIdIso C (ComplexShape.up ℤ)) DerivedCategory.Q ≪≫
+      DerivedCategory.Q.leftUnitor)
+
 /-- An exact functor commutes with the homology functors of the derived categories:
 the canonical isomorphism
 `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` of functors

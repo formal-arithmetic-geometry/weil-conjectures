@@ -78,7 +78,9 @@ The adjunctions `Lf^* ⊣ Rf_*` and `j_! ⊣ j^*` restrict along the fully faith
 `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). Its conjugates under these
 adjunctions are the composition isomorphisms `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*`
 (`boundedConstructibleLowerStarComp`) and `(j ≫ j')_! ≅ j_! ⋙ j'_!` for open immersions
-(`boundedConstructibleOpenImmersionLowerShriekComp`). The adjunction
+(`boundedConstructibleOpenImmersionLowerShriekComp`). Likewise the identity isomorphism
+`L(𝟙 X)^* ≅ 𝟭` restricts (`boundedConstructibleUpperStarId`), with conjugate `R(𝟙 X)_* ≅ 𝟭`
+(`boundedConstructibleLowerStarId`). The adjunction
 `- ⊗ᴸ - ⊣₂ RHom(-, -)` is the tensor-hom adjunction of the monoidal closed category
 `Dᵇc(X)⟦Λ⟧` (`boundedConstructibleTensorHomAdjunction₂`).
 
@@ -226,6 +228,25 @@ noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
     ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g).comp
       (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f))
     (boundedConstructibleUpperStarComp Λ ℓ f g).symm).symm
+
+variable (X) in
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` on bounded constructible complexes: the restriction
+of `ProEtale.CondensedRing.leftDerivedUpperStarId` along the fully faithful inclusion. -/
+noncomputable def boundedConstructibleUpperStarId :
+    boundedConstructibleUpperStar Λ ℓ (𝟙 X) ≅ 𝟭 (Dᵇc(X.left)⟦Λ⟧) :=
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (boundedConstructibleUpperStarCompatibility Λ ℓ (𝟙 X) ≪≫
+      Functor.isoWhiskerLeft _ (leftDerivedUpperStarId Λ X.left) ≪≫
+      Functor.rightUnitor _ ≪≫ (Functor.leftUnitor _).symm)
+
+variable (X) in
+/-- The identity isomorphism `R(𝟙 X)_* ≅ 𝟭` on bounded constructible complexes: the conjugate
+of `boundedConstructibleUpperStarId` under the adjunctions `L(𝟙 X)^* ⊣ R(𝟙 X)_*` and
+`𝟭 ⊣ 𝟭`. -/
+noncomputable def boundedConstructibleLowerStarId :
+    boundedConstructibleLowerStar Λ ℓ (𝟙 X) ≅ 𝟭 (Dᵇc(X.left)⟦Λ⟧) :=
+  conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)) Adjunction.id
+    (boundedConstructibleUpperStarId Λ ℓ X).symm
 
 end UpperLowerStar
 
