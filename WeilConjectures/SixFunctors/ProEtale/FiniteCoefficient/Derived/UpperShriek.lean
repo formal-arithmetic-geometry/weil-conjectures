@@ -24,17 +24,15 @@ is *constructed* here out of the two halves of the derived lower shriek
 where `Rg^!` is a chosen right adjoint of the derived pushforward `Rg_*` along the *proper*
 morphism `g`, and `Di^*` is the levelwise pullback along the open immersion `i`, which is right
 adjoint to `Di_!` by `ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction`. The
-adjunction `Rf_! ⊣ Rf^!` is then the composite of these two adjunctions. The only input taken
-for granted is that `Rg_*` is a left adjoint for proper `g`; it is *not* assumed that `Rf_!`
-is a left adjoint for a general `f`, that is a theorem here.
+adjunction `Rf_! ⊣ Rf^!` is then the composite of these two adjunctions. The only input is that
+`Rg_*` is a left adjoint for the proper part `g` of the compactification. This is false in
+general, so it is an explicit hypothesis `[((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]`,
+not an instance (see the implementation notes).
 
 `Rf^!` is only defined on the unbounded derived categories: it does not preserve bounded
 below objects in general, so it does not restrict to `D⁺`.
 
 # Main Results
-
-- `AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerStar_of_isProper` : for `g` proper,
-  `Rg_*` is a left adjoint on `D(Z_proét)`.
 
 - `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekOfCompactification` : `Rf^!` with respect to
   a compactification `c`, with scoped notation `Rf^!(c)[A]`.
@@ -49,16 +47,20 @@ below objects in general, so it does not restrict to `D⁺`.
   on the unbounded derived categories.
 
 - `AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerShriek` : `Rf_!` is a left adjoint
-  on `D(X_proét)`, a consequence of the previous item.
+  on `D(X_proét)` when `Rg_*` is one for the proper part `g` of the chosen compactification, a
+  consequence of the previous item.
+
+All of these take the hypothesis that `Rg_*` is a left adjoint.
 
 ## Implementation notes
 
-* `isLeftAdjoint_rightDerivedLowerStar_of_isProper` is `sorry` by design: this file only
-  *states* that `Rg_*` has a right adjoint for `g` proper, the proof is left to a later file.
-  The adjoint exists by Brown representability, `Rg_*` being, for `g` proper, a colimit
-  preserving functor between compactly generated triangulated categories.
+* That `Rg_*` is a left adjoint for `g` proper is a hypothesis, not an instance, because it is
+  false in general on the unbounded derived category. Let `p` be the structure morphism of an
+  elliptic curve over `𝔽̄_p` and `A` the category of `𝔽_r`-modules. Then `Rp_*` does not preserve
+  coproducts, so it has no right adjoint. The hypothesis holds when `Rg_*` preserves coproducts
+  between compactly generated triangulated categories, by Brown representability.
 * `Rg^!` for proper `g` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint
-  extracted from the instance, not a construction. Only the adjunction
+  extracted from the hypothesis, not a construction. Only the adjunction
   `Adjunction.ofIsLeftAdjoint` should be used about it. The composite `Rf^!` is a construction
   out of it and `Di^*`.
 * The derived adjunction `Di_! ⊣ Di^*` goes through the total left derived functor of `i_!`,
@@ -92,21 +94,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace ProEtale
 
-section Proper
-
-variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
-
-/-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_proét) ⥤ D(Y_proét)` is a
-left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
-instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
-    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
-  sorry
-
-end Proper
-
 section OfCompactification
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+  [((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]
 
 /-- The exceptional inverse image `Rf^! : D(Y_proét) ⥤ D(X_proét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of pro-étale sheaves: a chosen
@@ -124,6 +115,7 @@ scoped notation "Rf^!("c")[" A "]" =>
 end OfCompactification
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  [(((HasCompactification.compactification f).g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]
 
 section Unbounded
 
@@ -155,9 +147,10 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 /-- The adjunction `Rf_! ⊣ Rf^!` attached to a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`:
 the composite of the derived adjunction `Di_! ⊣ Di^*` along the open immersion `i` and of the
-adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
+adjunction `Rg_* ⊣ Rg^!` along the proper `g`, provided `Rg_*` is a left adjoint. -/
 noncomputable def rightDerivedUpperShriekOfCompactificationAdjunction {f : X ⟶ Y}
-    (c : Compactification f) : Rf_!(c)[A] ⊣ Rf^!(c)[A] :=
+    (c : Compactification f) [((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint] :
+    Rf_!(c)[A] ⊣ Rf^!(c)[A] :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i).comp
     (Adjunction.ofIsLeftAdjoint _)
 
@@ -166,7 +159,8 @@ noncomputable def rightDerivedUpperShriekAdjunction : R(f)_![A] ⊣ R(f)^![A] :=
   rightDerivedUpperShriekOfCompactificationAdjunction A (HasCompactification.compactification f)
 
 /-- The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` is a left adjoint, its right adjoint
-being `R(f)^![A]`. -/
+being `R(f)^![A]`, provided `Rg_*` is a left adjoint for the proper part `g` of the chosen
+compactification. -/
 instance isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint :=
   (rightDerivedUpperShriekAdjunction A f).isLeftAdjoint
 
