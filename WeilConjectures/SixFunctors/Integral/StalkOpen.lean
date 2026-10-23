@@ -100,7 +100,7 @@ theorem Etale.exists_finset_stalkRestrict_eq_zero (sq : IsPullback g' f' f g)
       ConcreteCategory.congr_hom
         (Etale.toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} Λ) f' y' t G c) σ'
     rw [h]
-    exact Etale.toPresheafFiber_eq_zero_iff Λ G σ' t.1 _
+    exact Etale.toPresheafFiber_eq_zero_iff_mem_vanishingSet Λ G σ' t.1 _
   -- a basic open around `(v, t₀)` on which `σ'` vanishes
   have : IsAffine ((𝟭 Scheme).obj c.1.left) := hc
   have : IsAffine (pullback c.1.hom f') := isAffine_of_isAffineHom (pullback.fst c.1.hom f')

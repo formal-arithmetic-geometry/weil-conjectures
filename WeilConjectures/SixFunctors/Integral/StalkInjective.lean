@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Integral.StalkRestrict
 For a section `σ` of an étale sheaf `G` over an étale `X`-scheme `W`, the points of `W` near
 which `σ` vanishes form an open subset `AlgebraicGeometry.Etale.vanishingSet` of `W`, and the
 germ of `σ` at a geometric point of `W` vanishes exactly when the point lies in this open
-subset (`AlgebraicGeometry.Etale.toPresheafFiber_eq_zero_iff`).
+subset (`AlgebraicGeometry.Etale.toPresheafFiber_eq_zero_iff_mem_vanishingSet`).
 
 Let `f : X ⟶ Y` be an integral morphism and `y` a geometric point of `Y` with algebraically
 closed residue field. A germ of `f_* G` at `y` all of whose restrictions to the geometric points
@@ -73,8 +73,8 @@ lemma Etale.isOpen_vanishingSet : IsOpen (Etale.vanishingSet Λ G σ) :=
 
 /-- **The germ of a section at a geometric point vanishes exactly when the point lies in the
 vanishing set of the section.** -/
-lemma Etale.toPresheafFiber_eq_zero_iff {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-    (x : Spec (.of Ω) ⟶ X) (w : (pointSmallEtale x).fiber.obj W) :
+lemma Etale.toPresheafFiber_eq_zero_iff_mem_vanishingSet {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X) (w : (pointSmallEtale x).fiber.obj W) :
     (pointSmallEtale x).toPresheafFiber W w G.obj σ = 0 ↔
       w.left (default : Spec (.of Ω)) ∈ Etale.vanishingSet Λ G σ := by
   have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
@@ -123,7 +123,7 @@ lemma Etale.eq_zero_of_forall_stalkRestrict_eq_zero {Ω : Type u} [Field Ω] [Is
         (pointSmallEtale t.1).toPresheafFiber _ ((Etale.baseChangeNbhd f y t).obj c).2 G.obj σ' :=
       ConcreteCategory.congr_hom
         (Etale.toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} Λ) f y t G c) σ
-    exact (Etale.toPresheafFiber_eq_zero_iff Λ G σ' t.1 _).1 (h ▸ ha t)
+    exact (Etale.toPresheafFiber_eq_zero_iff_mem_vanishingSet Λ G σ' t.1 _).1 (h ▸ ha t)
   -- so `σ` vanishes over a smaller pointed étale neighbourhood of `y`
   obtain ⟨c', g, hg⟩ := exists_hom_preimage_eq_bot_of_isIntegralHom f c
     (Etale.vanishingSet Λ G σ')ᶜ (Etale.isOpen_vanishingSet Λ G σ').isClosed_compl

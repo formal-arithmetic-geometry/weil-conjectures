@@ -7714,7 +7714,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.SequentialHomotopyColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification
 public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
