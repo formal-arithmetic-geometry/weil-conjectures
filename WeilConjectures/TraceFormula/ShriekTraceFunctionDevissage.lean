@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
+public import WeilConjectures.TraceFormula.WeilDistTriangLowerShriek
+public import WeilConjectures.TraceFormula.WeilDistTriangTrace
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 
 /-!
@@ -134,89 +136,6 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
 
 end WeilSheafPullback
 
-/-! ### Naturality of the transported connecting morphisms -/
-
-section ConnectingNaturality
-
-variable {Cx Cs Dx Ds : Type*} [Category Cx] [Category Cs] [Category Dx] [Category Ds]
-  [HasShift Dx ℤ] [HasShift Ds ℤ] (A : Cx ⥤ Cs) (ιs : Cs ⥤ Ds) (ι : Cx ⥤ Dx) (R : Dx ⥤ Ds)
-  [R.CommShift ℤ] (e : A ⋙ ιs ≅ ι ⋙ R)
-
-/-- The connecting morphism of `connectingOfIso` is natural in its source. -/
-lemma connectingOfIso_comp {a c c' : Cx} (g : c' ⟶ c)
-    (δ : ι.obj c ⟶ (shiftFunctor Dx (1 : ℤ)).obj (ι.obj a)) :
-    connectingOfIso A ιs ι R e (ι.map g ≫ δ) =
-      ιs.map (A.map g) ≫ connectingOfIso A ιs ι R e δ := by
-  have h := e.hom.naturality g
-  simp only [Functor.comp_map] at h
-  simp only [connectingOfIso, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% h]
-
-
-end ConnectingNaturality
-
-/-! ### Distinguished triangles of Weil objects -/
-
-section Triangle
-
-/-- A triangle `A ⟶ B ⟶ C` of Weil objects for `Φ` is *distinguished* if it extends to a
-distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of the ambient derived category `D(Mod_{ℚ̲̄_ℓ,X})`
-whose connecting morphism `δ` commutes with the Frobenius structures: `δ ∘ φ_C = φ_A[1] ∘ LΦ^* δ`,
-where `LΦ^* δ` is formed through the ambient derived pullback, which commutes with the
-shifts. -/
-def WeilBoundedConstructible.IsDistTriang {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom]
-    [QuasiCompact V.hom] [IsSeparated V.hom] {Φ : V ⟶ V} {A B C : WeilBoundedConstructible ℓ Φ}
-    (a : A ⟶ B) (b : B ⟶ C) : Prop :=
-  ∃ δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.obj
-      C.carrier ⟶ (shiftFunctor _ (1 : ℤ)).obj
-        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.obj
-          A.carrier),
-    Pretriangulated.Triangle.mk
-        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-          a.hom.f)
-        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-          b.hom.f) δ ∈ Pretriangulated.distinguishedTriangles ∧
-      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-          C.str.hom ≫ δ =
-        connectingOfIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
-            (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι
-            (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι
-            L((Φ.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
-            (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ Φ) δ ≫
-          (shiftFunctor _ (1 : ℤ)).map
-            ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-              A.str.hom)
-
-/-- **Additivity of the local trace along distinguished triangles of Weil objects** (standard
-input, still `sorry`): for a distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of Weil objects for `e`,
-`t_{n+1}(B; x̄) = t_{n+1}(A; x̄) + t_{n+1}(C; x̄)`. The long exact sequence of homology sheaves
-`Hʲ(A) ⟶ Hʲ(B) ⟶ Hʲ(C) ⟶ Hʲ⁺¹(A)` is one of Weil sheaves, the connecting morphisms commuting with
-the Frobenius structures; the stalk functor at `x̄` is exact, the stalks of the homology sheaves of
-constructible complexes are finite-dimensional `ℚ̄_ℓ`-vector spaces, and the alternating sum of
-the traces of an endomorphism of a bounded exact sequence of finite-dimensional vector spaces
-vanishes. -/
-theorem weilStalkSupertrace_eq_add_of_isDistTriang {e : Y ≅ Y} (n : ℕ)
-    (x : Spec (.of (AlgebraicClosure k)) ⟶ Y.left)
-    (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)
-    {A B C : WeilBoundedConstructible ℓ e.hom} {a : A ⟶ B} {b : B ⟶ C}
-    (h : WeilBoundedConstructible.IsDistTriang ℓ a b) :
-    weilStalkSupertrace ℓ n x hx B =
-      weilStalkSupertrace ℓ n x hx A + weilStalkSupertrace ℓ n x hx C :=
-  sorry
-
-/-- **The lower shriek of Weil objects preserves distinguished triangles** (standard input, still
-`sorry`): `Rf_!` is a triangulated functor (`R(f)_!` on the ambient derived categories commutes
-with the shifts and is triangulated), and the compact-support base change isomorphism giving the
-Frobenius structure of `Rf_!^Weil` commutes with the shifts, so the image of the connecting
-morphism commutes with the Frobenius structures. -/
-theorem WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map {f : X ⟶ Y}
-    (hf : eX.hom ≫ f = f ≫ eY.hom) {A B C : WeilBoundedConstructible ℓ eX.hom} {a : A ⟶ B}
-    {b : B ⟶ C} (h : WeilBoundedConstructible.IsDistTriang ℓ a b) :
-    WeilBoundedConstructible.IsDistTriang ℓ ((weilLowerShriek ℓ eX eY hf).map a)
-      ((weilLowerShriek ℓ eX eY hf).map b) :=
-  sorry
-
-end Triangle
 
 /-- **Stalks of a pullback of Weil objects**: for `g : W ⟶ X` with
 `e_W ≫ g = g ≫ e_X` and a point `w̄` of `W` of degree `n + 1`,
