@@ -217,14 +217,27 @@ instance (n : ℤ) : (gradedHom ℓ k n).Additive := by
   unfold gradedHom
   infer_instance
 
-lemma gradedHom_map_apply (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} (f : Y ⟶ Y')
-    (x : shiftedUnit ℓ k n ⟶ Y) : ((gradedHom ℓ k n).map f).hom x = x ≫ f :=
+
+/-- A morphism `𝟙⟦n⟧ ⟶ Y` as an element of `Hⁿ(Y)`. -/
+noncomputable def gradedHomMk {n : ℤ} {Y : DerivedCategory (PointMod ℓ k)}
+    (x : shiftedUnit ℓ k n ⟶ Y) : (gradedHom ℓ k n).obj Y :=
+  x
+
+/-- An element of `Hⁿ(Y)` as a morphism `𝟙⟦n⟧ ⟶ Y`. -/
+noncomputable def gradedHomHom {n : ℤ} {Y : DerivedCategory (PointMod ℓ k)}
+    (x : (gradedHom ℓ k n).obj Y) : shiftedUnit ℓ k n ⟶ Y :=
+  x
+
+lemma gradedHomHom_smul (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) (c : PadicAlgCl ℓ)
+    (x : (gradedHom ℓ k n).obj Y) :
+    gradedHomHom ℓ k (c • x) =
+      (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) ≫
+        gradedHomHom ℓ k x :=
   rfl
 
-lemma gradedHom_smul (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) (c : PadicAlgCl ℓ)
+lemma gradedHomHom_map_apply (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} (f : Y ⟶ Y')
     (x : (gradedHom ℓ k n).obj Y) :
-    c • x = ((shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) ≫ x :
-      shiftedUnit ℓ k n ⟶ Y) :=
+    gradedHomHom ℓ k (((gradedHom ℓ k n).map f).hom x) = gradedHomHom ℓ k x ≫ f :=
   rfl
 
 end Ambient
@@ -300,5 +313,112 @@ lemma subsingleton_hom_shiftedUnit (a b : ℤ) (hab : a ≠ b) :
     (Profinite.padicAlgClRingObj ℓ) (point k).left))).homEquiv.trans
     (Iso.homCongr (((boundedConstructible _).ι.commShiftIso a).app (𝟙_ _))
       (((boundedConstructible _).ι.commShiftIso b).app (𝟙_ _)))).symm.subsingleton
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+section GradedHom
+
+/-- The scalars `ℚ̄_ℓ` are the endomorphisms of a shifted unit `𝟙⟦n⟧`: `c ↦ c • 𝟙`. -/
+noncomputable def shiftedUnitEquiv (n : ℤ) :
+    PadicAlgCl ℓ ≃ₗ[PadicAlgCl ℓ] (gradedHom ℓ k n).obj (shiftedUnit ℓ k n) :=
+  LinearEquiv.ofBijective (LinearMap.toSpanSingleton _ _ (gradedHomMk ℓ k (𝟙 _))) (by
+    constructor
+    · intro c d h
+      have h' := congrArg (gradedHomHom ℓ k) h
+      simp only [LinearMap.toSpanSingleton_apply, gradedHomHom_smul] at h'
+      change (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ 𝟙 _ =
+        (shiftFunctor _ n).map (pointScalar ℓ k d) ≫ 𝟙 _ at h'
+      rw [Category.comp_id, Category.comp_id] at h'
+      exact (bijective_pointScalar ℓ k).1 ((shiftFunctor _ n).map_injective h')
+    · intro x
+      obtain ⟨c, hc⟩ := (bijective_pointScalar ℓ k).2
+        ((shiftFunctor (DerivedCategory (PointMod ℓ k)) n).preimage (gradedHomHom ℓ k x))
+      refine ⟨c, ?_⟩
+      change gradedHomHom ℓ k (c • gradedHomMk ℓ k (𝟙 _)) = gradedHomHom ℓ k x
+      rw [gradedHomHom_smul]
+      change (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ 𝟙 _ = _
+      rw [Category.comp_id, hc, Functor.map_preimage])
+
+lemma gradedHomHom_shiftedUnitEquiv (n : ℤ) (c : PadicAlgCl ℓ) :
+    gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n c) =
+      (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) := by
+  change gradedHomHom ℓ k (c • gradedHomMk ℓ k (𝟙 _)) = _
+  rw [gradedHomHom_smul]
+  exact Category.comp_id _
+
+instance finiteDimensional_gradedHom_shiftedUnit (n m : ℤ) :
+    FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj (shiftedUnit ℓ k m)) := by
+  by_cases h : n = m
+  · subst h
+    exact Module.Finite.equiv (shiftedUnitEquiv ℓ k n)
+  · have := subsingleton_hom_shiftedUnit ℓ k n m h
+    have : Subsingleton ((gradedHom ℓ k n).obj (shiftedUnit ℓ k m)) :=
+      inferInstanceAs (Subsingleton (shiftedUnit ℓ k n ⟶ shiftedUnit ℓ k m))
+    infer_instance
+
+/-- The induced action on `Hⁿ(𝟙⟦m⟧)` of the endomorphism `c • 𝟙` of `𝟙⟦m⟧` has trace `c` if
+`n = m`, and `0` otherwise. -/
+lemma linearMapTrace_gradedHom_map_shiftedUnitEquiv (n m : ℤ) (c : PadicAlgCl ℓ) :
+    LinearMap.trace (PadicAlgCl ℓ) _ ((gradedHom ℓ k n).map
+      (gradedHomHom ℓ k (shiftedUnitEquiv ℓ k m c))).hom = if n = m then c else 0 := by
+  split_ifs with h
+  · subst h
+    have e : ((gradedHom ℓ k n).map (gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n c))).hom =
+        c • LinearMap.id := by
+      ext x
+      obtain ⟨d, rfl⟩ := (shiftedUnitEquiv ℓ k n).surjective x
+      rw [LinearMap.smul_apply, LinearMap.id_apply, ← map_smul, smul_eq_mul]
+      change gradedHomHom ℓ k (((gradedHom ℓ k n).map _).hom (shiftedUnitEquiv ℓ k n d)) =
+        gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n (c * d))
+      rw [gradedHomHom_map_apply, gradedHomHom_shiftedUnitEquiv, gradedHomHom_shiftedUnitEquiv,
+        gradedHomHom_shiftedUnitEquiv, ← Functor.map_comp, ← End.mul_def, ← map_mul]
+    rw [e, map_smul, LinearMap.trace_id, ← (shiftedUnitEquiv ℓ k n).finrank_eq,
+      Module.finrank_self, Nat.cast_one, smul_eq_mul, mul_one]
+  · have := subsingleton_hom_shiftedUnit ℓ k n m h
+    have : Subsingleton ((gradedHom ℓ k n).obj (shiftedUnit ℓ k m)) :=
+      inferInstanceAs (Subsingleton (shiftedUnit ℓ k n ⟶ shiftedUnit ℓ k m))
+    exact LinearMap.trace_eq_zero_of_subsingleton _
+
+end GradedHom
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+section TraceFormula
+
+attribute [local instance] DerivedCategory.braidedCategory'
+
+/-- A right dual of the shifted unit `𝟙⟦n⟧` of `D(Mod_{ℚ̲̄_ℓ,s})`. -/
+noncomputable instance shiftedUnitHasRightDual (n : ℤ) : HasRightDual (shiftedUnit ℓ k n) :=
+  (DerivedCategory.isDualizable_shift isDualizable_unit n).some
+
+/-- The trace of `c • 𝟙` on `𝟙⟦m⟧` is `(-1)ᵐ c`. -/
+lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
+    trace (gradedHomHom ℓ k (shiftedUnitEquiv ℓ k m c)) =
+      (m.negOnePow : ℤ) • pointScalar ℓ k c := by
+  rw [gradedHomHom_shiftedUnitEquiv]
+  have := (DerivedCategory.singleFunctor (PointMod ℓ k) 0).map_preimage (pointScalar ℓ k c)
+  let hd : HasRightDual ((shiftFunctor (DerivedCategory (PointMod ℓ k)) m).obj
+      ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).obj (𝟙_ _))) :=
+    shiftedUnitHasRightDual ℓ k m
+  have h := DerivedCategory.trace_shiftFunctor_map_singleFunctor_map m
+    ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).preimage (pointScalar ℓ k c))
+  rw [this] at h
+  exact h
+
+end TraceFormula
 
 end AlgebraicGeometry.ProEtale.CondensedRing
