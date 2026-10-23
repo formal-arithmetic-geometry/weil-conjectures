@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.WeaklyEtaleLowerShriek
 
 /-!
 # Extension by zero along a weakly étale morphism of `ℓ`-adic sheaves
@@ -33,83 +34,18 @@ exact, so `j^*` preserves K-injective complexes and the base change isomorphism 
 
 @[expose] public section
 
-universe u' u
+universe u
 
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-section Sheaf
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  {U X : Scheme.{u}} (j : U ⟶ X) [WeaklyEtale j]
-
-/-- The extension by zero `j_!` along a weakly étale morphism `j` on sheaves for the small
-pro-étale sites: the left Kan extension along the localization functor on presheaves followed by
-sheafification. -/
-noncomputable def weaklyEtaleLowerShriek :
-    Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A :=
-  Functor.sheafPullbackConstruction.sheafPullback
-    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)) A
-    (Scheme.ProEt.topology U) (Scheme.ProEt.topology X)
-
-/-- The adjunction `j_! ⊣ j^*` along a weakly étale morphism `j`. -/
-noncomputable def weaklyEtaleLowerShriekUpperStarAdjunction :
-    weaklyEtaleLowerShriek A j ⊣ (j)^*[A] :=
-  (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)) A
-    (Scheme.ProEt.topology U) (Scheme.ProEt.topology X)).ofNatIsoRight
-    (upperStarIsoLocalizationRestriction A j inferInstance).symm
-
-/-- **The extension by zero along a weakly étale morphism is left exact**: the left Kan extension
-along the localization functor is pointwise a direct sum, and sheafification is left exact. -/
-instance preservesFiniteLimits_weaklyEtaleLowerShriek :
-    PreservesFiniteLimits (weaklyEtaleLowerShriek A j) := by
-  have : PreservesFiniteLimits
-      ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.lan :
-        (U.ProEtᵒᵖ ⥤ A) ⥤ X.ProEtᵒᵖ ⥤ A) :=
-    SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian A _
-  have : PreservesFiniteLimits
-      ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.lan ⋙
-        presheafToSheaf (Scheme.ProEt.topology X) A) :=
-    comp_preservesFiniteLimits _ _
-  exact comp_preservesFiniteLimits (sheafToPresheaf _ A) _
-
-instance : PreservesLimits ((j)^*[A]) :=
-  (weaklyEtaleLowerShriekUpperStarAdjunction A j).rightAdjoint_preservesLimits
-
-end Sheaf
-
 section Adic
 
 variable {l : ℕ} [Fact l.Prime] {U X : Scheme.{u}} (j : U ⟶ X) [WeaklyEtale j]
 
-instance : PreservesLimits ((j)^*ᵃ[l]) := by
-  have : PreservesLimits ((j)^*ᵃ[l] ⋙ AdicSheaf.forget U) :=
-    inferInstanceAs (PreservesLimits (AdicSheaf.forget X ⋙ (j)^*[WeilCoefficients.{u} l]))
-  exact preservesLimits_of_reflects_of_preserves _ (AdicSheaf.forget U)
-
-instance : (j)^*ᵃ[l].IsRightAdjoint :=
-  isRightAdjoint_of_preservesLimits_of_isCoseparating (D := AdicSheaf l X)
-    (isCoseparator_coseparator (AdicSheaf l X)) (j)^*ᵃ[l]
-
-variable (l) in
-/-- The extension by zero `j_!` of sheaves of modules over the constant `ℓ`-adic sheaves along a
-weakly étale morphism `j`: the left adjoint of the pullback `j^*`. -/
-noncomputable def adicWeaklyEtaleLowerShriek : AdicSheaf l U ⥤ AdicSheaf l X :=
-  (j)^*ᵃ[l].leftAdjoint
-
-variable (l) in
-/-- The adjunction `j_! ⊣ j^*` on sheaves of `ℚ̄_ℓ`-modules along a weakly étale morphism. -/
-noncomputable def adicWeaklyEtaleLowerShriekAdjunction :
-    adicWeaklyEtaleLowerShriek l j ⊣ (j)^*ᵃ[l] :=
-  Adjunction.ofIsRightAdjoint _
-
 instance : (adicWeaklyEtaleLowerShriek l j).IsLeftAdjoint :=
   (adicWeaklyEtaleLowerShriekAdjunction l j).isLeftAdjoint
-
-instance : (adicWeaklyEtaleLowerShriek l j).Additive :=
-  (adicWeaklyEtaleLowerShriekAdjunction l j).left_adjoint_additive
 
 attribute [local instance] Sheaf.symmetricCategory in
 /-- The pullback of a cofree `ℚ̄_ℓ,X`-module along a weakly étale morphism is cofree: `j^*`
@@ -131,7 +67,7 @@ noncomputable def adicWeaklyEtaleLowerShriekForgetIso :
   ((adicWeaklyEtaleLowerShriekAdjunction l j).comp
       (Mod.forgetCofreeAdjunction (adicConstantSheaf l X))).leftAdjointUniq
     (((Mod.forgetCofreeAdjunction (adicConstantSheaf l U)).comp
-      (weaklyEtaleLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j)).ofNatIsoRight
+      (weaklyEtaleLowerShriekAdjunction (WeilCoefficients.{u} l) j)).ofNatIsoRight
       (adicUpperStarCofreeIso j).symm)
 
 /-- **The extension by zero along a weakly étale morphism is exact.** On underlying sheaves it is

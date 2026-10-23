@@ -6,12 +6,13 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 
 /-!
 # Adjoints through conjugate isomorphisms
 
 For conjugate natural transformations `α : L₂ ⟶ L₁` and `R₁ ⟶ R₂` of two adjunctions, the
-adjunction bijections intertwine (`CategoryTheory.Adjunction.homEquiv_comp_conjugateEquiv_app`).
+adjunction bijections intertwine (`CategoryTheory.homEquiv_comp_conjugateEquiv_app`).
 In a square of adjunctions (extension of scalars horizontally, pullback and pushforward
 vertically), this computes the adjoint of a morphism out of a pulled back extension of scalars
 through the conjugate isomorphism `Adjunction.pullIsoOfComapIso`
@@ -25,20 +26,6 @@ isomorphism of restrictions of scalars of pushforwards.
 namespace CategoryTheory.Adjunction
 
 universe v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
-
-section Conjugate
-
-variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] {L₁ L₂ : C ⥤ D}
-  {R₁ R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
-
-/-- **Adjunction bijections intertwine conjugate natural transformations.** -/
-lemma homEquiv_comp_conjugateEquiv_app (α : L₂ ⟶ L₁) {c : C} {d : D} (g : L₁.obj c ⟶ d) :
-    adj₁.homEquiv c d g ≫ (conjugateEquiv adj₁ adj₂ α).app d =
-      adj₂.homEquiv c d (α.app c ≫ g) := by
-  rw [homEquiv_unit, homEquiv_unit, Category.assoc, (conjugateEquiv adj₁ adj₂ α).naturality g,
-    ← Category.assoc, unit_conjugateEquiv, Category.assoc, ← Functor.map_comp]
-
-end Conjugate
 
 variable {A : Type u₁} {B : Type u₂} {A' : Type u₃} {B' : Type u₄}
   [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} A'] [Category.{v₄} B']
@@ -59,7 +46,7 @@ lemma homEquiv_homEquiv_pullIsoOfComapIso_inv (M : A') {B₀ : B} (β : E₁.obj
   have hχ : conjugateEquiv (adj₂.comp adjS) (adjR.comp adj₁) χ.hom = e.hom := by
     have := (conjugateIsoEquiv (adj₂.comp adjS) (adjR.comp adj₁)).apply_symm_apply e
     exact congrArg Iso.hom this
-  have h := homEquiv_comp_conjugateEquiv_app (adj₂.comp adjS) (adjR.comp adj₁) χ.hom
+  have h := CategoryTheory.homEquiv_comp_conjugateEquiv_app (adj₂.comp adjS) (adjR.comp adj₁) χ.hom
     (χ.inv.app M ≫ β)
   rw [hχ, Iso.hom_inv_id_app_assoc] at h
   have h' : (adj₂.comp adjS).homEquiv M B₀ (χ.inv.app M ≫ β) =
