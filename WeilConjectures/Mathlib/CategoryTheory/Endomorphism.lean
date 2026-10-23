@@ -18,6 +18,7 @@ A morphism `p : Y ⟶ X` intertwining endomorphisms `a` of `Y` and `b` of `X`
 - `CategoryTheory.End.asHom_pow_comp_eq_comp_asHom_pow`: `a ^ m ≫ p = p ≫ b ^ m`.
 - `CategoryTheory.Aut.one_hom`, `CategoryTheory.Aut.inv_hom`, `CategoryTheory.Aut.mul_hom`: the
   underlying morphisms of the unit, inverses and products in `Aut X`.
+- `CategoryTheory.End.comp_pow_eq_pow_comp`: the same statement for monoid powers in `End`.
 -/
 
 @[expose] public section
@@ -58,5 +59,14 @@ lemma asHom_pow_comp_eq_comp_asHom_pow {a : Y ⟶ Y} {b : X ⟶ X} {p : Y ⟶ X}
     rw [mul_def, mul_def]
     change (a ≫ asHom (of a ^ m)) ≫ p = p ≫ b ≫ asHom (of b ^ m)
     rw [Category.assoc, ih, reassoc_of% h]
+
+/-- If `x ≫ A = S ≫ x` then `x ≫ A ^ j = S ^ j ≫ x` for the monoid powers in `End`. -/
+lemma comp_pow_eq_pow_comp {W X : C} (x : W ⟶ X) (A : End X)
+    (S : End W) (h : x ≫ A = S ≫ x) (j : ℕ) : x ≫ (A ^ j : End X) = (S ^ j : End W) ≫ x := by
+  induction j with
+  | zero => rw [pow_zero, pow_zero, End.one_def, End.one_def, Category.comp_id, Category.id_comp]
+  | succ j ih =>
+    rw [pow_succ, pow_succ, End.mul_def, End.mul_def, ← Category.assoc, h, Category.assoc, ih,
+      Category.assoc]
 
 end CategoryTheory.End
