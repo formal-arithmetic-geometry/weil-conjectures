@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexDual
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusAdjunction
 
 /-!
 # Strict Weil data and the Tate datum
@@ -31,7 +33,8 @@ chapter transports through the purity isomorphism:
 
 The scheme-Frobenius form `u_K = φ_K ∘ κ_{Y,K}` of a datum is
 `AlgebraicGeometry.Etale.schemeFrobeniusForm` in
-`WeilConjectures.EtaleCohomology.Purity.Smooth.SchemeFrobeniusForm`.
+`WeilConjectures.SixFunctors.Etale.Derived.SchemeGaloisComparison`, together with the
+comparison `κ : LΦ^* ≅ Lg^*` of the scheme and the geometric Galois Frobenius pullbacks.
 
 ## Implementation notes
 
@@ -44,17 +47,87 @@ and the tensor formulas `φ` are arguments of the construction of `φ^!_{f,K}`.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
+
+namespace CategoryTheory.MonoidalCategory
+
+variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+
+/-- Let `T : C ⥤ D` be a functor with a tensor comparison `d : T(K ⊗ M) ⟶ T K ⊗ T M`, natural in
+`K`, and a unit comparison `e : T 𝟙 ⟶ 𝟙` satisfying the left unit law. Let `Z ≅ 𝟙_ C` and
+`Z' ≅ 𝟙_ D` be "unit objects" with products `Z ⊗ Z ⟶ Z` and `Z' ⊗ Z' ⟶ Z'` satisfying the left
+unit law, and `τ : T Z ≅ Z'` compatible with the products. Then `τ` corresponds to `e` under the
+identifications of `Z` and `Z'` with the units: writing `a = T zC ≫ e` and `b = τ ≫ zD`, both
+satisfy `d ≫ (a ▷ T Z) ≫ λ ≫ τ = T(Z ⊗ Z ⟶ Z) ≫ τ`, so `a ▷ T Z = b ▷ T Z`, and since `T Z` is
+isomorphic to the unit, `a = b`. -/
+lemma map_hom_comp_eq_of_whiskerRight_comp_leftUnitor (T : C ⥤ D)
+    (d : ∀ K M : C, T.obj (K ⊗ M) ⟶ T.obj K ⊗ T.obj M)
+    (hd : ∀ {K K' : C} (f : K ⟶ K') (M : C), T.map (f ▷ M) ≫ d K' M = d K M ≫ T.map f ▷ T.obj M)
+    (e : T.obj (𝟙_ C) ⟶ 𝟙_ D) [IsIso e] {Z : C} {Z' : D} [Epi (d Z Z)]
+    (he : d (𝟙_ C) Z ≫ e ▷ T.obj Z ≫ (λ_ (T.obj Z)).hom = T.map (λ_ Z).hom)
+    (zC : Z ≅ 𝟙_ C) (zD : Z' ≅ 𝟙_ D) (addC : Z ⊗ Z ⟶ Z) (addD : Z' ⊗ Z' ⟶ Z')
+    (τ : T.obj Z ≅ Z') (hC : zC.hom ▷ Z ≫ (λ_ Z).hom = addC)
+    (hD : zD.hom ▷ Z' ≫ (λ_ Z').hom = addD)
+    (hadd : T.map addC ≫ τ.hom = d Z Z ≫ τ.hom ▷ T.obj Z ≫ Z' ◁ τ.hom ≫ addD) :
+    T.map zC.hom ≫ e = τ.hom ≫ zD.hom := by
+  have h₁ : d Z Z ≫ (T.map zC.hom ≫ e) ▷ T.obj Z ≫ (λ_ _).hom = T.map addC := by
+    rw [comp_whiskerRight, Category.assoc, ← hC, T.map_comp, ← he, reassoc_of% hd]
+  have h₂ : d Z Z ≫ (τ.hom ≫ zD.hom) ▷ T.obj Z ≫ 𝟙_ D ◁ τ.hom ≫ (λ_ _).hom =
+      T.map addC ≫ τ.hom := by
+    rw [hadd, ← hD, comp_whiskerRight, Category.assoc, whisker_exchange_assoc]
+  have key : (T.map zC.hom ≫ e) ▷ T.obj Z = (τ.hom ≫ zD.hom) ▷ T.obj Z := by
+    rw [← cancel_epi (d Z Z), ← cancel_mono (𝟙_ D ◁ τ.hom ≫ (λ_ _).hom), Category.assoc,
+      Category.assoc, h₂, leftUnitor_naturality, reassoc_of% h₁]
+  have hW := congrArg (· ≫ (𝟙_ D ◁ (T.map zC.hom ≫ e))) key
+  simp only [← whisker_exchange, cancel_epi] at hW
+  rwa [MonoidalCategory.whiskerRight_id, MonoidalCategory.whiskerRight_id, cancel_epi,
+    cancel_mono] at hW
+
+end CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry
 
 open Scheme
 
 namespace Etale
+
+section Generic
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {X Y : Scheme.{u}} (f : X ⟶ Y)
+  [(f)^*[A].PreservesFlat]
+
+/-- Let `Z ≅ Λ_Y` and `Z' ≅ Λ_X` be objects identified with the units, with products
+`Z ⊗ᴸ Z ⟶ Z` and `Z' ⊗ᴸ Z' ⟶ Z'` satisfying the left unit law, and `τ : Lf^* Z ≅ Z'` compatible
+with the products. Then `τ` corresponds to the canonical identification `Lf^* Λ_Y ≅ Λ_X`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`) under the identifications with the
+units. The statement is phrased with the derived tensor product `-⊗ᴸ-`, so that it can be
+instantiated at `A = ModuleCat Λ`
+(`CategoryTheory.MonoidalCategory.map_hom_comp_eq_of_whiskerRight_comp_leftUnitor`). -/
+lemma leftDerivedUpperStar_map_hom_comp_unitIso_hom_eq
+    {Z : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    {Z' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (zY : Z ≅ 𝟙_ _) (zX : Z' ≅ 𝟙_ _)
+    (addY : ((derivedTensor A Y).obj Z).obj Z ⟶ Z)
+    (addX : ((derivedTensor A X).obj Z').obj Z' ⟶ Z') (τ : L((f)^*[A]).obj Z ≅ Z')
+    (hY : ((derivedTensor A Y).map zY.hom).app Z ≫ (derivedTensorLeftUnitor A Y Z).hom = addY)
+    (hX : ((derivedTensor A X).map zX.hom).app Z' ≫ (derivedTensorLeftUnitor A X Z').hom = addX)
+    (hadd : L((f)^*[A]).map addY ≫ τ.hom =
+      (leftDerivedUpperStarTensorIso A f Z Z).hom ≫ ((derivedTensor A X).map τ.hom).app _ ≫
+        ((derivedTensor A X).obj Z').map τ.hom ≫ addX) :
+    L((f)^*[A]).map zY.hom ≫ (leftDerivedUpperStarUnitIso A f).hom = τ.hom ≫ zX.hom :=
+  MonoidalCategory.map_hom_comp_eq_of_whiskerRight_comp_leftUnitor L((f)^*[A])
+    (fun K M ↦ (leftDerivedUpperStarTensorIso A f K M).hom)
+    (fun g M ↦ leftDerivedUpperStarTensorIso_hom_naturality_left f g M)
+    (leftDerivedUpperStarUnitIso A f).hom
+    (leftDerivedUpperStarTensorComparison_leftUnitor_hom A f Z)
+    zY zX addY addX τ hY hX hadd
+
+end Generic
 
 section Tate
 
@@ -72,6 +145,93 @@ on which geometric Frobenius acts by `q^{-r}`. -/
 noncomputable def tateWeilDatum (g : X ⟶ X) (r : ℤ) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ X r) ≅ tateObject Λ X r :=
   leftDerivedUpperStarTateObjectIso g r
+
+/-- Transporting the identifications `Lf^* Λ_Y(m) ≅ Λ_X(m)` along an equality `m = m'`. -/
+lemma leftDerivedUpperStarTwistObjectIso_eqToHom {Y : Scheme.{u}} [HasInvertibleExponent Λ Y]
+    (f : X ⟶ Y) {m m' : ℤ} (h : m = m') :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map
+        (eqToHom (congrArg (HasTateTwist.twistObject (Λ := Λ) Y) h)) ≫
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) f m').hom =
+      (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) f m).hom ≫
+        eqToHom (congrArg (HasTateTwist.twistObject (Λ := Λ) X) h) := by
+  subst h
+  simp
+
+section ZeroTwist
+
+variable {Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+
+private lemma map_twistObjectAddIso_zero_zero :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map ((HasTateTwist.twistObjectAddIso (Λ := Λ) Y 0 0).hom ≫
+        eqToHom (congrArg (HasTateTwist.twistObject (Λ := Λ) Y) (add_zero 0))) ≫
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) f 0).hom =
+      (leftDerivedUpperStarTensorIso _ f _ _).hom ≫
+        ((derivedTensor (ModuleCat.{u + 1} Λ) X).map
+          (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) f 0).hom).app _ ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (HasTateTwist.twistObject X 0)).map
+            (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) f 0).hom ≫
+            (HasTateTwist.twistObjectAddIso (Λ := Λ) X 0 0).hom ≫
+              eqToHom (congrArg (HasTateTwist.twistObject (Λ := Λ) X) (add_zero 0)) := by
+  rw [Functor.map_comp, Category.assoc,
+    leftDerivedUpperStarTwistObjectIso_eqToHom Λ f (add_zero 0),
+    ← Category.assoc, HasTateTwist.leftDerivedUpperStar_map_twistObjectAddIso]
+  simp only [Category.assoc]
+
+/-- Blueprint `sk-def-sf-weil-complexes`: the canonical Weil structure `φ_Λ` of `Λ_T` is the Tate
+datum `τ_0`.
+
+For every morphism `f : X ⟶ Y` the identification `Lf^* Λ_Y(0) ≅ Λ_X(0)` of the twist datum
+corresponds to the canonical identification `ε : Lf^* Λ_Y ≅ Λ_X`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`) under `Λ(0) ≅ Λ`
+(`HasTateTwist.twistObjectZeroIso`). In particular, for an endomorphism `g` the Tate datum `τ_0`
+(`AlgebraicGeometry.Etale.tateWeilDatum`) is the canonical Weil structure `φ_Λ` of `Λ_X`. This
+holds for every Tate twist datum: both identifications are compatible with the unit law
+`Λ(0) ⊗ Λ(0) ≅ Λ(0)` of the twist datum
+(`CategoryTheory.MonoidalCategory.map_hom_comp_eq_of_whiskerRight_comp_leftUnitor`). -/
+theorem leftDerivedUpperStar_map_twistObjectZeroIso_hom :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectZeroIso (Λ := Λ) Y).hom ≫
+        (leftDerivedUpperStarUnitIso _ f).hom =
+      (leftDerivedUpperStarTateObjectIso f 0).hom ≫
+        (HasTateTwist.twistObjectZeroIso (Λ := Λ) X).hom :=
+  leftDerivedUpperStar_map_hom_comp_unitIso_hom_eq _ f _ _ _ _ _
+    (HasTateTwist.twistObjectAddIso_zero_left (Λ := Λ) Y 0)
+    (HasTateTwist.twistObjectAddIso_zero_left (Λ := Λ) X 0) (map_twistObjectAddIso_zero_zero Λ f)
+
+end ZeroTwist
+
+namespace WeilComplex
+
+variable {Λ} [Finite Λ] (g : X ≅ X)
+
+variable (Λ) in
+/-- Blueprint `sk-def-sf-weil-complexes`: the *Tate line* `(Λ_X(r), τ_r)` as a strict Weil
+complex, for an automorphism `g` of `X` (for `g = g_{X,γ}` the geometric-Frobenius
+automorphism): the Tate twist `Λ_X(r) ∈ Dctf(X, Λ)` with its canonical Weil structure, the Tate
+datum `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`). -/
+noncomputable def tate (r : ℤ) : WeilComplex (ModuleCat.{u + 1} Λ) g where
+  obj := ⟨tateObject Λ X r, boundedConstructibleFiniteTor_tateObject Λ X r⟩
+  frobenius := ObjectProperty.isoMk _ (tateWeilDatum Λ g.hom r)
+
+omit [Finite Λ] in
+lemma tate_frobenius_hom_hom (r : ℤ) :
+    (tate Λ g r).frobenius.hom.hom = (tateWeilDatum Λ g.hom r).hom :=
+  rfl
+
+variable {g} {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k))
+  [LocallyOfFiniteType aX] [QuasiCompact aX]
+
+/-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data.
+
+The *twisted dual* `(K^∨(r), φ_{K^∨(r)})` of a strict Weil complex `(K, φ_K)`: the coefficient
+dual `K^∨ = RHom(K, Λ_X)` with the contragredient datum `φ_{K^∨}`
+(`AlgebraicGeometry.Etale.contragredientWeilDatum`), twisted by the Tate line, with the datum
+`φ_{K^∨(r)} = φ_{K^∨} ⊗ τ_r`
+(`AlgebraicGeometry.Etale.WeilComplex.twistedCoefficientDual_frobenius_hom_hom`). -/
+noncomputable def twistedDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) (r : ℤ) :
+    WeilComplex (ModuleCat.{u + 1} Λ) g :=
+  twistedCoefficientDual aX K (tate Λ g r)
+
+end WeilComplex
 
 end Tate
 
