@@ -46,6 +46,108 @@ open CategoryTheory Endofunctor
 
 open scoped CategoryTheory.Obj
 
+namespace CategoryTheory.Iso
+
+variable {C : Type*} [Category* C] {X Y : C} (eX : X ≅ X) (eY : Y ≅ Y) {D E : Type*}
+  [Category* D] [Category* E] (PX : (X ⟶ X) → D ⥤ D)
+  (compX : ∀ f g : X ⟶ X, PX (f ≫ g) ≅ PX g ⋙ PX f) (PY : (Y ⟶ Y) → E ⥤ E)
+  (compY : ∀ f g : Y ⟶ Y, PY (f ≫ g) ≅ PY g ⋙ PY f) (L : D ⥤ E)
+
+/-- The recursive description of the iterated structure isomorphisms. -/
+lemma powSuccStr_succ_hom {a : D} (φ : (PX eX.hom).obj a ≅ a) (n : ℕ) :
+    (eX.powSuccStr PX compX φ (n + 1)).hom = (compX (eX.powSucc n).hom eX.hom).hom.app a ≫
+      (PX (eX.powSucc n).hom).map φ.hom ≫ (eX.powSuccStr PX compX φ n).hom :=
+  rfl
+
+/-- **Transport of the iterated structure isomorphisms along a functor.** Let
+`β₀ : L ⋙ P_Y(e_Y) ⟶ P_X(e_X) ⋙ L` and `β n : L ⋙ P_Y(e_Y^{n+1}) ⟶ P_X(e_X^{n+1}) ⋙ L` be
+comparisons, with `β 0 = β₀`, satisfying the pasting law `hβ` with the composition isomorphisms.
+If the structure isomorphism `ψ` of `L a` is `β₀` followed by `L φ`, then the iterated structure
+isomorphisms of `ψ` are `β n` followed by `L` of those of `φ`. -/
+lemma powSuccStr_hom_eq_of_paste (β₀ : L ⋙ PY eY.hom ⟶ PX eX.hom ⋙ L)
+    (β : ∀ n : ℕ, L ⋙ PY (eY.powSucc n).hom ⟶ PX (eX.powSucc n).hom ⋙ L)
+    (hβ₀ : ∀ a : D, (β 0).app a = β₀.app a)
+    (hβ : ∀ (n : ℕ) (a : D), (compY (eY.powSucc n).hom eY.hom).hom.app (L.obj a) ≫
+      (PY (eY.powSucc n).hom).map (β₀.app a) ≫ (β n).app ((PX eX.hom).obj a) =
+        (β (n + 1)).app a ≫ L.map ((compX (eX.powSucc n).hom eX.hom).hom.app a))
+    {a : D} (φ : (PX eX.hom).obj a ≅ a) (ψ : (PY eY.hom).obj (L.obj a) ≅ L.obj a)
+    (hψ : ψ.hom = β₀.app a ≫ L.map φ.hom) (n : ℕ) :
+    (eY.powSuccStr PY compY ψ n).hom = (β n).app a ≫ L.map (eX.powSuccStr PX compX φ n).hom := by
+  induction n with
+  | zero => exact hψ.trans (by rw [hβ₀]; rfl)
+  | succ n ih =>
+    have hnat := (β n).naturality φ.hom
+    simp only [Functor.comp_map] at hnat
+    rw [powSuccStr_succ_hom, powSuccStr_succ_hom, ih, hψ, Functor.map_comp, Category.assoc,
+      reassoc_of% hnat, reassoc_of% (hβ n a), Functor.map_comp, Functor.map_comp]
+
+end CategoryTheory.Iso
+
+namespace CategoryTheory.Endofunctor.IsoAlgebra
+
+/-- An algebra `mk (L a) Φ` is the transport of `K` along `e : L ⋙ G ≅ F ⋙ L` as soon as its
+structure isomorphism is that of the transport. -/
+lemma mk_eq_mapOfNatIso_obj {C D : Type*} [Category* C] [Category* D] {F : C ⥤ C} {G : D ⥤ D}
+    {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L) (K : IsoAlgebra F)
+    (Φ : G.obj (L.obj K.carrier) ≅ L.obj K.carrier)
+    (h : Φ.hom = e.hom.app K.carrier ≫ L.map K.str.hom) :
+    mk (L.obj K.carrier) Φ = (mapOfNatIso e).obj K := by
+  obtain ⟨⟨a, s⟩, hs⟩ := K
+  obtain ⟨φ, ψ, h₁, h₂⟩ := Φ
+  dsimp at h
+  subst h
+  rfl
+
+/-- The algebra `mk` on the carrier of a transported algebra `(mapOfNatIso e₁).obj K` is the
+transport along `e₂` of `mk K.carrier Φ` as soon as the structure isomorphisms agree. -/
+lemma mk_carrier_mapOfNatIso_obj_eq {C D : Type*} [Category* C] [Category* D] {F₁ F₂ : C ⥤ C}
+    {G₁ G₂ : D ⥤ D} {L : C ⥤ D} (e₁ : L ⋙ G₁ ≅ F₁ ⋙ L) (e₂ : L ⋙ G₂ ≅ F₂ ⋙ L) (K : IsoAlgebra F₁)
+    (Φ : F₂.obj K.carrier ≅ K.carrier)
+    (Ψ : G₂.obj ((mapOfNatIso e₁).obj K).carrier ≅ ((mapOfNatIso e₁).obj K).carrier)
+    (h : Ψ.hom = e₂.hom.app K.carrier ≫ L.map Φ.hom) :
+    mk ((mapOfNatIso e₁).obj K).carrier Ψ = (mapOfNatIso e₂).obj (mk K.carrier Φ) :=
+  mk_eq_mapOfNatIso_obj e₂ (mk K.carrier Φ) Ψ h
+
+/-- The structure morphism of a transported algebra. -/
+lemma mapOfNatIso_obj_str_hom {C D : Type*} [Category* C] [Category* D] {F : C ⥤ C}
+    {G : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L) (K : IsoAlgebra F) :
+    ((mapOfNatIso e).obj K).str.hom = e.hom.app K.carrier ≫ L.map K.str.hom :=
+  rfl
+
+end CategoryTheory.Endofunctor.IsoAlgebra
+
+namespace CategoryTheory.Iso
+
+open Endofunctor
+
+variable {C : Type*} [Category* C] {X Y : C} (eX : X ≅ X) (eY : Y ≅ Y) {D E : Type*}
+  [Category* D] [Category* E] (PX : (X ⟶ X) → D ⥤ D)
+  (compX : ∀ f g : X ⟶ X, PX (f ≫ g) ≅ PX g ⋙ PX f) (PY : (Y ⟶ Y) → E ⥤ E)
+  (compY : ∀ f g : Y ⟶ Y, PY (f ≫ g) ≅ PY g ⋙ PY f) {L : D ⥤ E}
+
+/-- **Transport along a functor commutes with the iterated structure isomorphisms.** For
+comparisons `c : L ⋙ P_Y(e_Y) ≅ P_X(e_X) ⋙ L` and `c' n : L ⋙ P_Y(e_Y^{n+1}) ≅ P_X(e_X^{n+1}) ⋙ L`
+with `c' 0 = c`, satisfying the pasting law `hc` with the composition isomorphisms, the transport
+along `c` of an algebra `K`, with its iterated structure isomorphism, is the transport along
+`c' n` of `K` with its iterated structure isomorphism. -/
+lemma mk_powSuccStr_mapOfNatIso_obj (c : L ⋙ PY eY.hom ≅ PX eX.hom ⋙ L)
+    (c' : ∀ n : ℕ, L ⋙ PY (eY.powSucc n).hom ≅ PX (eX.powSucc n).hom ⋙ L)
+    (hc₀ : ∀ a : D, (c' 0).hom.app a = c.hom.app a)
+    (hc : ∀ (n : ℕ) (a : D), (compY (eY.powSucc n).hom eY.hom).hom.app (L.obj a) ≫
+      (PY (eY.powSucc n).hom).map (c.hom.app a) ≫ (c' n).hom.app ((PX eX.hom).obj a) =
+        (c' (n + 1)).hom.app a ≫ L.map ((compX (eX.powSucc n).hom eX.hom).hom.app a))
+    (K : IsoAlgebra (PX eX.hom)) (n : ℕ) :
+    IsoAlgebra.mk ((IsoAlgebra.mapOfNatIso c).obj K).carrier
+        (eY.powSuccStr PY compY ((IsoAlgebra.mapOfNatIso c).obj K).str n) =
+      (IsoAlgebra.mapOfNatIso (c' n)).obj
+        (IsoAlgebra.mk K.carrier (eX.powSuccStr PX compX K.str n)) :=
+  IsoAlgebra.mk_carrier_mapOfNatIso_obj_eq c (c' n) K _ _
+    (powSuccStr_hom_eq_of_paste eX eY PX compX PY compY L c.hom (fun n ↦ (c' n).hom) hc₀ hc
+      K.str _ (IsoAlgebra.mapOfNatIso_obj_str_hom c K) n)
+
+end CategoryTheory.Iso
+
+
 namespace CategoryTheory.Adjunction
 
 section ExchangeRight
@@ -166,6 +268,13 @@ lemma upperStarSquareComparison_hom_app (sq : CommSq g' f' f g)
   rw [upperStarSquareComparison_eq, Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app,
     NatTrans.comp_app, Iso.symm_hom]
 
+/-- The component of the transport of the pullback along an equality as an `eqToHom`. -/
+lemma upperStarCongr_hom_app_eq_eqToHom {S T : Scheme.{u}} {a b : S ⟶ T} (e : a = b)
+    (N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    (upperStarCongr Λ e).hom.app N = eqToHom (by rw [e]) := by
+  subst e
+  rfl
+
 /-- The composition isomorphism `(a ≫ t)^* ≅ t^* ⋙ a^*` is compatible with the transport along
 an equality `a = b`. -/
 @[reassoc]
@@ -225,24 +334,7 @@ lemma upperStarSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq
     ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
     upperStarComp_hom_app_map_upperStarCongr_hom_app_assoc Λ h' sq₁.w.symm,
     upperStarComp_hom_app_comp_map_upperStarComp_hom_app Λ h' g' f]
-
-  sorry
-
-example {c : X'' ⟶ Y} (e₂ : (f'' ≫ h) ≫ g = c)
-    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    (upperStarCongr Λ (Category.assoc f'' h g).symm).hom.app N ≫
-      (upperStarCongr Λ e₂).hom.app N =
-    (upperStarCongr Λ ((Category.assoc f'' h g).symm.trans e₂)).hom.app N :=
-  upperStarCongr_hom_app_trans Λ (Category.assoc f'' h g).symm e₂ N
-
-set_option diagnostics true in
-example {c : X'' ⟶ Y} (e₂ : (f'' ≫ h) ≫ g = c)
-    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    (upperStarCongr Λ (Category.assoc f'' h g).symm).hom.app N ≫
-      (upperStarCongr Λ e₂).hom.app N =
-    (upperStarCongr Λ ((Category.assoc f'' h g).symm.trans e₂)).hom.app N := by
-  set_option maxHeartbeats 30000 in
-  exact upperStarCongr_hom_app_trans Λ _ _ N
+  simp only [upperStarCongr_hom_app_eq_eqToHom, eqToHom_trans_assoc]
 
 /-- **Pasting law of the base-change morphisms**: the base-change morphism of the outer square of
 two horizontally pasted squares is the pasting of their base-change morphisms, through the
@@ -299,15 +391,65 @@ lemma weilSheafLowerStar_obj_str (F : WeilSheaf ℓ eX) :
         (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.mapIso F.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ F
 
+/-- `weilSheafLowerStar` as a transport of algebras. -/
+lemma weilSheafLowerStar_eq :
+    weilSheafLowerStar ℓ eX eY hf =
+      IsoAlgebra.mapOfNatIso (weilSheafLowerStarComparison ℓ eX eY hf) :=
+  rfl
+
+/-- `WeilSheaf.powSucc` as an algebra `mk`. -/
+lemma WeilSheaf.powSucc_eq_mk {Z : Over (Spec (.of k))} {e : Z ≅ Z}
+    (G : WeilSheaf ℓ e) (n : ℕ) :
+    WeilSheaf.powSucc ℓ G n = IsoAlgebra.mk G.carrier
+      (e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) G.str n) :=
+  rfl
+
+attribute [local irreducible] upperStar lowerStar
+
+
+set_option maxHeartbeats 2000000 in
+set_option diagnostics true in
+/-- **Transport of Weil sheaves commutes with the iterated Weil structures**: for comparisons
+`c : L ⋙ e_W^* ≅ e_Z^* ⋙ L` and `c' m : L ⋙ (e_W^{m+1})^* ≅ (e_Z^{m+1})^* ⋙ L` with `c' 0 = c`,
+satisfying the pasting law `hc` with the composition isomorphisms `upperStarComp`, transport
+along `c` followed by `WeilSheaf.powSucc` is `WeilSheaf.powSucc` followed by transport
+along `c' n`. -/
+lemma WeilSheaf.powSucc_mapOfNatIso_obj {Z W : Over (Spec (.of k))} (eZ : Z ≅ Z) (eW : W ≅ W)
+    {L : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology W.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) W.left)}
+    (c : L ⋙ (eW.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
+      (eZ.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ L)
+    (c' : ∀ m : ℕ, L ⋙ ((eW.powSucc m).hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
+      ((eZ.powSucc m).hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ L)
+    (hc₀ : ∀ a, (c' 0).hom.app a = c.hom.app a)
+    (hc : ∀ (m : ℕ) (a), (upperStarComp (Profinite.padicAlgClRingObj ℓ) (eW.powSucc m).hom.left
+        eW.hom.left).hom.app (L.obj a) ≫
+      ((eW.powSucc m).hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (c.hom.app a) ≫
+        (c' m).hom.app ((eZ.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj a) =
+      (c' (m + 1)).hom.app a ≫ L.map ((upperStarComp (Profinite.padicAlgClRingObj ℓ)
+        (eZ.powSucc m).hom.left eZ.hom.left).hom.app a))
+    (F : WeilSheaf ℓ eZ) (n : ℕ) :
+    WeilSheaf.powSucc ℓ ((IsoAlgebra.mapOfNatIso c).obj F) n =
+      (IsoAlgebra.mapOfNatIso (c' n)).obj (WeilSheaf.powSucc ℓ F n) :=
+  Iso.mk_powSuccStr_mapOfNatIso_obj eZ eW (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
+    (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) c c' hc₀ hc F n
+
 /-- **The pushforward commutes with the iterated Weil structures**: for a Weil sheaf `F` for
 `e_X`, the Weil sheaf `(f_* F)^{(n+1)}` for `e_Y^{n+1}` is the pushforward of the Weil sheaf
-`F^{(n+1)}` for `e_X^{n+1}`. The iterated comparison is the base-change morphism of the pasted
-squares, by the pasting law of exchange morphisms. -/
-theorem nonempty_powSucc_weilSheafLowerStar_iso (F : WeilSheaf ℓ eX) (n : ℕ) :
-    Nonempty (WeilSheaf.powSucc ℓ ((weilSheafLowerStar ℓ eX eY hf).obj F) n ≅
+`F^{(n+1)}` for `e_X^{n+1}`: the iterated structure isomorphisms agree by the pasting law of the
+base-change morphisms (`lowerStarBaseChange_app_paste`). -/
+theorem powSucc_weilSheafLowerStar_obj (F : WeilSheaf ℓ eX) (n : ℕ) :
+    WeilSheaf.powSucc ℓ ((weilSheafLowerStar ℓ eX eY hf).obj F) n =
       (weilSheafLowerStar ℓ (eX.powSucc n) (eY.powSucc n)
-        (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)).obj
-        (WeilSheaf.powSucc ℓ F n)) :=
-  sorry
+        (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)).obj (WeilSheaf.powSucc ℓ F n) :=
+  WeilSheaf.powSucc_mapOfNatIso_obj ℓ eX eY (weilSheafLowerStarComparison ℓ eX eY hf)
+    (fun m ↦ weilSheafLowerStarComparison ℓ (eX.powSucc m) (eY.powSucc m)
+      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf m))
+    (fun _ ↦ sorry) (fun m a ↦ sorry) F n
 
 end AlgebraicGeometry.ProEtale.CondensedRing
