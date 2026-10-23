@@ -214,14 +214,33 @@ theorem rightAcyclic_comparisonUpperStar_obj_of_injective_addCommGrpCat
 omit [IsAffine W] in
 /-- **Comparison of global cohomology for abelian sheaves.** The derived global sections of the
 comparison pullback `ν^* M` of an étale sheaf of abelian groups are those of `M`:
-`RΓ(W_proét, ν^* M) ≅ RΓ(W_ét, M)`, by
+`RΓ(W_proét, ν^* M) ≅ RΓ(W_ét, M)` in the bounded below derived category, by
 `rightAcyclic_comparisonUpperStar_obj_of_injective_addCommGrpCat`. -/
+noncomputable def rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoAddCommGrpCat
+    (M : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    (globalSectionsFunctor AddCommGrpCat.{u + 1} W).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj
+          ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj M)) ≅
+      (Etale.sectionsFunctor AddCommGrpCat.{u + 1} W).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj M) :=
+  rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic _ W
+    (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective_addCommGrpCat I) M
+
+omit [IsAffine W] in
+/-- **Comparison of global cohomology for abelian sheaves.** The derived global sections of the
+comparison pullback `ν^* M` of an étale sheaf of abelian groups are those of `M` in each degree:
+`R^qΓ(W_proét, ν^* M) ≅ R^qΓ(W_ét, M)`, the cohomology in degree `q` of
+`rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoAddCommGrpCat`. -/
 noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoAddCommGrpCat
     (M : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     ((globalSectionsFunctor AddCommGrpCat.{u + 1} W).rightDerived q).obj
         ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj M) ≅
       ((Etale.sectionsFunctor AddCommGrpCat.{u + 1} W).rightDerived q).obj M :=
-  rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoOfRightAcyclic _ W
-    (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective_addCommGrpCat I) M q
+  ((globalSectionsFunctor _ W).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).symm.app _ ≪≫
+    (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+      (rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoAddCommGrpCat M) ≪≫
+    ((Etale.sectionsFunctor _ W).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).app M
 
 end AlgebraicGeometry.ProEtale

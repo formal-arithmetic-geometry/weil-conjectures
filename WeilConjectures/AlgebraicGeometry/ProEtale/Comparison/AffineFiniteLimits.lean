@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 
 /-!
 # Finite limits on the affine étale and affine pro-étale sites of an affine scheme
@@ -36,16 +37,6 @@ hypotheses of `CategoryTheory.Presheaf.exactAt_cechComplex_comp_iff`.
 universe u
 
 open CategoryTheory Limits MorphismProperty
-
-namespace CategoryTheory.Limits
-
-/-- A functor sending some terminal object to a terminal object preserves terminal objects. -/
-lemma preservesLimit_empty_of_isTerminal {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)
-    {X : C} (hX : IsTerminal X) (hGX : IsTerminal (G.obj X)) :
-    PreservesLimit (Functor.empty.{0} C) G :=
-  preservesLimit_of_preserves_limit_cone hX ((isLimitMapConeEmptyConeEquiv G X).symm hGX)
-
-end CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 

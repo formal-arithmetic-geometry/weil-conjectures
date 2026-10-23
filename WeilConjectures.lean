@@ -9146,6 +9146,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
