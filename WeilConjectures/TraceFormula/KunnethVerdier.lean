@@ -168,19 +168,14 @@ theorem isIso_exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRin
     IsIso (exceptionalKunnethMap ℓ (Y := Y) M) :=
   sorry
 
-/-- Precomposition with an isomorphism is an isomorphism of internal homs. -/
-instance isIso_pre_app {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞] [MonoidalClosed 𝒞]
-    {A B : 𝒞} (e : B ⟶ A) [IsIso e] (Z : 𝒞) : IsIso ((pre e).app Z) :=
-  ⟨(pre (inv e)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
-    by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
-
 /-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (blueprint `def-sf-kv-maps` (iv)): through
 the unit identifications `M ≅ RHom(ℚ̄_ℓ, M)` and `ℚ̄_ℓ ⊠ N ≅ Lp_Y^* N`, `κ_{M,N}` is the external
 Hom map `β` for the pairs `(ℚ̄_ℓ, M)` and `(N, ω_Y)` followed by the exceptional Künneth map. -/
 lemma kunnethVerdierMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     kunnethVerdierMap ℓ M N =
-      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map (ihomUnitMap M) ▷ _ ≫
+      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+          (MonoidalClosed.unitNatIso.hom.app M) ▷ _ ≫
         externalHomMap (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) (𝟙_ _) M N
           (dualizingComplex' ℓ Y) ≫

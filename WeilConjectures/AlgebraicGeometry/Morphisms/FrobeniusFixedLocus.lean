@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
 
 /-!
@@ -20,15 +20,14 @@ fixed by `h`, then `t` is constant: it factors through a `k`-rational point `x` 
 
 The algebraic input is that in a local algebra `A` over an algebraically closed field `k`, an
 element `r` with `r ^ N = r` is a scalar, when `r ↦ r ^ N` is a ring endomorphism and `N ≥ 2`
-(`IsLocalRing.exists_algebraMap_eq_of_pow_eq_self`): `r` is congruent to a root `c` of
+(`IsLocalRing.exists_algebraMap_eq_of_pow_eq_self`, in
+`WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic`): `r` is congruent to a root `c` of
 `X ^ N - X` in `k` modulo the maximal ideal, and `n = r - c` satisfies `n ^ N = n` with
 `n ∈ 𝔪`, so `n (1 - n ^ (N - 1)) = 0` forces `n = 0`. This is the scheme-theoretic part of
 blueprint `thm-trf-frobenius-fixed-points`: the fixed scheme of `h` is reduced.
 
 ## Main statements
 
-- `IsLocalRing.exists_algebraMap_eq_of_pow_eq_self`: Frobenius-fixed elements of a local algebra
-  over an algebraically closed field are scalars.
 - `AlgebraicGeometry.exists_eq_comp_of_comp_eq_self_of_isFrobenius`: a local point fixed by `h`
   factors through a fixed rational point.
 -/
@@ -37,45 +36,7 @@ blueprint `thm-trf-frobenius-fixed-points`: the fixed scheme of `h` is reduced.
 
 universe u
 
-open CategoryTheory Limits IsLocalRing Polynomial
-
-/-- In a local algebra `A` over an algebraically closed field `K`, an element `r` with
-`r ^ N = r` is a scalar, provided `N ≥ 2` and `r ↦ r ^ N` is a ring endomorphism of `A`. -/
-lemma IsLocalRing.exists_algebraMap_eq_of_pow_eq_self {K A : Type*} [Field K] [IsAlgClosed K]
-    [CommRing A] [IsLocalRing A] [Algebra K A] {N : ℕ} (hN : 2 ≤ N) (χ : A →+* A)
-    (hχ : ∀ r, χ r = r ^ N) {r : A} (hr : r ^ N = r) : ∃ c : K, algebraMap K A c = r := by
-  -- `X ^ N - X` splits over `K`
-  set P : K[X] := X ^ N - X with hP
-  have hPm : P.Monic := monic_X_pow_sub (by rw [degree_X]; exact_mod_cast hN)
-  have hPdeg : P.natDegree = N := by
-    rw [hP, natDegree_sub_eq_left_of_natDegree_lt] <;> simp; omega
-  have hprod := prod_multiset_X_sub_C_of_monic_of_roots_card_eq hPm
-    IsAlgClosed.card_roots_eq_natDegree
-  have h0 : (P.roots.map fun c ↦ r - algebraMap K A c).prod ∈ maximalIdeal A := by
-    have := congr(aeval r $hprod)
-    rw [map_multiset_prod, Multiset.map_map] at this
-    simp only [Function.comp_def, map_sub, aeval_X, aeval_C, hP, map_pow, hr, sub_self] at this
-    rw [this]
-    exact zero_mem _
-  obtain ⟨_, hmem, hn⟩ := ((maximalIdeal.isMaximal A).isPrime.multiset_prod_mem_iff_exists_mem
-    _).mp h0
-  obtain ⟨c, hc, rfl⟩ := Multiset.mem_map.mp hmem
-  have hcN : c ^ N = c := by
-    have := (mem_roots hPm.ne_zero).mp hc
-    simpa [hP, sub_eq_zero] using this
-  refine ⟨c, ?_⟩
-  -- `n = r - c` lies in `𝔪` and satisfies `n ^ N = n`
-  set n := r - algebraMap K A c
-  have hnN : n ^ N = n := by
-    rw [← hχ, map_sub, hχ, hχ, hr, ← map_pow, hcN]
-  have hunit : IsUnit (1 - n ^ (N - 1)) := by
-    refine (IsLocalRing.isUnit_one_sub_self_of_mem_nonunits _ ?_)
-    exact (maximalIdeal A).pow_mem_of_mem hn _ (by omega)
-  have : n * (1 - n ^ (N - 1)) = 0 := by
-    rw [mul_sub, mul_one, ← pow_succ', Nat.sub_add_cancel (by omega), hnN, sub_self]
-  have hn0 : n = 0 := by
-    simpa using (hunit.mul_left_eq_zero).mp this
-  exact (sub_eq_zero.mp hn0).symm
+open CategoryTheory Limits IsLocalRing
 
 namespace AlgebraicGeometry
 
