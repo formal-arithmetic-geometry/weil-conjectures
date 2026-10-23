@@ -16,8 +16,8 @@ For an exact functor `F` between abelian categories, the isomorphisms
 `F.leftDerivedFunctorHomologyFunctorIso n : H^n(-) ⋙ F ≅ F.leftDerivedFunctor ⋙ H^n(-)`
 are compatible with isomorphisms of functors and with the composition of functors:
 
-- `Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryNatIso`,
-  `Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryCompIso`;
+- `Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryCompIso` (the
+  naturality in `F` is `Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_naturality`);
 - `Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorNatIso`,
   `Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorCompIso`.
 
@@ -38,42 +38,6 @@ section MapDerivedCategory
 variable {C : Type uC} {D : Type uD} {E : Type uE} [Category.{vC} C] [Category.{vD} D]
   [Category.{vE} E] [Abelian C] [Abelian D] [Abelian E]
   [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D] [HasDerivedCategory.{wE} E]
-
-set_option backward.isDefEq.respectTransparency false in
-/-- The isomorphism `F.mapDerivedCategoryHomologyFunctorIso n` is natural in the exact
-functor `F`. -/
-@[reassoc]
-lemma mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryNatIso
-    {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) (n : ℤ)
-    (K : DerivedCategory C) :
-    (F.mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (DerivedCategory.homologyFunctor D n).map ((mapDerivedCategoryNatIso e).hom.app K) =
-      e.hom.app ((DerivedCategory.homologyFunctor C n).obj K) ≫
-        (G.mapDerivedCategoryHomologyFunctorIso n).hom.app K := by
-  have h := Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
-    (τ := (F.mapDerivedCategoryHomologyFunctorIso n).hom ≫
-      whiskerRight (mapDerivedCategoryNatIso e).hom (DerivedCategory.homologyFunctor D n))
-    (τ' := whiskerLeft (DerivedCategory.homologyFunctor C n) e.hom ≫
-      (G.mapDerivedCategoryHomologyFunctorIso n).hom) (fun L ↦ by
-      have h₁ : F.mapDerivedCategoryFactors.inv.app L ≫
-          (mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj L) =
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app L) ≫
-            G.mapDerivedCategoryFactors.inv.app L := by
-        rw [← cancel_epi (F.mapDerivedCategoryFactors.hom.app L), Iso.hom_inv_id_app_assoc,
-          ← mapDerivedCategoryNatIso_fac_assoc, Iso.hom_inv_id_app]
-        exact (comp_id _).symm
-      simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
-        mapDerivedCategoryHomologyFunctorIso_hom_app_Q, assoc]
-      rw [← Functor.map_comp, h₁, Functor.map_comp]
-      have hn := (DerivedCategory.homologyFunctorFactors D n).inv.naturality
-        ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app L)
-      simp only [Functor.comp_map] at hn
-      rw [← reassoc_of% hn, mapHomologicalComplexHomologyIso_inv_app_comp_map_assoc]
-      exact e.hom.naturality_assoc _ _)
-  exact congr_app h K
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The composition isomorphism `Functor.mapDerivedCategoryCompIso` is compatible with the
@@ -99,6 +63,7 @@ lemma mapDerivedCategoryFactors_inv_app_comp_mapDerivedCategoryCompIso_hom_app
   simp only [Iso.trans_inv, Iso.app_inv, Functor.mapIso_inv, assoc] at h
   rw [← h]
   simp
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The isomorphism `F.mapDerivedCategoryHomologyFunctorIso n` is compatible with the
 composition of exact functors. -/
@@ -136,7 +101,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryCo
         ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app L)
       simp only [Functor.comp_map] at hn
       rw [Functor.map_comp, ← reassoc_of% hn,
-        mapHomologicalComplexHomologyIso_inv_app_comp_map_mapHomologicalComplexCompIso_inv_app_assoc]
+        mapHomologicalComplexHomologyIso_inv_app_comp_map_compIso_inv_app_assoc]
       simp only [assoc, Iso.refl_inv, NatTrans.id_app, ← G.map_comp_assoc,
         Iso.inv_hom_id_app]
       erw [id_comp, comp_id]
@@ -175,7 +140,7 @@ lemma leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorNa
       e.hom.app ((DerivedCategory.homologyFunctor C n).obj K) ≫
         (G.leftDerivedFunctorHomologyFunctorIso n).hom.app K := by
   simp [leftDerivedFunctorHomologyFunctorIso, leftDerivedFunctorNatIso,
-    mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryNatIso_assoc]
+    ← mapDerivedCategoryHomologyFunctorIso_hom_app_naturality_assoc]
 
 section Composition
 

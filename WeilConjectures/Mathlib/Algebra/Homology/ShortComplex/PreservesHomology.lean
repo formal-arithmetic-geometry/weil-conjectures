@@ -83,7 +83,9 @@ lemma mapCyclesIso_hom_comp_app [S.HasLeftHomology] [(S.map F).HasLeftHomology]
     mapCyclesIso_hom_iCycles_assoc, cyclesMap_i, mapNatTrans_τ₂]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The isomorphism `S.mapHomologyIso F` is natural in the functor `F`. -/
+/-- The isomorphism `S.mapHomologyIso F` is natural in the functor `F`. This strengthens Mathlib's
+`ShortComplex.homologyMap_mapNatTrans` (and `NatTrans.app_homology`) by only assuming that `F`
+and `G` preserve the left homology of `S`. -/
 @[reassoc]
 lemma mapHomologyIso_hom_comp_app [S.HasHomology] [(S.map F).HasHomology]
     [(S.map G).HasHomology] [F.PreservesLeftHomologyOf S] [G.PreservesLeftHomologyOf S] :
