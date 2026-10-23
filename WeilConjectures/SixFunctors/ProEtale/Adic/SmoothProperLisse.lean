@@ -102,6 +102,7 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isP
         ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F)))) := by
     obtain ⟨U, j, hj, hU, hy, σ, hσ⟩ := exists_etale_isTwistedSection_of_isProper f f₀ hc
       (fun Z π _ _ _ ↦ exists_isTwistedSection_compactOpenLattice_of_isRegular f₀ γ hc π) y
+    have := hU
     refine ⟨U, j, hj, hy, ?_⟩
     set π := pullback.fst f j
     have : IsAffineHom π := MorphismProperty.pullback_fst (P := @IsAffineHom) _ _ inferInstance
