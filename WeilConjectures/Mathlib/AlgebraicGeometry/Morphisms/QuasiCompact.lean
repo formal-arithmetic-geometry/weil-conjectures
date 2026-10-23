@@ -17,6 +17,9 @@ point of the range (`AlgebraicGeometry.exists_specializes_of_mem_closure_range`)
 the topological content of Stacks Project Tag 02JQ; it is deduced from the corresponding
 statement about prime spectra,
 `PrimeSpectrum.exists_specializes_of_mem_closure_range_comap`.
+
+`AlgebraicGeometry.quasiCompact_overMk_hom` transfers quasi-compactness of `f : X ⟶ S` to the
+structure morphism of the object `Over.mk f` of `Over S`.
 -/
 
 @[expose] public section
@@ -74,5 +77,10 @@ theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
   obtain ⟨t, ht⟩ := exists_specializes_of_mem_closure_range_of_isAffine (h ∣_ V) hzV'
   refine ⟨(h ⁻¹ᵁ V).ι t, ?_⟩
   simpa [Scheme.Opens.ι_apply, morphismRestrict_base_coe] using ht.map V.ι.continuous
+
+/-- The structure morphism of `Over.mk f` is quasi-compact if `f` is. -/
+instance quasiCompact_overMk_hom {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] :
+    QuasiCompact (Over.mk f).hom :=
+  ‹_›
 
 end AlgebraicGeometry

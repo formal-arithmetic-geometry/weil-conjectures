@@ -6,6 +6,9 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
@@ -60,7 +63,8 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
 ## Sorried input
 
 - `ProEtale.CondensedRing.isIso_verdierBiduality`: **constructible biduality**, `δ_K` is an
-  isomorphism for `K` bounded constructible (Input 3.3 of the specification).
+  isomorphism for `K` bounded constructible and `ω_X` the dualizing complex relative to the
+  structure morphism `X ⟶ Spec k` (Input 3.3 of the specification).
 
 -/
 
@@ -139,13 +143,27 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ a (verdierDual ℓ a K) :=
   Verdier.bidualityMap (dualizingComplex ℓ a) K
 
-/-- **Constructible Verdier biduality**: the double-dual morphism `δ_K` is an isomorphism for
-`K` bounded constructible. See the module docstring. -/
-theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+end Dualizing
+
+/-! ### Biduality over the base field -/
+
+section Biduality
+
+variable {X : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- **Constructible Verdier biduality**: for the structure morphism `a : X ⟶ Spec k` of a
+separated `k`-scheme of finite type, the double-dual morphism `δ_K` for the dualizing complex
+`ω_X = Ra^! ℚ̄_ℓ` is an isomorphism for `K` bounded constructible. See the module docstring.
+
+The base must be `Spec k` (or at least regular): for `a = 𝟙` on a nodal curve and `K` the
+skyscraper `ℚ̄_ℓ` at the node, `𝔻𝔻K` has rank `9`. -/
+theorem isIso_verdierBiduality (a : X ⟶ Over.mk (𝟙 (Spec (.of k))))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierBiduality ℓ a K) :=
   sorry
 
-end Dualizing
+end Biduality
 
 /-! ### The absolute and opposite exchange morphisms -/
 
