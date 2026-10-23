@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
@@ -150,18 +151,6 @@ lemma mapDerivedCategoryTensorComparison_app_app_comp (K M : HomotopyCategory C 
     ← NatTrans.naturality_assoc]
   simp only [Category.assoc]
   rfl
-
-omit [HasFunctorialFlatResolution D] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  [F.Monoidal] in
-/-- Every object of `D(C)` is isomorphic to `Qh P` for a complex `P` whose image under `F` is
-K-flat. -/
-lemma exists_kFlatMap_iso (X : DerivedCategory C) :
-    ∃ P, F.kFlatMap P ∧ Nonempty (Qh.obj P ≅ X) := by
-  have := Localization.essSurj (Qh (C := C)) (HomotopyCategory.quasiIso _ (.up ℤ))
-  obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
-    (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatMap) (Qh.objPreimage X)
-  have hw : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
-  exact ⟨R.X₁.obj, R.X₁.property, ⟨@asIso _ _ _ _ (Qh.map R.w) hw ≪≫ Qh.objObjPreimageIso X⟩⟩
 
 /-- The oplax monoidal structure on `D(F) : D(C) ⥤ D(D)` whose comonoidal structure is the
 tensor comparison `CategoryTheory.Functor.mapDerivedCategoryTensorComparison`. It is induced by
