@@ -17,15 +17,15 @@ public import WeilConjectures.RingTheory.Invariant.Etale
 /-!
 # Generic quotients of affine schemes by an automorphism of finite order
 
-For a `k`-algebra `C`, `AlgebraicGeometry.specOver C` is `Spec C` as a scheme over `Spec k`, with
-`AlgebraicGeometry.specOverMap` and `AlgebraicGeometry.specOverIso` the morphisms and isomorphisms
-induced by `k`-algebra maps.
+For a `k`-algebra `C`, `AlgebraicGeometry.specAlgOver C` is `Spec C` as a scheme over `Spec k`,
+with `AlgebraicGeometry.specAlgOverMap` and `AlgebraicGeometry.specAlgOverIso` the morphisms and
+isomorphisms induced by `k`-algebra maps.
 
 The main result is the **generic quotient** of an affine scheme `Spec B` of finite type over a
 field by an automorphism `Spec σ` of finite order (SGA 1, Exposé V, Prop. 1.1 and Cor. 2.4):
 there are a nonempty `σ`-stable basic open `U = Spec B_b`, its reduction `Z = U_red`, and a finite
 étale morphism `π : Z ⟶ V` to an affine scheme of finite type `V`, invariant under the
-automorphism of `Z` induced by `σ` (`AlgebraicGeometry.exists_isFinite_etale_specOver`). Here
+automorphism of `Z` induced by `σ` (`AlgebraicGeometry.exists_isFinite_etale_specAlgOver`). Here
 `V = Spec R_c`, for a finitely generated subalgebra `R` of invariants of `A = B_red` over which
 `A` is finite and generically étale
 (`Algebra.IsInvariant.exists_subalgebra_basicOpen_subset_etaleLocus`).
@@ -42,63 +42,63 @@ namespace AlgebraicGeometry
 variable {k : Type u} [Field k]
 
 /-- `Spec C` as a scheme over `Spec k`, for a `k`-algebra `C`. -/
-noncomputable def specOver (C : Type u) [CommRing C] [Algebra k C] : Over (Spec (.of k)) :=
+noncomputable def specAlgOver (C : Type u) [CommRing C] [Algebra k C] : Over (Spec (.of k)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k C)))
 
 variable {C D E : Type u} [CommRing C] [CommRing D] [CommRing E] [Algebra k C] [Algebra k D]
   [Algebra k E]
 
-instance [Algebra.FiniteType k C] : LocallyOfFiniteType (specOver (k := k) C).hom := by
-  dsimp only [specOver, Over.mk_hom]
+instance [Algebra.FiniteType k C] : LocallyOfFiniteType (specAlgOver (k := k) C).hom := by
+  dsimp only [specAlgOver, Over.mk_hom]
   rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType), CommRingCat.hom_ofHom]
   exact RingHom.finiteType_algebraMap.2 inferInstance
 
-instance : QuasiCompact (specOver (k := k) C).hom := by
-  dsimp only [specOver, Over.mk_hom]
+instance : QuasiCompact (specAlgOver (k := k) C).hom := by
+  dsimp only [specAlgOver, Over.mk_hom]
   have : IsAffineHom (Spec.map (CommRingCat.ofHom (algebraMap k C))) := isAffineHom_of_isAffine _
   infer_instance
 
-instance : IsSeparated (specOver (k := k) C).hom := by
-  dsimp only [specOver, Over.mk_hom]; infer_instance
+instance : IsSeparated (specAlgOver (k := k) C).hom := by
+  dsimp only [specAlgOver, Over.mk_hom]; infer_instance
 
-instance : IsAffine (specOver (k := k) C).left := by
-  dsimp only [specOver, Over.mk_left]; infer_instance
+instance : IsAffine (specAlgOver (k := k) C).left := by
+  dsimp only [specAlgOver, Over.mk_left]; infer_instance
 
 /-- `Spec` of a `k`-algebra map, as a morphism of schemes over `Spec k`. -/
-noncomputable def specOverMap (f : C →ₐ[k] D) : specOver (k := k) D ⟶ specOver C :=
+noncomputable def specAlgOverMap (f : C →ₐ[k] D) : specAlgOver (k := k) D ⟶ specAlgOver C :=
   Over.homMk (Spec.map (CommRingCat.ofHom f.toRingHom)) (by
-    dsimp only [specOver, Over.mk_hom]
+    dsimp only [specAlgOver, Over.mk_hom]
     rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
     congr 2
     exact RingHom.ext fun r ↦ f.commutes r)
 
-lemma specOverMap_left (f : C →ₐ[k] D) :
-    (specOverMap f).left = Spec.map (CommRingCat.ofHom f.toRingHom) :=
+lemma specAlgOverMap_left (f : C →ₐ[k] D) :
+    (specAlgOverMap f).left = Spec.map (CommRingCat.ofHom f.toRingHom) :=
   rfl
 
 @[simp]
-lemma specOverMap_id : specOverMap (AlgHom.id k C) = 𝟙 _ := by
+lemma specAlgOverMap_id : specAlgOverMap (AlgHom.id k C) = 𝟙 _ := by
   ext1
   exact Spec.map_id _
 
 @[reassoc]
-lemma specOverMap_comp (f : C →ₐ[k] D) (g : D →ₐ[k] E) :
-    specOverMap (g.comp f) = specOverMap g ≫ specOverMap f := by
+lemma specAlgOverMap_comp (f : C →ₐ[k] D) (g : D →ₐ[k] E) :
+    specAlgOverMap (g.comp f) = specAlgOverMap g ≫ specAlgOverMap f := by
   ext1
   exact Spec.map_comp (CommRingCat.ofHom f.toRingHom) (CommRingCat.ofHom g.toRingHom)
 
 /-- `Spec` of a `k`-algebra isomorphism. -/
 @[simps]
-noncomputable def specOverIso (e : C ≃ₐ[k] D) : specOver (k := k) D ≅ specOver C where
-  hom := specOverMap e.toAlgHom
-  inv := specOverMap e.symm.toAlgHom
+noncomputable def specAlgOverIso (e : C ≃ₐ[k] D) : specAlgOver (k := k) D ≅ specAlgOver C where
+  hom := specAlgOverMap e.toAlgHom
+  inv := specAlgOverMap e.symm.toAlgHom
   hom_inv_id := by
-    rw [← specOverMap_comp]
-    convert specOverMap_id
+    rw [← specAlgOverMap_comp]
+    convert specAlgOverMap_id
     ext x; simp
   inv_hom_id := by
-    rw [← specOverMap_comp]
-    convert specOverMap_id
+    rw [← specAlgOverMap_comp]
+    convert specAlgOverMap_id
     ext x; simp
 
 end AlgebraicGeometry
@@ -112,11 +112,11 @@ automorphism of finite order of a nonzero finitely generated `k`-algebra `B`. Th
 open subscheme `j : U ⟶ Spec B`, stable under `Spec σ`, a surjective closed immersion `i : Z ⟶ U`
 (the reduction of `U`), stable under the induced automorphism `e_Z`, and a finite étale morphism
 `π : Z ⟶ V` to an affine scheme of finite type over `k` with `e_Z ≫ π = π`. -/
-theorem exists_isFinite_etale_specOver (B : Type u) [CommRing B] [Algebra k B]
+theorem exists_isFinite_etale_specAlgOver (B : Type u) [CommRing B] [Algebra k B]
     [Algebra.FiniteType k B] [Nontrivial B] (σ : B ≃ₐ[k] B) {m : ℕ} (hσ : σ ^ (m + 1) = 1) :
     ∃ (U : Over (Spec (.of k))) (_ : LocallyOfFiniteType U.hom) (_ : QuasiCompact U.hom)
-      (_ : IsSeparated U.hom) (eU : U ≅ U) (j : U ⟶ specOver B) (_ : IsOpenImmersion j.left)
-      (_ : eU.hom ≫ j = j ≫ (specOverIso σ).hom) (Z : Over (Spec (.of k)))
+      (_ : IsSeparated U.hom) (eU : U ≅ U) (j : U ⟶ specAlgOver B) (_ : IsOpenImmersion j.left)
+      (_ : eU.hom ≫ j = j ≫ (specAlgOverIso σ).hom) (Z : Over (Spec (.of k)))
       (_ : LocallyOfFiniteType Z.hom) (_ : QuasiCompact Z.hom) (_ : IsSeparated Z.hom)
       (eZ : Z ≅ Z) (i : Z ⟶ U) (_ : IsClosedImmersion i.left) (_ : eZ.hom ≫ i = i ≫ eU.hom)
       (V : Over (Spec (.of k))) (_ : IsAffine V.left) (_ : LocallyOfFiniteType V.hom)
@@ -243,28 +243,28 @@ theorem exists_isFinite_etale_specOver (B : Type u) [CommRing B] [Algebra k B]
     have : algebraMap B Bb 1 = 0 := by rw [map_one]; exact h.symm
     obtain ⟨⟨_, n, rfl⟩, hn⟩ := (IsLocalization.map_eq_zero_iff (Submonoid.powers b) Bb 1).1 this
     exact ⟨n, by simpa using hn⟩
-  refine ⟨specOver Bb, inferInstance, inferInstance, inferInstance, specOverIso σb,
-    specOverMap (IsScalarTower.toAlgHom k B Bb), ?_, ?_, specOver Ac, inferInstance,
-    inferInstance, inferInstance, specOverIso σAc, specOverMap ψ, ?_, ?_, specOver Rc,
-    inferInstance, inferInstance, specOverMap π, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨specAlgOver Bb, inferInstance, inferInstance, inferInstance, specAlgOverIso σb,
+    specAlgOverMap (IsScalarTower.toAlgHom k B Bb), ?_, ?_, specAlgOver Ac, inferInstance,
+    inferInstance, inferInstance, specAlgOverIso σAc, specAlgOverMap ψ, ?_, ?_, specAlgOver Rc,
+    inferInstance, inferInstance, specAlgOverMap π, ?_, ?_, ?_, ?_, ?_⟩
   · exact inferInstanceAs (IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap B Bb))))
-  · rw [specOverIso_hom, specOverIso_hom, ← specOverMap_comp, ← specOverMap_comp]
+  · rw [specAlgOverIso_hom, specAlgOverIso_hom, ← specAlgOverMap_comp, ← specAlgOverMap_comp]
     congr 1
     ext x
     exact Localization.awayAlgEquiv_algebraMap σ b hb x
   · exact IsClosedImmersion.spec_of_surjective _ hψ
-  · rw [specOverIso_hom, specOverIso_hom, ← specOverMap_comp, ← specOverMap_comp]
-    exact congrArg specOverMap hψσ.symm
-  · rw [specOverMap_left, IsFinite.SpecMap_iff]
+  · rw [specAlgOverIso_hom, specAlgOverIso_hom, ← specAlgOverMap_comp, ← specAlgOverMap_comp]
+    exact congrArg specAlgOverMap hψσ.symm
+  · rw [specAlgOverMap_left, IsFinite.SpecMap_iff]
     exact hπfin
-  · rw [specOverMap_left, HasRingHomProperty.Spec_iff (P := @Etale)]
+  · rw [specAlgOverMap_left, HasRingHomProperty.Spec_iff (P := @Etale)]
     exact hπet
   · exact inferInstanceAs (Nonempty (PrimeSpectrum Bb))
-  · rw [specOverMap_left, Spec.map_base]
+  · rw [specAlgOverMap_left, Spec.map_base]
     change Function.Surjective (PrimeSpectrum.comap ψ.toRingHom)
     rw [← Set.range_eq_univ, range_comap_of_surjective _ _ hψ,
       PrimeSpectrum.zeroLocus_eq_univ_iff]
     exact hψker
-  · rw [specOverIso_hom, ← specOverMap_comp, hπσ]
+  · rw [specAlgOverIso_hom, ← specAlgOverMap_comp, hπσ]
 
 end AlgebraicGeometry

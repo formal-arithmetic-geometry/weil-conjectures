@@ -21,8 +21,8 @@ morphism `π : Z ⟶ V` to an affine scheme of finite type with `e_Z ≫ π = π
 Prop. 1.1 and Cor. 2.4). The proof finds a nonempty `e_X`-stable affine open
 (`AlgebraicGeometry.exists_nonempty_isAffineOpen_preimage_eq_self`, the intersection of the
 translates of a dense affine open), presents it as `Spec B` with `e_X = Spec σ`
-(`AlgebraicGeometry.exists_specOver_isOpenImmersion`), and applies the affine case
-`AlgebraicGeometry.exists_isFinite_etale_specOver`.
+(`AlgebraicGeometry.exists_specAlgOver_isOpenImmersion`), and applies the affine case
+`AlgebraicGeometry.exists_isFinite_etale_specAlgOver`.
 
 It also records the powers of products of automorphisms and of the automorphism of the fixed locus
 of `e_Y^{m+1}` (`AlgebraicGeometry.Scheme.overProdIso_powSucc`,
@@ -135,12 +135,12 @@ theorem exists_nonempty_isAffineOpen_preimage_eq_self (X : Over (Spec (.of k)))
 /-- A nonempty separated scheme of finite type over `k` with an automorphism `e` of finite order
 contains a nonempty `e`-stable affine open subscheme `Spec B`, on which `e` is `Spec σ` for an
 automorphism `σ` of the `k`-algebra `B` of finite order. -/
-theorem exists_specOver_isOpenImmersion (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+theorem exists_specAlgOver_isOpenImmersion (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] (eX : X ≅ X) {m : ℕ}
     (hm : eX.powSucc m = Iso.refl X) [Nonempty X.left] :
     ∃ (B : Type u) (_ : CommRing B) (_ : Algebra k B) (_ : Algebra.FiniteType k B)
-      (_ : Nontrivial B) (σ : B ≃ₐ[k] B) (_ : σ ^ (m + 1) = 1) (ι : specOver B ⟶ X),
-      IsOpenImmersion ι.left ∧ (specOverIso σ).hom ≫ ι = ι ≫ eX.hom := by
+      (_ : Nontrivial B) (σ : B ≃ₐ[k] B) (_ : σ ^ (m + 1) = 1) (ι : specAlgOver B ⟶ X),
+      IsOpenImmersion ι.left ∧ (specAlgOverIso σ).hom ≫ ι = ι ≫ eX.hom := by
   have appLE_of_eq : ∀ {Y : Scheme.{u}} {f g : X.left ⟶ Y} (h : f = g) {U : Y.Opens}
       {V : X.left.Opens} (e : V ≤ f ⁻¹ᵁ U), f.appLE U V e = g.appLE U V (h ▸ e) := by
     intro Y f g h U V e; subst h; rfl
@@ -203,14 +203,14 @@ theorem exists_specOver_isOpenImmersion (X : Over (Spec (.of k))) [LocallyOfFini
     rw [hpow, AlgEquiv.one_apply, appLE_of_eq (g := 𝟙 X.left) (by
       rw [hm, Iso.refl_hom, Over.id_left]), appLE_id]
     rfl
-  · dsimp only [specOver, Over.mk_hom]
+  · dsimp only [specAlgOver, Over.mk_hom]
     rw [← IsAffineOpen.SpecMap_appLE_fromSpec X.hom (isAffineOpen_top _) hW le_top,
       IsAffineOpen.fromSpec_top,
       Scheme.isoSpec_Spec_inv, ← Spec.map_comp]
     rfl
   · exact inferInstanceAs (IsOpenImmersion hW.fromSpec)
   · refine Over.OverMorphism.ext ?_
-    simp only [Over.comp_left, specOverIso_hom, specOverMap_left]
+    simp only [Over.comp_left, specAlgOverIso_hom, specAlgOverMap_left]
     exact IsAffineOpen.SpecMap_appLE_fromSpec eX.hom.left hW hW hWst.ge
 
 
@@ -231,9 +231,9 @@ theorem exists_isFinite_etale_of_powSucc_eq_refl (X : Over (Spec (.of k)))
       (_ : IsAffine V.left) (_ : LocallyOfFiniteType V.hom) (π : Z ⟶ V) (_ : IsFinite π.left)
       (_ : Etale π.left),
       Nonempty U.left ∧ Function.Surjective i.left.base ∧ eZ.hom ≫ π = π := by
-  obtain ⟨B, _, _, _, _, σ, hσ, ι, hι, hιe⟩ := exists_specOver_isOpenImmersion X eX hm
+  obtain ⟨B, _, _, _, _, σ, hσ, ι, hι, hιe⟩ := exists_specAlgOver_isOpenImmersion X eX hm
   obtain ⟨U, _, _, _, eU, j, _, hj, Z, _, _, _, eZ, i, _, hi, V, _, _, π, _, _, hU, hsurj, hπ⟩ :=
-    exists_isFinite_etale_specOver B σ hσ
+    exists_isFinite_etale_specAlgOver B σ hσ
   have : IsOpenImmersion (j ≫ ι).left := by rw [Over.comp_left]; infer_instance
   refine ⟨U, inferInstance, inferInstance, inferInstance, eU, j ≫ ι, this, ?_, Z, inferInstance,
     inferInstance, inferInstance, eZ, i, inferInstance, hi, V, inferInstance, inferInstance, π,
