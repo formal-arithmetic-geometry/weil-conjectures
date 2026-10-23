@@ -17,9 +17,10 @@ Let `e : X ≅ X` be an automorphism of a scheme over `Spec k` and `(K, φ)` a W
 (`ProEtale.CondensedRing.WeilBoundedConstructible.powSucc`) is a Weil object for `e^{n+1}`, with
 the iterated structure isomorphism `Iso.powSuccStr` of the derived pullbacks, as for Weil sheaves
 (`ProEtale.CondensedRing.WeilSheaf.powSucc`). The homology sheaves of the iterate are the
-iterates of the homology sheaves (`ProEtale.CondensedRing.WeilBoundedConstructible.homologyPowSuccIso`):
-the commutation of the homology sheaves with the derived pullbacks is compatible with the
-composition isomorphisms (`ProEtale.CondensedRing.leftDerivedUpperStarHomologyIso_comp_hom_app`).
+iterates of the homology sheaves
+(`ProEtale.CondensedRing.WeilBoundedConstructible.homologyPowSuccIso`): the commutation of the
+homology sheaves with the derived pullbacks is compatible with the composition isomorphisms
+(`ProEtale.CondensedRing.leftDerivedUpperStarHomologyIso_comp_hom_app`).
 
 The general statement is `CategoryTheory.Iso.powSuccStr_hom_eq_of_comp`: a functor `H` with
 commutation isomorphisms `H ⋙ Q g ≅ P g ⋙ H` compatible with the composition isomorphisms
@@ -74,9 +75,10 @@ theorem powSuccStr_hom_eq_of_comp (P : (X ⟶ X) → D ⥤ D)
       (h ((e.powSucc n).hom ≫ e.hom)).hom.app a ≫
         H.map ((compP (e.powSucc n).hom e.hom).hom.app a ≫ (P (e.powSucc n).hom).map φ.hom ≫
           (e.powSuccStr P compP φ n).hom)
-    rw [ih, Functor.map_comp_assoc, ← (h (e.powSucc n).hom).hom.naturality_assoc,
-      Functor.map_comp, Functor.map_comp, reassoc_of% (hcomp (e.powSucc n).hom e.hom a)]
-    simp only [Functor.comp_map, Category.assoc]
+    have nat := (h (e.powSucc n).hom).hom.naturality φ.hom
+    simp only [Functor.comp_map] at nat
+    rw [ih, Functor.map_comp_assoc, reassoc_of% nat, Functor.map_comp, Functor.map_comp,
+      reassoc_of% (hcomp (e.powSucc n).hom e.hom a)]
 
 end CategoryTheory.Iso
 
@@ -97,12 +99,119 @@ variable {e : X ≅ X}
 /-- The iterate `(K, φ^{(n+1)})` of a Weil object `(K, φ)` for an automorphism `e`: a Weil object
 for `e^{n+1}`, with the iterated structure isomorphism `Iso.powSuccStr` of the derived pullbacks,
 `φ^{(1)} = φ` and `φ^{(n+2)} : L(e^{n+1} ≫ e)^* K ≅ L(e^{n+1})^* Le^* K ≅ L(e^{n+1})^* K ≅ K`. -/
-noncomputable def powSucc (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
+noncomputable abbrev powSucc (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
     WeilBoundedConstructible ℓ (e.powSucc n).hom :=
   IsoAlgebra.mk K.carrier
     (e.powSuccStr (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
       (fun f g ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g) K.str n)
 
 end WeilBoundedConstructible
+
+/-! ### Homology sheaves of the iterates -/
+
+section Homology
+
+variable (n : ℤ)
+
+/-- The commutation `Hⁿ ⋙ g^* ≅ Lg^* ⋙ Hⁿ` of the homology sheaves with the derived pullback along
+an endomorphism `g`, as in `weilHomologyComparison` (which is the case of an automorphism). -/
+noncomputable def weilHomologyComparisonOfHom (g : X ⟶ X) :
+    ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) ⋙
+        (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
+        ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (leftDerivedUpperStarHomologyIso _ g.left n) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ g).symm _ ≪≫
+    Functor.associator _ _ _
+
+lemma weilHomologyComparison_eq (e : X ≅ X) :
+    weilHomologyComparison ℓ e n = weilHomologyComparisonOfHom ℓ n e.hom :=
+  rfl
+
+lemma weilHomologyComparisonOfHom_hom_app (g : X ⟶ X)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilHomologyComparisonOfHom ℓ n g).hom.app K =
+      (leftDerivedUpperStarHomologyIso _ g.left n).hom.app K.obj := by
+  simp only [weilHomologyComparisonOfHom, Iso.trans_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom,
+    boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso, Iso.refl_inv,
+    NatTrans.id_app, Category.id_comp, Category.comp_id]
+  exact (congrArg _ (CategoryTheory.Functor.map_id _ _)).trans (Category.comp_id _)
+
+/-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of the pullbacks of module objects for
+morphisms `f`, `g` over a base, with the source written as the pullback along `(f ≫ g).left`.
+It is `upperStarComp f.left g.left`; stating it with `(f ≫ g).left` keeps the kernel from
+unfolding the pullbacks when comparing `(f ≫ g).left` with `f.left ≫ g.left`. -/
+noncomputable def upperStarCompOver (f g : X ⟶ X) :
+    ((f ≫ g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
+      (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ (f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  upperStarComp _ f.left g.left
+
+/-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of the derived pullbacks, with the
+source written as the derived pullback along `(f ≫ g).left` (see `upperStarCompOver`). -/
+noncomputable def leftDerivedUpperStarCompOver (f g : X ⟶ X) :
+    L(((f ≫ g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
+      L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  Functor.leftDerivedFunctorFactorIso (upperStarCompOver ℓ f g)
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- The commutation of the homology sheaves with the derived pullbacks is compatible with the
+composition isomorphisms `leftDerivedUpperStarCompOver` and `upperStarCompOver`. -/
+lemma leftDerivedUpperStarHomologyIso_compOver_hom_app (f g : X ⟶ X)
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))) :
+    (leftDerivedUpperStarHomologyIso _ (f ≫ g).left n).hom.app M ≫
+        (DerivedCategory.homologyFunctor _ n).map ((leftDerivedUpperStarCompOver ℓ f g).hom.app M) =
+      (upperStarCompOver ℓ f g).hom.app ((DerivedCategory.homologyFunctor _ n).obj M) ≫
+        (f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
+          ((leftDerivedUpperStarHomologyIso _ g.left n).hom.app M) ≫
+        (leftDerivedUpperStarHomologyIso _ f.left n).hom.app
+          (L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj M) :=
+  Functor.leftDerivedFunctorHomologyFunctorIso_factorIso (upperStarCompOver ℓ f g) n M
+
+/-- On the ambient derived category, the composition isomorphism of the derived pullbacks on
+bounded constructible complexes is `leftDerivedUpperStarCompOver`. -/
+lemma boundedConstructibleUpperStarComp_hom_app_hom' (f g : X ⟶ X)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).hom.app K).hom =
+      (leftDerivedUpperStarCompOver ℓ f g).hom.app K.obj :=
+  boundedConstructibleUpperStarComp_hom_app_hom _ ℓ f g K
+
+/-- The commutation of the homology sheaves with the derived pullbacks is compatible with the
+composition isomorphisms. -/
+lemma weilHomologyComparisonOfHom_comp (f g : X ⟶ X)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilHomologyComparisonOfHom ℓ n (f ≫ g)).hom.app K ≫
+        ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n).map
+          ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).hom.app K) =
+      (upperStarCompOver ℓ f g).hom.app
+          (((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n).obj K) ≫
+        (f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
+          ((weilHomologyComparisonOfHom ℓ n g).hom.app K) ≫
+        (weilHomologyComparisonOfHom ℓ n f).hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K) := by
+  have h1 : ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n).map
+      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).hom.app K) =
+        (DerivedCategory.homologyFunctor _ n).map
+          ((leftDerivedUpperStarCompOver ℓ f g).hom.app K.obj) :=
+    congrArg (DerivedCategory.homologyFunctor _ n).map
+      (boundedConstructibleUpperStarComp_hom_app_hom' ℓ f g K)
+  rw [weilHomologyComparisonOfHom_hom_app, weilHomologyComparisonOfHom_hom_app,
+    weilHomologyComparisonOfHom_hom_app, h1]
+  exact leftDerivedUpperStarHomologyIso_compOver_hom_app ℓ n f g K.obj
+
+
+namespace WeilBoundedConstructible
+
+variable {e : X ≅ X}
+
+end WeilBoundedConstructible
+
+end Homology
 
 end AlgebraicGeometry.ProEtale.CondensedRing
