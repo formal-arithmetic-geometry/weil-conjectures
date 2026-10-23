@@ -2382,6 +2382,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.SmoothProj
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DegreePExtensionRegular
+public import WeilConjectures.AlgebraicGeometry.DenseAffineOpen
 public import WeilConjectures.AlgebraicGeometry.DenseCompactification
 public import WeilConjectures.AlgebraicGeometry.DenseOpenComponentCoproduct
 public import WeilConjectures.AlgebraicGeometry.DenseOpenComponentModifications
@@ -3936,6 +3937,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericProductIdempotentBound
 public import WeilConjectures.AlgebraicGeometry.GenericProductKernelBound
 public import WeilConjectures.AlgebraicGeometry.GenericProductLocalization
 public import WeilConjectures.AlgebraicGeometry.GenericProductMapDenominators
+public import WeilConjectures.AlgebraicGeometry.GenericQuotient
 public import WeilConjectures.AlgebraicGeometry.GenericRadicialGeometricallyReducedModel
 public import WeilConjectures.AlgebraicGeometry.GenericStalkVanishingPropagation
 public import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceAnnihilator
@@ -5498,6 +5500,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquareSection
 public import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquareSectionElement
 public import WeilConjectures.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence
 public import WeilConjectures.AlgebraicGeometry.OriginalCounitAdjunctionTransport
+public import WeilConjectures.AlgebraicGeometry.OverProduct
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
@@ -5771,6 +5774,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareLeftSummand
 public import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareRightSummand
 public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
 public import WeilConjectures.AlgebraicGeometry.PointedClopenIntegralModel
+public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
 public import WeilConjectures.AlgebraicGeometry.PolynomialChartClosedFiberModuleFlat
 public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreDimensions
 public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
@@ -9496,6 +9500,8 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingDown
 public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
+public import WeilConjectures.Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import WeilConjectures.Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Pointwise
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Pure
@@ -9516,6 +9522,7 @@ public import WeilConjectures.Mathlib.RingTheory.LocalProperties.Reduced
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.BaseChange
@@ -9528,6 +9535,7 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Localization
 public import WeilConjectures.Mathlib.RingTheory.Nakayama
 public import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
+public import WeilConjectures.Mathlib.RingTheory.Nilpotent.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.Mathlib.RingTheory.Norm.Basic
@@ -10277,6 +10285,7 @@ public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomia
 public import WeilConjectures.RingTheory.IntegralOverHenselianPair
 public import WeilConjectures.RingTheory.IntegralTotalFractionLocalDenominator
 public import WeilConjectures.RingTheory.IntegrallyClosedReducedFiniteDomainDecomposition
+public import WeilConjectures.RingTheory.Invariant.Etale
 public import WeilConjectures.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing
 public import WeilConjectures.RingTheory.IsN1AdjoinSingleton
 public import WeilConjectures.RingTheory.IsN1OfFiniteDomainExtension
@@ -12383,6 +12392,7 @@ public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
+public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.HomologyUnit
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LefschetzVerdier
