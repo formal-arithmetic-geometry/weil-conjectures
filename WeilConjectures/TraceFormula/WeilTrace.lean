@@ -8,9 +8,6 @@ module
 public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.Algebra.Ring.NegOnePow
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
@@ -254,6 +251,15 @@ end Unit
 /-! ### The global trace -/
 
 section Global
+
+instance (k : Type u) [Field k] : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (𝟙 _))
+
+instance (k : Type u) [Field k] : QuasiCompact (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (QuasiCompact (𝟙 _))
+
+instance (k : Type u) [Field k] : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (IsSeparated (𝟙 _))
 
 /-- The structure morphism `a : X ⟶ Spec k` is compatible with every automorphism `e` of `X` over
 `Spec k` and the identity of the base. -/

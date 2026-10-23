@@ -6,9 +6,6 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
@@ -148,6 +145,15 @@ end Dualizing
 /-! ### Biduality over the base field -/
 
 section Biduality
+
+instance : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (𝟙 _))
+
+instance : QuasiCompact (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (QuasiCompact (𝟙 _))
+
+instance : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=
+  inferInstanceAs (IsSeparated (𝟙 _))
 
 variable {X : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
