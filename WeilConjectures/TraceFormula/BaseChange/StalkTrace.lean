@@ -96,9 +96,9 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar Ω).P
 /-- A rational point fixed by the model Frobenius, on the underlying schemes. -/
 lemma left_comp_modelFrobenius_left [Finite k]
     {x' : RationalPoint ((geometricBaseChange k Ω).obj X)}
-    (hx' : x' ≫ modelFrobenius Ω X N g = x') :
-    x'.left ≫ (modelFrobenius Ω X N g).left = x'.left :=
-  (Over.comp_left _ _ _ x' (modelFrobenius Ω X N g)).symm.trans (congrArg Over.Hom.left hx')
+    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') :
+    x'.left ≫ (baseChangeModelFrobenius Ω X N g).left = x'.left :=
+  (Over.comp_left _ _ _ x' (baseChangeModelFrobenius Ω X N g)).symm.trans (congrArg Over.Hom.left hx')
 
 
 variable {X N g} in
@@ -110,7 +110,7 @@ Lx̄'^* Lπ^* a = L(x̄' ≫ Φ)^* Lπ^* a ≅ Lx̄'^* LΦ^* Lπ^* a
 ```
 -/
 noncomputable def modelStalkFrobenius (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
-    (hx' : x' ≫ modelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x').obj
         ((geometricBaseChangeUpperStar Ω ℓ X).obj a) ⟶
@@ -119,7 +119,7 @@ noncomputable def modelStalkFrobenius (x' : RationalPoint ((geometricBaseChange 
   eqToHom (congrArg (fun f ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
       ℓ f).obj ((geometricBaseChangeUpperStar Ω ℓ X).obj a)) hx'.symm) ≫
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x'
-      (modelFrobenius Ω X N g)).hom.app ((geometricBaseChangeUpperStar Ω ℓ X).obj a) ≫
+      (baseChangeModelFrobenius Ω X N g)).hom.app ((geometricBaseChangeUpperStar Ω ℓ X).obj a) ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x').map
       ((weilGeometricBaseChangeComparison Ω ℓ X N g).hom.app a ≫
         (geometricBaseChangeUpperStar Ω ℓ X).map ψ)
@@ -129,14 +129,14 @@ variable {X N g} in
 composite `modelFrobeniusAux` of the derived pullbacks. -/
 lemma modelStalkFrobenius_hom [IsSepClosed Ω]
     (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
-    (hx' : x' ≫ modelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
     (modelStalkFrobenius ℓ x' hx' a ψ).hom =
       modelFrobeniusAux (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S)
           Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
         (fun a ↦ L((a)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
         (fun a b ↦ leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a b) x'.left
-        (modelFrobenius Ω X N g).left (geometricBaseChangeProj X) g.left
+        (baseChangeModelFrobenius Ω X N g).left (geometricBaseChangeProj X) g.left
         (frobeniusIterate (overFrobenius X) N).left (left_comp_modelFrobenius_left hx')
         (modelFrobenius_left_comp_proj' X N g) (leftDerivedUpperStarFrobeniusIso ℓ X N)
         a.obj ψ.hom := by
@@ -157,8 +157,8 @@ variable {X N g} in
 composite `modelStalkFrobenius` for `(L, φ)`. -/
 lemma weilStalk_weilGeometricBaseChange_frobenius_hom [IsSepClosed Ω]
     (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
-    (hx' : x' ≫ modelFrobenius Ω X N g = x') (L : WeilBoundedConstructible ℓ g) :
-    ((weilStalk ℓ (modelFrobenius Ω X N g) x' hx').obj
+    (hx' : x' ≫ baseChangeModelFrobenius Ω X N g = x') (L : WeilBoundedConstructible ℓ g) :
+    ((weilStalk ℓ (baseChangeModelFrobenius Ω X N g) x' hx').obj
         ((weilGeometricBaseChange Ω ℓ X N g).obj L)).frobenius.hom =
       modelStalkFrobenius ℓ x' hx' L.carrier L.str.hom := by
   rw [WeilBoundedConstructible.weilStalk_obj_frobenius_hom_eq]
@@ -303,7 +303,7 @@ lemma categoricalTrace_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ 
         (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
           ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).str.hom) =
       categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
-        ((weilStalk ℓ (modelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
+        ((weilStalk ℓ (baseChangeModelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
           ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
   have hW : ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).str.hom =
@@ -335,7 +335,7 @@ lemma categoricalTrace_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ 
     (fun S ↦ DerivedCategory.homologyFunctor _ j)
     (fun a ↦ leftDerivedUpperStarHomologyIso (Profinite.padicAlgClRingObj ℓ) a j)
     (fun a b M ↦ leftDerivedUpperStarHomologyIso_comp_hom_app _ a b j M)
-    (geometricBaseChangePoint x hxk).left (modelFrobenius Ω X N e.hom).left
+    (geometricBaseChangePoint x hxk).left (baseChangeModelFrobenius Ω X N e.hom).left
     (geometricBaseChangeProj X) e.hom.left (frobeniusIterate (overFrobenius X) N).left σ.hom x
     (geometricBaseChangePoint_left_comp_proj x hxk) (left_comp_modelFrobenius_left hx')
     (modelFrobenius_left_comp_proj' X N e.hom) hx
@@ -369,7 +369,7 @@ theorem categoricalTrace_stalkFunctor_homologyFunctor_eq (L : WeilBoundedConstru
     categoricalTrace (((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj
         ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L)).str.hom) =
       categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
-        ((weilStalk ℓ (modelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
+        ((weilStalk ℓ (baseChangeModelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
           ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
   exact (congrArg categoricalTrace (stalkFunctor_obj_str_hom ℓ e σ x hx _)).trans
@@ -385,7 +385,7 @@ theorem categoricalTrace_stalkFunctor_homologyFunctor_eq_of_hom_eq
     categoricalTrace (((WeilSheaf.stalkFunctor ℓ e σ' x hx').obj
         ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L)).str.hom) =
       categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
-        ((weilStalk ℓ (modelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
+        ((weilStalk ℓ (baseChangeModelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
           ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
   subst hσ'

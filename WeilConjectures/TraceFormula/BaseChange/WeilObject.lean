@@ -19,7 +19,7 @@ field containing `k` (in the applications the algebraic closure `k̄`), `X` a se
 finite type over `Spec k` and `π : X̄ = X ×_k Ω ⟶ X` its base change
 (`WeilConjectures.TraceFormula.BaseChange.Basic`). A Weil object `(K, φ)` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for
 an endomorphism `g` of `X` over `Spec k` gives a Weil object `(Lπ^* K, φ̄)` of `Dᵇc(X̄)⟦ℚ̲̄_ℓ⟧`
-for the model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω` (`ProEtale.CondensedRing.modelFrobenius`), with
+for the model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω` (`baseChangeModelFrobenius`), with
 `N = n + 1` (`ProEtale.CondensedRing.weilGeometricBaseChange`). Its structure isomorphism is
 ```
 LΦ^* Lπ^* K ≅ L(Φ ≫ π)^* K = L(π ≫ g ≫ F_X^N)^* K ≅ Lπ^* Lg^* LF_X^{N*} K
@@ -51,7 +51,7 @@ scheme and Galois Frobenius pullbacks (blueprint `prop-trf-scheme-galois-compari
 - `ProEtale.CondensedRing.geometricBaseChangeUpperStar`: the derived pullback
   `Lπ^* : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X̄)⟦ℚ̲̄_ℓ⟧` along the base change.
 - `ProEtale.CondensedRing.weilGeometricBaseChange`: the base change of Weil objects
-  `WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (modelFrobenius Ω X (n + 1) g)`.
+  `WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (baseChangeModelFrobenius Ω X (n + 1) g)`.
 
 ## Sorried inputs
 
@@ -251,7 +251,7 @@ omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fac
   [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- The model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω` lies over `g ≫ F_X^N`. -/
 lemma modelFrobenius_left_comp_proj' :
-    (modelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X =
+    (baseChangeModelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X =
       geometricBaseChangeProj X ≫ g.left ≫ (frobeniusIterate (overFrobenius X) N).left :=
   modelFrobenius_left_comp_proj X N g
 
@@ -263,7 +263,7 @@ L(Φ ≫ π)^* = L(π ≫ g ≫ F)^* ≅ Lπ^* L(g ≫ F)^* ≅ Lπ^* Lg^* LF^* 
 ```
 for `F = F_X^N`. -/
 noncomputable def leftDerivedUpperStarModelFrobeniusIso :
-    L(((modelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X)^*⟦
+    L(((baseChangeModelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X)^*⟦
         Profinite.padicAlgClRingObj ℓ⟧) ≅
       L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L((geometricBaseChangeProj X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
@@ -302,10 +302,10 @@ variable (Ω) in
 derived categories: `(leftDerivedUpperStarComp Φ π)⁻¹ ≫ leftDerivedUpperStarModelFrobeniusIso`. -/
 noncomputable def leftDerivedUpperStarModelFrobeniusComparison :
     L((geometricBaseChangeProj X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
-        L(((modelFrobenius Ω X N g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
+        L(((baseChangeModelFrobenius Ω X N g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
       L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L((geometricBaseChangeProj X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  (leftDerivedUpperStarComp _ (modelFrobenius Ω X N g).left (geometricBaseChangeProj X)).symm ≪≫
+  (leftDerivedUpperStarComp _ (baseChangeModelFrobenius Ω X N g).left (geometricBaseChangeProj X)).symm ≪≫
     leftDerivedUpperStarModelFrobeniusIso Ω ℓ X N g
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar Ω).Prime]
@@ -314,7 +314,7 @@ lemma leftDerivedUpperStarModelFrobeniusComparison_hom_app
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))) :
     (leftDerivedUpperStarModelFrobeniusComparison Ω ℓ X N g).hom.app K =
-      (leftDerivedUpperStarComp _ (modelFrobenius Ω X N g).left
+      (leftDerivedUpperStarComp _ (baseChangeModelFrobenius Ω X N g).left
           (geometricBaseChangeProj X)).inv.app K ≫
         (leftDerivedUpperStarModelFrobeniusIso Ω ℓ X N g).hom.app K :=
   rfl
@@ -325,7 +325,7 @@ constructible complexes, for the model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω`: t
 `(leftDerivedUpperStarComp Φ π)⁻¹ ≫ leftDerivedUpperStarModelFrobeniusIso`. -/
 noncomputable def weilGeometricBaseChangeComparison :
     geometricBaseChangeUpperStar Ω ℓ X ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (modelFrobenius Ω X N g) ≅
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (baseChangeModelFrobenius Ω X N g) ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
         geometricBaseChangeUpperStar Ω ℓ X :=
   NatIso.ofComponents
@@ -364,7 +364,7 @@ variable (Ω) in
 Frobenius is the base change of the `q^N`-power Frobenius
 (`exists_isModelFrobenius_modelFrobenius_id`). -/
 noncomputable def weilGeometricBaseChange :
-    WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (modelFrobenius Ω X N g) :=
+    WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (baseChangeModelFrobenius Ω X N g) :=
   IsoAlgebra.mapOfNatIso (weilGeometricBaseChangeComparison Ω ℓ X N g)
 
 @[simp]

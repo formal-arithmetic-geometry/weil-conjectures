@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFiberFrobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusExistence
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.ModelExtension
@@ -20,37 +21,37 @@ closure `k̄`) and `X` a scheme over `Spec k`. This file sets up the geometry of
 model-Frobenius setting of the Lefschetz–Verdier formula, living over `Ω` with an endomorphism
 `Φ` over `Spec Ω`.
 
-* The `q`-power Frobenius `F_X : X ⟶ X` (`ProEtale.CondensedRing.overFrobenius`) is a morphism
+* The `q`-power Frobenius `F_X : X ⟶ X` (`AlgebraicGeometry.overFrobenius`) is a morphism
   over `Spec k`, since `k = 𝔽_q`, and commutes with every morphism of schemes over `Spec k`.
 * For an endomorphism `g` of `X` over `Spec k` and `N : ℕ`, the *model Frobenius*
-  `Φ = (g ≫ F_X^N) ×_k Ω` of `X̄` (`ProEtale.CondensedRing.modelFrobenius N g`) is an
+  `Φ = (g ≫ F_X^N) ×_k Ω` of `X̄` (`baseChangeModelFrobenius N g`) is an
   endomorphism over `Spec Ω`. For `g = 𝟙` it is the base change of the `q^N`-power Frobenius,
   the model Frobenius of `IsModelFrobenius` for a model of `X̄` over `𝔽_{q^N}`
-  (`ProEtale.CondensedRing.exists_isModelFrobenius_modelFrobenius_id`). For an automorphism `e`,
+  (`AlgebraicGeometry.exists_isModelFrobenius_modelFrobenius_id`). For an automorphism `e`,
   `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` is the Frobenius `σ^{n+1}` twisted by `e^{n+1}`.
 * A morphism `x̄ : Spec Ω ⟶ X` over `Spec k` is the same as an `Ω`-rational point
-  `x̄' = (x̄, 𝟙)` of `X̄` (`ProEtale.CondensedRing.geometricBaseChangePoint`). Let `σ` be an
+  `x̄' = (x̄, 𝟙)` of `X̄` (`AlgebraicGeometry.geometricBaseChangePoint`). Let `σ` be an
   automorphism of `Spec Ω` inverse to `Spec(y ↦ y ^ (q ^ N))`; for `Ω = k̄` this is `σ^N` for the
-  Galois Frobenius `σ` (`ProEtale.CondensedRing.geometricFrobeniusField_powSucc_inv`). Then
+  Galois Frobenius `σ` (`AlgebraicGeometry.geometricFrobeniusField_powSucc_inv`). Then
   `x̄ ≫ g = σ ≫ x̄` if and only if `x̄'` is fixed by `Φ = (g ≫ F_X^N) ×_k Ω`
-  (`ProEtale.CondensedRing.geometricBaseChangePoint_comp_modelFrobenius_eq_iff`), since
+  (`AlgebraicGeometry.geometricBaseChangePoint_comp_modelFrobenius_eq_iff`), since
   `x̄ ≫ F_X^N = Spec(y ↦ y ^ (q ^ N)) ≫ x̄`. In particular the points of degree `n + 1` for `e`
   (`ProEtale.CondensedRing.frobeniusFixedPoints e n`) are the rational points of `X̄` fixed by
-  `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` (`ProEtale.CondensedRing.frobeniusFixedPointsEquiv`).
+  `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` (`AlgebraicGeometry.frobeniusFixedPointsEquiv`).
 
 The statements are made for a general field `Ω` and specialized to `Ω = k̄` only at the end:
 statements about the categories of sheaves on the concrete scheme `Spec k̄` hit kernel timeouts.
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.overFrobenius`: the `q`-power Frobenius of a scheme over `Spec k`.
-- `ProEtale.CondensedRing.geometricBaseChange`: the base change functor
+- `AlgebraicGeometry.overFrobenius`: the `q`-power Frobenius of a scheme over `Spec k`.
+- `AlgebraicGeometry.geometricBaseChange`: the base change functor
   `Over (Spec k) ⥤ Over (Spec Ω)`, with projection
-  `ProEtale.CondensedRing.geometricBaseChangeProj : X̄ ⟶ X`.
-- `ProEtale.CondensedRing.modelFrobenius`: the model Frobenius `(g ≫ F_X^N) ×_k Ω` of `X̄`.
-- `ProEtale.CondensedRing.geometricBaseChangePoint`: the rational point of `X̄` attached to a
+  `AlgebraicGeometry.geometricBaseChangeProj : X̄ ⟶ X`.
+- `baseChangeModelFrobenius`: the model Frobenius `(g ≫ F_X^N) ×_k Ω` of `X̄`.
+- `AlgebraicGeometry.geometricBaseChangePoint`: the rational point of `X̄` attached to a
   morphism `Spec Ω ⟶ X` over `Spec k`.
-- `ProEtale.CondensedRing.frobeniusFixedPointsEquiv`: the points of degree `n + 1` for `e` are
+- `AlgebraicGeometry.frobeniusFixedPointsEquiv`: the points of degree `n + 1` for `e` are
   the rational points of `X̄ = X ×_k k̄` fixed by the model Frobenius.
 
 -/
@@ -61,9 +62,9 @@ universe u
 
 open CategoryTheory Limits
 
-namespace AlgebraicGeometry.ProEtale.CondensedRing
+namespace AlgebraicGeometry
 
-open Scheme
+open Scheme ProEtale.CondensedRing
 
 variable {k : Type u} [Field k] [Finite k]
 
@@ -74,22 +75,24 @@ section Frobenius
 variable (X : Over (Spec (.of k)))
 
 /-- The `#k`-power Frobenius `F_X` of a scheme `X` over the finite field `k`, as a morphism over
-`Spec k` (`Scheme.Hom.IsFrobenius.comp_eq`). It is unique: two `#k`-power Frobenii agree by
-`Scheme.Hom.IsFrobenius.comp_eq_comp` applied to the identity. -/
+`Spec k`: the scheme Frobenius `Scheme.Hom.modelFrobenius X.hom`, the absolute
+`#k`-power Frobenius of `X.left`. -/
 noncomputable def overFrobenius : X ⟶ X :=
-  Over.homMk X.hom.exists_isFrobenius.choose
-    (X.hom.exists_isFrobenius.choose_spec.comp_eq X.hom)
+  Over.homMk X.hom.modelFrobenius X.hom.modelFrobenius_comp
+
+@[simp]
+lemma overFrobenius_left : (overFrobenius X).left = X.hom.modelFrobenius :=
+  rfl
 
 lemma isFrobenius_overFrobenius_left : (overFrobenius X).left.IsFrobenius (Nat.card k) :=
-  X.hom.exists_isFrobenius.choose_spec
+  X.hom.isFrobenius_modelFrobenius
 
 variable {X} in
 /-- The Frobenius commutes with every morphism over `Spec k`. -/
 lemma comp_overFrobenius {Y : Over (Spec (.of k))} (f : X ⟶ Y) :
     f ≫ overFrobenius Y = overFrobenius X ≫ f := by
   ext1
-  exact (isFrobenius_overFrobenius_left X).comp_eq_comp X.hom
-    (isFrobenius_overFrobenius_left Y) f.left
+  exact Scheme.Hom.comp_modelFrobenius (f := X.hom) (g := Y.hom) f.left
 
 /-- The `N`-th iterate of the Frobenius is the `#k ^ N`-power Frobenius. -/
 lemma isFrobenius_frobeniusIterate_overFrobenius_left (N : ℕ) :
@@ -210,21 +213,21 @@ variable (Ω) in
 /-- The model Frobenius `Φ = (g ≫ F_X^N) ×_k Ω` of the base change `X̄`, for an endomorphism `g`
 of `X` over `Spec k`: an endomorphism of `X̄` over `Spec Ω`. For an automorphism `e`, the model
 Frobenius `(e^{n+1} ≫ F_X^{n+1}) ×_k k̄` is the Frobenius `σ^{n+1}` twisted by `e^{n+1}`. -/
-noncomputable def modelFrobenius (N : ℕ) (g : X ⟶ X) :
+noncomputable def baseChangeModelFrobenius (N : ℕ) (g : X ⟶ X) :
     (geometricBaseChange k Ω).obj X ⟶ (geometricBaseChange k Ω).obj X :=
   (geometricBaseChange k Ω).map (g ≫ frobeniusIterate (overFrobenius X) N)
 
 /-- `Φ ≫ π = π ≫ g ≫ F_X^N`. -/
 @[reassoc]
 lemma modelFrobenius_left_comp_proj (N : ℕ) (g : X ⟶ X) :
-    (modelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X =
+    (baseChangeModelFrobenius Ω X N g).left ≫ geometricBaseChangeProj X =
       geometricBaseChangeProj X ≫ (g ≫ frobeniusIterate (overFrobenius X) N).left :=
   geometricBaseChange_map_left_comp_proj _
 
 /-- For `g = 𝟙`, the model Frobenius `F_X^N ×_k Ω` is the `N`-th iterate of `F_X ×_k Ω`. -/
 lemma modelFrobenius_id (N : ℕ) :
-    modelFrobenius Ω X N (𝟙 X) = frobeniusIterate (modelFrobenius Ω X 1 (𝟙 X)) N := by
-  simp only [modelFrobenius, Category.id_comp, frobeniusIterate_one]
+    baseChangeModelFrobenius Ω X N (𝟙 X) = frobeniusIterate (baseChangeModelFrobenius Ω X 1 (𝟙 X)) N := by
+  simp only [baseChangeModelFrobenius, Category.id_comp, frobeniusIterate_one]
   induction N with
   | zero => simp
   | succ N ih => rw [frobeniusIterate_succ, frobeniusIterate_succ, Functor.map_comp, ih]
@@ -232,7 +235,7 @@ lemma modelFrobenius_id (N : ℕ) :
 /-- For `g = 𝟙`, the model Frobenius `F_X ×_k Ω` is the model Frobenius of the model `X` of
 `X̄` over `k` (blueprint `sk-d-weil`). -/
 theorem isModelFrobenius_modelFrobenius_one :
-    IsModelFrobenius (modelFrobenius Ω X 1 (𝟙 X)) X.hom (geometricBaseChangeProj X) where
+    IsModelFrobenius (baseChangeModelFrobenius Ω X 1 (𝟙 X)) X.hom (geometricBaseChangeProj X) where
   isPullback := isPullback_geometricBaseChangeProj X
   exists_isFrobenius := ⟨(overFrobenius X).left, isFrobenius_overFrobenius_left X, by
     rw [modelFrobenius_left_comp_proj, Category.id_comp, frobeniusIterate_one]⟩
@@ -244,7 +247,7 @@ theorem exists_isModelFrobenius_modelFrobenius_id [IsAlgClosed Ω] [LocallyOfFin
     ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₁ Ω)
       (X₁ : Scheme.{u}) (f₁ : X₁ ⟶ Spec (.of k₁)) (_ : LocallyOfFiniteType f₁)
       (p₁ : ((geometricBaseChange k Ω).obj X).left ⟶ X₁),
-      Nat.card k₁ = Nat.card k ^ N ∧ IsModelFrobenius (modelFrobenius Ω X N (𝟙 X)) f₁ p₁ := by
+      Nat.card k₁ = Nat.card k ^ N ∧ IsModelFrobenius (baseChangeModelFrobenius Ω X N (𝟙 X)) f₁ p₁ := by
   obtain ⟨k₁, _, _, _, _, _, hcard⟩ := exists_finiteField_natCard_eq_pow k Ω hN
   have h := (isModelFrobenius_modelFrobenius_one (Ω := Ω) X).fieldChange (k₁ := k₁) hcard
   rw [← modelFrobenius_id] at h
@@ -309,13 +312,13 @@ lemma geometricBaseChangePoint_left_comp_proj_eq
 theorem geometricBaseChangePoint_comp_modelFrobenius_eq_iff (x : Spec (.of Ω) ⟶ X.left)
     (hx : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω))) (N : ℕ) (g : X ⟶ X)
     (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N)) :
-    geometricBaseChangePoint x hx ≫ modelFrobenius Ω X N g = geometricBaseChangePoint x hx ↔
+    geometricBaseChangePoint x hx ≫ baseChangeModelFrobenius Ω X N g = geometricBaseChangePoint x hx ↔
       x ≫ g.left = σ.hom ≫ x := by
   have hF : (x ≫ g.left) ≫ (frobeniusIterate (overFrobenius X) N).left =
       Spec.map (powCardPowRingHom k Ω N) ≫ x ≫ g.left :=
     isFrobenius_frobeniusIterate_overFrobenius_left X N (x ≫ g.left) _
       (powCardPowRingHom_apply N)
-  have key : geometricBaseChangePoint x hx ≫ modelFrobenius Ω X N g =
+  have key : geometricBaseChangePoint x hx ≫ baseChangeModelFrobenius Ω X N g =
       geometricBaseChangePoint x hx ↔
       x ≫ (g ≫ frobeniusIterate (overFrobenius X) N).left = x := by
     constructor
@@ -340,7 +343,7 @@ of the base change `X̄ = X ×_k k̄` fixed by the model Frobenius
 noncomputable def frobeniusFixedPointsEquiv (e : X ≅ X) (n : ℕ) :
     frobeniusFixedPoints e n ≃
       {y : RationalPoint ((geometricBaseChange k (AlgebraicClosure k)).obj X) //
-        y ≫ modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom = y} where
+        y ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom = y} where
   toFun x := ⟨geometricBaseChangePoint x.1 x.2.1,
     (geometricBaseChangePoint_comp_modelFrobenius_eq_iff _ _ _ _ _
       (geometricFrobeniusField_powSucc_inv n)).2 x.2.2⟩
@@ -354,4 +357,4 @@ noncomputable def frobeniusFixedPointsEquiv (e : X ≅ X) (n : ℕ) :
 
 end Points
 
-end AlgebraicGeometry.ProEtale.CondensedRing
+end AlgebraicGeometry

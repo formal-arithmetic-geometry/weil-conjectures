@@ -87,7 +87,7 @@ Frobenius `(e^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
 theorem weilSheafStalkTrace_homologyFunctor_eq (K : WeilBoundedConstructible ℓ e.hom) (j : ℤ) :
     weilSheafStalkTrace ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) =
       categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
-        ((weilStalk ℓ (modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
+        ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
           (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1) (e.powSucc n).hom
             ((geometricFrobeniusField k).powSucc n) (geometricFrobeniusField_powSucc_inv n)).2
@@ -115,7 +115,7 @@ theorem weilStalkSupertrace_eq_superTrace (K : WeilBoundedConstructible ℓ e.ho
     weilStalkSupertrace ℓ n x hx K =
       superTrace
         (fun j ↦ (DerivedCategory.homologyFunctor _ j).obj
-          ((weilStalk ℓ (modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
+          ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
             (geometricBaseChangePoint x hxk)
             ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1)
               (e.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
@@ -123,7 +123,7 @@ theorem weilStalkSupertrace_eq_superTrace (K : WeilBoundedConstructible ℓ e.ho
             ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (e.powSucc n).hom).obj
               (K.powSucc ℓ n))).carrier.obj)
         (fun j ↦ (DerivedCategory.homologyFunctor _ j).map
-          ((weilStalk ℓ (modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
+          ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
             (geometricBaseChangePoint x hxk)
             ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1)
               (e.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
@@ -143,7 +143,7 @@ model Frobenius `(e^{n+1} ≫ F_X^{n+1}) ×_k k̄`, on the dualizable stalk `(L�
 (blueprint `prop-trf-trace-formal-laws`, item (4)). -/
 theorem homologyUnitEndRingHom_weilStalkSupertrace (K : WeilBoundedConstructible ℓ e.hom)
     [HasRightDual
-      ((weilStalk ℓ (modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
+      ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
         (geometricBaseChangePoint x hxk)
         ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1)
           (e.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
@@ -152,7 +152,7 @@ theorem homologyUnitEndRingHom_weilStalkSupertrace (K : WeilBoundedConstructible
           (K.powSucc ℓ n))).carrier] :
     homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point (AlgebraicClosure k))
         (weilStalkSupertrace ℓ n x hx K) =
-      trace ((weilStalk ℓ (modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
+      trace ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom)
         (geometricBaseChangePoint x hxk)
         ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1)
           (e.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
