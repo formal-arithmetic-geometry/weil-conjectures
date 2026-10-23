@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Sections over quasi-compact objects commute with filtered colimits
@@ -17,33 +18,26 @@ sections of some `F k` over `W` with the same image in `c.pt` agree in a later `
 every section of `c.pt` over `W` comes from some `F k`
 (`AlgebraicGeometry.Scheme.exists_app_eq_of_isColimit`). Together: sections over a
 quasi-compact quasi-separated `W` commute with filtered colimits (Stacks 0738).
-
-The index category `K` may live in any universe `≤ u + 1` (`UnivLE.{v, u + 1}`). This covers
-both `u`-small filtered colimits and filtered colimits indexed by `Type (u + 1)`, the size of the
-coproducts of étale sheaves of `ModuleCat.{u + 1} Λ`-modules which Brown representability
-quantifies over.
 -/
 
 @[expose] public section
 
-universe v u
+universe u
 
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] {K : Type v} [SmallCategory K]
-  [UnivLE.{v, u + 1}] [IsFiltered K] {F : K ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-  {c : Cocone F}
+variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] {K : Type u} [SmallCategory K]
+  [IsFiltered K] {F : K ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {c : Cocone F}
 
-/-- The forgetful functor of `ModuleCat.{u + 1} Λ` preserves colimits of filtered diagrams
-indexed by a category in a universe `≤ u + 1`. -/
+/-- The forgetful functor of `ModuleCat.{u + 1} Λ` preserves colimits of `u`-small filtered
+diagrams. -/
 instance (L : K ⥤ ModuleCat.{u + 1} Λ) : PreservesColimit L (CategoryTheory.forget _) :=
-  have : PreservesFilteredColimitsOfSize.{v, v} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, v, v} _
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   inferInstance
 
-omit [UnivLE.{v, u + 1}] in
 /-- A jointly surjective family of morphisms of étale `X`-schemes is a covering family for
 every étale sheaf of `Λ`-modules. -/
 lemma isSheafFor_ofArrows_moduleCat (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -127,26 +121,6 @@ lemma exists_mem_forall_exists_map_eq (hc : IsColimit c) {W : X.Etale} {k : K}
         rw [F.map_comp]; rfl
     _ = _ := by rw [← IsFiltered.coeq_condition a b]
 
-omit [UnivLE.{v, u + 1}] [IsFiltered K] in
-/-- A finite family of morphisms `aᵢ : k ⟶ kᵢ` out of an object of a filtered category extends to
-a cocone: there are `A : k ⟶ k'` and `bᵢ : kᵢ ⟶ k'` with `aᵢ ≫ bᵢ = A`. -/
-lemma _root_.CategoryTheory.IsFiltered.exists_comp_eq_of_finite [IsFilteredOrEmpty K] {k : K}
-    {ι : Type*} [Finite ι] {k₁ : ι → K} (a : ∀ i, k ⟶ k₁ i) :
-    ∃ (k' : K) (A : k ⟶ k') (b : ∀ i, k₁ i ⟶ k'), ∀ i, a i ≫ b i = A := by
-  classical
-  have := Fintype.ofFinite ι
-  have : Nonempty K := ⟨k⟩
-  have : IsFiltered K := { }
-  let O : Finset K := insert k (Finset.univ.image k₁)
-  have hk : k ∈ O := Finset.mem_insert_self _ _
-  have hk₁ (i : ι) : k₁ i ∈ O :=
-    Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ (Finset.mem_univ i))
-  let H : Finset (Σ' (X Y : K) (_ : X ∈ O) (_ : Y ∈ O), X ⟶ Y) :=
-    Finset.univ.image fun i ↦ ⟨k, k₁ i, hk, hk₁ i, a i⟩
-  exact ⟨IsFiltered.sup O H, IsFiltered.toSup O H hk, fun i ↦ IsFiltered.toSup O H (hk₁ i),
-    fun i ↦ IsFiltered.toSup_commutes O H hk (hk₁ i)
-      (Finset.mem_image_of_mem _ (Finset.mem_univ i))⟩
-
 /-- **Sections over a quasi-compact `W` of a filtered colimit are separated at a finite stage.**
 Two sections of `F k` over `W` with the same image in `c.pt` agree in some later `F k'`. -/
 theorem exists_map_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
@@ -165,16 +139,6 @@ theorem exists_map_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpac
     rw [← hb i, F.map_comp]
     exact (NatTrans.naturality_apply (F.map (a₁ i) ≫ F.map (b i)).hom (g i).op z).symm
   rw [hnat, hnat, ha₁ i]
-
-omit [UnivLE.{v, u + 1}] in
-/-- A finite family of objects of a filtered category has a cocone. -/
-lemma _root_.CategoryTheory.IsFiltered.exists_cocone_of_finite {ι : Type*} [Finite ι]
-    (k₁ : ι → K) : ∃ k : K, Nonempty (∀ i, k₁ i ⟶ k) := by
-  classical
-  have := Fintype.ofFinite ι
-  let O : Finset K := Finset.univ.image k₁
-  exact ⟨IsFiltered.sup O ∅, ⟨fun i ↦ IsFiltered.toSup O ∅
-    (Finset.mem_image_of_mem _ (Finset.mem_univ i))⟩⟩
 
 /-- **Sections over a quasi-compact quasi-separated `W` of a filtered colimit come from a finite
 stage.** Every section of `c.pt` over `W` is the image of a section of some `F k` (Stacks 0738).
@@ -230,7 +194,7 @@ theorem exists_app_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpac
   exact (NatTrans.naturality_apply (c.ι.app k').hom (g i).op y).symm
 
 /-- **Sections over a quasi-compact quasi-separated `W` commute with filtered colimits** (Stacks
-0738): the image of a colimit cocone of a filtered diagram of étale sheaves of
+0738): the image of a colimit cocone of a `u`-small filtered diagram of étale sheaves of
 `Λ`-modules under the sections functor over `W` is a colimit cocone. -/
 noncomputable def isColimitSheafSectionsMapCocone (hc : IsColimit c) (W : X.Etale)
     [CompactSpace W.left] [QuasiSeparatedSpace W.left] :
@@ -245,10 +209,10 @@ noncomputable def isColimitSheafSectionsMapCocone (hc : IsColimit c) (W : X.Etal
   · exact exists_map_eq_of_isColimit hc t t' h
 
 /-- The sections functor over a quasi-compact quasi-separated étale `X`-scheme preserves
-colimits of filtered diagrams indexed by categories in a universe `≤ u + 1`. -/
+colimits of `u`-small filtered diagrams. -/
 instance preservesFilteredColimitsOfSize_sheafSections (W : X.Etale) [CompactSpace W.left]
     [QuasiSeparatedSpace W.left] :
-    PreservesFilteredColimitsOfSize.{v, v}
+    PreservesFilteredColimitsOfSize.{u, u}
       ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op W)) where
   preserves_filtered_colimits _ _ _ :=
     ⟨fun {_} ↦ ⟨fun {_} hc ↦ ⟨isColimitSheafSectionsMapCocone hc W⟩⟩⟩

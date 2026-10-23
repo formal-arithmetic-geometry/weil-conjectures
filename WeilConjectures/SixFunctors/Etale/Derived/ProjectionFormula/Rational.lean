@@ -79,7 +79,7 @@ derived complete
 `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek`). It is an
 isomorphism: the integral projection map is one (`sk-thm-sf-pf-adic`) and the rationalization
 functor carries isomorphisms to isomorphisms. -/
-theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
+theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification f] [IsProper f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
     (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
@@ -100,7 +100,7 @@ theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification 
   refine @Functor.map_isIso _ _ _ _ _ _ _ _ ?_
   exact @isIso_of_fully_faithful _ _ _ _
     (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι _ _ _ _ _
-    (hasProjectionFormula_of_derivedCompleteIntegral l E f K L hKc hK hKt hLc hL hLt)
+    (hasProjectionFormula_of_derivedCompleteIntegral_of_isProper l E f K L hKc hK hKt hLc hL hLt)
 
 /-- Blueprint `thm-sf-pf-field`: Rational and algebraically closed stages; the compatibility
 with finite reduction.
@@ -135,8 +135,12 @@ map under the extension functor `D_comp(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, E)`, is
 reductions modulo `𝔪_Eⁿ` of its integral representative are isomorphisms.
 
 The stage `F = ℚ̄_ℓ` of the blueprint concerns objects represented at a finite stage `E'/ℚ_ℓ`:
-for those this is the statement at `E = E'`, which is arbitrary here. -/
-theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
+for those this is the statement at `E = E'`, which is arbitrary here.
+
+`f` is assumed proper: the statement needs `Rf_!(K ⊗ᴸ Lf^* L)` to be derived complete, which
+holds for the repository's `Rf_! = Rf̄_* j_!` only for proper `f`
+(`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek`). -/
+theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f] [IsProper f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
     (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
