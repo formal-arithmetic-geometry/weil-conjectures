@@ -47,7 +47,8 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] {e : X ≅ X} (n : ℕ)
-  (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left) (hxk : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))
+  (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
+  (hxk : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))
   (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)
 
 instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
@@ -55,31 +56,6 @@ instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
 
 instance : Fact (ringChar (AlgebraicClosure k) ≠ ℓ) :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
-include hx in
-/-- The geometric point `x̄' = (x̄, 𝟙)` of the base change is fixed by the model Frobenius
-`(e^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
-lemma geometricBaseChangePoint_comp_modelFrobenius_powSucc :
-    geometricBaseChangePoint x hxk ≫
-        modelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom =
-      geometricBaseChangePoint x hxk :=
-  (geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk (n + 1) (e.powSucc n).hom
-    ((geometricFrobeniusField k).powSucc n) (geometricFrobeniusField_powSucc_inv n)).2 hx
-
-/-- The homology sheaves of the iterate `(K, φ^{(n+1)})` are the iterates of the homology
-sheaves: `(Hʲ(K), φ_{Hʲ(K)}^{(n+1)}) ≅ Hʲ(K, φ^{(n+1)})` as Weil sheaves for `e^{n+1}`. -/
-noncomputable def WeilBoundedConstructible.homologyPowSuccIso
-    (K : WeilBoundedConstructible ℓ e.hom) (j : ℤ) :
-    (WeilSheaf.powSuccFunctor ℓ e n).obj ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) ≅
-      (WeilBoundedConstructible.homologyFunctor ℓ (e.powSucc n) j).obj (K.powSucc ℓ n) :=
-  e.mapOfNatIsoPowSuccIso
-    (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
-    (fun f g ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
-    (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
-    ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ j)
-    (fun g ↦ weilHomologyComparisonOfHom ℓ j g) (weilHomologyComparisonOfHom_comp ℓ j) K n
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
@@ -98,7 +74,8 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType 
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 lemma WeilSheaf.frobeniusStalk_eq' (F : WeilSheaf ℓ e) :
     WeilSheaf.frobeniusStalk ℓ n x hx F = (WeilSheaf.stalkFunctor ℓ (e.powSucc n)
-      ((geometricFrobeniusField k).powSucc n).hom x hx).obj ((WeilSheaf.powSuccFunctor ℓ e n).obj F) :=
+      ((geometricFrobeniusField k).powSucc n).hom x hx).obj
+        ((WeilSheaf.powSuccFunctor ℓ e n).obj F) :=
   (WeilSheaf.frobeniusStalk_eq ℓ n x hx F).trans
     ((congrArg (fun G ↦ G.obj F) (WeilSheaf.powSuccStalkFunctor_eq ℓ n x hx)).trans
       (Functor.comp_obj _ _ _))

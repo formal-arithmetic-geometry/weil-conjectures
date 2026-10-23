@@ -25,10 +25,15 @@ file compares, for a Weil object `L` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `e`:
 * the `j`-th homology of the local Frobenius at `x̄'` of the base change `Lπ^* L`, a Weil object
   for the model Frobenius `Φ` (`weilStalk`, `weilGeometricBaseChange`).
 
-They are conjugate, so they have the same trace
-(`ProEtale.CondensedRing.categoricalTrace_stalkFunctor_eq_categoricalTrace_homology_weilStalk`).
-The formal part is `homology_modelFrobenius_comp_eq_aux`; this file identifies the two Frobenii
-with its abstract composites.
+They are conjugate, so they have the same trace. The formal part is
+`homology_modelFrobenius_comp_eq_aux`; this file identifies the two Frobenii with its abstract
+composites, the Galois one for an abstract trivialization `τ : σ^* ≅ 𝟭` compatible with the
+trivialization of the Frobenius pullback (`IsGaloisCompatibleFrobeniusIsoAt`).
+
+## Main results
+
+- `ProEtale.CondensedRing.categoricalTrace_stalkFunctor_homologyFunctor_eq`:
+  `Tr(Fr_x̄ | Hʲ(L)_x̄) = Tr(Hʲ(F_x̄') | Hʲ((Lπ^* L)_x̄'))`.
 
 -/
 
@@ -99,7 +104,11 @@ lemma left_comp_modelFrobenius_left [Finite k]
 variable {X N g} in
 /-- The local Frobenius at a rational point `x̄'` fixed by the model Frobenius `Φ` of the base
 change of `(a, ψ)`, as an explicit composite on `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`:
-`Lx̄'^* Lπ^* a = L(x̄' ≫ Φ)^* Lπ^* a ≅ Lx̄'^* LΦ^* Lπ^* a --b--> Lx̄'^* Lπ^* Lg^* a --ψ--> Lx̄'^* Lπ^* a`. -/
+```
+Lx̄'^* Lπ^* a = L(x̄' ≫ Φ)^* Lπ^* a ≅ Lx̄'^* LΦ^* Lπ^* a
+  --b--> Lx̄'^* Lπ^* Lg^* a --ψ--> Lx̄'^* Lπ^* a
+```
+-/
 noncomputable def modelStalkFrobenius (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
     (hx' : x' ≫ modelFrobenius Ω X N g = x') (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj a ⟶ a) :
@@ -170,7 +179,8 @@ omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- The Frobenius comparison of the stalk, unfolded. -/
 lemma weilStalkComparison_eq : weilStalkComparison ℓ e σ.hom x hx =
-    Functor.isoWhiskerLeft _ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).symm ≪≫
+    Functor.isoWhiskerLeft _
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).symm ≪≫
       (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).symm ≪≫
       upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm ≪≫
       upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left :=

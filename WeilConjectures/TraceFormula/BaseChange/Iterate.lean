@@ -35,7 +35,8 @@ commutes with the iterated structure isomorphisms.
 ## Main results
 
 - `ProEtale.CondensedRing.WeilBoundedConstructible.homologyPowSuccIso`:
-  `Hʲ(K, φ^{(n+1)}) ≅ (Hʲ(K), φ_{Hʲ(K)}^{(n+1)})` as Weil sheaves for `e^{n+1}`.
+  `(Hʲ(K), φ_{Hʲ(K)}^{(n+1)}) ≅ Hʲ(K, φ^{(n+1)})` as Weil sheaves for `e^{n+1}`, from the
+  general `CategoryTheory.Iso.mapOfNatIsoPowSuccIso`.
 
 -/
 
@@ -82,7 +83,8 @@ theorem powSuccStr_hom_eq_of_comp (P : (X ⟶ X) → D ⥤ D)
 
 /-- The transport along `H` of the iterate of an algebra is the iterate of its transport: for an
 algebra `(a, φ)` for `P e`, the iterate for `Q e^{n+1}` of `(H a, (h e).app a ≪≫ H φ)` is
-isomorphic, through the identity of `H a`, to the transport `(H a, (h e^{n+1}).app a ≪≫ H φ^{(n+1)})`
+isomorphic, through the identity of `H a`, to the transport
+`(H a, (h e^{n+1}).app a ≪≫ H φ^{(n+1)})`
 of the iterate `(a, φ^{(n+1)})` (`powSuccStr_hom_eq_of_comp`). -/
 noncomputable def mapOfNatIsoPowSuccIso (P : (X ⟶ X) → D ⥤ D)
     (compP : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) (Q : (X ⟶ X) → E ⥤ E)
@@ -226,13 +228,26 @@ lemma weilHomologyComparisonOfHom_comp (f g : X ⟶ X)
     weilHomologyComparisonOfHom_hom_app, h1]
   exact leftDerivedUpperStarHomologyIso_compOver_hom_app ℓ n f g K.obj
 
-
-namespace WeilBoundedConstructible
-
-variable {e : X ≅ X}
-
-end WeilBoundedConstructible
-
 end Homology
+
+section PowSucc
+
+variable {e : X ≅ X} (n : ℕ)
+
+/-- The homology sheaves of the iterate `(K, φ^{(n+1)})` are the iterates of the homology
+sheaves: `(Hʲ(K), φ_{Hʲ(K)}^{(n+1)}) ≅ Hʲ(K, φ^{(n+1)})` as Weil sheaves for `e^{n+1}`. -/
+noncomputable def WeilBoundedConstructible.homologyPowSuccIso
+    (K : WeilBoundedConstructible ℓ e.hom) (j : ℤ) :
+    (WeilSheaf.powSuccFunctor ℓ e n).obj ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) ≅
+      (WeilBoundedConstructible.homologyFunctor ℓ (e.powSucc n) j).obj (K.powSucc ℓ n) :=
+  e.mapOfNatIsoPowSuccIso
+    (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+    (fun f g ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
+    (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
+    ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ j)
+    (fun g ↦ weilHomologyComparisonOfHom ℓ j g) (weilHomologyComparisonOfHom_comp ℓ j) K n
+
+end PowSucc
 
 end AlgebraicGeometry.ProEtale.CondensedRing

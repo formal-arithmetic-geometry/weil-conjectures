@@ -12136,6 +12136,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -12365,6 +12366,13 @@ public import WeilConjectures.Topology.TopologicalResolutionCocycleLift
 public import WeilConjectures.Topology.TopologicalTerminalResolutionExtComparison
 public import WeilConjectures.Topology.WholeSpaceClosedSubtypeCohomologyVanishing
 public import WeilConjectures.TraceFormula.Additivity
+public import WeilConjectures.TraceFormula.BaseChange.Basic
+public import WeilConjectures.TraceFormula.BaseChange.Coherence
+public import WeilConjectures.TraceFormula.BaseChange.Iterate
+public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
+public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
+public import WeilConjectures.TraceFormula.BaseChange.Supertrace
+public import WeilConjectures.TraceFormula.BaseChange.WeilObject
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.BorelMoore
