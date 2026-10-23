@@ -12,7 +12,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 The identification `Functor.homologyRightDerivedFunctorObjSingleFunctorIso` of the homology of
 the unbounded total right derived functor applied to an object placed in degree `0` with the
-classical right derived functor is natural in the object.
+classical right derived functor is natural in the object
+(`CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso`).
 -/
 
 @[expose] public section
@@ -44,5 +45,12 @@ lemma homologyRightDerivedFunctorObjSingleFunctorIso_hom_naturality {X Y : C} (f
   erw [h]
   rw [Functor.map_comp_assoc]
   rfl
+
+/-- The natural isomorphism `H^n(RF(X[0])) ≅ RⁿF X` of functors `C ⥤ D`. -/
+noncomputable def singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso (n : ℕ) :
+    DerivedCategory.singleFunctor C 0 ⋙ F.rightDerivedFunctor ⋙
+        DerivedCategory.homologyFunctor D n ≅ F.rightDerived n :=
+  NatIso.ofComponents (fun X ↦ F.homologyRightDerivedFunctorObjSingleFunctorIso X n)
+    fun f ↦ F.homologyRightDerivedFunctorObjSingleFunctorIso_hom_naturality f n
 
 end CategoryTheory.Functor
