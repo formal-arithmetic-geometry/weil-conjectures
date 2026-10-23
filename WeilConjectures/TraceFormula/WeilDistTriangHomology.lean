@@ -53,7 +53,7 @@ the commutation of `e^*` with homology, followed by the identification of the de
 with the levelwise pullback and the compatibility of `Le^*` with the inclusion of
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. Unlike `weilHomologyComparison_hom_app`, the compatibility isomorphism is kept
 explicit, as it occurs in `WeilBoundedConstructible.IsDistTriang`. -/
-lemma weilHomologyComparison_hom_app' (e : X ≅ X) (n : ℤ)
+lemma weilHomologyComparison_hom_app_compatibility_inv (e : X ≅ X) (n : ℤ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (weilHomologyComparison ℓ e n).hom.app K =
       ((e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.mapDerivedCategoryHomologyFunctorIso
@@ -150,8 +150,9 @@ lemma WeilBoundedConstructible.upperStar_map_shiftMap_comp_str_hom
       ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj C).str.hom ≫
         (DerivedCategory.homologyFunctor _ 0).shiftMap δ j j' h := by
   rw [WeilBoundedConstructible.homologyFunctor_obj_str_hom,
-    WeilBoundedConstructible.homologyFunctor_obj_str_hom, weilHomologyComparison_hom_app',
-    weilHomologyComparison_hom_app']
+    WeilBoundedConstructible.homologyFunctor_obj_str_hom,
+    weilHomologyComparison_hom_app_compatibility_inv,
+    weilHomologyComparison_hom_app_compatibility_inv]
   have h₁ := Functor.map_shiftMap_homologyFunctor_comp_mapDerivedCategoryHomologyFunctorIso
     (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ δ j j' h
   simp only [Category.assoc]
