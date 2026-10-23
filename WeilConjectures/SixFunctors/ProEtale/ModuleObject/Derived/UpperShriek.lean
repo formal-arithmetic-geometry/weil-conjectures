@@ -97,7 +97,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {f : X ⟶ Y} (c : Compactification f.left)
 
-variable [HasConstructibleFiniteness Λ ℓ k]
+variable [PreservesBoundedConstructible R((c.overG.left)_*⟦Λ⟧)]
   [(boundedConstructibleLowerStar Λ ℓ c.overG).IsLeftAdjoint]
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` attached to a compactification
@@ -143,7 +143,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
-variable [HasConstructibleFiniteness Λ ℓ k]
+variable [PreservesBoundedConstructible R(((compactificationOverField f).overG.left)_*⟦Λ⟧)]
   [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint]
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
@@ -186,8 +186,7 @@ variable {Z Y : Over (Spec (.of k))}
 pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
 adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    [HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k] :
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g).IsLeftAdjoint :=
   sorry
 

@@ -76,6 +76,8 @@ Any two compactifications `c₁` and `c₂` of `f` have a common refinement `c`
 
 universe u
 
+open scoped CategoryTheory.Obj
+
 open CategoryTheory
 
 open scoped CategoryTheory.Functor
@@ -182,15 +184,13 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
       sq.toCommSq.snd_comp_eq_of_fst_eq_id) :=
   sorry
 
-variable [HasConstructibleFiniteness Λ ℓ k]
-
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
 `isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the unit of `Lh^* ⊣ Rh_*`
 followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
-    (sq : IsPullback (𝟙 X) i i₁ h) :
+    (sq : IsPullback (𝟙 X) i i₁ h) [PreservesBoundedConstructible R((h.left)_*⟦Λ⟧)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ h :=
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ sq
@@ -210,14 +210,19 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and
 `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
+    [PreservesBoundedConstructible R((h.left)_*⟦Λ⟧)]
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [PreservesBoundedConstructible R((p₁.left)_*⟦Λ⟧)]
+    [PreservesBoundedConstructible R((p.left)_*⟦Λ⟧)]
+    [PreservesBoundedConstructible R(((h ≫ p₁).left)_*⟦Λ⟧)]
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ p :=
   Functor.isoWhiskerRight
       (asIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)) _ ≪≫
     Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp Λ ℓ h p₁ ≪≫ eqToIso (by rw [wp]))
+    Functor.isoWhiskerLeft _
+      (boundedConstructibleLowerStarComp Λ ℓ h p₁ ≪≫ eqToIso (by subst wp; rfl))
 
 end Refinement
 
@@ -226,7 +231,6 @@ end Refinement
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k]
 
 section Pushforward
 

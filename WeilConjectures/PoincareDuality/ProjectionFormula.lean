@@ -222,12 +222,15 @@ end OfCompactification
 section BoundedConstructible
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] [HasConstructibleFiniteness Λ ℓ k]
+  [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
+  [PreservesBoundedConstructible R(((compactificationOverField f).overG.left)_*⟦Λ⟧)]
+  [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+  [(boundedConstructible (condensedRingObj Λ Y.left)).IsMonoidal]
 
 /-- The **derived exceptional projection morphism**
 `PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes: the

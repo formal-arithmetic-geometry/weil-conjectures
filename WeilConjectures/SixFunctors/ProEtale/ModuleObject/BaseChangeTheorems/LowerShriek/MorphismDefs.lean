@@ -208,8 +208,6 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-  [HasConstructibleFiniteness Λ ℓ k]
-
 
 /-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
 on bounded constructible complexes, for a cartesian square `sq` and a compactification
@@ -221,7 +219,9 @@ the inverse of the extension-by-zero exchange of its open-immersion square,
 `i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    (c : Compactification f.left) (sq : IsPullback g' f' f g)
+    [PreservesBoundedConstructible R((c.overG.left)_*⟦Λ⟧)]
+    [PreservesBoundedConstructible R(((c.baseChange sq.overLeft).overG.left)_*⟦Λ⟧)] :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ c ⋙
       boundedConstructibleUpperStar Λ ℓ g ⟶
       boundedConstructibleUpperStar Λ ℓ g' ⋙
@@ -237,7 +237,9 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
     (Functor.associator _ _ _).hom
 
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
-    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    (c : Compactification f.left) (sq : IsPullback g' f' f g)
+    [PreservesBoundedConstructible R((c.overG.left)_*⟦Λ⟧)]
+    [PreservesBoundedConstructible R(((c.baseChange sq.overLeft).overG.left)_*⟦Λ⟧)] :
     boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ ℓ c sq =
       (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.overI)
@@ -261,7 +263,6 @@ section Chosen
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]

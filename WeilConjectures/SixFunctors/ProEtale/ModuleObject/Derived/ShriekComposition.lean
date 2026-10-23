@@ -100,7 +100,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
   {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
-  [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [HasConstructibleFiniteness Λ ℓ k]
+  [IsOpenImmersion j.left] [IsOpenImmersion i'.left]
+  [PreservesBoundedConstructible R((p.left)_*⟦Λ⟧)] [PreservesBoundedConstructible R((p'.left)_*⟦Λ⟧)]
 
 include ℓ k
 
@@ -167,7 +168,6 @@ end Exchange
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k]
 
 section ExchangeIsIso
 
