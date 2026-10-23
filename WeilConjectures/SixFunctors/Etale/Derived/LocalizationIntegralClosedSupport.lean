@@ -329,7 +329,7 @@ section Comparison
 
 variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
   [Finite (Λ ⧸ I)] [Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
-  {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
   (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]

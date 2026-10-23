@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.AdicImageTower
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
 public import WeilConjectures.SixFunctors.OpenClosed.Supported
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing

@@ -52,20 +52,21 @@ lemma geometricFrobeniusField_hom_pow (N : ℕ) :
     ext y
     simp [pow_succ', AlgEquiv.mul_apply]
 
+/-- The `N`-th power of the geometric Frobenius is a `#k ^ N`-th root:
+`(σ^N z) ^ (#k ^ N) = z`. -/
+lemma geometricFrobenius_pow_apply_pow_card_pow (N : ℕ) (z : AlgebraicClosure k) :
+    ((geometricFrobenius k (AlgebraicClosure k)) ^ N) z ^ (Nat.card k ^ N) = z := by
+  induction N generalizing z with
+  | zero => simp
+  | succ N ih =>
+    rw [pow_succ (geometricFrobenius k (AlgebraicClosure k)) N, AlgEquiv.mul_apply,
+      pow_succ (Nat.card k) N, pow_mul, ih, geometricFrobenius_pow_card]
+
 /-- If the `N`-th power of the geometric Frobenius fixes `y`, then `y ^ (#k ^ N) = y`. -/
 lemma pow_card_pow_eq_of_geometricFrobenius_pow (N : ℕ) (y : AlgebraicClosure k)
     (hy : ((geometricFrobenius k (AlgebraicClosure k)) ^ N) y = y) :
     y ^ (Nat.card k ^ N) = y := by
-  have key : ∀ (N : ℕ) (z : AlgebraicClosure k),
-      ((geometricFrobenius k (AlgebraicClosure k)) ^ N) z ^ (Nat.card k ^ N) = z := by
-    intro N
-    induction N with
-    | zero => simp
-    | succ N ih =>
-      intro z
-      rw [pow_succ (geometricFrobenius k (AlgebraicClosure k)) N, AlgEquiv.mul_apply,
-        pow_succ (Nat.card k) N, pow_mul, ih, geometricFrobenius_pow_card]
-  conv_rhs => rw [← key N y]
+  conv_rhs => rw [← geometricFrobenius_pow_apply_pow_card_pow N y]
   rw [hy]
 
 variable (k) in

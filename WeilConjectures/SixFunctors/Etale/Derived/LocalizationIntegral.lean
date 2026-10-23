@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
-public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
@@ -109,26 +109,6 @@ lemma DerivedCategory.torAmplitudeIn_obj₂
 end TorAmplitude
 
 variable {X : Scheme.{u}}
-
-/-- Derived completeness for `I = (ϖ)` is closed under isomorphisms. -/
-lemma _root_.DerivedCategory.isClosedUnderIsomorphisms_derivedComplete
-    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
-    (_root_.DerivedCategory.derivedComplete X.smallEtaleTopology I).IsClosedUnderIsomorphisms := by
-  rw [_root_.DerivedCategory.derivedComplete_eq_rightOrthogonal hϖ hI]
-  infer_instance
-
-/-- `Dᵇc(X, Λ)` is closed under isomorphisms. -/
-lemma DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
-    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
-    (DerivedCategory.boundedConstructibleIntegral I X).IsClosedUnderIsomorphisms where
-  of_iso e := by
-    have := _root_.DerivedCategory.isClosedUnderIsomorphisms_derivedComplete (X := X) hϖ hI
-    rintro ⟨hc, a, b, h⟩
-    exact ⟨(_root_.DerivedCategory.derivedComplete _ I).prop_of_iso e hc, a, b, fun n ↦
-      ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso
-          ((reductionModIdeal Λ X _).mapIso e) (h n).1,
-        (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso
-          ((reductionModIdeal Λ X _).mapIso e) (h n).2⟩⟩
 
 /-- The reductions of a zero object of `D(X_ét, Λ)` have Tor amplitude in any interval. -/
 lemma DerivedCategory.torAmplitudeIn_reductionModIdeal_of_isZero {K : 𝐃(X, Λ)} (hK : IsZero K)
@@ -323,25 +303,6 @@ section Reductions
 variable {X Y : Scheme.{u}} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
 include hϖ hI
 
-/-- The reductions of `Lf^* K` are the pullbacks of the reductions of `K`, so they are bounded
-constructible with the same Tor amplitude as those of `K`. -/
-lemma boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar
-    (f : X ⟶ Y) {K : 𝐃(Y, Λ)} {a b : ℤ} (n : ℕ)
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-        ((reductionModIdeal Λ Y (I ^ (n + 1))).obj K) ∧
-      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
-        ((reductionModIdeal Λ Y (I ^ (n + 1))).obj K)) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-        ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
-      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
-        ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  subst hI
-  obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal (L((f)^*[ModuleCat.{u + 1} Λ])) hϖ (n + 1) K
-  exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso e
-      (boundedConstructible_leftDerivedUpperStar _ f hK.1),
-    (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso e
-      (torAmplitudeIn_leftDerivedUpperStar _ f a b hK.2)⟩
-
 /-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the integral stage `𝒪_E`, for
 `j^*`: for an open immersion `j`, the pullback `Lj^*` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, and
 the reductions keep their Tor amplitude interval. -/
@@ -516,7 +477,8 @@ section UpperShriek
 
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
-  {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))] {X Y : Scheme.{u}}
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {X Y : Scheme.{u}}
 
 include hϖ hI in
 /-- `Rf^!` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, for a separated morphism `f` of separated
@@ -730,8 +692,8 @@ variable (I) in
 restriction of `Ri^!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), under the
 hypotheses providing the exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. -/
-noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsDomain Λ]
-    [IsAdicComplete I Λ] (hϖ : ϖ ∈ nonZeroDivisors Λ)
+noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsAlgClosed k]
+    [IsDomain Λ] [IsAdicComplete I Λ] (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]
     [IsSeparated aX] [IsSeparated aZ] [HasCompactification aX] [HasCompactification aZ]
@@ -749,7 +711,8 @@ end BoundedConstructible
 section Triangle
 
 variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
-  [Finite (Λ ⧸ I)] {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  [Finite (Λ ⧸ I)] {k : Type u} [Field k] [IsAlgClosed k]
+  [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
   (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]

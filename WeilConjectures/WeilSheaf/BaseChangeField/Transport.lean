@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLiftOfStr
 public import WeilConjectures.WeilSheaf.Category
 
 /-!
@@ -24,6 +25,13 @@ pro-étale Weil sheaf `(θ_* K, φ_r)` on `Y'`, whose Weil structure is the `r`-
   `φ_m : (Frᵐ)^* K ≅ K` of a pro-étale Weil sheaf.
 - `AlgebraicGeometry.ProEtaleWeilSheaf.powFunctor`: `(K, φ) ↦ (K, φ_r)`.
 - `AlgebraicGeometry.ProEtaleWeilSheaf.transport`: `(K, φ) ↦ (θ_* K, θ_* φ_r)`.
+
+## Implementation notes
+
+`powFunctor` is an instance of the generic `CategoryTheory.Endofunctor.IsoAlgebra.liftOfStr`, and
+its lemmas and instances, together with those of `transport`, are instances of the generic ones.
+Proving them directly makes the kernel compare `frobeniusPowPullback k₀ l Y r` with
+`WeilSheaf.frobeniusPullback k₀ l Y`, which is slow and memory-hungry.
 -/
 
 @[expose] public section
@@ -93,38 +101,33 @@ variable (k₀ l Y) in
 /-- The `r`-th power of a Weil structure: `(K, φ) ↦ (K, φ_r)`, a pro-étale sheaf with an
 isomorphism `(Frʳ)^* K ≅ K`. -/
 def powFunctor (r : ℕ) :
-    ProEtaleWeilSheaf k₀ l Y ⥤ IsoAlgebra (frobeniusPowPullback k₀ l Y r) where
-  obj K := IsoAlgebra.mk K.carrier (K.frobeniusPowIso r)
-  map φ := ObjectProperty.homMk
-    { f := φ.hom.f
-      h := frobeniusPowIso_hom_naturality φ r }
+    ProEtaleWeilSheaf k₀ l Y ⥤ IsoAlgebra (frobeniusPowPullback k₀ l Y r) :=
+  IsoAlgebra.liftOfStr _ (fun K : ProEtaleWeilSheaf k₀ l Y ↦ K.frobeniusPowIso r) fun φ ↦
+    frobeniusPowIso_hom_naturality φ r
 
 @[simp]
 lemma powFunctor_obj_carrier (r : ℕ) (K : ProEtaleWeilSheaf k₀ l Y) :
     ((powFunctor k₀ l Y r).obj K).carrier = K.carrier :=
-  rfl
+  IsoAlgebra.liftOfStr_obj_carrier _ _ _ K
 
 @[simp]
 lemma powFunctor_obj_str (r : ℕ) (K : ProEtaleWeilSheaf k₀ l Y) :
     ((powFunctor k₀ l Y r).obj K).str = K.frobeniusPowIso r :=
-  IsoAlgebra.mk_str _ _
+  IsoAlgebra.liftOfStr_obj_str _ _ _ K
 
 @[simp]
 lemma powFunctor_map_hom_f (r : ℕ) {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') :
     ((powFunctor k₀ l Y r).map φ).hom.f = φ.hom.f :=
-  rfl
+  IsoAlgebra.liftOfStr_map_hom_f _ _ _ φ
 
-instance (r : ℕ) : (powFunctor k₀ l Y r).Additive where
+instance (r : ℕ) : (powFunctor k₀ l Y r).Additive :=
+  IsoAlgebra.additive_liftOfStr _ _ _
 
-instance (r : ℕ) : PreservesFiniteLimits (powFunctor k₀ l Y r) := by
-  have : PreservesFiniteLimits (powFunctor k₀ l Y r ⋙ IsoAlgebra.forget _) :=
-    inferInstanceAs (PreservesFiniteLimits (IsoAlgebra.forget _))
-  exact preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
+instance (r : ℕ) : PreservesFiniteLimits (powFunctor k₀ l Y r) :=
+  IsoAlgebra.preservesFiniteLimits_liftOfStr _ _ _
 
-instance (r : ℕ) : PreservesFiniteColimits (powFunctor k₀ l Y r) := by
-  have : PreservesFiniteColimits (powFunctor k₀ l Y r ⋙ IsoAlgebra.forget _) :=
-    inferInstanceAs (PreservesFiniteColimits (IsoAlgebra.forget _))
-  exact preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
+instance (r : ℕ) : PreservesFiniteColimits (powFunctor k₀ l Y r) :=
+  IsoAlgebra.preservesFiniteColimits_liftOfStr _ _ _
 
 variable {k₀' : Type u} [Field k₀'] [Finite k₀']
   {Y' : Scheme.{u}} [Y'.Over (Spec (CommRingCat.of k₀'))]
@@ -162,13 +165,12 @@ lemma transport_obj_carrier (K : ProEtaleWeilSheaf k₀ l Y) :
 @[simp]
 lemma transport_map_hom_f {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') :
     ((transport θ r hθ).map φ).hom.f = (θ.hom)_*ᵃ[l].map φ.hom.f :=
-  rfl
+  IsoAlgebra.liftOfStr_comp_mapOfNatIso_map_hom_f _ _ _ (transportCommIso θ r hθ) φ
 
 lemma transport_obj_str (K : ProEtaleWeilSheaf k₀ l Y) :
     ((transport θ r hθ).obj K).str =
-      (transportCommIso θ r hθ).app K.carrier ≪≫ (θ.hom)_*ᵃ[l].mapIso (K.frobeniusPowIso r) := by
-  ext
-  rfl
+      (transportCommIso θ r hθ).app K.carrier ≪≫ (θ.hom)_*ᵃ[l].mapIso (K.frobeniusPowIso r) :=
+  IsoAlgebra.liftOfStr_comp_mapOfNatIso_obj_str _ _ _ (transportCommIso θ r hθ) K
 
 instance : (transport (l := l) θ r hθ).Additive := by
   unfold transport
