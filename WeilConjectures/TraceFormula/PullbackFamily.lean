@@ -308,6 +308,40 @@ noncomputable def IsoAlgebra.stalk {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S
     Endofunctor.IsoAlgebra (P e) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (stalkComparison (c := c) τ x e h)
 
+variable (c) in
+/-- An algebra for `P e` as an algebra for `P e^{n+1}` (`IsoAlgebra.overPowSucc`), as a functor. -/
+noncomputable def IsoAlgebra.overPowSuccFunctor {X : Over T} (e : X ≅ X) (n : ℕ) :
+    Endofunctor.IsoAlgebra (P e.hom.left) ⥤ Endofunctor.IsoAlgebra (P (e.powSucc n).hom.left) where
+  obj G := IsoAlgebra.overPowSucc c e n G
+  map {G H} φ := Endofunctor.IsoAlgebra.mkHom φ.hom.f
+    (e.powSuccStr_hom_naturality (fun f ↦ P f.left) (fun f f' ↦ c f.left f'.left) (φ := G.str)
+      (ψ := H.str) φ.hom.f φ.hom.h n)
+  map_id _ := Endofunctor.IsoAlgebra.mkHom_id _
+  map_comp _ _ := Endofunctor.IsoAlgebra.mkHom_comp _ _ _ _ _
+
+variable (c) in
+/-- The stalk at a point `x` with `x ≫ e^{n+1} = s ≫ x` of algebras for `P e`, with their
+`(n + 1)`-st structure isomorphisms. -/
+noncomputable def IsoAlgebra.frobeniusStalkFunctor {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S))
+    {V : Over T} (e : V ≅ V) (n : ℕ) (x : S ⟶ V.left) (hx : x ≫ (e.powSucc n).hom.left = s ≫ x) :
+    Endofunctor.IsoAlgebra (P e.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)) :=
+  IsoAlgebra.overPowSuccFunctor c e n ⋙ IsoAlgebra.stalk c τ x _ hx
+
+variable (c) in
+/-- The stalk at `x` of an algebra for `P e`, with its `(n + 1)`-st structure isomorphism. -/
+noncomputable def IsoAlgebra.frobeniusStalk {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S)) {V : Over T}
+    (e : V ≅ V) (n : ℕ) (x : S ⟶ V.left) (hx : x ≫ (e.powSucc n).hom.left = s ≫ x)
+    (G : Endofunctor.IsoAlgebra (P e.hom.left)) : Endofunctor.IsoAlgebra (𝟭 (D S)) :=
+  (IsoAlgebra.frobeniusStalkFunctor c τ e n x hx).obj G
+
+variable (c) in
+/-- The Frobenius stalk at `w` of the pullback of an algebra along `g` (`IsoAlgebra.overPullback`). -/
+noncomputable def IsoAlgebra.pullbackFrobeniusStalk {X W : Over T} (eX : X ≅ X) (eW : W ≅ W)
+    {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom) (n : ℕ) {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S))
+    (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
+    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) : Endofunctor.IsoAlgebra (𝟭 (D S)) :=
+  (IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw).obj ((IsoAlgebra.overPullback c eX eW hg).obj F)
+
 /-- **Stalks of iterated pullbacks of algebras**: the composition isomorphism
 `P w (P g F) ≅ P (w ≫ g) F` is an isomorphism between the stalk at `w` of the `(n + 1)`-st
 iterate of the pullback of `F` along `g`, and the stalk at `w ≫ g` of the `(n + 1)`-st iterate
@@ -316,10 +350,10 @@ theorem IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso (hc : PullbackAss
     {X W : Over T} (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
     (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
     (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
-    (hwg : (w ≫ g.left) ≫ (eX.powSucc n).hom.left = s ≫ (w ≫ g.left)) :
-    Nonempty ((IsoAlgebra.stalk c τ w _ hw).obj
-        (IsoAlgebra.overPowSucc c eW n ((IsoAlgebra.overPullback c eX eW hg).obj F)) ≅
-      (IsoAlgebra.stalk c τ (w ≫ g.left) _ hwg).obj (IsoAlgebra.overPowSucc c eX n F)) := by
+    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x) :
+    Nonempty (IsoAlgebra.pullbackFrobeniusStalk c eX eW hg n τ w hw F ≅
+      IsoAlgebra.frobeniusStalk c τ eX n x hwg F) := by
+  subst hx
   have hgn := Iso.powSucc_hom_comp_eq_comp_powSucc_hom eW eX hg n
   refine ⟨Endofunctor.IsoAlgebra.isoMk ((c w g.left).app F.carrier).symm ?_⟩
   change (c w g.left).inv.app F.carrier ≫
@@ -335,6 +369,56 @@ theorem IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso (hc : PullbackAss
     (Iso.powSuccStr_hom_eq_of_hom_eq (P := fun {X Y : Over T} (f : X ⟶ Y) ↦ P f.left)
       (c := fun {X Y Z : Over T} (f : X ⟶ Y) (g : Y ⟶ Z) ↦ c f.left g.left) hc.over eW eX g hg
       F.str ((IsoAlgebra.overPullback c eX eW hg).obj F).str rfl n) w hw hwg
+
+/-- `IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso` for functors given through equations:
+this form lets concrete instances use their own functors. -/
+theorem IsoAlgebra.nonempty_obj_obj_iso_of_eq (hc : PullbackAssoc P c) {X W : Over T}
+    (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
+    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
+    (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
+    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x)
+    (Λ₁ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (P eW.hom.left))
+    (hΛ₁ : Λ₁ = IsoAlgebra.overPullback c eX eW hg)
+    (Φ : Endofunctor.IsoAlgebra (P eW.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
+    (hΦ : Φ = IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw)
+    (Ψ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
+    (hΨ : Ψ = IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg) :
+    Nonempty (Φ.obj (Λ₁.obj F) ≅ Ψ.obj F) := by
+  subst hΛ₁ hΦ hΨ
+  exact IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg
+
+/-- The traces of the structure isomorphisms of the Frobenius stalks of `IsoAlgebra.overPullback`
+agree (`IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso`). -/
+theorem IsoAlgebra.categoricalTrace_frobeniusStalkFunctor_overPullback (hc : PullbackAssoc P c)
+    {X W : Over T} (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
+    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
+    (τ : P s ≅ 𝟭 (D S)) {instM : MonoidalCategory (D S)} {instB : BraidedCategory (D S)}
+    {instP : Preadditive (D S)} (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
+    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x) :
+    categoricalTrace ((IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw).obj
+        ((IsoAlgebra.overPullback c eX eW hg).obj F)).str.hom =
+      categoricalTrace ((IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg).obj F).str.hom :=
+  (Endofunctor.IsoAlgebra.categoricalTrace_str_congr (Classical.choice
+    (IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg))).symm
+
+/-- The traces of the Frobenius stalks of `IsoAlgebra.overPullback`, for functors given through
+equations, so that concrete instances can use their own functors. -/
+theorem IsoAlgebra.categoricalTrace_obj_obj_eq_of_eq (hc : PullbackAssoc P c) {X W : Over T}
+    (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
+    (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
+    (τ : P s ≅ 𝟭 (D S)) {instM : MonoidalCategory (D S)} {instB : BraidedCategory (D S)}
+    {instP : Preadditive (D S)} (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
+    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x)
+    (Λ₁ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (P eW.hom.left))
+    (hΛ₁ : Λ₁ = IsoAlgebra.overPullback c eX eW hg)
+    (Φ : Endofunctor.IsoAlgebra (P eW.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
+    (hΦ : Φ = IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw)
+    (Ψ : Endofunctor.IsoAlgebra (P eX.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)))
+    (hΨ : Ψ = IsoAlgebra.frobeniusStalkFunctor c τ eX n x hwg) :
+    categoricalTrace (Φ.obj (Λ₁.obj F)).str.hom = categoricalTrace (Ψ.obj F).str.hom := by
+  subst hΛ₁ hΦ hΨ
+  exact (Endofunctor.IsoAlgebra.categoricalTrace_str_congr (Classical.choice
+    (IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso hc eX eW hg F n τ w hw hx hwg))).symm
 
 end Over
 

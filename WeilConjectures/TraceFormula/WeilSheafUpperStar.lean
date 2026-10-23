@@ -42,29 +42,13 @@ open Scheme
 
 /-! ### The pullbacks of module objects as a family of pullbacks -/
 
-section PullbackFamily
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-/-- The pullbacks of module objects over `Λ` satisfy the associativity law of a family of
+/-- The pullbacks of module objects over `ℚ̲̄_ℓ` satisfy the associativity law of a family of
 pullbacks, along morphisms of schemes. -/
-lemma pullbackAssoc_upperStar :
-    PullbackAssoc (D := fun V : Scheme.{u} ↦
-        Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V))
-      (fun {X Y : Scheme.{u}} (f : X ⟶ Y) ↦ (f)^*⟦Λ⟧)
-      (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦ upperStarComp Λ f g) :=
-  fun f g h ↦ upperStarComp_assoc Λ f g h
-
-/-- The pullbacks of module objects over `Λ` satisfy the associativity law of a family of
-pullbacks, along morphisms of schemes over a base `T`. -/
-lemma pullbackAssoc_upperStar_left (T : Scheme.{u}) :
-    PullbackAssoc (C := Over T) (D := fun V : Over T ↦
-        Mod (Sheaf (Scheme.ProEt.topology V.left) Ab.{u + 1}) (condensedRingObj Λ V.left))
-      (fun {X Y : Over T} (f : X ⟶ Y) ↦ (f.left)^*⟦Λ⟧)
-      (fun {X Y Z : Over T} (f : X ⟶ Y) (g : Y ⟶ Z) ↦ upperStarComp Λ f.left g.left) :=
-  fun f g h ↦ upperStarComp_assoc Λ f.left g.left h.left
-
-end PullbackFamily
+lemma pullbackAssoc_upperStar (ℓ : ℕ) [Fact ℓ.Prime] :
+    PullbackAssoc (upperStar (Profinite.padicAlgClRingObj ℓ))
+      (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+        upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) :=
+  fun f g h ↦ upperStarComp_assoc _ f g h
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
@@ -94,25 +78,41 @@ noncomputable def weilSheafUpperStarComparison :
 noncomputable def weilSheafUpperStar : WeilSheaf ℓ eX ⥤ WeilSheaf ℓ eW :=
   IsoAlgebra.mapOfNatIso (weilSheafUpperStarComparison ℓ eX eW hg)
 
-/-- The Frobenius comparison of the pullback of Weil sheaves is the comparison of the family of
-pullbacks `V ↦ (V.left)^*`. -/
-lemma weilSheafUpperStarComparison_eq :
-    weilSheafUpperStarComparison ℓ eX eW hg =
-      pullbackComparison (C := Over (Spec (.of k))) (D := fun V : Over (Spec (.of k)) ↦
-          Mod (Sheaf (Scheme.ProEt.topology V.left) Ab.{u + 1})
-            (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left))
-        (P := fun {X Y : Over (Spec (.of k))} (f : X ⟶ Y) ↦
-          (f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
-        (c := fun {X Y Z : Over (Spec (.of k))} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
-          upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
-        g eW.hom eX.hom hg :=
+omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- The pullback of Weil sheaves is the pullback of algebras for the family of pullbacks of
+module objects. -/
+lemma weilSheafUpperStar_eq :
+    weilSheafUpperStar ℓ eX eW hg =
+      IsoAlgebra.overPullback (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+          upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) eX eW hg :=
   rfl
 
-/-- `IsoAlgebra.categoricalTrace_str_congr` with the monoidal structures found by unification. -/
-lemma categoricalTrace_str_congr_of_iso {C : Type*} [Category C] {_ : MonoidalCategory C}
-    {_ : BraidedCategory C} {_ : Preadditive C} {A B : IsoAlgebra (𝟭 C)} (i : A ≅ B) :
-    categoricalTrace B.str.hom = categoricalTrace A.str.hom :=
-  IsoAlgebra.categoricalTrace_str_congr i
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- The stalk functor of Weil sheaves with the `(n + 1)`-st Frobenius operator is the Frobenius
+stalk functor of algebras for the family of pullbacks of module objects. -/
+lemma WeilSheaf.powSuccStalkFunctor_eq (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ W.left)
+    (hx : x ≫ (eW.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
+    WeilSheaf.powSuccStalkFunctor ℓ n x hx =
+      IsoAlgebra.frobeniusStalkFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+          upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+        (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
+          ((geometricFrobeniusField k).powSucc n).hom) eW n x hx :=
+  rfl
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- The trace of the Frobenius on the stalk only depends on the stalk with its Frobenius operator
+up to isomorphism, for possibly different Weil sheaves and points. -/
+lemma weilSheafStalkTrace_eq_of_iso (n : ℕ) {x : Spec (.of (AlgebraicClosure k)) ⟶ W.left}
+    {hx : x ≫ (eW.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x}
+    {x' : Spec (.of (AlgebraicClosure k)) ⟶ X.left}
+    {hx' : x' ≫ (eX.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x'}
+    {G : WeilSheaf ℓ eW} {F : WeilSheaf ℓ eX}
+    (i : (WeilSheaf.powSuccStalkFunctor ℓ n x hx).obj G ≅
+      (WeilSheaf.powSuccStalkFunctor ℓ n x' hx').obj F) :
+    weilSheafStalkTrace ℓ n x hx G = weilSheafStalkTrace ℓ n x' hx' F :=
+  (IsoAlgebra.categoricalTrace_str_congr i).symm
 
 /-- **Stalks of a pullback of Weil sheaves**: for `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`, a Weil
 sheaf `F` for `e_X` and a point `w̄` of `W` of degree `n + 1`, the trace of the `(n + 1)`-st
@@ -126,6 +126,23 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
     weilSheafStalkTrace ℓ n w.1 w.2.2 ((weilSheafUpperStar ℓ eX eW hg).obj F) =
       weilSheafStalkTrace ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
         (frobeniusFixedPointsMap eW eX hg n w).2.2 F := by
+  have I := Classical.choice
+    (IsoAlgebra.nonempty_obj_obj_iso_of_eq
+    (c := fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+      upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+    (pullbackAssoc_upperStar ℓ) eX eW hg F n
+    (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
+      ((geometricFrobeniusField k).powSucc n).hom) w.1 w.2.2
+    (x := (frobeniusFixedPointsMap eW eX hg n w).1) rfl
+    (frobeniusFixedPointsMap eW eX hg n w).2.2 (weilSheafUpperStar ℓ eX eW hg)
+    (weilSheafUpperStar_eq ℓ eX eW hg) (WeilSheaf.powSuccStalkFunctor ℓ n w.1 w.2.2)
+    (WeilSheaf.powSuccStalkFunctor_eq ℓ eW n _ _)
+    (WeilSheaf.powSuccStalkFunctor ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
+      (frobeniusFixedPointsMap eW eX hg n w).2.2)
+    (WeilSheaf.powSuccStalkFunctor_eq ℓ eX n _ _))
+
+  have I' := (I : @Iso (IsoAlgebra (𝟭 (GeometricPointMod ℓ (AlgebraicClosure k)))) _
+    ((WeilSheaf.powSuccStalkFunctor ℓ n w.1 w.2.2).obj ((weilSheafUpperStar ℓ eX eW hg).obj F)) _)
   sorry
 
 end WeilSheafPullback
