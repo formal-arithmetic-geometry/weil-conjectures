@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 
 /-!
 # Direct images out of the spectrum of a separably closed field
@@ -15,12 +16,11 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 Let `L` be a separably closed field. Étale sheaves of `Λ`-modules on `Spec L` are `Λ`-modules
 (`AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed`), and the free sheaf `Λ[W]` on
 an étale `L`-scheme `W` corresponds to the free module on the `L`-points of `W`; hence it is a
-projective object (`AlgebraicGeometry.Etale.projective_freeSheaf_of_isSepClosed`) and taking
-sections over any étale `L`-scheme preserves epimorphisms. Since the sections of `f_* G` over
-`V` are the sections of `G` over the étale `L`-scheme `Spec L ×_Y V`, the direct image `f_*`
-along any morphism `f : Spec L ⟶ Y` is exact, and the higher direct images vanish
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isSepClosed`, the second half of
-blueprint `lem-kun-0ezp`).
+projective object (`AlgebraicGeometry.Etale.projective_freeSheaf_of_isSepClosed`). The direct
+image `f_*` along any morphism `f : Spec L ⟶ Y` is exact
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isSepClosed`), and hence the
+higher direct images vanish (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isSepClosed`,
+the second half of blueprint `lem-kun-0ezp`).
 -/
 
 @[expose] public section
@@ -59,38 +59,9 @@ theorem projective_freeSheaf_of_isSepClosed (W : (Spec (.of L)).Etale) :
       (op (etalePoint L)))) hP
   exact ((constantSheafEquivalenceOfIsSepClosed Λ (k := L)).symm.map_projective_iff _).1 hP'
 
-/-- Over a separably closed field `L`, an epimorphism of étale sheaves of `Λ`-modules on
-`Spec L` is surjective on sections over every étale `L`-scheme `W`. -/
-theorem surjective_app_of_epi_of_isSepClosed' (W : (Spec (.of L)).Etale)
-    {G G' : Sheaf (Spec (.of L)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : G ⟶ G')
-    [Epi φ] : Function.Surjective (φ.hom.app (op W)) := by
-  have := projective_freeSheaf_of_isSepClosed Λ W
-  intro s
-  refine ⟨Etale.freeSheafHomEquiv Λ W G
-    (Projective.factorThru ((Etale.freeSheafHomEquiv Λ W G').symm s) φ), ?_⟩
-  rw [← Etale.freeSheafHomEquiv_comp, Projective.factorThru_comp, Equiv.apply_symm_apply]
-
-/-- The direct image along a morphism `f : Spec L ⟶ Y` from the spectrum of a separably closed
-field preserves epimorphisms: the sections of `f_* G` over `V` are the sections of `G` over the
-étale `L`-scheme `Spec L ×_Y V`, on which an epimorphism is surjective. -/
-instance preservesEpimorphisms_lowerStar_of_isSepClosed {Y : Scheme.{u}}
-    (f : Spec (.of L) ⟶ Y) : ((f)_*[ModuleCat.{u + 1} Λ]).PreservesEpimorphisms where
-  preserves {G G'} φ _ := by
-    have : Epi ((sheafToPresheaf _ _).map ((f)_*[ModuleCat.{u + 1} Λ].map φ)) := by
-      have (V : Y.Etaleᵒᵖ) : Epi (((sheafToPresheaf _ _).map
-          ((f)_*[ModuleCat.{u + 1} Λ].map φ)).app V) := by
-        rw [ModuleCat.epi_iff_surjective]
-        exact surjective_app_of_epi_of_isSepClosed' Λ _ φ
-      exact NatTrans.epi_of_epi_app _
-    exact (sheafToPresheaf _ _).epi_of_epi_map this
-
 instance preservesHomology_lowerStar_of_isSepClosed {Y : Scheme.{u}} (f : Spec (.of L) ⟶ Y) :
     ((f)_*[ModuleCat.{u + 1} Λ]).PreservesHomology :=
   Functor.preservesHomology_of_preservesEpis_and_kernels _
-
-instance preservesFiniteColimits_lowerStar_of_isSepClosed {Y : Scheme.{u}}
-    (f : Spec (.of L) ⟶ Y) : PreservesFiniteColimits ((f)_*[ModuleCat.{u + 1} Λ]) :=
-  Functor.preservesFiniteColimits_of_preservesHomology _
 
 /-- Blueprint `lem-kun-0ezp`, second half: for a separably closed field `L` and any morphism
 `f : Spec L ⟶ Y`, the higher direct images `R^q f_* F` vanish for `q ≠ 0`, the direct image
