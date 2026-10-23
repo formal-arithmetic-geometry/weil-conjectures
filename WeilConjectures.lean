@@ -4122,6 +4122,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Affine
 public import WeilConjectures.AlgebraicGeometry.Hilbert.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.Hilbert.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
+public import WeilConjectures.AlgebraicGeometry.Hilbert.CurvePower
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.HomComplexOverEquivProjections
