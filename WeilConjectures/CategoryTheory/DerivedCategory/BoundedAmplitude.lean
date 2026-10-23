@@ -39,6 +39,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
   {D : Type u'} [Category.{v'} D] [Abelian D] [HasDerivedCategory.{w'} D]
   (G : DerivedCategory C ⥤ DerivedCategory D) [G.CommShift ℤ] [G.IsTriangulated]
 
+omit [G.IsTriangulated] in
 /-- The image under `G` of the third term `Hᵇ(E)[-b]` of the truncation triangle at `b` of an
 object `E` with `E ≤ b`, as the shift of the image of an object placed in degree `0`. -/
 private lemma exists_iso_shift_single_obj₃ (E : DerivedCategory C) (b : ℤ) [E.IsLE b] :

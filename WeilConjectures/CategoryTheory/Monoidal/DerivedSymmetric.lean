@@ -15,9 +15,9 @@ If the braiding of a monoidal category `C` is symmetric, `β_ Y X ∘ β_ X Y = 
 - the Koszul braiding of cochain complexes `CochainComplex.Monoidal.braiding`
   (`CochainComplex.Monoidal.braiding_hom_braiding_hom`), the two signs `(-1)^(pq)` cancelling;
 - the braiding of the homotopy category (`HomotopyCategory.braiding_hom_braiding_hom`);
-- the braiding of a derived monoidal category `CategoryTheory.DerivedMonoidal.braidedCategory`
+- the braiding of a derived monoidal category `CategoryTheory.DerivedMonoidal.braidedCategory'`
   (`CategoryTheory.DerivedMonoidal.braiding_hom_braiding_hom`);
-- the braiding `DerivedCategory.braidedCategory` of the derived tensor product on
+- the braiding `DerivedCategory.braidedCategory'` of the derived tensor product on
   `DerivedCategory C` (`DerivedCategory.braiding_hom_braiding_hom`).
 
 The symmetry of `C` is passed as a hypothesis on a given braiding rather than as a
@@ -98,9 +98,9 @@ lemma braidingInvNatTrans_eq_braidingNatTrans
 /-- Over a symmetric category, the braiding of the derived monoidal category is symmetric. -/
 lemma braiding_hom_braiding_hom (hC : ∀ X Y : C, (β_ X Y).hom ≫ (β_ Y X).hom = 𝟙 _)
     (X Y : DerivedMonoidal L W) :
-    (braiding L W X Y).hom ≫ (braiding L W Y X).hom = 𝟙 _ := by
-  have h : (braiding L W Y X).hom = (braiding L W X Y).inv := by
-    simp only [braiding, braidingInvNatTrans_eq_braidingNatTrans L W hC]
+    (braiding' L W X Y).hom ≫ (braiding' L W Y X).hom = 𝟙 _ := by
+  have h : (braiding' L W Y X).hom = (braiding' L W X Y).inv := by
+    simp only [braiding', braidingInvNatTrans_eq_braidingNatTrans L W hC]
   rw [h, Iso.hom_inv_id]
 
 end CategoryTheory.DerivedMonoidal
@@ -117,11 +117,11 @@ local instance hasColimitsOfSize_derivedSymmetric : HasColimitsOfSize.{0, 0} C :
 variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
-/-- The braiding `DerivedCategory.braidedCategory` of the derived tensor product is symmetric
+/-- The braiding `DerivedCategory.braidedCategory'` of the derived tensor product is symmetric
 when the braiding of `C` is. -/
 lemma braiding_hom_braiding_hom (hC : ∀ X Y : C, (β_ X Y).hom ≫ (β_ Y X).hom = 𝟙 _)
     (X Y : DerivedCategory C) :
-    letI := braidedCategory C
+    letI := braidedCategory' C
     (β_ X Y).hom ≫ (β_ Y X).hom = 𝟙 _ :=
   DerivedMonoidal.braiding_hom_braiding_hom Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
     (HomotopyCategory.braiding_hom_braiding_hom hC) X Y

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTest
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaConstant
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatIdeal
@@ -17,7 +18,7 @@ Let `f : X ⟶ Y` be a morphism of schemes and `Λ` a noetherian commutative rin
 higher direct images of `f` vanish above `N` on every sheaf of `Λ`-modules (`UDV(f, Λ; N)`,
 `def-sf-uniform-direct-image-vanishing`). Then `Rf_*` sends an object of Tor amplitude in
 `[a, b]` to an object of Tor amplitude in `[a, b + N]`
-(`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`).
+(`Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`).
 
 ## Proof
 
@@ -58,7 +59,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The short exact sequence `0 ⟶ I ⟶ Λ ⟶ Λ/I ⟶ 0` of `Λ`-modules attached to an ideal. -/
 noncomputable def idealShortComplex (I : Ideal Λ) : ShortComplex (ModuleCat.{u + 1} Λ) :=
-  ModuleCat.shortComplexOfCompEqZero I.subtype I.mkQ (LinearMap.exact_subtype_mkQ I).linearMap_comp_eq_zero
+  ModuleCat.shortComplexOfCompEqZero I.subtype I.mkQ
+    (LinearMap.exact_subtype_mkQ I).linearMap_comp_eq_zero
 
 lemma idealShortComplex_shortExact (I : Ideal Λ) : (idealShortComplex I).ShortExact :=
   ModuleCat.shortComplex_shortExact _ (LinearMap.exact_subtype_mkQ I) I.injective_subtype
@@ -76,8 +78,9 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + N)
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
   obtain ⟨_, _⟩ := _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hK
-  have := isGE_rightDerivedLowerStar_of_isGE f a b K
-  have := isLE_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE f N hf a b K
+  have := isGE_rightDerivedLowerStar_obj _ f K a
+  have := isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage
+    (fun F q hq ↦ hf F q (by exact_mod_cast hq)) K b
   let S (I : Ideal Λ) : ShortComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     (idealShortComplex I).map (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   refine _root_.DerivedCategory.torAmplitudeIn_of_forall_isGE S
@@ -87,12 +90,12 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE
   let Q := ModuleCat.of Λ (Λ ⧸ I)
   have := isIso_rightDerivedLowerStarProjectionMap_constantSheaf f N hf hK Q
   obtain ⟨_, _⟩ := hK ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj Q)
-  have := isGE_rightDerivedLowerStar_of_isGE f a b (K ⊗ constantSingle X Q)
-  exact TStructure.t.isGE_of_iso
+  have := isGE_rightDerivedLowerStar_obj _ f (K ⊗ constantSingle (ModuleCat.{u + 1} Λ) X Q) a
+  exact _root_.DerivedCategory.TStructure.t.isGE_of_iso
     ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
-      (whiskerLeftIso K (leftDerivedUpperStarSingleConstantSheafIso Λ f Q)).symm ≪≫
+      (whiskerLeftIso K (leftDerivedUpperStarSingleConstantSheafIso _ f Q)).symm ≪≫
     (asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app
-      (constantSingle Y Q))).symm) a
+      (constantSingle (ModuleCat.{u + 1} Λ) Y Q))).symm) a
 
 end Etale
 

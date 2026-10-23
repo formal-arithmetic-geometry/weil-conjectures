@@ -53,7 +53,7 @@ lemma isPullback_section_diagonal (s : Y ⟶ Z) (hs : s ≫ a = 𝟙 Y) :
     have h₂ : c.fst ≫ a ≫ s = c.snd := by simpa using c.condition =≫ pullback.snd a a
     rw [Category.assoc c.fst a s, h₂]
   · intro c m hm _
-    rw [← hm, Category.assoc m s a, hs, Category.comp_id]
+    simp [← hm, hs]
 
 namespace FormallyUnramified
 
@@ -90,13 +90,13 @@ lemma exists_comp_eq_id_of_isAlgClosed (a : Z ⟶ Spec (.of K)) [FormallyUnramif
       (Scheme.Spec.residueFieldIso (.of K) (a z)).inv).2.comp
       (Ideal.algebraMap_residueField_surjective _)
   have hint : φ.hom.IsIntegral := by
-    letI : Algebra ((Spec (.of K)).residueField (a z)) (Z.residueField z) :=
+    let : Algebra ((Spec (.of K)).residueField (a z)) (Z.residueField z) :=
       (a.residueFieldMap z).hom.toAlgebra
     rw [hφ, CommRingCat.hom_comp]
     exact RingHom.IsIntegral.trans _ _ (RingHom.isIntegral_of_surjective _ hχ)
       (Algebra.IsSeparable.isIntegral _)
-  letI : Algebra K (Z.residueField z) := φ.hom.toAlgebra
-  haveI : Algebra.IsIntegral K (Z.residueField z) := ⟨hint⟩
+  let : Algebra K (Z.residueField z) := φ.hom.toAlgebra
+  have : Algebra.IsIntegral K (Z.residueField z) := ⟨hint⟩
   let ψ : Z.residueField z →ₐ[K] K := IsAlgClosed.lift
   refine ⟨Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ Z.fromSpecResidueField z, ?_,
     ⟨IsLocalRing.closedPoint K, Z.fromSpecResidueField_apply z _⟩⟩
@@ -106,6 +106,7 @@ lemma exists_comp_eq_id_of_isAlgClosed (a : Z ⟶ Spec (.of K)) [FormallyUnramif
   ext c
   exact ψ.commutes c
 
+omit [IsAlgClosed K] in
 /-- Two sections `Spec K ⟶ Z` of a formally unramified morphism locally of finite type through
 the same point are equal. -/
 lemma eq_of_comp_eq_id_of_apply_eq (a : Z ⟶ Spec (.of K)) [FormallyUnramified a]

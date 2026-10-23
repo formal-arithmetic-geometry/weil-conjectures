@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFiniteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDual
+public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-!
 # The Verdier dual of a complex of lisse sheaves on a smooth scheme
@@ -52,7 +56,7 @@ lemma isConstant_upperStar {X Y : Scheme.{u}} (g : X ⟶ Y)
     (hF : F.IsConstant Y.smallEtaleTopology) :
     ((g)^*[ModuleCat.{u + 1} Λ].obj F).IsConstant X.smallEtaleTopology := by
   obtain ⟨⟨M, ⟨e⟩⟩⟩ := hF
-  exact Sheaf.isConstant_of_iso
+  exact Sheaf.isConstant_of_iso _
     ((g)^*[ModuleCat.{u + 1} Λ].mapIso e.symm ≪≫ (upperStarConstantSheafIso _ g).app M)
 
 variable {Λ} in
@@ -66,7 +70,7 @@ lemma exists_etale_isConstant_upperStar {O : Scheme.{u}} [IrreducibleSpace O] (n
     ∃ (W : Scheme.{u}) (_ : Nonempty W) (e : W ⟶ O) (_ : _root_.AlgebraicGeometry.Etale e),
       ∀ i, ((e)^*[ModuleCat.{u + 1} Λ].obj (F i)).IsConstant W.smallEtaleTopology := by
   induction n with
-  | zero => exact ⟨O, inferInstance, 𝟙 O, inferInstance, Fin.elim0⟩
+  | zero => exact ⟨O, inferInstance, 𝟙 O, inferInstance, fun i ↦ i.elim0⟩
   | succ n ih =>
     obtain ⟨W, hW, e, he, hc⟩ := ih (fun i ↦ F i.castSucc) (fun i ↦ hF _)
     obtain ⟨⟨𝒰, h𝒰⟩⟩ := (hF (Fin.last n)).nonempty_locallyConstantDatum
@@ -75,7 +79,7 @@ lemma exists_etale_isConstant_upperStar {O : Scheme.{u}} [IrreducibleSpace O] (n
     have hi : _root_.AlgebraicGeometry.Etale (𝒰.f i) := 𝒰.map_prop i
     have hci : ((𝒰.f i)^*[ModuleCat.{u + 1} Λ].obj (F (Fin.last n))).IsConstant
         (𝒰.X i).smallEtaleTopology :=
-      (isConstant_over_iff_upperStar _ _).1 (h𝒰 i)
+      (isConstant_over_iff_upperStar _ _ _).1 (h𝒰 i)
     -- the images of `e` and of `𝒰.f i` meet
     obtain ⟨w⟩ := hW
     obtain ⟨y, hy⟩ := 𝒰.covers x
@@ -86,12 +90,15 @@ lemma exists_etale_isConstant_upperStar {O : Scheme.{u}} [IrreducibleSpace O] (n
     refine ⟨pullback e (𝒰.f i), ⟨t⟩, pullback.fst e (𝒰.f i) ≫ e, inferInstance, ?_⟩
     intro j
     refine Fin.lastCases ?_ (fun j ↦ ?_) j
-    · refine Sheaf.isConstant_congr _
+    · have := isConstant_upperStar (pullback.snd e (𝒰.f i)) hci
+      exact Sheaf.isConstant_congr (F := (pullback.snd e (𝒰.f i))^*[ModuleCat.{u + 1} Λ].obj
+          ((𝒰.f i)^*[ModuleCat.{u + 1} Λ].obj (F (Fin.last n)))) _
         (((Etale.upperStarComp _ (pullback.snd e (𝒰.f i)) (𝒰.f i) _ pullback.condition).app
-          (F (Fin.last n))).symm) (h := isConstant_upperStar _ hci)
-    · refine Sheaf.isConstant_congr _
+          (F (Fin.last n))).symm)
+    · have := isConstant_upperStar (pullback.fst e (𝒰.f i)) (hc j)
+      exact Sheaf.isConstant_congr (F := (pullback.fst e (𝒰.f i))^*[ModuleCat.{u + 1} Λ].obj
+          ((e)^*[ModuleCat.{u + 1} Λ].obj (F j.castSucc))) _
         (((Etale.upperStarComp _ (pullback.fst e (𝒰.f i)) e _ rfl).app (F j.castSucc)).symm)
-        (h := isConstant_upperStar _ (hc j))
 
 variable {Λ} in
 /-- **Generic finite étale trivialisation.** Finitely many locally constant sheaves on an
@@ -109,10 +116,11 @@ lemma exists_finite_etale_surjective_isConstant {O S : Scheme.{u}} [IrreducibleS
       (_ : IsFinite p) (_ : _root_.AlgebraicGeometry.Etale p) (_ : Surjective p),
       ∀ i, ((p ≫ O'.ι)^*[ModuleCat.{u + 1} Λ].obj (F i)).IsConstant V.smallEtaleTopology := by
   obtain ⟨W, ⟨w⟩, e, he, hc⟩ := exists_etale_isConstant_upperStar n F hF
-  have : IsLocallyNoetherian W := isLocallyNoetherian_of_isOpenImmersion' e
+  have : IsLocallyNoetherian W := LocallyOfFiniteType.isLocallyNoetherian e
   -- restrict to a nonempty affine open of `W`
   obtain ⟨_, ⟨W₀, hW₀, rfl⟩, hwW₀, -⟩ :=
     W.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ w) isOpen_univ
+  change W.Opens at W₀
   have : IsAffine W₀ := hW₀
   have : Nonempty W₀ := ⟨⟨w, hwW₀⟩⟩
   have : TopologicalSpace.NoetherianSpace W₀ := by
@@ -130,8 +138,8 @@ lemma exists_finite_etale_surjective_isConstant {O S : Scheme.{u}} [IrreducibleS
     IsZariskiLocalAtTarget.restrict (P := @_root_.AlgebraicGeometry.Etale) inferInstance O'
   have : IrreducibleSpace O' := by
     obtain ⟨x, hx⟩ := hO'
-    exact Subtype.irreducibleSpace (IsPreirreducible.open_subset O'.isOpen
-      (IrreducibleSpace.isIrreducible_univ O).2 (Set.subset_univ _) |>.isIrreducible ⟨x, hx⟩)
+    exact Subtype.irreducibleSpace ⟨⟨x, hx⟩, IsPreirreducible.open_subset
+      (IrreducibleSpace.isIrreducible_univ O).2 O'.isOpen (Set.subset_univ _)⟩
   have hsurj : Surjective p := by
     refine ⟨?_⟩
     have hcl : IsClopen (Set.range p.base) :=
@@ -140,27 +148,18 @@ lemma exists_finite_etale_surjective_isConstant {O S : Scheme.{u}} [IrreducibleS
     rw [← Set.range_eq_univ, hcl.eq_univ ⟨_, ⟨v, hv⟩, rfl⟩]
   refine ⟨O', hO', _, p, hfin, inferInstance, hsurj, fun i ↦ ?_⟩
   have hp : p ≫ O'.ι = (e₀ ⁻¹ᵁ O').ι ≫ W₀.ι ≫ e := morphismRestrict_ι e₀ O'
-  refine Sheaf.isConstant_congr _ (((Etale.upperStarComp _ (e₀ ⁻¹ᵁ O').ι (W₀.ι ≫ e) _ hp).app
-    (F i)).symm ≪≫ ((e₀ ⁻¹ᵁ O').ι)^*[ModuleCat.{u + 1} Λ].mapIso
-      ((Etale.upperStarComp _ W₀.ι e _ rfl).app (F i)).symm) (h := ?_)
-  exact isConstant_upperStar _ (isConstant_upperStar _ (hc i))
+  have := isConstant_upperStar (e₀ ⁻¹ᵁ O').ι (isConstant_upperStar W₀.ι (hc i))
+  exact Sheaf.isConstant_congr (F := ((e₀ ⁻¹ᵁ O').ι)^*[ModuleCat.{u + 1} Λ].obj
+      ((W₀.ι)^*[ModuleCat.{u + 1} Λ].obj ((e)^*[ModuleCat.{u + 1} Λ].obj (F i)))) _
+    (((e₀ ⁻¹ᵁ O').ι)^*[ModuleCat.{u + 1} Λ].mapIso
+      ((Etale.upperStarComp _ W₀.ι e _ rfl).app (F i)).symm ≪≫
+      ((Etale.upperStarComp _ (e₀ ⁻¹ᵁ O').ι (W₀.ι ≫ e) _ hp).app (F i)).symm)
 
 /-! ### Dualizability after a finite étale trivialisation -/
 
 section Dualizable
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-
-/-- A zero object of a preadditive monoidal category is dualizable, with itself as dual and zero
-evaluation and coevaluation. -/
-lemma isDualizable_of_isZero {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C]
-    {Z : C} (hZ : IsZero Z) : IsDualizable Z :=
-  ⟨{ rightDual := Z
-     exact :=
-      { coevaluation' := 0
-        evaluation' := 0
-        coevaluation_evaluation' := (hZ.of_iso (ρ_ Z).symm).eq_of_src _ _
-        evaluation_coevaluation' := (hZ.of_iso (λ_ Z).symm).eq_of_src _ _ } }⟩
 
 /-- The constant sheaf of a finite projective `Λ`-module is dualizable, the constant sheaf
 functor being monoidal. -/
@@ -234,6 +233,7 @@ lemma exists_finite_etale_isConstant_model {O S : Scheme.{u}} [IrreducibleSpace 
   obtain ⟨h₁, h₂⟩ := projective_and_finite_of_iso_constantSheaf Λ hflat e
   exact ⟨M, h₁, h₂, ⟨e⟩⟩
 
+omit [Finite Λ] in
 /-- The right dual of a sheaf isomorphic to the constant sheaf of a finite projective module is
 finite locally constant: it is the constant sheaf of the dual module, duals being unique. -/
 lemma isFiniteLocallyConstantSheaf_rightDual_of_iso_constantSheaf {V : Scheme.{u}}
@@ -246,20 +246,27 @@ lemma isFiniteLocallyConstantSheaf_rightDual_of_iso_constantSheaf {V : Scheme.{u
   let p₁ : ExactPairing F (C.obj Mᘁ) :=
     @exactPairingCongrLeft _ _ _ _ _ _ (ExactPairing.map C M Mᘁ) e.symm
   -- the dual module is finite: it is the module of linear forms
-  have : Module.Finite Λ Mᘁ := by
+  have : Module.Finite Λ (Mᘁ : ModuleCat.{u + 1} Λ) := by
     let _ : ExactPairing Mᘁ M := BraidedCategory.exactPairing_swap M Mᘁ
     have : Module.Finite Λ (M ⟶ ModuleCat.of Λ Λ) :=
       Module.Finite.equiv (ModuleCat.homLinearEquiv (S := Λ)).symm
+    have : Module.Finite Λ ((ihom M).obj (𝟙_ (ModuleCat.{u + 1} Λ))) := this
     exact Module.Finite.equiv (MonoidalClosed.ihomObjUnitIso Mᘁ M).toLinearEquiv
+  have := isFiniteLocallyConstantSheaf_constantSheaf (X := V) Mᘁ
   exact IsFiniteLocallyConstantSheaf.of_iso (rightDualIso p₁ inferInstance)
 
+omit [Finite Λ] in
 /-- The right dual of a zero sheaf is finite locally constant, being zero. -/
 lemma isFiniteLocallyConstantSheaf_rightDual_of_isZero {V : Scheme.{u}}
     {F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasRightDual F] (hF : IsZero F) :
     IsFiniteLocallyConstantSheaf Fᘁ := by
-  obtain ⟨h⟩ := isDualizable_of_isZero hF
-  exact IsFiniteLocallyConstantSheaf.of_iso (rightDualIso h.exact inferInstance)
-    (h := IsFiniteLocallyConstantSheaf.of_isZero hF)
+  let p : ExactPairing F F :=
+    { coevaluation' := 0
+      evaluation' := 0
+      coevaluation_evaluation' := (hF.of_iso (ρ_ F)).eq_of_src _ _
+      evaluation_coevaluation' := (hF.of_iso (λ_ F)).eq_of_src _ _ }
+  have := IsFiniteLocallyConstantSheaf.of_isZero hF
+  exact IsFiniteLocallyConstantSheaf.of_iso (rightDualIso p inferInstance)
 
 /-- The property of being a finite locally constant sheaf. -/
 def finiteLocallyConstantSheaf (V : Scheme.{u}) :
@@ -279,9 +286,9 @@ lemma homologyProperty_Q_obj_of_isFiniteLocallyConstantSheaf {V : Scheme.{u}}
     _root_.DerivedCategory.homologyProperty (finiteLocallyConstantSheaf Λ V)
       ((_root_.DerivedCategory.Q).obj C) := fun q ↦ by
   have : IsNoetherianRing Λ := inferInstance
-  have := hC ((ComplexShape.up ℤ).prev q)
-  have := hC q
-  have := hC ((ComplexShape.up ℤ).next q)
+  have : IsFiniteLocallyConstantSheaf (C.sc q).X₁ := hC _
+  have : IsFiniteLocallyConstantSheaf (C.sc q).X₂ := hC _
+  have : IsFiniteLocallyConstantSheaf (C.sc q).X₃ := hC _
   have : IsFiniteLocallyConstantSheaf ((C.sc q).homology) :=
     IsFiniteLocallyConstantSheaf.homology (C.sc q)
   exact ObjectProperty.prop_of_iso _
@@ -312,7 +319,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     (n : ℕ) [SmoothOfRelativeDimension n aO] {a b : ℤ}
     (P : CochainComplex (Sheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)
     (hP : IsBoundedFlatComplex Λ a b P) (hPl : ∀ q, IsFiniteLocallyConstantSheaf (P.X q)) :
-    ∃ O' : O.Opens, (O' : Set O).Nonempty ∧
+    ∃ (O' : O.Opens) (_ : QuasiCompact O'.ι), (O' : Set O).Nonempty ∧
       boundedConstructible (ModuleCat.{u + 1} Λ) O'
         ((verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj
           (op (D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)))) ∧
@@ -320,18 +327,19 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
         ((verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj
           (op (D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)))) := by
   have : IsLocallyNoetherian O := LocallyOfFiniteType.isLocallyNoetherian aO
+  have : HasInvertibleExponent Λ O := .of_hom aO
   -- the dualizing complex of `O` is a shifted locally constant sheaf of rank one
   obtain ⟨L, hLc, hLs, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ aO n
   obtain ⟨-, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
   obtain ⟨O', hO', V, p, hfin, het, hsurj, hconst, hLV⟩ :=
     exists_finite_etale_isConstant_model Λ aO P hP hPl L hLc
-  refine ⟨O', hO', ?_⟩
   have : TopologicalSpace.NoetherianSpace O := by
     have : CompactSpace O := QuasiCompact.compactSpace_of_compactSpace aO
     have : IsNoetherian O := {}
     infer_instance
   have : TopologicalSpace.NoetherianSpace O' := O'.ι.isOpenEmbedding.isInducing.noetherianSpace
   have : QuasiCompact O'.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  refine ⟨O', this, hO', ?_⟩
   have : SmoothOfRelativeDimension n (O'.ι ≫ aO) := by
     have : SmoothOfRelativeDimension (0 + n) (O'.ι ≫ aO) := inferInstance
     simpa using this
@@ -344,17 +352,23 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
   let D := (verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj (op N)
   -- the pulled-back model `P'` on `V`
   let P' := (((g)^*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
-  have : P'.IsStrictlyGE a := by
+  have : CochainComplex.IsStrictlyGE P' a := by
     rw [CochainComplex.isStrictlyGE_iff]
-    exact fun q hq ↦ Functor.map_isZero _ (hP.1 q (.inl hq))
-  have : P'.IsStrictlyLE b := by
+    exact fun q hq ↦ ((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q (.inl hq))
+  have : CochainComplex.IsStrictlyLE P' b := by
     rw [CochainComplex.isStrictlyLE_iff]
-    exact fun q hq ↦ Functor.map_isZero _ (hP.1 q (.inr hq))
+    exact fun q hq ↦ ((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q (.inr hq))
   let eN : (L((p)^*[ModuleCat.{u + 1} Λ])).obj N ≅ (_root_.DerivedCategory.Q).obj P' :=
     (leftDerivedUpperStarIsoMapDerivedCategory _ p).app N ≪≫
       ((Functor.mapDerivedCategoryCompIso _ _).app _).symm ≪≫
       (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _ p O'.ι _ rfl).symm).app _ ≪≫
       ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app P
+  have : P.IsStrictlyGE a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    exact fun q hq ↦ hP.1 q (.inl hq)
+  have : P.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    exact fun q hq ↦ hP.1 q (.inr hq)
   have hQt : torAmplitudeIn (ModuleCat.{u + 1} Λ) O a b ((_root_.DerivedCategory.Q).obj P) :=
     _root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ a b hP.2
   have hNt : torAmplitudeIn (ModuleCat.{u + 1} Λ) V a b ((L((p)^*[ModuleCat.{u + 1} Λ])).obj N) :=
@@ -397,7 +411,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     have h := torAmplitudeIn_derivedHom_of_isDualizable_aux _ hNt hNd hωt
     refine torAmplitudeIn_of_leftDerivedUpperStar_of_surjective Λ p hsurj.surj ?_
     refine (torAmplitudeIn _ V _ _).prop_of_iso
-      (eD.symm ≪≫ (leftDerivedUpperStarIsoMapDerivedCategory _ p).app _).symm ?_
+      (eD.symm ≪≫ ((leftDerivedUpperStarIsoMapDerivedCategory _ p).app _).symm) ?_
     exact h.mono (by omega) (by omega)
   sorry
 

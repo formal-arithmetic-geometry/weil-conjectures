@@ -62,7 +62,7 @@ lemma plusEtaleOrigin_iff (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topol
     have h := adj.left_triangle_components N
     have : IsIso (D(ν^*(X)[A]).map (adj.unit.app N) ≫ adj.counit.app _) := by
       rw [h]
-      infer_instance
+      exact IsIso.id _
     exact IsIso.of_isIso_comp_left (D(ν^*(X)[A]).map (adj.unit.app N)) _
   have : IsIso ((R(ν_*(X)[A]) ⋙ D(ν^*(X)[A])).map e.hom ≫ adj.counit.app L) := by
     rw [adj.counit.naturality e.hom]
@@ -82,7 +82,7 @@ variable (A X) in
 /-- The objects bounded below of étale origin form a triangulated subcategory: they are the
 essential image of the triangulated functor `ν^*` restricted to `D⁺(X_ét)`, which is full. -/
 instance isTriangulated_plusEtaleOrigin : (plusEtaleOrigin A X).IsTriangulated := by
-  rw [plusEtaleOrigin, ← ObjectProperty.essImage_ι_comp]
+  rw [plusEtaleOrigin, ← Functor.essImage_ι_comp]
   infer_instance
 
 /-- A retract of a bounded below object is bounded below. -/
@@ -92,8 +92,10 @@ lemma _root_.DerivedCategory.TStructure.plus_of_retract {C : Type*} [Category* C
     _root_.DerivedCategory.TStructure.t.plus L := by
   obtain ⟨n, hn⟩ := hL'
   refine ⟨n, ?_⟩
-  rw [_root_.DerivedCategory.TStructure.t.isGE_iff] at hn ⊢
-  sorry
+  change L'.IsGE n at hn
+  change L.IsGE n
+  rw [_root_.DerivedCategory.isGE_iff] at hn ⊢
+  exact fun i hi ↦ (hn i hi).of_mono (r.map (_root_.DerivedCategory.homologyFunctor C i)).i
 
 variable (A X) in
 /-- The objects bounded below of étale origin are stable under retracts, being characterised

@@ -95,7 +95,7 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : 
           ((verdierDual (ModuleCat.{u + 1} Λ) (ι ≫ aX)).obj (op K)) := by
     by_cases hab : b < a
     · exact boundedConstructible_and_torAmplitudeIn_of_isZero
-        (isZero_derivedHom_obj_obj_of_isZero (isZero_of_torAmplitudeIn_of_lt hKt hab) _) _ _
+        (isZero_derivedHom_obj_of_isZero _ (isZero_of_torAmplitudeIn_of_lt hKt hab) _) _ _
     by_cases hZ : IsEmpty Z
     · exact boundedConstructible_and_torAmplitudeIn_of_isZero
         (isZero_derivedCategory_of_isEmpty _ Z _) _ _
@@ -103,15 +103,12 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : 
     have : TopologicalSpace.NoetherianSpace Z := ι.isClosedEmbedding.isInducing.noetherianSpace
     -- a lisse smooth open `O` and a smaller nonempty open `O'` where the dual is controlled
     obtain ⟨O, _, _, n, _, P, hP, hPl, ⟨eK⟩⟩ :=
-      exists_opens_smooth_isFiniteLocallyConstantSheaf (ι ≫ aX) (not_lt.1 hab) hK hKt
+      exists_opens_smooth_isFiniteLocallyConstantSheaf Λ (ι ≫ aX) (not_lt.1 hab) hK hKt
     have : TopologicalSpace.NoetherianSpace O := O.ι.isOpenEmbedding.isInducing.noetherianSpace
     have : QuasiCompact O.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
-    obtain ⟨O', hO', hloc⟩ :=
+    obtain ⟨O', _, hO', hloc⟩ :=
       exists_boundedConstructible_and_torAmplitudeIn_verdierDual Λ (O.ι ≫ ι ≫ aX) n P hP hPl
     have : Nonempty O' := hO'.to_subtype
-    have : TopologicalSpace.NoetherianSpace O' :=
-      O'.ι.isOpenEmbedding.isInducing.noetherianSpace
-    have : QuasiCompact O'.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
     let j := O'.ι ≫ O.ι
     let i := j.closedComplement
     have hij : Set.range i.base = (Set.range j.base)ᶜ := j.range_closedComplement

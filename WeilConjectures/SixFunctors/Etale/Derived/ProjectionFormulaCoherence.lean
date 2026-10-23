@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
@@ -32,7 +33,7 @@ transformation `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` of blueprint `sk-p
 - compatibility with base change
   (`AlgebraicGeometry.Etale.projectionMap_rightDerivedLowerShriekBaseChangeMap`);
 - associativity with respect to the derived tensor product
-  (`AlgebraicGeometry.Etale.projectionMapOfCompactification_associativity`), and, as its
+  (`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`), and, as its
   special case for the constant complex `(Λ/J)_Y`, compatibility with finite reduction
   `- ⊗ᴸ (Λ/J)` (`AlgebraicGeometry.Etale.projectionMapOfCompactification_reductionModIdeal`).
 
@@ -133,66 +134,47 @@ theorem hasProjectionFormula_iff_isIso_rightDerivedLowerStarProjectionMap (f : X
       IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app L) :=
   isIso_projectionMapOfCompactification_app_app_iff_of_isProper A _ K L
 
-/-- The projection map `PF_c` at `(K, L)` is the projection map
-`CategoryTheory.Adjunction.compProjectionMap` of the composite `Rf_!(c) = Rg_* ∘ i_!`. -/
-lemma projectionMapOfCompactification_app_app_eq_compProjectionMap (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((projectionMapOfCompactification A c).app K).app L =
-      (derivedUpperStarLowerStarAdjunction A c.g).compProjectionMap
-        (leftDerivedUpperStarTensorComparison A c.g) D((c.i)_!open[A])
-        (fun K N ↦ ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app N)
-        (fun L ↦ (leftDerivedUpperStarCompactificationIso A c).hom.app L) K L :=
-  rfl
-
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula; associativity. The
-projection map is compatible with the associativity of the derived tensor product: the two maps
-`(Rf_!K ⊗ᴸ L) ⊗ᴸ L' ⟶ Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ L'))` built from `PF` agree, for `Rf_!` computed with
-any compactification `c` of `f`. -/
-theorem projectionMapOfCompactification_associativity (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L L' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((projectionMapOfCompactification A c).app K).app L ▷ L' ≫
-        ((projectionMapOfCompactification A c).app (K ⊗ L((f)^*[A]).obj L)).app L' ≫
-        (Rf_!(c)[A]).map (α_ _ _ _).hom =
-      (α_ _ _ _).hom ≫ ((projectionMapOfCompactification A c).app K).app (L ⊗ L') ≫
-        (Rf_!(c)[A]).map (K ◁ ((leftDerivedUpperStarTensorComparison A f).app L).app L') := by
-  rw [projectionMapOfCompactification_app_app_eq_compProjectionMap,
-    projectionMapOfCompactification_app_app_eq_compProjectionMap,
-    projectionMapOfCompactification_app_app_eq_compProjectionMap]
-  exact compactificationProjectionMap_associativity A c K L L'
-
 end General
 
 section Torsion
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-set_option quotPrecheck false in
+set_option hygiene false in
 /-- The constant complex `(Λ/J)_Y` placed in degree zero, by which `reductionModIdeal` tensors. -/
 local notation "𝐏(" Y ", " J ")" =>
-  (_root_.DerivedCategory.singleFunctor _ 0).obj
-    ((constantSheaf (Scheme.smallEtaleTopology Y) (ModuleCat.{u + 1} Λ)).obj
-      (ModuleCat.of Λ (Λ ⧸ J)))
+  constantSingle (ModuleCat.{u + 1} Λ) Y (ModuleCat.of Λ (Λ ⧸ J))
+
+section Reduction
+
+-- The generic associativity `AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`
+-- braids `ModuleCat Λ` through its symmetric structure and étale sheaves through
+-- `Etale.sheafBraidedCategory`; use the same instances here so that the specialisation below
+-- matches it syntactically rather than up to an expensive unfolding.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 20000] Etale.sheafBraidedCategory
 
 /-- Blueprint `sk-prop-sf-pf-coherence` (and `sk-prop-sf-pf-reduction`): compatibility of the
 projection formula with finite reduction. Writing `ρ = - ⊗ᴸ (Λ/J)` for the reduction
 `AlgebraicGeometry.Etale.reductionModIdeal` and `P = (Λ/J)_Y`, the reduction of the projection
-map `ρ(PF_{K, L}) = PF_{K, L} ▷ P`, followed by the reduction comparison `ρ Rf_! ⟶ Rf_! ρ` (the projection map at
-`P`), is the projection map at `(K, L ⊗ᴸ P)` read through the associativity of `⊗ᴸ` and the
-tensor comparison of `Lf^*`. -/
+map `ρ(PF_{K, L}) = PF_{K, L} ▷ P`, followed by the reduction comparison `ρ Rf_! ⟶ Rf_! ρ`
+(the projection map at `P`), is the projection map at `(K, L ⊗ᴸ P)` read through the
+associativity of `⊗ᴸ` and the tensor comparison of `Lf^*`. -/
 theorem projectionMapOfCompactification_reductionModIdeal (c : Compactification f)
     (J : Ideal Λ) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((projectionMapOfCompactification _ c).app K).app L ▷ 𝐏(Y, J) ≫
-        ((projectionMapOfCompactification _ c).app
+    ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app L ▷ 𝐏(Y, J) ≫
+        ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app
           (K ⊗ L((f)^*[ModuleCat.{u + 1} Λ]).obj L)).app (𝐏(Y, J)) ≫
-        (Rf_!(c)[ModuleCat.{u + 1} Λ]).map (α_ _ _ _).hom =
-      (α_ _ _ _).hom ≫
-        ((projectionMapOfCompactification _ c).app K).app (L ⊗ 𝐏(Y, J)) ≫
-        (Rf_!(c)[ModuleCat.{u + 1} Λ]).map (K ◁ ((leftDerivedUpperStarTensorComparison _ f).app
-          L).app (𝐏(Y, J))) :=
-  projectionMapOfCompactification_associativity _ c K L _
+        (Rf_!(c)[ModuleCat.{u + 1} Λ]).map (α_ K (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)
+          (L((f)^*[ModuleCat.{u + 1} Λ]).obj 𝐏(Y, J))).hom =
+      (α_ ((Rf_!(c)[ModuleCat.{u + 1} Λ]).obj K) L 𝐏(Y, J)).hom ≫
+        ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app (L ⊗ 𝐏(Y, J)) ≫
+        (Rf_!(c)[ModuleCat.{u + 1} Λ]).map (K ◁
+          ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ) f).app L).app (𝐏(Y, J))) :=
+  projectionMapOfCompactification_assoc _ c K L _
+
+end Reduction
 
 variable [Finite Λ]
 
@@ -211,7 +193,7 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekIso [QuasiCompact
     [HasCompactification f] (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((projectionMapOfCompactification _ c).app K).app L ≫
+    ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app L ≫
         (rightDerivedLowerShriekIso Λ c).hom.app
           (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) =
       ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map ((rightDerivedLowerShriekIso Λ c).hom.app K)).app L ≫

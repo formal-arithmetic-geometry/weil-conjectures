@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteEtaleAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -51,59 +53,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-! ### Constant sheaves of finite modules -/
-
-/-- The small étale site is locally small. Instance search does not find this in the presence of
-the imports of this file. -/
-local instance (X : Scheme.{u}) : LocallySmall.{u + 1} X.Etale :=
-  @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
-
-section ConstantSheaf
-
-variable {X : Scheme.{u}} (M : ModuleCat.{u + 1} Λ)
-
-/-- A constant sheaf of `Λ`-modules is locally constant, trivialised by the identity cover. -/
-instance isLocallyConstantSheaf_constantSheaf :
-    IsLocallyConstantSheaf ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
-  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
-  refine ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩⟩⟩
-  rw [isConstant_over_iff_upperStar]
-  exact Sheaf.isConstant_of_iso _ ((Etale.upperStarId _ X).app _)
-
-/-- The constant sheaf of a finitely generated `Λ`-module is finite: its stalks are the module
-itself. -/
-instance isFiniteSheaf_constantSheaf [Module.Finite Λ M] :
-    IsFiniteSheaf ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
-  ⟨fun _ _ _ s ↦ (((ModuleCat.isFinitelyGenerated_iff _).2 inferInstance).of_iso
-    ((pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm).of_iso
-      (((pointSmallEtale s).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} Λ)).app _)⟩
-
-/-- The constant sheaf of a finitely generated `Λ`-module is finite locally constant. -/
-instance isFiniteLocallyConstantSheaf_constantSheaf [Module.Finite Λ M] :
-    IsFiniteLocallyConstantSheaf
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) where
-
-/-- The constant sheaf of a finitely generated `Λ`-module is constructible. -/
-instance isConstructibleSheaf_constantSheaf [Module.Finite Λ M] :
-    IsConstructibleSheaf ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
-  IsFiniteLocallyConstantSheaf.isConstructibleSheaf inferInstance
-
-end ConstantSheaf
-
 /-! ### The pullback -/
-
-/-- The pullback commutes with the reduction of coefficients:
-`Lf^*(K ⊗ᴸ (Λ/J)_Y) ≅ Lf^* K ⊗ᴸ (Λ/J)_X`, the pullback being monoidal and sending the constant
-sheaf `(Λ/J)_Y` to `(Λ/J)_X`. -/
-noncomputable def leftDerivedUpperStarReductionModIdealIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (J : Ideal Λ) (K : DerivedCategoryModule Λ Y) :
-    (L((f)^*[ModuleCat.{u + 1} Λ])).obj ((reductionModIdeal Λ Y J).obj K) ≅
-      (reductionModIdeal Λ X J).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  leftDerivedUpperStarTensorIso _ f _ _ ≪≫
-    ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).mapIso
-      ((singleFunctorCompLeftDerivedUpperStarIso _ f).app _ ≪≫
-        (_root_.DerivedCategory.singleFunctor _ 0).mapIso
-          ((upperStarConstantSheafIso _ f).app (ModuleCat.of Λ (Λ ⧸ J))))
 
 /-- Blueprint `lem-sf-pullback-tor-amplitude`: Pullback preserves finite Tor amplitude.
 
@@ -159,6 +109,7 @@ theorem preservation_of_iso_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y
     obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) Z
     have : Module.Finite Λ (ModuleCat.of Λ (Λ ⧸ J)) :=
       inferInstanceAs (Module.Finite Λ (Λ ⧸ J))
+    have := Scheme.isConstructibleSheaf_constantSheaf (X := Z) (ModuleCat.of Λ (Λ ⧸ J))
     exact (boundedConstructible _ Z).prop_of_iso ((β.app _).app N)
       (boundedConstructible_tensor Λ Z (boundedConstructible_singleFunctor_obj _ 0) hNb hNt)
   have hF (K : DerivedCategoryModule Λ Y) (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
@@ -175,10 +126,10 @@ theorem preservation_of_iso_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y
   · exact (torAmplitudeIn _ X a b).prop_of_iso (e.app K).symm
       (torAmplitudeIn_leftDerivedUpperStar _ f a b hKt)
   · exact ⟨(reductionModIdeal Λ X J).mapIso (e.app K) ≪≫
-      (leftDerivedUpperStarReductionModIdealIso Λ f J K).symm ≪≫ (e.app _).symm⟩
+      ((leftDerivedUpperStarReductionModIdealIso Λ J f).app K).symm ≪≫ (e.app _).symm⟩
   · exact ⟨hred X (hF K hK), (boundedConstructible _ X).prop_of_iso
       ((reductionModIdeal Λ X J).mapIso (e.app K) ≪≫
-        (leftDerivedUpperStarReductionModIdealIso Λ f J K).symm ≪≫ (e.app _).symm)
+        ((leftDerivedUpperStarReductionModIdealIso Λ J f).app K).symm ≪≫ (e.app _).symm)
       (hred X (hF K hK))⟩
 
 /-- Blueprint `thm-exc-explicit-preservation`: Preservation in the open and finite etale cases.
@@ -255,10 +206,11 @@ lemma exists_flat_rightDerivedUpperShriek_iso_tensor_shift {X Y : Scheme.{u}}
         Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj K ≅
           (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
             ((_root_.DerivedCategory.singleFunctor _ 0).obj L))⟦(2 * d : ℤ)⟧) := by
-  obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  have : HasInvertibleExponent Λ X := .of_hom f
+  obtain ⟨L, _, hLs, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨hLc, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
   refine ⟨L, hLc, hLf, fun K ↦ ?_⟩
-  obtain ⟨t⟩ := htens K
+  obtain ⟨t⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
   exact ⟨t.symm ≪≫ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).mapIso eω ≪≫
     ((((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).commShiftIso (2 * d : ℤ)).app _)⟩
 

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
@@ -29,11 +30,11 @@ and specialised to the chosen fibre product (`AlgebraicGeometry.Etale.relativeKu
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`: the composition isomorphism
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIsoOfEq`: the composition isomorphism
   `R(h)_! ≅ Rf_! ⋙ Rg_!` for `f ≫ g = h`, on unbounded derived categories, for a finite
   coefficient ring.
 - `AlgebraicGeometry.Etale.derivedTensorBraiding`: the symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the
-  derived tensor product, the braiding `DerivedCategory.braidedCategory`.
+  derived tensor product, the braiding `DerivedCategory.braidedCategory'`.
 - `AlgebraicGeometry.Etale.relativeKunnethIsoOfIsPullback`,
   `AlgebraicGeometry.Etale.relativeKunnethIso`: the relative Künneth isomorphism.
 - `AlgebraicGeometry.Etale.relativeKunnethNatIso`: the relative Künneth isomorphism as a
@@ -62,11 +63,11 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
 
 /-- The symmetry `σ : K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product of étale sheaves, natural
-in both variables: the braiding `DerivedCategory.braidedCategory` of `D(X_ét)`, as an
+in both variables: the braiding `DerivedCategory.braidedCategory'` of `D(X_ét)`, as an
 isomorphism between `- ⊗ᴸ -` and the flipped bifunctor. -/
 noncomputable def derivedTensorBraiding : derivedTensor A X ≅ (derivedTensor A X).flip :=
   @BraidedCategory.curriedBraidingNatIso _ _ _
-    (_root_.DerivedCategory.braidedCategory (Sheaf X.smallEtaleTopology A))
+    (_root_.DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology A))
 
 
 /-- The symmetry `σ_{M,N} : M ⊗ᴸ N ≅ N ⊗ᴸ M` of the derived tensor product of étale sheaves, the
@@ -105,38 +106,16 @@ section Composition
 
 variable {X Y S : Scheme.{u}}
 
-/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on unbounded derived categories, for
-a finite coefficient ring: the isomorphism of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, i.e.
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationCompIso` for the chosen
-compactification `d` of `g` and the compactification `Compactification.ofComp` of `f ≫ d.i`,
-compared with the chosen compactifications of `f` and `f ≫ g`. -/
-noncomputable def rightDerivedLowerShriekCompIso' (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact (f ≫ g)] :
-    R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ] :=
-  haveI : QuasiCompact f := .of_comp f g
-  (rightDerivedLowerShriekIso Λ ((HasCompactification.compactification g).comp
-      ((HasCompactification.compactification (f ≫ g)).ofComp
-        (HasCompactification.compactification g)))).symm ≪≫
-    (rightDerivedLowerShriekOfCompactificationCompIso Λ (HasCompactification.compactification g)
-      ((HasCompactification.compactification (f ≫ g)).ofComp
-        (HasCompactification.compactification g))).symm ≪≫
-    Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ
-      ((HasCompactification.compactification (f ≫ g)).ofComp
-        (HasCompactification.compactification g)).restrict) _
-
 /-- Blueprint `sk-thm-sf-comp-composition`: the composition isomorphism `α : R(h)_! ≅ Rf_! ⋙ Rg_!`
 for `f ≫ g = h`, on unbounded derived categories, for a finite coefficient ring
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso'` transported along `f ≫ g = h`). -/
-noncomputable def rightDerivedLowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S) (h : X ⟶ S)
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` transported along `f ≫ g = h`). -/
+noncomputable def rightDerivedLowerShriekCompIsoOfEq (f : X ⟶ Y) (g : Y ⟶ S) (h : X ⟶ S)
     (w : f ≫ g = h) [HasCompactification f] [HasCompactification g] [HasCompactification h]
     [QuasiCompact h] :
     R(h)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ] :=
   haveI : HasCompactification (f ≫ g) := .of_eq w.symm
   haveI : QuasiCompact (f ≫ g) := by rw [w]; infer_instance
-  eqToIso (by subst w; rfl) ≪≫ rightDerivedLowerShriekCompIso' Λ f g
+  eqToIso (by subst w; rfl) ≪≫ rightDerivedLowerShriekCompIso Λ f g
 
 end Composition
 
@@ -145,14 +124,14 @@ section Components
 variable {B X Y P : Scheme.{u}}
 
 /-- The composition isomorphism `α : Rh_! M ≅ Rg_! Rf_! M` for `f ≫ g = h`, at an object `M`
-(the component of `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`). -/
+(the component of `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIsoOfEq`). -/
 noncomputable def rightDerivedLowerShriekCompIsoApp {S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
     (h : X ⟶ S) (w : f ≫ g = h) [HasCompactification f] [HasCompactification g]
     [HasCompactification h] [QuasiCompact h]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(h)_![ModuleCat.{u + 1} Λ]).obj M ≅
       (R(g)_![ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj M) :=
-  (rightDerivedLowerShriekCompIso Λ f g h w).app M
+  (rightDerivedLowerShriekCompIsoOfEq Λ f g h w).app M
 
 @[reassoc]
 lemma rightDerivedLowerShriekCompIsoApp_hom_naturality {S : Scheme.{u}} (f : X ⟶ Y)
@@ -163,71 +142,71 @@ lemma rightDerivedLowerShriekCompIsoApp_hom_naturality {S : Scheme.{u}} (f : X �
     (R(h)_![ModuleCat.{u + 1} Λ]).map φ ≫ (rightDerivedLowerShriekCompIsoApp Λ f g h w M').hom =
       (rightDerivedLowerShriekCompIsoApp Λ f g h w M).hom ≫
         (R(g)_![ModuleCat.{u + 1} Λ]).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ) :=
-  (rightDerivedLowerShriekCompIso Λ f g h w).hom.naturality φ
+  (rightDerivedLowerShriekCompIsoOfEq Λ f g h w).hom.naturality φ
 
 /-- The projection formula `PF_{f,K,L} : Rf_! K ⊗ᴸ L ≅ Rf_!(K ⊗ᴸ Lf^* L)` for a finite
-coefficient ring, as an isomorphism: the projection map `AlgebraicGeometry.Etale.projectionMap`
-at `(K, L)`, an isomorphism by `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`. -/
-noncomputable def projectionIso (f : X ⟶ Y) [HasCompactification f]
+coefficient ring, as an isomorphism: the component at `L` of
+`AlgebraicGeometry.Etale.projectionIso`, i.e. the projection map
+`AlgebraicGeometry.Etale.projectionMap` at `(K, L)`. -/
+noncomputable def projectionIsoApp (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
       (R(f)_![ModuleCat.{u + 1} Λ]).obj
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
-  haveI := isIso_projectionMap_of_finite Λ f
-  asIso (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)
+  (projectionIso Λ f K).app L
 
-lemma projectionIso_hom (f : X ⟶ Y) [HasCompactification f]
+lemma projectionIsoApp_hom (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (projectionIso Λ f K L).hom = ((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L :=
+    (projectionIsoApp Λ f K L).hom = ((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L :=
   rfl
 
 @[reassoc]
-lemma projectionIso_hom_naturality_left (f : X ⟶ Y) [HasCompactification f]
+lemma projectionIsoApp_hom_naturality_left (f : X ⟶ Y) [HasCompactification f]
     {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K')
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ)).app L ≫
-        (projectionIso Λ f K' L).hom =
-      (projectionIso Λ f K L).hom ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map
+        (projectionIsoApp Λ f K' L).hom =
+      (projectionIsoApp Λ f K L).hom ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).map φ).app ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
   NatTrans.naturality_app (projectionMap (ModuleCat.{u + 1} Λ) f) L φ
 
 @[reassoc]
-lemma projectionIso_hom_naturality_right (f : X ⟶ Y) [HasCompactification f]
+lemma projectionIsoApp_hom_naturality_right (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     {L L' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (ψ : L ⟶ L') :
     ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).map ψ ≫
-        (projectionIso Λ f K L').hom =
-      (projectionIso Λ f K L).hom ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map
+        (projectionIsoApp Λ f K L').hom =
+      (projectionIsoApp Λ f K L).hom ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map ψ)) :=
   ((projectionMap (ModuleCat.{u + 1} Λ) f).app K).naturality ψ
 
 @[reassoc]
-lemma projectionIso_inv_naturality_left (f : X ⟶ Y) [HasCompactification f]
+lemma projectionIsoApp_inv_naturality_left (f : X ⟶ Y) [HasCompactification f]
     {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K')
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(f)_![ModuleCat.{u + 1} Λ]).map
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).map φ).app ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L)) ≫
-        (projectionIso Λ f K' L).inv =
-      (projectionIso Λ f K L).inv ≫
+        (projectionIsoApp Λ f K' L).inv =
+      (projectionIsoApp Λ f K L).inv ≫
         ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ)).app L := by
-  rw [Iso.comp_inv_eq, Category.assoc, projectionIso_hom_naturality_left, Iso.inv_hom_id_assoc]
+  rw [Iso.comp_inv_eq, Category.assoc, projectionIsoApp_hom_naturality_left, Iso.inv_hom_id_assoc]
 
 @[reassoc]
-lemma projectionIso_inv_naturality_right (f : X ⟶ Y) [HasCompactification f]
+lemma projectionIsoApp_inv_naturality_right (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     {L L' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (ψ : L ⟶ L') :
     (R(f)_![ModuleCat.{u + 1} Λ]).map
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map ψ)) ≫
-        (projectionIso Λ f K L').inv =
-      (projectionIso Λ f K L).inv ≫
+        (projectionIsoApp Λ f K L').inv =
+      (projectionIsoApp Λ f K L).inv ≫
         ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).map ψ := by
-  rw [Iso.comp_inv_eq, Category.assoc, projectionIso_hom_naturality_right, Iso.inv_hom_id_assoc]
+  rw [Iso.comp_inv_eq, Category.assoc, projectionIsoApp_hom_naturality_right, Iso.inv_hom_id_assoc]
 
 /-- Compact-support base change `Ex_! : Lg^* Rf_! K ≅ Rq_! Lp^* K` for a cartesian square
 `p ≫ f = q ≫ g` and a finite coefficient ring, as an isomorphism: the component of
@@ -235,7 +214,8 @@ lemma projectionIso_inv_naturality_right (f : X ⟶ Y) [HasCompactification f]
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`. -/
 noncomputable def rightDerivedLowerShriekBaseChangeIso {p : P ⟶ X} {q : P ⟶ Y} {f : X ⟶ B}
     {g : Y ⟶ B} (sq : IsPullback p q f g) [HasCompactification f] [HasCompactification q]
-    [QuasiCompact q] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    [QuasiCompact q]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) ≅
       (R(q)_![ModuleCat.{u + 1} Λ]).obj ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) :=
   haveI := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
@@ -243,7 +223,8 @@ noncomputable def rightDerivedLowerShriekBaseChangeIso {p : P ⟶ X} {q : P ⟶ 
 
 lemma rightDerivedLowerShriekBaseChangeIso_hom {p : P ⟶ X} {q : P ⟶ Y} {f : X ⟶ B}
     {g : Y ⟶ B} (sq : IsPullback p q f g) [HasCompactification f] [HasCompactification q]
-    [QuasiCompact q] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    [QuasiCompact q]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (rightDerivedLowerShriekBaseChangeIso Λ sq K).hom =
       (rightDerivedLowerShriekBaseChangeMap Λ sq).app K :=
   rfl
@@ -299,7 +280,7 @@ noncomputable def relativeKunnethInnerIso
         ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K)).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
       ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj L).obj
         ((L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) :=
-  (projectionIso Λ q ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) L).symm ≪≫
+  (projectionIsoApp Λ q ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) L).symm ≪≫
     ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).mapIso (rightDerivedLowerShriekBaseChangeIso Λ sq K).symm).app
       L ≪≫
     derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) Y _ L
@@ -316,7 +297,7 @@ lemma relativeKunnethInnerIso_hom_naturality_left
       ((L((g)^*[ModuleCat.{u + 1} Λ])).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ)) := by
   simp only [relativeKunnethInnerIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     Functor.mapIso_hom, Category.assoc]
-  rw [projectionIso_inv_naturality_left_assoc, ← NatTrans.comp_app_assoc, ← Functor.map_comp,
+  rw [projectionIsoApp_inv_naturality_left_assoc, ← NatTrans.comp_app_assoc, ← Functor.map_comp,
     rightDerivedLowerShriekBaseChangeIso_inv_naturality, Functor.map_comp,
     NatTrans.comp_app_assoc, derivedTensorBraidingIso_hom_naturality_left]
 
@@ -332,7 +313,7 @@ lemma relativeKunnethInnerIso_hom_naturality_right
       ((L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) := by
   simp only [relativeKunnethInnerIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     Functor.mapIso_hom, Category.assoc]
-  rw [projectionIso_inv_naturality_right_assoc, NatTrans.naturality_assoc,
+  rw [projectionIsoApp_inv_naturality_right_assoc, NatTrans.naturality_assoc,
     derivedTensorBraidingIso_hom_naturality_right]
 
 end Inner
@@ -374,7 +355,7 @@ noncomputable def relativeKunnethIsoOfIsPullback {p : P ⟶ X} {q : P ⟶ Y} {f 
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj L) :=
   rightDerivedLowerShriekCompIsoApp Λ q g h w _ ≪≫
     (R(g)_![ModuleCat.{u + 1} Λ]).mapIso (relativeKunnethInnerIso Λ sq K L) ≪≫
-    (projectionIso Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).symm ≪≫
+    (projectionIsoApp Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).symm ≪≫
     derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) B _ _
 
 section Naturality
@@ -413,7 +394,7 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_left
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj L) := by
   exact Iso.hom_naturality_trans₄ (rightDerivedLowerShriekCompIsoApp_hom_naturality Λ q g h w _)
     (rightDerivedLowerShriek_map_relativeKunnethInnerIso_hom_naturality_left Λ sq φ L)
-    (projectionIso_inv_naturality_right Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).map φ))
+    (projectionIsoApp_inv_naturality_right Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).map φ))
     (derivedTensorBraidingIso_hom_naturality_right _ _)
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism is natural in the
@@ -432,7 +413,7 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_right
   exact Iso.hom_naturality_trans₄ (rightDerivedLowerShriekCompIsoApp_hom_naturality Λ q g h w _)
     (by rw [Functor.mapIso_hom, Functor.mapIso_hom, ← Functor.map_comp, ← Functor.map_comp,
       relativeKunnethInnerIso_hom_naturality_right])
-    (projectionIso_inv_naturality_left Λ g ψ _)
+    (projectionIsoApp_inv_naturality_left Λ g ψ _)
     (derivedTensorBraidingIso_hom_naturality_left _ _)
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism

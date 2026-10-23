@@ -7352,7 +7352,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
-public import WeilConjectures.CategoryTheory.Adjunction.MatesEquivalence
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
@@ -7604,7 +7603,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableBounded
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableCriterion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect

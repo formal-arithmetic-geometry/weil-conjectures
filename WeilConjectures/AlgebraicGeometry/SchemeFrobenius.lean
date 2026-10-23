@@ -55,33 +55,6 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-namespace Scheme
-
-variable {p : ℕ} (hp : p.Prime)
-
-/-- The `p ^ 0`-power Frobenius is the identity. -/
-@[simp]
-lemma iterateFrobenius_zero (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) :
-    X.iterateFrobenius hp hX 0 = 𝟙 X := by
-  refine Scheme.Hom.ext rfl fun U ↦ ?_
-  ext s
-  simp only [eqToHom_refl, op_id]
-  erw [X.presheaf.map_id]
-  exact (iterateFrobenius_app_apply X hp hX 0 U s).trans
-    ((congrArg (s ^ ·) (pow_zero p)).trans (pow_one s))
-
-/-- The absolute Frobenius of an affine scheme `Spec R` is `Spec` of the Frobenius of `R`. -/
-lemma iterateFrobenius_Spec (R : CommRingCat.{u}) (hR : (p : R) = 0)
-    (hX : (p : Γ(Spec R, ⊤)) = 0) (n : ℕ) :
-    (Spec R).iterateFrobenius hp hX n =
-      Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime R hp hR n)) := by
-  refine ext_of_isAffine ?_
-  rw [← cancel_mono (ΓSpecIso R).hom, ΓSpecIso_naturality]
-  ext s
-  exact map_pow (ΓSpecIso R).hom.hom s _
-
-end Scheme
-
 section FiniteField
 
 variable {k : Type u} [Field k] [Finite k]
@@ -154,7 +127,7 @@ lemma absoluteFrobenius_app_apply (m : ℕ) (U : X₀.Opens) (s : Γ(X₀, U)) :
 @[simp]
 lemma absoluteFrobenius_zero : f.absoluteFrobenius 0 = 𝟙 X₀ := by
   unfold absoluteFrobenius
-  simp
+  simp [iterateFrobenius_zero]
 
 lemma absoluteFrobenius_add (m n : ℕ) :
     f.absoluteFrobenius (m + n) = f.absoluteFrobenius m ≫ f.absoluteFrobenius n := by
@@ -166,7 +139,7 @@ with every morphism `g : X₀ ⟶ Y₀` to a `k`-scheme. -/
 @[reassoc]
 lemma absoluteFrobenius_naturality {Y₀ : Scheme.{u}} (g : X₀ ⟶ Y₀) (e : Y₀ ⟶ Spec (.of k))
     (m : ℕ) : (g ≫ e).absoluteFrobenius m ≫ g = g ≫ e.absoluteFrobenius m :=
-  (iterateFrobenius_naturality _ _ g _ _).symm
+  (comp_iterateFrobenius _ g _ _ _).symm
 
 /-- The absolute `q ^ m`-power Frobenius of `Spec k` is the identity, as `c ^ q = c` on `k`. -/
 lemma absoluteFrobenius_spec (m : ℕ) :

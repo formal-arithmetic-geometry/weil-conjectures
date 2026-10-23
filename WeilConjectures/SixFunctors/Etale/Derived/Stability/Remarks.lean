@@ -15,7 +15,7 @@ This file formalises the remarks of the blueprint subsection `sk-thm-sf-ctf-stab
 accompany `thm-sf-ctf-stability` (`AlgebraicGeometry.Etale.constructibleFiniteTor_stability`).
 Each remark with mathematical content is a theorem bundling the statements it points to:
 
-- `AlgebraicGeometry.Etale.boundedConstructibleIntegral_leftDerivedUpperStar`
+- `AlgebraicGeometry.Etale.boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete`
   (`rem-sf-tor-toolbox-stages`): the integral form of clause (i);
 - `AlgebraicGeometry.Etale.reductionModIdeal_constantComplex_and_exists_normalizedTower`
   (`rem-sf-constant-tower-trivial-model`): the constant coefficient tower;
@@ -56,9 +56,9 @@ counterpart.
 
 The coefficient stages `E` and `ℚ̄_ℓ`, and the finite-stage comparisons
 `lem-coef-finite-direct-image`, `thm-coef-finite-hom`, `cor-coef-finite-verdier`,
-`lem-coef-finite-exceptional` (beyond the formula `Rf^! = 𝔻_X f^* 𝔻_Y`), `thm-coef-rational-verdier`,
-`lem-coef-rational-operations` and `thm-coef-qbar-verdier` are not formalised; the remarks are
-stated with the finite and integral stages that are.
+`lem-coef-finite-exceptional` (beyond the formula `Rf^! = 𝔻_X f^* 𝔻_Y`),
+`thm-coef-rational-verdier`, `lem-coef-rational-operations` and `thm-coef-qbar-verdier` are not
+formalised; the remarks are stated with the finite and integral stages that are.
 -/
 
 @[expose] public section
@@ -95,8 +95,9 @@ The integral form of clause (i) of `thm-sf-ctf-stability`: pullback commutes wit
 finite-stage pullback statements give that the reductions of `Lf^* K` are bounded constructible
 of Tor amplitude in the same interval as those of `K`. Hence, as soon as `Lf^* K` is derived
 complete, `Lf^*` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, with the same interval. -/
-theorem boundedConstructibleIntegral_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {a b : ℤ} {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+theorem boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete {X Y : Scheme.{u}}
+    (f : X ⟶ Y) {a b : ℤ}
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : ∀ n : ℕ, boundedConstructible (ModuleCat.{u + 1} Λ) Y
         ((reductionModIdeal Λ Y (I ^ (n + 1))).obj K) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b ((reductionModIdeal Λ Y (I ^ (n + 1))).obj K)) :
@@ -106,7 +107,8 @@ theorem boundedConstructibleIntegral_leftDerivedUpperStar {X Y : Scheme.{u}} (f 
         ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
     (DerivedCategory.derivedComplete X.smallEtaleTopology I
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) →
-      DerivedCategory.boundedConstructibleIntegral I X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+      DerivedCategory.boundedConstructibleIntegral I X
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
   have h (n : ℕ) : boundedConstructible (ModuleCat.{u + 1} Λ) X
         ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
@@ -138,6 +140,8 @@ theorem reductionModIdeal_constantComplex_and_exists_normalizedTower (X : Scheme
       (∀ n : ℕ, IsDerivedBaseChange (η n)) → ∃ M : NormalizedTower I X, M.obj = Ln :=
   ⟨fun _ ↦ ⟨λ_ _⟩,
     (exists_normalizedTower_and_boundedConstructibleIntegral_iff (I := I) (X := X)).1⟩
+
+end Integral
 
 section IntegralStage
 
@@ -310,9 +314,9 @@ include hf in
 /-- Blueprint `rem-sf-direct-image-proof-status`: Status of the recorded argument for clause
 (iii).
 
-For a finite `Λ` whose exponent is invertible on `k` and a separated morphism `f : X ⟶ Y` of
-finite-type `k`-schemes with `dim X ≤ d`, clause (iii) of `thm-sf-ctf-stability` holds on both
-sites with the interval `[a, b + 2d]`:
+For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and a separated
+morphism `f : X ⟶ Y` of finite-type `k`-schemes with `dim X ≤ d`, clause (iii) of
+`thm-sf-ctf-stability` holds on both sites with the interval `[a, b + 2d]`:
 
 * on the small étale site it is unconditional (`cor-sf-direct-image-ctf-nonproper`): `Rf_*`
   preserves `Dctf` and sends a bounded constructible complex of Tor amplitude `[a, b]` to one of
@@ -320,7 +324,7 @@ sites with the interval `[a, b + 2d]`:
   the étale direct-image vanishing `lem-sf-etale-direct-image-vanishing`);
 * on the small pro-étale site the same holds for every bounded constructible complex
   (`cor-sf-direct-image-ctf-proetale`). -/
-theorem constructibleFiniteTor_rightDerivedLowerStar_proofStatus [IsSeparated aX]
+theorem constructibleFiniteTor_rightDerivedLowerStar_proofStatus [IsAlgClosed k] [IsSeparated aX]
     [HasCompactification aX] [IsSeparated aY] [HasCompactification aY] [QuasiCompact f]
     [HasCompactification f] :
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
@@ -348,17 +352,18 @@ include hf in
 /-- Blueprint `rem-ptr-weil-exceptional-inverse-image-16`: Constructible exceptional inverse
 images at all coefficient stages, the finite stage.
 
-For a finite `Λ` whose exponent is invertible on `k` and a separated finite-type `f : X ⟶ Y` of
-separated finite-type `k`-schemes, the exceptional inverse image carries `Dctf(Y, Λ)` into
-`Dctf(X, Λ)`, it is `Rf^! ≅ 𝔻_X f^* 𝔻_Y` there (the dual formula of `lem-coef-finite-exceptional`),
-and it is right adjoint to `Rf_!` on the constructible finite-Tor categories
+For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and a separated
+finite-type `f : X ⟶ Y` of separated finite-type `k`-schemes, the exceptional inverse image
+carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`, it is `Rf^! ≅ 𝔻_X f^* 𝔻_Y` there (the dual formula of
+`lem-coef-finite-exceptional`), and it is right adjoint to `Rf_!` on the constructible
+finite-Tor categories
 (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The
 integral construction and adjunction are
 `AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`
 (`prop-coef-integral-exceptional-adjoint`). -/
-theorem exceptionalInverseImage_coefficientStages [IsSeparated aX] [HasCompactification aX]
-    [IsSeparated aY] [HasCompactification aY] [HasInvertibleExponent Λ Y] [QuasiCompact f]
-    [HasCompactification f] :
+theorem exceptionalInverseImage_coefficientStages [IsAlgClosed k] [IsSeparated aX]
+    [HasCompactification aX] [IsSeparated aY] [HasCompactification aY]
+    [HasInvertibleExponent Λ Y] [QuasiCompact f] [HasCompactification f] :
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
@@ -389,6 +394,7 @@ theorem DerivedCategoryFiniteTor.ctfDescent [HasInvertibleExponent Λ Y] [IsSepa
   ⟨⟨DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction Λ aX aY f hf⟩,
     ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩⟩
 
+include aX in
 /-- Blueprint `open-sf-preservation-gaps`: Scope beyond the constructible coefficient category.
 
 The dimension-free internal-Hom bound needs a site-perfect first variable. For `X` of finite type

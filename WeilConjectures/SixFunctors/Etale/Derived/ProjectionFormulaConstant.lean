@@ -6,12 +6,14 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-public import WeilConjectures.CategoryTheory.DerivedCategory.BoundedAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Triangulated.HomologySequenceMorphism
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenComplement
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.OpenComplement
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 
 /-!
 # The projection formula with a finitely presented constant coefficient
@@ -44,9 +46,6 @@ uniform bound `B` is what makes the induction start.
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
-- `AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`,
-  `AlgebraicGeometry.Etale.isGE_rightDerivedLowerStar_of_isGE`: amplitude of `Rf_*` on bounded
-  objects.
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`
   (`lem-sf-projection-finite-constant`).
 -/
@@ -67,12 +66,9 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- The constant sheaf on `X_ét` with value a `Λ`-module `M`, placed in degree `0` of
-`D(X_ét, Λ)`. -/
-noncomputable abbrev constantSingle (X : Scheme.{u}) (M : ModuleCat.{u + 1} Λ) :
-    _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (_root_.DerivedCategory.singleFunctor _ 0).obj
-    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+set_option hygiene false in
+/-- The constant complex `M_X` on a `Λ`-module `M`, placed in degree `0` of `D(X_ét, Λ)`. -/
+local notation "𝐂(" X ", " M ")" => constantSingle (ModuleCat.{u + 1} Λ) X M
 
 section Dualizable
 
@@ -82,7 +78,7 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 `D(X_ét, Λ)`: the constant sheaf functor is monoidal, and a bounded complex of dualizable sheaves
 is dualizable in the derived category. -/
 lemma isDualizable_constantSingle (X : Scheme.{u}) (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M]
-    [Module.Projective Λ M] : IsDualizable (constantSingle X M) := by
+    [Module.Projective Λ M] : IsDualizable 𝐂(X, M) := by
   let G := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
   have hG : IsDualizable G := IsDualizable.map _ (ModuleCat.isDualizable_of_projective M)
   refine IsDualizable.of_iso
@@ -92,13 +88,8 @@ lemma isDualizable_constantSingle (X : Scheme.{u}) (M : ModuleCat.{u + 1} Λ) [M
   by_cases hn : n = 0
   · subst hn
     exact IsDualizable.of_iso (HomologicalComplex.singleObjXSelf _ 0 G).symm hG
-  · have hZ := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 G n hn
-    exact ⟨{ rightDual := _
-             exact :=
-              { coevaluation' := 0
-                evaluation' := 0
-                coevaluation_evaluation' := (hZ.of_iso (ρ_ _).symm).eq_of_src _ _
-                evaluation_coevaluation' := (hZ.of_iso (λ_ _).symm).eq_of_src _ _ } }⟩
+  · exact CategoryTheory.IsZero.isDualizable
+      (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 G n hn)
 
 end Dualizable
 
@@ -118,34 +109,37 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoethe
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (B : ℤ)
     (hK : ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K).IsLE B)
     (hKZ : ∀ (Z : ModuleCat.{u + 1} Λ), Module.Finite Λ Z →
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj (K ⊗ constantSingle X Z)).IsLE B)
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj (K ⊗ 𝐂(X, Z))).IsLE B)
     (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app
-      (constantSingle Y M)) := by
-  let τ := (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K
+      (𝐂(Y, M))) := by
+  let τ : (-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) ⟶
+      (L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K) ⋙
+        R((f)_*[ModuleCat.{u + 1} Λ]) :=
+    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K
   let H := _root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0
   -- both sides vanish above `B`
   have hz₁ (M : ModuleCat.{u + 1} Λ) (n : ℤ) (hn : B < n) :
-      IsZero ((H.shift n).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K ⊗ constantSingle Y M)) := by
-    have : ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K ⊗ constantSingle Y M).IsLE (B + 0) :=
+      IsZero ((H.shift n).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K ⊗ 𝐂(Y, M))) := by
+    have : ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K ⊗ 𝐂(Y, M)).IsLE (B + 0) :=
       _root_.DerivedCategory.isLE_tensor _ _ B 0
-    exact _root_.DerivedCategory.isZero_of_isLE _ (B + 0) n (by lia)
+    exact _root_.DerivedCategory.isZero_of_isLE _ (B + 0) n (by omega)
   have hz₂ (M : ModuleCat.{u + 1} Λ) (hM : Module.Finite Λ M) (n : ℤ) (hn : B < n) :
       IsZero ((H.shift n).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-        (K ⊗ (L((f)^*[ModuleCat.{u + 1} Λ])).obj (constantSingle Y M)))) := by
+        (K ⊗ (L((f)^*[ModuleCat.{u + 1} Λ])).obj 𝐂(Y, M)))) := by
     have := hKZ M hM
     have : ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-        (K ⊗ (L((f)^*[ModuleCat.{u + 1} Λ])).obj (constantSingle Y M))).IsLE B :=
-      TStructure.t.isLE_of_iso ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
-        (whiskerLeftIso K (leftDerivedUpperStarSingleConstantSheafIso Λ f M))).symm B
+        (K ⊗ (L((f)^*[ModuleCat.{u + 1} Λ])).obj 𝐂(Y, M))).IsLE B :=
+      _root_.DerivedCategory.TStructure.t.isLE_of_iso ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
+        (whiskerLeftIso K (leftDerivedUpperStarSingleConstantSheafIso _ f M))).symm B
     exact _root_.DerivedCategory.isZero_of_isLE _ B n hn
   have hiso_of_gt (M : ModuleCat.{u + 1} Λ) (hM : Module.Finite Λ M) (n : ℤ) (hn : B < n) :
-      IsIso ((H.shift n).map (τ.app (constantSingle Y M))) :=
+      IsIso ((H.shift n).map (τ.app 𝐂(Y, M))) :=
     ⟨⟨(hz₂ M hM n hn).to_ _, (hz₁ M n hn).eq_of_src _ _, (hz₂ M hM n hn).eq_of_src _ _⟩⟩
   -- the projection map is an isomorphism at a finite free module
   have hfree (r : ℕ) (n : ℤ) :
-      IsIso ((H.shift n).map (τ.app (constantSingle Y (ModuleCat.of Λ (Fin r → Λ))))) := by
+      IsIso ((H.shift n).map (τ.app 𝐂(Y, ModuleCat.of Λ (Fin r → Λ)))) := by
     have := isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable _ f K
       (isDualizable_constantSingle Y (ModuleCat.of Λ (Fin r → Λ)))
     infer_instance
@@ -153,11 +147,11 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoethe
   have key (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Module.Finite Λ M] :
       ∃ (Z : Type (u + 1)) (_ : AddCommGroup Z) (_ : Module Λ Z) (_ : Module.Finite Λ Z),
         ∀ n₀ n₁ : ℤ, n₀ + 1 = n₁ →
-          (Epi ((H.shift n₁).map (τ.app (constantSingle Y (ModuleCat.of Λ Z)))) →
-            Epi ((H.shift n₀).map (τ.app (constantSingle Y (ModuleCat.of Λ M))))) ∧
-          (Epi ((H.shift n₀).map (τ.app (constantSingle Y (ModuleCat.of Λ Z)))) →
-            IsIso ((H.shift n₁).map (τ.app (constantSingle Y (ModuleCat.of Λ Z)))) →
-            IsIso ((H.shift n₀).map (τ.app (constantSingle Y (ModuleCat.of Λ M))))) := by
+          (Epi ((H.shift n₁).map (τ.app 𝐂(Y, ModuleCat.of Λ Z))) →
+            Epi ((H.shift n₀).map (τ.app 𝐂(Y, ModuleCat.of Λ M)))) ∧
+          (Epi ((H.shift n₀).map (τ.app 𝐂(Y, ModuleCat.of Λ Z))) →
+            IsIso ((H.shift n₁).map (τ.app 𝐂(Y, ModuleCat.of Λ Z))) →
+            IsIso ((H.shift n₀).map (τ.app 𝐂(Y, ModuleCat.of Λ M)))) := by
     obtain ⟨r, π, hπ⟩ := Module.Finite.exists_fin' Λ M
     let Z := LinearMap.ker π
     have hex := LinearMap.exact_subtype_ker_map π
@@ -180,53 +174,32 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoethe
         (hfree r n₁).mono_of_iso
   -- descending induction on the degree
   have hepi (k : ℕ) : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Module.Finite Λ M],
-      Epi ((H.shift (B + 1 - k)).map (τ.app (constantSingle Y (ModuleCat.of Λ M)))) := by
+      Epi ((H.shift (B + 1 - k)).map (τ.app 𝐂(Y, ModuleCat.of Λ M))) := by
     induction k with
     | zero =>
       intro M _ _ _
-      have := hiso_of_gt (ModuleCat.of Λ M) inferInstance (B + 1 - ((0 : ℕ) : ℤ)) (by lia)
+      have := hiso_of_gt (ModuleCat.of Λ M) inferInstance (B + 1 - ((0 : ℕ) : ℤ)) (by omega)
       infer_instance
     | succ k ih =>
       intro M _ _ _
       obtain ⟨Z, _, _, _, hZ⟩ := key M
-      exact (hZ (B + 1 - ((k + 1 : ℕ) : ℤ)) (B + 1 - k) (by lia)).1 (ih Z)
+      exact (hZ (B + 1 - ((k + 1 : ℕ) : ℤ)) (B + 1 - k) (by omega)).1 (ih Z)
   have hiso (k : ℕ) : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Module.Finite Λ M],
-      IsIso ((H.shift (B + 1 - k)).map (τ.app (constantSingle Y (ModuleCat.of Λ M)))) := by
+      IsIso ((H.shift (B + 1 - k)).map (τ.app 𝐂(Y, ModuleCat.of Λ M))) := by
     induction k with
     | zero =>
       intro M _ _ _
-      exact hiso_of_gt (ModuleCat.of Λ M) inferInstance (B + 1 - ((0 : ℕ) : ℤ)) (by lia)
+      exact hiso_of_gt (ModuleCat.of Λ M) inferInstance (B + 1 - ((0 : ℕ) : ℤ)) (by omega)
     | succ k ih =>
       intro M _ _ _
       obtain ⟨Z, _, _, _, hZ⟩ := key M
-      exact (hZ (B + 1 - ((k + 1 : ℕ) : ℤ)) (B + 1 - k) (by lia)).2 (hepi (k + 1) Z) (ih Z)
+      exact (hZ (B + 1 - ((k + 1 : ℕ) : ℤ)) (B + 1 - k) (by omega)).2 (hepi (k + 1) Z) (ih Z)
   rw [_root_.DerivedCategory.isIso_iff]
   intro n
   by_cases hn : B < n
   · exact hiso_of_gt M inferInstance n hn
   · have := hiso (B + 1 - n).toNat M
-    rwa [show B + 1 - ((B + 1 - n).toNat : ℤ) = n by lia] at this
-
-/-! ### Amplitude of the direct image -/
-
-/-- The derived direct image of a bounded object concentrated in degrees `≥ a` is concentrated
-in degrees `≥ a`. -/
-lemma isGE_rightDerivedLowerStar_of_isGE {X Y : Scheme.{u}} (f : X ⟶ Y) (a b : ℤ)
-    (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    [E.IsGE a] [E.IsLE b] : ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E).IsGE a :=
-  _root_.DerivedCategory.isGE_obj_of_bounded _
-    (fun F ↦ ((f)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj_singleFunctor F) a b E
-
-/-- Under the uniform vanishing `UDV(f, Λ; N)` of the higher direct images above `N`
-(`def-sf-uniform-direct-image-vanishing`), the derived direct image of a bounded object
-concentrated in degrees `≤ b` is concentrated in degrees `≤ b + N`. -/
-lemma isLE_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (N : ℕ) (hf : HasUniformDirectImageVanishingLE Λ f N) (a b : ℤ)
-    (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    [E.IsGE a] [E.IsLE b] : ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E).IsLE (b + N) :=
-  _root_.DerivedCategory.isLE_obj_of_bounded _ N (fun F ↦
-    (_root_.DerivedCategory.isLE_iff _ _).2 fun q hq ↦
-      (hf F q hq).of_iso (higherDirectImageIsoHomologyRightDerivedLowerStar Λ f q F).symm) a b E
+    rwa [show B + 1 - ((B + 1 - n).toNat : ℤ) = n by omega] at this
 
 /-- Blueprint `lem-sf-projection-finite-constant`: The projection formula with a finitely
 presented constant coefficient.
@@ -242,7 +215,7 @@ is natural in `M`, being a component of the natural transformation
 The blueprint allows any `K ∈ D^-(X_ét, Λ)`; here `K` has finite Tor amplitude, which is the case
 used in `thm-sf-direct-image-tor-amplitude` and makes all the complexes `K ⊗ᴸ Z_X` bounded, so
 that `UDV(f, Λ; N)` bounds their direct images
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`). The
+(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage`). The
 proof is `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
 with the bound `b + N`. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf [IsNoetherianRing Λ]
@@ -251,13 +224,15 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf [IsNoetherianRing
     (hK : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
     (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app
-      (constantSingle Y M)) := by
+      (𝐂(Y, M))) := by
   obtain ⟨_, _⟩ := _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hK
   refine isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE f K (b + N)
-    (isLE_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE f N hf a b K)
+    (isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage
+      (fun F q hq ↦ hf F q (by exact_mod_cast hq)) K b)
     (fun Z _ ↦ ?_) M
   obtain ⟨_, _⟩ := hK ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj Z)
-  exact isLE_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE f N hf a b _
+  exact isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage
+    (fun F q hq ↦ hf F q (by exact_mod_cast hq)) _ b
 
 end Etale
 

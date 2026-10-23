@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDualLocal
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.Refinement
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 
 /-!
 # The Tor bound of the Verdier dual, by noetherian induction
@@ -67,32 +68,16 @@ lemma verdierDual_obj_congr {X S : Scheme.{u}} {g₁ g₂ : X ⟶ S} (h : g₁ =
   rfl
 
 variable {Λ} in
-/-- A zero object has every Tor amplitude. -/
-lemma torAmplitudeIn_of_isZero {X : Scheme.{u}} {N : DerivedCategoryModule Λ X} (hN : IsZero N)
-    (a b : ℤ) : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b N := fun _ ↦
-  ⟨_root_.DerivedCategory.TStructure.t.isGE_of_isZero
-      (isZero_derivedTensor_obj_obj_of_isZero_left hN _) a,
-    _root_.DerivedCategory.TStructure.t.isLE_of_isZero
-      (isZero_derivedTensor_obj_obj_of_isZero_left hN _) b⟩
-
-variable {Λ} in
+omit [Finite Λ] in
 /-- A zero object is bounded constructible and has every Tor amplitude. -/
 lemma boundedConstructible_and_torAmplitudeIn_of_isZero {X : Scheme.{u}}
     {N : DerivedCategoryModule Λ X} (hN : IsZero N) (a b : ℤ) :
     boundedConstructible (ModuleCat.{u + 1} Λ) X N ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b N :=
-  ⟨(boundedConstructible _ X).prop_of_isZero hN, torAmplitudeIn_of_isZero hN a b⟩
+  ⟨(boundedConstructible _ X).prop_of_isZero hN, torAmplitudeIn_of_isZero _ a b hN⟩
 
 variable {Λ} in
-/-- The internal hom out of a zero object is zero. -/
-lemma isZero_derivedHom_obj_obj_of_isZero {X : Scheme.{u}} {K : DerivedCategoryModule Λ X}
-    (hK : IsZero K) (M : DerivedCategoryModule Λ X) :
-    IsZero (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
-  rw [IsZero.iff_id_eq_zero]
-  apply ((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K).homEquiv _ _).symm.injective
-  exact (isZero_derivedTensor_obj_obj_of_isZero_left hK _).eq_of_src _ _
-
-variable {Λ} in
+omit [Finite Λ] in
 /-- A complex of Tor amplitude in `[a, b]` with `b < a` is zero. -/
 lemma isZero_of_torAmplitudeIn_of_lt {X : Scheme.{u}} {K : DerivedCategoryModule Λ X} {a b : ℤ}
     (h : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hab : b < a) : IsZero K := by
@@ -125,7 +110,7 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek_dualizingComplex
 /-- **The open piece.** For an open immersion `j : U ⟶ Y` and `K` on `Y`,
 `RHom(K, Rj_* j^* ω_Y) ≅ Rj_* 𝔻_U(j^* K)`. -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerStar_dualizingComplex {U Y S : Scheme.{u}}
-    (aY : Y ⟶ S) [HasCompactification aY] (j : U ⟶ Y) [IsOpenImmersion j]
+    (aY : Y ⟶ S) [HasCompactification aY] (j : U ⟶ Y) [IsOpenImmersion j] [QuasiCompact j]
     [HasCompactification j] [HasCompactification (j ≫ aY)] [QuasiCompact (j ≫ aY)]
     (K : DerivedCategoryModule Λ Y) :
     Nonempty (((RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op K)).obj
@@ -197,7 +182,7 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization {k :
   obtain ⟨eU⟩ := nonempty_iso_derivedHom_rightDerivedLowerStar_dualizingComplex Λ aY j K
   obtain ⟨N, hN0, hNΛ, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
   have : NeZero N := ⟨hN0.ne'⟩
-  have hUt := torAmplitudeIn_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) (j ≫ aY) aY j rfl e he
+  have hUt := torAmplitudeIn_rightDerivedLowerStar Λ (j ≫ aY) aY j rfl e he
     α (β - 2 * e) N (nsmul_id_eq_zero_of_natCast_eq_zero hNΛ _) hNY hU.1 hU.2
   have h₃ : boundedConstructible (ModuleCat.{u + 1} Λ) Y
       (F.obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
@@ -214,6 +199,7 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization {k :
 /-! ### A lisse smooth open -/
 
 variable {Λ} in
+omit [Finite Λ] in
 /-- Finitely many constructible sheaves on a noetherian scheme are finite locally constant on a
 common dense open: intersect the dense opens of generic constancy of the individual sheaves. -/
 lemma exists_dense_open_forall_isFiniteLocallyConstantSheaf {X : Scheme.{u}} [IsNoetherian X]
@@ -222,7 +208,7 @@ lemma exists_dense_open_forall_isFiniteLocallyConstantSheaf {X : Scheme.{u}} [Is
     ∃ W : X.Opens, Dense (W : Set X) ∧
       ∀ q, IsFiniteLocallyConstantSheaf ((W.ι)^*[ModuleCat.{u + 1} Λ].obj (F q)) := by
   induction n with
-  | zero => exact ⟨⊤, by simp, Fin.elim0⟩
+  | zero => exact ⟨⊤, by simp, fun q ↦ q.elim0⟩
   | succ n ih =>
     obtain ⟨W, hWd, hW⟩ := ih (fun q ↦ F q.castSucc) (fun q ↦ hF _)
     have := hF (Fin.last n)
@@ -241,13 +227,16 @@ lemma exists_topologicalKrullDim_eq {k : Type u} [Field k] {X : Scheme.{u}} [Non
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] :
     ∃ n : ℕ, topologicalKrullDim X = n := by
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
+  have : Nonempty (TopologicalSpace.IrreducibleCloseds X) := by
+    obtain ⟨x⟩ := ‹Nonempty X›
+    exact ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
   have h0 : 0 ≤ topologicalKrullDim X := Order.krullDim_nonneg
   generalize topologicalKrullDim X = m at hd h0
   induction m using WithBot.recBotCoe with
   | bot => exact absurd h0 (by simp)
   | coe m =>
     induction m using ENat.recTopCoe with
-    | top => exact absurd hd (by simp)
+    | top => exact absurd hd fun h ↦ ENat.natCast_ne_top d (top_le_iff.1 (WithBot.coe_le_coe.1 h))
     | coe n => exact ⟨n, rfl⟩
 
 /-- **A lisse smooth open.** Let `Z` be a nonempty reduced scheme of finite type over a perfect
@@ -285,7 +274,7 @@ theorem exists_opens_smooth_isFiniteLocallyConstantSheaf {k : Type u} [Field k] 
   obtain ⟨o, ho, hon, hoC⟩ :=
     TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent C hC
   obtain ⟨z, hzo, hzWS⟩ : (o ∩ (W ⊓ S : Z.Opens)).Nonempty := by
-    obtain ⟨z, ⟨hzC, hzo⟩, hzWS⟩ := isIrreducible_irreducibleComponent.2 o _ ho (W ⊓ S).isOpen
+    obtain ⟨z, hzC, hzo, hzWS⟩ := isIrreducible_irreducibleComponent.2 o _ ho (W ⊓ S).isOpen
       (hon.mono fun x hx ↦ ⟨hoC hx, hx⟩) ⟨w, mem_irreducibleComponent, hw⟩
     exact ⟨z, hzo, hzWS⟩
   let O : Z.Opens := ⟨o ∩ (W ⊓ S : Z.Opens), ho.inter (W ⊓ S).isOpen⟩
@@ -306,7 +295,7 @@ theorem exists_opens_smooth_isFiniteLocallyConstantSheaf {k : Type u} [Field k] 
   -- the restricted model
   let P' := (((O.ι)^*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
   refine ⟨O, inferInstance, inferInstance, n, hsm, P',
-    ⟨fun q hq ↦ Functor.map_isZero _ (hP.1 q hq), fun q ↦
+    ⟨fun q hq ↦ ((O.ι)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q hq), fun q ↦
       Functor.PreservesFlat.flat_obj (F := (O.ι)^*[ModuleCat.{u + 1} Λ]) (hP.2 q)⟩,
     fun q ↦ ?_, ⟨(L((O.ι)^*[ModuleCat.{u + 1} Λ])).mapIso eP ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ O.ι).app _ ≪≫
@@ -319,7 +308,8 @@ theorem exists_opens_smooth_isFiniteLocallyConstantSheaf {k : Type u} [Field k] 
     rw [hi] at hWq
     exact IsFiniteLocallyConstantSheaf.upperStar_of_range_subset O.ι W.ι
       (by simpa using hOW) _
-  · exact IsFiniteLocallyConstantSheaf.of_isZero (Functor.map_isZero _ (hP.1 q (by omega)))
+  · exact IsFiniteLocallyConstantSheaf.of_isZero
+      (((O.ι)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q (by omega)))
 
 end Etale
 

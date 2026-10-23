@@ -62,16 +62,16 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
-  [HasInvertibleExponent Λ (Spec (.of k))]
+  [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
 /-- Blueprint `thm-sf-ctf-stability`, clause (v): the exceptional inverse image is
 `Rf^! = 𝔻_X f^* 𝔻_Y` on `Dctf(Y, Λ)`.
 
-For a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y` over `k`, with `Y` separated
-of finite type over `k`, every `K ∈ Dctf(Y, Λ)` satisfies `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))`: apply
-the exchange `Rf^! 𝔻_Y ≅ 𝔻_X f^*`
+For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y`
+over `k`, with `Y` separated of finite type over `k`, every `K ∈ Dctf(Y, Λ)` satisfies
+`Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))`: apply the exchange `Rf^! 𝔻_Y ≅ 𝔻_X f^*`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`) to `𝔻_Y K` and use
 the biduality `K ≅ 𝔻_Y 𝔻_Y K` (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`). -/
 theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
@@ -91,9 +91,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
 
 /-- Blueprint `thm-sf-ctf-stability`: Preservation on the proved finite-Tor domains.
 
-Let `Λ` be a finite ring whose exponent is invertible on the field `k`, and `f : X ⟶ Y` a
-separated morphism of separated finite-type `k`-schemes (`f` admitting a compactification). At
-this finite coefficient stage:
+Let `Λ` be a finite ring whose exponent is invertible on the algebraically closed field `k`, and
+`f : X ⟶ Y` a separated morphism of separated finite-type `k`-schemes (`f` admitting a
+compactification). At this finite coefficient stage:
 
 1. (i) `Lf^*` carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`, preserving the Tor interval `[a, b]`;
 2. (ii) `⊗ᴸ` carries `Dctf × Dctf` into `Dctf`, with Tor intervals `[a, b] + [c, d] ↦
@@ -108,7 +108,8 @@ this finite coefficient stage:
    if `dim X ≤ d_X`, `dim Y ≤ d_Y`, an input of Tor amplitude `[a, b]` goes to Tor amplitude
    `[a - 2 d_X, b + 2 d_Y]`;
 6. (vi) `𝔻_X = RHom(-, Ra_X^! Λ)` preserves `Dctf(X, Λ)`, `K ≅ 𝔻_X 𝔻_X K`, and `𝔻_X` restricts to
-   an anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)` (`AlgebraicGeometry.Etale.verdierDualEquivalence`);
+   an anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`
+   (`AlgebraicGeometry.Etale.verdierDualEquivalence`);
 7. (vii) finite coefficient quotients `K ↦ K ⊗ᴸ (Λ ⧸ J)_X` commute with `Lf^*`, with `⊗ᴸ` and with
    `Rf_!`.
 
@@ -240,7 +241,7 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
     have hfD := constructibleFiniteTor_leftDerivedUpperStar _ f
       (constructibleFiniteTor_verdierDual Λ aY hKc)
     have h := htvi dX hdX _ _ _ hfD.1 (hti _ _ _ hD)
-    rw [neg_neg, neg_sub', neg_neg] at h
+    rw [neg_neg, neg_sub', neg_neg, sub_neg_eq_add] at h
     exact (torAmplitudeIn _ X _ _).prop_of_iso e.symm h
 
 end Finite

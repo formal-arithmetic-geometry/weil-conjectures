@@ -19,8 +19,7 @@ Frobenius. For every object `v : V ⟶ X` of the small pro-étale site the relat
 isomorphism (`AlgebraicGeometry.Scheme.isIso_relativeIterateFrobenius`). These isomorphisms are
 natural in `V`, so base change along `F_X` is isomorphic to the identity functor of `X_proét`.
 Consequently the pushforward `F_{X*}`, the pullback `F_X^*` and the derived pullback `LF_X^*`
-are canonically isomorphic to the identity. These trivializations are compatible with base
-change along any morphism (in particular with restriction to open subschemes) and with
+are canonically isomorphic to the identity. These trivializations are compatible with
 the iterates `F_X^{(m + n)} = F_X^{(n)} ∘ F_X^{(m)}`.
 
 ## Main definitions
@@ -34,10 +33,10 @@ the iterates `F_X^{(m + n)} = F_X^{(n)} ∘ F_X^{(m)}`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.ProEt.overPullbackIterateFrobeniusIso_add`: compatibility with the
+- `AlgebraicGeometry.Scheme.ProEt.relativeIterateFrobeniusIso_add`,
+  `AlgebraicGeometry.ProEtale.lowerStarIterateFrobeniusIso_add`,
+  `AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso_add`: compatibility with the
   iterates.
-- `AlgebraicGeometry.Scheme.ProEt.overPullbackIterateFrobeniusIso_overPullback`: compatibility
-  with base change along a morphism `f : Y ⟶ X`, e.g. restriction to an open subscheme.
 -/
 
 @[expose] public section
@@ -75,7 +74,7 @@ noncomputable def overPullbackIterateFrobeniusIso :
   (NatIso.ofComponents (relativeIterateFrobeniusIso hp hX n) fun {V W} g ↦ by
     ext : 1
     apply pullback.hom_ext
-    · simpa using iterateFrobenius_naturality hp n g.left _ _
+    · simpa using comp_iterateFrobenius hp g.left _ _ n
     · simp).symm
 
 @[simp]
@@ -94,13 +93,29 @@ lemma relativeIterateFrobeniusIso_add (m : ℕ) (V : X.ProEt) :
           ((overPullbackIterateFrobeniusIso hp hX n).inv.app V) ≫
         (MorphismProperty.Over.pullbackComp (X.iterateFrobenius hp hX m)
           (X.iterateFrobenius hp hX n)).inv.app V ≫
-        (MorphismProperty.Over.pullbackCongr (iterateFrobenius_add hp n X hX m)).inv.app V =
+        (MorphismProperty.Over.pullbackCongr (iterateFrobenius_add hp X hX m n)).inv.app V =
       (overPullbackIterateFrobeniusIso hp hX (m + n)).inv.app V := by
   ext : 1
   apply pullback.hom_ext
-  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-      iterateFrobenius_add]
-  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
+  · simp only [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
+      Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj, NatIso.ofComponents_inv_app,
+      Comma.comp_hom, CategoryTheory.Comma.comp_left, overPullbackIterateFrobeniusIso_inv_app_left,
+      MorphismProperty.Over.pullback_map_left, MorphismProperty.Over.isoMk_inv_left,
+      Iso.trans_inv, Iso.symm_inv, pullback.congrHom_inv, pullback.map_id, Category.comp_id,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app, pullbackLeftPullbackSndIso_hom_fst,
+      relativeIterateFrobenius_fst]
+    erw [pullback.lift_fst_assoc]
+    simp [iterateFrobenius_add]
+  · simp only [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
+      Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj, NatIso.ofComponents_inv_app,
+      Comma.comp_hom, CategoryTheory.Comma.comp_left, overPullbackIterateFrobeniusIso_inv_app_left,
+      MorphismProperty.Over.pullback_map_left, MorphismProperty.Over.isoMk_inv_left,
+      Iso.trans_inv, Iso.symm_inv, pullback.congrHom_inv, pullback.map_id, Category.comp_id,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app, pullbackLeftPullbackSndIso_hom_snd,
+      relativeIterateFrobenius_snd]
+    erw [pullback.lift_snd]
+    simp
+
 end Scheme.ProEt
 
 namespace ProEtale
@@ -132,10 +147,11 @@ lemma lowerStarIterateFrobeniusIso_hom_app_hom_app (G : Sheaf (ProEt.topology X)
       G.obj.map ((ProEt.overPullbackIterateFrobeniusIso hp hX n).inv.app V.unop).op := by
   simp [lowerStarIterateFrobeniusIso]
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The trivializations `F_{X*} ≅ 𝟭` are compatible with the iterates
 `F_X^{(m + n)} = F_X^{(m)} ≫ F_X^{(n)}`. -/
 lemma lowerStarIterateFrobeniusIso_add (m : ℕ) :
-    lowerStarCongr A (iterateFrobenius_add hp n X hX m) ≪≫
+    lowerStarCongr A (iterateFrobenius_add hp X hX m n) ≪≫
         (lowerStarComp A (X.iterateFrobenius hp hX m) (X.iterateFrobenius hp hX n)).symm ≪≫
         Functor.isoWhiskerLeft _ (lowerStarIterateFrobeniusIso A hp hX n) ≪≫
         Functor.rightUnitor _ ≪≫ lowerStarIterateFrobeniusIso A hp hX m =
@@ -146,15 +162,16 @@ lemma lowerStarIterateFrobeniusIso_add (m : ℕ) :
     NatTrans.comp_app, lowerStarCongr_hom_app_hom_app, lowerStarComp_inv_app_hom_app,
     lowerStarIterateFrobeniusIso_hom_app_hom_app, lowerStar_obj_obj_map',
     ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
-  simp only [← Functor.map_comp, ← op_comp]
-  congr 2
-  exact ProEt.relativeIterateFrobeniusIso_add hp hX n m V.unop
+  erw [Category.id_comp]
+  rw [← ProEt.relativeIterateFrobeniusIso_add hp hX n m V.unop, op_comp, op_comp, op_comp,
+    Functor.map_comp, Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
+  rfl
 
 /-- The trivializations `F_X^* ≅ 𝟭` are compatible with the iterates
 `F_X^{(m + n)} = F_X^{(m)} ≫ F_X^{(n)}`: this is conjugate to
 `AlgebraicGeometry.ProEtale.lowerStarIterateFrobeniusIso_add`. -/
 lemma upperStarIterateFrobeniusIso_add (m : ℕ) :
-    upperStarCongr A (iterateFrobenius_add hp n X hX m) ≪≫
+    upperStarCongr A (iterateFrobenius_add hp X hX m n) ≪≫
         upperStarComp A (X.iterateFrobenius hp hX m) (X.iterateFrobenius hp hX n) ≪≫
         Functor.isoWhiskerRight (upperStarIterateFrobeniusIso A hp hX n) _ ≪≫
         Functor.leftUnitor _ ≪≫ upperStarIterateFrobeniusIso A hp hX m =
@@ -185,13 +202,11 @@ Let `X` be a scheme in which the prime `p` vanishes. On the small pro-étale sit
 derived pullback along the `p ^ n`-power absolute Frobenius `F_X` has a canonical
 trivialization `LF_X^* ≅ 𝟭`: the derived functor of the trivialization `F_X^* ≅ 𝟭` of the
 (exact) pullback, which comes from the relative Frobenius isomorphisms
-`r_V : V ≅ V ×_{X, F_X} X`. Its compatibility with the iterates is
-`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIterateFrobeniusIso_add`, and with restriction
-along any morphism (e.g. an open immersion) is
-`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIterateFrobeniusIso_restrict`. -/
+`r_V : V ≅ V ×_{X, F_X} X`; on the underived level, its compatibility with the iterates is
+`AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso_add`. -/
 noncomputable def leftDerivedUpperStarIterateFrobeniusIso :
     L((X.iterateFrobenius hp hX n)^*[A]) ≅ 𝟭 _ :=
-  Functor.leftDerivedFunctorIsoId _ (upperStarIterateFrobeniusIso A hp hX n)
+  Functor.leftDerivedFunctorIdIso (upperStarIterateFrobeniusIso A hp hX n)
 
 end ProEtale
 

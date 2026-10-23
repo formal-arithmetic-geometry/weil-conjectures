@@ -5,9 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.MatesEquivalence
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
@@ -18,7 +19,8 @@ Let `g : X ⟶ X` and `h : Y ⟶ Y` be automorphisms of schemes and `f : X ⟶ Y
 `g ≫ f = f ≫ h`. In the `ℓ`-adic formalism `X = X₀ ×_{k₀} k̄`, `Y = Y₀ ×_{k₀} k̄`, `f` is the
 base change of a morphism `f₀ : X₀ ⟶ Y₀` and `g`, `h` are the geometric Frobenius
 automorphisms (`AlgebraicGeometry.Scheme.Hom.commSq_geometricGaloisFrobenius`); the square is
-then cartesian (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`).
+then cartesian
+(`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`).
 
 A *Weil object* of `D(X_ét, Λ)` is an object `K` with an isomorphism `θ_K : Lg^* K ≅ K`; they
 form the category `IsoAlgebra (Lg^*)` (`CategoryTheory.Endofunctor.IsoAlgebra`), whose morphisms
@@ -48,8 +50,6 @@ equivariant.
 
 - `AlgebraicGeometry.Etale.weilUpperStar`, `AlgebraicGeometry.Etale.weilLowerStar`,
   `AlgebraicGeometry.Etale.weilLowerShriek`, `AlgebraicGeometry.Etale.weilUpperShriek`.
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`: the exchange
-  `Ex^! : Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian square.
 
 ## Main results
 
@@ -99,7 +99,7 @@ variable (Λ) in
 /-- The compact-support exchange `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*` of a cartesian square, as an
 isomorphism (compact-support base change,
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
-noncomputable def rightDerivedLowerShriekBaseChangeIso [HasCompactification f]
+noncomputable def rightDerivedLowerShriekBaseChangeNatIso [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
       L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] :=
@@ -107,29 +107,11 @@ noncomputable def rightDerivedLowerShriekBaseChangeIso [HasCompactification f]
   asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)
 
 @[simp]
-lemma rightDerivedLowerShriekBaseChangeIso_hom [HasCompactification f]
+lemma rightDerivedLowerShriekBaseChangeNatIso_hom [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    (rightDerivedLowerShriekBaseChangeIso Λ sq).hom = rightDerivedLowerShriekBaseChangeMap Λ sq :=
+    (rightDerivedLowerShriekBaseChangeNatIso Λ sq).hom =
+      rightDerivedLowerShriekBaseChangeMap Λ sq :=
   rfl
-
-variable (Λ) in
-/-- The *exceptional-inverse-image exchange* `Ex^! : Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian
-square
-```
-  X' --g'--> X
-  |          |
-  f'         f
-  v          v
-  Y' --g---> Y
-```
-the mate of the inverse of the compact-support exchange `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*` under
-the adjunctions `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`. -/
-noncomputable def rightDerivedUpperShriekBaseChangeMap [HasCompactification f]
-    [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ] :=
-  (mateEquiv (rightDerivedUpperShriekAdjunction _ f) (rightDerivedUpperShriekAdjunction _ f')
-    (TwoSquare.mk _ _ _ _ (rightDerivedLowerShriekBaseChangeIso Λ sq).inv)).natTrans
 
 /-- The unit form of the definition of `Ex^!` as a mate. -/
 @[reassoc]
@@ -139,7 +121,8 @@ lemma map_unit_rightDerivedUpperShriekBaseChangeMap_app [HasCompactification f]
     L((g')^*[ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekAdjunction _ f).unit.app K) ≫
         (rightDerivedUpperShriekBaseChangeMap Λ sq).app ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) =
       (rightDerivedUpperShriekAdjunction _ f').unit.app _ ≫
-        (R(f')^![ModuleCat.{u + 1} Λ]).map ((rightDerivedLowerShriekBaseChangeIso Λ sq).inv.app K) :=
+        (R(f')^![ModuleCat.{u + 1} Λ]).map
+          ((rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv.app K) :=
   unit_mateEquiv _ _ _ K
 
 /-- The counit form of the definition of `Ex^!` as a mate. -/
@@ -149,7 +132,8 @@ lemma map_rightDerivedUpperShriekBaseChangeMap_app_counit [HasCompactification f
     (M : DerivedCategoryModule Λ Y) :
     (R(f')_![ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekBaseChangeMap Λ sq).app M) ≫
         (rightDerivedUpperShriekAdjunction _ f').counit.app _ =
-      (rightDerivedLowerShriekBaseChangeIso Λ sq).inv.app ((R(f)^![ModuleCat.{u + 1} Λ]).obj M) ≫
+      (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv.app
+          ((R(f)^![ModuleCat.{u + 1} Λ]).obj M) ≫
         L((g)^*[ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekAdjunction _ f).counit.app M) :=
   mateEquiv_counit _ _ _ M
 
@@ -159,8 +143,9 @@ being the mate of an isomorphism along the equivalences `Lg^*` and `Lg'^*`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) [IsIso g]
     [IsIso g'] : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
-  have : IsIso (TwoSquare.mk _ _ _ _ (rightDerivedLowerShriekBaseChangeIso Λ sq).inv).natTrans :=
-    inferInstanceAs (IsIso (rightDerivedLowerShriekBaseChangeIso Λ sq).inv)
+  have : IsIso (TwoSquare.mk _ _ _ _
+      (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv).natTrans :=
+    inferInstanceAs (IsIso (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv)
   isIso_mateEquiv_of_isEquivalence _ _ _
 end Exchange
 
@@ -220,7 +205,7 @@ is `AlgebraicGeometry.Etale.lowerShriekWeilDatum`. -/
 noncomputable def weilLowerShriek [HasCompactification f] [QuasiCompact f]
     (sq : IsPullback g f f h) :
     IsoAlgebra L((g)^*[ModuleCat.{u + 1} Λ]) ⥤ IsoAlgebra L((h)^*[ModuleCat.{u + 1} Λ]) :=
-  IsoAlgebra.mapOfNatIso (rightDerivedLowerShriekBaseChangeIso Λ sq)
+  IsoAlgebra.mapOfNatIso (rightDerivedLowerShriekBaseChangeNatIso Λ sq)
 
 variable (Λ) in
 /-- **Weil structure on the exceptional inverse image.** For a cartesian square
@@ -319,7 +304,7 @@ lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_unit (sq : IsPullback g a
       ((rightDerivedUpperShriekAdjunction _ a).unit.app K) := by
   unfold IsWeilMorphism upperShriekWeilDatum lowerShriekWeilDatum
   rw [map_unit_rightDerivedUpperShriekBaseChangeMap_app_assoc, ← Functor.map_comp,
-    ← rightDerivedLowerShriekBaseChangeIso_hom, Iso.inv_hom_id_app_assoc,
+    ← rightDerivedLowerShriekBaseChangeNatIso_hom, Iso.inv_hom_id_app_assoc,
     Adjunction.unit_naturality]
 
 /-- **The counit of `Ra_! ⊣ Ra^!` is equivariant**: for a Weil datum `ψ` on `M`, the counit
@@ -331,7 +316,7 @@ lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_counit (sq : IsPullback g
   unfold IsWeilMorphism upperShriekWeilDatum lowerShriekWeilDatum
   rw [Functor.map_comp, Category.assoc, Category.assoc, Adjunction.counit_naturality,
     map_rightDerivedUpperShriekBaseChangeMap_app_counit_assoc,
-    ← rightDerivedLowerShriekBaseChangeIso_hom, Iso.hom_inv_id_app_assoc]
+    ← rightDerivedLowerShriekBaseChangeNatIso_hom, Iso.hom_inv_id_app_assoc]
 
 end Data
 

@@ -7,23 +7,24 @@ module
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.RingHom.PurelyInseparable
-public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtaleHomeomorphism
 
 /-!
-# The absolute Frobenius is a natural universal homeomorphism
+# The absolute Frobenius is a universal homeomorphism
 
 Let `p` be a prime and `X` a scheme in which `p` vanishes. The `p ^ n`-power absolute Frobenius
-`F_X = X.iterateFrobenius hp hX n` is natural in `X`, i.e. `f ≫ F_Y = F_X ≫ f` for every
-morphism `f : X ⟶ Y`, and it is a universal homeomorphism: it is the identity on points,
+`F_X = X.iterateFrobenius hp hX n` is a universal homeomorphism: it is the identity on points,
 integral since every section `s` is a root of `T ^ p ^ n - s ^ p ^ n`, and its residue field
-extensions `κ(x) → κ(x)`, `a ↦ a ^ p ^ n`, are purely inseparable.
+extensions `κ(x) → κ(x)`, `a ↦ a ^ p ^ n`, are purely inseparable. Its naturality is
+`AlgebraicGeometry.Scheme.comp_iterateFrobenius`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.iterateFrobenius_naturality`: naturality of the absolute Frobenius.
 - `AlgebraicGeometry.Scheme.isUniversalHomeomorphism_iterateFrobenius`: the absolute Frobenius
   is a universal homeomorphism.
+- `AlgebraicGeometry.Scheme.isIso_relativeIterateFrobenius`: the relative Frobenius of a weakly
+  étale morphism is an isomorphism.
 -/
 
 @[expose] public section
@@ -36,30 +37,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {p : ℕ} (hp : p.Prime) (n : ℕ)
 
-/-- If the prime `p` vanishes on `Y`, it vanishes on every `X` with a morphism `X ⟶ Y`. -/
-lemma natCast_eq_zero_of_hom {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : (p : Γ(Y, ⊤)) = 0) :
-    (p : Γ(X, ⊤)) = 0 := by
-  rw [← map_natCast f.appTop.hom, hY, map_zero]
-
-/-- The absolute Frobenius is natural: `f ≫ F_Y = F_X ≫ f` for every morphism `f : X ⟶ Y` of
-schemes in which `p` vanishes. -/
-lemma iterateFrobenius_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (hX : (p : Γ(X, ⊤)) = 0)
-    (hY : (p : Γ(Y, ⊤)) = 0) :
-    f ≫ Y.iterateFrobenius hp hY n = X.iterateFrobenius hp hX n ≫ f := by
-  refine Scheme.Hom.ext rfl fun U ↦ ?_
-  ext s
-  simp only [Hom.comp_base, TopologicalSpace.Opens.map_comp_obj, preimage_iterateFrobenius,
-    Hom.comp_app, eqToHom_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id,
-    CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply]
-  exact map_pow (f.app U).hom s (p ^ n)
-
 variable (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0)
-
-/-- The stalk map of the absolute Frobenius is the `p ^ n`-power map. -/
-lemma iterateFrobenius_stalkMap_apply (x : X) (a : X.presheaf.stalk x) :
-    (X.iterateFrobenius hp hX n).stalkMap x a = a ^ p ^ n := by
-  obtain ⟨U, hxU, s, rfl⟩ := X.presheaf.exists_germ_eq a
-  exact (Scheme.Hom.germ_stalkMap_apply _ U x hxU s).trans (map_pow _ s _)
 
 /-- The residue field map of the absolute Frobenius is the `p ^ n`-power map. -/
 lemma iterateFrobenius_residueFieldMap_apply (x : X) (a : X.residueField x) :
@@ -68,7 +46,7 @@ lemma iterateFrobenius_residueFieldMap_apply (x : X) (a : X.residueField x) :
   have h := congr($(residue_residueFieldMap (f := X.iterateFrobenius hp hX n) x).hom b)
   simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply] at h
   refine h.trans ?_
-  rw [iterateFrobenius_stalkMap_apply, map_pow]
+  rw [stalkMap_iterateFrobenius_apply, map_pow]
 
 /-- The absolute Frobenius is integral: every section `s` is a root of the monic polynomial
 `T ^ p ^ n - s ^ p ^ n` over the image. -/
@@ -103,17 +81,6 @@ homeomorphism. -/
 instance isUniversalHomeomorphism_iterateFrobenius :
     IsUniversalHomeomorphism (X.iterateFrobenius hp hX n) where
 
-/-- The `p ^ (m + n)`-power absolute Frobenius is the composite of the `p ^ m`-power and the
-`p ^ n`-power absolute Frobenius. -/
-lemma iterateFrobenius_add (m : ℕ) :
-    X.iterateFrobenius hp hX (m + n) = X.iterateFrobenius hp hX m ≫ X.iterateFrobenius hp hX n := by
-  refine Scheme.Hom.ext rfl fun U ↦ ?_
-  ext s
-  simp only [Hom.comp_base, TopologicalSpace.Opens.map_comp_obj, preimage_iterateFrobenius,
-    Hom.comp_app, eqToHom_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id,
-    CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply]
-  exact (congrArg (s ^ ·) (by rw [pow_add, mul_comm])).trans (pow_mul s _ _)
-
 section RelativeFrobenius
 
 variable {X} {V : Scheme.{u}} (v : V ⟶ X)
@@ -122,13 +89,13 @@ variable {X} {V : Scheme.{u}} (v : V ⟶ X)
 `v : V ⟶ X` to a scheme in which the prime `p` vanishes. -/
 noncomputable def relativeIterateFrobenius :
     V ⟶ Limits.pullback v (X.iterateFrobenius hp hX n) :=
-  Limits.pullback.lift (V.iterateFrobenius hp (natCast_eq_zero_of_hom v hX) n) v
-    (iterateFrobenius_naturality hp n v _ hX).symm
+  Limits.pullback.lift (V.iterateFrobenius hp (IsOfCharacteristic.of_hom hX v) n) v
+    (comp_iterateFrobenius hp v hX _ n).symm
 
 @[reassoc (attr := simp)]
 lemma relativeIterateFrobenius_fst :
     relativeIterateFrobenius hp n hX v ≫ Limits.pullback.fst _ _ =
-      V.iterateFrobenius hp (natCast_eq_zero_of_hom v hX) n :=
+      V.iterateFrobenius hp (IsOfCharacteristic.of_hom hX v) n :=
   Limits.pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
@@ -167,7 +134,7 @@ lemma relativeIterateFrobenius_naturality {W : Scheme.{u}} (w : W ⟶ X) (g : V 
         Limits.pullback.map _ _ _ _ g (𝟙 X) (𝟙 X) (by simp [h]) (by simp) =
       g ≫ relativeIterateFrobenius hp n hX w := by
   apply Limits.pullback.hom_ext
-  · simpa using (iterateFrobenius_naturality hp n g _ _).symm
+  · simpa using (comp_iterateFrobenius hp g _ _ n).symm
   · simp [h]
 
 end RelativeFrobenius

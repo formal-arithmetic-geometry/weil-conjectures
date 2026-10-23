@@ -84,7 +84,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section Bifunctors
 
-variable {k : Type u} [Field k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
+variable {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 /-- The tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` restricts to the small category
@@ -107,14 +107,14 @@ end Bifunctors
 
 section VerdierDual
 
-variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}}
-  (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
-  [HasCompactification aX]
+variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
+  {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
+  [QuasiCompact aX] [HasCompactification aX]
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): for `X` separated of finite type over a
-field `k` and a finite `Λ` whose exponent is invertible on `k`, every object `K` of the small
-category `Dctf(X, Λ)` is isomorphic, inside `Dctf(X, Λ)`, to its double Verdier dual
-`𝔻_X 𝔻_X K`, the Verdier dual being restricted to `Dctf(X, Λ)` by
+/-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): for `X` separated of finite type over an
+algebraically closed field `k` and a finite `Λ` whose exponent is invertible on `k`, every
+object `K` of the small category `Dctf(X, Λ)` is isomorphic, inside `Dctf(X, Λ)`, to its double
+Verdier dual `𝔻_X 𝔻_X K`, the Verdier dual being restricted to `Dctf(X, Λ)` by
 `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
 theorem DerivedCategoryFiniteTor.nonempty_iso_verdierDual_verdierDual
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
@@ -144,7 +144,7 @@ end VerdierDual
 
 /-! ### The typing rule -/
 
-variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
+variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
   [IsSeparated aX] [HasCompactification aX] [HasInvertibleExponent Λ X]
@@ -154,8 +154,9 @@ variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 /-- Blueprint `rem-sf-typing-rule`: The typing rule of this section.
 
 Every operation is defined on the ambient derived categories `D(-_ét, Λ)`, and its version on
-the small categories `Dctf(-, Λ)` is its restriction: for a finite `Λ` whose exponent is
-invertible on `k` and a separated morphism `f : X ⟶ Y` of schemes of finite type over `k`,
+the small categories `Dctf(-, Λ)` is its restriction: for an algebraically closed field `k`, a
+finite `Λ` whose exponent is invertible on `k` and a separated morphism `f : X ⟶ Y` of schemes
+of finite type over `k`,
 with `X` separated over `k`, each of the functors `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!`, `𝔻_X`,
 `K ⊗ᴸ -` and `RHom(K, -)` (for `K ∈ Dctf(X, Λ)`) between the small categories, followed by the
 inclusion, is isomorphic to the inclusion followed by the ambient operation. By

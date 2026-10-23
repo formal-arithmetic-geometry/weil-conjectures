@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 
 /-!
 # Trivializations of left derived functors
@@ -14,22 +15,15 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 Let `F : C ⥤ C` be an exact endofunctor of an abelian category with functorial flat
 resolutions, and `e : F ≅ 𝟭 C` a trivialization of `F`. Then the total left derived functor
 of `F` is trivialized as well, `L(F) ≅ L(𝟭) ≅ D(𝟭) ≅ 𝟭`
-(`CategoryTheory.Functor.leftDerivedFunctorIsoId`). We show that this construction is
+(`CategoryTheory.Functor.leftDerivedFunctorIdIso`). We show that this construction is
 compatible with composition and with commutative squares of exact functors; both statements
 are checked on the image of the homotopy category, through the counits of the derived
-functors.
-
-## Main definitions
-
-- `CategoryTheory.Functor.leftDerivedFunctorIsoId`: the trivialization `L(F) ≅ 𝟭` induced by a
-  trivialization `F ≅ 𝟭`.
+functors (`CategoryTheory.Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj`).
 
 ## Main statements
 
-- `CategoryTheory.Functor.leftDerivedFunctorIsoId_hom_app_Qh_obj`: the trivialization on the
-  image of a complex.
-- `CategoryTheory.Functor.leftDerivedFunctorIsoId_comp`: compatibility with composition.
-- `CategoryTheory.Functor.leftDerivedFunctorIsoId_square`: compatibility with a commutative
+- `CategoryTheory.Functor.leftDerivedFunctorIdIso_comp`: compatibility with composition.
+- `CategoryTheory.Functor.leftDerivedFunctorIdIso_square`: compatibility with a commutative
   square.
 -/
 
@@ -52,7 +46,7 @@ lemma mapHomotopyCategory_isoId_quotient_obj {F : C ⥤ D} {G : C ⥤ D} [F.Addi
       (HomotopyCategory.quotient D _).map ((NatTrans.mapHomologicalComplex e (.up ℤ)).app K) :=
   rfl
 
-/-- The homotopy category statement behind `leftDerivedFunctorIsoId_comp`. -/
+/-- The homotopy category statement behind `leftDerivedFunctorIdIso_comp`. -/
 lemma mapHomotopyCategory_isoId_comp {F G H : C ⥤ C} [F.Additive] [G.Additive] [H.Additive]
     (eF : F ≅ 𝟭 C) (eG : G ≅ 𝟭 C) (c : H ≅ F ⋙ G)
     (P : HomotopyCategory C (.up ℤ)) :
@@ -83,7 +77,7 @@ lemma mapHomotopyCategory_isoId_comp {F G H : C ⥤ C} [F.Additive] [G.Additive]
   erw [Category.comp_id]
   rfl
 
-/-- The homotopy category statement behind `leftDerivedFunctorIsoId_square`. -/
+/-- The homotopy category statement behind `leftDerivedFunctorIdIso_square`. -/
 lemma mapHomotopyCategory_isoId_square {F : C ⥤ C} {G : C ⥤ D} {F' : D ⥤ D} [F.Additive]
     [G.Additive] [F'.Additive] (eF : F ≅ 𝟭 C) (eF' : F' ≅ 𝟭 D) (c : F ⋙ G ≅ G ⋙ F')
     (hc : c.hom ≫ whiskerLeft G eF'.hom = whiskerRight eF.hom G ≫ G.leftUnitor.hom ≫
@@ -163,53 +157,6 @@ lemma leftDerivedFunctorNatIso_symm (e : F ≅ G) :
 
 end NatIso
 
-section IsoId
-
-variable (F : C ⥤ C) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-
-/-- The trivialization `L(F) ≅ L(𝟭) ≅ D(𝟭) ≅ 𝟭` of the total left derived functor of an exact
-endofunctor `F` induced by a trivialization `e : F ≅ 𝟭`. -/
-noncomputable def leftDerivedFunctorIsoId (e : F ≅ 𝟭 C) : F.leftDerivedFunctor ≅ 𝟭 _ :=
-  F.leftDerivedFunctorNatIso e ≪≫ (𝟭 C).leftDerivedFunctorIsoMapDerivedCategory ≪≫
-    mapDerivedCategoryIdIso C
-
-/-- On the image `Qh P` of a complex, the trivialization `L(F) ≅ 𝟭` induced by `e : F ≅ 𝟭` is
-`e`, through the counit of the derived functor. -/
-lemma leftDerivedFunctorIsoId_hom_app_Qh_obj (e : F ≅ 𝟭 C)
-    (P : HomotopyCategory C (.up ℤ)) :
-    (F.leftDerivedFunctorIsoId e).hom.app (Qh.obj P) =
-      F.leftDerivedFunctorCounit.app P ≫
-        Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app P ≫
-          (mapHomotopyCategoryIdIso C (.up ℤ)).hom.app P) := by
-  have hfac := NatTrans.congr_app F.leftDerivedFunctorIsoMapDerivedCategory_hom_fac P
-  have hnat := mapDerivedCategoryNatIso_fach e P
-  have hid := NatTrans.congr_app (congrArg Iso.hom (mapDerivedCategoryIdIso_factorsh C)) P
-  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
-    whiskerLeft_app, rightUnitor_hom_app, isoWhiskerRight_hom,
-    whiskerRight_app, leftUnitor_hom_app] at hfac hid
-  simp only [leftDerivedFunctorIsoId, leftDerivedFunctorNatIso, Iso.trans_hom,
-    Iso.symm_hom, NatTrans.comp_app, Category.assoc, Iso.inv_hom_id_app_assoc]
-  rw [← hfac, Category.assoc, Functor.map_comp]
-  congr 1
-  have hid' : (mapDerivedCategoryIdIso C).hom.app (Qh.obj P) =
-      (𝟭 C).mapDerivedCategoryFactorsh.hom.app P ≫
-        Qh.map ((mapHomotopyCategoryIdIso C (.up ℤ)).hom.app P) := by
-    erw [Category.comp_id, Category.comp_id] at hid
-    exact hid
-  rw [hid', reassoc_of% hnat]
-
-end IsoId
-
-/-- The naturality of the counit of a left derived functor, with the composite functors
-unfolded. -/
-@[reassoc]
-lemma leftDerivedFunctorCounit_naturality' (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-    [PreservesFiniteColimits F]
-    {P Q : HomotopyCategory C (.up ℤ)} (f : P ⟶ Q) :
-    F.leftDerivedFunctor.map (Qh.map f) ≫ F.leftDerivedFunctorCounit.app Q =
-      F.leftDerivedFunctorCounit.app P ≫ Qh.map ((F.mapHomotopyCategory (.up ℤ)).map f) :=
-  F.leftDerivedFunctorCounit.naturality f
-
 section Comp
 
 variable {F G H : C ⥤ C} [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -220,24 +167,32 @@ variable {F G H : C ⥤ C} [F.Additive] [PreservesFiniteLimits F] [PreservesFini
 endofunctors with trivializations `eF : F ≅ 𝟭`, `eG : G ≅ 𝟭` and `c : H ≅ F ⋙ G`, the
 composite `L(H) ≅ L(F ⋙ G) ≅ L(F) ⋙ L(G) ≅ 𝟭` of the derived trivializations is the derived
 trivialization of the composite `H ≅ F ⋙ G ≅ 𝟭`. -/
-lemma leftDerivedFunctorIsoId_comp (eF : F ≅ 𝟭 C) (eG : G ≅ 𝟭 C) (c : H ≅ F ⋙ G) :
+lemma leftDerivedFunctorIdIso_comp (eF : F ≅ 𝟭 C) (eG : G ≅ 𝟭 C) (c : H ≅ F ⋙ G) :
     H.leftDerivedFunctorNatIso c ≪≫ F.leftDerivedFunctorCompIso G ≪≫
-        isoWhiskerRight (F.leftDerivedFunctorIsoId eF) G.leftDerivedFunctor ≪≫
-        G.leftDerivedFunctor.leftUnitor ≪≫ G.leftDerivedFunctorIsoId eG =
-      H.leftDerivedFunctorIsoId (c ≪≫ isoWhiskerRight eF G ≪≫ G.leftUnitor ≪≫ eG) := by
+        isoWhiskerRight (leftDerivedFunctorIdIso eF) G.leftDerivedFunctor ≪≫
+        G.leftDerivedFunctor.leftUnitor ≪≫ leftDerivedFunctorIdIso eG =
+      leftDerivedFunctorIdIso (c ≪≫ isoWhiskerRight eF G ≪≫ G.leftUnitor ≪≫ eG) := by
   ext : 1
   refine Localization.natTrans_ext Qh (HomotopyCategory.quasiIso _ (.up ℤ)) fun P ↦ ?_
+  have h₁ := leftDerivedFunctorIdIso_hom_app_Qh_obj eF P
+  have hn := (leftDerivedFunctorIdIso eG).hom.naturality (Qh.map
+    ((NatTrans.mapHomotopyCategory eF.hom (.up ℤ)).app P ≫
+      (mapHomotopyCategoryIdIso C (.up ℤ)).hom.app P))
+  have h₂ := leftDerivedFunctorIdIso_hom_app_Qh_obj eG ((F.mapHomotopyCategory (.up ℤ)).obj P)
+  have h₃ := leftDerivedFunctorIdIso_hom_app_Qh_obj
+    (c ≪≫ isoWhiskerRight eF G ≪≫ G.leftUnitor ≪≫ eG) P
+  -- `leftDerivedFunctorIdIso` is reducible: generalize it so that `simp` does not unfold it.
+  generalize leftDerivedFunctorIdIso eF = a at h₁ ⊢
+  generalize leftDerivedFunctorIdIso eG = b at hn h₂ ⊢
+  generalize leftDerivedFunctorIdIso (c ≪≫ isoWhiskerRight eF G ≪≫ G.leftUnitor ≪≫ eG) = d
+    at h₃ ⊢
   simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom, whiskerRight_app,
     leftUnitor_hom_app]
   erw [Category.id_comp]
-  rw [leftDerivedFunctorIsoId_hom_app_Qh_obj F eF P, Functor.map_comp, Category.assoc]
-  have hn := (G.leftDerivedFunctorIsoId eG).hom.naturality (Qh.map
-    ((NatTrans.mapHomotopyCategory eF.hom (.up ℤ)).app P ≫
-      (mapHomotopyCategoryIdIso C (.up ℤ)).hom.app P))
+  rw [h₁, Functor.map_comp, Category.assoc]
   rw [id_map] at hn
   erw [hn]
-  rw [leftDerivedFunctorIsoId_hom_app_Qh_obj G eG, leftDerivedFunctorIsoId_hom_app_Qh_obj H,
-    Category.assoc, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
+  rw [h₂, h₃, Category.assoc, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     leftDerivedFunctorNatIso_hom_app_comp_counit_assoc]
   congr 1
   rw [← Functor.map_comp, ← Functor.map_comp, mapHomotopyCategory_isoId_comp]
@@ -266,26 +221,26 @@ functors `F : C ⥤ C`, `G : C ⥤ D`, `F' : D ⥤ D`, trivializations `eF : F �
 and an isomorphism `c : F ⋙ G ≅ G ⋙ F'` compatible with them, the induced isomorphism
 `L(F) ⋙ L(G) ≅ L(F ⋙ G) ≅ L(G ⋙ F') ≅ L(G) ⋙ L(F')` is compatible with the derived
 trivializations. -/
-lemma leftDerivedFunctorIsoId_square (eF : F ≅ 𝟭 C) (eF' : F' ≅ 𝟭 D) (c : F ⋙ G ≅ G ⋙ F')
+lemma leftDerivedFunctorIdIso_square (eF : F ≅ 𝟭 C) (eF' : F' ≅ 𝟭 D) (c : F ⋙ G ≅ G ⋙ F')
     (hc : c.hom ≫ whiskerLeft G eF'.hom = whiskerRight eF.hom G ≫ G.leftUnitor.hom ≫
       G.rightUnitor.inv) :
     (F.leftDerivedFunctorCompIso G).inv ≫ ((F ⋙ G).leftDerivedFunctorNatIso c).hom ≫
         (G.leftDerivedFunctorCompIso F').hom ≫
-        whiskerLeft G.leftDerivedFunctor (F'.leftDerivedFunctorIsoId eF').hom =
-      whiskerRight (F.leftDerivedFunctorIsoId eF).hom G.leftDerivedFunctor ≫
+        whiskerLeft G.leftDerivedFunctor (leftDerivedFunctorIdIso eF').hom =
+      whiskerRight (leftDerivedFunctorIdIso eF).hom G.leftDerivedFunctor ≫
         G.leftDerivedFunctor.leftUnitor.hom ≫ G.leftDerivedFunctor.rightUnitor.inv := by
   refine Localization.natTrans_ext Qh (HomotopyCategory.quasiIso _ (.up ℤ)) fun P ↦ ?_
   rw [← cancel_mono (G.leftDerivedFunctorCounit.app P)]
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, leftUnitor_hom_app,
     rightUnitor_inv_app, Category.assoc]
   erw [Category.id_comp, Category.id_comp]
-  have hn := (F'.leftDerivedFunctorIsoId eF').hom.naturality (G.leftDerivedFunctorCounit.app P)
+  have hn := (leftDerivedFunctorIdIso eF').hom.naturality (G.leftDerivedFunctorCounit.app P)
   rw [id_map] at hn
   erw [← hn]
-  erw [leftDerivedFunctorIsoId_hom_app_Qh_obj F' eF' ((G.mapHomotopyCategory (.up ℤ)).obj P)]
-  rw [leftDerivedFunctorIsoId_hom_app_Qh_obj F eF P, G.leftDerivedFunctor.map_comp,
+  erw [leftDerivedFunctorIdIso_hom_app_Qh_obj eF' ((G.mapHomotopyCategory (.up ℤ)).obj P)]
+  rw [leftDerivedFunctorIdIso_hom_app_Qh_obj eF P, G.leftDerivedFunctor.map_comp,
     Category.assoc]
-  erw [leftDerivedFunctorCounit_naturality']
+  erw [leftDerivedFunctorCounit_naturality]
   rw [leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     leftDerivedFunctorNatIso_hom_app_comp_counit_assoc,
     ← leftDerivedFunctorCompIso_hom_app_comp_counit, Category.assoc, Category.assoc,

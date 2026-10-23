@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Explicit
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenComplement
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 /-!
 # Preservation for the exceptional inverse image of a general morphism
@@ -25,7 +26,7 @@ the preservation clauses for `Rf^!`:
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_openComplementBound_constructible`
+- `Etale.preservation_rightDerivedUpperShriek_of_openComplementBound_constructible`
   (`thm-pur-general-admissibility`, constructibility clause).
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_unconditional`
   (`cor-pur-general-admissibility-datum`): the open-complement condition holds with
@@ -57,6 +58,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section DirectImage
 
+omit [Finite Λ] in
 /-- Under the open-complement condition with constant `e`, the direct image of a constructible
 sheaf placed in degree `0` is bounded constructible and concentrated in `[0, e]`. -/
 lemma boundedConstructible_rightDerivedLowerStar_singleFunctor_of_openComplementBound
@@ -263,13 +265,6 @@ section Charts
 
 variable {k : Type u} [Field k]
 
-/-- Equal morphisms have isomorphic exceptional inverse images. -/
-lemma nonempty_iso_rightDerivedUpperShriek_of_eq {X Y : Scheme.{u}} {g₁ g₂ : X ⟶ Y}
-    [HasCompactification g₁] [HasCompactification g₂] (h : g₁ = g₂) :
-    Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
-  subst h
-  exact ⟨Iso.refl _⟩
-
 /-- **The chart step.** Let `v : V ⟶ Y` be an affine open of a finite-type `k`-scheme `Y`, and
 `c : U ⟶ 𝔸ⁿ_V` a closed immersion whose open complement `W` satisfies the open-complement
 condition with constant `e`. Then `R(c ≫ π ≫ v)^! ≅ Rc^! ∘ Rπ^! ∘ Rv^!` sends `D_c^[a, b](Y)` into
@@ -392,7 +387,7 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     have : HasCompactification (U i : X.Opens).ι :=
       (Compactification.ofIsOpenImmersion _).hasCompactification
     obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U i : X.Opens).ι f
-    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ (hc i)
+    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) (hc i)
     exact ⟨Functor.isoWhiskerLeft _
       (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ (U i : X.Opens).ι).symm ≪≫ e₁.symm ≪≫
         e₂.symm⟩
@@ -418,7 +413,10 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
       ((hres (σ.symm k)).some.app K).symm ((hchart (σ.symm k)).2 (hjt (σ.symm k)) a b K hK)
     have := hD (σ.symm k)
     have := hC (σ.symm k)
-    exact ⟨⟨hbc, hconc.mono (by lia) (by lia)⟩, hta.mono (by lia) (by lia)⟩
+    have h₁ : a - 2 * (D : ℤ) ≤ a - 2 * (n (σ.symm k) : ℤ) := by lia
+    have h₂ : b - 2 * (n (σ.symm k) : ℤ) + (e (σ.symm k) : ℤ) + 1 ≤ b - 2 * (D : ℤ) + C := by
+      lia
+    exact ⟨⟨hbc, hconc.mono h₁ h₂⟩, hta.mono h₁ h₂⟩
 
 end Charts
 
