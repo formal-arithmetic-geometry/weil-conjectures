@@ -18,6 +18,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjection
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
 /-!
 # The projection map at flat modules placed in degree zero
@@ -254,23 +255,19 @@ lemma isIso_rightDerivedFunctorUnit_app_of_isStrictlyGE (T : CochainComplex A �
     ((HomotopyCategory.quotient A (.up ℤ)).map ι) ≫ Γ.rightDerivedFunctorUnit.app _)
     (Γ.rightDerivedFunctorUnit.naturality _).symm
 
-/-- The unit of the right derived functor on cochain complexes, `Q(Γ K) ⟶ RΓ(Q K)`. -/
-noncomputable def rightDerivedFunctorUnitQ :
+/-- The unit `Q(Γ K) ⟶ RΓ(Q K)` of the right derived functor on cochain complexes
+(`CategoryTheory.Functor.rightDerivedFunctorUnitQ`), as a natural transformation. -/
+noncomputable def rightDerivedFunctorUnitQNatTrans :
     Γ.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
-      DerivedCategory.Q ⋙ Γ.rightDerivedFunctor :=
-  Functor.whiskerLeft (Γ.mapHomologicalComplex (.up ℤ)) (DerivedCategory.quotientCompQhIso B).inv ≫
-    (Functor.whiskerRight (Γ.mapHomotopyCategoryFactors (.up ℤ)).inv Qh :
-      (Γ.mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient B (.up ℤ)) ⋙ Qh ⟶ _) ≫
-    (Functor.whiskerLeft (HomotopyCategory.quotient A (.up ℤ)) Γ.rightDerivedFunctorUnit :
-      HomotopyCategory.quotient A (.up ℤ) ⋙ Γ.mapHomotopyCategory (.up ℤ) ⋙ Qh ⟶ _) ≫
-    Functor.whiskerRight (DerivedCategory.quotientCompQhIso A).hom Γ.rightDerivedFunctor
+      DerivedCategory.Q ⋙ Γ.rightDerivedFunctor where
+  app K := Γ.rightDerivedFunctorUnitQ K
+  naturality _ _ f := Γ.rightDerivedFunctorUnitQ_naturality f
 
-lemma isIso_rightDerivedFunctorUnitQ_app_of_isStrictlyGE (T : CochainComplex A ℤ) (a : ℤ)
+lemma isIso_rightDerivedFunctorUnitQ_of_isStrictlyGE (T : CochainComplex A ℤ) (a : ℤ)
     [T.IsStrictlyGE a] (hT : ∀ n, Γ.rightAcyclic (T.X n)) :
-    IsIso ((Γ.rightDerivedFunctorUnitQ).app T) := by
+    IsIso (Γ.rightDerivedFunctorUnitQ T) := by
   have := Γ.isIso_rightDerivedFunctorUnit_app_of_isStrictlyGE T a hT
-  dsimp only [rightDerivedFunctorUnitQ, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app]
+  dsimp only [rightDerivedFunctorUnitQ]
   infer_instance
 
 end Unit
@@ -375,12 +372,12 @@ theorem isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat
   let T := F ⋙ Functor.tensorRightComplex I ⋙ Q ⋙ Γ.rightDerivedFunctor ⋙ H
   let β₂ : F ⋙ Functor.tensorRightComplex I ⋙ Γ.mapHomologicalComplex _ ⋙ Q ⋙ H ⟶ T :=
     Functor.whiskerLeft (F ⋙ Functor.tensorRightComplex I)
-      (Functor.whiskerRight Γ.rightDerivedFunctorUnitQ H)
+      (Functor.whiskerRight Γ.rightDerivedFunctorUnitQNatTrans H)
   have hβ₂ (X : ModuleCat.{u + 1} Λ) (hX : ObjectProperty.flat X) : IsIso (β₂.app X) := by
     have := hge X
-    have := Γ.isIso_rightDerivedFunctorUnitQ_app_of_isStrictlyGE _ a (hacyc X hX)
+    have := Γ.isIso_rightDerivedFunctorUnitQ_of_isStrictlyGE _ a (hacyc X hX)
     exact Functor.map_isIso H
-      (Γ.rightDerivedFunctorUnitQ.app ((Functor.tensorRightComplex I).obj (F.obj X)))
+      (Γ.rightDerivedFunctorUnitQ ((Functor.tensorRightComplex I).obj (F.obj X)))
   let β₃ : R ⟶ T :=
     Functor.whiskerRight (F.mapDerivedCategorySingleFunctor 0).hom
       ((curriedTensor _).obj E ⋙ Γ.rightDerivedFunctor ⋙ H) ≫
