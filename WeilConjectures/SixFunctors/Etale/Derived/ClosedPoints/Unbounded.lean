@@ -464,7 +464,8 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι 
   let hP : IsLimit P := productIsProduct _
   obtain ⟨δ, hT⟩ := hc.exists_distTriang hP
   obtain ⟨α, hα⟩ := Triangle.coyoneda_exact₂ _ hT (Fan.IsLimit.lift hP fun n ↦ cK.π.app (op n))
-    (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP (towerShift hP) (towerShift_proj hP) cK)
+    (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP (Pretriangulated.towerShift hP)
+      (towerShift_proj hP) cK)
   have hαπ (n : ℕ) : α ≫ c.π.app (op n) = cK.π.app (op n) := by
     rw [← Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n,
       ← Fan.IsLimit.fac hP (fun n ↦ cK.π.app (op n)) n, hα, assoc]
