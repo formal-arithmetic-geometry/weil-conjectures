@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # Composition and injectivity of the transition maps of higher direct images
@@ -132,17 +132,7 @@ theorem Etale.mono_higherDirectImageOverMap {T S S' P : Scheme.{u}} (k : T ⟶ S
   have := Etale.mono_homologyFunctor_map_lowerStarPlusTransition Λ φ.left (V.hom ≫ k)
     (U.hom ≫ k) (by rw [← Category.assoc, Over.w]) g hg sq pr₁ hpr
     ((DerivedCategory.Plus.singleFunctor _ 0).obj (((V.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) q
-  rw [Etale.higherDirectImageOverMap, Etale.higherDirectImageTransition]
-  simp only [Functor.map_comp]
-  exact mono_comp' (mono_comp' this (@IsIso.mono_of_iso _ _ _ _ _
-    (Iso.isIso_hom ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
-      (R+((U.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).mapIso
-        ((((φ.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app _))))))
-    (@IsIso.mono_of_iso _ _ _ _ _ (Iso.isIso_hom ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
-      (R+((U.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).mapIso
-        ((DerivedCategory.Plus.singleFunctor _ 0).mapIso
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.left V.hom U.hom
-            (Over.w φ).symm).app G).symm)))))
+  exact Functor.mono_map_comp_map_map_comp_map_map_of_isIso _ _ _ _ _ this
 
 open ZeroObject in
 /-- **Vanishing of a higher direct image through a limit.** Let `k : W ⟶ S`, `G` a sheaf on `W`,

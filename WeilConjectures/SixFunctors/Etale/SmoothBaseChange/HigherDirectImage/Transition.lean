@@ -23,16 +23,22 @@ is a canonical map `Rh_* K ⟶ Rh'_* (a^* K)`, the composite of the unit of `Lh'
 the composition isomorphism `Lh'^* ≅ Lh^* ⋙ La^*` and the counit of `Lh^* ⊣ Rh_*`. In degree
 `q` it gives the transition map `R^q h_* F ⟶ R^q h'_* a^* F` of higher direct images. These
 are the maps along which higher direct images are compared when the source scheme varies, as
-in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit` of
-`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit`.
+in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.lowerStarPlusTransition`: the map `Rh_* K ⟶ Rh'_* (a^* K)`.
 - `AlgebraicGeometry.Etale.higherDirectImageTransition`: the map
   `R^q h_* F ⟶ R^q h'_* a^* F`.
-- `AlgebraicGeometry.Etale.higherDirectImageOverMap`: the transition maps for schemes over a
-  base, with coefficients pulled back from the base.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.higherDirectImage_limit`: higher direct images commute with limits
+  of schemes along affine transition morphisms.
+
+## References
+
+- Stacks Project, Lemma 59.51.7, <https://stacks.math.columbia.edu/tag/09Z1>
 -/
 
 @[expose] public section

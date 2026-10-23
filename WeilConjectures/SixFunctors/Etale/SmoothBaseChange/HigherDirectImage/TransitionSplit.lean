@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 
 /-!
 # Injectivity of the transition maps of higher direct images on geometric stalks
@@ -24,6 +24,10 @@ which lift to `Y'`, although `e` need not be surjective.
 - `AlgebraicGeometry.Etale.isSplitMono_upperStar_map_lowerStarPlusTransition`: the splitting.
 - `AlgebraicGeometry.Etale.injective_sheafFiber_map_higherDirectImageTransition`: injectivity
   on stalks.
+
+The compatibility of these transition maps with the transition maps over `X` is
+`AlgebraicGeometry.Etale.higherDirectImageTransition_comp_higherDirectImageOverMap`, in
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionOverMap`.
 -/
 
 @[expose] public section
@@ -92,20 +96,6 @@ theorem Etale.isSplitMono_upperStar_map_lowerStarPlusTransition {X Y Y' X' : Sch
   rw [← Category.assoc, ← Category.assoc, ← key]
   simp
 
-/-- The transition maps of higher direct images compose with the transition maps over `X`. -/
-lemma Etale.higherDirectImageTransition_comp_higherDirectImageOverMap {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
-    {U V : Over X} (φ : U ⟶ V) :
-    Etale.higherDirectImageTransition Λ V.hom f (V.hom ≫ f) rfl q G ≫
-        Etale.higherDirectImageOverMap Λ f G q φ =
-      Etale.higherDirectImageTransition Λ U.hom f (U.hom ≫ f) rfl q G := by
-  have h1 := Etale.homologyFunctor_map_overLowerStarTransition Λ f G q φ
-  have h2 := Etale.lowerStarPlusTransition_comp Λ V.hom φ.left U.hom (Over.w φ) f (V.hom ≫ f)
-    (U.hom ≫ f) rfl (by rw [← Category.assoc, Over.w]) rfl
-    ((DerivedCategory.Plus.singleFunctor _ 0).obj G)
-  simp only [Etale.higherDirectImageTransition, Functor.map_comp, Category.assoc]
-  rw [← h1, ← Functor.map_comp_assoc, Etale.overLowerStarTransition, h2]
-
 open Scheme in
 /-- The transition map of higher direct images along the base change `π : X' ⟶ X` of a smooth
 `e : Y' ⟶ Y` is injective on the stalks at the geometric points of `Y` which lift to `Y'`. -/
@@ -118,35 +108,38 @@ theorem Etale.injective_sheafFiber_map_higherDirectImageTransition {X Y Y' X' : 
     Function.Injective (((pointSmallEtale (t ≫ e)).ulift.{u + 1}).sheafFiber.map
       (Etale.higherDirectImageTransition Λ π f (π ≫ f) rfl q G)).hom := by
   obtain ⟨n, hn, hΛ, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
-  have hs := Etale.isSplitMono_upperStar_map_lowerStarPlusTransition Λ f e π f' sq
-    ((DerivedCategory.Plus.singleFunctor _ 0).obj G) fun j ↦
-      IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ n hn.ne' hΛ hu _
-  let τ := Etale.lowerStarPlusTransition Λ π f (π ≫ f) rfl
-    ((DerivedCategory.Plus.singleFunctor _ 0).obj G)
-  have h₀ : IsSplitMono ((D+((e)^*[ModuleCat.{u + 1} Λ]) ⋙
-      DerivedCategory.Plus.homologyFunctor _ q).map τ) := by
-    rw [Functor.comp_map]
-    infer_instance
-  have h₁ : IsSplitMono (((DerivedCategory.Plus.homologyFunctor _ q) ⋙
-      (e)^*[ModuleCat.{u + 1} Λ]).map τ) :=
-    isSplitMono_map_of_iso
-      (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).symm τ
-  have h₂ : IsSplitMono ((DerivedCategory.Plus.homologyFunctor _ q ⋙ (e)^*[ModuleCat.{u + 1} Λ] ⋙
-      ((pointSmallEtale t).ulift.{u + 1}).sheafFiber).map τ) :=
-    inferInstanceAs (IsSplitMono (((pointSmallEtale t).ulift.{u + 1}).sheafFiber.map
-      (((DerivedCategory.Plus.homologyFunctor _ q) ⋙ (e)^*[ModuleCat.{u + 1} Λ]).map τ)))
-  have h₃ : IsSplitMono ((DerivedCategory.Plus.homologyFunctor _ q ⋙
-      ((pointSmallEtale (t ≫ e)).ulift.{u + 1}).sheafFiber).map τ) :=
-    isSplitMono_map_of_iso (Functor.isoWhiskerLeft (DerivedCategory.Plus.homologyFunctor _ q)
-      (Etale.upperStarCompUliftSheafFiberIso (ModuleCat.{u + 1} Λ) e t)) τ
-  have h₄ : Mono (((pointSmallEtale (t ≫ e)).ulift.{u + 1}).sheafFiber.map
-      ((DerivedCategory.Plus.homologyFunctor _ q).map τ)) := h₃.mono
-  rw [← ModuleCat.mono_iff_injective, Etale.higherDirectImageTransition, Functor.map_comp,
-    Functor.map_comp]
-  have h₅ : Mono (((pointSmallEtale (t ≫ e)).ulift.{u + 1}).sheafFiber.mapIso
-      ((DerivedCategory.Plus.homologyFunctor _ q).mapIso (R+((π ≫ f)_*[ModuleCat.{u + 1} Λ]).mapIso
-        ((((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G)))).hom :=
-    inferInstance
-  exact @mono_comp _ _ _ _ _ _ h₄ _ h₅
+  -- Stated for an arbitrary `K`, so that the complex `G[0]` is only supplied at the end, in the
+  -- form in which it appears in the body of `Etale.higherDirectImageTransition`: the kernel then
+  -- never compares two differently elaborated copies of the derived categories involved.
+  have key (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (hK : ∀ j, IsTorsionSheafOfInvertibleOrder Y
+        ((DerivedCategory.Plus.homologyFunctor _ j).obj K)) :
+      Mono (((pointSmallEtale (t ≫ e)).ulift.{u + 1}).sheafFiber.map
+        ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (Etale.lowerStarPlusTransition Λ π f (π ≫ f) rfl K))) := by
+    have hs := Etale.isSplitMono_upperStar_map_lowerStarPlusTransition Λ f e π f' sq K hK
+    let τ := Etale.lowerStarPlusTransition Λ π f (π ≫ f) rfl K
+    have h₀ : IsSplitMono ((D+((e)^*[ModuleCat.{u + 1} Λ]) ⋙
+        DerivedCategory.Plus.homologyFunctor _ q).map τ) := by
+      rw [Functor.comp_map]
+      infer_instance
+    have h₁ : IsSplitMono (((DerivedCategory.Plus.homologyFunctor _ q) ⋙
+        (e)^*[ModuleCat.{u + 1} Λ]).map τ) :=
+      isSplitMono_map_of_iso
+        (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).symm τ
+    have h₂ : IsSplitMono ((DerivedCategory.Plus.homologyFunctor _ q ⋙
+        (e)^*[ModuleCat.{u + 1} Λ] ⋙ ((pointSmallEtale t).ulift.{u + 1}).sheafFiber).map τ) :=
+      inferInstanceAs (IsSplitMono (((pointSmallEtale t).ulift.{u + 1}).sheafFiber.map
+        (((DerivedCategory.Plus.homologyFunctor _ q) ⋙ (e)^*[ModuleCat.{u + 1} Λ]).map τ)))
+    have h₃ : IsSplitMono ((DerivedCategory.Plus.homologyFunctor _ q ⋙
+        ((pointSmallEtale (t ≫ e)).ulift.{u + 1}).sheafFiber).map τ) :=
+      isSplitMono_map_of_iso (Functor.isoWhiskerLeft (DerivedCategory.Plus.homologyFunctor _ q)
+        (Etale.upperStarCompUliftSheafFiberIso (ModuleCat.{u + 1} Λ) e t)) τ
+    exact h₃.mono
+  rw [← ModuleCat.mono_iff_injective]
+  -- The transition map is `H.map (τ ≫ s)` with `s` an isomorphism; `τ` and `s` are found by
+  -- unification with its body rather than elaborated again.
+  exact Functor.mono_map_map_comp_of_isIso _ _ _ _
+    (key _ fun j ↦ IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ n hn.ne' hΛ hu _)
 
 end AlgebraicGeometry

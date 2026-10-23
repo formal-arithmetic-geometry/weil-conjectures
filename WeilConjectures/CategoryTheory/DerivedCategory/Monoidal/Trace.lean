@@ -40,8 +40,6 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
 
 local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
-instance : IsIso (ε (Qh : _ ⥤ DerivedCategory A)) := inferInstanceAs (IsIso (𝟙 _))
-
 /-- For the braiding `DerivedCategory.braidedCategory'` of the derived tensor product, the lax
 monoidal structure of `Qh : K(A) ⥤ D(A)` is compatible with the Koszul braiding of the homotopy
 category and the braiding of `D(A)`. -/

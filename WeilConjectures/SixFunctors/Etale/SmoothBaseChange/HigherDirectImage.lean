@@ -6,8 +6,6 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 
 /-!
@@ -20,11 +18,10 @@ the composition isomorphism `Lh'^* ≅ Lh^* ⋙ La^*` and the counit of `Lh^* �
 are the maps along which higher direct images are compared when the source scheme varies, as
 in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
-The transition maps are in
-`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition`, the limit
-theorem in `...HigherDirectImage.Limit`, the cohomology presheaf and its consequences in
-`...HigherDirectImage.CohomPresheaf`, `...HigherDirectImage.FilteredColimit` and
-`...HigherDirectImage.LocalVanishing`; this module imports all of them.
+The transition maps and the limit theorem are in
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition`, the
+cohomology presheaf and its consequences in `...HigherDirectImage.CohomPresheaf` and
+`...HigherDirectImage.FilteredColimit`; this module imports all of them.
 
 ## Main definitions
 
