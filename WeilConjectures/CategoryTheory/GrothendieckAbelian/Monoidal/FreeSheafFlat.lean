@@ -73,6 +73,18 @@ Proof:
 lemma free_sheaf_flat (P : A) (hP : PreservesFiniteLimits (tensorLeft P))
     (X : C) :
     PreservesFiniteLimits (tensorLeft (Sheaf.freeYoneda J X P)) := by
-  sorry
+  -- Retain the additivity hypothesis in the existing theorem interface.
+  have _hadd : MonoidalPreadditive A := inferInstance
+  apply (ObjectProperty.flat_iff_preservesFiniteLimits _).1
+  change ObjectProperty.flat ((presheafToSheaf J A).obj (Presheaf.freeYoneda X P))
+  apply flat_presheafToSheaf_obj A J
+  intro V
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} A
+    (ULift.{u + 1} (V.unop ⟶ X))
+  exact ObjectProperty.prop_of_iso _
+    (Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} (V.unop ⟶ X) ↦ P) Equiv.ulift
+      fun _ ↦ Iso.refl P)
+    (ObjectProperty.flat_coproduct _ fun _ ↦
+      (ObjectProperty.flat_iff_preservesFiniteLimits P).2 hP)
 
 end CategoryTheory.GrothendieckTopology
