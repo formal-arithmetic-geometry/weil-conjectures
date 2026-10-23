@@ -19,7 +19,7 @@ public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
-public import WeilConjectures.WeilSheaf.CurveTopCohomology
+public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
@@ -311,7 +311,7 @@ theorem subsingleton_compactlySupportedCohomology_directImage (_hF : F.IsLisse) 
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier := by
   rcases hr with hr | hr
   · exact WeilSheaf.subsingleton_globalSections_of_isZero
-      (WeilComplex.isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg _ _ hr)
+      (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg _ hr)
   · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine _ (Or.inr hr)
 
 /-- In the situation of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`

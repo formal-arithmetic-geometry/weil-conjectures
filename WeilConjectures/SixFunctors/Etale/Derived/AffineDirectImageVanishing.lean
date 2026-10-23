@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 
 /-!
@@ -40,8 +41,8 @@ field.** Let `K` be separably closed, `h : T ⟶ Y` affine with `T` of finite ty
 `M` of `Λ`-modules on `T`: `UDV(h, Λ; e)` holds. For an affine `W` étale over `Y`, the scheme
 `W ×_Y T` is affine, of finite type over `K` and étale over `T`, so its cohomology vanishes
 above `e` by the affine bound `thm-sc-affine-torsion-cd`
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_lt_of_isAffine_of_isSepClosed`); and `R^q h_* M`
-is the sheafification of these groups. -/
+(`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`, with `c = 0`); and
+`R^q h_* M` is the sheafification of these groups. -/
 theorem Etale.hasUniformDirectImageVanishingLE_of_isAffineHom [Finite Λ] {K : Type u} [Field K]
     [IsSepClosed K] {T Y : Scheme.{u}} (h : T ⟶ Y) [IsAffineHom h] (aT : T ⟶ Spec (.of K))
     [LocallyOfFiniteType aT] (e : ℕ) (hT : topologicalKrullDim T ≤ (e : WithBot ℕ∞)) :
@@ -61,7 +62,8 @@ theorem Etale.hasUniformDirectImageVanishingLE_of_isAffineHom [Finite Λ] {K : T
     have : IsAffine ((𝟭 Scheme.{u}).obj V.left) := by
       change IsAffine (pullback W.hom h)
       exact isAffine_of_isAffineHom (pullback.fst W.hom h)
-    refine Scheme.subsingleton_H_of_lt_of_isAffine_of_isSepClosed e (V.hom ≫ aT)
+    refine Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine
+      (Scheme.hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed K) (V.hom ≫ aT)
       ((V.hom.topologicalKrullDim_le_of_etale).trans hT) _ ?_ (n + 1) (by omega)
     refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
     have := Fintype.ofFinite Λ
