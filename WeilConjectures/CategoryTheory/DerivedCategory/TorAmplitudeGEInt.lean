@@ -19,10 +19,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeGE
 
 If every object of `C` has a flat resolution of length one, every object `K` of `D(C)` vanishing
 in degrees `< b` has Tor amplitude in `[b - 1, ∞)`
-(`DerivedCategory.torAmplitudeGE_of_isGE_of_flat_resolution`). This applies to abelian groups,
+(`DerivedCategory.torAmplitudeGE_of_isGE_of_flat_resolution`). This applies to modules over a
+principal ideal domain
+(`DerivedCategory.torAmplitudeGE_of_isGE_of_isPrincipalIdealRing`), for instance abelian groups,
 that is modules over `ULift ℤ` (`DerivedCategory.torAmplitudeGE_of_isGE_int`): a module is a
 quotient of a free module by a submodule, which is torsion free, hence flat over the principal
-ideal domain `ℤ`.
+ideal domain.
 -/
 
 @[expose] public section
@@ -90,34 +92,16 @@ lemma torAmplitudeGE_of_isGE_of_isPrincipalIdealRing {R : Type (u + 1)} [CommRin
   exact ⟨S, hS, (ModuleCat.flat_iff_flat _).2 (inferInstanceAs (Module.Flat R (LinearMap.ker π))),
     (ModuleCat.flat_iff_flat _).2 (inferInstanceAs (Module.Flat R (F →₀ R))), ⟨Iso.refl _⟩⟩
 
-attribute [local instance] IsPrincipalIdealRing.isDedekindDomain in
 /-- Every bounded below complex of abelian groups (modules over `ULift ℤ`) vanishing in degrees
-`< b` has Tor amplitude in `[b - 1, ∞)`: every abelian group is the quotient of a free abelian
-group by a torsion free, hence flat, subgroup. -/
+`< b` has Tor amplitude in `[b - 1, ∞)`. -/
 lemma torAmplitudeGE_of_isGE_int
     [HasDerivedCategory.{w} (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))]
     (K : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) (b : ℤ) [K.IsGE b] :
-    torAmplitudeGE (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (b - 1) K := by
-  let R := ULift.{u + 1} ℤ
-  have : IsDomain R := MulEquiv.isDomain ℤ ULift.ringEquiv.toMulEquiv
-  have : IsPrincipalIdealRing R :=
+    torAmplitudeGE (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (b - 1) K :=
+  have : IsDomain (ULift.{u + 1} ℤ) := MulEquiv.isDomain ℤ ULift.ringEquiv.toMulEquiv
+  have : IsPrincipalIdealRing (ULift.{u + 1} ℤ) :=
     IsPrincipalIdealRing.of_surjective ULift.ringEquiv.symm.toRingHom
       ULift.ringEquiv.symm.surjective
-  refine torAmplitudeGE_of_isGE_of_flat_resolution (fun F ↦ ?_) K b
-  let π : (F →₀ R) →ₗ[R] F := Finsupp.linearCombination R id
-  have hπ : Function.Surjective π := fun x ↦ ⟨Finsupp.single x 1, by simp [π]⟩
-  let S : ShortComplex (ModuleCat.{u + 1} R) :=
-    ShortComplex.mk (ModuleCat.ofHom (LinearMap.ker π).subtype) (ModuleCat.ofHom π) (by
-      ext x
-      simp)
-  have hS : S.ShortExact :=
-    { exact := (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).2
-        (LinearMap.exact_subtype_ker_map π)
-      mono_f := (ModuleCat.mono_iff_injective _).2 Subtype.val_injective
-      epi_g := (ModuleCat.epi_iff_surjective _).2 hπ }
-  have : Module.IsTorsionFree R (LinearMap.ker π) :=
-    Function.Injective.moduleIsTorsionFree _ Subtype.val_injective (fun _ _ ↦ rfl)
-  exact ⟨S, hS, (ModuleCat.flat_iff_flat _).2 (inferInstanceAs (Module.Flat R (LinearMap.ker π))),
-    (ModuleCat.flat_iff_flat _).2 (inferInstanceAs (Module.Flat R (F →₀ R))), ⟨Iso.refl _⟩⟩
+  torAmplitudeGE_of_isGE_of_isPrincipalIdealRing K b
 
 end DerivedCategory

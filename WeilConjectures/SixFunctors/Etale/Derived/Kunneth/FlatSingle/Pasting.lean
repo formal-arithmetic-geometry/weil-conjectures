@@ -95,7 +95,6 @@ lemma tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e 
     ← reassoc_of% (leftDerivedUpperStarTensorComparison_leftUnitor_hom A h _)]
   rfl
 
-omit [HasSmallSiteSheafify A] in
 /-- The base change map at the unit is an isomorphism if the derived base change map is. -/
 lemma isIso_tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ T)
     (f' : X' ⟶ S') (g : T ⟶ S') (w : h ≫ f' = e ≫ g)
@@ -112,7 +111,6 @@ lemma isIso_tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X
 
 set_option maxHeartbeats 1000000 in
 -- the pasting computation in the derived category is expensive to elaborate
-omit [HasSmallSiteSheafify A] in
 /-- **Pasting of base change maps**: for two commutative squares pasted horizontally,
 
 ```
