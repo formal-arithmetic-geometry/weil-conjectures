@@ -15,8 +15,9 @@ The derived pushforward `Rf_*` along a morphism of separated schemes of finite t
 `k` of characteristic `p ≠ ℓ` carries bounded constructible complexes to bounded constructible
 complexes only for suitable coefficient rings: for the constant discrete ring `𝔽_p` and the
 affine line over an algebraically closed field of characteristic `p`, the Artin–Schreier sequence
-gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. The class
-`IsFinitenessCoefficient ℓ Λ` singles out the coefficient rings for which it holds (Deligne's
+gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. Already the bounded constructible
+complexes form a triangulated subcategory only for coherent coefficient rings. The class
+`IsFinitenessCoefficient ℓ Λ` singles out the coefficient rings for which these hold (Deligne's
 finiteness theorems, SGA 4½ [Th. finitude]; Bhatt–Scholze, Section 6.8):
 
 * the `ℓ`-adic rings of the blueprint, `E̲` for a finite extension `E` of `ℚ_ℓ`
