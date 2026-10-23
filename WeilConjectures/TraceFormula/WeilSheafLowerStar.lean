@@ -271,6 +271,11 @@ noncomputable def weilSheafLowerStarComparison :
         (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   asIso (lowerStarBaseChange _ (commSq_left_of_comp_eq eX eY hf))
 
+lemma weilSheafLowerStarComparison_hom :
+    (weilSheafLowerStarComparison ℓ eX eY hf).hom =
+      lowerStarBaseChange _ (commSq_left_of_comp_eq eX eY hf) :=
+  rfl
+
 /-- The pushforward `f_*` of Weil sheaves along `f : X ⟶ Y` with `e_X ≫ f = f ≫ e_Y`: a Weil
 sheaf `(F, φ_F)` for `e_X` is sent to `f_* F` with the structure isomorphism
 `e_Y^* f_* F ≅ f_* e_X^* F ≅ f_* F` given by `weilSheafLowerStarComparison` and `f_* φ_F`. -/

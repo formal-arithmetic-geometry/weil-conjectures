@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 /-!
 
@@ -51,7 +52,12 @@ abbrev FibrePoints : Type u :=
 /-- A finite morphism has finitely many geometric points over a geometric point. -/
 theorem finite_fibrePoints [IsFinite f] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (eP : P ≅ Spec (.of Ω)) : Finite (FibrePoints f y) :=
-  sorry
+  have : Finite (f.GeometricFiber (eP.inv ≫ y)) := inferInstance
+  Finite.of_injective
+    (fun x : FibrePoints f y ↦ (⟨eP.inv ≫ x.1, by rw [Category.assoc, x.2]⟩ :
+      f.GeometricFiber (eP.inv ≫ y)))
+    fun a b h ↦ Subtype.ext (by
+      simpa using congrArg (fun z : f.GeometricFiber (eP.inv ≫ y) ↦ eP.hom ≫ z.1) h)
 
 variable {f y}
 

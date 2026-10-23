@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.FiniteEtaleStalk
 public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
+public import WeilConjectures.TraceFormula.StalkLowerStarRestriction
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilTrace
 
@@ -164,6 +165,11 @@ lemma WeilSheaf.stalkFunctor_obj_str_hom {Ω : Type u} [Field Ω] [IsSepClosed �
     weilStalkComparison_eq]
   rfl
 
+/-- `weilPointComparison` is `pointComparison` for the underlying morphism of `e`. -/
+lemma weilPointComparison_eq_pointComparison {x x' : P ⟶ Z.left} (h : x ≫ e.hom.left = σ ≫ x') :
+    weilPointComparison ℓ τ e h = pointComparison _ τ e.hom.left h :=
+  rfl
+
 end StalkFrobenius
 
 /-- The Frobenius transport `x̄'^* F ⟶ x̄^* F` of a Weil sheaf `F` for `e_X` between points with
@@ -193,8 +199,11 @@ theorem stalkFrobenius_lowerStar_comp_stalkLowerStarProj {y : P ⟶ Y.left}
     stalkFrobenius ℓ τ eY hy ((weilSheafLowerStarComparison ℓ eX eY hf).hom.app F.carrier ≫
         (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.map F.str.hom) ≫
         stalkLowerStarProj _ hx F.carrier =
-      stalkLowerStarProj _ hx' F.carrier ≫ weilStalkTransport ℓ eX τ h F :=
-  sorry
+      stalkLowerStarProj _ hx' F.carrier ≫ weilStalkTransport ℓ eX τ h F := by
+  rw [stalkFrobenius, weilStalkTransport, weilPointComparison_eq_pointComparison,
+    weilPointComparison_eq_pointComparison, weilSheafLowerStarComparison_hom]
+  exact pointComparison_lowerStarBaseChange_stalkLowerStarProj _ (commSq_left_of_comp_eq eX eY hf)
+    τ hy hx hx' h F.carrier F.str.hom
 
 /-- **The Frobenius trace on a stalk of a finite étale pushforward of Weil sheaves**: for a point
 `ȳ` with `ȳ ≫ e_Y = σ ≫ ȳ`, `σ` an automorphism of `P ≅ Spec Ω`, the trace of the Frobenius of the
