@@ -62,7 +62,8 @@ noncomputable def proEtTwistedModulePresheaf : Y.ProEtᵒᵖ ⥤ ModuleCat.{u + 
     ext σ : 2
     refine Subtype.ext ?_
     change σ.1 ∘ (pullbackMapRight f (g'.unop.left ≫ g.unop.left) (by
-        rw [Category.assoc, MorphismProperty.Over.w g.unop, MorphismProperty.Over.w g'.unop])).base =
+        rw [Category.assoc, MorphismProperty.Over.w g.unop,
+          MorphismProperty.Over.w g'.unop])).base =
       (σ.1 ∘ (pullbackMapRight f g.unop.left (MorphismProperty.Over.w g.unop)).base) ∘
         (pullbackMapRight f g'.unop.left (MorphismProperty.Over.w g'.unop)).base
     rw [pullbackMapRight_comp g.unop.left (MorphismProperty.Over.w g.unop) g'.unop.left
@@ -209,7 +210,9 @@ lemma bijective_comparisonUpperStarTwistedModuleSheafHom_app_of_isLimit [QuasiCo
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).obj
           (twistedModuleSheaf f c)).obj.map (c₀.π.app j').op a' := by
       have hw' : c₀.π.app j' ≫ (toProEt Y).map (K.map g) = c₀.π.app j := c₀.w g
-      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hw']
+      simp only [a']
+      rw [← hw', op_comp, Functor.map_comp]
+      rfl
     refine hw.trans ?_
     rw [ha'0, map_zero]
   · obtain ⟨j, σ, hσ, hστ⟩ := IsTwistedSection.exists_of_isLimit hc hc₀
@@ -233,7 +236,8 @@ lemma bijective_comparisonUpperStarTwistedModuleSheafHom_app_affineProEt [QuasiC
   have hAff (j : J) : IsAffine (D.obj j) :=
     MorphismProperty.ofObjectProperty_top_right_iff.mp (hts j).1.2
   have ht (i j : J) (g : i ⟶ j) : D.map g ≫ t.app j = t.app i := by
-    simpa using t.naturality g
+    rw [t.naturality g]
+    simp
   let K : J ⥤ Y.Etale :=
     { obj j := MorphismProperty.Over.mk ⊤ (t.app j) (hEt j)
       map g := MorphismProperty.Over.homMk (D.map g) (ht _ _ g)

@@ -15,7 +15,8 @@ Let `f : V ⟶ Y` be a morphism, `c` a descent cocycle on the constant sheaf `S_
 `c_T = c ∘ (V ×_Y T ×_T V ×_Y T ⟶ V ×_Y V)` (`AlgebraicGeometry.pullbackDescentCocycle`), again a
 descent cocycle (`AlgebraicGeometry.IsDescentCocycle.pullbackCover`). The twisted sections of `c`
 over `π` are the twisted sections of `c_T` over `𝟙 T`
-(`AlgebraicGeometry.IsTwistedSection.pullbackCover`, `AlgebraicGeometry.IsTwistedSection.ofPullbackCover`).
+(`AlgebraicGeometry.IsTwistedSection.pullbackCover`,
+`AlgebraicGeometry.IsTwistedSection.ofPullbackCover`).
 -/
 
 @[expose] public section
@@ -48,8 +49,8 @@ lemma IsDescentCocycle.pullbackCover (hc : IsDescentCocycle f c) (π : T ⟶ Y) 
     rw [pullback_diagonal_comp_twistedPairMap, Scheme.Hom.comp_apply]
     exact hc.diagonal _
   · let T₃ : tripleProduct (pullback.snd f π) ⟶ tripleProduct f :=
-      pullback.map _ _ _ _ (twistedPairMap f π) (twistedPairMap f π) (pullback.fst f π) (by simp [twistedPairMap, pullback.condition])
-        (by simp [twistedPairMap, pullback.condition])
+      pullback.map _ _ _ _ (twistedPairMap f π) (twistedPairMap f π) (pullback.fst f π)
+        (by simp [twistedPairMap]) (by simp [twistedPairMap])
     have e₁ : T₃ ≫ tripleProj₁₃ f = tripleProj₁₃ (pullback.snd f π) ≫ twistedPairMap f π := by
       apply pullback.hom_ext <;> simp [T₃, twistedPairMap]
     have e₂ : T₃ ≫ pullback.fst _ _ = pullback.fst _ _ ≫ twistedPairMap f π := by simp [T₃]
@@ -70,8 +71,9 @@ lemma IsTwistedSection.pullbackCover {π : T ⟶ Y} {σ : ↥(pullback f π) →
     IsTwistedSection (pullback.snd f π) (pullbackDescentCocycle f c π) (𝟙 T)
       (σ ∘ (pullback.fst (pullback.snd f π) (𝟙 T)).base) := by
   set p := pullback.fst (pullback.snd f π) (𝟙 T)
-  let P₂ : pullback (pullback.snd (pullback.snd f π) (𝟙 T)) (pullback.snd (pullback.snd f π) (𝟙 T)) ⟶
-      pullback (pullback.snd f π) (pullback.snd f π) :=
+  let P₂ : pullback (pullback.snd (pullback.snd f π) (𝟙 T))
+      (pullback.snd (pullback.snd f π) (𝟙 T)) ⟶
+        pullback (pullback.snd f π) (pullback.snd f π) :=
     pullback.map _ _ _ _ p p (𝟙 T) (by simp [p, pullback.condition])
       (by simp [p, pullback.condition])
   have e₁ : P₂ ≫ pullback.fst _ _ = pullback.fst _ _ ≫ p := by simp [P₂]

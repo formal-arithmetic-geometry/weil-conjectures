@@ -165,4 +165,57 @@ lemma frameEval_comp {W' : Scheme.{u}} {π' : W' ⟶ Y} (g : W' ⟶ W) (hg : g �
   simp only [frameEval, Function.comp_apply]
   rw [e]
 
+/-- `frameExt` is natural: extending `τ ∘ g` along the factorization `g ≫ a` is extending `τ`
+along `a` and restricting along `g : W' ⟶ W`. -/
+lemma frameExt_comp {W' : Scheme.{u}} {π' : W' ⟶ Y} (g : W' ⟶ W) (hg : g ≫ π = π')
+    (τ : W → S) :
+    frameExt f (g ≫ a) (by rw [Category.assoc, ha, hg]) c (τ ∘ g.base) =
+      frameExt f a ha c τ ∘ (pullbackMapRight f g hg).base := by
+  have h₁ : frameTransport f (g ≫ a) (by rw [Category.assoc, ha, hg]) =
+      pullbackMapRight f g hg ≫ frameTransport f a ha := by
+    apply pullback.hom_ext
+    · rw [pullback.lift_fst, Category.assoc, pullback.lift_fst, pullbackMapRight_fst]
+    · rw [pullback.lift_snd, Category.assoc, pullback.lift_snd, pullbackMapRight_snd_assoc]
+  have h₂ : pullback.snd f π' ≫ g = pullbackMapRight f g hg ≫ pullback.snd f π :=
+    (pullbackMapRight_snd g hg).symm
+  funext x
+  have e₁ := congrArg (fun φ ↦ φ.base x) h₁
+  have e₂ := congrArg (fun φ ↦ φ.base x) h₂
+  simp only [Scheme.Hom.comp_apply] at e₁ e₂
+  simp only [frameExt, Function.comp_apply]
+  rw [e₁, e₂]
+
+/-- `frameEval_comp`, for any factorization `a'` of `π'` equal to `g ≫ a`. -/
+lemma frameEval_comp_eq {W' : Scheme.{u}} {π' : W' ⟶ Y} (g : W' ⟶ W) (hg : g ≫ π = π')
+    {a' : W' ⟶ V} (ha' : a' ≫ f = π') (h : g ≫ a = a') (σ : ↥(pullback f π) → S) :
+    frameEval f a' ha' (σ ∘ (pullbackMapRight f g hg).base) = frameEval f a ha σ ∘ g.base := by
+  subst h
+  exact frameEval_comp a ha g hg σ
+
+/-- `frameExt_comp`, for any factorization `a'` of `π'` equal to `g ≫ a`. -/
+lemma frameExt_comp_eq {W' : Scheme.{u}} {π' : W' ⟶ Y} (g : W' ⟶ W) (hg : g ≫ π = π')
+    {a' : W' ⟶ V} (ha' : a' ≫ f = π') (h : g ≫ a = a') (τ : W → S) :
+    frameExt f a' ha' c (τ ∘ g.base) = frameExt f a ha c τ ∘ (pullbackMapRight f g hg).base := by
+  subst h
+  exact frameExt_comp a ha g hg τ
+
+section Linear
+
+variable {Λ : Type*} [CommRing Λ] {M : Type*} [AddCommGroup M] [Module Λ M]
+  (cl : ↥(pullback f f) → M ≃ₗ[Λ] M)
+
+lemma frameExt_add (τ₁ τ₂ : W → M) :
+    frameExt f a ha (fun z ↦ cl z) (τ₁ + τ₂) =
+      frameExt f a ha (fun z ↦ cl z) τ₁ + frameExt f a ha (fun z ↦ cl z) τ₂ :=
+  funext fun _ ↦ map_add (cl _) _ _
+
+lemma frameExt_smul (r : Λ) (τ : W → M) :
+    frameExt f a ha (fun z ↦ cl z) (r • τ) = r • frameExt f a ha (fun z ↦ cl z) τ :=
+  funext fun _ ↦ map_smul (cl _) _ _
+
+lemma frameExt_zero : frameExt f a ha (fun z ↦ cl z) 0 = 0 :=
+  funext fun _ ↦ map_zero (cl _)
+
+end Linear
+
 end AlgebraicGeometry

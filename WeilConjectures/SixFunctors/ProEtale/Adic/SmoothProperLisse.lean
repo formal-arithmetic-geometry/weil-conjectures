@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedProper
 Let `K` be an algebraically closed field (or any field), `Y` locally of finite type over `K`,
 `f : X ⟶ Y` smooth and proper and `F` a lisse `ℓ`-adic sheaf on `X`, `ℓ` invertible in `K`.
 Then every `Hⁿ(Rf_* F[0])` is lisse
-(`AlgebraicGeometry.ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`,
+(`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`,
 Step 1 of blueprint `prop-zl-smooth-proper-relative-purity`).
 
 The proof follows the blueprint. Being lisse is local on `Y`, so `Y` may be assumed affine,
@@ -29,7 +29,7 @@ lattices of `Eⁿ`. The geometric fibres of `f` are regular, so `F` has a lattic
 change in degree zero every point of `Y` has an étale neighbourhood `U` such that `F` has a
 lattice on `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_isProper`). There the
 lattice case applies
-(`AlgebraicGeometry.ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection`),
+(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection`),
 and étale base change identifies the result with the restriction of `Hⁿ(Rf_* F[0])` to `U`.
 -/
 
@@ -148,7 +148,8 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isP
     obtain ⟨W, hW, hyW, -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (Set.mem_univ y)
     have : IsAffine W.toScheme := hW
     refine ⟨W.toScheme, W.ι, inferInstance, ⟨⟨y, hyW⟩, rfl⟩, ?_⟩
-    refine (isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper_of_isAffine
+    refine
+      (isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper_of_isAffine
       hK (W.ι ≫ s) (pullback.snd f W.ι) (hF.upperStar (pullback.fst f W.ι)) n).of_iso ?_
     exact (DerivedCategory.homologyFunctor _ n).mapIso
       (mapDerivedCategoryUpperStarRightDerivedFunctorLowerStarIsoOfEtale f W.ι F).symm ≪≫

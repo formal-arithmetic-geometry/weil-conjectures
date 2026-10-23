@@ -183,7 +183,7 @@ lemma isCompact_finsetSup (T : Finset (CompactOpenLattice E n)) :
     IsCompact ((T.sup (·.1) : AddSubgroup (Fin n → E)) : Set (Fin n → E)) := by
   classical
   induction T using Finset.induction_on with
-  | empty => simpa using isCompact_singleton
+  | empty => simp
   | insert L T _ ih =>
     rw [Finset.sup_insert, AddSubgroup.normal_add]
     exact L.2.1.add ih
@@ -206,7 +206,7 @@ lemma smul_sum (g : GL (Fin n) E) (T : Finset (CompactOpenLattice E n)) (hT : T.
   ext v
   change v ∈ (T.sup (·.1)).map _ ↔ v ∈ (T.image (g • ·)).sup (·.1)
   rw [Finset.sup_image]
-  have := Finset.comp_sup_eq_sup_comp (s := T) (f := (·.1))
+  have := Finset.apply_sup_eq_sup_comp (s := T) (f := (·.1))
     (AddSubgroup.map (mulVecHom (g : Matrix (Fin n) (Fin n) E)))
     (fun _ _ ↦ AddSubgroup.map_sup _ _ _) (AddSubgroup.map_bot _)
   rw [show (T.sup (·.1)).map _ = _ from this]
@@ -220,11 +220,13 @@ variable (E n) in
 /-- The standard lattice `𝒪_Eⁿ = {v | ∀ i, ‖v i‖ ≤ 1}`. -/
 noncomputable def standard : CompactOpenLattice E n :=
   ⟨{ carrier := {v | ∀ i, ‖v i‖ ≤ 1}
-     add_mem' := fun ha hb i ↦ (IsUltrametricDist.norm_add_le_max _ _).trans (max_le (ha i) (hb i))
+     add_mem' := fun ha hb i ↦
+       (IsUltrametricDist.norm_add_le_max _ _).trans (max_le (ha i) (hb i))
      zero_mem' := fun i ↦ by simp
      neg_mem' := fun ha i ↦ by simpa using ha i }, by
     have : ProperSpace E := FiniteDimensional.proper ℚ_[l] E
-    have : ({v | ∀ i, ‖v i‖ ≤ 1} : Set (Fin n → E)) = Set.univ.pi fun _ ↦ Metric.closedBall 0 1 := by
+    have : ({v | ∀ i, ‖v i‖ ≤ 1} : Set (Fin n → E)) =
+        Set.univ.pi fun _ ↦ Metric.closedBall 0 1 := by
       ext v
       simp
     refine ⟨?_, ?_⟩

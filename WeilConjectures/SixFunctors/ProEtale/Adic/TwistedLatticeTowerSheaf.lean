@@ -33,30 +33,35 @@ section LevelMaps
 variable (l) in
 /-- `towerReduce x * y` is the action of `x` through `ULift ℤ_ℓ`. -/
 lemma towerReduce_mul (k : ℕ) (x : ℤ_[l]) (y : ULift.{u + 1} ℤ_[l] ⧸ towerIdeal.{u} l k) :
-    towerReduce.{u} l k x * y = ULift.up x • y := by
-  rw [Algebra.smul_def]
+    towerReduce.{u} l k x * y = (ULift.up x : ULift.{u + 1} ℤ_[l]) • y := by
+  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective y
   rfl
 
 /-- The action of a reduced matrix through `ULift ℤ_ℓ`. -/
 lemma levelCocycle_apply_eq_sum (γ : ↥(pullback f f) → GL (Fin N) ℤ_[l]) (k : ℕ)
     (z : ↥(pullback f f)) (v : LevelModule l N k) (i : Fin N) :
     levelCocycle γ k z v i =
-      ∑ j, ULift.up ((γ z : Matrix (Fin N) (Fin N) ℤ_[l]) i j) • v j := by
+      ∑ j, (ULift.up ((γ z : Matrix (Fin N) (Fin N) ℤ_[l]) i j) : ULift.{u + 1} ℤ_[l]) • v j := by
   rw [levelCocycle_apply]
   simp only [Matrix.mulVec, dotProduct, Matrix.map_apply, towerReduce_mul]
+
+/-- The reduction maps are `ULift ℤ_ℓ`-linear. -/
+lemma towerFactor_smul {k k' : ℕ} (h : k' ≤ k) (a : ULift.{u + 1} ℤ_[l])
+    (x : ULift.{u + 1} ℤ_[l] ⧸ towerIdeal.{u} l k) :
+    towerFactor.{u} l h (a • x) = a • towerFactor.{u} l h x := by
+  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rfl
 
 variable (l N) in
 /-- The reduction `(ℤ_ℓ ⧸ ℓᵏ)ᴺ → (ℤ_ℓ ⧸ ℓᵏ')ᴺ` for `k' ≤ k`. -/
 noncomputable def levelReduce {k k' : ℕ} (h : k' ≤ k) :
     LevelModule l N k →ₗ[ULift.{u + 1} ℤ_[l]] LevelModule l N k' where
-  toFun v i := towerFactor l h (v i)
+  toFun v i := towerFactor.{u} l h (v i)
   map_add' _ _ := funext fun _ ↦ map_add _ _ _
-  map_smul' a v := funext fun i ↦ by
-    simp only [Pi.smul_apply, RingHom.id_apply, Algebra.smul_def, map_mul]
-    rfl
+  map_smul' a v := funext fun i ↦ towerFactor_smul h a (v i)
 
 lemma levelReduce_apply {k k' : ℕ} (h : k' ≤ k) (v : LevelModule l N k) (i : Fin N) :
-    levelReduce l N h v i = towerFactor l h (v i) :=
+    levelReduce l N h v i = towerFactor.{u} l h (v i) :=
   rfl
 
 lemma levelReduce_levelCocycleInt (γ : ↥(pullback f f) → GL (Fin N) ℤ_[l]) {k k' : ℕ}
@@ -66,22 +71,19 @@ lemma levelReduce_levelCocycleInt (γ : ↥(pullback f f) → GL (Fin N) ℤ_[l]
   funext i
   rw [levelCocycleInt_apply, levelCocycleInt_apply, levelReduce_apply,
     levelCocycle_apply_eq_sum, levelCocycle_apply_eq_sum, map_sum]
-  refine Finset.sum_congr rfl fun j _ ↦ ?_
-  rw [Algebra.smul_def, Algebra.smul_def, map_mul]
-  rfl
+  exact Finset.sum_congr rfl fun j _ ↦ towerFactor_smul h _ _
 
 lemma levelReduce_id {k : ℕ} (v : LevelModule l N k) : levelReduce l N (le_refl k) v = v := by
   funext i
   obtain ⟨x, hx⟩ := Ideal.Quotient.mk_surjective (v i)
-  rw [levelReduce_apply, ← hx]
-  rfl
+  rw [levelReduce_apply, ← hx, towerFactor, Ideal.Quotient.factor_mk]
 
 lemma levelReduce_comp {k k' k'' : ℕ} (h : k' ≤ k) (h' : k'' ≤ k') (v : LevelModule l N k) :
     levelReduce l N h' (levelReduce l N h v) = levelReduce l N (h'.trans h) v := by
   funext i
   obtain ⟨x, hx⟩ := Ideal.Quotient.mk_surjective (v i)
-  rw [levelReduce_apply, levelReduce_apply, levelReduce_apply, ← hx]
-  rfl
+  rw [levelReduce_apply, levelReduce_apply, levelReduce_apply, ← hx, towerFactor, towerFactor,
+    towerFactor, Ideal.Quotient.factor_mk, Ideal.Quotient.factor_mk, Ideal.Quotient.factor_mk]
 
 variable (l) in
 /-- The multiplication by `ℓᵐ`, `ℤ_ℓ ⧸ ℓⁿ → ℤ_ℓ ⧸ ℓⁿ⁺ᵐ`. -/
@@ -99,7 +101,7 @@ noncomputable def towerMul (n m : ℕ) :
     ring)
 
 lemma towerMul_mk (n m : ℕ) (a : ULift.{u + 1} ℤ_[l]) :
-    towerMul l n m (Ideal.Quotient.mk _ a) =
+    towerMul.{u} l n m (Ideal.Quotient.mk _ a) =
       Ideal.Quotient.mk _ ((l : ULift.{u + 1} ℤ_[l]) ^ m * a) :=
   rfl
 
@@ -107,10 +109,10 @@ variable (l N) in
 /-- The multiplication by `ℓᵐ`, `(ℤ_ℓ ⧸ ℓⁿ)ᴺ → (ℤ_ℓ ⧸ ℓⁿ⁺ᵐ)ᴺ`. -/
 noncomputable def levelMul (n m : ℕ) :
     LevelModule l N n →ₗ[ULift.{u + 1} ℤ_[l]] LevelModule l N (n + m) :=
-  LinearMap.pi fun i ↦ (towerMul l n m).comp (LinearMap.proj i)
+  LinearMap.pi fun i ↦ (towerMul.{u} l n m).comp (LinearMap.proj i)
 
 lemma levelMul_apply (n m : ℕ) (v : LevelModule l N n) (i : Fin N) :
-    levelMul l N n m v i = towerMul l n m (v i) :=
+    levelMul l N n m v i = towerMul.{u} l n m (v i) :=
   rfl
 
 lemma levelMul_levelCocycleInt (γ : ↥(pullback f f) → GL (Fin N) ℤ_[l]) (n m : ℕ)
@@ -161,9 +163,9 @@ noncomputable def comparisonUpperStarIntegralCocycleTowerIso [QuasiCompact f] [Q
     integralCocycleTower γ ⋙ ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift ℤ_[l])) Y ≅
       proEtIntegralCocycleTower γ :=
   NatIso.ofComponents (fun k ↦
-    have := isIso_comparisonUpperStarTwistedModuleSheafHom f (levelCocycleInt γ k.unop)
-      (hγ.isDescentCocycle_int k.unop)
-    asIso (comparisonUpperStarTwistedModuleSheafHom f (levelCocycleInt γ k.unop)))
+    @asIso _ _ _ _ (comparisonUpperStarTwistedModuleSheafHom f (levelCocycleInt γ k.unop))
+      (isIso_comparisonUpperStarTwistedModuleSheafHom f (levelCocycleInt γ k.unop)
+        (hγ.isDescentCocycle_int k.unop)))
     fun h ↦ comparisonUpperStar_map_twistedModuleSheafMap_comp _ _
 
 end Tower
