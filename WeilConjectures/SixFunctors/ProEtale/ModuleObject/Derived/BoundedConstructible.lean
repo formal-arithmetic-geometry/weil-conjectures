@@ -280,8 +280,7 @@ lemma isRightAdjoint_boundedConstructibleLowerStar :
 /-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` on bounded constructible complexes:
 the conjugate of `boundedConstructibleUpperStarComp` under the adjunctions
 `L(f ≫ g)^* ⊣ R(f ≫ g)_*` and `Lg^* ⋙ Lf^* ⊣ Rf_* ⋙ Rg_*`. -/
-noncomputable def boundedConstructibleLowerStarComp
-    {Z : Over (Spec (.of k))}
+noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
     boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleLowerStar Λ hΛ g ≅
       boundedConstructibleLowerStar Λ hΛ (f ≫ g) :=
