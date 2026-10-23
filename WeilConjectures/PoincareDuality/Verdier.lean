@@ -102,14 +102,14 @@ noncomputable def verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingO
       (ihom ((boundedConstructibleLowerShriek _ ℓ f).obj K)).obj L :=
   Verdier.exchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleExceptionalProjection _ ℓ f) K L
+    (boundedConstructibleExceptionalProjection ℓ f) K L
 
 /-- **Verdier duality**: the exchange morphism `Φ_{f,K,L}` is an isomorphism, by the derived
 projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierExchange ℓ f K L) := by
-  have := isIso_boundedConstructibleExceptionalProjection_app_app _ ℓ f K
+  have := isIso_boundedConstructibleExceptionalProjection_app_app ℓ f K
   exact Verdier.isIso_exchange_of_isIso _ _ _ K L
 
 end Exchange
@@ -187,7 +187,7 @@ noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAl
       verdierDual ℓ ((boundedConstructibleLowerShriek _ ℓ f).obj K) :=
   Verdier.absoluteExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleExceptionalProjection _ ℓ f)
+    (boundedConstructibleExceptionalProjection ℓ f)
     (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
 
 /-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`: the double-dual
@@ -198,7 +198,7 @@ noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClR
       verdierDual ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
   Verdier.dualExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleExceptionalProjection _ ℓ f)
+    (boundedConstructibleExceptionalProjection ℓ f)
     (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
 
 end Absolute

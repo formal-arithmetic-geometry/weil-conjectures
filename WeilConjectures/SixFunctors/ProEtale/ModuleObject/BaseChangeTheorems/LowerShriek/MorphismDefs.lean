@@ -220,8 +220,7 @@ the inverse of the extension-by-zero exchange of its open-immersion square,
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
     (c : Compactification f.left) (sq : IsPullback g' f' f g)
-    [PreservesBoundedConstructible R((c.overG.left)_*⟦Λ⟧)]
-    [PreservesBoundedConstructible R(((c.baseChange sq.overLeft).overG.left)_*⟦Λ⟧)] :
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ c ⋙
       boundedConstructibleUpperStar Λ ℓ g ⟶
       boundedConstructibleUpperStar Λ ℓ g' ⋙
@@ -238,8 +237,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
 
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
     (c : Compactification f.left) (sq : IsPullback g' f' f g)
-    [PreservesBoundedConstructible R((c.overG.left)_*⟦Λ⟧)]
-    [PreservesBoundedConstructible R(((c.baseChange sq.overLeft).overG.left)_*⟦Λ⟧)] :
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ ℓ c sq =
       (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.overI)

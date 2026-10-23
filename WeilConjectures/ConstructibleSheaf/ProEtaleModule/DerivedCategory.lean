@@ -87,17 +87,6 @@ lemma mem_boundedConstructible_iff
 abbrev BoundedConstructible : Type _ :=
   (boundedConstructible R).FullSubcategory
 
-variable {R} in
-/-- A functor `F : D(X_proét, R) ⥤ D(Y_proét, S)` *preserves bounded constructible complexes* if it
-sends bounded constructible complexes of `R`-modules to bounded constructible complexes of
-`S`-modules. -/
-class PreservesBoundedConstructible {Y : Scheme.{u}} {S : Sheaf (Scheme.ProEt.topology Y) A}
-    [MonObj S] [IsCommMonObj S]
-    (F : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) A) R) ⥤
-      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) A) S)) : Prop where
-  boundedConstructible_obj (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) A) R))
-    (hK : boundedConstructible R K) : boundedConstructible S (F.obj K)
-
 /-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
 subcategory. -/
 instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :

@@ -96,13 +96,12 @@ end PullbackComparison
 section BaseChange
 
 variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
-  [PreservesBoundedConstructible R((f.left)_*⟦Λ⟧)] [PreservesBoundedConstructible R((f'.left)_*⟦Λ⟧)]
-
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
 the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
 unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
-noncomputable def boundedConstructibleBaseChangeUnitStep :
+noncomputable def boundedConstructibleBaseChangeUnitStep
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
       (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
         (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ ℓ f') :=
@@ -114,7 +113,8 @@ variable {f g f' g'} in
 /-- The *square transport* step of the base-change morphism on bounded constructible
 complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
 the left and `Rf'_*` on the right. -/
-noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g) :
+noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g)
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
         (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ ℓ f') ≅
       (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
@@ -125,7 +125,8 @@ noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f 
 /-- The *counit contraction* step of the base-change morphism on bounded constructible
 complexes: the natural transformation obtained by contracting the counit of the adjunction
 `Lf^* ⊣ Rf_*`. -/
-noncomputable def boundedConstructibleBaseChangeCounitStep :
+noncomputable def boundedConstructibleBaseChangeCounitStep
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
         (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') ⟶
       boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
@@ -142,7 +143,8 @@ counit contraction.
 Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
 proper; no such hypothesis is built into the definition. -/
 @[no_expose]
-noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
+noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g)
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
       boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
   boundedConstructibleBaseChangeUnitStep Λ ℓ f g f' ≫

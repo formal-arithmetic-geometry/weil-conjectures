@@ -116,7 +116,7 @@ noncomputable def poincareMap :
         (𝟙_ _))).obj (𝟙_ _) :=
   Verdier.poincareMap (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
     (boundedConstructibleUpperShriekAdjunction _ ℓ p)
-    (boundedConstructibleExceptionalProjection _ ℓ p)
+    (boundedConstructibleExceptionalProjection ℓ p)
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
 /-- The **compact-support cup product**
@@ -129,7 +129,7 @@ noncomputable def cupProduct :
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
         (boundedConstructibleTateTwist ℓ X d (2 * d)) :=
   Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
-    (boundedConstructibleExceptionalProjection _ ℓ p)
+    (boundedConstructibleExceptionalProjection ℓ p)
 
 omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality is the trace–cup pairing**: the transpose

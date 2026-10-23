@@ -190,7 +190,8 @@ cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
 followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
-    (sq : IsPullback (𝟙 X) i i₁ h) [PreservesBoundedConstructible R((h.left)_*⟦Λ⟧)] :
+    (sq : IsPullback (𝟙 X) i i₁ h)
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ h :=
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ sq
@@ -210,11 +211,8 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and
 `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
-    [PreservesBoundedConstructible R((h.left)_*⟦Λ⟧)]
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
-    [PreservesBoundedConstructible R((p₁.left)_*⟦Λ⟧)]
-    [PreservesBoundedConstructible R((p.left)_*⟦Λ⟧)]
-    [PreservesBoundedConstructible R(((h ≫ p₁).left)_*⟦Λ⟧)]
+    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ p :=
@@ -287,8 +285,10 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
   have := r₂.isProper
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ E r₁.isPullback
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ E r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso _ ℓ r₂.isPullback r₂.hom_overG).symm
+  boundedConstructibleLowerShriekRefinementIso (Profinite.continuousMapRingObj E) ℓ r₁.isPullback
+      r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIso (Profinite.continuousMapRingObj E) ℓ
+      r₂.isPullback r₂.hom_overG).symm
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
 `ℚ̄_ℓ`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
@@ -308,7 +308,9 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicAlgC
     r₁.isPullback
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
     r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso _ ℓ r₂.isPullback r₂.hom_overG).symm
+  boundedConstructibleLowerShriekRefinementIso (Profinite.padicAlgClRingObj ℓ) ℓ r₁.isPullback
+      r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIso (Profinite.padicAlgClRingObj ℓ) ℓ
+      r₂.isPullback r₂.hom_overG).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

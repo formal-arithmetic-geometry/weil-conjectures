@@ -91,7 +91,7 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
       (Profinite.continuousMapRingObj E) ℓ c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
-  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq _ ℓ c sq]
   infer_instance
 
 /-- **The base change theorem for the compactly supported direct image attached to a
@@ -104,7 +104,7 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
       (Profinite.padicAlgClRingObj ℓ) ℓ c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
     (c.overBaseChange_isPullback_g sq)
-  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq _ ℓ c sq]
   infer_instance
 
 /-! ### For the lower shriek -/
