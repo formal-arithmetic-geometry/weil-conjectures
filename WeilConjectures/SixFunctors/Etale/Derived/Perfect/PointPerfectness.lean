@@ -376,7 +376,7 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoetherianRing Λ]
+variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsPrincipalIdealRing Λ]
   [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
@@ -384,12 +384,14 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
 
 /-- Blueprint `thm-pod-point-perfectness`, integral stage (Step 2).
 
-Let `Λ = 𝒪_E` (a Noetherian domain, complete for the principal ideal `I = 𝔪_E`, with `Λ/I`
+Let `Λ = 𝒪_E` (a principal ideal domain, complete for the ideal `I = 𝔪_E`, with `Λ/I`
 finite of exponent invertible in the separably closed field `k`), `X` separated of finite type
 over `k`, and `K ∈ D^b_c(X, Λ)`
 (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`).
-Then `RΓ_c(X, K)`, `RΓ(X, K)` and their duals are perfect complexes of `Λ`-modules (in
-particular in `D^b_fg(Λ)`), and for every `n` the reductions modulo `Iⁿ⁺¹` of `RΓ_c(X, K)` and
+Then the integral `RΓ_c(X, K) = RΓ(Spec k, c.pt)`, for a homotopy limit cone `c` of the tower of
+reductions of `Ra_! K` (the derived completion, as in
+`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`), `RΓ(X, K)` and
+their duals are perfect complexes of `Λ`-modules (in particular in `D^b_fg(Λ)`), and for every `n` the reductions modulo `Iⁿ⁺¹` of `RΓ_c(X, K)` and
 `RΓ(X, K)` are the compactly supported, resp. ordinary, cohomology of the reduction
 `K_{n+1} = K ⊗ᴸ (Λ/Iⁿ⁺¹)_X`.
 
@@ -403,10 +405,13 @@ level amplitude of the reductions is not stated here: the `K_{n+1}` are complexe
 `AlgebraicGeometry.Etale.isPerfect_and_torAmplitudeIn_globalSections` would apply. -/
 theorem isPerfect_and_reduction_globalSections_integral (hI : I.IsPrincipal)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect ∧
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K)
+    (c : Cone (_root_.DerivedCategory.derivedCompletionDiagram (Spec (.of k)).smallEtaleTopology
+      I ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)))
+    (hc : Pretriangulated.IsHomotopyLimit c) :
+    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj c.pt).IsPerfect ∧
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
-    ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
+    ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj c.pt)).obj
       (𝟙_ _)).IsPerfect ∧
     ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
       (𝟙_ _)).IsPerfect ∧
@@ -419,10 +424,10 @@ theorem isPerfect_and_reduction_globalSections_integral (hI : I.IsPrincipal)
           (_root_.DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of Λ (Λ ⧸ I ^ (n + 1))) ≅
         (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) := by
-  refine ⟨isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK,
-    isPerfect_rightDerivedGlobalSections_integral I aX hI K hK,
-    isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK,
-    isPerfect_ihom_rightDerivedGlobalSections_integral I aX hI K hK, fun n ↦ ?_⟩
+  refine ⟨isPerfect_compactlySupportedGlobalSections_integral aX hI K hK c hc,
+    isPerfect_rightDerivedGlobalSections_integral aX hI K hK,
+    isPerfect_ihom_compactlySupportedGlobalSections_integral aX hI K hK c hc,
+    isPerfect_ihom_rightDerivedGlobalSections_integral aX hI K hK, fun n ↦ ?_⟩
   obtain ⟨x, hx⟩ := hI.principal
   have hJ : (I ^ (n + 1)).IsPrincipal :=
     ⟨⟨x ^ (n + 1), by rw [hx, Ideal.submodule_span_eq, Ideal.span_singleton_pow]⟩⟩
