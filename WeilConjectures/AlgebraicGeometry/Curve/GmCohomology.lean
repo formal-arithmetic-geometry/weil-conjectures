@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.GmTransport
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.InjectiveAcyclic
 
 /-!
 # The cohomology of `𝔾ₘ` on a smooth curve
@@ -86,7 +86,7 @@ Let `C` be a smooth separated curve of finite type over an algebraically closed 
 `𝒢ₘ^cl = ν^* 𝔾ₘ` the classical multiplicative sheaf on the small pro-étale site of `C`. Then
 `H¹(C_proét, 𝒢ₘ^cl) ≅ Pic(C)` and `Hᵠ(C_proét, 𝒢ₘ^cl) = 0` for `q ≥ 2`: the comparison
 `RΓ(C_proét, ν^* F) ≅ RΓ(C_ét, F)`
-(`ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso`)
+(`ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoAddCommGrpCat`)
 transports `AlgebraicGeometry.IsCurve.sheafH_gmSheaf_of_smooth`. -/
 theorem rightDerived_globalSections_comparisonUpperStar_gmSheaf (f : C ⟶ Spec (.of k))
     [IsCurve f] [Smooth f] :
@@ -97,13 +97,13 @@ theorem rightDerived_globalSections_comparisonUpperStar_gmSheaf (f : C ⟶ Spec 
         IsZero (((ProEtale.globalSectionsFunctor AddCommGrpCat.{u + 1} C).rightDerived q).obj
           ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} C).obj C.gmSheaf)) := by
   refine ⟨?_, fun q hq ↦ ?_⟩
-  · let e₁ := ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso
-      AddCommGrpCat.{u + 1} C C.gmSheaf 1
+  · let e₁ := ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoAddCommGrpCat
+      C.gmSheaf 1
     obtain ⟨e₂⟩ := nonempty_rightDerived_sectionsFunctor_iso_sheafH C 1 C.gmSheaf
     exact ⟨e₁ ≪≫ e₂ ≪≫
       (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).symm.toAddCommGrpIso⟩
-  · let e₁ := ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso
-      AddCommGrpCat.{u + 1} C C.gmSheaf q
+  · let e₁ := ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoAddCommGrpCat
+      C.gmSheaf q
     obtain ⟨e₂⟩ := nonempty_rightDerived_sectionsFunctor_iso_sheafH C q C.gmSheaf
     have := subsingleton_sheafH_gmSheaf_of_smooth f q hq
     exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso (e₁ ≪≫ e₂)

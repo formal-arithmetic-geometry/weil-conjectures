@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-!
@@ -62,19 +62,12 @@ lemma exists_surjective_factorization_disjoint {X : S.AffineProEt} {ι : Type u}
     sigmaCoverι_π V f, isOpenImmersion_sigmaCoverι V f, exists_mem_range_sigmaCoverι V f,
     fun _ _ ↦ disjoint_range_sigmaCoverι V f⟩
 
-variable (S) in
-/-- A single surjection in the affine pro-étale site generates a covering sieve. -/
-lemma generate_singleton_mem_topology {W V : S.AffineProEt} (q : W ⟶ V)
-    (hq : Surjective q.left) : Sieve.generate (Presieve.singleton q) ∈ topology S V := by
-  rw [← GrothendieckTopology.mem_toPrecoverage_iff]
-  exact (generates_minimalPrecoverage S).le_toPrecoverage _ (.inr ⟨⟨W, q, rfl⟩, by simpa⟩)
-
 /-- A single surjection `q : W ⟶ V` in the affine pro-étale site, viewed as a family indexed by
 `Fin 1`, generates a covering sieve. -/
 lemma ofArrows_mem_topology_of_surjective {W V : S.AffineProEt} (q : W ⟶ V)
     (hq : Surjective q.left) :
     Sieve.ofArrows (fun _ : Fin 1 ↦ W) (fun _ ↦ q) ∈ topology S V := by
-  refine (topology S).superset_covering ?_ (generate_singleton_mem_topology S q hq)
+  refine (topology S).superset_covering ?_ (generate_singleton_mem_topology q hq)
   rw [Sieve.generate_le_iff]
   rintro _ _ ⟨⟩
   exact Sieve.ofArrows_mk _ _ 0
