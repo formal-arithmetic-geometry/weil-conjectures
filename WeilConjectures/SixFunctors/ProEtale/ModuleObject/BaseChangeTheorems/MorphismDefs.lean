@@ -95,41 +95,41 @@ end PullbackComparison
 
 section BaseChange
 
-variable [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
+variable (hΛ : LowerStarFiniteness Λ k) (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
 the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
 unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def boundedConstructibleBaseChangeUnitStep :
-    boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
-      (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
-        (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ ℓ f') :=
+    boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
+      (boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
+        (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ hΛ f') :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft
-    (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f').unit
+    (boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ f').unit
 
 variable {f g f' g'} in
 /-- The *square transport* step of the base-change morphism on bounded constructible
 complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
 the left and `Rf'_*` on the right. -/
 noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g) :
-    (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
-        (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ ℓ f') ≅
-      (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
-        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') :=
-  Functor.squareTransport (boundedConstructibleLowerStar Λ ℓ f)
-    (boundedConstructibleLowerStar Λ ℓ f') (boundedConstructiblePullbackSquareComparison Λ ℓ sq)
+    (boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
+        (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ hΛ f') ≅
+      (boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
+        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ hΛ f') :=
+  Functor.squareTransport (boundedConstructibleLowerStar Λ hΛ f)
+    (boundedConstructibleLowerStar Λ hΛ f') (boundedConstructiblePullbackSquareComparison Λ ℓ sq)
 
 /-- The *counit contraction* step of the base-change morphism on bounded constructible
 complexes: the natural transformation obtained by contracting the counit of the adjunction
 `Lf^* ⊣ Rf_*`. -/
 noncomputable def boundedConstructibleBaseChangeCounitStep :
-    (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
-        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') ⟶
-      boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
-  Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).counit
-    (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') ≫
+    (boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
+        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ hΛ f') ⟶
+      boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ hΛ f' :=
+  Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ f).counit
+    (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ hΛ f') ≫
     (Functor.leftUnitor _).hom
 
 variable {f g f' g'} in
@@ -142,11 +142,11 @@ Proper base change asserts that this morphism is an isomorphism for a cartesian 
 proper; no such hypothesis is built into the definition. -/
 @[no_expose]
 noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
-    boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
-      boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
-  boundedConstructibleBaseChangeUnitStep Λ ℓ f g f' ≫
-    (boundedConstructibleBaseChangeSquareStep Λ ℓ sq).hom ≫
-      boundedConstructibleBaseChangeCounitStep Λ ℓ f f' g'
+    boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
+      boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ hΛ f' :=
+  boundedConstructibleBaseChangeUnitStep Λ ℓ hΛ f g f' ≫
+    (boundedConstructibleBaseChangeSquareStep Λ ℓ hΛ sq).hom ≫
+      boundedConstructibleBaseChangeCounitStep Λ ℓ hΛ f f' g'
 
 end BaseChange
 

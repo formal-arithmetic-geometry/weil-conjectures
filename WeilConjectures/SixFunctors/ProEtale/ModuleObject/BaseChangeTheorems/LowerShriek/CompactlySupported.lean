@@ -89,7 +89,8 @@ and the extension-by-zero exchange is an isomorphism by base change for extensio
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-      (Profinite.continuousMapRingObj E) ℓ c sq) := by
+      (Profinite.continuousMapRingObj E) ℓ (lowerStarFiniteness_continuousMapRingObj ℓ E) c sq) :=
+        by
   have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
   infer_instance
@@ -101,7 +102,7 @@ an isomorphism of functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_�
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-      (Profinite.padicAlgClRingObj ℓ) ℓ c sq) := by
+      (Profinite.padicAlgClRingObj ℓ) ℓ (lowerStarFiniteness_padicAlgClRingObj ℓ) c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
     (c.overBaseChange_isPullback_g sq)
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
