@@ -58,7 +58,7 @@ lemma homEquiv_comp_descentMap_eq_zero {G : AdicSheaf l X} {n : ℕ}
   rw [homEquiv_adicUpperStarCongr, homEquiv_adicUpperStarComp, homEquiv_adicUpperStarComp,
     Adjunction.homEquiv_naturality_right, ← freePull_eq, ← freePull_eq] at hk
   rw [descentMap_eq, Preadditive.comp_sub, sub_eq_zero]
-  simp only [descentMapFst, descentMapSnd, Functor.map_comp, Category.assoc]
+  simp only [descentMapFst, descentMapSnd, Functor.map_comp, Category.assoc] at hk ⊢
   exact hk
 
 variable [Surjective f] [QuasiCompact f]

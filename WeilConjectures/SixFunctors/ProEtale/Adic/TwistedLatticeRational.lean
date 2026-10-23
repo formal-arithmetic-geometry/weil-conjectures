@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeIntegralSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeRetract
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeConjugate
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeDescentCriterion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeDescentMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRationalizationRegular
@@ -149,43 +150,6 @@ lemma integralCocycleInvMatrix_map_tripleProj₁₃ (hγ : IsIntegralCocycle f �
     integralCocycleInvMatrix_map_eval, integralCocycleInvMatrix_map_eval,
     integralCocycleInvMatrix_map_eval, ← Matrix.map_mul, ← Units.val_mul, ← mul_inv_rev,
     ← hγ.cocycle]
-
-section Descent
-
-set_option maxHeartbeats 2000000 in
--- The kernel unfolds the composites of sheaf morphisms in the descent map.
-/-- **A criterion for landing in a descent**: a morphism of abelian sheaves into `f_* ℚ̄_ℓ,Vⁿ`
-whose sections satisfy `γ · ρ₁^* y = ρ₂^* y` is killed by the descent map of `γ`. -/
-lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
-    (Γ : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l ↥(pullback f f)))
-    {Z : Sheaf (ProEt.topology T) Ab.{u + 1}}
-    (Φ : Z ⟶ ((AdicSheaf.restrictPadicInt T l).obj
-      ((f)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ AdicSheaf.unit l V))).X)
-    (y : ∀ T' : T.ProEt, Z.obj.obj (op T') → Fin n →
-      locallyFiniteFunctions l ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T').left)
-    (hy : ∀ (T' : T.ProEt) (s : Z.obj.obj (op T')),
-      comps (l := l) (B := V) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')
-        (Φ.hom.app (op T') s) = y T' s)
-    (h : ∀ (T' : T.ProEt) (s : Z.obj.obj (op T')) (i : Fin n),
-      ∑ j, locallyFiniteFunctionsComp l
-          (pullback.snd T'.hom (pullback.fst f f ≫ f)).base.hom (Γ i j) *
-        locallyFiniteFunctionsComp l (descentρ₁ f T').base.hom (y T' s j) =
-      locallyFiniteFunctionsComp l (descentρ₂ f T').base.hom (y T' s i)) :
-    Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom = 0 := by
-  ext T' s
-  have key : ((Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom).hom.app T') s =
-      0 := by
-    refine comps_injective (B := pullback f f) (n := n)
-      (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (pullback.fst f f ≫ f)).obj T'.unop) ?_
-    refine (comps_descentMap f Γ T'.unop (Φ.hom.app T' s)).trans ?_
-    rw [comps_zero, hy T'.unop s]
-    funext i
-    rw [h T'.unop s i, sub_self]
-    rfl
-  rw [key]
-  simp
-
-end Descent
 
 section Values
 

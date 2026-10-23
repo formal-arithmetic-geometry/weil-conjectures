@@ -11748,6 +11748,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeBasis
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeComparison
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeConjugate
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeDescentCriterion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeDescentMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeFiniteLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeFrame
