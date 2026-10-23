@@ -12,7 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitDer
 
 Let `ρ : Λ →+* Λ'` be a morphism of commutative rings and `f : X ⟶ Y` a morphism of schemes
 whose higher direct images vanish in large degrees. The coefficient comparison
-`Res ⋙ Rf_* ≅ Rf_* ⋙ Res` (`AlgebraicGeometry.Etale.derivedRestrictScalarsCompRightDerivedLowerStarIso`)
+`Res ⋙ Rf_* ≅ Rf_* ⋙ Res`
+(`AlgebraicGeometry.Etale.derivedRestrictScalarsCompRightDerivedLowerStarIso`)
 is the mate of the coefficient comparison `Res ⋙ Lf^* ≅ Lf^* ⋙ Res`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso`) for the derived adjunctions
 `Lf^* ⊣ Rf_*`, and the mate of the comparison `Res ⋙ D(f^*) ≅ D(f^*) ⋙ Res` for the adjunctions
@@ -59,6 +60,20 @@ lemma mateEquiv_derivedUpperStarLowerStarAdjunction_leftDerivedUpperStarRestrict
         (leftDerivedUpperStarRestrictScalarsIso ρ f).hom =
       (derivedRestrictScalarsCompRightDerivedLowerStarIso ρ f d hd).inv :=
   Adjunction.mateEquiv_derivedAdjunction_restrict
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f) (upperStarRestrictScalarsIso ρ f)
+    (lowerStarCompRestrictScalarsIso ρ f)
+    (restrictScalars_map_unit_app_comp_lowerStarCompRestrictScalarsIso_hom_app ρ f)
+    (fun K _ ↦ isIso_rightDerivedFunctorUnit_app_restrictScalars ρ f d hd K)
+
+/-- **The coefficient comparison of `Rf_*` is the mate of that of `D(f^*)`** for the
+adjunctions `D(f^*) ⊣ Rf_*` over `Λ'` and `Λ`. -/
+lemma mateEquiv_mapDerivedUpperStarLowerStarAdjunction_restrictScalars :
+    mateEquiv (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
+        (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+        (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso ρ f)).hom =
+      (derivedRestrictScalarsCompRightDerivedLowerStarIso ρ f d hd).inv :=
+  Adjunction.mateEquiv_mapDerivedCategoryRightDerivedAdjunction_restrict
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f) (upperStarRestrictScalarsIso ρ f)
     (lowerStarCompRestrictScalarsIso ρ f)

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnit
 
 /-!
 # Coefficient comparisons and the compact-support exchange map
@@ -15,7 +16,7 @@ We reduce the compatibility of the coefficient comparison
 compact-support exchange map `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`
 to the compatibility of each of its building blocks, through the abstract predicate
 `AlgebraicGeometry.Etale.CoeffCompatible` and its stability under composition, whiskering and
-inversion. The building blocks (A), (B), (C) are not proved yet. The file then deduces the
+inversion, and proves the building blocks (A), (B), (C). The file then deduces the
 coefficient-change statements used by `AlgebraicGeometry.Etale.AdicSystem`.
 -/
 
@@ -209,7 +210,8 @@ section Exchange
 
 variable [Finite Λ]
 
-/-- **Unfinished (A).**
+omit [Finite Λ] in
+/-- **(A)**
 The derived base change map `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` is compatible with the
 coefficient comparisons of `Rf_*`, `Rf'_*`, `Lg^*` and `Lg'^*`. -/
 lemma coeffCompatible_derivedBaseChangeMap {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
@@ -225,7 +227,7 @@ lemma coeffCompatible_derivedBaseChangeMap {X' X Y' Y : Scheme.{u}} {g' : X' ⟶
         (derivedRestrictScalarsCompRightDerivedLowerStarIso ρ f' d' hd'))
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq)
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ') sq) :=
-  sorry
+  fun K ↦ derivedBaseChangeMap_app_restrictScalars ρ sq d d' hd hd' K
 
 omit [Finite Λ] in
 /-- **(B)**
@@ -245,7 +247,8 @@ lemma coeffCompatible_derivedOpenImmersionLowerShriekBaseChangeIso {U' U X' X : 
 
 variable [Finite Λ'] {X Y : Scheme.{u}} {f : X ⟶ Y} [CompactSpace Y]
 
-/-- **Unfinished (C).**
+omit [Finite Λ'] in
+/-- **(C)**
 The comparison of derived lower shrieks along a refinement of compactifications is
 compatible with the coefficient comparisons. -/
 lemma coeffCompatible_rightDerivedLowerShriekOfCompactificationComparison
@@ -254,7 +257,8 @@ lemma coeffCompatible_rightDerivedLowerShriekOfCompactificationComparison
       (compactificationRestrictScalarsIso ρ c)
       (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ) r hcart)
       (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ') r hcart) :=
-  sorry
+  fun K ↦ rightDerivedLowerShriekOfCompactificationComparison_app_restrictScalars ρ r hcart
+    _ _ _ _ K
 
 /-- The isomorphism between the derived lower shrieks of two compactifications is compatible
 with the coefficient comparisons. -/
