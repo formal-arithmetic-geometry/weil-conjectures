@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
 /-!
 # Exactness of a finite free complex from its fibres
@@ -22,29 +23,6 @@ they split near `y` (`AlgebraicGeometry.Scheme.exists_opens_split_of_rank_add_eq
 universe u
 
 open CategoryTheory Limits
-
-namespace Matrix
-
-variable {K : Type*} [Field K] {ι₀ ι₁ ι₂ : Type*} [Fintype ι₀] [Fintype ι₁]
-
-/-- **Ranks in an exact sequence over a field.** If `B * A = 0` and every vector killed by `B` is
-in the image of `A`, then `rank A + rank B` is the size of the middle term. -/
-theorem rank_add_rank_eq_card_of_exact (A : Matrix ι₁ ι₀ K) (B : Matrix ι₂ ι₁ K)
-    (hBA : B * A = 0) (h : ∀ v : ι₁ → K, B *ᵥ v = 0 → ∃ w, A *ᵥ w = v) :
-    A.rank + B.rank = Fintype.card ι₁ := by
-  have hker : LinearMap.ker B.mulVecLin = LinearMap.range A.mulVecLin := by
-    refine le_antisymm (fun v hv ↦ ?_) ?_
-    · obtain ⟨w, hw⟩ := h v hv
-      exact ⟨w, hw⟩
-    · rintro _ ⟨w, rfl⟩
-      change B *ᵥ (A *ᵥ w) = 0
-      rw [Matrix.mulVec_mulVec, hBA, Matrix.zero_mulVec]
-  have := LinearMap.finrank_range_add_finrank_ker B.mulVecLin
-  rw [hker, Module.finrank_fintype_fun_eq_card] at this
-  rw [Matrix.rank, Matrix.rank]
-  omega
-
-end Matrix
 
 namespace AlgebraicGeometry.Scheme.Modules
 
