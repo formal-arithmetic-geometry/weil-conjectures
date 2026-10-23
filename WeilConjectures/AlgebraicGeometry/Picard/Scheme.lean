@@ -220,7 +220,7 @@ theorem exists_mul_mem_picardFunctorInvertibleDirectImage [IsSepClosed k]
 `X`, the subfunctor `F ⊆ Pic_{X/k,σ}` is represented by an open subscheme `W` of the Hilbert scheme
 `H = Hilb^g_{X/k}`, which is smooth of relative dimension `g` over `k`
 (`AlgebraicGeometry.isRepresentable_picardFunctorInvertibleDirectImage`). -/
-lemma exists_representableBy_picardFunctorInvertibleDirectImage
+lemma exists_representableBy_picardFunctorInvertibleDirectImage [IsSepClosed k]
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (pullback (X ↘ Spec (.of k)) T.hom).Modules]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 _) :
