@@ -30,6 +30,9 @@ implication inside a conclusion.
   over an arbitrary field.
 - `AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`: clauses (c) and (d), over an
   algebraically closed field.
+- `AlgebraicGeometry.surjective_comp_torsionSubgroupSchemeMul`: the transition maps
+  `A[ℓ ^ (n + 1)](K̄) ⟶ A[ℓ ^ n](K̄)` of the Tate module are surjective (the remark after the
+  blueprint theorem).
 -/
 
 @[expose] public section
@@ -93,5 +96,49 @@ theorem abelianVariety_estimate_of_isAlgClosed [IsAlgClosed K] (p : ℕ) [CharP 
   ⟨nonempty_addEquiv_torsionBy p A, bijective_toUnit_comp_torsionSubgroupScheme p A,
     surjective_npow_points, fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_tateModule ℓ A p hℓ,
     fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_rationalTateModule ℓ A p hℓ⟩
+
+/-- Blueprint `sk-the-final-theorem-the-abelian-variety-estimate--remark-1`: where the
+abelian-variety estimate feeds in.
+
+The divisibility of clause (d) of `AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed` is
+what makes the transition maps of the Tate module surjective: for an abelian variety `A` over any
+field `K`, `0 < ℓ` and every `n`, multiplication by `ℓ` maps the geometric points
+`A[ℓ ^ (n + 1)](K̄)` onto `A[ℓ ^ n](K̄)`, through `AlgebraicGeometry.torsionSubgroupSchemeMul`.
+
+A geometric point `b` of `A[ℓ ^ n]` lifts along the finite surjective `[ℓ]`
+(`AlgebraicGeometry.exists_comp_eq_of_isFinite_of_surjective`) to a geometric point `a` of `A`
+with `ℓ a = b`; then `ℓ ^ (n + 1) a = ℓ ^ n b = 0`, so `a` is a point of `A[ℓ ^ (n + 1)]`.
+The other uses listed in the remark are clauses (a)–(d) themselves: for `K` of characteristic
+`p > 0`, clause (a) with `n = p` says that `A[p]` is finite flat of order `p ^ (2 * g)`, and
+clause (d) gives `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`. -/
+theorem surjective_comp_torsionSubgroupSchemeMul (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianVariety A] (ℓ : ℕ) (hℓ : 0 < ℓ) (n : ℕ) :
+    Function.Surjective fun x : Scheme.specAlgebraicClosure K ⟶
+        torsionSubgroupScheme A (ℓ ^ (n + 1)) ↦
+      x ≫ torsionSubgroupSchemeMul A ℓ (pow_succ' ℓ n) := by
+  intro y
+  have := isIsogeny_npow_id (A := A) ℓ hℓ
+  have := IsIsogeny.isFinite (𝟙 A ^ ℓ)
+  have := surjective_npow_id A ℓ hℓ
+  set b := y ≫ torsionSubgroupScheme.ι A (ℓ ^ n)
+  obtain ⟨x, hx⟩ :=
+    exists_comp_eq_of_isFinite_of_surjective (K := AlgebraicClosure K) (𝟙 A ^ ℓ).left b.left
+  let a : Scheme.specAlgebraicClosure K ⟶ A :=
+    Over.homMk x (by rw [← Over.w (𝟙 A ^ ℓ), reassoc_of% hx, Over.w b])
+  have ha : a ^ ℓ = b := by
+    rw [← Category.comp_id a, ← comp_pow]
+    exact Over.OverMorphism.ext hx
+  have hmem : Additive.ofMul a ∈
+      AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A))
+        ((ℓ ^ (n + 1) : ℕ) : ℤ) := by
+    rw [AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup, Submodule.mem_torsionBy_iff,
+      natCast_zsmul]
+    change Additive.ofMul (a ^ ℓ ^ (n + 1)) = Additive.ofMul 1
+    rw [pow_succ' ℓ n, pow_mul, ha, ← comp_pow, torsionSubgroupScheme.ι_pow, MonObj.comp_one]
+  refine ⟨torsionByPointsEquiv A (ℓ ^ (n + 1)) _ ⟨_, hmem⟩, ?_⟩
+  refine (cancel_mono (torsionSubgroupScheme.ι A (ℓ ^ n))).mp ?_
+  dsimp only
+  rw [Category.assoc, torsionSubgroupSchemeMul_ι, comp_pow, torsionByPointsEquiv_comp_ι]
+  exact ha
 
 end AlgebraicGeometry

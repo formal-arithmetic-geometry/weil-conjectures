@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Additive functors applied to a splitting
@@ -18,6 +19,8 @@ kernel unfolding them.
 ## Main statements
 
 - `CategoryTheory.Functor.nonempty_iso_biprod_of_iso_biprod`: `U ≅ U ⊞ (G B ⊞ G M)`.
+- `CategoryTheory.NatTrans.isIso_app_biproduct`: a natural transformation between additive
+  functors is invertible at a finite biproduct if it is invertible at the summands.
 -/
 
 @[expose] public section
@@ -36,5 +39,22 @@ lemma Functor.nonempty_iso_biprod_of_iso_biprod {C D : Type*} [Category C] [Cate
     (hP : G.obj P ≅ U) (hA : G.obj A ≅ U) : Nonempty (U ≅ U ⊞ (G.obj B ⊞ G.obj M)) :=
   ⟨hP.symm ≪≫ G.mapIso e ≪≫ G.mapBiprod _ _ ≪≫ biprod.mapIso (G.mapBiprod _ _) (Iso.refl _) ≪≫
     biprod.associator _ _ _ ≪≫ biprod.mapIso hA (Iso.refl _)⟩
+
+/-- A natural transformation between additive functors is invertible at a finite biproduct if it
+is invertible at the summands. -/
+lemma NatTrans.isIso_app_biproduct {C D : Type*} [Category C] [Category D]
+    [Preadditive C] [Preadditive D] {F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G)
+    {J : Type} [Finite J] (f : J → C) [HasBiproduct f] (h : ∀ j, IsIso (α.app (f j))) :
+    IsIso (α.app (⨁ f)) := by
+  have := Fintype.ofFinite J
+  refine ⟨∑ j, G.map (biproduct.π f j) ≫ inv (α.app (f j)) ≫ F.map (biproduct.ι f j), ?_, ?_⟩
+  · simp only [Preadditive.comp_sum, ← NatTrans.naturality_assoc, IsIso.hom_inv_id_assoc,
+      ← Functor.map_comp, ← Functor.map_sum]
+    convert F.map_id _
+    exact biproduct.total
+  · simp only [Preadditive.sum_comp, Category.assoc, NatTrans.naturality, IsIso.inv_hom_id_assoc,
+      ← Functor.map_comp, ← Functor.map_sum]
+    convert G.map_id _
+    exact biproduct.total
 
 end CategoryTheory

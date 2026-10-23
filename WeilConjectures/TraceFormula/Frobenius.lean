@@ -61,7 +61,8 @@ finitely many of them, and a closed point of `X₀` of degree `d ∣ m` carries 
 - `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`,
   `ProEtale.CondensedRing.IsModelFrobenius.sum_fixedPoint`: there are finitely many fixed
   points of `Φ_m`, counted by the closed points of `X₀`
-  (blueprint `thm-trf-frobenius-fixed-points`).
+  (blueprint `thm-trf-frobenius-fixed-points`); they are proved in
+  `WeilConjectures.TraceFormula.FixedPoint`.
 
 -/
 
@@ -310,25 +311,6 @@ lemma IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobeni
   | succ m ih =>
     rw [frobeniusIterate_succ, Over.comp_left]
     infer_instance
-
-/-- For `m ≥ 1` there are finitely many rational points of `X` fixed by `Φ_m`. -/
-theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [QuasiCompact f₀]
-    [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : m ≠ 0) :
-    Finite (FixedPoint Φ m) :=
-  sorry
-
-/-- **Counting fixed points.** For a function `h` on the points of `X₀` and `m ≥ 1`, the sum of
-`h` over the closed points of `X₀` underlying the rational points of `X` fixed by `Φ_m` is
-`∑_{deg y ∣ m} deg y • h y`: a closed point `y` of degree `d ∣ m` carries exactly `d` fixed
-points, the conjugates `x ≫ Φ_i`, `i < d`, of one of them (blueprint
-`thm-trf-frobenius-fixed-points`). The sum may be taken over any finite set `T` of closed
-points containing those of degree dividing `m`. -/
-theorem IsModelFrobenius.sum_fixedPoint [IsAlgClosed k] (hΦ : IsModelFrobenius Φ f₀ p)
-    {m : ℕ} (hm : m ≠ 0) [Fintype (FixedPoint Φ m)] {M : Type*} [AddCommMonoid M] (h : X₀ → M)
-    {T : Finset X₀.finitePoints} (hT : ∀ y : X₀.finitePoints, f₀.degreeOver y.1 ∣ m → y ∈ T) :
-    ∑ x : FixedPoint Φ m, h ((x.1.left ≫ p).base (default : Spec (.of k))) =
-      ∑ y ∈ T with f₀.degreeOver y.1 ∣ m, f₀.degreeOver y.1 • h y.1 :=
-  sorry
 
 end Model
 
