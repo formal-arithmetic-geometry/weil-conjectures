@@ -34,7 +34,7 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-section StrNatIso
+section ForgetCompIsoOfIso
 
 variable {C : Type*} [Category C] {F : C ⥤ C} {V : Type*} [Category V] {Γ : C ⥤ V}
 
@@ -47,7 +47,7 @@ lemma forgetCompIsoOfIso_hom_app (γ : F ⋙ Γ ≅ Γ) (K : IsoAlgebra F) :
     (forgetCompIsoOfIso γ).hom.app K = γ.inv.app K.carrier ≫ Γ.map K.str.hom :=
   rfl
 
-end StrNatIso
+end ForgetCompIsoOfIso
 
 end CategoryTheory.Endofunctor.IsoAlgebra
 
