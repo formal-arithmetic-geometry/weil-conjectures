@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
@@ -87,17 +88,22 @@ category: it is constructed on bounded constructible complexes directly, for the
 coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek`.
 
-## Sorried input
+## The finiteness theorems
 
-That the six functors preserve bounded constructible complexes is `sorry`ed:
-`boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`
-and `boundedConstructible_openImmersionLowerShriek_obj`, and the instances
-`isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
-`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
+That `Lf^*` and `j_!` preserve bounded constructible complexes holds for every `Λ`; it is
+`sorry`ed (`boundedConstructible_leftDerivedUpperStar_obj`,
+`boundedConstructible_openImmersionLowerShriek_obj`).
 
-These are theorems for the `ℓ`-adic coefficient rings, the condensed rings `E̲` of a finite
-extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ` (Deligne's finiteness theorems, Bhatt–Scholze, Section 6.8);
-`Λ` is kept general here, the coefficient ring being an input of the statements.
+That `Rf_*` preserves bounded constructible complexes, and that `Dᵇc(X)⟦Λ⟧` contains `Λ_X` and
+is stable under `- ⊗ᴸ -` and `RHom(-, -)`, are the finiteness theorems. They are false for a
+general condensed ring `Λ` (Artin–Schreier for `Λ = 𝔽_p` in characteristic `p`, unbounded
+`Tor` and `Ext` for `Λ = ℤ/ℓ²`), so they are the fields of the hypothesis class
+`HasConstructibleFiniteness Λ ℓ k`, which the functors `Rf_*`, `Rf_!`, `- ⊗ᴸ -` and `RHom(-, -)`
+on `Dᵇc(X)⟦Λ⟧` assume. It holds (`sorry`ed, Deligne's finiteness theorems, Bhatt–Scholze,
+Section 6.8) for the `ℓ`-adic coefficient rings `E̲`, `𝒪̲_E` and `ℚ̲̄_ℓ` with `ℓ` invertible in
+`k`: `hasConstructibleFiniteness_continuousMapRingObj`,
+`hasConstructibleFiniteness_padicIntegersRingObj` and
+`hasConstructibleFiniteness_padicAlgClRingObj`.
 
 -/
 
@@ -114,6 +120,75 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+/-! ### The finiteness theorems -/
+
+section Finiteness
+
+/-- The coefficient ring `Λ` satisfies the *finiteness theorems* over the field `k`: on
+separated `k`-schemes of finite type, the bounded constructible complexes of module objects over
+`Λ` are preserved by the derived pushforward `Rf_*`, contain the unit `Λ_X`, and are stable under
+the derived tensor product `- ⊗ᴸ -` and the derived hom `RHom(-, -)`.
+
+None of these holds for an arbitrary condensed ring `Λ`:
+* for `Λ = 𝔽_p` with `p` the characteristic of `k`, `k` separably closed and
+  `f : 𝔸¹_k ⟶ Spec k`, the Artin–Schreier sequence gives `R¹f_* 𝔽_p = k[t] / (F - 1) k[t]`, an
+  infinite dimensional `𝔽_p`-vector space, so `Rf_* 𝔽_p` is not constructible;
+* for `Λ = ℤ/ℓ²`, the constructible sheaf `ℤ/ℓ` has `ℤ/ℓ ⊗ᴸ ℤ/ℓ` and `RHom(ℤ/ℓ, ℤ/ℓ)` with
+  nonzero cohomology in infinitely many degrees, so these are not bounded.
+
+The finiteness theorems hold for the `ℓ`-adic coefficient rings with `ℓ` invertible in `k`
+(Deligne's finiteness theorems, SGA 4½, [Th. finitude]; Bhatt–Scholze, Section 6.8): these are
+the instances `hasConstructibleFiniteness_padicIntegersRingObj` and
+`hasConstructibleFiniteness_padicAlgClRingObj`, and the lemma
+`hasConstructibleFiniteness_continuousMapRingObj`.
+
+The prime `ℓ` is the residue characteristic of the coefficients. It does not enter the
+statements: it is an `outParam`, determined by `Λ`, so that the functors on `Dᵇc(X)⟦Λ⟧`, which
+depend on the prime `ℓ` of the setting, can assume this class. -/
+class HasConstructibleFiniteness (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : outParam ℕ) (k : Type u) [Field k] : Prop where
+  /-- The derived pushforward `Rf_*` preserves bounded constructible complexes. -/
+  boundedConstructible_rightDerivedLowerStar_obj {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left)))
+    (hK : boundedConstructible (condensedRingObj Λ X.left) K) :
+    boundedConstructible (condensedRingObj Λ Y.left) ((R((f.left)_*⟦Λ⟧)).obj K)
+  /-- The bounded constructible complexes contain `Λ_X` and are stable under `- ⊗ᴸ -`. -/
+  isMonoidal_boundedConstructible (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] :
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal
+  /-- The bounded constructible complexes are stable under `RHom(-, -)`. -/
+  isMonoidalClosed_boundedConstructible (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] :
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed
+
+/-- The finiteness theorems for the condensed ring `E̲ = C(-, E)` of a finite extension `E` of
+`ℚ_ℓ`, for `ℓ` invertible in `k`. It is not an instance, since `ℓ` cannot be recovered from
+`E̲` by instance search. -/
+lemma hasConstructibleFiniteness_continuousMapRingObj (ℓ : ℕ) [Fact ℓ.Prime] (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (k : Type u) [Field k]
+    [Fact (ringChar k ≠ ℓ)] :
+    HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k :=
+  sorry
+
+/-- The finiteness theorems for the condensed ring `𝒪̲_E = C(-, 𝒪_E)` of the ring of integers of
+a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, for `ℓ` invertible in `k`. -/
+instance hasConstructibleFiniteness_padicIntegersRingObj (ℓ : ℕ) [Fact ℓ.Prime] (E : Type)
+    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)] :
+    HasConstructibleFiniteness (Profinite.padicIntegersRingObj ℓ E) ℓ k :=
+  sorry
+
+/-- The finiteness theorems for the condensed ring `ℚ̲̄_ℓ`, for `ℓ` invertible in `k`. -/
+instance hasConstructibleFiniteness_padicAlgClRingObj (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u)
+    [Field k] [Fact (ringChar k ≠ ℓ)] :
+    HasConstructibleFiniteness (Profinite.padicAlgClRingObj ℓ) ℓ k :=
+  sorry
+
+end Finiteness
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
@@ -172,20 +247,14 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-/-- The derived pushforward `Rf_*` on module objects over `Λ` preserves bounded constructible
-complexes. -/
-lemma boundedConstructible_rightDerivedLowerStar_obj
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left)))
-    (hK : boundedConstructible (condensedRingObj Λ X.left) K) :
-    boundedConstructible (condensedRingObj Λ Y.left) ((R((f.left)_*⟦Λ⟧)).obj K) :=
-  sorry
+variable [HasConstructibleFiniteness Λ ℓ k]
 
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
 the restriction of `R((f)_*⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleLowerStar : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧))
-    fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ ℓ f K.obj K.property
+    fun K ↦
+      HasConstructibleFiniteness.boundedConstructible_rightDerivedLowerStar_obj f K.obj K.property
 
 /-- The restricted derived pushforward is compatible with the inclusions. -/
 noncomputable def boundedConstructibleLowerStarCompatibility :
@@ -323,6 +392,7 @@ include ℓ k
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [HasConstructibleFiniteness Λ ℓ k]
 
 section OfCompactification
 
@@ -382,20 +452,20 @@ end Shriek
 section TensorHom
 
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom]
+  [IsSeparated X.hom] {ℓ} [HasConstructibleFiniteness Λ ℓ k]
 
 /-- The bounded constructible complexes of module objects over `Λ` form a monoidal
 subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the unit `Λ_X`
 and are stable under `- ⊗ᴸ -`. -/
 instance isMonoidal_boundedConstructible :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
-  sorry
+  HasConstructibleFiniteness.isMonoidal_boundedConstructible X
 
 /-- The bounded constructible complexes of module objects over `Λ` are stable under the derived
 hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. -/
 instance isMonoidalClosed_boundedConstructible :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
-  sorry
+  HasConstructibleFiniteness.isMonoidalClosed_boundedConstructible X
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory
@@ -451,7 +521,7 @@ section MonoidalUpperStar
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [HasConstructibleFiniteness Λ ℓ k]
   (f : X ⟶ Y)
 
 /-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes is

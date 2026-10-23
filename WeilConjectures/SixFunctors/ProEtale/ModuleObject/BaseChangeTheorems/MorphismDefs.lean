@@ -96,6 +96,7 @@ end PullbackComparison
 section BaseChange
 
 variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
+  [HasConstructibleFiniteness Λ ℓ k]
 
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:

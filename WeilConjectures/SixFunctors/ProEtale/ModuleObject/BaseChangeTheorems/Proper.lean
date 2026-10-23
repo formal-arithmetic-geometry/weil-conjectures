@@ -96,6 +96,7 @@ Y' --g---> Y
 with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
+    [HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k]
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) :=
   sorry

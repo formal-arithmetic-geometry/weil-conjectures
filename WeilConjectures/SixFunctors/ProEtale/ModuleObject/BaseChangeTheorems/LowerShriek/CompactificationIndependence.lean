@@ -182,6 +182,8 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
       sq.toCommSq.snd_comp_eq_of_fst_eq_id) :=
   sorry
 
+variable [HasConstructibleFiniteness Λ ℓ k]
+
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
 `isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the unit of `Lh^* ⊣ Rh_*`
@@ -224,6 +226,7 @@ end Refinement
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  [HasConstructibleFiniteness (Profinite.continuousMapRingObj E) ℓ k]
 
 section Pushforward
 
