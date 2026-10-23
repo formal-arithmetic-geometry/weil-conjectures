@@ -4998,6 +4998,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStal
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusExistence
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusFixedLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusPoints
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverOpenFactorRationalPoint
@@ -7959,6 +7960,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalDual
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
@@ -9181,6 +9183,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import WeilConjectures.Mathlib.AlgebraicGeometry.SpreadingOut
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
@@ -12515,6 +12518,7 @@ public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperCompatibility
+public import WeilConjectures.TraceFormula.ProperCurve
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
