@@ -11557,6 +11557,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyLift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseNilInvariance
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRankCriterion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
