@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedFinite
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedModule
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale
 public import WeilConjectures.ConstructibleSheaf.OfForget
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstant
 
 /-!
 # Twisted sheaves with finite fibres are finite locally constant
@@ -112,18 +113,6 @@ theorem exists_iso_uliftYoneda_twistedSectionsPresheaf {S : Type (u + 1)} [Finit
   rw [op_comp, Functor.map_comp_apply]
   rfl
 
-omit [WeaklyEtale f] [Surjective f] [QuasiCompact f] [QuasiSeparatedSpace Y] in
-/-- Finite local constancy of sheaves of sets is invariant under isomorphism. -/
-lemma isFiniteLocallyConstantSheafOfTypes_of_iso
-    {E E' : Sheaf Y.smallEtaleTopology (Type (u + 1))} (e : E ≅ E')
-    (h : IsFiniteLocallyConstantSheafOfTypes E) : IsFiniteLocallyConstantSheafOfTypes E' := by
-  obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := h
-  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ⟨fun Ω _ _ s ↦ ?_⟩⟩
-  · have := h𝒰 i
-    exact Sheaf.isConstant_congr _ ((Y.smallEtaleTopology.overPullback _ _).mapIso e)
-  · exact (hfin.isFinitelyGenerated_sheafFiber Ω s).of_iso
-      ((pointSmallEtale s).sheafFiber.mapIso e)
-
 /-- **Twisted sheaves of sets with finite fibres are finite locally constant.** -/
 theorem isFiniteLocallyConstantSheafOfTypes_twistedSectionsPresheaf {S : Type (u + 1)}
     [Finite S] {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c) :
@@ -132,7 +121,7 @@ theorem isFiniteLocallyConstantSheafOfTypes_twistedSectionsPresheaf {S : Type (u
         Sheaf Y.smallEtaleTopology (Type (u + 1))) := by
   obtain ⟨P, π, _, _, ⟨e⟩⟩ := exists_iso_uliftYoneda_twistedSectionsPresheaf f hc
   obtain ⟨hsh, hcov, hfin⟩ := isFiniteLocallyConstant_uliftYoneda P π
-  exact isFiniteLocallyConstantSheafOfTypes_of_iso
+  exact IsFiniteLocallyConstantSheafOfTypes.of_iso
     ((fullyFaithfulSheafToPresheaf _ _).preimageIso
       (X := ⟨uliftYoneda.obj (Scheme.Etale.mk π), hsh⟩)
       (Y := ⟨twistedSectionsPresheaf f c, isSheaf_twistedSectionsPresheaf f c⟩) e.symm)
@@ -145,7 +134,7 @@ theorem isFiniteLocallyConstantSheaf_twistedModuleSheaf {Λ : Type (u + 1)} [Com
     [Finite Λ] {M : Type (u + 1)} [AddCommGroup M] [Module Λ M] [Finite M]
     (c : ↥(pullback f f) → M ≃ₗ[Λ] M) (hc : IsDescentCocycle f (fun z ↦ c z)) :
     IsFiniteLocallyConstantSheaf (twistedModuleSheaf f c) :=
-  IsFiniteLocallyConstantSheaf.of_forget _ (isFiniteLocallyConstantSheafOfTypes_of_iso
+  IsFiniteLocallyConstantSheaf.of_forget _ (IsFiniteLocallyConstantSheafOfTypes.of_iso
     ((fullyFaithfulSheafToPresheaf _ _).preimageIso
       (X := ⟨twistedSectionsPresheaf f (fun z ↦ c z), isSheaf_twistedSectionsPresheaf f _⟩)
       (Y := (sheafCompose _ (forget (ModuleCat.{u + 1} Λ))).obj (twistedModuleSheaf f c))

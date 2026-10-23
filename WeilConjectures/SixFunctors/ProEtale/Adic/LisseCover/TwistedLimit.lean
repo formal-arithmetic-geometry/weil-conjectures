@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSheaf
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Twisted sections over inverse limits
@@ -29,35 +30,6 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
-section Cofiltered
-
-/-- In a cofiltered category, finitely many properties of morphisms to `i` which are stable under
-precomposition, and each of which holds for some morphism to `i`, hold simultaneously for some
-morphism to `i`. -/
-lemma IsCofiltered.exists_forall_of_finite {C : Type*} [Category C] [IsCofiltered C] {i : C}
-    {ι : Type*} [Finite ι] (P : ι → ∀ {j : C}, (j ⟶ i) → Prop)
-    (hP : ∀ k {j j' : C} (a : j' ⟶ j) (g : j ⟶ i), P k g → P k (a ≫ g))
-    (h : ∀ k, ∃ (j : C) (g : j ⟶ i), P k g) : ∃ (j : C) (g : j ⟶ i), ∀ k, P k g := by
-  classical
-  have := Fintype.ofFinite ι
-  suffices H : ∀ s : Finset ι, ∃ (j : C) (g : j ⟶ i), ∀ k ∈ s, P k g by
-    obtain ⟨j, g, hg⟩ := H Finset.univ
-    exact ⟨j, g, fun k ↦ hg k (Finset.mem_univ k)⟩
-  intro s
-  induction s using Finset.induction_on with
-  | empty => exact ⟨i, 𝟙 i, by simp⟩
-  | insert a s _ ih =>
-    obtain ⟨j, g, hg⟩ := ih
-    obtain ⟨j', g', hg'⟩ := h a
-    obtain ⟨k, b, b', e⟩ := IsCofiltered.cospan g g'
-    refine ⟨k, b ≫ g, fun l hl ↦ ?_⟩
-    rcases Finset.mem_insert.1 hl with rfl | hl
-    · rw [e]
-      exact hP _ b' g' hg'
-    · exact hP _ b g (hg l hl)
-
-end Cofiltered
 
 section Limit
 
@@ -124,7 +96,7 @@ lemma Scheme.exists_isLocallyConstant_comp_eq_of_isLimit [∀ i, QuasiSeparatedS
     · intro hrr
       simp only [CategoryTheory.Functor.map_comp, Scheme.Hom.comp_preimage]
       exact Scheme.Hom.preimage_mono _ (hk hrr)
-  obtain ⟨j, a, ha⟩ := IsCofiltered.exists_forall_of_finite P hP fun k ↦ by
+  obtain ⟨j, a, ha⟩ := CategoryTheory.IsCofiltered.exists_forall_of_finite P hP fun k ↦ by
     rcases k with _ | ⟨r, r'⟩
     · refine exists_map_eq_top D c hc _ ?_
       rw [Scheme.Hom.preimage_iSup, eq_top_iff]

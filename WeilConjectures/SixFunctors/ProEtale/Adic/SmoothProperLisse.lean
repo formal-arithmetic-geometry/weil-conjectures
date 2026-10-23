@@ -83,7 +83,9 @@ open PadicAlgCl AdicSheaf
 
 variable {l : ℕ} [Fact l.Prime]
 
-/-- **Lisse direct images along smooth proper morphisms, connected case.** -/
+/-- **Lisse direct images along smooth proper morphisms, connected case.** For `Y` affine and
+locally of finite type over a field of characteristic `≠ ℓ`, `f : X ⟶ Y` smooth and proper with
+`X` connected, and `F` lisse on `X`, every `Rⁿf_* F` is lisse. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper_of_connected
     {K : Type u} [Field K] (hK : ringChar K ≠ l) {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType s] [IsAffine Y] (f : X ⟶ Y) [Smooth f] [IsProper f] [ConnectedSpace X]
@@ -119,7 +121,9 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isP
   refine IsAdicLisseSheaf.of_cover j (Scheme.etalePrecoverage_le_proetalePrecoverage _ ?_) hlisse
   exact (Scheme.ofArrows_mem_precoverage_iff (P := @Etale)).2 ⟨fun y ↦ ⟨y, hy y⟩, hj⟩
 
-/-- **Lisse direct images along smooth proper morphisms, over an affine base.** -/
+/-- **Lisse direct images along smooth proper morphisms, over an affine base.** For `Y` affine
+and locally of finite type over a field of characteristic `≠ ℓ`, `f : X ⟶ Y` smooth and proper
+and `F` lisse on `X`, every `Rⁿf_* F` is lisse: reduce to the connected components of `X`. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper_of_isAffine
     {K : Type u} [Field K] (hK : ringChar K ≠ l) {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType s] [IsAffine Y] (f : X ⟶ Y) [Smooth f] [IsProper f]
