@@ -8699,6 +8699,7 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.FieldTheory.AlgClosedFiniteTypeTensorDomain
+public import WeilConjectures.FieldTheory.AlgebraicSeparableSmooth
 public import WeilConjectures.FieldTheory.AlgebraicTowerTriangularRelations
 public import WeilConjectures.FieldTheory.ArtinSchreierExtension
 public import WeilConjectures.FieldTheory.BrauerGaloisComparison
@@ -8787,7 +8788,6 @@ public import WeilConjectures.FieldTheory.SeparableExtension
 public import WeilConjectures.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 public import WeilConjectures.FieldTheory.SeparableIndSmoothTransport
 public import WeilConjectures.FieldTheory.SeparableSmoothColimit
-public import WeilConjectures.FieldTheory.SeparableSmoothSubalgebra
 public import WeilConjectures.FieldTheory.SeparableSplitPurelyInseparableResidueFields
 public import WeilConjectures.FieldTheory.SeparableTensorPurelyInseparable
 public import WeilConjectures.FieldTheory.SeparablyGeneratedDifferentialsBasis
