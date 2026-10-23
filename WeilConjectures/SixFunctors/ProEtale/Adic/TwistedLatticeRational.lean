@@ -457,10 +457,13 @@ lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
             ((descentρ₂ f T').base w)) := by
     refine PadicInt.ext_of_toZModPow.1 fun k ↦ ?_
     rw [map_sum]
-    simp only [map_mul, toZModPow_upperStarIntegralCocycleLatticeXIso]
+    simp only [map_mul]
     have hp₁ := congrArg (fun φ ↦ φ.base w) (descentρ₁_comp_pullbackSymmetry_hom (f := f) T')
     have hp₂ := congrArg (fun φ ↦ φ.base w) (descentρ₂_comp_pullbackSymmetry_hom (f := f) T')
     simp only [Scheme.Hom.comp_apply] at hp₁ hp₂
+    refine Eq.trans (Finset.sum_congr rfl fun j _ ↦ congrArg₂ (· * ·) rfl
+      (toZModPow_upperStarIntegralCocycleLatticeXIso hγ T' s k j _)) ?_
+    refine Eq.trans ?_ (toZModPow_upperStarIntegralCocycleLatticeXIso hγ T' s k i _).symm
     rw [hp₁, hp₂]
     have hσ := (mem_twistedSubmodule f _).1 (((integralCocycleLatticeXIso hγ).hom ≫
       limit.π (proEtIntegralCocycleTower γ ⋙ sheafCompose (ProEt.topology T)
@@ -472,6 +475,22 @@ lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
   simp only [RingHom.map_mul] at this
   rw [map_sum (locallyFiniteFunctionsEval w)]
   exact this
+
+/-- **The rationalised lattice of an integral cocycle is a descent**: `ℚ̄_ℓ ⊗ M` is the descent
+of `ℚ̄_ℓ,Vᴺ` along the matrix `γ⁻¹`. -/
+theorem nonempty_iso_descentSheaf_integralCocycleLattice (hγ : IsIntegralCocycle f γ) :
+    Nonempty ((adicSheafExtendScalars T l).obj (integralCocycleLattice l hγ) ≅
+      descentSheaf f (integralCocycleInvMatrix l hγ)) := by
+  set κ := (adicUpperStarLowerStarAdjunction l f).homEquiv _ _ (integralCocycleLatticeTriv hγ).hom
+  have hκ : κ ≫ descentMap f (integralCocycleInvMatrix l hγ) = 0 := by
+    apply ((adicSheafExtendScalarsRestrictAdjunction T l).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_unit _ _ _ 0, Functor.map_zero,
+      comp_zero]
+    exact Mod.Hom.ext (homEquiv_comp_descentMap_hom hγ)
+  exact ⟨@asIso _ _ _ _ (kernel.lift _ κ hκ)
+    (AdicSheaf.isIso_kernelLift (integralCocycleInvMatrix_map_diagonal hγ)
+      (integralCocycleInvMatrix_map_tripleProj₁₃ hγ) κ hκ
+      (by rw [Equiv.symm_apply_apply]; infer_instance))⟩
 
 end Triv
 
