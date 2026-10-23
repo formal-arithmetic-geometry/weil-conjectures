@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.NatIso
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 
@@ -124,19 +125,6 @@ variable {F G H : C ⥤ D} [F.Additive] [PreservesFiniteLimits F] [PreservesFini
   [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
 
-/-- The isomorphism of left derived functors induced by a composite of isomorphisms of exact
-functors is the composite of the induced isomorphisms. -/
-lemma leftDerivedFunctorNatIso_trans (e : F ≅ G) (e' : G ≅ H) :
-    F.leftDerivedFunctorNatIso (e ≪≫ e') =
-      F.leftDerivedFunctorNatIso e ≪≫ G.leftDerivedFunctorNatIso e' := by
-  ext : 1
-  refine Localization.natTrans_ext Qh (HomotopyCategory.quasiIso _ (.up ℤ)) fun P ↦ ?_
-  rw [← cancel_mono (H.leftDerivedFunctorCounit.app P)]
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
-  rw [leftDerivedFunctorNatIso_hom_app_comp_counit, leftDerivedFunctorNatIso_hom_app_comp_counit,
-    leftDerivedFunctorNatIso_hom_app_comp_counit_assoc, ← Functor.map_comp, ← NatTrans.comp_app,
-    ← NatTrans.mapHomotopyCategory_comp, Iso.trans_hom]
-
 /-- The isomorphism of left derived functors induced by the identity is the identity. -/
 @[simp]
 lemma leftDerivedFunctorNatIso_refl :
@@ -146,14 +134,6 @@ lemma leftDerivedFunctorNatIso_refl :
   rw [← cancel_mono (F.leftDerivedFunctorCounit.app P),
     leftDerivedFunctorNatIso_hom_app_comp_counit]
   simp
-
-/-- The isomorphism of left derived functors induced by the inverse of an isomorphism is the
-inverse of the induced isomorphism. -/
-lemma leftDerivedFunctorNatIso_symm (e : F ≅ G) :
-    G.leftDerivedFunctorNatIso e.symm = (F.leftDerivedFunctorNatIso e).symm := by
-  ext : 1
-  rw [Iso.symm_hom, ← Iso.hom_comp_eq_id, ← Iso.trans_hom, ← leftDerivedFunctorNatIso_trans,
-    Iso.self_symm_id, leftDerivedFunctorNatIso_refl, Iso.refl_hom]
 
 end NatIso
 

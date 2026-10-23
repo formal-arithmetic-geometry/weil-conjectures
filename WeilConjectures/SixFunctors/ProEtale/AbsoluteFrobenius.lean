@@ -60,11 +60,11 @@ namespace Scheme.ProEt
 site of `X`, as an isomorphism in `X_proét`. -/
 noncomputable def relativeIterateFrobeniusIso (V : X.ProEt) :
     V ≅ (Over.pullback @WeaklyEtale ⊤ (X.iterateFrobenius hp hX n)).obj V :=
-  Over.isoMk (asIso (relativeIterateFrobenius hp n hX V.hom)) (by simp)
+  Over.isoMk (asIso (relativeIterateFrobenius hp hX n V.hom)) (by simp)
 
 @[simp]
 lemma relativeIterateFrobeniusIso_hom_left (V : X.ProEt) :
-    (relativeIterateFrobeniusIso hp hX n V).hom.left = relativeIterateFrobenius hp n hX V.hom :=
+    (relativeIterateFrobeniusIso hp hX n V).hom.left = relativeIterateFrobenius hp hX n V.hom :=
   rfl
 
 /-- Base change along the absolute Frobenius `F_X` is isomorphic to the identity functor of the
@@ -80,7 +80,7 @@ noncomputable def overPullbackIterateFrobeniusIso :
 @[simp]
 lemma overPullbackIterateFrobeniusIso_inv_app_left (V : X.ProEt) :
     ((overPullbackIterateFrobeniusIso hp hX n).inv.app V).left =
-      relativeIterateFrobenius hp n hX V.hom :=
+      relativeIterateFrobenius hp hX n V.hom :=
   rfl
 
 

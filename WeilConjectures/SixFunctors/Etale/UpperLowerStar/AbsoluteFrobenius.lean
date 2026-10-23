@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Gluing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
@@ -21,11 +22,13 @@ Let `X` be a scheme of characteristic `p` and `F_X` its absolute `p ^ n`-power F
 change along `F_X` on the small étale site of `X` is isomorphic to base change along `𝟙 X`, and
 the pushforward and the pullback along `F_X` on étale sheaves are isomorphic to those along
 `𝟙 X`, compatibly with pullback along morphisms of schemes of characteristic `p`.
+The relative Frobenius `AlgebraicGeometry.Scheme.relativeIterateFrobenius` and the facts that
+it is a universal homeomorphism and, for a weakly étale `u`, an isomorphism
+(`AlgebraicGeometry.Scheme.isIso_relativeIterateFrobenius`) are in
+`WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.relativeIterateFrobenius`: the relative Frobenius
-  `U ⟶ U ×_{X, F_X} X` of a morphism `U ⟶ X`.
 - `AlgebraicGeometry.Etale.overPullbackIterateFrobeniusIso`: base change along `𝟙 X` and along
   `F_X` on the small étale site of `X` are isomorphic.
 - `AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso`: `(F_X)_* ≅ (𝟙 X)_*`.
@@ -33,10 +36,6 @@ the pushforward and the pullback along `F_X` on étale sheaves are isomorphic to
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.isUniversalHomeomorphism_iterateFrobenius`: the absolute Frobenius
-  is a universal homeomorphism.
-- `AlgebraicGeometry.Scheme.isIso_relativeIterateFrobenius`: the relative Frobenius of an étale
-  morphism is an isomorphism.
 - `AlgebraicGeometry.Etale.upperStarIterateFrobeniusIso_naturality`: the isomorphisms
   `(F_X)^* ≅ (𝟙 X)^*` are compatible with pullback along morphisms `f : Y ⟶ X`.
 -/
@@ -104,79 +103,6 @@ lemma isPullback_iterateFrobenius {X U : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0)
   · rw [← cancel_mono t, Category.assoc, hw, ← Category.assoc, IsOpenImmersion.lift_fac,
       s.condition]
   · rw [← cancel_mono t, h₂, IsOpenImmersion.lift_fac]
-
-set_option backward.isDefEq.respectTransparency false in
-/-- The absolute Frobenius `F_X` of a scheme of characteristic `p` is a universal homeomorphism:
-over every affine open `Spec R ⊆ X` it is `Spec` of the `p ^ n`-power map of `R`. -/
-theorem isUniversalHomeomorphism_iterateFrobenius {X : Scheme.{u}}
-    (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ) :
-    IsUniversalHomeomorphism (X.iterateFrobenius hp hX n) := by
-  have key (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtTarget P]
-      (H : ∀ (R : CommRingCat.{u}) (hR : (p : R) = 0),
-        P (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime R hp hR n)))) :
-      P (X.iterateFrobenius hp hX n) := by
-    refine IsZariskiLocalAtTarget.of_openCover X.affineOpenCover.openCover
-      fun (j : X.affineOpenCover.I₀) ↦ ?_
-    have : IsOpenImmersion (X.affineOpenCover.f j) := X.affineOpenCover.map_prop j
-    have hpb := (isPullback_iterateFrobenius hp hX n (X.affineOpenCover.f j)).flip
-    change P (pullback.snd (X.iterateFrobenius hp hX n) (X.affineOpenCover.f j))
-    rw [← hpb.isoPullback_inv_snd, P.cancel_left_of_respectsIso]
-    have hR' := IsOfCharacteristic.of_hom hX (X.affineOpenCover.f j)
-    have hR : (p : X.affineOpenCover.X j) = 0 := by
-      rw [← map_natCast (ΓSpecIso _).hom.hom, hR', map_zero]
-    rw [iterateFrobenius_Spec hp _ hR]
-    exact H _ hR
-  rw [isUniversalHomeomorphism_eq]
-  exact ⟨⟨key @IsIntegralHom fun R hR ↦
-      (isUniversalHomeomorphism_specMap_iterateFrobeniusOfPrime hp hR n).toIsIntegralHom,
-    key @UniversallyInjective fun R hR ↦
-      (isUniversalHomeomorphism_specMap_iterateFrobeniusOfPrime hp hR n).toUniversallyInjective⟩,
-    key @Surjective fun R hR ↦
-      (isUniversalHomeomorphism_specMap_iterateFrobeniusOfPrime hp hR n).toSurjective⟩
-
-variable {X U : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ) (u : U ⟶ X)
-
-/-- The relative `p ^ n`-power Frobenius `U ⟶ U ×_{X, F_X} X` of a morphism `u : U ⟶ X` of
-schemes of characteristic `p`: its components are the absolute Frobenius `F_U` and `u`. -/
-noncomputable def relativeIterateFrobenius : U ⟶ pullback u (X.iterateFrobenius hp hX n) :=
-  pullback.lift (U.iterateFrobenius hp (IsOfCharacteristic.of_hom hX u) n) u
-    (comp_iterateFrobenius hp u hX (IsOfCharacteristic.of_hom hX u) n).symm
-
-@[reassoc (attr := simp)]
-lemma relativeIterateFrobenius_fst :
-    relativeIterateFrobenius hp hX n u ≫ pullback.fst _ _ =
-      U.iterateFrobenius hp (IsOfCharacteristic.of_hom hX u) n :=
-  pullback.lift_fst _ _ _
-
-@[reassoc (attr := simp)]
-lemma relativeIterateFrobenius_snd :
-    relativeIterateFrobenius hp hX n u ≫ pullback.snd _ _ = u :=
-  pullback.lift_snd _ _ _
-
-/-- The relative Frobenius of an étale morphism is a universal homeomorphism: its composite
-with the first projection is the absolute Frobenius of the source, and this projection is a
-base change of the absolute Frobenius of the target. -/
-instance isUniversalHomeomorphism_relativeIterateFrobenius :
-    IsUniversalHomeomorphism (relativeIterateFrobenius hp hX n u) := by
-  have := isUniversalHomeomorphism_iterateFrobenius hp (IsOfCharacteristic.of_hom hX u) n
-  have := isUniversalHomeomorphism_iterateFrobenius hp hX n
-  have : IsUniversalHomeomorphism (relativeIterateFrobenius hp hX n u ≫ pullback.fst _ _) := by
-    rw [relativeIterateFrobenius_fst]
-    infer_instance
-  exact IsUniversalHomeomorphism.of_comp _ (pullback.fst u (X.iterateFrobenius hp hX n))
-
-/-- Stacks 03SN: the relative Frobenius `U ⟶ U ×_{X, F_X} X` of an étale morphism `U ⟶ X` is
-an isomorphism. It is étale, being a morphism between étale `X`-schemes, and a universal
-homeomorphism, hence an open immersion which is surjective. -/
-instance isIso_relativeIterateFrobenius [Etale u] : IsIso (relativeIterateFrobenius hp hX n u) := by
-  have : Etale (relativeIterateFrobenius hp hX n u ≫ pullback.snd _ _) := by
-    rw [relativeIterateFrobenius_snd]
-    infer_instance
-  have : Etale (relativeIterateFrobenius hp hX n u) :=
-    Etale.of_comp _ (pullback.snd u (X.iterateFrobenius hp hX n))
-  have := IsOpenImmersion.of_etale_of_universallyInjective (relativeIterateFrobenius hp hX n u)
-  rw [isIso_iff_isOpenImmersion_and_epi_base, TopCat.epi_iff_surjective]
-  exact ⟨inferInstance, (relativeIterateFrobenius hp hX n u).surjective⟩
 
 end Scheme
 

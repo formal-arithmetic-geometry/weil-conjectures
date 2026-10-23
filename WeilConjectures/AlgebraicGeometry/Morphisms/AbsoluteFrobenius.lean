@@ -35,9 +35,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-variable {p : ℕ} (hp : p.Prime) (n : ℕ)
-
-variable (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0)
+variable {p : ℕ} (hp : p.Prime) {X : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)
 
 /-- The residue field map of the absolute Frobenius is the `p ^ n`-power map. -/
 lemma iterateFrobenius_residueFieldMap_apply (x : X) (a : X.residueField x) :
@@ -74,7 +72,7 @@ instance universallyInjective_iterateFrobenius :
   have : CharP (X.residueField (X.iterateFrobenius hp hX n x)) p := this
   algebraize [((X.iterateFrobenius hp hX n).residueFieldMap x).hom]
   rw [RingHom.IsPurelyInseparable, isPurelyInseparable_iff_pow_mem _ p]
-  exact fun a ↦ ⟨n, a, iterateFrobenius_residueFieldMap_apply hp n X hX x a⟩
+  exact fun a ↦ ⟨n, a, iterateFrobenius_residueFieldMap_apply hp hX n x a⟩
 
 /-- The absolute Frobenius of a scheme in which the prime `p` vanishes is a universal
 homeomorphism. -/
@@ -83,7 +81,7 @@ instance isUniversalHomeomorphism_iterateFrobenius :
 
 section RelativeFrobenius
 
-variable {X} {V : Scheme.{u}} (v : V ⟶ X)
+variable {V : Scheme.{u}} (v : V ⟶ X)
 
 /-- The relative `p ^ n`-power Frobenius `r_V = (F_V, v) : V ⟶ V ×_{X, F_X} X` of a morphism
 `v : V ⟶ X` to a scheme in which the prime `p` vanishes. -/
@@ -94,21 +92,21 @@ noncomputable def relativeIterateFrobenius :
 
 @[reassoc (attr := simp)]
 lemma relativeIterateFrobenius_fst :
-    relativeIterateFrobenius hp n hX v ≫ Limits.pullback.fst _ _ =
+    relativeIterateFrobenius hp hX n v ≫ Limits.pullback.fst _ _ =
       V.iterateFrobenius hp (IsOfCharacteristic.of_hom hX v) n :=
   Limits.pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
 lemma relativeIterateFrobenius_snd :
-    relativeIterateFrobenius hp n hX v ≫ Limits.pullback.snd _ _ = v :=
+    relativeIterateFrobenius hp hX n v ≫ Limits.pullback.snd _ _ = v :=
   Limits.pullback.lift_snd _ _ _
 
 /-- The relative Frobenius is a universal homeomorphism: its composite with the base change
 of the absolute Frobenius `F_X` is the absolute Frobenius `F_V`. -/
 instance isUniversalHomeomorphism_relativeIterateFrobenius :
-    IsUniversalHomeomorphism (relativeIterateFrobenius hp n hX v) := by
+    IsUniversalHomeomorphism (relativeIterateFrobenius hp hX n v) := by
   have : IsUniversalHomeomorphism
-      (relativeIterateFrobenius hp n hX v ≫ Limits.pullback.fst _ _) := by
+      (relativeIterateFrobenius hp hX n v ≫ Limits.pullback.fst _ _) := by
     rw [relativeIterateFrobenius_fst]
     infer_instance
   exact .of_comp _ (Limits.pullback.fst v (X.iterateFrobenius hp hX n))
@@ -116,13 +114,13 @@ instance isUniversalHomeomorphism_relativeIterateFrobenius :
 /-- The relative Frobenius of a weakly étale morphism `v` is weakly étale, being a morphism
 between the weakly étale `X`-schemes `V` and `V ×_{X, F_X} X`. -/
 instance weaklyEtale_relativeIterateFrobenius [WeaklyEtale v] :
-    WeaklyEtale (relativeIterateFrobenius hp n hX v) :=
-  WeaklyEtale.of_comp_eq v (Limits.pullback.snd _ _) _ (relativeIterateFrobenius_snd hp n hX v)
+    WeaklyEtale (relativeIterateFrobenius hp hX n v) :=
+  WeaklyEtale.of_comp_eq v (Limits.pullback.snd _ _) _ (relativeIterateFrobenius_snd hp hX n v)
 
 /-- The relative Frobenius of a weakly étale morphism is an isomorphism, being a weakly étale
 universal homeomorphism. -/
 instance isIso_relativeIterateFrobenius [WeaklyEtale v] :
-    IsIso (relativeIterateFrobenius hp n hX v) :=
+    IsIso (relativeIterateFrobenius hp hX n v) :=
   WeaklyEtale.isIso_of_isUniversalHomeomorphism _
 
 /-- The relative Frobenius is natural in `V`: for a morphism `g : V ⟶ W` over `X`, the square
@@ -130,9 +128,9 @@ formed with the base change of `g` along `F_X` commutes. -/
 @[reassoc]
 lemma relativeIterateFrobenius_naturality {W : Scheme.{u}} (w : W ⟶ X) (g : V ⟶ W)
     (h : g ≫ w = v) :
-    relativeIterateFrobenius hp n hX v ≫
+    relativeIterateFrobenius hp hX n v ≫
         Limits.pullback.map _ _ _ _ g (𝟙 X) (𝟙 X) (by simp [h]) (by simp) =
-      g ≫ relativeIterateFrobenius hp n hX w := by
+      g ≫ relativeIterateFrobenius hp hX n w := by
   apply Limits.pullback.hom_ext
   · simpa using (comp_iterateFrobenius hp g _ _ n).symm
   · simp [h]

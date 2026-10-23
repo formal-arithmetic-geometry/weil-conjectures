@@ -290,7 +290,7 @@ variable [Finite Λ] [HasCompactification a] [QuasiCompact a]
 with the exceptional-inverse-image exchange
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`). It is the structure morphism
 of `AlgebraicGeometry.Etale.weilUpperShriek`. -/
-noncomputable def upperShriekWeilDatum (sq : IsPullback g a a h)
+noncomputable def upperShriekBaseChangeWeilDatum (sq : IsPullback g a a h)
     {M : DerivedCategoryModule Λ Y} (ψ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(a)^![ModuleCat.{u + 1} Λ]).obj M) ⟶
       (R(a)^![ModuleCat.{u + 1} Λ]).obj M :=
@@ -300,9 +300,9 @@ noncomputable def upperShriekWeilDatum (sq : IsPullback g a a h)
 `K ⟶ Ra^! Ra_! K` is a morphism of Weil objects, `Ex^!` being the mate of `Ex_!⁻¹`. -/
 lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_unit (sq : IsPullback g a a h)
     {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
-    IsWeilMorphism g φ (upperShriekWeilDatum sq (lowerShriekWeilDatum sq φ))
+    IsWeilMorphism g φ (upperShriekBaseChangeWeilDatum sq (lowerShriekWeilDatum sq φ))
       ((rightDerivedUpperShriekAdjunction _ a).unit.app K) := by
-  unfold IsWeilMorphism upperShriekWeilDatum lowerShriekWeilDatum
+  unfold IsWeilMorphism upperShriekBaseChangeWeilDatum lowerShriekWeilDatum
   rw [map_unit_rightDerivedUpperShriekBaseChangeMap_app_assoc, ← Functor.map_comp,
     ← rightDerivedLowerShriekBaseChangeNatIso_hom, Iso.inv_hom_id_app_assoc,
     Adjunction.unit_naturality]
@@ -311,9 +311,9 @@ lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_unit (sq : IsPullback g a
 `Ra_! Ra^! M ⟶ M` is a morphism of Weil objects, `Ex^!` being the mate of `Ex_!⁻¹`. -/
 lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_counit (sq : IsPullback g a a h)
     {M : DerivedCategoryModule Λ Y} (ψ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
-    IsWeilMorphism h (lowerShriekWeilDatum sq (upperShriekWeilDatum sq ψ)) ψ
+    IsWeilMorphism h (lowerShriekWeilDatum sq (upperShriekBaseChangeWeilDatum sq ψ)) ψ
       ((rightDerivedUpperShriekAdjunction _ a).counit.app M) := by
-  unfold IsWeilMorphism upperShriekWeilDatum lowerShriekWeilDatum
+  unfold IsWeilMorphism upperShriekBaseChangeWeilDatum lowerShriekWeilDatum
   rw [Functor.map_comp, Category.assoc, Category.assoc, Adjunction.counit_naturality,
     map_rightDerivedUpperShriekBaseChangeMap_app_counit_assoc,
     ← rightDerivedLowerShriekBaseChangeNatIso_hom, Iso.hom_inv_id_app_assoc]
