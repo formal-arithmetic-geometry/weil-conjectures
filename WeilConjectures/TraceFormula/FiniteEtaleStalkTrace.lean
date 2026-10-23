@@ -219,8 +219,39 @@ theorem stalkFrobeniusTrace_lowerStar [IsFinite f.left] [Etale f.left] [IsIso σ
         ((weilSheafLowerStarComparison ℓ eX eY hf).hom.app F.carrier ≫
           (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.map F.str.hom) =
       ∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1},
-        stalkFrobeniusTrace ℓ τ eX x.2 F.str.hom :=
-  sorry
+        stalkFrobeniusTrace ℓ τ eX x.2 F.str.hom := by
+  classical
+  have := finite_fibrePoints f.left y eP
+  have := Fintype.ofFinite (FibrePoints f.left y)
+  obtain ⟨hlim⟩ := isLimit_stalkLowerStarFan (Profinite.padicAlgClRingObj ℓ) f.left y eP F.carrier
+  have hsq := (commSq_left_of_comp_eq eX eY hf).w
+  rw [stalkFrobeniusTrace_eq, categoricalTrace_eq_sum_of_isLimit_fan _ hlim hF _
+    (fun x ↦ x.1 ≫ eX.hom.left = σ ≫ x.1) (fun x h ↦ stalkFrobenius ℓ τ eX h F.str.hom)
+    (fun x h ↦ stalkFrobenius_lowerStar_comp_stalkLowerStarProj ℓ eX eY hf τ hy x.2 x.2 h F)
+    (fun x h ↦ ⟨⟨inv σ ≫ x.1 ≫ eX.hom.left, by
+      rw [Category.assoc, Category.assoc, hsq, ← Category.assoc x.1, x.2, hy,
+        IsIso.inv_hom_id_assoc]⟩, fun he ↦ h (by
+      have h' : inv σ ≫ x.1 ≫ eX.hom.left = x.1 := congrArg Subtype.val he
+      calc x.1 ≫ eX.hom.left = σ ≫ inv σ ≫ x.1 ≫ eX.hom.left :=
+            (IsIso.hom_inv_id_assoc σ _).symm
+        _ = σ ≫ x.1 := by rw [h']), _,
+      stalkFrobenius_lowerStar_comp_stalkLowerStarProj ℓ eX eY hf τ hy x.2 _
+        (by rw [IsIso.hom_inv_id_assoc]) F⟩)]
+  rw [← finsum_eq_sum_of_fintype]
+  set G := fun x : FibrePoints f.left y ↦ if h : x.1 ≫ eX.hom.left = σ ≫ x.1 then
+    categoricalTrace (stalkFrobenius ℓ τ eX h F.str.hom) else 0 with hG
+  have hR : (∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1},
+      stalkFrobeniusTrace ℓ τ eX x.2 F.str.hom) =
+      ∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1}, G x.1 :=
+    finsum_congr fun x ↦ by dsimp only [G]; rw [dif_pos x.2]; rfl
+  rw [hR, finsum_subtype_eq_finsum_cond]
+  refine finsum_congr fun x ↦ ?_
+  by_cases h : x.1 ≫ eX.hom.left = σ ≫ x.1
+  · rw [finsum_eq_if, if_pos h]
+  · rw [finsum_eq_if, if_neg h]
+    dsimp only [G]
+    rw [dif_neg h]
+
 
 /-- Reindexing a sum of traces of stalk Frobenii over the fixed points along a family `pt`
 enumerating them. -/

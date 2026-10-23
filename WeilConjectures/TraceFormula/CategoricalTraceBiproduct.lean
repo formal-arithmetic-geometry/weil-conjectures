@@ -150,4 +150,25 @@ theorem categoricalTrace_eq_sum_of_isBilimit [HasFiniteBiproducts C] {ι : Type*
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [traceAddMonoidHom_apply, trace_comp_idempotent]
 
+/-- **The trace of a block-permutation endomorphism**: let `V` be the product of finitely many
+dualizable objects `Wᵢ`, with projections `πᵢ`, and `T` an endomorphism of `V` such that for
+each `i` either `T ≫ πᵢ = πᵢ ≫ tᵢ` (if `p i`) or `T ≫ πᵢ` factors through `πⱼ` for some `j ≠ i`.
+Then the trace of `T` is the sum of the traces of the `tᵢ` with `p i`. -/
+theorem categoricalTrace_eq_sum_of_isLimit_fan [HasFiniteBiproducts C] {ι : Type*} [Fintype ι]
+    {V : C} {W : ι → C} (π : ∀ i, V ⟶ W i) (hπ : IsLimit (Fan.mk V π))
+    (hW : ∀ i, Nonempty (HasRightDual (W i))) (T : V ⟶ V) (p : ι → Prop) [DecidablePred p]
+    (t : ∀ i, p i → (W i ⟶ W i)) (hp : ∀ i (h : p i), T ≫ π i = π i ≫ t i h)
+    (hnp : ∀ i, ¬ p i → ∃ j, j ≠ i ∧ ∃ s : W j ⟶ W i, T ≫ π i = π j ≫ s) :
+    categoricalTrace T = ∑ i, if h : p i then categoricalTrace (t i h) else 0 := by
+  let b := Bicone.ofLimitCone hπ
+  have hb : b.IsBilimit := isBilimitOfIsLimit b hπ
+  rw [categoricalTrace_eq_sum_of_isBilimit hb hW T]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  have hbπ : ∀ j, b.π j = π j := fun _ ↦ rfl
+  split_ifs with h
+  · rw [hbπ, hp i h, ← hbπ, bicone_ι_π_self_assoc]
+  · obtain ⟨j, hji, s, hs⟩ := hnp i h
+    rw [hbπ, hs, ← hbπ, bicone_ι_π_ne_assoc _ (Ne.symm hji), Limits.zero_comp,
+      categoricalTrace_zero]
+
 end CategoryTheory
