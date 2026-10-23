@@ -8,16 +8,17 @@ module
 public import WeilConjectures.ConstructibleSheaf.FiniteDerived
 public import WeilConjectures.ConstructibleSheaf.FiniteConstantModel
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 
 /-!
 # Constructibility inputs of the Künneth formula
 
-This file records three constructibility statements used in the proof of the base change theorem
-for a pushforward tensored with a flat sheaf (blueprint `lem-kun-0f1j`):
+This file records two constructibility statements used in the proof of the base change theorem
+for a pushforward tensored with a flat sheaf (blueprint `lem-kun-0f1j`). The third one, that
+constant sheaves with finitely generated values are constructible (blueprint
+`lem-kun-constant-constructible`), is `AlgebraicGeometry.Scheme.isConstructibleSheaf_constantSheaf`
+in `WeilConjectures.ConstructibleSheaf.SpecializationCriterion`.
 
-- `AlgebraicGeometry.Scheme.isConstructibleSheaf_constantSheaf` (blueprint
-  `lem-kun-constant-constructible`): constant sheaves with finitely generated values are
-  constructible;
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_isFinite`
   (blueprint `fin4-thm-finite-morphisms-constructible`): all higher direct images of a
   constructible sheaf along a finite morphism towards a scheme of finite type over a field are
@@ -40,28 +41,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
-
-/-- Blueprint `lem-kun-constant-constructible`: constant sheaves are constructible.
-
-For a finitely generated `Λ`-module `M` (for instance a finite `Λ`-module over a Noetherian, or a
-finite, ring `Λ`), the constant sheaf `M_X` on the small étale site of a scheme `X` is
-constructible: for the trivial stratification it is locally constant, trivialised by the identity
-cover, and its stalk at every geometric point is `M`. The blueprint assumes `X` quasi-compact and
-quasi-separated, which is not needed here. -/
-theorem Scheme.isConstructibleSheaf_constantSheaf {X : Scheme.{u}} (M : ModuleCat.{u + 1} Λ)
-    [Module.Finite Λ M] :
-    IsConstructibleSheaf ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
-  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
-  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-  refine IsFiniteLocallyConstantSheaf.isConstructibleSheaf
-    { nonempty_locallyConstantDatum :=
-        ⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩⟩
-      isFinitelyGenerated_sheafFiber := fun Ω _ _ s ↦ ?_ }
-  · rw [isConstant_over_iff_upperStar]
-    exact Sheaf.isConstant_of_iso _ (X := M) ((Etale.upperStarId _ X).app _)
-  · exact ((ModuleCat.isFinitelyGenerated_iff _).2 ‹_›).of_iso
-      ((pointSmallEtale s).sheafFiberConstantSheafIso M).symm
 
 namespace Etale
 
