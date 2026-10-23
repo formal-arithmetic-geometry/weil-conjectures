@@ -6,6 +6,11 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeComp
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
