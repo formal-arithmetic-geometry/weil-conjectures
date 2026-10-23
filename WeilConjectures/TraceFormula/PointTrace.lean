@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FieldDevissage
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceShiftUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceShiftDecomposition
 public import WeilConjectures.LinearAlgebra.TraceLongExactSequence
@@ -157,5 +158,147 @@ theorem nonempty_shiftDecomposition_point
     exact ⟨(D.shift n).ofIso ((shiftFunctorCompIsoId _ (-n) n (neg_add_cancel n)).app P)⟩
   · intro _ P e
     exact ⟨(ShiftDecomposition.self _).ofIso (hG.preimageIso (e₀ ≪≫ e.symm))⟩
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+/-- The abelian category of `ℚ̲̄_ℓ`-module objects on the pro-étale site of the point
+`s = Spec k`, the ambient category of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+abbrev PointMod : Type _ :=
+  Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
+    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+section Ambient
+
+/-- The shifted unit `𝟙⟦n⟧` of `D(Mod_{ℚ̲̄_ℓ,s})`. -/
+noncomputable abbrev shiftedUnit (n : ℤ) : DerivedCategory (PointMod ℓ k) :=
+  (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).obj (𝟙_ _)
+
+/-- The scalars `ℚ̄_ℓ` acting on the unit of `D(Mod_{ℚ̲̄_ℓ,s})`. -/
+noncomputable def pointScalar : PadicAlgCl ℓ →+* End (𝟙_ (DerivedCategory (PointMod ℓ k))) :=
+  ((boundedConstructible _).ι.mapEndRingHom
+    (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))).comp
+    (padicAlgClUnitEndRingHom ℓ (point k))
+
+lemma bijective_pointScalar [IsSepClosed k] : Function.Bijective (pointScalar ℓ k) :=
+  ((ObjectProperty.fullyFaithfulι _).map_bijective _ _).comp
+    (bijective_padicAlgClUnitEndRingHom_point ℓ k)
+
+/-- The scalars acting on the shifted unit `𝟙⟦n⟧` by precomposition. -/
+noncomputable def shiftedUnitScalar (n : ℤ) :
+    PadicAlgCl ℓ →+* (End (shiftedUnit ℓ k n))ᵐᵒᵖ :=
+  (((shiftFunctor (DerivedCategory (PointMod ℓ k)) n).mapEndRingHom _).comp
+    (pointScalar ℓ k)).toOpposite fun x y ↦ by
+      unfold Commute SemiconjBy
+      rw [← map_mul, mul_comm, map_mul]
+
+/-- The graded pieces `Hⁿ(Y) = Hom(𝟙⟦n⟧, Y)` of `Y ∈ D(Mod_{ℚ̲̄_ℓ,s})`, as `ℚ̄_ℓ`-vector
+spaces. -/
+noncomputable def gradedHom (n : ℤ) : DerivedCategory (PointMod ℓ k) ⥤ ModuleCat (PadicAlgCl ℓ) :=
+  preadditiveCoyonedaObj (shiftedUnit ℓ k n) ⋙
+    ModuleCat.restrictScalars (shiftedUnitScalar ℓ k n)
+
+instance (n : ℤ) : (gradedHom ℓ k n).Additive := by
+  unfold gradedHom
+  infer_instance
+
+lemma gradedHom_map_apply (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} (f : Y ⟶ Y')
+    (x : shiftedUnit ℓ k n ⟶ Y) : ((gradedHom ℓ k n).map f).hom x = x ≫ f :=
+  rfl
+
+lemma gradedHom_smul (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) (c : PadicAlgCl ℓ)
+    (x : (gradedHom ℓ k n).obj Y) :
+    c • x = ((shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) ≫ x :
+      shiftedUnit ℓ k n ⟶ Y) :=
+  rfl
+
+end Ambient
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace DerivedCategory
+
+variable {F : Type (u + 1)} [Field F]
+
+/-- Morphisms `M[-b] ⟶ Z` vanish when `Hᵇ(Z) = 0`, over a field. -/
+lemma eq_zero_of_singleFunctor_of_field (b : ℤ) (M : ModuleCat.{u + 1} F)
+    (Z : DerivedCategory (ModuleCat.{u + 1} F))
+    (hZ : IsZero ((homologyFunctor (ModuleCat.{u + 1} F) b).obj Z))
+    (g : (singleFunctor (ModuleCat.{u + 1} F) b).obj M ⟶ Z) : g = 0 := by
+  have : Projective M := inferInstanceAs (Projective (ModuleCat.of F M))
+  apply (shiftFunctor (DerivedCategory (ModuleCat.{u + 1} F)) b).map_injective
+  rw [Functor.map_zero, ← cancel_epi
+    (((singleFunctors (ModuleCat.{u + 1} F)).shiftIso b 0 b (by lia)).inv.app M), Limits.comp_zero]
+  refine eq_zero_of_isZero_homology_zero M _ ?_ _
+  exact hZ.of_iso (((homologyFunctor (ModuleCat.{u + 1} F) 0).shiftIso b 0 b (by lia)).app Z)
+
+/-- Over a field, there are no nonzero morphisms between distinct shifts of `F[0]`. -/
+lemma subsingleton_hom_shift_singleFunctor (a b : ℤ) (hab : a ≠ b) :
+    Subsingleton ((shiftFunctor (DerivedCategory (ModuleCat.{u + 1} F)) a).obj
+        ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F F)) ⟶
+      (shiftFunctor (DerivedCategory (ModuleCat.{u + 1} F)) b).obj
+        ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F F))) := by
+  refine ⟨fun φ ψ ↦ ?_⟩
+  suffices h : ∀ φ : (shiftFunctor (DerivedCategory (ModuleCat.{u + 1} F)) a).obj
+      ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F F)) ⟶
+      (shiftFunctor (DerivedCategory (ModuleCat.{u + 1} F)) b).obj
+        ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F F)), φ = 0 by
+    rw [h φ, h ψ]
+  intro φ
+  rw [← cancel_epi (((singleFunctors (ModuleCat.{u + 1} F)).shiftIso a (-a) 0 (by lia)).inv.app
+    (ModuleCat.of F F)), Limits.comp_zero]
+  refine eq_zero_of_singleFunctor_of_field (-a) _ _ ?_ _
+  refine IsZero.of_iso ?_ (((homologyFunctor (ModuleCat.{u + 1} F) 0).shiftIso b (-a)
+    (b - a) (by lia)).app _)
+  rcases lt_or_gt_of_ne (sub_ne_zero.2 hab.symm) with h | h
+  · exact isZero_of_isGE _ 0 _ h
+  · exact isZero_of_isLE _ 0 _ h
+
+end DerivedCategory
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+attribute [local instance] boundedConstructibleBraiding
+
+/-- There are no nonzero morphisms between distinct shifts of the unit of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+lemma subsingleton_hom_shift_unit_point (a b : ℤ) (hab : a ≠ b) :
+    Subsingleton ((shiftFunctor (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) a).obj
+        (𝟙_ _) ⟶
+      (shiftFunctor (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) b).obj (𝟙_ _)) := by
+  obtain ⟨G, _, _, ⟨hG⟩, -, -, ⟨e₀⟩⟩ := exists_fiberFunctor_point ℓ k
+  have := DerivedCategory.subsingleton_hom_shift_singleFunctor
+    (F := ULift.{u + 1} (PadicAlgCl ℓ)) a b hab
+  exact (hG.homEquiv.trans (Iso.homCongr ((G.commShiftIso a).app _ ≪≫
+    (shiftFunctor _ a).mapIso e₀) ((G.commShiftIso b).app _ ≪≫
+      (shiftFunctor _ b).mapIso e₀))).subsingleton
+
+/-- There are no nonzero morphisms between distinct shifts of the unit of `D(Mod_{ℚ̲̄_ℓ,s})`. -/
+lemma subsingleton_hom_shiftedUnit (a b : ℤ) (hab : a ≠ b) :
+    Subsingleton (shiftedUnit ℓ k a ⟶ shiftedUnit ℓ k b) := by
+  have := subsingleton_hom_shift_unit_point ℓ k a b hab
+  exact ((ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj
+    (Profinite.padicAlgClRingObj ℓ) (point k).left))).homEquiv.trans
+    (Iso.homCongr (((boundedConstructible _).ι.commShiftIso a).app (𝟙_ _))
+      (((boundedConstructible _).ι.commShiftIso b).app (𝟙_ _)))).symm.subsingleton
 
 end AlgebraicGeometry.ProEtale.CondensedRing

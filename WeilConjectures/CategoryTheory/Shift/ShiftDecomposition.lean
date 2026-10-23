@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-public import Mathlib.CategoryTheory.Shift.Basic
+public import Mathlib.CategoryTheory.Shift.CommShift
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 public import Mathlib.Data.Fintype.BigOperators
 
@@ -140,6 +140,27 @@ def sum {P₁ P₂ : C} (D₁ : ShiftDecomposition E P₁) (D₂ : ShiftDecompos
     | .inr j, .inl j', _ => by simp [reassoc_of% h₂₁]
     | .inr j, .inr j', h => by
         simp [reassoc_of% h₂, D₂.incl_proj_of_ne j j' (fun e ↦ h (congrArg _ e))]
+
+variable {D : Type*} [Category D] [Preadditive D] [HasShift D ℤ]
+  [∀ n : ℤ, (shiftFunctor D n).Additive]
+
+/-- The image of a decomposition under an additive functor commuting with the shifts. -/
+noncomputable def map (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] (Dc : ShiftDecomposition E P) :
+    ShiftDecomposition (F.obj E) (F.obj P) where
+  ι := Dc.ι
+  deg := Dc.deg
+  incl j := (F.commShiftIso (Dc.deg j)).inv.app E ≫ F.map (Dc.incl j)
+  proj j := F.map (Dc.proj j) ≫ (F.commShiftIso (Dc.deg j)).hom.app E
+  total := by
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← F.map_comp, ← F.map_sum, Dc.total,
+      F.map_id]
+  incl_proj_self j := by
+    simp only [Category.assoc, ← F.map_comp_assoc, Dc.incl_proj_self, F.map_id,
+      Category.id_comp, Iso.inv_hom_id_app]
+    rfl
+  incl_proj_of_ne j j' h := by
+    simp only [Category.assoc, ← F.map_comp_assoc, Dc.incl_proj_of_ne j j' h, F.map_zero,
+      Limits.zero_comp, Limits.comp_zero]
 
 end ShiftDecomposition
 
