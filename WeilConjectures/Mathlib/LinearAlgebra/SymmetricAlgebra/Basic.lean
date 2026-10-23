@@ -7,162 +7,119 @@ module
 
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Localization.Module
-public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
-# Functoriality of the symmetric algebra along semilinear maps
+# The symmetric algebra commutes with localization
 
-For a ring map `ρ : R →+* S` and a `ρ`-semilinear map `l : M →ₛₗ[ρ] N` from an `R`-module to an
-`S`-module, we construct the ring map `SymmetricAlgebra R M →+* SymmetricAlgebra S N` extending
-`ρ` and `l` (`SymmetricAlgebra.mapSemilinear`). We show that it is compatible with the
-augmentations `SymmetricAlgebra.algebraMapInv`, and that the symmetric algebra commutes with
-localization: if `S = R[1/g]` and `N = M[1/g]`, then `SymmetricAlgebra S N` is the localization
-of `SymmetricAlgebra R M` away from `g`
-(`SymmetricAlgebra.isLocalization_away_mapSemilinear`).
+Let `S` be a submonoid of `R`, `R'` a localization of `R` at `S` and `g : M →ₗ[R] N` a
+localization of the `R`-module `M` at `S`, with `N` an `R'`-module. Then the natural map
+`Sym_R M ⟶ Sym_{R'} N` is a localization at (the image of) `S`
+(`SymmetricAlgebra.isLocalization_mapOfLocalization`). This is the algebraic input for the
+symmetric algebra `Sym^• ℰ` of a quasi-coherent sheaf `ℰ` to be a quasi-coherent algebra: on
+affine opens its sections are `Sym_{Γ(U)} Γ(U, ℰ)`, compatibly with restriction to basic opens.
 -/
 
 @[expose] public section
 
 namespace SymmetricAlgebra
 
-variable {R S : Type*} [CommRing R] [CommRing S] {M N : Type*} [AddCommGroup M] [Module R M]
-  [AddCommGroup N] [Module S N]
+variable {R : Type*} [CommRing R] (S : Submonoid R) (R' : Type*) [CommRing R'] [Algebra R R']
+  [IsLocalization S R'] {M : Type*} [AddCommGroup M] [Module R M] {N : Type*} [AddCommGroup N]
+  [Module R N] [Module R' N] [IsScalarTower R R' N] (g : M →ₗ[R] N)
 
-/-- Two ring maps out of a symmetric algebra agree as soon as they agree on the scalars and on
-the generators. -/
-theorem ringHom_ext {B : Type*} [Semiring B] {F G : SymmetricAlgebra R M →+* B}
-    (h₁ : ∀ r, F (algebraMap R _ r) = G (algebraMap R _ r)) (h₂ : ∀ m, F (ι R M m) = G (ι R M m)) :
-    F = G := by
-  refine RingHom.ext fun x ↦ ?_
-  induction x using SymmetricAlgebra.induction with
-  | algebraMap r => exact h₁ r
-  | ι m => exact h₂ m
-  | mul a b ha hb => rw [map_mul, map_mul, ha, hb]
-  | add a b ha hb => rw [map_add, map_add, ha, hb]
+/-- The map `Sym_R M ⟶ Sym_{R'} N` induced by `g : M →ₗ[R] N`. -/
+noncomputable def mapOfLocalization : SymmetricAlgebra R M →ₐ[R] SymmetricAlgebra R' N :=
+  lift ((ι R' N).restrictScalars R ∘ₗ g)
 
-/-- The ring map `Sym_R M →+* Sym_S N` induced by a ring map `ρ : R →+* S` and a `ρ`-semilinear
-map `l : M →ₛₗ[ρ] N`. -/
-noncomputable def mapSemilinear {ρ : R →+* S} (l : M →ₛₗ[ρ] N) :
-    SymmetricAlgebra R M →+* SymmetricAlgebra S N :=
-  letI : Algebra R (SymmetricAlgebra S N) := ((algebraMap S _).comp ρ).toAlgebra
-  (lift
-    { toFun := fun m ↦ ι S N (l m)
-      map_add' := fun m m' ↦ by rw [map_add, map_add]
-      map_smul' := fun r m ↦ by
-        rw [l.map_smulₛₗ, map_smul, Algebra.smul_def, Algebra.smul_def]
-        rfl } : SymmetricAlgebra R M →ₐ[R] SymmetricAlgebra S N).toRingHom
-
-variable {ρ : R →+* S} (l : M →ₛₗ[ρ] N)
-
+omit [IsLocalization S R'] in
 @[simp]
-theorem mapSemilinear_algebraMap (r : R) :
-    mapSemilinear l (algebraMap R _ r) = algebraMap S _ (ρ r) := by
-  let : Algebra R (SymmetricAlgebra S N) := ((algebraMap S _).comp ρ).toAlgebra
-  exact AlgHom.commutes _ r
+lemma mapOfLocalization_ι (m : M) :
+    mapOfLocalization R' g (ι R M m) = ι R' N (g m) := by
+  simp [mapOfLocalization]
 
-@[simp]
-theorem mapSemilinear_ι (m : M) : mapSemilinear l (ι R M m) = ι S N (l m) := by
-  let : Algebra R (SymmetricAlgebra S N) := ((algebraMap S _).comp ρ).toAlgebra
-  exact lift_ι_apply _ m
-
-theorem mapSemilinear_id : mapSemilinear (LinearMap.id : M →ₗ[R] M) = RingHom.id _ :=
-  ringHom_ext (fun r ↦ by simp) fun m ↦ by simp
-
-theorem mapSemilinear_comp {T : Type*} [CommRing T] {P : Type*} [AddCommGroup P] [Module T P]
-    {σ : S →+* T} {τ : R →+* T} [RingHomCompTriple ρ σ τ] (l' : N →ₛₗ[σ] P) :
-    mapSemilinear (l'.comp l) = (mapSemilinear l').comp (mapSemilinear l) :=
-  ringHom_ext (fun r ↦ by simp [RingHomCompTriple.comp_apply]) fun m ↦ by simp
-
-/-- `mapSemilinear` is compatible with the augmentations `Sym_R M → R` and `Sym_S N → S`. -/
-theorem algebraMapInv_mapSemilinear :
-    (algebraMapInv : SymmetricAlgebra S N →ₐ[S] S).toRingHom.comp (mapSemilinear l) =
-      ρ.comp (algebraMapInv : SymmetricAlgebra R M →ₐ[R] R).toRingHom :=
-  ringHom_ext (fun r ↦ by simp [algebraMapInv]) fun m ↦ by simp [algebraMapInv]
-
-/-- **The symmetric algebra commutes with localization.** Let `S` be the localization of `R` away
-from `g` and let `l : M → N` exhibit the `S`-module `N` as the localization of `M` away from `g`.
-Then `Sym_S N` is the localization of `Sym_R M` away from `g`. -/
-theorem isLocalization_away_mapSemilinear [Algebra R S] (g : R) [IsLocalization.Away g S]
-    [Module R N] [IsScalarTower R S N] (l : M →ₗ[R] N) (hl : IsLocalizedModule.Away g l)
-    (l' : M →ₛₗ[algebraMap R S] N) (hl' : ∀ m, l' m = l m) :
-    letI := (mapSemilinear l').toAlgebra
-    IsLocalization.Away (algebraMap R (SymmetricAlgebra R M) g) (SymmetricAlgebra S N) := by
-  let := (mapSemilinear l').toAlgebra
-  set x := algebraMap R (SymmetricAlgebra R M) g
-  have hφ (y : SymmetricAlgebra R M) :
-      algebraMap (SymmetricAlgebra R M) (SymmetricAlgebra S N) y = mapSemilinear l' y := rfl
-  have hx (n : ℕ) : algebraMap (SymmetricAlgebra R M) (SymmetricAlgebra S N) (x ^ n) =
-      algebraMap S _ (algebraMap R S (g ^ n)) := by
-    rw [hφ, ← map_pow, mapSemilinear_algebraMap]
-  refine ⟨⟨fun ⟨y, n, hn⟩ ↦ ?_, fun z ↦ ?_, fun {a b} h ↦ ?_⟩⟩
-  · subst hn
-    rw [hx]
-    rw [map_pow, map_pow]
-    exact ((IsLocalization.Away.algebraMap_isUnit (S := S) g).map
-      (algebraMap S (SymmetricAlgebra S N))).pow n
-  · -- every element of `Sym_S N` is a fraction with denominator a power of `g`
+/-- **The symmetric algebra commutes with localization.** If `R'` is the localization of `R` at
+`S` and `g : M →ₗ[R] N` is a localization of modules at `S` (`N` an `R'`-module), then
+`Sym_{R'} N` is the localization of `Sym_R M` at the image of `S`. -/
+theorem isLocalization_mapOfLocalization [IsLocalizedModule S g] :
+    letI := (mapOfLocalization R' g).toRingHom.toAlgebra
+    IsLocalization (Algebra.algebraMapSubmonoid (SymmetricAlgebra R M) S)
+      (SymmetricAlgebra R' N) := by
+  let := (mapOfLocalization R' g).toRingHom.toAlgebra
+  have halg (x : SymmetricAlgebra R M) :
+      algebraMap (SymmetricAlgebra R M) (SymmetricAlgebra R' N) x = mapOfLocalization R' g x :=
+    rfl
+  set φ := mapOfLocalization R' g
+  have hφ (r : R) : φ (algebraMap R _ r) = algebraMap R (SymmetricAlgebra R' N) r := φ.commutes r
+  have hR (r : R) : algebraMap R (SymmetricAlgebra R' N) r =
+      algebraMap R' (SymmetricAlgebra R' N) (algebraMap R R' r) :=
+    IsScalarTower.algebraMap_apply R R' _ r
+  constructor
+  refine ⟨?_, ?_, ?_⟩
+  · rintro ⟨_, s, hs, rfl⟩
+    rw [halg, hφ, hR]
+    exact (IsLocalization.map_units R' ⟨s, hs⟩).map _
+  · -- every element is a fraction `φ x / φ s`
+    suffices H : ∀ z : SymmetricAlgebra R' N, ∃ x : SymmetricAlgebra R M, ∃ s ∈ S,
+        z * algebraMap R _ s = φ x by
+      intro z
+      obtain ⟨x, s, hs, h⟩ := H z
+      exact ⟨⟨x, ⟨_, s, hs, rfl⟩⟩, by simpa [halg, hφ] using h⟩
+    intro z
     induction z using SymmetricAlgebra.induction with
-    | algebraMap s =>
-      obtain ⟨⟨r, ⟨_, n, rfl⟩⟩, hr⟩ := IsLocalization.surj (Submonoid.powers g) s
-      refine ⟨⟨algebraMap R _ r, ⟨x ^ n, n, rfl⟩⟩, ?_⟩
-      dsimp only at hr ⊢
-      rw [hx, ← map_mul, hr, hφ, mapSemilinear_algebraMap]
+    | algebraMap r =>
+      obtain ⟨⟨a, s⟩, h⟩ := IsLocalization.surj S r
+      refine ⟨algebraMap R _ a, s, s.2, ?_⟩
+      rw [hφ, hR, hR, ← map_mul, h]
     | ι n =>
-      obtain ⟨⟨m, ⟨_, k, rfl⟩⟩, hm⟩ := IsLocalizedModule.surj (Submonoid.powers g) l n
-      refine ⟨⟨ι R M m, ⟨x ^ k, k, rfl⟩⟩, ?_⟩
-      dsimp only at hm ⊢
-      rw [hx, hφ, mapSemilinear_ι, mul_comm, ← Algebra.smul_def, ← map_smul, algebraMap_smul,
-        hl', ← hm, Submonoid.smul_def]
+      obtain ⟨⟨m, s⟩, h⟩ := IsLocalizedModule.surj S g n
+      refine ⟨ι R M m, s, s.2, ?_⟩
+      rw [mapOfLocalization_ι, ← h, mul_comm, ← Algebra.smul_def, LinearMap.map_smul_of_tower]
+      rfl
     | mul a b ha hb =>
-      obtain ⟨⟨a', ya⟩, ha⟩ := ha
-      obtain ⟨⟨b', yb⟩, hb⟩ := hb
-      refine ⟨⟨a' * b', ya * yb⟩, ?_⟩
-      dsimp only at ha hb ⊢
-      rw [Submonoid.coe_mul, map_mul, map_mul, ← ha, ← hb]
+      obtain ⟨x, s, hs, hx⟩ := ha
+      obtain ⟨y, t, ht, hy⟩ := hb
+      refine ⟨x * y, s * t, S.mul_mem hs ht, ?_⟩
+      rw [map_mul, map_mul, ← hx, ← hy]
       ring
     | add a b ha hb =>
-      obtain ⟨⟨a', ya⟩, ha⟩ := ha
-      obtain ⟨⟨b', yb⟩, hb⟩ := hb
-      refine ⟨⟨a' * yb + b' * ya, ya * yb⟩, ?_⟩
-      dsimp only at ha hb ⊢
-      rw [Submonoid.coe_mul, map_add, map_mul, map_mul, map_mul, ← ha, ← hb]
+      obtain ⟨x, s, hs, hx⟩ := ha
+      obtain ⟨y, t, ht, hy⟩ := hb
+      refine ⟨x * algebraMap R _ t + y * algebraMap R _ s, s * t, S.mul_mem hs ht, ?_⟩
+      simp only [map_add, map_mul, hφ]
+      rw [← hx, ← hy]
       ring
-  · -- construct a left inverse `Sym_S N → (Sym_R M)[1/g]`
-    let L := Localization.Away x
-    have hgL : IsUnit (algebraMap R L g) := by
+  · -- injectivity up to `S`: construct the inverse map into the localization
+    intro x y hxy
+    let T := Algebra.algebraMapSubmonoid (SymmetricAlgebra R M) S
+    let L := Localization T
+    have hu (s : S) : IsUnit (algebraMap R L s) := by
       rw [IsScalarTower.algebraMap_apply R (SymmetricAlgebra R M) L]
-      exact IsLocalization.Away.algebraMap_isUnit x
-    let : Algebra S L := (IsLocalization.Away.lift g hgL).toAlgebra
-    have hSL (s : S) : algebraMap S L s = IsLocalization.Away.lift g hgL s := rfl
-    have : IsScalarTower R S L := .of_algebraMap_eq fun r ↦ by
-      rw [hSL, IsLocalization.Away.lift_eq]
-    let T : M →ₗ[R] L := (IsScalarTower.toAlgHom R (SymmetricAlgebra R M) L).toLinearMap ∘ₗ ι R M
-    have hT : ∀ s : Submonoid.powers g, IsUnit (algebraMap R (Module.End R L) s) := by
-      rintro ⟨_, n, rfl⟩
-      have hu : IsUnit (algebraMap R L (g ^ n)) := by rw [map_pow]; exact hgL.pow n
-      have hE (a : L) : algebraMap R (Module.End R L) (g ^ n) a = algebraMap R L (g ^ n) * a := by
-        rw [Module.algebraMap_end_apply, Algebra.smul_def]
-      change IsUnit (algebraMap R (Module.End R L) (g ^ n))
+      exact IsLocalization.map_units L (⟨_, s, s.2, rfl⟩ : T)
+    let : Algebra R' L := (IsLocalization.lift (M := S) (S := R') hu).toAlgebra
+    have : IsScalarTower R R' L := .of_algebraMap_eq fun r ↦
+      (IsLocalization.lift_eq (M := S) (S := R') hu r).symm
+    let h₀ : M →ₗ[R] L :=
+      (IsScalarTower.toAlgHom R (SymmetricAlgebra R M) L).toLinearMap ∘ₗ ι R M
+    let h₁ : N →ₗ[R] L := IsLocalizedModule.lift S g h₀ fun s ↦ by
       rw [Module.End.isUnit_iff]
-      refine ⟨fun a b hab ↦ hu.mul_left_cancel ?_, fun a ↦ ⟨hu.unit⁻¹ * a, ?_⟩⟩
-      · rwa [hE, hE] at hab
-      · rw [hE, ← mul_assoc, IsUnit.mul_val_inv, one_mul]
-    let ψ : N →ₗ[S] L := (IsLocalizedModule.lift (Submonoid.powers g) l T hT)
-      |>.extendScalarsOfIsLocalization (Submonoid.powers g) S
-    let Ψ : SymmetricAlgebra S N →+* L := (lift ψ).toRingHom
-    have hΨ : Ψ.comp (mapSemilinear l') = algebraMap (SymmetricAlgebra R M) L := by
-      refine ringHom_ext (fun r ↦ ?_) fun m ↦ ?_
-      · simp only [RingHom.coe_comp, Function.comp_apply, mapSemilinear_algebraMap, Ψ,
-          AlgHom.toRingHom_eq_coe, RingHom.coe_coe, AlgHom.commutes]
-        rw [hSL, IsLocalization.Away.lift_eq, ← IsScalarTower.algebraMap_apply]
-      · simp only [RingHom.coe_comp, Function.comp_apply, mapSemilinear_ι, Ψ,
-          AlgHom.toRingHom_eq_coe, RingHom.coe_coe, lift_ι_apply, hl', ψ,
-          LinearMap.extendScalarsOfIsLocalization_apply', IsLocalizedModule.lift_apply, T]
-        rfl
-    have h' : algebraMap (SymmetricAlgebra R M) L a = algebraMap (SymmetricAlgebra R M) L b := by
-      rw [← hΨ, RingHom.comp_apply, RingHom.comp_apply]
-      exact congrArg Ψ h
-    obtain ⟨c, hc⟩ := (IsLocalization.eq_iff_exists (Submonoid.powers x) L).mp h'
+      obtain ⟨u, hu'⟩ := hu s
+      refine ⟨fun a b h ↦ (hu s).mul_left_cancel ?_, fun b ↦ ⟨(↑u⁻¹ : L) * b, ?_⟩⟩
+      · simpa [Algebra.smul_def] using h
+      · simp [Algebra.smul_def, ← hu']
+    let h₂ : N →ₗ[R'] L := h₁.extendScalarsOfIsLocalization S R'
+    let ψ : SymmetricAlgebra R' N →ₐ[R'] L := lift h₂
+    have hψ : (ψ.restrictScalars R).comp φ =
+        IsScalarTower.toAlgHom R (SymmetricAlgebra R M) L := by
+      apply algHom_ext
+      ext m
+      simp [ψ, h₂, h₁, h₀, φ]
+    have := congr(ψ $hxy)
+    have hx := congr($hψ x)
+    have hy := congr($hψ y)
+    simp only [AlgHom.comp_apply, AlgHom.coe_restrictScalars'] at hx hy
+    rw [halg, halg, hx, hy] at this
+    obtain ⟨c, hc⟩ := IsLocalization.exists_of_eq (M := T) this
     exact ⟨c, hc⟩
 
 end SymmetricAlgebra

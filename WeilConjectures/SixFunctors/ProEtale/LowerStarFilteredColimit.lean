@@ -18,14 +18,14 @@ pro-étale sheaves preserves colimits of `u + 1`-small filtered diagrams
 (`AlgebraicGeometry.ProEtale.isColimit_lowerStar_mapCocone`): isomorphisms of pro-étale sheaves
 are detected on the affine pro-étale site, and over an affine `W` the sections of `g_* F` are those
 of `F` over the quasi-compact quasi-separated `W ×_Y T`, which commute with filtered colimits
-(`AlgebraicGeometry.Scheme.ProEt.exists_app_eq_of_isColimit_ab`). This is the degree `0` case of
+(`CategoryTheory.Sheaf.exists_app_eq_of_isColimit_of_finite`). This is the degree `0` case of
 the commutation of `Rg_*` with filtered colimits, needed to compare `Rg_* E_X` with
 `(Rg_* 𝒪_{E,X})[1/ℓ]` (`WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldSheafColimit`).
 
 Moreover a filtered colimit of injective sheaves is `g_*`-acyclic
 (`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_of_injective`), its higher
 cohomology over the quasi-compact quasi-separated `W ×_Y T` vanishing by
-`AlgebraicGeometry.Scheme.ProEt.subsingleton_H_succ_of_isColimit_of_injective`. With functorial
+`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective`. With functorial
 injective resolutions this gives the commutation of `Rⁱg_*` with filtered colimits; that last step
 (computing `Rⁱg_*` by the `g_*`-acyclic resolution `colim I•`) is not formalised here.
 -/
@@ -43,7 +43,7 @@ open Scheme
 /-- **The pushforward along a qcqs morphism preserves filtered colimits** of abelian pro-étale
 sheaves: on an object `W` of the affine pro-étale site of `Y`, the sections of `g_* F` are those
 of `F` over the quasi-compact quasi-separated `W ×_Y T`, which commute with filtered colimits
-(`AlgebraicGeometry.Scheme.ProEt.exists_app_eq_of_isColimit_ab`). -/
+(`CategoryTheory.Sheaf.exists_app_eq_of_isColimit_of_finite`). -/
 theorem isColimit_lowerStar_mapCocone {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCompact g]
     [QuasiSeparated g] {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
     {F : K ⥤ Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}} {c : Cocone F}
@@ -70,16 +70,23 @@ theorem isColimit_lowerStar_mapCocone {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCom
   have hc' : IsColimit c' := colimit.isColimit _
   rw [ConcreteCategory.isIso_iff_bijective]
   refine ⟨(injective_iff_map_eq_zero (φ.hom.app (op W')).hom).2 fun x hx ↦ ?_, fun s ↦ ?_⟩
-  · obtain ⟨k, t, rfl⟩ := Scheme.ProEt.exists_app_eq_of_isColimit_ab hc' (W := W') x
+  · obtain ⟨k, t, rfl⟩ := Sheaf.exists_app_eq_of_isColimit_of_finite hc'
+      (fun W : Y.ProEt ↦ CompactSpace W.left ∧ QuasiSeparatedSpace W.left)
+      (fun _ hW _ hR ↦ ProEt.exists_finite_cechNerve_of_mem_topology hW hR) ⟨‹_›, ‹_›⟩ x
     have h0 : (c.ι.app k).hom.app (op V) t = 0 := by
       change ((c'.ι.app k ≫ φ).hom.app (op W')) t = 0 at hx
       rw [hφ] at hx
       exact hx
-    obtain ⟨k', a, ha⟩ := Scheme.ProEt.exists_map_eq_zero_of_isColimit_ab hc (W := V) t h0
+    obtain ⟨k', a, ha⟩ := Sheaf.exists_map_eq_zero_of_isColimit_of_finite hc
+      (fun R hR ↦ by
+        obtain ⟨n, U, -, hUR, hUJ⟩ := ProEt.exists_finite_cechNerve_of_mem_topology ⟨‹_›, ‹_›⟩ hR
+        exact ⟨n, U, hUR, hUJ⟩) t h0
     rw [← c'.w a]
     change ((c'.ι.app k').hom.app (op W')) ((F.map a).hom.app (op V) t) = 0
     rw [ha, map_zero]
-  · obtain ⟨k, t, ht⟩ := Scheme.ProEt.exists_app_eq_of_isColimit_ab hc (W := V) s
+  · obtain ⟨k, t, ht⟩ := Sheaf.exists_app_eq_of_isColimit_of_finite hc
+      (fun W : T.ProEt ↦ CompactSpace W.left ∧ QuasiSeparatedSpace W.left)
+      (fun _ hW _ hR ↦ ProEt.exists_finite_cechNerve_of_mem_topology hW hR) ⟨‹_›, ‹_›⟩ s
     refine ⟨(c'.ι.app k).hom.app (op W') t, ?_⟩
     change ((c'.ι.app k ≫ φ).hom.app (op W')) t = s
     rw [hφ]
@@ -90,7 +97,7 @@ morphism**: by `AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isZero_righ
 suffices that its higher cohomology over `W ×_Y T` vanishes for `W` affine, and the restriction to
 the quasi-compact quasi-separated `W ×_Y T` is a filtered colimit of injective sheaves, which has
 no higher cohomology
-(`AlgebraicGeometry.Scheme.ProEt.subsingleton_H_succ_of_isColimit_of_injective`).
+(`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective`).
 -/
 theorem rightAcyclic_lowerStar_of_isColimit_of_injective {T Y : Scheme.{u}} (g : T ⟶ Y)
     [QuasiCompact g] [QuasiSeparated g] {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
@@ -114,7 +121,10 @@ theorem rightAcyclic_lowerStar_of_isColimit_of_injective {T Y : Scheme.{u}} (g :
   have hc₂ := isColimitOfPreserves (ProEtale.upperStar AddCommGrpCat.{u + 1} V.hom) hc
   have (k : K) : Injective ((I ⋙ ProEtale.upperStar AddCommGrpCat.{u + 1} V.hom).obj k) :=
     injective_upperStar_obj_of_weaklyEtale _ V.hom (I.obj k)
-  have hs := Scheme.ProEt.subsingleton_H_succ_of_isColimit_of_injective V.left hc₂ q
+  have hs := Sheaf.subsingleton_H_succ_of_isColimit_of_injective
+    (MorphismProperty.Over.mkIdTerminal @WeaklyEtale V.left)
+    (fun W : V.left.ProEt ↦ CompactSpace W.left ∧ QuasiSeparatedSpace W.left) ⟨‹_›, ‹_›⟩
+    (fun _ hW _ hR ↦ ProEt.exists_finite_cechNerve_of_mem_topology hW hR) hc₂ q
   obtain ⟨e⟩ := Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ
     (ProEt.topology V.left) _ (ProEt.isTerminalMkId V.left)
     ((ProEtale.upperStar AddCommGrpCat.{u + 1} V.hom).obj c.pt) q

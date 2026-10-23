@@ -7,37 +7,26 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
-public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 
 /-!
-# Vector bundles of quasi-coherent modules and the relative tangent bundle
-
-For a quasi-coherent `𝒪_X`-module `M`, the *vector bundle* `𝕍(M) = Spec_X Sym_{𝒪_X}(M)` is the
-relative spectrum of the symmetric algebra of `M`. It is constructed by gluing the affine schemes
-`Spec Sym_{Γ(X, U)} Γ(M, U)` over the affine opens `U` of `X`
-(`AlgebraicGeometry.Scheme.AffineZariskiSite.relativeGluingData`); this is possible because the
-symmetric algebra commutes with localization (`SymmetricAlgebra.isLocalization_away_mapSemilinear`)
-and the sections of a quasi-coherent module over a basic open are a localization
-(`AlgebraicGeometry.Scheme.Modules.isLocalizedModule_basicOpen`). Its *zero section*
-`X ⟶ 𝕍(M)` corresponds to the augmentation `Sym_{𝒪_X}(M) ⟶ 𝒪_X`, which kills `M`.
+# The relative tangent bundle
 
 For a morphism `f : X ⟶ Y`, the sheaf of relative differentials `Ω¹_{X/Y}` is quasi-coherent
 (`AlgebraicGeometry.Scheme.Hom.isQuasicoherent_relativeDifferentials`), and the *relative tangent
-bundle* is `T_{X/Y} = 𝕍(Ω¹_{X/Y}) = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})`.
+bundle* is the vector bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})`
+(`AlgebraicGeometry.Scheme.Modules.symSpec`), with its zero section `X ⟶ T_{X/Y}`
+corresponding to the augmentation `Sym_{𝒪_X}(Ω¹_{X/Y}) ⟶ 𝒪_X`, which kills `Ω¹_{X/Y}`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Modules.vectorBundle`: the vector bundle `Spec_X Sym_{𝒪_X}(M)`,
-  with its projection `vectorBundleProj` and its zero section `vectorBundleZeroSection`.
 - `AlgebraicGeometry.Scheme.Hom.tangentBundle`: the relative tangent bundle `T_{X/Y}`, with its
   projection `tangentBundleProj` and its zero section `tangentBundleZeroSection`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.vectorBundleZeroSection_vectorBundleProj` and
-  `AlgebraicGeometry.Scheme.Hom.tangentBundleZeroSection_tangentBundleProj`: the zero section is
+- `AlgebraicGeometry.Scheme.Hom.tangentBundleZeroSection_tangentBundleProj`: the zero section is
   a section of the projection.
 -/
 
@@ -75,151 +64,6 @@ instance isQuasicoherent_relativeDifferentials : f.relativeDifferentials.IsQuasi
   exact (presentationTilde _ Set.univ (by simp) _ (Submodule.span_eq _)).ofIsIso
     (f.relativeDifferentialsRestrictFromSpecIso (hU x) (hV x) (hVU x)).inv
 
-end Scheme.Hom
-
-namespace Scheme.Modules
-
-open AffineZariskiSite
-
-variable {X : Scheme.{u}} (M : X.Modules)
-
-/-- The restriction map `Γ(M, U) → Γ(M, V)` of an `𝒪_X`-module, as a semilinear map over the
-restriction map `Γ(X, U) → Γ(X, V)`. -/
-noncomputable def restrictSemilinear {U V : X.Opens} (i : V ⟶ U) :
-    Γ(M, U) →ₛₗ[(X.presheaf.map i.op).hom] Γ(M, V) where
-  toFun := M.presheaf.map i.op
-  map_add' := map_add _
-  map_smul' := M.map_smul i
-
-@[simp]
-lemma restrictSemilinear_apply {U V : X.Opens} (i : V ⟶ U) (m : Γ(M, U)) :
-    M.restrictSemilinear i m = M.presheaf.map i.op m :=
-  rfl
-
-/-- The ring map `Sym_{Γ(X, U)} Γ(M, U) → Sym_{Γ(X, V)} Γ(M, V)` induced by restriction. -/
-noncomputable def symmetricAlgebraMap {U V : X.Opens} (i : V ⟶ U) :
-    SymmetricAlgebra Γ(X, U) Γ(M, U) →+* SymmetricAlgebra Γ(X, V) Γ(M, V) :=
-  SymmetricAlgebra.mapSemilinear (M.restrictSemilinear i)
-
-lemma symmetricAlgebraMap_id (U : X.Opens) : M.symmetricAlgebraMap (𝟙 U) = RingHom.id _ :=
-  SymmetricAlgebra.ringHom_ext (fun r ↦ by simp [symmetricAlgebraMap])
-    fun m ↦ by
-      simp only [symmetricAlgebraMap, SymmetricAlgebra.mapSemilinear_ι, RingHom.id_apply]
-      change SymmetricAlgebra.ι Γ(X, U) Γ(M, U) (M.presheaf.map (𝟙 U).op m) = _
-      simp
-
-lemma symmetricAlgebraMap_comp {U V W : X.Opens} (i : V ⟶ U) (j : W ⟶ V) :
-    M.symmetricAlgebraMap (j ≫ i) = (M.symmetricAlgebraMap j).comp (M.symmetricAlgebraMap i) :=
-  SymmetricAlgebra.ringHom_ext (fun r ↦ by simp [symmetricAlgebraMap])
-    fun m ↦ by
-      simp only [symmetricAlgebraMap, SymmetricAlgebra.mapSemilinear_ι, RingHom.comp_apply]
-      change SymmetricAlgebra.ι Γ(X, W) Γ(M, W) (M.presheaf.map (j ≫ i).op m) =
-        SymmetricAlgebra.ι Γ(X, W) Γ(M, W) (M.presheaf.map j.op (M.presheaf.map i.op m))
-      simp
-
-/-- The symmetric algebra `Sym_{𝒪_X}(M)` of an `𝒪_X`-module, on the affine opens of `X`. -/
-@[simps obj]
-noncomputable def symmetricAlgebraPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} where
-  obj U := .of (SymmetricAlgebra Γ(X, U.unop.toOpens) Γ(M, U.unop.toOpens))
-  map {U V} i := CommRingCat.ofHom (M.symmetricAlgebraMap ((toOpensFunctor X).map i.unop))
-  map_id U := by
-    ext1
-    exact M.symmetricAlgebraMap_id U.unop.toOpens
-  map_comp {U V W} i j := by
-    ext1
-    exact M.symmetricAlgebraMap_comp ((toOpensFunctor X).map i.unop)
-      ((toOpensFunctor X).map j.unop)
-
-/-- The structure map `𝒪_X ⟶ Sym_{𝒪_X}(M)`. -/
-@[simps]
-noncomputable def toSymmetricAlgebraPresheaf :
-    (toOpensFunctor X).op ⋙ X.presheaf ⟶ M.symmetricAlgebraPresheaf where
-  app U := CommRingCat.ofHom (algebraMap Γ(X, U.unop.toOpens)
-    (SymmetricAlgebra Γ(X, U.unop.toOpens) Γ(M, U.unop.toOpens)))
-  naturality {U V} i := by
-    ext r
-    simp only [Functor.comp_obj, Functor.op_obj, Functor.comp_map,
-      CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp, Function.comp_apply]
-    exact (SymmetricAlgebra.mapSemilinear_algebraMap
-      (M.restrictSemilinear ((toOpensFunctor X).map i.unop)) (R := Γ(X, U.unop.toOpens))
-      (M := Γ(M, U.unop.toOpens)) (S := Γ(X, V.unop.toOpens)) (N := Γ(M, V.unop.toOpens)) r).symm
-
-/-- The augmentation `Sym_{𝒪_X}(M) ⟶ 𝒪_X`, which kills `M`. -/
-@[simps]
-noncomputable def symmetricAlgebraPresheafAugmentation :
-    M.symmetricAlgebraPresheaf ⟶ (toOpensFunctor X).op ⋙ X.presheaf where
-  app U := CommRingCat.ofHom (SymmetricAlgebra.algebraMapInv (R := Γ(X, U.unop.toOpens))
-    (M := Γ(M, U.unop.toOpens))).toRingHom
-  naturality {U V} i := by
-    ext1
-    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom]
-    exact SymmetricAlgebra.algebraMapInv_mapSemilinear
-      (M.restrictSemilinear ((toOpensFunctor X).map i.unop))
-
-lemma toSymmetricAlgebraPresheaf_comp_augmentation :
-    M.toSymmetricAlgebraPresheaf ≫ M.symmetricAlgebraPresheafAugmentation = 𝟙 _ := by
-  ext U r
-  exact AlgHom.commutes (SymmetricAlgebra.algebraMapInv (R := Γ(X, U.unop.toOpens))
-    (M := Γ(M, U.unop.toOpens))) r
-
-variable [M.IsQuasicoherent]
-
-/-- `Sym_{𝒪_X}(M)` is a quasi-coherent `𝒪_X`-algebra: over a basic open `D(g)` of an affine open
-`U`, it is the localization of its sections over `U` away from `g`. -/
-lemma coequifibered_toSymmetricAlgebraPresheaf : M.toSymmetricAlgebraPresheaf.Coequifibered := by
-  rw [coequifibered_iff_forall_isLocalizationAway]
-  intro U g
-  have := U.2.isLocalization_basicOpen g
-  let : Module Γ(X, U.1) Γ(M, X.basicOpen g) :=
-    Module.compHom _ (algebraMap Γ(X, U.1) Γ(X, X.basicOpen g))
-  have : IsScalarTower Γ(X, U.1) Γ(X, X.basicOpen g) Γ(M, X.basicOpen g) :=
-    IsScalarTower.of_compHom _ _ _
-  exact SymmetricAlgebra.isLocalization_away_mapSemilinear g _
-    (isLocalizedModule_basicOpen M U.2 g)
-    (M.restrictSemilinear (homOfLE (X.basicOpen_le g))) fun _ ↦ rfl
-
-/-- The vector bundle `𝕍(M) = Spec_X Sym_{𝒪_X}(M)` of a quasi-coherent `𝒪_X`-module `M`. -/
-noncomputable def vectorBundle : Scheme.{u} :=
-  (relativeGluingData M.coequifibered_toSymmetricAlgebraPresheaf).glued
-
-/-- The projection `𝕍(M) ⟶ X`. -/
-noncomputable def vectorBundleProj : M.vectorBundle ⟶ X :=
-  (relativeGluingData M.coequifibered_toSymmetricAlgebraPresheaf).toBase
-
-instance : IsAffineHom M.vectorBundleProj :=
-  inferInstanceAs (IsAffineHom
-    (relativeGluingData M.coequifibered_toSymmetricAlgebraPresheaf).toBase)
-
-/-- `X` is its own relative spectrum: the structure morphism `Spec_X 𝒪_X ⟶ X` is an
-isomorphism. -/
-instance isIso_toBase_structurePresheaf (X : Scheme.{u}) :
-    IsIso (relativeGluingData
-      (NatTrans.Coequifibered.of_isIso (𝟙 ((toOpensFunctor X).op ⋙ X.presheaf)))).toBase :=
-  toBase_of_forall _ (MorphismProperty.isomorphisms Scheme) fun U ↦ by
-    rw [NatTrans.id_app, Spec.map_id]
-    exact inferInstanceAs (IsIso (𝟙 _))
-
-/-- The zero section `X ⟶ 𝕍(M)`, corresponding to the augmentation `Sym_{𝒪_X}(M) ⟶ 𝒪_X`. -/
-noncomputable def vectorBundleZeroSection : X ⟶ M.vectorBundle :=
-  inv (relativeGluingData
-      (NatTrans.Coequifibered.of_isIso (𝟙 ((toOpensFunctor X).op ⋙ X.presheaf)))).toBase ≫
-    relativeGluingMap M.coequifibered_toSymmetricAlgebraPresheaf
-      (NatTrans.Coequifibered.of_isIso _) M.symmetricAlgebraPresheafAugmentation
-
-/-- The zero section is a section of the projection. -/
-@[reassoc (attr := simp)]
-lemma vectorBundleZeroSection_vectorBundleProj :
-    M.vectorBundleZeroSection ≫ M.vectorBundleProj = 𝟙 X := by
-  rw [vectorBundleZeroSection, vectorBundleProj, Category.assoc,
-    relativeGluingMap_toBase _ _ _ (by rw [toSymmetricAlgebraPresheaf_comp_augmentation]),
-    IsIso.inv_hom_id]
-
-end Scheme.Modules
-
-namespace Scheme.Hom
-
-variable {X Y : Scheme.{u}} (f : X ⟶ Y)
-
 /-- Blueprint `pur9-dg-def-tangent`: Relative tangent bundle
 
 The relative tangent bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})` of a morphism `f : X ⟶ Y`.
@@ -227,26 +71,26 @@ The blueprint considers it for smooth `f`, where `Ω¹_{X/Y}` is locally free
 (`AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials`), but the
 construction makes sense for every morphism. -/
 noncomputable def tangentBundle : Scheme.{u} :=
-  f.relativeDifferentials.vectorBundle
+  f.relativeDifferentials.symSpec
 
 /-- Blueprint `pur9-dg-def-tangent`: Relative tangent bundle
 
 The projection `T_{X/Y} ⟶ X`. -/
 noncomputable def tangentBundleProj : f.tangentBundle ⟶ X :=
-  f.relativeDifferentials.vectorBundleProj
+  f.relativeDifferentials.symSpecProj
 
 /-- Blueprint `pur9-dg-def-tangent`: Relative tangent bundle
 
 The zero section `X ⟶ T_{X/Y}`, corresponding to the augmentation
 `Sym_{𝒪_X}(Ω¹_{X/Y}) ⟶ 𝒪_X`. -/
 noncomputable def tangentBundleZeroSection : X ⟶ f.tangentBundle :=
-  f.relativeDifferentials.vectorBundleZeroSection
+  f.relativeDifferentials.symSpecZeroSection
 
 /-- The zero section of the relative tangent bundle is a section of its projection. -/
 @[reassoc (attr := simp)]
 lemma tangentBundleZeroSection_tangentBundleProj :
     f.tangentBundleZeroSection ≫ f.tangentBundleProj = 𝟙 X :=
-  f.relativeDifferentials.vectorBundleZeroSection_vectorBundleProj
+  f.relativeDifferentials.symSpecZeroSection_symSpecProj
 
 end Scheme.Hom
 
