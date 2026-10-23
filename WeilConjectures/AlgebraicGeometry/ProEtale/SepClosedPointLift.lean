@@ -17,8 +17,8 @@ A nonzero weakly étale algebra over a separably closed field `K` has a `K`-poin
 fields being separable algebraic over `K`. Hence a weakly étale scheme over `Spec K` with a point
 has a section (`AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale_of_isSepClosed'`), and every
 `K`-point `y : Spec K ⟶ Y` of a scheme lifts along some member of any pro-étale cover of `Y`
-(`AlgebraicGeometry.Scheme.Cover.exists_comp_eq_of_isSepClosed`): pull the cover back along `y`
-and take a section of a member hit by the point of `Spec K`.
+(`AlgebraicGeometry.Scheme.Cover.exists_comp_eq_of_isSepClosed_of_proetale`): pull the cover
+back along `y` and take a section of a member hit by the point of `Spec K`.
 
 A field-valued point lifts along a morphism which is surjective on stalks, such as an immersion,
 as soon as its image lies in the image of the morphism
@@ -98,7 +98,8 @@ lemma Scheme.exists_comp_eq_of_mem_range_of_surjectiveOnStalks {W Z : Scheme.{u}
 
 /-- A point `y : Spec K ⟶ Y` with values in a separably closed field lifts along some member of
 any pro-étale cover of `Y`. -/
-theorem Scheme.Cover.exists_comp_eq_of_isSepClosed {K : Type u} [Field K] [IsSepClosed K]
+theorem Scheme.Cover.exists_comp_eq_of_isSepClosed_of_proetale {K : Type u} [Field K]
+    [IsSepClosed K]
     {Y : Scheme.{u}} (𝒰 : Y.Cover Scheme.proetalePrecoverage) (y : Spec (.of K) ⟶ Y) :
     ∃ (i : 𝒰.I₀) (g : Spec (.of K) ⟶ 𝒰.X i), g ≫ 𝒰.f i = y := by
   have h𝒰 := (Scheme.presieve₀_mem_precoverage_iff _).1
@@ -121,14 +122,14 @@ lemma Scheme.exists_comp_eq_of_mem_range_of_isField {W Z : Scheme.{u}} (p : W �
   exact Scheme.exists_comp_eq_of_mem_range_of_surjectiveOnStalks p s
     (Subsingleton.elim z (IsLocalRing.closedPoint K) ▸ hs)
 
-/-- `Scheme.Cover.exists_comp_eq_of_isSepClosed` for a commutative ring `K` which is a separably
-closed field, stated with the ring structure of `K` itself: a point `y : Spec K ⟶ Y` lifts along
-some member of any pro-étale cover of `Y`. -/
+/-- `Scheme.Cover.exists_comp_eq_of_isSepClosed_of_proetale` for a commutative ring `K` which is
+a separably closed field, stated with the ring structure of `K` itself: a point
+`y : Spec K ⟶ Y` lifts along some member of any pro-étale cover of `Y`. -/
 theorem Scheme.Cover.exists_comp_eq_of_isField {K : Type u} [CommRing K] (hK : IsField K)
     (hsep : letI := hK.toField; IsSepClosed K) {Y : Scheme.{u}}
     (𝒰 : Y.Cover Scheme.proetalePrecoverage) (y : Spec (.of K) ⟶ Y) :
     ∃ (i : 𝒰.I₀) (g : Spec (.of K) ⟶ 𝒰.X i), g ≫ 𝒰.f i = y := by
   let := hK.toField
-  exact 𝒰.exists_comp_eq_of_isSepClosed y
+  exact 𝒰.exists_comp_eq_of_isSepClosed_of_proetale y
 
 end AlgebraicGeometry
