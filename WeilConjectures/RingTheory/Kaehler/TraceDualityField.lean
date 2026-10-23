@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 public import Mathlib.RingTheory.Unramified.Field
 public import WeilConjectures.RingTheory.Kaehler.TraceDuality
+public import WeilConjectures.Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import WeilConjectures.RingTheory.Kaehler.TraceIdempotent
 public import WeilConjectures.RingTheory.RegularLocalRing.Smooth
 public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
@@ -59,14 +60,6 @@ namespace KaehlerDifferential
 attribute [local instance] precompModule precompModule_isScalarTower
 
 section Factors
-
-/-- In a reduced ring, an element lying in every minimal prime is zero. -/
-theorem _root_.Ideal.eq_zero_of_forall_mem_minimalPrimes {A : Type*} [CommRing A] [IsReduced A]
-    (x : A) (hx : ∀ P ∈ minimalPrimes A, x ∈ P) : x = 0 := by
-  have : x ∈ sInf (minimalPrimes A) := Submodule.mem_sInf.2 fun P hP ↦ hx P hP
-  rw [minimalPrimes, Ideal.sInf_minimalPrimes] at this
-  obtain ⟨n, hn⟩ := this
-  exact IsReduced.eq_zero x ⟨n, by simpa using hn⟩
 
 /-- Over a ring whose localizations at maximal ideals are domains, distinct minimal primes are
 coprime: a maximal ideal containing both would contain two minimal primes of a local domain. -/
