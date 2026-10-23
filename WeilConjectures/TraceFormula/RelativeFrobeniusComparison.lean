@@ -141,6 +141,27 @@ lemma comp_inv_app_coherence {𝒞 : Type*} [Category 𝒞] {A B C D : 𝒞}
     reassoc_of% (T₂ (show ra ≫ t ≫ q = (ra ≫ pa) ≫ rb by simp [w]))]
   simp
 
+
+/-- The diagram chase of the composition law of the Frobenius comparisons, for opaque morphisms
+of a category: the hypotheses are the pasting and base-change laws, the naturality squares and
+the coherence of the composition isomorphisms, and the conclusion is the composition law. -/
+lemma comp_aux {E : Type*} [Category E] {o₀ o₁ o₂ o₃ o₄ o₅ o₆ o₇ p₁ p₂ p₃ p₄ p₅ q₁ r₁ r₂ s₁ : E}
+    {c₀ : o₀ ⟶ o₁} {GEb : o₁ ⟶ o₂} {EQ : o₂ ⟶ o₃} {Sabc : o₃ ⟶ o₄} {R₁ : o₄ ⟶ o₅}
+    {SfC₁ : o₅ ⟶ o₆} {Sfe₁ : o₆ ⟶ o₇} {e₀ : o₀ ⟶ o₀} {GRb : o₂ ⟶ p₁} {GSfCb : p₁ ⟶ p₂}
+    {GSfeb : p₂ ⟶ p₂} {Ea : p₂ ⟶ p₃} {Ra : p₃ ⟶ p₄} {SfCa : p₄ ⟶ p₅} {Sfea : p₅ ⟶ p₅}
+    {SfCab : p₅ ⟶ o₇} {Sfeab : o₇ ⟶ o₇} {Ea' : p₁ ⟶ q₁} {StaUCb : q₁ ⟶ p₃} {ρt : o₃ ⟶ r₁}
+    {StaPSC : r₁ ⟶ q₁} {Staψ : r₁ ⟶ p₃} {Ra' : r₁ ⟶ r₂} {SfUψ : r₂ ⟶ p₄} {R₁' : o₃ ⟶ s₁}
+    {SfUc : s₁ ⟶ o₅} {SfCrt : r₂ ⟶ s₁}
+    (he₀ : e₀ = 𝟙 _) (heb : GSfeb = 𝟙 _) (hea : Sfea = 𝟙 _) (heab : Sfeab = 𝟙 _)
+    (N₁ : GSfCb ≫ Ea = Ea' ≫ StaUCb) (R₄ : GRb ≫ Ea' = EQ ≫ ρt ≫ StaPSC)
+    (hψ : Staψ = StaPSC ≫ StaUCb) (N₂ : Staψ ≫ Ra = Ra' ≫ SfUψ) (N₃ : Sabc ≫ R₁ = R₁' ≫ SfUc)
+    (C : R₁' = ρt ≫ Ra' ≫ SfCrt) (R₆ : SfCrt ≫ SfUc ≫ SfC₁ ≫ Sfe₁ = SfUψ ≫ SfCa ≫ SfCab) :
+    c₀ ≫ GEb ≫ EQ ≫ Sabc ≫ R₁ ≫ SfC₁ ≫ Sfe₁ =
+      e₀ ≫ c₀ ≫ GEb ≫ GRb ≫ GSfCb ≫ GSfeb ≫ Ea ≫ Ra ≫ SfCa ≫ Sfea ≫ SfCab ≫ Sfeab := by
+  subst he₀ heb hea heab hψ
+  simp only [Category.id_comp, Category.comp_id]
+  rw [reassoc_of% N₃, C, Category.assoc, Category.assoc, R₆, reassoc_of% N₁, reassoc_of% R₄]
+  rw [reassoc_of% N₂]
 end CategoryTheory.PullbackFamily
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -344,9 +365,9 @@ lemma weilLowerShriekFrobeniusComparison_hom_app_eq (ΦX : X ⟶ X) (ΦY : Y ⟶
   simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom,
     Category.id_comp, Functor.comp_obj, Functor.id_obj, relativePullback_app, eqToHom_refl,
-    Category.comp_id, Functor.map_comp, Category.assoc, CategoryTheory.Functor.map_id]
+    Category.comp_id, Category.assoc]
 
 end Comparison
 
@@ -452,4 +473,88 @@ lemma boundedConstructibleUpperStarComp_relativeFrobenius_aux (ra : X ⟶ X'a)
 
 end UpperStarCoherence
 
+
+/-! ### The composition law -/
+
+section Composition
+
+variable {X Y X'a X'b X'ab : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'a.hom] [QuasiCompact X'a.hom]
+  [IsSeparated X'a.hom] [LocallyOfFiniteType X'b.hom] [QuasiCompact X'b.hom]
+  [IsSeparated X'b.hom] [LocallyOfFiniteType X'ab.hom] [QuasiCompact X'ab.hom]
+  [IsSeparated X'ab.hom]
+
+set_option maxHeartbeats 1000000 in
+-- the instances of the categories of sheaves make the rewriting slow
+/-- **The composition law of the Frobenius comparisons** (blueprint `sk-i-relative-frob` (1),
+`lem-trf-weil-shriek-iterates` (1)): for two pairs of endomorphisms `a_X, a_Y` and `b_X, b_Y`
+compatible with `f`, with relative Frobenii `r_a`, `r_b`, `r_{ab}` (finite universal
+homeomorphisms) for `a`, `b` and the composites `a_X ≫ b_X`, `a_Y ≫ b_Y`,
+```
+θ_{a ≫ b} = Rf_!(L(a_X ≫ b_X)^* ≅ La_X^* Lb_X^*) ∘ θ_a(Lb_X^* -) ∘ La_Y^*(θ_b)
+              ∘ (L(a_Y ≫ b_Y)^* ≅ La_Y^* Lb_Y^*).
+```
+-/
+theorem weilLowerShriekFrobeniusComparison_comp (aX bX abX : X ⟶ X) (aY bY abY : Y ⟶ Y)
+    (f : X ⟶ Y) {pa : X'a ⟶ X} {f'a : X'a ⟶ Y} (sqa : IsPullback pa f'a f aY) (ra : X ⟶ X'a)
+    (hrpa : ra ≫ pa = aX) (hrfa : ra ≫ f'a = f) [IsFinite ra.left]
+    [IsUniversalHomeomorphism ra.left] {pb : X'b ⟶ X} {f'b : X'b ⟶ Y}
+    (sqb : IsPullback pb f'b f bY) (rb : X ⟶ X'b) (hrpb : rb ≫ pb = bX) (hrfb : rb ≫ f'b = f)
+    [IsFinite rb.left] [IsUniversalHomeomorphism rb.left] {pab : X'ab ⟶ X} {f'ab : X'ab ⟶ Y}
+    (sqab : IsPullback pab f'ab f abY) (rab : X ⟶ X'ab) (hrpab : rab ≫ pab = abX)
+    (hrfab : rab ≫ f'ab = f) [IsFinite rab.left] [IsUniversalHomeomorphism rab.left]
+    (hX : aX ≫ bX = abX) (hY : aY ≫ bY = abY) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilLowerShriekFrobeniusComparison ℓ abX abY f sqab rab hrpab hrfab).hom.app K =
+      eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+          ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+          hY.symm) ≫
+        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ aY bY).hom.app
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ aY).map
+          ((weilLowerShriekFrobeniusComparison ℓ bX bY f sqb rb hrpb hrfb).hom.app K) ≫
+        (weilLowerShriekFrobeniusComparison ℓ aX aY f sqa ra hrpa hrfa).hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ bX).obj K) ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+          ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ aX bX).inv.app K ≫
+            eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar
+              (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K) hX)) := by
+  subst hX hY
+  obtain ⟨q, hq₁, hq₂⟩ : ∃ q : X'ab ⟶ X'b, q ≫ pb = pab ∧ q ≫ f'b = f'ab ≫ aY :=
+    ⟨sqb.lift pab (f'ab ≫ aY) (by rw [sqab.w, Category.assoc]), sqb.lift_fst _ _ _,
+      sqb.lift_snd _ _ _⟩
+  subst hq₁ hrpb hrpa hrfb
+  have hQ : IsPullback q f'ab f'b aY := IsPullback.of_right sqab hq₂ sqb
+  obtain ⟨t, ht₁, ht₂⟩ : ∃ t : X'a ⟶ X'ab, t ≫ q = pa ≫ rb ∧ t ≫ f'ab = f'a :=
+    ⟨hQ.lift (pa ≫ rb) f'a (by rw [Category.assoc, sqa.w]), hQ.lift_fst _ _ _,
+      hQ.lift_snd _ _ _⟩
+  subst ht₂
+  have hT : IsPullback pa t rb q := IsPullback.of_bot sqa ht₁.symm hQ
+  obtain rfl : rab = ra ≫ t := sqab.hom_ext
+    (by rw [hrpab]; simp only [Category.assoc, reassoc_of% ht₁])
+    (by rw [hrfab, Category.assoc, hrfa])
+  have : IsFinite t.left := MorphismProperty.of_isPullback hT.overLeft inferInstance
+  rw [weilLowerShriekFrobeniusComparison_hom_app_eq ℓ _ _ _ sqab,
+    weilLowerShriekFrobeniusComparison_hom_app_eq ℓ _ _ _ sqb,
+    weilLowerShriekFrobeniusComparison_hom_app_eq ℓ _ _ _ sqa,
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hQ sqb K]
+  simp only [Functor.map_comp, Category.assoc (obj := Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)]
+  have hR6 := congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    (rb ≫ f'b)).map (boundedConstructibleUpperStarComp_relativeFrobenius_aux ℓ ra hT.toCommSq pb K)
+  simp only [Functor.map_comp
+    (self := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (rb ≫ f'b))] at hR6
+  exact CategoryTheory.PullbackFamily.comp_aux (eqToHom_refl _ _)
+    (by rw [eqToHom_refl, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id])
+    (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])
+    (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])
+    ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqa).naturality
+      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ rb pb).inv.app K))
+    (map_relativePullback_app_comp_baseChange_app ℓ hT hQ
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ pb).obj K))
+    (Functor.map_comp _ _ _)
+    ((relativePullback ℓ ra (t ≫ f'ab) (rb ≫ f'b) hrfa).naturality _)
+    ((relativePullback ℓ (ra ≫ t) f'ab (rb ≫ f'b) hrfab).naturality _)
+    (relativePullback_comp_app ℓ ra t f'ab (t ≫ f'ab) (rb ≫ f'b) rfl hrfa _) hR6
+
+end Composition
 end AlgebraicGeometry.ProEtale.CondensedRing
