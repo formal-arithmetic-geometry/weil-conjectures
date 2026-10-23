@@ -84,7 +84,7 @@ omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 module objects. -/
 lemma weilSheafUpperStar_eq :
     weilSheafUpperStar ℓ eX eW hg =
-      IsoAlgebra.overPullback (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+      Endofunctor.IsoAlgebra.overPullback (P := upperStar (Profinite.padicAlgClRingObj ℓ))
         (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
           upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) eX eW hg :=
   rfl
@@ -95,7 +95,7 @@ stalk functor of algebras for the family of pullbacks of module objects. -/
 lemma WeilSheaf.powSuccStalkFunctor_eq (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ W.left)
     (hx : x ≫ (eW.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
     WeilSheaf.powSuccStalkFunctor ℓ n x hx =
-      IsoAlgebra.frobeniusStalkFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+      Endofunctor.IsoAlgebra.frobeniusStalkFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
         (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
           upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
         (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
@@ -119,16 +119,17 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 sheaf `F` for `e_X` and a point `w̄` of `W` of degree `n + 1`, the trace of the `(n + 1)`-st
 Frobenius on the stalk of `g^* F` at `w̄` is its trace on the stalk of `F` at `w̄ ≫ g`. The
 composition isomorphism `(w̄ ≫ g)^* F ≅ w̄^* g^* F` of the pullbacks intertwines the two Frobenius
-operators (`CategoryTheory.stalkComparison_pullbackComparison`), once the iterated structure
+operators (`CategoryTheory.pullbackFamilyStalkComparison_pullbackFamilyComparison`), once the
+iterated structure
 isomorphism of `g^* F` is identified with the pullback of that of `F`
-(`CategoryTheory.Iso.powSuccStr_pullbackComparison`). -/
+(`CategoryTheory.Iso.powSuccStr_pullbackFamilyComparison`). -/
 theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
     (w : frobeniusFixedPoints eW n) :
     weilSheafStalkTrace ℓ n w.1 w.2.2 ((weilSheafUpperStar ℓ eX eW hg).obj F) =
       weilSheafStalkTrace ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
         (frobeniusFixedPointsMap eW eX hg n w).2.2 F := by
   have I := Classical.choice
-    (IsoAlgebra.nonempty_obj_obj_iso_of_eq
+    (Endofunctor.IsoAlgebra.nonempty_obj_obj_iso_of_eq
       (c := fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
         upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
       (pullbackAssoc_upperStar ℓ) eX eW hg n
@@ -152,7 +153,7 @@ Weil sheaf `Hʲ(K)`.
 The isomorphism is the commutation `θ_g : Hʲ ⋙ g^* ≅ Lg^* ⋙ Hʲ` of the exact functor `g^*` with
 homology. It is compatible with the Weil structures because `θ` is pseudonatural, and the
 formal part of the argument is proved:
-`CategoryTheory.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso` gives the isomorphism from
+`Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso` gives the isomorphism from
 pseudonaturality (`CategoryTheory.PullbackPseudonatural`), and
 `CategoryTheory.PullbackPseudonatural.lifted` reduces pseudonaturality on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` to
 pseudonaturality on the derived categories of module objects. The latter is the composition
