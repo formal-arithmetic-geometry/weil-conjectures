@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
 
@@ -113,7 +114,21 @@ The eight clauses of the blueprint, one group of fields each:
 7. **Relative product.** The four Künneth comparisons over `k` are isomorphisms.
 8. **Stability.** `Lf^*`, `- ⊗ᴸ -`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` carry `Dctf` into
    `Dctf`.
-See the module docstring for the clauses that are deliberately not carried here. -/
+See the module docstring for the clauses that are deliberately not carried here.
+
+Blueprint `def-sf-datum`: Six-functor datum, axiomatized
+
+The axioms (A1)–(A4) and (A6) of a six-functor datum, at a finite coefficient stage
+`Λ = A_{E,n}` on the étale sites: the fields of this structure are the adjunctions (A1), the base
+change isomorphisms (A2), the projection formula (A3), the composition law and proper
+coincidence (A4) and Verdier biduality (A6); the compatibilities (A5) with change of coefficients
+are not carried (see the module docstring).
+
+Blueprint `rem-sf-summary`: What a six-functor formalism is
+
+The six-functor formalism summarised by the remark is the conjunction of the clauses of this
+structure: the two adjoint pairs, base change, the projection formula, and proper coincidence
+together with the orientation of a smooth morphism. -/
 structure SixOperationsPackage : Prop where
   /-- (1) The adjunction `Lf^* ⊣ Rf_*`. -/
   upperStarLowerStarAdjunction :
@@ -199,13 +214,15 @@ structure SixOperationsPackage : Prop where
 /-- Blueprint `sk-thm-sf-package`: The six-operations package.
 
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
-exponent is invertible on `k`. Every clause is one of the propositions of this directory, and
-the proof is the assembly. Smooth base change on the unbounded derived categories and the
-orientation, which is smooth purity, are not available in this directory and are left open
-here. The Tate twist datum is assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the
-orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
-theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
-    [IsSeparated f] :
+exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
+biduality is proved over algebraically closed fields). Every clause is one of the propositions of
+this directory, and the proof is the assembly. Smooth base change on the unbounded derived
+categories and the orientation, which is smooth purity, are not available in this directory and
+are left open here. The Tate twist datum is assumed normalized: for the untwisted datum
+`Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for
+`𝔸¹_ℚ ⟶ Spec ℚ`. -/
+theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩

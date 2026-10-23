@@ -45,7 +45,8 @@ on the cohomology sheaves. The local alternating trace `Tr(F_x^{(n)} | K_x̄)` o
 derived stalk is not used.
 
 The remark `rem-ptr-weil-local-frobenius-trace-1` of the blueprint only points to
-`AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`.
+`AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`; it is recorded as
+`AlgebraicGeometry.WeilComplex.exists_frobeniusEnd_stalkAtGeometricFiberPoint_eq_conj`.
 -/
 
 @[expose] public section
@@ -136,6 +137,26 @@ theorem nonempty_equiv_stalkAtGeometricFiberPoint (j : ℤ) {K' : Type u} [Field
     Nonempty ((K.stalkAtGeometricFiberPoint j ι g hg m hK).Equiv
       (K.stalkAtGeometricFiberPoint j ι' g hg m hK)) :=
   ((homologySheaf j).obj K).nonempty_equiv_stalkAtGeometricFiberPoint ι ι' g hg m hK
+
+/-- Blueprint `rem-ptr-weil-local-frobenius-trace-1`: Pointer to the properties of the local
+Frobenius.
+
+The conjugacy class of the local Frobenius `F_x^{(m)}` on `𝓗ʲ(For K)_x̄` does not depend on the
+embedding `ι : K' ↪ k̄` used to build the geometric point: for two embeddings the two operators
+are conjugate by a linear isomorphism of the stalks. This independence is
+`lem-weil-local-frobenius-conjugacy-class`
+(`AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`), not part of the
+construction. -/
+theorem exists_frobeniusEnd_stalkAtGeometricFiberPoint_eq_conj (j : ℤ) {K' : Type u} [Field K']
+    [Algebra k₀ K'] [Finite K'] (ι ι' : K' →ₐ[k₀] AlgebraicClosure k₀) (g : Spec (.of K') ⟶ X)
+    (hg : g ≫ (X ↘ Spec (CommRingCat.of k₀)) = Spec.map (CommRingCat.ofHom (algebraMap k₀ K')))
+    (m : ℕ) (hK : Nat.card K' = Nat.card k₀ ^ m) :
+    ∃ e : (K.stalkAtGeometricFiberPoint j ι g hg m hK).carrier ≃ₗ[PadicAlgCl l]
+        (K.stalkAtGeometricFiberPoint j ι' g hg m hK).carrier,
+      (K.stalkAtGeometricFiberPoint j ι' g hg m hK).frobeniusEnd =
+        e.conj (K.stalkAtGeometricFiberPoint j ι g hg m hK).frobeniusEnd :=
+  let ⟨e⟩ := K.nonempty_equiv_stalkAtGeometricFiberPoint j ι ι' g hg m hK
+  ⟨e.toLinearEquiv, e.frobeniusEnd_eq_conj⟩
 
 end WeilComplex
 

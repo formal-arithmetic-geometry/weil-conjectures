@@ -125,8 +125,11 @@ Let `W = X ×_Y X` with projections `p₁, p₂`. The square `p₂ ≫ f = p₁ 
 `p₁` is the base change of the smooth `f`, so smooth base change for `R^!` (`sk-prop-cohsm`
 (c)) gives
 
-`ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`. -/
-theorem nonempty_iso_dualizingComplex_pullbackFst :
+`ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`.
+
+Smooth base change is available over a quasi-separated base `Y` for the quasi-compact base
+change `p₁` of `f`; both hold for `f` and `Y` of finite type over a field, as in the blueprint. -/
+theorem nonempty_iso_dualizingComplex_pullbackFst [QuasiSeparatedSpace Y] [QuasiCompact f] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (pullback.fst f f) ≅
       (L((pullback.snd f f)^*[ModuleCat.{u + 1} Λ])).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f)) := by
@@ -141,7 +144,7 @@ include d in
 projection
 
 The symmetric statement: `ω_{p₂} ≅ Lp₁^* ω_f`. -/
-theorem nonempty_iso_dualizingComplex_pullbackSnd :
+theorem nonempty_iso_dualizingComplex_pullbackSnd [QuasiSeparatedSpace Y] [QuasiCompact f] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (pullback.snd f f) ≅
       (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ])).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f)) := by
@@ -159,7 +162,7 @@ The section invariant of the diagonal `Δ : X ⟶ X ×_Y X`, a closed section of
 dualizing complex of `f`: since `Δ ≫ p₂ = 𝟙 X`,
 
 `𝒞(p₁, Δ) = LΔ^* ω_{p₁} ≅ LΔ^* Lp₂^* ω_f ≅ L(𝟙 X)^* ω_f ≅ ω_f`. -/
-theorem nonempty_iso_sectionInvariant_diagonal :
+theorem nonempty_iso_sectionInvariant_diagonal [QuasiSeparatedSpace Y] [QuasiCompact f] :
     Nonempty (sectionInvariant Λ (pullback.fst f f) (pullback.diagonal f) ≅
       dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
   obtain ⟨e⟩ := nonempty_iso_dualizingComplex_pullbackFst Λ (d := d) f

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 
 /-!

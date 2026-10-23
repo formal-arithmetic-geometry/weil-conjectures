@@ -10,8 +10,12 @@ public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+import WeilConjectures.ConstructibleSheaf.MonoidalParts
+import WeilConjectures.ConstructibleSheaf.DualLocallyConstant
+import WeilConjectures.ConstructibleSheaf.DualStalk
 
 /-!
 # Tensor products and duals of constructible sheaves
@@ -48,8 +52,7 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 
 ## TODO
 
-Prove `IsConstructibleSheaf.isFiniteSheaf`, `IsFiniteLocallyConstantSheaf.tensorObj` and
-`IsFiniteLocallyConstantSheaf.ihom_unit`.
+Prove `IsFiniteLocallyConstantSheaf.ihom_unit`.
 -/
 
 @[expose] public section
@@ -75,12 +78,23 @@ theorem IsFiniteLocallyConstantSheaf.isConstructibleSheaf (hF : IsFiniteLocallyC
     IsConstructibleSheaf F :=
   ⟨Stratification.trivial X, fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar (𝟙 X) F⟩
 
+omit [HasSmallSiteSheafify A] in
 /-- A constructible sheaf is finite: a geometric point of `X` lies in a stratum, through whose
 immersion it factors, and the stalk of `F` there is the stalk of the finite locally constant
 pullback of `F` to the stratum. -/
-theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F :=
-  sorry
+theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F where
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
+    obtain ⟨S, hS⟩ := hF.exists_stratification
+    obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
+      (S.iUnion_stratum_eq_univ ▸ Set.mem_univ (s.base (IsLocalRing.closedPoint Ω)))
+    rw [← S.range_immersion] at hi
+    obtain ⟨t, rfl⟩ := IsImmersion.exists_comp_eq_of_field (S.immersion i) s hi
+    have := (hS i).toIsFiniteSheaf
+    exact (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA)
+      (F := (Etale.upperStar A (S.immersion i)).obj F) Ω t).of_iso
+        ((Etale.upperStarCompSheafFiberIso A (S.immersion i) t).app F)
 
+omit [HasSmallSiteSheafify A] in
 /-- A constructible locally constant sheaf is finite locally constant. -/
 theorem IsConstructibleSheaf.isFiniteLocallyConstantSheaf (hF : IsConstructibleSheaf F)
     (hF' : IsLocallyConstantSheaf F) :
@@ -99,8 +113,10 @@ constant: on a common trivialising cover it is the constant sheaf at the tensor 
 finitely generated modules. -/
 theorem IsFiniteLocallyConstantSheaf.tensorObj (hF : IsFiniteLocallyConstantSheaf F)
     (hG : IsFiniteLocallyConstantSheaf G) :
-    IsFiniteLocallyConstantSheaf (F ⊗ G) :=
-  sorry
+    IsFiniteLocallyConstantSheaf (F ⊗ G) where
+  toIsLocallyConstantSheaf :=
+    IsLocallyConstantSheaf.tensorObj_part hF.toIsLocallyConstantSheaf hG.toIsLocallyConstantSheaf
+  toIsFiniteSheaf := IsFiniteSheaf.tensorObj_part hF.toIsFiniteSheaf hG.toIsFiniteSheaf
 
 /-- **The tensor product of two constructible sheaves of modules is constructible**: on the
 common refinement of witnessing stratifications, the pullback of `F ⊗ G` to a stratum is the
@@ -112,7 +128,7 @@ theorem IsConstructibleSheaf.tensorObj (hF : IsConstructibleSheaf F) (hG : IsCon
   refine ⟨S.inter T, fun k ↦ ?_⟩
   have hF' := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
   have hG' := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
-  have := hF'.tensorObj hG'
+  have hFG := hF'.tensorObj hG'
   exact IsFiniteLocallyConstantSheaf.of_iso
     (Functor.Monoidal.μIso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) F G)
 
@@ -123,8 +139,17 @@ being finitely generated and hence finitely presented, `Λ` being noetherian; an
 `Hom_Λ(M, Λ)` is finitely generated, being a submodule of `Λⁿ` for a surjection `Λⁿ ⟶ M`. -/
 theorem IsFiniteLocallyConstantSheaf.ihom_unit [IsNoetherianRing Λ]
     (hF : IsFiniteLocallyConstantSheaf F) :
-    IsFiniteLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) :=
-  sorry
+    IsFiniteLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) where
+  toIsLocallyConstantSheaf := hF.ihom_unit_locallyConstant
+  toIsFiniteSheaf := ⟨fun Ω _ _ s ↦ by
+    have : Module.Finite Λ
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :=
+      (ModuleCat.isFinitelyGenerated_iff _).1
+        (hF.toIsFiniteSheaf.isFinitelyGenerated_sheafFiber Ω s)
+    obtain ⟨e⟩ := hF.nonempty_ihom_unit_stalk_iso Ω s
+    exact ((ModuleCat.isFinitelyGenerated_iff _).2
+      (inferInstance : Module.Finite Λ
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F →ₗ[Λ] Λ))).of_iso e.symm⟩
 
 /-- A sheaf of `Λ`-modules with a tensor inverse, `F ⊗ G ≅ Λ`, is finite: the stalks are strong
 monoidal, so `F_s ⊗ G_s ≅ Λ` and `F_s` is an invertible, hence finitely generated, `Λ`-module. -/

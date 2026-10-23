@@ -26,6 +26,8 @@ that `q^* j_! = j'_!` is again fully faithful.
 
 ## Main statements
 
+- `CategoryTheory.Adjunction.map_bijective_of_isIso_unit_app`: if the unit is invertible at `B`,
+  then `L` is bijective on morphisms with target `B`.
 - `CategoryTheory.Adjunction.map_map_unit_app_eq`: `R (L (η X)) = η (R (L X))` when `ε (L X)` is
   an isomorphism.
 - `CategoryTheory.Adjunction.isIso_map_unit_app_obj`: `J' (η_{J K})` is an isomorphism.
@@ -105,6 +107,30 @@ lemma map_map_unit_app_eq {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (X : C)
     R.map (L.map (adj.unit.app X)) = adj.unit.app (R.obj (L.obj X)) := by
   rw [← cancel_mono (R.map (adj.counit.app (L.obj X)))]
   simp [← R.map_comp]
+
+section UnitIso
+
+variable {L : C ⥤ D} {R : D ⥤ C}
+
+/-- Under the adjunction bijection, `L f` corresponds to `f ≫ η_B`. -/
+lemma homEquiv_map (adj : L ⊣ R) {A B : C} (f : A ⟶ B) :
+    adj.homEquiv A (L.obj B) (L.map f) = f ≫ adj.unit.app B := by
+  rw [adj.homEquiv_unit, adj.unit_naturality]
+
+/-- If the unit `η_B` of `L ⊣ R` is an isomorphism, then `L` is bijective on morphisms with
+target `B`. -/
+lemma map_bijective_of_isIso_unit_app (adj : L ⊣ R) (A : C) {B : C}
+    [IsIso (adj.unit.app B)] :
+    Function.Bijective (L.map : (A ⟶ B) → (L.obj A ⟶ L.obj B)) := by
+  have h : (L.map : (A ⟶ B) → (L.obj A ⟶ L.obj B)) =
+      (adj.homEquiv A (L.obj B)).symm ∘ fun f ↦ f ≫ adj.unit.app B := by
+    ext1 f
+    exact ((adj.homEquiv _ _).symm_apply_apply _).symm.trans (congrArg _ (homEquiv_map adj f))
+  rw [h]
+  exact (adj.homEquiv A (L.obj B)).symm.bijective.comp
+    ((asIso (adj.unit.app B)).homToEquiv (Z := A)).bijective
+
+end UnitIso
 
 end Adjunction
 

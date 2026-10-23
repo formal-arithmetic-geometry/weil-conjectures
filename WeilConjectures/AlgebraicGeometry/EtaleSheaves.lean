@@ -5,7 +5,9 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
+
+
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
@@ -49,6 +51,24 @@ Source: blueprint `def-weil-pbc-etale-sheaves`, lisse sheaves clause. -/
 abbrev IsLisseEtaleSheafOfSets {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (Type (u + 1))) : Prop :=
   IsFiniteLocallyConstantSheafOfTypes F
+
+/-- The stalks of a finite locally constant sheaf of sets at separably closed geometric
+points are finite. In particular this holds at algebraically closed geometric points. -/
+theorem IsFiniteLocallyConstantSheafOfTypes.finite_sheafFiber {T : Scheme.{u}}
+    {F : Sheaf T.smallEtaleTopology (Type (u + 1))} (hF : IsFiniteLocallyConstantSheafOfTypes F)
+    (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T) :
+    Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj F) :=
+  (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+    (hF.2.isFinitelyGenerated_sheafFiber Ω s)
+
+/-- A sheaf of sets is finite locally constant if it is locally constant on an étale cover
+and its stalks at separably closed geometric points are finite. -/
+theorem isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber {T : Scheme.{u}}
+    {F : Sheaf T.smallEtaleTopology (Type (u + 1))} (hF : IsLocallyConstantEtaleSheafOfSets F)
+    (hfin : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T),
+      Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj F)) :
+    IsFiniteLocallyConstantSheafOfTypes F :=
+  ⟨hF, ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).mpr (hfin Ω s)⟩⟩
 
 /-- Inverse image of sheaves of sets along a morphism of schemes, constructed by left
 Kan extension along base change on small étale sites followed by sheafification.

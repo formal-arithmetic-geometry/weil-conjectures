@@ -37,13 +37,6 @@ Frobenius.
   with its geometric Frobenius.
 - `AlgebraicGeometry.WeilComplex.cohomology` and `AlgebraicGeometry.WeilSheaf.cohomology`:
   ordinary cohomology `Hʳ(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` with its geometric Frobenius.
-
-## Main statements
-
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`: the
-  compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
-  compactly supported cohomology of a smooth affine curve is concentrated in degrees `0, 1, 2`.
 -/
 
 @[expose] public section
@@ -76,10 +69,20 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 namespace WeilComplex
 
 -- TODO(unify): thm:proetale-weil-perfectness
-/-- The compactly supported cohomology `H_c^r(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_! K)` of a Weil
+/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
+cohomology.
+
+The compactly supported cohomology `H_c^r(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_! K)` of a Weil
 complex `K` on a separated `k₀`-scheme `a : X ⟶ Spec k₀` of finite type, with its geometric
 Frobenius: the cohomology of the direct image with compact support of `K` along `a`, a Weil
-complex on `Spec k₀`. -/
+complex on `Spec k₀`. Here `Hʳ(Spec k̄, -)` is the evaluation `Fib_s` at the geometric point
+followed by `Hʳ` (`AlgebraicGeometry.WeilComplex.cohomologyFrobeniusModule`). The ordinary
+cohomology is `AlgebraicGeometry.WeilComplex.cohomology`, the versions for Weil sheaves are
+`AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology` and
+`AlgebraicGeometry.WeilSheaf.cohomology`, and the constant coefficients `H_c^i(Y, ℚ̄_ℓ)` are
+those of the constant Weil sheaf `AlgebraicGeometry.WeilSheaf.adicConstant`. The finite
+coefficient stages are `AlgebraicGeometry.Etale.compactlySupportedCohomology` and
+`AlgebraicGeometry.Etale.cohomology`. -/
 noncomputable def compactlySupportedCohomology (K : WeilComplex k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
@@ -92,7 +95,9 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- The ordinary cohomology `Hʳ(Y ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` of a Weil complex `K` on a
+/-- Blueprint `def-weil-ordinary-compact-cohomology` (ordinary cohomology).
+
+The ordinary cohomology `Hʳ(Y ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` of a Weil complex `K` on a
 `k₀`-scheme `a : Y ⟶ Spec k₀` of finite type, with its geometric Frobenius: the cohomology of the
 derived direct image of `K` along `a`, a Weil complex on `Spec k₀`. For `a` proper it agrees with
 `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`. -/
@@ -115,29 +120,6 @@ Frobenius: that of the Weil complex `F` concentrated in degree zero. -/
 noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
-
-/-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported
-cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`: after geometric
-base change `X` becomes a finite discrete space, whose cohomology is concentrated in degree
-zero. The blueprint states this for `G` with stalk weights at most some `w`; the weights play
-no role.
-(blueprint: `lem-a1-finite-boundary-cohomology`) -/
-theorem subsingleton_compactlySupportedCohomology_of_isFinite
-    [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
-    Subsingleton (G.compactlySupportedCohomology r).carrier :=
-  sorry
-
-/-- *Cohomological range of an affine curve.* If `X` is a smooth affine curve over `k₀` and `G`
-is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`: after a
-smooth compactification `j : X ↪ X̄`, `H_c^r(X ⊗ k̄, G) = H^r(X̄ ⊗ k̄, j_!G)` is the cohomology of
-a sheaf on a proper curve, of cohomological dimension two.
-(blueprint: `lem-zl-affine-curve-range`) -/
-theorem subsingleton_compactlySupportedCohomology_of_isAffine [IsAffine X]
-    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ}
-    (hr : r < 0 ∨ 2 < r) :
-    Subsingleton (G.compactlySupportedCohomology r).carrier := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
 
 end WeilSheaf
 

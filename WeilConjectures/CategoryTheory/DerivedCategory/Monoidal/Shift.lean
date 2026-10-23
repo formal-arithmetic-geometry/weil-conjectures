@@ -62,7 +62,7 @@ structure.
 
 open CategoryTheory Limits MonoidalCategory
 
-universe w v u
+universe w v u s
 
 namespace DerivedCategory
 
@@ -178,12 +178,12 @@ namespace DerivedCategory
 
 section GrothendieckAbelian
 
-variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
+variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{s} C]
   [HasDerivedCategory.{w} C]
   [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
   [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance localInstance_Shift_1 : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 /-- The inclusion of K-flat cochain complexes induces an equivalence of the localizations with
 respect to quasi-isomorphisms: every complex has a functorial K-flat resolution. -/

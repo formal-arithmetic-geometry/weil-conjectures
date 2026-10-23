@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
 /-!
 # The comparison between the small étale and the small pro-étale site

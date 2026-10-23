@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChange
+
+
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -17,6 +20,11 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import WeilConjectures.AlgebraicGeometry.ZariskiDimensionBound
+import Mathlib.Topology.Sheaves.Abelian
+import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
+import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules
@@ -68,11 +76,50 @@ every sheaf of modules vanishes in degrees `q > n`.
 
 This is what makes the `finsum` defining `AlgebraicGeometry.Scheme.Modules.eulerChar` a finite
 sum, hence makes `χ`, the genus and the degree meaningful, for instance on a curve, where
-`n = 1`. -/
+`n = 1`. 
+(blueprint: lem-sc-noetherian-cohomology-above-dimension)
+-/
 @[stacks 02UZ]
 theorem Modules.subsingleton_H_of_topologicalKrullDim_lt {X : Scheme.{u}} [IsNoetherian X]
-    (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) :=
-  sorry
+    (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) := by
+  classical
+  let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ
+  by_cases hX : Nonempty X
+  · obtain ⟨x⟩ := hX
+    have : Nonempty (IrreducibleCloseds X) :=
+      ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+    have hnonneg : 0 ≤ topologicalKrullDim X := Order.krullDim_nonneg
+    cases q with
+    | zero => exact False.elim (not_lt_of_ge hnonneg hq)
+    | succ n =>
+      have hdim : topologicalKrullDim X ≤ (n : WithBot ℕ∞) := by
+        apply ENat.WithBot.lt_add_one_iff.mp
+        simpa only [Nat.cast_add, Nat.cast_one] using hq
+      have hz := AlgebraicGeometry.isZero_zariskiCohomology_of_dimension_bound
+        X n hdim F (n + 1) n.lt_succ_self
+      let e : (yoneda.obj (⊤ : X.Opens) ⋙ AddCommGrpCat.free) ≅
+          (Functor.const X.Opensᵒᵖ).obj (AddCommGrpCat.of (ULift ℤ)) :=
+        NatIso.ofComponents (fun U ↦ by
+          letI : Unique (U.unop ⟶ (⊤ : X.Opens)) :=
+            ⟨⟨homOfLE le_top⟩, fun f ↦ Subsingleton.elim f _⟩
+          exact ((FreeAbelianGroup.uniqueEquiv _).trans AddEquiv.ulift.symm).toAddCommGrpIso)
+          (by
+            intro U V f
+            ext g
+            change ULift.up ((FreeAbelianGroup.lift fun _ ↦ (1 : ℤ))
+                (FreeAbelianGroup.map (fun g ↦ f.unop ≫ g) g)) =
+              ULift.up ((FreeAbelianGroup.lift fun _ ↦ (1 : ℤ)) g)
+            rw [← FreeAbelianGroup.lift_comp]
+            rfl)
+      let e' := (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat).mapIso e
+      have : Subsingleton (F.H' (n + 1) ⊤) := AddCommGrpCat.subsingleton_of_isZero hz
+      let a : ℱ.H (n + 1) ≃+ (F.H' (n + 1) ⊤) :=
+        Abelian.Ext.precompAddEquiv e' F (n + 1)
+      exact a.injective.subsingleton
+  · have : IsEmpty X := not_nonempty_iff.mp hX
+    have hz : Limits.IsZero F :=
+      (TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero F).mpr fun x ↦ isEmptyElim x
+    exact Sheaf.subsingleton_H_of_isZero hz q
 
 section Defs
 
@@ -88,7 +135,9 @@ For a smooth proper curve `X ↘ Spec k`, Serre duality identifies this with
 `AlgebraicGeometry.Scheme.Hom.genus (X ↘ Spec k) = dim_k H^0(X, Ω¹_{X/k})`; see
 `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
 
-(blueprint: `def-pc-genus`) -/
+(blueprint: `def-pc-genus`) 
+(blueprint: def-pc-genus)
+-/
 noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
 
@@ -104,24 +153,85 @@ quasi-separated scheme over a field `k`, let `K/k` be a field extension and let 
 quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
 `X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`.
 
-Both sides are computed by the Čech complex of a finite affine open cover of `X`, which has
-affine intersections since `X` is quasi-separated; the Čech complex of the base-changed cover
-of `X_K` is obtained by applying the exact functor `- ⊗_k K` (Stacks 02KH).
+Proof (Stacks 02KH): first suppose `X` is separated. A finite affine open cover has affine
+intersections, so its Čech complex computes quasi-coherent cohomology. The affine pullback
+section formula identifies the base-changed complex with its tensor product by `K`.
+Tensoring over the field `k` is exact, hence commutes with cohomology. For general
+quasi-separated `X`, use compact-open induction. Its step adds an affine open `V` to a
+compact open `U`. The overlap `U ∩ V` is compact by quasi-separatedness and separated
+because it is open in the affine scheme `V`; it need not be affine. The separated case
+applies to `V` and the overlap, while the induction hypothesis applies to `U`.
+Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪ V` in
+all degrees. Apply the induction at the whole scheme and invert the resulting
+`K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology.
 
-(blueprint: `lem-sc-flat-base-change-coherent`) -/
+(blueprint: `lem-sc-flat-base-change-coherent`) 
+(blueprint: lem-sc-flat-base-change-coherent)
+-/
 @[stacks 02KH]
 theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
     Nonempty (((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).H q ≃ₗ[K]
-        TensorProduct k K (M.H q)) :=
-  sorry
+        TensorProduct k K (M.H q)) := by
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X :=
+    quasiSeparatedSpace_of_quasiSeparated (X ↘ Spec (.of k))
+  let P (U : X.Opens) : Prop :=
+    ∀ (Y : Scheme.{u}) (j : Y ⟶ X) (_ : IsOpenImmersion j), j.opensRange = U →
+      ∀ (N : Y.Modules) (_ : N.IsQuasicoherent) (n : ℕ),
+        Function.Bijective (Modules.H.baseChange (S := K) (j ≫ X ↘ Spec (.of k)) N n)
+  have hP : P ⊤ := by
+    apply compact_open_induction_on (P := P) ⊤ isCompact_univ
+    · intro Y j hj hjrange N hN n
+      have : IsEmpty Y := ⟨fun y ↦ by
+        have hy : j y ∈ j.opensRange := ⟨y, rfl⟩
+        rw [hjrange] at hy
+        exact hy⟩
+      exact Modules.H.baseChange_bijective_of_isSeparated _ N n
+    · intro U hU V ih Y j hj hjrange N hN n
+      let A : Y.Opens := j ⁻¹ᵁ U
+      let B : Y.Opens := j ⁻¹ᵁ V.1
+      have hAimage : j ''ᵁ A = U := by
+        rw [Hom.image_preimage_eq_opensRange_inf, hjrange, inf_eq_right.mpr le_sup_left]
+      have hB : IsAffineOpen B :=
+        V.2.preimage_of_isOpenImmersion j (hjrange.symm ▸ le_sup_right)
+      have hAc : IsCompact (A : Set Y) :=
+        j.isOpenEmbedding.isEmbedding.isCompact_iff.mpr (by
+          change IsCompact (j ''ᵁ A : Set X)
+          rw [hAimage]
+          exact hU)
+      have : CompactSpace A.toScheme := isCompact_iff_compactSpace.mp hAc
+      have : QuasiSeparatedSpace Y := j.isOpenEmbedding.quasiSeparatedSpace
+      have hIc : IsCompact ((A ⊓ B : Y.Opens) : Set Y) :=
+        hAc.inter_of_isOpen hB.isCompact A.isOpen B.isOpen
+      have : CompactSpace (A ⊓ B).toScheme := isCompact_iff_compactSpace.mp hIc
+      have : IsAffine B.toScheme := hB
+      have : (A ⊓ B).toScheme.IsSeparated := ⟨by
+        rw [← Limits.terminal.comp_from (Y.homOfLE (inf_le_right : A ⊓ B ≤ B))]
+        infer_instance⟩
+      apply Modules.H.baseChange_bijective_of_openCover _ N A B ?_ ?_ ?_ ?_ n
+      · change j ⁻¹ᵁ U ⊔ j ⁻¹ᵁ V.1 = ⊤
+        rw [← j.preimage_sup, ← hjrange, j.preimage_opensRange]
+      · intro r
+        apply ih A.toScheme (A.ι ≫ j) inferInstance ?_ _ inferInstance r
+        rw [Hom.opensRange_comp, Opens.opensRange_ι, hAimage]
+      · intro r
+        exact Modules.H.baseChange_bijective_of_isSeparated _ _ r
+      · intro r
+        exact Modules.H.baseChange_bijective_of_isSeparated _ _ r
+  have hb := hP X (𝟙 X) inferInstance (Hom.opensRange_of_isIso _) M inferInstance q
+  exact ⟨(LinearEquiv.ofBijective (Modules.H.baseChange (S := K)
+    (X ↘ Spec (.of k)) M q) hb).symm⟩
 
 /-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`,
 `dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`.
 
-(blueprint: `lem-pc-flat-base-change-cohom`) -/
+(blueprint: `lem-pc-flat-base-change-cohom`) 
+(blueprint: lem-pc-flat-base-change-cohom)
+-/
 theorem Modules.finrankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
     ((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
@@ -144,7 +254,9 @@ scheme over a field `k` and let `K/k` be a field extension. Then the base change
 `X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
 `H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
 
-(blueprint: `lem-pc-genus-base-change`) -/
+(blueprint: `lem-pc-genus-base-change`) 
+(blueprint: lem-pc-genus-base-change)
+-/
 theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] :
     arithmeticGenus K
@@ -167,7 +279,9 @@ The value is the degree in the usual sense only for an invertible `ℒ` on a pro
 it agrees with the degree of the associated divisor class; for other sheaves it is just a
 difference of Euler characteristics.
 
-(blueprint: `def-pc-degree-line-bundle`) -/
+(blueprint: `def-pc-degree-line-bundle`) 
+(blueprint: def-pc-degree-line-bundle)
+-/
 noncomputable def Modules.degree (M : X.Modules) : ℤ :=
   M.eulerChar k - Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf)
 
@@ -185,7 +299,9 @@ part (1)). For a quasi-coherent module `M` on a quasi-compact quasi-separated sc
 `k` and a field extension `K/k`, `deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in
 `deg M = χ(M) - χ(𝒪_X)` are invariant under flat base change.
 
-(blueprint: `lem-pc-degree-base-change`) -/
+(blueprint: `lem-pc-degree-base-change`) 
+(blueprint: lem-pc-degree-base-change)
+-/
 theorem Modules.degree_pullback (K : Type u) [Field K] [Algebra k K]
     [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules)
     [M.IsQuasicoherent] :
@@ -371,3 +487,4 @@ end Additivity
 end Modules
 
 end AlgebraicGeometry.Scheme
+

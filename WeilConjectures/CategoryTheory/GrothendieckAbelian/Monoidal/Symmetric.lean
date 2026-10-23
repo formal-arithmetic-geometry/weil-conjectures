@@ -30,14 +30,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
   [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
 
-/-- The symmetric monoidal structure on `A`-valued sheaves on an essentially small site, for a
-symmetric monoidal closed coefficient category `A`. -/
-noncomputable instance symmetricCategory_sheaf_of_essentiallySmall :
-    SymmetricCategory (Sheaf J A) :=
-  Sheaf.symmetricCategory _ _
-
 lemma toBraidedCategory_symmetricCategory_sheaf_of_essentiallySmall :
-    (symmetricCategory_sheaf_of_essentiallySmall A J).toBraidedCategory =
+    (symmetricCategory_sheaf_of_essentiallySmall J (A := A)).toBraidedCategory =
       braidedCategory_sheaf_of_essentiallySmall A J :=
   rfl
 

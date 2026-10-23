@@ -203,14 +203,14 @@ private theorem wnorm_mul_le {r : ℝ} (hr : 0 ≤ r) (f g : Polynomial ℂ) :
   refine Summable.tsum_le_tsum (fun n ↦ ?_) (summable_wnorm r _)
     (summable_norm_sum_mul_antidiagonal_of_summable_norm ha hb).of_norm
   rw [Polynomial.coeff_mul]
-  calc ‖∑ p ∈ Finset.antidiagonal n, f.coeff p.1 * g.coeff p.2‖ * r ^ n
-      ≤ (∑ p ∈ Finset.antidiagonal n, ‖f.coeff p.1‖ * ‖g.coeff p.2‖) * r ^ n := by
+  calc ‖∑ p ∈ Finset.HasAntidiagonal.antidiagonal n, f.coeff p.1 * g.coeff p.2‖ * r ^ n
+      ≤ (∑ p ∈ Finset.HasAntidiagonal.antidiagonal n, ‖f.coeff p.1‖ * ‖g.coeff p.2‖) * r ^ n := by
         gcongr
         exact (norm_sum_le _ _).trans (Finset.sum_le_sum fun _ _ ↦ norm_mul_le _ _)
-    _ = ∑ p ∈ Finset.antidiagonal n, a p.1 * b p.2 := by
+    _ = ∑ p ∈ Finset.HasAntidiagonal.antidiagonal n, a p.1 * b p.2 := by
         rw [Finset.sum_mul]
         refine Finset.sum_congr rfl fun p hp ↦ ?_
-        rw [← Finset.mem_antidiagonal.1 hp, pow_add]
+        rw [← Finset.HasAntidiagonal.mem_antidiagonal.1 hp, pow_add]
         ring
 
 private theorem wnorm_one (r : ℝ) : wnorm r 1 = 1 := by
@@ -597,9 +597,8 @@ theorem exists_card_filter_degreeOver_le {X' : C.Opens} (hX' : IsAffineOpen X') 
     simp
   -- the points of `t` of degree `e`, as points of `X'₀`
   let φ : {x : U.finitePoints | j.base x.1 ∈ X'} → X'.toScheme.finitePoints := fun x ↦
-    ⟨⟨j.base x.1.1, x.2⟩, by
-      rw [← Scheme.Hom.mem_finitePoints_iff_of_isIso X'.ι]
-      exact (Scheme.Hom.mem_finitePoints_iff_of_isIso j x.1.1).2 x.1.2⟩
+    ⟨⟨j.base x.1.1, x.2⟩, (Scheme.Hom.mem_finitePoints_iff_of_isIso X'.ι _).1
+      ((Scheme.Hom.mem_finitePoints_iff_of_isIso j x.1.1).2 x.1.2)⟩
   have hφ : Function.Injective φ := fun x y h ↦ by
     have h' : j.base x.1.1 = j.base y.1.1 := congrArg (fun z ↦ z.1.1) h
     exact Subtype.ext (Subtype.ext (j.isOpenEmbedding.injective h'))

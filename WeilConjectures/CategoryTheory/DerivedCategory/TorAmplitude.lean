@@ -22,7 +22,7 @@ Tor amplitude only has its meaning for the derived tensor product.
 
 Nothing here depends on a site: the étale and pro-étale Tor amplitude of
 `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude` and
-`WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude` are specialisations.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude` are specialisations.
 
 ## Main definitions
 

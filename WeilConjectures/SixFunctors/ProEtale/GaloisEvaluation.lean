@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.KummerCover
 public import WeilConjectures.CategoryTheory.Sites.EquivariantEvaluation
 public import WeilConjectures.FieldTheory.KummerFreeSubgroup
 public import WeilConjectures.SixFunctors.ProEtale.KummerCover
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Galois actions on the geometric generic point with free orbits

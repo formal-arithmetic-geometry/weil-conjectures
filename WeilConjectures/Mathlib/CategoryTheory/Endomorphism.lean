@@ -8,7 +8,16 @@ module
 public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
-# Underlying morphisms of the unit and inverses in `Aut X`
+# Powers of intertwined endomorphisms; units and inverses in `Aut X`
+
+A morphism `p : Y ⟶ X` intertwining endomorphisms `a` of `Y` and `b` of `X`
+(`a ≫ p = p ≫ b`) intertwines their powers in the endomorphism monoids.
+
+## Main statements
+
+- `CategoryTheory.End.asHom_pow_comp_eq_comp_asHom_pow`: `a ^ m ≫ p = p ≫ b ^ m`.
+- `CategoryTheory.Aut.one_hom`, `CategoryTheory.Aut.inv_hom`, `CategoryTheory.Aut.mul_hom`: the
+  underlying morphisms of the unit, inverses and products in `Aut X`.
 -/
 
 @[expose] public section
@@ -32,3 +41,22 @@ lemma mul_hom (f g : Aut X) : (f * g).hom = g.hom ≫ f.hom :=
   rfl
 
 end CategoryTheory.Aut
+
+namespace CategoryTheory.End
+
+variable {C : Type*} [Category* C] {X Y : C}
+
+/-- A morphism `p` intertwining endomorphisms `a` and `b` (`a ≫ p = p ≫ b`) intertwines their
+`m`-th powers. -/
+lemma asHom_pow_comp_eq_comp_asHom_pow {a : Y ⟶ Y} {b : X ⟶ X} {p : Y ⟶ X}
+    (h : a ≫ p = p ≫ b) (m : ℕ) :
+    asHom (of a ^ m) ≫ p = p ≫ asHom (of b ^ m) := by
+  induction m with
+  | zero => simp [one_def]
+  | succ m ih =>
+    change asHom (of a ^ m * of a) ≫ p = p ≫ asHom (of b ^ m * of b)
+    rw [mul_def, mul_def]
+    change (a ≫ asHom (of a ^ m)) ≫ p = p ≫ b ≫ asHom (of b ^ m)
+    rw [Category.assoc, ih, reassoc_of% h]
+
+end CategoryTheory.End

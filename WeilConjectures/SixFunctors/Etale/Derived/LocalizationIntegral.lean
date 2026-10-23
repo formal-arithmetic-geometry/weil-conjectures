@@ -74,26 +74,6 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ}
 
-/-- An element `r` of the ideal `J` kills the reduction `K ⊗ᴸ (Λ ⧸ J)_X` of every object `K` of
-`D(X_ét, Λ)`: it kills `Λ ⧸ J`, hence the constant complex `(Λ ⧸ J)_X`, and tensoring with `K`
-is `Λ`-linear. -/
-lemma smul_id_reductionModIdeal {X : Scheme.{u}} {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
-    (K : 𝐃(X, Λ)) :
-    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
-  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
-    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
-    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
-    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
-      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
-    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
-      Ideal.Quotient.eq_zero_iff_mem]
-    exact J.mul_mem_right _ hr
-  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
-  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
-    ← (_root_.DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
-    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
-    Functor.map_zero, Functor.map_zero, Functor.map_zero]
-
 /-! ### Tor amplitude and closure properties -/
 
 section Triangulated
@@ -392,22 +372,27 @@ theorem boundedConstructibleIntegral_of_rightDerivedLowerStar_obj (i : X ⟶ Y)
   exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso e h'.1,
     (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso e h'.2⟩
 
-variable [IsNoetherianRing Λ] {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+variable [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] {k : Type u} [Field k]
+  [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
   [LocallyOfFiniteType aY] [QuasiCompact aY]
 
-omit hϖ hI [IsNoetherianRing Λ] [LocallyOfFiniteType aY] [QuasiCompact aY] in
+omit hϖ hI [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [LocallyOfFiniteType aY]
+  [QuasiCompact aY] in
 include aY in
-/-- The reductions of the objects of `D(X_ét, Λ)` are killed by an integer invertible on `Y`. -/
+/-- The reductions modulo `Iⁿ⁺¹` of the objects of `D(X_ét, Λ)` are killed by an integer lying
+in `Iⁿ⁺¹` and invertible on `Y`. -/
 lemma exists_nsmul_id_reductionModIdeal_eq_zero (n : ℕ) :
-    ∃ N : ℕ, NeZero N ∧ IsUnit (N : Γ(Y, ⊤)) ∧ ∀ K : 𝐃(X, Λ),
+    ∃ N : ℕ, NeZero N ∧ (N : Λ) ∈ I ^ (n + 1) ∧ IsUnit (N : Γ(Y, ⊤)) ∧ ∀ K : 𝐃(X, Λ),
       N • 𝟙 ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) = 0 := by
   have : HasInvertibleExponent (Λ ⧸ I) Y := HasInvertibleExponent.of_hom aY
   obtain ⟨m, hm0, hmΛ, hmY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ ⧸ I) (X := Y)
   have hmI : (m : Λ) ∈ I := by
     rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
     exact hmΛ
-  refine ⟨m ^ (n + 1), ⟨pow_ne_zero _ hm0.ne'⟩, by rw [Nat.cast_pow]; exact hmY.pow _,
+  refine ⟨m ^ (n + 1), ⟨pow_ne_zero _ hm0.ne'⟩,
+    by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _,
+    by rw [Nat.cast_pow]; exact hmY.pow _,
     fun K ↦ nsmul_id_reductionModIdeal (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) K⟩
 
 /-- Blueprint `prop-sf-localization-all-stages`, clauses (1) and (1') at the integral stage
@@ -437,14 +422,17 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar (f : X ⟶ Y) (hf : f
         DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
           ((reductionModIdeal Λ Y (I ^ (n + 1))).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) := by
     intro n a b hbc hta
-    obtain ⟨N, _, hNY, hN⟩ := exists_nsmul_id_reductionModIdeal_eq_zero (I := I) (X := X) aY n
+    obtain ⟨N, _, hNI, hNY, hN⟩ := exists_nsmul_id_reductionModIdeal_eq_zero (I := I) (X := X) aY n
+    have : Finite (Λ ⧸ I ^ (n + 1)) := Ideal.finite_quotient_pow (IsNoetherian.noetherian I) _
     have hN' := hN K
     subst hI
     obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal (R((f)_*[ModuleCat.{u + 1} Λ])) hϖ (n + 1) K
     exact ⟨(DerivedCategory.boundedConstructible _ Y).prop_of_iso e
-        (boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN' hNY hbc),
+        (boundedConstructible_rightDerivedLowerStar Λ _ aX aY f hf N hNI hNY
+          (fun r hr ↦ smul_id_reductionModIdeal hr K) hbc),
       (DerivedCategory.torAmplitudeIn _ Y _ _).prop_of_iso e
-        (torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN' hNY hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX aY f hf d hd a b N hN' hNY
+          hbc hta)⟩
   refine ⟨⟨derivedComplete_rightDerivedLowerStar_obj hϖ hI f hc, a₀, b₀ + 2 * (d : ℤ),
     fun n ↦ key n a₀ b₀ (h₀ n).1 (h₀ n).2⟩, fun a b hab n ↦ (key n a b (h₀ n).1 (hab n)).2⟩
 
@@ -461,8 +449,10 @@ section Recollement
 variable {U Z X : Scheme.{u}}
 
 variable (Λ) in
-/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully
-faithful. -/
+/-- Blueprint `lem-exc-open-fully-faithful`, first half: for an open immersion `j`, the counit
+`Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully faithful. In the adjoint triple
+`D(j_!) ⊣ D(j^*) ⊣ Rj_*` the unit of the first adjunction is invertible, hence so is the counit
+of the second. -/
 instance isIso_derivedUpperStarLowerStarAdjunction_counit (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit := by
   let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
@@ -485,8 +475,9 @@ noncomputable def rightDerivedLowerStarUpperShriekAdjunction (i : Z ⟶ X) [IsCl
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).ofNatIsoLeft
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i)
 
-/-- `j^* i_* = 0` for an open immersion `j` whose range is disjoint from that of the closed
-immersion `i` (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
+/-- Blueprint `lem-exc-open-fully-faithful`, second half: `j^* i_* = 0` for an open immersion `j`
+whose range is disjoint from that of the closed immersion `i`
+(`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
 lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj (i : Z ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
     (hij : Disjoint (Set.range i.base) (Set.range j.base)) (M : 𝐃(Z, Λ)) :
@@ -643,7 +634,7 @@ end Localization
 
 section BoundedConstructible
 
-variable {U Z X Y : Scheme.{u}} [IsNoetherianRing Λ] {k : Type u} [Field k]
+variable {U Z X Y : Scheme.{u}} [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] {k : Type u} [Field k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 /-- Blueprint `prop-sf-localization-all-stages`, clauses (1) and (1') at the integral stage
@@ -740,7 +731,7 @@ restriction of `Ri^!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), under the
 hypotheses providing the exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsDomain Λ]
-    [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    [IsAdicComplete I Λ] (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]
     [IsSeparated aX] [IsSeparated aZ] [HasCompactification aX] [HasCompactification aZ]

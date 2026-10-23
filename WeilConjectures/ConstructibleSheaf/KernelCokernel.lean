@@ -8,6 +8,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-!
 # Kernels and cokernels of morphisms between finite locally constant sheaves
@@ -28,8 +30,12 @@ hence finitely generated, for kernels when `Λ` is noetherian
 stratifications, kernels, cokernels and direct sums of constructible sheaves of modules are
 constructible (`IsConstructibleSheaf.kernel`, `IsConstructibleSheaf.cokernel`,
 `IsConstructibleSheaf.biprod`).
-(blueprint: `lemma:constructible-hom-constant-locally`, the kernel and cokernel part of
-`lemma:constructible-flc-serre`)
+
+For a finite ring `Λ`, an extension of finite locally constant sheaves is finite locally
+constant (`IsFiniteLocallyConstantSheaf.of_shortExact`): étale locally the outer terms are
+constant, a presentation of the quotient lifts to the extension, and the extension is the
+constant sheaf at the pushout of the presentation, by the five lemma.
+(blueprint: `lemma:constructible-hom-constant-locally`, `lemma:constructible-flc-serre`)
 
 -/
 
@@ -40,6 +46,31 @@ universe u
 open CategoryTheory Limits Opposite
 
 noncomputable section
+
+namespace CategoryTheory.ShortComplex.ShortExact
+
+/-- **Pushout of a short exact sequence.** For a short exact sequence
+`0 ⟶ S.X₁ ⟶ S.X₂ ⟶ S.X₃ ⟶ 0` in an abelian category and `α : S.X₁ ⟶ M`, the sequence
+`0 ⟶ M ⟶ M ⊔_{S.X₁} S.X₂ ⟶ S.X₃ ⟶ 0` is short exact. -/
+lemma pushout_shortExact {C : Type*} [Category* C] [Abelian C] {S : ShortComplex C}
+    (hS : S.ShortExact) {M : C} (α : S.X₁ ⟶ M) :
+    (ShortComplex.mk (pushout.inl α S.f) (pushout.desc 0 S.g (by rw [comp_zero, S.zero]))
+      (by rw [pushout.inl_desc])).ShortExact := by
+  have := hS.mono_f
+  have := hS.epi_g
+  refine { exact := ?_, mono_f := inferInstance, epi_g := ?_ }
+  · refine ShortComplex.exact_of_g_is_cokernel _ (CokernelCofork.IsColimit.ofπ _ _
+      (fun h hh ↦ hS.exact.desc (pushout.inr _ _ ≫ h)
+        (by rw [← pushout.condition_assoc, hh, comp_zero]))
+      (fun h hh ↦ ?_) (fun h hh m hm ↦ ?_))
+    · apply pushout.hom_ext
+      · rw [pushout.inl_desc_assoc, zero_comp]
+        exact hh.symm
+      · rw [pushout.inr_desc_assoc, hS.exact.g_desc]
+    · rw [← cancel_epi S.g, ShortComplex.Exact.g_desc, ← hm, pushout.inr_desc_assoc]
+  · exact epi_of_epi_fac (pushout.inr_desc _ _ _)
+
+end CategoryTheory.ShortComplex.ShortExact
 
 namespace AlgebraicGeometry.Scheme
 
@@ -363,13 +394,232 @@ theorem IsFiniteLocallyConstantSheaf.homology [IsNoetherianRing Λ]
   exact IsFiniteLocallyConstantSheaf.of_iso (F := Limits.cokernel S.toCycles)
     ((cokernelIsCokernel S.toCycles).coconePointUniqueUpToIso S.homologyIsCokernel)
 
+end FiniteStalks
+
+section Extension
+
+variable {X Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
+
+/-- **An extension of constant sheaves with a lifted presentation is constant.** Let
+`0 ⟶ S.X₁ ⟶ S.X₂ ⟶ S.X₃ ⟶ 0` be a short exact sequence of sheaves of modules on `Y_ét` with
+`S.X₁ ≅ M_Y` and `S.X₃ ≅ N_Y`, let `p : Λᵇ ⟶ N` be surjective with kernel `K`, and let `V` be an
+étale `Y`-scheme over which the images of the basis vectors under `p` lift to sections `y i` of
+`S.X₂`, and such that the induced map `K_V ⟶ S.X₁|_V` is the constant map at a linear map
+`α : K ⟶ M`. Then `S.X₂|_V` is the constant sheaf at the pushout `L` of `α` and `K ⟶ Λᵇ`: the
+constant sequence `0 ⟶ M_V ⟶ L_V ⟶ N_V ⟶ 0` maps to the restriction of `S`, by isomorphisms on
+the outer terms, so the middle map is an isomorphism by the five lemma. -/
+lemma isConstant_over_of_shortExact_of_lift
+    {S : ShortComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    {M N : ModuleCat.{u + 1} Λ}
+    (e₁ : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M ≅ S.X₁)
+    (e₃ : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N ≅ S.X₃)
+    {b : ℕ} (p : (Fin b → Λ) →ₗ[Λ] N) (hp : Function.Surjective p) (V : Y.Etale)
+    (y : Fin b → S.X₂.obj.obj (op V))
+    (hy : ∀ i, S.g.hom.app (op V) (y i) = e₃.hom.hom.app (op V)
+      ((toSheafify Y.smallEtaleTopology ((Functor.const _).obj N)).app (op V)
+        (p (Pi.single i 1))))
+    (α : LinearMap.ker p →ₗ[Λ] M)
+    (hα : ∀ k : LinearMap.ker p, S.f.hom.app (op V) (e₁.hom.hom.app (op V)
+      ((toSheafify Y.smallEtaleTopology ((Functor.const _).obj M)).app (op V) (α k))) =
+        ∑ i, (k : Fin b → Λ) i • y i) :
+    (S.X₂.over V).IsConstant (Y.smallEtaleTopology.over V) := by
+  let J := Y.smallEtaleTopology
+  let A := ModuleCat.{u + 1} Λ
+  let c' := constantSheaf (J.over V) A
+  let O := J.overPullback A V
+  let adj := constantSheafAdj (J.over V) A Over.mkIdTerminal
+  let Sm := p.shortComplexKer
+  have hSm : Sm.ShortExact := LinearMap.shortExact_shortComplexKer hp
+  have hSc := hSm.map_of_exact c'
+  let α' : (Sm.map c').X₁ ⟶ c'.obj M := c'.map (ModuleCat.ofHom α)
+  have hP := hSc.pushout_shortExact α'
+  have hO := hS.map_of_exact O
+  let τ₁ : c'.obj M ⟶ O.obj S.X₁ := constantSheafOverHom J A V M ≫ O.map e₁.hom
+  let τ₃ : c'.obj N ⟶ O.obj S.X₃ := constantSheafOverHom J A V N ≫ O.map e₃.hom
+  let φ : c'.obj (ModuleCat.of Λ (Fin b → Λ)) ⟶ O.obj S.X₂ :=
+    (adj.homEquiv _ _).symm (ModuleCat.ofHom (Fintype.linearCombination Λ y))
+  have hcond : α' ≫ τ₁ ≫ O.map S.f = (Sm.map c').f ≫ φ := by
+    apply (adj.homEquiv _ _).injective
+    change adj.homEquiv _ _ (c'.map (ModuleCat.ofHom α) ≫ (constantSheafOverHom J A V M ≫
+      O.map e₁.hom) ≫ O.map S.f) = adj.homEquiv _ _ (c'.map Sm.f ≫ φ)
+    rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_left, Category.assoc,
+      adj.homEquiv_naturality_right]
+    erw [constantSheafAdj_homEquiv_constantSheafOverHom]
+    simp only [φ]
+    erw [Equiv.apply_symm_apply]
+    ext k
+    exact (hα k).trans (by
+      change _ = Fintype.linearCombination Λ y (k : Fin b → Λ)
+      rw [Fintype.linearCombination_apply])
+  have hg : φ ≫ O.map S.g = (Sm.map c').g ≫ τ₃ := by
+    apply (adj.homEquiv _ _).injective
+    change adj.homEquiv _ _ (φ ≫ O.map S.g) = adj.homEquiv _ _ (c'.map Sm.g ≫
+      constantSheafOverHom J A V N ≫ O.map e₃.hom)
+    rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right,
+      adj.homEquiv_naturality_right,
+      show adj.homEquiv _ _ (constantSheafOverHom J A V N) = _ from
+        constantSheafAdj_homEquiv_constantSheafOverHom J A V N,
+      show adj.homEquiv _ _ φ = ModuleCat.ofHom (Fintype.linearCombination Λ y) from
+        Equiv.apply_symm_apply _ _]
+    ext i
+    change S.g.hom.app (op V) (Fintype.linearCombination Λ y (Pi.single i 1)) =
+      e₃.hom.hom.app (op V) ((toSheafify Y.smallEtaleTopology ((Functor.const _).obj N)).app
+        (op V) (p (Pi.single i 1)))
+    rw [Fintype.linearCombination_apply_single, one_smul]
+    exact hy i
+  let τ₂ : pushout α' (Sm.map c').f ⟶ O.obj S.X₂ := pushout.desc (τ₁ ≫ O.map S.f) φ hcond
+  have key := fun (ψ : _ ⟶ S.map O) (h₁ : IsIso ψ.τ₁) (h₃ : IsIso ψ.τ₃) ↦
+    ShortComplex.isIso₂_of_shortExact_of_isIso₁₃' ψ hP hO h₁ h₃
+  have : IsIso τ₂ := key ⟨τ₁, τ₂, τ₃, by dsimp only [τ₂]; exact (pushout.inl_desc _ _ _).symm, by
+    dsimp only [τ₂]
+    apply pushout.hom_ext
+    · erw [pushout.inl_desc_assoc, pushout.inl_desc_assoc]
+      change (τ₁ ≫ O.map S.f) ≫ O.map S.g = 0 ≫ τ₃
+      rw [zero_comp, Category.assoc, ← O.map_comp, S.zero, O.map_zero, comp_zero]
+    · erw [pushout.inr_desc_assoc, pushout.inr_desc_assoc]
+      exact hg⟩ (by change IsIso τ₁; infer_instance) (by change IsIso τ₃; infer_instance)
+  exact Sheaf.isConstant_of_iso _ ((asIso τ₂).symm.trans
+    (PreservesPushout.iso c' (ModuleCat.ofHom α) Sm.f))
+
+/-- **An extension of finite constant sheaves is locally constant.** For a finite ring `Λ` and a
+short exact sequence `0 ⟶ S.X₁ ⟶ S.X₂ ⟶ S.X₃ ⟶ 0` of sheaves of modules on `Y_ét` with
+`S.X₁ ≅ M_Y` and `S.X₃ ≅ N_Y`, `N` finitely generated, every object `T` of the small étale site
+has a covering sieve over whose non-degenerate members `V` the restriction of `S.X₂` is
+constant. Choose a surjection `p : Λᵇ ⟶ N` with kernel `K`; the images of the basis vectors
+lift to sections of `S.X₂` locally (`S.X₂ ⟶ S.X₃` being locally surjective), the finitely many
+resulting sections of `S.X₁ ≅ M_Y` indexed by the finite set `K` are locally constant, and then
+`isConstant_over_of_shortExact_of_lift` applies. -/
+lemma exists_isConstant_over_of_shortExact [Finite Λ]
+    {S : ShortComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    {M N : ModuleCat.{u + 1} Λ} [Module.Finite Λ N]
+    (e₁ : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M ≅ S.X₁)
+    (e₃ : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N ≅ S.X₃)
+    (T : Y.Etale) :
+    ∃ R ∈ Y.smallEtaleTopology T, ∀ ⦃V : Y.Etale⦄ (g : V ⟶ T), R g →
+      (⊥ : Sieve V) ∉ Y.smallEtaleTopology V →
+        (S.X₂.over V).IsConstant (Y.smallEtaleTopology.over V) := by
+  obtain ⟨b, p, hp⟩ := Module.Finite.exists_fin' Λ N
+  let J := Y.smallEtaleTopology
+  let A := ModuleCat.{u + 1} Λ
+  let x (i : Fin b) : S.X₃.obj.obj (op T) := e₃.hom.hom.app (op T)
+    ((toSheafify J ((Functor.const _).obj N)).app (op T) (p (Pi.single i 1)))
+  have : Sheaf.IsLocallySurjective S.g :=
+    (Sheaf.isLocallySurjective_iff_epi' (φ := S.g)).2 hS.epi_g
+  have hR₁ : (⨅ i, Presheaf.imageSieve S.g.hom (x i)) ∈ J T :=
+    J.iInf_mem _ fun i ↦ Presheaf.imageSieve_mem J S.g.hom (x i)
+  -- sections of the short exact sequence
+  have hsec (U : Y.Etale) :
+      (S.map (sheafToPresheaf J A ⋙ (CategoryTheory.evaluation Y.Etaleᵒᵖ A).obj (op U))).Exact :=
+    hS.exact.map_of_mono_of_preservesKernel _ hS.mono_f inferInstance
+  have hinj (U : Y.Etale) : Function.Injective (S.f.hom.app (op U)) :=
+    have := hS.mono_f
+    have : Mono S.f.hom := inferInstance
+    (ModuleCat.mono_iff_injective _).1 ((NatTrans.mono_iff_mono_app _).1 this (op U))
+  -- naturality of the constant sections
+  have hconst {Q : ModuleCat.{u + 1} Λ} {U U' : Y.Etale} (f : U' ⟶ U) (q : Q) :
+      (sheafify J ((Functor.const _).obj Q)).map f.op
+        ((toSheafify J ((Functor.const _).obj Q)).app (op U) q) =
+      (toSheafify J ((Functor.const _).obj Q)).app (op U') q := by
+    have := (toSheafify J ((Functor.const Y.Etaleᵒᵖ).obj Q)).naturality f.op
+    exact (ConcreteCategory.congr_hom this q).symm
+  have step : ∀ ⦃U : Y.Etale⦄ (g : U ⟶ T), (⨅ i, Presheaf.imageSieve S.g.hom (x i)) g →
+      ∃ R₂ ∈ J U, ∀ ⦃V : Y.Etale⦄ (f : V ⟶ U), R₂ f → (⊥ : Sieve V) ∉ J V →
+        (S.X₂.over V).IsConstant (J.over V) := by
+    intro U g hg
+    have hy (i : Fin b) := ((iInf_le _ i : (⨅ i, Presheaf.imageSieve S.g.hom (x i)) ≤ _) _ hg)
+    choose y hy using hy
+    have nat {F G : Y.Etaleᵒᵖ ⥤ A} (η : F ⟶ G) {U₁ U₂ : Y.Etale} (f : U₂ ⟶ U₁)
+        (a : ToType (F.obj (op U₁))) :
+        η.app (op U₂) (F.map f.op a) = G.map f.op (η.app (op U₁) a) :=
+      ConcreteCategory.congr_hom (η.naturality f.op) a
+    have hyU (i : Fin b) : S.g.hom.app (op U) (y i) = e₃.hom.hom.app (op U)
+        ((toSheafify J ((Functor.const _).obj N)).app (op U) (p (Pi.single i 1))) := by
+      rw [hy i]
+      exact (nat e₃.hom.hom g _).symm.trans (congrArg (e₃.hom.hom.app (op U)) (hconst g _))
+    have hsum (k : LinearMap.ker p) :
+        ∑ i, (k : Fin b → Λ) i • (Pi.single i 1 : Fin b → Λ) = k := by
+      ext j
+      simp [Finset.sum_apply, Pi.single_apply]
+    have hw (k : LinearMap.ker p) : ∃ w : ToType (S.X₁.obj.obj (op U)),
+        S.f.hom.app (op U) w = ∑ i, (k : Fin b → Λ) i • y i := by
+      refine (ShortComplex.moduleCat_exact_iff _).1 (hsec U) _ ?_
+      change S.g.hom.app (op U) (∑ i, (k : Fin b → Λ) i • y i) = 0
+      let L : (Fin b → Λ) →ₗ[Λ] ToType (S.X₃.obj.obj (op U)) := (e₃.hom.hom.app (op U)).hom ∘ₗ
+        ((toSheafify J ((Functor.const _).obj N)).app (op U)).hom ∘ₗ p
+      have hL (v : Fin b → Λ) : e₃.hom.hom.app (op U)
+          ((toSheafify J ((Functor.const _).obj N)).app (op U) (p v)) = L v := rfl
+      calc S.g.hom.app (op U) (∑ i, (k : Fin b → Λ) i • y i)
+          = ∑ i, (k : Fin b → Λ) i • L (Pi.single i 1) := by
+            simp only [map_sum, map_smul]
+            exact Finset.sum_congr rfl fun i _ ↦ congrArg ((k : Fin b → Λ) i • ·) (hyU i)
+        _ = L (∑ i, (k : Fin b → Λ) i • Pi.single i 1) := by simp only [map_sum, map_smul]
+        _ = 0 := by
+            rw [hsum]
+            change e₃.hom.hom.app (op U) ((toSheafify J ((Functor.const _).obj N)).app (op U)
+              (p k)) = 0
+            rw [LinearMap.mem_ker.1 k.2, map_zero]
+            exact map_zero (e₃.hom.hom.app (op U)).hom
+    choose w hw using hw
+    obtain ⟨R₂, hR₂, hm⟩ := J.exists_mem_forall_exists_toSheafify_const_app_eq M
+      (fun k : LinearMap.ker p ↦ e₁.inv.hom.app (op U) (w k))
+    refine ⟨R₂, hR₂, fun V f hf hV ↦ ?_⟩
+    choose m hm using hm f hf
+    let y' (i : Fin b) : ToType (S.X₂.obj.obj (op V)) := S.X₂.obj.map f.op (y i)
+    have hy' (i : Fin b) : S.g.hom.app (op V) (y' i) = e₃.hom.hom.app (op V)
+        ((toSheafify J ((Functor.const _).obj N)).app (op V) (p (Pi.single i 1))) := by
+      change S.g.hom.app (op V) (S.X₂.obj.map f.op (y i)) = _
+      rw [nat S.g.hom f, hyU]
+      exact (nat e₃.hom.hom f _).symm.trans (congrArg (e₃.hom.hom.app (op V)) (hconst f _))
+    let θ : M →ₗ[Λ] ToType (S.X₂.obj.obj (op V)) := (S.f.hom.app (op V)).hom ∘ₗ
+      (e₁.hom.hom.app (op V)).hom ∘ₗ ((toSheafify J ((Functor.const _).obj M)).app (op V)).hom
+    have hθ : Function.Injective θ := by
+      have he : Function.Injective (e₁.hom.hom.app (op V)) :=
+        ((sheafToPresheaf J A ⋙ (CategoryTheory.evaluation Y.Etaleᵒᵖ A).obj (op V)).mapIso
+          e₁).toLinearEquiv.injective
+      exact (hinj V).comp (he.comp (J.toSheafify_const_app_injective M hV))
+    have hinv (a : ToType (S.X₁.obj.obj (op U))) :
+        e₁.hom.hom.app (op U) (e₁.inv.hom.app (op U) a) = a :=
+      ((sheafToPresheaf J A ⋙ (CategoryTheory.evaluation Y.Etaleᵒᵖ A).obj (op U)).mapIso
+          e₁).toLinearEquiv.apply_symm_apply a
+    have key (k : LinearMap.ker p) : θ (m k) = ∑ i, (k : Fin b → Λ) i • y' i := by
+      calc θ (m k) = S.f.hom.app (op V) (S.X₁.obj.map f.op (w k)) := by
+              exact congrArg (S.f.hom.app (op V)) ((congrArg (e₁.hom.hom.app (op V)) (hm k)).trans
+                ((nat e₁.hom.hom f _).trans (congrArg _ (hinv _))))
+        _ = ∑ i, (k : Fin b → Λ) i • y' i := by
+              rw [nat S.f.hom f, hw k, map_sum]
+              simp only [map_smul, y']
+    let α : LinearMap.ker p →ₗ[Λ] M :=
+      { toFun := m
+        map_add' := fun k k' ↦ hθ (by
+          rw [map_add, key, key, key]
+          simp [add_smul, Finset.sum_add_distrib])
+        map_smul' := fun c k ↦ hθ (by
+          rw [map_smul, key, key]
+          simp [Finset.smul_sum, smul_smul]) }
+    exact isConstant_over_of_shortExact_of_lift hS e₁ e₃ p hp V y' hy' α key
+  choose R₂ hR₂ hP using step
+  exact ⟨Sieve.bind _ R₂, J.bind_covering hR₁ hR₂, by
+    rintro V _ ⟨U, f, g, hg, hf, rfl⟩ hV
+    exact hP g hg f hf hV⟩
+
+
 /-- Blueprint `lemma-constructible-flc-serre`: Kernels, cokernels and extensions of finite
 locally constant sheaves.
 
 **The extension clause.** For a finite ring `Λ`, the middle term of a short exact sequence of
-sheaves of `Λ`-modules whose outer terms are finite locally constant is finite locally constant:
-on an étale cover trivialising the outer terms, the sheaf of splittings is a torsor under the
-finite group `Hom_Λ(N, M)`, so the extension is locally constant. -/
+sheaves of `Λ`-modules whose outer terms are finite locally constant is finite locally constant.
+On an étale cover trivialising the outer terms, `S.X₁ ≅ M_U` and `S.X₃ ≅ N_U` with `M`, `N`
+finite; choosing a presentation `0 ⟶ K ⟶ Λᵇ ⟶ N ⟶ 0`, the generators of `N` lift to sections
+of `S.X₂` étale locally and the induced map `K_U ⟶ M_U` is étale locally constant, at a linear
+map `α`; there `S.X₂` is the constant sheaf at the pushout of `α` and `K ⟶ Λᵇ`, by the five
+lemma (`AlgebraicGeometry.Scheme.exists_isConstant_over_of_shortExact`). The stalks of `S.X₂`
+are extensions of finitely generated modules, hence finitely generated.
+
+Implementation note: the blueprint argues that the extension is étale locally split, the sheaf
+of splittings being a torsor under `Hom_Λ(N, M)`. This fails: over `Λ = ℤ/4`, the constant
+extension `0 ⟶ ℤ/2 ⟶ ℤ/4 ⟶ ℤ/2 ⟶ 0` does not split on any nonempty étale scheme. The proof
+above shows instead that the extension is étale locally the constant sheaf at an extension of
+modules. -/
 theorem IsFiniteLocallyConstantSheaf.of_shortExact [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
@@ -377,10 +627,73 @@ theorem IsFiniteLocallyConstantSheaf.of_shortExact [Finite Λ]
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
     IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ :=
-  sorry
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ where
+  toIsLocallyConstantSheaf := by
+    obtain ⟨𝒰₀, h𝒰₀⟩ := IsLocallyConstantSheaf.exists_cover₂ S.X₁ S.X₃
+    let 𝒰 := 𝒰₀.nonemptyMembers
+    have key : ∀ i : 𝒰.I₀, ∃ 𝒱 : Cover.{u} etalePrecoverage (𝒰.X i), ∀ j,
+        (S.X₂.over (Etale.mk (𝒱.f j ≫ 𝒰.f i))).IsConstant
+          (X.smallEtaleTopology.over (Etale.mk (𝒱.f j ≫ 𝒰.f i))) := by
+      intro i
+      set Y := 𝒰.X i
+      set g := 𝒰.f i
+      have hF : ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₁).IsConstant
+          Y.smallEtaleTopology := (h𝒰₀ i.1).1
+      have hG : ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₃).IsConstant
+          Y.smallEtaleTopology := (h𝒰₀ i.1).2
+      obtain ⟨M, ⟨eM⟩⟩ :=
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₁).mem_essImage_of_isConstant
+      obtain ⟨N, ⟨eN⟩⟩ :=
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₃).mem_essImage_of_isConstant
+      have hfin : IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) :=
+        have := IsFiniteSheaf.upperStar (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) g S.X₃
+        IsFiniteSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) eN.symm
+      have : Module.Finite Λ N := moduleFinite_of_isFiniteSheaf_constantSheaf (Y := Y) N
+      obtain ⟨R, hR, hP⟩ := exists_isConstant_over_of_shortExact
+        (hS.map_of_exact (Etale.upperStar (ModuleCat.{u + 1} Λ) g)) eM eN (Etale.mk (𝟙 Y))
+      refine ⟨Cover.ofSieve R hR, fun y ↦ ?_⟩
+      set V := Cover.ofSieveObj R hR y
+      set a := Cover.ofSieveHom R hR y
+      have := Cover.nonempty_ofSieveObj R hR y
+      have hk : ((Etale.upperStar (ModuleCat.{u + 1} Λ) V.hom).obj
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₂)).IsConstant
+            V.left.smallEtaleTopology := by
+        have := hP a (Cover.ofSieveHom_mem R hR y) (bot_not_mem_smallEtaleTopology V)
+        rwa [isConstant_over_iff_upperStar] at this
+      rw [isConstant_over_iff_upperStar]
+      change ((Etale.upperStar (ModuleCat.{u + 1} Λ) (a.left ≫ g)).obj S.X₂).IsConstant
+        V.left.smallEtaleTopology
+      refine Sheaf.isConstant_congr _ (?_ : (Etale.upperStar _ V.hom).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₂) ≅ _)
+      exact eqToIso (congrArg (fun m ↦ (Etale.upperStar (ModuleCat.{u + 1} Λ) m).obj
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₂))
+          (Cover.ofSieveHom_left R hR y).symm) ≪≫
+        ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) a.left g).app S.X₂).symm
+    choose 𝒱 h𝒱 using key
+    exact ⟨⟨⟨𝒰.bind 𝒱, fun ⟨i, j⟩ ↦ h𝒱 i j⟩⟩⟩
+  toIsFiniteSheaf := ⟨fun Ω _ _ s ↦ by
+    have hs := hS.map_of_exact ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ))
+    have : Module.Finite Λ (S.map (pointSmallEtale s).sheafFiber).X₁ :=
+      (ModuleCat.isFinitelyGenerated_iff _).1
+        (IsFiniteSheaf.isFinitelyGenerated_sheafFiber
+          (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := S.X₁) Ω s)
+    have : Module.Finite Λ (S.map (pointSmallEtale s).sheafFiber).X₃ :=
+      (ModuleCat.isFinitelyGenerated_iff _).1
+        (IsFiniteSheaf.isFinitelyGenerated_sheafFiber
+          (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := S.X₃) Ω s)
+    exact (ModuleCat.isFinitelyGenerated_iff _).2
+      (Module.Finite.of_exact
+        ((ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).1 hs.exact)
+        hs.moduleCat_surjective_g)⟩
 
-end FiniteStalks
+
+end Extension
 
 section Constructible
 

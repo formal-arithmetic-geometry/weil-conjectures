@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Symmet
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TransposePairing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AbelianIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Braided
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Braided
 public import WeilConjectures.WeilSheaf.Dual
 
 /-!

@@ -165,7 +165,7 @@ lemma upperStarIsoLowerStarInv_refl_hom_app (M : Sheaf (Scheme.ProEt.topology X)
     simp
   erw [reassoc_of% h₁, h₂]
   rw [lowerStarUnit, ← lowerStarComp_trans_lowerStarCongr]
-  erw [lowerStarComp_id_left]
+  erw [legacy_lowerStarComp_id_left]
   simp only [Functor.id_obj, Iso.refl_hom, Iso.refl_inv, lowerStarCongr_rfl, Iso.refl_symm,
     Iso.trans_refl, Iso.trans_assoc, Iso.trans_inv, Category.assoc, Functor.isoWhiskerRight_inv,
     NatTrans.comp_app, Functor.comp_obj, NatTrans.id_app, Functor.leftUnitor_inv_app,

@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.ShortExact
 public import WeilConjectures.ConstructibleSheaf.OfForget
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
+public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 
 /-!
 # Constructible sheaves and restriction of scalars to a quotient ring
@@ -100,6 +101,9 @@ instance : (coextendScalars K J).IsRightAdjoint :=
 
 variable {K J}
 
+-- Avoid searching for an irrelevant torsion-free instance in the counit proof.
+attribute [-simp] smul_eq_zero smul_right_inj
+  IsRegular.smul_right_inj IsRegular.smul_eq_zero_iff_right in
 /-- A sheaf of `R`-modules killed by `J` is the restriction of scalars of its coextension of
 scalars along `R ⟶ R ⧸ J`: the counit `Hom_R(R ⧸ J, F) ⟶ F` is an isomorphism. -/
 def restrictScalarsCoextendScalarsIso (F : Sheaf K (ModuleCat.{w} R))
@@ -178,31 +182,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ)
-
-namespace Etale
-
-variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-
-/-- The pushforward of étale sheaves commutes with coextension of scalars along `Λ ⟶ Λ ⧸ J`,
-both being computed sectionwise. -/
-def lowerStarCoextendScalarsIso :
-    lowerStar (ModuleCat.{u + 1} Λ) g ⋙ Sheaf.coextendScalars Y.smallEtaleTopology J ≅
-      Sheaf.coextendScalars Z.smallEtaleTopology J ⋙ lowerStar (ModuleCat.{u + 1} (Λ ⧸ J)) g :=
-  Iso.refl _
-
-/-- The pullback of étale sheaves commutes with restriction of scalars along `Λ ⟶ Λ ⧸ J`: the
-right adjoints, pushforward and coextension of scalars, commute. -/
-def upperStarRestrictScalarsIso :
-    Sheaf.restrictScalars Y.smallEtaleTopology (Ideal.Quotient.mk J) ⋙
-        upperStar (ModuleCat.{u + 1} Λ) g ≅
-      upperStar (ModuleCat.{u + 1} (Λ ⧸ J)) g ⋙
-        Sheaf.restrictScalars Z.smallEtaleTopology (Ideal.Quotient.mk J) :=
-  Adjunction.leftAdjointUniq
-    (((Sheaf.restrictCoextendScalarsAdj _ _).comp (upperStarLowerStarAdjunction _ g)).ofNatIsoRight
-      (lowerStarCoextendScalarsIso J g))
-    ((upperStarLowerStarAdjunction _ g).comp (Sheaf.restrictCoextendScalarsAdj _ _))
-
-end Etale
 
 namespace Scheme
 
@@ -299,7 +278,7 @@ lemma isConstructibleSheaf_restrictScalars_iff [Finite (Λ ⧸ J)]
     have : IsFiniteLocallyConstantSheaf ((Sheaf.restrictScalars _ (Ideal.Quotient.mk J)).obj
         ((Etale.upperStar (ModuleCat.{u + 1} (Λ ⧸ J)) (S.immersion i)).obj G)) :=
       IsFiniteLocallyConstantSheaf.of_iso
-        ((Etale.upperStarRestrictScalarsIso J (S.immersion i)).app G)
+        ((Etale.upperStarRestrictScalarsIso (Ideal.Quotient.mk J) (S.immersion i)).app G)
     exact IsFiniteLocallyConstantSheaf.of_restrictScalars J _
   · rintro ⟨S, hS⟩
     refine ⟨S, fun i ↦ ?_⟩
@@ -308,7 +287,7 @@ lemma isConstructibleSheaf_restrictScalars_iff [Finite (Λ ⧸ J)]
       inferInstanceAs (IsFiniteLocallyConstantSheaf ((Sheaf.restrictScalars _
         (Ideal.Quotient.mk J)).obj ((Etale.upperStar _ (S.immersion i)).obj G)))
     exact IsFiniteLocallyConstantSheaf.of_iso
-      ((Etale.upperStarRestrictScalarsIso J (S.immersion i)).app G).symm
+      ((Etale.upperStarRestrictScalarsIso (Ideal.Quotient.mk J) (S.immersion i)).app G).symm
 
 /-- **Extensions of constructible sheaves killed by an ideal of finite index.** Let `J` be an
 ideal of `Λ` with `Λ ⧸ J` finite, and let `0 ⟶ F₁ ⟶ F₂ ⟶ F₃ ⟶ 0` be a short exact sequence of

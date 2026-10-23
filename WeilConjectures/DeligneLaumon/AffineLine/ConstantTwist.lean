@@ -87,6 +87,9 @@ theorem IsIrreducibleLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
   · have : IsIso i := IsIso.of_isIso_comp_right i e.inv
     exact Or.inr this
 
+set_option synthInstance.maxHeartbeats 80000 in
+-- The instances `PreservesZeroMorphisms` of the equivalence take longer to find with the full
+-- import context (`WeilSheaf.Localization` upstream).
 /-- An autoequivalence `E` of Weil sheaves whose inverse preserves lisse sheaves maps irreducible
 lisse sheaves to irreducible lisse sheaves. -/
 theorem IsIrreducibleLisse.map_equivalence (E : WeilSheaf k₀ l X ≌ WeilSheaf k₀ l X)
@@ -100,7 +103,7 @@ theorem IsIrreducibleLisse.map_equivalence (E : WeilSheaf k₀ l X ≌ WeilSheaf
     ((hE G).2 hG)
   · exact Or.inl ((E.functor.map_isZero h').of_iso (E.counitIso.app G).symm)
   · have : IsIso (E.inverse.map i) := IsIso.of_isIso_comp_right _ (E.unitInv.app F)
-    exact Or.inr (isIso_of_reflects_iso i E.inverse)
+    exact Or.inr (E.fullyFaithfulInverse.isIso_of_isIso_map i)
 
 /-- The constant twist of an irreducible lisse Weil sheaf is irreducible lisse: the twist is
 an autoequivalence of Weil sheaves which does not change underlying sheaves. -/

@@ -2180,8 +2180,11 @@ variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D)
 variable {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
 
 set_option backward.defeqAttrib.useBackward true in
-/-- (Implementation) The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a
-morphism `p : Y ⟶ Dᵢ`. -/
+/-- Blueprint `def-nagata-basechanged-system`: Base-changed system over a chosen stage.
+
+The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a morphism
+`p : Y ⟶ Dᵢ`, indexed by the cofinal subsystem `Over i`; its transition maps are the base
+changes of the transitions of `D`. The limit `Y ×_{Dᵢ} lim Dⱼ` is `baseChangeCone`. -/
 @[simps] noncomputable def baseChangeDiagram : Over i ⥤ Scheme.{u} where
   obj j := pullback p (D.map j.hom)
   map {j k} f := pullback.map _ _ _ _ (𝟙 Y) (D.map f.left) (𝟙 _)
@@ -3159,7 +3162,7 @@ The affine case is
 `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
 general case follows by induction over a finite cover of `X` by affine opens each of which
 lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
-(Blueprint: `lemma:nagata-finite-presentation-descends`.) -/
+(Blueprint: `lemma:nagata-finite-presentation-descends`; `thm-pd-spreading-out`, part (1).) -/
 @[stacks 01ZM]
 theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)
