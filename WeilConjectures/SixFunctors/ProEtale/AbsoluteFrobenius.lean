@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 
 /-!
 # The absolute Frobenius acts trivially on the small pro-étale site
