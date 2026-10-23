@@ -12237,6 +12237,8 @@ public import WeilConjectures.WeilSheaf.StalkTensorTrace
 public import WeilConjectures.WeilSheaf.StalkTransportGeneral
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
+public import WeilConjectures.WeilSheaf.StrictWeilComplex
+public import WeilConjectures.WeilSheaf.StrictWeilComplexNotFaithful
 public import WeilConjectures.WeilSheaf.SupportSubobject
 public import WeilConjectures.WeilSheaf.SupportUpperStar
 public import WeilConjectures.WeilSheaf.TateTwist
