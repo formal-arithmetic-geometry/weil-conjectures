@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
 public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.TraceFormula.Product
 
@@ -149,13 +150,58 @@ noncomputable def kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRin
         ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
   curry (kunnethVerdierPairing ℓ M N)
 
+/-- **External Hom** (blueprint `prop-trf-external-hom`, section `sec-six-functors`): for bounded
+constructible `E₁, L₁` on `X` and `E₂, L₂` on `Y`, the external Hom map
+`β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)` of blueprint `def-sf-kv-maps` (iii),
+the transpose of the two evaluations, is an isomorphism. -/
+theorem isIso_externalHomMap (E₁ L₁ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (E₂ L₂ : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (externalHomMap (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+      (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) E₁ L₁ E₂ L₂) :=
+  sorry
+
+/-- **Exceptional Künneth** (blueprint `prop-trf-exceptional-kunneth`, section
+`sec-six-functors`, for `f₁ = 𝟙_X`, `f₂ = a_Y`, `L₁ = M` and `L₂ = ℚ̄_ℓ`, read through
+`X × s = X ⨯ Y`'s first projection): the exceptional Künneth map
+`α_{𝟙, a_Y} : M ⊠ ω_Y ⟶ Rp_X^! M` is an isomorphism. -/
+theorem isIso_exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (exceptionalKunnethMap ℓ (Y := Y) M) :=
+  sorry
+
+/-- Precomposition with an isomorphism is an isomorphism of internal homs. -/
+instance isIso_pre_app {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞] [MonoidalClosed 𝒞]
+    {A B : 𝒞} (e : B ⟶ A) [IsIso e] (Z : 𝒞) : IsIso ((pre e).app Z) :=
+  ⟨(pre (inv e)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
+    by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
+
+/-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (blueprint `def-sf-kv-maps` (iv)): through
+the unit identifications `M ≅ RHom(ℚ̄_ℓ, M)` and `ℚ̄_ℓ ⊠ N ≅ Lp_Y^* N`, `κ_{M,N}` is the external
+Hom map `β` for the pairs `(ℚ̄_ℓ, M)` and `(N, ω_Y)` followed by the exceptional Künneth map. -/
+lemma kunnethVerdierMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    kunnethVerdierMap ℓ M N =
+      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map (ihomUnitMap M) ▷ _ ≫
+        externalHomMap (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+          (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) (𝟙_ _) M N
+          (dualizingComplex' ℓ Y) ≫
+        (pre (unitExternalMap (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+          (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) N)).app _) ≫
+      (ihom _).map (exceptionalKunnethMap ℓ M) :=
+  curry_braiding_comp_eq _ _ M N _ (exceptionalKunnethMap ℓ M)
+
 /-- **The Künneth–Verdier isomorphism** (blueprint `thm-trf-kunneth-verdier`, section
 `sec-six-functors`): for bounded constructible `M` on `X` and `N` on `Y`, the Künneth–Verdier map
-`κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism. -/
+`κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism. By
+`kunnethVerdierMap_eq` it is `RHom(1, α) ∘ β`, and both factors are isomorphisms
+(`isIso_externalHomMap`, `isIso_exceptionalKunnethMap`). -/
 instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (kunnethVerdierMap ℓ M N) :=
-  sorry
+    IsIso (kunnethVerdierMap ℓ M N) := by
+  have := isIso_externalHomMap ℓ (𝟙_ _) M N (dualizingComplex' ℓ Y)
+  have := isIso_exceptionalKunnethMap ℓ (Y := Y) M
+  rw [kunnethVerdierMap_eq]
+  infer_instance
+
 
 /-- The double-dual morphism is natural, for any braiding. -/
 private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]

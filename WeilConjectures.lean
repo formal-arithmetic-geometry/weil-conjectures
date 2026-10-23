@@ -7943,6 +7943,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
