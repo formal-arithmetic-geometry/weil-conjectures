@@ -165,7 +165,12 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
 
 /-- The component of a composite `F ⋙ G ⋙ H ≅ K ⋙ L ⋙ H ≅ K` of a whiskered isomorphism
-`a : F ⋙ G ≅ K ⋙ L` and an isomorphism `b : L ⋙ H ≅ 𝟭`, up to associators and unitors. -/
+`a : F ⋙ G ≅ K ⋙ L` and an isomorphism `b : L ⋙ H ≅ 𝟭`, up to associators and unitors: at `x`
+it is the composite
+```
+H (G (F x)) --H (a_x)--> H (L (K x)) --b_{K x}--> K x.
+```
+-/
 lemma associator_symm_trans_isoWhiskerRight_hom_app {A B C' E' : Type*} [Category A] [Category B]
     [Category C'] [Category E'] {F : A ⥤ B} {G : B ⥤ C'} {H : C' ⥤ E'} {K : A ⥤ E'}
     {L : E' ⥤ C'} (a : F ⋙ G ≅ K ⋙ L) (b : L ⋙ H ≅ 𝟭 _) (x : A) :
@@ -201,7 +206,15 @@ noncomputable def mapModCompExtendScalarsIso :
     Functor.rightUnitor _
 
 /-- The comparison `mapMod F ⋙ mapMod G ⋙ Ext_{τ_R} ≅ mapMod H` is `τ` on underlying objects
-after the unit `G (F M) ⟶ H R ⊗_{G (F R)} G (F M)`. -/
+after the unit `G (F M) ⟶ H R ⊗_{G (F R)} G (F M)`: the square
+```
+G (F M) ---- unit ----> H R ⊗_{G (F R)} G (F M)
+   |                              |
+   | τ_M                          | comparison
+   v                              v
+  H M ============================ H M
+```
+commutes. -/
 lemma extendUnitHom_mapModCompExtendScalarsIso_hom_app_hom (M : Mod C R) :
     Mod.extendUnitHom (compAlgHom F G τ R) ((G.mapMod (F.obj R)).obj ((F.mapMod R).obj M)) ≫
       ((mapModCompExtendScalarsIso F G τ R).hom.app M).hom = τ.app M.X := by

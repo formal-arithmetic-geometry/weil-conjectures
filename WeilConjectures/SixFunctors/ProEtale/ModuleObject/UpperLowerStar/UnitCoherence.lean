@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-!
 # The coherence isomorphisms of the pullbacks of module objects at the unit
@@ -80,31 +81,26 @@ section Adjoint
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option linter.flexible false in
--- the simplified form of `h` is large; it is closed by `exact`
 /-- The unit `M ⟶ Λ_X ⊗_{f^* Λ_Y} M` of the extension of scalars along `α_f`, followed by the
 identification of the extension of scalars along the isomorphism `α_f` with the restriction of
-scalars along `α_f⁻¹`, is the identity of the underlying sheaf. -/
+scalars along `α_f⁻¹`, is the identity of the underlying sheaf (a case of
+`Mod.extendUnitHom_extendScalarsIsoComapInv_hom_app`). -/
 lemma extendUnitHom_extendScalarsIsoComapInv_hom_app
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       ((f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y))) :
     Mod.extendUnitHom (condensedPullbackHom Λ f) M ≫
-      ((Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)).hom.app M).hom = 𝟙 _ := by
-  have h := congrArg Mod.Hom.hom (Adjunction.homEquiv_leftAdjointUniq_hom_app
-    (Mod.extendRestrictAdjunction (condensedPullbackHom Λ f))
-    (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).symm.toAdjunction M)
-  simp [Mod.extendRestrictAdjunction, Mod.comapEquivalenceOfIsIso] at h
-  exact h
+      ((Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)).hom.app M).hom = 𝟙 _ :=
+  Mod.extendUnitHom_extendScalarsIsoComapInv_hom_app _ M
 
 /-- The unit of the adjunction between extension and restriction of scalars along `α_f` is
-`Mod.extendUnitHom` on underlying sheaves. -/
+`Mod.extendUnitHom` on underlying sheaves (a case of
+`Mod.extendRestrictAdjunction_unit_app_hom`). -/
 lemma extendRestrictAdjunction_condensedPullbackHom_unit_app_hom
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       ((f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y))) :
     ((Mod.extendRestrictAdjunction (condensedPullbackHom Λ f)).unit.app M).hom =
-      Mod.extendUnitHom (condensedPullbackHom Λ f) M := by
-  simp only [Mod.extendRestrictAdjunction, Adjunction.mkOfHomEquiv_unit_app]
-  exact Category.comp_id _
+      Mod.extendUnitHom (condensedPullbackHom Λ f) M :=
+  Mod.extendRestrictAdjunction_unit_app_hom _ M
 
 /-- The inverse `f^* Λ_Y ⟶ Λ_X` of the unit comparison of the pullback of module objects,
 precomposed with the unit of the extension of scalars along `α_f`, is `α_f` on underlying
