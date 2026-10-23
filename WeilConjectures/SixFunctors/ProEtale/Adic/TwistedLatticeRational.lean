@@ -121,6 +121,13 @@ lemma integralCocycleInvMatrix_map_eval (hγ : IsIntegralCocycle f γ) (z : ↥(
         (padicIntToPadicAlgCl l) :=
   Matrix.ext fun _ _ ↦ rfl
 
+/-- The entries of `AlgebraicGeometry.ProEtale.integralCocycleInvMatrix`. -/
+lemma locallyFiniteFunctionsEval_integralCocycleInvMatrix (hγ : IsIntegralCocycle f γ)
+    (z : ↥(pullback f f)) (i j : Fin N) :
+    locallyFiniteFunctionsEval z (integralCocycleInvMatrix l hγ i j) =
+      padicIntToPadicAlgCl l ((((γ z)⁻¹ : GL (Fin N) ℤ_[l]) : Matrix (Fin N) (Fin N) ℤ_[l]) i j) :=
+  rfl
+
 /-- The matrix `γ⁻¹` is trivial on the diagonal. -/
 lemma integralCocycleInvMatrix_map_diagonal (hγ : IsIntegralCocycle f γ) :
     (integralCocycleInvMatrix l hγ).map
@@ -154,15 +161,16 @@ lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
     {Z : Sheaf (ProEt.topology T) Ab.{u + 1}}
     (Φ : Z ⟶ ((AdicSheaf.restrictPadicInt T l).obj
       ((f)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ AdicSheaf.unit l V))).X)
+    (y : ∀ T' : T.ProEt, Z.obj.obj (op T') → Fin n →
+      locallyFiniteFunctions l ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T').left)
+    (hy : ∀ (T' : T.ProEt) (s : Z.obj.obj (op T')),
+      comps (l := l) (B := V) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')
+        (Φ.hom.app (op T') s) = y T' s)
     (h : ∀ (T' : T.ProEt) (s : Z.obj.obj (op T')) (i : Fin n),
       ∑ j, locallyFiniteFunctionsComp l
           (pullback.snd T'.hom (pullback.fst f f ≫ f)).base.hom (Γ i j) *
-        locallyFiniteFunctionsComp l (descentρ₁ f T').base.hom
-          (comps (l := l) (B := V) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')
-            (Φ.hom.app (op T') s) j) =
-      locallyFiniteFunctionsComp l (descentρ₂ f T').base.hom
-          (comps (l := l) (B := V) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')
-            (Φ.hom.app (op T') s) i)) :
+        locallyFiniteFunctionsComp l (descentρ₁ f T').base.hom (y T' s j) =
+      locallyFiniteFunctionsComp l (descentρ₂ f T').base.hom (y T' s i)) :
     Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom = 0 := by
   ext T' s
   have key : ((Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom).hom.app T') s =
@@ -170,7 +178,7 @@ lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
     refine comps_injective (B := pullback f f) (n := n)
       (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (pullback.fst f f ≫ f)).obj T'.unop) ?_
     refine (comps_descentMap f Γ T'.unop (Φ.hom.app T' s)).trans ?_
-    rw [comps_zero]
+    rw [comps_zero, hy T'.unop s]
     funext i
     rw [h T'.unop s i, sub_self]
     rfl
@@ -386,6 +394,26 @@ lemma toZModPow_upperStarIntegralCocycleLatticeXIso (hγ : IsIntegralCocycle f �
   erw [ProEtale.localizationRestriction_map_hom_app, hz, hn]
   exact congrArg (fun x ↦ towerEquiv l k ((g.hom.app (op T') s).1 x j)) hpt
 
+omit [Surjective f] [QuasiCompact f] [QuasiSeparated f] in
+/-- The identification `Res (f_* B) ≅ f_* (Res B)` is the identity on underlying sheaves. -/
+lemma adicLowerStarRestrictPadicIntIso_inv_app_hom (B : AdicSheaf l V) :
+    ((adicLowerStarRestrictPadicIntIso l f).inv.app B).hom = 𝟙 _ := by
+  simp [adicLowerStarRestrictPadicIntIso, adicLowerStarCompRestrictPadicIntIso,
+    restrictPadicIntCompPadicIntModLowerStarIso]
+  rfl
+
+omit [Surjective f] [QuasiCompact f] [QuasiSeparated f] in
+/-- The identification `Res (f_* B) ≅ f_* (Res B)` is the identity on sections. -/
+lemma adicLowerStarRestrictPadicIntIso_inv_app_hom_app_apply (B : AdicSheaf l V) (T' : T.ProEt)
+    (x : ((padicIntModLowerStar l f).obj ((AdicSheaf.restrictPadicInt V l).obj B)).X.obj.obj
+      (op T')) :
+    (((adicLowerStarRestrictPadicIntIso l f).inv.app B).hom.hom.app (op T')) x = x := by
+  rw [adicLowerStarRestrictPadicIntIso_inv_app_hom]
+  rfl
+
+set_option maxRecDepth 20000 in
+set_option synthInstance.maxHeartbeats 200000 in
+-- The sections of composites of sheaf morphisms are unfolded.
 /-- The adjoint of the trivialisation, restricted to `ℤ_ℓ`-modules, as a morphism of abelian
 sheaves. -/
 lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
@@ -397,12 +425,53 @@ lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
     padicIntModUpperStarLowerStarAdjunction]
   erw [Adjunction.modAdjunction_homEquiv_apply_hom]
   rw [Adjunction.homEquiv_unit]
-  refine comp_descentMap_eq_zero (integralCocycleInvMatrix l hγ) _ fun T' s i ↦ ?_
-  have hc (j : Fin N) := comps_homEquiv_regularBiproductTriv hγ
-    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')
-    (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app _).hom.app (op T') s) j
-  erw [hc, hc]
-  done
+  set ψ := (upperStarIntegralCocycleLatticeIso hγ).hom ≫
+    (adicSheafExtendScalarsRestrictAdjunction V l).homEquiv _ _
+      (regularBiproductTriv (l := l) (V := V) (N := N)) with hψ
+  refine comp_descentMap_eq_zero (integralCocycleInvMatrix l hγ) _
+    (fun T' s j ↦ integralToLocallyFiniteFunctions l _
+      ((((upperStarIntegralCocycleLatticeXIso hγ).hom ≫ biproduct.π _ j).hom.app
+        (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T'))
+          (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app _).hom.app (op T') s)).down))
+    (fun T' s ↦ funext fun j ↦ by
+      have h₁ := adicLowerStarRestrictPadicIntIso_inv_app_hom_app_apply (f := f)
+        (⨁ fun _ : Fin N ↦ unit l V) T'
+        (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app _ ≫
+          (f)_*[Ab.{u + 1}].map ψ.hom).hom.app (op T') s)
+      have h₂ := comps_homEquiv_regularBiproductTriv hγ
+        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')
+        (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app _).hom.app (op T') s) j
+      exact (congrArg (fun x ↦ comps (l := l) (B := V)
+        (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T') x j) h₁).trans h₂)
+    fun T' s i ↦ ?_
+  refine locallyFiniteFunctions_ext_eval fun w ↦ ?_
+  have key : ∑ j, (((γ ((pullback.snd T'.hom (pullback.fst f f ≫ f)).base w))⁻¹ :
+      GL (Fin N) ℤ_[l]) : Matrix (Fin N) (Fin N) ℤ_[l]) i j *
+      ((((upperStarIntegralCocycleLatticeXIso hγ).hom ≫ biproduct.π _ j).hom.app
+        (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T'))
+          (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app _).hom.app (op T') s)).down
+            ((descentρ₁ f T').base w)) =
+      ((((upperStarIntegralCocycleLatticeXIso hγ).hom ≫ biproduct.π _ i).hom.app
+        (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T'))
+          (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app _).hom.app (op T') s)).down
+            ((descentρ₂ f T').base w)) := by
+    refine PadicInt.ext_of_toZModPow.1 fun k ↦ ?_
+    rw [map_sum]
+    simp only [map_mul, toZModPow_upperStarIntegralCocycleLatticeXIso]
+    have hp₁ := congrArg (fun φ ↦ φ.base w) (descentρ₁_comp_pullbackSymmetry_hom (f := f) T')
+    have hp₂ := congrArg (fun φ ↦ φ.base w) (descentρ₂_comp_pullbackSymmetry_hom (f := f) T')
+    simp only [Scheme.Hom.comp_apply] at hp₁ hp₂
+    rw [hp₁, hp₂]
+    have hσ := (mem_twistedSubmodule f _).1 (((integralCocycleLatticeXIso hγ).hom ≫
+      limit.π (proEtIntegralCocycleTower γ ⋙ sheafCompose (ProEt.topology T)
+        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) Ab)) (op k)).hom.app (op T') s).2
+    rw [hσ.apply_descentPoint w, levelCocycleInt_apply, levelCocycle_apply_eq_sum, map_sum]
+    simp only [towerEquiv_smul, hγ.apply_pullbackSymmetry]
+  have := congrArg (padicIntToPadicAlgCl l) key
+  rw [map_sum] at this
+  simp only [RingHom.map_mul] at this
+  rw [map_sum (locallyFiniteFunctionsEval w)]
+  exact this
 
 end Triv
 
