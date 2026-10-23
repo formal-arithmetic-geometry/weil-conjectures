@@ -101,7 +101,6 @@ lemma left_comp_modelFrobenius_left [Finite k]
   (Over.comp_left _ _ _ x' (baseChangeModelFrobenius Ω X N g)).symm.trans (congrArg Over.Hom.left
       hx')
 
-
 variable {X N g} in
 /-- The local Frobenius at a rational point `x̄'` fixed by the model Frobenius `Φ` of the base
 change of `(a, ψ)`, as an explicit composite on `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`:
@@ -223,35 +222,6 @@ lemma stalkFunctor_obj_str_hom (W : WeilSheaf ℓ e) :
         (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom)
       (upperStarEqToIso_hom_app _ hx.symm W.carrier)).trans ?_))
   simp only [Category.assoc]
-
-omit [Finite k] [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k Ω]
-  [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] [IsSepClosed Ω] in
-/-- The transport of the pullback of module objects along an equality of morphisms is
-`upperStarEqToIso`. -/
-lemma upperStarCongr_eq_upperStarEqToIso
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
-    upperStarCongr Λ h = upperStarEqToIso Λ h := by
-  subst h
-  ext M
-  rw [upperStarEqToIso_hom_app]
-  simp [upperStarCongr]
-
-omit [Finite k] [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k Ω]
-  [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] [IsSepClosed Ω] in
-/-- The associativity law of the composition isomorphisms of the pullbacks of module objects, with
-the transport written through `eqToHom` of objects. -/
-lemma upperStarComp_assoc_app_eqToHom
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {W' X' Y' Z' : Scheme.{u}} (f : W' ⟶ X') (g : X' ⟶ Y') (h : Y' ⟶ Z') (M) :
-    (upperStarComp Λ (f ≫ g) h).hom.app M ≫ (upperStarComp Λ f g).hom.app ((h)^*⟦Λ⟧.obj M) =
-      eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) (Category.assoc f g h)) ≫
-        (upperStarComp Λ f (g ≫ h)).hom.app M ≫
-          (f)^*⟦Λ⟧.map ((upperStarComp Λ g h).hom.app M) := by
-  rw [upperStarComp_hom_app_comp_upperStarComp_hom_app, upperStarCongr_eq_upperStarEqToIso,
-    upperStarEqToIso_hom_app]
 
 end Galois
 

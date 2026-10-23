@@ -7943,6 +7943,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsOfIsIso
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
@@ -11719,6 +11720,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.SupportsDerived
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.AbsoluteFrobeniusMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.AbsoluteFrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AbelianIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicAbIdentification
@@ -12232,6 +12234,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
@@ -12495,6 +12498,7 @@ public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.Sheaf.Stalk
+public import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
 public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology

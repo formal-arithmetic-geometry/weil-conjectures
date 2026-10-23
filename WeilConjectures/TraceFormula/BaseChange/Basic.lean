@@ -100,11 +100,16 @@ lemma isFrobenius_frobeniusIterate_overFrobenius_left (N : ℕ) :
   rw [frobeniusIterate_left]
   exact (isFrobenius_overFrobenius_left X).pow X.hom N
 
+omit [Finite k] in
+/-- The characteristic `ringChar k` vanishes on a scheme over `k`. -/
+lemma natCast_ringChar_left_eq_zero : (ringChar k : Γ(X.left, ⊤)) = 0 :=
+  isOfCharacteristic_of_hom_spec X.hom
+
 /-- The `N`-th iterate of the Frobenius is the absolute `p ^ (a * N)`-power Frobenius, where
 `#k = p ^ a`. -/
 lemma frobeniusIterate_overFrobenius_left (N : ℕ) :
     (frobeniusIterate (overFrobenius X) N).left =
-      X.left.iterateFrobenius (FiniteField.ringChar_prime k) (isOfCharacteristic_of_hom_spec X.hom)
+      X.left.iterateFrobenius (FiniteField.ringChar_prime k) (natCast_ringChar_left_eq_zero X)
         (FiniteField.frobeniusExponent k * N) := by
   induction N with
   | zero => rw [frobeniusIterate_zero, mul_zero, Scheme.iterateFrobenius_zero]; rfl
@@ -137,6 +142,22 @@ lemma powCardPowRingHom_apply (N : ℕ) (y : Ω) :
   | succ N ih =>
     rw [Function.iterate_succ_apply, ih, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
       FiniteField.frobeniusAlgHom_apply, Nat.card_eq_fintype_card, ← pow_mul, pow_succ']
+
+omit [Finite k] in
+/-- The prime `ringChar k` vanishes in a field `Ω` containing `k`. -/
+lemma ringChar_cast_eq_zero : (ringChar k : Ω) = 0 := by
+  rw [← map_natCast (algebraMap k Ω), ringChar.Nat.cast_ringChar, map_zero]
+
+/-- On `Spec Ω`, the absolute `p ^ (a N)`-power Frobenius, for `#k = p ^ a`, is `Spec` of the
+`#k ^ N`-power map. -/
+lemma iterateFrobenius_spec_eq_specMap_powCardPowRingHom (N : ℕ)
+    (hΩ : (ringChar k : Γ(Spec (.of Ω), ⊤)) = 0) :
+    (Spec (.of Ω)).iterateFrobenius (FiniteField.ringChar_prime k) hΩ
+        (FiniteField.frobeniusExponent k * N) = Spec.map (powCardPowRingHom k Ω N) := by
+  rw [Scheme.iterateFrobenius_Spec _ _ (ringChar_cast_eq_zero (k := k) (Ω := Ω))]
+  refine congrArg Spec.map (CommRingCat.hom_ext (RingHom.ext fun z ↦ ?_))
+  rw [CommRingCat.hom_ofHom, powCardPowRingHom_apply, iterateFrobeniusOfPrime_apply,
+    pow_mul, ← FiniteField.card_eq_ringChar_pow_frobeniusExponent]
 
 end PowCard
 

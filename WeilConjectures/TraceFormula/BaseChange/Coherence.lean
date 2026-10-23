@@ -387,3 +387,80 @@ lemma mapOfNatIso_obj_mapOfNatIso_obj_str_hom_aux {C₀ D₀ E₀ : Type*} [Cate
   simp
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+variable {𝒞 : Type*} [Category 𝒞] {E : 𝒞 → Type u₂} [∀ A, Category.{v₂} (E A)]
+
+section GaloisCompatibility
+
+variable (V : ∀ {A B : 𝒞}, (A ⟶ B) → E B ⥤ E A)
+  (cV : ∀ {A B C : 𝒞} (a : A ⟶ B) (b : B ⟶ C), V (a ≫ b) ≅ V b ⋙ V a)
+  (assocV : ∀ {A B C C' : 𝒞} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ C') (M : E C'),
+    (cV (a ≫ b) c).hom.app M ≫ (cV a b).hom.app ((V c).obj M) =
+      eqToHom (congrArg (fun s ↦ (V s).obj M) (Category.assoc a b c)) ≫
+        (cV a (b ≫ c)).hom.app M ≫ (V a).map ((cV b c).hom.app M))
+  (unitV : ∀ A, V (𝟙 A) ≅ 𝟭 (E A))
+  (hunit : ∀ {A B : 𝒞} (t : A ⟶ B) (M : E B), (cV (𝟙 A) t).hom.app M =
+    eqToHom (congrArg (fun s ↦ (V s).obj M) (Category.id_comp t)) ≫
+      (unitV A).inv.app ((V t).obj M))
+  {P X : 𝒞} (y : P ⟶ X) (σ FP : P ⟶ P) (FX F' : X ⟶ X) (hF' : F' = FX) (hFσ : FP ≫ σ = 𝟙 P)
+  (hnat : (σ ≫ y) ≫ FX = FP ≫ σ ≫ y) (e : y = (σ ≫ y) ≫ F')
+  (κX : V FX ≅ 𝟭 (E X)) (κP : V FP ≅ 𝟭 (E P)) (τ : V σ ≅ 𝟭 (E P))
+  (hκ : ∀ M : E X, (cV (σ ≫ y) FX).hom.app M ≫ (V (σ ≫ y)).map (κX.hom.app M) =
+    eqToHom (congrArg (fun s ↦ (V s).obj M) hnat) ≫ (cV FP (σ ≫ y)).hom.app M ≫
+      κP.hom.app ((V (σ ≫ y)).obj M))
+  (hτ : ∀ N : E P, (unitV P).inv.app N ≫ eqToHom (congrArg (fun s ↦ (V s).obj N) hFσ.symm) ≫
+    (cV FP σ).hom.app N ≫ (V FP).map (τ.hom.app N) ≫ κP.hom.app N = 𝟙 N)
+
+include assocV hunit hκ hτ in
+/-- **Galois compatibility from naturality**, for abstract families of pullback functors: let
+`κ_X : V F_X ≅ 𝟭` and `κ_P : V F_P ≅ 𝟭` be trivializations compatible with the pullback along
+`σ ≫ y` (`hκ`, for `(σ ≫ y) ≫ F_X = F_P ≫ σ ≫ y`) and let `τ : V σ ≅ 𝟭` be inverse to `κ_P`
+through `F_P ≫ σ = 𝟙` (`hτ`). Then, writing `y = (σ ≫ y) ≫ F_X`, the identifications
+`V y M ≅ V σ V y M ≅ V (σ ≫ y) M` through `τ` and
+`V y M = V ((σ ≫ y) ≫ F_X) M ≅ V (σ ≫ y) V F_X M --κ_X--> V (σ ≫ y) M` agree. -/
+theorem inv_app_comp_inv_app_eq_aux (M : E X) :
+    τ.inv.app ((V y).obj M) ≫ (cV σ y).inv.app M =
+      eqToHom (congrArg (fun s ↦ (V s).obj M) e) ≫ (cV (σ ≫ y) F').hom.app M ≫
+        (V (σ ≫ y)).map (eqToHom (congrArg (fun s ↦ (V s).obj M) hF') ≫ κX.hom.app M) := by
+  subst hF'
+  rw [eqToHom_refl, Category.id_comp, hκ M]
+  have hτ' : τ.inv.app ((V y).obj M) = (unitV P).inv.app ((V y).obj M) ≫
+      eqToHom (congrArg (fun s ↦ (V s).obj ((V y).obj M)) hFσ.symm) ≫
+        (cV FP σ).hom.app ((V y).obj M) ≫ κP.hom.app ((V σ).obj ((V y).obj M)) := by
+    have h := hτ ((V y).obj M)
+    rw [show (V FP).map (τ.hom.app ((V y).obj M)) ≫ κP.hom.app ((V y).obj M) =
+      κP.hom.app ((V σ).obj ((V y).obj M)) ≫ τ.hom.app ((V y).obj M) from
+        κP.hom.naturality _] at h
+    simp only [← Category.assoc] at h
+    have h' := ((Iso.comp_hom_eq_id (τ.app ((V y).obj M))).1 h).symm
+    simp only [Iso.app_inv, Category.assoc] at h'
+    exact h'
+  rw [hτ', ← cancel_mono ((cV σ y).hom.app M)]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Functor.comp_obj, Category.comp_id]
+  rw [show κP.hom.app ((V (σ ≫ y)).obj M) ≫ (cV σ y).hom.app M =
+      (V FP).map ((cV σ y).hom.app M) ≫ κP.hom.app ((V σ).obj ((V y).obj M)) from
+        (κP.hom.naturality _).symm]
+  simp only [← Category.assoc]
+  refine congrArg (fun z ↦ z ≫ κP.hom.app ((V σ).obj ((V y).obj M))) ?_
+  simp only [Category.assoc]
+  have h2 := assocV FP σ y M
+  have h3 := eqToHom_comp_comp_hom_app_aux V cV hFσ y M
+  rw [hunit] at h3
+  have h2' : (cV FP (σ ≫ y)).hom.app M ≫ (V FP).map ((cV σ y).hom.app M) =
+      eqToHom (congrArg (fun s ↦ (V s).obj M) (Category.assoc FP σ y).symm) ≫
+        (cV (FP ≫ σ) y).hom.app M ≫ (cV FP σ).hom.app ((V y).obj M) := by
+    rw [h2, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+  have h3' : (unitV P).inv.app ((V y).obj M) =
+      eqToHom (congrArg (fun s ↦ (V s).obj M) (by rw [hFσ, Category.id_comp])) ≫
+        (cV (FP ≫ σ) y).hom.app M ≫
+          eqToHom (congrArg (fun s ↦ (V s).obj ((V y).obj M)) hFσ) := by
+    rw [← h3]
+    simp
+  rw [h2', h3']
+  simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+
+end GaloisCompatibility
+
+end AlgebraicGeometry.ProEtale.CondensedRing

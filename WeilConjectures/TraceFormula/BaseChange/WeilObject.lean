@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
+public import
+    WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
+public import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
 public import WeilConjectures.TraceFormula.BaseChange.Basic
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.BaseChange.Coherence
@@ -45,7 +48,12 @@ pulled back from the point, so it gives `κ : (F_X^N)^* ≅ 𝟭` on `ℚ̲̄_�
 geometric point `ȳ : Spec Ω ⟶ X`, the trivialization `κ` restricts to the trivialization
 `(σ)^* ≅ 𝟭` of the pullback along the automorphism `σ` of `Spec Ω` inverse to the
 `q^N`-power Frobenius of `Spec Ω` (`upperStarIsoIdOfIsSepClosed`), since `(σ ≫ ȳ) ≫ F_X^N = ȳ`
-(`ProEtale.CondensedRing.isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso`).
+(`ProEtale.CondensedRing.isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso`). It follows from the
+naturality of `κ` under pullback
+    (`upperStarComp_hom_app_comp_map_upperStarIterateFrobeniusIso_hom_app`)
+and from the fact that on `Spec Ω` the Frobenius and Galois trivializations are inverse
+(`upperStarIterateFrobeniusIso_comp_upperStarIsoIdOfIsSepClosed`), both being the identity on the
+modules pulled back from the condensed point.
 
 ## Main definitions
 
@@ -59,8 +67,6 @@ geometric point `ȳ : Spec Ω ⟶ X`, the trivialization `κ` restricts to the t
 
 ## Sorried inputs
 
-- `ProEtale.CondensedRing.isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso`: the Galois
-  compatibility of the Frobenius trivialization at geometric points (unfinished).
 - `ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj`:
   the pullback along `π` preserves bounded constructible complexes (blueprint
   `sk-thm-sf-ctf-stability`, section `sec-six-functors-basics`, with the pullback of
@@ -183,19 +189,157 @@ noncomputable def upperStarFrobeniusIso :
     ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _ :=
   upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (frobeniusIterate_overFrobenius_left X N) ≪≫
     upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
-      (isOfCharacteristic_of_hom_spec X.hom) (FiniteField.frobeniusExponent k * N)
+      (natCast_ringChar_left_eq_zero X) (FiniteField.frobeniusExponent k * N)
 
-/-- At geometric points, the trivialization of the Frobenius pullback is the trivialization of
-the Galois pullback (`IsGaloisCompatibleFrobeniusIso`). -/
-theorem isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso :
-    IsGaloisCompatibleFrobeniusIso ℓ X N (upperStarFrobeniusIso ℓ X N) :=
-  sorry
+lemma upperStarFrobeniusIso_eq :
+    upperStarFrobeniusIso ℓ X N =
+      upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (frobeniusIterate_overFrobenius_left X N) ≪≫
+        upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
+          (natCast_ringChar_left_eq_zero X) (FiniteField.frobeniusExponent k * N) :=
+  rfl
+
+/-- The components of `upperStarEqToIso h ≪≫ κ`. -/
+lemma upperStarEqToIso_trans_hom_app
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {A : Scheme.{u}} {t t' : A ⟶ A} (h : t = t') (κ : (t')^*⟦Λ⟧ ≅ 𝟭 _) (M) :
+    (upperStarEqToIso Λ h ≪≫ κ).hom.app M =
+      eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) h) ≫ κ.hom.app M := by
+  rw [Iso.trans_hom, NatTrans.comp_app, upperStarEqToIso_hom_app]
 
 /-- The trivialization `Lκ : L(F_X^N)^* ≅ 𝟭` of the derived pullback along the `#k ^ N`-power
 Frobenius: the derived functor of `upperStarFrobeniusIso`. -/
 noncomputable def leftDerivedUpperStarFrobeniusIso :
     L(((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅ 𝟭 _ :=
   Functor.leftDerivedFunctorIdIso (upperStarFrobeniusIso ℓ X N)
+
+/-- The transport of the pullback of module objects along an equality of morphisms is
+`upperStarEqToIso`. -/
+lemma upperStarCongr_eq_upperStarEqToIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
+    upperStarCongr Λ h = upperStarEqToIso Λ h := by
+  subst h
+  ext M
+  rw [upperStarEqToIso_hom_app]
+  simp [upperStarCongr]
+
+/-- The associativity law of the composition isomorphisms of the pullbacks of module objects, with
+the transport written through `eqToHom` of objects. -/
+lemma upperStarComp_assoc_app_eqToHom
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {W' X' Y' Z' : Scheme.{u}} (f : W' ⟶ X') (g : X' ⟶ Y') (h : Y' ⟶ Z') (M) :
+    (upperStarComp Λ (f ≫ g) h).hom.app M ≫ (upperStarComp Λ f g).hom.app ((h)^*⟦Λ⟧.obj M) =
+      eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) (Category.assoc f g h)) ≫
+        (upperStarComp Λ f (g ≫ h)).hom.app M ≫
+          (f)^*⟦Λ⟧.map ((upperStarComp Λ g h).hom.app M) := by
+  rw [upperStarComp_hom_app_comp_upperStarComp_hom_app, upperStarCongr_eq_upperStarEqToIso,
+    upperStarEqToIso_hom_app]
+
+
+/-! ### The Galois compatibility of the Frobenius trivialization -/
+
+section GaloisCompatibility
+
+/-- The components of `α ≫ ρ_G⁻¹ ≫ G ◁ κ`, for `κ : 𝟭 ⟶ F`. -/
+lemma _root_.CategoryTheory.NatTrans.comp_rightUnitor_inv_comp_whiskerLeft_app {C D : Type*}
+    [Category C] [Category D] {F : D ⥤ D} {G H : C ⥤ D} (α : H ⟶ G) (κ : 𝟭 D ⟶ F) (c : C) :
+    (α ≫ (Functor.rightUnitor G).inv ≫ Functor.whiskerLeft G κ).app c =
+      α.app c ≫ κ.app (G.obj c) := by
+  simp
+
+/-- The left unit law for the composition isomorphisms of the pullbacks of module objects, on
+components: `(𝟙 ≫ t)^* M = t^* M ≅ 𝟙^* t^* M`. -/
+lemma upperStarComp_id_left_hom_app
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {A B : Scheme.{u}} (t : A ⟶ B) (M) :
+    (upperStarComp Λ (𝟙 A) t).hom.app M =
+      eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) (Category.id_comp t)) ≫
+        (upperStarId Λ A).inv.app ((t)^*⟦Λ⟧.obj M) := by
+  have h := congrArg (fun i ↦ i.hom.app M) (upperStarComp_id_left Λ t)
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom] at h
+  rw [NatTrans.comp_rightUnitor_inv_comp_whiskerLeft_app, upperStarCongr_hom_app] at h
+  exact h
+
+/-- The Galois compatibility of the Frobenius trivialization at a geometric point, for the
+`p ^ m`-power absolute Frobenius of a scheme `X` of characteristic `p` and an endomorphism `σ` of
+`Spec Ω` with `F_Ω ≫ σ = 𝟙`. -/
+theorem upperStarIsoIdOfIsSepClosed_inv_app_comp_upperStarComp_inv_app
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X : Scheme.{u}} {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0) (m : ℕ)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (hΩ : (p : Γ(Spec (.of Ω), ⊤)) = 0)
+    (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (hFσ : (Spec (.of Ω)).iterateFrobenius hp hΩ m ≫ σ = 𝟙 _)
+    (y : Spec (.of Ω) ⟶ X) (F' : X ⟶ X) (hF' : F' = X.iterateFrobenius hp hX m)
+    (e : y = (σ ≫ y) ≫ F') (τ : (σ)^*⟦Λ⟧ ≅ 𝟭 _)
+    (hτ : ∀ N, (upperStarId Λ _).inv.app N ≫ eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj N) hFσ.symm) ≫
+      (upperStarComp Λ ((Spec (.of Ω)).iterateFrobenius hp hΩ m) σ).hom.app N ≫
+      ((Spec (.of Ω)).iterateFrobenius hp hΩ m)^*⟦Λ⟧.map (τ.hom.app N) ≫
+      (upperStarIterateFrobeniusIso Λ hp hΩ m).hom.app N = 𝟙 N) (M) :
+    τ.inv.app ((y)^*⟦Λ⟧.obj M) ≫
+        (upperStarComp Λ σ y).inv.app M =
+      eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) e) ≫ (upperStarComp Λ (σ ≫ y) F').hom.app M ≫
+        (σ ≫ y)^*⟦Λ⟧.map (eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj M) hF') ≫
+          (upperStarIterateFrobeniusIso Λ hp hX m).hom.app M) :=
+  inv_app_comp_inv_app_eq_aux
+    (E := fun S ↦ Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))
+    (fun a ↦ (a)^*⟦Λ⟧) (fun a b ↦ upperStarComp Λ a b)
+    (fun a b c M ↦ upperStarComp_assoc_app_eqToHom Λ a b c M) (fun A ↦ upperStarId Λ A)
+    (fun t M ↦ upperStarComp_id_left_hom_app Λ t M) y σ _ _ F' hF' hFσ
+    (comp_iterateFrobenius hp (σ ≫ y) hX hΩ m) e (upperStarIterateFrobeniusIso Λ hp hX m)
+    (upperStarIterateFrobeniusIso Λ hp hΩ m) τ
+    (fun M ↦ upperStarComp_hom_app_comp_map_upperStarIterateFrobeniusIso_hom_app Λ hp hX hΩ m
+      (σ ≫ y) M)
+    hτ M
+
+/-- The Galois compatibility at a geometric point `ȳ` of the Frobenius trivialization, for any
+trivialization `τ : σ^* ≅ 𝟭` inverse to the Frobenius trivialization of `Spec Ω` through
+`F_Ω ≫ σ = 𝟙`. -/
+lemma isGaloisCompatibleFrobeniusIsoAt_of {Ω : Type u} [Field Ω] [IsSepClosed Ω] [Algebra k Ω]
+    (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N))
+    (y : Spec (.of Ω) ⟶ X.left) (hΩ : (ringChar k : Γ(Spec (.of Ω), ⊤)) = 0)
+    (hFσ : (Spec (.of Ω)).iterateFrobenius (FiniteField.ringChar_prime k) hΩ
+      (FiniteField.frobeniusExponent k * N) ≫ σ.hom = 𝟙 _)
+    (τ : (σ.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
+    (hτ : τ = upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom) :
+    IsGaloisCompatibleFrobeniusIsoAt ℓ X N (upperStarFrobeniusIso ℓ X N) σ hσ y τ := by
+  intro M
+  have key := upperStarIsoIdOfIsSepClosed_inv_app_comp_upperStarComp_inv_app
+    (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
+    (natCast_ringChar_left_eq_zero X) (FiniteField.frobeniusExponent k * N) hΩ σ.hom hFσ y
+    _ (frobeniusIterate_overFrobenius_left X N)
+    (comp_comp_frobeniusIterate_overFrobenius_left hσ y).symm τ
+    (fun N' ↦ upperStarIterateFrobeniusIso_comp_eq_id_of_eq _ (FiniteField.ringChar_prime k) hΩ _
+      σ.hom hFσ τ hτ N') M
+  have hκ : (upperStarFrobeniusIso ℓ X N).hom.app M =
+      eqToHom (congrArg (fun s ↦ (s)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M)
+        (frobeniusIterate_overFrobenius_left X N)) ≫
+        (upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
+          (FiniteField.ringChar_prime k) (natCast_ringChar_left_eq_zero X)
+          (FiniteField.frobeniusExponent k * N)).hom.app M := by
+    rw [upperStarFrobeniusIso_eq, upperStarEqToIso_trans_hom_app]
+  rw [hκ]
+  exact key
+
+/-- **The Galois compatibility of the Frobenius trivialization** (`IsGaloisCompatibleFrobeniusIso`):
+at a geometric point `ȳ : Spec Ω ⟶ X`, the trivialization `κ : (F_X^N)^* ≅ 𝟭` of the pullback
+along the `#k ^ N`-power Frobenius restricts to the trivialization `τ : σ^* ≅ 𝟭` of the pullback
+along the automorphism `σ` of `Spec Ω` inverse to the `#k ^ N`-power Frobenius `F_Ω`. It follows
+from the naturality of the Frobenius trivialization along `σ ≫ ȳ`
+(`upperStarComp_hom_app_comp_map_upperStarIterateFrobeniusIso_hom_app`) and from the fact that
+on `Spec Ω` the trivializations `κ_Ω : F_Ω^* ≅ 𝟭` and `τ` are inverse through `F_Ω ≫ σ = 𝟙`
+(`upperStarIterateFrobeniusIso_comp_upperStarIsoIdOfIsSepClosed`), by the coherence of the
+composition isomorphisms (`inv_app_comp_inv_app_eq_aux`). -/
+theorem isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso :
+    IsGaloisCompatibleFrobeniusIso ℓ X N (upperStarFrobeniusIso ℓ X N) := by
+  intro Ω' _ _ _ σ hσ y
+  have hΩ : (ringChar k : Γ(Spec (.of Ω'), ⊤)) = 0 :=
+    Scheme.isOfCharacteristic_Spec (ringChar_cast_eq_zero (k := k) (Ω := Ω'))
+  have hFσ : (Spec (.of Ω')).iterateFrobenius (FiniteField.ringChar_prime k) hΩ
+      (FiniteField.frobeniusExponent k * N) ≫ σ.hom = 𝟙 _ := by
+    rw [iterateFrobenius_spec_eq_specMap_powCardPowRingHom, ← hσ, Iso.inv_hom_id]
+  exact isGaloisCompatibleFrobeniusIsoAt_of ℓ X N σ hσ y hΩ hFσ _ rfl
+
+
+end GaloisCompatibility
 
 end Frobenius
 
