@@ -119,7 +119,7 @@ theorem leftDerivedUpperStar_map_leftDerivedUpperStarGeometricFiberFrobeniusIso
     (Hom.geometricFiberMap_comp_geometricFiberFrobenius φ h).symm
     (Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm
     (comp_iterateFrobenius _ _ _ _ _).symm
-    (leftDerivedUpperStarIterateFrobeniusIso_naturality A _ _ _ _ _) K
+    (leftDerivedUpperStarIterateFrobeniusIso_naturality_app A _ _ _ _ _ _) K
 
 section SchemeFrobeniusForm
 

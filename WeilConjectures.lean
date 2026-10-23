@@ -3926,6 +3926,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceAnnihilat
 public import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceDescent
 public import WeilConjectures.AlgebraicGeometry.GenusInvariant
 public import WeilConjectures.AlgebraicGeometry.GeometricFiberFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.GeometricFiberFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
@@ -8458,6 +8459,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.SelfInje
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceCupNondegenerate
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceEquivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitDualDatum
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UntwistedPerfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
@@ -8588,11 +8590,14 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDatum
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.Cohomology
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange
+public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization
+public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback
@@ -11010,6 +11015,7 @@ public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExt
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExtPullback
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyRingChange
 public import WeilConjectures.SixFunctors.Etale.ConstantRingEndomorphisms
+public import WeilConjectures.SixFunctors.Etale.Derived.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
@@ -11236,6 +11242,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Com
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Identification
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.IsIso
+public import WeilConjectures.SixFunctors.Etale.Derived.PullbackComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.PullbackIntTensorFamily
 public import WeilConjectures.SixFunctors.Etale.Derived.PurityPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
@@ -11246,6 +11253,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStarHomology
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
+public import WeilConjectures.SixFunctors.Etale.Derived.SchemeGaloisComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.ShiftAssoc
@@ -11387,6 +11395,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestrictionNaturality
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTriangle
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
