@@ -97,7 +97,13 @@ noncomputable def connectingOfIso {a c : Cx}
 
 /-- If `Cx`, `Cs` carry shifts for which `ι`, `ι_s`, `A` and the comparison `e` commute with the
 shifts, the morphism `connectingOfIso` attached to `ι δ₀` for `δ₀ : c ⟶ a⟦1⟧` is the image under
-`ι_s` of `A δ₀` followed by the commutation of `A` with the shift. -/
+`ι_s` of `A δ₀` followed by the commutation of `A` with the shift:
+```
+ι_s A c ──e──▶ R ι c ──R (ι δ₀ ≫ comm)──▶ R ((ι a)⟦1⟧) ──comm──▶ (R ι a)⟦1⟧ ──e⁻¹⟦1⟧──▶ (ι_s A a)⟦1⟧
+   ‖                                                                                       ‖
+ι_s A c ─────────ι_s (A δ₀ ≫ comm)─────────▶ ι_s ((A a)⟦1⟧) ─────────comm─────────▶ (ι_s A a)⟦1⟧
+```
+-/
 lemma connectingOfIso_map_comp_commShiftIso [HasShift Cx ℤ] [HasShift Cs ℤ] [A.CommShift ℤ]
     [ιs.CommShift ℤ] [ι.CommShift ℤ] [NatTrans.CommShift e.hom ℤ] {a c : Cx}
     (δ₀ : c ⟶ (shiftFunctor Cx (1 : ℤ)).obj a) :
@@ -141,7 +147,15 @@ section ShiftSquares
 variable {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
 
 /-- An identity between images of morphisms under a faithful functor `ι` commuting with the
-shifts, composed with the commutation of `ι` with the shift, descends along `ι`. -/
+shifts, composed with the commutation of `ι` with the shift, descends along `ι`: if the square
+```
+ι P ──ι a ≫ comm──▶ (ι Q)⟦1⟧
+ ‖                     ▲
+ ‖                (ι c)⟦1⟧
+ ‖                     │
+ι P ──ι b ≫ comm──▶ (ι Q')⟦1⟧
+```
+commutes, then `a = b ≫ c⟦1⟧`. -/
 lemma eq_comp_shift_map_of_map_comp_commShiftIso (ι : C ⥤ D) [ι.Faithful] [ι.CommShift ℤ]
     {P Q Q' : C} (a : P ⟶ (shiftFunctor C (1 : ℤ)).obj Q)
     (b : P ⟶ (shiftFunctor C (1 : ℤ)).obj Q') (c : Q' ⟶ Q)
@@ -153,7 +167,15 @@ lemma eq_comp_shift_map_of_map_comp_commShiftIso (ι : C ⥤ D) [ι.Faithful] [�
     Category.assoc, Functor.commShiftIso_hom_naturality]
 
 /-- The image of a commutation with a shifted morphism under a functor `ι` commuting with the
-shifts. -/
+shifts: if `x ≫ a = a ≫ y⟦1⟧`, then the square
+```
+ι P ──ι a ≫ comm──▶ (ι Q)⟦1⟧
+ │                     │
+ι x                (ι y)⟦1⟧
+ ▼                     ▼
+ι P ──ι a ≫ comm──▶ (ι Q)⟦1⟧
+```
+commutes. -/
 lemma map_comp_commShiftIso_of_comp_eq (ι : C ⥤ D) [ι.CommShift ℤ] {P Q : C} (x : P ⟶ P)
     (y : Q ⟶ Q) (a : P ⟶ (shiftFunctor C (1 : ℤ)).obj Q)
     (h : x ≫ a = a ≫ (shiftFunctor C (1 : ℤ)).map y) :
@@ -166,7 +188,15 @@ lemma map_comp_commShiftIso_of_comp_eq (ι : C ⥤ D) [ι.CommShift ℤ] {P Q : 
 `θ : A ⟶ F ⋙ A` commute with the shifts, and let `ψ_Z : F M_Z ⟶ M_Z`, `ψ_U : F M_U ⟶ M_U`
 commute with `δ₀ : M_Z ⟶ M_U⟦1⟧` through the commutation of `F` with the shift. Then
 `E_Z = A ψ_Z ∘ θ` and `E_U = A ψ_U ∘ θ` commute with `A δ₀` followed by the commutation of `A`
-with the shift. -/
+with the shift:
+```
+A M_Z ──A δ₀ ≫ comm──▶ (A M_U)⟦1⟧
+  │                        │
+ E_Z                     E_U⟦1⟧
+  ▼                        ▼
+A M_Z ──A δ₀ ≫ comm──▶ (A M_U)⟦1⟧
+```
+-/
 lemma comp_map_comp_commShiftIso_eq_of_commShift (A : C ⥤ D) (F : C ⥤ C) [A.CommShift ℤ]
     [F.CommShift ℤ] (θ : A ⟶ F ⋙ A) [NatTrans.CommShift θ ℤ] {MZ MU : C} (ψZ : F.obj MZ ⟶ MZ)
     (ψU : F.obj MU ⟶ MU) (δ₀ : MZ ⟶ (shiftFunctor C (1 : ℤ)).obj MU)
@@ -384,11 +414,6 @@ end ConnectingSquare
 /-! ### Triangle additivity of the trace -/
 
 attribute [local instance] boundedConstructibleBraiding
-
-/-- A dual of an object transported along an isomorphism. -/
-noncomputable abbrev hasRightDualOfIso {C : Type*} [Category C] [MonoidalCategory C] {P Q : C}
-    (e : P ≅ Q) [HasRightDual Q] : HasRightDual P :=
-  @HasRightDual.mk _ _ _ _ Qᘁ (exactPairingCongrLeft e)
 
 /-- **Triangle additivity of the trace** (blueprint `prop-trf-trace-formal-laws`, item (2)): for
 a distinguished triangle `P₁ ⟶ P₂ ⟶ P₃ ⟶ P₁[1]` of dualizable objects of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` (through

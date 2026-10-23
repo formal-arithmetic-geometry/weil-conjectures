@@ -53,8 +53,16 @@ variable {CX CZ D : Type*} [Category CX] [Category CZ] [Category D] {aX : CX ⥤
 
 /-- The abstract shape of the compatibility of the pullback to the closed piece with the
 Frobenius: from the composition laws `p₁ = (i ≫ Φ)^♯` and `p₂ = (Φ_Z ≫ i)^♯` and their
-comparison `e`, the square `i^♯ ≫ Φ_Z^♯ ≫ cmp = Φ^♯ ≫ i^♯` commutes. -/
-lemma closedPiece_pullback_comm_aux (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ)
+comparison `e`, the square
+```
+aX M ─────pΦ─────▶ aX (uΦ M)
+  │                    │
+  pi                   pi
+  ▼                    ▼
+aZ (ui M) ──pΦZ ≫ aZ cmp──▶ aZ (ui (uΦ M))
+```
+commutes. -/
+lemma closedPiece_pullback_comm_of_comp (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ)
     (pΦZ : aZ ⟶ uΦZ ⋙ aZ) {u₁ u₂ : CX ⥤ CZ} (p₁ : aX ⟶ u₁ ⋙ aZ) (p₂ : aX ⟶ u₂ ⋙ aZ)
     (c₁ : u₁ ≅ uΦ ⋙ ui) (c₂ : u₂ ≅ ui ⋙ uΦZ) (M : CX) (e : u₂.obj M ⟶ u₁.obj M)
     (h1 : p₁.app M = pΦ.app M ≫ pi.app (uΦ.obj M) ≫ aZ.map (c₁.inv.app M))
@@ -71,8 +79,14 @@ lemma closedPiece_pullback_comm_aux (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui �
 
 /-- The abstract shape of the closed-piece operator: conjugated along `c : ri ⋙ aX ≅ aZ`, the
 operator `pΦZ ≫ aZ g` of a coefficient map `g : uΦZ N ⟶ N` is `pΦ` followed by the image of the
-adjoint coefficient map, for pullback maps `pi` given by the unit of `ui ⊣ ri`. -/
-lemma closedPiece_eq_aux (adj : ui ⊣ ri) (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ)
+adjoint coefficient map, for pullback maps `pi` given by the unit of `ui ⊣ ri`:
+```
+aX (ri N) ──c──▶ aZ N ──pΦZ ≫ aZ g──▶ aZ N ──c⁻¹──▶ aX (ri N)
+    ‖                                                  ‖
+aX (ri N) ──pΦ──▶ aX (uΦ (ri N)) ──aX (closedPieceCoeff g)──▶ aX (ri N)
+```
+-/
+lemma closedPiece_conj_eq_of_unit (adj : ui ⊣ ri) (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ)
     (pΦZ : aZ ⟶ uΦZ ⋙ aZ) (c : ri ⋙ aX ≅ aZ)
     (hpi : ∀ M, pi.app M = aX.map (adj.unit.app M) ≫ c.hom.app (ui.obj M))
     (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui)
@@ -100,8 +114,14 @@ lemma closedPiece_eq_aux (adj : ui ⊣ ri) (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX �
     ← reassoc_of% hc]
 
 /-- The adjoint coefficient map of the restriction `cmp ≫ ui φ` of a coefficient map `φ` is
-compatible with `φ` along the unit of `ui ⊣ ri`. -/
-lemma closedPiece_coeff_unit_aux (adj : ui ⊣ ri) (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui) (K : CX)
+compatible with `φ` along the unit of `ui ⊣ ri`:
+```
+uΦ K ──uΦ η──▶ uΦ (ri (ui K)) ──closedPieceCoeff (cmp ≫ ui φ)──▶ ri (ui K)
+  ‖                                                                ‖
+uΦ K ─────────────φ─────────────▶ K ────────────η────────────▶ ri (ui K)
+```
+-/
+lemma closedPiece_unit_comp_coeff_eq (adj : ui ⊣ ri) (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui) (K : CX)
     (φ : uΦ.obj K ⟶ K) :
     uΦ.map (adj.unit.app K) ≫ adj.unit.app (uΦ.obj (ri.obj (ui.obj K))) ≫
       ri.map (cmp.inv.app (ri.obj (ui.obj K)) ≫
@@ -123,8 +143,8 @@ def closedPieceCoeff (adj : ui ⊣ ri) (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui) (N : C
     uΦ.obj (ri.obj N) ⟶ ri.obj N :=
   adj.unit.app _ ≫ ri.map (cmp.inv.app (ri.obj N) ≫ uΦZ.map (adj.counit.app N) ≫ g)
 
-/-- `closedPiece_eq_aux` for `closedPieceCoeff`. -/
-lemma closedPiece_eq_aux' (adj : ui ⊣ ri) (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ)
+/-- `closedPiece_conj_eq_of_unit` for `closedPieceCoeff`. -/
+lemma closedPiece_conj_eq_closedPieceCoeff (adj : ui ⊣ ri) (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ)
     (pΦZ : aZ ⟶ uΦZ ⋙ aZ) (c : ri ⋙ aX ≅ aZ)
     (hpi : ∀ M, pi.app M = aX.map (adj.unit.app M) ≫ c.hom.app (ui.obj M))
     (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui)
@@ -133,15 +153,15 @@ lemma closedPiece_eq_aux' (adj : ui ⊣ ri) (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX �
     (c.hom.app N : aX.obj (ri.obj N) ⟶ aZ.obj N) ≫ (pΦZ.app N ≫ aZ.map g) ≫
         (c.inv.app N : aZ.obj N ⟶ aX.obj (ri.obj N)) =
       pΦ.app (ri.obj N) ≫ aX.map (closedPieceCoeff adj cmp N g) :=
-  closedPiece_eq_aux adj pΦ pi pΦZ c hpi cmp hcomm N g
+  closedPiece_conj_eq_of_unit adj pΦ pi pΦZ c hpi cmp hcomm N g
 
-/-- `closedPiece_coeff_unit_aux` for `closedPieceCoeff`. -/
-lemma closedPiece_coeff_unit_aux' (adj : ui ⊣ ri) (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui) (K : CX)
+/-- `closedPiece_unit_comp_coeff_eq` for `closedPieceCoeff`. -/
+lemma closedPieceCoeff_unit_comm (adj : ui ⊣ ri) (cmp : ui ⋙ uΦZ ≅ uΦ ⋙ ui) (K : CX)
     (φ : uΦ.obj K ⟶ K) :
     uΦ.map (adj.unit.app K) ≫ closedPieceCoeff adj cmp (ui.obj K) (cmp.hom.app K ≫ ui.map φ) =
       φ ≫ adj.unit.app K := by
   rw [closedPieceCoeff]
-  exact closedPiece_coeff_unit_aux adj cmp K φ
+  exact closedPiece_unit_comp_coeff_eq adj cmp K φ
 
 end PieceCoefficients
 
@@ -178,7 +198,7 @@ lemma compactPullback_comp_compactPullback_comparison (hi : ΦZ ≫ i = i ≫ Φ
   have : IsProper (ΦZ ≫ i).left := by
     rw [Over.comp_left]
     infer_instance
-  exact closedPiece_pullback_comm_aux (compactPullback ℓ Φ) (compactPullback ℓ i)
+  exact closedPiece_pullback_comm_of_comp (compactPullback ℓ Φ) (compactPullback ℓ i)
     (compactPullback ℓ ΦZ) (compactPullback ℓ (i ≫ Φ)) (compactPullback ℓ (ΦZ ≫ i))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ i Φ)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ ΦZ i) M
@@ -216,7 +236,7 @@ lemma compactFrobeniusClosedPiece_eq (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
           (closedPieceFrobeniusCoeff ℓ hi K) := by
   rw [compactFrobeniusClosedPiece]
-  exact closedPiece_eq_aux'
+  exact closedPiece_conj_eq_closedPieceCoeff
     (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
     (compactPullback ℓ Φ) (compactPullback ℓ i) (compactPullback ℓ ΦZ)
     (boundedConstructibleLowerStarCompToPoint ℓ i) (compactPullback_app_eq (ℓ := ℓ) i)
@@ -238,7 +258,7 @@ lemma upperStar_map_unit_comp_closedPieceFrobeniusCoeff (hi : ΦZ ≫ i = i ≫ 
           i).unit.app K.carrier) ≫ closedPieceFrobeniusCoeff ℓ hi K =
       K.str.hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction
         (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K.carrier := by
-  exact closedPiece_coeff_unit_aux'
+  exact closedPieceCoeff_unit_comm
     (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi) K.carrier K.str.hom
 

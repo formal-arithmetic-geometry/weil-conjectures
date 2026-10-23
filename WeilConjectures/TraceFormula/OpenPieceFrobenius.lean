@@ -53,8 +53,14 @@ variable {CU : Type*} [Category CU] {aU : CU ⥤ D} {uΦU : CU ⥤ CU} {rj : CU 
 
 /-- The abstract shape of the open-piece operator: conjugated along `c : rj ⋙ aX ≅ aU`, the
 operator `pΦU ≫ aU g` of a coefficient map `g` is `pΦ` followed by the image of
-`bc ≫ rj g`, for a base change map `bc` compatible with the pullbacks. -/
-lemma openPiece_eq_aux (pΦ : aX ⟶ uΦ ⋙ aX) (pΦU : aU ⟶ uΦU ⋙ aU) (c : rj ⋙ aX ≅ aU)
+`bc ≫ rj g`, for a base change map `bc` compatible with the pullbacks:
+```
+aX (rj N) ──c──▶ aU N ──pΦU ≫ aU g──▶ aU N ──c⁻¹──▶ aX (rj N)
+    ‖                                                  ‖
+aX (rj N) ──pΦ──▶ aX (uΦ (rj N)) ──aX (bc ≫ rj g)──▶ aX (rj N)
+```
+-/
+lemma openPiece_conj_eq_of_baseChange (pΦ : aX ⟶ uΦ ⋙ aX) (pΦU : aU ⟶ uΦU ⋙ aU) (c : rj ⋙ aX ≅ aU)
     (bc : rj ⋙ uΦ ⟶ uΦU ⋙ rj) (N : CU)
     (hB : pΦ.app (rj.obj N) ≫ aX.map (bc.app N) ≫ c.hom.app (uΦU.obj N) =
       c.hom.app N ≫ pΦU.app N) (g : uΦU.obj N ⟶ N) :
@@ -67,14 +73,14 @@ lemma openPiece_eq_aux (pΦ : aX ⟶ uΦ ⋙ aX) (pΦU : aU ⟶ uΦU ⋙ aU) (c 
   rw [← reassoc_of% hn, Iso.hom_inv_id_app]
   simp
 
-/-- `openPiece_eq_aux` for a coefficient `ψ` given by its defining equation. -/
-lemma openPiece_eq_aux' (pΦ : aX ⟶ uΦ ⋙ aX) (pΦU : aU ⟶ uΦU ⋙ aU) (c : rj ⋙ aX ≅ aU)
+/-- `openPiece_conj_eq_of_baseChange` for a coefficient `ψ` given by its defining equation. -/
+lemma openPiece_comp_eq_of_baseChange (pΦ : aX ⟶ uΦ ⋙ aX) (pΦU : aU ⟶ uΦU ⋙ aU) (c : rj ⋙ aX ≅ aU)
     (bc : rj ⋙ uΦ ⟶ uΦU ⋙ rj) (N : CU)
     (hB : pΦ.app (rj.obj N) ≫ aX.map (bc.app N) ≫ c.hom.app (uΦU.obj N) =
       c.hom.app N ≫ pΦU.app N) (g : uΦU.obj N ⟶ N) (ψ : uΦ.obj (rj.obj N) ⟶ rj.obj N)
     (hψ : ψ = bc.app N ≫ rj.map g) :
     c.hom.app N ≫ pΦU.app N ≫ aU.map g = (pΦ.app (rj.obj N) ≫ aX.map ψ) ≫ c.hom.app N := by
-  rw [hψ, ← openPiece_eq_aux pΦ pΦU c bc N hB g]
+  rw [hψ, ← openPiece_conj_eq_of_baseChange pΦ pΦU c bc N hB g]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 end PieceCoefficients
 
@@ -120,7 +126,7 @@ lemma compactFrobeniusOpenPiece_eq (hj : ΦU ≫ j = j ≫ Φ) (K : WeilBoundedC
               K.carrier)) ≫
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
           (openPieceFrobeniusCoeff ℓ hj K) := by
-  have h := openPiece_eq_aux' (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
+  have h := openPiece_comp_eq_of_baseChange (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
     (boundedConstructibleLowerShriekCompToPoint ℓ j)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
       (isPullback_of_comp_eq_of_isOpenImmersion j hj))

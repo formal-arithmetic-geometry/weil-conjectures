@@ -24,40 +24,6 @@ universe v u
 
 open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal
 
-namespace CategoryTheory
-
-variable {C : Type*} [Category C] [MonoidalCategory C] [Preadditive C] [MonoidalPreadditive C]
-
-/-- A zero object is its own right dual. -/
-@[instance_reducible]
-noncomputable def hasRightDualOfIsZero {Z : C} (hZ : IsZero Z) : HasRightDual Z where
-  rightDual := Z
-  exact :=
-    { coevaluation' := 0
-      evaluation' := 0
-      coevaluation_evaluation' :=
-        (hZ.of_iso (ρ_ Z)).eq_of_src _ _
-      evaluation_coevaluation' :=
-        (hZ.of_iso (λ_ Z)).eq_of_src _ _ }
-
-/-- A right dual of an object transported along an isomorphism. -/
-@[instance_reducible]
-noncomputable def hasRightDualOfIso' {P Q : C} (e : P ≅ Q) [HasRightDual Q] : HasRightDual P :=
-  @HasRightDual.mk _ _ _ _ Qᘁ (exactPairingCongrLeft e)
-
-variable [BraidedCategory C]
-
-omit [Preadditive C] [MonoidalPreadditive C] in
-/-- The trace of an endomorphism of the unit, for the canonical self-duality of the unit, is the
-endomorphism itself. -/
-lemma trace_unit (f : 𝟙_ C ⟶ 𝟙_ C) : trace f = f := by
-  change (ρ_ _).inv ≫ f ▷ 𝟙_ C ≫ (β_ (𝟙_ C) (𝟙_ C)).hom ≫ (ρ_ _).hom = f
-  simp only [braiding_tensorUnit_left, Category.assoc]
-  rw [unitors_equal, Iso.inv_hom_id, Category.comp_id, MonoidalCategory.rightUnitor_naturality,
-    Iso.inv_hom_id_assoc]
-
-end CategoryTheory
-
 namespace DerivedCategory
 
 variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
@@ -72,7 +38,7 @@ variable (A) in
 @[instance_reducible]
 noncomputable def singleUnitXHasRightDual (m n : ℤ) :
     HasRightDual (((HomologicalComplex.single A (.up ℤ) m).obj (𝟙_ A)).X n) :=
-  if h : n = m then hasRightDualOfIso' (HomologicalComplex.singleObjXIsoOfEq _ m (𝟙_ A) n h)
+  if h : n = m then hasRightDualOfIso (HomologicalComplex.singleObjXIsoOfEq _ m (𝟙_ A) n h)
   else hasRightDualOfIsZero (HomologicalComplex.isZero_single_obj_X _ m _ n h)
 
 omit [HasDerivedCategory A] [Abelian.HasFunctorialFlatResolution A] in
@@ -90,7 +56,7 @@ lemma trace_single_map (m : ℤ) (r : 𝟙_ A ⟶ 𝟙_ A) :
     HomologicalComplex.zsmul_f_apply, HomologicalComplex.single_map_f_self,
     trace_eq_of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) m (𝟙_ A)) _ r
       (by simp),
-    trace_unit, HomologicalComplex.single_map_f_self]
+    trace_tensorUnit, HomologicalComplex.single_map_f_self]
   simp only [Preadditive.zsmul_comp, Preadditive.comp_zsmul]
 
 /-- **The trace of an endomorphism of a shifted unit**: for an endomorphism `r` of the unit of
@@ -110,7 +76,7 @@ theorem trace_shiftFunctor_map_singleFunctor_map (n : ℤ) (r : 𝟙_ A ⟶ 𝟙
         ((HomologicalComplex.single A (.up ℤ) (-n)).map r)) :=
     ((singleFunctors A).shiftIso n (-n) 0 (by lia)).hom.naturality r
   let : HasRightDual (Qh.obj ((HomotopyCategory.quotient A (.up ℤ)).obj P)) :=
-    hasRightDualOfIso' eX.symm
+    hasRightDualOfIso eX.symm
   let := singleUnitXHasRightDual A (-n)
   rw [trace_eq_of_iso eX _ _ hnat,
     trace_Qh_map_quotient_map (fun X Y _ _ ↦ braiding_hom_μ_Qh X Y) P (-n) (-n), trace_single_map,
