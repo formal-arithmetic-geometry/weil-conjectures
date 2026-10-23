@@ -22,6 +22,7 @@ public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
@@ -327,7 +328,6 @@ public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import WeilConjectures.WeilObject.Defs
 public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries

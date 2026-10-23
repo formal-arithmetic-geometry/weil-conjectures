@@ -74,16 +74,20 @@ variable {X S : Over (Spec (.of k))}
 
 /-! ### Smooth purity on bounded constructible complexes -/
 
-/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` is bounded constructible. -/
-lemma boundedConstructible_tateTwistDerived (X : Scheme.{u}) (d n : ℤ) :
-    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)
-      ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d)) :=
+variable (X) in
+/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` of a separated `k`-scheme of finite type, on which `ℓ`
+is invertible, is bounded constructible. -/
+lemma boundedConstructible_tateTwistDerived (d n : ℤ) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
+      ((shiftFunctor _ n).obj (tateTwistDerived X.left ℓ d)) :=
   sorry
 
+variable (X) in
 /-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]`, as a bounded constructible complex. -/
-noncomputable def boundedConstructibleTateTwist (X : Scheme.{u}) (d n : ℤ) :
-    Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  ⟨(shiftFunctor _ n).obj (tateTwistDerived X ℓ d), boundedConstructible_tateTwistDerived ℓ X d n⟩
+noncomputable def boundedConstructibleTateTwist (d n : ℤ) :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  ⟨(shiftFunctor _ n).obj (tateTwistDerived X.left ℓ d),
+    boundedConstructible_tateTwistDerived ℓ X d n⟩
 
 /-- The chosen purity isomorphism `pur_p : Rp^! ℚ̄_ℓ,S ≅ ℚ̄_ℓ,X(d)[2d]` of
 `ProEtale.CondensedRing.smoothPurityIso`, as an isomorphism in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: its preimage
@@ -91,14 +95,14 @@ under the fully faithful inclusion `Dᵇc ⥤ D`. No new choice is made: this is
 isomorphism, and it is the only normalization entering the trace and Poincaré duality below. -/
 noncomputable def boundedConstructibleSmoothPurityIso :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ≅
-      boundedConstructibleTateTwist ℓ X.left d (2 * d) :=
+      boundedConstructibleTateTwist ℓ X d (2 * d) :=
   (ObjectProperty.fullyFaithfulι _).preimageIso (smoothPurityIso ℓ p d)
 
 /-- The **trace** `Tr_p : Rp_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of a smooth morphism `p : X ⟶ S` of pure
 relative dimension `d`: `Rp_!(pur_p⁻¹)` followed by the counit of `Rp_! ⊣ Rp^!`. -/
 noncomputable def trace :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-      (boundedConstructibleTateTwist ℓ X.left d (2 * d)) ⟶ 𝟙_ _ :=
+      (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶ 𝟙_ _ :=
   Verdier.trace (boundedConstructibleUpperShriekAdjunction _ ℓ p)
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
@@ -107,7 +111,7 @@ noncomputable def trace :
 `Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)`, and the Verdier exchange morphism. -/
 noncomputable def poincareMap :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-        (boundedConstructibleTateTwist ℓ X.left d (2 * d)) ⟶
+        (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
       (ihom ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
         (𝟙_ _))).obj (𝟙_ _) :=
   Verdier.poincareMap (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
@@ -121,9 +125,9 @@ projection morphism `PF^!`, the counit `Lp^* Rp_* ⟶ 𝟭` and the left unitor.
 noncomputable def cupProduct :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ⊗
         (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-          (boundedConstructibleTateTwist ℓ X.left d (2 * d)) ⟶
+          (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-        (boundedConstructibleTateTwist ℓ X.left d (2 * d)) :=
+        (boundedConstructibleTateTwist ℓ X d (2 * d)) :=
   Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
     (boundedConstructibleExceptionalProjection _ ℓ p)
 
