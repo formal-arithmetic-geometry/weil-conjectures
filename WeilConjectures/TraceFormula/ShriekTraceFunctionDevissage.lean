@@ -6,9 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-public import WeilConjectures.TraceFormula.Additivity
-public import WeilConjectures.TraceFormula.ShriekTraceFunction
-public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.TraceFormula.WeilSheafUpperStar
+public import WeilConjectures.TraceFormula.WeilTriangle
 
 /-!
 
@@ -35,7 +34,10 @@ inputs, stated here as separate lemmas:
   sheaves `ProEtale.CondensedRing.weilSheafUpperStar`. Its model-Frobenius analogue is
   `ProEtale.CondensedRing.WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar`.
 
-## Sorried inputs
+## Inputs
+
+The inputs are stated in `WeilConjectures.TraceFormula.WeilSheafUpperStar` and
+`WeilConjectures.TraceFormula.WeilTriangle`:
 
 - `ProEtale.CondensedRing.nonempty_homologyFunctor_weilUpperStar_iso`: `Hʲ(Lg^* K) ≅ g^* Hʲ(K)`
   as Weil sheaves.
@@ -58,16 +60,6 @@ open CategoryTheory Endofunctor
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace CategoryTheory.Over
-
-/-- An equation `a ≫ b = c ≫ d` in `Over T` holds for the underlying morphisms. -/
-lemma left_comp_left_eq_of_comp_eq {S : Type*} [Category S] {T : S} {A B C D : Over T}
-    {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D} (h : a ≫ b = c ≫ d) :
-    a.left ≫ b.left = c.left ≫ d.left := by
-  rw [← Over.comp_left, h, Over.comp_left]
-
-end CategoryTheory.Over
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -79,123 +71,6 @@ variable {X Y W : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) (eW : W ≅ W)
-
-/-! ### The pullback of Weil sheaves -/
-
-section WeilSheafPullback
-
-variable {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
-
-/-- The Frobenius comparison `g^* ⋙ e_W^* ≅ e_X^* ⋙ g^*` of the pullback of module objects along
-`g` with `e_W ≫ g = g ≫ e_X`: the composite of the composition isomorphisms of the pullbacks and
-the transport along `e_W ≫ g = g ≫ e_X`. -/
-noncomputable def weilSheafUpperStarComparison :
-    (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ (eW.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
-      (eX.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙
-        (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (upperStarComp _ eW.hom.left g.left).symm ≪≫
-    eqToIso (congrArg (upperStar _) (Over.left_comp_left_eq_of_comp_eq hg)) ≪≫
-    upperStarComp _ g.left eX.hom.left
-
-/-- The pullback `g^*` of Weil sheaves along `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`: a Weil sheaf
-`(F, φ_F)` for `e_X` is sent to `g^* F` with the structure isomorphism
-`e_W^* g^* F ≅ g^* e_X^* F ≅ g^* F` given by `weilSheafUpperStarComparison` and `g^* φ_F`. -/
-noncomputable def weilSheafUpperStar : WeilSheaf ℓ eX ⥤ WeilSheaf ℓ eW :=
-  IsoAlgebra.mapOfNatIso (weilSheafUpperStarComparison ℓ eX eW hg)
-
-/-- **The homology sheaves of a pullback of Weil objects** (standard input, still `sorry`): for
-`g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`, the Weil sheaf `Hʲ(Lg^* K)` is isomorphic to the pullback
-`g^* Hʲ(K)` of the Weil sheaf `Hʲ(K)`. The underlying isomorphism is the commutation of the exact
-functor `g^*` with homology (as in `weilHomologyComparison`, with the identification of the derived
-pullback with the levelwise pullback); its compatibility with the Frobenius structures is the
-compatibility of these commutation isomorphisms with the composition isomorphisms of the
-pullbacks, along `e_W ≫ g = g ≫ e_X`. -/
-theorem nonempty_homologyFunctor_weilUpperStar_iso (K : WeilBoundedConstructible ℓ eX.hom)
-    (j : ℤ) :
-    Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eW j).obj
-        ((weilUpperStar ℓ eW.hom eX.hom g hg).obj K) ≅
-      (weilSheafUpperStar ℓ eX eW hg).obj
-        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) :=
-  sorry
-
-/-- **Stalks of a pullback of Weil sheaves** (standard input, still `sorry`): for `g : W ⟶ X`
-with `e_W ≫ g = g ≫ e_X`, a Weil sheaf `F` for `e_X` and a point `w̄` of `W` of degree `n + 1`,
-the trace of the `(n + 1)`-st Frobenius on the stalk of `g^* F` at `w̄` is its trace on the stalk
-of `F` at `w̄ ≫ g`. The composition isomorphism `(w̄ ≫ g)^* F ≅ w̄^* g^* F` of the pullbacks
-intertwines the two Frobenius operators: this is a coherence of the composition isomorphisms
-`upperStarComp` (their associativity), applied to the iterated structure isomorphisms
-`WeilSheaf.powSucc` and to the stalk comparison `weilStalkComparison`. -/
-theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
-    (w : frobeniusFixedPoints eW n) :
-    weilSheafStalkTrace ℓ n w.1 w.2.2 ((weilSheafUpperStar ℓ eX eW hg).obj F) =
-      weilSheafStalkTrace ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
-        (frobeniusFixedPointsMap eW eX hg n w).2.2 F :=
-  sorry
-
-end WeilSheafPullback
-
-/-! ### Distinguished triangles of Weil objects -/
-
-section Triangle
-
-/-- A triangle `A ⟶ B ⟶ C` of Weil objects for `Φ` is *distinguished* if it extends to a
-distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of the ambient derived category `D(Mod_{ℚ̲̄_ℓ,X})`
-whose connecting morphism `δ` commutes with the Frobenius structures: `δ ∘ φ_C = φ_A[1] ∘ LΦ^* δ`,
-where `LΦ^* δ` is formed through the ambient derived pullback, which commutes with the
-shifts. -/
-def WeilBoundedConstructible.IsDistTriang {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom]
-    [QuasiCompact V.hom] [IsSeparated V.hom] {Φ : V ⟶ V} {A B C : WeilBoundedConstructible ℓ Φ}
-    (a : A ⟶ B) (b : B ⟶ C) : Prop :=
-  ∃ δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.obj
-      C.carrier ⟶ (shiftFunctor _ (1 : ℤ)).obj
-        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.obj
-          A.carrier),
-    Pretriangulated.Triangle.mk
-        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-          a.hom.f)
-        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-          b.hom.f) δ ∈ Pretriangulated.distinguishedTriangles ∧
-      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-          C.str.hom ≫ δ =
-        connectingOfIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
-            (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι
-            (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι
-            L((Φ.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
-            (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ Φ) δ ≫
-          (shiftFunctor _ (1 : ℤ)).map
-            ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.left)).ι.map
-              A.str.hom)
-
-/-- **Additivity of the local trace along distinguished triangles of Weil objects** (standard
-input, still `sorry`): for a distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of Weil objects for `e`,
-`t_{n+1}(B; x̄) = t_{n+1}(A; x̄) + t_{n+1}(C; x̄)`. The long exact sequence of homology sheaves
-`Hʲ(A) ⟶ Hʲ(B) ⟶ Hʲ(C) ⟶ Hʲ⁺¹(A)` is one of Weil sheaves, the connecting morphisms commuting with
-the Frobenius structures; the stalk functor at `x̄` is exact, the stalks of the homology sheaves of
-constructible complexes are finite-dimensional `ℚ̄_ℓ`-vector spaces, and the alternating sum of
-the traces of an endomorphism of a bounded exact sequence of finite-dimensional vector spaces
-vanishes. -/
-theorem weilStalkSupertrace_eq_add_of_isDistTriang {e : Y ≅ Y} (n : ℕ)
-    (x : Spec (.of (AlgebraicClosure k)) ⟶ Y.left)
-    (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)
-    {A B C : WeilBoundedConstructible ℓ e.hom} {a : A ⟶ B} {b : B ⟶ C}
-    (h : WeilBoundedConstructible.IsDistTriang ℓ a b) :
-    weilStalkSupertrace ℓ n x hx B =
-      weilStalkSupertrace ℓ n x hx A + weilStalkSupertrace ℓ n x hx C :=
-  sorry
-
-/-- **The lower shriek of Weil objects preserves distinguished triangles** (standard input, still
-`sorry`): `Rf_!` is a triangulated functor (`R(f)_!` on the ambient derived categories commutes
-with the shifts and is triangulated), and the compact-support base change isomorphism giving the
-Frobenius structure of `Rf_!^Weil` commutes with the shifts, so the image of the connecting
-morphism commutes with the Frobenius structures. -/
-theorem WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map {f : X ⟶ Y}
-    (hf : eX.hom ≫ f = f ≫ eY.hom) {A B C : WeilBoundedConstructible ℓ eX.hom} {a : A ⟶ B}
-    {b : B ⟶ C} (h : WeilBoundedConstructible.IsDistTriang ℓ a b) :
-    WeilBoundedConstructible.IsDistTriang ℓ ((weilLowerShriek ℓ eX eY hf).map a)
-      ((weilLowerShriek ℓ eX eY hf).map b) :=
-  sorry
-
-end Triangle
 
 /-- **Stalks of a pullback of Weil objects**: for `g : W ⟶ X` with
 `e_W ≫ g = g ≫ e_X` and a point `w̄` of `W` of degree `n + 1`,
@@ -273,21 +148,6 @@ variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U
   (eU : U ≅ U) (eZ : Z ≅ Z) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
   {j : U ⟶ X} {i : Z ⟶ X} [IsOpenImmersion j.left] [IsClosedImmersion i.left]
   (hj : eU.hom ≫ j = j ≫ eX.hom) (hi : eZ.hom ≫ i = i ≫ eX.hom)
-
-/-- **The localization triangle of Weil objects** (standard input, still `sorry`, blueprint
-`prop-sf-open-closed-triangle-all-stages` and `prop-trf-trace-additivity-open-closed`, Step 2):
-for an open immersion `j` with closed complement `i`, both stable under `e_X`, the counit
-`Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_* Li^* K = Ri_! Li^* K` are morphisms of Weil objects and
-extend to a distinguished triangle of Weil objects. The triangle is
-`ProEtale.CondensedRing.exists_distTriang_openClosed`; the Frobenius compatibility of the
-connecting morphism is `ProEtale.CondensedRing.map_comp_connecting_eq_of_isCompl`. -/
-theorem exists_isDistTriang_openClosed
-    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
-    (K : WeilBoundedConstructible ℓ eX.hom) :
-    ∃ (α : (weilLowerShriek ℓ eU eX hj).obj ((weilUpperStar ℓ eU.hom eX.hom j hj).obj K) ⟶ K)
-      (β : K ⟶ (weilLowerShriek ℓ eZ eX hi).obj ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)),
-      WeilBoundedConstructible.IsDistTriang ℓ α β :=
-  sorry
 
 /-- **Additivity of the local trace along an open–closed decomposition**: for
 an open immersion `j` with closed complement `i`, both stable under `e_X`,
