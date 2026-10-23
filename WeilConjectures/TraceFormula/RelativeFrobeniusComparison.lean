@@ -145,7 +145,8 @@ lemma comp_inv_app_coherence {𝒞 : Type*} [Category 𝒞] {A B C D : 𝒞}
 /-- The diagram chase of the composition law of the Frobenius comparisons, for opaque morphisms
 of a category: the hypotheses are the pasting and base-change laws, the naturality squares and
 the coherence of the composition isomorphisms, and the conclusion is the composition law. -/
-lemma comp_aux {E : Type*} [Category E] {o₀ o₁ o₂ o₃ o₄ o₅ o₆ o₇ p₁ p₂ p₃ p₄ p₅ q₁ r₁ r₂ s₁ : E}
+lemma frobeniusComparison_comp_aux {E : Type*} [Category E]
+    {o₀ o₁ o₂ o₃ o₄ o₅ o₆ o₇ p₁ p₂ p₃ p₄ p₅ q₁ r₁ r₂ s₁ : E}
     {c₀ : o₀ ⟶ o₁} {GEb : o₁ ⟶ o₂} {EQ : o₂ ⟶ o₃} {Sabc : o₃ ⟶ o₄} {R₁ : o₄ ⟶ o₅}
     {SfC₁ : o₅ ⟶ o₆} {Sfe₁ : o₆ ⟶ o₇} {e₀ : o₀ ⟶ o₀} {GRb : o₂ ⟶ p₁} {GSfCb : p₁ ⟶ p₂}
     {GSfeb : p₂ ⟶ p₂} {Ea : p₂ ⟶ p₃} {Ra : p₃ ⟶ p₄} {SfCa : p₄ ⟶ p₅} {Sfea : p₅ ⟶ p₅}
@@ -543,7 +544,7 @@ theorem weilLowerShriekFrobeniusComparison_comp (aX bX abX : X ⟶ X) (aY bY abY
     (rb ≫ f'b)).map (boundedConstructibleUpperStarComp_relativeFrobenius_aux ℓ ra hT.toCommSq pb K)
   simp only [Functor.map_comp
     (self := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (rb ≫ f'b))] at hR6
-  exact CategoryTheory.PullbackFamily.comp_aux (eqToHom_refl _ _)
+  exact CategoryTheory.PullbackFamily.frobeniusComparison_comp_aux (eqToHom_refl _ _)
     (by rw [eqToHom_refl, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id])
     (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])
     (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])

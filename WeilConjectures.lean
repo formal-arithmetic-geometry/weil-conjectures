@@ -7655,7 +7655,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.FiniteFree
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.FreeAwayBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.LocalRing
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
-public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.ResidueField
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
@@ -12403,6 +12402,8 @@ public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 public import WeilConjectures.TraceFormula.RelativeFrobenius
+public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
+public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage

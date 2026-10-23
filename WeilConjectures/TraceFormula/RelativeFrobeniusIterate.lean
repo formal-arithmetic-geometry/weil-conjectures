@@ -137,7 +137,8 @@ lemma frobeniusCoefficientIterate_succ {Z : Over (Spec (.of k))} [LocallyOfFinit
 
 /-- The diagram chase of the induction step for the iterates of the pushforward of a Frobenius
 coefficient morphism, for opaque morphisms and functors. -/
-lemma _root_.CategoryTheory.PullbackFamily.iterate_aux {D E : Type*} [Category D] [Category E]
+lemma _root_.CategoryTheory.PullbackFamily.frobeniusCoefficient_iterate_aux {D E : Type*}
+    [Category D] [Category E]
     (F : D ⥤ E) (G : E ⥤ E) (H : D ⥤ D) {o₀ o₁ o₂ : E} {d₀ d₁ d₃ d₄ : D}
     (e : o₀ ⟶ o₁) (c : o₁ ⟶ G.obj o₂) (θm : o₂ ⟶ F.obj d₀) (ψm : d₀ ⟶ d₁)
     (θK : G.obj (F.obj d₁) ⟶ F.obj (H.obj d₁)) (ψ : H.obj d₁ ⟶ d₁)
@@ -227,7 +228,7 @@ theorem frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient
     rw [frobeniusCoefficientIterate_succ ℓ (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) m,
       frobeniusCoefficientIterate_succ ℓ ψ m,
       lowerShriekFrobeniusCoefficient]
-    refine CategoryTheory.PullbackFamily.iterate_aux
+    refine CategoryTheory.PullbackFamily.frobeniusCoefficient_iterate_aux
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX) _ _ _
