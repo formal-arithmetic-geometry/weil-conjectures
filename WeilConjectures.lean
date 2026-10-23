@@ -7677,6 +7677,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologySequence
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZero
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
@@ -8561,6 +8562,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.JacobianKummer
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseRepAbelian
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseSheafEquivalence
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseWeilSheafTensor
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
@@ -11800,6 +11802,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyLift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseNilInvariance
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRankCriterion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
@@ -12497,6 +12500,7 @@ public import WeilConjectures.WeilSheaf.GeometricConstituentMono
 public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
+public import WeilConjectures.WeilSheaf.HigherLowerStarZero
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.IhomCurry
@@ -12517,6 +12521,7 @@ public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseExtension
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.LisseLocusDimension
 public import WeilConjectures.WeilSheaf.LissePoincarePairing
 public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.Localization
