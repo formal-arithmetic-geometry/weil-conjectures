@@ -191,7 +191,7 @@ lemma isIso_completion_map_map_completionUnit_app {X Y : Scheme.{u}} (F : 𝐃(X
   obtain ⟨Z, g, h', hT, hZ⟩ :=
     _root_.DerivedCategory.exists_distinguished_derivedCompletionAdjunction_unit_app (I := I)
       (h := hI) N
-  refine _root_.DerivedCategory.isIso_derivedCompletion_map (h := hI)
+  refine _root_.DerivedCategory.isIso_derivedCompletion_map (h := hI) hI.choose_spec.2
     (F.map_distinguished _ hT) ?_
   change IsIso (hI.choose • 𝟙 (F.obj Z))
   have hZ' : IsIso (hI.choose • 𝟙 Z) := hZ

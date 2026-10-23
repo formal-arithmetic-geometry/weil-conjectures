@@ -95,7 +95,7 @@ lemma isIso_derivedCompletion_map_map_unit_app
       (Φ.map ((derivedCompletionAdjunction J I h).unit.app K))) := by
   obtain ⟨X, g, h₃, hT, hX⟩ := exists_distinguished_derivedCompletionAdjunction_unit_app h K
   have hX' := hΦ X ((idealInvertible_iff h.choose_spec.2 X).2 hX)
-  exact isIso_derivedCompletion_map h' (Φ.map_distinguished _ hT)
+  exact isIso_derivedCompletion_map h' h'.choose_spec.2 (Φ.map_distinguished _ hT)
     ((idealInvertible_iff h'.choose_spec.2 _).1 hX')
 
 /-- For a triangulated functor `Φ` carrying the objects on which `I` acts invertibly to objects
