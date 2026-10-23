@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColim
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # The pro-étale pushforward along a qcqs morphism preserves filtered colimits
@@ -25,9 +26,9 @@ the commutation of `Rg_*` with filtered colimits, needed to compare `Rg_* E_X` w
 Moreover a filtered colimit of injective sheaves is `g_*`-acyclic
 (`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_of_injective`), its higher
 cohomology over the quasi-compact quasi-separated `W ×_Y T` vanishing by
-`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective`. With functorial
-injective resolutions this gives the commutation of `Rⁱg_*` with filtered colimits; that last step
-(computing `Rⁱg_*` by the `g_*`-acyclic resolution `colim I•`) is not formalised here.
+`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective`. By induction on `i`, this
+gives the commutation of `Rⁱg_*` with filtered colimits
+(`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`).
 -/
 
 @[expose] public section
@@ -130,32 +131,5 @@ theorem rightAcyclic_lowerStar_of_isColimit_of_injective {T Y : Scheme.{u}} (g :
     ((ProEtale.upperStar AddCommGrpCat.{u + 1} V.hom).obj c.pt) q
   rw [AddCommGrpCat.isZero_iff_subsingleton]
   exact ⟨fun a b ↦ e.symm.injective (@Subsingleton.elim _ hs _ _)⟩
-
-/-- The pushforward along a quasi-compact quasi-separated morphism preserves filtered colimits
-of abelian pro-étale sheaves indexed by `u + 1`-small categories. -/
-instance preservesColimitsOfShape_lowerStar {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCompact g]
-    [QuasiSeparated g] (K : Type (u + 1)) [SmallCategory K] [IsFiltered K] :
-    PreservesColimitsOfShape K (ProEtale.lowerStar AddCommGrpCat.{u + 1} g) :=
-  ⟨fun {_} ↦ ⟨fun hc ↦ ⟨(isColimit_lowerStar_mapCocone g hc).some⟩⟩⟩
-
-/-- **The higher direct images along a qcqs morphism commute with filtered colimits**
-([Stacks 0739] on the pro-étale site): `Rⁱg_*` preserves colimits of `u + 1`-small filtered
-diagrams of abelian sheaves. In degree `0` this is
-`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_lowerStar`; the induction step
-`CategoryTheory.Functor.preservesColimitsOfShape_rightDerived_succ` needs filtered colimits of
-injective sheaves to be `g_*`-acyclic
-(`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_of_injective`). -/
-instance preservesColimitsOfShape_rightDerived_lowerStar {T Y : Scheme.{u}} (g : T ⟶ Y)
-    [QuasiCompact g] [QuasiSeparated g] (K : Type (u + 1)) [SmallCategory K] [IsFiltered K]
-    (n : ℕ) :
-    PreservesColimitsOfShape K ((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived n) := by
-  induction n with
-  | zero =>
-    exact preservesColimitsOfShape_of_natIso
-      (ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedZeroIsoSelf.symm
-  | succ n ih =>
-    exact Functor.preservesColimitsOfShape_rightDerived_succ _ K n fun J hJ ↦
-      have := hJ
-      rightAcyclic_lowerStar_of_isColimit_of_injective g (colimit.isColimit J) n
 
 end AlgebraicGeometry.ProEtale

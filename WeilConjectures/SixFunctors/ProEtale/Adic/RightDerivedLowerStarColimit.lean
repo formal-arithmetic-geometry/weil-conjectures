@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.LowerStarFilteredColimit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldSheafColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafColimit
 
@@ -36,13 +36,12 @@ variable {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCompact g] [QuasiSeparated g] (l
 /-- `Rⁱg_*` preserves colimits indexed by `ℕ`. -/
 instance (n : ℕ) : PreservesColimitsOfShape ℕ
     ((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived n) :=
-  preservesColimitsOfShape_of_equiv (AsSmall.equiv.{0, 0, u + 1} (C := ℕ)).symm _
+  preservesColimitsOfShape_rightDerived_lowerStar g ℕ n
 
 /-- `Rⁱg_*` preserves colimits over the finite subextensions of `ℚ̄_ℓ`. -/
 instance (n : ℕ) : PreservesColimitsOfShape (FiniteIntermediateField l)
     ((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived n) :=
-  preservesColimitsOfShape_of_equiv
-    (AsSmall.equiv.{0, 0, u + 1} (C := FiniteIntermediateField l)).symm _
+  preservesColimitsOfShape_rightDerived_lowerStar g (FiniteIntermediateField l) n
 
 /-- **`Rⁱg_* E_T = (Rⁱg_* 𝒪_{E,T})[1/ℓ]`**: the higher direct images of `E_T` are the colimit of
 those of `𝒪_{E,T}` along multiplication by `ℓ`. -/
@@ -59,6 +58,6 @@ underlying `ℚ̄_ℓ,T` are the colimit of those of the `E_T`. -/
 noncomputable def isColimitRightDerivedLowerStarAdicConstantSheafCocone (n : ℕ) :
     IsColimit (((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived n).mapCocone
       ((padicAlgClSheafCocone T l).extend (padicAlgClSheafIsoAdicConstantSheaf T l).hom)) :=
-  isColimitOfPreserves _ (isColimitAdicConstantSheafCocone T l)
+  isColimitOfPreserves _ (isColimitPadicAlgClSheafCoconeExtend T l)
 
 end AlgebraicGeometry.ProEtale

@@ -287,7 +287,7 @@ lemma epi_one_sub_of_shortExact (hC : EpiπAppZeroOfEpi C) {G' G G'' : ℕᵒᵖ
   let ht₀ (H : ℕᵒᵖ ⥤ C) (n : ℕ) : piTowerShift H ≫ Pi.π _ n =
       Pi.π _ (n + 1) ≫ H.map (homOfLE n.le_succ).op := Pi.lift_π _ _
   have e' : Epi (𝟙 _ - piTowerShift G') :=
-    epi_one_sub_of_epiπAppZeroOfEpi hC (productIsProduct _) _ (ht₀ G') h'
+    epi_one_sub_of_epiπAppZeroOfEpi hC h' (productIsProduct _) _ (ht₀ G')
   have e'' : Epi (𝟙 _ - piTowerShift G'') :=
     epi_one_sub_of_essentiallyZero (productIsProduct _) _ (ht₀ G'') h''
   let φ : SF.map lim ⟶ SF.map lim :=
@@ -339,7 +339,13 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfMittagLeffler
     (h' : ∀ n : ℕ, Epi (G'.map (homOfLE n.le_succ).op))
     (h'' : ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), G''.map (homOfLE h).op = 0) :
     IsLimit ((homologyFunctor C i).mapCone c) :=
-  isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfEpi hc i fun hQ t ht ↦
-    CategoryTheory.Limits.epi_one_sub_of_shortExact hC ι π hιπ hS h' h'' hQ t ht
+  have ht (n : ℕ) : piTowerShift (F ⋙ homologyFunctor C (i - 1)) ≫ Pi.π _ n =
+      Pi.π _ (n + 1) ≫ (F ⋙ homologyFunctor C (i - 1)).map (homOfLE n.le_succ).op :=
+    Pi.lift_π _ _
+  have := isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit hc (i - 1) i (by lia)
+    (productIsProduct _) _ ht (epi_one_sub_of_shortExact hC ι π hιπ hS h' h''
+      (productIsProduct _) _ ht)
+    (limit.isLimit _)
+  IsLimit.ofPointIso (limit.isLimit _)
 
 end DerivedCategory

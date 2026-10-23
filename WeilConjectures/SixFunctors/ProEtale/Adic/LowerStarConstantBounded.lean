@@ -59,7 +59,7 @@ theorem isGE_and_isLE_of_isHomotopyLimit_proEt {X : Scheme.{u}}
     c.pt.IsGE a ∧ c.pt.IsLE (b + 1) := by
   refine DerivedCategory.isGE_and_isLE_of_isHomotopyLimit hc a (b + 1)
     (fun n ↦ ⟨(hF n).1, ?_⟩) (fun n ↦ ?_) fun G _ hP t ht hG ↦
-      epi_one_sub_of_epiπAppZeroOfEpi Scheme.ProEt.epi_π_app_zero_of_epi_ab hP t ht hG
+      epi_one_sub_of_epiπAppZeroOfEpi Scheme.ProEt.epi_π_app_zero_of_epi_ab hG hP t ht
   · have := (hF n).2
     exact DerivedCategory.TStructure.t.isLE_of_le _ b (b + 1) (by lia)
   · have := (hF n).2
@@ -176,7 +176,7 @@ theorem isLE_rightDerivedFunctor_adicLowerStar_unit :
   rw [DerivedCategory.isLE_iff]
   intro i hi
   let K := (DerivedCategory.singleFunctor (AdicSheaf l T) 0).obj (AdicSheaf.unit l T)
-  let G := AdicSheaf.forget (l := l) Y ⋙ weilCoefficientsSheafToAb l Y
+  let G := AdicSheaf.forget (l := l) Y ⋙ weilCoefficientsForgetAb l Y
   have hG : G.Faithful := inferInstance
   -- the underlying abelian sheaf of `Hⁱ(Rg_* ℚ̄_ℓ)`
   obtain ⟨i', rfl⟩ : ∃ i' : ℕ, (i' : ℤ) = i := ⟨i.toNat, by lia⟩
@@ -184,16 +184,16 @@ theorem isLE_rightDerivedFunctor_adicLowerStar_unit :
       ((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived i').obj
         ((sheafCompose (Scheme.ProEt.topology T) (forget₂ (WeilCoefficients.{u} l)
           AddCommGrpCat.{u + 1})).obj (adicConstantSheaf l T)) :=
-    (weilCoefficientsSheafToAb l Y).mapIso
+    (weilCoefficientsForgetAb l Y).mapIso
         (((AdicSheaf.forget Y).mapDerivedCategoryHomologyFunctorIso i').app _) ≪≫
-      ((weilCoefficientsSheafToAb l Y).mapDerivedCategoryHomologyFunctorIso i').app _ ≪≫
+      ((weilCoefficientsForgetAb l Y).mapDerivedCategoryHomologyFunctorIso i').app _ ≪≫
       (DerivedCategory.homologyFunctor _ i').mapIso
         ((rightDerivedAdicLowerStarCompForgetAbIso g).app K) ≪≫
       (DerivedCategory.homologyFunctor _ i').mapIso
         (((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctor).mapIso
-          ((weilCoefficientsSheafToAb l T).mapDerivedCategory.mapIso
+          ((weilCoefficientsForgetAb l T).mapDerivedCategory.mapIso
             (((AdicSheaf.forget T).mapDerivedCategorySingleFunctor 0).app _) ≪≫
-          ((weilCoefficientsSheafToAb l T).mapDerivedCategorySingleFunctor 0).app _)) ≪≫
+          ((weilCoefficientsForgetAb l T).mapDerivedCategorySingleFunctor 0).app _)) ≪≫
       (ProEtale.lowerStar AddCommGrpCat.{u + 1} g).homologyRightDerivedFunctorObjSingleFunctorIso
         _ i'
   have hz := (isZero_rightDerived_lowerStar_adicConstantSheaf g aT aY hg d hd l i'

@@ -54,7 +54,7 @@ theorem isIso_supportedClassMap_kummerBoundary_coord {k : Type u} [Field k] (B :
     (isZero_homology_rightDerivedLowerStar_tateObject_affineLine Λ B aB)
     (isIso_homology_zero_map_unit_multiplicativeGroup Λ B aB)
     (isIso_shiftMap_kummerClassAffineLineDirectImage Λ B aB)
-    (isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup Λ B aB)
+    (isZero_homology_rightDerivedLowerStar_tateObject_basicOpen Λ B aB)
 
 /-- The Kummer classes of the Tate twist `μₙ ⊗ Λ` are normalized. -/
 instance hasKummerClass_isNormalized : HasKummerClass.IsNormalized Λ where

@@ -60,7 +60,7 @@ variable {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} [CompactSpace X] [Quas
   (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
 /-- The extension by zero `j_!` of pro-étale sheaves of modules preserves products. -/
-lemma preservesLimitsOfShape_openImmersionLowerShriek
+lemma preservesLimitsOfShape_discrete_openImmersionLowerShriek
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (β : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete β) (j)_!open[ModuleCat.{u + 1} R] :=
   have (N : β → Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R)) :
@@ -76,7 +76,7 @@ open immersion with closed complement `i`. The extension by zero
 theorem preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (β : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete β) D((j)_!open[ModuleCat.{u + 1} R]) :=
-  have := preservesLimitsOfShape_openImmersionLowerShriek (R := R) i j hij β
+  have := preservesLimitsOfShape_discrete_openImmersionLowerShriek (R := R) i j hij β
   Functor.preservesLimitsOfShape_discrete_mapDerivedCategory _
 
 /-- Blueprint `det-sf-open-closed-extension-zero-limits` (subsection `sk-prop-sf-closed-unit`),

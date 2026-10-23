@@ -81,7 +81,7 @@ lemma adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul (U : S.ProEt)
     (x : ((p)^*ᵃ[l].obj (adicRightDerivedLowerStarUnit l g i)).X.obj.obj (op U)) :
     (adicUpperStarRightDerivedLowerStarUnitAbIso l g p i).hom.hom.app (op U) (c • x) =
       ((p)^*[Ab.{u + 1}].map (((g)_*[Ab.{u + 1}].rightDerived i).map
-        ((weilCoefficientsSheafToAb l T).map
+        ((weilCoefficientsForgetAb l T).map
           ((weilSmulNatTrans l T c).app (adicConstantSheaf l T))))).hom.app (op U)
         ((adicUpperStarRightDerivedLowerStarUnitAbIso l g p i).hom.hom.app (op U) x) := by
   have h := congrArg (fun φ ↦ φ.hom.app (op U))
@@ -131,7 +131,7 @@ omit [QuasiCompact g] [QuasiSeparated g] [TopologicalSpace (integers l E.1)]
 lemma adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul' (c : ULift.{u + 1} (PadicAlgCl l))
     (x : ((p)^*ᵃ[l].obj (adicRightDerivedLowerStarUnit l g i)).X.obj.obj (op W)) :
     (adicUpperStarRightDerivedLowerStarUnitAbIso l g p i).hom.hom.app (op W) (c • x) =
-      (upperStarRightDerivedSections g p i W).map ((weilCoefficientsSheafToAb l T).map
+      (upperStarRightDerivedSections g p i W).map ((weilCoefficientsForgetAb l T).map
         ((weilSmulNatTrans l T c).app (adicConstantSheaf l T)))
         ((adicUpperStarRightDerivedLowerStarUnitAbIso l g p i).hom.hom.app (op W) x) :=
   adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul g p i W c x
@@ -157,7 +157,7 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
     rw [AdicSheaf.tensorSections_tmul]
     rw [adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul']
     refine (congrArg (fun y ↦ (upperStarRightDerivedSections g p i W).map
-      ((weilCoefficientsSheafToAb l T).map ((weilSmulNatTrans l T _).app
+      ((weilCoefficientsForgetAb l T).map ((weilSmulNatTrans l T _).app
         (adicConstantSheaf l T))) y)
       (adicUpperStarRightDerivedLowerStarUnitAbIso_hom_integralLatticeSections' g p i E θ W
         m)).trans ?_

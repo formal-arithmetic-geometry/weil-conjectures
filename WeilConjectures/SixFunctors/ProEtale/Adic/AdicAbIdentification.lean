@@ -63,12 +63,12 @@ variable (l) in
 /-- The abelian sheaf `Rⁱg_*` of the abelian sheaf underlying `ℚ̄_ℓ,T`. -/
 noncomputable abbrev rightDerivedLowerStarAdicAb : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1} :=
   ((g)_*[Ab.{u + 1}].rightDerived i).obj
-    ((weilCoefficientsSheafToAb l T).obj (adicConstantSheaf l T))
+    ((weilCoefficientsForgetAb l T).obj (adicConstantSheaf l T))
 
 /-- `Rⁱg_*` of the multiplication by `c ∈ ℚ̄_ℓ` on the abelian sheaf underlying `ℚ̄_ℓ,T`. -/
 noncomputable abbrev rightDerivedLowerStarAdicAbSmul (c : ULift.{u + 1} (PadicAlgCl l)) :
     rightDerivedLowerStarAdicAb l g i ⟶ rightDerivedLowerStarAdicAb l g i :=
-  ((g)_*[Ab.{u + 1}].rightDerived i).map ((weilCoefficientsSheafToAb l T).map
+  ((g)_*[Ab.{u + 1}].rightDerived i).map ((weilCoefficientsForgetAb l T).map
     ((weilSmulNatTrans l T c).app (adicConstantSheaf l T)))
 
 /-- An identification of the abelian sheaf underlying a sheaf `F` of `ℚ̄_ℓ`-modules on `S` with
@@ -76,10 +76,10 @@ noncomputable abbrev rightDerivedLowerStarAdicAbSmul (c : ULift.{u + 1} (PadicAl
 by `c` on `ℚ̄_ℓ,T`. -/
 structure AdicAbIdentification (F : AdicSheaf l S) (q : S ⟶ Y) where
   /-- The isomorphism of abelian sheaves. -/
-  iso : (weilCoefficientsSheafToAb l S).obj F.X ≅
+  iso : (weilCoefficientsForgetAb l S).obj F.X ≅
     (q)^*[Ab.{u + 1}].obj (rightDerivedLowerStarAdicAb l g i)
   hom_smul (c : ULift.{u + 1} (PadicAlgCl l)) :
-    (weilCoefficientsSheafToAb l S).map ((weilSmulNatTrans l S c).app F.X) ≫ iso.hom =
+    (weilCoefficientsForgetAb l S).map ((weilSmulNatTrans l S c).app F.X) ≫ iso.hom =
       iso.hom ≫ (q)^*[Ab.{u + 1}].map (rightDerivedLowerStarAdicAbSmul g i c)
 
 namespace AdicAbIdentification
@@ -91,11 +91,11 @@ underlying abelian sheaf, `forget (f^* M) ≅ f^* (forget M)`, commutes with the
 lemma sheafComposeForget₂CompUpperStarIso_inv_smul {Z X : Scheme.{u}} (f : Z ⟶ X)
     (M : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))
     (c : ULift.{u + 1} (PadicAlgCl l)) :
-    (weilCoefficientsSheafToAb l Z).map
+    (weilCoefficientsForgetAb l Z).map
         ((weilSmulNatTrans l Z c).app ((f)^*[WeilCoefficients.{u} l].obj M)) ≫
       (sheafComposeForget₂CompUpperStarIso (ULift.{u + 1} (PadicAlgCl l)) f).inv.app M =
     (sheafComposeForget₂CompUpperStarIso (ULift.{u + 1} (PadicAlgCl l)) f).inv.app M ≫
-      (f)^*[Ab.{u + 1}].map ((weilCoefficientsSheafToAb l X).map
+      (f)^*[Ab.{u + 1}].map ((weilCoefficientsForgetAb l X).map
         ((weilSmulNatTrans l X c).app M)) := by
   have h := (sheafComposeForget₂CompUpperStarIso (ULift.{u + 1} (PadicAlgCl l)) f).inv.naturality
     ((weilSmulNatTrans l X c).app M)
@@ -126,26 +126,26 @@ variable (g i) in
 noncomputable def ofUpperStar (q : S ⟶ Y) :
     AdicAbIdentification g i ((q)^*ᵃ[l].obj (adicRightDerivedLowerStarUnit l g i)) q where
   iso := (sheafComposeForget₂CompUpperStarIso (ULift.{u + 1} (PadicAlgCl l)) q).symm.app _ ≪≫
-    (q)^*[Ab.{u + 1}].mapIso ((weilCoefficientsSheafToAb l Y).mapIso
+    (q)^*[Ab.{u + 1}].mapIso ((weilCoefficientsForgetAb l Y).mapIso
       (adicRightDerivedLowerStarUnitForgetIso l g i)) ≪≫
-    (q)^*[Ab.{u + 1}].mapIso ((rightDerivedLowerStarWeilCoefficientsSheafToAbIso l g i).app _)
+    (q)^*[Ab.{u + 1}].mapIso ((rightDerivedLowerStarWeilCoefficientsForgetAbIso l g i).app _)
   hom_smul c := by
     have h1 := sheafComposeForget₂CompUpperStarIso_inv_smul q
       (adicRightDerivedLowerStarUnit l g i).X c
-    have h2 := congrArg (weilCoefficientsSheafToAb l Y).map
+    have h2 := congrArg (weilCoefficientsForgetAb l Y).map
       ((weilSmulNatTrans l Y c).naturality (adicRightDerivedLowerStarUnitForgetIso l g i).hom)
     have h4 := rightDerived_lowerStar_map_weilSmulNatTrans_app g c i (adicConstantSheaf l T)
-    have h5 := (rightDerivedLowerStarWeilCoefficientsSheafToAbIso l g i).hom.naturality
+    have h5 := (rightDerivedLowerStarWeilCoefficientsForgetAbIso l g i).hom.naturality
       ((weilSmulNatTrans l T c).app (adicConstantSheaf l T))
     dsimp at h5
     simp only [Functor.id_map, Functor.map_comp] at h2
-    have key : (weilCoefficientsSheafToAb l Y).map
+    have key : (weilCoefficientsForgetAb l Y).map
           ((weilSmulNatTrans l Y c).app (adicRightDerivedLowerStarUnit l g i).X) ≫
-        (weilCoefficientsSheafToAb l Y).map (adicRightDerivedLowerStarUnitForgetIso l g i).hom ≫
-          (rightDerivedLowerStarWeilCoefficientsSheafToAbIso l g i).hom.app
+        (weilCoefficientsForgetAb l Y).map (adicRightDerivedLowerStarUnitForgetIso l g i).hom ≫
+          (rightDerivedLowerStarWeilCoefficientsForgetAbIso l g i).hom.app
             (adicConstantSheaf l T) =
-        (weilCoefficientsSheafToAb l Y).map (adicRightDerivedLowerStarUnitForgetIso l g i).hom ≫
-          (rightDerivedLowerStarWeilCoefficientsSheafToAbIso l g i).hom.app
+        (weilCoefficientsForgetAb l Y).map (adicRightDerivedLowerStarUnitForgetIso l g i).hom ≫
+          (rightDerivedLowerStarWeilCoefficientsForgetAbIso l g i).hom.app
             (adicConstantSheaf l T) ≫ rightDerivedLowerStarAdicAbSmul g i c := by
       erw [← reassoc_of% h2]
       rw [← h4]

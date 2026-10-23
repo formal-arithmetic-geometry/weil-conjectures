@@ -75,7 +75,7 @@ include e in
 lemma AdicAbIdentification.iso_hom_app_smul (U : S.ProEt) (c : ULift.{u + 1} (PadicAlgCl l))
     (x : F.X.obj.obj (op U)) :
     e.iso.hom.hom.app (op U) (c • x) =
-      (upperStarRightDerivedSections g q i U).map ((weilCoefficientsSheafToAb l T).map
+      (upperStarRightDerivedSections g q i U).map ((weilCoefficientsForgetAb l T).map
         ((weilSmulNatTrans l T c).app (adicConstantSheaf l T)))
         (e.iso.hom.hom.app (op U) x) := by
   have h := congrArg (fun φ ↦ φ.hom.app (op U)) (e.hom_smul c)
@@ -118,7 +118,7 @@ lemma tensorSections_stageTensorMap_ofIdentification (F' : FiniteIntermediateFie
     rw [Subalgebra.stageTensorMap_tmul, AdicSheaf.tensorSections_tmul,
       AdicAbIdentification.iso_hom_app_smul e]
     refine (congrArg (fun y ↦ (upperStarRightDerivedSections g q i W).map
-      ((weilCoefficientsSheafToAb l T).map ((weilSmulNatTrans l T _).app
+      ((weilCoefficientsForgetAb l T).map ((weilSmulNatTrans l T _).app
         (adicConstantSheaf l T))) y)
       (iso_hom_integralLatticeSectionsOfIdentification e E θ W m)).trans ?_
     rw [stageMap_tmul, algebraMap_natCast_pow_inv_mul_eq]

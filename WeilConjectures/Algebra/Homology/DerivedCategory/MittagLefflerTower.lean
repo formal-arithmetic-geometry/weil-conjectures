@@ -131,7 +131,13 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfIsMittagLeffle
     (hC : EpiπAppZeroOfEpi C) (hc : IsHomotopyLimit c) (i : ℤ)
     (hF : IsMittagLefflerTower (F ⋙ homologyFunctor C (i - 1))) :
     IsLimit ((homologyFunctor C i).mapCone c) :=
-  isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfEpi hc i fun hQ t ht ↦
-    epi_one_sub_of_isMittagLefflerTower hC hF hQ t ht
+  have ht (n : ℕ) : piTowerShift (F ⋙ homologyFunctor C (i - 1)) ≫ Pi.π _ n =
+      Pi.π _ (n + 1) ≫ (F ⋙ homologyFunctor C (i - 1)).map (homOfLE n.le_succ).op :=
+    Pi.lift_π _ _
+  have := isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit hc (i - 1) i (by lia)
+    (productIsProduct _) _ ht (epi_one_sub_of_isMittagLefflerTower hC hF
+      (productIsProduct _) _ ht)
+    (limit.isLimit _)
+  IsLimit.ofPointIso (limit.isLimit _)
 
 end DerivedCategory

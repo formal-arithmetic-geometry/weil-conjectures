@@ -49,8 +49,9 @@ lemma padicSubfieldSheafToPadicAlgClSheaf_comp_iso_hom_app (E : FiniteIntermedia
   have key : padicSubfieldSheafToPadicAlgClSheaf X l E.1 ≫
       (padicAlgClSheafIsoAdicConstantSheaf X l).hom = ⟨P⟩ := by
     simp only [padicSubfieldSheafToPadicAlgClSheaf, continuousMapRingSheafToPadicAlgClSheaf,
-      Sheaf.sheafComposeToSheafify, padicAlgClSheafIsoAdicConstantSheaf, Iso.trans_hom,
-      asIso_hom, Category.assoc, ← Functor.map_comp_assoc]
+      Sheaf.sheafComposeToSheafify, padicAlgClSheafIsoAdicConstantSheaf, asIso_hom,
+      padicAlgClSheafToAdicConstantSheaf, Adjunction.homEquiv_counit, Category.assoc,
+      ← Functor.map_comp_assoc]
     rw [Iso.inv_comp_eq]
     exact ((sheafificationAdjunction (Scheme.ProEt.topology X) Ab.{u + 1}).counit.naturality
       (⟨P⟩ : (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
@@ -95,7 +96,7 @@ lemma padicIntegersSheafMulOfLE_hom_app (o : integers l F.1) (U : X.ProEtᵒᵖ)
 is the inclusion `𝒪_{E,X} ⟶ ℚ̄_ℓ,X` followed by the multiplication by the scalar `ℓ⁻ⁿ o`. -/
 lemma padicIntegersSheafMulOfLE_comp_adicConstantSheafLeg (o : integers l F.1) (n : ℕ) :
     padicIntegersSheafMulOfLE X h o ≫ adicConstantSheafLeg X l F n =
-      adicConstantSheafLeg X l E 0 ≫ (weilCoefficientsSheafToAb l X).map
+      adicConstantSheafLeg X l E 0 ≫ (weilCoefficientsForgetAb l X).map
         ((weilSmulNatTrans l X (ULift.up (((l : PadicAlgCl l) ^ n)⁻¹ *
           algebraMap (integers l F.1) (PadicAlgCl l) o))).app (adicConstantSheaf l X)) := by
   ext U f

@@ -84,24 +84,24 @@ lemma upperStar_map_weilSmulNatTrans_app (h : WeaklyEtale g)
 variable (l) in
 /-- Taking underlying abelian sheaves commutes with the classical right derived functors of the
 pushforward of sheaves of `ℚ̄_ℓ`-modules. -/
-noncomputable def rightDerivedLowerStarWeilCoefficientsSheafToAbIso (i : ℕ) :
-    (g)_*[WeilCoefficients.{u} l].rightDerived i ⋙ weilCoefficientsSheafToAb l Y ≅
-      weilCoefficientsSheafToAb l Z ⋙ (g)_*[Ab.{u + 1}].rightDerived i :=
+noncomputable def rightDerivedLowerStarWeilCoefficientsForgetAbIso (i : ℕ) :
+    (g)_*[WeilCoefficients.{u} l].rightDerived i ⋙ weilCoefficientsForgetAb l Y ≅
+      weilCoefficientsForgetAb l Z ⋙ (g)_*[Ab.{u + 1}].rightDerived i :=
   Functor.isoWhiskerRight ((g)_*[WeilCoefficients.{u} l]
       |>.singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso i).symm _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
-      ((weilCoefficientsSheafToAb l Y).mapDerivedCategoryHomologyFunctorIso i)) ≪≫
+      ((weilCoefficientsForgetAb l Y).mapDerivedCategoryHomologyFunctorIso i)) ≪≫
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
-      (rightDerivedLowerStarCompWeilCoefficientsSheafToAbIso g) _) ≪≫
+      (rightDerivedLowerStarCompWeilCoefficientsForgetAbIso g) _) ≪≫
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
-      ((weilCoefficientsSheafToAb l Z).mapDerivedCategorySingleFunctor 0) _ ≪≫
+      ((weilCoefficientsForgetAb l Z).mapDerivedCategorySingleFunctor 0) _ ≪≫
     Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (weilCoefficientsSheafToAb l Z)
+    Functor.isoWhiskerLeft (weilCoefficientsForgetAb l Z)
       ((g)_*[Ab.{u + 1}].singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso i)
 
 end Scalar
@@ -126,7 +126,7 @@ noncomputable def adicRightDerivedLowerStarUnitForgetIso :
       ((g)_*[WeilCoefficients.{u} l].rightDerived i).obj (adicConstantSheaf l T) :=
   ((AdicSheaf.forget Y).mapDerivedCategoryHomologyFunctorIso i).app _ ≪≫
     (DerivedCategory.homologyFunctor _ i).mapIso
-      ((rightDerivedAdicLowerStarCompForgetIso g).app _) ≪≫
+      ((mapDerivedCategoryForgetCompRightDerivedLowerStarIso l g).app _).symm ≪≫
     (DerivedCategory.homologyFunctor _ i).mapIso
       (((g)_*[WeilCoefficients.{u} l]).rightDerivedFunctor.mapIso
         (((AdicSheaf.forget T).mapDerivedCategorySingleFunctor 0).app _)) ≪≫
@@ -137,23 +137,23 @@ variable (l) [WeaklyEtale p]
 /-- The abelian sheaf underlying `p^* Rⁱg_* ℚ̄_ℓ,T`, for `p` weakly étale, is `p^* Rⁱg_*` of the
 abelian sheaf underlying `ℚ̄_ℓ,T`. -/
 noncomputable def adicUpperStarRightDerivedLowerStarUnitAbIso :
-    (weilCoefficientsSheafToAb l S).obj ((p)^*ᵃ[l].obj (adicRightDerivedLowerStarUnit l g i)).X ≅
+    (weilCoefficientsForgetAb l S).obj ((p)^*ᵃ[l].obj (adicRightDerivedLowerStarUnit l g i)).X ≅
       (p)^*[Ab.{u + 1}].obj (((g)_*[Ab.{u + 1}].rightDerived i).obj
-        ((weilCoefficientsSheafToAb l T).obj (adicConstantSheaf l T))) :=
-  (weilCoefficientsSheafToAb l S).mapIso ((p)^*[WeilCoefficients.{u} l].mapIso
+        ((weilCoefficientsForgetAb l T).obj (adicConstantSheaf l T))) :=
+  (weilCoefficientsForgetAb l S).mapIso ((p)^*[WeilCoefficients.{u} l].mapIso
       (adicRightDerivedLowerStarUnitForgetIso l g i)) ≪≫
     (upperStarCompSheafComposeForget₂Iso p (ULift.{u + 1} (PadicAlgCl l))).app _ ≪≫
-    (p)^*[Ab.{u + 1}].mapIso ((rightDerivedLowerStarWeilCoefficientsSheafToAbIso l g i).app _)
+    (p)^*[Ab.{u + 1}].mapIso ((rightDerivedLowerStarWeilCoefficientsForgetAbIso l g i).app _)
 
 /-- **The identification `adicUpperStarRightDerivedLowerStarUnitAbIso` is `ℚ̄_ℓ`-linear**: it
 carries the multiplication by `c ∈ ℚ̄_ℓ` to `p^* Rⁱg_*` of the multiplication by `c` on
 `ℚ̄_ℓ,T`. -/
 lemma adicUpperStarRightDerivedLowerStarUnitAbIso_hom_smul (c : ULift.{u + 1} (PadicAlgCl l)) :
-    (weilCoefficientsSheafToAb l S).map ((weilSmulNatTrans l S c).app _) ≫
+    (weilCoefficientsForgetAb l S).map ((weilSmulNatTrans l S c).app _) ≫
         (adicUpperStarRightDerivedLowerStarUnitAbIso l g p i).hom =
       (adicUpperStarRightDerivedLowerStarUnitAbIso l g p i).hom ≫
         (p)^*[Ab.{u + 1}].map (((g)_*[Ab.{u + 1}].rightDerived i).map
-          ((weilCoefficientsSheafToAb l T).map
+          ((weilCoefficientsForgetAb l T).map
             ((weilSmulNatTrans l T c).app (adicConstantSheaf l T)))) := by
   have h1 := (weilSmulNatTrans l S c).naturality
     ((p)^*[WeilCoefficients.{u} l].map (adicRightDerivedLowerStarUnitForgetIso l g i).hom)
@@ -163,7 +163,7 @@ lemma adicUpperStarRightDerivedLowerStarUnitAbIso_hom_smul (c : ULift.{u + 1} (P
     ((weilSmulNatTrans l Y c).app
       (((g)_*[WeilCoefficients.{u} l].rightDerived i).obj (adicConstantSheaf l T)))
   have h4 := rightDerived_lowerStar_map_weilSmulNatTrans_app g c i (adicConstantSheaf l T)
-  have h5 := (rightDerivedLowerStarWeilCoefficientsSheafToAbIso l g i).hom.naturality
+  have h5 := (rightDerivedLowerStarWeilCoefficientsForgetAbIso l g i).hom.naturality
     ((weilSmulNatTrans l T c).app (adicConstantSheaf l T))
   dsimp at h1 h3 h5
   simp only [adicUpperStarRightDerivedLowerStarUnitAbIso, Iso.trans_hom, Functor.mapIso_hom,

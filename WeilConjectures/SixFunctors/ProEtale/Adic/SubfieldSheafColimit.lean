@@ -22,10 +22,10 @@ on non-quasi-compact objects, but every continuous function is bounded on the qu
 affine opens, so its sheafification is `E_X`
 (`AlgebraicGeometry.ProEtale.w_boundedToContinuousMap`).
 
-Together with `AlgebraicGeometry.ProEtale.isColimitAdicConstantSheafCocone` this identifies the
-constant `ℓ`-adic sheaf `ℚ̄_ℓ,X = colim_E E_X = colim_E 𝒪_{E,X}[1/ℓ]`, step (1) of the comparison
-of `ℓ`-adic sheaves with `ℓ`-adic towers of torsion étale sheaves needed for the finiteness
-theorem (`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`).
+Together with `AlgebraicGeometry.ProEtale.isColimitPadicAlgClSheafCoconeExtend` this
+identifies the constant `ℓ`-adic sheaf `ℚ̄_ℓ,X = colim_E E_X = colim_E 𝒪_{E,X}[1/ℓ]`, step (1) of
+the comparison of `ℓ`-adic sheaves with `ℓ`-adic towers of torsion étale sheaves needed for the
+finiteness theorem (`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`).
 -/
 
 @[expose] public section

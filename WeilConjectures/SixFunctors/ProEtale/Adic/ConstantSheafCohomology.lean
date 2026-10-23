@@ -20,7 +20,7 @@ filtered colimits (`AlgebraicGeometry.Scheme.ProEt.H_map_isColimit_of_isFiltered
   (`E_X = 𝒪_{E,X}[1/ℓ]` is `AlgebraicGeometry.ProEtale.isColimitPadicSubfieldSheafCocone`);
 - `AlgebraicGeometry.ProEtale.H_adicConstantSheaf`: the cohomology of the abelian sheaf
   underlying the constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` is `colim_E H^q(X_proét, E_X)` over the finite
-  subextensions `E ⊆ ℚ̄_ℓ` (`AlgebraicGeometry.ProEtale.isColimitAdicConstantSheafCocone`).
+  subextensions `E ⊆ ℚ̄_ℓ` (`AlgebraicGeometry.ProEtale.isColimitPadicAlgClSheafCoconeExtend`).
 
 Both are spelled out elementwise, as in the étale analogue
 `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`.
@@ -81,7 +81,7 @@ theorem H_adicConstantSheaf (q : ℕ) :
         ∃ (F' : FiniteIntermediateField l) (a : F ⟶ F'),
           Sheaf.H.map ((padicSubfieldSheafFunctor X l ⋙ sheafCompose (Scheme.ProEt.topology X)
             (forget₂ RingCat.{u + 1} Ab.{u + 1})).map a) q y = 0 := by
-  have hc := (isColimitAdicConstantSheafCocone X l).whiskerEquivalence
+  have hc := (isColimitPadicAlgClSheafCoconeExtend X l).whiskerEquivalence
     (AsSmall.equiv.{0, 0, u + 1} (C := FiniteIntermediateField l)).symm
   obtain ⟨h₁, h₂⟩ := Scheme.ProEt.H_map_isColimit_of_isFiltered_small X hc q
   refine ⟨fun x ↦ ?_, fun F y hy ↦ ?_⟩

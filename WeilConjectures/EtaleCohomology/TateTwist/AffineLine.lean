@@ -31,13 +31,20 @@ which for the concrete twist is the very statement `sk-prop-a1` they are used to
 do not name the generator; hence these statements for the concrete twist. The vanishing in
 negative degrees is the left t-exactness of the direct images.
 
+Over an algebraically closed field and for `B` quasi-compact, the same computations, phrased
+for the direct image along the composite `G ⟶ 𝔸¹_B ⟶ B` of an arbitrary open complement of the
+zero section, are proved in `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`,
+for instance clause (c) as
+`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup`;
+the statements here are over an arbitrary field.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.affineLine_multiplicativeGroup_homology_tateObject`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_affineLine`
 - `AlgebraicGeometry.Etale.isIso_homology_zero_map_unit_multiplicativeGroup`
 - `AlgebraicGeometry.Etale.isIso_shiftMap_kummerClassAffineLineDirectImage`
-- `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup`
+- `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_basicOpen`
 -/
 
 @[expose] public section
@@ -139,7 +146,7 @@ include aB in
 
 *(c).* `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the cohomological dimension of affine curves over an
 algebraically closed field. -/
-theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_two_le
+theorem isZero_homology_rightDerivedLowerStar_tateObject_basicOpen_of_two_le
     (n : ℤ) (hn : 2 ≤ n) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj
@@ -173,7 +180,7 @@ include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 `Rπ_* Λ(1)` has cohomology only in degrees zero and one. -/
-theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup (n : ℤ)
+theorem isZero_homology_rightDerivedLowerStar_tateObject_basicOpen (n : ℤ)
     (hn₀ : n ≠ 0) (hn₁ : n ≠ 1) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj
@@ -191,7 +198,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup (n 
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
         ((L((j)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1))) 0
     exact _root_.DerivedCategory.isZero_of_isGE _ 0 n hn
-  · exact isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_two_le
+  · exact isZero_homology_rightDerivedLowerStar_tateObject_basicOpen_of_two_le
       Λ B aB n (by lia)
 
 end Etale
