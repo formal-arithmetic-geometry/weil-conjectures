@@ -7569,6 +7569,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.NatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
@@ -7925,6 +7926,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Trace
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.CategoryTheory.Monoidal.TensorInverse
+public import WeilConjectures.CategoryTheory.Monoidal.UnitComparison
 public import WeilConjectures.CategoryTheory.Monoidal.UnitIsoBijective
 public import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 public import WeilConjectures.CategoryTheory.MorphismProperty.IndSpreads
@@ -8860,6 +8862,7 @@ public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.AlgCat.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.CommAlgCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable

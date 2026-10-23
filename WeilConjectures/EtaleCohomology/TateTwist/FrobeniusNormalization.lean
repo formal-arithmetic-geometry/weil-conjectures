@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback
@@ -61,24 +62,11 @@ namespace Scheme
 
 variable {X Y : Scheme.{u}} (n : ℕ)
 
-/-- The reduction `ℤ ⟶ ℤ/n` of abelian groups, `ℤ` being written `ℤ/0`. -/
-noncomputable def _root_.AddCommGrpCat.uliftIntToZMod :
-    AddCommGrpCat.of (ULift.{u + 1} (ZMod 0)) ⟶ AddCommGrpCat.of (ULift.{u + 1} (ZMod n)) :=
-  AddCommGrpCat.ofHom
-    ((AddEquiv.ulift.symm : ZMod n ≃+ ULift.{u + 1} (ZMod n)).toAddMonoidHom.comp
-      ((ZMod.castHom (dvd_zero n) (ZMod n)).toAddMonoidHom.comp
-        (AddEquiv.ulift : ULift.{u + 1} (ZMod 0) ≃+ ZMod 0).toAddMonoidHom))
-
-/-- The reduction `ℤ ⟶ ℤ/n` sends `1` to `1`. -/
-lemma _root_.AddCommGrpCat.uliftIntToZMod_apply_one :
-    (AddCommGrpCat.uliftIntToZMod.{u} n).hom (ULift.up 1) = ULift.up ((1 : ℕ) : ZMod n) :=
-  ULift.ext _ _ ((map_one (ZMod.castHom (dvd_zero n) (ZMod n))).trans Nat.cast_one.symm)
-
 variable (X) in
 /-- The reduction `ℤ ⟶ ℤ/n` of constant étale sheaves. -/
 noncomputable def constantSheafIntToConstantZMod : X.constantSheafInt ⟶ X.constantZMod n :=
   (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
-    (AddCommGrpCat.uliftIntToZMod.{u} n)
+    (AddCommGrpCat.uliftIntToZMod.{u + 1} n)
 
 /-- The morphism `ℤ ⟶ μₙ`, `1 ↦ ζ ^ c`, is `c` times the morphism `1 ↦ ζ`. -/
 lemma constantSheafIntToConstantZMod_comp_constantZModToRootsOfUnitySheaf_pow (ζ : Γ(X, ⊤)ˣ)
@@ -121,7 +109,7 @@ lemma upperStar_map_constantZModToRootsOfUnitySheaf_comp_eq_nsmul [NeZero n] (g 
     rfl
   have hζc : (ζ ^ c) ^ n = 1 := by rw [← pow_mul, mul_comm, pow_mul, hζ, one_pow]
   have hnat := (upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).hom.naturality
-    (AddCommGrpCat.uliftIntToZMod.{u} n)
+    (AddCommGrpCat.uliftIntToZMod.{u + 1} n)
   rw [Functor.map_comp, Category.assoc, upperStar_map_constantZModToRootsOfUnitySheaf_comp,
     hθ _ _ hζc hc, ← constantSheafIntToConstantZMod_comp_constantZModToRootsOfUnitySheaf_pow n ζ hζ
       c hζc, constantSheafIntToConstantZMod, ← Category.assoc, ← Category.assoc]
@@ -216,7 +204,7 @@ lemma epi_extendScalarsRootOfUnity (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ ringChar Λ =
     Epi (extendScalarsRootOfUnity Λ ζ hζ) := by
   have : (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).IsLeftAdjoint :=
     (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).isLeftAdjoint
-  have : Epi (AddCommGrpCat.uliftIntToZMod.{u} (ringChar Λ)) := by
+  have : Epi (AddCommGrpCat.uliftIntToZMod.{u + 1} (ringChar Λ)) := by
     rw [AddCommGrpCat.epi_iff_surjective]
     intro x
     obtain ⟨a, ha⟩ := ZMod.castHom_surjective (dvd_zero (ringChar Λ)) x.down
@@ -326,12 +314,13 @@ normalized as in `def-weil-frobenius-coefficient-twists`: geometric Frobenius ac
 `H⁰(Spec k̄, Λ(r))` by `q^{-r}` (hence by `q^r` on `Λ(-r)`). Here `Λ` is a commutative ring of
 characteristic `n ≠ 0` invertible on `Spec k̄`, so that `q` is a unit of `Λ`
 (`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). -/
-theorem frobeniusOperator_tateWeilDatum (hq : IsUnit (Nat.card k : Λ)) (r : ℤ)
+theorem frobeniusOperator_tateWeilDatum (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k))) r) :
     frobeniusOperator (specGeometricFrobenius k).hom (tateWeilDatum Λ _ r).hom x =
-      ((hq.unit⁻¹ ^ r : Λˣ) : Λ) • x := by
-  have hu : tateFrobeniusUnit Λ (specGeometricFrobenius k).hom = hq.unit⁻¹ := by
+      (((isUnit_natCard_of_hasInvertibleExponent Λ k).unit⁻¹ ^ r : Λˣ) : Λ) • x := by
+  have hu : tateFrobeniusUnit Λ (specGeometricFrobenius k).hom =
+      (isUnit_natCard_of_hasInvertibleExponent Λ k).unit⁻¹ := by
     refine Units.ext ?_
     rw [val_tateFrobeniusUnit, Units.inv_eq_of_mul_eq_one_left]
     rw [IsUnit.unit_spec]

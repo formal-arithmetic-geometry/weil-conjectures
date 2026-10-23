@@ -53,13 +53,6 @@ namespace Scheme
 
 variable {p : ℕ} (hp : p.Prime)
 
-/-- The prime `p` vanishes in the global sections of `Y` if it does in those of `X` and
-`Y ⟶ X`. This is `AlgebraicGeometry.Scheme.IsOfCharacteristic.of_hom`, stated with the
-hypothesis type of `AlgebraicGeometry.Scheme.iterateFrobenius`. -/
-lemma natCast_eq_zero_of_hom {X Y : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (g : Y ⟶ X) :
-    (p : Γ(Y, ⊤)) = 0 :=
-  IsOfCharacteristic.of_hom hX g
-
 /-- `Spec` of the `p ^ n`-power endomorphism of a ring in which `p` vanishes is universally
 injective: the `p ^ n`-power map of a field of characteristic `p` is injective. -/
 lemma universallyInjective_specMap_iterateFrobeniusOfPrime {R : CommRingCat.{u}}
@@ -97,11 +90,11 @@ Frobenius of `U`: the square `F_U ≫ t = t ≫ F_X` is Cartesian, since `F_X` i
 the underlying space. -/
 lemma isPullback_iterateFrobenius {X U : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)
     (t : U ⟶ X) [IsOpenImmersion t] :
-    IsPullback (U.iterateFrobenius hp (natCast_eq_zero_of_hom hX t) n) t t
+    IsPullback (U.iterateFrobenius hp (IsOfCharacteristic.of_hom hX t) n) t t
       (X.iterateFrobenius hp hX n) := by
-  have hw : U.iterateFrobenius hp (natCast_eq_zero_of_hom hX t) n ≫ t =
+  have hw : U.iterateFrobenius hp (IsOfCharacteristic.of_hom hX t) n ≫ t =
       t ≫ X.iterateFrobenius hp hX n :=
-    (comp_iterateFrobenius hp t hX (natCast_eq_zero_of_hom hX t) n).symm
+    (comp_iterateFrobenius hp t hX (IsOfCharacteristic.of_hom hX t) n).symm
   have hr (s : PullbackCone t (X.iterateFrobenius hp hX n)) : Set.range s.snd ⊆ Set.range t := by
     rintro _ ⟨w, rfl⟩
     refine ⟨s.fst w, ?_⟩
@@ -128,7 +121,7 @@ theorem isUniversalHomeomorphism_iterateFrobenius {X : Scheme.{u}}
     have hpb := (isPullback_iterateFrobenius hp hX n (X.affineOpenCover.f j)).flip
     change P (pullback.snd (X.iterateFrobenius hp hX n) (X.affineOpenCover.f j))
     rw [← hpb.isoPullback_inv_snd, P.cancel_left_of_respectsIso]
-    have hR' := natCast_eq_zero_of_hom hX (X.affineOpenCover.f j)
+    have hR' := IsOfCharacteristic.of_hom hX (X.affineOpenCover.f j)
     have hR : (p : X.affineOpenCover.X j) = 0 := by
       rw [← map_natCast (ΓSpecIso _).hom.hom, hR', map_zero]
     rw [iterateFrobenius_Spec hp _ hR]
@@ -146,13 +139,13 @@ variable {X U : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ) (u : U ⟶ X)
 /-- The relative `p ^ n`-power Frobenius `U ⟶ U ×_{X, F_X} X` of a morphism `u : U ⟶ X` of
 schemes of characteristic `p`: its components are the absolute Frobenius `F_U` and `u`. -/
 noncomputable def relativeIterateFrobenius : U ⟶ pullback u (X.iterateFrobenius hp hX n) :=
-  pullback.lift (U.iterateFrobenius hp (natCast_eq_zero_of_hom hX u) n) u
-    (comp_iterateFrobenius hp u hX (natCast_eq_zero_of_hom hX u) n).symm
+  pullback.lift (U.iterateFrobenius hp (IsOfCharacteristic.of_hom hX u) n) u
+    (comp_iterateFrobenius hp u hX (IsOfCharacteristic.of_hom hX u) n).symm
 
 @[reassoc (attr := simp)]
 lemma relativeIterateFrobenius_fst :
     relativeIterateFrobenius hp hX n u ≫ pullback.fst _ _ =
-      U.iterateFrobenius hp (natCast_eq_zero_of_hom hX u) n :=
+      U.iterateFrobenius hp (IsOfCharacteristic.of_hom hX u) n :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
@@ -165,7 +158,7 @@ with the first projection is the absolute Frobenius of the source, and this proj
 base change of the absolute Frobenius of the target. -/
 instance isUniversalHomeomorphism_relativeIterateFrobenius :
     IsUniversalHomeomorphism (relativeIterateFrobenius hp hX n u) := by
-  have := isUniversalHomeomorphism_iterateFrobenius hp (natCast_eq_zero_of_hom hX u) n
+  have := isUniversalHomeomorphism_iterateFrobenius hp (IsOfCharacteristic.of_hom hX u) n
   have := isUniversalHomeomorphism_iterateFrobenius hp hX n
   have : IsUniversalHomeomorphism (relativeIterateFrobenius hp hX n u ≫ pullback.fst _ _) := by
     rw [relativeIterateFrobenius_fst]
@@ -208,8 +201,8 @@ noncomputable def overPullbackIterateFrobeniusIso :
     (fun {U V} φ ↦ by
       ext : 1
       apply pullback.hom_ext
-      · simp [comp_iterateFrobenius hp φ.left (natCast_eq_zero_of_hom hX V.hom)
-          (natCast_eq_zero_of_hom hX U.hom) n]
+      · simp [comp_iterateFrobenius hp φ.left (IsOfCharacteristic.of_hom hX V.hom)
+          (IsOfCharacteristic.of_hom hX U.hom) n]
       · simp)
 
 @[reassoc (attr := simp)]
@@ -217,7 +210,7 @@ lemma overPullbackIterateFrobeniusIso_hom_app_left_fst (U : MorphismProperty.Ove
     ((overPullbackIterateFrobeniusIso hp hX n).hom.app U).left ≫
         pullback.fst U.hom (X.iterateFrobenius hp hX n) =
       pullback.fst U.hom (𝟙 X) ≫
-        U.left.iterateFrobenius hp (natCast_eq_zero_of_hom hX U.hom) n := by
+        U.left.iterateFrobenius hp (IsOfCharacteristic.of_hom hX U.hom) n := by
   simp [overPullbackIterateFrobeniusIso]
 
 @[reassoc (attr := simp)]
@@ -225,8 +218,6 @@ lemma overPullbackIterateFrobeniusIso_hom_app_left_snd (U : MorphismProperty.Ove
     ((overPullbackIterateFrobeniusIso hp hX n).hom.app U).left ≫
         pullback.snd U.hom (X.iterateFrobenius hp hX n) = pullback.snd U.hom (𝟙 X) := by
   simp [overPullbackIterateFrobeniusIso, pullback.condition]
-
-
 
 /-- The pushforward along the absolute Frobenius `F_X` of a scheme `X` of characteristic `p`
 is isomorphic to the pushforward along the identity: it is the pushforward along the base
@@ -247,7 +238,8 @@ lemma lowerStarIterateFrobeniusIso_hom_app_hom_app (G : Sheaf X.smallEtaleTopolo
       G.obj.map ((overPullbackIterateFrobeniusIso hp hX n).hom.app V.unop).op :=
   rfl
 
-/-- Blueprint `lem-trf-absolute-frobenius-site`: the absolute Frobenius acts as the identity on
+/-- Étale analogue of blueprint `lem-trf-absolute-frobenius-site` (stated there for the small
+pro-étale site): the absolute Frobenius acts as the identity on
 the étale topos. For a scheme `X` of characteristic `p`, the pullback `(F_X)^*` along the
 absolute `p ^ n`-power Frobenius is isomorphic to the pullback `(𝟙 X)^*` along the identity. It
 is the conjugate of `AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso` under the
@@ -306,7 +298,7 @@ lemma overPullbackIterateFrobeniusIso_naturality (V : MorphismProperty.Over @Eta
         pullback.fst (pullback.snd V.hom f) (X.iterateFrobenius hp hX n) =
       pullback.fst (pullback.snd V.hom f) (𝟙 X) ≫
         (pullback V.hom f).iterateFrobenius hp
-          (natCast_eq_zero_of_hom hX (pullback.snd V.hom f)) n :=
+          (IsOfCharacteristic.of_hom hX (pullback.snd V.hom f)) n :=
     overPullbackIterateFrobeniusIso_hom_app_left_fst hp hX n _
   have hsnd : (MorphismProperty.Comma.Hom.hom ((overPullbackIterateFrobeniusIso hp hX n).hom.app
       ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V))).left ≫
@@ -324,8 +316,8 @@ lemma overPullbackIterateFrobeniusIso_naturality (V : MorphismProperty.Over @Eta
     erw [pullback.lift_fst_assoc]
     simp only [Category.assoc]
     rw [overPullbackIterateFrobeniusIso_hom_app_left_fst, reassoc_of% hfst,
-      ← comp_iterateFrobenius hp (pullback.fst V.hom f) (natCast_eq_zero_of_hom hY V.hom)
-        (natCast_eq_zero_of_hom hX (pullback.snd V.hom f)) n]
+      ← comp_iterateFrobenius hp (pullback.fst V.hom f) (IsOfCharacteristic.of_hom hY V.hom)
+        (IsOfCharacteristic.of_hom hX (pullback.snd V.hom f)) n]
     erw [pullbackLeftPullbackSndIso_inv_fst_assoc]
     simp
   · simp only [Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj,
@@ -413,7 +405,6 @@ theorem upperStarIterateFrobeniusIso_naturality :
       (upperStarLowerStarAdjunction A (𝟙 X))),
     conjugateEquiv_whiskerRight, conjugateEquiv_whiskerLeft, h₁, h₂, h₃, h₄, hY', hX']
   exact lowerStarIterateFrobeniusIso_naturality A hp hX n hY f
-
 
 end Naturality
 
