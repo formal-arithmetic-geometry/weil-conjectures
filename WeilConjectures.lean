@@ -11157,9 +11157,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchang
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitMate
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
