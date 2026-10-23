@@ -510,6 +510,150 @@ lemma gradedHomShift_map (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} (h 
     (_ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x)) ≫ (shiftFunctor _ (1 : ℤ)).map h
   rw [Functor.map_comp, Category.assoc]
 
+/-- The connecting map `Hⁿ(Y₃) ⟶ Hⁿ⁻¹(Y₁)` of a morphism `δ : Y₃ ⟶ Y₁⟦1⟧`. -/
+noncomputable def gradedHomConnecting (n : ℤ) {Y₃ Y₁ : DerivedCategory (PointMod ℓ k)}
+    (δ : Y₃ ⟶ (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).obj Y₁) :
+    (gradedHom ℓ k n).obj Y₃ →ₗ[PadicAlgCl ℓ] (gradedHom ℓ k (n - 1)).obj Y₁ :=
+  (LinearEquiv.ofBijective _ (bijective_gradedHomShift ℓ k n Y₁)).symm.toLinearMap ∘ₗ
+    ((gradedHom ℓ k n).map δ).hom
+
+lemma gradedHomShift_gradedHomConnecting (n : ℤ) {Y₃ Y₁ : DerivedCategory (PointMod ℓ k)}
+    (δ : Y₃ ⟶ (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).obj Y₁)
+    (y : (gradedHom ℓ k n).obj Y₃) :
+    gradedHomShift ℓ k n Y₁ (gradedHomConnecting ℓ k n δ y) = ((gradedHom ℓ k n).map δ).hom y :=
+  (LinearEquiv.ofBijective _ (bijective_gradedHomShift ℓ k n Y₁)).apply_symm_apply _
+
+lemma gradedHom_map_comp_comm (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} {f : Y ⟶ Y'}
+    {v : Y ⟶ Y} {v' : Y' ⟶ Y'} (h : v ≫ f = f ≫ v') :
+    ((gradedHom ℓ k n).map v').hom ∘ₗ ((gradedHom ℓ k n).map f).hom =
+      ((gradedHom ℓ k n).map f).hom ∘ₗ ((gradedHom ℓ k n).map v).hom := by
+  rw [← ModuleCat.hom_comp, ← ModuleCat.hom_comp, ← Functor.map_comp, ← Functor.map_comp, h]
+
+section Exact
+
+variable {Y₁ Y₂ Y₃ : DerivedCategory (PointMod ℓ k)} {f : Y₁ ⟶ Y₂} {g : Y₂ ⟶ Y₃}
+  {δ : Y₃ ⟶ (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).obj Y₁}
+
+/-- Exactness of `Hⁿ(Y₁) ⟶ Hⁿ(Y₂) ⟶ Hⁿ(Y₃)` for a distinguished triangle. -/
+lemma exact_gradedHom_map_map (n : ℤ) (hT : Triangle.mk f g δ ∈ distTriang _) :
+    Function.Exact ((gradedHom ℓ k n).map f).hom ((gradedHom ℓ k n).map g).hom := by
+  intro y
+  constructor
+  · intro hy
+    obtain ⟨x, hx⟩ := Triangle.coyoneda_exact₂ _ hT (gradedHomHom ℓ k y) hy
+    exact ⟨gradedHomMk ℓ k x, hx.symm⟩
+  · rintro ⟨x, rfl⟩
+    change (gradedHomHom ℓ k x ≫ f) ≫ g = 0
+    rw [Category.assoc, show f ≫ g = 0 from comp_distTriang_mor_zero₁₂ _ hT, Limits.comp_zero]
+
+/-- Exactness of `Hⁿ(Y₂) ⟶ Hⁿ(Y₃) ⟶ Hⁿ⁻¹(Y₁)` for a distinguished triangle. -/
+lemma exact_gradedHom_map_gradedHomConnecting (n : ℤ) (hT : Triangle.mk f g δ ∈ distTriang _) :
+    Function.Exact ((gradedHom ℓ k n).map g).hom (gradedHomConnecting ℓ k n δ) := by
+  intro y
+  constructor
+  · intro hy
+    have hy' : ((gradedHom ℓ k n).map δ).hom y = 0 := by
+      rw [← gradedHomShift_gradedHomConnecting, hy, map_zero]
+    obtain ⟨x, hx⟩ := Triangle.coyoneda_exact₃ _ hT (gradedHomHom ℓ k y) hy'
+    exact ⟨gradedHomMk ℓ k x, hx.symm⟩
+  · rintro ⟨x, rfl⟩
+    apply (bijective_gradedHomShift ℓ k n Y₁).1
+    rw [gradedHomShift_gradedHomConnecting, map_zero]
+    change (gradedHomHom ℓ k x ≫ g) ≫ δ = 0
+    rw [Category.assoc, show g ≫ δ = 0 from comp_distTriang_mor_zero₂₃ _ hT, Limits.comp_zero]
+
+/-- Exactness of `Hⁿ(Y₃) ⟶ Hⁿ⁻¹(Y₁) ⟶ Hⁿ⁻¹(Y₂)` for a distinguished triangle. -/
+lemma exact_gradedHomConnecting_gradedHom_map (n : ℤ) (hT : Triangle.mk f g δ ∈ distTriang _) :
+    Function.Exact (gradedHomConnecting ℓ k n δ) ((gradedHom ℓ k (n - 1)).map f).hom := by
+  intro x
+  constructor
+  · intro hx
+    have hx0 : ((gradedHom ℓ k (n - 1)).map f).hom x = 0 := hx
+    have hx' : gradedHomHom ℓ k (gradedHomShift ℓ k n Y₁ x) ≫
+        (shiftFunctor _ (1 : ℤ)).map f = 0 := by
+      rw [gradedHomHom_gradedHomShift, Category.assoc, ← Functor.map_comp,
+        ← gradedHomHom_map_apply, hx0]
+      change _ ≫ (shiftFunctor _ (1 : ℤ)).map 0 = 0
+      rw [Functor.map_zero, Limits.comp_zero]
+    obtain ⟨y, hy⟩ := Triangle.coyoneda_exact₁ _ hT _ hx'
+    refine ⟨gradedHomMk ℓ k y, ?_⟩
+    show gradedHomConnecting ℓ k n δ (gradedHomMk ℓ k y) = x
+    apply (bijective_gradedHomShift ℓ k n Y₁).1
+    rw [gradedHomShift_gradedHomConnecting]
+    exact hy.symm
+  · rintro ⟨y, rfl⟩
+    refine ((gradedHomShift ℓ k n Y₂).map_eq_zero_iff (bijective_gradedHomShift ℓ k n Y₂).1).1 ?_
+    show gradedHomShift ℓ k n Y₂ (((gradedHom ℓ k (n - 1)).map f).hom
+        (gradedHomConnecting ℓ k n δ y)) = 0
+    rw [gradedHomShift_map, gradedHomShift_gradedHomConnecting]
+    change (gradedHomHom ℓ k y ≫ δ) ≫ (shiftFunctor _ (1 : ℤ)).map f = 0
+    rw [Category.assoc]
+    erw [comp_distTriang_mor_zero₃₁ _ hT]
+    rw [Limits.comp_zero]
+
+/-- The connecting maps commute with the maps induced by an endomorphism of the triangle. -/
+lemma gradedHomConnecting_comm (n : ℤ) {v₁ : Y₁ ⟶ Y₁} {v₃ : Y₃ ⟶ Y₃}
+    (h₃ : v₃ ≫ δ = δ ≫ (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).map v₁) :
+    ((gradedHom ℓ k (n - 1)).map v₁).hom ∘ₗ gradedHomConnecting ℓ k n δ =
+      gradedHomConnecting ℓ k n δ ∘ₗ ((gradedHom ℓ k n).map v₃).hom := by
+  refine LinearMap.ext fun y ↦ (bijective_gradedHomShift ℓ k n Y₁).1 ?_
+  rw [LinearMap.comp_apply, LinearMap.comp_apply, gradedHomShift_map,
+    gradedHomShift_gradedHomConnecting, gradedHomShift_gradedHomConnecting]
+  change (gradedHomHom ℓ k y ≫ δ) ≫ (shiftFunctor _ (1 : ℤ)).map v₁ =
+    (gradedHomHom ℓ k y ≫ v₃) ≫ δ
+  rw [Category.assoc, Category.assoc, h₃]
+
+end Exact
+
+attribute [local instance] DerivedCategory.braidedCategory'
+
+/-- **Additivity of the trace along distinguished triangles over the point**, in the ambient
+derived category: for a distinguished triangle `Y₁ ⟶ Y₂ ⟶ Y₃ ⟶ Y₁⟦1⟧` of finite direct sums of
+shifts of the unit and an endomorphism `(v₁, v₂, v₃)` of it, `tr v₂ = tr v₁ + tr v₃`. -/
+theorem trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition
+    {Y₁ Y₂ Y₃ : DerivedCategory (PointMod ℓ k)} [HasRightDual Y₁] [HasRightDual Y₂]
+    [HasRightDual Y₃] (D₁ : ShiftDecomposition (𝟙_ _) Y₁) (D₂ : ShiftDecomposition (𝟙_ _) Y₂)
+    (D₃ : ShiftDecomposition (𝟙_ _) Y₃) (f : Y₁ ⟶ Y₂) (g : Y₂ ⟶ Y₃)
+    (δ : Y₃ ⟶ (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).obj Y₁)
+    (hT : Triangle.mk f g δ ∈ distTriang _) (v₁ : Y₁ ⟶ Y₁) (v₂ : Y₂ ⟶ Y₂) (v₃ : Y₃ ⟶ Y₃)
+    (h₁ : v₁ ≫ f = f ≫ v₂) (h₂ : v₂ ≫ g = g ≫ v₃)
+    (h₃ : v₃ ≫ δ = δ ≫ (shiftFunctor (DerivedCategory (PointMod ℓ k)) (1 : ℤ)).map v₁) :
+    trace v₂ = trace v₁ + trace v₃ := by
+  have : ∀ n, FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj Y₁) :=
+    fun n ↦ D₁.finiteDimensional_obj (gradedHom ℓ k n)
+  have : ∀ n, FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj Y₂) :=
+    fun n ↦ D₂.finiteDimensional_obj (gradedHom ℓ k n)
+  have : ∀ n, FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj Y₃) :=
+    fun n ↦ D₃.finiteDimensional_obj (gradedHom ℓ k n)
+  let s := Finset.univ.image D₁.deg ∪ Finset.univ.image D₂.deg ∪ Finset.univ.image D₃.deg
+  have hs₁ (j : D₁.ι) : D₁.deg j ∈ s := by simp [s]
+  have hs₂ (j : D₂.ι) : D₂.deg j ∈ s := by simp [s]
+  have hs₃ (j : D₃.ι) : D₃.deg j ∈ s := by simp [s]
+  have hsub {Y : DerivedCategory (PointMod ℓ k)} (D : ShiftDecomposition (𝟙_ _) Y)
+      (hD : ∀ j, D.deg j ∈ s) (n : ℤ) (hn : n ∉ s) :
+      Subsingleton ((gradedHom ℓ k n).obj Y) :=
+    D.subsingleton_obj (gradedHom ℓ k n) fun j ↦
+      have := subsingleton_hom_shiftedUnit ℓ k n (D.deg j) (fun h ↦ hn (h ▸ hD j))
+      inferInstanceAs (Subsingleton (shiftedUnit ℓ k n ⟶ shiftedUnit ℓ k (D.deg j)))
+  have key := LinearMap.sum_negOnePow_smul_trace_sub_trace_sub_trace_eq_zero
+    (fun n ↦ (gradedHom ℓ k n).obj Y₁) (fun n ↦ (gradedHom ℓ k n).obj Y₂)
+    (fun n ↦ (gradedHom ℓ k n).obj Y₃) (fun n ↦ ((gradedHom ℓ k n).map f).hom)
+    (fun n ↦ ((gradedHom ℓ k n).map g).hom) (fun n ↦ gradedHomConnecting ℓ k n δ)
+    (fun n ↦ exact_gradedHom_map_map ℓ k n hT)
+    (fun n ↦ exact_gradedHom_map_gradedHomConnecting ℓ k n hT)
+    (fun n ↦ exact_gradedHomConnecting_gradedHom_map ℓ k n hT)
+    (fun n ↦ ((gradedHom ℓ k n).map v₁).hom) (fun n ↦ ((gradedHom ℓ k n).map v₂).hom)
+    (fun n ↦ ((gradedHom ℓ k n).map v₃).hom) (fun n ↦ gradedHom_map_comp_comm ℓ k n h₁)
+    (fun n ↦ gradedHom_map_comp_comm ℓ k n h₂) (fun n ↦ gradedHomConnecting_comm ℓ k n h₃) s
+    (hsub D₁ hs₁) (hsub D₃ hs₃)
+  rw [trace_eq_pointScalar_sum ℓ k D₁ s hs₁, trace_eq_pointScalar_sum ℓ k D₂ s hs₂,
+    trace_eq_pointScalar_sum ℓ k D₃ s hs₃, ← (pointScalar ℓ k).map_add, ← Finset.sum_add_distrib]
+  congr 1
+  rw [← sub_eq_zero, ← Finset.sum_sub_distrib, ← key]
+  refine Finset.sum_congr rfl fun n _ ↦ ?_
+  simp only [smul_sub]
+  abel
+
 end Additivity
 
 end AlgebraicGeometry.ProEtale.CondensedRing
