@@ -327,7 +327,6 @@ public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import WeilConjectures.WeilObject.Defs
 public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
