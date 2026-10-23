@@ -28,7 +28,7 @@ the factors: it sends the factor of `x̄⁺` to the factor of `x̄`, where `σ �
 this permutation are those of the points with `x̄ ≫ e_X = σ ≫ x̄`, on which the Frobenius is the
 Frobenius of the stalk of `F`. Hence the trace of the Frobenius of the stalk of `f_* F` at `ȳ` is
 the sum of the traces of the Frobenius of the stalks of `F` at these points
-(`ProEtale.CondensedRing.categoricalTrace_stalkFrobenius_lowerStar`), provided the stalks
+(`ProEtale.CondensedRing.stalkFrobeniusTrace_lowerStar`), provided the stalks
 are dualizable.
 
 The statements are made for a scheme `P` and an isomorphism `τ`, rather than for `Spec Ω` and

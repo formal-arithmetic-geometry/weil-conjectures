@@ -23,7 +23,7 @@ Hʲ(Rf_!^Weil K) ≅ f_* Hʲ(K)
 (`ProEtale.CondensedRing.nonempty_homologyFunctor_weilLowerShriek_iso`). It is the composite of
 
 - `Rf_!^Weil K ≅ Rf_*^Weil K` for proper `f`
-  (`ProEtale.CondensedRing.nonempty_weilLowerShriek_iso_weilLowerStar`), through
+  (`ProEtale.CondensedRing.weilLowerShriekIsoWeilLowerStar`), through
   `Rf_! ≅ Rf_*` and the identification of the compact-support base change with the direct-image
   base change for proper vertical maps
   (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`, blueprint
@@ -58,20 +58,20 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 Frobenius structures, the compact-support base change of the Frobenius square being the
 direct-image base change for proper vertical maps
 (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`). -/
-theorem nonempty_weilLowerShriek_iso_weilLowerStar [IsProper f.left]
+noncomputable def weilLowerShriekIsoWeilLowerStar [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
-    Nonempty ((weilLowerShriek ℓ eX eY hf).obj K ≅ (weilLowerStar ℓ eX eY f hf).obj K) := by
-  refine ⟨IsoAlgebra.isoMk ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).app
-    K.carrier) ?_⟩
-  rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, weilLowerShriek_obj_str, weilLowerStar_obj_str]
-  have nat := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.naturality
-    K.str.hom
-  have hp := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper ℓ
-    (weilFrobeniusSquare eX eY hf) K.carrier
-  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, asIso_hom, Category.assoc,
-    weilLowerShriekComparison_hom]
-  rw [nat, reassoc_of% hp]
-  rfl
+    (weilLowerShriek ℓ eX eY hf).obj K ≅ (weilLowerStar ℓ eX eY f hf).obj K :=
+  IsoAlgebra.isoMk ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).app
+    K.carrier) (by
+    rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, weilLowerShriek_obj_str, weilLowerStar_obj_str]
+    have nat := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.naturality
+      K.str.hom
+    have hp := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper ℓ
+      (weilFrobeniusSquare eX eY hf) K.carrier
+    simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, asIso_hom, Category.assoc,
+      weilLowerShriekComparison_hom]
+    rw [nat, reassoc_of% hp]
+    rfl)
 
 /-- **Homology of the pushforward of Weil objects along a finite morphism**: for finite `f`, the
 Weil sheaf `Hʲ(Rf_*^Weil K)` for `e_Y` is the pushforward `f_* Hʲ(K)` of the Weil sheaf `Hʲ(K)`.
@@ -94,8 +94,8 @@ theorem nonempty_homologyFunctor_weilLowerShriek_iso [IsFinite f.left]
         ((weilLowerShriek ℓ eX eY hf).obj K) ≅
       (weilSheafLowerStar ℓ eX eY hf).obj
         ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) := by
-  obtain ⟨i⟩ := nonempty_weilLowerShriek_iso_weilLowerStar ℓ eX eY hf K
   obtain ⟨i'⟩ := nonempty_homologyFunctor_weilLowerStar_iso ℓ eX eY hf K j
-  exact ⟨(WeilBoundedConstructible.homologyFunctor ℓ eY j).mapIso i ≪≫ i'⟩
+  exact ⟨(WeilBoundedConstructible.homologyFunctor ℓ eY j).mapIso
+    (weilLowerShriekIsoWeilLowerStar ℓ eX eY hf K) ≪≫ i'⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -70,7 +70,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Finite k] [Fact (r
 étale morphism `f`. The stalk of `Rf_! K = f_* K` at `ȳ` is the sum of the stalks `K_x̄` over
 the geometric points `x̄ ↦ ȳ`, permuted by the Frobenius; the trace only sees the summands at
 the points fixed by the Frobenius, which are the points of degree `n + 1`
-(`ShriekTraceFunctionAt.of_isFinite_of_etale`, which does not need `e_X` to have finite order). -/
+(`ShriekTraceFunctionAt.of_isFinite_of_etale`, which does not need `e_X` to have finite order).
+The hypothesis `_he` is therefore redundant; it is kept so that the statement has the form of the
+base case `H₀` of `shriekTraceFunctionGenericallyHolds_of_baseCases`. -/
 theorem shriekTraceFunctionAt_of_isFinite_of_etale {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]

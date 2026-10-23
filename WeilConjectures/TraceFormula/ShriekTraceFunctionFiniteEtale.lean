@@ -25,7 +25,7 @@ Grothendieck–Lefschetz formula in dimension zero. The proof:
    `Hʲ(K)` (`ProEtale.CondensedRing.nonempty_powSucc_weilSheafLowerStar_iso`);
 3. the stalk of `f_* Hʲ(K)` at `ȳ` is the product of the stalks of `Hʲ(K)` at the points over `ȳ`,
    permuted by the Frobenius, so its trace is the sum of the traces at the fixed points
-   (`ProEtale.CondensedRing.categoricalTrace_stalkFunctor_weilSheafLowerStar`), the stalks being
+   (`ProEtale.CondensedRing.weilSheafStalkTrace_weilSheafLowerStar`), the stalks being
    dualizable (`ProEtale.CondensedRing.nonempty_hasRightDual_upperStar_homology`);
 4. the sums over `j` and over the points are exchanged.
 

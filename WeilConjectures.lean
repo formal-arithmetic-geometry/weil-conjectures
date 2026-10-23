@@ -8012,6 +8012,7 @@ public import WeilConjectures.CategoryTheory.OpcyclesTorKernelIso
 public import WeilConjectures.CategoryTheory.OpcyclesTorSurjection
 public import WeilConjectures.CategoryTheory.PBCFiltration
 public import WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.Preadditive.CokernelBiproduct
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 public import WeilConjectures.CategoryTheory.Pro.Basic
@@ -9312,7 +9313,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.WeakSerreCop
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.CokernelBiproduct
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves

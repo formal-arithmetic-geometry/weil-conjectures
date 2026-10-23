@@ -74,7 +74,14 @@ lemma isIso_exchangeRight_of_isEquivalence {G : B ⥤ B'} {G' : A ⥤ A'} [G.IsE
 `θ₂ : G₂ ⋙ Lf'' ≅ Lf' ⋙ G₂'` be comparisons of two horizontally adjacent squares, and
 `θ : G ⋙ Lf'' ≅ Lf ⋙ G'` one of the outer square, compatible with `θ₁` and `θ₂` through
 isomorphisms `c : G ≅ G₁ ⋙ G₂` and `c' : G' ≅ G₁' ⋙ G₂'`. Then the exchange morphism of `θ` is
-the pasting of those of `θ₁` and `θ₂`, through `c` and `c'`. -/
+the pasting of those of `θ₁` and `θ₂`, through `c` and `c'`. The squares are
+```
+B --G₁--> B' --G₂--> B''
+|Lf        |Lf'       |Lf''
+v          v           v
+A --G₁'-> A' --G₂'-> A''
+```
+with right adjoints `Rf`, `Rf'`, `Rf''` going up. -/
 lemma exchangeRight_app_paste {G₁ : B ⥤ B'} {G₁' : A ⥤ A'} {G₂ : B' ⥤ B''} {G₂' : A' ⥤ A''}
     {G : B ⥤ B''} {G' : A ⥤ A''} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (af'' : Lf'' ⊣ Rf'')
     (θ₁ : G₁ ⋙ Lf' ≅ Lf ⋙ G₁') (θ₂ : G₂ ⋙ Lf'' ≅ Lf' ⋙ G₂') (θ : G ⋙ Lf'' ≅ Lf ⋙ G')
@@ -212,7 +219,14 @@ variable {X'' Y'' : Scheme.{u}} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' �
 
 /-- **Pasting law of the pullback comparisons**: the comparison of the outer square of two
 horizontally pasted squares is the pasting of their comparisons, through the composition
-isomorphisms `upperStarComp`. -/
+isomorphisms `upperStarComp`. The squares are
+```
+X'' --h'--> X' --g'--> X
+ |f''       |f'        |f
+ v          v          v
+Y'' --h---> Y' --g---> Y
+```
+-/
 lemma upperStarSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g))
     (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
@@ -236,7 +250,14 @@ lemma upperStarSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq
 
 /-- **Pasting law of the base-change morphisms**: the base-change morphism of the outer square of
 two horizontally pasted squares is the pasting of their base-change morphisms, through the
-composition isomorphisms `upperStarComp`. -/
+composition isomorphisms `upperStarComp`. The squares are
+```
+X'' --h'--> X' --g'--> X
+ |f''       |f'        |f
+ v          v          v
+Y'' --h---> Y' --g---> Y
+```
+-/
 lemma lowerStarBaseChange_app_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g))
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :

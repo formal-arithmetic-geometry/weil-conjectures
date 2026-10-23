@@ -12,9 +12,27 @@ public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 
 # Coherence of the restriction of stalks of a pushforward
 
-TODO docstring
+Let `f : X ⟶ Y` be a morphism of schemes and `x̄ : P ⟶ X`, `ȳ : P ⟶ Y` with `x̄ ≫ f = ȳ`. The
+restriction `ȳ^* f_* M ⟶ x̄^* M` (`ProEtale.CondensedRing.stalkLowerStarProj`) is compatible with
+
+- precomposition of the points (`ProEtale.CondensedRing.stalkLowerStarProj_comp_left`),
+- base change along a commutative square `a ≫ f = f ≫ b`
+  (`ProEtale.CondensedRing.stalkLowerStarProj_lowerStarBaseChange`),
+- transport of the points along equalities and morphisms of module objects.
+
+For points `x̄, x̄'` over `ȳ` with `x̄ ≫ a = σ ≫ x̄'` and `ȳ ≫ b = σ ≫ ȳ`, these combine into the
+compatibility of the restriction with the Frobenius comparisons
+(`ProEtale.CondensedRing.pointComparison_lowerStarBaseChange_stalkLowerStarProj`): the Frobenius
+of the stalk of `f_* M` at `ȳ`, followed by the restriction to `x̄`, is the restriction to `x̄'`
+followed by the Frobenius transport from `x̄'` to `x̄`.
+
+The coherences are first proved for abstract functors and isomorphisms
+(`CategoryTheory.Iso.app_counit_eq_of_coherence`,
+`CategoryTheory.Adjunction.unit_counit_baseChange_eq_of_coherence`) and then instantiated; this
+keeps the kernel from unfolding the pullback functors.
 
 -/
+
 
 @[expose] public section
 
@@ -30,9 +48,11 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y P : Scheme.{u}} {f : X ⟶ Y}
-/-- Abstract form of `stalkLowerStarProj_comp_left`, for variables in place of the pullbacks. -/
-lemma CategoryTheory.restriction_comp_left_aux {A B Q Q' : Type*} [Category A] [Category B]
-    [Category Q] [Category Q'] {Rf : A ⥤ B} {Lf : B ⥤ A} (ε : Rf ⋙ Lf ⟶ 𝟭 A)
+
+/-- Abstract form of `stalkLowerStarProj_comp_left`, with variables in place of the pullbacks. -/
+lemma _root_.CategoryTheory.Iso.app_counit_eq_of_coherence {A B Q Q' : Type*}
+    [Category A] [Category B] [Category Q] [Category Q'] {Rf : A ⥤ B} {Lf : B ⥤ A}
+    (ε : Rf ⋙ Lf ⟶ 𝟭 A)
     {Xs : A ⥤ Q} {Ys XFs : B ⥤ Q} {S : Q ⥤ Q'} {SYs SXFs : B ⥤ Q'} {SXs : A ⥤ Q'}
     (cy : Ys ≅ XFs) (cxf : XFs ≅ Lf ⋙ Xs) (c1 : SYs ≅ SXFs) (c2 : SXFs ≅ Lf ⋙ SXs)
     (csy : SYs ≅ Ys ⋙ S) (csx : SXs ≅ Xs ⋙ S)
@@ -87,12 +107,13 @@ lemma stalkLowerStarProj_comp_left {P' : Scheme.{u}} (σ : P' ⟶ P) {x : P ⟶ 
       (upperStarComp Λ σ y).hom.app ((f)_*⟦Λ⟧.obj M) ≫
         (σ)^*⟦Λ⟧.map (stalkLowerStarProj Λ hx M) ≫ (upperStarComp Λ σ x).inv.app M := by
   rw [stalkLowerStarProj_eq, stalkLowerStarProj_eq]
-  refine CategoryTheory.restriction_comp_left_aux _ _ _ _ _ _ _ 
+  refine CategoryTheory.Iso.app_counit_eq_of_coherence _ _ _ _ _ _ _
     (restriction_comp_left_coherence Λ σ hx hx') M
 
 /-- Abstract form of `stalkLowerStarProj_lowerStarBaseChange`. -/
-lemma CategoryTheory.restriction_baseChange_aux {A B Q : Type*} [Category A] [Category B]
-    [Category Q] {Rf : A ⥤ B} {Lf : B ⥤ A} (adj : Lf ⊣ Rf) {As : A ⥤ A} {Bs : B ⥤ B}
+lemma _root_.CategoryTheory.Adjunction.unit_counit_baseChange_eq_of_coherence {A B Q : Type*}
+    [Category A] [Category B] [Category Q] {Rf : A ⥤ B} {Lf : B ⥤ A} (adj : Lf ⊣ Rf)
+    {As : A ⥤ A} {Bs : B ⥤ B}
     {Xs : A ⥤ Q} {Ys YBs XFs XAFs : B ⥤ Q} {XAs : A ⥤ Q}
     (θ : Bs ⋙ Lf ≅ Lf ⋙ As) (cyb : YBs ≅ Bs ⋙ Ys) (cy : Ys ≅ XFs) (cxf : XFs ≅ Lf ⋙ Xs)
     (cxa : XAs ≅ As ⋙ Xs) (c1 : YBs ≅ XAFs) (c2 : XAFs ≅ Lf ⋙ XAs)
@@ -128,7 +149,7 @@ lemma upperStarComp_hom_app_upperStarCongr_hom_app' {S T U : Scheme.{u}} {a b : 
   simp [upperStarCongr_self]
 
 @[reassoc]
-lemma CategoryTheory.Functor.map_hom_app_comp_map_inv_app {C D E : Type*} [Category C]
+lemma _root_.CategoryTheory.Functor.map_hom_app_comp_map_inv_app {C D E : Type*} [Category C]
     [Category D] [Category E] (F : D ⥤ E) {G H : C ⥤ D} (e : G ≅ H) (X : C) :
     F.map (e.hom.app X) ≫ F.map (e.inv.app X) = 𝟙 _ := by
   rw [← F.map_comp, Iso.hom_inv_id_app, F.map_id]
@@ -160,7 +181,8 @@ lemma stalkLowerStarProj_lowerStarBaseChange {a : X ⟶ X} {b : Y ⟶ Y} (sq : C
       stalkLowerStarProj Λ hxy M ≫ (upperStarComp Λ x a).hom.app M := by
   rw [lowerStarBaseChange_eq, Adjunction.exchangeRight_app, stalkLowerStarProj_eq,
     stalkLowerStarProj_eq]
-  exact CategoryTheory.restriction_baseChange_aux (upperStarLowerStarAdjunction Λ f)
+  exact CategoryTheory.Adjunction.unit_counit_baseChange_eq_of_coherence
+    (upperStarLowerStarAdjunction Λ f)
     (upperStarSquareComparison Λ sq) _ _ _ _ _ _ (restriction_baseChange_coherence Λ sq hx hxy) M
 
 /-- The restriction of stalks is natural in the module object. -/
@@ -197,13 +219,6 @@ lemma stalkLowerStarProj_upperStarCongr_hom_app {x₁ x₂ : P ⟶ X} {y : P ⟶
 
 /-- The Frobenius comparison `x̄'^* ≅ a^* ⋙ x̄^*` between points `x̄, x̄' : P ⟶ Z` with
 `x̄ ≫ a = σ ≫ x̄'`, for an isomorphism `τ : σ^* ≅ 𝟭`. -/
-lemma CategoryTheory.Iso.whiskerLeft_symm_trans_hom_app {A Q : Type*} [Category A] [Category Q]
-    {X' F G H : A ⥤ Q} {S : Q ⥤ Q} (τ : S ≅ 𝟭 Q) (c₁ : F ≅ X' ⋙ S) (c₂ : F ≅ G) (c₃ : G ≅ H)
-    (M : A) :
-    (Functor.isoWhiskerLeft X' τ.symm ≪≫ c₁.symm ≪≫ c₂ ≪≫ c₃).hom.app M =
-      τ.inv.app (X'.obj M) ≫ c₁.inv.app M ≫ c₂.hom.app M ≫ c₃.hom.app M :=
-  rfl
-
 noncomputable def pointComparison {σ : P ⟶ P} (τ : (σ)^*⟦Λ⟧ ≅ 𝟭 _) {Z : Scheme.{u}} (a : Z ⟶ Z)
     {x x' : P ⟶ Z} (h : x ≫ a = σ ≫ x') : (x')^*⟦Λ⟧ ⋙ 𝟭 _ ≅ (a)^*⟦Λ⟧ ⋙ (x)^*⟦Λ⟧ :=
   Functor.isoWhiskerLeft _ τ.symm ≪≫ (upperStarComp Λ σ x').symm ≪≫ upperStarCongr Λ h.symm ≪≫
