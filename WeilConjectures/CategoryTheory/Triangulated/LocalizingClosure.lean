@@ -112,5 +112,25 @@ instance hasCoproducts_fullSubcategory [HasCoproducts.{v} C] (Q : ObjectProperty
 instance preservesColimitsOfShape_ι [HasCoproducts.{v} C] (Q : ObjectProperty C)
     [Q.IsLocalizing] (J : Type v) : PreservesColimitsOfShape (Discrete J) Q.ι :=
   inferInstance
+/-- A localizing property is its own localizing closure. -/
+lemma localizingClosure_eq_self [P.IsLocalizing] : P.localizingClosure = P :=
+  le_antisymm (localizingClosure_le le_rfl) (le_localizingClosure P)
+
+/-- Blueprint `det-proper-image-localizing-principle`: a triangulated functor `F : C ⥤ D`
+preserving coproducts indexed by `Type v` which maps the objects of `P` into `Loc(P')` maps
+`Loc(P)` into `Loc(P')`: the objects `X` with `F X ∈ Loc(P')` form a localizing property. -/
+lemma localizingClosure_le_inverseImage {D : Type*} [Category.{v} D] [HasZeroObject D]
+    [HasShift D ℤ] [Preadditive D] [∀ (n : ℤ), (shiftFunctor D n).Additive] [Pretriangulated D]
+    (P' : ObjectProperty D) {F : C ⥤ D} [F.CommShift ℤ]
+    [F.IsTriangulated] [∀ J : Type v, PreservesColimitsOfShape (Discrete J) F]
+    (h : P ≤ P'.localizingClosure.inverseImage F) :
+    P.localizingClosure ≤ P'.localizingClosure.inverseImage F := by
+  have : (P'.localizingClosure.inverseImage F).IsLocalizing :=
+    { isClosedUnderColimitsOfShape_discrete J :=
+        { colimitsOfShape_le := by
+            rintro X ⟨h⟩
+            exact P'.localizingClosure.prop_of_isColimit
+              (isColimitOfPreserves F h.isColimit) h.prop_diag_obj } }
+  exact localizingClosure_le h
 
 end CategoryTheory.ObjectProperty

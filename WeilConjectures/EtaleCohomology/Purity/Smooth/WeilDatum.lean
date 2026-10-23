@@ -209,14 +209,15 @@ end Tate
 section Purity
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
-  {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
-  [HasInvertibleExponent Λ X] {gX : X ⟶ X} {gY : Y ⟶ Y}
+  {d : ℕ} (f : X ⟶ Y) [HasCompactification f] [HasInvertibleExponent Λ X] {gX : X ⟶ X}
+  {gY : Y ⟶ Y}
 
 variable (d) in
 /-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
 
 The datum `φ^pur_{f,K}` induced on the source `Lf^* K(d)[2d]` of smooth purity by a strict Weil
-datum `φ_K : Lg_Y^* K ≅ K`, for a commutative square `g_X ≫ f = f ≫ g_Y`:
+datum `φ_K : Lg_Y^* K ≅ K` (more generally by any Weil datum `φ_K : Lg_Y^* K ⟶ K`), for a
+commutative square `g_X ≫ f = f ≫ g_Y`:
 ```
                           ≅                                   Lf^* φ_K ⊗ τ_d
   Lg_X^*(Lf^* K(d)[2d]) ────▶ Lf^* Lg_Y^* K ⊗ Lg_X^* Λ_X(d)[2d] ──────────────▶ Lf^* K(d)[2d].
@@ -228,17 +229,18 @@ The first arrow moves `Lg_X^*` through the twist and shift and identifies
 `Lf^* φ_K`. -/
 noncomputable def smoothPurityWeilDatum (sq : CommSq gX f f gY)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K) :
+    (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     (L((gX)^*[ModuleCat.{u + 1} Λ])).obj
-        ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
+        ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ⟶
       (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq K ≪≫
-    (twistShift Λ X d).mapIso ((L((f)^*[ModuleCat.{u + 1} Λ])).mapIso φ)
+  (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq K).hom ≫
+    (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ)
 
 /-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
 
 The datum `φ^!_{f,K}` induced on the exceptional inverse image `Rf^! K` by a strict Weil datum
-`φ_K : Lg_Y^* K ≅ K`, for a cartesian square `g_X ≫ f = f ≫ g_Y`:
+`φ_K : Lg_Y^* K ≅ K` (more generally by any Weil datum `φ_K : Lg_Y^* K ⟶ K`), for a cartesian
+square `g_X ≫ f = f ≫ g_Y`:
 ```
                 Ex^{!,sm}_{f,g_Y,K}                 Rf^!(φ_K)
   Lg_X^* Rf^! K ───────────────────▶ Rf^! Lg_Y^* K ──────────▶ Rf^! K,
@@ -251,7 +253,7 @@ the smooth pullback exchange of `def-pur-smooth-pullback-exchange`
 `φ^!_{f,K}` only when these are the canonical identifications. -/
 noncomputable def upperShriekWeilDatum (sq : IsPullback gX f f gY)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
+    (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (φf : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
@@ -264,12 +266,11 @@ noncomputable def upperShriekWeilDatum (sq : IsPullback gX f f gY)
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
         ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     (L((gX)^*[ModuleCat.{u + 1} Λ])).obj
-        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) ≅
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) ⟶
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K :=
-  smoothPullbackExchange Λ f sq K θ φf θ φf' ≪≫
-    (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).mapIso φ
+  (smoothPullbackExchange Λ f sq K θ φf θ φf').hom ≫
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).map φ
 
-omit [IsSeparated f] [SmoothOfRelativeDimension d f] in
 /-- The datum `φ^!_{f,K}` corresponds to the datum `φ^pur_{f,K}` under the smooth purity
 isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` (`AlgebraicGeometry.Etale.smoothPurityIso`) built
 from `θ` and `φf`, provided the purity isomorphism of `Lg_Y^* K` built from `θ` and `φf'` is
@@ -277,7 +278,7 @@ compatible with `φ_K` (that is, `γ_{f,-}` is natural along `φ_K`): `γ_{f,K}`
 of Weil objects. -/
 theorem smoothPurityIso_hom_comp_upperShriekWeilDatum (sq : IsPullback gX f f gY)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
+    (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (φf : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
@@ -289,15 +290,15 @@ theorem smoothPurityIso_hom_comp_upperShriekWeilDatum (sq : IsPullback gX f f gY
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
         ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))
-    (hφ : (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ.hom) ≫
+    (hφ : (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ) ≫
         (smoothPurityIso Λ f K θ φf).hom =
-      (smoothPurityIso Λ f _ θ φf').hom ≫ (rightDerivedUpperShriek _ f).map φ.hom) :
+      (smoothPurityIso Λ f _ θ φf').hom ≫ (rightDerivedUpperShriek _ f).map φ) :
     (L((gX)^*[ModuleCat.{u + 1} Λ])).map (smoothPurityIso Λ f K θ φf).hom ≫
-        (upperShriekWeilDatum Λ f sq φ θ φf φf').hom =
-      (smoothPurityWeilDatum Λ d f sq.toCommSq φ).hom ≫ (smoothPurityIso Λ f K θ φf).hom := by
-  rw [upperShriekWeilDatum, Iso.trans_hom, reassoc_of%
+        upperShriekWeilDatum Λ f sq φ θ φf φf' =
+      smoothPurityWeilDatum Λ d f sq.toCommSq φ ≫ (smoothPurityIso Λ f K θ φf).hom := by
+  rw [upperShriekWeilDatum, reassoc_of%
     leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom Λ f sq K θ φf θ φf',
-    smoothPurityWeilDatum, Iso.trans_hom, Category.assoc, Functor.mapIso_hom]
+    smoothPurityWeilDatum, Category.assoc]
   exact congrArg (_ ≫ ·) hφ.symm
 
 end Purity

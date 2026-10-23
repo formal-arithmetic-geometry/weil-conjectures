@@ -43,6 +43,40 @@ noncomputable def DerivedCategory.Plus.connectingOfTriangle {C D : Type*} [Categ
   (DerivedCategory.Plus.homologyFunctor D 0).homologySequenceδ
     (F.mapTriangle.obj (Triangle.mk f g δ)) n₀ n₁ h
 
+namespace DerivedCategory.Plus.connectingOfTriangle
+
+/-! The exactness properties of `connectingOfTriangle` are proved for an arbitrary functor `F`.
+Instantiating them, rather than the lemmas on `homologySequenceδ`, at a concrete functor keeps
+the kernel from comparing the concrete connecting map with the expanded `homologySequenceδ`. -/
+
+variable {C D : Type*} [Category C] [Category D] [Abelian D] [HasDerivedCategory D]
+  {_ : HasShift C ℤ} [Preadditive C] [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] (F : C ⥤ DerivedCategory.Plus D) (iF : F.CommShift ℤ) [F.IsTriangulated]
+  {X₁ X₂ X₃ : C} {f : X₁ ⟶ X₂} {g : X₂ ⟶ X₃} {δ : X₃ ⟶ X₁⟦(1 : ℤ)⟧}
+  (hT : Triangle.mk f g δ ∈ distTriang C) (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁)
+
+include hT
+
+lemma comp_eq_zero :
+    (homologyFunctor D n₀).map (F.map g) ≫ connectingOfTriangle F iF f g δ n₀ n₁ h = 0 :=
+  (homologyFunctor D 0).comp_homologySequenceδ _ (F.map_distinguished _ hT) n₀ n₁ h
+
+lemma eq_zero_comp :
+    connectingOfTriangle F iF f g δ n₀ n₁ h ≫ (homologyFunctor D n₁).map (F.map f) = 0 :=
+  (homologyFunctor D 0).homologySequenceδ_comp _ (F.map_distinguished _ hT) n₀ n₁ h
+
+/-- Exactness at `Hⁿ⁰(F(X₃))`. -/
+lemma exact₃ :
+    (ShortComplex.mk _ _ (comp_eq_zero F iF hT n₀ n₁ h)).Exact :=
+  (homologyFunctor D 0).homologySequence_exact₃ _ (F.map_distinguished _ hT) n₀ n₁ h
+
+/-- Exactness at `Hⁿ¹(F(X₁))`. -/
+lemma exact₁ :
+    (ShortComplex.mk _ _ (eq_zero_comp F iF hT n₀ n₁ h)).Exact :=
+  (homologyFunctor D 0).homologySequence_exact₁ _ (F.map_distinguished _ hT) n₀ n₁ h
+
+end DerivedCategory.Plus.connectingOfTriangle
+
 namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
@@ -160,8 +194,8 @@ lemma exists_of_stalk_exact₃ (α : LimitStage B W) (n₀ n₁ : ℤ) (h : n₀
     (hy : ((B.uliftPointSmallEtale x).sheafFiber.map (connecting Λ δ α n₀ n₁ h)).hom y = 0) :
     ∃ z, ((stalkHomology Λ n₀ x).map ((functor Λ α).map
       ((DerivedCategory.Plus.singleFunctor _ 0).map E.g))).hom z = y :=
-  exists_of_exact_sheafFiber Λ ((DerivedCategory.Plus.homologyFunctor _ 0).homologySequence_exact₃
-    _ ((functor Λ α).map_distinguished _ hT) n₀ n₁ h) x y hy
+  exists_of_exact_sheafFiber Λ (DerivedCategory.Plus.connectingOfTriangle.exact₃ (functor Λ α)
+    (commShift_functor Λ α) hT n₀ n₁ h) x y hy
 
 variable {Λ} in
 include hT in
@@ -172,16 +206,16 @@ lemma exists_of_stalk_exact₁ (α : LimitStage B W) (n₀ n₁ : ℤ) (h : n₀
     (hy : ((stalkHomology Λ n₁ x).map ((functor Λ α).map
       ((DerivedCategory.Plus.singleFunctor _ 0).map E.f))).hom y = 0) :
     ∃ z, ((B.uliftPointSmallEtale x).sheafFiber.map (connecting Λ δ α n₀ n₁ h)).hom z = y :=
-  exists_of_exact_sheafFiber Λ ((DerivedCategory.Plus.homologyFunctor _ 0).homologySequence_exact₁
-    _ ((functor Λ α).map_distinguished _ hT) n₀ n₁ h) x y hy
+  exists_of_exact_sheafFiber Λ (DerivedCategory.Plus.connectingOfTriangle.exact₁ (functor Λ α)
+    (commShift_functor Λ α) hT n₀ n₁ h) x y hy
 
 variable {Λ} in
 include hT in
 lemma connecting_comp_eq_zero (α : LimitStage B W) (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) :
     (DerivedCategory.Plus.homologyFunctor _ n₀).map ((functor Λ α).map
       ((DerivedCategory.Plus.singleFunctor _ 0).map E.g)) ≫ connecting Λ δ α n₀ n₁ h = 0 :=
-  (DerivedCategory.Plus.homologyFunctor _ 0).comp_homologySequenceδ _
-    ((functor Λ α).map_distinguished _ hT) n₀ n₁ h
+  DerivedCategory.Plus.connectingOfTriangle.comp_eq_zero (functor Λ α) (commShift_functor Λ α) hT
+    n₀ n₁ h
 
 end LES
 

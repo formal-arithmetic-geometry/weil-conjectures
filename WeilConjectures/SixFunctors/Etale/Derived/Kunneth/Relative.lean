@@ -16,9 +16,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 
 /-!
 
@@ -69,6 +72,65 @@ namespace Etale
 
 variable {B X Y : Scheme.{u}}
 
+/-- The square
+```
+  X ×_B Z --f × 𝟙--> Y ×_B Z
+     |                  |
+    pr                 pr
+     v                  v
+     X -------f-------> Y
+```
+is cartesian. -/
+lemma isPullback_mapOverBaseRight_fst {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y) :
+    IsPullback (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) (pullback.fst b c)
+      f :=
+  .of_right (h₁₂ := pullback.snd b c) (h₂₂ := b) (v₁₃ := c)
+    (by simpa using (IsPullback.of_hasPullback (f ≫ b) c).flip)
+    (pullback.mapOverBaseRight_fst f b c) (IsPullback.of_hasPullback b c).flip
+
+/-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` of the ordinary Künneth formula
+with an identity factor (`sk-lem-sf-kunneth-star`, `lem-trf-ordinary-kunneth`), for
+`f : X ⟶ Y`, `b : Y ⟶ B`, `c : Z ⟶ B`, `M ∈ D(X_ét)` and `Q ∈ D(Z_ét)`.
+
+Writing `p_Y, p'_Z` for the projections of `Y ×_B Z` and `p_X, p_Z` for those of `X ×_B Z`,
+it is the composite
+
+`p_Y^* Rf_* M ⊗ᴸ p'_Z^* Q ≅ p'_Z^* Q ⊗ᴸ p_Y^* Rf_* M
+  ⟶ R(f × 𝟙)_* ((f × 𝟙)^* p'_Z^* Q ⊗ᴸ p_X^* M) ≅ R(f × 𝟙)_* (p_X^* M ⊗ᴸ p_Z^* Q)`
+
+of the braiding of `⊗ᴸ` (`AlgebraicGeometry.Etale.derivedTensorBraiding`),
+the base change map `AlgebraicGeometry.Etale.tensorBaseChangeMap` of `lem-kun-0f1n` for the
+cartesian square `AlgebraicGeometry.Etale.isPullback_mapOverBaseRight_fst`, and the
+composition isomorphism `(f × 𝟙)^* p'_Z^* ≅ p_Z^*` followed by the braiding again. -/
+noncomputable def externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
+    {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    externalProduct A b c ((R((f)_*[A])).obj M) Q ⟶
+      (R((pullback.mapOverBaseRight f b c)_*[A])).obj (externalProduct A (f ≫ b) c M Q) :=
+  ((derivedTensorBraiding A (pullback b c)).hom.app _).app _ ≫
+    tensorBaseChangeMap A (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c)
+      (pullback.fst b c) f (isPullback_mapOverBaseRight_fst b c f).w
+      ((L((pullback.snd b c)^*[A])).obj Q) M ≫
+    (R((pullback.mapOverBaseRight f b c)_*[A])).map
+      (((derivedTensor A (pullback (f ≫ b) c)).map
+          ((leftDerivedUpperStarComp A (pullback.mapOverBaseRight f b c) (pullback.snd b c)
+            (pullback.snd (f ≫ b) c) (by simp)).inv.app Q)).app _ ≫
+        ((derivedTensorBraiding A (pullback (f ≫ b) c)).hom.app _).app _)
+
+/-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` is an isomorphism as soon as the
+base change map of `lem-kun-0f1n` it is built from is one. -/
+lemma isIso_externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
+    {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    [IsIso (tensorBaseChangeMap A (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c)
+      (pullback.fst b c) f (isPullback_mapOverBaseRight_fst b c f).w
+      ((L((pullback.snd b c)^*[A])).obj Q) M)] :
+    IsIso (externalProductRightDerivedLowerStarMap A b c f M Q) := by
+  rw [externalProductRightDerivedLowerStarMap]
+  infer_instance
+
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
@@ -108,38 +170,43 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
-    (hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
+    (_hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+    (_hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
         ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
       (R((pullback.mapOverBaseRight f b c)_*[ModuleCat.{u + 1} Λ])).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) :=
-  sorry
+        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) := by
+  have := isIso_tensorBaseChangeMap Λ c b (f ≫ b) (pullback.snd b c) (pullback.fst b c)
+    (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) f rfl
+    (IsPullback.of_hasPullback b c).flip (isPullback_mapOverBaseRight_fst b c f) Q M
+  have := isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q
+  exact ⟨asIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q)⟩
 
-/-- Blueprint `sk-thm-sf-kunneth-relative`: Relative product theorem.
+/-- Blueprint `lem-trf-ordinary-kunneth`: Ordinary Kunneth for a general morphism.
 
-Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type over a base scheme `B`, and let
-`K` be in `Dctf(X, A)` and `M` in `Dctf(Y, A)`. Writing `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M` for the
-external product over `B` and `f ×_B g : X ×_B Y ⟶ B` for the structure morphism
-`CategoryTheory.Limits.pullback.toBase` of the fibre product, the canonical map
-
-`R(f ×_B g)_! (K ⊠ M) ⟶ Rf_! K ⊗ᴸ Rg_! M`
-
-in `D(B_ét)` is an isomorphism. The coefficients are torsion, finitely generated objects of `A`
-being finite (`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`): with coefficients
-`ℤ` the statement fails, proper base change failing for a regular proper curve over a strictly
-henselian discrete valuation ring with nodal special fibre. -/
-theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : Y ⟶ B)
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
-    [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
-    [HasCompactification (pullback.toBase f g)]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X K)
-    (hM : DerivedCategory.constructibleFiniteTor A Y M) :
-    Nonempty ((R(pullback.toBase f g)_![A]).obj (externalProduct A f g K M) ≅
-      (R(f)_![A]).obj K ⊗ (R(g)_![A]).obj M) :=
-  sorry
+The detailed form of `sk-lem-sf-kunneth-star`, at a finite coefficient ring `A` whose exponent
+is invertible in `k` (such as `A_{E,n}`): for a morphism `f : X ⟶ Y` of separated finite-type
+`k`-schemes, an auxiliary separated finite-type `k`-scheme `Z`, `L ∈ Dctf(X, A)` and
+`Q ∈ Dctf(Z, A)`, the canonical comparison `Rf_* L ⊠ Q ⟶ R(f × id_Z)_* (L ⊠ Q)`
+(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarMap`) is an isomorphism. It is the
+composite of the base-change map along `Y ×_k Z ⟶ Y`, an isomorphism by `lem-kun-0f1n`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`), and of the projection map of
+`R(f × id_Z)_*`. -/
+theorem isIso_externalProductRightDerivedLowerStarMap_of_finite (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Z : Scheme.{u}}
+    (b : Y ⟶ Spec (.of k)) (c : Z ⟶ Spec (.of k)) (f : X ⟶ Y)
+    [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
+    [IsSeparated c] [LocallyOfFiniteType c] [QuasiCompact c]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L)
+    (_hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
+    IsIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q) := by
+  have := isIso_tensorBaseChangeMap Λ c b (f ≫ b) (pullback.snd b c) (pullback.fst b c)
+    (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) f rfl
+    (IsPullback.of_hasPullback b c).flip (isPullback_mapOverBaseRight_fst b c f) Q L
+  exact isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q
 
 omit [HasSmallSiteSheafify A] in
 /-- The assembly step of the ordinary Künneth formula with an identity factor for a morphism
@@ -256,6 +323,37 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite (Λ : Typ
     ((asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)).app K)
     (hasProjectionFormula_of_finite Λ _ _ _)
 
+/-- Blueprint `sk-thm-sf-kunneth-relative`: Relative product theorem.
+
+Let `Λ` be a finite coefficient ring (for instance the finite stage `A_{E,n}`), let
+`f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type over a base scheme `B`, and let `K` be
+in `Dctf(X, Λ)` and `M` in `Dctf(Y, Λ)`. Writing `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M` for the external
+product over `B` and `f ×_B g : X ×_B Y ⟶ B` for the structure morphism
+`CategoryTheory.Limits.pullback.toBase` of the fibre product, there is an isomorphism
+
+`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`
+
+in `D(B_ét)`. The canonical isomorphism, an explicit composite of the composition law, the
+projection formula, compact-support base change and the symmetry of `⊗ᴸ`, is
+`AlgebraicGeometry.Etale.relativeKunnethIso`. The coefficients are torsion: with coefficients
+`ℤ` the statement fails, proper base change failing for a regular proper curve over a strictly
+henselian discrete valuation ring with nodal special fibre. The `Dctf` hypotheses are those of
+the blueprint; for a finite coefficient ring the isomorphism exists for all `K` and `M`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite`). -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] (f : X ⟶ B) (g : Y ⟶ B)
+    [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
+    [HasCompactification (pullback.toBase f g)]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (_hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (_hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y M) :
+    Nonempty ((R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) f g K M) ≅
+      ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
+        ((R(g)_![ModuleCat.{u + 1} Λ]).obj M)) :=
+  ⟨relativeKunnethIso Λ f g K M⟩
+
 omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`
 over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
@@ -328,22 +426,27 @@ The hypotheses are on `i_* i^* K` and `j_* j^* L` rather than on `K` and `L`: th
 (`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`), which in the blueprint's
 setting turns `K, L ∈ Dctf` into these hypotheses. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A] [UpperStarPreservesFlat A]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
     [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)))
-    (hL : DerivedCategory.constructibleFiniteTor A Y ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :
-    Nonempty ((R(f)_![A]).obj ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) ⊗
-        (R(g)_![A]).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)) ≅
-      (R(pullback.toBase f g)_![A]).obj
-        ((R((pullback.mapOverBase i j f g)_*[A])).obj
-          ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)))) := by
-  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion A f g i j K L
-  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A f g hK hL
-  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![A]).mapIso e.symm⟩
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)))
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y
+      ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L))) :
+    Nonempty (((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj
+          ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)))).obj
+        ((R(g)_![ModuleCat.{u + 1} Λ]).obj
+          ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L))) ≅
+      (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
+        ((R((pullback.mapOverBase i j f g)_*[ModuleCat.{u + 1} Λ])).obj
+          ((L((pullback.mapOverBase i j f g)^*[ModuleCat.{u + 1} Λ])).obj
+            (externalProduct (ModuleCat.{u + 1} Λ) f g K L)))) := by
+  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion (ModuleCat.{u + 1} Λ) f g i j K L
+  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ f g hK hL
+  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
@@ -363,25 +466,30 @@ It is the relative product theorem
 over `B = Spec k` would also need `R(i ≫ f)_! ≅ Rf_! Ri_*`, the composition of compactly
 supported direct images. -/
 theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A] [UpperStarPreservesFlat A]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))
     [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
     [HasCompactification (i ≫ f)] [HasCompactification (j ≫ g)]
     [HasCompactification (pullback.toBase (i ≫ f) (j ≫ g))]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X K)
-    (hL : DerivedCategory.constructibleFiniteTor A Y L) :
-    Nonempty ((R(i ≫ f)_![A]).obj ((L((i)^*[A])).obj K) ⊗
-        (R(j ≫ g)_![A]).obj ((L((j)^*[A])).obj L) ≅
-      (R(pullback.toBase (i ≫ f) (j ≫ g))_![A]).obj
-        ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L))) := by
-  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct A f g i j K L
-  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A (i ≫ f) (j ≫ g)
-    (constructibleFiniteTor_leftDerivedUpperStar A i hK)
-    (constructibleFiniteTor_leftDerivedUpperStar A j hL)
-  exact ⟨k.symm ≪≫ (R(pullback.toBase (i ≫ f) (j ≫ g))_![A]).mapIso e.symm⟩
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    Nonempty (((-⊗ᴸ-(Spec (.of k))[ModuleCat.{u + 1} Λ]).obj
+          ((R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
+        ((R(j ≫ g)_![ModuleCat.{u + 1} Λ]).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
+      (R(pullback.toBase (i ≫ f) (j ≫ g))_![ModuleCat.{u + 1} Λ]).obj
+        ((L((pullback.mapOverBase i j f g)^*[ModuleCat.{u + 1} Λ])).obj
+          (externalProduct (ModuleCat.{u + 1} Λ) f g K L))) := by
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct (ModuleCat.{u + 1} Λ) f g i j
+    K L
+  have : QuasiCompact (i ≫ f) := inferInstance
+  have : QuasiCompact (j ≫ g) := inferInstance
+  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ (i ≫ f) (j ≫ g)
+    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) i hK)
+    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) j hL)
+  exact ⟨k.symm ≪≫ (R(pullback.toBase (i ≫ f) (j ≫ g))_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
 
 end Etale
 
