@@ -407,15 +407,15 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     · have := hD (σ.symm k)
       have := hC (σ.symm k)
       exact (homologyConcentratedIn_of_iso _ ((hres (σ.symm k)).some.app L).symm
-        (h k).2).mono (by lia) (by lia)
+        (h k).2).mono (by omega) (by omega)
   · refine constructibleTorAmplitudeIn_of_openCover Λ Uc hUc _ fun k ↦ ?_
     obtain ⟨⟨hbc, hconc⟩, hta⟩ := constructibleTorAmplitudeIn_of_iso _
       ((hres (σ.symm k)).some.app K).symm ((hchart (σ.symm k)).2 (hjt (σ.symm k)) a b K hK)
     have := hD (σ.symm k)
     have := hC (σ.symm k)
-    have h₁ : a - 2 * (D : ℤ) ≤ a - 2 * (n (σ.symm k) : ℤ) := by lia
+    have h₁ : a - 2 * (D : ℤ) ≤ a - 2 * (n (σ.symm k) : ℤ) := by omega
     have h₂ : b - 2 * (n (σ.symm k) : ℤ) + (e (σ.symm k) : ℤ) + 1 ≤ b - 2 * (D : ℤ) + C := by
-      lia
+      omega
     exact ⟨⟨hbc, hconc.mono h₁ h₂⟩, hta.mono h₁ h₂⟩
 
 end Charts
