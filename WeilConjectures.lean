@@ -1827,7 +1827,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModul
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionBase
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechSectionsBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FibreDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
@@ -4135,6 +4137,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Affine
 public import WeilConjectures.AlgebraicGeometry.Hilbert.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.Hilbert.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
+public import WeilConjectures.AlgebraicGeometry.Hilbert.CurvePower
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.HomComplexOverEquivProjections
@@ -4751,6 +4754,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FpqcFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexExact
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexLocal
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexOfMatrix
@@ -7661,6 +7665,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationLift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AcyclicResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdicTowerSequence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
