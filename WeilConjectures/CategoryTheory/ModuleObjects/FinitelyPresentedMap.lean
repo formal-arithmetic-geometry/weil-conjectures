@@ -6,13 +6,14 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 
 /-!
 # Finitely presented module objects under right exact functors
 
-A functor `F : Mod_R ⥤ Mod_S` between categories of module objects which is additive, right exact
-and sends the free module `R` to the free module `S` preserves finitely presented module objects
+Finitely presented module objects are stable under isomorphism
+(`CategoryTheory.Mod.IsFinitelyPresented.of_iso`). A functor `F : Mod_R ⥤ Mod_S` between
+categories of module objects which is additive, right exact and sends the free module `R` to the
+free module `S` preserves finitely presented module objects
 (`CategoryTheory.Mod.IsFinitelyPresented.map`). Restriction of scalars along an isomorphism of
 algebra objects reflects them (`CategoryTheory.Mod.IsFinitelyPresented.of_comap`).
 -/
@@ -24,6 +25,19 @@ universe v₁ v₂ u₁ u₂
 open CategoryTheory MonoidalCategory MonObj Limits
 
 namespace CategoryTheory.Mod
+
+section Iso
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
+  {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
+
+/-- Being finitely presented is invariant under isomorphism of module objects. -/
+lemma IsFinitelyPresented.of_iso {M N : Mod C R} (e : M ≅ N) (h : IsFinitelyPresented R M) :
+    IsFinitelyPresented R N := by
+  obtain ⟨n, m, f, ⟨e'⟩⟩ := h
+  exact ⟨n, m, f, ⟨e.symm ≪≫ e'⟩⟩
+
+end Iso
 
 section Map
 
