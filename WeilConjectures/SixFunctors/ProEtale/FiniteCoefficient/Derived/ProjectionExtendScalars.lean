@@ -129,6 +129,10 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
+-- `𝐌` is elaborated with the ring structure `CommRing.toRing` of `Shrink 𝒪_E`, as in
+-- `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
+attribute [-instance] Shrink.instRing
+
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stages `𝒪_{E'}`
 for scalar extensions.
 

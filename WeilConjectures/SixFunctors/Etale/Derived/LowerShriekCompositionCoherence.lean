@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompCoherenceStatement
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 
 /-!
@@ -50,6 +52,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
+omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
 The projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity of
@@ -101,7 +104,7 @@ theorem exists_rightDerivedLowerShriekCompIso :
         Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
           (rightDerivedLowerShriekBaseChangeMap Λ sqg) (rightDerivedLowerShriekBaseChangeMap Λ sqh)
           (E f g h w) (E f' g' h' w')) :=
-  sorry
+  rightDerivedLowerShriekCompCoherence Λ
 
 end Etale
 

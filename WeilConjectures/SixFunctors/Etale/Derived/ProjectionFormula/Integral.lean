@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.TorsionReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-!
@@ -31,6 +32,8 @@ blueprint:
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible`:
+  the reductions of the projection map modulo `𝔪_Eⁿ` are isomorphisms.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`: the
   reconstruction step — the projection formula holds at `K` and `L` as soon as both sides of the
   projection map are derived complete and its reduction modulo `𝔪_E` is an isomorphism.
@@ -38,6 +41,40 @@ blueprint:
   (`sk-thm-sf-pf-adic`, `thm-sf-pf-adic`): the projection formula at the integral stage.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral_of_isProper`: the same
   for proper `f`, deduced from the reconstruction step.
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral_of_derivedComplete`:
+  the projection formula at the integral stage, for any `f`, when both sides of the projection map
+  are derived complete.
+
+## Implementation notes: derived completeness of the two sides
+
+In the blueprint the coefficients live on the pro-étale site, where derived completeness of the
+two sides of `PF_{f, K, L}` is automatic for integral constructible `K` and `L` (Step 3 of the
+blueprint proof). Here the integral stage is modelled by derived complete objects of
+`D(X_ét, 𝒪_E)`, with `𝒪_E` discrete, on the small étale site, and there it fails: neither
+`Rf_! K ⊗ᴸ L` nor `K ⊗ᴸ Lf^* L` (nor `Rf_!(K ⊗ᴸ Lf^* L)`) needs to be derived complete for
+bounded constructible, derived complete `K`, `L` of finite Tor amplitude. Counterexample: let `k`
+be an algebraically closed field of characteristic `0`, let `R` be the integral closure of
+`k[t]_(t)` in an algebraic closure `Ω` of `k(t)` and `X = Spec R`. All local rings of `R` are
+strictly henselian (`Ω` and the valuation rings of `Ω` extending the `t`-adic valuation), so every
+étale map to `X` is a local isomorphism and étale cohomology on `X` is Zariski cohomology; every
+open of `X` is irreducible, so `RΓ(U, 𝒪_E) = 𝒪_E` for every open `U` and the constant complex
+`𝒪_{E,X}` is derived complete (and bounded constructible, of Tor amplitude `[0, 0]`). The closed
+subset `C = V(t) ⊂ X` is the infinite profinite set of extensions of the `t`-adic valuation to `Ω`.
+Let `Y = 𝔸¹_X`, `f : X ⟶ Y` the graph of `t` (a closed immersion), `i : X ⟶ Y` the zero section,
+`K = 𝒪_{E,X}` and `L = i_* 𝒪_{E,X}` (derived complete as `i_*` preserves derived completeness,
+bounded constructible for the stratification `V(x) ⊔ D(x)`, Tor amplitude `[0, 0]`). Then
+`Rf_! K ⊗ᴸ L ≅ Rf_!(K ⊗ᴸ Lf^* L)` and `K ⊗ᴸ Lf^* L ≅ (C ⟶ X)_* 𝒪_{E,C}` have global sections
+the locally constant functions `C → 𝒪_E`, a torsion-free module which is not `ϖ`-adically
+complete since `C` is infinite, hence not derived complete. So derived completeness of the two
+sides is a hypothesis of
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral_of_derivedComplete`;
+it holds in the intended pro-étale setting.
+
+Note that `X = Spec R` above is not of finite type over `k`: the counterexample bears on
+`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek` and
+`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar` as stated
+(without finiteness assumptions on `X` and `Y`), not on finite-type `k`-schemes, the setting of
+the blueprint.
 -/
 
 @[expose] public section
@@ -64,6 +101,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
 
 variable {X Y : Scheme.{u}}
 
+-- `𝐌` is elaborated with the ring structure `CommRing.toRing` of `Shrink 𝒪_E`, as in the
+-- lemmas over a general commutative ring `Λ` used here: comparing it with `Shrink.instRing` in
+-- the kernel is very expensive.
+attribute [-instance] Shrink.instRing
+
 /-- **The reconstruction step of the projection formula at the integral stage.** If both sides
 `Rf_! K ⊗ᴸ L` and `Rf_!(K ⊗ᴸ Lf^* L)` of the projection map are derived complete for `𝔪_E`, and
 the reduction of the projection map modulo `𝔪_E` is an isomorphism, then the projection formula
@@ -87,6 +129,56 @@ theorem hasProjectionFormula_of_isIso_reductionModIdeal_map (f : X ⟶ Y) [HasCo
   change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at hs ht
   rw [hI] at hs ht hρ
   exact isIso_of_derivedComplete_of_isIso_reductionModIdeal hϖ _ hs ht hρ
+
+/-- `𝒪_E`, transported to `Shrink 𝒪_E`, is a domain. -/
+local instance : IsDomain (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+  (PadicAlgCl.shrinkRingEquiv.{w, u} l E).symm.toMulEquiv.isDomain _
+
+/-- `𝒪_E`, transported to `Shrink 𝒪_E`, is a principal ideal ring. -/
+local instance : IsPrincipalIdealRing (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+  IsPrincipalIdealRing.of_surjective (PadicAlgCl.shrinkRingEquiv.{w, u} l E).toRingHom
+    (PadicAlgCl.shrinkRingEquiv.{w, u} l E).surjective
+
+/-- Some nonzero integer (a power of the residue characteristic) lies in `𝔪_Eⁿ`. -/
+lemma exists_natCast_mem_maximalIdealShrink_pow (n : ℕ) :
+    ∃ N : ℕ, N ≠ 0 ∧
+      (N : Shrink.{u + 1} (PadicAlgCl.integers l E)) ∈ PadicAlgCl.maximalIdealShrink l E ^ n := by
+  let k := IsLocalRing.ResidueField (PadicAlgCl.integers l E)
+  have hp : ringChar k ≠ 0 := CharP.char_ne_zero_of_finite k (ringChar k)
+  have hmem : ((ringChar k : ℕ) : PadicAlgCl.integers l E) ∈
+      IsLocalRing.maximalIdeal (PadicAlgCl.integers l E) := by
+    rw [← IsLocalRing.residue_eq_zero_iff, map_natCast]
+    exact ringChar.Nat.cast_ringChar
+  refine ⟨ringChar k ^ n, pow_ne_zero n hp, ?_⟩
+  rw [Nat.cast_pow]
+  refine Ideal.pow_mem_pow ?_ n
+  have := Ideal.mem_map_of_mem (PadicAlgCl.shrinkRingEquiv.{w, u} l E) hmem
+  rwa [map_natCast] at this
+
+/-- Blueprint `thm-sf-pf-field`: the compatibility with finite reduction, and Steps 1 and 2 of
+`sk-thm-sf-pf-adic`.
+
+If `K` is bounded of finite Tor amplitude and `L` is bounded constructible over `𝒪_E`, the
+reduction `ρ_n(PF_{f, K, L}) = PF_{f, K, L} ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y` of the projection map is an
+isomorphism for every `n`. As in the blueprint, `ρ_n(PF_{f, K, L})` is a finite-level projection
+map (`sk-prop-sf-pf-reduction`), which is an isomorphism by the argument of the finite projection
+formula (`sk-thm-sf-pf-finite`): see
+`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_nsmul`. Derived
+completeness is not needed. -/
+theorem isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible
+    (f : X ⟶ Y) [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
+    (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
+    (hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
+    (hLc : DerivedCategory.boundedConstructible 𝐌 Y L) (n : ℕ) :
+    IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
+      (((projectionMap 𝐌 f).app K).app L)) := by
+  obtain ⟨ϖ, hϖ, hI⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  obtain ⟨N, hN, hNJ⟩ := exists_natCast_mem_maximalIdealShrink_pow l E n
+  exact isIso_reductionModIdeal_map_projectionMap_of_eq_span_pow hϖ n (by rw [hI]) hN hNJ f K L
+    hKc.1 hKt hLc
 
 /-- Step 3 of blueprint `sk-thm-sf-pf-adic`: the source of the projection map is derived complete.
 
@@ -153,8 +245,10 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f 
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E)).map
-      (((projectionMap 𝐌 f).app K).app L)) :=
-  sorry
+      (((projectionMap 𝐌 f).app K).app L)) := by
+  have := isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible l E f K L hKc hKt
+    hLc 1
+  rwa [pow_one] at this
 
 /-- The projection formula at the integral stage (blueprint `sk-thm-sf-pf-adic`) for a proper
 morphism `f`: if `K` and `L` are bounded constructible, derived complete for the maximal ideal
@@ -217,6 +311,76 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
   -- `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek` is only available
   -- for proper `f`; the general case needs the derived-complete `Rf_!` of the blueprint.
   sorry
+
+/-- The projection formula at the integral stage (blueprint `sk-thm-sf-pf-adic`,
+`thm-sf-pf-adic`) under the assumption that both sides of the projection map are derived complete.
+
+At the integral stage of the `ℓ`-adic formalism, where the coefficients are the ring of
+integers `𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`: if `K` and `L` are bounded
+constructible, derived complete for the maximal ideal `𝔪_E` and of finite Tor amplitude, and
+both sides `Rf_! K ⊗ᴸ L` and `Rf_!(K ⊗ᴸ Lf^* L)` of the projection map are derived complete,
+then the projection formula holds for `f` at `K` and `L`.
+
+The proof follows the blueprint: the reduction of the projection map modulo `𝔪_E` is an
+isomorphism
+(`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral`),
+and the reduction is conservative on derived complete objects
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`).
+
+The derived completeness `hs`, `ht` of the two sides is automatic in the pro-étale setting of the
+blueprint (the "uniform-tower reconstruction" of `thm-sf-pf-adic`), but not on the small étale
+site with discrete coefficients `𝒪_E`: see the implementation notes of this file for a
+counterexample, with `K` and `L` bounded constructible, derived complete and of Tor amplitude
+`[0, 0]`, where neither side is derived complete. -/
+theorem hasProjectionFormula_of_derivedCompleteIntegral_of_derivedComplete (f : X ⟶ Y)
+    [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
+    (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
+    (hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
+    (hLc : DerivedCategory.boundedConstructible 𝐌 Y L)
+    (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
+    (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((derivedTensor 𝐌 Y).obj ((R(f)_![𝐌]).obj K)).obj L))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      ((R(f)_![𝐌]).obj (((derivedTensor 𝐌 X).obj K).obj ((L((f)^*[𝐌])).obj L)))) :
+    HasProjectionFormula 𝐌 f K L :=
+  hasProjectionFormula_of_isIso_reductionModIdeal_map l E f K L hs ht
+    (isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral l E f K L
+      hKc hK hKt hLc hL hLt)
+
+/-- Blueprint `det-thm-sf-pf-adic-projection`, part (1): the integral proper projection formula.
+
+Let `f : X ⟶ Y` be proper and let `K`, `L` be bounded constructible, derived complete for `𝔪_E`
+and of finite Tor amplitude, such that `Rf_! K ⊗ᴸ L` and `K ⊗ᴸ Lf^* L` are derived complete. Then
+the projection map `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. For proper `f`, the
+derived completeness of the target follows from that of `K ⊗ᴸ Lf^* L`, `Rf_! ≅ Rf_*` preserving
+derived completeness (`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek`).
+As in the blueprint, the reduction of the projection map modulo `𝔪_E` is the torsion projection
+formula, and derived Nakayama concludes. The derived completeness of the two tensor products is
+automatic in the pro-étale setting of the blueprint but not on the small étale site (see the
+implementation notes of this file). The extension to the localizing categories
+`Loc(Dᵇc(-, 𝒪_E))` (part (2) of the blueprint node) is not formalised. -/
+theorem hasProjectionFormula_of_isProper_of_derivedCompleteIntegral (f : X ⟶ Y)
+    [HasCompactification f] [IsProper f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
+    (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
+    (hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
+    (hLc : DerivedCategory.boundedConstructible 𝐌 Y L)
+    (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
+    (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((derivedTensor 𝐌 Y).obj ((R(f)_![𝐌]).obj K)).obj L))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
+      (((derivedTensor 𝐌 X).obj K).obj ((L((f)^*[𝐌])).obj L))) :
+    HasProjectionFormula 𝐌 f K L :=
+  hasProjectionFormula_of_derivedCompleteIntegral_of_derivedComplete l E f K L hKc hK hKt hLc hL hLt
+    hs
+    (derivedCompleteIntegral_rightDerivedLowerShriek l E f _ ht)
 
 end Etale
 

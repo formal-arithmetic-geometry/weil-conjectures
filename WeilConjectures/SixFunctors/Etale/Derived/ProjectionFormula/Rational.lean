@@ -67,6 +67,10 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
 
 variable {X Y : Scheme.{u}}
 
+-- `𝐌` is elaborated with the ring structure `CommRing.toRing` of `Shrink 𝒪_E`, as in
+-- `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
+attribute [-instance] Shrink.instRing
+
 /-- Blueprint `thm-sf-pf-field`: Rational and algebraically closed stages; the rational stage.
 
 Let `K` and `L` be bounded constructible, derived complete for `𝔪_E` and of finite Tor amplitude
@@ -107,9 +111,10 @@ with finite reduction.
 
 For `K` and `L` bounded constructible, derived complete for `𝔪_E` and of finite Tor amplitude
 over `𝒪_E`, the reduction modulo `𝔪_Eⁿ` of the integral projection map `PF_{f, K, L}`, the
-representative of the projection map over `E`, is an isomorphism for every `n`: the integral
-projection map is an isomorphism (`sk-thm-sf-pf-adic`) and the reduction
-`- ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y` is a functor. -/
+representative of the projection map over `E`, is an isomorphism for every `n`: it is a
+finite-level projection map, invertible by the argument of the finite projection formula
+(`AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible`,
+which needs neither derived completeness nor the Tor amplitude of `L`). -/
 theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
@@ -121,8 +126,7 @@ theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompacti
     (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) (n : ℕ) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
       (((projectionMap 𝐌 f).app K).app L)) :=
-  @Functor.map_isIso _ _ _ _ _ _ _ _
-    (hasProjectionFormula_of_derivedCompleteIntegral l E f K L hKc hK hKt hLc hL hLt)
+  isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible l E f K L hKc hKt hLc n
 
 /-- Blueprint `sk-thm-sf-pf-field`: Projection formula: rational and algebraically closed
 stages.

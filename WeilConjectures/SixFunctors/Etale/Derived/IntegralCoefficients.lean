@@ -11,6 +11,10 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
+public import WeilConjectures.SixFunctors.Etale.Derived.FiniteExceptional
+public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers
@@ -58,6 +62,12 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
+
+-- Elaborate the ring structure of the quotients `Λ ⧸ Iⁿ` through their commutative ring
+-- structure, as in the general results about `[CommRing Λ']` applied to them: the kernel compares
+-- `Ideal.Quotient.instRingQuotient` with `CommRing.toRing Ideal.Quotient.commRing` inside derived
+-- categories only very slowly.
+attribute [local instance 2000] CommRing.toRing
 
 set_option hygiene false in
 /-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
@@ -204,8 +214,21 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
     Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
       (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
-        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) :=
-  sorry
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) := by
+  subst hI
+  have hφ : Function.Surjective (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) :=
+    Ideal.Quotient.mk_surjective
+  have ha : RingHom.ker (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) = Ideal.span {ϖ ^ n} := by
+    rw [Ideal.mk_ker, Ideal.span_singleton_pow]
+  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K L
+  obtain ⟨e₂⟩ := nonempty_iso_derivedHom_derivedTensor_of_isDerivedBaseChange
+    (Λ' := Λ ⧸ Ideal.span {ϖ} ^ n) hφ ha X hη hη'
+  let q := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
+    (Ideal.quotientEquivAlgOfEq Λ
+      (Ideal.mk_ker (I := Ideal.span {ϖ} ^ n))).toLinearEquiv.toModuleIso
+  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
+    (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).mapIso
+      ((_root_.DerivedCategory.singleFunctor _ 0).mapIso q)).symm ≪≫ e₂⟩
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.
@@ -255,6 +278,75 @@ theorem exists_iso_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
   have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
   exact (hL.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
 
+/-- An element of `J` kills the reduction `K ⊗ᴸ (Λ ⧸ J)_X`. -/
+lemma smul_id_reductionModIdeal_obj_eq_zero {X : Scheme.{u}} {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
+    (K : 𝐃(X, Λ)) :
+    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
+  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
+    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
+      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
+    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
+      Ideal.Quotient.eq_zero_iff_mem]
+    exact J.mul_mem_right _ hr
+  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
+    ← (_root_.DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
+    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
+    Functor.map_zero, Functor.map_zero, Functor.map_zero]
+
+/-- The short complex `Λ ⧸ (ϖ) ⟶ Λ ⧸ (ϖ)ᵐ⁺¹ ⟶ Λ ⧸ (ϖ)ᵐ`: multiplication by `ϖᵐ`, then the
+projection. -/
+noncomputable def quotSpanPowSuccShortComplex (ϖ : Λ) (m : ℕ) :
+    ShortComplex (ModuleCat.{u + 1} Λ) :=
+  ShortComplex.mk
+    (ModuleCat.ofHom ((Ideal.span {ϖ} ^ 1).liftQ
+      ((Ideal.span {ϖ} ^ (m + 1)).mkQ ∘ₗ (ϖ ^ m • LinearMap.id)) (by
+        intro x hx
+        rw [Ideal.span_singleton_pow] at hx
+        obtain ⟨y, rfl⟩ := Ideal.mem_span_singleton'.1 hx
+        rw [LinearMap.mem_ker, LinearMap.comp_apply, LinearMap.smul_apply, LinearMap.id_apply,
+          Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero, Ideal.span_singleton_pow,
+          Ideal.mem_span_singleton']
+        exact ⟨y, by rw [smul_eq_mul, pow_one, pow_succ]; ring⟩)))
+    (ModuleCat.ofHom (Submodule.factor (Ideal.pow_le_pow_right (Nat.le_succ m))))
+    (by
+      refine ModuleCat.hom_ext (Submodule.linearMap_qext _ (LinearMap.ext fun y ↦ ?_))
+      refine (Submodule.Quotient.mk_eq_zero _).2 ?_
+      change ϖ ^ m * y ∈ _
+      exact Ideal.mul_mem_right _ _ (Ideal.pow_mem_pow (Ideal.mem_span_singleton_self ϖ) m))
+
+lemma quotSpanPowSuccShortComplex_shortExact {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (m : ℕ) :
+    (quotSpanPowSuccShortComplex ϖ m).ShortExact := by
+  refine ModuleCat.shortComplex_shortExact _ ?_ ?_ ?_
+  · intro y
+    constructor
+    · intro hy
+      obtain ⟨z, rfl⟩ := Submodule.Quotient.mk_surjective _ y
+      have hz : z ∈ Ideal.span {ϖ} ^ m := (Submodule.Quotient.mk_eq_zero _).1 hy
+      rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton'] at hz
+      obtain ⟨w, rfl⟩ := hz
+      exact ⟨Submodule.Quotient.mk w, congrArg Submodule.Quotient.mk (by
+        change ϖ ^ m * w = w * ϖ ^ m
+        ring)⟩
+    · rintro ⟨x, rfl⟩
+      have := ConcreteCategory.congr_hom (quotSpanPowSuccShortComplex ϖ m).zero x
+      simp at this ⊢
+  · intro x y h
+    obtain ⟨w, rfl⟩ := Submodule.Quotient.mk_surjective _ x
+    obtain ⟨w', rfl⟩ := Submodule.Quotient.mk_surjective _ y
+    have h' : Submodule.Quotient.mk (p := Ideal.span {ϖ} ^ (m + 1)) (ϖ ^ m * w) =
+        Submodule.Quotient.mk (ϖ ^ m * w') := h
+    rw [Submodule.Quotient.eq, Ideal.span_singleton_pow, Ideal.mem_span_singleton'] at h'
+    obtain ⟨v, hv⟩ := h'
+    rw [Submodule.Quotient.eq, Ideal.span_singleton_pow, Ideal.mem_span_singleton']
+    refine ⟨v, sub_eq_zero.1 ((mem_nonZeroDivisors_iff.1 (pow_mem hϖ m)).1 _ ?_)⟩
+    linear_combination hv
+  · intro x
+    obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ x
+    exact ⟨Submodule.Quotient.mk y, rfl⟩
+
 section Constructible
 
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
@@ -297,6 +389,105 @@ theorem boundedConstructibleIntegral_derivedHom {X : Scheme.{u}} (aX : X ⟶ Spe
   ⟨⟨derivedComplete_derivedHom I hϖ hI hL.1, sorry⟩,
     fun n _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη', sorry⟩
 
+omit [IsDomain Λ] [Finite (Λ ⧸ I)] in
+include hϖ in
+/-- If the reduction modulo `(ϖ)` of `M` is bounded constructible of Tor amplitude in `[a, b]`,
+so are all its reductions modulo `(ϖ)ⁿ⁺¹`: the reductions sit in distinguished triangles
+`M ⊗ᴸ Λ ⧸ (ϖ) ⟶ M ⊗ᴸ Λ ⧸ (ϖ)ⁿ⁺² ⟶ M ⊗ᴸ Λ ⧸ (ϖ)ⁿ⁺¹ ⟶`. -/
+theorem boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_one
+    [Finite (Λ ⧸ Ideal.span {ϖ})] {X : Scheme.{u}} {a b : ℤ} {M : 𝐃(X, Λ)}
+    (h : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ 1)).obj M) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ 1)).obj M)) (n : ℕ) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj M) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj M) := by
+  induction n with
+  | zero => exact h
+  | succ n ih =>
+    let FM := (derivedTensor (ModuleCat.{u + 1} Λ) X).obj M
+    have hS := (quotSpanPowSuccShortComplex_shortExact hϖ (n + 1)).map_of_exact
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    have hT := FM.map_distinguished _ hS.singleTriangle_distinguished
+    have : Finite (Λ ⧸ Ideal.span {ϖ} ^ (n + 1 + 1)) :=
+      Ideal.finite_quotient_pow ⟨{ϖ}, by simp⟩ _
+    exact ⟨DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero
+        (J := Ideal.span {ϖ} ^ (n + 1 + 1)) hT h.1 ih.1
+        fun r hr ↦ smul_id_reductionModIdeal_obj_eq_zero hr M,
+      torAmplitudeIn_obj₂_of_distTriang hT h.2 ih.2⟩
+
+include hϖ hI in
+/-- Blueprint `det-sfb-coefficient-comparisons-exceptional`: Coefficient comparison for `f^!`,
+for the coefficient map `Λ ⟶ A_n = Λ ⧸ Iⁿ` from the integral stage to a finite stage.
+
+For `L ∈ Dᵇc(Y, Λ)` and a derived base change `L_n = L ⊗ᴸ_Λ A_n ∈ D(Y_ét, A_n)`, the exceptional
+inverse image commutes with the coefficient change:
+`(Rf^! L) ⊗ᴸ_Λ A_n ≅ Rf_n^! L_n`, read after restriction of scalars to `Λ`.
+
+This is a known weakening of the blueprint node: the blueprint asserts that the specific
+transposed comparison map `β_{f,K}` is an isomorphism, compatibly with composition and with
+restriction to opens; here only the existence of some isomorphism is stated. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y)
+    [QuasiCompact f] [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (n : ℕ) [(R(f)_![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.boundedConstructibleIntegral I Y L) {Ln : 𝐃(Y, Λ ⧸ I ^ n)}
+    {η : L ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) Y).obj Ln}
+    (hη : IsDerivedBaseChange η) :
+    Nonempty ((reductionModIdeal Λ X (I ^ n)).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) ≅
+      (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
+        ((R(f)^![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).obj Ln)) :=
+  sorry
+
+omit [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] in
+include hϖ in
+/-- The first finite stage of the integral exceptional inverse image: for `L ∈ Dᵇc(Y, Λ)` whose
+reduction modulo `(ϖ)` has Tor amplitude in `[a, b]` over `Λ`, its derived base change
+`L₁ = L ⊗ᴸ_Λ Λ ⧸ (ϖ)` is bounded constructible of Tor amplitude in `[a + 1, b]` over `Λ ⧸ (ϖ)`,
+and `(Rf^! L) ⊗ᴸ Λ ⧸ (ϖ) ≅ Res Rf_1^! L₁`. -/
+theorem exists_reductionModIdeal_one_rightDerivedUpperShriek [IsAdicComplete (Ideal.span {ϖ}) Λ]
+    [Finite (Λ ⧸ Ideal.span {ϖ})] [Finite (Λ ⧸ Ideal.span {ϖ} ^ 1)]
+    [HasInvertibleExponent (Λ ⧸ Ideal.span {ϖ}) (Spec (.of k))] {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y)
+    [QuasiCompact f] [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    {L : 𝐃(Y, Λ)} (hL : DerivedCategory.boundedConstructibleIntegral (Ideal.span {ϖ}) Y L)
+    {a b : ℤ} (hab : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+        ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ 1)).obj L) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+        ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ 1)).obj L)) :
+    ∃ L₁ : 𝐃(Y, Λ ⧸ Ideal.span {ϖ} ^ 1),
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ 1)) Y L₁ ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ 1)) Y (a + 1) b
+        L₁ ∧
+      Nonempty ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ 1)).obj
+          ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) ≅
+        (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) X).obj
+          ((R(f)^![ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ 1)]).obj L₁)) := by
+  have hk : RingHom.ker (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) = Ideal.span {ϖ ^ 1} := by
+    rw [Ideal.mk_ker, Ideal.span_singleton_pow]
+  have hsurj : Function.Surjective (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) :=
+    Ideal.Quotient.mk_surjective
+  have ha' : ϖ ^ 1 ∈ nonZeroDivisors Λ := pow_mem hϖ 1
+  let L₁ := (derivedExtendScalars hsurj hk Y).obj L
+  obtain ⟨s⟩ := nonempty_iso_reductionModIdeal_rightDerivedUpperShriek (Ideal.span {ϖ}) hϖ rfl
+    aY f 1 hL (isDerivedBaseChange_derivedExtendScalarsAdjunction_unit hsurj hk Y L)
+  obtain ⟨r⟩ := nonempty_iso_derivedRestrictScalars_derivedExtendScalars hsurj hk Y L
+  have hbc : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj L).obj
+        (quotientSingle (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) Y)) := by
+    rw [quotientSingle, Ideal.mk_ker]
+    exact hab.1
+  have ht : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+      (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj L).obj
+        (quotientSingle (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) Y)) := by
+    rw [quotientSingle, Ideal.mk_ker]
+    exact hab.2
+  exact ⟨L₁, (boundedConstructible_derivedRestrictScalars_iff _ L₁).1
+      ((DerivedCategory.boundedConstructible _ Y).prop_of_iso r.symm hbc),
+    torAmplitudeIn_derivedExtendScalars hsurj hk ha' ht, ⟨s⟩⟩
+
 include hϖ hI in
 /-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
 constructible complexes.
@@ -319,7 +510,8 @@ on `Y`. Then:
 3. `G_f L ≅ 𝔻_{X,Λ} f^*_comp 𝔻_{Y,Λ} L`, where the completed pullback `f^*_comp M` is the
    derived complete object `N` receiving a map from `Lf^* M` inducing isomorphisms on all
    reductions;
-4. if the reductions of `L` have Tor amplitude in `[a, b]`, those of `G_f L` have Tor amplitude
+4. if `k` is algebraically closed and the reductions of `L` have Tor amplitude in `[a, b]`,
+   those of `G_f L` have Tor amplitude
    in `[a - 2 dim X, b + 2 dim Y]`. -/
 theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -355,10 +547,71 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj c.pt) := by
   subst hI
   obtain ⟨e, he⟩ := exists_iso_rightDerivedUpperShriek _ f hL.1 hc
-  refine ⟨⟨sorry, fun n ↦ ?_⟩, ⟨e, he⟩, sorry, sorry⟩
-  have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
-  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
-  exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
+  -- `c.pt ≅ Rf^! L` is derived complete, `Rf^!` being right adjoint to the linear `Rf_!`
+  have hcpt : DerivedCategory.derivedComplete X.smallEtaleTopology (Ideal.span {ϖ}) c.pt := by
+    rw [DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ rfl]
+    intro Z g (hZ : IsIso (ϖ • 𝟙 Z))
+    let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+    have hZ' : DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ
+        ((R(f)_![ModuleCat.{u + 1} Λ]).obj Z) := by
+      change IsIso (ϖ • 𝟙 _)
+      rw [← (R(f)_![ModuleCat.{u + 1} Λ]).map_id, ← Functor.map_smul]
+      infer_instance
+    have hL' := (DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ rfl L).1 hL.1
+    have h₀ : g ≫ e.inv = 0 := by
+      rw [← (adj.homEquiv Z L).apply_symm_apply (g ≫ e.inv),
+        hL' ((adj.homEquiv Z L).symm (g ≫ e.inv)) hZ',
+        Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
+    rw [← Category.comp_id g, ← e.inv_hom_id, ← Category.assoc, h₀, zero_comp]
+  -- the first finite stage `Λ ⧸ (ϖ)`
+  have : Finite (Λ ⧸ Ideal.span {ϖ} ^ 1) := by rw [pow_one]; infer_instance
+  have : HasInvertibleExponent (Λ ⧸ Ideal.span {ϖ} ^ 1) (Spec (.of k)) := by
+    rw [pow_one]; infer_instance
+  have : HasInvertibleExponent (Λ ⧸ Ideal.span {ϖ} ^ 1) Y := .of_hom aY
+  have hk : RingHom.ker (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) = Ideal.span {ϖ ^ 1} := by
+    rw [Ideal.mk_ker, Ideal.span_singleton_pow]
+  have hsurj : Function.Surjective (Ideal.Quotient.mk (Ideal.span {ϖ} ^ 1)) :=
+    Ideal.Quotient.mk_surjective
+  have ha' : ϖ ^ 1 ∈ nonZeroDivisors Λ := pow_mem hϖ 1
+  obtain ⟨a, b, hab⟩ := hL.2
+  obtain ⟨L₁, hb₁, ht₁, ⟨s⟩⟩ := exists_reductionModIdeal_one_rightDerivedUpperShriek hϖ aY f hL
+    (hab 0)
+  obtain ⟨hNbc, a', b', hNt⟩ := constructibleFiniteTor_rightDerivedUpperShriek
+    (Λ ⧸ Ideal.span {ϖ} ^ 1) aY f ⟨hb₁, a + 1, b, ht₁⟩
+  have h₁ : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ 1)).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a' - 1) b'
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ 1)).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) :=
+    ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso s.symm
+      ((boundedConstructible_derivedRestrictScalars_iff _ _).2 hNbc),
+      (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso s.symm
+        (torAmplitudeIn_derivedRestrictScalars hsurj hk ha' hNt)⟩
+  have hall := boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_one hϖ h₁
+  refine ⟨⟨⟨hcpt, a' - 1, b', fun n ↦
+    ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso
+        ((reductionModIdeal Λ X _).mapIso e) (hall n).1,
+      (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso
+        ((reductionModIdeal Λ X _).mapIso e) (hall n).2⟩⟩, fun n ↦ ?_⟩, ⟨e, he⟩, sorry, ?_⟩
+  · have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
+    obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
+    exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
+  · intro dX dY hdX hdY a₀ b₀ hab₀ n
+    -- the Tor amplitude bound of the finite stages is available over algebraically closed `k`
+    by_cases hkc : IsAlgClosed k
+    swap
+    · sorry
+    subst hf
+    obtain ⟨L₁, hb₁, ht₁, ⟨s⟩⟩ := exists_reductionModIdeal_one_rightDerivedUpperShriek hϖ aY f hL
+      ⟨(hab 0).1, hab₀ 0⟩
+    have hE := constructibleFiniteTor_and_torAmplitudeIn_rightDerivedUpperShriek
+      (Λ ⧸ Ideal.span {ϖ} ^ 1) aY f dX dY hdX hdY (a₀ + 1) b₀ hb₁ ht₁
+    have ht := torAmplitudeIn_derivedRestrictScalars hsurj hk ha' hE.2
+    have heq : a₀ + 1 - 2 * (dX : ℤ) - 1 = a₀ - 2 * (dX : ℤ) := by ring
+    rw [heq] at ht
+    exact (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso
+      ((reductionModIdeal Λ X _).mapIso e)
+      (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_one hϖ
+        ⟨h₁.1, (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso s.symm ht⟩ n).2
 
 end Constructible
 
