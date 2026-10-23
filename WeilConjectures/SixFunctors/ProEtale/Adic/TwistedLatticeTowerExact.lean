@@ -256,7 +256,8 @@ noncomputable def integralCocycleTowerObjIso (k : ℕ) :
   (fullyFaithfulSheafToPresheaf _ _).preimageIso
     (NatIso.ofComponents (fun U ↦ LinearEquiv.toModuleIso
       (X₁ := ((integralCocycleTower γ).obj (op k)).obj.obj U)
-      (X₂ := ((Sheaf.restrictScalars Y.smallEtaleTopology (Ideal.Quotient.mk (towerIdeal.{u} l k))).obj
+      (X₂ := ((Sheaf.restrictScalars Y.smallEtaleTopology
+        (Ideal.Quotient.mk (towerIdeal.{u} l k))).obj
         (levelTwistedModuleSheaf f γ k)).obj.obj U)
       { toFun σ := ⟨σ.1, σ.2⟩
         invFun σ := ⟨σ.1, σ.2⟩

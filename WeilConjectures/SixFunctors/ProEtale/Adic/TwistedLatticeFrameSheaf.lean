@@ -28,6 +28,16 @@ open CategoryTheory Limits Opposite Matrix
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
+namespace CategoryTheory.Functor
+
+/-- The direct sum of copies of a functor, on morphisms, followed by a projection. -/
+lemma biproductPow_map_π {K D : Type*} [Category K] [Category D] [Preadditive D]
+    [HasFiniteBiproducts D] (F : K ⥤ D) (ι : Type*) [Finite ι] {k k' : K} (g : k ⟶ k')
+    (i : ι) : (F.biproductPow ι).map g ≫ biproduct.π _ i = biproduct.π _ i ≫ F.map g :=
+  biproduct.map_π (f := fun _ : ι ↦ F.obj k) (g := fun _ : ι ↦ F.obj k') (fun _ ↦ F.map g) i
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 open Scheme ProEtale
@@ -104,7 +114,8 @@ variable (hγ : IsIntegralCocycle f γ)
 
 /-- The twisted section `(v, u) ↦ γ(v, u) eᵢ x(u)` extending `x eᵢ`, for a function `x` on
 `U ⟶ V` with values in `ℤ/ℓᵏ`. -/
-noncomputable def frameExtSection (k : ℕ) (i : Fin N) (U : V.ProEt) (x : C(U.left, ZMod (l ^ k))) :
+noncomputable def frameExtSection (k : ℕ) (i : Fin N) (U : V.ProEt)
+    (x : C(U.left, ZMod (l ^ k))) :
     twistedSubmodule f (levelCocycleInt γ k) (U.hom ≫ f) :=
   ⟨frameExt f U.hom rfl (fun z ↦ levelCocycleInt γ k z)
       (fun u ↦ Pi.single i ((towerEquiv l k).symm (x u))),
@@ -112,43 +123,58 @@ noncomputable def frameExtSection (k : ℕ) (i : Fin N) (U : V.ProEt) (x : C(U.l
       (hγ.isDescentCocycle_int k) (((IsLocallyConstant.iff_continuous x).2 x.continuous).comp
         fun a : ZMod (l ^ k) ↦ (Pi.single i ((towerEquiv l k).symm a) : LevelModule.{u} l N k)))⟩
 
+omit hf in
+/-- The underlying function of `AlgebraicGeometry.frameExtSection`. -/
+lemma frameExtSection_coe (k : ℕ) (i : Fin N) (U : V.ProEt) (x : C(U.left, ZMod (l ^ k))) :
+    (frameExtSection hγ k i U x : ↥(pullback f (U.hom ≫ f)) → LevelModule.{u} l N k) =
+      frameExt f U.hom rfl (fun z ↦ levelCocycleInt γ k z)
+        (fun u ↦ Pi.single i ((towerEquiv l k).symm (x u))) :=
+  rfl
+
 /-- The extension of the `i`-th coordinate functions modulo `ℓᵏ` to twisted sections. -/
-noncomputable def frameExtHom (k : ℕ) (i : Fin N) :
+noncomputable def frameExtHom (hγ : IsIntegralCocycle f γ) (k : ℕ) (i : Fin N) :
     (zmodPowAbSheafDiagram V l).obj (op k) ⟶ (frameTower f γ).obj (op k) :=
   (fullyFaithfulSheafToPresheaf _ _).preimage
     { app U := AddCommGrpCat.ofHom
         { toFun x := frameExtSection hγ k i U.unop x.down
-          map_zero' := Subtype.ext ((congrArg
-            (frameExt f U.unop.hom rfl (fun z ↦ levelCocycleInt γ k z)) (by
-              funext u
-              simp)).trans (frameExt_zero U.unop.hom rfl (levelCocycleInt γ k)))
-          map_add' x y := Subtype.ext ((congrArg
-            (frameExt f U.unop.hom rfl (fun z ↦ levelCocycleInt γ k z)) (by
-              funext u
-              simp [Pi.single_add])).trans (frameExt_add U.unop.hom rfl (levelCocycleInt γ k)
-                (fun u ↦ Pi.single i ((towerEquiv l k).symm (x.down u)))
-                (fun u ↦ Pi.single i ((towerEquiv l k).symm (y.down u))))) }
+          map_zero' := Subtype.ext (by
+            rw [frameExtSection_coe, Submodule.coe_zero,
+              ← frameExt_zero U.unop.hom rfl (levelCocycleInt γ k)]
+            congr 1
+            funext u
+            simp)
+          map_add' x y := Subtype.ext (by
+            rw [Submodule.coe_add, frameExtSection_coe, frameExtSection_coe, frameExtSection_coe,
+              ← frameExt_add]
+            congr 1
+            funext u
+            rw [Pi.add_apply, ← Pi.single_add, ← map_add]
+            rfl) }
       naturality U U' g := by
         ext x
         refine Subtype.ext ?_
         exact frameExt_comp_eq (f := f) U.unop.hom rfl g.unop.left
           ((Category.assoc _ _ _).symm.trans (congrArg (· ≫ f) (MorphismProperty.Over.w g.unop)))
-          (a' := U'.unop.hom) rfl (MorphismProperty.Over.w g.unop) _ }
+          (a' := U'.unop.hom) rfl (MorphismProperty.Over.w g.unop)
+          (c := fun z ↦ levelCocycleInt γ k z)
+          (fun u ↦ (Pi.single i ((towerEquiv l k).symm (x.down u)) : LevelModule.{u} l N k)) }
 
+/-- The extension of coordinate functions, on sections. -/
 lemma frameExtHom_hom_app_apply (k : ℕ) (i : Fin N) (U : V.ProEtᵒᵖ)
     (x : ULift.{u + 1} C(U.unop.left, ZMod (l ^ k))) :
     (frameExtHom hγ k i).hom.app U x = frameExtSection hγ k i U.unop x.down :=
   rfl
 
-
+/-- The `j`-th coordinate of the extension of the `i`-th coordinate function is `δᵢⱼ` times it. -/
 lemma frameEvalHom_frameExtHom (k : ℕ) (i j : Fin N) :
-    frameExtHom hγ k i ≫ frameEvalHom k j =
-      if i = j then 𝟙 _ else 0 := by
+    frameExtHom hγ k i ≫ frameEvalHom k j = if i = j then 𝟙 _ else 0 := by
   ext U x
   refine ULift.ext _ _ (ContinuousMap.ext fun u ↦ ?_)
   have h := congrFun (frameEval_frameExt (f := f) U.unop.hom rfl (hγ.isDescentCocycle_int k)
-    (fun u ↦ Pi.single i ((towerEquiv l k).symm (x.down u)))) u
-  change towerEquiv l k (frameEval f U.unop.hom rfl (frameExt f U.unop.hom rfl _ _) u j) = _
+    (fun u ↦ (Pi.single i ((towerEquiv l k).symm (x.down u)) : LevelModule.{u} l N k))) u
+  change towerEquiv l k (frameEval f U.unop.hom rfl (frameExt f U.unop.hom rfl
+    (fun z ↦ levelCocycleInt γ k z)
+    (fun u ↦ (Pi.single i ((towerEquiv l k).symm (x.down u)) : LevelModule.{u} l N k))) u j) = _
   rw [h]
   split_ifs with hij
   · subst hij
@@ -157,35 +183,33 @@ lemma frameEvalHom_frameExtHom (k : ℕ) (i j : Fin N) :
   · rw [Pi.single_eq_of_ne (Ne.symm hij), map_zero]
     rfl
 
+/-- Morphisms into the restricted tower are determined by their coordinates. -/
+lemma frameEvalHom_ext {k : ℕ} {Z : Sheaf (ProEt.topology V) Ab.{u + 1}}
+    {g g' : Z ⟶ (frameTower f γ).obj (op k)}
+    (H : ∀ i, g ≫ frameEvalHom k i = g' ≫ frameEvalHom k i) : g = g' := by
+  ext U s
+  have hσ := (mem_twistedSubmodule f _).1 (g.hom.app U s).2
+  have hσ' := (mem_twistedSubmodule f _).1 (g'.hom.app U s).2
+  refine Subtype.ext ?_
+  rw [← frameExt_frameEval U.unop.hom rfl hσ, ← frameExt_frameEval U.unop.hom rfl hσ']
+  congr 1
+  funext u i
+  have := congrArg (fun φ : Z ⟶ (zmodPowAbSheafDiagram V l).obj (op k) ↦
+    ((φ.hom.app U s).down u)) (H i)
+  exact (towerEquiv l k).injective this
+
+/-- The coordinates and the extensions of coordinate functions exhibit the restricted tower as a
+direct sum. -/
 lemma sum_frameEvalHom_frameExtHom (k : ℕ) :
     ∑ i, frameEvalHom k i ≫ frameExtHom hγ k i = 𝟙 ((frameTower f γ).obj (op k)) := by
-  ext U σ
-  have hσ := (mem_twistedSubmodule f _).1 σ.2
-  refine Subtype.ext ?_
-  change (∑ i, frameExtSection hγ k i U.unop
-    (frameEvalHom k i |>.hom.app U σ).down).1 = σ.1
-  rw [Submodule.coe_sum]
-  change ∑ i, frameExt f U.unop.hom rfl (fun z ↦ levelCocycleInt γ k z)
-    (fun u ↦ Pi.single i ((towerEquiv l k).symm (frameCoord k i U.unop σ u))) = σ.1
-  have hsum (s : Finset (Fin N)) : ∑ i ∈ s, frameExt f U.unop.hom rfl
-      (fun z ↦ levelCocycleInt γ k z)
-        (fun u ↦ Pi.single i ((towerEquiv l k).symm (frameCoord k i U.unop σ u))) =
-      frameExt f U.unop.hom rfl (fun z ↦ levelCocycleInt γ k z)
-        (∑ i ∈ s, fun u ↦ Pi.single i ((towerEquiv l k).symm (frameCoord k i U.unop σ u))) := by
-    induction s using Finset.induction_on with
-    | empty => simp [frameExt_zero]
-    | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, ih, frameExt_add]
-  rw [hsum]
-  have : (∑ i, fun u ↦ Pi.single i ((towerEquiv l k).symm (frameCoord k i U.unop σ u))) =
-      frameEval f U.unop.hom rfl σ.1 := by
-    funext u j
-    simp only [Finset.sum_apply, frameCoord, AddEquiv.symm_apply_apply, Pi.single_apply,
-      Finset.sum_ite_eq', Finset.mem_univ, if_true]
-  rw [this, frameExt_frameEval _ _ hσ]
+  refine frameEvalHom_ext fun j ↦ ?_
+  simp only [Preadditive.sum_comp, Category.assoc, frameEvalHom_frameExtHom, Category.id_comp]
+  rw [Finset.sum_eq_single j (fun b _ hb ↦ by rw [if_neg hb, comp_zero]) (by simp), if_pos rfl,
+    Category.comp_id]
 
 /-- The restriction to `V` of the pro-étale tower, at level `k`, as a direct sum of copies of
 the constant sheaf `(ℤ/ℓᵏ)_V`. -/
-noncomputable def frameBicone (k : ℕ) :
+noncomputable def frameBicone (hγ : IsIntegralCocycle f γ) (k : ℕ) :
     Bicone fun _ : Fin N ↦ (zmodPowAbSheafDiagram V l).obj (op k) where
   pt := (frameTower f γ).obj (op k)
   π i := frameEvalHom k i
@@ -195,10 +219,19 @@ noncomputable def frameBicone (k : ℕ) :
     split_ifs <;> rfl
 
 /-- **The restriction to `V` of the pro-étale tower is constant**, at each level. -/
-noncomputable def frameTowerObjIso (k : ℕ) :
+noncomputable def frameTowerObjIso (hγ : IsIntegralCocycle f γ) (k : ℕ) :
     (frameTower f γ).obj (op k) ≅ (zmodPowAbSheafDiagramPow V l N).obj (op k) :=
-  biproduct.uniqueUpToIso _ ((frameBicone hγ k).isBilimitOfTotal (sum_frameEvalHom_frameExtHom hγ k))
+  biproduct.uniqueUpToIso _ (isBilimitOfTotal (frameBicone hγ k)
+    (sum_frameEvalHom_frameExtHom hγ k))
 
+/-- The isomorphism `AlgebraicGeometry.frameTowerObjIso`, followed by a projection, is a
+coordinate. -/
+lemma frameTowerObjIso_hom_π (k : ℕ) (i : Fin N) :
+    (frameTowerObjIso hγ k).hom ≫ biproduct.π _ i = frameEvalHom k i := by
+  rw [frameTowerObjIso, biproduct.uniqueUpToIso_hom, biproduct.lift_π]
+  rfl
+
+/-- The coordinates are compatible with the reductions. -/
 lemma frameEvalHom_naturality {k k' : ℕ} (h : k' ≤ k) (i : Fin N) :
     (frameTower f γ).map (homOfLE h).op ≫ frameEvalHom k' i =
       frameEvalHom k i ≫ (zmodPowAbSheafDiagram V l).map (homOfLE h).op := by
@@ -207,15 +240,17 @@ lemma frameEvalHom_naturality {k k' : ℕ} (h : k' ≤ k) (i : Fin N) :
   exact towerEquiv_towerFactor l h _
 
 /-- **The restriction to `V` of the pro-étale tower is the constant tower `(ℤ/ℓᵏ)_V^N`.** -/
-noncomputable def frameTowerIso : frameTower f γ ≅ zmodPowAbSheafDiagramPow V l N :=
+noncomputable def frameTowerIso (hγ : IsIntegralCocycle f γ) :
+    frameTower f γ ≅ zmodPowAbSheafDiagramPow V l N :=
   NatIso.ofComponents (fun k ↦ frameTowerObjIso hγ k.unop) fun {k k'} h ↦ by
     refine biproduct.hom_ext _ _ fun j ↦ ?_
-    simp only [frameTowerObjIso, biproduct.uniqueUpToIso_hom, Category.assoc,
-      Functor.biproductPow_map, biproduct.lift_π, biproduct.map_π, biproduct.lift_π_assoc]
+    rw [Category.assoc, frameTowerObjIso_hom_π, Category.assoc]
+    rw [Functor.biproductPow_map_π]
+    rw [← Category.assoc, frameTowerObjIso_hom_π]
     exact frameEvalHom_naturality (leOfHom h.unop) j
 
 /-- **The limit of the restriction to `V` of the pro-étale tower is `ℤ_ℓ,V^N`.** -/
-noncomputable def frameLimitIso :
+noncomputable def frameLimitIso (hγ : IsIntegralCocycle f γ) :
     limit (frameTower f γ) ≅ ⨁ fun _ : Fin N ↦ padicIntAbSheaf V l :=
   lim.mapIso (frameTowerIso hγ) ≪≫ limitZmodPowAbSheafDiagramPowIso V l N
 
