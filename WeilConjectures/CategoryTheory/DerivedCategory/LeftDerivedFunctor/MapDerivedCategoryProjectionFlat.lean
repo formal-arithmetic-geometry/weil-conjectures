@@ -19,6 +19,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-!
 # The projection map at flat modules placed in degree zero
@@ -47,30 +48,6 @@ universe u u₂
 open CategoryTheory Abelian Limits MonoidalCategory DerivedCategory
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory
-
-section Biproduct
-
-variable {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive B]
-  {P R : A ⥤ B} [P.Additive] [R.Additive]
-
-/-- A natural transformation between additive functors is an isomorphism at a finite biproduct
-if it is an isomorphism at its summands. -/
-lemma NatTrans.isIso_app_biproduct_of_finite (τ : P ⟶ R) {J : Type} [Finite J] (f : J → A)
-    [HasBiproduct f] (h : ∀ j, IsIso (τ.app (f j))) : IsIso (τ.app (⨁ f)) := by
-  have e : τ.app (⨁ f) = (P.mapBiproduct f).hom ≫
-      (biproduct.mapIso fun j ↦ asIso (τ.app (f j))).hom ≫ (R.mapBiproduct f).inv := by
-    rw [← cancel_epi (P.mapBiproduct f).inv, Iso.inv_hom_id_assoc]
-    refine biproduct.hom_ext' _ _ fun j ↦ ?_
-    simp only [biproduct.mapIso_hom, Functor.mapBiproduct_inv, biproduct.ι_desc_assoc,
-      biproduct.ι_map_assoc, biproduct.ι_desc, NatTrans.naturality, asIso_hom]
-  rw [e]
-  infer_instance
-
-end Biproduct
-
-end CategoryTheory
 
 namespace ModuleCat
 
@@ -255,14 +232,8 @@ lemma isIso_rightDerivedFunctorUnit_app_of_isStrictlyGE (T : CochainComplex A �
     ((HomotopyCategory.quotient A (.up ℤ)).map ι) ≫ Γ.rightDerivedFunctorUnit.app _)
     (Γ.rightDerivedFunctorUnit.naturality _).symm
 
-/-- The unit `Q(Γ K) ⟶ RΓ(Q K)` of the right derived functor on cochain complexes
-(`CategoryTheory.Functor.rightDerivedFunctorUnitQ`), as a natural transformation. -/
-noncomputable def rightDerivedFunctorUnitQNatTrans :
-    Γ.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
-      DerivedCategory.Q ⋙ Γ.rightDerivedFunctor where
-  app K := Γ.rightDerivedFunctorUnitQ K
-  naturality _ _ f := Γ.rightDerivedFunctorUnitQ_naturality f
-
+/-- The unit `Q(Γ T) ⟶ RΓ(Q T)` is an isomorphism at a bounded below complex `T` of `Γ`-acyclic
+objects. -/
 lemma isIso_rightDerivedFunctorUnitQ_of_isStrictlyGE (T : CochainComplex A ℤ) (a : ℤ)
     [T.IsStrictlyGE a] (hT : ∀ n, Γ.rightAcyclic (T.X n)) :
     IsIso (Γ.rightDerivedFunctorUnitQ T) := by
@@ -300,7 +271,7 @@ lemma isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_finsupp (E : Deriv
         (isIso_mapDerivedCategoryProjectionMap_app_tensorUnit adj E)
   exact (NatTrans.isIso_app_iff_of_iso (mapDerivedCategoryProjectionMap adj E)
     ((singleFunctor _ 0).mapIso (ModuleCat.finsuppIsoBiproduct Λ k))).2
-      (NatTrans.isIso_app_biproduct_of_finite τ _ fun _ ↦ hunit)
+      (NatTrans.isIso_app_biproduct τ _ fun _ ↦ hunit)
 
 /-- If the derived functors of `Γ` commute with filtered colimits, the projection map
 `RΓ E ⊗ᴸ M[0] ⟶ RΓ (E ⊗ᴸ D(F) M[0])` is an isomorphism for every bounded below `E` and every
@@ -371,8 +342,10 @@ theorem isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat
   -- the target commutes with the filtered colimit
   let T := F ⋙ Functor.tensorRightComplex I ⋙ Q ⋙ Γ.rightDerivedFunctor ⋙ H
   let β₂ : F ⋙ Functor.tensorRightComplex I ⋙ Γ.mapHomologicalComplex _ ⋙ Q ⋙ H ⟶ T :=
-    Functor.whiskerLeft (F ⋙ Functor.tensorRightComplex I)
-      (Functor.whiskerRight Γ.rightDerivedFunctorUnitQNatTrans H)
+    { app X := H.map (Γ.rightDerivedFunctorUnitQ ((Functor.tensorRightComplex I).obj (F.obj X)))
+      naturality X Y f := by
+        dsimp [T]
+        rw [← H.map_comp, ← H.map_comp, rightDerivedFunctorUnitQ_naturality] }
   have hβ₂ (X : ModuleCat.{u + 1} Λ) (hX : ObjectProperty.flat X) : IsIso (β₂.app X) := by
     have := hge X
     have := Γ.isIso_rightDerivedFunctorUnitQ_of_isStrictlyGE _ a (hacyc X hX)

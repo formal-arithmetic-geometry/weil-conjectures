@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
 public import WeilConjectures.SixFunctors.OpenClosed.Supported
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
+public import WeilConjectures.ConstructibleSheaf.AdicImageTower
 
 /-!
 # Pushforward along a closed immersion

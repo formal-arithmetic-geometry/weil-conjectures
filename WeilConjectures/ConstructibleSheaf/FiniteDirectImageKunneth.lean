@@ -8,12 +8,16 @@ module
 public import WeilConjectures.ConstructibleSheaf.FiniteDerived
 public import WeilConjectures.ConstructibleSheaf.FiniteConstantModel
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 
 /-!
 # Constructibility inputs of the Künneth formula
 
 This file records two constructibility statements used in the proof of the base change theorem
-for a pushforward tensored with a flat sheaf (blueprint `lem-kun-0f1j`):
+for a pushforward tensored with a flat sheaf (blueprint `lem-kun-0f1j`). The third one, that
+constant sheaves with finitely generated values are constructible (blueprint
+`lem-kun-constant-constructible`), is `AlgebraicGeometry.Scheme.isConstructibleSheaf_constantSheaf`
+in `WeilConjectures.ConstructibleSheaf.SpecializationCriterion`.
 
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_isFinite`
   (blueprint `fin4-thm-finite-morphisms-constructible`): all higher direct images of a

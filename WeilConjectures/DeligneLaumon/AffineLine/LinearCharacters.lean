@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
+public import WeilConjectures.WeilSheaf.FourierInversion.AffinePlaneAdd
 public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
 public import WeilConjectures.WeilSheaf.ArtinSchreierMulGeometric
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisseQuotients
@@ -43,18 +44,7 @@ open scoped ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀]
 
-
 section Plane
-
-variable (k₀) in
-/-- The addition `(x, y) ↦ x + y` of the affine plane `𝔸¹ ×_{k₀} 𝔸¹` to the affine line. -/
-noncomputable def affinePlane.add : affinePlane k₀ ⟶ affineLine k₀ :=
-  AffineSpace.homOfVector (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) fun _ ↦
-    (affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) +
-      (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)
-
-instance : (affinePlane.add k₀).IsOver (Spec (CommRingCat.of k₀)) :=
-  ⟨AffineSpace.homOfVector_over _ _⟩
 
 omit [Finite k₀] in
 lemma affineLine.geometricConst_add (a b : AlgebraicClosure k₀) :

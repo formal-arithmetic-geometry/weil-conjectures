@@ -18,10 +18,9 @@ Let `L` be a separably closed field. Étale sheaves of `Λ`-modules on `Spec L` 
 an étale `L`-scheme `W` corresponds to the free module on the `L`-points of `W`; hence it is a
 projective object (`AlgebraicGeometry.Etale.projective_freeSheaf_of_isSepClosed`). The direct
 image `f_*` along any morphism `f : Spec L ⟶ Y` is exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isSepClosed`), so its higher
-direct images vanish
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isSepClosed`, the second half of
-blueprint `lem-kun-0ezp`).
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isSepClosed`), and hence the
+higher direct images vanish (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isSepClosed`,
+the second half of blueprint `lem-kun-0ezp`).
 -/
 
 @[expose] public section
