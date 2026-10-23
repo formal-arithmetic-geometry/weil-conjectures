@@ -147,7 +147,7 @@ theorem nonempty_shiftDecomposition_point
       ← Preadditive.add_comp, biprod.total, Category.id_comp, Iso.hom_inv_id]
     all_goals
       apply hG.map_injective
-      simp only [G.map_add, G.map_comp, hG.map_preimage, Category.assoc, Iso.inv_hom_id_assoc,
+      simp only [G.map_comp, hG.map_preimage, Category.assoc, Iso.inv_hom_id_assoc,
         G.map_id, G.map_zero, biprod.inl_fst_assoc, biprod.inr_snd_assoc, biprod.inl_snd_assoc,
         biprod.inr_fst_assoc, Iso.hom_inv_id, zero_comp, comp_zero]
   · intro X n hX hXn P e
@@ -228,6 +228,7 @@ noncomputable def gradedHomHom {n : ℤ} {Y : DerivedCategory (PointMod ℓ k)}
     (x : (gradedHom ℓ k n).obj Y) : shiftedUnit ℓ k n ⟶ Y :=
   x
 
+omit [Fact (ringChar k).Prime] in
 lemma gradedHomHom_smul (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) (c : PadicAlgCl ℓ)
     (x : (gradedHom ℓ k n).obj Y) :
     gradedHomHom ℓ k (c • x) =
@@ -235,6 +236,7 @@ lemma gradedHomHom_smul (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) (c : Pa
         gradedHomHom ℓ k x :=
   rfl
 
+omit [Fact (ringChar k).Prime] in
 lemma gradedHomHom_map_apply (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} (f : Y ⟶ Y')
     (x : (gradedHom ℓ k n).obj Y) :
     gradedHomHom ℓ k (((gradedHom ℓ k n).map f).hom x) = gradedHomHom ℓ k x ≫ f :=
@@ -420,6 +422,7 @@ lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
   exact h
 
 set_option synthInstance.maxHeartbeats 200000 in
+-- the instances on the ambient derived category of modules are found through long searches
 /-- **The trace is the supertrace on the graded pieces**: for an object `Y` of `D(Mod_{ℚ̲̄_ℓ,s})`
 which is a finite direct sum of shifts `𝟙⟦nⱼ⟧` of the unit, the categorical trace of an
 endomorphism `w` of `Y` is the alternating sum `∑ₙ (-1)ⁿ tr(w | Hⁿ(Y))` of the traces on the
@@ -452,8 +455,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
 
 section Additivity
 
@@ -473,8 +475,9 @@ noncomputable def gradedHomShift (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)
     change _ ≫ (shiftFunctor _ (1 : ℤ)).map ((shiftFunctor _ (n - 1)).map (pointScalar ℓ k c) ≫
         gradedHomHom ℓ k x) = (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ _ ≫
         (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x)
-    have h := (shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.naturality
-      (pointScalar ℓ k c)
+    have h :=
+      (shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.naturality
+        (pointScalar ℓ k c)
     simp only [Functor.comp_map] at h
     rw [Functor.map_comp, reassoc_of% h]
 
@@ -523,6 +526,7 @@ lemma gradedHomShift_gradedHomConnecting (n : ℤ) {Y₃ Y₁ : DerivedCategory 
     gradedHomShift ℓ k n Y₁ (gradedHomConnecting ℓ k n δ y) = ((gradedHom ℓ k n).map δ).hom y :=
   (LinearEquiv.ofBijective _ (bijective_gradedHomShift ℓ k n Y₁)).apply_symm_apply _
 
+/-- The maps induced on `Hⁿ` by a commutative square `v ≫ f = f ≫ v'` commute. -/
 lemma gradedHom_map_comp_comm (n : ℤ) {Y Y' : DerivedCategory (PointMod ℓ k)} {f : Y ⟶ Y'}
     {v : Y ⟶ Y} {v' : Y' ⟶ Y'} (h : v ≫ f = f ≫ v') :
     ((gradedHom ℓ k n).map v').hom ∘ₗ ((gradedHom ℓ k n).map f).hom =
@@ -583,7 +587,7 @@ lemma exact_gradedHomConnecting_gradedHom_map (n : ℤ) (hT : Triangle.mk f g δ
     exact hy.symm
   · rintro ⟨y, rfl⟩
     refine ((gradedHomShift ℓ k n Y₂).map_eq_zero_iff (bijective_gradedHomShift ℓ k n Y₂).1).1 ?_
-    show gradedHomShift ℓ k n Y₂ (((gradedHom ℓ k (n - 1)).map f).hom
+    change gradedHomShift ℓ k n Y₂ (((gradedHom ℓ k (n - 1)).map f).hom
         (gradedHomConnecting ℓ k n δ y)) = 0
     rw [gradedHomShift_map, gradedHomShift_gradedHomConnecting]
     change (gradedHomHom ℓ k y ≫ δ) ≫ (shiftFunctor _ (1 : ℤ)).map f = 0
@@ -610,7 +614,8 @@ attribute [local instance] DerivedCategory.braidedCategory'
 /-- **Additivity of the trace along distinguished triangles over the point**, in the ambient
 derived category: for a distinguished triangle `Y₁ ⟶ Y₂ ⟶ Y₃ ⟶ Y₁⟦1⟧` of finite direct sums of
 shifts of the unit and an endomorphism `(v₁, v₂, v₃)` of it, `tr v₂ = tr v₁ + tr v₃`. -/
-theorem trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition
+theorem trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition [IsSepClosed k]
+    [Fact (ringChar k).Prime]
     {Y₁ Y₂ Y₃ : DerivedCategory (PointMod ℓ k)} [HasRightDual Y₁] [HasRightDual Y₂]
     [HasRightDual Y₃] (D₁ : ShiftDecomposition (𝟙_ _) Y₁) (D₂ : ShiftDecomposition (𝟙_ _) Y₂)
     (D₃ : ShiftDecomposition (𝟙_ _) Y₃) (f : Y₁ ⟶ Y₂) (g : Y₂ ⟶ Y₃)

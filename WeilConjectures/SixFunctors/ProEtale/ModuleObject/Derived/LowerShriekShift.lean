@@ -46,6 +46,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 set_option synthInstance.maxSize 1024 in
+-- the instance problems for the composite with the right derived functor are large
 /-- The derived lower shriek on the derived categories of module objects commutes with the
 shifts: it is the composite of the functor induced by the exact extension by zero and a right
 derived functor. -/
@@ -111,7 +112,8 @@ instance commShift_boundedConstructiblePullbackSquareComparison_hom (sq : CommSq
     NatTrans.CommShift (boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom ℤ := by
   have : NatTrans.CommShift (eqToHom (show boundedConstructibleUpperStar Λ ℓ (f' ≫ g) =
       boundedConstructibleUpperStar Λ ℓ (g' ≫ f) by rw [sq.w])) ℤ :=
-    NatTrans.CommShift.eqToHom_congrArg (fun m : X' ⟶ Y ↦ boundedConstructibleUpperStar Λ ℓ m) sq.w.symm
+    NatTrans.CommShift.eqToHom_congrArg (fun m : X' ⟶ Y ↦ boundedConstructibleUpperStar Λ ℓ m)
+      sq.w.symm
   unfold boundedConstructiblePullbackSquareComparison
   dsimp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]
   infer_instance

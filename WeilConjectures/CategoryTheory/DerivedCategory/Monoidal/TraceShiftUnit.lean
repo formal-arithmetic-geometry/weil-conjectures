@@ -47,6 +47,7 @@ noncomputable def hasRightDualOfIso' {P Q : C} (e : P ≅ Q) [HasRightDual Q] : 
 
 variable [BraidedCategory C]
 
+omit [Preadditive C] [MonoidalPreadditive C] in
 /-- The trace of an endomorphism of the unit, for the canonical self-duality of the unit, is the
 endomorphism itself. -/
 lemma trace_unit (f : 𝟙_ C ⟶ 𝟙_ C) : trace f = f := by
@@ -74,6 +75,7 @@ noncomputable def singleUnitXHasRightDual (m n : ℤ) :
   if h : n = m then hasRightDualOfIso' (HomologicalComplex.singleObjXIsoOfEq _ m (𝟙_ A) n h)
   else hasRightDualOfIsZero (HomologicalComplex.isZero_single_obj_X _ m _ n h)
 
+omit [HasDerivedCategory A] [Abelian.HasFunctorialFlatResolution A] in
 /-- The trace of `r` placed in degree `m` is `(-1)ᵐ r` placed in degree `0`, for the termwise
 dual of the complex `𝟙[-m]`. -/
 lemma trace_single_map (m : ℤ) (r : 𝟙_ A ⟶ 𝟙_ A) :
@@ -81,8 +83,8 @@ lemma trace_single_map (m : ℤ) (r : 𝟙_ A ⟶ 𝟙_ A) :
     letI := CochainComplex.hasRightDual ((HomologicalComplex.single A (.up ℤ) m).obj (𝟙_ A)) m m
     trace ((HomologicalComplex.single A (.up ℤ) m).map r) =
       (m.negOnePow : ℤ) • (HomologicalComplex.single A (.up ℤ) 0).map r := by
-  letI := singleUnitXHasRightDual A m
-  letI := CochainComplex.hasRightDual ((HomologicalComplex.single A (.up ℤ) m).obj (𝟙_ A)) m m
+  let := singleUnitXHasRightDual A m
+  let := CochainComplex.hasRightDual ((HomologicalComplex.single A (.up ℤ) m).obj (𝟙_ A)) m m
   refine HomologicalComplex.from_single_hom_ext ?_
   rw [CochainComplex.trace_f_zero_eq _ m m, Finset.Icc_self, Finset.sum_singleton,
     HomologicalComplex.zsmul_f_apply, HomologicalComplex.single_map_f_self,

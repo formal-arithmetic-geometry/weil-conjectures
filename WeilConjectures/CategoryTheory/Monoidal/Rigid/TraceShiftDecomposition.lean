@@ -27,8 +27,8 @@ open CategoryTheory Limits MonoidalCategory
 
 namespace CategoryTheory.ShiftDecomposition
 
-variable {C : Type*} [Category C] [Preadditive C] [HasShift C ℤ]
-  [∀ n : ℤ, (shiftFunctor C n).Additive] {E P : C} (D : ShiftDecomposition E P)
+variable {C : Type*} [Category C] [Preadditive C] [HasShift C ℤ] {E P : C}
+  (D : ShiftDecomposition E P)
 
 section Monoidal
 

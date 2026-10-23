@@ -17,11 +17,11 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompo
 The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on bounded constructible `ℚ̄_ℓ`-sheaves
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl`) commutes with the
 shifts (`ProEtale.CondensedRing.commShift_boundedConstructibleLowerShriekComp_padicAlgCl_hom`).
-Like the isomorphisms of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekShift`,
-it is assembled from units and counits of adjunctions commuting with the shifts and from
-composition isomorphisms of pullbacks and pushforwards; here through the comparison of the
-extensions by zero along a refinement of compactifications and the exchange of extension by zero
-and proper pushforward.
+Like the isomorphisms of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekShift`, it is assembled
+from units and counits of adjunctions commuting with the shifts and from composition isomorphisms
+of pullbacks and pushforwards; here through the comparison of the extensions by zero along a
+refinement of compactifications and the exchange of extension by zero and proper pushforward.
 -/
 
 @[expose] public section
