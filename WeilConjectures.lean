@@ -1817,6 +1817,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResol
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionBase
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechSectionsBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FibreDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
@@ -4736,6 +4737,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FpqcFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexExact
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexLocal
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexOfMatrix
