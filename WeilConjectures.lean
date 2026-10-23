@@ -12443,6 +12443,7 @@ public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
