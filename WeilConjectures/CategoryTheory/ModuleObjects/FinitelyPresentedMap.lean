@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 
 /-!
 # Finitely presented module objects under right exact functors
@@ -23,19 +24,6 @@ universe v₁ v₂ u₁ u₂
 open CategoryTheory MonoidalCategory MonObj Limits
 
 namespace CategoryTheory.Mod
-
-section Iso
-
-variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
-
-/-- Finitely presented module objects are stable under isomorphism. -/
-lemma IsFinitelyPresented.of_iso {M N : Mod C R} (h : IsFinitelyPresented R M) (e : M ≅ N) :
-    IsFinitelyPresented R N := by
-  obtain ⟨n, m, f, ⟨e'⟩⟩ := h
-  exact ⟨n, m, f, ⟨e.symm ≪≫ e'⟩⟩
-
-end Iso
 
 section Map
 

@@ -21,7 +21,7 @@ Let `Λ` be a commutative condensed ring and `Mod_X` the category of `Λ_X`-modu
 * If the pullback `h^* N` of the sheaf pullback of a module `N` over a ring object `T ≅ Λ_X` is
   finitely presented over `h^* T`, then the pullback `h^* M` on module objects over `Λ` is
   finitely presented over `Λ_Y`
-  (`ProEtale.CondensedRing.isFinitelyPresented_upperStar_of_mapMod`).
+  (`ProEtale.CondensedRing.isFinitelyPresented_upperStar_of_comap_iso`).
 * For a separably closed field `Ω`, the pullback of a constructible module object along a point
   `x̄ : Spec Ω ⟶ X` is finitely presented
   (`ProEtale.CondensedRing.isFinitelyPresented_upperStar_of_isConstructibleModuleObject`):
@@ -62,7 +62,7 @@ lemma IsFinitelyPresented.upperStar {W Y : Scheme.{u}} (g : W ⟶ Y)
 `Λ_X`-module and `N ≅ M` the corresponding `T`-module. If the sheaf pullback `h^* N` is finitely
 presented over `h^* T`, then the pullback `h^* M` of module objects over `Λ` is finitely
 presented over `Λ_Y`. -/
-lemma isFinitelyPresented_upperStar_of_mapMod {X Y : Scheme.{u}} (h : Y ⟶ X)
+lemma isFinitelyPresented_upperStar_of_comap_iso {X Y : Scheme.{u}} (h : Y ⟶ X)
     {T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj T]
     (φ : T ⟶ condensedRingObj Λ X) [IsMonHom φ] [IsIso φ]
     {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) T}
@@ -108,7 +108,7 @@ theorem isFinitelyPresented_upperStar_of_isConstructibleModuleObject {Ω : Type 
   obtain ⟨y, hy⟩ := Scheme.exists_comp_eq_of_mem_range_of_isField (S.immersion a) hΩ x z ha
   obtain ⟨𝒰, h𝒰⟩ := hS a
   obtain ⟨i, g, hg⟩ := 𝒰.exists_comp_eq_of_isField hΩ hsep y
-  have h₁ := isFinitelyPresented_upperStar_of_mapMod Λ (𝒰.f i)
+  have h₁ := isFinitelyPresented_upperStar_of_comap_iso Λ (𝒰.f i)
     (condensedPullbackHom Λ (S.immersion a)) (comapUpperStarObjIso Λ (S.immersion a) M) (h𝒰 i)
   exact (IsFinitelyPresented.upperStar Λ g h₁).of_iso
     ((g)^*⟦Λ⟧.mapIso ((upperStarComp Λ (𝒰.f i) (S.immersion a)).app M).symm ≪≫
