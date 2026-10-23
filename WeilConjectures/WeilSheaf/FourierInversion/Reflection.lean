@@ -146,26 +146,23 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_hom_upperStar_inv {X Y : Sch
     Functor.isoWhiskerRight (BC ≪≫ Functor.isoWhiskerRight eU _ ≪≫ Functor.leftUnitor _ ≪≫ eS)
       (WeilComplex.upperStar e.inv) ≪≫ Functor.leftUnitor _⟩
 
-/-- **`FT_ψ ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`). On `𝔸³`
-with points `(x, ξ, y)`,
-
-`FT_ψ FT_ψ (K) ≅ Rr₃₀!(ℒ_ψ((x + y) ξ) ⊗ r₁^* K)[1][1]`
-
-naturally in `K`, with `r₁ = r₁₃ ≫ pr₁` and `r₃ = r₁₃ ≫ pr₂`: the composition of kernel
-transforms (`AlgebraicGeometry.WeilComplex.nonempty_iso_kernelTransform_comp`) together with
-`ℒ_ψ(x ξ) ⊗ ℒ_ψ(ξ y) ≅ ℒ_ψ((x + y) ξ)` (blueprint `lem-fd-as-lisse`). -/
-theorem nonempty_iso_fourierTransform_comp_fourierTransform
+/-- The two Fourier kernels pulled back to the triple product `𝔸³` with points `(x, ξ, y)`
+multiply to `ℒ_ψ((x + y) ξ)`: tensoring with `r₁₂^* μ^* ℒ_ψ` and then with `r₂₃^* μ^* ℒ_ψ` is
+tensoring with `ℒ_ψ((x + y) ξ)` (blueprint `lem-fd-as-lisse`). -/
+theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_add
     (ψ : AddChar k₀ (PadicAlgCl l)) :
-    Nonempty (fourierTransform (l := l) ψ ⋙ fourierTransform ψ ≅
-      WeilComplex.upperStar (affineTripleProduct.proj₁₃ k₀ ≫ affinePlane.fst k₀) ⋙
-        WeilComplex.tensorLisse (artinSchreierOf ψ
+    Nonempty (WeilComplex.tensorLisse
+        ((WeilSheaf.upperStar (affineTripleProduct.proj₁₂ k₀)).obj (fourierKernel (l := l) ψ))
+        ((isLisse_fourierKernel ψ).upperStar _) ⋙
+      WeilComplex.tensorLisse
+        ((WeilSheaf.upperStar (affineTripleProduct.proj₂₃ k₀)).obj (fourierKernel ψ))
+        ((isLisse_fourierKernel ψ).upperStar _) ≅
+      WeilComplex.tensorLisse (artinSchreierOf ψ
           ((affineTripleProduct.proj₁₃ k₀).appTop
               ((affinePlane.add k₀).appTop
                 (AffineSpace.coord (Spec (CommRingCat.of k₀)) PUnit.unit)) *
             (affineTripleProduct.proj₁₂ k₀ ≫ affinePlane.snd k₀).appTop
-              (AffineSpace.coord _ PUnit.unit))) (isLisse_artinSchreierOf ψ _) ⋙
-        WeilComplex.derivedLowerShriek k₀ l (affineTripleProduct.proj₁₃ k₀ ≫ affinePlane.snd k₀) ⋙
-        shiftFunctor _ (1 : ℤ) ⋙ shiftFunctor _ (1 : ℤ)) := by
+              (AffineSpace.coord _ PUnit.unit))) (isLisse_artinSchreierOf ψ _)) := by
   have h₁₂₃ : affineTripleProduct.proj₂₃ k₀ ≫ affinePlane.fst k₀ =
       affineTripleProduct.proj₁₂ k₀ ≫ affinePlane.snd k₀ :=
     pullback.condition.symm
@@ -194,9 +191,6 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform
       map_mul _ _ _
     rw [e₁, e₂, e₃, h₁₂₃]
     ring
-  -- the composite of the kernel transforms
-  obtain ⟨eKT⟩ := WeilComplex.nonempty_iso_kernelTransform_comp (fourierKernel (l := l) ψ)
-    (fourierKernel ψ) (isLisse_fourierKernel ψ) (isLisse_fourierKernel ψ) 1 1
   -- the kernels as Artin–Schreier sheaves on `𝔸³`
   obtain ⟨eF⟩ := nonempty_iso_fourierKernel_artinSchreierOf (l := l) ψ
   have eF' : fourierKernel (l := l) ψ ≅ artinSchreierOf ψ m := eF
@@ -225,6 +219,31 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform
     (ProEtale.IsAdicLisseSheaf.ihom (isLisse_artinSchreierOf ψ _).dual
       (isLisse_artinSchreierOf ψ _))
     (isLisse_artinSchreierOf ψ _)
+  exact ⟨Functor.isoWhiskerRight eT₁ _ ≪≫ Functor.isoWhiskerLeft _ eT₂ ≪≫ eT₁₂ ≪≫ eT⟩
+
+/-- **`FT_ψ ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`). On `𝔸³`
+with points `(x, ξ, y)`,
+
+`FT_ψ FT_ψ (K) ≅ Rr₃₀!(ℒ_ψ((x + y) ξ) ⊗ r₁^* K)[1][1]`
+
+naturally in `K`, with `r₁ = r₁₃ ≫ pr₁` and `r₃ = r₁₃ ≫ pr₂`: the composition of kernel
+transforms (`AlgebraicGeometry.WeilComplex.nonempty_iso_kernelTransform_comp`) together with
+`ℒ_ψ(x ξ) ⊗ ℒ_ψ(ξ y) ≅ ℒ_ψ((x + y) ξ)` (blueprint `lem-fd-as-lisse`). -/
+theorem nonempty_iso_fourierTransform_comp_fourierTransform
+    (ψ : AddChar k₀ (PadicAlgCl l)) :
+    Nonempty (fourierTransform (l := l) ψ ⋙ fourierTransform ψ ≅
+      WeilComplex.upperStar (affineTripleProduct.proj₁₃ k₀ ≫ affinePlane.fst k₀) ⋙
+        WeilComplex.tensorLisse (artinSchreierOf ψ
+          ((affineTripleProduct.proj₁₃ k₀).appTop
+              ((affinePlane.add k₀).appTop
+                (AffineSpace.coord (Spec (CommRingCat.of k₀)) PUnit.unit)) *
+            (affineTripleProduct.proj₁₂ k₀ ≫ affinePlane.snd k₀).appTop
+              (AffineSpace.coord _ PUnit.unit))) (isLisse_artinSchreierOf ψ _) ⋙
+        WeilComplex.derivedLowerShriek k₀ l (affineTripleProduct.proj₁₃ k₀ ≫ affinePlane.snd k₀) ⋙
+        shiftFunctor _ (1 : ℤ) ⋙ shiftFunctor _ (1 : ℤ)) := by
+  obtain ⟨eKT⟩ := WeilComplex.nonempty_iso_kernelTransform_comp (fourierKernel (l := l) ψ)
+    (fourierKernel ψ) (isLisse_fourierKernel ψ) (isLisse_fourierKernel ψ) 1 1
+  obtain ⟨eT⟩ := WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_add (l := l) ψ
   let A₁₃ := WeilComplex.upperStar (k₀ := k₀) (l := l)
     (affineTripleProduct.proj₁₃ k₀ ≫ affinePlane.fst k₀)
   let D := WeilComplex.derivedLowerShriek k₀ l
@@ -233,8 +252,7 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform
   let S₁ := shiftFunctor (WeilComplex k₀ l (affineLine k₀)) (1 : ℤ)
   exact ⟨eKT ≪≫ Functor.isoWhiskerLeft A₁₃
     ((Functor.associator _ _ (D ⋙ S₁ ⋙ S₁)).symm ≪≫
-      Functor.isoWhiskerRight (Functor.isoWhiskerRight eT₁ _ ≪≫
-        Functor.isoWhiskerLeft _ eT₂ ≪≫ eT₁₂ ≪≫ eT) (D ⋙ S₁ ⋙ S₁))⟩
+      Functor.isoWhiskerRight eT (D ⋙ S₁ ⋙ S₁))⟩
 
 /-- **`FT_ψ ∘ FT_ψ ≅ ι'^* ((-)(-1))`** (blueprint `lem-fd-inversion`, `sk-thm-inversion`,
 second formula), with the shifts `[-2][1][1]` left uncancelled: for a nontrivial additive
