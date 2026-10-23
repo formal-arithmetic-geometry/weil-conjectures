@@ -554,6 +554,29 @@ noncomputable instance monoidal_boundedConstructibleUpperStar :
   unfold boundedConstructibleUpperStar
   exact ObjectProperty.monoidalLift _ _
 
+variable {Λ} (ℓ)
+
+/-- `monoidal_boundedConstructibleUpperStar` for the condensed ring `𝒪̲_E` itself. -/
+noncomputable instance monoidal_boundedConstructibleUpperStar_padicIntegersRingObj (E : Type)
+    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] :
+    (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).Monoidal :=
+  monoidal_boundedConstructibleUpperStar (.integers ℓ E) f
+
+-- The prime `ℓ` of `E̲` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
+-- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
+set_option synthInstance.checkSynthOrder false in
+/-- `monoidal_boundedConstructibleUpperStar` for the condensed ring `E̲` itself. -/
+noncomputable instance monoidal_boundedConstructibleUpperStar_continuousMapRingObj (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ f).Monoidal :=
+  monoidal_boundedConstructibleUpperStar (.field ℓ E) f
+
+/-- `monoidal_boundedConstructibleUpperStar` for the condensed ring `ℚ̲̄_ℓ` itself. -/
+noncomputable instance monoidal_boundedConstructibleUpperStar_padicAlgClRingObj :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).Monoidal :=
+  monoidal_boundedConstructibleUpperStar (.algClosure ℓ) f
+
 end MonoidalUpperStar
 
 end AlgebraicGeometry.ProEtale.CondensedRing
