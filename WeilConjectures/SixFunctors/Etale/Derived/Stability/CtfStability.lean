@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Typing
 
 /-!
@@ -47,7 +50,7 @@ part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_st
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Opposite
+open CategoryTheory Limits MonoidalCategory Opposite Pretriangulated
 
 open scoped CategoryTheory.Functor
 
@@ -92,30 +95,32 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
 /-- Blueprint `thm-sf-ctf-stability`: Preservation on the proved finite-Tor domains.
 
 Let `Λ` be a finite ring whose exponent is invertible on the algebraically closed field `k`, and
-`f : X ⟶ Y` a separated morphism of separated finite-type `k`-schemes (`f` admitting a
-compactification). At this finite coefficient stage:
+`f : X ⟶ Y` a morphism over `k` of separated finite-type `k`-schemes (it is then separated of
+finite type; `f` is assumed to admit a compactification). At this finite coefficient stage:
 
 1. (i) `Lf^*` carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`, preserving the Tor interval `[a, b]`;
 2. (ii) `⊗ᴸ` carries `Dctf × Dctf` into `Dctf`, with Tor intervals `[a, b] + [c, d] ↦
    [a + c, b + d]`; internal Hom carries `Dctf × Dctf` into `Dctf`, and if `dim X ≤ m` it sends
    bounded constructible inputs of Tor amplitude `[a, b]`, `[c, d]` to Tor amplitude
-   `[c - b - 2m, d - a + 2m]`, sharpened to `[c - b, d - a]` when the first variable is
-   site-perfect (dualizable);
+   `[c - b - 2m, d - a + 2m]`, sharpened to `[c - b, d - a]` when the first variable `K` is
+   site-perfect (dualizable), in which case `RHom(K, M) ≅ K^∨ ⊗ᴸ M` with `K^∨ = RHom(K, Λ_X)`;
 3. (iii) `Rf_*` carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and if `dim X ≤ d` a bounded constructible
    input of Tor amplitude `[a, b]` goes to Tor amplitude `[a, b + 2d]`;
 4. (iv) `Rf_!` carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`;
 5. (v) on `Dctf(Y, Λ)`, `Rf^! ≅ 𝔻_X f^* 𝔻_Y`, `Rf^!` carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`, and
    if `dim X ≤ d_X`, `dim Y ≤ d_Y`, an input of Tor amplitude `[a, b]` goes to Tor amplitude
    `[a - 2 d_X, b + 2 d_Y]`;
-6. (vi) `𝔻_X = RHom(-, Ra_X^! Λ)` preserves `Dctf(X, Λ)`, `K ≅ 𝔻_X 𝔻_X K`, and `𝔻_X` restricts to
-   an anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`
+6. (vi) `𝔻_X = RHom(-, Ra_X^! Λ)` preserves `Dctf(X, Λ)`, the double-dual map `K ⟶ 𝔻_X 𝔻_X K`
+   is an isomorphism there, `𝔻_X` is exact (it carries a distinguished triangle
+   `K → L → M → K[1]` to a distinguished triangle `𝔻M → 𝔻L → 𝔻K → 𝔻M[1]`), and `𝔻_X` restricts
+   to an anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`
    (`AlgebraicGeometry.Etale.verdierDualEquivalence`);
 7. (vii) finite coefficient quotients `K ↦ K ⊗ᴸ (Λ ⧸ J)_X` commute with `Lf^*`, with `⊗ᴸ` and with
    `Rf_!`.
 
 The integral part of (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`. -/
 theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification aX]
-    [IsSeparated aY] [HasCompactification aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f]
+    [IsSeparated aY] [HasCompactification aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
     [HasCompactification f] :
     -- (i)
     ((∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
@@ -150,7 +155,7 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
               torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M →
                 torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b - 2 * (m : ℤ))
                   (d - a + 2 * (m : ℤ)) (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M)) ∧
-      ∀ (a b c d : ℤ)
+      (∀ (a b c d : ℤ)
         (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         boundedConstructible (ModuleCat.{u + 1} Λ) X K →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K → IsDualizable K →
@@ -158,6 +163,11 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
               torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M →
                 torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
                   (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M)) ∧
+      ∀ K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        IsDualizable K →
+          Nonempty ((((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) ≅
+            ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj
+              ((coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj M)) ∧
     -- (iii)
     ((∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
@@ -198,7 +208,12 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
             ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
           Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
-            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))))) ∧
+            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)))) ∧
+          IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K)) ∧
+      (∀ T ∈ distTriang (_root_.DerivedCategory (Sheaf X.smallEtaleTopology
+          (ModuleCat.{u + 1} Λ))),
+        ∃ w, Triangle.mk ((verdierDual (ModuleCat.{u + 1} Λ) aX).map T.mor₂.op)
+          ((verdierDual (ModuleCat.{u + 1} Λ) aX).map T.mor₁.op) w ∈ distTriang _) ∧
       Nonempty ((verdierDualEquivalence Λ aX).functor ⋙
           DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
         (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X).op ⋙
@@ -217,13 +232,23 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
   have : IsSeparated f := by
     have : IsSeparated (f ≫ aY) := hf ▸ inferInstance
     exact IsSeparated.of_comp f aY
+  have : QuasiCompact f := by
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := {}
+    have : QuasiCompact (f ≫ aY) := hf ▸ inferInstance
+    exact QuasiCompact.of_comp f aY
   obtain ⟨hi, hii, hiii, hiv, hdhom, hv, -⟩ :=
     constructibleFiniteTor_preservation Λ aX aY f hf
   obtain ⟨hti, htii, -, hthom, hthomd, -, htvi, hbid⟩ := torAmplitudeIn_preservation Λ aX aY f hf
-  refine ⟨⟨hi, hti⟩, ⟨hii, htii, hdhom, hthom, hthomd⟩, ⟨hiii, fun d hd a b K hK hKt ↦ ?_⟩,
+  refine ⟨⟨hi, hti⟩, ⟨hii, htii, hdhom, hthom, hthomd,
+      fun K M hK ↦ ⟨(nonempty_iso_coefficientDual_tensor hK M).some.symm⟩⟩,
+    ⟨hiii, fun d hd a b K hK hKt ↦ ?_⟩,
     hiv, ⟨fun K hK ↦ nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY
       f hf hK, hv, fun dX dY hdX hdY a b K hK hKt ↦ ?_⟩,
-    ⟨hbid, ⟨ObjectProperty.liftCompιIso _ _ _⟩⟩, fun J ↦
+    ⟨fun K hK ↦ ⟨(hbid K hK).1, (hbid K hK).2, isIso_verdierDualDoubleDual_app Λ aX hK⟩,
+      fun T hT ↦ exists_distTriang_derivedHom_left _ T hT, ⟨ObjectProperty.liftCompιIso _ _ _⟩⟩,
+    fun J ↦
       ⟨nonempty_iso_reductionModIdeal_leftDerivedUpperStar Λ f J,
         fun K M ↦ ⟨α_ K M _⟩, nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite Λ
           f J⟩⟩
@@ -250,14 +275,15 @@ section Integral
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoetherianRing Λ]
   [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
-  (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [IsAlgClosed k]
+  [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
 /-- Blueprint `thm-sf-ctf-stability`, clause (vii), integral coefficients.
 
 Let `Λ` be a Noetherian domain complete for `I = (ϖ)` with `Λ ⧸ I` finite of exponent invertible
-on `k` (the stage `𝒪_E`), and `f : X ⟶ Y` a separated finite-type morphism of separated
-finite-type `k`-schemes. Then:
+on the algebraically closed field `k` (the stage `𝒪_E`), and `f : X ⟶ Y` a separated
+finite-type morphism of separated finite-type `k`-schemes. Then:
 
 * `Dᵇc(X, Λ)` is the category of derived complete objects whose reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` are
   bounded constructible of Tor amplitude in one common interval, i.e. `Dᵇc(X, 𝒪_E) =

@@ -338,15 +338,16 @@ lemma exists_distinguished_derivedCompletionAdjunction_unit_app
   exact ObjectProperty.exists_distinguished_reflectorOfDistinguishedι _ _ _ K
 
 /-- The derived completion inverts every morphism `s : K ⟶ K'` sitting in a distinguished
-triangle `K ⟶ K' ⟶ X ⟶ K⟦1⟧` with `X` an object on which the generator of `I` acts
-invertibly. -/
-lemma isIso_derivedCompletion_map {K K' X : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+triangle `K ⟶ K' ⟶ X ⟶ K⟦1⟧` with `X` an object on which some generator `ϖ` of `I` acts
+invertibly (e.g. the chosen generator, `completionKernel J I h`). -/
+lemma isIso_derivedCompletion_map {ϖ : R} (hIϖ : I = Ideal.span {ϖ})
+    {K K' X : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
     {s : K ⟶ K'} {g : K' ⟶ X} {h' : X ⟶ K⟦(1 : ℤ)⟧} (hT : Triangle.mk s g h' ∈ distTriang _)
-    (hX : completionKernel J I h X) : IsIso ((derivedCompletion J I h).map s) := by
+    (hX : smulInvertible J ϖ X) : IsIso ((derivedCompletion J I h).map s) := by
   let adj := derivedCompletionAdjunction J I h
   refine isIso_of_coyoneda_map_bijective _ fun T ↦ ?_
   have hb := ObjectProperty.bijective_comp_of_distinguished hT hX
-    (derivedComplete_le_rightOrthogonal J I h _ T.property)
+    (rightOrthogonal_of_derivedComplete (mem_of_eq_span hIϖ) T.property)
   have e : (fun x : (derivedCompletion J I h).obj K' ⟶ T ↦
       (derivedCompletion J I h).map s ≫ x) =
       (adj.homEquiv K T).symm ∘ (fun a ↦ s ≫ a) ∘ adj.homEquiv K' T := by

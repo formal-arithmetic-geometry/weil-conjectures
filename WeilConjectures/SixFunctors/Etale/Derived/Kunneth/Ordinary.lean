@@ -86,7 +86,10 @@ the base change map (`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
 `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)`
 
 is an isomorphism for every bounded below `E ∈ D(X_ét, Λ)` of Tor amplitude in `[n, ∞)` and every
-bounded below `F ∈ D(T_ét, Λ)`. -/
+bounded below `F ∈ D(T_ét, Λ)`.
+
+The blueprint statement does not require `X` to be of finite type over `K`, but its proof uses
+it: it applies `lem-kun-0f1i`, which is stated for schemes of finite type, to the `Xᵢ`. -/
 theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
     [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
