@@ -117,7 +117,8 @@ instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_unit
         (boundedConstructible (condensedRingObj Λ X.left)).ι
           (boundedConstructibleLowerStar Λ ℓ f) :=
     derivedUpperStarLowerStarAdjunction Λ f.left
-  have : adj.CommShift ℤ := commShift_derivedUpperStarLowerStarAdjunction Λ f.left
+  have : adj.CommShift ℤ :=
+    commShift_derivedUpperStarLowerStarAdjunction_rightDerivedFunctor Λ f.left
   exact NatTrans.CommConnecting.restrictFullyFaithful_unit adj (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.fullyFaithfulι _)
 
@@ -131,7 +132,8 @@ instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_counit
         (boundedConstructible (condensedRingObj Λ X.left)).ι
           (boundedConstructibleLowerStar Λ ℓ f) :=
     derivedUpperStarLowerStarAdjunction Λ f.left
-  have : adj.CommShift ℤ := commShift_derivedUpperStarLowerStarAdjunction Λ f.left
+  have : adj.CommShift ℤ :=
+    commShift_derivedUpperStarLowerStarAdjunction_rightDerivedFunctor Λ f.left
   exact NatTrans.CommConnecting.restrictFullyFaithful_counit adj (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.fullyFaithfulι _)
 

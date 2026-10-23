@@ -20,7 +20,7 @@ from the levelwise functor `D((f)^*⟦Λ⟧)`
 pushforward `R((f)_*⟦Λ⟧)` the one of right derived functors. This file shows:
 
 * the derived adjunction `Lf^* ⊣ Rf_*` commutes with the shifts
-  (`ProEtale.CondensedRing.commShift_derivedUpperStarLowerStarAdjunction`);
+  (`ProEtale.CondensedRing.commShift_derivedUpperStarLowerStarAdjunction_rightDerivedFunctor`);
 * for an open immersion `j`, the adjunction `j_! ⊣ Lj^*` commutes with the shifts
   (`ProEtale.CondensedRing.commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction`);
 * the composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` commutes with the shifts
@@ -61,8 +61,10 @@ lemma derivedUpperStarLowerStarAdjunction_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (leftDerivedUpperStarIsoMapDerivedCategory Λ f)
     ((f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory_hom_fac).symm
 
-/-- The derived adjunction `Lf^* ⊣ Rf_*` on module objects commutes with the shifts. -/
-instance commShift_derivedUpperStarLowerStarAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
+/-- The derived adjunction `Lf^* ⊣ Rf_*` on module objects commutes with the shifts, for the shift
+structure of `Rf_*` as a right derived functor. -/
+instance commShift_derivedUpperStarLowerStarAdjunction_rightDerivedFunctor {X Y : Scheme.{u}}
+    (f : X ⟶ Y) :
     (derivedUpperStarLowerStarAdjunction Λ f).CommShift ℤ := by
   rw [derivedUpperStarLowerStarAdjunction_eq]
   exact Adjunction.commShift_ofNatIsoLeft _ _
