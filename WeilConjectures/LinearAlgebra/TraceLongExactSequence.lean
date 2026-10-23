@@ -10,6 +10,7 @@ public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.Algebra.Ring.NegOnePow
 public import Mathlib.LinearAlgebra.Trace
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import WeilConjectures.Mathlib.LinearAlgebra.Trace
 
 /-!
 # Alternating sums of traces along a long exact sequence
@@ -42,10 +43,6 @@ theorem trace_restrict_congr (φ : V →ₗ[K] V) {p q : Submodule K V} (hpq : p
     trace K p (φ.restrict hp) = trace K q (φ.restrict hq) := by
   subst hpq
   rfl
-
-/-- The trace of an endomorphism of a subsingleton module vanishes. -/
-theorem trace_eq_zero_of_subsingleton [Subsingleton V] (φ : V →ₗ[K] V) : trace K V φ = 0 := by
-  rw [Subsingleton.elim φ 0, map_zero]
 
 /-- **Additivity of the trace along an invariant subspace.** If `p` is invariant under `φ`, then
 the trace of `φ` is the sum of the traces of its restriction to `p` and of the induced map on
