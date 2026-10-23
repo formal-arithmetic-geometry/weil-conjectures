@@ -54,11 +54,11 @@ categories. By `CategoryTheory.CategoryCocone.IsFilteredTwoColimit` this is the 
 
 These are stated for a topologically noetherian `X`, the setting in which the bounded
 constructible complexes form a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible_continuousMapRingObj`, for the rings `E_X`). They
-are *not* formal consequences of the identification `ℚ̄_ℓ,X ≃ colim_E E_X` of
-`ProEtale.isColimitPadicAlgClRingObjCocone`, and they are false for the unbounded derived
-categories; see the module docstring of `WeilConjectures.CategoryTheory.FilteredTwoColimit` for
-the ordinary-category model of the 2-colimit that they describe.
+(`ProEtale.isTriangulated_boundedConstructible`). They are *not* formal consequences of the
+identification `ℚ̄_ℓ,X ≃ colim_E E_X` of `ProEtale.isColimitPadicAlgClRingObjCocone`, and they
+are false for the unbounded derived categories; see the module docstring of
+`WeilConjectures.CategoryTheory.FilteredTwoColimit` for the ordinary-category model of the
+2-colimit that they describe.
 
 ## Sorried input
 

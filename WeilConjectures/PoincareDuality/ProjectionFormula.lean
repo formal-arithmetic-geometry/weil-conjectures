@@ -221,14 +221,12 @@ end OfCompactification
 
 section BoundedConstructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] (hΛ : LowerStarFiniteness Λ k)
+variable {ℓ : ℕ} [Fact ℓ.Prime] (Λ : Profinite.EllAdicCoefficient ℓ) {k : Type u} [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
-  [(boundedConstructible (condensedRingObj Λ Y.left)).IsMonoidal]
   (f : X ⟶ Y)
 
 /-- The **derived exceptional projection morphism**
@@ -238,8 +236,8 @@ morphism `exceptionalProjectionMorphismOfCompactification` for the compactificat
 `Dᵇc ⥤ D` being fully faithful and monoidal. -/
 noncomputable def boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X.left)⟦Λ⟧)
     (B : Dᵇc(Y.left)⟦Λ⟧) :
-    (boundedConstructibleLowerShriek Λ ℓ hΛ f).obj K ⊗ B ⟶
-      (boundedConstructibleLowerShriek Λ ℓ hΛ f).obj
+    (boundedConstructibleLowerShriek Λ f).obj K ⊗ B ⟶
+      (boundedConstructibleLowerShriek Λ f).obj
         (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
   ObjectProperty.homMk
     (exceptionalProjectionMorphismOfCompactification Λ (compactificationOverField f) K.obj B.obj)
@@ -252,10 +250,10 @@ now. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc(X.left)⟦Λ⟧)
     {B B' : Dᵇc(Y.left)⟦Λ⟧} (h : B ⟶ B') :
-    (boundedConstructibleLowerShriek Λ ℓ hΛ f).obj K ◁ h ≫
-        boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B' =
-      boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B ≫
-        (boundedConstructibleLowerShriek Λ ℓ hΛ f).map
+    (boundedConstructibleLowerShriek Λ f).obj K ◁ h ≫
+        boundedConstructibleExceptionalProjectionMorphism Λ f K B' =
+      boundedConstructibleExceptionalProjectionMorphism Λ f K B ≫
+        (boundedConstructibleLowerShriek Λ f).map
           (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
   sorry
 
@@ -265,10 +263,10 @@ follows from the naturality of the three constituent maps; it is `sorry`ed for n
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left {K K' : Dᵇc(X.left)⟦Λ⟧}
     (φ : K ⟶ K') (B : Dᵇc(Y.left)⟦Λ⟧) :
-    (boundedConstructibleLowerShriek Λ ℓ hΛ f).map φ ▷ B ≫
-        boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K' B =
-      boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B ≫
-        (boundedConstructibleLowerShriek Λ ℓ hΛ f).map
+    (boundedConstructibleLowerShriek Λ f).map φ ▷ B ≫
+        boundedConstructibleExceptionalProjectionMorphism Λ f K' B =
+      boundedConstructibleExceptionalProjectionMorphism Λ f K B ≫
+        (boundedConstructibleLowerShriek Λ f).map
           (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
   sorry
 
@@ -280,21 +278,21 @@ natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`
 with components `boundedConstructibleExceptionalProjectionMorphism`. This is the form in which
 `PF^!` enters `CategoryTheory.Verdier`. -/
 noncomputable def boundedConstructibleExceptionalProjection :
-    curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek Λ ℓ hΛ f) ⟶
-      curriedTensorPost (boundedConstructibleLowerShriek Λ ℓ hΛ f) ⋙
+    curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek Λ f) ⟶
+      curriedTensorPost (boundedConstructibleLowerShriek Λ f) ⋙
         (Functor.whiskeringLeft _ _ _).obj (boundedConstructibleUpperStar Λ ℓ f) where
   app K :=
-    { app B := boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B
+    { app B := boundedConstructibleExceptionalProjectionMorphism Λ f K B
       naturality _ _ h :=
-        boundedConstructibleExceptionalProjectionMorphism_natural_right Λ ℓ hΛ f K h }
+        boundedConstructibleExceptionalProjectionMorphism_natural_right Λ f K h }
   naturality _ _ φ := NatTrans.ext <| funext fun B ↦
-    boundedConstructibleExceptionalProjectionMorphism_natural_left Λ ℓ hΛ f φ B
+    boundedConstructibleExceptionalProjectionMorphism_natural_left Λ f φ B
 
 @[simp]
 lemma boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ⟧)
     (B : Dᵇc(Y.left)⟦Λ⟧) :
-    ((boundedConstructibleExceptionalProjection Λ ℓ hΛ f).app K).app B =
-      boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B :=
+    ((boundedConstructibleExceptionalProjection Λ f).app K).app B =
+      boundedConstructibleExceptionalProjectionMorphism Λ f K B :=
   rfl
 
 /-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
@@ -302,13 +300,13 @@ lemma boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ�
 docstring. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X.left)⟦Λ⟧)
     (B : Dᵇc(Y.left)⟦Λ⟧) :
-    IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B) :=
+    IsIso (boundedConstructibleExceptionalProjectionMorphism Λ f K B) :=
   sorry
 
 instance isIso_boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ⟧)
     (B : Dᵇc(Y.left)⟦Λ⟧) :
-    IsIso (((boundedConstructibleExceptionalProjection Λ ℓ hΛ f).app K).app B) :=
-  isIso_boundedConstructibleExceptionalProjectionMorphism Λ ℓ hΛ f K B
+    IsIso (((boundedConstructibleExceptionalProjection Λ f).app K).app B) :=
+  isIso_boundedConstructibleExceptionalProjectionMorphism Λ f K B
 
 end BoundedConstructible
 

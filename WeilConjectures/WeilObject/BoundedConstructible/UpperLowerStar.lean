@@ -88,8 +88,7 @@ horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
     (sq : CommSq g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
-      (lowerStarFiniteness_padicAlgClRingObj ℓ) sq) :=
+    IsIso (boundedConstructibleBaseChange (.algClosure ℓ) sq) :=
   sorry
 
 end BaseChangeOfIsIso
@@ -152,14 +151,11 @@ section LowerStar
 that is `Φ_Y Rf_* ⟶ Rf_* Φ_X`: the base-change morphism of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilLowerStarComparison :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ)
-      (lowerStarFiniteness_padicAlgClRingObj ℓ) f ⋙
+    boundedConstructibleLowerStar (.algClosure ℓ) f ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eY.hom ⟶
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ)
-          (lowerStarFiniteness_padicAlgClRingObj ℓ) f :=
-  boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
-    (lowerStarFiniteness_padicAlgClRingObj ℓ) (CommSq.mk hf)
+        boundedConstructibleLowerStar (.algClosure ℓ) f :=
+  boundedConstructibleBaseChange (.algClosure ℓ) (CommSq.mk hf)
 
 /-- The Frobenius comparison of the derived pushforward is an isomorphism, the Frobenius
 automorphisms being isomorphisms. -/
@@ -176,15 +172,13 @@ noncomputable def weilLowerStar :
 @[simp]
 lemma weilLowerStar_obj_carrier (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).carrier =
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ)
-        (lowerStarFiniteness_padicAlgClRingObj ℓ) f).obj K.carrier :=
+      (boundedConstructibleLowerStar (.algClosure ℓ) f).obj K.carrier :=
   rfl
 
 lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).str =
       (asIso (weilLowerStarComparison ℓ eX eY f hf)).app K.carrier ≪≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ)
-          (lowerStarFiniteness_padicAlgClRingObj ℓ) f).mapIso K.str :=
+        (boundedConstructibleLowerStar (.algClosure ℓ) f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
@@ -192,8 +186,7 @@ the forgetful functors. -/
 lemma weilLowerStar_comp_forget :
     weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY =
       WeilBoundedConstructible.forget ℓ eX ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ)
-          (lowerStarFiniteness_padicAlgClRingObj ℓ) f :=
+        boundedConstructibleLowerStar (.algClosure ℓ) f :=
   rfl
 
 end LowerStar
