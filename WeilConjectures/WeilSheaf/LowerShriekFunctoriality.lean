@@ -17,8 +17,6 @@ The direct image with compact support `Rf₀! = Rḡ_* ∘ ī_!` of Weil complex
 `Rf₀!` collected in the blueprint theorem `prop-functor-package` of the six-functor chapter that
 the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
 
-- *independence of the compactification* (clause 2), in the case of the compactification
-  `U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`: `Rj₀!` is the extension by zero;
 - *composition* (clause 3): `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`, and the distinguished triangle
   `R(j ≫ f)₀! j^*K ⟶ Rf₀!K ⟶ R(i ≫ f)₀! i^*K ⟶` obtained by applying `Rf₀!` to the
   localization triangle of an open immersion `j` and its closed complement `i`;
@@ -28,15 +26,17 @@ These clauses belong to the six-functor chapter and are stated here with `sorry`
 the blueprint statement it renders. The identification of `Rf₀!` with `Rf₀*` for proper `f` is
 proved here. The open–closed triangle of a Weil complex
 (`prop-sf-open-closed-triangle-all-stages`) is in `WeilConjectures.WeilSheaf.OpenClosedTriangle`.
+Clause 2 in the case of the compactification `U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`
+(`Rj₀!` is the extension by zero) is proved in
+`WeilConjectures.WeilSheaf.ExtensionByZeroLowerShriek`, which needs proper base change.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar`: `Rf₀! ≅ Rf₀*` for
   `f` proper.
-- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion`,
-  `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`,
+- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`,
   `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` and
-  `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: clauses 2, 3 and 4 of
+  `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: clauses 3 and 4 of
   `prop-functor-package`.
 -/
 
@@ -143,20 +143,6 @@ section Package
 variable {X Y Z U : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
   [U.Over (Spec (CommRingCat.of k₀))]
-
-/-- **The direct image with compact support along an open immersion is the extension by zero**
-(blueprint: `prop-functor-package`, clause 2, compactification comparisons for
-`Rf_! = Rf̄_* j_!` are independent of the refinement, applied to the compactification
-`U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`; and `def-weil-extension-by-zero`). For a
-quasi-compact open immersion `j` and a Weil sheaf `G` on `U`, `Rj₀!G ≅ j₀!G` in degree zero. -/
-theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ X)
-    [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l U) :
-    Nonempty ((derivedLowerShriek k₀ l j).obj (WeilSheaf.toComplex.obj G) ≅
-      WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) :=
-  sorry
 
 /-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,
 clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `lem-zl-shriek-composition` of

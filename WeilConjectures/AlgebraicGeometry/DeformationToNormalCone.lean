@@ -91,6 +91,7 @@ variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
 /-- The inclusion `𝒪_X / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}` of the degree-zero part of the associated
 graded algebra. -/
+@[simps]
 noncomputable def quotientToNormalCone : I.quotientAlgebra ⟶ I.normalConePresheaf where
   app U := CommRingCat.ofHom (Ideal.Quotient.lift _
     ((Ideal.Quotient.mk (I.tIdeal U)).comp (I.toReesPresheaf.app U).hom)

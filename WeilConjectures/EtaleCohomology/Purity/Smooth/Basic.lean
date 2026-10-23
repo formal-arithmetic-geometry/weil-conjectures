@@ -306,7 +306,7 @@ include d in
 (`AlgebraicGeometry.Etale.tensorComparison`) of a smooth morphism, as an isomorphism: it is the
 tensor formula of `sk-prop-cohsm` (b)
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`). -/
-noncomputable def smoothTensorIso
+noncomputable def smoothTensorIso [QuasiSeparatedSpace Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
@@ -317,7 +317,7 @@ noncomputable def smoothTensorIso
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 @[simp]
-lemma smoothTensorIso_hom
+lemma smoothTensorIso_hom [QuasiSeparatedSpace Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (smoothTensorIso Λ (d := d) f K).hom = tensorComparison Λ f K :=
   rfl
@@ -330,7 +330,7 @@ omit [IsSeparated f] in
 `γ_{f,K} = smoothPurityIso f K θ φ_{f,K}` built with the tensor comparison `φ_{f,K}` of
 `pur9-cs-def-phi` (`AlgebraicGeometry.Etale.smoothTensorIso`) are the components of a natural
 isomorphism `Lf^*(-)(d)[2d] ≅ Rf^!` of functors `D(Y_ét, Λ) ⥤ D(X_ét, Λ)`. -/
-noncomputable def smoothPurityNatIso
+noncomputable def smoothPurityNatIso [QuasiSeparatedSpace Y]
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) :
     L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅
@@ -344,7 +344,7 @@ noncomputable def smoothPurityNatIso
 
 omit [IsSeparated f] in
 @[simp]
-lemma smoothPurityNatIso_app
+lemma smoothPurityNatIso_app [QuasiSeparatedSpace Y]
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -371,7 +371,7 @@ commutes. Its three factors (the twist reassociation, `1 ⊗ θ⁻¹` and `φ_{f
 apart from the identification `θ : ω_f ≅ Λ_X(d)[2d]` itself, the construction involves no
 choice. -/
 @[reassoc]
-theorem smoothPurityIso_hom_naturality
+theorem smoothPurityIso_hom_naturality [QuasiSeparatedSpace Y]
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -400,7 +400,7 @@ the projection-formula composite with the integration map of `p_d`, so `γ_{p_d,
 The library does not define the affine-line and affine-space comparisons as maps (only their
 existence, `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`), so the
 statement is made for an arbitrary integration map. -/
-theorem smoothPurityIso_hom_eq_traceComparison
+theorem smoothPurityIso_hom_eq_traceComparison [QuasiSeparatedSpace Y]
     (tr : (R(f)_![ModuleCat.{u + 1} Λ]).obj ((twistShift Λ X d).obj (constantComplex Λ X)) ⟶
       𝟙_ _)
     [IsIso (traceAdjunct f tr)]
@@ -438,6 +438,7 @@ theorem exists_smoothPurityNatIso [HasTateTwist.IsNormalized Λ] {k : Type u} [F
         ((smoothPurityNatIso Λ (d := d) f θ).app K).hom = (twistShiftObjIso Λ X d _).hom ≫
           ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
             ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   exact ⟨θ, fun K ↦ rfl⟩
 
@@ -459,6 +460,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormaliz
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K ≅
       (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
   exact ⟨(smoothPurityIso Λ (d := d) f K θ φ).symm⟩
@@ -486,6 +488,7 @@ theorem isIso_smoothPurityMap [HasTateTwist.IsNormalized Λ] {k : Type u} [Field
     IsIso ((twistShiftObjIso Λ X d _).hom ≫
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K) := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   rw [← smoothTensorIso_hom Λ (d := d) f K, ← smoothPurityIso_hom]
   infer_instance
 include d in
@@ -512,6 +515,8 @@ theorem nonempty_iso_dualizingComplex_comp [HasTateTwist.IsNormalized Λ]
       ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
         ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f))) := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e + d) (g ≫ f) aY
   obtain ⟨θg⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e) g (f ≫ aY)
   obtain ⟨θf⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
@@ -547,7 +552,7 @@ theorem exists_smoothPurityIso_baseChange_comp [HasTateTwist.IsNormalized Λ] {k
               ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
                 ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map θ.inv ≫ tensorComparison Λ f K) ∧
       (∀ {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {v : Y' ⟶ Y}
-          (_ : IsPullback g' f' f v) [HasCompactification f'],
+          (_ : IsPullback g' f' f v) [HasCompactification f'] [QuasiCompact f'],
         Nonempty ((L((g')^*[ModuleCat.{u + 1} Λ])).obj
             (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
           dualizingComplex (ModuleCat.{u + 1} Λ) f')) ∧
@@ -558,9 +563,10 @@ theorem exists_smoothPurityIso_baseChange_comp [HasTateTwist.IsNormalized Λ] {k
               (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
             ((L((g)^*[ModuleCat.{u + 1} Λ])).obj
               (dualizingComplex (ModuleCat.{u + 1} Λ) f)))) := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   refine ⟨θ, fun K _ ↦ ⟨smoothPurityIso Λ f K θ (smoothTensorIso Λ (d := d) f K), rfl⟩,
-    fun {X' Y' g' f' v} sq _ ↦ ?_, fun {W e} g _ _ _ _ _ ↦
+    fun {X' Y' g' f' v} sq _ _ ↦ ?_, fun {W e} g _ _ _ _ _ ↦
       nonempty_iso_dualizingComplex_comp Λ (d := d) f aY (e := e) g⟩
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
   obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) v

@@ -44,6 +44,7 @@ namespace ProEtale
 section CompactSupportComparison
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
   {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- Blueprint `lem-sf-class-compact-support-comparison`: On the coefficient class the
@@ -100,6 +101,7 @@ section ClassAdjoint
 /- The adjunction `ν^* ⊣ Rν_*` on the unbounded derived categories is obtained by deriving the
 pullback via K-flat resolutions, hence the closed symmetric monoidal structure on `A`. -/
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
   {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}

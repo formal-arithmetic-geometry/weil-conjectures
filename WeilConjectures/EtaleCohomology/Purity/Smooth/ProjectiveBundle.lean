@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ChernPowMapBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveBundleFormula
 
 /-!
@@ -78,9 +79,12 @@ exponent of `Λ` is invertible, and let `h ∈ H²(P, Λ(1))` be a class restric
 
 is an isomorphism.
 
-Not proved here: on the charts this is
-`AlgebraicGeometry.Etale.isIso_projectiveFormulaMap`, and the formation of `Rp_*` commutes with
-restriction to the opens of the base. -/
+Proof: being an isomorphism is checked on the opens `U i` covering `B`. The restriction of the map
+to `U i` is the map for `p⁻¹(U i) ⟶ U i` and the restricted class
+(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_projectiveFormulaMap_iff`: open base
+change). Along the chart `p⁻¹(U i) ≅ ℙʳ_{U i}` over `U i` it is the map for projective space and
+the hyperplane class (`AlgebraicGeometry.Etale.isIso_projectiveFormulaMap_comp_iff`), an
+isomorphism by `AlgebraicGeometry.Etale.isIso_projectiveFormulaMap`. -/
 theorem isIso_projectiveFormulaMap_of_projectiveBundle [Fintype n] {P B : Scheme.{u}}
     [HasInvertibleExponent Λ P] [HasInvertibleExponent Λ B] (aB : B ⟶ Spec (.of k))
     [IsSeparated aB] [LocallyOfFiniteType aB] {p : P ⟶ B} (E : ProjectiveBundle n p)
@@ -88,7 +92,21 @@ theorem isIso_projectiveFormulaMap_of_projectiveBundle [Fintype n] {P B : Scheme
     (hh : ∀ i, ∃ γ, IsHyperplaneClass Λ n (E.U i) γ ∧
       restrictClass ((E.chart i).inv ≫ (p ⁻¹ᵁ E.U i).ι) h = hyperplaneChernClass γ) :
     IsIso (projectiveFormulaMap p h (Fintype.card n)) := by
-  sorry
+  refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ (fun i ↦ (E.U i).ι)
+    (fun x ↦ ?_) _ fun i ↦ ?_
+  · obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (E.iSup_U.ge (Set.mem_univ x))
+    exact ⟨i, ⟨x, hi⟩, rfl⟩
+  obtain ⟨γ, hγ, hres⟩ := hh i
+  have hc : VectorBundle.classRestriction Λ (r := 1) (p ⁻¹ᵁ E.U i).ι h =
+      VectorBundle.classRestriction Λ (r := 1) (E.chart i).hom (hyperplaneChernClass γ) := by
+    rw [← hres]
+    exact VectorBundle.classRestriction_comp Λ (E.chart i).hom
+      ((E.chart i).inv ≫ (p ⁻¹ᵁ E.U i).ι) (p ⁻¹ᵁ E.U i).ι (Iso.hom_inv_id_assoc _ _).symm h
+  rw [isIso_leftDerivedUpperStar_map_projectiveFormulaMap_iff
+      (isPullback_morphismRestrict p (E.U i)).flip h, hc,
+    isIso_projectiveFormulaMap_comp_iff (E.chart i).hom (ℙ(Option n; E.U i) ↘ E.U i)
+      (p ∣_ E.U i) (E.chart_over i).symm]
+  exact isIso_projectiveFormulaMap ((E.U i).ι ≫ aB) γ hγ
 
 end Etale
 

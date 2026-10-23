@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.WeilSheaf.ExtensionByZeroLowerShriek
 public import WeilConjectures.WeilSheaf.FiniteLowerStar
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 

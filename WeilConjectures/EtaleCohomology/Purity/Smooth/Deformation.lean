@@ -258,9 +258,11 @@ theorem hasInvertibleExponent_scheme : HasInvertibleExponent Λ D.scheme :=
 omit [HasTateTwist Λ] in
 /-- The family object is ⊗-invertible: `ω_{g̃}` is by cohomological smoothness of the smooth
 separated `g̃` (`sk-prop-cohsm` (a)), and derived pullback along `s̃` preserves invertibility. -/
-theorem isInvertible_familyObject :
+theorem isInvertible_familyObject [QuasiSeparatedSpace B] :
     Etale.DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); B) (D.familyObject Λ) :=
   have := D.hasInvertibleExponent_scheme Λ
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   Etale.DerivedCategory.isInvertible.leftDerivedUpperStar D.sect
     (isInvertible_dualizingComplex Λ (d := d) D.proj)
 
@@ -536,15 +538,17 @@ theorem existsUnique_familyObject_iso [QuasiCompact D.proj]
     exact ε.hom.naturality ψ.hom
   let ψ := (i₁.mapIso κ₀ ≪≫ ε.app _).symm ≪≫ θ
   have hψ : (i₁.map κ₀.hom ≫ ε.hom.app _) ≫ ψ.hom = θ.hom := by simp [ψ]
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
   refine ⟨κ₀ ≪≫ a.mapIso ψ, (key κ₀ ψ).trans hψ, fun κ hκ ↦ ?_⟩
   refine eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _ (D.isInvertible_familyObject Λ) _ _ ?_
   rw [← cancel_mono (ε.hom.app _)]
   exact hκ.trans ((key κ₀ ψ).trans hψ).symm
 
+include aB in
 /-- The comparison `κ_{g,s} : F ≅ La^* 𝒞(g, s)` of the family object with the pullback of the
 section invariant, normalized at `t = 1` against `θ₁ : i₁^* F ≅ 𝒞(g, s)`: the unique one of
 `existsUnique_familyObject_iso`. This is the extension of the punctured trivialisation. -/
-noncomputable def familyObjectIso
+noncomputable def familyObjectIso [QuasiCompact D.proj]
     (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s) :
     D.familyObject Λ ≅
@@ -561,7 +565,7 @@ of `a ∘ i₀ = 𝟙`, the inverse of `Li₀^* κ_{g,s}` for the comparison
 `κ_{g,s} : F ≅ La^* 𝒞(g, s)` (`familyObjectIso`, normalized against the fibre identification
 `θ₁` at `t = 1`) and the fibre identification `θ₀ : Li₀^* F ≅ 𝒞(π_N, 0_N)` at `t = 0`
 (`lem-pur-dnc-section-geometry` (1)). -/
-noncomputable def dncIso [HasCompactification N.proj]
+noncomputable def dncIso [HasCompactification N.proj] [QuasiCompact D.proj]
     (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s)
     (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
@@ -582,7 +586,7 @@ to `θ` at `t = 1` (clause (3)), and let `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` be th
 the restriction `κ|_{B'} : Lv₁^* F ≅ Lv₁^* La^* 𝒞(g, s) ≅ La'^* Lu^* 𝒞(g, s)` restricts at
 `t = 1` to the restriction `Lu^* θ` of `θ`, and it is the only comparison
 `Lv₁^* F ≅ La'^* Lu^* 𝒞(g, s)` doing so. -/
-theorem leftDerivedUpperStar_familyObject_iso_baseChange
+theorem leftDerivedUpperStar_familyObject_iso_baseChange [QuasiSeparatedSpace B]
     (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s)
     (κ : D.familyObject Λ ≅
@@ -740,6 +744,7 @@ theorem exists_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d
   let φ₁ := sectionRestrictionIso _ u _ (AffineSpace.oneSection_comp_map u)
     (AffineSpace.oneSection_comp_over _ B') θ₁ e
   -- the restriction of `κ` is `e` read in the coordinates `φ₁`
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
   have hκr : κr = e ≪≫
       (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁.symm := by
     refine eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _
@@ -805,6 +810,7 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
             (AffineSpace.zeroSection_comp_over _ B') θ₀ e).symm := by
   have := D.hasInvertibleExponent_scheme Λ
   obtain ⟨Ψ₀, hΨ₀⟩ := exists_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
   have hinv : DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) :=
     DerivedCategory.isInvertible.of_iso θ₁
       (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
@@ -888,7 +894,7 @@ theorem existsUnique_iso_sectionInvariant_normalCone_and_baseChange
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
     (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
     (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B]
+    [HasInvertibleExponent Λ B] [QuasiCompact D.proj]
     (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s)
     (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj

@@ -12241,6 +12241,7 @@ public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.DualIrreducible
 public import WeilConjectures.WeilSheaf.EulerProduct
 public import WeilConjectures.WeilSheaf.ExtensionByZero
+public import WeilConjectures.WeilSheaf.ExtensionByZeroLowerShriek
 public import WeilConjectures.WeilSheaf.FieldCoefficient
 public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars

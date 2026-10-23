@@ -156,8 +156,8 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
         [LocallyOfFiniteType aY], p ≫ aY = aX → ∀ d : ℕ,
         topologicalKrullDim X ≤ (d : WithBot ℕ∞) →
         ProEtale.HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) p (2 * d))) ∧
-    (∀ {X Y : Scheme.{u}} (_ : Y ⟶ Spec (.of k)) (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
-      [SmoothOfRelativeDimension d f],
+    (∀ {X Y : Scheme.{u}} (_ : Y ⟶ Spec (.of k)) [QuasiSeparatedSpace Y] (f : X ⟶ Y)
+      [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f],
       (∀ (a b : ℤ)
         (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
@@ -203,7 +203,7 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
               ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
             torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
               ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
-  refine ⟨⟨fun f _ ↦ inferInstance, fun _ X Y p _ aX aY _ _ hp d hd ↦ ?_⟩, fun aY f _ d _ ↦ ?_,
+  refine ⟨⟨fun f _ ↦ inferInstance, fun _ X Y p _ aX aY _ _ hp d hd ↦ ?_⟩, fun aY _ f _ d _ ↦ ?_,
     fun aT _ _ d hT i _ j _ hij ↦
       (isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion aT d hT i j hij
         Λ).2,

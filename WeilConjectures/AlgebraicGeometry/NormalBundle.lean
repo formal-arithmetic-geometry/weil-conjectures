@@ -49,20 +49,6 @@ lemma algebraMap_mem_tIdeal (U : X.AffineZariskiSiteᵒᵖ) {a : Γ(X, U.unop.1)
     Ideal.coe_algebraMap_extendedReesAlgebra, mul_assoc, ← LaurentPolynomial.T_add]
   simp
 
-/-- The inclusion `𝒪_X / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}` of the degree zero part: an element of `I`
-is `(x t⁻¹) · t`, which vanishes modulo `t`. -/
-@[simps]
-noncomputable def quotientToNormalCone : I.quotientAlgebra ⟶ I.normalConePresheaf where
-  app U := CommRingCat.ofHom (Ideal.Quotient.lift _
-    ((Ideal.Quotient.mk (I.tIdeal U)).comp (I.toReesPresheaf.app U).hom)
-    fun a ha ↦ Ideal.Quotient.eq_zero_iff_mem.2 (I.algebraMap_mem_tIdeal U ha))
-  naturality U V i := by
-    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_))
-    change Ideal.Quotient.mk _
-        ((I.toReesPresheaf.app V).hom ((X.affineStructurePresheaf.map i).hom x)) =
-      Ideal.Quotient.mk _ ((I.reesPresheaf.map i).hom ((I.toReesPresheaf.app U).hom x))
-    exact congrArg _ (I.toReesPresheaf.naturality_apply i x)
-
 lemma toQuotientAlgebra_comp_quotientToNormalCone :
     I.toQuotientAlgebra ≫ I.quotientToNormalCone =
       I.toReesPresheaf ≫ toQuotientPresheaf I.tIdeal I.map_tIdeal := by
@@ -74,11 +60,6 @@ lemma quotientToNormalCone_comp_normalConeToQuotient :
   refine NatTrans.ext (funext fun U ↦ CommRingCat.hom_ext
     (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_)))
   exact congr($(I.toNormalConePresheaf_comp_normalConeToQuotient).app U x)
-
-/-- The projection `N_I X ⟶ V(I)` of the normal cone to the closed subscheme. -/
-noncomputable def normalConeToQuotientSpec : I.normalCone ⟶ I.quotientSpec :=
-  relativeGluingMap I.coequifibered_toQuotientAlgebra I.coequifibered_toNormalConePresheaf
-    I.quotientToNormalCone
 
 lemma normalConeToQuotientSpec_toBase :
     I.normalConeToQuotientSpec ≫ (relativeGluingData I.coequifibered_toQuotientAlgebra).toBase =

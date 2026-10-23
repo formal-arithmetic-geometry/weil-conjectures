@@ -38,12 +38,13 @@ variable {V T : Scheme.{u}} {r : ℕ} {π : V ⟶ T} (E : VectorBundle r π) (s 
   (hs : s ≫ π = 𝟙 T)
 
 /-- Over a trivialising open `U i`, the zero scheme `Z(s) = s⁻¹(0)` of a section `s` is the zero
-locus of its components `s₁, …, s_r` (`AlgebraicGeometry.VectorBundle.sectionCoord`). -/
-lemma exists_isPullback_sectionCoord (i : E.ι) :
-    ∃ g : (E.U i).toScheme.zeroLocusSubscheme (Set.range (E.sectionCoord s hs i)) ⟶
-        pullback E.zero s,
-      IsPullback g ((E.U i).toScheme.zeroLocusSubschemeι (Set.range (E.sectionCoord s hs i)))
+locus of its components `f = (s₁, …, s_r)` (`AlgebraicGeometry.VectorBundle.sectionCoord`). -/
+lemma exists_isPullback_sectionCoord (i : E.ι) (f : Fin r → Γ((E.U i).toScheme, ⊤))
+    (hf : E.sectionCoord s hs i = f) :
+    ∃ g : (E.U i).toScheme.zeroLocusSubscheme (Set.range f) ⟶ pullback E.zero s,
+      IsPullback g ((E.U i).toScheme.zeroLocusSubschemeι (Set.range f))
         (pullback.snd E.zero s) (E.U i).ι := by
+  subst hf
   have hgs := isPullback_zeroLocusSubschemeι (E.sectionRes s hs i)
     (Set.range (E.coord i)) (Set.range (E.sectionCoord s hs i))
     (by rw [← Set.range_comp]; rfl)
@@ -74,7 +75,7 @@ lemma exists_restrictSupportedClass_localizedTopChern_eq (i : E.ι)
           (leftDerivedUpperStarTateShiftIso Λ _ r) (E.localizedTopChern s Λ aT) =
         kummerBoundaryProduct Λ f := by
   subst hf
-  obtain ⟨g, hg⟩ := E.exists_isPullback_sectionCoord s hs i
+  obtain ⟨g, hg⟩ := E.exists_isPullback_sectionCoord s hs i _ rfl
   exact ⟨g, hg, E.restrictSupportedClass_localizedTopChern s hs Λ aT i g hg⟩
 
 end VectorBundle
@@ -88,14 +89,87 @@ the ratio `T_t / T_b`. -/
 lemma twistBundle_sectionCoord (t b : n) (a : Fin 1) :
     (twistBundle n S).sectionCoord (twistBundleSection n S t) (twistBundleSection_comp_π n S t)
       b a = (standardOpen n S b).topIso.inv (coordRatio n S b t) := by
-  sorry
+  set r := (twistBundle n S).sectionRes (twistBundleSection n S t)
+    (twistBundleSection_comp_π n S t) b
+  have hr : r ≫ (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).ι ≫ (twistBundleOpen n S).ι =
+      (standardOpen n S b).ι ≫ twistBundleSectionAux n S t := by
+    have h := (twistBundle n S).sectionRes_ι (twistBundleSection n S t)
+      (twistBundleSection_comp_π n S t) b
+    rw [← Category.assoc]
+    exact (h =≫ (twistBundleOpen n S).ι).trans (by rw [Category.assoc, twistBundleSection_ι])
+  have e₁ : (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).topIso.inv =
+      (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).ι.appLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S b)
+        ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₂ : r.appTop = r.appLE ⊤ ⊤ le_top := by
+    rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+    rfl
+  have hh : (standardOpen n S b).ι ≫ twistBundleSectionAux n S t =
+      homOfSections ((standardOpen n S b).ι ≫ ℙ(n; S) ↘ S)
+        (fun a ↦ (standardOpen n S b).topIso.inv ((twistBundleSectionSections n S t a).s b))
+        (Scheme.CoordinateCover.span_topIso_inv _ (span_twistBundleSectionSections n S t) b) :=
+    Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover n S) _ _ _ _
+  simp only [VectorBundle.sectionCoord, twistBundle_coord, twistBundleFiberCoord]
+  rw [e₁, e₂, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
+    Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hr, appLE_eq_of_eq hh]
+  exact (homOfSections_appLE_coordRatio (S := S) _ _ _
+    (twistBundleSectionSections_some_s_self n S t b) none _).trans rfl
+
+/-- A point of the standard open `D₊(T_b)` lies in the basic open of `T_t / T_b` if and only if
+it lies in `D₊(T_t)`. -/
+lemma mem_basicOpen_topIso_inv_coordRatio (b t : n) (y : (standardOpen n S b).toScheme) :
+    y ∈ (standardOpen n S b).toScheme.basicOpen
+      ((standardOpen n S b).topIso.inv (coordRatio n S b t)) ↔ y.1 ∈ standardOpen n S t := by
+  rw [← (standardOpen n S b).ι.preimage_image_eq (Scheme.basicOpen _ _),
+    Scheme.Opens.ι_image_basicOpen_topIso_inv]
+  have h : ℙ(n; S).basicOpen (coordRatio n S b t) = standardOpen n S b ⊓ standardOpen n S t :=
+    (standardCoordinateCover n S).basicOpen_ratio b t
+  rw [h]
+  exact ⟨fun hy ↦ hy.2, fun hy ↦ ⟨y.2, hy⟩⟩
 
 /-- The zero scheme of the coordinate section `[x] ↦ [x : x_t]` of `𝒪(1)` is the complement of
 `D₊(T_t)`. -/
 lemma range_pullbackSnd_twistBundleSection (t : n) :
     Set.range (pullback.snd (twistBundle n S).zero (twistBundleSection n S t)).base =
       ((standardOpen n S t : Set ℙ(n; S)))ᶜ := by
-  sorry
+  ext x
+  obtain ⟨b, hb⟩ := TopologicalSpace.Opens.mem_iSup.mp
+    ((iSup_standardOpen n S).ge (Set.mem_univ x))
+  obtain ⟨g, hg⟩ := (twistBundle n S).exists_isPullback_sectionCoord (twistBundleSection n S t)
+    (twistBundleSection_comp_π n S t) b
+    (fun _ ↦ (standardOpen n S b).topIso.inv (coordRatio n S b t))
+    (funext (twistBundle_sectionCoord n S t b))
+  have hr := Scheme.range_eq_inter_of_isPullback hg rfl
+  rw [hg.w, Set.range_const] at hr
+  have hV := range_zeroLocusSubschemeι_singleton
+    ((standardOpen n S b).topIso.inv (coordRatio n S b t))
+  rw [Scheme.Opens.range_ι] at hV
+  constructor
+  · intro hx
+    have hx' : x ∈ Set.range (((standardOpen n S b).toScheme.zeroLocusSubschemeι
+        {(standardOpen n S b).topIso.inv (coordRatio n S b t)}) ≫ (standardOpen n S b).ι).base := by
+      rw [hr]
+      exact ⟨hx, by rw [Scheme.Opens.range_ι]; exact hb⟩
+    obtain ⟨v, rfl⟩ := hx'
+    have hv : (Scheme.zeroLocusSubschemeι _ _).base v ∈ Set.range
+        ((standardOpen n S b).toScheme.zeroLocusSubschemeι
+          {(standardOpen n S b).topIso.inv (coordRatio n S b t)}).base := ⟨v, rfl⟩
+    rw [hV] at hv
+    intro ht
+    exact hv ((mem_basicOpen_topIso_inv_coordRatio n S b t _).2 ht)
+  · intro hx
+    have hy : (⟨x, hb⟩ : (standardOpen n S b).toScheme) ∈ Set.range
+        ((standardOpen n S b).toScheme.zeroLocusSubschemeι
+          {(standardOpen n S b).topIso.inv (coordRatio n S b t)}).base := by
+      rw [hV]
+      exact fun h ↦ hx ((mem_basicOpen_topIso_inv_coordRatio n S b t _).1 h)
+    obtain ⟨v, hv⟩ := hy
+    have hx' : x ∈ Set.range (((standardOpen n S b).toScheme.zeroLocusSubschemeι
+        {(standardOpen n S b).topIso.inv (coordRatio n S b t)}) ≫ (standardOpen n S b).ι).base :=
+      ⟨v, by rw [Scheme.Hom.comp_apply, hv]; rfl⟩
+    rw [hr] at hx'
+    exact hx'.1
 
 end ProjectiveSpace
 
@@ -185,10 +259,13 @@ theorem exists_pointClass_aux : ∀ (n : ℕ) (a : Fin n → m)
     · exact restrictSupportedClass_kummerBoundaryProduct Λ _ f₀ f (fun j ↦ j.elim0) _ hg
   | n + 1, a, f, hf => by
     obtain ⟨f₀, x, rfl⟩ : ∃ f₀ x, f = Fin.append f₀ (fun _ : Fin 1 ↦ x) :=
-      ⟨Fin.init f, f (Fin.last n), by rw [Fin.append_right_eq_snoc, Fin.snoc_init_self]⟩
+      ⟨Fin.init f, f (Fin.last n), by
+        rw [Fin.append_right_eq_snoc]
+        exact (Fin.snoc_init_self f).symm⟩
     have hf₀ (j : Fin n) : f₀ j = (standardOpen (Option m) S none).topIso.inv
         (coordRatio (Option m) S none (some (a j.castSucc))) := by
-      rw [← hf j.castSucc, Fin.append_left]
+      rw [← hf j.castSucc]
+      exact (Fin.append_left f₀ _ j).symm
     have hx : x = (standardOpen (Option m) S none).topIso.inv
         (coordRatio (Option m) S none (some (a (Fin.last n)))) := by
       rw [← hf (Fin.last n)]
@@ -265,7 +342,78 @@ the localized first Chern classes of the coordinate sections `T_a`, `a : m`, of 
 `T_a / T_∗`, the Thom class of the origin
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord`). -/
 theorem nonempty_pointClassData : Nonempty (PointClassData Λ m aS) := by
-  sorry
+  let σ : Fin (Fintype.card m) ≃ m := (Fintype.equivFin m).symm
+  set U := standardOpen (Option m) S none
+  let f : Fin (Fintype.card m) → Γ(U.toScheme, ⊤) :=
+    fun j ↦ U.topIso.inv (coordRatio (Option m) S none (some (σ j)))
+  obtain ⟨Z, i, _, γ, g, hg, hrange, hforget, hres⟩ :=
+    exists_pointClass_aux Λ m aS _ σ f fun _ ↦ rfl
+  have hsub : Set.range i.base ⊆ Set.range U.ι.base := by
+    rintro _ ⟨z, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    obtain ⟨b, hb⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      ((iSup_standardOpen (Option m) S).ge (Set.mem_univ (i z)))
+    cases b with
+    | none => exact hb
+    | some a =>
+      have hz : i z ∈ Set.range i.base := ⟨z, rfl⟩
+      rw [hrange] at hz
+      exact absurd (by simpa [σ] using hb) (hz (σ.symm a))
+  have hgs (z : Z) : ∃ v, g v = z := by
+    obtain ⟨w, hw⟩ := hsub ⟨z, rfl⟩
+    obtain ⟨v, hv, -⟩ := hg.exists_scheme_point z w hw.symm
+    exact ⟨v, hv⟩
+  have : IsOpenImmersion g :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion) hg.flip inferInstance
+  have : Surjective g := ⟨hgs⟩
+  have : IsIso g := (isIso_iff_isOpenImmersion_and_surjective g).2 ⟨inferInstance, inferInstance⟩
+  -- the chart `D₊(T_∗) ≅ 𝔸^m_S` and the model
+  let e : ULift.{u} (Fin (Fintype.card m)) ≃ {j : Option m // j ≠ none} :=
+    { toFun := fun j ↦ ⟨some (σ j.down), Option.some_ne_none _⟩
+      invFun := fun j ↦ ⟨σ.symm (j.1.get (Option.ne_none_iff_isSome.mp j.2))⟩
+      left_inv := fun j ↦ by simp
+      right_inv := fun j ↦ by
+        obtain ⟨_ | a, h⟩ := j
+        · exact absurd rfl h
+        · simp }
+  have he (j : Fin (Fintype.card m)) :
+      (standardOpenIso (Option m) S none).hom.appTop (AffineSpace.coord S (e ⟨j⟩)) = f j :=
+    standardOpenIso_hom_appTop_coord _ _ _
+  have : IsIso (AffineSpace.reindex e S) := (AffineSpace.reindexIso S e).isIso_hom
+  have hthom := isIso_supportedClassMap_kummerBoundaryProduct_of_etale Λ
+    (standardOpenIso (Option m) S none).hom _ f he
+    (isIso_supportedClassMap_kummerBoundaryProduct_of_etale Λ (AffineSpace.reindex e S)
+      (fun a ↦ AffineSpace.coord S (ULift.up a)) _
+      (fun a ↦ AffineSpace.reindex_appTop_coord _ _ _)
+      (isIso_supportedClassMap_kummerBoundaryProduct_coord Λ (Fintype.card m) S aS))
+  -- the support maps isomorphically to `S`
+  have himg : (standardOpenIso (Option m) S none).hom.appTop '' Set.range (AffineSpace.coord S) =
+      Set.range f := by
+    rw [← Set.range_comp, ← (Equiv.ulift.symm.trans e).surjective.range_comp]
+    exact congrArg Set.range (funext he)
+  have hz := isPullback_zeroLocusSubschemeι (standardOpenIso (Option m) S none).hom _ _ himg
+  have : IsIso (𝔸({j : Option m // j ≠ none}; S).zeroLocusSubschemeι
+      (Set.range (AffineSpace.coord S)) ≫ 𝔸({j : Option m // j ≠ none}; S) ↘ S) :=
+    inferInstanceAs (IsIso (AffineSpace.zeroSectionIsoZeroLocusSubscheme _ S rfl).inv)
+  have hcomp : IsIso (g ≫ i ≫ ℙ(Option m; S) ↘ S) := by
+    have := hz.isIso_fst_of_isIso
+    rw [← Category.assoc, hg.w, Category.assoc, ← standardOpenIso_hom_over, ← Category.assoc,
+      ← hz.w, Category.assoc]
+    infer_instance
+  refine ⟨{ Z := Z, i := i, isIso_comp := IsIso.of_isIso_comp_left g _, range_eq := ?_, γ := γ,
+    isIso_supportedClassMap := ?_, forget_eq := hforget }⟩
+  · rw [hrange, Scheme.Opens.range_ι]
+    ext x
+    simp only [Set.mem_setOf_eq, Set.mem_compl_iff, SetLike.mem_coe, twistBundleOpen,
+      TopologicalSpace.Opens.mem_iSup, not_exists]
+    exact σ.forall_congr_left
+  · refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ (fun _ : Unit ↦ g)
+      (fun z ↦ ⟨(), hgs z⟩) _ fun _ ↦ ?_
+    refine (isIso_supportedClassMap_restrictSupportedClass_iff Λ U.ι i _ g hg _ _
+      (leftDerivedUpperStarTateShiftIso Λ U.ι (Fintype.card m)) γ
+      (isIso_supportedRestriction_of_isOpenImmersion _ _ _ _ _ _ _ _ _)).1 ?_
+    rw [hres]
+    exact hthom
 
 end Etale
 

@@ -24,6 +24,12 @@ extension by zero through proper base change, which needs much heavier imports.
 
 @[expose] public section
 
+-- The imports bring in `AlgebraicGeometry.specOverSpec` of `(Spec A).Over (Spec R)`, under which
+-- `Spec k₀` would lie over itself through `Algebra.id` rather than through the identity, which the
+-- structure-morphism instances `(X ↘ S).IsOver S` do not unify with. The canonical instance is
+-- given priority.
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 universe u
 
 open CategoryTheory Limits Pretriangulated

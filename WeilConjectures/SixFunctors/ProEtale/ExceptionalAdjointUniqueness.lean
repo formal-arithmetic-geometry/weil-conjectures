@@ -49,6 +49,7 @@ namespace ProEtale
 section Uniqueness
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [Etale.HasBoundedBelowUpperShriek A f]
@@ -112,6 +113,7 @@ end Uniqueness
 section Admissibility
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]

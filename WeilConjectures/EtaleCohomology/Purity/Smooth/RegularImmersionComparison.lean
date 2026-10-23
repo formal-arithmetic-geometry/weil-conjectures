@@ -69,7 +69,8 @@ variable (X : Scheme.{u}) [HasInvertibleExponent Λ X]
 noncomputable def shiftTateObjectTensorNegIso (a : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X a)⟦2 * a⟧)).obj
         ((tateObject Λ X (-a))⟦2 * -a⟧) ≅ constantComplex Λ X :=
-  shiftTateObjectAddIso Λ X a (-a) ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫
+  shiftTateObjectAddIso Λ X a (-a) ≪≫
+    eqToIso (congrArg (fun b ↦ (tateObject Λ X b)⟦2 * b⟧) (add_neg_cancel a)) ≪≫
     (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).app _ ≪≫
     HasTateTwist.twistObjectZeroIso (Λ := Λ) X
 
@@ -78,7 +79,8 @@ noncomputable def shiftTateObjectTensorNegIso (a : ℤ) :
 noncomputable def shiftTateObjectNegTensorIso (a : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X (-a))⟦2 * -a⟧)).obj
         ((tateObject Λ X a)⟦2 * a⟧) ≅ constantComplex Λ X :=
-  shiftTateObjectAddIso Λ X (-a) a ≪≫ eqToIso (by rw [neg_add_cancel]) ≪≫
+  shiftTateObjectAddIso Λ X (-a) a ≪≫
+    eqToIso (congrArg (fun b ↦ (tateObject Λ X b)⟦2 * b⟧) (neg_add_cancel a)) ≪≫
     (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).app _ ≪≫
     HasTateTwist.twistObjectZeroIso (Λ := Λ) X
 
@@ -114,7 +116,7 @@ relative dimension `d`: the smooth purity map `γ_{f,Λ_Y}` of `def-pur-smooth-p
 (`AlgebraicGeometry.Etale.smoothPurityNatIso`, built from the orientation `θ` and the canonical
 tensor comparison) at the constant complex, read through `Lf^* Λ_Y ≅ Λ_X`. -/
 noncomputable def smoothPurityConstantIso {d : ℕ} (f : X ⟶ Y) [SmoothOfRelativeDimension d f]
-    [HasCompactification f] [HasInvertibleExponent Λ X]
+    [HasCompactification f] [HasInvertibleExponent Λ X] [QuasiSeparatedSpace Y]
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) :
     (tateObject Λ X d)⟦2 * (d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f :=

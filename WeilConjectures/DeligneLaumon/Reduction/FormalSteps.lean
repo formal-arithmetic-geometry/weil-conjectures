@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.WeilSheaf.ExtensionByZeroLowerShriek
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.OpenClosedTriangleWeil
 public import WeilConjectures.WeilSheaf.StalkUpperStar

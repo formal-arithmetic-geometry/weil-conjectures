@@ -53,8 +53,9 @@ For `g : V ⟶ B` smooth of pure relative dimension `d` and a section `s` of `g`
 invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an invertible object of `D(B_ét, Λ)`: the
 dualizing complex `ω_g` is invertible by cohomological smoothness (`def-pur-co-smoothness`,
 `sk-prop-cohsm` (a)), and derived pullback preserves invertible objects. -/
-theorem isInvertible_sectionInvariant (g : V ⟶ B) [SmoothOfRelativeDimension d g]
-    [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) :
+theorem isInvertible_sectionInvariant [QuasiSeparatedSpace B] (g : V ⟶ B)
+    [SmoothOfRelativeDimension d g] [HasCompactification g] [HasInvertibleExponent Λ V]
+    (s : B ⟶ V) :
     DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) :=
   DerivedCategory.isInvertible.leftDerivedUpperStar s (isInvertible_dualizingComplex Λ (d := d) g)
 
@@ -84,13 +85,16 @@ The family object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of
 of a morphism `g` smooth of pure relative dimension `d` is an invertible object of
 `D(𝔸¹_B, Λ)`: `g̃` is again smooth of relative dimension `d`
 (`AlgebraicGeometry.Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj`). -/
-theorem isInvertible_deformationFamilyObject (g : V ⟶ B) [SmoothOfRelativeDimension d g]
+theorem isInvertible_deformationFamilyObject [QuasiSeparatedSpace B] (g : V ⟶ B)
+    [SmoothOfRelativeDimension d g]
     (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] [HasInvertibleExponent Λ B] :
     DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); B) (deformationFamilyObject Λ g s) :=
   have := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
   have : HasInvertibleExponent Λ s.ker.deformationSpace :=
     .of_hom (Scheme.Hom.deformationSpaceProj g s ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   isInvertible_sectionInvariant Λ d _ _
 
 end Etale

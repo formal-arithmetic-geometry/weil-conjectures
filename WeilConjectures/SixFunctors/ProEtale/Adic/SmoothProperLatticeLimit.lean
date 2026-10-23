@@ -45,6 +45,7 @@ open Scheme
 section Comparison
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
 /-- The comparison `Rf_*^{proét} ν^* G[0] ≅ ν^* Rf_*^{ét} G[0]`, natural in the étale sheaf `G`

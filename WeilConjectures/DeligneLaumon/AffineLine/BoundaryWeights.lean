@@ -118,6 +118,8 @@ namespace WeilSheaf.LisseOnDenseOpen
 
 variable (D : LisseOnDenseOpen k₀ l)
 
+set_option synthInstance.maxHeartbeats 100000 in
+-- the `Epi` instance of the restricted comparison map is found only after unfolding the restriction
 /-- **The boundary sheaf vanishes on `U₀`**: the restriction of `j_!M ⟶ j_*M` to `U₀` is an
 isomorphism, and the restriction is exact. -/
 theorem isZero_upperStar_boundarySheaf :
