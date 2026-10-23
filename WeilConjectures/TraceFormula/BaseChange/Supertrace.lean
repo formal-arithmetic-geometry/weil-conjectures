@@ -49,6 +49,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+set_option synthInstance.maxHeartbeats 100000 in
+-- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
 /-- The endomorphisms of the unit module `Λ_X` act on the unit of `Dᵇc(X)⟦Λ⟧`: an endomorphism
 of `Λ_X` is placed in degree `0`. -/
 noncomputable def homologyUnitEndRingHom :
