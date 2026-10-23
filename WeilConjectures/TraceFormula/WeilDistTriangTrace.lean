@@ -163,14 +163,14 @@ theorem weilStalkSupertrace_eq_add_of_isDistTriang_of_isFiniteFree {e : Y ≅ Y}
         isZero_frobeniusStalk_carrier ℓ n x hx (hbB j (by omega)),
         isZero_frobeniusStalk_carrier ℓ n x hx (hbC j (by omega))⟩⟩
 
-/-- **Additivity of the local trace along distinguished triangles of Weil objects** (standard
-input, still `sorry`): for a distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of Weil objects for `e`,
+/-- **Additivity of the local trace along distinguished triangles of Weil objects**: for a
+distinguished triangle `A ⟶ B ⟶ C ⟶ A[1]` of Weil objects for `e`,
 `t_{n+1}(B; x̄) = t_{n+1}(A; x̄) + t_{n+1}(C; x̄)`. The long exact sequence of homology sheaves
 `Hʲ(A) ⟶ Hʲ(B) ⟶ Hʲ(C) ⟶ Hʲ⁺¹(A)` is one of Weil sheaves, the connecting morphisms commuting with
 the Frobenius structures; the stalk functor at `x̄` is exact, the stalks of the homology sheaves of
-constructible complexes are finite-dimensional `ℚ̄_ℓ`-vector spaces, and the alternating sum of
-the traces of an endomorphism of a bounded exact sequence of finite-dimensional vector spaces
-vanishes. -/
+constructible complexes are finite free (`isFiniteFree_upperStar_homology`), and the
+alternating sum of the traces of compatible endomorphisms of a bounded long exact sequence of finite
+free objects vanishes (`superTrace_eq_add_of_exact`). -/
 theorem weilStalkSupertrace_eq_add_of_isDistTriang {e : Y ≅ Y} (n : ℕ)
     (x : Spec (.of (AlgebraicClosure k)) ⟶ Y.left)
     (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)

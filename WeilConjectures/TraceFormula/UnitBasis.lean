@@ -12,9 +12,9 @@ public import Mathlib.LinearAlgebra.Trace
 public import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
 public import Mathlib.Algebra.Field.Opposite
 public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndModule
+public import WeilConjectures.CategoryTheory.Preadditive.EndModule
 public import WeilConjectures.Mathlib.LinearAlgebra.Basis.VectorSpace
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.EndTensorUnit
+public import WeilConjectures.CategoryTheory.Monoidal.EndTensorUnit
 public import WeilConjectures.TraceFormula.CategoricalTrace
 
 /-!

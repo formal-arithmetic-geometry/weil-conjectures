@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Abelian.Basic
-public import WeilConjectures.Mathlib.LinearAlgebra.Trace.LongExact
+public import WeilConjectures.LinearAlgebra.TraceLongExact
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.UnitBasis
 

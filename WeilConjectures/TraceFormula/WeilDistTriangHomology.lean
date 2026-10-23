@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctorShiftMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExactFunctorShiftMap
 public import WeilConjectures.TraceFormula.WeilDistTriang
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 
