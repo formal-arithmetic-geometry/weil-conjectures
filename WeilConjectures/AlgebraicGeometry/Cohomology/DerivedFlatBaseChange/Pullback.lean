@@ -40,17 +40,17 @@ noncomputable def schemeDerivedCategoryEquivFunctorSingleIso {X : Scheme.{u}}
 
 /-- For flat `h`, the derived pullback of a module `M` placed in degree `0` is `h^* M` placed in
 degree `0`. -/
-theorem nonempty_derivedPullback_singleFunctor_iso_of_flat
+noncomputable def derivedPullbackSingleFunctorIsoOfFlat
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {T T' : Scheme.{u}} (h : T' ⟶ T) [Flat h] (M : T.Modules) :
-    Nonempty ((derivedPullback h).obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅
-      (DerivedCategory.singleFunctor _ 0).obj ((Scheme.Modules.pullback h).obj M)) := by
-  rw [derivedPullback_def]
-  exact ⟨(schemeDerivedCategoryEquiv T').inverse.mapIso
-    ((Scheme.Modules.derivedPullback h).mapIso (schemeDerivedCategoryEquivFunctorSingleIso M) ≪≫
-      (Scheme.Modules.pullback h).singleFunctorCompLeftDerivedFunctorIso.app M ≪≫
-      (schemeDerivedCategoryEquivFunctorSingleIso _).symm) ≪≫
-    (schemeDerivedCategoryEquiv T').unitIso.symm.app _⟩
+    (derivedPullback h).obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅
+      (DerivedCategory.singleFunctor _ 0).obj ((Scheme.Modules.pullback h).obj M) :=
+  (eqToIso (derivedPullback_def h)).app _ ≪≫
+    (schemeDerivedCategoryEquiv T').inverse.mapIso
+      ((Scheme.Modules.derivedPullback h).mapIso (schemeDerivedCategoryEquivFunctorSingleIso M) ≪≫
+        (Scheme.Modules.pullback h).singleFunctorCompLeftDerivedFunctorIso.app M ≪≫
+        (schemeDerivedCategoryEquivFunctorSingleIso _).symm) ≪≫
+    (schemeDerivedCategoryEquiv T').unitIso.symm.app _
 
 end AlgebraicGeometry

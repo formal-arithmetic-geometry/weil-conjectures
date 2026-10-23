@@ -5,10 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.FiveLemma
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-public import Mathlib.LinearAlgebra.TensorProduct.Prod
-public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # `Ext`-groups with an action on the target
@@ -26,7 +23,7 @@ change (`AlgebraicGeometry.Scheme.Modules.nonempty_H_baseChange_linearEquiv`).
 
 universe w v u
 
-open CategoryTheory Limits TensorProduct
+open CategoryTheory Limits
 
 namespace CategoryTheory.Abelian.Ext
 

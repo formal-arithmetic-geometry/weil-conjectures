@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Descent
-public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
+public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
+public import WeilConjectures.Algebra.Homology.ExtWithAction
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
@@ -38,18 +39,11 @@ universe w wA u
 
 open CategoryTheory Limits TopologicalSpace Opposite
 
-namespace ModuleCat
-
-variable {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)
-
-instance : (extendScalars.{u, u, u} φ).Additive :=
-  (extendRestrictScalarsAdj.{u, u, u} φ).left_adjoint_additive
-
-instance : PreservesFiniteColimits (extendScalars.{u, u, u} φ) :=
+/-- Extension of scalars preserves finite colimits, as a left adjoint. -/
+instance ModuleCat.preservesFiniteColimits_extendScalars {R S : Type u} [CommRing R]
+    [CommRing S] (φ : R →+* S) : PreservesFiniteColimits (extendScalars.{u, u, u} φ) :=
   have := (extendRestrictScalarsAdj.{u, u, u} φ).leftAdjoint_preservesColimits
   inferInstance
-
-end ModuleCat
 
 namespace AlgebraicGeometry
 

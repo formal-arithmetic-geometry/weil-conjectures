@@ -296,10 +296,10 @@ public import WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration
 public import WeilConjectures.Algebra.Homology.ExactCouple.TotalComplexFiltration
 public import WeilConjectures.Algebra.Homology.ExactCouple.Triangulated
 public import WeilConjectures.Algebra.Homology.ExactCouple.TruncationCouple
-public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
 public import WeilConjectures.Algebra.Homology.ExtInjectiveEdgeQuasiIso
 public import WeilConjectures.Algebra.Homology.ExtInjectiveResolutionComparison
 public import WeilConjectures.Algebra.Homology.ExtResolutionDoubleComplex
+public import WeilConjectures.Algebra.Homology.ExtWithAction
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import WeilConjectures.Algebra.Homology.FilteredColimitCochainHomology
 public import WeilConjectures.Algebra.Homology.FilteredColimitsTensor

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
+public import WeilConjectures.Algebra.Homology.ExtWithAction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedGlobalSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.BaseChangeMap
@@ -110,69 +110,13 @@ theorem nonempty_derivedGlobalSectionsOver_baseChange_iso :
     (schemeDerivedDirectImage_preserves_QCoh f E hE)
   have := isIso_schemeDerivedBaseChangeMap_of_flat f f' g g' H E hE
   have : Flat g' := MorphismProperty.of_isPullback (P := @Flat) H.flip inferInstance
-  obtain ⟨p⟩ := nonempty_derivedPullback_singleFunctor_iso_of_flat g' ℱ
   exact ⟨(mixedGlobalExtensionIsoOfFlat g).symm.app _ ≪≫ a ≪≫
     (schemeDerivedGlobalSections T).mapIso (asIso (schemeDerivedBaseChangeMap f f' g g' H.w E)) ≪≫
     (mixedGlobalSectionsDirectImageIso f').app _ ≪≫
-    (schemeGlobalScalarRestriction f').mapIso ((schemeDerivedGlobalSections Y).mapIso p)⟩
+    (schemeGlobalScalarRestriction f').mapIso ((schemeDerivedGlobalSections Y).mapIso
+      (derivedPullbackSingleFunctorIsoOfFlat g' ℱ))⟩
 
 end Derived
-
-open scoped ChangeOfRings in
-/-- `B ⊗_A M` is the extension of scalars of `M` along `φ = algebraMap A B`. -/
-noncomputable def _root_.ModuleCat.tensorLinearEquivExtendScalars {A B : Type u} [CommRing A]
-    [CommRing B] [Algebra A B] (φ : A →+* B) (hφ : algebraMap A B = φ) (M : ModuleCat.{u} A) :
-    B ⊗[A] M ≃ₗ[B] (ModuleCat.extendScalars.{u, u, u} φ).obj M := by
-  subst hφ
-  let E := (ModuleCat.extendScalars.{u, u, u} (algebraMap A B)).obj M
-  let B' := (ModuleCat.restrictScalars (algebraMap A B)).obj (.of B B)
-  let toFun : B ⊗[A] M →+ E :=
-    TensorProduct.liftAddHom
-      { toFun := fun b ↦
-          { toFun := fun m ↦ b ⊗ₜ[A, algebraMap A B] m
-            map_zero' := TensorProduct.tmul_zero _ _
-            map_add' := TensorProduct.tmul_add _ }
-        map_zero' := by ext m; exact TensorProduct.zero_tmul _ _
-        map_add' := fun b b' ↦ by ext m; exact TensorProduct.add_tmul _ _ _ }
-      fun a b m ↦ by
-        change (a • b) ⊗ₜ[A, algebraMap A B] m = b ⊗ₜ[A, algebraMap A B] (a • m)
-        rw [Algebra.smul_def]
-        exact TensorProduct.smul_tmul (R := A) (M := B') a b m
-  let invFun : E →+ B ⊗[A] M :=
-    TensorProduct.liftAddHom
-      { toFun := fun (b : B') ↦
-          { toFun := fun m ↦ (show B from b) ⊗ₜ[A] m
-            map_zero' := TensorProduct.tmul_zero _ _
-            map_add' := TensorProduct.tmul_add _ }
-        map_zero' := by ext m; exact TensorProduct.zero_tmul _ _
-        map_add' := fun b b' ↦ by ext m; exact TensorProduct.add_tmul _ _ _ }
-      fun a (b : B') m ↦ by
-        change (algebraMap A B a * (show B from b)) ⊗ₜ[A] m = (show B from b) ⊗ₜ[A] (a • m)
-        rw [← Algebra.smul_def]
-        exact TensorProduct.smul_tmul a (show B from b) m
-  exact
-    { toFun := toFun
-      invFun := invFun
-      map_add' := map_add toFun
-      map_smul' := fun b x ↦ by
-        induction x using TensorProduct.induction_on with
-        | zero => rw [smul_zero, map_zero, smul_zero]
-        | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, smul_add]
-        | tmul b' m =>
-          rw [TensorProduct.smul_tmul']
-          rfl
-      left_inv := fun x ↦ by
-        induction x using TensorProduct.induction_on with
-        | zero => rw [map_zero, map_zero]
-        | add x y hx hy => rw [map_add, map_add]; exact congrArg₂ (· + ·) hx hy
-        | tmul b m => rfl
-      right_inv := fun x ↦ by
-        induction x using TensorProduct.induction_on with
-        | zero => change toFun (invFun 0) = 0; rw [map_zero, map_zero]
-        | add x y hx hy =>
-          exact (congrArg toFun (map_add invFun x y)).trans
-            ((map_add toFun _ _).trans (congrArg₂ (· + ·) hx hy))
-        | tmul b m => rfl }
 
 include H hg in
 /-- **Cohomology and flat base change** (Stacks 02KH). Consider a cartesian square
@@ -211,9 +155,15 @@ theorem nonempty_H_baseChange_linearEquiv (n : ℕ) :
   obtain ⟨e⟩ := nonempty_derivedGlobalSectionsOver_baseChange_iso H ℱ
   let F := ModuleCat.extendScalars.{u, u, u} g.appTop.hom
   let K := derivedGlobalSectionsOver f ℱ
+  have (φ : Γ(S, ⊤) →+* Γ(T, ⊤)) (hφ : algebraMap Γ(S, ⊤) Γ(T, ⊤) = φ)
+      (M : ModuleCat.{u} Γ(S, ⊤)) :
+      Nonempty (Γ(T, ⊤) ⊗[Γ(S, ⊤)] M ≃ₗ[Γ(T, ⊤)] (ModuleCat.extendScalars.{u, u, u} φ).obj M) := by
+    subst hφ
+    exact ⟨ModuleCat.tensorEquivExtendScalars _ _ M⟩
+  obtain ⟨t⟩ := this _ hg ((DerivedCategory.homologyFunctor _ n).obj K)
   exact ⟨(LinearEquiv.baseChange Γ(S, ⊤) Γ(T, ⊤) _ _
       (homologyDerivedGlobalSectionsOverLinearEquiv f ℱ n).symm).trans <|
-    (ModuleCat.tensorLinearEquivExtendScalars g.appTop.hom hg _).trans <|
+    t.trans <|
     ((F.mapDerivedCategoryHomologyFunctorIso n).app K).toLinearEquiv.trans <|
     ((DerivedCategory.homologyFunctor _ n).mapIso e).toLinearEquiv.trans <|
     homologyDerivedGlobalSectionsOverLinearEquiv f' ((pullback g').obj ℱ) n⟩
