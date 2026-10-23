@@ -55,10 +55,14 @@ All of these take the hypothesis that `Rg_*` is a left adjoint.
 ## Implementation notes
 
 * That `Rg_*` is a left adjoint for `g` proper is a hypothesis, not an instance, because it is
-  false in general on the unbounded derived category. Let `p` be the structure morphism of an
-  elliptic curve over `𝔽̄_p` and `A` the category of `𝔽_r`-modules. Then `Rp_*` does not preserve
-  coproducts, so it has no right adjoint. The hypothesis holds when `Rg_*` preserves coproducts
-  between compactly generated triangulated categories, by Brown representability.
+  false on the unbounded derived category, even for finite coefficients. Let `p` be the
+  structure morphism of an abelian variety of positive dimension over an algebraically closed
+  field, and `A` the category of `Λ`-modules for a field `Λ`, e.g. `𝔽_r`. Then `Rp_*` does not
+  preserve countable coproducts, so it has no right adjoint. Unlike in the étale case, finite
+  coefficients do not help. The reason is a pro-étale sheaf `F` of `Λ`-modules on the abelian
+  variety `E` with `Hⁿ(E_proét, F) ≠ 0` for every `n ≥ 1`. The hypothesis holds when `Rg_*`
+  preserves coproducts between compactly generated triangulated categories, by Brown
+  representability.
 * `Rg^!` for proper `g` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint
   extracted from the hypothesis, not a construction. Only the adjunction
   `Adjunction.ofIsLeftAdjoint` should be used about it. The composite `Rf^!` is a construction

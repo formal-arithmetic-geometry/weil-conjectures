@@ -22,15 +22,19 @@ where `Rg^!` is a chosen right adjoint of the derived pushforward `Rg_*` along t
 morphism `g`, and `Di^*` is the levelwise pullback along the open immersion `i`, which is right
 adjoint to `Di_!` by `Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`. The
 adjunction `Rf_! ⊣ Rf^!` is then the composite of these two adjunctions. The only input is that
-`Rg_*` is a left adjoint for the proper part `g` of the compactification. This does not hold
-for arbitrary coefficients, so it is an explicit hypothesis
-`[((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]`, not an instance (see the implementation
-notes).
+`Rg_*` is a left adjoint for the proper part `g` of the compactification. For general
+coefficients this is an explicit hypothesis `[((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]`.
+It is an instance for finite coefficients `Λ` invertible on `Y`, with `Y` of finite type over
+a finite or separably closed field (see the implementation notes).
 
 `Rf^!` is only defined on the unbounded derived categories: it does not preserve bounded
 below objects in general, so it does not restrict to `D⁺`.
 
 # Main Results
+
+- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerStar_of_isProper` : for `g` proper,
+  `Rg_*` is a left adjoint on `D(Z_ét, Λ)`, for `Λ` finite and invertible on `Y`, and `Y` of
+  finite type over a finite or separably closed field.
 
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekOfCompactification` : `Rf^!` with respect to
   a compactification `c`, with scoped notation `Rf^!(c)[A]`.
@@ -48,15 +52,18 @@ below objects in general, so it does not restrict to `D⁺`.
   on `D(X_ét)` when `Rg_*` is one for the proper part `g` of the chosen compactification, a
   consequence of the previous item.
 
-All of these take the hypothesis that `Rg_*` is a left adjoint.
+All of these take the hypothesis that `Rg_*` is a left adjoint, which the first item provides for
+finite coefficients.
 
 ## Implementation notes
 
-* That `Rg_*` is a left adjoint for `g` proper is a hypothesis, not an instance. By Brown
-  representability it holds when `Rg_*` preserves coproducts between compactly generated
-  triangulated categories, e.g. for torsion coefficients and `g` of finite cohomological
-  dimension. For arbitrary Grothendieck abelian coefficients and arbitrary schemes, `Rg_*` need
-  not preserve coproducts on the unbounded derived category. The pro-étale analogue is false in
+* That `Rg_*` is a left adjoint for `g` proper is a hypothesis for general coefficients. By
+  Brown representability it holds whenever `Rg_*` preserves coproducts. This is the case for
+  finite coefficients `Λ` invertible on `Y` when all cohomological dimensions are finite, which
+  `Scheme.IsOfFiniteTypeOverFiniteOrSepClosedField` ensures. That case is the instance
+  `isLeftAdjoint_rightDerivedLowerStar_of_isProper`, which is `sorry` but true. For arbitrary
+  Grothendieck abelian coefficients and arbitrary schemes, `Rg_*` need not preserve coproducts on
+  the unbounded derived category. The pro-étale analogue is false in
   general, see `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek`.
 * `Rg^!` for proper `g` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint
   extracted from the hypothesis, not a construction. Only the adjunction
@@ -89,9 +96,36 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+/-- A scheme `X` is of finite type over a field `k` which is finite or separably closed. Over
+such a field, schemes of finite type have finite étale cohomological dimension for torsion
+coefficients invertible on them. -/
+class Scheme.IsOfFiniteTypeOverFiniteOrSepClosedField (X : Scheme.{u}) : Prop where
+  exists_field : ∃ (k : Type u) (_ : Field k) (s : X ⟶ Spec (.of k)),
+    (Finite k ∨ IsSepClosed k) ∧ LocallyOfFiniteType s ∧ QuasiCompact s
+
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 namespace Etale
+
+section FiniteCoefficient
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
+  [Y.IsOfFiniteTypeOverFiniteOrSepClosedField] [Fact (IsUnit (Nat.card Λ : Γ(Y, ⊤)))]
+
+/-- Let `Λ` be a finite ring whose order is invertible on `Y`, with `Y` of finite type over a
+finite or separably closed field. Then for a proper morphism `g : Z ⟶ Y`, the derived pushforward
+`Rg_* : D(Z_ét, Λ) ⥤ D(Y_ét, Λ)` on the unbounded derived categories is a left adjoint, with
+right adjoint the exceptional inverse image `Rg^!` along `g`.
+
+This is true, and it is `sorry` only because the proof needs more theory. By proper base
+change, `Rg_*` has finite cohomological dimension, and the étale sites of `Z` and `Y` have finite
+`Λ`-cohomological dimension. So `Rg_*` preserves coproducts, and Brown representability gives the
+right adjoint. -/
+instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
+    ((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.IsLeftAdjoint :=
+  sorry
+
+end FiniteCoefficient
 
 section OfCompactification
 
