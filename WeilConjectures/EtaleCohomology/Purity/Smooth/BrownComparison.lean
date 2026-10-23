@@ -100,6 +100,7 @@ lemma constructibleFiniteTor_twistShift_leftDerivedUpperStar
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
       ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   exact (constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).prop_of_iso
     ((smoothPurityNatIso Λ f θ).app K).symm
@@ -164,6 +165,7 @@ noncomputable def DerivedCategoryFiniteTor.smoothPurityNatIso
       (twistShift Λ X d).obj (constantComplex Λ X)) :
     DerivedCategoryFiniteTor.twistShiftPullback Λ aY (d := d) f ≅
       DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f :=
+  haveI : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   NatIso.ofComponents
     (fun K ↦ ObjectProperty.isoMk _ ((Etale.smoothPurityNatIso Λ (d := d) f θ).app K.obj))
     (fun g ↦ by
@@ -192,6 +194,7 @@ noncomputable def DerivedCategoryFiniteTor.twistShiftPullbackAdjunction
 /-- Blueprint `det-sp-comparison-brown-explicit`: the counit of the explicit adjunction
 `Rf_! ⊣ Lf^*(-)(d)[2d]` at `K` is the smooth trace `Tr^sm_{f,K}`. -/
 lemma DerivedCategoryFiniteTor.twistShiftPullbackAdjunction_counit_app
+    [QuasiSeparatedSpace Y]
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y) :
@@ -215,7 +218,7 @@ For `f` smooth separated of pure relative dimension `d` over a separated finite-
 `k`-scheme `Y` and a finite `Λ` whose exponent is invertible on `X` and `Y`, the functor
 `K ↦ Lf^* K(d)[2d]` on `Dctf` is right adjoint to `Rf_!`, by an adjunction whose counit at
 every `K` is the smooth trace `Tr^sm_{f,K}` of the purity isomorphism. -/
-theorem DerivedCategoryFiniteTor.exists_twistShiftPullbackAdjunction :
+theorem DerivedCategoryFiniteTor.exists_twistShiftPullbackAdjunction [QuasiSeparatedSpace Y] :
     ∃ (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
         (twistShift Λ X d).obj (constantComplex Λ X))
       (adj : DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣

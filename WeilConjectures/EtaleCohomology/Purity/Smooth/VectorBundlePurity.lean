@@ -116,6 +116,7 @@ theorem nonempty_iso_sectionInvariant :
     Nonempty (sectionInvariant Λ π E.zero ≅ (tateObject Λ S d)⟦2 * (d : ℤ)⟧) := by
   have : HasInvertibleExponent Λ S := .of_hom E.zero
   have := E.smoothOfRelativeDimension
+  have : QuasiSeparatedSpace S := quasiSeparatedSpace_of_quasiSeparated aS
   obtain ⟨Mω, ⟨eω'⟩, ⟨eω⟩⟩ := isInvertible_dualizingComplex Λ π (d := d)
   obtain ⟨MX, ⟨eX'⟩, ⟨eX⟩⟩ := (isInvertible_tateObject Λ V d).shift (2 * (d : ℤ))
   obtain ⟨ω₀⟩ := E.nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ
@@ -295,6 +296,7 @@ lemma nonempty_iso_leftDerivedUpperStar_dualizingComplex (i : E.ι) :
   have sq : IsPullback (π ⁻¹ᵁ E.U i).ι (π ∣_ E.U i) π (E.U i).ι :=
     (isPullback_morphismRestrict π (E.U i)).flip
   have : HasCompactification (π ∣_ E.U i) := HasCompactification.of_isPullback sq
+  have : QuasiSeparatedSpace S := quasiSeparatedSpace_of_quasiSeparated aS
   obtain ⟨bc⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) π sq
   have hp : π ∣_ E.U i = (E.chart i).hom ≫ 𝔸(ULift.{u} (Fin d); E.U i) ↘ E.U i :=
     (E.chart_over i).symm
@@ -325,6 +327,7 @@ theorem nonempty_iso_dualizingComplex :
   have := E.smoothOfRelativeDimension
   set ω := dualizingComplex (ModuleCat.{u + 1} Λ) π
   obtain ⟨F, -, -, ⟨eF⟩⟩ := HasTateTwist.exists_isLocallyConstantSheaf_twistObject (Λ := Λ) V d
+  have : QuasiSeparatedSpace S := quasiSeparatedSpace_of_quasiSeparated aS
   obtain ⟨G, -, -, ⟨eG⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ π d
   let sh : ∀ {X : Scheme.{u}}
       (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -368,6 +371,7 @@ theorem nonempty_iso_rightDerivedUpperShriek
     Nonempty ((R(π)^![ModuleCat.{u + 1} Λ]).obj K ≅
       (twistShift Λ V d).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
   have := E.smoothOfRelativeDimension
+  have : QuasiSeparatedSpace S := quasiSeparatedSpace_of_quasiSeparated aS
   obtain ⟨t⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ π d K
   obtain ⟨ω⟩ := E.nonempty_iso_dualizingComplex Λ aS
   exact ⟨t.symm ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) V).obj _).mapIso ω ≪≫
@@ -434,6 +438,7 @@ theorem isIso_purityMap
     (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (E.purityMap Λ aS K) := by
   have := E.smoothOfRelativeDimension
+  have : QuasiSeparatedSpace S := quasiSeparatedSpace_of_quasiSeparated aS
   have := isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := d) π K
   unfold purityMap
   infer_instance

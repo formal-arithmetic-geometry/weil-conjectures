@@ -55,13 +55,8 @@ lemma isIso_biprod_desc_of_distTriang {X Y Z A B : C} (f : X ⟶ Y) (g : Y ⟶ Z
       hom₃ := φ ≫ g
       comm₁ := by simp [binaryBiproductTriangle]
       comm₂ := by
-        dsimp [binaryBiproductTriangle]
-        ext
-        · simp [reassoc_of% hfg]
-        · simp
-      comm₃ := by
-        dsimp [binaryBiproductTriangle]
-        rw [zero_comp, Category.assoc, hgw, comp_zero] }
+        refine biprod.hom_ext' _ _ ?_ ?_ <;> simp [hfg]
+      comm₃ := by simp [hgw] }
   exact isIso₂_of_isIso₁₃ τ (binaryBiproductTriangle_distinguished A B) hT
     (inferInstanceAs (IsIso ψ)) (inferInstanceAs (IsIso (φ ≫ g)))
 
@@ -93,7 +88,7 @@ lemma isIso_homEquiv_of_isIso_leftDerivedUpperStar_map {X S Z : Scheme.{u}} (q :
     (y : (L((q)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj B)
     (hy : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map y)) :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).homEquiv _ _ y) := by
-  set A := ModuleCat.{u + 1} Λ
+  let A := ModuleCat.{u + 1} Λ
   let adjq := derivedUpperStarLowerStarAdjunction A q
   let adji := derivedUpperStarLowerStarAdjunction A i
   let θ := rightDerivedLowerShriekIsoRightDerivedLowerStar A i
@@ -109,9 +104,8 @@ lemma isIso_homEquiv_of_isIso_leftDerivedUpperStar_map {X S Z : Scheme.{u}} (q :
   have : (L((q)^*[A]) ⋙ L((i)^*[A])).Faithful := Functor.Faithful.of_iso e.symm
   let adj := adjq.comp adji
   have key : adj.homEquiv _ _ z = adjq.homEquiv _ _ y ≫ (R((q)_*[A])).map (θ.hom.app B) := by
-    rw [Adjunction.comp_homEquiv]
-    simp only [Equiv.trans_apply, z, Equiv.apply_symm_apply]
-    exact adjq.homEquiv_naturality_right y _
+    rw [Adjunction.comp_homEquiv, ← adjq.homEquiv_naturality_right]
+    exact congrArg (adjq.homEquiv _ _) ((adji.homEquiv _ _).apply_symm_apply _)
   have : IsIso (adj.homEquiv _ _ z) := by
     rw [Adjunction.homEquiv_unit]
     infer_instance
@@ -150,20 +144,23 @@ theorem exists_isIso_comp_map_counit_eq_chernPowMap {X S Z : Scheme.{u}}
       IsIso ψ ∧ ψ ≫ (R((q)_*[ModuleCat.{u + 1} Λ])).map
         ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app _) =
         chernPowMap q h a := by
-  set A := ModuleCat.{u + 1} Λ
-  set M := (tateObject Λ X a)⟦2 * (a : ℤ)⟧
-  set T := (tateObject Λ X (-(a : ℤ)))⟦2 * (-(a : ℤ))⟧
-  set K := constantComplex Λ X
-  set ε := (rightDerivedUpperShriekAdjunction A i).counit
-  set u := supportedRestrictionMap Λ i
-  set φ := supportedTranspose Λ i γ
-  set χ := (R(i)_![A]).map φ ≫ ε.app M
-  set e₂ : ((derivedTensor A X).obj M).obj T ⟶ K :=
+  let M := (tateObject Λ X a)⟦2 * (a : ℤ)⟧
+  let T := (tateObject Λ X (-(a : ℤ)))⟦2 * (-(a : ℤ))⟧
+  let K := constantComplex Λ X
+  let u := supportedRestrictionMap Λ i
+  let φ := supportedTranspose Λ i γ
+  let χ := (R(i)_![ModuleCat.{u + 1} Λ]).map φ ≫
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app M
+  let e₂ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).obj T ⟶ K :=
     (shiftTateObjectAddIso Λ X a (-(a : ℤ))).hom ≫ (tateObjectShiftAddNegIso (a : ℤ)).hom
-  set χ' := ((derivedTensor A X).map χ).app T ≫ e₂
-  set N := ((derivedTensor A X).obj ((R(i)_![A]).obj (constantComplex Λ Z))).obj T
-  have hφ : IsIso φ := hγ
-  have hγ' : u ≫ (R(i)_![A]).map φ = γ := supportedRestrictionMap_comp_map_supportedTranspose Λ i γ
+  let χ' := ((derivedTensor (ModuleCat.{u + 1} Λ) X).map χ).app T ≫ e₂
+  let N := ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+    ((R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z))).obj T
+  have hφ : IsIso φ := by
+    rw [← supportedClassMap_eq_supportedTranspose]
+    exact hγ
+  have hγ' : u ≫ (R(i)_![ModuleCat.{u + 1} Λ]).map φ = γ :=
+    supportedRestrictionMap_comp_map_supportedTranspose Λ i γ
   -- `χ'` is universal for objects supported on `Z`
   have huniv : IsSupportedUniversal Λ i χ' := by
     intro S' hS'
@@ -179,39 +176,44 @@ theorem exists_isIso_comp_map_counit_eq_chernPowMap {X S Z : Scheme.{u}}
   have hθiso : IsIso θ := by
     have hb : ∀ S', IsSupported Λ i S' → Function.Bijective (fun f : S' ⟶ N ↦ f ≫ θ) :=
       fun S' hS' ↦ bijective_comp_of_bijective_comp_comp (by
-        have : (fun f : S' ⟶ N ↦ f ≫ θ ≫ ε.app K) = fun f ↦ f ≫ χ' := by rw [hθ]
+        have : (fun f : S' ⟶ N ↦ f ≫ θ ≫
+            (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K) =
+            fun f ↦ f ≫ χ' := by rw [hθ]
         rw [this]
         exact huniv S' hS') (bijective_comp_counit Λ i hS' K)
     exact isIso_of_bijective_comp_right _
       (hb _ (isSupported_rightDerivedLowerShriek Λ i _)).2 (hb _ hN).1
   -- the morphism `Lq^* Λ_S(-a)[-2a] ⟶ Ri_! Ri^! Λ_X`
-  set y := (leftDerivedUpperStarTateShiftIso Λ q (-(a : ℤ))).hom ≫
-    (derivedTensorLeftUnitor A X T).inv ≫ ((derivedTensor A X).map u).app T ≫ θ
-  have hy : y ≫ ε.app K = (leftDerivedUpperStarTateShiftIso Λ q (-(a : ℤ))).hom ≫
-      (derivedTensorLeftUnitor A X T).inv ≫ ((derivedTensor A X).map (chernPow h a)).app T ≫
-      e₂ := by
-    simp only [y, Category.assoc, hθ, χ', ← hforget, ← hγ', χ, Functor.map_comp,
-      NatTrans.comp_app]
-  have hLy : IsIso ((L((i)^*[A])).map y) := by
+  let y := (leftDerivedUpperStarTateShiftIso Λ q (-(a : ℤ))).hom ≫
+    (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X T).inv ≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).map u).app T ≫ θ
+  have hy : y ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K =
+      (leftDerivedUpperStarTateShiftIso Λ q (-(a : ℤ))).hom ≫
+      (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X T).inv ≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (chernPow h a)).app T ≫ e₂ := by
+    rw [← hforget, ← hγ']
+    simp only [y, Category.assoc, hθ, χ', χ, Functor.map_comp, NatTrans.comp_app]
+  have hLy : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map y) := by
     have := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ i
-    have hn := leftDerivedUpperStarTensorIso_hom_naturality_left A i u T
-    have : IsIso ((L((i)^*[A])).map (((derivedTensor A X).map u).app T) ≫
-        (leftDerivedUpperStarTensorIso A i _ T).hom) := by
+    have hn := leftDerivedUpperStarTensorIso_hom_naturality_left i u T
+    have : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).map u).app T) ≫
+        (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) i _ T).hom) := by
       rw [hn]
       infer_instance
-    have : IsIso ((L((i)^*[A])).map (((derivedTensor A X).map u).app T)) :=
-      IsIso.of_isIso_comp_right _ (leftDerivedUpperStarTensorIso A i _ T).hom
+    have : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).map u).app T)) :=
+      IsIso.of_isIso_comp_right _ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) i _ T).hom
     simp only [y, Functor.map_comp]
     infer_instance
   refine ⟨_, isIso_homEquiv_of_isIso_leftDerivedUpperStar_map Λ q i y hLy, ?_⟩
-  rw [← Adjunction.homEquiv_naturality_right, hy]
-  rfl
+  rw [← Adjunction.homEquiv_naturality_right, hy, chernPowMap]
 
 end TopClass
 
 section Biproduct
 
-variable {C : Type*} [Category C] [Preadditive C] [HasFiniteBiproducts C]
+variable {C : Type*} [Category C] [Preadditive C] [HasFiniteBiproducts C] [HasBinaryBiproducts C]
 
 /-- A morphism out of a biproduct indexed by `Fin (N + 1)` is an isomorphism if its last component
 together with the morphism out of the first `N` summands is one. -/

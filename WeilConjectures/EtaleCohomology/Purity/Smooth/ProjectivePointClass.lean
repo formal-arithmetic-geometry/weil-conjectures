@@ -30,7 +30,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme
+open Scheme Etale
 
 namespace VectorBundle
 
@@ -89,32 +89,33 @@ the ratio `T_t / T_b`. -/
 lemma twistBundle_sectionCoord (t b : n) (a : Fin 1) :
     (twistBundle n S).sectionCoord (twistBundleSection n S t) (twistBundleSection_comp_π n S t)
       b a = (standardOpen n S b).topIso.inv (coordRatio n S b t) := by
-  set r := (twistBundle n S).sectionRes (twistBundleSection n S t)
-    (twistBundleSection_comp_π n S t) b
-  have hr : r ≫ (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).ι ≫ (twistBundleOpen n S).ι =
-      (standardOpen n S b).ι ≫ twistBundleSectionAux n S t := by
-    have h := (twistBundle n S).sectionRes_ι (twistBundleSection n S t)
-      (twistBundleSection_comp_π n S t) b
-    rw [← Category.assoc]
-    exact (h =≫ (twistBundleOpen n S).ι).trans (by rw [Category.assoc, twistBundleSection_ι])
-  have e₁ : (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).topIso.inv =
-      (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).ι.appLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S b)
-        ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
-    rw [Scheme.Opens.ι_appLE]
-    rfl
-  have e₂ : r.appTop = r.appLE ⊤ ⊤ le_top := by
-    rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
-    rfl
-  have hh : (standardOpen n S b).ι ≫ twistBundleSectionAux n S t =
-      homOfSections ((standardOpen n S b).ι ≫ ℙ(n; S) ↘ S)
-        (fun a ↦ (standardOpen n S b).topIso.inv ((twistBundleSectionSections n S t a).s b))
-        (Scheme.CoordinateCover.span_topIso_inv _ (span_twistBundleSectionSections n S t) b) :=
-    Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover n S) _ _ _ _
-  simp only [VectorBundle.sectionCoord, twistBundle_coord, twistBundleFiberCoord]
-  rw [e₁, e₂, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
-    Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hr, appLE_eq_of_eq hh]
-  exact (homOfSections_appLE_coordRatio (S := S) _ _ _
-    (twistBundleSectionSections_some_s_self n S t b) none _).trans rfl
+  have key (r : (standardOpen n S b).toScheme ⟶ (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).toScheme)
+      (hr : r ≫ (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).ι ≫ (twistBundleOpen n S).ι =
+        (standardOpen n S b).ι ≫ twistBundleSectionAux n S t) :
+      r.appTop (twistBundleFiberCoord n S b) =
+        (standardOpen n S b).topIso.inv (coordRatio n S b t) := by
+    have e₁ : (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).topIso.inv =
+        (twistBundleπ n S ⁻¹ᵁ standardOpen n S b).ι.appLE
+          (twistBundleπ n S ⁻¹ᵁ standardOpen n S b) ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have e₂ : r.appTop = r.appLE ⊤ ⊤ le_top := by
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    have hh : (standardOpen n S b).ι ≫ twistBundleSectionAux n S t =
+        homOfSections ((standardOpen n S b).ι ≫ ℙ(n; S) ↘ S)
+          (fun a ↦ (standardOpen n S b).topIso.inv ((twistBundleSectionSections n S t a).s b))
+          (Scheme.CoordinateCover.span_topIso_inv _ (span_twistBundleSectionSections n S t) b) :=
+      Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover n S) _ _ _ _
+    rw [twistBundleFiberCoord, e₁, e₂, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+      Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hr,
+      appLE_eq_of_eq hh]
+    exact (homOfSections_appLE_coordRatio (S := S) _ _ _
+      (twistBundleSectionSections_some_s_self n S t b) none _).trans rfl
+  simp only [VectorBundle.sectionCoord, twistBundle_coord]
+  refine key _ ?_
+  rw [← Category.assoc, VectorBundle.sectionRes_ι_assoc, twistBundleSection_ι]
+  rfl
 
 /-- A point of the standard open `D₊(T_b)` lies in the basic open of `T_t / T_b` if and only if
 it lies in `D₊(T_t)`. -/
@@ -140,8 +141,13 @@ lemma range_pullbackSnd_twistBundleSection (t : n) :
     (twistBundleSection_comp_π n S t) b
     (fun _ ↦ (standardOpen n S b).topIso.inv (coordRatio n S b t))
     (funext (twistBundle_sectionCoord n S t b))
-  have hr := Scheme.range_eq_inter_of_isPullback hg rfl
-  rw [hg.w, Set.range_const] at hr
+  have hr : Set.range (((standardOpen n S b).toScheme.zeroLocusSubschemeι
+      {(standardOpen n S b).topIso.inv (coordRatio n S b t)}) ≫ (standardOpen n S b).ι).base =
+        Set.range (pullback.snd (twistBundle n S).zero (twistBundleSection n S t)).base ∩
+          Set.range (standardOpen n S b).ι.base := by
+    have h := Scheme.range_eq_inter_of_isPullback hg rfl
+    rw [hg.w, Set.range_const] at h
+    exact h
   have hV := range_zeroLocusSubschemeι_singleton
     ((standardOpen n S b).topIso.inv (coordRatio n S b t))
   rw [Scheme.Opens.range_ι] at hV

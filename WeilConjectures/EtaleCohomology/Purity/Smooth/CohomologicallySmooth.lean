@@ -317,7 +317,7 @@ invertibility of `ω_g` is used. -/
 theorem nonempty_iso_dualizingComplex_comp_of_smoothOfRelativeDimension {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (e : ℕ) [SmoothOfRelativeDimension e g]
-    [HasInvertibleExponent Λ Y] :
+    [HasInvertibleExponent Λ Y] [QuasiSeparatedSpace Z] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g))) :=
@@ -351,6 +351,14 @@ theorem isCohomologicallySmooth_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale
 
 variable {Λ}
 
+/-- The dualizing complex of an étale `u` admitting a compactification, with the exponent of
+`Λ` invertible on its source, is invertible: `ω_u ≅ Λ`. -/
+theorem isInvertible_dualizingComplex_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
+    [QuasiCompact u] [HasCompactification u] [HasInvertibleExponent Λ U] :
+    DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) u) :=
+  .of_iso (nonempty_dualizingComplex_iso_of_etale (Λ := Λ) u).some.symm
+    (DerivedCategory.isInvertible_unit Λ U)
+
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
 
 Let `u : U ⟶ X` be a surjective étale morphism and `f : X ⟶ Y`. If `u ≫ f` is cohomologically
@@ -377,13 +385,13 @@ theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : 
     IsCohomologicallySmooth Λ f where
   isInvertible_dualizingComplex :=
     isInvertible_dualizingComplex_of_comp u f
-      (isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := 0) u)
-      (_root_.AlgebraicGeometry.Etale.isInvertible_dualizingComplex Λ (d := 0) u)
+      (fun P ↦ isIso_dualizingComplexTensorMap_of_etale (Λ := Λ) u P)
+      (isInvertible_dualizingComplex_of_etale u)
       h.isInvertible_dualizingComplex
   isIso_dualizingComplexTensorMap K hK :=
     isIso_dualizingComplexTensorMap_of_comp u f
-      (isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := 0) u)
-      (_root_.AlgebraicGeometry.Etale.isInvertible_dualizingComplex Λ (d := 0) u) K
+      (fun P ↦ isIso_dualizingComplexTensorMap_of_etale (Λ := Λ) u P)
+      (isInvertible_dualizingComplex_of_etale u) K
       (h.isIso_dualizingComplexTensorMap K hK)
   isIso_dualizingComplexBaseChangeMap {X' Y'} {g} {f'} {g'} sq _ _ := by
     rw [isIso_dualizingComplexBaseChangeMap_iff]
@@ -395,8 +403,8 @@ theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : 
     have hh := (isIso_dualizingComplexBaseChangeMap_iff Λ sqh).1
       (h.isIso_dualizingComplexBaseChangeMap sqh)
     exact isIso_of_isIso_rightDerivedUpperShriek_map (pullback.snd u g')
-      (isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := 0) _)
-      (_root_.AlgebraicGeometry.Etale.isInvertible_dualizingComplex Λ (d := 0) _) _
+      (fun P ↦ isIso_dualizingComplexTensorMap_of_etale (Λ := Λ) _ P)
+      (isInvertible_dualizingComplex_of_etale _) _
       ((isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff squ sq sqh rfl rfl (𝟙_ _)
         inferInstance).1 hh)
 
