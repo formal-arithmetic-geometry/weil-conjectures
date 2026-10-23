@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 public import WeilConjectures.SixFunctors.Etale.Derived.PointDualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexDual
 
 /-!
 
@@ -60,17 +61,6 @@ namespace Etale
 open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-omit [Finite Λ] in
-/-- The unit `Λ_X` lies in `Dctf(X, Λ)`: it is the constant sheaf `Λ` placed in degree `0`,
-which is constructible and flat. -/
-theorem constructibleFiniteTor_unit (X : Scheme.{u}) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=
-  ⟨(boundedConstructible _ X).prop_of_iso (_root_.DerivedCategory.singleFunctorObjUnitIso _)
-      (boundedConstructible_singleFunctor_obj _ 0), 0, 0,
-    (torAmplitudeIn _ X 0 0).prop_of_iso (_root_.DerivedCategory.singleFunctorObjUnitIso _)
-      (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
-        (ObjectProperty.flat_of_isDualizable isDualizable_unit))⟩
 
 /-- Blueprint `def-trf-dualizing-complex`: Dualizing complex and Verdier dual.
 
@@ -182,8 +172,8 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
         ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) := by
   have hω : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (dualizingComplex _ b) :=
-    constructibleFiniteTor_dualizingComplex Λ (𝟙 _) b (constructibleFiniteTor_unit Λ _)
-  obtain ⟨β⟩ := nonempty_iso_externalHom Λ a b (constructibleFiniteTor_unit Λ X) hN hM hω
+    constructibleFiniteTor_dualizingComplex Λ (𝟙 _) b (constructibleFiniteTor_unit Λ)
+  obtain ⟨β⟩ := nonempty_iso_externalHom Λ a b (constructibleFiniteTor_unit Λ (X := X)) hN hM hω
   obtain ⟨α⟩ := nonempty_iso_rightDerivedUpperShriek_pullbackFst Λ a b M
   exact ⟨externalProductMapIso _ a b ((derivedHomUnitIso Λ X).app M).symm (Iso.refl _) ≪≫ β ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).mapIso
