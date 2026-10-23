@@ -185,6 +185,15 @@ lemma hom_app_comp_map_eqToHom_aux {A B : 𝒞} {t t' : A ⟶ B} (e : t = t') (M
 
 end Homology
 
+/-- The components of a composite `F ⋙ 𝟭 ≅ F ⋙ S ≅ G₁ ≅ G₂ ≅ G₃` starting with the
+whiskering of the inverse of a trivialization `τ : S ≅ 𝟭`. -/
+lemma isoWhiskerLeft_symm_trans_hom_app_aux {C₀ D₀ : Type*} [Category C₀] [Category D₀]
+    (F : C₀ ⥤ D₀) {S : D₀ ⥤ D₀} (τ : S ≅ 𝟭 D₀) {G₁ G₂ G₃ : C₀ ⥤ D₀} (c₁ : G₁ ≅ F ⋙ S)
+    (E : G₁ ≅ G₂) (c₂ : G₂ ≅ G₃) (M : C₀) :
+    (Functor.isoWhiskerLeft F τ.symm ≪≫ c₁.symm ≪≫ E ≪≫ c₂).hom.app M =
+      τ.inv.app (F.obj M) ≫ c₁.inv.app M ≫ E.hom.app M ≫ c₂.hom.app M := by
+  simp
+
 variable (U : ∀ {A B : 𝒞}, (A ⟶ B) → D B ⥤ D A)
   (cU : ∀ {A B C : 𝒞} (a : A ⟶ B) (b : B ⟶ C), U (a ≫ b) ≅ U b ⋙ U a)
   (assocU : ∀ {A B C C' : 𝒞} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ C') (M : D C'),

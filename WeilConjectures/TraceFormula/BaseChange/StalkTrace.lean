@@ -143,6 +143,74 @@ lemma modelStalkFrobenius_hom [IsSepClosed Ω]
   simp only [eqToHom_trans_assoc]
   rfl
 
+variable {X N g} in
+/-- The local Frobenius at `x̄'` of the base change of a Weil object `(L, φ)` is the explicit
+composite `modelStalkFrobenius` for `(L, φ)`. -/
+lemma weilStalk_weilGeometricBaseChange_frobenius_hom [IsSepClosed Ω]
+    (x' : RationalPoint ((geometricBaseChange k Ω).obj X))
+    (hx' : x' ≫ modelFrobenius Ω X N g = x') (L : WeilBoundedConstructible ℓ g) :
+    ((weilStalk ℓ (modelFrobenius Ω X N g) x' hx').obj
+        ((weilGeometricBaseChange Ω ℓ X N g).obj L)).frobenius.hom =
+      modelStalkFrobenius ℓ x' hx' L.carrier L.str.hom := by
+  rw [WeilBoundedConstructible.weilStalk_obj_frobenius_hom_eq]
+  simp only [weilGeometricBaseChange_obj_str, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+  rfl
+
 end Model
+
+/-! ### The Galois Frobenius -/
+
+section Galois
+
+variable {X} [IsSepClosed Ω] (e : X ≅ X) (σ : Spec (.of Ω) ≅ Spec (.of Ω))
+  (x : Spec (.of Ω) ⟶ X.left) (hx : x ≫ e.hom.left = σ.hom ≫ x)
+
+omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k Ω]
+  [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- The Frobenius comparison of the stalk, unfolded. -/
+lemma weilStalkComparison_eq : weilStalkComparison ℓ e σ.hom x hx =
+    Functor.isoWhiskerLeft _ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).symm ≪≫
+      (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).symm ≪≫
+      upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm ≪≫
+      upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left :=
+  rfl
+
+omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k Ω]
+  [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- The Frobenius of the stalk of a Weil sheaf at a geometric point fixed up to `σ`, as an
+explicit composite:
+`x̄^* F --τ⁻¹--> σ^* x̄^* F ≅ (σ ≫ x̄)^* F = (x̄ ≫ e)^* F ≅ x̄^* e^* F --x̄^* φ_F--> x̄^* F`. -/
+lemma stalkFunctor_obj_str_hom (W : WeilSheaf ℓ e) :
+    ((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj W).str.hom =
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app W.carrier ≫
+        eqToHom (congrArg (fun t : Spec (.of Ω) ⟶ X.left ↦
+          (t)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) hx.symm) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app W.carrier ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom := by
+  have h1 : ((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj W).str.hom =
+      (weilStalkComparison ℓ e σ.hom x hx).hom.app W.carrier ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom := by
+    rw [WeilSheaf.stalkFunctor_obj_str]
+    rfl
+  have h2 := isoWhiskerLeft_symm_trans_hom_app_aux ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x)
+    (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm)
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left) W.carrier
+  have h3 := (congrArg (fun i ↦ i.hom.app W.carrier) (weilStalkComparison_eq ℓ e σ x hx)).trans h2
+  refine h1.trans ((congrArg (· ≫ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom) h3).trans
+    ((congrArg (fun z ↦ ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+        ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app W.carrier ≫ z ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app W.carrier) ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom)
+      (upperStarEqToIso_hom_app _ hx.symm W.carrier)).trans ?_))
+  simp only [Category.assoc]
+
+end Galois
 
 end AlgebraicGeometry.ProEtale.CondensedRing
