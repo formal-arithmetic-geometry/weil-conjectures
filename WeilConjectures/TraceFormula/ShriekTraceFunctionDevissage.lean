@@ -43,12 +43,14 @@ inputs, stated here as separate lemmas:
   as Weil sheaves.
 - `ProEtale.CondensedRing.weilSheafStalkTrace_weilSheafUpperStar`: the stalk of `g^* F` at `w̄`
   is the stalk of `F` at `w̄ ≫ g`, compatibly with the Frobenius operators.
-- `ProEtale.CondensedRing.weilStalkSupertrace_eq_add_of_isDistTriang`: the local trace is
-  additive along distinguished triangles of Weil objects.
-- `ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map`: `Rf_!` of
-  Weil objects preserves distinguished triangles.
-- `ProEtale.CondensedRing.exists_isDistTriang_openClosed`: the localization triangle
-  `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` of Weil objects.
+
+The triangle inputs are proved: the additivity of the local trace along distinguished triangles
+(`ProEtale.CondensedRing.weilStalkSupertrace_eq_add_of_isDistTriang`,
+`WeilConjectures.TraceFormula.WeilDistTriangTrace`), the preservation of distinguished triangles by
+`Rf_!` (`ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map`,
+`WeilConjectures.TraceFormula.WeilDistTriangLowerShriek`) and the localization triangle
+`j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` of Weil objects
+(`ProEtale.CondensedRing.exists_isDistTriang_openClosed`).
 
 -/
 
