@@ -37,7 +37,9 @@ built from the derived projection formula for `p_X`, compact-support base change
 cartesian square of the product, and the counit of `Ra_Y! ⊣ Ra_Y^!`; this is the composite
 `Ku_!` of `def-sf-kv-maps` (i) for the pair `(𝟙_X, a_Y)` followed by the counits. Its
 invertibility is the Künneth–Verdier theorem (blueprint `thm-trf-kunneth-verdier`), recorded
-here as the sorried input `ProEtale.CondensedRing.isIso_kunnethVerdierMap`.
+here as the sorried input `ProEtale.CondensedRing.isIso_kunnethVerdierMap`. The map `κ_{M,N}`
+factors as `RHom(1, α) ∘ β` through the external Hom map `β` of blueprint `def-sf-kv-maps` (iii)
+(`ProEtale.CondensedRing.kunnethVerdierMap_eq`).
 
 All constructions are classical: ordinary categories and natural transformations built by
 composition, whiskering and mates from the data of the six functors (blueprint
@@ -49,10 +51,17 @@ composition, whiskering and mates from the data of the six functors (blueprint
 - `ProEtale.CondensedRing.exceptionalKunnethMap`: `α_{𝟙, a_Y} : M ⊠ ω_Y ⟶ Rp_X^! M`.
 - `ProEtale.CondensedRing.kunnethVerdierMap`: `κ_{M,N}`.
 
+## Main statements
+
+- `ProEtale.CondensedRing.kunnethVerdierMap_eq`: `κ_{M,N} = RHom(1, α) ∘ β`.
+
 ## Sorried input
 
 - `ProEtale.CondensedRing.isIso_kunnethVerdierMap`: the Künneth–Verdier theorem (blueprint
-  `thm-trf-kunneth-verdier`, section `sec-six-functors`).
+  `thm-trf-kunneth-verdier`, section `sec-six-functors`). Its blueprint proof shows that `α` and
+  `β` are isomorphisms (blueprint `prop-trf-exceptional-kunneth`, `prop-trf-external-hom`), by
+  dévissage along lisse sheaves on strata and induction on the dimension of the support; this
+  dévissage is not yet available for `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
 
 -/
 
@@ -150,27 +159,10 @@ noncomputable def kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRin
         ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
   curry (kunnethVerdierPairing ℓ M N)
 
-/-- **External Hom** (blueprint `prop-trf-external-hom`, section `sec-six-functors`): for bounded
-constructible `E₁, L₁` on `X` and `E₂, L₂` on `Y`, the external Hom map
-`β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)` of blueprint `def-sf-kv-maps` (iii),
-the transpose of the two evaluations, is an isomorphism. -/
-theorem isIso_externalHomMap (E₁ L₁ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (E₂ L₂ : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (externalHomMap (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-      (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) E₁ L₁ E₂ L₂) :=
-  sorry
-
-/-- **Exceptional Künneth** (blueprint `prop-trf-exceptional-kunneth`, section
-`sec-six-functors`, for `f₁ = 𝟙_X`, `f₂ = a_Y`, `L₁ = M` and `L₂ = ℚ̄_ℓ`, read through
-`X × s = X ⨯ Y`'s first projection): the exceptional Künneth map
-`α_{𝟙, a_Y} : M ⊠ ω_Y ⟶ Rp_X^! M` is an isomorphism. -/
-theorem isIso_exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (exceptionalKunnethMap ℓ (Y := Y) M) :=
-  sorry
-
 /-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (blueprint `def-sf-kv-maps` (iv)): through
 the unit identifications `M ≅ RHom(ℚ̄_ℓ, M)` and `ℚ̄_ℓ ⊠ N ≅ Lp_Y^* N`, `κ_{M,N}` is the external
-Hom map `β` for the pairs `(ℚ̄_ℓ, M)` and `(N, ω_Y)` followed by the exceptional Künneth map. -/
+Hom map `β` of blueprint `def-sf-kv-maps` (iii) for the pairs `(ℚ̄_ℓ, M)` and `(N, ω_Y)` followed
+by the exceptional Künneth map `α`. -/
 lemma kunnethVerdierMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     kunnethVerdierMap ℓ M N =
@@ -182,21 +174,15 @@ lemma kunnethVerdierMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ�
         (pre (unitExternalMap (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) N)).app _) ≫
       (ihom _).map (exceptionalKunnethMap ℓ M) :=
-  curry_braiding_comp_eq _ _ M N _ (exceptionalKunnethMap ℓ M)
+  curry_eq_externalHomMap_comp _ _ M N _ (exceptionalKunnethMap ℓ M)
 
 /-- **The Künneth–Verdier isomorphism** (blueprint `thm-trf-kunneth-verdier`, section
 `sec-six-functors`): for bounded constructible `M` on `X` and `N` on `Y`, the Künneth–Verdier map
-`κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism. By
-`kunnethVerdierMap_eq` it is `RHom(1, α) ∘ β`, and both factors are isomorphisms
-(`isIso_externalHomMap`, `isIso_exceptionalKunnethMap`). -/
+`κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism. -/
 instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (kunnethVerdierMap ℓ M N) := by
-  have := isIso_externalHomMap ℓ (𝟙_ _) M N (dualizingComplex' ℓ Y)
-  have := isIso_exceptionalKunnethMap ℓ (Y := Y) M
-  rw [kunnethVerdierMap_eq]
-  infer_instance
-
+    IsIso (kunnethVerdierMap ℓ M N) :=
+  sorry
 
 /-- The double-dual morphism is natural, for any braiding. -/
 private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]

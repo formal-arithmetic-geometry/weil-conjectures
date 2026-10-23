@@ -70,7 +70,16 @@ instance (N : C₂) : IsIso (unitExternalMap P Q N) := by
 
 /-- **The external Hom pairing at the unit**: through `M ≅ RHom(𝟙, M)` and `Q N ≅ 𝟙 ⊠ N`, the
 external Hom pairing for `(E₁, L₁) = (𝟙, M)` and `(E₂, L₂) = (N, W)` is the braiding moving
-`Q N` past `P M`, the monoidal structure of `Q` and the evaluation `N ⊗ RHom(N, W) ⟶ W`. -/
+`Q N` past `P M`, the monoidal structure of `Q` and the evaluation `N ⊗ RHom(N, W) ⟶ W`; that is,
+the following diagram commutes, with `H = RHom(N, W)`:
+```
+Q N ⊗ (P M ⊗ Q H) ───── braid ─────▶ P M ⊗ (Q N ⊗ Q H) ── μ, ev ──▶ P M ⊗ Q W
+        │                                                             ▲
+        │ M ≅ RHom(𝟙, M), Q N ≅ P 𝟙 ⊗ Q N                              │ pairing
+        ▼                                                             │
+(P 𝟙 ⊗ Q N) ⊗ (P RHom(𝟙, M) ⊗ Q H) ───────────────────────────────────┘
+```
+-/
 @[reassoc]
 lemma externalHomPairing_unit (M : C₁) (N W : C₂) :
     Q.obj N ◁ (P.map (unitNatIso.hom.app M) ▷ Q.obj ((ihom N).obj W)) ≫
@@ -97,8 +106,22 @@ lemma externalHomPairing_unit (M : C₁) (N W : C₂) :
 /-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (abstract form of blueprint
 `def-sf-kv-maps` (iv)): the transpose of the braiding, the monoidal structure of `Q`, the
 evaluation `N ⊗ RHom(N, W) ⟶ W` and a map `a : P M ⊗ Q W ⟶ Z` is, through `M ≅ RHom(𝟙, M)`
-and `Q N ≅ 𝟙 ⊠ N`, the external Hom map for `(𝟙, M)` and `(N, W)` followed by `RHom(1, a)`. -/
-lemma curry_braiding_comp_eq [MonoidalClosed C] (M : C₁) (N W : C₂) {Z : C}
+and `Q N ≅ 𝟙 ⊠ N`, the external Hom map for `(𝟙, M)` and `(N, W)` followed by `RHom(1, a)`; that
+is, the following diagram commutes, where `κ` is the transpose of
+`Q N ⊗ (P M ⊗ Q RHom(N, W)) ⟶ P M ⊗ Q W ⟶ Z` as in `externalHomPairing_unit`:
+```
+P M ⊗ Q RHom(N, W) ───────────── κ ─────────────▶ RHom(Q N, Z)
+        │                                              ▲
+        │ M ≅ RHom(𝟙, M)                               │ RHom(1, a)
+        ▼                                              │
+P RHom(𝟙, M) ⊗ Q RHom(N, W)                   RHom(Q N, P M ⊗ Q W)
+        │                                              ▲
+        │ β                                            │ Q N ≅ P 𝟙 ⊗ Q N
+        ▼                                              │
+RHom(P 𝟙 ⊗ Q N, P M ⊗ Q W) ────────────────────────────┘
+```
+-/
+lemma curry_eq_externalHomMap_comp [MonoidalClosed C] (M : C₁) (N W : C₂) {Z : C}
     (a : P.obj M ⊗ Q.obj W ⟶ Z) :
     curry ((α_ _ _ _).inv ≫ (β_ (Q.obj N) (P.obj M)).hom ▷ _ ≫ (α_ _ _ _).hom ≫
         P.obj M ◁ μ Q N ((ihom N).obj W) ≫ P.obj M ◁ Q.map ((ihom.ev N).app W) ≫ a) =

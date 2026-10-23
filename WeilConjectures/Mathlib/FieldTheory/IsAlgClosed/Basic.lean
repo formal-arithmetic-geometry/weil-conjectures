@@ -250,4 +250,3 @@ lemma IsLocalRing.exists_algebraMap_eq_of_pow_eq_self {K A : Type*} [Field K] [I
   have hn0 : n = 0 := by
     simpa using (hunit.mul_left_eq_zero).mp this
   exact (sub_eq_zero.mp hn0).symm
-
