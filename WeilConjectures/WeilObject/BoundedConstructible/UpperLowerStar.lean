@@ -118,6 +118,16 @@ noncomputable def weilUpperStarComparison :
   (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
     (CommSq.mk hf)).symm
 
+/-- The Frobenius comparison of the pullback at an object, through the composition isomorphisms
+`L(Φ_X ≫ f)^* ≅ LΦ_X^* Lf^*` and `L(f ≫ Φ_Y)^* ≅ Lf^* LΦ_Y^*`. -/
+lemma weilUpperStarComparison_hom_app (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilUpperStarComparison ℓ ΦX ΦY f hf).hom.app K =
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ ΦX f).inv.app K ≫
+        eqToHom (by rw [hf]) ≫
+        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f ΦY).hom.app K := by
+  simp only [weilUpperStarComparison, boundedConstructiblePullbackSquareComparison, Iso.symm_hom,
+    Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, eqToIso.inv, eqToHom_app, Category.assoc]
+
 /-- The derived pullback `Lf^*` of Weil objects: a Weil object `(K, φ_K)` for `Φ_Y` is sent to
 `Lf^* K` with the structure isomorphism
 `Φ_X Lf^* K ≅ Lf^* Φ_Y K ≅ Lf^* K` given by `weilUpperStarComparison` and `Lf^* φ_K`. -/

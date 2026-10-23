@@ -42,7 +42,9 @@ variable {l : ℕ} [Fact l.Prime]
 there is a geometric point `s : Spec K ⟶ Y` (with `K` algebraically closed, depending on `y`) at
 which the stalk of the lisse sheaf `H` vanishes, then `H = 0`. Indeed, on a member `f : V ⟶ Y`
 of a trivialising cover with `f^* H ≅ ℚ̄_ℓⁿ` and `V` nonempty, the geometric point over the image
-of a point of `V` lifts to `V`, so the stalk would contain `ℚ̄_ℓ` if `n > 0`. -/
+of a point of `V` lifts to `V`, so the stalk would contain `ℚ̄_ℓ` if `n > 0`.
+
+Blueprint `lem-wf-lisse-stalk-vanishing` (1). -/
 theorem IsAdicLisseSheaf.isZero_of_forall_subsingleton_stalk {Y : Scheme.{u}}
     {H : AdicSheaf l Y} (hH : IsAdicLisseSheaf H)
     (h : ∀ y : Y, ∃ (K : Type u) (_ : Field K) (_ : IsAlgClosed K) (s : Spec (.of K) ⟶ Y),
@@ -79,7 +81,9 @@ theorem IsAdicLisseSheaf.isZero_of_forall_subsingleton_stalk {Y : Scheme.{u}}
 /-- **Vanishing of a lisse restriction with vanishing stalks.** Let `H` be an `ℓ`-adic sheaf on
 `X` all of whose geometric stalks vanish, and `g : Z ⟶ X` a morphism along which `H` becomes
 lisse (e.g. a stratum of a stratification on which `H` is lisse). Then `g^* H = 0`: the stalks
-of `g^* H` at the geometric points `Spec κ(z)‾ ⟶ Z` are stalks of `H`. -/
+of `g^* H` at the geometric points `Spec κ(z)‾ ⟶ Z` are stalks of `H`.
+
+Blueprint `lem-wf-lisse-stalk-vanishing` (2). -/
 theorem isZero_adicUpperStar_of_forall_subsingleton_stalk {X Z : Scheme.{u}}
     {H : AdicSheaf l X} (g : Z ⟶ X) (hg : IsAdicLisseSheaf ((g)^*ᵃ[l].obj H))
     (h : ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ X),

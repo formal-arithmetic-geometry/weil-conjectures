@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MumfordComparison
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
@@ -76,10 +77,14 @@ point `s₀` of `S` lies in a basic open `D(a)` over which there is a bounded co
 free modules such that for every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` there
 is an isomorphism `g^* P ≅ R p'_* g'^* 𝒢` in `D(𝒪_{T'})`.
 
-The per-degree form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
-This derived form is stated with `sorry`: its proof needs the comparison of the Čech complex
-`Č(U, g'^* 𝒢)` with `R p'_* g'^* 𝒢` as objects of the derived category, while this file only has
-the comparison on cohomology sheaves.
+The Čech complex `Č(U, 𝒢)` of a finite affine cover is, over `Spec A`, quasi-isomorphic to a
+perfect complex of flat `A`-modules, which near `s₀` is modelled by a complex `P` of finite free
+modules compatibly with every base change (`CochainComplex.exists_free_away_quasiIso_baseChange`).
+After base change along `g`, the complex of free sheaves with the matrices of `P` maps
+quasi-isomorphically to `p'_* Č(g'⁻¹ U, g'^* 𝒢)`
+(`AlgebraicGeometry.Scheme.Modules.quasiIso_mumfordFreeHom`), which is `R p'_* g'^* 𝒢`
+(`AlgebraicGeometry.Scheme.Modules.derivedPushforwardSingleIsoCechResolution`). The per-degree
+form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
 
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing {Y S : Scheme.{u}}
@@ -93,26 +98,6 @@ theorem exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing {Y S :
         Nonempty (DerivedCategory.Q.obj (((Modules.pullback g).mapHomologicalComplex _).obj P) ≅
           (derivedPushforward f').obj
             ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj 𝒢))) := by
-  sorry
-
-/-- **Mumford's complex over a Noetherian affine base.** Let `p : Y ⟶ S` be proper of finite
-presentation over an affine scheme `S` with Noetherian ring of global sections, and `𝒢` an
-`𝒪_Y`-module of finite presentation which is flat over `S`. Every point `s₀` of `S` lies in a
-basic open `D(a)` over which there is a bounded complex `P` of finite free modules such that for
-every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` the cohomology of `g^* P` is
-`R^q p'_* g'^* 𝒢`.
-
-(blueprint: `sk-thm-picard-coherence`) -/
-theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : Scheme.{u}}
-    [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
-    [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]
-    (h𝒢 : 𝒢.IsFlatOver p) (s₀ : S) :
-    ∃ (a : Γ(S, ⊤)) (P : CochainComplex (S.basicOpen a).toScheme.Modules ℤ) (d : ℕ),
-      s₀ ∈ S.basicOpen a ∧ IsFiniteFreeComplex P d ∧
-      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ (S.basicOpen a).toScheme) (g' : X' ⟶ Y) (f' : X' ⟶ T')
-        [HasInjectiveResolutions X'.Modules], IsPullback g' f' p (g ≫ (S.basicOpen a).ι) →
-        ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj 𝒢)) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
   obtain ⟨ι, _, _, U, hU, hU'⟩ := exists_finite_nonempty_affine_cover Y
   have := Fintype.ofFinite ι
@@ -159,7 +144,7 @@ theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : 
     IsLocalization.Away.lift_comp _ _
   refine ⟨s, freeComplexOfBasis P b σ, d, hs₀,
     isFiniteFreeComplex_freeComplexOfBasis P b σ d hr, ?_⟩
-  intro T' X' g g' f' _ H q
+  intro T' X' g g' f' H
   let _ : Algebra R Γ(T', ⊤) := (g.appTop.hom.comp σ).toAlgebra
   let _ : Algebra Γ(S, ⊤) Γ(T', ⊤) := (g ≫ V.ι).appTop.hom.toAlgebra
   have : IsScalarTower Γ(S, ⊤) R Γ(T', ⊤) := IsScalarTower.of_algebraMap_eq fun a ↦ by
@@ -173,13 +158,59 @@ theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : 
   have hκ (n : ℤ) (hn : n < 0) : IsEmpty (ULift.{u} (Fin (r n))) := by
     rw [hr n (Or.inl hn)]
     infer_instance
-  obtain ⟨e⟩ := nonempty_homology_freeComplexOfBasis_iso H 𝒢 U hg P b Φ
-    (isAffineOpen_iInf_of_isSeparated p U hU) hU' hκ hΦ q
+  have : IsSeparated f' := MorphismProperty.of_isPullback H inferInstance
+  have hUi := isAffineOpen_iInf_of_isSeparated p U hU
   let e₁ : ((Modules.pullback g).mapHomologicalComplex _).obj (freeComplexOfBasis P b σ) ≅
       freeComplexOfBasis P b (algebraMap R Γ(T', ⊤)) :=
     pullbackFreeComplexIso _ _ g ≪≫ eqToIso (by
       unfold freeComplexOfBasis
       congr 1)
-  exact ⟨HomologicalComplex.homologyMapIso e₁ q ≪≫ e⟩
+  set K := freeComplexOfBasis (Z := T') P b (algebraMap R Γ(T', ⊤))
+  have : K.IsStrictlyGE 0 := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    intro i hi
+    have := hκ i hi
+    exact isZero_free_of_isEmpty _
+  have := quasiIso_mumfordFreeHom H 𝒢 U hg P b Φ hUi hΦ
+  have : QuasiIso (HomologicalComplex.extendMap (mumfordFreeHom H 𝒢 U hg P b Φ)
+      ComplexShape.embeddingUpNat) :=
+    (HomologicalComplex.quasiIso_extendMap_iff _ ComplexShape.embeddingUpNat).2 inferInstance
+  have hU₂ (k : ℕ) (y : Fin (k + 1) → ι) : IsAffineHom ((⨅ l, g' ⁻¹ᵁ U (y l)).ι ≫ f') :=
+    isAffineHom_ι_comp_of_isPullback H (hUi k y) (iInf_preimage_eq_preimage_iInf g' U y)
+  have hU₃ : ⨆ i, g' ⁻¹ᵁ U i = ⊤ := by
+    rw [← Scheme.Hom.preimage_iSup, hU', Scheme.Hom.preimage_top]
+  exact ⟨DerivedCategory.Q.mapIso (e₁ ≪≫
+      HomologicalComplex.isoExtendRestriction ComplexShape.embeddingUpNat K) ≪≫
+    asIso (DerivedCategory.Q.map (HomologicalComplex.extendMap
+      (mumfordFreeHom H 𝒢 U hg P b Φ) ComplexShape.embeddingUpNat)) ≪≫
+    (derivedPushforwardSingleIsoCechResolution f' (fun i ↦ g' ⁻¹ᵁ U i) hU₂ hU₃
+      ((pullback g').obj 𝒢)).symm⟩
+
+/-- **Mumford's complex over a Noetherian affine base.** Let `p : Y ⟶ S` be proper of finite
+presentation over an affine scheme `S` with Noetherian ring of global sections, and `𝒢` an
+`𝒪_Y`-module of finite presentation which is flat over `S`. Every point `s₀` of `S` lies in a
+basic open `D(a)` over which there is a bounded complex `P` of finite free modules such that for
+every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` the cohomology of `g^* P` is
+`R^q p'_* g'^* 𝒢`. This is the per-degree form of
+`exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`.
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : Scheme.{u}}
+    [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
+    [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]
+    (h𝒢 : 𝒢.IsFlatOver p) (s₀ : S) :
+    ∃ (a : Γ(S, ⊤)) (P : CochainComplex (S.basicOpen a).toScheme.Modules ℤ) (d : ℕ),
+      s₀ ∈ S.basicOpen a ∧ IsFiniteFreeComplex P d ∧
+      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ (S.basicOpen a).toScheme) (g' : X' ⟶ Y) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' p (g ≫ (S.basicOpen a).ι) →
+        ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj 𝒢)) := by
+  obtain ⟨a, P, d, hs₀, hP, h⟩ :=
+    exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing p 𝒢 h𝒢 s₀
+  refine ⟨a, P, d, hs₀, hP, fun g g' f' _ H q ↦ ?_⟩
+  obtain ⟨e⟩ := h g g' f' H
+  exact ⟨(DerivedCategory.homologyFunctorFactors _ q).symm.app _ ≪≫
+    (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+    homologyDerivedPushforwardSingleIso f' ((Modules.pullback g').obj 𝒢) q⟩
 
 end AlgebraicGeometry.Scheme.Modules

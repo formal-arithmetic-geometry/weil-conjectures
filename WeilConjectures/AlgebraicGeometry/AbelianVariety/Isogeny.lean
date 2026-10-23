@@ -319,7 +319,12 @@ theorem IsIsogeny.finrank_eq (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
 An isogeny `f : A ⟶ B` of abelian varieties is finite locally free of degree the order of its
 kernel: it is finite (`AlgebraicGeometry.IsIsogeny.isFinite`), flat
 (`AlgebraicGeometry.IsIsogeny.flat`) and of finite presentation, and all of its fibres have
-degree `isogenyDegree f` (`AlgebraicGeometry.IsIsogeny.fiberDegree_eq`). -/
+degree `isogenyDegree f` (`AlgebraicGeometry.IsIsogeny.fiberDegree_eq`).
+
+This is the second paragraph of blueprint `sk-def-av-isogeny` (and of `def-sc-isogeny`): an
+isogeny of abelian varieties is finite and flat, and its degree as a finite flat morphism is
+the order of its kernel. As blueprint `rem-ptr-sc-isogeny-2` notes, this is a theorem and not
+part of the definition `AlgebraicGeometry.IsIsogeny`. -/
 theorem IsIsogeny.isFiniteLocallyFreeOfDegree (f : A ⟶ B) [IsIsogeny f] :
     f.left.IsFiniteLocallyFreeOfDegree (isogenyDegree f) := by
   have := IsIsogeny.isFinite f
