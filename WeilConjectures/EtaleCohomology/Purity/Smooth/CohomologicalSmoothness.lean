@@ -70,6 +70,7 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+  [QuasiSeparatedSpace Y]
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
 
@@ -145,7 +146,7 @@ possible. The isomorphism is the canonical base change map
 which is constructed for quasi-compact `f'` and shown to be an isomorphism over a
 quasi-separated base `Y`; both hypotheses hold in the Noetherian setting of the blueprint.
 -/
-theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSeparatedSpace Y]
+theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek
     {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
     (sq : IsPullback g' f' f g) [HasCompactification f'] [QuasiCompact f'] :
     Nonempty (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f ⋙
@@ -162,7 +163,7 @@ exponent of `Λ` invertible on `X` (the purity conventions), is cohomologically 
 trivial dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`
 (`AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_of_etale`). -/
 theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X] :
+    [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e] [HasInvertibleExponent Λ X] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ constantComplex Λ X) :=
   nonempty_dualizingComplex_iso_of_etale e
 
@@ -172,15 +173,16 @@ ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm`
 smooth of relative dimension zero, together with `ω_e ≅ Λ_X`
 (`lem-pur-co-smooth-etale-locality`). -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X]
+    [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
+    [HasInvertibleExponent Λ X]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) e).obj K ≅
       (L((e)^*[ModuleCat.{u + 1} Λ])).obj K) := by
-  obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := 0) e K hK
-  obtain ⟨ω⟩ := nonempty_dualizingComplex_iso_constantComplex_of_etale Λ e
-  exact ⟨t.symm ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso ω ≪≫
-    derivedTensorRightUnitor _ X _⟩
+  have := isIso_dualizingComplexTensorMap_of_etale (Λ := Λ) e K
+  obtain ⟨ω⟩ := nonempty_dualizingComplex_iso_of_etale (Λ := Λ) e
+  exact ⟨(asIso (dualizingComplexTensorMap Λ e K)).symm ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso ω).app _ ≪≫ derivedTensorLeftUnitor _ X _⟩
 
 end Etale
 

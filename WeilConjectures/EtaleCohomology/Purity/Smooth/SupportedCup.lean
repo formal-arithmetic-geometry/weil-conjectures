@@ -232,7 +232,18 @@ Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a clo
 (`AlgebraicGeometry.Etale.cupSupportedHom`), read as an element of
 `H^{a+b}_{Z ∩ W}(X, F ⊗ᴸ G)`. As throughout the purity chapter (`def-pur-conventions`) this is
 the étale form. The cup product of classes in the model `Λ_X ⟶ Ri_! Ri^! M` is
-`AlgebraicGeometry.Etale.cupWithSupports`. -/
+`AlgebraicGeometry.Etale.cupWithSupports`.
+
+Also blueprint `pur9-rg-def-supported`: Supported étale cohomology. The blueprint's
+`H^q_C(U, F)` is the cohomology of the kernel complex of `Γ(U, I) ⟶ Γ(U ∖ C, I)` for an injective
+resolution `I`, i.e. of the total right derived functor of the sections with support
+(`AlgebraicGeometry.Etale.derivedSupportCohomology`, independent of `I` by construction); its
+boundary `∂ : H^q(U ∖ C, F) ⟶ H^{q+1}_C(U, F)` is the boundary of the supported localization
+triangle (`AlgebraicGeometry.Etale.supportedLocalizationBoundary`, through which the Kummer
+boundaries `AlgebraicGeometry.Etale.kummerBoundary` are formed); and its cup product with
+supports is this one. The blueprint multiplies kernel complexes of injective resolutions; here
+the product is formed on the derived category through `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W`, the
+derived-category form of the same pairing. -/
 noncomputable def cupSupportCohomology
     {F G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}
     (α : (derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a).obj F)

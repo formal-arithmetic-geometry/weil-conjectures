@@ -117,7 +117,7 @@ quasi-compact and admits a compactification. Clause 1 is smooth base change for 
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
 `prop-asd-smooth-base-change`), clause 2 is
 `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_rightDerivedUpperShriekTensorMap`. -/
-theorem isIso_rightDerivedUpperShriekBaseChangeMap_and_tensorMap (d : ℕ)
+theorem isIso_rightDerivedUpperShriekBaseChangeMap_and_tensorMap [QuasiSeparatedSpace Y] (d : ℕ)
     [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] :
     IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) ∧
       ∀ N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
@@ -205,11 +205,11 @@ of `Λ` invertible on `U`, the canonical tensor map `θ_{j,K}` is an isomorphism
 square `𝟙 ≫ j = 𝟙 ≫ j` is cartesian, its base change map is an isomorphism
 (`prop-asd-smooth-base-change`), and the tensor map of `𝟙_U` is an isomorphism. -/
 theorem isIso_dualizingComplexTensorMap_of_isOpenImmersion {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] [HasCompactification j] [HasInvertibleExponent Λ U]
+    [IsOpenImmersion j] [QuasiCompact j] [HasCompactification j] [HasInvertibleExponent Λ U]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (dualizingComplexTensorMap Λ j K) := by
   have sq : IsPullback (𝟙 U) (𝟙 U) j j := IsKernelPair.id_of_mono j
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ j 0 sq
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq
   have h := isIso_map_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullback sq
     (𝟭 _) K (isIso_dualizingComplexTensorMap_id Λ U _)
   exact (NatIso.isIso_map_iff (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) U) _).1 h
@@ -217,17 +217,17 @@ theorem isIso_dualizingComplexTensorMap_of_isOpenImmersion {U X : Scheme.{u}} (j
 /-- For an open immersion `j : U ⟶ X`, with the exponent of `Λ` invertible on `U`, the dualizing
 complex is trivial: `ω_j ≅ L(𝟙_U)^* ω_j ≅ ω_{𝟙_U} ≅ Λ_U`. -/
 theorem nonempty_dualizingComplex_iso_of_isOpenImmersion {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] [HasCompactification j] [HasInvertibleExponent Λ U] :
+    [IsOpenImmersion j] [QuasiCompact j] [HasCompactification j] [HasInvertibleExponent Λ U] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) j ≅ 𝟙_ _) := by
   have sq : IsPullback (𝟙 U) (𝟙 U) j j := IsKernelPair.id_of_mono j
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ j 0 sq
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq
   exact ⟨(leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) U).symm.app _ ≪≫
     dualizingComplexBaseChangeIso sq ≪≫ (nonempty_dualizingComplex_id_iso Λ U).some⟩
 
 /-- The dualizing complex of an open immersion `j`, with the exponent of `Λ` invertible on its
 source, is invertible. -/
 lemma isInvertible_dualizingComplex_of_isOpenImmersion {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] [HasCompactification j] [HasInvertibleExponent Λ U] :
+    [IsOpenImmersion j] [QuasiCompact j] [HasCompactification j] [HasInvertibleExponent Λ U] :
     DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) j) :=
   .of_iso (nonempty_dualizingComplex_iso_of_isOpenImmersion j).some.symm
     (DerivedCategory.isInvertible_unit Λ U)
@@ -237,6 +237,11 @@ keeps the target of `pullback.diagonal e`, the definition `pullback.diagonalObj 
 unfolded inside the derived categories). -/
 noncomputable def diagonalToPullback {V W : Scheme.{u}} (e : V ⟶ W) : V ⟶ pullback e e :=
   pullback.diagonal e
+
+instance {V W : Scheme.{u}} (e : V ⟶ W) [IsSeparated e] :
+    QuasiCompact (diagonalToPullback e) := by
+  unfold diagonalToPullback
+  infer_instance
 
 @[reassoc (attr := simp)]
 lemma diagonalToPullback_fst {V W : Scheme.{u}} (e : V ⟶ W) :
@@ -317,7 +322,7 @@ theorem isIso_dualizingComplexTensorMap_of_etale {V W : Scheme.{u}} (e : V ⟶ W
     (K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (dualizingComplexTensorMap Λ e K) := by
   have sq := IsPullback.of_hasPullback e e
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ e 0 sq
+  have := etaleBaseChange Λ e sq
   -- the object `Le^* K` is left to unification, so that it is the one of the base change lemma
   have h₃ := isIso_map_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullback sq
     (L((diagonalToPullback e)^*[ModuleCat.{u + 1} Λ])) K
@@ -331,10 +336,12 @@ invertible on `V`, the dualizing complex is trivial:
 `ω_e ≅ LΔ^* Lpr₁^* ω_e ≅ LΔ^* ω_{pr₂} ≅ ω_{Δ ≫ pr₂} = ω_{𝟙_V} ≅ Λ_V`, through the base change
 isomorphism of `R^!` (`prop-asd-smooth-base-change`) for the square of `e` along itself. -/
 theorem nonempty_dualizingComplex_iso_of_etale {V W : Scheme.{u}} (e : V ⟶ W)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ V] :
+    [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
+    [HasInvertibleExponent Λ V] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ 𝟙_ _) := by
   have sq := IsPullback.of_hasPullback e e
-  obtain ⟨b⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ e 0 sq
+  have := etaleBaseChange Λ e sq
+  let b := asIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
   have : HasCompactification (diagonalToPullback e) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
   obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar Λ (diagonalToPullback e)
@@ -355,7 +362,7 @@ variable (Λ) in
 /-- **Smooth duality for open immersions** holds
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_isOpenImmersion`,
 `AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_of_isOpenImmersion`). -/
-theorem openImmersionSmoothDuality : OpenImmersionSmoothDuality Λ := fun _ _ j _ _ _ ↦
+theorem openImmersionSmoothDuality : OpenImmersionSmoothDuality Λ := fun _ _ j _ _ _ _ ↦
   ⟨isIso_dualizingComplexTensorMap_of_isOpenImmersion j,
     nonempty_dualizingComplex_iso_of_isOpenImmersion j⟩
 

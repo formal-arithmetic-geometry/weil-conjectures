@@ -70,7 +70,7 @@ open Scheme
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} [QuasiSeparatedSpace Y]
   [HasInvertibleExponent Λ X]
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
@@ -78,11 +78,12 @@ include d in
 /-- Blueprint `thm-asd-smooth-tensor`: Smooth cohomological duality without a chosen
 orientation.
 
-Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`
-be a finite ring whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is
-a locally constant sheaf `L` of free rank-one `Λ`-modules: `L` is locally constant, every stalk
-of `L` at a geometric point is free of rank one, and `ω_f ≅ L[2d]`. For every complex `K` on `Y`,
-the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
+Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, over
+a quasi-separated base `Y` (the blueprint works over a Noetherian base), let `Λ` be a finite ring
+whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is a locally
+constant sheaf `L` of free rank-one `Λ`-modules: `L` is locally constant, every stalk of `L` at a
+geometric point is free of rank one, and `ω_f ≅ L[2d]`. For every complex `K` on `Y`, the
+canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
 (`AlgebraicGeometry.Etale.dualizingComplexTensorMap`) is an isomorphism. -/
 theorem exists_dualizingComplex_iso_and_tensor :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧

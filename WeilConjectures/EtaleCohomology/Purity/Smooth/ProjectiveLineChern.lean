@@ -50,7 +50,7 @@ open Scheme
 
 section Excision
 
-variable (Λ : Type (u + 1)) [CommRing Λ] {X U Z Z' : Scheme.{u}} (e : U ⟶ X)
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X U Z Z' : Scheme.{u}} (e : U ⟶ X)
   [IsOpenImmersion e] (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i']
   (g : Z' ⟶ Z) (hg : IsPullback g i' i e) (hZ : Set.range i.base ⊆ Set.range e.base)
 

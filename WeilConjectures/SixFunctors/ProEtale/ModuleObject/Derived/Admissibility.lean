@@ -94,7 +94,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  (f : X ⟶ Y)
+  (f : X ⟶ Y) [IsFinitenessCoefficient ℓ Λ]
   [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint]
 
 /-- Blueprint `pur456-def-amplitude-module`: Uniform constructible cohomological amplitude,

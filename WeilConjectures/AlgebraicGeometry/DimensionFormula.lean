@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.RingTheory.HeightAddCoheight
+public import WeilConjectures.RingTheory.KrullDimension.FiniteType
 
 /-!
 # The dimension formula for schemes locally of finite type over a field

@@ -83,11 +83,11 @@ def EtaleSmoothDuality : Prop :=
       IsIso (dualizingComplexTensorMap Λ e K)) ∧
       Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ 𝟙_ _)
 
-/-- *Smooth duality for open immersions*, which need not be quasi-compact: for every open immersion
+/-- *Smooth duality for quasi-compact open immersions*: for every quasi-compact open immersion
 `j : U ⟶ X` admitting a compactification, with the exponent of `Λ` invertible on `U`, the
 canonical tensor maps `θ_{j,K}` are isomorphisms and `ω_j ≅ Λ_U`. -/
 def OpenImmersionSmoothDuality : Prop :=
-  ∀ ⦃U X : Scheme.{u}⦄ (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j]
+  ∀ ⦃U X : Scheme.{u}⦄ (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [HasCompactification j]
     [HasInvertibleExponent Λ U],
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsIso (dualizingComplexTensorMap Λ j K)) ∧
@@ -126,7 +126,7 @@ lemma EtaleSmoothDuality.isInvertible (hE : EtaleSmoothDuality Λ) {V W : Scheme
   DerivedCategory.isInvertible.of_iso (hE e).2.some.symm (DerivedCategory.isInvertible_unit Λ V)
 
 lemma OpenImmersionSmoothDuality.isInvertible (hO : OpenImmersionSmoothDuality Λ)
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [HasCompactification j]
     [HasInvertibleExponent Λ U] :
     DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) j) :=
   DerivedCategory.isInvertible.of_iso (hO j).2.some.symm (DerivedCategory.isInvertible_unit Λ U)
@@ -141,11 +141,12 @@ shape of the dualizing complex
 theorem satisfiesSmoothDuality_of_forall_exists_isOpenImmersion
     (hO : OpenImmersionSmoothDuality Λ) {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] (f : X ⟶ Y) (n : ℤ)
-    (h : ∀ x : X, ∃ (W : Scheme.{u}) (u : W ⟶ X), IsOpenImmersion u ∧ x ∈ Set.range u.base ∧
-      SatisfiesSmoothDuality Λ (u ≫ f) n) :
+    (h : ∀ x : X, ∃ (W : Scheme.{u}) (u : W ⟶ X), IsOpenImmersion u ∧ QuasiCompact u ∧
+      x ∈ Set.range u.base ∧ SatisfiesSmoothDuality Λ (u ≫ f) n) :
     SatisfiesSmoothDuality Λ f n := by
   intro _
-  choose W u hu hx hg using h
+  choose W u hu hqc hx hg using h
+  have (x : X) : QuasiCompact (u x) := hqc x
   have (x : X) : HasCompactification (u x) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
   have (x : X) : HasCompactification (u x ≫ f) :=
@@ -173,7 +174,8 @@ include hO hE hA
 `V` of `X` is the composite `V --e--> 𝔸^d_U --p_d--> U ⊆ Y` of an étale morphism, an
 affine-space projection over an affine open `U` of `Y` on which the exponent of `Λ` is invertible
 and an open immersion, then `V ⟶ Y` satisfies smooth duality in degree `-2d`. -/
-theorem satisfiesSmoothDuality_chart {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) {U : Y.Opens}
+theorem satisfiesSmoothDuality_chart {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] (f : X ⟶ Y) (d : ℕ)
+    {U : Y.Opens}
     {V : X.Opens} (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hVU : V ≤ f ⁻¹ᵁ U)
     (e : V.toScheme ⟶ 𝔸(ULift.{u} (Fin d); U.toScheme)) [_root_.AlgebraicGeometry.Etale e]
     (hfe : e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) = f.resLE U V hVU)
@@ -212,14 +214,17 @@ theorem satisfiesSmoothDuality_chart {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) 
 the étale-local normal form (`AlgebraicGeometry.Etale.satisfiesSmoothDuality_chart`) along the
 open cover of `X` by their sources. -/
 theorem satisfiesSmoothDuality_of_hasInvertibleExponent {X Y : Scheme.{u}}
-    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f] :
+    [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
     SatisfiesSmoothDuality Λ f (2 * d : ℤ) := by
   have : HasInvertibleExponent Λ X := .of_hom f
   intro _
   refine satisfiesSmoothDuality_of_forall_exists_isOpenImmersion hO f _ fun x ↦ ?_
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
   obtain ⟨U, V, hU, hV, -, hxV, hVU, e, he, hfe⟩ := Smooth.exists_etale_to_affineSpace f d x
   have : HasInvertibleExponent Λ U.toScheme := .of_hom U.ι
-  exact ⟨V.toScheme, V.ι, inferInstance, ⟨⟨x, hxV⟩, rfl⟩,
+  have : IsAffine V.toScheme := hV
+  exact ⟨V.toScheme, V.ι, inferInstance, inferInstance, ⟨⟨x, hxV⟩, rfl⟩,
     satisfiesSmoothDuality_chart hO hE hA f d hU hV hVU e hfe⟩
 
 /-- **Smooth duality from the étale and affine-space cases** (the reduction in the proof of
@@ -235,7 +240,7 @@ satisfies smooth duality by the étale-local normal form
 (`AlgebraicGeometry.Etale.satisfiesSmoothDuality_of_hasInvertibleExponent`), and the canonical
 tensor maps compose with those of the open immersion `ι`. -/
 theorem satisfiesSmoothDuality_of_etaleSmoothDuality_of_affineSpaceSmoothDuality
-    {X Y : Scheme.{u}} [HasInvertibleExponent Λ X] (f : X ⟶ Y) (d : ℕ)
+    {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X] (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     SatisfiesSmoothDuality Λ f (2 * d : ℤ) := by
   intro _
@@ -262,6 +267,7 @@ theorem satisfiesSmoothDuality_of_etaleSmoothDuality_of_affineSpaceSmoothDuality
     (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback sq.flip
       ‹SmoothOfRelativeDimension d f›
   have : HasCompactification Y'.ι := (Compactification.ofIsOpenImmersion _).hasCompactification
+  have : QuasiSeparatedSpace Y'.toScheme := quasiSeparatedSpace_of_quasiSeparated Y'.ι
   obtain ⟨hω', hθ'⟩ := satisfiesSmoothDuality_of_hasInvertibleExponent hO hE hA
     (IsOpenImmersion.lift Y'.ι f hf) d
   refine ⟨?_, fun K ↦ isIso_dualizingComplexTensorMap_comp_of_forall Λ _ Y'.ι f w hθ'
@@ -278,7 +284,7 @@ theorem satisfiesSmoothDuality_of_etaleSmoothDuality_of_affineSpaceSmoothDuality
 invertible on `X`, `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free rank-one `Λ`-modules
 and `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineSpace {X Y : Scheme.{u}}
-    [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
+    [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),

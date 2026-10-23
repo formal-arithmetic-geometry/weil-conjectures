@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+public import WeilConjectures.WeilSheaf.OpenClosedTriangleWeil
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 
 /-!

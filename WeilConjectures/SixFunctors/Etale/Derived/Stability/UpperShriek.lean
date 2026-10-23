@@ -131,8 +131,8 @@ orientation, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` for a locally constant sheaf `L` o
 `thm-asd-smooth-tensor`), and tensoring with the flat constructible `L` changes neither the
 constructible interval nor the Tor amplitude. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
-    {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
-    [SmoothOfRelativeDimension d f] (a b : ℤ)
+    {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)

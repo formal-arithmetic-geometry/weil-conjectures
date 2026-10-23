@@ -192,19 +192,14 @@ reduction
 This is one of the three compatibilities out of which the comparison square of
 `sk-prop-sf-pf-reduction` (`AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`)
 is built, and the only one that is not formal; it is what reduces the projection formula at
-level `n` to the projection formula at level `m ≤ n`. -/
-theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
-    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
-      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
-  sorry
+level `n` to the projection formula at level `m ≤ n`.
 
-/-- **`Rf_!` commutes with reduction for a finite coefficient ring.** This is the case of
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` where `Λ` is
-finite (the blueprint's `A_{E,n}`). The isomorphism is the comparison
+As in the blueprint, the coefficient ring `Λ` is finite (the finite levels `A_{E,n}`). The
+isomorphism is the comparison
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekReductionModIdealMap`, the projection map at
 `(K, (Λ/J)_Y)` followed by `Lf^*(Λ/J)_Y ≅ (Λ/J)_X`, invertible by the projection formula at
 finite coefficients. -/
-theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite [Finite Λ]
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek [Finite Λ]
     (J : Ideal Λ) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=

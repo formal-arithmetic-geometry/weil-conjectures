@@ -90,7 +90,9 @@ namespace Scheme.Hom
 
 variable {X Z : Scheme.{u}}
 
-/-- A *frame* of a closed immersion `i : Z ⟶ X` of codimension `c`: an étale `e : U ⟶ X`
+/-- Blueprint `pur9-rg-def-frame`: Frames and frame classes
+
+A *frame* of a closed immersion `i : Z ⟶ X` of codimension `c`: an étale `e : U ⟶ X`
 together with functions `f₁, …, f_c ∈ Γ(U, 𝒪_U)` generating the ideal of `Z_U = Z ×_X U`,
 recorded as a pullback square
 
@@ -402,13 +404,18 @@ instance _root_.AlgebraicGeometry.Scheme.Hom.EtaleFrame.hasInvertibleExponent
 
 attribute [local instance] HasInvertibleExponent.opens
 
-/-- The *class of a frame* `(e : U ⟶ X, f₁, …, f_c)` of `Z`:
+/-- Blueprint `pur9-rg-def-frame`: Frames and frame classes
+
+The *class of a frame* `(e : U ⟶ X, f₁, …, f_c)` of `Z`:
 
 `cl(f) = ∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c) ∈ H^{2c}_{Z_U}(U, Λ(c)) = Hom(Λ_U, Ri_{U!} Ri_U^! (Λ_U(c)[2c]))`,
 
 the iterated cup product with supports of the Kummer boundaries
 (`AlgebraicGeometry.Etale.kummerBoundaryProduct`), supported on
-`V(f₁) ∩ ⋯ ∩ V(f_c) = Z_U`. -/
+`V(f₁) ∩ ⋯ ∩ V(f_c) = Z_U`. This is the blueprint's frame class: each `∂κ(f_r)` is the boundary
+of the Kummer class of `f_r` on `U ∖ V(f_r)` (`AlgebraicGeometry.Etale.kummerBoundary`), and
+the classes with supports are read in the model `Hom(Λ_U, Ri_! Ri^! L)` of supported
+cohomology (`pur9-rg-def-supported`). -/
 noncomputable def frameClass [HasKummerClass Λ] [HasInvertibleExponent Λ X] (F : i.EtaleFrame c) :
     constantComplex Λ F.U ⟶
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
@@ -977,7 +984,13 @@ unique class restricting to the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`
 
 It is *defined* as `Classical.choose` of
 `AlgebraicGeometry.Etale.existsUnique_fundamentalClass`; uniqueness
-is what makes the choice canonical. -/
+is what makes the choice canonical.
+
+Also blueprint `pur9-rg-def-fundamental`: Fundamental class. The blueprint defines `[Z ⊂ X]` as
+the unique section of the rank-one sheaf `ℋ⁰(Ri^! Λ_X(c)[2c])` restricting on every frame to its
+class; the class here lives in `Hom(Λ_X, Ri_! Ri^! (Λ_X(c)[2c])) = H^{2c}_Z(X, Λ(c))`, and its
+existence and uniqueness (`existsUnique_fundamentalClass`) are proved by the same gluing of the
+frame classes over the frames, which exist locally because `i` is regular. -/
 noncomputable def fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -995,7 +1008,12 @@ theorem frameRestriction_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
 The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`: the adjoint
 (`AlgebraicGeometry.Etale.supportedClassMap`) of the fundamental class
 `Λ_X ⟶ Ri_! Ri^! (Λ_X(c)[2c])`, through the forget-supports map `Ri_! ⟶ Ri_*`, which is an
-isomorphism as `i` is a closed immersion. -/
+isomorphism as `i` is a closed immersion.
+
+Also blueprint `pur9-rg-def-fundamental`: Fundamental class. This is the blueprint's
+`cl_i : Λ_Z ⟶ Ri^! Λ_X(c)[2c]`, the morphism corresponding to `[Z ⊂ X]` under the
+identification `H^{2c}_Z(X, Λ(c)) ≅ Hom(Λ_Z, Ri^! Λ_X(c)[2c])`
+(`AlgebraicGeometry.Etale.supportedClassMap_bijective`). -/
 noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     constantComplex Λ Z ⟶

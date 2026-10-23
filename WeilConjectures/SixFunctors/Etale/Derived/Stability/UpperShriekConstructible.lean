@@ -57,11 +57,12 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isOpenImmersion {U Y : S
     ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm
     (hK.mapDerivedCategory_upperStar j)
 
-/-- For `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is invertible on
-`Y`, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` with `L` flat, locally constant and constructible, so `Rf^!`
-preserves bounded constructibility. -/
+/-- For `f` smooth of pure relative dimension `d` over a quasi-separated base `Y` and a finite `Λ`
+whose exponent is invertible on `Y`, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` with `L` flat, locally constant
+and constructible, so `Rf^!` preserves bounded constructibility. -/
 theorem boundedConstructible_rightDerivedUpperShriek_of_smoothOfRelativeDimension
-    {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
+    {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :

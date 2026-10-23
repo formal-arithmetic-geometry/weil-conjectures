@@ -57,7 +57,7 @@ For a morphism `f` and objects `K` over `X`, `L` over `Y`:
   `Lj^* Lp^* ≅ Lf^*`.
 
 The open-extension projection map `σ_j` itself is
-`ProEtale.CondensedRing.openImmersionProjectionComparison`.
+`ProEtale.CondensedRing.openImmersionProjectionComparison'`.
 -/
 
 @[expose] public section
@@ -167,12 +167,12 @@ component at `K` is the adjoint, under `Dj'_! ⊣ Lj'^*`, of
 `Lg'^* K ⟶ Lg'^* Lj^* Dj_! K ≅ Lj'^* Lg^* Dj_! K`, `Lg'^*` of the unit of `Dj_! ⊣ Lj^*`
 followed by the pullback comparison of the square
 (`ProEtale.CondensedRing.derivedPullbackSquareIso`). The adjunctions are
-`ProEtale.CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction`, whose
+`ProEtale.CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction'`, whose
 right adjoint is the derived pullback `Lj^*`, canonically the levelwise `D(j^*)`. -/
 noncomputable def derivedOpenImmersionLowerShriekExchange (sq : CommSq g' j' j g) :
     L((g')^*⟦Λ⟧) ⋙ D((j')_!open⟦Λ⟧) ⟶ D((j)_!open⟦Λ⟧) ⋙ L((g)^*⟦Λ⟧) :=
-  Adjunction.exchangeLeft (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j)
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
+  Adjunction.exchangeLeft (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j')
     (derivedPullbackSquareIso Λ sq.flip)
 
 /-- The extension by zero `Dj_!` on module objects along an open immersion is fully faithful,
@@ -235,8 +235,8 @@ theorem isIso_derivedOpenImmersionLowerShriekExchange (sq : IsPullback g' j' j g
   obtain ⟨_, _⟩ := full_faithful_derivedOpenImmersionLowerShriek Λ j
   obtain ⟨_, _⟩ := full_faithful_derivedOpenImmersionLowerShriek Λ j'
   have e : derivedOpenImmersionLowerShriekExchange Λ sq.toCommSq =
-      Adjunction.exchangeLeft (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j)
-        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
+      Adjunction.exchangeLeft (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j)
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j')
         (derivedPullbackSquareIso Λ sq.toCommSq.flip) := by
     unfold derivedOpenImmersionLowerShriekExchange
     rfl
@@ -244,8 +244,8 @@ theorem isIso_derivedOpenImmersionLowerShriekExchange (sq : IsPullback g' j' j g
   have (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
       IsIso ((Adjunction.exchangeLeft
-        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j)
-        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j)
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j')
         (derivedPullbackSquareIso Λ sq.toCommSq.flip)).app K) :=
     Adjunction.isIso_exchangeLeft_app_of_mem_essImage _ _ _ K
       (leftDerivedUpperStar_obj_derivedOpenImmersionLowerShriek_mem_essImage Λ sq K)
@@ -335,7 +335,7 @@ Rp_* Dj_! K ⊗ᴸ L ⟶ Rp_* (Dj_! K ⊗ᴸ Lp^* L) ⟶ Rp_* Dj_! (K ⊗ᴸ Lj^
 ```
 of the direct-image projection map `P_p` (`ProEtale.CondensedRing.derivedLowerStarProjection`),
 of `Rp_*` of the inverse of the open-extension projection isomorphism `σ_j`
-(`ProEtale.CondensedRing.openImmersionProjectionComparison`), and of the composition
+(`ProEtale.CondensedRing.openImmersionProjectionComparison'`), and of the composition
 isomorphism `Lj^* Lp^* ≅ L(j ≫ p)^* = Lf^*` (`ProEtale.CondensedRing.leftDerivedUpperStarComp`).
 For `c` the chosen compactification of `f` this is `PF_f`. -/
 noncomputable def derivedLowerShriekProjection {f : X ⟶ Y} (c : Compactification f)
@@ -345,7 +345,7 @@ noncomputable def derivedLowerShriekProjection {f : X ⟶ Y} (c : Compactificati
       (condensedRingObj Λ Y))) :
     (Rf_!(c)⟦Λ⟧).obj K ⊗ L ⟶ (Rf_!(c)⟦Λ⟧).obj (K ⊗ L((f)^*⟦Λ⟧).obj L) :=
   ((derivedLowerStarProjection Λ c.g).app (D((c.i)_!open⟦Λ⟧).obj K)).app L ≫
-    R((c.g)_*⟦Λ⟧).map (inv (((openImmersionProjectionComparison Λ c.i).app K).app
+    R((c.g)_*⟦Λ⟧).map (inv (((openImmersionProjectionComparison' Λ c.i).app K).app
       (L((c.g)^*⟦Λ⟧).obj L))) ≫
     (Rf_!(c)⟦Λ⟧).map (K ◁ ((leftDerivedUpperStarComp Λ c.i c.g).inv.app L ≫
       eqToHom (by rw [← c.comm])))

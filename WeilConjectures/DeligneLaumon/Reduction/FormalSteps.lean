@@ -13,7 +13,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.Finiteness
-public import WeilConjectures.WeilSheaf.OpenClosedTriangle
+public import WeilConjectures.WeilSheaf.OpenClosedTriangleWeil
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 

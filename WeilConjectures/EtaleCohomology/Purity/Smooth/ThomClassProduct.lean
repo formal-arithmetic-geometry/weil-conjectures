@@ -275,6 +275,8 @@ lemma bijective_comp_rightDerivedLowerShriek_iff
     rw [this]
     exact (E K N).symm.bijective.comp ((bijective_comp_left_of_isIso _).comp (E T N).bijective)
 
+variable [Finite Λ]
+
 /-- The pullback `Li^* u` of the restriction map `u : Λ_U ⟶ Ri_! Λ_Z` is an isomorphism. -/
 lemma isIso_leftDerivedUpperStar_map_supportedRestrictionMap :
     IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map (supportedRestrictionMap Λ i)) :=
@@ -314,6 +316,8 @@ end Reflection
 section Universal
 
 variable {U Z : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i]
+
+variable [Finite Λ]
 
 /-- A morphism `χ : E ⟶ L` is *universal for objects supported on `Z`* if `f ↦ f ≫ χ` is a
 bijection `Hom(S, E) ≅ Hom(S, L)` for every `S` supported on `Z`. For the counit
@@ -371,6 +375,8 @@ section Restriction
 
 variable {U U' Z₂ Z' : Scheme.{u}} (e : U' ⟶ U) (i₂ : Z₂ ⟶ U) (b : Z' ⟶ U')
   [IsClosedImmersion i₂] [IsClosedImmersion b] (g : Z' ⟶ Z₂) (hg : IsPullback g b i₂ e)
+
+variable [Finite Λ]
 
 /-- **Forget supports after restriction.** Let `β` be a class supported on `Z₂` and `β'` its
 restriction along `e : U' ⟶ U` to the base change `b : Z' ⟶ U'`. Up to an isomorphism

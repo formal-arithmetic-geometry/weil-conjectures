@@ -28,7 +28,10 @@ formula says that
 `(1, h, …, hⁿ) : ⊕ₐ Λ_S(-a)[-2a] ⟶ Rq_* Λ_{ℙⁿ_S}`
 
 is an isomorphism (`AlgebraicGeometry.Etale.isIso_projectiveFormulaMap`, the case of a
-trivial bundle of `thm-pur-projective-bundle-formula`; stated, not proved).
+trivial bundle of `thm-pur-projective-bundle-formula`, proved in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveBundleFormula`). This file defines the
+map (`AlgebraicGeometry.Etale.projectiveFormulaMap`) and the induction hypothesis
+(`AlgebraicGeometry.Etale.ProjectiveFormula`).
 
 The hyperplane class exists and is unique (`AlgebraicGeometry.Etale.hyperplaneClass`), and its
 adjoint `Λ ⟶ RH^! Λ(1)[2]` is an isomorphism
@@ -803,111 +806,6 @@ lemma projectiveFormula_pempty : ProjectiveFormula Λ S PEmpty := by
     | none => rfl
     | some x => exact x.elim⟩
   exact isIso_projectiveFormulaMap_of_eq_zero _ _ _ Fintype.card_eq_zero
-
-include aS in
-/-- *Invariance under renaming the coordinates* of the projective-space formula.
-
-Not proved here: an equivalence `n ≃ n'` induces an isomorphism `ℙ(Option n; S) ≅ ℙ(Option n'; S)`
-over `S` carrying the hyperplane to the hyperplane, hence hyperplane classes to hyperplane
-classes (`AlgebraicGeometry.Etale.eq_hyperplaneClass`). -/
-lemma projectiveFormula_of_equiv {n n' : Type u} [Fintype n] [Fintype n'] (e : n ≃ n')
-    (h : ProjectiveFormula Λ S n) : ProjectiveFormula Λ S n' := by
-  sorry
-
-include aS in
-/-- *Induction step of the projective-space formula*, by the localization triangle of
-`𝔸 ⊂ ℙ(Option (Option n); S) ⊃ ℙ(Option n; S)`.
-
-Not proved here. Apply `Rq_*` to `j_! j^* Λ ⟶ Λ ⟶ H_* H^* Λ`, with `j` the open immersion of
-`D₊(T_∗) ≅ 𝔸^{r+1}_S` and `H` the hyperplane. The first term is `Rp_! Λ ≅ Λ_S(-r-1)[-2r-2]`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace`). The last
-is `⊕_{a ≤ r} Λ_S(-a)[-2a]` by the induction hypothesis, compatibly with `hᵃ` since `h` restricts
-to `h` (`AlgebraicGeometry.Etale.classRestriction_hyperplane_hyperplaneChernClass_eq`). The top
-power `h^{r+1}` restricts to zero on the hyperplane and corresponds to the generator of the first
-term. -/
-lemma projectiveFormula_option {n : Type u} [Fintype n] (h : ProjectiveFormula Λ S n) :
-    ProjectiveFormula Λ S (Option n) := by
-  sorry
-
-include aS in
-/-- Blueprint `thm-pur-projective-bundle-formula`: Projective-bundle formula without purity
-
-*The trivial bundle.* For the projective space `q : ℙⁿ_S = ℙ(Option n; S) ⟶ S`, `n` with `r`
-elements, over a separated scheme of finite type over a field on which the exponent of `Λ` is
-invertible, and `h = c₁(𝒪(1))` the first Chern class of a hyperplane class
-(`AlgebraicGeometry.Etale.hyperplaneChernClass`),
-
-`(1, h, …, hʳ) : ⊕_{a ≤ r} Λ_S(-a)[-2a] ⟶ Rq_* Λ_{ℙʳ_S}`
-
-is an isomorphism. The blueprint states the formula for the projectivization `ℙ_B(F)` of any
-vector bundle `F`; the projectivization of a vector bundle is not constructed in this repository,
-and the formula for it follows from this case by restriction to trivialising opens.
-
-By induction on `n` (`Fintype.induction_empty_option`) from `projectiveFormula_pempty`,
-`projectiveFormula_of_equiv` and the localization step `projectiveFormula_option`, which are
-stated and not proved. -/
-theorem isIso_projectiveFormulaMap [Fintype n]
-    (γ : constantComplex Λ ℙ(Option n; S) ⟶ (R(hyperplane n S)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(hyperplane n S)^![ModuleCat.{u + 1} Λ]).obj
-        ((tateObject Λ ℙ(Option n; S) ((1 : ℕ) : ℤ))⟦2 * ((1 : ℕ) : ℤ)⟧)))
-    (hγ : IsHyperplaneClass Λ n S γ) :
-    IsIso (projectiveFormulaMap (ℙ(Option n; S) ↘ S) (hyperplaneChernClass γ)
-      (Fintype.card n)) := by
-  have key : ∀ (n : Type u) [Fintype n], ProjectiveFormula Λ S n :=
-    Fintype.induction_empty_option (P := fun n _ ↦ ProjectiveFormula Λ S n)
-      (fun _ β _ e h ↦ letI := Fintype.ofEquiv β e.symm; projectiveFormula_of_equiv aS e h)
-      projectiveFormula_pempty
-      (fun _ _ h ↦ projectiveFormula_option aS h)
-  exact key n γ hγ
-
-attribute [local instance] HasInvertibleExponent.opens
-
-/-- The restriction of a class `h ∈ H^{2m}(Y, Λ(m))` along `g : X ⟶ Y`. -/
-noncomputable def restrictClass {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
-    [HasInvertibleExponent Λ Y] (g : X ⟶ Y) {m : ℤ}
-    (h : constantComplex Λ Y ⟶ (tateObject Λ Y m)⟦2 * m⟧) :
-    constantComplex Λ X ⟶ (tateObject Λ X m)⟦2 * m⟧ :=
-  (leftDerivedUpperStarConstantComplexIso Λ g).inv ≫ (L((g)^*[ModuleCat.{u + 1} Λ])).map h ≫
-    (leftDerivedUpperStarTateShiftIso Λ g m).hom
-
-/-- A *projective bundle* of relative dimension given by `n`: a morphism `p : P ⟶ B` together
-with an open cover `(U i)` of `B` and isomorphisms `p⁻¹(U i) ≅ ℙ(Option n; U i)` over `U i`. The
-projectivization `ℙ_B(F)` of a vector bundle `F` of rank `#n + 1` is one. -/
-structure ProjectiveBundle {P B : Scheme.{u}} (n : Type u) (p : P ⟶ B) where
-  /-- The index type of the trivialising cover. -/
-  ι : Type u
-  /-- The trivialising opens of the base. -/
-  U : ι → B.Opens
-  iSup_U : iSup U = ⊤
-  /-- The trivialisations. -/
-  chart (i : ι) : (p ⁻¹ᵁ U i).toScheme ≅ ℙ(Option n; U i)
-  chart_over (i : ι) : (chart i).hom ≫ ℙ(Option n; U i) ↘ U i = p ∣_ U i
-
-include aS in
-/-- Blueprint `thm-pur-projective-bundle-formula`: Projective-bundle formula without purity
-
-Let `p : P ⟶ B` be a projective bundle of relative dimension `r = #n`
-(`AlgebraicGeometry.Etale.ProjectiveBundle`), for instance the projectivization `ℙ_B(F)` of a
-vector bundle `F` of rank `r + 1`, over a separated scheme of finite type over a field on which the
-exponent of `Λ` is invertible, and let `h ∈ H²(P, Λ(1))` be a class restricting on every chart
-`p⁻¹(U i) ≅ ℙʳ_{U i}` to the first Chern class of `𝒪(1)`, the hyperplane class (for `ℙ_B(F)`,
-`h = c₁(𝒪(1))`). Then
-
-`(1, h, …, hʳ) : ⊕_{a ≤ r} Λ_B(-a)[-2a] ⟶ Rp_* Λ_P`
-
-is an isomorphism.
-
-Not proved here: on the charts this is
-`AlgebraicGeometry.Etale.isIso_projectiveFormulaMap`, and the formation of `Rp_*` commutes with
-restriction to the opens of the base. -/
-theorem isIso_projectiveFormulaMap_of_projectiveBundle [Fintype n] {P B : Scheme.{u}}
-    [HasInvertibleExponent Λ P] [HasInvertibleExponent Λ B] (aB : B ⟶ Spec (.of k))
-    [IsSeparated aB] [LocallyOfFiniteType aB] {p : P ⟶ B} (E : ProjectiveBundle n p)
-    (h : constantComplex Λ P ⟶ (tateObject Λ P 1)⟦2 * (1 : ℤ)⟧)
-    (hh : ∀ i, ∃ γ, IsHyperplaneClass Λ n (E.U i) γ ∧
-      restrictClass ((E.chart i).inv ≫ (p ⁻¹ᵁ E.U i).ι) h = hyperplaneChernClass γ) :
-    IsIso (projectiveFormulaMap p h (Fintype.card n)) := by
-  sorry
 
 section TwistBundle
 

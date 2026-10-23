@@ -44,19 +44,6 @@ theorem ringKrullDim_ne_top_of_finiteType (k A : Type*) [Field k] [CommRing A] [
   intro h
   cases h
 
-/-- A nontrivial finitely generated algebra over a field has finite Krull dimension. -/
-theorem exists_ringKrullDim_eq_natCast_of_finiteType (k R : Type*) [Field k] [CommRing R]
-    [Nontrivial R] [Algebra k R] [Algebra.FiniteType k R] : ∃ n : ℕ, ringKrullDim R = n := by
-  have h1 := ringKrullDim_ne_top_of_finiteType k R
-  have h2 : ringKrullDim R ≠ ⊥ :=
-    ne_bot_of_le_ne_bot WithBot.coe_ne_bot ringKrullDim_nonneg_of_nontrivial
-  induction h : ringKrullDim R using WithBot.recBotCoe with
-  | bot => exact absurd h h2
-  | coe m =>
-    induction m using ENat.recTopCoe with
-    | top => exact absurd h h1
-    | coe m => exact ⟨m, rfl⟩
-
 /-- A proper closed subset of an irreducible closed subset of `Spec R` of finite dimension has
 strictly smaller dimension: if `I ≤ J` with `I` prime, `R ⧸ I` finite-dimensional and
 `dim (R ⧸ J) = dim (R ⧸ I)`, then `J = I`. -/

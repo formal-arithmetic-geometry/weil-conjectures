@@ -83,7 +83,8 @@ lemma constructibleIn_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{
 /-- Blueprint `cor-pur-smooth-admissibility`: Smooth morphisms satisfy the preservation clauses.
 
 Let `f : X ⟶ Y` be smooth (and compactifiable, hence separated of finite type) of pure relative
-dimension `d`, and `Λ` a finite ring whose exponent is invertible on `Y`. Then `f` satisfies
+dimension `d` over a quasi-separated base `Y` (the blueprint works over finite-type schemes over
+a field), and `Λ` a finite ring whose exponent is invertible on `Y`. Then `f` satisfies
 the two preservation clauses with `c_f^- = c_f^+ = -2d`:
 
 1. (constructibility) `Rf^!` carries `D_c^[a, b](Y, Λ)` into `D_c^[a - 2d, b - 2d](X, Λ)`;
@@ -96,8 +97,9 @@ By smooth duality (`thm-asd-smooth-tensor`, `cor-pur-dualizing-object-purity`)
 the homology interval and the Tor amplitude, and `[2d]` shifts both intervals by `-2d`. The
 ambient adjoint `Rf^!` is the right adjoint of `Rf_!` on the unbounded derived categories, which
 exists unconditionally here. -/
-theorem smooth_preservationClauses {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
-    [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f] :
+theorem smooth_preservationClauses {X Y : Scheme.{u}} [QuasiSeparatedSpace Y]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
     (∀ (a b : ℤ) (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)

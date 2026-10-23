@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.IntegralClosure.GoingDown
 public import Mathlib.RingTheory.Polynomial.RationalRoot
 public import Mathlib.RingTheory.Polynomial.UniqueFactorization
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
+public import WeilConjectures.RingTheory.KrullDimension.FiniteType
 
 /-!
 # Height plus coheight in finitely generated domains over a field

@@ -127,6 +127,12 @@ lemma affineLineToProjectiveLine_over (S : Scheme.{u}) :
   rw [affineLineToProjectiveLine, Category.assoc, ProjectiveLine.affineChart_over,
     AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
 
+instance (S : Scheme.{u}) : QuasiCompact (affineLineToProjectiveLine S) := by
+  have : QuasiCompact (affineLineToProjectiveLine S ≫ ProjectiveLine S ↘ S) := by
+    rw [affineLineToProjectiveLine_over]
+    infer_instance
+  exact QuasiCompact.of_comp _ (ProjectiveLine S ↘ S)
+
 /-- **Smooth duality for the affine line.** For every scheme `S` on which the exponent of `Λ` is
 invertible, the projection `𝔸¹_S ⟶ S` satisfies smooth duality in degree `-2`: it is the
 composite of the open immersion `𝔸¹_S ⟶ ℙ¹_S` and of the projective line `ℙ¹_S ⟶ S`

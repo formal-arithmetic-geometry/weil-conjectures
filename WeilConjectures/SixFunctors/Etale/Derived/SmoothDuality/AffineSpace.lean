@@ -212,8 +212,7 @@ rank-one `Λ`-modules and `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomo
 this is the statement of `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine
     (hO : OpenImmersionSmoothDuality Λ) (hE : EtaleSmoothDuality Λ)
-    (h₁ : AffineLineSmoothDuality Λ)
-    {X Y : Scheme.{u}}
+    (h₁ : AffineLineSmoothDuality Λ) {X Y : Scheme.{u}} [QuasiSeparatedSpace Y]
     [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
