@@ -4991,6 +4991,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStal
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusExistence
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusFixedLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusPoints
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverOpenFactorRationalPoint
@@ -9154,6 +9155,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import WeilConjectures.Mathlib.AlgebraicGeometry.SpreadingOut
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
