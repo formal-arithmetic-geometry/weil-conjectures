@@ -12186,7 +12186,6 @@ public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.KummerCover
 public import WeilConjectures.SixFunctors.ProEtale.LowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.HomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
@@ -12262,7 +12261,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjection
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionIso
-public import WeilConjectures.SixFunctors.ProEtale.SplitFiniteEtaleLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianNeighbourhood
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianStalk
 public import WeilConjectures.SixFunctors.ProEtale.SupportCohomologyTrianglePullback

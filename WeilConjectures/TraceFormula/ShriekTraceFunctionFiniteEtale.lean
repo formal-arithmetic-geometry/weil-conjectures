@@ -97,6 +97,9 @@ theorem weilSheafStalkTrace_eq_stalkFrobeniusTrace :
 
 end FrobeniusStalk
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] in
 /-- The trace of the Frobenius on the stalk of the pushforward `f_* F` of a Weil sheaf along a
 finite étale morphism at a point `ȳ` of degree `n + 1` is the sum of the traces at the points of
 degree `n + 1` over `ȳ`, provided the stalks of `F` over `ȳ` are dualizable. -/

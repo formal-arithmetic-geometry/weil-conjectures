@@ -76,7 +76,8 @@ noncomputable def weilPointComparison {x x' : P ⟶ Z.left} (h : x ≫ e.hom.lef
 lemma weilStalkComparison_eq {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) {x : Spec (.of Ω) ⟶ Z.left} (hx : x ≫ e.hom.left = σ ≫ x) :
     weilStalkComparison ℓ e σ x hx =
-      weilPointComparison ℓ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ) e hx := by
+      weilPointComparison ℓ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ) e
+        hx := by
   unfold weilStalkComparison weilPointComparison
   rfl
 
@@ -223,8 +224,8 @@ lemma finsum_stalkFrobeniusTrace_eq {y : P ⟶ Y.left} (G : WeilSheaf ℓ eX)
         stalkFrobeniusTrace ℓ τ eX x.2 G.str.hom :=
   finsum_eq_of_bijective (fun i ↦ (⟨⟨pt i, hpt i⟩, hfix i⟩ :
       {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1}))
-    ⟨fun i j hij ↦ hinj (congrArg (fun x ↦ x.1.1) hij), fun x ↦
-      (hsurj x.1.1 x.1.2 x.2).imp fun i hi ↦ Subtype.ext (Subtype.ext hi)⟩
+    ⟨fun _ _ hij ↦ hinj (congrArg (fun x ↦ x.1.1) hij), fun x ↦
+      (hsurj x.1.1 x.1.2 x.2).imp fun _ hi ↦ Subtype.ext (Subtype.ext hi)⟩
     fun _ ↦ rfl
 
 /-- The trace of the Frobenius of the stalk at `ȳ` of the pushforward `f_* G` of a Weil sheaf
