@@ -125,10 +125,15 @@ noncomputable def poincarePairing (γ : TateOrientation Λ a d)
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.poincarePairing a γ.dualizingComplexIso K
 
-/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
+/-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality, at a finite
+coefficient stage `Λ = A`. This is also the derived part of blueprint `sk-thm-derived-duality`.
 
 The derived Poincaré pairing of a Tate orientation is perfect, for a finite coefficient ring
-`Λ` and `K` dualizable (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`). -/
+`Λ` and `K` dualizable (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`): the
+tensor–internal-hom adjoint `RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of
+`β_K : RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` is an isomorphism, read in `D(Y_ét, Λ)`. The integral
+stage `Λ = 𝒪_E` is
+`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable`. -/
 theorem isPerfectPairing_poincarePairing (γ : TateOrientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
     IsPerfectPairing (γ.poincarePairing K) :=

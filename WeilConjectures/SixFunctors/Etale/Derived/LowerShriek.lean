@@ -247,7 +247,9 @@ namespace Etale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- The compactly supported derived global sections along a morphism `f : X ⟶ Y`
+/-- Blueprint `def-trf-coefficient-conventions`: Trace-formula coefficient conventions.
+
+The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite
 
 `RΓc(X/Y, -) := RΓ(Y, Rf_! -) : D(X_ét) ⥤ D(A)`.
@@ -255,7 +257,20 @@ admitting a compactification, *defined* as the composite
 The intermediate object `Rf_! K ∈ D(Y_ét)` and the coefficient complex
 `RΓc(X/Y, K) ∈ D(A)` are not definitionally the same. For the structure morphism of the
 geometric fiber of a scheme separated of finite type over a finite field this is the
-`RΓc(X, K) = RΓ(s, Ra_{X!} K)` of the trace-formula interface. -/
+`RΓc(X, K) = RΓ(s, Ra_{X!} K)` of the trace-formula interface.
+
+This carries the coefficient conventions of the trace formula: the coefficients are
+`A = ModuleCat Λ` for a finite coefficient ring `Λ` (the stage `A_{E,n} = 𝒪_E / ϖ_Eⁿ`) whose
+exponent is invertible on the base, the schemes are the geometric fibers `X = X₀ ×_{k₀} k`
+(`AlgebraicGeometry.Scheme.Hom.geometricFiber`) with structure morphism `a_X : X ⟶ s = Spec k`,
+the categories are `Dᵇc(X, A)` and `Dctf(X, A)` of `AlgebraicGeometry.Etale.DerivedCategory`,
+`RΓ(s, -)` is the evaluation `Fib_s` at the geometric point
+(`AlgebraicGeometry.Etale.pointFiber`, see `AlgebraicGeometry.Etale.pointFiberCompιIso`), and
+`H_c^i(X, K) = Hⁱ(RΓc(X, K))` is `AlgebraicGeometry.Etale.compactlySupportedCohomology`. The
+same construction on the small pro-étale site of the blueprint node is
+`AlgebraicGeometry.ProEtale.compactlySupportedGlobalSections`; the pro-étale comparison
+(`WeilConjectures.SixFunctors.ProEtale.Comparison`) identifies the two on the constructible
+objects. -/
 noncomputable def compactlySupportedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
   R(f)_![A] ⋙ rightDerivedGlobalSections A Y

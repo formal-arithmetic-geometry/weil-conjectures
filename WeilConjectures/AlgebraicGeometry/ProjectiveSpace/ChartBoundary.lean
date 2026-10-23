@@ -69,7 +69,7 @@ variable {n : Type u} (S : Scheme.{u})
 
 /-- The ratio `Tⱼ / Tᵢ` on `D₊(Tᵢ)`, restricted to `D₊(Tⱼ) ∩ D₊(Tᵢ)`, is the ratio `xⱼ / xᵢ` of
 `AlgebraicGeometry.ProjectiveSpace.ratio`. -/
-lemma map_coordRatio (i j : n) :
+lemma map_coordRatio_eq_ratio (i j : n) :
     ℙ(n; S).presheaf.map (homOfLE (inf_le_right :
         standardOpen n S j ⊓ standardOpen n S i ≤ standardOpen n S i)).op
       (coordRatio n S i j) = ratio n S j i := by
@@ -82,7 +82,7 @@ lemma basicOpen_coordRatio (i j : n) :
   have h := ℙ(n; S).basicOpen_res (coordRatio n S i j) (homOfLE (inf_le_right :
     standardOpen n S j ⊓ standardOpen n S i ≤ standardOpen n S i)).op
   have hu : IsUnit (ratio n S j i) := (ratioUnit n S j i).isUnit
-  rw [map_coordRatio, Scheme.basicOpen_of_isUnit _ hu] at h
+  rw [map_coordRatio_eq_ratio, Scheme.basicOpen_of_isUnit _ hu] at h
   rw [inf_comm, h]
   exact inf_le_right
 

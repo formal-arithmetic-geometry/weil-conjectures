@@ -133,7 +133,7 @@ private theorem half_plane_limits (X : BigradedExactCouple C 0) (a : ℤ)
       X.cycleBoundaryTower.Z t p q = X.cycleBoundaryTower.Z (R p q) p q ∧
         X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B (R p q) p q := by
     simpa only [Nat.add_sub_of_le ht] using htail p q (t - R p q)
-  refine ⟨fun p q ↦ ⟨R p q, fun t ht ↦ (heventual p q t ht).1⟩, ?_⟩
+  refine ⟨fun p q ↦ ⟨R p q, fun t ht ↦ (heventual p q t ht).2⟩, ?_⟩
   refine ⟨{ Z := fun p q ↦ X.cycleBoundaryTower.Z (R p q) p q
             B := fun p q ↦ X.cycleBoundaryTower.B (R p q) p q
             Z_glb := ?_

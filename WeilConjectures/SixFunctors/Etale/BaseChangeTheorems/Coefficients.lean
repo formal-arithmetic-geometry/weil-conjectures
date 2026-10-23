@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangePro
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
+public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso
 
 /-!
 # Change of coefficients for the base change property

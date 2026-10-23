@@ -85,6 +85,13 @@ structure UniversalCovers where
     cover y ≅ cover z
   transport_proj {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) :
     (transport τ).hom ≫ proj z = proj y
+  /-- The transport along `τ` acts on fibres by `τ⁻¹`: under `bijective_fiber`, precomposition
+  with `transport τ` sends `x ∈ F_z(P)` to `τ⁻¹ x ∈ F_y(P)`. -/
+  transport_fiber {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
+    (P : Y.FiniteEtale) (f : cover z ⟶ P.obj.left) (hf : f ≫ P.obj.hom = proj z) :
+    fiberMk y P (pt y ≫ (transport τ).hom ≫ f)
+        (by rw [Category.assoc, Category.assoc, hf, transport_proj, pt_proj]) =
+      τ.inv.app P (fiberMk z P (pt z ≫ f) (by rw [Category.assoc, hf, pt_proj]))
   transport_refl (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
     transport (Iso.refl (fiber y)) = Iso.refl _
   transport_trans {y z w : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
@@ -142,6 +149,15 @@ noncomputable def universalCovers [ConnectedSpace Y] [CompactSpace Y] [QuasiSepa
   bijective_fiber y P := UniversalCover.bijective_fiber y P
   transport := UniversalCover.transport
   transport_proj τ := UniversalCover.transportHom_proj τ
+  transport_fiber {y z} τ P f hf := by
+    have hx : UniversalCover.toObj (Y := Y) z P (fiberMk z P (UniversalCover.pt z ≫ f)
+        (by rw [Category.assoc, hf]; exact UniversalCover.pt_proj (Y := Y) z)) = f :=
+      UniversalCover.eq_of_pt_comp_eq (Y := Y) z P (UniversalCover.toObj_hom (Y := Y) z P _) hf
+        (UniversalCover.pt_toObj (Y := Y) z P _)
+    apply fiber_ext
+    conv_lhs => rw [fiberMk_left, ← hx]
+    rw [UniversalCover.transport_hom, UniversalCover.transportHom_toObj,
+      UniversalCover.pt_toObj]
   transport_refl := UniversalCover.transport_refl
   transport_trans := UniversalCover.transport_trans
   pt_transport_reparam := UniversalCover.pt_transport_reparam

@@ -71,7 +71,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section Gysin
 
-variable {X Z : Scheme.{u}}
+variable [Finite Λ] {X Z : Scheme.{u}}
 
 /-- The *Gysin image* of a class `a : Λ_Z ⟶ Ri^! L[n]` along a proper morphism `i : Z ⟶ X`:
 the composite
