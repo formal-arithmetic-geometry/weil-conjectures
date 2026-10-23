@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
-# Powers of intertwined endomorphisms
+# Powers of intertwined endomorphisms; units and inverses in `Aut X`
 
 A morphism `p : Y ⟶ X` intertwining endomorphisms `a` of `Y` and `b` of `X`
 (`a ≫ p = p ≫ b`) intertwines their powers in the endomorphism monoids.
@@ -16,11 +16,33 @@ A morphism `p : Y ⟶ X` intertwining endomorphisms `a` of `Y` and `b` of `X`
 ## Main statements
 
 - `CategoryTheory.End.asHom_pow_comp_eq_comp_asHom_pow`: `a ^ m ≫ p = p ≫ b ^ m`.
+- `CategoryTheory.Aut.one_hom`, `CategoryTheory.Aut.inv_hom`, `CategoryTheory.Aut.mul_hom`: the
+  underlying morphisms of the unit, inverses and products in `Aut X`.
 - `CategoryTheory.End.comp_pow_eq_pow_comp`: the same statement for monoid powers in `End`.
 - `CategoryTheory.End.asHom_pow_comp_of_comp_eq`: if `a ≫ p = p` then `a ^ m ≫ p = p`.
 -/
 
 @[expose] public section
+
+namespace CategoryTheory.Aut
+
+variable {C : Type*} [Category* C] (X : C)
+
+@[simp]
+lemma one_hom : (1 : Aut X).hom = 𝟙 X :=
+  rfl
+
+variable {X}
+
+@[simp]
+lemma inv_hom (f : Aut X) : f⁻¹.hom = f.inv :=
+  rfl
+
+@[simp]
+lemma mul_hom (f g : Aut X) : (f * g).hom = g.hom ≫ f.hom :=
+  rfl
+
+end CategoryTheory.Aut
 
 namespace CategoryTheory.End
 
