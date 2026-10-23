@@ -213,11 +213,18 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
       (leftDerivedUpperStarTensorRightCounit g c_Z) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) _ (fun X ↦ ?_)
+  -- Stated for an arbitrary K-flat `K`: applying `Derives.isIso_of_isLeftDerivedFunctor` directly
+  -- to the pullback of `X` is very slow for the kernel.
+  have hk (K : HomotopyCategory (Sheaf (ProEt.topology Z) A) (.up ℤ))
+      (hK : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat K) :
+      IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app K) := by
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    exact (tensorRight c_Z).isIso_leftDerivedFunctorCounit_app_of_kFlat K
+      ((HomotopyCategory.kFlat_quotient_obj_iff K).1 hK)
   have : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
       (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X))) :=
-    (tensorRight c_Z).derives_kFlat.isIso_of_isLeftDerivedFunctor
-      (tensorRight c_Z).leftDerivedFunctorCounit ⟨_, X.property⟩
+    hk _ X.property
   have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
       ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
     NatIso.isIso_app_of_isIso _ _
@@ -396,8 +403,18 @@ lemma leftDerivedUpperStarTensorComparison_app_app_fac
     ((leftDerivedUpperStarTensorComparison A g).app (DerivedCategory.Qh.obj X)).app
         (DerivedCategory.Qh.obj M) ≫ ((derivedTensorLeftDerivedUpperStarCounit A g).app X).app M =
       ((leftDerivedUpperStarDerivedTensorCounit A g).app X).app M ≫
-        DerivedCategory.Qh.map (((mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]).app X).app M) :=
-  Functor.leftDerived₂NatTrans_app_app _ (derivedTensorLeftDerivedUpperStarCounit A g)
+        DerivedCategory.Qh.map (((mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]).app X).app M) := by
+  -- Compare the comparison with its definition as natural transformations, not componentwise:
+  -- the componentwise comparison is very slow for the kernel.
+  have e : leftDerivedUpperStarTensorComparison A g =
+      Functor.leftDerived₂NatTrans _ (derivedTensorLeftDerivedUpperStarCounit A g)
+        (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _
+        (leftDerivedUpperStarDerivedTensorCounit A g)
+        (Functor.postcompose₂MapWhiskeringLeft₂ (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A])
+          DerivedCategory.Qh) :=
+    rfl
+  rw [e]
+  exact Functor.leftDerived₂NatTrans_app_app _ (derivedTensorLeftDerivedUpperStarCounit A g)
     (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _
     (leftDerivedUpperStarDerivedTensorCounit A g)
     (Functor.postcompose₂MapWhiskeringLeft₂ (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A])
