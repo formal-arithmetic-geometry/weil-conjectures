@@ -117,7 +117,7 @@ theorem nonempty_iso_kernelConvolution_fourierKernel (ψ : AddChar k₀ (PadicAl
     (l := l) ψ hψ (affinePlane.add k₀)
     (affineTripleProduct.proj₁₃ k₀) (affineTripleProduct.proj₁₂ k₀ ≫ affinePlane.snd k₀)
     affineTripleProduct.isPullback_proj₁₃ (affineLine.antidiagonal k₀)
-    (AffineSpace.isPullback_diagonal_prodNeg_add _ _)
+    affineLine.isPullback_antidiagonal
   let U := WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affinePlane k₀))
   exact ⟨(WeilComplex.derivedLowerShriek k₀ l (affineTripleProduct.proj₁₃ k₀)).mapIso
       (eT.app _ ≪≫ (WeilComplex.tensorLisse _ (isLisse_artinSchreierOf ψ _)).mapIso

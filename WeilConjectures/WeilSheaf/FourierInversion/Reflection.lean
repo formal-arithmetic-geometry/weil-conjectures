@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion
+public import WeilConjectures.WeilSheaf.FourierInversion.AffinePlaneAdd
 public import WeilConjectures.WeilSheaf.FourierInversion.KernelComposition
 
 /-!
@@ -66,14 +67,6 @@ instance : (affineLine.negIso k₀).inv.IsOver (Spec (CommRingCat.of k₀)) :=
   inferInstanceAs ((affineLine.neg k₀).IsOver _)
 
 variable (k₀) in
-/-- The addition `(x, y) ↦ x + y` on the affine plane. -/
-noncomputable def affinePlane.add : affinePlane k₀ ⟶ affineLine k₀ :=
-  AffineSpace.add PUnit.{u + 1} (Spec (CommRingCat.of k₀))
-
-instance : (affinePlane.add k₀).IsOver (Spec (CommRingCat.of k₀)) :=
-  ⟨AffineSpace.add_over _ _⟩
-
-variable (k₀) in
 /-- The antidiagonal `x ↦ (x, -x)` of the affine line, the zero locus of the addition. -/
 noncomputable def affineLine.antidiagonal : affineLine k₀ ⟶ affinePlane k₀ :=
   affineLine.diagonal k₀ ≫ AffineSpace.prodNeg PUnit.{u + 1} (Spec (CommRingCat.of k₀))
@@ -105,12 +98,14 @@ instance : (affineLine.antidiagonal k₀).IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨show affineLine.antidiagonal k₀ ≫ affinePlane.fst k₀ ≫ _ = _ by
     rw [affineLine.antidiagonal_fst_assoc]⟩
 
+
 omit [Finite k₀] in
-lemma affinePlane.add_appTop_coord :
-    (affinePlane.add k₀).appTop (AffineSpace.coord _ PUnit.unit) =
-      (affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) +
-        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit) :=
-  AffineSpace.add_appTop_coord _ _ _
+/-- The antidiagonal `x ↦ (x, -x)` is the fibre of the addition over the origin. -/
+theorem affineLine.isPullback_antidiagonal :
+    IsPullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) (affineLine.antidiagonal k₀)
+      (AffineSpace.zeroSection PUnit.{u + 1} (Spec (CommRingCat.of k₀))) (affinePlane.add k₀) := by
+  rw [affinePlane.add_eq]
+  exact AffineSpace.isPullback_diagonal_prodNeg_add _ _
 
 end Reflection
 
@@ -277,7 +272,7 @@ theorem nonempty_iso_fourierTransform_comp_self (ψ : AddChar k₀ (PadicAlgCl l
     (l := l) ψ hψ (affinePlane.add k₀)
     (affineTripleProduct.proj₁₃ k₀) (affineTripleProduct.proj₁₂ k₀ ≫ affinePlane.snd k₀)
     affineTripleProduct.isPullback_proj₁₃ (affineLine.antidiagonal k₀)
-    (AffineSpace.isPullback_diagonal_prodNeg_add _ _)
+    affineLine.isPullback_antidiagonal
   obtain ⟨e₅⟩ := WeilComplex.nonempty_iso_upperStar_comp (k₀ := k₀) (l := l)
     (affineLine.antidiagonal k₀) (affinePlane.fst k₀)
   obtain ⟨e₆⟩ := WeilComplex.nonempty_iso_derivedLowerShriek_comp (k₀ := k₀) (l := l)
