@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.FrobeniusIterate
+public import WeilConjectures.TraceFormula.HomologyUnit
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
@@ -357,6 +358,15 @@ lemma isZero_homologyFunctor_unit_carrier {j : ℤ} (hj : j ≠ 0) :
   rw [WeilBoundedConstructible.homologyFunctor_obj_carrier]
   exact DerivedCategory.isZero_homologyFunctor_obj_of_iso_singleFunctor
     (DerivedCategory.singleFunctorObjUnitIso _).symm hj
+
+/-- `H⁰(ℚ̲̄_ℓ,X) ≅ ℚ̲̄_ℓ,X` as Weil sheaves for `e`: the identification `H⁰(ℚ̲̄_ℓ[0]) ≅ ℚ̲̄_ℓ` is
+compatible with the structure isomorphisms
+(`WeilBoundedConstructible.homologyFunctor_obj_unit_str_hom_comp`). -/
+noncomputable def WeilBoundedConstructible.homologyFunctorZeroUnitIso :
+    (WeilBoundedConstructible.homologyFunctor ℓ e 0).obj (WeilBoundedConstructible.unit ℓ e.hom) ≅
+      WeilSheaf.unit ℓ e :=
+  IsoAlgebra.isoMk (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _))
+    (WeilBoundedConstructible.homologyFunctor_obj_unit_str_hom_comp ℓ e).symm
 
 /-- The local trace of the canonical Weil unit is the trace of the Frobenius on the stalk of its
 homology sheaf `H⁰(ℚ̲̄_ℓ,X)`, the other homology sheaves being zero. -/
