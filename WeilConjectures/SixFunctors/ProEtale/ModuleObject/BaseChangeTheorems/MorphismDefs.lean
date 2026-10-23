@@ -95,7 +95,7 @@ end PullbackComparison
 
 section BaseChange
 
-variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
+variable [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
