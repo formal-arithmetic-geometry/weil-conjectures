@@ -34,6 +34,10 @@ the hypotheses of
   (`AlgebraicGeometry.Etale.moduleAbelianDerivedLowerStarIso`), with `ν^*`
   (`AlgebraicGeometry.ProEtale.sheafComposeForget₂CompComparisonUpperStarIso`) and with
   cohomology, all functors involved being exact.
+
+The final assembly goes through `AlgebraicGeometry.ProEtale.homologyIntegersTowerIsoAux`, stated
+for abstract functors, so that the kernel never reassociates compositions of the concrete derived
+functors.
 -/
 
 @[expose] public section
@@ -112,32 +116,61 @@ noncomputable def constantSheafTowerIsoQuotPow :
 
 variable {T} {Y : Scheme.{u}} (g : T ⟶ Y)
 
-/-- **The cohomology towers of `R lim_n ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)`**: the degree `k` cohomology of
-the tower `n ↦ ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)` of complexes of abelian pro-étale sheaves is, naturally in
-`n`, the abelian sheaf underlying `ν^* Hᵏ(Rg_* (Λ ⧸ ℓⁿ))` for the tower of étale sheaves of
-`Λ`-modules `AlgebraicGeometry.Etale.higherDirectImageQuotPowTower`, `Λ = Shrink 𝒪_E`. -/
-noncomputable def homologyIntegersTowerIso (k : ℤ) :
-    (constantSheafTower T (integersModPowTransition l E) ⋙
-        DerivedCategory.Plus.singleFunctor _ 0 ⋙
-        (Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlus ⋙
-        DerivedCategory.Plus.ι ⋙ (comparisonUpperStar AddCommGrpCat.{u + 1} Y).mapDerivedCategory) ⋙
-        DerivedCategory.homologyFunctor _ k ≅
-      Etale.higherDirectImageQuotPowTower (integersShrinkIdeal.{u} l E) g k ⋙
-        comparisonUpperStar _ Y ⋙
-          sheafCompose (ProEt.topology Y)
-            (forget₂ (ModuleCat.{u + 1} (integersShrink.{u} l E)) AddCommGrpCat.{u + 1}) :=
-  let Λ := integersShrink.{u} l E
-  let fT := Etale.moduleAbelianForget Λ T
-  let fY := Etale.moduleAbelianForget Λ Y
-  let ν := comparisonUpperStar AddCommGrpCat.{u + 1} Y
-  let e₂ : fT ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
+section
+
+variable {J M₀ M A DA DM DA' DM' DAY DAP AP DMf DMY MY MP : Type*} [Category J] [Category M₀]
+  [Category M] [Category A] [Category DA] [Category DM] [Category DA'] [Category DM']
+  [Category DAY] [Category DAP] [Category AP] [Category DMf] [Category DMY] [Category MY]
+  [Category MP]
+
+/-- The assembly of `AlgebraicGeometry.ProEtale.homologyIntegersTowerIso` from its three
+ingredients, over abstract functors: reassociating compositions of abstract functors is cheap
+for the kernel, whereas reassociating the concrete derived functors is not. -/
+noncomputable def homologyIntegersTowerIsoAux {Q : J ⥤ M₀} {c : M₀ ⥤ M} {f : M ⥤ A}
+    {τ : J ⥤ A} {s : A ⥤ DA} {r : DA ⥤ DA'} {ι : DA' ⥤ DAY} {ν : DAY ⥤ DAP} {H : DAP ⥤ AP}
+    {s' : M ⥤ DM} {r' : DM ⥤ DM'} {f' : DM' ⥤ DA'} {S : M ⥤ DMf} {R : DMf ⥤ DMY}
+    {H' : DMY ⥤ MY} {ν' : MY ⥤ MP} {f'' : MP ⥤ AP}
+    (e₁ : (Q ⋙ c) ⋙ f ≅ τ) (e₂ : f ⋙ s ⋙ r ≅ s' ⋙ r' ⋙ f')
+    (e₄ : (s' ⋙ r') ⋙ f' ⋙ ι ⋙ ν ⋙ H ≅ (S ⋙ R) ⋙ H' ⋙ ν' ⋙ f'') :
+    (τ ⋙ s ⋙ r ⋙ ι ⋙ ν) ⋙ H ≅ (Q ⋙ c ⋙ S ⋙ R ⋙ H') ⋙ ν' ⋙ f'' :=
+  Functor.isoWhiskerRight e₁.symm (s ⋙ r ⋙ ι ⋙ ν ⋙ H) ≪≫
+    Functor.isoWhiskerLeft (Q ⋙ c) (Functor.isoWhiskerRight e₂ (ι ⋙ ν ⋙ H) ≪≫ e₄)
+
+end
+
+section
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- Taking underlying abelian sheaves commutes with `Rg_*` on the bounded below derived
+categories, precomposed with the inclusion of sheaves in degree `0`. -/
+noncomputable def forgetSingleRightDerivedLowerStarPlusIso :
+    Etale.moduleAbelianForget Λ T ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
         (Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlus ≅
       DerivedCategory.Plus.singleFunctor _ 0 ⋙
         (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlus ⋙
-          fY.mapDerivedCategoryPlus :=
-    Functor.isoWhiskerRight (fT.mapDerivedCategoryPlusSingleFunctor 0).symm _ ≪≫
-      Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
-        (Etale.moduleAbelianDerivedLowerStarIso Λ g).symm
+          (Etale.moduleAbelianForget Λ Y).mapDerivedCategoryPlus :=
+  Functor.isoWhiskerRight
+      ((Etale.moduleAbelianForget Λ T).mapDerivedCategoryPlusSingleFunctor 0).symm _ ≪≫
+    Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
+      (Etale.moduleAbelianDerivedLowerStarIso Λ g).symm
+
+/-- The degree `k` cohomology of `ν^*` of the underlying abelian complex of `Rg_* F`, for an
+étale sheaf `F` of `Λ`-modules, is the abelian sheaf underlying `ν^* Hᵏ(Rg_* F)`. -/
+noncomputable def homologyComparisonUpperStarForgetIso (k : ℤ) :
+    (DerivedCategory.Plus.singleFunctor _ 0 ⋙
+        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlus) ⋙
+        (Etale.moduleAbelianForget Λ Y).mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ⋙
+          (comparisonUpperStar AddCommGrpCat.{u + 1} Y).mapDerivedCategory ⋙
+          DerivedCategory.homologyFunctor _ k ≅
+      (DerivedCategory.singleFunctor _ 0 ⋙
+        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor) ⋙
+          DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) k ⋙
+          comparisonUpperStar _ Y ⋙
+          sheafCompose (ProEt.topology Y) (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+  let fY := Etale.moduleAbelianForget Λ Y
+  let ν := comparisonUpperStar AddCommGrpCat.{u + 1} Y
+  let Hk := DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) k
   let e₃ : fY.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ⋙ ν.mapDerivedCategory ⋙
         DerivedCategory.homologyFunctor _ k ≅
       DerivedCategory.Plus.ι ⋙ DerivedCategory.homologyFunctor _ k ⋙ fY ⋙ ν :=
@@ -154,34 +187,30 @@ noncomputable def homologyIntegersTowerIso (k : ℤ) :
     Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
         (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlusCompatibility ≪≫
       Functor.isoWhiskerRight (DerivedCategory.Plus.singleFunctorιIso _ 0) _
-  let Hk := DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) k
-  let fP := sheafCompose (ProEt.topology Y) (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
-  let e₄ : (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlus) ⋙
-        fY.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ⋙ ν.mapDerivedCategory ⋙
-          DerivedCategory.homologyFunctor _ k ≅
-      (DerivedCategory.singleFunctor _ 0 ⋙
-        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor) ⋙ Hk ⋙
-          comparisonUpperStar _ Y ⋙ fP :=
-    Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlus) e₃ ≪≫
-      Functor.isoWhiskerRight e₅ (Hk ⋙ fY ⋙ ν) ≪≫
-      Functor.isoWhiskerLeft (DerivedCategory.singleFunctor _ 0 ⋙
-          (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor ⋙ Hk)
-        (sheafComposeForget₂CompComparisonUpperStarIso Λ Y)
-  let e₂₄ : fT ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
+  Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0 ⋙
+      (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlus) e₃ ≪≫
+    Functor.isoWhiskerRight e₅ (Hk ⋙ fY ⋙ ν) ≪≫
+    Functor.isoWhiskerLeft (DerivedCategory.singleFunctor _ 0 ⋙
+        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor ⋙ Hk)
+      (sheafComposeForget₂CompComparisonUpperStarIso Λ Y)
+
+end
+
+/-- **The cohomology towers of `R lim_n ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)`**: the degree `k` cohomology of
+the tower `n ↦ ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)` of complexes of abelian pro-étale sheaves is, naturally in
+`n`, the abelian sheaf underlying `ν^* Hᵏ(Rg_* (Λ ⧸ ℓⁿ))` for the tower of étale sheaves of
+`Λ`-modules `AlgebraicGeometry.Etale.higherDirectImageQuotPowTower`, `Λ = Shrink 𝒪_E`. -/
+noncomputable def homologyIntegersTowerIso (k : ℤ) :
+    (constantSheafTower T (integersModPowTransition l E) ⋙
+        DerivedCategory.Plus.singleFunctor _ 0 ⋙
         (Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlus ⋙
-        DerivedCategory.Plus.ι ⋙ ν.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ k ≅
-      DerivedCategory.singleFunctor _ 0 ⋙
-        (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor ⋙ Hk ⋙
-          comparisonUpperStar _ Y ⋙ fP :=
-    Functor.isoWhiskerRight e₂ (DerivedCategory.Plus.ι ⋙ ν.mapDerivedCategory ⋙
-      DerivedCategory.homologyFunctor _ k) ≪≫ e₄
-  Functor.isoWhiskerRight (constantSheafTowerIsoQuotPow l E T).symm
-      (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-        (Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlus ⋙
-        DerivedCategory.Plus.ι ⋙ ν.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ k) ≪≫
-    Functor.isoWhiskerLeft (Ideal.quotPowFunctor (integersShrinkIdeal.{u} l E) ⋙
-      constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) e₂₄
+        DerivedCategory.Plus.ι ⋙ (comparisonUpperStar AddCommGrpCat.{u + 1} Y).mapDerivedCategory) ⋙
+        DerivedCategory.homologyFunctor _ k ≅
+      Etale.higherDirectImageQuotPowTower (integersShrinkIdeal.{u} l E) g k ⋙
+        comparisonUpperStar _ Y ⋙
+          sheafCompose (ProEt.topology Y)
+            (forget₂ (ModuleCat.{u + 1} (integersShrink.{u} l E)) AddCommGrpCat.{u + 1}) :=
+  homologyIntegersTowerIsoAux (constantSheafTowerIsoQuotPow l E T)
+    (forgetSingleRightDerivedLowerStarPlusIso g _) (homologyComparisonUpperStarForgetIso g _ k)
 
 end AlgebraicGeometry.ProEtale
