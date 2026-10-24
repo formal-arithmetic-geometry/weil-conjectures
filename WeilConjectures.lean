@@ -5521,6 +5521,7 @@ public import WeilConjectures.AlgebraicGeometry.OriginalCounitAdjunctionTranspor
 public import WeilConjectures.AlgebraicGeometry.OverProduct
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.OverReduced
 public import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
 public import WeilConjectures.AlgebraicGeometry.OverlapComparisonRefinement
 public import WeilConjectures.AlgebraicGeometry.OverlapConjugateRestriction
@@ -12685,6 +12686,7 @@ public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.TraceFormula.ContractingAt
 public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence

@@ -122,7 +122,8 @@ theorem isZero_upperStar_zeroSection_specialization
   have h₁ : IsZero ((boundedConstructible _).ι.obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :=
     (boundedConstructible _).ι.map_isZero hK
-  have h₂ := (L((deformationSpecialZeroLocusToBase k' x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero h₁
+  have h₂ :=
+    (L((deformationSpecialZeroLocusToBase k' x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero h₁
   exact IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _
     (h₂.of_iso (nonempty_upperStar_zeroSection_specialization_iso k' x K).some)
 
@@ -219,7 +220,8 @@ the trait of the deformed support `𝒞 ⟶ 𝒳 ×_S 𝒳` with the diagonal of
 the fixed locus of the specialized correspondence. -/
 noncomputable def specializationFixedLocus (F : c.FixedLocus) :
     Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc((fixedLocusOfDiag (hc.specialLeg₁ k') (hc.specialLeg₂ k')).left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+      Dᵇc((fixedLocusOfDiag (hc.specialLeg₁ k') (hc.specialLeg₂ k')).left)⟦
+        Profinite.padicAlgClRingObj ℓ⟧ :=
   NearbyCyclesModel.boundedConstructibleNearbyCycles
     ((deformationFixedLocusModel k' c.c₁ c.c₂ hc.ker_map_le_c₁ hc.ker_map_le_c₂
       F.isPullback).preservesBoundedConstructible_of_isTraitModel
