@@ -12736,6 +12736,8 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunctionFibre
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
+public import WeilConjectures.TraceFormula.SourceExchangeTest
+public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.StalkDualizable
 public import WeilConjectures.TraceFormula.Statement
