@@ -435,6 +435,47 @@ lemma shriekBaseChange_refinementComparison {Z₁ Z₁' : 𝒞} (i : X ⟶ Z) (p
   dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   rw [reassoc_of% hcancel, reassoc_of% hn, ← hn₂, reassoc_of% hcore']
+
+/-- The compact-support exchange map of factorizations with identities as open immersions is
+the base change map of the pushforwards, through `(𝟙)_! ≅ 𝟭`. -/
+lemma shriekBaseChange_id_left_app [𝒪.ContainsIdentities] (p : X ⟶ Y) (p' : X' ⟶ Y')
+    (g' : X' ⟶ X) (g : Y' ⟶ Y) (wi : g' ≫ 𝟙 X = 𝟙 X' ≫ g') (wp : g' ≫ p = p' ≫ g)
+    [IsIso (F.baseChange g' (𝟙 X') (𝟙 X) g' wi).natTrans] (K : F.obj X) :
+    (F.shriekBaseChange (𝟙 X) p (𝟙 X') p' g' g' g wi wp).natTrans.app K ≫
+        (F.pf p').map ((F.shId X').hom.app ((F.pb g').obj K)) =
+      (F.pb g).map ((F.pf p).map ((F.shId X).hom.app K)) ≫
+        (F.pfBaseChange g' p' p g wp).natTrans.app K := by
+  have hb := congr_app (F.baseChange_id_vert g' wi) K
+  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.rightUnitor_hom_app,
+    Functor.leftUnitor_inv_app, Category.id_comp, Functor.comp_obj, Functor.id_obj] at hb
+  have hinv : inv ((F.baseChange g' (𝟙 X') (𝟙 X) g' wi).natTrans.app K) =
+      (F.pb g').map ((F.shId X).hom.app K) ≫ (F.shId X').inv.app ((F.pb g').obj K) := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [hb]
+    simp [← Functor.map_comp_assoc]
+  rw [shriekBaseChange_app, hinv]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp (F.pf p'), Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  exact ((F.pfBaseChange g' p' p g wp).natTrans.naturality ((F.shId X).hom.app K)).symm
+
+/-- The compact-support exchange map of factorizations with identities as open immersions is
+the base change map of the pushforwards, through `(𝟙)_! ≅ 𝟭`. -/
+lemma shriekBaseChange_id_left [𝒪.ContainsIdentities] (p : X ⟶ Y) (p' : X' ⟶ Y')
+    (g' : X' ⟶ X) (g : Y' ⟶ Y) (wi : g' ≫ 𝟙 X = 𝟙 X' ≫ g') (wp : g' ≫ p = p' ≫ g)
+    [IsIso (F.baseChange g' (𝟙 X') (𝟙 X) g' wi).natTrans] :
+    (F.shriekBaseChange (𝟙 X) p (𝟙 X') p' g' g' g wi wp).natTrans ≫
+        Functor.whiskerLeft (F.pb g') (Functor.whiskerRight (F.shId X').hom (F.pf p') ≫
+          (Functor.leftUnitor _).hom) =
+      Functor.whiskerRight (Functor.whiskerRight (F.shId X).hom (F.pf p) ≫
+          (Functor.leftUnitor _).hom) (F.pb g) ≫ (F.pfBaseChange g' p' p g wp).natTrans := by
+  ext K
+  have := F.shriekBaseChange_id_left_app p p' g' g wi wp K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Functor.map_comp] at this ⊢
+  erw [Category.comp_id, CategoryTheory.Functor.map_id, Category.comp_id]
+  exact this
 end ShriekBaseChange
 
 end CategoryTheory.ExchangeFormalism

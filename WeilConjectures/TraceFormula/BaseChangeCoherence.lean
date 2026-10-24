@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.TwoSquare
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeProper
 
 /-!
 
@@ -145,6 +145,35 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+/-- **`Ex_!` for proper vertical maps is `Ex_*`**, as an identity of natural transformations. -/
+theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper'
+    (sq : IsPullback g' f' f g) [IsProper f.left] [IsProper f'.left] :
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq ≫
+        Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
+          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f').hom =
+      Functor.whiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
+        boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq := by
+  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq
+      (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
+      (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
+      (isPullback_ofIsProper_overG sq),
+    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq,
+    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq]
+  have hc : Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+        (Compactification.ofIsProper f'.left) (compactificationOverField f')).hom ≫
+      Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+        (compactificationOverField f') (Compactification.ofIsProper f'.left)).hom = 𝟙 _ := by
+    rw [← Functor.whiskerLeft_comp, ← Iso.trans_hom,
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans,
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl]
+    simp
+  simp only [Iso.trans_hom, Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
+  rw [reassoc_of% hc]
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper ℓ sq]
+
 /-- **`Ex_!` for proper vertical maps is `Ex_*`** (blueprint `def-exchange-projection`: `Ex_!` is
 represented by `Ex_*` for the compactification `f = f ∘ 𝟙` of a proper `f`): under the
 identifications `Rf_! ≅ Rf_*` and `Rf'_! ≅ Rf'_*`, the compact-support base change of a
@@ -157,8 +186,9 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj K) =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq).app K :=
-  sorry
+        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq).app K := by
+  have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper' ℓ sq) K
+  simpa using h
 
 /-- The exchange `Rf ⋙ G ⟶ G' ⋙ Rf'` of an isomorphism `θ : G ⋙ Lf' ≅ Lf ⋙ G'` along the
 adjunctions `Lf ⊣ Rf` and `Lf' ⊣ Rf'` is compatible with the units. -/
