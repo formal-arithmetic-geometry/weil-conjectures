@@ -104,9 +104,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 include ℓ k
 
-/-- The *unit insertion* step of the exchange morphism: the natural transformation
-`Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
-`Lp'^* ⊣ Rp'_*`. -/
+/-- The *unit insertion* step of the exchange morphism (`ℚ̄_ℓ`-coefficient): the natural
+transformation `Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the
+adjunction `Lp'^* ⊣ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep :
     boundedConstructibleLowerStar ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek
       (Profinite.padicAlgClRingObj ℓ) ℓ j ⟶
@@ -117,9 +117,9 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeU
   (Functor.rightUnitor _).inv ≫
     Functor.whiskerLeft _ (boundedConstructibleUpperStarLowerStarAdjunction ℓ p').unit
 
-/-- The *square transport* step of the exchange morphism: `Functor.squareTransport` applied to
-the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the cartesian
-square, under `Rp_*` on the left and `Rp'_*` on the right. -/
+/-- The *square transport* step of the exchange morphism (`ℚ̄_ℓ`-coefficient):
+`Functor.squareTransport` applied to the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅
+Lp^* ⋙ i'_!` of the cartesian square, under `Rp_*` on the left and `Rp'_*` on the right. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
     (sq : IsPullback p i' j p') :
     (boundedConstructibleLowerStar ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek
@@ -134,9 +134,9 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeS
     (boundedConstructibleLowerStar ℓ p')
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.padicAlgClRingObj ℓ) ℓ sq)
 
-/-- The *counit contraction* step of the exchange morphism: the natural transformation
-`(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of the
-adjunction `Lp^* ⊣ Rp_*`. -/
+/-- The *counit contraction* step of the exchange morphism (`ℚ̄_ℓ`-coefficient): the natural
+transformation `(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of
+the adjunction `Lp^* ⊣ Rp_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep :
     (boundedConstructibleLowerStar ℓ p ⋙ boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ p) ⋙
@@ -155,10 +155,10 @@ X' --i'--> Z'
 v          v
 X  --j---> Z
 ```
-with `j` and `i'` open immersions: the mate, under the adjunctions `Lp^* ⊣ Rp_*` and
-`Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
-(`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of the
-unit insertion, the square transport, and the counit contraction:
+with `j` and `i'` open immersions (`ℚ̄_ℓ`-coefficient): the mate, under the adjunctions `Lp^* ⊣
+Rp_*` and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙
+i'_!` (`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of
+the unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
@@ -192,7 +192,7 @@ include ℓ k
 
 variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
 
-/-- The *unit insertion* step of the exchange morphism: the natural transformation
+/-- The *unit insertion* step of the exchange morphism (`E`-coefficient): the natural transformation
 `Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
 `Lp'^* ⊣ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep :
@@ -205,9 +205,9 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeU
   (Functor.rightUnitor _).inv ≫
     Functor.whiskerLeft _ (boundedConstructibleUpperStarLowerStarAdjunction ℓ E p').unit
 
-/-- The *square transport* step of the exchange morphism: `Functor.squareTransport` applied to
-the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the cartesian
-square, under `Rp_*` on the left and `Rp'_*` on the right. -/
+/-- The *square transport* step of the exchange morphism (`E`-coefficient):
+`Functor.squareTransport` applied to the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅
+Lp^* ⋙ i'_!` of the cartesian square, under `Rp_*` on the left and `Rp'_*` on the right. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
     (sq : IsPullback p i' j p') :
     (boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleOpenImmersionLowerShriek
@@ -223,9 +223,9 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeS
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.continuousMapRingObj E) ℓ
       sq)
 
-/-- The *counit contraction* step of the exchange morphism: the natural transformation
-`(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of the
-adjunction `Lp^* ⊣ Rp_*`. -/
+/-- The *counit contraction* step of the exchange morphism (`E`-coefficient): the natural
+transformation `(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of
+the adjunction `Lp^* ⊣ Rp_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep :
     (boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleUpperStar
       (Profinite.continuousMapRingObj E) ℓ p) ⋙
@@ -244,8 +244,8 @@ X' --i'--> Z'
 v          v
 X  --j---> Z
 ```
-with `j` and `i'` open immersions: the mate, under the adjunctions `Lp^* ⊣ Rp_*` and
-`Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
+with `j` and `i'` open immersions (`E`-coefficient): the mate, under the adjunctions `Lp^* ⊣ Rp_*`
+and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
 (`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of the
 unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
@@ -284,9 +284,9 @@ include ℓ k
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-/-- The *unit insertion* step of the exchange morphism: the natural transformation
-`Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
-`Lp'^* ⊣ Rp'_*`. -/
+/-- The *unit insertion* step of the exchange morphism (`𝒪_E`-coefficient): the natural
+transformation `Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the
+adjunction `Lp'^* ⊣ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep :
     boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleOpenImmersionLowerShriek
       (Profinite.padicIntegersRingObj ℓ E) ℓ j ⟶
@@ -297,9 +297,9 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeU
   (Functor.rightUnitor _).inv ≫
     Functor.whiskerLeft _ (boundedConstructibleUpperStarLowerStarAdjunction ℓ E p').unit
 
-/-- The *square transport* step of the exchange morphism: `Functor.squareTransport` applied to
-the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the cartesian
-square, under `Rp_*` on the left and `Rp'_*` on the right. -/
+/-- The *square transport* step of the exchange morphism (`𝒪_E`-coefficient):
+`Functor.squareTransport` applied to the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅
+Lp^* ⋙ i'_!` of the cartesian square, under `Rp_*` on the left and `Rp'_*` on the right. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
     (sq : IsPullback p i' j p') :
     (boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleOpenImmersionLowerShriek
@@ -315,9 +315,9 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeS
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.padicIntegersRingObj ℓ E)
       ℓ sq)
 
-/-- The *counit contraction* step of the exchange morphism: the natural transformation
-`(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of the
-adjunction `Lp^* ⊣ Rp_*`. -/
+/-- The *counit contraction* step of the exchange morphism (`𝒪_E`-coefficient): the natural
+transformation `(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of
+the adjunction `Lp^* ⊣ Rp_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep :
     (boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleUpperStar
       (Profinite.padicIntegersRingObj ℓ E) ℓ p) ⋙
@@ -336,8 +336,8 @@ X' --i'--> Z'
 v          v
 X  --j---> Z
 ```
-with `j` and `i'` open immersions: the mate, under the adjunctions `Lp^* ⊣ Rp_*` and
-`Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
+with `j` and `i'` open immersions (`𝒪_E`-coefficient): the mate, under the adjunctions `Lp^* ⊣ Rp_*`
+and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
 (`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of the
 unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
@@ -369,8 +369,8 @@ variable {X Z X' Z' : Over (Spec (.of k))}
   [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p'.left]
 
 /-- For bounded constructible `E`-sheaves, the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of
-a cartesian square with `p'` proper is an isomorphism: over the open `X ⊆ Z` it is the
-identification `Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed complement `Z ∖ X` the stalks
+a cartesian square with `p'` proper is an isomorphism (`E`-coefficient): over the open `X ⊆ Z` it is
+the identification `Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed complement `Z ∖ X` the stalks
 of `Rp'_*(i'_! K)` are, by proper base change, the cohomology of the fibres of `p'` over `Z ∖ X`,
 which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`, hence vanish. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
@@ -380,7 +380,8 @@ theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
   sorry
 
 /-- For bounded constructible `ℚ̄_ℓ`-sheaves, the exchange morphism
-`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
+`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism
+(`ℚ̄_ℓ`-coefficient). -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl
     (sq : IsPullback p i' j p') :
     IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq) :=
@@ -397,10 +398,10 @@ variable {X Y S : Over (Spec (.of k))}
   (f : X ⟶ Y) (g : Y ⟶ S)
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the derived lower shriek on
-bounded constructible `E`-sheaves: for the chosen compactifications `c = (X ⟶[i] Z ⟶[p] Y)` of
-`f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W ⟶[p'] Z')` of
-`p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the composite
-of the independence of the compactification
+bounded constructible `E`-sheaves (`E`-coefficient): for the chosen compactifications `c = (X ⟶[i] Z
+⟶[p] Y)` of `f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W ⟶[p']
+Z')` of `p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the
+composite of the independence of the compactification
 (`boundedConstructibleLowerShriekOfCompactificationIso`) for the composite compactification
 `X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of `j_!` and `Rf_*`, and of the
 inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`. -/
@@ -440,10 +441,10 @@ noncomputable def boundedConstructibleLowerShriekComp :
     (Functor.associator _ _ _).symm
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the derived lower shriek on
-bounded constructible `ℚ̄_ℓ`-sheaves: for the chosen compactifications `c = (X ⟶[i] Z ⟶[p] Y)` of
-`f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W ⟶[p'] Z')` of
-`p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the composite
-of the independence of the compactification
+bounded constructible `ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): for the chosen compactifications `c = (X
+⟶[i] Z ⟶[p] Y)` of `f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W
+⟶[p'] Z')` of `p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the
+composite of the independence of the compactification
 (`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`) for the composite
 compactification `X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of `j_!`
 and `Rf_*`, and of the inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`. -/
@@ -482,8 +483,9 @@ noncomputable def boundedConstructibleLowerShriekComp_padicAlgCl :
     (Functor.associator _ _ _).symm
 
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` for the exceptional inverse image on
-bounded constructible `E`-sheaves: the conjugate of `boundedConstructibleLowerShriekComp` under
-the adjunctions `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
+bounded constructible `E`-sheaves (`E`-coefficient): the conjugate of
+`boundedConstructibleLowerShriekComp` under the adjunctions `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and `Rf_! ⋙
+Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekComp :
     ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E (f ≫ g) ≅
       ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E g ⋙
@@ -494,7 +496,7 @@ noncomputable def boundedConstructibleUpperShriekComp :
     (boundedConstructibleLowerShriekComp ℓ E f g).symm
 
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` for the exceptional inverse image on
-bounded constructible `ℚ̄_ℓ`-sheaves: the conjugate of
+bounded constructible `ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): the conjugate of
 `boundedConstructibleLowerShriekComp_padicAlgCl` under the adjunctions
 `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekComp_padicAlgCl :

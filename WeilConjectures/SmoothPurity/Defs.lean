@@ -80,10 +80,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
-/-- **Smooth purity**: for a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type
-which is smooth of pure relative dimension `d`, the exceptional inverse image of the constant
-coefficient object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(d)[2d]`. This is a chosen
-isomorphism: see the module docstring. -/
+/-- **Smooth purity** (`ℚ̄_ℓ`-coefficient): for a morphism `f : X ⟶ Y` of separated `k`-schemes of
+finite type which is smooth of pure relative dimension `d`, the exceptional inverse image of the
+constant coefficient object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(d)[2d]`. This is a
+chosen isomorphism: see the module docstring. -/
 @[no_expose]
 noncomputable def smoothPurityIso :
     ((boundedConstructibleUpperShriek ℓ f).obj

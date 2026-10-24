@@ -148,7 +148,7 @@ end UpperStar
 section LowerStar
 
 /-- The Frobenius comparison `b_* : Rf_* ⋙ Le_Y^* ⟶ Le_X^* ⋙ Rf_*` of the derived pushforward,
-that is `Φ_Y Rf_* ⟶ Rf_* Φ_X`: the base-change morphism of the Frobenius square
+that is `Φ_Y Rf_* ⟶ Rf_* Φ_X` (`ℚ̄_ℓ`-coefficient): the base-change morphism of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilLowerStarComparison :
     boundedConstructibleLowerStar ℓ f ⋙

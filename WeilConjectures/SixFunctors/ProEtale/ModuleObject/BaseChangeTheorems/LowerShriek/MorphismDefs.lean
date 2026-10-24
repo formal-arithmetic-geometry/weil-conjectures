@@ -216,8 +216,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 
 /-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
 on bounded constructible complexes, for a cartesian square `sq` and a compactification
-`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'`: with
-`Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'` (`ℚ̄_ℓ`-coefficient):
+with `Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
 `boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
 the inverse of the extension-by-zero exchange of its open-immersion square,
 
@@ -276,8 +276,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 
 /-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
 on bounded constructible complexes, for a cartesian square `sq` and a compactification
-`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'`: with
-`Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'` (`E`-coefficient):
+with `Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
 `boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
 the inverse of the extension-by-zero exchange of its open-immersion square,
 
@@ -341,8 +341,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 
 /-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
 on bounded constructible complexes, for a cartesian square `sq` and a compactification
-`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'`: with
-`Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'` (`𝒪_E`-coefficient):
+with `Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
 `boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
 the inverse of the extension-by-zero exchange of its open-immersion square,
 
@@ -405,9 +405,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
 constructible `E`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
-shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`:
-the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into
-`Rf'_!^{c_f.baseChange sq}`, followed by its identification
+shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`
+(`E`-coefficient): the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
+into `Rf'_!^{c_f.baseChange sq}`, followed by its identification
 `boundedConstructibleLowerShriekOfCompactificationIso` with `Rf'_! = Rf'_!^{c_{f'}}`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' f' f g) :
@@ -431,9 +431,10 @@ lemma boundedConstructibleLowerShriekBaseChange_eq (sq : IsPullback g' f' f g) :
 
 /-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
 constructible `ℚ̄_ℓ`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
-shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`:
-the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into
-`Rf'_!^{c_f.baseChange sq}`, followed by its identification
+shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`
+(`ℚ̄_ℓ`-coefficient): the morphism
+`boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into `Rf'_!^{c_f.baseChange
+sq}`, followed by its identification
 `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` with `Rf'_! = Rf'_!^{c_{f'}}`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekBaseChange_padicAlgCl

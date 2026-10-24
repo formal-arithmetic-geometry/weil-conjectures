@@ -233,10 +233,10 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The **derived exceptional projection morphism**
-`PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes: the
-morphism `exceptionalProjectionMorphismOfCompactification` for the compactification
-`compactificationOverField f` defining `boundedConstructibleLowerShriek`, the inclusions
-`Dᵇc ⥤ D` being fully faithful and monoidal. -/
+`PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes
+(`ℚ̄_ℓ`-coefficient): the morphism `exceptionalProjectionMorphismOfCompactification` for the
+compactification `compactificationOverField f` defining `boundedConstructibleLowerShriek`, the
+inclusions `Dᵇc ⥤ D` being fully faithful and monoidal. -/
 noncomputable def boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -248,7 +248,7 @@ noncomputable def boundedConstructibleExceptionalProjectionMorphism
       (compactificationOverField f) K.obj B.obj)
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-second variable. It is the image of
+second variable (`ℚ̄_ℓ`-coefficient). It is the image of
 `exceptionalProjectionMorphismOfCompactification_natural_right` under the faithful inclusion;
 the direct term proof times out on unfolding the restricted functors, so it is `sorry`ed for
 now. -/
@@ -264,8 +264,9 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right
   sorry
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
-follows from the naturality of the three constituent maps; it is `sorry`ed for now. -/
+first variable (`ℚ̄_ℓ`-coefficient). Like
+`boundedConstructibleExceptionalProjectionMorphism_natural_right`, it follows from the naturality of
+the three constituent maps; it is `sorry`ed for now. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
@@ -282,8 +283,8 @@ natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`
 ```
 (K, B) ↦ Rf_! K ⊗ᴸ B   ⟶   (K, B) ↦ Rf_! (K ⊗ᴸ Lf^* B),
 ```
-with components `boundedConstructibleExceptionalProjectionMorphism`. This is the form in which
-`PF^!` enters `CategoryTheory.Verdier`. -/
+with components `boundedConstructibleExceptionalProjectionMorphism` (`ℚ̄_ℓ`-coefficient). This is
+the form in which `PF^!` enters `CategoryTheory.Verdier`. -/
 noncomputable def boundedConstructibleExceptionalProjection :
     curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek ℓ f) ⟶
       curriedTensorPost (boundedConstructibleLowerShriek ℓ f) ⋙
@@ -304,8 +305,8 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ f K B :=
   rfl
 
-/-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
-`PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
+/-- **The derived projection formula for `Rf_!`** (`ℚ̄_ℓ`-coefficient): the exceptional projection
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -339,10 +340,10 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The **derived exceptional projection morphism**
-`PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes: the
-morphism `exceptionalProjectionMorphismOfCompactification` for the compactification
-`compactificationOverField f` defining `boundedConstructibleLowerShriek`, the inclusions
-`Dᵇc ⥤ D` being fully faithful and monoidal. -/
+`PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes
+(`E`-coefficient): the morphism `exceptionalProjectionMorphismOfCompactification` for the
+compactification `compactificationOverField f` defining `boundedConstructibleLowerShriek`, the
+inclusions `Dᵇc ⥤ D` being fully faithful and monoidal. -/
 noncomputable def boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
@@ -354,7 +355,7 @@ noncomputable def boundedConstructibleExceptionalProjectionMorphism
       (compactificationOverField f) K.obj B.obj)
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-second variable. It is the image of
+second variable (`E`-coefficient). It is the image of
 `exceptionalProjectionMorphismOfCompactification_natural_right` under the faithful inclusion;
 the direct term proof times out on unfolding the restricted functors, so it is `sorry`ed for
 now. -/
@@ -370,8 +371,9 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right
   sorry
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
-follows from the naturality of the three constituent maps; it is `sorry`ed for now. -/
+first variable (`E`-coefficient). Like
+`boundedConstructibleExceptionalProjectionMorphism_natural_right`, it follows from the naturality of
+the three constituent maps; it is `sorry`ed for now. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left
     {K K' : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧}
@@ -388,8 +390,8 @@ natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`
 ```
 (K, B) ↦ Rf_! K ⊗ᴸ B   ⟶   (K, B) ↦ Rf_! (K ⊗ᴸ Lf^* B),
 ```
-with components `boundedConstructibleExceptionalProjectionMorphism`. This is the form in which
-`PF^!` enters `CategoryTheory.Verdier`. -/
+with components `boundedConstructibleExceptionalProjectionMorphism` (`E`-coefficient). This is the
+form in which `PF^!` enters `CategoryTheory.Verdier`. -/
 noncomputable def boundedConstructibleExceptionalProjection :
     curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek ℓ E f) ⟶
       curriedTensorPost (boundedConstructibleLowerShriek ℓ E f) ⋙
@@ -410,8 +412,8 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
 
-/-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
-`PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
+/-- **The derived projection formula for `Rf_!`** (`E`-coefficient): the exceptional projection
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
@@ -448,10 +450,10 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The **derived exceptional projection morphism**
-`PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes: the
-morphism `exceptionalProjectionMorphismOfCompactification` for the compactification
-`compactificationOverField f` defining `boundedConstructibleLowerShriek`, the inclusions
-`Dᵇc ⥤ D` being fully faithful and monoidal. -/
+`PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes
+(`𝒪_E`-coefficient): the morphism `exceptionalProjectionMorphismOfCompactification` for the
+compactification `compactificationOverField f` defining `boundedConstructibleLowerShriek`, the
+inclusions `Dᵇc ⥤ D` being fully faithful and monoidal. -/
 noncomputable def boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
@@ -463,7 +465,7 @@ noncomputable def boundedConstructibleExceptionalProjectionMorphism
       (compactificationOverField f) K.obj B.obj)
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-second variable. It is the image of
+second variable (`𝒪_E`-coefficient). It is the image of
 `exceptionalProjectionMorphismOfCompactification_natural_right` under the faithful inclusion;
 the direct term proof times out on unfolding the restricted functors, so it is `sorry`ed for
 now. -/
@@ -479,8 +481,9 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right
   sorry
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
-follows from the naturality of the three constituent maps; it is `sorry`ed for now. -/
+first variable (`𝒪_E`-coefficient). Like
+`boundedConstructibleExceptionalProjectionMorphism_natural_right`, it follows from the naturality of
+the three constituent maps; it is `sorry`ed for now. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left
     {K K' : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧}
@@ -497,8 +500,8 @@ natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`
 ```
 (K, B) ↦ Rf_! K ⊗ᴸ B   ⟶   (K, B) ↦ Rf_! (K ⊗ᴸ Lf^* B),
 ```
-with components `boundedConstructibleExceptionalProjectionMorphism`. This is the form in which
-`PF^!` enters `CategoryTheory.Verdier`. -/
+with components `boundedConstructibleExceptionalProjectionMorphism` (`𝒪_E`-coefficient). This is the
+form in which `PF^!` enters `CategoryTheory.Verdier`. -/
 noncomputable def boundedConstructibleExceptionalProjection :
     curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek ℓ E f) ⟶
       curriedTensorPost (boundedConstructibleLowerShriek ℓ E f) ⋙
@@ -519,8 +522,8 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
 
-/-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
-`PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
+/-- **The derived projection formula for `Rf_!`** (`𝒪_E`-coefficient): the exceptional projection
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)

@@ -111,7 +111,8 @@ variable (X : Scheme.{u})
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the bounded constructible complexes of
-`𝒪_{E,X}`-modules on a topologically noetherian scheme form a triangulated subcategory. -/
+`𝒪_{E,X}`-modules on a topologically noetherian scheme form a triangulated subcategory
+(`𝒪_E`-coefficient). -/
 instance isTriangulated_boundedConstructible_padicIntegersRingObj
     [TopologicalSpace.NoetherianSpace X] (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
@@ -124,7 +125,7 @@ instance isTriangulated_boundedConstructible_padicIntegersRingObj
 -- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in
 /-- For a finite extension `E` of `ℚ_ℓ`, the bounded constructible complexes of `E_X`-modules on a
-topologically noetherian scheme form a triangulated subcategory. -/
+topologically noetherian scheme form a triangulated subcategory (`E`-coefficient). -/
 instance isTriangulated_boundedConstructible_continuousMapRingObj
     [TopologicalSpace.NoetherianSpace X] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
@@ -133,7 +134,7 @@ instance isTriangulated_boundedConstructible_continuousMapRingObj
   sorry
 
 /-- The bounded constructible complexes of `ℚ̄_{ℓ,X}`-modules on a topologically noetherian scheme
-form a triangulated subcategory. -/
+form a triangulated subcategory (`ℚ̄_ℓ`-coefficient). -/
 instance isTriangulated_boundedConstructible_padicAlgClRingObj
     [TopologicalSpace.NoetherianSpace X] :
     (boundedConstructible

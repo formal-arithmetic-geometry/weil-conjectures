@@ -108,9 +108,9 @@ theorem weilFrobeniusSquare : IsPullback eX.hom f f eY.hom :=
 section LowerShriek
 
 /-- The Frobenius comparison `b_! : Rf_! ⋙ Le_Y^* ≅ Le_X^* ⋙ Rf_!` of the lower shriek `Rf_!`
-for the chosen compactification of `f`: the compact-support base-change morphism
-`boundedConstructibleLowerShriekBaseChange_padicAlgCl` of the Frobenius square, an isomorphism by
-the compactly supported base change theorem
+for the chosen compactification of `f` (`ℚ̄_ℓ`-coefficient): the compact-support base-change
+morphism `boundedConstructibleLowerShriekBaseChange_padicAlgCl` of the Frobenius square, an
+isomorphism by the compactly supported base change theorem
 (`isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl`). -/
 noncomputable def weilLowerShriekComparison :
     boundedConstructibleLowerShriek ℓ f ⋙
@@ -160,8 +160,8 @@ end LowerShriek
 section UpperShriek
 
 /-- The Frobenius comparison `b^! : Rf^! ⋙ Le_X^* ⟶ Le_Y^* ⋙ Rf^!` of the upper shriek `Rf^!`
-for the chosen compactification of `f`: the mate, for the adjunction `Rf_! ⊣ Rf^!` on both
-sides, of the inverse `Φ_X ⋙ Rf_! ⟶ Rf_! ⋙ Φ_Y` of the lower shriek comparison
+for the chosen compactification of `f` (`ℚ̄_ℓ`-coefficient): the mate, for the adjunction `Rf_! ⊣
+Rf^!` on both sides, of the inverse `Φ_X ⋙ Rf_! ⟶ Rf_! ⋙ Φ_Y` of the lower shriek comparison
 `weilLowerShriekComparison`. -/
 noncomputable def weilUpperShriekComparison :
     boundedConstructibleUpperShriek ℓ f ⋙

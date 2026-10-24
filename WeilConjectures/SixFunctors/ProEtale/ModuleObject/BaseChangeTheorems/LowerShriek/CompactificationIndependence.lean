@@ -184,8 +184,8 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
 
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
-`isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the unit of `Lh^* ⊣ Rh_*`
-followed by the inverse of the restriction comparison,
+`isIso_boundedConstructibleOpenImmersionLowerShriekRefinement` (`ℚ̄_ℓ`-coefficient): the unit of
+`Lh^* ⊣ Rh_*` followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
@@ -207,9 +207,9 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 /-- The isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement `h : Z ⟶ Z₁` with
 `h ≫ p₁ = p`, for a cartesian square `sq` as in
 `isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`, when the pushforward comparison
-`i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism: `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_! ⋙ Rp_*`. For
-compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and
-`p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
+`i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism (`ℚ̄_ℓ`-coefficient): `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_!
+⋙ Rp_*`. For compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ =
+c₁.overI` and `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq)] :
@@ -231,8 +231,8 @@ variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimension
 
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
-`isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the unit of `Lh^* ⊣ Rh_*`
-followed by the inverse of the restriction comparison,
+`isIso_boundedConstructibleOpenImmersionLowerShriekRefinement` (`E`-coefficient): the unit of `Lh^*
+⊣ Rh_*` followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
@@ -254,9 +254,9 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 /-- The isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement `h : Z ⟶ Z₁` with
 `h ≫ p₁ = p`, for a cartesian square `sq` as in
 `isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`, when the pushforward comparison
-`i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism: `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_! ⋙ Rp_*`. For
-compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and
-`p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
+`i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism (`E`-coefficient): `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_! ⋙
+Rp_*`. For compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI`
+and `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ E sq)] :
@@ -281,8 +281,8 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
-`isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the unit of `Lh^* ⊣ Rh_*`
-followed by the inverse of the restriction comparison,
+`isIso_boundedConstructibleOpenImmersionLowerShriekRefinement` (`𝒪_E`-coefficient): the unit of
+`Lh^* ⊣ Rh_*` followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
@@ -304,9 +304,9 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 /-- The isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement `h : Z ⟶ Z₁` with
 `h ≫ p₁ = p`, for a cartesian square `sq` as in
 `isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`, when the pushforward comparison
-`i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism: `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_! ⋙ Rp_*`. For
-compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and
-`p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
+`i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism (`𝒪_E`-coefficient): `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_!
+⋙ Rp_*`. For compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ =
+c₁.overI` and `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ E sq)] :
@@ -339,10 +339,10 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   [IsProper h.left]
 
 /-- For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism: over `X ⊆ Z₁` both sides restrict to the
-identity, and over the closed complement `Z₁ ∖ X` the stalks of `Rh_*(i_! K)` are, by proper base
-change, the cohomology of the fibres of `h` over `Z₁ ∖ X`, which do not meet `X ⊆ Z`, with
-coefficients in `i_! K`, hence vanish. -/
+cartesian square `sq` with `h` proper is an isomorphism (`E`-coefficient): over `X ⊆ Z₁` both sides
+restrict to the identity, and over the closed complement `Z₁ ∖ X` the stalks of `Rh_*(i_! K)` are,
+by proper base change, the cohomology of the fibres of `h` over `Z₁ ∖ X`, which do not meet `X ⊆ Z`,
+with coefficients in `i_! K`, hence vanish. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (ContinuousMapRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
@@ -350,7 +350,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
   sorry
 
 /-- For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism. -/
+cartesian square `sq` with `h` proper is an isomorphism (`ℚ̄_ℓ`-coefficient). -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq) :=
@@ -366,7 +366,7 @@ variable {X Y : Over (Spec (.of k))}
   {f : X ⟶ Y}
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
-`E`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
+`E`-sheaves (`E`-coefficient): for two compactifications `c₁` and `c₂` of `f`, the isomorphism
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` between `i₁_! ⋙ Rp₁_*` and `i₂_! ⋙ Rp₂_*` on `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧`:
 for a common refinement `c` of `c₁` and `c₂` (`Compactification.exists_overRefinement`), the
 composite `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}` of the isomorphisms
@@ -389,7 +389,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
       r₂.hom_overG).symm
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
-`ℚ̄_ℓ`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
+`ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): for two compactifications `c₁` and `c₂` of `f`, the isomorphism
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`: for a common refinement `c` of `c₁`
 and `c₂` (`Compactification.exists_overRefinement`), the composite
 `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}` of the isomorphisms `boundedConstructibleLowerShriekRefinementIso`

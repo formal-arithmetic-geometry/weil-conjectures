@@ -89,7 +89,7 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The **Verdier exchange morphism** `Φ_{f,K,L} : Rf_* RHom(K, Rf^! L) ⟶ RHom(Rf_! K, L)` on
-bounded constructible complexes: the transpose of the pairing
+bounded constructible complexes (`ℚ̄_ℓ`-coefficient): the transpose of the pairing
 ```
 Rf_! K ⊗ᴸ Rf_* RHom(K, Rf^! L) ⟶ Rf_! (K ⊗ᴸ Lf^* Rf_* RHom(K, Rf^! L))
   ⟶ Rf_! (K ⊗ᴸ RHom(K, Rf^! L)) ⟶ Rf_! Rf^! L ⟶ L,
@@ -105,8 +105,8 @@ noncomputable def verdierExchange
     (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleExceptionalProjection ℓ f) K L
 
-/-- **Verdier duality**: the exchange morphism `Φ_{f,K,L}` is an isomorphism, by the derived
-projection formula and the Yoneda lemma. -/
+/-- **Verdier duality** (`ℚ̄_ℓ`-coefficient): the exchange morphism `Φ_{f,K,L}` is an isomorphism,
+by the derived projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierExchange ℓ f K L) := by
@@ -133,7 +133,7 @@ variable (X : Over (Spec (.of k)))
 
 /-- The **dualizing complex** `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k`-scheme of finite type `X`, for
 its structure morphism `a_X : X ⟶ Spec k`, the morphism `Over.mkIdTerminal.from X` to the
-terminal object `Over.mk (𝟙 (Spec k))` of `Over (Spec k)`. -/
+terminal object `Over.mk (𝟙 (Spec k))` of `Over (Spec k)` (`ℚ̄_ℓ`-coefficient). -/
 noncomputable def dualizingComplex : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleUpperShriek ℓ (Over.mkIdTerminal.from X)).obj (𝟙_ _)
 
@@ -171,8 +171,8 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
-/-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes: the composition
-isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
+/-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes (`ℚ̄_ℓ`-coefficient): the
+composition isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
 `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl` at the unit, followed by
 the equality `f ≫ a_Y = a_X` of morphisms to the terminal object. -/
 noncomputable def upperShriekDualizingComplexIso :
@@ -181,8 +181,9 @@ noncomputable def upperShriekDualizingComplexIso :
       (𝟙_ _)).symm ≪≫
     eqToIso (by rw [Over.mkIdTerminal.comp_from]; rfl)
 
-/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`: the exchange morphism
-`Φ_{f,K,ω_Y}` precomposed with the inverse of `γ = upperShriekDualizingComplexIso`. -/
+/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K` (`ℚ̄_ℓ`-coefficient): the
+exchange morphism `Φ_{f,K,ω_Y}` precomposed with the inverse of `γ =
+upperShriekDualizingComplexIso`. -/
 noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K) ⟶
       verdierDual ℓ ((boundedConstructibleLowerShriek ℓ f).obj K) :=
@@ -191,9 +192,9 @@ noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAl
     (boundedConstructibleExceptionalProjection ℓ f)
     (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
 
-/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`: the double-dual
-morphism of `Rf_! 𝔻_X K`, followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`.
-The familiar `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
+/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K` (`ℚ̄_ℓ`-coefficient):
+the double-dual morphism of `Rf_! 𝔻_X K`, followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y
+Rf_! 𝔻_X K`. The familiar `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
 noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriek ℓ f).obj (verdierDual ℓ K) ⟶
       verdierDual ℓ ((boundedConstructibleLowerStar ℓ f).obj K) :=

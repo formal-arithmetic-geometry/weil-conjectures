@@ -102,9 +102,9 @@ section BaseChange
 variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 
-/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
-the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
-unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
+/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes
+(`ℚ̄_ℓ`-coefficient): the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*`
+obtained by inserting the unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def boundedConstructibleBaseChangeUnitStep :
     boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶
@@ -119,8 +119,8 @@ noncomputable def boundedConstructibleBaseChangeUnitStep :
 
 variable {f g f' g'} in
 /-- The *square transport* step of the base-change morphism on bounded constructible
-complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
-the left and `Rf'_*` on the right. -/
+complexes (`ℚ̄_ℓ`-coefficient): `Functor.squareTransport` applied to the pullback comparison `θ_sq`,
+under `Rf_*` on the left and `Rf'_*` on the right. -/
 noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g) :
     (boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ g) ⋙
@@ -135,8 +135,8 @@ noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f 
       (Profinite.padicAlgClRingObj ℓ) ℓ sq)
 
 /-- The *counit contraction* step of the base-change morphism on bounded constructible
-complexes: the natural transformation obtained by contracting the counit of the adjunction
-`Lf^* ⊣ Rf_*`. -/
+complexes (`ℚ̄_ℓ`-coefficient): the natural transformation obtained by contracting the counit of the
+adjunction `Lf^* ⊣ Rf_*`. -/
 noncomputable def boundedConstructibleBaseChangeCounitStep :
     (boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ f) ⋙
@@ -153,7 +153,7 @@ variable {f g f' g'} in
 /-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
 over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction.
+counit contraction (`ℚ̄_ℓ`-coefficient).
 
 Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
 proper; no such hypothesis is built into the definition. -/
@@ -181,9 +181,9 @@ section BaseChange
 variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 
-/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
-the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
-unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
+/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes
+(`E`-coefficient): the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained
+by inserting the unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def boundedConstructibleBaseChangeUnitStep :
     boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.continuousMapRingObj E) ℓ g ⟶
@@ -198,8 +198,8 @@ noncomputable def boundedConstructibleBaseChangeUnitStep :
 
 variable {f g f' g'} in
 /-- The *square transport* step of the base-change morphism on bounded constructible
-complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
-the left and `Rf'_*` on the right. -/
+complexes (`E`-coefficient): `Functor.squareTransport` applied to the pullback comparison `θ_sq`,
+under `Rf_*` on the left and `Rf'_*` on the right. -/
 noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g) :
     (boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.continuousMapRingObj E) ℓ g) ⋙
@@ -214,8 +214,8 @@ noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f 
       (Profinite.continuousMapRingObj E) ℓ sq)
 
 /-- The *counit contraction* step of the base-change morphism on bounded constructible
-complexes: the natural transformation obtained by contracting the counit of the adjunction
-`Lf^* ⊣ Rf_*`. -/
+complexes (`E`-coefficient): the natural transformation obtained by contracting the counit of the
+adjunction `Lf^* ⊣ Rf_*`. -/
 noncomputable def boundedConstructibleBaseChangeCounitStep :
     (boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.continuousMapRingObj E) ℓ f) ⋙
@@ -232,7 +232,7 @@ variable {f g f' g'} in
 /-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
 over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction.
+counit contraction (`E`-coefficient).
 
 Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
 proper; no such hypothesis is built into the definition. -/
@@ -263,9 +263,9 @@ section BaseChange
 variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 
-/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
-the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
-unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
+/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes
+(`𝒪_E`-coefficient): the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained
+by inserting the unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def boundedConstructibleBaseChangeUnitStep :
     boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.padicIntegersRingObj ℓ E) ℓ g ⟶
@@ -280,8 +280,8 @@ noncomputable def boundedConstructibleBaseChangeUnitStep :
 
 variable {f g f' g'} in
 /-- The *square transport* step of the base-change morphism on bounded constructible
-complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
-the left and `Rf'_*` on the right. -/
+complexes (`𝒪_E`-coefficient): `Functor.squareTransport` applied to the pullback comparison `θ_sq`,
+under `Rf_*` on the left and `Rf'_*` on the right. -/
 noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g) :
     (boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.padicIntegersRingObj ℓ E) ℓ g) ⋙
@@ -296,8 +296,8 @@ noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f 
       (Profinite.padicIntegersRingObj ℓ E) ℓ sq)
 
 /-- The *counit contraction* step of the base-change morphism on bounded constructible
-complexes: the natural transformation obtained by contracting the counit of the adjunction
-`Lf^* ⊣ Rf_*`. -/
+complexes (`𝒪_E`-coefficient): the natural transformation obtained by contracting the counit of the
+adjunction `Lf^* ⊣ Rf_*`. -/
 noncomputable def boundedConstructibleBaseChangeCounitStep :
     (boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.padicIntegersRingObj ℓ E) ℓ f) ⋙
@@ -314,7 +314,7 @@ variable {f g f' g'} in
 /-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
 over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction.
+counit contraction (`𝒪_E`-coefficient).
 
 Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
 proper; no such hypothesis is built into the definition. -/
