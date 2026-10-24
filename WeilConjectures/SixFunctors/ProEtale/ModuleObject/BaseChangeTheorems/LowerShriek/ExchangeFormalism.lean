@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 
 /-!
@@ -138,7 +139,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_baseChange
 
 /-- Base change for extension by zero in the exchange formalism: the base change map of a
 cartesian square of open immersions is an isomorphism. -/
-instance isIso_baseChange_boundedConstructibleExchangeFormalism (sq : IsPullback g' f' f g) :
+lemma isIso_baseChange_boundedConstructibleExchangeFormalism (sq : IsPullback g' f' f g) :
     IsIso ((𝔽).baseChange (SepFinType.homMk g') (SepFinType.homMk f') (SepFinType.homMk f)
       (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
   rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_baseChange]
@@ -169,5 +170,83 @@ lemma boundedConstructibleLowerStarId_eq_pfId :
   rfl
 
 end Composition
+
+section Exchange
+
+variable {X Z X' Z' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
+  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+  {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z} [IsOpenImmersion i'.left]
+  [IsOpenImmersion j.left]
+
+/-- The exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square is the exchange map
+of the exchange formalism. -/
+lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchange
+    (sq : IsPullback p i' j p') :
+    haveI := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ sq
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq =
+      ((𝔽).exchange (SepFinType.homMk p) (SepFinType.homMk i') (SepFinType.homMk j)
+        (SepFinType.homMk p') (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+  rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchangeRight,
+    Adjunction.exchangeRight_eq_mateEquiv, ExchangeFormalism.exchange]
+  congr 2
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso', Iso.symm_hom, asIso_inv]
+  simp only [boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_baseChange]
+
+end Exchange
+
+section Refinement
+
+variable {X Z Z₁ Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
+  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
+  [IsSeparated Z₁.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
+
+/-- Base change for extension by zero in the exchange formalism, for a cartesian square with an
+identity as top side. -/
+lemma isIso_baseChange_boundedConstructibleExchangeFormalism_id (sq : IsPullback (𝟙 X) i i₁ h) :
+    IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk i) (SepFinType.homMk i₁)
+      (SepFinType.homMk h) (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w)).natTrans :=
+  isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ sq
+
+/-- The inverse of the composition isomorphism of the pushforwards of the exchange formalism
+along `h ≫ p₁` is the composition isomorphism `Rh_* ⋙ Rp₁_* ≅ R(h ≫ p₁)_*`. -/
+lemma pfComp'_homMk_comp_inv {p₁ : Z₁ ⟶ Y} (hp : SepFinType.homMk h ≫ SepFinType.homMk p₁ =
+      SepFinType.homMk (h ≫ p₁)) :
+    ((𝔽).pfComp' (SepFinType.homMk h) (SepFinType.homMk p₁) (SepFinType.homMk (h ≫ p₁))
+      hp).inv = (boundedConstructibleLowerStarComp Λ ℓ h p₁).hom := by
+  rw [show (𝔽).pfComp' (SepFinType.homMk h) (SepFinType.homMk p₁)
+      (SepFinType.homMk (h ≫ p₁)) hp =
+    (𝔽).pfComp' (SepFinType.homMk h) (SepFinType.homMk p₁)
+      (SepFinType.homMk h ≫ SepFinType.homMk p₁) rfl from rfl,
+    boundedConstructibleLowerStarComp_eq_pfComp']
+  rfl
+
+/-- The comparison isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement
+(`boundedConstructibleLowerShriekRefinementIso'`) is the comparison along a refinement of the
+exchange formalism. -/
+lemma boundedConstructibleLowerShriekRefinementIso'_hom_eq (sq : IsPullback (𝟙 X) i i₁ h)
+    {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)] :
+    haveI := isIso_baseChange_boundedConstructibleExchangeFormalism_id Λ ℓ sq
+    (boundedConstructibleLowerShriekRefinementIso' Λ ℓ sq wp).hom =
+      (𝔽).refinementComparison (SepFinType.homMk i) (SepFinType.homMk p) (SepFinType.homMk i₁)
+        (SepFinType.homMk p₁) (SepFinType.homMk h) (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w)
+        (ObjectProperty.hom_ext _ wp) := by
+  subst wp
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  rw [ExchangeFormalism.refinementComparison_app, pfComp'_homMk_comp_inv]
+  simp only [eqToIso_refl, Iso.refl_hom, Category.comp_id,
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchange,
+    boundedConstructibleLowerShriekRefinementIso', Iso.trans_hom,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom, asIso_hom,
+    Functor.associator_hom_app, Category.id_comp, Functor.map_comp, Functor.leftUnitor_inv_app,
+    Category.assoc]
+  rfl
+
+end Refinement
 
 end AlgebraicGeometry.ProEtale.CondensedRing
