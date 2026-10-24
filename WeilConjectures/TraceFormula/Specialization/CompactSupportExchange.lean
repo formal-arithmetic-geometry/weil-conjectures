@@ -1,0 +1,252 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
+public import WeilConjectures.TraceFormula.Specialization.Basic
+
+/-!
+
+# Trace specialization from compact-support exchanges
+
+Let `c` be an endocorrespondence over `k` (the generic fibre) and `c'` one over `k'` (the special
+fibre), with fixed loci `F` and `F'`, and let `Ψ` be specialization functors between the bounded
+constructible derived categories of the corresponding schemes. In the nearby-cycles formalism
+(blueprint `det-nearby-exchange-maps`) the exceptional exchanges `β_f : Ψ Rf^! ⟶ Rf'^! Ψ` and
+the dualizing maps `θ_X : Ψ ω_X ⟶ ω_{X'}` are built from the *compact-support exchanges*
+
+```
+ν_f : Rf'_! Ψ ⟶ Ψ Rf_!
+```
+
+as their mates for `Rf_! ⊣ Rf^!` (`ProEtale.CondensedRing.exceptionalExchange`), and
+`θ_X = β_{a_X}(ℚ̄_ℓ)` read through the specialization unit `σ : ℚ̄_ℓ ≅ Ψ ℚ̄_ℓ` of the point
+(`ProEtale.CondensedRing.dualizingExchange`). The proper exchanges `χ_f` are the mates of the
+pullback exchanges `α_f : f'^* Ψ ⟶ Ψ f^*` for `f^* ⊣ Rf_*`.
+
+The two coherences of the trace class (blueprint `sk-lem-tf-nearby-mate-coherences` (4) and (6))
+follow formally from two properties of `ν`, which in the nearby-cycles formalism hold because `ν`
+is compatible with composition and is the inverse of `χ` for proper maps:
+
+* if `ν_{a_F}` is the composite of `ν_d` and `ν_{a_X}` (for `a_F = a_X ∘ d`), then
+  `θ_F = d'^! θ_X ∘ β_d(ω_X)` (`ProEtale.CondensedRing.dualizingExchange_eq_comp`, (4));
+* if `ν_ι`, `ν_Δ` are inverse to `χ_ι`, `χ_Δ` and the composites of `ν` along `cι = Δd` agree,
+  then the fixed-square identity `Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(RΔ_*)` holds
+  (`CategoryTheory.fixedSquare_of_compactSupportExchange`, (6)).
+
+Together with the unit identity, this builds the specialization data `TraceSpecialization` of
+blueprint `sk-prop-tf-trace-specialization` out of pullback and compact-support exchanges
+(`ProEtale.CondensedRing.Correspondence.TraceSpecialization.ofCompactSupportExchange`).
+
+## Main definitions
+
+- `ProEtale.CondensedRing.exceptionalExchange`: the exceptional exchange `β_f`, the mate of a
+  compact-support exchange `ν_f`.
+- `ProEtale.CondensedRing.dualizingExchange`: the dualizing map `θ_X = β_{a_X}(ℚ̄_ℓ)`.
+- `ProEtale.CondensedRing.Correspondence.TraceSpecialization.ofCompactSupportExchange`: the
+  specialization data built from pullback and compact-support exchanges.
+
+## Main statements
+
+- `ProEtale.CondensedRing.dualizingExchange_eq_comp`: the composition law
+  `θ_F = d'^! θ_X ∘ β_d(ω_X)` (blueprint `det-nearby-exceptional-tensor` (3)).
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory
+
+open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable {ℓ : ℕ} [Fact ℓ.Prime]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k' : Type u} [Field k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+
+section Exchange
+
+variable (ℓ) {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {X' Y' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+
+/-- The *exceptional exchange* `β_f : Ψ_X Rf^! ⟶ Rf'^! Ψ_Y` of a compact-support exchange
+`ν_f : Rf'_! Ψ_X ⟶ Ψ_Y Rf_!` (blueprint `det-nearby-exchange-maps` (4)): its mate for the
+adjunctions `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, that is, the `Rf'_! ⊣ Rf'^!` adjoint of
+`Rf'_! Ψ_X Rf^! ⟶ Ψ_Y Rf_! Rf^! ⟶ Ψ_Y`. -/
+noncomputable def exceptionalExchange (f : X ⟶ Y) (f' : X' ⟶ Y')
+    {ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {ΨY : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(Y'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (ν : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙ ΨY) :
+    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙ ΨX ⟶
+      ΨY ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f' :=
+  mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ f') ν
+
+/-- The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` of a compact-support exchange
+`ν : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}` for the structure maps (blueprint `det-nearby-exchange-maps`
+(5)): the exceptional exchange `β_{a_X}(ℚ̄_ℓ) : Ψ_X Ra_X^! ℚ̄_ℓ ⟶ Ra_{X'}^! Ψ_s ℚ̄_ℓ`, followed
+by the inverse of the specialization unit `σ_s : ℚ̄_ℓ ≅ Ψ_s ℚ̄_ℓ` of the point. -/
+noncomputable def dualizingExchange
+    {ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {Ψpt : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (σpt : 𝟙_ _ ⟶ Ψpt.obj (𝟙_ _)) [IsIso σpt]
+    (ν : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙ Ψpt) :
+    ΨX.obj (dualizingComplex' ℓ X) ⟶ dualizingComplex' ℓ X' :=
+  (exceptionalExchange ℓ (toPoint X) (toPoint X') ν).app (𝟙_ _) ≫
+    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X')).map
+      (inv σpt)
+
+end Exchange
+
+section Composition
+
+variable (ℓ) {F X P : Over (Spec (.of k))} [LocallyOfFiniteType F.hom] [QuasiCompact F.hom]
+  [IsSeparated F.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+  {F' X' P' : Over (Spec (.of k'))} [LocallyOfFiniteType F'.hom] [QuasiCompact F'.hom]
+  [IsSeparated F'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType P'.hom] [QuasiCompact P'.hom] [IsSeparated P'.hom]
+  {ΨF : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(F'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+
+/-- **Composition law for exceptional exchanges** (blueprint `det-nearby-exceptional-tensor` (3),
+`β_{ad} = d'^! β_a ∘ β_d(a^!)`): if the compact-support exchange `ν` of `d ≫ a` is the composite
+of those of `d` and `a` under the composition isomorphisms of the lower shrieks, then the
+exceptional exchange of `d ≫ a` is the composite of those of `d` and `a` under the composition
+isomorphisms of the exceptional inverse images. -/
+theorem exceptionalExchange_comp_app (d : F ⟶ X) (a : X ⟶ P) (d' : F' ⟶ X') (a' : X' ⟶ P')
+    {ΨP : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(P'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (νd : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d' ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d ⋙ ΨX)
+    (νa : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a' ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a ⋙ ΨP)
+    (ν : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (d' ≫ a') ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (d ≫ a) ⋙ ΨP)
+    (h : ∀ M, ν.app M ≫ ΨP.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ d a).hom.app M) =
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ d' a').hom.app (ΨF.obj M) ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a').map (νd.app M) ≫
+          νa.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d).obj M))
+    (N : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (exceptionalExchange ℓ (d ≫ a) (d' ≫ a') ν).app N ≫
+        (boundedConstructibleUpperShriekComp_padicAlgCl ℓ d' a').hom.app (ΨP.obj N) =
+      ΨF.map ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ d a).hom.app N) ≫
+        (exceptionalExchange ℓ d d' νd).app
+          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj N) ≫
+          (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ d').map
+            ((exceptionalExchange ℓ a a' νa).app N) :=
+  mateEquiv_app_comp_conjugateIsoEquiv_hom_app _ _ _ _ _ _ _ _ νd νa ν h N
+
+/-- The composition isomorphism `R(a)_! ≅ Rd_! ⋙ R(b)_!` for a morphism `a` equal to `d ≫ b`: the
+composition isomorphism of `d ≫ b`, transported along `d ≫ b = a`. -/
+noncomputable def lowerShriekCompOfEq {aF : F ⟶ P} (d : F ⟶ X) (b : X ⟶ P) (w : d ≫ b = aF) :
+    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ aF ≅
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d ⋙
+        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ b :=
+  eqToIso (by rw [← w]) ≪≫ boundedConstructibleLowerShriekComp_padicAlgCl ℓ d b
+
+@[simp]
+lemma lowerShriekCompOfEq_rfl (d : F ⟶ X) (b : X ⟶ P) :
+    lowerShriekCompOfEq ℓ d b rfl = boundedConstructibleLowerShriekComp_padicAlgCl ℓ d b := by
+  simp [lowerShriekCompOfEq]
+
+/-- The composition isomorphism `Rd^! Rb^! ℚ̄_ℓ ≅ R(a)^! ℚ̄_ℓ` for a morphism `a` equal to
+`d ≫ b`: the composition isomorphism of `d ≫ b` at the unit, transported along `d ≫ b = a`. -/
+noncomputable def upperShriekUnitCompOfEq {aF : F ⟶ P} (d : F ⟶ X) (b : X ⟶ P)
+    (w : d ≫ b = aF) :
+    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ d).obj
+        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ b).obj (𝟙_ _)) ≅
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ aF).obj (𝟙_ _) :=
+  ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ d b).app (𝟙_ _)).symm ≪≫
+    eqToIso (by rw [w])
+
+@[simp]
+lemma upperShriekUnitCompOfEq_rfl (d : F ⟶ X) (b : X ⟶ P) :
+    upperShriekUnitCompOfEq ℓ d b rfl =
+      ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ d b).app (𝟙_ _)).symm := by
+  simp [upperShriekUnitCompOfEq]
+
+/-- The composition isomorphism of the dualizing complexes is `upperShriekUnitCompOfEq`. -/
+lemma dualizingComplexComp_eq_upperShriekUnitCompOfEq (d : F ⟶ X) :
+    dualizingComplexComp ℓ d = upperShriekUnitCompOfEq ℓ d (toPoint X) (comp_toPoint d) :=
+  rfl
+
+variable {Ψpt : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+    Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  (σpt : 𝟙_ _ ⟶ Ψpt.obj (𝟙_ _)) [IsIso σpt]
+
+/-- `dualizingExchange_eq_comp` for an arbitrary morphism `a_F` equal to `d ≫ a_X`. -/
+private lemma dualizingExchange_eq_comp_aux (d : F ⟶ X) (d' : F' ⟶ X') {aF : F ⟶ point k}
+    {aF' : F' ⟶ point k'} (w : d ≫ toPoint X = aF) (w' : d' ≫ toPoint X' = aF')
+    (νd : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d' ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d ⋙ ΨX)
+    (νX : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙ Ψpt)
+    (νF : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ aF' ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ aF ⋙ Ψpt)
+    (h : ∀ M, νF.app M ≫ Ψpt.map ((lowerShriekCompOfEq ℓ d (toPoint X) w).hom.app M) =
+      (lowerShriekCompOfEq ℓ d' (toPoint X') w').hom.app (ΨF.obj M) ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X')).map
+          (νd.app M) ≫
+          νX.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d).obj M)) :
+    (exceptionalExchange ℓ aF aF' νF).app (𝟙_ _) ≫
+        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ aF').map (inv σpt) =
+      ΨF.map (upperShriekUnitCompOfEq ℓ d (toPoint X) w).inv ≫
+        (exceptionalExchange ℓ d d' νd).app (dualizingComplex' ℓ X) ≫
+        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ d').map
+          (dualizingExchange ℓ σpt νX) ≫ (upperShriekUnitCompOfEq ℓ d' (toPoint X') w').hom := by
+  subst w w'
+  simp only [lowerShriekCompOfEq_rfl] at h
+  simp only [upperShriekUnitCompOfEq_rfl, Iso.symm_inv, Iso.app_hom, Iso.symm_hom, Iso.app_inv]
+  have hc := exceptionalExchange_comp_app ℓ d (toPoint X) d' (toPoint X') νd νX νF h (𝟙_ _)
+  have hn := (boundedConstructibleUpperShriekComp_padicAlgCl ℓ d' (toPoint X')).hom.naturality
+    (inv σpt)
+  rw [dualizingExchange, Functor.map_comp]
+  rw [← cancel_mono ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ d' (toPoint X')).hom.app
+    (𝟙_ _))]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [hn, reassoc_of% hc]
+  simp only [Functor.comp_map, Functor.comp_obj, Category.comp_id]
+
+/-- **The composition law for the dualizing maps** (blueprint `det-nearby-exceptional-tensor`
+(3), `θ_F = d'^! θ_X ∘ β_d(ω_X)`; `sk-lem-tf-nearby-mate-coherences` (4)): if the
+compact-support exchange of `a_F` is the composite of those of `d : F ⟶ X` and of `a_X`, then
+the dualizing map of `F` is `Ψ_F ω_F ≅ Ψ_F Rd^! ω_X ⟶ Rd'^! Ψ_X ω_X ⟶ Rd'^! ω_{X'} ≅ ω_{F'}`. -/
+theorem dualizingExchange_eq_comp (d : F ⟶ X) (d' : F' ⟶ X')
+    (νd : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d' ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d ⋙ ΨX)
+    (νX : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙ Ψpt)
+    (νF : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F') ⟶
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F) ⋙ Ψpt)
+    (h : ∀ M, νF.app M ≫
+        Ψpt.map ((lowerShriekCompOfEq ℓ d (toPoint X) (comp_toPoint d)).hom.app M) =
+      (lowerShriekCompOfEq ℓ d' (toPoint X') (comp_toPoint d')).hom.app (ΨF.obj M) ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X')).map
+          (νd.app M) ≫
+          νX.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d).obj M)) :
+    dualizingExchange ℓ σpt νF = ΨF.map (dualizingComplexComp ℓ d).inv ≫
+      (exceptionalExchange ℓ d d' νd).app (dualizingComplex' ℓ X) ≫
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ d').map
+        (dualizingExchange ℓ σpt νX) ≫ (dualizingComplexComp ℓ d').hom := by
+  rw [dualizingComplexComp_eq_upperShriekUnitCompOfEq,
+    dualizingComplexComp_eq_upperShriekUnitCompOfEq]
+  exact dualizingExchange_eq_comp_aux ℓ σpt d d' (comp_toPoint d) (comp_toPoint d') νd νX νF h
+
+end Composition
+
+end AlgebraicGeometry.ProEtale.CondensedRing
