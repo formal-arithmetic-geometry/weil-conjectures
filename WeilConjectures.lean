@@ -5887,6 +5887,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteOnContractible
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedWeaklyContractible
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
@@ -7703,6 +7704,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.PrincipalIdealDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.Products
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProductsMapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoyoneda
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
@@ -7756,6 +7758,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.SequentialHomotopyC
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.IdIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification
+public import WeilConjectures.CategoryTheory.DerivedCategory.ShiftSumFullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
@@ -7999,7 +8002,9 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndSurjective
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularProjective
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
@@ -12418,6 +12423,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
@@ -12654,6 +12660,7 @@ public import WeilConjectures.TraceFormula.CoefficientMorphism
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
@@ -12688,6 +12695,7 @@ public import WeilConjectures.TraceFormula.OpenPieceFrobenius
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointDualizable
+public import WeilConjectures.TraceFormula.PointFiberFunctor
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
 public import WeilConjectures.TraceFormula.PointNormalizationClass

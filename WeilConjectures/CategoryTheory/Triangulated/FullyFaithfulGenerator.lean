@@ -62,6 +62,16 @@ lemma HomBijective.of_iso {X Y X' Y' : C} (h : F.HomBijective X Y) (e : X ≅ X'
   rw [h₁]
   exact h₃.comp (h.comp h₂)
 
+/-- `F.HomBijective X Y` only depends on `X` up to isomorphism. -/
+lemma HomBijective.of_iso_left {X Y X' : C} (h : F.HomBijective X Y) (e : X ≅ X') :
+    F.HomBijective X' Y :=
+  h.of_iso e (Iso.refl _)
+
+/-- `F.HomBijective X Y` only depends on `Y` up to isomorphism. -/
+lemma HomBijective.of_iso_right {X Y Y' : C} (h : F.HomBijective X Y) (e : Y ≅ Y') :
+    F.HomBijective X Y' :=
+  h.of_iso (Iso.refl _) e
+
 section Zero
 
 variable [Preadditive C] [Preadditive D]
@@ -75,6 +85,56 @@ lemma HomBijective.of_isZero_right {X Y : C} (hY : IsZero Y) [F.PreservesZeroMor
   ⟨fun _ _ _ ↦ hY.eq_of_tgt _ _, fun _ ↦ ⟨0, (F.map_isZero hY).eq_of_tgt _ _⟩⟩
 
 end Zero
+
+section Biprod
+
+variable [Preadditive C] [Preadditive D] [F.Additive] [HasBinaryBiproducts C]
+
+/-- If `F` is bijective on the morphisms `X₁ ⟶ Y` and `X₂ ⟶ Y`, it is bijective on the morphisms
+`X₁ ⊞ X₂ ⟶ Y`: a morphism `F (X₁ ⊞ X₂) ⟶ F Y` is determined by its restrictions along
+`F inl` and `F inr`.
+```
+F X₁ --F inl--> F (X₁ ⊞ X₂) <--F inr-- F X₂
+                     |
+                     v
+                    F Y
+```
+-/
+lemma HomBijective.biprod_left {X₁ X₂ Y : C} (h₁ : F.HomBijective X₁ Y)
+    (h₂ : F.HomBijective X₂ Y) : F.HomBijective (X₁ ⊞ X₂) Y := by
+  refine ⟨fun φ ψ hφψ ↦ ?_, fun χ ↦ ?_⟩
+  · refine biprod.hom_ext' _ _ (h₁.1 ?_) (h₂.1 ?_) <;>
+      simp only [F.map_comp] <;> exact congrArg (_ ≫ ·) hφψ
+  · obtain ⟨φ₁, hφ₁⟩ := h₁.2 (F.map biprod.inl ≫ χ)
+    obtain ⟨φ₂, hφ₂⟩ := h₂.2 (F.map biprod.inr ≫ χ)
+    refine ⟨biprod.desc φ₁ φ₂, ?_⟩
+    rw [biprod.desc_eq, F.map_add, F.map_comp, F.map_comp, hφ₁, hφ₂, ← Category.assoc,
+      ← Category.assoc, ← F.map_comp, ← F.map_comp, ← Preadditive.add_comp, ← F.map_add,
+      biprod.total, F.map_id, Category.id_comp]
+
+/-- If `F` is bijective on the morphisms `X ⟶ Y₁` and `X ⟶ Y₂`, it is bijective on the morphisms
+`X ⟶ Y₁ ⊞ Y₂`: a morphism `F X ⟶ F (Y₁ ⊞ Y₂)` is determined by its composites with
+`F fst` and `F snd`.
+```
+                    F X
+                     |
+                     v
+F Y₁ <--F fst-- F (Y₁ ⊞ Y₂) --F snd--> F Y₂
+```
+-/
+lemma HomBijective.biprod_right {X Y₁ Y₂ : C} (h₁ : F.HomBijective X Y₁)
+    (h₂ : F.HomBijective X Y₂) : F.HomBijective X (Y₁ ⊞ Y₂) := by
+  refine ⟨fun φ ψ hφψ ↦ ?_, fun χ ↦ ?_⟩
+  · refine biprod.hom_ext _ _ (h₁.1 ?_) (h₂.1 ?_) <;>
+      simp only [F.map_comp] <;> exact congrArg (· ≫ _) hφψ
+  · obtain ⟨φ₁, hφ₁⟩ := h₁.2 (χ ≫ F.map biprod.fst)
+    obtain ⟨φ₂, hφ₂⟩ := h₂.2 (χ ≫ F.map biprod.snd)
+    refine ⟨biprod.lift φ₁ φ₂, ?_⟩
+    rw [biprod.lift_eq, F.map_add, F.map_comp, F.map_comp, hφ₁, hφ₂, Category.assoc,
+      Category.assoc, ← F.map_comp, ← F.map_comp, ← Preadditive.comp_add, ← F.map_add,
+      biprod.total, F.map_id, Category.comp_id]
+
+end Biprod
 
 variable [HasShift C ℤ]
 
