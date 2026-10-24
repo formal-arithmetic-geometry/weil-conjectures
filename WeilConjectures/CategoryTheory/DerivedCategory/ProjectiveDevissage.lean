@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.PrincipalIdealDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingle
+public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 
 /-!
 # Bounded complexes with projective cohomology split
@@ -31,46 +32,6 @@ closed under finite biproducts of copies of an object (`ObjectProperty.prop_bipr
 
 open CategoryTheory Limits Pretriangulated
 
-namespace CategoryTheory.Limits
-
-variable {C : Type*} [Category C] [Preadditive C] [HasFiniteBiproducts C] [HasBinaryBiproducts C]
-
-/-- The finite biproduct of `n + 1` copies of `X` is `X ⊞ Xⁿ`. -/
-noncomputable def biproductFinSuccIso (X : C) (n : ℕ) :
-    (⨁ fun _ : Fin (n + 1) ↦ X) ≅ X ⊞ ⨁ fun _ : Fin n ↦ X where
-  hom := biprod.lift (biproduct.π (fun _ : Fin (n + 1) ↦ X) 0)
-    (biproduct.lift fun i : Fin n ↦ biproduct.π (fun _ : Fin (n + 1) ↦ X) i.succ)
-  inv := biprod.desc (biproduct.ι (fun _ : Fin (n + 1) ↦ X) 0)
-    (biproduct.desc fun i : Fin n ↦ biproduct.ι (fun _ : Fin (n + 1) ↦ X) i.succ)
-  hom_inv_id := by
-    have h₀ : biproduct.ι (fun _ : Fin (n + 1) ↦ X) 0 ≫
-        (biproduct.lift fun i : Fin n ↦ biproduct.π (fun _ : Fin (n + 1) ↦ X) i.succ) = 0 :=
-      biproduct.hom_ext _ _ fun j ↦ by simp [biproduct.ι_π_ne _ (Fin.succ_ne_zero j).symm]
-    have h₁ (i : Fin n) : biproduct.ι (fun _ : Fin (n + 1) ↦ X) i.succ ≫
-        (biproduct.lift fun i : Fin n ↦ biproduct.π (fun _ : Fin (n + 1) ↦ X) i.succ) =
-          biproduct.ι (fun _ : Fin n ↦ X) i :=
-      biproduct.hom_ext _ _ fun j ↦ by simp [biproduct.ι_π, Fin.succ_inj]
-    refine biproduct.hom_ext' _ _ fun i ↦ ?_
-    refine Fin.cases ?_ (fun i ↦ ?_) i
-    · simp [reassoc_of% h₀]
-    · refine biproduct.hom_ext _ _ fun j ↦ ?_
-      refine Fin.cases ?_ (fun j ↦ ?_) j
-      · simp [reassoc_of% h₁]
-      · simp [reassoc_of% h₁, biproduct.ι_π]
-  inv_hom_id := by
-    have h₀ : (biproduct.desc fun i : Fin n ↦ biproduct.ι (fun _ : Fin (n + 1) ↦ X) i.succ) ≫
-        biproduct.π (fun _ : Fin (n + 1) ↦ X) 0 = 0 :=
-      biproduct.hom_ext' _ _ fun i ↦ by simp [biproduct.ι_π_ne _ (Fin.succ_ne_zero i)]
-    refine biprod.hom_ext' _ _ (biprod.hom_ext _ _ ?_ ?_) (biprod.hom_ext _ _ ?_ ?_)
-    · simp
-    · refine biproduct.hom_ext _ _ fun j ↦ ?_
-      simp [biproduct.ι_π_ne _ (Fin.succ_ne_zero j).symm]
-    · simp [h₀]
-    · refine biproduct.hom_ext' _ _ fun i ↦ biproduct.hom_ext _ _ fun j ↦ ?_
-      simp [biproduct.ι_π, Fin.succ_inj]
-
-end CategoryTheory.Limits
-
 namespace CategoryTheory.ObjectProperty
 
 variable {C : Type*} [Category C] [Preadditive C] [HasFiniteBiproducts C] [HasBinaryBiproducts C]
@@ -81,8 +42,9 @@ objects is satisfied by the finite biproducts of copies of an object satisfying 
 lemma prop_biproduct_fin (h₀ : ∀ X, IsZero X → Q X) (hb : ∀ X Y, Q X → Q Y → Q (X ⊞ Y))
     {X : C} (hX : Q X) (n : ℕ) : Q (⨁ fun _ : Fin n ↦ X) := by
   induction n with
-  | zero => exact h₀ _ ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext _ _ fun i ↦ Fin.elim0 i))
-  | succ n ih => exact Q.prop_of_iso (biproductFinSuccIso X n).symm (hb _ _ hX ih)
+  | zero => exact h₀ _ (isZero_biproduct_fin_zero _)
+  | succ n ih =>
+    exact Q.prop_of_iso (biproductFinSuccIso fun _ : Fin (n + 1) ↦ X).symm (hb _ _ hX ih)
 
 end CategoryTheory.ObjectProperty
 
