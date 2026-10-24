@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!
 # Monoidality of a composition isomorphism of derived functors, abstractly
@@ -108,5 +108,50 @@ lemma derivedId_tensor_aux (εe : QZ ⋙ Le ⟶ Eh ⋙ QZ) (ι : Le ≅ 𝟭 DZ)
   exact (ι.hom.naturality (μ QZ P Q)).symm
 
 end Id
+
+section Braided
+
+variable {HY HX DY DX : Type*} [Category HY] [Category HX] [Category DY] [Category DX]
+  [MonoidalCategory HY] [MonoidalCategory HX] [MonoidalCategory DY] [MonoidalCategory DX]
+  [BraidedCategory HY] [BraidedCategory HX] [BraidedCategory DY] [BraidedCategory DX]
+  {QY : HY ⥤ DY} {QX : HX ⥤ DX} [QY.LaxMonoidal] [QX.LaxMonoidal] {Fh : HY ⥤ HX} {L : DY ⥤ DX}
+
+/-- The compatibility of a tensor comparison `m : L (K ⊗ M) ⟶ L K ⊗ L M` of a derived functor
+with the braidings, on the image of `(P, Q)`. -/
+lemma derived_map_braiding_aux (ε : QY ⋙ L ⟶ Fh ⋙ QX)
+    (m : ∀ K M : DY, L.obj (K ⊗ M) ⟶ L.obj K ⊗ L.obj M) (P Q : HY)
+    (T : ∀ P Q : HY, Fh.obj P ⊗ Fh.obj Q ⟶ Fh.obj (P ⊗ Q))
+    (hfac : ∀ P Q : HY, m (QY.obj P) (QY.obj Q) ≫ (ε.app P ⊗ₘ ε.app Q) ≫ μ QX _ _ ≫
+      QX.map (T P Q) = L.map (μ QY P Q) ≫ ε.app (P ⊗ Q))
+    (hβY : (β_ (QY.obj P) (QY.obj Q)).hom ≫ μ QY Q P = μ QY P Q ≫ QY.map (β_ P Q).hom)
+    (hβX : (β_ (QX.obj (Fh.obj P)) (QX.obj (Fh.obj Q))).hom ≫ μ QX (Fh.obj Q) (Fh.obj P) =
+      μ QX (Fh.obj P) (Fh.obj Q) ≫ QX.map (β_ (Fh.obj P) (Fh.obj Q)).hom)
+    (hT : T P Q ≫ Fh.map (β_ P Q).hom = (β_ (Fh.obj P) (Fh.obj Q)).hom ≫ T Q P)
+    [IsIso (ε.app P)] [IsIso (ε.app Q)] [IsIso (μ QX (Fh.obj Q) (Fh.obj P))]
+    [IsIso (QX.map (T Q P))] :
+    L.map (β_ (QY.obj P) (QY.obj Q)).hom ≫ m (QY.obj Q) (QY.obj P) =
+      m (QY.obj P) (QY.obj Q) ≫ (β_ (L.obj (QY.obj P)) (L.obj (QY.obj Q))).hom := by
+  rw [← cancel_mono ((ε.app Q ⊗ₘ ε.app P) ≫ μ QX _ _ ≫ QX.map (T Q P))]
+  simp only [Category.assoc]
+  rw [hfac, ← L.map_comp_assoc, hβY, L.map_comp_assoc]
+  have hn := ε.naturality (β_ P Q).hom
+  simp only [Functor.comp_map] at hn
+  rw [hn, ← BraidedCategory.braiding_naturality_assoc]
+  erw [reassoc_of% hβX]
+  rw [← QX.map_comp, ← hT, QX.map_comp, reassoc_of% (hfac P Q)]
+
+lemma map_braiding_comp_of_iso {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
+    [MonoidalCategory D] [BraidedCategory C] [BraidedCategory D] {L : C ⥤ D}
+    (m : ∀ K M : C, L.obj (K ⊗ M) ⟶ L.obj K ⊗ L.obj M)
+    (hnat : ∀ {K K' M M' : C} (a : K ⟶ K') (b : M ⟶ M'),
+      m K M ≫ (L.map a ⊗ₘ L.map b) = L.map (a ⊗ₘ b) ≫ m K' M')
+    {K M K' M' : C} (eK : K' ≅ K) (eM : M' ≅ M)
+    (h : L.map (β_ K' M').hom ≫ m M' K' = m K' M' ≫ (β_ (L.obj K') (L.obj M')).hom) :
+    L.map (β_ K M).hom ≫ m M K = m K M ≫ (β_ (L.obj K) (L.obj M)).hom := by
+  rw [← cancel_epi (L.map (eK.hom ⊗ₘ eM.hom)), ← L.map_comp_assoc,
+    BraidedCategory.braiding_naturality, L.map_comp_assoc, ← hnat, reassoc_of% h,
+    ← BraidedCategory.braiding_naturality, reassoc_of% (hnat eK.hom eM.hom)]
+
+end Braided
 
 end CategoryTheory
