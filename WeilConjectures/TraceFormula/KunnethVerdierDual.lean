@@ -68,12 +68,6 @@ namespace MonoidalClosed
 
 variable {𝒞 : Type*} [Category* 𝒞] [MonoidalCategory 𝒞] [MonoidalClosed 𝒞]
 
-/-- Precomposition with an isomorphism is an isomorphism. -/
-lemma isIso_pre_app_of_isIso {A B : 𝒞} (f : B ⟶ A) [IsIso f] (Z : 𝒞) :
-    IsIso ((pre f).app Z) :=
-  ⟨(pre (inv f)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
-    by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
-
 /-- The internal uncurrying `[y', [x, z]] ⟶ [x ⊗ y', z]` is natural in `y'`. -/
 @[reassoc]
 lemma pre_app_comp_ihomUncurry (x : 𝒞) {y y' : 𝒞} (g : y ⟶ y') (z : 𝒞) :
@@ -267,7 +261,7 @@ theorem isIso_kunnethVerdierMap_of_exactPairing (M : Dᵇc(X.left)⟦Profinite.p
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) (𝟙_ _) (𝟙_ _) M N' N
     (dualizingComplex' ℓ Y)
-  have := isIso_pre_app_of_isIso (unitExternalMap
+  have := isIso_pre_app (unitExternalMap
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) N)
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ⊗

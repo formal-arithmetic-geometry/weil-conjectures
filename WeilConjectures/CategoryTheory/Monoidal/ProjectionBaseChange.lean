@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 
 /-!
 
@@ -398,12 +399,6 @@ lemma trace_comp_curry {G : 𝒱 ⥤ 𝒲} {Gs : 𝒲 ⥤ 𝒱} [Gs.OplaxMonoida
   rw [reassoc_of% hci, ← hnat]
   simp only [Category.assoc, Functor.map_comp]
   rw [← G.map_comp_assoc αZ eT, hstar]
-
-/-- `pre` of an isomorphism is an isomorphism. -/
-lemma isIso_pre_app {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C] {A B : C}
-    (f : A ⟶ B) [IsIso f] (X : C) : IsIso ((pre f).app X) :=
-  ⟨(pre (inv f)).app X, by simp [← NatTrans.comp_app, ← pre_map], by
-    simp [← NatTrans.comp_app, ← pre_map]⟩
 
 end Assembly
 
