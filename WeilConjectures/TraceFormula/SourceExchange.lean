@@ -75,6 +75,32 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
+set_option maxHeartbeats 2000000 in
+-- the compactly supported direct images are unfolded in the defeq checks
+/-- **The class of the coefficient pushforward** (blueprint `lem-trf-trace-source-exchange`,
+identity (b)): `[δ ∘ Rg_* u ∘ γ] = Φ ∘ Rq_* [u] ∘ Ξ ∘ Rb_! η_g`. -/
+theorem class_pushforward :
+    P.pushforward.class =
+      (boundedConstructibleLowerShriek _ ℓ P.pushforward.support).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).unit.app (𝟙_ _) ≫
+            (boundedConstructibleLowerStar _ ℓ P.g).map
+              (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ P.g)).inv) ≫
+        (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar _ ℓ (prod.map P.f P.f)).map c.class ≫
+        classTransportMap ℓ P.f K := by
+  apply classTest_injective
+  rw [classTest_comp, classTest_comp, classTest_map_comp_classTransportMap]
+  simp only [Correspondence.class]
+  rw [classTest_correspondenceClassEquiv_symm, classTest_correspondenceClassEquiv_symm,
+    lowerShriek_map_comp_comp_eqToHom_comp_counit ℓ P.pushforward.support_fst.symm,
+    lowerShriek_map_comp_comp_eqToHom_comp_counit ℓ c.support_fst.symm]
+  simp only [pushforwardCoeff, pushforwardCoeffCounit, lowerStarUpperShriekExchange]
+  rw [Adjunction.map_comp_mateEquiv_app_comp_counit]
+  have h := congrArg (· ≫ (boundedConstructibleLowerStar _ ℓ P.f).map
+    ((boundedConstructibleLowerShriek _ ℓ c.c₁).map c.u ≫
+      (boundedConstructibleUpperShriekAdjunction _ ℓ c.c₁).counit.app K)) P.class_pushforward_core
+  simpa only [Functor.map_comp, Category.assoc] using h
+
 /-- **Exchange of the trace-class sources** (blueprint `lem-trf-trace-source-exchange`): the
 kernel class of the coefficient pushforward `[f, g]_! u` is the transported kernel class of `u`,
 `[[f, g]_! u]_P = ρ_f ∘ Rq_* [u]_P ∘ Ξ ∘ Rb_! η_g`. -/
