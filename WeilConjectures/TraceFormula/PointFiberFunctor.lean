@@ -173,4 +173,150 @@ noncomputable def pointFiberFunctorUnitIso :
   ((pointSections ℓ k).mapDerivedCategorySingleFunctor 0).app (𝟙_ (PointMod ℓ k)) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (pointSectionsUnitIso ℓ k).symm
 
+/-- An object of `Mod_{ℚ̲̄_ℓ,s}` is *finite free* if it is a finite direct sum of copies of the
+unit. -/
+def pointFiniteFree : ObjectProperty (PointMod ℓ k) := fun X ↦
+  ∃ n : ℕ, Nonempty (X ≅ ⨁ fun _ : Fin n ↦ 𝟙_ (PointMod ℓ k))
+
+instance : (pointFiniteFree ℓ k).IsClosedUnderIsomorphisms :=
+  ⟨fun e ⟨n, ⟨e'⟩⟩ ↦ ⟨n, ⟨e.symm ≪≫ e'⟩⟩⟩
+
+omit [IsSepClosed k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+lemma pointFiniteFree_of_isZero {X : PointMod ℓ k} (hX : IsZero X) : pointFiniteFree ℓ k X :=
+  ⟨0, ⟨hX.iso (isZero_biproduct_fin_zero _)⟩⟩
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+lemma projective_of_pointFiniteFree {X : PointMod ℓ k} (hX : pointFiniteFree ℓ k X) :
+    Projective X := by
+  obtain ⟨n, ⟨e⟩⟩ := hX
+  let Q : ObjectProperty (PointMod ℓ k) := fun X ↦ Projective X
+  have : Q.IsClosedUnderIsomorphisms := ⟨fun e h ↦ Projective.of_iso e h⟩
+  have h := Q.prop_biproduct_fin (fun X hX ↦ ⟨fun _ _ _ ↦ ⟨0, hX.eq_of_src _ _⟩⟩)
+    (fun X Y (hX : Projective X) (hY : Projective Y) ↦ (inferInstance : Projective (X ⊞ Y)))
+    (inferInstance : Projective (𝟙_ (PointMod ℓ k))) n
+  exact Projective.of_iso e.symm h
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace DerivedCategory
+
+variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+
+/-- There are no nonzero morphisms `P[0] ⟶ Q[b]` from a projective object `P` when `b ≠ 0`. -/
+lemma subsingleton_singleFunctor_hom_shift (P : C) [Projective P] (Q : C) {b : ℤ} (hb : b ≠ 0) :
+    Subsingleton ((singleFunctor C 0).obj P ⟶ ((singleFunctor C 0).obj Q)⟦b⟧) := by
+  refine (subsingleton_singleFunctor_hom_shift_iff_of_projective P _ b).2 ⟨fun f g ↦ ?_⟩
+  have : IsZero ((homologyFunctor C b).obj ((singleFunctor C 0).obj Q)) := by
+    rcases lt_or_gt_of_ne hb with h | h
+    · exact isZero_of_isGE _ 0 b h
+    · exact isZero_of_isLE _ 0 b h
+  exact this.eq_of_tgt f g
+
+end DerivedCategory
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k]
+
+/-- On the shifts of the unit, the functor induced by the global sections over the point is
+bijective on morphisms: both sides vanish in nonzero degrees, the unit being projective, and in
+degree zero both sides are `ℚ̄_ℓ`. -/
+theorem homBijective_pointSections_unit (b : ℤ) :
+    (pointSections ℓ k).mapDerivedCategory.HomBijective
+      ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ (PointMod ℓ k)))
+      ((shiftFunctor _ b).obj ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ (PointMod ℓ k)))) := by
+  let F := (pointSections ℓ k).mapDerivedCategory
+  let S := DerivedCategory.singleFunctor (PointMod ℓ k) 0
+  let S' := DerivedCategory.singleFunctor (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ))) 0
+  let e := (pointSections ℓ k).mapDerivedCategorySingleFunctor 0
+  by_cases hb : b = 0
+  · subst hb
+    refine Functor.HomBijective.of_iso_right ?_ ((shiftFunctorZero _ ℤ).app _).symm
+    have hS := (Functor.FullyFaithful.ofFullyFaithful S).map_bijective (𝟙_ _) (𝟙_ _)
+    have hS' := (Functor.FullyFaithful.ofFullyFaithful S').map_bijective
+      ((pointSections ℓ k).obj (𝟙_ _)) ((pointSections ℓ k).obj (𝟙_ _))
+    have hconj : Function.Bijective (fun χ : S'.obj ((pointSections ℓ k).obj (𝟙_ _)) ⟶
+        S'.obj ((pointSections ℓ k).obj (𝟙_ _)) ↦
+          e.hom.app (𝟙_ (PointMod ℓ k)) ≫ χ ≫ e.inv.app (𝟙_ (PointMod ℓ k))) :=
+      ((e.app (𝟙_ (PointMod ℓ k))).homCongr (e.app (𝟙_ (PointMod ℓ k)))).symm.bijective
+    have hcomp : (fun φ ↦ F.map φ) ∘ (fun φ : 𝟙_ (PointMod ℓ k) ⟶ 𝟙_ _ ↦ S.map φ) =
+        (fun χ ↦ e.hom.app (𝟙_ (PointMod ℓ k)) ≫ χ ≫ e.inv.app (𝟙_ (PointMod ℓ k))) ∘
+          (fun φ ↦ S'.map φ) ∘ (fun φ ↦ (pointSections ℓ k).map φ) := by
+      ext1 φ
+      have := e.hom.naturality φ
+      simp only [Functor.comp_map] at this
+      simp only [Function.comp_apply]
+      rw [← Category.assoc, ← this, Category.assoc, Iso.hom_inv_id_app]
+      exact (Category.comp_id _).symm
+    exact (Function.Bijective.of_comp_iff _ hS).1
+      (hcomp ▸ hconj.comp (hS'.comp (bijective_pointSections_map_unit ℓ k)))
+  · have h₂ : Subsingleton (F.obj (S.obj (𝟙_ (PointMod ℓ k))) ⟶
+        F.obj ((shiftFunctor _ b).obj (S.obj (𝟙_ (PointMod ℓ k))))) := by
+      have := DerivedCategory.subsingleton_singleFunctor_hom_shift
+        ((pointSections ℓ k).obj (𝟙_ (PointMod ℓ k))) ((pointSections ℓ k).obj (𝟙_ _)) hb
+      exact @Equiv.subsingleton _ _ ((e.app (𝟙_ (PointMod ℓ k))).homCongr
+        ((F.commShiftIso b).app _ ≪≫ (shiftFunctor _ b).mapIso (e.app (𝟙_ (PointMod ℓ k))))) this
+    have h₁ := DerivedCategory.subsingleton_singleFunctor_hom_shift (𝟙_ (PointMod ℓ k))
+      (𝟙_ (PointMod ℓ k)) hb
+    exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+
+/-- On the shifts of finite free objects, the functor induced by the global sections over the
+point is bijective on morphisms. -/
+theorem homBijective_pointSections_finiteFree {X Y : PointMod ℓ k} (hX : pointFiniteFree ℓ k X)
+    (hY : pointFiniteFree ℓ k Y) (b : ℤ) :
+    (pointSections ℓ k).mapDerivedCategory.HomBijective
+      ((DerivedCategory.singleFunctor _ 0).obj X)
+      ((shiftFunctor _ b).obj ((DerivedCategory.singleFunctor _ 0).obj Y)) := by
+  let F := (pointSections ℓ k).mapDerivedCategory
+  let S := DerivedCategory.singleFunctor (PointMod ℓ k) 0
+  have := preservesBinaryBiproducts_of_preservesBiproducts S
+  have (b : ℤ) := preservesBinaryBiproducts_of_preservesBiproducts (S ⋙ shiftFunctor _ b)
+  let QA : ObjectProperty (PointMod ℓ k) := fun X ↦
+    ∀ b : ℤ, F.HomBijective (S.obj X) ((shiftFunctor _ b).obj (S.obj (𝟙_ _)))
+  have : QA.IsClosedUnderIsomorphisms := ⟨fun e h b ↦ (h b).of_iso_left (S.mapIso e)⟩
+  have hA (n : ℕ) : QA (⨁ fun _ : Fin n ↦ 𝟙_ (PointMod ℓ k)) :=
+    QA.prop_biproduct_fin (fun _ hX b ↦ .of_isZero_left (S.map_isZero hX))
+      (fun X₁ X₂ h₁ h₂ b ↦ ((h₁ b).biprod_left (h₂ b)).of_iso_left (S.mapBiprod X₁ X₂).symm)
+      (homBijective_pointSections_unit ℓ k) n
+  let QB : ObjectProperty (PointMod ℓ k) := fun Y ↦ ∀ (n : ℕ) (b : ℤ),
+    F.HomBijective (S.obj (⨁ fun _ : Fin n ↦ 𝟙_ (PointMod ℓ k))) ((shiftFunctor _ b).obj (S.obj Y))
+  have : QB.IsClosedUnderIsomorphisms :=
+    ⟨fun e h n b ↦ (h n b).of_iso_right ((shiftFunctor _ b).mapIso (S.mapIso e))⟩
+  have hB (m : ℕ) : QB (⨁ fun _ : Fin m ↦ 𝟙_ (PointMod ℓ k)) :=
+    QB.prop_biproduct_fin
+      (fun _ hY n b ↦ .of_isZero_right ((shiftFunctor _ b).map_isZero (S.map_isZero hY)))
+      (fun Y₁ Y₂ h₁ h₂ n b ↦ ((h₁ n b).biprod_right (h₂ n b)).of_iso_right
+        ((S ⋙ shiftFunctor _ b).mapBiprod Y₁ Y₂).symm)
+      (fun n b ↦ hA n b) m
+  obtain ⟨n, ⟨eX⟩⟩ := hX
+  obtain ⟨m, ⟨eY⟩⟩ := hY
+  exact ((hB m n b).of_iso_left (S.mapIso eX.symm)).of_iso_right
+    ((shiftFunctor _ b).mapIso (S.mapIso eY.symm))
+
+variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+
+/-- Every object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is a shifted sum of finite free objects: it is bounded with
+finite free cohomology sheaves, and the truncation triangles split. -/
+lemma isShiftSum_boundedConstructible_point
+    (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    DerivedCategory.IsShiftSum (pointFiniteFree ℓ k) K.obj := by
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, -⟩ := K.property
+  refine DerivedCategory.isShiftSum_of_isGE_of_isLE (fun X hX ↦ pointFiniteFree_of_isZero ℓ k hX)
+    (fun X hX ↦ projective_of_pointFiniteFree ℓ k hX) ha hb fun q ↦ ?_
+  obtain ⟨n, ⟨e⟩⟩ := isFiniteFree_upperStar_homology ℓ (Field.toIsField k)
+    IsField.isSepClosed_toField K q (𝟙 _)
+  exact ⟨n, ⟨((upperStarId _ _).app _).symm ≪≫ e⟩⟩
+
+/-- `Fib_s` is bijective on morphisms. -/
+theorem bijective_pointFiberFunctor_map
+    (K L : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Function.Bijective (fun φ : K ⟶ L ↦ (pointFiberFunctor ℓ k).map φ) :=
+  (DerivedCategory.homBijective_of_isShiftSum
+    (fun _ _ hX hY b ↦ homBijective_pointSections_finiteFree ℓ k hX hY b)
+    (isShiftSum_boundedConstructible_point ℓ k K)
+    (isShiftSum_boundedConstructible_point ℓ k L)).comp
+    ((ObjectProperty.fullyFaithfulι _).map_bijective K L)
+
 end AlgebraicGeometry.ProEtale.CondensedRing
