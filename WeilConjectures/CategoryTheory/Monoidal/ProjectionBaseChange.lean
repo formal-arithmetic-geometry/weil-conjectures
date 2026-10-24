@@ -305,6 +305,62 @@ def PFBaseChange {𝒱 𝒲 𝒴 𝒵 : Type*} [Category 𝒱] [Category 𝒲] [
     G.map (δ qZ A (gs.obj B)) ≫ G.map (qZ.obj A ◁ θ.inv.app B) =
       δ q (g.obj A) B ≫ (BC.app A ▷ q.obj B) ≫ (pfG.app (qZ.obj A)).app (q.obj B)
 
+/-- **Projection morphisms of adjunctions are compatible with base change**: if the projection
+morphisms `pfg` of `gs ⊣ g` and `pfG` of `Gs ⊣ G` are those of the adjunctions (characterised by
+the counits, `hcg` and `hcG`), the base change `BC` is the mate of `θ` (`hmate`) and
+`θ : q ⋙ Gs ≅ gs ⋙ qZ` is compatible with the comultiplications (`hθ`), then `PFBaseChange`
+holds, that is the square
+```
+q (g A ⊗ B) ──q PF_g──▶ q g (A ⊗ gs B) ──BC──▶ G qZ (A ⊗ gs B) ──G δ──▶ G (qZ A ⊗ qZ gs B)
+    │δ                                                                       │G (qZ A ◁ θ⁻¹)
+    ▼                                                                       ▼
+q g A ⊗ q B ──BC ▷ q B──▶ G qZ A ⊗ q B ─────────PF_G─────────▶ G (qZ A ⊗ Gs q B)
+```
+commutes: both composites are adjoint, for `Gs ⊣ G`, to the comultiplication of `q ⋙ Gs`
+followed by `θ` and the counit of `gs ⊣ g` on the first factor. -/
+lemma pfBaseChange_of_counit {𝒱 𝒲 𝒴 𝒵 : Type*} [Category 𝒱] [Category 𝒲] [Category 𝒴]
+    [Category 𝒵] [MonoidalCategory 𝒱] [MonoidalCategory 𝒲] [MonoidalCategory 𝒴]
+    [MonoidalCategory 𝒵] {G : 𝒱 ⥤ 𝒲} {Gs : 𝒲 ⥤ 𝒱} [Gs.OplaxMonoidal] (aG : Gs ⊣ G)
+    {g : 𝒵 ⥤ 𝒴} {gs : 𝒴 ⥤ 𝒵} [gs.OplaxMonoidal] (ag : gs ⊣ g)
+    (q : 𝒴 ⥤ 𝒲) [q.Monoidal] (qZ : 𝒵 ⥤ 𝒱) [qZ.Monoidal]
+    (BC : g ⋙ q ⟶ qZ ⋙ G) (θ : q ⋙ Gs ≅ gs ⋙ qZ)
+    (pfg : curriedTensorInsertFunctor₁ g ⟶
+      curriedTensorPost g ⋙ (Functor.whiskeringLeft 𝒴 𝒵 𝒴).obj gs)
+    (pfG : curriedTensorInsertFunctor₁ G ⟶
+      curriedTensorPost G ⋙ (Functor.whiskeringLeft 𝒲 𝒱 𝒲).obj Gs)
+    (hcg : ∀ A B, gs.map ((pfg.app A).app B) ≫ ag.counit.app (A ⊗ gs.obj B) =
+      δ gs (g.obj A) B ≫ (ag.counit.app A ▷ gs.obj B))
+    (hcG : ∀ A B, Gs.map ((pfG.app A).app B) ≫ aG.counit.app (A ⊗ Gs.obj B) =
+      δ Gs (G.obj A) B ≫ (aG.counit.app A ▷ Gs.obj B))
+    (hmate : ∀ K, Gs.map (BC.app K) ≫ aG.counit.app (qZ.obj K) =
+      θ.hom.app (g.obj K) ≫ qZ.map (ag.counit.app K))
+    (hθ : ∀ A B, θ.hom.app (A ⊗ B) ≫ qZ.map (δ gs A B) ≫ δ qZ (gs.obj A) (gs.obj B) =
+      Gs.map (δ q A B) ≫ δ Gs (q.obj A) (q.obj B) ≫ (θ.hom.app A ⊗ₘ θ.hom.app B)) :
+    PFBaseChange q qZ BC θ pfg pfG := by
+  intro A B
+  apply (aG.homEquiv _ _).symm.injective
+  have hθn : Gs.map (q.map ((pfg.app A).app B)) ≫ θ.hom.app (g.obj (A ⊗ gs.obj B)) =
+      θ.hom.app (g.obj A ⊗ B) ≫ qZ.map (gs.map ((pfg.app A).app B)) :=
+    θ.hom.naturality ((pfg.app A).app B)
+  have hG : Gs.map ((pfG.app (qZ.obj A)).app (q.obj B)) ≫
+      aG.counit.app (qZ.obj A ⊗ Gs.obj (q.obj B)) =
+      δ Gs (G.obj (qZ.obj A)) (q.obj B) ≫ (aG.counit.app (qZ.obj A) ▷ Gs.obj (q.obj B)) :=
+    hcG _ _
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [Adjunction.counit_naturality, Adjunction.counit_naturality_assoc, reassoc_of% (hmate _),
+    reassoc_of% hθn, ← qZ.map_comp_assoc, hcg, qZ.map_comp_assoc]
+  erw [hG]
+  erw [← δ_natural_left_assoc qZ (ag.counit.app A) (gs.obj B)]
+  erw [← δ_natural_left_assoc Gs (BC.app A) (q.obj B)]
+  erw [reassoc_of% (hθ (g.obj A) B)]
+  congr 2
+  erw [← comp_whiskerRight (Gs.map (BC.app A)), hmate]
+  rw [tensorHom_def_assoc, whisker_exchange_assoc]
+  dsimp only [Functor.id_obj]
+  rw [← MonoidalCategory.whiskerLeft_comp, Iso.hom_inv_id_app]
+  erw [MonoidalCategory.whiskerLeft_id]
+  rw [Category.comp_id, comp_whiskerRight]
+
 open MonoidalClosed
 
 variable {𝒱 𝒲 𝒴 𝒵 : Type*} [Category 𝒱] [Category 𝒲] [Category 𝒴] [Category 𝒵]

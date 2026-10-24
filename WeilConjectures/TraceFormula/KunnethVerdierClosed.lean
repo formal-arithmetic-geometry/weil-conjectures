@@ -172,7 +172,7 @@ theorem isIso_curry_kunnethPairing_iff_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     (aG := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ G)
     (aGu := boundedConstructibleUpperShriekAdjunction _ ℓ G)
     (pfG := boundedConstructibleExceptionalProjection _ ℓ G)
-    (hcG := fun A B ↦ boundedConstructibleExceptionalProjectionMorphism_counit ℓ G A B)
+    (hcG := fun A B ↦ upperStar_map_exceptionalProjection_comp_counit ℓ G A B)
     (ag := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
     (agu := boundedConstructibleUpperShriekAdjunction _ ℓ g)
     (pfg := boundedConstructibleExceptionalProjection _ ℓ g)
