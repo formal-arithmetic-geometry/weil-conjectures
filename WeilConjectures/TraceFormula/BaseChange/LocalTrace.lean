@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
 public import WeilConjectures.TraceFormula.BaseChange.Supertrace
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 
 /-!
 
@@ -61,13 +62,6 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType 
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 lemma WeilSheaf.frobeniusStalk_eq_powSuccStalkFunctor_obj (F : WeilSheaf ℓ e) :
     WeilSheaf.frobeniusStalk ℓ n x hx F = (WeilSheaf.powSuccStalkFunctor ℓ n x hx).obj F :=
-  rfl
-
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] in
-private lemma WeilSheaf.powSuccStalkFunctor_eq_comp :
-    WeilSheaf.powSuccStalkFunctor ℓ n x hx = WeilSheaf.powSuccFunctor ℓ e n ⋙
-      WeilSheaf.stalkFunctor ℓ (e.powSucc n) ((geometricFrobeniusField k).powSucc n).hom x hx :=
   rfl
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
