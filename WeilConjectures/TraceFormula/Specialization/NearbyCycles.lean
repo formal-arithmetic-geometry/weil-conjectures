@@ -54,14 +54,12 @@ open Scheme
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **Deligne's finiteness theorem for nearby cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for
-`ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze §6.8): over the strictly henselian trait
+/-- Compatibility required from the nearby-cycles section (blueprint
+`det-sp-nearby-cycles-exchanges`, to be proved there): **Deligne's finiteness theorem for nearby
+cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for `ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze §6.8): over the strictly henselian trait
 `Spec k'⟦t⟧`, `k'` separably closed, the nearby cycles of a model of finite type preserve bounded
 constructible complexes. The pullback `ε^*` to the geometric generic fibre preserves them, and
-`ī^* Rj̄_*` does by Deligne's theorem.
-
-Compatibility required from the nearby-cycles section (blueprint `det-sp-nearby-cycles-exchanges`,
-to be proved there). -/
+`ī^* Rj̄_*` does by Deligne's theorem. -/
 theorem NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel {X : Scheme.{u}}
     {X' : Over (Spec (.of k'))} (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel) :
     M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
