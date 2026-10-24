@@ -97,12 +97,6 @@ The unit `ℚ̲̄_ℓ,X` with its canonical Weil structure is
 - `ProEtale.CondensedRing.weilSheafStalkTrace_unit`: the unit Weil sheaf has trace `1` at every
   point (normalization test N1, giving `weilStalkSupertrace_unit`).
 
-## Sorried input
-
-- `ProEtale.CondensedRing.finite_frobeniusFixedPoints`: there are finitely many points of degree
-  `n + 1`: they are the `k`-points of the fixed-point scheme of `σ^{n+1}` twisted by `e^{n+1}`,
-  which is of finite type and unramified over `k`.
-
 -/
 
 @[expose] public section
@@ -140,17 +134,6 @@ def frobeniusFixedPoints : Type u :=
   {x : Spec (.of (AlgebraicClosure k)) ⟶ X.left //
     x ≫ X.hom = specAlgebraicClosure k ∧
       x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x}
-
-/-- A scheme of finite type over a finite field has finitely many points of degree `n + 1`: they
-are the `k`-points of the fixed-point scheme of `σ^{n+1}` twisted by `e^{n+1}`, which is of finite
-type and unramified over `k`, the differential of the Frobenius being zero.
-
-This is the twisted analogue of the finiteness part of blueprint `thm-trf-frobenius-fixed-points`,
-which is stated for the model Frobenius
-(`ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`). -/
-theorem finite_frobeniusFixedPoints [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-    [IsSeparated X.hom] : Finite (frobeniusFixedPoints e n) :=
-  sorry
 
 end Points
 
