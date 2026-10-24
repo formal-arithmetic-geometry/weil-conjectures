@@ -106,11 +106,37 @@ theorem transport_class
     braiding_tensorUnit_left]
   simp
 
+/-- **Transport of the exceptional Künneth map along the inverse image.** Let the adjoint of
+`exK` under `S₁ ⊣ B₁` be the symmetry, the inverse of a projection morphism
+`pf : S₁ W ⊗ K ⟶ S₁ (W ⊗ A₁ K)` and a morphism `X = X₁ ≫ X₂ ≫ X₃ : S₁ W ⟶ 𝟙` tensored with
+`K`. If `F` is braided at `(A₁ K, W)` (`hbraid`), `ζ` is compatible with `pf` (`hproj`) and
+`ζ_W ≫ X = eW ≫ φ` (`hX`), then the transport of `exK` is `(eB ⊗ eW) ≫ K ◁ φ ≫ ρ`. -/
+theorem transport_kunneth {A₁ : S ⥤ P} {K ω Y₁ Y₂ : S} {W : P}
+    (pf : S₁.obj W ⊗ K ⟶ S₁.obj (W ⊗ A₁.obj K)) [IsIso pf]
+    (X₁ : S₁.obj W ⟶ Y₁) (X₂ : Y₁ ⟶ Y₂) (X₃ : Y₂ ⟶ 𝟙_ S) (eB : F.obj (A₁.obj K) ⟶ K)
+    (eW : F.obj W ⟶ ω) (φ : ω ⟶ 𝟙_ S)
+    (hbraid : μ F (A₁.obj K) W ≫ F.map (β_ (A₁.obj K) W).hom =
+      (β_ (F.obj (A₁.obj K)) (F.obj W)).hom ≫ μ F W (A₁.obj K))
+    (hproj : μ F W (A₁.obj K) ≫ transportζ adjFG ιΦ (W ⊗ A₁.obj K) =
+      (transportζ adjFG ιΦ W ⊗ₘ eB) ≫ pf)
+    (hX : transportζ adjFG ιΦ W ≫ X₁ ≫ X₂ ≫ X₃ = eW ≫ φ) :
+    μ F (A₁.obj K) W ≫ F.map ((adjSB.homEquiv _ _) (S₁.map (β_ (A₁.obj K) W).hom ≫ inv pf ≫
+        X₁ ▷ K ≫ X₂ ▷ K ≫ X₃ ▷ K ≫ (λ_ K).hom)) ≫ transportζ adjFG ιΦ (B₁.obj K) ≫
+        adjSB.counit.app K =
+      (eB ⊗ₘ eW) ≫ K ◁ φ ≫ (ρ_ K).hom := by
+  rw [← comp_whiskerRight_assoc, ← comp_whiskerRight_assoc, transportζ_homEquiv,
+    ← transportζ_naturality_assoc, reassoc_of% hbraid, reassoc_of% hproj,
+    IsIso.hom_inv_id_assoc, tensorHom_comp_whiskerRight_assoc]
+  simp only [Category.assoc]
+  rw [hX, ← BraidedCategory.braiding_naturality_assoc]
+  simp [tensorHom_def]
+
 section Projection
 
 variable {L I : S ⥤ S} {A₁ : S ⥤ P} (c₁ : L ≅ G ⋙ S₁) (u : L ≅ 𝟭 S) (cI : I ≅ A₁ ⋙ F)
   (s : I ≅ 𝟭 S)
 
+omit [BraidedCategory S] [BraidedCategory P] in
 /-- **`ζ` is compatible with the projection morphisms**: if the projection morphism of the
 composite `L ≅ G ⋙ S₁` is given by those of `G` and `S₁` (`hcomp`), that of `L ≅ 𝟭` is trivial
 (`hid`), and that of `G` is the projection morphism of `F ⊣ G` (`hpf`), then
@@ -162,8 +188,7 @@ theorem transportζ_projection (hu : ιΦ = c₁.symm ≪≫ u)
     rw [← comp_whiskerRight_assoc (u.inv.app T), Iso.inv_hom_id_app]
     simp only [Functor.id_obj, id_whiskerRight, Category.id_comp]
     rw [← whisker_exchange_assoc]
-    simp only [← whiskerLeft_comp_assoc, Category.assoc, MonoidalCategory.whiskerLeft_id,
-      Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+    simp only [← whiskerLeft_comp_assoc, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
     rw [whisker_exchange_assoc, ← whiskerLeft_comp_assoc, Iso.inv_hom_id_app]
     simp
   rw [← cancel_mono (S₁.map (adjFG.unit.app W ▷ A₁.obj M)), Category.assoc,

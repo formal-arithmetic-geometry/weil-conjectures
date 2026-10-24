@@ -134,6 +134,60 @@ lemma pointDiag_μ_transportζ (W : Dᵇc((point k ⨯ point k).left)⟦Profinit
     W M
   convert h using 2 <;> rfl
 
+/-- **The transport of the exceptional Künneth map along `LΔ^*`** over the base point, for the
+symmetry `LΔ^*` at `(Lp₁^* K, Lp₂^* ω)` (`hbraid`) and a description `hX` of the base change
+part. -/
+lemma pointKunneth_transport (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    {φ : dualizingComplex' ℓ (point k) ⟶ 𝟙_ _}
+    (hbraid : Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+        ((boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K)
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
+          (dualizingComplex' ℓ (point k))) ≫
+      (boundedConstructibleUpperStar _ ℓ (diag (point k))).map (β_ _ _).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+        _ _)
+    (hX : Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
+          (dualizingComplex' ℓ (point k))) ≫
+        (prodBaseChangeIso ℓ (point k) (point k)).hom.app (dualizingComplex' ℓ (point k)) ≫
+        (boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
+          ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (point k))).counit.app
+            (𝟙_ _)) ≫
+        (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint (point k)))).inv =
+      (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom ≫ φ) :
+    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+        ((boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K)
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
+          (dualizingComplex' ℓ (point k))) ≫
+      (boundedConstructibleUpperStar _ ℓ (diag (point k))).map (exceptionalKunnethMap ℓ K) ≫
+      Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
+      (boundedConstructibleUpperShriekAdjunction _ ℓ
+        (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K =
+    ((diagUpperStarProjIso ℓ prod.fst (by simp) K).hom ⊗ₘ
+      (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom) ≫ K ◁ φ ≫ (ρ_ K).hom := by
+  have h := Verdier.transport_kunneth
+    (F := boundedConstructibleUpperStar _ ℓ (diag (point k)))
+    (G := boundedConstructibleLowerShriek _ ℓ (diag (point k)))
+    (S₁ := boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (B₁ := boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (A₁ := boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (boundedConstructibleExceptionalProjectionMorphism _ ℓ
+      (prod.fst : point k ⨯ point k ⟶ point k)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
+        (dualizingComplex' ℓ (point k))) K)
+    ((prodBaseChangeIso ℓ (point k) (point k)).hom.app (dualizingComplex' ℓ (point k)))
+    ((boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
+      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (point k))).counit.app (𝟙_ _)))
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint (point k)))).inv
+    (diagUpperStarProjIso ℓ prod.fst (by simp) K).hom
+    (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom φ hbraid
+    (pointDiag_μ_transportζ _ K) hX
+  convert h using 3
+  rfl
+
 end Correspondence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
