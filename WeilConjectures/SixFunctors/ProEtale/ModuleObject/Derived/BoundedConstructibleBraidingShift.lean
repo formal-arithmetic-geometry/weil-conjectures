@@ -33,9 +33,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {ℓ : ℕ} [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
-  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
+  {X : Over (Spec (.of k))}
 
 attribute [local instance] boundedConstructibleBraiding DerivedCategory.braidedCategory'
 
