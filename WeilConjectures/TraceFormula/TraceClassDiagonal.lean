@@ -100,6 +100,22 @@ lemma mate_comp_verdierDualityIso_hom :
         c.supportedClass := by
   rw [supportedClass, Equiv.apply_symm_apply]
 
+/-- **The supported class is the Künneth–Verdier inverse of the class of `u`** (blueprint
+`lem-trf-trace-class-diagonal-pairing`, Step 1): `ũ = κ_{K,K}⁻¹ ∘ [u]`, where `[u]` is the class of
+`u` read through `Lc₂^* = Lc^* Lp₂^*` and `Rc₁^! = Rc^! Rp₁^!`. -/
+lemma supportedClass_eq :
+    c.supportedClass =
+      (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
+          (boundedConstructibleExceptionalProjection _ ℓ c.support) _ _).symm
+          ((eqToIso (by rw [support_snd]) ≪≫
+              (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).app K).inv ≫ c.u ≫
+            (eqToIso (by rw [support_fst]) ≪≫
+              (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c.support prod.fst).app K).hom) ≫
+        inv (kunnethVerdierMap ℓ K K) := by
+  unfold supportedClass mate verdierDualityIso traceClassSourceIso exceptionalHomIso
+  simp only [Iso.trans_hom, asIso_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_inv]
+  exact Verdier.homEquiv_symm_curry'_comp_exceptionalHomMap _ _ _ _ c.u _ _ _
+
 variable {c} (F : c.FixedLocus)
 
 /-- The morphism `h : Rd_! Lι^* ℚ̄_ℓ,C ⟶ ω_X` whose exceptional adjoint along `d` is the trace

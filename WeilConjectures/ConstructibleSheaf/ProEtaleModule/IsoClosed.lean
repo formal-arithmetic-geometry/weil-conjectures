@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-!
@@ -32,19 +33,6 @@ universe v u' u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
-
-namespace CategoryTheory.Mod
-
-variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
-
-/-- Being finitely presented is invariant under isomorphism of module objects. -/
-lemma IsFinitelyPresented.of_iso {M N : Mod C R} (e : M ≅ N) (h : IsFinitelyPresented R M) :
-    IsFinitelyPresented R N := by
-  obtain ⟨n, m, f, ⟨e'⟩⟩ := h
-  exact ⟨n, m, f, ⟨e.symm ≪≫ e'⟩⟩
-
-end CategoryTheory.Mod
 
 namespace AlgebraicGeometry.ProEtale
 
