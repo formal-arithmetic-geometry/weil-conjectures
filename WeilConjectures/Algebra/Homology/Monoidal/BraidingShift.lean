@@ -44,7 +44,8 @@ variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [HasZero
 /-- The Koszul braiding commutes with the shift isomorphisms of the tensor product of cochain
 complexes. -/
 lemma braiding_hom_mapBifunctorShift₁Iso_hom (K L : CochainComplex C ℤ) (y : ℤ) :
-    (braiding K (L⟦y⟧)).hom ≫ (CochainComplex.mapBifunctorShift₁Iso L K (curriedTensor C) y).hom =
+    (braiding K (L⟦y⟧)).hom ≫
+        (CochainComplex.mapBifunctorShift₁Iso L K (curriedTensor C) y).hom =
       (CochainComplex.mapBifunctorShift₂Iso K L (curriedTensor C) y).hom ≫
         (shiftFunctor _ y).map (braiding K L).hom := by
   ext n : 1
