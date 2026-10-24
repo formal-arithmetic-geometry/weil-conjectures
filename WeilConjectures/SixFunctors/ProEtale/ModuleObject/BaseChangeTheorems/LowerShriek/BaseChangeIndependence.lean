@@ -155,18 +155,13 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz
     (c₁ : Compactification f₁.left) (h₂ : c₂.overObj ⟶ c.overObj)
     (h₁ : c₁.overObj ⟶ c₂.overObj) (hi₂ : IsPullback g'₂ c₂.overI c.overI h₂)
     (hp₂ : IsPullback h₂ c₂.overG c.overG g₂) (hi₁ : IsPullback g'₁ c₁.overI c₂.overI h₁)
-    (hp₁ : IsPullback h₁ c₁.overG c₂.overG g₁) (K : Dᵇc(X.left)⟦Λ⟧) :
-    (boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c₁ (h₁ ≫ h₂)
-        (hi₁.paste_horiz hi₂) (hp₁.paste_horiz hp₂)).app K =
-      (boundedConstructibleUpperStarComp Λ ℓ g₁ g₂).hom.app
-          ((boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K) ≫
-        (boundedConstructibleUpperStar Λ ℓ g₁).map
-          ((boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c₂ h₂ hi₂ hp₂).app
-            K) ≫
-        (boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c₂ c₁ h₁ hi₁ hp₁).app
-          ((boundedConstructibleUpperStar Λ ℓ g'₂).obj K) ≫
-        (boundedConstructibleLowerShriekOfCompactification Λ ℓ c₁).map
-          ((boundedConstructibleUpperStarComp Λ ℓ g'₁ g'₂).inv.app K) := by
+    (hp₁ : IsPullback h₁ c₁.overG c₂.overG g₁) :
+    boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c₁ (h₁ ≫ h₂)
+        (hi₁.paste_horiz hi₂) (hp₁.paste_horiz hp₂) =
+      ((TwoSquare.vComp (boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c₂ h₂
+        hi₂ hp₂) (boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c₂ c₁ h₁ hi₁
+          hp₁)).whiskerLeft (boundedConstructibleUpperStarComp Λ ℓ g'₁ g'₂).inv).whiskerRight
+        (boundedConstructibleUpperStarComp Λ ℓ g₁ g₂).hom := by
   have := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ hi₁
   have := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ hi₂
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g'₁ ≫ SepFinType.homMk g'₂)
@@ -183,18 +178,8 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz
     (SepFinType.homMk_comp_homMk hp₂.w) (SepFinType.homMk_comp_homMk (hi₁.paste_horiz hi₂).w)
     (SepFinType.homMk_comp_homMk (hp₁.paste_horiz hp₂).w)
   rw [ExchangeFormalism.pbComp'_rfl, ExchangeFormalism.pbComp'_rfl] at h
-  have h' : boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c₁ (h₁ ≫ h₂)
-      (hi₁.paste_horiz hi₂) (hp₁.paste_horiz hp₂) =
-      ((TwoSquare.vComp (boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c₂ h₂
-        hi₂ hp₂) (boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c₂ c₁ h₁ hi₁
-          hp₁)).whiskerLeft (boundedConstructibleUpperStarComp Λ ℓ g'₁ g'₂).inv).whiskerRight
-        (boundedConstructibleUpperStarComp Λ ℓ g₁ g₂).hom :=
-    h
-  have hK := congr_app h' K
-  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc] at hK
-  exact hK
+  exact h
+
 end Compactification
 
 omit [IsFinitenessCoefficient ℓ Λ] [MonObj Λ] [IsCommMonObj Λ] [Fact ℓ.Prime] [Fact (ringChar k).Prime]

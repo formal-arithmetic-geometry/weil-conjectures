@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.TwoSquare
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeIndependence
 
 /-!
 
@@ -54,6 +56,42 @@ variable {X₁ X₂ X₃ Y₁ Y₂ Y₃ : Over (Spec (.of k))}
   [LocallyOfFiniteType Y₂.hom] [QuasiCompact Y₂.hom] [IsSeparated Y₂.hom]
   [LocallyOfFiniteType Y₃.hom] [QuasiCompact Y₃.hom] [IsSeparated Y₃.hom]
 
+/-- **Horizontal pasting of `Ex_!`**, as an identity of 2-squares: the exchange of the outer
+rectangle is the vertical composite of the exchanges of the two squares, after inserting the
+composition isomorphisms of the pullbacks. -/
+theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz'
+    {g'₁ : X₁ ⟶ X₂} {g'₂ : X₂ ⟶ X₃} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} {f : X₃ ⟶ Y₃}
+    {g₁ : Y₁ ⟶ Y₂} {g₂ : Y₂ ⟶ Y₃} (sq₁ : IsPullback g'₁ f₁ f₂ g₁) (sq₂ : IsPullback g'₂ f₂ f g₂) :
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (sq₁.paste_horiz sq₂) =
+      ((TwoSquare.vComp (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)
+        (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁)).whiskerLeft
+          (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g'₁ g'₂).inv).whiskerRight
+        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g₁ g₂).hom := by
+  have hi₂ := (compactificationOverField f).overBaseChange_isPullback_i sq₂
+  have hp₂ := (compactificationOverField f).overBaseChange_isPullback_g sq₂
+  have hi₁ := ((compactificationOverField f).ofIsPullback sq₂.overLeft).overBaseChange_isPullback_i
+    sq₁
+  have hp₁ := ((compactificationOverField f).ofIsPullback sq₂.overLeft).overBaseChange_isPullback_g
+    sq₁
+  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ (sq₁.paste_horiz sq₂)
+      (compactificationOverField f)
+      (((compactificationOverField f).ofIsPullback sq₂.overLeft).ofIsPullback sq₁.overLeft) _
+      (hi₁.paste_horiz hi₂) (hp₁.paste_horiz hp₂),
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq₂
+      (compactificationOverField f) ((compactificationOverField f).ofIsPullback sq₂.overLeft) _
+      hi₂ hp₂,
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq₁
+      ((compactificationOverField f).ofIsPullback sq₂.overLeft)
+      (((compactificationOverField f).ofIsPullback sq₂.overLeft).ofIsPullback sq₁.overLeft) _
+      hi₁ hp₁,
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl,
+    ← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm ℓ
+      ((compactificationOverField f).ofIsPullback sq₂.overLeft)]
+  simp only [Iso.refl_hom, Functor.whiskerRight_id', Category.id_comp, Iso.symm_hom]
+  exact TwoSquare.whiskerLeft_whiskerRight_vComp_conj _ _ _ _ _ _ _
+    (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz _ ℓ _ _ _ _ _
+      hi₂ hp₂ hi₁ hp₁)
+
 /-- **Horizontal pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian
 squares `g'₁ ≫ f₂ = f₁ ≫ g₁` and `g'₂ ≫ f = f₂ ≫ g₂`, the exchange of the outer rectangle is
 `L(g₁ ≫ g₂)^* Rf_! ≅ Lg₁^* Lg₂^* Rf_! ⟶ Lg₁^* Rf₂_! Lg'₂^* ⟶ Rf₁_! Lg'₁^* Lg'₂^*
@@ -71,8 +109,12 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'₂).obj K) ≫
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g'₁ g'₂).inv.app
-            K) :=
-  sorry
+            K) := by
+  have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz' ℓ sq₁ sq₂) K
+  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc] at h
+  exact h
 
 /-- **Vertical pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian
 squares `h ≫ v₂ = v₁ ≫ k` and `k ≫ w₂ = w₁ ≫ l`, the exchange of the outer rectangle is
