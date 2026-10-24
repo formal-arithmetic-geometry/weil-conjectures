@@ -42,16 +42,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-! ### The pullbacks of module objects as a family of pullbacks -/
-
-/-- The pullbacks of module objects over `ℚ̲̄_ℓ` satisfy the associativity law of a family of
-pullbacks, along morphisms of schemes. -/
-lemma pullbackAssoc_upperStar (ℓ : ℕ) [Fact ℓ.Prime] :
-    PullbackAssoc (upperStar (Profinite.padicAlgClRingObj ℓ))
-      (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
-        upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) :=
-  fun f g h ↦ upperStarComp_assoc _ f g h
-
 section HomologyFunctor
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

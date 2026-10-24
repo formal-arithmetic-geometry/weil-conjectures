@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.PullbackFamily
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 
 /-!
@@ -272,3 +273,21 @@ theorem Endofunctor.IsoAlgebra.nonempty_obj_obj_iso_of_eq (hc : PullbackAssoc P 
 end Over
 
 end CategoryTheory
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+open scoped CategoryTheory.Obj
+
+/-! ### The pullbacks of module objects as a family of pullbacks -/
+
+/-- The pullbacks of module objects over `ℚ̲̄_ℓ` satisfy the associativity law of a family of
+pullbacks, along morphisms of schemes. -/
+lemma pullbackAssoc_upperStar (ℓ : ℕ) [Fact ℓ.Prime] :
+    PullbackAssoc (upperStar (Profinite.padicAlgClRingObj ℓ))
+      (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+        upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) :=
+  fun f g h ↦ upperStarComp_assoc _ f g h
+
+end AlgebraicGeometry.ProEtale.CondensedRing
