@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriek
--- TEMP public import WeilConjectures.TraceFormula.BaseChange.LowerShriekIterate
+public import WeilConjectures.TraceFormula.BaseChange.LowerShriekIterate
 
 /-!
 
@@ -221,5 +221,66 @@ noncomputable def fibreFixedPointEquiv :
       (geometricBaseChangePoint_left_comp_proj _ _)))
 
 end Fibre
+
+/-! ### The local trace of the lower shriek as a trace on the fibre -/
+
+section Main
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {eX : X ≅ X} {eY : Y ≅ Y} {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom) {n : ℕ}
+  (y : frobeniusFixedPoints eY n)
+  {Z : Over (Spec (.of (AlgebraicClosure k)))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
+  [IsSeparated Z.hom] {ΦZ : Z ⟶ Z} [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
+  {i : Z ⟶ (geometricBaseChange k (AlgebraicClosure k)).obj X}
+  (hi : ΦZ ≫ i = i ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (eX.powSucc n).hom)
+  (hZ : IsPullback i (toPoint Z) ((geometricBaseChange k (AlgebraicClosure k)).map f)
+    (geometricBaseChangePoint y.1 y.2.1))
+
+set_option maxHeartbeats 400000 in
+-- the carriers of the Weil objects are compared up to unfolding
+include hZ in
+/-- **The local trace of the lower shriek as a trace on the geometric fibre**: placed in degree
+`0`, the local trace `t_{n+1}(Rf_!^Weil K; ȳ)` is the trace of the compactly supported Frobenius
+of the restriction `K̄|_Z` to the fibre `Z` of `f̄` at `ȳ'` of the base change `K̄ = Lπ_X^* K` of
+the iterate `(K, φ^{(n+1)})`, a Weil object for the model Frobenius
+`Φ_X = (e_X^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
+theorem homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek
+    (K : WeilBoundedConstructible ℓ eX.hom) :
+    homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point (AlgebraicClosure k))
+        (weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
+      trace ((weilUpperStar ℓ ΦZ _ i hi).obj
+        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+          (K.powSucc ℓ n))).compactFrobenius := by
+  refine (homologyUnitEndRingHom_weilStalkSupertrace ℓ n y.1 y.2.1 y.2.2 _).trans ?_
+  refine (WeilBoundedConstructible.trace_frobenius_congr
+    ((weilStalk ℓ _ _ ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff y.1 y.2.1 (n + 1)
+      (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
+        (geometricFrobeniusField_powSucc_inv n)).2 y.2.2)).mapIso
+      ((weilGeometricBaseChange (AlgebraicClosure k) ℓ Y (n + 1) (eY.powSucc n).hom).mapIso
+        (weilLowerShriekPowSuccIso ℓ hf K n)))).trans ?_
+  refine (WeilBoundedConstructible.trace_frobenius_congr
+    ((weilStalk ℓ _ _ ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff y.1 y.2.1 (n + 1)
+      (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
+        (geometricFrobeniusField_powSucc_inv n)).2 y.2.2)).mapIso
+      (nonempty_weilGeometricBaseChange_weilLowerShriek_iso ℓ (AlgebraicClosure k)
+        (eX.powSucc n) (eY.powSucc n) (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n) (n + 1) (K.powSucc ℓ n)).some)).trans ?_
+  exact WeilBoundedConstructible.trace_frobenius_congr
+    (nonempty_weilStalk_weilLowerShriekOfFrobenius_iso ℓ
+      (IsPullback.of_hasPullback
+        (baseChangeModelFrobenius (AlgebraicClosure k) Y (n + 1) (eY.powSucc n).hom)
+        ((geometricBaseChange k (AlgebraicClosure k)).map f)).flip
+      (r := geometricBaseChangeRelativeFrobenius (n + 1)
+        (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n))
+      (relativeFrobenius_snd _ _ _ _) (relativeFrobenius_fst _ _ _ _) hi
+      ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff y.1 y.2.1 (n + 1)
+        (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
+          (geometricFrobeniusField_powSucc_inv n)).2 y.2.2) hZ
+      ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+        (K.powSucc ℓ n))).some
+
+end Main
 
 end AlgebraicGeometry.ProEtale.CondensedRing
