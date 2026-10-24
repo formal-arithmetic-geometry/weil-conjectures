@@ -12617,6 +12617,7 @@ public import WeilConjectures.TraceFormula.ProperCurve
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 public import WeilConjectures.TraceFormula.PullbackFamily
+public import WeilConjectures.TraceFormula.PushforwardFamily
 public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
