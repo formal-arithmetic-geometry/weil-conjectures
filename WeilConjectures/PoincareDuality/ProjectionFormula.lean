@@ -56,7 +56,7 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 - `ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_right` and
   `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_right`:
   `PF^!_{f,K,B}` is natural in `B`.
-  Its proof (sorried for now) is the naturality of the three constituent maps:
+  Its proof is the naturality of the three constituent maps, assembled for abstract functors:
   `Adjunction.projectionMorphism_natural_right`,
   `Adjunction.inv_projectionComparison_natural_right` and that of
   `leftDerivedUpperStarCompactificationIso`. The bounded constructible version is its image
@@ -204,6 +204,28 @@ noncomputable def exceptionalProjectionMorphismOfCompactification
         (D((c.i)_!open⟦Λ⟧)).map
           (K ◁ (leftDerivedUpperStarCompactificationIso Λ c).inv.app B))
 
+/-- The naturality of `exceptionalProjectionMorphismOfCompactification` in its second variable,
+for abstract functors: the composite of a projection morphism natural in `B`, an inverse
+projection comparison natural in `N` and the identification `Lf^* ≅ Lg^* ⋙ Li^*`. -/
+private lemma exceptionalProjectionMorphism_natural_right_aux {𝒰 𝒵 𝒴 : Type*} [Category 𝒰]
+    [Category 𝒵] [Category 𝒴] [MonoidalCategory 𝒰] [MonoidalCategory 𝒵] [MonoidalCategory 𝒴]
+    (I : 𝒰 ⥤ 𝒵) (G : 𝒵 ⥤ 𝒴) (Fg : 𝒴 ⥤ 𝒵) (Fi : 𝒵 ⥤ 𝒰) (Ff : 𝒴 ⥤ 𝒰) (e : Ff ≅ Fg ⋙ Fi)
+    (K : 𝒰) (pm : ∀ (A : 𝒵) (B : 𝒴), G.obj A ⊗ B ⟶ G.obj (A ⊗ Fg.obj B))
+    (hpm : ∀ (A : 𝒵) {B B' : 𝒴} (h : B ⟶ B'),
+      G.obj A ◁ h ≫ pm A B' = pm A B ≫ G.map (A ◁ Fg.map h))
+    (iq : ∀ N : 𝒵, I.obj K ⊗ N ⟶ I.obj (K ⊗ Fi.obj N))
+    (hiq : ∀ {N N' : 𝒵} (h : N ⟶ N'), I.obj K ◁ h ≫ iq N' = iq N ≫ I.map (K ◁ Fi.map h))
+    {B B' : 𝒴} (h : B ⟶ B') :
+    G.obj (I.obj K) ◁ h ≫ pm (I.obj K) B' ≫ G.map (iq (Fg.obj B') ≫ I.map (K ◁ e.inv.app B')) =
+      (pm (I.obj K) B ≫ G.map (iq (Fg.obj B) ≫ I.map (K ◁ e.inv.app B))) ≫
+        G.map (I.map (K ◁ Ff.map h)) := by
+  rw [reassoc_of% hpm, ← G.map_comp, Category.assoc, ← G.map_comp, reassoc_of% hiq,
+    ← I.map_comp, ← MonoidalCategory.whiskerLeft_comp, Category.assoc, ← I.map_comp,
+    ← MonoidalCategory.whiskerLeft_comp]
+  have he := e.inv.naturality h
+  dsimp at he
+  rw [he]
+
 /-- The exceptional projection morphism is natural in its second variable. -/
 @[reassoc]
 lemma exceptionalProjectionMorphismOfCompactification_natural_right
@@ -212,8 +234,13 @@ lemma exceptionalProjectionMorphismOfCompactification_natural_right
       (condensedRingObj Λ Y))} (h : B ⟶ B') :
     (Rf_!(c)⟦Λ⟧).obj K ◁ h ≫ exceptionalProjectionMorphismOfCompactification Λ c K B' =
       exceptionalProjectionMorphismOfCompactification Λ c K B ≫
-        (Rf_!(c)⟦Λ⟧).map (K ◁ (L((f)^*⟦Λ⟧)).map h) :=
-  sorry
+        (Rf_!(c)⟦Λ⟧).map (K ◁ (L((f)^*⟦Λ⟧)).map h) := by
+  exact exceptionalProjectionMorphism_natural_right_aux D((c.i)_!open⟦Λ⟧) R((c.g)_*⟦Λ⟧)
+    L((c.g)^*⟦Λ⟧) L((c.i)^*⟦Λ⟧) L((f)^*⟦Λ⟧) (leftDerivedUpperStarCompactificationIso Λ c) K
+    (properProjectionMorphism Λ c.g)
+    (fun A _ _ h ↦ properProjectionMorphism_natural_right Λ c.g A h)
+    (fun N ↦ inv (openImmersionProjectionComparison Λ c.i K N))
+    (fun h ↦ inv_openImmersionProjectionComparison_natural_right Λ c.i K h) h
 
 end OfCompactification
 
