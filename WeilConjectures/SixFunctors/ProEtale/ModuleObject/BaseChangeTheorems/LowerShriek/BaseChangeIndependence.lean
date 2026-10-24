@@ -199,8 +199,8 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz
 
 end Compactification
 
-omit [IsFinitenessCoefficient ℓ Λ] [MonObj Λ] [IsCommMonObj Λ] [Fact ℓ.Prime] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] in
+omit [IsFinitenessCoefficient ℓ Λ] [MonObj Λ] [IsCommMonObj Λ] [Fact ℓ.Prime]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- In a category, two squares through a common corner glued along isomorphisms. -/
 lemma _root_.CategoryTheory.Iso.comp_inv_comp_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
     {A₁ A₂ D B₁ B₂ D' : 𝒜} (e₁ : A₁ ≅ D) (e₂ : A₂ ≅ D) (e₁' : B₁ ≅ D') (e₂' : B₂ ≅ D')
@@ -357,8 +357,9 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange
   simp only [Category.assoc]
   rw [reassoc_of% (boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl_iso' ℓ sq
       (compactificationOverField f) c)]
-  simp only [Category.assoc, ← Functor.whiskerLeft_comp, ← Iso.trans_hom,
+  simp only [← Functor.whiskerLeft_comp, ← Iso.trans_hom,
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans]
+
 end PadicAlgCl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

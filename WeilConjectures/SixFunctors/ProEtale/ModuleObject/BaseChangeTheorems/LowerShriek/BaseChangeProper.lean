@@ -68,6 +68,10 @@ section Proper
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
   [IsProper f.left] [IsProper f'.left]
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom]
+  [QuasiCompact X'.hom] [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] in
 /-- The map `g'` between the trivial compactifications of `f'` and `f`. -/
 lemma ofIsProper_overObj_hom_eq (sq : IsPullback g' f' f g) :
     g'.left ≫ (Compactification.ofIsProper f.left).overObj.hom =
@@ -81,6 +85,8 @@ noncomputable abbrev ofIsProperBaseChangeHom (sq : IsPullback g' f' f g) :
       (Compactification.ofIsProper f.left).overObj :=
   Over.homMk g'.left (ofIsProper_overObj_hom_eq sq)
 
+/-- The square of the open immersions (identities) of the trivial compactifications of `f'` and
+`f` is cartesian. -/
 lemma isPullback_ofIsProper_overI (sq : IsPullback g' f' f g) :
     IsPullback g' (Compactification.ofIsProper f'.left).overI
       (Compactification.ofIsProper f.left).overI (ofIsProperBaseChangeHom sq) :=
@@ -89,6 +95,7 @@ lemma isPullback_ofIsProper_overI (sq : IsPullback g' f' f g) :
     exact (Category.comp_id _).trans (Category.id_comp _).symm))
     (IsPullback.of_id_snd (f := g'.left))
 
+/-- The square of the proper maps of the trivial compactifications of `f'` and `f` is cartesian. -/
 lemma isPullback_ofIsProper_overG (sq : IsPullback g' f' f g) :
     IsPullback (ofIsProperBaseChangeHom sq) (Compactification.ofIsProper f'.left).overG
       (Compactification.ofIsProper f.left).overG g :=
@@ -146,7 +153,8 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
   have key := (𝔽).shriekBaseChange_id_left (SepFinType.homMk f) (SepFinType.homMk f')
     (SepFinType.homMk g') (SepFinType.homMk g)
     hw (SepFinType.homMk_comp_homMk sq.w)
-  have hσ := congrArg Iso.hom (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId ℓ f)
+  have hσ := congrArg Iso.hom
+    (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId ℓ f)
   have hσ' := congrArg Iso.hom
     (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId ℓ f')
   simp only [boundedConstructibleLowerShriekOfCompactificationOfIsProperIso, Iso.trans_hom,

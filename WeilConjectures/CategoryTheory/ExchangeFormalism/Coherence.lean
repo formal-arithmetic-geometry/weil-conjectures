@@ -101,6 +101,8 @@ section ExtensionByZero
 
 variable {A B C D : 𝒞}
 
+/-- The composition isomorphism of the extensions by zero is conjugate to the inverse of the
+composition isomorphism of the pullbacks. -/
 lemma conjugateEquiv_shComp'_hom (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j : A ⟶ C) [Fact (𝒪 j₁)]
     [Fact (𝒪 j₂)] [Fact (𝒪 j)] (w : j₁ ≫ j₂ = j) :
     conjugateEquiv ((F.shAdj j₁).comp (F.shAdj j₂)) (F.shAdj j) (F.shComp' j₁ j₂ j w).hom =

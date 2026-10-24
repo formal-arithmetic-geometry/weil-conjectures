@@ -84,6 +84,12 @@ noncomputable abbrev ofIsOpenImmersionBaseChangeHom (g : Y' ⟶ Y) :
     change g.left ≫ 𝟙 Y.left ≫ Y.hom = 𝟙 Y'.left ≫ Y'.hom
     simp [Over.w g])
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom]
+  [QuasiCompact X'.hom] [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] in
+/-- The square of the open immersions of the trivial compactifications of `f'` and `f` is
+cartesian. -/
 lemma isPullback_ofIsOpenImmersion_overI (sq : IsPullback g' f' f g) :
     IsPullback g' (Compactification.ofIsOpenImmersion f'.left).overI
       (Compactification.ofIsOpenImmersion f.left).overI (ofIsOpenImmersionBaseChangeHom g) :=
@@ -91,6 +97,12 @@ lemma isPullback_ofIsOpenImmersion_overI (sq : IsPullback g' f' f g) :
       simp only [Over.comp_left]
       exact congrArg CommaMorphism.left sq.w)) sq.overLeft
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom]
+  [QuasiCompact X'.hom] [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] in
+/-- The square of the proper maps (identities) of the trivial compactifications of `f'` and `f`
+is cartesian. -/
 lemma isPullback_ofIsOpenImmersion_overG :
     IsPullback (ofIsOpenImmersionBaseChangeHom (f := f) (f' := f') g)
       (Compactification.ofIsOpenImmersion f'.left).overG

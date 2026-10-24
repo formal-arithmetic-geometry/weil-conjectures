@@ -21,7 +21,7 @@ For 2-squares `a : TwoSquare T L R B` and `b : TwoSquare B L' R'' B''` and isomo
 
 namespace CategoryTheory.TwoSquare
 
-open Functor
+open CategoryTheory.Functor
 
 variable {C₁ C₂ C₃ C₄ C₇ C₈ : Type*} [Category* C₁] [Category* C₂] [Category* C₃]
   [Category* C₄] [Category* C₇] [Category* C₈]

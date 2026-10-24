@@ -20,7 +20,7 @@ This file records the pasting laws of the compact-support base change `Ex_!` and
 with the direct-image base change `Ex_*` for proper vertical maps, and derives the compatibility
 of `Ex_!` with the units of `Lf^* ⊣ Rf_!` for proper `f`.
 
-## Sorried input
+## Main results
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz`,
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`: the
@@ -29,6 +29,13 @@ of `Ex_!` with the units of `Lf^* ⊣ Rf_!` for proper `f`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`: for
   proper vertical maps, `Ex_!` is `Ex_*` through `Rf_! ≅ Rf_*` (blueprint
   `def-exchange-projection`, the compactification `f = f ∘ 𝟙`).
+
+All three are deduced from the description of `Ex_!` through any compactification and its base
+change
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange`),
+from the corresponding laws in the abstract exchange formalism
+(`CategoryTheory.ExchangeFormalism`) and, for vertical pasting, from the description of the
+composition isomorphism through any triangle of compactifications.
 
 -/
 
@@ -64,9 +71,10 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz'
     {g'₁ : X₁ ⟶ X₂} {g'₂ : X₂ ⟶ X₃} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} {f : X₃ ⟶ Y₃}
     {g₁ : Y₁ ⟶ Y₂} {g₂ : Y₂ ⟶ Y₃} (sq₁ : IsPullback g'₁ f₁ f₂ g₁) (sq₂ : IsPullback g'₂ f₂ f g₂) :
     boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (sq₁.paste_horiz sq₂) =
-      ((TwoSquare.vComp (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)
-        (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁)).whiskerLeft
-          (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g'₁ g'₂).inv).whiskerRight
+      TwoSquare.whiskerRight
+        ((TwoSquare.vComp (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)
+          (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁)).whiskerLeft
+            (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g'₁ g'₂).inv)
         (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g₁ g₂).hom := by
   have hi₂ := (compactificationOverField f).overBaseChange_isPullback_i sq₂
   have hp₂ := (compactificationOverField f).overBaseChange_isPullback_g sq₂
@@ -111,10 +119,11 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g'₁ g'₂).inv.app
             K) := by
-  have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz' ℓ sq₁ sq₂) K
+  have h :=
+    congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz' ℓ sq₁ sq₂) K
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc] at h
+    Functor.associator_inv_app, Category.id_comp, Category.assoc] at h
   exact h
 
 /-- **Vertical pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian
@@ -134,10 +143,11 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
           ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app M) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₁ w₁).inv.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj M) := by
-  have hM := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' ℓ sq₁ sq₂) M
+  have hM :=
+    congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' ℓ sq₁ sq₂) M
   simp only [TwoSquare.hComp, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc] at hM
+    Category.id_comp, Category.assoc] at hM
   exact hM
 
 end Pasting

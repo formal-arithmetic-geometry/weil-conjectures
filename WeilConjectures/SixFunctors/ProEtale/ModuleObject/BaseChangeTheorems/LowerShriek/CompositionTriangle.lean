@@ -74,24 +74,10 @@ lemma CategoryTheory.Iso.trans_symm_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, ← hv]
   simp
 
-namespace AlgebraicGeometry.ProEtale.CondensedRing
+namespace AlgebraicGeometry.Compactification.Triangle
 
-open Scheme
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
-
-/-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
-
-variable {X Y S : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
-  [IsSeparated S.hom] {f : X ⟶ Y} {g : Y ⟶ S}
-
-namespace Compactification.Triangle
-
-variable (T : AlgebraicGeometry.Compactification.Triangle f.left g.left)
+variable {k : Type u} [Field k] {X Y S : Over (Spec (.of k))} {f : X ⟶ Y} {g : Y ⟶ S}
+  (T : Triangle f.left g.left)
 
 /-- The compactification of the composite of a triangle, as a compactification of
 `(f ≫ g).left`. -/
@@ -115,16 +101,34 @@ noncomputable def overP : (overCfg T).overObj ⟶ T.cg.overObj :=
 instance : IsOpenImmersion (overQ T).left := inferInstanceAs (IsOpenImmersion T.q)
 instance : IsProper (overP T).left := inferInstanceAs (IsProper T.p)
 
+/-- The open immersion of `T.cf` followed by `q` is the open immersion of `T.cfg`. -/
 lemma overI_overQ : T.cf.overI ≫ overQ T = (overCfg T).overI :=
   Over.OverMorphism.ext T.i_q
 
+/-- The map `p` followed by the proper map of `T.cg` is the proper map of `T.cfg`. -/
 lemma overP_overG : overP T ≫ T.cg.overG = (overCfg T).overG :=
   Over.OverMorphism.ext T.p_g
 
+/-- The square of a triangle of compactifications, as a cartesian square of `Over S`. -/
 lemma isPullback_over : IsPullback T.cf.overG (overQ T) T.cg.overI (overP T) :=
   IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext T.isPullback.w) T.isPullback
 
-end Compactification.Triangle
+end AlgebraicGeometry.Compactification.Triangle
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+/-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
+local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+
+variable {X Y S : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
+  [IsSeparated S.hom] {f : X ⟶ Y} {g : Y ⟶ S}
 
 open Compactification.Triangle in
 /-- A triangle of compactifications of `f.left` and `g.left` as a triangle of factorizations of the
@@ -183,13 +187,15 @@ noncomputable abbrev compShriekTriangle :
   r_p := ObjectProperty.hom_ext _ rfl
   w := SepFinType.homMk_comp_homMk hd.w
 
+/-- The base change map of the square of the triangle `compShriekTriangle` is an isomorphism. -/
 lemma isIso_baseChange_compShriekTriangle :
     IsIso ((𝔽).baseChange (compShriekTriangle c c' d hd).p₁ (compShriekTriangle c c' d hd).q
       (compShriekTriangle c c' d hd).i₂ (compShriekTriangle c c' d hd).r
       (compShriekTriangle c c' d hd).w).natTrans :=
   isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ hd
 
-
+/-- The exchange map of the square of the triangle `compShriekTriangle` is an isomorphism when
+the exchange of `Rc'.overG_*` with the extension by zero along `d.overI` is. -/
 lemma isIso_exchange_compShriekTriangle
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
       (Profinite.padicAlgClRingObj ℓ) ℓ hd)] :
@@ -216,8 +222,8 @@ lemma compShriekTriangle_compIso_symm
         (boundedConstructibleLowerStarComp _ ℓ d.overG c'.overG).symm ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-          _ ℓ hd)).symm _ ≪≫
+        Functor.isoWhiskerRight
+          (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange _ ℓ hd)).symm _ ≪≫
         Functor.associator _ _ _) ≪≫
       (Functor.associator _ _ _).symm =
     ((𝔽).compIso (compShriekTriangle c c' d hd)).symm := by
@@ -258,6 +264,7 @@ noncomputable abbrev triangleOfCompactifications :
   p_g := rfl
   isPullback := hd.map (Over.forget _)
 
+/-- The base change map of the square of a triangle of compactifications is an isomorphism. -/
 lemma isIso_baseChange_triangleShriekTriangle
     (T : AlgebraicGeometry.Compactification.Triangle f.left g.left) :
     IsIso ((𝔽).baseChange (triangleShriekTriangle T).p₁ (triangleShriekTriangle T).q
@@ -266,6 +273,8 @@ lemma isIso_baseChange_triangleShriekTriangle
   isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
     (Compactification.Triangle.isPullback_over T)
 
+/-- The exchange map of the square of a triangle of compactifications is an isomorphism
+(proper base change for extension by zero). -/
 lemma isIso_exchange_triangleShriekTriangle
     (T : AlgebraicGeometry.Compactification.Triangle f.left g.left) :
     haveI := isIso_baseChange_triangleShriekTriangle ℓ T
@@ -380,8 +389,8 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
       Iso.refl_hom]
     infer_instance
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ sqe
-  have hρ := boundedConstructibleLowerShriekRefinementIso_hom_eq (Profinite.padicAlgClRingObj ℓ) ℓ sqe
-    (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d)
+  have hρ := boundedConstructibleLowerShriekRefinementIso_hom_eq (Profinite.padicAlgClRingObj ℓ)
+    ℓ sqe (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d)
   have key : (𝔽).compIso (triangleShriekTriangle (triangleOfCompactifications c c' d hd)) =
       (𝔽).compIso (compShriekTriangle c c' d hd) ≪≫
         boundedConstructibleLowerShriekRefinementIso (Profinite.padicAlgClRingObj ℓ) ℓ sqe
@@ -402,11 +411,13 @@ section HomConv
 variable {T' T : AlgebraicGeometry.Compactification.Triangle f.left g.left} (φ : T'.Hom T)
 
 /-- The refinement of the compactifications of `f` of a morphism of triangles, in `Over S`. -/
-noncomputable abbrev triangleHomOverRf : AlgebraicGeometry.Compactification.OverRefinement T'.cf T.cf :=
+noncomputable abbrev triangleHomOverRf :
+    AlgebraicGeometry.Compactification.OverRefinement T'.cf T.cf :=
   AlgebraicGeometry.Compactification.overRefinementOfRefinement φ.rf φ.isPullback_rf.flip
 
 /-- The refinement of the compactifications of `g` of a morphism of triangles, in `Over S`. -/
-noncomputable abbrev triangleHomOverRg : AlgebraicGeometry.Compactification.OverRefinement T'.cg T.cg :=
+noncomputable abbrev triangleHomOverRg :
+    AlgebraicGeometry.Compactification.OverRefinement T'.cg T.cg :=
   AlgebraicGeometry.Compactification.overRefinementOfRefinement φ.rg φ.isPullback_rg.flip
 
 /-- The refinement of the compactifications of `f ≫ g` of a morphism of triangles, in
@@ -433,16 +444,24 @@ noncomputable abbrev triangleShriekTriangleHom :
   q_comm := ObjectProperty.hom_ext _ (Over.OverMorphism.ext φ.q_comm)
   p_comm := ObjectProperty.hom_ext _ (Over.OverMorphism.ext φ.p_comm)
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom]
+  [QuasiCompact S.hom] [IsSeparated S.hom] in
+/-- The square of the maps `q` of a morphism of triangles is cartesian, in `Over S`. -/
 lemma isPullback_triangleHom_q :
     IsPullback (triangleHomOverRf φ).hom (Compactification.Triangle.overQ T')
       (Compactification.Triangle.overQ T) (triangleHomOverRfg φ).hom :=
   IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext φ.q_comm) φ.isPullback_q
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom]
+  [QuasiCompact S.hom] [IsSeparated S.hom] in
+/-- For a morphism of triangles `T' ⟶ T`, the square of `T'` with `p` followed by the refinement
+of `T.cg` is cartesian, in `Over S`. -/
 lemma isPullback_triangleHom_big :
     IsPullback T'.cf.overG (Compactification.Triangle.overQ T') T.cg.overI
       (Compactification.Triangle.overP T' ≫ (triangleHomOverRg φ).hom) :=
   IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext φ.isPullback_big.w) φ.isPullback_big
-
 
 include φ in
 include φ in

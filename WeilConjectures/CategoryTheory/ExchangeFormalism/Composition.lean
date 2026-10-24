@@ -19,7 +19,8 @@ factorizations `X ⟶[i₁] Z₁ ⟶[p₁] Y`, `Y ⟶[i₂] Z₂ ⟶[p₂] S` an
 `F.shriek i₁ p₁ ⋙ F.shriek i₂ p₂ ≅ F.shriek i p`
 (`CategoryTheory.ExchangeFormalism.compIso`). This file proves that it is natural with respect to
 morphisms of triangles (`CategoryTheory.ExchangeFormalism.compIso_naturality`) and compatible
-with the compact-support exchange maps (`CategoryTheory.ExchangeFormalism.compIso_shriekBaseChange`).
+with the compact-support exchange maps
+(`CategoryTheory.ExchangeFormalism.compIso_shriekBaseChange`).
 
 These are the results of `AlgebraicGeometry.CompactSupportFormalism` for triangles of
 compactifications, for factorizations instead of compactifications.
@@ -126,6 +127,7 @@ structure ShriekTriangle.Hom (T' T : ShriekTriangle 𝒪 X Y S) where
   p_comm : T'.r ≫ rg = rfg ≫ T.r
 
 omit F in
+/-- The big square of a morphism of triangles commutes: `p₁' ≫ i₂ = q' ≫ r' ≫ rg`. -/
 lemma ShriekTriangle.Hom.big_w {T' T : ShriekTriangle 𝒪 X Y S} (φ : ShriekTriangle.Hom 𝒪 T' T) :
     T'.p₁ ≫ T.i₂ = T'.q ≫ (T'.r ≫ φ.rg) := by
   have := φ.wg

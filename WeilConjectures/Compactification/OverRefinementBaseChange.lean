@@ -93,6 +93,8 @@ lemma toOfIsPullbackHom_overBaseChangeFst (sq : IsPullback g' f' f g)
     toOfIsPullbackHom sq c c' h hp ≫ c.overBaseChangeFst sq = h :=
   Over.OverMorphism.ext (pullback.lift_fst _ _ _)
 
+/-- The comparison `c' ⟶ c.ofIsPullback` is an isomorphism of schemes when `c'` is cartesian over
+`c`. -/
 instance isIso_toOfIsPullbackHom_left (sq : IsPullback g' f' f g) (c : Compactification f.left)
     (c' : Compactification f'.left) (h : c'.overObj ⟶ c.overObj)
     (hp : IsPullback h c'.overG c.overG g) : IsIso (toOfIsPullbackHom sq c c' h hp).left := by

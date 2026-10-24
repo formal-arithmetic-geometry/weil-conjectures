@@ -45,6 +45,7 @@ lemma pbComp'_id_right_hom (f : X ⟶ Y) :
   ext M
   simpa using F.pbComp'_id_right f f (Category.comp_id f) M
 
+/-- The comparison isomorphism of a commutative square through a common diagonal `d`. -/
 lemma sqIso_eq {U' U Z' Z : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     (w : t ≫ r = l ≫ b) (d : U' ⟶ Z) (hd₁ : t ≫ r = d) (hd₂ : l ≫ b = d) :
     F.sqIso t l r b w = (F.pbComp' t r d hd₁).symm ≪≫ F.pbComp' l b d hd₂ := by

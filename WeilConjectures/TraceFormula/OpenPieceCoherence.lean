@@ -18,11 +18,13 @@ For an open immersion `j : U ⟶ X` stable under the Frobenius, the extension by
 the pullbacks along the Frobenii on compactly supported cohomology. This is the first square of
 the open piece in blueprint `prop-trf-trace-additivity-open-closed` (Steps 2(a) and 3).
 
-## Sorried input
+## Main input
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion`:
   for vertical open immersions, `Ex_!` is the extension-by-zero base change through
-  `Rj_! ≅ j_!` (blueprint `def-exchange-projection`).
+  `Rj_! ≅ j_!` (blueprint `def-exchange-projection`). It is computed with the trivial
+  compactification `j = 𝟙 ∘ j`
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen`).
 
 -/
 
