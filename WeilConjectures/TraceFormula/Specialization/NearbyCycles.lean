@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.KunnethVerdier
 
 /-!
@@ -48,7 +49,7 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -87,6 +88,21 @@ noncomputable def specialization :
     ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
       (isTraitModel_deformationModel X x.left.ker k'))
 
+/-- **Verdier's zero-section theorem, exchange form** (Verdier, *Spécialisation de faisceaux et
+monodromie modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, for the closed
+subscheme `Z = x`, with the constant family identification of `sk-lem-tf-sp-constant-family`):
+for `K` bounded constructible on `X`, the pullback exchange
+`α : Le^* Sp_{X,x}(K) ⟶ Ψ_S(Lx^* K)` along the section `ẽ : S ⟶ 𝒳` of the deformation to the
+normal cone (`ProEtale.CondensedRing.zeroSectionModelHom`) is an isomorphism. Followed by the
+inverse of the (invertible) specialization unit of the constant family `S`, it is the zero-section
+map `ε_{X,x}(K) : e^* Sp_{X,x}(K) ⟶ x^* K` of blueprint `det-sp-defect-definition`, which the
+blueprint node asserts to be an isomorphism. -/
+theorem isIso_pullbackExchange_zeroSectionModelHom_app
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (((zeroSectionModelHom X x k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
+      K.obj) :=
+  sorry
+
 /-- **Verdier's zero-section theorem** (Verdier, *Spécialisation de faisceaux et monodromie
 modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, `sk-thm-tf-sp-zero-section`):
 the restriction of the specialization `Sp_{X,x}(K)` to the zero section `x ⊗ k'` of the normal
@@ -96,8 +112,15 @@ theorem isZero_upperStar_zeroSection_specialization
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (deformationSpecialFibreZeroSection X x.left.ker k')).obj
-        ((specialization k' x).obj K)) :=
-  sorry
+        ((specialization k' x).obj K)) := by
+  have := isIso_pullbackExchange_zeroSectionModelHom_app (ℓ := ℓ) k' x K
+  have h₁ : IsZero ((L((x.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) :=
+    ((boundedConstructible _).ι.map_isZero hK).of_iso
+      ((boundedConstructibleUpperStarCompatibility _ ℓ x).app K).symm
+  have h₃ := (zeroSectionModelHom X x k').isZero_upperStar_nearbyCycles_obj _ h₁
+  exact IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _
+    (h₃.of_iso ((boundedConstructibleUpperStarCompatibility _ ℓ
+      (deformationSpecialFibreZeroSection X x.left.ker k')).app ((specialization k' x).obj K)))
 
 /-- The specialization `Dᵇc(X × X) ⥤ Dᵇc((N_x X ⊗ k') × (N_x X ⊗ k'))` of the product: the nearby
 cycles of the product over the trait of two copies of the deformation to the normal cone of
