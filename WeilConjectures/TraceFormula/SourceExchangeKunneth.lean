@@ -156,7 +156,7 @@ theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
     have h₁ := (boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.snd).inv.naturality g
     have h₃ := (boundedConstructibleUpperStarComp _ ℓ (prod.snd : X ⨯ X ⟶ X) f).hom.naturality g
     simp only [Functor.comp_map] at h₁ h₃
-    rw [reassoc_of% h₁, upperStar_map_comp_eqToHom_of_eq_assoc ℓ _ (prod.map_snd f f) g, h₃]
+    rw [reassoc_of% h₁, upperStar_map_comp_eqToHom_congrArg_assoc ℓ _ (prod.map_snd f f) g, h₃]
     simp only [Category.assoc]
   exact Adjunction.map_μ_comp_homEquiv_comp _ _ _ _
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f) _ hnat

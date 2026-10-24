@@ -174,7 +174,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 @[reassoc]
-lemma upperStar_map_comp_eqToHom_of_eq {u u' : V ⟶ Y} (h : u = u') {M M' : Dᵇc(Y.left)⟦Λ⟧}
+lemma upperStar_map_comp_eqToHom_congrArg {u u' : V ⟶ Y} (h : u = u') {M M' : Dᵇc(Y.left)⟦Λ⟧}
     (g : M ⟶ M') :
     (boundedConstructibleUpperStar Λ ℓ u).map g ≫
         eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar Λ ℓ r).obj M') h) =
