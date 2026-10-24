@@ -742,27 +742,29 @@ include ℓ k
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
+-- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- hypotheses are restated as binders; they repeat section variables.
+set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `ℚ̄_ℓ`-sheaves form a monoidal subcategory of
 `D(Mod_{ℚ̄_ℓ,X})` for the derived tensor product: they contain the unit `ℚ̄_ℓ,X` and are stable
 under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidal_boundedConstructible :
+instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
   sorry
 
-attribute [instance] isMonoidal_boundedConstructible
-
+-- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- hypotheses are restated as binders; they repeat section variables.
+set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `ℚ̄_ℓ`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze,
 Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of
 characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidalClosed_boundedConstructible :
+instance isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
   sorry
-
-attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory
@@ -833,30 +835,38 @@ variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimension
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
+-- The prime `ℓ` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
+-- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
+set_option synthInstance.checkSynthOrder false in
+-- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- hypotheses are restated as binders; they repeat section variables.
+set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
 `D(Mod_{E_X})` for the derived tensor product: they contain the unit `E_X` and are stable
 under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidal_boundedConstructible :
+instance isMonoidal_boundedConstructible
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
   sorry
 
+-- The prime `ℓ` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
+-- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in
-attribute [instance] isMonoidal_boundedConstructible
-
+-- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- hypotheses are restated as binders; they repeat section variables.
+set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze,
 Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of
 characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidalClosed_boundedConstructible :
+instance isMonoidalClosed_boundedConstructible
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
   sorry
-
-set_option synthInstance.checkSynthOrder false in
-attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory
@@ -932,28 +942,34 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
+-- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- hypotheses are restated as binders; they repeat section variables.
+set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves form a monoidal subcategory of
 `D(Mod_{𝒪_{E,X}})` for the derived tensor product: they contain the unit `𝒪_{E,X}` and are stable
 under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidal_boundedConstructible :
+instance isMonoidal_boundedConstructible
+    [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
   sorry
 
-attribute [instance] isMonoidal_boundedConstructible
-
+-- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- hypotheses are restated as binders; they repeat section variables.
+set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{𝒪_{E,X}})` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze,
 Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of
 characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidalClosed_boundedConstructible :
+instance isMonoidalClosed_boundedConstructible
+    [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidalClosed :=
   sorry
-
-attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory
