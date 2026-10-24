@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
 public import WeilConjectures.TraceFormula.PointNormalizationTau
 
@@ -85,10 +86,14 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
     _ _ χ (pointTau v) τ' ?hτ ?hbraid
     (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) ?hK ?hC
   case hτ => exact pointTau_comp_counit v
-  case hbraid => sorry
-  case hK => exact pointKunneth_transport K sorry (pointKunneth_baseChange ℓ rfl)
+  case hbraid => exact boundedConstructibleUpperStar_μ_map_braiding_hom _ ℓ (diag (point k)) _ _
+  case hK =>
+    exact pointKunneth_transport K
+      (boundedConstructibleUpperStar_μ_map_braiding_hom _ ℓ (diag (point k)) _ _)
+      (pointKunneth_baseChange ℓ rfl)
   case hC =>
-    exact pointClass_transport K sorry
+    exact pointClass_transport K
+      (boundedConstructibleUpperStar_μ_map_braiding_hom _ ℓ (diag (point k)) _ _)
 
 /-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
 `sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
