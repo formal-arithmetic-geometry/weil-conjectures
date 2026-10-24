@@ -64,9 +64,9 @@ restricts to a right adjoint of the bounded below `Rf_! : D⁺(X_ét, Λ) ⥤ D�
   `Adjunction.ofIsLeftAdjoint` should be used about it. The composite `Rf^!` is a construction
   out of it and `Di^*`.
 * The derived adjunction `Di_! ⊣ Di^*` goes through the total left derived functor of `i_!`,
-  which is why the K-flat hypotheses on `ModuleCat Λ` of
-  `WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek` are needed for the
-  adjunctions of this file, though not for the definition of `Rf^!` itself.
+  which uses the closed symmetric monoidal structure and the functorial flat resolutions of
+  `ModuleCat Λ` (`ModuleCat.hasFunctorialFlatResolution`), see
+  `WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek`.
 * There is no underived `f^!`, but the notation still carries the `R` of `R(f)_![A]` and
   `R((g)_*[A])`, to mark that it lives on derived categories rather than on sheaves.
 
@@ -159,13 +159,6 @@ end Unbounded
 
 section Adjunction
 
-/- The K-flat resolution package on `ModuleCat Λ`, needed for the derived adjunction
-`Di_! ⊣ Di^*` along the open immersion of a compactification, see
-`Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`. -/
-variable [MonoidalCategory (ModuleCat.{u + 1} Λ)] [MonoidalPreadditive (ModuleCat.{u + 1} Λ)]
-  [SymmetricCategory (ModuleCat.{u + 1} Λ)] [MonoidalClosed (ModuleCat.{u + 1} Λ)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ)]
-
 /-- The adjunction `Rf_! ⊣ Rf^!` attached to a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`:
 the composite of the derived adjunction `Di_! ⊣ Di^*` along the open immersion `i` and of the
 adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
@@ -234,10 +227,6 @@ bounded below derived categories. -/
 noncomputable def rightDerivedUpperShriekPlusCompatibility :
     R(f)^![Λ]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![Λ] :=
   ObjectProperty.liftCompιIso _ _ _
-
-variable [MonoidalCategory (ModuleCat.{u + 1} Λ)] [MonoidalPreadditive (ModuleCat.{u + 1} Λ)]
-  [SymmetricCategory (ModuleCat.{u + 1} Λ)] [MonoidalClosed (ModuleCat.{u + 1} Λ)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ)]
 
 /-- The adjunction `Rf_! ⊣ Rf^!` on the bounded below derived categories of étale sheaves of
 `Λ`-modules, for a separated morphism `f`, locally of finite type, of quasi-compact
