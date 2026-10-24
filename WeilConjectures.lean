@@ -12653,6 +12653,7 @@ public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
 public import WeilConjectures.TraceFormula.ContractingGraph
+public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
