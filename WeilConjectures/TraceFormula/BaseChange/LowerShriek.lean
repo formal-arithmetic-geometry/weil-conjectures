@@ -134,8 +134,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] (Ω : Ty
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom) (N : ℕ)
 
-/-- **The geometric base change of the Weil lower shriek** (Unfinished input): for a morphism
-`f : X ⟶ Y` of separated schemes of finite type over `k = 𝔽_q` with `e_X ≫ f = f ≫ e_Y` and a
+/-- **The geometric base change of the Weil lower shriek** (Unfinished input): for a proper
+morphism `f : X ⟶ Y` of separated schemes of finite type over `k = 𝔽_q` with `e_X ≫ f = f ≫ e_Y` and a
 Weil object `K` for `e_X`, the base change to `Ω` of the twisted Weil lower shriek is the model
 Weil lower shriek of the base change,
 ```
@@ -144,9 +144,9 @@ Lπ_Y^* Rf_!^Weil K ≅ Rf̄_! Lπ_X^* K
 as Weil objects for the model Frobenius `Φ_Y = (e_Y ≫ F_Y^N) ×_k Ω`, the right side with the
 Frobenius comparison of the relative Frobenius `r = (f̄, Φ_X)` of `f̄`
 (`weilLowerShriekOfFrobenius`, blueprint `def-trf-weil-shriek-pushforward`). The underlying
-isomorphism is the compactly supported base change along the projection `π_Y : Ȳ ⟶ Y` (proper
-base change for the compactification of `f` base changed to `Ω`, and base change for the
-extension by zero), and its compatibility with the Frobenius structures is the pasting of
+isomorphism is the proper base change `Lπ_Y^* Rf_* ≅ Rf̄_* Lπ_X^*` along the projection
+`π_Y : Ȳ ⟶ Y` (blueprint `sk-thm-sfb-proper-base-change`, for an arbitrary base change), read
+through `Rf_! ≅ Rf_*`, and its compatibility with the Frobenius structures is the pasting of
 `Ex_!` along the cube formed by the base change squares of `e_X`, `e_Y` and of the Frobenii,
 with the trivializations `κ : (F^N)^* ≅ 𝟭` of the absolute Frobenius (blueprint
 `sk-i-relative-frob` (1), `lem-trf-absolute-frobenius-site`, `fix-lem-exchanges`).
@@ -155,7 +155,7 @@ The base change runs along `Spec Ω ⟶ Spec k`, which is not of finite type, so
 compactly supported base change theorem of the project
 (`isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl`), which is stated for squares of
 separated schemes of finite type over one field. -/
-theorem nonempty_weilGeometricBaseChange_weilLowerShriek_iso
+theorem nonempty_weilGeometricBaseChange_weilLowerShriek_iso [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
     Nonempty ((weilGeometricBaseChange Ω ℓ Y N eY.hom).obj ((weilLowerShriek ℓ eX eY hf).obj K) ≅
       (weilLowerShriekOfFrobenius ℓ (baseChangeModelFrobenius Ω X N eX.hom)

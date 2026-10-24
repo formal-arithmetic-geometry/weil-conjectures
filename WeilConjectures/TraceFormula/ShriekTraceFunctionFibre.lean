@@ -255,7 +255,7 @@ include hZ in
 of the restriction `K̄|_Z` to the fibre `Z` of `f̄` at `ȳ'` of the base change `K̄ = Lπ_X^* K` of
 the iterate `(K, φ^{(n+1)})`, a Weil object for the model Frobenius
 `Φ_X = (e_X^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
-theorem homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek
+theorem homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
     homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point (AlgebraicClosure k))
         (weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
@@ -312,7 +312,7 @@ fibre**: if the restriction `K̄|_Z` of the base change of the iterate `(K, φ^{
 fibre `Z` of `f̄` at `ȳ'` satisfies the trace formula
 `tr(F_{c,1} | RΓ_c(Z, K̄|_Z)) = ∑_{z ∈ Z^{Φ_Z}} tr(F_{z,1} | (K̄|_Z)_z)`, then
 `t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄)`. -/
-theorem weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre
+theorem weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) [Fintype (FixedPoint ΦZ 1)]
     [IsFinite (frobeniusIterate ΦZ 1).left]
     [IsUniversalHomeomorphism (frobeniusIterate ΦZ 1).left]
