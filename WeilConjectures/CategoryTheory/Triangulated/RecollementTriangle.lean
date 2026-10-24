@@ -46,7 +46,20 @@ variable {C : Type*} [Category C] {D₁ D₂ : Type u} [Category.{v} D₁] [Cate
 /-- **The triangle of a recollement.** Let `F₁` and `F₂` be triangulated functors jointly
 reflecting isomorphisms, and `f : A ⟶ M`, `g : M ⟶ N` with `f ≫ g = 0`, such that `F₁ f` is an
 isomorphism, `F₁ N = 0`, `F₂ A = 0` and `F₂ g` is an isomorphism. Then `f` and `g` extend to a
-distinguished triangle `A ⟶ M ⟶ N ⟶ A⟦1⟧`. -/
+distinguished triangle `A ⟶ M ⟶ N ⟶ A⟦1⟧`.
+
+Proof: complete `f` to a distinguished triangle `A ⟶ M ⟶ P ⟶ A⟦1⟧`. Since `f ≫ g = 0`, the map
+`g` factors through `P` by a comparison `φ : P ⟶ N`:
+
+```
+  A ──f──▶ M ──g'──▶ P ──h──▶ A⟦1⟧
+  ‖        ‖         │φ        ‖
+  A ──f──▶ M ──g───▶ N ─────▶ A⟦1⟧
+```
+
+`F₁ φ` is a map between zero objects (`F₁ P = 0` as `F₁ f` is an isomorphism), and `F₂ φ` is an
+isomorphism (`F₂ g'` is one as `F₂ A = 0`, and `F₂ g' ≫ F₂ φ = F₂ g`). So `φ` is an isomorphism,
+and the bottom row, with `δ = φ⁻¹ ≫ h`, is distinguished. -/
 lemma exists_distTriang_of_jointlyReflectIsomorphisms
     (hF : JointlyReflectIsomorphisms (pairFunctor F₁ F₂)) {A M N : C} (f : A ⟶ M) (g : M ⟶ N)
     (hfg : f ≫ g = 0) (h₁ : IsIso (F₁.map f)) (hN : IsZero (F₁.obj N))

@@ -133,6 +133,7 @@ lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
   rw [← Category.assoc, ← Spec.map_comp, hφ]
   exact e.left_inv x
 
+
 /-- **Finiteness of the points of degree `n + 1`** for an automorphism `e` of finite order of a
 scheme of finite type over a finite field (the finiteness part of blueprint
 `thm-trf-frobenius-fixed-points`, for the Frobenius twisted by `e`): a point `x̄` with
@@ -176,6 +177,7 @@ theorem finite_frobeniusFixedPoints_of_powSucc_eq_refl {X : Over (Spec (.of k))}
     fun x₁ x₂ h ↦ Subtype.ext (by
       rw [← hg x₁, ← hg x₂]
       exact congrArg (_ ≫ ·) (congrArg Subtype.val h))
+
 /-- **Finiteness of the points of degree `n + 1`** of a separated scheme of finite type over a
 finite field, for the Frobenius twisted by an automorphism `e` (the twisted analogue of the
 finiteness part of blueprint `thm-trf-frobenius-fixed-points`, which is stated for the model

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersionAb
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
@@ -21,7 +21,7 @@ blueprint `lem-exc-proetale-closed-fully-faithful`).
 
 The adjunction `i^* ⊣ i_*` on module objects is the lift `mapMod(i^*) ⊣ mapMod(i_*)` of the
 adjunction on abelian sheaves, whose counit is the counit on underlying sheaves, an isomorphism
-(`ProEtale.isIso_upperStarLowerStarAdjunction_counit_addCommGrp`), composed with the extension
+(`ProEtale.isIso_upperStarLowerStarAdjunction_counit`), composed with the extension
 and restriction of scalars along the isomorphism `α_i`, an equivalence.
 
 -/
@@ -44,7 +44,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- The pushforward `i_*` along a closed immersion is fully faithful on module objects over
 `Λ`. -/
 noncomputable def fullyFaithfulLowerStarOfIsClosedImmersion : ((i)_*⟦Λ⟧).FullyFaithful := by
-  have := ProEtale.isIso_upperStarLowerStarAdjunction_counit_addCommGrp i
+  have := ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i
   let adj := (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} i).mapModAdjunction
     (condensedRingObj Λ X)
   have : IsIso adj.counit := by
