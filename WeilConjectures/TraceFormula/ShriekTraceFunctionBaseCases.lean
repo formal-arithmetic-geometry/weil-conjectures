@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
 public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
 public import WeilConjectures.TraceFormula.WeilBaseChange
 
 /-!
@@ -119,19 +120,6 @@ lemma exists_isOpenImmersion_range_eq_compl {X Y : Over S} [IsLocallyNoetherian 
   · ext1
     simp
   · exact U.range_ι
-
-/-- The square of the empty scheme over two morphisms with disjoint images is cartesian. -/
-lemma isPullback_emptyOverTo {X Y V : Over S} (f : X ⟶ Y) (j : V ⟶ Y)
-    (h : Disjoint (Set.range f.left.base) (Set.range j.left.base)) :
-    IsPullback (Scheme.emptyOverTo X) (Scheme.emptyOverTo V) f j := by
-  have hE (s : PullbackCone f j) : IsEmpty s.pt.left :=
-    Scheme.isEmpty_of_commSq ⟨by rw [← Over.comp_left, s.condition, Over.comp_left]⟩ h
-  refine IsPullback.of_isLimit (PullbackCone.IsLimit.mk (Scheme.emptyOverTo_ext _ _)
-    (fun s ↦ Over.homMk ((@isInitialOfIsEmpty _ (hE s)).to _)
-      ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _))
-    (fun s ↦ Over.OverMorphism.ext ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _))
-    (fun s ↦ Over.OverMorphism.ext ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _))
-    (fun s _ _ _ ↦ Over.OverMorphism.ext ((@isInitialOfIsEmpty _ (hE s)).hom_ext _ _)))
 
 end Complement
 
