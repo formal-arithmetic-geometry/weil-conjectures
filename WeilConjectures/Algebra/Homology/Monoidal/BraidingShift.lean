@@ -61,7 +61,7 @@ lemma braiding_hom_mapBifunctorShift₁Iso_hom (K L : CochainComplex C ℤ) (y :
       (q + y) (n + y) rfl rfl]
   erw [CochainComplex.shiftFunctor_map_f']
   simp only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom,
-    Iso.refl_inv, Category.id_comp, Category.comp_id, Units.smul_def, Preadditive.zsmul_comp,
+    Iso.refl_inv, Category.comp_id, Units.smul_def, Preadditive.zsmul_comp,
     Category.assoc]
   erw [ι_braiding_hom (K := K) (L := L) p (q + y) (n + y) (by omega)]
   erw [CategoryTheory.Functor.map_id, NatTrans.id_app, CategoryTheory.Functor.map_id,

@@ -32,7 +32,7 @@ open CategoryTheory Category Limits MonoidalCategory
 namespace HomotopyCategory
 
 variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [HasZeroObject C]
-  [HasBinaryBiproducts C] [MonoidalPreadditive C] [BraidedCategory C]
+  [MonoidalPreadditive C] [BraidedCategory C]
   [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
   [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
@@ -40,6 +40,7 @@ variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [HasZeroO
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
 
+omit [BraidedCategory C] in
 /-- On images of complexes, the commutation of `K ⊗ -` with the shifts is that of complexes. -/
 lemma tensorLeft_commShiftIso_hom_app_quotient (K L : CochainComplex C ℤ) (y : ℤ) :
     (((curriedTensor (HomotopyCategory C (.up ℤ))).obj ((quotient C _).obj K)).commShiftIso
@@ -50,8 +51,7 @@ lemma tensorLeft_commShiftIso_hom_app_quotient (K L : CochainComplex C ℤ) (y :
   have h := NatTrans.shift_app_comm ((curriedTensor C).quotientCompBifunctorMapHomotopyObjIso
     (.up ℤ) (.up ℤ) (.up ℤ) K).hom y L
   simp only [Functor.commShiftIso_comp_hom_app, Functor.quotientCompBifunctorMapHomotopyObjIso,
-    Iso.refl_hom, NatTrans.id_app, CategoryTheory.Functor.map_id, Category.comp_id,
-    Category.id_comp] at h
+    Iso.refl_hom, NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   rw [← cancel_epi (((curriedTensor (HomotopyCategory C (.up ℤ))).obj
     ((quotient C _).obj K)).map (((quotient C (.up ℤ)).commShiftIso y).hom.app L))]
   refine (Category.comp_id _).symm.trans (h.trans ?_)
@@ -59,6 +59,7 @@ lemma tensorLeft_commShiftIso_hom_app_quotient (K L : CochainComplex C ℤ) (y :
     MonoidalCategory.whiskerLeft_id, Category.id_comp]
   rfl
 
+omit [BraidedCategory C] in
 /-- On images of complexes, the commutation of `- ⊗ K` with the shifts is that of complexes. -/
 lemma tensorRight_commShiftIso_hom_app_quotient (K L : CochainComplex C ℤ) (y : ℤ) :
     (((curriedTensor (HomotopyCategory C (.up ℤ))).flip.obj ((quotient C _).obj K)).commShiftIso
@@ -70,7 +71,7 @@ lemma tensorRight_commShiftIso_hom_app_quotient (K L : CochainComplex C ℤ) (y 
     (.up ℤ) (.up ℤ) (.up ℤ) K).hom y L
   simp only [Functor.commShiftIso_comp_hom_app,
     Functor.quotientCompBifunctorMapHomotopyFlipObjIso, Iso.refl_hom, NatTrans.id_app,
-    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] at h
+    CategoryTheory.Functor.map_id, Category.id_comp] at h
   rw [← cancel_epi (((curriedTensor (HomotopyCategory C (.up ℤ))).flip.obj
     ((quotient C _).obj K)).map (((quotient C (.up ℤ)).commShiftIso y).hom.app L))]
   refine (Category.comp_id _).symm.trans (h.trans ?_)
