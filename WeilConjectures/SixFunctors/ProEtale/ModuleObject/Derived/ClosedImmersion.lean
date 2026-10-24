@@ -8,12 +8,12 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.ClosedImmersion
 
 /-!
 
-# Full faithfulness of `Ri_*` and `j_!` on derived categories of module objects
+# Full faithfulness of `Ri_*` on derived categories of module objects
 
 Let `Λ` be a commutative condensed ring, `i : Z ⟶ X` a closed immersion and `j : U ⟶ X` an open
 immersion. This file proves:
@@ -23,9 +23,6 @@ immersion. This file proves:
   (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion`)
   and on bounded constructible complexes
   (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit`);
-* the extension by zero `j_!` on bounded constructible complexes is fully faithful, i.e. the unit
-  `𝟭 ⟶ Lj^* j_!` is an isomorphism
-  (`isIso_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_unit`);
 * `Lj^* Ri_* = 0` on bounded constructible complexes when the ranges of `i` and `j` are disjoint
   (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_lowerStar_obj`), by adjunction
   from `Li^* j_! = 0`.
@@ -89,29 +86,6 @@ instance isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit
   have := h'.full
   have := h'.faithful
   exact (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ i).counit_isIso_of_R_fully_faithful
-
-/-- The extension by zero `j_!` along an open immersion is fully faithful on bounded
-constructible complexes: the unit `𝟭 ⟶ Lj^* j_!` is an isomorphism. -/
-instance isIso_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_unit
-    {U X : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    (j : U ⟶ X) [IsOpenImmersion j.left] :
-    IsIso (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit := by
-  have : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j.left).unit :=
-    (openImmersionLowerShriekUpperStarAdjunction Λ j.left).unit_isIso_of_L_fully_faithful
-  have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).unit :=
-    Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
-  have h₀ := (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).fullyFaithfulLOfIsIsoUnit
-  have h : (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
-      (boundedConstructible _).ι).FullyFaithful :=
-    ((ObjectProperty.fullyFaithfulι _).comp h₀).ofIso
-      (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j).symm
-  have h' := h.ofCompFaithful
-  have := h'.full
-  have := h'.faithful
-  exact (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ
-    j).unit_isIso_of_L_fully_faithful
 
 /-- **`Lj^* Ri_*` vanishes on bounded constructible complexes** when the ranges of the open
 immersion `j` and of `i` are disjoint: by the adjunctions `j_! ⊣ Lj^*` and `Li^* ⊣ Ri_*`, a
