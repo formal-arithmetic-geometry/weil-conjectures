@@ -388,7 +388,16 @@ lemma exchangePairing_whiskerLeft {G : 𝒱 ⥤ 𝒲} {Gs : 𝒲 ⥤ 𝒱} (aG :
 the Künneth–Verdier morphism of `(P, g N')` (the transpose of the pairing with `αY`), precomposed
 with the trace of the absolute Verdier exchange of `g` at `N'`, is `G` of the Künneth–Verdier
 morphism of `(P_Z, N')`, followed by the identification `eT`, the Verdier exchange of `G` and the
-base change of `q (g N')`; the hypothesis `hstar` is the functoriality of `α` along `G`. -/
+base change of `q (g N')`; the hypothesis `hstar` is the functoriality of `α` along `G`. Writing
+`κ_Y : P ⊗ q [g N', ω_Y] ⟶ [q g N', T]` and `κ_Z : P_Z ⊗ qZ [N', ω_Z] ⟶ [qZ N', T_Z]` for
+the Künneth–Verdier morphisms, the square
+```
+G (P_Z ⊗ qZ [N', ω_Z]) ──G κ_Z──▶ G [qZ N', T_Z] ──G [_, eT]──▶ G [qZ N', Gu T]
+        │trace                                                     │Verdier exchange of G
+        ▼                                                          ▼
+P ⊗ q [g N', ω_Y] ───────κ_Y──────▶ [q g N', T] ◀──[BC, T]── [G qZ N', T]
+```
+commutes. -/
 lemma trace_comp_curry {G : 𝒱 ⥤ 𝒲} {Gs : 𝒲 ⥤ 𝒱} [Gs.OplaxMonoidal] (aG : Gs ⊣ G) {Gu : 𝒲 ⥤ 𝒱}
     (aGu : G ⊣ Gu)
     (pfG : curriedTensorInsertFunctor₁ G ⟶

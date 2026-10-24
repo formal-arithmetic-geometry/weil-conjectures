@@ -8023,6 +8023,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.SwapEvPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
@@ -9746,6 +9747,7 @@ public import WeilConjectures.NumberTheory.Padics.ULiftAdicComplete
 public import WeilConjectures.NumberTheory.Padics.ULiftDiscreteValuationRing
 public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.PoincareDuality.OpenImmersionProjection
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
@@ -12707,7 +12709,6 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.KunnethVerdierClosed
 public import WeilConjectures.TraceFormula.KunnethVerdierDual
 public import WeilConjectures.TraceFormula.KunnethVerdierOpen
-public import WeilConjectures.TraceFormula.KunnethVerdierOpenAux
 public import WeilConjectures.TraceFormula.KunnethVerdierShift
 public import WeilConjectures.TraceFormula.KunnethVerdierTheorem
 public import WeilConjectures.TraceFormula.KunnethVerdierUnit
