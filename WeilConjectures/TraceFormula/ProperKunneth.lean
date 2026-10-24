@@ -43,7 +43,8 @@ an isomorphism as soon as
 * the projection morphism of `r` and the left projection morphism of `s` are isomorphisms: this
   is the projection formula for the proper morphisms `r` and `s`
   (`isIso_projectionMorphism_boundedConstructible_padicAlgCl`), together with the compatibility of
-  the derived pullback with the braidings for the left one.
+  the derived pullback with the Koszul braidings for the left one
+  (`boundedConstructibleUpperStar_δ_braiding`).
 
 The transported counits are compatible with the composition isomorphisms of the pullbacks
 (`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit_left`,

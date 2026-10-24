@@ -68,6 +68,7 @@ lemma δ_braiding_of_eq
 
 variable {X₁ X₂ X₃ X₄ : D} {LP LQ FP FQ W₁ W₂ T₁ T₂ : D'}
 
+omit [MonoidalCategory D] [BraidedCategory D] in
 /-- The computation identifying the braided conjugate of a tensor comparison of a derived functor
 with the comparison itself on the images of complexes `P`, `Q`; see the module docstring. -/
 lemma braidedConjugate_aux (b : X₁ ⟶ X₂) (μPQ : X₁ ⟶ X₃) (μQP : X₂ ⟶ X₄) (qβ : X₃ ⟶ X₄)
