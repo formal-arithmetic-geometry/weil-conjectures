@@ -40,7 +40,7 @@ universe u
 
 open CategoryTheory Endofunctor
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -79,8 +79,8 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
         ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app K.obj := by
   have h1 := boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K
   have h2 := Adjunction.leftDerivedFunctorSquareIso_hom_app_of_eq
-    (upperStarSquareComparison Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩) (upperStarComp Λ f'.left g.left)
-      (upperStarComp Λ g'.left f.left) (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
+    (upperStarSquareComparison Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)
+    (upperStarComp Λ f'.left g.left) (upperStarComp Λ g'.left f.left) (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
   rw [h1, h2, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
   simp only [boundedConstructibleUpperStarComp_inv_app_hom,
     boundedConstructibleUpperStarComp_hom_app_hom]
@@ -91,6 +91,28 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
   simp only [e, leftDerivedUpperStarComp, Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc]
 
+set_option maxHeartbeats 1000000 in
+-- the instances of the general lemmas are found for each of the categories of module objects
+/-- `boundedConstructiblePullbackSquareComparison_hom_app_hom` through the compatibilities of the
+restricted derived pullbacks with the inclusions. -/
+lemma map_boundedConstructiblePullbackSquareComparison_hom_app (sq : CommSq g' f' f g)
+    (K : Dᵇc(Y.left)⟦Λ⟧) :
+    L((f'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ g).inv.app K) ≫
+        (boundedConstructibleUpperStarCompatibility Λ ℓ f').inv.app
+          ((boundedConstructibleUpperStar Λ ℓ g).obj K) ≫
+        (boundedConstructible _).ι.map
+          ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K) =
+      (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
+          ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app ((boundedConstructible _).ι.obj K) ≫
+        L((g'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ f).inv.app K) ≫
+        (boundedConstructibleUpperStarCompatibility Λ ℓ g').inv.app
+          ((boundedConstructibleUpperStar Λ ℓ f).obj K) := by
+  simp only [boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+    Iso.refl_inv, NatTrans.id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.id_comp, Category.comp_id, Category.comp_id]
+  exact boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
+
 end SquareComparison
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -99,18 +121,58 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
 
-/-- The isomorphism `Lf^* ⋙ Le_X^* ≅ Le_Y^* ⋙ Lf^*` of derived pullbacks of module objects
-induced by the Frobenius square, through the derived composition isomorphisms. -/
-noncomputable abbrev weilDerivedSquareIso :=
-  Adjunction.leftDerivedFunctorSquareIso
-    (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ) (commSq_left_of_comp_eq eX eY hf))
-
-/-- The derived base-change morphism `Rf_* ⋙ Le_Y^* ⟶ Le_X^* ⋙ Rf_*` of the Frobenius square on
-the ambient derived categories of module objects. -/
-noncomputable abbrev weilDerivedBaseChange :=
-  Adjunction.exchangeRight
+set_option maxHeartbeats 1000000 in
+-- the instances of the general lemmas are found for each of the categories of module objects
+/-- **Homology of the pushforward of Weil objects along a finite morphism**: for finite `f`, the
+Weil sheaf `Hʲ(Rf_*^Weil K)` for `e_Y` is the pushforward `f_* Hʲ(K)` of the Weil sheaf `Hʲ(K)`.
+The pushforward along a finite morphism is exact, so `Rf_*` commutes with homology, and on
+homology the derived base-change morphism of the Frobenius square is the base-change morphism
+of module objects. -/
+theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
+    (K : WeilBoundedConstructible ℓ eX.hom) (j : ℤ) :
+    Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eY j).obj
+        ((weilLowerStar ℓ eX eY f hf).obj K) ≅
+      (weilSheafLowerStar ℓ eX eY hf).obj
+        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) := by
+  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have : LocallyOfFinitePresentation f.left :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance
+  have := preservesFiniteColimits_lowerStar_of_isFinite (Profinite.padicAlgClRingObj ℓ) f.left
+  have : IsIso (Adjunction.exchangeRight
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf))) :=
+    isIso_lowerStarBaseChange_of_isIso _ _
+  exact Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_obj_iso_of_restrict
+    (cX := boundedConstructibleUpperStarCompatibility _ ℓ eX.hom)
+    (cY := boundedConstructibleUpperStarCompatibility _ ℓ eY.hom)
+    (μX := (eX.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
+    (μY := (eY.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
+    (cR := boundedConstructibleLowerStarCompatibility _ ℓ f)
+    (ρ := (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.rightDerivedFunctorHomologyFunctorIso j)
+    (cF := boundedConstructibleUpperStarCompatibility _ ℓ f)
+    (θD := Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+      (Profinite.padicAlgClRingObj ℓ) (commSq_left_of_comp_eq eX eY hf)))
+    (θK := boundedConstructiblePullbackSquareComparison _ ℓ (CommSq.mk hf))
+    (B' := asIso (weilLowerStarComparison ℓ eX eY f hf))
+    (b := weilSheafLowerStarComparison ℓ eX eY hf)
+    (bc := Adjunction.exchangeRight
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf)))
     (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).derivedAdjunction
-    (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).derivedAdjunction
-    (weilDerivedSquareIso ℓ eX eY hf)
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (map_boundedConstructiblePullbackSquareComparison_hom_app _ ℓ (CommSq.mk hf))
+    (boundedConstructibleBaseChange_eq_exchangeRight _ ℓ (CommSq.mk hf))
+    ((weilSheafLowerStarComparison_hom ℓ eX eY hf).trans (lowerStarBaseChange_eq _ _))
+    (fun M ↦
+      Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction_leftDerivedFunctorSquareIso
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf)) j M)
+    _ _ _ _ K _ _ _ _ rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
