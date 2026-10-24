@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Subcategory
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!
@@ -88,5 +89,84 @@ instance commShift_tensorRightCompιIso_hom (K : P.FullSubcategory)
     NatTrans.CommShift.of_iso_inv (P.tensorRightIsoLift K) A
   dsimp only [tensorRightCompιIso, Iso.trans_hom, Functor.isoWhiskerRight_hom]
   infer_instance
+
+/-- Through the inclusion, the commutation of `K ⊗ -` on `P` with the shifts is that of
+`K ⊗ -` on `C`, conjugated by the commutation of the inclusion with the shifts. -/
+lemma ι_map_commShiftIso_tensorLeft_hom_app (K : P.FullSubcategory)
+    [((curriedTensor C).obj K.obj).CommShift A] (a : A) (X : P.FullSubcategory) :
+    P.ι.map ((((curriedTensor P.FullSubcategory).obj K).commShiftIso a).hom.app X) =
+      K.obj ◁ (P.ι.commShiftIso a).hom.app X ≫
+        (((curriedTensor C).obj K.obj).commShiftIso a).hom.app X.obj ≫
+        (P.ι.commShiftIso a).inv.app (K ⊗ X) := by
+  have h := NatTrans.shift_app_comm (P.tensorLeftCompιIso K).hom a X
+  simp only [Functor.commShiftIso_comp_hom_app, tensorLeftCompιIso, Iso.trans_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, tensorLeftIsoLift, Iso.symm_hom,
+    NatIso.ofComponents_inv_app, Iso.refl_inv, liftFullSubcategoryCompιIso, Iso.refl_hom,
+    Category.comp_id] at h
+  rw [← cancel_mono ((P.ι.commShiftIso a).hom.app (K ⊗ X)), Category.assoc, Category.assoc,
+    Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.comp_id,
+    Category.id_comp] at h
+  exact h
+
+/-- Through the inclusion, the commutation of `- ⊗ K` on `P` with the shifts is that of
+`- ⊗ K` on `C`, conjugated by the commutation of the inclusion with the shifts. -/
+lemma ι_map_commShiftIso_tensorRight_hom_app (K : P.FullSubcategory)
+    [((curriedTensor C).flip.obj K.obj).CommShift A] (a : A) (X : P.FullSubcategory) :
+    P.ι.map ((((curriedTensor P.FullSubcategory).flip.obj K).commShiftIso a).hom.app X) =
+      (P.ι.commShiftIso a).hom.app X ▷ K.obj ≫
+        (((curriedTensor C).flip.obj K.obj).commShiftIso a).hom.app X.obj ≫
+        (P.ι.commShiftIso a).inv.app (X ⊗ K) := by
+  have h := NatTrans.shift_app_comm (P.tensorRightCompιIso K).hom a X
+  simp only [Functor.commShiftIso_comp_hom_app, tensorRightCompιIso, Iso.trans_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, tensorRightIsoLift, Iso.symm_hom,
+    NatIso.ofComponents_inv_app, Iso.refl_inv, liftFullSubcategoryCompιIso, Iso.refl_hom,
+    Category.comp_id] at h
+  rw [← cancel_mono ((P.ι.commShiftIso a).hom.app (X ⊗ K)), Category.assoc, Category.assoc,
+    Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.comp_id,
+    Category.id_comp] at h
+  exact h
+
+/-- The computation behind `braiding_hom_commShiftIso_hom_app_of_ι`, for abstract morphisms. -/
+private lemma braiding_commShift_aux {D : Type*} [Category D] [MonoidalCategory D]
+    [BraidedCategory D] (S : D ⥤ D) {X Y Y' W W' : D} (q : Y' ⟶ S.obj Y)
+    (cL : X ⊗ S.obj Y ⟶ S.obj (X ⊗ Y)) (cR : S.obj Y ⊗ X ⟶ S.obj (Y ⊗ X))
+    (r₁ : S.obj (X ⊗ Y) ⟶ W) (r₁' : W ⟶ S.obj (X ⊗ Y)) (r₂ : S.obj (Y ⊗ X) ⟶ W')
+    (h : (β_ X (S.obj Y)).hom ≫ cR = cL ≫ S.map (β_ X Y).hom) (hr : r₁ ≫ r₁' = 𝟙 _) :
+    (β_ X Y').hom ≫ (q ▷ X ≫ cR ≫ r₂) = (X ◁ q ≫ cL ≫ r₁) ≫ (r₁' ≫ S.map (β_ X Y).hom ≫ r₂) := by
+  rw [← BraidedCategory.braiding_naturality_right_assoc, reassoc_of% h]
+  simp only [Category.assoc, reassoc_of% hr]
+
+variable [BraidedCategory C] [∀ X : C, ((curriedTensor C).obj X).CommShift A]
+  [∀ X : C, ((curriedTensor C).flip.obj X).CommShift A]
+
+attribute [local instance] fullBraidedSubcategory
+
+/-- If the braiding of `C` is compatible with the commutations of the tensor product with the
+shifts, so is the braiding of the full braided subcategory `P`. -/
+lemma braiding_hom_commShiftIso_hom_app_of_ι (a : A)
+    (h : ∀ X Y : C, (β_ X (Y⟦a⟧)).hom ≫ (((curriedTensor C).flip.obj X).commShiftIso a).hom.app Y =
+      (((curriedTensor C).obj X).commShiftIso a).hom.app Y ≫ ((β_ X Y).hom)⟦a⟧')
+    (X Y : P.FullSubcategory) :
+    (β_ X (Y⟦a⟧)).hom ≫
+        (((curriedTensor P.FullSubcategory).flip.obj X).commShiftIso a).hom.app Y =
+      (((curriedTensor P.FullSubcategory).obj X).commShiftIso a).hom.app Y ≫
+        ((β_ X Y).hom)⟦a⟧' := by
+  apply P.fullyFaithfulι.map_injective
+  rw [Functor.map_comp, Functor.map_comp, ι_map_commShiftIso_tensorRight_hom_app,
+    ι_map_commShiftIso_tensorLeft_hom_app]
+  have hN : P.ι.map ((shiftFunctor P.FullSubcategory a).map (β_ X Y).hom) =
+      (P.ι.commShiftIso a).hom.app (X ⊗ Y) ≫ (shiftFunctor C a).map (β_ X.obj Y.obj).hom ≫
+        (P.ι.commShiftIso a).inv.app (Y ⊗ X) := by
+    rw [← cancel_mono ((P.ι.commShiftIso a).hom.app (Y ⊗ X)), Category.assoc, Category.assoc,
+      Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    exact P.ι.commShiftIso_hom_naturality (β_ X Y).hom a
+  rw [hN]
+  exact braiding_commShift_aux (shiftFunctor C a) _ _ _ _ _ _ (h X.obj Y.obj)
+    ((P.ι.commShiftIso a).inv_hom_id_app (X ⊗ Y))
 
 end CategoryTheory.ObjectProperty
