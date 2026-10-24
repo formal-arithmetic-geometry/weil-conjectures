@@ -90,6 +90,17 @@ lemma boundedConstructibleUpperStarLowerStarAdjunction_projectionMorphism_hom (g
   ObjectProperty.projectionMorphism_restrictFullyFaithful_hom _ _
     (derivedUpperStarLowerStarAdjunction Λ g.left) _ A B
 
+
+/-- The projection comparison of the bounded constructible adjunction `i_! ⊣ Li^*` along an open
+immersion is the derived projection comparison. -/
+lemma boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_projectionComparison_hom
+    (j : P ⟶ Q) [IsOpenImmersion j.left] (M : Dᵇc(P.left)⟦Λ⟧) (N : Dᵇc(Q.left)⟦Λ⟧) :
+    ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).projectionComparison
+        M N).hom =
+      openImmersionProjectionComparison Λ j.left M.obj N.obj :=
+  ObjectProperty.projectionComparison_restrictFullyFaithful_hom _ _
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j.left) _ M N
+
 end Bridge
 
 end AlgebraicGeometry.ProEtale.CondensedRing

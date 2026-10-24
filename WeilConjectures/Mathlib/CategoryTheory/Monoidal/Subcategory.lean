@@ -52,4 +52,9 @@ lemma δ_monoidalLift_hom (X Y : P.FullSubcategory) :
       Functor.OplaxMonoidal.δ F X.obj Y.obj :=
   rfl
 
+/-- The multiplication of the restriction of a strong monoidal functor is that of the functor. -/
+lemma μ_monoidalLift_hom (X Y : P.FullSubcategory) :
+    (Functor.LaxMonoidal.μ (Q.lift (P.ι ⋙ F) hF) X Y).hom = Functor.LaxMonoidal.μ F X.obj Y.obj :=
+  rfl
+
 end CategoryTheory.ObjectProperty

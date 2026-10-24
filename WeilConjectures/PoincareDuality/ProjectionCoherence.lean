@@ -297,4 +297,31 @@ lemma projectionMorphism_restrictFullyFaithful_hom (A : Q.FullSubcategory)
     Adjunction.projectionMorphism, Adjunction.homEquiv_unit]
   simp [liftCompιIso, δ_monoidalLift_hom, hε]
 
+section Comparison
+
+variable {G : D ⥤ C} (b : G ⊣ F) (hG : ∀ Y : Q.FullSubcategory, P (G.obj Y.obj))
+
+/-- The projection comparison of the restriction of an adjunction `G ⊣ F` with `F` strong monoidal
+to full monoidal subcategories is the projection comparison of `G ⊣ F`. -/
+lemma projectionComparison_restrictFullyFaithful_hom (M : Q.FullSubcategory)
+    (N : P.FullSubcategory) :
+    ((b.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι
+        (P.liftCompιIso (Q.ι ⋙ G) hG).symm (Q.liftCompιIso (P.ι ⋙ F) hF).symm).projectionComparison
+          M N).hom =
+      b.projectionComparison M.obj N.obj := by
+  have hη := Adjunction.map_restrictFullyFaithful_unit_app b Q.fullyFaithfulι
+    P.fullyFaithfulι (P.liftCompιIso (Q.ι ⋙ G) hG).symm (Q.liftCompιIso (P.ι ⋙ F) hF).symm M
+  simp only [liftCompιIso, Iso.refl_symm, Iso.refl_hom, NatTrans.id_app, ι_map] at hη
+  have hε := Adjunction.map_restrictFullyFaithful_counit_app b Q.fullyFaithfulι
+    P.fullyFaithfulι (P.liftCompιIso (Q.ι ⋙ G) hG).symm (Q.liftCompιIso (P.ι ⋙ F) hF).symm
+    ((P.lift (Q.ι ⋙ G) hG).obj M ⊗ N)
+  simp only [liftCompιIso, Iso.refl_symm, Iso.refl_inv, NatTrans.id_app, Category.id_comp, ι_map]
+    at hε
+  rw [Adjunction.projectionComparison, Adjunction.projectionComparison, Adjunction.homEquiv_counit,
+    Adjunction.homEquiv_counit]
+  simp only [liftCompιIso, Iso.refl_symm] at hη hε ⊢
+  simp [hη, hε, μ_monoidalLift_hom]
+
+end Comparison
+
 end CategoryTheory.ObjectProperty
