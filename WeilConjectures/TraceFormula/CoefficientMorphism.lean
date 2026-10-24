@@ -87,7 +87,7 @@ theorem traceFormulaHolds_of_card_eq [IsAlgClosed k] {k₀ : Type u} [Field k₀
   induction n with
   | zero =>
     intro X _ _ _ X₀ f₀ _ p Φ hΦ _ s hs _ hcov
-    have := hΦ.isProper_of_card_eq_zero hs hcov
+    have := isProper_hom_of_card_eq_zero p hs hcov
     exact traceFormulaHolds_of_isProper hΦ
   | succ n ih =>
     intro X _ _ _ X₀ f₀ _ p Φ hΦ _ s hs hsa hcov

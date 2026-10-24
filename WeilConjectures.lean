@@ -12651,6 +12651,8 @@ public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
 public import WeilConjectures.TraceFormula.CoefficientMorphism
 public import WeilConjectures.TraceFormula.CoefficientMorphismAdditivity
 public import WeilConjectures.TraceFormula.CoefficientMorphismBasic
+public import WeilConjectures.TraceFormula.CoefficientMorphismFixedPoints
+public import WeilConjectures.TraceFormula.CoefficientMorphismPieces
 public import WeilConjectures.TraceFormula.CoefficientMorphismProper
 public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.CompactCohomology
