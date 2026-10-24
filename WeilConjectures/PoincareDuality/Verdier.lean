@@ -133,7 +133,7 @@ variable (X : Over (Spec (.of k)))
 
 /-- The **dualizing complex** `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k`-scheme of finite type `X`, for
 its structure morphism `a_X : X ⟶ Spec k`, the morphism `Over.mkIdTerminal.from X` to the
-terminal object `Over.mk (𝟙 (Spec k))` of `Over (Spec k)` (`ℚ̄_ℓ`-coefficient). -/
+terminal object `Over.mk (𝟙 (Spec k))` of `Over (Spec k)`. -/
 noncomputable def dualizingComplex : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleUpperShriek ℓ (Over.mkIdTerminal.from X)).obj (𝟙_ _)
 

@@ -369,7 +369,7 @@ variable {X Z X' Z' : Over (Spec (.of k))}
   [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p'.left]
 
 /-- For bounded constructible `E`-sheaves, the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of
-a cartesian square with `p'` proper is an isomorphism (`E`-coefficient): over the open `X ⊆ Z` it is
+a cartesian square with `p'` proper is an isomorphism: over the open `X ⊆ Z` it is
 the identification `Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed complement `Z ∖ X` the stalks
 of `Rp'_*(i'_! K)` are, by proper base change, the cohomology of the fibres of `p'` over `Z ∖ X`,
 which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`, hence vanish. -/
@@ -380,8 +380,7 @@ theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
   sorry
 
 /-- For bounded constructible `ℚ̄_ℓ`-sheaves, the exchange morphism
-`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism
-(`ℚ̄_ℓ`-coefficient). -/
+`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl
     (sq : IsPullback p i' j p') :
     IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq) :=
@@ -398,7 +397,7 @@ variable {X Y S : Over (Spec (.of k))}
   (f : X ⟶ Y) (g : Y ⟶ S)
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the derived lower shriek on
-bounded constructible `E`-sheaves (`E`-coefficient): for the chosen compactifications `c = (X ⟶[i] Z
+bounded constructible `E`-sheaves: for the chosen compactifications `c = (X ⟶[i] Z
 ⟶[p] Y)` of `f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W ⟶[p']
 Z')` of `p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the
 composite of the independence of the compactification
@@ -441,7 +440,7 @@ noncomputable def boundedConstructibleLowerShriekComp :
     (Functor.associator _ _ _).symm
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the derived lower shriek on
-bounded constructible `ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): for the chosen compactifications `c = (X
+bounded constructible `ℚ̄_ℓ`-sheaves: for the chosen compactifications `c = (X
 ⟶[i] Z ⟶[p] Y)` of `f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W
 ⟶[p'] Z')` of `p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the
 composite of the independence of the compactification
@@ -483,7 +482,7 @@ noncomputable def boundedConstructibleLowerShriekComp_padicAlgCl :
     (Functor.associator _ _ _).symm
 
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` for the exceptional inverse image on
-bounded constructible `E`-sheaves (`E`-coefficient): the conjugate of
+bounded constructible `E`-sheaves: the conjugate of
 `boundedConstructibleLowerShriekComp` under the adjunctions `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and `Rf_! ⋙
 Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekComp :
@@ -496,7 +495,7 @@ noncomputable def boundedConstructibleUpperShriekComp :
     (boundedConstructibleLowerShriekComp ℓ E f g).symm
 
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` for the exceptional inverse image on
-bounded constructible `ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): the conjugate of
+bounded constructible `ℚ̄_ℓ`-sheaves: the conjugate of
 `boundedConstructibleLowerShriekComp_padicAlgCl` under the adjunctions
 `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekComp_padicAlgCl :

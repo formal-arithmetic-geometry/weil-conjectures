@@ -103,7 +103,7 @@ by `sorry` does not use it, so as a section variable it would be silently droppe
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible `ℚ̄_ℓ`-sheaves is a left adjoint;
 its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII, 3.1.4;
-Bhatt–Scholze, Section 6.8) (`ℚ̄_ℓ`-coefficient). -/
+Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper g.left] :
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
   sorry
@@ -111,7 +111,7 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper
 /-- For a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
 derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
 adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII, 3.1.4;
-Bhatt–Scholze, Section 6.8) (`E`-coefficient). -/
+Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [IsProper g.left] :
@@ -121,7 +121,7 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
 /-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII,
-3.1.4; Bhatt–Scholze, Section 6.8) (`𝒪_E`-coefficient). -/
+3.1.4; Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
@@ -144,7 +144,7 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` attached to a
 compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes (`ℚ̄_ℓ`-coefficient): a chosen
+`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes: a chosen
 right adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, followed by the
 pullback `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
@@ -196,11 +196,11 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` attached to a
 compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes (`E`-coefficient): a chosen right
+`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes: a chosen right
 adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, followed by the pullback
 `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
-    PadicSubfieldConstructible Y.left ℓ E ⥤ PadicSubfieldConstructible X.left ℓ E :=
+    Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
   (boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
     boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI
 
@@ -252,7 +252,7 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` attached to a
 compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes (`𝒪_E`-coefficient): a chosen
+`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes: a chosen
 right adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, followed by the
 pullback `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
@@ -302,7 +302,7 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded constructible
-complexes (`ℚ̄_ℓ`-coefficient): the functor `boundedConstructibleUpperShriekOfCompactification`
+complexes: the functor `boundedConstructibleUpperShriekOfCompactification`
 attached to the chosen compactification `compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriek :
     Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
@@ -345,10 +345,10 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded constructible
-complexes (`E`-coefficient): the functor `boundedConstructibleUpperShriekOfCompactification`
+complexes: the functor `boundedConstructibleUpperShriekOfCompactification`
 attached to the chosen compactification `compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriek :
-    PadicSubfieldConstructible Y.left ℓ E ⥤ PadicSubfieldConstructible X.left ℓ E :=
+    Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
   boundedConstructibleUpperShriekOfCompactification ℓ E (compactificationOverField f)
 
 /-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes (`E`-coefficient): the
@@ -391,7 +391,7 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded constructible
-complexes (`𝒪_E`-coefficient): the functor `boundedConstructibleUpperShriekOfCompactification`
+complexes: the functor `boundedConstructibleUpperShriekOfCompactification`
 attached to the chosen compactification `compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriek :
     Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ

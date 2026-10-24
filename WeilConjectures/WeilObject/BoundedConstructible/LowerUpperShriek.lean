@@ -148,7 +148,7 @@ lemma weilLowerShriek_obj_str (K : WeilBoundedConstructible ℓ eX) :
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The lower shriek of Weil objects lifts the lower shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the forgetful
-functors (`ℚ̄_ℓ`-coefficient). -/
+functors. -/
 lemma weilLowerShriek_comp_forget :
     weilLowerShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eY =
       WeilBoundedConstructible.forget ℓ eX ⋙
@@ -205,7 +205,7 @@ lemma weilUpperShriek_obj_str (K : WeilBoundedConstructible ℓ eY) :
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The upper shriek of Weil objects lifts the upper shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the
-forgetful functors (`ℚ̄_ℓ`-coefficient). -/
+forgetful functors. -/
 lemma weilUpperShriek_comp_forget :
     weilUpperShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eX =
       WeilBoundedConstructible.forget ℓ eY ⋙

@@ -83,7 +83,7 @@ set_option synthInstance.maxHeartbeats 80000 in
 -- The instance search through the pasting is slower for `E̲` than for `ℚ̲̄_ℓ`.
 include ℓ k in
 /-- **The base change theorem for the compactly supported direct image attached to a
-compactification** of bounded constructible `E`-sheaves (`E`-coefficient): for a compactification
+compactification** of bounded constructible `E`-sheaves: for a compactification
 `c` of `f`, the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange
 sq}` is an isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`: in the defining pasting, the
 direct-image exchange is an isomorphism by proper base change for the proper structure morphism `p`
@@ -98,7 +98,7 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
   infer_instance
 
 /-- **The base change theorem for the compactly supported direct image attached to a
-compactification** of bounded constructible `ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): for a
+compactification** of bounded constructible `ℚ̄_ℓ`-sheaves: for a
 compactification `c` of `f`, the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙
 Rf'_!^{c.baseChange sq}` is an isomorphism of functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl

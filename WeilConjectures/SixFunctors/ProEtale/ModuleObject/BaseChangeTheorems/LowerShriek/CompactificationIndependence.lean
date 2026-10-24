@@ -339,7 +339,7 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   [IsProper h.left]
 
 /-- For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism (`E`-coefficient): over `X ⊆ Z₁` both sides
+cartesian square `sq` with `h` proper is an isomorphism: over `X ⊆ Z₁` both sides
 restrict to the identity, and over the closed complement `Z₁ ∖ X` the stalks of `Rh_*(i_! K)` are,
 by proper base change, the cohomology of the fibres of `h` over `Z₁ ∖ X`, which do not meet `X ⊆ Z`,
 with coefficients in `i_! K`, hence vanish. -/
@@ -350,7 +350,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
   sorry
 
 /-- For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism (`ℚ̄_ℓ`-coefficient). -/
+cartesian square `sq` with `h` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq) :=
@@ -366,7 +366,7 @@ variable {X Y : Over (Spec (.of k))}
   {f : X ⟶ Y}
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
-`E`-sheaves (`E`-coefficient): for two compactifications `c₁` and `c₂` of `f`, the isomorphism
+`E`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` between `i₁_! ⋙ Rp₁_*` and `i₂_! ⋙ Rp₂_*` on `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧`:
 for a common refinement `c` of `c₁` and `c₂` (`Compactification.exists_overRefinement`), the
 composite `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}` of the isomorphisms
@@ -389,7 +389,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
       r₂.hom_overG).symm
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
-`ℚ̄_ℓ`-sheaves (`ℚ̄_ℓ`-coefficient): for two compactifications `c₁` and `c₂` of `f`, the isomorphism
+`ℚ̄_ℓ`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`: for a common refinement `c` of `c₁`
 and `c₂` (`Compactification.exists_overRefinement`), the composite
 `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}` of the isomorphisms `boundedConstructibleLowerShriekRefinementIso`

@@ -82,7 +82,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 
-/-- Base change along isomorphisms (`ℚ̄_ℓ`-coefficient): for a commutative square `g' ≫ f = f' ≫ g`
+/-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g`
 of schemes whose horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible `ℚ̄_ℓ`-sheaves is an isomorphism.
 No properness of `f` is needed. See the module docstring for the argument. -/
@@ -184,7 +184,7 @@ lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX) :
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
-the forgetful functors (`ℚ̄_ℓ`-coefficient). -/
+the forgetful functors. -/
 lemma weilLowerStar_comp_forget :
     weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY =
       WeilBoundedConstructible.forget ℓ eX ⋙

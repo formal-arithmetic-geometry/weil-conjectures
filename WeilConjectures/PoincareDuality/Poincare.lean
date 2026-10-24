@@ -90,7 +90,7 @@ noncomputable def boundedConstructibleTateTwist (d n : ℤ) :
     boundedConstructible_tateTwistDerived ℓ X d n⟩
 
 /-- The chosen purity isomorphism `pur_p : Rp^! ℚ̄_ℓ,S ≅ ℚ̄_ℓ,X(d)[2d]` of
-`ProEtale.CondensedRing.smoothPurityIso`, as an isomorphism in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`ℚ̄_ℓ`-coefficient):
+`ProEtale.CondensedRing.smoothPurityIso`, as an isomorphism in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`:
 its preimage under the fully faithful inclusion `Dᵇc ⥤ D`. No new choice is made: this is the same
 isomorphism, and it is the only normalization entering the trace and Poincaré duality below. -/
 noncomputable def boundedConstructibleSmoothPurityIso :
@@ -99,7 +99,7 @@ noncomputable def boundedConstructibleSmoothPurityIso :
   (ObjectProperty.fullyFaithfulι _).preimageIso (smoothPurityIso ℓ p d)
 
 /-- The **trace** `Tr_p : Rp_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of a smooth morphism `p : X ⟶ S` of pure
-relative dimension `d` (`ℚ̄_ℓ`-coefficient): `Rp_!(pur_p⁻¹)` followed by the counit of `Rp_! ⊣
+relative dimension `d`: `Rp_!(pur_p⁻¹)` followed by the counit of `Rp_! ⊣
 Rp^!`. -/
 noncomputable def trace :
     (boundedConstructibleLowerShriek ℓ p).obj
@@ -108,7 +108,7 @@ noncomputable def trace :
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
 /-- The **Poincaré duality morphism**
-`PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` (`ℚ̄_ℓ`-coefficient): `Rp_*(pur_p⁻¹)`, the
+`PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)`: `Rp_*(pur_p⁻¹)`, the
 identification `Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)`, and the Verdier exchange morphism. -/
 noncomputable def poincareMap :
     (boundedConstructibleLowerStar ℓ p).obj
@@ -121,7 +121,7 @@ noncomputable def poincareMap :
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
 /-- The **compact-support cup product**
-`cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]` (`ℚ̄_ℓ`-coefficient): the derived
+`cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]`: the derived
 exceptional projection morphism `PF^!`, the counit `Lp^* Rp_* ⟶ 𝟭` and the left unitor. -/
 noncomputable def cupProduct :
     (boundedConstructibleLowerShriek ℓ p).obj (𝟙_ _) ⊗

@@ -347,8 +347,8 @@ variable {X Y : Over (Spec (.of k))}
 compactification `compactificationOverField f` defining `boundedConstructibleLowerShriek`, the
 inclusions `Dᵇc ⥤ D` being fully faithful and monoidal. -/
 noncomputable def boundedConstructibleExceptionalProjectionMorphism
-    (K : PadicSubfieldConstructible X.left ℓ E)
-    (B : PadicSubfieldConstructible Y.left ℓ E) :
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
+    (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleLowerShriek ℓ E f).obj K ⊗ B ⟶
       (boundedConstructibleLowerShriek ℓ E f).obj
         (K ⊗ (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ f).obj B) :=
@@ -363,8 +363,8 @@ the direct term proof times out on unfolding the restricted functors, so it is `
 now. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_right
-    (K : PadicSubfieldConstructible X.left ℓ E)
-    {B B' : PadicSubfieldConstructible Y.left ℓ E} (h : B ⟶ B') :
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
+    {B B' : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧} (h : B ⟶ B') :
     (boundedConstructibleLowerShriek ℓ E f).obj K ◁ h ≫
         boundedConstructibleExceptionalProjectionMorphism ℓ E f K B' =
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B ≫
@@ -378,8 +378,8 @@ first variable (`E`-coefficient). Like
 the three constituent maps; it is `sorry`ed for now. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left
-    {K K' : PadicSubfieldConstructible X.left ℓ E}
-    (φ : K ⟶ K') (B : PadicSubfieldConstructible Y.left ℓ E) :
+    {K K' : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧}
+    (φ : K ⟶ K') (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleLowerShriek ℓ E f).map φ ▷ B ≫
         boundedConstructibleExceptionalProjectionMorphism ℓ E f K' B =
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B ≫
@@ -409,8 +409,8 @@ noncomputable def boundedConstructibleExceptionalProjection :
 /-- The components of `boundedConstructibleExceptionalProjection` (`E`-coefficient). -/
 @[simp]
 lemma boundedConstructibleExceptionalProjection_app_app
-    (K : PadicSubfieldConstructible X.left ℓ E)
-    (B : PadicSubfieldConstructible Y.left ℓ E) :
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
+    (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
     ((boundedConstructibleExceptionalProjection ℓ E f).app K).app B =
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
@@ -419,15 +419,15 @@ lemma boundedConstructibleExceptionalProjection_app_app
 morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
-    (K : PadicSubfieldConstructible X.left ℓ E)
-    (B : PadicSubfieldConstructible Y.left ℓ E) :
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
+    (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
     IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) :=
   sorry
 
 /-- The components of the exceptional projection are isomorphisms (`E`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app
-    (K : PadicSubfieldConstructible X.left ℓ E)
-    (B : PadicSubfieldConstructible Y.left ℓ E) :
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
+    (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
     IsIso (((boundedConstructibleExceptionalProjection ℓ E f).app K).app B) :=
   isIso_boundedConstructibleExceptionalProjectionMorphism ℓ E f K B
 

@@ -119,7 +119,7 @@ noncomputable abbrev padicIntegersToPadicSubfield :
 /-! ### Extension of scalars on bounded constructible complexes -/
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` preserves
-bounded constructible complexes (`𝒪_E`-to-`E`-coefficient). -/
+bounded constructible complexes. -/
 lemma boundedConstructible_derivedExtendScalars_obj
     (K : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
@@ -127,11 +127,11 @@ lemma boundedConstructible_derivedExtendScalars_obj
   sorry
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, E)`
-on bounded constructible complexes (`𝒪_E`-to-`E`-coefficient): the restriction of
+on bounded constructible complexes: the restriction of
 `L(extendScalars (padicIntegersToPadicSubfield X ℓ E))`. -/
 noncomputable def boundedConstructibleExtendScalars :
     Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧ ⥤
-      PadicSubfieldConstructible X ℓ E :=
+      Dᵇc(X)⟦Profinite.continuousMapRingObj E.1⟧ :=
   (boundedConstructible _).lift
     ((boundedConstructible _).ι ⋙
       (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor)
@@ -165,7 +165,7 @@ category `D_cons(X_proét, 𝒪_E)` at the powers of `ℓ`. -/
 noncomputable def rationalizationEquivalence :
     Rationalization (Submonoid.powers (ℓ : ℤ))
         (Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ≌
-      PadicSubfieldConstructible X ℓ E :=
+      Dᵇc(X)⟦Profinite.continuousMapRingObj E.1⟧ :=
   Localization.uniq (Rationalization.Q _ _) (boundedConstructibleExtendScalars X ℓ E)
     (Rationalization.W (Submonoid.powers (ℓ : ℤ)) _)
 

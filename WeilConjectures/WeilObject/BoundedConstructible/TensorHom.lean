@@ -78,7 +78,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 section Tensor
 
 /-- The comparison `m_{K,L} : Le^* (K ⊗ᴸ L) ≅ Le^* K ⊗ᴸ Le^* L` on bounded constructible
-`ℚ̄_ℓ`-sheaves, as an isomorphism of functors `Dᵇc × Dᵇc ⥤ Dᵇc` (`ℚ̄_ℓ`-coefficient): the
+`ℚ̄_ℓ`-sheaves, as an isomorphism of functors `Dᵇc × Dᵇc ⥤ Dᵇc`: the
 restriction along the fully faithful inclusion of `leftDerivedUpperStarTensorIso`, through the
 compatibility isomorphisms of the restricted pullback (`boundedConstructibleUpperStarCompatibility`)
 and tensor product with the inclusions. -/
@@ -130,21 +130,21 @@ noncomputable abbrev weilFrobenius :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom
 
-/-- The derived hom `RHom(-, -)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`ℚ̄_ℓ`-coefficient). -/
+/-- The derived hom `RHom(-, -)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable abbrev weilRHom :
     (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
       Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   boundedConstructibleHom ℓ X
 
-/-- The evaluation `K ⊗ᴸ RHom(K, L) ⟶ L` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`ℚ̄_ℓ`-coefficient): the counit of the
+/-- The evaluation `K ⊗ᴸ RHom(K, L) ⟶ L` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the counit of the
 adjunction `K ⊗ᴸ - ⊣ RHom(K, -)`. -/
 noncomputable def weilEv (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleTensor ℓ X).obj K).obj
         (((weilRHom ℓ (X := X)).obj (Opposite.op K)).obj L) ⟶ L :=
   (boundedConstructibleTensorHomAdjunction ℓ K).counit.app L
 
-/-- The comparison `h_{K,L} : Φ RHom(K, L) ⟶ RHom(Φ K, Φ L)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`
-(`ℚ̄_ℓ`-coefficient): the adjoint, for `Φ K ⊗ᴸ - ⊣ RHom(Φ K, -)`, of the composite
+/-- The comparison `h_{K,L} : Φ RHom(K, L) ⟶ RHom(Φ K, Φ L)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`:
+the adjoint, for `Φ K ⊗ᴸ - ⊣ RHom(Φ K, -)`, of the composite
 ```
 Φ K ⊗ᴸ Φ RHom(K, L) --m⁻¹--> Φ (K ⊗ᴸ RHom(K, L)) --Φ ev--> Φ L.
 ```

@@ -150,6 +150,8 @@ end ExtendScalars
 
 section Constructible
 
+open scoped CondensedRing
+
 /-- The bounded constructible derived category `C_E(X) = D^b_cons(X, E)` of `E_X`-modules, for
 a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
 noncomputable abbrev PadicSubfieldConstructible (E : FiniteIntermediateField ℓ) : Type _ :=
@@ -160,24 +162,24 @@ noncomputable abbrev PadicSubfieldConstructible (E : FiniteIntermediateField ℓ
 noncomputable abbrev PadicAlgClConstructible : Type _ :=
   BoundedConstructible (padicAlgClRingObj X ℓ)
 
-/-- Extension of scalars along `E_X ⟶ F_X` preserves bounded constructible complexes
-(`E`-to-`F`-coefficient). See the module docstring. -/
+/-- Extension of scalars along `E_X ⟶ F_X` preserves bounded constructible complexes.
+See the module docstring. -/
 lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteIntermediateField ℓ}
-    (h : E ≤ F) (K : PadicSubfieldConstructible X ℓ E) :
+    (h : E ≤ F) (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicSubfieldRingObj X ℓ F)
       ((derivedExtendScalarsSubfield X ℓ h).obj K.obj) :=
   sorry
 
-/-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes
-(`E`-to-`ℚ̄_ℓ`-coefficient). See the module docstring. -/
+/-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes.
+See the module docstring. -/
 lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteIntermediateField ℓ)
-    (K : PadicSubfieldConstructible X ℓ E) :
+    (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicAlgClRingObj X ℓ)
       ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K.obj) :=
   sorry
 
 /-- The extension of scalars `T^X_{E,F} : C_E(X) ⥤ C_F(X)` on bounded constructible complexes,
-for finite subextensions `E ≤ F` (`E`-to-`F`-coefficient). -/
+for finite subextensions `E ≤ F`. -/
 noncomputable def constructibleExtendScalars {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     PadicSubfieldConstructible X ℓ E ⥤ PadicSubfieldConstructible X ℓ F :=
   (boundedConstructible (padicSubfieldRingObj X ℓ F)).lift
@@ -185,7 +187,7 @@ noncomputable def constructibleExtendScalars {E F : FiniteIntermediateField ℓ}
     (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K)
 
 /-- The extension of scalars `T^X_{E,Ω} : C_E(X) ⥤ C_Ω(X)` on bounded constructible complexes,
-for a finite subextension `E` (`E`-to-`ℚ̄_ℓ`-coefficient): the functors of the cocone whose vertex
+for a finite subextension `E`: the functors of the cocone whose vertex
 is the bounded constructible `ℚ̄_ℓ`-complexes. -/
 noncomputable def constructibleToPadicAlgCl (E : FiniteIntermediateField ℓ) :
     PadicSubfieldConstructible X ℓ E ⥤ PadicAlgClConstructible X ℓ :=

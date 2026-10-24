@@ -411,8 +411,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
 constructible `E`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
-shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`
-(`E`-coefficient): the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
+shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`:
+the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
 into `Rf'_!^{c_f.baseChange sq}`, followed by its identification
 `boundedConstructibleLowerShriekOfCompactificationIso` with `Rf'_! = Rf'_!^{c_{f'}}`. -/
 @[no_expose]
@@ -438,8 +438,8 @@ lemma boundedConstructibleLowerShriekBaseChange_eq (sq : IsPullback g' f' f g) :
 
 /-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
 constructible `ℚ̄_ℓ`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
-shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`
-(`ℚ̄_ℓ`-coefficient): the morphism
+shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`:
+the morphism
 `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into `Rf'_!^{c_f.baseChange
 sq}`, followed by its identification
 `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` with `Rf'_! = Rf'_!^{c_{f'}}`. -/
