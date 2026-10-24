@@ -270,6 +270,124 @@ lemma projectionComparison_comp_refinement {Gh : C₁ ⥤ C₂} (ah : Fh ⊣ Gh)
 
 end Refinement
 
+section NaturalLeft
+
+variable {D₁ D₂ : Type*} [Category D₁] [Category D₂] [MonoidalCategory D₁] [MonoidalCategory D₂]
+  {F : D₂ ⥤ D₁} {G : D₁ ⥤ D₂} [F.OplaxMonoidal] (adj : F ⊣ G)
+
+/-- The projection morphism is natural in its first variable. -/
+@[reassoc]
+lemma projectionMorphism_natural_left {A A' : D₁} (a : A ⟶ A') (B : D₂) :
+    G.map a ▷ B ≫ adj.projectionMorphism A' B =
+      adj.projectionMorphism A B ≫ G.map (a ▷ F.obj B) := by
+  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
+    ← homEquiv_naturality_right]
+  congr 1
+  rw [← δ_natural_left_assoc, Category.assoc, ← comp_whiskerRight]
+  erw [adj.counit_naturality]
+  rw [comp_whiskerRight]
+
+end NaturalLeft
+
+section Independence
+
+variable {C₀ C₁ C₂ C₃ : Type*} [Category C₀] [Category C₁] [Category C₂] [Category C₃]
+  [MonoidalCategory C₀] [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory C₃]
+  {Pi : C₀ ⥤ C₁} {Si : C₁ ⥤ C₀} {Pi₁ : C₀ ⥤ C₂} {Si₁ : C₂ ⥤ C₀} {Fh : C₂ ⥤ C₁}
+  {Gh : C₁ ⥤ C₂} {Fp : C₃ ⥤ C₁} {Gp : C₁ ⥤ C₃} {Fp₁ : C₃ ⥤ C₂} {Gp₁ : C₂ ⥤ C₃} {Ff : C₃ ⥤ C₀}
+  [Si.LaxMonoidal] [Si₁.LaxMonoidal] [Fh.Monoidal] [Fp.Monoidal] [Fp₁.Monoidal]
+  (bi : Pi ⊣ Si) (bi₁ : Pi₁ ⊣ Si₁) (ah : Fh ⊣ Gh) (ap : Fp ⊣ Gp) (ap₁ : Fp₁ ⊣ Gp₁)
+
+/-- The *exceptional projection morphism* `PF_{f, (i, p)} : p_* i_! K ⊗ B ⟶ p_* i_! (K ⊗ f^* B)`
+of a compactification `f = i ≫ p` (`i_! ⊣ i^*` open, `p^* ⊣ p_*` proper, `cf : f^* ≅ p^* ⋙ i^*`):
+the projection morphism of `p` at `i_! K` followed by `p_*` of the inverse of the projection
+comparison of `i`. -/
+noncomputable def exceptionalProjection (cf : Ff ≅ Fp ⋙ Si)
+    [∀ K N, IsIso (bi.projectionComparison K N)] (K : C₀) (B : C₃) :
+    Gp.obj (Pi.obj K) ⊗ B ⟶ Gp.obj (Pi.obj (K ⊗ Ff.obj B)) :=
+  ap.projectionMorphism (Pi.obj K) B ≫
+    Gp.map (inv (bi.projectionComparison K (Fp.obj B)) ≫ Pi.map (K ◁ cf.inv.app B))
+
+variable {bi bi₁} in
+omit [MonoidalCategory C₀] [MonoidalCategory C₁] [MonoidalCategory C₂] [Si.LaxMonoidal]
+  [Si₁.LaxMonoidal] [Fh.Monoidal] in
+lemma restrictionComparison_naturality (e : Si₁ ≅ Fh ⋙ Si) {M M' : C₀} (x : M ⟶ M') :
+    Pi.map x ≫ restrictionComparison bi bi₁ e M' =
+      restrictionComparison bi bi₁ e M ≫ Fh.map (Pi₁.map x) := by
+  simp only [restrictionComparison, ← Pi.map_comp_assoc, Category.assoc]
+  rw [← bi₁.unit_naturality_assoc, e.hom.naturality]
+  simp
+
+open Functor.LaxMonoidal in
+/-- **Independence of the compactification** (blueprint `prop-sf-pf-coherence`, independence
+clause): for a refinement `h : Z ⟶ Z₁` of compactifications `f = i₁ ≫ p₁ = i ≫ p` with
+`i ≫ h = i₁` and `h ≫ p₁ = p`, the refinement isomorphism
+`p₁_* i₁_! ⟶ p₁_* h_* i_! ≅ p_* i_!` carries the exceptional projection morphism of `(i₁, p₁)` to
+that of `(i, p)`, provided the composition isomorphisms are coherent (`hcoh`). -/
+theorem exceptionalProjection_comp_refinement (e : Si₁ ≅ Fh ⋙ Si) (c : Fp ≅ Fp₁ ⋙ Fh)
+    (cf : Ff ≅ Fp ⋙ Si) (cf₁ : Ff ≅ Fp₁ ⋙ Si₁)
+    [∀ M, IsIso (restrictionComparison bi bi₁ e M)]
+    [∀ K N, IsIso (bi.projectionComparison K N)] [∀ K N, IsIso (bi₁.projectionComparison K N)]
+    (he : ∀ X Y, μ Si₁ X Y ≫ e.hom.app (X ⊗ Y) =
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Fh ⋙ Si) X Y)
+    (hc : ∀ X Y, δ Fp X Y ≫ (c.hom.app X ⊗ₘ c.hom.app Y) = c.hom.app (X ⊗ Y) ≫ δ (Fp₁ ⋙ Fh) X Y)
+    (hcoh : ∀ B, cf.hom.app B ≫ Si.map (c.hom.app B) = cf₁.hom.app B ≫ e.hom.app (Fp₁.obj B))
+    (K : C₀) (B : C₃) :
+    exceptionalProjection bi₁ ap₁ cf₁ K B ≫
+        (Gp₁.map (ah.unit.app (Pi₁.obj (K ⊗ Ff.obj B)) ≫
+          Gh.map (inv (restrictionComparison bi bi₁ e (K ⊗ Ff.obj B)))) ≫
+          (conjugateIsoEquiv (ap₁.comp ah) ap c).hom.app _) =
+      (Gp₁.map (ah.unit.app (Pi₁.obj K) ≫ Gh.map (inv (restrictionComparison bi bi₁ e K))) ≫
+          (conjugateIsoEquiv (ap₁.comp ah) ap c).hom.app _) ▷ B ≫
+        exceptionalProjection bi ap cf K B := by
+  have hcf : cf₁.inv.app B = e.hom.app (Fp₁.obj B) ≫ Si.map (c.inv.app B) ≫ cf.inv.app B := by
+    rw [← cancel_epi (cf₁.hom.app B), Iso.hom_inv_id_app, ← reassoc_of% (hcoh B),
+      ← Si.map_comp_assoc, Iso.hom_inv_id_app, Si.map_id, Category.id_comp, Iso.hom_inv_id_app]
+  have hPi : Pi.map (K ◁ cf₁.inv.app B) = Pi.map (K ◁ e.hom.app (Fp₁.obj B)) ≫
+      bi.projectionComparison K (Fh.obj (Fp₁.obj B)) ≫ Pi.obj K ◁ c.inv.app B ≫
+      inv (bi.projectionComparison K (Fp.obj B)) ≫ Pi.map (K ◁ cf.inv.app B) := by
+    rw [← bi.projectionComparison_natural_right_assoc, IsIso.hom_inv_id_assoc, ← Pi.map_comp,
+      ← Pi.map_comp, ← whiskerLeft_comp, ← whiskerLeft_comp, hcf]
+  have hρn : ∀ {M M' : C₀} (x : M ⟶ M'),
+      Pi₁.map x ≫ ah.unit.app (Pi₁.obj M') ≫ Gh.map (inv (restrictionComparison bi bi₁ e M')) =
+        (ah.unit.app (Pi₁.obj M) ≫ Gh.map (inv (restrictionComparison bi bi₁ e M))) ≫
+          Gh.map (Pi.map x) := by
+    intro M M' x
+    have hn := restrictionComparison_naturality (bi := bi) (bi₁ := bi₁) e x
+    have hn' : inv (restrictionComparison bi bi₁ e M) ≫ Pi.map x =
+        Fh.map (Pi₁.map x) ≫ inv (restrictionComparison bi bi₁ e M') := by
+      rw [IsIso.inv_comp_eq, ← reassoc_of% hn, IsIso.hom_inv_id, Category.comp_id]
+    rw [← ah.unit_naturality_assoc, Category.assoc, ← Gh.map_comp, ← Gh.map_comp, hn']
+  have h8 := projectionComparison_comp_refinement bi bi₁ e ah he K (Fp₁.obj B)
+  have h8' : (ah.unit.app (Pi₁.obj K) ≫ Gh.map (inv (restrictionComparison bi bi₁ e K))) ▷
+        Fp₁.obj B ≫ ah.projectionMorphism (Pi.obj K) (Fp₁.obj B) =
+      inv (bi₁.projectionComparison K (Fp₁.obj B)) ≫
+        (ah.unit.app (Pi₁.obj (K ⊗ Si₁.obj (Fp₁.obj B))) ≫
+          Gh.map (inv (restrictionComparison bi bi₁ e (K ⊗ Si₁.obj (Fp₁.obj B))))) ≫
+        Gh.map (Pi.map (K ◁ e.hom.app (Fp₁.obj B)) ≫
+          bi.projectionComparison K (Fh.obj (Fp₁.obj B))) := by
+    rw [IsIso.eq_inv_comp, ← h8]
+  have hPM := projectionMorphism_eq_of_iso ap (ap₁.comp ah) c hc (Pi.obj K) B
+  rw [projectionMorphism_comp] at hPM
+  rw [exceptionalProjection, exceptionalProjection, hPM]
+  simp only [comp_whiskerRight, Category.assoc]
+  rw [← comp_whiskerRight_assoc ((conjugateIsoEquiv (ap₁.comp ah) ap c).hom.app _),
+    Iso.hom_inv_id_app, id_whiskerRight, Category.id_comp, projectionMorphism_natural_left_assoc]
+  congr 1
+  have hγn : ∀ {S T : C₁} (s : S ⟶ T), Gp₁.map (Gh.map s) ≫
+      (conjugateIsoEquiv (ap₁.comp ah) ap c).hom.app T =
+        (conjugateIsoEquiv (ap₁.comp ah) ap c).hom.app S ≫ Gp.map s :=
+    fun s ↦ (conjugateIsoEquiv (ap₁.comp ah) ap c).hom.naturality s
+  rw [← Gp₁.map_comp_assoc ((_ ≫ _) ▷ _), h8', ← Gp₁.map_comp_assoc (inv _ ≫ _), Category.assoc,
+    hρn]
+  simp only [Functor.map_comp, Category.assoc, hγn]
+  rw [hPi]
+  simp only [Functor.map_comp]
+  erw [reassoc_of% (hγn (bi.projectionComparison K (Fh.obj (Fp₁.obj B)))),
+    reassoc_of% (hγn (Pi.map (K ◁ e.hom.app (Fp₁.obj B))))]
+
+end Independence
+
 end CategoryTheory.Adjunction
 
 namespace CategoryTheory.ObjectProperty
