@@ -35,6 +35,12 @@ at `F` of the natural transformation
 `AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. The property `BC(p, Λ, q)` of the
 blueprint is that this map is an isomorphism for every such square and every `F`.
 
+The base-change square of the blueprint (`sbc-def-base-change-square`) is a Cartesian square
+recorded as `CategoryTheory.IsPullback e h g p`; the coefficient conventions
+(`sbc-def-coefficient-conventions`) are a commutative ring `Λ` and sheaves of `Λ`-modules on the
+small étale site, `Sheaf T.smallEtaleTopology (ModuleCat Λ)`, with the derived categories of
+`WeilConjectures.SixFunctors.Etale.Derived`.
+
 The coefficient condition of the theorem is
 `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`, which lives next to the
 torsion condition of proper base change in
@@ -179,7 +185,7 @@ end BaseChangeMap
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `sk-def-bc`: The recorded base-change property.
+/-- Blueprint `sk-def-bc`, `sbc-def-base-change-property`: The recorded base-change property.
 
 `BC(p, Λ, q)` holds when, for every quasi-compact quasi-separated `g : T ⟶ S`, every sheaf
 `F` of `Λ`-modules on `T_ét` and every Cartesian square
@@ -195,7 +201,11 @@ X --p--> S
 the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` of
 `AlgebraicGeometry.Etale.baseChangeHomologyMap` is an isomorphism. The coefficient ring `Λ`
 plays the role of `ℤ/nℤ` in the blueprint; the hypothesis that `n` be invertible on `S` is
-not part of the property and is carried separately by the statements that need it. -/
+not part of the property and is carried separately by the statements that need it.
+
+The Cartesian squares are the base-change squares of blueprint `sbc-def-base-change-square`,
+recorded as `IsPullback e h g p`; following blueprint `sbc-def-coefficient-conventions`, the
+coefficients are sheaves of modules over a commutative ring `Λ` on the small étale sites. -/
 def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
   ∀ {T Y : Scheme.{u}} (g : T ⟶ S) (e : Y ⟶ T) (h : Y ⟶ X)
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)

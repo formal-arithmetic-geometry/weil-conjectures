@@ -160,4 +160,43 @@ lemma injective_Γ_map_pullback_fst_fromSpecFunctionField {U : Scheme.{u}} (f : 
     infer_instance
   exact (pullback.fst f X.fromSpecFunctionField).app_injective ⊤
 
+/-- A nonempty open of an irreducible scheme contains the generic point. -/
+lemma genericPoint_mem_of_nonempty {X : Scheme.{u}} [IrreducibleSpace X] (W : X.Opens)
+    [h : Nonempty W] : genericPoint X ∈ W :=
+  ((genericPoint_spec X).mem_open_set_iff W.isOpen).mpr (by simpa using h)
+
+/-- The generic point `Spec k(X) ⟶ X` maps into every nonempty open of `X`. -/
+lemma top_le_preimage_fromSpecFunctionField {X : Scheme.{u}} [IsIntegral X] (W : X.Opens)
+    [Nonempty W] : ⊤ ≤ X.fromSpecFunctionField ⁻¹ᵁ W := fun x _ ↦ by
+  have : x = IsLocalRing.closedPoint _ := Subsingleton.elim (α := PrimeSpectrum _) _ _
+  subst this
+  change X.fromSpecStalk _ _ ∈ W
+  rw [fromSpecStalk_closedPoint]
+  exact genericPoint_mem_of_nonempty W
+
+/-- On sections over a nonempty open `W`, the generic point `Spec k(X) ⟶ X` is the germ map
+`Γ(X, W) ⟶ k(X)`. -/
+lemma fromSpecFunctionField_appLE_eq {X : Scheme.{u}} [IrreducibleSpace X] (W : X.Opens)
+    [Nonempty W] (h : ⊤ ≤ X.fromSpecFunctionField ⁻¹ᵁ W) :
+    X.fromSpecFunctionField.appLE W ⊤ h =
+      X.germToFunctionField W ≫ (ΓSpecIso X.functionField).inv := by
+  rw [Scheme.Hom.appLE, fromSpecStalk_app (genericPoint_mem_of_nonempty W), Category.assoc,
+    Category.assoc, ← Functor.map_comp]
+  have : ((homOfLE le_top).op ≫ (homOfLE h).op :
+      (Opposite.op (⊤ : (Spec X.functionField).Opens)) ⟶ _) = 𝟙 _ := Subsingleton.elim _ _
+  rw [this, CategoryTheory.Functor.map_id, Category.comp_id]
+
+/-- For a nonempty affine open `W` of an integral scheme `X`, the sections of `Spec k(X)` are
+the localization of `Γ(X, W)` at its nonzero divisors. -/
+lemma isLocalization_fromSpecFunctionField_appLE {X : Scheme.{u}} [IsIntegral X] {W : X.Opens}
+    (hW : IsAffineOpen W) [Nonempty W] (h : ⊤ ≤ X.fromSpecFunctionField ⁻¹ᵁ W) :
+    letI := (X.fromSpecFunctionField.appLE W ⊤ h).hom.toAlgebra
+    IsLocalization (nonZeroDivisors Γ(X, W)) Γ(Spec X.functionField, ⊤) := by
+  have := functionField_isFractionRing_of_isAffineOpen X W hW
+  let e := (Scheme.ΓSpecIso X.functionField).symm.commRingCatIsoToRingEquiv
+  have := (IsLocalization.isLocalization_iff_of_ringEquiv (nonZeroDivisors Γ(X, W)) e).mp this
+  convert this using 1
+  refine Algebra.algebra_ext _ _ fun r ↦ ?_
+  exact congr($(fromSpecFunctionField_appLE_eq W h).hom r)
+
 end AlgebraicGeometry.Scheme

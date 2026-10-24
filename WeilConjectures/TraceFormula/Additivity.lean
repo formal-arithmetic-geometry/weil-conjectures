@@ -12,6 +12,9 @@ public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
+public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
+public import WeilConjectures.TraceFormula.OpenPieceFrobenius
+public import WeilConjectures.TraceFormula.PointTrace
 
 /-!
 
@@ -37,27 +40,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-! ### The ambient lower shriek is triangulated -/
-
-section Ambient
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-
-/-- The derived lower shriek on the derived categories of module objects commutes with the
-shifts: it is the composite of the functor induced by the exact extension by zero and a right
-derived functor. -/
-noncomputable instance : (R(f)_!⟦Λ⟧).CommShift ℤ := by
-  unfold rightDerivedLowerShriek
-  infer_instance
-
-/-- The derived lower shriek on the derived categories of module objects is triangulated. -/
-instance : (R(f)_!⟦Λ⟧).IsTriangulated := by
-  unfold rightDerivedLowerShriek
-  infer_instance
-
-end Ambient
-
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
@@ -69,15 +51,6 @@ variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [IsSeparated X.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left] (i : Z ⟶ X) [IsClosedImmersion i.left]
-
-variable (ℓ) in
-/-- The adjunction `Rj_! ⊣ Lj^*` of an open immersion: the adjunction `Rj_! ⊣ Rj^!` transported
-along `Rj^! ≅ Lj^*`. -/
-noncomputable def boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⊣
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).ofNatIsoRight
-    (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)
 
 variable (ℓ) in
 /-- **The open–closed localization triangle** (blueprint
@@ -122,6 +95,30 @@ noncomputable def connectingOfIso {a c : Cx}
   e.hom.app c ≫ R.map δ ≫ (R.commShiftIso (1 : ℤ)).hom.app (ι.obj a) ≫
     (shiftFunctor Ds (1 : ℤ)).map (e.inv.app a)
 
+/-- If `Cx`, `Cs` carry shifts for which `ι`, `ι_s`, `A` and the comparison `e` commute with the
+shifts, the morphism `connectingOfIso` attached to `ι δ₀` for `δ₀ : c ⟶ a⟦1⟧` is the image under
+`ι_s` of `A δ₀` followed by the commutation of `A` with the shift:
+```
+ι_s A c ──e──▶ R ι c ──R (ι δ₀ ≫ comm)──▶ R ((ι a)⟦1⟧) ──comm──▶ (R ι a)⟦1⟧ ──e⁻¹⟦1⟧──▶ (ι_s A a)⟦1⟧
+   ‖                                                                                       ‖
+ι_s A c ─────────ι_s (A δ₀ ≫ comm)─────────▶ ι_s ((A a)⟦1⟧) ─────────comm─────────▶ (ι_s A a)⟦1⟧
+```
+-/
+lemma connectingOfIso_map_comp_commShiftIso [HasShift Cx ℤ] [HasShift Cs ℤ] [A.CommShift ℤ]
+    [ιs.CommShift ℤ] [ι.CommShift ℤ] [NatTrans.CommShift e.hom ℤ] {a c : Cx}
+    (δ₀ : c ⟶ (shiftFunctor Cx (1 : ℤ)).obj a) :
+    connectingOfIso A ιs ι R e (ι.map δ₀ ≫ (ι.commShiftIso (1 : ℤ)).hom.app a) =
+      ιs.map (A.map δ₀ ≫ (A.commShiftIso (1 : ℤ)).hom.app a) ≫
+        (ιs.commShiftIso (1 : ℤ)).hom.app (A.obj a) := by
+  have h₁ := e.hom.naturality δ₀
+  have h₂ := NatTrans.shift_app_comm e.hom (1 : ℤ) a
+  simp only [Functor.comp_map, Functor.comp_obj, Functor.commShiftIso_comp_hom_app] at h₁ h₂
+  simp only [connectingOfIso, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h₁.symm]
+  slice_lhs 2 4 => rw [← h₂]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.comp_obj,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+
 variable [HasZeroObject Dx] [HasZeroObject Ds] [Preadditive Dx] [Preadditive Ds]
   [∀ n : ℤ, (shiftFunctor Dx n).Additive] [∀ n : ℤ, (shiftFunctor Ds n).Additive]
   [Pretriangulated Dx] [Pretriangulated Ds] [R.IsTriangulated]
@@ -142,6 +139,82 @@ lemma distinguished_of_iso {a b c : Cx} {f : a ⟶ b} {g : b ⟶ c}
         rfl))
 
 end Transport
+
+/-! ### Squares with connecting morphisms -/
+
+section ShiftSquares
+
+variable {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+
+/-- An identity between images of morphisms under a faithful functor `ι` commuting with the
+shifts, composed with the commutation of `ι` with the shift, descends along `ι`: if the square
+```
+ι P ──ι a ≫ comm──▶ (ι Q)⟦1⟧
+ ‖                     ▲
+ ‖                (ι c)⟦1⟧
+ ‖                     │
+ι P ──ι b ≫ comm──▶ (ι Q')⟦1⟧
+```
+commutes, then `a = b ≫ c⟦1⟧`. -/
+lemma eq_comp_shift_map_of_map_comp_commShiftIso (ι : C ⥤ D) [ι.Faithful] [ι.CommShift ℤ]
+    {P Q Q' : C} (a : P ⟶ (shiftFunctor C (1 : ℤ)).obj Q)
+    (b : P ⟶ (shiftFunctor C (1 : ℤ)).obj Q') (c : Q' ⟶ Q)
+    (h : ι.map a ≫ (ι.commShiftIso (1 : ℤ)).hom.app Q =
+      (ι.map b ≫ (ι.commShiftIso (1 : ℤ)).hom.app Q') ≫ (shiftFunctor D (1 : ℤ)).map (ι.map c)) :
+    a = b ≫ (shiftFunctor C (1 : ℤ)).map c := by
+  apply ι.map_injective
+  rw [← cancel_mono ((ι.commShiftIso (1 : ℤ)).hom.app Q), h, Functor.map_comp, Category.assoc,
+    Category.assoc, Functor.commShiftIso_hom_naturality]
+
+/-- The image of a commutation with a shifted morphism under a functor `ι` commuting with the
+shifts: if `x ≫ a = a ≫ y⟦1⟧`, then the square
+```
+ι P ──ι a ≫ comm──▶ (ι Q)⟦1⟧
+ │                     │
+ι x                (ι y)⟦1⟧
+ ▼                     ▼
+ι P ──ι a ≫ comm──▶ (ι Q)⟦1⟧
+```
+commutes. -/
+lemma map_comp_commShiftIso_of_comp_eq (ι : C ⥤ D) [ι.CommShift ℤ] {P Q : C} (x : P ⟶ P)
+    (y : Q ⟶ Q) (a : P ⟶ (shiftFunctor C (1 : ℤ)).obj Q)
+    (h : x ≫ a = a ≫ (shiftFunctor C (1 : ℤ)).map y) :
+    ι.map x ≫ ι.map a ≫ (ι.commShiftIso (1 : ℤ)).hom.app Q =
+      (ι.map a ≫ (ι.commShiftIso (1 : ℤ)).hom.app Q) ≫ (shiftFunctor D (1 : ℤ)).map (ι.map y) := by
+  rw [Category.assoc, ← Functor.commShiftIso_hom_naturality, ← Functor.map_comp_assoc,
+    ← Functor.map_comp_assoc, h]
+
+/-- **The Frobenius operators commute with the connecting morphism**, abstractly: let
+`θ : A ⟶ F ⋙ A` commute with the shifts, and let `ψ_Z : F M_Z ⟶ M_Z`, `ψ_U : F M_U ⟶ M_U`
+commute with `δ₀ : M_Z ⟶ M_U⟦1⟧` through the commutation of `F` with the shift. Then
+`E_Z = A ψ_Z ∘ θ` and `E_U = A ψ_U ∘ θ` commute with `A δ₀` followed by the commutation of `A`
+with the shift:
+```
+A M_Z ──A δ₀ ≫ comm──▶ (A M_U)⟦1⟧
+  │                        │
+ E_Z                     E_U⟦1⟧
+  ▼                        ▼
+A M_Z ──A δ₀ ≫ comm──▶ (A M_U)⟦1⟧
+```
+-/
+lemma comp_map_comp_commShiftIso_eq_of_commShift (A : C ⥤ D) (F : C ⥤ C) [A.CommShift ℤ]
+    [F.CommShift ℤ] (θ : A ⟶ F ⋙ A) [NatTrans.CommShift θ ℤ] {MZ MU : C} (ψZ : F.obj MZ ⟶ MZ)
+    (ψU : F.obj MU ⟶ MU) (δ₀ : MZ ⟶ (shiftFunctor C (1 : ℤ)).obj MU)
+    (h : ψZ ≫ δ₀ = F.map δ₀ ≫ (F.commShiftIso (1 : ℤ)).hom.app MU ≫
+      (shiftFunctor C (1 : ℤ)).map ψU) (EZ : A.obj MZ ⟶ A.obj MZ) (EU : A.obj MU ⟶ A.obj MU)
+    (hZ : EZ = θ.app MZ ≫ A.map ψZ) (hU : EU = θ.app MU ≫ A.map ψU) :
+    EZ ≫ A.map δ₀ ≫ (A.commShiftIso (1 : ℤ)).hom.app MU =
+      (A.map δ₀ ≫ (A.commShiftIso (1 : ℤ)).hom.app MU) ≫ (shiftFunctor D (1 : ℤ)).map EU := by
+  have hθ := NatTrans.shift_app_comm θ (1 : ℤ) MU
+  have hn := θ.naturality δ₀
+  rw [Functor.commShiftIso_comp_hom_app] at hθ
+  simp only [Functor.comp_map] at hn
+  rw [hZ, hU, Category.assoc, ← A.map_comp_assoc, h, Functor.map_comp, Functor.map_comp,
+    Category.assoc, Category.assoc, Functor.commShiftIso_hom_naturality, reassoc_of% hn.symm,
+    ← reassoc_of% hθ]
+  simp only [Functor.map_comp, Category.assoc]
+
+end ShiftSquares
 
 /-! ### The compactly supported localization triangle -/
 
@@ -342,18 +415,13 @@ end ConnectingSquare
 
 attribute [local instance] boundedConstructibleBraiding
 
-/-- A dual of an object transported along an isomorphism. -/
-noncomputable abbrev hasRightDualOfIso {C : Type*} [Category C] [MonoidalCategory C] {P Q : C}
-    (e : P ≅ Q) [HasRightDual Q] : HasRightDual P :=
-  @HasRightDual.mk _ _ _ _ Qᘁ (exactPairingCongrLeft e)
-
 /-- **Triangle additivity of the trace** (blueprint `prop-trf-trace-formal-laws`, item (2)): for
 a distinguished triangle `P₁ ⟶ P₂ ⟶ P₃ ⟶ P₁[1]` of dualizable objects of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` (through
 the inclusion into `D(Mod_{ℚ̲̄_ℓ,s})`) and an endomorphism `(v₁, v₂, v₃)` of it,
 `tr v₂ = tr v₁ + tr v₃`. Over the field `ℚ̄_ℓ` the filtered origin required in item (2) is
 automatic: by item (4) the trace is the alternating sum of the traces on the cohomology, which is
 additive along the long exact cohomology sequence of an endomorphism of a triangle. -/
-theorem trace_eq_trace_add_trace_of_distTriang
+theorem trace_eq_trace_add_trace_of_distTriang [IsSepClosed k]
     {P₁ P₂ P₃ : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} [HasRightDual P₁]
     [HasRightDual P₂] [HasRightDual P₃] (f : P₁ ⟶ P₂) (g : P₂ ⟶ P₃)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -373,88 +441,36 @@ theorem trace_eq_trace_add_trace_of_distTriang
       δ ≫ (shiftFunctor _ (1 : ℤ)).map
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           (point k).left)).ι.map v₁)) :
-    trace v₂ = trace v₁ + trace v₃ :=
-  sorry
-
-/-! ### The Frobenius endomorphisms of the triangle -/
-
-/-- The abstract shape of the compatibility of the compactly supported Frobenius with the pullback
-to a closed piece: the composition laws `(i ≫ Φ)^♯ = Φ^♯ ≫ i^♯` and `(Φ_Z ≫ i)^♯ = i^♯ ≫ Φ_Z^♯`
-and `Φ_Z ≫ i = i ≫ Φ`. -/
-lemma frobenius_closedPiece_aux {CX CZ D : Type*} [Category CX] [Category CZ] [Category D]
-    {aX : CX ⥤ D} {aZ : CZ ⥤ D} {uΦ : CX ⥤ CX} {ui : CX ⥤ CZ} {uΦZ : CZ ⥤ CZ} {u₁ u₂ : CX ⥤ CZ}
-    (pΦ : aX ⟶ uΦ ⋙ aX) (pi : aX ⟶ ui ⋙ aZ) (pΦZ : aZ ⟶ uΦZ ⋙ aZ) (p₁ : aX ⟶ u₁ ⋙ aZ)
-    (p₂ : aX ⟶ u₂ ⋙ aZ) (c₁ : u₁ ≅ uΦ ⋙ ui) (c₂ : u₂ ≅ ui ⋙ uΦZ) (K : CX)
-    (e : u₂.obj K ⟶ u₁.obj K)
-    (h1 : p₁.app K = pΦ.app K ≫ pi.app (uΦ.obj K) ≫ aZ.map (c₁.inv.app K))
-    (h2 : p₂.app K = pi.app K ≫ pΦZ.app (ui.obj K) ≫ aZ.map (c₂.inv.app K))
-    (h3 : p₂.app K ≫ aZ.map e = p₁.app K) (cmp : uΦZ.obj (ui.obj K) ⟶ ui.obj (uΦ.obj K))
-    (hc : cmp = c₂.inv.app K ≫ e ≫ c₁.hom.app K) (φ : uΦ.obj K ⟶ K) (cF : aX.obj K ⟶ aX.obj K)
-    (hK : cF = pΦ.app K ≫ aX.map φ) (ψ : uΦZ.obj (ui.obj K) ⟶ ui.obj K)
-    (cFZ : aZ.obj (ui.obj K) ⟶ aZ.obj (ui.obj K)) (hKZ : cFZ = pΦZ.app (ui.obj K) ≫ aZ.map ψ)
-    (hψ : ψ = cmp ≫ ui.map φ) :
-    cF ≫ pi.app K = pi.app K ≫ cFZ := by
-  have hn := pi.naturality φ
-  simp only [Functor.comp_map] at hn
-  rw [hK, hKZ, hψ, hc, Category.assoc, hn]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% h2, reassoc_of% h3, h1]
-  simp only [Category.assoc]
-  rw [← Functor.map_comp_assoc aZ (c₁.inv.app K) (c₁.hom.app K), Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-
-/-- The inverse of `a⁻¹ ≫ (G = H) ≫ b` at an object. -/
-lemma iso_symm_trans_eqToIso_trans_inv_app {C D : Type*} [Category C] [Category D]
-    {F G H I : C ⥤ D} (a : F ≅ G) (h : F = H) (b : H ≅ I) (K : C) :
-    (a.symm ≪≫ eqToIso h ≪≫ b).inv.app K =
-      b.inv.app K ≫ eqToHom (congrArg (fun T ↦ T.obj K) h.symm) ≫ a.hom.app K := by
-  subst h
-  simp
-
-/-- `comp_eq_comp_conj_of_comp_eq` for the component of a natural isomorphism. -/
-lemma comp_eq_comp_conj_of_comp_eq_app {B C D : Type*} [Category B] [Category C] [Category D]
-    {F₁ : B ⥤ C} {F₂ : C ⥤ D} {G : B ⥤ D} (γ : F₁ ⋙ F₂ ≅ G) (M : B) {a : D} (x : a ⟶ a)
-    (y : a ⟶ F₂.obj (F₁.obj M)) (z : G.obj M ⟶ G.obj M)
-    (h : x ≫ y ≫ γ.hom.app M = (y ≫ γ.hom.app M) ≫ z) :
-    x ≫ y = y ≫ γ.hom.app M ≫ z ≫ γ.inv.app M := by
-  rw [← cancel_mono (γ.hom.app M)]
-  simpa using h
-
-/-- An endomorphism commuting with `y ≫ g` for an isomorphism `g` commutes with `y` and the
-conjugate along `g`. -/
-lemma comp_eq_comp_conj_of_comp_eq {D : Type*} [Category D] {a b c : D} (x : a ⟶ a) (y : a ⟶ b)
-    (g : b ≅ c) (z : c ⟶ c) (h : x ≫ y ≫ g.hom = (y ≫ g.hom) ≫ z) :
-    x ≫ y = y ≫ g.hom ≫ z ≫ g.inv := by
-  rw [← cancel_mono g.hom]
-  simpa using h
+    trace v₂ = trace v₁ + trace v₃ := by
+  let ι := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+    (point k).left)).ι
+  let := DerivedCategory.braidedCategory' (PointMod ℓ k)
+  let : HasRightDual (ι.obj P₁) :=
+    @HasRightDual.mk _ _ _ _ (ι.obj (P₁ᘁ)) (ExactPairing.map ι P₁ (P₁ᘁ))
+  let : HasRightDual (ι.obj P₂) :=
+    @HasRightDual.mk _ _ _ _ (ι.obj (P₂ᘁ)) (ExactPairing.map ι P₂ (P₂ᘁ))
+  let : HasRightDual (ι.obj P₃) :=
+    @HasRightDual.mk _ _ _ _ (ι.obj (P₃ᘁ)) (ExactPairing.map ι P₃ (P₃ᘁ))
+  have key {P : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} [HasRightDual P]
+      [HasRightDual (ι.obj P)] (v : P ⟶ P) : trace (ι.map v) = ι.unitEndRingHom (trace v) :=
+    ι.trace_eq_unitEndRingHom_trace v (ι.map v) (Iso.refl _) (by simp)
+  have hinj : Function.Injective ι.unitEndRingHom := fun a b h ↦ by
+    rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
+    exact ι.map_injective ((cancel_mono _).1 (by simpa [ι] using h))
+  apply hinj
+  rw [RingHom.map_add, ← key, ← key, ← key]
+  exact trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition ℓ k
+    ((nonempty_shiftDecomposition_point ℓ k P₁).some.map ι)
+    ((nonempty_shiftDecomposition_point ℓ k P₂).some.map ι)
+    ((nonempty_shiftDecomposition_point ℓ k P₃).some.map ι) (ι.map f) (ι.map g) δ hT
+    (ι.map v₁) (ι.map v₂) (ι.map v₃) (by rw [← ι.map_comp, ← ι.map_comp, h₁])
+    (by rw [← ι.map_comp, ← ι.map_comp, h₂]) h₃
 
 section Frobenius
 
 variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-
-variable (ℓ) in
-/-- The isomorphism `Ra_{X!} Ri_* ≅ Ra_{X!} Ri_! ≅ Ra_{Z!}` for a proper `i : Z ⟶ X`. -/
-noncomputable def boundedConstructibleLowerStarCompToPoint (i : Z ⟶ X) [IsProper i.left] :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z) :=
-  Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i).symm _ ≪≫
-    boundedConstructibleLowerShriekCompToPoint ℓ i
-
-/-- The pullback `i^♯ : Ra_{X!} ⟶ Ra_{Z!} Li^*` along a proper `i` is `Ra_{X!}` of the unit of
-`Li^* ⊣ Ri_*` followed by `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
-lemma compactPullback_app_eq (i : Z ⟶ X) [IsProper i.left]
-    (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (compactPullback ℓ i).app N =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-            i).unit.app N) ≫
-        (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj N) := by
-  rw [compactPullback_app, boundedConstructibleLowerStarCompToPoint, Iso.trans_hom,
-    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom]
 
 variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶ X}
   [IsOpenImmersion j.left] [IsClosedImmersion i.left] [IsFinite Φ.left]
@@ -463,194 +479,25 @@ variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶
 
 namespace WeilBoundedConstructible
 
-omit [IsClosedImmersion i.left] [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
-  [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left] in
-/-- The Frobenius structure of the restriction `K|_Z`. -/
-lemma weilUpperStar_obj_str_hom (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) :
-    ((weilUpperStar ℓ ΦZ Φ i hi).obj K).str.hom =
-      (weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom := by
-  rw [weilUpperStar_obj_str ℓ ΦZ Φ i hi K]
-  rfl
+/-- The image under `ι` of `δ₀` followed by the commutation of `ι` with the shift. -/
+lemma exists_eq_map_comp_commShiftIso {C D : Type*} [Category C] [Category D] [HasShift C ℤ]
+    [HasShift D ℤ] {ι : C ⥤ D} (hι : ι.FullyFaithful) [ι.CommShift ℤ] {a c : C}
+    (δ : ι.obj c ⟶ (shiftFunctor D (1 : ℤ)).obj (ι.obj a)) :
+    ∃ δ₀ : c ⟶ (shiftFunctor C (1 : ℤ)).obj a,
+      δ = ι.map δ₀ ≫ (ι.commShiftIso (1 : ℤ)).hom.app a :=
+  ⟨hι.preimage (δ ≫ (ι.commShiftIso (1 : ℤ)).inv.app a), by simp⟩
 
-omit [IsClosedImmersion i.left] [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] in
-/-- The compactly supported Frobenius of the restriction `K|_Z` as `RΓ_c(φ|_Z) ∘ Φ_Z^♯`. -/
-lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) :
-    ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius =
-      (compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        i).obj K.carrier) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
-          ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
-            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom) := by
-  rw [compactFrobenius_eq (X := Z) (Φ := ΦZ) ((weilUpperStar ℓ ΦZ Φ i hi).obj K),
-    weilUpperStar_obj_str_hom]
-  rfl
-
-set_option maxHeartbeats 1000000 in
--- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
+variable (ℓ) in
 omit [IsUniversalHomeomorphism ΦZ.left] in
-/-- **The compactly supported Frobenius commutes with the pullback to a closed piece**: for a
-closed immersion `i` with `Φ_Z ≫ i = i ≫ Φ`, `i^♯ ∘ F_c(K) = F_c(K|_Z) ∘ i^♯`. Through
-`F_c = RΓ_c(φ) ∘ Φ^♯` this is the composition law of the pullbacks along
-`Φ_Z ≫ i = i ≫ Φ`. -/
-theorem compactFrobenius_comp_compactPullback (hi : ΦZ ≫ i = i ≫ Φ)
-    (K : WeilBoundedConstructible ℓ Φ) :
-    K.compactFrobenius ≫ (compactPullback ℓ i).app K.carrier =
-      (compactPullback ℓ i).app K.carrier ≫
-        ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
-          (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
-            ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
-              (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
-                K.str.hom)) := by
-  have : IsProper (i ≫ Φ).left := by
-    rw [Over.comp_left]
-    infer_instance
-  have : IsProper (ΦZ ≫ i).left := by
-    rw [Over.comp_left]
-    infer_instance
-  exact frobenius_closedPiece_aux (compactPullback ℓ Φ) (compactPullback ℓ i)
-    (compactPullback ℓ ΦZ) (compactPullback ℓ (i ≫ Φ)) (compactPullback ℓ (ΦZ ≫ i))
-    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ i Φ)
-    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ ΦZ i) K.carrier
-    (eqToHom (by rw [hi])) (compactPullback_comp_app ℓ i Φ K.carrier)
-    (compactPullback_comp_app ℓ ΦZ i K.carrier) (compactPullback_app_congr ℓ hi K.carrier)
-    ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier)
-    (weilUpperStarComparison_hom_app ℓ ΦZ Φ i hi K.carrier) K.str.hom _
-    (compactFrobenius_eq K) _ _ rfl rfl
-
-variable (ℓ) in
-/-- The operator `E_U` on `RΓ_c(X, Rj_! Lj^* K)`: the compactly supported Frobenius of the
-restriction `K|_U`, transported along `Ra_{X!} Rj_! ≅ Ra_{U!}`. -/
-noncomputable def compactFrobeniusOpenPiece (hj : ΦU ≫ j = j ≫ Φ)
-    (K : WeilBoundedConstructible ℓ Φ) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) :=
-  (boundedConstructibleLowerShriekCompToPoint ℓ j).hom.app
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) ≫
-    ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius ≫
-    (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)
-
-variable (ℓ) in
-/-- The operator `E_Z` on `RΓ_c(X, Ri_* Li^* K)`: the compactly supported Frobenius of the
-restriction `K|_Z`, transported along `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
-noncomputable def compactFrobeniusClosedPiece (hi : ΦZ ≫ i = i ≫ Φ)
-    (K : WeilBoundedConstructible ℓ Φ) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) :=
-  (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-    ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
-      (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
-        ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom)) ≫
-    (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
-
-set_option maxHeartbeats 1000000 in
--- the closed-piece operator unfolds to a long composite
-omit [IsUniversalHomeomorphism ΦZ.left] in
-/-- The square of the closed piece: `E_Z ∘ RΓ_c(η) = RΓ_c(η) ∘ F_c(K)` for the unit
-`η : K ⟶ Ri_* Li^* K`. -/
-theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
-    (K : WeilBoundedConstructible ℓ Φ) :
-    K.compactFrobenius ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-            i).unit.app K.carrier) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-            i).unit.app K.carrier) ≫ compactFrobeniusClosedPiece ℓ hi K := by
-  have e := compactPullback_app_eq (ℓ := ℓ) i K.carrier
-  have h : K.compactFrobenius ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-          i).unit.app K.carrier) ≫
-        (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) =
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-          i).unit.app K.carrier) ≫
-        (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ≫
-        ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
-          (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
-            ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
-              (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
-                K.str.hom)) := by
-    rw [← e]
-    exact compactFrobenius_comp_compactPullback hi K
-  rw [compactFrobeniusClosedPiece,
-    ← cancel_mono ((boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)),
-    Category.assoc, h]
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-
-set_option maxHeartbeats 1000000 in
--- the open-piece operator unfolds to a long composite
-omit [IsClosedImmersion i.left] in
-/-- The square of the open piece (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(a)):
-`RΓ_c(ε) ∘ E_U = F_c(K) ∘ RΓ_c(ε)` for the counit `ε : Rj_! Lj^* K ⟶ K`. Through
-`F_c = RΓ_c(φ) ∘ Φ^♯` this is the compatibility of the extension by zero with the pullbacks along
-the Frobenii, `compToPoint_inv_app_comp_counit_comp_compactPullback`. -/
-theorem compactFrobeniusOpenPiece_comp_counit (hj : ΦU ≫ j = j ≫ Φ)
-    (K : WeilBoundedConstructible ℓ Φ) :
-    compactFrobeniusOpenPiece ℓ hj K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
-            K.carrier) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
-            K.carrier) ≫ K.compactFrobenius := by
-  have h := compToPoint_inv_app_comp_counit_comp_compactPullback ℓ j hj K.carrier
-  have hn₁ := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)
-  have hn₂ := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-    ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.naturality
-      K.str.hom)
-  simp only [Functor.comp_map, Functor.comp_obj] at hn₁
-  simp only [Functor.comp_map, Functor.id_map, Functor.map_comp, Functor.comp_obj,
-    Functor.id_obj] at hn₂
-  rw [boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl] at hn₂ ⊢
-  rw [compactFrobeniusOpenPiece,
-    ← cancel_epi ((boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier))]
-  simp only [Category.assoc]
-  rw [Iso.inv_hom_id_app_assoc, compactFrobenius_eq K, reassoc_of% h]
-  refine Eq.trans (congrArg (fun f ↦ f ≫
-    (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-        j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
-          K.carrier)) (compactFrobenius_weilUpperStar hj K)) ?_
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hn₁, hn₂]
-
-variable (ℓ) in
-/-- **Unfinished gap of this proof** (blueprint `prop-trf-trace-additivity-open-closed`, Step 3):
-the operators `E_Z`, `E_U` commute with the connecting morphism of the compactly supported
-localization triangle (for any localization triangle; its connecting morphism is unique by the
-Hom vanishing of blueprint `prop-sf-open-closed-triangle-all-stages`).
-
-This is not an input from another subsection but a gap of this proof: it needs the Frobenius
-comparison `θ` (built from the compact-support base change, the unit of `LΦ^* ⊣ RΦ_*`,
-`RΦ_! ≅ RΦ_*` and composition isomorphisms on `Dᵇc`) to commute with the shifts of the ambient
-derived categories, for which there is no shift-compatibility API for these functors on `Dᵇc`.
-(The companion square with the counit `ε` is `compactFrobeniusOpenPiece_comp_counit`.) -/
+/-- **The operators `E_Z`, `E_U` commute with the connecting morphism of the compactly supported
+localization triangle** (blueprint `prop-trf-trace-additivity-open-closed`, Step 3). Write
+`E_Z = RΓ_c(ψ_Z) ∘ Φ^♯` and `E_U = RΓ_c(ψ_U) ∘ Φ^♯` (`compactFrobeniusClosedPiece_eq`,
+`compactFrobeniusOpenPiece_eq`) with Frobenius coefficients `ψ_Z`, `ψ_U` compatible with the unit
+and counit of the localization triangle. By Hom vanishing these commute with the connecting
+morphism `δ` on `X` (`map_comp_connecting_eq_of_isCompl`), and `Φ^♯` commutes with the shifts
+(`commShift_compactPullback`). -/
 theorem compactFrobenius_connecting_compat
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
           ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
@@ -672,14 +519,32 @@ theorem compactFrobenius_connecting_compat
         compactLocalizationConnecting ℓ j i K.carrier δ =
       compactLocalizationConnecting ℓ j i K.carrier δ ≫ (shiftFunctor _ (1 : ℤ)).map
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-          (point k).left)).ι.map (compactFrobeniusOpenPiece ℓ hj K)) :=
-  sorry
+          (point k).left)).ι.map (compactFrobeniusOpenPiece ℓ hj K)) := by
+  have hX := map_comp_connecting_eq_of_isCompl ℓ hcompl hj K.carrier δ hδ
+    (openPieceFrobeniusCoeff ℓ hj K) K.str.hom (closedPieceFrobeniusCoeff ℓ hi K)
+    (upperStar_map_counit_comp_str_hom hj K)
+    (upperStar_map_unit_comp_closedPieceFrobeniusCoeff hi K)
+  obtain ⟨δ₀, rfl⟩ := exists_eq_map_comp_commShiftIso
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).fullyFaithfulι
+    δ
+  rw [connectingOfIso_map_comp_commShiftIso, ← Functor.map_comp_assoc] at hX
+  have key₁ := eq_comp_shift_map_of_map_comp_commShiftIso _ _ _ _ hX
+  have key₂ := comp_map_comp_commShiftIso_eq_of_commShift
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ) (compactPullback ℓ Φ)
+    (closedPieceFrobeniusCoeff ℓ hi K) (openPieceFrobeniusCoeff ℓ hj K) δ₀
+    (key₁.trans (Category.assoc _ _ _))
+    (compactFrobeniusClosedPiece ℓ hi K) (compactFrobeniusOpenPiece ℓ hj K)
+    (compactFrobeniusClosedPiece_eq hi K) (compactFrobeniusOpenPiece_eq hj K)
+  have := HasCompactification.of_over (toPoint X)
+  rw [compactLocalizationConnecting, connectingOfIso_map_comp_commShiftIso]
+  exact map_comp_commShiftIso_of_comp_eq _ _ _ _ key₂
 
 /-- **Additivity of the compactly supported Frobenius along an open–closed decomposition**
 (blueprint `prop-trf-trace-additivity-open-closed`, `sk-i-global-additivity`): for an open
 immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius,
 `tr(F_c | RΓ_c(X, K)) = tr(F_c | RΓ_c(U, K|_U)) + tr(F_c | RΓ_c(Z, K|_Z))`. -/
-theorem trace_compactFrobenius_eq_add_of_isCompl
+theorem trace_compactFrobenius_eq_add_of_isCompl [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
     [HasRightDual
@@ -696,7 +561,7 @@ theorem trace_compactFrobenius_eq_add_of_isCompl
         trace ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed ℓ j i hcompl K.carrier
   have h₁ := compactFrobeniusOpenPiece_comp_counit hj K
-  have h₃ := compactFrobenius_connecting_compat ℓ hj hi K δ hδ
+  have h₃ := compactFrobenius_connecting_compat ℓ hcompl hj hi K δ hδ
   let : HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj

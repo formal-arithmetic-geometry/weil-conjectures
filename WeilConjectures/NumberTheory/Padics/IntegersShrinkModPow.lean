@@ -37,23 +37,33 @@ open Topology
 
 namespace PadicAlgCl
 
-variable (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl l)]
+variable (l : ℕ) [Fact l.Prime]
 
 /-- `ℓ` is not a unit of `𝒪_E`: its norm is `ℓ⁻¹ < 1`. -/
-lemma natCast_mem_maximalIdeal_integers :
+lemma natCast_mem_maximalIdeal_integers (E : Type*) [Field E] [Algebra E (PadicAlgCl l)] :
     (l : integers l E) ∈ IsLocalRing.maximalIdeal (integers l E) := by
-  rintro ⟨v, hv⟩
-  have hv' : ‖algebraMap E (PadicAlgCl l) ((v.inv : integers l E) : E)‖ ≤ 1 := v.inv.2
-  have h1 : ((l : integers l E) * v.inv : integers l E) = 1 := by
-    rw [← hv]
-    exact v.val_inv
-  have h2 := congrArg (fun x : integers l E ↦ ‖algebraMap E (PadicAlgCl l) (x : E)‖) h1
-  simp only [MulMemClass.coe_mul, map_mul, norm_mul, OneMemClass.coe_one, map_one,
-    norm_one] at h2
-  have h3 : ((l : integers l E) : E) = (l : E) := by simp
-  rw [h3, norm_algebraMap_natCast_self] at h2
-  have := mul_le_mul_of_nonneg_left hv' (inv_prime_pos l).le
-  linarith [inv_prime_lt_one l]
+  refine (IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 fun hu ↦ ?_)
+  obtain ⟨v, hv⟩ := hu.exists_right_inv
+  have h₁ : ‖algebraMap E (PadicAlgCl l) (v : E)‖₊ ≤ 1 := v.2
+  have h₂ : algebraMap E (PadicAlgCl l) (l : E) * algebraMap E (PadicAlgCl l) (v : E) = 1 := by
+    rw [← map_mul, ← map_one (algebraMap E (PadicAlgCl l))]
+    congr 1
+    exact_mod_cast congrArg (fun x : integers l E ↦ (x : E)) hv
+  have h₃ : ‖algebraMap E (PadicAlgCl l) (l : E)‖₊ = 1 / (l : NNReal) := by
+    rw [map_natCast]
+    exact valuation_p l
+  have h₄ := congrArg (‖·‖₊) h₂
+  simp only [nnnorm_mul, nnnorm_one, h₃] at h₄
+  have hl : (1 : NNReal) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  have : 1 / (l : NNReal) * ‖algebraMap E (PadicAlgCl l) (v : E)‖₊ < 1 :=
+    calc 1 / (l : NNReal) * ‖algebraMap E (PadicAlgCl l) (v : E)‖₊ ≤ 1 / (l : NNReal) * 1 :=
+          by gcongr
+      _ < 1 := by
+          rw [mul_one, div_lt_one (by positivity)]
+          exact hl
+  exact this.ne h₄
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl l)]
 
 /-- `ℓ` is a nonzero element of `𝒪_E`. -/
 lemma natCast_ne_zero_integers : (l : integers l E) ≠ 0 := fun h ↦ by

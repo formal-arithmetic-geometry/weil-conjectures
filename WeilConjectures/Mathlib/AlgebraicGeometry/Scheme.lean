@@ -40,6 +40,8 @@ point lies in `D(a)`:
   `f : Γ(X, U)`, then `f` is a unit. This is the converse of `Scheme.basicOpen_of_isUnit`.
 * `AlgebraicGeometry.Scheme.Hom.range_appLE_subset_of_comp_eq`: sections in the image of
   `appLE` of a composition are in the image of `appLE` of its first factor.
+* `AlgebraicGeometry.Scheme.Hom.appLE_eq_of_eq`: rewriting `appLE` along an equality of
+  morphisms.
 * `AlgebraicGeometry.Scheme.connectedSpace_iff_isIdempotentElem`: a nonempty scheme is connected
   if and only if its only idempotent global sections are `0` and `1`.
 * `AlgebraicGeometry.Scheme.IsSpecOfField`: the scheme is isomorphic to the spectrum of a
@@ -304,3 +306,14 @@ theorem connectedSpace_iff_isIdempotentElem (X : Scheme.{u}) [Nonempty X] :
       exact one_ne_zero this
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+/-- Rewriting `appLE` along an equality of morphisms. -/
+lemma appLE_eq_of_eq {T T' : Scheme.{u}} {f g : T ⟶ T'} (hfg : f = g) (U : T'.Opens)
+    (V' : T.Opens) (e : V' ≤ f ⁻¹ᵁ U) :
+    f.appLE U V' e = g.appLE U V' (hfg ▸ e) := by
+  subst hfg
+  rfl
+
+end AlgebraicGeometry.Scheme.Hom

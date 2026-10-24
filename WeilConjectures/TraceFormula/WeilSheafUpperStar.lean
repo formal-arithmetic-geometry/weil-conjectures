@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.HomologyFunctorCoherence
 
 /-!
 
@@ -51,10 +52,143 @@ lemma pullbackAssoc_upperStar (ℓ : ℕ) [Fact ℓ.Prime] :
         upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) :=
   fun f g h ↦ upperStarComp_assoc _ f g h
 
+section HomologyFunctor
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+set_option maxHeartbeats 1000000 in
+-- the instances of the general lemmas are found for each of the categories of module objects
+/-- The commutation `H^n ⋙ f^* ≅ Lf^* ⋙ H^n` of the exact pullbacks of module objects with
+homology is compatible with the composition isomorphisms, at an object. -/
+lemma leftDerivedFunctorHomologyFunctorIso_upperStarComp {X Y Z : Scheme.{u}} (a : X ⟶ Y)
+    (b : Y ⟶ Z) (n : ℤ)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) :
+    (upperStarComp Λ a b).hom.app ((DerivedCategory.homologyFunctor _ n).obj K) ≫
+        (a)^*⟦Λ⟧.map (((b)^*⟦Λ⟧.leftDerivedFunctorHomologyFunctorIso n).hom.app K) ≫
+          ((a)^*⟦Λ⟧.leftDerivedFunctorHomologyFunctorIso n).hom.app (L((b)^*⟦Λ⟧).obj K) =
+      ((a ≫ b)^*⟦Λ⟧.leftDerivedFunctorHomologyFunctorIso n).hom.app K ≫
+        (DerivedCategory.homologyFunctor _ n).map
+          ((leftDerivedUpperStarComp Λ a b).hom.app K) := by
+  rw [leftDerivedUpperStarComp, Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
+    Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorNatIso_assoc,
+    Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorCompIso]
+
+/-- The commutation `H^n ⋙ f^* ≅ Lf^* ⋙ H^n` of the exact pullbacks of module objects with
+homology is pseudonatural, for the composition isomorphisms `upperStarComp` and
+`leftDerivedUpperStarComp`. -/
+lemma pullbackPseudonatural_leftDerivedFunctorHomologyFunctorIso_upperStar (n : ℤ) :
+    PullbackPseudonatural (C := Scheme.{u})
+      (D := fun X ↦ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+      (E := fun X ↦ DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+      (P := fun f ↦ (f)^*⟦Λ⟧) (fun f g ↦ upperStarComp Λ f g) (L := fun f ↦ L((f)^*⟦Λ⟧))
+      (fun f g ↦ leftDerivedUpperStarComp Λ f g)
+      (H := fun _ ↦ DerivedCategory.homologyFunctor _ n)
+      (fun f ↦ (f)^*⟦Λ⟧.leftDerivedFunctorHomologyFunctorIso n) :=
+  PullbackPseudonatural.of_hom_app fun {_ _ _} a b K ↦
+    leftDerivedFunctorHomologyFunctorIso_upperStarComp Λ a b n K
+
+end HomologyFunctor
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
 variable {X W : Over (Spec (.of k))} (eX : X ≅ X) (eW : W ≅ W)
+
+/-! ### The pullbacks of bounded constructible complexes as a family of pullbacks -/
+
+variable (k) in
+/-- The schemes over `k` which are locally of finite type, quasi-compact and separated: those on
+which the bounded constructible complexes `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` and their pullbacks are defined. -/
+def isFiniteTypeSeparated : ObjectProperty (Over (Spec (.of k))) :=
+  fun X ↦ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom ∧ IsSeparated X.hom
+
+section BoundedConstructibleFamily
+
+omit [Finite k]
+
+/-- The derived pullback `Lf^* : Dᵇc(W)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(V)⟦ℚ̲̄_ℓ⟧` along a morphism of
+`isFiniteTypeSeparated k`. -/
+noncomputable def boundedConstructibleUpperStarFamily
+    {V W : (isFiniteTypeSeparated k).FullSubcategory}
+    (f : V ⟶ W) :
+    Dᵇc(W.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc(V.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  haveI := V.property.1; haveI := V.property.2.1; haveI := V.property.2.2
+  haveI := W.property.1; haveI := W.property.2.1; haveI := W.property.2.2
+  boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f.hom
+
+/-- The compatibility of `boundedConstructibleUpperStarFamily` with the inclusions. -/
+noncomputable def boundedConstructibleUpperStarFamilyCompatibility
+    {V W : (isFiniteTypeSeparated k).FullSubcategory} (f : V ⟶ W) :
+    boundedConstructibleUpperStarFamily ℓ f ⋙ (boundedConstructible _).ι ≅
+      (boundedConstructible _).ι ⋙ L((f.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  haveI := V.property.1; haveI := V.property.2.1; haveI := V.property.2.2
+  haveI := W.property.1; haveI := W.property.2.1; haveI := W.property.2.2
+  boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f.hom
+
+/-- The composition isomorphisms of `boundedConstructibleUpperStarFamily`, lifted from
+`leftDerivedUpperStarComp`; they are `boundedConstructibleUpperStarComp`. -/
+noncomputable def boundedConstructibleUpperStarFamilyComp
+    {X Y Z : (isFiniteTypeSeparated k).FullSubcategory} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    boundedConstructibleUpperStarFamily ℓ (f ≫ g) ≅
+      boundedConstructibleUpperStarFamily ℓ g ⋙ boundedConstructibleUpperStarFamily ℓ f :=
+  liftedPullbackComp (C := Scheme.{u})
+    (E := fun X ↦ DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (L := fun f ↦ L((f)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (E' := fun V ↦ Dᵇc(V.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun f g ↦ leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+    (fun _ ↦ (boundedConstructible _).ι) (fun _ ↦ ObjectProperty.fullyFaithfulι _)
+    (boundedConstructibleUpperStarFamily ℓ) (boundedConstructibleUpperStarFamilyCompatibility ℓ)
+    f g
+
+/-- The commutation `Hⁿ ⋙ f^* ≅ Lf^* ⋙ Hⁿ` of the derived pullback on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` with the
+homology sheaves; for an automorphism `e`, this is `weilHomologyComparison`. -/
+noncomputable def boundedConstructibleHomologyComparison (n : ℤ)
+    {V W : (isFiniteTypeSeparated k).FullSubcategory} (f : V ⟶ W) :
+    ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) ⋙
+        (f.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
+      boundedConstructibleUpperStarFamily ℓ f ⋙
+        ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) :=
+  liftedComparison (C := Scheme.{u})
+    (E := fun X ↦ DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (L := fun f ↦ L((f)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (E' := fun V ↦ Dᵇc(V.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (Q := isFiniteTypeSeparated k)
+    (fun f ↦ (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso n)
+    (fun _ ↦ (boundedConstructible _).ι) (boundedConstructibleUpperStarFamily ℓ)
+    (boundedConstructibleUpperStarFamilyCompatibility ℓ) f
+
+/-- The commutation of the derived pullback on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` with the homology sheaves is
+pseudonatural: the restriction of
+`pullbackPseudonatural_leftDerivedFunctorHomologyFunctorIso_upperStar` along the inclusions. -/
+lemma pullbackPseudonatural_boundedConstructibleHomologyComparison (n : ℤ) :
+    PullbackPseudonatural (C := (isFiniteTypeSeparated k).FullSubcategory)
+      (D := fun V ↦ Mod (Sheaf (Scheme.ProEt.topology V.obj.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.obj.left))
+      (E := fun V ↦ Dᵇc(V.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (P := fun {V W : (isFiniteTypeSeparated k).FullSubcategory} (f : V ⟶ W) ↦
+        (f.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (fun {X Y Z : (isFiniteTypeSeparated k).FullSubcategory} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+        upperStarComp (Profinite.padicAlgClRingObj ℓ) f.hom.left g.hom.left)
+      (L := boundedConstructibleUpperStarFamily ℓ) (boundedConstructibleUpperStarFamilyComp ℓ)
+      (H := fun _ ↦ (boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n)
+      (boundedConstructibleHomologyComparison ℓ n) :=
+  PullbackPseudonatural.lifted (C := Scheme.{u})
+    (E := fun X ↦ DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (L := fun f ↦ L((f)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (E' := fun V ↦ Dᵇc(V.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (Q := isFiniteTypeSeparated k)
+    (fun _ ↦ (boundedConstructible _).ι) (fun _ ↦ ObjectProperty.fullyFaithfulι _)
+    (boundedConstructibleUpperStarFamily ℓ) (boundedConstructibleUpperStarFamilyCompatibility ℓ)
+    (pullbackPseudonatural_leftDerivedFunctorHomologyFunctorIso_upperStar _ n)
+
+end BoundedConstructibleFamily
 
 /-! ### The pullback of Weil sheaves -/
 
@@ -149,30 +283,42 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
       (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eX n _ _)))
   exact weilSheafStalkTrace_eq_of_iso ℓ eX eW n I
 
-/-- **The homology sheaves of a pullback of Weil objects** (still `sorry`): for `g : W ⟶ X` with
+omit [Finite k] in
+/-- **The homology sheaves of a pullback of Weil objects**: for `g : W ⟶ X` with
 `e_W ≫ g = g ≫ e_X`, the Weil sheaf `Hʲ(Lg^* K)` is isomorphic to the pullback `g^* Hʲ(K)` of the
 Weil sheaf `Hʲ(K)`.
 
 The isomorphism is the commutation `θ_g : Hʲ ⋙ g^* ≅ Lg^* ⋙ Hʲ` of the exact functor `g^*` with
-homology. It is compatible with the Weil structures because `θ` is pseudonatural, and the
-formal part of the argument is proved:
-`Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso` gives the isomorphism from
-pseudonaturality (`CategoryTheory.PullbackPseudonatural`), and
-`CategoryTheory.PullbackPseudonatural.lifted` reduces pseudonaturality on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` to
-pseudonaturality on the derived categories of module objects. The latter is the composition
-law of `CategoryTheory.Functor.leftDerivedFunctorHomologyFunctorIso`
-(`Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorNatIso` and
-`Functor.leftDerivedFunctorHomologyFunctorIso_hom_app_comp_map_leftDerivedFunctorCompIso`) applied
-to the composition isomorphisms `upperStarComp`. What is missing is the instantiation of these
-generic statements for the pullbacks of module objects. -/
+homology. It is compatible with the Weil structures because `θ` is pseudonatural
+(`pullbackPseudonatural_boundedConstructibleHomologyComparison`), by
+`Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso`. -/
 theorem nonempty_homologyFunctor_weilUpperStar_iso [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom]
     [IsSeparated W.hom] (K : WeilBoundedConstructible ℓ eX.hom) (j : ℤ) :
     Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eW j).obj
         ((weilUpperStar ℓ eW.hom eX.hom g hg).obj K) ≅
       (weilSheafUpperStar ℓ eX eW hg).obj
-        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) :=
-  sorry
+        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) := by
+  let Xo : (isFiniteTypeSeparated k).FullSubcategory :=
+    ⟨X, inferInstance, inferInstance, inferInstance⟩
+  let Wo : (isFiniteTypeSeparated k).FullSubcategory :=
+    ⟨W, inferInstance, inferInstance, inferInstance⟩
+  let eX' : Xo ⟶ Xo := ObjectProperty.homMk eX.hom
+  let eW' : Wo ⟶ Wo := ObjectProperty.homMk eW.hom
+  let g' : Wo ⟶ Xo := ObjectProperty.homMk g
+  have hg' : eW' ≫ g' = g' ≫ eX' := ObjectProperty.hom_ext _ hg
+  have hB : weilUpperStarComparison ℓ eW.hom eX.hom g hg =
+      pullbackFamilyComparison (c := boundedConstructibleUpperStarFamilyComp ℓ) g' eW' eX' hg' := by
+    ext M
+    rw [weilUpperStarComparison_hom_app, pullbackFamilyComparison_hom_app]
+    rfl
+  -- with `@`, the pseudonaturality is not unfolded to its universally quantified statement
+  have h := Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso
+    (@pullbackPseudonatural_boundedConstructibleHomologyComparison ℓ _ k _ _ _ j) g' eW' eX' hg'
+  exact h _ _ _ _ (WeilBoundedConstructible.homologyFunctor ℓ eX j)
+    (weilUpperStar ℓ eW.hom eX.hom g hg) (WeilBoundedConstructible.homologyFunctor ℓ eW j)
+    (weilSheafUpperStar ℓ eX eW hg) K rfl rfl rfl rfl HEq.rfl
+    (heq_of_eq (congrArg IsoAlgebra.mapOfNatIso hB)) HEq.rfl HEq.rfl
 
 end WeilSheafPullback
 

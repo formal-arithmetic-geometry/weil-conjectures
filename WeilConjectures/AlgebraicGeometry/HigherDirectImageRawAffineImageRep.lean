@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverNaturality
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
