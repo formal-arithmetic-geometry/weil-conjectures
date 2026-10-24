@@ -7685,6 +7685,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnito
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TensorMappingCone
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceShiftUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceSupertrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.DerivedCategory.NotPreservesCoproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
