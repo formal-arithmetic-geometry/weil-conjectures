@@ -22,7 +22,8 @@ On underlying sheaves, after the projections `M ⊗ N ⟶ M ⊗_Λ N` and the un
 `f^* M ⟶ Λ_X ⊗_{f^* Λ_Y} f^* M` of the extensions of scalars, the tensor comparison of the
 pullback of module objects is that of the pullback of sheaves
 (`ProEtale.CondensedRing.map_tensorObjπ_upperStarUnitHom_δ_hom`) and the composition isomorphism
-is that of the pullbacks of sheaves (`ProEtale.CondensedRing.upperStarUnitHom_upperStarComp_hom_app_hom`),
+is that of the pullbacks of sheaves
+(`ProEtale.CondensedRing.upperStarUnitHom_upperStarComp_hom_app_hom`),
 which is monoidal (`ProEtale.CondensedRing.isMonoidal_sheafUpperStarComp_inv`).
 -/
 
@@ -258,5 +259,17 @@ lemma upperStarComp_hom_app_tensor_δ
     map_tensorObjπ_upperStarUnitHom_δ_hom, Functor.map_comp_assoc, Functor.map_comp_assoc,
     map_tensorObjπ_upperStarUnitHom_δ_hom, Functor.OplaxMonoidal.δ_natural_assoc]
   rfl
+
+/-- `upperStarComp_hom_app_tensor_δ` in terms of the tensorators. -/
+@[reassoc]
+lemma upperStarComp_hom_app_tensor_μ
+    (A B : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    ((upperStarComp Λ f g).hom.app A ⊗ₘ (upperStarComp Λ f g).hom.app B) ≫
+        Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ _ _ ≫
+        (f)^*⟦Λ⟧.map (Functor.LaxMonoidal.μ (g)^*⟦Λ⟧ A B) =
+      Functor.LaxMonoidal.μ (f ≫ g)^*⟦Λ⟧ A B ≫ (upperStarComp Λ f g).hom.app (A ⊗ B) := by
+  rw [← cancel_epi (δ (f ≫ g)^*⟦Λ⟧ A B), reassoc_of% (upperStarComp_hom_app_tensor_δ Λ f g A B),
+    Functor.Monoidal.δ_μ_assoc, Functor.Monoidal.δ_μ_assoc, ← Functor.map_comp,
+    Functor.Monoidal.δ_μ, CategoryTheory.Functor.map_id, Category.comp_id]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
