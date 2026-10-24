@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.SourceExchangeTransport
+public import WeilConjectures.TraceFormula.SourceExchangeProjection
 
 /-!
 
@@ -71,6 +71,55 @@ lemma _root_.CategoryTheory.NatIso.map_map₆_comp_hom_app_comp_map_comp_hom_app
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at h h'
   rw [reassoc_of% h, h']
 
+lemma _root_.CategoryTheory.Functor.OplaxMonoidal.map_evaluation_comp_δ {𝒞 𝒟 : Type*} [Category 𝒞]
+    [Category 𝒟] [MonoidalCategory 𝒞] [MonoidalCategory 𝒟] [BraidedCategory 𝒞]
+    [BraidedCategory 𝒟] (G : 𝒟 ⥤ 𝒞) [G.OplaxMonoidal]
+    (hbraid : ∀ A B : 𝒟, G.map (β_ A B).hom ≫ Functor.OplaxMonoidal.δ G B A =
+      Functor.OplaxMonoidal.δ G A B ≫ (β_ (G.obj A) (G.obj B)).hom)
+    {a b d v w : 𝒟} {Ka Wb Vd Vw E : 𝒞} (x₁ : a ⊗ d ⟶ v) (x₂ : v ⟶ w) (cb : G.obj b ⟶ Wb)
+    (ca : G.obj a ⟶ Ka) (cd : G.obj d ⟶ Vd) (cw : G.obj w ⟶ Vw) (m : Ka ⊗ Vd ⟶ E)
+    (e : E ⟶ Vw)
+    (h : G.map (x₁ ≫ x₂) ≫ cw = Functor.OplaxMonoidal.δ G a d ≫ (ca ⊗ₘ cd) ≫ m ≫ e) :
+    G.map ((α_ a b d).inv ≫ (β_ a b).hom ▷ d ≫ (α_ b a d).hom ≫ b ◁ x₁ ≫ b ◁ x₂) ≫
+        Functor.OplaxMonoidal.δ G b w ≫ (cb ⊗ₘ cw) =
+      Functor.OplaxMonoidal.δ G a (b ⊗ d) ≫
+        G.obj a ◁ (Functor.OplaxMonoidal.δ G b d ≫ (cb ⊗ₘ cd)) ≫ ca ▷ (Wb ⊗ Vd) ≫
+        (α_ _ _ _).inv ≫ (β_ Ka Wb).hom ▷ Vd ≫ (α_ _ _ _).hom ≫ Wb ◁ m ≫ Wb ◁ e := by
+  have h' : G.map (b ◁ x₁) ≫ G.map (b ◁ x₂) ≫ Functor.OplaxMonoidal.δ G b w ≫ (cb ⊗ₘ cw) =
+      Functor.OplaxMonoidal.δ G b (a ⊗ d) ≫ (cb ⊗ₘ (Functor.OplaxMonoidal.δ G a d ≫
+        (ca ⊗ₘ cd) ≫ m ≫ e)) := by
+    rw [← h, ← G.map_comp_assoc, ← MonoidalCategory.whiskerLeft_comp,
+      ← Functor.OplaxMonoidal.δ_natural_right_assoc, MonoidalCategory.tensorHom_def',
+      MonoidalCategory.tensorHom_def', ← MonoidalCategory.whiskerLeft_comp_assoc,
+      Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp, Category.assoc, h']
+  have h₃ := Functor.OplaxMonoidal.associativity G b a d
+  have h₂ := Functor.OplaxMonoidal.δ_natural_left G (β_ a b).hom d
+  have h₁ := Functor.OplaxMonoidal.associativity_inv G a b d
+  have hnat : (α_ (G.obj a) (G.obj b) (G.obj d)).inv ≫ (β_ (G.obj a) (G.obj b)).hom ▷ G.obj d ≫
+      (α_ (G.obj b) (G.obj a) (G.obj d)).hom ≫ (cb ⊗ₘ ((ca ⊗ₘ cd) ≫ m ≫ e)) =
+      G.obj a ◁ (cb ⊗ₘ cd) ≫ ca ▷ (Wb ⊗ Vd) ≫ (α_ _ _ _).inv ≫ (β_ Ka Wb).hom ▷ Vd ≫
+        (α_ _ _ _).hom ≫ Wb ◁ m ≫ Wb ◁ e := by
+    have k1 : cb ⊗ₘ ((ca ⊗ₘ cd) ≫ m ≫ e) = (cb ⊗ₘ (ca ⊗ₘ cd)) ≫ Wb ◁ m ≫ Wb ◁ e := by
+      rw [← MonoidalCategory.whiskerLeft_comp, ← MonoidalCategory.id_tensorHom,
+        MonoidalCategory.tensorHom_comp_tensorHom, Category.comp_id]
+    have k2 : G.obj a ◁ (cb ⊗ₘ cd) ≫ ca ▷ (Wb ⊗ Vd) = ca ⊗ₘ (cb ⊗ₘ cd) :=
+      (MonoidalCategory.tensorHom_def' _ _).symm
+    have k3 : ((ca ⊗ₘ cb) ⊗ₘ cd) ≫ (β_ Ka Wb).hom ▷ Vd =
+        (β_ (G.obj a) (G.obj b)).hom ▷ G.obj d ≫ ((cb ⊗ₘ ca) ⊗ₘ cd) := by
+      rw [← MonoidalCategory.tensorHom_id, ← MonoidalCategory.tensorHom_id,
+        MonoidalCategory.tensorHom_comp_tensorHom, MonoidalCategory.tensorHom_comp_tensorHom,
+        BraidedCategory.braiding_naturality, Category.comp_id, Category.id_comp]
+    rw [k1, reassoc_of% k2, MonoidalCategory.associator_inv_naturality_assoc, reassoc_of% k3,
+      MonoidalCategory.associator_naturality_assoc]
+  have k4 : cb ⊗ₘ (Functor.OplaxMonoidal.δ G a d ≫ (ca ⊗ₘ cd) ≫ m ≫ e) =
+      G.obj b ◁ Functor.OplaxMonoidal.δ G a d ≫ (cb ⊗ₘ ((ca ⊗ₘ cd) ≫ m ≫ e)) := by
+    rw [← MonoidalCategory.id_tensorHom, MonoidalCategory.tensorHom_comp_tensorHom,
+      Category.id_comp]
+  rw [k4, ← reassoc_of% h₃, ← reassoc_of% h₂, ← MonoidalCategory.comp_whiskerRight_assoc, hbraid,
+    MonoidalCategory.comp_whiskerRight_assoc, ← reassoc_of% h₁, MonoidalCategory.whiskerLeft_comp,
+    Category.assoc, hnat]
+
 lemma _root_.CategoryTheory.Adjunction.homEquiv_symm_comp_homEquiv {C D : Type*} [Category C]
     [Category D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) {A B : C} {Z : D} (p : A ⟶ B)
     (e : F.obj B ⟶ Z) : (adj.homEquiv A Z).symm (p ≫ adj.homEquiv B Z e) = F.map p ≫ e := by
@@ -109,6 +158,28 @@ lemma classTest_kunnethVerdierMap :
 
 end Test
 
+set_option maxHeartbeats 2000000 in
+-- the adjunctions of bounded constructible complexes are unfolded in the defeq checks
+/-- The left projection morphism of a proper morphism after a unit. -/
+lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom]
+    [QuasiCompact A.hom] [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
+    [IsSeparated B.hom] (g : A ⟶ B) [IsProper g.left]
+    (M W : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    M ◁ ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app W ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
+          ((boundedConstructibleUpperStar _ ℓ g).obj W)) ≫
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ g) M
+        ((boundedConstructibleUpperStar _ ℓ g).obj W) =
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app (M ⊗ W) ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
+        ((boundedConstructibleUpperStar _ ℓ g).obj (M ⊗ W)) ≫
+      (boundedConstructibleLowerShriek _ ℓ g).map
+        (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g) M W) :=
+  Verdier.leftProjection_unit_app _ _ _ _
+    (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ g A B)
+    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _) M W
+
 section KernelPushforward
 
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -135,6 +206,22 @@ theorem lowerShriek_map_trace_comp_exceptionalKunnethAdjoint :
         (externalProduct ℓ K (dualizingComplex' ℓ X)) ≫
       (boundedConstructibleLowerShriek _ ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
+  sorry
+
+/-- The transported counits of `q = f × f` are compatible with the multiplication `μ_f`. -/
+theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
+    (B₁ B₂ B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (e : B₁ ⊗ B₂ ⟶ B) :
+    (boundedConstructibleUpperStar _ ℓ (prod.map f f)).map
+        (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
+            ((boundedConstructibleLowerStar _ ℓ f).obj B₁)
+            ((boundedConstructibleLowerStar _ ℓ f).obj B₂) ≫
+          (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
+            (lowerStarTensorMap ℓ f B₁ B₂ ≫ (boundedConstructibleLowerStar _ ℓ f).map e)) ≫
+      prodUpperStarCounit ℓ (prod.map_snd f f) B =
+    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (prod.map f f)) _ _ ≫
+      (prodUpperStarCounit ℓ (prod.map_snd f f) B₁ ⊗ₘ prodUpperStarCounit ℓ (prod.map_snd f f) B₂) ≫
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)) B₁ B₂ ≫
+      (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map e :=
   sorry
 
 /-- The evaluation part of identity (a) (blueprint `lem-trf-trace-source-exchange`, Step 3):
@@ -169,7 +256,15 @@ theorem evaluation_comp_prodLowerStarExternalProduct :
             (prod.snd : X ⨯ X ⟶ X)) _ _) ≫
           (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map
             ((ihom.ev K).app (dualizingComplex' ℓ X)))) :=
-  sorry
+  by
+  unfold prodLowerStarExternalProduct
+  refine Verdier.comp_homEquiv_comp_eq_whiskerLeft_homEquiv_comp_leftProjection _ _ _ _
+    (fun M W ↦ leftProjection_lowerShriek_unit_app ℓ (prod.map f f) M W) _ _ _ _ _ _ _ _ ?_
+  simp only [Functor.Monoidal.μIso_inv]
+  exact Functor.OplaxMonoidal.map_evaluation_comp_δ _
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ (prod.map f f) A B)
+    _ _ _ _ _ _ _ _ (upperStar_map_tensorMap_comp_prodUpperStarCounit ℓ f _ _ _ _)
+  done
 
 set_option maxHeartbeats 6000000 in
 -- the compactly supported direct images are unfolded in the defeq checks

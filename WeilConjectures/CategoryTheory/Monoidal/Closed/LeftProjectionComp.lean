@@ -110,6 +110,77 @@ lemma leftProjection_unit
     adj.left_triangle_components_assoc, ← cancel_mono (ρ_ (G.obj M)).hom]
   simp
 
+/-- **The left projection morphism at a unit**: under the hypotheses of `leftProjection_unit`, the
+left projection morphism after the unit `W ⟶ S G W ≅ L G W` is the unit at `M ⊗ W` followed by
+the tensor structure of `G`. -/
+lemma leftProjection_unit_app
+    (hcounit : ∀ (T : C) (M : D), G.map ((pf.app T).app M) ≫
+        (adj.ofNatIsoRight σ.symm).counit.app (T ⊗ G.obj M) =
+      Functor.OplaxMonoidal.δ G (Lg.obj T) M ≫ (adj.ofNatIsoRight σ.symm).counit.app T ▷ G.obj M)
+    (hbraid : ∀ A B : D, G.map (β_ A B).hom ≫ Functor.OplaxMonoidal.δ G B A =
+      Functor.OplaxMonoidal.δ G A B ≫ (β_ (G.obj A) (G.obj B)).hom)
+    (hsymm : ∀ A B : C, (β_ A B).hom ≫ (β_ B A).hom = 𝟙 _) (M W : D) :
+    M ◁ (adj.unit.app W ≫ σ.inv.app (G.obj W)) ≫ leftProjection pf M (G.obj W) =
+      adj.unit.app (M ⊗ W) ≫ σ.inv.app (G.obj (M ⊗ W)) ≫
+        Lg.map (Functor.OplaxMonoidal.δ G M W) := by
+  apply ((adj.ofNatIsoRight σ.symm).homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have hLP : ∀ T : C, G.map (leftProjection pf M T) ≫
+      (adj.ofNatIsoRight σ.symm).counit.app (G.obj M ⊗ T) =
+      Functor.OplaxMonoidal.δ G M (Lg.obj T) ≫ G.obj M ◁
+          (adj.ofNatIsoRight σ.symm).counit.app T := by
+    intro T
+    have hn := (adj.ofNatIsoRight σ.symm).counit.naturality (β_ T (G.obj M)).hom
+    simp only [Functor.comp_map, Functor.id_map] at hn
+    simp only [leftProjection, Functor.map_comp, Category.assoc]
+    rw [hn, reassoc_of% (hcounit T M), reassoc_of% (hbraid M (Lg.obj T)),
+      ← BraidedCategory.braiding_naturality_right_assoc, hsymm, Category.comp_id]
+  have hε : ∀ N, (adj.ofNatIsoRight σ.symm).counit.app N =
+      G.map (σ.hom.app N) ≫ adj.counit.app N := by
+    intro N
+    simp [Adjunction.ofNatIsoRight]
+  have hx : ∀ V : D, G.map (adj.unit.app V ≫ σ.inv.app (G.obj V)) ≫
+      (adj.ofNatIsoRight σ.symm).counit.app (G.obj V) = 𝟙 _ := by
+    intro V
+    rw [hε, Functor.map_comp, Category.assoc, ← G.map_comp_assoc (σ.inv.app _),
+      Iso.inv_hom_id_app, G.map_id, Category.id_comp]
+    exact adj.left_triangle_components V
+  rw [hLP, ← Functor.OplaxMonoidal.δ_natural_right_assoc, ← MonoidalCategory.whiskerLeft_comp,
+    hx, MonoidalCategory.whiskerLeft_id, Category.comp_id]
+  have hn := (adj.ofNatIsoRight σ.symm).counit.naturality (Functor.OplaxMonoidal.δ G M W)
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  rw [hn, ← Functor.map_comp_assoc, reassoc_of% (hx (M ⊗ W))]
+  rfl
+
+/-- A map into `L T` built from units, read through the left projection morphism. -/
+lemma comp_homEquiv_comp_eq_whiskerLeft_homEquiv_comp_leftProjection
+    (hU : ∀ M W : D, M ◁ (adj.unit.app W ≫ σ.inv.app (G.obj W)) ≫ leftProjection pf M (G.obj W) =
+      adj.unit.app (M ⊗ W) ≫ σ.inv.app (G.obj (M ⊗ W)) ≫
+        Lg.map (Functor.OplaxMonoidal.δ G M W))
+    {A W A₁ A₂ A₃ A₄ W' : D} {Z E : C} (a₁ : A ⊗ W ⟶ A₁) (a₂ : A₁ ⟶ A₂) (a₃ : A₂ ⟶ A₃)
+    (a₄ : A₃ ⟶ A₄) (a₅ : A₄ ⟶ W') (φ : G.obj W ⟶ Z) (φ' : G.obj W' ⟶ E)
+    (ψ : G.obj A ⊗ Z ⟶ E)
+    (h : G.map (a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅) ≫ φ' =
+      Functor.OplaxMonoidal.δ G A W ≫ G.obj A ◁ φ ≫ ψ) :
+    a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅ ≫ adj.homEquiv _ _ φ' ≫ σ.inv.app E =
+      A ◁ (adj.homEquiv _ _ φ ≫ σ.inv.app Z) ≫ leftProjection pf A Z ≫ Lg.map ψ := by
+  have e1 : A ◁ Sg.map φ ≫ A ◁ σ.inv.app Z ≫ leftProjection pf A Z ≫ Lg.map ψ =
+      A ◁ σ.inv.app (G.obj W) ≫ leftProjection pf A (G.obj W) ≫
+        Lg.map (G.obj A ◁ φ ≫ ψ) := by
+    rw [← MonoidalCategory.whiskerLeft_comp_assoc, σ.inv.naturality φ,
+      MonoidalCategory.whiskerLeft_comp_assoc, leftProjection_naturality_assoc, Lg.map_comp]
+  have e3 := hU A W
+  rw [MonoidalCategory.whiskerLeft_comp, Category.assoc] at e3
+  have hu := adj.unit.naturality (a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅)
+  simp only [Functor.comp_map, Functor.id_map] at hu
+  have hn' := σ.inv.naturality (G.map (a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅) ≫ φ')
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, MonoidalCategory.whiskerLeft_comp,
+    MonoidalCategory.whiskerLeft_comp]
+  simp only [Category.assoc]
+  rw [e1, reassoc_of% e3,
+    ← Lg.map_comp, ← h]
+  rw [← hn', Sg.map_comp_assoc, ← reassoc_of% hu]
+
 end Unit
 
 end CategoryTheory.Verdier
