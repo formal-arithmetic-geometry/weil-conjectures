@@ -3783,6 +3783,7 @@ public import WeilConjectures.AlgebraicGeometry.FreeSheafDualTranspose
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
+public import WeilConjectures.AlgebraicGeometry.FrobeniusTwistFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import WeilConjectures.AlgebraicGeometry.FunctionField
@@ -8337,6 +8338,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 public import WeilConjectures.CategoryTheory.Triangulated.PBCDerivedLimitTowerCone
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementIsoAlgebra
+public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts
 public import WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Adjunction
@@ -12268,6 +12270,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.SmoothProperLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Braided
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersionAb
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CounitStructure
@@ -12322,6 +12325,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
@@ -12362,6 +12366,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
