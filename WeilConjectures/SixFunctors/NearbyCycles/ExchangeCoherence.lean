@@ -1,0 +1,258 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
+
+/-!
+
+# Coherence of the pullback exchanges of nearby cycles
+
+The pullback exchanges `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of morphisms of models
+(`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.pullbackExchange`) are
+compatible with commutative squares of morphisms of models (blueprint
+`sk-lem-tf-nearby-mate-coherences` (2), `α_{gf} = α_f(g^*) f_s^* α_g`).
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory
+
+open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+/-! ### Abstract computations -/
+
+section Abstract
+
+variable {DX1 DX DZ1 DZ TM1 TM TP1 TP GM1 GM GP1 GP : Type*} [Category DX1] [Category DX]
+  [Category DZ1] [Category DZ] [Category TM1] [Category TM] [Category TP1] [Category TP]
+  [Category GM1] [Category GM] [Category GP1] [Category GP]
+  {g : DX1 ⥤ DX} {f : DX ⥤ DZ} {e : DX1 ⥤ DZ1} {k : DZ1 ⥤ DZ}
+  {tψ : TM1 ⥤ TM} {tφ : TM ⥤ TP} {tφ' : TM1 ⥤ TP1} {tψ' : TP1 ⥤ TP}
+  {gψ : GM1 ⥤ GM} {gφ : GM ⥤ GP} {gφ' : GM1 ⥤ GP1} {gψ' : GP1 ⥤ GP}
+  {εM1 : DX1 ⥤ GM1} {εM : DX ⥤ GM} {εP1 : DZ1 ⥤ GP1} {εP : DZ ⥤ GP}
+  {jM1 : TM1 ⥤ GM1} {jM : TM ⥤ GM} {jP1 : TP1 ⥤ GP1} {jP : TP ⥤ GP}
+  {RM1 : GM1 ⥤ TM1} {RM : GM ⥤ TM} {RP1 : GP1 ⥤ TP1} {RP : GP ⥤ TP}
+
+/-- The square law of the exchanges `t^* Rj_* ε^* ⟶ Rj_* ε^* f^*` of the total spaces, in abstract
+categories: both sides have the same adjoint for `j_P^* ⊣ Rj_{P*}`, by the cubes of comparisons
+of the `j`-squares and of the `ε`-squares. -/
+lemma exchange_square_total_aux (aM1 : jM1 ⊣ RM1) (aM : jM ⊣ RM) (aP1 : jP1 ⊣ RP1)
+    (aP : jP ⊣ RP)
+    (cEψ : εM1 ⋙ gψ ⟶ g ⋙ εM) (cEφ : εM ⋙ gφ ⟶ f ⋙ εP) (cEφ' : εM1 ⋙ gφ' ⟶ e ⋙ εP1)
+    (cEψ' : εP1 ⋙ gψ' ⟶ k ⋙ εP)
+    (cJψ : tψ ⋙ jM ⟶ jM1 ⋙ gψ) (cJφ : tφ ⋙ jP ⟶ jM ⋙ gφ) (cJφ' : tφ' ⋙ jP1 ⟶ jM1 ⋙ gφ')
+    (cJψ' : tψ' ⋙ jP ⟶ jP1 ⋙ gψ')
+    (bψ : RM1 ⋙ tψ ⟶ gψ ⋙ RM) (bφ : RM ⋙ tφ ⟶ gφ ⋙ RP) (bφ' : RM1 ⋙ tφ' ⟶ gφ' ⋙ RP1)
+    (bψ' : RP1 ⋙ tψ' ⟶ gψ' ⋙ RP)
+    (hbψ : ∀ D, jM.map (bψ.app D) ≫ aM.counit.app _ = cJψ.app _ ≫ gψ.map (aM1.counit.app D))
+    (hbφ : ∀ D, jP.map (bφ.app D) ≫ aP.counit.app _ = cJφ.app _ ≫ gφ.map (aM.counit.app D))
+    (hbφ' : ∀ D, jP1.map (bφ'.app D) ≫ aP1.counit.app _ = cJφ'.app _ ≫ gφ'.map (aM1.counit.app D))
+    (hbψ' : ∀ D, jP.map (bψ'.app D) ≫ aP.counit.app _ = cJψ'.app _ ≫ gψ'.map (aP1.counit.app D))
+    (cT : tφ' ⋙ tψ' ⟶ tψ ⋙ tφ) (cG : gφ' ⋙ gψ' ⟶ gψ ⋙ gφ) (cB : e ⋙ k ⟶ g ⋙ f)
+    (hJ : ∀ K, jP.map (cT.app K) ≫ cJφ.app (tψ.obj K) ≫ gφ.map (cJψ.app K) =
+      cJψ'.app (tφ'.obj K) ≫ gψ'.map (cJφ'.app K) ≫ cG.app (jM1.obj K))
+    (hE : ∀ C, cG.app (εM1.obj C) ≫ gφ.map (cEψ.app C) ≫ cEφ.app (g.obj C) =
+      gψ'.map (cEφ'.app C) ≫ cEψ'.app (e.obj C) ≫ εP.map (cB.app C))
+    (C : DX1) :
+    cT.app (RM1.obj (εM1.obj C)) ≫ tφ.map (bψ.app (εM1.obj C) ≫ RM.map (cEψ.app C)) ≫
+        bφ.app (εM.obj (g.obj C)) ≫ RP.map (cEφ.app (g.obj C)) =
+      tψ'.map (bφ'.app (εM1.obj C) ≫ RP1.map (cEφ'.app C)) ≫ bψ'.app (εP1.obj (e.obj C)) ≫
+        RP.map (cEψ'.app (e.obj C)) ≫ RP.map (εP.map (cB.app C)) := by
+  apply (aP.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
+    Adjunction.counit_naturality, Adjunction.counit_naturality_assoc]
+  have h₁ := hbφ (εM.obj (g.obj C))
+  have h₂ := hbψ' (εP1.obj (e.obj C))
+  simp only [Functor.comp_obj] at h₁ h₂
+  rw [reassoc_of% h₁, reassoc_of% h₂]
+  have h₃ := cJφ.naturality (bψ.app (εM1.obj C))
+  have h₄ := cJφ.naturality (RM.map (cEψ.app C))
+  have h₅ := cJψ'.naturality (bφ'.app (εM1.obj C))
+  have h₆ := cJψ'.naturality (RP1.map (cEφ'.app C))
+  simp only [Functor.comp_obj, Functor.comp_map] at h₃ h₄ h₅ h₆
+  rw [reassoc_of% h₄, reassoc_of% h₃, reassoc_of% h₆, reassoc_of% h₅]
+  simp only [← Functor.map_comp_assoc]
+  have h₇ : jM.map (bψ.app (εM1.obj C) ≫ RM.map (cEψ.app C)) ≫ aM.counit.app (εM.obj (g.obj C)) =
+      cJψ.app _ ≫ gψ.map (aM1.counit.app _) ≫ cEψ.app C := by
+    have := aM.counit.naturality (cEψ.app C)
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at this
+    rw [Functor.map_comp, Category.assoc, this, ← Category.assoc, hbψ, Category.assoc]
+  have h₈ : jP1.map (bφ'.app (εM1.obj C) ≫ RP1.map (cEφ'.app C)) ≫
+      aP1.counit.app (εP1.obj (e.obj C)) =
+      cJφ'.app _ ≫ gφ'.map (aM1.counit.app _) ≫ cEφ'.app C := by
+    have := aP1.counit.naturality (cEφ'.app C)
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at this
+    rw [Functor.map_comp, Category.assoc, this, ← Category.assoc, hbφ', Category.assoc]
+  rw [h₇, h₈]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (hJ (RM1.obj (εM1.obj C)))]
+  have h₉ := cG.naturality (aM1.counit.app (εM1.obj C))
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at h₉
+  rw [← reassoc_of% h₉, hE C]
+
+/-- The square law of the pullback exchanges `α = cI ≫ i_P^* β` of nearby cycles, in abstract
+categories, from the cube of comparisons of the `i`-squares and the square law of the exchanges
+`β` of the total spaces. -/
+lemma exchange_square_aux {SM1 SM SP1 SP : Type*} [Category SM1] [Category SM] [Category SP1]
+    [Category SP] {e' : SM1 ⥤ SP1} {k' : SP1 ⥤ SP} {g' : SM1 ⥤ SM} {f' : SM ⥤ SP}
+    {iM1 : TM1 ⥤ SM1} {iM : TM ⥤ SM} {iP1 : TP1 ⥤ SP1} {iP : TP ⥤ SP}
+    {ΦM1 : DX1 ⥤ TM1} {ΦM : DX ⥤ TM} {ΦP1 : DZ1 ⥤ TP1} {ΦP : DZ ⥤ TP}
+    (cIψ : iM1 ⋙ g' ⟶ tψ ⋙ iM) (cIφ : iM ⋙ f' ⟶ tφ ⋙ iP) (cIφ' : iM1 ⋙ e' ⟶ tφ' ⋙ iP1)
+    (cIψ' : iP1 ⋙ k' ⟶ tψ' ⋙ iP) (cS : e' ⋙ k' ⟶ g' ⋙ f') (cT : tφ' ⋙ tψ' ⟶ tψ ⋙ tφ)
+    (cB : e ⋙ k ⟶ g ⋙ f)
+    (hI : ∀ K, cS.app (iM1.obj K) ≫ f'.map (cIψ.app K) ≫ cIφ.app (tψ.obj K) =
+      k'.map (cIφ'.app K) ≫ cIψ'.app (tφ'.obj K) ≫ iP.map (cT.app K))
+    (C : DX1) (βψ : tψ.obj (ΦM1.obj C) ⟶ ΦM.obj (g.obj C))
+    (βφ : tφ.obj (ΦM.obj (g.obj C)) ⟶ ΦP.obj (f.obj (g.obj C)))
+    (βφ' : tφ'.obj (ΦM1.obj C) ⟶ ΦP1.obj (e.obj C))
+    (βψ' : tψ'.obj (ΦP1.obj (e.obj C)) ⟶ ΦP.obj (k.obj (e.obj C)))
+    (hβ : cT.app (ΦM1.obj C) ≫ tφ.map βψ ≫ βφ = tψ'.map βφ' ≫ βψ' ≫ ΦP.map (cB.app C)) :
+    cS.app (iM1.obj (ΦM1.obj C)) ≫ f'.map (cIψ.app (ΦM1.obj C) ≫ iM.map βψ) ≫
+        cIφ.app (ΦM.obj (g.obj C)) ≫ iP.map βφ =
+      k'.map (cIφ'.app (ΦM1.obj C) ≫ iP1.map βφ') ≫ cIψ'.app (ΦP1.obj (e.obj C)) ≫
+        iP.map βψ' ≫ iP.map (ΦP.map (cB.app C)) := by
+  have h₁ := cIφ.naturality βψ
+  have h₂ := cIψ'.naturality βφ'
+  simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% (hI (ΦM1.obj C)), ← iP.map_comp,
+    ← iP.map_comp, ← iP.map_comp, ← iP.map_comp, hβ]
+
+section Monoidal
+
+variable {TN TM GN GM : Type*} [Category TN] [Category TM] [Category GN] [Category GM]
+  [MonoidalCategory TN] [MonoidalCategory TM] [MonoidalCategory GN] [MonoidalCategory GM]
+  {t : TN ⥤ TM} {gen : GN ⥤ GM} {jN : TN ⥤ GN} {jM : TM ⥤ GM} {RN : GN ⥤ TN} {RM : GM ⥤ TM}
+  [t.OplaxMonoidal] [gen.OplaxMonoidal] [jN.OplaxMonoidal] [jM.OplaxMonoidal]
+
+/-- The base change morphism `bc : t^* Rj_{N*} ⟶ Rj_{M*} gen^*` (with counit identity
+`hbc`) is monoidal for the lax tensor maps of the pushforwards, the adjoints of the tensor
+products of the counits, if the comparison `cJ : t^* j_M^* ⟶ gen^* j_N^*` is monoidal. -/
+lemma baseChange_tensor_aux (aN : jN ⊣ RN) (aM : jM ⊣ RM) (cJ : t ⋙ jM ⟶ jN ⋙ gen)
+    (bc : RN ⋙ t ⟶ gen ⋙ RM)
+    (hbc : ∀ D, jM.map (bc.app D) ≫ aM.counit.app _ = cJ.app _ ≫ gen.map (aN.counit.app D))
+    (hcJ : ∀ X Y, jM.map (Functor.OplaxMonoidal.δ t X Y) ≫ Functor.OplaxMonoidal.δ jM _ _ ≫
+      (cJ.app X ⊗ₘ cJ.app Y) =
+        cJ.app (X ⊗ Y) ≫ gen.map (Functor.OplaxMonoidal.δ jN X Y) ≫
+          Functor.OplaxMonoidal.δ gen _ _)
+    (U V : GN) :
+    t.map (aN.homEquiv _ _ (Functor.OplaxMonoidal.δ jN _ _ ≫
+        (aN.counit.app U ⊗ₘ aN.counit.app V))) ≫ bc.app (U ⊗ V) ≫
+        RM.map (Functor.OplaxMonoidal.δ gen U V) =
+      Functor.OplaxMonoidal.δ t (RN.obj U) (RN.obj V) ≫ (bc.app U ⊗ₘ bc.app V) ≫
+        aM.homEquiv _ _ (Functor.OplaxMonoidal.δ jM _ _ ≫
+          (aM.counit.app (gen.obj U) ⊗ₘ aM.counit.app (gen.obj V))) := by
+  have hμN : jN.map (aN.homEquiv _ _ (Functor.OplaxMonoidal.δ jN _ _ ≫
+      (aN.counit.app U ⊗ₘ aN.counit.app V))) ≫ aN.counit.app _ =
+      Functor.OplaxMonoidal.δ jN _ _ ≫ (aN.counit.app U ⊗ₘ aN.counit.app V) := by
+    erw [← Adjunction.homEquiv_counit, Equiv.symm_apply_apply]
+  have hμM : jM.map (aM.homEquiv _ _ (Functor.OplaxMonoidal.δ jM _ _ ≫
+      (aM.counit.app (gen.obj U) ⊗ₘ aM.counit.app (gen.obj V)))) ≫ aM.counit.app _ =
+      Functor.OplaxMonoidal.δ jM _ _ ≫
+        (aM.counit.app (gen.obj U) ⊗ₘ aM.counit.app (gen.obj V)) := by
+    erw [← Adjunction.homEquiv_counit, Equiv.symm_apply_apply]
+  have hδ := aM.counit.naturality (Functor.OplaxMonoidal.δ gen U V)
+  have hn := cJ.naturality (aN.homEquiv _ _ (Functor.OplaxMonoidal.δ jN _ _ ≫
+      (aN.counit.app U ⊗ₘ aN.counit.app V)))
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hδ hn
+  apply (aM.homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hδ, reassoc_of% (hbc (U ⊗ V)), reassoc_of% hn, ← gen.map_comp_assoc, hμN, hμM,
+    ← Functor.OplaxMonoidal.δ_natural_assoc, tensorHom_comp_tensorHom, hbc U, hbc V,
+    ← tensorHom_comp_tensorHom, reassoc_of% (hcJ _ _), gen.map_comp_assoc,
+    Functor.OplaxMonoidal.δ_natural]
+  rfl
+
+/-- The pullback exchange `α = cI ≫ i_M^* (bc ≫ Rj_{M*} cE)` is monoidal for the lax tensor maps
+`μ_Ψ = μ_i ≫ i^* (μ_j ≫ Rj_* μ_ε)` of nearby cycles, in abstract categories, if the comparisons
+`cI`, `cE` and the base change morphism `bc` are monoidal. -/
+lemma pullbackExchange_tensor_aux {SN SM DY DX : Type*} [Category SN] [Category SM] [Category DY]
+    [Category DX] [MonoidalCategory SN] [MonoidalCategory SM] [MonoidalCategory DY]
+    [MonoidalCategory DX] {f' : SN ⥤ SM} {iN : TN ⥤ SN} {iM : TM ⥤ SM} {f : DY ⥤ DX}
+    {εN : DY ⥤ GN} {εM : DX ⥤ GM} [f'.OplaxMonoidal] [iN.Monoidal] [iM.Monoidal]
+    [f.OplaxMonoidal] [εN.Monoidal] [εM.Monoidal]
+    (cI : iN ⋙ f' ⟶ t ⋙ iM) (cE : εN ⋙ gen ⟶ f ⋙ εM) (bc : RN ⋙ t ⟶ gen ⋙ RM)
+    (μjN : ∀ U V : GN, RN.obj U ⊗ RN.obj V ⟶ RN.obj (U ⊗ V))
+    (μjM : ∀ U V : GM, RM.obj U ⊗ RM.obj V ⟶ RM.obj (U ⊗ V))
+    (hμjM : ∀ {U U' V V' : GM} (x : U ⟶ U') (y : V ⟶ V'),
+      (RM.map x ⊗ₘ RM.map y) ≫ μjM U' V' = μjM U V ≫ RM.map (x ⊗ₘ y))
+    (hcI : ∀ X Y, f'.map (Functor.OplaxMonoidal.δ iN X Y) ≫ Functor.OplaxMonoidal.δ f' _ _ ≫
+      (cI.app X ⊗ₘ cI.app Y) =
+        cI.app (X ⊗ Y) ≫ iM.map (Functor.OplaxMonoidal.δ t X Y) ≫
+          Functor.OplaxMonoidal.δ iM _ _)
+    (hcE : ∀ A B, gen.map (Functor.OplaxMonoidal.δ εN A B) ≫ Functor.OplaxMonoidal.δ gen _ _ ≫
+      (cE.app A ⊗ₘ cE.app B) =
+        cE.app (A ⊗ B) ≫ εM.map (Functor.OplaxMonoidal.δ f A B) ≫
+          Functor.OplaxMonoidal.δ εM _ _)
+    (hbc : ∀ U V, t.map (μjN U V) ≫ bc.app (U ⊗ V) ≫ RM.map (Functor.OplaxMonoidal.δ gen U V) =
+      Functor.OplaxMonoidal.δ t (RN.obj U) (RN.obj V) ≫ (bc.app U ⊗ₘ bc.app V) ≫
+        μjM (gen.obj U) (gen.obj V))
+    (A B : DY) :
+    f'.map (Functor.LaxMonoidal.μ iN (RN.obj (εN.obj A)) (RN.obj (εN.obj B)) ≫
+        iN.map (μjN (εN.obj A) (εN.obj B) ≫ RN.map (Functor.LaxMonoidal.μ εN A B))) ≫
+        (cI.app (RN.obj (εN.obj (A ⊗ B))) ≫
+          iM.map (bc.app (εN.obj (A ⊗ B)) ≫ RM.map (cE.app (A ⊗ B)))) ≫
+        iM.map (RM.map (εM.map (Functor.OplaxMonoidal.δ f A B))) =
+      Functor.OplaxMonoidal.δ f' _ _ ≫
+        ((cI.app (RN.obj (εN.obj A)) ≫ iM.map (bc.app (εN.obj A) ≫ RM.map (cE.app A))) ⊗ₘ
+          (cI.app (RN.obj (εN.obj B)) ≫ iM.map (bc.app (εN.obj B) ≫ RM.map (cE.app B)))) ≫
+        Functor.LaxMonoidal.μ iM (RM.obj (εM.obj (f.obj A))) (RM.obj (εM.obj (f.obj B))) ≫
+          iM.map (μjM (εM.obj (f.obj A)) (εM.obj (f.obj B)) ≫
+            RM.map (Functor.LaxMonoidal.μ εM (f.obj A) (f.obj B))) := by
+  -- the monoidality of `cE` in the form needed
+  have hE : gen.map (Functor.LaxMonoidal.μ εN A B) ≫ cE.app (A ⊗ B) ≫
+      εM.map (Functor.OplaxMonoidal.δ f A B) =
+      Functor.OplaxMonoidal.δ gen _ _ ≫ (cE.app A ⊗ₘ cE.app B) ≫
+        Functor.LaxMonoidal.μ εM _ _ := by
+    rw [← cancel_epi (gen.map (Functor.OplaxMonoidal.δ εN A B)), ← gen.map_comp_assoc,
+      Functor.Monoidal.δ_μ, gen.map_id, Category.id_comp, reassoc_of% (hcE A B),
+      Functor.Monoidal.δ_μ, Category.comp_id]
+  -- the monoidality of `cI` in the form needed
+  have hI : f'.map (Functor.LaxMonoidal.μ iN (RN.obj (εN.obj A)) (RN.obj (εN.obj B))) ≫
+      cI.app _ ≫ iM.map (Functor.OplaxMonoidal.δ t _ _) =
+      Functor.OplaxMonoidal.δ f' _ _ ≫ (cI.app _ ⊗ₘ cI.app _) ≫
+        Functor.LaxMonoidal.μ iM _ _ := by
+    rw [← cancel_epi (f'.map (Functor.OplaxMonoidal.δ iN _ _)), ← f'.map_comp_assoc,
+      Functor.Monoidal.δ_μ, f'.map_id, Category.id_comp, reassoc_of% (hcI _ _),
+      Functor.Monoidal.δ_μ, Category.comp_id]
+  have h₁ := cI.naturality (μjN (εN.obj A) (εN.obj B) ≫ RN.map (Functor.LaxMonoidal.μ εN A B))
+  have h₂ := bc.naturality (Functor.LaxMonoidal.μ εN A B)
+  simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂
+  have hin : t.map (μjN (εN.obj A) (εN.obj B) ≫ RN.map (Functor.LaxMonoidal.μ εN A B)) ≫
+      (bc.app (εN.obj (A ⊗ B)) ≫ RM.map (cE.app (A ⊗ B))) ≫
+        RM.map (εM.map (Functor.OplaxMonoidal.δ f A B)) =
+      Functor.OplaxMonoidal.δ t _ _ ≫
+        ((bc.app (εN.obj A) ≫ RM.map (cE.app A)) ⊗ₘ (bc.app (εN.obj B) ≫ RM.map (cE.app B))) ≫
+        μjM (εM.obj (f.obj A)) (εM.obj (f.obj B)) ≫
+          RM.map (Functor.LaxMonoidal.μ εM (f.obj A) (f.obj B)) := by
+    have hE' : RM.map (gen.map (Functor.LaxMonoidal.μ εN A B)) ≫ RM.map (cE.app (A ⊗ B)) ≫
+        RM.map (εM.map (Functor.OplaxMonoidal.δ f A B)) =
+        RM.map (Functor.OplaxMonoidal.δ gen _ _) ≫ RM.map (cE.app A ⊗ₘ cE.app B) ≫
+          RM.map (Functor.LaxMonoidal.μ εM _ _) := by
+      rw [← RM.map_comp, ← RM.map_comp, hE, RM.map_comp, RM.map_comp]
+    simp only [t.map_comp, Category.assoc]
+    rw [reassoc_of% h₂, hE', reassoc_of% (hbc _ _), ← reassoc_of% (hμjM (cE.app A) (cE.app B)),
+      ← tensorHom_comp_tensorHom_assoc]
+  rw [f'.map_comp, Category.assoc, Category.assoc, reassoc_of% h₁, ← iM.map_comp,
+    ← iM.map_comp, hin, iM.map_comp, reassoc_of% hI]
+  simp only [← tensorHom_comp_tensorHom, Category.assoc, iM.map_comp]
+  rw [← Functor.LaxMonoidal.μ_natural_assoc, ← Functor.LaxMonoidal.μ_natural_assoc]
+  rfl
+
+end Monoidal
+
+end Abstract
+
+end AlgebraicGeometry.ProEtale.CondensedRing

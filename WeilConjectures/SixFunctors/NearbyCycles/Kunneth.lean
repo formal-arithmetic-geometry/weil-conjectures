@@ -67,6 +67,26 @@ noncomputable def lowerStarTensorMap'
       ((derivedUpperStarLowerStarAdjunction Λ j).counit.app A ⊗ₘ
         (derivedUpperStarLowerStarAdjunction Λ j).counit.app B))
 
+section Kunneth
+
+variable {X X₁ Y Y₁ Z Z₁ : Scheme.{u}} {f₁ : Z ⟶ X} {f₂ : Z ⟶ Y} {g : X ⟶ X₁} {h : Y ⟶ Y₁}
+  {k : Z ⟶ Z₁} {e₁ : Z₁ ⟶ X₁} {e₂ : Z₁ ⟶ Y₁}
+
+/-- The *ordinary Künneth map* `κ_{A,B} : Le₁^* Rg_* A ⊗ Le₂^* Rh_* B ⟶ Rk_* (Lf₁^* A ⊗ Lf₂^* B)`
+of two commutative squares `f₁ ≫ g = k ≫ e₁` and `f₂ ≫ h = k ≫ e₂` (blueprint
+`lem-trf-ordinary-kunneth`, for the squares of a product `f × g`): the tensor product of the base
+change morphisms followed by the lax tensor map of `Rk_*`. -/
+noncomputable def lowerStarKunnethMap' (sq₁ : CommSq f₁ k g e₁) (sq₂ : CommSq f₂ k h e₂)
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    L((e₁)^*⟦Λ⟧).obj (R((g)_*⟦Λ⟧).obj A) ⊗ L((e₂)^*⟦Λ⟧).obj (R((h)_*⟦Λ⟧).obj B) ⟶
+      R((k)_*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) :=
+  ((baseChangeMap Λ sq₁).app A ⊗ₘ (baseChangeMap Λ sq₂).app B) ≫ lowerStarTensorMap' Λ k _ _
+
+end Kunneth
+
 end LowerStar
 
 namespace NearbyCyclesModel
