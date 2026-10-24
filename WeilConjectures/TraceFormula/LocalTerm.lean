@@ -504,4 +504,69 @@ theorem localTerm_eq_of_iso [IsProper B.hom] (j : B ⟶ E) [IsOpenImmersion j.le
 
 end BorelMooreSection
 
+
+/-! ### Local terms of pushforwards -/
+
+namespace BorelMooreSection
+
+variable {T B X : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
+  [IsSeparated B.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- The pushforward of a Borel–Moore section along an open and closed immersion `j : B ⟶ X` is
+fixed by the idempotent `e_B` of `B`. -/
+lemma pushforward_comp_clopenIdempotent (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left]
+    (γ : BorelMooreSection ℓ B) :
+    pushforward j γ ≫ (clopenIdempotent ℓ j).app (dualizingComplex' ℓ X) =
+      pushforward j γ := by
+  rw [clopenIdempotent_app, pushforward]
+  simp only [Category.assoc]
+  rw [reassoc_of% (Adjunction.clopenCounit_comp_clopenSection _ _ _ _ _
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen ℓ j)
+    (dualizingComplex' ℓ X))]
+
+/-- The restriction to an open and closed subscheme `j : B ⟶ X` of the pushforward along `j` of
+a Borel–Moore section of `B` is the section itself. -/
+lemma restrict_pushforward_self (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left]
+    (γ : BorelMooreSection ℓ B) : (pushforward j γ).restrict j = γ := by
+  have key := Adjunction.conjugateIsoEquiv_inv_app_comp_map_clopenPush
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen ℓ j)
+    ((Functor.Monoidal.εIso
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).inv ≫ γ)
+    (dualizingComplexComp ℓ j).inv
+  rw [restrict, pushforward, boundedConstructibleUpperShriekUnitIso_padicAlgCl, Iso.trans_inv,
+    Iso.symm_inv, Iso.app_inv, Category.assoc,
+    boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl,
+    reassoc_of% key]
+  simp
+
+end BorelMooreSection
+
+namespace BorelMooreSection
+
+variable {T B X : Over (Spec (.of k))} [QuasiCompact T.hom] [QuasiCompact B.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- **The local term of a pushforward** (blueprint `thm-trf-frobenius-local-term`, Step 3): for an
+open and closed subscheme `j : B ⟶ X`, proper over `s`, and a proper morphism `h : T ⟶ X` from a
+scheme proper over `s` with image in `B`, the local term along `B` of the Borel–Moore pushforward
+`h_* γ` is `∫_T γ`. -/
+theorem localTerm_pushforward [IsProper T.hom] [IsProper B.hom] (j : B ⟶ X)
+    [IsOpenImmersion j.left] [IsClosedImmersion j.left] (h : T ⟶ X) [IsProper h.left]
+    (hh : Set.range h.left.base ⊆ Set.range j.left.base) (γ : BorelMooreSection ℓ T) :
+    (pushforward h γ).localTerm j = γ.integral := by
+  obtain ⟨e, rfl⟩ : ∃ e : T ⟶ B, e ≫ j = h :=
+    ⟨Over.homMk (IsOpenImmersion.lift j.left h.left hh) (by
+      rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac, Over.w h]),
+      Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)⟩
+  have : IsProper e.left := IsProper.of_comp e.left j.left
+  rw [← pushforward_comp, localTerm, restrict_pushforward_self, integral_pushforward]
+
+end BorelMooreSection
+
 end AlgebraicGeometry.ProEtale.CondensedRing
