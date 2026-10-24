@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
+public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 
@@ -73,5 +74,22 @@ lemma boundedConstructibleUpperStarTriangleComparison_μ (w : i ≫ h = i₁)
     Iso.refl_hom, Category.id_comp,
     Functor.OplaxMonoidal.comp_δ]
   exact boundedConstructibleUpperStarComp_hom_app_tensor_δ Λ ℓ i h K M
+
+section Bridge
+
+variable [IsEllAdicFinitenessCoefficient ℓ Λ] {P Q : Over (Spec (.of k))}
+  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+  [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [IsSeparated Q.hom]
+
+/-- The projection morphism of the bounded constructible adjunction `Lg^* ⊣ Rg_*` is the derived
+projection morphism. -/
+lemma boundedConstructibleUpperStarLowerStarAdjunction_projectionMorphism_hom (g : P ⟶ Q)
+    (A : Dᵇc(P.left)⟦Λ⟧) (B : Dᵇc(Q.left)⟦Λ⟧) :
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g).projectionMorphism A B).hom =
+      properProjectionMorphism Λ g.left A.obj B.obj :=
+  ObjectProperty.projectionMorphism_restrictFullyFaithful_hom _ _
+    (derivedUpperStarLowerStarAdjunction Λ g.left) _ A B
+
+end Bridge
 
 end AlgebraicGeometry.ProEtale.CondensedRing

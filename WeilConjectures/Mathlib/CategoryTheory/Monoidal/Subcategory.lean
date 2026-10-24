@@ -46,4 +46,10 @@ noncomputable instance monoidalLift : (Q.lift (P.ι ⋙ F) hF).Monoidal :=
       left_unitality X := hom_ext _ (left_unitality F X.obj)
       right_unitality X := hom_ext _ (right_unitality F X.obj) }
 
+/-- The comultiplication of the restriction of a strong monoidal functor is that of the functor. -/
+lemma δ_monoidalLift_hom (X Y : P.FullSubcategory) :
+    (Functor.OplaxMonoidal.δ (Q.lift (P.ι ⋙ F) hF) X Y).hom =
+      Functor.OplaxMonoidal.δ F X.obj Y.obj :=
+  rfl
+
 end CategoryTheory.ObjectProperty

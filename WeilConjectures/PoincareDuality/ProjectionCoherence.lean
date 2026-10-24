@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.PoincareDuality.Abstract
 
 /-!
@@ -269,3 +271,30 @@ lemma projectionComparison_comp_refinement {Gh : C₁ ⥤ C₂} (ah : Fh ⊣ Gh)
 end Refinement
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.ObjectProperty
+
+open MonoidalCategory
+
+variable {C : Type*} [Category C] [MonoidalCategory C] {D : Type*} [Category D]
+  [MonoidalCategory D] {P : ObjectProperty C} [P.IsMonoidal] {Q : ObjectProperty D}
+  [Q.IsMonoidal] (F : C ⥤ D) [F.Monoidal] (hF : ∀ X : P.FullSubcategory, Q (F.obj X.obj))
+variable {G : D ⥤ C} (adj : F ⊣ G) (hG : ∀ Y : Q.FullSubcategory, P (G.obj Y.obj))
+
+/-- The projection morphism of the restriction of an adjunction `F ⊣ G` with `F` strong monoidal
+to full monoidal subcategories is the projection morphism of `F ⊣ G`. -/
+lemma projectionMorphism_restrictFullyFaithful_hom (A : Q.FullSubcategory)
+    (B : P.FullSubcategory) :
+    ((adj.restrictFullyFaithful P.fullyFaithfulι Q.fullyFaithfulι
+        (Q.liftCompιIso (P.ι ⋙ F) hF).symm (P.liftCompιIso (Q.ι ⋙ G) hG).symm).projectionMorphism
+          A B).hom =
+      adj.projectionMorphism A.obj B.obj := by
+  have hε := Adjunction.map_restrictFullyFaithful_counit_app adj P.fullyFaithfulι
+    Q.fullyFaithfulι (Q.liftCompιIso (P.ι ⋙ F) hF).symm (P.liftCompιIso (Q.ι ⋙ G) hG).symm A
+  simp only [liftCompιIso, Iso.refl_symm, Iso.refl_inv, NatTrans.id_app, Category.id_comp, ι_map]
+    at hε
+  rw [Adjunction.projectionMorphism, Adjunction.restrictFullyFaithful_homEquiv_apply,
+    Adjunction.projectionMorphism, Adjunction.homEquiv_unit]
+  simp [liftCompιIso, δ_monoidalLift_hom, hε]
+
+end CategoryTheory.ObjectProperty
