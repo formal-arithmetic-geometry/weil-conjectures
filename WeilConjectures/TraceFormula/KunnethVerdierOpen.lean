@@ -426,7 +426,8 @@ theorem isIso_map_kunnethVerdierMap_iff (j : U ⟶ Y) [IsOpenImmersion j.left]
 /-- For an open immersion `i`, the counit `Li^* Ri_* ⟶ 𝟭` on bounded constructible complexes is an
 isomorphism: `Li^*` has the fully faithful left adjoint `i_!`, so its right adjoint `Ri_*` is
 fully faithful as well. -/
-instance isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit {A B : Over (Spec (.of k))}
+instance isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit_of_isOpenImmersion
+    {A B : Over (Spec (.of k))}
     [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] [IsSeparated A.hom]
     [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (i : A ⟶ B)
     [IsOpenImmersion i.left] :
