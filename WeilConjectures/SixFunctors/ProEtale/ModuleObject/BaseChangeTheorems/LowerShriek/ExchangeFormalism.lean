@@ -145,6 +145,17 @@ lemma isIso_baseChange_boundedConstructibleExchangeFormalism (sq : IsPullback g'
   rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_baseChange]
   exact isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq
 
+/-- The extension-by-zero base-change isomorphism `f_! ⋙ Lg^* ≅ Lg'^* ⋙ f'_!` of a cartesian
+square is the inverse of the base change map of the extension by zero of the exchange formalism. -/
+lemma boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_hom_eq
+    (sq : IsPullback g' f' f g) :
+    haveI := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ sq
+    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).hom =
+      inv ((𝔽).baseChange (SepFinType.homMk g') (SepFinType.homMk f') (SepFinType.homMk f)
+        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso, Iso.symm_hom, asIso_inv]
+  simp only [boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_baseChange]
+
 end Squares
 
 section Composition
