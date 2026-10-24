@@ -74,9 +74,7 @@ noncomputable def classTransport :
     Functor.whiskerLeft (tensorLeft ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
           ((boundedConstructibleLowerStar _ ℓ f).obj K))))
-      ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (prod.map f f) prod.fst).inv ≫
-        eqToHom (congrArg (boundedConstructibleLowerShriek _ ℓ) (prod.map_fst f f)) ≫
-        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ prod.fst f).hom) ≫
+      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom ≫
     Functor.whiskerRight ((curriedTensor _).map (prodUpperStarCounit ℓ (prod.map_snd f f) K))
       (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X) ⋙
         boundedConstructibleLowerShriek _ ℓ f) ≫
