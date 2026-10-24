@@ -102,7 +102,9 @@ variable {X Y : Over (Spec (.of k))}
 of the derived pushforward `Rg_*` along the proper `g`, followed by the pullback `i^*` along the
 open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hc : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((c.overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ c.overG).IsLeftAdjoint] :
     Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   (boundedConstructibleLowerStar Λ ℓ c.overG).rightAdjoint ⋙
@@ -112,7 +114,9 @@ noncomputable def boundedConstructibleUpperShriekOfCompactification
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`: the composite of the adjunction `i_! ⊣ i^*`
 along the open immersion `i` and of the adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hc : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((c.overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ c.overG).IsLeftAdjoint] :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ c ⊣
       boundedConstructibleUpperShriekOfCompactification Λ ℓ c :=
@@ -122,7 +126,9 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction
 /-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
 adjoint being `boundedConstructibleUpperShriekOfCompactification`. -/
 instance isLeftAdjoint_boundedConstructibleLowerShriekOfCompactification
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hc : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((c.overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ c.overG).IsLeftAdjoint] :
     (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).IsLeftAdjoint :=
   (boundedConstructibleUpperShriekOfCompactificationAdjunction Λ ℓ c).isLeftAdjoint
@@ -130,7 +136,9 @@ instance isLeftAdjoint_boundedConstructibleLowerShriekOfCompactification
 /-- The exceptional inverse image `Rf^!(c)` on bounded constructible complexes is a right
 adjoint, its left adjoint being `boundedConstructibleLowerShriekOfCompactification`. -/
 instance isRightAdjoint_boundedConstructibleUpperShriekOfCompactification
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hc : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((c.overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ c.overG).IsLeftAdjoint] :
     (boundedConstructibleUpperShriekOfCompactification Λ ℓ c).IsRightAdjoint :=
   (boundedConstructibleUpperShriekOfCompactificationAdjunction Λ ℓ c).isRightAdjoint
@@ -152,7 +160,9 @@ variable {X Y : Over (Spec (.of k))}
 complexes: the functor `boundedConstructibleUpperShriekOfCompactification` attached to the chosen
 compactification `compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriek
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hf : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R(((compactificationOverField f).overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint] :
     Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   boundedConstructibleUpperShriekOfCompactification Λ ℓ (compactificationOverField f)
@@ -160,7 +170,9 @@ noncomputable def boundedConstructibleUpperShriek
 /-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes: the adjunction
 `Rf_!(c) ⊣ Rf^!(c)` for the chosen compactification `c = compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriekAdjunction
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hf : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R(((compactificationOverField f).overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint] :
     boundedConstructibleLowerShriek Λ ℓ f ⊣ boundedConstructibleUpperShriek Λ ℓ f :=
   boundedConstructibleUpperShriekOfCompactificationAdjunction Λ ℓ
@@ -169,13 +181,17 @@ noncomputable def boundedConstructibleUpperShriekAdjunction
 /-- The derived lower shriek `Rf_!` on bounded constructible complexes is a left adjoint, its
 right adjoint being `boundedConstructibleUpperShriek`. -/
 instance isLeftAdjoint_boundedConstructibleLowerShriek
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hf : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R(((compactificationOverField f).overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint] :
     (boundedConstructibleLowerShriek Λ ℓ f).IsLeftAdjoint :=
   (boundedConstructibleUpperShriekAdjunction Λ ℓ f).isLeftAdjoint
 
 instance isRightAdjoint_boundedConstructibleUpperShriek
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hf : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R(((compactificationOverField f).overG.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint] :
     (boundedConstructibleUpperShriek Λ ℓ f).IsRightAdjoint :=
   (boundedConstructibleUpperShriekAdjunction Λ ℓ f).isRightAdjoint

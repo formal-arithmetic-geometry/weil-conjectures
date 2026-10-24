@@ -191,7 +191,9 @@ followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h)
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
+    (hh : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((h.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star) :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ h :=
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ sq
@@ -212,7 +214,18 @@ compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁
 `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness)
+    (hh : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((h.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hp₁ : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p₁.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hp : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hhp₁ : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R(((h ≫ p₁).left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ p :=

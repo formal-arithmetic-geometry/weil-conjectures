@@ -108,7 +108,12 @@ include ℓ k
 `Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
 `Lp'^* ⊣ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
+    (hp : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hp' : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p'.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star) :
     boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
       (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j) ⋙
         (boundedConstructibleUpperStar Λ ℓ p' ⋙ boundedConstructibleLowerStar Λ ℓ p') :=
@@ -120,7 +125,12 @@ the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` 
 square, under `Rp_*` on the left and `Rp'_*` on the right. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
     (sq : IsPullback p i' j p')
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
+    (hp : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hp' : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p'.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star) :
     (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j) ⋙
         (boundedConstructibleUpperStar Λ ℓ p' ⋙ boundedConstructibleLowerStar Λ ℓ p') ≅
       (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleUpperStar Λ ℓ p) ⋙
@@ -134,7 +144,12 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeS
 `(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of the
 adjunction `Lp^* ⊣ Rp_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
+    (hp : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hp' : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p'.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star) :
     (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleUpperStar Λ ℓ p) ⋙
         (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
           boundedConstructibleLowerStar Λ ℓ p') ⟶
@@ -158,7 +173,12 @@ unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p')
-    (hΛ : RightDerivedLowerStarFiniteness Λ k := by right_derived_lower_star_finiteness) :
+    (hp : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star)
+    (hp' : boundedConstructible _ ≤
+      (boundedConstructible _).inverseImage R((p'.left)_*⟦Λ⟧) := by
+      bounded_constructible_lower_star) :
     boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
         boundedConstructibleLowerStar Λ ℓ p' :=

@@ -178,7 +178,7 @@ noncomputable def upperShriekDualizingComplexIso :
     (boundedConstructibleUpperShriek _ ℓ f).obj (dualizingComplex ℓ Y) ≅ dualizingComplex ℓ X :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (Over.mkIdTerminal.from Y)).app
       (𝟙_ _)).symm ≪≫
-    eqToIso (by rw [Over.mkIdTerminal.comp_from]; rfl)
+    eqToIso (by simp only [Over.mkIdTerminal.comp_from]; rfl)
 
 /-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`: the exchange morphism
 `Φ_{f,K,ω_Y}` precomposed with the inverse of `γ = upperShriekDualizingComplexIso`. -/
