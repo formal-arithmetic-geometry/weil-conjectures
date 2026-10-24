@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverCoefficient
 public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 
 /-! # Coefficient factors of the derived scalar pullback square
 

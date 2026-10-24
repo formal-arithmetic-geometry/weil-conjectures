@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
 public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 
 import WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 public import WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
