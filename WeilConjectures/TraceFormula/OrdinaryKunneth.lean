@@ -85,10 +85,10 @@ noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.pa
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ U ⟶ U)).map
             ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ j).counit.app B))))
 
-/-- Input from another section: **the ordinary Künneth formula along an open immersion**
-(blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, at the coefficient stage
-`ℚ̄_ℓ`, for `f = j` an open immersion and the identity of `X`). For an open immersion
-`j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
+/-- Input from another section: **the ordinary Künneth formula along an open immersion**, the
+special case `f = j` an open immersion of blueprint node `lem-trf-ordinary-kunneth` (section
+`sec-six-functors`, at the coefficient stage `ℚ̄_ℓ` and with the identity of `X`). For an open
+immersion `j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
 `M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` is an isomorphism (SGA 4½, [Th. finitude], Corollaire 1.11,
 a consequence of Deligne's generic base change theorem, [Th. finitude], Théorème 1.9; for
 `ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze, Section 6.8). -/
