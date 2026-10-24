@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSquareCoherence
 public import WeilConjectures.TraceFormula.SourceExchangeProjection
 
 /-!
@@ -120,6 +121,42 @@ lemma _root_.CategoryTheory.Functor.OplaxMonoidal.map_evaluation_comp_δ {𝒞 �
     MonoidalCategory.comp_whiskerRight_assoc, ← reassoc_of% h₁, MonoidalCategory.whiskerLeft_comp,
     Category.assoc, hnat]
 
+lemma _root_.CategoryTheory.Adjunction.map_μ_comp_homEquiv_comp {𝒜 𝒞 𝒳 𝒴 : Type*} [Category 𝒜]
+    [Category 𝒞] [Category 𝒳] [Category 𝒴] [MonoidalCategory 𝒜] [MonoidalCategory 𝒞]
+    [MonoidalCategory 𝒳] [MonoidalCategory 𝒴] (Q : 𝒜 ⥤ 𝒞) [Q.OplaxMonoidal] (U₂ : 𝒴 ⥤ 𝒜)
+    [U₂.Monoidal] (P₂ : 𝒳 ⥤ 𝒞) [P₂.Monoidal] (F : 𝒴 ⥤ 𝒳) [F.OplaxMonoidal] {S : 𝒳 ⥤ 𝒴}
+    (adj : F ⊣ S) (Θ : ∀ M : 𝒴, Q.obj (U₂.obj M) ⟶ P₂.obj (F.obj M))
+    (hnat : ∀ {M M' : 𝒴} (g : M ⟶ M'), Q.map (U₂.map g) ≫ Θ M' = Θ M ≫ P₂.map (F.map g))
+    (hΘ : ∀ M₁ M₂ : 𝒴, Θ (M₁ ⊗ M₂) ≫ P₂.map (Functor.OplaxMonoidal.δ F M₁ M₂) ≫
+        Functor.OplaxMonoidal.δ P₂ _ _ =
+      Q.map (Functor.OplaxMonoidal.δ U₂ M₁ M₂) ≫ Functor.OplaxMonoidal.δ Q _ _ ≫
+        (Θ M₁ ⊗ₘ Θ M₂))
+    (c : ∀ B : 𝒳, Q.obj (U₂.obj (S.obj B)) ⟶ P₂.obj B)
+    (hc : ∀ B, c B = Θ (S.obj B) ≫ P₂.map (adj.counit.app B))
+    (B₁ B₂ B : 𝒳) (e : B₁ ⊗ B₂ ⟶ B) :
+    Q.map (Functor.LaxMonoidal.μ U₂ (S.obj B₁) (S.obj B₂) ≫
+        U₂.map (adj.homEquiv _ _ (Functor.OplaxMonoidal.δ F (S.obj B₁) (S.obj B₂) ≫
+          (adj.counit.app B₁ ⊗ₘ adj.counit.app B₂)) ≫ S.map e)) ≫
+      c B =
+    Functor.OplaxMonoidal.δ Q _ _ ≫ (c B₁ ⊗ₘ c B₂) ≫ Functor.LaxMonoidal.μ P₂ B₁ B₂ ≫ P₂.map e := by
+  simp only [hc]
+  have h₁ : Θ (S.obj B₁ ⊗ S.obj B₂) ≫ P₂.map (Functor.OplaxMonoidal.δ F _ _) =
+      Q.map (Functor.OplaxMonoidal.δ U₂ _ _) ≫ Functor.OplaxMonoidal.δ Q _ _ ≫
+        (Θ _ ⊗ₘ Θ _) ≫ Functor.LaxMonoidal.μ P₂ _ _ := by
+    rw [← reassoc_of% (hΘ _ _), Functor.Monoidal.δ_μ, Category.comp_id]
+  have hμ : F.map (adj.homEquiv _ _ (Functor.OplaxMonoidal.δ F (S.obj B₁) (S.obj B₂) ≫
+      (adj.counit.app B₁ ⊗ₘ adj.counit.app B₂))) ≫ adj.counit.app (B₁ ⊗ B₂) =
+      Functor.OplaxMonoidal.δ F (S.obj B₁) (S.obj B₂) ≫ (adj.counit.app B₁ ⊗ₘ adj.counit.app B₂) := by
+    simp [Adjunction.homEquiv_unit]
+  have hc := adj.counit.naturality e
+  simp only [Functor.comp_map, Functor.id_map] at hc
+  rw [Q.map_comp, Category.assoc, reassoc_of% (hnat _), ← P₂.map_comp, F.map_comp, Category.assoc,
+    hc, ← Category.assoc (F.map _), hμ]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h₁, ← Q.map_comp_assoc, Functor.Monoidal.μ_δ, Q.map_id, Category.id_comp,
+    ← Functor.LaxMonoidal.μ_natural_assoc, ← MonoidalCategory.tensorHom_comp_tensorHom_assoc]
+  rfl
+
 lemma _root_.CategoryTheory.Adjunction.homEquiv_symm_comp_homEquiv {C D : Type*} [Category C]
     [Category D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) {A B : C} {Z : D} (p : A ⟶ B)
     (e : F.obj B ⟶ Z) : (adj.homEquiv A Z).symm (p ≫ adj.homEquiv B Z e) = F.map p ≫ e := by
@@ -180,6 +217,51 @@ lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOf
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ g A B)
     (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _) M W
 
+section Pullback
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  [IsEllAdicFinitenessCoefficient ℓ Λ]
+  {V W X Y : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
+  [IsSeparated V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+@[reassoc]
+lemma upperStar_map_comp_eqToHom_of_eq {u u' : V ⟶ Y} (h : u = u') {M M' : Dᵇc(Y.left)⟦Λ⟧}
+    (g : M ⟶ M') :
+    (boundedConstructibleUpperStar Λ ℓ u).map g ≫
+        eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar Λ ℓ r).obj M') h) =
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar Λ ℓ r).obj M) h) ≫
+        (boundedConstructibleUpperStar Λ ℓ u').map g := by
+  subst h
+  simp
+
+/-- The identification `Lq^* Lπ^* ≅ Lp^* Lf^*` of a commutative square `q ≫ π = p ≫ f` is
+compatible with the tensor structures. -/
+lemma upperStarComp_square_tensor_δ {q : V ⟶ W} {π : W ⟶ Y} {p : V ⟶ X} {f : X ⟶ Y}
+    (w : q ≫ π = p ≫ f) (M₁ M₂ : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleUpperStarComp Λ ℓ q π).inv.app (M₁ ⊗ M₂) ≫
+        eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj (M₁ ⊗ M₂)) w) ≫
+        (boundedConstructibleUpperStarComp Λ ℓ p f).hom.app (M₁ ⊗ M₂) ≫
+        (boundedConstructibleUpperStar Λ ℓ p).map
+          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ f) M₁ M₂) ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ p) _ _ =
+      (boundedConstructibleUpperStar Λ ℓ q).map
+          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ π) M₁ M₂) ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ q) _ _ ≫
+        (((boundedConstructibleUpperStarComp Λ ℓ q π).inv.app M₁ ≫
+            eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj M₁) w) ≫
+            (boundedConstructibleUpperStarComp Λ ℓ p f).hom.app M₁) ⊗ₘ
+          ((boundedConstructibleUpperStarComp Λ ℓ q π).inv.app M₂ ≫
+            eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj M₂) w) ≫
+            (boundedConstructibleUpperStarComp Λ ℓ p f).hom.app M₂)) := by
+  rw [← boundedConstructibleUpperStarComp_hom_app_tensor_δ,
+    reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar Λ ℓ w M₁ M₂),
+    reassoc_of% (boundedConstructibleUpperStarComp_inv_app_tensor_δ Λ ℓ q π M₁ M₂)]
+  simp only [MonoidalCategory.tensorHom_comp_tensorHom, Category.assoc]
+
+end Pullback
+
 section KernelPushforward
 
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -222,7 +304,32 @@ theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
       (prodUpperStarCounit ℓ (prod.map_snd f f) B₁ ⊗ₘ prodUpperStarCounit ℓ (prod.map_snd f f) B₂) ≫
       Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)) B₁ B₂ ≫
       (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map e :=
-  sorry
+  by
+  have hnat : ∀ {M M' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : M ⟶ M'),
+      (boundedConstructibleUpperStar _ ℓ (prod.map f f)).map
+          ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map g) ≫
+        ((boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.snd).inv.app M' ≫
+          eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar _ ℓ u).obj M')
+            (prod.map_snd f f)) ≫
+          (boundedConstructibleUpperStarComp _ ℓ (prod.snd : X ⨯ X ⟶ X) f).hom.app M') =
+      ((boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.snd).inv.app M ≫
+          eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar _ ℓ u).obj M)
+            (prod.map_snd f f)) ≫
+          (boundedConstructibleUpperStarComp _ ℓ (prod.snd : X ⨯ X ⟶ X) f).hom.app M) ≫
+        (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map
+          ((boundedConstructibleUpperStar _ ℓ f).map g) := by
+    intro M M' g
+    have h₁ := (boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.snd).inv.naturality g
+    have h₃ := (boundedConstructibleUpperStarComp _ ℓ (prod.snd : X ⨯ X ⟶ X) f).hom.naturality g
+    simp only [Functor.comp_map] at h₁ h₃
+    rw [reassoc_of% h₁, upperStar_map_comp_eqToHom_of_eq_assoc ℓ _ (prod.map_snd f f) g, h₃]
+    simp only [Category.assoc]
+  exact Adjunction.map_μ_comp_homEquiv_comp _ _ _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f) _ hnat
+    (fun M₁ M₂ ↦ by
+      simp only [Category.assoc]
+      exact upperStarComp_square_tensor_δ ℓ _ (prod.map_snd f f) M₁ M₂) _
+    (fun B ↦ by simp only [prodUpperStarCounit, Category.assoc]) B₁ B₂ B e
 
 /-- The evaluation part of identity (a) (blueprint `lem-trf-trace-source-exchange`, Step 3):
 `Π_f` and `μ_f` are adjoint to the counits of `f`. -/
