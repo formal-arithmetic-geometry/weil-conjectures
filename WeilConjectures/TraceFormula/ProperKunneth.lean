@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 public import WeilConjectures.TraceFormula.KunnethVerdier
@@ -210,5 +211,118 @@ lemma upperStarComp_inv_app_comp_prodUpperStarCounit_left {P'' : Over (Spec (.of
     (map_eqToHom_comp_upperStarComp_inv_app ℓ r w' _)
 
 end Counit
+
+/-! ### The braiding -/
+
+/-- The derived pullback on bounded constructible `ℚ̄_ℓ`-sheaves is compatible with the Koszul
+braidings. -/
+lemma boundedConstructibleUpperStar_δ_braiding {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
+    (K M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) K M ≫
+        (β_ ((boundedConstructibleUpperStar _ ℓ f).obj K)
+          ((boundedConstructibleUpperStar _ ℓ f).obj M)).hom =
+      (boundedConstructibleUpperStar _ ℓ f).map (β_ K M).hom ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) M K :=
+  sorry
+
+/-! ### The Künneth map -/
+
+section Kunneth
+
+variable {P Q R X₁ X₂ Y₁ Y₂ : Over (Spec (.of k))}
+  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+  [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [IsSeparated Q.hom]
+  [LocallyOfFiniteType R.hom] [QuasiCompact R.hom] [IsSeparated R.hom]
+  [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
+  [LocallyOfFiniteType X₂.hom] [QuasiCompact X₂.hom] [IsSeparated X₂.hom]
+  [LocallyOfFiniteType Y₁.hom] [QuasiCompact Y₁.hom] [IsSeparated Y₁.hom]
+  [LocallyOfFiniteType Y₂.hom] [QuasiCompact Y₂.hom] [IsSeparated Y₂.hom]
+
+/-- **The Künneth map of a factorization `q = r ≫ s` is an isomorphism**: let
+`q ≫ πᵢ = pᵢ ≫ fᵢ` be commutative squares with `f₁`, `f₂` proper, such that `q = r ≫ s` with `r`
+and `s` proper, `p₁ ≫ f₁ = r ≫ (s ≫ π₁)` cartesian and `p₂ = r ≫ ρ₂` with `ρ₂ ≫ f₂ = s ≫ π₂`
+cartesian. Then the transpose of
+`Lq^* (Lπ₁^* Rf₁* B₁ ⊗ Lπ₂^* Rf₂* B₂) ⟶ Lq^* Lπ₁^* Rf₁* B₁ ⊗ Lq^* Lπ₂^* Rf₂* B₂ ⟶ Lp₁^* B₁ ⊗ Lp₂^* B₂`
+is an isomorphism. -/
+theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit {q : P ⟶ Q} {p₁ : P ⟶ X₁}
+    {p₂ : P ⟶ X₂} {π₁ : Q ⟶ Y₁} {π₂ : Q ⟶ Y₂} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} (r : P ⟶ R)
+    (s : R ⟶ Q) (ρ₂ : R ⟶ X₂) (hq : r ≫ s = q) (hp₂ : r ≫ ρ₂ = p₂) (w₁ : q ≫ π₁ = p₁ ≫ f₁)
+    (w₂ : q ≫ π₂ = p₂ ≫ f₂) (sq₁ : IsPullback p₁ r f₁ (s ≫ π₁)) (sq₂ : IsPullback ρ₂ s f₂ π₂)
+    [IsProper f₁.left] [IsProper f₂.left] [IsProper r.left] [IsProper s.left]
+    (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).homEquiv _ _
+      (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ q) _ _ ≫
+        (prodUpperStarCounit ℓ w₁ B₁ ⊗ₘ prodUpperStarCounit ℓ w₂ B₂))) := by
+  subst hq hp₂
+  have hc₁ := upperStarComp_inv_app_comp_prodUpperStarCounit_right ℓ w₁ sq₁.w.symm B₁
+  have : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ r).homEquiv _ _
+      ((boundedConstructibleUpperStarComp _ ℓ r s).inv.app _ ≫ prodUpperStarCounit ℓ w₁ B₁)) := by
+    rw [hc₁, Adjunction.homEquiv_naturality_left]
+    have := isIso_homEquiv_prodUpperStarCounit ℓ sq₁ B₁
+    infer_instance
+  have := isIso_homEquiv_prodUpperStarCounit ℓ sq₂ B₂
+  have := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ s).isIso_leftProjectionMorphism
+    (boundedConstructibleUpperStar_δ_braiding ℓ s)
+    ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁))
+    ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂)
+  exact Adjunction.isIso_homEquiv_δ_tensorHom
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ r)
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ s)
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (r ≫ s))
+    (boundedConstructibleUpperStarComp _ ℓ r s)
+    (boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ r s) _ _
+    (prodUpperStarCounit ℓ sq₂.w.symm B₂) ((boundedConstructibleUpperStarComp _ ℓ r ρ₂).inv.app B₂)
+    (upperStarComp_inv_app_comp_prodUpperStarCounit_left ℓ w₂ sq₂.w.symm B₂)
+
+variable (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
+
+/-- The *Künneth map* `Π : Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` (blueprint
+`def-trf-kernel-pushforward-maps`, item 5): the adjoint for `Lq^* ⊣ Rq_*`, `q = f₁ × f₂`, of
+```
+Lq^* (Lp₁^* Rf₁* B₁ ⊗ Lp₂^* Rf₂* B₂) ≅ Lq^* Lp₁^* Rf₁* B₁ ⊗ Lq^* Lp₂^* Rf₂* B₂
+  ⟶ Lp₁^* B₁ ⊗ Lp₂^* B₂,
+```
+the monoidal structure of `Lq^*` followed by the counits. For proper `f_i` it is the inverse of
+the `!`-Künneth isomorphism `Ku_!` of `def-sf-kv-maps` (i) under `Rq_* ≅ Rq_!`. -/
+noncomputable def prodLowerStarExternalProduct
+    (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁)
+        ((boundedConstructibleLowerStar _ ℓ f₂).obj B₂) ⟶
+      (boundedConstructibleLowerStar _ ℓ (prod.map f₁ f₂)).obj (externalProduct ℓ B₁ B₂) :=
+  (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map f₁ f₂)).homEquiv _ _
+    ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (prod.map f₁ f₂)) _ _).inv ≫
+      (prodUpperStarCounit ℓ (prod.map_fst f₁ f₂) B₁ ⊗ₘ
+        prodUpperStarCounit ℓ (prod.map_snd f₁ f₂) B₂))
+
+/-- **The relative product theorem for proper morphisms** (blueprint `thm-sf-kunneth-relative`,
+compatibility with `Rf_! ≅ Rf_*` for proper `f`, as used in `def-sf-kv-maps` (i)): for proper
+`f₁`, `f₂` the Künneth map `Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` is an isomorphism. It is
+the Künneth map of the factorization `f₁ × f₂ = (f₁ × 1) ≫ (1 × f₂)` into base changes of `f₁` and
+`f₂` (`isIso_homEquiv_δ_tensorHom_prodUpperStarCounit`). -/
+instance isIso_prodLowerStarExternalProduct [IsProper f₁.left] [IsProper f₂.left]
+    (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (prodLowerStarExternalProduct ℓ f₁ f₂ B₁ B₂) := by
+  have : IsProper (prod.map f₁ (𝟙 X₂)).left :=
+    MorphismProperty.of_isPullback ((IsPullback.of_prod_fst_with_id f₁ X₂).map (Over.forget _))
+      (inferInstanceAs (IsProper f₁.left))
+  have : IsProper (prod.map (𝟙 Y₁) f₂).left :=
+    MorphismProperty.of_isPullback ((IsPullback.of_prod_snd_with_id f₂ Y₁).map (Over.forget _))
+      (inferInstanceAs (IsProper f₂.left))
+  have h : prod.map (𝟙 Y₁) f₂ ≫ prod.fst = prod.fst := by simp
+  have sq₁ : IsPullback (prod.fst : X₁ ⨯ X₂ ⟶ X₁) (prod.map f₁ (𝟙 X₂)) f₁
+      (prod.map (𝟙 Y₁) f₂ ≫ prod.fst) := by
+    rw [h]
+    exact IsPullback.of_prod_fst_with_id f₁ X₂
+  rw [prodLowerStarExternalProduct, Functor.Monoidal.μIso_inv]
+  exact isIso_homEquiv_δ_tensorHom_prodUpperStarCounit ℓ (prod.map f₁ (𝟙 X₂))
+    (prod.map (𝟙 Y₁) f₂) prod.snd (by simp) (by simp) _ _ sq₁
+    (IsPullback.of_prod_snd_with_id f₂ Y₁) B₁ B₂
+
+end Kunneth
 
 end AlgebraicGeometry.ProEtale.CondensedRing
