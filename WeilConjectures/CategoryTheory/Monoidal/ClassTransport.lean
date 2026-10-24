@@ -60,6 +60,14 @@ lemma transportζ_comp_ιΦ (Y : S) :
   rw [transportζ, h₁, Category.assoc, h₂]
   exact Iso.inv_hom_id_app_assoc ιΦ (F.obj (G.obj Y)) _
 
+/-- `ζ` read through the exceptional adjunction `S₁ ⊣ B₁`. -/
+lemma transportζ_homEquiv {B₁ : S ⥤ P} (adjSB : S₁ ⊣ B₁) {Z : P} {K : S} (g : S₁.obj Z ⟶ K) :
+    F.map (adjSB.homEquiv _ _ g) ≫ transportζ adjFG ιΦ (B₁.obj K) ≫ adjSB.counit.app K =
+      transportζ adjFG ιΦ Z ≫ g := by
+  rw [Adjunction.homEquiv_unit, F.map_comp, Category.assoc, transportζ_naturality_assoc,
+    transportζ_naturality_assoc]
+  simp
+
 lemma transportζ_eq (Y : S) :
     transportζ adjFG ιΦ (G.obj Y) = adjFG.counit.app Y ≫ ιΦ.inv.app Y := by
   rw [← transportζ_comp_ιΦ adjFG ιΦ Y]
@@ -97,6 +105,76 @@ theorem transport_class
     ← BraidedCategory.braiding_naturality_right_assoc, braiding_tensorUnit_right,
     braiding_tensorUnit_left]
   simp
+
+section Projection
+
+variable {L I : S ⥤ S} {A₁ : S ⥤ P} (c₁ : L ≅ G ⋙ S₁) (u : L ≅ 𝟭 S) (cI : I ≅ A₁ ⋙ F)
+  (s : I ≅ 𝟭 S)
+
+/-- **`ζ` is compatible with the projection morphisms**: if the projection morphism of the
+composite `L ≅ G ⋙ S₁` is given by those of `G` and `S₁` (`hcomp`), that of `L ≅ 𝟭` is trivial
+(`hid`), and that of `G` is the projection morphism of `F ⊣ G` (`hpf`), then
+`μ ≫ ζ = (ζ ⊗ eB) ≫ pf₁` for `eB : F (A₁ M) ≅ I M ≅ M`. -/
+theorem transportζ_projection (hu : ιΦ = c₁.symm ≪≫ u)
+    (pfL : ∀ (T M : S), L.obj T ⊗ M ⟶ L.obj (T ⊗ I.obj M))
+    (pf₁ : ∀ (W : P) (M : S), S₁.obj W ⊗ M ⟶ S₁.obj (W ⊗ A₁.obj M))
+    (pfΔ : ∀ (T : S) (N : P), G.obj T ⊗ N ⟶ G.obj (T ⊗ F.obj N))
+    [∀ T N, IsIso (pfΔ T N)]
+    (hpf : ∀ T N, F.map (pfΔ T N) ≫ adjFG.counit.app (T ⊗ F.obj N) =
+      δ F (G.obj T) N ≫ adjFG.counit.app T ▷ F.obj N)
+    (hcomp : ∀ T M, pfL T M ≫ L.map (T ◁ cI.hom.app M) =
+      c₁.hom.app T ▷ M ≫ pf₁ (G.obj T) M ≫ S₁.map (pfΔ T (A₁.obj M)) ≫
+        c₁.inv.app (T ⊗ F.obj (A₁.obj M)))
+    (hid : ∀ T M, pfL T M ≫ u.hom.app (T ⊗ I.obj M) ≫ T ◁ s.hom.app M = u.hom.app T ▷ M)
+    (hnat : ∀ {W W' : P} (f : W ⟶ W') (M : S),
+      S₁.map f ▷ M ≫ pf₁ W' M = pf₁ W M ≫ S₁.map (f ▷ A₁.obj M))
+    (W : P) (M : S) :
+    μ F W (A₁.obj M) ≫ transportζ adjFG ιΦ (W ⊗ A₁.obj M) =
+      (transportζ adjFG ιΦ W ⊗ₘ (cI.inv.app M ≫ s.hom.app M)) ≫ pf₁ W M := by
+  subst hu
+  -- the case `W = G T`
+  have key : ∀ T : S, μ F (G.obj T) (A₁.obj M) ≫ transportζ adjFG (c₁.symm ≪≫ u)
+      (G.obj T ⊗ A₁.obj M) = (transportζ adjFG (c₁.symm ≪≫ u) (G.obj T) ⊗ₘ
+        (cI.inv.app M ≫ s.hom.app M)) ≫ pf₁ (G.obj T) M := by
+    intro T
+    have h₁ : pf₁ (G.obj T) M ≫ S₁.map (pfΔ T (A₁.obj M)) =
+        c₁.inv.app T ▷ M ≫ pfL T M ≫ L.map (T ◁ cI.hom.app M) ≫
+          c₁.hom.app (T ⊗ F.obj (A₁.obj M)) := by
+      rw [reassoc_of% (hcomp T M)]
+      simp [← comp_whiskerRight_assoc]
+    have h₂ : pfL T M = u.hom.app T ▷ M ≫ T ◁ s.inv.app M ≫ u.inv.app (T ⊗ I.obj M) := by
+      rw [← hid T M]
+      simp only [Category.assoc]
+      rw [← MonoidalCategory.whiskerLeft_comp_assoc, Iso.hom_inv_id_app,
+        MonoidalCategory.whiskerLeft_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+    have h₃ := u.inv.naturality (T ◁ cI.hom.app M)
+    simp only [Functor.id_map] at h₃
+    rw [← cancel_mono (S₁.map (pfΔ T (A₁.obj M))), Category.assoc, ← transportζ_naturality,
+      transportζ_eq, ← Category.assoc (F.map _), hpf]
+    simp only [Category.assoc]
+    rw [h₁, h₂, transportζ_eq]
+    simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc,
+      Functor.Monoidal.μ_δ_assoc]
+    rw [← reassoc_of% h₃, tensorHom_def']
+    simp only [comp_whiskerRight, Category.assoc, Functor.id_obj]
+    rw [← comp_whiskerRight_assoc (c₁.hom.app T), Iso.hom_inv_id_app]
+    simp only [id_whiskerRight, Category.id_comp]
+    rw [← comp_whiskerRight_assoc (u.inv.app T), Iso.inv_hom_id_app]
+    simp only [Functor.id_obj, id_whiskerRight, Category.id_comp]
+    rw [← whisker_exchange_assoc]
+    simp only [← whiskerLeft_comp_assoc, Category.assoc, MonoidalCategory.whiskerLeft_id,
+      Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+    rw [whisker_exchange_assoc, ← whiskerLeft_comp_assoc, Iso.inv_hom_id_app]
+    simp
+  rw [← cancel_mono (S₁.map (adjFG.unit.app W ▷ A₁.obj M)), Category.assoc,
+    ← transportζ_naturality, ← Functor.LaxMonoidal.μ_natural_left_assoc]
+  simp only [Functor.comp_obj]
+  rw [key, Category.assoc, ← hnat]
+  simp only [Functor.id_obj]
+  rw [tensorHom_comp_whiskerRight_assoc, ← transportζ_naturality,
+    ← whiskerRight_comp_tensorHom_assoc]
+
+end Projection
 
 section Conjugate
 
