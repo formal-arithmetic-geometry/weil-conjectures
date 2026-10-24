@@ -12649,6 +12649,10 @@ public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 public import WeilConjectures.TraceFormula.CategoricalTraceExact
 public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
 public import WeilConjectures.TraceFormula.CoefficientMorphism
+public import WeilConjectures.TraceFormula.CoefficientMorphismAdditivity
+public import WeilConjectures.TraceFormula.CoefficientMorphismBasic
+public import WeilConjectures.TraceFormula.CoefficientMorphismProper
+public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
@@ -12680,6 +12684,8 @@ public import WeilConjectures.TraceFormula.LocalTermLocality
 public import WeilConjectures.TraceFormula.LocalizationFrobenius
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.ModelExtension
+public import WeilConjectures.TraceFormula.ModelOpenClosed
+public import WeilConjectures.TraceFormula.ModelProjectiveImmersion
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.OpenPieceFrobenius
