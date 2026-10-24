@@ -18,8 +18,7 @@ For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` (blueprint
   (`Correspondence.ProperPushforwardDiagram.kernelClass_pushforward`, blueprint
   `lem-trf-trace-source-exchange`);
 * the evaluation kernels are exchanged by the kernel pushforward (blueprint
-  `lem-trf-trace-map-exchange`, (1); proved in
-  `WeilConjectures.TraceFormula.ProperCompatibilityEvaluation`);
+  `lem-trf-trace-map-exchange`, (1); proved in `WeilConjectures.TraceFormula.ProperCompatibility`);
 * the support isomorphisms are exchanged by the exchange map of the support square
   (`Correspondence.ProperPushforwardDiagram.lowerStar_map_supportIso_comp_exchange`, blueprint
   `lem-trf-trace-map-exchange`, (2)).

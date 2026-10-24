@@ -14,7 +14,10 @@ public import WeilConjectures.TraceFormula.ProperCompatibilityEvaluation
 For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed
 loci `h`, the Borel–Moore pushforward of the trace class of `u` is the trace class of the pushed
 correspondence: `h_* Tr_c(u) = Tr_b([f, g]_! u)` (blueprint `thm-trf-trace-proper-compatibility`,
-`sk-p-proper`).
+`sk-p-proper`). The proof goes through the exchange of the evaluation kernels along `f`
+(`ProEtale.CondensedRing.kernelPushforward_comp_evaluationKernel_lowerStar`, blueprint
+`lem-trf-trace-map-exchange`, (1)), of the support isomorphisms (`lem-trf-trace-map-exchange`,
+(2)) and of the trace-class sources (`lem-trf-trace-source-exchange`).
 
 -/
 
