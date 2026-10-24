@@ -72,7 +72,13 @@ lemma map_homEquiv_comp_counit {X : D} {A : C} (c : F.obj X ⟶ A) :
   simp [homEquiv_unit]
 
 /-- The transpose of `F (X ⊗ E) ⟶ F X ⊗ F E ⟶ A ⊗ F E` is the transpose of `F X ⟶ A` followed
-by the projection morphism. -/
+by the projection morphism: writing `c♯ : X ⟶ G A` for the transpose of `c`, the transpose of
+the top row is the composite of the bottom row in
+```
+F (X ⊗ E) ──δ──▶ F X ⊗ F E ──c ▷ F E──▶ A ⊗ F E
+X ⊗ E ──c♯ ▷ E──▶ G A ⊗ E ──projectionMorphism──▶ G (A ⊗ F E)
+```
+-/
 lemma homEquiv_δ_whiskerRight {X : D} {A : C} (c : F.obj X ⟶ A) (E : D) :
     adj.homEquiv _ _ (δ F X E ≫ c ▷ F.obj E) =
       adj.homEquiv _ _ c ▷ E ≫ adj.projectionMorphism A E := by
@@ -80,7 +86,13 @@ lemma homEquiv_δ_whiskerRight {X : D} {A : C} (c : F.obj X ⟶ A) (E : D) :
     ← comp_whiskerRight, map_homEquiv_comp_counit]
 
 /-- The transpose of `F (E ⊗ X) ⟶ F E ⊗ F X ⟶ F E ⊗ A` is the transpose of `F X ⟶ A` followed
-by the left projection morphism. -/
+by the left projection morphism: writing `c♯ : X ⟶ G A` for the transpose of `c`, the
+transpose of the top row is the composite of the bottom row in
+```
+F (E ⊗ X) ──δ──▶ F E ⊗ F X ──F E ◁ c──▶ F E ⊗ A
+E ⊗ X ──E ◁ c♯──▶ E ⊗ G A ──leftProjectionMorphism──▶ G (F E ⊗ A)
+```
+-/
 lemma homEquiv_δ_whiskerLeft {X : D} {A : C} (c : F.obj X ⟶ A) (E : D) :
     adj.homEquiv _ _ (δ F E X ≫ F.obj E ◁ c) =
       E ◁ adj.homEquiv _ _ c ≫ adj.leftProjectionMorphism E A := by
@@ -90,7 +102,14 @@ lemma homEquiv_δ_whiskerLeft {X : D} {A : C} (c : F.obj X ⟶ A) (E : D) :
 variable [BraidedCategory C] [BraidedCategory D]
 
 /-- For `F` compatible with the braidings, the left projection morphism is the projection
-morphism conjugated by the braidings. -/
+morphism conjugated by the braidings: the square
+```
+B ⊗ G A ───────leftProjectionMorphism───────▶ G (F B ⊗ A)
+   │ β                                             ▲ G β⁻¹
+   ▼                                               │
+G A ⊗ B ─────────projectionMorphism──────────▶ G (A ⊗ F B)
+```
+commutes. -/
 lemma leftProjectionMorphism_eq
     (h : ∀ X Y : D, δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom = F.map (β_ X Y).hom ≫ δ F Y X)
     (B : D) (A : C) :
@@ -151,7 +170,16 @@ variable {C₁ : Type u₁} [Category.{v₁} C₁] {C₂ : Type u₂} [Category.
   {Q' : C₃ ⥤ C₁} {Q : C₁ ⥤ C₃} (adjQ : Q' ⊣ Q)
 
 /-- Transposing along an adjunction `Q' ⊣ Q` with `Q' ≅ S' ⋙ R'` is transposing along `R' ⊣ R`
-and then along `S' ⊣ S`, followed by the identification `R ⋙ S ≅ Q` of right adjoints. -/
+and then along `S' ⊣ S`, followed by the identification `R ⋙ S ≅ Q` of right adjoints: for
+`g : Q' U ⟶ A`, with `h = e⁻¹ ≫ g : R' (S' U) ⟶ A`, `h♭ : S' U ⟶ R A` its transpose along
+`R' ⊣ R` and `h♭♭ : U ⟶ S (R A)` the transpose of `h♭` along `S' ⊣ S`, the triangle
+```
+U ───────h♭♭──────▶ S (R A)
+  ╲                    │ ≅
+   g♯ ╲                ▼
+        ╲──────────▶ Q A
+```
+commutes, where `g♯` is the transpose of `g` along `Q' ⊣ Q`. -/
 lemma homEquiv_eq_homEquiv_homEquiv (e : Q' ≅ S' ⋙ R') {U : C₃} {A : C₁} (g : Q'.obj U ⟶ A) :
     adjQ.homEquiv _ _ g =
       adjS.homEquiv _ _ (adjR.homEquiv _ _ (e.inv.app U ≫ g)) ≫

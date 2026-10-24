@@ -7973,7 +7973,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
-public import WeilConjectures.CategoryTheory.ModuleObjects.MapModBraided
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
@@ -7996,7 +7995,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
-public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraidingAux
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedCompAux
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
@@ -12325,7 +12323,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
@@ -12368,7 +12365,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BraidedModule
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Braided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
@@ -12616,6 +12613,7 @@ public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.OpenPieceFrobenius
 public import WeilConjectures.TraceFormula.OpenSquare
+public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointTrace
 public import WeilConjectures.TraceFormula.Product

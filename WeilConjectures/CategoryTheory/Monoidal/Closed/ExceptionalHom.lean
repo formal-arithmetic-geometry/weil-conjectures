@@ -57,6 +57,16 @@ noncomputable def ihomIsoOfIso {A A' B B' : 𝒞} (eA : A ≅ A') (eB : B ≅ B'
     (ihom A).obj B ≅ (ihom A').obj B' :=
   (ihom A).mapIso eB ≪≫ (internalHom.mapIso eA.symm.op).app B'
 
+/-- Transporting the mate `𝟙 ⟶ RHom(A, B)` of `u : A ⟶ B` along `RHom(A, B) ≅ RHom(A', B')` gives
+the mate of the transported map `A' ⟶ A ⟶ B ⟶ B'`. -/
+lemma curry'_comp_ihomIsoOfIso_hom {A A' B B' : 𝒞} (u : A ⟶ B) (eA : A ≅ A') (eB : B ≅ B') :
+    curry' u ≫ (ihomIsoOfIso eA eB).hom = curry' (eA.inv ≫ u ≫ eB.hom) := by
+  rw [ihomIsoOfIso, Iso.trans_hom, Functor.mapIso_hom, curry', ← Category.assoc,
+    ← curry_natural_right]
+  change curry _ ≫ (pre eA.inv).app B' = _
+  rw [curry_pre_app, curry', ← rightUnitor_naturality_assoc]
+  simp only [Category.assoc]
+
 end IhomIso
 
 namespace Verdier
@@ -181,6 +191,16 @@ theorem curry'_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app M
     IsIso.inv_hom_id_assoc, curry', uncurry_curry, Adjunction.homEquiv_counit,
     ← Functor.map_comp_assoc, Iso.inv_hom_id_assoc, ← Adjunction.homEquiv_counit,
     Equiv.apply_symm_apply]
+
+/-- The exceptional adjoint of a transported mate followed by the exceptional internal hom exchange
+and `S g` is the class of the transported map followed by `g`. -/
+lemma homEquiv_symm_curry'_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)]
+    {A B : C} (u : A ⟶ B) (eA : A ≅ F.obj M) (eB : B ≅ S.obj N) {N' : D} (g : (ihom M).obj N ⟶ N') :
+    (adj'.homEquiv _ _).symm (curry' u ≫ (ihomIsoOfIso eA eB).hom ≫
+        exceptionalHomMap adj' pf M N ≫ S.map g) =
+      (correspondenceClassEquiv adj' pf M N).symm (eA.inv ≫ u ≫ eB.hom) ≫ g := by
+  rw [← Category.assoc, curry'_comp_ihomIsoOfIso_hom, ← Category.assoc,
+    curry'_comp_exceptionalHomMap, ← Adjunction.homEquiv_naturality_right, Equiv.symm_apply_apply]
 
 omit [MonoidalClosed C] [MonoidalClosed D] in
 /-- Naturality of `leftProjection` in the object `M`. -/

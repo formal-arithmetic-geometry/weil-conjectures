@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
@@ -44,7 +44,7 @@ an isomorphism as soon as
   is the projection formula for the proper morphisms `r` and `s`
   (`isIso_projectionMorphism_boundedConstructible_padicAlgCl`), together with the compatibility of
   the derived pullback with the Koszul braidings for the left one
-  (`boundedConstructibleUpperStar_δ_braiding`).
+  (`boundedConstructibleUpperStar_map_braiding_hom_δ`).
 
 The transported counits are compatible with the composition isomorphisms of the pullbacks
 (`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit_left`,
@@ -259,7 +259,7 @@ theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit {q : P ⟶ Q} {p₁ : P 
     infer_instance
   have := isIso_homEquiv_prodUpperStarCounit ℓ sq₂ B₂
   have := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ s).isIso_leftProjectionMorphism
-    (boundedConstructibleUpperStar_δ_braiding _ ℓ s)
+    (fun K M ↦ (boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ s K M).symm)
     ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁))
     ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂)
   exact Adjunction.isIso_homEquiv_δ_tensorHom
