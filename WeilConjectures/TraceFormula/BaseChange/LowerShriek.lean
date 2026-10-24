@@ -6,6 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeFrobenius
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
+public import WeilConjectures.TraceFormula.BaseChange.CubeCoherence
+public import WeilConjectures.TraceFormula.BaseChangeCoherence
+public import WeilConjectures.TraceFormula.RelativeFrobeniusProper
 public import WeilConjectures.TraceFormula.BaseChange.WeilObject
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.RelativeFrobenius
@@ -50,6 +55,8 @@ universe u
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Functor CategoryTheory.Obj
+
 namespace AlgebraicGeometry
 
 open Scheme ProEtale.CondensedRing
@@ -63,7 +70,7 @@ lemma isPullback_geometricBaseChange_map_left [Algebra k Ω] {X Y : Over (Spec (
     (f : X ⟶ Y) :
     IsPullback ((geometricBaseChange k Ω).map f).left (geometricBaseChangeProj X)
       (geometricBaseChangeProj Y) f.left := by
-  refine (IsPullback.of_bot ?_ (geometricBaseChange_map_left_comp_proj f).symm
+  refine (IsPullback.of_bot ?_ (geometricBaseChange_map_left_comp_proj (Ω := Ω) f).symm
     (isPullback_geometricBaseChangeProj Y)).flip
   have hw : ((geometricBaseChange k Ω).map f).left ≫ ((geometricBaseChange k Ω).obj Y).hom =
       ((geometricBaseChange k Ω).obj X).hom :=
@@ -134,6 +141,193 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] (Ω : Ty
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom) (N : ℕ)
 
+/-! ### Proper base change along the base change `π` -/
+
+section ProperBaseChange
+
+variable {Ω} (f) in
+/-- The transport `L(f̄ ≫ π_Y)^* ≅ L(π_X ≫ f)^*` along the square `f̄ ≫ π_Y = π_X ≫ f`. -/
+noncomputable def leftDerivedUpperStarGeometricBaseChangeCongr :
+    L((Over.Hom.left ((geometricBaseChange k Ω).map f) ≫
+        geometricBaseChangeProj (Ω := Ω) Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
+      L((geometricBaseChangeProj (Ω := Ω) X ≫ f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  pullbackCongrIso (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S)
+    Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
+    (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (geometricBaseChange_map_left_comp_proj (Ω := Ω) f)
+
+variable {Ω} (f) in
+/-- The comparison `Lπ_Y^* ⋙ Lf̄^* ≅ Lf^* ⋙ Lπ_X^*` of the derived pullbacks along the square
+`f̄ ≫ π_Y = π_X ≫ f` of the base change, on the ambient derived categories: the composite
+`L(f̄ ≫ π_Y)^* = L(π_X ≫ f)^*` of the composition isomorphisms. -/
+noncomputable def leftDerivedUpperStarGeometricBaseChangeComparison :
+    L((geometricBaseChangeProj (Ω := Ω) Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
+        L((Over.Hom.left ((geometricBaseChange k Ω).map f))^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
+      L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
+        L((geometricBaseChangeProj (Ω := Ω) X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
+      ((geometricBaseChange k Ω).map f).left (geometricBaseChangeProj (Ω := Ω) Y)).symm ≪≫
+    leftDerivedUpperStarGeometricBaseChangeCongr ℓ f ≪≫
+    leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
+      (geometricBaseChangeProj (Ω := Ω) X) f.left
+
+variable {Ω} (f) in
+/-- The components of `leftDerivedUpperStarGeometricBaseChangeComparison`. -/
+lemma leftDerivedUpperStarGeometricBaseChangeComparison_hom_app
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))) :
+    (leftDerivedUpperStarGeometricBaseChangeComparison ℓ (Ω := Ω) f).hom.app M =
+      (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
+          ((geometricBaseChange k Ω).map f).left (geometricBaseChangeProj (Ω := Ω) Y)).inv.app M ≫
+        (leftDerivedUpperStarGeometricBaseChangeCongr ℓ f).hom.app M ≫
+        (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
+          (geometricBaseChangeProj (Ω := Ω) X) f.left).hom.app M := by
+  simp only [leftDerivedUpperStarGeometricBaseChangeComparison, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app]
+
+variable (f) in
+/-- The comparison `θ_π : Lπ_Y^* ⋙ Lf̄^* ≅ Lf^* ⋙ Lπ_X^*` of the derived pullbacks along the
+square `f̄ ≫ π_Y = π_X ≫ f` of the base change, on bounded constructible complexes. -/
+noncomputable def geometricBaseChangePullbackComparison :
+    geometricBaseChangeUpperStar Ω ℓ Y ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((geometricBaseChange k Ω).map f) ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        geometricBaseChangeUpperStar Ω ℓ X :=
+  NatIso.ofComponents
+    (fun K ↦ ObjectProperty.isoMk _
+      ((leftDerivedUpperStarGeometricBaseChangeComparison ℓ (Ω := Ω) f).app K.obj))
+    (fun φ ↦ ObjectProperty.hom_ext _
+      ((leftDerivedUpperStarGeometricBaseChangeComparison ℓ (Ω := Ω) f).hom.naturality φ.hom))
+
+variable (f) in
+/-- On the ambient derived categories, `θ_π` is
+`leftDerivedUpperStarGeometricBaseChangeComparison`. -/
+lemma geometricBaseChangePullbackComparison_hom_app_hom
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((geometricBaseChangePullbackComparison ℓ Ω f).hom.app K).hom =
+      (leftDerivedUpperStarGeometricBaseChangeComparison ℓ (Ω := Ω) f).hom.app K.obj :=
+  (congrArg InducedCategory.Hom.hom (NatIso.ofComponents_hom_app _ _ K)).trans
+    ((congrArg InducedCategory.Hom.hom (ObjectProperty.isoMk_hom _ _)).trans
+      ((ObjectProperty.homMk_hom _).trans (Iso.app_hom _ _)))
+
+variable (f) in
+/-- The *base change morphism along the base change* `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` of the
+square `f̄ ≫ π_Y = π_X ≫ f`: the exchange morphism of `θ_π` under the adjunctions
+`Lf^* ⊣ Rf_*` and `Lf̄^* ⊣ Rf̄_*`. -/
+noncomputable abbrev geometricBaseChangeLowerStarBaseChange :
+    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        geometricBaseChangeUpperStar Ω ℓ Y ⟶
+      geometricBaseChangeUpperStar Ω ℓ X ⋙
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((geometricBaseChange k Ω).map f) :=
+  Adjunction.exchangeRight
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((geometricBaseChange k Ω).map f))
+    (geometricBaseChangePullbackComparison ℓ Ω f)
+
+variable (f) in
+/-- **Proper base change along the base change to `Ω`** (blueprint
+`sk-thm-sfb-proper-base-change`, for the cartesian square `f̄ ≫ π_Y = π_X ≫ f`,
+`isPullback_geometricBaseChange_map_left`): for a proper morphism `f` of separated schemes of
+finite type over `k`, the base change morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the
+projection `π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. The blueprint
+statement is for an arbitrary cartesian square; the project's version
+(`isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`) only covers squares of schemes of
+finite type over one field, and `π_Y` is the base change of `Spec Ω ⟶ Spec k`, which is not of
+finite type. -/
+theorem isIso_geometricBaseChangeLowerStarBaseChange [IsProper f.left] :
+    IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) :=
+  sorry
+
+omit [Finite k] in
+/-- The base change `f̄` of a proper morphism is proper. -/
+instance isProper_geometricBaseChange_map_left [IsProper f.left] :
+    IsProper ((geometricBaseChange k Ω).map f).left :=
+  MorphismProperty.of_isPullback (isPullback_geometricBaseChange_map_left f).flip ‹_›
+
+end ProperBaseChange
+
+/-! ### The Frobenius structures -/
+
+section Frobenius
+
+variable [IsProper f.left]
+
+omit [IsProper f.left] in
+include hf in
+/-- The square `Φ_X ≫ f̄ = f̄ ≫ Φ_Y` of the model Frobenii, as a commutative square. -/
+lemma commSq_baseChangeModelFrobenius :
+    CommSq (baseChangeModelFrobenius Ω X N eX.hom) ((geometricBaseChange k Ω).map f)
+      ((geometricBaseChange k Ω).map f) (baseChangeModelFrobenius Ω Y N eY.hom) :=
+  ⟨baseChangeModelFrobenius_comp_map N hf⟩
+
+/-- **The pullback cube**: on bounded constructible complexes, the comparisons of the derived
+pullbacks along the squares of `e`, of the base change `π` and of the model Frobenii `Φ`
+commute with the Frobenius comparisons of the base change
+(`weilGeometricBaseChangeComparison`). -/
+lemma geometricBaseChangePullbackComparison_cube (We : CommSq eX.hom f f eY.hom)
+    (WΦ : CommSq (baseChangeModelFrobenius Ω X N eX.hom) ((geometricBaseChange k Ω).map f)
+      ((geometricBaseChange k Ω).map f) (baseChangeModelFrobenius Ω Y N eY.hom)) :
+    Adjunction.CubeCondition
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        We)
+      (geometricBaseChangePullbackComparison ℓ Ω f)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        WΦ)
+      (weilGeometricBaseChangeComparison Ω ℓ X N eX.hom)
+      (weilGeometricBaseChangeComparison Ω ℓ Y N eY.hom) := by
+  intro M
+  sorry
+
+/-- Under `Rf_! ≅ Rf_*`, the Frobenius comparison `b_! : Rf_! ⋙ Le_Y^* ≅ Le_X^* ⋙ Rf_!` of the
+twisted Weil lower shriek is the direct-image exchange morphism `Ex_e` of the square of `e`
+(`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`). -/
+lemma weilLowerShriekComparison_exchangeCompatible :
+    Adjunction.ExchangeCompatible
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        (weilFrobeniusSquare eX eY hf).toCommSq)
+      (weilLowerShriekComparison ℓ eX eY hf)
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f) := by
+  intro K
+  have h := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper ℓ
+    (weilFrobeniusSquare eX eY hf) K
+  rw [boundedConstructibleBaseChange_eq_exchangeRight] at h
+  rw [weilLowerShriekComparison_hom]
+  exact h
+
+/-- Under `Rf̄_! ≅ Rf̄_*`, the Frobenius comparison `θ_f̄` of the model Weil lower shriek is the
+direct-image exchange morphism `Ex_Φ` of the square of the model Frobenii
+(`weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq`). -/
+lemma weilLowerShriekFrobeniusComparison_exchangeCompatible :
+    Adjunction.ExchangeCompatible
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((geometricBaseChange k Ω).map f))
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        (commSq_baseChangeModelFrobenius Ω eX eY hf N))
+      (weilLowerShriekFrobeniusComparison ℓ (baseChangeModelFrobenius Ω X N eX.hom)
+        (baseChangeModelFrobenius Ω Y N eY.hom) ((geometricBaseChange k Ω).map f)
+        (IsPullback.of_hasPullback (baseChangeModelFrobenius Ω Y N eY.hom)
+          ((geometricBaseChange k Ω).map f)).flip
+        (geometricBaseChangeRelativeFrobenius N hf) (relativeFrobenius_snd _ _ _ _)
+        (relativeFrobenius_fst _ _ _ _))
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
+        ((geometricBaseChange k Ω).map f)) := by
+  intro K
+  have h := weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq ℓ
+    (baseChangeModelFrobenius Ω X N eX.hom) (baseChangeModelFrobenius Ω Y N eY.hom)
+    ((geometricBaseChange k Ω).map f)
+    (IsPullback.of_hasPullback (baseChangeModelFrobenius Ω Y N eY.hom)
+      ((geometricBaseChange k Ω).map f)).flip
+    (geometricBaseChangeRelativeFrobenius N hf) (relativeFrobenius_snd _ _ _ _)
+    (relativeFrobenius_fst _ _ _ _) (commSq_baseChangeModelFrobenius Ω eX eY hf N) K
+  rw [boundedConstructibleBaseChange_eq_exchangeRight] at h
+  exact h
+
+end Frobenius
+
 /-- **The geometric base change of the Weil lower shriek** (Unfinished input): for a proper
 morphism `f : X ⟶ Y` of separated schemes of finite type over `k = 𝔽_q` with `e_X ≫ f = f ≫ e_Y` and a
 Weil object `K` for `e_X`, the base change to `Ω` of the twisted Weil lower shriek is the model
@@ -164,7 +358,25 @@ theorem nonempty_weilGeometricBaseChange_weilLowerShriek_iso [IsProper f.left]
           ((geometricBaseChange k Ω).map f)).flip
         (geometricBaseChangeRelativeFrobenius N hf) (relativeFrobenius_snd _ _ _ _)
         (relativeFrobenius_fst _ _ _ _)).obj
-        ((weilGeometricBaseChange Ω ℓ X N eX.hom).obj K)) :=
-  sorry
+        ((weilGeometricBaseChange Ω ℓ X N eX.hom).obj K)) := by
+  haveI := isIso_geometricBaseChangeLowerStarBaseChange ℓ Ω f
+  have hc := Adjunction.nonempty_mapOfNatIso_obj_iso_of_cubeCondition
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((geometricBaseChange k Ω).map f))
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      (weilFrobeniusSquare eX eY hf).toCommSq)
+    (geometricBaseChangePullbackComparison ℓ Ω f)
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      (commSq_baseChangeModelFrobenius Ω eX eY hf N))
+    (weilGeometricBaseChangeComparison Ω ℓ X N eX.hom)
+    (weilGeometricBaseChangeComparison Ω ℓ Y N eY.hom)
+    (geometricBaseChangePullbackComparison_cube ℓ Ω eX eY N _ _)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ ((geometricBaseChange k Ω).map f))
+    _ _ (weilLowerShriekComparison_exchangeCompatible ℓ eX eY hf)
+    (weilLowerShriekFrobeniusComparison_exchangeCompatible ℓ Ω eX eY hf N) K
+  unfold weilGeometricBaseChange weilLowerShriek weilLowerShriekOfFrobenius
+  convert hc using 3
 
 end AlgebraicGeometry.ProEtale.CondensedRing
