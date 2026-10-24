@@ -59,24 +59,24 @@ instance : Fact (ringChar (AlgebraicClosure k) ≠ ℓ) :=
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-lemma WeilSheaf.frobeniusStalk_eq (F : WeilSheaf ℓ e) :
+lemma WeilSheaf.frobeniusStalk_eq_powSuccStalkFunctor_obj (F : WeilSheaf ℓ e) :
     WeilSheaf.frobeniusStalk ℓ n x hx F = (WeilSheaf.powSuccStalkFunctor ℓ n x hx).obj F :=
   rfl
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-lemma WeilSheaf.powSuccStalkFunctor_eq_comp :
+private lemma WeilSheaf.powSuccStalkFunctor_eq_comp :
     WeilSheaf.powSuccStalkFunctor ℓ n x hx = WeilSheaf.powSuccFunctor ℓ e n ⋙
       WeilSheaf.stalkFunctor ℓ (e.powSucc n) ((geometricFrobeniusField k).powSucc n).hom x hx :=
   rfl
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-lemma WeilSheaf.frobeniusStalk_eq' (F : WeilSheaf ℓ e) :
+lemma WeilSheaf.frobeniusStalk_eq_stalkFunctor_obj_powSuccFunctor_obj (F : WeilSheaf ℓ e) :
     WeilSheaf.frobeniusStalk ℓ n x hx F = (WeilSheaf.stalkFunctor ℓ (e.powSucc n)
       ((geometricFrobeniusField k).powSucc n).hom x hx).obj
         ((WeilSheaf.powSuccFunctor ℓ e n).obj F) :=
-  (WeilSheaf.frobeniusStalk_eq ℓ n x hx F).trans
+  (WeilSheaf.frobeniusStalk_eq_powSuccStalkFunctor_obj ℓ n x hx F).trans
     ((congrArg (fun G ↦ G.obj F) (WeilSheaf.powSuccStalkFunctor_eq_comp ℓ n x hx)).trans
       (Functor.comp_obj _ _ _))
 
@@ -103,7 +103,7 @@ theorem weilSheafStalkTrace_homologyFunctor_eq (K : WeilBoundedConstructible ℓ
   have t : weilSheafStalkTrace ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) =
       categoricalTrace (WeilSheaf.frobeniusStalk ℓ n x hx
         ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom := rfl
-  rw [WeilSheaf.frobeniusStalk_eq' ℓ n x hx] at t
+  rw [WeilSheaf.frobeniusStalk_eq_stalkFunctor_obj_powSuccFunctor_obj ℓ n x hx] at t
   exact t.trans (h1.symm.trans h2)
 
 /-- **The local trace of a Weil object as a supertrace on its base change**: the local trace

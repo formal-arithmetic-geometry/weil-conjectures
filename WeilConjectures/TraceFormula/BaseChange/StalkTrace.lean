@@ -180,7 +180,7 @@ omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k
   [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- The Frobenius comparison of the stalk, unfolded. -/
-lemma weilStalkComparison_eq : weilStalkComparison ℓ e σ.hom x hx =
+lemma weilStalkComparison_eq_trans : weilStalkComparison ℓ e σ.hom x hx =
     Functor.isoWhiskerLeft _
       (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).symm ≪≫
       (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).symm ≪≫
@@ -213,7 +213,8 @@ lemma stalkFunctor_obj_str_hom (W : WeilSheaf ℓ e) :
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x)
     (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm)
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left) W.carrier
-  have h3 := (congrArg (fun i ↦ i.hom.app W.carrier) (weilStalkComparison_eq ℓ e σ x hx)).trans h2
+  have h3 := (congrArg (fun i ↦ i.hom.app W.carrier)
+    (weilStalkComparison_eq_trans ℓ e σ x hx)).trans h2
   refine h1.trans ((congrArg (· ≫ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom) h3).trans
     ((congrArg (fun z ↦ ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
         ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) ≫
@@ -246,7 +247,7 @@ lemma weilStalkComparison_hom_app' (M) :
         eqToHom (congrArg (fun s : Spec (.of Ω) ⟶ X.left ↦
           (s)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) hx.symm) ≫
         (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app M :=
-  (congrArg (fun i ↦ i.hom.app M) (weilStalkComparison_eq ℓ e σ x hx)).trans
+  (congrArg (fun i ↦ i.hom.app M) (weilStalkComparison_eq_trans ℓ e σ x hx)).trans
     ((isoWhiskerLeft_symm_trans_hom_app_aux ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
       (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
       (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x)
