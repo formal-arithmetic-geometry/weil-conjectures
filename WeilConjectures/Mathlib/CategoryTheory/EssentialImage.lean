@@ -36,3 +36,15 @@ lemma essImage_ι_le [P.IsClosedUnderIsomorphisms] : P.ι.essImage ≤ P := by
   rw [essImage_ι, isoClosure_eq_self]
 
 end CategoryTheory.ObjectProperty
+
+namespace CategoryTheory.NatTrans
+
+/-- A natural endomorphism of the identity functor which is the identity on the objects in the
+image of an essentially surjective functor is the identity. -/
+lemma app_eq_id_of_essSurj {A B : Type*} [Category A] [Category B] (P : A ⥤ B) [P.EssSurj]
+    (θ : 𝟭 B ⟶ 𝟭 B) (h : ∀ a, θ.app (P.obj a) = 𝟙 _) (b : B) : θ.app b = 𝟙 b := by
+  have hn := θ.naturality (P.objObjPreimageIso b).hom
+  rw [h, Category.id_comp] at hn
+  exact (cancel_epi (P.objObjPreimageIso b).hom).1 (hn.trans (Category.comp_id _).symm)
+
+end CategoryTheory.NatTrans

@@ -98,6 +98,39 @@ lemma clopenCounit_comp_clopenSection [IsIso ao.unit] (P : S ≅ O) (I : S ≅ L
   rw [clopenSection, reassoc_of% key, Iso.hom_inv_id_app]
   rfl
 
+
+/-- The restriction along `j` of a pushforward `K ⟶ j_* M ≅ j_! M ⟶ j_! j^! N ⟶ N` is the
+original map: for `f : j^* K ⟶ M` and `g : M ⟶ j^! N`, the composite
+`j^* K ≅ j^! K ⟶ j^! N` of the conjugate `j^* ≅ j^!` of `P` and `j^!` of the pushforward
+`K ⟶ j_* j^* K ⟶ j_* M ≅ j_! M ⟶ j_! j^! N ⟶ N` is `f ≫ g`. -/
+lemma conjugateIsoEquiv_inv_app_comp_map_clopenPush [IsIso ao.unit] (P : S ≅ O) (I : S ≅ L)
+    (hPI : ∀ M, ao.unit.app M ≫ U.map (P.inv.app M ≫ I.hom.app M) ≫ a.counit.app M = 𝟙 M)
+    {K N : D} {M : C} (f : U.obj K ⟶ M) (g : M ⟶ R.obj N) :
+    (conjugateIsoEquiv b ao P.symm).inv.app K ≫
+        R.map (a.unit.app K ≫ L.map f ≫ I.inv.app M ≫ S.map g ≫ b.counit.app N) = f ≫ g := by
+  have hI : ∀ M, U.map (I.inv.app M) = a.counit.app M ≫ ao.unit.app M ≫ U.map (P.inv.app M) := by
+    intro M
+    rw [← cancel_mono (U.map (I.hom.app M)), ← U.map_comp, Iso.inv_hom_id_app, U.map_id,
+      Category.assoc, Category.assoc, ← U.map_comp]
+    have h := hPI M
+    rw [← Category.assoc] at h
+    have : a.counit.app M = inv (ao.unit.app M ≫ U.map (P.inv.app M ≫ I.hom.app M)) :=
+      IsIso.eq_inv_of_hom_inv_id h
+    rw [this, IsIso.inv_hom_id]
+  have hn := (I.inv.naturality g).symm
+  rw [reassoc_of% hn, ← L.map_comp_assoc]
+  erw [← (conjugateIsoEquiv b ao P.symm).inv.naturality]
+  simp only [Functor.map_comp, Category.assoc, hI, Adjunction.counit_naturality_assoc,
+    Adjunction.left_triangle_components_assoc]
+  rw [counit_eq_conjugate ao b P]
+  simp only [Functor.map_comp, Category.assoc]
+  have hp := P.inv.naturality ((conjugateIsoEquiv ao b P).inv.app N)
+  rw [← U.map_comp_assoc (P.inv.app _) (S.map _), ← hp, U.map_comp_assoc,
+    ← U.map_comp_assoc (P.inv.app _) (P.hom.app _), Iso.inv_hom_id_app, U.map_id,
+    Category.id_comp, ao.unit_naturality_assoc, ao.right_triangle_components_assoc]
+  change _ ≫ _ ≫ (conjugateIsoEquiv ao b P).inv.app N ≫ (conjugateIsoEquiv ao b P).hom.app N = _
+  rw [Iso.inv_hom_id_app, Category.comp_id]
+
 end Adjunction
 
 namespace Preadditive

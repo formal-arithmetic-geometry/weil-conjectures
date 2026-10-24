@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
 
 /-!
 
@@ -32,10 +33,11 @@ The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with 
 
 ## Main definitions
 
-* `CategoryTheory.Adjunction.projectionMorphism`: for `F ⊣ G` with `F` oplax monoidal, the
-  projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)`, the mate of
-  `F (G A ⊗ B) ⟶ F G A ⊗ F B ⟶ A ⊗ F B` (the morphism `PF^*` of
-  `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`).
+* The projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` of `F ⊣ G` with `F` oplax monoidal (the
+  morphism `PF^*` of
+  `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`) is
+  `CategoryTheory.Adjunction.projectionMorphism`, in
+  `WeilConjectures.CategoryTheory.Adjunction.KunnethMap`.
 * `CategoryTheory.Adjunction.projectionComparison`: for `P ⊣ S` with `S` lax monoidal, the
   comparison `P (M ⊗ S N) ⟶ P M ⊗ N`, adjoint to `M ⊗ S N ⟶ S P M ⊗ S N ⟶ S (P M ⊗ N)` (the
   morphism `q_j` for an open immersion `j`).
@@ -78,34 +80,6 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
 /-! ### The projection morphisms -/
 
 namespace Adjunction
-
-section ProjectionMorphism
-
-/-!
-In the application, `adj : F ⊣ G` is the derived adjunction `Lg^* ⊣ Rg_*` along the proper half
-`g` of a compactification, and `projectionMorphism` is
-`ProEtale.CondensedRing.properProjectionMorphism`.
--/
-
-variable {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
-
-/-- The projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` of an adjunction `F ⊣ G` with `F` oplax
-monoidal: the adjoint of `F (G A ⊗ B) ⟶ F G A ⊗ F B ⟶ A ⊗ F B`. -/
-noncomputable def projectionMorphism (A : C) (B : D) : G.obj A ⊗ B ⟶ G.obj (A ⊗ F.obj B) :=
-  adj.homEquiv _ _ (δ F (G.obj A) B ≫ adj.counit.app A ▷ F.obj B)
-
-/-- The projection morphism is natural in its second variable. -/
-@[reassoc]
-lemma projectionMorphism_natural_right (A : C) {B B' : D} (h : B ⟶ B') :
-    G.obj A ◁ h ≫ adj.projectionMorphism A B' =
-      adj.projectionMorphism A B ≫ G.map (A ◁ F.map h) := by
-  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
-    ← homEquiv_naturality_right]
-  congr 1
-  rw [← δ_natural_right_assoc, whisker_exchange, Category.assoc]
-  rfl
-
-end ProjectionMorphism
 
 section ProjectionComparison
 
