@@ -24,7 +24,8 @@ of `f^* ⊣ f_*` (`ProEtale.CondensedRing.stalkLowerStarProj`).
 
 The proof: `f` becomes a trivial cover `∐_S U ⟶ U` after base change along an étale
 `g : U ⟶ Y` (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`), and `ȳ`
-lifts to a point `v̄ : P ⟶ U` (`AlgebraicGeometry.Scheme.exists_comp_eq_of_weaklyEtale_of_isField`).
+lifts to a point `v̄ : P ⟶ U`
+(`AlgebraicGeometry.Scheme.exists_comp_eq_of_weaklyEtale_of_isSepClosed`).
 Along the weakly étale `g`, the pushforward commutes with the pullback
 (`ProEtale.CondensedRing.isIso_lowerStarBaseChange_of_isPullback`), compatibly with the
 restrictions of stalks (`ProEtale.CondensedRing.stalkLowerStarProj_lowerStarBaseChange'`). For
@@ -50,6 +51,23 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
+
+/-- An identity between composites of isomorphisms and morphisms, used for
+`ProEtale.CondensedRing.isLimit_stalkLowerStarFan`. -/
+lemma Iso.eq_hom_comp_trans_hom {C : Type*} [Category C] {A B D E G K : C} (i : B ≅ A)
+    (p : B ⟶ K) (r : A ⟶ D) (c₁ : D ≅ E) (c₂ : E ≅ G) (c₃ : G ≅ K)
+    (h : i.inv ≫ p = r ≫ c₁.hom ≫ c₂.hom ≫ c₃.hom) :
+    p = i.hom ≫ r ≫ (c₁ ≪≫ c₂ ≪≫ c₃).hom := by
+  rw [← Iso.hom_inv_id_assoc i p, h]
+  simp
+
+/-- An identity between composites of isomorphisms and morphisms, used for
+`ProEtale.CondensedRing.isLimit_stalkLowerStarFan`. -/
+lemma Iso.eq_trans_symm_hom_comp {C : Type*} [Category C] {A G K V W : C} (d : V ≅ W) (c : W ≅ A)
+    (p : A ⟶ G) (q : W ⟶ G) (m : V ⟶ K) (dₛ : K ≅ G) (h₁ : c.hom ≫ p = q)
+    (h₂ : q = d.inv ≫ m ≫ dₛ.hom) : p = (d ≪≫ c).symm.hom ≫ m ≫ dₛ.hom := by
+  rw [← Iso.inv_hom_id_assoc c p, h₁, h₂]
+  simp
 
 /-- An identity between composites of isomorphisms and morphisms, the algebraic core of
 `ProEtale.CondensedRing.isLimit_stalkLowerStarFan`. -/
@@ -124,18 +142,6 @@ noncomputable def Fan.isLimitOfBijectiveIso {C : Type*} [Category C] {ι ι' : T
     rw [key' _ (hr (e i))]
     rfl
 
-/-- A fan indexed by `ι` is a limit if its reindexing along a bijection `e : ι' → ι` is. -/
-noncomputable def Fan.isLimitOfBijective {C : Type*} [Category C] {ι ι' : Type*} (e : ι' → ι)
-    (he : Function.Bijective e) {X : C} {Y : ι → C} (π : ∀ i, X ⟶ Y i)
-    (h : IsLimit (Fan.mk X fun i' ↦ π (e i'))) : IsLimit (Fan.mk X π) :=
-  Fan.IsLimit.mk _ (fun s ↦ Fan.IsLimit.lift h fun i' ↦ s.proj (e i'))
-    (fun s i ↦ by
-      obtain ⟨i', rfl⟩ := he.2 i
-      exact Fan.IsLimit.fac h (fun i' ↦ s.proj (e i')) i')
-    (fun s m hm ↦ Fan.IsLimit.hom_ext h _ _ fun i' ↦ by
-      erw [Fan.IsLimit.fac h]
-      exact hm (e i'))
-
 end CategoryTheory.Limits
 
 namespace AlgebraicGeometry
@@ -160,7 +166,8 @@ theorem Scheme.Hom.exists_etale_isPullback_sigma {X Y : Scheme.{u}} (f : X ⟶ Y
     ∃ (U : Scheme.{u}) (g : U ⟶ Y) (_ : Etale g) (S : Type u) (_ : Finite S)
       (fst : (∐ fun _ : S ↦ U) ⟶ X),
       y ∈ Set.range g ∧ IsPullback fst (Sigma.desc fun _ ↦ 𝟙 U) f g :=
-  Scheme.FiniteEtale.exists_etale_isPullback_sigma (⟨Scheme.Etale.mk f, ‹IsFinite f›⟩ : Y.FiniteEtale) y
+  Scheme.FiniteEtale.exists_etale_isPullback_sigma
+    (⟨Scheme.Etale.mk f, ‹IsFinite f›⟩ : Y.FiniteEtale) y
 
 end AlgebraicGeometry
 
@@ -208,20 +215,63 @@ theorem isLimit_stalkLowerStarFan [IsFinite f] [Etale f] {Ω : Type u} [Field Ω
   -- the restrictions of `p_* N` along the sections of the trivial cover `p`
   have h5 : IsLimit (Fan.mk ((𝟙 U)^*⟦Λ⟧.obj ((fold)_*⟦Λ⟧.obj N))
       fun s ↦ stalkLowerStarProj Λ (hι s) N) := by
-    sorry
+    have : PreservesLimitsOfShape (Discrete S) (fold)_*⟦Λ⟧ :=
+      (upperStarLowerStarAdjunction Λ fold).rightAdjoint_preservesLimits.preservesLimitsOfShape
+    have h1 := isLimitFanUnitOfIsColimitCofanConst Λ (coproductIsCoproduct fun _ : S ↦ U) N
+    have h2 := isLimitFanMkObjOfIsLimit (fold)_*⟦Λ⟧ _ _ h1
+    refine Fan.isLimitOfIsoLegs h2 ((upperStarId Λ U).app _)
+      (fun s ↦ (lowerStarComp Λ (Sigma.ι (fun _ : S ↦ U) s) fold).app _ ≪≫
+        (lowerStarCongr Λ (hι s)).app _ ≪≫ (lowerStarId Λ U).app _) _ fun s ↦ ?_
+    have L := upperStarComp_hom_app_map_counit_eq_lowerStar_map_unit Λ
+      (Sigma.ι (fun _ : S ↦ U) s) fold (hι s) N
+    have L' : ((upperStarId Λ U).app ((fold)_*⟦Λ⟧.obj N)).inv ≫ stalkLowerStarProj Λ (hι s) N =
+        (fold)_*⟦Λ⟧.map ((upperStarLowerStarAdjunction Λ (Sigma.ι (fun _ : S ↦ U) s)).unit.app N) ≫
+          ((lowerStarComp Λ (Sigma.ι (fun _ : S ↦ U) s) fold).app _).hom ≫
+          ((lowerStarCongr Λ (hι s)).app _).hom ≫ ((lowerStarId Λ U).app _).hom := by
+      rw [stalkLowerStarProj_eq, Iso.app_inv, Iso.app_hom, Iso.app_hom, Iso.app_hom]
+      exact L
+    exact Iso.eq_hom_comp_trans_hom _ _ _ _ _ _ L'
   -- the restrictions of the stalk of `p_* N` at `v̄`
   have h4s (s : S) : (v ≫ Sigma.ι (fun _ : S ↦ U) s) ≫ fold = v := by
     rw [Category.assoc, hι, Category.comp_id]
   have h4 : IsLimit (Fan.mk ((v)^*⟦Λ⟧.obj ((fold)_*⟦Λ⟧.obj N))
       fun s ↦ stalkLowerStarProj Λ (h4s s) N) := by
-    sorry
+    have : PreservesLimitsOfShape (Discrete S) (v)^*⟦Λ⟧ := by
+      obtain ⟨n, ⟨e⟩⟩ := Finite.exists_equiv_fin S
+      exact preservesLimitsOfShape_of_equiv (Discrete.equivalence e.symm) _
+    have h6 := isLimitFanMkObjOfIsLimit (v)^*⟦Λ⟧ _ _ h5
+    refine Fan.isLimitOfIsoLegs h6
+      (upperStarCompApp Λ v (𝟙 U) _ ≪≫ (upperStarCongr Λ (Category.comp_id v)).app _).symm
+      (fun s ↦ upperStarCompApp Λ v (Sigma.ι (fun _ : S ↦ U) s) N) _ fun s ↦ ?_
+    have hx' : (v ≫ Sigma.ι (fun _ : S ↦ U) s) ≫ fold = v ≫ 𝟙 U := by
+      rw [h4s, Category.comp_id]
+    have hcl := stalkLowerStarProj_comp_left Λ v (hι s) hx' N
+    have hcong := upperStarCongr_hom_app_stalkLowerStarProj Λ (Category.comp_id v) hx' (h4s s) N
+    rw [← Iso.app_hom] at hcong
+    have hd : (upperStarCompApp Λ v (𝟙 U) ((fold)_*⟦Λ⟧.obj N)).inv =
+        (upperStarComp Λ v (𝟙 U)).hom.app ((fold)_*⟦Λ⟧.obj N) := rfl
+    exact Iso.eq_trans_symm_hom_comp _ _ _ _ _ _ hcong (by rw [hcl, hd, upperStarCompApp_hom])
   -- the points of `X` over `ȳ` are the `v̄ ≫ ι_s ≫ fst`
   have hP : Nonempty P := ⟨eP.inv (IsLocalRing.closedPoint Ω)⟩
   have hinj (s t : S) (h : (v ≫ Sigma.ι (fun _ : S ↦ U) s) ≫ fst =
       (v ≫ Sigma.ι (fun _ : S ↦ U) t) ≫ fst) : s = t := by
-    sorry
+    by_contra hst
+    have h' : v ≫ Sigma.ι (fun _ : S ↦ U) s = v ≫ Sigma.ι (fun _ : S ↦ U) t :=
+      hpb'.hom_ext (by simpa only [Category.assoc] using h) ((h4s s).trans (h4s t).symm)
+    have := Scheme.isEmpty_of_isColimit_cofan (coproductIsCoproduct fun _ : S ↦ U) hst v v h'
+    exact (this.false hP.some).elim
   have hex (x : FibrePoints f y) : ∃ s : S, (v ≫ Sigma.ι (fun _ : S ↦ U) s) ≫ fst = x.1 := by
-    sorry
+    obtain ⟨x', hx'1, hx'2⟩ : ∃ x' : P ⟶ ∐ fun _ : S ↦ U, x' ≫ fst = x.1 ∧ x' ≫ fold = v :=
+      ⟨hpb'.lift x.1 v (x.2.trans hv.symm), hpb'.lift_fst _ _ _, hpb'.lift_snd _ _ _⟩
+    obtain ⟨s, hs⟩ := Scheme.exists_mem_range_of_isColimit_cofan
+      (coproductIsCoproduct fun _ : S ↦ U) (x' (eP.inv (IsLocalRing.closedPoint Ω)))
+    obtain ⟨w, hw⟩ := Scheme.exists_comp_eq_of_mem_range (Sigma.ι (fun _ : S ↦ U) s)
+      (eP.inv ≫ x') (by simpa using hs)
+    have hw' : (eP.hom ≫ w) ≫ Sigma.ι (fun _ : S ↦ U) s = x' := by
+      rw [Category.assoc, hw, Iso.hom_inv_id_assoc]
+    have hwv : eP.hom ≫ w = v := by
+      rw [← hx'2, ← hw', Category.assoc, hι, Category.comp_id]
+    exact ⟨s, by rw [← hwv, hw', hx'1]⟩
   choose σ hσ using hex
   have hσ' : Function.Bijective σ := by
     refine ⟨fun x x' h ↦ Subtype.ext ?_, fun s ↦ ⟨⟨(v ≫ Sigma.ι (fun _ : S ↦ U) s) ≫ fst, ?_⟩, ?_⟩⟩
@@ -248,8 +298,10 @@ theorem isLimit_stalkLowerStarFan [IsFinite f] [Etale f] {Ω : Type u} [Field Ω
         (upperStarCompApp Λ (v ≫ Sigma.ι (fun _ : S ↦ U) (σ x)) fst F).inv := h₁
   rw [← Iso.app_hom] at h₂ h₃
   exact Iso.eq_trans_hom_comp_trans_hom ((upperStarCongr Λ hv.symm).app _)
-    ((upperStarComp Λ v g).app _) ((v)^*⟦Λ⟧.mapIso (asIso ((lowerStarBaseChange Λ hpb'.toCommSq).app F)))
-    (stalkLowerStarProj Λ (h4s (σ x)) N) (upperStarCompApp Λ (v ≫ Sigma.ι (fun _ : S ↦ U) (σ x)) fst F)
+    ((upperStarComp Λ v g).app _)
+    ((v)^*⟦Λ⟧.mapIso (asIso ((lowerStarBaseChange Λ hpb'.toCommSq).app F)))
+    (stalkLowerStarProj Λ (h4s (σ x)) N)
+    (upperStarCompApp Λ (v ≫ Sigma.ι (fun _ : S ↦ U) (σ x)) fst F)
     ((upperStarCongr Λ (hσ x)).app F) (stalkLowerStarProj Λ (hxy (σ x)) F) h₁' h₂ h₃
 
 end AlgebraicGeometry.ProEtale.CondensedRing

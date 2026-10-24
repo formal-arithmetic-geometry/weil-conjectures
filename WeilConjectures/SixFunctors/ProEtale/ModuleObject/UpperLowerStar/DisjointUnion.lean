@@ -100,4 +100,20 @@ noncomputable def isLimitFanUnitOfIsColimitCofan {ι : Type u} [Finite ι] {Z : 
       lowerStarUpperStarForgetHom Λ (f i) M)
     fun i ↦ forget_map_upperStarLowerStarAdjunction_unit_app Λ (f i) M
 
+/-- `isLimitFanUnitOfIsColimitCofan` for a disjoint union `Z` of copies of a single scheme `U`,
+stated without the constant family of schemes. -/
+noncomputable def isLimitFanUnitOfIsColimitCofanConst {ι : Type u} [Finite ι] {U Z : Scheme.{u}}
+    {f : ι → (U ⟶ Z)} (hf : IsColimit (Cofan.mk Z f))
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    IsLimit (Fan.mk M fun i ↦ (upperStarLowerStarAdjunction Λ (f i)).unit.app M) := by
+  have : ReflectsLimitsOfShape (Discrete ι)
+      (Mod.forget (condensedRingObj Λ Z) :
+        Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z) ⥤ _) :=
+    reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact Fan.isLimitOfIsLimitMapComp (Mod.forget _) _ _
+    (ProEtale.isLimitFanUnitOfIsColimitCofan Ab.{u + 1} hf M.X)
+    (fun i ↦ (f i)_*[Ab.{u + 1}].map (upperStarUnitHom Λ (f i) M) ≫
+      lowerStarUpperStarForgetHom Λ (f i) M)
+    fun i ↦ forget_map_upperStarLowerStarAdjunction_unit_app Λ (f i) M
+
 end AlgebraicGeometry.ProEtale.CondensedRing
