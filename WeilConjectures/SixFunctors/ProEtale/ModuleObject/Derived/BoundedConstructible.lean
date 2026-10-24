@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 
 /-!
 
@@ -113,8 +114,9 @@ coefficient rings separately, with the same declaration names:
 
 * `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`, in the namespace `ProEtale.CondensedRing`
   (`boundedConstructibleLowerStar ℓ f`);
-* `E̲ = Profinite.continuousMapRingObj E` for a finite extension `E` of `ℚ_ℓ`, in the namespace
-  `ProEtale.CondensedRing.ContinuousMapRingObj`
+* `E̲ = Profinite.continuousMapRingObj E` for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
+  (`E : PadicAlgCl.FiniteIntermediateField ℓ`, with category `PadicSubfieldConstructible X ℓ E`),
+  in the namespace `ProEtale.CondensedRing.ContinuousMapRingObj`
   (`ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E f`);
 * `𝒪̲_E = Profinite.padicIntegersRingObj ℓ E` for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, in
   the namespace `ProEtale.CondensedRing.PadicIntegersRingObj`
@@ -270,7 +272,7 @@ noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
 
 end LowerStar
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -279,7 +281,7 @@ section LowerStar
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -294,7 +296,7 @@ ring: for the constant discrete ring `𝔽_p` and the affine line over an algebr
 characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is
 infinite. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
+    (K : PadicSubfieldConstructible X.left ℓ E) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Y.left)
       ((R((f.left)_*⟦Profinite.continuousMapRingObj E⟧)).obj K.obj) :=
   sorry
@@ -302,7 +304,7 @@ lemma boundedConstructible_rightDerivedLowerStar_obj
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible
 complexes (`E`-coefficient): the restriction of `R((f)_*⟦E̲⟧)`. -/
 noncomputable def boundedConstructibleLowerStar :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
+    PadicSubfieldConstructible X.left ℓ E ⥤ PadicSubfieldConstructible Y.left ℓ E :=
   (boundedConstructible _).lift
     ((boundedConstructible _).ι ⋙ R((f.left)_*⟦Profinite.continuousMapRingObj E⟧))
     fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E f K
@@ -585,7 +587,7 @@ noncomputable def boundedConstructibleLowerShriekCompatibility :
 
 end Shriek
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -594,7 +596,7 @@ section Shriek
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -610,7 +612,7 @@ constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶
 derived pushforward along the proper morphism `p`, both on bounded constructible complexes, for `i`
 and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactification :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
+    PadicSubfieldConstructible X.left ℓ E ⥤ PadicSubfieldConstructible Y.left ℓ E :=
   boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ c.overI ⋙
     boundedConstructibleLowerStar ℓ E c.overG
 
@@ -636,7 +638,7 @@ variable (f : X ⟶ Y)
 complexes (`E`-coefficient): the functor `boundedConstructibleLowerShriekOfCompactification`
 attached to the compactification `compactificationOverField f` chosen by Nagata's theorem. -/
 noncomputable def boundedConstructibleLowerShriek :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
+    PadicSubfieldConstructible X.left ℓ E ⥤ PadicSubfieldConstructible Y.left ℓ E :=
   boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
 
 lemma boundedConstructibleLowerShriek_eq :
@@ -822,7 +824,7 @@ noncomputable def boundedConstructibleTensorHomAdjunction
 
 end TensorHom
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -831,14 +833,11 @@ section TensorHom
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- The prime `ℓ` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
--- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
-set_option synthInstance.checkSynthOrder false in
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
@@ -848,14 +847,11 @@ stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidal_boundedConstructible
-    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [Fact (ringChar k ≠ ℓ)] :
+    [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
   sorry
 
--- The prime `ℓ` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
--- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
-set_option synthInstance.checkSynthOrder false in
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
@@ -864,7 +860,7 @@ set_option linter.overlappingInstances false in
 Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric
 point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidalClosed_boundedConstructible
-    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [Fact (ringChar k ≠ ℓ)] :
+    [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
   sorry
@@ -874,8 +870,8 @@ constructible complexes (`E`-coefficient): the tensor product of the monoidal st
 subcategory `Dᵇc(X)⟦E̲⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of
 `-⊗ᴸ-(X)⟦E̲⟧` in both variables. -/
 noncomputable def boundedConstructibleTensor :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+    PadicSubfieldConstructible X.left ℓ E ⥤ PadicSubfieldConstructible X.left ℓ E ⥤
+      PadicSubfieldConstructible X.left ℓ E :=
   curriedTensor _
 
 /-- The derived hom `RHom(-, -) : Dᵇc(X)⟦E̲⟧ᵒᵖ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
@@ -883,9 +879,9 @@ constructible complexes (`E`-coefficient): the internal hom of the monoidal clos
 full subcategory `Dᵇc(X)⟦E̲⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction
 of `RHom(X)⟦E̲⟧` in both variables. -/
 noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj
+    (PadicSubfieldConstructible X.left ℓ E)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj
       E⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+      PadicSubfieldConstructible X.left ℓ E :=
   MonoidalClosed.internalHom
 
 variable {X}
@@ -893,7 +889,7 @@ variable {X}
 /-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
 inclusions (`E`-coefficient). -/
 noncomputable def boundedConstructibleTensorObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
+    (K : PadicSubfieldConstructible X.left ℓ E) :
     (boundedConstructibleTensor ℓ E X).obj K ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Profinite.continuousMapRingObj E⟧).obj K.obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
@@ -902,7 +898,7 @@ noncomputable def boundedConstructibleTensorObjCompatibility
 /-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the restricted functor `RHom(K, -)` is compatible with the
 inclusions (`E`-coefficient). -/
 noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
+    (K : PadicSubfieldConstructible X.left ℓ E) :
     (boundedConstructibleHom ℓ E X).obj (op K) ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.continuousMapRingObj E⟧).obj
         (op K.obj) :=
@@ -920,7 +916,7 @@ noncomputable def boundedConstructibleTensorHomAdjunction₂ :
 complexes (`E`-coefficient): the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
 structure on `Dᵇc(X)⟦E̲⟧`. -/
 noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
+    (K : PadicSubfieldConstructible X.left ℓ E) :
     (boundedConstructibleTensor ℓ E X).obj K ⊣ (boundedConstructibleHom ℓ E X).obj (op K) :=
   (boundedConstructibleTensorHomAdjunction₂ ℓ E).adj K
 
@@ -1051,7 +1047,7 @@ noncomputable instance monoidal_boundedConstructibleUpperStar :
 
 end MonoidalUpperStar
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -1060,7 +1056,7 @@ section MonoidalUpperStar
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]

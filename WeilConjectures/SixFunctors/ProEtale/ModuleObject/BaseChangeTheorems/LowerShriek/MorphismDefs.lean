@@ -44,7 +44,7 @@ the namespaces `ProEtale.CondensedRing`, `ProEtale.CondensedRing.ContinuousMapRi
     compactification. Its canonical mate goes in the direction `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*`,
     base change for extension by zero asserts that it is an isomorphism (currently `sorry`),
     and the pasting uses its inverse.
-* **For the lower shriek.** For the coefficient rings `E̲` of a finite extension `E` of `ℚ_ℓ` and
+* **For the lower shriek.** For the coefficient rings `E̲` of a finite subextension `E ⊆ ℚ̄_ℓ` and
   `ℚ̲̄_ℓ`, the morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for the lower shriek
   `ProEtale.CondensedRing.boundedConstructibleLowerShriek` of the chosen compactifications: the
   pasting for the chosen compactification of `f`, followed by the identification of the lower
@@ -258,11 +258,11 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
 
 end LowerShriek
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 
 section LowerShriek
@@ -394,7 +394,7 @@ end Compactification
 section Chosen
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+  (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]

@@ -172,7 +172,7 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
 
 end Exchange
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -190,7 +190,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 /-- The *unit insertion* step of the exchange morphism (`E`-coefficient): the natural transformation
 `Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
@@ -356,7 +356,7 @@ end Exchange
 end PadicIntegersRingObj
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+  (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 section ExchangeIsIso

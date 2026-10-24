@@ -169,11 +169,11 @@ noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
 
 end BaseChange
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 
 section BaseChange

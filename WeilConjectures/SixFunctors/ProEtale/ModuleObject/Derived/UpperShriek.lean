@@ -108,12 +108,12 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
   sorry
 
-/-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E` of `ℚ_ℓ`, the derived
-pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
+/-- For a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
+derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
 adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII, 3.1.4;
 Bhatt–Scholze, Section 6.8) (`E`-coefficient). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [IsProper g.left] :
     (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
   sorry
@@ -178,7 +178,7 @@ instance isRightAdjoint_boundedConstructibleUpperShriekOfCompactification :
 
 end OfCompactification
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -187,7 +187,7 @@ section OfCompactification
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -200,7 +200,7 @@ compactification
 adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, followed by the pullback
 `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
-    Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+    PadicSubfieldConstructible Y.left ℓ E ⥤ PadicSubfieldConstructible X.left ℓ E :=
   (boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
     boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI
 
@@ -327,7 +327,7 @@ instance isRightAdjoint_boundedConstructibleUpperShriek :
 
 end Chosen
 
-/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
 
@@ -336,7 +336,7 @@ section Chosen
 
 include ℓ k
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -347,7 +347,7 @@ variable {X Y : Over (Spec (.of k))}
 complexes (`E`-coefficient): the functor `boundedConstructibleUpperShriekOfCompactification`
 attached to the chosen compactification `compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriek :
-    Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+    PadicSubfieldConstructible Y.left ℓ E ⥤ PadicSubfieldConstructible X.left ℓ E :=
   boundedConstructibleUpperShriekOfCompactification ℓ E (compactificationOverField f)
 
 /-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes (`E`-coefficient): the

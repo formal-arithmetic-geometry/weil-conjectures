@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 
@@ -88,6 +89,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
+open scoped CondensedRing
+
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 /-! ### The inclusion `𝒪_{E,X} ⟶ E_X` -/
@@ -118,7 +121,7 @@ noncomputable abbrev padicIntegersToPadicSubfield :
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` preserves
 bounded constructible complexes. -/
 lemma boundedConstructible_derivedExtendScalars_obj
-    (K : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) :
+    (K : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
       ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K.obj) :=
   sorry
@@ -127,8 +130,8 @@ lemma boundedConstructible_derivedExtendScalars_obj
 on bounded constructible complexes: the restriction of
 `L(extendScalars (padicIntegersToPadicSubfield X ℓ E))`. -/
 noncomputable def boundedConstructibleExtendScalars :
-    BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) ⥤
-      BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X) :=
+    Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧ ⥤
+      PadicSubfieldConstructible X ℓ E :=
   (boundedConstructible _).lift
     ((boundedConstructible _).ι ⋙
       (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor)
@@ -153,7 +156,7 @@ constructible `𝒪_E`-coefficient one with `ℓ` inverted. -/
 instance isLocalization_boundedConstructibleExtendScalars :
     (boundedConstructibleExtendScalars X ℓ E).IsLocalization
       (Rationalization.W (Submonoid.powers (ℓ : ℤ))
-        (BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :=
+        (Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)) :=
   sorry
 
 /-- The bounded constructible `E`-coefficient derived category `D_cons(X_proét, E)` is
@@ -161,8 +164,8 @@ equivalent to the rationalization of the bounded constructible `𝒪_E`-coeffici
 category `D_cons(X_proét, 𝒪_E)` at the powers of `ℓ`. -/
 noncomputable def rationalizationEquivalence :
     Rationalization (Submonoid.powers (ℓ : ℤ))
-        (BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) ≌
-      BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X) :=
+        (Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ≌
+      PadicSubfieldConstructible X ℓ E :=
   Localization.uniq (Rationalization.Q _ _) (boundedConstructibleExtendScalars X ℓ E)
     (Rationalization.W (Submonoid.powers (ℓ : ℤ)) _)
 

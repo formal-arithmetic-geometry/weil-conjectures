@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 # The compactly supported base change theorem for constructible `E`- and `ℚ̄_ℓ`-sheaves
 
-Let `ℓ` be a prime and `E` a finite extension of `ℚ_ℓ`, with condensed ring `E̲ = C(-, E)`
+Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, with condensed ring `E̲ = C(-, E)`
 (`Profinite.continuousMapRingObj E`). Fix a cartesian square of schemes
 
 ```
@@ -68,7 +68,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+  (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -112,7 +112,8 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
 /-! ### For the lower shriek -/
 
 /-- **The base change theorem for the compactly supported direct image** of bounded
-constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
+constructible `E`-sheaves, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`: for a cartesian square of
+schemes
 
 ```
 X' --g'--> X

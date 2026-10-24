@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 # The proper base change theorem for constructible `E`- and `ℚ̄_ℓ`-sheaves
 
-Let `ℓ` be a prime and `E` a finite extension of `ℚ_ℓ`, with its normed field structure. Its
+Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. Its
 condensed ring is `E̲ = C(-, E)` (`Profinite.continuousMapRingObj E`, of
 `WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap`), and the coefficient ring
 on `X_proét` is `E_X = p_X^* E̲`. Fix a cartesian square of schemes
@@ -72,7 +72,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+  (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
