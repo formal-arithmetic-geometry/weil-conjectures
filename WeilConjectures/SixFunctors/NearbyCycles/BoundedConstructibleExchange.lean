@@ -66,8 +66,6 @@ lemma liftExchange_app_hom {DY DX DY' DX' : Type*} [Category DY] [Category DX]
     ((liftExchange χ hR hR' hN hM).app Z).hom = χ.app Z.obj :=
   rfl
 
-
-
 end Abstract
 
 section Exchange
@@ -99,7 +97,6 @@ noncomputable def boundedConstructiblePushforwardExchange :
     boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
       boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
   liftExchange (φ.pushforwardExchange Λ) _ _ _ _
-
 
 end Hom
 

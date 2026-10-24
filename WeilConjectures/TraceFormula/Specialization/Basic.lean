@@ -179,7 +179,13 @@ private lemma comp_eq_of_unit_comp {𝒞 : Type*} [Category 𝒞] {A₀ A₁ A�
 /-- The specialization units commute with the adjunctions `Lι^* ⊣ Rι_*`: for `g : Lι^* ℚ̄_ℓ ⟶ M`,
 the specialization `σ_F Ψ_F(g)` is the `Lι'^* ⊣ Rι'_*` adjoint of the specialization
 `χ_ι Ψ_C(g^♯) σ_C` of the adjoint `g^♯ : ℚ̄_ℓ ⟶ Rι_* M` of `g`. It follows from the unit identity
-`unit_comp` and the naturality of `χ_ι`. -/
+`unit_comp` and the naturality of `χ_ι`:
+```
+ℚ̄_ℓ --σ_C--> Ψ_C ℚ̄_ℓ --Ψ_C(g^♯)--> Ψ_C Rι_* M --χ_ι--> Rι'_* Ψ_F M
+  ‖                                                    ↕ (Lι'^* ⊣ Rι'_*)
+Lι'^* ℚ̄_ℓ ≅ ℚ̄_ℓ --σ_F--> Ψ_F ℚ̄_ℓ ≅ Ψ_F Lι^* ℚ̄_ℓ --Ψ_F(g)--> Ψ_F M
+```
+-/
 lemma σF_comp_map_eq_homEquiv_symm (M : Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (g : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).obj (𝟙_ _) ⟶ M) :
     T.σF ≫ T.ΨF.map ((Functor.Monoidal.εIso

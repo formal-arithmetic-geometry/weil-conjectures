@@ -28,6 +28,13 @@ field `k` by the coordinate `t` (`AlgebraicGeometry.traitToAffineLine`), sending
 point to the origin (`AlgebraicGeometry.traitClosedPoint_traitToAffineLine`); the deformation to
 the normal cone is then base changed along this map.
 
+The blueprint (`sk-lem-tf-sp-constant-family`, `det-sp-nearby-cycles-exchanges`) takes nearby
+cycles over the strict henselization of `k[t]_{(t)}` (for `k` algebraically closed). This
+development uses instead the complete trait `Spec k'⟦t⟧`, `k'` a separably closed extension of
+`k`: it is a `k[t]`-algebra in an elementary way, and it allows a base field `k` that is not
+separably closed (the special fibres are then `k'`-schemes). For schemes of finite type over
+`k[t]` the nearby cycles over the two strictly henselian traits agree.
+
 None of the henselian properties are formalised here; only the schemes and morphisms are.
 
 ## Main definitions

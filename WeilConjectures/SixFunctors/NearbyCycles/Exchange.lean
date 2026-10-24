@@ -445,7 +445,13 @@ lemma unit_comp_map_comp_pushforwardExchange_app :
     (φ.map_unit_comp_pullbackExchange_app Λ)
 
 /-- The unit identity of the pushforward exchange in the form
-`χ_f(Lf^* Λ_Y) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹) ∘ η_{f'}`. -/
+`χ_f(Lf^* Λ_Y) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹) ∘ η_{f'}`:
+```
+Λ_{Y'} --σ_N--> Ψ_N Λ_Y --Ψ_N(η_f)--> Ψ_N Rf_* Lf^* Λ_Y --χ_f--> Rf'_* Ψ_M Lf^* Λ_Y
+   |η_{f'}                                                         ‖
+Rf'_* Lf'^* Λ_{Y'} ≅ Rf'_* Λ_{X'} --Rf'_* σ_M--> Rf'_* Ψ_M Λ_X ≅ Rf'_* Ψ_M Lf^* Λ_Y
+```
+-/
 lemma unit_comp_map_unit_comp_pushforwardExchange_app :
     N.unit Λ ≫ (N.nearbyCycles Λ).map ((derivedUpperStarLowerStarAdjunction Λ f).unit.app (𝟙_ _)) ≫
         (φ.pushforwardExchange Λ).app _ =
