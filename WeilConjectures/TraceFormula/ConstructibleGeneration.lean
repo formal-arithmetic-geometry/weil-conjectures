@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 
@@ -47,13 +48,13 @@ variable (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 
 /-- The *lisse generators* of `Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`: the objects isomorphic to `Rg_! Rj_! L` for a
 closed immersion `g : Z ⟶ Y`, an open immersion `j : U ⟶ Z` with `U` affine, and a dualizable
-`L ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, with dual `L'`. -/
+`L ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`. -/
 def lisseGenerator : ObjectProperty (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) := fun N ↦
   ∃ (Z : Over (Spec (.of k))) (_ : LocallyOfFiniteType Z.hom) (_ : QuasiCompact Z.hom)
     (_ : IsSeparated Z.hom) (g : Z ⟶ Y) (_ : IsClosedImmersion g.left)
     (U : Over (Spec (.of k))) (_ : LocallyOfFiniteType U.hom) (_ : QuasiCompact U.hom)
     (_ : IsSeparated U.hom) (_ : IsAffine U.left) (j : U ⟶ Z) (_ : IsOpenImmersion j.left)
-    (L L' : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (_ : ExactPairing L' L),
+    (L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (_ : IsDualizable L),
     Nonempty (N ≅ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L))
 
