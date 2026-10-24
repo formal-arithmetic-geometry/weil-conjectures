@@ -121,7 +121,7 @@ lemma leftDerivedUpperStarTensor_comp_eq :
   obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
   obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
   simp only [NatTrans.comp_app]
-  rw [leftDerivedUpperStarTensorRightCounit_app_app]
+  rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
   erw [leftDerivedUpperStarTensorComp_app_app]
   exact leftDerivedUpperStarTensor_comp_aux Λ f g A B
 
@@ -233,7 +233,7 @@ lemma leftDerivedUpperStarTensor_id_eq :
   obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
   obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
   simp only [NatTrans.comp_app]
-  rw [leftDerivedUpperStarTensorRightCounit_app_app]
+  rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
   erw [leftDerivedUpperStarTensorId_app_app, leftDerivedUpperStarTensor_id_aux,
     leftDerivedUpperStarTensor_app_app_comp]
 

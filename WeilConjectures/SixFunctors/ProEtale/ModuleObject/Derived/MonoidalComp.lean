@@ -58,7 +58,10 @@ lemma upperStarTensorComplexHom_comp
 open DerivedCategory Functor.LaxMonoidal
 
 variable {f} in
-lemma leftDerivedUpperStarTensorRightCounit_app_app {W : Scheme.{u}} (h : W ⟶ Y)
+/-- The counit of the bifunctor `Lh^* - ⊗ᴸ Lh^* -` on objects of the homotopy category, with the
+tensor product of the counits (`leftDerivedUpperStarTensorRightCounit_app_app` in
+`ProjectionMapShift` is the same statement with the tensor product written as whiskerings). -/
+lemma leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom {W : Scheme.{u}} (h : W ⟶ Y)
     (P Q : HomotopyCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)) :
     ((leftDerivedUpperStarTensorRightCounit Λ h).app P).app Q =
@@ -123,7 +126,8 @@ lemma leftDerivedUpperStarTensor_app_app_comp {W : Scheme.{u}} (h : W ⟶ Y)
     (leftDerivedUpperStarTensorRightCounit Λ h) (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
     (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) (leftDerivedUpperStarTensorLeft Λ h)
     (leftDerivedUpperStarTensorLeftCounit Λ h) P Q
-  rw [leftDerivedUpperStarTensorRightCounit_app_app, leftDerivedUpperStarTensorLeftCounit_app_app]
+  rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom,
+    leftDerivedUpperStarTensorLeftCounit_app_app]
     at h1
   exact h1
 
