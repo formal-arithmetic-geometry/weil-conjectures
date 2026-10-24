@@ -92,21 +92,15 @@ lemma deformationSpecialZeroLocusToQuotientSpec_normalConeZeroSection (I : X.lef
         deformationSpecialFibreToNormalCone X I k' :=
   pullback.condition.symm
 
-/-- The special fibre maps to the deformation space through the normal cone. -/
-@[reassoc]
-lemma deformationSpecialFibreToNormalCone_toSpace (I : X.left.IdealSheafData) :
-    deformationSpecialFibreToNormalCone X I k' ≫ I.normalConeToDeformationSpace =
-      deformationSpecialToTotal X I k' ≫ deformationTotalToSpace X I k' :=
-  deformationSpecialFibreToNormalCone_normalConeToDeformationSpace X I k'
-
 /-- The special fibre maps to `X` through the normal cone. -/
 @[reassoc]
 lemma deformationSpecialFibreToNormalCone_toBase (I : X.left.IdealSheafData) :
     deformationSpecialFibreToNormalCone X I k' ≫
         (relativeGluingData I.coequifibered_toNormalConePresheaf).toBase =
       deformationSpecialToTotal X I k' ≫ deformationTotalToBase X I k' := by
-  rw [← IdealSheafData.normalConeToDeformationSpace_deformationSpaceProj,
-    deformationSpecialFibreToNormalCone_toSpace_assoc, deformationTotalToBase]
+  rw [← IdealSheafData.normalConeToDeformationSpace_deformationSpaceProj]
+  change _ = (deformationModel X I k').i ≫ deformationTotalToSpace X I k' ≫ _
+  rw [deformationSpecialFibreToNormalCone_normalConeToDeformationSpace_assoc]
 
 /-- The map `Z₀ ⟶ V(I)` from the zero locus of the special fibre to the closed subscheme `V(I)` of
 the point `x` factors through the structure morphism `Z₀ ⟶ Spec k' ⟶ Spec k`. -/
@@ -138,9 +132,10 @@ lemma deformationSpecialFibreZeroSection_toTotal :
       ((deformationSpecialZeroLocus X x.left.ker k').hom ≫ traitClosedPoint k') ≫
         deformationZeroSectionTotal X x k' := by
   refine pullback.hom_ext ?_ ?_
-  · change _ ≫ deformationSpecialToTotal X x.left.ker k' ≫ deformationTotalToSpace X x.left.ker k' =
+  · change _ ≫ (deformationModel X x.left.ker k').i ≫ deformationTotalToSpace X x.left.ker k' =
       _ ≫ deformationZeroSectionTotal X x k' ≫ deformationTotalToSpace X x.left.ker k'
-    rw [deformationZeroSectionTotal_toSpace, ← deformationSpecialFibreToNormalCone_toSpace,
+    rw [deformationZeroSectionTotal_toSpace,
+      ← deformationSpecialFibreToNormalCone_normalConeToDeformationSpace,
       ← deformationSpecialZeroLocusToQuotientSpec_normalConeZeroSection_assoc,
       deformationSpecialZeroLocusToQuotientSpec_eq]
     simp only [Category.assoc]
