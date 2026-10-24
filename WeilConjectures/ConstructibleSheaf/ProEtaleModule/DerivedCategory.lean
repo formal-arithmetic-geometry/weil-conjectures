@@ -96,6 +96,12 @@ lemma mem_boundedConstructible_iff
 abbrev BoundedConstructible : Type _ :=
   (boundedConstructible R).FullSubcategory
 
+/-- The zero complex is bounded constructible: it is bounded, and its cohomology sheaves are zero,
+which is constructible for the trivial stratification (the cokernel of `R⁰ ⟶ R⁰`). This makes
+`BoundedConstructible R` have a zero object without going through the triangulated structure. -/
+instance containsZero_boundedConstructible : (boundedConstructible R).ContainsZero :=
+  sorry
+
 section Triangulated
 
 open scoped CategoryTheory.Obj
