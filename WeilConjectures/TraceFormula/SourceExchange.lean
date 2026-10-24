@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.SourceExchangeClass
+public import WeilConjectures.TraceFormula.SourceExchangeKernel
 
 /-!
 
@@ -43,16 +44,6 @@ section KernelPushforward
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-
-/-- **The kernel pushforward and the Künneth–Verdier isomorphisms** (blueprint
-`lem-trf-trace-source-exchange`, identity (a)): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`. -/
-theorem kernelPushforward_comp_kunnethVerdierMap :
-    kernelPushforward ℓ f K ≫
-        kunnethVerdierMap ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-          ((boundedConstructibleLowerStar _ ℓ f).obj K) =
-      (boundedConstructibleLowerStar _ ℓ (prod.map f f)).map (kunnethVerdierMap ℓ K K) ≫
-        classTransportMap ℓ f K :=
-  sorry
 
 /-- Identity (a) read through the inverses of the Künneth–Verdier isomorphisms. -/
 lemma classTransportMap_comp_inv_kunnethVerdierMap :
