@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
 public import WeilConjectures.TraceFormula.SupportedClass
 
@@ -74,6 +75,43 @@ lemma diagIso_naturality_aux {Cs CP : Type*} [Category Cs] [MonoidalCategory Cs]
 end CategoryTheory.Verdier
 
 namespace CategoryTheory.Verdier
+
+/-- An algebraic step of `diagUpperStarProjIso_tensor`. -/
+lemma tensor_comp_iso_aux {C : Type*} [Category C] [MonoidalCategory C] {QML QM QL RML RM RL IML IM IL
+    KM KL : C} (cML : QML ≅ RML) (cM : QM ≅ RM) (cL : QL ≅ RL) (eML : QML ⟶ IML) (eM : QM ⟶ IM)
+    (eL : QL ⟶ IL) (sML : IML ⟶ KM ⊗ KL) (sM : IM ⟶ KM) (sL : IL ⟶ KL) {RML' : C} (x₁ : RML ⟶ RML')
+    (x₂ : RML' ⟶ RM ⊗ RL) (y : QML ⟶ QM ⊗ QL) (z : IML ⟶ IM ⊗ IL)
+    (h₁ : y ≫ (cM.hom ⊗ₘ cL.hom) = cML.hom ≫ x₁ ≫ x₂)
+    (h₂ : y ≫ (eM ⊗ₘ eL) = eML ≫ z) (h₃ : z ≫ (sM ⊗ₘ sL) = sML) :
+    x₁ ≫ x₂ ≫ ((cM.inv ≫ eM ≫ sM) ⊗ₘ (cL.inv ≫ eL ≫ sL)) = cML.inv ≫ eML ≫ sML := by
+  rw [← cancel_epi cML.hom, Iso.hom_inv_id_assoc, ← Category.assoc x₁, ← Category.assoc,
+    ← h₁, Category.assoc, tensorHom_comp_tensorHom,
+    Iso.hom_inv_id_assoc, Iso.hom_inv_id_assoc, ← tensorHom_comp_tensorHom, reassoc_of% h₂, h₃]
+
+/-- An algebraic step of `diagUpperStarProjIso_μ_map`. -/
+lemma μ_map_aux {P S : Type*} [Category P] [Category S] [MonoidalCategory P] [MonoidalCategory S]
+    (F : P ⥤ S) [F.Monoidal] (G : S ⥤ P) [G.Monoidal] (e : ∀ X, F.obj (G.obj X) ⟶ X) {M L Z : S}
+    (g : M ⊗ L ⟶ Z) (hnat : F.map (G.map g) ≫ e Z = e (M ⊗ L) ≫ g)
+    (htens : F.map (Functor.OplaxMonoidal.δ G M L) ≫ Functor.OplaxMonoidal.δ F _ _ ≫
+      (e M ⊗ₘ e L) = e (M ⊗ L)) :
+    Functor.LaxMonoidal.μ F _ _ ≫ F.map (Functor.LaxMonoidal.μ G M L) ≫ F.map (G.map g) ≫ e Z =
+      (e M ⊗ₘ e L) ≫ g := by
+  rw [hnat, ← htens]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp_assoc, Functor.Monoidal.μ_δ, Functor.map_id, Category.id_comp,
+    Functor.Monoidal.μ_δ_assoc]
+
+/-- The uncurried form of `Cl = A ≫ curry p`. -/
+lemma whiskerLeft_comp_inv_curry {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
+    {M X Y N : C} (Cl : X ⟶ (ihom M).obj N) (p : M ⊗ Y ⟶ N) (_ : IsIso (MonoidalClosed.curry p)) :
+    M ◁ (Cl ≫ inv (MonoidalClosed.curry p)) ≫ p = MonoidalClosed.uncurry Cl := by
+  calc M ◁ (Cl ≫ inv (MonoidalClosed.curry p)) ≫ p =
+        M ◁ (Cl ≫ inv (MonoidalClosed.curry p)) ≫
+          MonoidalClosed.uncurry (MonoidalClosed.curry p) := by
+        rw [MonoidalClosed.uncurry_curry]
+    _ = MonoidalClosed.uncurry ((Cl ≫ inv (MonoidalClosed.curry p)) ≫
+          MonoidalClosed.curry p) := (MonoidalClosed.uncurry_natural_left _ _).symm
+    _ = MonoidalClosed.uncurry Cl := by rw [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
 /-- Commuting a natural isomorphism `ψ : R ≅ 𝟭` past `R.map x`. -/
 lemma comp_map_comp_iso_hom_app {C : Type*} [Category C] {R : C ⥤ C} (ψ : R ≅ 𝟭 C) {V W X Y : C}
@@ -205,6 +243,69 @@ noncomputable def diagUpperStarProjIso (p : point k ⨯ point k ⟶ point k) (hp
   ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app M).symm ≪≫
     eqToIso (by rw [hp]) ≪≫ (boundedConstructibleUpperStarId _ ℓ (point k)).app M
 
+lemma upperStar_δ_eqToHom {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
+    [QuasiCompact Y.hom] [IsSeparated Y.hom] {f g : point k ⟶ Y} (h : f = g)
+    (M L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) M L ≫
+        (eqToHom (congrArg (fun φ ↦ (boundedConstructibleUpperStar _ ℓ φ).obj M) h) ⊗ₘ
+          eqToHom (congrArg (fun φ ↦ (boundedConstructibleUpperStar _ ℓ φ).obj L) h)) =
+      eqToHom (congrArg (fun φ ↦ (boundedConstructibleUpperStar _ ℓ φ).obj (M ⊗ L)) h) ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g) M L := by
+  subst h
+  simp
+
+variable (ℓ) in
+/-- The identification `LΔ^* Lp^* ≅ 𝟭` is monoidal. -/
+lemma diagUpperStarProjIso_tensor (p : point k ⨯ point k ⟶ point k)
+    (hp : diag (point k) ≫ p = 𝟙 _) (M L : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+        (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ p) M L) ≫
+      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
+      ((diagUpperStarProjIso ℓ p hp M).hom ⊗ₘ (diagUpperStarProjIso ℓ p hp L).hom) =
+    (diagUpperStarProjIso ℓ p hp (M ⊗ L)).hom := by
+  have h₁ := boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ (diag (point k)) p M L
+  have h₂ := upperStar_δ_eqToHom (ℓ := ℓ) hp M L
+  have h₃ := boundedConstructibleUpperStarId_hom_app_tensor_δ _ ℓ (point k) M L
+  refine Verdier.tensor_comp_iso_aux (C := Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app (M ⊗ L))
+    ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app M)
+    ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app L) _ _ _ _ _ _ _ _
+    (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (diag (point k) ≫ p)) M L)
+    (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (𝟙 (point k))) M L) ?_ ?_ ?_
+  · convert h₁ using 2 <;> rfl
+  · convert h₂ using 2 <;> simp only [eqToIso.hom]
+  · convert h₃ using 2 <;> rfl
+
+variable (ℓ) in
+/-- The identification `LΔ^* Lp^* ≅ 𝟭` is natural. -/
+lemma diagUpperStarProjIso_naturality (p : point k ⨯ point k ⟶ point k)
+    (hp : diag (point k) ≫ p = 𝟙 _) {M M' : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (g : M ⟶ M') :
+    (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+        ((boundedConstructibleUpperStar _ ℓ p).map g) ≫ (diagUpperStarProjIso ℓ p hp M').hom =
+      (diagUpperStarProjIso ℓ p hp M).hom ≫ g := by
+  have h₁ := (boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).inv.naturality g
+  have h₂ := upperStar_map_comp_eqToHom_of_eq (ℓ := ℓ) hp g
+  have h₃ := (boundedConstructibleUpperStarId _ ℓ (point k)).hom.naturality g
+  simp only [diagUpperStarProjIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+    eqToIso.hom]
+  exact Verdier.comp_comp_naturality h₁ h₂ h₃
+
+variable (ℓ) in
+/-- The identification `LΔ^* Lp^* ≅ 𝟭` is compatible with the tensor structures and the image of
+a map out of a tensor product. -/
+lemma diagUpperStarProjIso_μ_map (p : point k ⨯ point k ⟶ point k)
+    (hp : diag (point k) ≫ p = 𝟙 _) (M L Z : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (g : M ⊗ L ⟶ Z) :
+    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
+        (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+          (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ p) M L) ≫
+        (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+          ((boundedConstructibleUpperStar _ ℓ p).map g) ≫ (diagUpperStarProjIso ℓ p hp Z).hom =
+      ((diagUpperStarProjIso ℓ p hp M).hom ⊗ₘ (diagUpperStarProjIso ℓ p hp L).hom) ≫ g := by
+  exact Verdier.μ_map_aux _ _ (fun X ↦ (diagUpperStarProjIso ℓ p hp X).hom) g
+    (diagUpperStarProjIso_naturality ℓ p hp g) (diagUpperStarProjIso_tensor ℓ p hp M L)
+
 /-- The point `τ : ℚ̄_ℓ ⟶ LΔ^* RΔ_! ℚ̄_ℓ` through which the coevaluation over the base point
 factors. -/
 noncomputable def pointTau (v : K ⟶ K) :
@@ -241,12 +342,14 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
       ((ihom.ev K).app (dualizingComplex' ℓ (point k))))
     (exceptionalKunnethMap ℓ K)
     (uncurry (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm))
-    sorry
+    (Verdier.whiskerLeft_comp_inv_curry _ (kunnethVerdierPairing ℓ K K)
+      (isIso_kunnethVerdierMap ℓ K K))
     (diagUpperStarProjIso ℓ prod.snd (by simp) K)
     (diagUpperStarProjIso ℓ prod.fst (by simp) K).hom
     (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
     (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
-    _ _ sorry (pointTau v) sorry sorry sorry sorry sorry sorry
+    _ _ sorry (pointTau v) sorry sorry sorry
+    (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) sorry sorry
 
 /-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
 `sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
