@@ -161,6 +161,14 @@ lemma WeilBoundedConstructible.stalkFrobenius_one (K : WeilBoundedConstructible 
     ((K.iterateStr_hom_eq_frobeniusCoefficientIterate 1).trans
       (frobeniusCoefficientIterate_one K.str.hom))
 
+/-- The trace of the local Frobenius `F_{x,1}` of degree one is the trace of the Frobenius of
+the stalk at `x`. -/
+lemma WeilBoundedConstructible.trace_stalkFrobenius_one [IsSepClosed k]
+    (K : WeilBoundedConstructible ℓ Φ) (x : RationalPoint X)
+    (hx : x ≫ frobeniusIterate Φ 1 = x) (hx' : x ≫ Φ = x) :
+    trace (K.stalkFrobenius 1 x hx) = trace ((weilStalk ℓ Φ x hx').obj K).frobenius.hom := by
+  rw [K.stalkFrobenius_one x hx hx']
+
 set_option linter.overlappingInstances false in
 /-- The global operator `F_{c,1}` of degree one is the compactly supported Frobenius. -/
 lemma WeilBoundedConstructible.globalOperator_one (K : WeilBoundedConstructible ℓ Φ)
@@ -280,6 +288,60 @@ theorem homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek
           (geometricFrobeniusField_powSucc_inv n)).2 y.2.2) hZ
       ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
         (K.powSucc ℓ n))).some
+
+omit [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+/-- The trace of the Frobenius of a stalk only depends on the point. -/
+lemma trace_weilStalk_frobenius_congr {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)] {W : Over (Spec (.of Ω))}
+    [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom] {Φ : W ⟶ W}
+    {x x' : RationalPoint W} (h : x = x') (hx : x ≫ Φ = x) (hx' : x' ≫ Φ = x')
+    (L : WeilBoundedConstructible ℓ Φ) :
+    trace ((weilStalk ℓ Φ x hx).obj L).frobenius.hom =
+      trace ((weilStalk ℓ Φ x' hx').obj L).frobenius.hom := by
+  subst h
+  obtain rfl : hx = hx' := rfl
+  rfl
+
+set_option maxHeartbeats 800000 in
+-- the carriers of the Weil objects are compared up to unfolding
+set_option linter.overlappingInstances false in
+include hZ in
+/-- **The sheaf–function compatibility at a point from the trace formula on its geometric
+fibre**: if the restriction `K̄|_Z` of the base change of the iterate `(K, φ^{(n+1)})` to the
+fibre `Z` of `f̄` at `ȳ'` satisfies the trace formula
+`tr(F_{c,1} | RΓ_c(Z, K̄|_Z)) = ∑_{z ∈ Z^{Φ_Z}} tr(F_{z,1} | (K̄|_Z)_z)`, then
+`t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄)`. -/
+theorem weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre
+    (K : WeilBoundedConstructible ℓ eX.hom) [Fintype (FixedPoint ΦZ 1)]
+    [IsFinite (frobeniusIterate ΦZ 1).left]
+    [IsUniversalHomeomorphism (frobeniusIterate ΦZ 1).left]
+    (htf : trace (((weilUpperStar ℓ ΦZ _ i hi).obj
+        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+          (K.powSucc ℓ n))).globalOperator 1) =
+      ∑ z : FixedPoint ΦZ 1, trace (((weilUpperStar ℓ ΦZ _ i hi).obj
+        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+          (K.powSucc ℓ n))).stalkFrobenius 1 z.1 z.2)) :
+    weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
+      ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
+        weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K := by
+  classical
+  let e := fibreFixedPointEquiv y hi hZ
+  let _ : Fintype {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
+  refine homologyUnitEndRingHom_injective (Profinite.padicAlgClRingObj ℓ) ℓ
+    (point (AlgebraicClosure k)) ?_
+  rw [homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek ℓ hf y hi hZ K,
+    ← WeilBoundedConstructible.globalOperator_one, htf, finsum_eq_sum_of_fintype, map_sum,
+    ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
+  refine Finset.sum_congr rfl fun z _ ↦ ?_
+  rw [WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar hi,
+    WeilBoundedConstructible.trace_stalkFrobenius_one _ _ _ (by
+      rw [← frobeniusIterate_one (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1)
+        (eX.powSucc n).hom)]
+      exact comp_comp_frobeniusIterate_of_comp hi z.2),
+    homologyUnitEndRingHom_weilStalkSupertrace ℓ n _ (e z).1.2.1 (e z).1.2.2 K]
+  have h : z.1 ≫ i = geometricBaseChangePoint (e z).1.1 (e z).1.2.1 :=
+    rationalPoint_ext (geometricBaseChangePoint_left_comp_proj _ _).symm
+  exact trace_weilStalk_frobenius_congr ℓ h _ _ _
 
 end Main
 
