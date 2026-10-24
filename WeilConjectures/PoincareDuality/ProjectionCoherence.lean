@@ -222,4 +222,50 @@ lemma projectionComparison_comp_restrictionComparison
 
 end Restriction
 
+section Refinement
+
+variable {C₀ C₁ C₂ : Type*} [Category C₀] [Category C₁] [Category C₂]
+  [MonoidalCategory C₀] [MonoidalCategory C₁] [MonoidalCategory C₂]
+  {Pi : C₀ ⥤ C₁} {Si : C₁ ⥤ C₀} {Pi₁ : C₀ ⥤ C₂} {Si₁ : C₂ ⥤ C₀} {Fh : C₂ ⥤ C₁}
+  [Si.LaxMonoidal] [Si₁.LaxMonoidal] [Fh.Monoidal]
+  (bi : Pi ⊣ Si) (bi₁ : Pi₁ ⊣ Si₁) (e : Si₁ ≅ Fh ⋙ Si)
+
+open Functor.LaxMonoidal in
+/-- **The refinement comparison intertwines the projection formulas**: for `Fh ⊣ Gh` (the
+proper `h`) with `Fh` monoidal and the restriction comparison `ρ'` invertible, the comparison
+`ρ = η_h ≫ Gh ρ'⁻¹ : i₁_! ⟶ h_* i_!` carries `q_{i₁}` followed by the projection morphism of `h`
+to `h_*` of `q_i`. -/
+lemma projectionComparison_comp_refinement {Gh : C₁ ⥤ C₂} (ah : Fh ⊣ Gh)
+    [∀ M, IsIso (restrictionComparison bi bi₁ e M)]
+    (he : ∀ X Y, μ Si₁ X Y ≫ e.hom.app (X ⊗ Y) =
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Fh ⋙ Si) X Y) (K : C₀) (B : C₂) :
+    bi₁.projectionComparison K B ≫
+        (ah.unit.app (Pi₁.obj K) ≫ Gh.map (inv (restrictionComparison bi bi₁ e K))) ▷ B ≫
+        ah.projectionMorphism (Pi.obj K) B =
+      (ah.unit.app (Pi₁.obj (K ⊗ Si₁.obj B)) ≫
+        Gh.map (inv (restrictionComparison bi bi₁ e (K ⊗ Si₁.obj B)))) ≫
+        Gh.map (Pi.map (K ◁ e.hom.app B) ≫ bi.projectionComparison K (Fh.obj B)) := by
+  have h6 := projectionComparison_comp_restrictionComparison bi bi₁ e he K B
+  have h6' : inv (restrictionComparison bi bi₁ e (K ⊗ Si₁.obj B)) ≫ Pi.map (K ◁ e.hom.app B) ≫
+      bi.projectionComparison K (Fh.obj B) =
+      Fh.map (bi₁.projectionComparison K B) ≫ δ Fh (Pi₁.obj K) B ≫
+        inv (restrictionComparison bi bi₁ e K) ▷ Fh.obj B := by
+    rw [IsIso.inv_comp_eq, ← cancel_mono (restrictionComparison bi bi₁ e K ▷ Fh.obj B)]
+    simp only [Category.assoc, ← comp_whiskerRight, IsIso.inv_hom_id, id_whiskerRight,
+      Category.comp_id]
+    rw [← cancel_mono (μ Fh (Pi₁.obj K) B)]
+    simp only [Category.assoc, Functor.Monoidal.δ_μ, Category.comp_id]
+    rw [h6]
+    simp only [← Pi.map_comp_assoc, ← whiskerLeft_comp, Iso.hom_inv_id_app, whiskerLeft_id,
+      Pi.map_id, Category.id_comp]
+  apply (ah.homEquiv _ _).symm.injective
+  simp only [homEquiv_counit, projectionMorphism, homEquiv_unit, Functor.map_comp,
+    Category.assoc, Adjunction.counit_naturality, Adjunction.counit_naturality_assoc,
+    Adjunction.left_triangle_components_assoc]
+  rw [h6', ← δ_natural_left_assoc, ← comp_whiskerRight, Functor.map_comp, Category.assoc]
+  erw [ah.counit_naturality, ah.left_triangle_components_assoc]
+  rfl
+
+end Refinement
+
 end CategoryTheory.Adjunction
