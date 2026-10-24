@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
+public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Conj
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
@@ -14,6 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-!
 
@@ -48,17 +51,17 @@ functors on `Dᵇc(-)⟦Λ⟧` do not provide yet.
   (`ProEtale.CondensedRing.padicAlgClUnitEndRingHom`), and `unitEndRingEquiv` is its inverse
   over the base point.
 
-## Sorried input
-
-- `ProEtale.CondensedRing.bijective_padicAlgClUnitEndRingHom_point`: for `k` separably closed,
-  the canonical map `ℚ̄_ℓ ⟶ End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ)` is bijective.
-
 ## Main definitions
 
 - `ProEtale.CondensedRing.point`: the base point `s = Spec k`, terminal in `Over (Spec (.of k))`.
 - `ProEtale.CondensedRing.toPoint`: the structure morphism `a_X : X ⟶ s`.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.frobenius`: the automorphism of a Weil
   object for the identity.
+
+## Main results
+
+- `ProEtale.CondensedRing.bijective_padicAlgClUnitEndRingHom_point`: for `k` separably closed,
+  the canonical map `ℚ̄_ℓ ⟶ End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ)` is bijective.
 
 -/
 
@@ -171,17 +174,58 @@ noncomputable def padicAlgClUnitEndRingHom :
 
 end Scalars
 
+/-- A composite of bijective ring homomorphisms is bijective. -/
+private lemma bijective_ringHomComp {A B C : Type*} [NonAssocSemiring A] [NonAssocSemiring B]
+    [NonAssocSemiring C] {f : B →+* C} {g : A →+* B} (hf : Function.Bijective f)
+    (hg : Function.Bijective g) : Function.Bijective (f.comp g) :=
+  hf.comp hg
+
 section ScalarsPoint
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
+omit [Fact (ringChar k).Prime] in
 /-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
 `H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is
-bijective. -/
+bijective. It is the composite of the bijections
+`ℚ̄_ℓ ≅ Γ ℚ̲̄_ℓ` (`Profinite.PadicAlgCl.constRingHom_surjective`),
+`Γ ℚ̲̄_ℓ ≅ End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s` (the pullback `p^*` from condensed `ℚ̲̄_ℓ`-modules being an
+equivalence over a separably closed field, `isEquivalence_upperStarFromPointMod`) and
+`End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s ≅ End_{D(ℚ̲̄_ℓ,s)} ℚ̲̄_ℓ,s` (the functor `singleFunctor 0` being fully
+faithful). -/
 theorem bijective_padicAlgClUnitEndRingHom_point :
-    Function.Bijective (padicAlgClUnitEndRingHom ℓ (point k)) :=
-  sorry
+    Function.Bijective (padicAlgClUnitEndRingHom ℓ (point k)) := by
+  let Λ := Profinite.padicAlgClRingObj.{u} ℓ
+  have := isEquivalence_upperStarFromPointMod (Ω := k) Λ
+  have hE := (upperStarFromPoint (Spec (.of k))).bijective_regularEndRingHom_comp_mapFunctor Λ
+    (Functor.FullyFaithful.ofFullyFaithful (upperStarFromPointMod Λ (Spec (.of k))))
+  have : Nontrivial (MonObj.Γ Λ) := ⟨⟨1, 0, fun h ↦ Profinite.PadicAlgCl.one_ne_zero_end_regular ℓ
+    (by rw [← map_one Mod.regularEndRingHom, h, map_zero])⟩⟩
+  have hc : Function.Bijective (Profinite.PadicAlgCl.constRingHom.{u} ℓ) :=
+    ⟨(Profinite.PadicAlgCl.constRingHom ℓ).injective,
+      Profinite.PadicAlgCl.constRingHom_surjective ℓ⟩
+  let A := Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
+    (condensedRingObj Λ (point k).left)
+  let F := HomologicalComplex.single A (ComplexShape.up ℤ) 0 ⋙
+    HomotopyCategory.quotient A (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
+  have : F.Full := Functor.Full.of_iso
+    ((DerivedCategory.singleFunctorIsoCompQ A 0).trans
+      (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso A).symm))
+  have : F.Faithful := Functor.Faithful.of_iso
+    ((DerivedCategory.singleFunctorIsoCompQ A 0).trans
+      (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso A).symm))
+  have hF :
+      Function.Bijective (F.mapEndRingHom (Mod.regular (condensedRingObj Λ (point k).left))) :=
+    (Functor.FullyFaithful.ofFullyFaithful F).map_bijective _ _
+  unfold padicAlgClUnitEndRingHom boundedConstructibleUnitEndRingHom
+  dsimp only
+  refine bijective_ringHomComp (bijective_ringHomComp ?_
+    (bijective_ringHomComp ?_ (bijective_ringHomComp hF hE))) hc
+  · simp only [RingEquiv.toRingHom_eq_coe]
+    exact RingEquiv.bijective _
+  · simp only [RingEquiv.toRingHom_eq_coe]
+    exact RingEquiv.bijective _
 
 /-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
 `H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the inverse of the canonical map `padicAlgClUnitEndRingHom`. The

@@ -7978,6 +7978,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndSurjective
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
