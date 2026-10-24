@@ -17,8 +17,8 @@ Let `f : X ⟶ Y` be a morphism of schemes and `x̄ : P ⟶ X`, `ȳ : P ⟶ Y` w
 restriction `ȳ^* f_* M ⟶ x̄^* M` of module objects over `Λ`
 (`ProEtale.CondensedRing.stalkLowerStarProj`) is the composite
 `ȳ^* f_* M = (x̄ ≫ f)^* f_* M ≅ x̄^* f^* f_* M ⟶ x̄^* M` of the composition isomorphism and
-the counit of `f^* ⊣ f_*`. For `P` the spectrum of a separably closed field, these are the projections of the
-stalk of `f_* M` at `ȳ` to the stalks of `M` at the points over `ȳ`
+the counit of `f^* ⊣ f_*`. For `P` the spectrum of a separably closed field, these are the
+projections of the stalk of `f_* M` at `ȳ` to the stalks of `M` at the points over `ȳ`
 (`ProEtale.CondensedRing.FibrePoints`, finite for finite `f`:
 `ProEtale.CondensedRing.finite_fibrePoints`).
 
