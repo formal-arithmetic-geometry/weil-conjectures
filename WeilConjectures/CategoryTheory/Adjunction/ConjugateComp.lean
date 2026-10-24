@@ -104,4 +104,67 @@ lemma Adjunction.ofNatIsoRight_comp_unit_app (af : Lf ⊣ Rf) (ag : Lg ⊣ Rg) (
 
 end Units
 
+section BaseChange
+
+variable {CC CF CX CP : Type*} [Category CC] [Category CF] [Category CX] [Category CP]
+  {ιs : CC ⥤ CF} {Lι Sι : CF ⥤ CC} (Bι : ιs ⊣ Sι) (σι : Lι ≅ Sι)
+  {Δs : CP ⥤ CX} {LΔ SΔ : CX ⥤ CP} (BΔ : Δs ⊣ SΔ) (σΔ : LΔ ≅ SΔ)
+  {Lc : CC ⥤ CP} {Rc : CP ⥤ CC} (Ac : Lc ⊣ Rc) {Ld : CF ⥤ CX} {Rd : CX ⥤ CF} (Ad : Ld ⊣ Rd)
+  (Sq : Lι ⋙ Lc ≅ Ld ⋙ LΔ)
+
+/-- The exceptional adjoint of the right-adjoint form of a base change isomorphism which is the
+mate of a square isomorphism. For a square isomorphism `Sq : Lι ⋙ Lc ≅ Ld ⋙ LΔ`, its mate
+`Ex : Lc ⋙ Δ^* ⟶ ι^* ⋙ Ld` for `ι^* ⊣ Lι`, `Δ^* ⊣ LΔ` (with `Lι ≅ Sι`, `LΔ ≅ SΔ`), and the
+conjugate `U : SΔ ⋙ Rc ≅ Rd ⋙ Sι` of `Ex⁻¹`, the `Lc ⊣ Rc`-adjoint of `U⁻¹` is
+```
+Lc Sι Rd N ──Lc σι⁻¹──▶ Lc Lι Rd N ──Sq──▶ LΔ Ld Rd N ──LΔ ε──▶ LΔ N ──σΔ──▶ SΔ N.
+```
+-/
+lemma Adjunction.homEquiv_symm_conjugateIsoEquiv_inv_app (Ex : Lc ⋙ Δs ⟶ ιs ⋙ Ld) [IsIso Ex]
+    (hEx : Ex = (mateEquiv (Bι.ofNatIsoRight σι.symm) (BΔ.ofNatIsoRight σΔ.symm)).symm Sq.hom)
+    (N : CX) :
+    (Ac.homEquiv _ _).symm ((conjugateIsoEquiv (Ac.comp BΔ) (Bι.comp Ad)
+      (asIso Ex).symm).inv.app N) =
+      Lc.map (σι.inv.app (Rd.obj N)) ≫ Sq.hom.app (Rd.obj N) ≫ LΔ.map (Ad.counit.app N) ≫
+        σΔ.hom.app N := by
+  subst hEx
+  rw [Equiv.symm_apply_eq]
+  simp only [Adjunction.homEquiv_unit, Functor.comp_obj, mateEquiv_symm_apply, ofNatIsoRight_unit,
+    Iso.symm_hom, Functor.whiskerRight_comp, ofNatIsoRight_counit, Iso.symm_inv,
+    Functor.whiskerLeft_comp, Category.assoc, conjugateIsoEquiv_apply_inv, asIso_hom,
+    conjugateEquiv_apply_app, comp_unit_app, NatTrans.comp_app, Functor.id_obj,
+    Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map,
+    Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.associator_hom_app,
+    Functor.map_id, Functor.rightUnitor_hom_app, Category.comp_id, Category.id_comp,
+    Functor.map_comp, comp_counit_app, NatTrans.naturality]
+  dsimp only [TwoSquare.natTrans]
+  congr 1
+  simp only [← Functor.map_comp]
+  congr 1
+  simp only [Functor.map_comp]
+  have h1 := BΔ.unit.naturality_assoc (Lc.map (Bι.unit.app (Sι.obj (Rd.obj N))) ≫
+    Lc.map (σι.inv.app (ιs.obj (Sι.obj (Rd.obj N)))) ≫
+    Sq.hom.app (ιs.obj (Sι.obj (Rd.obj N))) ≫
+    σΔ.hom.app (Ld.obj (ιs.obj (Sι.obj (Rd.obj N)))))
+    (SΔ.map (BΔ.counit.app (Ld.obj (ιs.obj (Sι.obj (Rd.obj N))))) ≫
+      SΔ.map (Ld.map (Bι.counit.app (Rd.obj N))) ≫ SΔ.map (Ad.counit.app N))
+  simp only [Functor.id_map, Functor.comp_map, Functor.map_comp, Category.assoc] at h1
+  dsimp only [Functor.id_obj] at h1
+  rw [← h1]
+  rw [BΔ.right_triangle_components_assoc]
+  have h2 := σΔ.hom.naturality (Ld.map (Bι.counit.app (Rd.obj N)))
+  have h3 := Sq.hom.naturality (Bι.counit.app (Rd.obj N))
+  have h4 := σι.inv.naturality (Bι.counit.app (Rd.obj N))
+  simp only [Functor.comp_map] at h2 h3 h4
+  have key : Bι.unit.app (Sι.obj (Rd.obj N)) ≫ σι.inv.app (ιs.obj (Sι.obj (Rd.obj N))) ≫
+      Lι.map (Bι.counit.app (Rd.obj N)) = σι.inv.app (Rd.obj N) := by
+    dsimp only [Functor.comp_obj] at h4
+    rw [← h4, ← Category.assoc, Bι.right_triangle_components]
+    simp
+  rw [← reassoc_of% h2, ← reassoc_of% h3, ← Lc.map_comp_assoc, ← Lc.map_comp_assoc]
+  simp only [Category.assoc]
+  rw [key]
+
+end BaseChange
+
 end CategoryTheory
