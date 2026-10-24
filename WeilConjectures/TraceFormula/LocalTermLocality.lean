@@ -54,7 +54,7 @@ is the pushforward of the trace class of the restricted coefficient map
 item 2 is the vanishing of the trace class on `B` below. Following the blueprint proof, the
 theorem is reduced to
 * the additivity of trace classes along the pieces `K^U = j_! Lj^* K` and `K^Z = Rx_* Lx^* K`
-  of `K` (`Correspondence.traceClass_eq_add_of_isContractingAt`, blueprint
+  of `K` (`Correspondence.traceClass_eq_add_of_isPullback`, blueprint
   `prop-trf-trace-class-additivity`; for graphs `Correspondence.traceClass_ofGraph_eq_add`);
 * the proper pushforward compatibility of trace classes for the closed piece
   (`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`);
@@ -122,24 +122,25 @@ lemma FixedLocus.liftPoint_ι (F : c.FixedLocus) (y : RationalPoint c.C)
 variable (c)
 
 variable {c} in
-/-- The *restricted coefficient map* `u_Z : K_x ⟶ K_x` of a correspondence contracting at `y`,
-`x = c₁(y) = c₂(y)` (blueprint `det-tf-contracting-restricted-morphism` for `Z = {x}`): the
-restriction
+/-- The *restricted coefficient map* `u_Z : K_x ⟶ K_x` of a correspondence at a `k`-point `y` of
+the fixed locus whose fibre `c₁⁻¹(x)`, `x = c₁(y) = c₂(y)`, is the reduced point `y` (blueprint
+`det-tf-contracting-restricted-morphism` for `Z = {x}`): the restriction
 ```
 K_x ≅ Ly^* Lc₂^* K --Ly^* u--> Ly^* Rc₁^! K --β--> R(𝟙)^! K_x ≅ K_x
 ```
 of `u` to `y`, where `β` is the base change mate of the cartesian square `y ≫ c₁ = 𝟙 ≫ x`: the
 `R(𝟙)_! ⊣ R(𝟙)^!` adjoint of `R(𝟙)_! Ly^* Rc₁^! K ≅ Lx^* Rc₁_! Rc₁^! K ⟶ Lx^* K`. -/
-noncomputable def contractingStalkMap {y : RationalPoint c.C} (hc : c.IsContractingAt y) :
+noncomputable def restrictedStalkMap {y : RationalPoint c.C} (hy : y ≫ c.c₁ = y ≫ c.c₂)
+    (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K :=
-  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hc.isPullback
-  eqToHom (by rw [hc.comp_c₁_eq_comp_c₂]) ≫
+  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
+  eqToHom (by rw [hy]) ≫
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y c.c₂).hom.app K ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map c.u ≫
     (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
       (𝟙 (point k))).homEquiv _ _
-      ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hc.isPullback)).inv.app
+      ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app
           ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).map
           ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -147,13 +148,21 @@ noncomputable def contractingStalkMap {y : RationalPoint c.C} (hc : c.IsContract
     (boundedConstructibleUpperShriekId ℓ (point k)).hom.app _
 
 variable {c} in
-/-- At a contracting point `y` with `x = c₁(y)`, the closed subscheme `{x}` is `c`-invariant:
-`c₁⁻¹(x) = {y} ⊆ c₂⁻¹(x)`, that is, `c₂⁻¹(X ∖ {x}) ⊆ c₁⁻¹(X ∖ {x})`. -/
-lemma IsContractingAt.preimage_pointComplOpens_le {y : RationalPoint c.C}
-    (hc : c.IsContractingAt y) :
+/-- The restricted coefficient map `u_Z : K_x ⟶ K_x` (`restrictedStalkMap`) of a correspondence
+contracting at `y`. -/
+noncomputable abbrev contractingStalkMap {y : RationalPoint c.C} (hc : c.IsContractingAt y) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K :=
+  restrictedStalkMap hc.comp_c₁_eq_comp_c₂ hc.isPullback
+
+variable {c} in
+/-- If the fibre `c₁⁻¹(x)` of `x = c₁(y)` is the point `y` and `c₂(y) = x`, the closed
+subscheme `{x}` is `c`-invariant: `c₁⁻¹(x) ⊆ c₂⁻¹(x)`, that is,
+`c₂⁻¹(X ∖ {x}) ⊆ c₁⁻¹(X ∖ {x})`. -/
+lemma preimage_pointComplOpens_le_of_isPullback {y : RationalPoint c.C}
+    (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
     c.c₂.left ⁻¹ᵁ pointComplOpens (y ≫ c.c₁) ≤ c.c₁.left ⁻¹ᵁ pointComplOpens (y ≫ c.c₁) := by
-  have hsq : IsPullback y.left (𝟙 _) c.c₁.left (y ≫ c.c₁).left :=
-    hc.isPullback.map (Over.forget _)
+  have hsq : IsPullback y.left (𝟙 _) c.c₁.left (y ≫ c.c₁).left := sq.map (Over.forget _)
   intro z hz
   simp only [pointComplOpens, Scheme.Hom.mem_preimage, TopologicalSpace.Opens.mem_mk,
     Set.mem_compl_iff, Set.mem_range, not_exists] at hz ⊢
@@ -163,40 +172,38 @@ lemma IsContractingAt.preimage_pointComplOpens_le {y : RationalPoint c.C}
     exact ⟨p, hp⟩
   obtain ⟨q, rfl⟩ := hmem
   refine hz (hsq.isoPullback.inv.base q) ?_
-  refine (congrArg (fun f : point k ⟶ X ↦ f.left.base (hsq.isoPullback.inv.base q))
-    hc.comp_c₁_eq_comp_c₂).trans ?_
+  refine (congrArg (fun f : point k ⟶ X ↦ f.left.base (hsq.isoPullback.inv.base q)) hy).trans ?_
   rw [← hsq.isoPullback_inv_fst]
   rfl
 
 variable {c} in
 /-- The proper pushforward diagram `(x, y)`, `x = c₁(y)`, from the identity correspondence of
-the point with the restricted coefficient map `u_Z` to `c`, at a contracting point `y`: a
-diagram since `y ≫ c₁ = 𝟙 ≫ x` and `y ≫ c₂ = 𝟙 ≫ x`. -/
-noncomputable abbrev contractingClosedPieceDiagram {y : RationalPoint c.C}
-    (hc : c.IsContractingAt y) :
-    (ofEnd _ (contractingStalkMap hc)).ProperPushforwardDiagram X where
+the point with the restricted coefficient map `u_Z` to `c`: a diagram since `y ≫ c₁ = 𝟙 ≫ x`
+and `y ≫ c₂ = 𝟙 ≫ x`. -/
+noncomputable abbrev restrictedClosedPieceDiagram {y : RationalPoint c.C}
+    (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
+    (ofEnd _ (restrictedStalkMap hy sq)).ProperPushforwardDiagram X where
   f := y ≫ c.c₁
   D := c.C
   b₁ := c.c₁
   b₂ := c.c₂
   g := y
   w₁ := (Category.id_comp _).symm
-  w₂ := hc.comp_c₁_eq_comp_c₂.symm.trans (Category.id_comp _).symm
+  w₂ := hy.symm.trans (Category.id_comp _).symm
 
-/-- **Additivity of trace classes along the pieces of a contracting point** (blueprint
+/-- **Additivity of trace classes along the pieces of a point with reduced fibre** (blueprint
 `prop-trf-trace-class-additivity`, item 1, and `lem-trf-trace-triangle-compatibility`, for the
-`c`-invariant closed subscheme `Z = {x}` of the rational point `x = c₁(y)` of a contracting point
-`y`, where `c₁⁻¹(x)` is the reduced point `y`; Varshavsky, Prop. 1.5.10 after SGA 5, III 4.13):
-the trace class of `u` is the sum of the trace classes of the induced coefficient maps
-`u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K`, the proper pushforward of the restricted coefficient
-map along `(x, y)`, and `u^U = [j]_! (u|_U)` on `K^U = j_! Lj^* K`. Only `c₁⁻¹(x) = {y}` and
-`c₂(y) = x` are used, not the contraction inequality. -/
-theorem traceClass_eq_add_of_isContractingAt (F : c.FixedLocus) {y : RationalPoint c.C}
-    (hc : c.IsContractingAt y) :
+`c`-invariant closed subscheme `Z = {x}` of the rational point `x = c₁(y)` of a `k`-point `y` of
+the fixed locus such that `c₁⁻¹(x)` is the reduced point `y`; Varshavsky, Prop. 1.5.10 after
+SGA 5, III 4.13): the trace class of `u` is the sum of the trace classes of the induced
+coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K`, the proper pushforward of the
+restricted coefficient map along `(x, y)`, and `u^U = [j]_! (u|_U)` on `K^U = j_! Lj^* K`. -/
+theorem traceClass_eq_add_of_isPullback (F : c.FixedLocus) {y : RationalPoint c.C}
+    (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
     c.traceClass F =
-      F.traceClassWithCoeff _ (contractingClosedPieceDiagram hc).pushforwardCoeff +
+      F.traceClassWithCoeff _ (restrictedClosedPieceDiagram hy sq).pushforwardCoeff +
         F.traceClassWithCoeff _ (c.pointOpenPieceCoeff (y ≫ c.c₁)
-          hc.preimage_pointComplOpens_le) :=
+          (preimage_pointComplOpens_le_of_isPullback hy sq)) :=
   sorry
 
 /-- **Vanishing of the trace class at a contracting point with zero stalk** (blueprint
@@ -237,7 +244,7 @@ restriction of the trace class of `c` to `B` is the pushforward along `e` of the
 `u_Z`: `Tr_c(u)|_B = e_* Tr_{c_Z}(u_Z)`.
 
 This is the blueprint proof (`det-tf-contracting-closed-piece`): by additivity
-(`traceClass_eq_add_of_isContractingAt`) the trace class is the sum of the trace classes of the
+(`traceClass_eq_add_of_isPullback`) the trace class is the sum of the trace classes of the
 coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z` and `u^U` on `K^U`; the first is the pushforward
 of the trace class of `u_Z` along the induced map of fixed loci by proper pushforward
 compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
@@ -251,7 +258,7 @@ theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
       {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
     (c.traceClass F).restrict j = BorelMooreSection.pushforward e
       ((ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _)) := by
-  have hle := hc.preimage_pointComplOpens_le
+  have hle := preimage_pointComplOpens_le_of_isPullback hc.comp_c₁_eq_comp_c₂ hc.isPullback
   have hc' : (c.withCoeff (pointOpenPiece K (y ≫ c.c₁))
       (c.pointOpenPieceCoeff (y ≫ c.c₁) hle)).IsContractingAt y := ⟨hc.1, hc.2, hc.3⟩
   have hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -262,7 +269,7 @@ theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
     restrict_traceClass_eq_zero_of_isContractingAt
       (c.withCoeff (pointOpenPiece K (y ≫ c.c₁)) (c.pointOpenPieceCoeff (y ≫ c.c₁) hle))
       (F.withCoeff _ _) hc' j hB hK
-  let P := contractingClosedPieceDiagram hc
+  let P := restrictedClosedPieceDiagram hc.comp_c₁_eq_comp_c₂ hc.isPullback
   let Fc := fixedLocusOfEnd (contractingStalkMap hc)
   let Fb : P.pushforward.FixedLocus := F.withCoeff _ P.pushforwardCoeff
   have : IsProper (e ≫ j).left := by
@@ -276,7 +283,8 @@ theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
   have hZ := P.traceClassPushforward_eq Fc Fb
   rw [ProperPushforwardDiagram.traceClassPushforward, BorelMooreSection.pushforward_congr hfix,
     ← BorelMooreSection.pushforward_comp] at hZ
-  rw [traceClass_eq_add_of_isContractingAt c F hc, BorelMooreSection.restrict_add, hU, add_zero]
+  rw [traceClass_eq_add_of_isPullback c F hc.comp_c₁_eq_comp_c₂ hc.isPullback,
+    BorelMooreSection.restrict_add, hU, add_zero]
   change (P.pushforward.traceClass Fb).restrict j = _
   rw [← hZ, BorelMooreSection.restrict_pushforward_self]
 

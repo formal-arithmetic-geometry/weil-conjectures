@@ -106,4 +106,84 @@ lemma exists_isPullback_pointComplι (x : RationalPoint X) (g : X ⟶ X)
 
 end PointCompl
 
+/-! ### Preimages of the complement of a point -/
+
+section Preimage
+
+variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom]
+
+/-- The preimage `g⁻¹(X ∖ {x})` of the open complement of a rational point under `g : Y ⟶ X`,
+as a scheme over `s`. -/
+noncomputable abbrev preimagePointCompl (g : Y ⟶ X) (x : RationalPoint X) :
+    Over (Spec (.of k)) :=
+  Over.mk ((g.left ⁻¹ᵁ pointComplOpens x).ι ≫ Y.hom)
+
+instance (g : Y ⟶ X) (x : RationalPoint X) : LocallyOfFiniteType (preimagePointCompl g x).hom :=
+  inferInstanceAs (LocallyOfFiniteType ((g.left ⁻¹ᵁ pointComplOpens x).ι ≫ Y.hom))
+
+instance (g : Y ⟶ X) (x : RationalPoint X) : IsSeparated (preimagePointCompl g x).hom :=
+  inferInstanceAs (IsSeparated ((g.left ⁻¹ᵁ pointComplOpens x).ι ≫ Y.hom))
+
+instance (g : Y ⟶ X) (x : RationalPoint X) : QuasiCompact (preimagePointCompl g x).hom := by
+  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  have : IsNoetherian Y.left := ⟨⟩
+  have : QuasiCompact (g.left ⁻¹ᵁ pointComplOpens x).ι := inferInstance
+  exact inferInstanceAs (QuasiCompact ((g.left ⁻¹ᵁ pointComplOpens x).ι ≫ Y.hom))
+
+/-- The open immersion `g⁻¹(X ∖ {x}) ⟶ Y`. -/
+noncomputable abbrev preimagePointComplι (g : Y ⟶ X) (x : RationalPoint X) :
+    preimagePointCompl g x ⟶ Y :=
+  Over.homMk (g.left ⁻¹ᵁ pointComplOpens x).ι
+
+instance (g : Y ⟶ X) (x : RationalPoint X) : IsOpenImmersion (preimagePointComplι g x).left :=
+  inferInstanceAs (IsOpenImmersion (g.left ⁻¹ᵁ pointComplOpens x).ι)
+
+/-- The restriction `g⁻¹(X ∖ {x}) ⟶ X ∖ {x}` of `g`. -/
+noncomputable def preimagePointComplRestrict (g : Y ⟶ X) (x : RationalPoint X) :
+    preimagePointCompl g x ⟶ pointCompl x :=
+  Over.homMk (g.left ∣_ pointComplOpens x) (by
+    change _ ≫ (pointComplOpens x).ι ≫ X.hom = _
+    rw [morphismRestrict_ι_assoc, Over.w g]
+    rfl)
+
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+/-- The restriction of `g` to the preimage of the complement of a point is a base change of
+`g`. -/
+lemma isPullback_preimagePointComplRestrict (g : Y ⟶ X) (x : RationalPoint X) :
+    IsPullback (preimagePointComplRestrict g x) (preimagePointComplι g x) (pointComplι x) g := by
+  have w : preimagePointComplRestrict g x ≫ pointComplι x = preimagePointComplι g x ≫ g := by
+    ext1
+    exact morphismRestrict_ι _ _
+  exact IsPullback.of_map (Over.forget _) w (isPullback_morphismRestrict g.left (pointComplOpens x))
+
+/-- The inclusion `g⁻¹(X ∖ {x}) ⟶ g'⁻¹(X ∖ {x})` of preimages. -/
+noncomputable def preimagePointComplHomOfLE {g g' : Y ⟶ X} {x : RationalPoint X}
+    (hle : g.left ⁻¹ᵁ pointComplOpens x ≤ g'.left ⁻¹ᵁ pointComplOpens x) :
+    preimagePointCompl g x ⟶ preimagePointCompl g' x :=
+  Over.homMk (Y.left.homOfLE hle) (by
+    change _ ≫ (g'.left ⁻¹ᵁ pointComplOpens x).ι ≫ Y.hom = _
+    rw [Scheme.homOfLE_ι_assoc]
+    rfl)
+
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+@[reassoc (attr := simp)]
+lemma preimagePointComplHomOfLE_ι {g g' : Y ⟶ X} {x : RationalPoint X}
+    (hle : g.left ⁻¹ᵁ pointComplOpens x ≤ g'.left ⁻¹ᵁ pointComplOpens x) :
+    preimagePointComplHomOfLE hle ≫ preimagePointComplι g' x = preimagePointComplι g x := by
+  ext1
+  exact Scheme.homOfLE_ι _ hle
+
+instance {g g' : Y ⟶ X} {x : RationalPoint X}
+    (hle : g.left ⁻¹ᵁ pointComplOpens x ≤ g'.left ⁻¹ᵁ pointComplOpens x) :
+    IsOpenImmersion (preimagePointComplHomOfLE hle).left :=
+  inferInstanceAs (IsOpenImmersion (Y.left.homOfLE hle))
+
+end Preimage
+
 end AlgebraicGeometry.ProEtale.CondensedRing

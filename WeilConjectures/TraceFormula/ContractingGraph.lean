@@ -180,6 +180,14 @@ theorem localTerm_traceClass_eq_integral_of_isContractingAt {c : Correspondence 
   localTerm_traceClass_eq_integral_of_restrict_eq F _ j hB _ fun e _ he ↦
     restrict_traceClass_eq_pushforward_of_isContractingAt c F hc j e he hB
 
+/-- The trace class of the diagonal correspondence of an endomorphism `f` of `M` which is
+conjugate, along an equality `M = N`, to an endomorphism `g` of `N` is the trace class of `g`. -/
+lemma traceClass_ofEnd_of_eq_eqToHom {M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm) :
+    (ofEnd M f).traceClass (fixedLocusOfEnd f) = (ofEnd N g).traceClass (fixedLocusOfEnd g) := by
+  subst e hfg
+  rw [eqToHom_refl, Category.id_comp, Category.comp_id]
+
 /-- The integral of the trace class of the diagonal correspondence of an endomorphism `f` of `M`
 which is conjugate, along an equality `M = N`, to an endomorphism `g` of a dualizable `N` is the
 trace of `g` (point normalization). -/
@@ -188,8 +196,7 @@ lemma integral_traceClass_ofEnd_of_eq_eqToHom
     (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm)
     [HasRightDual N] :
     ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = trace g := by
-  subst e hfg
-  rw [eqToHom_refl, Category.id_comp, Category.comp_id]
+  rw [traceClass_ofEnd_of_eq_eqToHom e hfg]
   exact integral_traceClass_ofEnd g
 
 /-! ### Graph correspondences -/
@@ -244,7 +251,7 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   have hx := comp_eq_of_isContractingAt_ofGraph hc
   have sq : IsPullback x (𝟙 (point k)) (𝟙 X) (x ≫ 𝟙 X) := hc.isPullback
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  unfold contractingStalkMap graphStalkMap
+  unfold contractingStalkMap restrictedStalkMap graphStalkMap
   change eqToHom (congrArg
           (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
         (show x ≫ 𝟙 X = x ≫ h by rw [hx, Category.comp_id])) ≫
@@ -296,15 +303,6 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   dsimp only [Functor.id_obj]
   simp only [Category.comp_id]
 
-
-/-- The trace class of the diagonal correspondence of an endomorphism `f` of `M` which is
-conjugate, along an equality `M = N`, to an endomorphism `g` of `N` is the trace class of `g`. -/
-lemma traceClass_ofEnd_of_eq_eqToHom {M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm) :
-    (ofEnd M f).traceClass (fixedLocusOfEnd f) = (ofEnd N g).traceClass (fixedLocusOfEnd g) := by
-  subst e hfg
-  rw [eqToHom_refl, Category.id_comp, Category.comp_id]
-
 /-- **Contracting graph correspondences and local terms** (blueprint
 `sk-thm-tf-contracting-local-term` for the graph correspondence `(𝟙, h)` and `Z = {x}`;
 Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
@@ -315,7 +313,9 @@ the restricted coefficient map `u_Z`, which is the stalk map `v_x` (`contracting
 
 This is the special case `c = (𝟙, h)` of `restrict_traceClass_eq_pushforward_of_isContractingAt`,
 proved through the additivity of trace classes for graphs (`traceClass_ofGraph_eq_add`) instead of
-the additivity for arbitrary correspondences (`traceClass_eq_add_of_isContractingAt`): the
+the additivity for arbitrary correspondences (`traceClass_eq_add_of_isPullback`). It exists only
+so that the graph case, which carries every current user, does not depend on that `sorry`, and
+should be dropped once `traceClass_eq_add_of_isPullback` is proved. The proof: the
 trace class is the sum of the trace classes of `u^Z` on `K^Z = Rx_* Lx^* K` and `u^U` on
 `K^U = j_! Lj^* K`; the first is the pushforward of the trace class of `v_x` by proper pushforward
 compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
