@@ -61,6 +61,7 @@ lemma exceptionalKunnethAdjoint_naturality_aux (S : CP ⥤ CX) (F : CX ⥤ CP) (
     S.map_comp_assoc, reassoc_of% hinv]
   simp only [Category.assoc, whisker_exchange_assoc, leftUnitor_naturality]
 
+omit [MonoidalCategory CX] in
 /-- Abstract form of the naturality of the Künneth–Verdier map `κ = curry (pairing)` in its
 first variable, from the naturality of the exceptional Künneth map `ex`. -/
 lemma kunnethVerdierMap_naturality_aux [MonoidalClosed CP] (F R : CX ⥤ CP) (A C T₁ T : CP)
@@ -95,6 +96,7 @@ lemma curry'_comp_pre_app {X Y Z : C} (e : X ⟶ Y) (g : Y ⟶ Z) :
   congr 1
   rw [← Category.assoc, rightUnitor_naturality, Category.assoc]
 
+omit [BraidedCategory C] in
 lemma curry'_comp_ihomIsoOfIso_hom {A A' B B' : C} (eA : A ≅ A') (eB : B ≅ B') (g : A ⟶ B) :
     curry' g ≫ (ihomIsoOfIso eA eB).hom = curry' (eA.inv ≫ g ≫ eB.hom) := by
   simp only [ihomIsoOfIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.op_hom,
@@ -102,6 +104,7 @@ lemma curry'_comp_ihomIsoOfIso_hom {A A' B B' : C} (eA : A ≅ A') (eB : B ≅ B
   rw [← Category.assoc, curry'_ihom_map]
   exact curry'_comp_pre_app _ _
 
+omit [MonoidalClosed C] in
 /-- The uncurried form of a class `[y]`: the projection morphism, the unitor and the exceptional
 adjoint of `y`. -/
 lemma uncurry_correspondenceClassEquiv_symm (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)]
@@ -185,9 +188,11 @@ lemma exceptionalKunnethMap_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAl
         (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f =
       ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷ _) ≫
         exceptionalKunnethMap ℓ M' := by
-  have h := (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_right
+  have h := (boundedConstructibleUpperShriekAdjunction _ ℓ
+    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_right
     (exceptionalKunnethAdjoint ℓ (Y := Y) M) f
-  have h' := (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_left
+  have h' := (boundedConstructibleUpperShriekAdjunction _ ℓ
+    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_left
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷
       (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y))
     (exceptionalKunnethAdjoint ℓ (Y := Y) M')
@@ -280,7 +285,8 @@ lemma correspondenceClassEquiv_symm_comp_map {C : Over (Spec (.of k))} [LocallyO
         (ihom _).map ((boundedConstructibleUpperShriek _ ℓ prod.fst).map b) := by
   rw [Equiv.symm_apply_eq, correspondenceClassEquiv_naturality_right, Equiv.apply_symm_apply]
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma map_comp_eqToHom_of_eq {A : Type*} (Φ : A → (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
       Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) {a a' : A} (h : a = a')
     {L L' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L') :

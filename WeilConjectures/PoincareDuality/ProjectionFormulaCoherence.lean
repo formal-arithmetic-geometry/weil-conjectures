@@ -53,7 +53,8 @@ projection formula through `Rf_! ≅ Rf_*` for proper `f`): the adjoint of `PF^!
 `Lf^* ⊣ Rf_!` is the counit at `T` tensored with `Lf^* M`, read through the tensor structure of
 `Lf^*`. -/
 theorem upperStar_map_exceptionalProjection_comp_counit (f : X ⟶ Y) [IsProper f.left]
-    (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ f).map
         (boundedConstructibleExceptionalProjectionMorphism _ ℓ f T M) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app
@@ -71,7 +72,8 @@ variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.h
 `prop-sf-pf-coherence`, the associativity pentagon for composable `f`, `g`, compatible with the
 composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`). -/
 theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
-    (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructibleExceptionalProjectionMorphism _ ℓ (f ≫ g) T M ≫
         (boundedConstructibleLowerShriek _ ℓ (f ≫ g)).map
           (T ◁ (boundedConstructibleUpperStarComp _ ℓ f g).hom.app M) =
@@ -82,7 +84,8 @@ theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
           (boundedConstructibleExceptionalProjectionMorphism _ ℓ f T
             ((boundedConstructibleUpperStar _ ℓ g).obj M)) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app
-          (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleUpperStar _ ℓ g).obj M)) :=
+          (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj
+            ((boundedConstructibleUpperStar _ ℓ g).obj M)) :=
   sorry
 
 variable (X) in

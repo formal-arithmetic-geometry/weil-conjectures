@@ -93,7 +93,8 @@ theorem zigzag_of_transport {K D ω : S} {M B C W N R T₁ : P} (A : R ⟶ B ⊗
     simp only [Category.assoc]
     rw [← hK]
     simp only [Functor.map_comp, Category.assoc]
-    rw [Functor.LaxMonoidal.associativity_inv_assoc, ← μ_natural_left_assoc, ← comp_whiskerRight_assoc, hbraid,
+    rw [Functor.LaxMonoidal.associativity_inv_assoc, ← μ_natural_left_assoc,
+      ← comp_whiskerRight_assoc, hbraid,
       comp_whiskerRight_assoc, Functor.LaxMonoidal.associativity_assoc, ← μ_natural_right_assoc,
       ← μ_natural_right_assoc]
   rw [Functor.map_comp, tensorHom_def' eM.inv τ]

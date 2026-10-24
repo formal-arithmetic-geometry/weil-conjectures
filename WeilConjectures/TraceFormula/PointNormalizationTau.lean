@@ -102,7 +102,8 @@ lemma upperShriekAdjunction_id_unit_app (x : Dᵇc(X.left)⟦Profinite.padicAlgC
 lemma tau_comp_counit_of_id (Δ : X ⟶ P) [IsProper Δ.left] {ι d : X ⟶ X} (hι : ι = 𝟙 X)
     (hd : d = 𝟙 X) [IsProper ι.left] (sq : IsPullback ι d Δ Δ)
     [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)] :
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι)).hom ≫
+    (Functor.Monoidal.εIso
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι)).hom ≫
       (boundedConstructibleUpperShriekAdjunction _ ℓ d).unit.app _ ≫
       (eqToIso (congrArg (fun g : X ⟶ X ↦ boundedConstructibleUpperShriek
           (Profinite.padicAlgClRingObj ℓ) ℓ g) hd) ≪≫
@@ -144,8 +145,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 section of the counit of `LΔ^* ⊣ RΔ_!`. -/
 lemma pointTau_comp_counit (v : K ⟶ K) :
     pointTau v ≫ (pointDiagAdj ℓ k).counit.app (𝟙_ _) = 𝟙 _ := by
-  haveI : IsProper (fixedLocusOfEnd v).ι.left := inferInstanceAs (IsProper (𝟙 (point k).left))
-  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+  have : IsProper (fixedLocusOfEnd v).ι.left := inferInstanceAs (IsProper (𝟙 (point k).left))
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
     (fixedLocusOfEnd v).isPullback
   simp only [pointTau, Category.assoc]
   exact tau_comp_counit_of_id ℓ (diag (point k)) (ι := (fixedLocusOfEnd v).ι)

@@ -54,7 +54,7 @@ lemma conjugateIsoEquiv_comp_left_hom_app {LF Lh : C ⥤ D} {RF Rh : D ⥤ C} {G
   have hn := ι.inv.naturality ((conjugateEquiv adjF (adjG.comp adjh) c.inv).app K')
   simp only [Functor.id_obj, Functor.id_map] at hn
   rw [hE, hι, ← he, Category.assoc, ← hC]
-  simp only [← Functor.map_comp, ← Functor.map_comp_assoc, Category.assoc]
+  simp only [← Functor.map_comp_assoc]
   erw [reassoc_of% hn]
 
 end Left
@@ -94,7 +94,7 @@ lemma Adjunction.ofNatIsoRight_comp_unit_app (af : Lf ⊣ Rf) (ag : Lg ⊣ Rg) (
   simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app,
     Iso.symm_hom, Category.assoc]
   rw [reassoc_of% hI', reassoc_of% hU]
-  simp only [Category.assoc, ← Rg.map_comp_assoc]
+  simp only [← Rg.map_comp_assoc]
   erw [reassoc_of% hn₁]
   rw [← Sg.map_comp]
   congr 3

@@ -67,7 +67,8 @@ end CategoryTheory.Verdier
 namespace CategoryTheory.Verdier
 
 /-- An algebraic step of `diagUpperStarProjIso_tensor`. -/
-lemma tensor_comp_iso_aux {C : Type*} [Category C] [MonoidalCategory C] {QML QM QL RML RM RL IML IM IL
+lemma tensor_comp_iso_aux {C : Type*} [Category C] [MonoidalCategory C]
+    {QML QM QL RML RM RL IML IM IL
     KM KL : C} (cML : QML ≅ RML) (cM : QM ≅ RM) (cL : QL ≅ RL) (eML : QML ⟶ IML) (eM : QM ⟶ IM)
     (eL : QL ⟶ IL) (sML : IML ⟶ KM ⊗ KL) (sM : IM ⟶ KM) (sL : IL ⟶ KL) {RML' : C} (x₁ : RML ⟶ RML')
     (x₂ : RML' ⟶ RM ⊗ RL) (y : QML ⟶ QM ⊗ QL) (z : IML ⟶ IM ⊗ IL)
@@ -151,7 +152,8 @@ lemma upperStar_map_comp_eqToHom_of_eq {f g : X ⟶ X} (h : f = g)
 
 variable (ℓ) in
 /-- The identification `LΔ^* (K ⊠ N) ≅ K ⊗ N` is natural in `K`. -/
-lemma diagUpperStarExternalProductIso_hom_naturality {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+lemma diagUpperStarExternalProductIso_hom_naturality
+    {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (v : K ⟶ K') (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ (diag X)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).map v ▷
@@ -219,7 +221,8 @@ theorem integral_traceClass_ofEnd_eq (v : K ⟶ K) :
     ((ofEnd K v).traceClass (fixedLocusOfEnd v)).integral =
       pointCoev v ≫ v ▷ _ ≫ pointPairing v := by
   rw [BorelMooreSection.integral_point, traceClass_eq_homEquiv]
-  have h := Verdier.integral_traceClass_aux (G := boundedConstructibleUpperStar _ ℓ (diag (point k)))
+  have h := Verdier.integral_traceClass_aux
+    (G := boundedConstructibleUpperStar _ ℓ (diag (point k)))
     (T := (boundedConstructibleLowerShriek _ ℓ (ofEnd K v).support).obj (𝟙_ _))
     (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d)
     (fixedLocusOfEndUpperShriekIso v)
@@ -233,7 +236,8 @@ theorem integral_traceClass_ofEnd_eq (v : K ⟶ K) :
 
 variable (ℓ) in
 /-- The identification `LΔ^* Lp^* M ≅ M` along `Δ ≫ p = 𝟙` for a projection `p` of `s ⨯ s`. -/
-noncomputable def diagUpperStarProjIso (p : point k ⨯ point k ⟶ point k) (hp : diag (point k) ≫ p = 𝟙 _)
+noncomputable def diagUpperStarProjIso (p : point k ⨯ point k ⟶ point k)
+    (hp : diag (point k) ≫ p = 𝟙 _)
     (M : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
         ((boundedConstructibleUpperStar _ ℓ p).obj M) ≅ M :=
@@ -303,16 +307,19 @@ lemma diagUpperStarProjIso_μ_map (p : point k ⨯ point k ⟶ point k)
   exact Verdier.μ_map_aux _ _ (fun X ↦ (diagUpperStarProjIso ℓ p hp X).hom) g
     (diagUpperStarProjIso_naturality ℓ p hp g) (diagUpperStarProjIso_tensor ℓ p hp M L)
 
+omit [Fact (ringChar k).Prime] in
 lemma diag_point_fst : diag (point k) ≫ (prod.fst : point k ⨯ point k ⟶ point k) = 𝟙 _ := by
   simp
 
+omit [Fact (ringChar k).Prime] in
 lemma diag_point_snd : diag (point k) ≫ (prod.snd : point k ⨯ point k ⟶ point k) = 𝟙 _ := by
   simp
 
 /-- The point `τ : ℚ̄_ℓ ⟶ LΔ^* RΔ_! ℚ̄_ℓ` through which the coevaluation over the base point
 factors. -/
 noncomputable def pointTau (v : K ⟶ K) :
-    𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
+    𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
+      (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
       ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom ≫
     (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d).unit.app _ ≫

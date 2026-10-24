@@ -65,7 +65,8 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
       ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ⟶ K :=
     Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
       ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K
+      (boundedConstructibleUpperShriekAdjunction _ ℓ
+        (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K
   let τ' : (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
       ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) ⟶ 𝟙_ _ :=
     (pointDiagAdj ℓ k).counit.app (𝟙_ _)

@@ -351,7 +351,8 @@ lemma diagUpperStarProjIso_congr {p q : point k ⨯ point k ⟶ point k} (h : p 
 
 /-- The comparison `Lp₁^* y ≅ Lp₂^* y` is the identification `p₁ = p₂` (the base point is
 terminal). -/
-lemma pointProdUpperStarComparison_hom_app (y : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+lemma pointProdUpperStarComparison_hom_app
+    (y : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (Θpt).hom.app y = eqToHom (congrArg (fun p : point k ⨯ point k ⟶ point k ↦
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj y)
         (toPoint_ext _ _)) := by
@@ -364,7 +365,8 @@ lemma pointProdUpperStarComparison_hom_app (y : Dᵇc((point k).left)⟦Profinit
   have h₁' : (boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
       ((upperStarIdOfEq ℓ toPoint_point_eq).inv.app y) ≫
       (boundedConstructibleUpperStarComp _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)
-        (toPoint (point k))).inv.app y = eqToHom (by rw [toPoint_point_eq, Category.comp_id]; rfl) := by
+        (toPoint (point k))).inv.app y =
+      eqToHom (by rw [toPoint_point_eq, Category.comp_id]; rfl) := by
     rw [← cancel_mono (eqToHom (by rw [toPoint_point_eq, Category.comp_id]; rfl :
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         ((prod.fst : point k ⨯ point k ⟶ point k) ≫ toPoint (point k))).obj y =
