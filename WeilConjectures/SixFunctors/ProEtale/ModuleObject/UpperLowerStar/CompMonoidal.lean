@@ -294,7 +294,7 @@ lemma upperStarUnitHom_upperStarId_hom_app_hom (X : Scheme.{u})
   have hL := homEquiv_comp_conjugateEquiv_app Adjunction.id
     (upperStarLowerStarAdjunction Λ (𝟙 X)) (upperStarId Λ X).hom (𝟙 M)
   rw [← conjugateIsoEquiv_apply_hom, conjugateIsoEquiv_upperStarId] at hL
-  simp only [Category.comp_id, Iso.symm_hom] at hL
+  simp only [Iso.symm_hom] at hL
   have hL' := congrArg Mod.Hom.hom hL
   rw [Mod.comp_hom', upperStarLowerStarAdjunction_homEquiv_hom] at hL'
   have hR := homEquiv_comp_conjugateEquiv_app Adjunction.id
@@ -306,7 +306,8 @@ lemma upperStarUnitHom_upperStarId_hom_app_hom (X : Scheme.{u})
   erw [← hR]
   conv_lhs => rw [Adjunction.homEquiv_unit]
   erw [← hL']
-  have hi : ((lowerStarId Λ X).inv.app M).hom = (ProEtale.lowerStarId Ab.{u + 1} X).inv.app M.X := by
+  have hi : ((lowerStarId Λ X).inv.app M).hom =
+      (ProEtale.lowerStarId Ab.{u + 1} X).inv.app M.X := by
     rw [← cancel_epi ((ProEtale.lowerStarId Ab.{u + 1} X).hom.app M.X), Iso.hom_inv_id_app]
     conv_lhs => rw [← lowerStarId_hom_app_hom]
     rw [← Mod.comp_hom', Iso.hom_inv_id_app]
