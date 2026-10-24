@@ -127,4 +127,59 @@ lemma leftDerivedUpperStarTensor_app_app_comp {W : Scheme.{u}} (h : W ⟶ Y)
     at h1
   exact h1
 
+variable {f} in
+/-- The comparison `Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M` is natural in both variables. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensor_naturality {W : Scheme.{u}} (h : W ⟶ Y)
+    {K K' M M' : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))}
+    (a : K ⟶ K') (b : M ⟶ M') :
+    ((leftDerivedUpperStarTensor Λ h).app K).app M ≫ (L((h)^*⟦Λ⟧).map a ⊗ₘ L((h)^*⟦Λ⟧).map b) =
+      L((h)^*⟦Λ⟧).map (a ⊗ₘ b) ≫ ((leftDerivedUpperStarTensor Λ h).app K').app M' := by
+  have h₁ := NatTrans.congr_app ((leftDerivedUpperStarTensor Λ h).naturality a) M
+  have h₂ := ((leftDerivedUpperStarTensor Λ h).app K').naturality b
+  dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h₁ h₂
+  rw [MonoidalCategory.tensorHom_def, MonoidalCategory.tensorHom_def, Functor.map_comp,
+    Category.assoc, ← reassoc_of% h₁, ← h₂]
+
+private lemma quotient_map_whiskerRight_mod
+    {K₁ L₁ : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ} (f₁ : K₁ ⟶ L₁)
+    (K₂ : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) :
+    (HomotopyCategory.quotient _ (.up ℤ)).map (f₁ ▷ K₂) =
+      (HomotopyCategory.quotient _ (.up ℤ)).map f₁ ▷ (HomotopyCategory.quotient _ (.up ℤ)).obj K₂ :=
+  HomotopyCategory.MonoidalCategory.quotient_map_whiskerRight _ (.up ℤ) f₁ K₂
+
+private lemma quotient_map_whiskerLeft_mod
+    (K₁ : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
+    {K₂ L₂ : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ} (f₂ : K₂ ⟶ L₂) :
+    (HomotopyCategory.quotient _ (.up ℤ)).map (K₁ ◁ f₂) =
+      (HomotopyCategory.quotient _ (.up ℤ)).obj K₁ ◁ (HomotopyCategory.quotient _ (.up ℤ)).map f₂ :=
+  HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft _ (.up ℤ) K₁ f₂
+
+/-- `upperStarTensorComplexHom_comp` in the homotopy category. -/
+@[reassoc]
+lemma quotient_map_upperStarTensorComplexHom_comp
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
+    ((HomotopyCategory.quotient _ _).map
+          ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A) ⊗ₘ
+        (HomotopyCategory.quotient _ _).map
+          ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app B)) ≫
+        (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f
+          (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj A) (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj B)) ≫
+        (HomotopyCategory.quotient _ _).map (((f)^*⟦Λ⟧.mapHomologicalComplex _).map
+          (upperStarTensorComplexHom Λ g A B)) =
+      (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ (f ≫ g) A B) ≫
+        (HomotopyCategory.quotient _ _).map
+          ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app (A ⊗ B)) := by
+  rw [MonoidalCategory.tensorHom_def,
+    ← quotient_map_whiskerRight_mod, ← quotient_map_whiskerLeft_mod]
+  simp only [← Functor.map_comp, Category.assoc]
+  congr 1
+  rw [← upperStarTensorComplexHom_comp, MonoidalCategory.tensorHom_def, Category.assoc]
+
 end AlgebraicGeometry.ProEtale.CondensedRing
