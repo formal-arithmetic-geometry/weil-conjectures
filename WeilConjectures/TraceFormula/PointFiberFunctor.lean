@@ -52,12 +52,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
 
-/-- The abelian category of `ℚ̲̄_ℓ`-module objects on the pro-étale site of the point
-`s = Spec k`, the ambient category of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
-abbrev PointMod : Type _ :=
-  Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
-    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)
-
 /-- The base point `Spec k` is a noetherian topological space. -/
 instance noetherianSpace_point : TopologicalSpace.NoetherianSpace (point k).left :=
   inferInstanceAs (TopologicalSpace.NoetherianSpace (Spec (.of k)))
@@ -67,26 +61,6 @@ variable [IsSepClosed k]
 /-- For `k` separably closed, the unit of `Mod_{ℚ̲̄_ℓ,s}` is projective. -/
 instance projective_tensorUnit_pointMod : Projective (𝟙_ (PointMod ℓ k)) :=
   projective_regular_of_isSepClosed (k := k) _
-
-/-- The scalars `ℚ̄_ℓ` acting on the unit of `Mod_{ℚ̲̄_ℓ,s}`: a scalar `a` acts by the
-multiplication by the constant global section `a`. -/
-noncomputable def pointUnitEndRingHom : PadicAlgCl ℓ →+* End (𝟙_ (PointMod ℓ k)) :=
-  (Mod.regularEndRingHom.comp (MonObj.Γ.mapFunctor (upperStarFromPoint (point k).left))).comp
-    (Profinite.PadicAlgCl.constRingHom ℓ)
-
-/-- For `k` separably closed, the endomorphisms of the unit of `Mod_{ℚ̲̄_ℓ,s}` are the scalars
-`ℚ̄_ℓ`. -/
-theorem bijective_pointUnitEndRingHom : Function.Bijective (pointUnitEndRingHom ℓ k) := by
-  let Λ := Profinite.padicAlgClRingObj.{u} ℓ
-  have := isEquivalence_upperStarFromPointMod (Ω := k) Λ
-  have hE := (upperStarFromPoint (Spec (.of k))).bijective_regularEndRingHom_comp_mapFunctor Λ
-    (Functor.FullyFaithful.ofFullyFaithful (upperStarFromPointMod Λ (Spec (.of k))))
-  have : Nontrivial (MonObj.Γ Λ) := ⟨⟨1, 0, fun h ↦ Profinite.PadicAlgCl.one_ne_zero_end_regular ℓ
-    (by rw [← map_one Mod.regularEndRingHom, h, map_zero])⟩⟩
-  have hc : Function.Bijective (Profinite.PadicAlgCl.constRingHom.{u} ℓ) :=
-    ⟨(Profinite.PadicAlgCl.constRingHom ℓ).injective,
-      Profinite.PadicAlgCl.constRingHom_surjective ℓ⟩
-  exact hE.comp hc
 
 /-- The scalars `ℚ̄_ℓ` acting on the unit of `Mod_{ℚ̲̄_ℓ,s}`, as a ring homomorphism to the
 opposite of its endomorphism ring, from the universe `u + 1` copy of `ℚ̄_ℓ`. -/
@@ -197,22 +171,6 @@ lemma projective_of_pointFiniteFree {X : PointMod ℓ k} (hX : pointFiniteFree �
   exact Projective.of_iso e.symm h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-namespace DerivedCategory
-
-variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-
-/-- There are no nonzero morphisms `P[0] ⟶ Q[b]` from a projective object `P` when `b ≠ 0`. -/
-lemma subsingleton_singleFunctor_hom_shift (P : C) [Projective P] (Q : C) {b : ℤ} (hb : b ≠ 0) :
-    Subsingleton ((singleFunctor C 0).obj P ⟶ ((singleFunctor C 0).obj Q)⟦b⟧) := by
-  refine (subsingleton_singleFunctor_hom_shift_iff_of_projective P _ b).2 ⟨fun f g ↦ ?_⟩
-  have : IsZero ((homologyFunctor C b).obj ((singleFunctor C 0).obj Q)) := by
-    rcases lt_or_gt_of_ne hb with h | h
-    · exact isZero_of_isGE _ 0 b h
-    · exact isZero_of_isLE _ 0 b h
-  exact this.eq_of_tgt f g
-
-end DerivedCategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

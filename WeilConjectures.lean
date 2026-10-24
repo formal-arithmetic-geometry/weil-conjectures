@@ -5886,6 +5886,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteOnContractible
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedWeaklyContractible
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
@@ -7991,6 +7992,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdju
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndSurjective
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularProjective
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction

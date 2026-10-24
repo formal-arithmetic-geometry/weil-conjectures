@@ -55,11 +55,15 @@ functors on `Dᵇc(-)⟦Λ⟧` do not provide yet.
 
 - `ProEtale.CondensedRing.point`: the base point `s = Spec k`, terminal in `Over (Spec (.of k))`.
 - `ProEtale.CondensedRing.toPoint`: the structure morphism `a_X : X ⟶ s`.
+- `ProEtale.CondensedRing.PointMod`: the category `Mod_{ℚ̲̄_ℓ,s}` of `ℚ̲̄_ℓ`-module objects on
+  the pro-étale site of the point.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.frobenius`: the automorphism of a Weil
   object for the identity.
 
 ## Main results
 
+- `ProEtale.CondensedRing.bijective_pointUnitEndRingHom`: for `k` separably closed, the
+  endomorphisms of the unit of `Mod_{ℚ̲̄_ℓ,s}` are the scalars `ℚ̄_ℓ`.
 - `ProEtale.CondensedRing.bijective_padicAlgClUnitEndRingHom_point`: for `k` separably closed,
   the canonical map `ℚ̄_ℓ ⟶ End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ)` is bijective.
 
@@ -174,28 +178,27 @@ noncomputable def padicAlgClUnitEndRingHom :
 
 end Scalars
 
-/-- A composite of bijective ring homomorphisms is bijective. -/
-private lemma bijective_ringHomComp {A B C : Type*} [NonAssocSemiring A] [NonAssocSemiring B]
-    [NonAssocSemiring C] {f : B →+* C} {g : A →+* B} (hf : Function.Bijective f)
-    (hg : Function.Bijective g) : Function.Bijective (f.comp g) :=
-  hf.comp hg
+section PointMod
 
-section ScalarsPoint
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
+/-- The abelian category of `ℚ̲̄_ℓ`-module objects on the pro-étale site of the point
+`s = Spec k`, the ambient category of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+abbrev PointMod : Type _ :=
+  Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
+    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)
 
-omit [Fact (ringChar k).Prime] in
-/-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
-`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is
-bijective. It is the composite of the bijections
-`ℚ̄_ℓ ≅ Γ ℚ̲̄_ℓ` (`Profinite.PadicAlgCl.constRingHom_surjective`),
-`Γ ℚ̲̄_ℓ ≅ End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s` (the pullback `p^*` from condensed `ℚ̲̄_ℓ`-modules being an
-equivalence over a separably closed field, `isEquivalence_upperStarFromPointMod`) and
-`End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s ≅ End_{D(ℚ̲̄_ℓ,s)} ℚ̲̄_ℓ,s` (the functor `singleFunctor 0` being fully
-faithful). -/
-theorem bijective_padicAlgClUnitEndRingHom_point :
-    Function.Bijective (padicAlgClUnitEndRingHom ℓ (point k)) := by
+/-- The scalars `ℚ̄_ℓ` acting on the unit of `Mod_{ℚ̲̄_ℓ,s}`: a scalar `a` acts by the
+multiplication by the constant global section `a`. -/
+noncomputable def pointUnitEndRingHom : PadicAlgCl ℓ →+* End (𝟙_ (PointMod ℓ k)) :=
+  (Mod.regularEndRingHom.comp (MonObj.Γ.mapFunctor (upperStarFromPoint (point k).left))).comp
+    (Profinite.PadicAlgCl.constRingHom ℓ)
+
+variable [IsSepClosed k]
+
+/-- For `k` separably closed, the endomorphisms of the unit of `Mod_{ℚ̲̄_ℓ,s}` are the scalars
+`ℚ̄_ℓ`. -/
+theorem bijective_pointUnitEndRingHom : Function.Bijective (pointUnitEndRingHom ℓ k) := by
   let Λ := Profinite.padicAlgClRingObj.{u} ℓ
   have := isEquivalence_upperStarFromPointMod (Ω := k) Λ
   have hE := (upperStarFromPoint (Spec (.of k))).bijective_regularEndRingHom_comp_mapFunctor Λ
@@ -205,6 +208,25 @@ theorem bijective_padicAlgClUnitEndRingHom_point :
   have hc : Function.Bijective (Profinite.PadicAlgCl.constRingHom.{u} ℓ) :=
     ⟨(Profinite.PadicAlgCl.constRingHom ℓ).injective,
       Profinite.PadicAlgCl.constRingHom_surjective ℓ⟩
+  exact hE.comp hc
+
+end PointMod
+
+section ScalarsPoint
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+omit [Fact (ringChar k).Prime] in
+/-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
+`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is
+bijective. It is the composite of the bijection `ℚ̄_ℓ ≅ End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s`
+(`bijective_pointUnitEndRingHom`) and
+`End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s ≅ End_{D(ℚ̲̄_ℓ,s)} ℚ̲̄_ℓ,s` (the functor `singleFunctor 0` being fully
+faithful). -/
+theorem bijective_padicAlgClUnitEndRingHom_point :
+    Function.Bijective (padicAlgClUnitEndRingHom ℓ (point k)) := by
+  let Λ := Profinite.padicAlgClRingObj.{u} ℓ
   let A := Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
     (condensedRingObj Λ (point k).left)
   let F := HomologicalComplex.single A (ComplexShape.up ℤ) 0 ⋙
@@ -218,13 +240,12 @@ theorem bijective_padicAlgClUnitEndRingHom_point :
   have hF :
       Function.Bijective (F.mapEndRingHom (Mod.regular (condensedRingObj Λ (point k).left))) :=
     (Functor.FullyFaithful.ofFullyFaithful F).map_bijective _ _
+  have h := bijective_pointUnitEndRingHom ℓ k
   unfold padicAlgClUnitEndRingHom boundedConstructibleUnitEndRingHom
-  dsimp only
-  refine bijective_ringHomComp (bijective_ringHomComp ?_
-    (bijective_ringHomComp ?_ (bijective_ringHomComp hF hE))) hc
-  · simp only [RingEquiv.toRingHom_eq_coe]
-    exact RingEquiv.bijective _
-  · simp only [RingEquiv.toRingHom_eq_coe]
+  unfold pointUnitEndRingHom at h
+  simp only [RingHom.comp_assoc] at h ⊢
+  rw [RingHom.coe_comp, RingHom.coe_comp, RingHom.coe_comp]
+  refine Function.Bijective.comp ?_ (Function.Bijective.comp ?_ (hF.comp h)) <;>
     exact RingEquiv.bijective _
 
 /-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
