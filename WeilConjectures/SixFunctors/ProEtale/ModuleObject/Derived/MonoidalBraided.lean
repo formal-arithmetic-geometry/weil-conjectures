@@ -9,7 +9,7 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModBraided
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalComp
 
 /-!
 
@@ -87,5 +87,92 @@ lemma upperStarTensorComplexHom_braiding
   simp only [Functor.map_zsmul, Preadditive.comp_zsmul, Functor.map_comp]
   rw [reassoc_of% (upperStar_μ_map_braiding_hom Λ f (A.X p) (B.X q))]
   rfl
+
+/-- `upperStarTensorComplexHom_braiding` in the homotopy category. -/
+@[reassoc]
+lemma quotient_map_upperStarTensorComplexHom_braiding
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    (β_ ((HomotopyCategory.quotient _ _).obj (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj A))
+        ((HomotopyCategory.quotient _ _).obj (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj B))).hom ≫
+      (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f B A) =
+    (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f A B) ≫
+      (HomotopyCategory.quotient _ _).map (((f)^*⟦Λ⟧.mapHomologicalComplex _).map
+        (β_ A B).hom) := by
+  rw [← Functor.map_comp, ← upperStarTensorComplexHom_braiding, Functor.map_comp]
+  rfl
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace CategoryTheory.MonoidalCategory
+
+open Functor.LaxMonoidal
+
+variable {HY HX DY DX : Type*} [Category HY] [Category HX] [Category DY] [Category DX]
+  [MonoidalCategory HY] [MonoidalCategory HX] [MonoidalCategory DY] [MonoidalCategory DX]
+  [BraidedCategory HY] [BraidedCategory HX] [BraidedCategory DY] [BraidedCategory DX]
+  {Qy : HY ⥤ DY} {Qx : HX ⥤ DX} [Qy.LaxMonoidal] [Qx.LaxMonoidal] {LF : DY ⥤ DX}
+  {FK : HY ⥤ HX} (ε : Qy ⋙ LF ⟶ FK ⋙ Qx)
+  (m : ∀ K M : DY, LF.obj (K ⊗ M) ⟶ LF.obj K ⊗ LF.obj M)
+  (T : ∀ P Q : HY, FK.obj P ⊗ FK.obj Q ⟶ FK.obj (P ⊗ Q))
+
+/-- The braided transform `LF β ≫ m ≫ β` of a tensor comparison `m` of a left derived functor
+has the same composite with the counit as `m`, if the underived comparison `T` is compatible
+with the braidings and the braidings of the localizations and of the source are compatible and
+symmetric. -/
+lemma derived_braiding_tensor_aux
+    (hfac : ∀ P Q : HY, m (Qy.obj P) (Qy.obj Q) ≫ (ε.app P ⊗ₘ ε.app Q) ≫ μ Qx _ _ ≫
+      Qx.map (T P Q) = LF.map (μ Qy P Q) ≫ ε.app (P ⊗ Q))
+    (hβx : ∀ X Y : HX, (β_ (Qx.obj X) (Qx.obj Y)).hom ≫ μ Qx Y X = μ Qx X Y ≫ Qx.map (β_ X Y).hom)
+    (hβy : ∀ X Y : HY, (β_ (Qy.obj X) (Qy.obj Y)).hom ≫ μ Qy Y X = μ Qy X Y ≫ Qy.map (β_ X Y).hom)
+    (hT : ∀ P Q : HY, (β_ (FK.obj P) (FK.obj Q)).hom ≫ T Q P = T P Q ≫ FK.map (β_ P Q).hom)
+    (hsymm : ∀ P Q : HY, (β_ P Q).hom ≫ (β_ Q P).hom = 𝟙 _) (P Q : HY) :
+    (LF.map (β_ (Qy.obj P) (Qy.obj Q)).hom ≫ m (Qy.obj Q) (Qy.obj P) ≫
+        (β_ (LF.obj (Qy.obj Q)) (LF.obj (Qy.obj P))).hom) ≫ (ε.app P ⊗ₘ ε.app Q) ≫
+      μ Qx _ _ ≫ Qx.map (T P Q) = LF.map (μ Qy P Q) ≫ ε.app (P ⊗ Q) := by
+  have hε := ε.naturality (β_ Q P).hom
+  simp only [Functor.comp_map] at hε
+  simp only [Category.assoc]
+  rw [← BraidedCategory.braiding_naturality_assoc]
+  simp only [Functor.comp_obj]
+  rw [reassoc_of% (hβx _ _), ← Qx.map_comp, hT,
+    Qx.map_comp, reassoc_of% (hfac Q P), ← hε, ← LF.map_comp_assoc, ← LF.map_comp_assoc,
+    Category.assoc, reassoc_of% (hβy P Q), ← Qy.map_comp, hsymm, Qy.map_id, Category.comp_id]
+
+end CategoryTheory.MonoidalCategory
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme Functor DerivedCategory
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+attribute [local instance] DerivedCategory.braidedCategory'
+
+set_option maxHeartbeats 2000000 in
+-- the derived categories of module objects are unfolded in the naturality checks
+/-- The braided transform `(K, M) ↦ Lf^* β_{K, M} ≫ m_{M, K} ≫ β_{Lf^* M, Lf^* K}` of the tensor
+comparison `m` of the derived pullback. It is `m` (`leftDerivedUpperStarTensor_eq_braid`). -/
+noncomputable def leftDerivedUpperStarTensorBraid :
+    leftDerivedUpperStarTensorLeft Λ f ⟶ leftDerivedUpperStarTensorRight Λ f where
+  app K :=
+    { app M := L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K ≫
+        (β_ (L((f)^*⟦Λ⟧).obj M) (L((f)^*⟦Λ⟧).obj K)).hom
+      naturality M M' b := by
+        have h := NatTrans.congr_app ((leftDerivedUpperStarTensor Λ f).naturality b) K
+        dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h ⊢
+        rw [← Functor.map_comp_assoc (L((f)^*⟦Λ⟧)) (K ◁ b) (β_ K M').hom,
+          BraidedCategory.braiding_naturality_right]
+        simp only [Functor.map_comp, Category.assoc]
+        rw [reassoc_of% h, BraidedCategory.braiding_naturality_left] }
+  naturality K K' a := by
+    refine NatTrans.ext (funext fun M ↦ ?_)
+    have h := ((leftDerivedUpperStarTensor Λ f).app M).naturality a
+    dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h ⊢
+    rw [← Functor.map_comp_assoc (L((f)^*⟦Λ⟧)) (a ▷ M) (β_ K' M).hom,
+      BraidedCategory.braiding_naturality_left]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% h, BraidedCategory.braiding_naturality_right]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
