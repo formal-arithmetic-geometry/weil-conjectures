@@ -80,7 +80,8 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
   have h1 := boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K
   have h2 := Adjunction.leftDerivedFunctorSquareIso_hom_app_of_eq
     (upperStarSquareComparison Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)
-    (upperStarComp Λ f'.left g.left) (upperStarComp Λ g'.left f.left) (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
+    (upperStarComp Λ f'.left g.left) (upperStarComp Λ g'.left f.left)
+    (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
   rw [h1, h2, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
   simp only [boundedConstructibleUpperStarComp_inv_app_hom,
     boundedConstructibleUpperStarComp_hom_app_hom]
