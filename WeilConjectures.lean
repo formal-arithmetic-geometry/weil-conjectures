@@ -8043,6 +8043,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Trace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceShiftDecomposition
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
+public import WeilConjectures.CategoryTheory.Monoidal.SubcategoryShift
 public import WeilConjectures.CategoryTheory.Monoidal.TensorInverse
 public import WeilConjectures.CategoryTheory.Monoidal.UnitComparison
 public import WeilConjectures.CategoryTheory.Monoidal.UnitIsoBijective
@@ -9712,6 +9713,7 @@ public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
 public import WeilConjectures.PoincareDuality.ProperProjectionComp
 public import WeilConjectures.PoincareDuality.RefinementProjection
 public import WeilConjectures.PoincareDuality.Verdier
@@ -12331,6 +12333,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Adjuncti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraidingShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
