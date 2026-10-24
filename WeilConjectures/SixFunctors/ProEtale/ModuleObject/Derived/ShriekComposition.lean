@@ -285,6 +285,40 @@ noncomputable def boundedConstructibleLowerShriekComp_padicAlgCl :
       Functor.associator _ _ _) ≪≫
     (Functor.associator _ _ _).symm
 
+/-- Unfolding `boundedConstructibleLowerShriekComp_padicAlgCl`. -/
+lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq :
+    boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g = (
+  let c := compactificationOverField f
+  let c' := compactificationOverField g
+  have hd := Compactification.exists_isPullback_overG_overI c c'
+  let d := hd.choose
+  let e := Compactification.overCompObjIso c c' d
+  have : IsOpenImmersion (c.overI ≫ d.overI).left := by
+    rw [Over.comp_left]
+    infer_instance
+  have : IsProper e.hom.left := by
+    simp only [e, Compactification.overCompObjIso, Over.isoMk_hom_left, Iso.refl_hom]
+    infer_instance
+  have sqe : IsPullback (𝟙 X) (c.overComp c' d).overI (c.overI ≫ d.overI) e.hom :=
+    IsPullback.of_horiz_isIso ⟨by simp [e]⟩
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ sqe
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+    hd.choose_spec
+  boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ _ (c.overComp c' d) ≪≫
+    (boundedConstructibleLowerShriekRefinementIso _ ℓ sqe
+      (Compactification.overCompObjIso_hom_overG c c' d)).symm ≪≫
+    Functor.isoWhiskerRight
+      (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp _ ℓ d.overG c'.overG).symm ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+        _ ℓ hd.choose_spec)).symm _ ≪≫
+      Functor.associator _ _ _) ≪≫
+    (Functor.associator _ _ _).symm) := by
+  unfold boundedConstructibleLowerShriekComp_padicAlgCl
+  rfl
+
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` for the exceptional inverse image on
 bounded constructible `E`-sheaves: the conjugate of `boundedConstructibleLowerShriekComp` under
 the adjunctions `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`. -/

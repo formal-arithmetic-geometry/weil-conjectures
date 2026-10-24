@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
 /-!
 
@@ -369,5 +370,64 @@ lemma boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq'
     boundedConstructibleLowerShriekRefinementIso_eq']
 
 end Independence
+
+section CompositionBridges
+
+variable {X Y Z : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
+  [IsSeparated Z.hom]
+
+omit [IsFinitenessCoefficient ℓ Λ] in
+/-- The composition isomorphism `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero is the
+composition isomorphism of the extensions by zero of the exchange formalism. -/
+lemma boundedConstructibleOpenImmersionLowerShriekComp_eq_shComp' (j : X ⟶ Y) (j' : Y ⟶ Z)
+    [IsOpenImmersion j.left] [IsOpenImmersion j'.left] [IsOpenImmersion (j ≫ j').left]
+    [IsFinitenessCoefficient ℓ Λ] :
+    boundedConstructibleOpenImmersionLowerShriekComp Λ ℓ j j' =
+      (𝔽).shComp' (SepFinType.homMk j) (SepFinType.homMk j') (SepFinType.homMk (j ≫ j'))
+        (ObjectProperty.hom_ext _ rfl) := by
+  rw [ExchangeFormalism.shComp',
+    show (𝔽).pbComp' (SepFinType.homMk j) (SepFinType.homMk j') (SepFinType.homMk (j ≫ j'))
+      (ObjectProperty.hom_ext _ rfl) =
+      (𝔽).pbComp' (SepFinType.homMk j) (SepFinType.homMk j')
+        (SepFinType.homMk j ≫ SepFinType.homMk j') rfl from rfl,
+    ExchangeFormalism.pbComp'_rfl]
+  rfl
+
+end CompositionBridges
+
+section ExchangeUnprimed
+
+variable {X Z X' Z' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
+  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+  {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z} [IsOpenImmersion i'.left]
+  [IsOpenImmersion j.left]
+
+/-- The exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square is the exchange map
+of the exchange formalism. -/
+lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq_exchange
+    (sq : IsPullback p i' j p') :
+    haveI := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ sq
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq =
+      ((𝔽).exchange (SepFinType.homMk p) (SepFinType.homMk i') (SepFinType.homMk j)
+        (SepFinType.homMk p') (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+  have : boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq =
+      Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p)
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p')
+        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq) := by
+    unfold boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep
+      Adjunction.exchangeRight
+    rfl
+  rw [this, Adjunction.exchangeRight_eq_mateEquiv, ExchangeFormalism.exchange,
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_hom_eq]
+  rfl
+
+end ExchangeUnprimed
 
 end AlgebraicGeometry.ProEtale.CondensedRing
