@@ -19,6 +19,7 @@ A morphism `p : Y ⟶ X` intertwining endomorphisms `a` of `Y` and `b` of `X`
 - `CategoryTheory.Aut.one_hom`, `CategoryTheory.Aut.inv_hom`, `CategoryTheory.Aut.mul_hom`: the
   underlying morphisms of the unit, inverses and products in `Aut X`.
 - `CategoryTheory.End.comp_pow_eq_pow_comp`: the same statement for monoid powers in `End`.
+- `CategoryTheory.End.asHom_pow_comp_of_comp_eq`: if `a ≫ p = p` then `a ^ m ≫ p = p`.
 -/
 
 @[expose] public section
@@ -68,5 +69,13 @@ lemma comp_pow_eq_pow_comp {W X : C} (x : W ⟶ X) (A : End X)
   | succ j ih =>
     rw [pow_succ, pow_succ, End.mul_def, End.mul_def, ← Category.assoc, h, Category.assoc, ih,
       Category.assoc]
+
+/-- If `a ≫ p = p`, then `a ^ m ≫ p = p` for every `m`. -/
+lemma asHom_pow_comp_of_comp_eq {a : Y ⟶ Y} {p : Y ⟶ X} (h : a ≫ p = p) (m : ℕ) :
+    asHom (of a ^ m) ≫ p = p := by
+  refine (asHom_pow_comp_eq_comp_asHom_pow (b := 𝟙 X) (h.trans (Category.comp_id p).symm)
+    m).trans ?_
+  rw [show of (𝟙 X) ^ m = 1 from one_pow m]
+  exact Category.comp_id p
 
 end CategoryTheory.End

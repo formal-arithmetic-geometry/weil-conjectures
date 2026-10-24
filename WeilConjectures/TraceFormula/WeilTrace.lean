@@ -14,6 +14,7 @@ public import WeilConjectures.TraceFormula.HomologyUnit
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
+public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 
 /-!
 
@@ -93,15 +94,14 @@ The unit `ℚ̲̄_ℓ,X` with its canonical Weil structure is
   sheaf up to isomorphism.
 - `ProEtale.CondensedRing.finite_support_weilSheafStalkTrace_homology`: only finitely many
   homology sheaves of a bounded complex contribute to the local trace.
+- `ProEtale.CondensedRing.weilSheafStalkTrace_unit`: the unit Weil sheaf has trace `1` at every
+  point (normalization test N1, giving `weilStalkSupertrace_unit`).
 
 ## Sorried input
 
 - `ProEtale.CondensedRing.finite_frobeniusFixedPoints`: there are finitely many points of degree
   `n + 1`: they are the `k`-points of the fixed-point scheme of `σ^{n+1}` twisted by `e^{n+1}`,
   which is of finite type and unramified over `k`.
-- `ProEtale.CondensedRing.weilSheafStalkTrace_unit`: the unit Weil sheaf has trace `1` at every
-  point; this gives `weilStalkSupertrace_unit`, the normalization test N1 (see its docstring
-  for the reduction and the kernel timeout it hits).
 
 -/
 
@@ -165,6 +165,16 @@ lemma _root_.CategoryTheory.Endofunctor.IsoAlgebra.categoricalTrace_str_congr {C
   let e : A.carrier ≅ B.carrier := (IsoAlgebra.forget _).mapIso i
   have h : B.str.hom = e.inv ≫ A.str.hom ≫ e.hom := (Iso.eq_inv_comp e).2 i.hom.hom.h
   exact (congrArg categoricalTrace h).trans (categoricalTrace_conj e _)
+
+/-- If the carrier of an algebra for the identity functor is isomorphic to the unit, by an
+isomorphism conjugating the structure automorphism to the identity, then the structure
+automorphism has trace `1`. -/
+lemma _root_.CategoryTheory.Endofunctor.IsoAlgebra.categoricalTrace_str_hom_eq_one {C : Type*}
+    [Category C] [MonoidalCategory C] [BraidedCategory C] [Preadditive C] (A : IsoAlgebra (𝟭 C))
+    (ε : 𝟙_ C ≅ A.carrier) (h : ε.hom ≫ A.str.hom ≫ ε.inv = 𝟙 _) :
+    categoricalTrace A.str.hom = 1 := by
+  rw [← categoricalTrace_conj ε.symm, Iso.symm_inv, Iso.symm_hom, h]
+  exact categoricalTrace_id_tensorUnit
 
 section Local
 
@@ -340,6 +350,46 @@ lemma WeilSheaf.powSucc_unit (n : ℕ) :
   rw [Iso.symm_hom]
   exact powSuccStr_εIso_symm_hom ℓ e n
 
+/-- The Frobenius on the stalk of the unit Weil sheaf, conjugated by the unit comparison
+`ε_x : Λ ≅ x̄^* Λ`, is the identity: by `Iso.hom_comp_whiskerLeft_comp_inv_eq` it is
+`τ⁻¹ ≫ ε_σ⁻¹` at the unit, for `τ = upperStarIsoIdOfIsSepClosed σ`, and
+`τ = ε_σ⁻¹` there by `upperStarIsoIdOfIsSepClosed_hom_app_unit`. -/
+lemma WeilSheaf.stalkFunctor_obj_unit_str_hom {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ e.hom.left = σ ≫ x) :
+    (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom ≫
+      ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj (WeilSheaf.unit ℓ e)).str.hom ≫
+        (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv = 𝟙 _ := by
+  rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.unit_str, weilStalkComparison]
+  have key := Iso.hom_comp_whiskerLeft_comp_inv_eq
+    (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ)
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x)
+    (congrArg (upperStar (Profinite.padicAlgClRingObj ℓ)) hx.symm)
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left)
+    (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).symm
+    (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (Functor.Monoidal.εIso (x ≫ e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (upperStarComp_hom_app_unit _ x e.hom.left)
+    ((upperStarComp_hom_app_unit _ σ x).trans (eqToHom_comp_upperStar_εIso_inv ℓ hx.symm _).symm)
+  refine key.trans ?_
+  rw [← upperStarIsoIdOfIsSepClosed_hom_app_unit, Iso.inv_hom_id_app]
+  rfl
+
+/-- The Frobenius on the stalk of the unit Weil sheaf has trace `1`: conjugated by the unit
+comparison `ε_x : Λ ≅ x̄^* Λ` it is the identity (`WeilSheaf.stalkFunctor_obj_unit_str_hom`). -/
+lemma WeilSheaf.categoricalTrace_stalkFunctor_obj_unit_str_hom {Ω : Type u} [Field Ω]
+    [hΩ : IsSepClosed Ω] (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ e.hom.left = σ ≫ x) :
+    @Eq (End (𝟙_ (GeometricPointMod ℓ Ω)))
+      (categoricalTrace (C := GeometricPointMod ℓ Ω)
+        (IsoAlgebra.str (C := GeometricPointMod ℓ Ω) (F := 𝟭 (GeometricPointMod ℓ Ω))
+          (Functor.obj (D := IsoAlgebra (𝟭 (GeometricPointMod ℓ Ω)))
+            (WeilSheaf.stalkFunctor ℓ e σ x hx) (WeilSheaf.unit ℓ e))).hom) 1 :=
+  IsoAlgebra.categoricalTrace_str_hom_eq_one _
+    (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (WeilSheaf.stalkFunctor_obj_unit_str_hom ℓ e σ x hx)
+
 end UnitSheaf
 
 /-! ### The canonical Weil unit -/
@@ -388,23 +438,16 @@ lemma weilStalkSupertrace_unit_eq_weilSheafStalkTrace (n : ℕ)
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- The unit Weil sheaf `ℚ̲̄_ℓ,X` has trace `1` at every point: its stalk is the unit, on which the
-Frobenius acts trivially.
-
-Proof sketch: by `WeilSheaf.powSucc_unit` the stalk is that of the unit Weil sheaf for
-`e^{n+1}`, whose Frobenius, conjugated by the unit comparison `ε : 𝟙 ≅ x̄^* 𝟙`, is `τ⁻¹ ≫ ε_σ⁻¹`
-at the unit (`Iso.hom_comp_whiskerLeft_comp_inv_eq`, fed by `upperStarComp_hom_app_unit` and
-`eqToHom_comp_upperStar_εIso_inv`), for `τ = upperStarIsoIdOfIsSepClosed σ`. This is the identity
-by `upperStarIsoIdOfIsSepClosed_hom_app_unit`, of trace `1` by `categoricalTrace_conj` and
-`categoricalTrace_id_tensorUnit`. Each step elaborates, but the assembled term hits a kernel
-deterministic timeout: the unit of `Mod_{Spec k̄}` occurs both as the `tensorUnit` of
-`Mod.monoidalCategoryStruct` (in `upperStarIsoIdOfIsSepClosed_hom_app_unit` and in
-`weilSheafStalkTrace`) and through `Mod.monoidalCategory` (in the unit comparisons `ε` and in
-`categoricalTrace`), and the kernel identifies the two only after unfolding
-`upperStarIsoIdOfIsSepClosed` or the pullbacks. -/
+Frobenius acts trivially. By `WeilSheaf.powSucc_unit` the stalk is that of the unit Weil sheaf for
+`e^{n+1}`, whose Frobenius has trace `1`
+(`WeilSheaf.categoricalTrace_stalkFunctor_obj_unit_str_hom`). This gives
+`weilStalkSupertrace_unit`, the normalization test N1. -/
 lemma weilSheafStalkTrace_unit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
     (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
-    weilSheafStalkTrace ℓ n x hx (WeilSheaf.unit ℓ e) = 1 :=
-  sorry
+    weilSheafStalkTrace ℓ n x hx (WeilSheaf.unit ℓ e) = 1 := by
+  rw [weilSheafStalkTrace, WeilSheaf.frobeniusStalk, WeilSheaf.powSuccStalkFunctor,
+    Functor.comp_obj, WeilSheaf.powSuccFunctor_obj, WeilSheaf.powSucc_unit]
+  exact WeilSheaf.categoricalTrace_stalkFunctor_obj_unit_str_hom ℓ _ (hΩ := _) _ x hx
 
 /-- The canonical Weil unit `ℚ̲̄_ℓ,X` (`WeilBoundedConstructible.unit`) has local trace `1` at every
 point: its stalk is `ℚ̄_ℓ` in degree `0`, on which the Frobenius acts trivially (normalization
