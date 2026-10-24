@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.FibreCoherence
+public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
@@ -412,7 +413,7 @@ theorem nonempty_hasRightDual_compactCohomology [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty (HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)) :=
-  sorry
+  nonempty_hasRightDual_point ℓ k _
 
 /-- **Perfectness of the geometric stalks** (blueprint `prop-trf-compact-support-perfectness`,
 clause on derived geometric stalks; section `sec-smooth-purity`): for `k` separably closed,
@@ -422,7 +423,7 @@ theorem nonempty_hasRightDual_stalk [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (x : RationalPoint X) :
     Nonempty (HasRightDual
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :=
-  sorry
+  nonempty_hasRightDual_point ℓ k _
 
 end WeilBoundedConstructible
 
