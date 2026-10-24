@@ -80,4 +80,64 @@ lemma leftDerivedUpperStarTensor_comp_aux
     (leftDerivedUpperStarTensor_naturality Λ f _ _)
     (quotient_map_upperStarTensorComplexHom_comp Λ f g A B)
 
+/-- The composite `L(f ≫ g)^*(K ⊗ᴸ M) ≅ Lf^* Lg^*(K ⊗ᴸ M) ⟶ Lf^*(Lg^* K ⊗ᴸ Lg^* M) ⟶
+Lf^* Lg^* K ⊗ᴸ Lf^* Lg^* M ≅ L(f ≫ g)^* K ⊗ᴸ L(f ≫ g)^* M` of the tensor comparisons of `Lg^*` and
+`Lf^*`, read through the composition isomorphism. -/
+noncomputable def leftDerivedUpperStarTensorComp :
+    leftDerivedUpperStarTensorLeft Λ (f ≫ g) ⟶ leftDerivedUpperStarTensorRight Λ (f ≫ g) :=
+  Functor.whiskerLeft (curriedTensor _)
+      ((Functor.whiskeringRight _ _ _).map (leftDerivedUpperStarComp Λ f g).hom) ≫
+    Functor.whiskerRight (leftDerivedUpperStarTensor Λ g)
+      ((Functor.whiskeringRight _ _ _).obj L((f)^*⟦Λ⟧)) ≫
+    (((Functor.whiskeringLeft₂ _).obj L((g)^*⟦Λ⟧)).obj L((g)^*⟦Λ⟧)).map
+      (leftDerivedUpperStarTensor Λ f) ≫
+    (((Functor.whiskeringLeft₂ _).map (leftDerivedUpperStarComp Λ f g).inv).app
+      (L((g)^*⟦Λ⟧) ⋙ L((f)^*⟦Λ⟧))).app (curriedTensor _) ≫
+    (((Functor.whiskeringLeft₂ _).obj L((f ≫ g)^*⟦Λ⟧)).map
+      (leftDerivedUpperStarComp Λ f g).inv).app (curriedTensor _)
+
+lemma leftDerivedUpperStarTensorComp_app_app
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    ((leftDerivedUpperStarTensorComp Λ f g).app K).app M =
+      (leftDerivedUpperStarComp Λ f g).hom.app (K ⊗ M) ≫
+        L((f)^*⟦Λ⟧).map (((leftDerivedUpperStarTensor Λ g).app K).app M) ≫
+        ((leftDerivedUpperStarTensor Λ f).app _).app _ ≫
+        ((leftDerivedUpperStarComp Λ f g).inv.app K ⊗ₘ
+          (leftDerivedUpperStarComp Λ f g).inv.app M) := by
+  rw [MonoidalCategory.tensorHom_def]
+  rfl
+
+set_option maxHeartbeats 2000000 in
+-- the images of complexes in the homotopy category are unfolded
+lemma leftDerivedUpperStarTensor_comp_eq :
+    leftDerivedUpperStarTensor Λ (f ≫ g) = leftDerivedUpperStarTensorComp Λ f g := by
+  refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ (f ≫ g))
+    (leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)) (HomotopyCategory.quasiIso _ _)
+    (HomotopyCategory.quasiIso _ _) _ _ _ ?_
+  ext P Q
+  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
+  simp only [NatTrans.comp_app]
+  rw [leftDerivedUpperStarTensorRightCounit_app_app]
+  erw [leftDerivedUpperStarTensorComp_app_app]
+  exact leftDerivedUpperStarTensor_comp_aux Λ f g A B
+
+/-- **The composition isomorphism of the derived pullbacks of module objects is monoidal**: it
+commutes with the tensor comparisons `m : Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M`. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensor_comp
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    ((leftDerivedUpperStarTensor Λ (f ≫ g)).app K).app M ≫
+        ((leftDerivedUpperStarComp Λ f g).hom.app K ⊗ₘ (leftDerivedUpperStarComp Λ f g).hom.app M) =
+      (leftDerivedUpperStarComp Λ f g).hom.app (K ⊗ M) ≫
+        L((f)^*⟦Λ⟧).map (((leftDerivedUpperStarTensor Λ g).app K).app M) ≫
+        ((leftDerivedUpperStarTensor Λ f).app _).app _ := by
+  refine comp_tensorHom_hom_eq_of_eq_comp_tensorHom_inv
+    ((leftDerivedUpperStarComp Λ f g).app K) ((leftDerivedUpperStarComp Λ f g).app M) ?_
+  rw [leftDerivedUpperStarTensor_comp_eq, leftDerivedUpperStarTensorComp_app_app]
+  simp only [Category.assoc]
+  rfl
+
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -77,4 +77,10 @@ lemma derivedComp_tensor_aux
   simp only [Category.assoc]
   rw [hfg]
 
+lemma comp_tensorHom_hom_eq_of_eq_comp_tensorHom_inv {D : Type*} [Category D] [MonoidalCategory D]
+    {W A B A' B' : D} {m : W ⟶ A ⊗ B} {x : W ⟶ A' ⊗ B'} (e : A ≅ A') (e' : B ≅ B')
+    (h : m = x ≫ (e.inv ⊗ₘ e'.inv)) : m ≫ (e.hom ⊗ₘ e'.hom) = x := by
+  rw [h, Category.assoc, tensorHom_comp_tensorHom, e.inv_hom_id, e'.inv_hom_id, id_tensorHom_id,
+    Category.comp_id]
+
 end CategoryTheory
