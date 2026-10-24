@@ -20,13 +20,14 @@ M ⊠ Rj_* B = Lp_X^* M ⊗ᴸ Lp_Y^* Rj_* B ⟶ RG_* (M ⊠ B)
 structure of `LG^*`, the composition isomorphisms `LG^* Lp_X^* ≅ Lp_X^*` and
 `LG^* Lp_Y^* ≅ Lp_U^* Lj^*`, and the counit `Lj^* Rj_* B ⟶ B`.
 
-## Input from another section
+## Sorried input
 
 - `ProEtale.CondensedRing.isIso_openKunnethMap`: the Künneth map is an isomorphism. This is the
-  ordinary Künneth formula of blueprint `lem-trf-ordinary-kunneth` (section `sec-six-functors`),
-  at the coefficient stage `ℚ̄_ℓ`, for the open immersion `j` and the identity of `X`
-  (SGA 4½, [Th. finitude], Corollaire 1.11; it rests on Deligne's generic base change theorem,
-  [Th. finitude], Théorème 1.9).
+  ordinary Künneth formula at the coefficient stage `ℚ̄_ℓ`, for the open immersion `j` and the
+  identity of `X` (blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it
+  for finite coefficients; SGA 4½, [Th. finitude], Corollaire 1.11). It rests on Deligne's
+  generic base change theorem over the point `Spec k` ([Th. finitude], Théorème 1.9): already
+  for `M = ℚ̄_ℓ` it says that `Rj_*` commutes with the base change along `X ⨯ Y ⟶ Y`.
 
 -/
 
@@ -85,9 +86,9 @@ noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.pa
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ U ⟶ U)).map
             ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ j).counit.app B))))
 
-/-- Input from another section: **the ordinary Künneth formula along an open immersion**
-(blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, at the coefficient stage
-`ℚ̄_ℓ`, for `f = j` an open immersion and the identity of `X`). For an open immersion
+/-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
+(blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it for finite
+coefficients and a general morphism `f`; here `f = j` is an open immersion). For an open immersion
 `j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
 `M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` is an isomorphism (SGA 4½, [Th. finitude], Corollaire 1.11,
 a consequence of Deligne's generic base change theorem, [Th. finitude], Théorème 1.9; for
