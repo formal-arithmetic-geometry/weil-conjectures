@@ -39,6 +39,7 @@ lemma isIso_externalHomMap_of_exactPairing (D₁' E₁ L₁ : C₁) (D₂' E₂ 
   rw [externalHomMap_eq_externalIhomMap]
   exact MonoidalClosed.isIso_externalIhomMap_of_exactPairing P Q D₁' E₁ L₁ D₂' E₂ L₂
 
+omit [BraidedCategory C] in
 /-- If the transposed form `κ = (u ≫ β ≫ v) ≫ RHom(1, a)` of a map at the unit is an isomorphism,
 for isomorphisms `u`, `β`, `v`, then so is `a`: the internal hom out of an object isomorphic to
 the unit is isomorphic to the identity functor. -/
@@ -68,7 +69,7 @@ exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp_X^! M` is. -/
 theorem isIso_kunnethVerdierMap_unit_iff (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (kunnethVerdierMap ℓ M (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) ↔
       IsIso (exceptionalKunnethMap ℓ (Y := Y) M) := by
-  haveI := isIso_externalHomMap_of_exactPairing
+  have := isIso_externalHomMap_of_exactPairing
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) (𝟙_ _) (𝟙_ _) M (𝟙_ _) (𝟙_ _)
     (dualizingComplex' ℓ Y)

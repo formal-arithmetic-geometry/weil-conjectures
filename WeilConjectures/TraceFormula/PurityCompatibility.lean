@@ -13,7 +13,8 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 
 The Künneth–Verdier theorem for `ℚ̄_ℓ`-coefficients
 (`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, blueprint `thm-trf-kunneth-verdier`) uses
-smooth purity through a single statement: for `Y` smooth over `k`, the exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp_X^! M` of the projection
+smooth purity through a single statement: for `Y` smooth over `k`, the exceptional Künneth map
+`α : M ⊠ ω_Y ⟶ Rp_X^! M` of the projection
 `p_X : X ⨯ Y ⟶ X` is an isomorphism. It is stated here, to be proved in the smooth purity
 section.
 
