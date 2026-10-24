@@ -72,7 +72,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdicCoefficient
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic

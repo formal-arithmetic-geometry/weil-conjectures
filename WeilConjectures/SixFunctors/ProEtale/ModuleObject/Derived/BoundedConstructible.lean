@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdicCoefficient
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
@@ -58,8 +58,10 @@ composite of the inclusion with the functor on the ambient derived category, so 
 compatible with the inclusions by construction (`ObjectProperty.liftCompιIso`). The derived
 tensor product and the derived hom are instead the monoidal closed structure of the full
 subcategory `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`,
-`ObjectProperty.fullMonoidalClosedSubcategory`), given by the instances
-`isMonoidal_boundedConstructible` and `isMonoidalClosed_boundedConstructible`; they are again
+`ObjectProperty.fullMonoidalClosedSubcategory`), for coefficients `Λ` for which `Dᵇc(X)⟦Λ⟧` is
+monoidal and monoidal closed (`ObjectProperty.IsMonoidal`, `ObjectProperty.IsMonoidalClosed`,
+provided for the `ℓ`-adic rings by `isMonoidal_boundedConstructible_padicAlgClRingObj` and its
+siblings); they are again
 compatible with the inclusions, the inclusion being strict monoidal (`ObjectProperty.monoidalι`).
 The restricted pullback `Lf^*` is strong monoidal, with the comparison isomorphisms of the
 strong monoidal derived pullback `ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`
@@ -90,31 +92,34 @@ coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
 
 ## Sorried input
 
-That the six functors preserve bounded constructible complexes is `sorry`ed:
-`boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`
-and `boundedConstructible_openImmersionLowerShriek_obj`, and the instances
-`isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
-`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
+That the pullback and the extension by zero preserve bounded constructible complexes is `sorry`ed
+for a general `Λ`: `boundedConstructible_leftDerivedUpperStar_obj` and
+`boundedConstructible_openImmersionLowerShriek_obj`.
 
-The pullback and the extension by zero preserve bounded constructible complexes for every `Λ`, and
-are defined for a general condensed ring `Λ`. The other three statements are false for a general
-`Λ`, and are theorems for the `ℓ`-adic coefficient rings `𝒪̲_E`, `E̲` and `ℚ̲̄_ℓ`, with `ℓ`
-invertible in `k` (Deligne's finiteness theorems, Bhatt–Scholze, Section 6.8):
+That `Rf_*` preserves bounded constructible complexes is false for a general `Λ`: for the constant
+discrete ring `𝔽_p` and the affine line over an algebraically closed field of characteristic `p`,
+Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. It is stated and
+`sorry`ed separately for each coefficient ring (Deligne's finiteness theorems, SGA 4½
+[Th. finitude], Bhatt–Scholze, Section 6.8):
+`boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj_of_finite` (a finite discrete
+ring whose exponent is invertible in `k`),
+`boundedConstructible_rightDerivedLowerStar_obj_padicIntegersRingObj` (`𝒪̲_E`),
+`boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj` (`E̲`) and
+`boundedConstructible_rightDerivedLowerStar_obj_padicAlgClRingObj` (`ℚ̲̄_ℓ`), for `ℓ` invertible in
+`k` in the `ℓ`-adic cases. The restricted pushforward, its adjunction and the lower shriek are
+constructed for a general `Λ` from the statement for `Λ`, an explicit argument `hΛ`; the users
+pass the statement for their coefficient ring.
 
-* for the constant discrete ring `𝔽_p` and the affine line over an algebraically closed field of
-  characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is
-  infinite, so `Rf_*` does not preserve bounded constructible complexes;
-* for `Λ = ℤ/4` on a geometric point of characteristic `3`, `Tor_i` and `Ext^i` of `ℤ/2` over
-  `ℤ/4` are `ℤ/2` in every degree `i ≥ 0`, so `Dᵇc(X)⟦Λ⟧` is not stable under `- ⊗ᴸ -` and
-  `RHom(-, -)`.
-
-So `Rf_*`, the lower shriek, the derived tensor product and the derived hom on bounded
-constructible complexes, and the statements about them, are made for an `ℓ`-adic coefficient ring
-`Λ : Profinite.EllAdicCoefficient ℓ`
-(`WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdicCoefficient`), as in the blueprint
-(`sk-def-sfb-dc-restricted-functors`, `lem-sfb-dc-lower-star-preserves`,
-`lem-sfb-dc-tensor-preserves`, `lem-sfb-dc-hom-preserves`). For the condensed rings themselves,
-`isMonoidal_boundedConstructible_padicAlgClRingObj` and its siblings transfer the instances.
+Likewise, that `Dᵇc(X)⟦Λ⟧` is stable under `- ⊗ᴸ -` and `RHom(-, -)` is false for a general `Λ`:
+for `Λ = ℤ/4` on a geometric point of characteristic `3`, `Tor_i` and `Ext^i` of `ℤ/2` over `ℤ/4`
+are `ℤ/2` in every degree `i ≥ 0`. The tensor product, the internal hom and the monoidal structure
+of `Lf^*` assume the instances `ObjectProperty.IsMonoidal` and `ObjectProperty.IsMonoidalClosed`
+of `boundedConstructible`, which are stated and `sorry`ed for the `ℓ`-adic rings only, as in the
+blueprint (`lem-sfb-dc-tensor-preserves`, `lem-sfb-dc-hom-preserves`):
+`isMonoidal_boundedConstructible_padicIntegersRingObj`,
+`isMonoidal_boundedConstructible_continuousMapRingObj`,
+`isMonoidal_boundedConstructible_padicAlgClRingObj` and the corresponding
+`isMonoidalClosed_boundedConstructible_*`.
 
 -/
 
@@ -140,11 +145,87 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 scoped notation "Dᵇc(" X ")⟦" Λ "⟧" =>
   AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj Λ X)
 
-/-! ### The pullback and the pushforward -/
+/-! ### Deligne's finiteness theorem for the pushforward -/
+
+/-- **Deligne's finiteness theorem** for `Rf_*` with finite coefficients (SGA 4½ [Th. finitude]):
+for a finite discrete ring `T` whose exponent, the characteristic of `T`, is invertible in `k`,
+the derived pushforward along a morphism of separated `k`-schemes of finite type preserves bounded
+constructible complexes of `T̲`-modules. It is false without the invertibility: for `T = 𝔽_p` and
+the affine line over an algebraically closed field of characteristic `p`, Artin–Schreier gives
+`H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj_of_finite (T : Type)
+    [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [DiscreteTopology T] [Finite T]
+    (hT : IsUnit (ringChar T : k)) :
+    ∀ ⦃X Y : Over (Spec (.of k))⦄ [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+      [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+      (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X.left))),
+      boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X.left) K →
+        boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} T) Y.left)
+          ((R((f.left)_*⟦Profinite.continuousMapRingObj.{u} T⟧)).obj K) :=
+  sorry
+
+/-- **Deligne's finiteness theorem** for `Rf_*` with coefficients `𝒪̲_E`, for a finite
+subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `ℓ` invertible in `k` (Bhatt–Scholze, Section 6.8): the
+derived pushforward along a morphism of separated `k`-schemes of finite type preserves bounded
+constructible complexes. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_padicIntegersRingObj (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] :
+    ∀ ⦃X Y : Over (Spec (.of k))⦄ [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+      [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+      (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X.left))),
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X.left) K →
+        boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) Y.left)
+          ((R((f.left)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧)).obj K) :=
+  sorry
+
+/-- **Deligne's finiteness theorem** for `Rf_*` with coefficients `E̲`, for a finite extension `E`
+of `ℚ_ℓ` and `ℓ` invertible in `k` (Bhatt–Scholze, Section 6.8): the derived pushforward along a
+morphism of separated `k`-schemes of finite type preserves bounded constructible complexes. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    ∀ ⦃X Y : Over (Spec (.of k))⦄ [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+      [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+      (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X.left))),
+      boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X.left) K →
+        boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Y.left)
+          ((R((f.left)_*⟦Profinite.continuousMapRingObj.{u} E⟧)).obj K) :=
+  sorry
+
+/-- **Deligne's finiteness theorem** for `Rf_*` with coefficients `ℚ̲̄_ℓ`, for `ℓ` invertible in
+`k` (Bhatt–Scholze, Section 6.8): the derived pushforward along a morphism of separated
+`k`-schemes of finite type preserves bounded constructible complexes. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_padicAlgClRingObj :
+    ∀ ⦃X Y : Over (Spec (.of k))⦄ [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+      [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+      (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X.left))),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X.left) K →
+        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Y.left)
+          ((R((f.left)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧)).obj K) :=
+  sorry
+
+/-! ### The pullback and the pushforward
+
+The restricted pushforward is constructed for a general `Λ` from the statement that `Rf_*`
+preserves bounded constructible complexes over `Λ`, taken as the explicit argument `hΛ`. -/
+
+variable (hΛ :
+  ∀ ⦃X Y : Over (Spec (.of k))⦄ [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left))),
+    boundedConstructible (condensedRingObj Λ X.left) K →
+      boundedConstructible (condensedRingObj Λ Y.left)
+        ((R((f.left)_*⟦Λ⟧)).obj K))
 
 section UpperLowerStar
 
 include ℓ k
+
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -189,40 +270,17 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-end UpperLowerStar
-
-/-! ### The pushforward for the `ℓ`-adic coefficient rings -/
-
-section LowerStar
-
-variable {ℓ} (Λ : Profinite.EllAdicCoefficient ℓ)
-
-variable {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  (f : X ⟶ Y)
-
-/-- **Deligne's finiteness theorem** for `Rf_*`: for an `ℓ`-adic coefficient ring `Λ` and `ℓ`
-invertible in `k`, the derived pushforward `Rf_*` preserves bounded constructible complexes. It is
-false for a general condensed ring: for the constant discrete ring `𝔽_p` and the affine line over
-an algebraically closed field of characteristic `p`, Artin–Schreier gives
-`H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. -/
-lemma boundedConstructible_rightDerivedLowerStar_obj
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left)))
-    (hK : boundedConstructible (condensedRingObj Λ X.left) K) :
-    boundedConstructible (condensedRingObj Λ Y.left) ((R((f.left)_*⟦Λ⟧)).obj K) :=
-  sorry
-
-/-- The derived pushforward `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
-the restriction of `R((f)_*⟦Λ⟧)`. -/
+/-- The derived pushforward `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes,
+for coefficients `Λ` for which `Rf_*` preserves bounded constructible complexes (`hΛ`): the
+restriction of
+`R((f)_*⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleLowerStar : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧))
-    fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ f K.obj K.property
+    fun K ↦ hΛ f K.obj K.property
 
 /-- The restricted derived pushforward is compatible with the inclusions. -/
 noncomputable def boundedConstructibleLowerStarCompatibility :
-    boundedConstructibleLowerStar Λ f ⋙ (boundedConstructible _).ι ≅
+    boundedConstructibleLowerStar Λ hΛ f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
 
@@ -230,37 +288,38 @@ noncomputable def boundedConstructibleLowerStarCompatibility :
 `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction` along the fully faithful
 inclusions. -/
 noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
-    boundedConstructibleUpperStar Λ ℓ f ⊣ boundedConstructibleLowerStar Λ f :=
+    boundedConstructibleUpperStar Λ ℓ f ⊣ boundedConstructibleLowerStar Λ hΛ f :=
   Adjunction.restrictFullyFaithful (derivedUpperStarLowerStarAdjunction Λ f.left)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm
-    (boundedConstructibleLowerStarCompatibility Λ f).symm
+    (boundedConstructibleLowerStarCompatibility Λ hΛ f).symm
 
+include hΛ in
 /-- The derived pullback `Lf^*` on bounded constructible complexes is a left adjoint, its right
 adjoint being `boundedConstructibleLowerStar`. -/
-instance isLeftAdjoint_boundedConstructibleUpperStar :
+lemma isLeftAdjoint_boundedConstructibleUpperStar :
     (boundedConstructibleUpperStar Λ ℓ f).IsLeftAdjoint :=
-  (boundedConstructibleUpperStarLowerStarAdjunction Λ f).isLeftAdjoint
+  (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ f).isLeftAdjoint
 
 /-- The derived pushforward `Rf_*` on bounded constructible complexes is a right adjoint, its
 left adjoint being `boundedConstructibleUpperStar`. -/
-instance isRightAdjoint_boundedConstructibleLowerStar :
-    (boundedConstructibleLowerStar Λ f).IsRightAdjoint :=
-  (boundedConstructibleUpperStarLowerStarAdjunction Λ f).isRightAdjoint
+lemma isRightAdjoint_boundedConstructibleLowerStar :
+    (boundedConstructibleLowerStar Λ hΛ f).IsRightAdjoint :=
+  (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ f).isRightAdjoint
 
 /-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` on bounded constructible complexes:
 the conjugate of `boundedConstructibleUpperStarComp` under the adjunctions
 `L(f ≫ g)^* ⊣ R(f ≫ g)_*` and `Lg^* ⋙ Lf^* ⊣ Rf_* ⋙ Rg_*`. -/
 noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
-    boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleLowerStar Λ g ≅
-      boundedConstructibleLowerStar Λ (f ≫ g) :=
-  (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ (f ≫ g))
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ g).comp
-      (boundedConstructibleUpperStarLowerStarAdjunction Λ f))
+    boundedConstructibleLowerStar Λ hΛ f ⋙ boundedConstructibleLowerStar Λ hΛ g ≅
+      boundedConstructibleLowerStar Λ hΛ (f ≫ g) :=
+  (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ (f ≫ g))
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ g).comp
+      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ hΛ f))
     (boundedConstructibleUpperStarComp Λ ℓ f g).symm).symm
 
-end LowerStar
+end UpperLowerStar
 
 /-! ### The extension by zero along an open immersion -/
 
@@ -353,8 +412,6 @@ section Shriek
 
 include ℓ k
 
-variable {ℓ} (Λ : Profinite.EllAdicCoefficient ℓ)
-
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -371,15 +428,15 @@ morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactification :
     Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
   boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.overI ⋙
-    boundedConstructibleLowerStar Λ c.overG
+    boundedConstructibleLowerStar Λ hΛ c.overG
 
 /-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
 `Rf_!(c)⟦Λ⟧` on the ambient derived categories. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
-    boundedConstructibleLowerShriekOfCompactification Λ c ⋙ (boundedConstructible _).ι ≅
+    boundedConstructibleLowerShriekOfCompactification Λ ℓ hΛ c ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ Rf_!(c)⟦Λ⟧ :=
   Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility Λ c.overG) ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility Λ hΛ c.overG) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ c.overI) _ ≪≫
@@ -393,20 +450,20 @@ variable (f : X ⟶ Y)
 the functor `boundedConstructibleLowerShriekOfCompactification` attached to the compactification
 `compactificationOverField f` chosen by Nagata's theorem. -/
 noncomputable def boundedConstructibleLowerShriek : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
-  boundedConstructibleLowerShriekOfCompactification Λ (compactificationOverField f)
+  boundedConstructibleLowerShriekOfCompactification Λ ℓ hΛ (compactificationOverField f)
 
 lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek Λ f =
-      boundedConstructibleLowerShriekOfCompactification Λ (compactificationOverField f) :=
+    boundedConstructibleLowerShriek Λ ℓ hΛ f =
+      boundedConstructibleLowerShriekOfCompactification Λ ℓ hΛ (compactificationOverField f) :=
   rfl
 
 /-- The derived lower shriek on bounded constructible complexes is the restriction of the
 derived lower shriek `R(f)_!⟦Λ⟧` on the ambient derived categories. -/
 noncomputable def boundedConstructibleLowerShriekCompatibility :
     haveI := HasCompactification.of_over f
-    boundedConstructibleLowerShriek Λ f ⋙ (boundedConstructible _).ι ≅
+    boundedConstructibleLowerShriek Λ ℓ hΛ f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R(f.left)_!⟦Λ⟧ :=
-  boundedConstructibleLowerShriekOfCompactificationCompatibility Λ
+  boundedConstructibleLowerShriekOfCompactificationCompatibility Λ ℓ hΛ
     (compactificationOverField f)
 
 end Shriek
@@ -416,83 +473,74 @@ end Shriek
 
 section TensorHom
 
-variable {ℓ} (Λ : Profinite.EllAdicCoefficient ℓ)
-
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
-/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`,
-for `ℓ` invertible in `k`, form a monoidal subcategory of `D(Mod_{Λ_X})` for the derived tensor
-product: they contain the unit `Λ_X` and are stable under `- ⊗ᴸ -`. It is false for a general
-condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
-`Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible :
-    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
-  sorry
+/-! The bounded constructible complexes of module objects over `Λ` form a monoidal subcategory of
+`D(Mod_{Λ_X})` for the derived tensor product (they contain the unit `Λ_X` and are stable under
+`- ⊗ᴸ -`) and are stable under the derived hom `RHom(-, -)`, for the `ℓ`-adic coefficient rings
+with `ℓ` invertible in `k` (Bhatt–Scholze, Section 6.8). This is false for a general `Λ`: for
+`Λ = ℤ/4` on a geometric point of characteristic `3`,
+`Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`, so `ℤ/2 ⊗ᴸ ℤ/2` and
+`RHom(ℤ/2, ℤ/2)` are unbounded. -/
 
-/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`,
-for `ℓ` invertible in `k`, are stable under the derived hom `RHom(-, -)`, the internal hom of
-`D(Mod_{Λ_X})`. It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of
-characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible :
-    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
-  sorry
-
-variable {Λ} (ℓ)
-
-/-- `isMonoidal_boundedConstructible` for the condensed ring `𝒪̲_E` itself. -/
+/-- The bounded constructible complexes over `𝒪̲_E`, for a finite subextension `E ⊆ ℚ̄_ℓ` of
+`ℚ_ℓ`, form a monoidal subcategory for the derived tensor product. -/
 instance isMonoidal_boundedConstructible_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
-  isMonoidal_boundedConstructible (.integers ℓ E) X
+  sorry
 
 -- The prime `ℓ` of `E̲` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
 -- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in
-/-- `isMonoidal_boundedConstructible` for the condensed ring `E̲` itself. -/
+/-- The bounded constructible complexes over `E̲`, for a finite extension `E` of `ℚ_ℓ`, form a
+monoidal subcategory for the derived tensor product. -/
 instance isMonoidal_boundedConstructible_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
-  isMonoidal_boundedConstructible (.field ℓ E) X
+  sorry
 
-/-- `isMonoidal_boundedConstructible` for the condensed ring `ℚ̲̄_ℓ` itself. -/
+/-- The bounded constructible complexes over `ℚ̲̄_ℓ` form a monoidal subcategory for the derived
+tensor product. -/
 instance isMonoidal_boundedConstructible_padicAlgClRingObj :
-    (boundedConstructible
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
-  isMonoidal_boundedConstructible (.algClosure ℓ) X
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
+  sorry
 
-/-- `isMonoidalClosed_boundedConstructible` for the condensed ring `𝒪̲_E` itself. -/
+/-- The bounded constructible complexes over `𝒪̲_E`, for a finite subextension `E ⊆ ℚ̄_ℓ` of
+`ℚ_ℓ`, are stable under the derived hom `RHom(-, -)`. -/
 instance isMonoidalClosed_boundedConstructible_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidalClosed :=
-  isMonoidalClosed_boundedConstructible (.integers ℓ E) X
+  sorry
 
 set_option synthInstance.checkSynthOrder false in
-/-- `isMonoidalClosed_boundedConstructible` for the condensed ring `E̲` itself. -/
+/-- The bounded constructible complexes over `E̲`, for a finite extension `E` of `ℚ_ℓ`, are stable
+under the derived hom `RHom(-, -)`. -/
 instance isMonoidalClosed_boundedConstructible_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
-  isMonoidalClosed_boundedConstructible (.field ℓ E) X
+  sorry
 
-/-- `isMonoidalClosed_boundedConstructible` for the condensed ring `ℚ̲̄_ℓ` itself. -/
+/-- The bounded constructible complexes over `ℚ̲̄_ℓ` are stable under the derived hom
+`RHom(-, -)`. -/
 instance isMonoidalClosed_boundedConstructible_padicAlgClRingObj :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
-  isMonoidalClosed_boundedConstructible (.algClosure ℓ) X
-
-variable (Λ) {ℓ}
+  sorry
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory
 `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of `-⊗ᴸ-(X)⟦Λ⟧` in
 both variables. -/
-noncomputable def boundedConstructibleTensor :
+noncomputable def boundedConstructibleTensor
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal] :
     Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   curriedTensor _
 
@@ -500,7 +548,9 @@ noncomputable def boundedConstructibleTensor :
 complexes: the internal hom of the monoidal closed structure on the full subcategory
 `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction of `RHom(X)⟦Λ⟧`
 in both variables. -/
-noncomputable def boundedConstructibleHom :
+noncomputable def boundedConstructibleHom
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed] :
     (Dᵇc(X.left)⟦Λ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   MonoidalClosed.internalHom
 
@@ -508,7 +558,8 @@ variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
 inclusions. -/
-noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable def boundedConstructibleTensorObjCompatibility
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleTensor Λ X).obj K ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Λ⟧).obj K.obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
@@ -516,7 +567,9 @@ noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X.left)�
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `RHom(K, -)` is compatible with the
 inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable def boundedConstructibleHomObjCompatibility
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleHom Λ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Λ⟧).obj (op K.obj) :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
@@ -525,14 +578,18 @@ noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X.left)⟦�
 
 /-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
 the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦Λ⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
+noncomputable def boundedConstructibleTensorHomAdjunction₂
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed] :
     boundedConstructibleTensor Λ X ⊣₂ boundedConstructibleHom Λ X :=
   MonoidalClosed.internalHomAdjunction₂
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
 complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed structure on
 `Dᵇc(X)⟦Λ⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable def boundedConstructibleTensorHomAdjunction
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+    [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleTensor Λ X).obj K ⊣ (boundedConstructibleHom Λ X).obj (op K) :=
   (boundedConstructibleTensorHomAdjunction₂ Λ).adj K
 
@@ -540,11 +597,11 @@ end TensorHom
 
 section MonoidalUpperStar
 
-variable {ℓ} (Λ : Profinite.EllAdicCoefficient ℓ)
-
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+  [(boundedConstructible (condensedRingObj Λ Y.left)).IsMonoidal]
   (f : X ⟶ Y)
 
 /-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes is
@@ -553,29 +610,6 @@ noncomputable instance monoidal_boundedConstructibleUpperStar :
     (boundedConstructibleUpperStar Λ ℓ f).Monoidal := by
   unfold boundedConstructibleUpperStar
   exact ObjectProperty.monoidalLift _ _
-
-variable {Λ} (ℓ)
-
-/-- `monoidal_boundedConstructibleUpperStar` for the condensed ring `𝒪̲_E` itself. -/
-noncomputable instance monoidal_boundedConstructibleUpperStar_padicIntegersRingObj (E : Type)
-    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
-    [FiniteDimensional ℚ_[ℓ] E] :
-    (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).Monoidal :=
-  monoidal_boundedConstructibleUpperStar (.integers ℓ E) f
-
--- The prime `ℓ` of `E̲` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
--- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
-set_option synthInstance.checkSynthOrder false in
-/-- `monoidal_boundedConstructibleUpperStar` for the condensed ring `E̲` itself. -/
-noncomputable instance monoidal_boundedConstructibleUpperStar_continuousMapRingObj (E : Type)
-    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ f).Monoidal :=
-  monoidal_boundedConstructibleUpperStar (.field ℓ E) f
-
-/-- `monoidal_boundedConstructibleUpperStar` for the condensed ring `ℚ̲̄_ℓ` itself. -/
-noncomputable instance monoidal_boundedConstructibleUpperStar_padicAlgClRingObj :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).Monoidal :=
-  monoidal_boundedConstructibleUpperStar (.algClosure ℓ) f
 
 end MonoidalUpperStar
 

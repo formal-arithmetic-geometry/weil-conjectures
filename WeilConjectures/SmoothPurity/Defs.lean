@@ -32,9 +32,9 @@ pullback of the condensed ring `ℚ̲̄_ℓ` (`Profinite.padicAlgClRingObj ℓ`)
 constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` (the right adjoint of `Rf_!`, built from the
 compactification of `f` chosen by Nagata's theorem), `ℚ̄_ℓ,Y` is the tensor unit of the
 monoidal category `Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`
-(`AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible`), whose underlying
-complex is the tensor unit of `D(Mod_{ℚ̄_ℓ,Y})`, and `ℚ̄_ℓ,X(d)` is the Tate twist of
-`WeilConjectures.TateTwist.ProEtale`. The isomorphism is stated after the inclusion
+(`AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible_padicAlgClRingObj`),
+whose underlying complex is the tensor unit of `D(Mod_{ℚ̄_ℓ,Y})`, and `ℚ̄_ℓ,X(d)` is the Tate
+twist of `WeilConjectures.TateTwist.ProEtale`. The isomorphism is stated after the inclusion
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`, which is fully faithful, so that the constructibility of the Tate
 twists need not be recorded.
 
@@ -86,7 +86,8 @@ coefficient object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(
 isomorphism: see the module docstring. -/
 @[no_expose]
 noncomputable def smoothPurityIso :
-    ((boundedConstructibleUpperShriek (.algClosure ℓ) f).obj
+    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructible_rightDerivedLowerStar_obj_padicAlgClRingObj ℓ) f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   sorry
