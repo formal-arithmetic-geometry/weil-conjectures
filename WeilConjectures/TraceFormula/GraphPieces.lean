@@ -163,6 +163,18 @@ noncomputable def graphStalkMap (h : X ⟶ X)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).hom.app K ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map v
 
+/-- The stalk map of a coefficient map transported along an equality of objects. -/
+lemma graphStalkMap_eqToHom {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : A = B)
+    (h : X ⟶ X)
+    (w : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj B ⟶ B)
+    (x : RationalPoint X) (hx : x ≫ h = x) :
+    graphStalkMap A h
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map (eqToHom e) ≫
+          w ≫ eqToHom e.symm) x hx =
+      eqToHom (by rw [e]) ≫ graphStalkMap B h w x hx ≫ eqToHom (by rw [e]) := by
+  subst e
+  simp
+
 variable {h : X ⟶ X}
   (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
   {x : RationalPoint X} (hx : x ≫ h = x)

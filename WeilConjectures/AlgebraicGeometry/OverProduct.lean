@@ -108,6 +108,14 @@ lemma overProdIso_trans {W W' W'' T T' T'' : Over S} (e₁ : W ≅ W') (e₂ : W
   ext1
   exact overProdMap_comp _ _ _ _
 
+/-- `a ×_S 𝟙` intertwines the automorphisms `𝟙 ×_S e` of its source and target. -/
+@[reassoc]
+lemma overProdIso_refl_hom_comp_overProdMap {W W' T : Over S} (a : W ⟶ W') (e : T ≅ T) :
+    (overProdIso (Iso.refl W) e).hom ≫ overProdMap a (𝟙 T) =
+      overProdMap a (𝟙 T) ≫ (overProdIso (Iso.refl W') e).hom := by
+  simp only [overProdIso_hom, Iso.refl_hom, ← overProdMap_comp, Category.id_comp,
+    Category.comp_id]
+
 /-- The second projection `W ×_S T ⟶ T`. -/
 noncomputable def overProdSnd (W T : Over S) : overProd W T ⟶ T :=
   Over.homMk (pullback.snd _ _) rfl

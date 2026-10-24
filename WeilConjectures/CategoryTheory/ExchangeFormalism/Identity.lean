@@ -5,29 +5,31 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Coherence
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-!
-# Identity squares in a compact support formalism
+# Identity squares in an exchange formalism
 
-In a `AlgebraicGeometry.CompactSupportFormalism`, the base change and exchange maps of the
+In a `CategoryTheory.ExchangeFormalism`, the base change and exchange maps of the
 squares with two identity sides are the identity isomorphisms `(𝟙 X)^* ≅ 𝟭`, `(𝟙 X)_* ≅ 𝟭` and
 `(𝟙 X)_! ≅ 𝟭`, and the composition isomorphisms with an identity are the unitors.
 -/
 
 @[expose] public section
 
-universe w v u
+universe w v₁ v u
 
-open CategoryTheory Limits TwoSquare
+namespace CategoryTheory.ExchangeFormalism
 
-namespace AlgebraicGeometry.CompactSupportFormalism
+open TwoSquare
 
-variable (F : CompactSupportFormalism.{w, v, u})
+variable {𝒞 : Type u} [Category.{v} 𝒞] {𝒪 : MorphismProperty 𝒞}
+  (F : ExchangeFormalism.{w, v₁} 𝒞 𝒪)
 
 section Unit
 
-variable {X Y : Scheme.{u}}
+variable {X Y : 𝒞}
 
 lemma pbComp'_id_left_hom (f : X ⟶ Y) :
     (F.pbComp' (𝟙 X) f f (Category.id_comp f)).hom ≫
@@ -43,10 +45,18 @@ lemma pbComp'_id_right_hom (f : X ⟶ Y) :
   ext M
   simpa using F.pbComp'_id_right f f (Category.comp_id f) M
 
-lemma sqIso_eq {U' U Z' Z : Scheme.{u}} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+/-- The comparison isomorphism of a commutative square through a common diagonal `d`. -/
+lemma sqIso_eq {U' U Z' Z : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     (w : t ≫ r = l ≫ b) (d : U' ⟶ Z) (hd₁ : t ≫ r = d) (hd₂ : l ≫ b = d) :
     F.sqIso t l r b w = (F.pbComp' t r d hd₁).symm ≪≫ F.pbComp' l b d hd₂ := by
   subst hd₁
+  rfl
+
+/-- The inverse of the square isomorphism of a square is the square isomorphism of the transposed
+square. -/
+lemma sqIso_symm {U' U Z' Z : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+    (w : t ≫ r = l ≫ b) : (F.sqIso t l r b w).symm = F.sqIso l t b r w.symm := by
+  rw [F.sqIso_eq l t b r w.symm (t ≫ r) w.symm rfl]
   rfl
 
 lemma pbComp'_id_left_inv_app (f : X ⟶ Y) (M : F.obj Y) :
@@ -97,10 +107,11 @@ end Unit
 
 section IdentitySquares
 
-variable {X Y : Scheme.{u}}
+variable [𝒪.ContainsIdentities] {X Y : 𝒞}
 
+omit [𝒪.ContainsIdentities] in
 /-- The base change map of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up to `(𝟙)^* ≅ 𝟭`. -/
-lemma baseChange_id_horiz (j : X ⟶ Y) [IsOpenImmersion j] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
+lemma baseChange_id_horiz (j : X ⟶ Y) [Fact (𝒪 j)] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
     F.baseChange (𝟙 X) j j (𝟙 Y) w =
       ((TwoSquare.mk (𝟭 _) (F.sh j) (F.sh j) (𝟭 _)
         ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
@@ -129,8 +140,9 @@ lemma baseChange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) :
   ext M
   simp
 
+omit [𝒪.ContainsIdentities] in
 /-- The exchange map of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up to `(𝟙)_* ≅ 𝟭`. -/
-lemma exchange_id_horiz (j : X ⟶ Y) [IsOpenImmersion j] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y)
+lemma exchange_id_horiz (j : X ⟶ Y) [Fact (𝒪 j)] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y)
     [IsIso (F.baseChange (𝟙 X) j j (𝟙 Y) w).natTrans] :
     F.exchange (𝟙 X) j j (𝟙 Y) w =
       ((TwoSquare.mk (𝟭 _) (F.sh j) (F.sh j) (𝟭 _)
@@ -176,7 +188,7 @@ end IdentitySquares
 
 section PushforwardUnit
 
-variable {X Y : Scheme.{u}}
+variable {X Y : 𝒞}
 
 lemma pfId_hom : (F.pfId X).hom = conjugateEquiv (F.adj (𝟙 X)) Adjunction.id (F.pbId X).inv :=
   rfl
@@ -250,10 +262,10 @@ end PushforwardUnit
 
 section ExtensionByZeroUnit
 
-variable {X Y : Scheme.{u}}
+variable [𝒪.ContainsIdentities] {X Y : 𝒞}
 
 /-- The left unit law for the composition isomorphisms of the extensions by zero. -/
-lemma shComp'_id_left (j : X ⟶ Y) [IsOpenImmersion j] :
+lemma shComp'_id_left (j : X ⟶ Y) [Fact (𝒪 j)] :
     (F.shComp' (𝟙 X) j j (Category.id_comp j)).hom ≫
         Functor.whiskerRight (F.shId X).hom (F.sh j) ≫ (Functor.leftUnitor (F.sh j)).hom =
       𝟙 _ := by
@@ -271,7 +283,7 @@ lemma shComp'_id_left (j : X ⟶ Y) [IsOpenImmersion j] :
   simp [pbComp'_id_left_inv_app]
 
 /-- The right unit law for the composition isomorphisms of the extensions by zero. -/
-lemma shComp'_id_right (j : X ⟶ Y) [IsOpenImmersion j] :
+lemma shComp'_id_right (j : X ⟶ Y) [Fact (𝒪 j)] :
     (F.shComp' j (𝟙 Y) j (Category.comp_id j)).hom ≫
         Functor.whiskerLeft (F.sh j) (F.shId Y).hom ≫ (Functor.rightUnitor (F.sh j)).hom =
       𝟙 _ := by
@@ -286,19 +298,42 @@ lemma shComp'_id_right (j : X ⟶ Y) [IsOpenImmersion j] :
     ← conjugateEquiv_comp _ ((F.shAdj j).comp Adjunction.id), conjugateEquiv_rightUnitor_hom,
     conjugateEquiv_whiskerLeft, h₁, h₂]
   ext M
-  simp [pbComp'_id_right_inv_app]
+  simp [pbComp'_id_right_inv_app, ← Functor.map_comp]
+
+
+/-- The identity isomorphism `(𝟙 X)_! ≅ 𝟭` is characterized by the counit of `(𝟙 X)_! ⊣ (𝟙 X)^*`:
+`(𝟙 X)^* W ≅ (𝟙 X)_! (𝟙 X)^* W ⟶ W` is `(𝟙 X)^* ≅ 𝟭`. -/
+@[reassoc]
+lemma shId_inv_app_comp_counit (X : 𝒞) (W : F.obj X) :
+    (F.shId X).inv.app ((F.pb (𝟙 X)).obj W) ≫ (F.shAdj (𝟙 X)).counit.app W =
+      (F.pbId X).hom.app W := by
+  have h₂ : conjugateEquiv Adjunction.id (F.shAdj (𝟙 X)) (F.shId X).hom = (F.pbId X).inv := by
+    simp [shId, conjugateIsoEquiv]
+  have hc := conjugateEquiv_counit Adjunction.id (F.shAdj (𝟙 X)) (F.shId X).hom W
+  rw [h₂] at hc
+  simp only [Functor.id_obj, Adjunction.id_counit, NatTrans.id_app] at hc
+  have hc' : (F.shAdj (𝟙 X)).counit.app W =
+      (F.sh (𝟙 X)).map ((F.pbId X).hom.app W) ≫ (F.shId X).hom.app W := by
+    rw [← cancel_epi ((F.sh (𝟙 X)).map ((F.pbId X).inv.app W)), ← Functor.map_comp_assoc,
+      Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+    erw [hc]
+    simp
+  have hn := (F.shId X).inv.naturality ((F.pbId X).hom.app W)
+  simp only [Functor.id_map] at hn
+  rw [hc', ← reassoc_of% hn, Iso.inv_hom_id_app]
+  simp
 
 end ExtensionByZeroUnit
 
 
 section Restriction
 
-variable {U' U Z' Z : Scheme.{u}}
+variable {U' U Z' Z : 𝒞}
 
 /-- The base change map of the extension by zero becomes an isomorphism after restriction to the
 open `l : U' ⟶ Z'`, when the extensions by zero along `l` and `r` are fully faithful. -/
 lemma isIso_map_baseChange_app (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
-    [IsOpenImmersion l] [IsOpenImmersion r] (w : t ≫ r = l ≫ b) [IsIso (F.shAdj r).unit]
+    [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.shAdj r).unit]
     [IsIso (F.shAdj l).unit] (M : F.obj U) :
     IsIso ((F.pb l).map ((F.baseChange t l r b w).natTrans.app M)) := by
   have h := unit_mateEquiv_symm (F.shAdj r) (F.shAdj l) (F.sqIso t l r b w).hom M
@@ -312,4 +347,4 @@ lemma isIso_map_baseChange_app (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b :
 
 end Restriction
 
-end AlgebraicGeometry.CompactSupportFormalism
+end CategoryTheory.ExchangeFormalism

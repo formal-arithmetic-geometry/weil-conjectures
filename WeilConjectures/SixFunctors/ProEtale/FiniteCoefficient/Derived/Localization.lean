@@ -190,7 +190,7 @@ theorem rightDerivedFunctor_lowerStar_essImage_of_isZero [QuasiCompact j]
   have := preservesFiniteColimits_lowerStar_of_isCompl (R := R) i j hij
   set adj := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).mapDerivedCategoryAdjunction
   have : IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit :=
-    isIso_upperStarLowerStarAdjunction_counit R i
+    isIso_upperStarLowerStarAdjunction_counit (ModuleCat.{u + 1} R) i
   have : IsIso adj.counit := Adjunction.isIso_mapDerivedCategoryAdjunction_counit _
   obtain ⟨W, v, w, h₁⟩ := distinguished_cocone_triangle (adj.unit.app E)
   have hiu : IsIso (D((i)^*[ModuleCat.{u + 1} R]).map (adj.unit.app E)) :=

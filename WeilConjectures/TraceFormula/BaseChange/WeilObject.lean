@@ -188,13 +188,15 @@ induces a trivialization on `Λ_X`-modules (`upperStarIterateFrobeniusIso`). -/
 noncomputable def upperStarFrobeniusIso :
     ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _ :=
   upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (frobeniusIterate_overFrobenius_left X N) ≪≫
-    upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
+    upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
+      (FiniteField.ringChar_prime (k := k))
       (natCast_ringChar_left_eq_zero X) (FiniteField.frobeniusExponent k * N)
 
 lemma upperStarFrobeniusIso_eq :
     upperStarFrobeniusIso ℓ X N =
       upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (frobeniusIterate_overFrobenius_left X N) ≪≫
-        upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
+        upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
+          (FiniteField.ringChar_prime (k := k))
           (natCast_ringChar_left_eq_zero X) (FiniteField.frobeniusExponent k * N) :=
   rfl
 
@@ -296,24 +298,25 @@ trivialization `τ : σ^* ≅ 𝟭` inverse to the Frobenius trivialization of `
 lemma isGaloisCompatibleFrobeniusIsoAt_of {Ω : Type u} [Field Ω] [IsSepClosed Ω] [Algebra k Ω]
     (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (hσ : σ.inv = Spec.map (powCardPowRingHom k Ω N))
     (y : Spec (.of Ω) ⟶ X.left) (hΩ : (ringChar k : Γ(Spec (.of Ω), ⊤)) = 0)
-    (hFσ : (Spec (.of Ω)).iterateFrobenius (FiniteField.ringChar_prime k) hΩ
+    (hFσ : (Spec (.of Ω)).iterateFrobenius (FiniteField.ringChar_prime (k := k)) hΩ
       (FiniteField.frobeniusExponent k * N) ≫ σ.hom = 𝟙 _)
     (τ : (σ.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
     (hτ : τ = upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom) :
     IsGaloisCompatibleFrobeniusIsoAt ℓ X N (upperStarFrobeniusIso ℓ X N) σ hσ y τ := by
   intro M
   have key := upperStarIsoIdOfIsSepClosed_inv_app_comp_upperStarComp_inv_app
-    (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime k)
+    (Profinite.padicAlgClRingObj ℓ) (FiniteField.ringChar_prime (k := k))
     (natCast_ringChar_left_eq_zero X) (FiniteField.frobeniusExponent k * N) hΩ σ.hom hFσ y
     _ (frobeniusIterate_overFrobenius_left X N)
     (comp_comp_frobeniusIterate_overFrobenius_left hσ y).symm τ
-    (fun N' ↦ upperStarIterateFrobeniusIso_comp_eq_id_of_eq _ (FiniteField.ringChar_prime k) hΩ _
+    (fun N' ↦ upperStarIterateFrobeniusIso_comp_eq_id_of_eq _
+      (FiniteField.ringChar_prime (k := k)) hΩ _
       σ.hom hFσ τ hτ N') M
   have hκ : (upperStarFrobeniusIso ℓ X N).hom.app M =
       eqToHom (congrArg (fun s ↦ (s)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M)
         (frobeniusIterate_overFrobenius_left X N)) ≫
         (upperStarIterateFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
-          (FiniteField.ringChar_prime k) (natCast_ringChar_left_eq_zero X)
+          (FiniteField.ringChar_prime (k := k)) (natCast_ringChar_left_eq_zero X)
           (FiniteField.frobeniusExponent k * N)).hom.app M := by
     rw [upperStarFrobeniusIso_eq, upperStarEqToIso_trans_hom_app]
   rw [hκ]
@@ -333,7 +336,7 @@ theorem isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso :
   intro Ω' _ _ _ σ hσ y
   have hΩ : (ringChar k : Γ(Spec (.of Ω'), ⊤)) = 0 :=
     Scheme.isOfCharacteristic_Spec (ringChar_cast_eq_zero (k := k) (Ω := Ω'))
-  have hFσ : (Spec (.of Ω')).iterateFrobenius (FiniteField.ringChar_prime k) hΩ
+  have hFσ : (Spec (.of Ω')).iterateFrobenius (FiniteField.ringChar_prime (k := k)) hΩ
       (FiniteField.frobeniusExponent k * N) ≫ σ.hom = 𝟙 _ := by
     rw [iterateFrobenius_spec_eq_specMap_powCardPowRingHom, ← hσ, Iso.inv_hom_id]
   exact isGaloisCompatibleFrobeniusIsoAt_of ℓ X N σ hσ y hΩ hFσ _ rfl

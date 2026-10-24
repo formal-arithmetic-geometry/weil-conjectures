@@ -48,10 +48,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
 
-/-- The base point `Spec k` is a noetherian topological space. -/
-instance noetherianSpace_point : TopologicalSpace.NoetherianSpace (point k).left :=
-  inferInstanceAs (TopologicalSpace.NoetherianSpace (Spec (.of k)))
-
 /-- The tensor product `𝟙⟦a⟧ ⊗ 𝟙⟦b⟧` of two shifts of the unit of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is `𝟙` when
 `a + b = 0`: the corresponding isomorphism `𝟙⟦a⟧ ⊗ᴸ 𝟙⟦b⟧ ≅ (𝟙 ⊗ᴸ 𝟙)⟦a + b⟧ ≅ 𝟙` of
 `D(Mod_{ℚ̲̄_ℓ,s})` (`DerivedCategory.shiftTensorShiftIso`), restricted to the full subcategory. -/
