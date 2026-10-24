@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.ContractingAt
 
 /-!
 

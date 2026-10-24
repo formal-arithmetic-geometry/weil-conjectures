@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
-public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.ContractingAt
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduct
 

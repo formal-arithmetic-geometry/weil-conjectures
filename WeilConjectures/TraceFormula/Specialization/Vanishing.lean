@@ -116,31 +116,6 @@ theorem restrict_traceClass_eq_zero (F : c.FixedLocus) {B : Over (Spec (.of k))}
 
 end IsContractingAt
 
-variable (c)
-
-/-- **Vanishing of the trace class at a contracting point with zero stalk** (blueprint
-`det-tf-contracting-vanishing` for the closed subscheme `Z = {x}` of the rational point
-`x = c₁(y)`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of
-Fujiwara*, Thm. 2.1.3, the case `K|_Z = 0` of its proof): let `c` be contracting at `y` and let
-`B` be an open and closed subscheme of the fixed locus, proper over `s`, with underlying set
-`{y}`. If the stalk `K_x` vanishes, the restriction of the trace class of `c` to `B` is zero,
-whatever the coefficient map `u`. The proof specializes to the normal cone over the trait
-`Spec k̄⟦t⟧` (`IsContractingAt.restrict_traceClass_eq_zero`). -/
-theorem restrict_traceClass_eq_zero_of_isContractingAt' (F : c.FixedLocus)
-    {y : RationalPoint c.C} (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
-    [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
-    [IsClosedImmersion j.left]
-    (hB : Set.range j.left.base =
-      {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
-    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (y ≫ c.c₁)).obj K)) :
-    (c.traceClass F).restrict j = 0 :=
-  haveI : Fact (ringChar (AlgebraicClosure k)).Prime :=
-    ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-  haveI : Fact (ringChar (AlgebraicClosure k) ≠ ℓ) :=
-    ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-  hc.restrict_traceClass_eq_zero (AlgebraicClosure k) F j hB hK
-
 end Correspondence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
