@@ -52,7 +52,8 @@ set_option maxHeartbeats 0 in
 to `Rf_* Rc₁_! Lc₂^* K` agree. -/
 theorem class_pushforward_core :
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
-        (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ P.pushforward.support)
+        (Verdier.leftProjection
+            (boundedConstructibleExceptionalProjection _ ℓ P.pushforward.support)
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff) (𝟙_ _) ≫
           (boundedConstructibleLowerShriek _ ℓ P.pushforward.support).map
             ((ρ_ _).hom ≫ (boundedConstructibleUpperStarComp _ ℓ P.pushforward.support
@@ -82,7 +83,8 @@ theorem class_pushforward_core :
             (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ c.support)
                 ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K) (𝟙_ _) ≫
               (boundedConstructibleLowerShriek _ ℓ c.support).map
-                ((ρ_ _).hom ≫ (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).inv.app K)) ≫
+                ((ρ_ _).hom ≫
+                    (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).inv.app K)) ≫
           (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support prod.fst).inv.app
             ((boundedConstructibleUpperStar _ ℓ (c.support ≫ prod.snd)).obj K) ≫
           (boundedConstructibleLowerShriek _ ℓ (c.support ≫ prod.fst)).map
@@ -106,9 +108,11 @@ theorem class_pushforward_core :
     curriedTensor_obj_obj]
   conv_rhs => rw [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek _ ℓ P.f)
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X))
-    (Verdier.leftProjection_naturality_left (boundedConstructibleExceptionalProjection _ ℓ c.support)
+    (Verdier.leftProjection_naturality_left
+        (boundedConstructibleExceptionalProjection _ ℓ c.support)
       (prodUpperStarCounit ℓ (prod.map_snd P.f P.f) K) (𝟙_ _))]
-  have hsq := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst P.f P.f)).hom.naturality
+  have hsq := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ
+      (prod.map_fst P.f P.f)).hom.naturality
       (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ c.support)
         ((boundedConstructibleUpperStar _ ℓ (prod.map P.f P.f)).obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)) (𝟙_ _))
@@ -131,12 +135,14 @@ theorem class_pushforward_core :
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff) (𝟙_ _) ≫
       (boundedConstructibleLowerShriek _ ℓ (c.support ≫ prod.map P.f P.f)).map
         ((boundedConstructibleUpperStarComp _ ℓ c.support (prod.map P.f P.f)).hom.app _ ▷ _) ≫
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support (prod.map P.f P.f)).hom.app _ := by
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
+          (prod.map P.f P.f)).hom.app _ := by
     rw [reassoc_of% hc]
     simp
   conv_rhs => rw [Functor.map_comp₃_assoc_of_eq
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]
-  conv_rhs => rw [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support P.g_comp_support]
+  conv_rhs => rw [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support
+      P.g_comp_support]
   refine whisker_eq _ (whisker_eq _ ?_)
   unfold pushforwardCoeffUnit
   dsimp only [Functor.comp_obj]

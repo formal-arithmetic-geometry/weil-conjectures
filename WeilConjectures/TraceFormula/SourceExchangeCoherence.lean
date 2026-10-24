@@ -126,15 +126,18 @@ lemma boundedConstructibleUpperStarComp_pushforwardSquare (g : C ⟶ D) (b : D �
       (boundedConstructibleUpperStarComp Λ ℓ g (b ≫ p)).inv.app N ≫
       eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj N) w) ≫
       (boundedConstructibleUpperStarComp Λ ℓ (c ≫ p') f).hom.app N =
-    (boundedConstructibleUpperStarComp Λ ℓ g b).inv.app ((boundedConstructibleUpperStar Λ ℓ p).obj N) ≫
+    (boundedConstructibleUpperStarComp Λ ℓ g b).inv.app
+        ((boundedConstructibleUpperStar Λ ℓ p).obj N) ≫
       eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj
         ((boundedConstructibleUpperStar Λ ℓ p).obj N)) hgq) ≫
-      (boundedConstructibleUpperStarComp Λ ℓ c q).hom.app ((boundedConstructibleUpperStar Λ ℓ p).obj N) ≫
+      (boundedConstructibleUpperStarComp Λ ℓ c q).hom.app
+          ((boundedConstructibleUpperStar Λ ℓ p).obj N) ≫
       (boundedConstructibleUpperStar Λ ℓ c).map
         ((boundedConstructibleUpperStarComp Λ ℓ q p).inv.app N ≫
           eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj N) hq) ≫
           (boundedConstructibleUpperStarComp Λ ℓ p' f).hom.app N) ≫
-      (boundedConstructibleUpperStarComp Λ ℓ c p').inv.app ((boundedConstructibleUpperStar Λ ℓ f).obj N) := by
+      (boundedConstructibleUpperStarComp Λ ℓ c p').inv.app
+          ((boundedConstructibleUpperStar Λ ℓ f).obj N) := by
   have e₁ := boundedConstructibleUpperStarComp_hom_app_map_inv_app Λ ℓ c q p N
   have e₂ := boundedConstructibleUpperStar_map_hom_app_comp_inv_app Λ ℓ c p' f N
   have e₃ := boundedConstructibleUpperStarComp_hom_app_map_eqToHom ℓ Λ hq c N

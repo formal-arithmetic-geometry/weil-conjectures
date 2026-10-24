@@ -84,7 +84,8 @@ lemma leftProjection_unit
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   have hLP : ∀ T : C, G.map (leftProjection pf M T) ≫
       (adj.ofNatIsoRight σ.symm).counit.app (G.obj M ⊗ T) =
-      Functor.OplaxMonoidal.δ G M (Lg.obj T) ≫ G.obj M ◁ (adj.ofNatIsoRight σ.symm).counit.app T := by
+      Functor.OplaxMonoidal.δ G M (Lg.obj T) ≫ G.obj M ◁
+          (adj.ofNatIsoRight σ.symm).counit.app T := by
     intro T
     have hn := (adj.ofNatIsoRight σ.symm).counit.naturality (β_ T (G.obj M)).hom
     simp only [Functor.comp_map, Functor.id_map] at hn

@@ -79,7 +79,8 @@ noncomputable def classTransport :
       (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X) ⋙
         boundedConstructibleLowerShriek _ ℓ f) ≫
     (Functor.associator _ _ _).inv ≫
-    Functor.whiskerLeft (tensorLeft ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K) ⋙
+    Functor.whiskerLeft (tensorLeft ((boundedConstructibleUpperStar _ ℓ
+        (prod.snd : X ⨯ X ⟶ X)).obj K) ⋙
         boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X))
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom ≫
     (Functor.associator _ _ _).hom
@@ -95,7 +96,8 @@ noncomputable def classTransportMap :
         ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
           ((boundedConstructibleLowerStar _ ℓ f).obj K)) :=
   curry (((boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).homEquiv _ _)
-    ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar _ ℓ f).map (classTest ℓ K (𝟙 _))))
+    ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar _ ℓ f).map (classTest ℓ K
+        (𝟙 _))))
 
 set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks

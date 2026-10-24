@@ -58,7 +58,8 @@ lemma lowerShriekComp_hom_app_naturality (x : C ⟶ D) (y : D ⟶ W)
     (boundedConstructibleLowerShriek _ ℓ (x ≫ y)).map φ ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app N =
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app M ≫
-        (boundedConstructibleLowerShriek _ ℓ y).map ((boundedConstructibleLowerShriek _ ℓ x).map φ) :=
+        (boundedConstructibleLowerShriek _ ℓ y).map
+            ((boundedConstructibleLowerShriek _ ℓ x).map φ) :=
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.naturality φ
 
 @[reassoc]
@@ -78,7 +79,8 @@ lemma lowerShriekSquareIso_hom_app_naturality {g' : C ⟶ D} {f₀ : D ⟶ W} {f
     (boundedConstructibleLowerShriek _ ℓ f₀).map ((boundedConstructibleLowerShriek _ ℓ g').map φ) ≫
         (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app N =
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app M ≫
-        (boundedConstructibleLowerShriek _ ℓ g₀).map ((boundedConstructibleLowerShriek _ ℓ f').map φ) :=
+        (boundedConstructibleLowerShriek _ ℓ g₀).map
+            ((boundedConstructibleLowerShriek _ ℓ f').map φ) :=
   (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.naturality φ
 
 @[reassoc]
@@ -106,7 +108,8 @@ lemma map_lowerShriekComp_hom_app_naturality (x : C ⟶ D) (y : D ⟶ W)
 /-- Moving maps past a cast `Ru_! = R(c ≫ q)_!` and the composition isomorphism of `c ≫ q`. -/
 lemma map_lowerShriek_map_comp_eqToHom_comp_lowerShriekComp_hom_app {u : C ⟶ W} (c : C ⟶ V)
     (q : V ⟶ W) (h : u = c ≫ q) {M M' N : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (A : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (A : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (φ₁ : M ⟶ M') (φ₂ : M' ⟶ (boundedConstructibleUpperStar _ ℓ u).obj A ⊗ T)
     (ψ : (boundedConstructibleUpperStar _ ℓ (c ≫ q)).obj A ⊗ T ⟶ N) {Z : Type*} [Category Z]
     (F : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Z) {E : Z}
@@ -123,7 +126,8 @@ lemma map_lowerShriek_map_comp_eqToHom_comp_lowerShriekComp_hom_app {u : C ⟶ W
     F.map (eqToHom (by rw [h] : (boundedConstructibleLowerShriek _ ℓ u).obj M =
         (boundedConstructibleLowerShriek _ ℓ (c ≫ q)).obj M)) ≫
       F.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ c q).hom.app M) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ q).map ((boundedConstructibleLowerShriek _ ℓ c).map
+      F.map ((boundedConstructibleLowerShriek _ ℓ q).map
+          ((boundedConstructibleLowerShriek _ ℓ c).map
         (φ₁ ≫ φ₂ ≫ eqToHom (by rw [h]) ≫ ψ))) ≫ k := by
   subst h
   simp only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp, Functor.map_comp,
@@ -134,18 +138,23 @@ lemma map_lowerShriek_map₄_comp_lowerShriekComp_inv_app (x : C ⟶ D) (y : D �
     {M₀ M₁ M₂ M₃ M₄ : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a₁ : M₀ ⟶ M₁) (a₂ : M₁ ⟶ M₂)
     (a₃ : M₂ ⟶ M₃) (a₄ : M₃ ⟶ M₄) {Z : Type*} [Category Z]
     (F : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Z) :
-    F.map ((boundedConstructibleLowerShriek _ ℓ y).map ((boundedConstructibleLowerShriek _ ℓ x).map a₁)) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ y).map ((boundedConstructibleLowerShriek _ ℓ x).map a₂)) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ y).map ((boundedConstructibleLowerShriek _ ℓ x).map a₃)) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ y).map ((boundedConstructibleLowerShriek _ ℓ x).map a₄)) ≫
+    F.map ((boundedConstructibleLowerShriek _ ℓ y).map
+        ((boundedConstructibleLowerShriek _ ℓ x).map a₁)) ≫
+      F.map ((boundedConstructibleLowerShriek _ ℓ y).map
+          ((boundedConstructibleLowerShriek _ ℓ x).map a₂)) ≫
+      F.map ((boundedConstructibleLowerShriek _ ℓ y).map
+          ((boundedConstructibleLowerShriek _ ℓ x).map a₃)) ≫
+      F.map ((boundedConstructibleLowerShriek _ ℓ y).map
+          ((boundedConstructibleLowerShriek _ ℓ x).map a₄)) ≫
       F.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app M₄) =
     F.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app M₀) ≫
       F.map ((boundedConstructibleLowerShriek _ ℓ (x ≫ y)).map (a₁ ≫ a₂ ≫ a₃ ≫ a₄)) := by
-  simp only [Functor.map_comp, Category.assoc, map_lowerShriekComp_inv_app_naturality_assoc,
+  simp only [Functor.map_comp, map_lowerShriekComp_inv_app_naturality_assoc,
     map_lowerShriekComp_inv_app_naturality]
 
 lemma eqToHom_upperStar_tensor {u u' : C ⟶ D} (h : u = u')
-    (A : Dᵇc(D.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (A : Dᵇc(D.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     eqToHom (by rw [h] : (boundedConstructibleUpperStar _ ℓ u).obj A ⊗ T =
         (boundedConstructibleUpperStar _ ℓ u').obj A ⊗ T) =
       eqToHom (by rw [h] : (boundedConstructibleUpperStar _ ℓ u).obj A =
@@ -196,9 +205,11 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
           ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
       (boundedConstructibleLowerShriek _ ℓ (b ≫ p₁)).map (eqToHom (by rw [hb₂])) ≫
       eqToHom (by rw [hb₁] : (boundedConstructibleLowerShriek _ ℓ (b ≫ p₁)).obj
-          ((boundedConstructibleUpperStar _ ℓ b₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj K)) =
+          ((boundedConstructibleUpperStar _ ℓ b₂).obj
+              ((boundedConstructibleLowerStar _ ℓ f).obj K)) =
         (boundedConstructibleLowerShriek _ ℓ b₁).obj
-          ((boundedConstructibleUpperStar _ ℓ b₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj K))) ≫
+          ((boundedConstructibleUpperStar _ ℓ b₂).obj
+              ((boundedConstructibleLowerStar _ ℓ f).obj K))) ≫
       (boundedConstructibleLowerShriek _ ℓ b₁).map
         ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app
             ((boundedConstructibleUpperStar _ ℓ b₂).obj
@@ -238,12 +249,16 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
           ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj
             ((boundedConstructibleUpperStar _ ℓ p₂).obj
               ((boundedConstructibleLowerStar _ ℓ f).obj K))) ⊗ 𝟙_ _)) ≫
-      (boundedConstructibleLowerShriek _ ℓ p₁).map ((boundedConstructibleLowerShriek _ ℓ (g ≫ b)).map
-        ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app ((boundedConstructibleUpperStar _ ℓ p₂).obj
+      (boundedConstructibleLowerShriek _ ℓ p₁).map ((boundedConstructibleLowerShriek _ ℓ (g ≫
+          b)).map
+        ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app
+            ((boundedConstructibleUpperStar _ ℓ p₂).obj
           ((boundedConstructibleLowerStar _ ℓ f).obj K)) ▷ 𝟙_ _)) ≫
       (boundedConstructibleLowerShriek _ ℓ p₁).map (eqToHom (by rw [hgq])) ≫
-      (boundedConstructibleLowerShriek _ ℓ p₁).map ((boundedConstructibleLowerShriek _ ℓ (c ≫ q)).map
-        ((boundedConstructibleUpperStarComp _ ℓ c q).hom.app ((boundedConstructibleUpperStar _ ℓ p₂).obj
+      (boundedConstructibleLowerShriek _ ℓ p₁).map ((boundedConstructibleLowerShriek _ ℓ (c ≫
+          q)).map
+        ((boundedConstructibleUpperStarComp _ ℓ c q).hom.app
+            ((boundedConstructibleUpperStar _ ℓ p₂).obj
           ((boundedConstructibleLowerStar _ ℓ f).obj K)) ▷ 𝟙_ _)) ≫
       (boundedConstructibleLowerShriek _ ℓ p₁).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ c q).hom.app
@@ -271,22 +286,27 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
       (boundedConstructibleLowerShriek _ ℓ f).map
         ((boundedConstructibleLowerShriek _ ℓ (c ≫ p₁')).map (eqToHom (by rw [hc₂]))) ≫
       (boundedConstructibleLowerShriek _ ℓ f).map (eqToHom (by rw [hc₁] :
-        (boundedConstructibleLowerShriek _ ℓ (c ≫ p₁')).obj ((boundedConstructibleUpperStar _ ℓ c₂).obj K) =
-          (boundedConstructibleLowerShriek _ ℓ c₁).obj ((boundedConstructibleUpperStar _ ℓ c₂).obj K))) := by
+        (boundedConstructibleLowerShriek _ ℓ (c ≫ p₁')).obj
+            ((boundedConstructibleUpperStar _ ℓ c₂).obj K) =
+          (boundedConstructibleLowerShriek _ ℓ c₁).obj
+              ((boundedConstructibleUpperStar _ ℓ c₂).obj K))) := by
   subst hb₁ hb₂ hc₁ hc₂
   rewrite [eqToHom_refl ((boundedConstructibleUpperStar _ ℓ (b ≫ p₂)).obj
       ((boundedConstructibleLowerStar _ ℓ f).obj K)),
     eqToHom_refl ((boundedConstructibleLowerShriek _ ℓ (b ≫ p₁)).obj
-      ((boundedConstructibleUpperStar _ ℓ (b ≫ p₂)).obj ((boundedConstructibleLowerStar _ ℓ f).obj K))),
+      ((boundedConstructibleUpperStar _ ℓ (b ≫ p₂)).obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj K))),
     eqToHom_refl ((boundedConstructibleUpperStar _ ℓ (c ≫ p₂')).obj K),
     eqToHom_refl ((boundedConstructibleLowerShriek _ ℓ (c ≫ p₁')).obj
       ((boundedConstructibleUpperStar _ ℓ (c ≫ p₂')).obj K))]
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   rewrite [lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
-    ((boundedConstructibleUpperStarComp _ ℓ b p₂).inv.app ((boundedConstructibleLowerStar _ ℓ f).obj K))]
+    ((boundedConstructibleUpperStarComp _ ℓ b p₂).inv.app
+        ((boundedConstructibleLowerStar _ ℓ f).obj K))]
   rewrite [map_unit_comp_lowerShriekIsoLowerStar_inv ℓ g
     (E := (boundedConstructibleUpperStar _ ℓ (c ≫ p₂')).obj K)
-    ((boundedConstructibleUpperStarComp _ ℓ b p₂).inv.app ((boundedConstructibleLowerStar _ ℓ f).obj K))
+    ((boundedConstructibleUpperStarComp _ ℓ b p₂).inv.app
+        ((boundedConstructibleLowerStar _ ℓ f).obj K))
     ((boundedConstructibleUpperStarComp _ ℓ g (b ≫ p₂)).inv.app
         ((boundedConstructibleLowerStar _ ℓ f).obj K) ≫
       eqToHom (by rw [w₂]) ≫
@@ -296,7 +316,8 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
         ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K))
     (boundedConstructibleLowerShriek _ ℓ (b ≫ p₁))]
   dsimp only [Functor.comp_obj]
-  rewrite [lowerShriekComp_inv_app_naturality_assoc ℓ g (b ≫ p₁), lowerShriek_map_comp_eqToHom'_assoc ℓ w₁,
+  rewrite [lowerShriekComp_inv_app_naturality_assoc ℓ g (b ≫
+      p₁), lowerShriek_map_comp_eqToHom'_assoc ℓ w₁,
     lowerShriekComp_hom_app_naturality ℓ (c ≫ p₁') f]
   dsimp only [Functor.comp_obj]
   rewrite [← lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
@@ -309,10 +330,12 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
   rewrite [← lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
         ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj
-          ((boundedConstructibleUpperStar _ ℓ p₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj K)))))]
+          ((boundedConstructibleUpperStar _ ℓ p₂).obj
+              ((boundedConstructibleLowerStar _ ℓ f).obj K)))))]
   rewrite [lowerShriekComp_pushforwardSquare_assoc ℓ g b c q p₁ p₁' f hgq hq₁ w₁]
   refine whisker_eq _ (whisker_eq _ ?_)
-  rewrite [map_lowerShriekComp_inv_app_naturality_assoc ℓ g b _ (boundedConstructibleLowerShriek _ ℓ p₁)]
+  rewrite [map_lowerShriekComp_inv_app_naturality_assoc ℓ g b _
+      (boundedConstructibleLowerShriek _ ℓ p₁)]
   rewrite [map_lowerShriek_map_comp_eqToHom_comp_lowerShriekComp_hom_app ℓ c q hgq]
   rewrite [lowerShriekSquareIso_hom_app_naturality_assoc ℓ hq₁]
   rewrite [map_lowerShriek_map₄_comp_lowerShriekComp_inv_app ℓ c p₁']
