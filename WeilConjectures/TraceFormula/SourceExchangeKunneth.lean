@@ -115,7 +115,8 @@ set_option maxHeartbeats 1000000 in
 /-- The adjoint of the exceptional Künneth map precomposed with a map `t : N ⟶ ω_Y` in the second
 factor: the counit of `Ra_Y! ⊣ Ra_Y^!` is precomposed with `Ra_Y! t`. -/
 lemma lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint
-    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj
+        ℓ⟧}
     (t : N ⟶ dualizingComplex' ℓ Y) :
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
@@ -149,7 +150,8 @@ lemma lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map t) M
-    (fun V ↦ inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app V).app M))
+    (fun V ↦ inv (((boundedConstructibleExceptionalProjection _ ℓ
+        (prod.fst : X ⨯ Y ⟶ X)).app V).app M))
     hpf _ _).trans ?_
   rw [hbc]
   simp only [Category.assoc, Functor.map_comp, MonoidalCategory.comp_whiskerRight]
