@@ -148,12 +148,6 @@ lemma NatTrans.naturality_comp_assoc {C D E : Type*} [Category C] [Category D] [
   simpa using α.naturality_assoc x h
 
 @[reassoc]
-lemma Functor.map_hom_app_comp_map_inv_app {C D E : Type*} [Category C] [Category D] [Category E]
-    (F : D ⥤ E) {G H : C ⥤ D} (e : G ≅ H) (X : C) :
-    F.map (e.hom.app X) ≫ F.map (e.inv.app X) = 𝟙 _ := by
-  rw [← F.map_comp, Iso.hom_inv_id_app, F.map_id]
-
-@[reassoc]
 lemma Functor.map_map_hom_app_comp_map_map_inv_app {B C D E : Type*} [Category B] [Category C]
     [Category D] [Category E] (F : D ⥤ E) (G : C ⥤ D) {H H' : B ⥤ C} (e : H ≅ H') (X : B) :
     F.map (G.map (e.hom.app X)) ≫ F.map (G.map (e.inv.app X)) = 𝟙 _ := by

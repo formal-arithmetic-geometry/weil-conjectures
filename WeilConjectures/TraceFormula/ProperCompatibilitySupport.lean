@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
 public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
 public import WeilConjectures.TraceFormula.ShriekTrace
 
 /-!
