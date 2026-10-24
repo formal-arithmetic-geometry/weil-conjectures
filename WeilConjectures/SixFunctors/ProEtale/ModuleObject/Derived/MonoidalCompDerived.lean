@@ -28,7 +28,8 @@ set_option maxHeartbeats 2000000 in
 lemma leftDerivedUpperStarTensor_comp_aux
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
-    ((leftDerivedUpperStarTensor Λ (f ≫ g)).app (Qh.obj ((HomotopyCategory.quotient _ _).obj A))).app
+    ((leftDerivedUpperStarTensor Λ (f ≫ g)).app
+      (Qh.obj ((HomotopyCategory.quotient _ _).obj A))).app
         (Qh.obj ((HomotopyCategory.quotient _ _).obj B)) ≫
       ((f ≫ g)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj A) ⊗ₘ
         (f ≫ g)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj B)) ≫
@@ -54,7 +55,8 @@ lemma leftDerivedUpperStarTensor_comp_aux
     inferInstanceAs (IsIso ((HomotopyCategory.quotient _ (.up ℤ)).map
       ((NatIso.mapHomologicalComplex (upperStarComp Λ f g) (.up ℤ)).app (A ⊗ B)).hom))
   have : IsIso ((NatTrans.mapHomotopyCategory (upperStarComp Λ f g).hom (.up ℤ)).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗ (HomotopyCategory.quotient _ (.up ℤ)).obj B)) :=
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
+        (HomotopyCategory.quotient _ (.up ℤ)).obj B)) :=
     ⟨(NatTrans.mapHomotopyCategory (upperStarComp Λ f g).inv (.up ℤ)).app _, by
       rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
         NatTrans.mapHomotopyCategory_id]
@@ -139,5 +141,19 @@ lemma leftDerivedUpperStarTensor_comp
   rw [leftDerivedUpperStarTensor_comp_eq, leftDerivedUpperStarTensorComp_app_app]
   simp only [Category.assoc]
   rfl
+
+/-- `leftDerivedUpperStarTensor_comp` for a morphism `h` equal to `f ≫ g`. -/
+lemma leftDerivedUpperStarTensor_comp_of_eq {h : X ⟶ Z} (hh : h = f ≫ g)
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    ((leftDerivedUpperStarTensor Λ h).app K).app M ≫
+        ((eqToHom (by subst hh; rfl) ≫ (leftDerivedUpperStarComp Λ f g).hom.app K) ⊗ₘ
+          (eqToHom (by subst hh; rfl) ≫ (leftDerivedUpperStarComp Λ f g).hom.app M)) =
+      (eqToHom (by subst hh; rfl) ≫ (leftDerivedUpperStarComp Λ f g).hom.app (K ⊗ M)) ≫
+        L((f)^*⟦Λ⟧).map (((leftDerivedUpperStarTensor Λ g).app K).app M) ≫
+        ((leftDerivedUpperStarTensor Λ f).app _).app _ := by
+  subst hh
+  simp only [eqToHom_refl, Category.id_comp]
+  exact leftDerivedUpperStarTensor_comp Λ f g K M
 
 end AlgebraicGeometry.ProEtale.CondensedRing
