@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
-public import WeilConjectures.TraceFormula.PointNormalizationClass
+public import WeilConjectures.TraceFormula.PointNormalizationTau
 
 /-!
 
@@ -83,7 +83,7 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
     (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
     _ _ χ (pointTau v) τ' ?hτ ?hbraid
     (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) ?hK ?hC
-  case hτ => sorry
+  case hτ => exact pointTau_comp_counit v
   case hbraid => sorry
   case hK => sorry
   case hC =>
