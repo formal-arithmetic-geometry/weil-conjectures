@@ -71,6 +71,43 @@ lemma Adjunction.homEquiv_comp_mateEquiv_of_eq {CC CD CP CQ : Type*} [Category C
   rw [← H.map_comp_assoc, hκ, Adjunction.homEquiv_comp_mateEquiv, G.map_comp, Category.assoc]
   exact congrArg (fun t ↦ η ≫ G.map T ≫ t) h
 
+/-- The points `𝟙 ⟶ Rp_* 𝟙` (units followed by the unit comparisons of the pullbacks) compose:
+for adjunctions `Lp ⊣ Rp`, `Lq ⊣ Rq`, `Lpq ⊣ Rpq` with `Lpq ≅ Lq ⋙ Lp` and the conjugate
+`Rp ⋙ Rq ≅ Rpq`, compatible unit comparisons give `s_q ≫ Rq s_p = s_{pq} ≫ (Rp ⋙ Rq ≅ Rpq)⁻¹`. -/
+lemma Adjunction.unit_map_comp_unit_map {CA CB CC : Type*} [Category CA] [Category CB]
+    [Category CC] {Lp : CB ⥤ CA} {Rp : CA ⥤ CB} {Lq : CC ⥤ CB} {Rq : CB ⥤ CC} {Lpq : CC ⥤ CA}
+    {Rpq : CA ⥤ CC} (ap : Lp ⊣ Rp) (aq : Lq ⊣ Rq) (apq : Lpq ⊣ Rpq) (cU : Lpq ≅ Lq ⋙ Lp)
+    (cR : Rp ⋙ Rq ≅ Rpq) (hcR : cR.inv = conjugateEquiv apq (aq.comp ap) cU.inv) {oC : CC}
+    {oB : CB} {oA : CA} (eq : Lq.obj oC ⟶ oB) (ep : Lp.obj oB ⟶ oA) (epq : Lpq.obj oC ⟶ oA)
+    (hε : cU.hom.app oC ≫ Lp.map eq ≫ ep = epq) :
+    (aq.unit.app oC ≫ Rq.map eq) ≫ Rq.map (ap.unit.app oB ≫ Rp.map ep) =
+      (apq.unit.app oC ≫ Rpq.map epq) ≫ cR.inv.app oA := by
+  have hU := unit_conjugateEquiv apq (aq.comp ap) cU.inv oC
+  rw [← hcR] at hU
+  simp only [Functor.comp_obj, Functor.comp_map, Adjunction.comp_unit_app] at hU
+  have hη := ap.unit.naturality eq
+  have hn := cR.inv.naturality epq
+  simp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at hη hn
+  rw [Category.assoc, Category.assoc, hn, reassoc_of% hU, ← hε]
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app_assoc]
+  congr 2
+  rw [Functor.map_comp, ← reassoc_of% hη]
+
+/-- Bookkeeping for the proper pushforward of the trace class (blueprint
+`thm-trf-trace-proper-compatibility`, Step 4): two chains of points through a square agree. -/
+lemma comp_eq_comp_of_points {C : Type*} [Category C]
+    {P₀ P₁ P₂ P₃ P₄ P₅ Q₁ Q₂ Q₃ Q₄ Q₅ R₁ R₂ S₁ S₂ N : C}
+    (a₁ : P₀ ⟶ P₁) (a₂ : P₁ ⟶ P₂) (a₃ : P₂ ⟶ P₃) (a₄ : P₃ ⟶ P₄) (t : P₄ ⟶ P₅)
+    (b₁ : P₀ ⟶ Q₁) (b₂ : Q₁ ⟶ Q₂) (b₃ : Q₂ ⟶ Q₃) (b₄ : Q₃ ⟶ Q₄) (t' : Q₄ ⟶ Q₅)
+    (e₁ : Q₅ ⟶ R₁) (e₂ : R₁ ⟶ R₂) (e₃ : R₂ ⟶ P₅) (f₁ : Q₄ ⟶ S₁) (f₂ : S₁ ⟶ S₂) (f₃ : S₂ ⟶ P₄)
+    (z : P₀ ⟶ S₁) (w : P₀ ⟶ S₂) (r : P₅ ⟶ N)
+    (hnat : t' ≫ e₁ ≫ e₂ ≫ e₃ = f₁ ≫ f₂ ≫ f₃ ≫ t) (hpg : b₁ ≫ b₂ ≫ b₃ ≫ b₄ ≫ f₁ = z)
+    (htr : z ≫ f₂ = w) (hhb : a₁ ≫ a₂ ≫ a₃ ≫ a₄ = w ≫ f₃) :
+    a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ t ≫ r = b₁ ≫ b₂ ≫ b₃ ≫ b₄ ≫ t' ≫ e₁ ≫ e₂ ≫ e₃ ≫ r := by
+  rw [reassoc_of% hnat]
+  simp only [← Category.assoc] at hpg hhb ⊢
+  rw [hpg, hhb, ← htr]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -82,6 +119,37 @@ attribute [local instance] boundedConstructibleBraiding
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+
+section Transport
+
+variable {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A.hom]
+  [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
+
+/-- `Rp_*` and `Rq_*` agree on morphisms for `p = q`, through the casts. -/
+lemma lowerStar_map_comp_eqToHom_of_eq {p q : A ⟶ B} (h : p = q)
+    {a b : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (x : a ⟶ b) :
+    (boundedConstructibleLowerStar _ ℓ p).map x ≫ eqToHom (congrArg (fun r : A ⟶ B ↦
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj b) h) =
+      eqToHom (congrArg (fun r : A ⟶ B ↦
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj a) h) ≫
+        (boundedConstructibleLowerStar _ ℓ q).map x := by
+  subst h
+  simp
+
+/-- The points `𝟙 ⟶ Rp_* 𝟙` of `p = q` agree through the cast. -/
+lemma unit_comp_map_εIso_inv_comp_eqToHom_of_eq {p q : A ⟶ B} (h : p = q) :
+    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar _ ℓ p).map
+          (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ p)).inv) ≫
+      eqToHom (congrArg (fun r : A ⟶ B ↦
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj (𝟙_ _)) h) =
+      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar _ ℓ q).map
+          (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ q)).inv := by
+  subst h
+  simp
+
+end Transport
 
 namespace Correspondence
 

@@ -74,7 +74,8 @@ lemma mate_comp_traceMap_pushforward :
         (boundedConstructibleLowerStar _ ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
     (c.mate ≫ c.traceMap Fc) Fc.supportIso.hom
     (by rw [Category.assoc]; exact (mate_comp_traceMap_comp_supportIso c Fc).symm) _
-    (lowerStarUpperShriekExchange ℓ P.g_comp_support) (by unfold lowerStarUpperShriekExchange; rfl)
+    (lowerStarUpperShriekExchange ℓ P.g_comp_support)
+    (by unfold lowerStarUpperShriekExchange; rfl)
     (P.lowerStar_map_supportIso_comp_exchange Fc Fb)
   have e1 := mate_comp_traceMap_comp_supportIso P.pushforward Fb
   rw [P.kernelClass_pushforward] at e1
@@ -83,6 +84,8 @@ lemma mate_comp_traceMap_pushforward :
   rw [← cancel_mono Fb.supportIso.hom]
   simpa only [Category.assoc] using e5
 
+set_option maxHeartbeats 3000000 in
+-- composite functors on bounded constructible complexes are unfolded
 /-- **Proper pushforward compatibility of the trace class** (blueprint
 `thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
 diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed loci `h`,
@@ -91,9 +94,65 @@ The special case `f = 𝟙` is blueprint `lem-trf-proper-pushforward-trace-class
 through the exchange of the trace maps (`lem-trf-trace-map-exchange`) and of the trace-class
 sources (`lem-trf-trace-source-exchange`). -/
 theorem traceClassPushforward_eq :
-    P.traceClassPushforward Fc Fb = P.pushforward.traceClass Fb :=
-  sorry
-
+    P.traceClassPushforward Fc Fb = P.pushforward.traceClass Fb := by
+  have hTc : c.mate ≫ c.traceMap Fc =
+      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ Fc.ι).homEquiv _ _
+        ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ Fc.ι)).inv ≫
+          c.traceClass Fc) := by
+    rw [traceClass, Iso.inv_hom_id_assoc, Equiv.apply_symm_apply]
+  have key : (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ Fb.ι).homEquiv _ _
+      ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ Fb.ι)).inv ≫
+        P.traceClassPushforward Fc Fb) = P.pushforward.mate ≫ P.pushforward.traceMap Fb := by
+    rw [P.mate_comp_traceMap_pushforward Fc Fb, hTc]
+    simp only [Adjunction.homEquiv_unit, traceClassPushforward, BorelMooreSection.pushforward,
+      lowerStarDualizingComplexTrace, Functor.map_comp, Category.assoc]
+    have hpg := Adjunction.unit_map_comp_unit_map
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ P.g)
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (Fc.ι ≫ P.g))
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι P.g)
+      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι P.g)
+      rfl _ _ _ (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ Fc.ι P.g)
+    have hhb := Adjunction.unit_map_comp_unit_map
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (P.fixMap Fc Fb))
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Fb.ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (P.fixMap Fc Fb ≫ Fb.ι))
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+        (P.fixMap Fc Fb) Fb.ι)
+      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+        (P.fixMap Fc Fb) Fb.ι)
+      rfl _ _ _
+      (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ (P.fixMap Fc Fb) Fb.ι)
+    have htr := unit_comp_map_εIso_inv_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
+    have n1 := (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      Fc.ι P.g).hom.naturality (c.traceClass Fc)
+    have n2 := lowerStar_map_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
+      (c.traceClass Fc)
+    have n3 := (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      (P.fixMap Fc Fb) Fb.ι).inv.naturality (c.traceClass Fc)
+    simp only [Functor.comp_map] at n1 n3
+    refine comp_eq_comp_of_points _ _ _ _ _ _ _ _ _ _ _ _ _
+      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+        Fc.ι P.g).hom.app (𝟙_ _))
+      (eqToHom (congrArg (fun r : Fc.F ⟶ P.D ↦
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj (𝟙_ _))
+          (P.fixMap_ι Fc Fb).symm))
+      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (P.fixMap Fc Fb)
+        Fb.ι).inv.app (𝟙_ _))
+      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          (Fc.ι ≫ P.g)).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (Fc.ι ≫ P.g)).map
+          (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (Fc.ι ≫ P.g))).inv) _ _
+      ?_ ?_ htr ?_
+    · rw [reassoc_of% n1, reassoc_of% n2, n3]
+    · simp only [Functor.map_comp, Category.assoc] at hpg
+      rw [reassoc_of% hpg, Iso.inv_hom_id_app, Category.comp_id]
+    · simpa only [Functor.map_comp, Category.assoc] using hhb
+  rw [traceClass, ← key, Equiv.symm_apply_apply, Iso.hom_inv_id_assoc]
 
 end Correspondence.ProperPushforwardDiagram
 
