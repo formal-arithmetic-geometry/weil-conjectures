@@ -7,8 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
-public import WeilConjectures.PoincareDuality.Abstract
 
 /-!
 
@@ -60,6 +60,22 @@ section ProjectionMorphisms
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
+/-- The projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` of an adjunction `F ⊣ G` with `F` oplax
+monoidal: the adjoint of `F (G A ⊗ B) ⟶ F G A ⊗ F B ⟶ A ⊗ F B`. -/
+noncomputable def projectionMorphism (A : C) (B : D) : G.obj A ⊗ B ⟶ G.obj (A ⊗ F.obj B) :=
+  adj.homEquiv _ _ (δ F (G.obj A) B ≫ adj.counit.app A ▷ F.obj B)
+
+/-- The projection morphism is natural in its second variable. -/
+@[reassoc]
+lemma projectionMorphism_natural_right (A : C) {B B' : D} (h : B ⟶ B') :
+    G.obj A ◁ h ≫ adj.projectionMorphism A B' =
+      adj.projectionMorphism A B ≫ G.map (A ◁ F.map h) := by
+  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
+    ← homEquiv_naturality_right]
+  congr 1
+  rw [← δ_natural_right_assoc, whisker_exchange, Category.assoc]
+  rfl
+
 
 /-- The *left projection morphism* `B ⊗ G A ⟶ G (F B ⊗ A)` of an adjunction `F ⊣ G` with `F`
 oplax monoidal: the adjoint of `F (B ⊗ G A) ⟶ F B ⊗ F G A ⟶ F B ⊗ A`. -/
