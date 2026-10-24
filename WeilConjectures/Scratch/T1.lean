@@ -22,12 +22,26 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-  [IsProper f.left] [IsProper f'.left]
+  [IsOpenImmersion f.left] [IsOpenImmersion f'.left]
+
+/-- test -/
+noncomputable abbrev hU : (Compactification.ofIsOpenImmersion f'.left).overObj ⟶
+      (Compactification.ofIsOpenImmersion f.left).overObj :=
+  Over.homMk g.left (by
+    change g.left ≫ 𝟙 Y.left ≫ Y.hom = 𝟙 Y'.left ≫ Y'.hom
+    simp [Over.w g])
 
 set_option profiler true in
-example (sq : IsPullback g' f' f g) :
-    boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
-      (isPullback_ofIsProper_overG sq).toCommSq =
-    boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq := rfl
+example (sq : IsPullback g' f' f g)
+    (hi : CommSq g' (Compactification.ofIsOpenImmersion f'.left).overI
+      (Compactification.ofIsOpenImmersion f.left).overI (hU (f := f) (f' := f') (g := g))) :
+    Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsOpenImmersion f.left).overI)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsOpenImmersion f'.left).overI)
+        (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ hi.flip) =
+      Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f')
+        (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq.flip) := rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

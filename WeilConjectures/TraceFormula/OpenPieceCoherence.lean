@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 public import WeilConjectures.TraceFormula.CompactCohomology
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
 
 /-!
 
@@ -85,7 +86,9 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion
           sq.toCommSq).app K =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
         ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K) :=
-  sorry
+  by
+  have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen ℓ sq) K
+  simpa using h
 
 end BaseChange
 section OpenImmersion

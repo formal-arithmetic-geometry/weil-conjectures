@@ -84,6 +84,23 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChange :
     (SepFinType.homMk h) (SepFinType.homMk g) (SepFinType.homMk_comp_homMk hi.w)
     (SepFinType.homMk_comp_homMk hp.w)).natTrans
 
+/-- The compact-support exchange map of a pair of compactifications is the base-change morphism
+of the proper squares after the extension by zero, followed by the inverse of the
+extension-by-zero exchange morphism of the open squares. -/
+lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_eq :
+    boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c' h hi hp =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.overI)
+          (boundedConstructibleBaseChange Λ ℓ hp.toCommSq) ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ hi).hom
+          (boundedConstructibleLowerStar Λ ℓ c'.overG) ≫
+        (Functor.associator _ _ _).hom := by
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChange,
+    ExchangeFormalism.shriekBaseChange, boundedConstructibleBaseChange_eq_pfBaseChange,
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_hom_eq]
+  rfl
+
 /-- The compact-support base-change morphism for the compactification `c` and its base change is
 the compact-support exchange map of the pair. -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq_baseChange

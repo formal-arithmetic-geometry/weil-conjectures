@@ -267,4 +267,31 @@ lemma exchange_pfBaseChange_cube (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b
 
 end Cube
 
+section IdVert
+
+/-- The base change map of the pushforwards of the square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity, up
+to `(𝟙)_* ≅ 𝟭`. -/
+lemma pfBaseChange_id_vert_app {X Y : 𝒞} (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) (M : F.obj Y) :
+    (F.pfBaseChange g (𝟙 X) (𝟙 Y) g w).natTrans.app M ≫
+        (F.pfId X).hom.app ((F.pb g).obj M) =
+      (F.pb g).map ((F.pfId Y).hom.app M) := by
+  have hId : ∀ {Z : 𝒞} (N : F.obj Z), (F.pfId Z).hom.app N =
+      (F.pbId Z).inv.app ((F.pf (𝟙 Z)).obj N) ≫ (F.adj (𝟙 Z)).counit.app N := by
+    intro Z N
+    simp [pfId_hom]
+  have hc := F.pfBaseChange_counit g (𝟙 X) (𝟙 Y) g w M
+  have hs : (F.sqIso g (𝟙 X) (𝟙 Y) g w).inv.app ((F.pf (𝟙 Y)).obj M) =
+      (F.pbId X).hom.app ((F.pb g).obj ((F.pf (𝟙 Y)).obj M)) ≫
+        (F.pb g).map ((F.pbId Y).inv.app ((F.pf (𝟙 Y)).obj M)) := by
+    rw [← cancel_epi ((F.sqIso g (𝟙 X) (𝟙 Y) g w).hom.app ((F.pf (𝟙 Y)).obj M)),
+      Iso.hom_inv_id_app, F.sqIso_id_vert_hom]
+    simp [← Functor.map_comp]
+  rw [hId, hId]
+  have hn := (F.pbId X).inv.naturality ((F.pfBaseChange g (𝟙 X) (𝟙 Y) g w).natTrans.app M)
+  simp only [Functor.id_map] at hn
+  rw [reassoc_of% hn, hc, hs]
+  simp [← Functor.map_comp]
+
+end IdVert
+
 end CategoryTheory.ExchangeFormalism
