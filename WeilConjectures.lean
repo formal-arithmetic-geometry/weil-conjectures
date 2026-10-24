@@ -12645,6 +12645,7 @@ public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointTrace
 public import WeilConjectures.TraceFormula.Product
+public import WeilConjectures.TraceFormula.ProjectiveLineFibre
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperCurve
 public import WeilConjectures.TraceFormula.ProperKunneth
