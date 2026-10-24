@@ -144,3 +144,74 @@ theorem Endofunctor.IsoAlgebra.nonempty_overPowSucc_overPushforward_iso_of_eq
   exact Endofunctor.IsoAlgebra.nonempty_overPowSucc_overPushforward_iso hbc eX eY hf n A
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+/-! ### Transports of algebras along commuting squares -/
+
+section Square
+
+variable {EX EY DX DY : Type*} [Category EX] [Category EY] [Category DX] [Category DY]
+  {LX : EX ⥤ EX} {LY : EY ⥤ EY} {PX : DX ⥤ DX} {PY : DY ⥤ DY} {R : EX ⥤ EY} {r : DX ⥤ DY}
+  {HX : EX ⥤ DX} {HY : EY ⥤ DY}
+
+/-- **Transport of algebras along a commuting square**: let `R`, `r` be transports along
+`BC : R ⋙ LY ≅ LX ⋙ R` and `bc : r ⋙ PY ≅ PX ⋙ r`, and `HX`, `HY` transports along
+`θX : HX ⋙ PX ≅ LX ⋙ HX` and `θY : HY ⋙ PY ≅ LY ⋙ HY`. An isomorphism `α : R ⋙ HY ≅ HX ⋙ r`
+compatible with these comparisons (`h`) gives isomorphisms `HY (R K) ≅ r (HX K)` of algebras. -/
+theorem Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_iso_of_comm (BC : R ⋙ LY ≅ LX ⋙ R)
+    (bc : r ⋙ PY ≅ PX ⋙ r) (θX : HX ⋙ PX ≅ LX ⋙ HX) (θY : HY ⋙ PY ≅ LY ⋙ HY)
+    (α : R ⋙ HY ≅ HX ⋙ r)
+    (h : ∀ K, θY.hom.app (R.obj K) ≫ HY.map (BC.hom.app K) ≫ α.hom.app (LX.obj K) =
+      PY.map (α.hom.app K) ≫ bc.hom.app (HX.obj K) ≫ r.map (θX.hom.app K))
+    (K : Endofunctor.IsoAlgebra LX) :
+    Nonempty ((Endofunctor.IsoAlgebra.mapOfNatIso θY).obj
+        ((Endofunctor.IsoAlgebra.mapOfNatIso BC).obj K) ≅
+      (Endofunctor.IsoAlgebra.mapOfNatIso bc).obj
+        ((Endofunctor.IsoAlgebra.mapOfNatIso θX).obj K)) := by
+  refine ⟨Endofunctor.IsoAlgebra.isoMk (α.app K.carrier) ?_⟩
+  rw [← Endofunctor.IsoAlgebra.str_hom, ← Endofunctor.IsoAlgebra.str_hom,
+    Endofunctor.IsoAlgebra.mapOfNatIso_obj_str, Endofunctor.IsoAlgebra.mapOfNatIso_obj_str]
+  simp only [Endofunctor.IsoAlgebra.mapOfNatIso_obj_carrier,
+    Endofunctor.IsoAlgebra.mapOfNatIso_obj_str, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
+    Functor.map_comp, Category.assoc]
+  have hn := α.hom.naturality K.str.hom
+  simp only [Functor.comp_map] at hn
+  rw [hn, ← reassoc_of% (h K.carrier)]
+
+/-- `Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_iso_of_comm` for categories and functors given
+through equations (compare `Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso`). -/
+theorem Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_iso_of_comm_of_eq (BC : R ⋙ LY ≅ LX ⋙ R)
+    (bc : r ⋙ PY ≅ PX ⋙ r) (θX : HX ⋙ PX ≅ LX ⋙ HX) (θY : HY ⋙ PY ≅ LY ⋙ HY)
+    (α : R ⋙ HY ≅ HX ⋙ r)
+    (h : ∀ K, θY.hom.app (R.obj K) ≫ HY.map (BC.hom.app K) ≫ α.hom.app (LX.obj K) =
+      PY.map (α.hom.app K) ≫ bc.hom.app (HX.obj K) ≫ r.map (θX.hom.app K))
+    (𝒦X 𝒦Y 𝒮X 𝒮Y : Type _) {i𝒦X : Category 𝒦X} {i𝒦Y : Category 𝒦Y} {i𝒮X : Category 𝒮X}
+    {i𝒮Y : Category 𝒮Y} (A₁ : 𝒦X ⥤ 𝒮X) (B₁ : 𝒦X ⥤ 𝒦Y) (A₂ : 𝒦Y ⥤ 𝒮Y) (B₂ : 𝒮X ⥤ 𝒮Y)
+    (K : 𝒦X)
+    (h𝒦X : (⟨𝒦X, i𝒦X⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra LX, inferInstance⟩)
+    (h𝒦Y : (⟨𝒦Y, i𝒦Y⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra LY, inferInstance⟩)
+    (h𝒮X : (⟨𝒮X, i𝒮X⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra PX, inferInstance⟩)
+    (h𝒮Y : (⟨𝒮Y, i𝒮Y⟩ : Σ A : Type _, Category A) =
+      ⟨Endofunctor.IsoAlgebra PY, inferInstance⟩)
+    (hA₁ : HEq A₁ (Endofunctor.IsoAlgebra.mapOfNatIso θX))
+    (hB₁ : HEq B₁ (Endofunctor.IsoAlgebra.mapOfNatIso BC))
+    (hA₂ : HEq A₂ (Endofunctor.IsoAlgebra.mapOfNatIso θY))
+    (hB₂ : HEq B₂ (Endofunctor.IsoAlgebra.mapOfNatIso bc)) :
+    Nonempty (A₂.obj (B₁.obj K) ≅ B₂.obj (A₁.obj K)) := by
+  cases h𝒦X
+  cases h𝒦Y
+  cases h𝒮X
+  cases h𝒮Y
+  cases hA₁
+  cases hB₁
+  cases hA₂
+  cases hB₂
+  exact Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_iso_of_comm BC bc θX θY α h K
+
+end Square
+
+end CategoryTheory
