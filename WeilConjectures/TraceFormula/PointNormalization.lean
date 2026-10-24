@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
+public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
 public import WeilConjectures.TraceFormula.SupportedClass
 
@@ -73,6 +74,13 @@ lemma diagIso_naturality_aux {Cs CP : Type*} [Category Cs] [MonoidalCategory Cs]
 end CategoryTheory.Verdier
 
 namespace CategoryTheory.Verdier
+
+/-- Commuting a natural isomorphism `ψ : R ≅ 𝟭` past `R.map x`. -/
+lemma comp_map_comp_iso_hom_app {C : Type*} [Category C] {R : C ⥤ C} (ψ : R ≅ 𝟭 C) {V W X Y : C}
+    (a₁ : V ⟶ W) (a₂ : W ⟶ R.obj X) (x : X ⟶ Y) :
+    a₁ ≫ a₂ ≫ R.map x ≫ ψ.hom.app Y = (a₁ ≫ a₂ ≫ ψ.hom.app X) ≫ x := by
+  rw [ψ.hom.naturality x, Functor.id_map]
+  simp only [Category.assoc]
 
 /-- A naturality square for a composite of three morphisms. -/
 lemma comp_comp_naturality {𝒞 : Type*} [Category 𝒞] {A A' B B' C C' D D' : 𝒞} {x : A ⟶ A'}
@@ -188,12 +196,57 @@ theorem integral_traceClass_ofEnd_eq (v : K ⟶ K) :
     (dualizingComplexComp ℓ (fixedLocusOfEnd v).d).hom (dualizingComplexPointIso ℓ k).hom
   convert h using 2 <;> rfl
 
+variable (ℓ) in
+/-- The identification `LΔ^* Lp^* M ≅ M` along `Δ ≫ p = 𝟙` for a projection `p` of `s ⨯ s`. -/
+noncomputable def diagUpperStarProjIso (p : point k ⨯ point k ⟶ point k) (hp : diag (point k) ≫ p = 𝟙 _)
+    (M : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
+        ((boundedConstructibleUpperStar _ ℓ p).obj M) ≅ M :=
+  ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app M).symm ≪≫
+    eqToIso (by rw [hp]) ≪≫ (boundedConstructibleUpperStarId _ ℓ (point k)).app M
+
+/-- The point `τ : ℚ̄_ℓ ⟶ LΔ^* RΔ_! ℚ̄_ℓ` through which the coevaluation over the base point
+factors. -/
+noncomputable def pointTau (v : K ⟶ K) :
+    𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
+      ((boundedConstructibleLowerShriek _ ℓ (ofEnd K v).support).obj (𝟙_ _)) :=
+  (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom ≫
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
+    (fixedLocusOfEndUpperShriekIso v).hom.app _ ≫
+    (fixedLocusOfEnd v).lowerShriekBaseChangeIso.inv.app (𝟙_ _)
+
+lemma pointCoev_eq (v : K ⟶ K) :
+    pointCoev v = pointTau v ≫ (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+        (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm ≫
+          inv (kunnethVerdierMap ℓ K K)) ≫
+      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
+      ((diagUpperStarProjIso ℓ prod.fst (by simp) K).hom ⊗ₘ
+        (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom) := by
+  unfold pointCoev
+  refine (Verdier.comp_map_comp_iso_hom_app (fixedLocusOfEndUpperShriekIso v) _ _ _).trans ?_
+  simp only [pointTau, Category.assoc]
+  congr 4
+
 /-- **The zigzag identity of the coevaluation and the pairing over the base point**: `σ` and `P`
 satisfy the zigzag identity of a duality. -/
 theorem pointCoev_zigzag (v : K ⟶ K) :
     (ρ_ K).inv ≫ K ◁ pointCoev v ≫ (α_ K K _).inv ≫ (β_ K K).hom ▷ _ ≫ (α_ K K _).hom ≫
-      K ◁ pointPairing v ≫ (ρ_ K).hom = 𝟙 K :=
-  sorry
+      K ◁ pointPairing v ≫ (ρ_ K).hom = 𝟙 K := by
+  rw [pointCoev_eq, pointPairing]
+  exact zigzag_of_transport (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+    (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm ≫
+      inv (kunnethVerdierMap ℓ K K))
+    (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ prod.snd) K _)
+    ((boundedConstructibleUpperStar _ ℓ prod.snd).map
+      ((ihom.ev K).app (dualizingComplex' ℓ (point k))))
+    (exceptionalKunnethMap ℓ K)
+    (uncurry (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm))
+    sorry
+    (diagUpperStarProjIso ℓ prod.snd (by simp) K)
+    (diagUpperStarProjIso ℓ prod.fst (by simp) K).hom
+    (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
+    (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
+    _ _ sorry (pointTau v) sorry sorry sorry sorry sorry sorry
 
 /-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
 `sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
