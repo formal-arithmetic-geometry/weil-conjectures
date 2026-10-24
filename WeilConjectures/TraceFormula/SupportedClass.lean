@@ -47,21 +47,6 @@ variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C] [Mono
   (pf : curriedTensorInsertFunctor₁ P ⟶
     curriedTensorPost P ⋙ (Functor.whiskeringLeft D C D).obj F)
 
-omit [BraidedCategory C] in
-lemma curry'_comp_pre_app {X Y Z : C} (e : X ⟶ Y) (g : Y ⟶ Z) :
-    curry' g ≫ (pre e).app Z = curry' (e ≫ g) := by
-  rw [curry', curry', curry_pre_app]
-  congr 1
-  rw [← Category.assoc, rightUnitor_naturality, Category.assoc]
-
-omit [BraidedCategory C] in
-lemma curry'_comp_ihomIsoOfIso_hom {A A' B B' : C} (eA : A ≅ A') (eB : B ≅ B') (g : A ⟶ B) :
-    curry' g ≫ (ihomIsoOfIso eA eB).hom = curry' (eA.inv ≫ g ≫ eB.hom) := by
-  simp only [ihomIsoOfIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.op_hom,
-    Iso.symm_hom]
-  rw [← Category.assoc, curry'_ihom_map]
-  exact curry'_comp_pre_app _ _
-
 omit [MonoidalClosed C] in
 /-- The uncurried form of a class `[y]`: the projection morphism, the unitor and the exceptional
 adjoint of `y`. -/
@@ -73,27 +58,15 @@ lemma uncurry_correspondenceClassEquiv_symm (M N : D) [IsIso ((pf.app (𝟙_ C))
     correspondenceClassEquiv_apply, Equiv.symm_apply_apply]
   rw [← P.map_comp_assoc, Iso.hom_inv_id, P.map_id, Category.id_comp, IsIso.hom_inv_id_assoc]
 
-/-- Abstract form of the description of the supported class: the exceptional adjoint of
-`curry' u` read through `RHom(A, B) ≅ RHom(F M, S N) ≅ S RHom(M, N) ≅ S E` is the class of `u`
-followed by `E ≅ RHom(M, N)`. -/
-lemma homEquiv_symm_curry'_comp_eq (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)] {A B : C}
-    (eA : A ≅ F.obj M) (eB : B ≅ S.obj N) {E : D} (k : E ≅ (ihom M).obj N) (u : A ⟶ B) :
-    (adj'.homEquiv _ _).symm (curry' u ≫ (ihomIsoOfIso eA eB).hom ≫
-        exceptionalHomMap adj' pf M N ≫ S.map k.inv) =
-      (correspondenceClassEquiv adj' pf M N).symm (eA.inv ≫ u ≫ eB.hom) ≫ k.inv := by
-  rw [← Category.assoc, ← Category.assoc, curry'_comp_ihomIsoOfIso_hom,
-    curry'_comp_exceptionalHomMap, Adjunction.homEquiv_naturality_right_symm,
-    Equiv.symm_apply_apply]
-
 /-- An algebraic step of `ProEtale.CondensedRing.Correspondence.class_ofEnd`. -/
-lemma comp_comp_eq_of_naturality {𝒞 : Type*} [Category 𝒞] {P Q K R T : 𝒞} (e : P ⟶ Q)
+private lemma comp_comp_eq_of_naturality {𝒞 : Type*} [Category 𝒞] {P Q K R T : 𝒞} (e : P ⟶ Q)
     (a : Q ⟶ K) (v : K ⟶ K) (b : K ⟶ R) {Rv : R ⟶ R} {e' : R ⟶ T} {Tv : T ⟶ T}
     (hb : v ≫ b = b ≫ Rv) (he : Rv ≫ e' = e' ≫ Tv) :
     e ≫ (a ≫ v ≫ b) ≫ e' = (e ≫ (a ≫ b) ≫ e') ≫ Tv := by
   simp only [Category.assoc, reassoc_of% hb, he]
 
 /-- An algebraic step of `ProEtale.CondensedRing.Correspondence.supportedClass_ofEnd`. -/
-lemma comp_eq_comp_of_naturality {𝒞 : Type*} [Category 𝒞] {P Q Q' E E' : 𝒞} {s : P ⟶ E}
+private lemma comp_eq_comp_of_naturality {𝒞 : Type*} [Category 𝒞] {P Q Q' E E' : 𝒞} {s : P ⟶ E}
     {s₁ : P ⟶ E'} {c' : P ⟶ Q'} {c₁ : P ⟶ Q} {m : Q ⟶ Q'} {i : Q ⟶ E'} {i' : Q' ⟶ E}
     {w : E' ⟶ E}
     (h₁ : s = c' ≫ i') (h₂ : c' = c₁ ≫ m) (h₃ : m ≫ i' = i ≫ w) (h₄ : s₁ = c₁ ≫ i) :
@@ -162,16 +135,8 @@ noncomputable def «class» :
 `lem-trf-trace-source-exchange`, Step 0): `ũ = κ_{K,K}⁻¹ ∘ [u]`. -/
 theorem supportedClass_eq_class_comp_inv :
     c.supportedClass = c.class ≫ inv (kunnethVerdierMap ℓ K K) := by
-  have h := Verdier.homEquiv_symm_curry'_comp_eq
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleExceptionalProjection _ ℓ c.support) _ _
-    (eqToIso (by rw [support_snd]) ≪≫
-      (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).app K)
-    (eqToIso (by rw [support_fst]) ≪≫
-      (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c.support prod.fst).app K)
-    (asIso (kunnethVerdierMap ℓ K K)) c.u
-  refine h.trans ?_
-  simp only [«class», correspondenceClassEquiv, Equiv.coe_fn_symm_mk, asIso_inv, Iso.trans_inv,
+  rw [supportedClass_eq]
+  simp only [«class», correspondenceClassEquiv, Equiv.coe_fn_symm_mk, Iso.trans_inv,
     Iso.trans_hom, Iso.app_inv, Iso.app_hom, eqToIso.inv, eqToIso.hom, Category.assoc]
 
 end Correspondence

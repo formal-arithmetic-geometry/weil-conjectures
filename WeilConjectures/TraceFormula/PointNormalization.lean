@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
 public import WeilConjectures.TraceFormula.PointNormalizationTau
@@ -30,7 +30,7 @@ correspondence (`supportedClass_ofEnd`), the integral `∫_s Tr(v)` is
 `P : K ⊗ D_s K ⟶ ℚ̄_ℓ` built from the evaluation. The pair `(σ, P)` satisfies the zigzag identity
 of a duality, and the trace through such a pair is the categorical trace
 (`MonoidalCategory.trace_eq_of_zigzag`), the Koszul braiding being symmetric
-(`boundedConstructibleBraiding_hom_braiding_hom`).
+(`boundedConstructible_braiding_hom_braiding_hom`).
 
 -/
 
@@ -103,7 +103,7 @@ endomorphism `v` of a perfect complex integrates to the categorical trace of `v`
 theorem integral_traceClass_ofEnd [HasRightDual K] (v : K ⟶ K) :
     ((ofEnd K v).traceClass (fixedLocusOfEnd v)).integral = trace v :=
   (integral_traceClass_ofEnd_eq v).trans (trace_eq_of_zigzag
-    (boundedConstructibleBraiding_hom_braiding_hom _ _) _ _ (pointCoev_zigzag v) v)
+    (boundedConstructible_braiding_hom_braiding_hom _) _ _ (pointCoev_zigzag v) v)
 
 end Correspondence
 
