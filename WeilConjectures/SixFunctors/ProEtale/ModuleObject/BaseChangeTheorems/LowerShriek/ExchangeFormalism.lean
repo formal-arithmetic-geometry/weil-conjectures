@@ -306,6 +306,42 @@ lemma boundedConstructibleLowerShriekRefinementIso_hom_eq (sq : IsPullback (𝟙
     Functor.comp_obj, Functor.comp_map]
   rfl
 
+/-- The two comparison isomorphisms along a refinement agree. -/
+lemma boundedConstructibleLowerShriekRefinementIso_eq' (sq : IsPullback (𝟙 X) i i₁ h)
+    {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)]
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)] :
+    boundedConstructibleLowerShriekRefinementIso Λ ℓ sq wp =
+      boundedConstructibleLowerShriekRefinementIso' Λ ℓ sq wp :=
+  Iso.ext ((boundedConstructibleLowerShriekRefinementIso_hom_eq Λ ℓ sq wp).trans
+    (boundedConstructibleLowerShriekRefinementIso'_hom_eq Λ ℓ sq wp).symm)
+
 end Refinement
+
+section Independence
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
+
+omit [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ] in
+/-- The two comparison isomorphisms between the lower shrieks attached to two compactifications
+agree. -/
+lemma boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq'
+    (c₁ c₂ : Compactification f.left) :
+    boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₁ c₂ =
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ := by
+  have := (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isProper
+  have := (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isProper
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+  rw [boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq_refinementIso,
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refinementIso',
+    boundedConstructibleLowerShriekRefinementIso_eq',
+    boundedConstructibleLowerShriekRefinementIso_eq']
+
+end Independence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
