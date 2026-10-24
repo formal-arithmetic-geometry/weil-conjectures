@@ -42,16 +42,16 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 section Diag
 open Lean Meta Elab Tactic
 
-meta partial def findDiffAux (a b : Expr) (acc : IO.Ref (Array (Expr × Expr))) (fuel : Nat := 30) :
-    MetaM Unit := do
+meta partial def findDiffAux (a b : Expr) (acc : IO.Ref (Array (Expr × Expr))) (fuel : Nat := 30)
+    (path : List String := []) : MetaM Unit := do
   if a == b then return
   if (← acc.get).size ≥ 8 then return
   if (← isProof a) && (← isProof b) then return
   let unfoldStep : MetaM Unit := do
     let a' ← whnfR a
     let b' ← whnfR b
-    if a' != a || b' != b then return ← findDiffAux a' b' acc fuel
-    if fuel = 0 then acc.modify (·.push (a, b)); return
+    if a' != a || b' != b then return ← findDiffAux a' b' acc fuel path
+    if fuel = 0 then acc.modify (·.push (a, b)); logInfo m!"PATH {path}"; return
     let ha := match a.getAppFn with | .const n _ => some n | _ => none
     let hb := match b.getAppFn with | .const n _ => some n | _ => none
     -- unfold the side whose head is a definition with the larger height
@@ -65,17 +65,19 @@ meta partial def findDiffAux (a b : Expr) (acc : IO.Ref (Array (Expr × Expr))) 
     if ua then
       if let some a' ← unfoldDefinition? a then
         logInfo m!"unfold KEY head {ha}"
-        return ← findDiffAux a' b acc (fuel - 1)
+        return ← findDiffAux a' b acc (fuel - 1) path
     if ub || !ua then
       if let some b' ← unfoldDefinition? b then
         logInfo m!"unfold GOAL head {hb}"
-        return ← findDiffAux a b' acc (fuel - 1)
+        return ← findDiffAux a b' acc (fuel - 1) path
+    logInfo m!"PATH {path}"
     acc.modify (·.push (a, b))
   match a, b with
   | .app f₁ x₁, .app f₂ x₂ =>
       if f₁.getAppNumArgs == f₂.getAppNumArgs && f₁.getAppFn == f₂.getAppFn then
-        findDiffAux f₁ f₂ acc fuel
-        findDiffAux x₁ x₂ acc fuel
+        let hd := toString f₁.getAppFn.constName?
+        findDiffAux f₁ f₂ acc fuel path
+        findDiffAux x₁ x₂ acc fuel ((hd ++ "#" ++ toString f₁.getAppNumArgs) :: path)
       else unfoldStep
   | .lam _ t₁ b₁ _, .lam _ t₂ b₂ _ =>
       findDiffAux t₁ t₂ acc fuel
@@ -107,6 +109,24 @@ elab "find_diff_terms " a:term " , " b:term : tactic => withMainContext do
   findDiffAux a b acc
   for (a, b) in ← acc.get do
     logInfo m!"A: {a}\n=====\nB: {b}"
+
+elab "diff_rhs " h:ident " , " t:term : tactic => withMainContext do
+  let d ← getLocalDeclFromUserName h.getId
+  let ty ← instantiateMVars d.type
+  let y := ty.appArg!
+  let b ← instantiateMVars (← Elab.Term.elabTerm t none)
+  let acc ← IO.mkRef #[]
+  findDiffAux y b acc
+  for (a, b) in ← acc.get do
+    logInfo m!"A: {a}\n=====\nB: {b}"
+
+elab "diff_goal_inst " h:ident : tactic => withMainContext do
+  let d ← getLocalDeclFromUserName h.getId
+  let ty ← instantiateMVars d.type
+  let g ← instantiateMVars (← getMainTarget)
+  let g := g.appArg!
+  logInfo m!"I2INST: {ty.appFn!.appFn!.appArg!}"
+  logInfo m!"GOALINST: {g.appFn!.appFn!.appArg!}"
 
 end Diag
 
@@ -187,7 +207,8 @@ end CategoryTheory.Functor
 
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
-variable {𝒟X 𝒟Y 𝒜X 𝒜Y : Type*} [Category 𝒟X] [Category 𝒟Y] [Category 𝒜X] [Category 𝒜Y]
+variable {𝒟X 𝒟Y 𝒜X 𝒜Y : Type*} {_ : Category 𝒟X} {_ : Category 𝒟Y} {_ : Category 𝒜X}
+  {_ : Category 𝒜Y}
   {LX : 𝒟X ⥤ 𝒟X} {LY : 𝒟Y ⥤ 𝒟Y} {PX : 𝒜X ⥤ 𝒜X} {PY : 𝒜Y ⥤ 𝒜Y} {R : 𝒟X ⥤ 𝒟Y}
   {S : 𝒜X ⥤ 𝒜Y} {HX : 𝒟X ⥤ 𝒜X} {HY : 𝒟Y ⥤ 𝒜Y}
 
@@ -212,6 +233,26 @@ theorem nonempty_mapOfNatIso_obj_mapOfNatIso_obj_iso (b : R ⋙ LY ≅ LX ⋙ R)
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% (h K.carrier), nat]
 
+
+/-- The isomorphism of `nonempty_mapOfNatIso_obj_mapOfNatIso_obj_iso`, as a natural isomorphism
+of functors `IsoAlgebra LX ⥤ IsoAlgebra PY`. -/
+theorem nonempty_mapOfNatIso_comp_mapOfNatIso_iso (b : R ⋙ LY ≅ LX ⋙ R)
+    (bc : S ⋙ PY ≅ PX ⋙ S) (θX : HX ⋙ PX ≅ LX ⋙ HX) (θY : HY ⋙ PY ≅ LY ⋙ HY)
+    (ψ : R ⋙ HY ≅ HX ⋙ S)
+    (h : ∀ K, PY.map (ψ.hom.app K) ≫ bc.hom.app (HX.obj K) ≫ S.map (θX.hom.app K) =
+      θY.hom.app (R.obj K) ≫ HY.map (b.hom.app K) ≫ ψ.hom.app (LX.obj K)) :
+    Nonempty (mapOfNatIso b ⋙ mapOfNatIso θY ≅ mapOfNatIso θX ⋙ mapOfNatIso bc) := by
+  refine ⟨NatIso.ofComponents (fun K ↦ isoMk (ψ.app K.carrier) ?_) fun φ ↦ ?_⟩
+  · change PY.map (ψ.hom.app K.carrier) ≫
+        (bc.hom.app (HX.obj K.carrier) ≫ S.map (θX.hom.app K.carrier ≫ HX.map K.str.hom)) =
+      (θY.hom.app (R.obj K.carrier) ≫ HY.map (b.hom.app K.carrier ≫ R.map K.str.hom)) ≫
+        ψ.hom.app K.carrier
+    have nat := ψ.hom.naturality K.str.hom
+    simp only [Functor.comp_map] at nat
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% (h K.carrier), nat]
+  · ext
+    exact ψ.hom.naturality φ.hom.f
 end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace CategoryTheory.Adjunction
@@ -277,7 +318,8 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 section Pushforward
 
-variable {DX DY 𝒜X 𝒜Y : Type*} [Category DX] [Category DY] [Category 𝒜X] [Category 𝒜Y]
+variable {DX DY 𝒜X 𝒜Y : Type*} {_ : Category DX} {_ : Category DY} {_ : Category 𝒜X}
+  {_ : Category 𝒜Y}
   {P : ObjectProperty DX} {Q : ObjectProperty DY}
 
 /-- The commutation `(ι ⋙ H) ⋙ v ≅ L ⋙ (ι ⋙ H)` of the restriction of a functor `H` to a full
@@ -330,20 +372,19 @@ theorem nonempty_mapOfNatIso_liftComparison_obj_iso
     (eadjB : adjB = adjD.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι cLf.symm cRf.symm)
     (θB : LuB ⋙ LfB ≅ LfB ⋙ LvB) (hθB : ∀ K, HEq (θB.hom.app K).hom (θD.hom.app K.obj))
     (bB : RfB ⋙ LuB ⟶ LvB ⋙ RfB) [IsIso bB] (ebB : bB = Adjunction.exchangeRight adjB adjB θB)
-    (exU : g ⋙ u ≅ v ⋙ g) (eexU : exU.hom = Adjunction.exchangeRight adjU adjU β)
-    (K : IsoAlgebra LvB) :
-    Nonempty ((mapOfNatIso (liftComparison θu cLu)).obj ((mapOfNatIso (asIso bB)).obj K) ≅
-      (mapOfNatIso exU).obj ((mapOfNatIso (liftComparison θv cLv)).obj K)) := by
+    (exU : g ⋙ u ≅ v ⋙ g) (eexU : exU.hom = Adjunction.exchangeRight adjU adjU β) :
+    Nonempty (mapOfNatIso (asIso bB) ⋙ mapOfNatIso (liftComparison θu cLu) ≅
+      mapOfNatIso (liftComparison θv cLv) ⋙ mapOfNatIso exU) := by
   subst eLf eRf eLu eLv
   obtain rfl := eq_of_heq ecLf
   obtain rfl := eq_of_heq ecRf
   obtain rfl := eq_of_heq ecLu
   obtain rfl := eq_of_heq ecLv
   subst eadjB ebB
-  refine nonempty_mapOfNatIso_obj_mapOfNatIso_obj_iso (asIso _) exU _ _
+  refine nonempty_mapOfNatIso_comp_mapOfNatIso_iso (asIso _) exU _ _
     ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (Q.liftCompιIso _ hRf) HY ≪≫
       Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft P.ι ψa.symm ≪≫
-      (Functor.associator _ _ _).symm) (fun K ↦ ?_) K
+      (Functor.associator _ _ _).symm) (fun K ↦ ?_)
   have hB := Adjunction.exchangeRight_restrictFullyFaithful_app_hom (hL := hLf) (hR := hRf)
     (hL₂ := hLf) (hR₂ := hRf) (hG := hLu) (hH := hLv) adjD adjD θD θB
     (fun K ↦ eq_of_heq (hθB K)) K
@@ -447,6 +488,34 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
   rfl
 
 end BaseChange
+
+/-! ### Homology of the pushforward of Weil objects -/
+
+section Homology
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+/-- The homology sheaf functor of Weil objects is the transport of algebras along the restriction
+to bounded constructible complexes of the commutation of the derived pullback with homology. -/
+lemma WeilBoundedConstructible.homologyFunctor_eq_mapOfNatIso_liftComparison (e : X ≅ X)
+    (n : ℤ) :
+    WeilBoundedConstructible.homologyFunctor ℓ e n =
+      IsoAlgebra.mapOfNatIso (IsoAlgebra.liftComparison
+        ((e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso n)
+        (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)) :=
+  rfl
+
+variable (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
+
+/-- `weilLowerStar` as a transport of algebras. -/
+lemma weilLowerStar_eq_mapOfNatIso :
+    weilLowerStar ℓ eX eY f hf =
+      IsoAlgebra.mapOfNatIso (asIso (weilLowerStarComparison ℓ eX eY f hf)) :=
+  rfl
+
+end Homology
 
 end ProEtale.CondensedRing
 

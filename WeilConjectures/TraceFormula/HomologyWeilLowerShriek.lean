@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
+public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
@@ -83,8 +84,55 @@ theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
     Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eY j).obj
         ((weilLowerStar ℓ eX eY f hf).obj K) ≅
       (weilSheafLowerStar ℓ eX eY hf).obj
-        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) :=
-  sorry
+        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) := by
+  have := locallyOfFinitePresentation_left f
+  have := preservesFiniteColimits_lowerStar_of_isFinite (Profinite.padicAlgClRingObj ℓ) f.left
+  have sq : CommSq eX.hom f f eY.hom := ⟨hf⟩
+  have : IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
+    isIso_weilLowerStarComparison ℓ eX eY f hf
+  have : IsIso eX.hom.left := inferInstanceAs (IsIso ((Over.forget _).map eX.hom))
+  have : IsIso eY.hom.left := inferInstanceAs (IsIso ((Over.forget _).map eY.hom))
+  have : IsIso (Adjunction.exchangeRight
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf))) :=
+    isIso_lowerStarBaseChange_of_isIso _ (commSq_left_of_comp_eq eX eY hf)
+  obtain ⟨iso⟩ := IsoAlgebra.nonempty_mapOfNatIso_liftComparison_obj_iso
+    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+    (leftDerivedUpperStarSquareComparison ℓ sq)
+    (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+    (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ) (commSq_left_of_comp_eq eX eY hf))
+    ((eY.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
+    ((eX.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
+    ((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.rightDerivedFunctorHomologyFunctorIso j)
+    (Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ) (commSq_left_of_comp_eq eX eY hf))
+      (leftDerivedUpperStarSquareComparison ℓ sq)
+      (fun K ↦ Functor.leftDerivedFunctorSquareIso_hom_app _ _ _ K) j)
+    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleLowerStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ eY.hom)
+    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K.obj K.property)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ f K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ eY.hom K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ eX.hom K.obj K.property)
+    rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f) rfl
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
+    (fun K ↦ heq_of_eq (boundedConstructiblePullbackSquareComparison_hom_app_hom ℓ sq K))
+    (weilLowerStarComparison ℓ eX eY f hf)
+    (boundedConstructibleBaseChange_eq_exchangeRight _ ℓ sq)
+    (weilSheafLowerStarComparison ℓ eX eY hf) (lowerStarBaseChange_eq _ _)
+  -- the isomorphism of functors, checked at the level of functors
+  have iso' : weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.homologyFunctor ℓ eY j ≅
+      WeilBoundedConstructible.homologyFunctor ℓ eX j ⋙ weilSheafLowerStar ℓ eX eY hf := iso
+  have i := iso'.app K
+  rw [Functor.comp_obj, Functor.comp_obj] at i
+  exact ⟨i⟩
 
 /-- **Homology of the lower shriek of Weil objects along a finite morphism**:
 `Hʲ(Rf_!^Weil K) ≅ f_* Hʲ(K)` as Weil sheaves for `e_Y`. -/
