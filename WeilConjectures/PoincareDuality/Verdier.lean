@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.PoincareDuality.VerdierBiduality
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
@@ -68,7 +68,7 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
   biduality.
 - `ProEtale.CondensedRing.dualizingComplexIsoUpperStar`: `Lj^* ω_X ≅ ω_U` for an open immersion
   `j`, and `ProEtale.CondensedRing.isIso_map_verdierBiduality_iff_of_isOpenImmersion`:
-  `Lj^* δ_K` is an isomorphism iff `δ_{Lj^* K}` is (given the braided axiom for `Lj^*`).
+  `Lj^* δ_K` is an isomorphism iff `δ_{Lj^* K}` is.
 
 ## Sorried input
 
@@ -302,20 +302,21 @@ noncomputable def dualizingComplexIsoUpperStar :
 isomorphism if and only if the double-dual morphism `δ_{Lj^* K}` relative to `j ≫ a` is, under
 the identification `Lj^* ω_X ≅ ω_U` (`dualizingComplexIsoUpperStar`) and the
 commutation of `Lj^*` with internal homs
-(`isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`).
-
-The braided axiom `hbr` for the monoidal structure of `Lj^*` and the Koszul braidings is taken
-as a hypothesis: it is not yet available for the derived pullback. -/
+(`isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`). The compatibility of
+`Lj^*` with the Koszul braidings is `boundedConstructibleUpperStar_map_braiding_hom_δ`. -/
 theorem isIso_map_verdierBiduality_iff_of_isOpenImmersion
-    (hbr : ∀ K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ a K)) ↔
+      IsIso (verdierBiduality ℓ (j ≫ a) ((boundedConstructibleUpperStar _ ℓ j).obj K)) := by
+  have hbr : ∀ K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
       Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) K M ≫
           (boundedConstructibleUpperStar _ ℓ j).map (β_ K M).hom =
         (β_ ((boundedConstructibleUpperStar _ ℓ j).obj K)
             ((boundedConstructibleUpperStar _ ℓ j).obj M)).hom ≫
-          Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) M K)
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ a K)) ↔
-      IsIso (verdierBiduality ℓ (j ≫ a) ((boundedConstructibleUpperStar _ ℓ j).obj K)) := by
+          Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) M K := fun K M ↦ by
+    rw [← cancel_mono (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ j) M K),
+      Category.assoc, Category.assoc, boundedConstructibleUpperStar_map_braiding_hom_δ,
+      Functor.Monoidal.μ_δ, Category.comp_id, Functor.Monoidal.μ_δ_assoc]
   let : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).LaxBraided :=
     { (inferInstance : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         j).LaxMonoidal) with braided := hbr }

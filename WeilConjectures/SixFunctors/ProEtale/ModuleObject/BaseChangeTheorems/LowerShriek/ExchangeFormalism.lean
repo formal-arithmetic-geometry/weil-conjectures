@@ -5,7 +5,7 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
@@ -37,13 +37,6 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory.Adjunction
 
 variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']
-
-/-- The exchange morphism `exchangeRight` is the mate of the forward morphism. -/
-lemma exchangeRight_eq_mateEquiv {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ A'} {Rf' : A' ⥤ B'}
-    {G : B ⥤ B'} {G' : A ⥤ A'} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (θ : G ⋙ Lf' ≅ Lf ⋙ G') :
-    exchangeRight af af' θ = (mateEquiv af af' θ.hom).natTrans := by
-  ext K
-  simp [exchangeRight_app, mateEquiv]
 
 /-- The exchange morphism `exchangeLeft` is the inverse mate of the forward morphism. -/
 lemma exchangeLeft_eq_mateEquiv_symm {jS : A ⥤ B} {jU : B ⥤ A} {jS' : A' ⥤ B'}

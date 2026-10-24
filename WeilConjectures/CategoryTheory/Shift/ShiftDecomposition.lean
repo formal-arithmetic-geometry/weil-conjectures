@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 public import Mathlib.CategoryTheory.Shift.CommShift
-public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 public import Mathlib.Data.Fintype.BigOperators
 
 /-!
@@ -17,7 +17,8 @@ Let `C` be a preadditive category with a shift by `ℤ` and `E` an object of `C`
 *decomposition of `P` into shifts of `E`* (`CategoryTheory.ShiftDecomposition E P`) is a finite
 family of inclusions `E⟦nⱼ⟧ ⟶ P` and projections `P ⟶ E⟦nⱼ⟧` exhibiting `P` as the direct sum
 `⨁ⱼ E⟦nⱼ⟧`. Such decompositions are transported along isomorphisms, shifts and binary direct sums,
-and exist for zero objects and for `E` itself.
+and exist for zero objects and for `E` itself. A decomposition is a bilimit bicone
+(`CategoryTheory.ShiftDecomposition.isBilimitBicone`).
 -/
 
 @[expose] public section
@@ -73,6 +74,22 @@ def ofIsZero (hP : IsZero P) : ShiftDecomposition E P where
   total := hP.eq_of_src _ _
   incl_proj_self := fun j ↦ j.elim
   incl_proj_of_ne := fun j ↦ j.elim
+
+/-- The bicone with cone point `P` and summands `E⟦nⱼ⟧` of a decomposition of `P`. -/
+@[simps]
+def bicone (D : ShiftDecomposition E P) : Bicone fun j ↦ (shiftFunctor C (D.deg j)).obj E where
+  pt := P
+  π := D.proj
+  ι := D.incl
+  ι_π j j' := by
+    split_ifs with h
+    · subst h
+      rw [D.incl_proj_self, eqToHom_refl]
+    · exact D.incl_proj_of_ne j j' h
+
+/-- The bicone of a decomposition is a bilimit: `P` is the biproduct `⨁ⱼ E⟦nⱼ⟧`. -/
+def isBilimitBicone (D : ShiftDecomposition E P) : D.bicone.IsBilimit :=
+  isBilimitOfTotal _ D.total
 
 variable (E) in
 /-- The decomposition of `E` with the single summand `E⟦0⟧`. -/
