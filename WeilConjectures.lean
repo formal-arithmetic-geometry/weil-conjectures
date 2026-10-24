@@ -7404,6 +7404,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import WeilConjectures.CategoryTheory.Adjunction.MateComp
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
@@ -12698,6 +12699,7 @@ public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperCompatibilityEvaluation
 public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
+public import WeilConjectures.TraceFormula.ProperCompatibilitySupport
 public import WeilConjectures.TraceFormula.ProperCurve
 public import WeilConjectures.TraceFormula.ProperKunneth
 public import WeilConjectures.TraceFormula.ProperPushforward
@@ -12707,6 +12709,7 @@ public import WeilConjectures.TraceFormula.PushforwardFamily
 public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
+public import WeilConjectures.TraceFormula.ShriekTrace
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
