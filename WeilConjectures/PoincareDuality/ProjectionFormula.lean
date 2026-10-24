@@ -60,9 +60,11 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
   `Adjunction.projectionMorphism_natural_right`,
   `Adjunction.inv_projectionComparison_natural_right` and that of
   `leftDerivedUpperStarCompactificationIso`. The bounded constructible version is its image
-  under the faithful inclusion, also sorried: the direct proof times out.
-- `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_left`:
-  `PF^!_{f,K,B}` is natural in `K` (sorried for now).
+  under the faithful inclusion, first for an arbitrary compactification
+  (`boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right`).
+- `ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_left` and
+  `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_left`:
+  `PF^!_{f,K,B}` is natural in `K`, in the same way.
 
 ## Sorried input
 
@@ -242,6 +244,46 @@ lemma exceptionalProjectionMorphismOfCompactification_natural_right
     (fun N ↦ inv (openImmersionProjectionComparison Λ c.i K N))
     (fun h ↦ inv_openImmersionProjectionComparison_natural_right Λ c.i K h) h
 
+
+/-- The naturality of `exceptionalProjectionMorphismOfCompactification` in its first variable,
+for abstract functors. -/
+private lemma exceptionalProjectionMorphism_natural_left_aux {𝒰 𝒵 𝒴 : Type*} [Category 𝒰]
+    [Category 𝒵] [Category 𝒴] [MonoidalCategory 𝒰] [MonoidalCategory 𝒵] [MonoidalCategory 𝒴]
+    (I : 𝒰 ⥤ 𝒵) (G : 𝒵 ⥤ 𝒴) (Fg : 𝒴 ⥤ 𝒵) (Fi : 𝒵 ⥤ 𝒰) (Ff : 𝒴 ⥤ 𝒰) (e : Ff ≅ Fg ⋙ Fi)
+    (pm : ∀ (A : 𝒵) (B : 𝒴), G.obj A ⊗ B ⟶ G.obj (A ⊗ Fg.obj B))
+    (hpm : ∀ {A A' : 𝒵} (φ : A ⟶ A') (B : 𝒴),
+      G.map φ ▷ B ≫ pm A' B = pm A B ≫ G.map (φ ▷ Fg.obj B))
+    (iq : ∀ (K : 𝒰) (N : 𝒵), I.obj K ⊗ N ⟶ I.obj (K ⊗ Fi.obj N))
+    (hiq : ∀ {K K' : 𝒰} (φ : K ⟶ K') (N : 𝒵),
+      I.map φ ▷ N ≫ iq K' N = iq K N ≫ I.map (φ ▷ Fi.obj N))
+    {K K' : 𝒰} (φ : K ⟶ K') (B : 𝒴) :
+    G.map (I.map φ) ▷ B ≫ pm (I.obj K') B ≫ G.map (iq K' (Fg.obj B) ≫ I.map (K' ◁ e.inv.app B)) =
+      (pm (I.obj K) B ≫ G.map (iq K (Fg.obj B) ≫ I.map (K ◁ e.inv.app B))) ≫
+        G.map (I.map (φ ▷ Ff.obj B)) := by
+  rw [reassoc_of% hpm, ← G.map_comp, Category.assoc, ← G.map_comp, reassoc_of% hiq,
+    ← I.map_comp, Category.assoc, ← I.map_comp, whisker_exchange]
+
+/-- The exceptional projection morphism is natural in its first variable. -/
+@[reassoc]
+lemma exceptionalProjectionMorphismOfCompactification_natural_left
+    {K K' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (φ : K ⟶ K')
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    (Rf_!(c)⟦Λ⟧).map φ ▷ B ≫ exceptionalProjectionMorphismOfCompactification Λ c K' B =
+      exceptionalProjectionMorphismOfCompactification Λ c K B ≫
+        (Rf_!(c)⟦Λ⟧).map (φ ▷ (L((f)^*⟦Λ⟧)).obj B) :=
+  exceptionalProjectionMorphism_natural_left_aux D((c.i)_!open⟦Λ⟧) R((c.g)_*⟦Λ⟧)
+    L((c.g)^*⟦Λ⟧) L((c.i)^*⟦Λ⟧) L((f)^*⟦Λ⟧) (leftDerivedUpperStarCompactificationIso Λ c)
+    (properProjectionMorphism Λ c.g)
+    (fun φ B ↦ (derivedUpperStarLowerStarAdjunction Λ c.g).projectionMorphism_natural_left φ B)
+    (fun K N ↦ inv (openImmersionProjectionComparison Λ c.i K N))
+    (fun {K K'} φ N ↦ by
+      exact @CategoryTheory.Adjunction.inv_projectionComparison_natural_left _ _ _ _ _ _ _ _
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ c.i) _ _ _ φ N
+        (isIso_openImmersionProjectionComparison Λ c.i K N)
+        (isIso_openImmersionProjectionComparison Λ c.i K' N)) φ B
+
 end OfCompactification
 
 /-! ### The exceptional projection morphism on bounded constructible complexes -/
@@ -269,11 +311,31 @@ noncomputable def boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X
   ObjectProperty.homMk
     (exceptionalProjectionMorphismOfCompactification Λ (compactificationOverField f) K.obj B.obj)
 
+/-- The exceptional projection morphism of a compactification `c`, restricted to bounded
+constructible complexes, is natural in its second variable. -/
+lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right
+    (c : Compactification f.left) (K : Dᵇc(X.left)⟦Λ⟧) {B B' : Dᵇc(Y.left)⟦Λ⟧} (h : B ⟶ B') :
+    (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K ◁ h ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K ⊗ B')
+          (Y := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B'))
+          (exceptionalProjectionMorphismOfCompactification Λ c K.obj B'.obj) =
+      ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification Λ c K.obj B.obj) ≫
+        (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).map
+          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  exact exceptionalProjectionMorphismOfCompactification_natural_right Λ c K.obj h.hom
+
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 second variable. It is the image of
-`exceptionalProjectionMorphismOfCompactification_natural_right` under the faithful inclusion;
-the direct term proof times out on unfolding the restricted functors, so it is `sorry`ed for
-now. -/
+`exceptionalProjectionMorphismOfCompactification_natural_right` under the faithful inclusion,
+proved for an arbitrary compactification and specialised (unfolding the chosen compactification
+directly times out). -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc(X.left)⟦Λ⟧)
     {B B' : Dᵇc(Y.left)⟦Λ⟧} (h : B ⟶ B') :
@@ -282,11 +344,31 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
           (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
-  sorry
+  boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right Λ ℓ f
+    (compactificationOverField f) K h
+
+/-- The exceptional projection morphism of a compactification `c`, restricted to bounded
+constructible complexes, is natural in its first variable. -/
+lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_left
+    (c : Compactification f.left) {K K' : Dᵇc(X.left)⟦Λ⟧} (φ : K ⟶ K') (B : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).map φ ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K' ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj
+            (K' ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification Λ c K'.obj B.obj) =
+      ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification Λ c K.obj B.obj) ≫
+        (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).map
+          (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  exact exceptionalProjectionMorphismOfCompactification_natural_left Λ c φ.hom B.obj
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
-first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
-follows from the naturality of the three constituent maps; it is `sorry`ed for now. -/
+first variable, as `boundedConstructibleExceptionalProjectionMorphism_natural_right`. -/
 @[reassoc]
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left {K K' : Dᵇc(X.left)⟦Λ⟧}
     (φ : K ⟶ K') (B : Dᵇc(Y.left)⟦Λ⟧) :
@@ -295,7 +377,8 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_left {K K' : D�
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
           (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
-  sorry
+  boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_left Λ ℓ f
+    (compactificationOverField f) φ B
 
 /-- The **derived exceptional projection morphism** on bounded constructible complexes, as a
 natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`

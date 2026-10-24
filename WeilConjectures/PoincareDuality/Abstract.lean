@@ -118,6 +118,27 @@ lemma inv_projectionComparison_natural_right (M : C) {N N' : D} (h : N ⟶ N')
   rw [IsIso.eq_inv_comp, ← projectionComparison_natural_right_assoc, IsIso.hom_inv_id,
     Category.comp_id]
 
+/-- The projection comparison is natural in its first variable. -/
+@[reassoc]
+lemma projectionComparison_natural_left {M M' : C} (φ : M ⟶ M') (N : D) :
+    P.map (φ ▷ S.obj N) ≫ adj.projectionComparison M' N =
+      adj.projectionComparison M N ≫ P.map φ ▷ N := by
+  rw [projectionComparison, projectionComparison, ← homEquiv_naturality_left_symm,
+    ← homEquiv_naturality_right_symm, ← comp_whiskerRight_assoc, Category.assoc,
+    ← μ_natural_left, ← comp_whiskerRight_assoc]
+  congr 3
+  exact (adj.unit.naturality φ)
+
+/-- The inverse of the projection comparison, when it is an isomorphism, is natural in the
+first variable. -/
+@[reassoc]
+lemma inv_projectionComparison_natural_left {M M' : C} (φ : M ⟶ M') (N : D)
+    [IsIso (adj.projectionComparison M N)] [IsIso (adj.projectionComparison M' N)] :
+    P.map φ ▷ N ≫ inv (adj.projectionComparison M' N) =
+      inv (adj.projectionComparison M N) ≫ P.map (φ ▷ S.obj N) := by
+  rw [IsIso.eq_inv_comp, ← projectionComparison_natural_left_assoc, IsIso.hom_inv_id,
+    Category.comp_id]
+
 end ProjectionComparison
 
 end Adjunction
