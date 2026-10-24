@@ -50,6 +50,13 @@ lemma sqIso_eq {U' U Z' Z : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (
   subst hd₁
   rfl
 
+/-- The inverse of the square isomorphism of a square is the square isomorphism of the transposed
+square. -/
+lemma sqIso_symm {U' U Z' Z : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+    (w : t ≫ r = l ≫ b) : (F.sqIso t l r b w).symm = F.sqIso l t b r w.symm := by
+  rw [F.sqIso_eq l t b r w.symm (t ≫ r) w.symm rfl]
+  rfl
+
 lemma pbComp'_id_left_inv_app (f : X ⟶ Y) (M : F.obj Y) :
     (F.pbComp' (𝟙 X) f f (Category.id_comp f)).inv.app M = (F.pbId X).hom.app _ := by
   rw [← cancel_epi ((F.pbComp' (𝟙 X) f f (Category.id_comp f)).hom.app M), Iso.hom_inv_id_app]
