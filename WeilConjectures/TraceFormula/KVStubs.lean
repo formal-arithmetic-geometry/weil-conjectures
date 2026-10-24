@@ -24,12 +24,4 @@ theorem exceptionalKunnethMapRestriction (j : Z ⟶ Y) [IsOpenImmersion j.left]
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : ExceptionalKunnethMapRestriction ℓ j M :=
   sorry
 
-theorem isIso_kunnethVerdierMap_lowerShriek_iff_of_isClosedImmersion (g : Z ⟶ Y)
-    [IsClosedImmersion g.left] (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (N' : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (kunnethVerdierMap ℓ (Y := Y) M
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N')) ↔
-      IsIso (kunnethVerdierMap ℓ (Y := Z) M N') :=
-  sorry
-
 end AlgebraicGeometry.ProEtale.CondensedRing
