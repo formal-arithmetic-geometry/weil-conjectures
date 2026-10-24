@@ -248,6 +248,25 @@ private lemma mateEquiv_counit_aux {DY DX DY' DX' : Type*} [Category DY] [Catego
   subst hχ
   exact mateEquiv_counit adjf adjf' α E
 
+private lemma unit_comp_mateEquiv_aux₂ {DY DX DY' DX' : Type*} [Category DY] [Category DX]
+    [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
+    {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
+    (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
+    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
+    (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv) :
+    σN ≫ ΨN.map (adjf.unit.app oY) ≫ χ.app (Ff.obj oY) =
+      adjf'.unit.app oY' ≫ Rf'.map (uf'.hom ≫ σM ≫ ΨM.map uf.inv) := by
+  have hb := unit_comp_mateEquiv_aux adjf adjf' α σN σM uf' uf ha
+  subst hχ
+  have hn := (mateEquiv adjf adjf' α).natTrans.naturality uf.hom
+  simp only [Functor.comp_map] at hn
+  rw [Functor.map_comp, Category.assoc, hn] at hb
+  rw [← cancel_mono (Rf'.map (ΨM.map uf.hom))]
+  simp only [Category.assoc] at hb ⊢
+  rw [hb]
+  simp [← Functor.map_comp]
+
 end Abstract
 
 /-! ### The pullback comparisons at the unit -/
@@ -423,6 +442,19 @@ lemma unit_comp_map_comp_pushforwardExchange_app :
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
     rfl
     (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
+    (φ.map_unit_comp_pullbackExchange_app Λ)
+
+/-- The unit identity of the pushforward exchange in the form
+`χ_f(Lf^* Λ_Y) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹) ∘ η_{f'}`. -/
+lemma unit_comp_map_unit_comp_pushforwardExchange_app :
+    N.unit Λ ≫ (N.nearbyCycles Λ).map ((derivedUpperStarLowerStarAdjunction Λ f).unit.app (𝟙_ _)) ≫
+        (φ.pushforwardExchange Λ).app _ =
+      (derivedUpperStarLowerStarAdjunction Λ f').unit.app (𝟙_ _) ≫
+        R((f')_*⟦Λ⟧).map ((leftDerivedUpperStarUnitIso Λ f').hom ≫ M.unit Λ ≫
+          (M.nearbyCycles Λ).map (leftDerivedUpperStarUnitIso Λ f).inv) :=
+  unit_comp_mateEquiv_aux₂ (derivedUpperStarLowerStarAdjunction Λ f)
+    (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
+    rfl (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
     (φ.map_unit_comp_pullbackExchange_app Λ)
 
 end Hom
