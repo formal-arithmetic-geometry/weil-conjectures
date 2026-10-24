@@ -247,6 +247,65 @@ lemma boundedConstructibleLowerShriekRefinementIso'_hom_eq (sq : IsPullback (�
     Category.assoc]
   rfl
 
+omit [IsFinitenessCoefficient ℓ Λ] in
+/-- The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is the exchange morphism of the triangle
+comparison. -/
+lemma boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft (w : i ≫ h = i₁) :
+    boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ w =
+      Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i)
+        (Functor.rightUnitor _ ≪≫ boundedConstructibleUpperStarTriangleComparison Λ ℓ w) := by
+  unfold boundedConstructibleOpenImmersionLowerShriekRefinement
+    boundedConstructibleOpenImmersionLowerShriekRefinementUnitStep
+    boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep
+    boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep Adjunction.exchangeLeft
+  rfl
+
+omit [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] in
+/-- The triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*` is the composition isomorphism of the
+pullbacks of the exchange formalism. -/
+lemma boundedConstructibleUpperStarTriangleComparison_eq_pbComp' (w : i ≫ h = i₁) :
+    boundedConstructibleUpperStarTriangleComparison Λ ℓ w =
+      (boundedConstructibleExchangeFormalism Λ ℓ k).pbComp' (SepFinType.homMk i)
+        (SepFinType.homMk h) (SepFinType.homMk i₁) (ObjectProperty.hom_ext _ w) :=
+  rfl
+
+/-- The comparison isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement
+(`boundedConstructibleLowerShriekRefinementIso`) is the comparison along a refinement of the
+exchange formalism. -/
+lemma boundedConstructibleLowerShriekRefinementIso_hom_eq (sq : IsPullback (𝟙 X) i i₁ h)
+    {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)] :
+    haveI := isIso_baseChange_boundedConstructibleExchangeFormalism_id Λ ℓ sq
+    (boundedConstructibleLowerShriekRefinementIso Λ ℓ sq wp).hom =
+      (𝔽).refinementComparison (SepFinType.homMk i) (SepFinType.homMk p) (SepFinType.homMk i₁)
+        (SepFinType.homMk p₁) (SepFinType.homMk h) (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w)
+        (ObjectProperty.hom_ext _ wp) := by
+  subst wp
+  have hw : i ≫ h = i₁ := sq.toCommSq.snd_comp_eq_of_fst_eq_id
+  have hR := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ sq
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism_id Λ ℓ sq
+  have : IsIso (Adjunction.exchangeLeft ((𝔽).shAdj (SepFinType.homMk i₁))
+      ((𝔽).shAdj (SepFinType.homMk i)) (Functor.rightUnitor ((𝔽).pb (SepFinType.homMk i₁)) ≪≫
+        (𝔽).pbComp' (SepFinType.homMk i) (SepFinType.homMk h) (SepFinType.homMk i₁)
+          (ObjectProperty.hom_ext _ hw))) := by
+    rwa [boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft,
+      boundedConstructibleUpperStarTriangleComparison_eq_pbComp'] at hR
+  rw [ExchangeFormalism.refinementComparison_eq_exchangeLeft _ _ _ _ _ _ _ _
+    (ObjectProperty.hom_ext _ hw)]
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  simp only [boundedConstructibleLowerShriekRefinementIso,
+    boundedConstructibleOpenImmersionLowerShriekRefinementPushforward,
+    boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft,
+    boundedConstructibleUpperStarTriangleComparison_eq_pbComp', pfComp'_homMk_comp_inv,
+    eqToIso_refl, Iso.refl_hom, Category.comp_id, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, asIso_hom, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Functor.map_comp, Functor.rightUnitor_inv_app, Category.assoc,
+    Functor.comp_obj, Functor.comp_map]
+  rfl
+
 end Refinement
 
 end AlgebraicGeometry.ProEtale.CondensedRing

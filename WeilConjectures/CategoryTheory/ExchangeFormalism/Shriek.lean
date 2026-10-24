@@ -5,6 +5,7 @@ Authors: Weil conjectures project
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.PushforwardBaseChange
 
 /-!
@@ -131,6 +132,33 @@ lemma refinementComparison_comp (i : X ⟶ Z) (p : Z ⟶ Y) (i₁ : X ⟶ Z₁) 
   simp only [Category.assoc, Functor.map_comp]
   rw [← reassoc_of% hnat2, hassoc', reassoc_of% hnat]
 
+/-- The base change map of the square `𝟙 X ≫ i₁ = i ≫ r` is, up to `(𝟙 X)^* ≅ 𝟭`, the exchange
+morphism `CategoryTheory.Adjunction.exchangeLeft` of the composition isomorphism
+`i₁^* ≅ r^* ⋙ i^*`. -/
+lemma baseChange_id_eq_exchangeLeft (i : X ⟶ Z) (i₁ : X ⟶ Z₁) [Fact (𝒪 i)] [Fact (𝒪 i₁)]
+    (r : Z ⟶ Z₁) (w : 𝟙 X ≫ i₁ = i ≫ r) (hi : i ≫ r = i₁) :
+    (F.baseChange (𝟙 X) i i₁ r w).natTrans =
+      Functor.whiskerRight (F.pbId X).hom (F.sh i) ≫
+        Adjunction.exchangeLeft (F.shAdj i₁) (F.shAdj i)
+          (Functor.rightUnitor (F.pb i₁) ≪≫ F.pbComp' i r i₁ hi) := by
+  ext K
+  have hn := (F.pbId X).hom.naturality ((F.shAdj i₁).unit.app K)
+  simp only [Functor.id_map] at hn
+  rw [baseChange, F.sqIso_eq (𝟙 X) i i₁ r w i₁ (Category.id_comp i₁) hi]
+  simp only [mateEquiv, Equiv.coe_fn_symm_mk, NatTrans.comp_app,
+    Functor.whiskerRight_app, Adjunction.exchangeLeft_app, Iso.trans_hom, Iso.symm_hom,
+    Functor.rightUnitor_hom_app, Category.id_comp, Functor.comp_obj, Functor.id_obj,
+    Functor.leftUnitor_inv_app, Functor.associator_inv_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Category.comp_id, Functor.id_map,
+    F.pbComp'_id_left_inv_app, Functor.map_comp, Category.assoc, TwoSquare.natTrans]
+  simp only [Functor.comp_map]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  rw [← Functor.map_comp_assoc]
+  erw [hn]
+  rw [Functor.map_comp_assoc]
+  rfl
+
 /-- **The comparison along a refinement, through a base change isomorphism**: if the base change
 map of the square of `r` is `β : i_! ≅ i₁_! ⋙ r^*` up to `(𝟙 X)^* ≅ 𝟭`, then the comparison
 along `r` is the unit of `r^* ⊣ r_*`, followed by `β⁻¹` and by `r_* ⋙ p₁_* ≅ p_*`. -/
@@ -170,6 +198,25 @@ lemma refinementComparison_eq_of_baseChange (i : X ⟶ Z) (p : Z ⟶ Y) (i₁ : 
     simp
   rw [refinementComparison_app, key]
   simp
+
+/-- The comparison along a refinement `r`, in terms of the unit of `r^* ⊣ r_*` and the inverse
+of the exchange morphism `i_! ⟶ i₁_! ⋙ r^*` of the composition isomorphism
+`i₁^* ≅ r^* ⋙ i^*`. -/
+lemma refinementComparison_eq_exchangeLeft (i : X ⟶ Z) (p : Z ⟶ Y) (i₁ : X ⟶ Z₁)
+    (p₁ : Z₁ ⟶ Y) [Fact (𝒪 i)] [Fact (𝒪 i₁)] (r : Z ⟶ Z₁) (w : 𝟙 X ≫ i₁ = i ≫ r)
+    (hp : r ≫ p₁ = p) (hi : i ≫ r = i₁) [IsIso (F.baseChange (𝟙 X) i i₁ r w).natTrans]
+    [IsIso (Adjunction.exchangeLeft (F.shAdj i₁) (F.shAdj i)
+      (Functor.rightUnitor (F.pb i₁) ≪≫ F.pbComp' i r i₁ hi))] :
+    F.refinementComparison i p i₁ p₁ r w hp =
+      Functor.whiskerRight (Functor.whiskerLeft (F.sh i₁) (F.adj r).unit) (F.pf p₁) ≫
+        Functor.whiskerRight (inv (Adjunction.exchangeLeft (F.shAdj i₁) (F.shAdj i)
+          (Functor.rightUnitor (F.pb i₁) ≪≫ F.pbComp' i r i₁ hi))) (F.pf r ⋙ F.pf p₁) ≫
+        Functor.whiskerLeft (F.sh i) (F.pfComp' r p₁ p hp).inv := by
+  rw [F.refinementComparison_eq_of_baseChange i p i₁ p₁ r w hp
+    (asIso (Adjunction.exchangeLeft (F.shAdj i₁) (F.shAdj i)
+      (Functor.rightUnitor (F.pb i₁) ≪≫ F.pbComp' i r i₁ hi)))
+    (by rw [F.baseChange_id_eq_exchangeLeft i i₁ r w hi]; ext K; simp)]
+  rfl
 
 /-- The comparison along a refinement `r`, in terms of the unit of `r^* ⊣ r_*` and the inverse
 of the base change map of the extension by zero of the square of `r`. -/
