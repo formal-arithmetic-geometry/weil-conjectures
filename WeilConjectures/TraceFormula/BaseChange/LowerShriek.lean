@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeFrobenius
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.TraceFormula.BaseChange.CubeCoherence
 public import WeilConjectures.TraceFormula.BaseChange.FrobeniusNaturality
 public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
@@ -59,8 +60,11 @@ change `Lπ_Y^* Rf_! ≅ Rf̄_! Lπ_X^*` along `π_Y : Ȳ ⟶ Y` intertwines the
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.isIso_geometricBaseChangeLowerStarBaseChange`: proper base change along
-  `π_Y` (blueprint `sk-thm-sfb-proper-base-change`, section `sec-six-functors-basics`).
+- `ProEtale.CondensedRing.isIso_exchangeRight_derivedUpperStarLowerStarAdjunction_app_of_isProper`:
+  the proper base change theorem for an arbitrary cartesian square of qcqs schemes on the ambient
+  derived categories (blueprint `sk-thm-sfb-proper-base-change`, section
+  `sec-six-functors-basics`), from which proper base change along `π_Y`
+  (`isIso_geometricBaseChangeLowerStarBaseChange`) is deduced.
 
 -/
 
@@ -187,6 +191,75 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq [Fact ℓ.Prim
 
 end SquareComparison
 
+/-! ### Compactness of schemes of finite type over a field -/
+
+section Compact
+
+omit [Fact ℓ.Prime] in
+/-- A scheme quasi-compact over a field is quasi-compact. -/
+lemma compactSpace_left {S : Type u} [Field S] (Z : Over (Spec (.of S))) [QuasiCompact Z.hom] :
+    CompactSpace Z.left :=
+  (quasiCompact_iff_compactSpace Z.hom).1 ‹_›
+
+omit [Fact ℓ.Prime] in
+/-- A scheme separated over a field is quasi-separated. -/
+lemma quasiSeparatedSpace_left {S : Type u} [Field S] (Z : Over (Spec (.of S)))
+    [IsSeparated Z.hom] : QuasiSeparatedSpace Z.left :=
+  (quasiSeparated_iff_quasiSeparatedSpace Z.hom).1 inferInstance
+
+end Compact
+
+/-! ### Proper base change on the ambient derived categories -/
+
+section AmbientProperBaseChange
+
+variable {S₁ S₂ S₃ S₄ : Scheme.{u}} {p : S₁ ⟶ S₂} {g : S₄ ⟶ S₂} {p' : S₃ ⟶ S₄} {g' : S₃ ⟶ S₁}
+
+omit [Fact ℓ.Prime] in
+/-- The transport `L(p' ≫ g)^* ≅ L(g' ≫ p)^*` of derived pullbacks along `w : g' ≫ p = p' ≫ g`. -/
+noncomputable def leftDerivedUpperStarCongrOfComm (w : g' ≫ p = p' ≫ g) :
+    L((p' ≫ g)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅ L((g' ≫ p)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  pullbackCongrIso (D := fun S ↦ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S)
+    Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
+    (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧)) w.symm
+
+omit [Fact ℓ.Prime] in
+/-- The comparison `Lg^* ⋙ Lp'^* ≅ Lp^* ⋙ Lg'^*` of the derived pullbacks along a commutative
+square `w : g' ≫ p = p' ≫ g` of schemes, on the ambient derived categories. -/
+noncomputable def leftDerivedUpperStarSquareComparison (w : g' ≫ p = p' ≫ g) :
+    L((g)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ L((p')^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
+      L((p)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ L((g')^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) p' g).symm ≪≫
+    leftDerivedUpperStarCongrOfComm ℓ w ≪≫
+    leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) g' p
+
+/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`): for a
+cartesian square of quasi-compact quasi-separated schemes
+```
+S₃ --g'--> S₁
+|p'        |p
+v          v
+S₄ --g---> S₂
+```
+with `p` proper, the base change morphism `Lg^* Rp_* K ⟶ Rp'_* Lg'^* K` of `ℚ̲̄_ℓ`-modules on the
+pro-étale sites, the exchange morphism of `leftDerivedUpperStarSquareComparison`, is an
+isomorphism for every bounded constructible `K`. No hypothesis is imposed on `g`. The project's
+version `isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl` is the case of squares of
+separated schemes of finite type over one field. -/
+theorem isIso_exchangeRight_derivedUpperStarLowerStarAdjunction_app_of_isProper
+    [CompactSpace S₂] [QuasiSeparatedSpace S₂] [CompactSpace S₄] [QuasiSeparatedSpace S₄]
+    (sq : IsPullback g' p' p g) [IsProper p]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S₁) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S₁)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S₁) K) :
+    IsIso ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p)
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p')
+      (leftDerivedUpperStarSquareComparison ℓ sq.w)).app K) :=
+  sorry
+
+end AmbientProperBaseChange
+
 /-! ### Proper base change along the base change `π` -/
 
 section ProperBaseChange
@@ -291,19 +364,65 @@ noncomputable abbrev geometricBaseChangeLowerStarBaseChange :
       ((geometricBaseChange k Ω).map f))
     (geometricBaseChangePullbackComparison ℓ Ω f)
 
+set_option maxHeartbeats 1600000 in
+-- the objects of the bounded constructible and of the ambient derived categories are compared
 variable (f) in
 /-- **Proper base change along the base change to `Ω`** (blueprint
 `sk-thm-sfb-proper-base-change`, for the cartesian square `f̄ ≫ π_Y = π_X ≫ f`,
 `isPullback_geometricBaseChange_map_left`): for a proper morphism `f` of separated schemes of
 finite type over `k`, the base change morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the
-projection `π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. The blueprint
-statement is for an arbitrary cartesian square; the project's version
-(`isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`) only covers squares of schemes of
-finite type over one field, and `π_Y` is the base change of `Spec Ω ⟶ Spec k`, which is not of
-finite type. -/
+projection `π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. It is the
+restriction to bounded constructible complexes of the ambient statement
+`isIso_exchangeRight_derivedUpperStarLowerStarAdjunction_app_of_isProper`: `π_Y` is the base
+change of `Spec Ω ⟶ Spec k`, which is not of finite type, so the square is outside
+`isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`. -/
 theorem isIso_geometricBaseChangeLowerStarBaseChange [IsProper f.left] :
-    IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) :=
-  sorry
+    IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) := by
+  have hc : leftDerivedUpperStarGeometricBaseChangeComparison ℓ (Ω := Ω) f =
+      leftDerivedUpperStarSquareComparison ℓ
+        (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip.w := rfl
+  have : CompactSpace Y.left := compactSpace_left Y
+  have : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_left Y
+  have : CompactSpace ((geometricBaseChange k Ω).obj Y).left := compactSpace_left _
+  have : QuasiSeparatedSpace ((geometricBaseChange k Ω).obj Y).left :=
+    quasiSeparatedSpace_left _
+  have : ∀ K, IsIso ((geometricBaseChangeLowerStarBaseChange ℓ Ω f).app K) := fun K ↦ by
+    have h := isIso_exchangeRight_derivedUpperStarLowerStarAdjunction_app_of_isProper ℓ
+      (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip K.obj K.property
+    rw [← hc, Adjunction.exchangeRight_app] at h
+    suffices IsIso ((boundedConstructible _).ι.map
+        ((geometricBaseChangeLowerStarBaseChange ℓ Ω f).app K)) from
+      isIso_of_reflects_iso _ (boundedConstructible _).ι
+    rw [Adjunction.exchangeRight_app]
+    simp only [Functor.map_comp]
+    have e₂ : ∀ {A B : Dᵇc(((geometricBaseChange k Ω).obj X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+        (ψ : A ⟶ B), (boundedConstructible _).ι.map ((boundedConstructibleLowerStar
+          (Profinite.padicAlgClRingObj ℓ) ℓ ((geometricBaseChange k Ω).map f)).map ψ) =
+        R((Over.Hom.left ((geometricBaseChange k Ω).map f))_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          ((boundedConstructible _).ι.map ψ) := fun _ ↦ rfl
+    have e₃ : ∀ {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (ψ : A ⟶ B),
+        (boundedConstructible _).ι.map ((geometricBaseChangeUpperStar Ω ℓ X).map ψ) =
+        L((geometricBaseChangeProj (Ω := Ω) X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          ((boundedConstructible _).ι.map ψ) := fun _ ↦ rfl
+    rw [e₂, e₂, e₃]
+    simp only [boundedConstructibleUpperStarLowerStarAdjunction,
+      Adjunction.map_restrictFullyFaithful_unit_app,
+      Adjunction.map_restrictFullyFaithful_counit_app, Iso.symm_hom, Iso.symm_inv,
+      boundedConstructibleUpperStarCompatibility, boundedConstructibleLowerStarCompatibility,
+      ObjectProperty.liftCompιIso_hom_app, ObjectProperty.liftCompιIso_inv_app]
+    simp only [ObjectProperty.ι_map, geometricBaseChangePullbackComparison_hom_app_hom]
+    convert h using 2
+    all_goals first
+      | rfl
+      | simp only [Over.pullback_obj_left, Functor.comp_obj, ObjectProperty.ι_obj,
+          geometricBaseChangeUpperStar_obj_obj, Functor.id_obj,
+          boundedConstructibleUpperStar_obj_obj, CategoryTheory.Functor.map_id, Category.comp_id,
+          ObjectProperty.lift_obj_obj, Category.id_comp, Functor.map_comp]
+    · exact rfl
+    · erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+        CategoryTheory.Functor.map_id, Category.id_comp]
+      rfl
+  exact NatIso.isIso_of_isIso_app _
 
 omit [Finite k] in
 /-- The base change `f̄` of a proper morphism is proper. -/
