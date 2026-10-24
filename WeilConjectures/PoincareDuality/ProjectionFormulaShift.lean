@@ -113,9 +113,10 @@ noncomputable def exceptionalProjectionMorphismOfCompactificationNatTrans
   app B := exceptionalProjectionMorphismOfCompactification Λ c K B
   naturality _ _ h := exceptionalProjectionMorphismOfCompactification_natural_right Λ c K h
 
-set_option maxHeartbeats 1000000 in
 set_option synthInstance.maxSize 4096 in
 set_option synthInstance.maxHeartbeats 1000000 in
+-- the instance problems for the composite functors are large
+set_option maxHeartbeats 1000000 in
 -- the instances of the composite functors are large
 /-- **The exceptional projection morphism commutes with the shifts** in its second variable. -/
 instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
@@ -153,7 +154,7 @@ instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
       exceptionalProjectionMorphismOfCompactification, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
       Functor.associator_inv_app, NatIso.isIso_inv_app, Functor.comp_map, Category.id_comp,
-      CategoryTheory.Functor.map_id, Functor.map_comp, Category.assoc]
+      CategoryTheory.Functor.map_id, Functor.map_comp]
     erw [Category.id_comp, Category.id_comp]
     rfl
   have : NatTrans.CommShift τ₃ ℤ := inferInstance
