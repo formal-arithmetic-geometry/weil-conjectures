@@ -126,6 +126,92 @@ instance isIso_boundedConstructibleOpenImmersionProjectionComparison {P Q : Over
     infer_instance
   exact (ObjectProperty.fullyFaithfulι _).isIso_of_isIso_map _
 
+/-- **The exceptional projection morphism is independent of the compactification**, refinement
+step (blueprint `prop-sf-pf-coherence`, independence clause): for a refinement `h : Z ⟶ Z₁` of
+compactifications `f = i₁ ≫ p₁ = i ≫ p` (`sq`, `wp`), the refinement isomorphism
+`boundedConstructibleLowerShriekRefinementIso` carries the exceptional projection morphism of
+`(i₁, p₁)` to that of `(i, p)`, for identifications `cf`, `cf₁` of `Lf^*` compatible with the
+triangle comparisons (`hcoh`). -/
+theorem exceptionalProjection_boundedConstructibleLowerShriekRefinementIso
+    (sq : IsPullback (𝟙 X) i i₁ h) {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)]
+    {f : X ⟶ Y}
+    (cf : boundedConstructibleUpperStar Λ ℓ f ≅
+      boundedConstructibleUpperStar Λ ℓ p ⋙ boundedConstructibleUpperStar Λ ℓ i)
+    (cf₁ : boundedConstructibleUpperStar Λ ℓ f ≅
+      boundedConstructibleUpperStar Λ ℓ p₁ ⋙ boundedConstructibleUpperStar Λ ℓ i₁)
+    (hcoh : ∀ B, cf.hom.app B ≫ (boundedConstructibleUpperStar Λ ℓ i).map
+        ((boundedConstructibleUpperStarTriangleComparison Λ ℓ wp).hom.app B) =
+      cf₁.hom.app B ≫ (boundedConstructibleUpperStarTriangleComparison Λ ℓ
+        sq.toCommSq.snd_comp_eq_of_fst_eq_id).hom.app
+          ((boundedConstructibleUpperStar Λ ℓ p₁).obj B))
+    (K : Dᵇc(X.left)⟦Λ⟧) (B : Dᵇc(Y.left)⟦Λ⟧) :
+    Adjunction.exceptionalProjection
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁)
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p₁) cf₁ K B ≫
+        (boundedConstructibleLowerShriekRefinementIso Λ ℓ sq wp).hom.app
+          (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B) =
+      (boundedConstructibleLowerShriekRefinementIso Λ ℓ sq wp).hom.app K ▷ B ≫
+        Adjunction.exceptionalProjection
+          (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i)
+          (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p) cf K B := by
+  subst wp
+  obtain rfl := sq.toCommSq.snd_comp_eq_of_fst_eq_id
+  have hρ := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ sq
+  have : ∀ M, IsIso (Adjunction.restrictionComparison
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i)
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ (i ≫ h))
+      (boundedConstructibleUpperStarTriangleComparison Λ ℓ
+        sq.toCommSq.snd_comp_eq_of_fst_eq_id) M) := fun M ↦ by
+    rw [← boundedConstructibleOpenImmersionLowerShriekRefinement_app]
+    infer_instance
+  have key := Adjunction.exceptionalProjection_comp_refinement
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ (i ≫ h))
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ h)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h ≫ p₁))
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p₁)
+    (boundedConstructibleUpperStarTriangleComparison Λ ℓ sq.toCommSq.snd_comp_eq_of_fst_eq_id)
+    (boundedConstructibleUpperStarTriangleComparison Λ ℓ (rfl : h ≫ p₁ = h ≫ p₁)) cf cf₁
+    (fun X Y ↦ by
+      refine Adjunction.μ_comp_hom_app_eq_of_δ_comp _ (fun K M ↦ ?_) X Y
+      simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom, eqToIso_refl,
+        Iso.refl_hom, Category.id_comp]
+      exact boundedConstructibleUpperStarComp_hom_app_tensor_δ Λ ℓ i h K M)
+    (fun X Y ↦ by
+      simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom, eqToIso_refl,
+        Iso.refl_hom, Category.id_comp]
+      exact boundedConstructibleUpperStarComp_hom_app_tensor_δ Λ ℓ h p₁ X Y)
+    hcoh K B
+  have hR : ∀ M, (boundedConstructibleLowerShriekRefinementIso Λ ℓ sq rfl).hom.app M =
+      (boundedConstructibleLowerStar Λ ℓ p₁).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ h).unit.app
+            ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ (i ≫ h)).obj M) ≫
+          (boundedConstructibleLowerStar Λ ℓ h).map (inv (Adjunction.restrictionComparison
+            (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i)
+            (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ (i ≫ h))
+            (boundedConstructibleUpperStarTriangleComparison Λ ℓ
+              sq.toCommSq.snd_comp_eq_of_fst_eq_id) M))) ≫
+        (conjugateIsoEquiv ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p₁).comp
+            (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ h))
+          (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h ≫ p₁))
+          (boundedConstructibleUpperStarTriangleComparison Λ ℓ (rfl : h ≫ p₁ = h ≫ p₁))).hom.app
+          ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj M) := by
+    intro M
+    simp only [boundedConstructibleLowerShriekRefinementIso,
+      boundedConstructibleOpenImmersionLowerShriekRefinementPushforward, Iso.trans_hom,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, asIso_hom, eqToIso_refl, Iso.trans_refl]
+    simp only [Functor.rightUnitor_inv_app, Functor.associator_inv_app, Functor.associator_hom_app,
+      Category.id_comp, NatIso.isIso_inv_app,
+      boundedConstructibleOpenImmersionLowerShriekRefinement_app]
+    congr 1
+    simp only [boundedConstructibleLowerStarComp, boundedConstructibleUpperStarTriangleComparison,
+      eqToIso_refl, Iso.refl_trans]
+    rfl
+  rw [hR, hR]
+  exact key
+
 end Independence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
