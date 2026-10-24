@@ -66,13 +66,13 @@ lemma boundedConstructibleUpperStarTriangleComparison_μ (w : i ≫ h = i₁)
         (boundedConstructibleUpperStarTriangleComparison Λ ℓ w).hom.app (K ⊗ M) =
       ((boundedConstructibleUpperStarTriangleComparison Λ ℓ w).hom.app K ⊗ₘ
           (boundedConstructibleUpperStarTriangleComparison Λ ℓ w).hom.app M) ≫
-        Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ h ⋙
-          boundedConstructibleUpperStar Λ ℓ i) K M := by
+        Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ i) _ _ ≫
+          (boundedConstructibleUpperStar Λ ℓ i).map
+            (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ h) K M) := by
   subst w
-  refine Adjunction.μ_comp_hom_app_eq_of_δ _ (fun K M ↦ ?_) K M
+  refine Adjunction.μ_comp_hom_app_eq_of_δ_comp _ (fun K M ↦ ?_) K M
   simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom, eqToIso_refl,
-    Iso.refl_hom, Category.id_comp,
-    Functor.OplaxMonoidal.comp_δ]
+    Iso.refl_hom, Category.id_comp]
   exact boundedConstructibleUpperStarComp_hom_app_tensor_δ Λ ℓ i h K M
 
 section Bridge
@@ -102,5 +102,30 @@ lemma boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_projection
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j.left) _ M N
 
 end Bridge
+
+section Independence
+
+variable [IsEllAdicFinitenessCoefficient ℓ Λ] {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+omit [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] in
+/-- The projection comparison of `i_! ⊣ Li^*` on bounded constructible complexes is an
+isomorphism, being the derived one. -/
+instance isIso_boundedConstructibleOpenImmersionProjectionComparison {P Q : Over (Spec (.of k))}
+    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+    [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [IsSeparated Q.hom] (j : P ⟶ Q)
+    [IsOpenImmersion j.left] (M : Dᵇc(P.left)⟦Λ⟧) (N : Dᵇc(Q.left)⟦Λ⟧) :
+    IsIso
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).projectionComparison
+        M N) := by
+  have : IsIso ((boundedConstructible _).ι.map
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).projectionComparison
+        M N)) := by
+    rw [ObjectProperty.ι_map,
+      boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_projectionComparison_hom]
+    infer_instance
+  exact (ObjectProperty.fullyFaithfulι _).isIso_of_isIso_map _
+
+end Independence
 
 end AlgebraicGeometry.ProEtale.CondensedRing

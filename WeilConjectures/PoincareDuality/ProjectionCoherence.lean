@@ -153,6 +153,19 @@ lemma μ_comp_hom_app_eq_of_δ {F F' : C₁ ⥤ C₂} [F.Monoidal] [F'.Monoidal]
   rw [← cancel_mono (δ F' X Y), Category.assoc, Category.assoc, Functor.Monoidal.μ_δ,
     Category.comp_id, ← he, Functor.Monoidal.μ_δ_assoc]
 
+/-- `μ_comp_hom_app_eq_of_δ` for an isomorphism with a composite, with the comultiplication and
+multiplication of the composite written out. -/
+lemma μ_comp_hom_app_eq_of_δ_comp {F : C₁ ⥤ C₃} {F₁ : C₁ ⥤ C₂} {F₂ : C₂ ⥤ C₃} [F.Monoidal]
+    [F₁.Monoidal] [F₂.Monoidal] (e : F ≅ F₁ ⋙ F₂)
+    (he : ∀ X Y, δ F X Y ≫ (e.hom.app X ⊗ₘ e.hom.app Y) =
+      e.hom.app (X ⊗ Y) ≫ F₂.map (δ F₁ X Y) ≫ δ F₂ (F₁.obj X) (F₁.obj Y)) (X Y : C₁) :
+    Functor.LaxMonoidal.μ F X Y ≫ e.hom.app (X ⊗ Y) =
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ Functor.LaxMonoidal.μ F₂ (F₁.obj X) (F₁.obj Y) ≫
+        F₂.map (Functor.LaxMonoidal.μ F₁ X Y) := by
+  have := μ_comp_hom_app_eq_of_δ e (fun X Y ↦ by rw [Functor.OplaxMonoidal.comp_δ]; exact he X Y)
+    X Y
+  rwa [Functor.LaxMonoidal.comp_μ] at this
+
 /-- The projection comparison of `P ⊣ S` with `S ≅ S₂ ⋙ S₁` a monoidal isomorphism is the
 composite of the projection comparisons of `P₁ ⊣ S₁` and `P₂ ⊣ S₂`, read through `S ≅ S₂ ⋙ S₁`
 and its conjugate. -/
@@ -192,7 +205,8 @@ the multiplications, `q_i` followed by `ρ ⊗ 𝟙` and the multiplication of `
 by `h^* q_{i₁}`, through `e`. -/
 lemma projectionComparison_comp_restrictionComparison
     (he : ∀ X Y, μ Si₁ X Y ≫ e.hom.app (X ⊗ Y) =
-      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Fh ⋙ Si) X Y) (K : C₀) (B : C₂) :
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ Si (Fh.obj X) (Fh.obj Y) ≫ Si.map (μ Fh X Y))
+    (K : C₀) (B : C₂) :
     bi.projectionComparison K (Fh.obj B) ≫ restrictionComparison bi bi₁ e K ▷ Fh.obj B ≫
         μ Fh (Pi₁.obj K) B =
       Pi.map (K ◁ e.inv.app B) ≫ restrictionComparison bi bi₁ e (K ⊗ Si₁.obj B) ≫
@@ -217,7 +231,7 @@ lemma projectionComparison_comp_restrictionComparison
   rw [he]
   rw [Si.map_comp, ← μ_natural_left_assoc, ← comp_whiskerRight_assoc]
   erw [← bi.homEquiv_unit, hρ]
-  rw [Functor.LaxMonoidal.comp_μ, tensorHom_def]
+  rw [tensorHom_def]
   simp only [comp_whiskerRight, Category.assoc, whisker_exchange_assoc, ← whiskerLeft_comp_assoc,
     Iso.inv_hom_id_app, whiskerLeft_id, Category.id_comp]
   rfl
@@ -240,7 +254,8 @@ to `h_*` of `q_i`. -/
 lemma projectionComparison_comp_refinement {Gh : C₁ ⥤ C₂} (ah : Fh ⊣ Gh)
     [∀ M, IsIso (restrictionComparison bi bi₁ e M)]
     (he : ∀ X Y, μ Si₁ X Y ≫ e.hom.app (X ⊗ Y) =
-      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Fh ⋙ Si) X Y) (K : C₀) (B : C₂) :
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ Si (Fh.obj X) (Fh.obj Y) ≫ Si.map (μ Fh X Y))
+    (K : C₀) (B : C₂) :
     bi₁.projectionComparison K B ≫
         (ah.unit.app (Pi₁.obj K) ≫ Gh.map (inv (restrictionComparison bi bi₁ e K))) ▷ B ≫
         ah.projectionMorphism (Pi.obj K) B =
@@ -329,8 +344,9 @@ theorem exceptionalProjection_comp_refinement (e : Si₁ ≅ Fh ⋙ Si) (c : Fp 
     [∀ M, IsIso (restrictionComparison bi bi₁ e M)]
     [∀ K N, IsIso (bi.projectionComparison K N)] [∀ K N, IsIso (bi₁.projectionComparison K N)]
     (he : ∀ X Y, μ Si₁ X Y ≫ e.hom.app (X ⊗ Y) =
-      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Fh ⋙ Si) X Y)
-    (hc : ∀ X Y, δ Fp X Y ≫ (c.hom.app X ⊗ₘ c.hom.app Y) = c.hom.app (X ⊗ Y) ≫ δ (Fp₁ ⋙ Fh) X Y)
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ Si (Fh.obj X) (Fh.obj Y) ≫ Si.map (μ Fh X Y))
+    (hc : ∀ X Y, δ Fp X Y ≫ (c.hom.app X ⊗ₘ c.hom.app Y) =
+      c.hom.app (X ⊗ Y) ≫ Fh.map (δ Fp₁ X Y) ≫ δ Fh (Fp₁.obj X) (Fp₁.obj Y))
     (hcoh : ∀ B, cf.hom.app B ≫ Si.map (c.hom.app B) = cf₁.hom.app B ≫ e.hom.app (Fp₁.obj B))
     (K : C₀) (B : C₃) :
     exceptionalProjection bi₁ ap₁ cf₁ K B ≫
@@ -367,7 +383,8 @@ theorem exceptionalProjection_comp_refinement (e : Si₁ ≅ Fh ⋙ Si) (c : Fp 
         Gh.map (Pi.map (K ◁ e.hom.app (Fp₁.obj B)) ≫
           bi.projectionComparison K (Fh.obj (Fp₁.obj B))) := by
     rw [IsIso.eq_inv_comp, ← h8]
-  have hPM := projectionMorphism_eq_of_iso ap (ap₁.comp ah) c hc (Pi.obj K) B
+  have hPM := projectionMorphism_eq_of_iso ap (ap₁.comp ah) c
+    (fun X Y ↦ by rw [Functor.OplaxMonoidal.comp_δ]; exact hc X Y) (Pi.obj K) B
   rw [projectionMorphism_comp] at hPM
   rw [exceptionalProjection, exceptionalProjection, hPM]
   simp only [comp_whiskerRight, Category.assoc]
