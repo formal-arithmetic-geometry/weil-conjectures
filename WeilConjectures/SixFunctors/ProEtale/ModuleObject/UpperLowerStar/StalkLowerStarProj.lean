@@ -5,19 +5,30 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.FiniteEtaleStalk
-public import WeilConjectures.TraceFormula.WeilSheafLowerStar
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
 
 /-!
 
-# Coherence of the restriction of stalks of a pushforward
+# Restriction of stalks of a pushforward
 
 Let `f : X ⟶ Y` be a morphism of schemes and `x̄ : P ⟶ X`, `ȳ : P ⟶ Y` with `x̄ ≫ f = ȳ`. The
-restriction `ȳ^* f_* M ⟶ x̄^* M` (`ProEtale.CondensedRing.stalkLowerStarProj`) is compatible with
+restriction `ȳ^* f_* M ⟶ x̄^* M` of module objects over `Λ`
+(`ProEtale.CondensedRing.stalkLowerStarProj`) is the composite
+`ȳ^* f_* M = (x̄ ≫ f)^* f_* M ≅ x̄^* f^* f_* M ⟶ x̄^* M` of the composition isomorphism and
+the counit of `f^* ⊣ f_*`. For `P` the spectrum of a separably closed field, these are the
+projections of the stalk of `f_* M` at `ȳ` to the stalks of `M` at the points over `ȳ`
+(`ProEtale.CondensedRing.FibrePoints`, finite for finite `f`:
+`ProEtale.CondensedRing.finite_fibrePoints`).
+
+The restriction is compatible with
 
 - precomposition of the points (`ProEtale.CondensedRing.stalkLowerStarProj_comp_left`),
 - base change along a commutative square `a ≫ f = f ≫ b`
-  (`ProEtale.CondensedRing.stalkLowerStarProj_lowerStarBaseChange`),
+  (`ProEtale.CondensedRing.stalkLowerStarProj_lowerStarBaseChange`), and along a general
+  commutative square `g' ≫ f = f' ≫ g`
+  (`ProEtale.CondensedRing.stalkLowerStarProj_lowerStarBaseChange'`),
 - transport of the points along equalities and morphisms of module objects.
 
 For points `x̄, x̄'` over `ȳ` with `x̄ ≫ a = σ ≫ x̄'` and `ȳ ≫ b = σ ≫ ȳ`, these combine into the
@@ -33,18 +44,50 @@ keeps the kernel from unfolding the pullback functors.
 
 -/
 
-
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+section Fibre
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {X Y P : Scheme.{u}} (f : X ⟶ Y) (y : P ⟶ Y)
+
+/-- The `P`-valued points `x̄ : P ⟶ X` over a `P`-valued point `ȳ : P ⟶ Y`. -/
+abbrev FibrePoints : Type u :=
+  {x : P ⟶ X // x ≫ f = y}
+
+/-- A finite morphism has finitely many geometric points over a geometric point. -/
+theorem finite_fibrePoints [IsFinite f] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (eP : P ≅ Spec (.of Ω)) : Finite (FibrePoints f y) :=
+  have : Finite (f.GeometricFiber (eP.inv ≫ y)) := inferInstance
+  Finite.of_injective
+    (fun x : FibrePoints f y ↦ (⟨eP.inv ≫ x.1, by rw [Category.assoc, x.2]⟩ :
+      f.GeometricFiber (eP.inv ≫ y)))
+    fun a b h ↦ Subtype.ext (by
+      simpa using congrArg (fun z : f.GeometricFiber (eP.inv ≫ y) ↦ eP.hom ≫ z.1) h)
+
+variable {f y}
+
+/-- The projection `ȳ^* f_* F ⟶ x̄^* F` of the stalk of the pushforward at `ȳ` to the stalk at a
+point `x̄` over `ȳ`: the composite `ȳ^* f_* F = (x̄ ≫ f)^* f_* F ≅ x̄^* f^* f_* F ⟶ x̄^* F` of the
+composition isomorphism and the counit of `f^* ⊣ f_*`. -/
+noncomputable def stalkLowerStarProj {x : P ⟶ X} (hx : x ≫ f = y)
+    (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    (y)^*⟦Λ⟧.obj ((f)_*⟦Λ⟧.obj F) ⟶ (x)^*⟦Λ⟧.obj F :=
+  eqToHom (by rw [← hx]) ≫ (upperStarComp Λ x f).hom.app _ ≫
+    (x)^*⟦Λ⟧.map ((upperStarLowerStarAdjunction Λ f).counit.app F)
+
+
+end Fibre
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y P : Scheme.{u}} {f : X ⟶ Y}
@@ -184,6 +227,72 @@ lemma stalkLowerStarProj_lowerStarBaseChange {a : X ⟶ X} {b : Y ⟶ Y} (sq : C
   exact CategoryTheory.Adjunction.unit_counit_baseChange_eq_of_coherence
     (upperStarLowerStarAdjunction Λ f)
     (upperStarSquareComparison Λ sq) _ _ _ _ _ _ (restriction_baseChange_coherence Λ sq hx hxy) M
+
+/-- Abstract form of `stalkLowerStarProj_lowerStarBaseChange'`, for a general commutative square. -/
+lemma _root_.CategoryTheory.Adjunction.unit_counit_baseChange_eq_of_coherence' {A A' B B' Q : Type*}
+    [Category A] [Category A'] [Category B] [Category B'] [Category Q] {Rf : A ⥤ B} {Lf : B ⥤ A}
+    (adj : Lf ⊣ Rf) {Rf' : A' ⥤ B'} {Lf' : B' ⥤ A'} (adj' : Lf' ⊣ Rf') {As : A ⥤ A'}
+    {Bs : B ⥤ B'} {Xs : A' ⥤ Q} {Ys XFs : B' ⥤ Q} {YBs XAFs : B ⥤ Q} {XAs : A ⥤ Q}
+    (θ : Bs ⋙ Lf' ≅ Lf ⋙ As) (cyb : YBs ≅ Bs ⋙ Ys) (cy : Ys ≅ XFs) (cxf : XFs ≅ Lf' ⋙ Xs)
+    (cxa : XAs ≅ As ⋙ Xs) (c1 : YBs ≅ XAFs) (c2 : XAFs ≅ Lf ⋙ XAs)
+    (h : ∀ N, cyb.hom.app N ≫ cy.hom.app (Bs.obj N) ≫ cxf.hom.app (Bs.obj N) ≫
+      Xs.map (θ.hom.app N) = c1.hom.app N ≫ c2.hom.app N ≫ cxa.hom.app (Lf.obj N)) (M : A) :
+    cyb.hom.app (Rf.obj M) ≫ Ys.map (adj'.unit.app (Bs.obj (Rf.obj M)) ≫
+        Rf'.map (θ.hom.app (Rf.obj M)) ≫ Rf'.map (As.map (adj.counit.app M))) ≫
+        (cy.hom.app (Rf'.obj (As.obj M)) ≫ cxf.hom.app (Rf'.obj (As.obj M)) ≫
+          Xs.map (adj'.counit.app (As.obj M))) =
+      (c1.hom.app (Rf.obj M) ≫ c2.hom.app (Rf.obj M) ≫ XAs.map (adj.counit.app M)) ≫
+        cxa.hom.app M := by
+  have hκ := (cy ≪≫ cxf).hom.naturality (adj'.unit.app (Bs.obj (Rf.obj M)) ≫
+    Rf'.map (θ.hom.app (Rf.obj M)) ≫ Rf'.map (As.map (adj.counit.app M)))
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.comp_map, Category.assoc] at hκ
+  rw [reassoc_of% hκ]
+  have hε : Lf'.map (adj'.unit.app (Bs.obj (Rf.obj M)) ≫ Rf'.map (θ.hom.app (Rf.obj M)) ≫
+      Rf'.map (As.map (adj.counit.app M))) ≫ adj'.counit.app (As.obj M) =
+      θ.hom.app (Rf.obj M) ≫ As.map (adj.counit.app M) := by
+    simp only [Functor.map_comp, Category.assoc]
+    erw [adj'.counit_naturality, adj'.counit_naturality_assoc, adj'.left_triangle_components_assoc]
+  rw [← Xs.map_comp, hε, Xs.map_comp, reassoc_of% (h (Rf.obj M))]
+  simp only [Category.assoc]
+  erw [cxa.hom.naturality (adj.counit.app M)]
+  rfl
+
+variable {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+lemma restriction_baseChange_coherence' (sq : CommSq g' f' f g) {x : P ⟶ X'} {y : P ⟶ Y'}
+    (hx : x ≫ f' = y) (hxy : (x ≫ g') ≫ f = y ≫ g)
+    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    (upperStarComp Λ y g).hom.app N ≫ (upperStarCongr Λ hx.symm).hom.app ((g)^*⟦Λ⟧.obj N) ≫
+        (upperStarComp Λ x f').hom.app ((g)^*⟦Λ⟧.obj N) ≫
+        (x)^*⟦Λ⟧.map ((upperStarSquareComparison Λ sq).hom.app N) =
+      (upperStarCongr Λ hxy.symm).hom.app N ≫ (upperStarComp Λ (x ≫ g') f).hom.app N ≫
+        (upperStarComp Λ x g').hom.app ((f)^*⟦Λ⟧.obj N) := by
+  rewrite [upperStarComp_hom_app_upperStarCongr_hom_app'_assoc Λ hx.symm g (by rw [hx]),
+    CondensedRing.upperStarComp_hom_app_comp_upperStarComp_hom_app_assoc,
+    upperStarSquareComparison_hom_app, Functor.map_comp, Functor.map_comp,
+    CategoryTheory.Functor.map_hom_app_comp_map_inv_app_assoc,
+    upperStarComp_hom_app_map_upperStarCongr_hom_app'_assoc Λ x sq.w.symm (by rw [sq.w]),
+    upperStarComp_hom_app_comp_map_upperStarComp_hom_app, upperStarCongr_hom_app_trans_assoc,
+    upperStarCongr_hom_app_trans_assoc, upperStarCongr_hom_app_trans_assoc]
+  conv_lhs => rw [upperStarCongr_proof_irrel Λ _ hxy.symm]
+
+/-- **Restriction of stalks and base change**, for a general commutative square
+`g' ≫ f = f' ≫ g`: for points `x̄ : P ⟶ X'` and `ȳ : P ⟶ Y'` with `x̄ ≫ f' = ȳ`, the restriction
+of the stalk of `f'_* g'^* M` at `ȳ` to `x̄`, precomposed with the base-change morphism, is the
+restriction of the stalk of `f_* M` at `ȳ ≫ g` to `x̄ ≫ g'`. -/
+@[reassoc]
+lemma stalkLowerStarProj_lowerStarBaseChange' (sq : CommSq g' f' f g) {x : P ⟶ X'} {y : P ⟶ Y'}
+    (hx : x ≫ f' = y) (hxy : (x ≫ g') ≫ f = y ≫ g)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    (upperStarComp Λ y g).hom.app ((f)_*⟦Λ⟧.obj M) ≫
+        (y)^*⟦Λ⟧.map ((lowerStarBaseChange Λ sq).app M) ≫
+        stalkLowerStarProj Λ hx ((g')^*⟦Λ⟧.obj M) =
+      stalkLowerStarProj Λ hxy M ≫ (upperStarComp Λ x g').hom.app M := by
+  rw [lowerStarBaseChange_eq, Adjunction.exchangeRight_app, stalkLowerStarProj_eq,
+    stalkLowerStarProj_eq]
+  exact CategoryTheory.Adjunction.unit_counit_baseChange_eq_of_coherence'
+    (upperStarLowerStarAdjunction Λ f) (upperStarLowerStarAdjunction Λ f')
+    (upperStarSquareComparison Λ sq) _ _ _ _ _ _ (restriction_baseChange_coherence' Λ sq hx hxy) M
 
 /-- The restriction of stalks is natural in the module object. -/
 @[reassoc]
