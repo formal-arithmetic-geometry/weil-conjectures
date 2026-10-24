@@ -7399,6 +7399,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.CompUnitCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
@@ -7811,6 +7812,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCompIso
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraHomology
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLeftAdjunction
@@ -12368,6 +12370,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
@@ -12631,6 +12634,8 @@ public import WeilConjectures.Topology.WholeSpaceClosedSubtypeCohomologyVanishin
 public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.BaseChange.Basic
 public import WeilConjectures.TraceFormula.BaseChange.Coherence
+public import WeilConjectures.TraceFormula.BaseChange.CubeCoherence
+public import WeilConjectures.TraceFormula.BaseChange.FrobeniusNaturality
 public import WeilConjectures.TraceFormula.BaseChange.Iterate
 public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriek
@@ -12696,6 +12701,7 @@ public import WeilConjectures.TraceFormula.PushforwardFamily
 public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
+public import WeilConjectures.TraceFormula.RelativeFrobeniusProper
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionAffineLine
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases

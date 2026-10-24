@@ -78,8 +78,7 @@ lemma exchangeRight_app_cube (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (θe : GB ⋙ 
     (fun N ↦ by simp) K
   have h₂ := exchangeRight_app_paste af af af' θe θπ (pasteIso θπ θΦ) cB cA
     (fun N ↦ by rw [h N, pasteIso_hom_app, Category.assoc]) K
-  simp only [Iso.refl_hom, NatTrans.id_app, Functor.map_id, Category.id_comp,
-    Category.comp_id] at h₁
+  simp only [Iso.refl_hom, NatTrans.id_app, Functor.map_id, Category.id_comp] at h₁
   erw [Category.comp_id] at h₁
   rw [h₂, ← h₁, Category.assoc]
 
