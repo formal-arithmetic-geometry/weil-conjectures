@@ -7394,6 +7394,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
@@ -12349,6 +12350,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
@@ -12617,6 +12619,7 @@ public import WeilConjectures.TraceFormula.PointTrace
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperCurve
+public import WeilConjectures.TraceFormula.ProperKunneth
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 public import WeilConjectures.TraceFormula.PullbackFamily
