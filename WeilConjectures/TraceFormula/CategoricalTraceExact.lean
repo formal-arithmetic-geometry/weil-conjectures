@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Abelian.Basic
-public import WeilConjectures.LinearAlgebra.TraceLongExact
+public import Mathlib.Data.Int.Interval
+public import WeilConjectures.LinearAlgebra.TraceLongExactSequence
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.UnitBasis
 
@@ -103,21 +104,72 @@ theorem superTrace_eq_add_of_exact (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIs
   have := fun j ↦ hfin (hA j)
   have := fun j ↦ hfin (hB j)
   have := fun j ↦ hfin (hD j)
-  have key := LinearMap.finsum_negOnePow_smul_trace_eq_add_of_exact
-    (k := (End (𝟙_ C))ᵐᵒᵖ) (A := fun j ↦ 𝟙_ C ⟶ A j) (B := fun j ↦ 𝟙_ C ⟶ B j)
-    (D := fun j ↦ 𝟙_ C ⟶ D j) (fun j ↦ Preadditive.rightCompEndOp _ (φA j))
-    (fun j ↦ Preadditive.rightCompEndOp _ (φB j)) (fun j ↦ Preadditive.rightCompEndOp _ (φD j))
-    (fun j ↦ Preadditive.rightCompEndOp _ (u j)) (fun j ↦ Preadditive.rightCompEndOp _ (v j))
-    (fun j ↦ Preadditive.rightCompEndOp _ (w j)) (fun j ↦ hcomm (hu j)) (fun j ↦ hcomm (hv j))
-    (fun j ↦ hcomm (hw j)) (fun j ↦ hex (hA j) (hB j) (ex₁ j))
-    (fun j ↦ hex (hB j) (hD j) (ex₂ j)) (fun j ↦ hex (hD j) (hA (j + 1)) (ex₃ j))
-    (hbdd.imp fun a ↦ Exists.imp fun b hab j hj ↦
-      ⟨hsub (hab j hj).1, hsub (hab j hj).2.1, hsub (hab j hj).2.2⟩)
+  obtain ⟨a, b, hab⟩ := hbdd
+  -- the sequence reindexed by `n ↦ -n`, with connecting maps `D (-n) ⟶ A (-(n - 1))`
+  have hidx (n : ℤ) : -n + 1 = -(n - 1) := by omega
+  let δ (n : ℤ) : D (-n) ⟶ A (-(n - 1)) := w (-n) ≫ eqToHom (congrArg A (hidx n))
+  have hφA {i j : ℤ} (h : i = j) :
+      φA i ≫ eqToHom (congrArg A h) = eqToHom (congrArg A h) ≫ φA j := by
+    subst h
+    simp
+  have hexδ {i j : ℤ} (h : i = j) {X : C} {f : X ⟶ A i}
+      (hf : Function.Exact (Preadditive.rightCompEndOp (𝟙_ C) f)
+        (Preadditive.rightCompEndOp (𝟙_ C) (u i))) :
+      Function.Exact (Preadditive.rightCompEndOp (𝟙_ C) (f ≫ eqToHom (congrArg A h)))
+        (Preadditive.rightCompEndOp (𝟙_ C) (u j)) := by
+    subst h
+    simpa using hf
+  have hexδ' {W X Y Z : C} (h : Y = Z) {f : W ⟶ X} {g : X ⟶ Y}
+      (hfg : Function.Exact (Preadditive.rightCompEndOp (𝟙_ C) f)
+        (Preadditive.rightCompEndOp (𝟙_ C) g)) :
+      Function.Exact (Preadditive.rightCompEndOp (𝟙_ C) f)
+        (Preadditive.rightCompEndOp (𝟙_ C) (g ≫ eqToHom h)) := by
+    subst h
+    simpa using hfg
+  have hδ (n : ℤ) : φD (-n) ≫ δ n = δ n ≫ φA (-(n - 1)) := by
+    simp only [δ]
+    rw [reassoc_of% (hw (-n)), hφA (hidx n), Category.assoc]
+  set s : Finset ℤ := Finset.Icc (-b) (-a)
+  have hs {n : ℤ} (hn : n ∉ s) : -n < a ∨ b < -n := by
+    simp only [s, Finset.mem_Icc, not_and_or, not_le] at hn
+    omega
+  have key := LinearMap.sum_negOnePow_smul_trace_sub_trace_sub_trace_eq_zero
+    (K := (End (𝟙_ C))ᵐᵒᵖ) (fun n ↦ 𝟙_ C ⟶ A (-n)) (fun n ↦ 𝟙_ C ⟶ B (-n))
+    (fun n ↦ 𝟙_ C ⟶ D (-n)) (fun n ↦ Preadditive.rightCompEndOp _ (u (-n)))
+    (fun n ↦ Preadditive.rightCompEndOp _ (v (-n))) (fun n ↦ Preadditive.rightCompEndOp _ (δ n))
+    (fun n ↦ hex (hA _) (hB _) (ex₁ _)) (fun n ↦ hexδ' _ (hex (hB _) (hD _) (ex₂ _)))
+    (fun n ↦ hexδ (hidx n) (hex (hD _) (hA _) (ex₃ _)))
+    (fun n ↦ Preadditive.rightCompEndOp _ (φA (-n)))
+    (fun n ↦ Preadditive.rightCompEndOp _ (φB (-n)))
+    (fun n ↦ Preadditive.rightCompEndOp _ (φD (-n))) (fun n ↦ (hcomm (hu _)).symm)
+    (fun n ↦ (hcomm (hv _)).symm) (fun n ↦ (hcomm (hδ n)).symm) s
+    (fun n hn ↦ hsub (hab _ (hs hn)).1) (fun n hn ↦ hsub (hab _ (hs hn)).2.2)
   simp only [htr (hA _), htr (hB _), htr (hD _)] at key
-  have hop (f : ℤ → End (𝟙_ C)) : MulOpposite.op (∑ᶠ j, f j) = ∑ᶠ j, MulOpposite.op (f j) :=
-    (MulOpposite.opAddEquiv : End (𝟙_ C) ≃+ _).toAddMonoidHom.map_finsum_of_injective
-      MulOpposite.op_injective f
+  -- the supertraces are the sums over `s` of the reindexed traces
+  have hsum {X : ℤ → C} (hX : ∀ j, IsFiniteFree (X j))
+      (hX₀ : ∀ j, (j < a ∨ b < j) → IsZero (X j)) (φ : ∀ j, X j ⟶ X j) :
+      superTrace X φ = ∑ n ∈ s, (n.negOnePow : ℤ) • categoricalTrace (φ (-n)) := by
+    have h₀ {n : ℤ} (hn : n ∉ s) : categoricalTrace (φ (-n)) = 0 := by
+      have := hsub (hX₀ _ (hs hn))
+      apply MulOpposite.op_injective
+      rw [← htr (hX _), LinearMap.trace_eq_zero_of_subsingleton, MulOpposite.op_zero]
+    rw [superTrace, ← finsum_comp_equiv (Equiv.neg ℤ)]
+    refine (finsum_eq_sum_of_support_subset _ fun n hn ↦ ?_).trans
+      (Finset.sum_congr rfl fun n _ ↦ ?_)
+    · by_contra h
+      apply hn
+      change ((-n).negOnePow : ℤ) • categoricalTrace (φ (-n)) = 0
+      rw [h₀ h, smul_zero]
+    · change ((-n).negOnePow : ℤ) • categoricalTrace (φ (-n)) = _
+      rw [Int.negOnePow_neg]
+  rw [hsum hA (fun j hj ↦ (hab j hj).1), hsum hB (fun j hj ↦ (hab j hj).2.1),
+    hsum hD (fun j hj ↦ (hab j hj).2.2), ← sub_eq_zero, ← Finset.sum_add_distrib,
+    ← Finset.sum_sub_distrib]
   apply MulOpposite.op_injective
-  simpa only [superTrace, MulOpposite.op_add, hop, MulOpposite.op_smul] using key
+  rw [MulOpposite.op_zero, ← key, ← MulOpposite.opAddEquiv_apply, map_sum]
+  refine Finset.sum_congr rfl fun n _ ↦ ?_
+  simp only [MulOpposite.opAddEquiv_apply, MulOpposite.op_sub, MulOpposite.op_add,
+    MulOpposite.op_smul, smul_sub]
+  abel
 
 end CategoryTheory

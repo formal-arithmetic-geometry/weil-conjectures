@@ -8998,7 +8998,6 @@ public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.DegreeExact
 public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 public import WeilConjectures.LinearAlgebra.TensorProduct.Kunneth
-public import WeilConjectures.LinearAlgebra.TraceLongExact
 public import WeilConjectures.LinearAlgebra.TraceLongExactSequence
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Algebra.Pi
