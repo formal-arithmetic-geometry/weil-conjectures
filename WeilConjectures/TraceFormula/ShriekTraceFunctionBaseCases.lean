@@ -155,14 +155,15 @@ def ShriekTraceFunctionFiniteEtale : Prop :=
     [IsFinite f.left] → [Etale f.left] → (∃ m : ℕ, eX.powSucc m = Iso.refl X) →
     ShriekTraceFunctionAt ℓ eX eY hf
 
-/-- The sheaf–function compatibility holds along every morphism `f` smooth of relative dimension
-one (for `e_X` of finite order). -/
-def ShriekTraceFunctionCurve : Prop :=
-  ∀ (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-    [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (eX : X ≅ X) (eY : Y ≅ Y) (f : X ⟶ Y) (hf : eX.hom ≫ f = f ≫ eY.hom),
-    [SmoothOfRelativeDimension 1 f.left] → (∃ m : ℕ, eX.powSucc m = Iso.refl X) →
-    ShriekTraceFunctionAt ℓ eX eY hf
+/-- The sheaf–function compatibility holds along every coordinate projection
+`𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`, the relative affine line over `𝔸ʲ_k ×_k E`, for the
+automorphisms `𝟙 ×_k e_E` with `e_E` of finite order. -/
+def ShriekTraceFunctionAffineLine : Prop :=
+  ∀ (j : ℕ) (E : Over (Spec (.of k))) [LocallyOfFiniteType E.hom] [QuasiCompact E.hom]
+    [IsSeparated E.hom] (eE : E ≅ E), (∃ m : ℕ, eE.powSucc m = Iso.refl E) →
+    ShriekTraceFunctionAt ℓ (overProdIso (Iso.refl (polyAffine k (j + 1))) eE)
+      (overProdIso (Iso.refl (polyAffine k j)) eE) (overProdIso_refl_hom_comp_overProdMap
+        (polyAffineProj k j) eE)
 
 /-- The sheaf–function compatibility holds along every closed immersion `f` (for `e_X` of finite
 order). -/
@@ -188,18 +189,19 @@ theorem shriekTraceFunctionAt_of_isFinite_of_etale {X Y : Over (Spec (.of k))}
     ShriekTraceFunctionAt ℓ eX eY hf :=
   ShriekTraceFunctionAt.of_isFinite_of_etale ℓ eX eY hf
 
-/-- **Curves** (still `sorry`): the sheaf–function compatibility holds along a smooth morphism
-`f` of relative dimension one. By compactly supported base change to `ȳ`, it is the trace
-formula for the smooth curve `X_ȳ` over a finite field, which follows from the Lefschetz–Verdier
-formula for the Frobenius graph on a compactification and the vanishing of the local terms
-away from the fixed points (blueprint `thm-trf-grothendieck-lefschetz-finite-ring`, the case of
-curves). -/
-theorem shriekTraceFunctionAt_of_smoothOfRelativeDimension_one {X Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    [SmoothOfRelativeDimension 1 f.left] (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
-    ShriekTraceFunctionAt ℓ eX eY hf :=
+/-- **The affine line**: the sheaf–function compatibility holds along the coordinate projection
+`𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`, the relative affine line over `B = 𝔸ʲ_k ×_k E`, for the
+automorphisms `𝟙 ×_k e_E`. This is the geometric base case: the relative affine line is the open
+complement of the section at infinity in the relative projective line `ℙ¹_B`, and over a point
+`ȳ` of `B` the compatibility along `ℙ¹_B ⟶ B` is the trace formula on the projective line, from
+the Lefschetz–Verdier formula for the Frobenius graph and the local terms at its fixed points
+(blueprint `thm-trf-coefficient-morphism-trace-formula`, the case of the affine line). -/
+theorem shriekTraceFunctionAt_overProdMap_polyAffineProj (j : ℕ) (E : Over (Spec (.of k)))
+    [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [IsSeparated E.hom] (eE : E ≅ E)
+    (he : ∃ m : ℕ, eE.powSucc m = Iso.refl E) :
+    ShriekTraceFunctionAt ℓ (overProdIso (Iso.refl (polyAffine k (j + 1))) eE)
+      (overProdIso (Iso.refl (polyAffine k j)) eE)
+      (overProdIso_refl_hom_comp_overProdMap (polyAffineProj k j) eE) :=
   sorry
 
 /-- **Closed immersions**: the sheaf–function compatibility holds along a closed
@@ -272,7 +274,7 @@ variable {ℓ k}
 
 section Chain
 
-variable (H₀ : ShriekTraceFunctionFiniteEtale ℓ k) (H₁ : ShriekTraceFunctionCurve ℓ k)
+variable (H₀ : ShriekTraceFunctionFiniteEtale ℓ k) (H₁ : ShriekTraceFunctionAffineLine ℓ k)
   (H₂ : ShriekTraceFunctionClosedImmersion ℓ k)
 
 section Projections
@@ -284,8 +286,8 @@ variable {E Y : Over (Spec (.of k))} [LocallyOfFiniteType E.hom] [QuasiCompact E
 
 include H₀ H₁ heE in
 /-- The compatibility along the projection `𝔸ʲ_k ×_k E ⟶ E` followed by `ι : E ⟶ Y`, from the
-one along `ι`: the projection is the composite of the coordinate projections, smooth of relative
-dimension one, and of the isomorphism `𝔸⁰_k ×_k E ≅ E`. -/
+one along `ι`: the projection is the composite of the coordinate projections, the relative affine
+lines of `ShriekTraceFunctionAffineLine`, and of the isomorphism `𝔸⁰_k ×_k E ≅ E`. -/
 lemma shriekTraceFunctionAt_overProdSnd_polyAffine
     (Hι : ShriekTraceFunctionAt ℓ eE eY hι) (j : ℕ) :
     ShriekTraceFunctionAt ℓ (overProdIso (Iso.refl (polyAffine k j)) eE) eY
@@ -299,15 +301,10 @@ lemma shriekTraceFunctionAt_overProdSnd_polyAffine
     exact shriekTraceFunctionAt_comp ℓ _ eY eE (by simp) hι ⟨m, hfin 0⟩ ⟨m, heE⟩
       (H₀ _ _ _ _ _ _ ⟨m, hfin 0⟩) Hι
   | succ j ih =>
-    have hp : (overProdIso (Iso.refl (polyAffine k (j + 1))) eE).hom ≫
-        overProdMap (polyAffineProj k j) (𝟙 E) =
-          overProdMap (polyAffineProj k j) (𝟙 E) ≫
-            (overProdIso (Iso.refl (polyAffine k j)) eE).hom := by
-      simp only [overProdIso_hom, Iso.refl_hom, ← overProdMap_comp, Category.id_comp,
-        Category.comp_id]
+    have hp := overProdIso_refl_hom_comp_overProdMap (polyAffineProj k j) eE
     refine ShriekTraceFunctionAt.of_eq ℓ (by simp)
       (shriekTraceFunctionAt_comp ℓ _ eY _ hp _ ⟨m, hfin (j + 1)⟩ ⟨m, hfin j⟩
-        (H₁ _ _ _ _ _ hp ⟨m, hfin (j + 1)⟩) ih)
+        (H₁ j E eE ⟨m, heE⟩) ih)
 
 end Projections
 
@@ -393,7 +390,7 @@ under `e_Z` (the generic quotient by `e_X`); the compatibility along `U ⟶ Y` f
 along `Z ⟶ Y` by dévissage, and `Z ⟶ Y` is a composite of base cases
 (`shriekTraceFunctionAt_of_isFinite_of_etale_of_comp_eq`). -/
 theorem shriekTraceFunctionGenericallyHolds_of_baseCases
-    (H₀ : ShriekTraceFunctionFiniteEtale ℓ k) (H₁ : ShriekTraceFunctionCurve ℓ k)
+    (H₀ : ShriekTraceFunctionFiniteEtale ℓ k) (H₁ : ShriekTraceFunctionAffineLine ℓ k)
     (H₂ : ShriekTraceFunctionClosedImmersion ℓ k) :
     ShriekTraceFunctionGenericallyHolds ℓ k := by
   intro X Y _ _ _ _ _ _ eX eY f hf ⟨m, hm⟩ hX
@@ -426,8 +423,7 @@ theorem shriekTraceFunctionGenericallyHolds : ShriekTraceFunctionGenericallyHold
   shriekTraceFunctionGenericallyHolds_of_baseCases ℓ k
     (fun _ _ _ _ _ _ _ _ eX eY _ hf _ _ he ↦
       shriekTraceFunctionAt_of_isFinite_of_etale ℓ k eX eY hf he)
-    (fun _ _ _ _ _ _ _ _ eX eY _ hf _ he ↦
-      shriekTraceFunctionAt_of_smoothOfRelativeDimension_one ℓ k eX eY hf he)
+    (fun j E _ _ _ eE he ↦ shriekTraceFunctionAt_overProdMap_polyAffineProj ℓ k j E eE he)
     (fun _ _ _ _ _ _ _ _ eX eY _ hf _ he ↦
       shriekTraceFunctionAt_of_isClosedImmersion ℓ k eX eY hf he)
 
