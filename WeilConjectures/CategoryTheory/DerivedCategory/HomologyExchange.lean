@@ -164,6 +164,61 @@ lemma homologyFunctor_map_exchangeRight_derivedAdjunction [IsIso (exchangeRight 
   rw [reassoc_of% e₁, hA', homologyFunctor_map_exchangeRight_mapDerivedCategoryAdjunction_assoc,
     reassoc_of% e₃]
 
+/-- The isomorphism `Lu ⋙ Lf₂ ≅ Lf₁ ⋙ Lv` of total left derived functors induced by
+`β : u ⋙ f₂ ≅ f₁ ⋙ v`, through the composition isomorphisms of total left derived functors of exact
+functors. -/
+noncomputable def leftDerivedFunctorSquareIso :
+    u.leftDerivedFunctor ⋙ f₂.leftDerivedFunctor ≅ f₁.leftDerivedFunctor ⋙ v.leftDerivedFunctor :=
+  (u.leftDerivedFunctorCompIso f₂).symm ≪≫ (u ⋙ f₂).leftDerivedFunctorNatIso β ≪≫
+    f₁.leftDerivedFunctorCompIso v
+
+omit [HasKInjectiveResolutions D₁] [HasKInjectiveResolutions D₂] in
+/-- The isomorphism `leftDerivedFunctorSquareIso β` corresponds to the isomorphism
+`D(u) ⋙ D(f₂) ≅ D(f₁) ⋙ D(v)` induced by `β`, through the identifications of the total left
+derived functors of the exact functors with the levelwise ones. -/
+lemma leftDerivedFunctorSquareIso_hom_app (K : DerivedCategory C₁) :
+    f₂.mapDerivedCategory.map (u.leftDerivedFunctorIsoMapDerivedCategory.inv.app K) ≫
+      f₂.leftDerivedFunctorIsoMapDerivedCategory.inv.app (u.leftDerivedFunctor.obj K) ≫
+        (leftDerivedFunctorSquareIso β).hom.app K =
+      (Functor.mapDerivedCategorySquareIso β).hom.app K ≫
+        v.mapDerivedCategory.map (f₁.leftDerivedFunctorIsoMapDerivedCategory.inv.app K) ≫
+        v.leftDerivedFunctorIsoMapDerivedCategory.inv.app (f₁.leftDerivedFunctor.obj K) := by
+  simp [leftDerivedFunctorSquareIso, Functor.leftDerivedFunctorCompIso,
+    Functor.leftDerivedFunctorNatIso]
+
+omit [HasKInjectiveResolutions D₁] [HasKInjectiveResolutions D₂] in
+/-- The isomorphism `leftDerivedFunctorSquareIso β` for `β` the composite
+`u ⋙ f₂ ≅ P = Q ≅ f₁ ⋙ v` of isomorphisms of exact functors: it is the composite of the derived
+isomorphisms. -/
+lemma leftDerivedFunctorSquareIso_hom_app_of_eq {P Q : C₁ ⥤ D₂} [P.Additive]
+    [PreservesFiniteLimits P] [PreservesFiniteColimits P] [Q.Additive] [PreservesFiniteLimits Q]
+    [PreservesFiniteColimits Q] (cP : P ≅ u ⋙ f₂) (cQ : Q ≅ f₁ ⋙ v) (h : P = Q)
+    (hβ : β = cP.symm ≪≫ eqToIso h ≪≫ cQ) (K : DerivedCategory C₁) :
+    (leftDerivedFunctorSquareIso β).hom.app K =
+      (u.leftDerivedFunctorCompIso f₂).inv.app K ≫ (P.leftDerivedFunctorNatIso cP).inv.app K ≫
+        eqToHom (by subst h; rfl) ≫ (Q.leftDerivedFunctorNatIso cQ).hom.app K ≫
+        (f₁.leftDerivedFunctorCompIso v).hom.app K := by
+  subst hβ h
+  simp [leftDerivedFunctorSquareIso, Functor.leftDerivedFunctorNatIso,
+    Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm]
+
+/-- **Homology of the derived exchange morphism**, for the isomorphism
+`leftDerivedFunctorSquareIso β : Lu ⋙ Lf₂ ≅ Lf₁ ⋙ Lv` induced by `β`: if the exchange morphism of
+`β` is an isomorphism, then on the homology objects, the exchange morphism for the derived
+adjunctions `Lf₁ ⊣ Rg₁` and `Lf₂ ⊣ Rg₂` is the exchange morphism of `β`. -/
+lemma homologyFunctor_map_exchangeRight_derivedAdjunction_leftDerivedFunctorSquareIso
+    [IsIso (exchangeRight adj₁ adj₂ β)] (n : ℤ) (K : DerivedCategory D₁) :
+    u.map ((g₁.rightDerivedFunctorHomologyFunctorIso n).hom.app K) ≫
+        (u.leftDerivedFunctorHomologyFunctorIso n).hom.app (g₁.rightDerivedFunctor.obj K) ≫
+        (DerivedCategory.homologyFunctor C₂ n).map
+          ((exchangeRight adj₁.derivedAdjunction adj₂.derivedAdjunction
+            (leftDerivedFunctorSquareIso β)).app K) =
+      (exchangeRight adj₁ adj₂ β).app ((DerivedCategory.homologyFunctor D₁ n).obj K) ≫
+        g₂.map ((v.leftDerivedFunctorHomologyFunctorIso n).hom.app K) ≫
+        (g₂.rightDerivedFunctorHomologyFunctorIso n).hom.app (v.leftDerivedFunctor.obj K) :=
+  homologyFunctor_map_exchangeRight_derivedAdjunction adj₁ adj₂ β _
+    (leftDerivedFunctorSquareIso_hom_app β) n K
+
 end Derived
 
 end CategoryTheory.Adjunction

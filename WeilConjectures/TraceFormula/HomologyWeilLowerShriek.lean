@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
+public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
@@ -72,19 +73,6 @@ noncomputable def weilLowerShriekIsoWeilLowerStar [IsProper f.left]
       weilLowerShriekComparison_hom]
     rw [nat, reassoc_of% hp]
     rfl)
-
-/-- **Homology of the pushforward of Weil objects along a finite morphism**: for finite `f`, the
-Weil sheaf `Hʲ(Rf_*^Weil K)` for `e_Y` is the pushforward `f_* Hʲ(K)` of the Weil sheaf `Hʲ(K)`.
-The pushforward along a finite morphism is exact, so `Rf_*` is computed levelwise and commutes
-with homology, and on homology the derived base-change morphism of the Frobenius square is the
-base-change morphism of module objects. -/
-theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
-    (K : WeilBoundedConstructible ℓ eX.hom) (j : ℤ) :
-    Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eY j).obj
-        ((weilLowerStar ℓ eX eY f hf).obj K) ≅
-      (weilSheafLowerStar ℓ eX eY hf).obj
-        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) :=
-  sorry
 
 /-- **Homology of the lower shriek of Weil objects along a finite morphism**:
 `Hʲ(Rf_!^Weil K) ≅ f_* Hʲ(K)` as Weil sheaves for `e_Y`. -/
