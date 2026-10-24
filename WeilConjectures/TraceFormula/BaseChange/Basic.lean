@@ -109,7 +109,8 @@ lemma natCast_ringChar_left_eq_zero : (ringChar k : Γ(X.left, ⊤)) = 0 :=
 `#k = p ^ a`. -/
 lemma frobeniusIterate_overFrobenius_left (N : ℕ) :
     (frobeniusIterate (overFrobenius X) N).left =
-      X.left.iterateFrobenius (FiniteField.ringChar_prime k) (natCast_ringChar_left_eq_zero X)
+      X.left.iterateFrobenius (FiniteField.ringChar_prime (k := k))
+        (natCast_ringChar_left_eq_zero X)
         (FiniteField.frobeniusExponent k * N) := by
   induction N with
   | zero => rw [frobeniusIterate_zero, mul_zero, Scheme.iterateFrobenius_zero]; rfl
@@ -152,7 +153,7 @@ lemma ringChar_cast_eq_zero : (ringChar k : Ω) = 0 := by
 `#k ^ N`-power map. -/
 lemma iterateFrobenius_spec_eq_specMap_powCardPowRingHom (N : ℕ)
     (hΩ : (ringChar k : Γ(Spec (.of Ω), ⊤)) = 0) :
-    (Spec (.of Ω)).iterateFrobenius (FiniteField.ringChar_prime k) hΩ
+    (Spec (.of Ω)).iterateFrobenius (FiniteField.ringChar_prime (k := k)) hΩ
         (FiniteField.frobeniusExponent k * N) = Spec.map (powCardPowRingHom k Ω N) := by
   rw [Scheme.iterateFrobenius_Spec _ _ (ringChar_cast_eq_zero (k := k) (Ω := Ω))]
   refine congrArg Spec.map (CommRingCat.hom_ext (RingHom.ext fun z ↦ ?_))

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 public import WeilConjectures.TraceFormula.CompactCohomology
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
 
 /-!
 
@@ -17,11 +18,13 @@ For an open immersion `j : U ⟶ X` stable under the Frobenius, the extension by
 the pullbacks along the Frobenii on compactly supported cohomology. This is the first square of
 the open piece in blueprint `prop-trf-trace-additivity-open-closed` (Steps 2(a) and 3).
 
-## Sorried input
+## Main input
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion`:
   for vertical open immersions, `Ex_!` is the extension-by-zero base change through
-  `Rj_! ≅ j_!` (blueprint `def-exchange-projection`).
+  `Rj_! ≅ j_!` (blueprint `def-exchange-projection`). It is computed with the trivial
+  compactification `j = 𝟙 ∘ j`
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen`).
 
 -/
 
@@ -84,8 +87,10 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion
         (boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
           sq.toCommSq).app K =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K) :=
-  sorry
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app
+          K) := by
+  have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen ℓ sq) K
+  simpa using h
 
 end BaseChange
 section OpenImmersion

@@ -31,6 +31,8 @@ that `q^* j_! = j'_!` is again fully faithful.
 - `CategoryTheory.Adjunction.map_map_unit_app_eq`: `R (L (η X)) = η (R (L X))` when `ε (L X)` is
   an isomorphism.
 - `CategoryTheory.Adjunction.isIso_map_unit_app_obj`: `J' (η_{J K})` is an isomorphism.
+- `CategoryTheory.Adjunction.iso_ext_of_inv_app_comp_counit`: an isomorphism `L ≅ 𝟭` from a
+  left adjoint `L ⊣ R` with `R ≅ 𝟭` is determined by its composite with the counit.
 -/
 
 @[expose] public section
@@ -131,6 +133,26 @@ lemma map_bijective_of_isIso_unit_app (adj : L ⊣ R) (A : C) {B : C}
     ((asIso (adj.unit.app B)).homToEquiv (Z := A)).bijective
 
 end UnitIso
+
+/-- An isomorphism `σ : L ≅ 𝟭` from a left adjoint `L ⊣ R` with `R ≅ 𝟭` is determined by the
+composite `σ⁻¹_{R W} ≫ ε_W`. -/
+lemma iso_ext_of_inv_app_comp_counit {𝒜 : Type*} [Category* 𝒜]
+    {L R : 𝒜 ⥤ 𝒜} (adj : L ⊣ R) (e : R ≅ 𝟭 𝒜) (σ σ' : L ≅ 𝟭 𝒜)
+    (h : ∀ W, σ.inv.app (R.obj W) ≫ adj.counit.app W = e.hom.app W)
+    (h' : ∀ W, σ'.inv.app (R.obj W) ≫ adj.counit.app W = e.hom.app W) : σ = σ' := by
+  have : R.Full := Functor.Full.of_iso e.symm
+  have : R.Faithful := Functor.Faithful.of_iso e.symm
+  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
+  have key : ∀ W, σ.inv.app (R.obj W) = σ'.inv.app (R.obj W) := fun W ↦ by
+    rw [← cancel_mono (adj.counit.app W), h, h']
+  ext1
+  rw [← Iso.inv_eq_inv σ σ']
+  ext M
+  have hn := σ.inv.naturality (e.hom.app M)
+  have hn' := σ'.inv.naturality (e.hom.app M)
+  simp only [Functor.id_map] at hn hn'
+  rw [← cancel_epi (e.hom.app M)]
+  erw [hn, hn', key]
 
 end Adjunction
 

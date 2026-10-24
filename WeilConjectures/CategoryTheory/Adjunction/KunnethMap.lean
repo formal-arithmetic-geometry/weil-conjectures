@@ -76,6 +76,17 @@ lemma projectionMorphism_natural_right (A : C) {B B' : D} (h : B ⟶ B') :
   rw [← δ_natural_right_assoc, whisker_exchange, Category.assoc]
   rfl
 
+/-- The projection morphism is natural in its first variable. -/
+@[reassoc]
+lemma projectionMorphism_natural_left {A A' : C} (φ : A ⟶ A') (B : D) :
+    G.map φ ▷ B ≫ adj.projectionMorphism A' B =
+      adj.projectionMorphism A B ≫ G.map (φ ▷ F.obj B) := by
+  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
+    ← homEquiv_naturality_right, ← δ_natural_left_assoc, Category.assoc, ← comp_whiskerRight,
+    ← comp_whiskerRight]
+  congr 3
+  exact adj.counit.naturality φ
+
 
 /-- The *left projection morphism* `B ⊗ G A ⟶ G (F B ⊗ A)` of an adjunction `F ⊣ G` with `F`
 oplax monoidal: the adjoint of `F (B ⊗ G A) ⟶ F B ⊗ F G A ⟶ F B ⊗ A`. -/

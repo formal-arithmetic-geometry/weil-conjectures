@@ -59,8 +59,8 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
     at hV hH
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.id_comp, compIso_hom_app]
-  dsimp only [shriek, Functor.comp_obj, Functor.comp_map, Compactification.copy_i,
-    Compactification.copy_g]
+  dsimp only [shriek, ExchangeFormalism.shriek, Functor.comp_obj, Functor.comp_map,
+    Compactification.copy_i, Compactification.copy_g]
   have hPC := F.pfComp'_assoc_inv_app 𝒯.p₁ 𝒯.p₂ 𝒯.ch.g (𝒯.p₁ ≫ 𝒯.p₂) 𝒯.cgh.g 𝒯.cfgh.g rfl 𝒯.p₂_g
     𝒯.fg_h.p_g 𝒯.p₁_g ((F.sh 𝒯.cfgh.i).obj K)
   have hSC := F.shComp'_assoc_inv_app 𝒯.cf.i 𝒯.q 𝒯.q' 𝒯.cfg.i (𝒯.q ≫ 𝒯.q') 𝒯.cfgh.i 𝒯.i_q rfl
