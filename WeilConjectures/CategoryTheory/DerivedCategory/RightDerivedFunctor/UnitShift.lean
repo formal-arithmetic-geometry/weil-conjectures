@@ -19,10 +19,7 @@ shows that its unit `F.mapHomotopyCategory ⋙ Qh ⟶ Qh ⋙ F.rightDerivedFunct
 the shifts for this structure (`Functor.commShift_rightDerivedFunctorUnit`), and deduces that
 the derived adjunction `L.mapDerivedCategory ⊣ R.rightDerivedFunctor` of an adjunction `L ⊣ R`
 with `L` exact commutes with the shifts
-(`Adjunction.commShift_mapDerivedCategoryRightDerivedAdjunction`). It also records that
-transporting an adjunction commuting with the shifts along an isomorphism of right adjoints
-commuting with the shifts gives an adjunction commuting with the shifts
-(`Adjunction.commShift_ofNatIsoRight`).
+(`Adjunction.commShift_mapDerivedCategoryRightDerivedAdjunction`).
 -/
 
 @[expose] public section
@@ -125,22 +122,6 @@ instance commShift_mapDerivedCategoryRightDerivedAdjunction :
     rw [e]; infer_instance
   exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Qh
     (fun X ↦ ⟨_, (DerivedCategory.Qh.objObjPreimageIso X).inv, inferInstance⟩)
-
-end Adjunction
-
-namespace Adjunction
-
-variable {A : Type*} [AddMonoid A] {C D : Type*} [Category C] [Category D] [HasShift C A]
-  [HasShift D A] {F : C ⥤ D} {G H : D ⥤ C} [F.CommShift A] [G.CommShift A] [H.CommShift A]
-
-/-- An adjunction commuting with shifts, transported along an isomorphism of right adjoints
-commuting with shifts, commutes with shifts. -/
-lemma commShift_ofNatIsoRight (adj : F ⊣ G) (iso : G ≅ H) [adj.CommShift A]
-    [NatTrans.CommShift iso.hom A] : (adj.ofNatIsoRight iso).CommShift A := by
-  have : NatTrans.CommShift iso.inv A := NatTrans.CommShift.of_iso_inv iso A
-  exact
-    { commShift_unit := by dsimp only [ofNatIsoRight]; infer_instance
-      commShift_counit := by dsimp only [ofNatIsoRight]; infer_instance }
 
 end Adjunction
 
