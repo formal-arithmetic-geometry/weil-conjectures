@@ -68,6 +68,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+attribute [local instance] boundedConstructibleBraiding
+
 namespace Correspondence
 
 variable {ℓ : ℕ} [Fact ℓ.Prime]
@@ -130,17 +132,16 @@ structure TraceSpecialization where
   /-- the exceptional exchange `β_d : Ψ_F Rd^! ⟶ Rd'^! Ψ_X`. -/
   βd : boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ⋙ ΨF ⟶
     ΨX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d
-  /-- the specialization units commute with the adjunctions `Lι^* ⊣ Rι_*`. -/
-  σF_comp_map_homEquiv_symm (M : Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-      (h : 𝟙_ _ ⟶ (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).obj M) :
-    σF ≫ ΨF.map ((Functor.Monoidal.εIso
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom ≫
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm h) =
-      (Functor.Monoidal.εIso
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).hom ≫
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _).symm
-          (σC ≫ ΨC.map h ≫ χι.app M)
-  /-- the composition law `θ_F = d'^! θ_X ∘ β_d(ω_X)` of the dualizing maps. -/
+  /-- the unit identity `χ_ι Ψ_C(η_ι) σ_C = Rι'_*(σ_F) η_ι'` (blueprint `det-tf-sp-trace-morphism`),
+  read through the unit isomorphisms `Lι^* ℚ̄_ℓ ≅ ℚ̄_ℓ` of the monoidal pullbacks. -/
+  unit_comp : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).unit.app
+      (𝟙_ _)) ≫ χι.app _ =
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.app (𝟙_ _) ≫
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
+        ((Functor.Monoidal.εIso
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).inv ≫ σF ≫
+          ΨF.map (Functor.Monoidal.εIso
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom)
   θF_eq : θF = ΨF.map (dualizingComplexComp ℓ F.d).inv ≫ βd.app (dualizingComplex' ℓ X) ≫
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d).map θX ≫
     (dualizingComplexComp ℓ F'.d).hom
@@ -152,9 +153,56 @@ structure TraceSpecialization where
       βc.app _ ≫ (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).map
           (χΔ.app M) ≫ (F'.upperShriekLowerStarIso.app (ΨX.obj M)).hom
 
+
+variable {c'} in
+/-- The exceptional pullback `Rc'^! (K' ⊠ D K')` of the universal kernel along the support of
+`c'` vanishes as soon as the ordinary pullback `Lc₂'^* K'` does: by external duality
+(`verdierDualityIso`) it is `RHom(Lc₂'^* K', Rc₁'^! K')`. -/
+lemma isZero_upperShriek_externalProduct_of_isZero
+    (h : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c'.c₂).obj K')) :
+    IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).obj
+      (externalProduct ℓ K' (verdierDual ℓ (toPoint X') K'))) :=
+  (isZero_ihom_obj_of_isZero h _).of_iso c'.verdierDualityIso.symm
+
 namespace TraceSpecialization
 
 variable {c F c' F'} (T : c.TraceSpecialization F c' F')
+
+/-- The diagram chase behind `σF_comp_map_homEquiv_symm`, in an arbitrary category. -/
+private lemma comp_eq_of_unit_comp {𝒞 : Type*} [Category 𝒞] {A₀ A₁ A₂ A₃ A₄ A₅ A₆ : 𝒞}
+    (σ : A₀ ⟶ A₁) (u : A₁ ⟶ A₂) (m : A₂ ⟶ A₃) (χ : A₃ ⟶ A₄) (χ₀ : A₂ ⟶ A₅) (m' : A₅ ⟶ A₄)
+    (u' : A₀ ⟶ A₆) (w : A₆ ⟶ A₅) (w' : A₆ ⟶ A₄) (hχ : m ≫ χ = χ₀ ≫ m')
+    (hu : σ ≫ u ≫ χ₀ = u' ≫ w) (hw : w ≫ m' = w') :
+    σ ≫ (u ≫ m) ≫ χ = u' ≫ w' := by
+  rw [Category.assoc, hχ, ← hw, reassoc_of% hu]
+
+/-- The specialization units commute with the adjunctions `Lι^* ⊣ Rι_*`: for `g : Lι^* ℚ̄_ℓ ⟶ M`,
+the specialization `σ_F Ψ_F(g)` is the `Lι'^* ⊣ Rι'_*` adjoint of the specialization
+`χ_ι Ψ_C(g^♯) σ_C` of the adjoint `g^♯ : ℚ̄_ℓ ⟶ Rι_* M` of `g`. It follows from the unit identity
+`unit_comp` and the naturality of `χ_ι`. -/
+lemma σF_comp_map_eq_homEquiv_symm (M : Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (g : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).obj (𝟙_ _) ⟶ M) :
+    T.σF ≫ T.ΨF.map ((Functor.Monoidal.εIso
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom ≫ g) =
+      (Functor.Monoidal.εIso
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).hom ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _).symm
+          (T.σC ≫ T.ΨC.map
+            (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _) g) ≫
+            T.χι.app M) := by
+  have key : T.σC ≫ T.ΨC.map
+      (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _) g) ≫
+        T.χι.app M =
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _)
+        ((Functor.Monoidal.εIso
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).inv ≫ T.σF ≫
+          T.ΨF.map ((Functor.Monoidal.εIso
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom ≫ g)) := by
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, T.ΨC.map_comp]
+    exact comp_eq_of_unit_comp _ _ _ _ _ _ _ _ _ (T.χι.naturality g) T.unit_comp
+      (((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map_comp _
+        _).symm.trans (congrArg _ (by rw [T.ΨF.map_comp]; simp only [Category.assoc])))
+  rw [key, Equiv.symm_apply_apply, (Functor.Monoidal.εIso _).hom_inv_id_assoc]
 
 /-- The *specialization* `sp_F(z) = θ_F Ψ_F(z) σ_F` of a Borel–Moore section `z` of the fixed
 locus (blueprint `sk-prop-tf-trace-specialization`). -/
@@ -170,7 +218,10 @@ lemma sp_traceClass : T.sp (c.traceClass F) =
       ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _).symm
         (T.σC ≫ T.ΨC.map c.mate ≫ T.ΨC.map (c.traceMap F) ≫ T.χι.app _ ≫
           (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map T.θF) := by
-  have h1 := T.σF_comp_map_homEquiv_symm (dualizingComplex' ℓ F.F) (c.mate ≫ c.traceMap F)
+  have h1 := T.σF_comp_map_eq_homEquiv_symm (dualizingComplex' ℓ F.F)
+    (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
+      (c.mate ≫ c.traceMap F))
+  rw [Equiv.apply_symm_apply] at h1
   have h2 :=
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv_naturality_right_symm
     (T.σC ≫ T.ΨC.map (c.mate ≫ c.traceMap F) ≫ T.χι.app _) T.θF
