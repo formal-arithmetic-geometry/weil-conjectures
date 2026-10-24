@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
-public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.TraceFormula.GraphPieces
+public import WeilConjectures.TraceFormula.PointNormalization
+public import WeilConjectures.TraceFormula.ProperCompatibility
 
 /-!
 
@@ -128,17 +130,23 @@ theorem localTerm_traceClass_eq_zero_of_isContractingAt (F : c.FixedLocus)
     (c.traceClass F).localTerm j = 0 :=
   sorry
 
-variable (K) in
-/-- The *stalk map* `v_x : K_x ≅ (Lh^* K)_x ⟶ K_x` of a map `v : Lh^* K ⟶ K` at a rational
-point `x` fixed by `h`, through `Lx^* Lh^* ≅ L(x ≫ h)^* = Lx^*`. -/
-noncomputable def graphStalkMap (h : X ⟶ X)
-    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
-    (x : RationalPoint X) (hx : x ≫ h = x) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K ⟶
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K :=
-  eqToHom (by rw [hx]) ≫
-    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).hom.app K ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map v
+variable {c}
+
+/-- Being contracting at a point only depends on the support of the correspondence. -/
+lemma IsContractingAt.withCoeff {y : RationalPoint c.C} (hc : c.IsContractingAt y)
+    (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K') :
+    (c.withCoeff K' u').IsContractingAt y :=
+  ⟨hc.1, hc.2, hc.3, hc.4⟩
+
+lemma FixedLocus.liftPoint_withCoeff (F : c.FixedLocus)
+    (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K')
+    (y : RationalPoint c.C) (hy : y ≫ c.c₁ = y ≫ c.c₂) :
+    (F.withCoeff K' u').liftPoint y hy = F.liftPoint y hy :=
+  rfl
 
 lemma comp_eq_of_isContractingAt_ofGraph {h : X ⟶ X}
     {v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K}
@@ -147,12 +155,79 @@ lemma comp_eq_of_isContractingAt_ofGraph {h : X ⟶ X}
   simp only [ofGraph, Category.comp_id] at this
   exact this.symm
 
+section Graph
+
+variable {h : X ⟶ X}
+  {v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K}
+  (F : (ofGraph K h v).FixedLocus) {x : RationalPoint X}
+  {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
+  [IsOpenImmersion j.left] [IsClosedImmersion j.left]
+
+/-- The open piece `K^U = j_! Lj^* K` of a graph correspondence contracting at `x` contributes
+nothing to the local term at `x`: its stalk at `x` vanishes (item 2). -/
+lemma localTerm_traceClassWithCoeff_graphOpenPieceCoeff_eq_zero
+    (hc : (ofGraph K h v).IsContractingAt x)
+    (hB : Set.range j.left.base =
+      {(F.liftPoint x hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
+    (F.traceClassWithCoeff (pointOpenPiece K x)
+      (graphOpenPieceCoeff K v (comp_eq_of_isContractingAt_ofGraph hc) ≫
+        (boundedConstructibleUpperShriekId ℓ X).inv.app _)).localTerm j = 0 := by
+  have hx := comp_eq_of_isContractingAt_ofGraph hc
+  have hc' := hc.withCoeff (pointOpenPiece K x)
+    (graphOpenPieceCoeff K v hx ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _)
+  refine localTerm_traceClass_eq_zero_of_isContractingAt _ (F.withCoeff _ _) x hc' j
+    hB ?_
+  change IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).obj
+    (pointOpenPiece K x))
+  rw [Category.comp_id]
+  exact isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ (pointComplι x) x
+    (isCompl_range_pointComplι x).disjoint _
+
+/-- The closed piece `K^Z = Rx_* Lx^* K` of a graph correspondence at a fixed rational point `x`
+contributes the trace of the stalk map: its trace class is the pushforward of the trace class
+of the point correspondence of `v_x` (proper pushforward compatibility), which integrates to
+`tr(v_x)` (point normalization). -/
+lemma localTerm_traceClassWithCoeff_graphClosedPieceCoeff (hx : x ≫ h = x)
+    (hB : Set.range j.left.base = {(F.liftPoint x (by
+      change x ≫ 𝟙 X = x ≫ h
+      rw [Category.comp_id, hx])).left.base (default : Spec (.of k))})
+    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
+    (F.traceClassWithCoeff _ (graphClosedPieceCoeff K v hx)).localTerm j =
+      trace (graphStalkMap K h v x hx) := by
+  let P := graphClosedPieceDiagram K v hx
+  let Fc : (ofEnd _ (graphStalkMap K h v x hx)).FixedLocus := fixedLocusOfEnd _
+  let Fb : P.pushforward.FixedLocus := F.withCoeff _ (graphClosedPieceCoeff K v hx)
+  have hfix : P.fixMap Fc Fb = F.liftPoint x (by
+      change x ≫ 𝟙 X = x ≫ h
+      rw [Category.comp_id, hx]) := by
+    refine Fb.hom_ext ?_
+    rw [P.fixMap_ι]
+    exact (Category.id_comp x).trans (F.liftPoint_ι x _).symm
+  have hrange : Set.range (P.fixMap Fc Fb).left.base ⊆ Set.range j.left.base := by
+    rw [hB, hfix]
+    rintro _ ⟨z, rfl⟩
+    rw [Subsingleton.elim (α := Spec (.of k)) z default]
+    rfl
+  have hZ := P.traceClassPushforward_eq Fc Fb
+  rw [ProperPushforwardDiagram.traceClassPushforward] at hZ
+  refine (congrArg (BorelMooreSection.localTerm j) hZ.symm).trans ?_
+  rw [BorelMooreSection.localTerm_pushforward j _ hrange]
+  exact integral_traceClass_ofEnd _
+
+end Graph
+
 /-- **Local terms of contracting graph correspondences** (blueprint `lem-trf-local-term-locality`,
 item 1, for correspondences with exceptional leg `c₁ = 𝟙`; Varshavsky, Thm. 2.1.3): if the graph
 correspondence `(𝟙, h)` with coefficient map `v : Lh^* K ⟶ K` is contracting at the fixed
 rational point `x`, and `B` is an open and closed subscheme of the fixed locus, proper over `s`,
 with underlying set `{x}`, then the local term along `B` is the trace of the stalk map
-`v_x : K_x ⟶ K_x`. No invertibility of `v` is required. -/
+`v_x : K_x ⟶ K_x`. No invertibility of `v` is required.
+
+Following Varshavsky, the local term is additive along the pieces `K^U = j_! Lj^* K` and
+`K^Z = Rx_* Lx^* K` of the complement `j : X ∖ {x} ⟶ X` (`traceClass_ofGraph_eq_add`); the open
+piece has zero stalk at `x`, so contributes nothing by item 2
+(`localTerm_traceClassWithCoeff_graphOpenPieceCoeff_eq_zero`), and the closed piece contributes
+`tr(v_x)` (`localTerm_traceClassWithCoeff_graphClosedPieceCoeff`). -/
 theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
     (F : (ofGraph K h v).FixedLocus) (x : RationalPoint X)
@@ -162,8 +237,11 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
       {(F.liftPoint x hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     ((ofGraph K h v).traceClass F).localTerm j =
-      trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) :=
-  sorry
+      trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) := by
+  rw [traceClass_ofGraph_eq_add K v (comp_eq_of_isContractingAt_ofGraph hc) F,
+    BorelMooreSection.localTerm_add,
+    localTerm_traceClassWithCoeff_graphClosedPieceCoeff F j _ hB,
+    localTerm_traceClassWithCoeff_graphOpenPieceCoeff_eq_zero F j hc hB, add_zero]
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] in

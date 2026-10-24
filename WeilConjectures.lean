@@ -12609,6 +12609,7 @@ public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.OpenPieceFrobenius
 public import WeilConjectures.TraceFormula.OpenSquare
+public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointTrace
 public import WeilConjectures.TraceFormula.Product
