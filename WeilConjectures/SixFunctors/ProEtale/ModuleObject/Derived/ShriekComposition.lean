@@ -285,25 +285,27 @@ noncomputable def boundedConstructibleLowerShriekComp_padicAlgCl :
       Functor.associator _ _ _) ≪≫
     (Functor.associator _ _ _).symm
 
-/-- Unfolding `boundedConstructibleLowerShriekComp_padicAlgCl`. -/
-lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq :
-    boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g = (
-  let c := compactificationOverField f
-  let c' := compactificationOverField g
-  have hd := Compactification.exists_isPullback_overG_overI c c'
-  let d := hd.choose
-  let e := Compactification.overCompObjIso c c' d
+/-- The isomorphism `R(f ≫ g)_! ≅ Rf_!^c ⋙ Rg_!^{c'}` attached to compactifications `c` of `f` and
+`c'` of `g` and a compactification `d` of `p ≫ j` with cartesian square `hd`, as in the definition
+of `boundedConstructibleLowerShriekComp_padicAlgCl`. -/
+noncomputable def boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl
+    (c : Compactification f.left) (c' : Compactification g.left)
+    (d : Compactification (c.overG ≫ c'.overI).left)
+    (hd : IsPullback c.overG d.overI c'.overI d.overG) :
+    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g) ≅
+      boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c ⋙
+        boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c' :=
   have : IsOpenImmersion (c.overI ≫ d.overI).left := by
     rw [Over.comp_left]
     infer_instance
-  have : IsProper e.hom.left := by
-    simp only [e, Compactification.overCompObjIso, Over.isoMk_hom_left, Iso.refl_hom]
+  have : IsProper (Compactification.overCompObjIso c c' d).hom.left := by
+    simp only [Compactification.overCompObjIso, Over.isoMk_hom_left, Iso.refl_hom]
     infer_instance
-  have sqe : IsPullback (𝟙 X) (c.overComp c' d).overI (c.overI ≫ d.overI) e.hom :=
-    IsPullback.of_horiz_isIso ⟨by simp [e]⟩
+  have sqe : IsPullback (𝟙 X) (c.overComp c' d).overI (c.overI ≫ d.overI)
+      (Compactification.overCompObjIso c c' d).hom :=
+    IsPullback.of_horiz_isIso ⟨by simp⟩
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ sqe
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
-    hd.choose_spec
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ hd
   boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ _ (c.overComp c' d) ≪≫
     (boundedConstructibleLowerShriekRefinementIso _ ℓ sqe
       (Compactification.overCompObjIso_hom_overG c c' d)).symm ≪≫
@@ -313,10 +315,22 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-        _ ℓ hd.choose_spec)).symm _ ≪≫
+        _ ℓ hd)).symm _ ≪≫
       Functor.associator _ _ _) ≪≫
-    (Functor.associator _ _ _).symm) := by
+    (Functor.associator _ _ _).symm
+
+/-- The composition isomorphism of the lower shriek is the isomorphism attached to the chosen
+compactifications. -/
+lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq :
+    boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g =
+      boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl ℓ f g
+        (compactificationOverField f) (compactificationOverField g)
+        (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
+          (compactificationOverField g)).choose
+        (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
+          (compactificationOverField g)).choose_spec := by
   unfold boundedConstructibleLowerShriekComp_padicAlgCl
+    boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl
   rfl
 
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` for the exceptional inverse image on
