@@ -76,7 +76,7 @@ the restrictions being the derived pullbacks of Weil objects. It comes from the 
 triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶`, a triangle of Weil objects, and the additivity of
 traces in distinguished triangles (blueprint `prop-trf-trace-formal-laws`); no
 invertibility of `φ` is used in the blueprint. -/
-theorem trace_compactFrobenius_eq_add
+theorem trace_compactFrobenius_eq_add [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ)
     [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦU.left]

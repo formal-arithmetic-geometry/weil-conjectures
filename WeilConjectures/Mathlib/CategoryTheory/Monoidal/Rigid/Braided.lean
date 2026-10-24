@@ -184,6 +184,14 @@ theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 
         (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫ (λ_ (𝟙_ C)).inv) ≫ (λ_ (𝟙_ C)).hom := by simp
     _ = 𝟙 _ := by rw [h']; simp [unitors_equal]
 
+/-- The trace of an endomorphism of the unit, for the canonical self-duality of the unit, is the
+endomorphism itself. -/
+theorem trace_tensorUnit (f : 𝟙_ C ⟶ 𝟙_ C) : trace f = f := by
+  change (ρ_ _).inv ≫ f ▷ 𝟙_ C ≫ (β_ (𝟙_ C) (𝟙_ C)).hom ≫ (ρ_ _).hom = f
+  simp only [braiding_tensorUnit_left, Category.assoc]
+  rw [unitors_equal, Iso.inv_hom_id, Category.comp_id, MonoidalCategory.rightUnitor_naturality,
+    Iso.inv_hom_id_assoc]
+
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
 adjoint to `X ⊗ - ≅ - ⊗ X`. -/
