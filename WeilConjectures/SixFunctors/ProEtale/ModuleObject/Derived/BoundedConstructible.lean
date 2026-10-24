@@ -883,8 +883,7 @@ constructible complexes (`E`-coefficient): the internal hom of the monoidal clos
 full subcategory `Dᵇc(X)⟦E̲⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction
 of `RHom(X)⟦E̲⟧` in both variables. -/
 noncomputable def boundedConstructibleHom :
-    (PadicSubfieldConstructible X.left ℓ E)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj
-      E⟧ ⥤
+    (PadicSubfieldConstructible X.left ℓ E)ᵒᵖ ⥤ PadicSubfieldConstructible X.left ℓ E ⥤
       PadicSubfieldConstructible X.left ℓ E :=
   MonoidalClosed.internalHom
 
