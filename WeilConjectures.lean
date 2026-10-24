@@ -7689,6 +7689,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnito
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TensorMappingCone
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceShiftUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceSupertrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.DerivedCategory.NotPreservesCoproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
@@ -12379,6 +12380,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSquareCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
