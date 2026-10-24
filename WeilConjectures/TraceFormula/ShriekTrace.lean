@@ -110,6 +110,7 @@ lemma lowerShriek_map_lowerShriekDualizingComplexTrace_comp_counit (a : A ⟶ B)
     eqToIso.inv, Functor.map_comp, Category.assoc] at hP ⊢
   rw [hP, reassoc_of% hn, he]
 
+@[reassoc]
 lemma lowerShriek_map_comp_eqToHom {r r' : A ⟶ B} (h : r = r')
     {M N : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : M ⟶ N) :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ r).map φ ≫
@@ -284,6 +285,7 @@ set_option maxHeartbeats 1000000 in
 direct images: for squares `ιc ≫ c = dc ≫ Δc` and `ιb ≫ b = db ≫ Δb` and a map
 `(h, g, f, q)` between them, the two maps `Rb_! Rg_! Rιc_! ω ⟶ RΔb_! ω` built from the
 composition laws and the traces `t_dc`, `t_f`, resp. `t_h`, `t_db` agree. -/
+@[reassoc]
 theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb ≫ b = db ≫ Δb)
     (wgb : g ≫ b = c ≫ q) (wq : Δc ≫ q = f ≫ Δb) (wh : ιc ≫ g = h ≫ ιb)
     (whd : dc ≫ f = h ≫ db) :
@@ -369,5 +371,48 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
   simp only [eqToHom_trans, eqToHom_trans_assoc]
 
 end Exchange
+
+section LowerStar
+
+variable {D : Over (Spec (.of k))} [LocallyOfFiniteType D.hom] [QuasiCompact D.hom]
+  [IsSeparated D.hom]
+
+lemma lowerStarComp_inv_app_eq (a : A ⟶ B) (b : B ⟶ C) [IsProper a.left] [IsProper b.left]
+    [IsProper (a ≫ b).left] (K : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b).inv.app K =
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (a ≫ b)).inv.app K ≫
+        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a b).hom.app K ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ b).hom.app
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj K) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ b).map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ a).hom.app K) := by
+  rw [boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp, Iso.inv_hom_id_app_assoc]
+
+lemma lowerStarComp_hom_app_eq (a : A ⟶ B) (b : B ⟶ C) [IsProper a.left] [IsProper b.left]
+    [IsProper (a ≫ b).left] (K : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b).hom.app K =
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ b).map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ a).inv.app K) ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ b).inv.app
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj K) ≫
+        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a b).inv.app K ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (a ≫ b)).hom.app K := by
+  rw [← cancel_mono ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a
+    b).inv.app K), Iso.hom_inv_id_app, lowerStarComp_inv_app_eq]
+  simp [← Functor.map_comp]
+
+@[reassoc]
+lemma lowerShriekIsoLowerStar_hom_app_comp_eqToHom {r r' : A ⟶ B} (h : r = r') [IsProper r.left]
+    [IsProper r'.left] (K : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).hom.app K ≫
+        eqToHom (congrArg (fun s ↦
+          (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ s).obj K) h) =
+      eqToHom (congrArg (fun s ↦
+          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ s).obj K) h) ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r').hom.app K := by
+  subst h
+  simp
+
+end LowerStar
 
 end AlgebraicGeometry.ProEtale.CondensedRing

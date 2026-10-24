@@ -195,30 +195,6 @@ theorem kernelClass_pushforward :
         kernelPushforward ℓ P.f K :=
   sorry
 
-variable (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
-
-/-- **Exchange of the support isomorphisms** (blueprint `lem-trf-trace-map-exchange`, (2)):
-`Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`, read through `g ∘ i_c = i_b ∘ h`. -/
-theorem lowerStar_map_supportIso_comp_exchange :
-    (boundedConstructibleLowerStar _ ℓ P.g).map Fc.supportIso.hom ≫
-        (lowerStarUpperShriekExchange ℓ P.g_comp_support).app
-          ((boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) ≫
-        (boundedConstructibleUpperShriek _ ℓ P.pushforward.support).map
-          ((boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map P.f P.f)).hom.app
-              (dualizingComplex' ℓ X) ≫
-            eqToHom (by rw [P.diag_comp_prodMap]) ≫
-            (boundedConstructibleLowerStarComp _ ℓ P.f (diag Y)).inv.app
-              (dualizingComplex' ℓ X) ≫
-            (boundedConstructibleLowerStar _ ℓ (diag Y)).map
-              (lowerStarDualizingComplexTrace ℓ P.f)) =
-      (boundedConstructibleLowerStarComp _ ℓ Fc.ι P.g).hom.app (dualizingComplex' ℓ Fc.F) ≫
-        eqToHom (by rw [← P.fixMap_ι]) ≫
-        (boundedConstructibleLowerStarComp _ ℓ (P.fixMap Fc Fb) Fb.ι).inv.app
-          (dualizingComplex' ℓ Fc.F) ≫
-        (boundedConstructibleLowerStar _ ℓ Fb.ι).map
-          (lowerStarDualizingComplexTrace ℓ (P.fixMap Fc Fb)) ≫
-        Fb.supportIso.hom :=
-  sorry
 
 end Correspondence.ProperPushforwardDiagram
 
