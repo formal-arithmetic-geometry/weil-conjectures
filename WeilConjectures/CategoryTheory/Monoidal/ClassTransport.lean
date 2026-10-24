@@ -81,8 +81,8 @@ theorem transport_class
     {M : P} (hbraid : μ F M (G.obj (𝟙_ S)) ≫ F.map (β_ M (G.obj (𝟙_ S))).hom =
       (β_ (F.obj M) (F.obj (G.obj (𝟙_ S)))).hom ≫ μ F (G.obj (𝟙_ S)) M)
     {K : S} (x : F.obj M ⟶ H.obj (B₁.obj K)) :
-    μ F M (G.obj (𝟙_ S)) ≫ F.map ((β_ M (G.obj (𝟙_ S))).hom ≫ pf (𝟙_ S) M ≫
-        G.map (β_ (𝟙_ S) (F.obj M)).hom ≫ G.map (ρ_ (F.obj M)).hom ≫
+    μ F M (G.obj (𝟙_ S)) ≫ F.map (((β_ M (G.obj (𝟙_ S))).hom ≫ pf (𝟙_ S) M ≫
+        G.map (β_ (𝟙_ S) (F.obj M)).hom) ≫ G.map (ρ_ (F.obj M)).hom ≫
         (adjGH.homEquiv _ _).symm x) ≫ transportζ adjFG ιΦ (B₁.obj K) ≫ adjSB.counit.app K =
       F.obj M ◁ adjFG.counit.app (𝟙_ S) ≫ (ρ_ _).hom ≫ x ≫ ιΨ.hom.app K := by
   rw [Adjunction.homEquiv_counit]

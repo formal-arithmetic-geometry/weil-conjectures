@@ -102,6 +102,16 @@ lemma curry'_comp_ihomIsoOfIso_hom {A A' B B' : C} (eA : A ≅ A') (eB : B ≅ B
   rw [← Category.assoc, curry'_ihom_map]
   exact curry'_comp_pre_app _ _
 
+/-- The uncurried form of a class `[y]`: the projection morphism, the unitor and the exceptional
+adjoint of `y`. -/
+lemma uncurry_correspondenceClassEquiv_symm (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)]
+    (y : F.obj M ⟶ S.obj N) :
+    uncurry ((correspondenceClassEquiv adj' pf M N).symm y) =
+      leftProjection pf M (𝟙_ C) ≫ P.map (ρ_ (F.obj M)).hom ≫ (adj'.homEquiv _ _).symm y := by
+  conv_rhs => rw [← (correspondenceClassEquiv adj' pf M N).apply_symm_apply y,
+    correspondenceClassEquiv_apply, Equiv.symm_apply_apply]
+  rw [← P.map_comp_assoc, Iso.hom_inv_id, P.map_id, Category.id_comp, IsIso.hom_inv_id_assoc]
+
 /-- Abstract form of the description of the supported class: the exceptional adjoint of
 `curry' u` read through `RHom(A, B) ≅ RHom(F M, S N) ≅ S RHom(M, N) ≅ S E` is the class of `u`
 followed by `E ≅ RHom(M, N)`. -/
@@ -288,6 +298,29 @@ noncomputable def diagUnitClass {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = �
   (correspondenceClassEquiv ℓ s K K).symm
     (eqToHom (by rw [h₂]) ≫ ((boundedConstructibleUpperStarId _ ℓ X).hom.app K ≫
       (boundedConstructibleUpperShriekId ℓ X).inv.app K) ≫ eqToHom (by rw [← h₁]))
+
+/-- The coefficient map of the class `diagUnitClass`, read through the composition isomorphisms
+of the support map `s`. -/
+noncomputable def diagUnitCoeff {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = 𝟙 X)
+    (h₁ : 𝟙 X = s ≫ prod.fst) :
+    (boundedConstructibleUpperStar _ ℓ s).obj
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K) ⟶
+      (boundedConstructibleUpperShriek _ ℓ s).obj
+        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
+  (boundedConstructibleUpperStarComp _ ℓ s prod.snd).inv.app K ≫
+    (eqToHom (by rw [h₂]) ≫ ((boundedConstructibleUpperStarId _ ℓ X).hom.app K ≫
+      (boundedConstructibleUpperShriekId ℓ X).inv.app K) ≫ eqToHom (by rw [← h₁])) ≫
+    (boundedConstructibleUpperShriekComp_padicAlgCl ℓ s prod.fst).hom.app K
+
+/-- The uncurried class of the identity: the projection morphism, the unitor and the exceptional
+adjoint of `diagUnitCoeff`. -/
+lemma uncurry_diagUnitClass {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = 𝟙 X) (h₁ : 𝟙 X = s ≫ prod.fst) :
+    uncurry (diagUnitClass ℓ (K := K) h₂ h₁) =
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ s) _ (𝟙_ _) ≫
+        (boundedConstructibleLowerShriek _ ℓ s).map (ρ_ _).hom ≫
+        ((boundedConstructibleUpperShriekAdjunction _ ℓ s).homEquiv _ _).symm
+          (diagUnitCoeff ℓ h₂ h₁) :=
+  Verdier.uncurry_correspondenceClassEquiv_symm _ _ _ _ _
 
 /-- The class of the diagonal correspondence of `v` is the class of the identity followed by
 `RHom(1, Rp₁^! v)`. -/

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
+public import WeilConjectures.CategoryTheory.Monoidal.ClassTransport
+public import WeilConjectures.PoincareDuality.ProjectionFormulaProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
 public import WeilConjectures.TraceFormula.SupportedClass
@@ -112,6 +114,13 @@ lemma whiskerLeft_comp_inv_curry {C : Type*} [Category C] [MonoidalCategory C] [
     _ = MonoidalClosed.uncurry ((Cl ≫ inv (MonoidalClosed.curry p)) ≫
           MonoidalClosed.curry p) := (MonoidalClosed.uncurry_natural_left _ _).symm
     _ = MonoidalClosed.uncurry Cl := by rw [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+
+/-- An algebraic step of `pointClass_coeff`. -/
+lemma coeff_cancel_aux {C : Type*} [Category C] {X₁ X₂ X₃ K Y Z W : C} (a : X₁ ⟶ X₂)
+    (e₁ : X₂ ⟶ X₃) (s : X₃ ⟶ K) (t : Y ≅ K) (e₂ : Y ⟶ Z) (e₃ : Z ⟶ Y) (he : e₂ ≫ e₃ = 𝟙 _)
+    (u : Z ≅ W) :
+    (a ≫ (e₁ ≫ (s ≫ t.inv) ≫ e₂) ≫ u.hom) ≫ u.inv ≫ e₃ ≫ t.hom = a ≫ e₁ ≫ s := by
+  simp [reassoc_of% he]
 
 /-- Commuting a natural isomorphism `ψ : R ≅ 𝟭` past `R.map x`. -/
 lemma comp_map_comp_iso_hom_app {C : Type*} [Category C] {R : C ⥤ C} (ψ : R ≅ 𝟭 C) {V W X Y : C}
@@ -306,11 +315,17 @@ lemma diagUpperStarProjIso_μ_map (p : point k ⨯ point k ⟶ point k)
   exact Verdier.μ_map_aux _ _ (fun X ↦ (diagUpperStarProjIso ℓ p hp X).hom) g
     (diagUpperStarProjIso_naturality ℓ p hp g) (diagUpperStarProjIso_tensor ℓ p hp M L)
 
+lemma diag_point_fst : diag (point k) ≫ (prod.fst : point k ⨯ point k ⟶ point k) = 𝟙 _ := by
+  simp
+
+lemma diag_point_snd : diag (point k) ≫ (prod.snd : point k ⨯ point k ⟶ point k) = 𝟙 _ := by
+  simp
+
 /-- The point `τ : ℚ̄_ℓ ⟶ LΔ^* RΔ_! ℚ̄_ℓ` through which the coevaluation over the base point
 factors. -/
 noncomputable def pointTau (v : K ⟶ K) :
     𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
-      ((boundedConstructibleLowerShriek _ ℓ (ofEnd K v).support).obj (𝟙_ _)) :=
+      ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom ≫
     (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
     (fixedLocusOfEndUpperShriekIso v).hom.app _ ≫
@@ -318,7 +333,7 @@ noncomputable def pointTau (v : K ⟶ K) :
 
 lemma pointCoev_eq (v : K ⟶ K) :
     pointCoev v = pointTau v ≫ (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
-        (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm ≫
+        (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm ≫
           inv (kunnethVerdierMap ℓ K K)) ≫
       Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
       ((diagUpperStarProjIso ℓ prod.fst (by simp) K).hom ⊗ₘ
@@ -328,28 +343,170 @@ lemma pointCoev_eq (v : K ⟶ K) :
   simp only [pointTau, Category.assoc]
   congr 4
 
+section ClassTransport
+
+variable (ℓ k) in
+/-- The adjunction `LΔ^* ⊣ RΔ_!` of the diagonal of the base point. -/
+noncomputable abbrev pointDiagAdj :=
+  boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (diag (point k))
+
+instance (Z : Dᵇc((point k ⨯ point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((pointDiagAdj ℓ k).unit.app Z) :=
+  sorry
+
+variable (ℓ k) in
+/-- `RΔ_! ⋙ Rp₁_! ≅ R(Δ ≫ p₁)_! = R(𝟙)_! ≅ 𝟭`. -/
+noncomputable def pointLowerShriekιΦ :
+    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (diag (point k)) ⋙
+        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.fst : point k ⨯ point k ⟶ point k) ≅ 𝟭 _ :=
+  (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm ≪≫
+    eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+    boundedConstructibleLowerShriekId ℓ (point k)
+
+variable (ℓ k) in
+/-- `Rp₁^! ⋙ RΔ^! ≅ R(Δ ≫ p₁)^! = R(𝟙)^! ≅ 𝟭`. -/
+noncomputable def pointUpperShriekιΨ :
+    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.fst : point k ⨯ point k ⟶ point k) ⋙
+        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (diag (point k)) ≅
+      𝟭 _ :=
+  (boundedConstructibleUpperShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm ≪≫
+    eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+    boundedConstructibleUpperShriekId ℓ (point k)
+
+lemma eqToHom_counit_point {u₁ u₂ : point k ⟶ point k} (h : u₁ = u₂)
+    (d : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriek _ ℓ u₁).map
+        ((eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ g) h)).hom.app d) ≫
+      (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ g) h)).hom.app _ ≫
+      (boundedConstructibleUpperShriekAdjunction _ ℓ u₂).counit.app d =
+    (boundedConstructibleUpperShriekAdjunction _ ℓ u₁).counit.app d := by
+  subst h
+  simp
+
+lemma pointUpperShriekιΨ_conj (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (pointLowerShriekιΦ ℓ k).inv.app _ ≫
+      (boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
+        ((boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k))).counit.app
+          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K)) ≫
+      (boundedConstructibleUpperShriekAdjunction _ ℓ
+        (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K =
+    (pointUpperShriekιΨ ℓ k).hom.app K := by
+  have h := Verdier.conjugate_counit_aux
+    ((boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k))).comp
+      (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)))
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k) ≫ prod.fst))
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 (point k)))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm
+    (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst))
+    (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst))
+    (boundedConstructibleLowerShriekId ℓ (point k)) (eqToHom_counit_point diag_point_fst) K
+  simp only [Adjunction.comp_counit_app] at h
+  simp only [pointLowerShriekιΦ, pointUpperShriekιΨ, Iso.trans_inv, Iso.trans_hom,
+    NatTrans.comp_app, Category.assoc]
+  convert h using 2 <;> rfl
+
+lemma pointClass_coeff :
+    diagUnitCoeff ℓ (K := K) diag_point_snd diag_point_fst.symm ≫
+      (pointUpperShriekιΨ ℓ k).hom.app K = (diagUpperStarProjIso ℓ prod.snd (by simp) K).hom := by
+  have h := Verdier.coeff_cancel_aux
+    ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) prod.snd).inv.app K)
+    (eqToHom (by rw [diag_point_snd]))
+    ((boundedConstructibleUpperStarId _ ℓ (point k)).hom.app K)
+    ((boundedConstructibleUpperShriekId ℓ (point k)).app K)
+    (eqToHom (by rw [← diag_point_fst]))
+    ((eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst)).hom.app K)
+    (by simp)
+    ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).app K)
+  convert h using 2 <;> first
+    | simp only [diagUnitCoeff, pointUpperShriekιΨ, diagUpperStarProjIso, Iso.trans_hom,
+        Iso.symm_hom, NatTrans.comp_app, Iso.app_hom, Iso.app_inv, eqToIso.hom]
+    | simp only [Functor.comp_obj]
+
+/-- The transport of the class of the identity along `LΔ^*`. -/
+lemma pointClass_transport (v : K ⟶ K)
+    (hbraid : Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj K)
+        ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) ≫
+      (boundedConstructibleUpperStar _ ℓ (diag (point k))).map (β_ _ _).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _) :
+    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
+      (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+        (uncurry (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm)) ≫
+      Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k) _ ≫
+      (boundedConstructibleUpperShriekAdjunction _ ℓ
+        (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K =
+    _ ◁ (pointDiagAdj ℓ k).counit.app (𝟙_ _) ≫ (ρ_ _).hom ≫
+      (diagUpperStarProjIso ℓ prod.snd (by simp) K).hom := by
+  rw [← pointClass_coeff, uncurry_diagUnitClass]
+  have h := Verdier.transport_class (S := Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (P := Dᵇc((point k ⨯ point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (F := boundedConstructibleUpperStar _ ℓ (diag (point k)))
+    (G := boundedConstructibleLowerShriek _ ℓ (diag (point k)))
+    (S₁ := boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (H := boundedConstructibleUpperShriek _ ℓ (diag (point k)))
+    (B₁ := boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k)))
+    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (pointUpperShriekιΨ ℓ k) (fun K ↦ by exact pointUpperShriekιΨ_conj K)
+    (fun T M ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ (diag (point k)) T M)
+    (fun T M ↦ by exact upperStar_map_exceptionalProjection_comp_counit ℓ (diag (point k)) T M)
+    (by exact hbraid)
+    (diagUnitCoeff ℓ (K := K) diag_point_snd diag_point_fst.symm)
+  convert h using 3 <;> rfl
+
+set_option maxHeartbeats 50000 in
+lemma diagUnitCoeff_ofEnd (v : K ⟶ K) :
+    diagUnitCoeff ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm =
+      diagUnitCoeff ℓ (K := K) diag_point_snd diag_point_fst.symm :=
+  rfl
+
+end ClassTransport
+
 /-- **The zigzag identity of the coevaluation and the pairing over the base point**: `σ` and `P`
 satisfy the zigzag identity of a duality. -/
 theorem pointCoev_zigzag (v : K ⟶ K) :
     (ρ_ K).inv ≫ K ◁ pointCoev v ≫ (α_ K K _).inv ≫ (β_ K K).hom ▷ _ ≫ (α_ K K _).hom ≫
       K ◁ pointPairing v ≫ (ρ_ K).hom = 𝟙 K := by
   rw [pointCoev_eq, pointPairing]
-  exact zigzag_of_transport (boundedConstructibleUpperStar _ ℓ (diag (point k)))
-    (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm ≫
+  let χ : (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
+      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ⟶ K :=
+    Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
+      (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K
+  let τ' : (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
+      ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) ⟶ 𝟙_ _ :=
+    (pointDiagAdj ℓ k).counit.app (𝟙_ _)
+  refine zigzag_of_transport (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+    (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm ≫
       inv (kunnethVerdierMap ℓ K K))
     (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ prod.snd) K _)
     ((boundedConstructibleUpperStar _ ℓ prod.snd).map
       ((ihom.ev K).app (dualizingComplex' ℓ (point k))))
     (exceptionalKunnethMap ℓ K)
-    (uncurry (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm))
+    (uncurry (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm))
     (Verdier.whiskerLeft_comp_inv_curry _ (kunnethVerdierPairing ℓ K K)
       (isIso_kunnethVerdierMap ℓ K K))
     (diagUpperStarProjIso ℓ prod.snd (by simp) K)
     (diagUpperStarProjIso ℓ prod.fst (by simp) K).hom
     (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
     (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom
-    _ _ sorry (pointTau v) sorry sorry sorry
-    (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) sorry sorry
+    _ _ χ (pointTau v) τ' ?hτ ?hbraid
+    (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) ?hK ?hC
+  case hτ => sorry
+  case hbraid => sorry
+  case hK => sorry
+  case hC =>
+    exact pointClass_transport v sorry
 
 /-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
 `sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
