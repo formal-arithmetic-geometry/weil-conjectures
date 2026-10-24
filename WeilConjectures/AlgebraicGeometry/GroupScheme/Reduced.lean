@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.AmpleReduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.AlgebraicGeometry.OverReduced
 
 /-!
 # The reduced subgroup scheme
@@ -27,8 +28,8 @@ zero `G` itself is reduced by Cartier's theorem, and in characteristic `p` an am
 
 ## Main definitions
 
-- `AlgebraicGeometry.GrpObj.reduced`: the reduced subscheme `G_red` of `G`, as a `k`-scheme, with
-  its closed immersion `AlgebraicGeometry.GrpObj.reducedι : G_red ⟶ G`; it carries a group
+- `CategoryTheory.Over.reduced`: the reduced subscheme `G_red` of `G`, as a `k`-scheme, with
+  its closed immersion `CategoryTheory.Over.reducedι : G_red ⟶ G`; it carries a group
   structure making `reducedι` a homomorphism.
 
 ## Main statements
@@ -78,44 +79,6 @@ section Reduced
 
 variable (G : Over (Spec (.of k)))
 
-/-- The reduced subscheme `G_red` of a scheme `G` over `k`, as a scheme over `k`. -/
-noncomputable abbrev GrpObj.reduced : Over (Spec (.of k)) :=
-  Over.mk (G.left.nilradical.subschemeι ≫ G.hom)
-
-/-- The closed immersion `G_red ⟶ G` of the reduced subscheme, as a morphism over `k`. -/
-noncomputable def GrpObj.reducedι : GrpObj.reduced G ⟶ G :=
-  Over.homMk G.left.nilradical.subschemeι
-
-instance : IsClosedImmersion (GrpObj.reducedι G).left :=
-  inferInstanceAs (IsClosedImmersion G.left.nilradical.subschemeι)
-
-instance : Mono (GrpObj.reducedι G) :=
-  Over.mono_of_mono_left _
-
-instance : IsReduced (GrpObj.reduced G).left :=
-  inferInstanceAs (IsReduced G.left.nilradical.subscheme)
-
-instance [LocallyOfFiniteType G.hom] : LocallyOfFiniteType (GrpObj.reduced G).hom :=
-  inferInstanceAs (LocallyOfFiniteType (G.left.nilradical.subschemeι ≫ G.hom))
-
-instance [QuasiCompact G.hom] : QuasiCompact (GrpObj.reduced G).hom :=
-  inferInstanceAs (QuasiCompact (G.left.nilradical.subschemeι ≫ G.hom))
-
-/-- A morphism `X ⟶ G` over `k` from a reduced scheme factors (uniquely, as `G_red ⟶ G` is a
-monomorphism) through the reduced subscheme `G_red`. -/
-noncomputable def GrpObj.reducedLift {X : Over (Spec (.of k))} [IsReduced X.left] (f : X ⟶ G) :
-    X ⟶ GrpObj.reduced G :=
-  Over.homMk (IsClosedImmersion.lift G.left.nilradical.subschemeι f.left (by
-      rw [Scheme.IdealSheafData.ker_subschemeι,
-        Scheme.IdealSheafData.le_ker_iff_range_subset_support]
-      simp))
-    ((IsClosedImmersion.lift_fac_assoc _ _ _ _).trans (Over.w f))
-
-@[reassoc (attr := simp)]
-theorem GrpObj.reducedLift_reducedι {X : Over (Spec (.of k))} [IsReduced X.left] (f : X ⟶ G) :
-    GrpObj.reducedLift G f ≫ GrpObj.reducedι G = f := by
-  apply Over.OverMorphism.ext
-  exact IsClosedImmersion.lift_fac _ _ _
 
 variable [PerfectField k] [LocallyOfFiniteType G.hom] [GrpObj G]
 
@@ -124,38 +87,38 @@ open CartesianMonoidalCategory MonObj in
 field is a closed subgroup scheme: as `G_red × G_red` is reduced, the multiplication, unit and
 inverse of `G` restrict to `G_red`, and the group axioms follow from those of `G` since
 `G_red ⟶ G` is a monomorphism. -/
-noncomputable instance : GrpObj (GrpObj.reduced G) where
-  one := GrpObj.reducedLift G η[G]
-  mul := GrpObj.reducedLift G ((GrpObj.reducedι G ⊗ₘ GrpObj.reducedι G) ≫ μ[G])
-  inv := GrpObj.reducedLift G (GrpObj.reducedι G ≫ ι[G])
+noncomputable instance : GrpObj (Over.reduced G) where
+  one := Over.reducedLift G η[G]
+  mul := Over.reducedLift G ((Over.reducedι G ⊗ₘ Over.reducedι G) ≫ μ[G])
+  inv := Over.reducedLift G (Over.reducedι G ≫ ι[G])
   one_mul := by
-    rw [← cancel_mono (GrpObj.reducedι G)]
+    rw [← cancel_mono (Over.reducedι G)]
     simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, leftUnitor_hom,
       toUnit_unique _ (toUnit _), ← Hom.one_def]
   mul_one := by
-    rw [← cancel_mono (GrpObj.reducedι G)]
+    rw [← cancel_mono (Over.reducedι G)]
     simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, rightUnitor_hom,
       toUnit_unique _ (toUnit _), ← Hom.one_def]
   mul_assoc := by
-    rw [← cancel_mono (GrpObj.reducedι G)]
+    rw [← cancel_mono (Over.reducedι G)]
     simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, _root_.mul_assoc]
   left_inv := by
-    rw [← cancel_mono (GrpObj.reducedι G)]
+    rw [← cancel_mono (Over.reducedι G)]
     simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, ← Hom.inv_def,
       ← Hom.one_def]
   right_inv := by
-    rw [← cancel_mono (GrpObj.reducedι G)]
+    rw [← cancel_mono (Over.reducedι G)]
     simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, ← Hom.inv_def,
       ← Hom.one_def]
 
 /-- The inclusion `G_red ⟶ G` of the reduced subgroup scheme is a homomorphism. -/
-instance : IsMonHom (GrpObj.reducedι G) where
-  one_hom := GrpObj.reducedLift_reducedι G _
-  mul_hom := GrpObj.reducedLift_reducedι G _
+instance : IsMonHom (Over.reducedι G) where
+  one_hom := Over.reducedLift_reducedι G _
+  mul_hom := Over.reducedLift_reducedι G _
 
 /-- The reduced subgroup scheme `G_red` of a group scheme locally of finite type over a perfect
 field is smooth. -/
-instance : Smooth (GrpObj.reduced G).hom :=
+instance : Smooth (Over.reduced G).hom :=
   smooth_of_grpObj_of_isReduced (G.left.nilradical.subschemeι ≫ G.hom)
 
 end Reduced
@@ -189,7 +152,7 @@ theorem GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth [IsAlgClose
     have := LocallyOfFiniteType.isLocallyNoetherian G.hom
     have := QuasiCompact.compactSpace_of_compactSpace G.hom
     exact exists_isAffineOpen_compl_support_zeroLocus_of_nilradical hp hG
-      (h (GrpObj.reduced G))
+      (h (Over.reduced G))
   · have := ringChar.charP k
     rw [hp] at this
     have := CharP.charP_to_charZero k
