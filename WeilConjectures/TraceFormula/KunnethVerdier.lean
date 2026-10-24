@@ -36,8 +36,9 @@ Rp_X! (Lp_X^* M ⊗ Lp_Y^* ω_Y) ≅ Rp_X! (Lp_Y^* ω_Y ⊗ Lp_X^* M) ≅ Rp_X! 
 built from the derived projection formula for `p_X`, compact-support base change in the
 cartesian square of the product, and the counit of `Ra_Y! ⊣ Ra_Y^!`; this is the composite
 `Ku_!` of `def-sf-kv-maps` (i) for the pair `(𝟙_X, a_Y)` followed by the counits. Its
-invertibility is the Künneth–Verdier theorem (blueprint `thm-trf-kunneth-verdier`), recorded
-here as the sorried input `ProEtale.CondensedRing.isIso_kunnethVerdierMap`. The map `κ_{M,N}`
+invertibility, the Künneth–Verdier theorem (blueprint `thm-trf-kunneth-verdier`), is
+`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, in
+`WeilConjectures.TraceFormula.KunnethVerdierTheorem`. The map `κ_{M,N}`
 factors as `RHom(1, α) ∘ β` through the external Hom map `β` of blueprint `def-sf-kv-maps` (iii)
 (`ProEtale.CondensedRing.kunnethVerdierMap_eq`).
 
@@ -54,16 +55,6 @@ composition, whiskering and mates from the data of the six functors (blueprint
 ## Main statements
 
 - `ProEtale.CondensedRing.kunnethVerdierMap_eq`: `κ_{M,N} = RHom(1, α) ∘ β`.
-
-## Sorried input
-
-- `ProEtale.CondensedRing.isIso_kunnethVerdierMap`: the Künneth–Verdier theorem (blueprint
-  `thm-trf-kunneth-verdier`, section `sec-six-functors`). Its blueprint proof shows that `α` and
-  `β` are isomorphisms (blueprint `prop-trf-exceptional-kunneth`, `prop-trf-external-hom`), by
-  dévissage along lisse sheaves on strata and induction on the dimension of the support. The
-  two-out-of-three step of this dévissage in `M` is available
-  (`WeilConjectures.TraceFormula.KunnethVerdierShift`); the generation of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` by
-  lisse sheaves on strata and the base cases are not, for these coefficients.
 
 -/
 
@@ -307,14 +298,6 @@ lemma isIso_kunnethVerdierMap_of_iso {M M' : Dᵇc(X.left)⟦Profinite.padicAlgC
   have h := kunnethVerdierMap_naturality_left ℓ e.hom N
   rw [(IsIso.eq_comp_inv _).mpr h.symm]
   infer_instance
-
-/-- **The Künneth–Verdier isomorphism** (blueprint `thm-trf-kunneth-verdier`, section
-`sec-six-functors`): for bounded constructible `M` on `X` and `N` on `Y`, the Künneth–Verdier map
-`κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism. -/
-instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (kunnethVerdierMap ℓ M N) :=
-  sorry
 
 /-- The double-dual morphism is natural, for any braiding. -/
 private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]

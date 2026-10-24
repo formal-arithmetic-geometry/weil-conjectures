@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
-public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.TraceFormula.KunnethVerdierDual
 
 /-!
 # The Künneth–Verdier map at the unit
@@ -31,13 +31,6 @@ variable {C₁ C₂ C : Type*} [Category C₁] [MonoidalCategory C₁] [Monoidal
   [Category C₂] [MonoidalCategory C₂] [MonoidalClosed C₂]
   [Category C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
   (P : C₁ ⥤ C) (Q : C₂ ⥤ C) [P.Monoidal] [Q.Monoidal]
-
-/-- The external Hom map `externalHomMap` is the external internal-hom map
-`MonoidalClosed.externalIhomMap`. -/
-lemma externalHomMap_eq_externalIhomMap (E₁ L₁ : C₁) (E₂ L₂ : C₂) :
-    externalHomMap P Q E₁ L₁ E₂ L₂ = MonoidalClosed.externalIhomMap P Q E₁ L₁ E₂ L₂ := by
-  rw [externalHomMap, MonoidalClosed.externalIhomMap, externalHomPairing,
-    tensorHom_comp_tensorHom]
 
 /-- The external Hom map is an isomorphism when the sources have left duals. -/
 lemma isIso_externalHomMap_of_exactPairing (D₁' E₁ L₁ : C₁) (D₂' E₂ L₂ : C₂)
