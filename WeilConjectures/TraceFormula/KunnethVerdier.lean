@@ -60,8 +60,10 @@ composition, whiskering and mates from the data of the six functors (blueprint
 - `ProEtale.CondensedRing.isIso_kunnethVerdierMap`: the Künneth–Verdier theorem (blueprint
   `thm-trf-kunneth-verdier`, section `sec-six-functors`). Its blueprint proof shows that `α` and
   `β` are isomorphisms (blueprint `prop-trf-exceptional-kunneth`, `prop-trf-external-hom`), by
-  dévissage along lisse sheaves on strata and induction on the dimension of the support; this
-  dévissage is not yet available for `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
+  dévissage along lisse sheaves on strata and induction on the dimension of the support. The
+  two-out-of-three step of this dévissage in `M` is available
+  (`WeilConjectures.TraceFormula.KunnethVerdierShift`); the generation of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` by
+  lisse sheaves on strata and the base cases are not, for these coefficients.
 
 -/
 
