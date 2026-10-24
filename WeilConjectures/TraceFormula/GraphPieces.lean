@@ -35,6 +35,10 @@ of the open–closed triangle `K^U ⟶ K ⟶ K^Z ⟶` (blueprint `prop-trf-trace
   (`ProEtale.CondensedRing.Correspondence.graphOpenPieceCoeff`). The square need not be
   cartesian for `ι`: `h` may map other points to `x`.
 
+The trace class of `v` is the sum of the trace classes of `u^Z` and `u^U`
+(`ProEtale.CondensedRing.Correspondence.traceClass_ofGraph_eq_add`, blueprint
+`prop-trf-trace-class-additivity`, item 1).
+
 -/
 
 @[expose] public section
@@ -159,6 +163,18 @@ noncomputable def graphStalkMap (h : X ⟶ X)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).hom.app K ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map v
 
+/-- The stalk map of a coefficient map transported along an equality of objects. -/
+lemma graphStalkMap_eqToHom {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : A = B)
+    (h : X ⟶ X)
+    (w : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj B ⟶ B)
+    (x : RationalPoint X) (hx : x ≫ h = x) :
+    graphStalkMap A h
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map (eqToHom e) ≫
+          w ≫ eqToHom e.symm) x hx =
+      eqToHom (by rw [e]) ≫ graphStalkMap B h w x hx ≫ eqToHom (by rw [e]) := by
+  subst e
+  simp
+
 variable {h : X ⟶ X}
   (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
   {x : RationalPoint X} (hx : x ≫ h = x)
@@ -245,6 +261,22 @@ noncomputable def graphOpenPieceCoeff :
       (((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
         (Profinite.padicAlgClRingObj ℓ) ℓ (pointComplPreimageι hx)).homEquiv _ _).symm
         (graphOpenRestriction K v hx))
+
+/-! ### Additivity -/
+
+/-- **Additivity of trace classes along the pieces of a fixed point** (blueprint
+`prop-trf-trace-class-additivity`, item 1, and `lem-trf-trace-triangle-compatibility`, for the
+graph correspondence `(𝟙, h)` and the `c`-invariant closed subscheme `Z = {x}` of a rational
+point fixed by `h`; Varshavsky, Prop. 1.5.10 after SGA 5, III 4.13): the trace class of
+`v : Lh^* K ⟶ K` is the sum of the trace classes of the induced coefficient maps
+`u^Z = [x, x]_! v_x` on `K^Z = Rx_* Lx^* K` and `u^U = [j]_! (v|_U)` on `K^U = j_! Lj^* K`.
+No invertibility of `v` is required. -/
+theorem traceClass_ofGraph_eq_add (F : (ofGraph K h v).FixedLocus) :
+    (ofGraph K h v).traceClass F =
+      F.traceClassWithCoeff _ (graphClosedPieceCoeff K v hx) +
+        F.traceClassWithCoeff _ (graphOpenPieceCoeff K v hx ≫
+          (boundedConstructibleUpperShriekId ℓ X).inv.app _) :=
+  sorry
 
 end Correspondence
 

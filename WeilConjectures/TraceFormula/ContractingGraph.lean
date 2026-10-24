@@ -134,10 +134,10 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 /-! ### The local term at a contracting point -/
 
 /-- **The local term at a contracting point** (blueprint `sk-thm-tf-contracting-local-term` for
-`Z = {x}`, Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y` and `B` is an
+`Z = {c₁(y)}`, Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y` and `B` is an
 open and closed subscheme of the fixed locus, proper over `s`, with underlying set `{y}`, the
 local term along `B` is the integral of the trace class of the restricted coefficient map
-`u_Z : K_x ⟶ K_x` on the point. -/
+`u_Z` on the stalk `L(y ≫ c₁)^* K` over the point. -/
 theorem localTerm_traceClass_eq_integral_of_isContractingAt {c : Correspondence ℓ K}
     (F : c.FixedLocus) (y : RationalPoint c.C) (hc : c.IsContractingAt y)
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)

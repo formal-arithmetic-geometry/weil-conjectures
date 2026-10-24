@@ -41,8 +41,9 @@ Frobenius on the point, whose local term along `B` is `tr(F_{x,m})`
 - `ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`: the
   local term of the Frobenius correspondence at a fixed point is the trace of the local
   Frobenius.
-- `ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_add`: the local
-  term is additive along the curve pieces.
+- `ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_add_of_range_eq`:
+  at the component `{x}` of the fixed locus, the local term is additive along the curve pieces,
+  without the trace-class additivity.
 
 -/
 
@@ -103,18 +104,6 @@ lemma weilStalk_obj_frobenius_hom_eq_graphStalkMap {Ψ : X ⟶ X} (x : RationalP
     Functor.mapIso_hom, Correspondence.graphStalkMap]
   simp only [Category.assoc]
   exact key
-
-/-- The stalk map of a coefficient map transported along an equality of objects. -/
-lemma _root_.AlgebraicGeometry.ProEtale.CondensedRing.Correspondence.graphStalkMap_eqToHom
-    {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : A = B) (h : X ⟶ X)
-    (w : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj B ⟶ B)
-    (x : RationalPoint X) (hx : x ≫ h = x) :
-    Correspondence.graphStalkMap A h
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map (eqToHom e) ≫
-          w ≫ eqToHom e.symm) x hx =
-      eqToHom (by rw [e]) ≫ Correspondence.graphStalkMap B h w x hx ≫ eqToHom (by rw [e]) := by
-  subst e
-  simp
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The local Frobenius `F_{x,m}` is the stalk map at `x` of the iterate `φ_m : LΦ_m^* K ⟶ K`. -/
@@ -228,8 +217,9 @@ theorem localTerm_traceClass_graph_eq_trace {k₀ : Type u} [Field k₀] [Finite
   exact Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt
     (frobeniusIterate Φ m) (K.iterateStr m).hom F x hc j hB
 
-/-- **Additivity of the Frobenius local term along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2, in local-term form at an isolated fixed point): let
+/-- **Additivity of the Frobenius local term at an isolated fixed point** (blueprint
+`prop-trf-trace-class-additivity`, item 2, local terms, the case of the component `β = {x}`; the
+statement for every component is `localTerm_traceClass_graph_eq_add`): let
 `Φ` be the model Frobenius of a model over a finite field, `m ≥ 1`, `x` a rational point fixed
 by `Φ_m` with open complement `jU : U ⟶ X` (with `Φ_{m,U} ≫ jU = jU ≫ Φ_m` cartesian), and
 `j : B ⟶ Fix(c_m)` an open and closed subscheme of the fixed locus, proper over `s`, with
@@ -238,7 +228,8 @@ underlying set `{x}`. Then the local terms along `B` are additive along the open
 by `localTerm_traceClass_graph_eq_trace`, the closed piece by
 `localTerm_traceClassWithCoeff_closedPieceCoeff` and the open piece vanishes
 (`localTerm_traceClassWithCoeff_openPieceCoeff_eq_zero`). -/
-theorem localTerm_traceClass_graph_eq_add {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
+theorem localTerm_traceClass_graph_eq_add_of_range_eq {k₀ : Type u} [Field k₀] [Finite k₀]
+    [Algebra k₀ k]
     {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType f₀] {p : X.left ⟶ X₀}
     (hΦ : IsModelFrobenius Φ f₀ p) (K : WeilBoundedConstructible ℓ Φ) {m : ℕ} (hm : 1 ≤ m)
     {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
