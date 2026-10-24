@@ -28,7 +28,19 @@ variable {C₁ C₂ C₃ C₄ C₇ C₈ : Type*} [Category* C₁] [Category* C�
   {T : C₁ ⥤ C₂} {L : C₁ ⥤ C₃} {R : C₂ ⥤ C₄} {B Bt : C₃ ⥤ C₄} {L' : C₃ ⥤ C₇}
   {R'' : C₄ ⥤ C₈} {B'' Bt'' : C₇ ⥤ C₈}
 
-/-- The vertical composite of conjugated 2-squares is the conjugated vertical composite. -/
+/-- The vertical composite of conjugated 2-squares is the conjugated vertical composite: for the
+2-squares `a` and `b` stacked vertically and isomorphisms `e : B ≅ Bt`, `e'' : B'' ≅ Bt''`
+```
+C₁ --T---> C₂
+|L    a    |R
+v          v
+C₃ --B---> C₄        e : B ≅ Bt
+|L'   b    |R''
+v          v
+C₇ --B''-> C₈        e'' : B'' ≅ Bt''
+```
+replacing `B` by `Bt` in both squares (through `e`) and `B''` by `Bt''` (through `e''`) and
+composing vertically gives the vertical composite of `a` and `b` followed by `e''`. -/
 lemma vComp_conj (a : TwoSquare T L R B) (b : TwoSquare B L' R'' B'') (e : B ≅ Bt)
     (e'' : B'' ≅ Bt'') :
     TwoSquare.vComp (T := T) (B := Bt) (a.natTrans ≫ whiskerLeft L e.hom)
@@ -40,7 +52,20 @@ lemma vComp_conj (a : TwoSquare T L R B) (b : TwoSquare B L' R'' B'') (e : B ≅
 variable {L'' : C₁ ⥤ C₇} {R''' : C₂ ⥤ C₈}
 
 /-- The vertical composite of conjugated 2-squares, whiskered on the left and on the right, is
-the conjugate of the whiskered vertical composite. -/
+the conjugate of the whiskered vertical composite: for the 2-squares `a` and `b` stacked as in
+`CategoryTheory.TwoSquare.vComp_conj`
+```
+C₁ --T---> C₂
+|L    a    |R
+v          v
+C₃ --B---> C₄        e : B ≅ Bt
+|L'   b    |R''
+v          v
+C₇ --B''-> C₈        e'' : B'' ≅ Bt''
+```
+and natural transformations `α : L ⋙ L' ⟶ L''`, `β : R''' ⟶ R ⋙ R''`, a 2-square `s` from `T` to
+`B''` with sides `L''` and `R'''` equal to the whiskered vertical composite of `a` and `b`, followed
+by `e''`, is the whiskered vertical composite of the conjugated squares. -/
 lemma whiskerLeft_whiskerRight_vComp_conj (a : TwoSquare T L R B) (b : TwoSquare B L' R'' B'')
     (e : B ≅ Bt) (e'' : B'' ≅ Bt'') (α : L ⋙ L' ⟶ L'') (β : R''' ⟶ R ⋙ R'')
     (s : TwoSquare T L'' R''' B'') (hs : s = ((TwoSquare.vComp a b).whiskerLeft α).whiskerRight β) :

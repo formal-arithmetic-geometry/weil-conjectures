@@ -6,7 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Coherence
-public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-!
 # Identity squares in an exchange formalism
@@ -323,26 +323,6 @@ lemma shId_inv_app_comp_counit (X : 𝒞) (W : F.obj X) :
   rw [hc', ← reassoc_of% hn, Iso.inv_hom_id_app]
   simp
 
-omit [𝒪.ContainsIdentities] in
-/-- An isomorphism `σ : L ≅ 𝟭` from a left adjoint `L ⊣ R` with `R ≅ 𝟭` is determined by the
-composite `σ⁻¹_{R W} ≫ ε_W`. -/
-lemma _root_.CategoryTheory.Adjunction.iso_ext_of_inv_app_comp_counit {𝒜 : Type*} [Category* 𝒜]
-    {L R : 𝒜 ⥤ 𝒜} (adj : L ⊣ R) (e : R ≅ 𝟭 𝒜) (σ σ' : L ≅ 𝟭 𝒜)
-    (h : ∀ W, σ.inv.app (R.obj W) ≫ adj.counit.app W = e.hom.app W)
-    (h' : ∀ W, σ'.inv.app (R.obj W) ≫ adj.counit.app W = e.hom.app W) : σ = σ' := by
-  have : R.Full := Functor.Full.of_iso e.symm
-  have : R.Faithful := Functor.Faithful.of_iso e.symm
-  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
-  have key : ∀ W, σ.inv.app (R.obj W) = σ'.inv.app (R.obj W) := fun W ↦ by
-    rw [← cancel_mono (adj.counit.app W), h, h']
-  ext1
-  rw [← Iso.inv_eq_inv σ σ']
-  ext M
-  have hn := σ.inv.naturality (e.hom.app M)
-  have hn' := σ'.inv.naturality (e.hom.app M)
-  simp only [Functor.id_map] at hn hn'
-  rw [← cancel_epi (e.hom.app M)]
-  erw [hn, hn', key]
 end ExtensionByZeroUnit
 
 

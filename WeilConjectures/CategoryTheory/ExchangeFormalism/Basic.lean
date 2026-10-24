@@ -15,10 +15,11 @@ public import Mathlib.CategoryTheory.MorphismProperty.Composition
 This is the formal structure underlying compactly supported direct images, indexed by an
 arbitrary category `𝒞` with a class `𝒪` of morphisms playing the role of the open immersions:
 a category for each object of `𝒞`, a pullback pseudofunctor `f ↦ f^*`, right adjoints `f_*` and
-left adjoints `j_!` of `j^*` for `j ∈ 𝒪` (`CategoryTheory.ExchangeFormalism`). It is the
-formalism `AlgebraicGeometry.CompactSupportFormalism`, which is indexed by all schemes, for an
-arbitrary index category, so that it applies to coefficient categories, such as bounded
-constructible complexes, that are only defined for schemes of finite type over a field.
+left adjoints `j_!` of `j^*` for `j ∈ 𝒪` (`CategoryTheory.ExchangeFormalism`). The formalism
+of compactly supported direct images on all schemes, `AlgebraicGeometry.CompactSupportFormalism`,
+is the case of the category of schemes with the open immersions; an arbitrary index category
+allows coefficient categories, such as bounded constructible complexes, that are only defined
+for schemes of finite type over a field.
 
 All the comparison maps of the theory (base change for `j_!`, the exchange `j_! g'_* ⟶ g''_* j'_!`,
 the base change of the pushforwards) are mates of the composition isomorphisms of the pullbacks,

@@ -6626,6 +6626,7 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductor
 public import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPower
 public import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPowerAux
+public import WeilConjectures.AlgebraicGeometry.SepFinType
 public import WeilConjectures.AlgebraicGeometry.SeparableClosureLimit
 public import WeilConjectures.AlgebraicGeometry.SeparableResidueCotangentInjective
 public import WeilConjectures.AlgebraicGeometry.SeparatedAffineCoverCriterion
@@ -9304,6 +9305,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
+public import WeilConjectures.Mathlib.CategoryTheory.Iso
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Comma
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Constructions.Filtered
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct
@@ -11814,12 +11816,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Cube
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion

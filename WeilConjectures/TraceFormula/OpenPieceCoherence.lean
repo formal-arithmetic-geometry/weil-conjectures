@@ -87,8 +87,8 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion
         (boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
           sq.toCommSq).app K =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K) :=
-  by
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app
+          K) := by
   have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen ℓ sq) K
   simpa using h
 

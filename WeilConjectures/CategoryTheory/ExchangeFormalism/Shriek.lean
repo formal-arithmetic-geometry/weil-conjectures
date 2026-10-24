@@ -25,9 +25,9 @@ with `i` in the class `𝒪` of open immersions gives the compactly supported di
   laws and its compatibility with the comparisons along refinements
   (`CategoryTheory.ExchangeFormalism.shriekBaseChange_refinementComparison`).
 
-These are the constructions of `AlgebraicGeometry.CompactSupportFormalism` for factorizations
-instead of compactifications; the cartesian squares there are replaced by the hypotheses that
-the relevant base change maps of the extension by zero are isomorphisms.
+For a `AlgebraicGeometry.CompactSupportFormalism`, the constructions along compactifications
+are these constructions for the underlying factorizations, the hypotheses that the relevant base
+change maps of the extension by zero are isomorphisms being supplied by cartesian squares.
 -/
 
 @[expose] public section

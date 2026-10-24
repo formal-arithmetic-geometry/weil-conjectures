@@ -6,6 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.OverRefinementBaseChange
+public import WeilConjectures.Mathlib.CategoryTheory.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
 
@@ -198,17 +199,6 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz
   exact h
 
 end Compactification
-
-omit [IsFinitenessCoefficient ℓ Λ] [MonObj Λ] [IsCommMonObj Λ] [Fact ℓ.Prime]
-  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- In a category, two squares through a common corner glued along isomorphisms. -/
-lemma _root_.CategoryTheory.Iso.comp_inv_comp_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
-    {A₁ A₂ D B₁ B₂ D' : 𝒜} (e₁ : A₁ ≅ D) (e₂ : A₂ ≅ D) (e₁' : B₁ ≅ D') (e₂' : B₂ ≅ D')
-    (s₁ : A₁ ⟶ B₁) (s₂ : A₂ ⟶ B₂) (s : D ⟶ D') (h₁ : e₁.hom ≫ s = s₁ ≫ e₁'.hom)
-    (h₂ : e₂.hom ≫ s = s₂ ≫ e₂'.hom) : e₁.hom ≫ e₂.inv ≫ s₂ = s₁ ≫ e₁'.hom ≫ e₂'.inv := by
-  have : e₂.inv ≫ s₂ = s ≫ e₂'.inv := by
-    rw [Iso.inv_comp_eq, reassoc_of% h₂, Iso.hom_inv_id, Category.comp_id]
-  rw [this, reassoc_of% h₁]
 
 /-! ### `ℚ̄_ℓ`-sheaves -/
 

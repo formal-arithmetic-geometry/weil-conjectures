@@ -22,8 +22,8 @@ morphisms of triangles (`CategoryTheory.ExchangeFormalism.compIso_naturality`) a
 with the compact-support exchange maps
 (`CategoryTheory.ExchangeFormalism.compIso_shriekBaseChange`).
 
-These are the results of `AlgebraicGeometry.CompactSupportFormalism` for triangles of
-compactifications, for factorizations instead of compactifications.
+For a `AlgebraicGeometry.CompactSupportFormalism`, the composition isomorphism of a triangle of
+compactifications is the one of its underlying triangle of factorizations.
 -/
 
 @[expose] public section
