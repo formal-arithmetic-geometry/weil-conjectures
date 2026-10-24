@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.CoefficientMorphismAdditivity
+public import WeilConjectures.TraceFormula.CoefficientMorphismProper
 public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.ModelOpenClosed
@@ -103,6 +104,7 @@ theorem traceFormulaHolds_of_card_eq [IsAlgClosed k] {k₀ : Type u} [Field k₀
       hΦU.exists_isProper_pullback
     have := hΦY.isFinite_left
     exact traceFormulaHolds_of_isProper_pullback hΦU hΦY hf hfp h₀ (fun y _ ↦ hfib y)
+      (fun _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ h ↦ traceFormulaHolds_of_isProper h)
       (traceFormulaHolds_of_isProper hΦY)
 
 /-- **The trace formula in degree one for a model Frobenius** (blueprint
