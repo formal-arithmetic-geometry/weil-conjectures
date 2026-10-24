@@ -17,9 +17,9 @@ For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` (blueprint
 * the kernel class of `[f, g]_! u` is the transported kernel class of `u`
   (`Correspondence.ProperPushforwardDiagram.kernelClass_pushforward`, blueprint
   `lem-trf-trace-source-exchange`);
-* the evaluation kernels are exchanged by the kernel pushforward
-  (`Correspondence.ProperPushforwardDiagram.kernelPushforward_comp_evaluationKernel`, blueprint
-  `lem-trf-trace-map-exchange`, (1));
+* the evaluation kernels are exchanged by the kernel pushforward (blueprint
+  `lem-trf-trace-map-exchange`, (1); proved in
+  `WeilConjectures.TraceFormula.ProperCompatibilityEvaluation`);
 * the support isomorphisms are exchanged by the exchange map of the support square
   (`Correspondence.ProperPushforwardDiagram.lowerStar_map_supportIso_comp_exchange`, blueprint
   `lem-trf-trace-map-exchange`, (2)).
@@ -193,18 +193,6 @@ theorem kernelClass_pushforward :
         (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom.app (𝟙_ _) ≫
         (boundedConstructibleLowerStar _ ℓ (prod.map P.f P.f)).map c.kernelClass ≫
         kernelPushforward ℓ P.f K :=
-  sorry
-
-/-- **Exchange of the evaluation kernels** (blueprint `lem-trf-trace-map-exchange`, (1)):
-`δ_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* δ_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
-theorem kernelPushforward_comp_evaluationKernel :
-    kernelPushforward ℓ P.f K ≫ evaluationKernel ℓ P.coeff =
-      (boundedConstructibleLowerStar _ ℓ (prod.map P.f P.f)).map (evaluationKernel ℓ K) ≫
-        (boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map P.f P.f)).hom.app
-          (dualizingComplex' ℓ X) ≫
-        eqToHom (by rw [P.diag_comp_prodMap]) ≫
-        (boundedConstructibleLowerStarComp _ ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
-        (boundedConstructibleLowerStar _ ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f) :=
   sorry
 
 variable (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)

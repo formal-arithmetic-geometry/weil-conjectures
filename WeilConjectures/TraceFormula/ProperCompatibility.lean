@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
+public import WeilConjectures.TraceFormula.ProperCompatibilityEvaluation
 
 /-!
 

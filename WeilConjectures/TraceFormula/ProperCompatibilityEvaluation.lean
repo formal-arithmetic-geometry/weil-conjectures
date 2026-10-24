@@ -55,6 +55,16 @@ lemma comp_tensorHom_eq_of_eq {C : Type*} [Category C] [MonoidalCategory C] {T P
   subst ha
   rw [MonoidalCategory.tensorHom_comp_whiskerLeft, h, Category.id_comp]
 
+/-- Moving maps into and out of an adjoint:
+`d ≫ (x₁ ≫ x₂)♯ ≫ R e ≫ t = (L d ≫ x₁ ≫ x₂ ≫ e)♯ ≫ t`. -/
+lemma Adjunction.comp_homEquiv_comp_map {C D : Type*} [Category C] [Category D] {L : C ⥤ D}
+    {R : D ⥤ C} (adj : L ⊣ R) {P Q : C} {M M' N : D} {T : C} (d : P ⟶ Q) (x₁ : L.obj Q ⟶ M')
+    (x₂ : M' ⟶ M) (e : M ⟶ N) (t : R.obj N ⟶ T) :
+    d ≫ adj.homEquiv _ _ (x₁ ≫ x₂) ≫ R.map e ≫ t =
+      adj.homEquiv _ _ (L.map d ≫ x₁ ≫ x₂ ≫ e) ≫ t := by
+  rw [Adjunction.homEquiv_naturality_left]
+  simp [Adjunction.homEquiv_naturality_right]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -341,7 +351,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- The adjoint for `Lp^* ⊣ Rp_*` followed by the cast along `p = p'`. -/
 lemma homEquiv_comp_eqToHom_of_eq {p p' : A ⟶ B} (h : p = p')
-    {M : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {N : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {M : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {N : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : (boundedConstructibleUpperStar _ ℓ p).obj M ⟶ N) :
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p).homEquiv _ _ φ ≫
         eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerStar _ ℓ r).obj N) h) =
@@ -353,7 +364,8 @@ lemma homEquiv_comp_eqToHom_of_eq {p p' : A ⟶ B} (h : p = p')
 /-- The adjoint for `L(f ≫ g)^* ⊣ R(f ≫ g)_*` through the composition isomorphisms. -/
 lemma homEquiv_comp_lowerStarComp_hom_app {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
     [QuasiCompact Z.hom] [IsSeparated Z.hom] (a : X ⟶ Y) (b : Y ⟶ Z)
-    {M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : (boundedConstructibleUpperStar _ ℓ a).obj ((boundedConstructibleUpperStar _ ℓ b).obj M) ⟶
       N) :
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ b).homEquiv _ _
@@ -366,7 +378,8 @@ lemma homEquiv_comp_lowerStarComp_hom_app {Z : Over (Spec (.of k))} [LocallyOfFi
 /-- The adjoint for `L(f ≫ g)^* ⊣ R(f ≫ g)_*` followed by the inverse composition isomorphism. -/
 lemma homEquiv_comp_lowerStarComp_inv_app {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
     [QuasiCompact Z.hom] [IsSeparated Z.hom] (a : X ⟶ Y) (b : Y ⟶ Z)
-    {M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : (boundedConstructibleUpperStar _ ℓ (a ≫ b)).obj M ⟶ N) :
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (a ≫ b)).homEquiv _ _ φ ≫
       (boundedConstructibleLowerStarComp _ ℓ a b).inv.app N =
@@ -378,7 +391,7 @@ lemma homEquiv_comp_lowerStarComp_inv_app {Z : Over (Spec (.of k))} [LocallyOfFi
     Iso.hom_inv_id_app_assoc]
 
 set_option maxHeartbeats 2000000 in
--- TEMP
+-- the pullbacks of bounded constructible complexes are unfolded in the defeq checks
 /-- The identification `LΔ^* (K ⊠ N) ≅ K ⊗ N` is natural in `N`. -/
 lemma diagUpperStarExternalProductIso_hom_naturality_right
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -389,7 +402,8 @@ lemma diagUpperStarExternalProductIso_hom_naturality_right
       (diagUpperStarExternalProductIso ℓ M N').hom =
     (diagUpperStarExternalProductIso ℓ M N).hom ≫ (M ◁ χ) := by
   have h₂ : diag X ≫ (prod.snd : X ⨯ X ⟶ X) = 𝟙 X := by simp [diag]
-  have n₁ := (boundedConstructibleUpperStarComp _ ℓ (diag X) (prod.snd : X ⨯ X ⟶ X)).inv.naturality χ
+  have n₁ :=
+    (boundedConstructibleUpperStarComp _ ℓ (diag X) (prod.snd : X ⨯ X ⟶ X)).inv.naturality χ
   have n₂ := boundedConstructibleUpperStar_map_eqToHom_id _ ℓ h₂ χ
   simp only [Functor.comp_map] at n₁
   unfold externalProduct at *
@@ -411,6 +425,94 @@ lemma diagUpperStarExternalProductIso_hom_naturality_right
     rw [reassoc_of% n₁, n₂]
   exact comp_tensorHom_eq_of_eq _ _ (CategoryTheory.Functor.map_id _ _) _ _ _ _ _ h
 
+
+set_option maxHeartbeats 3000000 in
+-- composite functors on bounded constructible complexes are unfolded
+/-- **Exchange of the evaluation kernels** along a proper morphism `f` (blueprint
+`lem-trf-trace-map-exchange`, (1)): with `q = f × f` and `K' = Rf_* K`,
+`e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
+theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsProper f.left]
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (hΔ : diag X ≫ prod.map f f = f ≫ diag Y) :
+    kernelPushforward ℓ f K ≫ evaluationKernel ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K) =
+      (boundedConstructibleLowerStar _ ℓ (prod.map f f)).map (evaluationKernel ℓ K) ≫
+        (boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map f f)).hom.app
+          (dualizingComplex' ℓ X) ≫
+        eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerStar _ ℓ r).obj
+          (dualizingComplex' ℓ X)) hΔ) ≫
+        (boundedConstructibleLowerStarComp _ ℓ f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
+        (boundedConstructibleLowerStar _ ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ f) := by
+  have key : (boundedConstructibleUpperStarComp _ ℓ f (diag Y)).inv.app
+        (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
+          ((boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K))) ≫
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
+        (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
+          ((boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K)))) hΔ.symm) ≫
+      (boundedConstructibleUpperStarComp _ ℓ (diag X) (prod.map f f)).hom.app
+        (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
+          ((boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K))) ≫
+      (boundedConstructibleUpperStar _ ℓ (diag X)).map
+        ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (prod.map f f)) _ _).inv ≫
+          (prodUpperStarCounit ℓ (prod.map_fst f f) K ⊗ₘ
+            prodUpperStarCounit ℓ (prod.map_snd f f) (verdierDual ℓ (toPoint X) K))) ≫
+      (diagUpperStarExternalProductIso ℓ K (verdierDual ℓ (toPoint X) K)).hom =
+    (boundedConstructibleUpperStar _ ℓ f).map
+        (diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
+          ((boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K))).hom ≫
+      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) _ _ ≫
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K ⊗ₘ
+        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app
+          (verdierDual ℓ (toPoint X) K)) := by
+    simp only [diagUpperStarExternalProductIso, prodUpperStarCounit, Iso.trans_hom, Iso.symm_hom,
+      tensorIso_hom, Iso.app_inv, Iso.app_hom, eqToIso.hom, Functor.Monoidal.μIso_inv,
+      Functor.map_comp, Category.assoc]
+    exact boundedConstructibleUpperStarComp_square_coherence_tensor _ ℓ f (diag X) (diag Y)
+      (prod.map f f) prod.fst prod.snd prod.fst prod.snd hΔ.symm (prod.map_fst f f)
+      (prod.map_snd f f) (by simp [diag]) (by simp [diag]) (by simp [diag]) (by simp [diag]) _ _
+  rw [kernelPushforward, Category.assoc, IsIso.inv_comp_eq, prodLowerStarExternalProduct,
+    evaluationKernel, evaluationKernel]
+  rw [← reassoc_of% (Adjunction.homEquiv_naturality_right _ _ _),
+    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left,
+    reassoc_of% homEquiv_comp_lowerStarComp_hom_app, reassoc_of% homEquiv_comp_eqToHom_of_eq,
+    reassoc_of% homEquiv_comp_lowerStarComp_inv_app, ← Adjunction.homEquiv_naturality_right]
+  swap
+  · exact hΔ
+  have hu : (boundedConstructibleLowerStar _ ℓ f).obj K ◁ lowerStarVerdierDualMap ℓ f K ≫
+      (ihom.ev ((boundedConstructibleLowerStar _ ℓ f).obj K)).app (dualizingComplex' ℓ Y) =
+      lowerStarTensorMap ℓ f K (verdierDual ℓ (toPoint X) K) ≫
+        (boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
+        lowerStarDualizingComplexTrace ℓ f :=
+    MonoidalClosed.whiskerLeft_curry_ihom_ev_app _ _ _
+  rw [reassoc_of% diagUpperStarExternalProductIso_hom_naturality_right]
+  refine (congrArg (fun t ↦ (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag Y)).homEquiv
+    _ _ ((diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
+      ((boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K))).hom ≫ t))
+        hu).trans ?_
+  rw [reassoc_of% key]
+  apply congrArg ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag Y)).homEquiv _
+    (dualizingComplex' ℓ Y))
+  exact Adjunction.comp_homEquiv_comp_map _ _ _ _ _ _
 end Evaluation
+
+namespace Correspondence.ProperPushforwardDiagram
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
+
+/-- **Exchange of the evaluation kernels** (blueprint `lem-trf-trace-map-exchange`, (1)):
+`δ_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* δ_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
+theorem kernelPushforward_comp_evaluationKernel :
+    kernelPushforward ℓ P.f K ≫ evaluationKernel ℓ P.coeff =
+      (boundedConstructibleLowerStar _ ℓ (prod.map P.f P.f)).map (evaluationKernel ℓ K) ≫
+        (boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map P.f P.f)).hom.app
+          (dualizingComplex' ℓ X) ≫
+        eqToHom (by rw [P.diag_comp_prodMap]) ≫
+        (boundedConstructibleLowerStarComp _ ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
+        (boundedConstructibleLowerStar _ ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f) :=
+  kernelPushforward_comp_evaluationKernel_lowerStar ℓ P.f K P.diag_comp_prodMap
+
+end Correspondence.ProperPushforwardDiagram
 
 end AlgebraicGeometry.ProEtale.CondensedRing
