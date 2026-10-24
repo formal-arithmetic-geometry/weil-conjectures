@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
+public import WeilConjectures.TraceFormula.PushforwardFamily
 
 /-!
 
@@ -274,6 +275,31 @@ lemma lowerStarBaseChange_app_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h
     (upperStarComp Λ h' g') (upperStarSquareComparison_paste Λ sq₁ sq₂ sq) M
   exact hp
 
+
+/-- **Pasting law of the base-change morphisms**, as an equation of natural transformations: for
+the horizontally pasted squares
+```
+X'' --h'--> X' --g'--> X
+ |f''       |f'        |f
+ v          v          v
+Y'' --h---> Y' --g---> Y
+```
+the base-change morphism of the outer square is the pasting of the two base-change morphisms,
+through the composition isomorphisms `upperStarComp`. -/
+lemma lowerStarBaseChange_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
+    (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) :
+    Functor.whiskerLeft (f)_*⟦Λ⟧ (upperStarComp Λ h g).hom ≫ (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (lowerStarBaseChange Λ sq₁) (h)^*⟦Λ⟧ ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (g')^*⟦Λ⟧ (lowerStarBaseChange Λ sq₂) ≫
+        (Functor.associator _ _ _).inv =
+      lowerStarBaseChange Λ sq ≫ Functor.whiskerRight (upperStarComp Λ h' g').hom (f'')_*⟦Λ⟧ := by
+  refine NatTrans.ext (funext fun M ↦ ?_)
+  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id] using lowerStarBaseChange_app_paste Λ sq₁ sq₂ sq M
+
+
 end BaseChange
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] {X Y : Over (Spec (.of k))}
@@ -321,6 +347,36 @@ lemma weilSheafLowerStar_eq :
       IsoAlgebra.mapOfNatIso (weilSheafLowerStarComparison ℓ eX eY hf) :=
   rfl
 
+/-- The Frobenius comparisons of the pushforward satisfy the pasting law along the composition of
+automorphisms. -/
+lemma pushforwardPaste_weilSheafLowerStarComparison :
+    PushforwardPaste (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+        upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧
+      (fun a b h ↦ weilSheafLowerStarComparison ℓ a b h) := by
+  intro a a' b b' h h' h''
+  simp only [weilSheafLowerStarComparison_hom]
+  exact lowerStarBaseChange_paste _ (commSq_left_of_comp_eq a' b' h') (commSq_left_of_comp_eq a b h)
+    (commSq_left_of_comp_eq (a ≪≫ a') (b ≪≫ b') h'')
+
+/-- The pushforward of Weil sheaves is the transport of algebras for the family of pullbacks of
+module objects. -/
+lemma weilSheafLowerStar_eq_overPushforward :
+    weilSheafLowerStar ℓ eX eY hf =
+      Endofunctor.IsoAlgebra.overPushforward (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (L := (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (fun a b h ↦ weilSheafLowerStarComparison ℓ a b h) eX eY hf :=
+  rfl
+
+/-- The iterated Weil sheaves are the iterated algebras for the family of pullbacks of module
+objects. -/
+lemma WeilSheaf.powSuccFunctor_eq_overPowSuccFunctor {Z : Over (Spec (.of k))} (e : Z ≅ Z)
+    (n : ℕ) :
+    WeilSheaf.powSuccFunctor ℓ e n =
+      Endofunctor.IsoAlgebra.overPowSuccFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+          upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) e n :=
+  rfl
+
 /-- **The pushforward commutes with the iterated Weil structures**: for a Weil sheaf `F` for
 `e_X`, the Weil sheaf `(f_* F)^{(n+1)}` for `e_Y^{n+1}` is the pushforward of the Weil sheaf
 `F^{(n+1)}` for `e_X^{n+1}`: the iterated structure isomorphisms agree by the pasting law of the
@@ -330,6 +386,16 @@ theorem nonempty_powSucc_weilSheafLowerStar_iso (F : WeilSheaf ℓ eX) (n : ℕ)
       (weilSheafLowerStar ℓ (eX.powSucc n) (eY.powSucc n)
         (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)).obj
         (WeilSheaf.powSucc ℓ F n)) := by
-  sorry
+  rw [← WeilSheaf.powSuccFunctor_obj, ← WeilSheaf.powSuccFunctor_obj]
+  exact Endofunctor.IsoAlgebra.nonempty_overPowSucc_overPushforward_iso_of_eq
+    (pushforwardPaste_weilSheafLowerStarComparison ℓ) eX eY hf n (WeilSheaf ℓ eX) (WeilSheaf ℓ eY)
+    (WeilSheaf ℓ (eX.powSucc n)) (WeilSheaf ℓ (eY.powSucc n)) F (weilSheafLowerStar ℓ eX eY hf)
+    (weilSheafLowerStar ℓ (eX.powSucc n) (eY.powSucc n)
+      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n))
+    (WeilSheaf.powSuccFunctor ℓ eX n) (WeilSheaf.powSuccFunctor ℓ eY n) rfl rfl rfl rfl
+    (heq_of_eq (weilSheafLowerStar_eq_overPushforward ℓ eX eY hf))
+    (heq_of_eq (weilSheafLowerStar_eq_overPushforward ℓ _ _ _))
+    (heq_of_eq (WeilSheaf.powSuccFunctor_eq_overPowSuccFunctor ℓ eX n))
+    (heq_of_eq (WeilSheaf.powSuccFunctor_eq_overPowSuccFunctor ℓ eY n))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
