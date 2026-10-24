@@ -390,6 +390,7 @@ attribute [local instance] DerivedCategory.braidedCategory'
 noncomputable instance shiftedUnitHasRightDual (n : ℤ) : HasRightDual (shiftedUnit ℓ k n) :=
   (DerivedCategory.isDualizable_shift isDualizable_unit n).some
 
+omit [Fact (ringChar k).Prime] in
 /-- The trace of `c • 𝟙` on `𝟙⟦m⟧` is `(-1)ᵐ c`. -/
 lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
     trace (gradedHomHom ℓ k (shiftedUnitEquiv ℓ k m c)) =
