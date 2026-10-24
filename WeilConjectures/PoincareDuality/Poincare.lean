@@ -94,42 +94,42 @@ noncomputable def boundedConstructibleTateTwist (d n : ℤ) :
 under the fully faithful inclusion `Dᵇc ⥤ D`. No new choice is made: this is the same
 isomorphism, and it is the only normalization entering the trace and Poincaré duality below. -/
 noncomputable def boundedConstructibleSmoothPurityIso :
-    (boundedConstructibleUpperShriek ℓ p).obj (𝟙_ _) ≅
+    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ≅
       boundedConstructibleTateTwist ℓ X d (2 * d) :=
   (ObjectProperty.fullyFaithfulι _).preimageIso (smoothPurityIso ℓ p d)
 
 /-- The **trace** `Tr_p : Rp_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of a smooth morphism `p : X ⟶ S` of pure
 relative dimension `d`: `Rp_!(pur_p⁻¹)` followed by the counit of `Rp_! ⊣ Rp^!`. -/
 noncomputable def trace :
-    (boundedConstructibleLowerShriek ℓ p).obj
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
       (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶ 𝟙_ _ :=
-  Verdier.trace (boundedConstructibleUpperShriekAdjunction ℓ p)
+  Verdier.trace (boundedConstructibleUpperShriekAdjunction _ ℓ p)
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
 /-- The **Poincaré duality morphism**
 `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)`: `Rp_*(pur_p⁻¹)`, the identification
 `Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)`, and the Verdier exchange morphism. -/
 noncomputable def poincareMap :
-    (boundedConstructibleLowerStar ℓ p).obj
+    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
         (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
-      (ihom ((boundedConstructibleLowerShriek ℓ p).obj
+      (ihom ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
         (𝟙_ _))).obj (𝟙_ _) :=
-  Verdier.poincareMap (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
-    (boundedConstructibleUpperShriekAdjunction ℓ p)
-    (boundedConstructibleExceptionalProjection ℓ p)
+  Verdier.poincareMap (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ p)
+    (boundedConstructibleExceptionalProjection _ ℓ p)
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
 /-- The **compact-support cup product**
 `cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]`: the derived exceptional
 projection morphism `PF^!`, the counit `Lp^* Rp_* ⟶ 𝟭` and the left unitor. -/
 noncomputable def cupProduct :
-    (boundedConstructibleLowerShriek ℓ p).obj (𝟙_ _) ⊗
-        (boundedConstructibleLowerStar ℓ p).obj
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ⊗
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
           (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
-      (boundedConstructibleLowerShriek ℓ p).obj
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
         (boundedConstructibleTateTwist ℓ X d (2 * d)) :=
-  Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
-    (boundedConstructibleExceptionalProjection ℓ p)
+  Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
+    (boundedConstructibleExceptionalProjection _ ℓ p)
 
 omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality is the trace–cup pairing**: the transpose

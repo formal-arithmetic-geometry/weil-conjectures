@@ -10,11 +10,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 /-!
 
-# The proper base change theorem for constructible `ℚ̄_ℓ`-sheaves
+# The proper base change theorem for constructible `E`- and `ℚ̄_ℓ`-sheaves
 
-Let `ℓ` be a prime and `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ` the condensed ring of
-`WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic`, whose sections are continuous
-maps into finite subextensions of `ℚ̄_ℓ`. Fix a cartesian square of schemes
+Let `ℓ` be a prime and `E` a finite extension of `ℚ_ℓ`, with its normed field structure. Its
+condensed ring is `E̲ = C(-, E)` (`Profinite.continuousMapRingObj E`, of
+`WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap`), and the coefficient ring
+on `X_proét` is `E_X = p_X^* E̲`. Fix a cartesian square of schemes
 
 ```
 X' --g'--> X
@@ -25,16 +26,20 @@ Y' --g---> Y
 ```
 
 with `f` **proper**, recorded as `sq : IsPullback g' f' f g`. This file states the proper base
-change theorem for bounded constructible `ℚ̄_ℓ`-sheaves: the base-change morphism
+change theorem for bounded constructible `E`-sheaves: the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs` is an
-isomorphism of functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`. No hypothesis is imposed on `g`.
+isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. No hypothesis is imposed on `g`. The same
+holds for the condensed ring `ℚ̲̄_ℓ` of
+`WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic`
+(`Profinite.padicAlgClRingObj`), whose sections are continuous maps into finite
+subextensions of `ℚ̄_ℓ`.
 
 The proof reduces to the torsion case, the étale proper base change theorem
 `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, by writing a constructible
 `𝒪_E`-complex as the derived limit of its reductions modulo `ϖⁿ` and inverting `ℓ`
-(Bhatt–Scholze, Section 6.7), and passing to the colimit over the finite subextensions `E` of
-`ℚ̄_ℓ`. It is currently `sorry`.
+(Bhatt–Scholze, Section 6.7); the `ℚ̄_ℓ` case follows by passing to the colimit over the finite
+subextensions `E`. Both are currently `sorry`.
 
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes are
@@ -43,6 +48,8 @@ morphisms are morphisms of `Over (Spec (.of k))`.
 
 ## Main statements
 
+- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`: proper base
+  change on bounded constructible `E`-sheaves.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`: proper
   base change on bounded constructible `ℚ̄_ℓ`-sheaves.
 
@@ -65,6 +72,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
+  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -72,6 +80,25 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+
+include ℓ k in
+/-- **The proper base change theorem** for bounded constructible `E`-sheaves, `E` a finite
+extension of `ℚ_ℓ`: for a cartesian square of schemes
+
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+Y' --g---> Y
+```
+
+with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
+isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
+theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
+    (sq : IsPullback g' f' f g) :
+    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) :=
+  sorry
 
 /-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves: for a cartesian
 square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change morphism
@@ -81,7 +108,7 @@ square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change m
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleBaseChange
-      ℓ sq.toCommSq) :=
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) :=
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -88,7 +88,7 @@ horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
     (sq : CommSq g' f' f g) :
-    IsIso (boundedConstructibleBaseChange ℓ sq) :=
+    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
   sorry
 
 end BaseChangeOfIsIso
@@ -107,11 +107,11 @@ section UpperStar
 is `Φ_X Lf^* ≅ Lf^* Φ_Y`: the pullback comparison of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilUpperStarComparison :
-    boundedConstructibleUpperStar ℓ f ⋙
-        boundedConstructibleUpperStar ℓ eX.hom ≅
-      boundedConstructibleUpperStar ℓ eY.hom ⋙
-        boundedConstructibleUpperStar ℓ f :=
-  (boundedConstructiblePullbackSquareComparison ℓ
+    boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eY.hom ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+  (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
     (CommSq.mk hf)).symm
 
 /-- The derived pullback `Lf^*` of Weil objects: a Weil object `(K, φ_K)` for `e_Y` is sent to
@@ -124,13 +124,13 @@ noncomputable def weilUpperStar :
 @[simp]
 lemma weilUpperStar_obj_carrier (K : WeilBoundedConstructible ℓ eY) :
     ((weilUpperStar ℓ eX eY f hf).obj K).carrier =
-      (boundedConstructibleUpperStar ℓ f).obj K.carrier :=
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier :=
   rfl
 
 lemma weilUpperStar_obj_str (K : WeilBoundedConstructible ℓ eY) :
     ((weilUpperStar ℓ eX eY f hf).obj K).str =
       (weilUpperStarComparison ℓ eX eY f hf).app K.carrier ≪≫
-        (boundedConstructibleUpperStar ℓ f).mapIso K.str :=
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The derived pullback of Weil objects lifts the derived pullback on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the
@@ -138,7 +138,7 @@ forgetful functors. -/
 lemma weilUpperStar_comp_forget :
     weilUpperStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eX =
       WeilBoundedConstructible.forget ℓ eY ⋙
-        boundedConstructibleUpperStar ℓ f :=
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   rfl
 
 end UpperStar
@@ -151,11 +151,11 @@ section LowerStar
 that is `Φ_Y Rf_* ⟶ Rf_* Φ_X`: the base-change morphism of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilLowerStarComparison :
-    boundedConstructibleLowerStar ℓ f ⋙
-        boundedConstructibleUpperStar ℓ eY.hom ⟶
-      boundedConstructibleUpperStar ℓ eX.hom ⋙
-        boundedConstructibleLowerStar ℓ f :=
-  boundedConstructibleBaseChange ℓ (CommSq.mk hf)
+    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eY.hom ⟶
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom ⋙
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+  boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (CommSq.mk hf)
 
 /-- The Frobenius comparison of the derived pushforward is an isomorphism, the Frobenius
 automorphisms being isomorphisms. -/
@@ -172,13 +172,13 @@ noncomputable def weilLowerStar :
 @[simp]
 lemma weilLowerStar_obj_carrier (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).carrier =
-      (boundedConstructibleLowerStar ℓ f).obj K.carrier :=
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier :=
   rfl
 
 lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).str =
       (asIso (weilLowerStarComparison ℓ eX eY f hf)).app K.carrier ≪≫
-        (boundedConstructibleLowerStar ℓ f).mapIso K.str :=
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
@@ -186,7 +186,7 @@ the forgetful functors. -/
 lemma weilLowerStar_comp_forget :
     weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY =
       WeilBoundedConstructible.forget ℓ eX ⋙
-        boundedConstructibleLowerStar ℓ f :=
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   rfl
 
 end LowerStar

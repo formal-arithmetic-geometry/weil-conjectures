@@ -15,7 +15,7 @@ public import WeilConjectures.WeilObject.Sheaf.Stalk
 Let `ℓ` be a prime, `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ` the condensed ring of `ℚ̄_ℓ`, and
 let `X` be a separated scheme of finite type over `Spec k` with an automorphism `e : X ≅ X` over
 `Spec k`. Write `e^* = (e.hom.left)^*⟦ℚ̲̄_ℓ⟧` for the pullback on module objects and
-`Le^* = boundedConstructibleUpperStar ℓ e.hom` for the derived pullback on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
+`Le^* = boundedConstructibleUpperStar ℚ̲̄_ℓ ℓ e.hom` for the derived pullback on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
 
 Since `Le^*` is computed levelwise by the exact functor `e^*`
 (`ProEtale.CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`), the `n`-th homology sheaf
@@ -67,7 +67,7 @@ pullback with the levelwise pullback, and the compatibility
 noncomputable def weilHomologyComparison :
     ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) ⋙
         (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
-      boundedConstructibleUpperStar ℓ e.hom ⋙
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom ⋙
         ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _
@@ -77,7 +77,7 @@ noncomputable def weilHomologyComparison :
             e.hom.left).symm _) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
-      (boundedConstructibleUpperStarCompatibility ℓ
+      (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
         e.hom).symm _ ≪≫
     Functor.associator _ _ _
 
