@@ -65,7 +65,7 @@ lemma WeilSheaf.frobeniusStalk_eq (F : WeilSheaf ℓ e) :
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-lemma WeilSheaf.powSuccStalkFunctor_eq :
+lemma WeilSheaf.powSuccStalkFunctor_eq_comp :
     WeilSheaf.powSuccStalkFunctor ℓ n x hx = WeilSheaf.powSuccFunctor ℓ e n ⋙
       WeilSheaf.stalkFunctor ℓ (e.powSucc n) ((geometricFrobeniusField k).powSucc n).hom x hx :=
   rfl
@@ -77,7 +77,7 @@ lemma WeilSheaf.frobeniusStalk_eq' (F : WeilSheaf ℓ e) :
       ((geometricFrobeniusField k).powSucc n).hom x hx).obj
         ((WeilSheaf.powSuccFunctor ℓ e n).obj F) :=
   (WeilSheaf.frobeniusStalk_eq ℓ n x hx F).trans
-    ((congrArg (fun G ↦ G.obj F) (WeilSheaf.powSuccStalkFunctor_eq ℓ n x hx)).trans
+    ((congrArg (fun G ↦ G.obj F) (WeilSheaf.powSuccStalkFunctor_eq_comp ℓ n x hx)).trans
       (Functor.comp_obj _ _ _))
 
 /-- **The local trace of a Weil sheaf of homology in terms of the base change**, in each degree:

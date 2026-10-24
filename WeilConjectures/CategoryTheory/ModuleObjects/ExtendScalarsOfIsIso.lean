@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-!
 # Extension of scalars along an isomorphism, on underlying objects
@@ -50,13 +51,6 @@ lemma hom_ext_of_extendUnitHom {M : Mod C R} {N : Mod C S} {g g' : extendScalars
   refine (extendHomEquiv φ M N).injective (Mod.hom_ext _ _ ?_)
   simpa [extendHomEquiv] using h
 
-/-- The unit of the adjunction between extension and restriction of scalars is `extendUnitHom`
-on underlying objects. -/
-lemma extendRestrictAdjunction_unit_app_hom (M : Mod C R) :
-    ((extendRestrictAdjunction φ).unit.app M).hom = extendUnitHom φ M := by
-  simp only [extendRestrictAdjunction, Adjunction.mkOfHomEquiv_unit_app]
-  exact Category.comp_id _
-
 /-- The unit `M ⟶ S ⊗_R M` is natural on underlying objects. -/
 @[reassoc]
 lemma extendUnitHom_comp_extendScalars_map_hom {M M' : Mod C R} (g : M ⟶ M') :
@@ -79,15 +73,6 @@ lemma extendUnitHom_extendScalarsIsoComapInv_hom_app_hom (M : Mod C R) :
     Mod.comap_map_hom] at h
   refine h.trans ?_
   simp [comapEquivalenceOfIsIso, comapCongr, Equivalence.mk, Equivalence.symm, comap]
-
-omit [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
-  [IsCommMonObj R] in
-/-- The isomorphism `Res_{φ⁻¹} Res_φ N ≅ N` is the identity on underlying objects. -/
-@[simp]
-lemma comapEquivalenceOfIsIso_unitIso_inv_app_hom (N : Mod C S) :
-    ((comapEquivalenceOfIsIso φ).unitIso.inv.app N).hom = 𝟙 _ := by
-  simp [comapEquivalenceOfIsIso, comapCongr, Equivalence.mk, Equivalence.adjointifyη, comap]
 
 /-- The map `Ext_φ M ⟶ Ext_φ Res_φ N ≅ Res_{φ⁻¹} Res_φ N ≅ N` induced by `g : M ⟶ Res_φ N`,
 precomposed with the unit `M ⟶ S ⊗_R M`, is `g` on underlying objects. -/

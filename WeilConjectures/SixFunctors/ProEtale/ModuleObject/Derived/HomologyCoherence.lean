@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.Algebra.Homology.ShortComplex.MapHomologyIsoComp
+public import WeilConjectures.Algebra.Homology.MapHomologicalComplexHomologyIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 
 /-!
@@ -78,32 +79,6 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
   [Preadditive C] [Preadditive D] [Preadditive E]
   [CategoryWithHomology C] [CategoryWithHomology D] [CategoryWithHomology E]
   {ι : Type*} (c : ComplexShape ι) (i : ι)
-
-/-- The commutation of `F ⋙ G` with the homology of complexes is the composite of the
-commutations of `G` and of `F`. -/
-lemma mapHomologicalComplexHomologyIso_comp_hom_app (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
-    [G.Additive] [F.PreservesHomology] [G.PreservesHomology] [(F ⋙ G).PreservesHomology]
-    (K : HomologicalComplex C c) :
-    ((F ⋙ G).mapHomologicalComplexHomologyIso c i).hom.app K =
-      (G.mapHomologicalComplexHomologyIso c i).hom.app ((F.mapHomologicalComplex c).obj K) ≫
-        G.map ((F.mapHomologicalComplexHomologyIso c i).hom.app K) := by
-  rw [mapHomologicalComplexHomologyIso_hom_app_eq, mapHomologicalComplexHomologyIso_hom_app_eq,
-    mapHomologicalComplexHomologyIso_hom_app_eq, ShortComplex.mapHomologyIso_comp]
-  rfl
-
-/-- The commutation of `F ⋙ G` with the homology of complexes is the composite of the
-commutations of `G` and of `F` (inverse form). -/
-lemma mapHomologicalComplexHomologyIso_comp_inv_app (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
-    [G.Additive] [F.PreservesHomology] [G.PreservesHomology] [(F ⋙ G).PreservesHomology]
-    (K : HomologicalComplex C c) :
-    ((F ⋙ G).mapHomologicalComplexHomologyIso c i).inv.app K =
-      G.map ((F.mapHomologicalComplexHomologyIso c i).inv.app K) ≫
-        (G.mapHomologicalComplexHomologyIso c i).inv.app ((F.mapHomologicalComplex c).obj K) := by
-  rw [← Iso.app_inv]
-  refine Iso.inv_ext ?_
-  rw [Iso.app_hom, mapHomologicalComplexHomologyIso_comp_hom_app]
-  simp [← G.map_comp_assoc]
-  rfl
 
 /-- The commutation of `𝟭 C` with the homology of complexes is the identity. -/
 lemma mapHomologicalComplexHomologyIso_id_hom_app (K : HomologicalComplex C c) :

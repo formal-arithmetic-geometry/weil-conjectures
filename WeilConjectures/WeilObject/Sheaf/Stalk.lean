@@ -164,6 +164,13 @@ lemma upperStarEqToIso_hom_app {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') 
     (upperStarEqToIso Λ h).hom.app M = eqToHom (congrArg (fun s : A ⟶ B ↦ (s)^*⟦Λ⟧.obj M) h) :=
   (NatIso.ofComponents_hom_app _ _ M).trans (eqToIso.hom _)
 
+/-- `upperStarEqToIso` is `eqToIso` of the equality of the pullback functors. -/
+lemma upperStarEqToIso_eq_eqToIso {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
+    upperStarEqToIso Λ h = eqToIso (congrArg (upperStar Λ) h) := by
+  subst h
+  ext M
+  simp [upperStarEqToIso_hom_app]
+
 end EqToIso
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
