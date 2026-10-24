@@ -39,23 +39,21 @@ variable {C : Type w} [Category.{v} C]
 section Retract
 
 variable {V : C} [HasFiniteProducts (Over V)] {ι : Type t} (U : ι → Over V)
-  (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
 
-/-- The Čech complex of a presheaf of abelian groups which is a retract of its cofree presheaf
-is exact in positive degrees. -/
-theorem exactAt_cechComplex_of_retract (r : cofree P ⟶ P) (hr : toCofree P ≫ r = 𝟙 P) (q : ℕ) :
+/-- Exactness of Čech complexes passes to retracts of presheaves. -/
+theorem exactAt_cechComplex_of_retract {P Q : Cᵒᵖ ⥤ AddCommGrpCat.{max w v}} (i : P ⟶ Q)
+    (r : Q ⟶ P) (hir : i ≫ r = 𝟙 P) (q : ℕ) (hQ : ((cechComplex U).obj Q).ExactAt (q + 1)) :
     ((cechComplex U).obj P).ExactAt (q + 1) := by
-  set ι' := (cechComplex U).map (toCofree P)
+  set ι' := (cechComplex U).map i
   set ρ := (cechComplex U).map r
   have hιρ (k : ℕ) (c : ((cechComplex U).obj P).X k) : ρ.f k (ι'.f k c) = c := by
-    rw [← ConcreteCategory.comp_apply, ← HomologicalComplex.comp_f, ← Functor.map_comp, hr,
+    rw [← ConcreteCategory.comp_apply, ← HomologicalComplex.comp_f, ← Functor.map_comp, hir,
       CategoryTheory.Functor.map_id, HomologicalComplex.id_f, ConcreteCategory.id_apply]
   rw [exactAt_cechComplex_iff]
   intro c hc
-  obtain ⟨b, hb⟩ := (exactAt_cechComplex_iff U _ q).1 (exactAt_cechComplex_cofree U P q)
-    (ι'.f (q + 1) c) (by
-      exact (ConcreteCategory.congr_hom (ι'.comm (q + 1) (q + 2)) c).trans
-        ((congrArg (ι'.f (q + 2)) hc).trans (map_zero _)))
+  obtain ⟨b, hb⟩ := (exactAt_cechComplex_iff U _ q).1 hQ (ι'.f (q + 1) c)
+    ((ConcreteCategory.congr_hom (ι'.comm (q + 1) (q + 2)) c).trans
+      ((congrArg (ι'.f (q + 2)) hc).trans (map_zero _)))
   exact ⟨ρ.f q b, (ConcreteCategory.congr_hom (ρ.comm q (q + 1)) b).trans
     ((congrArg (ρ.f (q + 1)) hb).trans (hιρ _ c))⟩
 
@@ -135,6 +133,7 @@ lemma exactAt_cechComplex_forget₂_of_injective (I : Sheaf J (ModuleCat.{max w 
   have : Injective I.obj := (sheafificationAdjunction _ _).map_injective I inferInstance
   obtain ⟨r, hr⟩ := Presheaf.exists_retract_cofree_forget₂ I.obj
   exact Presheaf.exactAt_cechComplex_of_retract U _ r hr q
+    (Presheaf.exactAt_cechComplex_cofree U _ q)
 
 variable [HasSheafify J AddCommGrpCat.{max w v}] [HasExt.{t} (Sheaf J AddCommGrpCat.{max w v})]
   [∀ V : C, HasFiniteProducts (Over V)] [EnoughInjectives (Sheaf J AddCommGrpCat.{max w v})]

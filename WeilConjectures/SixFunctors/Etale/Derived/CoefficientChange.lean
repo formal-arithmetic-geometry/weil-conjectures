@@ -39,7 +39,8 @@ the coefficient-change statements
 - `derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap`:
   the compatibility of the comparisons with the compact-support exchange map (the "compatible with
   pullback" clause of `lem-fix-compact-support-coefficient-change`). This is a coherence statement
-  for the unbounded derived functors involved; it is not proved yet.
+  for the unbounded derived functors involved; it is proved in
+  `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange`.
 -/
 
 @[expose] public section

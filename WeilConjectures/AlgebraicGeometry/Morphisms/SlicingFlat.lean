@@ -467,7 +467,7 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
     ∃ (U : Scheme.{u}) (p : U ⟶ X) (V : Scheme.{u}) (q : U ⟶ V) (r : V ⟶ S),
       Etale p ∧ x ∈ Set.range p ∧ Etale r ∧ Flat q ∧ LocallyOfFinitePresentation q ∧
       QuasiCompact q ∧ QuasiSeparated q ∧ GeometricallyConnected q ∧ GeometricallyReduced q ∧
-      q ≫ r = p ≫ f := by
+      IsAffine V ∧ (∃ s : V ⟶ U, s ≫ q = 𝟙 V) ∧ q ≫ r = p ≫ f := by
   -- a smooth point `x'` with finite separable residue field in the connected component of `x`
   obtain ⟨W, hxW, hW⟩ := f.exists_opens_inter_preimage_subset_connectedComponentIn x
   obtain ⟨x₁, hx₁W, hfx₁, hx₁⟩ := exists_mem_smoothLocus_of_geometricallyReduced f W hxW
@@ -536,7 +536,8 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
   have : GeometricallyReduced (W.ι ≫ g) := GeometricallyReduced.comp_of_etale _ _
   refine ⟨W, W.ι ≫ pullback.fst f (ι ≫ f), Z, W.ι ≫ g, ι ≫ f, inferInstance,
     ⟨⟨p₀, hp₀W⟩, hp₀x⟩, inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, ?_, ‹_›, ?_⟩
+    inferInstance, ?_, ‹_›, hZ, ⟨IsOpenImmersion.lift W.ι σ hσW, by
+      rw [IsOpenImmersion.lift_fac_assoc, hσ]⟩, ?_⟩
   · refine GeometricallyConnected.of_isPreconnected_preimage_singleton _
       (IsOpenImmersion.lift W.ι σ hσW) (by rw [IsOpenImmersion.lift_fac_assoc, hσ]) fun n ↦ ?_
     rw [← W.ι.isOpenEmbedding.isInducing.isPreconnected_image]
@@ -554,13 +555,14 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
 /-- **Slicing at a point.** Let `f : X ⟶ S` be flat, locally of finite presentation, with
 geometrically reduced fibres, and let `x : X`. There are an étale `p : U ⟶ X` with `x` in its
 image and a factorisation `p ≫ f = q ≫ r` with `r : V ⟶ S` étale and `q : U ⟶ V` flat of finite
-presentation with geometrically connected and geometrically reduced fibres. -/
+presentation with geometrically connected and geometrically reduced fibres, admitting a section,
+with `V` affine. -/
 theorem exists_etale_factorization_of_mem {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [GeometricallyReduced f] (x : X) :
     ∃ (U : Scheme.{u}) (p : U ⟶ X) (V : Scheme.{u}) (q : U ⟶ V) (r : V ⟶ S),
       Etale p ∧ x ∈ Set.range p ∧ Etale r ∧ Flat q ∧ LocallyOfFinitePresentation q ∧
       QuasiCompact q ∧ QuasiSeparated q ∧ GeometricallyConnected q ∧ GeometricallyReduced q ∧
-      q ≫ r = p ≫ f := by
+      IsAffine V ∧ (∃ s : V ⟶ U, s ≫ q = 𝟙 V) ∧ q ≫ r = p ≫ f := by
   obtain ⟨S', hS', hxS', -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (x := f x) trivial
   obtain ⟨X', hX', hxX', hX'S'⟩ :=
     exists_isAffineOpen_mem_and_subset (U := f ⁻¹ᵁ S') (x := x) hxS'
@@ -571,10 +573,10 @@ theorem exists_etale_factorization_of_mem {X S : Scheme.{u}} (f : X ⟶ S) [Flat
     (P := @GeometricallyReduced) (isPullback_morphismRestrict f S').flip ‹_›
   have : GeometricallyReduced (f.resLE S' X' hX'S') :=
     GeometricallyReduced.comp_of_etale (X.homOfLE hX'S') (f ∣_ S')
-  obtain ⟨U, p, V, q, r, hp, ⟨u, hu⟩, hr, hq, hq', hqc, hqs, hqg, hqr, hqf⟩ :=
+  obtain ⟨U, p, V, q, r, hp, ⟨u, hu⟩, hr, hq, hq', hqc, hqs, hqg, hqr, hV, hs, hqf⟩ :=
     exists_etale_factorization_of_mem_aux (f.resLE S' X' hX'S') ⟨x, hxX'⟩
   refine ⟨U, p ≫ X'.ι, V, q, r ≫ S'.ι, inferInstance, ⟨u, by simp [hu]⟩, inferInstance, hq, hq',
-    hqc, hqs, hqg, hqr, ?_⟩
+    hqc, hqs, hqg, hqr, hV, hs, ?_⟩
   rw [← Category.assoc, hqf, Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc]
 
 /-- **Slicing a flat morphism with geometrically reduced fibres.** Let `f : X ⟶ S` be flat,
@@ -582,7 +584,9 @@ locally of finite presentation and with geometrically reduced fibres. Then there
 covering `p i : U i ⟶ X` of `X`, that is, a family of étale morphisms whose images cover `X`,
 such that each composite `p i ≫ f` factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and
 `q i : U i ⟶ V i` flat of finite presentation (locally of finite presentation, quasi-compact and
-quasi-separated), with geometrically connected and geometrically reduced fibres:
+quasi-separated), with geometrically connected and geometrically reduced fibres and a section,
+over an affine scheme `V i` (the "Moreover" part of blueprint `sk-prop-normal-form`, except
+that `U i` is only quasi-compact, not affine):
 
 ```
 U i --q i--> V i
@@ -593,7 +597,7 @@ p i          r i
 ```
 
 For a smooth morphism the first leg can moreover be taken to be a smooth morphism of affine
-schemes admitting a section; that is Stacks `0EY4`,
+schemes; that is Stacks `0EY4`,
 `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`. -/
 @[stacks 0EY5]
 theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
@@ -604,8 +608,10 @@ theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f
       (∀ i, Etale (r i)) ∧ (∀ i, Flat (q i)) ∧ (∀ i, LocallyOfFinitePresentation (q i)) ∧
       (∀ i, QuasiCompact (q i)) ∧ (∀ i, QuasiSeparated (q i)) ∧
       (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, GeometricallyReduced (q i)) ∧
+      (∀ i, IsAffine (V i)) ∧ (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧
       (∀ i, q i ≫ r i = p i ≫ f) := by
-  choose U p V q r hp hx hr hq hq' hqc hqs hqg hqr hqf using exists_etale_factorization_of_mem f
-  exact ⟨X, U, p, V, q, r, hp, fun x ↦ ⟨x, hx x⟩, hr, hq, hq', hqc, hqs, hqg, hqr, hqf⟩
+  choose U p V q r hp hx hr hq hq' hqc hqs hqg hqr hV hs hqf using
+    exists_etale_factorization_of_mem f
+  exact ⟨X, U, p, V, q, r, hp, fun x ↦ ⟨x, hx x⟩, hr, hq, hq', hqc, hqs, hqg, hqr, hV, hs, hqf⟩
 
 end AlgebraicGeometry

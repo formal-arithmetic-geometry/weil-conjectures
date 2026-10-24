@@ -54,7 +54,7 @@ variable {Z : Over (Spec (.of k))} {e : Z ≅ Z} (n : ℕ)
   (F : WeilSheaf ℓ e)
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-lemma WeilSheaf.powSuccStalkFunctor_eq : WeilSheaf.powSuccStalkFunctor ℓ n x hx =
+lemma WeilSheaf.powSuccStalkFunctor_eq_comp : WeilSheaf.powSuccStalkFunctor ℓ n x hx =
     WeilSheaf.powSuccFunctor ℓ e n ⋙
       WeilSheaf.stalkFunctor ℓ (e.powSucc n) ((geometricFrobeniusField k).powSucc n).hom x hx :=
   WeilSheaf.powSuccStalkFunctor.eq_1 ℓ n x hx
@@ -63,7 +63,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma WeilSheaf.powSuccStalkFunctor_obj : (WeilSheaf.powSuccStalkFunctor ℓ n x hx).obj F =
     (WeilSheaf.powSuccFunctor ℓ e n ⋙ WeilSheaf.stalkFunctor ℓ (e.powSucc n)
       ((geometricFrobeniusField k).powSucc n).hom x hx).obj F :=
-  congrArg (fun G ↦ G.obj F) (WeilSheaf.powSuccStalkFunctor_eq ℓ n x hx)
+  congrArg (fun G ↦ G.obj F) (WeilSheaf.powSuccStalkFunctor_eq_comp ℓ n x hx)
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma WeilSheaf.powSuccFunctor_comp_stalkFunctor_obj : (WeilSheaf.powSuccFunctor ℓ e n ⋙

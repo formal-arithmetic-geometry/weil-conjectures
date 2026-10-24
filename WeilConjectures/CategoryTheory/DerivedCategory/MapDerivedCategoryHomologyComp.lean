@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Homology.MapHomologicalComplexHomologyIso
 public import WeilConjectures.Algebra.Homology.ShortComplex.MapHomologyIsoComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -36,25 +37,6 @@ variable {C D E : Type*} [Category C] [Category D] [Category E] [Abelian C] [Abe
 variable (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-
-omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] in
-/-- The homology isomorphism `Functor.mapHomologicalComplexHomologyIso` of a composite of exact
-functors is the composite of those of the factors. -/
-lemma mapHomologicalComplexHomologyIso_comp_inv_app (n : ℤ) (L : CochainComplex C ℤ) :
-    ((F ⋙ G).mapHomologicalComplexHomologyIso (.up ℤ) n).inv.app L =
-      G.map ((F.mapHomologicalComplexHomologyIso (.up ℤ) n).inv.app L) ≫
-        (G.mapHomologicalComplexHomologyIso (.up ℤ) n).inv.app
-          ((F.mapHomologicalComplex (.up ℤ)).obj L) := by
-  have hhom : ((F ⋙ G).mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app L =
-      (G.mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app
-          ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
-        G.map ((F.mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app L) := by
-    rw [mapHomologicalComplexHomologyIso_hom_app_eq, mapHomologicalComplexHomologyIso_hom_app_eq,
-      mapHomologicalComplexHomologyIso_hom_app_eq, ShortComplex.mapHomologyIso_comp]
-    rfl
-  rw [← cancel_mono (((F ⋙ G).mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app L),
-    Iso.inv_hom_id_app, hhom]
-  simp
 
 /-- **The homology isomorphism of a composite of exact functors**: the commutation of `F ⋙ G`
 with the homology functors is the composite of the commutations of `F` and `G`, through the
