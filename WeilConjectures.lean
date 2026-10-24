@@ -8022,6 +8022,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.LeftProjectionComp
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
@@ -12756,6 +12757,16 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunctionFibre
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
+public import WeilConjectures.TraceFormula.SourceExchange
+public import WeilConjectures.TraceFormula.SourceExchangeClass
+public import WeilConjectures.TraceFormula.SourceExchangeCoefficient
+public import WeilConjectures.TraceFormula.SourceExchangeCoherence
+public import WeilConjectures.TraceFormula.SourceExchangeKernel
+public import WeilConjectures.TraceFormula.SourceExchangeKunneth
+public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
+public import WeilConjectures.TraceFormula.SourceExchangeProjection
+public import WeilConjectures.TraceFormula.SourceExchangeTest
+public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.DeformationModel

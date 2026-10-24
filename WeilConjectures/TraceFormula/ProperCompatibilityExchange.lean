@@ -15,9 +15,8 @@ public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` (blueprint
 `def-trf-coefficient-pushforward`), with `q = f × f`:
 
-* the kernel class of `[f, g]_! u` is the transported kernel class of `u`
-  (`Correspondence.ProperPushforwardDiagram.kernelClass_pushforward`, blueprint
-  `lem-trf-trace-source-exchange`);
+* the kernel class of `[f, g]_! u` is the transported kernel class of `u` (blueprint
+  `lem-trf-trace-source-exchange`; proved in `WeilConjectures.TraceFormula.SourceExchange`);
 * the evaluation kernels are exchanged by the kernel pushforward (blueprint
   `lem-trf-trace-map-exchange`, (1); proved in
   `WeilConjectures.TraceFormula.ProperCompatibilityEvaluation`);
@@ -105,20 +104,6 @@ omit [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
 /-- The diagonal square `Δ_X ≫ (f × f) = f ≫ Δ_Y`. -/
 lemma diag_comp_prodMap : diag X ≫ prod.map P.f P.f = P.f ≫ diag Y := by
   apply prod.hom_ext <;> simp
-
-/-- **Exchange of the trace-class sources** (blueprint `lem-trf-trace-source-exchange`): the
-kernel class of the coefficient pushforward `[f, g]_! u` is the transported kernel class of `u`,
-`[[f, g]_! u]_P = ρ_f ∘ Rq_* [u]_P ∘ Ξ ∘ Rb_! η_g`. -/
-theorem kernelClass_pushforward :
-    P.pushforward.kernelClass =
-      (boundedConstructibleLowerShriek _ ℓ P.pushforward.support).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).unit.app (𝟙_ _) ≫
-            (boundedConstructibleLowerStar _ ℓ P.g).map
-              (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ P.g)).inv) ≫
-        (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar _ ℓ (prod.map P.f P.f)).map c.kernelClass ≫
-        kernelPushforward ℓ P.f K :=
-  sorry
 
 
 end Correspondence.ProperPushforwardDiagram
