@@ -5,11 +5,11 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Identity
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Pasting
 
 /-!
-# Base change maps on a cube in a compact support formalism
+# Base change maps on a cube in a exchange formalism
 
 Consider a commutative cube of schemes whose top face is the square
 ```
@@ -23,18 +23,19 @@ immersions. The base change map of the extension by zero of the diagonal square
 `(x ≫ t) ≫ r = l' ≫ (z ≫ b)` decomposes in two ways as a horizontal pasting, through the top face
 or through the bottom face. Comparing the two decompositions gives a relation between the base
 change maps of the top face, of the bottom face and of the two side faces containing the open
-immersions (`AlgebraicGeometry.CompactSupportFormalism.baseChange_cube`).
+immersions (`CategoryTheory.ExchangeFormalism.baseChange_cube`).
 -/
 
 @[expose] public section
 
-universe w v u
+universe w v₁ v u
 
-open CategoryTheory Limits TwoSquare
+namespace CategoryTheory.ExchangeFormalism
 
-namespace AlgebraicGeometry.CompactSupportFormalism
+open TwoSquare
 
-variable (F : CompactSupportFormalism.{w, v, u})
+variable {𝒞 : Type u} [Category.{v} 𝒞] {𝒪 : MorphismProperty 𝒞}
+  (F : ExchangeFormalism.{w, v₁} 𝒞 𝒪)
 
 /-- **The base change maps on a commutative cube.** For a commutative cube with top face
 `t ≫ r = l ≫ b`, bottom face `t' ≫ r' = l' ≫ b'` and connecting maps `x`, `y`, `z`, `v`
@@ -46,10 +47,10 @@ W' --b'--> W           Z' --b--> Z
 the base change maps of the top face, of the face `x ≫ l = l' ≫ z` and the square isomorphisms
 of the faces `x ≫ t = t' ≫ y` and `z ≫ b = b' ≫ v` compose to the base change maps of the bottom
 face and of the face `y ≫ r = r' ≫ v`. -/
-lemma baseChange_cube {U' U Z' Z V' V W' W : Scheme.{u}} (t : U' ⟶ U) (l : U' ⟶ Z')
+lemma baseChange_cube {U' U Z' Z V' V W' W : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z')
     (r : U ⟶ Z) (b : Z' ⟶ Z) (t' : V' ⟶ V) (l' : V' ⟶ W') (r' : V ⟶ W) (b' : W' ⟶ W)
-    (x : V' ⟶ U') (y : V ⟶ U) (z : W' ⟶ Z') (v : W ⟶ Z) [IsOpenImmersion l]
-    [IsOpenImmersion r] [IsOpenImmersion l'] [IsOpenImmersion r'] (w : t ≫ r = l ≫ b)
+    (x : V' ⟶ U') (y : V ⟶ U) (z : W' ⟶ Z') (v : W ⟶ Z) [Fact (𝒪 l)]
+    [Fact (𝒪 r)] [Fact (𝒪 l')] [Fact (𝒪 r')] (w : t ≫ r = l ≫ b)
     (w' : t' ≫ r' = l' ≫ b') (sx : x ≫ t = t' ≫ y) (sl : x ≫ l = l' ≫ z)
     (sr : y ≫ r = r' ≫ v) (sb : z ≫ b = b' ≫ v) (M : F.obj U) :
     (F.sh l').map ((F.sqIso x t' t y sx).inv.app M) ≫
@@ -77,4 +78,4 @@ lemma baseChange_cube {U' U Z' Z V' V W' W : Scheme.{u}} (t : U' ⟶ U) (l : U' 
   dsimp only [Functor.comp_obj]
   rw [Category.comp_id]
 
-end AlgebraicGeometry.CompactSupportFormalism
+end CategoryTheory.ExchangeFormalism

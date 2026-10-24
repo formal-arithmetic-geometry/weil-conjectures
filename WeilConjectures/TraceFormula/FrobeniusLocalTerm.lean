@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
@@ -54,142 +55,7 @@ attribute [local instance] boundedConstructibleBraiding
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-
-namespace BorelMooreSection
-
-variable {T B X : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
-  [IsSeparated B.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-- The pushforward of a Borel–Moore section along an open and closed immersion `j : B ⟶ X` is
-fixed by the idempotent `e_B` of `B`. -/
-lemma pushforward_comp_clopenIdempotent (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left]
-    (γ : BorelMooreSection ℓ B) :
-    pushforward j γ ≫ (clopenIdempotent ℓ j).app (dualizingComplex' ℓ X) =
-      pushforward j γ := by
-  rw [clopenIdempotent_app, pushforward]
-  simp only [Category.assoc]
-  rw [reassoc_of% (Adjunction.clopenCounit_comp_clopenSection _ _ _ _ _
-    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen ℓ j)
-    (dualizingComplex' ℓ X))]
-
-end BorelMooreSection
-
-namespace BorelMooreSection
-
-variable {T B X : Over (Spec (.of k))} [QuasiCompact T.hom] [QuasiCompact B.hom]
-  [QuasiCompact X.hom]
-
-/-- **The local term of a pushforward** (blueprint `thm-trf-frobenius-local-term`, Step 3): for an
-open and closed subscheme `j : B ⟶ X` and a proper morphism `h : T ⟶ X` of schemes proper over
-`s` with image in `B`, the local term along `B` of the Borel–Moore pushforward `h_* γ` is
-`∫_T γ`. -/
-theorem localTerm_pushforward [IsProper T.hom] [IsProper B.hom] [IsProper X.hom] (j : B ⟶ X)
-    [IsOpenImmersion j.left] [IsClosedImmersion j.left] (h : T ⟶ X) [IsProper h.left]
-    (hh : Set.range h.left.base ⊆ Set.range j.left.base) (γ : BorelMooreSection ℓ T) :
-    (pushforward h γ).localTerm j = γ.integral := by
-  obtain ⟨e, rfl⟩ : ∃ e : T ⟶ B, e ≫ j = h :=
-    ⟨Over.homMk (IsOpenImmersion.lift j.left h.left hh) (by
-      rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac, Over.w h]),
-      Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)⟩
-  have : IsProper e.left := IsProper.of_comp e.left j.left
-  rw [← pushforward_comp, localTerm_eq_integral]
-  have hn := (clopenIdempotent ℓ j).naturality (pushforward j (pushforward e γ))
-  simp only [Functor.id_map, Functor.id_obj] at hn
-  rw [← hn, pushforward_comp_clopenIdempotent, integral_pushforward, integral_pushforward]
-
-end BorelMooreSection
-
-end AlgebraicGeometry.ProEtale.CondensedRing
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-open Scheme
-
-attribute [local instance] boundedConstructibleBraiding
-
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-! ### The open complement of a rational point -/
-
-section PointCompl
-
-/-- The open complement `X ∖ {x}` of a rational point `x`, an open subset of `X`. -/
-noncomputable def pointComplOpens (x : RationalPoint X) : X.left.Opens :=
-  ⟨(Set.range x.left.base)ᶜ, x.left.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-
-/-- The open complement `U = X ∖ {x}` of a rational point `x`, as a scheme over `s`. -/
-noncomputable abbrev pointCompl (x : RationalPoint X) : Over (Spec (.of k)) :=
-  Over.mk ((pointComplOpens x).ι ≫ X.hom)
-
-/-- The open immersion `j : X ∖ {x} ⟶ X` of the complement of a rational point. -/
-noncomputable abbrev pointComplι (x : RationalPoint X) : pointCompl x ⟶ X :=
-  Over.homMk (pointComplOpens x).ι
-
-instance (x : RationalPoint X) : IsOpenImmersion (pointComplι x).left :=
-  inferInstanceAs (IsOpenImmersion (pointComplOpens x).ι)
-
-instance (x : RationalPoint X) : LocallyOfFiniteType (pointCompl x).hom :=
-  inferInstanceAs (LocallyOfFiniteType ((pointComplOpens x).ι ≫ X.hom))
-
-instance (x : RationalPoint X) : IsSeparated (pointCompl x).hom :=
-  inferInstanceAs (IsSeparated ((pointComplOpens x).ι ≫ X.hom))
-
-instance (x : RationalPoint X) : QuasiCompact (pointCompl x).hom := by
-  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
-  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
-  have : IsNoetherian X.left := ⟨⟩
-  have : QuasiCompact (pointComplOpens x).ι := inferInstance
-  exact inferInstanceAs (QuasiCompact ((pointComplOpens x).ι ≫ X.hom))
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
-lemma range_pointComplι (x : RationalPoint X) :
-    Set.range (pointComplι x).left.base = (Set.range x.left.base)ᶜ :=
-  Scheme.Opens.range_ι _
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
-/-- The open complement of a rational point and the point are complementary. -/
-lemma isCompl_range_pointComplι (x : RationalPoint X) :
-    IsCompl (Set.range (pointComplι x).left.base) (Set.range x.left.base) := by
-  rw [range_pointComplι]
-  exact isCompl_compl.symm
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
-/-- The open complement of a rational point `x` fixed by an endomorphism `g` of `X`, injective on
-points, is stable under `g`, and the square `g_U ≫ j = j ≫ g` is cartesian. -/
-lemma exists_isPullback_pointComplι (x : RationalPoint X) (g : X ⟶ X)
-    (hg : Function.Injective g.left.base) (hx : x ≫ g = x) :
-    ∃ gU : pointCompl x ⟶ pointCompl x, IsPullback gU (pointComplι x) (pointComplι x) g := by
-  set x₀ := x.left.base (default : Spec (.of k)) with hx₀
-  have hxg : g.left.base x₀ = x₀ := by
-    rw [hx₀, ← Scheme.Hom.comp_apply, ← Over.comp_left, hx]
-  have hpt (y : X.left) : y ∈ Set.range x.left.base ↔ y = x₀ := by
-    refine ⟨?_, fun h ↦ ⟨(default : Spec (.of k)), h.symm⟩⟩
-    rintro ⟨z, rfl⟩
-    rw [hx₀, Subsingleton.elim (α := Spec (.of k)) z default]
-  have hrange : Set.range ((pointComplι x).left ≫ g.left).base ⊆
-      Set.range (pointComplι x).left.base := by
-    rintro _ ⟨y, rfl⟩
-    have hy : (pointComplι x).left.base y ∈ Set.range (pointComplι x).left.base := ⟨y, rfl⟩
-    rw [range_pointComplι, Set.mem_compl_iff, hpt] at hy ⊢
-    rw [Scheme.Hom.comp_apply, ← hxg]
-    exact fun h ↦ hy (hg h)
-  have hι : (pointCompl x).hom = (pointComplι x).left ≫ X.hom := rfl
-  refine ⟨Over.homMk (IsOpenImmersion.lift (pointComplι x).left _ hrange) ?_, ?_⟩
-  · rw [hι, ← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, Over.w g]
-  · refine IsOpenImmersion.isPullback_over_of_preimage_range_subset _
-      (Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)) ?_
-    intro y hy
-    rw [range_pointComplι, Set.mem_preimage, Set.mem_compl_iff, hpt] at hy
-    rw [range_pointComplι, Set.mem_compl_iff, hpt]
-    rintro rfl
-    exact hy hxg
-
-end PointCompl
 
 namespace WeilBoundedConstructible
 

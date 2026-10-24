@@ -6,12 +6,12 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Basic
 
 /-!
-# Pasting laws in a compact support formalism
+# Pasting laws in an exchange formalism
 
-For a `AlgebraicGeometry.CompactSupportFormalism`, this file proves that the square
+For a `CategoryTheory.ExchangeFormalism`, this file proves that the square
 isomorphisms, the base change maps of the extension by zero and the exchange maps are
 compatible with horizontal and vertical pasting of commutative squares.
 
@@ -27,13 +27,14 @@ Horizontal pasting composes the maps `t` and `b`, vertical pasting composes `l` 
 
 @[expose] public section
 
-universe w v u
+universe w v₁ v u
 
-open CategoryTheory Limits TwoSquare
+namespace CategoryTheory.ExchangeFormalism
 
-namespace AlgebraicGeometry.CompactSupportFormalism
+open TwoSquare
 
-variable (F : CompactSupportFormalism.{w, v, u})
+variable {𝒞 : Type u} [Category.{v} 𝒞] {𝒪 : MorphismProperty 𝒞}
+  (F : ExchangeFormalism.{w, v₁} 𝒞 𝒪)
 
 section SqIso
 
@@ -45,7 +46,7 @@ Z'' --b₁--> Z' --b₂--> Z
 ```
 -/
 @[reassoc]
-lemma sqIso_hom_app_paste_horiz {U'' U' U Z'' Z' Z : Scheme.{u}} (t₁ : U'' ⟶ U')
+lemma sqIso_hom_app_paste_horiz {U'' U' U Z'' Z' Z : 𝒞} (t₁ : U'' ⟶ U')
     (t₂ : U' ⟶ U) (l : U'' ⟶ Z'') (m : U' ⟶ Z') (r : U ⟶ Z) (b₁ : Z'' ⟶ Z') (b₂ : Z' ⟶ Z)
     (t : U'' ⟶ U) (b : Z'' ⟶ Z) (w₁ : t₁ ≫ m = l ≫ b₁) (w₂ : t₂ ≫ r = m ≫ b₂)
     (ht : t₁ ≫ t₂ = t) (hb : b₁ ≫ b₂ = b) (w : t ≫ r = l ≫ b) (M : F.obj Z) :
@@ -75,7 +76,7 @@ Z' --b--> Z
 ```
 -/
 @[reassoc]
-lemma sqIso_hom_app_paste_vert {U' U W' W Z' Z : Scheme.{u}} (t : U' ⟶ U) (h : W' ⟶ W)
+lemma sqIso_hom_app_paste_vert {U' U W' W Z' Z : 𝒞} (t : U' ⟶ U) (h : W' ⟶ W)
     (b : Z' ⟶ Z) (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z) (l : U' ⟶ Z')
     (r : U ⟶ Z) (w₁ : t ≫ r₁ = l₁ ≫ h) (w₂ : h ≫ r₂ = l₂ ≫ b) (hl : l₁ ≫ l₂ = l)
     (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b) (M : F.obj Z) :
@@ -108,9 +109,9 @@ U'' --t₁--> U' --t₂--> U
 Z'' --b₁--> Z' --b₂--> Z
 ```
 -/
-lemma baseChange_paste_horiz {U'' U' U Z'' Z' Z : Scheme.{u}} (t₁ : U'' ⟶ U')
+lemma baseChange_paste_horiz {U'' U' U Z'' Z' Z : 𝒞} (t₁ : U'' ⟶ U')
     (t₂ : U' ⟶ U) (l : U'' ⟶ Z'') (m : U' ⟶ Z') (r : U ⟶ Z) (b₁ : Z'' ⟶ Z') (b₂ : Z' ⟶ Z)
-    (t : U'' ⟶ U) (b : Z'' ⟶ Z) [IsOpenImmersion l] [IsOpenImmersion m] [IsOpenImmersion r]
+    (t : U'' ⟶ U) (b : Z'' ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 m)] [Fact (𝒪 r)]
     (w₁ : t₁ ≫ m = l ≫ b₁) (w₂ : t₂ ≫ r = m ≫ b₂)
     (ht : t₁ ≫ t₂ = t) (hb : b₁ ≫ b₂ = b) (w : t ≫ r = l ≫ b) :
     F.baseChange t l r b w =
@@ -131,10 +132,10 @@ W' --h--> W
 Z' --b--> Z
 ```
 -/
-lemma baseChange_paste_vert {U' U W' W Z' Z : Scheme.{u}} (t : U' ⟶ U) (h : W' ⟶ W)
+lemma baseChange_paste_vert {U' U W' W Z' Z : 𝒞} (t : U' ⟶ U) (h : W' ⟶ W)
     (b : Z' ⟶ Z) (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z) (l : U' ⟶ Z')
-    (r : U ⟶ Z) [IsOpenImmersion l₁] [IsOpenImmersion r₁] [IsOpenImmersion l₂]
-    [IsOpenImmersion r₂] [IsOpenImmersion l] [IsOpenImmersion r]
+    (r : U ⟶ Z) [Fact (𝒪 l₁)] [Fact (𝒪 r₁)] [Fact (𝒪 l₂)]
+    [Fact (𝒪 r₂)] [Fact (𝒪 l)] [Fact (𝒪 r)]
     (w₁ : t ≫ r₁ = l₁ ≫ h) (w₂ : h ≫ r₂ = l₂ ≫ b) (hl : l₁ ≫ l₂ = l)
     (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b) :
     F.baseChange t l r b w =
@@ -166,9 +167,9 @@ U'' --t₁--> U' --t₂--> U
 Z'' --b₁--> Z' --b₂--> Z
 ```
 -/
-lemma exchange_paste_horiz {U'' U' U Z'' Z' Z : Scheme.{u}} (t₁ : U'' ⟶ U')
+lemma exchange_paste_horiz {U'' U' U Z'' Z' Z : 𝒞} (t₁ : U'' ⟶ U')
     (t₂ : U' ⟶ U) (l : U'' ⟶ Z'') (m : U' ⟶ Z') (r : U ⟶ Z) (b₁ : Z'' ⟶ Z') (b₂ : Z' ⟶ Z)
-    (t : U'' ⟶ U) (b : Z'' ⟶ Z) [IsOpenImmersion l] [IsOpenImmersion m] [IsOpenImmersion r]
+    (t : U'' ⟶ U) (b : Z'' ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 m)] [Fact (𝒪 r)]
     (w₁ : t₁ ≫ m = l ≫ b₁) (w₂ : t₂ ≫ r = m ≫ b₂)
     (ht : t₁ ≫ t₂ = t) (hb : b₁ ≫ b₂ = b) (w : t ≫ r = l ≫ b)
     [IsIso (F.baseChange t₁ l m b₁ w₁).natTrans] [IsIso (F.baseChange t₂ m r b₂ w₂).natTrans]
@@ -183,7 +184,7 @@ lemma exchange_paste_horiz {U'' U' U Z'' Z' Z : Scheme.{u}} (t₁ : U'' ⟶ U')
     apply IsIso.inv_eq_of_hom_inv_id
     rw [F.baseChange_paste_horiz t₁ t₂ l m r b₁ b₂ t b w₁ w₂ ht hb w]
     ext M
-    simp
+    simp [← Functor.map_comp]
   have hP : conjugateEquiv (F.adj t) ((F.adj t₂).comp (F.adj t₁)) (F.pbComp' t₁ t₂ t ht).inv =
       (F.pfComp' t₁ t₂ t ht).hom := rfl
   have hP' : conjugateEquiv ((F.adj b₂).comp (F.adj b₁)) (F.adj b) (F.pbComp' b₁ b₂ b hb).hom =
@@ -201,10 +202,10 @@ W' --h--> W
 Z' --b--> Z
 ```
 -/
-lemma exchange_paste_vert {U' U W' W Z' Z : Scheme.{u}} (t : U' ⟶ U) (h : W' ⟶ W)
+lemma exchange_paste_vert {U' U W' W Z' Z : 𝒞} (t : U' ⟶ U) (h : W' ⟶ W)
     (b : Z' ⟶ Z) (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z) (l : U' ⟶ Z')
-    (r : U ⟶ Z) [IsOpenImmersion l₁] [IsOpenImmersion r₁] [IsOpenImmersion l₂]
-    [IsOpenImmersion r₂] [IsOpenImmersion l] [IsOpenImmersion r]
+    (r : U ⟶ Z) [Fact (𝒪 l₁)] [Fact (𝒪 r₁)] [Fact (𝒪 l₂)]
+    [Fact (𝒪 r₂)] [Fact (𝒪 l)] [Fact (𝒪 r)]
     (w₁ : t ≫ r₁ = l₁ ≫ h) (w₂ : h ≫ r₂ = l₂ ≫ b) (hl : l₁ ≫ l₂ = l)
     (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b)
     [IsIso (F.baseChange t l₁ r₁ h w₁).natTrans] [IsIso (F.baseChange h l₂ r₂ b w₂).natTrans]
@@ -225,4 +226,4 @@ lemma exchange_paste_vert {U' U W' W Z' Z : Scheme.{u}} (t : U' ⟶ U) (h : W' �
 
 end Exchange
 
-end AlgebraicGeometry.CompactSupportFormalism
+end CategoryTheory.ExchangeFormalism

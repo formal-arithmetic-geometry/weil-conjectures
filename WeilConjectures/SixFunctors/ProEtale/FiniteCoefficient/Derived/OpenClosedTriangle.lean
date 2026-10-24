@@ -70,7 +70,7 @@ theorem exists_distTriang_openClosed (hij : IsCompl (Set.range i.base) (Set.rang
   set adj := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).mapDerivedCategoryAdjunction
   set adj' := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j
   have : IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit :=
-    isIso_upperStarLowerStarAdjunction_counit R i
+    isIso_upperStarLowerStarAdjunction_counit (ModuleCat.{u + 1} R) i
   have : IsIso adj.counit := Adjunction.isIso_mapDerivedCategoryAdjunction_counit _
   have : IsIso adj'.unit := Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
   -- complete the counit `j_! j^* M ⟶ M` to a distinguished triangle `j_! j^* M ⟶ M ⟶ C`

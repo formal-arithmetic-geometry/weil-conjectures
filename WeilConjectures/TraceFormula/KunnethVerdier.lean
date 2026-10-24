@@ -60,8 +60,10 @@ composition, whiskering and mates from the data of the six functors (blueprint
 - `ProEtale.CondensedRing.isIso_kunnethVerdierMap`: the Künneth–Verdier theorem (blueprint
   `thm-trf-kunneth-verdier`, section `sec-six-functors`). Its blueprint proof shows that `α` and
   `β` are isomorphisms (blueprint `prop-trf-exceptional-kunneth`, `prop-trf-external-hom`), by
-  dévissage along lisse sheaves on strata and induction on the dimension of the support; this
-  dévissage is not yet available for `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
+  dévissage along lisse sheaves on strata and induction on the dimension of the support. The
+  two-out-of-three step of this dévissage in `M` is available
+  (`WeilConjectures.TraceFormula.KunnethVerdierShift`); the generation of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` by
+  lisse sheaves on strata and the base cases are not, for these coefficients.
 
 -/
 
@@ -175,6 +177,136 @@ lemma kunnethVerdierMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ�
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) N)).app _) ≫
       (ihom _).map (exceptionalKunnethMap ℓ M) :=
   curry_eq_externalHomMap_comp _ _ M N _ (exceptionalKunnethMap ℓ M)
+
+/-- The computation behind `exceptionalKunnethAdjoint_naturality`, for abstract functors and
+morphisms. -/
+private lemma exceptionalKunnethAdjoint_naturality_aux {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟]
+    [MonoidalCategory 𝒞] [MonoidalCategory 𝒟] [BraidedCategory 𝒟] (F : 𝒟 ⥤ 𝒞) (P : 𝒞 ⥤ 𝒟)
+    (W : 𝒟) {M M' : 𝒞} (φ : M ⟶ M') (pf : ∀ M : 𝒞, F.obj (W ⊗ P.obj M) ⟶ F.obj W ⊗ M)
+    (hpf : F.map (W ◁ P.map φ) ≫ pf M' = pf M ≫ (F.obj W ◁ φ)) {T₁ T₂ : 𝒞}
+    (b : F.obj W ⟶ T₁) (c : T₁ ⟶ T₂) (e : T₂ ⟶ 𝟙_ 𝒞) :
+    F.map (P.map φ ▷ W) ≫ (F.map (β_ (P.obj M') W).hom ≫ pf M' ≫ (b ▷ M') ≫ (c ▷ M') ≫
+        (e ▷ M') ≫ (λ_ M').hom) =
+      (F.map (β_ (P.obj M) W).hom ≫ pf M ≫ (b ▷ M) ≫ (c ▷ M) ≫ (e ▷ M) ≫ (λ_ M).hom) ≫ φ := by
+  rw [← F.map_comp_assoc, BraidedCategory.braiding_naturality_left, F.map_comp_assoc,
+    reassoc_of% hpf, whisker_exchange_assoc, whisker_exchange_assoc, whisker_exchange_assoc,
+    leftUnitor_naturality]
+  simp only [Category.assoc]
+
+/-- The adjoint of the exceptional Künneth map is natural in `M`: for `φ : M ⟶ M'`,
+```
+Rp_X! (M ⊠ ω_Y) ──Rp_X! (φ ⊠ 1)──▶ Rp_X! (M' ⊠ ω_Y)
+       │                                   │
+       ▼                                   ▼
+       M ─────────────── φ ──────────────▶ M'
+```
+commutes. -/
+@[reassoc]
+lemma exceptionalKunnethAdjoint_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (φ : M ⟶ M') :
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+        ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _) ≫
+      exceptionalKunnethAdjoint ℓ M' = exceptionalKunnethAdjoint ℓ M ≫ φ := by
+  have hPF := boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ
+    (prod.fst : X ⨯ Y ⟶ X)
+    ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y)) φ
+  have hinv : (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+      (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) ≫
+        inv (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Y ⟶ X)
+          ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+            (dualizingComplex' ℓ Y)) M') =
+      inv (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Y ⟶ X)
+          ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+            (dualizingComplex' ℓ Y)) M) ≫ (_ ◁ φ) := by
+    rw [IsIso.comp_inv_eq, Category.assoc, hPF, IsIso.inv_hom_id_assoc]
+  have hinv' : (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+      (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) ≫
+        inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+          ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+            (dualizingComplex' ℓ Y))).app M') =
+      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+          ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+            (dualizingComplex' ℓ Y))).app M) ≫ (_ ◁ φ) := hinv
+  unfold exceptionalKunnethAdjoint
+  exact exceptionalKunnethAdjoint_naturality_aux
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y)) φ
+    (fun M ↦ inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+        (dualizingComplex' ℓ Y))).app M)) hinv'
+    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
+    ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
+      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)))
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
+
+/-- Transposes along an adjunction of morphisms related by naturality squares are related by
+naturality squares. -/
+private lemma homEquiv_naturality_aux {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] {F : 𝒟 ⥤ 𝒞}
+    {G : 𝒞 ⥤ 𝒟} (adj : F ⊣ G) {A A' : 𝒟} {B B' : 𝒞} (f : A ⟶ A') (g : B ⟶ B')
+    {a : F.obj A ⟶ B} {a' : F.obj A' ⟶ B'} (h : F.map f ≫ a' = a ≫ g) :
+    f ≫ adj.homEquiv _ _ a' = adj.homEquiv _ _ a ≫ G.map g := by
+  rw [← Adjunction.homEquiv_naturality_left, h, Adjunction.homEquiv_naturality_right]
+
+/-- Curried morphisms of pairings related by naturality squares are related by naturality
+squares. -/
+private lemma curry_naturality_aux {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]
+    [MonoidalClosed 𝒞] (A : 𝒞) {B B' T T' : 𝒞} (f : B ⟶ B') (g : T ⟶ T')
+    {p : A ⊗ B ⟶ T} {p' : A ⊗ B' ⟶ T'} (h : A ◁ f ≫ p' = p ≫ g) :
+    f ≫ curry p' = curry p ≫ (ihom A).map g := by
+  rw [← curry_natural_left, h, curry_natural_right]
+
+/-- The naturality of the Künneth–Verdier pairing in its first argument, for abstract objects. -/
+private lemma kunnethVerdierPairing_aux {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]
+    [BraidedCategory 𝒞] (A B : 𝒞) {C₁ C₀ PM PM' T T' : 𝒞} (x : PM ⟶ PM') (m₁ : A ⊗ B ⟶ C₁)
+    (m₂ : C₁ ⟶ C₀) {a : PM ⊗ C₀ ⟶ T} {a' : PM' ⊗ C₀ ⟶ T'} (g : T ⟶ T')
+    (h : x ▷ C₀ ≫ a' = a ≫ g) :
+    A ◁ (x ▷ B) ≫ ((α_ A PM' B).inv ≫ (β_ A PM').hom ▷ B ≫ (α_ PM' A B).hom ≫ PM' ◁ m₁ ≫
+        PM' ◁ m₂ ≫ a') =
+      ((α_ A PM B).inv ≫ (β_ A PM).hom ▷ B ≫ (α_ PM A B).hom ≫ PM ◁ m₁ ≫ PM ◁ m₂ ≫ a) ≫ g := by
+  rw [associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc,
+    BraidedCategory.braiding_naturality_right, comp_whiskerRight_assoc,
+    associator_naturality_left_assoc, ← whisker_exchange_assoc, ← whisker_exchange_assoc, h]
+  simp only [Category.assoc]
+
+/-- The exceptional Künneth map `α_{𝟙, a_Y} : M ⊠ ω_Y ⟶ Rp_X^! M` is natural in `M`. -/
+@[reassoc]
+lemma exceptionalKunnethMap_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (φ : M ⟶ M') :
+    (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _ ≫
+        exceptionalKunnethMap ℓ M' =
+      exceptionalKunnethMap ℓ M ≫
+        (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ := by
+  exact homEquiv_naturality_aux _ _ _ (exceptionalKunnethAdjoint_naturality ℓ φ)
+
+/-- The Künneth–Verdier pairing is natural in `M`. -/
+@[reassoc]
+lemma kunnethVerdierPairing_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (φ : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    _ ◁ ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _) ≫
+        kunnethVerdierPairing ℓ M' N =
+      kunnethVerdierPairing ℓ M N ≫
+        (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ :=
+  kunnethVerdierPairing_aux _ _ _ _ _ _ (exceptionalKunnethMap_naturality ℓ φ)
+
+/-- The Künneth–Verdier map `κ_{M,N}` is natural in `M`. -/
+@[reassoc]
+lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (φ : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _ ≫
+        kunnethVerdierMap ℓ M' N =
+      kunnethVerdierMap ℓ M N ≫
+        (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) := by
+  exact curry_naturality_aux _ _ _ (kunnethVerdierPairing_naturality ℓ φ N)
+
+/-- The objects `M` for which the Künneth–Verdier map `κ_{M,N}` is an isomorphism are closed under
+isomorphisms (the first closure property of the dévissage in `M` of `thm-trf-kunneth-verdier`). -/
+lemma isIso_kunnethVerdierMap_of_iso {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (e : M ≅ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    [IsIso (kunnethVerdierMap ℓ M' N)] : IsIso (kunnethVerdierMap ℓ M N) := by
+  have h := kunnethVerdierMap_naturality_left ℓ e.hom N
+  rw [(IsIso.eq_comp_inv _).mpr h.symm]
+  infer_instance
 
 /-- **The Künneth–Verdier isomorphism** (blueprint `thm-trf-kunneth-verdier`, section
 `sec-six-functors`): for bounded constructible `M` on `X` and `N` on `Y`, the Künneth–Verdier map

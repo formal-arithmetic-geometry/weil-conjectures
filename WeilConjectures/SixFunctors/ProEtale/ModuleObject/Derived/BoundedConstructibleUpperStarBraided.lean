@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
 
 /-!
 # The derived pullback of bounded constructible complexes is braided
@@ -15,9 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` with its monoidal structure
 `ProEtale.CondensedRing.monoidal_boundedConstructibleUpperStar` is braided for the Koszul braidings
 `ProEtale.CondensedRing.boundedConstructibleBraiding`
-(`ProEtale.CondensedRing.boundedConstructibleUpperStar_μ_map_braiding_hom`). It is the
-restriction of the corresponding statement on the ambient derived categories
-(`ProEtale.CondensedRing.leftDerivedUpperStar_μ_map_braiding_hom`).
+(`ProEtale.CondensedRing.boundedConstructibleUpperStar_μ_map_braiding_hom`): this is the lax
+monoidal form of `ProEtale.CondensedRing.boundedConstructibleUpperStar_map_braiding_hom_δ`.
 -/
 
 @[expose] public section
@@ -40,21 +37,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   (f : X ⟶ Y)
 
 attribute [local instance] boundedConstructibleBraiding
-
-set_option maxHeartbeats 1000000 in
--- the braiding of the full subcategory is unfolded to that of the derived category
-/-- The tensor comparison of the derived pullback of bounded constructible complexes is
-compatible with the braidings. -/
-lemma boundedConstructibleUpperStar_map_braiding_hom_δ (K M : Dᵇc(Y.left)⟦Λ⟧) :
-    (boundedConstructibleUpperStar Λ ℓ f).map (β_ K M).hom ≫
-        δ (boundedConstructibleUpperStar Λ ℓ f) M K =
-      δ (boundedConstructibleUpperStar Λ ℓ f) K M ≫
-        (β_ ((boundedConstructibleUpperStar Λ ℓ f).obj K)
-          ((boundedConstructibleUpperStar Λ ℓ f).obj M)).hom := by
-  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
-  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
-    δ_boundedConstructibleUpperStar_hom]
-  exact leftDerivedUpperStar_map_braiding_hom_comp_tensor Λ f.left K.obj M.obj
 
 /-- **The derived pullback of bounded constructible complexes is braided**:
 `μ_{K, M} ≫ Lf^* β_{K, M} = β_{Lf^* K, Lf^* M} ≫ μ_{M, K}`. -/

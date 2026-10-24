@@ -5,30 +5,19 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
-public import WeilConjectures.CategoryTheory.ModuleObjects.MapModBraided
-public import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalComp
+public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 
 /-!
+# The derived pullback of module objects is braided
 
-# The derived pullback of module objects is symmetric monoidal
-
-Let `Λ` be a commutative condensed ring and `f : X ⟶ Y` a morphism of schemes. The derived
-pullback `Lf^* = L((f)^*⟦Λ⟧)` with its monoidal structure
-`ProEtale.CondensedRing.monoidal_leftDerivedUpperStar` is braided for the Koszul braidings
-`DerivedCategory.braidedCategory'` of the derived tensor products
-(`ProEtale.CondensedRing.leftDerivedUpperStar_μ_map_braiding_hom`).
-
-The pullback `f^* = mapMod(f^*) ⋙ Ext_{α_f}` of module objects is braided
-(`ProEtale.CondensedRing.braided_upperStar`), being the composite of braided functors. On
-complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is therefore compatible with the Koszul
-braidings. The comparison `m : Lf^* (K ⊗ᴸ L) ⟶ Lf^* K ⊗ᴸ Lf^* L` is a natural transformation into
-the left derived bifunctor `Lf^* - ⊗ᴸ Lf^* -`, characterized by its composite with the counit;
-so is `Lf^* β_{K, L} ≫ m_{L, K} ≫ β_{Lf^* L, Lf^* K}`, and both have the same composite with the
-counit, by the compatibility on complexes and the symmetry of the braidings.
-
+The comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` of complexes of module objects commutes with the
+Koszul braidings of the tensor products of complexes
+(`ProEtale.CondensedRing.upperStarTensorComplexHom_braiding`).
 -/
 
 @[expose] public section
@@ -41,202 +30,148 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-open Scheme Functor
+open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The pullback `f^* = mapMod(f^*) ⋙ Ext_{α_f}` of module objects over `Λ` is braided, as the
-composite of braided functors. It is not an instance, to avoid a second path to the monoidal
-structure `ProEtale.CondensedRing.monoidal_upperStar`. -/
-@[instance_reducible]
-noncomputable def braided_upperStar : (f)^*⟦Λ⟧.Braided :=
-  inferInstanceAs ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y) ⋙
-    Mod.extendScalars (condensedPullbackHom Λ f)).Braided
-
-/-- The pullback of module objects is compatible with the braidings, in the form of the
-comonoidal structure. -/
-lemma upperStar_μ_map_braiding_hom
-    (M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ M N ≫ (f)^*⟦Λ⟧.map (β_ M N).hom =
-      (β_ ((f)^*⟦Λ⟧.obj M) ((f)^*⟦Λ⟧.obj N)).hom ≫ Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ N M :=
-  (braided_upperStar Λ f).braided M N
+/-- `δ_upperStar_braiding` in terms of the tensorators. -/
+@[reassoc]
+lemma μ_upperStar_braiding
+    (A B : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ A B ≫ (f)^*⟦Λ⟧.map (β_ A B).hom =
+      (β_ ((f)^*⟦Λ⟧.obj A) ((f)^*⟦Λ⟧.obj B)).hom ≫ Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ B A := by
+  rw [← cancel_epi (Functor.OplaxMonoidal.δ (f)^*⟦Λ⟧ A B), Functor.Monoidal.δ_μ_assoc,
+    δ_upperStar_braiding_assoc, Functor.Monoidal.δ_μ, Category.comp_id]
 
 set_option maxHeartbeats 1000000 in
 -- `erw` unfolds the tensor product of complexes of module objects to its components.
-/-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the Koszul
+/-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` commutes with the Koszul
 braidings. -/
-@[reassoc]
 lemma upperStarTensorComplexHom_braiding
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
-    (β_ (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj A)
-        (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj B)).hom ≫ upperStarTensorComplexHom Λ f B A =
-      upperStarTensorComplexHom Λ f A B ≫ ((f)^*⟦Λ⟧.mapHomologicalComplex _).map (β_ A B).hom := by
+    upperStarTensorComplexHom Λ f A B ≫
+        ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map (β_ A B).hom =
+      (β_ (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj A)
+          (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj B)).hom ≫
+        upperStarTensorComplexHom Λ f B A := by
   ext n : 1
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     upperStarTensorComplexHom, upperStarTensorComplexHomX]
-  erw [CochainComplex.Monoidal.ι_braiding_hom_assoc, HomologicalComplex.ι_mapBifunctorDesc_assoc]
-  rw [Preadditive.zsmul_comp, Category.assoc]
-  simp only [HomologicalComplex.ι_mapBifunctorDesc]
-  have hβ := CochainComplex.Monoidal.ι_braiding_hom (K := A) (L := B) p q n h
-  rw [Category.assoc, ← Functor.map_comp,
-    show (β_ A B).hom = (CochainComplex.Monoidal.braiding A B).hom from rfl, hβ]
-  simp only [Functor.map_zsmul, Preadditive.comp_zsmul, Functor.map_comp]
-  rw [reassoc_of% (upperStar_μ_map_braiding_hom Λ f (A.X p) (B.X q))]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  have hb : HomologicalComplex.ιTensorObj (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj A)
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj B) p q n h ≫
+      (β_ (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj A)
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj B)).hom.f n =
+      ((p * q).negOnePow : ℤ) • ((β_ ((((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj A).X p)
+        ((((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj B).X q)).hom ≫
+        HomologicalComplex.ιTensorObj (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj B)
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj A) q p n
+          (by rw [← h, add_comm]; rfl)) :=
+    CochainComplex.Monoidal.ι_braiding_hom p q n h
+  rw [reassoc_of% hb]
+  rw [Category.assoc, ← Functor.map_comp]
+  have hb2 : HomologicalComplex.ιTensorObj A B p q n h ≫ (β_ A B).hom.f n =
+      ((p * q).negOnePow : ℤ) • ((β_ (A.X p) (B.X q)).hom ≫
+        HomologicalComplex.ιTensorObj B A q p n (by rw [← h, add_comm]; rfl)) :=
+    CochainComplex.Monoidal.ι_braiding_hom p q n h
+  rw [hb2]
+  rw [Functor.map_zsmul, Preadditive.comp_zsmul, Preadditive.zsmul_comp, Functor.map_comp,
+    μ_upperStar_braiding_assoc, Category.assoc]
+  erw [HomologicalComplex.ι_mapBifunctorDesc]
   rfl
 
 /-- `upperStarTensorComplexHom_braiding` in the homotopy category. -/
-@[reassoc]
 lemma quotient_map_upperStarTensorComplexHom_braiding
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
-    (β_ ((HomotopyCategory.quotient _ _).obj (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj A))
-        ((HomotopyCategory.quotient _ _).obj (((f)^*⟦Λ⟧.mapHomologicalComplex _).obj B))).hom ≫
-      (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f B A) =
     (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f A B) ≫
-      (HomotopyCategory.quotient _ _).map (((f)^*⟦Λ⟧.mapHomologicalComplex _).map
-        (β_ A B).hom) := by
-  rw [← Functor.map_comp, ← upperStarTensorComplexHom_braiding, Functor.map_comp]
-  rfl
+        ((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).map
+          (β_ ((HomotopyCategory.quotient _ _).obj A) ((HomotopyCategory.quotient _ _).obj B)).hom =
+      (β_ (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj A))
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj
+            ((HomotopyCategory.quotient _ _).obj B))).hom ≫
+        (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f B A) := by
+  have h := (HomotopyCategory.quotient _ (.up ℤ)).congr_map
+    (upperStarTensorComplexHom_braiding Λ f A B)
+  simp only [Functor.map_comp] at h
+  exact h
 
-end AlgebraicGeometry.ProEtale.CondensedRing
-
-namespace CategoryTheory.MonoidalCategory
-
-open Functor.LaxMonoidal
-
-variable {HY HX DY DX : Type*} [Category HY] [Category HX] [Category DY] [Category DX]
-  [MonoidalCategory HY] [MonoidalCategory HX] [MonoidalCategory DY] [MonoidalCategory DX]
-  [BraidedCategory HY] [BraidedCategory HX] [BraidedCategory DY] [BraidedCategory DX]
-  {Qy : HY ⥤ DY} {Qx : HX ⥤ DX} [Qy.LaxMonoidal] [Qx.LaxMonoidal] {LF : DY ⥤ DX}
-  {FK : HY ⥤ HX} (ε : Qy ⋙ LF ⟶ FK ⋙ Qx)
-  (m : ∀ K M : DY, LF.obj (K ⊗ M) ⟶ LF.obj K ⊗ LF.obj M)
-  (T : ∀ P Q : HY, FK.obj P ⊗ FK.obj Q ⟶ FK.obj (P ⊗ Q))
-
-/-- The braided transform `LF β ≫ m ≫ β` of a tensor comparison `m` of a left derived functor
-has the same composite with the counit as `m`, if the underived comparison `T` is compatible
-with the braidings and the braidings of the localizations and of the source are compatible and
-symmetric. -/
-lemma derived_braiding_tensor_aux
-    (hfac : ∀ P Q : HY, m (Qy.obj P) (Qy.obj Q) ≫ (ε.app P ⊗ₘ ε.app Q) ≫ μ Qx _ _ ≫
-      Qx.map (T P Q) = LF.map (μ Qy P Q) ≫ ε.app (P ⊗ Q))
-    (hβx : ∀ X Y : HX, (β_ (Qx.obj X) (Qx.obj Y)).hom ≫ μ Qx Y X = μ Qx X Y ≫ Qx.map (β_ X Y).hom)
-    (hβy : ∀ X Y : HY, (β_ (Qy.obj X) (Qy.obj Y)).hom ≫ μ Qy Y X = μ Qy X Y ≫ Qy.map (β_ X Y).hom)
-    (hT : ∀ P Q : HY, (β_ (FK.obj P) (FK.obj Q)).hom ≫ T Q P = T P Q ≫ FK.map (β_ P Q).hom)
-    (hsymm : ∀ P Q : HY, (β_ P Q).hom ≫ (β_ Q P).hom = 𝟙 _) (P Q : HY) :
-    (LF.map (β_ (Qy.obj P) (Qy.obj Q)).hom ≫ m (Qy.obj Q) (Qy.obj P) ≫
-        (β_ (LF.obj (Qy.obj Q)) (LF.obj (Qy.obj P))).hom) ≫ (ε.app P ⊗ₘ ε.app Q) ≫
-      μ Qx _ _ ≫ Qx.map (T P Q) = LF.map (μ Qy P Q) ≫ ε.app (P ⊗ Q) := by
-  have hε := ε.naturality (β_ Q P).hom
-  simp only [Functor.comp_map] at hε
-  simp only [Category.assoc]
-  rw [← BraidedCategory.braiding_naturality_assoc]
-  simp only [Functor.comp_obj]
-  rw [reassoc_of% (hβx _ _), ← Qx.map_comp, hT,
-    Qx.map_comp, reassoc_of% (hfac Q P), ← hε, ← LF.map_comp_assoc, ← LF.map_comp_assoc,
-    Category.assoc, reassoc_of% (hβy P Q), ← Qy.map_comp, hsymm, Qy.map_id, Category.comp_id]
-
-end CategoryTheory.MonoidalCategory
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-open Scheme Functor DerivedCategory
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {X Y : Scheme.{u}} (f : X ⟶ Y)
+open DerivedCategory Functor Functor.LaxMonoidal
 
 attribute [local instance] DerivedCategory.braidedCategory'
 
 set_option maxHeartbeats 2000000 in
--- the derived categories of module objects are unfolded in the naturality checks
-/-- The braided transform `(K, M) ↦ Lf^* β_{K, M} ≫ m_{M, K} ≫ β_{Lf^* M, Lf^* K}` of the tensor
-comparison `m` of the derived pullback. It is `m` (`leftDerivedUpperStarTensor_eq_braid`). -/
-noncomputable def leftDerivedUpperStarTensorBraid :
-    leftDerivedUpperStarTensorLeft Λ f ⟶ leftDerivedUpperStarTensorRight Λ f where
-  app K :=
-    { app M := L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K ≫
-        (β_ (L((f)^*⟦Λ⟧).obj M) (L((f)^*⟦Λ⟧).obj K)).hom
-      naturality M M' b := by
-        have h := NatTrans.congr_app ((leftDerivedUpperStarTensor Λ f).naturality b) K
-        dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h ⊢
-        rw [← Functor.map_comp_assoc (L((f)^*⟦Λ⟧)) (K ◁ b) (β_ K M').hom,
-          BraidedCategory.braiding_naturality_right]
-        simp only [Functor.map_comp, Category.assoc]
-        rw [reassoc_of% h, BraidedCategory.braiding_naturality_left] }
-  naturality K K' a := by
-    refine NatTrans.ext (funext fun M ↦ ?_)
-    have h := ((leftDerivedUpperStarTensor Λ f).app M).naturality a
-    dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h ⊢
-    rw [← Functor.map_comp_assoc (L((f)^*⟦Λ⟧)) (a ▷ M) (β_ K' M).hom,
-      BraidedCategory.braiding_naturality_left]
-    simp only [Functor.map_comp, Category.assoc]
-    rw [reassoc_of% h, BraidedCategory.braiding_naturality_right]
-
-set_option maxHeartbeats 2000000 in
 -- the images of complexes in the homotopy category are unfolded
-/-- The tensor comparison `m` of the derived pullback is its braided transform:
-`m_{K, M} = Lf^* β_{K, M} ≫ m_{M, K} ≫ β_{Lf^* M, Lf^* K}`. Both are natural transformations into
-the left derived bifunctor `Lf^* - ⊗ᴸ Lf^* -` with the same composite with its counit. -/
-lemma leftDerivedUpperStarTensor_eq_braid :
-    leftDerivedUpperStarTensor Λ f = leftDerivedUpperStarTensorBraid Λ f := by
-  refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ f)
-    (leftDerivedUpperStarTensorRightCounit Λ f) (HomotopyCategory.quasiIso _ _)
-    (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  ext P Q
-  simp only [NatTrans.comp_app]
-  rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
-  erw [leftDerivedUpperStarTensor_app_app_comp]
-  have hT (P Q : HomotopyCategory
-      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)) :
-      (β_ (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj P)
-          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj Q)).hom ≫
-        (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f Q.as P.as) =
-      (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f P.as Q.as) ≫
-        ((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).map (β_ P Q).hom := by
-    obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-    obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-    exact quotient_map_upperStarTensorComplexHom_braiding Λ f A B
-  symm
-  exact MonoidalCategory.derived_braiding_tensor_aux (f)^*⟦Λ⟧.leftDerivedFunctorCounit
+/-- The tensor comparison of `Lf^*` commutes with the derived braidings at images of K-flat
+complexes. -/
+lemma leftDerivedUpperStarTensor_braiding_Qh
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
+    (hA : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat A)
+    (hB : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat B) :
+    L((f)^*⟦Λ⟧).map (β_ (Qh.obj ((HomotopyCategory.quotient _ _).obj A))
+        (Qh.obj ((HomotopyCategory.quotient _ _).obj B))).hom ≫
+        ((leftDerivedUpperStarTensor Λ f).app _).app _ =
+      ((leftDerivedUpperStarTensor Λ f).app _).app _ ≫
+        (β_ (L((f)^*⟦Λ⟧).obj (Qh.obj ((HomotopyCategory.quotient _ _).obj A)))
+          (L((f)^*⟦Λ⟧).obj (Qh.obj ((HomotopyCategory.quotient _ _).obj B)))).hom := by
+  have hA' := (HomotopyCategory.kFlat_quotient_obj_iff A).2 hA
+  have hB' := (HomotopyCategory.kFlat_quotient_obj_iff B).2 hB
+  have : IsIso ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj A)) :=
+    (f)^*⟦Λ⟧.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ hA'
+  have : IsIso ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj B)) :=
+    (f)^*⟦Λ⟧.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ hB'
+  have : IsIso (μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj
+      ((HomotopyCategory.quotient _ _).obj B))
+      (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj A))) :=
+    isIso_μNatTrans_Qh_app_app_of_kFlat _ _ (kFlat_upperStar_mapHomotopyCategory_obj Λ f hA)
+  have : IsIso (Qh.map ((HomotopyCategory.quotient _ _).map
+      (upperStarTensorComplexHom Λ f ((HomotopyCategory.quotient _ (.up ℤ)).obj B).as
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A).as))) := by
+    have h := upperStarTensorComplexHom_δ Λ f B A
+    have : IsIso (upperStarTensorComplexHom Λ f B A ≫
+        ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
+          (f)^*⟦Λ⟧).app B).app A) := by
+      rw [h]
+      infer_instance
+    have : IsIso (upperStarTensorComplexHom Λ f B A) := IsIso.of_isIso_comp_right _
+      (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app B).app A)
+    exact Functor.map_isIso _ ((HomotopyCategory.quotient _ (.up ℤ)).map
+      (upperStarTensorComplexHom Λ f B A))
+  exact derived_map_braiding_aux (f)^*⟦Λ⟧.leftDerivedFunctorCounit
     (fun K M ↦ ((leftDerivedUpperStarTensor Λ f).app K).app M)
+    ((HomotopyCategory.quotient _ _).obj A) ((HomotopyCategory.quotient _ _).obj B)
     (fun P Q ↦ (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f P.as Q.as))
-    (fun P Q ↦ leftDerivedUpperStarTensor_app_app_comp Λ f P Q)
-    (fun X Y ↦ DerivedCategory.braidedCategory'_braiding_hom_μ_Qh X Y)
-    (fun X Y ↦ DerivedCategory.braidedCategory'_braiding_hom_μ_Qh X Y) hT
-    (fun P Q ↦ HomotopyCategory.braiding_hom_braiding_hom
-      (fun M N ↦ Mod.braidingHom_braidingHom M N) P Q) P Q
+    (leftDerivedUpperStarTensor_app_app_comp Λ f)
+    (DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso _ _) _ _)
+    (DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso _ _) _ _)
+    (quotient_map_upperStarTensorComplexHom_braiding Λ f A B)
 
 set_option maxHeartbeats 1000000 in
--- the symmetry of the derived braiding is instantiated at module objects
-/-- The tensor comparison `m` of the derived pullback is compatible with the braidings. -/
-lemma leftDerivedUpperStar_map_braiding_hom_comp_tensor
+-- the K-flat replacements are unfolded
+/-- **The derived pullback of module objects is braided**: the tensor comparison
+`m : Lf^* (K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` commutes with the derived braidings,
+`Lf^* β_{K, M} ≫ m_{M, K} = m_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
+theorem leftDerivedUpperStarTensor_braiding
     (K M : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
     L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K =
       ((leftDerivedUpperStarTensor Λ f).app K).app M ≫
         (β_ (L((f)^*⟦Λ⟧).obj K) (L((f)^*⟦Λ⟧).obj M)).hom := by
-  have h := NatTrans.congr_app (NatTrans.congr_app (leftDerivedUpperStarTensor_eq_braid Λ f) K) M
-  rw [h]
-  change _ = (L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K ≫
-    (β_ (L((f)^*⟦Λ⟧).obj M) (L((f)^*⟦Λ⟧).obj K)).hom) ≫ _
-  have hs : (β_ (L((f)^*⟦Λ⟧).obj M) (L((f)^*⟦Λ⟧).obj K)).hom ≫
-      (β_ (L((f)^*⟦Λ⟧).obj K) (L((f)^*⟦Λ⟧).obj M)).hom = 𝟙 _ :=
-    DerivedCategory.braiding_hom_braiding_hom _ (fun M N ↦ Mod.braidingHom_braidingHom M N) _ _
-  rw [Category.assoc, Category.assoc, hs]
-  erw [Category.comp_id]
-
-/-- **The derived pullback of module objects is braided**: for the monoidal structure
-`ProEtale.CondensedRing.monoidal_leftDerivedUpperStar` and the Koszul braidings
-`DerivedCategory.braidedCategory'`, `μ_{K, M} ≫ Lf^* β_{K, M} = β_{Lf^* K, Lf^* M} ≫ μ_{M, K}`. -/
-theorem leftDerivedUpperStar_μ_map_braiding_hom
-    (K M : DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
-    Functor.LaxMonoidal.μ L((f)^*⟦Λ⟧) K M ≫ L((f)^*⟦Λ⟧).map (β_ K M).hom =
-      (β_ (L((f)^*⟦Λ⟧).obj K) (L((f)^*⟦Λ⟧).obj M)).hom ≫ Functor.LaxMonoidal.μ L((f)^*⟦Λ⟧) M K :=
-  Functor.Monoidal.μ_comp_map_braiding_hom_of_δ _ K M
-    (leftDerivedUpperStar_map_braiding_hom_comp_tensor Λ f K M)
+  have (Z : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+      PreservesColimitsOfShape ℤ ((curriedTensor _).obj Z) := inferInstance
+  obtain ⟨P, hP, ⟨eP⟩⟩ := DerivedCategory.exists_kFlat_iso K
+  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := DerivedCategory.exists_kFlat_iso M
+  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
+  have key := leftDerivedUpperStarTensor_braiding_Qh Λ f A B
+    ((HomotopyCategory.kFlat_quotient_obj_iff A).1 hP)
+    ((HomotopyCategory.kFlat_quotient_obj_iff B).1 hQ)
+  exact map_braiding_comp_of_iso (fun K M ↦ ((leftDerivedUpperStarTensor Λ f).app K).app M)
+    (leftDerivedUpperStarTensor_naturality Λ f) eP eQ key
 
 end AlgebraicGeometry.ProEtale.CondensedRing

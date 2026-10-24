@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 
 /-!
 # The composition isomorphisms of the derived pullbacks of bounded constructible complexes are
@@ -95,5 +96,31 @@ lemma boundedConstructibleUpperStarId_hom_app_tensor_δ (K M : Dᵇc(X.left)⟦�
   have key := leftDerivedUpperStarTensor_id_of_eq Λ X.left (Over.id_left X) K.obj M.obj
   simp only [eqToHom_comp_of_self] at key
   exact key
+
+section Braided
+
+attribute [local instance] boundedConstructibleBraiding
+
+omit [Fact (ringChar k).Prime] [Fact ℓ.Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
+lemma boundedConstructible_braiding_hom_hom (K M : Dᵇc(X.left)⟦Λ⟧) :
+    (β_ K M).hom.hom =
+      (@BraidedCategory.braiding _ _ _ (DerivedCategory.braidedCategory' _) K.obj M.obj).hom :=
+  rfl
+
+/-- **The derived pullback of bounded constructible complexes is braided** for the Koszul
+braidings: `Lf^* β_{K, M} ≫ δ_{M, K} = δ_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
+lemma boundedConstructibleUpperStar_map_braiding_hom_δ (K M : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleUpperStar Λ ℓ f).map (β_ K M).hom ≫
+        δ (boundedConstructibleUpperStar Λ ℓ f) M K =
+      δ (boundedConstructibleUpperStar Λ ℓ f) K M ≫
+        (β_ ((boundedConstructibleUpperStar Λ ℓ f).obj K)
+          ((boundedConstructibleUpperStar Λ ℓ f).obj M)).hom := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  simp only [ObjectProperty.FullSubcategory.comp_hom, δ_boundedConstructibleUpperStar_hom,
+    boundedConstructibleUpperStar_map_hom, boundedConstructible_braiding_hom_hom]
+  exact leftDerivedUpperStarTensor_braiding Λ f.left K.obj M.obj
+
+end Braided
 
 end AlgebraicGeometry.ProEtale.CondensedRing

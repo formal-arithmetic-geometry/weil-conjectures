@@ -148,6 +148,31 @@ noncomputable def upperStarIsoIdOfIsSepClosed [IsSepClosed Ω] (σ : Spec (.of �
 
 end PointModule
 
+section EqToIso
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The isomorphism `t^* ≅ t'^*` of the pullbacks of module objects along equal morphisms, with
+components `eqToHom` (an equality of objects rather than of functors, which keeps the kernel from
+unfolding the pullbacks when the components are computed). -/
+noncomputable def upperStarEqToIso {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
+    (t)^*⟦Λ⟧ ≅ (t')^*⟦Λ⟧ :=
+  NatIso.ofComponents (fun M ↦ eqToIso (congrArg (fun s : A ⟶ B ↦ (s)^*⟦Λ⟧.obj M) h))
+    (fun f ↦ by subst h; simp)
+
+lemma upperStarEqToIso_hom_app {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') (M) :
+    (upperStarEqToIso Λ h).hom.app M = eqToHom (congrArg (fun s : A ⟶ B ↦ (s)^*⟦Λ⟧.obj M) h) :=
+  (NatIso.ofComponents_hom_app _ _ M).trans (eqToIso.hom _)
+
+/-- `upperStarEqToIso` is `eqToIso` of the equality of the pullback functors. -/
+lemma upperStarEqToIso_eq_eqToIso {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
+    upperStarEqToIso Λ h = eqToIso (congrArg (upperStar Λ) h) := by
+  subst h
+  ext M
+  simp [upperStarEqToIso_hom_app]
+
+end EqToIso
+
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-! ### Weil sheaves and their stalks -/
@@ -178,7 +203,7 @@ noncomputable def weilStalkComparison (hx : x ≫ e.hom.left = σ ≫ x) :
       (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   Functor.isoWhiskerLeft _ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).symm ≪≫
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).symm ≪≫
-    eqToIso (congrArg (upperStar (Profinite.padicAlgClRingObj ℓ)) hx.symm) ≪≫
+    upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm ≪≫
     upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left
 
 /-- The stalk `x̄^* F` at a geometric point `x̄ : Spec Ω ⟶ X` fixed by `e` up to an endomorphism

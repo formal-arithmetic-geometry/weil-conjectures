@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.BorelMoore
+public import WeilConjectures.TraceFormula.ProperKunneth
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.TraceClass
 
@@ -20,12 +21,10 @@ Let `(f, g) : (C, c) ⟶ (D, b)` be a proper pushforward diagram of an endocorre
 isomorphism `Ξ` and the exchange `E` are in `WeilConjectures.TraceFormula.ProperPushforward`):
 
 * the *dual pushforward* `χ_f : Rf_* D_X K ⟶ D_Y K'` (`lowerStarVerdierDualMap`);
-* the *Künneth map* `Π_f : K' ⊠ Rf_* D_X K ⟶ Rq_* (K ⊠ D_X K)` (`prodLowerStarExternalProduct`),
-  the adjoint of the counits; for proper `f` it is the inverse of the `!`-Künneth isomorphism
-  `Ku_!` of `def-sf-kv-maps` (i) under `Rq_* ≅ Rq_!`, and it is invertible by the relative
-  product theorem (blueprint `thm-sf-kunneth-relative`, sorried input
-  `isIso_prodLowerStarExternalProduct`);
-* the *kernel pushforward* `ρ_f = (1 ⊠ χ_f) ∘ Π_f⁻¹ : Rq_* P_X ⟶ P_Y` (`kernelPushforward`);
+* the *kernel pushforward* `ρ_f = (1 ⊠ χ_f) ∘ Π_f⁻¹ : Rq_* P_X ⟶ P_Y` (`kernelPushforward`), where
+  `Π_f : K' ⊠ Rf_* D_X K ⟶ Rq_* (K ⊠ D_X K)` is the Künneth map, an isomorphism by the relative
+  product theorem (`prodLowerStarExternalProduct`, `isIso_prodLowerStarExternalProduct`,
+  blueprint `thm-sf-kunneth-relative`, in `WeilConjectures.TraceFormula.ProperKunneth`);
 * the *kernel class* `[u]_P : Rc_! ℚ̄_ℓ,C ⟶ P_X` (`Correspondence.kernelClass`), the exceptional
   adjoint of the mate of `u` followed by the external duality isomorphism;
 * the *support isomorphism* `ζ_c : Rι_* ω_Fix(c) ≅ Rc^! RΔ_* ω_X`
@@ -75,55 +74,6 @@ noncomputable def lowerStarVerdierDualMap (f : X ⟶ Y) [IsProper f.left]
   curry (lowerStarTensorMap ℓ f K _ ≫
     (boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
     lowerStarDualizingComplexTrace ℓ f)
-
-variable {X₁ X₂ Y₁ Y₂ : Over (Spec (.of k))}
-  [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
-  [LocallyOfFiniteType X₂.hom] [QuasiCompact X₂.hom] [IsSeparated X₂.hom]
-  [LocallyOfFiniteType Y₁.hom] [QuasiCompact Y₁.hom] [IsSeparated Y₁.hom]
-  [LocallyOfFiniteType Y₂.hom] [QuasiCompact Y₂.hom] [IsSeparated Y₂.hom]
-
-/-- The counit of `Lf^* ⊣ Rf_*` transported to a product: `Lq^* Lp_i^* Rf_i* B ⟶ Lp_i^* B` for
-`q ≫ p_i = p_i ≫ f_i`. -/
-noncomputable def prodUpperStarCounit {P P' : Over (Spec (.of k))}
-    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-    [LocallyOfFiniteType P'.hom] [QuasiCompact P'.hom] [IsSeparated P'.hom]
-    {q : P ⟶ P'} {p : P ⟶ X₁} {p' : P' ⟶ Y₁} {f₁ : X₁ ⟶ Y₁} (w : q ≫ p' = p ≫ f₁)
-    (B : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ q).obj ((boundedConstructibleUpperStar _ ℓ p').obj
-        ((boundedConstructibleLowerStar _ ℓ f₁).obj B)) ⟶
-      (boundedConstructibleUpperStar _ ℓ p).obj B :=
-  (boundedConstructibleUpperStarComp _ ℓ q p').inv.app _ ≫ eqToHom (by rw [w]) ≫
-    (boundedConstructibleUpperStarComp _ ℓ p f₁).hom.app _ ≫
-    (boundedConstructibleUpperStar _ ℓ p).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f₁).counit.app B)
-
-/-- The *Künneth map* `Π : Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` (blueprint
-`def-trf-kernel-pushforward-maps`, item 5): the adjoint for `Lq^* ⊣ Rq_*`, `q = f₁ × f₂`, of
-```
-Lq^* (Lp₁^* Rf₁* B₁ ⊗ Lp₂^* Rf₂* B₂) ≅ Lq^* Lp₁^* Rf₁* B₁ ⊗ Lq^* Lp₂^* Rf₂* B₂
-  ⟶ Lp₁^* B₁ ⊗ Lp₂^* B₂,
-```
-the monoidal structure of `Lq^*` followed by the counits. For proper `f_i` it is the inverse of
-the `!`-Künneth isomorphism `Ku_!` of `def-sf-kv-maps` (i) under `Rq_* ≅ Rq_!`. -/
-noncomputable def prodLowerStarExternalProduct (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
-    (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁)
-        ((boundedConstructibleLowerStar _ ℓ f₂).obj B₂) ⟶
-      (boundedConstructibleLowerStar _ ℓ (prod.map f₁ f₂)).obj (externalProduct ℓ B₁ B₂) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map f₁ f₂)).homEquiv _ _
-    ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (prod.map f₁ f₂)) _ _).inv ≫
-      (prodUpperStarCounit ℓ (prod.map_fst f₁ f₂) B₁ ⊗ₘ
-        prodUpperStarCounit ℓ (prod.map_snd f₁ f₂) B₂))
-
-/-- **The relative product theorem for proper morphisms** (blueprint `thm-sf-kunneth-relative`,
-compatibility with `Rf_! ≅ Rf_*` for proper `f`, as used in `def-sf-kv-maps` (i)): for proper
-`f₁`, `f₂` the Künneth map `Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` is an isomorphism. -/
-instance isIso_prodLowerStarExternalProduct (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [IsProper f₁.left]
-    [IsProper f₂.left] (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (prodLowerStarExternalProduct ℓ f₁ f₂ B₁ B₂) :=
-  sorry
 
 /-- The *kernel pushforward* `ρ_f = (1 ⊠ χ_f) ∘ Π_f⁻¹ : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` along a
 proper morphism `f`, `q = f × f`, `K' = Rf_* K` (blueprint `def-trf-kernel-pushforward-maps`,

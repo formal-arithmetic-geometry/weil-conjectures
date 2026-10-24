@@ -6,6 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.Triangle
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 
 /-!
@@ -34,29 +35,61 @@ open CategoryTheory Limits TwoSquare
 
 namespace AlgebraicGeometry.CompactSupportFormalism
 
-variable (F : CompactSupportFormalism.{w, v, u}) [F.HasProperExchange]
-
 variable {X Y S : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
+
+/-- The triangle of factorizations (`CategoryTheory.ExchangeFormalism.ShriekTriangle`)
+underlying a triangle of compactifications. -/
+abbrev _root_.AlgebraicGeometry.Compactification.Triangle.toShriekTriangle
+    (T : Compactification.Triangle f g) :
+    ExchangeFormalism.ShriekTriangle @IsOpenImmersion X Y S where
+  Z₁ := T.cf.Z
+  Z₂ := T.cg.Z
+  W := T.cfg.Z
+  i₁ := T.cf.i
+  p₁ := T.cf.g
+  i₂ := T.cg.i
+  p₂ := T.cg.g
+  i := T.cfg.i
+  p := T.cfg.g
+  q := T.q
+  r := T.p
+  i_q := T.i_q
+  r_p := T.p_g
+  w := T.isPullback.w
+
+/-- The morphism of triangles of factorizations underlying a morphism of triangles of
+compactifications. -/
+abbrev _root_.AlgebraicGeometry.Compactification.Triangle.Hom.toShriekTriangleHom
+    {T' T : Compactification.Triangle f g} (φ : T'.Hom T) :
+    ExchangeFormalism.ShriekTriangle.Hom @IsOpenImmersion T'.toShriekTriangle
+      T.toShriekTriangle where
+  rf := φ.rf.hom
+  rg := φ.rg.hom
+  rfg := φ.rfg.hom
+  wf := φ.isPullback_rf.flip.w
+  hf := φ.rf.hom_g
+  wg := φ.isPullback_rg.flip.w
+  hg := φ.rg.hom_g
+  wfg := φ.isPullback_rfg.flip.w
+  hfg := φ.rfg.hom_g
+  q_comm := φ.q_comm
+  p_comm := φ.p_comm
+
+variable (F : CompactSupportFormalism.{w, v, u}) [F.HasProperExchange]
 
 /-- **The composition isomorphism** attached to a triangle of compactifications `T`:
 ```
 (cf.i)_! ⋙ (cf.g)_* ⋙ (cg.i)_! ⋙ (cg.g)_* ≅ (cf.i)_! ⋙ q_! ⋙ p_* ⋙ (cg.g)_*
                                          ≅ (cfg.i)_! ⋙ (cfg.g)_*
 ```
-built from the exchange isomorphism of the cartesian square `cf.g ≫ cg.i = q ≫ p`.
+built from the exchange isomorphism of the cartesian square `cf.g ≫ cg.i = q ≫ p`
+(`CategoryTheory.ExchangeFormalism.compIso`).
 (blueprint: `sk-thm-sf-comp-composition`) -/
 noncomputable def compIso (T : Compactification.Triangle f g) :
     F.shriek T.cf ⋙ F.shriek T.cg ≅ F.shriek T.cfg :=
   haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
   haveI := HasProperExchange.isIso_exchange (F := F) T.isPullback
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (F.sh T.cf.i) ((Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight
-        (asIso (F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans) (F.pf T.cg.g) ≪≫
-      Functor.associator _ _ _) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (F.shComp' T.cf.i T.q T.cfg.i T.i_q).symm _ ≪≫
-    Functor.isoWhiskerLeft _ (F.pfComp' T.p T.cg.g T.cfg.g T.p_g).symm
+  ExchangeFormalism.compIso F T.toShriekTriangle
 
 lemma compIso_hom_app (T : Compactification.Triangle f g) (K : F.obj X) :
     haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
@@ -64,9 +97,10 @@ lemma compIso_hom_app (T : Compactification.Triangle f g) (K : F.obj X) :
       (F.pf T.cg.g).map ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans.app
           ((F.sh T.cf.i).obj K) ≫
         (F.pf T.p).map ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).inv.app K)) ≫
-      (F.pfComp' T.p T.cg.g T.cfg.g T.p_g).inv.app ((F.sh T.cfg.i).obj K) := by
-  simp [compIso, shriek]
-
+      (F.pfComp' T.p T.cg.g T.cfg.g T.p_g).inv.app ((F.sh T.cfg.i).obj K) :=
+  haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
+  haveI := HasProperExchange.isIso_exchange (F := F) T.isPullback
+  ExchangeFormalism.compIso_hom_app F T.toShriekTriangle K
 
 /-- **Naturality of the composition isomorphism**: for a morphism of triangles `φ : T' ⟶ T`,
 the comparisons along the refinements of `φ` intertwine the composition isomorphisms of `T` and
@@ -76,75 +110,15 @@ theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T
       NatTrans.hcomp (F.refinementComparison φ.rf φ.isPullback_rf)
           (F.refinementComparison φ.rg φ.isPullback_rg) ≫ (F.compIso T').hom := by
   have := HasBaseChange.isIso_baseChange (F := F) T.isPullback
+  have := HasProperExchange.isIso_exchange (F := F) T.isPullback
   have := HasBaseChange.isIso_baseChange (F := F) T'.isPullback
+  have := HasProperExchange.isIso_exchange (F := F) T'.isPullback
   have := HasBaseChange.isIso_baseChange (F := F) φ.isPullback_rf.flip
   have := HasBaseChange.isIso_baseChange (F := F) φ.isPullback_rg.flip
   have := HasBaseChange.isIso_baseChange (F := F) φ.isPullback_rfg.flip
   have := HasBaseChange.isIso_baseChange (F := F) φ.isPullback_q
   have := HasBaseChange.isIso_baseChange (F := F) φ.isPullback_big
-  ext K
-  have hG₁ := congr_app (F.exchange_paste_horiz φ.rf.hom T.cf.g T'.q T.q T.cg.i φ.rfg.hom T.p
-    T'.cf.g (T'.p ≫ φ.rg.hom) φ.isPullback_q.w T.isPullback.w φ.rf.hom_g φ.p_comm.symm
-    φ.isPullback_big.w) ((F.sh T'.cf.i).obj K)
-  have hG₂ := congr_app (F.exchange_paste_horiz T'.cf.g (𝟙 Y) T'.q T'.cg.i T.cg.i T'.p
-    φ.rg.hom T'.cf.g (T'.p ≫ φ.rg.hom) T'.isPullback.w φ.isPullback_rg.flip.w
-    (Category.comp_id _) rfl φ.isPullback_big.w) ((F.sh T'.cf.i).obj K)
-  have hC := congr_app (F.exchange_paste_vert (𝟙 X) φ.rf.hom φ.rfg.hom T'.cf.i T.cf.i T'.q T.q
-    T'.cfg.i T.cfg.i φ.isPullback_rf.flip.w φ.isPullback_q.w T'.i_q T.i_q
-    φ.isPullback_rfg.flip.w) K
-  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.hComp, TwoSquare.vComp, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id, Functor.comp_obj]
-    at hG₁ hG₂ hC
-  rw [NatTrans.comp_app, NatTrans.comp_app, NatTrans.hcomp_app, compIso_hom_app,
-    compIso_hom_app, refinementComparison_app, refinementComparison_app,
-    refinementComparison_app, hC]
-  dsimp only [shriek, Functor.comp_map, Functor.comp_obj]
-  have hbg : (T'.p ≫ φ.rg.hom) ≫ T.cg.g = T'.cfg.g := by
-    rw [Category.assoc, φ.rg.hom_g, T'.p_g]
-  have hL2 := F.pfComp'_assoc_inv_app φ.rfg.hom T.p T.cg.g (T'.p ≫ φ.rg.hom) T.cfg.g T'.cfg.g
-    φ.p_comm.symm T.p_g hbg φ.rfg.hom_g ((F.sh T'.cfg.i).obj K)
-  have hR2 := F.pfComp'_assoc_inv_app T'.p φ.rg.hom T.cg.g (T'.p ≫ φ.rg.hom) T'.cg.g T'.cfg.g
-    rfl φ.rg.hom_g hbg T'.p_g ((F.sh T'.cfg.i).obj K)
-  simp only [Category.assoc]
-  rw [← NatTrans.naturality_assoc, hL2, ← Functor.map_comp_assoc, ← NatTrans.naturality_assoc,
-    hR2]
-  simp only [Functor.comp_map, ← Functor.map_comp_assoc]
-  refine congrArg (· ≫ _) (congrArg (F.pf T.cg.g).map ?_)
-  -- the two decompositions of the exchange map of the big square
-  have hG := hG₁.symm.trans hG₂
-  have hG' := congrArg (fun x ↦ (F.sh T.cg.i).map ((F.pfComp' φ.rf.hom T.cf.g T'.cf.g
-    φ.rf.hom_g).inv.app ((F.sh T'.cf.i).obj K)) ≫ x) hG
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp] at hG'
-  -- naturality of the composition isomorphism of the extensions by zero
-  have hSC := congrArg (F.pf T.p).map ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).hom.naturality
-    ((F.pfId X).inv.app K))
-  -- naturality of the exchange maps
-  have hεQ := (F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans.naturality
-    ((F.sh T.cf.i).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) T'.cf.i T.cf.i φ.rf.hom φ.isPullback_rf.flip.w).natTrans.app K)
-  have hP₁ := (F.pfComp' φ.rfg.hom T.p (T'.p ≫ φ.rg.hom) φ.p_comm.symm).inv.naturality
-    ((F.shComp' T'.cf.i T'.q T'.cfg.i T'.i_q).inv.app K)
-  have hP₂ := (F.pfComp' T'.p φ.rg.hom (T'.p ≫ φ.rg.hom) rfl).inv.naturality
-    ((F.shComp' T'.cf.i T'.q T'.cfg.i T'.i_q).inv.app K)
-  have hεB := (F.exchange (𝟙 Y) T'.cg.i T.cg.i φ.rg.hom φ.isPullback_rg.flip.w).natTrans.naturality
-    ((F.pf T.cf.g).map ((F.sh T.cf.i).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) T'.cf.i T.cf.i φ.rf.hom φ.isPullback_rf.flip.w).natTrans.app K) ≫
-      (F.pfComp' φ.rf.hom T.cf.g T'.cf.g φ.rf.hom_g).inv.app ((F.sh T'.cf.i).obj K))
-  have hId := congrArg (F.sh T.cg.i).map ((F.pfId Y).inv.naturality
-    ((F.pf T.cf.g).map ((F.sh T.cf.i).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) T'.cf.i T.cf.i φ.rf.hom φ.isPullback_rf.flip.w).natTrans.app K) ≫
-      (F.pfComp' φ.rf.hom T.cf.g T'.cf.g φ.rf.hom_g).inv.app ((F.sh T'.cf.i).obj K)))
-  simp only [Functor.comp_obj, Functor.comp_map, Functor.map_comp, Functor.id_obj,
-    Functor.id_map, Category.assoc] at hSC hεQ hP₁ hP₂ hεB hId
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hSC, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  rw [← reassoc_of% hεQ, hP₁, reassoc_of% hG', hP₂, ← reassoc_of% hεB,
-    ← reassoc_of% hId, ← F.pfComp'_id_right_hom_app, Functor.map_comp_assoc]
-
+  exact ExchangeFormalism.compIso_naturality F φ.toShriekTriangleHom
 
 /-- **Independence of the triangle of compactifications**: the composition isomorphisms of two
 triangles `T₁` and `T₂` agree up to the comparison isomorphisms `F.shriekIso` of their
@@ -202,7 +176,7 @@ lemma compIso_unitLeft (c : Compactification f) :
       Iso.hom_inv_id_app]
     exact h₂.symm
   rw [h₁, hSC, F.pfComp'_id_left_inv_app]
-  simp [← Functor.map_comp, shriekOfIsProperIdIso, shriek]
+  simp [← Functor.map_comp, shriekOfIsProperIdIso, shriek, ExchangeFormalism.shriek]
 
 
 /-- The composition isomorphism of the triangle `(f, 𝟙 Y)` is the identity, up to
@@ -229,7 +203,7 @@ lemma compIso_unitRight (c : Compactification f) :
       Iso.hom_inv_id_app]
     exact h₂.symm
   rw [h₁, hSC, F.pfComp'_id_right_inv_app]
-  simp [← Functor.map_comp, shriekOfIsProperIdIso, shriek]
+  simp [← Functor.map_comp, shriekOfIsProperIdIso, shriek, ExchangeFormalism.shriek]
 
 end Unit
 

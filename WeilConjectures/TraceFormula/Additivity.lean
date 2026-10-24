@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
+public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
@@ -52,13 +54,82 @@ variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left] (i : Z ⟶ X) [IsClosedImmersion i.left]
 
+omit [IsClosedImmersion i.left] in
+/-- The counit of `j_! ⊣ Lj^*` followed by the unit of `Li^* ⊣ Ri_*` vanishes, since
+`Lj^* Ri_* = 0`. -/
+lemma counit_comp_unit_eq_zero_of_isCompl
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K ≫
+      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K = 0 :=
+  ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).homEquiv _ _).injective
+    ((isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hcompl.disjoint _).eq_of_tgt
+      _ _)
+
+/-- The open–closed triangle `j_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶` with the extension by zero `j_!`:
+the counit of `j_! ⊣ Lj^*` is inverted by `Lj^*`, which kills `Ri_* Li^* K`, and the unit of
+`Li^* ⊣ Ri_*` is inverted by `Li^*`, which kills `j_! Lj^* K`; these restrictions jointly
+reflect isomorphisms. -/
+lemma exists_distTriang_openImmersionLowerShriek_openClosed
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ∃ δ, Triangle.mk
+        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+          ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K))
+        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)) δ ∈
+      distTriang _ := by
+  have : QuasiCompact (j.left ≫ X.hom) := by
+    rw [Over.w j]
+    infer_instance
+  have : QuasiCompact j.left := QuasiCompact.of_comp j.left X.hom
+  have hP := jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl
+    (Profinite.padicAlgClRingObj ℓ) i.left j.left hcompl.symm
+  have h₀ := counit_comp_unit_eq_zero_of_isCompl j i hcompl K
+  have hzero : (boundedConstructible _).ι.map
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K) ≫
+      (boundedConstructible _).ι.map
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K) = 0 := by
+    rw [← Functor.map_comp, h₀, Functor.map_zero]
+  have h₁ : IsIso ((boundedConstructibleUpperStar _ ℓ j).map
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)) :=
+    IsIso.of_isIso_fac_left (hh := IsIso.id _)
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+        j).right_triangle_components K)
+  have h₂ : IsIso ((boundedConstructibleUpperStar _ ℓ i).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)) :=
+    IsIso.of_isIso_fac_right (hh := IsIso.id _)
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).left_triangle_components K)
+  have h₁' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
+    (Profinite.padicAlgClRingObj ℓ) ℓ j)
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)).1
+    (inferInstanceAs (IsIso ((boundedConstructible _).ι.map
+      ((boundedConstructibleUpperStar _ ℓ j).map
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)))))
+  have h₂' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
+    (Profinite.padicAlgClRingObj ℓ) ℓ i)
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)).1
+    (inferInstanceAs (IsIso ((boundedConstructible _).ι.map
+      ((boundedConstructibleUpperStar _ ℓ i).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)))))
+  have hN := ((boundedConstructible _).ι.map_isZero
+    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hcompl.disjoint
+      ((boundedConstructibleUpperStar _ ℓ i).obj K))).of_iso
+    ((boundedConstructibleUpperStarCompatibility _ ℓ j).symm.app _)
+  have hA := ((boundedConstructible _).ι.map_isZero
+    (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j i
+      hcompl.disjoint ((boundedConstructibleUpperStar _ ℓ j).obj K))).of_iso
+    ((boundedConstructibleUpperStarCompatibility _ ℓ i).symm.app _)
+  exact Pretriangulated.exists_distTriang_of_jointlyReflectIsomorphisms hP _ _ hzero h₁' hN hA h₂'
+
 variable (ℓ) in
 /-- **The open–closed localization triangle** (blueprint
 `prop-sf-open-closed-triangle-all-stages`): for an open immersion `j : U ⟶ X` and a closed
 immersion `i : Z ⟶ X` onto its complement, the counit `Rj_! Lj^* K ⟶ K` of `Rj_! ⊣ Lj^*` and the
 unit `K ⟶ Ri_* Li^* K` of `Li^* ⊣ Ri_*` extend to a distinguished triangle
 `Rj_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶ Rj_! Lj^* K[1]` of the ambient derived category
-`D(Mod_{ℚ̲̄_ℓ,X})`. -/
+`D(Mod_{ℚ̲̄_ℓ,X})`. Through `Rj_! ≅ j_!`, this is
+`exists_distTriang_openImmersionLowerShriek_openClosed`. -/
 theorem exists_distTriang_openClosed
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -74,8 +145,27 @@ theorem exists_distTriang_openClosed
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-            i).unit.app K)) δ ∈ distTriang _ :=
-  sorry
+            i).unit.app K)) δ ∈ distTriang _ := by
+  obtain ⟨δ, hδ⟩ := exists_distTriang_openImmersionLowerShriek_openClosed j i hcompl K
+  let γ := (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
+  have hε : (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K =
+      γ.hom ≫ (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app K :=
+    counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j K
+  refine ⟨δ ≫ (shiftFunctor _ (1 : ℤ)).map
+    ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+      γ.inv), isomorphic_distinguished _ hδ _ ?_⟩
+  refine Triangle.isoMk _ _
+    ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.mapIso γ)
+    (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
+  · exact (Category.comp_id _).trans ((congrArg (boundedConstructible _).ι.map hε).trans
+      (Functor.map_comp _ _ _))
+  · exact (Category.comp_id _).trans (Category.id_comp _).symm
+  · refine (Category.assoc _ _ _).trans ((congrArg (δ ≫ ·) ?_).trans
+      ((Category.comp_id _).trans (Category.id_comp _).symm))
+    rw [← Functor.map_comp, Functor.mapIso_hom, ← Functor.map_comp, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
 
 end Triangle
 

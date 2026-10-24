@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.FiniteEtaleStalk
 public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
-public import WeilConjectures.TraceFormula.StalkLowerStarRestriction
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilTrace
 
@@ -80,7 +79,7 @@ lemma weilStalkComparison_eq {Ω : Type u} [Field Ω] [IsSepClosed Ω]
       weilPointComparison ℓ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ) e
         hx := by
   unfold weilStalkComparison weilPointComparison
-  rfl
+  rw [upperStarEqToIso_eq_eqToIso]
 
 /-- The Frobenius of the stalk at a point `x̄ : P ⟶ Z` with `x̄ ≫ e = σ ≫ x̄` of a module object
 `M` with a morphism `φ : e^* M ⟶ M`: the composite
