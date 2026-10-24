@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
@@ -79,12 +79,16 @@ attribute [local instance] boundedConstructibleBraiding
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-lemma eqToHom_comp_eqToHom_comp_aux {C : Type*} [Category C] {O₁ O₂ O₃ O₄ O₅ O₆ : C}
+/-- Merging two `eqToHom`s after two morphisms; stated for abstract objects so that it can be
+applied without unfolding the objects. -/
+private lemma eqToHom_comp_eqToHom_comp_aux {C : Type*} [Category C] {O₁ O₂ O₃ O₄ O₅ O₆ : C}
     (x : O₁ ⟶ O₂) (y : O₂ ⟶ O₃) (e₁ : O₃ = O₄) (e₂ : O₄ = O₅) (e₃ : O₃ = O₅) (t : O₅ ⟶ O₆) :
     x ≫ y ≫ eqToHom e₁ ≫ eqToHom e₂ ≫ t = x ≫ y ≫ eqToHom e₃ ≫ t := by
   simp
 
-lemma map_comp_eqToHom_comp_aux {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] (F : 𝒞 ⥤ 𝒟)
+/-- The computation behind `upperStarComp_inv_app_comp_prodUpperStarCounit_left`, stated for
+abstract objects and morphisms so that it can be applied without unfolding them. -/
+private lemma map_comp_eqToHom_comp_aux {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] (F : 𝒞 ⥤ 𝒟)
     {A₁ A₂ A₃ A₄ A₅ : 𝒞} {B₁ B₂ B₃ B₄ B₅ B₆ : 𝒟} (a' : A₁ ⟶ A₂) (e₃ : A₂ = A₃) (c' : A₃ ⟶ A₄)
     (d' : A₄ ⟶ A₅) (y : F.obj A₂ ⟶ B₁) (e₁ : B₁ = B₂) (e₂ : B₂ = B₃) (c : B₃ ⟶ B₄)
     (d : B₄ ⟶ B₅) (n : F.obj A₅ ⟶ B₅) (n' : F.obj A₄ ⟶ B₄) (y' : F.obj A₃ ⟶ B₆)
@@ -163,7 +167,8 @@ lemma map_upperStarComp_hom_app_comp_upperStarComp_inv_app {X' : Over (Spec (.of
       (boundedConstructibleUpperStarComp _ ℓ r ρ).inv.app
         ((boundedConstructibleUpperStar _ ℓ f).obj K) =
     (boundedConstructibleUpperStarComp _ ℓ r (ρ ≫ f)).inv.app K ≫
-      eqToHom (by rw [Category.assoc]) ≫ (boundedConstructibleUpperStarComp _ ℓ (r ≫ ρ) f).hom.app K := by
+      eqToHom (by rw [Category.assoc]) ≫
+        (boundedConstructibleUpperStarComp _ ℓ (r ≫ ρ) f).hom.app K := by
   have hA := boundedConstructibleUpperStarComp_assoc_app (Profinite.padicAlgClRingObj ℓ) ℓ r ρ f K
   rw [← cancel_epi ((boundedConstructibleUpperStarComp _ ℓ r (ρ ≫ f)).hom.app K),
     Iso.hom_inv_id_app_assoc, ← cancel_mono ((boundedConstructibleUpperStarComp _ ℓ r ρ).hom.app
@@ -212,21 +217,6 @@ lemma upperStarComp_inv_app_comp_prodUpperStarCounit_left {P'' : Over (Spec (.of
 
 end Counit
 
-/-! ### The braiding -/
-
-/-- The derived pullback on bounded constructible `ℚ̄_ℓ`-sheaves is compatible with the Koszul
-braidings. -/
-lemma boundedConstructibleUpperStar_δ_braiding {X Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
-    (K M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) K M ≫
-        (β_ ((boundedConstructibleUpperStar _ ℓ f).obj K)
-          ((boundedConstructibleUpperStar _ ℓ f).obj M)).hom =
-      (boundedConstructibleUpperStar _ ℓ f).map (β_ K M).hom ≫
-        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) M K :=
-  sorry
-
 /-! ### The Künneth map -/
 
 section Kunneth
@@ -244,7 +234,10 @@ variable {P Q R X₁ X₂ Y₁ Y₂ : Over (Spec (.of k))}
 `q ≫ πᵢ = pᵢ ≫ fᵢ` be commutative squares with `f₁`, `f₂` proper, such that `q = r ≫ s` with `r`
 and `s` proper, `p₁ ≫ f₁ = r ≫ (s ≫ π₁)` cartesian and `p₂ = r ≫ ρ₂` with `ρ₂ ≫ f₂ = s ≫ π₂`
 cartesian. Then the transpose of
-`Lq^* (Lπ₁^* Rf₁* B₁ ⊗ Lπ₂^* Rf₂* B₂) ⟶ Lq^* Lπ₁^* Rf₁* B₁ ⊗ Lq^* Lπ₂^* Rf₂* B₂ ⟶ Lp₁^* B₁ ⊗ Lp₂^* B₂`
+```
+Lq^* (Lπ₁^* Rf₁* B₁ ⊗ Lπ₂^* Rf₂* B₂) ⟶ Lq^* Lπ₁^* Rf₁* B₁ ⊗ Lq^* Lπ₂^* Rf₂* B₂
+  ⟶ Lp₁^* B₁ ⊗ Lp₂^* B₂
+```
 is an isomorphism. -/
 theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit {q : P ⟶ Q} {p₁ : P ⟶ X₁}
     {p₂ : P ⟶ X₂} {π₁ : Q ⟶ Y₁} {π₂ : Q ⟶ Y₂} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} (r : P ⟶ R)
@@ -265,7 +258,7 @@ theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit {q : P ⟶ Q} {p₁ : P 
     infer_instance
   have := isIso_homEquiv_prodUpperStarCounit ℓ sq₂ B₂
   have := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ s).isIso_leftProjectionMorphism
-    (boundedConstructibleUpperStar_δ_braiding ℓ s)
+    (boundedConstructibleUpperStar_δ_braiding _ ℓ s)
     ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁))
     ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂)
   exact Adjunction.isIso_homEquiv_δ_tensorHom
