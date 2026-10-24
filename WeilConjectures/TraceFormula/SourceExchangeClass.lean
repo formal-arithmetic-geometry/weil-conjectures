@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.LeftProjectionComp
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalShift
+public import WeilConjectures.TraceFormula.SourceExchangeCoherence
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 
 /-!
@@ -150,10 +151,16 @@ lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : 
       Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ (g ≫ b)) M (𝟙_ _) =
     Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ b) M (𝟙_ _) ≫
       (boundedConstructibleLowerShriek _ ℓ b).map
-        ((ρ_ _).hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app _ ≫
-          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app _ ≫
-          (boundedConstructibleLowerShriek _ ℓ g).map (ρ_ _).inv) ≫
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app _ ≫
+        ((ρ_ ((boundedConstructibleUpperStar _ ℓ b).obj M)).hom ≫
+          (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app
+            ((boundedConstructibleUpperStar _ ℓ b).obj M) ≫
+          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
+            ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj M)) ≫
+          (boundedConstructibleLowerShriek _ ℓ g).map (ρ_ ((boundedConstructibleUpperStar _ ℓ g).obj
+            ((boundedConstructibleUpperStar _ ℓ b).obj M))).inv) ≫
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app
+        ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj M) ⊗
+          𝟙_ _) ≫
       (boundedConstructibleLowerShriek _ ℓ (g ≫ b)).map
         ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app M ▷ _) := by
   have hc := leftProjection_lowerShriek_comp ℓ g b M (𝟙_ _)
@@ -183,7 +190,6 @@ lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : 
   rw [hc', ← Category.assoc (M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app (𝟙_ _)),
     hi, Category.id_comp, reassoc_of% hn, ← Functor.map_comp_assoc,
     hu]
-  rfl
 
 set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
@@ -205,14 +211,18 @@ lemma map_leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (
       F.map (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ s) M (𝟙_ _)) ≫
       k =
     F.map (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ b) M (𝟙_ _)) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ b).map (ρ_ _).hom) ≫
+      F.map ((boundedConstructibleLowerShriek _ ℓ b).map (ρ_ ((boundedConstructibleUpperStar _ ℓ b).obj M)).hom) ≫
       F.map ((boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app _)) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app ((boundedConstructibleUpperStar _ ℓ b).obj M))) ≫
       F.map ((boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app _)) ≫
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
+          ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj M)))) ≫
       F.map ((boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleLowerShriek _ ℓ g).map (ρ_ _).inv)) ≫
-      F.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app _) ≫
+        ((boundedConstructibleLowerShriek _ ℓ g).map (ρ_ ((boundedConstructibleUpperStar _ ℓ g).obj
+          ((boundedConstructibleUpperStar _ ℓ b).obj M))).inv)) ≫
+      F.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app
+        ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj M) ⊗
+          𝟙_ _)) ≫
       F.map ((boundedConstructibleLowerShriek _ ℓ (g ≫ b)).map
         ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app M ▷ _)) ≫
       F.map (eqToHom (by rw [h])) ≫ k := by
@@ -343,7 +353,10 @@ theorem class_pushforward_core :
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]
   conv_rhs => rw [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support P.g_comp_support]
   refine whisker_eq _ (whisker_eq _ ?_)
-  done
+  exact lowerShriek_pushforwardCoeff_coherence ℓ P.g P.pushforward.support c.support
+    (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd P.pushforward.support_fst
+    P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
+    (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
 
 set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
