@@ -20,12 +20,18 @@ Let `f : X ⟶ Y` be a finite morphism over `Spec k` with automorphisms `e_X`, `
 `e_X ≫ f = f ≫ e_Y`. The pushforward `f_*` of module objects is exact
 (`ProEtale.CondensedRing.preservesFiniteColimits_lowerStar_of_isFinite`), so the derived
 pushforward `Rf_*` commutes with the homology sheaves: `Hⁿ(Rf_* K) ≅ f_* Hⁿ(K)`
-(`ProEtale.CondensedRing.boundedConstructibleLowerStarHomologyIso`). On the homology sheaves, the
+(`Functor.rightDerivedFunctorHomologyFunctorIso`). On the homology sheaves, the
 derived base-change morphism of the Frobenius square is the base-change morphism of module objects
 (`CategoryTheory.Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction`), so this
 isomorphism is compatible with the Weil structures: for a Weil object `K` for `e_X`,
 `Hⁿ(Rf_*^Weil K) ≅ f_* Hⁿ(K)` as Weil sheaves for `e_Y`
-(`ProEtale.CondensedRing.nonempty_homologyFunctor_weilLowerStar_iso_of_isFinite`).
+(`ProEtale.CondensedRing.nonempty_homologyFunctor_weilLowerStar_iso`, in
+`WeilConjectures.TraceFormula.HomologyWeilLowerShriek`).
+
+This file provides the generic transport statement
+(`CategoryTheory.Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_liftComparison_iso`), stated as a
+natural isomorphism of functors: an isomorphism of functors is cheap to check against the concrete
+Weil functors, whereas the corresponding check on objects unfolds the sheaf categories.
 
 -/
 
@@ -38,97 +44,6 @@ open CategoryTheory Limits MonoidalCategory Endofunctor
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 /-! ### Squares of left derived functors of exact functors -/
-
-section Diag
-open Lean Meta Elab Tactic
-
-meta partial def findDiffAux (a b : Expr) (acc : IO.Ref (Array (Expr × Expr))) (fuel : Nat := 30)
-    (path : List String := []) : MetaM Unit := do
-  if a == b then return
-  if (← acc.get).size ≥ 8 then return
-  if (← isProof a) && (← isProof b) then return
-  let unfoldStep : MetaM Unit := do
-    let a' ← whnfR a
-    let b' ← whnfR b
-    if a' != a || b' != b then return ← findDiffAux a' b' acc fuel path
-    if fuel = 0 then acc.modify (·.push (a, b)); logInfo m!"PATH {path}"; return
-    let ha := match a.getAppFn with | .const n _ => some n | _ => none
-    let hb := match b.getAppFn with | .const n _ => some n | _ => none
-    -- unfold the side whose head is a definition with the larger height
-    let env ← getEnv
-    let height (n? : Option Name) : Nat := match n? with
-      | some n => match env.find? n with
-        | some (.defnInfo d) => match d.hints with | .regular h => h.toNat + 1 | .abbrev => 1000 | _ => 0
-        | _ => 0
-      | none => 0
-    let (ua, ub) := if height ha ≥ height hb then (true, false) else (false, true)
-    if ua then
-      if let some a' ← unfoldDefinition? a then
-        logInfo m!"unfold KEY head {ha}"
-        return ← findDiffAux a' b acc (fuel - 1) path
-    if ub || !ua then
-      if let some b' ← unfoldDefinition? b then
-        logInfo m!"unfold GOAL head {hb}"
-        return ← findDiffAux a b' acc (fuel - 1) path
-    logInfo m!"PATH {path}"
-    acc.modify (·.push (a, b))
-  match a, b with
-  | .app f₁ x₁, .app f₂ x₂ =>
-      if f₁.getAppNumArgs == f₂.getAppNumArgs && f₁.getAppFn == f₂.getAppFn then
-        let hd := toString f₁.getAppFn.constName?
-        findDiffAux f₁ f₂ acc fuel path
-        findDiffAux x₁ x₂ acc fuel ((hd ++ "#" ++ toString f₁.getAppNumArgs) :: path)
-      else unfoldStep
-  | .lam _ t₁ b₁ _, .lam _ t₂ b₂ _ =>
-      findDiffAux t₁ t₂ acc fuel
-      withLocalDeclD `x t₁ fun x ↦ findDiffAux (b₁.instantiate1 x) (b₂.instantiate1 x) acc fuel
-  | .forallE _ t₁ b₁ _, .forallE _ t₂ b₂ _ =>
-      findDiffAux t₁ t₂ acc fuel
-      withLocalDeclD `x t₁ fun x ↦ findDiffAux (b₁.instantiate1 x) (b₂.instantiate1 x) acc fuel
-  | .mdata _ e, _ => findDiffAux e b acc fuel
-  | _, .mdata _ e => findDiffAux a e acc fuel
-  | .proj _ i₁ e₁, .proj _ i₂ e₂ =>
-      if i₁ == i₂ then findDiffAux e₁ e₂ acc fuel else acc.modify (·.push (a, b))
-  | _, _ => unfoldStep
-
-elab "find_diff " h:ident : tactic => withMainContext do
-  let goal ← getMainTarget
-  let lctx ← getLCtx
-  let some d := lctx.findFromUserName? h.getId | throwError "no"
-  let t ← instantiateMVars d.type
-  let g ← instantiateMVars goal
-  let acc ← IO.mkRef #[]
-  findDiffAux t g acc
-  for (a, b) in ← acc.get do
-    logInfo m!"KEY: {a}\n=====\nGOAL: {b}"
-
-elab "find_diff_terms " a:term " , " b:term : tactic => withMainContext do
-  let a ← instantiateMVars (← Elab.Term.elabTerm a none)
-  let b ← instantiateMVars (← Elab.Term.elabTerm b none)
-  let acc ← IO.mkRef #[]
-  findDiffAux a b acc
-  for (a, b) in ← acc.get do
-    logInfo m!"A: {a}\n=====\nB: {b}"
-
-elab "diff_rhs " h:ident " , " t:term : tactic => withMainContext do
-  let d ← getLocalDeclFromUserName h.getId
-  let ty ← instantiateMVars d.type
-  let y := ty.appArg!
-  let b ← instantiateMVars (← Elab.Term.elabTerm t none)
-  let acc ← IO.mkRef #[]
-  findDiffAux y b acc
-  for (a, b) in ← acc.get do
-    logInfo m!"A: {a}\n=====\nB: {b}"
-
-elab "diff_goal_inst " h:ident : tactic => withMainContext do
-  let d ← getLocalDeclFromUserName h.getId
-  let ty ← instantiateMVars d.type
-  let g ← instantiateMVars (← getMainTarget)
-  let g := g.appArg!
-  logInfo m!"I2INST: {ty.appFn!.appFn!.appArg!}"
-  logInfo m!"GOALINST: {g.appFn!.appFn!.appArg!}"
-
-end Diag
 
 namespace CategoryTheory.Functor
 
@@ -213,29 +128,8 @@ variable {𝒟X 𝒟Y 𝒜X 𝒜Y : Type*} {_ : Category 𝒟X} {_ : Category �
   {S : 𝒜X ⥤ 𝒜Y} {HX : 𝒟X ⥤ 𝒜X} {HY : 𝒟Y ⥤ 𝒜Y}
 
 /-- Let `R` and `S` transport algebras along `b` and `bc`, and `H_X`, `H_Y` along `θ_X`, `θ_Y`.
-An isomorphism `ψ : R ⋙ H_Y ≅ H_X ⋙ S` compatible with these commutation isomorphisms induces an
-isomorphism `H_Y (R K) ≅ S (H_X K)` of algebras. -/
-theorem nonempty_mapOfNatIso_obj_mapOfNatIso_obj_iso (b : R ⋙ LY ≅ LX ⋙ R)
-    (bc : S ⋙ PY ≅ PX ⋙ S) (θX : HX ⋙ PX ≅ LX ⋙ HX) (θY : HY ⋙ PY ≅ LY ⋙ HY)
-    (ψ : R ⋙ HY ≅ HX ⋙ S)
-    (h : ∀ K, PY.map (ψ.hom.app K) ≫ bc.hom.app (HX.obj K) ≫ S.map (θX.hom.app K) =
-      θY.hom.app (R.obj K) ≫ HY.map (b.hom.app K) ≫ ψ.hom.app (LX.obj K))
-    (K : IsoAlgebra LX) :
-    Nonempty ((mapOfNatIso θY).obj ((mapOfNatIso b).obj K) ≅
-      (mapOfNatIso bc).obj ((mapOfNatIso θX).obj K)) := by
-  refine ⟨isoMk (ψ.app K.carrier) ?_⟩
-  change PY.map (ψ.hom.app K.carrier) ≫
-      (bc.hom.app (HX.obj K.carrier) ≫ S.map (θX.hom.app K.carrier ≫ HX.map K.str.hom)) =
-    (θY.hom.app (R.obj K.carrier) ≫ HY.map (b.hom.app K.carrier ≫ R.map K.str.hom)) ≫
-      ψ.hom.app K.carrier
-  have nat := ψ.hom.naturality K.str.hom
-  simp only [Functor.comp_map] at nat
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% (h K.carrier), nat]
-
-
-/-- The isomorphism of `nonempty_mapOfNatIso_obj_mapOfNatIso_obj_iso`, as a natural isomorphism
-of functors `IsoAlgebra LX ⥤ IsoAlgebra PY`. -/
+An isomorphism `ψ : R ⋙ H_Y ≅ H_X ⋙ S` compatible with these commutation isomorphisms induces a
+natural isomorphism `R ⋙ H_Y ≅ H_X ⋙ S` of the transports of algebras. -/
 theorem nonempty_mapOfNatIso_comp_mapOfNatIso_iso (b : R ⋙ LY ≅ LX ⋙ R)
     (bc : S ⋙ PY ≅ PX ⋙ S) (θX : HX ⋙ PX ≅ LX ⋙ HX) (θY : HY ⋙ PY ≅ LY ⋙ HY)
     (ψ : R ⋙ HY ≅ HX ⋙ S)
@@ -253,6 +147,7 @@ theorem nonempty_mapOfNatIso_comp_mapOfNatIso_iso (b : R ⋙ LY ≅ LX ⋙ R)
     rw [reassoc_of% (h K.carrier), nat]
   · ext
     exact ψ.hom.naturality φ.hom.f
+
 end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace CategoryTheory.Adjunction
@@ -338,14 +233,14 @@ noncomputable def liftComparison {H : DX ⥤ 𝒜X} {v : 𝒜X ⥤ 𝒜X} {L' : 
 restricting to the full subcategories. Let `H_X`, `H_Y` be functors to categories with an
 adjunction `adj_U : f₁ ⊣ g`, endofunctors `u`, `v` and a comparison `β : u ⋙ f₁ ≅ f₁ ⋙ v`,
 commuting with the functors through `θ_u`, `θ_v` and `ψ_a`. If on `H` the exchange morphism of
-`θ_D` is that of `β` (`hA`), then for an algebra `K` for `L_v` on the full subcategory, the
-transport of the pushforward of `K` along `H_Y` is isomorphic to the pushforward of the transport
-of `K` along `H_X`.
+`θ_D` is that of `β` (`hA`), then transporting along the pushforward and then along `H_Y` is
+isomorphic to transporting along `H_X` and then along the pushforward, as functors on algebras for
+`L_v` on the full subcategory.
 
 The restricted functors, compatibilities, adjunction and base-change morphism are passed as
 variables with equations to their definitions, so that concrete instances can use their own
 definitions. -/
-theorem nonempty_mapOfNatIso_liftComparison_obj_iso
+theorem nonempty_mapOfNatIso_liftComparison_iso
     {Lf : DY ⥤ DX} {Rf : DX ⥤ DY} (adjD : Lf ⊣ Rf) {Lu : DY ⥤ DY} {Lv : DX ⥤ DX}
     (θD : Lu ⋙ Lf ≅ Lf ⋙ Lv) {HX : DX ⥤ 𝒜X} {HY : DY ⥤ 𝒜Y} {u : 𝒜Y ⥤ 𝒜Y} {v : 𝒜X ⥤ 𝒜X}
     {f₁ : 𝒜Y ⥤ 𝒜X} {g : 𝒜X ⥤ 𝒜Y} (adjU : f₁ ⊣ g) (β : u ⋙ f₁ ≅ f₁ ⋙ v)
@@ -389,11 +284,11 @@ theorem nonempty_mapOfNatIso_liftComparison_obj_iso
     (hL₂ := hLf) (hR₂ := hRf) (hG := hLu) (hH := hLv) adjD adjD θD θB
     (fun K ↦ eq_of_heq (hθB K)) K
   have h := hA K.obj
-  simp only [liftComparison, ObjectProperty.liftCompιIso_hom_app, ObjectProperty.liftCompιIso_inv_app,
-    Iso.trans_hom, Iso.symm_hom,
+  simp only [liftComparison, ObjectProperty.liftCompιIso_hom_app,
+    ObjectProperty.liftCompιIso_inv_app, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Functor.map_id,
+    Functor.whiskerRight_app, Functor.map_id,
     Category.id_comp, Category.comp_id, Functor.comp_obj, Functor.comp_map, asIso_hom,
     eexU] at h ⊢
   have h' : θu.hom.app (Rf.obj K.obj) ≫ HY.map ((Adjunction.exchangeRight adjD adjD θD).app K.obj) ≫
@@ -461,8 +356,8 @@ lemma boundedConstructibleUpperStarComp_inv_app_hom {Z : Over (Spec (.of k))}
     boundedConstructibleUpperStarComp_hom_app_hom, Iso.hom_inv_id_app]
   rfl
 
--- synthesizing the instances of the derived categories of module objects is slow
 set_option maxHeartbeats 1000000 in
+-- synthesizing the instances of the derived categories of module objects is slow
 /-- The pullback comparison of a commutative square on the ambient derived categories: the
 comparison `Lg^* ⋙ Lf'^* ≅ Lf^* ⋙ Lg'^*` of the composition isomorphisms
 `leftDerivedUpperStarComp`. -/
@@ -475,6 +370,7 @@ noncomputable def leftDerivedUpperStarSquareComparison (sq : CommSq g' f' f g) :
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) g'.left f.left)
 
 set_option maxHeartbeats 3000000 in
+-- the composite of the comparisons is checked against the ambient one by unfolding
 /-- The pullback comparison of a commutative square on bounded constructible complexes is
 `leftDerivedUpperStarSquareComparison` on the ambient derived categories. -/
 lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f' f g)

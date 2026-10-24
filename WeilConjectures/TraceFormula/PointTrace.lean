@@ -195,6 +195,7 @@ noncomputable def pointScalar : PadicAlgCl ℓ →+* End (𝟙_ (DerivedCategory
     (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))).comp
     (padicAlgClUnitEndRingHom ℓ (point k))
 
+omit [Fact (ringChar k).Prime] in
 lemma bijective_pointScalar [IsSepClosed k] : Function.Bijective (pointScalar ℓ k) :=
   ((ObjectProperty.fullyFaithfulι _).map_bijective _ _).comp
     (bijective_padicAlgClUnitEndRingHom_point ℓ k)

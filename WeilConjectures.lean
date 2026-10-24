@@ -12601,6 +12601,7 @@ public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.HomologyUnit
 public import WeilConjectures.TraceFormula.HomologyWeilLowerShriek
+public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LefschetzVerdier
 public import WeilConjectures.TraceFormula.LocalTerm

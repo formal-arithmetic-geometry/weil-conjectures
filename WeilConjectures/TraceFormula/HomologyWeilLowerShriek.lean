@@ -98,7 +98,7 @@ theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
       (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
         (commSq_left_of_comp_eq eX eY hf))) :=
     isIso_lowerStarBaseChange_of_isIso _ (commSq_left_of_comp_eq eX eY hf)
-  obtain ⟨iso⟩ := IsoAlgebra.nonempty_mapOfNatIso_liftComparison_obj_iso
+  obtain ⟨iso⟩ := IsoAlgebra.nonempty_mapOfNatIso_liftComparison_iso
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
     (leftDerivedUpperStarSquareComparison ℓ sq)
     (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
