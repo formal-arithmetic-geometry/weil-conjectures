@@ -2384,6 +2384,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobalRan
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobalSection
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupModel
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMap
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.SmoothProj
@@ -10089,6 +10090,7 @@ public import WeilConjectures.RingTheory.ExistsCompleteLocalFlatPresentation
 public import WeilConjectures.RingTheory.ExistsGeneratorsWithControlledAnnihilators
 public import WeilConjectures.RingTheory.ExistsLiftOfFieldCharP
 public import WeilConjectures.RingTheory.ExtendedCompletionModuleReduction
+public import WeilConjectures.RingTheory.ExtendedReesAlgebraGraded
 public import WeilConjectures.RingTheory.FGFractionFieldSubmoduleLatticePresentation
 public import WeilConjectures.RingTheory.FactorsThroughLocalization
 public import WeilConjectures.RingTheory.FactorsThroughSmooth
@@ -11854,6 +11856,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.NearbyCycles.Basic
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Complex
@@ -12405,6 +12409,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
@@ -12744,6 +12749,17 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunctionFibre
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
+public import WeilConjectures.TraceFormula.Specialization.Basic
+public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
+public import WeilConjectures.TraceFormula.Specialization.DeformationModel
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduct
+public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
+public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
+public import WeilConjectures.TraceFormula.Specialization.Trait
+public import WeilConjectures.TraceFormula.Specialization.TraitModel
+public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.StalkDualizable
 public import WeilConjectures.TraceFormula.Statement
