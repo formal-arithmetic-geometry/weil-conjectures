@@ -50,8 +50,7 @@ adjoints, both sides are the exchange of the composite `cι = Δd` followed by t
 namespace CategoryTheory
 
 variable {DC DF DX DP DC' DF' DX' DP' : Type*} [Category DC] [Category DF] [Category DX]
-  [Category DP]
-  [Category DC'] [Category DF'] [Category DX'] [Category DP']
+  [Category DP] [Category DC'] [Category DF'] [Category DX'] [Category DP']
   {cL : DC ⥤ DP} {cR : DP ⥤ DC} {dL : DF ⥤ DX} {dR : DX ⥤ DF}
   {ιU : DC ⥤ DF} {ιS : DF ⥤ DC} {ιL : DF ⥤ DC} {ΔU : DP ⥤ DX} {ΔS : DX ⥤ DP} {ΔL : DX ⥤ DP}
   {cL' : DC' ⥤ DP'} {cR' : DP' ⥤ DC'} {dL' : DF' ⥤ DX'} {dR' : DX' ⥤ DF'}
@@ -171,14 +170,21 @@ theorem fixedSquare_of_compactSupportExchange
       isoι'.inv.app (ΨF.obj Q) ≫ νι.app Q = 𝟙 _)
     (hΔ : ∀ Q : DX, νΔ.app Q ≫ ΨP.map (isoΔ.hom.app Q) ≫ (mateEquiv adjΔ adjΔ' αΔ).app Q ≫
       isoΔ'.inv.app (ΨX.obj Q) = 𝟙 _)
-    (hcomp : ∀ Q : DF, cL'.map (νι.app Q) ≫ νc.app (ιL.obj Q) ≫ ΨP.map (Sq.hom.app Q) =
-      Sq'.hom.app (ΨF.obj Q) ≫ ΔL'.map (νd.app Q) ≫ νΔ.app (dL.obj Q))
+    (hcomp₀ : Functor.whiskerRight νι cL' ≫ (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft ιL νc ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight Sq.hom ΨP =
+        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft ΨF Sq'.hom ≫
+          (Functor.associator _ _ _).inv ≫ Functor.whiskerRight νd ΔL' ≫
+            (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft dL νΔ ≫
+              (Functor.associator _ _ _).inv)
     (M : DX) :
     ΨC.map ((conjugateIsoEquiv (adjc.comp adjΔ) (adjι.comp adjd) BC.symm).hom.app M) ≫
         (mateEquiv adjι adjι' αι).app (dR.obj M) ≫ ιS'.map ((mateEquiv adjd adjd' νd).app M) =
       (mateEquiv adjc adjc' νc).app (ΔS.obj M) ≫ cR'.map ((mateEquiv adjΔ adjΔ' αΔ).app M) ≫
         (conjugateIsoEquiv (adjc'.comp adjΔ') (adjι'.comp adjd') BC'.symm).hom.app
           (ΨX.obj M) := by
+  have hcomp (Q : DF) : cL'.map (νι.app Q) ≫ νc.app (ιL.obj Q) ≫ ΨP.map (Sq.hom.app Q) =
+      Sq'.hom.app (ΨF.obj Q) ≫ ΔL'.map (νd.app Q) ≫ νΔ.app (dL.obj Q) := by
+    simpa using congr_app hcomp₀ Q
   have step2 (N : DC) : dL'.map (αι.app N) ≫ νd.app (ιU.obj N) ≫ ΨX.map (BC.inv.app N) =
       BC'.inv.app (ΨC.obj N) ≫ ΔU'.map (νc.app N) ≫ αΔ.app (cL.obj N) := by
     rw [← cancel_epi (BC'.hom.app (ΨC.obj N)), reassoc_of% (baseChange_exchange_comm (hBC := hBC)
