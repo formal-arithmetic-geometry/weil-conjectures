@@ -6,32 +6,31 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyExchange
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 
 /-!
 
 # Homology sheaves of the pushforward of Weil objects along a finite morphism
 
-Let `f : X ⟶ Y` be a finite morphism over `Spec k` with automorphisms `e_X`, `e_Y` such that
-`e_X ≫ f = f ≫ e_Y`. The pushforward `f_*` of module objects is exact
-(`ProEtale.CondensedRing.preservesFiniteColimits_lowerStar_of_isFinite`), so the derived
-pushforward `Rf_*` commutes with the homology sheaves: `Hⁿ(Rf_* K) ≅ f_* Hⁿ(K)`
-(`Functor.rightDerivedFunctorHomologyFunctorIso`). On the homology sheaves, the
-derived base-change morphism of the Frobenius square is the base-change morphism of module objects
-(`CategoryTheory.Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction`), so this
-isomorphism is compatible with the Weil structures: for a Weil object `K` for `e_X`,
-`Hⁿ(Rf_*^Weil K) ≅ f_* Hⁿ(K)` as Weil sheaves for `e_Y`
-(`ProEtale.CondensedRing.nonempty_homologyFunctor_weilLowerStar_iso`, in
-`WeilConjectures.TraceFormula.HomologyWeilLowerShriek`).
-
-This file provides the generic transport statement
-(`CategoryTheory.Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_liftComparison_iso`), stated as a
-natural isomorphism of functors: an isomorphism of functors is cheap to check against the concrete
-Weil functors, whereas the corresponding check on objects unfolds the sheaf categories.
+Let `f : X ⟶ Y` be a finite morphism with automorphisms `e_X`, `e_Y` such that
+`e_X ≫ f = f ≫ e_Y`. For a Weil object `K` for `e_X`, the homology sheaves of the derived
+pushforward `Rf_*^Weil K` are the pushforwards of the homology sheaves of `K`, as Weil sheaves
+for `e_Y` (`ProEtale.CondensedRing.nonempty_homologyFunctor_weilLowerStar_iso`):
+```
+Hʲ(Rf_*^Weil K) ≅ f_* Hʲ(K).
+```
+The pushforward of module objects along a finite morphism is exact
+(`ProEtale.CondensedRing.preservesFiniteColimits_lowerStar_of_isFinite`), so `Rf_*` commutes
+with homology (`Functor.rightDerivedFunctorHomologyFunctorIso`). The Frobenius structures agree:
+on homology, the derived base-change morphism of the Frobenius square is the base-change morphism
+of module objects (`Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction`), and the
+base-change morphism on bounded constructible complexes is the restriction of the derived one on
+the ambient derived categories (`Adjunction.map_exchangeRight_app_of_comm`). The two are
+assembled by `Endofunctor.IsoAlgebra.mapOfNatIsoHomologyExchangeIso`.
 
 -/
 
@@ -39,380 +38,142 @@ Weil functors, whereas the corresponding check on objects unfolds the sheaf cate
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Endofunctor
+open CategoryTheory Endofunctor
 
-open scoped CategoryTheory.Obj CategoryTheory.Functor
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-/-! ### Squares of left derived functors of exact functors -/
-
-namespace CategoryTheory.Functor
-
-variable {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
-  [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
-  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory D₁] [HasDerivedCategory D₂]
-  [MonoidalCategory C₁] [MonoidalPreadditive C₁] [HasCountableCoproducts C₁]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C₁), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₁), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₁), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ C₁] [HasExactColimitsOfShape ℤ C₁]
-  [∀ (X : C₁), PreservesColimitsOfShape ℤ ((curriedTensor C₁).obj X)]
-  [∀ (X : C₁), PreservesColimitsOfShape ℤ ((curriedTensor C₁).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution C₁]
-  [MonoidalCategory C₂] [MonoidalPreadditive C₂] [HasCountableCoproducts C₂]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C₂), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₂), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₂), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ C₂] [HasExactColimitsOfShape ℤ C₂]
-  [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).obj X)]
-  [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution C₂]
-  [MonoidalCategory D₁] [MonoidalPreadditive D₁] [HasCountableCoproducts D₁]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D₁), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ D₁), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ D₁), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ D₁] [HasExactColimitsOfShape ℤ D₁]
-  [∀ (X : D₁), PreservesColimitsOfShape ℤ ((curriedTensor D₁).obj X)]
-  [∀ (X : D₁), PreservesColimitsOfShape ℤ ((curriedTensor D₁).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution D₁]
-  {u : C₁ ⥤ C₂} {f₂ : C₂ ⥤ D₂} {f₁ : C₁ ⥤ D₁} {v : D₁ ⥤ D₂} {W₁ W₂ : C₁ ⥤ D₂}
-  [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
-  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
-  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
-  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
-  [W₁.Additive] [PreservesFiniteLimits W₁] [PreservesFiniteColimits W₁]
-  [W₂.Additive] [PreservesFiniteLimits W₂] [PreservesFiniteColimits W₂]
-
-/-- The isomorphism `Lu ⋙ Lf₂ ≅ Lf₁ ⋙ Lv` of total left derived functors of exact functors
-induced by isomorphisms `c₁ : W₁ ≅ u ⋙ f₂`, `c₂ : W₂ ≅ f₁ ⋙ v` and an equation `W₁ = W₂`,
-through the composition isomorphisms `Functor.leftDerivedFunctorCompIso`. -/
-noncomputable def leftDerivedFunctorSquareIso (c₁ : W₁ ≅ u ⋙ f₂) (h : W₁ = W₂)
-    (c₂ : W₂ ≅ f₁ ⋙ v) :
-    u.leftDerivedFunctor ⋙ f₂.leftDerivedFunctor ≅ f₁.leftDerivedFunctor ⋙ v.leftDerivedFunctor :=
-  (W₁.leftDerivedFunctorNatIso c₁ ≪≫ u.leftDerivedFunctorCompIso f₂).symm ≪≫
-    W₁.leftDerivedFunctorNatIso (eqToIso h) ≪≫
-      (W₂.leftDerivedFunctorNatIso c₂ ≪≫ f₁.leftDerivedFunctorCompIso v)
-
-/-- Through the identifications of the total left derived functors of exact functors with the
-functors they induce on derived categories, `leftDerivedFunctorSquareIso c₁ h c₂` is the
-isomorphism `D(u) ⋙ D(f₂) ≅ D(f₁) ⋙ D(v)` induced by `c₁⁻¹ ≫ h ≫ c₂`. -/
-lemma leftDerivedFunctorSquareIso_hom_app (c₁ : W₁ ≅ u ⋙ f₂) (h : W₁ = W₂)
-    (c₂ : W₂ ≅ f₁ ⋙ v) (K : DerivedCategory C₁) :
-    f₂.mapDerivedCategory.map (u.leftDerivedFunctorIsoMapDerivedCategory.inv.app K) ≫
-        f₂.leftDerivedFunctorIsoMapDerivedCategory.inv.app (u.leftDerivedFunctor.obj K) ≫
-          (leftDerivedFunctorSquareIso c₁ h c₂).hom.app K =
-      (mapDerivedCategorySquareIso (c₁.symm ≪≫ eqToIso h ≪≫ c₂)).hom.app K ≫
-        v.mapDerivedCategory.map (f₁.leftDerivedFunctorIsoMapDerivedCategory.inv.app K) ≫
-          v.leftDerivedFunctorIsoMapDerivedCategory.inv.app (f₁.leftDerivedFunctor.obj K) := by
-  simp [leftDerivedFunctorSquareIso, leftDerivedFunctorNatIso, leftDerivedFunctorCompIso,
-    mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_symm]
-
-/-- The components of `leftDerivedFunctorSquareIso`. -/
-lemma leftDerivedFunctorSquareIso_hom_app_eq (c₁ : W₁ ≅ u ⋙ f₂) (h : W₁ = W₂)
-    (c₂ : W₂ ≅ f₁ ⋙ v) (K : DerivedCategory C₁) :
-    (leftDerivedFunctorSquareIso c₁ h c₂).hom.app K =
-      (W₁.leftDerivedFunctorNatIso c₁ ≪≫ u.leftDerivedFunctorCompIso f₂).inv.app K ≫
-        eqToHom (by subst h; rfl) ≫
-          (W₂.leftDerivedFunctorNatIso c₂ ≪≫ f₁.leftDerivedFunctorCompIso v).hom.app K := by
-  rw [leftDerivedFunctorSquareIso, Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app,
-    NatTrans.comp_app, Iso.symm_hom, leftDerivedFunctorNatIso_eqToIso_hom_app]
-
-end CategoryTheory.Functor
-
-/-! ### Transport of algebras along functors commuting with the structures -/
-
-namespace CategoryTheory.Endofunctor.IsoAlgebra
-
-variable {𝒟X 𝒟Y 𝒜X 𝒜Y : Type*} {_ : Category 𝒟X} {_ : Category 𝒟Y} {_ : Category 𝒜X}
-  {_ : Category 𝒜Y}
-  {LX : 𝒟X ⥤ 𝒟X} {LY : 𝒟Y ⥤ 𝒟Y} {PX : 𝒜X ⥤ 𝒜X} {PY : 𝒜Y ⥤ 𝒜Y} {R : 𝒟X ⥤ 𝒟Y}
-  {S : 𝒜X ⥤ 𝒜Y} {HX : 𝒟X ⥤ 𝒜X} {HY : 𝒟Y ⥤ 𝒜Y}
-
-/-- Let `R` and `S` transport algebras along `b` and `bc`, and `H_X`, `H_Y` along `θ_X`, `θ_Y`.
-An isomorphism `ψ : R ⋙ H_Y ≅ H_X ⋙ S` compatible with these commutation isomorphisms induces a
-natural isomorphism `R ⋙ H_Y ≅ H_X ⋙ S` of the transports of algebras. -/
-theorem nonempty_mapOfNatIso_comp_mapOfNatIso_iso (b : R ⋙ LY ≅ LX ⋙ R)
-    (bc : S ⋙ PY ≅ PX ⋙ S) (θX : HX ⋙ PX ≅ LX ⋙ HX) (θY : HY ⋙ PY ≅ LY ⋙ HY)
-    (ψ : R ⋙ HY ≅ HX ⋙ S)
-    (h : ∀ K, PY.map (ψ.hom.app K) ≫ bc.hom.app (HX.obj K) ≫ S.map (θX.hom.app K) =
-      θY.hom.app (R.obj K) ≫ HY.map (b.hom.app K) ≫ ψ.hom.app (LX.obj K)) :
-    Nonempty (mapOfNatIso b ⋙ mapOfNatIso θY ≅ mapOfNatIso θX ⋙ mapOfNatIso bc) := by
-  refine ⟨NatIso.ofComponents (fun K ↦ isoMk (ψ.app K.carrier) ?_) fun φ ↦ ?_⟩
-  · change PY.map (ψ.hom.app K.carrier) ≫
-        (bc.hom.app (HX.obj K.carrier) ≫ S.map (θX.hom.app K.carrier ≫ HX.map K.str.hom)) =
-      (θY.hom.app (R.obj K.carrier) ≫ HY.map (b.hom.app K.carrier ≫ R.map K.str.hom)) ≫
-        ψ.hom.app K.carrier
-    have nat := ψ.hom.naturality K.str.hom
-    simp only [Functor.comp_map] at nat
-    simp only [Functor.map_comp, Category.assoc]
-    rw [reassoc_of% (h K.carrier), nat]
-  · ext
-    exact ψ.hom.naturality φ.hom.f
-
-end CategoryTheory.Endofunctor.IsoAlgebra
-
-namespace CategoryTheory.Adjunction
-
-variable {𝒜 ℬ 𝒜₂ ℬ₂ : Type*} [Category 𝒜] [Category ℬ] [Category 𝒜₂] [Category ℬ₂]
-  {P : ObjectProperty ℬ} {Q : ObjectProperty 𝒜} {P₂ : ObjectProperty ℬ₂}
-  {Q₂ : ObjectProperty 𝒜₂} {L' : ℬ ⥤ 𝒜} {R' : 𝒜 ⥤ ℬ} {L₂' : ℬ₂ ⥤ 𝒜₂} {R₂' : 𝒜₂ ⥤ ℬ₂}
-  (adj : L' ⊣ R') (adj₂ : L₂' ⊣ R₂') {G' : ℬ ⥤ ℬ₂} {H' : 𝒜 ⥤ 𝒜₂} (θ' : G' ⋙ L₂' ≅ L' ⋙ H')
-  {hL : ∀ X : P.FullSubcategory, Q ((P.ι ⋙ L').obj X)}
-  {hR : ∀ X : Q.FullSubcategory, P ((Q.ι ⋙ R').obj X)}
-  {hL₂ : ∀ X : P₂.FullSubcategory, Q₂ ((P₂.ι ⋙ L₂').obj X)}
-  {hR₂ : ∀ X : Q₂.FullSubcategory, P₂ ((Q₂.ι ⋙ R₂').obj X)}
-  {hG : ∀ X : P.FullSubcategory, P₂ ((P.ι ⋙ G').obj X)}
-  {hH : ∀ X : Q.FullSubcategory, Q₂ ((Q.ι ⋙ H').obj X)}
-
-/-- **The exchange morphism of restricted adjunctions**: for adjunctions restricted to full
-subcategories along lifts of the functors, and a comparison `θ` of the lifts lifting `θ'`, the
-exchange morphism of `θ` is that of `θ'`. -/
-lemma exchangeRight_restrictFullyFaithful_app_hom
-    (θ : P₂.lift (P.ι ⋙ G') hG ⋙ Q₂.lift (P₂.ι ⋙ L₂') hL₂ ≅
-      Q.lift (P.ι ⋙ L') hL ⋙ Q₂.lift (Q.ι ⋙ H') hH)
-    (hθ : ∀ K, (θ.hom.app K).hom = θ'.hom.app K.obj) (K : Q.FullSubcategory) :
-    ((exchangeRight
-        (adj.restrictFullyFaithful P.fullyFaithfulι Q.fullyFaithfulι
-          (Q.liftCompιIso _ hL).symm (P.liftCompιIso _ hR).symm)
-        (adj₂.restrictFullyFaithful P₂.fullyFaithfulι Q₂.fullyFaithfulι
-          (Q₂.liftCompιIso _ hL₂).symm (P₂.liftCompιIso _ hR₂).symm) θ).app K).hom =
-      (exchangeRight adj adj₂ θ').app K.obj := by
-  have h := map_exchangeRight_app_of_comm
-    (adj.restrictFullyFaithful P.fullyFaithfulι Q.fullyFaithfulι
-      (Q.liftCompιIso _ hL).symm (P.liftCompιIso _ hR).symm)
-    (adj₂.restrictFullyFaithful P₂.fullyFaithfulι Q₂.fullyFaithfulι
-      (Q₂.liftCompιIso _ hL₂).symm (P₂.liftCompιIso _ hR₂).symm) θ adj adj₂ θ'
-    (Q.liftCompιIso _ hL).symm (P.liftCompιIso _ hR).symm (Q₂.liftCompιIso _ hL₂).symm
-    (P₂.liftCompιIso _ hR₂).symm (P₂.liftCompιIso _ hG).symm (Q₂.liftCompιIso _ hH).symm
-    (fun K ↦ map_restrictFullyFaithful_unit_app _ _ _ _ _ K)
-    (fun K ↦ by
-      rw [map_restrictFullyFaithful_counit_app]
-      simp only [ObjectProperty.liftCompιIso, Iso.symm_hom, Iso.symm_inv, Iso.refl_hom,
-        Iso.refl_inv, NatTrans.id_app]
-      simp)
-    (fun K ↦ by simpa [ObjectProperty.liftCompιIso] using hθ K) K
-  simpa [ObjectProperty.liftCompιIso] using h
-
-end CategoryTheory.Adjunction
-
-namespace CategoryTheory.ObjectProperty
-
-variable {C D : Type*} [Category C] [Category D] {P : ObjectProperty D} {F : C ⥤ D}
-  {hF : ∀ X, P (F.obj X)}
-
-@[simp]
-lemma liftCompιIso_hom_app (X : C) : (P.liftCompιIso F hF).hom.app X = 𝟙 _ :=
-  rfl
-
-@[simp]
-lemma liftCompιIso_inv_app (X : C) : (P.liftCompιIso F hF).inv.app X = 𝟙 _ :=
-  rfl
-
-end CategoryTheory.ObjectProperty
-
-namespace CategoryTheory.Endofunctor.IsoAlgebra
-
-section Pushforward
-
-variable {DX DY 𝒜X 𝒜Y : Type*} {_ : Category DX} {_ : Category DY} {_ : Category 𝒜X}
-  {_ : Category 𝒜Y}
-  {P : ObjectProperty DX} {Q : ObjectProperty DY}
-
-/-- The commutation `(ι ⋙ H) ⋙ v ≅ L ⋙ (ι ⋙ H)` of the restriction of a functor `H` to a full
-subcategory with an endofunctor `L` of the full subcategory lifting `L'`, from a commutation
-`θ : H ⋙ v ≅ L' ⋙ H` and the compatibility `c : L ⋙ ι ≅ ι ⋙ L'`. -/
-noncomputable def liftComparison {H : DX ⥤ 𝒜X} {v : 𝒜X ⥤ 𝒜X} {L' : DX ⥤ DX}
-    {L : P.FullSubcategory ⥤ P.FullSubcategory} (θ : H ⋙ v ≅ L' ⋙ H)
-    (c : L ⋙ P.ι ≅ P.ι ⋙ L') :
-    (P.ι ⋙ H) ⋙ v ≅ L ⋙ (P.ι ⋙ H) :=
-  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ θ ≪≫ (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight c.symm _ ≪≫ Functor.associator _ _ _
-
-/-- **Homology of the transport of algebras along a restricted right adjoint.** Let
-`adj_D : L_f ⊣ R_f` be an adjunction of categories `D_Y`, `D_X` restricting to full subcategories
-`Q`, `P`, with endofunctors `L_u`, `L_v` and a comparison `θ_D : L_u ⋙ L_f ≅ L_f ⋙ L_v`, all
-restricting to the full subcategories. Let `H_X`, `H_Y` be functors to categories with an
-adjunction `adj_U : f₁ ⊣ g`, endofunctors `u`, `v` and a comparison `β : u ⋙ f₁ ≅ f₁ ⋙ v`,
-commuting with the functors through `θ_u`, `θ_v` and `ψ_a`. If on `H` the exchange morphism of
-`θ_D` is that of `β` (`hA`), then transporting along the pushforward and then along `H_Y` is
-isomorphic to transporting along `H_X` and then along the pushforward, as functors on algebras for
-`L_v` on the full subcategory.
-
-The restricted functors, compatibilities, adjunction and base-change morphism are passed as
-variables with equations to their definitions, so that concrete instances can use their own
-definitions. -/
-theorem nonempty_mapOfNatIso_liftComparison_iso
-    {Lf : DY ⥤ DX} {Rf : DX ⥤ DY} (adjD : Lf ⊣ Rf) {Lu : DY ⥤ DY} {Lv : DX ⥤ DX}
-    (θD : Lu ⋙ Lf ≅ Lf ⋙ Lv) {HX : DX ⥤ 𝒜X} {HY : DY ⥤ 𝒜Y} {u : 𝒜Y ⥤ 𝒜Y} {v : 𝒜X ⥤ 𝒜X}
-    {f₁ : 𝒜Y ⥤ 𝒜X} {g : 𝒜X ⥤ 𝒜Y} (adjU : f₁ ⊣ g) (β : u ⋙ f₁ ≅ f₁ ⋙ v)
-    (θu : HY ⋙ u ≅ Lu ⋙ HY) (θv : HX ⋙ v ≅ Lv ⋙ HX) (ψa : HX ⋙ g ≅ Rf ⋙ HY)
-    (hA : ∀ K, u.map (ψa.hom.app K) ≫ θu.hom.app (Rf.obj K) ≫
-        HY.map ((Adjunction.exchangeRight adjD adjD θD).app K) =
-      (Adjunction.exchangeRight adjU adjU β).app (HX.obj K) ≫ g.map (θv.hom.app K) ≫
-        ψa.hom.app (Lv.obj K))
-    {LfB : Q.FullSubcategory ⥤ P.FullSubcategory} {RfB : P.FullSubcategory ⥤ Q.FullSubcategory}
-    {LuB : Q.FullSubcategory ⥤ Q.FullSubcategory} {LvB : P.FullSubcategory ⥤ P.FullSubcategory}
-    (cLf : LfB ⋙ P.ι ≅ Q.ι ⋙ Lf) (cRf : RfB ⋙ Q.ι ≅ P.ι ⋙ Rf) (cLu : LuB ⋙ Q.ι ≅ Q.ι ⋙ Lu)
-    (cLv : LvB ⋙ P.ι ≅ P.ι ⋙ Lv)
-    (hLf : ∀ K : Q.FullSubcategory, P ((Q.ι ⋙ Lf).obj K))
-    (hRf : ∀ K : P.FullSubcategory, Q ((P.ι ⋙ Rf).obj K))
-    (hLu : ∀ K : Q.FullSubcategory, Q ((Q.ι ⋙ Lu).obj K))
-    (hLv : ∀ K : P.FullSubcategory, P ((P.ι ⋙ Lv).obj K))
-    (eLf : LfB = P.lift (Q.ι ⋙ Lf) hLf) (eRf : RfB = Q.lift (P.ι ⋙ Rf) hRf)
-    (eLu : LuB = Q.lift (Q.ι ⋙ Lu) hLu) (eLv : LvB = P.lift (P.ι ⋙ Lv) hLv)
-    (ecLf : HEq cLf (P.liftCompιIso (Q.ι ⋙ Lf) hLf))
-    (ecRf : HEq cRf (Q.liftCompιIso (P.ι ⋙ Rf) hRf))
-    (ecLu : HEq cLu (Q.liftCompιIso (Q.ι ⋙ Lu) hLu))
-    (ecLv : HEq cLv (P.liftCompιIso (P.ι ⋙ Lv) hLv))
-    (adjB : LfB ⊣ RfB)
-    (eadjB : adjB = adjD.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι cLf.symm cRf.symm)
-    (θB : LuB ⋙ LfB ≅ LfB ⋙ LvB) (hθB : ∀ K, HEq (θB.hom.app K).hom (θD.hom.app K.obj))
-    (bB : RfB ⋙ LuB ⟶ LvB ⋙ RfB) [IsIso bB] (ebB : bB = Adjunction.exchangeRight adjB adjB θB)
-    (exU : g ⋙ u ≅ v ⋙ g) (eexU : exU.hom = Adjunction.exchangeRight adjU adjU β) :
-    Nonempty (mapOfNatIso (asIso bB) ⋙ mapOfNatIso (liftComparison θu cLu) ≅
-      mapOfNatIso (liftComparison θv cLv) ⋙ mapOfNatIso exU) := by
-  subst eLf eRf eLu eLv
-  obtain rfl := eq_of_heq ecLf
-  obtain rfl := eq_of_heq ecRf
-  obtain rfl := eq_of_heq ecLu
-  obtain rfl := eq_of_heq ecLv
-  subst eadjB ebB
-  refine nonempty_mapOfNatIso_comp_mapOfNatIso_iso (asIso _) exU _ _
-    ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (Q.liftCompιIso _ hRf) HY ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft P.ι ψa.symm ≪≫
-      (Functor.associator _ _ _).symm) (fun K ↦ ?_)
-  have hB := Adjunction.exchangeRight_restrictFullyFaithful_app_hom (hL := hLf) (hR := hRf)
-    (hL₂ := hLf) (hR₂ := hRf) (hG := hLu) (hH := hLv) adjD adjD θD θB
-    (fun K ↦ eq_of_heq (hθB K)) K
-  have h := hA K.obj
-  simp only [liftComparison, ObjectProperty.liftCompιIso_hom_app,
-    ObjectProperty.liftCompιIso_inv_app, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.map_id,
-    Category.id_comp, Category.comp_id, Functor.comp_obj, Functor.comp_map, asIso_hom,
-    eexU] at h ⊢
-  have h' : θu.hom.app (Rf.obj K.obj) ≫ HY.map ((Adjunction.exchangeRight adjD adjD θD).app K.obj) ≫
-      ψa.inv.app (Lv.obj K.obj) = u.map (ψa.inv.app K.obj) ≫
-        (Adjunction.exchangeRight adjU adjU β).app (HX.obj K.obj) ≫ g.map (θv.hom.app K.obj) := by
-    rw [← cancel_epi (u.map (ψa.hom.app K.obj)), ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-      Functor.map_id, Category.id_comp, reassoc_of% h]
-    simp
-  rw [ObjectProperty.ι_map, hB]
-  exact h'.symm
-
-end Pushforward
-
-end CategoryTheory.Endofunctor.IsoAlgebra
-
-namespace CategoryTheory.ObjectProperty.FullSubcategory
-
-/-- The underlying morphism of `eqToHom` in a full subcategory. -/
-lemma eqToHom_hom {C : Type*} [Category C] {P : ObjectProperty C} {X Y : P.FullSubcategory}
-    (h : X = Y) : (eqToHom h).hom = eqToHom (congrArg (·.obj) h) := by
-  subst h
-  rfl
-
-end CategoryTheory.ObjectProperty.FullSubcategory
-
-namespace AlgebraicGeometry
-
-/-- A morphism between schemes locally of finite type over a field is locally of finite
-presentation. -/
-lemma locallyOfFinitePresentation_left {k : Type*} [Field k] {X Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [LocallyOfFiniteType Y.hom] (f : X ⟶ Y) :
-    LocallyOfFinitePresentation f.left := by
-  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
-  have : LocallyOfFiniteType (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
-  have : LocallyOfFiniteType f.left := locallyOfFiniteType_of_comp f.left Y.hom
-  infer_instance
-
-namespace ProEtale.CondensedRing
+namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
+section SquareComparison
 
-/-! ### The base-change morphism on the ambient derived categories -/
-
-section BaseChange
-
-variable {X Y X' Y' : Over (Spec (.of k))}
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- The inverse of the composition isomorphism of the derived pullbacks on bounded constructible
-complexes, on the ambient derived category. -/
-lemma boundedConstructibleUpperStarComp_inv_app_hom {Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (a : X' ⟶ Y')
-    (b : Y' ⟶ Z) (K : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b).inv.app K).hom =
-      (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).inv.app K.obj := by
-  rw [← cancel_epi
-    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b).hom.app K).hom]
-  rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app,
-    boundedConstructibleUpperStarComp_hom_app_hom, Iso.hom_inv_id_app]
-  rfl
+/-- On the ambient derived category, the inverse of the composition isomorphism of the derived
+pullbacks on bounded constructible complexes is that of `leftDerivedUpperStarComp`. -/
+@[simp]
+lemma boundedConstructibleUpperStarComp_inv_app_hom (f : X ⟶ Y) (g : Y ⟶ Y')
+    (K : Dᵇc(Y'.left)⟦Λ⟧) :
+    ((boundedConstructibleUpperStarComp Λ ℓ f g).inv.app K).hom =
+      (leftDerivedUpperStarComp Λ f.left g.left).inv.app K.obj := by
+  simp [boundedConstructibleUpperStarComp, boundedConstructibleUpperStarCompatibility,
+    ObjectProperty.liftCompιIso]
+
+variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 set_option maxHeartbeats 1000000 in
--- synthesizing the instances of the derived categories of module objects is slow
-/-- The pullback comparison of a commutative square on the ambient derived categories: the
-comparison `Lg^* ⋙ Lf'^* ≅ Lf^* ⋙ Lg'^*` of the composition isomorphisms
-`leftDerivedUpperStarComp`. -/
-noncomputable def leftDerivedUpperStarSquareComparison (sq : CommSq g' f' f g) :
-    L((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ L((f'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
-      L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
-        L((g'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  Functor.leftDerivedFunctorSquareIso (upperStarComp (Profinite.padicAlgClRingObj ℓ) f'.left g.left)
-    (by rw [← Over.comp_left, ← sq.w, Over.comp_left])
-    (upperStarComp (Profinite.padicAlgClRingObj ℓ) g'.left f.left)
-
-set_option maxHeartbeats 3000000 in
--- the composite of the comparisons is checked against the ambient one by unfolding
-/-- The pullback comparison of a commutative square on bounded constructible complexes is
-`leftDerivedUpperStarSquareComparison` on the ambient derived categories. -/
+-- the instances of the general lemmas are found for each of the categories of module objects
+/-- On the ambient derived category, the pullback comparison of a commutative square on bounded
+constructible complexes is the isomorphism of total left derived functors induced by the
+comparison `upperStarSquareComparison` of the pullbacks of module objects. -/
 lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f' f g)
-    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-        K).hom = (leftDerivedUpperStarSquareComparison ℓ sq).hom.app K.obj := by
-  rw [boundedConstructiblePullbackSquareComparison_hom_app, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.eqToHom_hom,
-    boundedConstructibleUpperStarComp_inv_app_hom, boundedConstructibleUpperStarComp_hom_app_hom,
-    leftDerivedUpperStarSquareComparison, Functor.leftDerivedFunctorSquareIso_hom_app_eq]
-  rfl
+    (K : Dᵇc(Y.left)⟦Λ⟧) :
+    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
+      (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
+        ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app K.obj := by
+  have h1 := boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K
+  have h2 := Adjunction.leftDerivedFunctorSquareIso_hom_app_of_eq
+    (upperStarSquareComparison Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)
+    (upperStarComp Λ f'.left g.left) (upperStarComp Λ g'.left f.left)
+    (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
+  rw [h1, h2, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
+  simp only [boundedConstructibleUpperStarComp_inv_app_hom,
+    boundedConstructibleUpperStarComp_hom_app_hom]
+  have e : ∀ {A B : Dᵇc(X'.left)⟦Λ⟧} (h : A = B),
+      (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
+    rintro _ _ rfl
+    rfl
+  simp only [e, leftDerivedUpperStarComp, Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
+    Category.assoc]
 
-end BaseChange
+set_option maxHeartbeats 1000000 in
+-- the instances of the general lemmas are found for each of the categories of module objects
+/-- `boundedConstructiblePullbackSquareComparison_hom_app_hom` through the compatibilities of the
+restricted derived pullbacks with the inclusions. -/
+lemma map_boundedConstructiblePullbackSquareComparison_hom_app (sq : CommSq g' f' f g)
+    (K : Dᵇc(Y.left)⟦Λ⟧) :
+    L((f'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ g).inv.app K) ≫
+        (boundedConstructibleUpperStarCompatibility Λ ℓ f').inv.app
+          ((boundedConstructibleUpperStar Λ ℓ g).obj K) ≫
+        (boundedConstructible _).ι.map
+          ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K) =
+      (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
+          ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app ((boundedConstructible _).ι.obj K) ≫
+        L((g'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ f).inv.app K) ≫
+        (boundedConstructibleUpperStarCompatibility Λ ℓ g').inv.app
+          ((boundedConstructibleUpperStar Λ ℓ f).obj K) := by
+  simp only [boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+    Iso.refl_inv, NatTrans.id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.id_comp, Category.comp_id, Category.comp_id]
+  exact boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
 
-/-! ### Homology of the pushforward of Weil objects -/
+end SquareComparison
 
-section Homology
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
 
-variable {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+set_option maxHeartbeats 1000000 in
+-- the instances of the general lemmas are found for each of the categories of module objects
+/-- **Homology of the pushforward of Weil objects along a finite morphism**: for finite `f`, the
+Weil sheaf `Hʲ(Rf_*^Weil K)` for `e_Y` is the pushforward `f_* Hʲ(K)` of the Weil sheaf `Hʲ(K)`.
+The pushforward along a finite morphism is exact, so `Rf_*` commutes with homology, and on
+homology the derived base-change morphism of the Frobenius square is the base-change morphism
+of module objects. -/
+theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
+    (K : WeilBoundedConstructible ℓ eX.hom) (j : ℤ) :
+    Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eY j).obj
+        ((weilLowerStar ℓ eX eY f hf).obj K) ≅
+      (weilSheafLowerStar ℓ eX eY hf).obj
+        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) := by
+  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have : LocallyOfFinitePresentation f.left :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance
+  have := preservesFiniteColimits_lowerStar_of_isFinite (Profinite.padicAlgClRingObj ℓ) f.left
+  have : IsIso (Adjunction.exchangeRight
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf))) :=
+    isIso_lowerStarBaseChange_of_isIso _ _
+  exact Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_obj_iso_of_restrict
+    (cX := boundedConstructibleUpperStarCompatibility _ ℓ eX.hom)
+    (cY := boundedConstructibleUpperStarCompatibility _ ℓ eY.hom)
+    (μX := (eX.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
+    (μY := (eY.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
+    (cR := boundedConstructibleLowerStarCompatibility _ ℓ f)
+    (ρ := (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.rightDerivedFunctorHomologyFunctorIso j)
+    (cF := boundedConstructibleUpperStarCompatibility _ ℓ f)
+    (θD := Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+      (Profinite.padicAlgClRingObj ℓ) (commSq_left_of_comp_eq eX eY hf)))
+    (θK := boundedConstructiblePullbackSquareComparison _ ℓ (CommSq.mk hf))
+    (B' := asIso (weilLowerStarComparison ℓ eX eY f hf))
+    (b := weilSheafLowerStarComparison ℓ eX eY hf)
+    (bc := Adjunction.exchangeRight
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf)))
+    (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).derivedAdjunction
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (map_boundedConstructiblePullbackSquareComparison_hom_app _ ℓ (CommSq.mk hf))
+    (boundedConstructibleBaseChange_eq_exchangeRight _ ℓ (CommSq.mk hf))
+    ((weilSheafLowerStarComparison_hom ℓ eX eY hf).trans (lowerStarBaseChange_eq _ _))
+    (fun M ↦
+      Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction_leftDerivedFunctorSquareIso
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+      (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (commSq_left_of_comp_eq eX eY hf)) j M)
+    _ _ _ _ K _ _ _ _ rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
 
-/-- The homology sheaf functor of Weil objects is the transport of algebras along the restriction
-to bounded constructible complexes of the commutation of the derived pullback with homology. -/
-lemma WeilBoundedConstructible.homologyFunctor_eq_mapOfNatIso_liftComparison (e : X ≅ X)
-    (n : ℤ) :
-    WeilBoundedConstructible.homologyFunctor ℓ e n =
-      IsoAlgebra.mapOfNatIso (IsoAlgebra.liftComparison
-        ((e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso n)
-        (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)) :=
-  rfl
-
-variable (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-
-/-- `weilLowerStar` as a transport of algebras. -/
-lemma weilLowerStar_eq_mapOfNatIso :
-    weilLowerStar ℓ eX eY f hf =
-      IsoAlgebra.mapOfNatIso (asIso (weilLowerStarComparison ℓ eX eY f hf)) :=
-  rfl
-
-end Homology
-
-end ProEtale.CondensedRing
-
-end AlgebraicGeometry
+end AlgebraicGeometry.ProEtale.CondensedRing

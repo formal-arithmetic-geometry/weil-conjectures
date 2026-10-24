@@ -224,6 +224,9 @@ lemma WeilSheaf.powSuccStalkFunctor_eq (n : ℕ) (x : Spec (.of (AlgebraicClosur
           upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
         (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
           ((geometricFrobeniusField k).powSucc n).hom) eW n x hx :=
+  by
+  rw [WeilSheaf.powSuccStalkFunctor, WeilSheaf.stalkFunctor, weilStalkComparison,
+    upperStarEqToIso_eq_eqToIso]
   rfl
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
