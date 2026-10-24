@@ -10,33 +10,32 @@ public import WeilConjectures.TraceFormula.TraceClass
 
 /-!
 
-# Additivity of trace classes along the curve pieces
+# Correspondences with another coefficient
 
-Let `(K, φ)` be a Weil object on `X` for `Φ`, `m ≥ 1`, `x` a rational point fixed by `Φ_m` and
-`j : U ⟶ X` the open complement of `x`. The open–closed triangle
-`K^U = j_! Lj^* K ⟶ K ⟶ K^Z = Rx_* Lx^* K ⟶` carries the coefficient maps `u^U`, `φ_m`, `u^Z` of
-the graph correspondence `c_m = (𝟙, Φ_m)` (blueprint `d-curve-pieces`), and the trace classes are
-additive (blueprint `prop-trf-trace-class-additivity`, item 2, the Frobenius case of
-`lem-trf-trace-triangle-compatibility`):
-```
-Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U),
-```
-and so are the local terms. The proof in the blueprint is Varshavsky's filtered argument
-(Prop. 1.5.10, after SGA 5, III 4.13): the trace map lifts to the filtered derived category, and
-the trace of a filtered coefficient map is the sum of the traces of its graded pieces; it is not
-a consequence of the three squares of the triangle commuting.
+Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence. The same support carries
+correspondences with any other coefficient object `K'` and coefficient map
+`u' : Lc₂^* K' ⟶ Rc₁^! K'` (`ProEtale.CondensedRing.Correspondence.withCoeff`), with the same
+fixed locus; this is how the coefficient maps `u^U`, `φ_m`, `u^Z` of the open–closed triangle
+`K^U = j_! Lj^* K ⟶ K ⟶ K^Z = Rx_* Lx^* K ⟶` of a fixed point of the Frobenius graph
+(blueprint `d-curve-pieces`) are compared. Restriction to an open subscheme and local terms are
+additive in the Borel–Moore section.
+
+The additivity of local terms along the curve pieces at an isolated rational fixed point of the
+model Frobenius (blueprint `prop-trf-trace-class-additivity`, item 2) is
+`ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_add`, in
+`WeilConjectures.TraceFormula.FrobeniusLocalTerm`; it is deduced there from Varshavsky's theorem
+for contracting correspondences rather than from additivity of the trace classes themselves.
 
 ## Main definitions
 
 - `ProEtale.CondensedRing.Correspondence.withCoeff`: the correspondence with the same support and
   another coefficient object and map.
+- `ProEtale.CondensedRing.Correspondence.FixedLocus.traceClassWithCoeff`: its trace class on the
+  fixed locus of `c`.
 
 ## Main statements
 
-- `ProEtale.CondensedRing.WeilBoundedConstructible.traceClass_graph_eq_add`: additivity of the
-  trace classes along the curve pieces.
-- `ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_add`:
-  additivity of the local terms.
+- `ProEtale.CondensedRing.BorelMooreSection.localTerm_add`: local terms are additive.
 
 -/
 
@@ -116,60 +115,5 @@ noncomputable def FixedLocus.traceClassWithCoeff (F : c.FixedLocus)
   (c.withCoeff K' u').traceClass (F.withCoeff K' u')
 
 end Correspondence
-
-namespace WeilBoundedConstructible
-
-variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.of k))}
-  [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
-  [IsOpenImmersion j.left]
-
-/-- The graph correspondence `(𝟙, Φ_m)` with the closed curve piece `K^Z = Rx_* Lx^* K` and its
-coefficient map `u^Z` (blueprint `d-curve-pieces`). -/
-noncomputable abbrev closedPieceGraph (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) : Correspondence ℓ (K.closedPiece x) :=
-  (K.graph m).withCoeff (K.closedPiece x) (K.closedPieceCoeff m x hx)
-
-/-- The graph correspondence `(𝟙, Φ_m)` with the open curve piece `K^U = j_! Lj^* K` and its
-coefficient map `u^U` (blueprint `d-curve-pieces`). -/
-noncomputable abbrev openPieceGraph (m : ℕ) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) : Correspondence ℓ (K.openPiece j) :=
-  (K.graph m).withCoeff (K.openPiece j)
-    (K.openPieceCoeff j m sq ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _)
-
-/-- **Additivity of trace classes along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the
-Frobenius graph; `sk-i-additivity`): for a rational point `x` fixed by `Φ_m`, `m ≥ 1`, with
-open complement `j : U ⟶ X` such that `Φ_{m,U} ≫ j = j ≫ Φ_m` is cartesian, the trace class of
-the graph correspondence `(𝟙, Φ_m)` with coefficient `φ_m` is the sum of the trace classes with
-the coefficients `u^Z` of `K^Z` and `u^U` of `K^U`. -/
-theorem traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m))
-    (hcompl : IsCompl (Set.range j.left.base) (Set.range x.left.base))
-    (F : (K.graph m).FixedLocus) :
-    (K.graph m).traceClass F =
-      F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx) +
-        F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
-          (boundedConstructibleUpperShriekId ℓ X).inv.app _) :=
-  sorry
-
-/-- **Additivity of local terms along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2): for every open and closed subscheme `B` of the fixed
-locus, proper over `s`, `LT_B(φ_m) = LT_B(u^Z) + LT_B(u^U)`. -/
-theorem localTerm_traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m))
-    (hcompl : IsCompl (Set.range j.left.base) (Set.range x.left.base))
-    (F : (K.graph m).FixedLocus) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
-    [IsProper B.hom] (jB : B ⟶ F.F) [IsOpenImmersion jB.left] [IsClosedImmersion jB.left] :
-    ((K.graph m).traceClass F).localTerm jB =
-      (F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx)).localTerm jB +
-        (F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
-          (boundedConstructibleUpperShriekId ℓ X).inv.app _)).localTerm jB := by
-  exact (congrArg (fun α ↦ BorelMooreSection.localTerm jB α)
-    (K.traceClass_graph_eq_add j m hm x hx sq hcompl F)).trans
-    (BorelMooreSection.localTerm_add jB _ _)
-
-end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing

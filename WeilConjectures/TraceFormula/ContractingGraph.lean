@@ -166,15 +166,17 @@ theorem localTerm_traceClass_eq_integral_of_isContractingAt {c : Correspondence 
     restrict_traceClass_eq_pushforward_of_isContractingAt c F hc j e he hB]
   exact BorelMooreSection.integral_pushforward e _
 
-/-- The trace class of the diagonal correspondence of an endomorphism transported along an
-equality of objects is the trace class of the endomorphism. -/
-lemma traceClass_ofEnd_eqToHom {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
-    [QuasiCompact Y.hom] [IsSeparated Y.hom] {M N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (e : M = N) (f : N ⟶ N) :
-    (ofEnd M (eqToHom e ≫ f ≫ eqToHom e.symm)).traceClass (fixedLocusOfEnd _) =
-      (ofEnd N f).traceClass (fixedLocusOfEnd _) := by
-  subst e
+/-- The integral of the trace class of the diagonal correspondence of an endomorphism `f` of `M`
+which is conjugate, along an equality `M = N`, to an endomorphism `g` of a dualizable `N` is the
+trace of `g` (point normalization). -/
+lemma integral_traceClass_ofEnd_of_eq_eqToHom
+    {M N : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm)
+    [HasRightDual N] :
+    ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = trace g := by
+  subst e hfg
   rw [eqToHom_refl, Category.id_comp, Category.comp_id]
+  exact integral_traceClass_ofEnd g
 
 /-! ### Graph correspondences -/
 
@@ -184,7 +186,8 @@ lemma boundedConstructibleUpperStar_map_comp_eqToHom {P : Over (Spec (.of k))}
     (e : g = g') {M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : M ⟶ N) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map f ≫
         eqToHom (by rw [e]) =
-      eqToHom (by rw [e]) ≫ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map f := by
+      eqToHom (by rw [e]) ≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map f := by
   subst e
   simp
 
@@ -204,6 +207,7 @@ lemma boundedConstructibleUpperShriekAdjunction_id_homEquiv_comp
     boundedConstructibleUpperShriekAdjunction_id_counit_app, reassoc_of% hn,
     Iso.inv_hom_id_app_assoc]
 
+set_option backward.isDefEq.respectTransparency true in
 variable (K) in
 /-- **The restricted coefficient map of a graph is the stalk map**: for the graph correspondence
 `(𝟙, h)` of `v : Lh^* K ⟶ K`, contracting at the rational point `x`, the restricted coefficient
@@ -212,28 +216,39 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
     {x : RationalPoint X} (hc : (ofGraph K h v).IsContractingAt x) :
     contractingStalkMap hc =
-      eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
-          (Category.comp_id x : x ≫ (ofGraph K h v).c₁ = x)) ≫
+      eqToHom (congrArg
+          (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
+          (Category.comp_id x :
+            @CategoryStruct.comp _ _ (point k) (ofGraph K h v).C X x
+              (ofGraph K h v).c₁ = x)) ≫
         graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc) ≫
-        eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
-          (Category.comp_id x : x ≫ (ofGraph K h v).c₁ = x).symm) := by
+        eqToHom (congrArg
+          (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
+          (Category.comp_id x :
+            @CategoryStruct.comp _ _ (point k) (ofGraph K h v).C X x
+              (ofGraph K h v).c₁ = x).symm) := by
   have hx := comp_eq_of_isContractingAt_ofGraph hc
   have sq : IsPullback x (𝟙 (point k)) (𝟙 X) (x ≫ 𝟙 X) := hc.isPullback
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   unfold contractingStalkMap graphStalkMap
-  change eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
+  change eqToHom (congrArg
+          (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
         (show x ≫ 𝟙 X = x ≫ h by rw [hx, Category.comp_id])) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).hom.app K ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
         (v ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app K) ≫
       (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-        (𝟙 (point k))).homEquiv _ _
+        (𝟙 (point k))).homEquiv
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K))
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).obj K)
         ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app
             ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K) ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).map
             ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
               (𝟙 X)).counit.app K)) ≫
-      (boundedConstructibleUpperShriekId ℓ (point k)).hom.app _ = _
+      (boundedConstructibleUpperShriekId ℓ (point k)).hom.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).obj K) = _
   have hinv : (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
       sq)).inv.app ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
         (𝟙 X)).obj K) =
@@ -247,12 +262,14 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, eqToHom_trans_assoc, eqToHom_refl,
       Category.id_comp, ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
     rfl
-  rw [boundedConstructibleUpperShriekAdjunction_id_homEquiv_comp, hinv,
-    boundedConstructibleUpperShriekAdjunction_id_counit_app]
+  rw [boundedConstructibleUpperShriekAdjunction_id_homEquiv_comp]
+  rw [hinv]
+  rw [boundedConstructibleUpperShriekAdjunction_id_counit_app]
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
   have e₁ := ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).mapIso
     ((boundedConstructibleLowerShriekId ℓ X).app
-      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K))).inv_hom_id_assoc
+      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj
+        K))).inv_hom_id_assoc
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).map
       ((boundedConstructibleUpperShriekId ℓ X).hom.app K))
   have e₂ := ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).mapIso
@@ -264,6 +281,31 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   simp only [eqToHom_trans_assoc]
   dsimp only [Functor.id_obj]
   simp only [Category.comp_id]
+
+
+/-- **Local terms of contracting graph correspondences** (blueprint `lem-trf-local-term-locality`,
+item 1, for correspondences with exceptional leg `c₁ = 𝟙`; Varshavsky, Thm. 2.1.3): if the graph
+correspondence `(𝟙, h)` with coefficient map `v : Lh^* K ⟶ K` is contracting at the fixed
+rational point `x`, and `B` is an open and closed subscheme of the fixed locus, proper over `s`,
+with underlying set `{x}`, then the local term along `B` is the trace of the stalk map
+`v_x : K_x ⟶ K_x`. No invertibility of `v` is required.
+
+By Varshavsky's theorem the local term is the integral of the trace class of the restricted
+coefficient map `u_Z` (`localTerm_traceClass_eq_integral_of_isContractingAt`), which is the stalk
+map `v_x` (`contractingStalkMap_ofGraph`), and the trace class of an endomorphism of the point
+integrates to its trace (point normalization). -/
+theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
+    (F : (ofGraph K h v).FixedLocus) (x : RationalPoint X)
+    (hc : (ofGraph K h v).IsContractingAt x) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
+    [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
+    (hB : Set.range j.left.base =
+      {(F.liftPoint x hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
+    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
+    ((ofGraph K h v).traceClass F).localTerm j =
+      trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) := by
+  rw [localTerm_traceClass_eq_integral_of_isContractingAt F x hc j hB]
+  exact integral_traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)
 
 end Correspondence
 
