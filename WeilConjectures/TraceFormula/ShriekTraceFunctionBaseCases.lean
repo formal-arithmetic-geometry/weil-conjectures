@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
 public import WeilConjectures.TraceFormula.GenericQuotient
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionAffineLine
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
@@ -29,18 +30,20 @@ statement to three base cases, stated as separate inputs:
   finite étale. Then `Rf_! = f_*` and the stalk of `f_* K` at `ȳ` is `⊕_{x̄ ↦ ȳ} K_x̄`, on which
   the Frobenius permutes the summands; only the summands at points of degree `n + 1` contribute
   to the trace;
-- **curves** (`ProEtale.CondensedRing.shriekTraceFunctionAt_of_smoothOfRelativeDimension_one`):
-  `f` smooth of relative dimension one. By compactly supported base change to `ȳ` this is the
-  trace formula for a smooth curve over a finite field, deduced from the Lefschetz–Verdier
-  formula of the model-Frobenius setting (`WeilConjectures.TraceFormula.LefschetzVerdier`) and
-  the vanishing of the local terms of the Frobenius graph away from its fixed points
-  (`WeilConjectures.TraceFormula.LocalTermLocality`);
+- **the affine line** (`ProEtale.CondensedRing.shriekTraceFunctionAt_overProdMap_polyAffineProj`,
+  proved in `WeilConjectures.TraceFormula.ShriekTraceFunctionAffineLine`): the coordinate
+  projections `𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`. The relative affine line is open in the relative
+  projective line, whose geometric fibres are `ℙ¹_{k̄}`, where the trace formula is the
+  Lefschetz–Verdier formula for the Frobenius graph on a proper smooth curve. The case of a
+  general smooth morphism of relative dimension one
+  (`ProEtale.CondensedRing.shriekTraceFunctionAt_of_smoothOfRelativeDimension_one`) is a
+  consequence of the full compatibility (`WeilConjectures.TraceFormula.Statement`);
 - **closed immersions**
   (`ProEtale.CondensedRing.shriekTraceFunctionAt_of_isClosedImmersion`): `Ri_! = i_*`, whose
   stalk at `ȳ` is `K_ȳ` if `ȳ` lies on the closed subscheme and `0` otherwise.
 
 The closed-immersion case cannot be avoided: every morphism built from finite étale morphisms
-and smooth morphisms of relative dimension one by composition (`shriekTraceFunctionAt_comp`)
+and relative affine lines by composition (`shriekTraceFunctionAt_comp`)
 and open–closed dévissage of the source (`shriekTraceFunctionAt_of_isCompl`) satisfies
 `dim 𝒪_{X,x} ≥ dim 𝒪_{Y,f(x)}`, which fails for a closed point of the affine line.
 
@@ -56,14 +59,10 @@ along `Z ⟶ Y` by dévissage (`U = ∅ ⊔ Z`), and `Z ⟶ Y` factors as the ch
 Z ⟶ Z ×_k E ⟶ V ×_k E ⟶ 𝔸ᴺ_k ×_k E ⟶ 𝔸ᴺ⁻¹_k ×_k E ⟶ ⋯ ⟶ 𝔸⁰_k ×_k E ⟶ E ⟶ Y
 ```
 of the graph of `Z ⟶ E` (a closed immersion), `π ×_k E` (finite étale), a closed embedding of
-`V` into `𝔸ᴺ_k`, the coordinate projections (smooth of relative dimension one), an isomorphism,
+`V` into `𝔸ᴺ_k`, the coordinate projections (relative affine lines), an isomorphism,
 and the closed immersion of the fixed locus `E` of `e_Y^{m+1}`, through which `Z ⟶ Y` factors.
 The automorphisms of the intermediate schemes are the products of `e_Z`, the identity and `e_E`;
 they have finite order, so that `shriekTraceFunctionAt_comp` composes the base cases.
-
-## Sorried inputs
-
-- `ProEtale.CondensedRing.shriekTraceFunctionAt_of_smoothOfRelativeDimension_one`.
 
 The closed-immersion case is proved here from the dimension-zero case (for the identity of `X`)
 and compactly supported base change of Weil objects
@@ -176,21 +175,6 @@ theorem shriekTraceFunctionAt_of_isFinite_of_etale {X Y : Over (Spec (.of k))}
     [IsFinite f.left] [Etale f.left] (_he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
     ShriekTraceFunctionAt ℓ eX eY hf :=
   ShriekTraceFunctionAt.of_isFinite_of_etale ℓ eX eY hf
-
-/-- **The affine line**: the sheaf–function compatibility holds along the coordinate projection
-`𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`, the relative affine line over `B = 𝔸ʲ_k ×_k E`, for the
-automorphisms `𝟙 ×_k e_E`. This is the geometric base case: the relative affine line is the open
-complement of the section at infinity in the relative projective line `ℙ¹_B`, and over a point
-`ȳ` of `B` the compatibility along `ℙ¹_B ⟶ B` is the trace formula on the projective line, from
-the Lefschetz–Verdier formula for the Frobenius graph and the local terms at its fixed points
-(blueprint `thm-trf-coefficient-morphism-trace-formula`, the case of the affine line). -/
-theorem shriekTraceFunctionAt_overProdMap_polyAffineProj (j : ℕ) (E : Over (Spec (.of k)))
-    [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [IsSeparated E.hom] (eE : E ≅ E)
-    (he : ∃ m : ℕ, eE.powSucc m = Iso.refl E) :
-    ShriekTraceFunctionAt ℓ (overProdIso (Iso.refl (polyAffine k (j + 1))) eE)
-      (overProdIso (Iso.refl (polyAffine k j)) eE)
-      (overProdIso_refl_hom_comp_overProdMap (polyAffineProj k j) eE) :=
-  sorry
 
 /-- **Closed immersions**: the sheaf–function compatibility holds along a closed
 immersion `i : X ⟶ Y`. For a point `ȳ` of `Y` of degree `n + 1`: if `ȳ = x̄ ≫ i`, then
@@ -411,7 +395,7 @@ theorem shriekTraceFunctionGenericallyHolds : ShriekTraceFunctionGenericallyHold
   shriekTraceFunctionGenericallyHolds_of_baseCases ℓ k
     (fun _ _ _ _ _ _ _ _ eX eY _ hf _ _ he ↦
       shriekTraceFunctionAt_of_isFinite_of_etale ℓ k eX eY hf he)
-    (fun j E _ _ _ eE he ↦ shriekTraceFunctionAt_overProdMap_polyAffineProj ℓ k j E eE he)
+    (fun j E _ _ _ eE he ↦ shriekTraceFunctionAt_overProdMap_polyAffineProj ℓ j E eE he)
     (fun _ _ _ _ _ _ _ _ eX eY _ hf _ he ↦
       shriekTraceFunctionAt_of_isClosedImmersion ℓ k eX eY hf he)
 

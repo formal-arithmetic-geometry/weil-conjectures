@@ -274,7 +274,8 @@ theorem homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek
       (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
         (geometricFrobeniusField_powSucc_inv n)).2 y.2.2)).mapIso
       (nonempty_weilGeometricBaseChange_weilLowerShriek_iso ℓ (AlgebraicClosure k)
-        (eX.powSucc n) (eY.powSucc n) (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n) (n + 1) (K.powSucc ℓ n)).some)).trans ?_
+        (eX.powSucc n) (eY.powSucc n) (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)
+        (n + 1) (K.powSucc ℓ n)).some)).trans ?_
   exact WeilBoundedConstructible.trace_frobenius_congr
     (nonempty_weilStalk_weilLowerShriekOfFrobenius_iso ℓ
       (IsPullback.of_hasPullback
