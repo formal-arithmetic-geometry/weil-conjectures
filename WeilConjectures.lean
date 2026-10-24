@@ -5997,6 +5997,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferential
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineGeometricallyIrreducible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineInfinityMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineIrreducible
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineOver
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
@@ -12595,6 +12596,7 @@ public import WeilConjectures.TraceFormula.BaseChange.Basic
 public import WeilConjectures.TraceFormula.BaseChange.Coherence
 public import WeilConjectures.TraceFormula.BaseChange.Iterate
 public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
+public import WeilConjectures.TraceFormula.BaseChange.LowerShriek
 public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
 public import WeilConjectures.TraceFormula.BaseChange.Supertrace
 public import WeilConjectures.TraceFormula.BaseChange.WeilObject
