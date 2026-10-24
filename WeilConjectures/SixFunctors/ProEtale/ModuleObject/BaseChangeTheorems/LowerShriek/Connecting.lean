@@ -118,7 +118,7 @@ instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_unit
           (boundedConstructibleLowerStar Λ ℓ f) :=
     derivedUpperStarLowerStarAdjunction Λ f.left
   have : adj.CommShift ℤ :=
-    commShift_derivedUpperStarLowerStarAdjunction_rightDerivedFunctor Λ f.left
+    commShift_derivedUpperStarLowerStarAdjunction Λ f.left
   exact NatTrans.CommConnecting.restrictFullyFaithful_unit adj (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.fullyFaithfulι _)
 
@@ -133,7 +133,7 @@ instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_counit
           (boundedConstructibleLowerStar Λ ℓ f) :=
     derivedUpperStarLowerStarAdjunction Λ f.left
   have : adj.CommShift ℤ :=
-    commShift_derivedUpperStarLowerStarAdjunction_rightDerivedFunctor Λ f.left
+    commShift_derivedUpperStarLowerStarAdjunction Λ f.left
   exact NatTrans.CommConnecting.restrictFullyFaithful_counit adj (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.fullyFaithfulι _)
 
@@ -148,7 +148,8 @@ instance commConnecting_boundedConstructibleOpenImmersionLowerShriekUpperStarAdj
           (boundedConstructibleUpperStar Λ ℓ j) :=
     (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).ofNatIsoRight
       (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j.left).symm
-  have : adj.CommShift ℤ := commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left
+  have : adj.CommShift ℤ :=
+    commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction_ofNatIsoRight Λ j.left
   exact NatTrans.CommConnecting.restrictFullyFaithful_unit adj (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.fullyFaithfulι _)
 
@@ -163,7 +164,8 @@ instance commConnecting_boundedConstructibleOpenImmersionLowerShriekUpperStarAdj
           (boundedConstructibleUpperStar Λ ℓ j) :=
     (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).ofNatIsoRight
       (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j.left).symm
-  have : adj.CommShift ℤ := commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left
+  have : adj.CommShift ℤ :=
+    commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction_ofNatIsoRight Λ j.left
   exact NatTrans.CommConnecting.restrictFullyFaithful_counit adj (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.fullyFaithfulι _)
 

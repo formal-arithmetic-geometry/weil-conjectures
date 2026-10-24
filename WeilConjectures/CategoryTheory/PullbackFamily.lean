@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 
 /-!
@@ -338,56 +339,59 @@ theorem Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso (hθ : Pullback
 
 section Restriction
 
-variable {T : C} {E' : Over T → Type*} [∀ V, Category (E' V)] (ι : ∀ V : Over T, E' V ⥤ E V.left)
-  (hι : ∀ V : Over T, (ι V).FullyFaithful)
-  (L' : ∀ {V W : Over T}, (V ⟶ W) → E' W ⥤ E' V)
-  (κ : ∀ {V W : Over T} (f : V ⟶ W), L' f ⋙ ι V ≅ ι W ⋙ L f.left)
+variable {T : C} {Q : ObjectProperty (Over T)} {E' : Q.FullSubcategory → Type*}
+  [∀ V, Category (E' V)] (ι : ∀ V : Q.FullSubcategory, E' V ⥤ E V.obj.left)
+  (hι : ∀ V : Q.FullSubcategory, (ι V).FullyFaithful)
+  (L' : ∀ {V W : Q.FullSubcategory}, (V ⟶ W) → E' W ⥤ E' V)
+  (κ : ∀ {V W : Q.FullSubcategory} (f : V ⟶ W), L' f ⋙ ι V ≅ ι W ⋙ L f.hom.left)
 
 variable (Lc) in
 /-- The composition isomorphisms of a family of pullbacks lifted along fully faithful functors
-`ι V : E' V ⥤ E V.left`. -/
-noncomputable def liftedPullbackComp {X Y Z : Over T} (f : X ⟶ Y) (g : Y ⟶ Z) :
+`ι V : E' V ⥤ E V.obj.left`. -/
+noncomputable def liftedPullbackComp {X Y Z : Q.FullSubcategory} (f : X ⟶ Y) (g : Y ⟶ Z) :
     L' (f ≫ g) ≅ L' g ⋙ L' f :=
   ((hι X).whiskeringRight _).preimageIso
-    (κ (f ≫ g) ≪≫ Functor.isoWhiskerLeft _ (Lc f.left g.left) ≪≫ (Functor.associator _ _ _).symm ≪≫
+    (κ (f ≫ g) ≪≫ Functor.isoWhiskerLeft _ (Lc f.hom.left g.hom.left) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (κ g).symm _ ≪≫ Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (κ f).symm ≪≫ (Functor.associator _ _ _).symm)
 
 variable (θ) in
 /-- The comparisons of a pseudonatural family restricted along the functors `ι V`. -/
-noncomputable def liftedComparison {V W : Over T} (f : V ⟶ W) :
-    (ι W ⋙ H W.left) ⋙ P f.left ≅ L' f ⋙ (ι V ⋙ H V.left) :=
-  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (θ f.left) ≪≫
+noncomputable def liftedComparison {V W : Q.FullSubcategory} (f : V ⟶ W) :
+    (ι W ⋙ H W.obj.left) ⋙ P f.hom.left ≅ L' f ⋙ (ι V ⋙ H V.obj.left) :=
+  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (θ f.hom.left) ≪≫
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (κ f).symm _ ≪≫
     Functor.associator _ _ _
 
 /-- The restriction of a pseudonatural family along fully faithful functors is pseudonatural. -/
 theorem PullbackPseudonatural.lifted (hθ : PullbackPseudonatural c Lc θ) :
-    PullbackPseudonatural (C := Over T) (D := fun V ↦ D V.left) (E := E')
-      (P := fun {X Y : Over T} (f : X ⟶ Y) ↦ P f.left)
-      (fun {X Y Z : Over T} (f : X ⟶ Y) (g : Y ⟶ Z) ↦ c f.left g.left)
-      (fun {X Y Z : Over T} (f : X ⟶ Y) (g : Y ⟶ Z) ↦ liftedPullbackComp Lc ι hι L' κ f g)
-      (H := fun V ↦ ι V ⋙ H V.left) (liftedComparison θ ι L' κ) := by
+    PullbackPseudonatural (C := Q.FullSubcategory) (D := fun V ↦ D V.obj.left) (E := E')
+      (P := fun {X Y : Q.FullSubcategory} (f : X ⟶ Y) ↦ P f.hom.left)
+      (fun {X Y Z : Q.FullSubcategory} (f : X ⟶ Y) (g : Y ⟶ Z) ↦ c f.hom.left g.hom.left)
+      (fun {X Y Z : Q.FullSubcategory} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+        liftedPullbackComp Lc ι hι L' κ f g)
+      (H := fun V ↦ ι V ⋙ H V.obj.left) (liftedComparison θ ι L' κ) := by
   intro X Y Z f g
   ext K
   have hp : (ι X).map ((liftedPullbackComp Lc ι hι L' κ f g).hom.app K) =
-      (κ (f ≫ g)).hom.app K ≫ (Lc f.left g.left).hom.app ((ι Z).obj K) ≫
-        (L f.left).map ((κ g).inv.app K) ≫ (κ f).inv.app ((L' g).obj K) := by
+      (κ (f ≫ g)).hom.app K ≫ (Lc f.hom.left g.hom.left).hom.app ((ι Z).obj K) ≫
+        (L f.hom.left).map ((κ g).inv.app K) ≫ (κ f).inv.app ((L' g).obj K) := by
     have := congrArg (fun α ↦ α.app K)
       (((hι X).whiskeringRight (E' Z)).map_preimage
-        (κ (f ≫ g) ≪≫ Functor.isoWhiskerLeft _ (Lc f.left g.left) ≪≫
+        (κ (f ≫ g) ≪≫ Functor.isoWhiskerLeft _ (Lc f.hom.left g.hom.left) ≪≫
           (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (κ g).symm _ ≪≫
           Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (κ f).symm ≪≫
           (Functor.associator _ _ _).symm).hom)
     set_option linter.unnecessarySimpa false in simpa [liftedPullbackComp] using this
-  have h := hθ.hom_app f.left g.left ((ι Z).obj K)
-  have n₁ := (θ f.left).hom.naturality ((κ g).inv.app K)
+  have h := hθ.hom_app f.hom.left g.hom.left ((ι Z).obj K)
+  have n₁ := (θ f.hom.left).hom.naturality ((κ g).inv.app K)
   simp only [Functor.comp_map] at n₁
   simp only [liftedComparison, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp, Category.comp_id,
     Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc, hp, Iso.symm_hom]
-  rw [← Functor.map_comp_assoc (H X.left) ((κ (f ≫ g)).inv.app K), Iso.inv_hom_id_app,
+  rw [← Functor.map_comp_assoc (H X.obj.left) ((κ (f ≫ g)).inv.app K), Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% n₁, reassoc_of% h]
   rfl
 
