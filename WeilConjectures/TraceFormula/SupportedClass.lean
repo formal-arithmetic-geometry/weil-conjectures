@@ -15,7 +15,7 @@ Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)`. Its *supporte
 `ũ : Rc_! ℚ̄_ℓ,C ⟶ K ⊠ D_X K` (`ProEtale.CondensedRing.Correspondence.supportedClass`) is the
 class `[u] : Rc_! ℚ̄_ℓ,C ⟶ RHom(Lp₂^* K, Rp₁^! K)` of `u` (blueprint
 `lem-trf-correspondence-class`) read through the inverse of the Künneth–Verdier isomorphism
-`κ_{K,K}` (`ProEtale.CondensedRing.Correspondence.supportedClass_eq`, blueprint
+`κ_{K,K}` (`ProEtale.CondensedRing.Correspondence.supportedClass_eq_class_comp_inv`, blueprint
 `lem-trf-trace-source-exchange`, Step 0).
 
 The Künneth–Verdier map `κ_{M,N}` is natural in `M`
@@ -38,48 +38,6 @@ open CategoryTheory Limits MonoidalCategory MonoidalClosed
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace CategoryTheory.Verdier
-
-section Abstract
-
-variable {CX CP : Type*} [Category CX] [Category CP] [MonoidalCategory CX] [MonoidalCategory CP]
-  [BraidedCategory CP]
-
-/-- Abstract form of the naturality of the exceptional adjoint of the exceptional Künneth map:
-for `exA M = S(β) ≫ (pf M)⁻¹ ≫ g₁ ▷ M ≫ g₂ ▷ M ≫ g₃ ▷ M ≫ λ`, with `pf` natural in `M`,
-`exA M ≫ f = S (F f ▷ W) ≫ exA M'`. -/
-lemma exceptionalKunnethAdjoint_naturality_aux (S : CP ⥤ CX) (F : CX ⥤ CP) (W : CP)
-    (pf : ∀ M : CX, S.obj W ⊗ M ⟶ S.obj (W ⊗ F.obj M)) [∀ M, IsIso (pf M)]
-    (hpf : ∀ {M M' : CX} (f : M ⟶ M'), S.obj W ◁ f ≫ pf M' = pf M ≫ S.map (W ◁ F.map f))
-    {T₁ T₂ : CX} (g₁ : S.obj W ⟶ T₁) (g₂ : T₁ ⟶ T₂) (g₃ : T₂ ⟶ 𝟙_ CX) {M M' : CX}
-    (f : M ⟶ M') :
-    (S.map (β_ (F.obj M) W).hom ≫ inv (pf M) ≫ g₁ ▷ M ≫ g₂ ▷ M ≫ g₃ ▷ M ≫ (λ_ M).hom) ≫ f =
-      S.map (F.map f ▷ W) ≫ S.map (β_ (F.obj M') W).hom ≫ inv (pf M') ≫ g₁ ▷ M' ≫ g₂ ▷ M' ≫
-        g₃ ▷ M' ≫ (λ_ M').hom := by
-  have hinv : S.map (W ◁ F.map f) ≫ inv (pf M') = inv (pf M) ≫ S.obj W ◁ f := by
-    rw [IsIso.comp_inv_eq, Category.assoc, hpf, IsIso.inv_hom_id_assoc]
-  rw [← S.map_comp_assoc (F.map f ▷ W), BraidedCategory.braiding_naturality_left,
-    S.map_comp_assoc, reassoc_of% hinv]
-  simp only [Category.assoc, whisker_exchange_assoc, leftUnitor_naturality]
-
-omit [MonoidalCategory CX] in
-/-- Abstract form of the naturality of the Künneth–Verdier map `κ = curry (pairing)` in its
-first variable, from the naturality of the exceptional Künneth map `ex`. -/
-lemma kunnethVerdierMap_naturality_aux [MonoidalClosed CP] (F R : CX ⥤ CP) (A C T₁ T : CP)
-    (μ₁ : A ⊗ C ⟶ T₁) (ev₁ : T₁ ⟶ T) (ex : ∀ M : CX, F.obj M ⊗ T ⟶ R.obj M)
-    (hex : ∀ {M M' : CX} (f : M ⟶ M'), ex M ≫ R.map f = F.map f ▷ T ≫ ex M') {M M' : CX}
-    (f : M ⟶ M') :
-    curry ((α_ A (F.obj M) C).inv ≫ (β_ A (F.obj M)).hom ▷ C ≫ (α_ (F.obj M) A C).hom ≫
-        F.obj M ◁ μ₁ ≫ F.obj M ◁ ev₁ ≫ ex M) ≫ (ihom A).map (R.map f) =
-      F.map f ▷ C ≫ curry ((α_ A (F.obj M') C).inv ≫ (β_ A (F.obj M')).hom ▷ C ≫
-        (α_ (F.obj M') A C).hom ≫ F.obj M' ◁ μ₁ ≫ F.obj M' ◁ ev₁ ≫ ex M') := by
-  rw [← curry_natural_right, ← curry_natural_left]
-  refine congrArg (curry (A := A)) ?_
-  simp only [Category.assoc, hex]
-  rw [whisker_exchange_assoc, whisker_exchange_assoc, ← associator_naturality_left_assoc,
-    ← comp_whiskerRight_assoc, ← BraidedCategory.braiding_naturality_right,
-    comp_whiskerRight_assoc, associator_inv_naturality_middle_assoc]
-
-end Abstract
 
 section ClassAbstract
 
@@ -161,56 +119,6 @@ variable (ℓ) {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The exceptional adjoint of the exceptional Künneth map is natural in `M`. -/
-lemma exceptionalKunnethAdjoint_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (f : M ⟶ M') :
-    exceptionalKunnethAdjoint ℓ (Y := Y) M ≫ f =
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
-          ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷ _) ≫
-        exceptionalKunnethAdjoint ℓ M' :=
-  Verdier.exceptionalKunnethAdjoint_naturality_aux
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-    (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-    ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y))
-    (fun M ↦ ((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
-      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-        (dualizingComplex' ℓ Y))).app M)
-    (fun f ↦ boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ _ _ f)
-    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
-    ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)))
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv f
-
-/-- The exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp_X^! M` is natural in `M`. -/
-lemma exceptionalKunnethMap_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (f : M ⟶ M') :
-    exceptionalKunnethMap ℓ (Y := Y) M ≫
-        (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f =
-      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷ _) ≫
-        exceptionalKunnethMap ℓ M' := by
-  have h := (boundedConstructibleUpperShriekAdjunction _ ℓ
-    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_right
-    (exceptionalKunnethAdjoint ℓ (Y := Y) M) f
-  have h' := (boundedConstructibleUpperShriekAdjunction _ ℓ
-    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_left
-    ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷
-      (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y))
-    (exceptionalKunnethAdjoint ℓ (Y := Y) M')
-  rw [exceptionalKunnethAdjoint_naturality] at h
-  exact h.symm.trans h'
-
-/-- The Künneth–Verdier map `κ_{M,N}` is natural in `M`. -/
-lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (f : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    kunnethVerdierMap ℓ M N ≫
-        (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) =
-      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷ _) ≫
-        kunnethVerdierMap ℓ M' N :=
-  Verdier.kunnethVerdierMap_naturality_aux
-    (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-    (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)) _ _ _ _ _ _
-    (fun M ↦ exceptionalKunnethMap ℓ M) (fun f ↦ exceptionalKunnethMap_naturality ℓ f) f
-
 /-- The inverse of the Künneth–Verdier isomorphism is natural in `M`. -/
 lemma inv_kunnethVerdierMap_naturality_left
     {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : M ⟶ M')
@@ -219,7 +127,7 @@ lemma inv_kunnethVerdierMap_naturality_left
         inv (kunnethVerdierMap ℓ M' N) =
       inv (kunnethVerdierMap ℓ M N) ≫
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷ _) := by
-  rw [IsIso.comp_inv_eq, Category.assoc, ← kunnethVerdierMap_naturality_left,
+  rw [IsIso.comp_inv_eq, Category.assoc, kunnethVerdierMap_naturality_left,
     IsIso.inv_hom_id_assoc]
 
 end KunnethVerdier
@@ -252,7 +160,7 @@ noncomputable def «class» :
 
 /-- **The supported class is the class read through the Künneth–Verdier isomorphism** (blueprint
 `lem-trf-trace-source-exchange`, Step 0): `ũ = κ_{K,K}⁻¹ ∘ [u]`. -/
-theorem supportedClass_eq :
+theorem supportedClass_eq_class_comp_inv :
     c.supportedClass = c.class ≫ inv (kunnethVerdierMap ℓ K K) := by
   have h := Verdier.homEquiv_symm_curry'_comp_eq
     (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
@@ -354,7 +262,8 @@ theorem supportedClass_ofEnd (v : K ⟶ K) :
       (diagUnitClass ℓ (Correspondence.ofEnd K v).support_snd
           (Correspondence.ofEnd K v).support_fst.symm ≫ inv (kunnethVerdierMap ℓ K K)) ≫
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).map v ▷ _) :=
-  Verdier.comp_eq_comp_of_naturality (Correspondence.supportedClass_eq _) (class_ofEnd ℓ v)
+  Verdier.comp_eq_comp_of_naturality (Correspondence.supportedClass_eq_class_comp_inv _)
+    (class_ofEnd ℓ v)
     (inv_kunnethVerdierMap_naturality_left ℓ v K) rfl
 
 end Class
