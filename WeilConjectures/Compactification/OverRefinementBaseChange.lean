@@ -37,6 +37,14 @@ namespace OverRefinement
 
 variable {c c₁ : Compactification f.left}
 
+/-- The identity refinement of a compactification. -/
+@[simps]
+noncomputable def refl (c : Compactification f.left) : OverRefinement c c where
+  hom := 𝟙 c.overObj
+  hom_overG := Category.id_comp _
+  isPullback := IsPullback.of_horiz_isIso ⟨by simp⟩
+  isProper := inferInstanceAs (IsProper (𝟙 c.Z))
+
 /-- The square of underlying schemes of a refinement is cartesian. -/
 theorem isPullback_left (r : OverRefinement c c₁) :
     IsPullback (𝟙 X.left) c.i c₁.i r.hom.left :=

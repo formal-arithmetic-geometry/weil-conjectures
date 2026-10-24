@@ -100,6 +100,145 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq_base
     boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_hom_eq]
   rfl
 
+/-- **The compact-support exchange maps are compatible with the comparisons along refinements**:
+for refinements `r` of `d` by `c` (compactifications of `f`) and `r'` of `d'` by `c'`
+(compactifications of `f'`), compatible with the maps `hc : c'.Z ⟶ c.Z` and `hd : d'.Z ⟶ d.Z`,
+the exchange maps of `(c, c')` and `(d, d')` are intertwined by the comparisons
+`Rf_!^d ≅ Rf_!^c` and `Rf'_!^{d'} ≅ Rf'_!^{c'}`. -/
+theorem boundedConstructibleLowerShriekOfCompactificationBaseChange_refinementIso'
+    {c d : Compactification f.left} {c' d' : Compactification f'.left}
+    (r : Compactification.OverRefinement c d) (r' : Compactification.OverRefinement c' d')
+    (hc : c'.overObj ⟶ c.overObj) (hci : IsPullback g' c'.overI c.overI hc)
+    (hcp : IsPullback hc c'.overG c.overG g) (hd : d'.overObj ⟶ d.overObj)
+    (hdi : IsPullback g' d'.overI d.overI hd) (hdp : IsPullback hd d'.overG d.overG g)
+    (hcomm : hc ≫ r.hom = r'.hom ≫ hd)
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ r.isPullback)]
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ r'.isPullback)] :
+    Functor.whiskerRight (boundedConstructibleLowerShriekRefinementIso' Λ ℓ r.isPullback
+        r.hom_overG).hom (boundedConstructibleUpperStar Λ ℓ g) ≫
+      boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ c c' hc hci hcp =
+    boundedConstructibleLowerShriekOfCompactificationBaseChange Λ ℓ d d' hd hdi hdp ≫
+      Functor.whiskerLeft (boundedConstructibleUpperStar Λ ℓ g')
+        (boundedConstructibleLowerShriekRefinementIso' Λ ℓ r'.isPullback r'.hom_overG).hom := by
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism_id Λ ℓ r.isPullback
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism_id Λ ℓ r'.isPullback
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ hci
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism Λ ℓ hdi
+  rw [boundedConstructibleLowerShriekRefinementIso'_hom_eq,
+    boundedConstructibleLowerShriekRefinementIso'_hom_eq]
+  exact (𝔽).shriekBaseChange_refinementComparison (SepFinType.homMk c.overI)
+    (SepFinType.homMk c.overG) (SepFinType.homMk d.overI) (SepFinType.homMk d.overG)
+    (SepFinType.homMk c'.overI) (SepFinType.homMk c'.overG) (SepFinType.homMk d'.overI)
+    (SepFinType.homMk d'.overG) (SepFinType.homMk g') (SepFinType.homMk g)
+    (SepFinType.homMk r.hom) (SepFinType.homMk_comp_homMk (a := 𝟙 X) r.isPullback.w)
+    (ObjectProperty.hom_ext _ r.hom_overG) (SepFinType.homMk r'.hom)
+    (SepFinType.homMk_comp_homMk (a := 𝟙 X') r'.isPullback.w)
+    (ObjectProperty.hom_ext _ r'.hom_overG) (SepFinType.homMk hc)
+    (SepFinType.homMk_comp_homMk hci.w) (SepFinType.homMk_comp_homMk hcp.w)
+    (SepFinType.homMk hd) (SepFinType.homMk_comp_homMk hdi.w)
+    (SepFinType.homMk_comp_homMk hdp.w) (SepFinType.homMk_comp_homMk hcomm)
+
 end Compactification
+
+omit [IsFinitenessCoefficient ℓ Λ] [MonObj Λ] [IsCommMonObj Λ] [Fact ℓ.Prime] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] in
+/-- In a category, two squares through a common corner glued along isomorphisms. -/
+lemma _root_.CategoryTheory.Iso.comp_inv_comp_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
+    {A₁ A₂ D B₁ B₂ D' : 𝒜} (e₁ : A₁ ≅ D) (e₂ : A₂ ≅ D) (e₁' : B₁ ≅ D') (e₂' : B₂ ≅ D')
+    (s₁ : A₁ ⟶ B₁) (s₂ : A₂ ⟶ B₂) (s : D ⟶ D') (h₁ : e₁.hom ≫ s = s₁ ≫ e₁'.hom)
+    (h₂ : e₂.hom ≫ s = s₂ ≫ e₂'.hom) : e₁.hom ≫ e₂.inv ≫ s₂ = s₁ ≫ e₁'.hom ≫ e₂'.inv := by
+  have : e₂.inv ≫ s₂ = s ≫ e₂'.inv := by
+    rw [Iso.inv_comp_eq, reassoc_of% h₂, Iso.hom_inv_id, Category.comp_id]
+  rw [this, reassoc_of% h₁]
+
+/-! ### `ℚ̄_ℓ`-sheaves -/
+
+section PadicAlgCl
+
+omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom] in
+/-- The comparison of a compactification with itself is the identity. -/
+lemma boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl
+    (c : Compactification f.left) :
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c c = Iso.refl _ := by
+  have h := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ c c c
+  ext : 1
+  rw [← cancel_epi (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c c).hom]
+  simpa using congrArg Iso.hom h
+
+omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom] in
+/-- The comparisons of compactifications are compatible with inverses. -/
+lemma boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm
+    (c₁ c₂ : Compactification f.left) :
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂).symm =
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₂ c₁ := by
+  have h := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ c₁ c₂ c₁
+  rw [boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl] at h
+  ext : 1
+  rw [Iso.symm_hom, ← cancel_epi (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+    ℓ c₁ c₂).hom, Iso.hom_inv_id]
+  exact (congrArg Iso.hom h).symm
+
+variable (sq : IsPullback g' f' f g)
+
+/-- The compact-support exchange map of a compactification and its base change. -/
+local notation "𝔼" c => boundedConstructibleLowerShriekOfCompactificationBaseChange
+  (Profinite.padicAlgClRingObj ℓ) ℓ c (Compactification.ofIsPullback sq.overLeft c)
+  (Compactification.overBaseChangeFst c sq) (Compactification.overBaseChange_isPullback_i c sq)
+  (Compactification.overBaseChange_isPullback_g c sq)
+
+/-- The compact-support exchange maps of the base changes of two compactifications `c₁` and
+`c₂` of `f` are intertwined by the comparisons `Rf_!^{c₁} ≅ Rf_!^{c₂}` and
+`Rf'_!^{c₁'} ≅ Rf'_!^{c₂'}`. -/
+theorem boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl_iso'
+    (c₁ c₂ : Compactification f.left) :
+    Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁
+        c₂).hom (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫ (𝔼 c₂) =
+      (𝔼 c₁) ≫ Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ g') (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+          (c₁.ofIsPullback sq.overLeft) (c₂.ofIsPullback sq.overLeft)).hom := by
+  obtain ⟨d, ⟨r₁⟩, ⟨r₂⟩⟩ := Compactification.exists_overRefinement c₁ c₂
+  have := r₁.isProper
+  have := r₂.isProper
+  have := (r₁.ofIsPullback sq).isProper
+  have := (r₂.ofIsPullback sq).isProper
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    r₁.isPullback
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    r₂.isPullback
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    (r₁.ofIsPullback sq).isPullback
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    (r₂.ofIsPullback sq).isPullback
+  have h₁ := boundedConstructibleLowerShriekOfCompactificationBaseChange_refinementIso'
+    (Profinite.padicAlgClRingObj ℓ) ℓ r₁
+    (r₁.ofIsPullback sq) _ (d.overBaseChange_isPullback_i sq) (d.overBaseChange_isPullback_g sq)
+    _ (c₁.overBaseChange_isPullback_i sq) (c₁.overBaseChange_isPullback_g sq)
+    (Compactification.OverRefinement.ofIsPullback_hom_overBaseChangeFst sq r₁).symm
+  have h₂ := boundedConstructibleLowerShriekOfCompactificationBaseChange_refinementIso'
+    (Profinite.padicAlgClRingObj ℓ) ℓ r₂
+    (r₂.ofIsPullback sq) _ (d.overBaseChange_isPullback_i sq) (d.overBaseChange_isPullback_g sq)
+    _ (c₂.overBaseChange_isPullback_i sq) (c₂.overBaseChange_isPullback_g sq)
+    (Compactification.OverRefinement.ofIsPullback_hom_overBaseChangeFst sq r₂).symm
+  rw [← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq,
+    ← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq] at h₁ h₂
+  rw [← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ c₁ d c₂,
+    ← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+      (c₁.ofIsPullback sq.overLeft) (d.ofIsPullback sq.overLeft) (c₂.ofIsPullback sq.overLeft),
+    ← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm ℓ c₂ d,
+    ← boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm ℓ
+      (c₂.ofIsPullback sq.overLeft) (d.ofIsPullback sq.overLeft)]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.whiskerRight_comp, Functor.whiskerLeft_comp,
+    Category.assoc]
+  exact Iso.comp_inv_comp_eq_of_comm
+    (Functor.isoWhiskerRight (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ d) _)
+    (Functor.isoWhiskerRight (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₂ d) _)
+    (Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      (c₁.ofIsPullback sq.overLeft) (d.ofIsPullback sq.overLeft)))
+    (Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      (c₂.ofIsPullback sq.overLeft) (d.ofIsPullback sq.overLeft))) _ _ _ h₁ h₂
+
+end PadicAlgCl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
