@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.IntegralPointedClopenRefinement
 # Exactness of the direct image along an integral morphism
 
 For an integral morphism `f : X ⟶ Y` the pushforward `f_*` on étale sheaves of `Λ`-modules is
-exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`), and it
-detects the zero sheaf (`AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj`). Together these
-make `f_*` conservative (`AlgebraicGeometry.Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom`).
+exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). That it
+also detects the zero sheaf, hence is conservative, is proved in
+`WeilConjectures.SixFunctors.Integral.StalkRestrict`.
 
 The finite case of the exactness is
 `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`, proved through the
@@ -35,10 +35,6 @@ and there the local lifts glue
   with algebraically closed residue field.
 - `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`: the direct
   image along an integral morphism is exact.
-- `AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj`: the direct image along an
-  integral morphism detects the zero sheaf.
-- `AlgebraicGeometry.Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom`: the direct
-  image along an integral morphism is conservative.
 
 ## References
 

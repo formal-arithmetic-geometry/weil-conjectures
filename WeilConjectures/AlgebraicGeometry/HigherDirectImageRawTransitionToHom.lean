@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 
 /-! # Raw pullback and the derived-Hom comparison
 

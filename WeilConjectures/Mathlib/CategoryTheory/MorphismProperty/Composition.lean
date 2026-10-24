@@ -5,14 +5,16 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Endomorphism
 public import Mathlib.CategoryTheory.MorphismProperty.Composition
 
 /-!
-# The two-out-of-three property for an intersection of morphism properties
+# Composition properties of morphism properties
 
 The instance `CategoryTheory.MorphismProperty.HasTwoOutOfThreeProperty.iInf` shows that an
 indexed intersection `⨅ i, W i` of morphism properties which all have the two-out-of-three
-property again has it.
+property again has it. The lemma `CategoryTheory.MorphismProperty.endAsHom_pow_mem` shows that a
+multiplicative morphism property containing an endomorphism contains its powers.
 -/
 
 @[expose] public section
@@ -31,5 +33,15 @@ instance HasTwoOutOfThreeProperty.iInf {ι : Type*} {W : ι → MorphismProperty
   of_precomp f g hf hfg := by
     rw [iInf_iff] at hf hfg ⊢
     exact fun i ↦ (W i).of_precomp f g (hf i) (hfg i)
+
+
+/-- A multiplicative morphism property containing an endomorphism contains its powers. -/
+lemma endAsHom_pow_mem (P : MorphismProperty C) [P.IsMultiplicative] {Z : C} {Φ : Z ⟶ Z}
+    (hΦ : P Φ) (m : ℕ) : P (End.asHom (End.of Φ ^ m)) := by
+  induction m with
+  | zero => exact P.id_mem Z
+  | succ m ih =>
+    rw [pow_succ, End.mul_def]
+    exact P.comp_mem _ _ hΦ ih
 
 end CategoryTheory.MorphismProperty

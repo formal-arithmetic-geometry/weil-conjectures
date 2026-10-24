@@ -8,7 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.TraceFormula.Frobenius
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusFixedLocus
+public import WeilConjectures.Mathlib.AlgebraicGeometry.SpreadingOut
+public import WeilConjectures.TraceFormula.FixedPoint
 
 /-!
 
@@ -22,12 +25,14 @@ For the model Frobenius `Φ` of `X = X₀ ×_{k₀} k`, the rational points fixe
 induce a morphism `∐_{x ∈ X(k)^{Φ_m}} Spec k ⟶ X` equalizing `𝟙` and `Φ_m`
 (`ProEtale.CondensedRing.fixedPointsι`).
 
-## Sorried input
+## Main statements
 
 - `ProEtale.CondensedRing.IsModelFrobenius.nonempty_isLimit_fixedPointsFork`: this
   morphism is an equalizer of `𝟙` and `Φ_m`, i.e. the fixed scheme `Fix(Φ_m)` is the disjoint
   union of copies of `Spec k` indexed by the fixed rational points (blueprint
-  `thm-trf-frobenius-fixed-points`, a node of the six-functor chapter).
+  `thm-trf-frobenius-fixed-points`). A morphism `g : T ⟶ X` fixed by `Φ_m` is constant near
+  every point of `T` (`ProEtale.CondensedRing.IsModelFrobenius.exists_opens_comp_eq`), so `T`
+  is the disjoint union of the open pieces `g⁻¹(x)`.
 
 -/
 
@@ -142,21 +147,169 @@ lemma fixedPointsι_comp :
   rw [Over.comp_left] at hx
   simp [fixedPointsι, hx]
 
+end FixedPoints
+
+section FixedPointsLimit
+
+variable {X : Over (Spec (.of k))} [IsAlgClosed k] [LocallyOfFiniteType X.hom] {k₀ : Type u}
+  [Field k₀] [Finite k₀]
+  [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
+  {m : ℕ}
+
+omit [LocallyOfFiniteType X.hom] in
+/-- A point of `X` with values in a local ring and fixed by `Φ_m` factors through a rational
+point fixed by `Φ_m` (blueprint `thm-trf-frobenius-fixed-points`: the fixed scheme is
+reduced). -/
+lemma IsModelFrobenius.exists_eq_comp_of_comp_eq_self (hΦ : IsModelFrobenius Φ f₀ p)
+    (hm : 1 ≤ m) {A : CommRingCat.{u}} [IsLocalRing A] (t : Spec A ⟶ X.left)
+    (ht : t ≫ (frobeniusIterate Φ m).left = t) :
+    ∃ x : FixedPoint Φ m, t = t ≫ X.hom ≫ x.1.left := by
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  obtain ⟨x, hxa, hxh, htx⟩ := exists_eq_comp_of_comp_eq_self_of_isFrobenius hΦ.isPullback hm
+    (hF₀.pow f₀ m) (Over.w (frobeniusIterate Φ m))
+    (IsModelFrobenius.frobeniusIterate_left_comp hp m) t ht
+  exact ⟨⟨Over.homMk x hxa, Over.OverMorphism.ext (by simpa using hxh)⟩, htx⟩
+
+/-- A morphism `g : T ⟶ X` fixed by `Φ_m` is, near every point of `T`, the constant map to a
+rational point fixed by `Φ_m`. -/
+lemma IsModelFrobenius.exists_opens_comp_eq (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m)
+    {T : Over (Spec (.of k))} (g : T ⟶ X) (hg : g ≫ frobeniusIterate Φ m = g) (t : T.left) :
+    ∃ x : FixedPoint Φ m, ∃ U : T.left.Opens, t ∈ U ∧
+      U.ι ≫ g.left = U.ι ≫ T.hom ≫ x.1.left := by
+  obtain ⟨x, hx⟩ := hΦ.exists_eq_comp_of_comp_eq_self hm (T.left.fromSpecStalk t ≫ g.left)
+    (by rw [Category.assoc, ← Over.comp_left, hg])
+  obtain ⟨U, htU, hU⟩ := spread_out_unique_of_locallyOfFiniteType T.hom X.hom g.left
+    (T.hom ≫ x.1.left) (Over.w g)
+    (by rw [Category.assoc, rationalPoint_left_comp_hom]; exact Category.comp_id _)
+    (x := t) (by rw [hx, Category.assoc, ← Category.assoc g.left, Over.w g])
+  exact ⟨x, U, htU, hU⟩
+
+/-- Rational points of `X` are determined by their underlying point. -/
+lemma rationalPoint_ext {x x' : RationalPoint X}
+    (h : x.left (IsLocalRing.closedPoint k) = x'.left (IsLocalRing.closedPoint k)) : x = x' :=
+  Over.OverMorphism.ext (ext_of_apply_closedPoint_eq X.hom (rationalPoint_left_comp_hom x)
+    (rationalPoint_left_comp_hom x') h)
+
+omit [IsAlgClosed k] [LocallyOfFiniteType X.hom] in
+/-- A morphism `U ⟶ X` which is the constant map to a rational point `x` sends every point to
+the point underlying `x`. -/
+lemma comp_rationalPoint_apply {U : Scheme.{u}} (s : U ⟶ Spec (.of k)) (x : RationalPoint X)
+    (u : U) : (s ≫ x.left) u = x.left (IsLocalRing.closedPoint k) := by
+  rw [Scheme.Hom.comp_apply]
+  congr 1
+  exact Subsingleton.elim _ _
+
 set_option linter.overlappingInstances false in
 /-- **The fixed scheme of a Frobenius** (blueprint `thm-trf-frobenius-fixed-points`, a node of
 the six-functor chapter): for the model Frobenius `Φ` of `X = X₀ ×_{k₀} k` and `m ≥ 1`, the
 fixed scheme `Fix(Φ_m)`, the equalizer of `𝟙` and `Φ_m`, is the disjoint union
 `∐ Spec k` of copies of the base point, one for each rational point fixed by `Φ_m` (these
-correspond to the `𝔽_{q^m}`-points of `X₀`, `IsModelFrobenius.fixedPointEquiv`). On affine
-charts the fixed algebra is `k[t] / (t_i^{q^m} - t_i) + 𝔞`, a finite product of copies of `k`. -/
-theorem IsModelFrobenius.nonempty_isLimit_fixedPointsFork [IsAlgClosed k]
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] {k₀ : Type u} [Field k₀]
-    [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀}
-    {Φ : X ⟶ X} (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : 1 ≤ m)
-    [Finite (FixedPoint Φ m)] :
-    Nonempty (IsLimit (Fork.ofι (fixedPointsι Φ m) (fixedPointsι_comp Φ m))) :=
-  sorry
+correspond to the `𝔽_{q^m}`-points of `X₀`, `IsModelFrobenius.fixedPointEquiv`).
 
-end FixedPoints
+A morphism `g : T ⟶ X` fixed by `Φ_m` is locally on `T` constant with value a fixed rational
+point (`IsModelFrobenius.exists_opens_comp_eq`), so `T` is the disjoint union of the open
+pieces `V_x = g⁻¹(x)` and `g` factors uniquely through `∐ Spec k`. -/
+theorem IsModelFrobenius.nonempty_isLimit_fixedPointsFork (hΦ : IsModelFrobenius Φ f₀ p)
+    (hm : 1 ≤ m) :
+    Nonempty (IsLimit (Fork.ofι (fixedPointsι Φ m) (fixedPointsι_comp Φ m))) := by
+  classical
+  refine ⟨Fork.IsLimit.mk' _ fun s ↦ ?_⟩
+  let T := s.pt
+  let g : T ⟶ X := s.ι
+  have hg : g ≫ frobeniusIterate Φ m = g := by simpa using s.condition.symm
+  let pt := IsLocalRing.closedPoint k
+  have hloc := hΦ.exists_opens_comp_eq hm g hg
+  have hval {x : FixedPoint Φ m} {U : T.left.Opens}
+      (hU : U.ι ≫ g.left = U.ι ≫ T.hom ≫ x.1.left) {u : T.left} (hu : u ∈ U) :
+      g.left u = x.1.left pt := by
+    have h₁ := congr($hU ⟨u, hu⟩)
+    rw [← Category.assoc, comp_rationalPoint_apply, Scheme.Hom.comp_apply] at h₁
+    simpa using h₁
+  -- the open pieces `V_x = g⁻¹(x)`
+  let V : FixedPoint Φ m → T.left.Opens := fun x ↦ ⟨{t | g.left t = x.1.left pt}, by
+    refine isOpen_iff_forall_mem_open.mpr fun t ht ↦ ?_
+    obtain ⟨x', U, htU, hU⟩ := hloc t
+    obtain rfl : x' = x := Subtype.ext (rationalPoint_ext ((hval hU htU).symm.trans ht))
+    exact ⟨U, fun u hu ↦ hval hU hu, U.isOpen, htU⟩⟩
+  have hV (x : FixedPoint Φ m) : (V x).ι ≫ g.left = (V x).ι ≫ T.hom ≫ x.1.left := by
+    refine hom_ext_of_forall _ _ fun u ↦ ?_
+    obtain ⟨x', U, hu, hU⟩ := hloc ((V x).ι u)
+    have hux : g.left ((V x).ι u) = x.1.left pt := by rw [Scheme.Opens.ι_apply]; exact u.2
+    obtain rfl : x' = x := Subtype.ext (rationalPoint_ext ((hval hU hu).symm.trans hux))
+    refine ⟨(V x').ι ⁻¹ᵁ U, hu, ?_⟩
+    have e := Scheme.Hom.resLE_comp_ι (V x').ι (le_refl ((V x').ι ⁻¹ᵁ U))
+    rw [← reassoc_of% e, ← reassoc_of% e, hU]
+  have hcov : ⨆ x, ((V x).ι).opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι]
+    refine eq_top_iff.mpr fun t _ ↦ ?_
+    obtain ⟨x, U, htU, hU⟩ := hloc t
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hval hU htU⟩
+  have hdisj : Pairwise (Function.onFun Disjoint fun x ↦ ((V x).ι).opensRange) := by
+    intro x x' hxx'
+    simp only [Function.onFun, Scheme.Opens.opensRange_ι]
+    rw [disjoint_iff, eq_bot_iff]
+    rintro t ⟨ht, ht'⟩
+    exact (hxx' (Subtype.ext (rationalPoint_ext (ht.symm.trans ht')))).elim
+  let hcolim := (nonempty_isColimit_cofanMk_of (fun x ↦ (V x).ι) hcov hdisj).some
+  -- the lift `T ⟶ ∐ Spec k`
+  let L : T.left ⟶ (sigmaPoint k (FixedPoint Φ m)).left := Cofan.IsColimit.desc hcolim
+    fun x ↦ (V x).ι ≫ T.hom ≫ Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x
+  have hL (x : FixedPoint Φ m) : (V x).ι ≫ L =
+      (V x).ι ≫ T.hom ≫ Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x :=
+    Cofan.IsColimit.fac hcolim _ x
+  have hLw : L ≫ (sigmaPoint k (FixedPoint Φ m)).hom = T.hom :=
+    Cofan.IsColimit.hom_ext hcolim _ _ fun x ↦ by
+      change (V x).ι ≫ L ≫ _ = (V x).ι ≫ T.hom
+      rw [reassoc_of% hL x]
+      simp [sigmaPoint]
+  refine ⟨Over.homMk L hLw, ?_, fun {l'} hl' ↦ ?_⟩
+  · ext1
+    refine Cofan.IsColimit.hom_ext hcolim _ _ fun x ↦ ?_
+    change (V x).ι ≫ L ≫ (fixedPointsι Φ m).left = (V x).ι ≫ g.left
+    rw [reassoc_of% hL x, hV x]
+    simp [fixedPointsι]
+  · ext1
+    refine Cofan.IsColimit.hom_ext hcolim _ _ fun x ↦ ?_
+    let l₀ : T.left ⟶ ∐ fun _ : FixedPoint Φ m ↦ Spec (.of k) := l'.left
+    have hl₀ : l₀ ≫ Sigma.desc (fun x : FixedPoint Φ m ↦ x.1.left) = g.left := by
+      simpa [l₀, g, fixedPointsι] using congrArg (fun φ ↦ φ.left) hl'
+    have hl₀w : l₀ ≫ Sigma.desc (fun _ : FixedPoint Φ m ↦ 𝟙 (Spec (.of k))) = T.hom := Over.w l'
+    change (V x).ι ≫ l₀ = (V x).ι ≫ L
+    rw [hL x]
+    have hrange : Set.range ((V x).ι ≫ l₀) ⊆
+        Set.range (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x) := by
+      rintro _ ⟨u, rfl⟩
+      obtain ⟨⟨i, a⟩, ha⟩ :=
+        (sigmaMk (fun _ : FixedPoint Φ m ↦ Spec (.of k))).surjective (((V x).ι ≫ l₀) u)
+      rw [sigmaMk_mk] at ha
+      obtain rfl : i = x := by
+        have h₁ : (Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left)
+            (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) i a) = i.1.left a := by
+          change (Sigma.ι _ i ≫ Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left) a = _
+          rw [Sigma.ι_desc]
+        have h₂ : (Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left) (((V x).ι ≫ l₀) u) =
+            g.left ((V x).ι u) := by
+          change ((V x).ι ≫ l₀ ≫ Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left) u = _
+          rw [hl₀]
+          rfl
+        have hux : g.left ((V x).ι u) = x.1.left pt := by
+          rw [Scheme.Opens.ι_apply]
+          exact u.2
+        have : Subsingleton (point k).left := inferInstanceAs (Subsingleton (Spec (.of k)))
+        refine Subtype.ext (rationalPoint_ext ?_)
+        rw [← hux, ← h₂, ← ha, h₁]
+        exact congrArg _ (Subsingleton.elim _ _)
+      exact ⟨a, ha⟩
+    have e₁ := IsOpenImmersion.lift_fac (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x)
+      ((V x).ι ≫ l₀) hrange
+    have e₂ : Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x ≫
+        Sigma.desc (fun _ : FixedPoint Φ m ↦ 𝟙 (Spec (.of k))) = 𝟙 _ := Sigma.ι_desc _ _
+    have hlx : IsOpenImmersion.lift (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x)
+        ((V x).ι ≫ l₀) hrange = (V x).ι ≫ T.hom := by
+      rw [← Category.comp_id (IsOpenImmersion.lift _ _ hrange), ← e₂, reassoc_of% e₁,
+        hl₀w]
+    rw [← e₁, hlx, Category.assoc]
+
+end FixedPointsLimit
 
 end AlgebraicGeometry.ProEtale.CondensedRing

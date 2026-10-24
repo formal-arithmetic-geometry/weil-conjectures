@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.WeilDistTriangLowerShriek
 public import WeilConjectures.TraceFormula.WeilDistTriangTrace
+public import WeilConjectures.TraceFormula.WeilSheafUpperStar
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 
 /-!
@@ -39,10 +40,8 @@ inputs, stated here as separate lemmas:
 
 ## Sorried inputs
 
-- `ProEtale.CondensedRing.nonempty_homologyFunctor_weilUpperStar_iso`: `Hʲ(Lg^* K) ≅ g^* Hʲ(K)`
-  as Weil sheaves.
-- `ProEtale.CondensedRing.weilSheafStalkTrace_weilSheafUpperStar`: the stalk of `g^* F` at `w̄`
-  is the stalk of `F` at `w̄ ≫ g`, compatibly with the Frobenius operators.
+- `ProEtale.CondensedRing.nonempty_homologyFunctor_weilUpperStar_iso`
+  (`WeilConjectures.TraceFormula.WeilSheafUpperStar`): `Hʲ(Lg^* K) ≅ g^* Hʲ(K)` as Weil sheaves.
 
 The triangle inputs are proved: the additivity of the local trace along distinguished triangles
 (`ProEtale.CondensedRing.weilStalkSupertrace_eq_add_of_isDistTriang`,
@@ -62,16 +61,6 @@ open CategoryTheory Endofunctor
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace CategoryTheory.Over
-
-/-- An equation `a ≫ b = c ≫ d` in `Over T` holds for the underlying morphisms. -/
-lemma left_comp_left_eq_of_comp_eq {S : Type*} [Category S] {T : S} {A B C D : Over T}
-    {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D} (h : a ≫ b = c ≫ d) :
-    a.left ≫ b.left = c.left ≫ d.left := by
-  rw [← Over.comp_left, h, Over.comp_left]
-
-end CategoryTheory.Over
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -83,61 +72,6 @@ variable {X Y W : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   (eX : X ≅ X) (eY : Y ≅ Y) (eW : W ≅ W)
-
-/-! ### The pullback of Weil sheaves -/
-
-section WeilSheafPullback
-
-variable {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
-
-/-- The Frobenius comparison `g^* ⋙ e_W^* ≅ e_X^* ⋙ g^*` of the pullback of module objects along
-`g` with `e_W ≫ g = g ≫ e_X`: the composite of the composition isomorphisms of the pullbacks and
-the transport along `e_W ≫ g = g ≫ e_X`. -/
-noncomputable def weilSheafUpperStarComparison :
-    (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ (eW.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
-      (eX.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙
-        (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (upperStarComp _ eW.hom.left g.left).symm ≪≫
-    eqToIso (congrArg (upperStar _) (Over.left_comp_left_eq_of_comp_eq hg)) ≪≫
-    upperStarComp _ g.left eX.hom.left
-
-/-- The pullback `g^*` of Weil sheaves along `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`: a Weil sheaf
-`(F, φ_F)` for `e_X` is sent to `g^* F` with the structure isomorphism
-`e_W^* g^* F ≅ g^* e_X^* F ≅ g^* F` given by `weilSheafUpperStarComparison` and `g^* φ_F`. -/
-noncomputable def weilSheafUpperStar : WeilSheaf ℓ eX ⥤ WeilSheaf ℓ eW :=
-  IsoAlgebra.mapOfNatIso (weilSheafUpperStarComparison ℓ eX eW hg)
-
-/-- **The homology sheaves of a pullback of Weil objects** (standard input, still `sorry`): for
-`g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`, the Weil sheaf `Hʲ(Lg^* K)` is isomorphic to the pullback
-`g^* Hʲ(K)` of the Weil sheaf `Hʲ(K)`. The underlying isomorphism is the commutation of the exact
-functor `g^*` with homology (as in `weilHomologyComparison`, with the identification of the derived
-pullback with the levelwise pullback); its compatibility with the Frobenius structures is the
-compatibility of these commutation isomorphisms with the composition isomorphisms of the
-pullbacks, along `e_W ≫ g = g ≫ e_X`. -/
-theorem nonempty_homologyFunctor_weilUpperStar_iso (K : WeilBoundedConstructible ℓ eX.hom)
-    (j : ℤ) :
-    Nonempty ((WeilBoundedConstructible.homologyFunctor ℓ eW j).obj
-        ((weilUpperStar ℓ eW.hom eX.hom g hg).obj K) ≅
-      (weilSheafUpperStar ℓ eX eW hg).obj
-        ((WeilBoundedConstructible.homologyFunctor ℓ eX j).obj K)) :=
-  sorry
-
-/-- **Stalks of a pullback of Weil sheaves** (standard input, still `sorry`): for `g : W ⟶ X`
-with `e_W ≫ g = g ≫ e_X`, a Weil sheaf `F` for `e_X` and a point `w̄` of `W` of degree `n + 1`,
-the trace of the `(n + 1)`-st Frobenius on the stalk of `g^* F` at `w̄` is its trace on the stalk
-of `F` at `w̄ ≫ g`. The composition isomorphism `(w̄ ≫ g)^* F ≅ w̄^* g^* F` of the pullbacks
-intertwines the two Frobenius operators: this is a coherence of the composition isomorphisms
-`upperStarComp` (their associativity), applied to the iterated structure isomorphisms
-`WeilSheaf.powSucc` and to the stalk comparison `weilStalkComparison`. -/
-theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
-    (w : frobeniusFixedPoints eW n) :
-    weilSheafStalkTrace ℓ n w.1 w.2.2 ((weilSheafUpperStar ℓ eX eW hg).obj F) =
-      weilSheafStalkTrace ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
-        (frobeniusFixedPointsMap eW eX hg n w).2.2 F :=
-  sorry
-
-end WeilSheafPullback
-
 
 /-- **Stalks of a pullback of Weil objects**: for `g : W ⟶ X` with
 `e_W ≫ g = g ≫ e_X` and a point `w̄` of `W` of degree `n + 1`,
