@@ -315,8 +315,8 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
             ℓ
             (c.overBaseChange_isPullback_i sq)).hom
           (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
-        (Functor.associator _ _ _).hom := by
-  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting]
+        (Functor.associator _ _ _).hom :=
+  by delta boundedConstructibleLowerShriekOfCompactificationBaseChangePasting; rfl
 
 end LowerShriek
 
