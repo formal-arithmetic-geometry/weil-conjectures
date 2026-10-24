@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.PoincareDuality.Abstract
 
 /-!
@@ -113,6 +115,33 @@ lemma isIso_leftProjectionMorphism
 
 end ProjectionMorphisms
 
+section Restrict
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  {P : ObjectProperty C} [P.IsMonoidal] {Q : ObjectProperty D} [Q.IsMonoidal]
+  {F : D ⥤ C} [F.Monoidal] {G : C ⥤ D} (adj : F ⊣ G)
+  (hF : ∀ X : Q.FullSubcategory, P (F.obj X.obj)) (hG : ∀ X : P.FullSubcategory, Q (G.obj X.obj))
+
+/-- The projection morphism of the restriction of an adjunction `F ⊣ G` to full monoidal
+subcategories is the projection morphism of `F ⊣ G`. -/
+lemma ι_map_projectionMorphism_restrictFullyFaithful (A : P.FullSubcategory)
+    (B : Q.FullSubcategory) :
+    Q.ι.map ((adj.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι
+      (P.liftCompιIso (Q.ι ⋙ F) hF).symm (Q.liftCompιIso (P.ι ⋙ G) hG).symm).projectionMorphism
+        A B) = adj.projectionMorphism A.obj B.obj := by
+  rw [projectionMorphism, projectionMorphism, restrictFullyFaithful_homEquiv_apply,
+    Functor.FullyFaithful.map_preimage, homEquiv_unit]
+  congr 1
+  simp only [ObjectProperty.liftCompιIso, Iso.symm_hom, Iso.refl_inv, Functor.map_comp]
+  erw [Functor.map_id, Category.id_comp, Category.comp_id]
+  congr 1
+  refine congrArg G.map (congrArg (· ▷ F.obj B.obj) ?_)
+  exact (adj.map_restrictFullyFaithful_counit_app Q.fullyFaithfulι P.fullyFaithfulι _ _ A).trans
+    (by simp)
+
+end Restrict
+
 section Composite
 
 variable {C₁ : Type u₁} [Category.{v₁} C₁] {C₂ : Type u₂} [Category.{v₂} C₂]
@@ -169,8 +198,7 @@ lemma homEquiv_δ_tensorHom_eq (e : Q' ≅ S' ⋙ R')
       MonoidalCategory.whiskerLeft_comp]
   rw [homEquiv_eq_homEquiv_homEquiv adjR adjS adjQ e, key, homEquiv_naturality_left (adj := adjR),
     homEquiv_naturality_right (adj := adjR), homEquiv_δ_whiskerRight,
-    homEquiv_naturality_right (adj := adjS),
-    homEquiv_δ_whiskerLeft]
+    homEquiv_naturality_right (adj := adjS), homEquiv_δ_whiskerLeft]
   simp only [Category.assoc, Functor.map_comp]
 
 /-- **The Künneth map of a composite is an isomorphism** if the transposes of `d₂` and of
