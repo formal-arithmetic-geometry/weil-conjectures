@@ -86,7 +86,7 @@ coefficient object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(
 isomorphism: see the module docstring. -/
 @[no_expose]
 noncomputable def smoothPurityIso :
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    ((boundedConstructibleUpperShriek ℓ f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   sorry

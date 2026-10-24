@@ -240,9 +240,9 @@ morphism `exceptionalProjectionMorphismOfCompactification` for the compactificat
 noncomputable def boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K ⊗ B ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        (K ⊗ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj B) :=
+    (boundedConstructibleLowerShriek ℓ f).obj K ⊗ B ⟶
+      (boundedConstructibleLowerShriek ℓ f).obj
+        (K ⊗ (boundedConstructibleUpperStar ℓ f).obj B) :=
   ObjectProperty.homMk
     (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ)
       (compactificationOverField f) K.obj B.obj)
@@ -256,11 +256,11 @@ now. -/
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_right
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {B B' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (h : B ⟶ B') :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K ◁ h ≫
+    (boundedConstructibleLowerShriek ℓ f).obj K ◁ h ≫
         boundedConstructibleExceptionalProjectionMorphism ℓ f K B' =
       boundedConstructibleExceptionalProjectionMorphism ℓ f K B ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
-          (K ◁ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map h) :=
+        (boundedConstructibleLowerShriek ℓ f).map
+          (K ◁ (boundedConstructibleUpperStar ℓ f).map h) :=
   sorry
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
@@ -270,11 +270,11 @@ follows from the naturality of the three constituent maps; it is `sorry`ed for n
 lemma boundedConstructibleExceptionalProjectionMorphism_natural_left
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : K ⟶ K') (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map φ ▷ B ≫
+    (boundedConstructibleLowerShriek ℓ f).map φ ▷ B ≫
         boundedConstructibleExceptionalProjectionMorphism ℓ f K' B =
       boundedConstructibleExceptionalProjectionMorphism ℓ f K B ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
-          (φ ▷ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj B) :=
+        (boundedConstructibleLowerShriek ℓ f).map
+          (φ ▷ (boundedConstructibleUpperStar ℓ f).obj B) :=
   sorry
 
 /-- The **derived exceptional projection morphism** on bounded constructible complexes, as a
@@ -286,10 +286,10 @@ with components `boundedConstructibleExceptionalProjectionMorphism`. This is the
 `PF^!` enters `CategoryTheory.Verdier`. -/
 noncomputable def boundedConstructibleExceptionalProjection :
     curriedTensorInsertFunctor₁
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) ⟶
-      curriedTensorPost (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) ⋙
+        (boundedConstructibleLowerShriek ℓ f) ⟶
+      curriedTensorPost (boundedConstructibleLowerShriek ℓ f) ⋙
         (Functor.whiskeringLeft _ _ _).obj
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) where
+          (boundedConstructibleUpperStar ℓ f) where
   app K :=
     { app B := boundedConstructibleExceptionalProjectionMorphism ℓ f K B
       naturality _ _ h :=

@@ -84,21 +84,21 @@ the restricted pullback (`boundedConstructibleUpperStarCompatibility`) and tenso
 the inclusions. -/
 noncomputable def weilTensorComparison :
     Functor.uncurry.obj (boundedConstructibleTensor ℓ X) ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom ≅
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom).prod
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom) ⋙
+        boundedConstructibleUpperStar ℓ e.hom ≅
+      (boundedConstructibleUpperStar ℓ e.hom).prod
+          (boundedConstructibleUpperStar ℓ e.hom) ⋙
         Functor.uncurry.obj (boundedConstructibleTensor ℓ X) :=
   NatIso.ofComponents
     (fun KL ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
-      ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarCompatibility ℓ
           e.hom).app _ ≪≫
         ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) e.hom.left).app
           KL.1.obj).app KL.2.obj ≪≫
         ((curriedTensor _).mapIso
-          ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarCompatibility ℓ
             e.hom).app KL.1).symm).app _ ≪≫
         ((curriedTensor _).obj _).mapIso
-          ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarCompatibility ℓ
             e.hom).app KL.2).symm))
     sorry
 
@@ -127,7 +127,7 @@ section Hom
 /-- The Frobenius pullback `Φ = Le^*` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable abbrev weilFrobenius :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom
+  boundedConstructibleUpperStar ℓ e.hom
 
 /-- The derived hom `RHom(-, -)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable abbrev weilRHom :

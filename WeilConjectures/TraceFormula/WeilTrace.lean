@@ -237,7 +237,7 @@ variable [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 noncomputable def weilUnit : WeilBoundedConstructible ℓ e :=
   IsoAlgebra.mk (𝟙_ _)
     (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)).symm
+      (boundedConstructibleUpperStar ℓ e.hom)).symm
 
 /-- The canonical Weil unit has local trace `1` at every point: its stalk is `ℚ̄_ℓ` in degree `0`,
 on which the Frobenius acts trivially (normalization test N1). -/
