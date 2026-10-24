@@ -12599,6 +12599,7 @@ public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.SupportedPairing
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
+public import WeilConjectures.TraceFormula.TraceClassDiagonal
 public import WeilConjectures.TraceFormula.WeilBaseChange
 public import WeilConjectures.TraceFormula.WeilSheafUpperStar
 public import WeilConjectures.TraceFormula.WeilTrace
