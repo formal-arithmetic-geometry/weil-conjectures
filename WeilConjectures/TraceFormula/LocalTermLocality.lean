@@ -46,13 +46,21 @@ This file states the locality of the local terms of contracting correspondences 
    (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`,
    blueprint `sk-i-curve-zero`).
 
-Items 1 and 2 follow from Varshavsky's contracting-correspondence theorem (Thm. 2.1.3, blueprint
+Item 1 follows from Varshavsky's contracting-correspondence theorem (Thm. 2.1.3, blueprint
 `sk-thm-tf-contracting-local-term`) for `Z = {x}`
 (`Correspondence.restrict_traceClass_eq_pushforward_of_isContractingAt`): the trace class on `B`
 is the pushforward of the trace class of the restricted coefficient map
-`u_Z : K_x ⟶ K_x` (`Correspondence.contractingStalkMap`), which vanishes with `K_x`, and which
-for a graph is the stalk map. The theorem itself is proved by specialization to the normal cone
-in its own blueprint subsection.
+`u_Z : K_x ⟶ K_x` (`Correspondence.contractingStalkMap`), which for a graph is the stalk map;
+item 2 is the vanishing of the trace class on `B` below. Following the blueprint proof, the
+theorem is reduced to
+* the additivity of trace classes along the pieces `K^U = j_! Lj^* K` and `K^Z = Rx_* Lx^* K`
+  of `K` (`Correspondence.traceClass_eq_add_of_isContractingAt`, blueprint
+  `prop-trf-trace-class-additivity`; for graphs `Correspondence.traceClass_ofGraph_eq_add`);
+* the proper pushforward compatibility of trace classes for the closed piece
+  (`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`);
+* the vanishing of the trace class on `B` for coefficients with zero stalk at `x`, applied to the
+  open piece (`Correspondence.restrict_traceClass_eq_zero_of_isContractingAt`, blueprint
+  `det-tf-contracting-vanishing`), which is Varshavsky's specialization to the normal cone.
 
 -/
 
@@ -226,8 +234,14 @@ point `y`, the correspondence `c_Z` induced on `Z` is the identity correspondenc
 the restricted coefficient map is `u_Z = contractingStalkMap hc`. For an open and closed subscheme
 `B` of the fixed locus, proper over `s`, with underlying set `{y}` and point `e : s ⟶ B`, the
 restriction of the trace class of `c` to `B` is the pushforward along `e` of the trace class of
-`u_Z`: `Tr_c(u)|_B = e_* Tr_{c_Z}(u_Z)`. The proof is Varshavsky's specialization to the normal
-cone (blueprint `det-tf-contracting-vanishing`, `det-tf-contracting-closed-piece`). -/
+`u_Z`: `Tr_c(u)|_B = e_* Tr_{c_Z}(u_Z)`.
+
+This is the blueprint proof (`det-tf-contracting-closed-piece`): by additivity
+(`traceClass_eq_add_of_isContractingAt`) the trace class is the sum of the trace classes of the
+coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z` and `u^U` on `K^U`; the first is the pushforward
+of the trace class of `u_Z` along the induced map of fixed loci by proper pushforward
+compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
+`B` since `K^U` has zero stalk at `x` (`restrict_traceClass_eq_zero_of_isContractingAt`). -/
 theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
     {y : RationalPoint c.C} (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
