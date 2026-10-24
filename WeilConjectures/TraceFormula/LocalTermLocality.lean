@@ -45,8 +45,16 @@ This file states the locality of the local terms of contracting correspondences 
    (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`,
    blueprint `sk-i-curve-zero`).
 
-The first two items are Varshavsky's contracting-correspondence theorem (Thm. 2.1.3), proved by
-specialization to the normal cone; the blueprint quotes it.
+Item 1 is reduced to item 2, as in Varshavsky's proof: the local term is additive along the
+pieces `K^U = j_! Lj^* K` and `K^Z = Rx_* Lx^* K` of the complement `j : X ∖ {x} ⟶ X`
+(`Correspondence.traceClass_ofGraph_eq_add`, blueprint `prop-trf-trace-class-additivity`), the
+open piece has zero stalk at `x` (item 2), and the trace class of the closed piece is the
+pushforward of the trace class of the stalk map, which integrates to its trace (proper
+pushforward compatibility and point normalization).
+
+Item 2 is Varshavsky's contracting-correspondence theorem (Thm. 2.1.3), proved by
+specialization to the normal cone (blueprint `det-tf-contracting-vanishing`, after restricting
+`C` to a neighbourhood of `y` as in `sk-rem-tf-contracting-neighbourhood`); it is still `sorry`.
 
 -/
 
