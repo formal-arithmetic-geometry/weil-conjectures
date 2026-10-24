@@ -12597,6 +12597,7 @@ public import WeilConjectures.TraceFormula.BaseChange.Coherence
 public import WeilConjectures.TraceFormula.BaseChange.Iterate
 public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriek
+public import WeilConjectures.TraceFormula.BaseChange.LowerShriekIterate
 public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
 public import WeilConjectures.TraceFormula.BaseChange.Supertrace
 public import WeilConjectures.TraceFormula.BaseChange.WeilObject
