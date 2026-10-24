@@ -33,7 +33,8 @@ Verdier exchange of `G` and compact-support base change. The square is the abstr
 `CategoryTheory.ProjectionBaseChange.trace_comp_curry`, whose inputs are the functoriality of the
 exceptional Künneth map `α` along `G` (`ProEtale.CondensedRing.exceptionalKunnethMap_comp_prodMap`),
 the compatibilities of the projection formula with base change and, for proper morphisms, with
-the adjunction `Lf^* ⊣ Rf_!` (`WeilConjectures.TraceFormula.LowerShriekCoherence`), and the
+the adjunction `Lf^* ⊣ Rf_!` (`WeilConjectures.TraceFormula.LowerShriekCoherence`,
+`WeilConjectures.PoincareDuality.ProjectionFormulaCoherence`), and the
 compatibility of compact-support base change with the units of `Lf^* ⊣ Rf_!`
 (`map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app`).
 Finally `RG_!` reflects isomorphisms, `G` being a monomorphism
@@ -172,7 +173,7 @@ theorem isIso_curry_kunnethPairing_iff_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     (aG := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ G)
     (aGu := boundedConstructibleUpperShriekAdjunction _ ℓ G)
     (pfG := boundedConstructibleExceptionalProjection _ ℓ G)
-    (hcG := fun A B ↦ boundedConstructibleExceptionalProjectionMorphism_counit ℓ G A B)
+    (hcG := fun A B ↦ upperStar_map_exceptionalProjection_comp_counit ℓ G A B)
     (ag := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
     (agu := boundedConstructibleUpperShriekAdjunction _ ℓ g)
     (pfg := boundedConstructibleExceptionalProjection _ ℓ g)

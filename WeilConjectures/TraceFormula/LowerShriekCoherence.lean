@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 
@@ -29,15 +29,16 @@ The companion coherence of compact-support base change with the pasting of carte
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp`: the
-  projection formula is compatible with composition (blueprint `prop-sf-pf-coherence`; SGA 4,
-  Exposé XVII, 5.2.2).
 - `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_baseChange`: the
   projection formula is compatible with compact-support base change (blueprint
   `prop-sf-pf-coherence`).
-- `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_counit`: for `f`
-  proper, the projection formula is the projection morphism of `Lf^* ⊣ Rf_!` (blueprint
-  `prop-sf-pf-coherence`, `def-exchange-projection`).
+
+The other clauses of `prop-sf-pf-coherence` used here are in
+`WeilConjectures.PoincareDuality.ProjectionFormulaCoherence`: the associativity pentagon
+`ProEtale.CondensedRing.exceptionalProjection_comp`, from which
+`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp` is deduced, and
+the identification of the projection formula of a proper morphism with that of `Lf^* ⊣ Rf_!`,
+`ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`.
 
 -/
 
@@ -82,33 +83,12 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp (f : X ⟶ Y) (g 
           ((boundedConstructibleLowerShriek _ ℓ f).obj K) B ≫
         (boundedConstructibleLowerShriek _ ℓ g).map
           (boundedConstructibleExceptionalProjectionMorphism _ ℓ f K
-            ((boundedConstructibleUpperStar _ ℓ g).obj B)) :=
-  sorry
-
-/-- **The projection formula of a proper morphism is that of `Lf^* ⊣ Rf_!`** (blueprint
-`prop-sf-pf-coherence` and `def-exchange-projection`: for `f` proper, `PF^!` is represented by
-the projection morphism of the compactification `f = f ∘ 𝟙`, which is the projection morphism of
-the adjunction `Lf^* ⊣ Rf_*`; SGA 4, Exposé XVII, 5.2.2 and 5.2.9): the composite of `Lf^*` of
-`PF_f`, with the counit of `Lf^* ⊣ Rf_!`, is the comultiplication of the monoidal functor `Lf^*`
-followed by the counit,
-```
-Lf^* (Rf_! K ⊗ B) ⟶ Lf^* Rf_! (K ⊗ Lf^* B) ⟶ K ⊗ Lf^* B
-  =  Lf^* (Rf_! K ⊗ B) ≅ Lf^* Rf_! K ⊗ Lf^* B ⟶ K ⊗ Lf^* B.
-```
-Equivalently `PF_f` is the mate of the comultiplication of `Lf^*`, which makes it compatible with
-the tensor products (the associativity pentagon of `prop-sf-pf-coherence`). -/
-theorem boundedConstructibleExceptionalProjectionMorphism_counit (f : X ⟶ Y) [IsProper f.left]
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ f).map
-        (boundedConstructibleExceptionalProjectionMorphism _ ℓ f K B) ≫
-      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app
-        (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) =
-    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f)
-        ((boundedConstructibleLowerShriek _ ℓ f).obj K) B ≫
-      ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app K ▷
-        (boundedConstructibleUpperStar _ ℓ f).obj B) :=
-  sorry
+            ((boundedConstructibleUpperStar _ ℓ g).obj B)) := by
+  have h := (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.naturality
+    (K ◁ (boundedConstructibleUpperStarComp _ ℓ f g).hom.app B)
+  dsimp only [Functor.comp_map] at h
+  rw [← h, reassoc_of% exceptionalProjection_comp ℓ f g K B]
+  simp
 
 section BaseChange
 
