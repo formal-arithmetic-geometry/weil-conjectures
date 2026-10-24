@@ -424,6 +424,7 @@ public import WeilConjectures.Algebra.Homology.HomologyEvaluationUniqueness
 public import WeilConjectures.Algebra.Homology.HomologyEvaluationUniquenessExt
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.BraidingShift
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
@@ -533,6 +534,7 @@ public import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkLinear
 public import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkNaturality
 public import WeilConjectures.Algebra.Homology.ModuleStalkExact
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.Monoidal.BraidingShift
 public import WeilConjectures.Algebra.Homology.Monoidal.Dual
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.Algebra.Homology.Monoidal.ProjectionMap
