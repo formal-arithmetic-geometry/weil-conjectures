@@ -81,4 +81,19 @@ lemma boundedConstructibleUpperStarComp_hom_app_tensor_δ (K M : Dᵇc(Z.left)�
   simp only [eqToHom_comp_of_self] at key
   exact key
 
+variable (X) in
+/-- **The identity isomorphism of the derived pullback of bounded constructible complexes is
+monoidal**: `L(𝟙 X)^*(K ⊗ M) ⟶ L(𝟙 X)^* K ⊗ L(𝟙 X)^* M ⟶ K ⊗ M` is the identity isomorphism. -/
+lemma boundedConstructibleUpperStarId_hom_app_tensor_δ (K M : Dᵇc(X.left)⟦Λ⟧) :
+    δ (boundedConstructibleUpperStar Λ ℓ (𝟙 X)) K M ≫
+        ((boundedConstructibleUpperStarId Λ ℓ X).hom.app K ⊗ₘ
+          (boundedConstructibleUpperStarId Λ ℓ X).hom.app M) =
+      (boundedConstructibleUpperStarId Λ ℓ X).hom.app (K ⊗ M) := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  simp only [ObjectProperty.FullSubcategory.comp_hom, δ_boundedConstructibleUpperStar_hom,
+    boundedConstructibleUpperStarId_hom_app_hom, ObjectProperty.tensorHom_hom']
+  have key := leftDerivedUpperStarTensor_id_of_eq Λ X.left (Over.id_left X) K.obj M.obj
+  simp only [eqToHom_comp_of_self] at key
+  exact key
+
 end AlgebraicGeometry.ProEtale.CondensedRing

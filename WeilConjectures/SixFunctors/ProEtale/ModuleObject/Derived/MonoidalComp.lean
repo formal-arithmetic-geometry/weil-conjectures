@@ -234,4 +234,29 @@ lemma upperStarTensorComplexHom_id' (W : Scheme.{u})
   rw [← tensorHom_comp_tensorHom, upperStarTensorComplexHom_id, Category.assoc,
     tensorHom_mapHomologicalComplexIdIso_hom_app]
 
+/-- `upperStarTensorComplexHom_id'` in the homotopy category. -/
+lemma quotient_map_upperStarTensorComplexHom_id (W : Scheme.{u})
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ℤ) :
+    (((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
+          ((HomotopyCategory.quotient _ _).obj A) ≫
+          (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app
+            ((HomotopyCategory.quotient _ _).obj A)) ⊗ₘ
+        ((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
+          ((HomotopyCategory.quotient _ _).obj B) ≫
+          (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app
+            ((HomotopyCategory.quotient _ _).obj B))) =
+      (HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ (𝟙 W) A B) ≫
+        ((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
+          ((HomotopyCategory.quotient _ _).obj (A ⊗ B)) ≫
+          (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app
+            ((HomotopyCategory.quotient _ _).obj (A ⊗ B))) := by
+  simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategoryIdIso_hom_app,
+    ← Functor.map_comp]
+  rw [MonoidalCategory.tensorHom_def]
+  erw [← quotient_map_whiskerRight_mod, ← quotient_map_whiskerLeft_mod]
+  rw [← Functor.map_comp]
+  erw [← MonoidalCategory.tensorHom_def, upperStarTensorComplexHom_id']
+  rfl
+
 end AlgebraicGeometry.ProEtale.CondensedRing

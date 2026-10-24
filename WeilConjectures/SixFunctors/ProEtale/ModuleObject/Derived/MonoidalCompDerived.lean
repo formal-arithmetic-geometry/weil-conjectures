@@ -156,4 +156,110 @@ lemma leftDerivedUpperStarTensor_comp_of_eq {h : X ⟶ Z} (hh : h = f ≫ g)
   simp only [eqToHom_refl, Category.id_comp]
   exact leftDerivedUpperStarTensor_comp Λ f g K M
 
+/-! ### The identity isomorphism -/
+
+variable (W : Scheme.{u})
+
+/-- The composite `L(𝟙 W)^*(K ⊗ᴸ M) ≅ K ⊗ᴸ M ≅ L(𝟙 W)^* K ⊗ᴸ L(𝟙 W)^* M` of the identity
+isomorphisms. It is the tensor comparison of `L(𝟙 W)^*` (`leftDerivedUpperStarTensor_id_eq`). -/
+noncomputable def leftDerivedUpperStarTensorId :
+    leftDerivedUpperStarTensorLeft Λ (𝟙 W) ⟶ leftDerivedUpperStarTensorRight Λ (𝟙 W) :=
+  Functor.whiskerLeft (curriedTensor _)
+      ((Functor.whiskeringRight _ _ _).map (leftDerivedUpperStarId Λ W).hom) ≫
+    (((Functor.whiskeringLeft₂ _).map (leftDerivedUpperStarId Λ W).inv).app (𝟭 _)).app
+      (curriedTensor _) ≫
+    (((Functor.whiskeringLeft₂ _).obj L((𝟙 W)^*⟦Λ⟧)).map
+      (leftDerivedUpperStarId Λ W).inv).app (curriedTensor _)
+
+lemma leftDerivedUpperStarTensorId_app_app
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W))) :
+    ((leftDerivedUpperStarTensorId Λ W).app K).app M =
+      (leftDerivedUpperStarId Λ W).hom.app (K ⊗ M) ≫
+        ((leftDerivedUpperStarId Λ W).inv.app K ⊗ₘ (leftDerivedUpperStarId Λ W).inv.app M) := by
+  rw [MonoidalCategory.tensorHom_def]
+  rfl
+
+set_option maxHeartbeats 2000000 in
+-- the images of complexes in the homotopy category are unfolded
+lemma leftDerivedUpperStarTensor_id_aux
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ℤ) :
+    ((leftDerivedUpperStarId Λ W).hom.app (Qh.obj ((HomotopyCategory.quotient _ _).obj A) ⊗
+          Qh.obj ((HomotopyCategory.quotient _ _).obj B)) ≫
+        ((leftDerivedUpperStarId Λ W).inv.app (Qh.obj ((HomotopyCategory.quotient _ _).obj A)) ⊗ₘ
+          (leftDerivedUpperStarId Λ W).inv.app (Qh.obj ((HomotopyCategory.quotient _ _).obj B)))) ≫
+      ((𝟙 W)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj A) ⊗ₘ
+        (𝟙 W)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj B)) ≫
+      μ Qh (((𝟙 W)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj A))
+        (((𝟙 W)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj B)) ≫
+      Qh.map ((HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ (𝟙 W) A B)) =
+    L((𝟙 W)^*⟦Λ⟧).map (μ Qh ((HomotopyCategory.quotient _ _).obj A)
+        ((HomotopyCategory.quotient _ _).obj B)) ≫
+      (𝟙 W)^*⟦Λ⟧.leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ _).obj A ⊗ (HomotopyCategory.quotient _ _).obj B) := by
+  have : IsIso (Qh.map ((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗ (HomotopyCategory.quotient _ (.up ℤ)).obj B) ≫
+      (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
+          (HomotopyCategory.quotient _ (.up ℤ)).obj B))) := by
+    have : IsIso ((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
+          (HomotopyCategory.quotient _ (.up ℤ)).obj B)) :=
+      ⟨(NatTrans.mapHomotopyCategory (upperStarId Λ W).inv (.up ℤ)).app _, by
+        rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
+          NatTrans.mapHomotopyCategory_id]
+        rfl, by
+        rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
+          NatTrans.mapHomotopyCategory_id]
+        rfl⟩
+    infer_instance
+  exact derivedId_tensor_aux (𝟙 W)^*⟦Λ⟧.leftDerivedFunctorCounit (leftDerivedUpperStarId Λ W)
+    ((HomotopyCategory.quotient _ _).obj A) ((HomotopyCategory.quotient _ _).obj B)
+    (fun K ↦ (NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app K ≫
+      (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app K)
+    ((HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ (𝟙 W) A B))
+    (Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj (upperStarId Λ W))
+    (quotient_map_upperStarTensorComplexHom_id Λ W A B)
+
+set_option maxHeartbeats 2000000 in
+-- the images of complexes in the homotopy category are unfolded
+lemma leftDerivedUpperStarTensor_id_eq :
+    leftDerivedUpperStarTensor Λ (𝟙 W) = leftDerivedUpperStarTensorId Λ W := by
+  refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ (𝟙 W))
+    (leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)) (HomotopyCategory.quasiIso _ _)
+    (HomotopyCategory.quasiIso _ _) _ _ _ ?_
+  ext P Q
+  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
+  simp only [NatTrans.comp_app]
+  rw [leftDerivedUpperStarTensorRightCounit_app_app]
+  erw [leftDerivedUpperStarTensorId_app_app, leftDerivedUpperStarTensor_id_aux,
+    leftDerivedUpperStarTensor_app_app_comp]
+
+/-- **The identity isomorphism of the derived pullbacks of module objects is monoidal**:
+`L(𝟙 W)^*(K ⊗ᴸ M) ⟶ L(𝟙 W)^* K ⊗ᴸ L(𝟙 W)^* M ⟶ K ⊗ᴸ M` is the identity isomorphism. -/
+lemma leftDerivedUpperStarTensor_id
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W))) :
+    ((leftDerivedUpperStarTensor Λ (𝟙 W)).app K).app M ≫
+        ((leftDerivedUpperStarId Λ W).hom.app K ⊗ₘ (leftDerivedUpperStarId Λ W).hom.app M) =
+      (leftDerivedUpperStarId Λ W).hom.app (K ⊗ M) := by
+  refine comp_tensorHom_hom_eq_of_eq_comp_tensorHom_inv
+    ((leftDerivedUpperStarId Λ W).app K) ((leftDerivedUpperStarId Λ W).app M) ?_
+  rw [leftDerivedUpperStarTensor_id_eq, leftDerivedUpperStarTensorId_app_app]
+  rfl
+
+/-- `leftDerivedUpperStarTensor_id` for a morphism `h` equal to `𝟙 W`. -/
+lemma leftDerivedUpperStarTensor_id_of_eq {h : W ⟶ W} (hh : h = 𝟙 W)
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W))) :
+    ((leftDerivedUpperStarTensor Λ h).app K).app M ≫
+        ((eqToHom (by subst hh; rfl) ≫ (leftDerivedUpperStarId Λ W).hom.app K) ⊗ₘ
+          (eqToHom (by subst hh; rfl) ≫ (leftDerivedUpperStarId Λ W).hom.app M)) =
+      eqToHom (by subst hh; rfl) ≫ (leftDerivedUpperStarId Λ W).hom.app (K ⊗ M) := by
+  subst hh
+  simp only [eqToHom_refl, Category.id_comp]
+  exact leftDerivedUpperStarTensor_id Λ W K M
+
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -83,4 +83,30 @@ lemma comp_tensorHom_hom_eq_of_eq_comp_tensorHom_inv {D : Type*} [Category D] [M
   rw [h, Category.assoc, tensorHom_comp_tensorHom, e.inv_hom_id, e'.inv_hom_id, id_tensorHom_id,
     Category.comp_id]
 
+section Id
+
+variable {HZ DZ : Type*} [Category HZ] [Category DZ] [MonoidalCategory HZ] [MonoidalCategory DZ]
+  {QZ : HZ ⥤ DZ} [QZ.LaxMonoidal] {Eh : HZ ⥤ HZ} {Le : DZ ⥤ DZ}
+
+/-- The identity isomorphism `L(I) ≅ 𝟭` of a derived functor, read through the tensor
+comparisons, on the image of `(P, Q)` composed with the counit of the bifunctor. -/
+lemma derivedId_tensor_aux (εe : QZ ⋙ Le ⟶ Eh ⋙ QZ) (ι : Le ≅ 𝟭 DZ) (P Q : HZ)
+    (j : ∀ K : HZ, Eh.obj K ⟶ K) (Te : Eh.obj P ⊗ Eh.obj Q ⟶ Eh.obj (P ⊗ Q))
+    (hι : ∀ K, ι.hom.app (QZ.obj K) = εe.app K ≫ QZ.map (j K))
+    (hT : (j P ⊗ₘ j Q) = Te ≫ j (P ⊗ Q)) [IsIso (QZ.map (j (P ⊗ Q)))] :
+    (ι.hom.app (QZ.obj P ⊗ QZ.obj Q) ≫ (ι.inv.app (QZ.obj P) ⊗ₘ ι.inv.app (QZ.obj Q))) ≫
+        (εe.app P ⊗ₘ εe.app Q) ≫ μ QZ _ _ ≫ QZ.map Te =
+      Le.map (μ QZ P Q) ≫ εe.app (P ⊗ Q) := by
+  have hinv (K : HZ) : ι.inv.app (QZ.obj K) ≫ εe.app K ≫ QZ.map (j K) = 𝟙 _ := by
+    rw [← hι, Iso.inv_hom_id_app]
+  rw [← cancel_mono (QZ.map (j (P ⊗ Q)))]
+  simp only [Category.assoc]
+  rw [← QZ.map_comp, ← hT, ← μ_natural, tensorHom_comp_tensorHom_assoc,
+    tensorHom_comp_tensorHom_assoc, Category.assoc, Category.assoc, hinv, hinv]
+  erw [id_tensorHom_id, Category.id_comp]
+  rw [← hι]
+  exact (ι.hom.naturality (μ QZ P Q)).symm
+
+end Id
+
 end CategoryTheory
