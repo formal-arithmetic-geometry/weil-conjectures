@@ -33,46 +33,15 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace CategoryTheory
 
-/-- The adjoint for a composite adjunction through the conjugate composition isomorphism: for
-`Lpq ≅ Lq ⋙ Lp` and its conjugate `Rp ⋙ Rq ≅ Rpq`, `(φ♯)♯ ≫ (Rp ⋙ Rq ≅ Rpq) = (c ≫ φ)♯`. -/
-lemma Adjunction.homEquiv_homEquiv_comp_hom_app {CA CB CC : Type*} [Category CA] [Category CB]
-    [Category CC] {Lp : CB ⥤ CA} {Rp : CA ⥤ CB} {Lq : CC ⥤ CB} {Rq : CB ⥤ CC} {Lpq : CC ⥤ CA}
-    {Rpq : CA ⥤ CC} (ap : Lp ⊣ Rp) (aq : Lq ⊣ Rq) (apq : Lpq ⊣ Rpq) (cU : Lpq ≅ Lq ⋙ Lp)
-    (cR : Rp ⋙ Rq ≅ Rpq) (hcR : cR.inv = conjugateEquiv apq (aq.comp ap) cU.inv) {oC : CC}
-    {oA : CA} (φ : Lp.obj (Lq.obj oC) ⟶ oA) :
-    aq.homEquiv _ _ (ap.homEquiv _ _ φ) ≫ cR.hom.app oA =
-      apq.homEquiv _ _ (cU.hom.app oC ≫ φ) := by
-  have h := Adjunction.unit_map_comp_unit_map ap aq apq cU cR hcR (𝟙 _) φ (cU.hom.app oC ≫ φ)
-    (by simp)
-  rw [← cancel_mono (cR.inv.app oA)]
-  simp only [Category.assoc, Iso.hom_inv_id_app]
-  simpa [Adjunction.homEquiv_unit] using h
-
 /-- Monoidal bookkeeping: `δ ≫ ((a ≫ c₁) ⊗ (b ≫ c₂')) = δ ≫ (c₁ ⊗ c₂) ≫ (M ◁ χ)` for `a = 𝟙` and
 `b ≫ c₂' = c₂ ≫ χ`. -/
-lemma comp_tensorHom_eq_of_eq {C : Type*} [Category C] [MonoidalCategory C] {T P Q Q' M N N' : C}
+private lemma comp_tensorHom_eq_of_eq {C : Type*} [Category C] [MonoidalCategory C]
+    {T P Q Q' M N N' : C}
     (δ : T ⟶ P ⊗ Q) (a : P ⟶ P) (ha : a = 𝟙 P) (c₁ : P ⟶ M) (b : Q ⟶ Q') (c₂' : Q' ⟶ N')
     (c₂ : Q ⟶ N) (χ : N ⟶ N') (h : b ≫ c₂' = c₂ ≫ χ) :
     δ ≫ ((a ≫ c₁) ⊗ₘ (b ≫ c₂')) = δ ≫ (c₁ ⊗ₘ c₂) ≫ (M ◁ χ) := by
   subst ha
   rw [MonoidalCategory.tensorHom_comp_whiskerLeft, h, Category.id_comp]
-
-/-- Moving maps into and out of an adjoint:
-`d ≫ (x₁ ≫ x₂)♯ ≫ R e ≫ t = (L d ≫ x₁ ≫ x₂ ≫ e)♯ ≫ t`. -/
-lemma Adjunction.comp_homEquiv_comp_map {C D : Type*} [Category C] [Category D] {L : C ⥤ D}
-    {R : D ⥤ C} (adj : L ⊣ R) {P Q : C} {M M' N : D} {T : C} (d : P ⟶ Q) (x₁ : L.obj Q ⟶ M')
-    (x₂ : M' ⟶ M) (e : M ⟶ N) (t : R.obj N ⟶ T) :
-    d ≫ adj.homEquiv _ _ (x₁ ≫ x₂) ≫ R.map e ≫ t =
-      adj.homEquiv _ _ (L.map d ≫ x₁ ≫ x₂ ≫ e) ≫ t := by
-  rw [Adjunction.homEquiv_naturality_left]
-  simp [Adjunction.homEquiv_naturality_right]
-
-/-- `Adjunction.homEquiv_naturality_right`, followed by a morphism. -/
-lemma Adjunction.homEquiv_comp_map_comp {C D : Type*} [Category C] [Category D] {L : C ⥤ D}
-    {R : D ⥤ C} (adj : L ⊣ R) {P : C} {M N : D} {T : C} (x : L.obj P ⟶ M) (e : M ⟶ N)
-    (t : R.obj N ⟶ T) :
-    adj.homEquiv _ _ x ≫ R.map e ≫ t = adj.homEquiv _ _ (x ≫ e) ≫ t := by
-  rw [Adjunction.homEquiv_naturality_right, Category.assoc]
 
 end CategoryTheory
 

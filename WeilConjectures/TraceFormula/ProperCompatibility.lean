@@ -30,6 +30,25 @@ open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Bookkeeping for the proper pushforward of the trace class (blueprint
+`thm-trf-trace-proper-compatibility`, Step 4): two chains of points through a square agree. -/
+private lemma comp_eq_comp_of_points {C : Type*} [Category C]
+    {P₀ P₁ P₂ P₃ P₄ P₅ Q₁ Q₂ Q₃ Q₄ Q₅ R₁ R₂ S₁ S₂ N : C}
+    (a₁ : P₀ ⟶ P₁) (a₂ : P₁ ⟶ P₂) (a₃ : P₂ ⟶ P₃) (a₄ : P₃ ⟶ P₄) (t : P₄ ⟶ P₅)
+    (b₁ : P₀ ⟶ Q₁) (b₂ : Q₁ ⟶ Q₂) (b₃ : Q₂ ⟶ Q₃) (b₄ : Q₃ ⟶ Q₄) (t' : Q₄ ⟶ Q₅)
+    (e₁ : Q₅ ⟶ R₁) (e₂ : R₁ ⟶ R₂) (e₃ : R₂ ⟶ P₅) (f₁ : Q₄ ⟶ S₁) (f₂ : S₁ ⟶ S₂) (f₃ : S₂ ⟶ P₄)
+    (z : P₀ ⟶ S₁) (w : P₀ ⟶ S₂) (r : P₅ ⟶ N)
+    (hnat : t' ≫ e₁ ≫ e₂ ≫ e₃ = f₁ ≫ f₂ ≫ f₃ ≫ t) (hpg : b₁ ≫ b₂ ≫ b₃ ≫ b₄ ≫ f₁ = z)
+    (htr : z ≫ f₂ = w) (hhb : a₁ ≫ a₂ ≫ a₃ ≫ a₄ = w ≫ f₃) :
+    a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ t ≫ r = b₁ ≫ b₂ ≫ b₃ ≫ b₄ ≫ t' ≫ e₁ ≫ e₂ ≫ e₃ ≫ r := by
+  rw [reassoc_of% hnat]
+  simp only [← Category.assoc] at hpg hhb ⊢
+  rw [hpg, hhb, ← htr]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme

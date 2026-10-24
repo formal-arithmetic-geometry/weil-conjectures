@@ -13,6 +13,17 @@ public import WeilConjectures.TraceFormula.ShriekTrace
 
 # Exchange of the support isomorphisms along a proper pushforward diagram
 
+For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced map of fixed loci `h`,
+the support isomorphisms are exchanged by the exchange map `E` of the support square:
+`Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`
+(`Correspondence.ProperPushforwardDiagram.lowerStar_map_supportIso_comp_exchange`, blueprint
+`lem-trf-trace-map-exchange`, (2)). Following the blueprint proof, we pass to the
+`Rb_! ⊣ Rb^!` adjoints; the exceptional adjoint of `ζ_c` is the composition law of the fixed
+square followed by the trace `t_d`
+(`ProEtale.CondensedRing.Correspondence.FixedLocus.homEquiv_symm_supportIso_hom`, the last
+assertion of `def-trf-kernel-pushforward-maps`), and the claim reduces to the compatibility of
+the traces with composition (`ProEtale.CondensedRing.lowerShriekSquareIso_trace_exchange`).
+
 -/
 
 @[expose] public section
@@ -22,64 +33,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory
-
-lemma NatTrans.naturality_comp_assoc {C D E : Type*} [Category C] [Category D] [Category E]
-    {F₁ F₂ : C ⥤ D} {G₁ G₂ : D ⥤ E} (α : F₁ ⋙ G₁ ⟶ F₂ ⋙ G₂) {X Y : C} (x : X ⟶ Y) {Z : E}
-    (h : G₂.obj (F₂.obj Y) ⟶ Z) :
-    G₁.map (F₁.map x) ≫ α.app Y ≫ h = α.app X ≫ G₂.map (F₂.map x) ≫ h := by
-  simpa using α.naturality_assoc x h
-
-@[reassoc]
-lemma Functor.map_hom_app_comp_map_inv_app {C D E : Type*} [Category C] [Category D] [Category E]
-    (F : D ⥤ E) {G H : C ⥤ D} (e : G ≅ H) (X : C) :
-    F.map (e.hom.app X) ≫ F.map (e.inv.app X) = 𝟙 _ := by
-  rw [← F.map_comp, Iso.hom_inv_id_app, F.map_id]
-
-@[reassoc]
-lemma Functor.map_map_hom_app_comp_map_map_inv_app {B C D E : Type*} [Category B] [Category C]
-    [Category D] [Category E] (F : D ⥤ E) (G : C ⥤ D) {H H' : B ⥤ C} (e : H ≅ H') (X : B) :
-    F.map (G.map (e.hom.app X)) ≫ F.map (G.map (e.inv.app X)) = 𝟙 _ := by
-  rw [← F.map_comp, ← G.map_comp, Iso.hom_inv_id_app, G.map_id, F.map_id]
-
-@[reassoc]
-lemma Iso.hom_app_comp_map_comp_inv_app {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
-    (e : F ≅ G) {X Y : C} (φ : X ⟶ Y) : e.hom.app X ≫ G.map φ ≫ e.inv.app Y = F.map φ := by
-  rw [← NatTrans.naturality_assoc, Iso.hom_inv_id_app, Category.comp_id]
-
-@[reassoc]
-lemma Functor.map_hom_app_comp_map_map_comp_map_inv_app {C D E : Type*} [Category C] [Category D]
-    [Category E] (K : D ⥤ E) {F G : C ⥤ D} (e : F ≅ G) {X Y : C} (φ : X ⟶ Y) :
-    K.map (e.hom.app X) ≫ K.map (G.map φ) ≫ K.map (e.inv.app Y) = K.map (F.map φ) := by
-  rw [← K.map_comp, ← K.map_comp, Iso.hom_app_comp_map_comp_inv_app]
-
-@[reassoc]
-lemma NatTrans.app_comp_map_map {C D E : Type*} [Category C] [Category D] [Category E]
-    {F : C ⥤ E} {G : C ⥤ D} {H : D ⥤ E} (α : F ⟶ G ⋙ H) {X Y : C} (x : X ⟶ Y) :
-    α.app X ≫ H.map (G.map x) = F.map x ≫ α.app Y :=
-  (α.naturality x).symm
-
-@[reassoc]
-lemma NatTrans.map_map_comp_app {C D E : Type*} [Category C] [Category D] [Category E]
-    {F : C ⥤ E} {G : C ⥤ D} {H : D ⥤ E} (α : G ⋙ H ⟶ F) {X Y : C} (x : X ⟶ Y) :
-    H.map (G.map x) ≫ α.app Y = α.app X ≫ F.map x :=
-  α.naturality x
-
-@[reassoc]
-lemma Functor.map_app_comp_map_map {B C D : Type*} [Category B] [Category C] [Category D]
-    (K : C ⥤ D) {F G : B ⥤ C} (α : F ⟶ G) {X Y : B} (x : X ⟶ Y) :
-    K.map (α.app X) ≫ K.map (G.map x) = K.map (F.map x) ≫ K.map (α.app Y) := by
-  rw [← K.map_comp, ← K.map_comp, α.naturality]
-
-@[reassoc]
-lemma Iso.hom_app_comp_map₃_comp_inv_app {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
-    (e : F ≅ G) {X Y Z W : C} (a : X ⟶ Y) (b : Y ⟶ Z) (c : Z ⟶ W) :
-    e.hom.app X ≫ G.map a ≫ G.map b ≫ G.map c ≫ e.inv.app W = F.map a ≫ F.map b ≫ F.map c := by
-  rw [← G.map_comp_assoc, ← G.map_comp_assoc, Iso.hom_app_comp_map_comp_inv_app, F.map_comp,
-    F.map_comp, Category.assoc]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -214,7 +167,8 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar _ ℓ Δb)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f),
     Functor.map_map_hom_app_comp_map_map_inv_app_assoc (boundedConstructibleLowerShriek _ ℓ b)
-      (boundedConstructibleLowerStar _ ℓ ιb) (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h),
+      (boundedConstructibleLowerStar _ ℓ ιb)
+          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h),
     lowerShriekIsoLowerStar_hom_app_comp_eqToHom_assoc ℓ wq, Iso.hom_inv_id_app_assoc,
     ← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δb).hom.naturality
       (lowerShriekDualizingComplexTrace ℓ f)]

@@ -31,7 +31,13 @@ variable {C D : Type*} [Category C] [Category D]
 
 /-- Let `c : L_F ≅ G ⋙ L_h` and `ι : G ≅ 𝟭` be isomorphisms of left adjoints whose composite is
 `e : L_F ≅ L_h`. Then the conjugates `R_F ≅ R_h ⋙ R_G` of `c` and `R_G ≅ 𝟭` of `ι` compose to
-the conjugate `R_F ≅ R_h` of `e`. -/
+the conjugate `R_F ≅ R_h` of `e`:
+```
+R_F ──conj(c)──▶ R_G R_h ──conj(ι)──▶ R_h
+  ╲                                    ╱
+   ╰──────────── conj(e) ────────────╯
+```
+-/
 lemma conjugateIsoEquiv_comp_left_hom_app {LF Lh : C ⥤ D} {RF Rh : D ⥤ C} {G RG : C ⥤ C}
     (adjF : LF ⊣ RF) (adjh : Lh ⊣ Rh) (adjG : G ⊣ RG) (c : LF ≅ G ⋙ Lh) (ι : G ≅ 𝟭 C)
     (e : LF ≅ Lh) (hc : ∀ K, c.hom.app K ≫ Lh.map (ι.hom.app K) = e.hom.app K) (K' : D) :

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.MateComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.TraceFormula.Dualizing
 
@@ -13,9 +14,9 @@ public import WeilConjectures.TraceFormula.Dualizing
 # The trace of the dualizing complexes along the compactly supported direct image
 
 For a morphism `a : A ⟶ B` of separated `k`-schemes of finite type, the *trace*
-`t_a : Ra_! ω_A ⟶ ω_B` (`ProEtale.CondensedRing.lowerShriekDualizingComplexTrace`) is the exceptional
-adjoint of `ω_A ≅ Ra^! ω_B`. Its adjoint along the structure morphism of `B` is the composition
-isomorphism followed by the counit of `A`
+`t_a : Ra_! ω_A ⟶ ω_B` (`ProEtale.CondensedRing.lowerShriekDualizingComplexTrace`) is the
+exceptional adjoint of `ω_A ≅ Ra^! ω_B`. Its adjoint along the structure morphism of `B` is the
+composition isomorphism followed by the counit of `A`
 (`ProEtale.CondensedRing.lowerShriek_map_lowerShriekDualizingComplexTrace_comp_counit`), and the
 traces are compatible with composition: `t_{a ≫ b} = t_b ∘ Rb_! t_a`
 (`ProEtale.CondensedRing.lowerShriekDualizingComplexTrace_comp`).
@@ -29,29 +30,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory
-
-/-- The counit of a composite adjunction through the conjugate composition isomorphisms:
-```
-Lp La Rap N ⟶ Lp La Ra Rp N ⟶ Lp Rp N ⟶ N
-     ‖                                  ‖
-Lp La Rap N ⟶ Lap Rap N ─────────────▶ N
-```
-for `Rap ≅ Rp ⋙ Ra` the conjugate of `Lap ≅ La ⋙ Lp`. -/
-lemma Adjunction.map_map_conjugateIsoEquiv_comp_counit {CA CB CC : Type*} [Category CA]
-    [Category CB] [Category CC] {La : CA ⥤ CB} {Ra : CB ⥤ CA} {Lp : CB ⥤ CC} {Rp : CC ⥤ CB}
-    {Lap : CA ⥤ CC} {Rap : CC ⥤ CA} (Aa : La ⊣ Ra) (Ap : Lp ⊣ Rp) (Aap : Lap ⊣ Rap)
-    (c : Lap ≅ La ⋙ Lp) (N : CC) :
-    Lp.map (La.map ((conjugateIsoEquiv Aap (Aa.comp Ap) c.symm).hom.app N) ≫
-        Aa.counit.app (Rp.obj N)) ≫ Ap.counit.app N =
-      c.inv.app (Rap.obj N) ≫ Aap.counit.app N := by
-  have h := conjugateEquiv_counit Aap (Aa.comp Ap) c.inv N
-  simp only [Functor.comp_map, Adjunction.comp_counit_app, Functor.comp_obj] at h
-  rw [Functor.map_comp, Category.assoc]
-  exact h
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -80,7 +58,8 @@ lemma lowerShriek_map_eqToHom_comp_counit {r r' : A ⟶ B} (h : r = r')
           (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ s).obj N) h.symm)) ≫
       (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r).counit.app N =
     eqToHom (by subst h; rfl) ≫
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r').counit.app N := by
+      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r').counit.app
+          N := by
   subst h
   simp
 
@@ -163,7 +142,8 @@ theorem lowerShriekDualizingComplexTrace_comp (a : A ⟶ B) (b : B ⟶ C) :
     rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (a ≫ b)
       (toPoint C)).hom.app (dualizingComplex' ℓ A)), reassoc_of% hassoc]
     simp
-  rw [pb, reassoc_of% hn, reassoc_of% he, pa, pab, reassoc_of% hassoc', reassoc_of% hc, Iso.hom_inv_id_app_assoc, eqToHom_trans_assoc,
+  rw [pb, reassoc_of% hn, reassoc_of% he, pa, pab, reassoc_of% hassoc', reassoc_of% hc,
+      Iso.hom_inv_id_app_assoc, eqToHom_trans_assoc,
     eqToHom_trans_assoc]
 
 section Coherence
@@ -175,38 +155,57 @@ variable {D : Over (Spec (.of k))} [LocallyOfFiniteType D.hom] [QuasiCompact D.h
 @[reassoc]
 lemma lowerShriekComp_hom_app_map_inv_app (x : A ⟶ B) (y : B ⟶ C) (z : C ⟶ D)
     (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).hom.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app M) =
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).inv.app M ≫ eqToHom (by rw [Category.assoc]) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).hom.app M := by
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) ≫
+            (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map
+                ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app M) =
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).inv.app M ≫
+          eqToHom (by rw [Category.assoc]) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫
+              y) z).hom.app M := by
   have h := boundedConstructibleLowerShriekComp_padicAlgCl_assoc ℓ x y z M
   rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).hom.app M),
-    ← cancel_epi (eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M) (Category.assoc x y z)))]
+    ← cancel_epi (eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek
+        (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M) (Category.assoc x y z)))]
   rw [← reassoc_of% h]
   simp [← Functor.map_comp]
 
 @[reassoc]
 lemma lowerShriekComp_hom_app_comp_hom_app (x : A ⟶ B) (y : B ⟶ C) (z : C ⟶ D)
     (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).hom.app M ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).hom.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) =
-      eqToHom (by rw [Category.assoc]) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).hom.app M ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app M) := by
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).hom.app M ≫
+        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).hom.app
+            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) =
+      eqToHom (by rw [Category.assoc]) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫
+          y) z).hom.app M ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map
+            ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app M) := by
   rw [boundedConstructibleLowerShriekComp_padicAlgCl_assoc]
   simp
 
 @[reassoc]
 lemma lowerShriek_map_lowerShriekComp_hom_app_comp_inv_app (x : A ⟶ B) (y : B ⟶ C)
     (z : C ⟶ D) (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app M) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).inv.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) =
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).inv.app M ≫ eqToHom (by rw [Category.assoc]) ≫
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app M) ≫
+            (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).inv.app
+                ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) =
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).inv.app M ≫
+          eqToHom (by rw [Category.assoc]) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).hom.app M := by
   have h := boundedConstructibleLowerShriekComp_padicAlgCl_assoc ℓ x y z M
-  rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).hom.app M), reassoc_of% h]
+  rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫
+      y) z).hom.app M), reassoc_of% h]
   simp
 
 @[reassoc]
 lemma lowerShriek_map_lowerShriekComp_inv_app_comp_inv_app (x : A ⟶ B) (y : B ⟶ C)
     (z : C ⟶ D) (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app M) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).inv.app M =
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).inv.app ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).inv.app M ≫
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app M) ≫
+            (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (x ≫ y) z).inv.app M =
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ y z).inv.app
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ x).obj M) ≫
+              (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x (y ≫ z)).inv.app M ≫
         eqToHom (by rw [Category.assoc]) := by
   have h := boundedConstructibleLowerShriekComp_padicAlgCl_assoc ℓ x y z M
   rw [← cancel_epi ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map
@@ -234,7 +233,10 @@ lemma lowerShriek_map_lowerShriekComp_inv_app_comp_eqToHom_comp_inv_app (x : A �
 @[reassoc]
 lemma lowerShriekComp_hom_app_comp_map_eqToHom {u u' : A ⟶ B} (h : u = u') (z : B ⟶ C)
     (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u z).hom.app M ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map (eqToHom (congrArg (fun s ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ s).obj M) h)) =
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u z).hom.app M ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map (eqToHom
+            (congrArg (fun s ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+                s).obj M) h)) =
       eqToHom (by rw [h]) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u' z).hom.app M := by
   subst h
   simp
@@ -242,7 +244,9 @@ lemma lowerShriekComp_hom_app_comp_map_eqToHom {u u' : A ⟶ B} (h : u = u') (z 
 @[reassoc]
 lemma lowerShriek_map_eqToHom_comp_lowerShriekComp_inv_app {u u' : A ⟶ B} (h : u = u')
     (z : B ⟶ C) (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map (eqToHom (congrArg (fun s ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ s).obj M) h)) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u' z).inv.app M =
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ z).map (eqToHom (congrArg
+        (fun s ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ s).obj M) h)) ≫
+            (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u' z).inv.app M =
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u z).inv.app M ≫ eqToHom (by rw [h]) := by
   subst h
   simp
@@ -257,7 +261,8 @@ lemma eqToHom_comp_lowerShriekComp_inv_app {r r' : B ⟶ C} (h : r = r') (a : A 
   simp
 
 lemma eqToHom_comp_lowerShriekDualizingComplexTrace {r r' : A ⟶ B} (h : r = r') :
-    eqToHom (congrArg (fun s ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ s).obj (dualizingComplex' ℓ A)) h) ≫
+    eqToHom (congrArg (fun s ↦ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        s).obj (dualizingComplex' ℓ A)) h) ≫
         lowerShriekDualizingComplexTrace ℓ r' = lowerShriekDualizingComplexTrace ℓ r := by
   subst h
   simp
@@ -320,7 +325,8 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
       (lowerShriekDualizingComplexTrace ℓ dc) ≫ lowerShriekDualizingComplexTrace ℓ f =
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ dc f).inv.app (dualizingComplex' ℓ Fc) ≫
         eqToHom (by rw [whd]) ≫ lowerShriekDualizingComplexTrace ℓ (h ≫ db) := by
-    rw [eqToHom_comp_lowerShriekDualizingComplexTrace ℓ whd, ← lowerShriekDualizingComplexTrace_comp,
+    rw [eqToHom_comp_lowerShriekDualizingComplexTrace ℓ whd, ←
+        lowerShriekDualizingComplexTrace_comp,
       Iso.inv_hom_id_app_assoc]
   have T₂ : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ db).map
       (lowerShriekDualizingComplexTrace ℓ h) ≫ lowerShriekDualizingComplexTrace ℓ db =
@@ -356,7 +362,8 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
     ℓ db).map _), T₂]
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, Iso.trans_hom, Iso.symm_hom,
     eqToIso.hom, NatTrans.comp_app, eqToHom_app, Functor.map_comp, Category.assoc]
-  rw [lowerShriekComp_hom_app_map_inv_app_assoc, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ wc,
+  rw [lowerShriekComp_hom_app_map_inv_app_assoc, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ
+      wc,
     reassoc_of% (boundedConstructibleLowerShriekComp_padicAlgCl_assoc ℓ dc Δc q
       (dualizingComplex' ℓ Fc)), Iso.hom_inv_id_app_assoc,
     lowerShriekComp_hom_app_comp_eqToHom_assoc ℓ wq, lowerShriekComp_hom_app_comp_hom_app_assoc,
@@ -368,7 +375,7 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
     ← Functor.map_comp_assoc _ ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ h db).hom.app _)]
   simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   rw [lowerShriek_map_lowerShriekComp_inv_app_comp_eqToHom_comp_inv_app_assoc ℓ ιc g b wh]
-  simp only [eqToHom_trans, eqToHom_trans_assoc]
+  simp only [eqToHom_trans_assoc]
 
 end Exchange
 
