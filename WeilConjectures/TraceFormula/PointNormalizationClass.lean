@@ -49,9 +49,36 @@ variable (ℓ k) in
 noncomputable abbrev pointDiagAdj :=
   boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (diag (point k))
 
+omit [Fact (ringChar k).Prime] in
+lemma prod_fst_diag_point :
+    (prod.fst : point k ⨯ point k ⟶ point k) ≫ diag (point k) = 𝟙 _ :=
+  prod.hom_ext (by simp) (by simpa using toPoint_ext _ _)
+
+variable (ℓ k) in
+/-- `LΔ^*` is an equivalence over the base point, with inverse `Lp₁^*`: `Δ ≫ p₁ = 𝟙` and
+`p₁ ≫ Δ = 𝟙`. -/
+noncomputable def pointDiagUpperStarEquivalence :
+    Dᵇc((point k ⨯ point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ≌
+      Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  CategoryTheory.Equivalence.mk (boundedConstructibleUpperStar _ ℓ (diag (point k)))
+    (boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    ((boundedConstructibleUpperStarId _ ℓ _).symm ≪≫
+      eqToIso (congrArg (fun g : point k ⨯ point k ⟶ point k ⨯ point k ↦
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+          prod_fst_diag_point.symm) ≪≫
+      boundedConstructibleUpperStarComp _ ℓ _ _)
+    ((boundedConstructibleUpperStarComp _ ℓ _ _).symm ≪≫
+      eqToIso (congrArg (fun g : point k ⟶ point k ↦
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+      boundedConstructibleUpperStarId _ ℓ _)
+
+instance : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (diag (point k))).IsEquivalence :=
+  (pointDiagUpperStarEquivalence ℓ k).isEquivalence_functor
+
 instance (Z : Dᵇc((point k ⨯ point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((pointDiagAdj ℓ k).unit.app Z) :=
-  sorry
+  inferInstance
 
 variable (ℓ k) in
 /-- `RΔ_! ⋙ Rp₁_! ≅ R(Δ ≫ p₁)_! = R(𝟙)_! ≅ 𝟭`. -/
@@ -130,13 +157,15 @@ lemma pointClass_coeff :
         Iso.symm_hom, NatTrans.comp_app, Iso.app_hom, Iso.app_inv, eqToIso.hom]
     | simp only [Functor.comp_obj]
 
+variable (K) in
 /-- The transport of the class of the identity along `LΔ^*`. -/
-lemma pointClass_transport (v : K ⟶ K)
+lemma pointClass_transport
     (hbraid : Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k)))
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj K)
         ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) ≫
       (boundedConstructibleUpperStar _ ℓ (diag (point k))).map (β_ _ _).hom =
-      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _) :
+      (β_ _ _).hom ≫
+        Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _) :
     Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
       (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
         (uncurry (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm)) ≫
@@ -161,7 +190,8 @@ lemma pointClass_transport (v : K ⟶ K)
     (fun T M ↦ by exact upperStar_map_exceptionalProjection_comp_counit ℓ (diag (point k)) T M)
     (by exact hbraid)
     (diagUnitCoeff ℓ (K := K) diag_point_snd diag_point_fst.symm)
-  convert h using 3 <;> rfl
+  convert h using 3
+  rfl
 
 end ClassTransport
 

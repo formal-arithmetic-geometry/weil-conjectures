@@ -88,7 +88,7 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
   case hbraid => sorry
   case hK => exact pointKunneth_transport K sorry sorry
   case hC =>
-    exact pointClass_transport v sorry
+    exact pointClass_transport K sorry
 
 /-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
 `sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
