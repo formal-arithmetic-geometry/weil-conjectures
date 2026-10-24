@@ -97,4 +97,77 @@ lemma projectionMorphism_eq_of_iso
 
 end Transport
 
+section TransportComparison
+
+variable {D₁ D₂ : Type*} [Category D₁] [Category D₂] [MonoidalCategory D₁] [MonoidalCategory D₂]
+  {P P' : D₁ ⥤ D₂} {S S' : D₂ ⥤ D₁} [S.LaxMonoidal] [S'.LaxMonoidal]
+  (b : P ⊣ S) (b' : P' ⊣ S') (e : S ≅ S')
+
+open Functor.LaxMonoidal in
+/-- The projection comparison is transported along an isomorphism `e : S ≅ S'` of lax monoidal
+right adjoints compatible with the multiplications, through the conjugate `P' ≅ P`. -/
+lemma projectionComparison_eq_of_iso
+    (he : ∀ X Y, μ S X Y ≫ e.hom.app (X ⊗ Y) = (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ S' X Y)
+    (M : D₁) (N : D₂) :
+    b.projectionComparison M N =
+      ((conjugateIsoEquiv b b').symm e).inv.app (M ⊗ S.obj N) ≫ P'.map (M ◁ e.hom.app N) ≫
+        b'.projectionComparison M N ≫ ((conjugateIsoEquiv b b').symm e).hom.app M ▷ N := by
+  set γ := (conjugateIsoEquiv b b').symm e with hγ
+  have hu : ∀ X, b'.unit.app X ≫ S'.map (γ.hom.app X) = b.unit.app X ≫ e.hom.app (P.obj X) := by
+    intro X
+    have h := unit_conjugateEquiv b b' γ.hom X
+    rw [show conjugateEquiv b b' γ.hom = e.hom by
+      rw [hγ, ← conjugateIsoEquiv_apply_hom, Equiv.apply_symm_apply]] at h
+    exact h.symm
+  have hpc : b.homEquiv _ _ (b.projectionComparison M N) =
+      b.unit.app M ▷ S.obj N ≫ μ S (P.obj M) N := by
+    rw [projectionComparison, Equiv.apply_symm_apply]
+  have hpc' : b'.homEquiv _ _ (b'.projectionComparison M N) =
+      b'.unit.app M ▷ S'.obj N ≫ μ S' (P'.obj M) N := by
+    rw [projectionComparison, Equiv.apply_symm_apply]
+  rw [← cancel_epi (γ.hom.app (M ⊗ S.obj N)), Iso.hom_inv_id_app_assoc]
+  apply (b'.homEquiv _ _).injective
+  conv_lhs => rw [homEquiv_unit, S'.map_comp, ← Category.assoc, hu, Category.assoc,
+    ← e.hom.naturality,
+    ← Category.assoc, ← homEquiv_unit, hpc]
+  conv_rhs => rw [homEquiv_naturality_left, homEquiv_naturality_right, hpc']
+  rw [Category.assoc, Category.assoc, ← μ_natural_left, ← comp_whiskerRight_assoc, hu,
+    comp_whiskerRight_assoc, whisker_exchange_assoc, ← tensorHom_def'_assoc, ← he]
+
+end TransportComparison
+
+section Combined
+
+variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+  [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory C₃]
+
+/-- An isomorphism of monoidal functors compatible with the comultiplications is compatible with
+the multiplications. -/
+lemma μ_comp_hom_app_eq_of_δ {F F' : C₁ ⥤ C₂} [F.Monoidal] [F'.Monoidal] (e : F ≅ F')
+    (he : ∀ X Y, δ F X Y ≫ (e.hom.app X ⊗ₘ e.hom.app Y) = e.hom.app (X ⊗ Y) ≫ δ F' X Y)
+    (X Y : C₁) :
+    Functor.LaxMonoidal.μ F X Y ≫ e.hom.app (X ⊗ Y) =
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ Functor.LaxMonoidal.μ F' X Y := by
+  rw [← cancel_mono (δ F' X Y), Category.assoc, Category.assoc, Functor.Monoidal.μ_δ,
+    Category.comp_id, ← he, Functor.Monoidal.μ_δ_assoc]
+
+/-- The projection comparison of `P ⊣ S` with `S ≅ S₂ ⋙ S₁` a monoidal isomorphism is the
+composite of the projection comparisons of `P₁ ⊣ S₁` and `P₂ ⊣ S₂`, read through `S ≅ S₂ ⋙ S₁`
+and its conjugate. -/
+lemma projectionComparison_eq_of_iso_comp {P : C₁ ⥤ C₃} {S : C₃ ⥤ C₁} {P₁ : C₁ ⥤ C₂}
+    {S₁ : C₂ ⥤ C₁} {P₂ : C₂ ⥤ C₃} {S₂ : C₃ ⥤ C₂} [S.Monoidal] [S₁.Monoidal] [S₂.Monoidal]
+    (b : P ⊣ S) (b₁ : P₁ ⊣ S₁) (b₂ : P₂ ⊣ S₂) (e : S ≅ S₂ ⋙ S₁)
+    (he : ∀ X Y, δ S X Y ≫ (e.hom.app X ⊗ₘ e.hom.app Y) = e.hom.app (X ⊗ Y) ≫ δ (S₂ ⋙ S₁) X Y)
+    (M : C₁) (N : C₃) :
+    b.projectionComparison M N =
+      ((conjugateIsoEquiv b (b₁.comp b₂)).symm e).inv.app (M ⊗ S.obj N) ≫
+        P₂.map (P₁.map (M ◁ e.hom.app N)) ≫ P₂.map (b₁.projectionComparison M (S₂.obj N)) ≫
+        b₂.projectionComparison (P₁.obj M) N ≫
+        ((conjugateIsoEquiv b (b₁.comp b₂)).symm e).hom.app M ▷ N := by
+  rw [projectionComparison_eq_of_iso b (b₁.comp b₂) e (μ_comp_hom_app_eq_of_δ e he),
+    projectionComparison_comp]
+  simp only [Functor.comp_map, Category.assoc]
+
+end Combined
+
 end CategoryTheory.Adjunction

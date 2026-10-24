@@ -83,4 +83,36 @@ lemma properProjectionMorphism_comp
     (leftDerivedUpperStarComp Λ f g) (leftDerivedUpperStarComp_δ Λ f g) A B).trans
     (by rw [Adjunction.projectionMorphism_comp, Category.assoc]; rfl)
 
+section Open
+
+variable {U V : Scheme.{u}} (i : U ⟶ V) (i' : V ⟶ X) [IsOpenImmersion i] [IsOpenImmersion i']
+
+set_option maxHeartbeats 2000000 in
+-- instantiating the abstract statement in the derived categories of module objects
+/-- **The open projection comparison of a composite** (blueprint `prop-sf-pf-coherence`,
+composition clause, for the extensions by zero along open immersions). -/
+lemma openImmersionProjectionComparison_comp
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    openImmersionProjectionComparison Λ (i ≫ i') M N =
+      ((conjugateIsoEquiv
+          (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (i ≫ i'))
+          ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i).comp
+            (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i'))).symm
+          (leftDerivedUpperStarComp Λ i i')).inv.app _ ≫
+        (D((i')_!open⟦Λ⟧)).map ((D((i)_!open⟦Λ⟧)).map
+          (M ◁ (leftDerivedUpperStarComp Λ i i').hom.app N)) ≫
+        (D((i')_!open⟦Λ⟧)).map (openImmersionProjectionComparison Λ i M ((L((i')^*⟦Λ⟧)).obj N)) ≫
+        openImmersionProjectionComparison Λ i' ((D((i)_!open⟦Λ⟧)).obj M) N ≫
+        ((conjugateIsoEquiv
+          (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (i ≫ i'))
+          ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i).comp
+            (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i'))).symm
+          (leftDerivedUpperStarComp Λ i i')).hom.app M ▷ N :=
+  Adjunction.projectionComparison_eq_of_iso_comp _ _ _ (leftDerivedUpperStarComp Λ i i')
+    (leftDerivedUpperStarComp_δ Λ i i') M N
+
+end Open
+
 end AlgebraicGeometry.ProEtale.CondensedRing
