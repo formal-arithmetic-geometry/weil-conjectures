@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.DualizableDecomposition
+public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 public import WeilConjectures.TraceFormula.PointTrace
 
 /-!
@@ -14,8 +14,9 @@ public import WeilConjectures.TraceFormula.PointTrace
 Let `k` be a separably closed field and `s = Spec k`. Every object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is a finite
 direct sum of shifts `𝟙⟦n⟧` of the unit
 (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), and each `𝟙⟦n⟧` is invertible,
-with inverse `𝟙⟦-n⟧`. Hence every object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is dualizable
-(`ProEtale.CondensedRing.nonempty_hasRightDual_point`): the bounded complexes of
+with inverse `𝟙⟦-n⟧`, and a finite biproduct of dualizable objects is dualizable
+(`CategoryTheory.Limits.Bicone.nonempty_hasRightDual_pt`). Hence every object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is
+dualizable (`ProEtale.CondensedRing.nonempty_hasRightDual_point`): the bounded complexes of
 `ℚ̄_ℓ`-vector spaces with finite-dimensional cohomology are the perfect complexes over `ℚ̄_ℓ`
 (blueprint `def-weil-finite-coefficient-point`, `prop-trf-compact-support-perfectness`).
 -/
@@ -27,6 +28,19 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
+
+namespace CategoryTheory.ShiftDecomposition
+
+variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
+  [HasFiniteBiproducts C] [HasShift C ℤ]
+
+/-- An object which is a finite direct sum of shifts of an object `E` all of whose shifts are
+dualizable is dualizable. -/
+theorem isDualizable {E P : C} (D : ShiftDecomposition E P)
+    (hE : ∀ n : ℤ, IsDualizable ((shiftFunctor C n).obj E)) : IsDualizable P :=
+  Bicone.nonempty_hasRightDual_pt D.isBilimitBicone fun j ↦ hE (D.deg j)
+
+end CategoryTheory.ShiftDecomposition
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
