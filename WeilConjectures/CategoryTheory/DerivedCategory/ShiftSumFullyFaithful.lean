@@ -24,8 +24,7 @@ open CategoryTheory Limits
 
 namespace CategoryTheory.Functor
 
-variable {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-  (F : C ⥤ D) [F.Additive]
+variable {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
 
 /-- The functor `F` is bijective on the morphisms `M ⟶ N`. -/
 def HomBijective (M N : C) : Prop :=
@@ -55,11 +54,13 @@ lemma HomBijective.of_iso_right {M N N' : C} (h : F.HomBijective M N) (e : N ≅
     simp only [F.map_comp] at hψ ⊢
     rw [hψ, Category.assoc, ← F.map_comp, e.inv_hom_id, F.map_id, Category.comp_id]
 
+variable [Preadditive C] [Preadditive D] [F.Additive]
+
 lemma HomBijective.of_isZero_left {M N : C} (hM : IsZero M) : F.HomBijective M N :=
-  ⟨fun _ _ _ ↦ hM.eq_of_src _ _, fun χ ↦ ⟨0, ((F.map_isZero hM).eq_of_src _ _)⟩⟩
+  ⟨fun _ _ _ ↦ hM.eq_of_src _ _, fun _ ↦ ⟨0, ((F.map_isZero hM).eq_of_src _ _)⟩⟩
 
 lemma HomBijective.of_isZero_right {M N : C} (hN : IsZero N) : F.HomBijective M N :=
-  ⟨fun _ _ _ ↦ hN.eq_of_tgt _ _, fun χ ↦ ⟨0, ((F.map_isZero hN).eq_of_tgt _ _)⟩⟩
+  ⟨fun _ _ _ ↦ hN.eq_of_tgt _ _, fun _ ↦ ⟨0, ((F.map_isZero hN).eq_of_tgt _ _)⟩⟩
 
 lemma HomBijective.biprod_left [HasBinaryBiproducts C] {M₁ M₂ N : C} (h₁ : F.HomBijective M₁ N)
     (h₂ : F.HomBijective M₂ N) : F.HomBijective (M₁ ⊞ M₂) N := by
@@ -87,6 +88,7 @@ lemma HomBijective.biprod_right [HasBinaryBiproducts C] {M N₁ N₂ : C} (h₁ 
       Category.assoc, ← F.map_comp, ← F.map_comp, ← Preadditive.comp_add, ← F.map_add,
       biprod.total, F.map_id, Category.comp_id]
 
+omit [Preadditive C] [Preadditive D] [F.Additive] in
 lemma HomBijective.shift {A : Type*} [AddGroup A] [HasShift C A] [HasShift D A] [F.CommShift A]
     {M N : C} (h : F.HomBijective M N) (a : A) :
     F.HomBijective ((shiftFunctor C a).obj M) ((shiftFunctor C a).obj N) := by
@@ -123,7 +125,8 @@ variable {C D : Type*} [Category C] [Abelian C] [HasDerivedCategory C] [Category
 `R`, then it is bijective on the morphisms between shifted sums of objects satisfying `R`. -/
 theorem homBijective_of_isShiftSum
     (hbase : ∀ X Y, R X → R Y → ∀ b : ℤ,
-      F.HomBijective ((singleFunctor C 0).obj X) ((shiftFunctor _ b).obj ((singleFunctor C 0).obj Y)))
+      F.HomBijective ((singleFunctor C 0).obj X)
+        ((shiftFunctor _ b).obj ((singleFunctor C 0).obj Y)))
     {M N : DerivedCategory C} (hM : IsShiftSum R M) (hN : IsShiftSum R N) :
     F.HomBijective M N := by
   let Q₂ : ObjectProperty (DerivedCategory C) := fun N' ↦
