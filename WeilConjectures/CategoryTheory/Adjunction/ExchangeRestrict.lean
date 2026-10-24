@@ -36,9 +36,23 @@ variable {B A B' A' : Type*} [Category* B] [Category* A] [Category* B'] [Categor
   (hg : ∀ K : PB.FullSubcategory, PB' ((PB.ι ⋙ g).obj K))
   (hg' : ∀ K : PA.FullSubcategory, PA' ((PA.ι ⋙ g').obj K))
 
-/-- **Exchange morphisms of restrictions.** The exchange morphism of an isomorphism `θ` of the
-functors restricted to full subcategories, for the restricted adjunctions, is the exchange
-morphism of the ambient isomorphism `t` restricting to `θ`. -/
+/-- **Exchange morphisms of restrictions.** Consider adjunctions `lf ⊣ rf : A ⇄ B` and
+`lf' ⊣ rf' : A' ⇄ B'`, functors `g : B ⥤ B'`, `g' : A ⥤ A'` and an isomorphism
+`t : g ⋙ lf' ≅ lf ⋙ g'`, all of which preserve full subcategories `PB`, `PA`, `PB'`, `PA'`:
+
+```
+  PB --lf--> PA          B --lf--> A
+  |          |           |         |
+  g          g'   ⊂      g         g'
+  v          v           v         v
+  PB' -lf'-> PA'         B' -lf'-> A'
+```
+
+The adjunctions restrict to `lf ⊣ rf` on `PA ⇄ PB` and `lf' ⊣ rf'` on `PA' ⇄ PB'`
+(`Adjunction.restrictFullyFaithful`). If `θ` is an isomorphism of the restricted functors which is
+`t` on the underlying objects, then the exchange morphism `rf ⋙ g ⟶ g' ⋙ rf'` of `θ` for the
+restricted adjunctions is, on the underlying objects, the exchange morphism of `t` for the
+ambient adjunctions. -/
 lemma exchangeRight_restrictFullyFaithful_app_hom
     (θ : PB'.lift (PB.ι ⋙ g) hg ⋙ PA'.lift (PB'.ι ⋙ lf') hlf' ≅
       PA.lift (PB.ι ⋙ lf) hlf ⋙ PA'.lift (PA.ι ⋙ g') hg')
@@ -58,5 +72,22 @@ lemma exchangeRight_restrictFullyFaithful_app_hom
   rw [← ObjectProperty.ι_map, ObjectProperty.ι_obj_lift_map, Functor.comp_map,
     map_restrictFullyFaithful_counit_app]
   simp [ObjectProperty.liftCompιIso]
+
+/-- The exchange morphism of the restrictions is an isomorphism at `K` when the ambient exchange
+morphism is an isomorphism at the underlying object of `K`. -/
+lemma isIso_exchangeRight_restrictFullyFaithful_app
+    (θ : PB'.lift (PB.ι ⋙ g) hg ⋙ PA'.lift (PB'.ι ⋙ lf') hlf' ≅
+      PA.lift (PB.ι ⋙ lf) hlf ⋙ PA'.lift (PA.ι ⋙ g') hg')
+    (hθ : ∀ K, (θ.hom.app K).hom = t.hom.app K.obj) (K : PA.FullSubcategory)
+    (hK : IsIso ((exchangeRight ad ad' t).app K.obj)) :
+    IsIso ((exchangeRight
+        (ad.restrictFullyFaithful PB.fullyFaithfulι PA.fullyFaithfulι
+          (PA.liftCompιIso (PB.ι ⋙ lf) hlf).symm (PB.liftCompιIso (PA.ι ⋙ rf) hrf).symm)
+        (ad'.restrictFullyFaithful PB'.fullyFaithfulι PA'.fullyFaithfulι
+          (PA'.liftCompιIso (PB'.ι ⋙ lf') hlf').symm (PB'.liftCompιIso (PA'.ι ⋙ rf') hrf').symm)
+        θ).app K) := by
+  rw [← ObjectProperty.isIso_hom_iff, exchangeRight_restrictFullyFaithful_app_hom ad ad' t]
+  · exact hK
+  · exact hθ
 
 end CategoryTheory.Adjunction
