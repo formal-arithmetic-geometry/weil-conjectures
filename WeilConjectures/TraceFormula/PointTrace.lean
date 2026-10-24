@@ -14,6 +14,7 @@ public import WeilConjectures.LinearAlgebra.TraceLongExactSequence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
 public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.PointFiberFunctor
 
 /-!
 # Traces on the point category over a separably closed field
@@ -54,20 +55,6 @@ example (n : ℤ) :
     (shiftFunctor (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) n).Additive :=
   inferInstance
 
-/-- **The point category, evaluated** (blueprint `def-weil-finite-coefficient-point`): for `k`
-separably closed, evaluation at the geometric point `s = Spec k` is an exact equivalence
-`Fib_s : Dᵇc(s)⟦ℚ̲̄_ℓ⟧ ≃ Dᵇ_fd(ℚ̄_ℓ)` onto the bounded complexes of `ℚ̄_ℓ`-vector spaces with
-finite-dimensional cohomology, with quasi-inverse `P ↦ ℚ̲̄_ℓ,s ⊗ P`; in particular it sends the
-unit `ℚ̲̄_ℓ,s` to `ℚ̄_ℓ[0]`. -/
-theorem exists_fiberFunctor_point :
-    ∃ (G : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-        DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)))) (_ : G.CommShift ℤ),
-      G.Additive ∧ Nonempty G.FullyFaithful ∧
-      (∀ P, DerivedCategory.boundedFiniteCohomology _ (G.obj P)) ∧
-      (∀ M, DerivedCategory.boundedFiniteCohomology _ M → ∃ P, Nonempty (G.obj P ≅ M)) ∧
-      Nonempty (G.obj (𝟙_ _) ≅ (DerivedCategory.singleFunctor _ 0).obj
-        (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl ℓ)))) :=
-  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -167,12 +154,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-
-/-- The abelian category of `ℚ̲̄_ℓ`-module objects on the pro-étale site of the point
-`s = Spec k`, the ambient category of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
-abbrev PointMod : Type _ :=
-  Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
-    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -349,6 +330,7 @@ noncomputable def shiftedUnitEquiv (n : ℤ) :
       change (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ 𝟙 _ = _
       rw [Category.comp_id, hc, Functor.map_preimage])
 
+omit [Fact (ringChar k).Prime] in
 lemma gradedHomHom_shiftedUnitEquiv (n : ℤ) (c : PadicAlgCl ℓ) :
     gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n c) =
       (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) := by

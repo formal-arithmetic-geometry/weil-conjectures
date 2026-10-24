@@ -44,7 +44,7 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -57,6 +57,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
 abbrev PointMod : Type _ :=
   Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)
+
+/-- The base point `Spec k` is a noetherian topological space. -/
+instance noetherianSpace_point : TopologicalSpace.NoetherianSpace (point k).left :=
+  inferInstanceAs (TopologicalSpace.NoetherianSpace (Spec (.of k)))
 
 variable [IsSepClosed k]
 
@@ -146,10 +150,6 @@ lemma bijective_pointSections_map_unit :
     congr 1
 
 variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-/-- The base point `Spec k` is a noetherian topological space. -/
-instance noetherianSpace_point : TopologicalSpace.NoetherianSpace (point k).left :=
-  inferInstanceAs (TopologicalSpace.NoetherianSpace (Spec (.of k)))
 
 /-- **The point category, evaluated**: the functor `Fib_s : Dᵇc(s)⟦ℚ̲̄_ℓ⟧ ⥤ D(ℚ̄_ℓ)` induced by the
 exact global sections functor over the point. -/
@@ -318,5 +318,74 @@ theorem bijective_pointFiberFunctor_map
     (isShiftSum_boundedConstructible_point ℓ k K)
     (isShiftSum_boundedConstructible_point ℓ k L)).comp
     ((ObjectProperty.fullyFaithfulι _).map_bijective K L)
+
+/-- The images under `Fib_s` are bounded with finite-dimensional cohomology. -/
+lemma boundedFiniteCohomology_pointFiberFunctor_obj
+    (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    DerivedCategory.boundedFiniteCohomology _ ((pointFiberFunctor ℓ k).obj K) := by
+  let F := (pointSections ℓ k).mapDerivedCategory
+  let S := DerivedCategory.singleFunctor (PointMod ℓ k) 0
+  let B := DerivedCategory.boundedFiniteCohomology (ULift.{u + 1} (PadicAlgCl ℓ))
+  let Q : ObjectProperty (DerivedCategory (PointMod ℓ k)) := fun M ↦ B (F.obj M)
+  have : Q.IsClosedUnderIsomorphisms := ⟨fun e h ↦ B.prop_of_iso (F.mapIso e) h⟩
+  have hb (M₁ M₂ : DerivedCategory (PointMod ℓ k)) (h₁ : Q M₁) (h₂ : Q M₂) : Q (M₁ ⊞ M₂) := by
+    have := preservesBinaryBiproducts_of_preservesBiproducts F
+    exact B.prop_of_iso (F.mapBiprod M₁ M₂).symm (B.ext_of_isTriangulatedClosed₂ _
+      (Pretriangulated.binaryBiproductTriangle_distinguished _ _) h₁ h₂)
+  refine (isShiftSum_boundedConstructible_point ℓ k K).prop Q
+    (fun M hM ↦ B.prop_of_isZero (F.map_isZero hM)) hb
+    (fun M n h ↦ B.prop_of_iso ((F.commShiftIso n).app M).symm (B.le_shift n _ h))
+    (fun X hX ↦ ?_)
+  let Q' : ObjectProperty (PointMod ℓ k) := fun X ↦ Q (S.obj X)
+  have : Q'.IsClosedUnderIsomorphisms := ⟨fun e h ↦ Q.prop_of_iso (S.mapIso e) h⟩
+  have := preservesBinaryBiproducts_of_preservesBiproducts S
+  obtain ⟨n, ⟨e⟩⟩ := hX
+  exact Q'.prop_of_iso e.symm (Q'.prop_biproduct_fin
+    (fun X hX ↦ B.prop_of_isZero (F.map_isZero (S.map_isZero hX)))
+    (fun X₁ X₂ h₁ h₂ ↦ Q.prop_of_iso (S.mapBiprod X₁ X₂).symm (hb _ _ h₁ h₂))
+    (B.prop_of_iso (pointFiberFunctorUnitIso ℓ k).symm
+      (DerivedCategory.boundedFiniteCohomology_singleFunctor _)) n)
+
+omit [Fact (ringChar k).Prime] in
+/-- Every bounded complex of `ℚ̄_ℓ`-vector spaces with finite-dimensional cohomology is in the
+essential image of `Fib_s`: it is a finite direct sum of shifts of `ℚ̄_ℓ[0] = Fib_s(ℚ̲̄_ℓ,s)`. -/
+lemma exists_pointFiberFunctor_obj_iso
+    {M : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)))}
+    (hM : DerivedCategory.boundedFiniteCohomology _ M) :
+    ∃ K, Nonempty ((pointFiberFunctor ℓ k).obj K ≅ M) := by
+  let G := pointFiberFunctor ℓ k
+  have : G.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive G
+  have := preservesBinaryBiproducts_of_preservesBiproducts G
+  have : HasBinaryBiproducts (DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)))) :=
+    inferInstance
+  let Q : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)))) :=
+    fun M ↦ ∃ K, Nonempty (G.obj K ≅ M)
+  have : Q.IsClosedUnderIsomorphisms := ⟨fun e ⟨K, ⟨e'⟩⟩ ↦ ⟨K, ⟨e' ≪≫ e⟩⟩⟩
+  exact DerivedCategory.prop_of_boundedFiniteCohomology_of_field Q
+    (fun X hX ↦ ⟨0, ⟨(G.map_isZero (isZero_zero _)).iso hX⟩⟩)
+    (fun X Y ⟨KX, ⟨eX⟩⟩ ⟨KY, ⟨eY⟩⟩ ↦ ⟨KX ⊞ KY, ⟨G.mapBiprod KX KY ≪≫ biprod.mapIso eX eY⟩⟩)
+    (fun X n ⟨K, ⟨e⟩⟩ ↦ ⟨(shiftFunctor _ n).obj K,
+      ⟨(G.commShiftIso n).app K ≪≫ (shiftFunctor _ n).mapIso e⟩⟩)
+    ⟨𝟙_ _, ⟨pointFiberFunctorUnitIso ℓ k⟩⟩ hM
+
+/-- **The point category, evaluated** (blueprint `def-weil-finite-coefficient-point`): for `k`
+separably closed, evaluation at the geometric point `s = Spec k` is an exact equivalence
+`Fib_s : Dᵇc(s)⟦ℚ̲̄_ℓ⟧ ≃ Dᵇ_fd(ℚ̄_ℓ)` onto the bounded complexes of `ℚ̄_ℓ`-vector spaces with
+finite-dimensional cohomology; it sends the unit `ℚ̲̄_ℓ,s` to `ℚ̄_ℓ[0]`. -/
+theorem exists_fiberFunctor_point :
+    ∃ (G : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+        DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)))) (_ : G.CommShift ℤ),
+      G.Additive ∧ Nonempty G.FullyFaithful ∧
+      (∀ P, DerivedCategory.boundedFiniteCohomology _ (G.obj P)) ∧
+      (∀ M, DerivedCategory.boundedFiniteCohomology _ M → ∃ P, Nonempty (G.obj P ≅ M)) ∧
+      Nonempty (G.obj (𝟙_ _) ≅ (DerivedCategory.singleFunctor _ 0).obj
+        (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl ℓ)))) := by
+  have : (pointFiberFunctor ℓ k).Full :=
+    ⟨fun f ↦ (bijective_pointFiberFunctor_map ℓ k _ _).2 f⟩
+  have : (pointFiberFunctor ℓ k).Faithful :=
+    ⟨fun h ↦ (bijective_pointFiberFunctor_map ℓ k _ _).1 h⟩
+  exact ⟨pointFiberFunctor ℓ k, inferInstance, inferInstance,
+    ⟨Functor.FullyFaithful.ofFullyFaithful _⟩, boundedFiniteCohomology_pointFiberFunctor_obj ℓ k,
+    fun _ hM ↦ exists_pointFiberFunctor_obj_iso ℓ k hM, ⟨pointFiberFunctorUnitIso ℓ k⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
