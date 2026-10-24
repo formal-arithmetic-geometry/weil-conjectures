@@ -81,4 +81,23 @@ lemma commShift_ofNatIsoLeft (adj : F ⊣ H) (iso : F ≅ G) [adj.CommShift A]
 
 end Adjunction
 
+namespace NatTrans.CommShift
+
+variable {C D E : Type*} [Category* C] [Category* D] [Category* E] [HasShift C A] [HasShift D A]
+  [HasShift E A] {L : C ⥤ D} {R : D ⥤ C} [L.CommShift A] [R.CommShift A] (adj : L ⊣ R)
+  [adj.CommShift A] {F : E ⥤ C} {G : E ⥤ D} [F.CommShift A] [G.CommShift A]
+
+/-- The transpose `F ⟶ G ⋙ R` along an adjunction `L ⊣ R` commuting with shifts of a natural
+transformation `τ : F ⋙ L ⟶ G` commuting with shifts commutes with shifts. -/
+lemma of_homEquiv (τ : F ⋙ L ⟶ G) [NatTrans.CommShift τ A] (σ : F ⟶ G ⋙ R)
+    (h : ∀ X, σ.app X = adj.homEquiv _ _ (τ.app X)) : NatTrans.CommShift σ A := by
+  have e : σ = (Functor.rightUnitor F).inv ≫ Functor.whiskerLeft F adj.unit ≫
+      (Functor.associator F L R).inv ≫ Functor.whiskerRight τ R := by
+    ext X
+    simp [h X, Adjunction.homEquiv_unit]
+  rw [e]
+  infer_instance
+
+end NatTrans.CommShift
+
 end CategoryTheory

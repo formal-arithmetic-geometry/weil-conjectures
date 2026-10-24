@@ -277,6 +277,16 @@ lemma exceptionalKunnethMap_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAl
         (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ := by
   exact homEquiv_naturality_aux _ _ _ (exceptionalKunnethAdjoint_naturality ℓ φ)
 
+/-- The Künneth–Verdier pairing is natural in `M`. -/
+@[reassoc]
+lemma kunnethVerdierPairing_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (φ : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    _ ◁ ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _) ≫
+        kunnethVerdierPairing ℓ M' N =
+      kunnethVerdierPairing ℓ M N ≫
+        (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ :=
+  kunnethVerdierPairing_aux _ _ _ _ _ _ (exceptionalKunnethMap_naturality ℓ φ)
+
 /-- The Künneth–Verdier map `κ_{M,N}` is natural in `M`. -/
 @[reassoc]
 lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
@@ -285,8 +295,7 @@ lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicA
         kunnethVerdierMap ℓ M' N =
       kunnethVerdierMap ℓ M N ≫
         (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) := by
-  exact curry_naturality_aux _ _ _ (kunnethVerdierPairing_aux _ _ _ _ _ _
-    (exceptionalKunnethMap_naturality ℓ φ))
+  exact curry_naturality_aux _ _ _ (kunnethVerdierPairing_naturality ℓ φ N)
 
 /-- The objects `M` for which the Künneth–Verdier map `κ_{M,N}` is an isomorphism are closed under
 isomorphisms (the first closure property of the dévissage in `M` of `thm-trf-kunneth-verdier`). -/

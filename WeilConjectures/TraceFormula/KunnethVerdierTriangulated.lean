@@ -81,20 +81,20 @@ instance (K : Dᵇc(X.left)⟦Λ⟧) : ((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).
   have := Functor.CommShift.ofIso_compatibility (ObjectProperty.tensorLeftIsoLift _ K) ℤ
   exact Functor.isTriangulated_of_iso (ObjectProperty.tensorLeftIsoLift _ K)
 
-noncomputable instance (K : Dᵇc(X.left)⟦Λ⟧) : (tensorLeft K).CommShift ℤ :=
-  inferInstanceAs (((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj K).CommShift ℤ)
-
-instance (K : Dᵇc(X.left)⟦Λ⟧) : (tensorLeft K).IsTriangulated :=
-  inferInstanceAs (((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj K).IsTriangulated)
+/-- The tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` of `Dᵇc(X)⟦Λ⟧`, with left adjoint written as
+`(curriedTensor _).obj K`. -/
+noncomputable def boundedConstructibleTensorIhomAdjunction (K : Dᵇc(X.left)⟦Λ⟧) :
+    (curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj K ⊣ ihom K :=
+  ihom.adjunction K
 
 noncomputable instance (K : Dᵇc(X.left)⟦Λ⟧) : (ihom K).CommShift ℤ :=
-  (ihom.adjunction K).rightAdjointCommShift ℤ
+  (boundedConstructibleTensorIhomAdjunction ℓ Λ K).rightAdjointCommShift ℤ
 
-instance (K : Dᵇc(X.left)⟦Λ⟧) : (ihom.adjunction K).CommShift ℤ :=
-  (ihom.adjunction K).commShift_of_leftAdjoint ℤ
+instance (K : Dᵇc(X.left)⟦Λ⟧) : (boundedConstructibleTensorIhomAdjunction ℓ Λ K).CommShift ℤ :=
+  (boundedConstructibleTensorIhomAdjunction ℓ Λ K).commShift_of_leftAdjoint ℤ
 
 instance (K : Dᵇc(X.left)⟦Λ⟧) : (ihom K).IsTriangulated :=
-  (ihom.adjunction K).isTriangulated_rightAdjoint
+  (boundedConstructibleTensorIhomAdjunction ℓ Λ K).isTriangulated_rightAdjoint
 
 end Tensor
 
