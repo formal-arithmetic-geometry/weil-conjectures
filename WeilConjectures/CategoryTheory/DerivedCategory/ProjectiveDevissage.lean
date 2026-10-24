@@ -179,3 +179,48 @@ theorem prop_of_isGE_of_isLE_of_projective {M : DerivedCategory C} {a b : ℤ} (
     this hM
 
 end DerivedCategory
+
+namespace DerivedCategory
+
+variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C] (R : ObjectProperty C)
+
+/-- An object `M` of `D(C)` is a *shifted sum* of objects satisfying `R` if it satisfies every
+property of objects of `D(C)` closed under isomorphisms, binary biproducts and shifts, satisfied
+by zero objects and by the objects `X[0]` with `R X`. -/
+def IsShiftSum (M : DerivedCategory C) : Prop :=
+  ∀ (Q : ObjectProperty (DerivedCategory C)) [Q.IsClosedUnderIsomorphisms],
+    (∀ X, IsZero X → Q X) → (∀ X Y, Q X → Q Y → Q (X ⊞ Y)) → (∀ X (n : ℤ), Q X → Q (X⟦n⟧)) →
+      (∀ X, R X → Q ((singleFunctor C 0).obj X)) → Q M
+
+variable {R}
+
+/-- A shifted sum of objects satisfying `R` satisfies every property closed under isomorphisms,
+binary biproducts and shifts, satisfied by zero objects and by the objects `X[0]` with `R X`. -/
+lemma IsShiftSum.prop {M : DerivedCategory C} (hM : IsShiftSum R M)
+    (Q : ObjectProperty (DerivedCategory C)) [Q.IsClosedUnderIsomorphisms]
+    (h₀ : ∀ X, IsZero X → Q X) (hb : ∀ X Y, Q X → Q Y → Q (X ⊞ Y))
+    (hs : ∀ X (n : ℤ), Q X → Q (X⟦n⟧)) (hQR : ∀ X, R X → Q ((singleFunctor C 0).obj X)) :
+    Q M :=
+  hM Q h₀ hb hs hQR
+
+/-- The shift of a shifted sum of objects satisfying `R` is one. -/
+lemma IsShiftSum.shift {M : DerivedCategory C} (hM : IsShiftSum R M) (n : ℤ) :
+    IsShiftSum R (M⟦n⟧) := by
+  intro Q _ h₀ hb hs hQR
+  let Q' : ObjectProperty (DerivedCategory C) := fun X ↦ Q (X⟦n⟧)
+  have : Q'.IsClosedUnderIsomorphisms :=
+    ⟨fun e h ↦ Q.prop_of_iso ((shiftFunctor _ n).mapIso e) h⟩
+  refine hM Q' (fun X hX ↦ h₀ _ ((shiftFunctor _ n).map_isZero hX)) (fun X Y hX hY ↦ ?_)
+    (fun X m hX ↦ Q.prop_of_iso ((shiftFunctorComm _ n m).app X) (hs _ m hX))
+    (fun X hX ↦ hs _ n (hQR X hX))
+  have := preservesBinaryBiproducts_of_preservesBiproducts (shiftFunctor (DerivedCategory C) n)
+  exact Q.prop_of_iso ((shiftFunctor _ n).mapBiprod X Y).symm (hb _ _ hX hY)
+
+/-- A bounded object of `D(C)` all of whose cohomology objects satisfy `R` is a shifted sum of
+objects satisfying `R`, provided `R` holds for zero objects and only for projective objects. -/
+lemma isShiftSum_of_isGE_of_isLE (hR₀ : ∀ X, IsZero X → R X) (hRP : ∀ X, R X → Projective X)
+    [R.IsClosedUnderIsomorphisms] {M : DerivedCategory C} {a b : ℤ} (ha : M.IsGE a)
+    (hb : M.IsLE b) (hM : ∀ q, R ((homologyFunctor C q).obj M)) : IsShiftSum R M :=
+  fun Q _ h₀ hb' hs hQR ↦ prop_of_isGE_of_isLE_of_projective R hR₀ hRP Q h₀ hb' hs hQR ha hb hM
+
+end DerivedCategory
