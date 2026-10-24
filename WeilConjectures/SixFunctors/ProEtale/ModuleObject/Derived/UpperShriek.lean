@@ -28,10 +28,13 @@ complexes (`boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction`) an
 chosen right adjoint of the bounded constructible pushforward `Rg_*` along the proper `g`. The
 adjunction `Rf_!(c) ⊣ Rf^!(c)` is the composite of these two adjunctions.
 
-The only input is that `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint for proper `g`
-(`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`, `sorry`ed). As the pushforward
-on bounded constructible complexes, everything is stated for the coefficient ring
-`ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`.
+The only input is that `Rg_*` on bounded constructible complexes is a left adjoint for proper `g`
+(`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
+`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`,
+`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`, `sorry`ed). As the
+pushforward on bounded constructible complexes, everything is stated for each of the `ℓ`-adic
+coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E` (in the namespaces `ProEtale.CondensedRing`,
+`ProEtale.CondensedRing.ContinuousMapRingObj` and `ProEtale.CondensedRing.PadicIntegersRingObj`).
 
 Exactly as the lower shriek `boundedConstructibleLowerShriek`, the functor `Rf^!` is `Rf^!(c)`
 for the compactification `c = compactificationOverField f` chosen by Nagata's theorem, and the
@@ -52,8 +55,11 @@ adjunction `Rf_! ⊣ Rf^!` is the adjunction `Rf_!(c) ⊣ Rf^!(c)`.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`:
-  for `g` proper, `Rg_*` on bounded constructible `ℚ̄_ℓ`-sheaves is a left adjoint.
+- `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
+  `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` and
+  `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`:
+  for `g` proper, `Rg_*` on bounded constructible `ℚ̄_ℓ`-, `E`- and `𝒪_E`-sheaves is a left
+  adjoint.
 
 ## Implementation notes
 
@@ -97,6 +103,25 @@ its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII
 Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
+  sorry
+
+/-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E` of `ℚ_ℓ`, the derived
+pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
+adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII, 3.1.4;
+Bhatt–Scholze, Section 6.8). -/
+instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
+  sorry
+
+/-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
+pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
+left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII,
+3.1.4; Bhatt–Scholze, Section 6.8). -/
+instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
   sorry
 
 end ProperLowerStar
@@ -146,6 +171,114 @@ instance isRightAdjoint_boundedConstructibleUpperShriekOfCompactification :
 
 end OfCompactification
 
+/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+
+namespace ContinuousMapRingObj
+
+
+section OfCompactification
+
+include ℓ k
+
+variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y} (c : Compactification f.left)
+
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` attached to a
+compactification
+`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes: a chosen right adjoint `Rg^!`
+of the derived pushforward `Rg_*` along the proper `g`, followed by the pullback `i^*` along the
+open immersion `i`. -/
+noncomputable def boundedConstructibleUpperShriekOfCompactification :
+    Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+  (boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
+    boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI
+
+/-- The adjunction `Rf_!(c) ⊣ Rf^!(c)` on bounded constructible complexes attached to a
+compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`: the composite of the adjunction `i_! ⊣ i^*`
+along the open immersion `i` and of the adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
+noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
+    boundedConstructibleLowerShriekOfCompactification ℓ E c ⊣
+      boundedConstructibleUpperShriekOfCompactification ℓ E c :=
+  (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+    (Profinite.continuousMapRingObj E) ℓ
+    c.overI).comp
+    (Adjunction.ofIsLeftAdjoint _)
+
+/-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleUpperShriekOfCompactification`. -/
+instance isLeftAdjoint_boundedConstructibleLowerShriekOfCompactification :
+    (boundedConstructibleLowerShriekOfCompactification ℓ E c).IsLeftAdjoint :=
+  (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c).isLeftAdjoint
+
+/-- The exceptional inverse image `Rf^!(c)` on bounded constructible complexes is a right
+adjoint, its left adjoint being `boundedConstructibleLowerShriekOfCompactification`. -/
+instance isRightAdjoint_boundedConstructibleUpperShriekOfCompactification :
+    (boundedConstructibleUpperShriekOfCompactification ℓ E c).IsRightAdjoint :=
+  (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c).isRightAdjoint
+
+end OfCompactification
+
+end ContinuousMapRingObj
+
+/-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
+
+namespace PadicIntegersRingObj
+
+
+section OfCompactification
+
+include ℓ k
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y} (c : Compactification f.left)
+
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` attached to a
+compactification
+`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on bounded constructible complexes: a chosen right adjoint `Rg^!`
+of the derived pushforward `Rg_*` along the proper `g`, followed by the pullback `i^*` along the
+open immersion `i`. -/
+noncomputable def boundedConstructibleUpperShriekOfCompactification :
+    Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ
+      E⟧ :=
+  (boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
+    boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ c.overI
+
+/-- The adjunction `Rf_!(c) ⊣ Rf^!(c)` on bounded constructible complexes attached to a
+compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`: the composite of the adjunction `i_! ⊣ i^*`
+along the open immersion `i` and of the adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
+noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
+    boundedConstructibleLowerShriekOfCompactification ℓ E c ⊣
+      boundedConstructibleUpperShriekOfCompactification ℓ E c :=
+  (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+    (Profinite.padicIntegersRingObj ℓ E) ℓ
+    c.overI).comp
+    (Adjunction.ofIsLeftAdjoint _)
+
+/-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleUpperShriekOfCompactification`. -/
+instance isLeftAdjoint_boundedConstructibleLowerShriekOfCompactification :
+    (boundedConstructibleLowerShriekOfCompactification ℓ E c).IsLeftAdjoint :=
+  (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c).isLeftAdjoint
+
+/-- The exceptional inverse image `Rf^!(c)` on bounded constructible complexes is a right
+adjoint, its left adjoint being `boundedConstructibleLowerShriekOfCompactification`. -/
+instance isRightAdjoint_boundedConstructibleUpperShriekOfCompactification :
+    (boundedConstructibleUpperShriekOfCompactification ℓ E c).IsRightAdjoint :=
+  (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c).isRightAdjoint
+
+end OfCompactification
+
+end PadicIntegersRingObj
+
 /-! ### The adjunction `Rf_! ⊣ Rf^!` -/
 
 section Chosen
@@ -182,5 +315,95 @@ instance isRightAdjoint_boundedConstructibleUpperShriek :
   (boundedConstructibleUpperShriekAdjunction ℓ f).isRightAdjoint
 
 end Chosen
+
+/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+
+namespace ContinuousMapRingObj
+
+
+section Chosen
+
+include ℓ k
+
+variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
+
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded constructible
+complexes: the functor `boundedConstructibleUpperShriekOfCompactification` attached to the chosen
+compactification `compactificationOverField f`. -/
+noncomputable def boundedConstructibleUpperShriek :
+    Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+  boundedConstructibleUpperShriekOfCompactification ℓ E (compactificationOverField f)
+
+/-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes: the adjunction
+`Rf_!(c) ⊣ Rf^!(c)` for the chosen compactification `c = compactificationOverField f`. -/
+noncomputable def boundedConstructibleUpperShriekAdjunction :
+    boundedConstructibleLowerShriek ℓ E f ⊣ boundedConstructibleUpperShriek ℓ E f :=
+  boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E
+    (compactificationOverField f)
+
+/-- The derived lower shriek `Rf_!` on bounded constructible complexes is a left adjoint, its
+right adjoint being `boundedConstructibleUpperShriek`. -/
+instance isLeftAdjoint_boundedConstructibleLowerShriek :
+    (boundedConstructibleLowerShriek ℓ E f).IsLeftAdjoint :=
+  (boundedConstructibleUpperShriekAdjunction ℓ E f).isLeftAdjoint
+
+instance isRightAdjoint_boundedConstructibleUpperShriek :
+    (boundedConstructibleUpperShriek ℓ E f).IsRightAdjoint :=
+  (boundedConstructibleUpperShriekAdjunction ℓ E f).isRightAdjoint
+
+end Chosen
+
+end ContinuousMapRingObj
+
+/-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
+
+namespace PadicIntegersRingObj
+
+
+section Chosen
+
+include ℓ k
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
+
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded constructible
+complexes: the functor `boundedConstructibleUpperShriekOfCompactification` attached to the chosen
+compactification `compactificationOverField f`. -/
+noncomputable def boundedConstructibleUpperShriek :
+    Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ
+      E⟧ :=
+  boundedConstructibleUpperShriekOfCompactification ℓ E (compactificationOverField f)
+
+/-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes: the adjunction
+`Rf_!(c) ⊣ Rf^!(c)` for the chosen compactification `c = compactificationOverField f`. -/
+noncomputable def boundedConstructibleUpperShriekAdjunction :
+    boundedConstructibleLowerShriek ℓ E f ⊣ boundedConstructibleUpperShriek ℓ E f :=
+  boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E
+    (compactificationOverField f)
+
+/-- The derived lower shriek `Rf_!` on bounded constructible complexes is a left adjoint, its
+right adjoint being `boundedConstructibleUpperShriek`. -/
+instance isLeftAdjoint_boundedConstructibleLowerShriek :
+    (boundedConstructibleLowerShriek ℓ E f).IsLeftAdjoint :=
+  (boundedConstructibleUpperShriekAdjunction ℓ E f).isLeftAdjoint
+
+instance isRightAdjoint_boundedConstructibleUpperShriek :
+    (boundedConstructibleUpperShriek ℓ E f).IsRightAdjoint :=
+  (boundedConstructibleUpperShriekAdjunction ℓ E f).isRightAdjoint
+
+end Chosen
+
+end PadicIntegersRingObj
 
 end AlgebraicGeometry.ProEtale.CondensedRing

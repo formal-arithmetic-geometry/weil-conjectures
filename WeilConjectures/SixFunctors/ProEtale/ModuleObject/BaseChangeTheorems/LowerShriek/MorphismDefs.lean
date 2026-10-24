@@ -23,9 +23,12 @@ Y' --g---> Y
 ```
 
 recorded as `sq : IsPullback g' f' f g`. This file constructs the compact-support base-change
-morphisms on the bounded constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` of `ℚ̄_ℓ`-sheaves
-(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`); the extension
-by zero part is stated for module objects over a general commutative condensed ring `Λ`.
+morphisms on the bounded constructible derived categories `Dᵇc(-)⟦Λ⟧` of module objects over
+`Λ_X = p_X^* Λ` (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`).
+The extension-by-zero exchange is stated for a general `Λ`; the morphisms involving the
+pushforward are defined for each of the `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E` (in
+the namespaces `ProEtale.CondensedRing`, `ProEtale.CondensedRing.ContinuousMapRingObj` and
+`ProEtale.CondensedRing.PadicIntegersRingObj`).
 
 * **For a compactification.** For a compactification `c : X ⟶[i] Z ⟶[p] Y` of `f` and its base
   change `c.baseChange sq`, a compactification of `f'`, the morphism
@@ -41,12 +44,13 @@ by zero part is stated for module objects over a general commutative condensed r
     compactification. Its canonical mate goes in the direction `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*`,
     base change for extension by zero asserts that it is an isomorphism (currently `sorry`),
     and the pasting uses its inverse.
-* **For the lower shriek.** The morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for the lower shriek
+* **For the lower shriek.** For the coefficient rings `E̲` of a finite extension `E` of `ℚ_ℓ` and
+  `ℚ̲̄_ℓ`, the morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for the lower shriek
   `ProEtale.CondensedRing.boundedConstructibleLowerShriek` of the chosen compactifications: the
   pasting for the chosen compactification of `f`, followed by the identification of the lower
   shriek attached to its base change with the lower shriek of `f'`, by the independence of the
   lower shriek from the compactification
-  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`).
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso`).
 
 All schemes are separated and of finite type over a field `k` of characteristic `p > 0` with
 `p ≠ ℓ`, and all morphisms are morphisms of `Over (Spec (.of k))`; the compactification `Z` of
@@ -61,8 +65,9 @@ All schemes are separated and of finite type over a field `k` of characteristic 
   `ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`:
   the morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}` for a compactification `c`.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl`: the morphism
-  `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!`.
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange` and
+  `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl`: the morphism
+  `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for `E`- and `ℚ̄_ℓ`-sheaves.
 
 ## Sorried input
 
@@ -253,20 +258,176 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
 
 end LowerShriek
 
+/-! #### The coefficient ring `E̲`, `E` a finite extension of `ℚ_ℓ` -/
+
+namespace ContinuousMapRingObj
+
+variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+
+
+section LowerShriek
+
+variable {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+
+/-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
+on bounded constructible complexes, for a cartesian square `sq` and a compactification
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'`: with
+`Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
+`boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
+the inverse of the extension-by-zero exchange of its open-immersion square,
+
+`i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`. -/
+@[no_expose]
+noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙
+      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g ⟶
+      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g' ⋙
+        boundedConstructibleLowerShriekOfCompactification ℓ E (c.baseChange sq.overLeft) :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek
+      (Profinite.continuousMapRingObj E) ℓ c.overI)
+      (boundedConstructibleBaseChange ℓ E (c.overBaseChange_isPullback_g sq).toCommSq) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight
+      (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.continuousMapRingObj E)
+        ℓ
+        (c.overBaseChange_isPullback_i sq)).hom
+      (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
+    (Functor.associator _ _ _).hom
+
+lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E c sq =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.continuousMapRingObj E) ℓ c.overI)
+          (boundedConstructibleBaseChange ℓ E (c.overBaseChange_isPullback_g sq).toCommSq) ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight
+          (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+            (Profinite.continuousMapRingObj E)
+            ℓ
+            (c.overBaseChange_isPullback_i sq)).hom
+          (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
+        (Functor.associator _ _ _).hom := by
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting]
+
+end LowerShriek
+
+end ContinuousMapRingObj
+
+/-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
+
+namespace PadicIntegersRingObj
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+
+
+section LowerShriek
+
+variable {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+
+/-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
+on bounded constructible complexes, for a cartesian square `sq` and a compactification
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'`: with
+`Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
+`boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
+the inverse of the extension-by-zero exchange of its open-immersion square,
+
+`i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`. -/
+@[no_expose]
+noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙
+      boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ g ⟶
+      boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ g' ⋙
+        boundedConstructibleLowerShriekOfCompactification ℓ E (c.baseChange sq.overLeft) :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek
+      (Profinite.padicIntegersRingObj ℓ E) ℓ c.overI)
+      (boundedConstructibleBaseChange ℓ E (c.overBaseChange_isPullback_g sq).toCommSq) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight
+      (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+        (Profinite.padicIntegersRingObj ℓ E) ℓ
+        (c.overBaseChange_isPullback_i sq)).hom
+      (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
+    (Functor.associator _ _ _).hom
+
+lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E c sq =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.padicIntegersRingObj ℓ E) ℓ c.overI)
+          (boundedConstructibleBaseChange ℓ E (c.overBaseChange_isPullback_g sq).toCommSq) ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight
+          (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+            (Profinite.padicIntegersRingObj ℓ E)
+            ℓ
+            (c.overBaseChange_isPullback_i sq)).hom
+          (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
+        (Functor.associator _ _ _).hom := by
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting]
+
+end LowerShriek
+
+end PadicIntegersRingObj
+
 end Compactification
 
 /-! ### For the lower shriek -/
 
 section Chosen
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime]
+  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+
+/-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
+constructible `E`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
+shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`:
+the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into
+`Rf'_!^{c_f.baseChange sq}`, followed by its identification
+`boundedConstructibleLowerShriekOfCompactificationIso` with `Rf'_! = Rf'_!^{c_{f'}}`. -/
+@[no_expose]
+noncomputable def boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' f' f g) :
+    ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
+      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g ⟶
+      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g' ⋙
+        ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f' :=
+  ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E
+      (compactificationOverField f) sq ≫
+    Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso ℓ E
+      ((compactificationOverField f).baseChange sq.overLeft) (compactificationOverField f')).hom
+
+lemma boundedConstructibleLowerShriekBaseChange_eq (sq : IsPullback g' f' f g) :
+    boundedConstructibleLowerShriekBaseChange ℓ E sq =
+      ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E
+          (compactificationOverField f) sq ≫
+        Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso ℓ E
+          ((compactificationOverField f).baseChange sq.overLeft)
+          (compactificationOverField f')).hom := by
+  rw [boundedConstructibleLowerShriekBaseChange]
 
 /-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
 constructible `ℚ̄_ℓ`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
