@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
-public import WeilConjectures.TraceFormula.GraphPieces
+public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.ProperCompatibility
 
@@ -46,13 +46,21 @@ This file states the locality of the local terms of contracting correspondences 
    (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`,
    blueprint `sk-i-curve-zero`).
 
-Items 1 and 2 follow from Varshavsky's contracting-correspondence theorem (Thm. 2.1.3, blueprint
+Item 1 follows from Varshavsky's contracting-correspondence theorem (Thm. 2.1.3, blueprint
 `sk-thm-tf-contracting-local-term`) for `Z = {x}`
 (`Correspondence.restrict_traceClass_eq_pushforward_of_isContractingAt`): the trace class on `B`
 is the pushforward of the trace class of the restricted coefficient map
-`u_Z : K_x ⟶ K_x` (`Correspondence.contractingStalkMap`), which vanishes with `K_x`, and which
-for a graph is the stalk map. The theorem itself is proved by specialization to the normal cone
-in its own blueprint subsection.
+`u_Z : K_x ⟶ K_x` (`Correspondence.contractingStalkMap`), which for a graph is the stalk map;
+item 2 is the vanishing of the trace class on `B` below. Following the blueprint proof, the
+theorem is reduced to
+* the additivity of trace classes along the pieces `K^U = j_! Lj^* K` and `K^Z = Rx_* Lx^* K`
+  of `K` (`Correspondence.traceClass_eq_add_of_isPullback`, blueprint
+  `prop-trf-trace-class-additivity`; for graphs `Correspondence.traceClass_ofGraph_eq_add`);
+* the proper pushforward compatibility of trace classes for the closed piece
+  (`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`);
+* the vanishing of the trace class on `B` for coefficients with zero stalk at `x`, applied to the
+  open piece (`Correspondence.restrict_traceClass_eq_zero_of_isContractingAt`, blueprint
+  `det-tf-contracting-vanishing`), which is Varshavsky's specialization to the normal cone.
 
 -/
 
@@ -114,29 +122,116 @@ lemma FixedLocus.liftPoint_ι (F : c.FixedLocus) (y : RationalPoint c.C)
 variable (c)
 
 variable {c} in
-/-- The *restricted coefficient map* `u_Z : K_x ⟶ K_x` of a correspondence contracting at `y`,
-`x = c₁(y) = c₂(y)` (blueprint `det-tf-contracting-restricted-morphism` for `Z = {x}`): the
-restriction
+/-- The *restricted coefficient map* `u_Z : K_x ⟶ K_x` of a correspondence at a `k`-point `y` of
+the fixed locus whose fibre `c₁⁻¹(x)`, `x = c₁(y) = c₂(y)`, is the reduced point `y` (blueprint
+`det-tf-contracting-restricted-morphism` for `Z = {x}`): the restriction
 ```
 K_x ≅ Ly^* Lc₂^* K --Ly^* u--> Ly^* Rc₁^! K --β--> R(𝟙)^! K_x ≅ K_x
 ```
 of `u` to `y`, where `β` is the base change mate of the cartesian square `y ≫ c₁ = 𝟙 ≫ x`: the
 `R(𝟙)_! ⊣ R(𝟙)^!` adjoint of `R(𝟙)_! Ly^* Rc₁^! K ≅ Lx^* Rc₁_! Rc₁^! K ⟶ Lx^* K`. -/
-noncomputable def contractingStalkMap {y : RationalPoint c.C} (hc : c.IsContractingAt y) :
+noncomputable def restrictedStalkMap {y : RationalPoint c.C} (hy : y ≫ c.c₁ = y ≫ c.c₂)
+    (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K :=
-  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hc.isPullback
-  eqToHom (by rw [hc.comp_c₁_eq_comp_c₂]) ≫
+  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
+  eqToHom (by rw [hy]) ≫
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y c.c₂).hom.app K ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map c.u ≫
     (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
       (𝟙 (point k))).homEquiv _ _
-      ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hc.isPullback)).inv.app
+      ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app
           ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).map
           ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
             c.c₁).counit.app K)) ≫
     (boundedConstructibleUpperShriekId ℓ (point k)).hom.app _
+
+variable {c} in
+/-- The restricted coefficient map `u_Z : K_x ⟶ K_x` (`restrictedStalkMap`) of a correspondence
+contracting at `y`. -/
+noncomputable abbrev contractingStalkMap {y : RationalPoint c.C} (hc : c.IsContractingAt y) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).obj K :=
+  restrictedStalkMap hc.comp_c₁_eq_comp_c₂ hc.isPullback
+
+variable {c} in
+/-- If the fibre `c₁⁻¹(x)` of `x = c₁(y)` is the point `y` and `c₂(y) = x`, the closed
+subscheme `{x}` is `c`-invariant: `c₁⁻¹(x) ⊆ c₂⁻¹(x)`, that is,
+`c₂⁻¹(X ∖ {x}) ⊆ c₁⁻¹(X ∖ {x})`. -/
+lemma preimage_pointComplOpens_le_of_isPullback {y : RationalPoint c.C}
+    (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
+    c.c₂.left ⁻¹ᵁ pointComplOpens (y ≫ c.c₁) ≤ c.c₁.left ⁻¹ᵁ pointComplOpens (y ≫ c.c₁) := by
+  have hsq : IsPullback y.left (𝟙 _) c.c₁.left (y ≫ c.c₁).left := sq.map (Over.forget _)
+  intro z hz
+  simp only [pointComplOpens, Scheme.Hom.mem_preimage, TopologicalSpace.Opens.mem_mk,
+    Set.mem_compl_iff, Set.mem_range, not_exists] at hz ⊢
+  intro p hp
+  have hmem : z ∈ Set.range (pullback.fst c.c₁.left (y ≫ c.c₁).left) := by
+    rw [Scheme.Pullback.range_fst]
+    exact ⟨p, hp⟩
+  obtain ⟨q, rfl⟩ := hmem
+  refine hz (hsq.isoPullback.inv.base q) ?_
+  refine (congrArg (fun f : point k ⟶ X ↦ f.left.base (hsq.isoPullback.inv.base q)) hy).trans ?_
+  rw [← hsq.isoPullback_inv_fst]
+  rfl
+
+variable {c} in
+/-- The proper pushforward diagram `(x, y)`, `x = c₁(y)`, from the identity correspondence of
+the point with the restricted coefficient map `u_Z` to `c`: a diagram since `y ≫ c₁ = 𝟙 ≫ x`
+and `y ≫ c₂ = 𝟙 ≫ x`. -/
+noncomputable abbrev restrictedClosedPieceDiagram {y : RationalPoint c.C}
+    (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
+    (ofEnd _ (restrictedStalkMap hy sq)).ProperPushforwardDiagram X where
+  f := y ≫ c.c₁
+  D := c.C
+  b₁ := c.c₁
+  b₂ := c.c₂
+  g := y
+  w₁ := (Category.id_comp _).symm
+  w₂ := hy.symm.trans (Category.id_comp _).symm
+
+/-- **Additivity of trace classes along the pieces of a point with reduced fibre** (blueprint
+`prop-trf-trace-class-additivity`, item 1, and `lem-trf-trace-triangle-compatibility`, for the
+`c`-invariant closed subscheme `Z = {x}` of the rational point `x = c₁(y)` of a `k`-point `y` of
+the fixed locus such that `c₁⁻¹(x)` is the reduced point `y`; Varshavsky, Prop. 1.5.10 after
+SGA 5, III 4.13): the trace class of `u` is the sum of the trace classes of the induced
+coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K`, the proper pushforward of the
+restricted coefficient map along `(x, y)`, and `u^U = [j]_! (u|_U)` on `K^U = j_! Lj^* K`. -/
+theorem traceClass_eq_add_of_isPullback (F : c.FixedLocus) {y : RationalPoint c.C}
+    (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
+    c.traceClass F =
+      F.traceClassWithCoeff _ (restrictedClosedPieceDiagram hy sq).pushforwardCoeff +
+        F.traceClassWithCoeff _ (c.pointOpenPieceCoeff (y ≫ c.c₁)
+          (preimage_pointComplOpens_le_of_isPullback hy sq)) :=
+  sorry
+
+/-- **Vanishing of the trace class at a contracting point with zero stalk** (blueprint
+`det-tf-contracting-vanishing` for the closed subscheme `Z = {x}` of the rational point
+`x = c₁(y)`, after shrinking `C` to a neighbourhood of `B` by
+`sk-rem-tf-contracting-neighbourhood`; Varshavsky, *Lefschetz–Verdier trace formula and a
+generalization of a theorem of Fujiwara*, Thm. 2.1.3, the case `K|_Z = 0` of its proof): let `c`
+be contracting at `y` and let `B` be an open and closed subscheme of the fixed locus, proper over
+`s`, with underlying set `{y}`. If the stalk `K_x` vanishes, the restriction of the trace class of
+`c` to `B` is zero, whatever the coefficient map `u`.
+
+The proof in the blueprint deforms `c` to the normal cones `N_{C_Z} C ⟶ N_Z X × N_Z X` and
+specializes `u` along this family by nearby cycles over the strict henselization of
+`k[t]_{(t)}`: the specialized coefficient map has source `γ₂^* Sp_{X,Z}(K)`, which vanishes since
+the leg `γ₂` maps into the zero section (`det-tf-cone-zero-sections`) and
+`Sp_{X,Z}(K)|_Z ≅ K|_Z = 0` (Verdier's zero-section theorem, `det-sp-zero-section-vanishing`),
+and the specialization of trace classes (`det-tf-sp-trace-morphism`) is injective on the constant
+family of fixed loci (`det-tf-sp-theta-open-constant`). -/
+theorem restrict_traceClass_eq_zero_of_isContractingAt (F : c.FixedLocus)
+    {y : RationalPoint c.C} (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
+    [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
+    [IsClosedImmersion j.left]
+    (hB : Set.range j.left.base =
+      {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
+    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (y ≫ c.c₁)).obj K)) :
+    (c.traceClass F).restrict j = 0 :=
+  sorry
 
 /-- **Contracting correspondences and local terms** (blueprint
 `sk-thm-tf-contracting-local-term`, for the closed subscheme `Z = {x}` of the rational point
@@ -146,8 +241,14 @@ point `y`, the correspondence `c_Z` induced on `Z` is the identity correspondenc
 the restricted coefficient map is `u_Z = contractingStalkMap hc`. For an open and closed subscheme
 `B` of the fixed locus, proper over `s`, with underlying set `{y}` and point `e : s ⟶ B`, the
 restriction of the trace class of `c` to `B` is the pushforward along `e` of the trace class of
-`u_Z`: `Tr_c(u)|_B = e_* Tr_{c_Z}(u_Z)`. The proof is Varshavsky's specialization to the normal
-cone (blueprint `det-tf-contracting-vanishing`, `det-tf-contracting-closed-piece`). -/
+`u_Z`: `Tr_c(u)|_B = e_* Tr_{c_Z}(u_Z)`.
+
+This is the blueprint proof (`det-tf-contracting-closed-piece`): by additivity
+(`traceClass_eq_add_of_isPullback`) the trace class is the sum of the trace classes of the
+coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z` and `u^U` on `K^U`; the first is the pushforward
+of the trace class of `u_Z` along the induced map of fixed loci by proper pushforward
+compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
+`B` since `K^U` has zero stalk at `x` (`restrict_traceClass_eq_zero_of_isContractingAt`). -/
 theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
     {y : RationalPoint c.C} (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
@@ -156,8 +257,36 @@ theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
     (hB : Set.range j.left.base =
       {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
     (c.traceClass F).restrict j = BorelMooreSection.pushforward e
-      ((ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _)) :=
-  sorry
+      ((ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _)) := by
+  have hle := preimage_pointComplOpens_le_of_isPullback hc.comp_c₁_eq_comp_c₂ hc.isPullback
+  have hc' : (c.withCoeff (pointOpenPiece K (y ≫ c.c₁))
+      (c.pointOpenPieceCoeff (y ≫ c.c₁) hle)).IsContractingAt y := ⟨hc.1, hc.2, hc.3⟩
+  have hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (y ≫ c.c₁)).obj (pointOpenPiece K (y ≫ c.c₁))) :=
+    isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ
+      (pointComplι (y ≫ c.c₁)) _ (isCompl_range_pointComplι _).disjoint _
+  have hU : (F.traceClassWithCoeff _ (c.pointOpenPieceCoeff (y ≫ c.c₁) hle)).restrict j = 0 :=
+    restrict_traceClass_eq_zero_of_isContractingAt
+      (c.withCoeff (pointOpenPiece K (y ≫ c.c₁)) (c.pointOpenPieceCoeff (y ≫ c.c₁) hle))
+      (F.withCoeff _ _) hc' j hB hK
+  let P := restrictedClosedPieceDiagram hc.comp_c₁_eq_comp_c₂ hc.isPullback
+  let Fc := fixedLocusOfEnd (contractingStalkMap hc)
+  let Fb : P.pushforward.FixedLocus := F.withCoeff _ P.pushforwardCoeff
+  have : IsProper (e ≫ j).left := by
+    rw [Over.comp_left]
+    infer_instance
+  have hfix : P.fixMap Fc Fb = e ≫ j := by
+    rw [he]
+    refine Fb.hom_ext ?_
+    rw [P.fixMap_ι]
+    exact (Category.id_comp y).trans (F.liftPoint_ι y _).symm
+  have hZ := P.traceClassPushforward_eq Fc Fb
+  rw [ProperPushforwardDiagram.traceClassPushforward, BorelMooreSection.pushforward_congr hfix,
+    ← BorelMooreSection.pushforward_comp] at hZ
+  rw [traceClass_eq_add_of_isPullback c F hc.comp_c₁_eq_comp_c₂ hc.isPullback,
+    BorelMooreSection.restrict_add, hU, add_zero]
+  change (P.pushforward.traceClass Fb).restrict j = _
+  rw [← hZ, BorelMooreSection.restrict_pushforward_self]
 
 /-- The trace class of a correspondence whose pulled back coefficient `Lc₂^* K` vanishes is
 zero: the mate of `u` is a map out of the zero object. -/
@@ -174,9 +303,8 @@ lemma traceClass_eq_zero_of_isZero (F : c.FixedLocus)
 Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y`, `B` is an open and closed
 subscheme of the fixed locus, proper over `s`, whose underlying set is `{y}`, and the stalk
 `K_{c₁ y}` vanishes, then the local term of the trace class of `c` along `B` is zero, whatever
-the coefficient map `u`. By `restrict_traceClass_eq_pushforward_of_isContractingAt` the trace
-class on `B` is the pushforward of the trace class of the restricted map `u_Z`, an endomorphism of
-the zero stalk. -/
+the coefficient map `u`: the restriction of the trace class to `B` vanishes
+(`restrict_traceClass_eq_zero_of_isContractingAt`). -/
 theorem localTerm_traceClass_eq_zero_of_isContractingAt (F : c.FixedLocus)
     (y : RationalPoint c.C) (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
@@ -186,30 +314,8 @@ theorem localTerm_traceClass_eq_zero_of_isContractingAt (F : c.FixedLocus)
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (y ≫ c.c₁)).obj K)) :
     (c.traceClass F).localTerm j = 0 := by
-  have hrange : Set.range (F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base ⊆
-      Set.range j.left.base := by
-    rw [hB]
-    rintro _ ⟨z, rfl⟩
-    rw [Subsingleton.elim (α := Spec (.of k)) z default]
-    rfl
-  let e : point k ⟶ B := Over.homMk (IsOpenImmersion.lift j.left _ hrange) (by
-    rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac]
-    exact Over.w (F.liftPoint y hc.comp_c₁_eq_comp_c₂))
-  have he : e ≫ j = F.liftPoint y hc.comp_c₁_eq_comp_c₂ :=
-    Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)
-  have : IsProper (e.left ≫ B.hom) := by
-    rw [Over.w e]
-    exact inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
-  have : IsProper e.left := IsProper.of_comp e.left B.hom
-  have h0 : (ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _) = 0 :=
-    traceClass_eq_zero_of_isZero _ _ (hK.of_iso
-      ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).app _))
-  have hp := BorelMooreSection.pushforward_add e (0 : BorelMooreSection ℓ (point k)) 0
-  rw [add_zero] at hp
   rw [BorelMooreSection.localTerm,
-    restrict_traceClass_eq_pushforward_of_isContractingAt c F hc j e he hB, h0]
-  rw [show BorelMooreSection.pushforward e (0 : BorelMooreSection ℓ (point k)) = 0 by
-    simpa using hp]
+    restrict_traceClass_eq_zero_of_isContractingAt c F hc j hB hK]
   exact BorelMooreSection.integral_zero
 
 variable {c}
