@@ -11,6 +11,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -90,8 +91,9 @@ coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
 
 ## Sorried input
 
-That the six functors preserve bounded constructible complexes is `sorry`ed:
-`boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`
+That the derived pushforward and extension by zero preserve bounded constructible complexes is
+`sorry`ed (the pullback is `boundedConstructible_leftDerivedUpperStar_obj_of_scheme`):
+`boundedConstructible_rightDerivedLowerStar_obj`
 and `boundedConstructible_openImmersionLowerShriek_obj`, and the instances
 `isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
 `isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
@@ -150,14 +152,16 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- The derived pullback `Lf^*` on module objects over `Λ` preserves bounded constructible
-complexes. -/
+complexes (blueprint `sk-thm-sf-ctf-stability`): this holds for any morphism of schemes
+(`ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj_of_scheme`). -/
 lemma boundedConstructible_leftDerivedUpperStar_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj Λ Y.left)))
     (hK : boundedConstructible (condensedRingObj Λ Y.left) K) :
     boundedConstructible (condensedRingObj Λ X.left) ((L((f.left)^*⟦Λ⟧)).obj K) :=
-  sorry
+  boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f.left K hK
 
 /-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes: the
 restriction of `L((f)^*⟦Λ⟧)`. -/
