@@ -160,13 +160,13 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- The derived pullback `Lf^*` on module objects over `Λ` preserves bounded constructible
-complexes (SGA 4 XVII, 5.1.16; Bhatt–Scholze, Section 6.8). -/
+complexes (SGA 4 XVII, 5.1.16; Bhatt–Scholze, Section 6.8) (`Λ`-coefficient). -/
 lemma boundedConstructible_leftDerivedUpperStar_obj (K : Dᵇc(Y.left)⟦Λ⟧) :
     boundedConstructible (condensedRingObj Λ X.left) ((L((f.left)^*⟦Λ⟧)).obj K.obj) :=
   sorry
 
-/-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes: the
-restriction of `L((f)^*⟦Λ⟧)`. -/
+/-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes
+(`Λ`-coefficient): the restriction of `L((f)^*⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleUpperStar : Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ L((f.left)^*⟦Λ⟧))
     fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f K
@@ -453,13 +453,14 @@ variable {U X : Over (Spec (.of k))}
 
 /-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
 module objects over `Λ`, preserves bounded constructible complexes (SGA 4 XVII, 5.1.16;
-Bhatt–Scholze, Section 6.8). -/
+Bhatt–Scholze, Section 6.8) (`Λ`-coefficient). -/
 lemma boundedConstructible_openImmersionLowerShriek_obj (K : Dᵇc(U.left)⟦Λ⟧) :
     boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K.obj) :=
   sorry
 
 /-- The extension by zero `j_! : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` along an open immersion on bounded
-constructible complexes: the restriction of the levelwise functor `D((j)_!open⟦Λ⟧)`. -/
+constructible complexes (`Λ`-coefficient): the restriction of the levelwise functor
+`D((j)_!open⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriek : Dᵇc(U.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ D((j.left)_!open⟦Λ⟧))
     fun K ↦ boundedConstructible_openImmersionLowerShriek_obj Λ ℓ j K
@@ -571,6 +572,7 @@ noncomputable def boundedConstructibleLowerShriek :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f)
 
+/-- The defining equation of `boundedConstructibleLowerShriek` (`ℚ̄_ℓ`-coefficient). -/
 lemma boundedConstructibleLowerShriek_eq :
     boundedConstructibleLowerShriek ℓ f =
       boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f) :=
@@ -641,6 +643,7 @@ noncomputable def boundedConstructibleLowerShriek :
     PadicSubfieldConstructible X.left ℓ E ⥤ PadicSubfieldConstructible Y.left ℓ E :=
   boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
 
+/-- The defining equation of `boundedConstructibleLowerShriek` (`E`-coefficient). -/
 lemma boundedConstructibleLowerShriek_eq :
     boundedConstructibleLowerShriek ℓ E f =
       boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f) :=
@@ -716,6 +719,7 @@ noncomputable def boundedConstructibleLowerShriek :
       E⟧ :=
   boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
 
+/-- The defining equation of `boundedConstructibleLowerShriek` (`𝒪_E`-coefficient). -/
 lemma boundedConstructibleLowerShriek_eq :
     boundedConstructibleLowerShriek ℓ E f =
       boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f) :=

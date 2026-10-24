@@ -82,8 +82,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 
-/-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g` of schemes whose
-horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
+/-- Base change along isomorphisms (`ℚ̄_ℓ`-coefficient): for a commutative square `g' ≫ f = f' ≫ g`
+of schemes whose horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible `ℚ̄_ℓ`-sheaves is an isomorphism.
 No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
@@ -169,12 +169,14 @@ noncomputable def weilLowerStar :
     WeilBoundedConstructible ℓ eX ⥤ WeilBoundedConstructible ℓ eY :=
   IsoAlgebra.mapOfNatIso (asIso (weilLowerStarComparison ℓ eX eY f hf))
 
+/-- The underlying complex of the image under `weilLowerStar` (`ℚ̄_ℓ`-coefficient). -/
 @[simp]
 lemma weilLowerStar_obj_carrier (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).carrier =
       (boundedConstructibleLowerStar ℓ f).obj K.carrier :=
   rfl
 
+/-- The Weil structure of the image under `weilLowerStar` (`ℚ̄_ℓ`-coefficient). -/
 lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).str =
       (asIso (weilLowerStarComparison ℓ eX eY f hf)).app K.carrier ≪≫
@@ -182,7 +184,7 @@ lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX) :
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
-the forgetful functors. -/
+the forgetful functors (`ℚ̄_ℓ`-coefficient). -/
 lemma weilLowerStar_comp_forget :
     weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY =
       WeilBoundedConstructible.forget ℓ eX ⋙

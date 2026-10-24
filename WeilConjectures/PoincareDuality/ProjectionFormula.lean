@@ -297,6 +297,7 @@ noncomputable def boundedConstructibleExceptionalProjection :
   naturality _ _ φ := NatTrans.ext <| funext fun B ↦
     boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ f φ B
 
+/-- The components of `boundedConstructibleExceptionalProjection` (`ℚ̄_ℓ`-coefficient). -/
 @[simp]
 lemma boundedConstructibleExceptionalProjection_app_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -314,6 +315,7 @@ instance isIso_boundedConstructibleExceptionalProjectionMorphism
     IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ f K B) :=
   sorry
 
+/-- The components of the exceptional projection are isomorphisms (`ℚ̄_ℓ`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -404,6 +406,7 @@ noncomputable def boundedConstructibleExceptionalProjection :
   naturality _ _ φ := NatTrans.ext <| funext fun B ↦
     boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ E f φ B
 
+/-- The components of `boundedConstructibleExceptionalProjection` (`E`-coefficient). -/
 @[simp]
 lemma boundedConstructibleExceptionalProjection_app_app
     (K : PadicSubfieldConstructible X.left ℓ E)
@@ -421,6 +424,7 @@ instance isIso_boundedConstructibleExceptionalProjectionMorphism
     IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) :=
   sorry
 
+/-- The components of the exceptional projection are isomorphisms (`E`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app
     (K : PadicSubfieldConstructible X.left ℓ E)
     (B : PadicSubfieldConstructible Y.left ℓ E) :
@@ -514,6 +518,7 @@ noncomputable def boundedConstructibleExceptionalProjection :
   naturality _ _ φ := NatTrans.ext <| funext fun B ↦
     boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ E f φ B
 
+/-- The components of `boundedConstructibleExceptionalProjection` (`𝒪_E`-coefficient). -/
 @[simp]
 lemma boundedConstructibleExceptionalProjection_app_app
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
@@ -531,6 +536,7 @@ instance isIso_boundedConstructibleExceptionalProjectionMorphism
     IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) :=
   sorry
 
+/-- The components of the exceptional projection are isomorphisms (`𝒪_E`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :

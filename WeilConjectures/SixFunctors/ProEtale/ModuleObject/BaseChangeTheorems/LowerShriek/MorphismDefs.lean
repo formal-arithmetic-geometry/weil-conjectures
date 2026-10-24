@@ -240,6 +240,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
       (boundedConstructibleLowerStar ℓ (c.baseChange sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
+/-- The defining equation of `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
+(`ℚ̄_ℓ`-coefficient). -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ c sq =
@@ -301,6 +303,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
       (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
+/-- The defining equation of `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
+(`E`-coefficient). -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E c sq =
@@ -366,6 +370,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
       (boundedConstructibleLowerStar ℓ E (c.baseChange sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
+/-- The defining equation of `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
+(`𝒪_E`-coefficient). -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E c sq =
@@ -420,6 +426,7 @@ noncomputable def boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' 
     Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso ℓ E
       ((compactificationOverField f).baseChange sq.overLeft) (compactificationOverField f')).hom
 
+/-- The defining equation of `boundedConstructibleLowerShriekBaseChange` (`E`-coefficient). -/
 lemma boundedConstructibleLowerShriekBaseChange_eq (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekBaseChange ℓ E sq =
       ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E
@@ -448,6 +455,8 @@ noncomputable def boundedConstructibleLowerShriekBaseChange_padicAlgCl
     Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ
       ((compactificationOverField f).baseChange sq.overLeft) (compactificationOverField f')).hom
 
+/-- The defining equation of `boundedConstructibleLowerShriekBaseChange_padicAlgCl`
+(`ℚ̄_ℓ`-coefficient). -/
 lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq =
       boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ

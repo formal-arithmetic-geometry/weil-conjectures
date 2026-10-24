@@ -321,6 +321,7 @@ instance isLeftAdjoint_boundedConstructibleLowerShriek :
     (boundedConstructibleLowerShriek ℓ f).IsLeftAdjoint :=
   (boundedConstructibleUpperShriekAdjunction ℓ f).isLeftAdjoint
 
+/-- `Rf^!` on bounded constructible complexes is a right adjoint (`ℚ̄_ℓ`-coefficient). -/
 instance isRightAdjoint_boundedConstructibleUpperShriek :
     (boundedConstructibleUpperShriek ℓ f).IsRightAdjoint :=
   (boundedConstructibleUpperShriekAdjunction ℓ f).isRightAdjoint
@@ -363,6 +364,7 @@ instance isLeftAdjoint_boundedConstructibleLowerShriek :
     (boundedConstructibleLowerShriek ℓ E f).IsLeftAdjoint :=
   (boundedConstructibleUpperShriekAdjunction ℓ E f).isLeftAdjoint
 
+/-- `Rf^!` on bounded constructible complexes is a right adjoint (`E`-coefficient). -/
 instance isRightAdjoint_boundedConstructibleUpperShriek :
     (boundedConstructibleUpperShriek ℓ E f).IsRightAdjoint :=
   (boundedConstructibleUpperShriekAdjunction ℓ E f).isRightAdjoint
@@ -409,6 +411,7 @@ instance isLeftAdjoint_boundedConstructibleLowerShriek :
     (boundedConstructibleLowerShriek ℓ E f).IsLeftAdjoint :=
   (boundedConstructibleUpperShriekAdjunction ℓ E f).isLeftAdjoint
 
+/-- `Rf^!` on bounded constructible complexes is a right adjoint (`𝒪_E`-coefficient). -/
 instance isRightAdjoint_boundedConstructibleUpperShriek :
     (boundedConstructibleUpperShriek ℓ E f).IsRightAdjoint :=
   (boundedConstructibleUpperShriekAdjunction ℓ E f).isRightAdjoint

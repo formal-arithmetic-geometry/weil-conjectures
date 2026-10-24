@@ -102,8 +102,8 @@ noncomputable def weilTensorComparison :
             e.hom).app KL.2).symm))
     sorry
 
-/-- The derived tensor product of Weil objects: a pair of Weil objects `(K, φ_K)` and `(L, φ_L)`
-for `e` is sent to `K ⊗ᴸ L` with the structure isomorphism
+/-- The derived tensor product of Weil objects (`ℚ̄_ℓ`-coefficient): a pair of Weil objects `(K,
+φ_K)` and `(L, φ_L)` for `e` is sent to `K ⊗ᴸ L` with the structure isomorphism
 `Φ (K ⊗ᴸ L) ≅ Φ K ⊗ᴸ Φ L ≅ K ⊗ᴸ L` given by `weilTensorComparison` and `φ_K ⊗ᴸ φ_L`. -/
 noncomputable def weilTensor :
     WeilBoundedConstructible ℓ e ⥤ WeilBoundedConstructible ℓ e ⥤
@@ -111,6 +111,7 @@ noncomputable def weilTensor :
   IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor ℓ X)
     (weilTensorComparison ℓ e)
 
+/-- The underlying complex of the image under `weilTensor` (`ℚ̄_ℓ`-coefficient). -/
 @[simp]
 lemma weilTensor_obj_obj_carrier (K L : WeilBoundedConstructible ℓ e) :
     (((weilTensor ℓ e).obj K).obj L).carrier =
