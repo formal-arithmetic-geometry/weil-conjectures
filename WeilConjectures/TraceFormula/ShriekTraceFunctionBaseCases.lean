@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
 public import WeilConjectures.TraceFormula.GenericQuotient
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.WeilBaseChange
 
@@ -22,7 +23,8 @@ shriek holds along every morphism as soon as it holds generically
 (`ProEtale.CondensedRing.ShriekTraceFunctionGenericallyHolds`). This file reduces the generic
 statement to three base cases, stated as separate inputs:
 
-- **dimension zero** (`ProEtale.CondensedRing.shriekTraceFunctionAt_of_isFinite_of_etale`): `f`
+- **dimension zero** (`ProEtale.CondensedRing.shriekTraceFunctionAt_of_isFinite_of_etale`, proved in
+  `WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale`): `f`
   finite étale. Then `Rf_! = f_*` and the stalk of `f_* K` at `ȳ` is `⊕_{x̄ ↦ ȳ} K_x̄`, on which
   the Frobenius permutes the summands; only the summands at points of degree `n + 1` contribute
   to the trace;
@@ -60,7 +62,6 @@ they have finite order, so that `shriekTraceFunctionAt_comp` composes the base c
 
 ## Sorried inputs
 
-- `ProEtale.CondensedRing.shriekTraceFunctionAt_of_isFinite_of_etale`;
 - `ProEtale.CondensedRing.shriekTraceFunctionAt_of_smoothOfRelativeDimension_one`.
 
 The closed-immersion case is proved here from the dimension-zero case (for the identity of `X`)
@@ -172,17 +173,20 @@ def ShriekTraceFunctionClosedImmersion : Prop :=
     [IsClosedImmersion f.left] → (∃ m : ℕ, eX.powSucc m = Iso.refl X) →
     ShriekTraceFunctionAt ℓ eX eY hf
 
-/-- **Dimension zero** (still `sorry`): the sheaf–function compatibility holds along a finite
+/-- **Dimension zero**: the sheaf–function compatibility holds along a finite
 étale morphism `f`. The stalk of `Rf_! K = f_* K` at `ȳ` is the sum of the stalks `K_x̄` over
 the geometric points `x̄ ↦ ȳ`, permuted by the Frobenius; the trace only sees the summands at
-the points fixed by the Frobenius, which are the points of degree `n + 1`. -/
+the points fixed by the Frobenius, which are the points of degree `n + 1`
+(`ShriekTraceFunctionAt.of_isFinite_of_etale`, which does not need `e_X` to have finite order).
+The hypothesis `_he` is therefore redundant; it is kept so that the statement has the form of the
+base case `H₀` of `shriekTraceFunctionGenericallyHolds_of_baseCases`. -/
 theorem shriekTraceFunctionAt_of_isFinite_of_etale {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    [IsFinite f.left] [Etale f.left] (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
+    [IsFinite f.left] [Etale f.left] (_he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
     ShriekTraceFunctionAt ℓ eX eY hf :=
-  sorry
+  ShriekTraceFunctionAt.of_isFinite_of_etale ℓ eX eY hf
 
 /-- **Curves** (still `sorry`): the sheaf–function compatibility holds along a smooth morphism
 `f` of relative dimension one. By compactly supported base change to `ȳ`, it is the trace
