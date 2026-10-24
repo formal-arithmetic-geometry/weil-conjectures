@@ -165,4 +165,24 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlg
   boundedConstructibleLowerShriekRefinementIso' _ ℓ r₁.isPullback r₁.hom_overG ≪≫
     (boundedConstructibleLowerShriekRefinementIso' _ ℓ r₂.isPullback r₂.hom_overG).symm
 
+/-- Unfolding `boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the comparison
+through the chosen common refinement. -/
+lemma boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refinementIso'
+    (c₁ c₂ : Compactification f.left) :
+    haveI := (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isProper
+    haveI := (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isProper
+    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+      (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+      (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ =
+      boundedConstructibleLowerShriekRefinementIso' _ ℓ
+          (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+          (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.hom_overG ≪≫
+        (boundedConstructibleLowerShriekRefinementIso' _ ℓ
+          (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+          (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.hom_overG).symm := by
+  unfold boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+  rfl
+
 end AlgebraicGeometry.ProEtale.CondensedRing

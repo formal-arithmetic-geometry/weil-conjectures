@@ -6,29 +6,30 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Basic
 
 /-!
-# Coherence of the composition isomorphisms in a compact support formalism
+# Coherence of the composition isomorphisms in an exchange formalism
 
-In a `AlgebraicGeometry.CompactSupportFormalism`, the composition isomorphisms of the
+In a `CategoryTheory.ExchangeFormalism`, the composition isomorphisms of the
 pushforwards `f_*` and of the extensions by zero `j_!` are conjugate to those of the pullbacks.
 This file transports the associativity of the pullback pseudofunctor to them.
 -/
 
 @[expose] public section
 
-universe w v u
+universe w v₁ v u
 
-open CategoryTheory Limits
+namespace CategoryTheory.ExchangeFormalism
 
-namespace AlgebraicGeometry.CompactSupportFormalism
 
-variable (F : CompactSupportFormalism.{w, v, u})
+
+variable {𝒞 : Type u} [Category.{v} 𝒞] {𝒪 : MorphismProperty 𝒞}
+  (F : ExchangeFormalism.{w, v₁} 𝒞 𝒪)
 
 section Pullback
 
-variable {X Y Z W : Scheme.{u}}
+variable {X Y Z W : 𝒞}
 
 /-- The associativity of the composition isomorphisms of the pullbacks, for their inverses. -/
 lemma pbComp'_assoc_inv (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) (fg : X ⟶ Z) (gh : Y ⟶ W)
@@ -50,7 +51,7 @@ end Pullback
 
 section Pushforward
 
-variable {X Y Z W : Scheme.{u}}
+variable {X Y Z W : 𝒞}
 
 lemma pfComp'_hom (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) :
     (F.pfComp' f g h w).hom =
@@ -98,18 +99,20 @@ end Pushforward
 
 section ExtensionByZero
 
-variable {A B C D : Scheme.{u}}
+variable {A B C D : 𝒞}
 
-lemma conjugateEquiv_shComp'_hom (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j : A ⟶ C) [IsOpenImmersion j₁]
-    [IsOpenImmersion j₂] [IsOpenImmersion j] (w : j₁ ≫ j₂ = j) :
+/-- The composition isomorphism of the extensions by zero is conjugate to the inverse of the
+composition isomorphism of the pullbacks. -/
+lemma conjugateEquiv_shComp'_hom (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j : A ⟶ C) [Fact (𝒪 j₁)]
+    [Fact (𝒪 j₂)] [Fact (𝒪 j)] (w : j₁ ≫ j₂ = j) :
     conjugateEquiv ((F.shAdj j₁).comp (F.shAdj j₂)) (F.shAdj j) (F.shComp' j₁ j₂ j w).hom =
       (F.pbComp' j₁ j₂ j w).inv := by
   simp [shComp', conjugateIsoEquiv]
 
 /-- **Associativity of the composition isomorphisms of the extensions by zero.** -/
 lemma shComp'_assoc (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j₃ : C ⟶ D) (j₁₂ : A ⟶ C) (j₂₃ : B ⟶ D)
-    (j : A ⟶ D) [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃]
-    [IsOpenImmersion j₁₂] [IsOpenImmersion j₂₃] [IsOpenImmersion j]
+    (j : A ⟶ D) [Fact (𝒪 j₁)] [Fact (𝒪 j₂)] [Fact (𝒪 j₃)]
+    [Fact (𝒪 j₁₂)] [Fact (𝒪 j₂₃)] [Fact (𝒪 j)]
     (h₁₂ : j₁ ≫ j₂ = j₁₂) (h₂₃ : j₂ ≫ j₃ = j₂₃) (h : j₁₂ ≫ j₃ = j) (h' : j₁ ≫ j₂₃ = j) :
     (F.shComp' j₁₂ j₃ j h).hom ≫ Functor.whiskerRight (F.shComp' j₁ j₂ j₁₂ h₁₂).hom (F.sh j₃) ≫
         (Functor.associator _ _ _).hom =
@@ -127,8 +130,8 @@ lemma shComp'_assoc (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j₃ : C ⟶ D) (j₁₂ 
 their inverses. -/
 @[reassoc]
 lemma shComp'_assoc_inv_app (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j₃ : C ⟶ D) (j₁₂ : A ⟶ C)
-    (j₂₃ : B ⟶ D) (j : A ⟶ D) [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃]
-    [IsOpenImmersion j₁₂] [IsOpenImmersion j₂₃] [IsOpenImmersion j]
+    (j₂₃ : B ⟶ D) (j : A ⟶ D) [Fact (𝒪 j₁)] [Fact (𝒪 j₂)] [Fact (𝒪 j₃)]
+    [Fact (𝒪 j₁₂)] [Fact (𝒪 j₂₃)] [Fact (𝒪 j)]
     (h₁₂ : j₁ ≫ j₂ = j₁₂) (h₂₃ : j₂ ≫ j₃ = j₂₃) (h : j₁₂ ≫ j₃ = j) (h' : j₁ ≫ j₂₃ = j)
     (M : F.obj A) :
     (F.sh j₃).map ((F.shComp' j₁ j₂ j₁₂ h₁₂).inv.app M) ≫ (F.shComp' j₁₂ j₃ j h).inv.app M =
@@ -145,4 +148,4 @@ lemma shComp'_assoc_inv_app (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j₃ : C ⟶ D) (
 
 end ExtensionByZero
 
-end AlgebraicGeometry.CompactSupportFormalism
+end CategoryTheory.ExchangeFormalism

@@ -6630,6 +6630,7 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductor
 public import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPower
 public import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPowerAux
+public import WeilConjectures.AlgebraicGeometry.SepFinType
 public import WeilConjectures.AlgebraicGeometry.SeparableClosureLimit
 public import WeilConjectures.AlgebraicGeometry.SeparableResidueCotangentInjective
 public import WeilConjectures.AlgebraicGeometry.SeparatedAffineCoverCriterion
@@ -7822,6 +7823,14 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import WeilConjectures.CategoryTheory.ExactCoupleExtension
 public import WeilConjectures.CategoryTheory.ExactCoupleShifted
 public import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Basic
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Coherence
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Composition
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Cube
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Identity
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Pasting
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.PushforwardBaseChange
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
 public import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 public import WeilConjectures.CategoryTheory.ExtCoefficientCocycle
 public import WeilConjectures.CategoryTheory.ExtExactFunctorCocycle
@@ -8405,6 +8414,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.Compactification.OverRefinement
+public import WeilConjectures.Compactification.OverRefinementBaseChange
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.ProperOpenSection
 public import WeilConjectures.Compactification.Refinement
@@ -9303,6 +9313,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preser
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.TwoSquare
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.PointedGaloisSmall
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
@@ -9310,6 +9321,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
+public import WeilConjectures.Mathlib.CategoryTheory.Iso
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Comma
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Constructions.Filtered
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct
@@ -11825,12 +11837,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Cube
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
@@ -12325,10 +12333,16 @@ public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.KummerCover
 public import WeilConjectures.SixFunctors.ProEtale.LowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeProper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeVertical
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Connecting
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
@@ -12344,6 +12358,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraidingShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
