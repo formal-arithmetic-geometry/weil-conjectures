@@ -39,7 +39,10 @@ and states the two theorems on nearby cycles that Varshavsky's vanishing argumen
   (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`);
 * Verdier's zero-section theorem: the specialization `Sp_{X,x}(K) = Ψ_X K` restricted to the zero
   section vanishes if `K_x` does
-  (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`).
+  (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`). It is deduced from its
+  exchange form: the pullback exchange along the section `ẽ : S ⟶ 𝒳` of the deformation to the
+  normal cone is invertible
+  (`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app`).
 
 -/
 
