@@ -170,4 +170,56 @@ lemma projectionComparison_eq_of_iso_comp {P : C₁ ⥤ C₃} {S : C₃ ⥤ C₁
 
 end Combined
 
+section Restriction
+
+variable {C₀ C₁ C₂ : Type*} [Category C₀] [Category C₁] [Category C₂]
+  [MonoidalCategory C₀] [MonoidalCategory C₁] [MonoidalCategory C₂]
+  {Pi : C₀ ⥤ C₁} {Si : C₁ ⥤ C₀} {Pi₁ : C₀ ⥤ C₂} {Si₁ : C₂ ⥤ C₀} {Fh : C₂ ⥤ C₁}
+  [Si.LaxMonoidal] [Si₁.LaxMonoidal] [Fh.LaxMonoidal]
+  (bi : Pi ⊣ Si) (bi₁ : Pi₁ ⊣ Si₁) (e : Si₁ ≅ Fh ⋙ Si)
+
+/-- The *restriction comparison* `i_! ⟶ h^* i₁_!` for open immersions `i : X ⟶ Z`,
+`i₁ : X ⟶ Z₁` and `h : Z ⟶ Z₁` with `i ≫ h = i₁`, through `e : i₁^* ≅ h^* ⋙ i^*`: the unit of
+`i₁_! ⊣ i₁^*`, `e`, and the counit of `i_! ⊣ i^*`. -/
+def restrictionComparison (M : C₀) : Pi.obj M ⟶ Fh.obj (Pi₁.obj M) :=
+  Pi.map (bi₁.unit.app M ≫ e.hom.app (Pi₁.obj M)) ≫ bi.counit.app _
+
+open Functor.LaxMonoidal in
+/-- **The restriction comparison intertwines the projection comparisons**: for `e` compatible with
+the multiplications, `q_i` followed by `ρ ⊗ 𝟙` and the multiplication of `h^*` is `ρ` followed
+by `h^* q_{i₁}`, through `e`. -/
+lemma projectionComparison_comp_restrictionComparison
+    (he : ∀ X Y, μ Si₁ X Y ≫ e.hom.app (X ⊗ Y) =
+      (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Fh ⋙ Si) X Y) (K : C₀) (B : C₂) :
+    bi.projectionComparison K (Fh.obj B) ≫ restrictionComparison bi bi₁ e K ▷ Fh.obj B ≫
+        μ Fh (Pi₁.obj K) B =
+      Pi.map (K ◁ e.inv.app B) ≫ restrictionComparison bi bi₁ e (K ⊗ Si₁.obj B) ≫
+        Fh.map (bi₁.projectionComparison K B) := by
+  have hρ : ∀ M, bi.homEquiv _ _ (restrictionComparison bi bi₁ e M) =
+      bi₁.unit.app M ≫ e.hom.app (Pi₁.obj M) := fun M ↦ by
+    rw [restrictionComparison, ← homEquiv_counit, Equiv.apply_symm_apply]
+  have hq : bi.homEquiv _ _ (bi.projectionComparison K (Fh.obj B)) =
+      bi.unit.app K ▷ Si.obj (Fh.obj B) ≫ μ Si (Pi.obj K) (Fh.obj B) := by
+    rw [projectionComparison, Equiv.apply_symm_apply]
+  have hq₁ : bi₁.homEquiv _ _ (bi₁.projectionComparison K B) =
+      bi₁.unit.app K ▷ Si₁.obj B ≫ μ Si₁ (Pi₁.obj K) B := by
+    rw [projectionComparison, Equiv.apply_symm_apply]
+  have hn := e.hom.naturality (bi₁.projectionComparison K B)
+  simp only [Functor.comp_map] at hn
+  apply (bi.homEquiv _ _).injective
+  rw [homEquiv_naturality_right, hq, homEquiv_naturality_left, homEquiv_naturality_right, hρ]
+  conv_rhs => rw [Category.assoc, ← hn, ← Category.assoc (bi₁.unit.app _)]
+  erw [← bi₁.homEquiv_unit]
+  erw [hq₁]
+  simp only [Category.assoc]
+  rw [he]
+  rw [Si.map_comp, ← μ_natural_left_assoc, ← comp_whiskerRight_assoc]
+  erw [← bi.homEquiv_unit, hρ]
+  rw [Functor.LaxMonoidal.comp_μ, tensorHom_def]
+  simp only [comp_whiskerRight, Category.assoc, whisker_exchange_assoc, ← whiskerLeft_comp_assoc,
+    Iso.inv_hom_id_app, whiskerLeft_id, Category.id_comp]
+  rfl
+
+end Restriction
+
 end CategoryTheory.Adjunction
