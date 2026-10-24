@@ -5,12 +5,42 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.KunnethVerdierTriangulated
+public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConstructible
 
 /-!
 # The Künneth–Verdier map is a morphism of triangulated functors
 
+Fix `N ∈ Dᵇc(Y)⟦ℚ̄_ℓ⟧`. Both sides of the Künneth–Verdier map
+```
+κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)
+```
+are triangulated functors of `M ∈ Dᵇc(X)⟦ℚ̄_ℓ⟧`, and `κ_{-,N}` is a natural transformation
+compatible with the shifts (`ProEtale.CondensedRing.kunnethVerdierNatTrans`). Hence the objects `M`
+for which `κ_{M,N}` is an isomorphism form a triangulated subcategory, closed under direct
+summands: this is the two-out-of-three property on which the dévissage in `M` of the proof of the
+Künneth–Verdier theorem rests (blueprint `prop-trf-exceptional-kunneth`,
+`lem-sf-triangle-two-out-of-three`).
+
+The compatibility with the shifts is obtained by writing `κ_{-,N}` as a composite of natural
+transformations which commute with the shifts: `κ_{-,N}` is the transpose along
+`Lp_Y^* N ⊗ᴸ - ⊣ RHom(Lp_Y^* N, -)` of the pairing
+(`ProEtale.CondensedRing.kunnethVerdierPairingNatTrans`), a rearrangement of the tensor factors
+followed by the exceptional Künneth map `α`
+(`ProEtale.CondensedRing.exceptionalKunnethMapNatTrans`),
+itself the transpose along `Rp_X! ⊣ Rp_X^!` of a composite of the braiding, the inverse of the
+exceptional projection formula, compact-support base change, a counit and the left unitor
+(`ProEtale.CondensedRing.exceptionalKunnethAdjointNatTrans_eq`).
+
+## Main statements
+
+- `ProEtale.CondensedRing.commShift_kunnethVerdierNatTrans`: `κ_{-,N}` commutes with the shifts.
+- `ProEtale.CondensedRing.isIso_kunnethVerdierMap_of_triangEnvelope`: if `κ_{M,N}` is an
+  isomorphism for `M` in a class `P`, it is one for `M` in the triangulated envelope of `P`.
+- `ProEtale.CondensedRing.isIso_kunnethVerdierMap_of_distinguished`,
+  `ProEtale.CondensedRing.isIso_kunnethVerdierMap_shift_iff`: two out of three and shifts.
 -/
 
 @[expose] public section
@@ -79,7 +109,7 @@ lemma exceptionalKunnethAdjointNatTrans_eq :
     exceptionalKunnethAdjointNatTrans ℓ X Y =
       Functor.whiskerRight (Functor.whiskerLeft
           (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-          (boundedConstructibleBraidingNatTrans₁ ℓ _
+          (boundedConstructibleBraidingNatTrans₁ _
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
               (dualizingComplex' ℓ Y))))
           (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)) ≫
@@ -166,63 +196,58 @@ noncomputable def kunnethVerdierPairingNatTrans :
       curriedTensor_obj_map, Functor.id_map]
     exact kunnethVerdierPairing_naturality ℓ (Y := Y) φ N
 
+variable (X) in
+/-- The rearrangement `Lp_Y^* N ⊗ (Q ⊗ Lp_Y^* D_Y N) ⟶ Q ⊗ Lp_Y^* ω_Y`, natural in `Q`, of the
+Künneth–Verdier pairing: associators and the braiding of `Lp_Y^* N` past `Q`, followed by
+`kunnethVerdierEvaluation`. -/
+noncomputable def kunnethVerdierRearrangement :
+    (curriedTensor _).flip.obj
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+          (verdierDual ℓ (toPoint Y) N)) ⋙
+      (curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) ⟶
+      (curriedTensor _).flip.obj
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+          (dualizingComplex' ℓ Y)) :=
+  inv (associatorNatTrans₂ _
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+        (verdierDual ℓ (toPoint Y) N))) ≫
+    Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ _
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
+      ((curriedTensor _).flip.obj
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+          (verdierDual ℓ (toPoint Y) N))) ≫
+    associatorNatTrans₁ _ _ _ ≫
+    (curriedTensor _).flip.map (kunnethVerdierEvaluation ℓ (X := X) N)
 
-lemma kunnethVerdierPairingNatTrans_eq :
-    kunnethVerdierPairingNatTrans ℓ X N =
-      (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-          (inv (associatorNatTrans₂ _
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-                (verdierDual ℓ (toPoint Y) N))) ≫
-            Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ ℓ _
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
-              ((curriedTensor _).flip.obj
-                ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-                  (verdierDual ℓ (toPoint Y) N))) ≫
-            associatorNatTrans₁ _ _ _ ≫
-            (curriedTensor _).flip.map (kunnethVerdierEvaluation ℓ (X := X) N)) ≫
-        exceptionalKunnethMapNatTrans ℓ X Y := by
-  refine NatTrans.ext (funext fun M ↦ ?_)
-  simp only [kunnethVerdierPairingNatTrans_app, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, NatIso.isIso_inv_app,
-    associatorNatTrans₂_app, associatorNatTrans₁_app, boundedConstructibleBraidingNatTrans₂_app,
-    curriedTensor_map_app, Functor.flip_map_app, exceptionalKunnethMapNatTrans_app,
-    kunnethVerdierEvaluation, MonoidalCategory.whiskerLeft_comp, Category.id_comp,
-    Category.assoc, IsIso.Iso.inv_hom, Functor.flip_obj_map, curriedTensor_obj_map,
-    kunnethVerdierPairing]
-
-instance commShift_kunnethVerdierPairingNatTrans :
-    NatTrans.CommShift (kunnethVerdierPairingNatTrans ℓ X N) ℤ := by
+instance commShift_kunnethVerdierRearrangement :
+    NatTrans.CommShift (kunnethVerdierRearrangement ℓ X N) ℤ := by
   have := NatTrans.CommShift.of_isIso (associatorNatTrans₂ _
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
       (verdierDual ℓ (toPoint Y) N))) ℤ
+  dsimp only [kunnethVerdierRearrangement]
+  infer_instance
+
+/-- The Künneth–Verdier pairing is the rearrangement followed by the exceptional Künneth map. -/
+lemma kunnethVerdierPairingNatTrans_eq :
+    kunnethVerdierPairingNatTrans ℓ X N =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+          (kunnethVerdierRearrangement ℓ X N) ≫
+        exceptionalKunnethMapNatTrans ℓ X Y := by
+  refine NatTrans.ext (funext fun M ↦ ?_)
+  simp only [kunnethVerdierPairingNatTrans_app, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, NatIso.isIso_inv_app,
+    kunnethVerdierRearrangement, associatorNatTrans₂_app, associatorNatTrans₁_app,
+    boundedConstructibleBraidingNatTrans₂_app, curriedTensor_map_app, Functor.flip_map_app,
+    exceptionalKunnethMapNatTrans_app, kunnethVerdierEvaluation,
+    MonoidalCategory.whiskerLeft_comp, Category.id_comp, Category.assoc, IsIso.Iso.inv_hom,
+    Functor.flip_obj_map, curriedTensor_obj_map, kunnethVerdierPairing]
+
+instance commShift_kunnethVerdierPairingNatTrans :
+    NatTrans.CommShift (kunnethVerdierPairingNatTrans ℓ X N) ℤ := by
   rw [kunnethVerdierPairingNatTrans_eq]
-  have : NatTrans.CommShift (associatorNatTrans₁ (Dᵇc((X ⨯ Y).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
-    ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-      (verdierDual ℓ (toPoint Y) N))) ℤ := inferInstance
-  have : NatTrans.CommShift ((curriedTensor (Dᵇc((X ⨯ Y).left)⟦Profinite.padicAlgClRingObj ℓ⟧)).flip.map
-    (kunnethVerdierEvaluation ℓ (X := X) N)) ℤ := inferInstance
-  have : NatTrans.CommShift (boundedConstructibleBraidingNatTrans₂ ℓ _
-    ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)) ℤ := inferInstance
-  have h1 : NatTrans.CommShift (Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ ℓ _
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
-              ((curriedTensor _).flip.obj
-                ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-                  (verdierDual ℓ (toPoint Y) N)))) ℤ := inferInstance
-  have h2 : NatTrans.CommShift (inv (associatorNatTrans₂ _
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-                (verdierDual ℓ (toPoint Y) N))) ≫
-            Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ ℓ _
-              ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
-              ((curriedTensor _).flip.obj
-                ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-                  (verdierDual ℓ (toPoint Y) N))) ≫
-            associatorNatTrans₁ _ _ _ ≫
-            (curriedTensor _).flip.map (kunnethVerdierEvaluation ℓ (X := X) N)) ℤ := inferInstance
   infer_instance
 
 variable (X) in
@@ -244,7 +269,7 @@ noncomputable def kunnethVerdierNatTrans :
 instance commShift_kunnethVerdierNatTrans :
     NatTrans.CommShift (kunnethVerdierNatTrans ℓ X N) ℤ :=
   NatTrans.CommShift.of_homEquiv
-    (boundedConstructibleTensorIhomAdjunction ℓ _
+    (boundedConstructibleTensorIhomAdjunction
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
     (kunnethVerdierPairingNatTrans ℓ X N) _ (fun _ ↦ rfl)
 

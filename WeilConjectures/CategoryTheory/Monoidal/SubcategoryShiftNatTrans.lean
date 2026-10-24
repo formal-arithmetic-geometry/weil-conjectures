@@ -60,6 +60,7 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] (P : ObjectProperty C) [
   [∀ X : C, ((curriedTensor C).obj X).CommShift A]
   [∀ X : C, ((curriedTensor C).flip.obj X).CommShift A]
 
+omit [∀ X : C, ((curriedTensor C).flip.obj X).CommShift A] in
 /-- The natural transformation `g ⊗ - : X ⊗ - ⟶ X' ⊗ -` of `P` commutes with the shifts if that
 of `C` does. -/
 lemma commShift_curriedTensor_map {X X' : P.FullSubcategory} (g : X ⟶ X')
@@ -78,6 +79,7 @@ lemma commShift_curriedTensor_map {X X' : P.FullSubcategory} (g : X ⟶ X')
     Category.id_comp, Category.comp_id, Category.comp_id]
   rfl
 
+omit [∀ X : C, ((curriedTensor C).obj X).CommShift A] in
 /-- The natural transformation `- ⊗ g : - ⊗ X ⟶ - ⊗ X'` of `P` commutes with the shifts if that
 of `C` does. -/
 lemma commShift_curriedTensor_flip_map {X X' : P.FullSubcategory} (g : X ⟶ X')
@@ -96,6 +98,7 @@ lemma commShift_curriedTensor_flip_map {X X' : P.FullSubcategory} (g : X ⟶ X')
     Category.id_comp, Category.comp_id, Category.comp_id]
   rfl
 
+omit [∀ X : C, ((curriedTensor C).obj X).CommShift A] in
 set_option synthInstance.maxSize 4096 in
 set_option synthInstance.maxHeartbeats 1000000 in
 -- the instance problems for the composite functors are large
@@ -122,12 +125,11 @@ lemma commShift_associatorNatTrans₁ (Y Z : P.FullSubcategory)
     isoMk_hom, ι_map, homMk_hom, tensorRightCompιIso, tensorRightIsoLift,
     liftFullSubcategoryCompιIso, Iso.trans_refl, Functor.isoWhiskerRight_twice,
     Iso.trans_assoc, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv, Category.assoc,
+    Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerRight_inv, Category.assoc,
     NatTrans.comp_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
     NatIso.ofComponents_inv_app, Iso.refl_inv, FullSubcategory.id_hom, Functor.comp_map,
     Functor.flip_obj_map, curriedTensor_map_app, Functor.associator_inv_app,
-    NatIso.ofComponents_hom_app, Iso.refl_hom, curriedTensor_obj_map, Category.comp_id,
-    Category.id_comp, eF]
+    NatIso.ofComponents_hom_app, Iso.refl_hom, Category.id_comp, eF]
   erw [MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id]
   exact (Category.id_comp _).symm
 
@@ -164,7 +166,7 @@ lemma commShift_leftUnitorNatTrans [NatTrans.CommShift (leftUnitorNatTrans C) A]
   simp only [Functor.whiskerRight_app, NatTrans.comp_app, Functor.whiskerLeft_app,
     tensorLeftCompιIso, tensorLeftIsoLift, liftFullSubcategoryCompιIso, Iso.trans_hom,
     Iso.trans_inv, Functor.isoWhiskerRight_hom, Iso.symm_hom,
-    Iso.symm_inv, NatIso.ofComponents_inv_app, NatIso.ofComponents_hom_app, Iso.refl_inv,
+    Iso.symm_inv, NatIso.ofComponents_inv_app, Iso.refl_inv,
     Iso.refl_hom, leftUnitorNatTrans_app, Functor.leftUnitor_inv_app,
     Functor.rightUnitor_hom_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, Category.comp_id]

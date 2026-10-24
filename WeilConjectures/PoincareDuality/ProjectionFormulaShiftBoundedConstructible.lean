@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
-public import WeilConjectures.CategoryTheory.Monoidal.SubcategoryShiftNatTrans
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekShift
 
 /-!
@@ -16,7 +16,8 @@ The exceptional projection morphism `PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K 
 constructible complexes commutes with the shifts in `B`
 (`ProEtale.CondensedRing.commShift_boundedConstructibleExceptionalProjectionNatTrans`): through
 the fully faithful inclusions it is the exceptional projection morphism of the ambient derived
-categories, which does (`ProEtale.CondensedRing.commShift_exceptionalProjectionMorphismOfCompactificationNatTrans`).
+categories, which does
+(`ProEtale.CondensedRing.commShift_exceptionalProjectionMorphismOfCompactificationNatTrans`).
 -/
 
 @[expose] public section
@@ -32,22 +33,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-/-- The commutations of the derived tensor products `K ⊗ᴸ -` with the shifts, as a family
-(instance search for the family itself times out). -/
-noncomputable abbrev commShiftTensorLeftFamily (X : Scheme.{u}) :
-    ∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)), ((curriedTensor (DerivedCategory (Mod
-        (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))).obj K).CommShift ℤ :=
-  fun K ↦ DerivedCategory.commShiftTensorLeft _ K
-
-/-- The commutations of the derived tensor products `- ⊗ᴸ K` with the shifts, as a family. -/
-noncomputable abbrev commShiftTensorRightFamily (X : Scheme.{u}) :
-    ∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)), ((curriedTensor (DerivedCategory (Mod
-        (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))).flip.obj
-          K).CommShift ℤ :=
-  fun K ↦ DerivedCategory.commShiftTensorRight _ K
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
@@ -74,6 +59,7 @@ noncomputable def boundedConstructibleExceptionalProjectionOfCompactificationNat
   naturality _ _ h :=
     boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right Λ ℓ f c K h
 
+set_option linter.flexible false in
 set_option synthInstance.maxSize 4096 in
 set_option synthInstance.maxHeartbeats 1000000 in
 -- the instance problems for the composite functors are large
@@ -85,10 +71,10 @@ instance commShift_boundedConstructibleExceptionalProjectionOfCompactificationNa
     (c : Compactification f.left) (K : Dᵇc(X.left)⟦Λ⟧) :
     NatTrans.CommShift
       (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans Λ ℓ c K) ℤ := by
-  letI := commShiftTensorLeftFamily Λ X.left
-  letI := commShiftTensorLeftFamily Λ Y.left
-  letI := commShiftTensorRightFamily Λ X.left
-  letI := commShiftTensorRightFamily Λ Y.left
+  let := commShiftTensorLeftFamily Λ X.left
+  let := commShiftTensorLeftFamily Λ Y.left
+  let := commShiftTensorRightFamily Λ X.left
+  let := commShiftTensorRightFamily Λ Y.left
   have : (boundedConstructible (condensedRingObj Λ Y.left)).ι.Faithful :=
     ObjectProperty.faithful_ι _
   let e₂ : ((boundedConstructibleUpperStar Λ ℓ f ⋙ (curriedTensor _).obj K) ⋙
