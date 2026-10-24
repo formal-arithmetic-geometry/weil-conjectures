@@ -13,7 +13,8 @@ public import WeilConjectures.TraceFormula.Specialization.Trait
 # Models of finite type over the trait
 
 A nearby-cycles model `M` of `X` with special fibre `X'` (a `k'`-scheme) is a *model of finite type
-over the trait* `S = Spec k'⟦t⟧` (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModel`)
+over the trait* `S = Spec k'⟦t⟧`
+(`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModel`)
 if its total space is separated and of finite type over `S`, and `j` and `i` are the inclusions of
 the geometric generic fibre and of the special fibre. For these models nearby cycles are the
 geometric nearby cycles of SGA 7 XIII, and Deligne's finiteness theorem applies.
@@ -37,7 +38,8 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
 trait, and `j` and `i` are the inclusions of its geometric generic fibre and of its special
 fibre. -/
 structure IsTraitModel (M : NearbyCyclesModel X X'.left) : Prop where
-  exists_isPullback : ∃ (q : M.total ⟶ trait k') (g : M.generic ⟶ Spec (.of (traitGenericField k'))),
+  exists_isPullback : ∃ (q : M.total ⟶ trait k')
+      (g : M.generic ⟶ Spec (.of (traitGenericField k'))),
     LocallyOfFiniteType q ∧ QuasiCompact q ∧ IsSeparated q ∧
       IsPullback M.j g q (traitGenericPoint k') ∧ IsPullback M.i X'.hom q (traitClosedPoint k')
 

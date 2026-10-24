@@ -16,8 +16,8 @@ For a model `M` of `X` with special fibre `X'` whose nearby cycles `Ψ = i^* Rj_
 bounded constructible complexes
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.PreservesBoundedConstructible`;
 for models of finite type over a strictly henselian trait this is Deligne's finiteness
-theorem, SGA 4½, [Th. finitude], Thm. 3.2), the restriction of `Ψ` to the bounded constructible derived
-categories
+theorem, SGA 4½, [Th. finitude], Thm. 3.2), the restriction of `Ψ` to the bounded
+constructible derived categories
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.boundedConstructibleNearbyCycles`).
 
 -/

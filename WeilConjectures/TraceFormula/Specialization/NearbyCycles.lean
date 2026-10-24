@@ -24,18 +24,21 @@ constructible derived categories by Deligne's finiteness theorem
 
 This file defines
 * the specialization functors `Ψ_X`, `Ψ_C`, `Ψ_{X×X}`, `Ψ_F`
-  (`ProEtale.CondensedRing.Correspondence.IsContractingAt.nearbyCyclesX` etc.);
-* the *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of `(N_x X ⊗ k', Ψ_X K)`
-  (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialCorrespondence`) and its fixed locus
+  (`ProEtale.CondensedRing.specialization`, `ProEtale.CondensedRing.specializationProd`,
+  `ProEtale.CondensedRing.Correspondence.IsContractingAt.specializationFixedLocus`);
+* the *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of
+  `(N_x X ⊗ k', Ψ_X K)`
+  (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialCorrespondence`) and its fixed
+  locus
   (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialFixedLocus`);
 
 and states the two theorems on nearby cycles that Varshavsky's vanishing argument uses:
 * Gabber's Künneth formula and the commutation of nearby cycles with Verdier duality, in the form
   `Ψ_{X×X}(K ⊠ D K) ≅ Ψ_X K ⊠ D Ψ_X K`
-  (`ProEtale.CondensedRing.Correspondence.IsContractingAt.nonempty_nearbyCyclesXX_externalProduct_iso`);
+  (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`);
 * Verdier's zero-section theorem: the specialization `Sp_{X,x}(K) = Ψ_X K` restricted to the zero
   section vanishes if `K_x` does
-  (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_nearbyCycles`).
+  (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`).
 
 -/
 
@@ -56,7 +59,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
 
 /-- Compatibility required from the nearby-cycles section (blueprint
 `det-sp-nearby-cycles-exchanges`, to be proved there): **Deligne's finiteness theorem for nearby
-cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for `ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze §6.8): over the strictly henselian trait
+cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for `ℚ̄_ℓ`-coefficients
+by passage to the limit, Bhatt–Scholze §6.8): over the strictly henselian trait
 `Spec k'⟦t⟧`, `k'` separably closed, the nearby cycles of a model of finite type preserve bounded
 constructible complexes. The pullback `ε^*` to the geometric generic fibre preserves them, and
 `ī^* Rj̄_*` does by Deligne's theorem. -/
@@ -103,7 +107,8 @@ noncomputable def specializationProd :
       Dᵇc((deformationSpecialFibre X x.left.ker k' ⨯
         deformationSpecialFibre X x.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   NearbyCyclesModel.boundedConstructibleNearbyCycles
-    ((deformationProdModel X x.left.ker X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
+    (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
+      (deformationProdModel X x.left.ker X x.left.ker k')
       (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k'))
 
 /-- **Nearby cycles of the universal kernel** (Gabber's Künneth formula for nearby cycles, Illusie,
