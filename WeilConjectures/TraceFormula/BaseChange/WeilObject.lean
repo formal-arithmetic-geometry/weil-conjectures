@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import
@@ -64,13 +65,6 @@ modules pulled back from the condensed point.
 - `ProEtale.CondensedRing.weilGeometricBaseChange`: the base change of Weil objects
   `WeilBoundedConstructible ℓ g ⥤ WeilBoundedConstructible ℓ (baseChangeModelFrobenius Ω X (n + 1)
       g)`.
-
-## Sorried inputs
-
-- `ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj`:
-  the pullback along `π` preserves bounded constructible complexes (blueprint
-  `sk-thm-sf-ctf-stability`, section `sec-six-functors-basics`, with the pullback of
-  constructible sheaves `prop-constructible-pullback`).
 
 -/
 
@@ -354,12 +348,14 @@ variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar �
 
 section UpperStar
 
+set_option linter.unusedSectionVars false in
 /-- The derived pullback along the base change `π : X̄ ⟶ X` preserves bounded constructible
 complexes (blueprint `sk-thm-sf-ctf-stability`, with the pullback of constructible sheaves
 `prop-constructible-pullback`): `Lπ^*` is computed levelwise by the exact functor `π^*`, so it
 commutes with the homology sheaves, and the pullback of a sheaf which is constructible along a
 finite stratification of `X` by locally closed constructible strata is constructible along the
-preimage stratification of `X̄`, the projection `π` being affine. -/
+preimage stratification of `X̄`
+(`ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj_of_scheme`). -/
 theorem boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
@@ -367,7 +363,7 @@ theorem boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj
     boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) ((geometricBaseChange k Ω).obj X).left)
       ((L((geometricBaseChangeProj (Ω := Ω) X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K) :=
-  sorry
+  boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ K hK
 
 variable (Ω) in
 /-- The derived pullback `Lπ^* : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X̄)⟦ℚ̲̄_ℓ⟧` along the base change

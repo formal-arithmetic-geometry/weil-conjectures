@@ -6,8 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeFrobenius
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
 public import WeilConjectures.TraceFormula.BaseChange.CubeCoherence
 public import WeilConjectures.TraceFormula.BaseChange.FrobeniusNaturality
 public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
@@ -56,11 +58,10 @@ change `Lπ_Y^* Rf_! ≅ Rf̄_! Lπ_X^*` along `π_Y : Ȳ ⟶ Y` intertwines the
   base change.
 - `ProEtale.CondensedRing.nonempty_weilGeometricBaseChange_weilLowerShriek_iso`: the geometric
   base change of the Weil lower shriek, for proper `f`.
-
-## Sorried input
-
 - `ProEtale.CondensedRing.isIso_geometricBaseChangeLowerStarBaseChange`: proper base change along
-  `π_Y` (blueprint `sk-thm-sfb-proper-base-change`, section `sec-six-functors-basics`).
+  `π_Y`, from the proper base change theorem along an arbitrary base change
+  (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper`, blueprint
+  `sk-thm-sfb-proper-base-change`).
 
 -/
 
@@ -291,19 +292,51 @@ noncomputable abbrev geometricBaseChangeLowerStarBaseChange :
       ((geometricBaseChange k Ω).map f))
     (geometricBaseChangePullbackComparison ℓ Ω f)
 
+omit [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar Ω).Prime]
+  [Fact (ringChar Ω ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+variable {Ω} (f) in
+/-- The comparison `θ_π` on the ambient derived categories is the comparison
+`pullbackSquareComparison` of the square `f̄ ≫ π_Y = π_X ≫ f`. -/
+lemma leftDerivedUpperStarGeometricBaseChangeComparison_eq :
+    leftDerivedUpperStarGeometricBaseChangeComparison ℓ (Ω := Ω) f =
+      pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ)
+        (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip.toCommSq := by
+  unfold leftDerivedUpperStarGeometricBaseChangeComparison pullbackSquareComparison
+    leftDerivedUpperStarGeometricBaseChangeCongr
+  rw [pullbackCongrIso_eq_eqToIso]
+
 variable (f) in
 /-- **Proper base change along the base change to `Ω`** (blueprint
 `sk-thm-sfb-proper-base-change`, for the cartesian square `f̄ ≫ π_Y = π_X ≫ f`,
 `isPullback_geometricBaseChange_map_left`): for a proper morphism `f` of separated schemes of
 finite type over `k`, the base change morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the
-projection `π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. The blueprint
-statement is for an arbitrary cartesian square; the project's version
-(`isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`) only covers squares of schemes of
-finite type over one field, and `π_Y` is the base change of `Spec Ω ⟶ Spec k`, which is not of
-finite type. -/
+projection `π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. On the ambient
+derived categories `Ex_π` is the base change morphism `baseChangeMap` of the square
+(`Adjunction.exchangeRight_restrictFullyFaithful_app_hom`, the functors on bounded constructible
+complexes being restrictions), which is an isomorphism on bounded constructible complexes by the
+proper base change theorem along an arbitrary base change
+(`isIso_baseChangeMap_app_of_isProper`). -/
 theorem isIso_geometricBaseChangeLowerStarBaseChange [IsProper f.left] :
-    IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) :=
-  sorry
+    IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have hamb := isIso_baseChangeMap_app_of_isProper ℓ
+    (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip K.obj K.property
+  unfold baseChangeMap at hamb
+  rw [← leftDerivedUpperStarGeometricBaseChangeComparison_eq] at hamb
+  exact Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K.obj K.property)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ f K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ ((geometricBaseChange k Ω).map f)
+      K.obj K.property)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ ((geometricBaseChange k Ω).map f)
+      K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj ℓ Y K.obj
+      K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj ℓ X K.obj
+      K.property) (geometricBaseChangePullbackComparison ℓ Ω f)
+    (geometricBaseChangePullbackComparison_hom_app_hom ℓ Ω f) K hamb
 
 omit [Finite k] in
 /-- The base change `f̄` of a proper morphism is proper. -/
