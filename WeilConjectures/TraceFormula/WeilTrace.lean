@@ -360,7 +360,8 @@ lemma WeilSheaf.stalkFunctor_obj_unit_str_hom {Ω : Type u} [Field Ω] [IsSepClo
     (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom ≫
       ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj (WeilSheaf.unit ℓ e)).str.hom ≫
         (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv = 𝟙 _ := by
-  rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.unit_str, weilStalkComparison]
+  rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.unit_str, weilStalkComparison,
+    upperStarEqToIso_eq_eqToIso]
   have key := Iso.hom_comp_whiskerLeft_comp_inv_eq
     (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ)
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x)
