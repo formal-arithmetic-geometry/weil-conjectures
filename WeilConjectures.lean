@@ -7392,6 +7392,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
@@ -12363,6 +12364,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
