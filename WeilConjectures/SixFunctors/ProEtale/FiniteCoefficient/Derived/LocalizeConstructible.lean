@@ -84,7 +84,7 @@ noncomputable def closedUpperShriekIsoMapDerivedCategoryUpperStar
     M ≅ D((i)^*[ModuleCat.{u + 1} Λ]).obj (R((i)_*[ModuleCat.{u + 1} Λ]).obj M) :=
   have := preservesFiniteColimits_lowerStar_of_isCompl (R := Λ) i j hij
   have : IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit :=
-    isIso_upperStarLowerStarAdjunction_counit Λ i
+    isIso_upperStarLowerStarAdjunction_counit (ModuleCat.{u + 1} Λ) i
   (asIso (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryAdjunction
     ).counit.app M)).symm ≪≫ D((i)^*[ModuleCat.{u + 1} Λ]).mapIso
       (((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorIsoMapDerivedCategory.app M).symm

@@ -3785,6 +3785,7 @@ public import WeilConjectures.AlgebraicGeometry.FreeSheafDualTranspose
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
+public import WeilConjectures.AlgebraicGeometry.FrobeniusTwistFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import WeilConjectures.AlgebraicGeometry.FunctionField
@@ -8351,6 +8352,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 public import WeilConjectures.CategoryTheory.Triangulated.PBCDerivedLimitTowerCone
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementIsoAlgebra
+public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts
 public import WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Adjunction
@@ -12347,6 +12349,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
@@ -12396,6 +12399,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.A
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs

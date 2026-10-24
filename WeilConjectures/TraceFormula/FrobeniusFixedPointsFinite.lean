@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.FrobeniusTwistFixedPoints
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.PointCount
@@ -23,6 +24,7 @@ the points of degree `n + 1` for the Frobenius twisted by `e`
 ## Main statements
 
 - `ProEtale.CondensedRing.finite_frobeniusFixedPoints_of_powSucc_eq_refl`.
+- `ProEtale.CondensedRing.finite_frobeniusFixedPoints`.
 
 -/
 
@@ -131,6 +133,7 @@ lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
   rw [← Category.assoc, ← Spec.map_comp, hφ]
   exact e.left_inv x
 
+
 /-- **Finiteness of the points of degree `n + 1`** for an automorphism `e` of finite order of a
 scheme of finite type over a finite field (the finiteness part of blueprint
 `thm-trf-frobenius-fixed-points`, for the Frobenius twisted by `e`): a point `x̄` with
@@ -174,5 +177,49 @@ theorem finite_frobeniusFixedPoints_of_powSucc_eq_refl {X : Over (Spec (.of k))}
     fun x₁ x₂ h ↦ Subtype.ext (by
       rw [← hg x₁, ← hg x₂]
       exact congrArg (_ ≫ ·) (congrArg Subtype.val h))
+
+/-- **Finiteness of the points of degree `n + 1`** of a separated scheme of finite type over a
+finite field, for the Frobenius twisted by an automorphism `e` (the twisted analogue of the
+finiteness part of blueprint `thm-trf-frobenius-fixed-points`, which is stated for the model
+Frobenius, `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`): a point `x̄` with
+`x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` is fixed by `e^{n+1} ≫ Fr^{(q^{n+1})}`, since
+`σ^{n+1} ≫ Fr^{(q^{n+1})} = 𝟙` on `Spec k̄`, and the fixed points of a Frobenius twisted by an
+endomorphism are finite (`AlgebraicGeometry.Scheme.Hom.finite_fixedPoints_comp_absoluteFrobenius`).
+-/
+theorem finite_frobeniusFixedPoints {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] (e : X ≅ X) (n : ℕ) :
+    Finite (frobeniusFixedPoints e n) := by
+  have hg : (e.powSucc n).hom.left ≫ X.hom = X.hom := Over.w (e.powSucc n).hom
+  have := X.hom.finite_fixedPoints_comp_absoluteFrobenius (e.powSucc n).hom.left hg
+    (M := n + 1) (Nat.succ_ne_zero n) (AlgebraicClosure k) (specAlgebraicClosure k)
+  set σN := (geometricFrobenius k (AlgebraicClosure k)) ^ (n + 1)
+  have hσ : ((geometricFrobeniusField k).powSucc n).hom =
+      Spec.map (CommRingCat.ofHom σN.toRingEquiv.toRingHom) := by
+    rw [Iso.powSucc_hom_eq_pow]
+    exact geometricFrobeniusField_hom_pow (n + 1)
+  let ρ : AlgebraicClosure k →+* AlgebraicClosure k := σN.symm.toRingEquiv.toRingHom
+  have hρ (z : AlgebraicClosure k) : ρ z = z ^ (Nat.card k ^ (n + 1)) := by
+    have h := geometricFrobenius_pow_apply_pow_card_pow (k := k) (n + 1) (σN.symm z)
+    change σN (σN.symm z) ^ _ = σN.symm z at h
+    rw [AlgEquiv.apply_symm_apply] at h
+    exact h.symm
+  have hρσ : Spec.map (CommRingCat.ofHom σN.toRingEquiv.toRingHom) ≫
+      Spec.map (CommRingCat.ofHom ρ) = 𝟙 _ := by
+    rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    ext z
+    exact σN.apply_symm_apply z
+  refine Finite.of_injective (fun x : frobeniusFixedPoints e n ↦
+    (⟨x.1, x.2.1, ?_⟩ : {x : Spec (.of (AlgebraicClosure k)) ⟶ X.left //
+      x ≫ X.hom = specAlgebraicClosure k ∧
+        x ≫ (e.powSucc n).hom.left ≫ X.hom.absoluteFrobenius (n + 1) = x}))
+    fun x y h ↦ by
+      have h' := congrArg Subtype.val h
+      exact Subtype.ext h'
+  obtain ⟨y, -, hy⟩ := x
+  change y ≫ (e.powSucc n).hom.left ≫ X.hom.absoluteFrobenius (n + 1) = y
+  rw [hσ] at hy
+  rw [← Category.assoc, hy, Category.assoc,
+    X.hom.isFrobenius_absoluteFrobenius (n + 1) y (CommRingCat.ofHom ρ) hρ, reassoc_of% hρσ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
