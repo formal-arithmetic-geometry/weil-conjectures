@@ -38,36 +38,57 @@ open CategoryTheory
 open scoped CategoryTheory.Obj
 
 /-- The 2-categorical computation behind the vertical pasting of the compact-support base change:
-conjugating the exchange maps of a pair of triangles by comparison isomorphisms. -/
-lemma CategoryTheory.TwoSquare.vertical_pasting_aux {A B C A' B' C' : Type*} [Category* A]
-    [Category* B] [Category* C] [Category* A'] [Category* B'] [Category* C'] {V₂ : A ⥤ B}
-    {W₂ : B ⥤ C} {U₂ U₂T : A ⥤ C} {V₁ V₁T : A' ⥤ B'} {W₁ W₁T : B' ⥤ C'} {U₁ U₁T : A' ⥤ C'}
-    {Lh : A ⥤ A'} {Lk : B ⥤ B'} {Ll : C ⥤ C'} (iU₂ : U₂ ≅ U₂T) (cT₂ : V₂ ⋙ W₂ ≅ U₂T)
-    (iU₁ : U₁ ≅ U₁T) (cT₁ : V₁T ⋙ W₁T ≅ U₁T) (iV₁ : V₁T ≅ V₁) (iW₁ : W₁T ≅ W₁)
-    (SU : U₂T ⋙ Ll ⟶ Lh ⋙ U₁T) (SV : V₂ ⋙ Lk ⟶ Lh ⋙ V₁T) (SW : W₂ ⋙ Ll ⟶ Lk ⋙ W₁T)
+if the exchange maps `EU`, `EV`, `EW` are conjugates of `SU`, `SV`, `SW` by comparison
+isomorphisms, the composition isomorphisms `C₂`, `C₁` are computed through `cT₂`, `cT₁` and
+the exchange maps `SU`, `SV`, `SW` are compatible with `cT₂`, `cT₁`, then `EU` is the
+horizontal composite of `EV` and `EW`, conjugated by `C₂` and `C₁`. -/
+lemma CategoryTheory.TwoSquare.eq_hComp_of_conj {A B C A' B' C' : Type*} [Category* A]
+    [Category* B] [Category* C] [Category* A'] [Category* B'] [Category* C']
+    {V₂ V₂T : A ⥤ B} {W₂ W₂T : B ⥤ C} {U₂ U₂T : A ⥤ C} {V₁ V₁T : A' ⥤ B'} {W₁ W₁T : B' ⥤ C'}
+    {U₁ U₁T : A' ⥤ C'} {Lh : A ⥤ A'} {Lk : B ⥤ B'} {Ll : C ⥤ C'}
+    (iU₂ : U₂ ≅ U₂T) (iV₂ : V₂ ≅ V₂T) (iW₂ : W₂ ≅ W₂T) (jU₁ : U₁T ≅ U₁) (jV₁ : V₁T ≅ V₁)
+    (jW₁ : W₁T ≅ W₁) (kV₂ : V₂T ≅ V₂) (kW₂ : W₂T ≅ W₂) (kU₁ : U₁ ≅ U₁T)
+    (cT₂ : V₂T ⋙ W₂T ≅ U₂T) (cT₁ : V₁T ⋙ W₁T ≅ U₁T)
+    (SU : U₂T ⋙ Ll ⟶ Lh ⋙ U₁T) (SV : V₂T ⋙ Lk ⟶ Lh ⋙ V₁T) (SW : W₂T ⋙ Ll ⟶ Lk ⋙ W₁T)
+    (EU : U₂ ⋙ Ll ⟶ Lh ⋙ U₁) (EV : V₂ ⋙ Lk ⟶ Lh ⋙ V₁) (EW : W₂ ⋙ Ll ⟶ Lk ⋙ W₁)
+    (C₂ : U₂ ≅ V₂ ⋙ W₂) (C₁ : U₁ ≅ V₁ ⋙ W₁)
+    (hU : EU = Functor.whiskerRight iU₂.hom Ll ≫ SU ≫ Functor.whiskerLeft Lh jU₁.hom)
+    (hV : EV = Functor.whiskerRight iV₂.hom Lk ≫ SV ≫ Functor.whiskerLeft Lh jV₁.hom)
+    (hW : EW = Functor.whiskerRight iW₂.hom Ll ≫ SW ≫ Functor.whiskerLeft Lk jW₁.hom)
+    (hC₂ : C₂.hom = iU₂.hom ≫ cT₂.inv ≫ NatTrans.hcomp kV₂.hom kW₂.hom)
+    (hC₁ : C₁.hom = kU₁.hom ≫ cT₁.inv ≫ NatTrans.hcomp jV₁.hom jW₁.hom)
+    (hkV₂ : iV₂.symm = kV₂) (hkW₂ : iW₂.symm = kW₂) (hkU₁ : jU₁.symm = kU₁)
     (h : Functor.whiskerRight cT₂.hom Ll ≫ SU =
-      (TwoSquare.hComp (T := V₂) (B := V₁T) SV SW).natTrans ≫ Functor.whiskerLeft Lh cT₁.hom) :
-    Functor.whiskerRight iU₂.hom Ll ≫ SU ≫ Functor.whiskerLeft Lh iU₁.inv =
-      Functor.whiskerRight (iU₂ ≪≫ cT₂.symm).hom Ll ≫
-        (TwoSquare.hComp (T := V₂) (B := V₁) (SV ≫ Functor.whiskerLeft Lh iV₁.hom)
-          (SW ≫ Functor.whiskerLeft Lk iW₁.hom)).natTrans ≫
-        Functor.whiskerLeft Lh (iU₁ ≪≫ cT₁.symm ≪≫ NatIso.hcomp iV₁ iW₁).inv := by
+      (TwoSquare.hComp (T := V₂T) (B := V₁T) SV SW).natTrans ≫ Functor.whiskerLeft Lh cT₁.hom) :
+    EU = Functor.whiskerRight C₂.hom Ll ≫
+      (TwoSquare.hComp (T := V₂) (B := V₁) EV EW).natTrans ≫ Functor.whiskerLeft Lh C₁.inv := by
+  subst hkV₂ hkW₂ hkU₁ hU hV hW
+  obtain rfl : C₁ = jU₁.symm ≪≫ cT₁.symm ≪≫ NatIso.hcomp jV₁ jW₁ := Iso.ext (by simp [hC₁])
   ext X
   have hX := congr_app h X
   simp only [TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.comp_id,
     Functor.comp_obj] at hX
-  simp only [TwoSquare.hComp, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
-    NatIso.hcomp_inv, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-    Functor.comp_obj, Functor.map_comp, Category.assoc, NatTrans.hcomp_app]
   dsimp only [TwoSquare.natTrans] at hX
-  simp only [Category.assoc] at hX
-  rw [← Functor.map_comp_assoc W₁ (SV.app X), ← iW₁.hom.naturality_assoc,
-    Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc W₁T, Category.assoc, Iso.hom_inv_id_app]
-  erw [Category.comp_id]
-  rw [← reassoc_of% hX]
-  simp [← Functor.map_comp_assoc]
+  simp only [hC₂, TwoSquare.hComp, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
+    NatIso.hcomp_inv, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Functor.comp_obj, Functor.map_comp, Category.assoc, NatTrans.hcomp_app]
+
+  simp only [Category.assoc] at hX ⊢
+  have hSU : SU.app X = Ll.map (cT₂.inv.app X) ≫ SW.app (V₂T.obj X) ≫ W₁T.map (SV.app X) ≫
+      cT₁.hom.app (Lh.obj X) := by
+    rw [← hX, ← Ll.map_comp_assoc]; simp
+  rw [hSU]
+  simp only [Category.assoc, cancel_epi]
+  rw [← Ll.map_comp_assoc, ← Ll.map_comp_assoc, Category.assoc, NatIso.naturality_1]
+  erw [SW.naturality_assoc]
+  simp only [Functor.comp_map]
+  rw [jW₁.hom.naturality_assoc, ← W₁.map_comp_assoc, ← Lk.map_comp, Iso.inv_hom_id_app]
+  simp only [Functor.map_id, Category.id_comp]
+  rw [← jW₁.hom.naturality_assoc, ← jW₁.hom.naturality_assoc, Iso.hom_inv_id_app_assoc,
+    ← W₁T.map_comp_assoc]
+  simp
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -219,6 +240,48 @@ lemma pasteVert_compIso_shriekBaseChange :
       (pasteVertTriangle (v₂ := v₂) (w₂ := w₂))).overBaseChange_isPullback_g (sq₁.paste_vert sq₂)).w)
     (SepFinType.homMk_comp_homMk (isPullback_pasteVertTriangle_q sq₁ sq₂).w)
     (SepFinType.homMk_comp_homMk (overBaseChangeFst_overP sq₁ sq₂))
+
+/-- **Vertical pasting of `Ex_!`**, as an identity of natural transformations. -/
+theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' :
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (sq₁.paste_vert sq₂) =
+      Functor.whiskerRight (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₂ w₂).hom
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ l) ≫
+        (TwoSquare.hComp (T := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ v₂)
+          (B := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ v₁)
+          (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁)
+          (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)).natTrans ≫
+        Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h)
+          (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₁ w₁).inv := by
+  have := isIso_baseChange_triangleShriekTriangle ℓ (pasteVertTriangle (v₂ := v₂) (w₂ := w₂))
+  have := isIso_exchange_triangleShriekTriangle ℓ (pasteVertTriangle (v₂ := v₂) (w₂ := w₂))
+  have := isIso_baseChange_triangleShriekTriangle ℓ (pasteVertTriangle' sq₁ sq₂)
+  have := isIso_exchange_triangleShriekTriangle ℓ (pasteVertTriangle' sq₁ sq₂)
+  exact TwoSquare.eq_hComp_of_conj _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ (sq₁.paste_vert sq₂)
+      (Compactification.Triangle.overCfg (pasteVertTriangle (v₂ := v₂) (w₂ := w₂)))
+      ((Compactification.Triangle.overCfg (pasteVertTriangle (v₂ := v₂) (w₂ := w₂))).ofIsPullback
+        (sq₁.paste_vert sq₂).overLeft)
+      _ ((Compactification.Triangle.overCfg
+        (pasteVertTriangle (v₂ := v₂) (w₂ := w₂))).overBaseChange_isPullback_i (sq₁.paste_vert sq₂))
+      ((Compactification.Triangle.overCfg
+        (pasteVertTriangle (v₂ := v₂) (w₂ := w₂))).overBaseChange_isPullback_g (sq₁.paste_vert sq₂)))
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq₁
+      (compactificationOverField v₂) ((compactificationOverField v₂).ofIsPullback sq₁.overLeft)
+      _ ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁)
+      ((compactificationOverField v₂).overBaseChange_isPullback_g sq₁))
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq₂
+      (compactificationOverField w₂) ((compactificationOverField w₂).ofIsPullback sq₂.overLeft)
+      _ ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂)
+      ((compactificationOverField w₂).overBaseChange_isPullback_g sq₂))
+    (boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle ℓ v₂ w₂
+      (pasteVertTriangle (v₂ := v₂) (w₂ := w₂)))
+    (boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle ℓ v₁ w₁
+      (pasteVertTriangle' sq₁ sq₂))
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm ℓ _ _)
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm ℓ _ _)
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm ℓ _ _)
+    (pasteVert_compIso_shriekBaseChange ℓ sq₁ sq₂)
+
 end Triangles
 
 end AlgebraicGeometry.ProEtale.CondensedRing

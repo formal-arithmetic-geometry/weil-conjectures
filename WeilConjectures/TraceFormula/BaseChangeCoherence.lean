@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.TwoSquare
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeProper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeVertical
 
 /-!
 
@@ -132,8 +133,12 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ w₁).map
           ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app M) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₁ w₁).inv.app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj M) :=
-  sorry
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj M) := by
+  have hM := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' ℓ sq₁ sq₂) M
+  simp only [TwoSquare.hComp, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Category.assoc] at hM
+  exact hM
 
 end Pasting
 
