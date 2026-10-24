@@ -85,9 +85,14 @@ theorem exists_traceSpecialization (F : c.FixedLocus) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     [IsClosedImmersion j.left]
     (hB : Set.range j.left.base =
-      {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
-    ∃ T : c.TraceSpecialization F (hc.specialCorrespondence k') (hc.specialFixedLocus k'),
-      T.ΨXX = specializationProd k' (y ≫ c.c₁) ∧
+      {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
+    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (hc.specialLeg₂ k')).obj
+        ((specialization k' (y ≫ c.c₁)).obj K) ⟶
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (hc.specialLeg₁ k')).obj
+        ((specialization k' (y ≫ c.c₁)).obj K)) :
+    ∃ T : c.TraceSpecialization F (hc.specialCorrespondence k' u') (hc.specialFixedLocus k' u'),
+      T.ΨC = specialization k' y ∧ T.ΨF = hc.specializationFixedLocus k' F ∧
+      T.ΨX = specialization k' (y ≫ c.c₁) ∧ T.ΨXX = specializationProd k' (y ≫ c.c₁) ∧
       ∀ z : BorelMooreSection ℓ F.F, T.sp z = 0 → z.restrict j = 0 :=
   sorry
 
@@ -102,12 +107,15 @@ theorem restrict_traceClass_eq_zero (F : c.FixedLocus) {B : Over (Spec (.of k))}
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (y ≫ c.c₁)).obj K)) :
     (c.traceClass F).restrict j = 0 := by
-  obtain ⟨T, hXX, hinj⟩ := hc.exists_traceSpecialization k' F j hB
+  have hT := hc.exists_traceSpecialization k' F j hB 0
+  obtain ⟨T, hT⟩ := hT
+  have hXX := hT.2.2.2.1
+  have hinj := hT.2.2.2.2
   refine hinj _ (T.sp_traceClass_eq_zero ?_)
-  have he := nonempty_specializationProd_externalProduct_iso (ℓ := ℓ) k' (y ≫ c.c₁) K
+  have he := nonempty_specializationProd_universalKernel_iso (ℓ := ℓ) k' (y ≫ c.c₁) K
   refine isZero_obj_obj_of_eq hXX _ _ (IsZero.of_iso ?_
     ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
-      (hc.specialCorrespondence k').support).mapIso he.some))
+      (hc.specialCorrespondence k' 0).support).mapIso he.some))
   refine isZero_upperShriek_externalProduct_of_isZero ?_
   exact isZero_boundedConstructibleUpperStar_obj_of_range_subset (Profinite.padicAlgClRingObj ℓ) ℓ
     _ _

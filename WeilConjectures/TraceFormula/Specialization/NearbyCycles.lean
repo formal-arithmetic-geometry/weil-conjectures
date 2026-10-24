@@ -48,7 +48,7 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -87,17 +87,44 @@ noncomputable def specialization :
     ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
       (isTraitModel_deformationModel X x.left.ker k'))
 
+/-- The base change `π : x ⊗ k' ⟶ Spec k` of the zero locus of the special fibre: the structure
+morphism to `Spec k'` followed by `Spec k' ⟶ Spec k`. -/
+noncomputable def deformationSpecialZeroLocusToBase :
+    (deformationSpecialZeroLocus X x.left.ker k').left ⟶ (point k).left :=
+  (deformationSpecialZeroLocus X x.left.ker k').hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k k'))
+
 /-- **Verdier's zero-section theorem** (Verdier, *Spécialisation de faisceaux et monodromie
 modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, `sk-thm-tf-sp-zero-section`):
-the restriction of the specialization `Sp_{X,x}(K)` to the zero section `x ⊗ k'` of the normal
-cone is the base change of the stalk `K_x`; in particular it vanishes if `K_x` does. -/
+the restriction `e^* Sp_{X,x}(K)` of the specialization to the zero section `e` of the special fibre
+`N_x X ⊗ k'` is the base change `π^* x^* K` of the stalk of `K` at `x`, where
+`π : x ⊗ k' ⟶ Spec k`. As in the rest of this development, the nearby cycles are taken over the
+complete trait `Spec k'⟦t⟧` rather than the strict henselization of `k[t]_{(t)}` of the blueprint;
+the two give the same nearby cycles for schemes of finite type over `k[t]`. -/
+theorem nonempty_upperStar_zeroSection_specialization_iso
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty ((boundedConstructible _).ι.obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (deformationSpecialFibreZeroSection X x.left.ker k')).obj
+          ((specialization k' x).obj K)) ≅
+      L((deformationSpecialZeroLocusToBase k' x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        ((boundedConstructible _).ι.obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K))) :=
+  sorry
+
+/-- The specialization `Sp_{X,x}(K)` vanishes on the zero section if the stalk `K_x` does
+(`nonempty_upperStar_zeroSection_specialization_iso`). -/
 theorem isZero_upperStar_zeroSection_specialization
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (deformationSpecialFibreZeroSection X x.left.ker k')).obj
-        ((specialization k' x).obj K)) :=
-  sorry
+        ((specialization k' x).obj K)) := by
+  have h₁ : IsZero ((boundedConstructible _).ι.obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :=
+    (boundedConstructible _).ι.map_isZero hK
+  have h₂ := (L((deformationSpecialZeroLocusToBase k' x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero h₁
+  exact IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _
+    (h₂.of_iso (nonempty_upperStar_zeroSection_specialization_iso k' x K).some)
 
 /-- The specialization `Dᵇc(X × X) ⥤ Dᵇc((N_x X ⊗ k') × (N_x X ⊗ k'))` of the product: the nearby
 cycles of the product over the trait of two copies of the deformation to the normal cone of
@@ -111,19 +138,42 @@ noncomputable def specializationProd :
       (deformationProdModel X x.left.ker X x.left.ker k')
       (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k'))
 
-/-- **Nearby cycles of the universal kernel** (Gabber's Künneth formula for nearby cycles, Illusie,
-*Autour du théorème de monodromie locale*, Thm. 4.7, blueprint `sk-prop-tf-nearby-external-kunneth`,
-and Gabber's commutation of nearby cycles with Verdier duality, Illusie, loc. cit., Thm. 4.2,
-blueprint `sk-prop-tf-nearby-duality-foundation`): the specialization of the universal kernel
-`K ⊠ D K` is the universal kernel of the specialization,
-`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ ΨX D_X K ≅ Ψ_X K ⊠ D Ψ_X K`. -/
+/-- **Gabber's Künneth formula for nearby cycles** (Illusie, *Autour du théorème de monodromie
+locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`): the nearby cycles of an
+external product are the external product of the nearby cycles,
+`Ψ_{X×X}(L ⊠ M) ≅ Ψ_X L ⊠ Ψ_X M`. The nearby cycles are taken over the complete trait
+`Spec k'⟦t⟧` rather than the strict henselization of `k[t]_{(t)}` of the blueprint. -/
 theorem nonempty_specializationProd_externalProduct_iso
+    (L M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty ((specializationProd k' x).obj (externalProduct ℓ L M) ≅
+      externalProduct ℓ ((specialization k' x).obj L) ((specialization k' x).obj M)) :=
+  sorry
+
+/-- **Gabber's commutation of nearby cycles with Verdier duality** (Illusie, *Autour du théorème
+de monodromie locale*, Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`):
+`Ψ_X (D_X L) ≅ D (Ψ_X L)`, the duality on the generic side relative to `k`, on the special side
+relative to `k'`. The nearby cycles are taken over the complete trait `Spec k'⟦t⟧` rather than the
+strict henselization of `k[t]_{(t)}` of the blueprint. -/
+theorem nonempty_specialization_verdierDual_iso
+    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) L) ≅
+      verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
+        ((specialization k' x).obj L)) :=
+  sorry
+
+/-- **Nearby cycles of the universal kernel**: `Ψ_{X×X}(K ⊠ D K) ≅ Ψ_X K ⊠ D Ψ_X K`, from
+Gabber's Künneth formula (`nonempty_specializationProd_externalProduct_iso`) and the commutation
+of nearby cycles with duality (`nonempty_specialization_verdierDual_iso`). -/
+theorem nonempty_specializationProd_universalKernel_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≅
       externalProduct ℓ ((specialization k' x).obj K)
         (verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
           ((specialization k' x).obj K))) :=
-  sorry
+  ⟨(nonempty_specializationProd_externalProduct_iso k' x _ _).some ≪≫
+    whiskerLeftIso _ ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.snd : _ ⨯ _ ⟶ deformationSpecialFibre X x.left.ker k')).mapIso
+        (nonempty_specialization_verdierDual_iso k' x K).some)⟩
 
 end ZeroSection
 
@@ -138,17 +188,27 @@ variable (k')
 
 /-- The *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of the
 specialization `Ψ_X K` of `K` to the normal cone of `x = c₁(y)`: the special fibre of the
-deformation of `c` to the normal cones (blueprint `det-tf-contracting-vanishing`). Its coefficient
-map plays no role in the vanishing argument and is taken to be zero. -/
-noncomputable def specialCorrespondence :
+deformation of `c` to the normal cones (blueprint `det-tf-contracting-vanishing`), with an arbitrary
+coefficient map `u'`: the vanishing argument holds for every `u'`, in particular for the
+specialized coefficient map `u_s`. -/
+noncomputable def specialCorrespondence
+    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (hc.specialLeg₂ k')).obj
+        ((specialization k' (y ≫ c.c₁)).obj K) ⟶
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (hc.specialLeg₁ k')).obj
+        ((specialization k' (y ≫ c.c₁)).obj K)) :
     Correspondence ℓ ((specialization k' (y ≫ c.c₁)).obj K) where
   C := deformationSpecialFibre c.C y.left.ker k'
   c₁ := hc.specialLeg₁ k'
   c₂ := hc.specialLeg₂ k'
-  u := 0
+  u := u'
 
 /-- The fixed locus of the specialized correspondence, the fibre product `C' ×_{X' × X'} X'`. -/
-noncomputable def specialFixedLocus : (hc.specialCorrespondence k').FixedLocus where
+noncomputable def specialFixedLocus
+    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (hc.specialLeg₂ k')).obj
+        ((specialization k' (y ≫ c.c₁)).obj K) ⟶
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (hc.specialLeg₁ k')).obj
+        ((specialization k' (y ≫ c.c₁)).obj K)) :
+    (hc.specialCorrespondence k' u').FixedLocus where
   F := fixedLocusOfDiag (hc.specialLeg₁ k') (hc.specialLeg₂ k')
   ι := fixedLocusOfDiag.ι _ _
   w := fixedLocusOfDiag.w _ _
@@ -159,7 +219,7 @@ the trait of the deformed support `𝒞 ⟶ 𝒳 ×_S 𝒳` with the diagonal of
 the fixed locus of the specialized correspondence. -/
 noncomputable def specializationFixedLocus (F : c.FixedLocus) :
     Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc((hc.specialFixedLocus k').F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+      Dᵇc((fixedLocusOfDiag (hc.specialLeg₁ k') (hc.specialLeg₂ k')).left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   NearbyCyclesModel.boundedConstructibleNearbyCycles
     ((deformationFixedLocusModel k' c.c₁ c.c₂ hc.ker_map_le_c₁ hc.ker_map_le_c₂
       F.isPullback).preservesBoundedConstructible_of_isTraitModel
