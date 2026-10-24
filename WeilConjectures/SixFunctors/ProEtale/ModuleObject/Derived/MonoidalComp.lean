@@ -182,4 +182,56 @@ lemma quotient_map_upperStarTensorComplexHom_comp
   congr 1
   rw [← upperStarTensorComplexHom_comp, MonoidalCategory.tensorHom_def, Category.assoc]
 
+set_option maxHeartbeats 1000000 in
+-- `erw` unfolds the tensor product of complexes of module objects to its components.
+/-- On complexes, the comparison `(𝟙 X)^* A ⊗ (𝟙 X)^* B ⟶ (𝟙 X)^* (A ⊗ B)` is compatible with the
+identity isomorphism of the pullback of module objects. -/
+lemma upperStarTensorComplexHom_id (W : Scheme.{u})
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ℤ) :
+    ((NatTrans.mapHomologicalComplex (upperStarId Λ W).hom (ComplexShape.up ℤ)).app A ⊗ₘ
+        (NatTrans.mapHomologicalComplex (upperStarId Λ W).hom (ComplexShape.up ℤ)).app B) =
+      upperStarTensorComplexHom Λ (𝟙 W) A B ≫
+        (NatTrans.mapHomologicalComplex (upperStarId Λ W).hom _).app (A ⊗ B) := by
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  simp only [HomologicalComplex.comp_f, upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  erw [HomologicalComplex.ι_mapBifunctorMap, HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  simp only [NatTrans.mapHomologicalComplex_app_f, Category.assoc]
+  rw [(upperStarId Λ W).hom.naturality]
+  have hμ := upperStarId_hom_app_tensor_μ_assoc Λ W (A.X p) (B.X q)
+    ((𝟭 _).map (HomologicalComplex.ιTensorObj A B p q n h))
+  rw [MonoidalCategory.tensorHom_def_assoc] at hμ
+  exact hμ
+
+set_option maxHeartbeats 1000000 in
+-- `erw` unfolds the tensor product of complexes of module objects to its components.
+lemma tensorHom_mapHomologicalComplexIdIso_hom_app (W : Scheme.{u})
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ℤ) :
+    ((Functor.mapHomologicalComplexIdIso _ (ComplexShape.up ℤ)).hom.app A ⊗ₘ
+        (Functor.mapHomologicalComplexIdIso _ (ComplexShape.up ℤ)).hom.app B) =
+      (Functor.mapHomologicalComplexIdIso _ (ComplexShape.up ℤ)).hom.app (A ⊗ B) := by
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  erw [HomologicalComplex.ι_mapBifunctorMap]
+  simp only [Functor.mapHomologicalComplexIdIso_hom_app_f]
+  erw [CategoryTheory.Functor.map_id, NatTrans.id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.id_comp]
+
+lemma upperStarTensorComplexHom_id' (W : Scheme.{u})
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ℤ) :
+    (((NatTrans.mapHomologicalComplex (upperStarId Λ W).hom (ComplexShape.up ℤ)).app A ≫
+          (Functor.mapHomologicalComplexIdIso _ (ComplexShape.up ℤ)).hom.app A) ⊗ₘ
+        ((NatTrans.mapHomologicalComplex (upperStarId Λ W).hom (ComplexShape.up ℤ)).app B ≫
+          (Functor.mapHomologicalComplexIdIso _ (ComplexShape.up ℤ)).hom.app B)) =
+      upperStarTensorComplexHom Λ (𝟙 W) A B ≫
+        (NatTrans.mapHomologicalComplex (upperStarId Λ W).hom _).app (A ⊗ B) ≫
+        (Functor.mapHomologicalComplexIdIso _ (ComplexShape.up ℤ)).hom.app (A ⊗ B) := by
+  rw [← tensorHom_comp_tensorHom, upperStarTensorComplexHom_id, Category.assoc,
+    tensorHom_mapHomologicalComplexIdIso_hom_app]
+
 end AlgebraicGeometry.ProEtale.CondensedRing

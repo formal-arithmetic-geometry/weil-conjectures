@@ -272,4 +272,78 @@ lemma upperStarComp_hom_app_tensor_μ
     Functor.Monoidal.δ_μ_assoc, Functor.Monoidal.δ_μ_assoc, ← Functor.map_comp,
     Functor.Monoidal.δ_μ, CategoryTheory.Functor.map_id, Category.comp_id]
 
+/-! ### The identity isomorphism -/
+
+/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback of pro-étale sheaves is monoidal: it is
+conjugate to the monoidal identity isomorphism of the pushforward. -/
+instance isMonoidal_sheafUpperStarId_hom (X : Scheme.{u}) :
+    NatTrans.IsMonoidal (ProEtale.upperStarId Ab.{u + 1} X).hom := by
+  have h₁ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (𝟙 X))
+      Functor.Monoidal.toOplaxMonoidal _ := by
+    exact isMonoidal_upperStarLowerStarAdjunction _ _
+  exact isMonoidal_conjugateEquiv_symm _ _ (ProEtale.lowerStarId Ab.{u + 1} X).inv
+
+/-- On underlying sheaves, the identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback of module
+objects is that of the pullback of sheaves, after the unit of the extension of scalars. -/
+lemma upperStarUnitHom_upperStarId_hom_app_hom (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    upperStarUnitHom Λ (𝟙 X) M ≫ ((upperStarId Λ X).hom.app M).hom =
+      (ProEtale.upperStarId Ab.{u + 1} X).hom.app M.X := by
+  apply ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (𝟙 X)).homEquiv _ _).injective
+  have hL := homEquiv_comp_conjugateEquiv_app Adjunction.id
+    (upperStarLowerStarAdjunction Λ (𝟙 X)) (upperStarId Λ X).hom (𝟙 M)
+  rw [← conjugateIsoEquiv_apply_hom, conjugateIsoEquiv_upperStarId] at hL
+  simp only [Category.comp_id, Iso.symm_hom] at hL
+  have hL' := congrArg Mod.Hom.hom hL
+  rw [Mod.comp_hom', upperStarLowerStarAdjunction_homEquiv_hom] at hL'
+  have hR := homEquiv_comp_conjugateEquiv_app Adjunction.id
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (𝟙 X)) (ProEtale.upperStarId Ab.{u + 1} X).hom
+    (𝟙 M.X)
+  rw [← conjugateIsoEquiv_apply_hom, ProEtale.conjugateIsoEquiv_upperStarId] at hR
+  simp only [Iso.symm_hom] at hR
+  erw [Category.comp_id] at hR
+  erw [← hR]
+  conv_lhs => rw [Adjunction.homEquiv_unit]
+  erw [← hL']
+  have hi : ((lowerStarId Λ X).inv.app M).hom = (ProEtale.lowerStarId Ab.{u + 1} X).inv.app M.X := by
+    rw [← cancel_epi ((ProEtale.lowerStarId Ab.{u + 1} X).hom.app M.X), Iso.hom_inv_id_app]
+    conv_lhs => rw [← lowerStarId_hom_app_hom]
+    rw [← Mod.comp_hom', Iso.hom_inv_id_app]
+    rfl
+  erw [hi]
+  rfl
+
+/-- **The identity isomorphism of the pullback of module objects is monoidal**:
+`(𝟙 X)^* (A ⊗ B) ⟶ (𝟙 X)^* A ⊗ (𝟙 X)^* B ⟶ A ⊗ B` is the identity isomorphism at `A ⊗ B`. -/
+@[reassoc]
+lemma upperStarId_hom_app_tensor_δ (X : Scheme.{u})
+    (A B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    δ (𝟙 X)^*⟦Λ⟧ A B ≫ ((upperStarId Λ X).hom.app A ⊗ₘ (upperStarId Λ X).hom.app B) =
+      (upperStarId Λ X).hom.app (A ⊗ B) := by
+  ext1
+  rw [← cancel_epi ((𝟙 X)^*[Ab.{u + 1}].map (Mod.tensorObjπ A B) ≫
+    upperStarUnitHom Λ (𝟙 X) (A ⊗ B))]
+  rw [Mod.comp_hom', Category.assoc, Category.assoc,
+    map_tensorObjπ_upperStarUnitHom_δ_hom_assoc, Mod.tensorObjπ_tensorHom_hom,
+    tensorHom_comp_tensorHom_assoc, upperStarUnitHom_upperStarId_hom_app_hom,
+    upperStarUnitHom_upperStarId_hom_app_hom, upperStarUnitHom_upperStarId_hom_app_hom]
+  have h := NatTrans.IsMonoidal.tensor (τ := (ProEtale.upperStarId Ab.{u + 1} X).hom) A.X B.X
+  have h' : δ (𝟙 X)^*[Ab.{u + 1}] A.X B.X ≫ ((ProEtale.upperStarId Ab.{u + 1} X).hom.app A.X ⊗ₘ
+      (ProEtale.upperStarId Ab.{u + 1} X).hom.app B.X) =
+      (ProEtale.upperStarId Ab.{u + 1} X).hom.app (A.X ⊗ B.X) := by
+    rw [← cancel_epi (Functor.LaxMonoidal.μ (𝟙 X)^*[Ab.{u + 1}] A.X B.X),
+      Functor.Monoidal.μ_δ_assoc, h]
+    exact (Category.comp_id _).symm
+  rw [reassoc_of% h']
+  exact ((ProEtale.upperStarId Ab.{u + 1} X).hom.naturality (Mod.tensorObjπ A B)).symm
+
+/-- `upperStarId_hom_app_tensor_δ` in terms of the tensorator. -/
+@[reassoc]
+lemma upperStarId_hom_app_tensor_μ (X : Scheme.{u})
+    (A B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((upperStarId Λ X).hom.app A ⊗ₘ (upperStarId Λ X).hom.app B) =
+      Functor.LaxMonoidal.μ (𝟙 X)^*⟦Λ⟧ A B ≫ (upperStarId Λ X).hom.app (A ⊗ B) := by
+  rw [← upperStarId_hom_app_tensor_δ, Functor.Monoidal.μ_δ_assoc]
+
 end AlgebraicGeometry.ProEtale.CondensedRing
