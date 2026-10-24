@@ -10,33 +10,20 @@ public import WeilConjectures.TraceFormula.TraceClass
 
 /-!
 
-# Additivity of trace classes along the curve pieces
+# Trace classes with another coefficient on the same support
 
-Let `(K, φ)` be a Weil object on `X` for `Φ`, `m ≥ 1`, `x` a rational point fixed by `Φ_m` and
-`j : U ⟶ X` the open complement of `x`. The open–closed triangle
-`K^U = j_! Lj^* K ⟶ K ⟶ K^Z = Rx_* Lx^* K ⟶` carries the coefficient maps `u^U`, `φ_m`, `u^Z` of
-the graph correspondence `c_m = (𝟙, Φ_m)` (blueprint `d-curve-pieces`), and the trace classes are
-additive (blueprint `prop-trf-trace-class-additivity`, item 2, the Frobenius case of
-`lem-trf-trace-triangle-compatibility`):
-```
-Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U),
-```
-and so are the local terms. The proof in the blueprint is Varshavsky's filtered argument
-(Prop. 1.5.10, after SGA 5, III 4.13): the trace map lifts to the filtered derived category, and
-the trace of a filtered coefficient map is the sum of the traces of its graded pieces; it is not
-a consequence of the three squares of the triangle commuting.
+This file defines the correspondence with the support of a correspondence `c` and another
+coefficient object and map, its trace class on the fixed locus of `c`, and the graph
+correspondences `(𝟙, Φ_m)` with the curve pieces `K^Z = Rx_* Lx^* K` and `K^U = j_! Lj^* K` of a
+Weil object and their coefficient maps `u^Z`, `u^U` (blueprint `d-curve-pieces`). The additivity
+`Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U)` of blueprint `prop-trf-trace-class-additivity`,
+item 2, is `ProEtale.CondensedRing.WeilBoundedConstructible.traceClass_graph_eq_add` in
+`WeilConjectures.TraceFormula.PieceAdditivity`.
 
 ## Main definitions
 
 - `ProEtale.CondensedRing.Correspondence.withCoeff`: the correspondence with the same support and
   another coefficient object and map.
-
-## Main statements
-
-- `ProEtale.CondensedRing.WeilBoundedConstructible.traceClass_graph_eq_add`: additivity of the
-  trace classes along the curve pieces.
-- `ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_add`:
-  additivity of the local terms.
 
 -/
 
@@ -135,40 +122,6 @@ noncomputable abbrev openPieceGraph (m : ℕ) {ΦU : U ⟶ U}
     (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) : Correspondence ℓ (K.openPiece j) :=
   (K.graph m).withCoeff (K.openPiece j)
     (K.openPieceCoeff j m sq ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _)
-
-/-- **Additivity of trace classes along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the
-Frobenius graph; `sk-i-additivity`): for a rational point `x` fixed by `Φ_m`, `m ≥ 1`, with
-open complement `j : U ⟶ X` such that `Φ_{m,U} ≫ j = j ≫ Φ_m` is cartesian, the trace class of
-the graph correspondence `(𝟙, Φ_m)` with coefficient `φ_m` is the sum of the trace classes with
-the coefficients `u^Z` of `K^Z` and `u^U` of `K^U`. -/
-theorem traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m))
-    (hcompl : IsCompl (Set.range j.left.base) (Set.range x.left.base))
-    (F : (K.graph m).FixedLocus) :
-    (K.graph m).traceClass F =
-      F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx) +
-        F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
-          (boundedConstructibleUpperShriekId ℓ X).inv.app _) :=
-  sorry
-
-/-- **Additivity of local terms along the curve pieces** (blueprint
-`prop-trf-trace-class-additivity`, item 2): for every open and closed subscheme `B` of the fixed
-locus, proper over `s`, `LT_B(φ_m) = LT_B(u^Z) + LT_B(u^U)`. -/
-theorem localTerm_traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m))
-    (hcompl : IsCompl (Set.range j.left.base) (Set.range x.left.base))
-    (F : (K.graph m).FixedLocus) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
-    [IsProper B.hom] (jB : B ⟶ F.F) [IsOpenImmersion jB.left] [IsClosedImmersion jB.left] :
-    ((K.graph m).traceClass F).localTerm jB =
-      (F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx)).localTerm jB +
-        (F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
-          (boundedConstructibleUpperShriekId ℓ X).inv.app _)).localTerm jB := by
-  exact (congrArg (fun α ↦ BorelMooreSection.localTerm jB α)
-    (K.traceClass_graph_eq_add j m hm x hx sq hcompl F)).trans
-    (BorelMooreSection.localTerm_add jB _ _)
 
 end WeilBoundedConstructible
 
