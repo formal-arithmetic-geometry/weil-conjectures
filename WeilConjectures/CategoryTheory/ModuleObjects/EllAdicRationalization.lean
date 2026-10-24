@@ -118,11 +118,9 @@ noncomputable abbrev padicIntegersToPadicSubfield :
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` preserves
 bounded constructible complexes. -/
 lemma boundedConstructible_derivedExtendScalars_obj
-    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
+    (K : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
-      ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K) :=
+      ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K.obj) :=
   sorry
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, E)`
@@ -134,7 +132,7 @@ noncomputable def boundedConstructibleExtendScalars :
   (boundedConstructible _).lift
     ((boundedConstructible _).ι ⋙
       (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor)
-    fun K ↦ boundedConstructible_derivedExtendScalars_obj X ℓ E K.obj K.property
+    fun K ↦ boundedConstructible_derivedExtendScalars_obj X ℓ E K
 
 /-- The restricted derived extension of scalars is compatible with the inclusions. -/
 noncomputable def boundedConstructibleExtendScalarsCompatibility :

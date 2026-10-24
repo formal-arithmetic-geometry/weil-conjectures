@@ -35,21 +35,19 @@ No derived completeness condition is imposed.
 
 ## Sorried input
 
-For the coefficient rings `Λ_X = p_X^* Λ` with `Λ` a finite discrete ring, `𝒪̲_E` or `E̲` for a
-finite extension `E` of `ℚ_ℓ`, or `ℚ̲̄_ℓ`, the bounded constructible complexes on a topologically
+For the `ℓ`-adic coefficient rings `Λ_X = p_X^* Λ` with `Λ` one of `𝒪̲_E` or `E̲` for a finite
+extension `E` of `ℚ_ℓ`, or `ℚ̲̄_ℓ`, the bounded constructible complexes on a topologically
 noetherian scheme form a triangulated subcategory. This is stated separately for each of these
-coefficient rings (`ProEtale.isTriangulated_boundedConstructible_continuousMapRingObj_of_finite`,
-`ProEtale.isTriangulated_boundedConstructible_padicIntegersRingObj`,
+coefficient rings (`ProEtale.isTriangulated_boundedConstructible_padicIntegersRingObj`,
 `ProEtale.isTriangulated_boundedConstructible_continuousMapRingObj`,
 `ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`). It rests on the fact that
 constructible sheaves of `Λ_X`-modules on such a scheme are closed under kernels, cokernels and
 extensions (Bhatt–Scholze, Section 6.8), which is not formalized; the instances are `sorry`ed.
 It is false for a general commutative ring object `R`: for `X = Spec k̄` and `R` the constant
-sheaf of the
-non-coherent ring `k[x₁, x₂, …]/(x₁xᵢ)ᵢ`, the cone of `x₁ : R ⟶ R` has `H⁻¹` the constant sheaf
-of the ideal `(x₂, x₃, …)`, which is not finitely generated. Noetherianity is assumed only there:
-the definition `ProEtale.boundedConstructible` makes sense on any scheme. The derived category
-itself uses the `sorry`ed instances of
+sheaf of the non-coherent ring `k[x₁, x₂, …]/(x₁xᵢ)ᵢ`, the cone of `x₁ : R ⟶ R` has `H⁻¹` the
+constant sheaf of the ideal `(x₂, x₃, …)`, which is not finitely generated. Noetherianity is
+assumed only there: the definition `ProEtale.boundedConstructible` makes sense on any scheme. The
+derived category itself uses the `sorry`ed instances of
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory`.
 
 -/
@@ -103,14 +101,6 @@ section Triangulated
 open scoped CategoryTheory.Obj
 
 variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
-
-/-- For a finite discrete ring `T`, the bounded constructible complexes of `T̲_X`-modules on a
-topologically noetherian scheme form a triangulated subcategory. -/
-instance isTriangulated_boundedConstructible_continuousMapRingObj_of_finite (T : Type)
-    [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [DiscreteTopology T] [Finite T] :
-    (boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)).IsTriangulated :=
-  sorry
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
