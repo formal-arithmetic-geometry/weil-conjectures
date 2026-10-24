@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSymmetric
-public import WeilConjectures.TraceFormula.PointNormalizationKunneth
+public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
 public import WeilConjectures.TraceFormula.PointNormalizationTau
 
 /-!
@@ -59,7 +59,7 @@ satisfy the zigzag identity of a duality. -/
 theorem pointCoev_zigzag (v : K ⟶ K) :
     (ρ_ K).inv ≫ K ◁ pointCoev v ≫ (α_ K K _).inv ≫ (β_ K K).hom ▷ _ ≫ (α_ K K _).hom ≫
       K ◁ pointPairing v ≫ (ρ_ K).hom = 𝟙 K := by
-  rw [pointCoev_eq, pointPairing]
+  rw [pointCoev_eq, pointPairing_eq]
   let χ : (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
       ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ⟶ K :=
     Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
@@ -86,7 +86,7 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
     (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) ?hK ?hC
   case hτ => exact pointTau_comp_counit v
   case hbraid => sorry
-  case hK => exact pointKunneth_transport K sorry sorry
+  case hK => exact pointKunneth_transport K sorry (pointKunneth_baseChange ℓ rfl)
   case hC =>
     exact pointClass_transport K sorry
 

@@ -33,6 +33,10 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace CategoryTheory.Verdier
 
+lemma iso_inv_app_comp_map_comp_hom_app {C : Type*} [Category C] {aS : C ⥤ C} (i : aS ≅ 𝟭 C)
+    {x z : C} (m : x ⟶ z) : i.inv.app x ≫ aS.map m ≫ i.hom.app z = m := by
+  simp
+
 variable {C P : Type*} [Category C] [Category P] {aS aL : C ⥤ C} {fS sS : C ⥤ P} {fL : P ⥤ C}
 
 /-- The isomorphism `F ≅ F ∘ A ≅ S ∘ A ≅ S` induced by `θ : A ⋙ F ≅ A ⋙ S` and `A ≅ 𝟭`. -/
@@ -467,6 +471,74 @@ lemma upperShriekIso_inv_comp_dualizingComplexComp {d : point k ⟶ point k} (hd
   rw [Iso.trans_inv, NatTrans.comp_app, eqToIso.inv, eqToHom_app, eqToHom_refl,
     Category.comp_id, dualizingComplexComp, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, eqToIso.hom,
     key, Iso.inv_hom_id_app]
+
+lemma baseChange_app_comp_prodBaseChangeIso_hom_app
+    (M : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+        (isPullback_prod_toPoint (point k) (point k))).app M ≫
+      (prodBaseChangeIso ℓ (point k) (point k)).hom.app M = 𝟙 _ := by
+  simp [prodBaseChangeIso]
+
+/-- `La^* ≅ 𝟭` for `a = 𝟙` at the unit, through `R(𝟙)^! ≅ 𝟭`, is `ω_s ≅ ℚ̄_ℓ`. -/
+lemma upperShriekIdOfEq_hom_app_unit :
+    (upperShriekIdOfEq ℓ toPoint_point_eq).hom.app (𝟙_ _) = (dualizingComplexPointIso ℓ k).hom := by
+  simp only [upperShriekIdOfEq, NatIso.ofComponents_hom_app, Iso.trans_hom, eqToIso.hom,
+    Iso.app_hom, dualizingComplexPointIso]
+  exact Category.id_comp _
+
+/-- **The base change part of the transport of the exceptional Künneth map** over the base
+point: `ζ` at `Lp₂^* ω_s`, followed by the inverse of compact-support base change in the product
+square, the counit at the unit and `La^* ℚ̄_ℓ ≅ ℚ̄_ℓ`, is `LΔ^* Lp₂^* ω_s ≅ ω_s ≅ ℚ̄_ℓ`. -/
+lemma pointKunneth_baseChange {φ : dualizingComplex' ℓ (point k) ⟶ 𝟙_ _}
+    (hφ : φ = (dualizingComplexPointIso ℓ k).hom) :
+    Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
+          (dualizingComplex' ℓ (point k))) ≫
+        (prodBaseChangeIso ℓ (point k) (point k)).hom.app (dualizingComplex' ℓ (point k)) ≫
+        (boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
+          ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (point k))).counit.app
+            (𝟙_ _)) ≫
+        (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint (point k)))).inv =
+      (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom ≫ φ := by
+  subst hφ
+  have hζ := Verdier.transportζ_naturality (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+    ((Θpt).hom.app (dualizingComplex' ℓ (point k)))
+  have hζ' : Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
+        (dualizingComplex' ℓ (point k))) =
+      (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
+          ((Θpt).inv.app (dualizingComplex' ℓ (point k))) ≫
+        Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
+          ((boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj
+            (dualizingComplex' ℓ (point k))) ≫
+        (boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
+          ((Θpt).hom.app (dualizingComplex' ℓ (point k))) := by
+    rw [← hζ, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+      Category.id_comp]
+  have hB := diagUpperStarProjIso_fst_eq ℓ (dualizingComplex' ℓ (point k))
+  have hU := unit_map_pointProdUpperStarComparison ℓ (dualizingComplex' ℓ (point k))
+  have hE := baseChange_app_comp_prodBaseChangeIso_hom_app ℓ (dualizingComplex' ℓ (point k))
+  have h₂ := transportζ_upperStar_fst ℓ (dualizingComplex' ℓ (point k))
+  rw [hB] at h₂
+  rw [hζ', h₂]
+  simp only [Category.assoc]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  have hε := εIso_inv_of_eq ℓ (toPoint_point_eq (k := k))
+  have hc := upperShriekAdjunction_counit_app_of_eq ℓ (toPoint_point_eq (k := k)) (𝟙_ _)
+  have hu := upperShriekIdOfEq_hom_app_unit ℓ (k := k)
+  have hi := Verdier.iso_inv_app_comp_map_comp_hom_app
+    (upperStarIdOfEq ℓ (toPoint_point_eq (k := k))) (dualizingComplexPointIso ℓ k).hom
+  simp only [reassoc_of% hU, reassoc_of% hE, hε, ← Functor.map_comp_assoc, hc,
+    Iso.inv_hom_id_app_assoc, hu]
+  exact congrArg ((diagUpperStarProjIso ℓ prod.snd (by simp) _).hom ≫ ·) hi
+
+/-- The pairing over the base point is the evaluation followed by `ω_s ≅ ℚ̄_ℓ`. -/
+lemma pointPairing_eq {K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} (v : K ⟶ K) :
+    pointPairing v = (ihom.ev K).app (dualizingComplex' ℓ (point k)) ≫
+      (dualizingComplexPointIso ℓ k).hom := by
+  have hφ := upperShriekIso_inv_comp_dualizingComplexComp ℓ (fixedLocusOfEnd_d v)
+  simp only [pointPairing, fixedLocusOfEndUpperShriekIso, reassoc_of% hφ]
 
 end Correspondence
 
