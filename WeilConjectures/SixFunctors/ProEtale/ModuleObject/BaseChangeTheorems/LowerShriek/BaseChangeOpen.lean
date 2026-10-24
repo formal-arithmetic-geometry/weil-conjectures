@@ -112,7 +112,8 @@ lemma isPullback_ofIsOpenImmersion_overG :
       exact (Category.comp_id _).trans (Category.id_comp _).symm))
     (IsPullback.of_id_snd (f := g.left))
 
-
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- The base change of the pushforwards for the cartesian square of the trivial compactifications
 is that of the identity square. -/
 lemma boundedConstructibleBaseChange_ofIsOpenImmersion_eq :
@@ -162,6 +163,8 @@ lemma boundedConstructibleBaseChange_id :
     Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app]
   simpa using h
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- The base change of the pushforwards for the proper square of the trivial compactifications is
 the identity, through `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleBaseChange_ofIsOpenImmersion :

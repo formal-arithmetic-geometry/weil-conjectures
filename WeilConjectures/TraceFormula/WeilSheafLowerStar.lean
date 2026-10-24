@@ -54,14 +54,6 @@ variable {A B A' B' A'' B'' : Type*} [Category* A] [Category* B] [Category* A'] 
   [Category* A''] [Category* B''] {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ A'} {Rf' : A' ⥤ B'}
   {Lf'' : B'' ⥤ A''} {Rf'' : A'' ⥤ B''}
 
-/-- The exchange morphism `exchangeRight af af' θ` is the mate of `θ.hom`. -/
-lemma exchangeRight_eq_mateEquiv {G : B ⥤ B'} {G' : A ⥤ A'} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf')
-    (θ : G ⋙ Lf' ≅ Lf ⋙ G') :
-    exchangeRight af af' θ = (mateEquiv af af' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans := by
-  ext K
-  rw [exchangeRight_app]
-  simp [mateEquiv]
-
 /-- The exchange morphism of a natural isomorphism is an isomorphism when the horizontal functors
 are equivalences. -/
 lemma isIso_exchangeRight_of_isEquivalence {G : B ⥤ B'} {G' : A ⥤ A'} [G.IsEquivalence]

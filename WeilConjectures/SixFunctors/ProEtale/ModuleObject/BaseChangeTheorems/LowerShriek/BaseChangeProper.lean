@@ -85,6 +85,10 @@ noncomputable abbrev ofIsProperBaseChangeHom (sq : IsPullback g' f' f g) :
       (Compactification.ofIsProper f.left).overObj :=
   Over.homMk g'.left (ofIsProper_overObj_hom_eq sq)
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom]
+  [QuasiCompact X'.hom] [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] in
 /-- The square of the open immersions (identities) of the trivial compactifications of `f'` and
 `f` is cartesian. -/
 lemma isPullback_ofIsProper_overI (sq : IsPullback g' f' f g) :
@@ -95,6 +99,10 @@ lemma isPullback_ofIsProper_overI (sq : IsPullback g' f' f g) :
     exact (Category.comp_id _).trans (Category.id_comp _).symm))
     (IsPullback.of_id_snd (f := g'.left))
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom]
+  [QuasiCompact X'.hom] [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] in
 /-- The square of the proper maps of the trivial compactifications of `f'` and `f` is cartesian. -/
 lemma isPullback_ofIsProper_overG (sq : IsPullback g' f' f g) :
     IsPullback (ofIsProperBaseChangeHom sq) (Compactification.ofIsProper f'.left).overG

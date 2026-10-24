@@ -291,8 +291,10 @@ theorem boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl_i
   simp only [Iso.trans_hom, Iso.symm_hom, Functor.whiskerRight_comp, Functor.whiskerLeft_comp,
     Category.assoc]
   exact Iso.comp_inv_comp_eq_of_comm
-    (Functor.isoWhiskerRight (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ d) _)
-    (Functor.isoWhiskerRight (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₂ d) _)
+    (Functor.isoWhiskerRight
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ d) _)
+    (Functor.isoWhiskerRight
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₂ d) _)
     (Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
       (c₁.ofIsPullback sq.overLeft) (d.ofIsPullback sq.overLeft)))
     (Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
