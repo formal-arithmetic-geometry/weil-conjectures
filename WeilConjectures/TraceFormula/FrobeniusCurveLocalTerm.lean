@@ -156,12 +156,13 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_subsingleton [Subsingleton X.le
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
 
-/-- **The supported restriction is zero for Frobenius** (blueprint
-`sk-lem-tf-curve-restriction-zero`; SGA 5, III B, §§2–4): let `X` be smooth of relative dimension
-one over the algebraically closed field `k`, with the model Frobenius `Φ` of a model over a finite
-field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` arbitrary, and let `z` be a point of the fixed locus of the
-graph correspondence `(𝟙, Φ_m)` whose image `x` in `X` has `K_x = 0`. Then the stalk at `z` of the
-supported restriction `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P`, `P = K ⊠ D_X K`
+/-- Compatibility required from `sk-lem-tf-curve-restriction-zero` (to be proved there):
+**the supported restriction is zero for Frobenius** (SGA 5, III B, §§2–4). Let `X` be
+smooth of relative dimension one over the algebraically closed field `k`, with the model
+Frobenius `Φ` of a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` arbitrary, and let `z`
+be a point of the fixed locus of the graph correspondence `(𝟙, Φ_m)` whose image `x` in `X`
+has `K_x = 0`. Then the stalk at `z` of the supported restriction
+`ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P`, `P = K ⊠ D_X K`
 (`Correspondence.FixedLocus.supportedRestriction`), vanishes.
 
 This is the `ℚ̄_ℓ`-form of the blueprint statement: the stalk of `ρ_P` at `z` is the supported
