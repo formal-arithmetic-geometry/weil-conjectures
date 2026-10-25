@@ -26,10 +26,11 @@ the Leray isomorphism. Complete `η` to a distinguished triangle `K ⟶ Rs_* s^*
 
 * As `s` is a closed immersion, `Rs_*` is fully faithful, so the counit of `s^* ⊣ Rs_*` is an
   isomorphism and, by a triangle identity, so is `s^* η`. Hence `s^* C = 0`.
-* The global sections functor on `Spec R` is exact, so `Hⁿ(RΓ(Spec R, C)) ≅ Γ(Spec R, Hⁿ(C))`,
-  and `Γ(Spec R, Hⁿ(C)) ≅ Γ(Spec κ, s^* Hⁿ(C)) ≅ Γ(Spec κ, Hⁿ(s^* C)) = 0` by the degree-zero
-  comparison over a henselian ring. Hence `RΓ(Spec R, C) = 0` and `RΓ(Spec R, η)` is an
-  isomorphism.
+* The global sections functor on `Spec R` is exact, so
+  `Hⁿ(RΓ(Spec R, C)) ≅ Γ(Spec R, Hⁿ(C))`,
+  and `Γ(Spec R, Hⁿ(C)) ≅ Γ(Spec κ, s^* Hⁿ(C)) ≅ Γ(Spec κ, Hⁿ(s^* C)) = 0` by the
+  degree-zero comparison over a henselian ring. Hence `RΓ(Spec R, C) = 0` and `RΓ(Spec R, η)`
+  is an isomorphism.
 
 ## Main statements
 
@@ -63,7 +64,8 @@ instance preservesEpimorphisms_Γ_of_isStrictlyHenselianLocalRing :
       simp
     have : Epi (((sheafSections (Spec (.of R)).smallEtaleTopology
         (ModuleCat.{u + 1} Λ)).obj (op (etaleTerminal R))).map φ) :=
-      (ModuleCat.epi_iff_surjective _).2 (surjective_app_of_epi_of_isStrictlyHenselianLocalRing R φ)
+      (ModuleCat.epi_iff_surjective _).2
+        (surjective_app_of_epi_of_isStrictlyHenselianLocalRing R φ)
     rw [h]
     infer_instance
 
@@ -111,10 +113,11 @@ lemma isZero_rightDerivedGlobalSections_of_isZero_upperStar_closedGeometricPoint
       refine Functor.map_isZero _ (IsZero.of_iso ?_
         ((Functor.mapDerivedCategoryHomologyFunctorIso
           ((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]) n).app C))
-      exact Functor.map_isZero _ hC
+      exact (DerivedCategory.homologyFunctor _ n).map_isZero hC
     exact isIso_of_source_target_iso_zero _ hn.isoZero
       ((Functor.map_isZero _ (isZero_zero _)).isoZero)
-  exact IsZero.of_iso (isZero_zero _) (asIso (0 : _ ⟶ 0))
+  exact IsZero.of_iso (isZero_zero _) (asIso (0 :
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of R))).obj C ⟶ 0))
 
 /-- **Derived global sections of a strictly local scheme are computed at the closed point.**
 Over a strictly henselian local ring `R` with closed geometric point `s : Spec κ ⟶ Spec R`, the
@@ -125,14 +128,8 @@ theorem isIso_globalSectionsRestriction_closedGeometricPoint
     IsIso (globalSectionsRestriction (closedGeometricPoint R) K) := by
   let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (closedGeometricPoint R)
   have hη : IsIso (((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map
-      (adj.unit.app K)) := by
-    have : IsIso (((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map
-        (adj.unit.app K) ≫ adj.counit.app _) := by
-      have e := adj.left_triangle_components K
-      dsimp only [Functor.id_obj, Functor.comp_obj] at e
-      erw [e]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
+      (adj.unit.app K)) :=
+    isIso_of_comp_hom_eq_id (adj.counit.app _) (adj.left_triangle_components K)
   have : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of R))).IsTriangulated :=
     inferInstanceAs ((Sheaf.Γ (Spec (.of R)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.IsTriangulated)

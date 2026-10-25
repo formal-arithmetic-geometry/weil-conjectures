@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalizationFibre
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 public import WeilConjectures.ConstructibleSheaf.EllMonodromy
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionStrictlyLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
@@ -195,7 +196,7 @@ theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠
   have hc : globalSectionsRestriction c (transverseBoundaryComplex hle E) = 0 := by
     have : IsIso (globalSectionsRestriction t
         (((c)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (transverseBoundaryComplex hle E))) :=
-      sorry
+      isIso_globalSectionsRestriction_closedGeometricPoint R _
     refine globalSectionsRestriction_eq_zero_of_comp c t _ ?_
     by_cases hsz : iY s = z
     · exact (Functor.map_isZero _ (h₁ _ (t ≫ c) (ht.trans (by rw [hsz])))).eq_of_tgt _ _
@@ -239,6 +240,7 @@ noncomputable def puncturedStrictLocalization (s' : Spec (.of Ω) ⟶ C) :
   ⟨{IsLocalRing.closedPoint (Scheme.strictHenselization s')}ᶜ,
     (IsLocalRing.isClosed_singleton_closedPoint _).isOpen_compl⟩
 
+omit [IsAlgClosed k] in
 /-- Let `C ⊆ Z` be closed with `C ∩ Y = {s}` and `s'` a geometric point of `C` over `s`. Then the
 punctured strict localization `C_(s) - s` maps into `Z - Y`. -/
 lemma range_puncturedStrictLocalization_subset (iC : C ⟶ Z.left) [IsClosedImmersion iC] (s : Y)
@@ -268,9 +270,9 @@ noncomputable def puncturedStrictLocalizationMap (iC : C ⟶ Z.left) [IsClosedIm
     (puncturedStrictLocalization s').toScheme ⟶ UY.toScheme :=
   IsOpenImmersion.lift UY.ι _ (range_puncturedStrictLocalization_subset iC s hCY s' hs' hUY)
 
-/-- **Restriction to a transverse punctured curve** (blueprint `sk-lem-tf-punctured-restriction`).
-In the situation of the transverse boundary calculation (`AlgebraicGeometry.Etale.transverseBoundary`)
-with `Y` connected, let `C ⊆ Z` be a closed subscheme (in the blueprint a curve) with
+/-- **Restriction to a transverse punctured curve**
+(blueprint `sk-lem-tf-punctured-restriction`). In the situation of the transverse boundary
+calculation (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `C ⊆ Z` be a closed subscheme (in the blueprint a curve) with
 `C ∩ Y = {s}`, and let `C_(s)` be its strict localization at a geometric point over `s`. Then the
 restriction map
 ```
