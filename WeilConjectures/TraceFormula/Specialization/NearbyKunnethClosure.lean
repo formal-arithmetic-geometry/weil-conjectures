@@ -191,6 +191,138 @@ theorem isIso_kunnethMap_of_toGeometricGeneric (φ₁ : P.Hom M f₁ f₁') (φ�
 
 end General
 
+section Closure
+
+variable {k' : Type u} [Field k']
+
+/-- The closed point `Spec k' ⟶ Spec k'⟦t⟧` is a monomorphism. -/
+instance mono_traitClosedPoint : Mono (traitClosedPoint k') := by
+  have : IsClosedImmersion (traitClosedPoint k') :=
+    IsClosedImmersion.spec_of_surjective _ fun a ↦ ⟨PowerSeries.C a, by simp⟩
+  infer_instance
+
+variable {T T' : Scheme.{u}}
+
+/-- The morphism `T ×_S s ⟶ T' ×_S s` of special fibres induced by a morphism `c : T ⟶ T'` of
+schemes over the trait. -/
+noncomputable def traitStdProjSpecial (q : T ⟶ trait k') (c : T ⟶ T') (q' : T' ⟶ trait k')
+    (hc : c ≫ q' = q) : (traitStdSpecialFibre q).left ⟶ (traitStdSpecialFibre q').left :=
+  pullback.lift (pullback.fst q (traitClosedPoint k') ≫ c) (pullback.snd _ _)
+    (by rw [Category.assoc, hc, pullback.condition])
+
+/-- The morphism of models from the model of the geometric generic fibre of the standard model of
+`T` to the geometric standard model of `T'` induced by a morphism `c : T ⟶ T'` over the trait. -/
+@[simps]
+noncomputable def traitStdProj (q : T ⟶ trait k') (c : T ⟶ T') (q' : T' ⟶ trait k')
+    (hc : c ≫ q' = q) :
+    (traitStdModel q).geometric.toGeneric.Hom (traitStdModel q').geometric
+      (pullback.fst q (traitGenericPoint k') ≫ c) (traitStdProjSpecial q c q' hc) where
+  total := c
+  generic := pullback.lift (pullback.fst q (traitGenericPoint k') ≫ c) (pullback.snd _ _)
+    (by rw [Category.assoc, hc, pullback.condition])
+  comm_j := pullback.lift_fst _ _ _
+  comm_i := pullback.lift_fst _ _ _
+  comm_ε := (pullback.lift_fst _ _ _).trans (Category.id_comp _).symm
+
+variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+  {N : NearbyCyclesModel Y Y'.left} {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X}
+  {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y} {f₂' : Z'.left ⟶ Y'.left}
+
+/-- The first projection of the product over the trait of the standard models of `Xc` and `Yc`. -/
+noncomputable abbrev closureFst {Xc Yc : Scheme.{u}} (qcM : Xc ⟶ trait k') (qcN : Yc ⟶ trait k') :=
+  traitStdProj (pullback.fst qcM qcN ≫ qcM) (pullback.fst qcM qcN) qcM rfl
+
+/-- The second projection of the product over the trait of the standard models of `Xc` and
+`Yc`. -/
+noncomputable abbrev closureSnd {Xc Yc : Scheme.{u}} (qcM : Xc ⟶ trait k') (qcN : Yc ⟶ trait k') :=
+  traitStdProj (pullback.fst qcM qcN ≫ qcM) (pullback.snd qcM qcN) qcN pullback.condition.symm
+
+/-- **Passing to closures**: let `P` be the product over the trait of models `M`, `N` along
+`qM`, `qN`, with second projection compatible with the structure morphisms `gM`, `gN` of the
+geometric generic fibres, and let `uM : 𝒳 ⟶ Xc`, `uN : 𝒴 ⟶ Yc` be open immersions over the trait
+into noetherian schemes. If the Künneth map of the product `Xc ×_S Yc` of the standard models is
+invertible on bounded constructible complexes, then so is the Künneth map of the models of the
+total spaces of `M`, `N`, `P`. The coefficients are extended by zero along `uM`, `uN`. -/
+theorem isIso_kunnethMap_toGeometricGeneric_of_closure {φ₁ : P.Hom M f₁ f₁'}
+    {φ₂ : P.Hom N f₂ f₂'} {qM : M.total ⟶ trait k'}
+    {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
+    {gN : N.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver qM gM)
+    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hcomp : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {Xc Yc : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace Xc] [TopologicalSpace.NoetherianSpace Yc]
+    {qcM : Xc ⟶ trait k'} {qcN : Yc ⟶ trait k'} (uM : M.total ⟶ Xc) (uN : N.total ⟶ Yc)
+    [IsOpenImmersion uM] [IsOpenImmersion uN] (huM : uM ≫ qcM = qM) (huN : uN ≫ qcN = qN)
+    (hK : ∀ (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Xc) Ab.{u + 1})
+        (condensedRingObj Λ Xc)))
+      (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Yc) Ab.{u + 1})
+        (condensedRingObj Λ Yc))),
+      boundedConstructible (condensedRingObj Λ Xc) A →
+        boundedConstructible (condensedRingObj Λ Yc) B →
+          IsIso (kunnethMap Λ (closureFst qcM qcN) (closureSnd qcM qcN) A B))
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
+      (condensedRingObj Λ M.total))}
+    (hA : boundedConstructible (condensedRingObj Λ M.total) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.total) Ab.{u + 1})
+      (condensedRingObj Λ N.total))}
+    (hB : boundedConstructible (condensedRingObj Λ N.total) B) :
+    IsIso (kunnethMap Λ φ₁.toGeometricGeneric φ₂.toGeometricGeneric A B) := by
+  let uP : P.total ⟶ pullback qcM qcN := pullback.lift (φ₁.total ≫ uM) (φ₂.total ≫ uN)
+    (by rw [Category.assoc, Category.assoc, huM, huN, hpb.w])
+  have huP : uP ≫ pullback.fst qcM qcN ≫ qcM = φ₁.total ≫ qM := by simp [uP, huM]
+  have : IsOpenImmersion uP := by
+    have e : uP = hpb.isoPullback.hom ≫ pullback.map qM qN qcM qcN uM uN (𝟙 _) (by simp [huM])
+        (by simp [huN]) := by
+      apply pullback.hom_ext <;> simp [uP]
+    rw [e]
+    infer_instance
+  have hj₁ : ∀ {W : Scheme.{u}} (x : M.total ⟶ W), φ₁.generic ≫ M.j ≫ x = P.j ≫ φ₁.total ≫ x :=
+    fun x ↦ by rw [← Category.assoc, φ₁.comm_j, Category.assoc]
+  have hj₂ : ∀ {W : Scheme.{u}} (x : N.total ⟶ W), φ₂.generic ≫ N.j ≫ x = P.j ≫ φ₂.total ≫ x :=
+    fun x ↦ by rw [← Category.assoc, φ₂.comm_j, Category.assoc]
+  have hi₁ : ∀ {W : Scheme.{u}} (x : M.total ⟶ W), f₁' ≫ M.i ≫ x = P.i ≫ φ₁.total ≫ x :=
+    fun x ↦ by rw [← Category.assoc, φ₁.comm_i, Category.assoc]
+  have hi₂ : ∀ {W : Scheme.{u}} (x : N.total ⟶ W), f₂' ≫ N.i ≫ x = P.i ≫ φ₂.total ≫ x :=
+    fun x ↦ by rw [← Category.assoc, φ₂.comm_i, Category.assoc]
+  have hZ₁ : f₁' ≫ X'.hom = Z'.hom := by
+    rw [← cancel_mono (traitClosedPoint k'), Category.assoc, ← hM.isPullback_i.w, hi₁,
+      hP.isPullback_i.w]
+  have hZ₂ : f₂' ≫ Y'.hom = Z'.hom := by
+    rw [← cancel_mono (traitClosedPoint k'), Category.assoc, ← hN.isPullback_i.w, hi₂, ← hpb.w,
+      hP.isPullback_i.w]
+  have hR : IsKunnethRestriction (closureFst qcM qcN) (closureSnd qcM qcN) φ₁.toGeometricGeneric
+      φ₂.toGeometricGeneric (traitStdHom qcM hM.isPullback_j hM.isPullback_i uM huM)
+      (traitStdHom qcN hN.isPullback_j hN.isPullback_i uN huN)
+      (traitStdHom _ hP.isPullback_j hP.isPullback_i uP huP).toGeneric :=
+    { htot₁ := by simp [uP]
+      hgen₁ := by apply pullback.hom_ext <;> simp [uP, hj₁]
+      htot₂ := by simp [uP]
+      hgen₂ := by apply pullback.hom_ext <;> simp [uP, hj₂, hcomp]
+      hb₁ := by simp [uP]
+      hs₁ := by
+        apply pullback.hom_ext <;>
+          simp [uP, traitStdSpecialHom, traitStdProjSpecial, hi₁, hZ₁]
+      hb₂ := by simp [uP]
+      hs₂ := by
+        apply pullback.hom_ext <;>
+          simp [uP, traitStdSpecialHom, traitStdProjSpecial, hi₂, hZ₂]
+      isOpenImmersion_M := inferInstanceAs (IsOpenImmersion uM)
+      isOpenImmersion_N := inferInstanceAs (IsOpenImmersion uN)
+      isOpenImmersion_P := inferInstanceAs (IsOpenImmersion uP)
+      isPullback_M := isPullback_traitStdHom_generic qcM hM.isPullback_j hM.isPullback_i uM huM
+      isPullback_N := isPullback_traitStdHom_generic qcN hN.isPullback_j hN.isPullback_i uN huN
+      isPullback_P := isPullback_traitStdHom_generic _ hP.isPullback_j hP.isPullback_i uP huP }
+  have hA' := boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj Λ uM A hA
+  have hB' := boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj Λ uN B hB
+  have := hK _ _ hA' hB'
+  have h := (isIso_map_kunnethMap_iff_of_isKunnethRestriction Λ hR
+    (D((uM)_!open⟦Λ⟧).obj A) (D((uN)_!open⟦Λ⟧).obj B)).1 inferInstance
+  exact isIso_kunnethMap_of_iso Λ _ _
+    (asIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ uM).unit.app A))
+    (asIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ uN).unit.app B)) h
+
+end Closure
+
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing
