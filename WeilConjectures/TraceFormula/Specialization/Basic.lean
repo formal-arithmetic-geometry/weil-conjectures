@@ -314,7 +314,13 @@ theorem sp_traceClass_eq_zero
     (h : IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).obj
       (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))))) :
     T.sp (c.traceClass F) = 0 := by
-  rw [sp_traceClass, T.traceMap_specialization, h.eq_of_tgt (T.βc.app _) 0, zero_comp,
+  have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).IsLeftAdjoint :=
+    ⟨_, ⟨boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι⟩⟩
+  have :
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint _
+  rw [sp_traceClass, T.traceMap_specialization, h.eq_of_tgt
+    (T.βc.app (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) 0, zero_comp,
     comp_zero, comp_zero, comp_zero, Adjunction.homEquiv_counit, Functor.map_zero, zero_comp,
     comp_zero]
 
