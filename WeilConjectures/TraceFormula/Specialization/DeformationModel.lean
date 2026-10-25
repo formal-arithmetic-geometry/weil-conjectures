@@ -263,6 +263,16 @@ lemma deformationTotalMap_toTrait :
       deformationTotalToTrait X J k' :=
   (pullback.lift_snd _ _ _).trans (Category.comp_id _)
 
+/-- The total space `𝒳` of the deformation of `J` is the base change of the total space `𝒴` of
+the deformation of `I` along the morphism of deformation spaces `D_J X ⟶ D_I Y`. -/
+lemma isPullback_deformationTotalMap :
+    IsPullback (deformationTotalMap f hJ k') (deformationTotalToSpace X J k')
+      (deformationTotalToSpace Y I k') (IdealSheafData.deformationSpaceMap f.left I J hJ) :=
+  IsPullback.of_right (by
+      rw [deformationTotalMap_toTrait, deformationSpaceMap_deformationSpaceToAffineLine]
+      exact (isPullback_deformationTotal X J k').flip)
+    (deformationTotalMap_toSpace f hJ k') (isPullback_deformationTotal Y I k').flip
+
 @[reassoc (attr := simp)]
 lemma deformationTotalMap_toBase :
     deformationTotalMap f hJ k' ≫ deformationTotalToBase Y I k' =
@@ -295,6 +305,16 @@ lemma deformationSpecialFibreMap_toTotal :
     (deformationSpecialFibreMap f hJ k').left ≫ deformationSpecialToTotal Y I k' =
       deformationSpecialToTotal X J k' ≫ deformationTotalMap f hJ k' :=
   pullback.lift_fst _ _ _
+
+/-- The special fibre `𝒳_s` of the deformation of `J` is the base change of the special fibre
+`𝒴_s` of the deformation of `I` along the morphism of total spaces `𝒳 ⟶ 𝒴`. -/
+lemma isPullback_deformationSpecialFibreMap :
+    IsPullback (deformationSpecialFibreMap f hJ k').left (deformationSpecialToTotal X J k')
+      (deformationSpecialToTotal Y I k') (deformationTotalMap f hJ k') :=
+  IsPullback.of_right (by
+      rw [Over.w (deformationSpecialFibreMap f hJ k'), deformationTotalMap_toTrait]
+      exact (isPullback_deformationSpecialFibre X J k').flip)
+    (deformationSpecialFibreMap_toTotal f hJ k') (isPullback_deformationSpecialFibre Y I k').flip
 
 /-- The morphism of nearby cycles models induced by `f : X ⟶ Y` with `f^* I ⊆ J`. -/
 noncomputable def deformationModelHom :

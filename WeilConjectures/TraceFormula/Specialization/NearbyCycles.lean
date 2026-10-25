@@ -45,7 +45,9 @@ and states the two theorems on nearby cycles that Varshavsky's vanishing argumen
   (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`). It is deduced from its
   exchange form: the pullback exchange along the section `ẽ : S ⟶ 𝒳` of the deformation to the
   normal cone is invertible
-  (`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app`).
+  (`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app`), the case `Z = {x}` of
+  the invertibility of the zero-section map for all closed subschemes
+  (`ProEtale.CondensedRing.isIso_zeroSectionMap`).
 
 -/
 

@@ -53,32 +53,6 @@ open CategoryTheory Limits Pretriangulated
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace AlgebraicGeometry.Scheme.IdealSheafData
-
-/-- If `I ≤ f_* J`, that is `f^* I ⊆ J`, then `f` maps the ideal `I(U)` into `J(U')` over affine
-opens `U' ⊆ f⁻¹ U`: the chartwise hypothesis of the functoriality of the deformation to the normal
-cone (`Scheme.IdealSheafData.deformationSpaceMap`). -/
-lemma siteIdeal_map_appLE_le_of_le_map {X Y : Scheme.{u}} {f : X ⟶ Y} {I : Y.IdealSheafData}
-    {J : X.IdealSheafData} (H : I ≤ J.map f) ⦃U' : X.AffineZariskiSite⦄
-    ⦃U : Y.AffineZariskiSite⦄ (hU : U'.1 ≤ f ⁻¹ᵁ U.1) :
-    (I.siteIdeal U).map (f.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U' := by
-  rw [Ideal.map_le_iff_le_comap]
-  intro a ha
-  have h1 := Hom.ideal_ker_le _ ⟨U.1, U.2⟩ (H ⟨U.1, U.2⟩ ha)
-  rw [RingHom.mem_ker] at h1
-  rw [Ideal.mem_comap, siteIdeal, ← J.ker_subschemeι, Hom.ker_apply, RingHom.mem_ker,
-    Scheme.Hom.app_eq_appLE, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
-  rw [Scheme.Hom.app_eq_appLE] at h1
-  rw [← Scheme.Hom.appLE_map (J.subschemeι ≫ f) le_rfl
-    (homOfLE (J.subschemeι.preimage_mono hU)).op, CommRingCat.comp_apply, h1, map_zero]
-
-/-- The ideal `I` is contained in the pushforward of the zero ideal along `V(I) ⟶ X`. -/
-lemma le_map_bot_subschemeι {X : Scheme.{u}} (I : X.IdealSheafData) :
-    I ≤ (⊥ : I.subscheme.IdealSheafData).map I.subschemeι := by
-  rw [map_bot, ker_subschemeι]
-
-end AlgebraicGeometry.Scheme.IdealSheafData
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme

@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.Defect
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 
 /-!
 
@@ -24,9 +22,6 @@ to the trait `S` as a model, by the deformation `D_⊥ Z ≅ 𝔸¹_Z ≅ 𝔸¹
 
 ## Main results
 
-- `ProEtale.CondensedRing.NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso`: a morphism of
-  models whose morphisms of total spaces and of geometric generic fibres are isomorphisms has an
-  invertible pullback exchange.
 - `ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap`:
   if the zero-section map `ε_{X,Z}(K)` of the centre `Z = V(ker x)` is an isomorphism, then so is
   the pullback exchange of `ẽ` at `K`.
@@ -41,97 +36,9 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-/-! ### The extended Rees algebra of the zero ideal -/
-
-namespace Ideal
-
-/-- The inclusion `R[t] ⟶ R[t, I t⁻¹]` is bijective for the zero ideal. -/
-lemma bijective_toExtendedReesAlgebra_of_eq_bot {R : Type*} [CommRing R] {I : Ideal R}
-    (hI : I = ⊥) : Function.Bijective I.toExtendedReesAlgebra := by
-  refine ⟨fun p q h ↦ Polynomial.toLaurent_injective (congrArg Subtype.val h), fun x ↦ ?_⟩
-  obtain ⟨p, hp⟩ := mapRingHom_mem_range_toLaurent (RingHom.id R)
-    (by rw [hI]; exact bot_le) x.2
-  refine ⟨p, Subtype.ext ?_⟩
-  rw [coe_toExtendedReesAlgebra, hp, LaurentPolynomial.mapRingHom_id]
-
-end Ideal
-
-namespace AlgebraicGeometry
-
-/-- The morphism of affine spaces induced by an isomorphism is an isomorphism. -/
-instance AffineSpace.isIso_map (n : Type u) {S T : Scheme.{u}} (f : S ⟶ T) [IsIso f] :
-    IsIso (AffineSpace.map n f) :=
-  ⟨⟨AffineSpace.map n (inv f), by rw [← AffineSpace.map_comp, IsIso.hom_inv_id,
-    AffineSpace.map_id], by rw [← AffineSpace.map_comp, IsIso.inv_hom_id, AffineSpace.map_id]⟩⟩
-
-namespace Scheme.IdealSheafData
-
-open AffineZariskiSite Opposite
-
-variable {X : Scheme.{u}}
-
-/-- The deformation space `D_⊥ X` of the zero ideal is the relative affine line `𝔸¹_X`. -/
-instance isIso_deformationSpaceToPolynomialSpec_bot :
-    IsIso (⊥ : X.IdealSheafData).deformationSpaceToPolynomialSpec :=
-  relativeGluingMap_of_forall _ (MorphismProperty.isomorphisms _) _ _
-    (⊥ : X.IdealSheafData).toPolynomialPresheaf_comp_polynomialToRees fun U ↦ by
-      have : IsIso ((⊥ : X.IdealSheafData).polynomialToRees.app (op U)) :=
-        (ConcreteCategory.isIso_iff_bijective _).mpr
-          (Ideal.bijective_toExtendedReesAlgebra_of_eq_bot rfl)
-      exact (inferInstance : IsIso (Spec.map ((⊥ : X.IdealSheafData).polynomialToRees.app (op U))))
-
-/-- The relative affine line `Spec_X (𝒪_X / ⊥)[t]` of the zero ideal is `𝔸¹_X`. -/
-instance isIso_relativeGluingMap_polynomialToQuotientPolynomial_bot :
-    IsIso (relativeGluingMap X.coequifibered_toPolynomialPresheaf
-      (⊥ : X.IdealSheafData).coequifibered_toQuotientPolynomialAlgebra
-      (⊥ : X.IdealSheafData).polynomialToQuotientPolynomial) :=
-  relativeGluingMap_of_forall _ (MorphismProperty.isomorphisms _) _ _
-    (⊥ : X.IdealSheafData).toPolynomialPresheaf_comp_polynomialToQuotientPolynomial fun U ↦ by
-      have : IsIso ((⊥ : X.IdealSheafData).polynomialToQuotientPolynomial.app (op U)) :=
-        (ConcreteCategory.isIso_iff_bijective _).mpr
-          ⟨Polynomial.map_injective _ ((RingHom.injective_iff_ker_eq_bot _).mpr Ideal.mk_ker),
-            Polynomial.map_surjective _ Ideal.Quotient.mk_surjective⟩
-      exact (inferInstance : IsIso (Spec.map
-        ((⊥ : X.IdealSheafData).polynomialToQuotientPolynomial.app (op U))))
-
-end Scheme.IdealSheafData
-
-namespace ProEtale.CondensedRing
+namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme AffineZariskiSite
-
-/-! ### Morphisms of models with invertible total spaces -/
-
-namespace NearbyCyclesModel
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {X X' Y Y' : Scheme.{u}}
-
-/-- The identity morphism of a model, over the identities. -/
-@[simps]
-def Hom.id (M : NearbyCyclesModel X X') : M.Hom M (𝟙 X) (𝟙 X') where
-  total := 𝟙 _
-  generic := 𝟙 _
-  comm_j := by rw [Category.id_comp, Category.comp_id]
-  comm_i := by rw [Category.id_comp, Category.comp_id]
-  comm_ε := by rw [Category.id_comp, Category.comp_id]
-
-variable {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
-
-/-- If the morphisms of total spaces and of geometric generic fibres of a morphism of models are
-isomorphisms, its pullback exchange `α : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is an isomorphism: the base change
-morphism of the square of geometric generic fibres is invertible by weakly étale base change. -/
-lemma Hom.isIso_pullbackExchange_of_isIso (φ : M.Hom N f f') [IsIso φ.total] [IsIso φ.generic] :
-    IsIso (φ.pullbackExchange Λ) := by
-  have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
-      (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
-    have := isIso_baseChangeMap_of_weaklyEtale Λ (IsPullback.of_horiz_isIso φ.commSq_j)
-    rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
-  unfold pullbackExchange
-  infer_instance
-
-end NearbyCyclesModel
 
 /-! ### The constant family of the centre of a rational point -/
 
@@ -448,6 +355,4 @@ theorem isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap
   have hn := ((zeroSectionModelHom X x k').pullbackExchange Λ).naturality e.hom
   exact IsIso.of_isIso_fac_right hn.symm
 
-end ProEtale.CondensedRing
-
-end AlgebraicGeometry
+end AlgebraicGeometry.ProEtale.CondensedRing

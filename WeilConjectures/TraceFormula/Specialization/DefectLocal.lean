@@ -47,51 +47,6 @@ open CategoryTheory Limits ZeroObject
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace AlgebraicGeometry.Scheme.IdealSheafData
-
-/-- Along an open immersion `h : X' ⟶ X`, the deformation space of `J = h^* I` is the base change
-`X' ×_X D_I X` of the deformation space of `I`. -/
-lemma isPullback_deformationSpaceMap_of_isOpenImmersion {X X' : Scheme.{u}} (h : X' ⟶ X)
-    [IsOpenImmersion h] (I : X.IdealSheafData) (J : X'.IdealSheafData)
-    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
-      (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U')
-    (hJI : J = I.comap h) :
-    IsPullback (deformationSpaceMap h I J hJ) J.deformationSpaceProj I.deformationSpaceProj h := by
-  refine (extendedReesPullbackData h I J hJ).isPullback_comparison _ _ fun x ↦ ?_
-  obtain ⟨U, hU, hx, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp X'.isBasis_affineOpens
-    (show x ∈ (⊤ : X'.Opens) from trivial)
-  exact ⟨⟨U, hU⟩, _, _, hx, isPushout_extendedReesPullbackData_imageSite _ _ _ _ hJI _⟩
-
-/-- Along a closed immersion `h : X' ⟶ X`, the morphism `D_⊥ X' ⟶ D_⊥ X` of deformation spaces of
-the zero ideals is a closed immersion: it is the morphism `𝔸¹_{X'} ⟶ 𝔸¹_X` of relative affine
-lines. -/
-lemma isClosedImmersion_deformationSpaceMap_bot {X X' : Scheme.{u}} (h : X' ⟶ X)
-    [IsClosedImmersion h]
-    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
-      ((⊥ : X.IdealSheafData).siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤
-        (⊥ : X'.IdealSheafData).siteIdeal U') :
-    IsClosedImmersion (deformationSpaceMap h ⊥ ⊥ hJ) := by
-  have hbij (R : Type u) [CommRing R] :
-      Function.Bijective (⊥ : Ideal R).toExtendedReesAlgebra := by
-    refine ⟨fun p q e ↦ Polynomial.toLaurent_injective (congrArg Subtype.val e), fun x ↦ ?_⟩
-    obtain ⟨p, hp⟩ := Ideal.mapRingHom_mem_range_toLaurent (RingHom.id R) bot_le x.2
-    refine ⟨p, Subtype.ext ?_⟩
-    rw [Ideal.coe_toExtendedReesAlgebra, hp, LaurentPolynomial.mapRingHom_id]
-  have hiso (Y : Scheme.{u}) : IsIso (⊥ : Y.IdealSheafData).deformationSpaceToPolynomialSpec :=
-    AffineZariskiSite.relativeGluingMap_of_forall _ (MorphismProperty.isomorphisms _) _ _
-      (⊥ : Y.IdealSheafData).toPolynomialPresheaf_comp_polynomialToRees fun U ↦ by
-        have : IsIso ((⊥ : Y.IdealSheafData).polynomialToRees.app (Opposite.op U)) :=
-          (ConcreteCategory.isIso_iff_bijective _).mpr (hbij _)
-        exact (inferInstance : IsIso (Spec.map
-          ((⊥ : Y.IdealSheafData).polynomialToRees.app (Opposite.op U))))
-  have : IsClosedImmersion (AffineSpace.map (ULift.{u} (Fin 1)) h) :=
-    MorphismProperty.of_isPullback (AffineSpace.isPullback_map h).flip ‹_›
-  rw [(IsIso.eq_comp_inv _).mpr (deformationSpaceMap_toPolynomialSpec h ⊥ ⊥ hJ),
-    (IsIso.eq_comp_inv _).mpr (polynomialSpecMap_polynomialSpecToAffineSpace h)]
-  infer_instance
-
-end AlgebraicGeometry.Scheme.IdealSheafData
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -106,26 +61,6 @@ variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y)
     (hU : U'.1 ≤ f.left ⁻¹ᵁ U.1), (I.siteIdeal U).map (f.left.appLE U.1 U'.1 hU).hom ≤
       J.siteIdeal U')
   (k' : Type u) [Field k'] [Algebra k k']
-
-/-- The total space `𝒳` of the deformation of `J` is the base change of the total space `𝒴` of
-the deformation of `I` along the morphism of deformation spaces `D_J X ⟶ D_I Y`. -/
-lemma isPullback_deformationTotalMap :
-    IsPullback (deformationTotalMap f hJ k') (deformationTotalToSpace X J k')
-      (deformationTotalToSpace Y I k') (IdealSheafData.deformationSpaceMap f.left I J hJ) :=
-  IsPullback.of_right (by
-      rw [deformationTotalMap_toTrait, deformationSpaceMap_deformationSpaceToAffineLine]
-      exact (isPullback_deformationTotal X J k').flip)
-    (deformationTotalMap_toSpace f hJ k') (isPullback_deformationTotal Y I k').flip
-
-/-- The special fibre `𝒳_s` of the deformation of `J` is the base change of the special fibre
-`𝒴_s` of the deformation of `I` along the morphism of total spaces `𝒳 ⟶ 𝒴`. -/
-lemma isPullback_deformationSpecialFibreMap :
-    IsPullback (deformationSpecialFibreMap f hJ k').left (deformationSpecialToTotal X J k')
-      (deformationSpecialToTotal Y I k') (deformationTotalMap f hJ k') :=
-  IsPullback.of_right (by
-      rw [Over.w (deformationSpecialFibreMap f hJ k'), deformationTotalMap_toTrait]
-      exact (isPullback_deformationSpecialFibre X J k').flip)
-    (deformationSpecialFibreMap_toTotal f hJ k') (isPullback_deformationSpecialFibre Y I k').flip
 
 /-- Along an open immersion `f : X ⟶ Y` and for `J = f^* I`, the special fibre `𝒳_s` of the
 deformation of `J` is the base change `X ×_Y 𝒴_s` of the special fibre of the deformation of

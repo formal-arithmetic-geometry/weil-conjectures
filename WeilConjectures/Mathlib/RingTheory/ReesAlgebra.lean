@@ -415,6 +415,15 @@ lemma mapRingHom_mem_range_toLaurent (φ : R →+* S) (h : I ≤ RingHom.ker φ)
   | add x y _ _ hx hy => rw [map_add]; exact Subring.add_mem _ hx hy
   | mul x y _ _ hx hy => rw [map_mul]; exact Subring.mul_mem _ hx hy
 
+/-- The inclusion `R[t] ⟶ R[t, I t⁻¹]` is bijective for the zero ideal. -/
+lemma bijective_toExtendedReesAlgebra_of_eq_bot (hI : I = ⊥) :
+    Function.Bijective I.toExtendedReesAlgebra := by
+  refine ⟨fun p q h ↦ Polynomial.toLaurent_injective (congrArg Subtype.val h), fun x ↦ ?_⟩
+  obtain ⟨p, hp⟩ := mapRingHom_mem_range_toLaurent (RingHom.id R)
+    (by rw [hI]; exact bot_le) x.2
+  refine ⟨p, Subtype.ext ?_⟩
+  rw [coe_toExtendedReesAlgebra, hp, LaurentPolynomial.mapRingHom_id]
+
 variable (I) in
 /-- For `φ : R ⟶ S` killing `I`, the map `R[t, I t⁻¹] ⟶ S[t]` sending `t ↦ t`, `x t⁻¹ ↦ 0` for
 `x ∈ I` and `r ↦ φ r`: it is induced by `R[t, t⁻¹] ⟶ S[t, t⁻¹]`, which lands in `S[t]`. -/
