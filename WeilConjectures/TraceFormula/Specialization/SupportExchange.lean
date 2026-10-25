@@ -194,7 +194,8 @@ noncomputable def ofSupportExchange : c.TraceSpecialization F c' F' where
   χι :=
     { app N := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.app
         (ΨC.obj ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).obj N))
-      naturality _ _ g := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.naturality
+      naturality _ _ g :=
+        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.naturality
         (ΨC.map ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).map g)) }
   χΔ := χΔ
   βc := βc

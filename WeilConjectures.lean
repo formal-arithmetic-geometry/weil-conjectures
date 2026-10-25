@@ -12994,6 +12994,7 @@ public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.HomologyUnit
 public import WeilConjectures.TraceFormula.HomologyWeilLowerShriek
 public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
+public import WeilConjectures.TraceFormula.IntegralPointThickening
 public import WeilConjectures.TraceFormula.KernelPushforwardCoherence
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.KunnethVerdierClosed
@@ -13085,12 +13086,15 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationModel
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduct
+public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
+public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
+public import WeilConjectures.TraceFormula.Specialization.SupportExchange
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
@@ -13098,6 +13102,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Stalk

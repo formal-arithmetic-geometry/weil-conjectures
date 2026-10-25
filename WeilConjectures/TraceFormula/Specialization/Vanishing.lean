@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
 public import WeilConjectures.TraceFormula.Specialization.Basic
+public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 
 /-!
@@ -88,8 +89,13 @@ theorem exists_traceSpecialization (F : c.FixedLocus) {B : Over (Spec (.of k))}
       {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
     ∃ T : c.TraceSpecialization F (hc.specialCorrespondence k') (hc.specialFixedLocus k'),
       T.ΨXX = specializationProd k' (y ≫ c.c₁) ∧
-      ∀ z : BorelMooreSection ℓ F.F, T.sp z = 0 → z.restrict j = 0 :=
-  sorry
+      ∀ z : BorelMooreSection ℓ F.F, T.sp z = 0 → z.restrict j = 0 := by
+  have hex := exists_specializesComponentClass (ℓ := ℓ) (X := X) (c := c) (y := y) hc k' F j hB
+  obtain ⟨νc, νX, hS⟩ := hex
+  refine ⟨hc.deformationTraceSpecialization k' νc νX F, ?_, ?_⟩
+  · exact hc.deformationTraceSpecialization_ΨXX k' νc νX F
+  · intro z hz
+    exact hc.restrict_eq_zero_of_sp_eq_zero k' j hB hS z hz
 
 include k' in
 /-- The vanishing lemma `restrict_traceClass_eq_zero_of_isContractingAt'`, proved with nearby

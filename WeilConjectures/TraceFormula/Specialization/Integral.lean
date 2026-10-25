@@ -29,7 +29,8 @@ For the specialization data determined by the support
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.ofSupportExchange`), whose exceptional
 exchange `β_c` and dualizing map `θ_X` come from compact-support exchanges `ν_c`, `ν_X`, the
 dualizing map `θ_F` is the dualizing map of the composite of `ν_X` with the compact-support exchange
-`ν_d` whose mate is `β_d` (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.θF_ofSupportExchange`;
+`ν_d` whose mate is `β_d`
+(`ProEtale.CondensedRing.Correspondence.TraceSpecialization.θF_ofSupportExchange`;
 
 blueprint `det-nearby-exceptional-tensor` (3)).
 
@@ -233,7 +234,8 @@ noncomputable def fixedLocusCompactSupportExchange :
     (fixedLocusExceptionalExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc)
 
 lemma exceptionalExchange_fixedLocusCompactSupportExchange :
-    exceptionalExchange ℓ F.d F'.d (fixedLocusCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) =
+    exceptionalExchange ℓ F.d F'.d
+        (fixedLocusCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) =
       fixedLocusExceptionalExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc :=
   Equiv.apply_symm_apply _ _
 
