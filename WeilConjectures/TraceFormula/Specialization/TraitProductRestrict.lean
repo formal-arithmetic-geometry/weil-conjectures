@@ -17,10 +17,9 @@ Let `P` be the product over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of
 `S` (`NearbyCyclesModel.IsTraitProduct`), with total spaces `𝒳`, `𝒴` and `𝒵 = 𝒳 ×_S 𝒴`. This file
 restricts the product to opens `V ⊆ 𝒳`, `W ⊆ 𝒴`:
 
-* the restriction `M.restrictOpen V` of a model to an open `V` of its total space, keeping the
-  identification `ε` (restricted to `j⁻¹ V`), and the inclusion of models
-  `M.restrictOpenHom V : M.restrictOpen V ⟶ M` over `𝟙 X` and `i⁻¹ V ⟶ X'`
-  (`NearbyCyclesModel.restrictOpen`, `NearbyCyclesModel.restrictOpenHom`);
+* the restriction `M.restrictOpen V` of a model to an open `V` of its total space
+  (`NearbyCyclesModel.restrictOpen`) is again of finite type over the trait
+  (`NearbyCyclesModel.IsTraitModelOver.restrictOpen`);
 * the restriction `φ.restrictOpen U V` of a morphism of models to opens `U`, `V` of the total
   spaces with `U ⊆ φ⁻¹ V` (`NearbyCyclesModel.Hom.restrictOpen`);
 * the restrictions of `P` to `U = pr₁⁻¹ V ∩ pr₂⁻¹ W = V ×_S W` with the restricted projections form
@@ -90,28 +89,6 @@ lemma isPullback_resLE_inf {Z X Y S : Scheme.{u}} {f₁ : Z ⟶ X} {f₂ : Z ⟶
 section Restrict
 
 variable {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
-
-/-- The *restriction* of a model to an open `V` of its total space, keeping the identification
-`ε` (restricted to the geometric generic fibre `j⁻¹ V`), with special fibre `i⁻¹ V`. -/
-@[simps]
-noncomputable def restrictOpen (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
-    NearbyCyclesModel X (M.restrictSpecialFibre V).left where
-  total := V
-  generic := M.j ⁻¹ᵁ V
-  j := M.j ∣_ V
-  i := M.i ∣_ V
-  ε := (M.j ⁻¹ᵁ V).ι ≫ M.ε
-
-/-- The inclusion of the restriction of a model to an open `V` of its total space, over `𝟙 X`
-and `i⁻¹ V ⟶ X'`. -/
-@[simps]
-noncomputable def restrictOpenHom (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
-    (M.restrictOpen V).Hom M (𝟙 X) (M.i ⁻¹ᵁ V).ι where
-  total := V.ι
-  generic := (M.j ⁻¹ᵁ V).ι
-  comm_j := (morphismRestrict_ι M.j V).symm
-  comm_i := (morphismRestrict_ι M.i V).symm
-  comm_ε := (Category.comp_id _).symm
 
 /-- The restriction of a model of finite type over the trait along `q`, `g` to an open `V` of
 its total space with quasi-compact inclusion is of finite type over the trait along the
