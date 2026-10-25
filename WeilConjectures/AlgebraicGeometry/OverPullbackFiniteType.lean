@@ -62,21 +62,21 @@ instance isSeparated_over_left : IsSeparated f.left := by
   exact IsSeparated.of_comp f.left Y.hom
 
 /-- The fibre product of `k`-schemes of finite type is of finite type. -/
-instance locallyOfFiniteType_pullback_hom : LocallyOfFiniteType (pullback f g).hom := by
+instance locallyOfFiniteType_over_pullback_hom : LocallyOfFiniteType (pullback f g).hom := by
   have : LocallyOfFiniteType (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq]
   infer_instance
 
 /-- The fibre product of `k`-schemes of finite type is quasi-compact. -/
-instance quasiCompact_pullback_hom : QuasiCompact (pullback f g).hom := by
+instance quasiCompact_over_pullback_hom : QuasiCompact (pullback f g).hom := by
   have : QuasiCompact (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq]
   infer_instance
 
 /-- The fibre product of separated `k`-schemes is separated. -/
-instance isSeparated_pullback_hom : IsSeparated (pullback f g).hom := by
+instance isSeparated_over_pullback_hom : IsSeparated (pullback f g).hom := by
   have : IsSeparated (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq]
