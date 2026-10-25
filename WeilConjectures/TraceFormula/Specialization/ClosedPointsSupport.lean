@@ -184,7 +184,8 @@ theorem isZero_of_isCompl_range_of_isClosedImmersion {V : Over (Spec (.of k))}
   refine (IsZero.iff_id_eq_zero _).2 ?_
   rw [← IsIso.hom_inv_id (0 : E ⟶ E), zero_comp]
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
 /-- The factorization through an open `W` of a closed immersion with range in `W` is a closed
 immersion. -/
 lemma isClosedImmersion_opensOverLift (W : X.left.Opens) {P : Over (Spec (.of k))}
