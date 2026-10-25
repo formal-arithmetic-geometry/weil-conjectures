@@ -54,7 +54,7 @@ lemma one_hom_comp_continuousMapSMulRightHom_hom (t : T') :
 the action of the constant global section `t` of `T̲'`. -/
 lemma continuousMapSMulRightHom_hom (t : T') :
     (continuousMapSMulRightHom.{u} hφ t).hom = continuousMapRingObjAlgebraMap hφ ≫
-      Mod.smulHom (continuousMapConstRingHom T' t) (Mod.regular _) := by
+      Mod.globalSmul (continuousMapConstRingHom T' t).hom (Mod.regular _) := by
   have h₁ := Mod.act_hom (continuousMapSMulRightHom.{u} hφ t)
   have h₂ := one_hom_comp_continuousMapSMulRightHom_hom hφ t
   rw [map_one, Γ.one_hom] at h₂
@@ -69,7 +69,7 @@ lemma continuousMapSMulRightHom_hom (t : T') :
         rw [← MonoidalCategory.whiskerLeft_comp_assoc, h₂]
         rfl
     _ = _ := by
-        rw [Mod.smulHom]
+        rw [Mod.globalSmul]
         erw [Mod.leftUnitor_inv_comp_whiskerRight_comp_mul (R := continuousMapRingObj.{u} T')]
         rw [whisker_exchange_assoc, ← rightUnitor_inv_naturality_assoc]
 

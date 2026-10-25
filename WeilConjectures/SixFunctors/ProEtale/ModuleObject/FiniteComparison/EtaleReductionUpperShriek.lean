@@ -249,7 +249,8 @@ theorem isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit (d : Z ⟶ Y
     (overOpenComplement d).left).isIso_unit_app_iff_of_iso_obj
       ((boundedConstructibleLowerStarCompatibility _ ℓ (overOpenComplement d)).app
         ((boundedConstructibleUpperStar _ ℓ (overOpenComplement d)).obj K)).symm).2
-      ((derivedUpperStarLowerStarAdjunction _ (overOpenComplement d).left).isIso_unit_app_obj _)
+      ((derivedUpperStarLowerStarAdjunction _
+        (overOpenComplement d).left).isIso_unit_app_obj_of_isIso_counit_app _)
   have h := (NatIso.isIso_map_iff (Functor.isoWhiskerRight
     (etaleReductionIsoDerivedEtaleReduction ℓ E n Y)
     (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left))

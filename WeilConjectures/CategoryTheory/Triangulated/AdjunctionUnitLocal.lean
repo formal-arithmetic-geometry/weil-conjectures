@@ -22,7 +22,10 @@ coefficients:
 * `CategoryTheory.Adjunction.isIso_unit_app_obj₃_of_distTriang`,
   `CategoryTheory.Adjunction.isIso_unit_app_obj₁_of_distTriang`: local objects satisfy the
   two-out-of-three property in distinguished triangles;
-* `CategoryTheory.Adjunction.isIso_unit_app_obj`: if the counit is invertible, `R M` is local;
+* `CategoryTheory.Adjunction.isIso_unit_app_iff_of_iso_obj`: locality is invariant under
+  isomorphism;
+* `CategoryTheory.Adjunction.isIso_unit_app_obj_of_isIso_counit_app`: if the counit is invertible
+  at `M`, then `R M` is local;
 * `CategoryTheory.Adjunction.isZero_of_isIso_unit_app`: a local object killed by `L` is zero;
 * `CategoryTheory.Adjunction.isIso_unit_app_of_isIso_unit_app_map`: locality descends along a
   triangulated functor reflecting zero objects and commuting with the adjunctions.
@@ -60,20 +63,25 @@ lemma isIso_unit_app_iff_of_iso_obj {X Y : C} (e : X ≅ Y) :
 
 /-- If the counit at `M` is an isomorphism, then `R M` is local: the unit at `R M` is a section of
 `R` of the counit, by the triangle identity. -/
-lemma isIso_unit_app_obj (M : D) [IsIso (adj.counit.app M)] :
+instance isIso_unit_app_obj_of_isIso_counit_app (M : D) [IsIso (adj.counit.app M)] :
     IsIso (adj.unit.app (R.obj M)) := by
   have : IsIso (adj.unit.app (R.obj M) ≫ R.map (adj.counit.app M)) := by
     rw [adj.right_triangle_components M]
     exact IsIso.id _
   exact IsIso.of_isIso_comp_right _ (R.map (adj.counit.app M))
 
-/-- If the counit is an isomorphism, `L` inverts the unit. -/
-lemma isIso_map_unit_app_of_isIso_counit [IsIso adj.counit] (X : C) :
+/-- If the counit is invertible at `L X`, then `L` inverts the unit at `X`. -/
+instance isIso_map_unit_app_of_isIso_counit_app (X : C) [IsIso (adj.counit.app (L.obj X))] :
     IsIso (L.map (adj.unit.app X)) := by
   have : IsIso (L.map (adj.unit.app X) ≫ adj.counit.app (L.obj X)) := by
     rw [adj.left_triangle_components X]
     exact IsIso.id _
   exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
+
+/-- If the counit is an isomorphism, `L` inverts the unit. -/
+lemma isIso_map_unit_app_of_isIso_counit [IsIso adj.counit] (X : C) :
+    IsIso (L.map (adj.unit.app X)) :=
+  adj.isIso_map_unit_app_of_isIso_counit_app X
 
 /-- A local object killed by `L` is zero. -/
 lemma isZero_of_isIso_unit_app [HasZeroMorphisms C] [HasZeroMorphisms D]
@@ -164,7 +172,7 @@ theorem isIso_unit_app_of_isIso_unit_app_map
       (adj'.isIso_map_unit_app_of_isIso_counit N)
   have hFT := F.map_distinguished _ hT
   have h₃ : IsIso (adj.unit.app (F.obj (R'.obj (L'.obj N)))) :=
-    (adj.isIso_unit_app_iff_of_iso_obj (e.app (L'.obj N))).2 (adj.isIso_unit_app_obj _)
+    (adj.isIso_unit_app_iff_of_iso_obj (e.app (L'.obj N))).2 (adj.isIso_unit_app_obj_of_isIso_counit_app _)
   have h₁ := adj.isIso_unit_app_obj₁_of_distTriang _ hFT hN h₃
   have hG : IsZero G := hF G (adj.isZero_of_isIso_unit_app h₁ (hL G hLG))
   exact (Triangle.isZero₁_iff_isIso₂ _ hT).1 hG
