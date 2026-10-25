@@ -7807,6 +7807,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationLift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AcyclicResolution
@@ -12608,6 +12609,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingB
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible

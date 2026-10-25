@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonIso
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
 
 /-!
@@ -47,10 +47,11 @@ The identification of the Verdier duals is compatible with the evaluation (trace
 `K ⊗ 𝔻 K ⟶ ω`
 (`ProEtale.CondensedRing.μ_comp_map_ev_comp_boundedConstructibleIntegersToPadicAlgClDualizingIso`).
 
-## Compatibilities required from other sections
-
-* `ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl`:
-  blueprint `det-prop-scalar-six-tensor-hom` (2), for `𝒪_E ⟶ ℚ̄_ℓ`.
+For `𝒪_E ⟶ E` these clauses are proved, `E ⊗ᴸ_{𝒪_E} -` being the rationalization of
+`Dᵇc(X)⟦𝒪_E⟧`. For `E ⟶ ℚ̄_ℓ` the internal Hom and `f^!` clauses are the compatibilities
+`ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl` and
+`ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekToPadicAlgCl` required from
+`sec-six-functors-basics`.
 
 -/
 
@@ -119,20 +120,6 @@ noncomputable def boundedConstructibleIntegersToPadicAlgClExternalProductIso
       ((boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E (prod.snd : X ⨯ Y ⟶ Y)).app N₀ ≪≫
         (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).mapIso eN)
 
-/-! ### Internal homs -/
-
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
-`det-prop-scalar-six-tensor-hom` (2), for the coefficient map `𝒪_E ⟶ ℚ̄_ℓ` (the composite of the
-listed maps `𝒪_E ⟶ E` and `E ⟶ ℚ̄_ℓ`). For bounded constructible `𝒪_E`-complexes `A` and `B`,
-the comparison `v_{A,B} : T RHom(A, B) ⟶ RHom(T A, T B)`, the transpose of
-`T RHom(A, B) ⊗ T A ≅ T (RHom(A, B) ⊗ A) ⟶ T B` (the mate of the tensorator,
-`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism. -/
-theorem isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl
-    (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
-    IsIso ((Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleIntegersToPadicAlgCl ℓ E X) A).natTrans.app B) :=
-  sorry
-
 /-! ### Dualizing complexes and Verdier duals -/
 
 section Dualizing
@@ -167,7 +154,6 @@ noncomputable def boundedConstructibleIntegersToPadicAlgClVerdierDualIso :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj
         (boundedConstructibleVerdierDual _ ℓ a K₀) ≅ verdierDual ℓ a K :=
   have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
-    (boundedConstructibleDualizingComplex _ ℓ a)
   Functor.LaxMonoidal.mapIhomObjIso _ e (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a)
 
 /-- **The identification of the Verdier duals is compatible with the evaluation maps**: the
@@ -183,7 +169,6 @@ lemma μ_comp_map_ev_comp_boundedConstructibleIntegersToPadicAlgClDualizingIso :
     (e.hom ⊗ₘ (boundedConstructibleIntegersToPadicAlgClVerdierDualIso ℓ E a e).hom) ≫
       (ihom.ev K).app (dualizingComplex ℓ a) := by
   have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
-    (boundedConstructibleDualizingComplex _ ℓ a)
   exact Functor.LaxMonoidal.μ_comp_map_ev_comp_hom _ e _
 
 end Dualizing
