@@ -13198,6 +13198,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnProperShape
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOpen
 public import WeilConjectures.TraceFormula.Specialization.PointModel
