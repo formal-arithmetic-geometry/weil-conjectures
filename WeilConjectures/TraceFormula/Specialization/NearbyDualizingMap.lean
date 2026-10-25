@@ -34,7 +34,8 @@ that characterize the dualizing maps is a `NearbyCyclesModel.NearbyDualizingData
 existence is the node lemma `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint
 `det-nearby-exchange-maps` and the composition law `sk-lem-tf-nearby-mate-coherences` (4)):
 
-* **proper models**: for `q` proper, `ν_{a} = χ_a⁻¹` under `Ra_! ≅ Ra_*`, so `θ_X` is the unique
+* **proper models**: for `q` proper and geometric generic fibre all of `X ×_k Spec Ω`,
+  `ν_{a} = χ_a⁻¹` under `Ra_! ≅ Ra_*`, so `θ_X` is the unique
   map with `tr_{X'} ∘ Ra'_*(θ_X) ∘ χ_a(ω_X) = σ⁻¹ ∘ Ψ_S(tr_X)`, `tr` the traces
   `Ra_* ω_X ≅ Ra_! Ra^! ℚ̄_ℓ ⟶ ℚ̄_ℓ` (`NearbyCyclesModel.trace`) and `σ` the specialization unit
   of the trait;
@@ -43,7 +44,9 @@ existence is the node lemma `NearbyCyclesModel.nonempty_nearbyDualizingData` (bl
   `ρ' ∘ j'^*(θ_M) = θ_N ∘ Ψ_N(ρ) ∘ α_j(ω_X)` for the identifications `ρ : j^* ω_X ≅ ω_Y`.
 
 These two properties determine the family `θ`: every trait model is an open sub-model of a proper
-one (Nagata compactification over `S`), the proper exchange `χ_a` is invertible, and maps
+one whose geometric generic fibre is all of `X̄ ×_k Spec Ω`
+(`NearbyCyclesModel.IsTraitModelOfBase.exists_isProper_openSubmodel`), the proper exchange `χ_a`
+is then invertible, and maps
 `A ⟶ ω_{X'}` are determined by their traces.
 
 -/
@@ -180,14 +183,15 @@ structure NearbyDualizingData where
     (h : M.IsTraitModelOfBase k q g) :
     (boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
       (dualizingComplex ℓ (toPoint X)) ⟶ dualizingComplex ℓ (toPoint X')
-  /-- proper models: `tr_{X'} ∘ Ra'_*(θ_M) ∘ χ_a(ω_X) = σ⁻¹ ∘ Ψ_S(tr_X)`. -/
+  /-- proper models whose geometric generic fibre is all of `X ×_k Spec Ω`:
+  `tr_{X'} ∘ Ra'_*(θ_M) ∘ χ_a(ω_X) = σ⁻¹ ∘ Ψ_S(tr_X)`. -/
   pushforwardExchange_comp_map_θ_comp_trace {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
     [IsSeparated X'.hom] [IsProper (toPoint X).left] [IsProper (toPoint X').left]
     {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
     {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (h : M.IsTraitModelOfBase k q g)
-    [IsProper q] :
+    [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k')) :
     (h.pushforwardExchange ℓ).app (dualizingComplex ℓ (toPoint X)) ≫
         (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X')).map
           (θ h) ≫ trace ℓ X' =
@@ -223,14 +227,22 @@ pullback and proper exchanges of `det-sp-nearby-cycles-exchanges` and Nagata's c
 theorem). The dualizing maps `θ_M = β_a(ℚ̄_ℓ) : Ψ_M ω_X ⟶ ω_{X'}` of the trait models over the base,
 read through the specialization unit of the trait and `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`, form a family
 `NearbyCyclesModel.NearbyDualizingData`:
-* (**proper models**) if `q : 𝒳 ⟶ S` is proper, then `ν_a = χ_a⁻¹` (under `Ra_! ≅ Ra_*`) gives
+* (**proper models**) if `q : 𝒳 ⟶ S` is proper and the geometric generic fibre `𝒳_Ω` is all of
+  `X ×_k Spec Ω` (a pullback square), then `ν_a = χ_a⁻¹` (under `Ra_! ≅ Ra_*`) gives
   `tr_{X'} ∘ Ra'_*(θ_M) ∘ χ_a(ω_X) = σ⁻¹ ∘ Ψ_S(tr_X)`;
 * (**open restriction**) if `φ : N ⟶ M` is a morphism of trait models over open immersions
   `j : Y ⟶ X` and `j' : Y' ⟶ X'`, whose map of total spaces is an open immersion compatible with
   the structure morphisms and whose square of geometric generic fibres is cartesian, then
   `β_j = α_j⁻¹` and `j^! = j^*` give `ρ' ∘ j'^*(θ_M) = θ_N ∘ Ψ_N(ρ) ∘ α_j(ω_X)`.
 
-These properties determine the family (see the module docstring). -/
+These properties determine the family (see the module docstring). The hypothesis that `𝒳_Ω` is
+all of `X ×_k Spec Ω` in the proper property is necessary: if `𝒳_Ω` is only an open of
+`X ×_k Spec Ω` (as `NearbyCyclesModel.IsTraitModelOfBase` allows), `Ψ_M` only sees the part of `X`
+met by `𝒳_Ω`, while `tr_X` sees all of `X` (for `X = Spec k ⊔ Spec k` and the trait itself as
+total space over the first copy, the left side vanishes on the second summand of
+`Ra_* ω_X = ℚ̄_ℓ ⊕ ℚ̄_ℓ` and the right side does not). With it, `χ_a` is the proper base change
+isomorphism `RΓ(X_Ω, -) ≅ RΓ(X', Ψ -)`, and the property is the compatibility of `β_a` with
+traces. -/
 theorem nonempty_nearbyDualizingData : Nonempty (NearbyDualizingData k k' ℓ) :=
   sorry
 

@@ -422,6 +422,32 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+/-- **The duality map of the trait itself** (blueprint `det-tf-nearby-duality-proper` (3), "with
+`θ_S` the identity of `A` the normalized pairing on `S` is ordinary evaluation"): for the trait `S`
+as a model of the base point `Spec k`, with the lax tensor map of its nearby cycles and the inverse
+of the specialization unit as dualizing map, the duality map
+`δ_{S,N} : Ψ_S RHom(N, ℚ̄_ℓ) ⟶ RHom(Ψ_S N, ℚ̄_ℓ)` is an isomorphism for every bounded
+constructible `N` on `Spec k`.
+
+Unfinished. Here `Ψ_S N = Li^* Rη̄_* Lε^* N` with `ε : Spec Ω ⟶ Spec k`. The duality map
+factors as `Ψ'(δ_ε) ∘ δ_{Ψ'}(Lε^* N)` with `Ψ' = Li^* Rη̄_*` the nearby cycles of the trait as a
+model of its geometric generic point; it remains to show (a) that `Lε^*` commutes with
+`RHom(N, ℚ̄_ℓ)` for constructible `N` on the (not separably closed) point `Spec k` (constructible
+complexes on a field are dualizable), and (b) that `δ_{Ψ'}` is invertible on `Spec Ω`, where every
+bounded constructible complex is a sum of shifts of the unit
+(`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`) and `Ψ'` is monoidal there
+(`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`) with
+`σ_s` invertible. -/
+theorem isIso_nearbyDualityMap_traitModel
+    (N : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (Verdier.nearbyDualityMap
+      (boundedConstructibleTensorMap
+        (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))
+      (inv (traitSpecializationUnit k k' (ℓ := ℓ))) N) :=
+  sorry
+
 /-- **Global sections of the duality map of a proper model, reduced to the trait** (blueprint
 `det-tf-nearby-duality-proper` (1) and (3)): if `X`, `X'` and the total space of the trait model
 `M` over the base are proper, then `RΓ(X', δ_{M,K})` is an isomorphism as soon as the proper
@@ -441,7 +467,8 @@ kills `Ψ_S Ra_*` of the unit of the second copy.
 -/
 theorem isIso_lowerStar_nearbyDualityMap_of_isIso (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
-    [IsProper q] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hχ : ∀ A, IsIso ((h.pushforwardExchange ℓ).app A))
     [IsIso (Verdier.nearbyDualityMap
       (boundedConstructibleTensorMap
@@ -453,7 +480,7 @@ theorem isIso_lowerStar_nearbyDualityMap_of_isIso (D : NearbyDualizingData k k' 
   let _ := boundedConstructibleLowerStarLaxMonoidal (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)
   let _ := boundedConstructibleLowerStarLaxMonoidal (Profinite.padicAlgClRingObj ℓ) ℓ
     (toPoint X')
-  have hθ := (D.pushforwardExchange_comp_map_θ_comp_trace h).symm
+  have hθ := (D.pushforwardExchange_comp_map_θ_comp_trace h hgen).symm
   have t₁ : h.pushforwardExchange ℓ = h.toTrait.boundedConstructiblePushforwardExchange ℓ
       (h.preservesBoundedConstructible ℓ) (preservesBoundedConstructible_traitModel ℓ) := rfl
   rw [t₁] at hθ hχ

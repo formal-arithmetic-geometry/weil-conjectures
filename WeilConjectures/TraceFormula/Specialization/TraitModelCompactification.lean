@@ -85,7 +85,8 @@ variable {k : Type u} [Field k] {k' : Type u} [Field k'] [Algebra k k']
 /-- **Compactification of trait models over the base**: a trait model `M` of `X` over the base
 is an open sub-model of a trait model `M̄` over the base with proper total space and proper `X̄`,
 `X̄'`, over open immersions `j : X ⟶ X̄` and `j' : X' ⟶ X̄'`, in the sense of
-`NearbyCyclesModel.isIso_nearbyDualityMap_of_openSubmodel`. -/
+`NearbyCyclesModel.isIso_nearbyDualityMap_of_openSubmodel`. The geometric generic fibre of `M̄` is
+all of `X̄ ×_k Spec Ω` (a pullback square). -/
 theorem IsTraitModelOfBase.exists_isProper_openSubmodel {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X.left X'.left}
@@ -96,7 +97,9 @@ theorem IsTraitModelOfBase.exists_isProper_openSubmodel {X : Over (Spec (.of k))
       (_ : LocallyOfFiniteType Xc'.hom) (_ : QuasiCompact Xc'.hom) (_ : IsSeparated Xc'.hom)
       (_ : IsProper (toPoint Xc').left) (Mc : NearbyCyclesModel Xc.left Xc'.left)
       (qc : Mc.total ⟶ trait k') (gc : Mc.generic ⟶ Spec (.of (traitGenericField k')))
-      (_ : Mc.IsTraitModelOfBase k qc gc) (_ : IsProper qc) (j : X ⟶ Xc)
+      (_ : Mc.IsTraitModelOfBase k qc gc)
+      (_ : IsPullback Mc.ε gc Xc.hom (traitGenericPoint k' ≫ traitToBase k k'))
+      (_ : IsProper qc) (j : X ⟶ Xc)
       (_ : IsOpenImmersion j.left) (j' : X' ⟶ Xc') (_ : IsOpenImmersion j'.left)
       (φ : M.Hom Mc j.left j'.left) (_ : IsOpenImmersion φ.total),
       IsPullback φ.generic M.j Mc.j φ.total ∧ q = φ.total ≫ qc ∧ g = φ.generic ≫ gc := by
@@ -250,7 +253,7 @@ theorem IsTraitModelOfBase.exists_isProper_openSubmodel {X : Over (Spec (.of k))
     inferInstanceAs (QuasiCompact (pullback.snd qc (traitClosedPoint k'))),
     inferInstanceAs (IsSeparated (pullback.snd qc (traitClosedPoint k'))),
     inferInstanceAs (IsProper (pullback.snd qc (traitClosedPoint k'))), Mc, qc,
-    pullback.snd z γ, hMc, inferInstanceAs (IsProper (p ≫ z)), j,
+    pullback.snd z γ, hMc, hZΩ, inferInstanceAs (IsProper (p ≫ z)), j,
     inferInstanceAs (IsOpenImmersion c₀.i), j', inferInstanceAs (IsOpenImmersion j'l), φ, hc,
     ?_, hqc, hφgen_snd.symm⟩
   refine IsPullback.of_right ?_ hcomm_j hMcj.flip

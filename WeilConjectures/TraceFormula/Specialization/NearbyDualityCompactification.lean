@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
+public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 
 /-!
@@ -86,7 +87,9 @@ theorem exists_isProper_openSubmodel_of_isAffine (h : M.IsTraitModelOfBase k q g
       (_ : LocallyOfFiniteType Xc'.hom) (_ : QuasiCompact Xc'.hom) (_ : IsSeparated Xc'.hom)
       (_ : IsProper (toPoint Xc').left) (Mc : NearbyCyclesModel Xc.left Xc'.left)
       (qc : Mc.total ⟶ trait k') (gc : Mc.generic ⟶ Spec (.of (traitGenericField k')))
-      (_ : Mc.IsTraitModelOfBase k qc gc) (_ : IsProper qc) (j : X ⟶ Xc)
+      (_ : Mc.IsTraitModelOfBase k qc gc)
+      (_ : IsPullback Mc.ε gc Xc.hom (traitGenericPoint k' ≫ traitToBase k k'))
+      (_ : IsProper qc) (j : X ⟶ Xc)
       (_ : IsOpenImmersion j.left) (j' : X' ⟶ Xc') (_ : IsOpenImmersion j'.left)
       (φ : M.Hom Mc j.left j'.left) (_ : IsOpenImmersion φ.total),
       IsPullback φ.generic M.j Mc.j φ.total ∧ q = φ.total ≫ qc ∧ g = φ.generic ≫ gc :=
@@ -99,24 +102,22 @@ structure morphism `a` (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchang
 for proper `q`) and global Verdier duality identify it with the identity of
 `RHom(RΓ(X ×_k Spec Ω, K), ℚ̄_ℓ)`.
 
-Unfinished. `NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isIso` proves the claim (with
-the lax monoidal structure of `Ra_*`, its compatibility with `χ_a`, the proper axiom of `D` and
-global Verdier duality on both fibres) from two remaining inputs: the invertibility of `χ_a`, and
-the invertibility of the duality map of the trait `S` itself at `Ra_* K` (blueprint: on `S`,
-`δ_{S,N}` is the identity of `RHom(N_η̄, ℚ̄_ℓ)`; this needs `Lε^*` along `Spec Ω ⟶ Spec k` to
-commute with `RHom(N, ℚ̄_ℓ)` for constructible `N`, and the monoidality of the nearby cycles of the
-trait, `NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`). The first
-input is false as stated: `χ_a` is not invertible when the geometric generic fibre of `M` is a
-proper open of `X ×_k Spec Ω` (e.g. `X = Spec k ⊔ Spec k`, `M` the trait mapping to the first
-copy), and for such models the proper axiom of `NearbyCyclesModel.NearbyDualizingData` fails too,
-so the proper case needs the hypothesis that the generic fibre is all of `X ×_k Spec Ω`. -/
+This is `NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isIso` (the formal identity of
+blueprint `det-tf-nearby-duality-proper` (1), with the lax monoidal structure of `Ra_*`, its
+compatibility with `χ_a`, the proper axiom of `D` and global Verdier duality on both fibres), with
+the invertibility of `χ_a` (`NearbyCyclesModel.IsTraitModelOfBase.isIso_pushforwardExchange_app`,
+which needs the geometric generic fibre to be all of `X ×_k Spec Ω`) and of the duality map of the
+trait (`NearbyCyclesModel.isIso_nearbyDualityMap_traitModel`). -/
 theorem isIso_lowerStar_nearbyDualityMap_of_isProper (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
-    [IsProper q]
+    [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (toPoint X')).map (nearbyDualityMap ℓ D h K)) :=
-  sorry
+      (toPoint X')).map (nearbyDualityMap ℓ D h K)) := by
+  have := isIso_nearbyDualityMap_traitModel ℓ (k := k) (k' := k')
+    ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)
+  exact isIso_lowerStar_nearbyDualityMap_of_isIso ℓ D h hgen K
+    (fun A ↦ h.isIso_pushforwardExchange_app ℓ hgen A)
 
 /-- **Finite support of the cone of the duality map of a proper model** (blueprint
 `sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if `X`, `X'` and the total space
@@ -133,6 +134,7 @@ fibre, so the induction runs over all such traits. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
     (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g)
     [IsProper (toPoint X).left] [IsProper (toPoint X').left] [IsProper q]
+    (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -148,11 +150,11 @@ bounded constructible `K`. Its cone has no global sections
 (`NearbyCyclesModel.isIso_nearbyDualityMap_of_isIso_lowerStar`). -/
 theorem isIso_nearbyDualityMap_of_isProper (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
-    [IsProper q]
+    [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ D h K) := by
-  obtain ⟨S, hS, hU⟩ := exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper ℓ D h K
+  obtain ⟨S, hS, hU⟩ := exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper ℓ D h hgen K
   exact isIso_nearbyDualityMap_of_isIso_lowerStar ℓ D h K S hS hU
-    (isIso_lowerStar_nearbyDualityMap_of_isProper ℓ D h K)
+    (isIso_lowerStar_nearbyDualityMap_of_isProper ℓ D h hgen K)
 
 /-- **Gabber's theorem for affine total spaces** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.2; SGA 7 XIII; blueprint `sk-prop-tf-nearby-duality-foundation`). For a trait
@@ -174,10 +176,11 @@ isomorphism at the extension by zero of `K`
 theorem isIso_nearbyDualityMap_of_isAffine (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsAffine M.total]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ D h K) := by
-  obtain ⟨Xc, _, _, _, _, Xc', _, _, _, _, Mc, qc, gc, hc, _, j, _, j', _, φ, _, hφ, hq, hg⟩ :=
+  obtain ⟨Xc, _, _, _, _, Xc', _, _, _, _, Mc, qc, gc, hc, hcgen, _, j, _, j', _, φ, _, hφ, hq,
+    hg⟩ :=
     exists_isProper_openSubmodel_of_isAffine h
   exact isIso_nearbyDualityMap_of_openSubmodel ℓ D h hc j j' φ hφ hq hg K
-    (isIso_nearbyDualityMap_of_isProper ℓ D hc _)
+    (isIso_nearbyDualityMap_of_isProper ℓ D hc hcgen _)
 
 end NearbyCyclesModel
 
