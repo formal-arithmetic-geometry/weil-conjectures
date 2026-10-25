@@ -8093,6 +8093,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingSheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsNakayama
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangle
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
@@ -12651,6 +12652,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
@@ -12746,6 +12748,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Weak
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
