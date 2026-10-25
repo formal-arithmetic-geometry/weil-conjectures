@@ -26,6 +26,12 @@ and checks that for `Λ = ℚ̲̄_ℓ` they are the constructions of the trace f
 (`ProEtale.CondensedRing.externalProduct_eq_boundedConstructibleExternalProduct`,
 `ProEtale.CondensedRing.verdierDual_eq_boundedConstructibleVerdierDual`).
 
+As for `ProEtale.CondensedRing.boundedConstructibleUpperShriek`, the dualizing complex of a
+general `Λ` assumes that `Rg_*` along the proper part `g` of the compactification is a left
+adjoint. For `Λ = 𝒪_E`, `E` and `ℚ̲̄_ℓ` this is an instance
+(`ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` and its
+siblings), so it need not be supplied there.
+
 -/
 
 @[expose] public section
