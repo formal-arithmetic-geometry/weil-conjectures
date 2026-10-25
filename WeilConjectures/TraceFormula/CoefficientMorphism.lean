@@ -6,11 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.CoefficientMorphismAdditivity
-public import WeilConjectures.TraceFormula.CoefficientMorphismProper
+public import WeilConjectures.TraceFormula.CoefficientMorphismCurve
 public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.ModelExtension
+public import WeilConjectures.TraceFormula.ModelLineTower
 public import WeilConjectures.TraceFormula.ModelOpenClosed
-public import WeilConjectures.TraceFormula.ModelProjectiveImmersion
 
 /-!
 
@@ -25,19 +25,38 @@ coefficient morphism*, blueprint `def-trf-frobenius-coefficient-morphism`), with
 tr(F_{c,m}(ψ) | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr(ψ_{m,x} | K_x)
 ```
 (`ProEtale.CondensedRing.trace_frobeniusCompactOperator_eq_sum`, blueprint
-`thm-trf-coefficient-morphism-trace-formula`) is the coefficient-morphism variant of the
-Grothendieck–Lefschetz formula.
+`sk-thm-tf-coefficient-morphism-formula`, `thm-trf-coefficient-morphism-trace-formula`) is the
+coefficient-morphism variant of the Grothendieck–Lefschetz formula.
 
-The proof follows the blueprint. The trace formula in degree `m` for `Φ` is the trace formula in
-degree one (`ProEtale.CondensedRing.TraceFormulaHolds`) for the iterate `Φ_m`, the model
-Frobenius of the base change of `X₀` to the extension of degree `m` of `k₀` (Step 0). It holds on
-proper schemes by the Lefschetz–Verdier formula and the Frobenius local term
-(`ProEtale.CondensedRing.traceFormulaHolds_of_isProper`, Step 2). An affine `X₀` embeds into a
-projective space over `k₀`, and the trace formula passes along this immersion, whose fibres are
-proper (`ProEtale.CondensedRing.traceFormulaHolds_of_isProper_pullback`, Steps 3–4). Finally a
-finite affine open cover of `X₀` and the additivity of the trace along open–closed
-decompositions (`ProEtale.CondensedRing.TraceFormulaHolds.of_isCompl`) give the general case
-(Step 5).
+The proof follows the blueprint route: the geometric content lies in the Frobenius local term on
+curves (blueprint `sk-p-frob`), and everything else is a formal reduction. In particular neither
+nearby cycles nor Varshavsky's contracting theorem is used.
+
+* The trace formula in degree `m` for `Φ` is the trace formula in degree one
+  (`ProEtale.CondensedRing.TraceFormulaHolds`) for the iterate `Φ_m`, the model Frobenius of the
+  base change of `X₀` to the extension of degree `m` of `k₀`; this is why every step is proved
+  for all finite fields at once.
+* On a proper smooth curve, the Lefschetz–Verdier formula (blueprint `sk-p-proper`) and the
+  Frobenius local term on a curve (blueprint `sk-p-frob`) give the trace formula
+  (`ProEtale.CondensedRing.traceFormulaHolds_of_smoothOfRelativeDimension_one`); on a point it
+  holds since the open piece at the point is zero
+  (`ProEtale.CondensedRing.traceFormulaHolds_of_isClosedImmersion`).
+* The trace formula passes along a morphism of models whose fibres over the fixed points satisfy
+  it (`ProEtale.CondensedRing.traceFormulaHolds_of_fibres`, blueprint `sk-i-relative-frob` (3) and
+  (4)). Applied to the projections `ℙ¹_B ⟶ B`, whose fibres are projective lines, it gives the
+  trace formula on the towers of projective lines `ℙ¹ ×_{k₀} ⋯ ×_{k₀} ℙ¹`
+  (`ProEtale.CondensedRing.traceFormulaHolds_of_isModelFrobenius_projectiveLineTower`). Applied to
+  an immersion of an affine model `X₀ ⟶ 𝔸ᵈ_{k₀} ⊆ ℙ¹ ×_{k₀} ⋯ ×_{k₀} ℙ¹`, whose fibres are empty or
+  a point, it gives the affine case (`ProEtale.CondensedRing.traceFormulaHolds_of_isAffine`). The
+  only compactification used is `𝔸¹ ⊆ ℙ¹`, in each coordinate.
+* A finite affine open cover of `X₀` and the additivity of the trace along open–closed
+  decompositions (`ProEtale.CondensedRing.TraceFormulaHolds.of_isCompl`, blueprint
+  `sk-i-global-additivity`) give the general case.
+
+The blueprint reduces closed subschemes of `𝔸ᵈ` to closed subschemes of `𝔸¹` by forgetting the
+last coordinate, and the affine line to `ℙ¹`; here the affine model is immersed into
+`ℙ¹ ×_{k₀} ⋯ ×_{k₀} ℙ¹` first, so that the fibres of the coordinate projections are projective
+lines and those of the immersion are points. The inputs are the same.
 
 -/
 
@@ -75,8 +94,109 @@ lemma IsModelFrobenius.isUniversalHomeomorphism_left {X : Over (Spec (.of k))} {
   have := hΦ.isUniversalHomeomorphism 1
   rwa [frobeniusIterate_one] at this
 
+/-! ### Towers of projective lines -/
+
+section Tower
+
+variable [IsAlgClosed k] {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
+
+omit [Fact (ringChar k).Prime] [IsAlgClosed k] [Finite k₀] in
+/-- A model Frobenius whose model is `Spec k₀` lives on a scheme `X` with `X ⟶ Spec k` an
+isomorphism, in particular a closed immersion. -/
+lemma IsModelFrobenius.isClosedImmersion_hom_of_isIso {X : Over (Spec (.of k))}
+    {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} [IsIso f₀] {p : X.left ⟶ X₀} {Φ : X ⟶ X}
+    (hΦ : IsModelFrobenius Φ f₀ p) : IsClosedImmersion X.hom := by
+  have : IsIso X.hom :=
+    MorphismProperty.of_isPullback (P := MorphismProperty.isomorphisms Scheme.{u}) hΦ.isPullback
+      (show IsIso f₀ from inferInstance)
+  infer_instance
+
+set_option linter.overlappingInstances false in
+/-- **The trace formula on a tower of projective lines** (blueprint
+`sk-thm-tf-coefficient-morphism-formula`, the affine line through `ℙ¹` and the induction on
+coordinates): for every model Frobenius `Φ_Y` of `Y = P_d ×_{k₀} k`, where
+`P_d = ℙ¹_{k₀} ×_{k₀} ⋯ ×_{k₀} ℙ¹_{k₀}` is the tower of projective lines, the trace formula in
+degree one holds. By induction on `d`: `P_0 = Spec k₀` is a point, and the projection
+`P_{d+1} = ℙ¹_{P_d} ⟶ P_d` has proper smooth curves as fibres, where the trace formula holds by
+the Frobenius local term on curves (`traceFormulaHolds_of_smoothOfRelativeDimension_one`); the
+trace formula passes along the projection (`traceFormulaHolds_of_fibres`). -/
+theorem traceFormulaHolds_of_isModelFrobenius_projectiveLineTower (d : ℕ) :
+    ∀ {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+      [IsSeparated Y.hom] {pY : Y.left ⟶ (projectiveLineTower (Spec (.of k₀)) d).left}
+      {ΦY : Y ⟶ Y}, IsModelFrobenius ΦY (projectiveLineTower (Spec (.of k₀)) d).hom pY →
+        ∀ [IsProper ΦY.left], TraceFormulaHolds ℓ ΦY := by
+  induction d with
+  | zero =>
+    intro Y _ _ _ pY ΦY hY _
+    have : IsIso (projectiveLineTower (Spec (.of k₀)) 0).hom :=
+      inferInstanceAs (IsIso (𝟙 (Spec (.of k₀))))
+    have := hY.isClosedImmersion_hom_of_isIso
+    exact traceFormulaHolds_of_isClosedImmersion hY
+  | succ d ih =>
+    intro Y _ _ _ pY ΦY hY _
+    obtain ⟨Y', _, _, _, pY', ΦY', f, hY', hf, hfp, hpb⟩ :=
+      hY.exists_comp_eq_comp (projectiveLineTower (Spec (.of k₀)) d)
+        (overProjectiveLineProj (projectiveLineTower (Spec (.of k₀)) d)).left rfl
+    have := hY'.isFinite_left
+    have : IsProper f.left := MorphismProperty.of_isPullback hpb.flip
+      (inferInstanceAs (IsProper (overProjectiveLineProj
+        (projectiveLineTower (Spec (.of k₀)) d)).left))
+    have : SmoothOfRelativeDimension 1 f.left :=
+      have := smoothOfRelativeDimension_isStableUnderBaseChange 1
+      MorphismProperty.of_isPullback hpb.flip
+        (inferInstanceAs (SmoothOfRelativeDimension 1 (overProjectiveLineProj
+          (projectiveLineTower (Spec (.of k₀)) d)).left))
+    refine traceFormulaHolds_of_fibres hY hY' hf hfp rfl ?_ (ih hY')
+    intro y hy k' _ _ _ Z₀ g₀ _ pZ hZ _
+    have := isProper_pullback_hom f y
+    have := smoothOfRelativeDimension_pullback_hom f y
+    exact traceFormulaHolds_of_smoothOfRelativeDimension_one hZ
+
+set_option linter.overlappingInstances false in
+/-- **The trace formula on an affine model** (blueprint `sk-thm-tf-coefficient-morphism-formula`,
+the affine case; detailed form `thm-trf-coefficient-morphism-trace-formula`, Step 4): for the
+model Frobenius `Φ` of an affine model `X₀` of finite type over `k₀`, the trace formula in degree
+one holds. The model `X₀` admits an immersion into a tower of projective lines
+(`Scheme.exists_isImmersion_projectiveLineTower`), on whose base change the trace formula holds
+(`traceFormulaHolds_of_isModelFrobenius_projectiveLineTower`); the fibres of the immersion are
+empty or a point, where the trace formula holds (`traceFormulaHolds_of_isClosedImmersion`), and
+the trace formula passes along the immersion (`traceFormulaHolds_of_fibres`). -/
+theorem traceFormulaHolds_of_isAffine {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] {X₀ : Scheme.{u}} [IsAffine X₀]
+    {f₀ : X₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType f₀] {p : X.left ⟶ X₀} {Φ : X ⟶ X}
+    (hΦ : IsModelFrobenius Φ f₀ p) [IsProper Φ.left] : TraceFormulaHolds ℓ Φ := by
+  obtain ⟨d, ι, hι, hcomp⟩ := exists_isImmersion_projectiveLineTower f₀
+  obtain ⟨Y, _, _, _, pY, ΦY, f, hY, hf, hfp, hpb⟩ :=
+    hΦ.exists_comp_eq_comp (projectiveLineTower (Spec (.of k₀)) d) ι hcomp
+  have := hY.isFinite_left
+  have : IsImmersion f.left := MorphismProperty.of_isPullback hpb.flip hι
+  refine traceFormulaHolds_of_fibres hΦ hY hf hfp hcomp ?_
+    (traceFormulaHolds_of_isModelFrobenius_projectiveLineTower d hY)
+  intro y hy k' _ _ _ Z₀ g₀ _ pZ hZ _
+  have := isClosedImmersion_pullback_hom_of_isImmersion f y
+  exact traceFormulaHolds_of_isClosedImmersion hZ
+
+end Tower
+
+/-! ### General models -/
+
+omit [Fact (ringChar k).Prime] in
+/-- A model covered by the empty family of opens is empty, hence affine. -/
+lemma isAffine_of_card_eq_zero {X₀ : Scheme.{u}} {s : Finset X₀.Opens} (hs : s.card = 0)
+    (hcov : ⨆ U ∈ s, U = ⊤) : IsAffine X₀ := by
+  have h : (⊤ : X₀.Opens) = ⊥ := by
+    rw [← hcov, Finset.card_eq_zero.1 hs]
+    simp
+  have : IsEmpty X₀ := ⟨fun x ↦ by
+    have hx : x ∈ (⊤ : X₀.Opens) := trivial
+    rw [h] at hx
+    simp at hx⟩
+  infer_instance
+
 /-- The trace formula in degree one for a model Frobenius whose model is covered by `n` affine
-opens, by induction on `n` (blueprint `thm-trf-coefficient-morphism-trace-formula`, Steps 2–5). -/
+opens, by induction on `n` (blueprint `sk-thm-tf-coefficient-morphism-formula`, general schemes;
+`thm-trf-coefficient-morphism-trace-formula`, Step 5): the open–closed additivity of the trace
+(blueprint `sk-i-global-additivity`) reduces it to the affine case. -/
 theorem traceFormulaHolds_of_card_eq [IsAlgClosed k] {k₀ : Type u} [Field k₀] [Finite k₀]
     [Algebra k₀ k] (n : ℕ) :
     ∀ {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -87,8 +207,8 @@ theorem traceFormulaHolds_of_card_eq [IsAlgClosed k] {k₀ : Type u} [Field k₀
   induction n with
   | zero =>
     intro X _ _ _ X₀ f₀ _ p Φ hΦ _ s hs _ hcov
-    have := isProper_hom_of_card_eq_zero p hs hcov
-    exact traceFormulaHolds_of_isProper hΦ
+    have := isAffine_of_card_eq_zero hs hcov
+    exact traceFormulaHolds_of_isAffine hΦ
   | succ n ih =>
     intro X _ _ _ X₀ f₀ _ p Φ hΦ _ s hs hsa hcov
     obtain ⟨U, _, _, _, Z, _, _, _, j, i, _, _, ΦU, ΦZ, U₀, fU₀, pU, Z₀, fZ₀, pZ, t, hj, hi,
@@ -99,16 +219,12 @@ theorem traceFormulaHolds_of_card_eq [IsAlgClosed k] {k₀ : Type u} [Field k₀
     have := hΦU.isUniversalHomeomorphism_left
     have := hΦZ.isFinite_left
     have := hΦZ.isUniversalHomeomorphism_left
-    refine TraceFormulaHolds.of_isCompl hcompl hj hi ?_ (ih hΦZ ht hta htcov)
-    obtain ⟨Y, _, _, _, Y₀, fY₀, pY, ΦY, f, f₀', _, _, hΦY, hf, hfp, h₀, hfib⟩ :=
-      hΦU.exists_isProper_pullback
-    have := hΦY.isFinite_left
-    exact traceFormulaHolds_of_isProper_pullback hΦU hΦY hf hfp h₀ (fun y _ ↦ hfib y)
-      (fun _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ h ↦ traceFormulaHolds_of_isProper h)
-      (traceFormulaHolds_of_isProper hΦY)
+    exact TraceFormulaHolds.of_isCompl hcompl hj hi (traceFormulaHolds_of_isAffine hΦU)
+      (ih hΦZ ht hta htcov)
 
 /-- **The trace formula in degree one for a model Frobenius** (blueprint
-`thm-trf-coefficient-morphism-trace-formula`, the statement `TF(X₀, K, ψ, 1)`). -/
+`sk-thm-tf-coefficient-morphism-formula`; `thm-trf-coefficient-morphism-trace-formula`, the
+statement `TF(X₀, K, ψ, 1)`). -/
 theorem traceFormulaHolds_of_isModelFrobenius [IsAlgClosed k] {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] {k₀ : Type u}
     [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)}
@@ -122,11 +238,11 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 variable (ℓ) in
 /-- **The trace formula for Frobenius coefficient morphisms** (blueprint
-`thm-trf-coefficient-morphism-trace-formula`): for the model Frobenius `Φ` of a separated model
-`X₀` of finite type over a finite field `k₀`, a bounded constructible `K` with an arbitrary map
-`ψ : LΦ^* K ⟶ K` and `m ≥ 1`, the trace of `F_{c,m}(ψ)` on `RΓ_c(X, K)` is the sum over the
-rational points `x` fixed by `Φ_m` of the traces of the stalk maps `ψ_{m,x}` on `K_x`. No
-invertibility of `ψ` is assumed. -/
+`sk-thm-tf-coefficient-morphism-formula`, `thm-trf-coefficient-morphism-trace-formula`): for the
+model Frobenius `Φ` of a separated model `X₀` of finite type over a finite field `k₀`, a bounded
+constructible `K` with an arbitrary map `ψ : LΦ^* K ⟶ K` and `m ≥ 1`, the trace of `F_{c,m}(ψ)`
+on `RΓ_c(X, K)` is the sum over the rational points `x` fixed by `Φ_m` of the traces of the stalk
+maps `ψ_{m,x}` on `K_x`. No invertibility of `ψ` is assumed. -/
 theorem trace_frobeniusCompactOperator_eq_sum [IsAlgClosed k] {k₀ : Type u} [Field k₀]
     [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)}
     [LocallyOfFiniteType f₀] {p : X.left ⟶ X₀} {Φ : X ⟶ X} (hΦ : IsModelFrobenius Φ f₀ p)
