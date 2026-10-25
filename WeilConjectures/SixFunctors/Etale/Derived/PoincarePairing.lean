@@ -44,9 +44,11 @@ coefficients `ModuleCat Λ`, where the projection formula is available.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`, `def-sf-cup`): `⌣_c`.
+- `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`, `def-sf-cup`,
+  `def-pod-mixed-support-cup-product`): `⌣_c`.
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
-- `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`, `def-sf-pairing`): `β_K`.
+- `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`, `def-sf-pairing`,
+  `def-pod-derived-poincare-pairing`): `β_K`.
 - `AlgebraicGeometry.Etale.properPoincarePairing`: `β_K` read through `Ra_! ≅ Ra_*` for proper
   `a`.
 - `AlgebraicGeometry.Etale.poincarePairingOfTrace`: the pairing
@@ -465,6 +467,8 @@ variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.
+This is also blueprint `thm-pod-identification-of-the-comparison` (Identification of the
+Poincaré pairing with Verdier duality), the part asserting that `b_K^♯` is an isomorphism.
 
 **The derived Poincaré pairing is perfect in the point category.** Let `k` be separably closed,
 `a : X ⟶ Spec k` admit a compactification, `γ : V[2d] ≅ ω_X` be a purity isomorphism (from an

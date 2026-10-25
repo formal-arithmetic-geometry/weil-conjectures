@@ -618,6 +618,27 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion
     fun d' hd' ↦ (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (j ≫ aX) aX j rfl d'
       hd' hG).2⟩
 
+/-- Blueprint `det-thm-sf-pf-adic-open`: Integral open direct image preserves constructibility.
+
+For a quasi-compact open immersion `j : U ⟶ X` into a scheme of finite type over `k` and
+`K ∈ Dᵇc(U, 𝒪_E)`, the direct image `Rj_* K` is derived complete and lies in `Dᵇc(X, 𝒪_E)`
+(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral` contains derived
+completeness), and its reduction modulo `I = (ϖ)` is the direct image of the reduction:
+`(Rj_* K) ⊗ᴸ Λ ⧸ I ≅ Rj_*(K ⊗ᴸ Λ ⧸ I)`, `Rj_*` being a triangulated `Λ`-linear functor. -/
+theorem boundedConstructibleIntegral_rightDerivedLowerStar_and_reductionModIdeal_of_isOpenImmersion
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    {G : 𝐃(U, Λ)} (hG : DerivedCategory.boundedConstructibleIntegral I U G) :
+    DerivedCategory.boundedConstructibleIntegral I X ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G) ∧
+      Nonempty ((reductionModIdeal Λ X I).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G) ≅
+        (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((reductionModIdeal Λ U I).obj G)) := by
+  refine ⟨(boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion hϖ hI aX j
+    hG).1, ?_⟩
+  obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal (R((j)_*[ModuleCat.{u + 1} Λ])) hϖ 1 G
+  subst hI
+  rw [pow_one] at e
+  exact ⟨e.symm⟩
+
 /-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the integral stage `𝒪_E`, for
 `i_*`: the direct image along a closed immersion `i : Z ⟶ X` of schemes of finite type over `k`
 carries `Dᵇc(Z, Λ)` into `Dᵇc(X, Λ)`. -/

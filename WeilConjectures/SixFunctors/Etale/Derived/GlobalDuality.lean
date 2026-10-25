@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
@@ -147,6 +148,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 /-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality, as a natural isomorphism.
+This is also blueprint `thm-sf-global-duality`.
 
 If the projection formula holds for `a_X : X ⟶ S`, the coefficient dual of the compactly
 supported direct image is the direct image of the Verdier dual, naturally in `K ∈ D(X_ét)`:
@@ -154,7 +156,19 @@ supported direct image is the direct image of the Verdier dual, naturally in `K 
 `(Ra_{X!} K)^∨ ≅ Ra_{X*} (𝔻_X K)`.
 
 It is the tensor–Hom exchange `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`
-evaluated at the unit `Λ_S`. Applying `RΓ(S, -)` gives `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`. -/
+evaluated at the unit `Λ_S`, that is the Verdier-duality exchange for `f = a_X` over the base
+`S` itself, where `𝔻_S` is the coefficient dual (`AlgebraicGeometry.Etale.verdierDualIdIso`).
+Over `S = s = Spec k` the category `D(s_ét)` is the point category, in which `Ra_{X!} K` and
+`Ra_{X*} K` are `RΓ_c(X, K)` and `RΓ(X, K)` (blueprint `lem-sf-point`); so this is
+`RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, natural in `K`. Applying the evaluation at the geometric point
+gives the same isomorphism in `D(Λ)`
+(`AlgebraicGeometry.Etale.nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual`).
+Its compatibility with shifts is
+`AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekShiftIso`, with changes of
+coefficients `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso_inv_app_comp`,
+and its value at `K = Λ_X` is `AlgebraicGeometry.Etale.globalVerdierDualityUnitIso`. As in
+the blueprint, neither the properness of `X` nor any comparison `Ra_{X!} ≅ Ra_{X*}` is used:
+`Ra_{X!}` and `Ra_{X*}` enter as two different functors. -/
 noncomputable def coefficientDualRightDerivedLowerShriekIso [IsIso (projectionMap A aX)] :
     (R(aX)_![A]).op ⋙ DerivedCategory.coefficientDual A S ≅ verdierDual A aX ⋙ R((aX)_*[A]) :=
   (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso A aX)
@@ -171,9 +185,10 @@ noncomputable def coefficientDualShiftIso
       ((DerivedCategory.coefficientDual A Z).obj (op K))⟦-a⟧ :=
   (derivedHomShiftIso A K a).app (𝟙_ _)
 
-/-- Blueprint `sk-thm-sf-global-duality` (shifts): global duality for a shifted complex is the
-shift of global duality, `RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the
-commutation `Ra_{X!}(K⟦a⟧) ≅ (Ra_{X!} K)⟦a⟧`, then `(-)^∨` turning `⟦a⟧` into `⟦-a⟧`
+/-- Blueprint `sk-thm-sf-global-duality` (shifts), also `thm-sf-global-duality` (shifts): global
+duality for a shifted complex is the shift of global duality,
+`RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the commutation
+`Ra_{X!}(K⟦a⟧) ≅ (Ra_{X!} K)⟦a⟧`, then `(-)^∨` turning `⟦a⟧` into `⟦-a⟧`
 (`AlgebraicGeometry.Etale.coefficientDualShiftIso`), then the shift of global duality for `K`.
 
 This is only the object-level form of the shift compatibility: it does not state that this
@@ -228,6 +243,35 @@ theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit :
       (R((aX)_*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) aX)) :=
   (nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ aX (𝟙_ _)).map fun e ↦
     e ≪≫ (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso (verdierDualObjUnitIso _ aX)
+
+/-- Blueprint `thm-sf-global-duality`: Global Verdier duality, in the point category.
+
+Let `k` be a separably closed field, `s = Spec k`, `a_X : X ⟶ s` admitting a compactification
+(for instance separated of finite type, smooth or not, proper or not) and `Λ` a finite
+coefficient ring. For `K ∈ D(X_ét, Λ)` there is an isomorphism of `Λ`-module complexes
+
+`RΓ_c(X, K)^∨ = RHom_Λ(RΓ_c(X, K), Λ) ≅ RΓ(X, 𝔻_X K)`.
+
+As in the blueprint it is global duality in the point category
+(`AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`, natural in `K`), read
+through the evaluation at the geometric point `RΓ(s, -)`, which carries the coefficient dual of
+the point category to the dual over `Λ`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`,
+`lem-sf-point`), `RΓ(s, Ra_{X!} K)` to `RΓ_c(X, K)` (by definition) and `RΓ(s, Ra_{X*} -)` to
+`RΓ(X, -)` (the Leray isomorphism). For `K = Λ_X` it reads `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`. -/
+theorem nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual {k : Type u} [Field k]
+    [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [HasCompactification aX]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
+        (𝟙_ _) ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
+        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) := by
+  have := isIso_projectionMap_of_finite Λ aX
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence
+    (ModuleCat.{u + 1} Λ) (Spec (.of k)) ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)
+  exact ⟨e₁.symm ≪≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso
+      ((coefficientDualRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) aX).app (op K)) ≪≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) aX).app _⟩
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.

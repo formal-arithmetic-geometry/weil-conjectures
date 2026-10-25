@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantHom
 public import WeilConjectures.CategoryTheory.Sites.PullbackLocallyBijective
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRightDerivedLowerStar
 
 /-!
 # The pullback of a condensed ring of continuous maps
@@ -299,27 +300,6 @@ lemma upperStar_map_comp_homEquiv_symm_eq (F : Sheaf (ProEt.topology specZ.{u}) 
 
 variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
 
-/-- The morphism of sheaves of rings `C(-, T)_X ⟶ g_* C(-, T)_{X'}`: precomposition with the
-projections `V ×_X X' → V`. -/
-noncomputable def continuousMapRingSheafToPushforwardOfPoint :
-    continuousMapRingSheaf X T ⟶
-      ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).sheafPushforwardContinuous
-        RingCat.{u + 1} (ProEt.topology X) (ProEt.topology X')).obj
-        (continuousMapRingSheaf X' T) where
-  hom :=
-    { app V := RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
-        (((ContinuousMap.compRightAlgHom ℤ T (pullback.fst V.unop.hom g).base.hom).toRingHom).comp
-          ULift.ringEquiv.toRingHom))
-      naturality V V' f := by
-        ext a
-        refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
-        have h := congrArg (fun k ↦ k.base x) (overPullback_map_left_fst g f.unop)
-        simp only [Scheme.Hom.comp_base, TopCat.comp_app] at h
-        change a.down (f.unop.left.base ((pullback.fst V'.unop.hom g).base x)) =
-          a.down ((pullback.fst V.unop.hom g).base
-            (((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map f.unop).left.base x))
-        exact congrArg a.down h.symm }
-
 /-- The morphism of ring objects `C(-, T)_X ⟶ g_* C(-, T)_{X'}`: precomposition with the
 projections `V ×_X X' → V`. -/
 noncomputable abbrev continuousMapToPushforward :
@@ -328,7 +308,7 @@ noncomputable abbrev continuousMapToPushforward :
       (g)_*[Ab.{u + 1}].obj ((sheafCompose (ProEt.topology X')
         (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousMapRingSheaf X' T)) :=
   (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-    (continuousMapRingSheafToPushforwardOfPoint g T)
+    (continuousMapRingSheafToPushforward g T)
 
 /-- The comparison `g^* C(-, T)_X ⟶ C(-, T)_{X'}`, adjoint to the precomposition with the
 projections `V ×_X X' → V`. -/

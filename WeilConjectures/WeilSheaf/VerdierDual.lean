@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import WeilConjectures.WeilSheaf.DerivedHom
+public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 
@@ -57,6 +58,25 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 namespace WeilComplex
 
+section Proper
+
+variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
+  [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- **The proper exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the constructible
+adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper morphism
+`g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes has a
+right adjoint `Rg^!`. The general case
+`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
+compactification. -/
+theorem isLeftAdjoint_derivedLowerStar_of_isProper :
+    (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
+  sorry
+
+end Proper
+
 section UpperShriek
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -74,13 +94,36 @@ always has one is `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShrie
 abbrev HasUpperShriek : Prop :=
   (derivedLowerShriek k₀ l f).IsLeftAdjoint
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The constructible exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the
 constructible adjunction `Rf_! ⊣ Rf^!`"; the exceptional inverse image itself is defined at the
 finite stage as `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a
 separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, the direct image
 with compact support `Rf₀!` of Weil complexes has a right adjoint. -/
-theorem isLeftAdjoint_derivedLowerShriek : HasUpperShriek k₀ l f :=
-  sorry
+theorem isLeftAdjoint_derivedLowerShriek : HasUpperShriek k₀ l f := by
+  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
+  let := Compactification.over (k₀ := k₀) c
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsProper c.g := c.isProper
+  have : IsOpenImmersion c.i := c.isOpenImmersion
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact c.i := inferInstance
+  have e : derivedLowerShriek k₀ l f ≅ extensionByZero c.i ⋙ derivedLowerStar c.g :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ ((derivedLowerShriekCompιIso k₀ l c).app K))
+      (fun φ ↦ by
+        apply (WeilComplex.objectProperty k₀ l Y).ι.map_injective
+        exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
+  have := isLeftAdjoint_derivedLowerStar_of_isProper (k₀ := k₀) (l := l) c.g
+  have : (extensionByZero (k₀ := k₀) (l := l) c.i).IsLeftAdjoint :=
+    (extensionByZeroUpperStarAdjunction c.i).isLeftAdjoint
+  exact Functor.isLeftAdjoint_of_iso e.symm
 
 variable [HasUpperShriek k₀ l f]
 
@@ -148,8 +191,12 @@ open Pretriangulated.Opposite in
 anti-equivalence `D_{X,ℚ̄_ℓ}`"): it commutes with the shifts and carries distinguished
 triangles of `(WeilComplex X)ᵒᵖ` to distinguished triangles. -/
 theorem exists_commShift_isTriangulated_verdierDual :
-    ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated :=
-  sorry
+    ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated := by
+  obtain ⟨_, _⟩ := DerivedCategory.exists_commShift_isTriangulated_bifunctorRHom
+    (ProEtaleWeilSheaf.ihomBifunctor k₀ l X) (dualizingComplex k₀ l X).obj
+  unfold verdierDual ProEtaleWeilSheaf.derivedHom
+  exact ⟨Functor.CommShift.ofComp ((WeilComplex.objectProperty k₀ l X).liftCompιIso _ _) ℤ,
+    ObjectProperty.isTriangulated_lift _ _ _⟩
 
 end VerdierDual
 
