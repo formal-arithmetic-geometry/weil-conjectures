@@ -72,7 +72,7 @@ set_option maxHeartbeats 1000000 in
 /-- On the ambient derived categories, the pullback comparison of a commutative square on bounded
 constructible complexes is the pullback comparison `pullbackSquareComparison` of the underlying
 square of schemes. -/
-lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq
+lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (sq : CommSq g' f' f g) (K : Dᵇc(B.left)⟦Λ⟧) :
     ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
@@ -117,7 +117,7 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
         K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
           (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq,
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
       pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
   have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f
