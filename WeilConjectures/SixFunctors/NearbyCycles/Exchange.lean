@@ -382,6 +382,22 @@ lemma isIso_pullbackExchange_of_isIso [IsIso φ.total] [IsIso φ.generic] :
   unfold pullbackExchange
   infer_instance
 
+/-- **The pullback exchange along a weakly étale morphism is invertible** (blueprint
+`det-sp-nearby-cycles-exchanges` (1), for weakly étale `f`, e.g. étale morphisms and open
+immersions): if the square of geometric generic fibres is cartesian and the morphisms of total
+spaces and of geometric generic fibres are weakly étale, the pullback exchange is an isomorphism,
+by weakly étale base change (`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`). -/
+lemma isIso_pullbackExchange_of_isPullback (h : IsPullback φ.generic M.j N.j φ.total)
+    [WeaklyEtale φ.total] [WeaklyEtale φ.generic] :
+    IsIso (φ.pullbackExchange Λ) := by
+  have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
+      (derivedUpperStarLowerStarAdjunction Λ M.j)
+      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
+    have := isIso_baseChangeMap_of_weaklyEtale Λ h
+    rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
+  unfold pullbackExchange
+  infer_instance
+
 /-- The *pushforward exchange* `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` of a morphism of models (blueprint
 `det-sp-nearby-cycles-exchanges` (2)): the mate of the pullback exchange `α_f` along the
 adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
