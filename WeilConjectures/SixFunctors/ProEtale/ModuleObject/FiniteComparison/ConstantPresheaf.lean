@@ -68,6 +68,12 @@ lemma constRingObj_mul_app (U : Cᵒᵖ) :
     (μ[constRingObj.{w} (C := C) T]).app U = μ[AddCommGrpCat.of (ULift.{w} T)] :=
   rfl
 
+/-- The constant ring presheaf of a commutative ring is a commutative ring object. -/
+instance isCommMonObj_constRingObj (T : Type) [CommRing T] :
+    IsCommMonObj (constRingObj.{w} (C := C) T) where
+  mul_comm := NatTrans.ext (funext fun _ ↦ AddCommGrpCat.hom_ext_toIntLinearMap
+    (TensorProduct.ext' fun (a b : ULift.{w} T) ↦ ULift.ext _ _ (mul_comm b.down a.down)))
+
 /-- The action of the constant ring presheaf on the abelian presheaf underlying a presheaf of
 `T`-modules. -/
 noncomputable def smulNatTrans (N : Cᵒᵖ ⥤ ModuleCat.{w} T) :

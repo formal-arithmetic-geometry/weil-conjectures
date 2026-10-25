@@ -53,6 +53,12 @@ object of abelian sheaves. -/
 noncomputable abbrev constRingSheaf : Sheaf J Ab.{u + 1} :=
   (presheafToSheaf J Ab.{u + 1}).obj (Presheaf.constRingObj.{u + 1} (C := C) T)
 
+/-- The constant ring sheaf of a commutative ring is a commutative ring object, sheafification
+being braided. -/
+instance isCommMonObj_constRingSheaf (T : Type) [CommRing T] :
+    IsCommMonObj (constRingSheaf J T) :=
+  Functor.isCommMonObj_obj (F := presheafToSheaf J Ab.{u + 1})
+
 /-- The underlying presheaf of a module object over the constant ring sheaf `T`, as a module
 object over the constant ring presheaf `T`, acting through the sheafification unit. -/
 noncomputable def modToPresheafMod :
