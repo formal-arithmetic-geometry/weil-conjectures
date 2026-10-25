@@ -12679,6 +12679,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.MonoidalUniqueness
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Profinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
@@ -12971,11 +12972,14 @@ public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
 public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusModel
+public import WeilConjectures.TraceFormula.CurveLocal.IntegralSupportedRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.LocalExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.Model
 public import WeilConjectures.TraceFormula.CurveLocal.ModelAxes
 public import WeilConjectures.TraceFormula.CurveLocal.ModelRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
+public import WeilConjectures.TraceFormula.CurveLocal.ReductionExternalProduct
+public import WeilConjectures.TraceFormula.CurveLocal.ReductionTransfer
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZero
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroChain
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstruction
@@ -13053,6 +13057,7 @@ public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.PointFiberFunctor
 public import WeilConjectures.TraceFormula.PointFiberFunctorIntegral
+public import WeilConjectures.TraceFormula.PointFiberReduction
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
 public import WeilConjectures.TraceFormula.PointNormalizationClass
