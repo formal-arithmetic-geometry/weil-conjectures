@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.ContractingLocalTerm
 public import WeilConjectures.TraceFormula.PieceAdditivity
 
 /-!
