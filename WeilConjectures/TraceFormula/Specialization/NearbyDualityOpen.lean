@@ -164,8 +164,8 @@ private lemma liftExchange_tensor_aux
     (hβ : β = liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
         (PY' := boundedConstructible _) (PX' := boundedConstructible _) α
         (fun K ↦ hM K.obj K.property) (fun K ↦ hN K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ j' K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ j K.obj K.property))
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ j' K)
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ j K))
     (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (β.app A ⊗ₘ β.app B) ≫ boundedConstructibleTensorMap hN _ _ ≫
         (boundedConstructibleNearbyCycles hN).map (Functor.LaxMonoidal.μ

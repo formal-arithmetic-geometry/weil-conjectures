@@ -120,18 +120,12 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
     rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
       pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
   have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f'
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f'
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g'
-      K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
     hθ K hamb
   convert key using 3
@@ -184,10 +178,8 @@ theorem isIso_upperStar_map_openKunnethMap_of_isOpenImmersion
   have hU : prod.map v (𝟙 U) ≫ prod.snd = (prod.snd : V ⨯ U ⟶ U) := by
     rw [prod.map_snd, Category.comp_id]
   unfold openKunnethMap at h ⊢
-  have hc' := Adjunction.isIso_homEquiv_of_isIso_kunnethNatTrans_app _ _ _ h (by
-    unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j))
+  have hc' := Adjunction.isIso_homEquiv_of_isIso_kunnethNatTrans_app _ _ _ h
+    (isIso_homEquiv_openKunnethSecondFactor ℓ j B)
   refine Adjunction.isIso_map_kunnethNatTrans_app_of_isIso_homEquiv
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (prod.map (𝟙 X) j)) _
@@ -208,9 +200,7 @@ theorem isIso_upperStar_map_openKunnethMap_of_isOpenImmersion
       (hpb.map (Over.forget _)) _
   · exact isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale ℓ hpb.toCommSq
       (hpb.map (Over.forget _)) _
-  · unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
+  · exact isIso_homEquiv_openKunnethSecondFactor ℓ j B
   · exact hc'
 
 end AlgebraicGeometry.ProEtale.CondensedRing

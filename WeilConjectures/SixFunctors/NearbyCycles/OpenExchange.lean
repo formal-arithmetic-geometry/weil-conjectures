@@ -144,8 +144,7 @@ end Ambient
 
 section BoundedConstructible
 
-variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -154,13 +153,16 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [I
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
-  (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
-  (hN : N.PreservesBoundedConstructible Λ)
+  (φ : M.Hom N f.left f'.left)
+  (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 /-- The restricted pullback exchange is an isomorphism if the pullback exchange is. -/
-theorem isIso_boundedConstructiblePullbackExchange [IsIso (φ.pullbackExchange Λ)] :
-    IsIso (φ.boundedConstructiblePullbackExchange ℓ hM hN) :=
-  isIso_liftExchange (φ.pullbackExchange Λ) _ _ _ _
+theorem isIso_boundedConstructiblePullbackExchange
+    [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))] :
+    IsIso (φ.boundedConstructiblePullbackExchange ℓ hM hN) := by
+  rw [boundedConstructiblePullbackExchange_eq_liftExchange]
+  exact isIso_liftExchange _ _ _ _ _
 
 /-- **Nearby cycles commute with weakly étale pullback**, on bounded constructible complexes: for
 a morphism of models whose morphism of total spaces is weakly étale and whose square of geometric
@@ -168,7 +170,7 @@ generic fibres is cartesian, the restricted pullback exchange is an isomorphism.
 theorem isIso_boundedConstructiblePullbackExchange_of_weaklyEtale [WeaklyEtale φ.total]
     (hj : IsPullback φ.generic M.j N.j φ.total) :
     IsIso (φ.boundedConstructiblePullbackExchange ℓ hM hN) :=
-  have := φ.isIso_pullbackExchange_of_weaklyEtale Λ hj
+  have := φ.isIso_pullbackExchange_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ) hj
   φ.isIso_boundedConstructiblePullbackExchange ℓ hM hN
 
 end BoundedConstructible

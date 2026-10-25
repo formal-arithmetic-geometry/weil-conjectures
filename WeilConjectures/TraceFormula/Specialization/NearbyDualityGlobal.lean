@@ -321,8 +321,8 @@ private lemma liftExchange_tensor_oplax_aux
     (hβ : β = liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
         (PY' := boundedConstructible _) (PX' := boundedConstructible _) α
         (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f' K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K.obj K.property))
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f' K)
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K))
     (A B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f').map
         (boundedConstructibleTensorMap hN A B) ≫
@@ -404,18 +404,18 @@ theorem isIso_nearbyDualityMap_lowerStar_trace (K : Dᵇc(Z.left)⟦Profinite.pa
     IsIso (Verdier.nearbyDualityMap
       (letI := boundedConstructibleLowerStarLaxMonoidal ℓ
         (toPoint Z);
-        Functor.LaxMonoidal.μ (boundedConstructibleLowerStar _ ℓ (toPoint Z)))
+        Functor.LaxMonoidal.μ (boundedConstructibleLowerStar ℓ (toPoint Z)))
       (NearbyCyclesModel.trace ℓ Z) K) := by
   have e := Verdier.nearbyDualityMap_comp_pre_eq_exchange
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint Z))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint Z))
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint Z))
-    (boundedConstructibleExceptionalProjection _ ℓ (toPoint Z))
+    (boundedConstructibleExceptionalProjection ℓ (toPoint Z))
     (fun T B ↦ upperStar_map_exceptionalProjection_comp_counit ℓ (toPoint Z) T B) K (𝟙_ _)
   have h₁ : IsIso (Verdier.exchange
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint Z))
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z))
-      (boundedConstructibleExceptionalProjection _ ℓ (toPoint Z)) K (𝟙_ _)) :=
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint Z))
+      (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z))
+      (boundedConstructibleExceptionalProjection ℓ (toPoint Z)) K (𝟙_ _)) :=
     isIso_verdierExchange ℓ (toPoint Z) K (𝟙_ _)
   have h₂ := isIso_pre_app
     ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint Z)).hom.app K) (𝟙_ _)
@@ -475,8 +475,8 @@ theorem isIso_lowerStar_nearbyDualityMap_of_isIso (D : NearbyDualizingData k k' 
     (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ))
     (boundedConstructibleTensorMap (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))
     (D.θ h) (inv (traitSpecializationUnit k k' (ℓ := ℓ)))
-    (Functor.LaxMonoidal.μ (boundedConstructibleLowerStar _ ℓ (toPoint X)))
-    (Functor.LaxMonoidal.μ (boundedConstructibleLowerStar _ ℓ (toPoint X')))
+    (Functor.LaxMonoidal.μ (boundedConstructibleLowerStar ℓ (toPoint X)))
+    (Functor.LaxMonoidal.μ (boundedConstructibleLowerStar ℓ (toPoint X')))
     (trace ℓ X) (trace ℓ X') (fun A ↦ (h.toTrait.boundedConstructiblePushforwardExchange ℓ
       (h.preservesBoundedConstructible ℓ) (preservesBoundedConstructible_traitModel ℓ)).app A)
     (fun A _ _ y ↦ Functor.LaxMonoidal.μ_natural_right _ A y)

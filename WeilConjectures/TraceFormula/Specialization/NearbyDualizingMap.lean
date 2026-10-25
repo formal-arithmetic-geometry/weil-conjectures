@@ -150,7 +150,7 @@ noncomputable def trace (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom]
     (boundedConstructibleLowerStar ℓ (toPoint Z)).obj
         (dualizingComplex ℓ Z) ⟶ 𝟙_ _ :=
   (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint Z)).inv.app _ ≫
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z)).counit.app (𝟙_ _)
 
 instance : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) :=
   isIso_traitSpecializationUnit k k'

@@ -63,7 +63,7 @@ Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), 
 exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
 `WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`) and that bounded
 constructible complexes on the special fibre form a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible`, `sorry`ed on the branch).
+(`ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`, `sorry`ed on the branch).
 
 -/
 
@@ -239,7 +239,7 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
     (isTraitModel_affineSpaceModel (k' := k') n).isNoetherian_total
   have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)).IsTriangulated :=
-    isTriangulated_boundedConstructible (ℓ := ℓ) _ _
+    isTriangulated_boundedConstructible_padicAlgClRingObj _ ℓ
   refine boundedConstructible_obj_of_forall_lisse_along
     (Φ := L(((affineSpaceModel k' n).geometric.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
       R(((affineSpaceModel k' n).geometric.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙

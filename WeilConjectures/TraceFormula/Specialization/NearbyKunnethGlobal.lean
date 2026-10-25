@@ -64,7 +64,7 @@ open Scheme
 
 section OrdinaryKunneth
 
-  {ℓ : ℕ} [Fact ℓ.Prime] {K : Type u} [Field K] [IsSepClosed K]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {K : Type u} [Field K] [IsSepClosed K]
   [Fact (ringChar K).Prime]
   [Fact (ringChar K ≠ ℓ)] {X Y P : Over (Spec (.of K))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -230,7 +230,7 @@ end Product
 
 section Exchange
 
-  {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k' ≠ ℓ)] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -440,7 +440,7 @@ end TraitGenericField
 
 section Global
 
-  {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
@@ -548,35 +548,34 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
           boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
             (C ⊗ D) := by
     have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        P.total)).IsMonoidal := isMonoidal_boundedConstructible (Profinite.padicAlgClRingObj ℓ)
+        P.total)).IsMonoidal := isMonoidal_boundedConstructible
       (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k')) (ℓ := ℓ)
     exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
-  refine isIso_lowerStar_kunnethMap_of_isIso _ hM hN hpb hP hgen A B ?_ ?_ ?_ ?_ ?_ hT
+  refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
+    hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- the proper exchanges
-  · exact isIso_app_of_forall_upperStar _ _
-        (fun C₀ hC₀ ↦
-          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (Profinite.padicAlgClRingObj
-              ℓ) hM C₀ hC₀) _
+  · have h₁ := fun C₀ hC₀ ↦
+      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hM C₀ hC₀
+    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
+    exact h₂ _
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
         nonempty_upperStar_obj_iso_comp _ heM A⟩
-  · exact isIso_app_of_forall_upperStar _ _
-        (fun C₀ hC₀ ↦
-          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (Profinite.padicAlgClRingObj
-              ℓ) hN C₀ hC₀) _
+  · have h₁ := fun C₀ hC₀ ↦
+      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hN C₀ hC₀
+    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
+    exact h₂ _
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
         nonempty_upperStar_obj_iso_comp _ heN B⟩
   · have hqP' : IsProper (φ₁.total ≫ qM) := hqP
-    exact isIso_app_of_forall_upperStar _ _
+    exact isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _
         (fun C₀ hC₀ ↦
-          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (Profinite.padicAlgClRingObj
-              ℓ) hP C₀ hC₀) _
+          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hP C₀ hC₀) _
         (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
   -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
-  · exact isIso_lowerStarKunnethMap'_of_isPullback (Profinite.padicAlgClRingObj ℓ) (X := X') (Y :=
-      Y') (P := Z') f₁' f₂'
+  · exact isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
       (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
       (isPullback_special hM hN hpb hP) _ hΨA' _ hΨB'
-  · exact isIso_lowerStarKunnethMap'_of_isPullback (Profinite.padicAlgClRingObj ℓ) (X := Over.mk gM)
+  · exact isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
       (Y := Over.mk gN)
       (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
       (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen) _ hA' _ hB'

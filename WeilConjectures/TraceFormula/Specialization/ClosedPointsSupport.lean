@@ -284,12 +284,12 @@ lemma isZero_upperStar_of_retract_of_conservative {P : Over (Spec (.of k))}
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C))) := by
     refine (IsZero.iff_id_eq_zero _).2 ?_
     rw [← CategoryTheory.Functor.map_id, ← hs, Functor.map_comp,
-      hΓ.eq_of_tgt ((boundedConstructibleLowerStar _ ℓ (toPoint X)).map s) 0, zero_comp]
+      hΓ.eq_of_tgt ((boundedConstructibleLowerStar ℓ (toPoint X)).map s) 0, zero_comp]
   have hxa : x ≫ toPoint X = toPoint P := by
     ext1
     simp
   exact hcons _ (hP.of_iso (eqToIso (by rw [hxa]) ≪≫
-    ((boundedConstructibleLowerStarComp _ ℓ x (toPoint X)).app _).symm))
+    ((boundedConstructibleLowerStarComp ℓ x (toPoint X)).app _).symm))
 
 /-- **A complex vanishes along a closed immersion `x` if its global sections vanish**, provided
 global sections on the source of `x` detect vanishing and the extension by zero `j_! Lj^* C` from
@@ -377,7 +377,7 @@ theorem isZero_upperStar_opensOverι_of_isClosedImmersion {P : Over (Spec (.of k
     (by rwa [hrange]) (by rwa [hrange]) _
     (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ
       (opensOverι U) x hU.disjoint _)
-    ((isZero_upperStar_of_range_subset _ ℓ W₀ _ (by rw [hrange]) C hC).of_iso
+    ((isZero_upperStar_of_range_subset ℓ W₀ _ (by rw [hrange]) C hC).of_iso
       ((boundedConstructibleUpperStarComp _ ℓ _ _).app _ ≪≫
         (boundedConstructibleUpperStar _ ℓ _).mapIso (@asIso _ _ _ _ _ hε) ≪≫
         ((boundedConstructibleUpperStarComp _ ℓ _ _).app C).symm))
@@ -438,7 +438,7 @@ theorem isZero_of_isZero_upperStar_finsetComplOpens_of_isZero_lowerStar (S : Fin
   classical
   induction S using Finset.induction_on with
   | empty =>
-    exact (isZero_upperStar_of_range_subset _ ℓ _ (𝟙 X)
+    exact (isZero_upperStar_of_range_subset ℓ _ (𝟙 X)
       (fun y _ ↦ by simp) C hU).of_iso ((boundedConstructibleUpperStarId _ ℓ X).app C).symm
   | insert z S hzS ih =>
     have hz : IsClosed {z} := hS z (Finset.mem_insert_self _ _)
@@ -487,6 +487,7 @@ theorem isZero_of_isZero_upperStar_finsetComplOpens (S : Finset X.left)
     (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) C)
     (hU : IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))
     (hΓ : IsZero (R((X.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) : IsZero C := by
+  rw [← toPoint_left X] at hΓ
   have h := isZero_of_isZero_upperStar_finsetComplOpens_of_isZero_lowerStar ℓ S hS ⟨C, hC⟩
     (IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _ hU)
     (IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _ hΓ)

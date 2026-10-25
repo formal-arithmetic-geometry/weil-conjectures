@@ -309,8 +309,9 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl 
         boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperShriekOfCompactification ℓ c :=
-  mateEquiv (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
-    (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
+  mateEquiv
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c)
+    (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
     (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
 
 set_option maxHeartbeats 400000 in
@@ -331,8 +332,10 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
   unfold boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl
   rw [h]
   exact mateEquiv_hcomp
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ c.overI)
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ c.overI)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.continuousMapRingObj E) ℓ c.overI)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
     (Adjunction.ofIsLeftAdjoint
       (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG))
     (Adjunction.ofIsLeftAdjoint
@@ -370,15 +373,15 @@ noncomputable def boundedConstructibleUpperShriekToPadicAlgCl :
         boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperShriek ℓ f :=
-  mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+  mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv
 
 /-- The exchange for `f^!` as the mate of a two-square. -/
 lemma boundedConstructibleUpperShriekToPadicAlgCl_eq_mateEquiv :
     boundedConstructibleUpperShriekToPadicAlgCl ℓ E f =
-      (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-        (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+      (mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
+        (boundedConstructibleUpperShriekAdjunction ℓ f)
         (TwoSquare.mk _ _ _ _
           (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv)).natTrans :=
   rfl
