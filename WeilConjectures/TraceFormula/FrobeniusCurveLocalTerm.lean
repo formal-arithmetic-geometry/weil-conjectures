@@ -172,7 +172,14 @@ at `(x, x)`, from the Frobenius graph `a` to the diagonal `b`. The blueprint sho
 diagonal, covers of degree prime to `ℓ`, and the blowup argument of
 `sk-lem-tf-blowup-restriction`); the `ℚ̄_ℓ`-form follows by the integral models of
 `sk-lem-tf-rational-model`. The coefficient map `v` plays no role: `ρ_P` only depends on the
-correspondence and on `P`. -/
+correspondence and on `P`.
+
+The finite-coefficient statement on the classical étale models is
+`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`. Its transport
+to `ℚ̄_ℓ` is not formalised yet: it needs integral models over `𝒪_E` of bounded constructible
+`ℚ̄_ℓ`-complexes (`sk-lem-tf-rational-model`), their reductions modulo `π_E^n`, and the
+comparison of the pro-étale operations with these coefficients with the étale ones on the strict
+localization (`sk-thm-pe-constructible-comparison`). -/
 theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : 1 ≤ m)

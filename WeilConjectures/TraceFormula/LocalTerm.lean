@@ -343,17 +343,6 @@ end LocalTerm
 
 section Decomposition
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- The derived pullback on bounded constructible complexes is additive. -/
-instance additive_boundedConstructibleUpperStar {Y Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).Additive := by
-  refine ⟨fun {_ _ f f'} ↦ ((boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ g).homEquiv _ _).injective ?_⟩
-  simp only [Adjunction.homEquiv_unit, Functor.map_add, Preadditive.comp_add,
-    Adjunction.unit_naturality, Preadditive.add_comp]
-
 variable {B X : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
   [IsSeparated B.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 

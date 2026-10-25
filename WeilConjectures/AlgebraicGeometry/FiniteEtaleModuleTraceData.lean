@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleUnitStalkInclusion
@@ -67,36 +68,24 @@ private theorem trace_stalk_component
     Adjunction.right_triangle_components]
   simp
 
-/-- A coefficient-linear trace whose composite with restriction is multiplication by
- the prescribed cardinality of every geometric fibre.
 
-Source: Stacks Project, Section 03SH, Definition 03SE and the following degree formula.
-(blueprint: lem-weil-pbc-finite-etale-module-trace-data)
-
-Proof: take the counit of the existing reverse adjunction `f_* ⊣ f^*`. The ordinary
-adjunction triangle identifies restriction on each geometric stalk with the diagonal.
-The reverse-adjunction triangle and `finiteEtaleUnit_stalk_inclusion` identify the
-trace on each summand with the pullback stalk comparison. The finite pushforward
-stalk formula and orthogonality of extensions by zero give the resolution of the
-identity as the sum of projection-inclusion composites. Consequently the composite
-is the sum of one identity for each lift, hence `(d : R)` times the identity.
-Geometric stalks detect equality of sheaf morphisms. Empty fibres and the empty
-base are covered by the same calculation; no invertibility is used. -/
-theorem finiteEtaleModuleTraceData
+/-- **The finite étale trace after pullback is multiplication by the degree.** For a finite
+étale `f` all of whose geometric fibres have `d` points, the unit `G ⟶ f_* f^* G` followed by the
+trace `f_* f^* G ⟶ G`, the counit of `f_* ⊣ f^*`, is multiplication by `d`. -/
+theorem unit_app_comp_lowerStarUpperStarAdjunctionOfIsFinite_counit_app
     {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R]
     (f : Y ⟶ X) [IsFinite f] [Etale f]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (d : ℕ)
     (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
       Nat.card (f.GeometricFiber s) = d) :
-    (∃ t : (f)_*[ModuleCat.{u + 1} R].obj ((f)^*[ModuleCat.{u + 1} R].obj G) ⟶ G,
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) f).unit.app G ≫ t =
-        (d : R) • 𝟙 G) ∧ Nonempty PUnit.{0} := by
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) f).unit.app G ≫
+      (lowerStarUpperStarAdjunctionOfIsFinite (ModuleCat.{u + 1} R) f).counit.app G =
+        (d : R) • 𝟙 G := by
   classical
   let A := ModuleCat.{u + 1} R
   let H := (f)^*[A].obj G
   let η := (upperStarLowerStarAdjunction A f).unit.app G
   let tr := (lowerStarUpperStarAdjunctionOfIsFinite A f).counit.app G
-  refine ⟨⟨tr, ?_⟩, ⟨PUnit.unit⟩⟩
   apply Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint
   intro x
   let s := X.algClosurePoint x
@@ -136,4 +125,30 @@ theorem finiteEtaleModuleTraceData
     _ = (d : R) • 𝟙 _ := by
       erw [Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card,
         hdeg _ s, ← Nat.cast_smul_eq_nsmul R]
+/-- A coefficient-linear trace whose composite with restriction is multiplication by
+ the prescribed cardinality of every geometric fibre.
+
+Source: Stacks Project, Section 03SH, Definition 03SE and the following degree formula.
+(blueprint: lem-weil-pbc-finite-etale-module-trace-data)
+
+Proof: take the counit of the existing reverse adjunction `f_* ⊣ f^*`. The ordinary
+adjunction triangle identifies restriction on each geometric stalk with the diagonal.
+The reverse-adjunction triangle and `finiteEtaleUnit_stalk_inclusion` identify the
+trace on each summand with the pullback stalk comparison. The finite pushforward
+stalk formula and orthogonality of extensions by zero give the resolution of the
+identity as the sum of projection-inclusion composites. Consequently the composite
+is the sum of one identity for each lift, hence `(d : R)` times the identity.
+Geometric stalks detect equality of sheaf morphisms. Empty fibres and the empty
+base are covered by the same calculation; no invertibility is used. -/
+theorem finiteEtaleModuleTraceData
+    {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R]
+    (f : Y ⟶ X) [IsFinite f] [Etale f]
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (d : ℕ)
+    (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+      Nat.card (f.GeometricFiber s) = d) :
+    (∃ t : (f)_*[ModuleCat.{u + 1} R].obj ((f)^*[ModuleCat.{u + 1} R].obj G) ⟶ G,
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) f).unit.app G ≫ t =
+        (d : R) • 𝟙 G) ∧ Nonempty PUnit.{0} :=
+  ⟨⟨_, unit_app_comp_lowerStarUpperStarAdjunctionOfIsFinite_counit_app R f G d hdeg⟩,
+    ⟨PUnit.unit⟩⟩
 end AlgebraicGeometry.Etale
