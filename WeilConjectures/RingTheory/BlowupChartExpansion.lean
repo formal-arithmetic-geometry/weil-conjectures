@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.Algebra.Polynomial.Eval.Coeff
 public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.Algebra.Polynomial.Eval.Degree
 
 /-!
 # Homogeneous expansions of elements of powers of a two-generated ideal
@@ -72,6 +73,18 @@ theorem exists_eq_sum_of_mem_span_pair_pow {u v r : R} {n : ℕ}
         ring
 
 end Ideal
+
+/-- If `φ(y) = φ(x) T`, then `φ` maps the homogeneous form `∑_{j ≤ n} p_j x ^ (n - j) y ^ j` to
+`φ(x) ^ n p(T)`. -/
+theorem RingHom.map_sum_eq_pow_mul_eval₂ {S : Type*} [CommRing S] (φ : R →+* S) {x y : R} {T : S}
+    (hT : φ y = φ x * T) (p : R[X]) {n : ℕ} (hp : p.natDegree ≤ n) :
+    φ (∑ j ∈ Finset.range (n + 1), p.coeff j * x ^ (n - j) * y ^ j) = φ x ^ n * p.eval₂ φ T := by
+  rw [eval₂_eq_sum_range' φ (Nat.lt_succ_of_le hp)]
+  simp only [map_sum, map_mul, map_pow, Finset.mul_sum, hT]
+  refine Finset.sum_congr rfl fun j hj => ?_
+  rw [Finset.mem_range] at hj
+  rw [mul_pow, show n = n - j + j by omega, pow_add, Nat.add_sub_cancel]
+  ring
 
 namespace IsLocalRing
 
