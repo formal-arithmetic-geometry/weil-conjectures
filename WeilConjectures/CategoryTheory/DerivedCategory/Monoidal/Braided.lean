@@ -305,6 +305,7 @@ identity law has to be proved. Being an identity in two variables, it follows fr
 @[instance_reducible]
 noncomputable def symmetricCategory : SymmetricCategory (DerivedCategory C) where
   __ := braidedCategory' C
-  symmetry X Y := braiding_hom_braiding_hom C (fun _ _ ↦ SymmetricCategory.symmetry _ _) X Y
+  symmetry X Y := by
+    exact braiding_hom_braiding_hom C (fun _ _ ↦ SymmetricCategory.symmetry _ _) X Y
 
 end DerivedCategory
