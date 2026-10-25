@@ -47,6 +47,7 @@ variable {ι : Type*} [Finite ι] {S : Scheme.{u}} {T : ι → Scheme.{u}} {f : 
 private noncomputable def sigmaIsoOfIsColimit (hS : IsColimit (Cofan.mk S f)) : ∐ T ≅ S :=
   (colimit.isColimit _).coconePointUniqueUpToIso hS
 
+/-- The isomorphism `∐ T ≅ S` restricts to `f i` on the summand `T i`. -/
 private lemma sigmaι_sigmaIsoOfIsColimit_hom (hS : IsColimit (Cofan.mk S f)) (i : ι) :
     Sigma.ι T i ≫ (sigmaIsoOfIsColimit hS).hom = f i :=
   (colimit.isColimit _).comp_coconePointUniqueUpToIso_hom hS ⟨i⟩
@@ -166,7 +167,7 @@ lemma isIso_piLift_globalSectionsRestriction_of_isColimit (hS : IsColimit (Cofan
         piComparison _ _ ≫ Limits.Pi.map fun i ↦
           (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ (f i)).hom.app _ := by
     refine Pi.hom_ext _ _ fun i ↦ ?_
-    simp [globalSectionsRestriction, ← Functor.map_comp_assoc]
+    simp [globalSectionsRestriction]
   rw [h]
   infer_instance
 
