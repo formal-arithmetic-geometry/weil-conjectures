@@ -14,13 +14,13 @@ public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionOpen
 
 Let `b : B ⟶ T`, `a : G ⟶ T` and `y : Y ⟶ B` be as in
 `WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization`, so that the supported
-restriction `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_Y(B, b^* P)` is defined, and let `w : W ⟶ T` be a closed
-immersion with `G ⊆ W` such that the punctured curve `U = B ∖ Y` maps into `T ∖ W` (in the
-blueprint, `W = G ∪ V` is the union of the Frobenius graph and the vertical axis, and the
+restriction `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_Y(B, b^* P)` is defined, and let `O ⊆ T ∖ G` be an open
+subscheme such that the punctured curve `U = B ∖ Y` maps into `O` (in the blueprint,
+`O = T ∖ (G ∪ V)` is the complement of the Frobenius graph and the vertical axis, and the
 punctured diagonal `B ∖ y` lies in `T ∖ (H ∪ V ∪ G)`). If `RΓ(T, P) = 0` and `RΓ(B, b^* P) = 0`
 and the restriction
 ```
-RΓ(T ∖ W, P) ⟶ RΓ(U, P|_U)
+RΓ(O, P) ⟶ RΓ(U, P|_U)
 ```
 vanishes, then `ρ_{a,b} = 0`
 (`AlgebraicGeometry.Etale.supportedRestrictionMap_eq_zero_of_restriction`).
@@ -28,7 +28,7 @@ vanishes, then `ρ_{a,b} = 0`
 This is the reduction step of the proof of blueprint `sk-lem-tf-curve-restriction-zero`
 (`det-tf-restriction-zero-localization` (iii)): by the localization triangles `ρ_{a,b}` vanishes
 if and only if the restriction `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ Y, b^* P)` does, and this restriction
-factors through `RΓ(T ∖ W, P)`, since `U ⊆ T ∖ W ⊆ T ∖ G`.
+factors through `RΓ(O, P)`, since `U ⊆ O ⊆ T ∖ G`.
 
 -/
 
@@ -81,24 +81,24 @@ lemma sectionsRestriction_comp_app_eq_zero_iff {X X' X'' : Scheme.{u}} (e : X' �
   rw [← sectionsRestriction_comp]
   exact Preadditive.IsIso.comp_right_eq_zero _ _
 
-variable {T B G Y W : Scheme.{u}} (b : B ⟶ T) (a : G ⟶ T) [IsClosedImmersion a] (y : Y ⟶ B)
-  [IsClosedImmersion y] (h : y.openComplement ≤ b ⁻¹ᵁ a.openComplement) (w : W ⟶ T)
-  [IsClosedImmersion w] (hw : w.openComplement ≤ a.openComplement)
-  (ψ : y.openComplement.toScheme ⟶ w.openComplement.toScheme)
-  (hψ : ψ ≫ w.openComplement.ι = y.openComplement.ι ≫ b)
+variable {T B G Y : Scheme.{u}} (b : B ⟶ T) (a : G ⟶ T) [IsClosedImmersion a] (y : Y ⟶ B)
+  [IsClosedImmersion y] (h : y.openComplement ≤ b ⁻¹ᵁ a.openComplement) (O : T.Opens)
+  (hw : O ≤ a.openComplement)
+  (ψ : y.openComplement.toScheme ⟶ O.toScheme)
+  (hψ : ψ ≫ O.ι = y.openComplement.ι ≫ b)
 
 include hw hψ in
 /-- **Reduction of the supported restriction to a punctured restriction** (blueprint
 `det-tf-restriction-zero-localization` (iii), as used in the proof of
 `sk-lem-tf-curve-restriction-zero`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
-`RΓ(T ∖ W, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ T ∖ W` vanishes, where `G ⊆ W`, then the
+`RΓ(O, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ O` vanishes, where `O ⊆ T ∖ G`, then the
 supported restriction `ρ_{a,b}` vanishes. -/
 theorem supportedRestrictionMap_eq_zero_of_restriction
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
     (hT : IsZero ((sectionsWithSupportTriangle A a).obj P).obj₂)
     (hB : IsZero ((sectionsWithSupportTriangle A y).obj
       ((Functor.mapDerivedCategoryPlus (b)^*[A]).obj P)).obj₂)
-    (hr : (sectionsRestriction A (ψ ≫ w.openComplement.ι) (V := Scheme.Etale.mk w.openComplement.ι)
+    (hr : (sectionsRestriction A (ψ ≫ O.ι) (V := Scheme.Etale.mk O.ι)
       (W := Scheme.Etale.mk (𝟙 _)) ψ (Category.id_comp _).symm).app P.obj = 0) :
     supportedRestrictionMap A b a y h P = 0 := by
   rw [supportedRestrictionMap_eq_zero_iff A b a y h P hT hB, puncturedRestrictionMap,
@@ -111,14 +111,14 @@ theorem supportedRestrictionMap_eq_zero_of_restriction
     (V := Scheme.Etale.mk y.openComplement.ι) (W := Scheme.Etale.mk (𝟙 _)) (𝟙 _)
     rfl).app ((b)^*[A].mapDerivedCategory.obj P.obj))).1 ?_
   refine (sectionsRestriction_comp_app_eq_zero_iff A b y.openComplement.ι _ _ _ _ P.obj).2 ?_
-  have hfac := (sectionsRestriction_comp_app_eq_zero_iff A (𝟙 T) (ψ ≫ w.openComplement.ι)
-    (V := Scheme.Etale.mk a.openComplement.ι) (W := Scheme.Etale.mk w.openComplement.ι)
-    (W'' := Scheme.Etale.mk (𝟙 _)) (Scheme.Hom.resLE (𝟙 T) a.openComplement w.openComplement hw)
+  have hfac := (sectionsRestriction_comp_app_eq_zero_iff A (𝟙 T) (ψ ≫ O.ι)
+    (V := Scheme.Etale.mk a.openComplement.ι) (W := Scheme.Etale.mk O.ι)
+    (W'' := Scheme.Etale.mk (𝟙 _)) (Scheme.Hom.resLE (𝟙 T) a.openComplement O hw)
     (Scheme.Hom.resLE_comp_ι _ _) ψ
     (Category.id_comp _).symm P.obj).1
   refine (sectionsRestriction_app_eq_zero_iff_of_eq A ?_ ?_ _ _ _).1 (hfac ?_)
   · simp [hψ]
-  · change ψ ≫ Scheme.Hom.resLE (𝟙 T) a.openComplement w.openComplement hw =
+  · change ψ ≫ Scheme.Hom.resLE (𝟙 T) a.openComplement O hw =
       𝟙 _ ≫ Scheme.Hom.resLE b _ _ h
     rw [← cancel_mono a.openComplement.ι]
     simp [hψ]
