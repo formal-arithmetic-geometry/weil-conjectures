@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineGeneric
+public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimensionReduction
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
@@ -400,19 +401,20 @@ cohomological dimension of a curve over an algebraically closed field is at most
 sharper bound for affine `C` is
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
 
-The proof compares `C` with an affine open `U` whose complement is a finite set of closed
-points and uses only the vanishing of `H²` on affine curves
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine`): by dimension shifting
-through acyclic envelopes of sheaves killed by an integer, the higher direct images of
-`U ⟶ C` in degrees at least two do not contribute
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall`).
-(blueprint: `sk-prop-cd`) -/
+The proof reduces to integral curves
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint `sk-prop-cd`,
+Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components `cₚ : Zₚ ⟶ C` with their
+reduced structure assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an isomorphism away from
+finitely many closed points, hence bijective on `Hᵠ` for `q ≥ 2`. On an integral curve the
+vanishing is the generic-point argument of
+`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral`: `Hᵠ(C, F)` agrees
+with `Hᵠ(C, η_* η^* F)` for the generic point `η`, and the function field has cohomological
+dimension at most one. (blueprint: `sk-prop-cd`) -/
 @[stacks 03SC "(1)"]
 theorem subsingleton_sheafH_of_three_le (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) :=
-  subsingleton_sheafH_of_three_le_of_forall f
-    (fun _ f' _ _ F' hF' ↦ subsingleton_sheafH_two_of_isAffine f' F' hF') F hF q hq
+  subsingleton_sheafH_of_three_le_generic f F hF q hq
 
 end IsCurve
 

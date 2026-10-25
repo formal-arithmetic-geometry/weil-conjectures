@@ -88,7 +88,7 @@ datum, see `AlgebraicGeometry.exists_isPullback_of_coaction`. -/
 theorem isEffective_of_isAffine {X Y : Scheme.{u}} {p : X ⟶ Y} [IsAffine X] [IsAffine Y]
     [Flat p] [Surjective p] {V : Over X} [IsAffine V.left] (D : DescentDatum p V) :
     D.IsEffective := by
-  obtain ⟨N, nY, q, hq, hγq⟩ := exists_isPullback_of_coaction p V.hom D.univ
+  obtain ⟨N, -, nY, q, hq, hγq⟩ := exists_isPullback_of_coaction p V.hom D.univ
     D.univ_hom D.coactionUnit_univ D.coactionMap_univ
   refine ⟨Over.mk nY, q, hq, fun f₁ f₂ h a ↦ ?_⟩
   rw [D.transport_left_eq, Category.assoc, hγq, Limits.pullback.lift_fst_assoc]
