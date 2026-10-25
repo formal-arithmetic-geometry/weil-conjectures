@@ -173,7 +173,9 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
     (((boundedConstructibleLowerShriek _ ℓ p').map
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app T) ≫
         (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
-          ((boundedConstructibleUpperStar _ ℓ q).obj T)) ▷ M) ≫
+          ((boundedConstructibleUpperStar _ ℓ q).obj T) :
+          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ p).obj
+            ((boundedConstructibleUpperStar _ ℓ q).obj T))) ▷ M) ≫
       boundedConstructibleExceptionalProjectionMorphism _ ℓ f
         ((boundedConstructibleLowerShriek _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ q).obj T))
         M ≫
