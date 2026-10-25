@@ -41,20 +41,7 @@ noncomputable abbrev Vc : D.C.Opens := D.p ⁻¹ᵁ puncturedOpens D.W _ M.isClo
 /-- The complement `T' ∖ (D' ∪ H')`. -/
 noncomputable abbrev O' : D.T'.Opens := D.dD'.openComplement ⊓ D.dH'.openComplement
 
-lemma π_comp_τ : D.π ≫ M.τ = strictLocalizationToBase D.s' ≫ D.g := by
-  have key : ∀ (a b : Spec (.of k) ⟶ pullback M.f M.f) (_ : a = b)
-      (h : strictLocalization a = strictLocalization b),
-      eqToHom h ≫ strictLocalizationToBase b = strictLocalizationToBase a := by
-    rintro a _ rfl h
-    simp
-  rw [π, Category.assoc, key _ _ D.s'_comp_g, strictLocalizationMap_comp_strictLocalizationToBase]
 
-
-lemma g_fst : D.g ≫ pullback.fst M.f M.f = pullback.fst D.fC D.fC ≫ D.p := by
-  simp [g]
-
-lemma g_snd : D.g ≫ pullback.snd M.f M.f = pullback.snd D.fC D.fC ≫ D.p := by
-  simp [g]
 
 lemma subset_range_dD' : D.π.base ⁻¹' (Set.range M.a.base ∪ Set.range M.v.base) ⊆
     Set.range D.dD'.base := by

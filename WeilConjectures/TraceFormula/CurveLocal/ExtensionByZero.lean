@@ -133,11 +133,6 @@ namespace CurveLocalModel
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
-omit [IsAlgClosed k] in
-@[reassoc (attr := simp)]
-lemma horizontal_snd : M.horizontal ≫ pullback.snd M.f M.f = M.f ≫ M.y :=
-  pullback.lift_snd _ _ _
-
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 omit [IsAlgClosed k] in

@@ -58,13 +58,6 @@ instance : IsOpenImmersion D.jUU := by
 lemma gU_jUU : D.gU ≫ D.jUU = D.g := by
   apply pullback.hom_ext <;> simp [gU, jUU, g, D.pU_ι]
 
-/-- Transport of strict localizations along an equality of points. -/
-lemma eqToHom_comp_strictLocalizationToBase {S : Scheme.{u}} {a b : Spec (.of k) ⟶ S}
-    (e : a = b) (h : strictLocalization a = strictLocalization b) :
-    eqToHom h ≫ strictLocalizationToBase b = strictLocalizationToBase a := by
-  subst e
-  simp
-
 lemma spec_map_strictHenselizationEval_comp_eqToHom {S : Scheme.{u}} {a b : Spec (.of k) ⟶ S}
     (e : a = b) (h : strictLocalization a = strictLocalization b) :
     Spec.map (strictHenselizationEval a) ≫ eqToHom h = Spec.map (strictHenselizationEval b) := by

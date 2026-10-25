@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstruction
 
@@ -66,7 +67,7 @@ theorem tangentConesMeetAtOrigin :
         (specIdeal D.dB') ∧
       IsLocalRing.TangentConesMeetAtOrigin (strictHenselization D.s') (specIdeal D.dD')
         (specIdeal D.dH') :=
-  sorry
+  D.tangentConesMeetAtOrigin_specIdeal
 
 /-- **The punctured diagonal** (blueprint `det-tf-restriction-zero-covers` (ii)): `B' ∖ y'` is
 finite étale of degree `e²` over `B ∖ y`, compatibly with the inclusions into `T' ∖ D'` and

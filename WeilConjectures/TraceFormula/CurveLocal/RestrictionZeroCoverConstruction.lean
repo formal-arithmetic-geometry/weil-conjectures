@@ -65,6 +65,34 @@ lemma s'_comp_g : D.s' ≫ D.g = M.diagPoint := by
 noncomputable def π : D.T' ⟶ M.T :=
   strictLocalizationMap D.g D.s' ≫ eqToHom (by rw [s'_comp_g])
 
+
+@[reassoc (attr := simp)]
+lemma g_fst : D.g ≫ pullback.fst M.f M.f = pullback.fst D.fC D.fC ≫ D.p :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma g_snd : D.g ≫ pullback.snd M.f M.f = pullback.snd D.fC D.fC ≫ D.p :=
+  pullback.lift_snd _ _ _
+
+@[reassoc (attr := simp)]
+lemma s'_fst : D.s' ≫ pullback.fst D.fC D.fC = D.c :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma s'_snd : D.s' ≫ pullback.snd D.fC D.fC = D.c :=
+  pullback.lift_snd _ _ _
+
+/-- Transport of strict localizations along an equality of points. -/
+lemma eqToHom_comp_strictLocalizationToBase {S : Scheme.{u}} {a b : Spec (.of k) ⟶ S}
+    (e : a = b) (h : strictLocalization a = strictLocalization b) :
+    eqToHom h ≫ strictLocalizationToBase b = strictLocalizationToBase a := by
+  subst e
+  simp
+
+/-- `π` is compatible with `p × p`. -/
+lemma π_comp_τ : D.π ≫ M.τ = strictLocalizationToBase D.s' ≫ D.g := by
+  rw [π, Category.assoc, eqToHom_comp_strictLocalizationToBase D.s'_comp_g,
+    strictLocalizationMap_comp_strictLocalizationToBase]
 /-- The reduced inverse image `D' = G' ∪ V'` of the graph and the vertical axis. -/
 noncomputable abbrev D' : Scheme.{u} :=
   reducedClosed (strictHenselization D.s') (D.π.base ⁻¹' (Set.range M.a.base ∪ Set.range M.v.base))

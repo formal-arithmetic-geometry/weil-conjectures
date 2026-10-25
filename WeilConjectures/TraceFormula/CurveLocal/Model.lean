@@ -120,6 +120,10 @@ instance isClosedImmersion_horizontal : IsClosedImmersion M.horizontal := by
     infer_instance
   exact IsClosedImmersion.of_comp M.horizontal (pullback.fst M.f M.f)
 
+@[reassoc (attr := simp)]
+lemma horizontal_snd : M.horizontal ≫ pullback.snd M.f M.f = M.f ≫ M.y :=
+  pullback.lift_snd _ _ _
+
 /-- The horizontal axis `H` inside `T`. -/
 noncomputable abbrev H : Scheme.{u} := pullback M.horizontal M.τ
 
