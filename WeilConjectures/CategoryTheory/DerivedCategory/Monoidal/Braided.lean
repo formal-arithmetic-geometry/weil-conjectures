@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.BifunctorFlip
 public import Mathlib.CategoryTheory.Monoidal.Braided.Multifunctor
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
 
 /-!
 # The braiding of the derived tensor product, and the symmetry of `D(C)`
@@ -19,7 +20,7 @@ category `D(C)` is monoidal for the derived tensor product, i.e. those of
 product is the binary left derived functor of the tensor product on
 `K(C) := HomotopyCategory C (ComplexShape.up ℤ)`. This file constructs, for `C` braided, the
 braiding isomorphisms of `K(C)` and of `D(C)` as natural isomorphisms of bifunctors, and states
-that `D(C)` is symmetric if `C` is (the symmetry axiom is left as `sorry`).
+that `D(C)` is symmetric if `C` is (the symmetry law is left as `sorry`).
 
 The construction follows the chain
 `C braided ⟹ Koszul braiding on CochainComplex C ℤ ⟹ K(C) braided ⟹ D(C) braided`:
@@ -299,11 +300,12 @@ variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
 
 /-- The derived category of a symmetric abelian monoidal category is symmetric for the
 derived tensor product, with the braiding `DerivedCategory.braidedCategory'`. Only the symmetry
-axiom has to be proved, and being an identity in two variables, it follows from the symmetry of
+identity law has to be proved. Being an identity in two variables, it follows from the symmetry of
 `K(C)` by binary left derived extensionality. -/
 @[instance_reducible]
 noncomputable def symmetricCategory : SymmetricCategory (DerivedCategory C) where
   __ := braidedCategory' C
-  symmetry X Y := sorry
+  symmetry X Y := by
+    exact braiding_hom_braiding_hom C (fun _ _ ↦ SymmetricCategory.symmetry _ _) X Y
 
 end DerivedCategory
