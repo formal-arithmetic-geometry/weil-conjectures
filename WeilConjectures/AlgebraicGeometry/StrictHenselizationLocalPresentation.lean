@@ -30,7 +30,12 @@ namespace AlgebraicGeometry.Scheme
 set_option maxHeartbeats 800000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
-private theorem chart_local_presentation
+/-- In an affine open chart `i : Spec R ⟶ S` through which the geometric point factors as
+`xR ≫ i`, the strict henselization of `S` at `xR ≫ i` is an algebraic strict henselization of
+`R` localized at the image `xR(*)` of the geometric point, compatibly with a ring map
+`b : R ⟶ 𝒪^{sh}` whose spectrum followed by `i` is the structure morphism.
+Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), using Tag 04GW. -/
+theorem strictHenselization_chart_isStrictHenselization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]
     (xR : Spec (.of Ω) ⟶ Spec R) :
@@ -43,6 +48,7 @@ private theorem chart_local_presentation
         (IsLocalRing.ResidueField (Localization.AtPrime q)) K)
       (_ : Algebra (Localization.AtPrime q) (strictHenselization (xR ≫ i)))
       (b : R ⟶ strictHenselization (xR ≫ i)),
+      q = (xR (IsLocalRing.closedPoint Ω)).asIdeal ∧
       Spec.map b ≫ i = strictLocalizationToBase (xR ≫ i) ∧
       (∀ r : R, algebraMap (Localization.AtPrime q) (strictHenselization (xR ≫ i))
         (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧
@@ -163,7 +169,8 @@ private theorem chart_local_presentation
         rw [← Category.assoc, hρ t]
         rfl)
   exact ⟨p.asIdeal, p.isPrime, L, hL, ares, hsep, aL, htower, aH,
-    ρ ≫ ringIso.inv, hstruct, hbase, hH⟩
+    ρ ≫ ringIso.inv, rfl, hstruct, hbase, hH⟩
+
 
 /-- The geometric strict henselization is an algebraic strict henselization of a prime
 localization, compatibly with the given structural ring map. There is no divisor here.
@@ -203,9 +210,9 @@ theorem strictHenselizationRing_local_presentation
         (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧
       Algebra.IsStrictHenselization (Localization.AtPrime q) K
         (strictHenselization barY) := by
-  have h := chart_local_presentation R (𝟙 (Spec R)) barY
+  have h := strictHenselization_chart_isStrictHenselization R (𝟙 (Spec R)) barY
   rw [Category.comp_id] at h
-  obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, ρ, hstruct, hbase, hH⟩ := h
+  obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, ρ, -, hstruct, hbase, hH⟩ := h
   have hρ : ρ = b := by
     apply Spec.map_injective
     have hstruct' : Spec.map ρ = strictLocalizationToBase barY := by

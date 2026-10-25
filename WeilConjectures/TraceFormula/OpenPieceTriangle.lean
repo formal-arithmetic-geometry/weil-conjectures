@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.CurvePieces
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-!
 
@@ -41,14 +42,16 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-open Scheme
+namespace CategoryTheory.Adjunction
 
 /-- A natural transformation `θ : jU ⋙ H ⟶ H' ⋙ jU'` is compatible with the triangle identity of
-an adjunction `jS ⊣ jU`: `H η_{jU K} ≫ θ_{jS jU K} ≫ jU' H' ε_K = θ_K`. -/
+an adjunction `jS ⊣ jU`: the composite
+```
+H (jU K) --H η--> H (jU (jS (jU K))) --θ--> jU' (H' (jS (jU K))) --jU' (H' ε)--> jU' (H' K)
+```
+is `θ_K`. -/
 @[reassoc]
-lemma Adjunction.map_unit_comp_app_comp_map_map_counit {A B A' B' : Type*} [Category* A]
+lemma map_unit_comp_app_comp_map_map_counit {A B A' B' : Type*} [Category* A]
     [Category* B] [Category* A'] [Category* B'] {jS : A ⥤ B} {jU : B ⥤ A} {jU' : B' ⥤ A'}
     {H : A ⥤ A'} {H' : B ⥤ B'} (aj : jS ⊣ jU) (θ : jU ⋙ H ⟶ H' ⋙ jU') (K : B) :
     H.map (aj.unit.app (jU.obj K)) ≫ θ.app (jS.obj (jU.obj K)) ≫
@@ -59,26 +62,11 @@ lemma Adjunction.map_unit_comp_app_comp_map_map_counit {A B A' B' : Type*} [Cate
   rw [← h, ← Functor.map_comp_assoc, Adjunction.right_triangle_components]
   simp
 
-/-- Let `α : R₁ ≅ R ⋙ R'` identify the right adjoint of `L₁ ⊣ R₁` with the composite of the right
-adjoints of `L' ⊣ R'` and `L ⊣ R`, and let `e : L₁ ≅ L' ⋙ L` be the conjugate identification of
-the left adjoints. Then the transpose of `f : A ⟶ R₁ K` under `L₁ ⊣ R₁` is computed through `e`
-and the transpose of `f ≫ α_K` under `L' ⊣ R'`. -/
-lemma Adjunction.conjugateIsoEquiv_symm_inv_app_comp_map_homEquiv_symm_comp_counit
-    {C M D : Type*} [Category* C] [Category* M] [Category* D] {L₁ : C ⥤ D} {R₁ : D ⥤ C}
-    {L' : C ⥤ M} {R' : M ⥤ C} {L : M ⥤ D} {R : D ⥤ M} (adj₁ : L₁ ⊣ R₁) (adj' : L' ⊣ R')
-    (adj : L ⊣ R) (α : R₁ ≅ R ⋙ R') {A : C} {K : D} (f : A ⟶ R₁.obj K) :
-    ((conjugateIsoEquiv adj₁ (adj'.comp adj)).symm α).inv.app A ≫
-        L.map ((adj'.homEquiv _ _).symm (f ≫ α.hom.app K)) ≫ adj.counit.app K =
-      L₁.map f ≫ adj₁.counit.app K := by
-  have h₁ := conjugateEquiv_counit_symm adj₁ (adj'.comp adj) α.hom K
-  have h₂ := ((conjugateIsoEquiv adj₁ (adj'.comp adj)).symm α).inv.naturality f
-  rw [Adjunction.comp_counit_app] at h₁
-  dsimp only [Functor.comp_map, Functor.comp_obj] at h₁ h₂
-  rw [Adjunction.homEquiv_counit]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [h₁, ← reassoc_of% h₂]
-  exact congrArg (L₁.map f ≫ ·)
-    (((conjugateIsoEquiv adj₁ (adj'.comp adj)).symm α).inv_hom_id_app_assoc _ _)
+end CategoryTheory.Adjunction
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
 
 /-! ### Cartesian squares of open immersions -/
 

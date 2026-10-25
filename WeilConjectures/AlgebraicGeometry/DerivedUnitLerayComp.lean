@@ -14,32 +14,35 @@ import WeilConjectures.AlgebraicGeometry.DerivedLerayComp
 
 @[expose] public section
 
-universe u
+universe u' u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
 private theorem derivedUnit_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
-    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f)).unit.app K ≫
-      (lowerStar AddCommGrpCat.{u + 1} (g ≫ f)).rightDerivedFunctor.map
-        ((Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
-          Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
-            (upperStar AddCommGrpCat.{u + 1} g)).hom.app K) =
-    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app K ≫
-      (lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor.map
-        ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app
-          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) ≫
-      (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} g f).hom.app
-        ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory.obj
-          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) := by
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f)).unit.app K ≫
+      (lowerStar A (g ≫ f)).rightDerivedFunctor.map
+        ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
+          Functor.mapDerivedCategoryCompIso (upperStar A f)
+            (upperStar A g)).hom.app K) =
+    (mapDerivedUpperStarLowerStarAdjunction A f).unit.app K ≫
+      (lowerStar A f).rightDerivedFunctor.map
+        ((mapDerivedUpperStarLowerStarAdjunction A g).unit.app
+          ((upperStar A f).mapDerivedCategory.obj K)) ≫
+      (rightDerivedLowerStarComp A g f).hom.app
+        ((upperStar A g).mapDerivedCategory.obj
+          ((upperStar A f).mapDerivedCategory.obj K)) := by
   simpa only [rightDerivedLowerStarComp, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
     Iso.symm_inv, Adjunction.comp_unit_app, Category.assoc, Functor.comp_obj] using
     (unit_conjugateEquiv
-      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).comp
-        (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g))
-      (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f))
-      (Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
-          (upperStar AddCommGrpCat.{u + 1} g)).hom K).symm
+      ((mapDerivedUpperStarLowerStarAdjunction A f).comp
+        (mapDerivedUpperStarLowerStarAdjunction A g))
+      (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f))
+      (Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
+        Functor.mapDerivedCategoryCompIso (upperStar A f)
+          (upperStar A g)).hom K).symm
 
 /-- The derived unit--Leray composites respect inverse-image composition.
 Source: Stacks Project, Tags 015M and 03CB.
@@ -68,40 +71,40 @@ lambda_f,R_g(U_g(U_f(K))). Naturality of lambda_f at eta_g,U_f(K) replaces these
 lambda_f,U_f(K) followed by RGamma_Y(eta_g,U_f(K)). After reassociating, the result is exactly
 the product of the unit-Leray composites for f at K and for g at U_f(K). -/
 theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
-    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map
-      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f)).unit.app K) ≫
-    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} (g ≫ f)).hom.app
-      ((upperStar AddCommGrpCat.{u + 1} (g ≫ f)).mapDerivedCategory.obj K) ≫
-    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Z).map
-      ((Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
-          (upperStar AddCommGrpCat.{u + 1} g)).hom.app K) =
-    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map
-      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app K) ≫
-    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} f).hom.app
-      ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K) ≫
-    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
-      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app
-        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) ≫
-    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} g).hom.app
-      ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory.obj
-        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) := by
-  let C := Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
-      (upperStar AddCommGrpCat.{u + 1} g)
-  let U := (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory
-  let V := (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory
-  let R := (lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor
-  let G := rightDerivedGlobalSections AddCommGrpCat.{u + 1} X
-  let H := rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y
-  let eta := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app K
-  let theta := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (rightDerivedGlobalSections A X).map
+      ((mapDerivedUpperStarLowerStarAdjunction A (g ≫ f)).unit.app K) ≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A (g ≫ f)).hom.app
+      ((upperStar A (g ≫ f)).mapDerivedCategory.obj K) ≫
+    (rightDerivedGlobalSections A Z).map
+      ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
+        Functor.mapDerivedCategoryCompIso (upperStar A f)
+          (upperStar A g)).hom.app K) =
+    (rightDerivedGlobalSections A X).map
+      ((mapDerivedUpperStarLowerStarAdjunction A f).unit.app K) ≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A f).hom.app
+      ((upperStar A f).mapDerivedCategory.obj K) ≫
+    (rightDerivedGlobalSections A Y).map
+      ((mapDerivedUpperStarLowerStarAdjunction A g).unit.app
+        ((upperStar A f).mapDerivedCategory.obj K)) ≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A g).hom.app
+      ((upperStar A g).mapDerivedCategory.obj
+        ((upperStar A f).mapDerivedCategory.obj K)) := by
+  let C := Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
+    Functor.mapDerivedCategoryCompIso (upperStar A f)
+      (upperStar A g)
+  let U := (upperStar A f).mapDerivedCategory
+  let V := (upperStar A g).mapDerivedCategory
+  let R := (lowerStar A f).rightDerivedFunctor
+  let G := rightDerivedGlobalSections A X
+  let H := rightDerivedGlobalSections A Y
+  let eta := (mapDerivedUpperStarLowerStarAdjunction A f).unit.app K
+  let theta := (mapDerivedUpperStarLowerStarAdjunction A g).unit.app
     (U.obj K)
   let lambda := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-    AddCommGrpCat.{u + 1} f).hom
+    A f).hom
   let mu := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-    AddCommGrpCat.{u + 1} (g ≫ f)).hom
+    A (g ≫ f)).hom
   have hn := mu.naturality (C.hom.app K)
   have hu := congrArg G.map (derivedUnit_comp f g K)
   have hl := derivedLeray_comp f g (V.obj (U.obj K))

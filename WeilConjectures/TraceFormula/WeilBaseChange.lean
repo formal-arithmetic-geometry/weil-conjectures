@@ -14,7 +14,8 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunction
 For a cartesian square `g' ≫ f = f' ≫ g` of separated schemes of finite type over `Spec k`,
 compatible with automorphisms of the four corners, the compact-support base-change isomorphism
 `Ex_! : Lg^* Rf_! K ≅ Rf'_! Lg'^* K` is an isomorphism of Weil objects, so that both have the
-same local traces (`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar_weilLowerShriek`).
+same local traces
+(`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek`).
 Its compatibility with the Frobenius structures is the pasting law of `Ex_!` (blueprint
 `fix-lem-exchanges`, item (2)) applied to the rectangles formed by the square and the Frobenius
 squares, in the two possible orders
@@ -152,13 +153,13 @@ include sq in
 `Lg^* Rf_! K` and `Rf'_! Lg'^* K` agree. The base-change isomorphism
 `Ex_! : Lg^* Rf_! K ≅ Rf'_! Lg'^* K` is an isomorphism of Weil objects
 (`CategoryTheory.Endofunctor.IsoAlgebra.compMapOfNatIsoIsoOfIso` applied to `Ex_!`). -/
-theorem weilStalkSupertrace_weilUpperStar_weilLowerShriek [Finite k]
+theorem weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek [Finite k]
     (K : WeilBoundedConstructible ℓ eX.hom)
     (n : ℕ) (y : Spec (.of (AlgebraicClosure k)) ⟶ Y'.left)
-    (hy : y ≫ (eY'.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ y) :
-    weilStalkSupertrace ℓ n y hy
+    (hy : y ≫ (eY'.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ y) :
+    weilStalkTraceAlternatingSum ℓ (n + 1) y hy
         ((weilUpperStar ℓ eY'.hom eY.hom g hg).obj ((weilLowerShriek ℓ eX eY hf).obj K)) =
-      weilStalkSupertrace ℓ n y hy
+      weilStalkTraceAlternatingSum ℓ (n + 1) y hy
         ((weilLowerShriek ℓ eX' eY' hf').obj ((weilUpperStar ℓ eX'.hom eX.hom g' hg').obj K)) := by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have iso : weilLowerShriek ℓ eX eY hf ⋙ weilUpperStar ℓ eY'.hom eY.hom g hg ≅
@@ -168,7 +169,7 @@ theorem weilStalkSupertrace_weilUpperStar_weilLowerShriek [Finite k]
       (weilUpperStarComparison ℓ eX'.hom eX.hom g' hg') (weilLowerShriekComparison ℓ eX' eY' hf')
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
       (weilUpperStarLowerShriekIso_comm ℓ sq hg' hf' hf hg)
-  exact weilStalkSupertrace_congr ℓ n y hy (iso.app K)
+  exact weilStalkTraceAlternatingSum_congr ℓ n y hy (iso.app K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

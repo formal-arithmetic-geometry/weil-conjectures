@@ -22,7 +22,10 @@ this file proves the two coherences behind the pullback of Weil sheaves:
   isomorphism `P w (P g F) ≅ P (w ≫ g) F` is an isomorphism between the stalk at `w` of the
   `(n + 1)`-st iterate of the pullback of `F`, and the stalk at `w ≫ g` of the `(n + 1)`-st iterate
   of `F` (`Endofunctor.IsoAlgebra.nonempty_obj_obj_iso_of_eq` is the form used for concrete
-  instances, whose functors are given through equations).
+  instances, whose functors are given through equations);
+- `Endofunctor.IsoAlgebra.overPowFunctor_succ`: for identity isomorphisms `P 𝟙 ≅ 𝟭` compatible
+  with the composition isomorphisms, the iterates with `Iso.powStr` at `n + 1` are the iterates
+  with `Iso.powSuccStr` at `n`.
 
 ## Implementation notes
 
@@ -77,28 +80,39 @@ theorem Iso.powSuccStr_pullbackFamilyComparison (hc : PullbackAssoc P c) {W X : 
     (φ : (P eX.hom).obj F ≅ F) (n : ℕ) :
     (eW.powSuccStr (fun f ↦ P f) (fun f f' ↦ c f f')
         ((pullbackFamilyComparison (c := c) g eW.hom eX.hom hg).app F ≪≫ (P g).mapIso φ) n).hom =
-      (pullbackFamilyComparison (c := c) g (eW.powSucc n).hom (eX.powSucc n).hom
-          (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eW eX hg n)).hom.app F ≫
+      (pullbackFamilyComparison (c := c) g (eW.pow (n + 1)).hom (eX.pow (n + 1)).hom
+          (Iso.pow_hom_comp_eq_comp_pow_hom eW eX hg n)).hom.app F ≫
         (P g).map (eX.powSuccStr (fun f ↦ P f) (fun f f' ↦ c f f') φ n).hom := by
   induction n with
-  | zero => rfl
+  | zero =>
+    have key : ∀ {E E' : W ⟶ W} {e e' : X ⟶ X} (hE : E = E') (he : e = e')
+        (s : E ≫ g = g ≫ e) (s' : E' ≫ g = g ≫ e'),
+        eqToHom (congrArg (fun t ↦ (P t).obj ((P g).obj F)) hE) ≫
+            (pullbackFamilyComparison (c := c) g E' e' s').hom.app F =
+          (pullbackFamilyComparison (c := c) g E e s).hom.app F ≫
+            (P g).map (eqToHom (congrArg (fun t ↦ (P t).obj F) he)) := by
+      rintro E _ e _ rfl rfl s s'
+      simp
+    rw [Iso.powSuccStr_zero, Iso.powSuccStr_zero]
+    simp only [Iso.trans_hom, eqToIso.hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp]
+    exact (reassoc_of% key (Category.id_comp eW.hom) (Category.id_comp eX.hom) _ hg) _
   | succ n ih =>
-    have hn := Iso.powSucc_hom_comp_eq_comp_powSucc_hom eW eX hg n
-    change (c (eW.powSucc n).hom eW.hom).hom.app ((P g).obj F) ≫
-        (P (eW.powSucc n).hom).map
+    have hn := Iso.pow_hom_comp_eq_comp_pow_hom eW eX hg n
+    change (c (eW.pow (n + 1)).hom eW.hom).hom.app ((P g).obj F) ≫
+        (P (eW.pow (n + 1)).hom).map
           ((pullbackFamilyComparison (c := c) g eW.hom eX.hom hg).hom.app F ≫ (P g).map φ.hom) ≫
         (eW.powSuccStr (fun f ↦ P f) (fun f f' ↦ c f f')
           ((pullbackFamilyComparison (c := c) g eW.hom eX.hom hg).app F ≪≫ (P g).mapIso φ) n).hom =
-      (pullbackFamilyComparison (c := c) g ((eW.powSucc n).hom ≫ eW.hom)
-          ((eX.powSucc n).hom ≫ eX.hom)
+      (pullbackFamilyComparison (c := c) g ((eW.pow (n + 1)).hom ≫ eW.hom)
+          ((eX.pow (n + 1)).hom ≫ eX.hom)
           (by rw [Category.assoc, hg, ← Category.assoc, hn, Category.assoc])).hom.app F ≫
-        (P g).map ((c (eX.powSucc n).hom eX.hom).hom.app F ≫
-          (P (eX.powSucc n).hom).map φ.hom ≫
+        (P g).map ((c (eX.pow (n + 1)).hom eX.hom).hom.app F ≫
+          (P (eX.pow (n + 1)).hom).map φ.hom ≫
           (eX.powSuccStr (fun f ↦ P f) (fun f f' ↦ c f f') φ n).hom)
     rw [ih]
     simp only [pullbackFamilyComparison_hom_app, Functor.map_comp, Category.assoc]
-    have nat₁ := (c (eW.powSucc n).hom g).inv.naturality φ.hom
-    have nat₂ := (c g (eX.powSucc n).hom).hom.naturality φ.hom
+    have nat₁ := (c (eW.pow (n + 1)).hom g).inv.naturality φ.hom
+    have nat₂ := (c g (eX.pow (n + 1)).hom).hom.naturality φ.hom
     simp only [Functor.comp_map] at nat₁ nat₂
     rw [reassoc_of% nat₁, map_comp_eqToHom_of_eq_assoc hn, reassoc_of% nat₂,
       pullbackFamilyComparison_comp_aux_assoc hc g _ _ _ _ hn hg F]
@@ -114,8 +128,8 @@ theorem Iso.powSuccStr_hom_eq_of_hom_eq (hc : PullbackAssoc P c) {W X : C} (eW :
       (pullbackFamilyComparison (c := c) g eW.hom eX.hom hg).hom.app F ≫ (P g).map φ.hom)
     (n : ℕ) :
     (eW.powSuccStr (fun f ↦ P f) (fun f f' ↦ c f f') ψ n).hom =
-      (pullbackFamilyComparison (c := c) g (eW.powSucc n).hom (eX.powSucc n).hom
-          (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eW eX hg n)).hom.app F ≫
+      (pullbackFamilyComparison (c := c) g (eW.pow (n + 1)).hom (eX.pow (n + 1)).hom
+          (Iso.pow_hom_comp_eq_comp_pow_hom eW eX hg n)).hom.app F ≫
         (P g).map (eX.powSuccStr (fun f ↦ P f) (fun f f' ↦ c f f') φ n).hom := by
   obtain rfl : ψ = (pullbackFamilyComparison (c := c) g eW.hom eX.hom hg).app F ≪≫ (P g).mapIso φ :=
     Iso.ext hψ
@@ -151,9 +165,16 @@ variable (c) in
 isomorphism. -/
 noncomputable def Endofunctor.IsoAlgebra.overPowSucc {X : Over T} (e : X ≅ X) (n : ℕ)
     (G : Endofunctor.IsoAlgebra (P e.hom.left)) :
-    Endofunctor.IsoAlgebra (P (e.powSucc n).hom.left) :=
+    Endofunctor.IsoAlgebra (P (e.pow (n + 1)).hom.left) :=
   Endofunctor.IsoAlgebra.mk G.carrier
     (e.powSuccStr (fun f ↦ P f.left) (fun f f' ↦ c f.left f'.left) G.str n)
+
+/-- The underlying morphism of `eqToHom` between algebras is `eqToHom` of the carriers. -/
+lemma Endofunctor.IsoAlgebra.eqToHom_hom_f {F : C ⥤ C} {A B : Endofunctor.IsoAlgebra F}
+    (h : A = B) :
+    (eqToHom h).hom.f = eqToHom (congrArg Endofunctor.IsoAlgebra.carrier h) := by
+  subst h
+  rfl
 
 variable (c) in
 /-- The stalk of algebras at a point `x : S ⟶ V` with `x ≫ e = s ≫ x`, for `τ : P s ≅ 𝟭`. -/
@@ -168,7 +189,8 @@ variable (c) in
 /-- An algebra for `P e` as an algebra for `P e^{n+1}` (`Endofunctor.IsoAlgebra.overPowSucc`), as a
 functor. -/
 noncomputable def Endofunctor.IsoAlgebra.overPowSuccFunctor {X : Over T} (e : X ≅ X) (n : ℕ) :
-    Endofunctor.IsoAlgebra (P e.hom.left) ⥤ Endofunctor.IsoAlgebra (P (e.powSucc n).hom.left) where
+    Endofunctor.IsoAlgebra (P e.hom.left) ⥤
+      Endofunctor.IsoAlgebra (P (e.pow (n + 1)).hom.left) where
   obj G := Endofunctor.IsoAlgebra.overPowSucc c e n G
   map {G H} φ := Endofunctor.IsoAlgebra.mkHom φ.hom.f
     (e.powSuccStr_hom_naturality (fun f ↦ P f.left) (fun f f' ↦ c f.left f'.left) (φ := G.str)
@@ -177,11 +199,45 @@ noncomputable def Endofunctor.IsoAlgebra.overPowSuccFunctor {X : Over T} (e : X 
   map_comp _ _ := Endofunctor.IsoAlgebra.mkHom_comp _ _ _ _ _
 
 variable (c) in
+/-- An algebra `(F, φ)` for `P e` as an algebra for `P eᵐ`, with the iterated structure
+isomorphism `Iso.powStr` for identity isomorphisms `ι Y : P 𝟙 ≅ 𝟭`, as a functor. -/
+noncomputable def Endofunctor.IsoAlgebra.overPowFunctor (ι : ∀ Y : C, P (𝟙 Y) ≅ 𝟭 (D Y))
+    {X : Over T} (e : X ≅ X) (m : ℕ) :
+    Endofunctor.IsoAlgebra (P e.hom.left) ⥤ Endofunctor.IsoAlgebra (P (e.pow m).hom.left) where
+  obj G := Endofunctor.IsoAlgebra.mk G.carrier
+    (e.powStr (fun f ↦ P f.left) (ι X.left) (fun f f' ↦ c f.left f'.left) G.str m)
+  map {G H} φ := Endofunctor.IsoAlgebra.mkHom φ.hom.f
+    (e.powStr_hom_naturality (fun f ↦ P f.left) (ι X.left) (fun f f' ↦ c f.left f'.left)
+      (φ := G.str) (ψ := H.str) φ.hom.f φ.hom.h m)
+  map_id _ := Endofunctor.IsoAlgebra.mkHom_id _
+  map_comp _ _ := Endofunctor.IsoAlgebra.mkHom_comp _ _ _ _ _
+
+/-- For identity isomorphisms `ι` compatible with the composition isomorphisms, the
+`(n + 1)`-st iterate with `Iso.powStr` is the `(n + 1)`-st iterate with `Iso.powSuccStr`. -/
+theorem Endofunctor.IsoAlgebra.overPowFunctor_succ (ι : ∀ Y : C, P (𝟙 Y) ≅ 𝟭 (D Y))
+    (hι : ∀ {Y Z : C} (t : Y ⟶ Z), c (𝟙 Y) t ≪≫ Functor.isoWhiskerLeft (P t) (ι Y) ≪≫
+      Functor.rightUnitor (P t) = eqToIso (congrArg P (Category.id_comp t)))
+    {X : Over T} (e : X ≅ X) (n : ℕ) :
+    Endofunctor.IsoAlgebra.overPowFunctor c ι e (n + 1) =
+      Endofunctor.IsoAlgebra.overPowSuccFunctor c e n := by
+  have h (G : Endofunctor.IsoAlgebra (P e.hom.left)) :
+      e.powStr (fun f ↦ P f.left) (ι X.left) (fun f f' ↦ c f.left f'.left) G.str (n + 1) =
+        e.powSuccStr (fun f ↦ P f.left) (fun f f' ↦ c f.left f'.left) G.str n :=
+    e.powStr_succ_eq_powSuccStr (fun f ↦ P f.left) (ι X.left) (fun f f' ↦ c f.left f'.left) G.str
+      (hι e.hom.left) n
+  refine Functor.ext (fun G ↦ congrArg (Endofunctor.IsoAlgebra.mk G.carrier) (h G))
+    fun G H φ ↦ ObjectProperty.hom_ext _ (Algebra.Hom.ext ?_)
+  rw [Endofunctor.IsoAlgebra.comp_hom_f, Endofunctor.IsoAlgebra.comp_hom_f,
+    Endofunctor.IsoAlgebra.eqToHom_hom_f, Endofunctor.IsoAlgebra.eqToHom_hom_f]
+  change φ.hom.f = 𝟙 G.carrier ≫ φ.hom.f ≫ 𝟙 H.carrier
+  rw [Category.id_comp, Category.comp_id]
+
+variable (c) in
 /-- The stalk at a point `x` with `x ≫ e^{n+1} = s ≫ x` of algebras for `P e`, with their
 `(n + 1)`-st structure isomorphisms. -/
 noncomputable def Endofunctor.IsoAlgebra.frobeniusStalkFunctor {S : C} {s : S ⟶ S}
     (τ : P s ≅ 𝟭 (D S))
-    {V : Over T} (e : V ≅ V) (n : ℕ) (x : S ⟶ V.left) (hx : x ≫ (e.powSucc n).hom.left = s ≫ x) :
+    {V : Over T} (e : V ≅ V) (n : ℕ) (x : S ⟶ V.left) (hx : x ≫ (e.pow (n + 1)).hom.left = s ≫ x) :
     Endofunctor.IsoAlgebra (P e.hom.left) ⥤ Endofunctor.IsoAlgebra (𝟭 (D S)) :=
   Endofunctor.IsoAlgebra.overPowSuccFunctor c e n ⋙ Endofunctor.IsoAlgebra.stalk c τ x _ hx
 
@@ -189,7 +245,7 @@ variable (c) in
 /-- The stalk at `x` of an algebra for `P e`, with its `(n + 1)`-st structure isomorphism. -/
 noncomputable def Endofunctor.IsoAlgebra.frobeniusStalk {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S))
     {V : Over T}
-    (e : V ≅ V) (n : ℕ) (x : S ⟶ V.left) (hx : x ≫ (e.powSucc n).hom.left = s ≫ x)
+    (e : V ≅ V) (n : ℕ) (x : S ⟶ V.left) (hx : x ≫ (e.pow (n + 1)).hom.left = s ≫ x)
     (G : Endofunctor.IsoAlgebra (P e.hom.left)) : Endofunctor.IsoAlgebra (𝟭 (D S)) :=
   (Endofunctor.IsoAlgebra.frobeniusStalkFunctor c τ e n x hx).obj G
 
@@ -199,7 +255,7 @@ variable (c) in
 noncomputable def Endofunctor.IsoAlgebra.pullbackFrobeniusStalk {X W : Over T} (eX : X ≅ X) (eW : W
     ≅ W)
     {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom) (n : ℕ) {S : C} {s : S ⟶ S} (τ : P s ≅ 𝟭 (D S))
-    (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
+    (w : S ⟶ W.left) (hw : w ≫ (eW.pow (n + 1)).hom.left = s ≫ w)
     (F : Endofunctor.IsoAlgebra (P eX.hom.left)) : Endofunctor.IsoAlgebra (𝟭 (D S)) :=
   (Endofunctor.IsoAlgebra.frobeniusStalkFunctor c τ eW n w hw).obj
       ((Endofunctor.IsoAlgebra.overPullback c eX eW hg).obj F)
@@ -211,12 +267,12 @@ of `F`. -/
 theorem Endofunctor.IsoAlgebra.nonempty_stalk_overPowSucc_overPullback_iso (hc : PullbackAssoc P c)
     {X W : Over T} (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
     (F : Endofunctor.IsoAlgebra (P eX.hom.left)) (n : ℕ) {S : C} {s : S ⟶ S}
-    (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
-    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x) :
+    (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.pow (n + 1)).hom.left = s ≫ w)
+    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.pow (n + 1)).hom.left = s ≫ x) :
     Nonempty (Endofunctor.IsoAlgebra.pullbackFrobeniusStalk c eX eW hg n τ w hw F ≅
       Endofunctor.IsoAlgebra.frobeniusStalk c τ eX n x hwg F) := by
   subst hx
-  have hgn := Iso.powSucc_hom_comp_eq_comp_powSucc_hom eW eX hg n
+  have hgn := Iso.pow_hom_comp_eq_comp_pow_hom eW eX hg n
   refine ⟨Endofunctor.IsoAlgebra.isoMk ((c w g.left).app F.carrier).symm ?_⟩
   change (c w g.left).inv.app F.carrier ≫
       ((pullbackFamilyStalkComparison (c := c) τ (w ≫ g.left) _ hwg).hom.app F.carrier ≫
@@ -245,8 +301,8 @@ categories and functors, together with `rfl` and functor-level equations. -/
 theorem Endofunctor.IsoAlgebra.nonempty_obj_obj_iso_of_eq (hc : PullbackAssoc P c) {X W : Over T}
     (eX : X ≅ X) (eW : W ≅ W) {g : W ⟶ X} (hg : eW.hom ≫ g = g ≫ eX.hom)
     (n : ℕ) {S : C} {s : S ⟶ S}
-    (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.powSucc n).hom.left = s ≫ w)
-    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.powSucc n).hom.left = s ≫ x)
+    (τ : P s ≅ 𝟭 (D S)) (w : S ⟶ W.left) (hw : w ≫ (eW.pow (n + 1)).hom.left = s ≫ w)
+    {x : S ⟶ X.left} (hx : w ≫ g.left = x) (hwg : x ≫ (eX.pow (n + 1)).hom.left = s ≫ x)
     (𝒜X 𝒜W ℬ : Type _) {i𝒜X : Category 𝒜X} {i𝒜W : Category 𝒜W} {iℬ : Category ℬ}
     (F : 𝒜X) (Λ₁ : 𝒜X ⥤ 𝒜W) (Φ : 𝒜W ⥤ ℬ) (Ψ : 𝒜X ⥤ ℬ)
     (h𝒜X : (⟨𝒜X, i𝒜X⟩ : Σ A : Type _, Category A) =

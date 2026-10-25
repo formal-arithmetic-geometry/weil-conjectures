@@ -34,6 +34,8 @@ monodromy at `z` extends over `z` (blueprint `cor-wf-unramified-boundary-purity`
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.LisseMonodromy.exists_upperStar_iso_of_rep_eq_self`.
+- `AlgebraicGeometry.Scheme.FiniteEtale.exists_pullbackPathHom_apply_eq`: if `P ×_Y Y'` is
+  connected, `π₁(Y', y)` acts transitively on the fibre of `P` at `y ≫ f`.
 -/
 
 @[expose] public section
@@ -75,6 +77,24 @@ lemma continuous_pullbackPathHom (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') :
     (f := fun a : Aut ((fiber y).obj ((pullback f).obj P)) ↦
       ((pullbackFiberIso f y).app P).symm ≪≫ a ≪≫ (pullbackFiberIso f y).app P)).comp hc).congr
     fun σ ↦ rfl
+
+open PreGaloisCategory in
+/-- If the base change `P ×_Y Y'` of a finite étale `Y`-scheme along `f : Y' ⟶ Y` is connected,
+the
+automorphisms of the fibre functor at `y` act transitively on the fibre of `P` at `y ≫ f`, through
+`pullbackPathHom`. -/
+lemma exists_pullbackPathHom_apply_eq [ConnectedSpace Y'] (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y')
+    (P : Y.FiniteEtale) [IsConnected ((pullback f).obj P)] (a b : (fiber (y ≫ f)).obj P) :
+    ∃ τ : Aut (fiber y), (pullbackPathHom f y τ).hom.app P a = b := by
+  have key (a' : (fiber y).obj ((pullback f).obj P)) :
+      ∃ τ : Aut (fiber y), τ.hom.app _ a' = (pullbackFiberIso f y).inv.app P b :=
+    MulAction.exists_smul_eq _ a' _
+  obtain ⟨τ, hτ⟩ := key ((pullbackFiberIso f y).inv.app P a)
+  refine ⟨τ, ?_⟩
+  have h : (pullbackPathHom f y τ).hom.app P a = (pullbackFiberIso f y).hom.app P
+      (τ.hom.app _ ((pullbackFiberIso f y).inv.app P a)) := rfl
+  rw [h, hτ]
+  exact ConcreteCategory.congr_hom ((pullbackFiberIso f y).inv_hom_id_app P) b
 
 end Scheme.FiniteEtale
 

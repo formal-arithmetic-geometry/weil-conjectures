@@ -32,11 +32,11 @@ model-Frobenius setting of the Lefschetz–Verdier formula, living over `Ω` wit
 * A morphism `x̄ : Spec Ω ⟶ X` over `Spec k` is the same as an `Ω`-rational point
   `x̄' = (x̄, 𝟙)` of `X̄` (`AlgebraicGeometry.geometricBaseChangePoint`). Let `σ` be an
   automorphism of `Spec Ω` inverse to `Spec(y ↦ y ^ (q ^ N))`; for `Ω = k̄` this is `σ^N` for the
-  Galois Frobenius `σ` (`AlgebraicGeometry.geometricFrobeniusField_powSucc_inv`). Then
+  Galois Frobenius `σ` (`AlgebraicGeometry.geometricFrobeniusField_pow_inv`). Then
   `x̄ ≫ g = σ ≫ x̄` if and only if `x̄'` is fixed by `Φ = (g ≫ F_X^N) ×_k Ω`
   (`AlgebraicGeometry.geometricBaseChangePoint_comp_modelFrobenius_eq_iff`), since
   `x̄ ≫ F_X^N = Spec(y ↦ y ^ (q ^ N)) ≫ x̄`. In particular the points of degree `n + 1` for `e`
-  (`ProEtale.CondensedRing.frobeniusFixedPoints e n`) are the rational points of `X̄` fixed by
+  (`ProEtale.CondensedRing.frobeniusFixedPoints e (n + 1)`) are the rational points of `X̄` fixed by
   `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` (`AlgebraicGeometry.frobeniusFixedPointsEquiv`).
 
 The statements are made for a general field `Ω` and specialized to `Ω = k̄` only at the end:
@@ -176,10 +176,10 @@ lemma geometricFrobenius_pow_apply_pow (N : ℕ) (y : AlgebraicClosure k) :
 
 /-- The `N`-th power of the geometric Frobenius `σ` of `Spec k̄` is inverse to `Spec` of the
 `#k ^ N`-power map of `k̄`: `σ^N ≫ Spec(y ↦ y ^ (#k ^ N)) = 𝟙`. -/
-lemma geometricFrobeniusField_powSucc_hom_comp_specMap (n : ℕ) :
-    ((geometricFrobeniusField k).powSucc n).hom ≫
+lemma geometricFrobeniusField_pow_hom_comp_specMap (n : ℕ) :
+    ((geometricFrobeniusField k).pow (n + 1)).hom ≫
       Spec.map (powCardPowRingHom k (AlgebraicClosure k) (n + 1)) = 𝟙 _ := by
-  rw [Iso.powSucc_hom_eq_pow, geometricFrobeniusField_hom_pow, ← Spec.map_comp, ← Spec.map_id]
+  rw [Iso.pow_hom_eq_pow, geometricFrobeniusField_hom_pow, ← Spec.map_comp, ← Spec.map_id]
   congr 1
   ext y
   change ((FiniteField.geometricFrobenius k (AlgebraicClosure k)) ^ (n + 1))
@@ -189,11 +189,11 @@ lemma geometricFrobeniusField_powSucc_hom_comp_specMap (n : ℕ) :
 
 /-- The inverse of the `N`-th power of the geometric Frobenius `σ` of `Spec k̄` is `Spec` of the
 `#k ^ N`-power map of `k̄`. -/
-lemma geometricFrobeniusField_powSucc_inv (n : ℕ) :
-    ((geometricFrobeniusField k).powSucc n).inv =
+lemma geometricFrobeniusField_pow_inv (n : ℕ) :
+    ((geometricFrobeniusField k).pow (n + 1)).inv =
       Spec.map (powCardPowRingHom k (AlgebraicClosure k) (n + 1)) := by
-  rw [← cancel_epi ((geometricFrobeniusField k).powSucc n).hom, Iso.hom_inv_id,
-    geometricFrobeniusField_powSucc_hom_comp_specMap]
+  rw [← cancel_epi ((geometricFrobeniusField k).pow (n + 1)).hom, Iso.hom_inv_id,
+    geometricFrobeniusField_pow_hom_comp_specMap]
 
 end Galois
 
@@ -379,15 +379,15 @@ theorem geometricBaseChangePoint_comp_modelFrobenius_eq_iff (x : Spec (.of Ω) �
 of the base change `X̄ = X ×_k k̄` fixed by the model Frobenius
 `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄`: `x̄ ↦ (x̄, 𝟙)`. -/
 noncomputable def frobeniusFixedPointsEquiv (e : X ≅ X) (n : ℕ) :
-    frobeniusFixedPoints e n ≃
+    frobeniusFixedPoints e (n + 1) ≃
       {y : RationalPoint ((geometricBaseChange k (AlgebraicClosure k)).obj X) //
-        y ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.powSucc n).hom = y} where
+        y ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.pow (n + 1)).hom = y} where
   toFun x := ⟨geometricBaseChangePoint x.1 x.2.1,
     (geometricBaseChangePoint_comp_modelFrobenius_eq_iff _ _ _ _ _
-      (geometricFrobeniusField_powSucc_inv n)).2 x.2.2⟩
+      (geometricFrobeniusField_pow_inv n)).2 x.2.2⟩
   invFun y := ⟨y.1.left ≫ geometricBaseChangeProj X, rationalPoint_left_comp_proj_comp y.1, by
     rw [← geometricBaseChangePoint_comp_modelFrobenius_eq_iff _
-      (rationalPoint_left_comp_proj_comp y.1) _ _ _ (geometricFrobeniusField_powSucc_inv n),
+      (rationalPoint_left_comp_proj_comp y.1) _ _ _ (geometricFrobeniusField_pow_inv n),
       geometricBaseChangePoint_left_comp_proj_eq]
     exact y.2⟩
   left_inv x := Subtype.ext (geometricBaseChangePoint_left_comp_proj _ x.2.1)

@@ -16,7 +16,7 @@ public import WeilConjectures.TraceFormula.CategoricalTrace
 Let `C` be a braided monoidal preadditive category in which the tensor product is additive in
 each variable. The categorical trace of an endomorphism `T` of a finite biproduct `⨁ᵢ Vᵢ` of
 dualizable objects is the sum of the traces of its diagonal blocks `ιᵢ ≫ T ≫ πᵢ`
-(`CategoryTheory.categoricalTrace_eq_sum_of_isBilimit`). In particular, if `T` permutes the
+(`CategoryTheory.traceOrZero_eq_sum_of_isBilimit`). In particular, if `T` permutes the
 summands, only the summands fixed by the permutation contribute.
 
 -/
@@ -126,25 +126,25 @@ theorem Limits.Bicone.nonempty_hasRightDual_pt [HasFiniteBiproducts C] {ι : Typ
 
 /-- The zero endomorphism has trace `0`. -/
 @[simp]
-theorem categoricalTrace_zero {V : C} : categoricalTrace (0 : V ⟶ V) = 0 := by
+theorem traceOrZero_zero {V : C} : traceOrZero (0 : V ⟶ V) = 0 := by
   by_cases h : Nonempty (HasRightDual V)
   · let := h.some
-    rw [categoricalTrace_eq_trace]
+    rw [traceOrZero_eq_trace]
     simp [trace]
-  · rw [categoricalTrace, dif_neg h]
+  · rw [traceOrZero, dif_neg h]
 
 /-- **The trace on a finite biproduct**: the categorical trace of an endomorphism `T` of a finite
 biproduct of dualizable objects `Vᵢ` is the sum of the traces of the diagonal blocks
 `ιᵢ ≫ T ≫ πᵢ`. The finite biproducts in `C` guarantee that `b.pt` has a right dual, the
 biproduct of the right duals of the `Vᵢ`; without them `b.pt` need not be dualizable, and then
 its categorical trace is `0` by definition. -/
-theorem categoricalTrace_eq_sum_of_isBilimit [HasFiniteBiproducts C] {ι : Type*} [Fintype ι]
+theorem traceOrZero_eq_sum_of_isBilimit [HasFiniteBiproducts C] {ι : Type*} [Fintype ι]
     {V : ι → C} {b : Bicone V} (hb : b.IsBilimit) (hV : ∀ i, Nonempty (HasRightDual (V i)))
     (T : b.pt ⟶ b.pt) :
-    categoricalTrace T = ∑ i, categoricalTrace (b.ι i ≫ T ≫ b.π i) := by
+    traceOrZero T = ∑ i, traceOrZero (b.ι i ≫ T ≫ b.π i) := by
   obtain ⟨_⟩ := b.nonempty_hasRightDual_pt hb hV
   let := fun i ↦ (hV i).some
-  simp only [categoricalTrace_eq_trace]
+  simp only [traceOrZero_eq_trace]
   conv_lhs => rw [← Category.comp_id T, ← Limits.IsBilimit.total hb, Preadditive.comp_sum,
     ← traceAddMonoidHom_apply, map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
@@ -154,21 +154,21 @@ theorem categoricalTrace_eq_sum_of_isBilimit [HasFiniteBiproducts C] {ι : Type*
 dualizable objects `Wᵢ`, with projections `πᵢ`, and `T` an endomorphism of `V` such that for
 each `i` either `T ≫ πᵢ = πᵢ ≫ tᵢ` (if `p i`) or `T ≫ πᵢ` factors through `πⱼ` for some `j ≠ i`.
 Then the trace of `T` is the sum of the traces of the `tᵢ` with `p i`. -/
-theorem categoricalTrace_eq_sum_of_isLimit_fan [HasFiniteBiproducts C] {ι : Type*} [Fintype ι]
+theorem traceOrZero_eq_sum_of_isLimit_fan [HasFiniteBiproducts C] {ι : Type*} [Fintype ι]
     {V : C} {W : ι → C} (π : ∀ i, V ⟶ W i) (hπ : IsLimit (Fan.mk V π))
     (hW : ∀ i, Nonempty (HasRightDual (W i))) (T : V ⟶ V) (p : ι → Prop) [DecidablePred p]
     (t : ∀ i, p i → (W i ⟶ W i)) (hp : ∀ i (h : p i), T ≫ π i = π i ≫ t i h)
     (hnp : ∀ i, ¬ p i → ∃ j, j ≠ i ∧ ∃ s : W j ⟶ W i, T ≫ π i = π j ≫ s) :
-    categoricalTrace T = ∑ i, if h : p i then categoricalTrace (t i h) else 0 := by
+    traceOrZero T = ∑ i, if h : p i then traceOrZero (t i h) else 0 := by
   let b := Bicone.ofLimitCone hπ
   have hb : b.IsBilimit := isBilimitOfIsLimit b hπ
-  rw [categoricalTrace_eq_sum_of_isBilimit hb hW T]
+  rw [traceOrZero_eq_sum_of_isBilimit hb hW T]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   have hbπ : ∀ j, b.π j = π j := fun _ ↦ rfl
   split_ifs with h
   · rw [hbπ, hp i h, ← hbπ, bicone_ι_π_self_assoc]
   · obtain ⟨j, hji, s, hs⟩ := hnp i h
     rw [hbπ, hs, ← hbπ, bicone_ι_π_ne_assoc _ (Ne.symm hji), Limits.zero_comp,
-      categoricalTrace_zero]
+      traceOrZero_zero]
 
 end CategoryTheory

@@ -9,6 +9,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConst
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
 public import WeilConjectures.TraceFormula.TraceClassDiagonal
+public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
 
 /-!
 
@@ -272,15 +273,6 @@ section Evaluation
 variable {X C : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
 
-/-- Pullback along equal morphisms commutes with the identification `eqToHom`. -/
-@[reassoc]
-lemma boundedConstructibleUpperStar_map_eqToHom_comm {a b : C ⟶ X} (h : a = b)
-    {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K ⟶ K') :
-    (boundedConstructibleUpperStar _ ℓ a).map f ≫ eqToHom (by rw [h]) =
-      eqToHom (by rw [h]) ≫ (boundedConstructibleUpperStar _ ℓ b).map f := by
-  subst h
-  simp
-
 /-- The exceptional pullback along equal morphisms commutes with the identification
 `eqToHom`. -/
 @[reassoc]
@@ -304,7 +296,7 @@ private lemma diag_upperStar_upperStar_naturality (p : X ⨯ X ⟶ X) (h : diag 
   rw [Functor.comp_map] at h1
   rw [Functor.id_map] at h3
   simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom, eqToIso.hom, Category.assoc]
-  rw [reassoc_of% h1, boundedConstructibleUpperStar_map_eqToHom_comm_assoc _ h, h3]
+  rw [reassoc_of% h1, upperStar_map_comp_eqToHom_congrArg_assoc ℓ _ h, h3]
 
 /-- The naturality of `G (A ⊗ B) ≅ G A ⊗ G B ≅ K ⊗ N` for a monoidal functor `G`, given the
 naturality of the identifications `G A ≅ K` and `G B ≅ N`. -/
@@ -425,7 +417,7 @@ lemma supportedClassOfCoeff_upperStar_map_comp
   unfold supportedClassOfCoeff
   refine comp_eq_comp_comp_of_eq ?_ (inv_kunnethVerdierMap_naturality_right ℓ K₁ g)
   rw [Equiv.symm_apply_eq, correspondenceClassEquiv_naturality_left, Equiv.apply_symm_apply,
-    Category.assoc, boundedConstructibleUpperStar_map_eqToHom_comm_assoc ℓ (support_snd c)]
+    Category.assoc, upperStar_map_comp_eqToHom_congrArg_assoc ℓ _ (support_snd c)]
 
 /-! ### The trace class through the evaluation kernel -/
 

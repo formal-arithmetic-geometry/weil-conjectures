@@ -70,8 +70,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Finite k] [Fact (r
 /-- **Open immersions**: the sheaf–function compatibility holds along an open immersion
 `j : X ⟶ Y`. For a point `ȳ` of `Y` of degree `n + 1`: if `ȳ = x̄ ≫ j`, then
 `t(Rj_! K; ȳ) = t(Lj^* Rj_! K; x̄)` by the stalks of pullbacks
-(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar`), `= t(R𝟙_! L𝟙^* K; x̄)` by compactly
-supported base change along the cartesian square `(𝟙, 𝟙, j, j)` (`j` is a monomorphism), and
+(`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar`), `= t(R𝟙_! L𝟙^* K; x̄)` by
+compactly supported base change along the cartesian square `(𝟙, 𝟙, j, j)` (`j` is a
+monomorphism), and
 `= t(K; x̄)` by the dimension-zero case for `𝟙_X`; the sum on the right has the single term `x̄`.
 Otherwise `ȳ` lies on the reduced closed complement `W`, and `Li^* Rj_! K = 0` by base change
 along the empty square `W ×_Y X = ∅`. The hypothesis `_he` is not needed; it is kept for
@@ -80,7 +81,7 @@ theorem shriekTraceFunctionAt_of_isOpenImmersion {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    [IsOpenImmersion f.left] (_he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
+    [IsOpenImmersion f.left] (_he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) :
     ShriekTraceFunctionAt ℓ eX eY hf := by
   intro K n y
   by_cases hy : y.1.base default ∈ Set.range f.left.base
@@ -98,8 +99,9 @@ theorem shriekTraceFunctionAt_of_isOpenImmersion {X Y : Over (Spec (.of k))}
     have : Etale (𝟙 X : X ⟶ X).left := by
       rw [Over.id_left]
       infer_instance
-    rw [← weilStalkSupertrace_weilUpperStar ℓ eY eX hf,
-      weilStalkSupertrace_weilUpperStar_weilLowerShriek ℓ ((mono_iff_isPullback f).1 ‹_›) hid
+    rw [← weilStalkTraceAlternatingSum_weilUpperStar ℓ eY eX hf,
+      weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek ℓ ((mono_iff_isPullback f).1 ‹_›)
+          hid
         hid hf hf,
       ShriekTraceFunctionAt.of_isFinite_of_etale ℓ eX eX hid _ n v]
     have hv : frobeniusFixedPointsMap eX eX hid n v = v :=
@@ -109,10 +111,10 @@ theorem shriekTraceFunctionAt_of_isOpenImmersion {X Y : Over (Spec (.of k))}
       ((finsum_eq_single _ ⟨v, rfl⟩ fun x hx ↦
         (hx (by exact Subtype.ext (Subtype.ext ((cancel_mono f.left).1 x.2)))).elim).trans
         ?_).symm
-    rw [weilStalkSupertrace_weilUpperStar ℓ eX eX hid K n v, hv]
+    rw [weilStalkTraceAlternatingSum_weilUpperStar ℓ eX eX hid K n v, hv]
   · -- `ȳ` on the reduced closed complement `W`: base change along the empty square
     -- `∅ = W ×_Y X`
-    have : IsEmpty {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1} :=
+    have : IsEmpty {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} :=
       ⟨fun x ↦ hy ⟨x.1.1.base default, congrArg (fun g ↦ g.base default) x.2⟩⟩
     rw [finsum_of_isEmpty]
     have hsub : (reducedComplι f).left.ker ≤ y.1.ker := by
@@ -130,8 +132,8 @@ theorem shriekTraceFunctionAt_of_isOpenImmersion {X Y : Over (Spec (.of k))}
     have h₀' : (Iso.refl emptyOver).hom ≫ emptyOverTo (reducedCompl f) =
         emptyOverTo (reducedCompl f) ≫ (reducedComplIso hf).hom :=
       emptyOverTo_ext _ _
-    rw [← weilStalkSupertrace_weilUpperStar ℓ eY (reducedComplIso hf) hW,
-      weilStalkSupertrace_weilUpperStar_weilLowerShriek ℓ
+    rw [← weilStalkTraceAlternatingSum_weilUpperStar ℓ eY (reducedComplIso hf) hW,
+      weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek ℓ
         (isPullback_emptyOverTo f (reducedComplι f)
           ((range_reducedComplι f).symm ▸ disjoint_compl_right)) h₀ h₀' hf hW,
       shriekTraceFunctionAt_of_isEmpty ℓ (Iso.refl _) (reducedComplIso hf) h₀' _ n v]
