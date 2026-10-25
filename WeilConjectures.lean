@@ -13165,6 +13165,7 @@ public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
 public import WeilConjectures.TraceFormula.Specialization.ComponentClass
+public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.DeformationExchange
 public import WeilConjectures.TraceFormula.Specialization.DeformationModel
@@ -13173,6 +13174,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneri
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduct
 public import WeilConjectures.TraceFormula.Specialization.DeformationProperPoint
+public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreComp
 public import WeilConjectures.TraceFormula.Specialization.DeformationSupport
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
@@ -13195,6 +13197,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnProperShape
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOpen
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.PointSupport
