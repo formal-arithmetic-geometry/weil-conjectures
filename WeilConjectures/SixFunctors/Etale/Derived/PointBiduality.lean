@@ -37,11 +37,10 @@ namespace Etale
 /-- Blueprint `lem-weil-coefficient-frobenius` (the derived form): for the identity of a scheme
 `S`, whose dualizing complex is the unit, the double-dual map of a dualizable `K` is an
 isomorphism. -/
-theorem isIso_verdierDualDoubleDual_app_id_of_isDualizable {(ModuleCat.{u + 1} Λ) : Type u'}
-
- (S : Scheme.{u})
-    {K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hK :
-        IsDualizable K) :
+theorem isIso_verdierDualDoubleDual_app_id_of_isDualizable {Λ : Type (u + 1)} [CommRing Λ]
+    [Finite Λ] (S : Scheme.{u})
+    {K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) :
     IsIso ((verdierDualDoubleDual Λ (𝟙 S)).app K) :=
   isIso_verdierDualDoubleDual_app_of_isDualizable (dualizingComplexIdIso Λ S).symm
     isInvertible_unit hK

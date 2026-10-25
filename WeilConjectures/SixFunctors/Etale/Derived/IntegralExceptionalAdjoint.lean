@@ -70,6 +70,14 @@ local notation "𝐃(" X ", " Λ ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
 
+/-- At integral coefficients the exceptional inverse image is a right adjoint `G` of `Rf_!`,
+assumed to exist; it is `Λ`-linear, `Rf_!` being `Λ`-linear. -/
+instance linear_rightAdjoint_rightDerivedLowerShriek {Λ : Type (u + 1)} [CommRing Λ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
+    (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.Linear Λ :=
+  (Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).right_adjoint_linear
+
 /-! ### The formal dual formula -/
 
 section General

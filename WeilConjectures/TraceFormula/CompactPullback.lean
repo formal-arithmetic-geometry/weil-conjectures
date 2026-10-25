@@ -341,11 +341,11 @@ the identity up to the identity isomorphisms of the pullbacks. -/
 lemma boundedConstructibleUpperStarId_inv_app_comp_baseChange_app
     (sq : IsPullback (𝟙 X) (toPoint X) (toPoint X) (𝟙 (point k)))
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
+    (boundedConstructibleUpperStarId _ ℓ (point k)).inv.app
         ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj M) ≫
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app M =
       (boundedConstructibleLowerShriek ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.app M) := by
+        ((boundedConstructibleUpperStarId _ ℓ X).inv.app M) := by
   have : IsProper (𝟙 X : X ⟶ X).left := inferInstanceAs (IsProper (𝟙 X.left))
   have : IsProper (𝟙 (point k) : point k ⟶ point k).left :=
     inferInstanceAs (IsProper (𝟙 (Spec (.of k))))

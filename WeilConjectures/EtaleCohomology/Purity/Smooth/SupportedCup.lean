@@ -112,7 +112,6 @@ lemma isIso_leftDerivedUpperStar_map_constantComplexToLowerShriekConstantTensor 
   rw [constantComplexToLowerShriekConstantTensor, Functor.map_comp, Functor.map_comp]
   infer_instance
 
-omit [Finite Λ] in
 include hr in
 /-- `Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` vanishes on the open complement of `Z ∩ W`: its restriction to that
 complement vanishes on the complements of `Z` and of `W`, which cover it. -/

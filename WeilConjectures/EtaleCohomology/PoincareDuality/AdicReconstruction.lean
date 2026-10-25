@@ -158,7 +158,7 @@ duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`
 theorem isIso_poincareAdjoint (hKd : IsDualizable K) : IsIso (poincareAdjoint a adj γ K) :=
   (isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a adj γ hKd).isIso_pairingAdjoint
 
-include γ in
+include adj γ in
 /-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: Adic reconstruction and
 scalar extension (the duality isomorphism in `D(Λ)`).
 

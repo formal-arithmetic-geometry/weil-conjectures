@@ -216,6 +216,8 @@ lemma weilCompactCohomology_obj_str (K : WeilBoundedConstructible ℓ Φ) :
           K.str :=
   weilLowerShriekOfFrobenius_obj_str ℓ _ _ _ _ _ _ _ K
 
+set_option maxHeartbeats 1000000 in
+-- the rewrites unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **The Frobenius comparison of `RΓ_c` is the pullback along `Φ`** (blueprint
 `lem-trf-frobenius-operator-compact-description`): for the trivial square of the structure
 morphism, the Frobenius comparison `θ : L(𝟙 s)^* Ra_{X!} ≅ Ra_{X!} LΦ^*` composed with the
