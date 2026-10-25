@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekMate
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
 

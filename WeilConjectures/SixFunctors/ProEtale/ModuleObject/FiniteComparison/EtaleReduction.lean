@@ -39,9 +39,10 @@ finite coefficients (blueprint `sk-lem-tf-curve-restriction-zero`, last step). T
 compatibilities required from section `sec-six-functors-basics`, each exactly one blueprint node:
 
 * `nonempty_etaleReductionUpperStarIso`: pullback (`det-prop-scalar-six-pullback`, (1));
-* `exists_etaleReductionLowerShriekIso`: compactly supported direct image and exceptional
-  inverse image, for closed immersions (`det-prop-scalar-six-exceptional`, with the comparison
-  `γ^!` of `det-prop-scalar-six-compact-support`);
+* compactly supported direct image and exceptional inverse image, for closed immersions
+  (`det-prop-scalar-six-exceptional`, with the comparison `γ^!` of
+  `det-prop-scalar-six-compact-support`): proved as `exists_etaleReductionLowerShriekIso` in
+  the file `FiniteComparison/EtaleReductionLowerShriekMate.lean`;
 * `nonempty_etaleReductionTensorIso`: tensor product (`det-prop-scalar-six-tensor-hom`, (1));
 * `boundedConstructibleFiniteTor_etaleReduction`: preservation of `Dctf`
   (`det-prop-scalar-six-ctf`, (3)).
@@ -104,29 +105,6 @@ noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
       etaleReduction ℓ E n Y ⋙
         L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left) :=
   (nonempty_etaleReductionUpperStarIso ℓ E n f).some
-
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
-`det-prop-scalar-six-exceptional` (with the compact-support comparison `γ^!` of
-`det-prop-scalar-six-compact-support`), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`), for a closed immersion `f`. **Reduction modulo `ℓⁿ`
-commutes with `Rf_!` and with `Rf^!`**: there is an isomorphism `γ^! : (Rf_! K)_{𝒪_E ⧸ ℓⁿ} ≅
-Rf_! (K_{𝒪_E ⧸ ℓⁿ})` whose transpose `β : (Rf^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓⁿ})` under
-`Rf_! ⊣ Rf^!` is an isomorphism.
-
-This is weaker than the blueprint node, and enough for its use in the trace formula: it covers
-only closed immersions `f` (the case used by the trace formula: the supports of graphs of
-correspondences), and it only asserts that some isomorphism `γ` with invertible transpose
-exists, without identifying `γ` with the canonical `γ^!` of the blueprint (nor `β` with its
-canonical comparison). -/
-theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsProper f.left]
-    [IsClosedImmersion f.left] :
-    ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
-        etaleReduction ℓ E n Y ≅
-      etaleReduction ℓ E n Z ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,
-      IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-        (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv)) :=
-  sorry
 
 /-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
 `det-prop-scalar-six-tensor-hom`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the

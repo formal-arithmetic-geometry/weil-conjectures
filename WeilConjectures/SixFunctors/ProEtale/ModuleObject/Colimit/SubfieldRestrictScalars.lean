@@ -112,7 +112,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D] [HasD
 /-- An exact functor between abelian categories which reflects isomorphisms induces a functor on
 the derived categories which reflects isomorphisms: a morphism is an isomorphism iff it is one on
 all cohomology objects, and `F.mapDerivedCategory` commutes with cohomology. -/
-lemma reflectsIsomorphisms_mapDerivedCategory [F.ReflectsIsomorphisms] :
+lemma reflectsIsomorphisms_mapDerivedCategory_of_reflectsIsomorphisms [F.ReflectsIsomorphisms] :
     F.mapDerivedCategory.ReflectsIsomorphisms where
   reflects f _ := by
     rw [DerivedCategory.isIso_iff]
@@ -217,7 +217,7 @@ instance reflectsIsomorphisms_mapDerivedCategory_comap_padicSubfieldRingObjMap :
       Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F) ⥤
         Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)
       ).mapDerivedCategory.ReflectsIsomorphisms :=
-  Functor.reflectsIsomorphisms_mapDerivedCategory _
+  Functor.reflectsIsomorphisms_mapDerivedCategory_of_reflectsIsomorphisms _
 
 /-- The restriction of scalars on bounded constructible complexes reflects isomorphisms, as the
 restriction of scalars on the derived categories does. -/

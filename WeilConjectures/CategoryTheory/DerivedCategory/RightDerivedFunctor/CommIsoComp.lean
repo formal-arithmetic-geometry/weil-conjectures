@@ -84,7 +84,7 @@ variable {C D E : Type*} [Category* C] [Category* D] [Category* E] [Abelian C] [
 
 /-- The components of the unit `Functor.rightDerivedFunctorCompMapDerivedCategoryUnit` of
 `RF ⋙ D(G)`. -/
-lemma rightDerivedFunctorCompMapDerivedCategoryUnit_app
+lemma rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq
     (X : HomotopyCategory C (ComplexShape.up ℤ)) :
     (rightDerivedFunctorCompMapDerivedCategoryUnit F G).app X =
       DerivedCategory.Qh.map
@@ -162,7 +162,7 @@ lemma rightDerivedFunctorCommIso_fac_app' (e : P' ⋙ rY ≅ rX ⋙ P)
         P.rightDerivedFunctorUnit.app ((rX.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
         P.rightDerivedFunctor.map (rX.mapDerivedCategoryFactorsh.inv.app K) := by
   have h := rightDerivedFunctorCommIso_fac_app e K
-  rw [rightDerivedFunctorCompMapDerivedCategoryUnit_app,
+  rw [rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq,
     mapHomotopyCategoryCompIso_refl_inv_app _ P' rY K, DerivedCategory.Qh.map_id, Category.id_comp,
     Category.assoc] at h
   exact h
@@ -225,7 +225,7 @@ theorem rightDerivedFunctorCommIso_hom_app_comp (e₁₂ : P₂ ⋙ rY₁₂ ≅
   simp only [NatTrans.comp_app, whiskerLeft_app, τ, Iso.trans_inv, Iso.trans_hom, Iso.symm_inv,
     Iso.symm_hom, associator_inv_app, associator_hom_app, whiskerRight_app, Category.id_comp,
     Functor.map_comp, Category.assoc]
-  rw [rightDerivedFunctorCommIso_fac_app, rightDerivedFunctorCompMapDerivedCategoryUnit_app,
+  rw [rightDerivedFunctorCommIso_fac_app, rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq,
     mapHomotopyCategoryCompIso_refl_inv_app, mapHomotopyCategoryCompIso_refl_inv_app,
     DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id, Category.id_comp, Category.id_comp,
     Category.assoc]
