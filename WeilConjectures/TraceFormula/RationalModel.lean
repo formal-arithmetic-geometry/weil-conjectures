@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.TraceFormula.Frobenius
@@ -36,11 +37,11 @@ and so do their stalks (`ProEtale.CondensedRing.pow_smul_upperStar_map_upperStar
 
 ## Implementation notes
 
-The coefficient comparison `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*` for the inverse image (blueprint
-`sk-prop-scalar-six`, the localization `𝒪_E ⟶ E`) is not part of the library on bounded
-constructible complexes; it is an argument `σ` of the statements, which hold for every natural
-isomorphism `σ`. The comparisons for the iterates `Φ_m` are assembled from `σ` and the
-composition isomorphisms of the inverse image.
+The main statement uses the canonical coefficient comparison `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*`
+(`boundedConstructibleUpperStarExtendScalarsIso`, blueprint `sk-prop-scalar-six`, available since
+`E_X` is flat over `𝒪_{E,X}`). The statements on iterates and stalks hold for every comparison
+`σ` for `Φ`; the comparisons for the iterates `Φ_m` are assembled from `σ` and the composition
+isomorphisms of the inverse image.
 
 The blueprint statement uses the uniformizer `π_E` and writes `ψ_E = π_E^{-N}(θ ⊗ E)`; here the
 denominator is a power of `ℓ = π_E^e · u`, `u` a unit of `𝒪_E`, which is equivalent and keeps the
@@ -318,31 +319,32 @@ theorem pow_smul_upperStar_map_upperStarIterateMap_eq
 variable [TopologicalSpace.NoetherianSpace X.left]
 
 /-- **Integral models for rational Frobenius correspondences** (blueprint
-`sk-lem-tf-rational-model`): let `σ : LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*` be a coefficient comparison for
-the inverse image along `Φ` (blueprint `sk-prop-scalar-six`). For every bounded constructible
+`sk-lem-tf-rational-model`): for every bounded constructible
 `E`-complex `K` and every morphism `ψ : LΦ^* K ⟶ K` there are a bounded constructible
 `𝒪_E`-complex `K₀`, an isomorphism `e : (K₀)_E ≅ K`, an integer `N ≥ 0` and a Frobenius
-correspondence `θ : LΦ^* K₀ ⟶ K₀` such that `ℓ^N ψ = θ ⊗ E`, read through `e` and `σ`.
+correspondence `θ : LΦ^* K₀ ⟶ K₀` such that `ℓ^N ψ = θ ⊗ E`, read through `e` and the canonical
+comparison `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*` (`boundedConstructibleUpperStarExtendScalarsIso`,
+blueprint `sk-prop-scalar-six`, which holds since `E_X` is flat over `𝒪_{E,X}`).
 The iterates and their stalks then satisfy `ℓ^{N m} ψ_m = θ_m ⊗ E`
 (`pow_smul_upperStarIterateMap_eq`, `pow_smul_upperStar_map_upperStarIterateMap_eq`).
 
 The integral model `K₀` exists since `(-)_E` is a localization functor (blueprint
-`sk-thm-sfb-rationalization-comparison`), and `σ` identifies `LΦ^* K` with `(LΦ^* K₀)_E`; the
-localized `Hom` description then writes `ψ` as `ℓ^{-N} (θ ⊗ E)`. -/
+`sk-thm-sfb-rationalization-comparison`), and the comparison identifies `LΦ^* K` with
+`(LΦ^* K₀)_E`; the localized `Hom` description then writes `ψ` as `ℓ^{-N} (θ ⊗ E)`. -/
 theorem exists_integralModel_frobeniusCorrespondence
-    (σ : boundedConstructibleUpperStar 𝒪 ℓ Φ ⋙ boundedConstructibleExtendScalars X.left ℓ E ≅
-      boundedConstructibleExtendScalars X.left ℓ E ⋙ boundedConstructibleUpperStar 𝔼 ℓ Φ)
     (K : Dᵇc(X.left)⟦𝔼⟧) (ψ : (boundedConstructibleUpperStar 𝔼 ℓ Φ).obj K ⟶ K) :
     ∃ (K₀ : Dᵇc(X.left)⟦𝒪⟧) (e : (boundedConstructibleExtendScalars X.left ℓ E).obj K₀ ≅ K)
       (N : ℕ) (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K₀ ⟶ K₀),
       ((ℓ : ℤ) ^ N) • ψ =
-        (boundedConstructibleUpperStar 𝔼 ℓ Φ).map e.inv ≫ σ.inv.app K₀ ≫
+        (boundedConstructibleUpperStar 𝔼 ℓ Φ).map e.inv ≫
+          (boundedConstructibleUpperStarExtendScalarsIso ℓ E Φ).inv.app K₀ ≫
           (boundedConstructibleExtendScalars X.left ℓ E).map θ ≫ e.hom := by
   have hK := ProEtale.exists_boundedConstructibleExtendScalars_obj_iso X.left ℓ E K
   let K₀ := hK.choose
   let e : (boundedConstructibleExtendScalars X.left ℓ E).obj K₀ ≅ K := hK.choose_spec.some
   have hθ := ProEtale.exists_pow_smul_eq_boundedConstructibleExtendScalars_map X.left ℓ E
-    (σ.hom.app K₀ ≫ (boundedConstructibleUpperStar 𝔼 ℓ Φ).map e.hom ≫ ψ ≫ e.inv)
+    ((boundedConstructibleUpperStarExtendScalarsIso ℓ E Φ).hom.app K₀ ≫
+      (boundedConstructibleUpperStar 𝔼 ℓ Φ).map e.hom ≫ ψ ≫ e.inv)
   refine ⟨K₀, e, hθ.choose, hθ.choose_spec.choose, ?_⟩
   symm
   simp only [← hθ.choose_spec.choose_spec, Linear.smul_comp, Linear.comp_smul,
