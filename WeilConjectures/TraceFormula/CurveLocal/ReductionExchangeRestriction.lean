@@ -24,7 +24,7 @@ square may moreover be transported along an isomorphism `φ : W ≅ X × X` of t
 This uses the coefficient comparisons of blueprint `sk-prop-scalar-six` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`
 (`ProEtale.CondensedRing.exists_etaleReductionLowerShriekIso`,
 `ProEtale.CondensedRing.etaleReductionUpperStarIso`) and
-`CategoryTheory.Adjunction.exists_map_exchangeRestriction_comp_eq`.
+`CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`.
 
 -/
 
@@ -141,8 +141,9 @@ theorem exists_etaleReduction_map_exchangeRestriction_comp_eq {c : C ⟶ Y} {ι 
               ((etaleReduction ℓ E n Y).obj P)))),
       IsIso β ∧
       (etaleReduction ℓ E n F).map
-          ((boundedConstructibleUpperShriekAdjunction _ ℓ c).exchangeRestriction
-            (boundedConstructibleUpperShriekAdjunction _ ℓ d) _ _ σ P) ≫ β =
+          ((mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
+            (boundedConstructibleUpperShriekAdjunction _ ℓ d)
+            (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫ β =
         s ≫ Etale.exchangeRestriction (integersModPowCoeff.{u} ℓ E n) hsq
           ((L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) φ)).obj
             ((etaleReduction ℓ E n Y).obj P)) := by
@@ -151,7 +152,7 @@ theorem exists_etaleReduction_map_exchangeRestriction_comp_eq {c : C ⟶ Y} {ι 
   have := Etale.full_rightDerivedLowerShriek_of_isClosedImmersion
     (integersModPowCoeff.{u} ℓ E n) d.left
   have := hd.choose_spec
-  have h := Adjunction.exists_map_exchangeRestriction_comp_eq
+  have h := Adjunction.exists_map_mateEquiv_app_comp_eq
     (boundedConstructibleUpperShriekAdjunction _ ℓ c)
     (boundedConstructibleUpperShriekAdjunction _ ℓ d) _ _ σ
     (Etale.rightDerivedUpperShriekAdjunction _ g)

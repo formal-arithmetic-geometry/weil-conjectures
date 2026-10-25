@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatDegreewiseFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsShortExact
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
@@ -26,7 +26,7 @@ in `D(Mod_R(C))`, where `S ⊗ᴸ_R K` is regarded as a complex of `R`-modules
 (`Mod.exists_distinguished_zsmul_derivedExtendScalars`).
 
 Indeed `K` is represented by a K-flat complex `P` of flat `R`-modules
-(`CochainComplex.exists_quasiIso_kFlat_of_flat`), on which the derived extension of scalars is
+(`CochainComplex.exists_quasiIso_flat_kFlat`), on which the derived extension of scalars is
 computed by `S ⊗_R P`, and `0 ⟶ P --k--> P ⟶ S ⊗_R P ⟶ 0` is a short exact sequence of complexes
 (`Mod.shortExact_extendUnit`).
 
@@ -80,8 +80,8 @@ theorem exists_distinguished_zsmul_derivedExtendScalars (k : ℤ) (w : (k • �
       (h : (comap φ).mapDerivedCategory.obj ((extendScalars φ).leftDerivedFunctor.obj K) ⟶
         K⟦(1 : ℤ)⟧),
       Triangle.mk (k • 𝟙 K) g h ∈ distTriang (DerivedCategory (Mod C R)) := by
-  obtain ⟨P, π, _, hP, hflat⟩ :=
-    CochainComplex.exists_quasiIso_kFlat_of_flat (DerivedCategory.Q.objPreimage K)
+  obtain ⟨P, π, _, hflat, hP⟩ :=
+    CochainComplex.exists_quasiIso_flat_kFlat (DerivedCategory.Q.objPreimage K)
   have hS := shortExact_extendUnitComplexHom k w hφ P hflat
   have := (extendScalars φ).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
   let e₁ : DerivedCategory.Q.obj P ≅ K :=

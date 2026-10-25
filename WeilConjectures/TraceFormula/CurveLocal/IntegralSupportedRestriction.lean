@@ -94,9 +94,9 @@ noncomputable def integralSupportedRestriction
           P) ⟶
       (boundedConstructibleUpperShriek _ ℓ F.d).obj
         ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ (diag X)).obj P) :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ c.support).exchangeRestriction
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d) _ _ (F.integralLowerShriekBaseChangeIso E)
-    P
+  (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+    (TwoSquare.mk _ _ _ _ (F.integralLowerShriekBaseChangeIso E).inv)).natTrans.app P
 
 end Correspondence.FixedLocus
 

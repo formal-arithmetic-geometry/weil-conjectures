@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPresheaf
+public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingPresheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 

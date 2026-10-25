@@ -25,7 +25,7 @@ stalk of the supported restriction with the strictly local `ρ_{a,b}` used in bl
 `sk-lem-tf-curve-supported-pairing`.
 
 The proof pulls the fixed square back along `τ : T ⟶ X ×_k X`
-(`CategoryTheory.Adjunction.exists_map_exchangeRestriction_comp_eq`, with compact-support base
+(`CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`, with compact-support base
 change for the closed immersions), uses that the exceptional pullback commutes with this pullback
 on global sections over `Y`
 (`CurveLocalModel.isIso_rightDerivedGlobalSections_map_rightDerivedUpperShriekBaseChangeMap`),

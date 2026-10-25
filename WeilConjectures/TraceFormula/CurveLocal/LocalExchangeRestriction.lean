@@ -161,6 +161,7 @@ theorem exists_sectionsWithSupportRestriction_eq
       have := (adjy.homEquiv _ _).symm_apply_apply
         (σ.inv.app K ≫ (L((M.b)^*[ModuleCat.{u + 1} Λ])).map ε.hom)
       rw [Adjunction.homEquiv_counit] at this
+      rw [exchangeRestriction_eq_homEquiv]
       exact this
     have e₃ := lb.hom.naturality ε.hom
     simp only [c₁, Category.assoc]

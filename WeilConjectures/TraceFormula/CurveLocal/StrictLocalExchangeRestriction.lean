@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionNaturality
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
 public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalModelRestriction
 
@@ -57,7 +57,8 @@ lemma exchangeRestriction_naturality (sq : IsPullback ι d c Δ)
         (R(d)^![ModuleCat.{u + 1} Λ]).map ((L((Δ)^*[ModuleCat.{u + 1} Λ])).map f) =
       (L((ι)^*[ModuleCat.{u + 1} Λ])).map ((R(c)^![ModuleCat.{u + 1} Λ]).map f) ≫
         exchangeRestriction Λ sq P' :=
-  Adjunction.exchangeRestriction_naturality _ _ _ _ _ f
+  ((mateEquiv _ _ (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).natTrans.naturality
+    f).symm
 
 end Naturality
 
@@ -111,7 +112,7 @@ instance full_rightDerivedLowerShriek_yB : (R(M.yB)_![ModuleCat.{u + 1} Λ]).Ful
 exchange restriction `ρ_P` of the fixed square, followed by the base change map
 `Lτ_Y^* Rd^! ⟶ Ry_B^! Lτ_B^*` and `Ry_B^!` of `Lτ_B^* LΔ^* ≅ Lb^* Lτ^*`, factors through the
 exchange restriction of the square `Y = G ×_T B` at `Lτ^* P`
-(`CategoryTheory.Adjunction.exists_map_exchangeRestriction_comp_eq`, `Ry_B_!` being full). -/
+(`CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`, `Ry_B_!` being full). -/
 theorem exists_map_exchangeRestriction_τY
     (P : DerivedCategory (Sheaf (pullback M.f M.f).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ∃ s : (L((M.τY hsq)^*[ModuleCat.{u + 1} Λ])).obj ((L((ι)^*[ModuleCat.{u + 1} Λ])).obj
@@ -123,7 +124,7 @@ theorem exists_map_exchangeRestriction_τY
             ((L((pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ])).obj P) ≫
           (R(M.yB)^![ModuleCat.{u + 1} Λ]).map ((M.diagonalPullbackIso Λ).hom.app P) =
         s ≫ exchangeRestriction Λ M.isPullback_ιY ((L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj P) :=
-  Adjunction.exists_map_exchangeRestriction_comp_eq
+  Adjunction.exists_map_mateEquiv_app_comp_eq
     (a := rightDerivedUpperShriekAdjunction _ M.graph) (g := rightDerivedUpperShriekAdjunction _ d)
     (ι := L((ι)^*[ModuleCat.{u + 1} Λ])) (Δ := L((pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ]))
     (σ := lowerShriekBaseChangeIso Λ hsq) (a' := rightDerivedUpperShriekAdjunction _ M.a)

@@ -104,8 +104,8 @@ theorem exists_distinguished_zsmul_derivedExtendMapDerivedCategoryUnit (k : ℤ)
         K⟦(1 : ℤ)⟧,
       Triangle.mk (k • 𝟙 K) ((derivedExtendMapDerivedCategoryAdjunction φ).unit.app K) h ∈
         distTriang (DerivedCategory (Mod C R)) := by
-  obtain ⟨P, π, _, hP, hflat⟩ :=
-    CochainComplex.exists_quasiIso_kFlat_of_flat (DerivedCategory.Q.objPreimage K)
+  obtain ⟨P, π, _, hflat, hP⟩ :=
+    CochainComplex.exists_quasiIso_flat_kFlat (DerivedCategory.Q.objPreimage K)
   have hS := shortExact_extendUnitComplexHom k w hφ P hflat
   have := (extendScalars φ).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
   let adj := derivedExtendMapDerivedCategoryAdjunction φ

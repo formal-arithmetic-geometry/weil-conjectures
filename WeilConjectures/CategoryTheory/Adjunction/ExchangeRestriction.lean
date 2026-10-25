@@ -9,21 +9,22 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 
-# The exchange restriction of a base-change square
+# The mate of a base-change square under a change of coefficients
 
 For adjunctions `c_! ⊣ c^!` and `d_! ⊣ d^!`, functors `ι^*` and `Δ^*` and an isomorphism
-`σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`, the *exchange restriction* `ι^* c^! P ⟶ d^! Δ^* P` is the
-`d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of `c_! ⊣ c^!`. For the fixed square
+`σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`, the mate `c^! ⋙ ι^* ⟶ Δ^* ⋙ d^!` of `σ⁻¹` has component
+`ι^* c^! P ⟶ d^! Δ^* P` the `d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of
+`c_! ⊣ c^!` (`CategoryTheory.Adjunction.mateEquiv_app_eq_homEquiv`). For the fixed square
 of a correspondence this is the supported restriction of the trace formula (blueprint
 `det-tf-supported-restriction`). This file proves how it behaves under a change of coefficients
 `T` commuting with `c_!`, `d_!` and `Δ^*`.
 
 ## Main statements
 
-- `CategoryTheory.Adjunction.map_exchangeRestriction_comp`: if `T` also commutes with `ι^*`,
+- `CategoryTheory.Adjunction.map_mateEquiv_app_comp`: if `T` also commutes with `ι^*`,
   compatibly with the base change isomorphisms, `T` carries the exchange restriction to the
   exchange restriction, up to the exchanges of `c^!` and `d^!`.
-- `CategoryTheory.Adjunction.exists_map_exchangeRestriction_comp_eq`: if the new `d_!` is full,
+- `CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`: if the new `d_!` is full,
   `T` of the exchange restriction factors through the new exchange restriction, without any
   compatibility with the base change isomorphisms.
 
@@ -37,6 +38,10 @@ open CategoryTheory
 
 namespace CategoryTheory
 
+
+/-- For adjunctions `L ⊣ R`, `L' ⊣ R'` and an isomorphism `τ : L ⋙ H ≅ G ⋙ L'`, the `L' ⊣ R'`
+adjoint of `G f` followed by the mate `G ⋙ R' ⟵ R ⋙ H` of `τ⁻¹` is `τ⁻¹` followed by `H` of the
+`L ⊣ R` adjoint of `f`. -/
 lemma Adjunction.homEquiv_symm_map_comp_mateEquiv_app {A B A' B' : Type*} [Category* A]
     [Category* B] [Category* A'] [Category* B'] {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R)
     {L' : A' ⥤ B'} {R' : B' ⥤ A'} (adj' : L' ⊣ R') (G : A ⥤ A') (H : B ⥤ B')
@@ -53,15 +58,15 @@ variable {C₂ : Type u₁} {CC : Type u₂} {CF : Type u₃} {CX : Type u₄}
   {C₂' : Type u₅} {CC' : Type u₆} {CF' : Type u₇} {CX' : Type u₈}
   [Category.{v₅} C₂'] [Category.{v₆} CC'] [Category.{v₇} CF'] [Category.{v₈} CX']
 
-/-- The *exchange restriction* of a base-change square: for adjunctions `c_! ⊣ c^!` and
-`d_! ⊣ d^!`, functors `ι^*` and `Δ^*` and an isomorphism `σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`, the morphism
-`ι^* c^! P ⟶ d^! Δ^* P` adjoint to `σ⁻¹` followed by `Δ^*` of the counit of `c_! ⊣ c^!`. For the
-fixed square of a correspondence this is the supported restriction
-(`ProEtale.CondensedRing.Correspondence.FixedLocus.supportedRestriction_eq_exchangeRestriction`). -/
-def Adjunction.exchangeRestriction {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR) {dL : CF ⥤ CX}
-    {dR : CX ⥤ CF} (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX) (σ : cL ⋙ Δ ≅ ι ⋙ dL) (P : C₂) :
-    ι.obj (cR.obj P) ⟶ dR.obj (Δ.obj P) :=
-  g.homEquiv _ _ (σ.inv.app _ ≫ Δ.map (a.counit.app P))
+/-- The component at `P` of the mate `c^! ⋙ ι^* ⟶ Δ^* ⋙ d^!` of `σ⁻¹ : ι^* ⋙ d_! ⟶ c_! ⋙ Δ^*`
+is the `d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of `c_! ⊣ c^!`. -/
+lemma Adjunction.mateEquiv_app_eq_homEquiv {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR)
+    {dL : CF ⥤ CX} {dR : CX ⥤ CF} (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX)
+    (σ : cL ⋙ Δ ≅ ι ⋙ dL) (P : C₂) :
+    (mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P =
+      g.homEquiv (ι.obj (cR.obj P)) (Δ.obj P) (σ.inv.app (cR.obj P) ≫ Δ.map (a.counit.app P)) := by
+  rw [Adjunction.homEquiv_unit]
+  simp [mateEquiv_apply]
 
 variable {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR) {dL : CF ⥤ CX} {dR : CX ⥤ CF}
     (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX) (σ : cL ⋙ Δ ≅ ι ⋙ dL)
@@ -71,26 +76,36 @@ variable {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR) {dL : CF ⥤ CX} 
   (τc : cL ⋙ T₂ ≅ TC ⋙ cL') (τd : dL ⋙ TX ≅ TF ⋙ dL')
   (τι : ι ⋙ TF ≅ TC ⋙ ι') (τΔ : Δ ⋙ TX ≅ T₂ ⋙ Δ')
 
-/-- **The exchange restriction commutes with a change of coefficients**: let `T` be a change of
-coefficients commuting with `c_!`, `d_!`, `ι^*` and `Δ^*` (isomorphisms `τ`), compatibly with base
-change `σ`, `σ'` (`hσ`). Then `T` of the exchange restriction, followed by the exchange
-`T ⋙ d'^! ⟵ d^! ⋙ T` (the mate of `τ_d⁻¹`) and `d'^!` of `τ_Δ`, is `τ_ι`, then `ι'^*` of the
-exchange for `c^!` (the mate of `τ_c⁻¹`), then the exchange restriction for the new
-coefficients. -/
-theorem Adjunction.map_exchangeRestriction_comp
+/-- **The mate of a base-change isomorphism commutes with a change of coefficients**: let `T` be a
+change of coefficients commuting with `c_!`, `d_!`, `ι^*` and `Δ^*` (isomorphisms `τ`), compatibly
+with base change `σ`, `σ'` (`hσ`), and write `ρ` and `ρ'` for the mates of `σ⁻¹` and `σ'⁻¹`
+(for a fixed square, the supported restrictions). Then the square
+```
+T ι^* c^! P ---T ρ_P---> T d^! Δ^* P --ex_d--> d'^! T Δ^* P --d'^! τ_Δ--> d'^! Δ'^* T P
+    |                                                                         ‖
+   τ_ι                                                                        ‖
+    v                                                                         ‖
+ι'^* T c^! P --ι'^* ex_c--> ι'^* c'^! T P ---------------ρ'_{T P}-----------> d'^! Δ'^* T P
+```
+commutes, where `ex_c` and `ex_d` are the exchanges `T ⋙ c'^! ⟵ c^! ⋙ T` (the mates of `τ_c⁻¹`
+and `τ_d⁻¹`). -/
+theorem Adjunction.map_mateEquiv_app_comp
     (hσ : ∀ M : CC, TX.map (σ.hom.app M) ≫ τd.hom.app (ι.obj M) ≫ dL'.map (τι.hom.app M) =
       τΔ.hom.app (cL.obj M) ≫ Δ'.map (τc.hom.app M) ≫ σ'.hom.app (TC.obj M)) (P : C₂) :
-    TF.map (a.exchangeRestriction g ι Δ σ P) ≫
+    TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫
         (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
           dR'.map (τΔ.hom.app P) =
       τι.hom.app (cR.obj P) ≫
         ι'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P) ≫
-          a'.exchangeRestriction g' ι' Δ' σ' (T₂.obj P) := by
+          (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).natTrans.app (T₂.obj P) := by
+  rw [Adjunction.mateEquiv_app_eq_homEquiv a g ι Δ σ P,
+    Adjunction.mateEquiv_app_eq_homEquiv a' g' ι' Δ' σ' (T₂.obj P)]
   apply (g'.homEquiv _ _).symm.injective
+  dsimp only [Functor.comp_obj, Functor.id_obj]
   rw [← Category.assoc, Adjunction.homEquiv_naturality_right_symm,
-    Adjunction.homEquiv_symm_map_comp_mateEquiv_app, Adjunction.exchangeRestriction,
-    Equiv.symm_apply_apply]
-  simp only [Adjunction.exchangeRestriction, Adjunction.homEquiv_naturality_left_symm]
+    Adjunction.homEquiv_symm_map_comp_mateEquiv_app]
+  erw [Equiv.symm_apply_apply]
+  simp only [Adjunction.homEquiv_naturality_left_symm]
   have hc := Adjunction.homEquiv_symm_map_comp_mateEquiv_app a a' TC T₂ τc (𝟙 (cR.obj P))
   simp only [Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit] at hc
   have hσ' : τd.inv.app (ι.obj (cR.obj P)) ≫ TX.map (σ.inv.app (cR.obj P)) =
@@ -118,27 +133,30 @@ theorem Adjunction.map_exchangeRestriction_comp
   exact hΔ.symm
 
 
+
 include τc in
-/-- **The exchange restriction under a change of coefficients, up to the source**: let `T` be a
-change of coefficients commuting with `c_!`, `d_!` and `Δ^*` (isomorphisms `τ`), with `d'_!`
-full. Then `T` of the exchange restriction, followed by the exchange `T ⋙ d'^! ⟵ d^! ⋙ T` (the
-mate of `τ_d⁻¹`) and `d'^!` of `τ_Δ`, factors through the exchange restriction for the new
-coefficients. No compatibility of `T` with the base change isomorphisms `σ`, `σ'` is needed:
+/-- **The mate of a base-change square under a change of coefficients, up to the source**: let
+`T` be a change of coefficients commuting with `c_!`, `d_!` and `Δ^*` (isomorphisms `τ`), with
+`d'_!` full. Then `T` of the mate `ρ` of `σ⁻¹`, followed by the exchange `T ⋙ d'^! ⟵ d^! ⋙ T` (the
+mate of `τ_d⁻¹`) and `d'^!` of `τ_Δ`, factors through the mate `ρ'` of `σ'⁻¹` for
+the new coefficients. No compatibility of `T` with the base change isomorphisms `σ`, `σ'` is needed:
 fullness of `d'_!` absorbs it into the factor on the source. -/
-theorem Adjunction.exists_map_exchangeRestriction_comp_eq [dL'.Full] (P : C₂) :
+theorem Adjunction.exists_map_mateEquiv_app_comp_eq [dL'.Full] (P : C₂) :
     ∃ s : TF.obj (ι.obj (cR.obj P)) ⟶ ι'.obj (cR'.obj (T₂.obj P)),
-      TF.map (a.exchangeRestriction g ι Δ σ P) ≫
+      TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫
           (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
             dR'.map (τΔ.hom.app P) =
-        s ≫ a'.exchangeRestriction g' ι' Δ' σ' (T₂.obj P) := by
+        s ≫ (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).natTrans.app (T₂.obj P) := by
+  rw [Adjunction.mateEquiv_app_eq_homEquiv a g ι Δ σ P,
+    Adjunction.mateEquiv_app_eq_homEquiv a' g' ι' Δ' σ' (T₂.obj P)]
   let m := (mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P
   refine ⟨dL'.preimage (τd.inv.app _ ≫ TX.map (σ.inv.app _) ≫ τΔ.hom.app _ ≫
     Δ'.map (τc.hom.app _) ≫ Δ'.map (cL'.map m) ≫ σ'.hom.app _), ?_⟩
   apply (g'.homEquiv _ _).symm.injective
   rw [← Category.assoc, Adjunction.homEquiv_naturality_right_symm,
-    Adjunction.homEquiv_symm_map_comp_mateEquiv_app, Adjunction.exchangeRestriction,
-    Equiv.symm_apply_apply, Adjunction.exchangeRestriction,
-    Adjunction.homEquiv_naturality_left_symm]
+    Adjunction.homEquiv_symm_map_comp_mateEquiv_app]
+  erw [Equiv.symm_apply_apply]
+  rw [Adjunction.homEquiv_naturality_left_symm]
   erw [Equiv.symm_apply_apply]
   rw [Functor.map_preimage]
   have hc := Adjunction.homEquiv_symm_map_comp_mateEquiv_app a a' TC T₂ τc (𝟙 (cR.obj P))
