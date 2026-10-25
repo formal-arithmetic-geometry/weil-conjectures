@@ -118,15 +118,21 @@ theorem Adjunction.map_mateEquiv_app_comp
   erw [Category.comp_id]
   exact hΔ.symm
 
-
-
 include τc in
 /-- **The mate of a base-change square under a change of coefficients, up to the source**: let
 `T` be a change of coefficients commuting with `c_!`, `d_!` and `Δ^*` (isomorphisms `τ`), with
 `d'_!` full. Then `T` of the mate `ρ` of `σ⁻¹`, followed by the exchange `T ⋙ d'^! ⟵ d^! ⋙ T` (the
 mate of `τ_d⁻¹`) and `d'^!` of `τ_Δ`, factors through the mate `ρ'` of `σ'⁻¹` for
 the new coefficients. No compatibility of `T` with the base change isomorphisms `σ`, `σ'` is needed:
-fullness of `d'_!` absorbs it into the factor on the source. -/
+fullness of `d'_!` absorbs it into the factor on the source. That is, there is `s` such that
+```
+T ι^* c^! P ---T ρ_P---> T d^! Δ^* P --ex_d--> d'^! T Δ^* P --d'^! τ_Δ--> d'^! Δ'^* T P
+    |                                                                         ‖
+    s                                                                         ‖
+    v                                                                         ‖
+ι'^* c'^! T P --------------------------ρ'_{T P}----------------------------> d'^! Δ'^* T P
+```
+commutes. -/
 theorem Adjunction.exists_map_mateEquiv_app_comp_eq [dL'.Full] (P : C₂) :
     ∃ s : TF.obj (ι.obj (cR.obj P)) ⟶ ι'.obj (cR'.obj (T₂.obj P)),
       TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫

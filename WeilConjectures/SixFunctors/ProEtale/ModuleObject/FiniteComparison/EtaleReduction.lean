@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 
@@ -37,12 +38,11 @@ It states the coefficient comparisons of blueprint `sk-prop-scalar-six` for the 
 finite coefficients (blueprint `sk-lem-tf-curve-restriction-zero`, last step). They are
 compatibilities required from section `sec-six-functors-basics`, each exactly one blueprint node:
 
-* `etaleReductionUpperStarIso`: pullback (`det-prop-scalar-six-pullback`, (1));
-* `etaleReductionLowerShriekIso`: compactly supported direct image, for proper morphisms
-  (`det-prop-scalar-six-compact-support`);
-* `isIso_etaleReductionUpperShriekExchange`: exceptional inverse image
-  (`det-prop-scalar-six-exceptional`);
-* `etaleReductionTensorIso`: tensor product (`det-prop-scalar-six-tensor-hom`, (1));
+* `nonempty_etaleReductionUpperStarIso`: pullback (`det-prop-scalar-six-pullback`, (1));
+* `exists_etaleReductionLowerShriekIso`: compactly supported direct image and exceptional
+  inverse image, for proper morphisms (`det-prop-scalar-six-exceptional`, with the comparison
+  `γ^!` of `det-prop-scalar-six-compact-support`);
+* `nonempty_etaleReductionTensorIso`: tensor product (`det-prop-scalar-six-tensor-hom`, (1));
 * `boundedConstructibleFiniteTor_etaleReduction`: preservation of `Dctf`
   (`det-prop-scalar-six-ctf`, (3)).
 
@@ -63,14 +63,6 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
-
-/-- A scheme of finite type over a field is noetherian. -/
-instance noetherianSpace_left_of_locallyOfFiniteType (Y : Over (Spec (.of k)))
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] : TopologicalSpace.NoetherianSpace Y.left :=
-  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
-  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
-  have : IsNoetherian Y.left := ⟨⟩
-  inferInstance
 
 /-- The finite coefficient ring `𝒪_E ⧸ ℓⁿ`, lifted to the universe of étale sheaves of
 modules. -/
@@ -119,7 +111,12 @@ noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
 étale site (`sk-def-sf-categories`), for a proper morphism `f`. **Reduction modulo `ℓⁿ` commutes
 with `Rf_!` and with `Rf^!`**: there is an isomorphism `γ^! : (Rf_! K)_{𝒪_E ⧸ ℓⁿ} ≅
 Rf_! (K_{𝒪_E ⧸ ℓⁿ})` whose transpose `β : (Rf^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓⁿ})` under
-`Rf_! ⊣ Rf^!` is an isomorphism. -/
+`Rf_! ⊣ Rf^!` is an isomorphism.
+
+This is weaker than the blueprint node, and enough for its use in the trace formula: it covers
+only proper `f`, and it only asserts that some isomorphism `γ` with invertible transpose exists,
+without identifying `γ` with the canonical `γ^!` of the blueprint (nor `β` with its canonical
+comparison). -/
 theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsProper f.left] :
     ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Y ≅

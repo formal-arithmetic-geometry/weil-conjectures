@@ -31,7 +31,8 @@ from the classical finite-coefficient computation
   intersection theorem;
 * the vanishing passes from `𝒪_E` to `E` to `ℚ̄_ℓ`
   (`ProEtale.CondensedRing.Correspondence.FixedLocus.map_supportedRestrictionIntegral_comp`,
-  `Correspondence.FixedLocus.upperStar_map_supportedRestriction_eq_zero_of_supportedRestrictionE`),
+  `FixedLocus.upperStar_map_supportedRestriction_eq_zero_of_supportedRestrictionE` in the same
+  namespace),
   the point fibre functor being faithful.
 
 -/
