@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
-public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
+public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnitSingle
@@ -114,7 +115,7 @@ noncomputable def traitSpecialization :
     Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
       Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   NearbyCyclesModel.boundedConstructibleNearbyCycles
-    ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
+    ((traitModel k k').preservesBoundedConstructible_of_exists_comp (ℓ := ℓ)
       (isTraitModel_traitModel k k')
       ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)
 
