@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-!
@@ -158,16 +159,6 @@ theorem exact_extendUnit (k : ℤ) (w : (k • 𝟙 R) ≫ φ = 0)
   refine ⟨(ShortComplex.exact_map_iff_of_faithful _ (forget R)).1
     ((ShortComplex.exact_iff_of_iso e).1 h₁), (forget R).epi_of_epi_map ?_⟩
   exact epi_of_epi_fac e.hom.comm₂₃
-
-omit [Abelian C] [MonoidalPreadditive C] [MonoidalClosed C] [IsGrothendieckAbelian.{v} C]
-  [IsCommMonObj S] in
-/-- The unit of the adjunction between extension and restriction of scalars is
-`Mod.extendUnit`. -/
-lemma extendRestrictAdjunction_unit_app [HasCoequalizers C]
-    [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-    [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] (M : Mod C R) :
-    (extendRestrictAdjunction φ).unit.app M = extendUnit φ M :=
-  hom_ext _ _ (extendRestrictAdjunction_unit_app_hom φ M)
 
 variable {φ} in
 omit [SymmetricCategory C] [MonoidalClosed C] [IsGrothendieckAbelian.{v} C] [IsCommMonObj R]
