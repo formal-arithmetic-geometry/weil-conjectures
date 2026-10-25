@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.ContractingLocalTerm
 public import WeilConjectures.TraceFormula.PieceAdditivity
 
 /-!
@@ -314,9 +314,10 @@ the restricted coefficient map `u_Z`, which is the stalk map `v_x` (`contracting
 
 This is the special case `c = (𝟙, h)` of `restrict_traceClass_eq_pushforward_of_isContractingAt`,
 proved through the additivity of trace classes for graphs (`traceClass_ofGraph_eq_add`) instead of
-the additivity for arbitrary correspondences (`traceClass_eq_add_of_isPullback`). It exists only
-so that the graph case, which carries every current user, does not depend on that `sorry`, and
-should be dropped once `traceClass_eq_add_of_isPullback` is proved. The proof: the
+the additivity for arbitrary correspondences (`traceClass_eq_add_of_isPullback`). It keeps
+the graph case, which carries every current user, independent of the mate description of the
+compact-support base change (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`)
+that the general closed piece needs. The proof: the
 trace class is the sum of the trace classes of `u^Z` on `K^Z = Rx_* Lx^* K` and `u^U` on
 `K^U = j_! Lj^* K`; the first is the pushforward of the trace class of `v_x` by proper pushforward
 compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
