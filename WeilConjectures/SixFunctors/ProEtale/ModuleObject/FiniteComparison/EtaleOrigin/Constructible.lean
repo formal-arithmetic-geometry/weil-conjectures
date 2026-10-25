@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.FinitelyPresented
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.Regular
 
@@ -64,9 +64,9 @@ theorem isConstructible_finiteCoefficientModEquivalence_functor_obj
     rw [h]
     exact 𝒰.mem₀
   · exact isFiniteLocallyConstant_of_iso
-      ((finiteCoefficientModEquivalenceUpperStarIso T (𝒰.f i.down)).app _ ≪≫
+      ((upperStarFiniteCoefficientModEquivalenceIso (𝒰.f i.down) T).app _ ≪≫
         ((𝒰.f i.down)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)]).mapIso
-          ((finiteCoefficientModEquivalenceUpperStarIso T (S.immersion a)).app M))
+          ((upperStarFiniteCoefficientModEquivalenceIso (S.immersion a) T).app M))
       (isFiniteLocallyConstant_finiteCoefficientModEquivalence_obj T _
         (isFinitelyPresented_upperStar_obj_upperStar_obj _ _ _ (h𝒰 i.down)))
 

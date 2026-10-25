@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 
 /-!
@@ -122,10 +123,6 @@ noncomputable def finiteCoefficientModEquivalenceRegularIso :
         (ModuleCat.of (ULift.{u + 1} T) (ULift.{u + 1} T)) :=
   (finiteCoefficientModEquivalence X T).functor.mapIso (regularIsoInverseConstant T X) ≪≫
     (finiteCoefficientModEquivalence X T).counitIso.app _
-
-/-- The equivalence `finiteCoefficientModEquivalence` is additive. -/
-instance : (finiteCoefficientModEquivalence X T).functor.Additive :=
-  Functor.additive_of_preserves_binary_products _
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
