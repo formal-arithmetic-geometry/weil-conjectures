@@ -501,11 +501,15 @@ map the specialization unit `σ_s` (`traitSpecializationUnit`).
 Unfinished. Two inputs are missing. (a) The lax tensor maps and the specialization unit of
 nearby cycles satisfy the associativity and unit axioms of a lax monoidal functor: with
 `Ψ = Li^* ∘ Rj_* ∘ Lε^*`, they are those of the composite of the monoidal functors `Li^*`, `Lε^*`
-and of the lax monoidal right adjoint `Rj_*` (`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`).
-(b) The tensor maps are invertible: `Lε^* A` is a finite direct sum of shifts of the unit on the
-geometric generic point `Spec Ω` (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), where
-the Künneth map of the trait is invertible
-(`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`); the unit map
+and of the lax monoidal right adjoint `Rj_*` (`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`,
+whose tensor maps are `ProEtale.CondensedRing.lowerStarTensorMap'`; the unit maps of `Li^*`,
+`Lε^*` are the inverses of `leftDerivedUpperStarUnitIso`), restricted to `Dᵇc` as in
+`CategoryTheory.ObjectProperty.monoidalLift`. (b) The tensor maps are invertible: `Lε^* A` is a
+finite direct sum of shifts of the unit on the geometric generic point `Spec Ω`
+(`nonempty_shiftDecomposition_of_boundedConstructible`), so `Li^*` of the tensor map of `Rj_*` is
+invertible at `(Lε^* A, Lε^* B)`
+(`ProEtale.CondensedRing.isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition`), and the
+other factors of the tensor map are invertible, `Li^*` and `Lε^*` being monoidal; the unit map
 `σ_s` is invertible by `ProEtale.CondensedRing.isIso_traitSpecializationUnit`. -/
 theorem exists_monoidal_traitSpecialization :
     ∃ L : (boundedConstructibleNearbyCycles
