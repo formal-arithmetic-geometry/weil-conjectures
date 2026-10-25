@@ -56,7 +56,7 @@ theorem bijective_residue_algebraMap_strictHenselization (ht : t ≫ S.hom = �
     letI := strictHenselizationAlgebra S t
     Function.Bijective (IsLocalRing.residue (strictHenselization t) ∘
       algebraMap k (strictHenselization t)) := by
-  letI := strictHenselizationAlgebra S t
+  let := strictHenselizationAlgebra S t
   have hφ : Spec.preimage (strictLocalizationToBase t ≫ S.hom) ≫ strictHenselizationEval t =
       𝟙 _ := by
     apply Spec.map_injective

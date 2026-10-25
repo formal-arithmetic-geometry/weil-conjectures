@@ -157,20 +157,87 @@ lemma globalSectionsRestriction_eq_zero_of_lowerStar {U Z W : Scheme.{u}} (j : U
 
 end Vanishing
 
-/-- **Restriction through a strictly local scheme vanishes** (blueprint
+/-- Let `j : U ⟶ Z` be a morphism, `F` a complex on `U` and `M = Rj_* F`. If `ι : W ⟶ U` and
+`ι ≫ j` factors through a morphism `c : S ⟶ Z` along which the restriction of `M` vanishes, then
+the restriction of `F` along `ι` vanishes. -/
+lemma globalSectionsRestriction_eq_zero_of_factor {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {U Z' S W : Scheme.{u}} (j : U ⟶ Z') (c : S ⟶ Z')
+    (F : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (hc : globalSectionsRestriction c (((j)_*[A]).rightDerivedFunctor.obj F) = 0)
+    (ι : W ⟶ U) (jW : W ⟶ S) (hι : ι ≫ j = jW ≫ c) : globalSectionsRestriction ι F = 0 := by
+  have hjc := globalSectionsRestriction_comp_eq_zero c jW _ hc
+  rw [← hι] at hjc
+  exact globalSectionsRestriction_eq_zero_of_lowerStar _ _ _ hjc
+
+/-- **Restriction to a strictly local scheme centred on the boundary vanishes** (blueprint
 `det-tf-punctured-restriction-factorization` and the proof of `sk-lem-tf-punctured-restriction`,
 with the stalk `M_s` computed on the strictly local scheme `S` instead of the strict localization
 of `Z`). In the situation of the transverse boundary calculation
 (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `c : S = Spec R ⟶ Z` be a
-morphism from a strictly local scheme whose closed point maps to a closed point `s` of `Y`, and
-let `ι : W ⟶ Z - Y` be a morphism factoring as `W ⟶ S ⟶ Z`. Then the restriction map
-`RΓ(Z - Y, i_! E) ⟶ RΓ(W, ι^* i_! E)` is zero.
+morphism from a strictly local scheme whose closed point maps to a closed point `s` of `Y`. Then
+the restriction map `RΓ(Z, M) ⟶ RΓ(S, c^* M)` is zero, `M = Rj_* i_! E`.
 
-Indeed it factors as `RΓ(Z - Y, i_! E) = RΓ(Z, M) ⟶ RΓ(S, c^* M) ⟶ RΓ(W, ...)`, and
-`RΓ(S, c^* M) ⟶ M_s` is an isomorphism (`S` is strictly local), so it suffices that the
+Indeed `RΓ(S, c^* M) ⟶ M_s` is an isomorphism (`S` is strictly local), so it suffices that the
 restriction `RΓ(Z, M) ⟶ M_s` vanishes. If `s = z` its target `M_z` is zero; otherwise it factors
 through the restriction `RΓ(Y, M|_Y) ⟶ M_s`, which is zero by the transverse boundary
 calculation. -/
+theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero (hℓ : (ℓ : k) ≠ 0)
+    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
+    (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
+    (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
+    (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hE : HasFiniteEllMonodromy ℓ E) [ConnectedSpace Y] {R : Type u} [CommRing R]
+    [IsStrictlyHenselianLocalRing R] (c : Spec (.of R) ⟶ Z.left) (s : Y)
+    (hs : IsClosed ({s} : Set Y)) (hcs : c (IsLocalRing.closedPoint R) = iY s) :
+    globalSectionsRestriction c (transverseBoundaryComplex hle E) = 0 := by
+  obtain ⟨h₁, -, h₃⟩ := transverseBoundary hℓ hΛ hZ hX hY z hz hUY hUXY hle E hE
+  have := hY.isClosedImmersion
+  let t := Scheme.closedGeometricPoint R
+  have ht : Set.range (t ≫ c) = {iY s} := by
+    ext w
+    refine ⟨?_, fun hw ↦ ⟨IsLocalRing.closedPoint _, ?_⟩⟩
+    · rintro ⟨a, rfl⟩
+      rw [Scheme.Hom.comp_apply, Scheme.closedGeometricPoint_apply, hcs]
+      rfl
+    · rw [Set.mem_singleton_iff.1 hw, Scheme.Hom.comp_apply, Scheme.closedGeometricPoint_apply,
+        hcs]
+  have : IsIso (globalSectionsRestriction t
+      (((c)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (transverseBoundaryComplex hle E))) :=
+    isIso_globalSectionsRestriction_closedGeometricPoint R _
+  refine globalSectionsRestriction_eq_zero_of_comp c t _ ?_
+  by_cases hsz : iY s = z
+  · exact (Functor.map_isZero _ (h₁ _ (t ≫ c) (ht.trans (by rw [hsz])))).eq_of_tgt _ _
+  · have hsub : Set.range (t ≫ c) ⊆ Set.range iY := by
+      rw [ht]
+      rintro _ rfl
+      exact ⟨s, rfl⟩
+    have hker : iY.ker ≤ (t ≫ c).ker := by
+      rw [Scheme.IdealSheafData.le_ker_iff_range_subset_support, Scheme.Hom.support_ker,
+        iY.isClosedMap.isClosed_range.closure_eq]
+      exact hsub
+    have hfac := IsClosedImmersion.lift_fac iY (t ≫ c) hker
+    rw [← hfac]
+    refine globalSectionsRestriction_comp_eq_zero_of_right _ _ _
+      (h₃ ‹_› s hs hsz _ _ ?_)
+    have hinj : Function.Injective iY := iY.isClosedEmbedding.injective
+    ext y
+    constructor
+    · rintro ⟨a, rfl⟩
+      apply hinj
+      rw [← Scheme.Hom.comp_apply, hfac, ← Set.mem_singleton_iff, ← ht]
+      exact ⟨a, rfl⟩
+    · intro hy
+      rw [Set.mem_singleton_iff.1 hy]
+      obtain ⟨a, ha⟩ : iY s ∈ Set.range (t ≫ c) := by rw [ht]; rfl
+      refine ⟨a, hinj ?_⟩
+      rw [← Scheme.Hom.comp_apply, hfac, ha]
+
+/-- **Restriction through a strictly local scheme vanishes**: in the situation of
+`globalSectionsRestriction_transverseBoundaryComplex_eq_zero`, for every `ι : W ⟶ Z - Y` such
+that `W ⟶ Z - Y ⟶ Z` factors through `c : S ⟶ Z`, the restriction map
+`RΓ(Z - Y, i_! E) ⟶ RΓ(W, ι^* i_! E)` is zero: it factors as
+`RΓ(Z - Y, i_! E) = RΓ(Z, M) ⟶ RΓ(S, c^* M) ⟶ RΓ(W, ...)`. -/
 theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠ 0)
     (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
     (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
@@ -182,52 +249,10 @@ theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠
     (hs : IsClosed ({s} : Set Y)) (hcs : c (IsLocalRing.closedPoint R) = iY s) {W : Scheme.{u}}
     (ι : W ⟶ UY.toScheme) (jW : W ⟶ Spec (.of R)) (hι : ι ≫ UY.ι = jW ≫ c) :
     globalSectionsRestriction ι
-      (((Z.left.homOfLE hle)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) = 0 := by
-  obtain ⟨h₁, -, h₃⟩ := transverseBoundary hℓ hΛ hZ hX hY z hz hUY hUXY hle E hE
-  have := hY.isClosedImmersion
-  let t := Scheme.closedGeometricPoint R
-  have ht : Set.range (t ≫ c) = {iY s} := by
-    ext w
-    refine ⟨?_, fun hw ↦ ⟨IsLocalRing.closedPoint _, ?_⟩⟩
-    · rintro ⟨a, rfl⟩
-      rw [Scheme.Hom.comp_apply, Scheme.closedGeometricPoint_apply, hcs]
-      rfl
-    · rw [Set.mem_singleton_iff.1 hw, Scheme.Hom.comp_apply, Scheme.closedGeometricPoint_apply, hcs]
-  have hc : globalSectionsRestriction c (transverseBoundaryComplex hle E) = 0 := by
-    have : IsIso (globalSectionsRestriction t
-        (((c)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (transverseBoundaryComplex hle E))) :=
-      isIso_globalSectionsRestriction_closedGeometricPoint R _
-    refine globalSectionsRestriction_eq_zero_of_comp c t _ ?_
-    by_cases hsz : iY s = z
-    · exact (Functor.map_isZero _ (h₁ _ (t ≫ c) (ht.trans (by rw [hsz])))).eq_of_tgt _ _
-    · have hsub : Set.range (t ≫ c) ⊆ Set.range iY := by
-        rw [ht]
-        rintro _ rfl
-        exact ⟨s, rfl⟩
-      have hker : iY.ker ≤ (t ≫ c).ker := by
-        rw [Scheme.IdealSheafData.le_ker_iff_range_subset_support, Scheme.Hom.support_ker,
-          iY.isClosedMap.isClosed_range.closure_eq]
-        exact hsub
-      have hfac := IsClosedImmersion.lift_fac iY (t ≫ c) hker
-      rw [← hfac]
-      refine globalSectionsRestriction_comp_eq_zero_of_right _ _ _
-        (h₃ ‹_› s hs hsz _ _ ?_)
-      have hinj : Function.Injective iY := iY.isClosedEmbedding.injective
-      ext y
-      constructor
-      · rintro ⟨a, rfl⟩
-        apply hinj
-        rw [← Scheme.Hom.comp_apply, hfac, ← Set.mem_singleton_iff, ← ht]
-        exact ⟨a, rfl⟩
-      · intro hy
-        rw [Set.mem_singleton_iff.1 hy]
-        obtain ⟨a, ha⟩ : iY s ∈ Set.range (t ≫ c) := by rw [ht]; rfl
-        refine ⟨a, hinj ?_⟩
-        rw [← Scheme.Hom.comp_apply, hfac, ha]
-  have hjc : globalSectionsRestriction (jW ≫ c) (transverseBoundaryComplex hle E) = 0 :=
-    globalSectionsRestriction_comp_eq_zero _ _ _ hc
-  rw [← hι] at hjc
-  exact globalSectionsRestriction_eq_zero_of_lowerStar _ _ _ hjc
+      (((Z.left.homOfLE hle)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) = 0 :=
+  globalSectionsRestriction_eq_zero_of_factor UY.ι c _
+    (globalSectionsRestriction_transverseBoundaryComplex_eq_zero hℓ hΛ hZ hX hY z hz hUY hUXY hle
+      E hE c s hs hcs) ι jW hι
 
 section Punctured
 
