@@ -14,6 +14,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 
 # The left side of the base-change core of the source exchange
 
+For a proper morphism `f`, the left side of the base-change core of the exceptional Künneth part
+of the source exchange, transposed along `Lf^* ⊣ Rf_*`, is the compact-support base change
+followed by the projection formula of `z` (`ProEtale.CondensedRing.sourceExchange_leftTranspose`).
+The ingredient is the compatibility of the exceptional projection morphism with the
+compact-support base change (`ProEtale.CondensedRing.exceptionalProjection_baseChange`,
+blueprint `prop-sf-pf-coherence`).
+
 -/
 
 @[expose] public section

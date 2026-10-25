@@ -16,6 +16,12 @@ public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 
 # The base-change core of the exceptional Künneth part of the source exchange
 
+The base-change core of the exceptional Künneth part of the source exchange
+(blueprint `lem-trf-trace-source-exchange`, Step 3), for a proper `f : X ⟶ Y`, in a generic form
+(`ProEtale.CondensedRing.lowerShriek_exceptionalKunneth_baseChange_generic`). It is proved by
+transposing both sides along `Lf^* ⊣ Rf_*` (`sourceExchange_leftTranspose`,
+`sourceExchange_rightTranspose`) and comparing them on `X × Y` (`sourceExchange_coreTail`).
+
 -/
 
 @[expose] public section
@@ -97,7 +103,7 @@ lemma Functor.OplaxMonoidal.comp_δ_tensorHom_comp_braiding {𝒱 𝒲 𝒰 : Ty
   rw [hbraidH, Functor.map_comp]
   simp only [Category.assoc]
   rw [reassoc_of% (hbraidR _ _), reassoc_of% hu, ← hc]
-  simp only [Category.assoc, MonoidalCategory.tensorHom_comp_tensorHom_assoc]
+  simp only [MonoidalCategory.tensorHom_comp_tensorHom_assoc]
   rw [BraidedCategory.braiding_naturality_assoc]
   simp only [MonoidalCategory.tensorHom_def, Category.assoc, MonoidalCategory.whiskerLeft_comp]
 
@@ -165,10 +171,11 @@ variable {P X Y W U V : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
   (aY : Y ⟶ P) (f : X ⟶ Y) [IsProper f.left] (p₂ : U ⟶ X) (π₁ π₂ : V ⟶ Y)
-  (zX : W ⟶ X) (h : W ⟶ V) [IsProper h.left] (r : U ⟶ W) [IsProper r.left]
+  (zX : W ⟶ X) (h : W ⟶ V) (r : U ⟶ W) [IsProper r.left]
   (hA : IsPullback h zX π₁ f) (hB : IsPullback p₂ r f (h ≫ π₂))
   (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
+omit [IsProper f.left] [IsProper r.left] in
 /-- The tensor part of the core identity: `Π_f` transposed along `h` and `r`. -/
 lemma sourceExchange_T1 [IsProper (r ≫ h).left] (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f)
     (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f) :
@@ -295,6 +302,8 @@ theorem sourceExchange_coreZ [IsIso (boundedConstructibleLowerShriekBaseChange_p
     _ _ _ _ _ _ _ _ (sourceExchange_T1 ℓ aY f p₂ π₁ π₂ zX h r hA K wq₁ wq₂)
     (sourceExchange_T2 ℓ aY f p₂ π₂ h r hB wq₂)
 
+omit [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] [IsProper f.left]
+  [IsProper r.left] in
 /-- The compact-support base change of the vertically pasted rectangle `sqX`, inverted. -/
 lemma sourceExchange_inv_baseChange_paste (sqY : IsPullback π₂ π₁ aY aY)
     [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)]
@@ -316,10 +325,10 @@ lemma sourceExchange_inv_baseChange_paste (sqY : IsPullback π₂ π₁ aY aY)
   simp only [NatIso.isIso_inv_app]
   apply IsIso.inv_eq_of_hom_inv_id
   rw [hP]
-  simp [← Functor.map_comp_assoc, ← Functor.map_comp]
-
+  simp [← Functor.map_comp]
 
 set_option maxHeartbeats 2000000 in
+-- the compactly supported direct images are unfolded in the defeq checks
 /-- The tail of the core identity: the left side through `Rh_*`, `Rr_!` and the projection
 formulas is the transported test map of the exceptional Künneth adjoint of `K`. -/
 theorem sourceExchange_coreTail (sqY : IsPullback π₂ π₁ aY aY)
