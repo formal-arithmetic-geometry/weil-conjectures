@@ -35,7 +35,7 @@ variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
 /-- The constant maps, as a morphism of abelian presheaves from the constant presheaf `T` to the
 presheaf `C(-, T)` of continuous maps. -/
 noncomputable def constToContinuousMap :
-    Presheaf.constRingObj.{u + 1} (C := Profinite.{u}) T ⟶
+    Presheaf.constRingObj (C := Profinite.{u}) (ULift.{u + 1} T) ⟶
       continuousMapRingPresheaf.{u} T ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1} where
   app _ := AddCommGrpCat.ofHom
     { toFun r := ULift.up (ContinuousMap.const _ r.down)
@@ -99,7 +99,8 @@ instance isLocallySurjective_constToContinuousMap :
 /-- The constant maps induce a morphism of ring objects from the constant ring sheaf `T` to the
 condensed ring `T̲ = C(-, T)`. -/
 noncomputable def constRingSheafToContinuousMapRingObj :
-    Sheaf.constRingSheaf (coherentTopology Profinite.{u}) T ⟶ continuousMapRingObj.{u} T :=
+    Sheaf.constRingSheaf (coherentTopology Profinite.{u}) (ULift.{u + 1} T) ⟶
+      continuousMapRingObj.{u} T :=
   (presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map (constToContinuousMap T) ≫
     (Sheaf.sheafifyRingPresheafIso (coherentTopology Profinite.{u})
       (continuousMapRingSheaf.{u} T)).hom

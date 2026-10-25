@@ -46,16 +46,16 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory.Sheaf
 
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-  (J : GrothendieckTopology C) (T : Type) [Ring T]
+  (J : GrothendieckTopology C) (T : Type (u + 1)) [Ring T]
 
 /-- The constant ring sheaf `T`, the sheafification of the constant ring presheaf `T`, as a ring
 object of abelian sheaves. -/
 noncomputable abbrev constRingSheaf : Sheaf J Ab.{u + 1} :=
-  (presheafToSheaf J Ab.{u + 1}).obj (Presheaf.constRingObj.{u + 1} (C := C) T)
+  (presheafToSheaf J Ab.{u + 1}).obj (Presheaf.constRingObj (C := C) T)
 
 /-- The constant ring sheaf of a commutative ring is a commutative ring object, sheafification
 being braided. -/
-instance isCommMonObj_constRingSheaf (T : Type) [CommRing T] :
+instance isCommMonObj_constRingSheaf (T : Type (u + 1)) [CommRing T] :
     IsCommMonObj (constRingSheaf J T) :=
   Functor.isCommMonObj_obj (F := presheafToSheaf J Ab.{u + 1})
 
@@ -63,13 +63,13 @@ instance isCommMonObj_constRingSheaf (T : Type) [CommRing T] :
 object over the constant ring presheaf `T`, acting through the sheafification unit. -/
 noncomputable def modToPresheafMod :
     Mod (Sheaf J Ab.{u + 1}) (constRingSheaf J T) ⥤
-      Mod (Cᵒᵖ ⥤ Ab.{u + 1}) (Presheaf.constRingObj.{u + 1} (C := C) T) :=
+      Mod (Cᵒᵖ ⥤ Ab.{u + 1}) (Presheaf.constRingObj (C := C) T) :=
   (sheafToPresheaf J Ab.{u + 1}).mapMod _ ⋙
     Mod.comap ((sheafificationAdjunction J Ab.{u + 1}).unitAlgHom _)
 
 /-- Sheafification of module objects is left adjoint to `modToPresheafMod`. -/
 noncomputable def sheafifyModAdjunction :
-    (presheafToSheaf J Ab.{u + 1}).mapMod (Presheaf.constRingObj.{u + 1} (C := C) T) ⊣
+    (presheafToSheaf J Ab.{u + 1}).mapMod (Presheaf.constRingObj (C := C) T) ⊣
       modToPresheafMod J T :=
   (sheafificationAdjunction J Ab.{u + 1}).mapModAdjunction _
 

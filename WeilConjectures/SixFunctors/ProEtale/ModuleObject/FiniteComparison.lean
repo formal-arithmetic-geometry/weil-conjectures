@@ -19,8 +19,9 @@ models of pro-étale sheaves of `T`-modules on `X`:
 1. module objects over the coefficient ring `Λ_X = p_X^* T̲`, the pullback from the point of
    the condensed ring `T̲ = C(-, T)`, in the category of abelian sheaves on `X_proét`
    (`WeilConjectures.SixFunctors.ProEtale.ModuleObject`);
-2. sheaves of `T`-modules, `Sheaf (ProEt.topology X) (ModuleCat T)`
-   (`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient`).
+2. sheaves of `T`-modules, `Sheaf (ProEt.topology X) (ModuleCat R)` for the ring
+   `R = ULift T` in the universe of the pro-étale coefficients, as in
+   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient`.
 
 This file proves that they are equivalent (`ProEtale.finiteCoefficientModEquivalence`),
 compatibly with the underlying abelian sheaves. The proof has three steps.
@@ -39,7 +40,7 @@ compatibly with the underlying abelian sheaves. The proof has three steps.
 
 * `ProEtale.constRingSheafToCondensedRingObj`: the isomorphism of ring objects `T_X ≅ Λ_X`.
 * `ProEtale.finiteCoefficientModEquivalence`: the equivalence
-  `Mod_{Λ_X} ≌ Sheaf (ProEt.topology X) (ModuleCat T)`.
+  `Mod_{Λ_X} ≌ Sheaf (ProEt.topology X) (ModuleCat (ULift T))`.
 -/
 
 @[expose] public section
@@ -135,7 +136,7 @@ of the comparisons `constantSheafToUpperStarToSpecZ`, `constantSheafToPointUpper
 constant sheaves and the identification `T_* ≅ T̲` of
 `Profinite.constRingSheafToContinuousMapRingObj`. -/
 noncomputable def constRingSheafToCondensedRingObj :
-    Sheaf.constRingSheaf (Scheme.ProEt.topology X) T ⟶
+    Sheaf.constRingSheaf (Scheme.ProEt.topology X) (ULift.{u + 1} T) ⟶
       condensedRingObj (Profinite.continuousMapRingObj T) X :=
   (constantSheafToUpperStarToSpecZ X).app (AddCommGrpCat.of (ULift.{u + 1} T)) ≫
     (toSpecZ X)^*[Ab.{u + 1}].map
@@ -196,14 +197,14 @@ preserved (`ProEtale.finiteCoefficientModEquivalence_functor_comp_sheafCompose`)
 noncomputable def finiteCoefficientModEquivalence :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.continuousMapRingObj T) X) ≌
-      Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} T) :=
+      Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T)) :=
   (Mod.comapEquivalenceOfIsIso (constRingSheafToCondensedRingObj X T)).trans
-    (Sheaf.modConstRingSheafEquivalence _ T)
+    (Sheaf.modConstRingSheafEquivalence _ (ULift.{u + 1} T))
 
 /-- The equivalence `finiteCoefficientModEquivalence` keeps the underlying abelian sheaf. -/
 lemma finiteCoefficientModEquivalence_functor_comp_sheafCompose :
     (finiteCoefficientModEquivalence X T).functor ⋙
-        sheafCompose _ (forget₂ (ModuleCat.{u + 1} T) Ab.{u + 1}) =
+        sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} T)) Ab.{u + 1}) =
       Mod.forget (condensedRingObj (Profinite.continuousMapRingObj T) X) :=
   rfl
 
