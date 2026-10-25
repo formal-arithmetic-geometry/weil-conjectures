@@ -24,8 +24,6 @@ of `F` and `G`.
   `k`-th power of the Frobenius on a stalk of `F ⊗ G` is the product of those of `F` and `G`.
 - `AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj`: the trace function of `F ⊗ G` is the
   product of those of `G` and `F`.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.tensorObj`: weights add under tensor
-  products.
 -/
 
 @[expose] public section

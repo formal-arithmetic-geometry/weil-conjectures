@@ -8042,6 +8042,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
@@ -9806,6 +9807,7 @@ public import WeilConjectures.RepresentationTheory.OpenStabilizerAdjunction
 public import WeilConjectures.RepresentationTheory.PiTensorProduct
 public import WeilConjectures.RepresentationTheory.PrimaryInvariantExtension
 public import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
+public import WeilConjectures.RepresentationTheory.ProfiniteInvariants
 public import WeilConjectures.RepresentationTheory.RepFunctors
 public import WeilConjectures.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
@@ -11863,6 +11865,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
+public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Complex
@@ -11987,6 +11992,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeGeneration
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseBidual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CompactOpenLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
@@ -12425,6 +12431,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
@@ -12775,9 +12782,11 @@ public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.DeformationModel
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduct
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
@@ -12832,6 +12841,7 @@ public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
 public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
 public import WeilConjectures.WeilSheaf.BaseChangeField.GlobalSections
 public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
+public import WeilConjectures.WeilSheaf.Bidual
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.BoundaryStalkFrobenius
 public import WeilConjectures.WeilSheaf.BoundaryStalkGaloisInvariants

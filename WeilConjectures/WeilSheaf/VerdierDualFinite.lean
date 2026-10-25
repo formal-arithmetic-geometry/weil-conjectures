@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructur
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.Bidual
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 
 /-!

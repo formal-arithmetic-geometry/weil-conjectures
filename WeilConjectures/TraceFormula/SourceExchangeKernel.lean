@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.SourceExchangeKunnethAdjoint
+public import WeilConjectures.TraceFormula.SourceExchangeKunneth
 
 /-!
 

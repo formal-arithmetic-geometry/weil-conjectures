@@ -83,7 +83,7 @@ lemma factorGerm_eq_globalSectionsTransport {P W Y : Scheme.{u}} {w : W ⟶ Y} {
 
 /-- Restricting a global section of `F` along `s` and then taking its germ along `y ≫ s = s` gives
 the restriction along `s`. -/
-lemma globalSectionsToUpperStar_app_comp_germ {P Y : Scheme.{u}} {s : P ⟶ Y} {y : P ⟶ P}
+lemma globalSectionsToUpperStar_app_comp_factorGerm {P Y : Scheme.{u}} {s : P ⟶ Y} {y : P ⟶ P}
     (h : y ≫ s = s) (F : Sheaf (Scheme.ProEt.topology Y) A) :
     (globalSectionsToUpperStar A s).app F ≫ factorGerm A h F =
       (globalSectionsToUpperStar A s).app F := by
@@ -122,11 +122,12 @@ lemma factorGerm_adicConstantSheaf_apply {S : Scheme.{u}} {L : Type u} [Field L]
   rw [map_smul]
   congr 1
   exact congrArg (fun φ ↦ φ.hom (oneGlobalSection (l := l) S))
-    (globalSectionsToUpperStar_app_comp_germ (WeilCoefficients.{u} l) hσ (adicConstantSheaf l S))
+    (globalSectionsToUpperStar_app_comp_factorGerm (WeilCoefficients.{u} l) hσ
+      (adicConstantSheaf l S))
 
 /-- The germ along `σ` of a section transported along `z' ≫ w = π ≫ z` is the transport of its
 germ along `g`, when `σ ≫ z' = z' ≫ g`. -/
-lemma globalSectionsTransport_comp_germ {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
+lemma globalSectionsTransport_comp_factorGerm {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
     {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
     {w : Y' ⟶ Y} {g : Y' ⟶ Y'} (hg : g ≫ w = w)
     {z : S ⟶ Y} {z' : Spec (.of L) ⟶ Y'} (hz : z' ≫ w = π ≫ z) (hσz : σ ≫ z' = z' ≫ g)
@@ -220,7 +221,7 @@ under the germ along `g`. Let `z : S ⟶ Y`, `π : Spec L ⟶ S`, `z' : Spec L �
 `z' ≫ w = π ≫ z`, and `σ : Spec L ⟶ Spec L` with `σ ≫ π = π` and `σ ≫ z' = z' ≫ g`. Then the
 transport of the section of `θ` is a nonzero section of `π^* z^* N` which the germ along `σ`
 multiplies by `χ`. -/
-lemma exists_ne_zero_germ_eq_smul_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
+lemma exists_ne_zero_factorGerm_eq_smul_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
     {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
     {w : Y' ⟶ Y} {g : Y' ⟶ Y'} (hg : g ≫ w = w)
     {z : S ⟶ Y} {z' : Spec (.of L) ⟶ Y'} (hz : z' ≫ w = π ≫ z) (hσz : σ ≫ z' = z' ≫ g)
@@ -231,7 +232,8 @@ lemma exists_ne_zero_germ_eq_smul_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [F
         ((π)^*[WeilCoefficients.{u} l].obj ((z)^*[WeilCoefficients.{u} l].obj N.X)),
       e ≠ 0 ∧ (factorGerm (WeilCoefficients.{u} l) hσ _).hom e = ULift.up χ • e := by
   refine ⟨_, globalSectionsTransport_globalSectionOfModHom_ne_zero hz θ, ?_⟩
-  rw [← ModuleCat.comp_apply, globalSectionsTransport_comp_germ hσ hg hz hσz, ModuleCat.comp_apply,
+  rw [← ModuleCat.comp_apply, globalSectionsTransport_comp_factorGerm hσ hg hz hσz,
+    ModuleCat.comp_apply,
     hθ, map_smul]
 
 /-- **A sheaf trivialised with a twisted deck action is not a subquotient of a constant sheaf.**
@@ -256,7 +258,7 @@ theorem not_epi_of_mono_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type 
     {n : ℕ} {B : AdicSheaf l S} (m : B ⟶ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l S) [Mono m]
     (p : B ⟶ (z)^*ᵃ[l].obj N) [Epi p] : False := by
   let A := WeilCoefficients.{u} l
-  obtain ⟨e, he0, he⟩ := exists_ne_zero_germ_eq_smul_of_twist hσ hg hz hσz θ χ hθ
+  obtain ⟨e, he0, he⟩ := exists_ne_zero_factorGerm_eq_smul_of_twist hσ hg hz hσz θ χ hθ
   -- lift `e` to a section `b` of `π^* B`
   have hsurj : Function.Surjective ((geometricStalkFunctor l π).map p).hom :=
     (ModuleCat.epi_iff_surjective _).1 inferInstance

@@ -19,10 +19,7 @@ through their test maps (`classTest`). The test map of `κ` is the evaluation fo
 adjoint of the exceptional Künneth map (`ProEtale.CondensedRing.classTest_kunnethVerdierMap`);
 the evaluation part is `ProEtale.CondensedRing.evaluation_comp_prodLowerStarExternalProduct`,
 and the exceptional Künneth part is
-`ProEtale.CondensedRing.lowerShriek_map_trace_comp_exceptionalKunnethAdjoint`
-(`WeilConjectures.TraceFormula.SourceExchangeKunnethAdjoint`), whose first reductions
-(`ProEtale.CondensedRing.lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint`,
-`ProEtale.CondensedRing.lowerShriek_map_lowerStarDualizingComplexTrace_comp_counit`) are here.
+`ProEtale.CondensedRing.lowerShriek_map_trace_comp_exceptionalKunnethAdjoint`.
 
 -/
 
@@ -185,6 +182,67 @@ section KernelPushforward
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+
+/-- The base-change core of the exceptional Künneth part of identity (a) (blueprint
+`lem-trf-trace-source-exchange`, Step 3): the projection formula for `p₁'`, compact-support base
+change in the product square of `Y` and the pasted counit of `a_X = f ≫ a_Y` agree, through
+`Π_f`, `Rq_* ≅ Rq_!`, the composition law of `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`, with `Rf_!`
+of the projection formula for `p₁`, base change in the product square of `X` and the counit of
+`a_X`. -/
+theorem lowerShriek_exceptionalKunneth_baseChange :
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map (β_ _ _).hom ≫
+      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).app
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)))).app
+        ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
+      (((prodBaseChangeIso ℓ Y Y).hom.app
+          ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)) ≫
+        (boundedConstructibleUpperStar _ ℓ (toPoint Y)).map
+          ((boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map
+              ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
+                (dualizingComplex' ℓ X)) ≫
+            (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (toPoint Y)).inv.app
+              (dualizingComplex' ℓ X) ≫
+            eqToHom (by rw [comp_toPoint]; rfl) ≫
+            (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint X)).counit.app (𝟙_ _))) ▷
+        (boundedConstructibleLowerStar _ ℓ f).obj K) ≫
+      ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint Y))).inv ▷ _) ≫
+      (λ_ _).hom =
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+        (prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X)) ≫
+      (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
+          (externalProduct ℓ K (dualizingComplex' ℓ X))) ≫
+      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
+        (externalProduct ℓ K (dualizingComplex' ℓ X)) ≫
+      (boundedConstructibleLowerShriek _ ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
+  sorry
+
+/-- **The exceptional Künneth adjoint commutes with a proper pushforward** (blueprint
+`lem-trf-trace-source-exchange`, Step 3): through `Π_f`, `Rq_* ≅ Rq_!`, the composition law of
+the square `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`, the adjoint of the exceptional Künneth map of
+`Rf_* K` precomposed with the trace `τ_f` is `Rf_*` of that of `K`. -/
+theorem lowerShriek_map_trace_comp_exceptionalKunnethAdjoint :
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+        ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
+            ((boundedConstructibleLowerStar _ ℓ f).obj K) ◁
+          (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
+            (lowerStarDualizingComplexTrace ℓ f)) ≫
+      exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K) =
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+        (prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X)) ≫
+      (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
+          (externalProduct ℓ K (dualizingComplex' ℓ X))) ≫
+      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
+        (externalProduct ℓ K (dualizingComplex' ℓ X)) ≫
+      (boundedConstructibleLowerShriek _ ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
+  by
+  refine (lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint ℓ _ _).trans ?_
+  rewrite [lowerShriek_map_lowerStarDualizingComplexTrace_comp_counit ℓ f]
+  exact lowerShriek_exceptionalKunneth_baseChange ℓ f K
 
 omit [IsProper f.left] in
 /-- The transported counits of `q = f × f` are compatible with the multiplication `μ_f`. -/
