@@ -25,8 +25,8 @@ as a function of `N`, in which it is contravariant.
   left dual and the exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp^! M` is an isomorphism, then `κ_{M,N}`
   is an isomorphism, since `κ = RHom(1, α) ∘ β` and the external Hom map `β` is an isomorphism for
   dualizable `N`.
-* **Naturality** (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_right_pre`): `κ_{M,N}` is natural
-  in `N`.
+* **Naturality** (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_right_pre`): `κ_{M,N}` is
+  natural in `N`.
 * **Two out of three** (`ProEtale.CondensedRing.isIso_kunnethVerdierMap_of_triangEnvelope_right`):
   the objects `N` such that `κ_{M,N⟦n⟧}` is an isomorphism for all `n` form a triangulated
   subcategory closed under retracts. No compatibility of `κ` with the shifts in `N` is used:
