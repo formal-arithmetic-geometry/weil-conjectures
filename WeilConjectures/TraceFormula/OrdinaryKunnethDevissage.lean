@@ -27,6 +27,10 @@ Künneth map restricts over `V ⨯ Y` to the dualizable case
 closed complement `Z ⨯ Y` its source vanishes, so that it remains to show that its target
 vanishes there.
 
+The extension by zero `Rj'_! Lj'^* K` of the restriction of a dualizable `K` on `X` is formal
+(`ProEtale.CondensedRing.isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable`, by the
+open–closed triangle).
+
 ## Unfinished
 
 - `ProEtale.CondensedRing.isZero_upperStar_lowerStar_externalProduct_lowerShriek`: the vanishing
@@ -132,6 +136,27 @@ lemma isIso_openKunnethMap_of_iso {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRi
     (h : IsIso (openKunnethMap ℓ j M' B)) : IsIso (openKunnethMap ℓ j M B) := by
   unfold openKunnethMap at h ⊢
   exact ObjectProperty.prop_of_iso (NatTrans.isoLocus _) e.symm h
+
+/-- **The Künneth map for the extension by zero of a restriction**: for an open immersion
+`j' : V ⟶ X` and a dualizable `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the Künneth map of `Rj'_! Lj'^* K` is an
+isomorphism. By the open–closed triangle `Rj'_! Lj'^* K ⟶ K ⟶ Ri_* Li^* K ⟶`, this follows from the
+dualizable case for `K` and for `Li^* K` and the compatibility with closed pushforward. Thus the
+generator case `isIso_openKunnethMap_lowerShriek_of_isDualizable` only fails to be formal for
+dualizable objects on `V` which do not extend to dualizable objects on `X`. -/
+theorem isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable [IsOpenImmersion j.left]
+    {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    (j' : V ⟶ X) [IsOpenImmersion j'.left]
+    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
+    IsIso (openKunnethMap ℓ j
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').obj K)) B) := by
+  obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_boundedConstructible ℓ (j := j')
+    (i := overClosedComplement j') (isCompl_range_overClosedComplement j').symm K
+  have key := fun h₂ h₃ ↦ isIso_openKunnethMap_of_distTriang₁ ℓ j B _ hT h₂ h₃
+  exact key (isIso_openKunnethMap_of_isDualizable ℓ j hK B)
+    (isIso_openKunnethMap_lowerStar_of_isClosedImmersion ℓ _ j _ B
+      (isIso_openKunnethMap_of_isDualizable ℓ j
+        (isDualizable_boundedConstructibleUpperStar_obj ℓ _ hK) B))
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in

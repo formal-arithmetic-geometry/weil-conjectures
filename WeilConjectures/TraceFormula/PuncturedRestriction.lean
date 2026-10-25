@@ -14,6 +14,8 @@ public import WeilConjectures.ConstructibleSheaf.EllMonodromy
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionStrictlyLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.TraceFormula.TransverseBoundary.Boundary
+public import WeilConjectures.TraceFormula.TransverseBoundary.OfRegularDivisors
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 /-!
@@ -62,23 +64,35 @@ noncomputable abbrev transverseBoundaryComplex (hXY : UXY ≤ UY)
   ((UY.ι)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.obj
     (((Z.left.homOfLE hXY)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E)
 
-/-- Compatibility required from the subsection `sk-lem-tf-transverse-boundary` (to be proved there):
-**transverse boundary calculation** (blueprint `sk-lem-tf-transverse-boundary`).
+/-- **Transverse boundary calculation** (blueprint `sk-lem-tf-transverse-boundary`).
 
-Let `Z` be a smooth surface over the algebraically closed field `k` of characteristic `≠ ℓ`, or
-an étale limit with affine transition maps of such surfaces, and `X, Y` regular divisors meeting
-transversely at exactly one point `z`, with open complements `Z - Y` (`UY`) and
-`Z - (X ∪ Y)` (`UXY`), `j : Z - Y ⟶ Z` and `i : Z - (X ∪ Y) ⟶ Z - Y`. Let `Λ` be a finite
-`ℓ`-primary ring and `E` a bounded complex of `Λ`-modules on `Z - (X ∪ Y)` with finite locally
-constant cohomology whose monodromy factors through a finite `ℓ`-group. Put `M = Rj_* i_! E`.
-Then
+Let `Z` be a regular, locally noetherian scheme over the algebraically closed field `k` of
+characteristic `≠ ℓ` which is a smooth surface, or an étale limit with affine transition maps of
+such surfaces, and `X, Y` regular divisors meeting transversely at exactly one point `z`: their
+scheme-theoretic intersection is the reduced point `z` (`MeetTransverselyAt`) and has codimension
+two in `Z` (`hXY`), i.e. local equations of `X` and `Y` form a regular system of parameters at
+`z`. Let `Z - Y` (`UY`) and `Z - (X ∪ Y)` (`UXY`) be the open complements,
+`j : Z - Y ⟶ Z` and `i : Z - (X ∪ Y) ⟶ Z - Y`. Let `Λ` be a finite `ℓ`-primary ring and `E` a
+bounded complex of `Λ`-modules on `Z - (X ∪ Y)` with finite locally constant cohomology whose
+monodromy factors through a finite `ℓ`-group. Put `M = Rj_* i_! E`. Then
 1. `M_z = 0`: the pullback of `M` to every geometric point over `z` vanishes;
 2. `M|_{Y - z}` has finite locally constant cohomology;
 3. if `Y` is connected, then for every closed point `s ≠ z` of `Y` and every geometric point
-   `s̄` over `s`, the restriction map `RΓ(Y, M|_Y) ⟶ M_s = RΓ(s̄, s̄^* M|_Y)` is zero. -/
+   `s̄` over `s`, the restriction map `RΓ(Y, M|_Y) ⟶ M_s = RΓ(s̄, s̄^* M|_Y)` is zero.
+
+This is `AlgebraicGeometry.Scheme.TransverseCorner.transverse_boundary` for the transverse corner
+`AlgebraicGeometry.Scheme.TransverseCorner.ofRegularDivisors`, with the derived pullbacks `Lf^*`
+replaced by the levelwise pullbacks `D(f^*)`.
+
+The codimension two hypothesis `hXY` is needed: without it `Z` could be the spectrum of a
+discrete valuation ring (an étale limit of smooth surfaces, the local ring of a surface at the
+generic point of a curve) with `X = Y` its closed point, and then `M_z` contains `Λ` in degree
+`0`. -/
 theorem transverseBoundary (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent (ℓ : Λ))
-    (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX) (hY : IsRegularDivisor iY)
+    (hZ : IsEtaleLimitOfSmoothSurfaces Z) [IsLocallyNoetherian Z.left] [IsRegular Z.left]
+    (hX : IsRegularDivisor iX) (hY : IsRegularDivisor iY)
     (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX))
     (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
     (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -94,9 +108,39 @@ theorem transverseBoundary (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent (ℓ : Λ
     (ConnectedSpace Y → ∀ (s : Y), IsClosed ({s} : Set Y) → iY s ≠ z →
       ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s' : Spec (.of Ω) ⟶ Y), Set.range s' = {s} →
         globalSectionsRestriction s' (((iY)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
-          (transverseBoundaryComplex hle E)) = 0) :=
-  sorry
-
+          (transverseBoundaryComplex hle E)) = 0) := by
+  let C := Scheme.TransverseCorner.ofRegularDivisors hZ hX hY z hz hXY hUY hUXY hle
+  obtain ⟨h₁, h₂, h₃⟩ := C.transverse_boundary hℓ Λ hΛ E hE
+  refine ⟨fun Ω _ _ z' hz' ↦ ?_, fun V hV n ↦ ?_, fun hYc s _ hsz Ω _ _ s' hs' ↦ ?_⟩
+  · exact (h₁ Ω z' hz').of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) z').app _).symm
+  · obtain rfl : V = C.puncturedY := by
+      ext1
+      exact hV
+    have := h₂ n
+    exact Scheme.IsFiniteLocallyConstantSheaf.of_iso
+      (F := (DerivedCategory.homologyFunctor _ n).obj
+        ((C.puncturedY.ι ≫ C.iY)^*[ModuleCat.{u + 1} Λ].leftDerivedFunctor.obj
+          (C.boundaryComplex Λ E)))
+      ((DerivedCategory.homologyFunctor _ n).mapIso
+        ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) _).app _))
+  · have hz' : C.z ∉ Set.range (s' ≫ C.iY) := by
+      rintro ⟨w, hw⟩
+      have hw' : s' w = s := by
+        rw [← Set.mem_singleton_iff, ← hs']
+        exact ⟨w, rfl⟩
+      apply hsz
+      rw [← hw']
+      exact hw
+    let e := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) iY).app
+      (transverseBoundaryComplex hle E)
+    have h := globalSectionsRestriction_naturality s' e.hom
+    have h0 : globalSectionsRestriction s' ((iY)^*[ModuleCat.{u + 1} Λ].leftDerivedFunctor.obj
+        (transverseBoundaryComplex hle E)) = 0 :=
+      globalSectionsRestriction_eq_zero_of_derived Λ s' _ (h₃ hYc Ω s' hz')
+    rw [h0, zero_comp] at h
+    rw [← cancel_epi ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).map e.hom), h,
+      comp_zero]
 
 section Vanishing
 
@@ -182,8 +226,10 @@ restriction `RΓ(Z, M) ⟶ M_s` vanishes. If `s = z` its target `M_z` is zero; o
 through the restriction `RΓ(Y, M|_Y) ⟶ M_s`, which is zero by the transverse boundary
 calculation. -/
 theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero (hℓ : (ℓ : k) ≠ 0)
-    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
+    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z)
+    [IsLocallyNoetherian Z.left] [IsRegular Z.left] (hX : IsRegularDivisor iX)
     (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX))
     (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
     (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -191,7 +237,7 @@ theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero (hℓ : (ℓ
     [IsStrictlyHenselianLocalRing R] (c : Spec (.of R) ⟶ Z.left) (s : Y)
     (hs : IsClosed ({s} : Set Y)) (hcs : c (IsLocalRing.closedPoint R) = iY s) :
     globalSectionsRestriction c (transverseBoundaryComplex hle E) = 0 := by
-  obtain ⟨h₁, -, h₃⟩ := transverseBoundary hℓ hΛ hZ hX hY z hz hUY hUXY hle E hE
+  obtain ⟨h₁, -, h₃⟩ := transverseBoundary hℓ hΛ hZ hX hY z hz hXY hUY hUXY hle E hE
   have := hY.isClosedImmersion
   let t := Scheme.closedGeometricPoint R
   have ht : Set.range (t ≫ c) = {iY s} := by
@@ -239,8 +285,10 @@ that `W ⟶ Z - Y ⟶ Z` factors through `c : S ⟶ Z`, the restriction map
 `RΓ(Z - Y, i_! E) ⟶ RΓ(W, ι^* i_! E)` is zero: it factors as
 `RΓ(Z - Y, i_! E) = RΓ(Z, M) ⟶ RΓ(S, c^* M) ⟶ RΓ(W, ...)`. -/
 theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠ 0)
-    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
+    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z)
+    [IsLocallyNoetherian Z.left] [IsRegular Z.left] (hX : IsRegularDivisor iX)
     (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX))
     (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
     (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -251,8 +299,8 @@ theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠
     globalSectionsRestriction ι
       (((Z.left.homOfLE hle)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) = 0 :=
   globalSectionsRestriction_eq_zero_of_factor UY.ι c _
-    (globalSectionsRestriction_transverseBoundaryComplex_eq_zero hℓ hΛ hZ hX hY z hz hUY hUXY hle
-      E hE c s hs hcs) ι jW hι
+    (globalSectionsRestriction_transverseBoundaryComplex_eq_zero hℓ hΛ hZ hX hY z hz hXY hUY
+      hUXY hle E hE c s hs hcs) ι jW hι
 
 section Punctured
 
@@ -307,8 +355,10 @@ is zero. This is `AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_s
 the strictly local scheme `C_(s)`, whose closed point maps to `s`; the point `s` is closed in `Y`,
 being cut out by the closed subscheme `C`. -/
 theorem puncturedRestriction_eq_zero (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent (ℓ : Λ))
-    (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX) (hY : IsRegularDivisor iY)
+    (hZ : IsEtaleLimitOfSmoothSurfaces Z) [IsLocallyNoetherian Z.left] [IsRegular Z.left]
+    (hX : IsRegularDivisor iX) (hY : IsRegularDivisor iY)
     (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX))
     (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
     (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -327,7 +377,7 @@ theorem puncturedRestriction_eq_zero (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent
       Set.ext fun y ↦ ⟨fun hy ↦ iY.isClosedEmbedding.injective hy, fun hy ↦ by rw [hy]; rfl⟩] at h
   have := Scheme.isStrictlyHenselianLocalRing_strictHenselization s'
   refine globalSectionsRestriction_eq_zero_of_strictlyLocal (R := Scheme.strictHenselization s')
-    hℓ hΛ hZ hX hY z hz hUY hUXY hle E hE
+    hℓ hΛ hZ hX hY z hz hXY hUY hUXY hle E hE
     (Scheme.strictLocalizationToBase s' ≫ iC) s hs ?_ _ (puncturedStrictLocalization s').ι ?_
   · rw [Scheme.Hom.comp_apply, ← hs']
     congr 1
