@@ -62,8 +62,8 @@ noncomputable abbrev transverseBoundaryComplex (hXY : UXY ≤ UY)
   ((UY.ι)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.obj
     (((Z.left.homOfLE hXY)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E)
 
-/-- **Transverse boundary calculation** (blueprint `sk-lem-tf-transverse-boundary`).
-Compatibility required from the subsection `sk-lem-tf-transverse-boundary` (to be proved there).
+/-- Compatibility required from the subsection `sk-lem-tf-transverse-boundary` (to be proved there):
+**transverse boundary calculation** (blueprint `sk-lem-tf-transverse-boundary`).
 
 Let `Z` be a smooth surface over the algebraically closed field `k` of characteristic `≠ ℓ`, or
 an étale limit with affine transition maps of such surfaces, and `X, Y` regular divisors meeting
