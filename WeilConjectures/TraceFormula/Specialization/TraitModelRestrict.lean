@@ -82,7 +82,7 @@ noncomputable def restrict (M : NearbyCyclesModel X X'.left) (V : M.total.Opens)
 geometric model, over the open immersions `V ⟶ 𝒳` and `i⁻¹ V ⟶ X'`. -/
 @[simps]
 noncomputable def restrictHom (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
-    (M.restrict V).Hom M.geometric V.ι (M.i ⁻¹ᵁ V).ι where
+    (M.restrict V).geometric.Hom M.geometric V.ι (M.i ⁻¹ᵁ V).ι where
   total := V.ι
   generic := (M.j ⁻¹ᵁ V).ι
   comm_j := (morphismRestrict_ι M.j V).symm
@@ -92,7 +92,7 @@ noncomputable def restrictHom (M : NearbyCyclesModel X X'.left) (V : M.total.Ope
 /-- The square of geometric generic fibres of the inclusion of a restricted model is
 cartesian. -/
 lemma isPullback_restrictHom (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
-    IsPullback (M.restrictHom V).generic (M.restrict V).j M.geometric.j
+    IsPullback (M.restrictHom V).generic (M.restrict V).geometric.j M.geometric.j
       (M.restrictHom V).total :=
   (isPullback_morphismRestrict M.j V).flip
 
