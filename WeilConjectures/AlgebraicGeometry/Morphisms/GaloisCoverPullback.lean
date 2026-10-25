@@ -63,10 +63,10 @@ noncomputable abbrev pullbackSMul {P : Scheme.{u}} (π : P ⟶ Y) (f : X ⟶ Y) 
 
 omit [Group G] in
 /-- Simple transitivity of a group action over `Y` is stable under base change: if
-`∐_{g ∈ G} P ⟶ P ×_Y P`, `(g • -, id)` on the `g`-th summand, is an isomorphism, then so is the
-corresponding morphism for the base change `P ×_Y X`. -/
-lemma isIso_sigmaDesc_pullback {P : Scheme.{u}} (π : P ⟶ Y) (f : X ⟶ Y) (smul : G → (P ⟶ P))
-    (hsmul : ∀ g, smul g ≫ π = π)
+`∐_{g ∈ G} P ⟶ P ×_Y P`, `(g • -, id)` on the `g`-th summand, is an isomorphism, then so is
+the corresponding morphism for the base change `P ×_Y X`. -/
+lemma isIso_sigmaDesc_pullback {P : Scheme.{u}} (π : P ⟶ Y) (f : X ⟶ Y)
+    (smul : G → (P ⟶ P)) (hsmul : ∀ g, smul g ≫ π = π)
     [IsIso (Sigma.desc fun g : G ↦ pullback.lift (f := π) (g := π) (smul g) (𝟙 P)
       (by simp [hsmul]))] :
     IsIso (Sigma.desc fun g : G ↦ pullback.lift (f := pullback.snd π f) (g := pullback.snd π f)

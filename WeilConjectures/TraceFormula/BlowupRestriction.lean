@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.EllMonodromyPullback
 public import WeilConjectures.TraceFormula.PuncturedRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionCoproduct
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
@@ -44,7 +45,7 @@ lemma HasFiniteEllMonodromy.upperStar {ℓ : ℕ} {U V : Scheme.{u}} (f : V ⟶ 
     {E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hE : HasFiniteEllMonodromy ℓ E) :
     HasFiniteEllMonodromy ℓ (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) :=
-  sorry
+  hE.upperStar' f
 
 /-- Base change for the derived extension by zero along a cartesian square of schemes
 `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions: `g''^* j_! E ≅ j'_! g'^* E`. -/

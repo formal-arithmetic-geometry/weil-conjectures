@@ -37,7 +37,8 @@ lemma HasFiniteEllMonodromy.upperStar' {ℓ : ℕ} {U V : Scheme.{u}} (f : V ⟶
     (hE : HasFiniteEllMonodromy ℓ E) :
     HasFiniteEllMonodromy ℓ (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) := by
   obtain ⟨⟨a, b, hab⟩, hfl, G, _, _, hG, c, hc⟩ := hE
-  let e (n : ℤ) : ((f)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.homologyFunctor _ n).obj E) ≅
+  let e (n : ℤ) :
+      ((f)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.homologyFunctor _ n).obj E) ≅
       (DerivedCategory.homologyFunctor _ n).obj
         (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) :=
     (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n).app E

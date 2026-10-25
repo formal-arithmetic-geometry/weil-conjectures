@@ -86,7 +86,8 @@ theorem not_mem_span_sup_pow_of_eval_ne_zero (hdim : ringKrullDim R = 2) {x₀ y
   have h1 : π (p.eval (-c)) = w * π y₀ := by
     apply sub_eq_zero.mp
     apply hpow n
-    rw [mul_sub, hw, pow_succ]
+    have hw' : w * π y₀ ^ (n + 1) = π y₀ ^ n * π (eval (-c) p) := hw
+    rw [mul_sub, ← hw']
     ring
   apply hc
   rw [eval_map, ← map_neg, eval₂_at_apply, residue_eq_zero_iff]
@@ -98,5 +99,80 @@ theorem not_mem_span_sup_pow_of_eval_ne_zero (hdim : ringKrullDim R = 2) {x₀ y
   have := Ideal.add_mem _ (hxm h1) (Ideal.mul_mem_left _ w'
     (show y₀ ∈ maximalIdeal R from hm' ▸ Ideal.subset_span (by simp)))
   rwa [sub_add_cancel] at this
+
+/-- **Separated tangent cones have no common tangent direction.** Let `𝔪 = (x, y)`, and let
+`f = ∑_{j ≤ d} p_j x ^ (d - j) y ^ j` and `g = ∑_{j ≤ e} q_j x ^ (e - j) y ^ j` be such that
+`𝔪 ^ n ⊆ f 𝔪 ^ (n - d) + g 𝔪 ^ (n - e) + 𝔪 ^ (n + 1)` for large `n`. Then `p(τ)` and `q(τ)` do not
+both lie in `𝔪`: otherwise, modulo `y - τ x`, both `f` and `g` would have order larger than `d` and
+`e` along the line `y = τ x`. -/
+theorem not_eval_mem_and_eval_mem (hdim : ringKrullDim R = 2) {x y : R}
+    (hm : maximalIdeal R = Ideal.span {x, y}) {f g : R} {d e : ℕ} {p q : R[X]}
+    (hp : p.natDegree ≤ d) (hf : f = ∑ j ∈ Finset.range (d + 1), p.coeff j * x ^ (d - j) * y ^ j)
+    (hq : q.natDegree ≤ e) (hg : g = ∑ j ∈ Finset.range (e + 1), q.coeff j * x ^ (e - j) * y ^ j)
+    (hT : ∃ N : ℕ, ∀ n ≥ N, maximalIdeal R ^ n ≤ Ideal.span {f} * maximalIdeal R ^ (n - d) ⊔
+      Ideal.span {g} * maximalIdeal R ^ (n - e) ⊔ maximalIdeal R ^ (n + 1))
+    (τ : R) (hpτ : p.eval τ ∈ maximalIdeal R) (hqτ : q.eval τ ∈ maximalIdeal R) : False := by
+  set z := y + -τ * x
+  have hm' : maximalIdeal R = Ideal.span {z, x} := by
+    rw [hm, span_pair_add_mul, Set.pair_comm]
+  obtain ⟨-, hreg⟩ := isDomain_quotient_and_mul_eq_zero hdim hm'
+  set π := Ideal.Quotient.mk (Ideal.span {z})
+  have hz : π z = 0 := Ideal.Quotient.mk_singleton_self z
+  have hy : π y = π τ * π x := by
+    rw [← sub_eq_zero, ← map_mul, ← map_sub, ← hz]
+    congr 1
+    ring
+  have hmap : (maximalIdeal R).map π = Ideal.span {π x} := by
+    rw [hm', Ideal.map_span, Set.image_pair, hz, Ideal.span_insert_zero]
+  have key : ∀ {k : ℕ} {r : R} {P : R[X]}, P.natDegree ≤ k →
+      r = ∑ j ∈ Finset.range (k + 1), P.coeff j * x ^ (k - j) * y ^ j →
+      P.eval τ ∈ maximalIdeal R → π r ∈ Ideal.span {π x ^ (k + 1)} := by
+    intro k r P hP hr hPτ
+    have h1 := Ideal.mem_map_of_mem π hPτ
+    rw [hmap, Ideal.mem_span_singleton'] at h1
+    obtain ⟨w, hw⟩ := h1
+    rw [Ideal.mem_span_singleton', hr, mk_sum_eq_pow_mul_eval hy P hP, ← hw]
+    exact ⟨w, by ring⟩
+  have hpow : ∀ (k : ℕ) {a : R ⧸ Ideal.span {z}}, π x ^ k * a = 0 → a = 0 := by
+    intro k
+    induction k with
+    | zero => intro a ha; simpa using ha
+    | succ k ih =>
+      intro a ha
+      rw [pow_succ', mul_assoc] at ha
+      exact ih (hreg _ ha)
+  obtain ⟨N, hN⟩ := hT
+  set n := N + d + e
+  have hxn : x ^ n ∈ maximalIdeal R ^ n :=
+    Ideal.pow_mem_pow (hm ▸ Ideal.subset_span (by simp)) n
+  have hmem := Ideal.mem_map_of_mem π (hN n (by omega) hxn)
+  have hle : ∀ {k : ℕ} {r : R}, π r ∈ Ideal.span {π x ^ (k + 1)} → k ≤ n →
+      Ideal.span {π r} * Ideal.span {π x ^ (n - k)} ≤ Ideal.span {π x ^ (n + 1)} := by
+    intro k r hr hk
+    obtain ⟨w, hw⟩ := Ideal.mem_span_singleton'.mp hr
+    rw [Ideal.span_singleton_mul_span_singleton,
+      Ideal.span_singleton_le_span_singleton, ← hw, show n + 1 = k + 1 + (n - k) by omega,
+      pow_add]
+    exact ⟨w, by ring⟩
+  rw [Ideal.map_sup, Ideal.map_sup, Ideal.map_mul, Ideal.map_mul, Ideal.map_pow, Ideal.map_pow,
+    Ideal.map_pow, hmap, Ideal.map_span, Ideal.map_span, Set.image_singleton, Set.image_singleton] at hmem
+  simp only [Ideal.span_singleton_pow] at hmem
+  have hmem' : π (x ^ n) ∈ Ideal.span {π x ^ (n + 1)} := by
+    refine (sup_le (sup_le (hle (key hp hf hpτ) (by omega)) (hle (key hq hg hqτ) (by omega)))
+      le_rfl) hmem
+  obtain ⟨w, hw⟩ := Ideal.mem_span_singleton'.mp hmem'
+  have h1 : 1 - w * π x = 0 := by
+    apply hpow n
+    rw [map_pow] at hw
+    linear_combination -hw
+  obtain ⟨w', rfl⟩ := Ideal.Quotient.mk_surjective w
+  rw [← map_mul, ← map_one π, ← map_sub, Ideal.Quotient.eq_zero_iff_mem] at h1
+  have hzm : Ideal.span {z} ≤ maximalIdeal R := by
+    rw [hm']
+    exact Ideal.span_mono (by simp)
+  have := Ideal.add_mem _ (hzm h1) (Ideal.mul_mem_left _ w'
+    (show x ∈ maximalIdeal R from hm ▸ Ideal.subset_span (by simp)))
+  rw [sub_add_cancel] at this
+  exact (maximalIdeal.isMaximal R).ne_top ((Ideal.eq_top_iff_one _).mpr this)
 
 end BlowupChart
