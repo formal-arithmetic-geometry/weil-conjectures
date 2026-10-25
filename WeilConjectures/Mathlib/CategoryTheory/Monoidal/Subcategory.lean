@@ -13,7 +13,8 @@ public import Mathlib.CategoryTheory.Monoidal.Subcategory
 Let `P` and `Q` be monoidal properties of objects of monoidal categories `C` and `D`, and
 `F : C ⥤ D` a strong monoidal functor sending objects satisfying `P` to objects satisfying `Q`.
 The restriction `Q.lift (P.ι ⋙ F) hF : P.FullSubcategory ⥤ Q.FullSubcategory` is then strong
-monoidal, with the comparison isomorphisms of `F`.
+monoidal, with the comparison isomorphisms of `F`. The file also records the underlying
+morphisms of whiskerings and associators in a full monoidal subcategory.
 
 ## Main definitions
 
@@ -45,5 +46,33 @@ noncomputable instance monoidalLift : (Q.lift (P.ι ⋙ F) hF).Monoidal :=
       associativity X Y Z := hom_ext _ (associativity F X.obj Y.obj Z.obj)
       left_unitality X := hom_ext _ (left_unitality F X.obj)
       right_unitality X := hom_ext _ (right_unitality F X.obj) }
+
+end CategoryTheory.ObjectProperty
+
+namespace CategoryTheory.ObjectProperty
+
+open MonoidalCategory
+
+variable {C : Type*} [Category* C] [MonoidalCategory C] (P : ObjectProperty C) [P.IsMonoidal]
+
+/-- The underlying morphism of a left whiskering in a full monoidal subcategory. -/
+lemma whiskerLeft_hom (X : P.FullSubcategory) {Y Z : P.FullSubcategory} (f : Y ⟶ Z) :
+    (X ◁ f).hom = X.obj ◁ f.hom :=
+  rfl
+
+/-- The underlying morphism of a right whiskering in a full monoidal subcategory. -/
+lemma whiskerRight_hom {X Y : P.FullSubcategory} (f : X ⟶ Y) (Z : P.FullSubcategory) :
+    (f ▷ Z).hom = f.hom ▷ Z.obj :=
+  rfl
+
+/-- The underlying morphism of the associator in a full monoidal subcategory. -/
+lemma associator_hom_hom (X Y Z : P.FullSubcategory) :
+    (α_ X Y Z).hom.hom = (α_ X.obj Y.obj Z.obj).hom :=
+  rfl
+
+/-- The underlying morphism of the inverse associator in a full monoidal subcategory. -/
+lemma associator_inv_hom (X Y Z : P.FullSubcategory) :
+    (α_ X Y Z).inv.hom = (α_ X.obj Y.obj Z.obj).inv :=
+  rfl
 
 end CategoryTheory.ObjectProperty

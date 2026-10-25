@@ -46,31 +46,37 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-instance : LocallyOfFiniteType f.left := by
+/-- A morphism of `k`-schemes of finite type is locally of finite type. -/
+instance locallyOfFiniteType_over_left : LocallyOfFiniteType f.left := by
   have : LocallyOfFiniteType (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact locallyOfFiniteType_of_comp f.left Y.hom
 
-instance : QuasiCompact f.left := by
+/-- A morphism of `k`-schemes of finite type is quasi-compact. -/
+instance quasiCompact_over_left : QuasiCompact f.left := by
   have : QuasiCompact (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact QuasiCompact.of_comp f.left Y.hom
 
-instance : IsSeparated f.left := by
+/-- A morphism of separated `k`-schemes is separated. -/
+instance isSeparated_over_left : IsSeparated f.left := by
   have : IsSeparated (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact IsSeparated.of_comp f.left Y.hom
 
-instance : LocallyOfFiniteType (pullback f g).hom := by
+/-- The fibre product of `k`-schemes of finite type is of finite type. -/
+instance locallyOfFiniteType_pullback_hom : LocallyOfFiniteType (pullback f g).hom := by
   have : LocallyOfFiniteType (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq]
   infer_instance
 
-instance : QuasiCompact (pullback f g).hom := by
+/-- The fibre product of `k`-schemes of finite type is quasi-compact. -/
+instance quasiCompact_pullback_hom : QuasiCompact (pullback f g).hom := by
   have : QuasiCompact (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq]
   infer_instance
 
-instance : IsSeparated (pullback f g).hom := by
+/-- The fibre product of separated `k`-schemes is separated. -/
+instance isSeparated_pullback_hom : IsSeparated (pullback f g).hom := by
   have : IsSeparated (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq]

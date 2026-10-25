@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidalOfCompactification
 
 /-!
@@ -121,10 +122,8 @@ lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_tensor
           ((α_ _ _ _).hom ≫ K ◁ μ (boundedConstructibleUpperStar Λ ℓ f) B C) := by
   refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
   dsimp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
-    ObjectProperty.FullSubcategory.tensorObj_obj, ObjectProperty.FullSubcategory.whiskerLeft_hom,
-    ObjectProperty.FullSubcategory.whiskerRight_hom,
-    ObjectProperty.FullSubcategory.associator_hom_hom,
-    ObjectProperty.FullSubcategory.associator_inv_hom,
+    ObjectProperty.tensorObj_obj, ObjectProperty.whiskerLeft_hom, ObjectProperty.whiskerRight_hom,
+    ObjectProperty.associator_hom_hom, ObjectProperty.associator_inv_hom,
     boundedConstructibleLowerShriekOfCompactification_map_hom,
     boundedConstructibleLowerShriekOfCompactification_obj_obj, boundedConstructibleUpperStar_μ_hom,
     boundedConstructibleUpperStar_obj_obj]
