@@ -30,7 +30,8 @@ blueprint `sk-prop-tf-nearby-external-kunneth`) says that the Künneth map of ne
 After the reduction to proper models with compatible geometric generic fibres
 (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), this is
 `NearbyCyclesModel.isIso_kunnethMap_of_isProper`, whose inputs are supplied here: Deligne's
-finiteness theorem for the nearby cycles (`NearbyCyclesModel.preservesBoundedConstructible_of_exists_comp`,
+finiteness theorem for the nearby cycles
+(`NearbyCyclesModel.preservesBoundedConstructible_of_exists_comp`,
 `NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`) and the monoidality of the
 nearby cycles of the trait on the cohomology of the geometric generic fibres
 (`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`), the complexes
@@ -101,8 +102,8 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
     (Over.homMk (U := Over.mk gM) (V := Over.mk (𝟙 (Spec (.of (traitGenericField k'))))) gM
       (Category.comp_id _)) _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)
   exact isIso_kunnethMap_of_isProper _ hM hN hpb hP hgen heM heN hA hB hΨA hΨB
-    (boundedConstructible_kunnethMap_source _ hM hP hΨA hΨB)
-    (boundedConstructible_kunnethMap_target _ (φ₂ := φ₂) hM hP
+    (boundedConstructible_kunnethMap_source _ hΨA hΨB)
+    (boundedConstructible_kunnethMap_target _ (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
     (isIso_kunnethMap_traitGenericModel_of_shiftDecomposition _ k' _ _

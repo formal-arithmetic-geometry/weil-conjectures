@@ -35,8 +35,9 @@ sections vanishes (`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComp
   generic slicing and induction on the dimension (SGA 4½, [Th. finitude], §§3.4, 3.7, the inertia
   sequence `1 ⟶ P ⟶ I' ⟶ I ⟶ 1`, and the invariants under the pro-`p` group `P`,
   blueprint `det-nearby-kunneth-invariants`, proved in
-  `WeilConjectures.RepresentationTheory.ProfiniteInvariants`). None of strict localizations of `𝔸¹_S`, nearby
-  cycles over a varying trait, or the action of inertia on nearby cycles is formalised.
+  `WeilConjectures.RepresentationTheory.ProfiniteInvariants`). None of strict localizations of
+  `𝔸¹_S`, nearby cycles over a varying trait, or the action of inertia on nearby cycles is
+  formalised.
 * `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`: blueprint
   `det-nearby-kunneth-finite-support` for closed points which need not be rational (the special
   fibre is over a separably closed, not necessarily perfect, field). The case of rational points
@@ -186,11 +187,11 @@ theorem isIso_kunnethMap_of_isProper (hM : M.IsTraitModelOver qM gM)
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
     (isZero_of_isZero_upperStar_finsetComplOpens Λ S hS C hC h₂ h₁)
 
+omit [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] [IsSepClosed k'] [Fact (ringChar k').Prime] in
 include hΛ in
 /-- The source `Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B` of the Künneth map is bounded constructible if the
 nearby cycles `Ψ_M A`, `Ψ_N B` are. -/
-lemma boundedConstructible_kunnethMap_source (hM : M.IsTraitModelOver qM gM)
-    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+lemma boundedConstructible_kunnethMap_source
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))}
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -206,13 +207,13 @@ lemma boundedConstructible_kunnethMap_source (hM : M.IsTraitModelOver qM gM)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
 
-include hΛ φ₂ in
+omit [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] [IsSepClosed k'] [Fact (ringChar k').Prime] in
+include hΛ φ₁ φ₂ in
 /-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
 geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
 `ε_M` and `ε_N` factor through the total spaces, `Lε_P^* (Lf₁^* A ⊗ Lf₂^* B)` is the pullback
 `Lj^* C₀` of a bounded constructible complex on the total space of `P`. -/
-lemma boundedConstructible_kunnethMap_target (hM : M.IsTraitModelOver qM gM)
-    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
     (hgeom : ∀ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
         (condensedRingObj Λ P.total)), boundedConstructible (condensedRingObj Λ P.total) C₀ →
       boundedConstructible (condensedRingObj Λ Z'.left) ((P.geometric.nearbyCycles Λ).obj C₀))
@@ -230,8 +231,7 @@ lemma boundedConstructible_kunnethMap_target (hM : M.IsTraitModelOver qM gM)
         boundedConstructible (condensedRingObj Λ P.total) D →
           boundedConstructible (condensedRingObj Λ P.total) (C ⊗ D) := by
     have : (boundedConstructible (condensedRingObj Λ P.total)).IsMonoidal :=
-      isMonoidal_boundedConstructible Λ (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k'))
-        (ℓ := ℓ)
+      isMonoidal_boundedConstructible Λ (X := Over.mk (qP ≫ traitToBase k' k')) (ℓ := ℓ)
     exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
   obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso Λ φ₁ φ₂ heM heN hA hB htensor
   exact (boundedConstructible _).prop_of_iso (L((P.i)^*⟦Λ⟧).mapIso (R((P.j)_*⟦Λ⟧).mapIso

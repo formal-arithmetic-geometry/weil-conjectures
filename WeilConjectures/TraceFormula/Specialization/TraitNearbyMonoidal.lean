@@ -26,8 +26,8 @@ cycles of `RΓ(X_η̄, A) ⊗ RΓ(Y_η̄, B)`.
 
 Every bounded constructible complex on `Spec Ω` is a finite direct sum of shifts `𝟙⟦d⟧` of the
 unit (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), and `𝟙⟦d⟧ = Lη̄^* 𝟙_S⟦d⟧`. For
-`W = 𝟙_S⟦d⟧` the lax tensor map `μ : Rη̄_* Lη̄^* W ⊗ Rη̄_* V ⟶ Rη̄_* (Lη̄^* W ⊗ V)`, precomposed with
-the unit `W ⟶ Rη̄_* Lη̄^* W`, is the left projection morphism of `η̄`
+`W = 𝟙_S⟦d⟧` the lax tensor map `μ : Rη̄_* Lη̄^* W ⊗ Rη̄_* V ⟶ Rη̄_* (Lη̄^* W ⊗ V)`, precomposed
+with the unit `W ⟶ Rη̄_* Lη̄^* W`, is the left projection morphism of `η̄`
 (`CategoryTheory.Adjunction.whiskerRight_unit_comp_homEquiv`), an isomorphism since `W` is
 invertible. After `Li^*` the unit at `W` is invertible: it is at `W = 𝟙_S` (the cohomology of the
 geometric generic point of `S` is that of its closed point,
@@ -56,6 +56,7 @@ variable {C D : Type*} [Category C] [Preadditive C] [HasShift C ℤ]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Category D] [Preadditive D] {F G : C ⥤ D}
   [F.Additive] [G.Additive]
 
+omit [∀ n : ℤ, (shiftFunctor C n).Additive] in
 /-- A natural transformation between additive functors which is invertible at the summands
 `E⟦nⱼ⟧` of a decomposition `P = ⨁ⱼ E⟦nⱼ⟧` is invertible at `P`. -/
 lemma isIso_app (τ : F ⟶ G) {E P : C} (Dc : ShiftDecomposition E P)
@@ -152,7 +153,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The shifts `𝟙⟦d⟧` of the unit of the derived category of module objects are dualizable: they
 are invertible, with inverse `𝟙⟦-d⟧`. -/
-lemma isDualizable_shift_unit (X : Scheme.{u}) (d : ℤ) :
+lemma isDualizable_shift_unit_derivedCategory (X : Scheme.{u}) (d : ℤ) :
     IsDualizable ((shiftFunctor (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X)
       Ab.{u + 1}) (condensedRingObj Λ X))) d).obj (𝟙_ _)) := by
   let e : ∀ a b : ℤ, a + b = 0 →
@@ -165,7 +166,7 @@ lemma isDualizable_shift_unit (X : Scheme.{u}) (d : ℤ) :
 variable (k' : Type u) [Field k'] [IsSepClosed k']
 
 set_option maxHeartbeats 1000000 in
--- test
+-- the derived functors of the trait unfold to large terms
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism for
 `U = Lη̄^* (𝟙⟦d⟧)`: precomposed with the unit, it is the left projection morphism of the
@@ -180,8 +181,10 @@ lemma isIso_upperStar_map_lowerStarTensorMap'_upperStar_shift (d : ℤ)
           ((shiftFunctor _ d).obj (𝟙_ _))) V)) := by
   have hp := (derivedUpperStarLowerStarAdjunction Λ
     (NearbyCyclesModel.traitGenericModel k').j).isIso_leftProjectionMorphism_of_isDualizable
-      (isDualizable_shift_unit Λ (NearbyCyclesModel.traitGenericModel k').total d) V
-  have e : (derivedUpperStarLowerStarAdjunction Λ (NearbyCyclesModel.traitGenericModel k').j).unit.app
+      (isDualizable_shift_unit_derivedCategory Λ (NearbyCyclesModel.traitGenericModel k').total d)
+      V
+  have e : (derivedUpperStarLowerStarAdjunction Λ
+        (NearbyCyclesModel.traitGenericModel k').j).unit.app
         ((shiftFunctor _ d).obj (𝟙_ _)) ▷
           R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).obj V ≫
         lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j
@@ -229,7 +232,7 @@ noncomputable def upperStarLowerStarTensorMapNatTrans
     exact congrArg _ h
 
 set_option maxHeartbeats 1000000 in
--- test
+-- the derived functors of the trait unfold to large terms
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism when `U` is a
 finite direct sum of shifts of the unit. -/
@@ -241,23 +244,29 @@ lemma isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition
     IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
       (lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j U V)) := by
   have : L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).Additive :=
-    Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ (NearbyCyclesModel.traitGenericModel k').j).symm
+    Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ
+      (NearbyCyclesModel.traitGenericModel k').j).symm
   have : L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).Additive :=
-    Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ (NearbyCyclesModel.traitGenericModel k').i).symm
-  have : R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).Additive := (derivedUpperStarLowerStarAdjunction Λ (NearbyCyclesModel.traitGenericModel k').j).right_adjoint_additive
+    Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ
+      (NearbyCyclesModel.traitGenericModel k').i).symm
+  have : R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).Additive :=
+    (derivedUpperStarLowerStarAdjunction Λ
+      (NearbyCyclesModel.traitGenericModel k').j).right_adjoint_additive
   rw [← upperStarLowerStarTensorMapNatTrans_app]
   refine ShiftDecomposition.isIso_app (upperStarLowerStarTensorMapNatTrans Λ k' V) hU fun j ↦ ?_
   have := isIso_upperStar_map_lowerStarTensorMap'_upperStar_shift Λ k' (hU.deg j) V
   exact @NatTrans.isIso_app_of_iso' _ _ _ _ _ _ (upperStarLowerStarTensorMapNatTrans Λ k' V) _ _
-    ((shiftFunctor _ (hU.deg j)).mapIso (leftDerivedUpperStarUnitIso Λ (NearbyCyclesModel.traitGenericModel k').j).symm ≪≫
-      ((L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).commShiftIso (hU.deg j)).app (𝟙_ _)).symm)
+    ((shiftFunctor _ (hU.deg j)).mapIso
+      (leftDerivedUpperStarUnitIso Λ (NearbyCyclesModel.traitGenericModel k').j).symm ≪≫
+      ((L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).commShiftIso
+        (hU.deg j)).app (𝟙_ _)).symm)
     this
 
 end TensorMap
 
 /-- Over a separably closed field, every bounded constructible `ℚ̄_ℓ`-complex on the point is a
-finite direct sum of shifts of the unit (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`),
-in the ambient derived category. -/
+finite direct sum of shifts of the unit
+(`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), in the ambient derived category. -/
 lemma nonempty_shiftDecomposition_of_boundedConstructible (ℓ : ℕ) [Fact ℓ.Prime] {K : Type u}
     [Field K] [IsSepClosed K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ ℓ)]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})

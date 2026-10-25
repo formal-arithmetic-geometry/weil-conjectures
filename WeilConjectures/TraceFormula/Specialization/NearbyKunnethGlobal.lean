@@ -41,7 +41,10 @@ to
 with the Künneth map of the trait `T` at `(RΓ(X_η̄, A), RΓ(Y_η̄, B))` followed by the nearby cycles
 of the ordinary Künneth isomorphism on the geometric generic fibres; the former is an isomorphism
 because the nearby cycles of the trait are monoidal on bounded constructible complexes on the
-geometric generic point (`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel`).
+geometric generic point; this last input is a hypothesis of
+`NearbyCyclesModel.isIso_lowerStar_kunnethMap`, supplied for `ℚ̄_ℓ`-coefficients by
+`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`
+(`WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal`).
 
 -/
 
@@ -73,9 +76,9 @@ include hΛ
 
 /-- **The ordinary Künneth formula over a separably closed field** (blueprint
 `sk-lem-sf-kunneth-star`, for `f_i : X_i ⟶ Y_i = Spec K`; SGA 4½, [Th. finitude], Cor. 1.11;
-for the `ℓ`-adic coefficient rings by passage to the limit, Bhatt–Scholze §6.8): for separated `K`-schemes
-of finite type `X`, `Y` with product `P = X ×_K Y` and bounded constructible `A`, `B`, the
-Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)`
+for the `ℓ`-adic coefficient rings by passage to the limit, Bhatt–Scholze §6.8): for
+separated `K`-schemes of finite type `X`, `Y` with product `P = X ×_K Y` and bounded
+constructible `A`, `B`, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)`
 (`ProEtale.CondensedRing.lowerStarKunnethMap'` of the two squares over `Spec K`) is an
 isomorphism. The blueprint node is stated over `k = 𝔽̄_q`; over a separably closed field it
 applies since passing to an algebraic closure does not change the étale topoi (blueprint
@@ -280,15 +283,15 @@ section Transport
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Pullbacks along the two sides of a commutative square are isomorphic. -/
-lemma nonempty_upperStar_comp_iso {W T T' V : Scheme.{u}} {a : W ⟶ T} {b : T ⟶ V} {c : W ⟶ T'}
-    {d : T' ⟶ V} (w : a ≫ b = c ≫ d)
+lemma nonempty_upperStar_obj_iso_of_comm {W T T' V : Scheme.{u}} {a : W ⟶ T} {b : T ⟶ V}
+    {c : W ⟶ T'} {d : T' ⟶ V} (w : a ≫ b = c ≫ d)
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
       (condensedRingObj Λ V))) :
     Nonempty (L((a)^*⟦Λ⟧).obj (L((b)^*⟦Λ⟧).obj A) ≅ L((c)^*⟦Λ⟧).obj (L((d)^*⟦Λ⟧).obj A)) :=
   ⟨(pullbackSquareComparison Λ (⟨w.symm⟩ : CommSq c a d b)).app A⟩
 
 /-- The pullback along a composite is the composite of the pullbacks. -/
-lemma nonempty_upperStar_iso_comp {W T V : Scheme.{u}} {a : W ⟶ T} {b : T ⟶ V} {c : W ⟶ V}
+lemma nonempty_upperStar_obj_iso_comp {W T V : Scheme.{u}} {a : W ⟶ T} {b : T ⟶ V} {c : W ⟶ V}
     (w : a ≫ b = c)
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
       (condensedRingObj Λ V))) :
@@ -327,7 +330,8 @@ lemma exists_boundedConstructible_tensor_iso (φ₁ : P.Hom M f₁ f₁') (φ₂
     rw [← heN, ← Category.assoc, φ₂.comm_j, Category.assoc]
   exact ⟨_, htensor _ _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ A hA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ B hB),
-    ⟨((nonempty_upperStar_comp_iso Λ w₁ A).some ⊗ᵢ (nonempty_upperStar_comp_iso Λ w₂ B).some) ≪≫
+    ⟨((nonempty_upperStar_obj_iso_of_comm Λ w₁ A).some ⊗ᵢ
+      (nonempty_upperStar_obj_iso_of_comm Λ w₂ B).some) ≪≫
       Functor.Monoidal.μIso L((P.j)^*⟦Λ⟧) _ _⟩⟩
 
 /-- A natural transformation invertible at all pullbacks `Lj^* C₀` of bounded constructible
@@ -543,18 +547,6 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
     (boundedConstructible _).prop_of_iso (L((N.i)^*⟦Λ⟧).mapIso
       (R((N.j)_*⟦Λ⟧).mapIso
         ((leftDerivedUpperStarId _ N.generic).app _))).symm hΨB
-  refine isIso_lowerStar_kunnethMap_of_isIso _ hM hN hpb hP hgen A B ?_ ?_ ?_ ?_ ?_ hT
-  -- the proper exchanges
-  · exact isIso_app_of_forall_upperStar _ _
-        (fun C₀ hC₀ ↦
-          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app Λ hM C₀ hC₀) _
-      ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
-        nonempty_upperStar_iso_comp _ heM A⟩
-  · exact isIso_app_of_forall_upperStar _ _
-        (fun C₀ hC₀ ↦
-          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app Λ hN C₀ hC₀) _
-      ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
-        nonempty_upperStar_iso_comp _ heN B⟩
   have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
       (condensedRingObj Λ P.total)),
       boundedConstructible (condensedRingObj Λ P.total) C →
@@ -565,6 +557,18 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
         P.total)).IsMonoidal := isMonoidal_boundedConstructible Λ
       (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k')) (ℓ := ℓ)
     exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+  refine isIso_lowerStar_kunnethMap_of_isIso _ hM hN hpb hP hgen A B ?_ ?_ ?_ ?_ ?_ hT
+  -- the proper exchanges
+  · exact isIso_app_of_forall_upperStar _ _
+        (fun C₀ hC₀ ↦
+          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app Λ hM C₀ hC₀) _
+      ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
+        nonempty_upperStar_obj_iso_comp _ heM A⟩
+  · exact isIso_app_of_forall_upperStar _ _
+        (fun C₀ hC₀ ↦
+          IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app Λ hN C₀ hC₀) _
+      ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
+        nonempty_upperStar_obj_iso_comp _ heN B⟩
   · have hqP' : IsProper (φ₁.total ≫ qM) := hqP
     exact isIso_app_of_forall_upperStar _ _
         (fun C₀ hC₀ ↦
