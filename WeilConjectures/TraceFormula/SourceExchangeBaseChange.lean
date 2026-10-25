@@ -99,6 +99,46 @@ lemma Functor.OplaxMonoidal.comp_δ_tensorHom_comp_braiding {𝒱 𝒲 𝒰 : Ty
   rw [BraidedCategory.braiding_naturality_assoc]
   simp only [MonoidalCategory.tensorHom_def, Category.assoc, MonoidalCategory.whiskerLeft_comp]
 
+/-- The abstract form of the tail of the core identity: the projection morphism of a composite
+`r ≫ z` and the compact-support base change of a vertically pasted rectangle. -/
+lemma map_comp_inv_projection_comp_eq_of_comp {𝒰 𝒲 𝒳 : Type*} [Category 𝒰] [Category 𝒲]
+    [Category 𝒳] [MonoidalCategory 𝒰] [MonoidalCategory 𝒲] [MonoidalCategory 𝒳]
+    {Lr : 𝒰 ⥤ 𝒲} {Lz : 𝒲 ⥤ 𝒳} {Lrz : 𝒰 ⥤ 𝒳} (c : Lrz ≅ Lr ⋙ Lz) {Gr : 𝒲 ⥤ 𝒰} {Gz : 𝒳 ⥤ 𝒲}
+    {Grz : 𝒳 ⥤ 𝒰} (uc : Grz ≅ Gz ⋙ Gr)
+    (pfr : ∀ (T : 𝒰) (M : 𝒲), Lr.obj T ⊗ M ⟶ Lr.obj (T ⊗ Gr.obj M))
+    (pfz : ∀ (T : 𝒲) (M : 𝒳), Lz.obj T ⊗ M ⟶ Lz.obj (T ⊗ Gz.obj M))
+    (pfrz : ∀ (T : 𝒰) (M : 𝒳), Lrz.obj T ⊗ M ⟶ Lrz.obj (T ⊗ Grz.obj M))
+    [∀ T M, IsIso (pfr T M)] [∀ T M, IsIso (pfz T M)] [∀ T M, IsIso (pfrz T M)]
+    (hcomp : ∀ T M, pfrz T M ≫ Lrz.map (T ◁ uc.hom.app M) =
+      (c.hom.app T ▷ M) ≫ pfz (Lr.obj T) M ≫ Lz.map (pfr T (Gz.obj M)) ≫
+        c.inv.app (T ⊗ Gr.obj (Gz.obj M)))
+    (hnatz : ∀ {T T' : 𝒲} (t : T ⟶ T') (M : 𝒳),
+      Lz.map t ▷ M ≫ pfz T' M = pfz T M ≫ Lz.map (t ▷ Gz.obj M))
+    {V₀ : 𝒲} {E₀ T : 𝒰} {K D₁ D₂ D₃ Z₀ : 𝒳} {B : 𝒲} (ψ : V₀ ⟶ Lr.obj E₀)
+    (bE : E₀ ⟶ T ⊗ Grz.obj K) (exB : Lr.obj T ⟶ B) (exZ₁ : Lz.obj B ⟶ D₁) (exZ₂ : D₁ ⟶ D₂)
+    (e₃ : D₂ ⟶ D₃) (e₂₃ : D₁ ⟶ D₃) (exX : Lrz.obj T ⟶ D₂) (rest : D₃ ⊗ K ⟶ Z₀)
+    (h₂₃ : e₂₃ = exZ₂ ≫ e₃) (hX : exX = c.hom.app T ≫ Lz.map exB ≫ exZ₁ ≫ exZ₂) :
+    Lz.map (ψ ≫ Lr.map (bE ≫ (T ◁ uc.hom.app K)) ≫ inv (pfr T (Gz.obj K)) ≫
+        (exB ▷ Gz.obj K)) ≫ inv (pfz B K) ≫ (exZ₁ ▷ K) ≫ (e₂₃ ▷ K) ≫ rest =
+      Lz.map ψ ≫ c.inv.app E₀ ≫ Lrz.map bE ≫ inv (pfrz T K) ≫ (exX ▷ K) ≫ (e₃ ▷ K) ≫ rest := by
+  have hinv : inv (pfrz T K) = Lrz.map (T ◁ uc.hom.app K) ≫ c.hom.app _ ≫
+      Lz.map (inv (pfr T (Gz.obj K))) ≫ inv (pfz (Lr.obj T) K) ≫ (c.inv.app T ▷ K) := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [reassoc_of% (hcomp T K)]
+    simp [← MonoidalCategory.comp_whiskerRight]
+  have hn : inv (pfz (Lr.obj T) K) ≫ (Lz.map exB ▷ K) =
+      Lz.map (exB ▷ Gz.obj K) ≫ inv (pfz B K) := by
+    rw [IsIso.inv_comp_eq, ← reassoc_of% (hnatz exB K), IsIso.hom_inv_id, Category.comp_id]
+  have hc := c.inv.naturality bE
+  have hc' := c.inv.naturality (T ◁ uc.hom.app K)
+  simp only [Functor.comp_map] at hc hc'
+  rw [hinv, hX, h₂₃]
+  simp only [Functor.map_comp, Category.assoc, MonoidalCategory.comp_whiskerRight]
+  rw [← reassoc_of% hc, ← reassoc_of% hc']
+  erw [Iso.inv_hom_id_app_assoc]
+  rw [← MonoidalCategory.comp_whiskerRight_assoc (c.inv.app T) (c.hom.app T), Iso.inv_hom_id_app,
+    MonoidalCategory.id_whiskerRight, Category.id_comp, reassoc_of% hn]
+
 end CoreAbstract
 
 end CategoryTheory
