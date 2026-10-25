@@ -9,9 +9,9 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 import WeilConjectures.CategoryTheory.Monoidal.Mod.FreePresentation
 import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
