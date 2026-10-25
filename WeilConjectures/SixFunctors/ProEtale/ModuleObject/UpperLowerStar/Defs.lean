@@ -57,15 +57,6 @@ and `f^*` on module objects is exact.
   isomorphisms `(𝟙 X)_* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭`, the latter obtained from the former by
   uniqueness of left adjoints.
 
-## Sorried input
-
-- `ProEtale.isMonoidal_lowerStarComp` (in
-  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal`):
-  the composition isomorphism of pushforwards of sheaves is monoidal; it enters
-  `ProEtale.CondensedRing.lowerStarComp`.
-- `ProEtale.isMonoidal_lowerStarId` (in the same file): the identity isomorphism of
-  pushforwards of sheaves is monoidal; it enters `ProEtale.CondensedRing.lowerStarId`.
-
 -/
 
 @[expose] public section

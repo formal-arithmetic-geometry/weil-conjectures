@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
@@ -134,7 +135,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of pushforwards on pro-étale sheaves is a monoidal
 natural isomorphism. See the module docstring. -/
 instance ProEtale.isMonoidal_lowerStarId (X : Scheme.{u}) :
-    NatTrans.IsMonoidal (ProEtale.lowerStarId A X).hom := sorry
+    NatTrans.IsMonoidal (ProEtale.lowerStarId A X).hom :=
+  inferInstanceAs (NatTrans.IsMonoidal (Functor.sheafPushforwardContinuousId'
+    (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) A (Scheme.ProEt.topology X)).hom)
 
 end LowerStarId
 
