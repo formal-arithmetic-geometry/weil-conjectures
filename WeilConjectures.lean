@@ -8112,6 +8112,7 @@ public import WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.Preadditive.CokernelBiproduct
 public import WeilConjectures.CategoryTheory.Preadditive.EndModule
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
+public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerPivot
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 public import WeilConjectures.CategoryTheory.Pro.Basic
@@ -12504,6 +12505,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented.Elimination
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented.FiberRank
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented.Sections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed

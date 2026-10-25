@@ -21,6 +21,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyF
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
 public import WeilConjectures.Topology.StratificationDense
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
 
 /-!
 
@@ -48,11 +49,12 @@ dualizable object of `Dᵇc(U)⟦ℚ̲̄_ℓ⟧` (for instance a lisse sheaf pla
   sheaf is locally finitely presented, hence locally free, hence dualizable
   (`ProEtale.CondensedRing.isDualizable_singleFunctor_of_isLocallyFree`).
 
-## Sorried input
+## Inputs
 
-- `ProEtale.CondensedRing.isLocallyFree_of_isLocallyFinitelyPresented`: a pro-étale locally
-  finitely presented `ℚ̲̄_ℓ`-module on a separated `k`-scheme of finite type is locally free, that
-  is, lisse (Bhatt–Scholze, Section 6.8).
+That a locally finitely presented `ℚ̲̄_ℓ`-module is locally free
+(`ProEtale.CondensedRing.isLocallyFree_of_isLocallyFinitelyPresented`) rests on the description
+of the sections of `ℚ̲̄_ℓ` over quasi-compact quasi-separated schemes
+(`ProEtale.CondensedRing.exists_endRegularRingEquiv`).
 
 -/
 
@@ -221,27 +223,6 @@ noncomputable def boundedConstructibleUpperStarSingleFunctorIso {Z W : Over (Spe
     ((boundedConstructibleUpperStarCompatibility _ ℓ g).app _ ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ g.left).app _ ≪≫
       ((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.mapDerivedCategorySingleFunctor 0).app M)
-
-/-- **A pro-étale locally finitely presented `ℚ̲̄_ℓ`-module is locally free** (of finite rank):
-on a separated `k`-scheme of finite type `Z`, the locally finitely presented sheaves of
-`ℚ̲̄_ℓ`-modules are the lisse `ℚ̄_ℓ`-sheaves of Bhatt–Scholze, *The pro-étale topology for
-schemes*, Definition 6.8.6.
-
-Pro-étale locally on `Z`, `M` is the cokernel of a matrix `φ` of sections of `ℚ̲̄_ℓ`, that is of
-continuous functions with values in finite extensions of `ℚ_ℓ`, which are constant along
-specializations. The rank of `M` at a point of `Z`, computed at a geometric point over it, does
-not depend on the presentation; the covers being flat, it is constant along specializations,
-hence locally constant on the noetherian space `Z`. Near a point where the rank of `φ` is `r`, an
-`r × r`-minor of `φ` is invertible and the rank is `r`, so Gaussian elimination presents `M` as a
-free module. -/
-theorem isLocallyFree_of_isLocallyFinitelyPresented (Z : Over (Spec (.of k)))
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    {M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)}
-    (hM : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)
-      M) :
-    IsLocallyFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) M :=
-  sorry
 
 /-- **Generic lisseness** (the local input of the constructible dévissage): let `M` be a
 constructible `ℚ̄_ℓ`-sheaf on a reduced separated `k`-scheme of finite type `Z`, placed in degree
