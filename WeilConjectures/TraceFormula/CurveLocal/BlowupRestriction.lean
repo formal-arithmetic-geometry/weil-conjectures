@@ -141,7 +141,8 @@ theorem sectionsRestriction_app_eq_zero_of_tangentConesMeetAtOrigin
   rw [hfI, hhI] at hDH
   -- the complements of `D` and `D ∪ H` are the basic opens of `f` and `fh`
   have hU := dD.openComplement_eq_basicOpen hfI
-  have hV : dD.openComplement ⊓ dH.openComplement = Scheme.basicOpenSpec (f * h) := by
+  have hV : dD.openComplement ⊓ dH.openComplement =
+      Scheme.specBasicOpen (R := .of _) (f * h) := by
     rw [hU, dH.openComplement_eq_basicOpen hhI]
     exact (PrimeSpectrum.basicOpen_mul f h).symm
   -- `B - t` maps to the punctured spectrum of `R / (g)`

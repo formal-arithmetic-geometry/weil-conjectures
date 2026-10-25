@@ -20,6 +20,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationProductParameters
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstruction
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
+public import WeilConjectures.SixFunctors.Etale.Derived.StrictLocalizationPoints
+public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTraitChart
 
 /-!
 
@@ -47,23 +49,6 @@ open scoped TensorProduct
 section Algebra
 
 variable {R : Type*} [CommRing R]
-
-/-- If `d + 1 = 2` in `WithBot ℕ∞`, then `d = 1`. -/
-lemma WithBot.ENat.eq_one_of_add_one_eq_two {d : WithBot ℕ∞} (hd : d + 1 = 2) : d = 1 := by
-  induction d using WithBot.recBotCoe with
-  | bot => exact absurd hd (by decide)
-  | coe n =>
-    induction n using ENat.recTopCoe with
-    | top => exact absurd hd (by decide)
-    | coe n =>
-      have h : ((n + 1 : ℕ) : WithBot ℕ∞) = ((2 : ℕ) : WithBot ℕ∞) := by
-        push_cast
-        exact hd
-      have : n = 1 := by
-        have := Nat.cast_injective (R := WithBot ℕ∞) h
-        omega
-      subst this
-      rfl
 
 /-- If `d < 2` in `WithBot ℕ∞`, then `d ≤ 1`. -/
 lemma WithBot.ENat.le_one_of_lt_two {d : WithBot ℕ∞} (hd : d < 2) : d ≤ 1 := by
@@ -289,14 +274,6 @@ theorem exists_affineChart_ker_eq_span_singleton {k : Type u} [Field k] {C : Sch
   have hu : IsUnit (algebraMap R A g) := IsLocalization.Away.algebraMap_isUnit g
   rw [Ideal.mem_comap, ← Ideal.unit_mul_mem_iff_mem _ hu, ← map_mul, ← hb, map_mul, mul_comm]
   exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _)
-
-
-/-- The canonical geometric point of the strict localization maps to the given point. -/
-lemma strictLocalizationToBase_apply_closedPoint {S : Scheme.{u}} {Ω : Type u} [Field Ω]
-    [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S) :
-    strictLocalizationToBase s (closedPoint (strictHenselization s)) = s (closedPoint Ω) := by
-  rw [← spec_map_strictHenselizationEval_apply s (closedPoint Ω), ← Scheme.Hom.comp_apply,
-    spec_map_strictHenselizationEval_comp_strictLocalizationToBase]
 
 /-- In an affine open chart `i : Spec A ⟶ C` through which a `k`-point `φ` with principal kernel
 `(ξ)` factors, a point of the chart lies over the image of `φ` iff it lies on `ξ = 0`. -/
