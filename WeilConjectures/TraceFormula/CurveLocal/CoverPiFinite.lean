@@ -36,6 +36,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {M : CurveLocalModel k} {ℓ : �
   {PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ}
   (D : M.CoverDatum ℓ PL PK)
 
+omit [IsAlgClosed k] in
 lemma fC_eq : D.fC = D.pU ≫ D.U.ι ≫ M.f := by
   rw [← Category.assoc, D.pU_ι, D.p_comp]
 
@@ -55,6 +56,7 @@ instance : IsOpenImmersion D.jUU := by
   unfold jUU
   infer_instance
 
+omit [IsAlgClosed k] in
 lemma gU_jUU : D.gU ≫ D.jUU = D.g := by
   apply pullback.hom_ext <;> simp [gU, jUU, g, D.pU_ι]
 
@@ -64,6 +66,7 @@ lemma spec_map_strictHenselizationEval_comp_eqToHom {S : Scheme.{u}} {a b : Spec
   subst e
   simp
 
+omit [IsAlgClosed k] in
 lemma s'_gU_jUU : (D.s' ≫ D.gU) ≫ D.jUU = M.diagPoint := by
   rw [Category.assoc, D.gU_jUU, D.s'_comp_g]
 

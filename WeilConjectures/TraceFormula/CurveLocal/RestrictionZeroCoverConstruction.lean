@@ -44,6 +44,7 @@ attribute [instance] CoverDatum.smoothOfRelativeDimension CoverDatum.isSeparated
 /-- The surface `S' = C ×_k C`. -/
 noncomputable abbrev S' : Scheme.{u} := pullback D.fC D.fC
 
+omit [IsAlgClosed k] in
 lemma c_comp_fC : D.c ≫ D.fC = 𝟙 _ := by
   rw [← D.p_comp, ← Category.assoc, D.c_comp, M.y_comp]
 
@@ -58,6 +59,7 @@ noncomputable def g : D.S' ⟶ pullback M.f M.f :=
   pullback.map _ _ _ _ D.p D.p (𝟙 _) (by rw [D.p_comp, Category.comp_id])
     (by rw [D.p_comp, Category.comp_id])
 
+omit [IsAlgClosed k] in
 lemma s'_comp_g : D.s' ≫ D.g = M.diagPoint := by
   apply pullback.hom_ext <;> simp [s', g, diagPoint, D.c_comp]
 
@@ -66,18 +68,22 @@ noncomputable def π : D.T' ⟶ M.T :=
   strictLocalizationMap D.g D.s' ≫ eqToHom (by rw [s'_comp_g])
 
 
+omit [IsAlgClosed k] in
 @[reassoc (attr := simp)]
 lemma g_fst : D.g ≫ pullback.fst M.f M.f = pullback.fst D.fC D.fC ≫ D.p :=
   pullback.lift_fst _ _ _
 
+omit [IsAlgClosed k] in
 @[reassoc (attr := simp)]
 lemma g_snd : D.g ≫ pullback.snd M.f M.f = pullback.snd D.fC D.fC ≫ D.p :=
   pullback.lift_snd _ _ _
 
+omit [IsAlgClosed k] in
 @[reassoc (attr := simp)]
 lemma s'_fst : D.s' ≫ pullback.fst D.fC D.fC = D.c :=
   pullback.lift_fst _ _ _
 
+omit [IsAlgClosed k] in
 @[reassoc (attr := simp)]
 lemma s'_snd : D.s' ≫ pullback.snd D.fC D.fC = D.c :=
   pullback.lift_snd _ _ _

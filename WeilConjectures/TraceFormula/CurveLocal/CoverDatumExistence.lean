@@ -161,6 +161,7 @@ lemma exists_isAffineOpen_irreducibleSpace :
     ⟨⟨_, hyU⟩, hOirr.2.open_subset U.isOpen hUO⟩
   exact ⟨U, hU, Subtype.irreducibleSpace hUirr, hyU⟩
 
+omit [IsAlgClosed k] in
 /-- A closed point `y` of the model has a strict generalization. -/
 lemma exists_specializes_ne :
     ∃ z : M.X, z ⤳ M.y.base (default : Spec (.of k)) ∧ z ≠ M.y.base default := by

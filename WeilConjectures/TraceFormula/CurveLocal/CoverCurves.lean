@@ -446,12 +446,14 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {M : CurveLocalModel k} {ℓ : �
   {PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ}
   (D : M.CoverDatum ℓ PL PK)
 
+omit [IsAlgClosed k] in
 lemma fst_g_apply (w : D.S') :
     pullback.fst M.f M.f (D.g w) = D.p (pullback.fst D.fC D.fC w) := by
   rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
   congr 1
   simp [g]
 
+omit [IsAlgClosed k] in
 lemma snd_g_apply (w : D.S') :
     pullback.snd M.f M.f (D.g w) = D.p (pullback.snd D.fC D.fC w) := by
   rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]

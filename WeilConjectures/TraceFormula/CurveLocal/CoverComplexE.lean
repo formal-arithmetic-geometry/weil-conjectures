@@ -220,6 +220,7 @@ noncomputable def restrictionIso
       (((leftDerivedUpperStarComp _ _ (pullback.snd M.f M.f)).app K).symm ≪≫
         leftDerivedUpperStarObjIsoOfFactor _ D.ψ₂ (D.Vc.ι ≫ D.p) D.iO'_snd eK)
 
+omit [IsAlgClosed k] in
 /-- The termwise pullback of a model to the Galois cover of the datum is constant. -/
 lemma exists_galois_trivializes (Q : CochainComplex (Sheaf M.X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) ℤ) (hQ : Q ∈ ({PL, PK} : Set _)) :
