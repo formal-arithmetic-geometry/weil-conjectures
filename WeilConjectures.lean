@@ -9880,6 +9880,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.NumberTheory.Padics.IntegersResidueField
 public import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersSubalgebra
 public import WeilConjectures.NumberTheory.Padics.IntegersToAlgCl

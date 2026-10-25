@@ -45,7 +45,7 @@ coefficients as in the proof of blueprint `sk-thm-sbc-coefficients`: a bounded c
 (`ProEtale.exists_padicAlgCl_iso_integralModel`), the scalar comparisons identify the base change
 morphism at `ℚ̄_ℓ ⊗ᴸ K₀` with the extension of scalars of the integral one
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), derived
-Nakayama reduces the integral one to its reduction modulo `ℓ`
+Nakayama reduces the integral one to its first derived reduction `K₀ ⊗ᴸ 𝔽_E`
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_integral_app_of_reduction`), which
 is the pro-étale base change morphism with coefficients `ℤ/ℓ` at a complex of étale origin, an
 isomorphism by the étale theorem
@@ -116,8 +116,8 @@ The finite-coefficient statement is
 `sk-thm-sbc-coefficients`, a bounded constructible `ℚ̄_ℓ`-complex has an integral model `K₀` over
 some `𝒪_E`, the scalar comparisons reduce to the integral base change morphism at `K₀`
 (`isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), and derived Nakayama to its
-reduction modulo `ℓ`, the pro-étale base change morphism with coefficients `ℤ/ℓ` at a complex of
-étale origin (`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). -/
+first derived reduction, the pro-étale base change morphism with coefficients `ℤ/ℓ` at a complex
+of étale origin (`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U ⟶ Y)
     [IsOpenImmersion j.left] :
     IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
