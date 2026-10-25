@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.RingTheory.Filtration
+public import WeilConjectures.Algebra.Category.ModuleCat.IhomComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
 /-!
@@ -34,19 +35,6 @@ category `D(R)`, which are finitely generated between perfect complexes.
 universe w v u
 
 open CategoryTheory Limits
-
-namespace Module
-
-/-- Over a Noetherian ring, the module of linear maps between finitely generated modules is
-finitely generated. -/
-theorem Finite.linearMap_of_isNoetherianRing (R M N : Type*) [CommRing R] [IsNoetherianRing R]
-    [AddCommGroup M] [Module R M] [Module.Finite R M] [AddCommGroup N] [Module R N]
-    [Module.Finite R N] : Module.Finite R (M →ₗ[R] N) := by
-  obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' R M
-  exact Module.Finite.of_injective (LinearMap.lcomp R N f) fun g h e ↦
-    (LinearMap.cancel_right hf).1 e
-
-end Module
 
 namespace IsLocalRing
 
@@ -78,7 +66,7 @@ theorem finite_hom {P P' : CochainComplex (ModuleCat.{v} R) ℤ} (a b : ℤ) [P.
   have (i : Finset.Icc a b) : Module.Finite R (P.X i →ₗ[R] P'.X i) := by
     have := hP i
     have := hP' i
-    exact Module.Finite.linearMap_of_isNoetherianRing R _ _
+    exact Module.Finite.linearMap_of_isNoetherianRing
   let φ : (P ⟶ P') →ₗ[R] ((i : Finset.Icc a b) → (P.X i →ₗ[R] P'.X i)) :=
     { toFun f i := (f.f i).hom
       map_add' f g := by
