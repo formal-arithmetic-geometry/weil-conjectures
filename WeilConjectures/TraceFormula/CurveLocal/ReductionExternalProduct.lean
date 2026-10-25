@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.TraceFormula.CurveLocal.IntegralSupportedRestriction
 
 /-!
@@ -50,7 +54,28 @@ theorem nonempty_etaleReduction_externalProduct_iso
             (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ
               (prod.snd : X ⨯ X ⟶ X)).obj N)) ≅
       Etale.externalProduct (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) X.hom X.hom
-        ((etaleReduction ℓ E n X).obj N) ((etaleReduction ℓ E n X).obj M)) :=
-  sorry
+        ((etaleReduction ℓ E n X).obj N) ((etaleReduction ℓ E n X).obj M)) := by
+  obtain ⟨eT⟩ := nonempty_etaleReductionTensorIso ℓ E n
+    ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ
+      (prod.fst : X ⨯ X ⟶ X)).obj M)
+    ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ
+      (prod.snd : X ⨯ X ⟶ X)).obj N)
+  obtain ⟨eB⟩ := Etale.nonempty_iso_derivedTensor_flip
+    (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) (pullback X.hom X.hom)
+  let A := ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)
+  let φ := swapPullbackToProd X
+  exact ⟨(L(Etale.upperStar A φ)).mapIso (eT ≪≫
+      ((Etale.derivedTensor A (X ⨯ X).left).mapIso
+          ((etaleReductionUpperStarIso ℓ E n (prod.fst : X ⨯ X ⟶ X)).app M)).app _ ≪≫
+      ((Etale.derivedTensor A (X ⨯ X).left).obj _).mapIso
+          ((etaleReductionUpperStarIso ℓ E n (prod.snd : X ⨯ X ⟶ X)).app N)) ≪≫
+    Etale.leftDerivedUpperStarTensorIso A φ _ _ ≪≫
+    ((Etale.derivedTensor A (pullback X.hom X.hom)).mapIso
+        ((Etale.leftDerivedUpperStarComp A φ (prod.fst : X ⨯ X ⟶ X).left
+          (pullback.snd X.hom X.hom) (by simp [φ])).app _).symm).app _ ≪≫
+    ((Etale.derivedTensor A (pullback X.hom X.hom)).obj _).mapIso
+        ((Etale.leftDerivedUpperStarComp A φ (prod.snd : X ⨯ X ⟶ X).left
+          (pullback.fst X.hom X.hom) (by simp [φ])).app _).symm ≪≫
+    (eB.app _).app _⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

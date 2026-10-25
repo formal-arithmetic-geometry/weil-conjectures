@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.CurveLocal.ReductionExternalProduct
-public import WeilConjectures.TraceFormula.CurveLocal.StalkExchangeRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.ReductionStalkRestriction
 public import WeilConjectures.TraceFormula.PointFiberReduction
 
 /-!
@@ -42,6 +41,28 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace CategoryTheory.Pretriangulated
+
+/-- **Transporting a reduction triangle along an isomorphism.** Let `Res : 𝒰 ⥤ 𝒯` with `𝒯`
+pretriangulated, `B₀ --N--> B₀ --π_B--> Res X_B ⟶` a distinguished triangle and
+`f₀ ≫ π_B = π_A ≫ Res(r)`. If `r` followed by an isomorphism `e : X_B ≅ T` factors as `s ≫ ρ`,
+then `f₀` followed by the reduction `B₀ ⟶ Res T` of a distinguished triangle on `N` factors
+through `Res(ρ)`. -/
+lemma exists_distinguished_comp_eq_of_iso {𝒯 𝒰 : Type*} [Category* 𝒯] [Preadditive 𝒯]
+    [HasZeroObject 𝒯] [HasShift 𝒯 ℤ] [∀ n : ℤ, (shiftFunctor 𝒯 n).Additive] [Pretriangulated 𝒯]
+    [Category* 𝒰] (Res : 𝒰 ⥤ 𝒯) {A₀ B₀ : 𝒯} (f₀ : A₀ ⟶ B₀) (N : ℤ) {XA XB S T : 𝒰}
+    {r : XA ⟶ XB} {πA : A₀ ⟶ Res.obj XA} {πB : B₀ ⟶ Res.obj XB} (hπ : f₀ ≫ πB = πA ≫ Res.map r)
+    {δ : Res.obj XB ⟶ B₀⟦(1 : ℤ)⟧} (hT : Triangle.mk (N • 𝟙 B₀) πB δ ∈ distTriang 𝒯)
+    (e : XB ≅ T) (s : XA ⟶ S) {ρ : S ⟶ T} (h : r ≫ e.hom = s ≫ ρ) :
+    ∃ (πA' : A₀ ⟶ Res.obj S) (πB' : B₀ ⟶ Res.obj T) (δ' : Res.obj T ⟶ B₀⟦(1 : ℤ)⟧),
+      Triangle.mk (N • 𝟙 B₀) πB' δ' ∈ distTriang 𝒯 ∧ πA' ≫ Res.map ρ = f₀ ≫ πB' := by
+  refine ⟨πA ≫ Res.map s, πB ≫ Res.map e.hom, Res.map e.inv ≫ δ,
+    isomorphic_distinguished _ hT _ (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
+      (Res.mapIso e).symm (by simp) (by simp [← Functor.map_comp]) (by simp)), ?_⟩
+  rw [Category.assoc, ← Res.map_comp, ← h, Res.map_comp, reassoc_of% hπ]
+
+end CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -102,8 +123,14 @@ theorem exists_reduction_pointIntegralSupportedRestriction [IsAlgClosed k]
         (((ℓ : ℤ) ^ n) • 𝟙 (pointIntegralSupportedRestriction ℓ F z E M N).right) πB δ ∈
           distTriang _ ∧
       πA ≫ (ModuleCat.restrictScalars φ).mapDerivedCategory.map D.supportedRestriction =
-        (pointIntegralSupportedRestriction ℓ F z E M N).hom ≫ πB :=
-  sorry
+        (pointIntegralSupportedRestriction ℓ F z E M N).hom ≫ πB := by
+  have hπ := exists_pointFiberFunctorIntegral_reduction ℓ k E n
+  have hst := exists_reduction_stalk_integralSupportedRestriction hΦ hm v F z E M N hM n
+  refine ⟨reductionCoefficientDatum ℓ hΦ hm v F z E M N hM n, integersModPowCoeffHom ℓ E n, ?_⟩
+  exact Pretriangulated.exists_distinguished_comp_eq_of_iso
+    (ModuleCat.restrictScalars (integersModPowCoeffHom ℓ E n)).mapDerivedCategory
+    (pointIntegralSupportedRestriction ℓ F z E M N).hom _ (hπ.choose.naturality _)
+    (hπ.choose_spec _).choose_spec hst.choose hst.choose_spec.choose hst.choose_spec.choose_spec
 
 end Correspondence
 
