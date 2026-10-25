@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 # The proper base change theorem for constructible `E`- and `ℚ̄_ℓ`-sheaves
 
-Let `ℓ` be a prime and `E` a finite extension of `ℚ_ℓ`, with its normed field structure. Its
+Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. Its
 condensed ring is `E̲ = C(-, E)` (`Profinite.continuousMapRingObj E`, of
 `WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap`), and the coefficient ring
 on `X_proét` is `E_X = p_X^* E̲`. Fix a cartesian square of schemes
@@ -72,7 +72,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+  (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -97,18 +97,17 @@ with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ R
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) :=
+    IsIso (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) :=
   sorry
 
-/-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves: for a cartesian
-square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change morphism
-`BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
+/-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves:
+for a cartesian square of schemes `sq : IsPullback g' f' f g` with `f` proper,
+the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange
-      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) :=
+    IsIso (boundedConstructibleBaseChange ℓ sq.toCommSq) :=
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

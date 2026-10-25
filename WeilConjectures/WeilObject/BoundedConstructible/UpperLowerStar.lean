@@ -82,13 +82,13 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 
-/-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g` of schemes whose
-horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
+/-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g`
+of schemes whose horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible `ℚ̄_ℓ`-sheaves is an isomorphism.
 No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
     (sq : CommSq g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
+    IsIso (boundedConstructibleBaseChange ℓ sq) :=
   sorry
 
 end BaseChangeOfIsIso
@@ -148,14 +148,14 @@ end UpperStar
 section LowerStar
 
 /-- The Frobenius comparison `b_* : Rf_* ⋙ Le_Y^* ⟶ Le_X^* ⋙ Rf_*` of the derived pushforward,
-that is `Φ_Y Rf_* ⟶ Rf_* Φ_X`: the base-change morphism of the Frobenius square
+that is `Φ_Y Rf_* ⟶ Rf_* Φ_X` (`ℚ̄_ℓ`-coefficient): the base-change morphism of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilLowerStarComparison :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+    boundedConstructibleLowerStar ℓ f ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eY.hom ⟶
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
-  boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (CommSq.mk hf)
+        boundedConstructibleLowerStar ℓ f :=
+  boundedConstructibleBaseChange ℓ (CommSq.mk hf)
 
 /-- The Frobenius comparison of the derived pushforward is an isomorphism, the Frobenius
 automorphisms being isomorphisms. -/
@@ -169,16 +169,18 @@ noncomputable def weilLowerStar :
     WeilBoundedConstructible ℓ eX ⥤ WeilBoundedConstructible ℓ eY :=
   IsoAlgebra.mapOfNatIso (asIso (weilLowerStarComparison ℓ eX eY f hf))
 
+/-- The underlying complex of the image under `weilLowerStar` (`ℚ̄_ℓ`-coefficient). -/
 @[simp]
 lemma weilLowerStar_obj_carrier (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).carrier =
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier :=
+      (boundedConstructibleLowerStar ℓ f).obj K.carrier :=
   rfl
 
+/-- The Weil structure of the image under `weilLowerStar` (`ℚ̄_ℓ`-coefficient). -/
 lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX) :
     ((weilLowerStar ℓ eX eY f hf).obj K).str =
       (asIso (weilLowerStarComparison ℓ eX eY f hf)).app K.carrier ≪≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
+        (boundedConstructibleLowerStar ℓ f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
 /-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
@@ -186,7 +188,7 @@ the forgetful functors. -/
 lemma weilLowerStar_comp_forget :
     weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY =
       WeilBoundedConstructible.forget ℓ eX ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleLowerStar ℓ f :=
   rfl
 
 end LowerStar
