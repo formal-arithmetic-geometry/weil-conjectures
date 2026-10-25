@@ -27,7 +27,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 
-private theorem unit_isPerfect (X : Scheme.{u})
+/-- The structure sheaf is perfect. -/
+theorem isPerfect_tensorUnit (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
@@ -166,7 +167,7 @@ theorem exists_perfect_annihilator
   obtain ⟨e, _, _, he, _⟩ := scheme_derivedInternalHom_adjunction Y
   let a : 𝟙_ (schemeDerivedCategory Y) ⟶ K :=
     (e _ P.obj Q.obj).symm ((λ_ P.obj).hom ≫ α.hom)
-  have hu : Scheme.IsPerfect Y (𝟙_ (schemeDerivedCategory Y)) := unit_isPerfect Y
+  have hu : Scheme.IsPerfect Y (𝟙_ (schemeDerivedCategory Y)) := isPerfect_tensorUnit Y
   obtain ⟨R, b, c, hR, hRzero, hbc⟩ :=
     supported_perfect_factorization Y V _ K hu hK hKzero a
   obtain ⟨C, g, h, htri⟩ := Pretriangulated.distinguished_cocone_triangle b

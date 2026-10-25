@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.TraceFormula.WeilTrace
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 
 /-!
 
@@ -60,7 +60,9 @@ automorphism `σ` in place of `Spec k` and the identity.
 ## Main results
 
 - `ProEtale.CondensedRing.weilShriekTraceFunction`: the sheaf–function compatibility of the Weil
-  lower shriek, the deep sorried input.
+  lower shriek, deduced by Noetherian induction
+  (`ProEtale.CondensedRing.weilShriekTraceFunction_of_genericallyHolds`) from the base cases of
+  `WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases`.
 - `ProEtale.CondensedRing.weilTraceFormula`: the trace formula, deduced from the relative form.
 - `ProEtale.CondensedRing.weilPointCount`: the point count `Lₙ(X, ℚ̲̄_ℓ) = #X(𝔽_{qⁿ})` for the
   canonical Weil unit, deduced from the trace formula and the normalization of the local trace of
@@ -121,8 +123,26 @@ theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
     (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) [NeZero n] (y : frobeniusFixedPoints eY n) :
     weilStalkTraceAlternatingSum ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
       ∑ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
-        weilStalkTraceAlternatingSum ℓ n x.1.1 x.1.2.2 K :=
-  sorry
+        weilStalkTraceAlternatingSum ℓ n x.1.1 x.1.2.2 K := by
+  obtain ⟨m, rfl⟩ := Nat.exists_eq_add_one_of_ne_zero (NeZero.ne n)
+  obtain ⟨p, hp, hpe⟩ := he
+  obtain ⟨p, rfl⟩ := Nat.exists_eq_add_one_of_ne_zero hp.ne'
+  rw [weilShriekTraceFunction_of_genericallyHolds ℓ (shriekTraceFunctionGenericallyHolds ℓ k) eX eY
+    hf ⟨p, hpe⟩ K m y, finsum_eq_sum_of_fintype]
+
+/-- **Curves**: the sheaf–function compatibility holds along a smooth morphism `f` of relative
+dimension one. By compactly supported base change to `ȳ`, it is the trace formula for the smooth
+curve `X_ȳ` over a finite field (blueprint `thm-trf-grothendieck-lefschetz-finite-ring`, the case
+of curves). It is a special case of `weilShriekTraceFunction`, whose proof only uses the relative
+affine line among the curves (`shriekTraceFunctionAt_overProdMap_polyAffineProj`). -/
+theorem shriekTraceFunctionAt_of_smoothOfRelativeDimension_one {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
+    [SmoothOfRelativeDimension 1 f.left] (he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) :
+    ShriekTraceFunctionAt ℓ eX eY hf :=
+  weilShriekTraceFunction_of_genericallyHolds ℓ (shriekTraceFunctionGenericallyHolds ℓ k) eX eY hf
+    he
 
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] (e : X ≅ X)

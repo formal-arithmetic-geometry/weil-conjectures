@@ -158,44 +158,76 @@ noncomputable def comparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}} (g : Y 
     (lowerStarCompComparisonLowerStarIso g A).symm
 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
-`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)`, by the
-invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
-noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso (X : Scheme.{u})
-    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
-    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
-      ((Etale.sectionsFunctor A X).rightDerived q).obj M := by
+`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)` in the bounded
+below derived category, by the invertibility of the derived unit `M ⟶ Rν_* ν^* M`, given that
+`ν^* I` is acyclic for `ν_*` for every injective étale sheaf `I`. -/
+noncomputable def rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic
+    (X : Scheme.{u})
+    (hI : ∀ (I : Sheaf X.smallEtaleTopology A) [Injective I],
+      ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I))
+    (M : Sheaf X.smallEtaleTopology A) :
+    (globalSectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj ((comparisonUpperStar A X).obj M)) ≅
+      (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj M) := by
   have := isIso_comparisonAdjunction_unit A X
   have : (comparisonLowerStar A X).PreservesInjectiveObjects :=
     Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
       (comparisonAdjunction A X)
-  -- the global sections of a pro-étale sheaf are the global sections of its restriction
-  let eΓ : comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X ≅ globalSectionsFunctor A X :=
-    Iso.refl _
-  let eR : (comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X).rightDerived q ≅
-      (globalSectionsFunctor A X).rightDerived q :=
-    { hom := NatTrans.rightDerived eΓ.hom q
-      inv := NatTrans.rightDerived eΓ.inv q
-      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
-      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
   -- the derived unit `M ⟶ Rν_* ν^* M` is invertible
   have hu := (comparisonAdjunction A X).isIso_derivedPlus_unit_app_of_rightAcyclic
-    (fun _ _ ↦ inferInstance) (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I)
+    (fun _ _ ↦ inferInstance) (fun I _ ↦ hI I)
     ((DerivedCategory.Plus.singleFunctor _ 0).obj M)
-  let e : (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-      (comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X).rightDerivedFunctorPlus ⋙
-        DerivedCategory.Plus.homologyFunctor A q).obj ((comparisonUpperStar A X).obj M) ≅
-      (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-        (Etale.sectionsFunctor A X).rightDerivedFunctorPlus ⋙
-          DerivedCategory.Plus.homologyFunctor A q).obj M :=
+  -- the global sections of a pro-étale sheaf are the global sections of its restriction
+  exact (Functor.rightDerivedFunctorPlusCompIso (comparisonLowerStar A X)
+      (Etale.sectionsFunctor A X)).app _ ≪≫
+    (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.mapIso
+      ((comparisonLowerStar A X).rightDerivedFunctorPlus.mapIso
+        (((comparisonUpperStar A X).mapDerivedCategoryPlusSingleFunctor 0).app M).symm ≪≫
+      (asIso ((comparisonAdjunction A X).derivedPlus.unit.app _)).symm)
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf are those of `M` in each degree: `R^qΓ(X_proét, ν^* M) ≅ R^qΓ(X_ét, M)`,
+the cohomology in degree `q` of
+`rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic`. -/
+noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoOfRightAcyclic
+    (X : Scheme.{u})
+    (hI : ∀ (I : Sheaf X.smallEtaleTopology A) [Injective I],
+      ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I))
+    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
+    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
+      ((Etale.sectionsFunctor A X).rightDerived q).obj M :=
+  ((globalSectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).symm.app _ ≪≫
     (DerivedCategory.Plus.homologyFunctor A q).mapIso
-      ((Functor.rightDerivedFunctorPlusCompIso _ _).app _ ≪≫
-        (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.mapIso
-          ((comparisonLowerStar A X).rightDerivedFunctorPlus.mapIso
-            (((comparisonUpperStar A X).mapDerivedCategoryPlusSingleFunctor 0).app M).symm ≪≫
-          (asIso ((comparisonAdjunction A X).derivedPlus.unit.app _)).symm))
-  exact eR.symm.app _ ≪≫
-    ((comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X)
-      |>.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).symm.app _ ≪≫ e ≪≫
+      (rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic A X hI M) ≪≫
+    ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).app M
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)` in the bounded
+below derived category, by the invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
+noncomputable def rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIso
+    (X : Scheme.{u}) (M : Sheaf X.smallEtaleTopology A) :
+    (globalSectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj ((comparisonUpperStar A X).obj M)) ≅
+      (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj M) :=
+  rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic A X
+    (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I) M
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf are those of `M` in each degree: `R^qΓ(X_proét, ν^* M) ≅ R^qΓ(X_ét, M)`,
+the cohomology in degree `q` of `rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIso`.
+-/
+noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso (X : Scheme.{u})
+    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
+    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
+      ((Etale.sectionsFunctor A X).rightDerived q).obj M :=
+  ((globalSectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).symm.app _ ≪≫
+    (DerivedCategory.Plus.homologyFunctor A q).mapIso
+      (rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIso A X M) ≪≫
     ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
       q).app M
 

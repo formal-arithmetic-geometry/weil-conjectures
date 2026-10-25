@@ -9,10 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
-
-
-public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions

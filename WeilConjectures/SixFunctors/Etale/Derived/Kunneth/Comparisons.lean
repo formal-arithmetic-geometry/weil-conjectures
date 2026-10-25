@@ -257,33 +257,6 @@ theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPrese
   obtain ⟨h⟩ := h
   exact ⟨e ≪≫ (ihom ((L((pullback.snd a b)^*[A])).obj N)).mapIso h⟩
 
-/-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
-
-The four product comparison maps of `AlgebraicGeometry.Etale.HasKunnethComparisons` are
-isomorphisms: besides the `!`-Künneth map `Ku_!`, which is an isomorphism by construction,
-this asserts the invertibility of the exceptional Künneth map `α`, of the external Hom map
-`β`, and of the Künneth–Verdier map `κ`.
-
-It is stated over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible
-in `k`, as in the blueprint. The headline case is `kunnethVerdier`: for `X` and `Y` separated of
-finite type over `S = Spec k`,
-with projections `p_X : X ×_S Y ⟶ X` and `p_Y : X ×_S Y ⟶ Y`, and for `M` in `Dctf(X, A)`
-and `N` in `Dctf(Y, A)`,
-
-`κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`
-
-on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
-theorem hasKunnethComparisons (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (k : Type u)
-    [Field k] [HasInvertibleExponent Λ (Spec (.of k))] :
-    HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) where
-  kunnethShriek := by
-    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
-    exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
-      hM₁ hM₂
-  exceptional := sorry
-  externalHom := sorry
-  kunnethVerdier := sorry
-
 end Etale
 
 end AlgebraicGeometry

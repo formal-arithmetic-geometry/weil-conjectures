@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.FieldTheory.SeparableClosure
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 public import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
@@ -21,7 +22,8 @@ a separable algebraic extension, hence ind-étale. This gives an object
 `AlgebraicGeometry.Scheme.ProEt.genericPointSep X` of `X_proét`, on which the Galois group
 `Gal(Kˢᵉᵖ/K)` acts (on the right).
 
-A nonempty weakly étale scheme over a separably closed field has a section, so every covering
+A nonempty weakly étale scheme over a separably closed field has a section
+(`AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale_of_isSepClosed`), so every covering
 sieve of an object of `X_proét` whose underlying scheme is the spectrum of a separably closed
 field contains the identity. For such an object `T`, taking sections over `T` preserves
 epimorphisms of sheaves with values in a concrete category, and evaluating the map from a
@@ -36,8 +38,6 @@ presheaf to its sheafification at `T` is bijective.
 
 - `Algebra.IndEtale.of_isSeparable`: a separable algebraic field extension is ind-étale.
 - `AlgebraicGeometry.Scheme.weaklyEtale_fromSpecStalk`: `Spec 𝒪_{X,x} ⟶ X` is weakly étale.
-- `AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale_of_isSepClosed`: a nonempty weakly étale
-  scheme over a separably closed field has a section.
 - `AlgebraicGeometry.Scheme.ProEt.id_mem_of_mem_topology_of_isSepClosed`: covering sieves of an
   object whose underlying scheme is the spectrum of a separably closed field contain `𝟙`.
 - `AlgebraicGeometry.Scheme.ProEt.genericPointSepAut_mul`:
@@ -64,18 +64,6 @@ theorem Algebra.IndEtale.of_isSeparable (K L : Type u) [Field K] [Field L] [Alge
     have : Algebra.FormallyEtale K A := .of_isSeparable K A
     exact ⟨inferInstance, Algebra.FinitePresentation.of_finiteType.mp inferInstance⟩
 
-/-- A nonzero weakly étale algebra over a separably closed field `K` has a `K`-algebra map to
-`K`: the residue field at a maximal ideal is separable algebraic over `K`, hence equal to `K`. -/
-theorem Algebra.WeaklyEtale.nonempty_algHom_of_isSepClosed {K R : Type u} [Field K]
-    [CommRing R] [Algebra K R] [Algebra.WeaklyEtale K R] [IsSepClosed K] [Nontrivial R] :
-    Nonempty (R →ₐ[K] K) := by
-  obtain ⟨m, hm⟩ := Ideal.exists_maximal R
-  have := Algebra.WeaklyEtale.indEtale_field K R
-  have := Algebra.IndEtale.isSeparable_residueField_of_field (K := K) m
-  let e := AlgEquiv.ofBijective (Algebra.ofId K m.ResidueField)
-    ⟨(algebraMap K _).injective, IsSepClosed.algebraMap_surjective K _⟩
-  exact ⟨e.symm.toAlgHom.comp (IsScalarTower.toAlgHom K R m.ResidueField)⟩
-
 namespace AlgebraicGeometry
 
 /-- The canonical morphism `Spec 𝒪_{X,x} ⟶ X` is weakly étale: on an affine open neighbourhood
@@ -92,28 +80,6 @@ instance Scheme.weaklyEtale_fromSpecStalk (X : Scheme.{u}) (x : X) :
   have : WeaklyEtale (Spec.map (X.presheaf.germ U x hxU)) :=
     weaklyEtale_SpecMap_algebraMap (R := Γ(X, U)) (S := X.presheaf.stalk x)
   infer_instance
-
-/-- A weakly étale scheme `V` over a separably closed field `K` with a point has a `K`-point:
-a section of `f : V ⟶ Spec K`. -/
-theorem exists_comp_eq_id_of_weaklyEtale_of_isSepClosed {K : Type u} [Field K] [IsSepClosed K]
-    {V : Scheme.{u}} (f : V ⟶ Spec (.of K)) [WeaklyEtale f] (v : V) :
-    ∃ σ : Spec (.of K) ⟶ V, σ ≫ f = 𝟙 _ := by
-  obtain ⟨_, ⟨U, hU, rfl⟩, hv, -⟩ :=
-    V.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ v) isOpen_univ
-  have : Nonempty U := ⟨⟨v, hv⟩⟩
-  let φ := Spec.preimage (hU.isoSpec.inv ≫ Scheme.Opens.ι U ≫ f)
-  let := φ.hom.toAlgebra
-  have : WeaklyEtale (Spec.map φ) := by
-    rw [Spec.map_preimage]
-    infer_instance
-  have := weaklyEtale_SpecMap_algebraMap_iff (R := K) (S := Γ(V, U)).1 this
-  obtain ⟨ψ⟩ := Algebra.WeaklyEtale.nonempty_algHom_of_isSepClosed (K := K) (R := Γ(V, U))
-  refine ⟨Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ hU.isoSpec.inv ≫ Scheme.Opens.ι U, ?_⟩
-  have hφ : hU.isoSpec.inv ≫ Scheme.Opens.ι U ≫ f = Spec.map φ := (Spec.map_preimage _).symm
-  rw [Category.assoc, Category.assoc, hφ, ← Spec.map_comp, ← Spec.map_id]
-  congr 1
-  ext x
-  exact ψ.commutes x
 
 namespace Scheme.ProEt
 

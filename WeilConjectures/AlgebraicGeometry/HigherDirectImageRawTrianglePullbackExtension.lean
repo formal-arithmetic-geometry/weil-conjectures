@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePull
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 
 /-! # Raw pullback for a commutative triangle
 

@@ -116,6 +116,49 @@ lemma zsmul_id_comparisonPadicIntModTower_obj_X {X : Scheme.{u}}
     ((l ^ n : ℕ) : ℤ) • 𝟙 ((comparisonPadicIntModTower X l G hG).obj (op n)).X = 0 :=
   zsmul_id_comparisonUpperStarAb_obj_eq_zero (hG n)
 
+/-- **`Hʲ(Rf_* (lim ν^* Gₙ)) ≅ lim Mₙ` on underlying abelian sheaves, for towers of
+`Λ`-modules**: for an `ℓ`-adic tower `(Gₙ)` of étale sheaves of `Λ`-modules, `Λ` flat over `ℤ`,
+with the hypotheses of `ProEtale.homologyRightDerivedLowerStarLimitIso`, `Hʲ` of the derived
+pushforward of abelian sheaves of the underlying abelian sheaf of the limit of the transported
+tower `ν^* Gₙ` is the underlying abelian sheaf of the limit of the transported tower `Mₙ` of
+`Rʲf_*^{ét} Gₙ`.
+
+Stating it for a general `Λ` keeps the ring instances of all intermediate objects syntactically
+equal; for `Λ = ULift ℤ_ℓ` this avoids expensive kernel conversions between `ULift.ring` and
+`CommRing.toRing`. -/
+noncomputable def homologyRightDerivedLowerStarForgetLimitComparisonIso [Module.Flat ℤ Λ]
+    {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
+    [QuasiCompact aY] (f : X ⟶ Y) [Smooth f] [IsProper f]
+    (G : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (A : AdicTowerStructure G l)
+    (I : ℕ → Ideal Λ) [∀ n, Finite (Λ ⧸ I n)] [∀ n, HasInvertibleExponent (Λ ⧸ I n) (Spec (.of K))]
+    (F : ∀ n, Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Λ ⧸ I n)))
+    [∀ n, IsFiniteLocallyConstantSheaf (F n)]
+    (eG : ∀ n, G.obj (op n) ≅
+      (Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk (I n))).obj (F n))
+    (j : ℕ) :
+    (DerivedCategory.homologyFunctor _ j).obj (((f)_*[Ab.{u + 1}]).rightDerivedFunctor.obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Mod.forget _).obj
+          (limit (comparisonPadicIntModTower X l G
+            (zsmul_id_eq_zero_of_adicTowerStructure X l A)))))) ≅
+      (limit (comparisonPadicIntModTower Y l
+        (G ⋙ DerivedCategory.singleFunctor _ 0 ⋙ R(Etale.lowerStar (ModuleCat.{u + 1} Λ) f) ⋙
+          DerivedCategory.homologyFunctor _ j)
+        (zsmul_id_homology_rightDerivedLowerStar_eq_zero l f A j))).X :=
+  (DerivedCategory.homologyFunctor _ j).mapIso (((f)_*[Ab.{u + 1}]).rightDerivedFunctor.mapIso
+      ((DerivedCategory.singleFunctor _ 0).mapIso
+        (forgetLimitComparisonPadicIntModTowerIso l G _))) ≪≫
+    (sheafComposeForget₂HomologyRightDerivedLowerStarIso _ f _ j).symm ≪≫
+    (sheafCompose (ProEt.topology Y) (forget₂ (ModuleCat.{u + 1} Λ) Ab.{u + 1})).mapIso
+      (homologyRightDerivedLowerStarLimitIso aY f G I F eG (fun n ↦ A.epi_map n.le_succ) j) ≪≫
+    preservesLimitIso
+      (sheafCompose (ProEt.topology Y) (forget₂ (ModuleCat.{u + 1} Λ) Ab.{u + 1})) _ ≪≫
+    (limit.isLimit (comparisonPadicIntModTower Y l
+        (G ⋙ DerivedCategory.singleFunctor _ 0 ⋙ R(Etale.lowerStar (ModuleCat.{u + 1} Λ) f) ⋙
+          DerivedCategory.homologyFunctor _ j)
+        (zsmul_id_homology_rightDerivedLowerStar_eq_zero l f A j) ⋙
+          Mod.forget _)).conePointUniqueUpToIso
+      (isLimitOfPreserves (Mod.forget _) (limit.isLimit _))
+
 /-- **`Hʲ(Rf_* (lim ν^* Gₙ)) ≅ lim Mₙ` on underlying abelian sheaves**, for the derived
 pushforward of `ℤ_ℓ`-modules: in the situation of
 `ProEtale.isAdicLisseSheaf_adicSheafExtendScalars_limit_homology_rightDerivedLowerStar`, the
@@ -144,22 +187,7 @@ noncomputable def forgetHomologyRightDerivedPadicIntModPushforwardLimitIso
             DerivedCategory.homologyFunctor _ j)
         (zsmul_id_homology_rightDerivedLowerStar_eq_zero l f A j))).X :=
   forgetHomologyRightDerivedPadicIntModPushforwardIso l f _ j ≪≫
-    (DerivedCategory.homologyFunctor _ j).mapIso (((f)_*[Ab.{u + 1}]).rightDerivedFunctor.mapIso
-      ((DerivedCategory.singleFunctor _ 0).mapIso
-        (forgetLimitComparisonPadicIntModTowerIso l G _))) ≪≫
-    (sheafComposeForget₂HomologyRightDerivedLowerStarIso _ f _ j).symm ≪≫
-    (sheafCompose (ProEt.topology Y)
-      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) Ab.{u + 1})).mapIso
-      (homologyRightDerivedLowerStarLimitIso aY f G I F eG (fun n ↦ A.epi_map n.le_succ) j) ≪≫
-    preservesLimitIso (sheafCompose (ProEt.topology Y)
-      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) Ab.{u + 1})) _ ≪≫
-    (limit.isLimit (comparisonPadicIntModTower Y l
-        (G ⋙ DerivedCategory.singleFunctor _ 0 ⋙
-          R(Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f) ⋙
-            DerivedCategory.homologyFunctor _ j)
-        (zsmul_id_homology_rightDerivedLowerStar_eq_zero l f A j) ⋙
-          Mod.forget _)).conePointUniqueUpToIso
-      (isLimitOfPreserves (Mod.forget _) (limit.isLimit _))
+    homologyRightDerivedLowerStarForgetLimitComparisonIso l aY f G A I F eG j
 
 /-- **`Hʲ(Rf_* M[0]) ≅ lim Mₙ` as `ℤ_ℓ,Y`-modules**: in the situation of
 `ProEtale.isAdicLisseSheaf_adicSheafExtendScalars_limit_homology_rightDerivedLowerStar`, let

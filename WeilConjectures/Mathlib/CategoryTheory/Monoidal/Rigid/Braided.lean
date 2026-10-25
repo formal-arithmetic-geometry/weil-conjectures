@@ -159,6 +159,14 @@ theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P
     (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
   rw [← Category.assoc, trace_comp_comm]
 
+/-- Blueprint `prop-trf-karoubi-independence`, representative independence of the summand trace:
+if an isomorphism `w : P ≅ P'` transports the idempotent `e` to `e'` and the endomorphism `v`
+to `v'`, the summand traces `tr(v ∘ e ∣ P)` and `tr(v' ∘ e' ∣ P')` agree. -/
+theorem trace_comp_idempotent_eq_of_iso {P P' : C} [HasRightDual P] [HasRightDual P'] (w : P ≅ P')
+    (e : P ⟶ P) (e' : P' ⟶ P') (v : P ⟶ P) (v' : P' ⟶ P') (he : e ≫ w.hom = w.hom ≫ e')
+    (hv : v ≫ w.hom = w.hom ≫ v') : trace (v ≫ e) = trace (v' ≫ e') :=
+  trace_eq_of_iso w _ _ (by rw [Category.assoc, he, reassoc_of% hv])
+
 /-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
 unit. -/
 theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 𝟙 _ := by
@@ -175,6 +183,14 @@ theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 
   calc _ = (ρ_ (𝟙_ C)).inv ≫ ((ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫
         (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫ (λ_ (𝟙_ C)).inv) ≫ (λ_ (𝟙_ C)).hom := by simp
     _ = 𝟙 _ := by rw [h']; simp [unitors_equal]
+
+/-- The trace of an endomorphism of the unit, for the canonical self-duality of the unit, is the
+endomorphism itself. -/
+theorem trace_tensorUnit (f : 𝟙_ C ⟶ 𝟙_ C) : trace f = f := by
+  change (ρ_ _).inv ≫ f ▷ 𝟙_ C ≫ (β_ (𝟙_ C) (𝟙_ C)).hom ≫ (ρ_ _).hom = f
+  simp only [braiding_tensorUnit_left, Category.assoc]
+  rw [unitors_equal, Iso.inv_hom_id, Category.comp_id, MonoidalCategory.rightUnitor_naturality,
+    Iso.inv_hom_id_assoc]
 
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right

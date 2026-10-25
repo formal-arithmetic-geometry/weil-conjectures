@@ -32,6 +32,9 @@ A pairing `b : X ⊗ Y ⟶ 𝟙_ C` is *perfect* (`CategoryTheory.MonoidalClosed
 if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism. Perfectness is preserved by precomposition
 with an isomorphism in the first variable
 (`CategoryTheory.MonoidalClosed.IsPerfectPairing.whiskerRight_comp`).
+
+The isomorphism `X ≅ [𝟙_ C, X]` of `CategoryTheory.MonoidalClosed.unitNatIso` is the transpose
+of the left unitor (`CategoryTheory.MonoidalClosed.unitNatIso_hom_app`).
 -/
 
 @[expose] public section
@@ -237,6 +240,19 @@ lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     have := h.isIso
     rw [← curry_pre_app]
     infer_instance⟩
+
+/-- The component at `X` of the isomorphism `𝟭 C ≅ ihom (𝟙_ C)` is the transpose of the left
+unitor of `X`. -/
+lemma unitNatIso_hom_app (X : C) : unitNatIso.hom.app X = curry (λ_ X).hom := by
+  rw [curry_eq, unitNatIso, conjugateIsoEquiv_apply_hom, conjugateEquiv_apply_app]
+  simp
+
+/-- Evaluating the transpose `X ⟶ RHom(𝟙_ C, X)` of the left unitor gives back the left
+unitor. -/
+@[reassoc (attr := simp)]
+lemma whiskerLeft_unitNatIso_hom_app_ihom_ev_app (X : C) :
+    𝟙_ C ◁ unitNatIso.hom.app X ≫ (ihom.ev (𝟙_ C)).app X = (λ_ X).hom := by
+  rw [unitNatIso_hom_app, whiskerLeft_curry_ihom_ev_app]
 
 end CategoryTheory.MonoidalClosed
 
