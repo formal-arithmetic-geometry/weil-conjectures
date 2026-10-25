@@ -155,10 +155,11 @@ theorem not_eval_mem_and_eval_mem (hdim : ringKrullDim R = 2) {x y : R}
       pow_add]
     exact ⟨w, by ring⟩
   rw [Ideal.map_sup, Ideal.map_sup, Ideal.map_mul, Ideal.map_mul, Ideal.map_pow, Ideal.map_pow,
-    Ideal.map_pow, hmap, Ideal.map_span, Ideal.map_span, Set.image_singleton, Set.image_singleton] at hmem
+    Ideal.map_pow, hmap, Ideal.map_span, Ideal.map_span, Set.image_singleton,
+    Set.image_singleton] at hmem
   simp only [Ideal.span_singleton_pow] at hmem
   have hmem' : π (x ^ n) ∈ Ideal.span {π x ^ (n + 1)} := by
-    refine (sup_le (sup_le (hle (key hp hf hpτ) (by omega)) (hle (key hq hg hqτ) (by omega)))
+    exact (sup_le (sup_le (hle (key hp hf hpτ) (by omega)) (hle (key hq hg hqτ) (by omega)))
       le_rfl) hmem
   obtain ⟨w, hw⟩ := Ideal.mem_span_singleton'.mp hmem'
   have h1 : 1 - w * π x = 0 := by
