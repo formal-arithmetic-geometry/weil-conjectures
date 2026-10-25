@@ -92,8 +92,6 @@ theorem isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family {X : Scheme.{u}
     (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
       (D((a i)^*[ModuleCat.{u + 1} Λ]).map φ))
 
-variable [Finite Λ]
-
 /-- For an étale `u : U ⟶ X` and `L ∈ D(X_ét, Λ)` with `Lu^* L` invertible, the derived pullback
 of the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` is an isomorphism, the derived pullback along `u`
 commuting with the derived internal hom

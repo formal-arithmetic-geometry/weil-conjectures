@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.RelativeFrobenius
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
+public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.TraceFormula.BaseChange.CubeCoherence
 public import WeilConjectures.TraceFormula.BaseChange.FrobeniusNaturality
 public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
@@ -58,10 +59,11 @@ change `Lπ_Y^* Rf_! ≅ Rf̄_! Lπ_X^*` along `π_Y : Ȳ ⟶ Y` intertwines the
   base change.
 - `ProEtale.CondensedRing.nonempty_weilGeometricBaseChange_weilLowerShriek_iso`: the geometric
   base change of the Weil lower shriek, for proper `f`.
-- `ProEtale.CondensedRing.isIso_geometricBaseChangeLowerStarBaseChange`: proper base change along
-  `π_Y`, from the proper base change theorem along an arbitrary base change
-  (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper`, blueprint
-  `sk-thm-sfb-proper-base-change`).
+- `ProEtale.CondensedRing.isIso_geometricBaseChangeLowerStarBaseChange`: base change along `π_Y`
+  for a separable algebraic extension `Ω / k`. The projection `π_Y` is then weakly étale
+  (`AlgebraicGeometry.weaklyEtale_geometricBaseChangeProj`), so this is weakly étale base change on
+  the ambient derived categories (`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`).
+  It holds for every `f`, proper or not.
 
 -/
 
@@ -93,6 +95,15 @@ lemma isPullback_geometricBaseChange_map_left [Algebra k Ω] {X Y : Over (Spec (
     Over.w ((geometricBaseChange k Ω).map f)
   rw [hw, Over.w f]
   exact isPullback_geometricBaseChangeProj X
+
+/-- For a separable algebraic extension `Ω / k`, the projection `π_X : X̄ = X ×_k Ω ⟶ X` is weakly
+étale: it is the base change of `Spec Ω ⟶ Spec k`, and `Ω` is an ind-étale `k`-algebra
+(`Algebra.IndEtale.of_isSeparable`). -/
+instance weaklyEtale_geometricBaseChangeProj [Algebra.IsSeparable k Ω]
+    (X : Over (Spec (.of k))) : WeaklyEtale (geometricBaseChangeProj (Ω := Ω) X) := by
+  have : Algebra.IndEtale k Ω := .of_isSeparable k Ω
+  unfold geometricBaseChangeProj
+  infer_instance
 
 variable [Finite k]
 
@@ -307,22 +318,25 @@ lemma leftDerivedUpperStarGeometricBaseChangeComparison_eq :
   rw [pullbackCongrIso_eq_eqToIso]
 
 variable (f) in
-/-- **Proper base change along the base change to `Ω`** (blueprint
-`sk-thm-sfb-proper-base-change`, for the cartesian square `f̄ ≫ π_Y = π_X ≫ f`,
-`isPullback_geometricBaseChange_map_left`): for a proper morphism `f` of separated schemes of
-finite type over `k`, the base change morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the
-projection `π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. On the ambient
-derived categories `Ex_π` is the base change morphism `baseChangeMap` of the square
+/-- **Base change along the base change to `Ω`** (blueprint `sk-thm-sfb-proper-base-change`, for
+the cartesian square `f̄ ≫ π_Y = π_X ≫ f`, `isPullback_geometricBaseChange_map_left`): for a
+separable algebraic extension `Ω / k` and a morphism `f` of separated schemes of finite type over
+`k`, the base change morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the projection
+`π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. On the ambient derived
+categories `Ex_π` is the base change morphism `baseChangeMap` of the square
 (`Adjunction.exchangeRight_restrictFullyFaithful_app_hom`, the functors on bounded constructible
-complexes being restrictions), which is an isomorphism on bounded constructible complexes by the
-proper base change theorem along an arbitrary base change
-(`isIso_baseChangeMap_app_of_isProper`). -/
-theorem isIso_geometricBaseChangeLowerStarBaseChange [IsProper f.left] :
+complexes being restrictions). The projections `π_X` and `π_Y` are weakly étale
+(`weaklyEtale_geometricBaseChangeProj`), so `baseChangeMap` is an isomorphism by weakly étale base
+change (`isIso_baseChangeMap_of_weaklyEtale`); no properness of `f` is needed. -/
+theorem isIso_geometricBaseChangeLowerStarBaseChange [Algebra.IsSeparable k Ω] :
     IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro K
-  have hamb := isIso_baseChangeMap_app_of_isProper ℓ
-    (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip K.obj K.property
+  have hamb : IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ)
+      (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip.toCommSq).app K.obj) := by
+    have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ)
+      (isPullback_geometricBaseChange_map_left (Ω := Ω) f).flip
+    infer_instance
   unfold baseChangeMap at hamb
   rw [← leftDerivedUpperStarGeometricBaseChangeComparison_eq] at hamb
   exact Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
@@ -456,15 +470,15 @@ end Frobenius
 
 /-- **The geometric base change of the Weil lower shriek**: for a proper morphism `f : X ⟶ Y` of
 separated schemes of finite type over `k = 𝔽_q` with `e_X ≫ f = f ≫ e_Y` and a Weil object `K`
-for `e_X`, the base change to `Ω` of the twisted Weil lower shriek is the model Weil lower shriek
-of the base change,
+for `e_X`, and a separable algebraic extension `Ω / k`, the base change to `Ω` of the twisted Weil
+lower shriek is the model Weil lower shriek of the base change,
 ```
 Lπ_Y^* Rf_!^Weil K ≅ Rf̄_! Lπ_X^* K
 ```
 as Weil objects for the model Frobenius `Φ_Y = (e_Y ≫ F_Y^N) ×_k Ω`, the right side with the
 Frobenius comparison of the relative Frobenius `r = (f̄, Φ_X)` of `f̄`
 (`weilLowerShriekOfFrobenius`, blueprint `def-trf-weil-shriek-pushforward`). The underlying
-isomorphism is the proper base change `Ex_π : Lπ_Y^* Rf_* ≅ Rf̄_* Lπ_X^*` along the projection
+isomorphism is the base change `Ex_π : Lπ_Y^* Rf_* ≅ Rf̄_* Lπ_X^*` along the projection
 `π_Y : Ȳ ⟶ Y` (`isIso_geometricBaseChangeLowerStarBaseChange`), read through `Rf_! ≅ Rf_*`.
 Under these identifications the Frobenius comparisons of both sides are exchange morphisms
 (`weilLowerShriekComparison_exchangeCompatible`,
@@ -474,6 +488,7 @@ pullback comparisons `geometricBaseChangePullbackComparison_cube`, which uses th
 the trivializations `κ : (F^N)^* ≅ 𝟭` of the absolute Frobenius (blueprint `sk-i-relative-frob`
 (1), `lem-trf-absolute-frobenius-site`, `fix-lem-exchanges`). -/
 theorem nonempty_weilGeometricBaseChange_weilLowerShriek_iso [IsProper f.left]
+    [Algebra.IsSeparable k Ω]
     (K : WeilBoundedConstructible ℓ eX.hom) :
     Nonempty ((weilGeometricBaseChange Ω ℓ Y N eY.hom).obj ((weilLowerShriek ℓ eX eY hf).obj K) ≅
       (weilLowerShriekOfFrobenius ℓ (baseChangeModelFrobenius Ω X N eX.hom)

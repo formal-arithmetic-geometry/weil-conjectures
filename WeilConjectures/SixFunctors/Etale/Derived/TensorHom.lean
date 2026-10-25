@@ -385,7 +385,6 @@ section VerdierExchange
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (f : X ⟶ Y)
   (aY : Y ⟶ S) [HasCompactification f] [HasCompactification aY] [HasCompactification (f ≫ aY)]
-  [QuasiCompact (f ≫ aY)]
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
@@ -401,8 +400,10 @@ This is the mate, under the adjunctions `Rf_! ⊣ Rf^!`, of the composition isom
 theorem nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
     Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY) ≅
       dualizingComplex _ (f ≫ aY)) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
-  exact ⟨(e.app (𝟙_ _)).symm⟩
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f aY
+  exact ⟨((((rightDerivedUpperShriekAdjunction _ (f ≫ aY)).ofNatIsoLeft e).rightAdjointUniq
+    ((rightDerivedUpperShriekAdjunction _ f).comp
+      (rightDerivedUpperShriekAdjunction _ aY))).app (𝟙_ _)).symm⟩
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
