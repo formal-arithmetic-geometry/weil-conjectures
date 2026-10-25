@@ -134,8 +134,9 @@ noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
 set_option synthInstance.maxHeartbeats 400000 in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 /-- The K-flat complexes of module objects over `Λ_Z` form a left derivability structure for the
-quasi-isomorphisms of the homotopy category. -/
-instance isLeftDerivabilityStructure_localizerMorphismKFlat (Z : Scheme.{u}) :
+quasi-isomorphisms of the homotopy category. It is not an instance: it would change the instance
+found for the existence of the derived pullbacks of module objects. -/
+lemma isLeftDerivabilityStructure_localizerMorphismKFlat (Z : Scheme.{u}) :
     (HomotopyCategory.quasiIso
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
       (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure := by
@@ -504,6 +505,7 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
       (leftDerivedUpperStarTensorRightCounit Λ f)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) := by
+  have := isLeftDerivabilityStructure_localizerMorphismKFlat Λ Y
   refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat _ (fun X₁ X₂ ↦ ?_)
@@ -618,6 +620,7 @@ lemma exists_kFlat_iso_Qh_obj (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
     ∃ P, (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat P ∧
       Nonempty (DerivedCategory.Qh.obj P ≅ K) := by
+  have := isLeftDerivabilityStructure_localizerMorphismKFlat Λ Y
   have := Localization.essSurj (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology Y)
     Ab.{u + 1}) (condensedRingObj Λ Y))) (HomotopyCategory.quasiIso _ (.up ℤ))
   obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
