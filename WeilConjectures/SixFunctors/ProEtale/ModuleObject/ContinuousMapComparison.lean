@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantHom
+public import WeilConjectures.CategoryTheory.Sites.PullbackLocallyBijective
 
 /-!
 # The pullback of a condensed ring of continuous maps
@@ -37,14 +39,18 @@ with the projections `V ×_X X' → V` (`AlgebraicGeometry.ProEtale.continuousMa
 The latter is a mate computation, reduced to an identity of projections of test objects
 `X[S] ×_X X' ≅ X'[S]`.
 
-## Sorried input
+## Main result
 
 - `AlgebraicGeometry.ProEtale.isIso_continuousMapComparison`: by Bhatt–Scholze, *The pro-étale
-  topology for schemes*, Lemma 4.2.12, `ψ_X` is an isomorphism for `T` locally compact, Hausdorff
-  and totally disconnected: for a profinite set `S` the condensed set `S̲` pulls back to the
-  representable sheaf of `X[S]`, whose sections over `U` are the continuous maps `U → S`, and `T̲`
-  is the filtered colimit of the `K̲` over the compact subsets `K ⊆ T`, with which sections over
-  quasi-compact quasi-separated objects commute.
+  topology for schemes*, Lemma 4.2.12, `ψ_X` is an isomorphism for `T` Hausdorff and totally
+  disconnected. The inverse image `p_X^*` is the sheafified left Kan extension along the
+  representably flat functor `S ↦ X[S]`, so it suffices that the morphism of presheaves
+  `AlgebraicGeometry.ProEtale.continuousMapLanHom` out of the left Kan extension is locally
+  injective and locally surjective. Both are checked over affine objects `W`, whose morphisms to
+  `X[S]` are the continuous maps `W → S`
+  (`AlgebraicGeometry.ProEtale.exists_hom_profiniteTestObject` and
+  `AlgebraicGeometry.ProEtale.hom_ext_profiniteTestObject`): a continuous map `W → T` factors
+  through its compact, hence profinite, image.
 -/
 
 @[expose] public section
@@ -418,25 +424,238 @@ lemma upperStar_map_continuousMapComparison_comp_continuousMapPullbackHom :
 
 end AlgebraicGeometry.ProEtale
 
+/-! ### Morphisms from affine schemes to the test objects `X[S]` -/
+
+namespace AlgebraicGeometry.Scheme.ProEt
+
+/-- A sieve on an object `U` of the small pro-étale site containing all morphisms from objects
+with affine underlying scheme is covering: it contains an affine open cover of `U`. -/
+lemma mem_topology_of_isAffine {X : Scheme.{u}} {U : X.ProEt} (R : Sieve U)
+    (hR : ∀ ⦃W : X.ProEt⦄ (f : W ⟶ U), IsAffine W.left → R f) : R ∈ ProEt.topology X U :=
+  mem_topology_of_openImmersion R U.left.affineOpenCover.f
+    (fun x ↦ ⟨_, U.left.affineOpenCover.covers x⟩)
+    (fun _ ↦ hR _ (inferInstanceAs (IsAffine (Spec _))))
+
+end AlgebraicGeometry.Scheme.ProEt
+
 namespace AlgebraicGeometry.ProEtale
 
-/-- **The pullback of `C(-, T)` from the point is the sheaf `U ↦ C(U, T)`** (sorried input), for a
-locally compact, Hausdorff, totally disconnected topological ring `T`: the comparison
-`ψ_X : p_X^* T̲ ⟶ C(-, T)_X` is an isomorphism.
+open Scheme
 
-This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12. Proof sketch: `T̲` is
-the filtered colimit of the condensed sets `K̲ = C(-, K)` over the compact subsets `K ⊆ T`, a
-continuous map from a profinite set having compact image. Each such `K` is profinite, so `K̲` is
-representable, and `p_X^*` (whose underlying functor on sets is computed by a filtered colimit,
-`S ↦ X[S]` being representably flat, followed by sheafification) sends it to the representable
-sheaf of `X[K] = Spec LC(K, ℤ) ×_{Spec ℤ} X`, whose sections over `U` are the continuous maps
-`U → K` (`LocallyConstant.liftPrimeSpectrum`). Sections over quasi-compact quasi-separated
-objects commute with filtered colimits (`Scheme.ProEt.isColimitSectionsOfIsColimit`), so over
-such `U` the sections of `p_X^* T̲` are `colim_K C(U, K) = C(U, T)`, `U` being quasi-compact. As
-the quasi-compact quasi-separated objects form a basis of `X_proét`, `ψ_X` is an isomorphism. -/
+/-- On the spectrum of a ring `R`, the projection `Spec LC(S, ℤ) → S` after `Spec φ` is the
+continuous map `Spec R → S` induced by `φ : LC(S, ℤ) ⟶ R`. -/
+lemma specLocallyConstantToProfinite_specMap_apply {S : Profinite.{u}} {R : CommRingCat.{u}}
+    (φ : CommRingCat.of (LocallyConstant S ℤ) ⟶ R) (p : PrimeSpectrum R) :
+    specLocallyConstantToProfinite S ((Spec.map φ).base p) =
+      LocallyConstant.specMap φ.hom p :=
+  rfl
+
+/-- Every continuous map `c : Y → S` from an affine scheme to a profinite set lifts to a morphism
+of schemes `Y ⟶ Spec LC(S, ℤ)` (`LocallyConstant.liftPrimeSpectrum`). -/
+lemma exists_hom_profiniteToScheme {Y : Scheme.{u}} [IsAffine Y] {S : Profinite.{u}}
+    (c : C(Y, S)) :
+    ∃ f : Y ⟶ profiniteToScheme.obj S,
+      ∀ y, specLocallyConstantToProfinite S (f.base y) = c y := by
+  refine ⟨Y.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom (LocallyConstant.liftPrimeSpectrum
+    (Int.castRingHom _) (c.comp Y.isoSpec.inv.base.hom))), fun y ↦ ?_⟩
+  rw [Scheme.Hom.comp_apply]
+  refine (specLocallyConstantToProfinite_specMap_apply _ _).trans ?_
+  rw [CommRingCat.hom_ofHom, LocallyConstant.specMap_liftPrimeSpectrum,
+    ContinuousMap.comp_apply]
+  exact congrArg c (Scheme.hom_inv_apply Y.isoSpec y)
+
+lemma specLocallyConstantToProfinite_apply_isoSpec_inv {Y : Scheme.{u}} [IsAffine Y]
+    {S : Profinite.{u}} (f : Y ⟶ profiniteToScheme.obj S) (p : PrimeSpectrum Γ(Y, ⊤)) :
+    specLocallyConstantToProfinite S (f.base (Y.isoSpec.inv.base p)) =
+      LocallyConstant.specMap (Spec.preimage (Y.isoSpec.inv ≫ f)).hom p := by
+  rw [← specLocallyConstantToProfinite_specMap_apply, Spec.map_preimage, Scheme.Hom.comp_apply]
+  rfl
+
+/-- Morphisms of schemes `Y ⟶ Spec LC(S, ℤ)` from an affine scheme are determined by their
+composites with the projection `Spec LC(S, ℤ) → S`
+(`LocallyConstant.ringHom_ext_of_specMap`). -/
+lemma hom_ext_of_specLocallyConstantToProfinite {Y : Scheme.{u}} [IsAffine Y]
+    {S : Profinite.{u}} {f g : Y ⟶ profiniteToScheme.obj S}
+    (h : ∀ y, specLocallyConstantToProfinite S (f.base y) =
+      specLocallyConstantToProfinite S (g.base y)) : f = g := by
+  rw [← Iso.hom_inv_id_assoc Y.isoSpec f, ← Iso.hom_inv_id_assoc Y.isoSpec g,
+    ← Spec.map_preimage (Y.isoSpec.inv ≫ f), ← Spec.map_preimage (Y.isoSpec.inv ≫ g)]
+  congr 2
+  ext1
+  refine LocallyConstant.ringHom_ext_of_specMap (RingHom.ext_int _ _)
+    (ContinuousMap.ext fun p ↦ ?_)
+  rw [← specLocallyConstantToProfinite_apply_isoSpec_inv,
+    ← specLocallyConstantToProfinite_apply_isoSpec_inv, h]
+
+variable (X : Scheme.{u})
+
+/-- Every continuous map `c : V → S` from an affine object of `X_proét` to a profinite set is the
+composite of a morphism `V ⟶ X[S]` with the projection `X[S] → S`. -/
+lemma exists_hom_profiniteTestObject {V : X.ProEt} [IsAffine V.left] {S : Profinite.{u}}
+    (c : C(V.left, S)) :
+    ∃ f : V ⟶ profiniteTestObject X S, ∀ y, profiniteTestObjectProj X S (f.left.base y) = c y := by
+  obtain ⟨g, hg⟩ := exists_hom_profiniteToScheme c
+  refine ⟨MorphismProperty.Over.homMk (pullback.lift g V.hom (specULiftZIsTerminal.hom_ext _ _))
+    (pullback.lift_snd _ _ _), fun y ↦ ?_⟩
+  rw [profiniteTestObjectProj, ContinuousMap.comp_apply, ← hg y]
+  erw [← Scheme.Hom.comp_apply, pullback.lift_fst]
+  rfl
+
+/-- Morphisms `V ⟶ X[S]` from an affine object of `X_proét` are determined by their composites
+with the projection `X[S] → S`. -/
+lemma hom_ext_profiniteTestObject {V : X.ProEt} [IsAffine V.left] {S : Profinite.{u}}
+    {f g : V ⟶ profiniteTestObject X S}
+    (h : ∀ y, profiniteTestObjectProj X S (f.left.base y) =
+      profiniteTestObjectProj X S (g.left.base y)) : f = g := by
+  refine MorphismProperty.Over.Hom.ext ?_
+  refine pullback.hom_ext (hom_ext_of_specLocallyConstantToProfinite fun y ↦ ?_) ?_
+  · exact h y
+  · erw [MorphismProperty.Over.w f, MorphismProperty.Over.w g]
+
+/-! ### The comparison is an isomorphism -/
+
+/-- The functor `S ↦ X[S]` is continuous, being the composite of the continuous functors
+`S ↦ Spec LC(S, ℤ)` and the base change along `π_X`. -/
+instance isContinuous_profiniteToProEtOf :
+    (profiniteToProEtOf X).IsContinuous (coherentTopology Profinite.{u}) (ProEt.topology X) :=
+  have := Scheme.ProEt.isContinuous_overPullback (toSpecZ X)
+  Functor.isContinuous_comp _ _ _ (ProEt.topology specZ) _
+
+/-- The functor `S ↦ X[S]` is representably flat, being the composite of two finite limit
+preserving functors. -/
+instance representablyFlat_profiniteToProEtOf : RepresentablyFlat (profiniteToProEtOf X) := by
+  have : RepresentablyFlat (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)) := by
+    infer_instance
+  exact RepresentablyFlat.comp _ _
+
+/-- The left Kan extension along `S ↦ X[S]` is computed by filtered colimits, which the
+forgetful functor of abelian groups preserves. -/
+instance (Y : X.ProEtᵒᵖ) :
+    PreservesColimitsOfShape (CostructuredArrow (profiniteToProEtOf X).op Y)
+      (forget Ab.{u + 1}) := by
+  have : PreservesFilteredColimitsOfSize.{u, u + 1} (forget Ab.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1} _
+  have : IsFiltered (CostructuredArrow (profiniteToProEtOf X).op Y) :=
+    IsFiltered.of_equivalence (structuredArrowOpEquivalence (profiniteToProEtOf X) Y.unop)
+  infer_instance
+
+variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+
+/-- The morphism of presheaves from the left Kan extension of `T̲` along `S ↦ X[S]` to
+`U ↦ C(U, T)`, transpose of `continuousMapToLowerStar`. Its sheafification is `ψ_X`. -/
+noncomputable abbrev continuousMapLanHom :
+    (profiniteToProEtOf X).op.leftKanExtension (Profinite.continuousMapRingObj.{u} T).obj ⟶
+      ((sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+        (continuousMapRingSheaf X T)).obj :=
+  (((profiniteToProEtOf X).op.lanAdjunction Ab.{u + 1}).homEquiv _ _).symm
+    (continuousMapToLowerStar X T).hom
+
+/-- `continuousMapLanHom` sends the image of `g : S → T` along `ψ : U ⟶ X[S]` to
+`g ∘ pr_S ∘ ψ : U → T`. -/
+lemma continuousMapLanHom_app_map_leftKanExtensionUnit_app {U : X.ProEt} {S : Profinite.{u}}
+    (ψ : U ⟶ profiniteTestObject X S) (g : ULift.{u + 1} C(S, T)) :
+    (continuousMapLanHom X T).app (op U)
+      (((profiniteToProEtOf X).op.leftKanExtension (Profinite.continuousMapRingObj.{u} T).obj).map
+        ψ.op (((profiniteToProEtOf X).op.leftKanExtensionUnit
+          (Profinite.continuousMapRingObj.{u} T).obj).app (op S) g)) =
+      ULift.up (g.down.comp ((profiniteTestObjectProj X S).comp ψ.left.base.hom)) := by
+  have h := Functor.leftKanExtensionUnit_app_comp_map_comp_lanAdjunction_homEquiv_symm_app
+    (H := Ab.{u + 1}) (P := (Profinite.continuousMapRingObj.{u} T).obj)
+    (Q := ((sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+        (continuousMapRingSheaf X T)).obj)
+    (profiniteToProEtOf X).op (continuousMapToLowerStar X T).hom (X := op S) ψ.op
+  exact ConcreteCategory.congr_hom h g
+
+/-- `continuousMapLanHom` is locally surjective: over an affine `W`, a continuous map `W → T` has
+compact image `K`, which is profinite, so it is `K ↪ T` composed with the projection `X[K] → K`
+and a morphism `W ⟶ X[K]`. -/
+instance isLocallySurjective_continuousMapLanHom [T2Space T] [TotallyDisconnectedSpace T] :
+    Presheaf.IsLocallySurjective (ProEt.topology X) (continuousMapLanHom X T) where
+  imageSieve_mem {U} s := Scheme.ProEt.mem_topology_of_isAffine _ fun W f hW ↦ by
+    let c : C(W.left, T) := s.down.comp f.left.base.hom
+    have : CompactSpace (Set.range c) :=
+      isCompact_iff_compactSpace.1 (isCompact_range c.continuous)
+    have : TotallyDisconnectedSpace (ULift.{u} (Set.range c)) :=
+      Homeomorph.ulift.symm.totallyDisconnectedSpace
+    let K : Profinite.{u} := Profinite.of (ULift.{u} (Set.range c))
+    let c' : C(W.left, K) :=
+      ⟨fun w ↦ (ULift.up ⟨c w, w, rfl⟩ : ULift.{u} (Set.range c)),
+        continuous_uliftUp.comp (c.continuous.subtype_mk _)⟩
+    obtain ⟨ψ, hψ⟩ := exists_hom_profiniteTestObject X c'
+    let incl : C(K, T) := ⟨fun k ↦ (k : ULift.{u} (Set.range c)).down.1,
+      continuous_subtype_val.comp continuous_uliftDown⟩
+    refine ⟨((profiniteToProEtOf X).op.leftKanExtension
+      (Profinite.continuousMapRingObj.{u} T).obj).map ψ.op
+        (((profiniteToProEtOf X).op.leftKanExtensionUnit
+          (Profinite.continuousMapRingObj.{u} T).obj).app (op K) (ULift.up incl)), ?_⟩
+    rw [continuousMapLanHom_app_map_leftKanExtensionUnit_app]
+    refine ULift.ext _ _ (ContinuousMap.ext fun w ↦ ?_)
+    rw [ContinuousMap.comp_apply, ContinuousMap.comp_apply, hψ]
+    rfl
+
+/-- A section of the left Kan extension of `T̲` along `S ↦ X[S]` killed by `continuousMapLanHom`
+vanishes over every affine `W`: writing it as the image of `g : S → T` along `ψ : U ⟶ X[S]`, the
+composite `W ⟶ U ⟶ X[S]` factors through `X[S']` for the closed subset `S' = g⁻¹(0)`. -/
+lemma map_eq_zero_of_continuousMapLanHom_app_eq_zero [T2Space T] {U : X.ProEt}
+    (z : ToType (((profiniteToProEtOf X).op.leftKanExtension
+      (Profinite.continuousMapRingObj.{u} T).obj).obj (op U)))
+    (hz : (continuousMapLanHom X T).app (op U) z = 0) {W : X.ProEt} (f : W ⟶ U)
+    [IsAffine W.left] :
+    ((profiniteToProEtOf X).op.leftKanExtension
+      (Profinite.continuousMapRingObj.{u} T).obj).map f.op z = 0 := by
+  obtain ⟨S, ψ, g, rfl⟩ := Functor.exists_leftKanExtensionUnit_app_eq _ _ z
+  erw [continuousMapLanHom_app_map_leftKanExtensionUnit_app] at hz
+  have hz' (w : W.left) : g.down (profiniteTestObjectProj X S ((f ≫ ψ).left.base w)) = 0 :=
+    DFunLike.congr_fun (congrArg ULift.down hz) (f.left.base w)
+  have : CompactSpace {s : S // g.down s = 0} :=
+    isCompact_iff_compactSpace.1 (isClosed_eq g.down.continuous continuous_const).isCompact
+  let S' : Profinite.{u} := Profinite.of {s : S // g.down s = 0}
+  let j : S' ⟶ S := ConcreteCategory.ofHom ⟨Subtype.val, continuous_subtype_val⟩
+  let c' : C(W.left, S') :=
+    ⟨fun w ↦ (⟨profiniteTestObjectProj X S ((f ≫ ψ).left.base w), hz' w⟩ :
+      {s : S // g.down s = 0}), by fun_prop⟩
+  obtain ⟨ψ', hψ'⟩ := exists_hom_profiniteTestObject X c'
+  have e : ψ' ≫ (profiniteToProEtOf X).map j = f ≫ ψ := hom_ext_profiniteTestObject X fun w ↦ by
+    rw [MorphismProperty.Comma.comp_left, Scheme.Hom.comp_apply]
+    erw [profiniteTestObjectProj_naturality, hψ']
+    rfl
+  rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, ← e, op_comp,
+    Functor.map_comp, ConcreteCategory.comp_apply]
+  have hu := ConcreteCategory.congr_hom (((profiniteToProEtOf X).op.leftKanExtensionUnit
+    (Profinite.continuousMapRingObj.{u} T).obj).naturality j.op) g
+  erw [← hu]
+  have h0 : (Profinite.continuousMapRingObj.{u} T).obj.map j.op g = 0 :=
+    ULift.ext _ _ (ContinuousMap.ext fun s ↦ s.2)
+  rw [ConcreteCategory.comp_apply, h0, map_zero, map_zero]
+
+/-- `continuousMapLanHom` is locally injective, by
+`map_eq_zero_of_continuousMapLanHom_app_eq_zero`. -/
+instance isLocallyInjective_continuousMapLanHom [T2Space T] :
+    Presheaf.IsLocallyInjective (ProEt.topology X) (continuousMapLanHom X T) where
+  equalizerSieve_mem {U} x y hxy := Scheme.ProEt.mem_topology_of_isAffine _ fun W f hW ↦ by
+    rw [Presheaf.equalizerSieve_apply, ← sub_eq_zero, ← map_sub]
+    exact map_eq_zero_of_continuousMapLanHom_app_eq_zero X T (x - y)
+      (by rw [map_sub, hxy, sub_self]) f
+
+/-- **The pullback of `C(-, T)` from the point is the sheaf `U ↦ C(U, T)`**, for a Hausdorff,
+totally disconnected topological ring `T`: the comparison `ψ_X : p_X^* T̲ ⟶ C(-, T)_X` is an
+isomorphism.
+
+This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12. The inverse image
+`p_X^*` is the inverse image along the representably flat functor `S ↦ X[S]`, so `ψ_X` is the
+sheafification of the morphism of presheaves `continuousMapLanHom` out of the left Kan extension,
+and it suffices that the latter is locally injective and locally surjective
+(`Functor.sheafPullbackConstruction.isIso_homEquiv_symm_of_isLocallyBijective`). Both are checked
+over affine objects `W`, whose morphisms to `X[S]` are the continuous maps `W → S`
+(`exists_hom_profiniteTestObject`, `hom_ext_profiniteTestObject`): a continuous map `W → T` has
+compact, hence profinite, image `K`, and factors through `X[K]`; a section `g ∘ pr_S ∘ ψ`
+vanishing on `W` comes from `X[g⁻¹(0)]`. -/
 theorem isIso_continuousMapComparison (X : Scheme.{u}) (T : Type) [TopologicalSpace T] [Ring T]
-    [IsTopologicalRing T] [LocallyCompactSpace T] [T2Space T] [TotallyDisconnectedSpace T] :
-    IsIso (continuousMapComparison X T) :=
-  sorry
+    [IsTopologicalRing T] [T2Space T] [TotallyDisconnectedSpace T] :
+    IsIso (continuousMapComparison X T) := by
+  rw [continuousMapComparison, Adjunction.isIso_homEquiv_symm_iff (upperStarFromPointAdjunction X)
+    (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (profiniteToProEtOf X)
+      Ab.{u + 1} (coherentTopology Profinite.{u}) (ProEt.topology X))]
+  exact Functor.sheafPullbackConstruction.isIso_homEquiv_symm_of_isLocallyBijective _ _ _ _ _
 
 end AlgebraicGeometry.ProEtale

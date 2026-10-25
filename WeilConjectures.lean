@@ -8285,6 +8285,7 @@ public import WeilConjectures.CategoryTheory.Sites.PresheafFreeNerveComparison
 public import WeilConjectures.CategoryTheory.Sites.PresheafFreeNerveExact
 public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
+public import WeilConjectures.CategoryTheory.Sites.PullbackLocallyBijective
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel

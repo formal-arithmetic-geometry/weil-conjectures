@@ -27,7 +27,7 @@ functions `W → ℚ̄_ℓ` with values in a finite subextension of `ℚ̄_ℓ /
 (`ProEtale.CondensedRing.exists_endRegularRingEquiv`). This is Bhatt–Scholze, *The pro-étale
 topology for schemes*, Lemma 4.2.12 and §6.8: the pullback of the condensed ring `C(-, E)` to the
 pro-étale site is `U ↦ C(U, E)` for a finite subextension `E`
-(`ProEtale.isIso_continuousMapComparison`, the only sorried input), and for `W` quasi-compact and
+(`ProEtale.isIso_continuousMapComparison`), and for `W` quasi-compact and
 quasi-separated taking sections commutes with the filtered colimit `ℚ̲̄_ℓ = colim_E E̲`
 (`ProEtale.padicAlgClSectionRingEquiv`). On global sections, the restriction of endomorphisms is
 the pullback followed by `α_g` (`ProEtale.CondensedRing.restrictEnd_regularEndRingHom`).
@@ -130,8 +130,8 @@ description of `ℚ̄_ℓ,W = colim_E E_W` of §6.8. The endomorphisms of the re
 global sections (`CategoryTheory.Mod.regularEndRingHom_bijective`), whose restriction is computed
 by `ProEtale.CondensedRing.restrictEnd_regularEndRingHom`; the global sections of `ℚ̲̄_ℓ,W` are
 computed by `ProEtale.padicAlgClSectionRingEquiv`, compatibly with pullback
-(`ProEtale.Γ_map_condensedPullbackHom_padicAlgClSectionRingHom`). The proof depends on the
-sorried input `ProEtale.isIso_continuousMapComparison`: the pullback of `C(-, E)` from the point
+(`ProEtale.Γ_map_condensedPullbackHom_padicAlgClSectionRingHom`). The proof uses
+`ProEtale.isIso_continuousMapComparison`: the pullback of `C(-, E)` from the point
 is the sheaf `U ↦ C(U, E)`. -/
 theorem exists_endRegularRingEquiv :
     ∃ e : ∀ (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W],
