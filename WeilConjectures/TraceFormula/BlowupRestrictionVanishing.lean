@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.BlowupRestrictionChart
 public import WeilConjectures.TraceFormula.BlowupChartLimit
+public import WeilConjectures.RingTheory.TangentConeRegular
 
 /-!
 # Blowup restriction vanishing
@@ -54,10 +55,12 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (S : Over (Spec (.of k)))
 /-- On the strict localization of a smooth surface, if the tangent cones of `V(f)` and `V(g)` meet
 only at the origin, then `V(f) ∩ V(g)` is the closed point. -/
 lemma maximalIdeal_le_radical_of_smooth (ht : t ≫ S.hom = 𝟙 _)
-    {f g : Scheme.strictHenselization t} (hfg : TangentConesMeetAtOrigin f g) :
-    maximalIdeal (Scheme.strictHenselization t) ≤ (Ideal.span {f, g}).radical :=
+    {f g : Scheme.strictHenselization t}
+    (hfg : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {g})) :
+    maximalIdeal (Scheme.strictHenselization t) ≤ (Ideal.span {f, g}).radical := by
   have := Scheme.isRegularLocalRing_strictHenselization_of_smooth S t ht
-  hfg.maximalIdeal_le_radical
+  rw [Ideal.span_insert]
+  exact hfg.maximalIdeal_le_radical
 
 /-- **Blowup restriction vanishing** (blueprint `sk-lem-tf-blowup-restriction`). Let
 `T = Spec R` be the strict localization of a smooth surface `S` over the algebraically closed
@@ -70,8 +73,9 @@ theorem blowupRestriction_eq_zero {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : (ℓ : k)
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (hΛ : IsNilpotent (ℓ : Λ))
     (ht : t ≫ S.hom = 𝟙 _) {f g h : Scheme.strictHenselization t}
     [Fact (g ∈ maximalIdeal (Scheme.strictHenselization t))]
-    (hDB : TangentConesMeetAtOrigin f g) (hDH : TangentConesMeetAtOrigin f h)
-    (hh : HasOrder h 1)
+    (hf : f ≠ 0) (hg : g ≠ 0) (hh : HasOrder h 1)
+    (hDB : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {g}))
+    (hDH : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {h}))
     (E : DerivedCategory (Sheaf (Scheme.specBasicOpen (f * h)).toScheme.smallEtaleTopology
       (ModuleCat.{u + 1} Λ)))
     (hE : HasFiniteEllMonodromy ℓ E) :
@@ -90,7 +94,9 @@ theorem blowupRestriction_eq_zero {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : (ℓ : k)
   obtain ⟨x₀, y₀, hm, hlim⟩ := Scheme.exists_isEtaleLimitOfSmoothSurfaces_blowupChart S t ht
   obtain ⟨D⟩ := nonempty_blowupChartData
     (Scheme.ringKrullDim_strictHenselization_of_smooth S t ht) hm
-    (algebraMap k (Scheme.strictHenselization t)) hres.1 hDB hDH hh
+    (algebraMap k (Scheme.strictHenselization t)) hres.1
+    (.of_tangentConesMeetAtOrigin hf hg hDB)
+    (.of_tangentConesMeetAtOrigin hf (fun h0 ↦ hh.2 (by simp [h0])) hDH) hh
   have hx : D.x ∈ maximalIdeal (Scheme.strictHenselization t) := by
     rw [hm]
     exact add_mem (Ideal.subset_span (Set.mem_insert _ _))

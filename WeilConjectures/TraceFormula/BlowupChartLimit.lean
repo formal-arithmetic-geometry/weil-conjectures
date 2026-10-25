@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleLimitSmoothSurface
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationSmoothSurface
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-public import WeilConjectures.RingTheory.TangentCone
+public import WeilConjectures.RingTheory.TangentConeInitialForms
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.RingTheory.TangentCone
+public import WeilConjectures.RingTheory.TangentConeInitialForms
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.MvPolynomial.Basic

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.RingTheory.TangentCone
+public import WeilConjectures.RingTheory.TangentConeInitialForms
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.RingTheory.Nakayama
 
@@ -25,7 +25,7 @@ blowup restriction vanishing (blueprint `sk-lem-tf-blowup-restriction`).
 
 ## Main results
 
-- `IsLocalRing.TangentConesMeetAtOrigin.maximalIdeal_le_radical`: `V(f) ∩ V(g) = {t}`.
+- `IsLocalRing.TangentConesMeetAtOrigin.maximalIdeal_le_radical`: `V(I) ∩ V(J) = {t}`.
 -/
 
 @[expose] public section
@@ -38,19 +38,17 @@ namespace IsLocalRing
 
 variable {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 
-/-- If the tangent cones of `V(f)` and `V(g)` meet only at the origin, then `V(f) ∩ V(g)` is the
-closed point: `(f, g)` is `𝔪`-primary. -/
-lemma TangentConesMeetAtOrigin.maximalIdeal_le_radical {f g : R}
-    (hfg : TangentConesMeetAtOrigin f g) : maximalIdeal R ≤ (Ideal.span {f, g}).radical := by
-  obtain ⟨d, e, -, -, N, hN⟩ := hfg
-  have hle : maximalIdeal R ^ N ≤ Ideal.span {f, g} := by
+/-- If the tangent cones of `V(I)` and `V(J)` meet only at the origin, then `V(I) ∩ V(J)` is the
+closed point: `I + J` is `𝔪`-primary. -/
+lemma TangentConesMeetAtOrigin.maximalIdeal_le_radical {I J : Ideal R}
+    (hIJ : TangentConesMeetAtOrigin R I J) : maximalIdeal R ≤ (I ⊔ J).radical := by
+  obtain ⟨N, hN⟩ := hIJ
+  have hle : maximalIdeal R ^ N ≤ I ⊔ J := by
     refine Submodule.le_of_le_smul_of_le_jacobson_bot (I := maximalIdeal R)
       (IsNoetherian.noetherian _) (by rw [jacobson_eq_maximalIdeal ⊥ bot_ne_top]) ?_
     refine (hN N le_rfl).trans (sup_le (sup_le ?_ ?_) ?_)
-    · exact le_sup_of_le_left (Ideal.mul_le_left.trans
-        (Ideal.span_mono (Set.singleton_subset_iff.2 (Set.mem_insert _ _))))
-    · exact le_sup_of_le_left (Ideal.mul_le_left.trans
-        (Ideal.span_mono (Set.singleton_subset_iff.2 (Set.mem_insert_of_mem _ rfl))))
+    · exact le_sup_of_le_left (inf_le_left.trans le_sup_left)
+    · exact le_sup_of_le_left (inf_le_left.trans le_sup_right)
     · rw [pow_succ', smul_eq_mul]
       exact le_sup_right
   intro a ha

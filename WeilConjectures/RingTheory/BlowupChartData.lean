@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.RingTheory.TangentCone
+public import WeilConjectures.RingTheory.TangentConeInitialForms
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Localization.Away.Basic
@@ -137,7 +137,7 @@ theorem nonempty_blowupChartData [IsRegularLocalRing R]
     (hdim : ringKrullDim R = 2) [HenselianLocalRing R] [IsAlgClosed (ResidueField R)]
     {x₀ y₀ : R} (hm : maximalIdeal R = Ideal.span {x₀, y₀}) {K : Type v} [Infinite K]
     (c : K → R) (hc : Function.Injective (residue R ∘ c)) {f g h : R}
-    (hDB : TangentConesMeetAtOrigin f g) (hDH : TangentConesMeetAtOrigin f h)
+    (hDB : InitialFormsSpanHighDegree f g) (hDH : InitialFormsSpanHighDegree f h)
     (hh : HasOrder h 1) :
     Nonempty (BlowupChartData f g h x₀ y₀ c) :=
   sorry

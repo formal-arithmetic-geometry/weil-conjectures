@@ -50,4 +50,16 @@ theorem exists_eq_of_monic_eval₂_eq_zero {R F : Type*} [CommRing R] [IsLocalRi
   rw [h, ← hcomp, RingHom.comp_apply, hτ, map_neg]
   rfl
 
+/-- If `K` is infinite and `c : K → R` has injective residues, then for a nonzero polynomial `P`
+over the residue field, `P(-c̄ i) ≠ 0` for some index `i`. -/
+theorem exists_eval_neg_residue_ne_zero {R K : Type*} [CommRing R] [IsLocalRing R] [Infinite K]
+    {c : K → R} (hc : Function.Injective (residue R ∘ c)) {P : (ResidueField R)[X]}
+    (hP : P ≠ 0) : ∃ i, P.eval (-residue R (c i)) ≠ 0 := by
+  classical
+  by_contra! h
+  have : Finite K := Finite.of_injective (β := P.roots.toFinset)
+    (fun i => ⟨-residue R (c i), Multiset.mem_toFinset.mpr ((mem_roots hP).mpr (h i))⟩)
+    (fun i j hij => hc (neg_inj.mp (congrArg Subtype.val hij)))
+  exact not_finite K
+
 end BlowupChart
