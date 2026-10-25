@@ -60,12 +60,6 @@ lemma nearbyDualityMap_eq_ihomComparison (G : C ⥤ D) [G.LaxMonoidal] {W : C} {
   rw [uncurry_nearbyDualityMap, uncurry_natural_right, uncurry_eq, Category.assoc,
     Functor.LaxMonoidal.ihomComparison_ev_assoc]
 
-/-- Precomposition with an isomorphism is an isomorphism of internal homs. -/
-instance isIso_pre_app {X Y : C} (f : X ⟶ Y) [IsIso f] (W : C) : IsIso ((pre f).app W) :=
-  ⟨(pre (inv f)).app W, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id,
-    NatTrans.id_app], by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id,
-    NatTrans.id_app]⟩
-
 omit [MonoidalClosed C] in
 /-- An exchange `α : F' Ψ_X ⟶ Ψ_U F` between strong monoidal functors which is monoidal in the
 oplax form `Ψ_U(δ_F) ∘ α ∘ F'(μ_X) = μ_U ∘ (α ⊗ α) ∘ δ_{F'}` is monoidal in the lax form. -/

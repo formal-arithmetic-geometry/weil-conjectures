@@ -31,7 +31,7 @@ After the reduction to proper models with compatible geometric generic fibres
 (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), this is
 `NearbyCyclesModel.isIso_kunnethMap_of_isProper`, whose inputs are supplied here: Deligne's
 finiteness theorem for the nearby cycles
-(`NearbyCyclesModel.preservesBoundedConstructible_of_exists_comp`,
+(`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
 `NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`) and the monoidality of the
 nearby cycles of the trait on the cohomology of the geometric generic fibres
 (`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`), the complexes
@@ -100,8 +100,8 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
     hP.locallyOfFiniteType
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
   have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
-  have hΨA := preservesBoundedConstructible_of_exists_comp M hM.isTraitModel ⟨eM, heM⟩ A hA
-  have hΨB := preservesBoundedConstructible_of_exists_comp N hN.isTraitModel ⟨eN, heN⟩ B hB
+  have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
+  have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
   have hpush := boundedConstructible_rightDerivedLowerStar_obj _ ℓ
     (Over.homMk (U := Over.mk gM) (V := Over.mk (𝟙 (Spec (.of (traitGenericField k'))))) gM
       (Category.comp_id _)) _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)

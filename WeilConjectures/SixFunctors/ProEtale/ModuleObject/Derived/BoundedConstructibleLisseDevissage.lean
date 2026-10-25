@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleDevissage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedLocalization
 
 /-!
@@ -128,14 +129,6 @@ lemma boundedConstructible_singleFunctor_zero_obj {X : Scheme.{u}}
   · exact IsConstructibleModuleObject.of_iso
       ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
   · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isLE _ 0 i hi)
-
-/-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` of derived pushforwards, conjugate to
-the composition isomorphism of derived pullbacks. -/
-noncomputable def rightDerivedLowerStarComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    R((f)_*⟦Λ⟧) ⋙ R((g)_*⟦Λ⟧) ≅ R((f ≫ g)_*⟦Λ⟧) :=
-  conjugateIsoEquiv ((derivedUpperStarLowerStarAdjunction Λ g).comp
-    (derivedUpperStarLowerStarAdjunction Λ f)) (derivedUpperStarLowerStarAdjunction Λ (f ≫ g))
-    (leftDerivedUpperStarComp Λ f g)
 
 omit [IsCommMonObj Λ] in
 /-- Along a commutative square `a ≫ f = b ≫ g`, if `g^* M` is pro-étale locally finitely

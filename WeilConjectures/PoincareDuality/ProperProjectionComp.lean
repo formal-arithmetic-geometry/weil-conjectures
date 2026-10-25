@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
 
 /-!
@@ -36,15 +37,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-/-- The conjugate `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` of the composition isomorphism of the derived
-pullbacks. -/
-noncomputable abbrev derivedLowerStarCompConj :
-    (R((f)_*⟦Λ⟧)) ⋙ (R((g)_*⟦Λ⟧)) ≅ (R((f ≫ g)_*⟦Λ⟧)) :=
-  conjugateIsoEquiv ((derivedUpperStarLowerStarAdjunction Λ g).comp
-    (derivedUpperStarLowerStarAdjunction Λ f)) (derivedUpperStarLowerStarAdjunction Λ (f ≫ g))
-    (leftDerivedUpperStarComp Λ f g)
-
-
 lemma δ_leftDerivedUpperStar {W V : Scheme.{u}} (h : W ⟶ V)
     (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
       (condensedRingObj Λ V))) :
@@ -73,10 +65,10 @@ lemma properProjectionMorphism_comp
     (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj Λ Z))) :
     properProjectionMorphism Λ (f ≫ g) A B =
-      (derivedLowerStarCompConj Λ f g).inv.app A ▷ B ≫
+      (rightDerivedLowerStarComp Λ f g).inv.app A ▷ B ≫
         properProjectionMorphism Λ g ((R((f)_*⟦Λ⟧)).obj A) B ≫
         (R((g)_*⟦Λ⟧)).map (properProjectionMorphism Λ f A ((L((g)^*⟦Λ⟧)).obj B)) ≫
-        (derivedLowerStarCompConj Λ f g).hom.app _ ≫
+        (rightDerivedLowerStarComp Λ f g).hom.app _ ≫
         (R((f ≫ g)_*⟦Λ⟧)).map (A ◁ (leftDerivedUpperStarComp Λ f g).inv.app B) :=
   (Adjunction.projectionMorphism_eq_of_iso _
     ((derivedUpperStarLowerStarAdjunction Λ g).comp (derivedUpperStarLowerStarAdjunction Λ f))

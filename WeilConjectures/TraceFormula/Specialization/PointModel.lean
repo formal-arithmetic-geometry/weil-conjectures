@@ -115,7 +115,7 @@ noncomputable def traitSpecialization :
     Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
       Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   NearbyCyclesModel.boundedConstructibleNearbyCycles
-    ((traitModel k k').preservesBoundedConstructible_of_exists_comp (ℓ := ℓ)
+    ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
       (isTraitModel_traitModel k k')
       ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)
 

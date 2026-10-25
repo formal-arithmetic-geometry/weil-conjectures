@@ -28,8 +28,9 @@ The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` (blueprint `det-nearby-exchan
 `θ_X = β_{a_X}(A)`) is the exceptional adjoint of the compact-support exchange `ν_{a_X}`, read
 through the specialization unit of the trait and the base change `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`.
 The compact-support exchange is built from a relative compactification of `𝒳` over `S`, and is
-independent of the choice; it is not formalised. Its existence, with the two properties that
-characterize it, is the node lemma `NearbyCyclesModel.exists_nearbyDualizingMap` (blueprint
+independent of the choice; it is not formalised. A family of maps `θ` with the two properties
+that characterize the dualizing maps is a `NearbyCyclesModel.NearbyDualizingData`, and its
+existence is the node lemma `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint
 `det-nearby-exchange-maps` and the composition law `sk-lem-tf-nearby-mate-coherences` (4)):
 
 * **proper models**: for `q` proper, `ν_{a} = χ_a⁻¹` under `Ra_! ≅ Ra_*`, so `θ_X` is the unique
@@ -42,8 +43,7 @@ characterize it, is the node lemma `NearbyCyclesModel.exists_nearbyDualizingMap`
 
 These two properties determine the family `θ`: every trait model is an open sub-model of a proper
 one (Nagata compactification over `S`), the proper exchange `χ_a` is invertible, and maps
-`A ⟶ ω_{X'}` are determined by their traces. The family is fixed once and for all as
-`NearbyCyclesModel.nearbyDualizingMap`.
+`A ⟶ ω_{X'}` are determined by their traces.
 
 -/
 
@@ -87,7 +87,7 @@ lemma preservesBoundedConstructible (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar
     [Fact (ringChar k' ≠ ℓ)]
     [IsSepClosed k'] (h : M.IsTraitModelOfBase k q g) :
     M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
-  M.preservesBoundedConstructible_of_exists_comp h.isTraitModelOver.isTraitModel h.exists_comp_ε
+  M.preservesBoundedConstructible_of_isTraitModel h.isTraitModelOver.isTraitModel h.exists_comp_ε
 
 /-- The morphism of models `a : M ⟶ S` from a trait model of `X` over the base to the trait
 model of the point, over the structure morphisms `X ⟶ Spec k` and `X' ⟶ Spec k'`. -/
@@ -110,7 +110,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- The trait model of the point preserves bounded constructible complexes. -/
 lemma preservesBoundedConstructible_traitModel :
     (traitModel k k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
-  (traitModel k k').preservesBoundedConstructible_of_exists_comp (isTraitModel_traitModel k k')
+  (traitModel k k').preservesBoundedConstructible_of_isTraitModel (isTraitModel_traitModel k k')
     ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩
 
 variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -213,14 +213,9 @@ read through the specialization unit of the trait and `Lε^* ω_{X/k} ≅ ω_{�
   the structure morphisms and whose square of geometric generic fibres is cartesian, then
   `β_j = α_j⁻¹` and `j^! = j^*` give `ρ' ∘ j'^*(θ_M) = θ_N ∘ Ψ_N(ρ) ∘ α_j(ω_X)`.
 
-These properties determine the family (see the module docstring), so the family chosen in
-`NearbyCyclesModel.nearbyDualizingData` is the canonical one. -/
+These properties determine the family (see the module docstring). -/
 theorem nonempty_nearbyDualizingData : Nonempty (NearbyDualizingData k k' ℓ) :=
   sorry
-
-/-- The canonical family of dualizing maps of nearby cycles over the trait. -/
-noncomputable def nearbyDualizingData : NearbyDualizingData k k' ℓ :=
-  (nonempty_nearbyDualizingData k k' ℓ).some
 
 end NearbyCyclesModel
 

@@ -17,8 +17,9 @@ Let `M` be a trait model over the base (`NearbyCyclesModel.IsTraitModelOfBase`) 
 fibre the `k'`-scheme `X'`. Its nearby cycles `Ψ = Li^* Rj_* Lε^*` carry the lax tensor map
 `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` (`NearbyCyclesModel.tensorMap`), which restricts to bounded
 constructible complexes (`NearbyCyclesModel.boundedConstructibleTensorMap`), and the dualizing map
-`θ_M = β_a(ℚ̄_ℓ) : Ψ ω_X ⟶ ω_{X'}` (`NearbyCyclesModel.nearbyDualizingData`, blueprint
-`det-nearby-exchange-maps`). The **duality map** (`NearbyCyclesModel.nearbyDualityMap`)
+`θ_M = β_a(ℚ̄_ℓ) : Ψ ω_X ⟶ ω_{X'}` of a family `D` of dualizing maps
+(`NearbyCyclesModel.NearbyDualizingData`, blueprint `det-nearby-exchange-maps`). The **duality
+map** (`NearbyCyclesModel.nearbyDualityMap`)
 ```
 δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K
 ```
@@ -67,15 +68,16 @@ variable (ℓ) [IsSepClosed k'] [Algebra k k'] {q : M.total ⟶ trait k'}
 
 /-- The **duality map** `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` of a trait model `M` over the base
 (blueprint `sk-prop-tf-nearby-duality-foundation`): the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ`, with `θ_M`
-the dualizing map `β_a(ℚ̄_ℓ)` (`NearbyCyclesModel.nearbyDualizingData`). -/
-noncomputable def nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
+the dualizing map `β_a(ℚ̄_ℓ)` of the family `D` (`NearbyCyclesModel.NearbyDualizingData`). -/
+noncomputable def nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
+    (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
         (verdierDual ℓ (toPoint X) K) ⟶
       verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
         (h.preservesBoundedConstructible ℓ)).obj K) :=
   Verdier.nearbyDualityMap (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ))
-    ((nearbyDualizingData k k' ℓ).θ h) K
+    (D.θ h) K
 
 /-- **Gabber's theorem: nearby cycles commute with Verdier duality** (Illusie, *Autour du
 théorème de monodromie locale*, Thm. 4.2; SGA 7 XIII; blueprint
@@ -102,8 +104,10 @@ but are only identified by unfolding the condensed coefficient rings and the sch
 exceeds the heartbeat limits (elaborator and kernel).
 Compactification of trait models over `S`, generic slicing (`det-tf-nearby-duality-slice`) and
 finite support are not formalised. -/
-theorem isIso_nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ h K) :=
+theorem isIso_nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
+    (h : M.IsTraitModelOfBase k q g)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (nearbyDualityMap ℓ D h K) :=
   sorry
 
 /-- **Nearby cycles commute with Verdier duality**: for a trait model `M` over the base,
@@ -115,8 +119,9 @@ theorem nonempty_nearbyCycles_verdierDual_iso (h : M.IsTraitModelOfBase k q g)
         (verdierDual ℓ (toPoint X) K) ≅
       verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
         (h.preservesBoundedConstructible ℓ)).obj K)) :=
-  have := isIso_nearbyDualityMap ℓ h K
-  ⟨asIso (nearbyDualityMap ℓ h K)⟩
+  let ⟨D⟩ := nonempty_nearbyDualizingData k k' ℓ
+  have := isIso_nearbyDualityMap ℓ D h K
+  ⟨asIso (nearbyDualityMap ℓ D h K)⟩
 
 end NearbyCyclesModel
 

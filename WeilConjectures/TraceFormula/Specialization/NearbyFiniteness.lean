@@ -25,7 +25,7 @@ constructible `ℚ̄_ℓ`-complexes on `𝒳` to bounded constructible complexes
 (`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`). Hence the nearby cycles
 `Ψ = Li^* Rj_* Lε^*` of a model whose identification factors as `ε = j ≫ e` through the total
 space preserve bounded constructible complexes
-(`NearbyCyclesModel.preservesBoundedConstructible_of_exists_comp`): `Lε^* ≅ Lj^* Le^*`, and the
+(`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`): `Lε^* ≅ Lj^* Le^*`, and the
 pullback `Le^*` preserves bounded constructible complexes.
 
 Following Deligne's proof, the theorem is reduced to the affine spaces `𝔸ⁿ_S` and to
@@ -259,8 +259,10 @@ Thm. 3.2; for `ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): over the strictl
 identification factors as `ε = j ≫ e` through the total space preserve bounded constructible
 complexes: `Lε^* A ≅ Lj^* Le^* A`, the pullback `Le^* A` is bounded constructible, and the
 geometric nearby cycles `Li^* Rj_* Lj^*` preserve bounded constructible complexes
-(`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`). -/
-theorem preservesBoundedConstructible_of_exists_comp (M : NearbyCyclesModel X X'.left)
+(`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`). No blueprint node states
+this theorem; it is the analogue over the trait of `lem-sfb-dc-lower-star-preserves`
+(`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`). -/
+theorem preservesBoundedConstructible_of_isTraitModel (M : NearbyCyclesModel X X'.left)
     (hM : M.IsTraitModel) (hε : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε) :
     M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) := by
   obtain ⟨e, he⟩ := hε
