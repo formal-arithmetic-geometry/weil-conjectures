@@ -33,6 +33,7 @@ open Scheme
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
+omit [IsAlgClosed k] in
 /-- The vertical axis is the base change of `y` along the first projection. -/
 lemma isPullback_vertical : IsPullback M.vertical M.f (pullback.fst M.f M.f) M.y := by
   have hr : IsPullback (pullback.fst M.f M.f) (pullback.snd M.f M.f) M.f M.f :=
@@ -45,6 +46,7 @@ lemma isPullback_vertical : IsPullback M.vertical M.f (pullback.fst M.f M.f) M.y
     exact IsPullback.id_horiz M.f
   · simp [vertical]
 
+omit [IsAlgClosed k] in
 /-- The horizontal axis is the base change of `y` along the second projection. -/
 lemma isPullback_horizontal : IsPullback M.horizontal M.f (pullback.snd M.f M.f) M.y := by
   have hr : IsPullback (pullback.fst M.f M.f) (pullback.snd M.f M.f) M.f M.f :=
@@ -57,6 +59,7 @@ lemma isPullback_horizontal : IsPullback M.horizontal M.f (pullback.snd M.f M.f)
     exact IsPullback.id_horiz M.f
   · simp [horizontal]
 
+omit [IsAlgClosed k] in
 lemma range_y : Set.range M.y.base = {M.y.base (default : Spec (.of k))} := by
   ext z
   constructor

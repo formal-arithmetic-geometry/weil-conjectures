@@ -14,9 +14,9 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalizatio
 
 This file sets up the classical étale models of blueprint `det-tf-restriction-zero-localization`
 (in the situation of `det-tf-supported-restriction`). Let `k` be an algebraically closed field,
-`f : X ⟶ Spec k` a separated quasi-compact smooth curve, `h : X ⟶ X` a `k`-endomorphism (in the blueprint the
-`m`-th power `Φ_X^m` of the `k`-linear Frobenius) and `y` a `k`-point of `X` fixed by `h` at which
-`h` contracts: `h^♯ 𝔪_y ⊆ 𝔪_y²` (for `Φ_X^m` this holds since `Φ_X^m(t - a) = (t - a)^{q^m}`
+`f : X ⟶ Spec k` a separated quasi-compact smooth curve, `h : X ⟶ X` a `k`-endomorphism (in the
+blueprint the `m`-th power `Φ_X^m` of the `k`-linear Frobenius) and `y` a `k`-point of `X` fixed
+by `h` at which `h` contracts: `h^♯ 𝔪_y ⊆ 𝔪_y²` (for `Φ_X^m` this holds since `Φ_X^m(t - a) = (t - a)^{q^m}`
 in a local coordinate `t` with `t(y) = a`, see
 `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`).
 
@@ -120,6 +120,7 @@ instance isClosedImmersion_horizontal : IsClosedImmersion M.horizontal := by
     infer_instance
   exact IsClosedImmersion.of_comp M.horizontal (pullback.fst M.f M.f)
 
+omit [IsAlgClosed k] in
 @[reassoc (attr := simp)]
 lemma horizontal_snd : M.horizontal ≫ pullback.snd M.f M.f = M.f ≫ M.y :=
   pullback.lift_snd _ _ _

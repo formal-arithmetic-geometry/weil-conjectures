@@ -44,6 +44,7 @@ open Scheme
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
+omit [IsAlgClosed k] in
 /-- The point `y` of the model is a closed point. -/
 lemma isClosed_y : IsClosed ({M.y.base (default : Spec (.of k))} : Set M.X) := by
   have : IsClosedImmersion M.y := by
@@ -64,9 +65,9 @@ lemma isClosed_y : IsClosed ({M.y.base (default : Spec (.of k))} : Set M.X) := b
 
 /-- **The cover datum** of blueprint `det-tf-restriction-zero-covers` for bounded complexes
 `PL`, `PK` of sheaves on `X` (flat constructible models of `L` and `K`): a smooth curve `C` finite
-over an open neighbourhood `U` of `y`, a `k`-point `c` over `y` with ramification index `e` prime to `ℓ` (the image of a
-uniformizer at `y` is a unit times the `e`-th power of a uniformizer at `c`), an open
-neighbourhood `W` of `y` over whose punctured part `p` is étale, and a finite étale Galois cover
+over an open neighbourhood `U` of `y`, a `k`-point `c` over `y` with ramification index `e` prime
+to `ℓ` (the image of a uniformizer at `y` is a unit times the `e`-th power of a uniformizer at
+`c`), an open neighbourhood `W` of `y` over whose punctured part `p` is étale, and a finite étale Galois cover
 of `p⁻¹(W ∖ y)` with group a finite `ℓ`-group over which the pullbacks of `PL`, `PK` are
 isomorphic, as complexes, to constant complexes on bounded complexes of finite modules (the lisse
 models with monodromy through the `ℓ`-group). -/
