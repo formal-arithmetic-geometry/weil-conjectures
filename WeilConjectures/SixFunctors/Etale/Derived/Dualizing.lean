@@ -113,6 +113,15 @@ noncomputable abbrev derivedBraidedCategory (X : Scheme.{u}) :
 
 attribute [local instance] derivedBraidedCategory
 
+attribute [local instance] _root_.DerivedCategory.braidedCategory' in
+/-- The double-dual transformation `K ⟶ RHom(RHom(K, ω), ω)` of the derived hom of étale sheaves,
+for an object `ω`: `CategoryTheory.MonoidalClosed.toIhomIhomNatTrans`. It is stated for a general
+coefficient category `A`, where the kernel checks it without unfolding the monoidal structure. -/
+noncomputable def derivedHomToIhomIhomNatTrans (X : Scheme.{u})
+    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    𝟭 _ ⟶ ((derivedHom A X).flip.obj ω).rightOp ⋙ (derivedHom A X).flip.obj ω :=
+  MonoidalClosed.toIhomIhomNatTrans ω
+
 /-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
 
 The evaluation `ev_K : K ⊗ᴸ 𝔻_X K ⟶ ω_X` of the internal hom, a pairing natural in `K`. No
@@ -130,7 +139,7 @@ symmetry `𝔻_X K ⊗ᴸ K ≅ K ⊗ᴸ 𝔻_X K` (`AlgebraicGeometry.Etale.ver
 It is `CategoryTheory.MonoidalClosed.toIhomIhom` for the dualizing complex. -/
 noncomputable def verdierDualDoubleDual :
     𝟭 _ ⟶ (verdierDual Λ a).rightOp ⋙ verdierDual Λ a :=
-  MonoidalClosed.toIhomIhomNatTrans (dualizingComplex Λ a)
+  derivedHomToIhomIhomNatTrans (ModuleCat.{u + 1} Λ) X (dualizingComplex Λ a)
 
 /-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism `δ_K` is the transpose of
 the evaluation `ev_K` composed with the symmetry, `CategoryTheory.MonoidalClosed.toIhomIhom`
