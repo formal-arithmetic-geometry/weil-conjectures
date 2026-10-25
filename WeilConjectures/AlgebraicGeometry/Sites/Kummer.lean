@@ -378,7 +378,7 @@ theorem exists_exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤)))
   ⟨_, _, X.exact_sheafH_rootsOfUnitySheaf_two n hn⟩
 
 /-- The constant étale sheaf `ℤ/n` on a scheme `X`, valued in abelian groups of the universe of
-the small étale site. -/
+the small étale site (blueprint `def-sc-constant-sheaves`). -/
 noncomputable abbrev constantZMod : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))

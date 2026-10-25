@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineCoaction
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.AffineDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
@@ -198,9 +198,9 @@ lemma γ_v : (γC F p r).left ≫ V.hom.left = pullback.snd (V.hom.left ≫ p.le
   congr_arg (fun f ↦ f.left) (γC_hom F p r)
 
 /-- The coaction is counital. -/
-lemma d_γ : AffineCoaction.d p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ := by
+lemma d_γ : coactionUnit p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ := by
   let dC : V.left ⟶ PC p (V := V) :=
-    homMk (AffineCoaction.d p.left V.hom.left) (by
+    homMk (coactionUnit p.left V.hom.left) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = _
       rw [pullback.lift_snd_assoc, over_w])
   have h₁ : dC ≫ pr₁C p = 𝟙 _ := hom_ext (by simp [dC])
@@ -211,8 +211,8 @@ lemma d_γ : AffineCoaction.d p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ :=
   exact congr_arg (fun f ↦ f.left) this
 
 /-- The coaction is coassociative. -/
-lemma γ₁_γ : AffineCoaction.γ₁ p.left V.hom.left (γC F p r).left (γ_v F p r) ≫ (γC F p r).left =
-    AffineCoaction.π₁ p.left V.hom.left ≫ (γC F p r).left := by
+lemma γ₁_γ : coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r) ≫ (γC F p r).left =
+    coactionForget p.left V.hom.left ≫ (γC F p r).left := by
   let P₂C : Y.Etale := Etale.mk
     (pullback.snd (pullback.snd (V.hom.left ≫ p.left) p.left ≫ p.left) p.left ≫ W.hom)
   let fstC : P₂C ⟶ PC p (V := V) := homMk (pullback.fst _ _) (by
@@ -222,11 +222,11 @@ lemma γ₁_γ : AffineCoaction.γ₁ p.left V.hom.left (γC F p r).left (γ_v F
     simp only [Category.assoc, w_left] at this
     exact this)
   let γ₁C : P₂C ⟶ PC p (V := V) := homMk
-    (AffineCoaction.γ₁ p.left V.hom.left (γC F p r).left (γ_v F p r)) (by
+    (coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r)) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
       simp)
   let π₁C : P₂C ⟶ PC p (V := V) := homMk
-    (AffineCoaction.π₁ p.left V.hom.left) (by
+    (coactionForget p.left V.hom.left) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
       simp)
   have e₁ : γ₁C ≫ pr₁C p = fstC ≫ γC F p r := hom_ext (by simp [γ₁C, fstC])
@@ -244,8 +244,7 @@ variable {N : Scheme.{u}} {n : N ⟶ B.left} {q : V.left.left ⟶ N}
   (hpb : IsPullback q V.hom.left n p.left)
   (hq : (γC F p r).left ≫ q = pullback.fst (V.hom.left ≫ p.left) p.left ≫ q)
 
-set_option linter.unusedSectionVars false in
-include hpb hq in
+include hq in
 /-- Two points of `V` over the same point of `B` representing the same section of `F` have the
 same image in the descended scheme. -/
 lemma left_comp_q_eq {T : Y.Etale} {a₁ a₂ : T ⟶ V.left}
@@ -317,6 +316,8 @@ instance (Z : Over B) [Surjective p.left] : Surjective (prZ p Z).left := by
   rw [prZ_left]
   infer_instance
 
+-- `hpb` is kept as an argument so that `descLeft` and its API take it uniformly
+set_option linter.unusedSectionVars false in
 include hpb hq in
 lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.left)) :
     ∃ m : Z.left.left ⟶ N, ∀ a : ZW p Z ⟶ V.left, a ≫ V.hom = prW p Z →
@@ -332,7 +333,7 @@ lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.l
     rw [← pullback.condition_assoc])
   have hk : k₁ ≫ prZ p Z = k₂ ≫ prZ p Z := hom_ext (by simp [k₁, k₂, pullback.condition])
   have hK : k₁.left ≫ a.left ≫ q = k₂.left ≫ a.left ≫ q := by
-    have := left_comp_q_eq hpb hq (a₁ := k₁ ≫ a) (a₂ := k₂ ≫ a)
+    have := left_comp_q_eq hq (a₁ := k₁ ≫ a) (a₂ := k₂ ≫ a)
       (by simp only [Category.assoc, reassoc_of% ha₁, prW_comp, reassoc_of% hk])
       (by rw [r.overElt_comp, r.overElt_comp, ha₂, ← Functor.map_comp_apply,
         ← Functor.map_comp_apply, ← op_comp, ← op_comp, hk])

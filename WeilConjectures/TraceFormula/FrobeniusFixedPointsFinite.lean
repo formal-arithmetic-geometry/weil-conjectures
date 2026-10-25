@@ -17,14 +17,15 @@ public import WeilConjectures.TraceFormula.WeilTrace
 
 For an automorphism `e` of finite order of a scheme `X` of finite type over a finite field `k`,
 the points of degree `n + 1` for the Frobenius twisted by `e`
-(`ProEtale.CondensedRing.frobeniusFixedPoints e n`) are finite: they are fixed by a power
+(`ProEtale.CondensedRing.frobeniusFixedPoints e (n + 1)`) are finite: they are fixed by a power
 `σ^N` of the geometric Frobenius of `Spec k̄`, hence factor through `Spec L` for the finite field
 `L ⊆ k̄` fixed by `σ^N`, and there are only finitely many morphisms `Spec L ⟶ X`.
 
 ## Main statements
 
-- `ProEtale.CondensedRing.finite_frobeniusFixedPoints_of_powSucc_eq_refl`.
-- `ProEtale.CondensedRing.finite_frobeniusFixedPoints`.
+- `ProEtale.CondensedRing.finite_frobeniusFixedPoints_of_pow_eq_refl`.
+- `ProEtale.CondensedRing.finite_frobeniusFixedPoints`, and the resulting `Fintype` structure
+  `ProEtale.CondensedRing.fintypeFrobeniusFixedPoints` on the points of degree `n ≠ 0`.
 
 -/
 
@@ -139,30 +140,31 @@ scheme of finite type over a finite field (the finiteness part of blueprint
 `thm-trf-frobenius-fixed-points`, for the Frobenius twisted by `e`): a point `x̄` with
 `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` is fixed by `σ^{(n+1)(m+1)}` when `e^{m+1} = 𝟙`, so it factors
 through `Spec L` for the finite field `L` fixed by `σ^{(n+1)(m+1)}`. -/
-theorem finite_frobeniusFixedPoints_of_powSucc_eq_refl {X : Over (Spec (.of k))}
+theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (e : X ≅ X)
-    (he : ∃ m : ℕ, e.powSucc m = Iso.refl X) (n : ℕ) : Finite (frobeniusFixedPoints e n) := by
+    (he : ∃ m : ℕ, e.pow (m + 1) = Iso.refl X) (n : ℕ) :
+    Finite (frobeniusFixedPoints e (n + 1)) := by
   obtain ⟨m, hm⟩ := he
   set N := (n + 1) * (m + 1)
   have hN : N ≠ 0 := Nat.mul_ne_zero (Nat.succ_ne_zero n) (Nat.succ_ne_zero m)
-  have hA : (show End X.left from (e.powSucc n).hom.left) ^ (m + 1) = 𝟙 X.left := by
-    rw [Iso.powSucc_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul,
-      ← Iso.powSucc_hom_eq_pow, hm, Iso.refl_hom, ← End.one_def, one_pow]
+  have hA : (show End X.left from (e.pow (n + 1)).hom.left) ^ (m + 1) = 𝟙 X.left := by
+    rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul,
+      ← Iso.pow_hom_eq_pow, hm, Iso.refl_hom, ← End.one_def, one_pow]
     rfl
-  have hfix : ∀ x : frobeniusFixedPoints e n,
+  have hfix : ∀ x : frobeniusFixedPoints e (n + 1),
       ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫
         x.1 = x.1 := by
     rintro ⟨y, -, hy⟩
-    have h := End.comp_pow_eq_pow_comp y (show End X.left from (e.powSucc n).hom.left)
-      (show End _ from ((geometricFrobeniusField k).powSucc n).hom) hy (m + 1)
-    rw [hA, Category.comp_id, Iso.powSucc_hom_eq_pow, ← pow_mul] at h
+    have h := End.comp_pow_eq_pow_comp y (show End X.left from (e.pow (n + 1)).hom.left)
+      (show End _ from ((geometricFrobeniusField k).pow (n + 1)).hom) hy (m + 1)
+    rw [hA, Category.comp_id, Iso.pow_hom_eq_pow, ← pow_mul] at h
     exact h.symm
   have := finite_geometricFrobeniusPowFixedField (k := k) hN
   set L := geometricFrobeniusPowFixedField k N
   have := X.hom.finite_fieldPoints L
-  choose g hg using fun x : frobeniusFixedPoints e n ↦
+  choose g hg using fun x : frobeniusFixedPoints e (n + 1) ↦
     exists_comp_eq_of_geometricFrobenius_pow N x.1 (hfix x)
-  have hg' : ∀ x : frobeniusFixedPoints e n,
+  have hg' : ∀ x : frobeniusFixedPoints e (n + 1),
       g x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
     intro x
     obtain ⟨φ, hφ⟩ := Spec.map_surjective (g x ≫ X.hom)
@@ -188,14 +190,14 @@ endomorphism are finite (`AlgebraicGeometry.Scheme.Hom.finite_fixedPoints_comp_a
 -/
 theorem finite_frobeniusFixedPoints {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] (e : X ≅ X) (n : ℕ) :
-    Finite (frobeniusFixedPoints e n) := by
-  have hg : (e.powSucc n).hom.left ≫ X.hom = X.hom := Over.w (e.powSucc n).hom
-  have := X.hom.finite_fixedPoints_comp_absoluteFrobenius (e.powSucc n).hom.left hg
+    Finite (frobeniusFixedPoints e (n + 1)) := by
+  have hg : (e.pow (n + 1)).hom.left ≫ X.hom = X.hom := Over.w (e.pow (n + 1)).hom
+  have := X.hom.finite_fixedPoints_comp_absoluteFrobenius (e.pow (n + 1)).hom.left hg
     (M := n + 1) (Nat.succ_ne_zero n) (AlgebraicClosure k) (specAlgebraicClosure k)
   set σN := (geometricFrobenius k (AlgebraicClosure k)) ^ (n + 1)
-  have hσ : ((geometricFrobeniusField k).powSucc n).hom =
+  have hσ : ((geometricFrobeniusField k).pow (n + 1)).hom =
       Spec.map (CommRingCat.ofHom σN.toRingEquiv.toRingHom) := by
-    rw [Iso.powSucc_hom_eq_pow]
+    rw [Iso.pow_hom_eq_pow]
     exact geometricFrobeniusField_hom_pow (n + 1)
   let ρ : AlgebraicClosure k →+* AlgebraicClosure k := σN.symm.toRingEquiv.toRingHom
   have hρ (z : AlgebraicClosure k) : ρ z = z ^ (Nat.card k ^ (n + 1)) := by
@@ -209,17 +211,29 @@ theorem finite_frobeniusFixedPoints {X : Over (Spec (.of k))} [LocallyOfFiniteTy
     congr 1
     ext z
     exact σN.apply_symm_apply z
-  refine Finite.of_injective (fun x : frobeniusFixedPoints e n ↦
+  refine Finite.of_injective (fun x : frobeniusFixedPoints e (n + 1) ↦
     (⟨x.1, x.2.1, ?_⟩ : {x : Spec (.of (AlgebraicClosure k)) ⟶ X.left //
       x ≫ X.hom = specAlgebraicClosure k ∧
-        x ≫ (e.powSucc n).hom.left ≫ X.hom.absoluteFrobenius (n + 1) = x}))
+        x ≫ (e.pow (n + 1)).hom.left ≫ X.hom.absoluteFrobenius (n + 1) = x}))
     fun x y h ↦ by
       have h' := congrArg Subtype.val h
       exact Subtype.ext h'
   obtain ⟨y, -, hy⟩ := x
-  change y ≫ (e.powSucc n).hom.left ≫ X.hom.absoluteFrobenius (n + 1) = y
+  change y ≫ (e.pow (n + 1)).hom.left ≫ X.hom.absoluteFrobenius (n + 1) = y
   rw [hσ] at hy
   rw [← Category.assoc, hy, Category.assoc,
     X.hom.isFrobenius_absoluteFrobenius (n + 1) y (CommRingCat.ofHom ρ) hρ, reassoc_of% hρσ]
+
+/-- The points of degree `n ≠ 0` form a finite type, with the `Fintype` structure chosen from
+`finite_frobeniusFixedPoints`. It is not a global instance; enable it with
+`attribute [local instance] fintypeFrobeniusFixedPoints` where sums over points are taken. -/
+@[instance_reducible]
+noncomputable def fintypeFrobeniusFixedPoints {X : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (e : X ≅ X) (n : ℕ)
+    [NeZero n] : Fintype (frobeniusFixedPoints e n) :=
+  have : Finite (frobeniusFixedPoints e n) := by
+    obtain ⟨m, rfl⟩ := Nat.exists_eq_add_one_of_ne_zero (NeZero.ne n)
+    exact finite_frobeniusFixedPoints e m
+  Fintype.ofFinite _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

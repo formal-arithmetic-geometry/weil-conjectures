@@ -53,7 +53,7 @@ noncomputable abbrev coactionMap (γ : pullback (v ≫ p) p ⟶ V)
 /-- **Affine flat descent in coaction form.** Let `p : X ⟶ Y` be a flat morphism of affine
 schemes and `v : V ⟶ X` with `V` affine. A coaction `γ : V ×_Y X ⟶ V` over the second projection
 satisfying the counit and coassociativity identities exhibits `V` as the base change along `p`
-of an affine `Y`-scheme `N`, through a morphism `q : V ⟶ N` with `γ ≫ q = pr₁ ≫ q`. -/
+of a `Y`-scheme `N`, through a morphism `q : V ⟶ N` with `γ ≫ q = pr₁ ≫ q`. -/
 theorem exists_isPullback_of_coaction (γ : pullback (v ≫ p) p ⟶ V)
     (hγv : γ ≫ v = pullback.snd _ _) (hd : coactionUnit p v ≫ γ = 𝟙 V)
     (hγ₁ : coactionMap p v γ hγv ≫ γ = coactionForget p v ≫ γ) :

@@ -254,7 +254,6 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y W S : Scheme.{u}} (a : Y ⟶ S)
   (j : W ⟶ Y) [HasCompactification j] [HasCompactification a] [HasCompactification (j ≫ a)]
-  [QuasiCompact (j ≫ a)]
 
 attribute [local instance] derivedBraidedCategory
 
@@ -367,7 +366,7 @@ section ProperFinite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (a : Y ⟶ S)
   (f : X ⟶ Y) [IsProper f] [HasCompactification f] [HasCompactification a]
-  [HasCompactification (f ≫ a)] [QuasiCompact (f ≫ a)]
+  [HasCompactification (f ≫ a)]
 
 attribute [local instance] derivedBraidedCategory
 

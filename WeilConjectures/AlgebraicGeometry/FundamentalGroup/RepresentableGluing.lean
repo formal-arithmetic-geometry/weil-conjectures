@@ -87,7 +87,7 @@ end BasisCover
 
 section Gluing
 
-variable {𝔅 : Set Y.Opens}
+variable {𝔅 : Set Y.Opens} [h𝔅 : Fact (TopologicalSpace.Opens.IsBasis 𝔅)]
   (F : Sheaf Y.smallEtaleTopology (Type w)) (X : ∀ U : 𝔅, Over (openObj U.1))
   (r : ∀ U : 𝔅, ((Over.forget (openObj U.1)).op ⋙ F.obj).RepresentableBy (X U))
 
@@ -99,24 +99,29 @@ noncomputable def τ {U U' : 𝔅} (h : U ≤ U') : (X U).left ⟶ (X U').left :
 
 variable {F X r}
 
+omit h𝔅 in
 lemma τ_hom {U U' : 𝔅} (h : U ≤ U') :
     τ F X r h ≫ (X U').hom = (X U).hom ≫ openHom (show U.1 ≤ U'.1 from h) :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose_spec.1
 
+omit h𝔅 in
 lemma overElt_τ {U U' : 𝔅} (h : U ≤ U') :
     (r U').overElt (τ F X r h) = (r U).overElt (𝟙 _) :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose_spec.2
 
+omit h𝔅 in
 lemma overElt_comp_τ {U U' : 𝔅} (h : U ≤ U') {T : Y.Etale} (a : T ⟶ (X U).left) :
     (r U').overElt (a ≫ τ F X r h) = (r U).overElt a := by
   rw [(r U').overElt_comp, overElt_τ, ← (r U).overElt_comp, Category.comp_id]
 
+omit h𝔅 in
 lemma τ_refl (U : 𝔅) : τ F X r (le_refl U) = 𝟙 _ :=
   (r U).overElt_injective (by rw [τ_hom, openHom_refl, Category.comp_id, Category.id_comp])
     (by rw [overElt_τ])
 
+omit h𝔅 in
 lemma τ_comp {U U' U'' : 𝔅} (h : U ≤ U') (h' : U' ≤ U'') :
     τ F X r h ≫ τ F X r h' = τ F X r (h.trans h') :=
   (r U'').overElt_injective
@@ -136,8 +141,6 @@ noncomputable def gluingFunctor : 𝔅 ⥤ Scheme.{u} where
     rw [← comp_left]
     exact congr_arg (fun f ↦ f.left)
       (τ_comp (F := F) (X := X) (r := r) (leOfHom h) (leOfHom h')).symm
-
-variable [h𝔅 : Fact (TopologicalSpace.Opens.IsBasis 𝔅)]
 
 /-- The structure maps `X_U ⟶ U`. -/
 noncomputable def gluingNatTrans :

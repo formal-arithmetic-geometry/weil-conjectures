@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 
 /-!
 # Blueprint statements
@@ -59,6 +60,8 @@ theorem finite_hypercover_descent
       ∃ (j : Iᵒᵖ) (h : j ⟶ i),
         Functor.whiskerRight φ (Over.pullback (D.map h)) =
           Functor.whiskerRight ψ (Over.pullback (D.map h))) := by
-  sorry
+  exact ⟨finite_hypercover_descent_objects D c hc,
+    finite_hypercover_descent_morphisms D c hc,
+    finite_hypercover_descent_equalities D c hc⟩
 
 end AlgebraicGeometry

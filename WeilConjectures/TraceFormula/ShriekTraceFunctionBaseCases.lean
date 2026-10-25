@@ -51,7 +51,7 @@ and open–closed dévissage of the source (`shriekTraceFunctionAt_of_isCompl`) 
 
 The reduction (`ProEtale.CondensedRing.shriekTraceFunctionGenericallyHolds_of_baseCases`) goes
 through the generic quotient of `X` by its automorphism `e_X` of finite order
-(`AlgebraicGeometry.exists_isFinite_etale_of_powSucc_eq_refl`): there are a nonempty
+(`AlgebraicGeometry.exists_isFinite_etale_of_pow_eq_refl`): there are a nonempty
 `e_X`-stable open `U ⊆ X`, its reduction `Z`, and a finite étale morphism `π : Z ⟶ V` to an
 affine scheme `V`, invariant under `e_Z`. The compatibility along `U ⟶ Y` follows from the one
 along `Z ⟶ Y` by dévissage (`U = ∅ ⊔ Z`), and `Z ⟶ Y` factors as the chain
@@ -66,7 +66,7 @@ they have finite order, so that `shriekTraceFunctionAt_comp` composes the base c
 
 The closed-immersion case is proved here from the dimension-zero case (for the identity of `X`)
 and compactly supported base change of Weil objects
-(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar_weilLowerShriek`).
+(`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek`).
 
 -/
 
@@ -139,7 +139,7 @@ def ShriekTraceFunctionFiniteEtale : Prop :=
   ∀ (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) (f : X ⟶ Y) (hf : eX.hom ≫ f = f ≫ eY.hom),
-    [IsFinite f.left] → [Etale f.left] → (∃ m : ℕ, eX.powSucc m = Iso.refl X) →
+    [IsFinite f.left] → [Etale f.left] → (∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) →
     ShriekTraceFunctionAt ℓ eX eY hf
 
 /-- The sheaf–function compatibility holds along every coordinate projection
@@ -147,7 +147,7 @@ def ShriekTraceFunctionFiniteEtale : Prop :=
 automorphisms `𝟙 ×_k e_E` with `e_E` of finite order. -/
 def ShriekTraceFunctionAffineLine : Prop :=
   ∀ (j : ℕ) (E : Over (Spec (.of k))) [LocallyOfFiniteType E.hom] [QuasiCompact E.hom]
-    [IsSeparated E.hom] (eE : E ≅ E), (∃ m : ℕ, eE.powSucc m = Iso.refl E) →
+    [IsSeparated E.hom] (eE : E ≅ E), (∃ m : ℕ, eE.pow (m + 1) = Iso.refl E) →
     ShriekTraceFunctionAt ℓ (overProdIso (Iso.refl (polyAffine k (j + 1))) eE)
       (overProdIso (Iso.refl (polyAffine k j)) eE) (overProdIso_refl_hom_comp_overProdMap
         (polyAffineProj k j) eE)
@@ -158,7 +158,7 @@ def ShriekTraceFunctionClosedImmersion : Prop :=
   ∀ (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) (f : X ⟶ Y) (hf : eX.hom ≫ f = f ≫ eY.hom),
-    [IsClosedImmersion f.left] → (∃ m : ℕ, eX.powSucc m = Iso.refl X) →
+    [IsClosedImmersion f.left] → (∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) →
     ShriekTraceFunctionAt ℓ eX eY hf
 
 /-- **Dimension zero**: the sheaf–function compatibility holds along a finite
@@ -172,15 +172,16 @@ theorem shriekTraceFunctionAt_of_isFinite_of_etale {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    [IsFinite f.left] [Etale f.left] (_he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
+    [IsFinite f.left] [Etale f.left] (_he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) :
     ShriekTraceFunctionAt ℓ eX eY hf :=
   ShriekTraceFunctionAt.of_isFinite_of_etale ℓ eX eY hf
 
 /-- **Closed immersions**: the sheaf–function compatibility holds along a closed
 immersion `i : X ⟶ Y`. For a point `ȳ` of `Y` of degree `n + 1`: if `ȳ = x̄ ≫ i`, then
 `t(Ri_! K; ȳ) = t(Li^* Ri_! K; x̄)` by the stalks of pullbacks
-(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar`), `= t(R𝟙_! L𝟙^* K; x̄)` by compactly
-supported base change along the cartesian square `(𝟙, 𝟙, i, i)` (`i` is a monomorphism), and
+(`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar`), `= t(R𝟙_! L𝟙^* K; x̄)` by
+compactly supported base change along the cartesian square `(𝟙, 𝟙, i, i)` (`i` is a
+monomorphism), and
 `= t(K; x̄)` by the dimension-zero case for `𝟙_X`; the sum on the right has the single term `x̄`.
 Otherwise `ȳ` lies on the open complement `V`, and
 `Lj^* Ri_! K = 0` by base change along the empty square `V ×_Y X = ∅`. -/
@@ -188,7 +189,7 @@ theorem shriekTraceFunctionAt_of_isClosedImmersion {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    [IsClosedImmersion f.left] (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
+    [IsClosedImmersion f.left] (he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) :
     ShriekTraceFunctionAt ℓ eX eY hf := by
   intro K n y
   by_cases hy : y.1.base default ∈ Set.range f.left.base
@@ -204,8 +205,9 @@ theorem shriekTraceFunctionAt_of_isClosedImmersion {X Y : Over (Spec (.of k))}
     have hid : eX.hom ≫ 𝟙 X = 𝟙 X ≫ eX.hom := by simp
     have : IsFinite (𝟙 X : X ⟶ X).left := by rw [Over.id_left]; infer_instance
     have : Etale (𝟙 X : X ⟶ X).left := by rw [Over.id_left]; infer_instance
-    rw [← weilStalkSupertrace_weilUpperStar ℓ eY eX hf,
-      weilStalkSupertrace_weilUpperStar_weilLowerShriek ℓ ((mono_iff_isPullback f).1 ‹_›) hid
+    rw [← weilStalkTraceAlternatingSum_weilUpperStar ℓ eY eX hf,
+      weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek ℓ ((mono_iff_isPullback f).1 ‹_›)
+          hid
         hid hf hf,
       shriekTraceFunctionAt_of_isFinite_of_etale ℓ k eX eX hid he _ n v]
     have hv : frobeniusFixedPointsMap eX eX hid n v = v :=
@@ -215,9 +217,9 @@ theorem shriekTraceFunctionAt_of_isClosedImmersion {X Y : Over (Spec (.of k))}
       ((finsum_eq_single _ ⟨v, rfl⟩ fun x hx ↦
         (hx (by exact Subtype.ext (Subtype.ext ((cancel_mono f.left).1 x.2)))).elim).trans
         ?_).symm
-    rw [weilStalkSupertrace_weilUpperStar ℓ eX eX hid K n v, hv]
+    rw [weilStalkTraceAlternatingSum_weilUpperStar ℓ eX eX hid K n v, hv]
   · -- `ȳ` on the open complement `V`: base change along the empty square `∅ = V ×_Y X`
-    have : IsEmpty {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1} :=
+    have : IsEmpty {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} :=
       ⟨fun x ↦ hy ⟨x.1.1.base default, by
         have h := congrArg (fun g ↦ g.base default) x.2; exact h⟩⟩
     rw [finsum_of_isEmpty]
@@ -234,8 +236,8 @@ theorem shriekTraceFunctionAt_of_isClosedImmersion {X Y : Over (Spec (.of k))}
       emptyOverTo_ext _ _
     have h₀' : (Iso.refl emptyOver).hom ≫ emptyOverTo V = emptyOverTo V ≫ eV.hom :=
       emptyOverTo_ext _ _
-    rw [← weilStalkSupertrace_weilUpperStar ℓ eY eV hj,
-      weilStalkSupertrace_weilUpperStar_weilLowerShriek ℓ
+    rw [← weilStalkTraceAlternatingSum_weilUpperStar ℓ eY eV hj,
+      weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek ℓ
         (isPullback_emptyOverTo f j (hrange ▸ disjoint_compl_right)) h₀ h₀' hf hj,
       shriekTraceFunctionAt_of_isEmpty ℓ (Iso.refl _) eV h₀' _ n v]
     exact finsum_eq_zero_of_forall_eq_zero fun x ↦ isEmptyElim (x.1.1.base default)
@@ -253,7 +255,7 @@ section Projections
 
 variable {E Y : Over (Spec (.of k))} [LocallyOfFiniteType E.hom] [QuasiCompact E.hom]
   [IsSeparated E.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  {eE : E ≅ E} {eY : Y ≅ Y} {m : ℕ} (heE : eE.powSucc m = Iso.refl E) {ι : E ⟶ Y}
+  {eE : E ≅ E} {eY : Y ≅ Y} {m : ℕ} (heE : eE.pow (m + 1) = Iso.refl E) {ι : E ⟶ Y}
   (hι : eE.hom ≫ ι = ι ≫ eY.hom)
 
 include H₀ H₁ heE in
@@ -266,8 +268,8 @@ lemma shriekTraceFunctionAt_overProdSnd_polyAffine
       (comp_comm_of_comp_comm _ eY eE (by simp) hι :
         (overProdIso (Iso.refl (polyAffine k j)) eE).hom ≫ overProdSnd _ E ≫ ι =
           (overProdSnd _ E ≫ ι) ≫ eY.hom) := by
-  have hfin : ∀ j, ((overProdIso (Iso.refl (polyAffine k j)) eE).powSucc m) = Iso.refl _ :=
-    fun j ↦ by rw [overProdIso_powSucc, heE, Iso.powSucc_refl, overProdIso_refl]
+  have hfin : ∀ j, ((overProdIso (Iso.refl (polyAffine k j)) eE).pow (m + 1)) = Iso.refl _ :=
+    fun j ↦ by rw [overProdIso_pow, heE, Iso.pow_refl, overProdIso_refl]
   induction j with
   | zero =>
     exact shriekTraceFunctionAt_comp ℓ _ eY eE (by simp) hι ⟨m, hfin 0⟩ ⟨m, heE⟩
@@ -290,18 +292,18 @@ lemma shriekTraceFunctionAt_of_isFinite_of_etale_of_comp_eq_aux
     [IsAffine V.left] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
     [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [IsSeparated E.hom]
     (eZ : Z ≅ Z) (eY : Y ≅ Y) (eE : E ≅ E) {g : Z ⟶ Y} (hg : eZ.hom ≫ g = g ≫ eY.hom) {m : ℕ}
-    (heZ : eZ.powSucc m = Iso.refl Z) (heE : eE.powSucc m = Iso.refl E) (π : Z ⟶ V)
+    (heZ : eZ.pow (m + 1) = Iso.refl Z) (heE : eE.pow (m + 1) = Iso.refl E) (π : Z ⟶ V)
     [IsFinite π.left] [Etale π.left] (hπ : eZ.hom ≫ π = π) (ι : E ⟶ Y)
     [IsClosedImmersion ι.left] (hι : eE.hom ≫ ι = ι ≫ eY.hom) (gE : Z ⟶ E)
     (hgE : eZ.hom ≫ gE = gE ≫ eE.hom) (hgE' : gE ≫ ι = g) :
     ShriekTraceFunctionAt ℓ eZ eY hg := by
   -- a closed embedding of `V` into an affine space
   obtain ⟨N, ιV, _⟩ := exists_isClosedImmersion_polyAffine V
-  have hfin : ∀ {W : Over (Spec (.of k))} (eW : W ≅ W), eW.powSucc m = Iso.refl W →
-      (overProdIso eW eE).powSucc m = Iso.refl _ :=
-    fun eW h ↦ by rw [overProdIso_powSucc, h, heE, overProdIso_refl]
-  have hfinV := hfin (Iso.refl V) (Iso.powSucc_refl _)
-  have hfinN := hfin (Iso.refl (polyAffine k N)) (Iso.powSucc_refl _)
+  have hfin : ∀ {W : Over (Spec (.of k))} (eW : W ≅ W), eW.pow (m + 1) = Iso.refl W →
+      (overProdIso eW eE).pow (m + 1) = Iso.refl _ :=
+    fun eW h ↦ by rw [overProdIso_pow, h, heE, overProdIso_refl]
+  have hfinV := hfin (Iso.refl V) (Iso.pow_refl _)
+  have hfinN := hfin (Iso.refl (polyAffine k N)) (Iso.pow_refl _)
   have hfinZ := hfin eZ heZ
   -- the compatibility along `E ⟶ Y` and along `𝔸ᴺ_k ×_k E ⟶ E ⟶ Y`
   have HN := shriekTraceFunctionAt_overProdSnd_polyAffine H₀ H₁ heE hι
@@ -337,15 +339,15 @@ theorem shriekTraceFunctionAt_of_isFinite_of_etale_of_comp_eq
     [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     [IsAffine V.left] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
     (eZ : Z ≅ Z) (eY : Y ≅ Y) {g : Z ⟶ Y} (hg : eZ.hom ≫ g = g ≫ eY.hom) {m : ℕ}
-    (heZ : eZ.powSucc m = Iso.refl Z) (π : Z ⟶ V) [IsFinite π.left] [Etale π.left]
+    (heZ : eZ.pow (m + 1) = Iso.refl Z) (π : Z ⟶ V) [IsFinite π.left] [Etale π.left]
     (hπ : eZ.hom ≫ π = π) :
     ShriekTraceFunctionAt ℓ eZ eY hg := by
-  have hgm : g ≫ 𝟙 Y = g ≫ (eY.powSucc m).hom := by
-    rw [Category.comp_id, ← Iso.powSucc_hom_comp_eq_comp_powSucc_hom eZ eY hg m, heZ,
+  have hgm : g ≫ 𝟙 Y = g ≫ (eY.pow (m + 1)).hom := by
+    rw [Category.comp_id, ← Iso.pow_hom_comp_eq_comp_pow_hom eZ eY hg m, heZ,
       Iso.refl_hom, Category.id_comp]
-  have hc := (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eY eY rfl m).symm
+  have hc := (Iso.pow_hom_comp_eq_comp_pow_hom eY eY rfl m).symm
   refine shriekTraceFunctionAt_of_isFinite_of_etale_of_comp_eq_aux H₀ H₁ H₂ eZ eY
-    (fixedLocusIso (eY.powSucc m).hom eY hc) hg heZ (fixedLocusIso_powSucc eY m) π hπ _
+    (fixedLocusIso (eY.pow (m + 1)).hom eY hc) hg heZ (fixedLocusIso_pow eY m) π hπ _
     (fixedLocusIso_hom_ι _ eY hc) (equalizer.lift g hgm) (equalizer.hom_ext ?_)
     (equalizer.lift_ι _ _)
   simp [hg]
@@ -367,19 +369,19 @@ theorem shriekTraceFunctionGenericallyHolds_of_baseCases
     ShriekTraceFunctionGenericallyHolds ℓ k := by
   intro X Y _ _ _ _ _ _ eX eY f hf ⟨m, hm⟩ hX
   obtain ⟨U, _, _, _, eU, j, _, hj, Z, _, _, _, eZ, i, _, hi, V, _, _, π, _, _, hU, hsurj, hπ⟩ :=
-    exists_isFinite_etale_of_powSucc_eq_refl X eX hm
+    exists_isFinite_etale_of_pow_eq_refl X eX hm
   refine ⟨U, inferInstance, inferInstance, inferInstance, eU, j, inferInstance, hj, hU, ?_⟩
-  have heU : eU.powSucc m = Iso.refl U := by
+  have heU : eU.pow (m + 1) = Iso.refl U := by
     ext1
     refine Over.OverMorphism.ext ?_
     rw [← cancel_mono j.left, ← Over.comp_left,
-      Iso.powSucc_hom_comp_eq_comp_powSucc_hom eU eX hj m, hm]
+      Iso.pow_hom_comp_eq_comp_pow_hom eU eX hj m, hm]
     simp
-  have heZ : eZ.powSucc m = Iso.refl Z := by
+  have heZ : eZ.pow (m + 1) = Iso.refl Z := by
     ext1
     refine Over.OverMorphism.ext ?_
     rw [← cancel_mono i.left, ← Over.comp_left,
-      Iso.powSucc_hom_comp_eq_comp_powSucc_hom eZ eU hi m, heU]
+      Iso.pow_hom_comp_eq_comp_pow_hom eZ eU hi m, heU]
     simp
   have h₀ : (Iso.refl emptyOver).hom ≫ emptyOverTo U = emptyOverTo U ≫ eU.hom :=
     emptyOverTo_ext _ _

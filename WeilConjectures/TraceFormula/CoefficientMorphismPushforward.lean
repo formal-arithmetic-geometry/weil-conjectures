@@ -121,6 +121,49 @@ lemma IsModelFrobenius.quasiCompact {Z : Over (Spec (.of k₁))} [QuasiCompact Z
 
 end Fibre
 
+section FibreFiniteness
+
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+/-- The fibre `X ×_Y y` of `f : X ⟶ Y` at a rational point `y` is the base change of `f` along
+`y`. -/
+lemma isPullback_pullbackFst_left (f : X ⟶ Y) (y : RationalPoint Y) :
+    IsPullback (pullback.fst f y).left (pullback f y).hom f.left y.left := by
+  have hZ := (IsPullback.of_hasPullback f y).map (Over.forget _)
+  simp only [Over.forget_map] at hZ
+  have h : (pullback f y).hom = (pullback.snd f y).left := by
+    rw [← Over.w (pullback.snd f y)]
+    exact (Category.comp_id _).symm
+  rw [h]
+  exact hZ
+
+omit [QuasiCompact X.hom] [IsSeparated X.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+instance (f : X ⟶ Y) (y : RationalPoint Y) : LocallyOfFiniteType (pullback f y).hom := by
+  have : LocallyOfFiniteType (f.left ≫ Y.hom) := by
+    rw [Over.w f]
+    infer_instance
+  have := locallyOfFiniteType_of_comp f.left Y.hom
+  exact MorphismProperty.of_isPullback (isPullback_pullbackFst_left f y) this
+
+omit [LocallyOfFiniteType X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] in
+instance (f : X ⟶ Y) (y : RationalPoint Y) : QuasiCompact (pullback f y).hom := by
+  have : QuasiCompact (f.left ≫ Y.hom) := by
+    rw [Over.w f]
+    infer_instance
+  have := QuasiCompact.of_comp f.left Y.hom
+  exact MorphismProperty.of_isPullback (isPullback_pullbackFst_left f y) this
+
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+instance (f : X ⟶ Y) (y : RationalPoint Y) : IsSeparated (pullback f y).hom := by
+  have : IsSeparated (f.left ≫ Y.hom) := by
+    rw [Over.w f]
+    infer_instance
+  have := IsSeparated.of_comp f.left Y.hom
+  exact MorphismProperty.of_isPullback (isPullback_pullbackFst_left f y) this
+
+end FibreFiniteness
+
 /-- **The trace of the stalk map of the pushforward at a fixed point** (blueprint
 `lem-trf-weil-shriek-operator-fibres`): for `y` fixed by `Φ_Y` with proper fibre `Z = X ×_Y y`,
 proper base change identifies the stalk map at `y` of `ψ' = Rf_! ψ ∘ θ_f` with the degree-one
@@ -133,12 +176,12 @@ theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k�
     (hY : IsModelFrobenius ΦY fY₀ pY) [IsFinite ΦX.left] [IsUniversalHomeomorphism ΦX.left]
     [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left] {f : X ⟶ Y} (hf : ΦX ≫ f = f ≫ ΦY)
     {f₀ : X₀ ⟶ Y₀} (hfp : f.left ≫ pY = pX ≫ f₀) (h₀ : f₀ ≫ fY₀ = fX₀)
-    (hproper : ∀ (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
-      [IsSeparated Z.hom] [IsProper Z.hom] (ΦZ : Z ⟶ Z) [IsProper ΦZ.left] (k' : Type u)
-      [Field k'] [Finite k'] [Algebra k' k] (Z₀ : Scheme.{u}) (g₀ : Z₀ ⟶ Spec (.of k'))
-      [LocallyOfFiniteType g₀] (pZ : Z.left ⟶ Z₀), IsModelFrobenius ΦZ g₀ pZ →
-        TraceFormulaHolds ℓ ΦZ)
-    (y : RationalPoint Y) (hy : y ≫ ΦY = y) [IsProper (pullback f y).hom]
+    (y : RationalPoint Y) (hy : y ≫ ΦY = y)
+    (hfib : ∀ (k' : Type u) [Field k'] [Finite k'] [Algebra k' k] (Z₀ : Scheme.{u})
+      (g₀ : Z₀ ⟶ Spec (.of k')) [LocallyOfFiniteType g₀] (pZ : (pullback f y).left ⟶ Z₀),
+      IsModelFrobenius (fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy)) g₀ pZ →
+        ∀ [IsProper (fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy)).left],
+          TraceFormulaHolds ℓ (fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy)))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K)
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
@@ -187,28 +230,29 @@ theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k�
     _ _ (stalk_weilLowerShriekFrobeniusComparison_comp ℓ (IsPullback.of_hasPullback ΦY f).flip
       (relativeFrobenius f ΦX ΦY hf) (relativeFrobenius_snd ..) (relativeFrobenius_fst ..) hi hy
       hZ ψ), frobeniusCompactOperator_one,
-    hproper _ _ k' Z₀ g₀ pZ hZm]
+    hfib k' Z₀ g₀ pZ hZm]
   exact Finset.sum_congr rfl fun z _ ↦ trace_graphStalkMap_upperStar hi K ψ z.1 z.2
 
-/-- **The trace formula along a morphism with proper fibres** (blueprint
-`thm-trf-coefficient-morphism-trace-formula`, Step 4, with
+/-- **The trace formula along a morphism of models** (blueprint
+`sk-thm-tf-coefficient-morphism-formula`, induction on affine coordinates; `sk-i-relative-frob`
+(3) and (4); `thm-trf-coefficient-morphism-trace-formula`, Step 4, with
 `lem-trf-weil-shriek-operator-fibres`): let `f : X ⟶ Y` be the base change of a morphism
-`f₀ : X₀ ⟶ Y₀` of models over the finite field `k₀`, commuting with the model Frobenii, whose
-fibres over the rational points of `Y` fixed by `Φ_Y` are proper. If the trace formula in degree
-one holds on `Y` and for all model Frobenii of proper schemes, it holds on `X`. -/
-theorem traceFormulaHolds_of_isProper_pullback [IsAlgClosed k] {k₀ : Type u} [Field k₀]
+`f₀ : X₀ ⟶ Y₀` of models over the finite field `k₀`, commuting with the model Frobenii. If the
+trace formula in degree one holds on `Y` and on the fibres of `f` over the rational points of `Y`
+fixed by `Φ_Y`, for every model of these fibres, it holds on `X`. -/
+theorem traceFormulaHolds_of_fibres [IsAlgClosed k] {k₀ : Type u} [Field k₀]
     [Finite k₀] [Algebra k₀ k] {X₀ Y₀ : Scheme.{u}} {fX₀ : X₀ ⟶ Spec (.of k₀)}
     {fY₀ : Y₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType fX₀] [LocallyOfFiniteType fY₀]
     {pX : X.left ⟶ X₀} {pY : Y.left ⟶ Y₀} {ΦX : X ⟶ X} {ΦY : Y ⟶ Y}
     (hX : IsModelFrobenius ΦX fX₀ pX) (hY : IsModelFrobenius ΦY fY₀ pY) [IsProper ΦX.left]
     [IsProper ΦY.left] {f : X ⟶ Y} (hf : ΦX ≫ f = f ≫ ΦY) {f₀ : X₀ ⟶ Y₀}
     (hfp : f.left ≫ pY = pX ≫ f₀) (h₀ : f₀ ≫ fY₀ = fX₀)
-    (hfib : ∀ y : RationalPoint Y, y ≫ ΦY = y → IsProper (pullback f y).hom)
-    (hproper : ∀ (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
-      [IsSeparated Z.hom] [IsProper Z.hom] (ΦZ : Z ⟶ Z) [IsProper ΦZ.left] (k' : Type u)
-      [Field k'] [Finite k'] [Algebra k' k] (Z₀ : Scheme.{u}) (g₀ : Z₀ ⟶ Spec (.of k'))
-      [LocallyOfFiniteType g₀] (pZ : Z.left ⟶ Z₀), IsModelFrobenius ΦZ g₀ pZ →
-        TraceFormulaHolds ℓ ΦZ)
+    (hfib : ∀ (y : RationalPoint Y) (hy : y ≫ ΦY = y) (k' : Type u) [Field k'] [Finite k']
+      [Algebra k' k] (Z₀ : Scheme.{u}) (g₀ : Z₀ ⟶ Spec (.of k')) [LocallyOfFiniteType g₀]
+      (pZ : (pullback f y).left ⟶ Z₀),
+      IsModelFrobenius (fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy)) g₀ pZ →
+        ∀ [IsProper (fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy)).left],
+          TraceFormulaHolds ℓ (fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy)))
     (hYtf : TraceFormulaHolds ℓ ΦY) : TraceFormulaHolds ℓ ΦX := by
   intro K ψ _ _ _
   classical
@@ -243,9 +287,8 @@ theorem traceFormulaHolds_of_isProper_pullback [IsAlgClosed k] {k₀ : Type u} [
     (frobeniusCompactOperator_lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ 1),
     frobeniusCompactOperator_one, hYtf, ← Fintype.sum_fiberwise (fixedPointComp hf)]
   refine Finset.sum_congr rfl fun y _ ↦ ?_
-  have := hfib y.1 y.2
   let := Fintype.ofEquiv _ (fixedPointCompFibreEquiv hf y)
-  rw [trace_graphStalkMap_lowerShriekFrobeniusCoefficient hX hY hf hfp h₀ hproper y.1 y.2]
+  rw [trace_graphStalkMap_lowerShriekFrobeniusCoefficient hX hY hf hfp h₀ y.1 y.2 (hfib y.1 y.2)]
   exact Fintype.sum_equiv (fixedPointCompFibreEquiv hf y).symm _ _ fun _ ↦ rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

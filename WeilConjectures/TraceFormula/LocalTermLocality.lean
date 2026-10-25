@@ -41,10 +41,10 @@ This file states the locality of the local terms of contracting correspondences 
    (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_eq_zero_of_isContractingAt`);
 3. for the graph of the model Frobenius and an arbitrary (not necessarily invertible) Frobenius
    coefficient morphism, the local term at a fixed rational point with zero stalk vanishes
-   (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero`), in
-   particular on smooth curves
+   (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero`). On smooth
+   curves the blueprint proves this without the contracting theorem
    (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth`,
-   blueprint `sk-i-curve-zero`).
+   blueprint `sk-i-curve-zero`, in `WeilConjectures.TraceFormula.FrobeniusCurveLocalTerm`).
 
 Item 1 follows from Varshavsky's contracting-correspondence theorem (Thm. 2.1.3, blueprint
 `sk-thm-tf-contracting-local-term`) for `Z = {x}`
@@ -414,29 +414,6 @@ theorem localTerm_traceClass_frobeniusGraph_eq_zero {k₀ : Type u} [Field k₀]
   have h₁ : x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₁ = x := Category.comp_id x
   rw [h₁]
   exact hK
-
-/-- **Zero-stalk vanishing on a smooth curve** (blueprint `sk-i-curve-zero`): for `X` smooth of
-relative dimension one over `s` with the model Frobenius `Φ` of a model over a finite field, an
-`m ≥ 1`, an arbitrary map `v : LΦ_m^* K ⟶ K` and a rational point `x` fixed by `Φ_m`
-with `K_x = 0`, the local term of the graph correspondence `(𝟙, Φ_m)` with coefficient `v`
-along an open and closed subscheme of the fixed locus, proper over `s`, with underlying set `{x}`
-is zero. This is the smooth-curve case of
-`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero`. -/
-theorem localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth
-    [SmoothOfRelativeDimension 1 X.hom] {k₀ : Type u} [Field k₀] [Finite k₀]
-    [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType f₀]
-    {p : X.left ⟶ X₀} {Φ : X ⟶ X} (hΦ : IsModelFrobenius Φ f₀ p)
-    {m : ℕ} (hm : 1 ≤ m)
-    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (frobeniusIterate Φ m)).obj K ⟶ K)
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (x : RationalPoint X)
-    (hx : x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₁ = x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₂)
-    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
-    [IsOpenImmersion j.left] [IsClosedImmersion j.left]
-    (hB : Set.range j.left.base = {(F.liftPoint x hx).left.base (default : Spec (.of k))})
-    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
-    ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j = 0 :=
-  localTerm_traceClass_frobeniusGraph_eq_zero hΦ hm v F x hx j hB hK
 
 end Correspondence
 

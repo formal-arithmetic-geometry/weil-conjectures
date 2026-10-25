@@ -13,7 +13,7 @@ public import WeilConjectures.RingTheory.HenselianDVRExtension
 /-!
 # Galois cohomology of the fraction field of a strictly henselian DVR
 
-Let `R` be a henselian discrete valuation ring with algebraically closed residue field `k`,
+Let `R` be a henselian discrete valuation ring with separably closed residue field `k`,
 `F` its fraction field, `Ω` a separable closure of `F` and `G = Gal(Ω/F)`. Let `ℓ` be a prime
 invertible in `k`. Then `Hᵠ(G, M) = 0` for `q > 1` and every `ℓ`-primary discrete `G`-module
 `M`, and `H⁰(G, M)`, `H¹(G, M)` are finite for finite `M` (blueprint `lem-exc-dvr-galois`).
@@ -48,11 +48,11 @@ open IsLocalRing Module IntermediateField Polynomial
 namespace IsDiscreteValuationRing
 
 variable {R F Ω : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
-  [HenselianLocalRing R] [IsAlgClosed (ResidueField R)] [Field F] [Algebra R F]
+  [HenselianLocalRing R] [IsSepClosed (ResidueField R)] [Field F] [Algebra R F]
   [IsFractionRing R F] [Field Ω] [Algebra F Ω] [IsSepClosed Ω] [Algebra.IsSeparable F Ω]
   {ℓ : ℕ} [hℓ' : Fact ℓ.Prime]
 
-omit [HenselianLocalRing R] [IsAlgClosed (ResidueField R)] [IsDomain R]
+omit [HenselianLocalRing R] [IsSepClosed (ResidueField R)] [IsDomain R]
   [IsDiscreteValuationRing R] [IsFractionRing R F] hℓ' in
 /-- `ℓ` is invertible in `F` if it is invertible in the residue field of `R`. -/
 lemma natCast_ne_zero_of_residue [IsLocalRing R]
@@ -74,7 +74,7 @@ lemma exists_isPrimitiveRoot_pow (hℓ : (ℓ : ResidueField R) ≠ 0) (m : ℕ)
   obtain ⟨ζ, hζ⟩ := HenselianLocalRing.exists_isPrimitiveRoot this
   exact ⟨algebraMap R F ζ, hζ.map_of_injective (IsFractionRing.injective R F)⟩
 
-omit [HenselianLocalRing R] [IsAlgClosed (ResidueField R)] in
+omit [HenselianLocalRing R] [IsSepClosed (ResidueField R)] in
 /-- A uniformizer is not an `ℓ`-th power in the fraction field. -/
 lemma not_exists_pow_eq_algebraMap {π : R} (hπ : Irreducible π) :
     ¬ ∃ y : F, y ^ ℓ = algebraMap R F π := by
@@ -237,7 +237,7 @@ theorem exists_isEllAdicQuotient (hℓ : (ℓ : ResidueField R) ≠ 0) :
   exact Nat.pow_succ_factorization_not_dvd hn0 hℓ'.out h4
 
 omit [IsDomain R] [IsDiscreteValuationRing R] [HenselianLocalRing R]
-  [IsAlgClosed (ResidueField R)] in
+  [IsSepClosed (ResidueField R)] in
 /-- A prime `ℓ` different from the characteristic `p` of a field is invertible in it. -/
 lemma natCast_ne_zero_of_ne [IsLocalRing R] {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime)
     (hℓp : ℓ ≠ p) : (ℓ : ResidueField R) ≠ 0 := by
@@ -255,7 +255,7 @@ theorem subsingleton_H_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) 
   obtain ⟨χ, τ, h⟩ := exists_isEllAdicQuotient R F Ω hℓ
   exact h.subsingleton_H M hM hq
 
-omit [IsAlgClosed (ResidueField R)] [IsDomain R] [IsDiscreteValuationRing R]
+omit [IsSepClosed (ResidueField R)] [IsDomain R] [IsDiscreteValuationRing R]
   [HenselianLocalRing R] [IsFractionRing R F] [IsSepClosed Ω] [Algebra.IsSeparable F Ω]
   [Fact ℓ.Prime] in
 /-- `H⁰(Gal(Ω/F), M)` is finite for finite `M`. -/
@@ -278,7 +278,7 @@ theorem finite_H_one_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) �
 variable (R) in
 /-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation.
 
-Let `R` be a discrete valuation ring which is strictly henselian, with algebraically closed
+Let `R` be a discrete valuation ring which is strictly henselian, with separably closed
 residue field of characteristic `p > 0`; put `F = Frac(R)`, `G = Gal(Ω/F)` for a separable
 closure `Ω` of `F`, and fix a prime `ℓ ≠ p`. Then `Hᵠ(G, M) = 0` for `q > 1` and every discrete
 `G`-module `M` killed by a power of `ℓ` (more generally `ℓ`-primary); if `M` is finite, then
@@ -288,7 +288,8 @@ closure `Ω` of `F`, and fix a prime `ℓ ≠ p`. Then `Hᵠ(G, M) = 0` for `q >
 Discrete modules over a finite ring `A` killed by a power of `ℓ` are in particular `ℓ`-primary
 discrete `G`-modules, and the cohomology is computed with `ℤ`-coefficients (see
 `DiscreteModule`). The excellence assumption of the blueprint is not needed: integral closures
-in finite separable extensions of `F` are finite over `R`. -/
+in finite separable extensions of `F` are finite over `R`; and the residue field only needs to
+be separably closed. -/
 theorem subsingleton_H_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) (hℓp : ℓ ≠ p)
     (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) {q : ℕ} (hq : 1 < q) :
     Subsingleton (DiscreteModule.H Gal(Ω/F) M q) :=

@@ -5,7 +5,7 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.Compactification.OverRefinement
+public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementOfIsPullback
 
 /-!

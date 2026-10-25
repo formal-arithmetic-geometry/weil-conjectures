@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.CategoryTheory.Monoidal.Mod.FreePresentation
@@ -58,22 +59,10 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
 symmetric monoidal Grothendieck abelian category is closed. -/
 noncomputable instance monoidalClosed : MonoidalClosed (Mod C R) where
   closed M := by
-    -- Keep the original signature: closedness already makes the ambient tensor additive.
+    -- Keep `[MonoidalPreadditive C]` out of the signature: closedness already gives it.
     rename_i hpre _ _ _ _
     clear hpre
-    have hleft (X : C) : (MonoidalCategory.tensorLeft X).Additive := by
-      have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
-        (MonoidalCategory.tensorLeft X)
-      exact Functor.additive_of_preservesBinaryBiproducts _
-    have hright (X : C) : (MonoidalCategory.tensorRight X).Additive := by
-      have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
-        (MonoidalCategory.tensorRight X)
-      exact Functor.additive_of_preservesBinaryBiproducts _
-    have : MonoidalPreadditive C :=
-      { whiskerLeft_zero := fun {X Y Z} ↦ (MonoidalCategory.tensorLeft X).map_zero Y Z
-        zero_whiskerRight := fun {X Y Z} ↦ (MonoidalCategory.tensorRight X).map_zero Y Z
-        whiskerLeft_add := fun {X Y Z} f g ↦ (MonoidalCategory.tensorLeft X).map_add
-        add_whiskerRight := fun {X Y Z} f g ↦ (MonoidalCategory.tensorRight X).map_add }
+    have : MonoidalPreadditive C := MonoidalClosed.monoidalPreadditive_of_braided
     have : IsGrothendieckAbelian.{v} (Mod C R) := isGrothendieckAbelian R
     let F₀ := forget R ⋙ MonoidalCategory.tensorRight R ⋙
       MonoidalCategory.tensorRight M.X
@@ -300,22 +289,10 @@ end
 `R ⊗ F` on flat objects `F` of `C`. -/
 instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] :
     Abelian.HasFunctorialFlatResolution (Mod C R) := by
-  -- Derive additivity without capturing the unused section instance in the signature.
+  -- Keep `[MonoidalPreadditive C]` out of the signature: closedness already gives it.
   rename_i hpre _ _ _ _ _
   clear hpre
-  have hleft (X : C) : (MonoidalCategory.tensorLeft X).Additive := by
-    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
-      (MonoidalCategory.tensorLeft X)
-    exact Functor.additive_of_preservesBinaryBiproducts _
-  have hright (X : C) : (MonoidalCategory.tensorRight X).Additive := by
-    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
-      (MonoidalCategory.tensorRight X)
-    exact Functor.additive_of_preservesBinaryBiproducts _
-  have : MonoidalPreadditive C :=
-    { whiskerLeft_zero := fun {X Y Z} ↦ (MonoidalCategory.tensorLeft X).map_zero Y Z
-      zero_whiskerRight := fun {X Y Z} ↦ (MonoidalCategory.tensorRight X).map_zero Y Z
-      whiskerLeft_add := fun {X Y Z} f g ↦ (MonoidalCategory.tensorLeft X).map_add
-      add_whiskerRight := fun {X Y Z} f g ↦ (MonoidalCategory.tensorRight X).map_add }
+  have : MonoidalPreadditive C := MonoidalClosed.monoidalPreadditive_of_braided
   obtain ⟨Λ⟩ := ‹Abelian.HasFunctorialFlatResolution C›
   have : (free R).IsLeftAdjoint := (freeForgetAdjunction R).isLeftAdjoint
   let F := forget R ⋙ Λ.F ⋙ ObjectProperty.flat.ι ⋙ free R

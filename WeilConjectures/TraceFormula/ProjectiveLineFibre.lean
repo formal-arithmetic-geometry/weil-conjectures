@@ -33,7 +33,7 @@ an automorphism `e_B` this gives the fibre at `y` of the model-Frobenius setting
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.overProjectiveLineIso_powSucc`: `ℙ¹(e)^{n+1} = ℙ¹(e^{n+1})`.
+- `AlgebraicGeometry.Scheme.overProjectiveLineIso_pow`: `ℙ¹(e)^{n+1} = ℙ¹(e^{n+1})`.
 - `ProEtale.CondensedRing.projectiveLineFibreι_comp`: the embedding intertwines the model
   Frobenii.
 - `ProEtale.CondensedRing.isPullback_projectiveLineFibreι`: `ℙ¹_Ω` is the fibre of
@@ -54,11 +54,12 @@ namespace AlgebraicGeometry
 namespace Scheme
 
 /-- `ℙ¹` commutes with the powers of an automorphism: `ℙ¹(e)^{n+1} = ℙ¹(e^{n+1})`. -/
-lemma overProjectiveLineIso_powSucc {S : Scheme.{u}} {B : Over S} (e : B ≅ B) (n : ℕ) :
-    (overProjectiveLineIso e).powSucc n = overProjectiveLineIso (e.powSucc n) := by
+lemma overProjectiveLineIso_pow {S : Scheme.{u}} {B : Over S} (e : B ≅ B) (n : ℕ) :
+    (overProjectiveLineIso e).pow (n + 1) = overProjectiveLineIso (e.pow (n + 1)) := by
   induction n with
-  | zero => rw [Iso.powSucc_zero, Iso.powSucc_zero]
-  | succ n ih => rw [Iso.powSucc_succ, Iso.powSucc_succ, ih, overProjectiveLineIso_trans]
+  | zero => simp only [zero_add, Iso.pow_one]
+  | succ n ih =>
+    rw [Iso.pow_succ _ (n + 1), Iso.pow_succ e (n + 1), ih, overProjectiveLineIso_trans]
 
 end Scheme
 
@@ -264,7 +265,7 @@ variable [Finite k]
 
 /-- The embedding `ℙ¹_{k̄} ⟶ ℙ¹_B ×_k k̄`, `(t, ω) ↦ ((t, ȳ(ω)), ω)`, of the fibre of
 `ℙ¹_B ×_k k̄ ⟶ B ×_k k̄` at a point `y` of degree `n + 1` for an automorphism `e_B` of `B`. -/
-noncomputable def projectiveLineFibreι (eB : B ≅ B) {n : ℕ} (y : frobeniusFixedPoints eB n) :
+noncomputable def projectiveLineFibreι (eB : B ≅ B) {n : ℕ} (y : frobeniusFixedPoints eB (n + 1)) :
     projectiveLineFibre k (AlgebraicClosure k) ⟶
       (geometricBaseChange k (AlgebraicClosure k)).obj (overProjectiveLine B) :=
   projectiveLineFibreMap y.1 y.2.1
@@ -272,16 +273,16 @@ noncomputable def projectiveLineFibreι (eB : B ≅ B) {n : ℕ} (y : frobeniusF
 /-- The embedding `ℙ¹_{k̄} ⟶ ℙ¹_B ×_k k̄` of the fibre at a point `y` of degree `n + 1` intertwines
 the model Frobenius `F^{n+1} ×_k k̄` of `ℙ¹_{k̄}` with the model Frobenius
 `(ℙ¹(e_B)^{n+1} ≫ F^{n+1}) ×_k k̄` of `ℙ¹_B ×_k k̄`. -/
-theorem projectiveLineFibreι_comp (eB : B ≅ B) {n : ℕ} (y : frobeniusFixedPoints eB n) :
+theorem projectiveLineFibreι_comp (eB : B ≅ B) {n : ℕ} (y : frobeniusFixedPoints eB (n + 1)) :
     projectiveLineFibreFrobenius k (AlgebraicClosure k) n ≫ projectiveLineFibreι eB y =
       projectiveLineFibreι eB y ≫ baseChangeModelFrobenius (AlgebraicClosure k)
-        (overProjectiveLine B) (n + 1) ((overProjectiveLineIso eB).powSucc n).hom := by
-  rw [overProjectiveLineIso_powSucc, overProjectiveLineIso_hom]
-  exact projectiveLineFibreMap_comp (geometricFrobeniusField_powSucc_inv n) _ _ _ y.2.2
+        (overProjectiveLine B) (n + 1) ((overProjectiveLineIso eB).pow (n + 1)).hom := by
+  rw [overProjectiveLineIso_pow, overProjectiveLineIso_hom]
+  exact projectiveLineFibreMap_comp (geometricFrobeniusField_pow_inv n) _ _ _ y.2.2
 
 /-- `ℙ¹_{k̄}` is the fibre of `ℙ¹_B ×_k k̄ ⟶ B ×_k k̄` at the rational point attached to a point
 `y` of degree `n + 1`. -/
-theorem isPullback_projectiveLineFibreι (eB : B ≅ B) {n : ℕ} (y : frobeniusFixedPoints eB n) :
+theorem isPullback_projectiveLineFibreι (eB : B ≅ B) {n : ℕ} (y : frobeniusFixedPoints eB (n + 1)) :
     IsPullback (projectiveLineFibreι eB y) (toPoint (projectiveLineFibre k (AlgebraicClosure k)))
       ((geometricBaseChange k (AlgebraicClosure k)).map (overProjectiveLineProj B))
       (geometricBaseChangePoint y.1 y.2.1) :=

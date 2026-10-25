@@ -27,7 +27,7 @@ biproduct relations.
 
 Such an `X` is its own right dual (`CategoryTheory.MonoidalCategory.UnitBasis.exactPairing`), and
 the categorical trace of an endomorphism `φ` is the sum of its diagonal entries
-`incl i ≫ φ ≫ proj i` (`CategoryTheory.MonoidalCategory.UnitBasis.categoricalTrace_eq_sum`).
+`incl i ≫ φ ≫ proj i` (`CategoryTheory.MonoidalCategory.UnitBasis.traceOrZero_eq_sum`).
 
 The morphisms `𝟙_ C ⟶ X` form a module over `(End (𝟙_ C))ᵐᵒᵖ`, with basis the inclusions
 (`CategoryTheory.MonoidalCategory.UnitBasis.basis`), and the categorical trace of `φ` is the trace
@@ -172,11 +172,11 @@ variable [MonoidalPreadditive C] [BraidedCategory C]
 
 /-- The categorical trace of an endomorphism of an object with a unit basis is the sum of its
 diagonal entries. -/
-theorem categoricalTrace_eq_sum (φ : X ⟶ X) :
-    categoricalTrace φ = ∑ i, b.incl i ≫ φ ≫ b.proj i := by
+theorem traceOrZero_eq_sum (φ : X ⟶ X) :
+    traceOrZero φ = ∑ i, b.incl i ≫ φ ≫ b.proj i := by
   let := b.exactPairing
   let : HasRightDual X := ⟨X⟩
-  rw [categoricalTrace_eq_trace, trace_eq_of_exactPairing X]
+  rw [traceOrZero_eq_trace, trace_eq_of_exactPairing X]
   have hη : η_ X X = ∑ i, (ρ_ (𝟙_ C)).inv ≫ (b.incl i ⊗ₘ b.incl i) := rfl
   have hε : ε_ X X = ∑ i, (b.proj i ⊗ₘ b.proj i) ≫ (ρ_ (𝟙_ C)).hom := rfl
   rw [hη, hε]
@@ -264,8 +264,8 @@ the linear map `x ↦ x ≫ φ` on `𝟙_ C ⟶ X`. -/
 theorem trace_rightCompEndOp [MonoidalPreadditive C] [BraidedCategory C] (b : UnitBasis X ι)
     (φ : X ⟶ X) :
     LinearMap.trace (End (𝟙_ C))ᵐᵒᵖ (𝟙_ C ⟶ X) (Preadditive.rightCompEndOp _ φ) =
-      .op (categoricalTrace φ) := by
-  rw [LinearMap.trace_eq_matrix_trace _ b.basis, Matrix.trace, b.categoricalTrace_eq_sum]
+      .op (traceOrZero φ) := by
+  rw [LinearMap.trace_eq_matrix_trace _ b.basis, Matrix.trace, b.traceOrZero_eq_sum]
   simp [LinearMap.toMatrix_apply]
 
 end Linear

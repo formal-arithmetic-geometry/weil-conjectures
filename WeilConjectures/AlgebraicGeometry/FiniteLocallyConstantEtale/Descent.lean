@@ -177,8 +177,8 @@ theorem exists_isUniversalSection_of_isAffine [IsAffine X] [IsAffine S]
     ∃ (N : Scheme.{u}) (n : N ⟶ S) (_ : AlgebraicGeometry.Etale n) (_ : IsFinite n)
       (ξ₀ : E.obj (op (Etale.mk (n ≫ s)))), IsUniversalSection E s (Etale.mk (n ≫ s)) n ξ₀ := by
   have : IsAffine V := isAffine_of_isAffineHom v
-  obtain ⟨N, -, n, q, hq, hγq⟩ := exists_isPullback_of_coaction p v h.coact.left
-    h.coact_left_comp h.coact_counit h.coact_coassoc
+  obtain ⟨N, -, n, q, hq, hγq⟩ := exists_isPullback_of_coaction p v h.coact.left h.coact_left_comp
+    h.coact_counit h.coact_coassoc
   have hpq : (@AlgebraicGeometry.Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme) p :=
     ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
   have hn : AlgebraicGeometry.Etale n :=
