@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.RingHom.StandardSmooth
 public import Mathlib.RingTheory.RingHom.LocallyStandardSmooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.AlgebraicGeometry.AffinePresentation
 
 /-!
 # Charts of blow-ups of surfaces étale over the plane are smooth surfaces
@@ -34,28 +35,7 @@ open CategoryTheory Limits MvPolynomial
 
 namespace AlgebraicGeometry
 
-/-- The submersive presentation of the polynomial ring `R[X₁, …, Xₙ]` with no relations. -/
-noncomputable def mvPolynomialSubmersivePresentation (R : Type u) [CommRing R] (n : ℕ) :
-    Algebra.SubmersivePresentation R (MvPolynomial (Fin n) R) (Fin n) PEmpty.{1} where
-  toGenerators := Algebra.Generators.mvPolynomial R (Fin n)
-  relation := PEmpty.elim
-  span_range_relation_eq_ker := by
-    rw [Set.range_eq_empty, Ideal.span_empty, eq_comm, Algebra.Generators.ker_eq_ker_aeval_val,
-      RingHom.ker_eq_bot_iff_eq_zero]
-    intro p hp
-    simpa [Algebra.Generators.mvPolynomial] using hp
-  map := PEmpty.elim
-  map_inj a := a.elim
-  jacobian_isUnit := by
-    rw [Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det, Matrix.det_isEmpty,
-      map_one]
-    exact isUnit_one
-
-/-- The polynomial ring `R[X₁, …, Xₙ]` is standard smooth of relative dimension `n` over `R`. -/
-instance isStandardSmoothOfRelativeDimension_mvPolynomial (R : Type u) [CommRing R] (n : ℕ) :
-    Algebra.IsStandardSmoothOfRelativeDimension n R (MvPolynomial (Fin n) R) :=
-  (mvPolynomialSubmersivePresentation R n).isStandardSmoothOfRelativeDimension
-    (by simp [Algebra.Presentation.dimension])
+attribute [local instance] isStandardSmoothOfRelativeDimension_mvPolynomial
 
 /-- Étale ring maps are stable under cobase change, in the form of pushout squares of commutative
 rings. -/
