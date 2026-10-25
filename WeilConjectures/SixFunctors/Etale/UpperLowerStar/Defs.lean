@@ -158,7 +158,8 @@ namespace Etale
 
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. The continuity of the
-base change functor is `Etale.isContinuous_overPullback`. -/
+base change functor is `Etale.isContinuous_overPullback`
+(blueprint `def-weil-pbc-direct-image`). -/
 noncomputable def lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
   (MorphismProperty.Over.pullback @Etale ⊤ g).sheafPushforwardContinuous A
@@ -234,7 +235,8 @@ namespace Etale
 through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g` étale
 the Kan extension hypothesis is automatic by
 `Etale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by restriction,
-see `Etale.upperStarIsoOpenImmersionRestriction`. -/
+see `Etale.upperStarIsoOpenImmersionRestriction`
+(blueprint `def-weil-pbc-inverse-image`). -/
 noncomputable def upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ g) A
@@ -246,7 +248,8 @@ scoped notation "(" g ")^*[" A "]" =>
 
 end Etale
 
-/-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites. -/
+/-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites
+(blueprint `def-weil-pbc-inverse-image`). -/
 noncomputable def Etale.upperStarLowerStarAdjunction : (g)^*[A] ⊣ (g)_*[A] :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) A

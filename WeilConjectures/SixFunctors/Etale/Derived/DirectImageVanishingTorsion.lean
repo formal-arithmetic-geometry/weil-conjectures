@@ -57,7 +57,7 @@ images (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`).
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory Limits Opposite
 
@@ -208,7 +208,7 @@ theorem Etale.subsingleton_H_forget₂_uliftInt_of_injective {X : Scheme.{u}}
 
 /-- Being torsion is invariant under isomorphisms of abelian sheaves. -/
 lemma _root_.CategoryTheory.Sheaf.IsTorsion.of_iso {C : Type*} [Category* C]
-    {J : GrothendieckTopology C} {F G : Sheaf J AddCommGrpCat.{u + 1}} (e : F ≅ G)
+    {J : GrothendieckTopology C} {F G : Sheaf J AddCommGrpCat.{w}} (e : F ≅ G)
     (hF : F.IsTorsion) : G.IsTorsion := by
   intro U s
   obtain ⟨S, hS, h⟩ := hF (e.inv.hom.app U s)
