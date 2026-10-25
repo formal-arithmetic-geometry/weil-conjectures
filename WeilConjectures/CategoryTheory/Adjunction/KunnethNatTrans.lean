@@ -107,6 +107,14 @@ lemma kunnethNatTrans_app (M : 𝒳) :
 
 end Oplax
 
+/-- The invertibility of the transpose `C₀ ⟶ G D₀` of the second factor `c`, with `adj`, `e` and
+`c` read off from a statement about the Künneth map. This instantiates them by unification with
+the body of a concrete Künneth map, whose terms may differ from separately elaborated ones. -/
+lemma isIso_homEquiv_of_isIso_kunnethNatTrans_app [F.OplaxMonoidal] {M : 𝒳}
+    (_ : IsIso ((adj.kunnethNatTrans e c).app M))
+    (hc : IsIso (adj.homEquiv _ _ c)) : IsIso (adj.homEquiv _ _ c) :=
+  hc
+
 /-- **Künneth maps at dualizable objects**: if `F` is strong monoidal, `P M` is dualizable and the
 transpose `C₀ ⟶ G D₀` of `c` is an isomorphism, the Künneth map at `M` is an isomorphism. -/
 lemma isIso_kunnethNatTrans_app_of_isDualizable [F.Monoidal] {M : 𝒳}
