@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.ClosedRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.NonClosedBaseChange
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Unbounded
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
@@ -24,8 +25,6 @@ is an isomorphism.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale`: étale base change in every
-  degree.
 - `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_forall_isIso_baseChangeHomologyMap`:
   base change in every degree and for every sheaf gives the derived base change on `D⁺`.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_etale`: base change along a
@@ -48,23 +47,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
-
-/-- **Étale base change in every degree**: for a cartesian square with `p` étale, the
-degree-`q` base change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism for every sheaf
-`F` of `Λ`-modules (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale`). -/
-theorem Etale.isIso_baseChangeHomologyMap_of_etale {X S T Y : Scheme.{u}} {p : X ⟶ S}
-    {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} (sq : IsPullback e h g p) [Etale p] (q : ℤ)
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  have := Etale.isIso_derivedBaseChangeMapPlus_of_etale Λ sq
-  have hb : Etale.baseChangeHomologyMap Λ sq q F = (DerivedCategory.Plus.homologyFunctor _ q).map
-      ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) := by
-    rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans_eq,
-      Etale.baseChange_eq_derivedBaseChangeMapPlus]
-    rfl
-  rw [hb]
-  infer_instance
 
 /-- **Derived base change from base change in every degree.** For a cartesian square such that
 the degree-`q` base change maps `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` are isomorphisms for all `q` and

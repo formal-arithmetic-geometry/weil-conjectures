@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.CurveLocal.CoverCurves
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalRestriction
@@ -34,13 +35,7 @@ open Scheme
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
-omit [IsAlgClosed k] in
-/-- The transposed graph `(h, id)` maps the fixed point `y` to the diagonal point `(y, y)`. -/
-@[reassoc (attr := simp)]
-lemma y_comp_graph : M.y ≫ M.graph = M.diagPoint := by
-  apply pullback.hom_ext
-  · simp [graph, diagPoint, y_comp_h]
-  · simp [graph, diagPoint]
+attribute [reassoc (attr := simp)] y_comp_graph
 
 /-- The geometric point of the graph `G` over the closed point. -/
 noncomputable def tG : Spec (.of k) ⟶ M.G :=
