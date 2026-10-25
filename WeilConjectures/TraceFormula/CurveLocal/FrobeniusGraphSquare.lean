@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.CurveLocal.IntegralSupportedRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
 
 /-!
 

@@ -130,7 +130,7 @@ theorem exists_reduction_stalk_integralSupportedRestriction [IsAlgClosed k]
           (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n)) (point k).left).map
           ((etaleReduction ℓ E.1 n (point k)).map
             ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ z).map
-              (F.integralSupportedRestriction E.1
+              (F.supportedRestrictionIntegral E
                 ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
                     (prod.fst : X ⨯ X ⟶ X)).obj M ⊗
                   (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
@@ -138,7 +138,7 @@ theorem exists_reduction_stalk_integralSupportedRestriction [IsAlgClosed k]
         s ≫ (reductionCoefficientDatum ℓ hΦ hm v F z E M N hM n).supportedRestriction := by
   have hsq := isPullback_frobeniusLocalModel_graph hΦ hm v F z
   have h₁ := exists_etaleReduction_map_exchangeRestriction_comp_eq ℓ E.1 n
-    (F.integralLowerShriekBaseChangeIso E.1) (frobeniusLocalModel hΦ hm v F z).graph
+    (F.lowerShriekBaseChangeIsoIntegral E) (frobeniusLocalModel hΦ hm v F z).graph
     (pullback.diagonal (frobeniusLocalModel hΦ hm v F z).f) (swapPullbackToProd X)
     (frobeniusLocalModel_graph_swapPullbackToProd hΦ hm v F z) (diagonal_swapPullbackToProd X)
     hsq ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ

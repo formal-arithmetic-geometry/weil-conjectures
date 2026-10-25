@@ -25,7 +25,7 @@ comparison), is the exchange for `c^!` followed by the supported restriction for
 coefficients. This is the coefficient compatibility of `ρ` used to transport the vanishing of the
 supported restriction between coefficient rings (blueprint `sk-lem-tf-curve-restriction-zero`,
 last step); the inputs are the coefficient comparisons of blueprint `sk-prop-scalar-six` and the
-compatibility of base change with them (blueprint `sk-thm-sf-package`, (2)).
+compatibility of base change with them (blueprint `sk-thm-sf-compatibility`, (7)).
 
 -/
 

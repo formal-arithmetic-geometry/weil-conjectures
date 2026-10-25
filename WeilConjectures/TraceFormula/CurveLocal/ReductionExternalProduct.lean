@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
-public import WeilConjectures.TraceFormula.CurveLocal.IntegralSupportedRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
 
 /-!
 

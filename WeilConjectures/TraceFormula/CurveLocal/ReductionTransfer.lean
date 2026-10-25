@@ -16,7 +16,7 @@ Let `X` be a smooth curve over the algebraically closed field `k` with the model
 `m ≥ 1`, `F` the fixed locus of the graph correspondence `(𝟙, Φ_m)` and `z` a point of `F`
 over `x`. For bounded constructible `𝒪_E`-complexes `M`, `N` on `X` with `M_x = 0`, let
 `ρ = ρ_{M ⊠ N}` be the integral supported restriction
-(`ProEtale.CondensedRing.Correspondence.FixedLocus.integralSupportedRestriction`) and
+(`ProEtale.CondensedRing.Correspondence.FixedLocus.supportedRestrictionIntegral`) and
 `f₀ = Fib_s(z^* ρ)` its point fibre, a morphism in `D(𝒪_E)`. This file proves that the
 reductions of `f₀` modulo every `ℓⁿ` factor through classical supported restrictions `ρ_{a,b}`
 on the strictly local model `M_x` at `x` (`Correspondence.frobeniusLocalModel`), with the
@@ -89,7 +89,7 @@ noncomputable def pointIntegralSupportedRestriction [IsSepClosed k] {c : Corresp
     Arrow (DerivedCategory (ModuleCat.{u + 1} (Shrink.{u + 1} (integers ℓ E.1)))) :=
   Arrow.mk ((pointFiberFunctorIntegral ℓ k E).map
     ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ z).map
-      (F.integralSupportedRestriction E.1
+      (F.supportedRestrictionIntegral E
         ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
             (prod.fst : X ⨯ X ⟶ X)).obj M ⊗
           (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ

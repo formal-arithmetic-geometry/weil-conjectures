@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
-public import WeilConjectures.TraceFormula.CurveLocal.IntegralSupportedRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
 
 /-!
 
