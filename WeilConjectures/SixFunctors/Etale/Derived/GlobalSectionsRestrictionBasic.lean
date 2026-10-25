@@ -51,7 +51,10 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The restriction map `RΓ(X, K) ⟶ RΓ(Y, f^* K)` along a morphism `f : Y ⟶ X`: derived global
 sections of the unit `K ⟶ Rf_* f^* K` of the derived adjunction `f^* ⊣ Rf_*`, followed by the
-Leray isomorphism `RΓ(X, Rf_* f^* K) ≅ RΓ(Y, f^* K)`. -/
+Leray isomorphism `RΓ(X, Rf_* f^* K) ≅ RΓ(Y, f^* K)`.
+
+For `A = AddCommGrpCat` this is the component at `K` of
+`AlgebraicGeometry.Etale.RawRestrictedComparison.derivedSectionPullback`. -/
 noncomputable def globalSectionsRestriction {X Y : Scheme.{u}} (f : Y ⟶ X)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (rightDerivedGlobalSections A X).obj K ⟶
@@ -89,7 +92,14 @@ lemma globalSectionsRestriction_comp_map_counit {X Y : Scheme.{u}} (f : Y ⟶ X)
   rfl
 
 /-- Restriction along a composite `g ≫ f` is restriction along `f` followed by restriction
-along `g`, up to the composition isomorphism `(g ≫ f)^* ≅ g^* f^*`. -/
+along `g`, up to the composition isomorphism `(g ≫ f)^* ≅ g^* f^*`:
+```
+RΓ(X, K) ──────────────────→ RΓ(Z, (g ≫ f)^* K)
+    │                                 │ ≅
+    ↓                                 ↓
+RΓ(Y, f^* K) ──────────────→ RΓ(Z, g^* f^* K)
+```
+-/
 lemma globalSectionsRestriction_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     globalSectionsRestriction (g ≫ f) K ≫
