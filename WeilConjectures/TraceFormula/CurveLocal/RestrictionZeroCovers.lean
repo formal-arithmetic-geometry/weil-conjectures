@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatConstructibleModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.CoverDatumExistence
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverProperties
 
 /-!
@@ -83,7 +84,7 @@ theorem exists_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] {Λ : Type (u + 1)} [Comm
     (hPL : ∃ a b, IsBoundedFlatComplex Λ a b PL) (hPK : ∃ a b, IsBoundedFlatComplex Λ a b PK)
     (hcL : ∀ q : ℤ, IsConstructibleSheaf (PL.X q)) (hcK : ∀ q : ℤ, IsConstructibleSheaf (PK.X q)) :
     Nonempty (M.CoverDatum ℓ PL PK) :=
-  sorry
+  M.nonempty_coverDatum ℓ PL PK hPL hPK hcL hcK
 
 /-- **The covers from a cover datum** (blueprint `det-tf-restriction-zero-covers` (ii), (iii)
 and the pulled back identification of `det-tf-restriction-zero-localization` (i)): from a cover
