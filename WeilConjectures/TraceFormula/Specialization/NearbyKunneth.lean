@@ -64,8 +64,6 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCycle
 variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-set_option maxHeartbeats 1600000 in
--- the inputs of the proper case are large terms
 /-- **Gabber's Künneth formula for nearby cycles** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; SGA 7 XIII; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product
 `P` over the strictly henselian trait `Spec k'⟦t⟧` of two models `M`, `N` of finite type and
