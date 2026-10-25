@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCart
 public import WeilConjectures.AlgebraicGeometry.Regular
 
 import Mathlib.RingTheory.KrullDimension.Regular
+import WeilConjectures.RingTheory.RegularRingOfQuotientAway
 
 /-!
 # The boundary after adjoining the generic point of a regular integral divisor
@@ -23,63 +24,6 @@ Source: Stacks Project, Tags 00NU, 0EYE and 0EYJ.
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
-
-open IsLocalRing in
-/-- Lift regularity across a nonzerodivisor (Stacks Project, Tag 00NU).
-The generator-lifting proof is reused from `RootAlgebraRegularAtRoot`. -/
-private theorem lift_regular
-    (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
-    (x : R) (hx : x ∈ maximalIdeal R) (hreg : IsSMulRegular R x)
-    [IsRegularLocalRing (R ⧸ Ideal.span {x})] : IsRegularLocalRing R := by
-  classical
-  let I := Ideal.span ({x} : Set R)
-  let Q := R ⧸ I
-  let φ := Ideal.Quotient.mk I
-  let m := maximalIdeal R
-  let mq := maximalIdeal Q
-  obtain ⟨s, hcard, hs⟩ := (IsNoetherian.noetherian mq).exists_span_finset_card_eq_spanFinrank
-  let a : Q → R := Function.surjInv Ideal.Quotient.mk_surjective
-  have ha (y : Q) : φ (a y) = y := Function.surjInv_eq _ y
-  let t : Set R := insert x (a '' (s : Set Q))
-  have hfin : t.Finite := (s.finite_toSet.image a).insert x
-  have ht : Ideal.span t = m := by
-    have hmap : (Ideal.span t).map φ = mq := by
-      rw [Ideal.map_span, Set.image_insert_eq]
-      have hx0 : φ x = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton_self x)
-      rw [hx0, Set.image_image]
-      simp only [ha, Set.image_id']
-      rw [Ideal.span_insert_zero]
-      exact hs
-    have hI : I ≤ Ideal.span t := Ideal.span_mono (by
-      intro y hy
-      have hyx : y = x := Set.mem_singleton_iff.mp hy
-      subst y
-      exact Set.mem_insert _ _)
-    have hc : (Ideal.span t).comap (RingHom.id R) = m := by
-      rw [Ideal.comap_id]
-      have hh := congrArg (Ideal.comap φ) hmap
-      rw [Ideal.comap_map_of_surjective φ Ideal.Quotient.mk_surjective,
-        ← RingHom.ker_eq_comap_bot, Ideal.mk_ker, sup_eq_left.mpr hI] at hh
-      have hm : mq.comap φ = m := by
-        rw [show mq = m.map φ from (map_maximalIdeal_of_surjective φ
-          Ideal.Quotient.mk_surjective).symm]
-        rw [Ideal.comap_map_of_surjective φ Ideal.Quotient.mk_surjective,
-          ← RingHom.ker_eq_comap_bot, Ideal.mk_ker,
-          sup_eq_left.mpr (Ideal.span_le.mpr (by rintro y rfl; exact hx))]
-      exact hh.trans hm
-    simpa using hc
-  have hbound : m.spanFinrank ≤ mq.spanFinrank + 1 := by
-    rw [← ht]
-    calc
-      _ ≤ t.ncard := Submodule.spanFinrank_span_le_ncard_of_finite hfin
-      _ ≤ (a '' (s : Set Q)).ncard + 1 := Set.ncard_insert_le _ _
-      _ ≤ (s : Set Q).ncard + 1 := Nat.add_le_add_right (Set.ncard_image_le s.finite_toSet) 1
-      _ = mq.spanFinrank + 1 := by rw [Set.ncard_coe_finset, hcard]
-  apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le
-  have hdim := ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson
-    hreg (by simpa [ringJacobson_eq_maximalIdeal] using hx)
-  rw [← hdim, ← IsRegularLocalRing.spanFinrank_maximalIdeal (R := Q)]
-  exact_mod_cast hbound
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- At a point on an effective Cartier centre, the stalk map has kernel generated
@@ -205,7 +149,7 @@ theorem regular_dim_ge_two_outside_divisor_generic_neighbourhood
     ((i.stalkMap d).hom.quotientKerEquivOfSurjective (i.stalkMap_surjective d))
   have : IsRegularLocalRing (L.presheaf.stalk (i d) ⧸ Ideal.span {f}) :=
     IsRegularLocalRing.of_ringEquiv e.symm
-  refine ⟨lift_regular _ f hf hreg, ?_⟩
+  refine ⟨IsRegularLocalRing.of_isRegularLocalRing_quotient _ f hf hreg, ?_⟩
   have hdim := ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim hreg hf
   rw [← hdim, ringKrullDim_eq_of_ringEquiv e]
   exact (show (2 : WithBot ℕ∞) = 1 + 1 from rfl).le.trans
