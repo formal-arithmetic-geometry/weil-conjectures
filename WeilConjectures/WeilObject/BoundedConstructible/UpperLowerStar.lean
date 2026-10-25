@@ -5,7 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMateEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 
 /-!
@@ -41,16 +43,14 @@ the derived pullback and the derived pushforward.
   (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isIso`); no properness of `f`
   is needed. This gives the Weil pushforward `ProEtale.CondensedRing.weilLowerStar`.
 
-## Sorried input
+## Base change along isomorphisms
 
-- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isIso`: the base-change
-  morphism of a commutative square whose horizontal maps `g` and `g'` are isomorphisms is an
-  isomorphism. This is formal: the derived pullbacks along `g` and `g'` are then equivalences,
-  with inverses the pullbacks along `g⁻¹` and `g'⁻¹`, and the mate of an isomorphism between
-  equivalences is an isomorphism. Making it precise needs the identity isomorphism
-  `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on module objects, which is not yet available. For `f`
-  proper, it is also a consequence of proper base change
-  (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`).
+`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isIso`: the base-change morphism of
+a commutative square whose horizontal maps `g` and `g'` are isomorphisms is an isomorphism. The
+derived pullbacks along `g` and `g'` are equivalences, with inverses the pullbacks along `g⁻¹`
+and `g'⁻¹` (`ProEtale.CondensedRing.boundedConstructibleUpperStarEquivalenceOfIsIso`), and the
+exchange morphism of an isomorphism along equivalences is an isomorphism
+(`CategoryTheory.Adjunction.isIso_exchangeRight_of_isEquivalence`).
 
 ## Main definitions
 
@@ -86,14 +86,31 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 
+/-- The derived pullback `Lg^*` along an isomorphism `g` on bounded constructible complexes is an
+equivalence, with inverse `L(g⁻¹)^*`: the composition isomorphisms identify both composites with
+the pullbacks along identities, which are the identity functors. -/
+noncomputable def boundedConstructibleUpperStarEquivalenceOfIsIso (g : Y' ⟶ Y) [IsIso g] :
+    Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ≌ Dᵇc(Y'.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  CategoryTheory.Equivalence.mk (boundedConstructibleUpperStar _ ℓ g)
+    (boundedConstructibleUpperStar _ ℓ (inv g))
+    ((boundedConstructibleUpperStarId _ ℓ Y).symm ≪≫
+      eqToIso (by rw [IsIso.inv_hom_id]) ≪≫ boundedConstructibleUpperStarComp _ ℓ (inv g) g)
+    ((boundedConstructibleUpperStarComp _ ℓ g (inv g)).symm ≪≫
+      eqToIso (by rw [IsIso.hom_inv_id]) ≪≫ boundedConstructibleUpperStarId _ ℓ Y')
+
+instance isEquivalence_boundedConstructibleUpperStar_of_isIso (g : Y' ⟶ Y) [IsIso g] :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).IsEquivalence :=
+  (boundedConstructibleUpperStarEquivalenceOfIsIso ℓ g).isEquivalence_functor
+
 /-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g` of schemes whose
 horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible `ℚ̄_ℓ`-sheaves is an isomorphism.
 No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
     (sq : CommSq g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
-  sorry
+    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
+  rw [boundedConstructibleBaseChange_eq_exchangeRight]
+  exact Adjunction.isIso_exchangeRight_of_isEquivalence _ _ _
 
 end BaseChangeOfIsIso
 
