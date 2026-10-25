@@ -17,7 +17,7 @@ restriction can be formed with `E`-coefficients from the compact-support base ch
 square (`FixedLocus.supportedRestrictionE`). Under the extension of scalars `T : E ⟶ ℚ̄_ℓ` it
 becomes the `ℚ̄_ℓ`-supported restriction of `T P`
 (`FixedLocus.map_supportedRestrictionE_comp`), given the compatibility of base change with the
-coefficient comparisons (blueprint `sk-thm-sf-package`, (2):
+coefficient comparisons (blueprint `sk-thm-sf-compatibility`, (7):
 `boundedConstructibleLowerShriekBaseChange_toPadicAlgCl`). With the `f^!` clause of blueprint
 `sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekToPadicAlgCl`) this transports the
 vanishing of a stalk of the supported restriction from `E` to `ℚ̄_ℓ`

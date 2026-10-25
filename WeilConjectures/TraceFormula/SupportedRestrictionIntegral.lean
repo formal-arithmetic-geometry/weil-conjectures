@@ -16,7 +16,7 @@ correspondence, the supported restriction can be formed with `𝒪_E`-coefficien
 compact-support base change of the fixed square (`FixedLocus.supportedRestrictionIntegral`).
 Under the extension of scalars `T : 𝒪_E ⟶ E` it becomes the `E`-supported restriction of `T P`
 (`FixedLocus.map_supportedRestrictionIntegral_comp`), given the compatibility of base change with
-the coefficient comparisons (blueprint `sk-thm-sf-package`, (2):
+the coefficient comparisons (blueprint `sk-thm-sf-compatibility`, (7):
 `boundedConstructibleLowerShriekBaseChange_extendScalars`). With the `f^!` clause of blueprint
 `sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekExtendScalars`) this transports the
 vanishing of a stalk of the supported restriction from `𝒪_E` to `E`

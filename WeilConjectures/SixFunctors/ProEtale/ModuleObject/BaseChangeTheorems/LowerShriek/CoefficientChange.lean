@@ -15,10 +15,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShr
 # Compact-support base change respects the coefficient comparisons
 
 Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E`.
-Blueprint `sk-thm-sf-package`, (2), asserts that the compact-support base-change isomorphisms
-`Ex_! : Rf_! ⋙ Lg^* ≅ Lg'^* ⋙ Rf'_!` for the coefficients `𝒪_E`, `E` and `ℚ̄_ℓ` respect the
-coefficient comparisons of blueprint `sk-prop-scalar-six`. This file states this compatibility
-for the two coefficient changes used to pass from integral to `ℚ̄_ℓ`-coefficients:
+Blueprint `sk-thm-sf-compatibility`, (7), asserts that the compact-support base-change
+isomorphisms `Ex_! : Rf_! ⋙ Lg^* ≅ Lg'^* ⋙ Rf'_!` of `sk-thm-sf-package`, (2), for the
+coefficients `𝒪_E`, `E` and `ℚ̄_ℓ` commute with the coefficient comparisons of blueprint
+`sk-prop-scalar-six`. This file states this compatibility for the two coefficient
+changes used to pass from integral to `ℚ̄_ℓ`-coefficients:
 
 * `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_toPadicAlgCl`, for the
   inclusion `E ⟶ ℚ̄_ℓ`;
@@ -70,11 +71,11 @@ instance isIso_boundedConstructibleLowerShriekBaseChange_padicSubfield
   isIso_boundedConstructibleLowerShriekBaseChange ℓ E sq
 
 /-- Compatibility required from `sec-six-functors` (to be proved there): blueprint
-`sk-thm-sf-package`, (2), the base-change isomorphism `Ex_!` respects the coefficient comparisons
-of `sk-prop-scalar-six`. For a cartesian square and the extension of scalars `T : E ⟶ ℚ̄_ℓ`, the
-image under `T` of compact-support base change `Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` with
-`E`-coefficients, read through the pullback and lower-shriek comparisons of `T`, is
-compact-support base change with `ℚ̄_ℓ`-coefficients. -/
+`sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
+commutes with the coefficient comparisons of `sk-prop-scalar-six`. For a cartesian square and the
+extension of scalars `T : E ⟶ ℚ̄_ℓ`, the image under `T` of compact-support base change
+`Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` with `E`-coefficients, read through the pullback and
+lower-shriek comparisons of `T`, is compact-support base change with `ℚ̄_ℓ`-coefficients. -/
 theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback g' f' f g)
     (M : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleToPadicAlgCl Y'.left ℓ E).map
@@ -89,11 +90,11 @@ theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback 
   sorry
 
 /-- Compatibility required from `sec-six-functors` (to be proved there): blueprint
-`sk-thm-sf-package`, (2), the base-change isomorphism `Ex_!` respects the coefficient comparisons
-of `sk-prop-scalar-six`. For a cartesian square and the extension of scalars `T : 𝒪_E ⟶ E`, the
-image under `T` of compact-support base change `Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` with
-`𝒪_E`-coefficients, read through the pullback and lower-shriek comparisons of `T`, is
-compact-support base change with `E`-coefficients. -/
+`sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
+commutes with the coefficient comparisons of `sk-prop-scalar-six`. For a cartesian square and the
+extension of scalars `T : 𝒪_E ⟶ E`, the image under `T` of compact-support base change
+`Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` with `𝒪_E`-coefficients, read through the pullback and
+lower-shriek comparisons of `T`, is compact-support base change with `E`-coefficients. -/
 theorem boundedConstructibleLowerShriekBaseChange_extendScalars (sq : IsPullback g' f' f g)
     (M : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     (boundedConstructibleExtendScalars Y'.left ℓ E).map
