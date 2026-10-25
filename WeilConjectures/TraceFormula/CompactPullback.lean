@@ -491,12 +491,17 @@ end BaseChange
 section Frobenius
 
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] {Φ : X ⟶ X} {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  [IsSeparated X.hom] {Φ : X ⟶ X}
+
+section Iterate
+
+variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+  {K : Dᵇc(X.left)⟦Λ⟧}
 
 variable {ℓ} in
 /-- The iterates `ψ_m : LΦ_m^* K ⟶ K` of a *Frobenius coefficient morphism* `ψ : LΦ^* K ⟶ K`,
-an arbitrary morphism (blueprint `def-trf-frobenius-coefficient-morphism`): `ψ_0` is the identity
-isomorphism `L(𝟙 X)^* K ≅ K` and `ψ_{m+1}` is the composite
+an arbitrary morphism (blueprint `def-trf-frobenius-coefficient-morphism`), for any coefficient
+ring `Λ`: `ψ_0` is the identity isomorphism `L(𝟙 X)^* K ≅ K` and `ψ_{m+1}` is the composite
 ```
 LΦ_{m+1}^* K = L(Φ ≫ Φ_m)^* K ≅ LΦ^* LΦ_m^* K --LΦ^* ψ_m--> LΦ^* K --ψ--> K.
 ```
@@ -504,26 +509,27 @@ For the structure isomorphism of a Weil object these are the iterated Weil struc
 (`ProEtale.CondensedRing.WeilBoundedConstructible.iterateStr_hom_eq_frobeniusCoefficientIterate`).
 -/
 noncomputable def frobeniusCoefficientIterate
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
-    (m : ℕ) → (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (frobeniusIterate Φ m)).obj K ⟶ K
+    (ψ : (boundedConstructibleUpperStar Λ ℓ Φ).obj K ⟶ K) :
+    (m : ℕ) → (boundedConstructibleUpperStar Λ ℓ (frobeniusIterate Φ m)).obj K ⟶ K
   | 0 => eqToHom (by rw [frobeniusIterate_zero]) ≫
-    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app K
+    (boundedConstructibleUpperStarId Λ ℓ X).hom.app K
   | m + 1 =>
     eqToHom (by rw [frobeniusIterate_succ]) ≫
-      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Φ
-        (frobeniusIterate Φ m)).hom.app K ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
-        (frobeniusCoefficientIterate ψ m) ≫ ψ
+      (boundedConstructibleUpperStarComp Λ ℓ Φ (frobeniusIterate Φ m)).hom.app K ≫
+      (boundedConstructibleUpperStar Λ ℓ Φ).map (frobeniusCoefficientIterate ψ m) ≫ ψ
+
 variable {ℓ} in
-lemma frobeniusCoefficientIterate_one
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
+lemma frobeniusCoefficientIterate_one (ψ : (boundedConstructibleUpperStar Λ ℓ Φ).obj K ⟶ K) :
     frobeniusCoefficientIterate ψ 1 = eqToHom (by rw [frobeniusIterate_one]) ≫ ψ := by
-  have h := boundedConstructibleUpperStarComp_id_right_aux (Profinite.padicAlgClRingObj ℓ) ℓ
+  have h := boundedConstructibleUpperStarComp_id_right_aux Λ ℓ
     (frobeniusIterate_zero Φ) (by rw [frobeniusIterate_zero, Category.comp_id]) ψ
   simp only [frobeniusCoefficientIterate]
   conv_rhs => rw [← h]
   rw [eqToHom_trans_assoc]
+
+end Iterate
+
+variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
 /-- The iterates `Φ_m` of a proper endomorphism are proper. -/
 instance isProper_frobeniusIterate [IsProper Φ.left] (m : ℕ) :

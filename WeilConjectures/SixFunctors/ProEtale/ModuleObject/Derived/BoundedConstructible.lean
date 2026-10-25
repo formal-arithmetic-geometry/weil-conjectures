@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-!
 
@@ -92,10 +93,10 @@ coefficient rings, in
 
 ## Sorried input
 
-That the derived pushforward and extension by zero preserve bounded constructible complexes is
-`sorry`ed (the pullback is `boundedConstructible_leftDerivedUpperStar_obj_of_scheme`):
-`boundedConstructible_rightDerivedLowerStar_obj`
-and `boundedConstructible_openImmersionLowerShriek_obj`, and the instances
+The pullback and the extension by zero preserve bounded constructible complexes
+(`boundedConstructible_leftDerivedUpperStar_obj_of_scheme`,
+`boundedConstructible_openImmersionLowerShriek_obj`). That the derived pushforward does is
+`sorry`ed: `boundedConstructible_rightDerivedLowerStar_obj`, and so are the instances
 `isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
 `isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
 
@@ -205,7 +206,8 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
-/-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k`, the
+/-- **Deligne's finiteness theorem** for `Rf_*` (part of blueprint
+`sk-def-sfb-dc-restricted-functors`): for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `ℚ̄_ℓ`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude]
 for torsion coefficients; Bhatt–Scholze, Section 6.8, for `ℚ̲̄_ℓ`). It is false for a general
@@ -449,12 +451,27 @@ variable {U X : Over (Spec (.of k))}
   [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
 
+-- The section variables are kept, as for all functors on `Dᵇc(-)⟦Λ⟧`, so that the restricted
+-- functor `boundedConstructibleOpenImmersionLowerShriek` has the same arguments as the others.
+set_option linter.unusedSectionVars false in
 /-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
 module objects over `Λ`, preserves bounded constructible complexes (SGA 4 XVII, 5.1.16;
-Bhatt–Scholze, Section 6.8). -/
+Bhatt–Scholze, Section 6.8): `j_!` is exact, so it commutes with the cohomology sheaves, and it
+preserves zero objects and constructible module objects
+(`ProEtale.CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek_obj`). -/
 lemma boundedConstructible_openImmersionLowerShriek_obj (K : Dᵇc(U.left)⟦Λ⟧) :
-    boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K.obj) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K.obj) := by
+  have : TopologicalSpace.NoetherianSpace X.left := by
+    have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+    have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+    have : IsNoetherian X.left := {}
+    infer_instance
+  obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff _ K.obj).1 K.property
+  refine (mem_boundedConstructible_iff _ _).2 ⟨⟨a, b, fun i hi ↦ ?_⟩, fun n ↦ ?_⟩
+  · exact ((j.left)_!open⟦Λ⟧.map_isZero (hab i hi)).of_iso
+      ((Functor.mapDerivedCategoryHomologyFunctorIso _ i).app K.obj).symm
+  · exact (isConstructibleModuleObject_openImmersionLowerShriek_obj Λ j.left _ (hc n)).of_iso
+      ((Functor.mapDerivedCategoryHomologyFunctorIso _ n).app K.obj)
 
 /-- The extension by zero `j_! : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` along an open immersion on bounded
 constructible complexes: the restriction of the levelwise functor
@@ -749,7 +766,8 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
-/-- The bounded constructible complexes of `ℚ̄_ℓ`-sheaves form a monoidal subcategory of
+/-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
+form a monoidal subcategory of
 `D(Mod_{ℚ̄_ℓ,X})` for the derived tensor product: they contain the unit
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
@@ -761,7 +779,8 @@ instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
-/-- The bounded constructible complexes of `ℚ̄_ℓ`-sheaves are stable under the derived hom
+/-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
+are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 
 /-!
 
@@ -31,9 +33,9 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
    `A = Di_! K`;
 2. the *inverse* of the projection comparison
    `q_{i,M,N} : Di_! (M ⊗ᴸ Li^* N) ⟶ Di_! M ⊗ᴸ N` of the adjunction `Di_! ⊣ Li^*` along the open
-   immersion `i` (`CategoryTheory.Adjunction.projectionComparison`), which is *assumed* to be an
-   isomorphism (`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`): this is the
-   derived projection formula for the extension by zero;
+   immersion `i` (`CategoryTheory.Adjunction.projectionComparison`), which is an isomorphism
+   (`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`): this is the derived
+   projection formula for the extension by zero;
 3. the identification `Li^* Lg^* B ≅ Lf^* B`.
 
 ## Main definitions
@@ -56,6 +58,9 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 
 ## Main results
 
+- `ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`: `q_j` is an isomorphism. It is
+  the projection map `openImmersionProjectionComparison'` of
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection`.
 - `ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_right` and
   `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_right`:
   `PF^!_{f,K,B}` is natural in `B`.
@@ -69,16 +74,14 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
   `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_left`:
   `PF^!_{f,K,B}` is natural in `K`, in the same way.
 
-## Sorried input
+## The projection formula
 
-- `ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`: `q_j` is an isomorphism.
-  On module objects `j_!` is exact and `j^*` is restriction, so `j_!(M ⊗ j^* N) ≅ j_! M ⊗ N`
-  holds already on the underived tensor products (`Adjunction.HasProjectionFormula` for
-  `j_! ⊣ j^*`), and both sides preserve K-flat resolutions.
-- `ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism`: the derived
-  projection formula for `Rf_!` on bounded constructible complexes (Input 2.1 of
-  `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`). It is
-  deduced from the proper case `g` and from base change; neither is available in derived form.
+`ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism`: for
+`Λ = ℚ̲̄_ℓ`, `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B` (Input 2.1
+of `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`). Its first
+factor `PF^*_g` is an isomorphism by the proper projection formula
+(`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`,
+blueprint `det-thm-sfb-proper-base-change-rational`), since `Di_! K` is bounded constructible.
 
 -/
 
@@ -155,7 +158,7 @@ instance isIso_openImmersionProjectionComparison
     (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     IsIso (openImmersionProjectionComparison Λ j M N) :=
-  sorry
+  inferInstanceAs (IsIso (((openImmersionProjectionComparison' Λ j).app M).app N))
 
 @[reassoc]
 lemma openImmersionProjectionComparison_natural_right
@@ -422,14 +425,56 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ f K B :=
   rfl
 
-/-- **The derived projection formula for `Rf_!`** (`ℚ̄_ℓ`-coefficient): the exceptional projection
-morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
-docstring. -/
+omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- A morphism of a full subcategory given by an isomorphism of the ambient category is an
+isomorphism. Stated for an abstract full subcategory, so that the inclusion is not unfolded. -/
+private lemma isIso_homMk_of_isIso {C : Type*} [Category* C] {P : ObjectProperty C}
+    {A B : P.FullSubcategory} (g : A.obj ⟶ B.obj) [IsIso g] : IsIso (P.homMk g) :=
+  have : IsIso (P.ι.map (P.homMk g)) := ‹IsIso g›
+  isIso_of_fully_faithful P.ι _
+
+set_option maxHeartbeats 1000000 in
+-- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
+/-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
+constructible `ℚ̄_ℓ`-complexes: the proper projection formula (blueprint
+`det-thm-sfb-proper-base-change-rational`). -/
+lemma isIso_properProjectionMorphism_padicAlgCl {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
+    [IsProper p.left]
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)))
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) A)
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left) B) :
+    IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
+      p.left).projectionMorphism A B) :=
+  (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj ℓ (X' := Z) (Y' := Y)
+    p).2.2 A B hA hB
+
+/-- **The derived projection formula for `Rf_!`** on bounded constructible `ℚ̄_ℓ`-sheaves: the
+exceptional projection morphism `PF^!_{f,K,B}` is an isomorphism. For the chosen
+compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
+isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-rational`,
+`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
+identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ f K B) :=
-  sorry
+    IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ f K B) := by
+  let c := compactificationOverField f
+  have hA := boundedConstructible_openImmersionLowerShriek_obj (Profinite.padicAlgClRingObj ℓ) ℓ
+    c.overI K
+  have : IsIso (properProjectionMorphism (Profinite.padicAlgClRingObj ℓ) c.overG.left
+      ((D((c.overI.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) B.obj) :=
+    isIso_properProjectionMorphism_padicAlgCl ℓ c.overG _ B.obj hA B.property
+  have : IsIso (properProjectionMorphism (Profinite.padicAlgClRingObj ℓ) c.g
+      ((D((c.i)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) B.obj) := this
+  have : IsIso (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
+      K.obj B.obj) := by
+    unfold exceptionalProjectionMorphismOfCompactification
+    infer_instance
+  exact isIso_homMk_of_isIso _
 
 /-- The components of the exceptional projection are isomorphisms (`ℚ̄_ℓ`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app

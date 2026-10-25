@@ -76,15 +76,23 @@ lemma map_eq_map_iff {X Y : C} (f g : X ⟶ Y) :
     rw [← cancel_epi (m • 𝟙 ((Q M C).obj X)), Linear.smul_comp, Linear.smul_comp, id_comp,
       id_comp, ← Functor.map_smul, ← Functor.map_smul, h]
 
+/-- For a localization functor `L` at the morphisms with `M`-torsion mapping cone, every morphism
+`L X ⟶ L Y` becomes the image of a morphism `X ⟶ Y` after multiplication by an element of `M`. -/
+lemma exists_smul_eq_map_of_isLocalization {D' : Type*} [Category* D'] [Preadditive D']
+    [Linear R D'] (L : C ⥤ D') [L.IsLocalization (W M C)] [L.Linear R] {X Y : C}
+    (φ : L.obj X ⟶ L.obj Y) :
+    ∃ m ∈ M, ∃ f : X ⟶ Y, m • φ = L.map f := by
+  obtain ⟨ψ, rfl⟩ := Localization.exists_leftFraction L (W M C) φ
+  obtain ⟨m, hm, t, ht⟩ := exists_comp_eq_smul_id ψ.hs
+  refine ⟨m, hm, ψ.f ≫ t, ?_⟩
+  rw [L.map_comp, ← MorphismProperty.LeftFraction.map_comp_map_s, assoc,
+    ← L.map_comp, ht, Functor.map_smul, L.map_id, Linear.comp_smul, comp_id]
+
 /-- Every morphism of the rationalization between objects of `C` becomes the image of a morphism
 of `C` after multiplication by an element of `M`. -/
 lemma exists_smul_eq_map {X Y : C} (φ : (Q M C).obj X ⟶ (Q M C).obj Y) :
-    ∃ m ∈ M, ∃ f : X ⟶ Y, m • φ = (Q M C).map f := by
-  obtain ⟨ψ, rfl⟩ := Localization.exists_leftFraction (Q M C) (W M C) φ
-  obtain ⟨m, hm, t, ht⟩ := exists_comp_eq_smul_id ψ.hs
-  refine ⟨m, hm, ψ.f ≫ t, ?_⟩
-  rw [Functor.map_comp, ← MorphismProperty.LeftFraction.map_comp_map_s, assoc,
-    ← Functor.map_comp, ht, Functor.map_smul, Functor.map_id, Linear.comp_smul, comp_id]
+    ∃ m ∈ M, ∃ f : X ⟶ Y, m • φ = (Q M C).map f :=
+  exists_smul_eq_map_of_isLocalization (Q M C) φ
 
 /-- In the rationalization, multiplication by an element of `M` is injective on morphisms. -/
 lemma smul_left_injective {m : R} (hm : m ∈ M) {A B : Rationalization M C} :

@@ -12,11 +12,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 # Additivity of the six functors on bounded constructible complexes
 
-The derived pushforward `Rf_*`, the extension by zero `j_!` along an open immersion and the
-derived lower shriek `Rf_!` on bounded constructible complexes `Dᵇc(-)⟦Λ⟧` are additive
-functors: they are restrictions (`ObjectProperty.lift`) of additive functors on the ambient
-derived categories, the right derived functor `R((f)_*⟦Λ⟧)` of an additive functor and the
-functor `D((j)_!open⟦Λ⟧)` induced by an exact functor.
+The derived pullback `Lf^*`, the derived pushforward `Rf_*`, the extension by zero `j_!` along an
+open immersion and the derived lower shriek `Rf_!` on bounded constructible complexes
+`Dᵇc(-)⟦Λ⟧` are additive functors. The pullback is a left adjoint; the other functors are
+restrictions (`ObjectProperty.lift`) of additive functors on the ambient derived categories, the
+right derived functor `R((f)_*⟦Λ⟧)` of an additive functor and the functor `D((j)_!open⟦Λ⟧)`
+induced by an exact functor.
 
 -/
 
@@ -40,6 +41,12 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
     (boundedConstructibleLowerStar ℓ f).Additive := by
   unfold boundedConstructibleLowerStar
+  infer_instance
+
+/-- The derived pullback `Lf^*` on bounded constructible complexes is additive. -/
+instance additive_boundedConstructibleUpperStar (f : X ⟶ Y) :
+    (boundedConstructibleUpperStar Λ ℓ f).Additive := by
+  unfold boundedConstructibleUpperStar
   infer_instance
 
 /-- The extension by zero along an open immersion on bounded constructible complexes is

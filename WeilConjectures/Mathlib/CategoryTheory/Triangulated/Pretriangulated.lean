@@ -156,6 +156,30 @@ theorem triangleHom_ext_of_subsingleton {T T' : Triangle C} (hT : T ∈ distTria
   · exact h
   · exact Triangle.cancel_mor₂_of_subsingleton hT (by rw [τ.comm₂, τ'.comm₂, h])
 
+/-- For a morphism `φ : T ⟶ T'` of distinguished triangles whose second objects vanish,
+```
+X  ⟶ 0 ⟶ Z  ⟶ X⟦1⟧
+↓φ₁       ↓φ₃    ↓φ₁⟦1⟧
+X' ⟶ 0 ⟶ Z' ⟶ X'⟦1⟧
+```
+the first component of `φ` vanishes if and only if the third one does: the third morphisms of
+the triangles are isomorphisms, and they intertwine `φ.hom₃` with `φ.hom₁⟦1⟧'`. -/
+lemma hom₁_eq_zero_iff_hom₃_eq_zero {T T' : Triangle C} (φ : T ⟶ T')
+    (hT : T ∈ distTriang C) (hT' : T' ∈ distTriang C) (h₂ : IsZero T.obj₂)
+    (h₂' : IsZero T'.obj₂) : φ.hom₁ = 0 ↔ φ.hom₃ = 0 := by
+  have := (T.isZero₂_iff_isIso₃ hT).1 h₂
+  have := (T'.isZero₂_iff_isIso₃ hT').1 h₂'
+  have hc := φ.comm₃
+  constructor
+  · intro h
+    rw [h, Functor.map_zero, Limits.comp_zero] at hc
+    rw [← cancel_mono T'.mor₃, ← hc, Limits.zero_comp]
+  · intro h
+    rw [h, Limits.zero_comp] at hc
+    have : (CategoryTheory.shiftFunctor C (1 : ℤ)).map φ.hom₁ = 0 := by
+      rw [← cancel_epi T.mor₃, hc, Limits.comp_zero]
+    exact (CategoryTheory.shiftFunctor C (1 : ℤ)).map_injective (by rw [this, Functor.map_zero])
+
 section Adjunction
 
 variable {D : Type*} [Category* D]

@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 
 /-!
 # The double-dual morphism: shifts, triangles, restriction and push-forward
@@ -224,13 +225,6 @@ lemma map_toIhomIhom_comp_dualComparison (X : C) :
     Functor.LaxBraided.braided_assoc, uncurry_toIhomIhom,
     BraidedCategory.braiding_naturality_left_assoc, MonoidalCategory.whiskerLeft_comp_assoc,
     ihom.ev_naturality, Functor.LaxMonoidal.ihomComparison_ev_assoc]
-
-omit [BraidedCategory D] in
-/-- Blueprint `lem-weil-delta-proper-pushforward` (auxiliary): the precomposition
-`[Y, W'] ⟶ [X, W']` with an isomorphism `X ⟶ Y` is an isomorphism. -/
-lemma isIso_pre_app {X Y : D} (f : X ⟶ Y) [IsIso f] (Z : D) : IsIso ((pre f).app Z) :=
-  ⟨(pre (inv f)).app Z, by simp [← NatTrans.comp_app, ← pre_map],
-    by simp [← NatTrans.comp_app, ← pre_map]⟩
 
 /-- Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward`: if the
 dual comparisons of `X` and of `[X, W]` along a lax braided functor `G` are isomorphisms, then

@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedComplement
 
 /-!
 
@@ -52,10 +53,14 @@ and `..._eq_exchangeRight` for the exchange morphism).
 - `ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`: the
   exchange morphism `Rg'_* ⋙ j_! ⟶ j'_! ⋙ Rg_*`.
 
-## Sorried input
+## Base change for extension by zero
 
-- `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'`: base
-  change for extension by zero (blueprint `sk-def-sfb-open-base-change`).
+`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'` (blueprint
+`sk-def-sfb-open-base-change`): the restrictions to `X'` and to its closed complement jointly
+reflect isomorphisms. Over `X'` the exchange morphism is an isomorphism because both extensions
+by zero are fully faithful (`CategoryTheory.Adjunction.isIso_map_exchangeLeft_app`). Over the
+closed complement both sides vanish: the square being cartesian, the complement of `X'` maps into
+the complement of `X`.
 
 -/
 
@@ -176,16 +181,60 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft
     boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep' Adjunction.exchangeLeft
   rfl
 
-/-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
-square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
-an isomorphism.
+/-- **Base change for extension by zero** (blueprint `sk-def-sfb-open-base-change`) on bounded
+constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange
+morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
 
 Mathematically, since the square is cartesian, `X'` is the preimage of the open subscheme
 `X ⊆ Z` under `g`, and on stalks at points of `Z'_proét` both sides are the pulled-back stalk at
 points of `X'` and vanish outside `X'`. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' (sq : IsPullback g' j' j g) :
-    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq.toCommSq) :=
-  sorry
+    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq.toCommSq) := by
+  have : QuasiCompact (j'.left ≫ Z'.hom) := by
+    rw [Over.w j']
+    infer_instance
+  have : QuasiCompact j'.left := QuasiCompact.of_comp j'.left Z'.hom
+  -- The range of `j'` is the preimage of the range of `j` under `g`.
+  have hrange : Set.range j'.left.base = g.left.base ⁻¹' Set.range j.left.base := by
+    have hsq : IsPullback g'.left j'.left j.left g.left := sq.map (Over.forget _)
+    ext x
+    constructor
+    · rintro ⟨y, rfl⟩
+      exact ⟨g'.left y, by rw [← Scheme.Hom.comp_apply, hsq.w, Scheme.Hom.comp_apply]⟩
+    · intro hx
+      have hx' : x ∈ Set.range (pullback.snd j.left g.left) := by
+        rw [IsOpenImmersion.range_pullbackSnd]
+        exact hx
+      obtain ⟨z, rfl⟩ := hx'
+      exact ⟨hsq.isoPullback.inv z, by rw [← Scheme.Hom.comp_apply, hsq.isoPullback_inv_snd]⟩
+  let c := overClosedComplement j'
+  have hK (K : Dᵇc(X.left)⟦Λ⟧) :
+      IsIso ((boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq.toCommSq).app K) := by
+    refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl Λ ℓ c j'
+      (isCompl_range_overClosedComplement j') _ ?_ ?_
+    · -- Over `X'`: both extensions by zero are fully faithful.
+      rw [boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft]
+      exact Adjunction.isIso_map_exchangeLeft_app _ _ _ K
+    · -- Over the closed complement of `X'`: both sides vanish.
+      have hS : IsZero ((boundedConstructibleUpperStar Λ ℓ c).obj
+          ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j').obj
+            ((boundedConstructibleUpperStar Λ ℓ g').obj K))) :=
+        isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ j' c
+          (isCompl_range_overClosedComplement j').disjoint.symm _
+      have hdisj : Disjoint (Set.range j.left.base) (Set.range (c ≫ g).left.base) := by
+        rw [Set.disjoint_left]
+        rintro _ ⟨x, rfl⟩ ⟨y, hy⟩
+        have hy' : c.left y ∈ Set.range j'.left.base := by
+          rw [hrange]
+          exact ⟨x, by simpa using hy.symm⟩
+        exact (isCompl_range_overClosedComplement j').disjoint.ne_of_mem ⟨y, rfl⟩ hy' rfl
+      have hT : IsZero ((boundedConstructibleUpperStar Λ ℓ c).obj
+          ((boundedConstructibleUpperStar Λ ℓ g).obj
+            ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj K))) :=
+        (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ j (c ≫ g) hdisj
+          K).of_iso ((boundedConstructibleUpperStarComp Λ ℓ c g).app _).symm
+      exact ⟨⟨hT.to_ _, hS.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
+  exact NatIso.isIso_of_isIso_app _
 
 /-- The extension-by-zero exchange isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` on bounded
 constructible complexes for a cartesian square of open immersions: the inverse of the canonical

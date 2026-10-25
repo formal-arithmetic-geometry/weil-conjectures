@@ -166,8 +166,9 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ (verdierDual ℓ K) :=
   Verdier.bidualityMap (dualizingComplex ℓ X) K
 
-/-- **Constructible Verdier biduality**: the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an
-isomorphism for `K` bounded constructible. See the module docstring.
+/-- **Constructible Verdier biduality** (blueprint `sk-thm-pd-verdier-duality`): the double-dual
+morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for `K` bounded constructible. See the module
+docstring.
 
 The dualizing complex must be taken relative to `Spec k` (or at least to a regular base): for the
 complex `Ra^! ℚ̄_ℓ = ℚ̄_ℓ` relative to `a = 𝟙` on a nodal curve and `K` the skyscraper `ℚ̄_ℓ` at

@@ -82,6 +82,8 @@ lemma leftDerivedUpperStarTensor_comp_aux
     (leftDerivedUpperStarTensor_naturality Λ f _ _)
     (quotient_map_upperStarTensorComplexHom_comp Λ f g A B)
 
+set_option maxHeartbeats 1000000 in
+-- the derived tensor products of module objects are unfolded
 /-- The composite `L(f ≫ g)^*(K ⊗ᴸ M) ≅ Lf^* Lg^*(K ⊗ᴸ M) ⟶ Lf^*(Lg^* K ⊗ᴸ Lg^* M) ⟶
 Lf^* Lg^* K ⊗ᴸ Lf^* Lg^* M ≅ L(f ≫ g)^* K ⊗ᴸ L(f ≫ g)^* M` of the tensor comparisons of `Lg^*` and
 `Lf^*`, read through the composition isomorphism. -/

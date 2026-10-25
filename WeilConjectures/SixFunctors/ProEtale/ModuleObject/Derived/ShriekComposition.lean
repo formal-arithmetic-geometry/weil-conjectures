@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 
@@ -67,11 +68,17 @@ composite of `Rf_! ⊣ Rf^!` and `Rg_! ⊣ Rg^!`.
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp` and its `_padicAlgCl` version:
   `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`.
 
+## Main results
+
+- `isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl`: for `ℚ̲̄_ℓ`,
+  the exchange morphism is an isomorphism for `p'` proper. It is the exchange
+  morphism of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange`
+  (`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq`).
+
 ## Sorried input
 
-- `ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`
-  and its `_padicAlgCl` version: the exchange morphism is an isomorphism for `p'` proper.
-- `Compactification.exists_isPullback_overG_overI`: the existence of the compactification `d`.
+- `ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`:
+  the same statement for `E̲`.
 
 -/
 
@@ -169,6 +176,32 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
   boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep ℓ ≫
     (boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep ℓ sq).hom ≫
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep ℓ
+
+/-- The exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` is the exchange morphism
+`boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange`: the two
+extension-by-zero base-change morphisms they are built from are the same exchange morphism. -/
+lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq
+    (sq : IsPullback p i' j p') :
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq =
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq := by
+  have e : boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq =
+      boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'
+        (Profinite.padicAlgClRingObj ℓ) ℓ sq := by
+    refine Iso.ext ((Iso.inv_eq_inv _ _).1 ?_)
+    change boundedConstructibleOpenImmersionLowerShriekBaseChange
+        (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq =
+      boundedConstructibleOpenImmersionLowerShriekBaseChange'
+        (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq
+    rw [boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft,
+      boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft]
+  unfold boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep'
+  rw [e]
+  rfl
 
 end Exchange
 
@@ -383,8 +416,9 @@ theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
 `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl
     (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq) :=
-  sorry
+    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq) := by
+  rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq]
+  exact isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ sq
 
 end ExchangeIsIso
 
