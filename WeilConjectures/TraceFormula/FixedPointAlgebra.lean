@@ -64,6 +64,13 @@ theorem mul_aeval_eq_of_mul_sub_eq_zero {R A : Type*} [CommRing R] [CommRing A] 
     simp only [map_mul, aeval_X, eval_X]
     linear_combination u i * hp + algebraMap R A (eval c p) * h i
 
+/-- Over a finite field `K` with `q` elements, `expand (q ^ m) f = f ^ (q ^ m)`. -/
+theorem expand_card_pow {K : Type*} [Field K] [Fintype K] (m : ℕ) (f : MvPolynomial σ K) :
+    expand (Fintype.card K ^ m) f = f ^ Fintype.card K ^ m := by
+  induction m generalizing f with
+  | zero => simp
+  | succ m ih => rw [pow_succ, expand_mul, expand_card, ih, ← pow_mul, mul_comm]
+
 section EvalPoints
 
 variable (F L : Type*) [Field F] [CommRing L] [Algebra F L]
