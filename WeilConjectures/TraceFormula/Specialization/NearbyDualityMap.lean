@@ -288,6 +288,28 @@ theorem nearbyDualityMap_restrict
   rw [hL, hR, reassoc_of% (hμ M _), 
     ← reassoc_of% (hα (A := M ⊗ (ihom M).obj ωX) (B := ωX) ((ihom.ev M).app ωX)), ← hθ]
 
+variable {μX μU} in
+/-- An exchange `α : Ψ_X ⋙ F' ⟶ F ⋙ Ψ_U` is *monoidal* for the lax tensor maps `μ_X`, `μ_U` of
+`Ψ_X`, `Ψ_U` and those of `F`, `F'`:
+`Ψ_U(μ_F) ∘ μ_U ∘ (α ⊗ α) = α ∘ F'(μ_X) ∘ μ_{F'}`. -/
+def IsMonoidalExchange (α : ΨX ⋙ F' ⟶ F ⋙ ΨU) : Prop :=
+  ∀ A B : C, (α.app A ⊗ₘ α.app B) ≫ μU _ _ ≫ ΨU.map (Functor.LaxMonoidal.μ F A B) =
+    Functor.LaxMonoidal.μ F' _ _ ≫ F'.map (μX A B) ≫ α.app (A ⊗ B)
+
+/-- `CategoryTheory.Verdier.nearbyDualityMap_restrict` for an exchange given as a natural
+transformation `α : Ψ_X ⋙ F' ⟶ F ⋙ Ψ_U`. -/
+theorem nearbyDualityMap_restrict_natTrans
+    (hμU : ∀ {A A' B B' : U} (x : A ⟶ A') (y : B ⟶ B'),
+      (ΨU.map x ⊗ₘ ΨU.map y) ≫ μU A' B' = μU A B ≫ ΨU.map (x ⊗ₘ y))
+    (α : ΨX ⋙ F' ⟶ F ⋙ ΨU) (hμ : IsMonoidalExchange (μX := μX) (μU := μU) α)
+    (hθ : F'.map θX ≫ ρ' = α.app ωX ≫ ΨU.map ρ ≫ θU) (M : C) :
+    F'.map (nearbyDualityMap μX θX M) ≫
+        nearbyDualityMap (Functor.LaxMonoidal.μ F') ρ' (ΨX.obj M) =
+      α.app _ ≫ ΨU.map (nearbyDualityMap (Functor.LaxMonoidal.μ F) ρ M) ≫
+        nearbyDualityMap μU θU (F.obj M) ≫ (pre (α.app M)).app ωU' :=
+  nearbyDualityMap_restrict μX μU θX θU ρ ρ' (fun A ↦ α.app A) hμU (fun g ↦ α.naturality g) hμ
+    hθ M
+
 end Restriction
 
 end CategoryTheory.Verdier

@@ -12,26 +12,26 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 
 /-!
 
-# Nearby duality and open restriction
+# Nearby duality and open restriction: the concrete inputs
 
-Let `φ : N ⟶ M` be a morphism of trait models over the base (`NearbyCyclesModel.IsTraitModelOfBase`)
-over open immersions `j : Y ⟶ X` and `j' : Y' ⟶ X'`, whose map of total spaces is an open immersion
-compatible with the structure morphisms and whose square of geometric generic fibres is cartesian.
-Then the restriction `j'^* δ_{M,K}` of the duality map of `M` is identified with the duality map
-`δ_{N, j^* K}` of `N` (blueprint `det-tf-nearby-duality-proper` (2)); in particular one is an
-isomorphism if and only if the other is
-(`NearbyCyclesModel.isIso_map_nearbyDualityMap_iff_of_isOpenImmersion`).
+The compatibility of the duality map of nearby cycles with open restriction (blueprint
+`det-tf-nearby-duality-proper` (2)) is the abstract identity
+`CategoryTheory.Verdier.nearbyDualityMap_restrict_natTrans`. This file proves its concrete inputs
+for trait models:
+* the duality map of `(G, μ_G, e)` for a lax monoidal `G` is the internal-hom comparison of `G`
+  followed by `e` (`CategoryTheory.Verdier.nearbyDualityMap_eq_ihomComparison`), so for an open
+  immersion it is invertible by
+  `ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`;
+* the lax tensor map of nearby cycles on bounded constructible complexes is natural
+  (`NearbyCyclesModel.boundedConstructibleTensorMap_natural`);
+* the restricted pullback exchange is monoidal, in the lax form used there
+  (`NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange_tensor`), from the ambient
+  monoidality `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`.
 
-The inputs are
-* the abstract compatibility `CategoryTheory.Verdier.nearbyDualityMap_restrict`;
-* the invertibility of the pullback exchange `α_j` for open immersions
-  (`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isOpenImmersion`), and its monoidality
-  (`NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`);
-* the commutation of `j^*` with internal homs
-  (`ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`)
-  and with dualizing complexes (`ProEtale.CondensedRing.dualizingComplexIsoUpperStar`);
-* the compatibility of the dualizing maps with open restriction
-  (`NearbyCyclesModel.NearbyDualizingData.map_θ_comp_dualizingComplexUpperStarIso`).
+The remaining inputs are the invertibility of the pullback exchange for open immersions
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isOpenImmersion`) and the compatibility of the
+dualizing maps with open restriction
+(`NearbyCyclesModel.NearbyDualizingData.map_θ_comp_dualizingComplexUpperStarIso`).
 
 -/
 
@@ -66,6 +66,7 @@ instance isIso_pre_app {X Y : C} (f : X ⟶ Y) [IsIso f] (W : C) : IsIso ((pre f
     NatTrans.id_app], by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id,
     NatTrans.id_app]⟩
 
+omit [MonoidalClosed C] in
 /-- An exchange `α : F' Ψ_X ⟶ Ψ_U F` between strong monoidal functors which is monoidal in the
 oplax form `Ψ_U(δ_F) ∘ α ∘ F'(μ_X) = μ_U ∘ (α ⊗ α) ∘ δ_{F'}` is monoidal in the lax form. -/
 lemma lax_of_oplax_aux {C' U U' : Type*} [Category* C'] [MonoidalCategory C'] [Category* U]
@@ -99,6 +100,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] in
 /-- The lax tensor map of nearby cycles on bounded constructible complexes is natural. -/
 lemma boundedConstructibleTensorMap_natural
     (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
