@@ -43,6 +43,113 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
+section Pasting
+
+variable {S P W V : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
+  [IsSeparated S.hom] [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+  [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
+  [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+
+set_option maxHeartbeats 1000000 in
+-- the pasting identities are checked against the six-functor definitions
+/-- The compact-support base changes of the product squares of `X` and `Y` (here abstract
+cartesian squares over a base `S`) are compatible along a proper `f : X ⟶ Y`: pasting the
+cartesian squares `h ≫ p₁' = p_X ≫ f` and `g ≫ p_Y = p₂ ≫ f` with the product squares,
+`Ex_!` of the square of `X` is read off from `Ex_!` of the square of `Y`. -/
+theorem lowerShriekBaseChange_inv_app_paste (aX : X ⟶ S) (aY : Y ⟶ S) (hA : f ≫ aY = aX)
+    {pX : P ⟶ X} {pY : P ⟶ Y} {p₁ p₂ : W ⟶ X} {p₁' p₂' : V ⟶ Y} {g : W ⟶ P} {h : P ⟶ V}
+    (hp : g ≫ pX = p₁) (hpY : h ≫ p₂' = pY) (sqY : IsPullback p₂' p₁' aY aY)
+    (sqXY : IsPullback pY pX aY aX) (sqX : IsPullback p₂ p₁ aX aX) (s₁ : IsPullback h pX p₁' f)
+    (s₃ : IsPullback p₂ g f pY) (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    [IsIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app
+      ((boundedConstructibleLowerStar _ ℓ f).obj B))]
+    [IsIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B)] :
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁).app
+        ((boundedConstructibleUpperStar _ ℓ p₂').obj ((boundedConstructibleLowerStar _ ℓ f).obj B)) ≫
+      (boundedConstructibleLowerShriek _ ℓ pX).map
+        ((boundedConstructibleUpperStarComp _ ℓ h p₂').inv.app
+            ((boundedConstructibleLowerStar _ ℓ f).obj B) ≫
+          eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
+            ((boundedConstructibleLowerStar _ ℓ f).obj B)) hpY) ≫
+          (boundedConstructibleUpperStar _ ℓ pY).map
+            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B) ≫
+          (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₃).app B) ≫
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g pX).inv.app
+        ((boundedConstructibleUpperStar _ ℓ p₂).obj B) ≫
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj
+        ((boundedConstructibleUpperStar _ ℓ p₂).obj B)) hp) ≫
+      inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B) =
+    (boundedConstructibleUpperStar _ ℓ f).map
+        (inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app
+          ((boundedConstructibleLowerStar _ ℓ f).obj B))) ≫
+      (boundedConstructibleUpperStarComp _ ℓ f aY).inv.app _ ≫
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
+        ((boundedConstructibleLowerShriek _ ℓ aY).obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj B))) hA) ≫
+      (boundedConstructibleUpperStar _ ℓ aX).map
+        ((boundedConstructibleLowerShriek _ ℓ aY).map
+            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B) ≫
+          (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app B ≫
+          eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj B) hA)) := by
+  subst hA hp hpY
+  have hV : (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B = _ :=
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ s₃ sqXY B
+  have hH : (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqXY).app
+      ((boundedConstructibleLowerShriek _ ℓ f).obj B) = _ :=
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ s₁ sqY _
+  have nY := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).naturality
+    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)
+  have n₁ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁).naturality
+    ((boundedConstructibleUpperStar _ ℓ p₂').map
+      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))
+  have nC := (boundedConstructibleUpperStarComp _ ℓ f aY).hom.naturality
+    ((boundedConstructibleLowerShriek _ ℓ aY).map
+      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))
+  have nC' := (boundedConstructibleUpperStarComp _ ℓ h p₂').inv.naturality
+    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)
+  simp only [Functor.comp_map, Functor.comp_obj] at nY n₁ nC nC'
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_id]
+  simp only [← Category.assoc]
+  rw [IsIso.comp_inv_eq]
+  simp only [Category.assoc]
+  rw [hV, hH]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  have c₁ : (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app B) ≫
+      (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).hom.app B) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  have c₂ : (boundedConstructibleUpperStar _ ℓ f).map
+        (inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app
+          ((boundedConstructibleLowerStar _ ℓ f).obj B))) ≫
+      (boundedConstructibleUpperStar _ ℓ f).map ((boundedConstructibleUpperStar _ ℓ aY).map
+        ((boundedConstructibleLowerShriek _ ℓ aY).map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))) ≫
+      (boundedConstructibleUpperStar _ ℓ f).map
+        ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app
+          ((boundedConstructibleLowerShriek _ ℓ f).obj B)) =
+      (boundedConstructibleUpperStar _ ℓ f).map ((boundedConstructibleLowerShriek _ ℓ p₁').map
+        ((boundedConstructibleUpperStar _ ℓ p₂').map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))) := by
+    rw [← Functor.map_comp, ← Functor.map_comp, nY, IsIso.inv_hom_id_assoc]
+  have c₃ : (boundedConstructibleLowerShriek _ ℓ pX).map ((boundedConstructibleUpperStar _ ℓ h).map
+        ((boundedConstructibleUpperStar _ ℓ p₂').map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))) ≫
+      (boundedConstructibleLowerShriek _ ℓ pX).map
+        ((boundedConstructibleUpperStarComp _ ℓ h p₂').inv.app
+          ((boundedConstructibleLowerShriek _ ℓ f).obj B)) =
+      (boundedConstructibleLowerShriek _ ℓ pX).map
+          ((boundedConstructibleUpperStarComp _ ℓ h p₂').inv.app
+            ((boundedConstructibleLowerStar _ ℓ f).obj B)) ≫
+        (boundedConstructibleLowerShriek _ ℓ pX).map
+          ((boundedConstructibleUpperStar _ ℓ (h ≫ p₂')).map
+            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp, nC']
+  simp only [reassoc_of% c₁, Category.id_comp]
+  rw [reassoc_of% nC, Iso.inv_hom_id_app_assoc, reassoc_of% c₂, reassoc_of% n₁, reassoc_of% c₃]
+
+end Pasting
+
 /-- **Base change along the Künneth square of a proper morphism** (blueprint
 `lem-trf-trace-source-exchange`, Step 3): the unit of `Lq^* ⊣ Rq_!` for `q = f × f`, followed by
 the composition isomorphism of `q ≫ p₁' = p₁ ≫ f`, the transported counit, the compact-support
