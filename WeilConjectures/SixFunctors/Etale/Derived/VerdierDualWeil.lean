@@ -251,7 +251,7 @@ theorem isWeilEquivariant_verdierDual_curry
         (MonoidalClosed.curry b) :=
   MonoidalClosed.isWeilEquivariant_curry _ φ ψ φω hb
 
-attribute [local instance] derivedBraidedCategory in
+attribute [local instance] _root_.DerivedCategory.braidedCategory' in
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **biduality is Weil equivariant**. For a
 strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X` such that the dual Weil datum on
 `𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) is invertible (for instance an

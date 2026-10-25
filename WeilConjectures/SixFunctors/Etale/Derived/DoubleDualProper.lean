@@ -193,7 +193,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasCompactification aY]
   (f : X ⟶ Y) [IsProper f] [HasCompactification f]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y`, `Rf_* δ_K` is an
 isomorphism if and only if `δ_{Rf_* K}` is. The hypotheses are the braided axiom for `Lf^*`

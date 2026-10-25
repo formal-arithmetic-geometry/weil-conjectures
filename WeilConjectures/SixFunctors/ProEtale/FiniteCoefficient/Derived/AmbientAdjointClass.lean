@@ -475,7 +475,7 @@ lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_trans
     ← rightDerivedLowerShriekOfCompactificationEtaleOriginIso_trans Λ c₁ c₂ c₃]
   rfl
 
-variable [HasCompactification f] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+variable [HasCompactification f] [CompactSpace Y]
 
 /-- Blueprint `thm-sf-ambient-adjoint-class` (2): for a compactification `c` of `f`, the class
 adjunction between the pro-étale `Rf_!(c)` on bounded below objects of étale origin and
@@ -538,7 +538,7 @@ section Theorem
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y]
   {f : X ⟶ Y} [QuasiCompact f] [HasCompactification f]
-  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+  [CompactSpace Y]
 
 include aY
 
@@ -562,7 +562,8 @@ exponent is invertible on `Y`. Then:
    comparisons of the compact-support functors) satisfy the cocycle condition.
 
 No adjunction on arbitrary unbounded pro-étale objects is asserted. That `f^×` preserves bounded
-below objects is the instance argument `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`. -/
+below objects uses that `Y` is quasi-compact
+(`AlgebraicGeometry.Etale.plus_rightDerivedUpperShriek_obj`). -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_bijective_classAdjunction
     (c : Compactification f) (d : ℕ) (hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) :
     HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) c.g (2 * d) ∧

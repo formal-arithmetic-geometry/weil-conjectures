@@ -16,9 +16,9 @@ Let `X` be a scheme over a base `s` with structure morphism `aX : X ⟶ s`, and 
 the derived category `D(X_ét, Λ)` of étale sheaves of modules over a finite ring `Λ`. A
 *cohomological correspondence* on `K` is a scheme `C` with two morphisms `c₁ c₂ : C ⟶ X` over
 `s`, i.e. `c = (c₁, c₂) : C ⟶ X ×_s X`, together with a morphism `u : c₂^* K ⟶ Rc₁^! K` in
-`D(C_ét, Λ)`. Here `c₂` is the pullback leg and `c₁` the exceptional leg. The *graph correspondence* of an endomorphism `h : X ⟶ X`
-over `s` and a morphism `v : h^* K ⟶ K` is `C = X`, `c₁ = 𝟙`, `c₂ = h`, `u = v`; its fixed scheme
-is the fixed scheme `Fix(h)` of `h`.
+`D(C_ét, Λ)`. Here `c₂` is the pullback leg and `c₁` the exceptional leg. The *graph
+correspondence* of an endomorphism `h : X ⟶ X` over `s` and a morphism `v : h^* K ⟶ K` is
+`C = X`, `c₁ = 𝟙`, `c₂ = h`, `u = v`; its fixed scheme is the fixed scheme `Fix(h)` of `h`.
 
 ## Main definitions
 

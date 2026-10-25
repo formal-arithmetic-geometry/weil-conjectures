@@ -55,7 +55,7 @@ set_option hygiene false in
 local notation "𝐃(" X ", " Λ ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 section DoubleDual
 

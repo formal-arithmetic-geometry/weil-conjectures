@@ -57,7 +57,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (f : X ⟶ Y) (g : Y ⟶ Z)
 
 set_option maxHeartbeats 1000000 in
--- the coefficient ring `ℚ̲̄_ℓ` is unfolded when comparing the tensor comparisons
+-- comparing the tensor comparisons unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 lemma δ_boundedConstructibleUpperStar_hom (K M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) K M).hom =
       ((leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj ℓ) f.left).app K.obj).app M.obj :=
@@ -87,7 +87,7 @@ lemma boundedConstructibleUpperStarComp_hom_app_tensor_δ (K M :
   exact key
 
 set_option maxHeartbeats 1000000 in
--- the coefficient ring `ℚ̲̄_ℓ` is unfolded when comparing the tensor comparisons
+-- comparing the tensor comparisons unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 variable (X) in
 /-- **The identity isomorphism of the derived pullback of bounded constructible complexes is
 monoidal**: `L(𝟙 X)^*(K ⊗ M) ⟶ L(𝟙 X)^* K ⊗ L(𝟙 X)^* M ⟶ K ⊗ M` is the identity isomorphism. -/
@@ -116,7 +116,7 @@ lemma boundedConstructible_braiding_hom_hom (K M : Dᵇc(X.left)⟦Profinite.pad
   rfl
 
 set_option maxHeartbeats 1000000 in
--- the coefficient ring `ℚ̲̄_ℓ` is unfolded when comparing the tensor comparisons
+-- comparing the tensor comparisons unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **The derived pullback of bounded constructible complexes is braided** for the Koszul
 braidings: `Lf^* β_{K, M} ≫ δ_{M, K} = δ_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
 lemma boundedConstructibleUpperStar_map_braiding_hom_δ (K M :

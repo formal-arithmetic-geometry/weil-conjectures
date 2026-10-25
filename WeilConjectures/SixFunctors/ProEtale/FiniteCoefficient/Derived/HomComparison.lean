@@ -173,7 +173,7 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
         ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
           (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
             (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) ∧
-    ∀ [HasCompactification aX] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) aX],
+    ∀ [HasCompactification aX],
       Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
           (Etale.dualizingComplex Λ aX) ≅
         ProEtale.dualizingComplex Λ aX) ∧

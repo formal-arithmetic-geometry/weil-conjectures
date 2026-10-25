@@ -238,7 +238,7 @@ structure CoefficientChange where
   /-- The change of coefficients of the dualizing complexes. -/
   dualizingComplexIso {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     (functor X).obj (dualizingComplex Λ f) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ') f
+      dualizingComplex Λ' f
 
 variable {Λ Λ'} in
 /-- Blueprint `def-sf-orientation`: Orientation datum.

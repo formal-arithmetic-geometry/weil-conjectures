@@ -48,8 +48,7 @@ open Scheme
 
 section UpperStar
 
-variable {(Profinite.padicAlgClRingObj ℓ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
@@ -98,8 +97,7 @@ end UpperStar
 
 namespace NearbyCyclesModel
 
-variable {(Profinite.padicAlgClRingObj ℓ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-  (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -111,8 +109,9 @@ variable {(Profinite.padicAlgClRingObj ℓ) : Sheaf (coherentTopology Profinite.
 
 namespace Hom
 
-variable (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
-  (hN : N.PreservesBoundedConstructible Λ)
+variable (φ : M.Hom N f.left f'.left)
+  (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 /-! ### The pushforward exchange -/
 
@@ -120,8 +119,8 @@ variable (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
 lemma boundedConstructiblePushforwardExchange_eq_liftExchange :
     φ.boundedConstructiblePushforwardExchange ℓ hM hN =
       liftExchange (φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ))
-        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K.obj K.property)
-        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K.obj K.property)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
         (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property) :=
   rfl
 
@@ -132,8 +131,8 @@ private lemma liftExchange_pushforward_app_hom_aux (K : Dᵇc(X.left)⟦Profinit
         ℓ) ⟶ M.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
             R((f'.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)) :
     ((liftExchange χ
-        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K.obj K.property)
-        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K.obj K.property)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
         (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property) :
       boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
         boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar ℓ f').app K).hom =
@@ -160,10 +159,8 @@ noncomputable def boundedConstructiblePullbackExchange :
           boundedConstructibleNearbyCycles hM :=
   liftExchange (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) (fun K ↦ hN K.obj K.property)
     (fun K ↦ hM K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f'
-        K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K.obj
-        K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
 
 /-- The restricted pullback exchange is `NearbyCyclesModel.liftExchange` of the ambient one. -/
 lemma boundedConstructiblePullbackExchange_eq_liftExchange :
@@ -171,10 +168,10 @@ lemma boundedConstructiblePullbackExchange_eq_liftExchange :
       liftExchange (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) (fun K ↦ hN K.obj
           K.property)
         (fun K ↦ hM K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f'
-            K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f
-            K.obj K.property) :=
+        (fun K ↦
+          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
+        (fun K ↦
+          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K) :=
   rfl
 
 /-- The components of `NearbyCyclesModel.liftExchange` of any transformation
@@ -184,10 +181,10 @@ private lemma liftExchange_pullback_app_hom_aux (K : Dᵇc(Y.left)⟦Profinite.p
         ℓ⟧) ⟶ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ M.nearbyCycles
             (Profinite.padicAlgClRingObj ℓ)) :
     ((liftExchange α (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f'
-            K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f
-            K.obj K.property) :
+        (fun K ↦
+          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
+        (fun K ↦
+          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K) :
       boundedConstructibleNearbyCycles hN ⋙ boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
@@ -229,8 +226,8 @@ private lemma unit_comp_map_unit_comp_liftExchange_app_aux
     boundedConstructibleUnit ℓ hN ≫ (boundedConstructibleNearbyCycles hN).map
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).unit.app (𝟙_ _)) ≫
         (liftExchange χ
-          (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K.obj K.property)
-          (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K.obj K.property)
+          (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+          (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
           (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property) :
             boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
             boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar ℓ f').app
@@ -270,10 +267,8 @@ lemma boundedConstructibleUnit_comp_map_unit_comp_pushforwardExchange_app :
   rw [boundedConstructiblePushforwardExchange_eq_liftExchange]
   exact unit_comp_map_unit_comp_liftExchange_app_aux ℓ hM hN (φ.pushforwardExchange
       (Profinite.padicAlgClRingObj ℓ)) _ _
-    (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ((Profinite.padicAlgClRingObj ℓ)
-        := (Profinite.padicAlgClRingObj ℓ)) ℓ f (𝟙_ _))
-    (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ((Profinite.padicAlgClRingObj ℓ)
-        := (Profinite.padicAlgClRingObj ℓ)) ℓ f' (𝟙_ _))
+    (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ f (𝟙_ _))
+    (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ f' (𝟙_ _))
     (φ.unit_comp_map_unit_comp_pushforwardExchange_app (Profinite.padicAlgClRingObj ℓ))
 
 /-! ### The mate relation -/
@@ -322,8 +317,8 @@ private lemma liftExchange_eq_mateEquiv_aux
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K).hom =
         adj.counit.app K.obj) :
     (liftExchange χ
-        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K.obj K.property)
-        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K.obj K.property)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
         (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property) :
       boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
         boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar ℓ f') =
@@ -331,9 +326,9 @@ private lemma liftExchange_eq_mateEquiv_aux
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
         (liftExchange α (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property)
           (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ
-              f' K.obj K.property)
-          (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f
-              K.obj K.property) :
+              f' K)
+          (fun K ↦
+            boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K) :
         boundedConstructibleNearbyCycles hN ⋙ boundedConstructibleUpperStar
             (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
           boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
@@ -360,10 +355,8 @@ lemma boundedConstructiblePushforwardExchange_eq_mateEquiv :
     boundedConstructiblePullbackExchange_eq_liftExchange]
   exact liftExchange_eq_mateEquiv_aux ℓ hM hN (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))
       (φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ))
-    _ _ rfl (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom
-        ((Profinite.padicAlgClRingObj ℓ) := (Profinite.padicAlgClRingObj ℓ)) ℓ f')
-    (boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom ((Profinite.padicAlgClRingObj
-        ℓ) := (Profinite.padicAlgClRingObj ℓ)) ℓ f)
+    _ _ rfl (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ f')
+    (boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom ℓ f)
 
 end Hom
 

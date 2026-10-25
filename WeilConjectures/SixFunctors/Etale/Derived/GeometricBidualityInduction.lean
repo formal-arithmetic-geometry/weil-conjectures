@@ -86,7 +86,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A]
   (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism only depends on the
 structure morphism, not on the (propositional) instances attached to it. -/
@@ -259,7 +259,7 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- Blueprint `lem-weil-delta-restriction`, after a further functor `H`: for a quasi-compact
 open immersion `j : W ⟶ Y` and finite coefficients, `H δ_{Lj^* K}` (relative to

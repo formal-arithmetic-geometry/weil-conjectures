@@ -36,7 +36,7 @@ categories.
 # Main Results
 
 - `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek` : `Rf^! : D(Y_proét) ⥤ D(X_proét)`,
-  with scoped notation `R(f)^![A]`.
+  with scoped notation `R(f)^![Λ]`.
 - `AlgebraicGeometry.ProEtale.plus_rightDerivedUpperShriek_obj`,
   `AlgebraicGeometry.ProEtale.plusEtaleOrigin_rightDerivedUpperShriek_obj` : `Rf^!` sends a
   bounded below object to an object bounded below of étale origin.
@@ -47,7 +47,7 @@ categories.
   `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` for `K` bounded below of étale origin and `L` bounded below,
   whose inverse is `g ↦ Rf_! g ≫ ε_L`.
 - `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekPlus` : `Rf^! : D⁺(Y_proét) ⥤ D⁺(X_proét)`,
-  the restriction of `R(f)^![A]`, with scoped notation `R(f)^![A]+`.
+  the restriction of `R(f)^![Λ]`, with scoped notation `R(f)^![Λ]+`.
 
 ## Implementation notes
 
@@ -64,13 +64,11 @@ categories.
   `sk-prop-sf-existence` lives on the localizing closures `Loc(Dctf)`, see
   `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizing` in
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizing`.
-* The definition of `Rf^!` only needs the étale `Rf_!` to be a left adjoint, so that `f^×`
-  exists; for torsion coefficients this is the instance
-  `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`. The results on bounded below
-  objects and the adjunction take `[AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek A f]`:
-  that `f^×` preserves bounded below objects. This rests on the finite cohomological amplitude of
-  proper direct images; for torsion coefficients it is the instance
-  `AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`, which needs `Y` quasi-compact.
+* The definition uses the étale exceptional inverse image `f^× = Rf^!` at a finite coefficient
+  ring `Λ` (`AlgebraicGeometry.Etale.rightDerivedUpperShriek`). The results on bounded below
+  objects and the adjunction take `[CompactSpace Y]`, under which `f^×` preserves bounded below
+  objects (`AlgebraicGeometry.Etale.plus_rightDerivedUpperShriek_obj`); this rests on the finite
+  cohomological amplitude of proper direct images.
 
 -/
 
@@ -180,7 +178,7 @@ lemma plus_rightDerivedUpperShriek_obj
 variable (A) (Λ)
 
 /-- The exceptional inverse image `Rf^! : D⁺(Y_proét) ⥤ D⁺(X_proét)` on the *bounded below*
-derived categories of pro-étale sheaves: the restriction of `R(f)^![A]`, which is well defined
+derived categories of pro-étale sheaves: the restriction of `R(f)^![Λ]`, which is well defined
 by `plus_rightDerivedUpperShriek_obj`. -/
 noncomputable def rightDerivedUpperShriekPlus :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
@@ -192,7 +190,7 @@ noncomputable def rightDerivedUpperShriekPlus :
 scoped notation "R(" f ")^![" A "]+" =>
   rightDerivedUpperShriekPlus A f
 
-/-- The bounded below `R(f)^![A]+` is compatible with the inclusions of the bounded below
+/-- The bounded below `R(f)^![Λ]+` is compatible with the inclusions of the bounded below
 derived categories, by construction. -/
 noncomputable def rightDerivedUpperShriekPlusCompatibility :
     R(f)^![Λ]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![Λ] :=

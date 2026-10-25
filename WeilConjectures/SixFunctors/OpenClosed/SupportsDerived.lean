@@ -133,7 +133,6 @@ lemma subsingleton_hom_Q_obj_supportsShortComplex_X₃
     (DerivedCategory.Q.obj ((((j)^*[A]).mapHomologicalComplex _).obj I))
   exact ((Iso.refl T).homCongr (supportsShortComplexX₃Iso A j I)).subsingleton
 
-include hJX hJZ in
 /-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
 inverse image
 
@@ -198,7 +197,6 @@ theorem exists_iso_supportLocalizationTriangle (hjs : Set.range s.base = (Set.ra
     (Arrow.isoMk e₁ (Iso.refl _) (by change ψ ≫ ε = u ≫ 𝟙 _; rw [comp_id]; exact hψ))
   exact ⟨e, he₂⟩
 
-include hJX hJZ in
 /-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
 inverse image
 
@@ -326,10 +324,10 @@ The first component is the restriction of supports, an isomorphism along an éta
 (`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`); the second is `τ`; so the third,
 the base change map `Lv^* Rj_* ⟶ Rj'_* Lv₁^*`, is an isomorphism as well. -/
 noncomputable def supportedLocalizationTriangleBaseChangeIso (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ]
     (v : U ⟶ X) [AlgebraicGeometry.Etale v] (s : Z ⟶ X) (j : V ⟶ X)
     (s' : Z' ⟶ U) (j' : V' ⟶ U) (g : Z' ⟶ Z) (v₁ : V' ⟶ V)
-    [IsClosedImmersion s] [(R(s)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsOpenImmersion j]
-    [IsClosedImmersion s'] [(R(s')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsOpenImmersion j']
+    [IsClosedImmersion s] [IsOpenImmersion j] [IsClosedImmersion s'] [IsOpenImmersion j']
     (hsj : Set.range s.base = (Set.range j.base)ᶜ)
     (hsj' : Set.range s'.base = (Set.range j'.base)ᶜ)
     (hg : IsPullback g s' s v) (sq : CommSq v₁ j' j v)

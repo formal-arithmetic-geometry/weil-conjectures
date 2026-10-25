@@ -389,8 +389,8 @@ lemma isWeilPairing_mixedSupportCupProduct [QuasiCompact a] (sq : IsPullback g a
     (ψ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj L ⟶ L) :
     IsWeilPairing h (lowerShriekWeilDatum sq φ) (lowerStarWeilDatum sq.toCommSq ψ)
       (lowerShriekWeilDatum sq (tensorWeilDatum g φ ψ))
-      (mixedSupportCupProduct Λ a K L) :=
-  mixedSupportCupProduct_exchange Λ sq.toCommSq
+      (mixedSupportCupProduct (ModuleCat.{u + 1} Λ) a K L) :=
+  mixedSupportCupProduct_exchange (ModuleCat.{u + 1} Λ) sq.toCommSq
     (rightDerivedLowerShriekBaseChangeMap Λ sq)
     (fun K M ↦ projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq K M) K L φ ψ
 

@@ -95,11 +95,11 @@ theorem map_smoothPurityIso_hom_comp (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY :
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex Λ f) ≅
       (R(f)^![Λ]).obj K)
-    (θ' : dualizingComplex (ModuleCat.{u + 1} Λ') f ≅
+    (θ' : dualizingComplex Λ' f ≅
       (twistShift Λ' X d).obj (constantComplex Λ' X))
     (φ' : ((derivedTensor (ModuleCat.{u + 1} Λ') X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K))).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ') f) ≅
+          (dualizingComplex Λ' f) ≅
       (R(f)^![Λ']).obj (ΨY.obj K))
     (vP : ΨX.obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K))
@@ -110,7 +110,7 @@ theorem map_smoothPurityIso_hom_comp (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY :
     (vT : ΨX.obj ((twistShift Λ X d).obj (constantComplex Λ X)) ≅
       (twistShift Λ' X d).obj (constantComplex Λ' X))
     (vω : ΨX.obj (dualizingComplex Λ f) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ') f)
+      dualizingComplex Λ' f)
     (v₀ : ΨX.obj ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
       (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K)))
     (vS : ΨX.obj ((R(f)^![Λ]).obj K) ≅

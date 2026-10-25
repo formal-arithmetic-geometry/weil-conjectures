@@ -338,7 +338,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- Blueprint `lem-weil-duality-pairing` (auxiliary): the Verdier dual on morphisms is
 `RHom(-, ω_X)`. -/

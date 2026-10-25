@@ -65,7 +65,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- The derived pullback `Lg^*` as a braided monoidal functor, for its monoidal structure
 `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal` and the derived braidings

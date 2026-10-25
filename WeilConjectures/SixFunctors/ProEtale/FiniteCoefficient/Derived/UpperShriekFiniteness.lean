@@ -61,7 +61,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 section Comparison
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+  [CompactSpace Y]
 
 /-- On a bounded below complex of étale origin `ν_Y^* G`, the pro-étale exceptional inverse
 image is `ν_X^* f^× G`: the unit `G ⟶ Rν_* ν^* G` is an isomorphism on bounded below `G`
@@ -127,7 +127,7 @@ need not exist) and `G L` is bounded below of étale origin for a bounded below 
 preservation clauses of `sk-def-sf-admissible` guarantee on `Dctf`), then `G L ≅ Rf^! L`, by
 uniqueness of adjoints on the bounded below objects of étale origin. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_adjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+    [HasCompactification f] [CompactSpace Y]
     {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
       _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⊣ G)
@@ -162,11 +162,11 @@ instance (X : Scheme.{u}) (a b : ℤ) :
 variable {k : Type u} [Field k] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y]
   (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
-  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+  [CompactSpace Y]
 
 include aY
 
-omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
+omit [CompactSpace Y] in
 /-- Blueprint `def-weil-exceptional-inverse-image`: the pro-étale exceptional inverse image
 carries `Dᵇc(Y, A)` into `Dᵇc(X, A)`, for a separated finite-type `f` over a finite-type
 `k`-scheme `Y` and a finite `Λ` whose exponent is invertible on `Y`. -/
@@ -182,7 +182,7 @@ theorem boundedConstructible_rightDerivedUpperShriek
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedUpperShriek Λ aY f hG))
 
-omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
+omit [CompactSpace Y] in
 /-- Blueprint `def-weil-exceptional-inverse-image`: the explicit interval bounds. There is a
 shift `c`, depending only on `f`, such that `Rf^!` carries `D_c^[a, b](Y, A)` with Tor amplitude
 in `[a, b]` into `D_c^[a - c, b + c](X, A)` with Tor amplitude in `[a - c, b + c]`, for all
@@ -205,7 +205,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek :
       hG.1.1).symm
     (constructibleTorAmplitudeIn_mapDerivedCategory_comparisonUpperStar Λ (hc a b G hG'))
 
-omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
+omit [CompactSpace Y] in
 /-- Blueprint `def-weil-exceptional-inverse-image`: the pro-étale exceptional inverse image
 carries `Dctf(Y, A)` into `Dctf(X, A)`. -/
 theorem constructibleFiniteTor_rightDerivedUpperShriek
@@ -219,7 +219,7 @@ theorem constructibleFiniteTor_rightDerivedUpperShriek
   exact (DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor _).1
     ⟨a - c, b + c, hc a b L hab⟩
 
-omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
+omit [CompactSpace Y] in
 /-- The pro-étale compact-support direct image carries `Dctf(X, A)` into `Dctf(Y, A)`: on
 `ν^* G` it is `ν^* Rf_!^{ét} G` (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`)
 and the étale `Rf_!` preserves `Dctf`
