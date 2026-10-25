@@ -7584,6 +7584,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionIdIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionNormalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnitSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.AlgebraicClosureColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.BoundedAmplitude
@@ -10850,11 +10851,14 @@ public import WeilConjectures.RingTheory.PrincipalPrimeQuotientFractionFinite
 public import WeilConjectures.RingTheory.ProEtale.Bijective
 public import WeilConjectures.RingTheory.ProEtale.ClosedLift
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftConnectedComponents
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftRetraction
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftStrictlyHenselian
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftUnits
 public import WeilConjectures.RingTheory.ProEtale.Contraction.Covers
 public import WeilConjectures.RingTheory.ProEtale.Etale
+public import WeilConjectures.RingTheory.ProEtale.EtaleStrictlyHenselianSplitting
 public import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 public import WeilConjectures.RingTheory.ProEtale.FiniteWContractible
 public import WeilConjectures.RingTheory.ProEtale.FiniteWStrictlyLocal
@@ -10872,6 +10876,7 @@ public import WeilConjectures.RingTheory.ProEtale.ProEtaleContraction
 public import WeilConjectures.RingTheory.ProEtale.PullbackProfinite
 public import WeilConjectures.RingTheory.ProEtale.RegularLocalization
 public import WeilConjectures.RingTheory.ProEtale.RetractionsStrictlyHenselian
+public import WeilConjectures.RingTheory.ProEtale.SpanIdempotents
 public import WeilConjectures.RingTheory.ProEtale.StalkAlgebraic
 public import WeilConjectures.RingTheory.ProEtale.StalkIso
 public import WeilConjectures.RingTheory.ProEtale.StrictlyHenselianRetraction
@@ -12376,6 +12381,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
@@ -12460,6 +12467,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.S
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UpperStarIsoId
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEtaleBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.WeaklyContractibleSections
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimits
@@ -12769,6 +12777,10 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.Trait
+public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
+public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
+public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
+public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.Vanishing

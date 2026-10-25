@@ -12,21 +12,21 @@ public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
 
 /-!
 
-# The direct image from the geometric generic point of the trait
+# Higher direct images from the geometric generic point of the trait
 
 Let `k'` be a separably closed field, `S = Spec k'⟦t⟧` the strictly henselian trait,
 `i : Spec k' ⟶ S` its closed point and `j : Spec Ω ⟶ S` its geometric generic point. For a
-commutative condensed ring `Λ`, the coefficient ring `Λ_S` restricted to the closed point does
-not see the passage to the geometric generic point:
+commutative condensed ring `Λ`, the higher direct images `Rⁿ j_* (j^* Λ_S)`, `n > 0`, vanish
+after `i^*` (`ProEtale.CondensedRing.isZero_upperStar_traitClosedPoint_obj_rightDerived`).
 
-* the unit `Λ_S ⟶ j_* j^* Λ_S` becomes an isomorphism after `i^*`
-  (`ProEtale.CondensedRing.isIso_upperStar_traitClosedPoint_map_unit_app`);
-* the higher direct images `Rⁿ j_* (j^* Λ_S)`, `n > 0`, vanish after `i^*`
-  (`ProEtale.CondensedRing.isZero_upperStar_traitClosedPoint_obj_rightDerived`).
-
-Both are checked on sections over the henselian lifts `W = Spec H_{k'⟦t⟧}(C̄)` of the
-w-contractible ind-étale `k'`-algebras `C̄`, which compute the sections of `i^*`. Such a `W` is
-weakly contractible, and so is its geometric generic fibre `W ×_S Spec Ω`.
+It suffices to check this on sections over the henselian lifts `W = Spec H_{k'⟦t⟧}(C̄)` of the
+w-contractible ind-étale `k'`-algebras `C̄`, which compute the sections of `i^*`
+(`ProEtale.CondensedRing.isZero_upperStar_traitClosedPoint_obj_of_forall`). Such a `W` is weakly
+contractible, and so is its geometric generic fibre `W ×_S Spec Ω`
+(`ProEtale.isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec`). Sections over a
+weakly contractible object are exact, so the sections of `Rⁿ j_* N` over `W` are the cohomology
+of the sections over `W ×_S Spec Ω` of an injective resolution of `N`, which vanishes in
+positive degrees.
 
 -/
 

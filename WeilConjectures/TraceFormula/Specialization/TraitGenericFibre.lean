@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
 public import WeilConjectures.TraceFormula.Specialization.Trait
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftConnectedComponents
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftStrictlyHenselian
 public import WeilConjectures.RingTheory.ProEtale.SpanIdempotents
 
@@ -21,7 +22,9 @@ of copies of `A` (an étale `A`-algebra over the strictly henselian `A` is a pro
 `A` and of an algebra on which `t` is invertible, and the latter maps to zero in `C̄`). Hence
 the geometric generic fibre `H ⊗_A Ω` is a filtered colimit of finite products of copies of the
 algebraically closed field `Ω`, with the same extremally disconnected space of connected
-components as `C̄`: it is w-contractible, and the base change of `W = Spec H` to the geometric
+components as `C̄`: it is w-contractible
+(`AlgebraicGeometry.ProEtale.isWContractibleRing_closedLift_tensorProduct_traitGenericField`), and
+the base change of `W = Spec H` to the geometric
 generic point `Spec Ω ⟶ S` is weakly contractible
 (`AlgebraicGeometry.ProEtale.isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec`).
 
@@ -41,19 +44,19 @@ open Scheme
 variable {k' : Type u} [Field k'] [IsSepClosed k']
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra in
-/-- The henselian lift `W = Spec H_{k'⟦t⟧}(C̄)` of a w-contractible ind-étale
-`k'⟦t⟧ ⧸ (t)`-algebra `C̄` has a weakly contractible geometric generic fibre
-`W ×_S Spec Ω`. -/
-theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type u) [CommRing C]
+/-- The geometric generic fibre `H ⊗_{k'⟦t⟧} Ω` of the henselian lift `H = H_{k'⟦t⟧}(C̄)` of a
+w-contractible ind-étale `k'⟦t⟧ ⧸ (t)`-algebra `C̄` is w-contractible: it is spanned over `Ω` by
+idempotents coming from `H`, and its space of connected components is that of `Spec H`, hence
+that of `Spec C̄`. -/
+theorem isWContractibleRing_closedLift_tensorProduct_traitGenericField (C : Type u) [CommRing C]
     [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
     [Algebra (PowerSeries k') C]
     [IsScalarTower (PowerSeries k')
       (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
     [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
     (hC : IsWContractibleRing C) :
-    (ProEt.topology (Spec (.of (traitGenericField k')))).IsWeaklyContractible.{u + 1}
-      ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (traitGenericPoint k')).obj
-        (closedLiftSpec (.of (PowerSeries k')) C)) := by
+    IsWContractibleRing (CommRingCat.of
+      (Algebra.ClosedLift (PowerSeries k') C ⊗[PowerSeries k'] traitGenericField k')) := by
   let H := Algebra.ClosedLift (PowerSeries k') C
   let Ω := traitGenericField k'
   let φ : H →ₐ[PowerSeries k'] H ⊗[PowerSeries k'] Ω := Algebra.TensorProduct.includeLeft
@@ -67,7 +70,6 @@ theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type
     rw [IsScalarTower.algebraMap_apply (PowerSeries k')
       (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C,
       Ideal.Quotient.algebraMap_eq, Ideal.Quotient.eq_zero_iff_mem.mpr ha, map_zero]
-  -- `H ⊗[A] Ω` is spanned over `Ω` by the images of the idempotents of `H`.
   have hR (x : H ⊗[PowerSeries k'] Ω) : x ∈ Submodule.span Ω E := by
     have htmul (h : H) (hh : h ∈ Submodule.span (PowerSeries k') {e : H | IsIdempotentElem e})
         (ω : Ω) : h ⊗ₜ[PowerSeries k'] ω ∈ Submodule.span Ω E := by
@@ -84,19 +86,9 @@ theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type
     | zero => exact zero_mem _
     | tmul h ω => exact htmul h (Algebra.ClosedLift.mem_span_isIdempotentElem hC0 h) ω
     | add x y hx hy => exact add_mem hx hy
-  -- `H → H ⊗[A] Ω` is injective, `H` being flat over the domain `A`.
-  have hφ : Function.Injective φ := by
-    have hinj : Function.Injective (algebraMap (PowerSeries k') Ω) := by
-      rw [IsScalarTower.algebraMap_eq (PowerSeries k') (FractionRing (PowerSeries k')) Ω]
-      exact (algebraMap (FractionRing (PowerSeries k')) Ω).injective.comp
-        (IsFractionRing.injective _ _)
-    have := Module.Flat.lTensor_preserves_injective_linearMap (M := H)
-      (Algebra.linearMap (PowerSeries k') Ω) hinj
-    intro x y hxy
-    apply (TensorProduct.rid (PowerSeries k') H).symm.injective
-    apply this
-    simpa [φ] using hxy
-  -- `π₀(Spec H) ≅ π₀(Spec C̄)` is extremally disconnected.
+  have hφ : Function.Injective φ := Algebra.ClosedLift.injective_includeLeft
+    ((algebraMap (FractionRing (PowerSeries k')) Ω).injective.comp
+      (IsFractionRing.injective (PowerSeries k') (FractionRing (PowerSeries k'))))
   have : ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum H)) := by
     have := hC.extremallyDisconnected_connectedComponents
     refine extremallyDisconnected_of_homeo (PrimeSpectrum.isHomeomorph_connectedComponentsMap_comap
@@ -106,7 +98,6 @@ theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type
     obtain ⟨e, he, rfl⟩ := Algebra.ClosedLift.exists_isIdempotentElem_toAlgHom_eq
       (Ideal.span {(PowerSeries.X : PowerSeries k')}) hc
     exact ⟨e, he, h₁, h₂⟩
-  -- `π₀(Spec (H ⊗[A] Ω)) ≅ π₀(Spec H)` is extremally disconnected.
   have : ExtremallyDisconnected
       (ConnectedComponents (PrimeSpectrum (H ⊗[PowerSeries k'] Ω))) := by
     refine extremallyDisconnected_of_homeo (PrimeSpectrum.isHomeomorph_connectedComponentsMap_comap
@@ -125,8 +116,26 @@ theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type
       p₁.isPrime.one_notMem (hadd ▸ add_mem h₁ h)
     exact ((p₂.isPrime.mem_or_mem (hmul ▸ p₂.asIdeal.zero_mem)).resolve_right
       (hcon _ he.one_sub h₁'))
-  have : IsWContractibleRing (CommRingCat.of (H ⊗[PowerSeries k'] Ω)) :=
-    IsWContractibleRing.of_forall_mem_span_isIdempotentElem hE hR
-  exact Scheme.ProEt.isWeaklyContractible_of_iso (pullbackSpecIso (PowerSeries k') H Ω)
+  exact IsWContractibleRing.of_forall_mem_span_isIdempotentElem hE hR
+
+attribute [local instance] Algebra.TensorProduct.rightAlgebra in
+/-- The henselian lift `W = Spec H_{k'⟦t⟧}(C̄)` of a w-contractible ind-étale
+`k'⟦t⟧ ⧸ (t)`-algebra `C̄` has a weakly contractible geometric generic fibre
+`W ×_S Spec Ω`. -/
+theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type u) [CommRing C]
+    [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    [Algebra (PowerSeries k') C]
+    [IsScalarTower (PowerSeries k')
+      (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    (hC : IsWContractibleRing C) :
+    (ProEt.topology (Spec (.of (traitGenericField k')))).IsWeaklyContractible.{u + 1}
+      ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (traitGenericPoint k')).obj
+        (closedLiftSpec (.of (PowerSeries k')) C)) :=
+  have := isWContractibleRing_closedLift_tensorProduct_traitGenericField (k' := k') C hC
+  Scheme.ProEt.isWeaklyContractible_of_iso
+    (pullbackSpecIso (PowerSeries k') (Algebra.ClosedLift (PowerSeries k') C)
+      (traitGenericField k'))
+
 
 end AlgebraicGeometry.ProEtale
