@@ -272,9 +272,9 @@ noncomputable def puncturedStrictLocalizationMap (iC : C ⟶ Z.left) [IsClosedIm
 
 /-- **Restriction to a transverse punctured curve**
 (blueprint `sk-lem-tf-punctured-restriction`). In the situation of the transverse boundary
-calculation (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `C ⊆ Z` be a closed subscheme (in the blueprint a curve) with
-`C ∩ Y = {s}`, and let `C_(s)` be its strict localization at a geometric point over `s`. Then the
-restriction map
+calculation (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `C ⊆ Z` be a
+closed subscheme (in the blueprint a curve) with `C ∩ Y = {s}`, and let `C_(s)` be its strict
+localization at a geometric point over `s`. Then the restriction map
 ```
 RΓ(Z - Y, i_! E) ⟶ RΓ(C_(s) - s, (i_! E)|_{C_(s) - s})
 ```
