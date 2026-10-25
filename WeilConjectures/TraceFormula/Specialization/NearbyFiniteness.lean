@@ -189,8 +189,9 @@ on a locally closed subscheme of the generic fibre of an affine space** (SGA 4½
 Thm. 3.2; for `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and passage to the limit, Bhatt–Scholze,
 *The pro-étale topology for schemes*, §6.8): over the strictly henselian trait
 `S = Spec k'⟦t⟧` (`k'` separably closed, `ℓ ≠ char k'`), let `v : E ⟶ 𝔸ⁿ_S` be a locally closed
-immersion, factored as a closed immersion `c' : E ⟶ W` into an open `W` of a closed subscheme
-`c : D ⟶ 𝔸ⁿ_S`, with `W` contained in the generic fibre `𝔸ⁿ_η = c⁻¹ D(t)`, and let `L` be a lisse
+immersion, factored as a surjective closed immersion `c' : E ⟶ W` (so `E` is `W` up to
+nilpotents) onto an open `W` of a closed subscheme `c : D ⟶ 𝔸ⁿ_S`, with `W` contained in the
+preimage `c⁻¹ 𝔸ⁿ_η` of the generic fibre `𝔸ⁿ_η = 𝔸ⁿ_S ×_S D(t)`, and let `L` be a lisse
 (pro-étale locally finitely presented) sheaf of `ℚ̄_ℓ`-modules on `E`. Then the geometric nearby
 cycles `Li^* Rj_* Lj^*` of its extension by zero `v_! L = Rc_* j_{W!} Rc'_* L`, with
 `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded constructible complex on the special
@@ -199,7 +200,7 @@ fibre `𝔸ⁿ_s`. (When `W` misses the generic fibre, these nearby cycles vanis
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D : Scheme.{u})
     (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens)
     (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' n) (E : Scheme.{u})
-    (c' : E ⟶ W) [IsClosedImmersion c']
+    (c' : E ⟶ W) [IsClosedImmersion c'] (hc' : Surjective c')
     (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E))
     (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E) L) :
@@ -238,9 +239,10 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
     (Φ := L(((affineSpaceModel k' n).geometric.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
       R(((affineSpaceModel k' n).geometric.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L(((affineSpaceModel k' n).geometric.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
-    (U := affineSpaceGenericOpen k' n) (fun D c _ W hW E c' _ L hL ↦ ?_) hB
+    (U := affineSpaceGenericOpen k' n) (fun D c _ W hW E c' _ hc' L hL ↦ ?_) hB
   rcases hW with hW | hW
-  · exact boundedConstructible_nearbyCycles_affineSpace_lisse_generic n D c W hW E c' L hL
+  · exact boundedConstructible_nearbyCycles_affineSpace_lisse_generic n D c W hW E c' hc'
+      L hL
   · have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
     have : TopologicalSpace.NoetherianSpace (c ⁻¹ᵁ affineSpaceGenericOpen k' n) :=
       (c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι.isOpenEmbedding.isInducing.noetherianSpace

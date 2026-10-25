@@ -191,13 +191,14 @@ omit [(boundedConstructible (condensedRingObj Λ Y)).IsTriangulated] [Φ.CommShi
   [Φ.IsTriangulated] in
 /-- The hypothesis of the dévissage to lisse sheaves *adapted to an open* `U` of `T`: `Φ` maps
 the extensions by zero `Rc_* j_! Rc'_* L` of the lisse sheaves `L` along the locally closed
-immersions `E ⟶ W ⊆ D ⟶ T` to bounded constructible complexes, whenever the open `W` of `D`
-lies either inside `c⁻¹ U` or inside its complement. -/
+immersions `E ⟶ W ⊆ D ⟶ T` to bounded constructible complexes, whenever `c'` is surjective (so
+that `E` is `W` up to nilpotents) and the open `W` of `D` lies either inside `c⁻¹ U` or inside
+its complement. -/
 def LisseHypothesisAlong (U : T.Opens) : Prop :=
   ∀ (D : Scheme.{u}) (c : D ⟶ T) [IsClosedImmersion c] (W : D.Opens),
     ((W : Set D) ⊆ c ⁻¹ᵁ U ∨ Disjoint (W : Set D) (c ⁻¹ᵁ U)) →
-    ∀ (E : Scheme.{u}) (c' : E ⟶ W) [IsClosedImmersion c']
-    (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1}) (condensedRingObj Λ E)),
+    ∀ (E : Scheme.{u}) (c' : E ⟶ W) [IsClosedImmersion c'], Surjective c' →
+    ∀ (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1}) (condensedRingObj Λ E)),
     IsLocallyFinitelyPresented (condensedRingObj Λ E) L →
     boundedConstructible (condensedRingObj Λ Y) (Φ.obj ((R((c)_*⟦Λ⟧)).obj
       (D((W.ι)_!open⟦Λ⟧).obj ((R((c')_*⟦Λ⟧)).obj ((DerivedCategory.singleFunctor _ 0).obj L)))))
@@ -209,7 +210,7 @@ omit [IsCommMonObj Λ] [(boundedConstructible (condensedRingObj Λ Y)).IsTriangu
 /-- The hypothesis of the dévissage to lisse sheaves implies its variant adapted to any open. -/
 lemma LisseHypothesis.along (hΦ : LisseHypothesis Λ Φ) (U : T.Opens) :
     LisseHypothesisAlong Λ Φ U :=
-  fun D c _ W _ E c' _ L hL ↦ hΦ D c W E c' L hL
+  fun D c _ W _ E c' _ _ L hL ↦ hΦ D c W E c' L hL
 
 omit [(boundedConstructible (condensedRingObj Λ Y)).IsTriangulated] [Φ.CommShift ℤ]
   [Φ.IsTriangulated] in
@@ -253,7 +254,7 @@ lemma boundedConstructible_lisse_open {U : T.Opens} (hΦ : LisseHypothesisAlong 
         leftDerivedUpperStarSingleIso Λ (c' ≫ V.ι) G)
   exact (boundedConstructible _).prop_of_iso
     (Φ.mapIso ((R((c)_*⟦Λ⟧)).mapIso (D((V.ι)_!open⟦Λ⟧).mapIso e))).symm
-    (hΦ D c V hVU E c' _ hL)
+    (hΦ D c V hVU E c' ‹_› _ hL)
 
 /-- The induction step of the dévissage to lisse sheaves, for a constructible sheaf `G` on a
 closed subscheme `c : D ⟶ T` with image in the closed subset `Z`: split `G` along a nonempty open
