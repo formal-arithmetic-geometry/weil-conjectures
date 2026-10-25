@@ -29,6 +29,8 @@ Fujiwara's theorem).
   at a contracting fixed point the local term is the integral of the trace class of `u_Z`.
 - `ProEtale.CondensedRing.Correspondence.contractingStalkMap_ofGraph`: for a graph, `u_Z` is the
   stalk map.
+- `Correspondence.restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt`:
+  Varshavsky's theorem for graphs, through the additivity of trace classes for graphs.
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt`:
   the local term of a contracting graph correspondence is the trace of the stalk map.
 
@@ -133,6 +135,35 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 /-! ### The local term at a contracting point -/
 
+/-- The local term along an open and closed subscheme `B` of the fixed locus with underlying set
+`{y}` is the integral of a Borel–Moore section `γ` of the point if the restriction of the trace
+class to `B` is the pushforward of `γ` along the point of `B`. -/
+lemma localTerm_traceClass_eq_integral_of_restrict_eq {c : Correspondence ℓ K}
+    (F : c.FixedLocus) {y : RationalPoint c.C} (hy : y ≫ c.c₁ = y ≫ c.c₂)
+    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
+    [IsOpenImmersion j.left] [IsClosedImmersion j.left]
+    (hB : Set.range j.left.base = {(F.liftPoint y hy).left.base (default : Spec (.of k))})
+    (γ : BorelMooreSection ℓ (point k))
+    (H : ∀ (e : point k ⟶ B) [IsProper e.left], e ≫ j = F.liftPoint y hy →
+      (c.traceClass F).restrict j = BorelMooreSection.pushforward e γ) :
+    (c.traceClass F).localTerm j = γ.integral := by
+  have hrange : Set.range (F.liftPoint y hy).left.base ⊆ Set.range j.left.base := by
+    rw [hB]
+    rintro _ ⟨z, rfl⟩
+    rw [Subsingleton.elim (α := Spec (.of k)) z default]
+    rfl
+  let e : point k ⟶ B := Over.homMk (IsOpenImmersion.lift j.left _ hrange) (by
+    rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac]
+    exact Over.w (F.liftPoint y hy))
+  have he : e ≫ j = F.liftPoint y hy :=
+    Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)
+  have : IsProper (e.left ≫ B.hom) := by
+    rw [Over.w e]
+    exact inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
+  have : IsProper e.left := IsProper.of_comp e.left B.hom
+  rw [BorelMooreSection.localTerm, H e he]
+  exact BorelMooreSection.integral_pushforward e _
+
 /-- **The local term at a contracting point** (blueprint `sk-thm-tf-contracting-local-term` for
 `Z = {c₁(y)}`, Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y` and `B` is an
 open and closed subscheme of the fixed locus, proper over `s`, with underlying set `{y}`, the
@@ -145,26 +176,17 @@ theorem localTerm_traceClass_eq_integral_of_isContractingAt {c : Correspondence 
     (hB : Set.range j.left.base =
       {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
     (c.traceClass F).localTerm j =
-      ((ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _)).integral := by
-  have hrange : Set.range (F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base ⊆
-      Set.range j.left.base := by
-    rw [hB]
-    rintro _ ⟨z, rfl⟩
-    rw [Subsingleton.elim (α := Spec (.of k)) z default]
-    rfl
-  let e : point k ⟶ B := Over.homMk (IsOpenImmersion.lift j.left _ hrange) (by
-    rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac]
-    exact Over.w (F.liftPoint y hc.comp_c₁_eq_comp_c₂))
-  have he : e ≫ j = F.liftPoint y hc.comp_c₁_eq_comp_c₂ :=
-    Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)
-  have : IsProper (e.left ≫ B.hom) := by
-    rw [Over.w e]
-    exact inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
-  have : IsProper e.left := IsProper.of_comp e.left B.hom
-  have : IsProper (point k).hom := inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
-  rw [BorelMooreSection.localTerm,
-    restrict_traceClass_eq_pushforward_of_isContractingAt c F hc j e he hB]
-  exact BorelMooreSection.integral_pushforward e _
+      ((ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _)).integral :=
+  localTerm_traceClass_eq_integral_of_restrict_eq F _ j hB _ fun e _ he ↦
+    restrict_traceClass_eq_pushforward_of_isContractingAt c F hc j e he hB
+
+/-- The trace class of the diagonal correspondence of an endomorphism `f` of `M` which is
+conjugate, along an equality `M = N`, to an endomorphism `g` of `N` is the trace class of `g`. -/
+lemma traceClass_ofEnd_of_eq_eqToHom {M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm) :
+    (ofEnd M f).traceClass (fixedLocusOfEnd f) = (ofEnd N g).traceClass (fixedLocusOfEnd g) := by
+  subst e hfg
+  rw [eqToHom_refl, Category.id_comp, Category.comp_id]
 
 /-- The integral of the trace class of the diagonal correspondence of an endomorphism `f` of `M`
 which is conjugate, along an equality `M = N`, to an endomorphism `g` of a dualizable `N` is the
@@ -174,8 +196,7 @@ lemma integral_traceClass_ofEnd_of_eq_eqToHom
     (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm)
     [HasRightDual N] :
     ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = trace g := by
-  subst e hfg
-  rw [eqToHom_refl, Category.id_comp, Category.comp_id]
+  rw [traceClass_ofEnd_of_eq_eqToHom e hfg]
   exact integral_traceClass_ofEnd g
 
 /-! ### Graph correspondences -/
@@ -230,7 +251,7 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   have hx := comp_eq_of_isContractingAt_ofGraph hc
   have sq : IsPullback x (𝟙 (point k)) (𝟙 X) (x ≫ 𝟙 X) := hc.isPullback
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  unfold contractingStalkMap graphStalkMap
+  unfold contractingStalkMap restrictedStalkMap graphStalkMap
   change eqToHom (congrArg
           (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)
         (show x ≫ 𝟙 X = x ≫ h by rw [hx, Category.comp_id])) ≫
@@ -282,6 +303,68 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   dsimp only [Functor.id_obj]
   simp only [Category.comp_id]
 
+/-- **Contracting graph correspondences and local terms** (blueprint
+`sk-thm-tf-contracting-local-term` for the graph correspondence `(𝟙, h)` and `Z = {x}`;
+Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
+`v : Lh^* K ⟶ K` is contracting at the fixed rational point `x`, and `B` is an open and closed
+subscheme of the fixed locus, proper over `s`, with underlying set `{x}` and point `e : s ⟶ B`,
+the restriction of the trace class to `B` is the pushforward along `e` of the trace class of
+the restricted coefficient map `u_Z`, which is the stalk map `v_x` (`contractingStalkMap_ofGraph`).
+
+This is the special case `c = (𝟙, h)` of `restrict_traceClass_eq_pushforward_of_isContractingAt`,
+proved through the additivity of trace classes for graphs (`traceClass_ofGraph_eq_add`) instead of
+the additivity for arbitrary correspondences (`traceClass_eq_add_of_isPullback`). It exists only
+so that the graph case, which carries every current user, does not depend on that `sorry`, and
+should be dropped once `traceClass_eq_add_of_isPullback` is proved. The proof: the
+trace class is the sum of the trace classes of `u^Z` on `K^Z = Rx_* Lx^* K` and `u^U` on
+`K^U = j_! Lj^* K`; the first is the pushforward of the trace class of `v_x` by proper pushforward
+compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
+`B` since the stalk of `K^U` at `x` is zero (`restrict_traceClass_eq_zero_of_isContractingAt`). -/
+theorem restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt (h : X ⟶ X)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
+    (F : (ofGraph K h v).FixedLocus) {x : RationalPoint X}
+    (hc : (ofGraph K h v).IsContractingAt x) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
+    [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
+    (e : point k ⟶ B) [IsProper e.left] (he : e ≫ j = F.liftPoint x hc.comp_c₁_eq_comp_c₂)
+    (hB : Set.range j.left.base =
+      {(F.liftPoint x hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
+    ((ofGraph K h v).traceClass F).restrict j = BorelMooreSection.pushforward e
+      ((ofEnd _ (contractingStalkMap hc)).traceClass (fixedLocusOfEnd _)) := by
+  have hx := comp_eq_of_isContractingAt_ofGraph hc
+  have hc' : ((ofGraph K h v).withCoeff (pointOpenPiece K x)
+      (graphOpenPieceCoeff K v hx ≫
+        (boundedConstructibleUpperShriekId ℓ X).inv.app _)).IsContractingAt x :=
+    ⟨hc.1, hc.2, hc.3⟩
+  have hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (x ≫ 𝟙 X)).obj (pointOpenPiece K x)) := by
+    refine isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ
+      (pointComplι x) _ ?_ _
+    rw [Category.comp_id]
+    exact (isCompl_range_pointComplι x).disjoint
+  have hU : (F.traceClassWithCoeff _ (graphOpenPieceCoeff K v hx ≫
+      (boundedConstructibleUpperShriekId ℓ X).inv.app _)).restrict j = 0 :=
+    restrict_traceClass_eq_zero_of_isContractingAt
+      ((ofGraph K h v).withCoeff (pointOpenPiece K x)
+        (graphOpenPieceCoeff K v hx ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _))
+      (F.withCoeff _ _) hc' j hB hK
+  let P := graphClosedPieceDiagram K v hx
+  let Fc := fixedLocusOfEnd (graphStalkMap K h v x hx)
+  let Fb : P.pushforward.FixedLocus := F.withCoeff _ (graphClosedPieceCoeff K v hx)
+  have : IsProper (e ≫ j).left := by
+    rw [Over.comp_left]
+    infer_instance
+  have hfix : P.fixMap Fc Fb = e ≫ j := by
+    rw [he]
+    refine Fb.hom_ext ?_
+    rw [P.fixMap_ι]
+    exact (Category.id_comp x).trans (F.liftPoint_ι x _).symm
+  have hZ := P.traceClassPushforward_eq Fc Fb
+  rw [ProperPushforwardDiagram.traceClassPushforward, BorelMooreSection.pushforward_congr hfix,
+    ← BorelMooreSection.pushforward_comp] at hZ
+  rw [traceClass_ofGraph_eq_add K v hx F, BorelMooreSection.restrict_add, hU, add_zero]
+  change (P.pushforward.traceClass Fb).restrict j = _
+  rw [← hZ, BorelMooreSection.restrict_pushforward_self]
+  exact congrArg _ (traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)).symm
 
 /-- **Local terms of contracting graph correspondences** (blueprint `lem-trf-local-term-locality`,
 item 1, for correspondences with exceptional leg `c₁ = 𝟙`; Varshavsky, Thm. 2.1.3): if the graph
@@ -290,10 +373,11 @@ rational point `x`, and `B` is an open and closed subscheme of the fixed locus, 
 with underlying set `{x}`, then the local term along `B` is the trace of the stalk map
 `v_x : K_x ⟶ K_x`. No invertibility of `v` is required.
 
-By Varshavsky's theorem the local term is the integral of the trace class of the restricted
-coefficient map `u_Z` (`localTerm_traceClass_eq_integral_of_isContractingAt`), which is the stalk
-map `v_x` (`contractingStalkMap_ofGraph`), and the trace class of an endomorphism of the point
-integrates to its trace (point normalization). -/
+By Varshavsky's theorem for graphs
+(`restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt`) the local term is the integral
+of the trace class of the restricted coefficient map `u_Z`, which is the stalk map `v_x`
+(`contractingStalkMap_ofGraph`), and the trace class of an endomorphism of the point integrates
+to its trace (point normalization). -/
 theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
     (F : (ofGraph K h v).FixedLocus) (x : RationalPoint X)
@@ -304,7 +388,8 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     ((ofGraph K h v).traceClass F).localTerm j =
       trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) := by
-  rw [localTerm_traceClass_eq_integral_of_isContractingAt F x hc j hB]
+  rw [localTerm_traceClass_eq_integral_of_restrict_eq F hc.comp_c₁_eq_comp_c₂ j hB _
+    fun e _ he ↦ restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt h v F hc j e he hB]
   exact integral_traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)
 
 end Correspondence

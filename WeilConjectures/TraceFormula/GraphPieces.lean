@@ -64,25 +64,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 section Preimage
 
-/-- The preimage `h⁻¹(X ∖ {x})` of the open complement of a rational point, as a scheme over
-`s`. -/
-noncomputable abbrev pointComplPreimage (h : X ⟶ X) (x : RationalPoint X) :
-    Over (Spec (.of k)) :=
-  Over.mk ((h.left ⁻¹ᵁ pointComplOpens x).ι ≫ X.hom)
-
-instance (h : X ⟶ X) (x : RationalPoint X) : LocallyOfFiniteType (pointComplPreimage h x).hom :=
-  inferInstanceAs (LocallyOfFiniteType ((h.left ⁻¹ᵁ pointComplOpens x).ι ≫ X.hom))
-
-instance (h : X ⟶ X) (x : RationalPoint X) : IsSeparated (pointComplPreimage h x).hom :=
-  inferInstanceAs (IsSeparated ((h.left ⁻¹ᵁ pointComplOpens x).ι ≫ X.hom))
-
-instance (h : X ⟶ X) (x : RationalPoint X) : QuasiCompact (pointComplPreimage h x).hom := by
-  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
-  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
-  have : IsNoetherian X.left := ⟨⟩
-  have : QuasiCompact (h.left ⁻¹ᵁ pointComplOpens x).ι := inferInstance
-  exact inferInstanceAs (QuasiCompact ((h.left ⁻¹ᵁ pointComplOpens x).ι ≫ X.hom))
-
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] in
 /-- A point fixed by `h` has no preimage in its complement: `h⁻¹(X ∖ {x}) ⊆ X ∖ {x}`. -/
@@ -97,7 +78,7 @@ lemma preimage_pointComplOpens_le {h : X ⟶ X} {x : RationalPoint X} (hx : x �
 
 /-- The inclusion `ι : h⁻¹(X ∖ {x}) ⟶ X ∖ {x}` for a point `x` fixed by `h`. -/
 noncomputable def pointComplPreimageι {h : X ⟶ X} {x : RationalPoint X} (hx : x ≫ h = x) :
-    pointComplPreimage h x ⟶ pointCompl x :=
+    preimagePointCompl h x ⟶ pointCompl x :=
   Over.homMk (X.left.homOfLE (preimage_pointComplOpens_le hx)) (by
     change _ ≫ (pointComplOpens x).ι ≫ X.hom = _
     rw [Scheme.homOfLE_ι_assoc]
@@ -118,22 +99,15 @@ instance {h : X ⟶ X} {x : RationalPoint X} (hx : x ≫ h = x) :
   rw [pointComplPreimageι_comp_left]
   infer_instance
 
-/-- The restriction `h_V : h⁻¹(X ∖ {x}) ⟶ X ∖ {x}` of `h`. -/
-noncomputable def pointComplRestrict (h : X ⟶ X) (x : RationalPoint X) :
-    pointComplPreimage h x ⟶ pointCompl x :=
-  Over.homMk (h.left ∣_ pointComplOpens x) (by
-    change _ ≫ (pointComplOpens x).ι ≫ X.hom = _
-    rw [morphismRestrict_ι_assoc, Over.w h]
-    rfl)
-
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] in
 /-- The square `h_V ≫ j = j_V ≫ h` of the restriction of `h` to `V = h⁻¹(X ∖ {x})` is
 cartesian. -/
-lemma isPullback_pointComplRestrict {h : X ⟶ X} {x : RationalPoint X} (hx : x ≫ h = x) :
-    IsPullback (pointComplRestrict h x) (pointComplPreimageι hx ≫ pointComplι x)
+lemma isPullback_preimagePointComplRestrict_of_comp_eq {h : X ⟶ X} {x : RationalPoint X}
+    (hx : x ≫ h = x) :
+    IsPullback (preimagePointComplRestrict h x) (pointComplPreimageι hx ≫ pointComplι x)
       (pointComplι x) h := by
-  have w : pointComplRestrict h x ≫ pointComplι x =
+  have w : preimagePointComplRestrict h x ≫ pointComplι x =
       (pointComplPreimageι hx ≫ pointComplι x) ≫ h := by
     ext1
     rw [Over.comp_left, Over.comp_left, pointComplPreimageι_comp_left]
@@ -227,7 +201,7 @@ noncomputable abbrev pointOpenPiece (x : RationalPoint X) :
 open correspondence on `V = h⁻¹(X ∖ {x})`. -/
 noncomputable def graphOpenRestriction :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (pointComplRestrict h x)).obj
+        (preimagePointComplRestrict h x)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (pointComplι x)).obj
           K) ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -235,8 +209,8 @@ noncomputable def graphOpenRestriction :
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (pointComplι x)).obj
           K) :=
   (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
-      (pointComplRestrict h x) (pointComplι x)).inv.app K ≫
-    eqToHom (by rw [(isPullback_pointComplRestrict hx).w]) ≫
+      (preimagePointComplRestrict h x) (pointComplι x)).inv.app K ≫
+    eqToHom (by rw [(isPullback_preimagePointComplRestrict_of_comp_eq hx).w]) ≫
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
       (pointComplPreimageι hx ≫ pointComplι x) h).hom.app K ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -254,7 +228,7 @@ extensions by zero for `j_V = ι ≫ j`, and `j_!` of the `ι_! ⊣ Lι^*` adjoi
 noncomputable def graphOpenPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj
         (pointOpenPiece K x) ⟶ pointOpenPiece K x :=
-  (openSquareExchange ℓ (isPullback_pointComplRestrict hx)).hom.app _ ≫
+  (openSquareExchange ℓ (isPullback_preimagePointComplRestrict_of_comp_eq hx)).hom.app _ ≫
     (boundedConstructibleOpenImmersionLowerShriekComp (Profinite.padicAlgClRingObj ℓ) ℓ
       (pointComplPreimageι hx) (pointComplι x)).hom.app _ ≫
     (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
