@@ -70,6 +70,26 @@ section Evaluation
 variable {X Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
+/-- An abstract evaluation of a projection formula against its inverse: for maps `pf` natural in
+both variables, the composite of `pf`, a functor applied to a whiskered map through an
+isomorphism `b`, the inverse of `pf` and maps whiskered on the right, is computed by
+whiskering. -/
+lemma _root_.CategoryTheory.MonoidalCategory.comp_map_comp_inv_comp_whiskerRight_eq
+    {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] [MonoidalCategory 𝒞] [MonoidalCategory 𝒟]
+    (L : 𝒟 ⥤ 𝒞) (P : 𝒞 ⥤ 𝒟) {S T W : 𝒟} {M' K A₁ A₂ : 𝒞} (e : M' ⟶ K) (c : S ⟶ T)
+    (pfS' : L.obj S ⊗ M' ⟶ L.obj (S ⊗ P.obj M')) (pfS : L.obj S ⊗ K ⟶ L.obj (S ⊗ P.obj K))
+    (pfT : L.obj T ⊗ K ⟶ L.obj (T ⊗ P.obj K)) [IsIso pfT]
+    (hr : (L.obj S ◁ e) ≫ pfS = pfS' ≫ L.map (S ◁ P.map e))
+    (hl : (L.map c ▷ K) ≫ pfT = pfS ≫ L.map (c ▷ P.obj K)) (b : W ≅ T ⊗ P.obj K)
+    (g₁ : L.obj T ⟶ A₁) (g₂ : A₁ ⟶ A₂) (g₃ : A₂ ⟶ 𝟙_ 𝒞) :
+    pfS' ≫ L.map ((S ◁ P.map e) ≫ (c ▷ P.obj K) ≫ b.inv) ≫ L.map b.hom ≫ inv pfT ≫
+      (g₁ ▷ K) ≫ (g₂ ▷ K) ≫ (g₃ ▷ K) ≫ (λ_ K).hom =
+    ((L.map c ≫ g₁ ≫ g₂ ≫ g₃) ▷ M') ≫ (𝟙_ 𝒞 ◁ e) ≫ (λ_ K).hom := by
+  rw [← L.map_comp_assoc, Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+    L.map_comp_assoc, ← reassoc_of% hr, ← reassoc_of% hl, IsIso.hom_inv_id_assoc]
+  simp only [← comp_whiskerRight_assoc]
+  rw [whisker_exchange_assoc]
+
 /-- The projection formula for `p_X` followed by the exceptional Künneth adjoint: for maps
 `c : S ⟶ Lp_Z^* ω_Z` and `e : M' ⟶ K`, it applies `c`, base change in the product square, the
 counit of `Ra_Z! ⊣ Ra_Z^!` and then `e`. -/
@@ -90,13 +110,55 @@ theorem exceptionalProjection_comp_exceptionalKunnethAdjoint
           ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)) ≫
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv) ▷ M') ≫
       (𝟙_ _ ◁ e) ≫ (λ_ K).hom := by
-  sorry
+  have h := MonoidalCategory.comp_map_comp_inv_comp_whiskerRight_eq
+    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Z ⟶ X))
+    (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Z ⟶ X)) e c
+    (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Z ⟶ X) S M')
+    (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Z ⟶ X) S K)
+    (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Z ⟶ X)).app
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Z ⟶ Z)).obj
+        (dualizingComplex' ℓ Z))).app K)
+    (boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ _ S _)
+    (boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _ c _)
+    (externalProductBraiding ℓ K (dualizingComplex' ℓ Z))
+    ((prodBaseChangeIso ℓ X Z).hom.app (dualizingComplex' ℓ Z))
+    ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
+      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)))
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
+  exact h
 
 end Evaluation
 
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+
+/-- For an adjunction `F ⊣ G` with `F` monoidal and an isomorphism `G' ≅ G`, the transpose of the
+tensor structure of `F` followed by `c₁ ⊗ c₂` is, through the braidings, the unit of the
+transported adjunction `F ⊣ G'` followed by `G'` of the tensor structure and the whiskerings of
+`c₁ = u₁ ≫ u₂ ≫ u₃ ≫ v` and `c₂` in the exchanged order. -/
+lemma _root_.CategoryTheory.Adjunction.homEquiv_μIso_inv_tensorHom_comp_inv_app
+    {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] [MonoidalCategory 𝒞] [MonoidalCategory 𝒟]
+    [BraidedCategory 𝒞] [BraidedCategory 𝒟] {F : 𝒞 ⥤ 𝒟} [F.Monoidal] {G G' : 𝒟 ⥤ 𝒞}
+    (adj : F ⊣ G) (ι : G' ≅ G) {A B : 𝒞}
+    (hδ : F.map (β_ A B).hom ≫ Functor.OplaxMonoidal.δ F B A =
+      Functor.OplaxMonoidal.δ F A B ≫ (β_ (F.obj A) (F.obj B)).hom)
+    {X₁ X₂ Z Y₁ Y₂ : 𝒟} (c₁ : F.obj A ⟶ Y₁) (c₂ : F.obj B ⟶ Y₂) (u₁ : F.obj A ⟶ X₁)
+    (u₂ : X₁ ⟶ X₂) (u₃ : X₂ ⟶ Z) (v : Z ⟶ Y₁) (hc : u₁ ≫ u₂ ≫ u₃ ≫ v = c₁) :
+    adj.homEquiv _ _ ((Functor.Monoidal.μIso F A B).inv ≫ (c₁ ⊗ₘ c₂)) ≫
+      ι.inv.app (Y₁ ⊗ Y₂) =
+    (β_ A B).hom ≫ (adj.ofNatIsoRight ι.symm).unit.app (B ⊗ A) ≫
+      G'.map (Functor.OplaxMonoidal.δ F B A ≫ (F.obj B ◁ (u₁ ≫ u₂ ≫ u₃))) ≫
+      G'.map ((F.obj B ◁ v) ≫ (c₂ ▷ Y₁) ≫ (β_ Y₁ Y₂).inv) := by
+  subst hc
+  rw [← (adj.ofNatIsoRight ι.symm).homEquiv_id (B ⊗ A), Adjunction.homEquiv_ofNatIsoRight_apply,
+    Adjunction.homEquiv_id, Adjunction.homEquiv_unit, Iso.symm_hom, Category.assoc,
+    Category.assoc, ← G'.map_comp, ← ι.inv.naturality, ← adj.unit_naturality_assoc,
+    ← G.map_comp_assoc]
+  rw [Functor.Monoidal.μIso_inv, Category.assoc, reassoc_of% hδ,
+    ← MonoidalCategory.whiskerLeft_comp_assoc, ← tensorHom_def'_assoc,
+    ← BraidedCategory.braiding_naturality_assoc, Iso.hom_inv_id, Category.comp_id, Category.assoc,
+    Category.assoc]
 
 /-- The Künneth map `Π_f` of `q = f × f`, read through `Rq_* ≅ Rq_!`, is the unit of
 `Lq^* ⊣ Rq_!` followed by `Rq_!` of the tensor structure of `Lq^*` and the transported counits,
@@ -133,7 +195,24 @@ theorem prodLowerStarExternalProduct_comp_inv_app (N : Dᵇc(X.left)⟦Profinite
                 ((boundedConstructibleLowerStar _ ℓ f).obj K) ⟶ K)) ≫
           (prodUpperStarCounit ℓ (prod.map_snd f f) N ▷ _) ≫
           (externalProductBraiding ℓ K N).inv) := by
-  sorry
+  have h := Adjunction.homEquiv_μIso_inv_tensorHom_comp_inv_app
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map f f))
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f))
+    (boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ (prod.map f f)
+      ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
+        ((boundedConstructibleLowerStar _ ℓ f).obj K))
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+        ((boundedConstructibleLowerStar _ ℓ f).obj N)))
+    (prodUpperStarCounit ℓ (prod.map_fst f f) K) (prodUpperStarCounit ℓ (prod.map_snd f f) N)
+    ((boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.fst).inv.app
+      ((boundedConstructibleLowerStar _ ℓ f).obj K))
+    (eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
+      ((boundedConstructibleLowerStar _ ℓ f).obj K)) (prod.map_fst f f)))
+    ((boundedConstructibleUpperStarComp _ ℓ (prod.fst : X ⨯ X ⟶ X) f).hom.app
+      ((boundedConstructibleLowerStar _ ℓ f).obj K))
+    ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K)) rfl
+  exact h
 
 /-- An abstract chain of identities: a composite through a functor `L`, a natural
 transformation `σ : Q ⋙ L ⟶ P ⋙ F` and a functor `F` is rewritten through an isomorphism `π`,
@@ -164,6 +243,7 @@ lemma _root_.CategoryTheory.NatTrans.map_comp_map_comp_app_comp_map_comp_eq {�
 
 
 set_option maxHeartbeats 3000000 in
+-- the final `exact`s unify large six-functor composites
 /-- The base-change core of the exceptional Künneth part of identity (a) (blueprint
 `lem-trf-trace-source-exchange`, Step 3): the projection formula for `p₁'`, compact-support base
 change in the product square of `Y` and the pasted counit of `a_X = f ≫ a_Y` agree, through
@@ -206,7 +286,10 @@ theorem lowerShriek_exceptionalKunneth_baseChange :
     (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom
   case hπ => exact boundedConstructibleExceptionalProjection_app_app _ ℓ _ _ _
   case hL =>
-    have h := exceptionalProjection_comp_unit_square ℓ (prod.map_fst f f) ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X))) ((boundedConstructibleLowerStar _ ℓ f).obj K)
+    have h := exceptionalProjection_comp_unit_square ℓ (prod.map_fst f f)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+        ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)))
+      ((boundedConstructibleLowerStar _ ℓ f).obj K)
     exact h
   case hC =>
     have h := exceptionalProjection_comp_exceptionalKunnethAdjoint ℓ
