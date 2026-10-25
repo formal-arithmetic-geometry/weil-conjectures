@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
@@ -40,11 +41,18 @@ sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ
   `WeilConjectures.RepresentationTheory.ProfiniteInvariants`). None of strict localizations of
   `𝔸¹_S`, nearby cycles over a varying trait, or the action of inertia on nearby cycles is
   formalised.
-* `NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine`: the reduction from
-  products of models with affine total spaces to proper models, by projective closures over the
-  trait and extension by zero (the reduction from arbitrary to affine total spaces,
-  `NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`, is proved). Projective closures of
-  affine schemes of finite type over the trait are not formalised.
+* `NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`: projective closures over the
+  trait of affine schemes of finite type (projective space over `k'⟦t⟧` and closures in it are
+  not formalised).
+* `NearbyCyclesModel.isIso_kunnethMap_of_isIso_kunnethMap_twistSnd`: the Galois twist relating
+  the Künneth maps of the second projection and of its twist compatible with the structure
+  morphisms of the geometric generic fibres to `Spec Ω`.
+
+The reduction to proper models is proved from these: locality on the special fibre reduces to
+affine total spaces (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), and for affine
+total spaces one passes to the models of the total spaces and to proper closures, extending the
+coefficients by zero (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine`,
+`WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure`).
 
 -/
 
@@ -212,6 +220,114 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
       (((pullbackSquareComparison Λ φ₁.commSq_ε).app A).symm ⊗ᵢ
         ((pullbackSquareComparison Λ φ₂.commSq_ε).app B).symm) ≪≫ e).symm)) (hgeom C₀ hC₀)
 
+/-- **Projective closures over the trait**: an affine scheme of finite type over the trait
+`S = Spec k'⟦t⟧` is an open subscheme of a proper `S`-scheme (its closure in `ℙⁿ_S` along a
+closed embedding into `𝔸ⁿ_S ⊆ ℙⁿ_S`). -/
+theorem exists_isProper_openImmersion_of_isAffine {T : Scheme.{u}} (q : T ⟶ trait k')
+    [IsAffine T] [LocallyOfFiniteType q] :
+    ∃ (Tc : Scheme.{u}) (qc : Tc ⟶ trait k') (c : T ⟶ Tc), IsProper qc ∧ IsOpenImmersion c ∧
+      c ≫ qc = q :=
+  sorry
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- The *twist* of the second projection of a product over the trait: the morphism of models
+`P ⟶ N` with the same morphism of total spaces, whose morphism of geometric generic fibres is
+compatible with the structure morphisms `φ₁.generic ≫ gM` and `gN` to `Spec Ω`. It differs from
+`φ₂` by an automorphism of the geometric generic fibre of `P` over its total space (a Galois
+twist on each connected component). -/
+@[simps]
+noncomputable def Hom.twistSnd (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
+    (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
+    (hpb : IsPullback φ₁.total φ₂.total qM qN) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε) :
+    P.Hom N f₂ f₂' where
+  total := φ₂.total
+  generic := hN.isPullback_j.lift (P.j ≫ φ₂.total) (φ₁.generic ≫ gM) (by
+    rw [Category.assoc, ← hpb.w, ← Category.assoc, ← φ₁.comm_j, Category.assoc,
+      hM.isPullback_j.w, Category.assoc])
+  comm_j := hN.isPullback_j.lift_fst _ _ _
+  comm_i := φ₂.comm_i
+  comm_ε := by
+    rw [← heN, IsPullback.lift_fst_assoc, ← φ₂.comm_ε, ← heN, ← Category.assoc, φ₂.comm_j,
+      Category.assoc]
+
+include hΛ in
+/-- **The Galois twist** (Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7):
+the Künneth map of a product over the trait is invertible on bounded constructible complexes if
+the Künneth map with the second projection replaced by its twist `Hom.twistSnd`, compatible with
+the structure morphisms of the geometric generic fibres to `Spec Ω`, is. The two projections
+differ by an automorphism of the geometric generic fibre of `P` over its total space. -/
+theorem isIso_kunnethMap_of_isIso_kunnethMap_twistSnd (hM : M.IsTraitModelOver qM gM)
+    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM)) {eM : M.total ⟶ X}
+    (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))}
+    (hA : boundedConstructible (condensedRingObj Λ X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))}
+    (hB : boundedConstructible (condensedRingObj Λ Y) B)
+    (h : IsIso (kunnethMap Λ φ₁ (Hom.twistSnd φ₁ φ₂ hM hN hpb heN) A B)) :
+    IsIso (kunnethMap Λ φ₁ φ₂ A B) :=
+  sorry
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- A proper scheme over the trait is noetherian. -/
+lemma noetherianSpace_of_isProper {T : Scheme.{u}} (q : T ⟶ trait k') [IsProper q] :
+    TopologicalSpace.NoetherianSpace T := by
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian q
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace q
+  have : IsNoetherian T := ⟨⟩
+  infer_instance
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- The Künneth formula for products over the trait of proper models with compatible projections
+applies to the product `X̄ ×_S Ȳ` of the standard models of proper schemes over the trait. -/
+theorem isIso_kunnethMap_closure_of_forall_isProper
+    (hproper : ∀ {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
+      {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
+      {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X} {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y}
+      {f₂' : Z'.left ⟶ Y'.left} (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
+      {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
+      {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))},
+      M.IsTraitModelOver qM gM → N.IsTraitModelOver qN gN →
+      IsPullback φ₁.total φ₂.total qM qN →
+      P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM) →
+      φ₂.generic ≫ gN = φ₁.generic ≫ gM → IsProper qM → IsProper qN →
+      ∀ {eM : M.total ⟶ X}, M.j ≫ eM = M.ε → ∀ {eN : N.total ⟶ Y}, N.j ≫ eN = N.ε →
+      ∀ {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X))}
+        {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+          (condensedRingObj Λ Y))},
+        boundedConstructible (condensedRingObj Λ X) A →
+          boundedConstructible (condensedRingObj Λ Y) B → IsIso (kunnethMap Λ φ₁ φ₂ A B))
+    {Xc Yc : Scheme.{u}} (qcM : Xc ⟶ trait k') (qcN : Yc ⟶ trait k') [IsProper qcM]
+    [IsProper qcN]
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Xc) Ab.{u + 1})
+      (condensedRingObj Λ Xc)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Yc) Ab.{u + 1})
+      (condensedRingObj Λ Yc)))
+    (hA : boundedConstructible (condensedRingObj Λ Xc) A)
+    (hB : boundedConstructible (condensedRingObj Λ Yc) B) :
+    IsIso (kunnethMap Λ (closureFst qcM qcN) (closureSnd qcM qcN) A B) := by
+  refine hproper (closureFst qcM qcN) (closureSnd qcM qcN) (qM := qcM)
+    (gM := pullback.snd qcM (traitGenericPoint k')) (qN := qcN)
+    (gN := pullback.snd qcN (traitGenericPoint k'))
+    ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+      IsPullback.of_hasPullback _ _⟩
+    ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+      IsPullback.of_hasPullback _ _⟩
+    (IsPullback.of_hasPullback qcM qcN)
+    ⟨inferInstanceAs (LocallyOfFiniteType (pullback.fst qcM qcN ≫ qcM)),
+      inferInstanceAs (QuasiCompact (pullback.fst qcM qcN ≫ qcM)),
+      inferInstanceAs (IsSeparated (pullback.fst qcM qcN ≫ qcM)), ?_,
+      IsPullback.of_hasPullback _ _⟩
+    (by simp) inferInstance inferInstance (eM := 𝟙 _) (by simp [geometric]) (eN := 𝟙 _)
+    (by simp [geometric]) hA hB
+  have e : (closureFst qcM qcN).generic ≫ pullback.snd qcM (traitGenericPoint k') =
+      pullback.snd (pullback.fst qcM qcN ≫ qcM) (traitGenericPoint k') := by simp
+  rw [e]
+  exact IsPullback.of_hasPullback _ _
+
 include hΛ in
 /-- **Reduction of Gabber's Künneth formula to proper models, affine case** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
@@ -220,11 +336,12 @@ for all products over the trait of models of finite type along proper structure 
 projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,
 then it is an isomorphism for products over the trait of models with affine total spaces.
 
-One takes projective closures of the affine total spaces over the trait and extends the
-coefficients by zero on the generic fibres. Finally the morphism of geometric generic fibres of the
-second projection may be replaced by the one compatible with the structure morphisms to `Spec Ω`:
-the two differ by an automorphism of the geometric generic fibre of `P` over its total space (a
-Galois twist on each connected component), whose pullback exchange is invertible. -/
+The second projection is replaced by its twist compatible with the structure morphisms to
+`Spec Ω` (`NearbyCyclesModel.isIso_kunnethMap_of_isIso_kunnethMap_twistSnd`); the Künneth map is
+that of the models of the total spaces (`NearbyCyclesModel.isIso_kunnethMap_of_toGeometricGeneric`);
+these are restrictions of the standard models of projective closures of the total spaces
+(`NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`), and the coefficients are
+extended by zero (`NearbyCyclesModel.isIso_kunnethMap_toGeometricGeneric_of_closure`). -/
 theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
     (hproper : ∀ {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
       {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
@@ -250,8 +367,26 @@ theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y))}
     (hB : boundedConstructible (condensedRingObj Λ Y) B) :
-    IsIso (kunnethMap Λ φ₁ φ₂ A B) :=
-  sorry
+    IsIso (kunnethMap Λ φ₁ φ₂ A B) := by
+  obtain ⟨qM, gM, qN, gN, hM, hN, hpb, hP⟩ := h.exists_isTraitModelOver
+  obtain ⟨eM, heM⟩ := h.exists_comp_ε_left
+  obtain ⟨eN, heN⟩ := h.exists_comp_ε_right
+  refine isIso_kunnethMap_of_isIso_kunnethMap_twistSnd Λ hM hN hpb hP heM heN hA hB ?_
+  have := hMa
+  have := hNa
+  have := hM.locallyOfFiniteType
+  have := hN.locallyOfFiniteType
+  obtain ⟨Xc, qcM, uM, hqM, huM, hcM⟩ := exists_isProper_openImmersion_of_isAffine qM
+  obtain ⟨Yc, qcN, uN, hqN, huN, hcN⟩ := exists_isProper_openImmersion_of_isAffine qN
+  have := noetherianSpace_of_isProper qcM
+  have := noetherianSpace_of_isProper qcN
+  refine isIso_kunnethMap_of_toGeometricGeneric Λ _ _ heM heN A B ?_
+  exact isIso_kunnethMap_toGeometricGeneric_of_closure Λ (φ₂ := Hom.twistSnd φ₁ φ₂ hM hN hpb heN)
+    hM hN hpb hP (by simp) uM uN hcM hcN
+    (fun A' B' hA' hB' ↦ isIso_kunnethMap_closure_of_forall_isProper Λ hproper qcM qcN A' B' hA'
+      hB')
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hA)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
 
 include hΛ in
 /-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
