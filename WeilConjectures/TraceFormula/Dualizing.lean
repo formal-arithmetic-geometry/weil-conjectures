@@ -255,6 +255,8 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
+set_option maxHeartbeats 1000000 in
+-- the `erw` step unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
 its structure morphism. -/
 private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point k))
@@ -292,12 +294,14 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
   refine Eq.trans ?_ (congrArg (· ≫ ((boundedConstructibleUpperShriekAdjunction
     ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
   simp only [Category.assoc]
-  rfl
 
 /-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
 (`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
 theorem integral_point (α : BorelMooreSection ℓ (point k)) :
     α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom :=
+  haveI : IsProper (toPoint (point k)).left := by
+    rw [toPoint_left]
+    infer_instance
   integral_point_aux (toPoint (point k)) (toPoint_ext _ _) α
 
 end BorelMooreSection

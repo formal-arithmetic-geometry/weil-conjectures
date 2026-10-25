@@ -109,7 +109,7 @@ lemma exceptionalKunnethAdjointNatTrans_eq :
     exceptionalKunnethAdjointNatTrans ℓ X Y =
       Functor.whiskerRight (Functor.whiskerLeft
           (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-          (boundedConstructibleBraidingNatTrans₁ _
+          (boundedConstructibleBraidingNatTrans₁
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
               (dualizingComplex' ℓ Y))))
           (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)) ≫
@@ -212,7 +212,7 @@ noncomputable def kunnethVerdierRearrangement :
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
         (verdierDual ℓ N))) ≫
-    Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ _
+    Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
       ((curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
