@@ -290,6 +290,101 @@ lemma isZero_upperStar_of_retract_of_conservative {P : Over (Spec (.of k))}
   exact hcons _ (hP.of_iso (eqToIso (by rw [hxa]) ≪≫
     ((boundedConstructibleLowerStarComp _ ℓ x (toPoint X)).app _).symm))
 
+/-- **A complex vanishes along a closed immersion `x` if its global sections vanish**, provided
+global sections on the source of `x` detect vanishing and the extension by zero `j_! Lj^* C` from
+the complement `j` of `x` vanishes on an open neighbourhood `W'` of `x`: the open–closed triangle
+`j_! Lj^* C ⟶ C ⟶ Rx_* Lx^* C ⟶` then splits. -/
+theorem isZero_upperStar_of_isZero_lowerStar_of_isClosedImmersion {P : Over (Spec (.of k))}
+    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom] (x : P ⟶ X)
+    [IsClosedImmersion x.left]
+    (hcons : ∀ E : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (toPoint P)).obj E) → IsZero E)
+    (U : X.left.Opens) (hU : IsCompl (Set.range (opensOverι U).left.base) (Set.range x.left.base))
+    (W' : X.left.Opens) (hx : Set.range x.left.base ⊆ W')
+    (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hW : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (opensOverι W')).obj ((boundedConstructibleOpenImmersionLowerShriek
+        (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι U)).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (opensOverι U)).obj C))))
+    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (toPoint X)).obj C)) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C) := by
+  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_openClosed (opensOverι U) x hU C
+  obtain ⟨δ₀, hδ₀⟩ := WeilBoundedConstructible.exists_eq_map_comp_commShiftIso
+    (ObjectProperty.fullyFaithfulι _) δ
+  have hW₁ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (opensOverι W')).obj ((shiftFunctor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (1 : ℤ)).obj
+        ((boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι U)).obj
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+              (opensOverι U)).obj C)))) :=
+    ((shiftFunctor _ (1 : ℤ)).map_isZero hW).of_iso
+      (((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (opensOverι W')).commShiftIso (1 : ℤ)).app _)
+  have hδ₀' : δ₀ = 0 :=
+    eq_zero_of_lowerStar_of_isProper ℓ (opensOverLift W' x hx) (opensOverι W')
+      (opensOverLift_ι _ _ _) _ _ hW₁ δ₀
+  have hδ : δ = 0 := by
+    rw [hδ₀, hδ₀', Functor.map_zero, zero_comp]
+  obtain ⟨s, hs⟩ := Triangle.coyoneda_exact₃ _ hT (𝟙 _) (by
+    rw [Triangle.mk_mor₃, hδ]
+    exact comp_zero)
+  exact isZero_upperStar_of_retract_of_conservative ℓ x hcons C hΓ
+    ((ObjectProperty.fullyFaithfulι _).preimage s)
+    ((boundedConstructible _).ι.map_injective (by
+      rw [Functor.map_comp, Functor.FullyFaithful.map_preimage, CategoryTheory.Functor.map_id]
+      exact hs.symm))
+
+/-- **The induction step**: let `x` be a closed immersion with complement `U`, and `W₀ ⊆ W'` opens
+with `W' = x ∪ W₀`, `W₀` disjoint from `x`. If `C` vanishes on `W₀` and `RΓ(X, C) = 0`, and global
+sections on the source of `x` detect vanishing, then `C` vanishes on `W'`. -/
+theorem isZero_upperStar_opensOverι_of_isClosedImmersion {P : Over (Spec (.of k))}
+    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom] (x : P ⟶ X)
+    [IsClosedImmersion x.left]
+    (hcons : ∀ E : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (toPoint P)).obj E) → IsZero E)
+    (U W₀ W' : X.left.Opens)
+    (hU : IsCompl (Set.range (opensOverι U).left.base) (Set.range x.left.base))
+    (hx : Set.range x.left.base ⊆ W') (hW₀U : (W₀ : Set X.left) ⊆ U)
+    (hW₀W' : (W₀ : Set X.left) ⊆ W') (hdisj : Disjoint (Set.range x.left.base) W₀)
+    (hcov : (W' : Set X.left) ⊆ Set.range x.left.base ∪ W₀)
+    (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hC : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (opensOverι W₀)).obj C))
+    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (toPoint X)).obj C)) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (opensOverι W')).obj C) := by
+  have hW₀ : Set.range (opensOverι W₀).left.base ⊆ U := by
+    rw [range_opensOverι]
+    exact hW₀U
+  have hrange : Set.range (opensOverLift U (opensOverι W₀) hW₀ ≫ opensOverι U).left.base =
+      W₀ := by
+    rw [opensOverLift_ι, range_opensOverι]
+  have hε : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (opensOverι U)).map
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι U)).counit.app C)) :=
+    IsIso.of_isIso_fac_left (hh := IsIso.id _)
+      ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+        (opensOverι U)).right_triangle_components C)
+  have hD := isZero_upperStar_opensOverι_of_isCompl_of_isClosedImmersion ℓ W' x hx
+    (opensOverLift U (opensOverι W₀) hW₀ ≫ opensOverι U) (by rwa [hrange])
+    (by rwa [hrange]) (by rwa [hrange]) _
+    (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ
+      (opensOverι U) x hU.disjoint _)
+    ((isZero_upperStar_of_range_subset _ ℓ W₀ _ (by rw [hrange]) C hC).of_iso
+      ((boundedConstructibleUpperStarComp _ ℓ _ _).app _ ≪≫
+        (boundedConstructibleUpperStar _ ℓ _).mapIso (@asIso _ _ _ _ _ hε) ≪≫
+        ((boundedConstructibleUpperStarComp _ ℓ _ _).app C).symm))
+  exact isZero_upperStar_opensOverι_of_isCompl_of_isClosedImmersion ℓ W' x hx (opensOverι W₀)
+    (by rwa [range_opensOverι]) (by rwa [range_opensOverι]) (by rwa [range_opensOverι]) C
+    (isZero_upperStar_of_isZero_lowerStar_of_isClosedImmersion ℓ x hcons U hU W' hx C hD hΓ)
+    hC
+
 end Vanishing
 
 end AlgebraicGeometry.ProEtale.CondensedRing
