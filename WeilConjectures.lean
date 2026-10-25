@@ -7730,7 +7730,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopySquareRecti
 public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparator
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsoOfSyzygies
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
-public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatDegreewiseFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatShortExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
@@ -8083,6 +8082,8 @@ public import WeilConjectures.CategoryTheory.MittagLefflerLimitExact
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Bimod
 public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
+public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingPresheaf
+public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingSheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
@@ -8165,6 +8166,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorExchange
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TransposePairing
+public import WeilConjectures.CategoryTheory.Monoidal.NatTransEqOfIsMonoidal
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
@@ -12672,11 +12674,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPresheaf
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPullback
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.MonoidalUniqueness
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Profinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
