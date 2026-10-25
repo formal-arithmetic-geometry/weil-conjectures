@@ -72,6 +72,27 @@ lemma noetherianSpace_left_of_over (X : Over (Spec (.of k))) [LocallyOfFiniteTyp
   have : IsNoetherian X.left := ⟨⟩
   infer_instance
 
+/-! ### Zero morphisms -/
+
+section Zero
+
+variable (X : Scheme.{u})
+
+/-- The extension of scalars `T_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦E⟧` preserves zero morphisms, as the
+derived extension of scalars, a left adjoint, does. -/
+instance : (boundedConstructibleExtendScalars X ℓ E).PreservesZeroMorphisms where
+  map_zero A B := (boundedConstructible _).ι.map_injective (by
+    have := (Mod.derivedExtendMapDerivedCategoryAdjunction
+      (padicIntegersToPadicSubfield X ℓ E)).isLeftAdjoint
+    have := Functor.preservesZeroMorphisms_of_isLeftAdjoint
+      (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor
+    have h := (boundedConstructibleExtendScalarsCompatibility X ℓ E).hom.naturality (0 : A ⟶ B)
+    simp only [Functor.comp_map, Functor.map_zero, Limits.comp_zero] at h
+    rw [(boundedConstructible _).ι.map_zero]
+    exact (cancel_mono _).1 (h.trans (Limits.zero_comp).symm))
+
+end Zero
+
 /-! ### (Push) -/
 
 section LowerStar
@@ -204,6 +225,15 @@ noncomputable def boundedConstructibleUpperShriekExtendScalars :
   mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
     (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv
+
+/-- The exchange for `f^!` as the mate of a two-square. -/
+lemma boundedConstructibleUpperShriekExtendScalars_eq_mateEquiv :
+    boundedConstructibleUpperShriekExtendScalars ℓ E f =
+      (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+        (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+        (TwoSquare.mk _ _ _ _
+          (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)).natTrans :=
+  rfl
 
 /-- **The exchange for `f^!` is an isomorphism** for `𝒪_E ⟶ E` (blueprint
 `det-prop-scalar-six-exceptional`): the extension of scalars is a rationalization on both sides,

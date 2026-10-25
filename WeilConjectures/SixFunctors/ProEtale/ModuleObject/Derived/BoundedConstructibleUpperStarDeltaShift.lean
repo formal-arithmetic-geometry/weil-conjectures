@@ -41,7 +41,13 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
 
 /-- Let `G = Q.lift (P.ι ⋙ F)` be the restriction of `F` to full monoidal subcategories. A natural
 transformation `τ : (- ⊗ Y) ⋙ G ⟶ G ⋙ (- ⊗ G Y)` commutes with the shifts if its components are
-those of a natural transformation `σ : (- ⊗ Y) ⋙ F ⟶ F ⋙ (- ⊗ F Y)` commuting with the shifts. -/
+those of a natural transformation `σ : (- ⊗ Y) ⋙ F ⟶ F ⋙ (- ⊗ F Y)` commuting with the shifts:
+```
+G (X ⊗ Y) ──τ_X──▶ G X ⊗ G Y
+    ‖                  ‖
+F (X ⊗ Y) ──σ_X──▶ F X ⊗ F Y
+```
+(that is, `Q.ι` maps `τ_X` to `σ_X`). -/
 lemma commShift_of_lift_flip_app [∀ X : C, ((curriedTensor C).flip.obj X).CommShift A]
     [∀ X : D, ((curriedTensor D).flip.obj X).CommShift A] (Y : P.FullSubcategory)
     (τ : (curriedTensor P.FullSubcategory).flip.obj Y ⋙ Q.lift (P.ι ⋙ F) hF ⟶
@@ -85,7 +91,13 @@ lemma commShift_of_lift_flip_app [∀ X : C, ((curriedTensor C).flip.obj X).Comm
 
 /-- Let `G = Q.lift (P.ι ⋙ F)` be the restriction of `F` to full monoidal subcategories. A natural
 transformation `τ : (Y ⊗ -) ⋙ G ⟶ G ⋙ (G Y ⊗ -)` commutes with the shifts if its components are
-those of a natural transformation `σ : (Y ⊗ -) ⋙ F ⟶ F ⋙ (F Y ⊗ -)` commuting with the shifts. -/
+those of a natural transformation `σ : (Y ⊗ -) ⋙ F ⟶ F ⋙ (F Y ⊗ -)` commuting with the shifts:
+```
+G (Y ⊗ X) ──τ_X──▶ G Y ⊗ G X
+    ‖                  ‖
+F (Y ⊗ X) ──σ_X──▶ F Y ⊗ F X
+```
+(that is, `Q.ι` maps `τ_X` to `σ_X`). -/
 lemma commShift_of_lift_app [∀ X : C, ((curriedTensor C).obj X).CommShift A]
     [∀ X : D, ((curriedTensor D).obj X).CommShift A] (Y : P.FullSubcategory)
     (τ : (curriedTensor P.FullSubcategory).obj Y ⋙ Q.lift (P.ι ⋙ F) hF ⟶
