@@ -85,6 +85,7 @@ structure TransverseCorner where
   aZ : Z ⟶ Spec (.of k)
   isEtaleLimitOfSmoothSurfaces : IsEtaleLimitOfSmoothSurfaces aZ
   [isLocallyNoetherian : IsLocallyNoetherian Z]
+  [isRegular_Z : IsRegular Z]
   /-- The first divisor. -/
   X : Scheme.{u}
   /-- The second divisor, along which the direct image is taken. -/
@@ -115,7 +116,8 @@ structure TransverseCorner where
   [isOpenImmersion_i : IsOpenImmersion i]
   range_i_j : Set.range (i ≫ j) = (Set.range iX ∪ Set.range iY)ᶜ
 
-attribute [instance] TransverseCorner.isLocallyNoetherian TransverseCorner.isRegular_X
+attribute [instance] TransverseCorner.isLocallyNoetherian TransverseCorner.isRegular_Z
+  TransverseCorner.isRegular_X
   TransverseCorner.isRegular_Y TransverseCorner.isRegularImmersion_iX
   TransverseCorner.isRegularImmersion_iY
   TransverseCorner.isOpenImmersion_j TransverseCorner.isOpenImmersion_i
