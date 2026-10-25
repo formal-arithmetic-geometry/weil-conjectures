@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianLift
 public import WeilConjectures.AlgebraicGeometry.StrictLocalizationFibre
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 public import WeilConjectures.ConstructibleSheaf.EllMonodromy
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionStrictlyLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology

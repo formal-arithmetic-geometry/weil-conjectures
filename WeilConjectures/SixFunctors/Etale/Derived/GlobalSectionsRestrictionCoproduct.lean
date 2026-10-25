@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!

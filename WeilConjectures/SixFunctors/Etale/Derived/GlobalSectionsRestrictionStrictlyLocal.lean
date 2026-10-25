@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianLift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 
 /-!

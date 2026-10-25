@@ -124,6 +124,7 @@ theorem map_residue_ne_zero_of_not_mem_pow {u v r : R} {n : ℕ} {p : R[X]}
   rw [mul_assoc, pow_succ', show n = n - j + j by omega, pow_add, Nat.add_sub_cancel]
   exact Ideal.mul_mem_mul hj' (Ideal.mul_mem_mul (Ideal.pow_mem_pow hu _) (Ideal.pow_mem_pow hv _))
 
+omit [IsLocalRing R] in
 /-- If `r = ∑_{j ≤ n} p_j u ^ (n - j) v ^ j` with `p_n` a unit, then `v ^ n ∈ (u, r)`. -/
 theorem pow_mem_span_pair_of_isUnit_coeff {u v r : R} {n : ℕ} {p : R[X]}
     (hr : r = ∑ j ∈ Finset.range (n + 1), p.coeff j * u ^ (n - j) * v ^ j)
@@ -135,8 +136,10 @@ theorem pow_mem_span_pair_of_isUnit_coeff {u v r : R} {n : ℕ} {p : R[X]}
     exact Ideal.mul_mem_right _ _ (Ideal.mul_mem_left _ _ (Ideal.mul_mem_left _ _
       (Ideal.subset_span (by simp))))
   have h1 : p.coeff n * v ^ n ∈ Ideal.span {u, r} := by
-    have := Ideal.sub_mem _ (Ideal.subset_span (by simp) : r ∈ Ideal.span {u, r}) hs
-    rwa [hr, Finset.sum_range_succ, add_sub_cancel_left, Nat.sub_self, pow_zero, mul_one] at this
+    have key : r - ∑ j ∈ Finset.range n, p.coeff j * u ^ (n - j) * v ^ j = p.coeff n * v ^ n := by
+      rw [hr, Finset.sum_range_succ, add_sub_cancel_left, Nat.sub_self, pow_zero, mul_one]
+    rw [← key]
+    exact Ideal.sub_mem _ (Ideal.subset_span (by simp)) hs
   have := Ideal.mul_mem_left _ (↑hu.unit⁻¹ : R) h1
   rwa [← mul_assoc, hu.val_inv_mul, one_mul] at this
 
