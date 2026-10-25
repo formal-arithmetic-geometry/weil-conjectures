@@ -24,6 +24,8 @@ structure of `LG^*`, the composition isomorphisms `LG^* Lp_X^* ≅ Lp_X^*` and
 
 ## Main statements
 
+- `ProEtale.CondensedRing.openKunnethMap`: the Künneth map, defined as the component of the
+  generic Künneth natural transformation `CategoryTheory.Adjunction.kunnethNatTrans`.
 - `ProEtale.CondensedRing.isIso_exchangeRight_prodMapUpperStarSndIso`,
   `ProEtale.CondensedRing.isIso_homEquiv_prodMapUpperStarSndIso_hom_app_comp_map_counit`: the
   transpose `Lp_Y^* Rj_* B ⟶ RG_* Lp_U^* B` of the second factor of the Künneth map is the base
@@ -33,28 +35,16 @@ structure of `LG^*`, the composition isomorphisms `LG^* Lp_X^* ≅ Lp_X^*` and
   isomorphism for dualizable `M`, by generic base change and the projection formula at the
   dualizable object `Lp_X^* M`.
 
-## Sorried statements
-
-- `ProEtale.CondensedRing.isIso_openKunnethMap`: the Künneth map is an isomorphism for every
-  `M` (blueprint `lem-trf-ordinary-kunneth`; SGA 4½, [Th. finitude], Corollaire 1.11). The
-  blueprint proves it for finite coefficients (Stacks, Tag 0F1N, whose étale version is
-  `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`), by embedding a constructible
-  `𝔽_ℓ`-sheaf `M` into a finite sum of finite direct images of constant sheaves, for which it is
-  generic base change. That embedding has no `ℚ̄_ℓ` analogue, and generic base change only gives
-  the case of dualizable `M`: a dévissage in `M` along strata on which `M` is lisse needs the
-  exchange `R(j' × 1)_! ∘ R(1 × j)_* ≅ R(1 × j)_* ∘ R(j' × 1)_!`, which is itself a Künneth formula.
-  The passage from finite to `ℚ̄_ℓ`-coefficients is not available for the condensed module
-  objects used here.
+The general case, by dévissage in `M`, is in `WeilConjectures.TraceFormula.OrdinaryKunnethDevissage`.
 
 ## Implementation notes
 
-Two kinds of mismatch make the instantiation of the abstract lemmas on `openKunnethMap` costly:
-the coefficient ring written `_` elaborates its `Precoherent Profinite` instance to an auxiliary
-proof constant, and the tensor products may be elaborated through the full subcategory structure
-or through the monoidal category instance. The coefficient ring is therefore always written
-explicitly, the monoidal category instance is the preferred one in this file, and
-`isIso_openKunnethMap_of_isDualizable` matches the abstract lemma against the unfolded definition
-with `refine`, so that its data are taken from the goal.
+Definitions abstract the instance proofs in their bodies into auxiliary constants, and comparing
+terms built from them with separately elaborated terms makes the elaborator and the kernel unfold
+the six functors. The Künneth map is therefore the component of a generic construction, and its
+properties are obtained by unification with generic lemmas (`unfold openKunnethMap` followed by
+`refine` with the data taken from the goal). The coefficient ring is always written explicitly:
+writing it `_` elaborates its `Precoherent Profinite` instance to an auxiliary proof constant.
 
 -/
 
@@ -133,22 +123,6 @@ noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.pa
   ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.map (𝟙 X) j)).kunnethNatTrans (prodMapUpperStarFstIso ℓ j)
       (openKunnethSecondFactor ℓ j B)).app M
-
-/-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
-(blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it for finite
-coefficients and a general morphism `f`; here `f = j` is an open immersion). For an open immersion
-`j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
-`M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` is an isomorphism (SGA 4½, [Th. finitude], Corollaire 1.11,
-a consequence of Deligne's generic base change theorem, [Th. finitude], Théorème 1.9; for
-`ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze, Section 6.8).
-
-For dualizable `M` this is `isIso_openKunnethMap_of_isDualizable`; see the module docstring for
-the general case. -/
-theorem isIso_openKunnethMap (j : U ⟶ Y) [IsOpenImmersion j.left]
-    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (openKunnethMap ℓ j M B) :=
-  sorry
 
 
 /-- `prodMapUpperStarSndIso` is the pullback comparison of the square `commSq_prodMap_snd`. -/

@@ -89,10 +89,91 @@ theorem isIso_openKunnethMap_of_triangEnvelope
       (prod.map (𝟙 X) j)) (prodMapUpperStarFstIso ℓ j) (openKunnethSecondFactor ℓ j B) ℤ
   exact NatTrans.isIso_app_of_triangEnvelope _ h hM
 
+/-- **Two out of three for the Künneth map**: for a distinguished triangle
+`M₁ ⟶ M₂ ⟶ M₃ ⟶ M₁[1]`, if the Künneth maps of `M₂` and `M₃` are isomorphisms, so is that of
+`M₁`. -/
+theorem isIso_openKunnethMap_of_distTriang₁
+    (T : Pretriangulated.Triangle (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (hT : T ∈ Pretriangulated.distinguishedTriangles)
+    (h₂ : IsIso (openKunnethMap ℓ j T.obj₂ B)) (h₃ : IsIso (openKunnethMap ℓ j T.obj₃ B)) :
+    IsIso (openKunnethMap ℓ j T.obj₁ B) := by
+  let P : ObjectProperty (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+    fun M ↦ IsIso (openKunnethMap ℓ j M B)
+  have : P.Nonempty := ⟨_, h₂⟩
+  exact isIso_openKunnethMap_of_triangEnvelope ℓ j B (P := P) (fun _ h ↦ h)
+    (P.triangEnvelope.ext_of_isTriangulatedClosed₁ T hT (P.le_triangEnvelope _ h₂)
+      (P.le_triangEnvelope _ h₃))
+
 /-- The invertibility of the Künneth map only depends on `M` up to isomorphism. -/
 lemma isIso_openKunnethMap_of_iso {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : M ≅ M')
     (h : IsIso (openKunnethMap ℓ j M' B)) : IsIso (openKunnethMap ℓ j M B) := by
   unfold openKunnethMap at h ⊢
   exact ObjectProperty.prop_of_iso (NatTrans.isoLocus _) e.symm h
+
+-- TEMP stand-in
+theorem isIso_openKunnethMap_lowerStar_of_isClosedImmersion {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+    (g : Z ⟶ X) [IsClosedImmersion g.left] (j : U ⟶ Y) [IsOpenImmersion j.left]
+    (N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (h : IsIso (openKunnethMap ℓ (X := Z) j N B)) :
+    IsIso (openKunnethMap ℓ (X := X) j
+      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) B) := sorry
+
+/-- **The Künneth map for the extension by zero of a restriction**: for an open immersion
+`j' : V ⟶ X` and a dualizable `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the Künneth map of `Rj'_! Lj'^* K` is an
+isomorphism. By the open–closed triangle `Rj'_! Lj'^* K ⟶ K ⟶ Ri_* Li^* K ⟶`, this follows from the
+dualizable case for `K` and for `Li^* K` and the compatibility with closed pushforward. Thus the
+generator case `isIso_openKunnethMap_lowerShriek_of_isDualizable` only fails to be formal for
+dualizable objects on `V` which do not extend to dualizable objects on `X`. -/
+theorem isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable [IsOpenImmersion j.left]
+    {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    (j' : V ⟶ X) [IsOpenImmersion j'.left]
+    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
+    IsIso (openKunnethMap ℓ j
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').obj K)) B) := by
+  obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_boundedConstructible ℓ (j := j')
+    (i := overClosedComplement j') (isCompl_range_overClosedComplement j').symm K
+  have key := fun h₂ h₃ ↦ isIso_openKunnethMap_of_distTriang₁ ℓ j B _ hT h₂ h₃
+  exact key (isIso_openKunnethMap_of_isDualizable ℓ j hK B)
+    (isIso_openKunnethMap_lowerStar_of_isClosedImmersion ℓ _ j _ B
+      (isIso_openKunnethMap_of_isDualizable ℓ j
+        (isDualizable_boundedConstructibleUpperStar_obj ℓ _ hK) B))
+
+/-- **The ordinary Künneth formula for the extension by zero of a dualizable object**: for an
+open immersion `j' : V ⟶ X` with `V` affine and a dualizable `L ∈ Dᵇc(V)⟦ℚ̲̄_ℓ⟧`, the Künneth map
+`Rj'_! L ⊠ Rj_* B ⟶ R(𝟙 × j)_* (Rj'_! L ⊠ B)` is an isomorphism. This is the generator case of the
+ordinary Künneth formula (blueprint `lem-trf-ordinary-kunneth`; SGA 4½, [Th. finitude],
+Corollaire 1.11), the only case not reached by generic base change and the dévissage: it amounts to
+the vanishing of `R(𝟙 × j)_* (Rj'_! L ⊠ B)` on `(X ∖ V) ⨯ Y`. -/
+theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left]
+    {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    [IsAffine V.left] (j' : V ⟶ X) [IsOpenImmersion j'.left]
+    {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
+    IsIso (openKunnethMap ℓ j
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) :=
+  sorry
+
+variable (X) in
+/-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
+(blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it for finite
+coefficients and a general morphism `f`; here `f = j` is an open immersion). For an open immersion
+`j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
+`M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` is an isomorphism (SGA 4½, [Th. finitude], Corollaire 1.11).
+
+By dévissage (`isIso_openKunnethMap_of_triangEnvelope`, `triangEnvelope_lisseGenerator`) it
+reduces to the generators `Rg_! Rj'_! L`; the closed pushforward `Rg_!` is removed by
+`isIso_openKunnethMap_lowerStar_of_isClosedImmersion`, and the extension by zero of a dualizable
+object is `isIso_openKunnethMap_lowerShriek_of_isDualizable`. -/
+theorem isIso_openKunnethMap [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (openKunnethMap ℓ j M B) := by
+  refine isIso_openKunnethMap_of_triangEnvelope ℓ j B ?_ (triangEnvelope_lisseGenerator ℓ X M)
+  rintro N ⟨Z, _, _, _, g, _, V, _, _, _, _, j', _, L, hL, ⟨eN⟩⟩
+  refine isIso_openKunnethMap_of_iso ℓ j B
+    (eN ≪≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).app _) ?_
+  exact isIso_openKunnethMap_lowerStar_of_isClosedImmersion ℓ g j _ B
+    (isIso_openKunnethMap_lowerShriek_of_isDualizable ℓ j B j' hL)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
