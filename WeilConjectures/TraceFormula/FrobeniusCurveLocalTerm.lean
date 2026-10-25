@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.CurveSupportedPairing
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
 public import WeilConjectures.TraceFormula.GraphPieces
 
 /-!
@@ -157,7 +156,7 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_subsingleton [Subsingleton X.le
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
 
-/-- Blueprint `sk-lem-tf-curve-restriction-zero`, `ℚ̄_ℓ`-form:
+/-- Compatibility required from `sk-lem-tf-curve-restriction-zero` (to be proved there):
 **the supported restriction is zero for Frobenius** (SGA 5, III B, §§2–4). Let `X` be
 smooth of relative dimension one over the algebraically closed field `k`, with the model
 Frobenius `Φ` of a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` arbitrary, and let `z`
@@ -173,11 +172,7 @@ at `(x, x)`, from the Frobenius graph `a` to the diagonal `b`. The blueprint sho
 diagonal, covers of degree prime to `ℓ`, and the blowup argument of
 `sk-lem-tf-blowup-restriction`); the `ℚ̄_ℓ`-form follows by the integral models of
 `sk-lem-tf-rational-model`. The coefficient map `v` plays no role: `ρ_P` only depends on the
-correspondence and on `P`.
-
-The finite-coefficient statement is
-`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`; the transport to
-`ℚ̄_ℓ` is `upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_restrictionZero`. -/
+correspondence and on `P`. -/
 theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : 1 ≤ m)
@@ -188,8 +183,7 @@ theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k
       (z ≫ F.ι)).obj K)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
       (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 :=
-  upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_restrictionZero hΦ hm v F z hK
-    (Etale.CurveLocalModel.restrictionZero natCast_ne_zero_of_ringChar_ne)
+  sorry
 
 /-- **Frobenius local vanishing on a smooth curve** (blueprint `sk-i-curve-zero`): let `X` be smooth
 of relative dimension one over the algebraically closed field `k`, with the model Frobenius `Φ` of
