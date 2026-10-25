@@ -89,7 +89,7 @@ lemma isUnit_f' : IsUnit (algebraMap (blowupChart D.x y₀) D.Rx D.f') :=
 /-- The blow-up map sends `Z - Y` into `T - D`. -/
 lemma range_subset_basicOpen_f :
     Set.range (D.UY.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R D.Rx))) ⊆
-      Set.range (Scheme.specBasicOpen f).ι := by
+      Set.range (Scheme.basicOpenSpec f).ι := by
   rintro _ ⟨p, rfl⟩
   rw [Scheme.Opens.range_ι]
   change f ∉ Ideal.comap (algebraMap R D.Rx) p.val.asIdeal
@@ -100,18 +100,18 @@ lemma range_subset_basicOpen_f :
   · exact p.val.isPrime.ne_top (Ideal.eq_top_of_isUnit_mem _ hu D.isUnit_f')
 
 /-- The blow-up map `φ : Z - Y ⟶ T - D`. -/
-noncomputable def φ : D.UY.toScheme ⟶ (Scheme.specBasicOpen f).toScheme :=
+noncomputable def φ : D.UY.toScheme ⟶ (Scheme.basicOpenSpec f).toScheme :=
   IsOpenImmersion.lift _ _ D.range_subset_basicOpen_f
 
 @[reassoc (attr := simp)]
-lemma φ_ι : D.φ ≫ (Scheme.specBasicOpen f).ι =
+lemma φ_ι : D.φ ≫ (Scheme.basicOpenSpec f).ι =
     D.UY.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R D.Rx)) :=
   IsOpenImmersion.lift_fac _ _ _
 
 /-- The blow-up map sends `Z - (X ∪ Y)` into `T - (D ∪ H)`. -/
 lemma range_subset_basicOpen_fh :
     Set.range (D.UXY.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R D.Rx))) ⊆
-      Set.range (Scheme.specBasicOpen (f * h)).ι := by
+      Set.range (Scheme.basicOpenSpec (f * h)).ι := by
   rintro _ ⟨p, rfl⟩
   rw [Scheme.Opens.range_ι]
   change f * h ∉ Ideal.comap (algebraMap R D.Rx) p.val.asIdeal
@@ -125,11 +125,11 @@ lemma range_subset_basicOpen_fh :
   · exact hxh hp
 
 /-- The restriction `φU : Z - (X ∪ Y) ⟶ T - (D ∪ H)` of the blow-up map. -/
-noncomputable def φU : D.UXY.toScheme ⟶ (Scheme.specBasicOpen (f * h)).toScheme :=
+noncomputable def φU : D.UXY.toScheme ⟶ (Scheme.basicOpenSpec (f * h)).toScheme :=
   IsOpenImmersion.lift _ _ D.range_subset_basicOpen_fh
 
 @[reassoc (attr := simp)]
-lemma φU_ι : D.φU ≫ (Scheme.specBasicOpen (f * h)).ι =
+lemma φU_ι : D.φU ≫ (Scheme.basicOpenSpec (f * h)).ι =
     D.UXY.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R D.Rx)) :=
   IsOpenImmersion.lift_fac _ _ _
 
@@ -138,7 +138,7 @@ lemma isPullback_φ :
     IsPullback D.φU ((Spec (.of D.Rx)).homOfLE D.UXY_le_UY)
       ((Spec (.of R)).homOfLE (PrimeSpectrum.basicOpen_mul_le_left f h)) D.φ := by
   refine IsOpenImmersion.isPullback _ _ _ _ ?_ ?_
-  · rw [← cancel_mono (Scheme.specBasicOpen f).ι]
+  · rw [← cancel_mono (Scheme.basicOpenSpec f).ι]
     simp
   · ext p
     change D.φ p ∈ Set.range ((Spec (.of R)).homOfLE _) ↔
@@ -239,7 +239,7 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
     (D : BlowupChartData f g h x₀ y₀ (algebraMap k R)) (hx : D.x ∈ maximalIdeal R)
     (hlim : IsEtaleLimitOfSmoothSurfaces
       (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k D.Rx)))))
-    (E : DerivedCategory (Sheaf (Scheme.specBasicOpen (f * h)).toScheme.smallEtaleTopology
+    (E : DerivedCategory (Sheaf (Scheme.basicOpenSpec (f * h)).toScheme.smallEtaleTopology
       (ModuleCat.{u + 1} Λ)))
     (hE : HasFiniteEllMonodromy ℓ E) :
     globalSectionsRestriction (Scheme.puncturedCurveMap hfg)
@@ -355,7 +355,7 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
     IsOpenImmersion.lift _ _ hrange
   have hι : ι ≫ D.UY.ι = jW ≫ c := IsOpenImmersion.lift_fac _ _ _
   have hψ : Scheme.puncturedCurveMap hfg = ι ≫ D.φ := by
-    rw [← cancel_mono (Scheme.specBasicOpen f).ι, Category.assoc, D.φ_ι, reassoc_of% hι,
+    rw [← cancel_mono (Scheme.basicOpenSpec f).ι, Category.assoc, D.φ_ι, reassoc_of% hι,
       Scheme.puncturedCurveMap, IsOpenImmersion.lift_fac]
     simp only [jW, c, Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
     rw [← IsOpenImmersion.isoOfRangeEq_hom_fac (Scheme.puncturedSpec _).ι

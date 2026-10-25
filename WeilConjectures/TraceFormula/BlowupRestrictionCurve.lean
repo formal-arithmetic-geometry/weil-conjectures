@@ -66,7 +66,7 @@ noncomputable def puncturedSpec (A : Type u) [CommRing A] [IsLocalRing A] :
 variable {R : Type u} [CommRing R] [IsLocalRing R]
 
 /-- The basic open `D(f) ⊆ Spec R`, as an open subscheme. -/
-noncomputable abbrev specBasicOpen (f : R) : (Spec (.of R)).Opens :=
+noncomputable abbrev basicOpenSpec (f : R) : (Spec (.of R)).Opens :=
   PrimeSpectrum.basicOpen f
 
 /-- A quotient of a local ring by an element of the maximal ideal is local. -/
@@ -85,7 +85,7 @@ lemma range_puncturedSpec_subset
     (hfg : maximalIdeal R ≤ (Ideal.span {f, g}).radical) :
     Set.range ((puncturedSpec (R ⧸ Ideal.span {g})).ι ≫
         Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {g})))) ⊆
-      Set.range (specBasicOpen f).ι := by
+      Set.range (basicOpenSpec f).ι := by
   rintro _ ⟨p, rfl⟩
   rw [Scheme.Opens.range_ι]
   set q : PrimeSpectrum R := PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span {g})) p.val
@@ -112,7 +112,7 @@ when `V(f) ∩ V(g)` is the closed point. -/
 noncomputable def puncturedCurveMap
     (hfg : maximalIdeal R ≤ (Ideal.span {f, g}).radical) :
     (puncturedSpec (R ⧸ Ideal.span {g})).toScheme ⟶
-      (specBasicOpen f).toScheme :=
+      (basicOpenSpec f).toScheme :=
   IsOpenImmersion.lift _ _ (range_puncturedSpec_subset hfg)
 
 end AlgebraicGeometry.Scheme
