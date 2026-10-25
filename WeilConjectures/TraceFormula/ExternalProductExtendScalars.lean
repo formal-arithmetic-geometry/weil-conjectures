@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
 
 /-!
