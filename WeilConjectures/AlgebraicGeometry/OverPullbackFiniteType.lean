@@ -39,7 +39,7 @@ lemma isPullback_pullback_left :
 
 /-- The structure morphism of the fibre product is the second projection followed by that
 of `Z`. -/
-lemma pullback_hom_eq : (pullback f g).hom = (pullback.snd f g).left ≫ Z.hom := by
+lemma pullback_hom_eq_snd_left_comp : (pullback f g).hom = (pullback.snd f g).left ≫ Z.hom := by
   rw [← Over.w (pullback.snd f g)]
 
 variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -65,21 +65,21 @@ instance isSeparated_over_left : IsSeparated f.left := by
 instance locallyOfFiniteType_over_pullback_hom : LocallyOfFiniteType (pullback f g).hom := by
   have : LocallyOfFiniteType (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
-  rw [pullback_hom_eq]
+  rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
 /-- The fibre product of `k`-schemes of finite type is quasi-compact. -/
 instance quasiCompact_over_pullback_hom : QuasiCompact (pullback f g).hom := by
   have : QuasiCompact (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
-  rw [pullback_hom_eq]
+  rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
 /-- The fibre product of separated `k`-schemes is separated. -/
 instance isSeparated_over_pullback_hom : IsSeparated (pullback f g).hom := by
   have : IsSeparated (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
-  rw [pullback_hom_eq]
+  rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
