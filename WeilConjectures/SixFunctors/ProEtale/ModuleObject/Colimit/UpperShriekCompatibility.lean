@@ -17,8 +17,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, and `k` a field of characteristic
 `p ≠ ℓ`. For a separated `k`-scheme of finite type `X` write `T_X : Dᵇc(X)⟦E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧`
 for the extension of scalars `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` on bounded constructible complexes
-(`ProEtale.constructibleToPadicAlgCl`). This file treats the clause on `f^!` of blueprint
-`sk-prop-scalar-six` for the coefficient change `E ⟶ ℚ̄_ℓ`.
+(`ProEtale.CondensedRing.boundedConstructibleToPadicAlgCl`, the functor
+`ProEtale.constructibleToPadicAlgCl` typed on the categories `Dᵇc(X)⟦Λ⟧`). This file treats the
+clause on `f^!` of blueprint `sk-prop-scalar-six` for the coefficient change `E ⟶ ℚ̄_ℓ`.
 
 * **(Pull)** on bounded constructible complexes:
   `Lf^*_E ⋙ T_X ≅ T_Y ⋙ Lf^*_{ℚ̄_ℓ}`
@@ -95,20 +96,33 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace AlgebraicGeometry.ProEtale
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+section ToPadicAlgCl
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
+/-- The extension of scalars `T_X : Dᵇc(X)⟦E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧` on bounded constructible complexes:
+the functor `ProEtale.constructibleToPadicAlgCl`, typed on the categories `Dᵇc(X)⟦Λ⟧` of the six
+operations rather than on `ProEtale.PadicSubfieldConstructible` and
+`ProEtale.PadicAlgClConstructible`. The two category structures agree only after unfolding their
+instances, so the coefficient comparisons below are stated with this functor. -/
+noncomputable def boundedConstructibleToPadicAlgCl :
+    Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  constructibleToPadicAlgCl X ℓ E
+
+lemma boundedConstructibleToPadicAlgCl_eq :
+    boundedConstructibleToPadicAlgCl X ℓ E = constructibleToPadicAlgCl X ℓ E :=
+  rfl
+
 /-- The extension of scalars `T_X` on bounded constructible complexes is compatible with the
 inclusions. -/
-noncomputable def constructibleToPadicAlgClCompatibility :
-    constructibleToPadicAlgCl X ℓ E ⋙ (boundedConstructible _).ι ≅
+noncomputable def boundedConstructibleToPadicAlgClCompatibility :
+    boundedConstructibleToPadicAlgCl X ℓ E ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ derivedExtendScalarsToPadicAlgCl X ℓ E :=
   ObjectProperty.liftCompιIso _ _ _
 
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing
+end ToPadicAlgCl
 
 open Scheme
 
@@ -129,19 +143,19 @@ variable {X Y : Over (Spec (.of k))}
 along the fully faithful inclusions. -/
 noncomputable def boundedConstructibleUpperStarToPadicAlgClIso :
     boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ f ⋙
-        constructibleToPadicAlgCl X.left ℓ E ≅
-      constructibleToPadicAlgCl Y.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl X.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (constructibleToPadicAlgClCompatibility X.left ℓ E) ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility X.left ℓ E) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility _ ℓ f) _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f.left) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (constructibleToPadicAlgClCompatibility Y.left ℓ E).symm _ ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility _ ℓ f).symm ≪≫
       (Functor.associator _ _ _).symm)
@@ -163,19 +177,19 @@ morphism `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
 (`ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`). -/
 noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
     boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g ⋙
-        constructibleToPadicAlgCl Y.left ℓ E ≅
-      constructibleToPadicAlgCl Z.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl Z.left ℓ E ⋙
         boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (constructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (boundedConstructibleLowerStarCompatibility _ ℓ g) _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (asIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (constructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility _ ℓ g).symm ≪≫
       (Functor.associator _ _ _).symm)
@@ -196,19 +210,19 @@ immersion `j`: `j_!^E ⋙ T_X ≅ T_U ⋙ j_!^{ℚ̄_ℓ}`, the restriction of
 `ProEtale.CondensedRing.derivedOpenImmersionShriekIso`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso :
     boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ j ⋙
-        constructibleToPadicAlgCl X.left ℓ E ≅
-      constructibleToPadicAlgCl U.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl X.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl U.left ℓ E ⋙
         boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (constructibleToPadicAlgClCompatibility X.left ℓ E) ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility X.left ℓ E) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ j) _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (derivedOpenImmersionShriekIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) j.left) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (constructibleToPadicAlgClCompatibility U.left ℓ E).symm _ ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility U.left ℓ E).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ j).symm ≪≫
@@ -218,8 +232,8 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso :
 inverse of (Shriek) under the adjunctions `j_! ⊣ j^*`. -/
 noncomputable def boundedConstructibleOpenImmersionUpperStarToPadicAlgCl :
     boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ j ⋙
-        constructibleToPadicAlgCl U.left ℓ E ⟶
-      constructibleToPadicAlgCl X.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl U.left ℓ E ⟶
+      boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j :=
   mateEquiv (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
@@ -252,8 +266,8 @@ variable {f : X ⟶ Y} (c : Compactification f.left)
 (Push) for the proper `g`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso :
     boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c ⋙
-        constructibleToPadicAlgCl Y.left ℓ E ≅
-      constructibleToPadicAlgCl X.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
         boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG) ≪≫
@@ -266,8 +280,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClI
 the mate of the inverse of (Push) under the adjunctions `Rg_* ⊣ Rg^!`. -/
 noncomputable def boundedConstructibleProperUpperShriekToPadicAlgCl :
     (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ c.overG).rightAdjoint ⋙
-        constructibleToPadicAlgCl c.overObj.left ℓ E ⟶
-      constructibleToPadicAlgCl Y.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl c.overObj.left ℓ E ⟶
+      boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overG).rightAdjoint :=
   mateEquiv (Adjunction.ofIsLeftAdjoint _) (Adjunction.ofIsLeftAdjoint _)
     (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
@@ -276,8 +290,8 @@ noncomputable def boundedConstructibleProperUpperShriekToPadicAlgCl :
 of the inverse of (Shriek) under the adjunctions `Rf_!(c) ⊣ Rf^!(c)`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl :
     boundedConstructibleUpperShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c ⋙
-        constructibleToPadicAlgCl X.left ℓ E ⟶
-      constructibleToPadicAlgCl Y.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
+      boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c :=
   mateEquiv (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
     (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
@@ -327,8 +341,8 @@ variable (f : X ⟶ Y)
 `Rf_!^E ⋙ T_Y ≅ T_X ⋙ Rf_!^{ℚ̄_ℓ}`, along the chosen compactification. -/
 noncomputable def boundedConstructibleLowerShriekToPadicAlgClIso :
     boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
-        constructibleToPadicAlgCl Y.left ℓ E ≅
-      constructibleToPadicAlgCl X.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
         boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E (compactificationOverField f)
 
@@ -337,12 +351,21 @@ noncomputable def boundedConstructibleLowerShriekToPadicAlgClIso :
 (`boundedConstructibleLowerShriekToPadicAlgClIso`) under the adjunctions `Rf_! ⊣ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekToPadicAlgCl :
     boundedConstructibleUpperShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
-        constructibleToPadicAlgCl X.left ℓ E ⟶
-      constructibleToPadicAlgCl Y.left ℓ E ⋙
+        boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
+      boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv
+
+/-- The exchange for `f^!` as the mate of a two-square. -/
+lemma boundedConstructibleUpperShriekToPadicAlgCl_eq_mateEquiv :
+    boundedConstructibleUpperShriekToPadicAlgCl ℓ E f =
+      (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+        (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+        (TwoSquare.mk _ _ _ _
+          (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv)).natTrans :=
+  rfl
 
 /-- The exchange for `f^!` is an isomorphism as soon as the exchange for the proper part of the
 chosen compactification is one. -/
