@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
@@ -128,6 +130,69 @@ noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
         ℤ) :=
   inferInstance
+
+/-! ### K-flatness of pullbacks -/
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+/-- The K-flat complexes of module objects over `Λ_Z` form a left derivability structure for the
+quasi-isomorphisms of the homotopy category. -/
+instance isLeftDerivabilityStructure_localizerMorphismKFlat (Z : Scheme.{u}) :
+    (HomotopyCategory.quasiIso
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+      (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure := by
+  have (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+      PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft M)
+      (NatIso.ofComponents (fun N ↦ β_ M N) (by intros; simp [curriedTensor]))
+  have h₁ : HasColimitsOfShape ℤ
+    (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) := inferInstance
+  have h₂ : HasExactColimitsOfShape ℤ
+    (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) := inferInstance
+  have h₃ (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+      PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) := inferInstance
+  have h₄ : Abelian.HasFunctorialFlatResolution
+    (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) := inferInstance
+  have h₅ (X₁ X₂ X₃ X₄ : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+  have h₆ (X₁ X₂ X₃ : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+  have h₇ (X₁ X₂ X₃ : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
+  infer_instance
+
+/-- The extension of scalars along the isomorphism `α_f : f^* Λ_Y ⟶ Λ_X` is an equivalence. -/
+instance isEquivalence_extendScalars_condensedPullbackHom :
+    (Mod.extendScalars (condensedPullbackHom Λ f)).IsEquivalence :=
+  have : (Mod.comap (asIso (condensedPullbackHom Λ f)).inv).IsEquivalence :=
+    (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).symm.isEquivalence_functor
+  Functor.isEquivalence_of_iso (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)).symm
+
+/-- The pullback of module objects preserves K-flat complexes. -/
+lemma kFlat_upperStar_mapHomologicalComplex_obj
+    {P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)) ℤ}
+    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :
+    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      (((f)^*⟦Λ⟧).mapHomologicalComplex (.up ℤ) |>.obj P) :=
+  ObjectProperty.prop_of_iso _
+    ((Functor.mapHomologicalComplexCompIso (Iso.refl ((f)^*⟦Λ⟧)) (.up ℤ)).app P)
+    ((Mod.extendScalars (condensedPullbackHom Λ f)).kFlat_mapHomologicalComplex_obj_of_isEquivalence
+      (((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).kFlat_mapHomologicalComplex_obj P hP))
+
+/-- The pullback of module objects preserves K-flat objects of the homotopy category. -/
+lemma kFlat_upperStar_mapHomotopyCategory_obj
+    {R : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)) ℤ}
+    (hR : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat R) :
+    (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
+      (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj R)) :=
+  ObjectProperty.prop_of_iso _ (((f)^*⟦Λ⟧.mapHomotopyCategoryFactors (.up ℤ)).app R).symm
+    ((HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (kFlat_upperStar_mapHomologicalComplex_obj Λ f hR))
 
 /-! ### Complexes -/
 
@@ -358,14 +423,88 @@ noncomputable def leftDerivedUpperStarTensorRightCounit :
         (NatTrans.prod (f)^*⟦Λ⟧.leftDerivedFunctorCounit (f)^*⟦Λ⟧.leftDerivedFunctorCounit)
           (uncurry.obj (curriedTensor _)) ≫ whiskeringLeft₂Equiv (upperStarTensorCounit Λ f))
 
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The comparison `f^* A ⊗ f^* B ⟶ f^*(A ⊗ B)` of complexes is a section of the comparison
+induced by the comonoidal structure of `f^*`. -/
+lemma upperStarTensorComplexHom_δ
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    upperStarTensorComplexHom Λ f A B ≫
+      ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B =
+      𝟙 _ := by
+  refine HomologicalComplex.hom_ext _ _ (fun n ↦ ?_)
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro i₁ i₂ h
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f, 
+    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
+    HomologicalComplex.mapBifunctorComparison_f]
+  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  rw [Category.assoc]
+  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
+  erw [Category.comp_id]
+  exact Functor.Monoidal.μ_δ_assoc _ _ _ _
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+open DerivedCategory in
+/-- The counit of the bifunctor `Lf^* - ⊗ᴸ Lf^* -` on objects of the homotopy category. -/
+lemma leftDerivedUpperStarTensorRightCounit_app_app (A B : HomotopyCategory
+    (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (ComplexShape.up ℤ)) :
+    ((leftDerivedUpperStarTensorRightCounit Λ f).app A).app B =
+      ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B)) ≫
+        (Qh.obj (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ◁
+          (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B) ≫
+        Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
+        Qh.map ((HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f A.as B.as)) := by
+  dsimp only [leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app]
+  erw [Category.id_comp]
+  refine (?_ : _ = 𝟙 _ ≫ (((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B)) ≫
+        (Qh.obj (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ◁
+          (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B)) ≫
+        (Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
+        Qh.map ((HomotopyCategory.quotient _ _).map
+          (upperStarTensorComplexHom Λ f A.as B.as)))).trans ?_
+  · rfl
+  · exact (Category.id_comp _).trans (Category.assoc _ _ _)
+
+
+set_option synthInstance.maxHeartbeats 400000 in
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
 /-- The bifunctor `Lf^* - ⊗ᴸ Lf^* -` is a left derived bifunctor of `(A, B) ↦ Qh (f^* (A ⊗ B))`,
 for the counit `leftDerivedUpperStarTensorRightCounit`. See the module docstring. -/
 instance isLeftDerivedFunctor₂_upperStarTensor :
     (leftDerivedUpperStarTensorRight Λ f).IsLeftDerivedFunctor₂
       (leftDerivedUpperStarTensorRightCounit Λ f)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
-      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
-  sorry
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) := by
+  refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
+    (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
+    (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat _ (fun X₁ X₂ ↦ ?_)
+  obtain ⟨A, hA⟩ := X₁
+  obtain ⟨B, hB⟩ := X₂
+  obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
+  obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
+  have hB' := (HomotopyCategory.kFlat_quotient_obj_iff B).1 hB
+  change IsIso (((leftDerivedUpperStarTensorRightCounit Λ f).app
+    ((HomotopyCategory.quotient _ _).obj A)).app ((HomotopyCategory.quotient _ _).obj B))
+  rw [leftDerivedUpperStarTensorRightCounit_app_app]
+  have := (f)^*⟦Λ⟧.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ hA
+  have := (f)^*⟦Λ⟧.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ hB
+  have h₃ : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh
+      (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj A))
+      (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj B))) :=
+    isIso_μNatTrans_Qh_app_app_of_kFlat _ _ (kFlat_upperStar_mapHomotopyCategory_obj Λ f hB')
+  have h₄ : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+      (upperStarTensorComplexHom Λ f A B))) := by
+    rw [upperStarTensorComplexHom_eq_inv]
+    infer_instance
+  exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance
+    (IsIso.comp_isIso' h₃ h₄))
 
 set_option maxHeartbeats 1600000 in
 -- the instances on complexes of module objects make the elaboration slow
@@ -417,6 +556,53 @@ lemma leftDerivedUpperStarTensor_fac :
         (leftDerivedUpperStarTensor Λ f) ≫ leftDerivedUpperStarTensorRightCounit Λ f =
       leftDerivedUpperStarTensorLeftCounit Λ f :=
   Functor.leftDerived₂_fac _ _ _ _ _ _
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+open DerivedCategory in
+/-- The defining property of the tensor comparison of `Lf^*`, in the form used by
+`DerivedCategory.commShift_of_tensorLeft_fac`. -/
+lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
+    (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (ComplexShape.up ℤ)) :
+    ((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B) ≫
+        Qh.obj (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ◁
+          (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B ≫
+        Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) =
+      L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ Qh A B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B) ≫
+        Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
+          (f)^*⟦Λ⟧).app A).app B) := by
+  have h : ((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ f).app A).app B =
+      ((leftDerivedUpperStarTensorLeftCounit Λ f).app A).app B :=
+    congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
+  rw [leftDerivedUpperStarTensorRightCounit_app_app] at h
+  have hδ : Qh.map ((HomotopyCategory.quotient _ _).map
+      (upperStarTensorComplexHom Λ f A.as B.as)) ≫
+      Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
+          (f)^*⟦Λ⟧).app A).app B) = 𝟙 _ := by
+    rw [← Functor.map_comp]
+    erw [Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app]
+    rw [← Functor.map_comp, upperStarTensorComplexHom_δ]
+    exact (congrArg Qh.map ((HomotopyCategory.quotient _ _).map_id _)).trans (Qh.map_id _)
+  calc _ = (((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B) ≫
+        Qh.obj (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ◁
+          (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B ≫
+        Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
+        Qh.map ((HomotopyCategory.quotient _ _).map
+          (upperStarTensorComplexHom Λ f A.as B.as))) ≫
+        Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
+          (f)^*⟦Λ⟧).app A).app B) := by
+        simp only [Category.assoc]
+        erw [hδ, Category.comp_id]
+    _ = _ := by
+        erw [h]
+        exact Category.assoc _ _ _
+
 
 /-- The comparison `m : Lf^* (- ⊗ᴸ -) ⟶ Lf^* - ⊗ᴸ Lf^* -` is an isomorphism. See the module
 docstring. -/
