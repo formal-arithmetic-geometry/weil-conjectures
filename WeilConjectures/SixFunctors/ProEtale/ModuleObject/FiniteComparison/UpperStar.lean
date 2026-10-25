@@ -20,9 +20,7 @@ pushforwards (`ProEtale.lowerStarFiniteCoefficientModEquivalenceIso`): both push
 underlying abelian sheaf `f_* M`, and the actions of `t ∈ T` agree, being the actions of the
 constant global section `t` (`ProEtale.finiteCoefficientModEquivalence_smul`). By uniqueness of
 left adjoints it commutes with the pullbacks
-(`ProEtale.upperStarFiniteCoefficientModEquivalenceIso`), and, all functors being exact, so does
-its derived version `ProEtale.finiteCoefficientDerivedEquivalence` with the derived pullbacks
-(`ProEtale.leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso`).
+(`ProEtale.upperStarFiniteCoefficientModEquivalenceIso`).
 
 -/
 
@@ -57,16 +55,6 @@ noncomputable def upperStarFiniteCoefficientModEquivalenceIso :
         (finiteCoefficientModEquivalence X T).functor ≅
       (finiteCoefficientModEquivalence Y T).functor ⋙
         ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) f :=
-  sorry
-
-/-- **The derived comparison of the two finite-coefficient models commutes with the derived
-pullback**: `Lf^* ⋙ D(Φ_X) ≅ D(Φ_Y) ⋙ Lf^*`, induced by
-`upperStarFiniteCoefficientModEquivalenceIso`, all functors involved being exact. -/
-noncomputable def leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso :
-    L(CondensedRing.upperStar (Profinite.continuousMapRingObj T) f) ⋙
-        (finiteCoefficientDerivedEquivalence X T).functor ≅
-      (finiteCoefficientDerivedEquivalence Y T).functor ⋙
-        L(ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) f) :=
   sorry
 
 end AlgebraicGeometry.ProEtale

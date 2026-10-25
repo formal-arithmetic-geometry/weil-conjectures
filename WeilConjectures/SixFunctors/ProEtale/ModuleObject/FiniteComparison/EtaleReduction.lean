@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 
 /-!
 
