@@ -12528,6 +12528,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPresheaf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
