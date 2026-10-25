@@ -17,17 +17,18 @@ The Künneth map of nearby cycles `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ 
 pullback exchanges `α`: for morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P`
 compatible with `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` and `φ₁' : P' ⟶ M'`, `φ₂' : P' ⟶ N'`, the square
 ```
-Lρ_P'^* (Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B) --Lρ'^* Π--> Lρ_P'^* Ψ_P (A ⊠ B) --α_{ρ_P}--> Ψ_{P'} Lρ_P^* (A ⊠ B)
-        | (α_{ρ_M} ⊗ α_{ρ_N}) ∘ m                                               | m
-Le₁'^* Ψ_{M'} Lρ_M^* A ⊗ Le₂'^* Ψ_{N'} Lρ_N^* B ------------Π---------> Ψ_{P'} (Lρ_M^* A ⊠ Lρ_N^* B)
+Lρ_P'^* (Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B) --Lρ'^* Π--> Lρ_P'^* Ψ_P (A ⊠ B)
+        | (α_{ρ_M} ⊗ α_{ρ_N}) ∘ m                     | m ∘ α_{ρ_P}
+Le₁'^* Ψ_{M'} Lρ_M^* A ⊗ Le₂'^* Ψ_{N'} Lρ_N^* B --Π--> Ψ_{P'} (Lρ_M^* A ⊠ Lρ_N^* B)
 ```
 commutes up to the tensor and pullback comparisons `m`
 (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`). It follows from the square law of
 the pullback exchanges (`NearbyCyclesModel.Hom.pullbackExchange_square`) and their monoidality
 (`NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`). In particular, when the
-exchanges `α_ρ` are invertible (e.g. for open immersions, `WeilConjectures.SixFunctors.NearbyCycles.OpenExchange`),
-`Lρ_P'^* Π_{A,B}` is invertible if and only if `Π_{Lρ_M^* A, Lρ_N^* B}` is
-(`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isIso`).
+exchanges `α_ρ` are invertible (e.g. for open immersions,
+`WeilConjectures.SixFunctors.NearbyCycles.OpenExchange`), `Lρ_P'^* Π_{A,B}` is invertible if and
+only if `Π_{Lρ_M^* A, Lρ_N^* B}` is
+(`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`).
 
 -/
 
