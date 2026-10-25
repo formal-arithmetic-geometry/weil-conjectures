@@ -340,12 +340,12 @@ theorem isIso_geometricBaseChangeLowerStarBaseChange [Algebra.IsSeparable k Ω] 
   unfold baseChangeMap at hamb
   rw [← leftDerivedUpperStarGeometricBaseChangeComparison_eq] at hamb
   exact Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ f K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ ((geometricBaseChange k Ω).map f)
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ ((geometricBaseChange k Ω).map f)
-      K.obj K.property)
+      K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ ((geometricBaseChange k Ω).map f)
+      K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj ℓ Y K.obj
       K.property)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj ℓ X K.obj

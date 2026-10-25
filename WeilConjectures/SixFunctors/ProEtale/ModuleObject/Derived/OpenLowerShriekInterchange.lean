@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowe
 
 # Interchanging proper direct image and extension by zero
 
-Let `Λ` be a commutative condensed ring. All schemes are separated and of finite type over a
+All schemes are separated and of finite type over a
 field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all morphisms are morphisms of
 `Over (Spec (.of k))`. For a cartesian square
 ```
@@ -26,10 +26,9 @@ X  --j---> Z
 ```
 with `j` and `i'` open immersions, the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*`
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`) is an
-isomorphism when `p'` is proper, for the coefficient rings `E̲` of a finite extension `E` of
-`ℚ_ℓ` and `ℚ̲̄_ℓ`
-(`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`
-and `..._padicAlgCl`). This is the `E`-coefficient analogue of part (3) of the blueprint
+isomorphism when `p'` is proper, for the coefficient ring `ℚ̲̄_ℓ`
+(`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl`).
+This is the `ℚ̄_ℓ`-coefficient analogue of part (3) of the blueprint
 lemma on interchanging proper direct image and extension by zero, which is formalised for finite
 coefficients as `AlgebraicGeometry.Etale.existsUnique_openImmersionLowerShriekLowerStarExchange`.
 
@@ -320,42 +319,20 @@ end Interchange
 
 section Coefficients
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-  {X Z X' Z' : Over (Spec (.of k))}
+variable {X Z X' Z' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
   {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
   [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p'.left]
 
-omit [MonObj Λ] [IsCommMonObj Λ] in
-/-- **Interchanging proper direct image and extension by zero** for bounded constructible
-`E`-sheaves (the `E`-coefficient analogue of part (3) of the interchange lemma): the exchange
-morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an
-isomorphism. Over the open `X ⊆ Z` it is the identification
-`Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed complement `Z ∖ X` the stalks of
-`Rp'_*(i'_! K)` are, by proper base change, the cohomology of the fibres of `p'` over `Z ∖ X`,
-which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`,
-hence vanish. (In the blueprint the square is cartesian by part (1), from the density of `X'`
-in `Z'`.) -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
-    (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
-      (Profinite.continuousMapRingObj E) ℓ sq) :=
-  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso _ ℓ sq
-    (isIso_boundedConstructibleBaseChange_of_isProper ℓ E sq.flip)
-    (isIso_boundedConstructibleBaseChange_of_isProper ℓ E
-      (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)))
-
-omit [MonObj Λ] [IsCommMonObj Λ] in
 /-- **Interchanging proper direct image and extension by zero** for bounded constructible
 `ℚ̄_ℓ`-sheaves (the `ℚ̄_ℓ`-analogue of part (3) of the interchange lemma): the exchange morphism
 `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl
     (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
-      ℓ sq) :=
-  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso _ ℓ sq
+    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq) :=
+  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso ℓ sq
     (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq.flip)
     (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
       (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)))

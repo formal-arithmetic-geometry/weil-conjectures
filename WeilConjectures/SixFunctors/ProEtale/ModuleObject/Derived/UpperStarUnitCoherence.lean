@@ -248,7 +248,7 @@ private lemma leftDerivedUpperStarUnitIso_hom_comp_left (f : X ⟶ Y) (g : Y ⟶
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [Fact ℓ.Prime] in
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 private lemma leftDerivedUpperStarComp_hom_app_unit_obj (f : X ⟶ Y) (g : Y ⟶ Z) :
     (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left).hom.app (𝟙_
         Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧).obj =
@@ -273,7 +273,7 @@ lemma boundedConstructibleUpperStarComp_hom_app_unit (f : X ⟶ Y) (g : Y ⟶ Z)
     boundedConstructibleUpperStar_map_hom, boundedConstructibleUpperStar_εIso_inv_hom]
   exact (congrArg (· ≫ _) (leftDerivedUpperStarComp_hom_app_unit_obj ℓ f g)).trans
     ((leftDerivedUpperStarComp_hom_app_unit (Profinite.padicAlgClRingObj ℓ) f.left g.left).trans
-      (leftDerivedUpperStarUnitIso_hom_comp_left f g).symm)
+      (leftDerivedUpperStarUnitIso_hom_comp_left ℓ f g).symm)
 
 variable (X) in
 /-- The identity isomorphism `R(𝟙 X)_* ≅ 𝟭` of the derived pushforward on bounded constructible
