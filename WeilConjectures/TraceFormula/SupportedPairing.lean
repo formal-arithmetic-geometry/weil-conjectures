@@ -110,7 +110,7 @@ noncomputable def supportedClass (c : C ⟶ Y ⨯ X)
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
       (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).obj L) :
     (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
-      externalProduct ℓ L (verdierDual ℓ (toPoint X) K) :=
+      externalProduct ℓ L (verdierDual ℓ K) :=
   (correspondenceClassEquiv ℓ c K L).symm u ≫ inv (kunnethVerdierMap ℓ L K)
 
 variable (X Y) in
@@ -137,7 +137,7 @@ noncomputable def oppositeSupportedClass (d : D ⟶ X ⨯ Y)
     (v : (boundedConstructibleUpperStar _ ℓ (d ≫ prod.snd)).obj L ⟶
       (boundedConstructibleUpperShriek ℓ (d ≫ prod.fst)).obj K) :
     (boundedConstructibleLowerShriek ℓ (d ≫ (prod.braiding X Y).hom)).obj (𝟙_ _) ⟶
-      externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K :=
+      externalProduct ℓ (verdierDual ℓ L) K :=
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ d (prod.braiding X Y).hom).hom.app _ ≫
     (boundedConstructibleLowerShriek ℓ (prod.braiding X Y).hom).map (supportedClass ℓ d v) ≫
     (externalProductBraidingIso ℓ X Y K _).hom
@@ -218,8 +218,8 @@ variable (L K) in
 the symmetry constraints, the monoidal structure of the pullbacks, the evaluations and the
 exterior product of the dualizing complexes. -/
 noncomputable def kernelContraction :
-    externalProduct ℓ L (verdierDual ℓ (toPoint X) K) ⊗
-        externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K ⟶
+    externalProduct ℓ L (verdierDual ℓ K) ⊗
+        externalProduct ℓ (verdierDual ℓ L) K ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=
   (tensorTensorRearrangeIso _ _ _ _).hom ≫
     ((β_ _ _).hom ▷ _) ≫
@@ -238,9 +238,9 @@ variable (c d') in
 `vc : Rd'_! ℚ̄_ℓ,D ⟶ D_Y L ⊠ K`. -/
 noncomputable def pairingMorphism (hE : IsPullback eC eD c d')
     (uc : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
-      externalProduct ℓ L (verdierDual ℓ (toPoint X) K))
+      externalProduct ℓ L (verdierDual ℓ K))
     (vc : (boundedConstructibleLowerShriek ℓ d').obj (𝟙_ _) ⟶
-      externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K) :
+      externalProduct ℓ (verdierDual ℓ L) K) :
     (boundedConstructibleLowerShriek ℓ (eC ≫ c)).obj (𝟙_ _) ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=
   (supportProductIso ℓ hE).hom ≫ (uc ⊗ₘ vc) ≫ kernelContraction ℓ K L
@@ -251,9 +251,9 @@ square `E = C ×_Z D`: the exceptional adjoint, along `e = eC ≫ c : E ⟶ Z`, 
 morphism, read through `Re^! ω_Z ≅ ω_E`. -/
 noncomputable def pairingOfClasses (hE : IsPullback eC eD c d')
     (uc : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
-      externalProduct ℓ L (verdierDual ℓ (toPoint X) K))
+      externalProduct ℓ L (verdierDual ℓ K))
     (vc : (boundedConstructibleLowerShriek ℓ d').obj (𝟙_ _) ⟶
-      externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K) :
+      externalProduct ℓ (verdierDual ℓ L) K) :
     BorelMooreSection ℓ E :=
   (boundedConstructibleUpperShriekAdjunction ℓ (eC ≫ c)).homEquiv _ _
       (pairingMorphism ℓ c d' hE uc vc) ≫

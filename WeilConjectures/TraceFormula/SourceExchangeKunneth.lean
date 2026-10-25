@@ -316,22 +316,22 @@ theorem evaluation_comp_prodLowerStarExternalProduct :
           ((boundedConstructibleLowerStar ℓ f).obj K))).hom ▷ _) ≫ (α_ _ _ _).hom ≫
       (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
         ((boundedConstructibleLowerStar ℓ f).obj K)
-        ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ (toPoint X) K))) ≫
+        ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K))) ≫
       (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
-        (lowerStarTensorMap ℓ f K (verdierDual ℓ (toPoint X) K) ≫
+        (lowerStarTensorMap ℓ f K (verdierDual ℓ K) ≫
           (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)))) ≫
       prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
         (externalProduct ℓ K (dualizingComplex' ℓ X)) =
     (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
         ((boundedConstructibleLowerStar ℓ f).obj K) ◁
-      (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ (toPoint X) K) ≫
+      (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ K) ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
-          (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) ≫
+          (externalProduct ℓ K (verdierDual ℓ K))) ≫
       Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ (prod.map f f))
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
           ((boundedConstructibleLowerStar ℓ f).obj K))
-        (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≫
+        (externalProduct ℓ K (verdierDual ℓ K)) ≫
       (boundedConstructibleLowerShriek ℓ (prod.map f f)).map
         ((prodUpperStarCounit ℓ (prod.map_snd f f) K ▷ _) ≫
           (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫

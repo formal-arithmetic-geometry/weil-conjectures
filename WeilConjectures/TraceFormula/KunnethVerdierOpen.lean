@@ -251,8 +251,8 @@ internal-hom comparison of `Lj^*` (an isomorphism for open `j`) followed by `Lj^
 noncomputable def verdierDualUpperStarIso (j : U ⟶ Y) [IsOpenImmersion j.left]
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-        (verdierDual ℓ (toPoint Y) N) ≅
-      verdierDual ℓ (toPoint U)
+        (verdierDual ℓ N) ≅
+      verdierDual ℓ
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N) :=
   haveI := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
     ℓ j N
@@ -278,8 +278,8 @@ noncomputable def kunnethVerdierSourceRestrictionIso (j : U ⟶ Y) [IsOpenImmers
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
-        (externalProduct ℓ M (verdierDual ℓ (toPoint Y) N)) ≅
-      externalProduct ℓ M (verdierDual ℓ (toPoint U)
+        (externalProduct ℓ M (verdierDual ℓ N)) ≅
+      externalProduct ℓ M (verdierDual ℓ
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N)) :=
   (Functor.Monoidal.μIso _ _ _).symm ≪≫
     tensorIso ((prodMapUpperStarFstIso ℓ j).app M)
@@ -445,19 +445,19 @@ formula `M ⊠ Rj_* B ≅ R(𝟙 × j)_* (M ⊠ B)`. -/
 noncomputable def kunnethVerdierSourceLowerShriekIso (j : U ⟶ Y) [IsOpenImmersion j.left]
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N' : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    externalProduct ℓ M (verdierDual ℓ (toPoint Y)
+    externalProduct ℓ M (verdierDual ℓ
         ((boundedConstructibleLowerShriek ℓ j).obj N')) ≅
       (boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).obj
         (externalProduct ℓ M ((ihom N').obj
           ((boundedConstructibleUpperShriek ℓ j).obj
-            (dualizingComplex ℓ (toPoint Y))))) :=
-  haveI := isIso_verdierExchange ℓ j N' (dualizingComplex ℓ (toPoint Y))
+            (dualizingComplex ℓ Y)))) :=
+  haveI := isIso_verdierExchange ℓ j N' (dualizingComplex ℓ Y)
   haveI := isIso_openKunnethMap ℓ (X := X) j M ((ihom N').obj
     ((boundedConstructibleUpperShriek ℓ j).obj
-      (dualizingComplex ℓ (toPoint Y))))
+      (dualizingComplex ℓ Y)))
   whiskerLeftIso _ ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.snd : X ⨯ Y ⟶ Y)).mapIso
-        (asIso (verdierExchange ℓ j N' (dualizingComplex ℓ (toPoint Y)))).symm) ≪≫
+        (asIso (verdierExchange ℓ j N' (dualizingComplex ℓ Y))).symm) ≪≫
     asIso (openKunnethMap ℓ j M _)
 
 /-- The target `RHom(Lp_Y^* Rj_! N', Rp_X^! M)` of the Künneth–Verdier map lies in the essential

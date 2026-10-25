@@ -210,9 +210,8 @@ asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ �
 isomorphism. -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅
-      verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-        ((specialization k' x).obj K)) :=
+    Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
+      verdierDual ℓ ((specialization k' x).obj K)) :=
   sorry
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
@@ -224,10 +223,9 @@ theorem nonempty_specialization_verdierDual_iso
 `sk-prop-tf-nearby-duality-foundation`). -/
 theorem nonempty_specializationProd_externalProduct_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≅
+    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ≅
       externalProduct ℓ ((specialization k' x).obj K)
-        (verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-          ((specialization k' x).obj K))) :=
+        (verdierDual ℓ ((specialization k' x).obj K))) :=
   have e := nonempty_specialization_verdierDual_iso (ℓ := ℓ) k' x K
   ⟨(asIso (specializationKunnethMap (ℓ := ℓ) k' x K _)).symm ≪≫
     whiskerLeftIso _ ((boundedConstructibleUpperStar _ ℓ _).mapIso e.some)⟩

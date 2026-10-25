@@ -351,7 +351,7 @@ instance (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
 instance (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
     [IsSeparated Z.hom] (K : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (toIhomIhom (dualizingComplex' ℓ Z) K) :=
-  isIso_verdierBiduality ℓ (toPoint Z) K
+  isIso_verdierBiduality ℓ K
 
 /-- `Hom(M ⊠ D_Y N, T') ≃ Hom(D_Y Rq_* RHom(Lp^* M, T'), N)`, by the tensor-hom adjunction, the
 adjunction `Lq^* ⊣ Rq_*` and biduality on `Y`. -/

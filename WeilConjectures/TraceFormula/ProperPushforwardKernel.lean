@@ -69,8 +69,8 @@ Rf_* K ⊗ Rf_* D_X K --μ_f--> Rf_* (K ⊗ D_X K) --Rf_* ev--> Rf_* ω_X --τ_f
 -/
 noncomputable def lowerStarVerdierDualMap (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ (toPoint X) K) ⟶
-      verdierDual ℓ (toPoint Y) ((boundedConstructibleLowerStar ℓ f).obj K) :=
+    (boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K) ⟶
+      verdierDual ℓ ((boundedConstructibleLowerStar ℓ f).obj K) :=
   curry (lowerStarTensorMap ℓ f K _ ≫
     (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
     lowerStarDualizingComplexTrace ℓ f)
@@ -81,10 +81,10 @@ item 5). -/
 noncomputable def kernelPushforward (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerStar ℓ (prod.map f f)).obj
-        (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ⟶
+        (externalProduct ℓ K (verdierDual ℓ K)) ⟶
       externalProduct ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
-        (verdierDual ℓ (toPoint Y) ((boundedConstructibleLowerStar ℓ f).obj K)) :=
-  inv (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ (toPoint X) K)) ≫
+        (verdierDual ℓ ((boundedConstructibleLowerStar ℓ f).obj K)) :=
+  inv (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ K)) ≫
     (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
       (lowerStarVerdierDualMap ℓ f K))
 
@@ -104,7 +104,7 @@ variable (c : Correspondence ℓ K)
 `ℚ̄_ℓ,C --ũ--> 𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
 noncomputable def kernelClass :
     (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
-      externalProduct ℓ K (verdierDual ℓ (toPoint X) K) :=
+      externalProduct ℓ K (verdierDual ℓ K) :=
   ((boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _).symm
     (c.mate ≫ c.verdierDualityIso.hom)
 

@@ -91,7 +91,9 @@ theorem not_isZero_leftDerivedUpperStar_zeroSection_rightDerivedLowerStar
   -- hence `Rs^! Λ_T ≅ Λ_k`
   let e : (R(s)^![Λ]).obj (constantComplex Λ T) ≅
       constantComplex Λ (Spec (.of k)) :=
-    ((asIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) s).counit).app _).symm ≪≫
+    ((rightDerivedUpperShriekAdjunction Λ s).rightAdjointUniq
+        (Adjunction.ofIsLeftAdjoint (R(s)_![ModuleCat.{u + 1} Λ]))).app _ ≪≫
+      ((asIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) s).counit).app _).symm ≪≫
       @asIso _ _ _ _ _ h₁ ≪≫ leftDerivedUpperStarConstantComplexIso Λ s
   obtain ⟨e'⟩ := nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed Λ k
   -- `𝓗⁰(Λ_k) ≅ 𝓗⁰(Rs^! Λ_T) ≅ 𝓗⁻²(Λ_k) = 0`

@@ -107,13 +107,14 @@ noncomputable def isTerminalPoint : IsTerminal (point k) :=
 
 variable {k}
 
-/-- The structure morphism `a_X : X ⟶ s` of a scheme over `Spec k`. -/
+/-- The structure morphism `a_X : X ⟶ s` of a scheme over `Spec k`: the morphism to the terminal
+object, as in `ProEtale.CondensedRing.dualizingComplex`. -/
 noncomputable def toPoint (X : Over (Spec (.of k))) : X ⟶ point k :=
-  Over.homMk X.hom (by simp)
+  Over.mkIdTerminal.from X
 
 @[simp]
 lemma toPoint_left (X : Over (Spec (.of k))) : (toPoint X).left = X.hom :=
-  rfl
+  Over.mkIdTerminal_from_left X
 
 /-- Two morphisms to the base point are equal. -/
 lemma toPoint_ext {X : Over (Spec (.of k))} (f g : X ⟶ point k) : f = g :=

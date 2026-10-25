@@ -69,16 +69,16 @@ theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsPrope
   · exact hΔ
   have hu : (boundedConstructibleLowerStar ℓ f).obj K ◁ lowerStarVerdierDualMap ℓ f K ≫
       (ihom.ev ((boundedConstructibleLowerStar ℓ f).obj K)).app (dualizingComplex' ℓ Y) =
-      lowerStarTensorMap ℓ f K (verdierDual ℓ (toPoint X) K) ≫
+      lowerStarTensorMap ℓ f K (verdierDual ℓ K) ≫
         (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
         lowerStarDualizingComplexTrace ℓ f :=
     MonoidalClosed.whiskerLeft_curry_ihom_ev_app _ _ _
   rw [diagUpperStarExternalProductIso_hom_naturality_right_assoc]
   refine (congrArg (fun t ↦ (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y)).homEquiv
     _ _ ((diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
-      ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ (toPoint X) K))).hom ≫ t))
+      ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K))).hom ≫ t))
         hu).trans ?_
-  rw [upperStarComp_inv_app_comp_prodUpperStarCounit_assoc ℓ f K (verdierDual ℓ (toPoint X) K)
+  rw [upperStarComp_inv_app_comp_prodUpperStarCounit_assoc ℓ f K (verdierDual ℓ K)
     hΔ]
   apply congrArg ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y)).homEquiv _
     (dualizingComplex' ℓ Y))

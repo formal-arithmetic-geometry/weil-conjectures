@@ -195,7 +195,7 @@ noncomputable def fixedLocusOfEndUpperShriekIso (v : K ⟶ K) :
 correspondence of `v` over the base point is computed: the adjoint along the fixed locus of
 `LΔ^*` of the class of the identity read through `κ⁻¹`. -/
 noncomputable def pointCoev (v : K ⟶ K) :
-    𝟙_ _ ⟶ K ⊗ verdierDual ℓ (toPoint (point k)) K :=
+    𝟙_ _ ⟶ K ⊗ verdierDual ℓ K :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom ≫
     (boundedConstructibleUpperShriekAdjunction ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
     (boundedConstructibleUpperShriek ℓ (fixedLocusOfEnd v).d).map
@@ -210,7 +210,7 @@ noncomputable def pointCoev (v : K ⟶ K) :
 correspondence of `v` over the base point is computed: the evaluation followed by
 `ω_s ≅ ℚ̄_ℓ`. -/
 noncomputable def pointPairing (v : K ⟶ K) :
-    K ⊗ verdierDual ℓ (toPoint (point k)) K ⟶ 𝟙_ _ :=
+    K ⊗ verdierDual ℓ K ⟶ 𝟙_ _ :=
   (ihom.ev K).app (dualizingComplex' ℓ (point k)) ≫
     (fixedLocusOfEndUpperShriekIso v).inv.app _ ≫
     (dualizingComplexComp ℓ (fixedLocusOfEnd v).d).hom ≫ (dualizingComplexPointIso ℓ k).hom

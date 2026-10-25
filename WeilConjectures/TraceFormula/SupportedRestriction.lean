@@ -189,7 +189,7 @@ composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportedEvaluation :
     (boundedConstructibleUpperShriek ℓ F.d).obj
         ((boundedConstructibleUpperStar _ ℓ (diag X)).obj
-          (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) ⟶
+          (externalProduct ℓ K (verdierDual ℓ K))) ⟶
       dualizingComplex' ℓ F.F :=
   (boundedConstructibleUpperShriek ℓ F.d).map
       ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) ≫
@@ -305,7 +305,7 @@ zero. -/
 theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (h : (boundedConstructibleUpperStar _ ℓ j).map
-      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0) :
+      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0) :
     (c.traceClass F).localTerm j = 0 := by
   rw [localTerm_traceClass_eq_integral_supportedRestriction, h, Limits.zero_comp,
     Limits.comp_zero, Limits.comp_zero, BorelMooreSection.integral_zero]

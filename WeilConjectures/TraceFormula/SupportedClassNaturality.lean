@@ -154,18 +154,16 @@ end ExternalProduct
 
 section VerdierDual
 
-variable {X S : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
-  [QuasiCompact S.hom] [IsSeparated S.hom]
+variable {X : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- The Verdier dual `D_X g = RHom(g, ω_X) : D_X N ⟶ D_X N'` of a morphism `g : N' ⟶ N`,
-relative to `a : X ⟶ S`. -/
-noncomputable def verdierDualMap (a : X ⟶ S) {N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (g : N' ⟶ N) : verdierDual ℓ a N ⟶ verdierDual ℓ a N' :=
-  (pre g).app (dualizingComplex ℓ a)
+/-- The Verdier dual `D_X g = RHom(g, ω_X) : D_X N ⟶ D_X N'` of a morphism `g : N' ⟶ N`. -/
+noncomputable def verdierDualMap {N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (g : N' ⟶ N) : verdierDual ℓ N ⟶ verdierDual ℓ N' :=
+  (pre g).app (dualizingComplex ℓ X)
 
-lemma verdierDualMap_eq (a : X ⟶ S) {N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (g : N' ⟶ N) : verdierDualMap ℓ a g = (pre g).app (dualizingComplex ℓ a) :=
+lemma verdierDualMap_eq {N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (g : N' ⟶ N) : verdierDualMap ℓ g = (pre g).app (dualizingComplex ℓ X) :=
   rfl
 
 end VerdierDual
@@ -207,7 +205,7 @@ private lemma lax_whiskerLeft_map_pre_comp_ev {𝒞 𝒟 : Type*} [Category 𝒞
 /-- The Künneth–Verdier pairing is natural in `N`. -/
 lemma kunnethVerdierPairing_naturality_right (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {N N' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : N' ⟶ N) :
-    _ ◁ externalProductMap ℓ (𝟙 M) (verdierDualMap ℓ (toPoint Y) g) ≫
+    _ ◁ externalProductMap ℓ (𝟙 M) (verdierDualMap ℓ g) ≫
         kunnethVerdierPairing ℓ M N' =
       (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map g ▷ _ ≫
         kunnethVerdierPairing ℓ M N := by
@@ -228,7 +226,7 @@ private lemma curry_pre_naturality_aux {𝒞 : Type*} [Category 𝒞] [MonoidalC
 @[reassoc]
 lemma kunnethVerdierMap_naturality_right (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {N N' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : N' ⟶ N) :
-    externalProductMap ℓ (𝟙 M) (verdierDualMap ℓ (toPoint Y) g) ≫
+    externalProductMap ℓ (𝟙 M) (verdierDualMap ℓ g) ≫
         kunnethVerdierMap ℓ M N' =
       kunnethVerdierMap ℓ M N ≫
         (pre ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map g)).app _ := by
@@ -260,7 +258,7 @@ lemma inv_kunnethVerdierMap_naturality_right (M : Dᵇc(X.left)⟦Profinite.padi
     (pre ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map g)).app _ ≫
         inv (kunnethVerdierMap ℓ M N') =
       inv (kunnethVerdierMap ℓ M N) ≫
-        externalProductMap ℓ (𝟙 M) (verdierDualMap ℓ (toPoint Y) g) := by
+        externalProductMap ℓ (𝟙 M) (verdierDualMap ℓ g) := by
   rw [IsIso.eq_inv_comp, ← kunnethVerdierMap_naturality_right_assoc, IsIso.hom_inv_id,
     Category.comp_id]
 
@@ -332,8 +330,8 @@ private lemma tensorHom_id_comp_ev {𝒞 : Type*} [Category 𝒞] [MonoidalCateg
 /-- The dinaturality of the evaluation against the dualizing complex. -/
 private lemma tensorHom_id_comp_ev_verdierDual
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K' ⟶ K) :
-    (f ⊗ₘ 𝟙 (verdierDual ℓ (toPoint X) K)) ≫ (ihom.ev K).app (dualizingComplex' ℓ X) =
-      (𝟙 K' ⊗ₘ verdierDualMap ℓ (toPoint X) f) ≫ (ihom.ev K').app (dualizingComplex' ℓ X) :=
+    (f ⊗ₘ 𝟙 (verdierDual ℓ K)) ≫ (ihom.ev K).app (dualizingComplex' ℓ X) =
+      (𝟙 K' ⊗ₘ verdierDualMap ℓ f) ≫ (ihom.ev K').app (dualizingComplex' ℓ X) :=
   tensorHom_id_comp_ev f _
 
 /-- **Dinaturality of the evaluation kernel**: for `f : K' ⟶ K`, the two maps
@@ -342,7 +340,7 @@ private lemma tensorHom_id_comp_ev_verdierDual
 lemma externalProductMap_comp_evaluationKernel
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K' ⟶ K) :
     externalProductMap ℓ f (𝟙 _) ≫ evaluationKernel ℓ K =
-      externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ (toPoint X) f) ≫
+      externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ f) ≫
         evaluationKernel ℓ K' := by
   rw [evaluationKernel, evaluationKernel, ← Adjunction.homEquiv_naturality_left,
     ← Adjunction.homEquiv_naturality_left, diagUpperStarExternalProductIso_hom_naturality₂_assoc,
@@ -367,7 +365,7 @@ noncomputable def supportedClassOfCoeff (K₁ K₂ : Dᵇc(X.left)⟦Profinite.p
     (w : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K₂ ⟶
       (boundedConstructibleUpperShriek ℓ c.c₁).obj K₁) :
     (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
-      externalProduct ℓ K₁ (verdierDual ℓ (toPoint X) K₂) :=
+      externalProduct ℓ K₁ (verdierDual ℓ K₂) :=
   (correspondenceClassEquiv ℓ c.support K₂ K₁).symm
       (eqToHom (by rw [support_snd]) ≫ w ≫ eqToHom (by rw [support_fst])) ≫
     inv (kunnethVerdierMap ℓ K₁ K₂)
@@ -413,7 +411,7 @@ lemma supportedClassOfCoeff_upperStar_map_comp
       (boundedConstructibleUpperShriek ℓ c.c₁).obj K₁) (g : K₂' ⟶ K₂) :
     c.supportedClassOfCoeff K₁ K₂' ((boundedConstructibleUpperStar _ ℓ c.c₂).map g ≫ w) =
       c.supportedClassOfCoeff K₁ K₂ w ≫
-        externalProductMap ℓ (𝟙 K₁) (verdierDualMap ℓ (toPoint X) g) := by
+        externalProductMap ℓ (𝟙 K₁) (verdierDualMap ℓ g) := by
   unfold supportedClassOfCoeff
   refine comp_eq_comp_comp_of_eq ?_ (inv_kunnethVerdierMap_naturality_right ℓ K₁ g)
   rw [Equiv.symm_apply_eq, correspondenceClassEquiv_naturality_left, Equiv.apply_symm_apply,

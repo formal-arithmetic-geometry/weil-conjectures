@@ -161,7 +161,7 @@ variable {c'} in
 lemma isZero_upperShriek_externalProduct_of_isZero
     (h : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c'.c₂).obj K')) :
     IsZero ((boundedConstructibleUpperShriek ℓ c'.support).obj
-      (externalProduct ℓ K' (verdierDual ℓ (toPoint X') K'))) :=
+      (externalProduct ℓ K' (verdierDual ℓ K'))) :=
   (isZero_ihom_obj_of_isZero h _).of_iso c'.verdierDualityIso.symm
 
 namespace TraceSpecialization
@@ -312,7 +312,7 @@ of the trace class of `u` vanishes, whatever the coefficient map `u`. This is th
 Varshavsky's vanishing argument (blueprint `det-tf-contracting-vanishing`). -/
 theorem sp_traceClass_eq_zero
     (h : IsZero ((boundedConstructibleUpperShriek ℓ c'.support).obj
-      (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))))) :
+      (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ K))))) :
     T.sp (c.traceClass F) = 0 := by
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).IsLeftAdjoint :=
     ⟨_, ⟨boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι⟩⟩
@@ -320,7 +320,7 @@ theorem sp_traceClass_eq_zero
       F'.ι).PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_isLeftAdjoint _
   rw [sp_traceClass, T.traceMap_specialization, h.eq_of_tgt
-    (T.βc.app (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) 0, zero_comp,
+    (T.βc.app (externalProduct ℓ K (verdierDual ℓ K))) 0, zero_comp,
     comp_zero, comp_zero, comp_zero, Adjunction.homEquiv_counit, Functor.map_zero, zero_comp,
     comp_zero]
 

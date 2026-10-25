@@ -105,7 +105,7 @@ noncomputable def diagUpperStarExternalProductIso
 `lem-trf-trace-map-from-external-duality`, `def-trf-kernel-pushforward-maps`): the
 `LΔ^* ⊣ RΔ_*` adjoint of the evaluation `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K ⟶ ω_X`. -/
 noncomputable def evaluationKernel (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    externalProduct ℓ K (verdierDual ℓ (toPoint X) K) ⟶
+    externalProduct ℓ K (verdierDual ℓ K) ⟶
       (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X) :=
   (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _
     ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X))
@@ -267,7 +267,7 @@ inverse Künneth–Verdier isomorphism `κ_{K,K}`. -/
 noncomputable def verdierDualityIso :
     c.traceClassSource ≅
       (boundedConstructibleUpperShriek ℓ c.support).obj
-        (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) :=
+        (externalProduct ℓ K (verdierDual ℓ K)) :=
   c.traceClassSourceIso ≪≫ c.exceptionalHomIso _ _ ≪≫
     (boundedConstructibleUpperShriek ℓ c.support).mapIso
       (asIso (kunnethVerdierMap ℓ K K)).symm

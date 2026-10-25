@@ -88,7 +88,7 @@ variable (c : Correspondence ℓ K)
 read through the external duality isomorphism `𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
 noncomputable def supportedClass :
     (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
-      externalProduct ℓ K (verdierDual ℓ (toPoint X) K) :=
+      externalProduct ℓ K (verdierDual ℓ K) :=
   ((boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _).symm
     (c.mate ≫ c.verdierDualityIso.hom)
 

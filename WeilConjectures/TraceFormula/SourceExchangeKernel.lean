@@ -67,7 +67,7 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
     (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
       ((boundedConstructibleLowerStar ℓ f).obj K)) _ _ _ _
-    (lowerStarTensorMap ℓ f K (verdierDual ℓ (toPoint X) K))
+    (lowerStarTensorMap ℓ f K (verdierDual ℓ K))
     ((boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)))
     (lowerStarDualizingComplexTrace ℓ f)
     (exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar ℓ f).obj K))

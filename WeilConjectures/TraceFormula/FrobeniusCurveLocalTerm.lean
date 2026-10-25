@@ -182,7 +182,7 @@ theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (z ≫ F.ι)).obj K)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
-      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 :=
+      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0 :=
   sorry
 
 /-- **Frobenius local vanishing on a smooth curve** (blueprint `sk-i-curve-zero`): let `X` be smooth

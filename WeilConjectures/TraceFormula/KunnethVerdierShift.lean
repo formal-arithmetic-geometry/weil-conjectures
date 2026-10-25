@@ -172,7 +172,7 @@ monoidal structure of `Lp_Y^*` followed by the evaluation `N ⊗ D_Y N ⟶ ω_Y`
 noncomputable def kunnethVerdierEvaluation :
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N ⊗
         (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (verdierDual ℓ (toPoint Y) N) ⟶
+          (verdierDual ℓ N) ⟶
       (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y) :=
   Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) _ _ ≫
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
@@ -186,7 +186,7 @@ noncomputable def kunnethVerdierPairingNatTrans :
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-            (verdierDual ℓ (toPoint Y) N))) ⋙
+            (verdierDual ℓ N))) ⋙
       (curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) ⟶
       𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) where
@@ -203,7 +203,7 @@ Künneth–Verdier pairing: associators and the braiding of `Lp_Y^* N` past `Q`,
 noncomputable def kunnethVerdierRearrangement :
     (curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (verdierDual ℓ (toPoint Y) N)) ⋙
+          (verdierDual ℓ N)) ⋙
       (curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) ⟶
       (curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
@@ -211,12 +211,12 @@ noncomputable def kunnethVerdierRearrangement :
   inv (associatorNatTrans₂ _
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-        (verdierDual ℓ (toPoint Y) N))) ≫
+        (verdierDual ℓ N))) ≫
     Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ _
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
       ((curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (verdierDual ℓ (toPoint Y) N))) ≫
+          (verdierDual ℓ N))) ≫
     associatorNatTrans₁ _ _ _ ≫
     (curriedTensor _).flip.map (kunnethVerdierEvaluation ℓ (X := X) N)
 
@@ -225,7 +225,7 @@ instance commShift_kunnethVerdierRearrangement :
   have := NatTrans.CommShift.of_isIso (associatorNatTrans₂ _
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-      (verdierDual ℓ (toPoint Y) N))) ℤ
+      (verdierDual ℓ N))) ℤ
   dsimp only [kunnethVerdierRearrangement]
   infer_instance
 
@@ -257,7 +257,7 @@ noncomputable def kunnethVerdierNatTrans :
     boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-            (verdierDual ℓ (toPoint Y) N)) ⟶
+            (verdierDual ℓ N)) ⟶
       (𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)) ⋙
         ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) where
@@ -282,7 +282,7 @@ instance isTriangulated_isoLocus_kunnethVerdierNatTrans :
   have : (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-            (verdierDual ℓ (toPoint Y) N))).IsTriangulated := inferInstance
+            (verdierDual ℓ N))).IsTriangulated := inferInstance
   have : ((𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)) ⋙
         ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).IsTriangulated :=

@@ -139,7 +139,6 @@ lemma isZero_leftDerivedUpperStar_openComplement_lowerShriekConstantTensor :
         (ModuleCat.{u + 1} Λ) k j _)).of_iso
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
 
-omit [Finite Λ] in
 include hr in
 /-- The unit `T ⟶ Rh_* Lh^* T` at `T = Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` is an isomorphism, `T` vanishing on
 the open complement of `h` (open–closed triangle). -/

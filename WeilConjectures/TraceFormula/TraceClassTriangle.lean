@@ -56,7 +56,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The Verdier dual of a composite which vanishes vanishes. -/
 lemma verdierDualMap_comp_eq_zero
     {K₁ K₂ K₃ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {f : K₁ ⟶ K₂} {g : K₂ ⟶ K₃}
-    (h : f ≫ g = 0) : verdierDualMap ℓ (toPoint X) g ≫ verdierDualMap ℓ (toPoint X) f = 0 := by
+    (h : f ≫ g = 0) : verdierDualMap ℓ g ≫ verdierDualMap ℓ f = 0 := by
   rw [verdierDualMap, verdierDualMap, ← NatTrans.comp_app, ← pre_map, h]
   apply uncurry_injective
   rw [uncurry_pre, MonoidalPreadditive.zero_whiskerRight, Limits.zero_comp, uncurry_eq,
@@ -99,12 +99,12 @@ theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
     (hu'' : (boundedConstructibleUpperStar _ ℓ c.c₂).map η ≫ u'' =
       c.u ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map η)
     (h₁ : ∀ φ : (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
-      (externalProduct ℓ K'' (verdierDual ℓ (toPoint X) K')) ⟦(-1 : ℤ)⟧, φ = 0)
-    (h₂ : ∀ φ : externalProduct ℓ K' (verdierDual ℓ (toPoint X) K) ⟶
-      (externalProduct ℓ K'' (verdierDual ℓ (toPoint X) K')) ⟦(-1 : ℤ)⟧, φ = 0)
-    (h₃ : ∀ φ : externalProduct ℓ K (verdierDual ℓ (toPoint X) K'') ⟶
-      (externalProduct ℓ K'' (verdierDual ℓ (toPoint X) K')) ⟦(-1 : ℤ)⟧, φ = 0)
-    (h₄ : ∀ φ : (externalProduct ℓ K' (verdierDual ℓ (toPoint X) K'')) ⟦(1 : ℤ)⟧ ⟶
+      (externalProduct ℓ K'' (verdierDual ℓ K')) ⟦(-1 : ℤ)⟧, φ = 0)
+    (h₂ : ∀ φ : externalProduct ℓ K' (verdierDual ℓ K) ⟶
+      (externalProduct ℓ K'' (verdierDual ℓ K')) ⟦(-1 : ℤ)⟧, φ = 0)
+    (h₃ : ∀ φ : externalProduct ℓ K (verdierDual ℓ K'') ⟶
+      (externalProduct ℓ K'' (verdierDual ℓ K')) ⟦(-1 : ℤ)⟧, φ = 0)
+    (h₄ : ∀ φ : (externalProduct ℓ K' (verdierDual ℓ K'')) ⟦(1 : ℤ)⟧ ⟶
       (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X), φ = 0) :
     c.traceClass F = F.traceClassWithCoeff K' u' + F.traceClassWithCoeff K'' u'' := by
   rw [traceClass_eq_traceClassOfKernel, FixedLocus.traceClassWithCoeff_eq,
@@ -112,30 +112,30 @@ theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
   refine (congrArg F.traceClassOfKernel ?_).trans (map_add _ _ _)
   have hεη : ε ≫ η = 0 := comp_distTriang_mor_zero₁₂ _ hT
   have hDcomp := verdierDualMap_comp_eq_zero (X := X) hεη
-  have hfP := externalProductMap_exchange ℓ ε (verdierDualMap ℓ (toPoint X) ε)
-  have hfR := externalProductMap_exchange ℓ η (verdierDualMap ℓ (toPoint X) ε)
-  have hgR := externalProductMap_exchange ℓ η (verdierDualMap ℓ (toPoint X) η)
+  have hfP := externalProductMap_exchange ℓ ε (verdierDualMap ℓ ε)
+  have hfR := externalProductMap_exchange ℓ η (verdierDualMap ℓ ε)
+  have hgR := externalProductMap_exchange ℓ η (verdierDualMap ℓ η)
   have hgfQ := externalProductMap_id_comp_eq_zero (M := K) hDcomp
   have hgfR := externalProductMap_id_comp_eq_zero (M := K'') hDcomp
   have he₁ : externalProductMap ℓ ε (𝟙 _) ≫ evaluationKernel ℓ K =
-      externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ (toPoint X) ε) ≫ evaluationKernel ℓ K' :=
+      externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ ε) ≫ evaluationKernel ℓ K' :=
     externalProductMap_comp_evaluationKernel ℓ ε
-  have he₂ : externalProductMap ℓ (𝟙 K) (verdierDualMap ℓ (toPoint X) η) ≫
+  have he₂ : externalProductMap ℓ (𝟙 K) (verdierDualMap ℓ η) ≫
         evaluationKernel ℓ K =
       externalProductMap ℓ η (𝟙 _) ≫ evaluationKernel ℓ K'' :=
     (externalProductMap_comp_evaluationKernel ℓ η).symm
-  have hσ₁ : c.supportedClass ≫ externalProductMap ℓ (𝟙 K) (verdierDualMap ℓ (toPoint X) ε) =
+  have hσ₁ : c.supportedClass ≫ externalProductMap ℓ (𝟙 K) (verdierDualMap ℓ ε) =
       c.supportedClassOfCoeff K' K' u' ≫ externalProductMap ℓ ε (𝟙 _) := by
     rw [← supportedClassOfCoeff_u, ← supportedClassOfCoeff_upperStar_map_comp, hu',
       supportedClassOfCoeff_comp_upperShriek_map]
   have hσ₂ : c.supportedClass ≫ externalProductMap ℓ η (𝟙 _) =
       c.supportedClassOfCoeff K'' K'' u'' ≫
-        externalProductMap ℓ (𝟙 K'') (verdierDualMap ℓ (toPoint X) η) := by
+        externalProductMap ℓ (𝟙 K'') (verdierDualMap ℓ η) := by
     rw [← supportedClassOfCoeff_u, ← supportedClassOfCoeff_comp_upperShriek_map, ← hu'',
       supportedClassOfCoeff_upperStar_map_comp]
-  obtain ⟨_, h₀⟩ := externalProduct_distTriang hT (verdierDual ℓ (toPoint X) K)
-  obtain ⟨_, h₁'⟩ := externalProduct_distTriang hT (verdierDual ℓ (toPoint X) K')
-  obtain ⟨_, h₂'⟩ := externalProduct_distTriang hT (verdierDual ℓ (toPoint X) K'')
+  obtain ⟨_, h₀⟩ := externalProduct_distTriang hT (verdierDual ℓ K)
+  obtain ⟨_, h₁'⟩ := externalProduct_distTriang hT (verdierDual ℓ K')
+  obtain ⟨_, h₂'⟩ := externalProduct_distTriang hT (verdierDual ℓ K'')
   exact comp_eq_add_of_distTriang h₀ h₁' h₂' _ _ _ _ _
     hfP hfR hgR hgfQ hgfR _ _ _ he₁ he₂ _ _ _ hσ₁ hσ₂ h₁ h₂ h₃ h₄
 

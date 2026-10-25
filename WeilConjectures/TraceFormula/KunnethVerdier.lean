@@ -134,7 +134,7 @@ evaluation `N ⊗ D_Y N ⟶ ω_Y` and the exceptional Künneth map. -/
 noncomputable def kunnethVerdierPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N ⊗
-        externalProduct ℓ M (verdierDual ℓ (toPoint Y) N) ⟶
+        externalProduct ℓ M (verdierDual ℓ N) ⟶
       (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
   (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
     (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) _ _) ≫
@@ -147,7 +147,7 @@ noncomputable def kunnethVerdierPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgC
 `β` of the two evaluations followed by the exceptional Künneth map `α_{𝟙, a_Y}`. -/
 noncomputable def kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    externalProduct ℓ M (verdierDual ℓ (toPoint Y) N) ⟶
+    externalProduct ℓ M (verdierDual ℓ N) ⟶
       (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).obj
         ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
   curry (kunnethVerdierPairing ℓ M N)
@@ -310,12 +310,12 @@ bounded constructible `M` on `Y`, the double-dual morphism `M ⟶ D_Y D_Y M`, th
 evaluation `D_Y M ⊗ M ⟶ M ⊗ D_Y M ⟶ ω_Y`, is an isomorphism. It is the constructible biduality
 theorem (`isIso_verdierBiduality`, blueprint `thm-coef-qbar-verdier`). -/
 noncomputable def verdierBidualityIso (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ≅ verdierDual ℓ (toPoint Y) (verdierDual ℓ (toPoint Y) M) :=
-  haveI := isIso_verdierBiduality ℓ (toPoint Y) M
-  asIso (verdierBiduality ℓ (toPoint Y) M)
+    M ≅ verdierDual ℓ (verdierDual ℓ M) :=
+  haveI := isIso_verdierBiduality ℓ M
+  asIso (verdierBiduality ℓ M)
 
 lemma verdierBidualityIso_hom (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (verdierBidualityIso ℓ M).hom = verdierBiduality ℓ (toPoint Y) M :=
+    (verdierBidualityIso ℓ M).hom = verdierBiduality ℓ M :=
   rfl
 
 /-- The biduality isomorphism is natural (blueprint `thm-trf-verdier-biduality`). -/
