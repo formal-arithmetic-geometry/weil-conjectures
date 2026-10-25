@@ -191,7 +191,8 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
     have h₂ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.map (overClosedComplement j') (𝟙 Y))).obj
         (externalProduct ℓ ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
-          j').obj L) ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))) := by
+          j').obj L)
+          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))) := by
       refine IsZero.of_iso ?_ (Functor.Monoidal.μIso _ _ _).symm
       exact isZero_tensorObj_of_isZero_left h₁ _
     exact ⟨⟨0, h₂.eq_of_src _ _, h₀.eq_of_src _ _⟩⟩
