@@ -74,6 +74,15 @@ lemma one_comp_regularLift_comp_hom (σ : 𝟙_ C ⟶ A) {M : Mod C A} (x : regu
   have hx : x = regularLift M (η[A] ≫ x.hom) := regular_hom_ext (one_comp_regularLift M _).symm
   rw [Mod.comp_hom', ← Category.assoc, one_comp_regularLift, ← comp_regularLift_hom, ← hx]
 
+/-- The action of the image `ε ≫ F σ` of a global section on `F M` is the image of the action
+of `σ` on `M`, for a lax monoidal functor `F`. -/
+lemma globalSmul_mapMod {D : Type*} [Category* D] [MonoidalCategory D] (F : C ⥤ D)
+    [F.LaxMonoidal] (σ : 𝟙_ C ⟶ A) (M : Mod C A) :
+    globalSmul (ε F ≫ F.map σ) ((F.mapMod A).obj M) = F.map (globalSmul σ M) := by
+  rw [globalSmul, globalSmul, Functor.map_comp, Functor.map_comp, ← left_unitality_inv,
+    Category.assoc, Category.assoc, ← μ_natural_left_assoc, comp_whiskerRight_assoc]
+  rfl
+
 section Preadditive
 
 variable [Preadditive C] [MonoidalPreadditive C]
