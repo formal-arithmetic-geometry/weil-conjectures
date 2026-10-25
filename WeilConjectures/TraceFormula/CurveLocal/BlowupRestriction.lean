@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+public import WeilConjectures.RingTheory.TangentCone
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
@@ -25,11 +26,8 @@ whose tangent cones satisfy `C_t D ∩ C_t B = {0}` and `C_t D ∩ T_t H = {0}`.
 constant cohomology and finite `ℓ`-group monodromy. Then the restriction
 `RΓ(T ∖ D, i_! E) ⟶ RΓ(B ∖ t, (i_! E)|_{B ∖ t})` is zero in `D(Λ)`.
 
-The tangent cone condition is expressed in the local ring `R` of `T` through the ideals `I`, `J`
-of the two curves (`IsLocalRing.TangentConesMeetAtOrigin`): the supports of the tangent cones
-`Spec (gr_𝔪 R / in I)` and `Spec (gr_𝔪 R / in J)` meet only at the origin if and only if the
-ideal `in I + in J` of the graded ring `gr_𝔪 R` contains all homogeneous elements of large degree,
-that is, if `𝔪^N ⊆ (I ∩ 𝔪^N) + (J ∩ 𝔪^N) + 𝔪^(N+1)` for all large `N`.
+The tangent cone condition is expressed in the local ring `R` of `T` through the ideals of the two
+curves (`IsLocalRing.TangentConesMeetAtOrigin`).
 
 -/
 
@@ -40,21 +38,6 @@ universe u
 open CategoryTheory Limits Opposite
 
 open scoped AlgebraicGeometry.Etale
-
-namespace IsLocalRing
-
-variable (R : Type*) [CommRing R] [IsLocalRing R]
-
-/-- The *tangent cones of `R ⧸ I` and `R ⧸ J` meet only at the origin*: the initial ideals
-`in I` and `in J` in the associated graded ring `gr_𝔪 R = ⊕ 𝔪^N / 𝔪^(N+1)` together contain every
-homogeneous element of large degree, i.e. `𝔪^N ⊆ (I ∩ 𝔪^N) + (J ∩ 𝔪^N) + 𝔪^(N+1)` for all large
-`N`. For curves `D`, `B` through the closed point of a surface `Spec R` with ideals `I`, `J`,
-this is the condition `C_t D ∩ C_t B = {0}` of blueprint `sk-lem-tf-blowup-restriction`. -/
-def TangentConesMeetAtOrigin (I J : Ideal R) : Prop :=
-  ∃ n : ℕ, ∀ N ≥ n, maximalIdeal R ^ N ≤
-    I ⊓ maximalIdeal R ^ N ⊔ J ⊓ maximalIdeal R ^ N ⊔ maximalIdeal R ^ (N + 1)
-
-end IsLocalRing
 
 namespace AlgebraicGeometry.Etale
 
