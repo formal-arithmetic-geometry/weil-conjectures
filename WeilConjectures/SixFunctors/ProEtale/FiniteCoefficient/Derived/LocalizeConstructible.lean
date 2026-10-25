@@ -84,7 +84,7 @@ noncomputable def closedUpperShriekIsoMapDerivedCategoryUpperStar
     M ≅ D((i)^*[ModuleCat.{u + 1} Λ]).obj (R((i)_*[ModuleCat.{u + 1} Λ]).obj M) :=
   have := preservesFiniteColimits_lowerStar_of_isCompl (R := Λ) i j hij
   have : IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit :=
-    isIso_upperStarLowerStarAdjunction_counit Λ i
+    isIso_upperStarLowerStarAdjunction_counit (ModuleCat.{u + 1} Λ) i
   (asIso (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryAdjunction
     ).counit.app M)).symm ≪≫ D((i)^*[ModuleCat.{u + 1} Λ]).mapIso
       (((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorIsoMapDerivedCategory.app M).symm
@@ -114,7 +114,7 @@ theorem boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion
     (hG : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U G) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
       (R((j)_*[ModuleCat.{u + 1} Λ]).obj G) :=
-  boundedConstructible_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) N hN (nsmul_id_eq_zero N hΛ)
+  boundedConstructible_rightDerivedLowerStar Λ N hN (nsmul_id_eq_zero N hΛ)
     s j hG
 
 omit [QuasiCompact j] in
@@ -125,7 +125,7 @@ theorem boundedConstructible_rightDerivedFunctor_lowerStar_of_isClosedImmersion
     (hM : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z M) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
       (R((i)_*[ModuleCat.{u + 1} Λ]).obj M) :=
-  boundedConstructible_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) N hN (nsmul_id_eq_zero N hΛ)
+  boundedConstructible_rightDerivedLowerStar Λ N hN (nsmul_id_eq_zero N hΛ)
     s i hM
 
 omit hN hΛ s [Finite Λ] in

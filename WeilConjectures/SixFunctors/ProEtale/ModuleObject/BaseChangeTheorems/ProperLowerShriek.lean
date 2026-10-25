@@ -17,7 +17,7 @@ Let `f : X ⟶ Y` be a proper morphism of separated `k`-schemes of finite type. 
 own compactification `X ⟶[𝟙] X ⟶[f] Y` (`AlgebraicGeometry.Compactification.ofIsProper`), for
 which `Rf_!^c = (𝟙)_! ⋙ Rf_*` is `Rf_*`, the extension by zero along the identity being the
 identity. By independence of the lower shriek from the compactification
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso`), this gives
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'`), this gives
 `Rf_! ≅ Rf_*` on bounded constructible `E`- and `ℚ̄_ℓ`-sheaves.
 
 ## Main definitions
@@ -95,7 +95,8 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekOfIsProperIso :
 /-- The lower shriek `Rf_!^c` attached to the trivial compactification `c = (X ⟶[𝟙] X ⟶[f] Y)`
 of a proper `f` (`AlgebraicGeometry.Compactification.ofIsProper`) is the derived pushforward
 `Rf_*` on bounded constructible complexes. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationOfIsProperIso :
+noncomputable def boundedConstructibleLowerShriekOfCompactificationOfIsProperIso
+    [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ (Compactification.ofIsProper f.left) ≅
       boundedConstructibleLowerStar Λ ℓ f :=
   Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso Λ ℓ f) _ ≪≫
@@ -110,7 +111,7 @@ independence of the compactification, `Rf_!` is `Rf_!^c` for the trivial compact
 noncomputable def boundedConstructibleLowerShriekIsoLowerStar :
     boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f ≅
       boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ f :=
-  boundedConstructibleLowerShriekOfCompactificationIso ℓ E (compactificationOverField f)
+  boundedConstructibleLowerShriekOfCompactificationIso' ℓ E (compactificationOverField f)
       (.ofIsProper f.left) ≪≫
     boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f
 
@@ -121,9 +122,18 @@ independence of the compactification, `Rf_!` is `Rf_!^c` for the trivial compact
 noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl :
     boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
       boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
-  boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ
+  boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
       (compactificationOverField f) (.ofIsProper f.left) ≪≫
     boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f
+
+/-- Unfolding `boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl`. -/
+lemma boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq :
+    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f =
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+          (compactificationOverField f) (.ofIsProper f.left) ≪≫
+        boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f := by
+  unfold boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl
+  rfl
 
 end Proper
 

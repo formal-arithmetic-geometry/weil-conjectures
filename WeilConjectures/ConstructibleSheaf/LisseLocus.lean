@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.Topology.KrullDimension.Open
 
 /-!
 # A lisse locus for a constructible sheaf
@@ -56,13 +57,6 @@ theorem Dense.exists_specializes_of_isOpen [NoetherianSpace X] [QuasiSober X] {U
   rw [(isClosed_of_mem_irreducibleComponents _ hT).closure_eq] at hgen
   exact ⟨_, (hgen.specializes (hoT hyo)).mem_open hUo hyU,
     hgen.specializes (mem_irreducibleComponent)⟩
-
-/-- A nonempty topological space has nonnegative Krull dimension. -/
-theorem topologicalKrullDim_nonneg [Nonempty X] : 0 ≤ topologicalKrullDim X := by
-  obtain ⟨x⟩ := ‹Nonempty X›
-  have : Nonempty (IrreducibleCloseds X) :=
-    ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
-  exact Order.krullDim_nonneg
 
 /-- **The complement of a dense open has smaller dimension.** In a nonempty Noetherian
 quasi-sober `T₀` space of finite Krull dimension, the closed complement of a dense open subset

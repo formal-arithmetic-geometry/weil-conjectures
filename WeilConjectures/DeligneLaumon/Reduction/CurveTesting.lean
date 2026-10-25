@@ -7,9 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Bertini
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PullbackPathHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyIrreducible
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
 public import WeilConjectures.WeilSheaf.Category
 
 /-!
@@ -38,7 +37,7 @@ Shrinking `U`, it is the stabilizer of a point `a` of the fibre of a connected (
 fibre of `T` at `s = i(c)`: its image meets every coset `g U`. Finally the monodromy
 representations of the `i^* 𝒮ⱼ` at `c` are the `ρⱼ` composed with `π₁(C, c) → π₁(X, s)`, by the
 compatibility of the dictionary between lisse sheaves and representations with base change
-(`AlgebraicGeometry.ProEtale.exists_lisseMonodromy_pullback`).
+(`AlgebraicGeometry.ProEtale.isCompatible_universalLisseMonodromy`).
 -/
 
 @[expose] public section
@@ -89,7 +88,8 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   have := IsRegular.of_smooth f.geometricFiberToAlgebraicClosure
   have := LocallyOfFiniteType.isLocallyNoetherian f.geometricFiberToAlgebraicClosure
   -- a monodromy on `X`, compatible with pullback to curves, and a base point `s₀ ∈ S`
-  obtain ⟨M, hM, hpull⟩ := exists_lisseMonodromy_pullback l f.geometricFiber k₀
+  let M := universalLisseMonodromy l f.geometricFiber k₀
+  have hM := universalLisseMonodromy_isEquivalenceAt l f.geometricFiber k₀
   obtain ⟨s₀, hs₀⟩ := hS
   let G (j : Fin r) : LisseSheaf l f.geometricFiber := ⟨F j, (hF j).1⟩
   have hirr (j : Fin r) : (M.rep s₀ (G j)).IsIrreducible :=
@@ -117,7 +117,8 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   have : Smooth (i ≫ f.geometricFiberToAlgebraicClosure) := SmoothOfRelativeDimension.smooth 1 _
   have := IsRegular.of_smooth (i ≫ f.geometricFiberToAlgebraicClosure)
   have := LocallyOfFiniteType.isLocallyNoetherian (i ≫ f.geometricFiberToAlgebraicClosure)
-  obtain ⟨M', hM', hcompat⟩ := hpull C i
+  have hM' := universalLisseMonodromy_isEquivalenceAt l C k₀
+  have hcompat := isCompatible_universalLisseMonodromy l k₀ i
   have : ConnectedSpace ((Scheme.FiniteEtale.pullback i).obj A.obj).obj.left := hTC
   have : IsConnected ((Scheme.FiniteEtale.pullback i).obj A.obj) :=
     isConnected_of_connectedSpace _

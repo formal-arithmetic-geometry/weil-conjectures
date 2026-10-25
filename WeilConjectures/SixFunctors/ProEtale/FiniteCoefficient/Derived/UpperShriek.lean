@@ -5,7 +5,6 @@ Authors: Nailin Guan, Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
@@ -28,8 +27,8 @@ comparison:
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)`,
 
 where `f^× = AlgebraicGeometry.Etale.rightDerivedUpperShriek` is the right adjoint of the étale
-`Rf_!`. Its defining property is a theorem, not a hypothesis (blueprint `sk-prop-sf-existence`
-(c)): for `K` bounded below of étale origin and `L` bounded below,
+`Rf_!`. Its defining property is a theorem, not a hypothesis (an earlier form of blueprint
+`sk-prop-sf-existence`): for `K` bounded below of étale origin and `L` bounded below,
 `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)`, naturally in both
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). Every bounded constructible
 object is bounded below of étale origin, so the adjunction holds on the constructible
@@ -57,12 +56,15 @@ categories.
   meaningful on `D⁺(Y_proét)`, where the blueprint defines it: the adjunction is only asserted for
   bounded below objects.
 * The bijectivity in `rightDerivedUpperShriekHomEquiv` is the chain of bijections of the proof of
-  blueprint `sk-prop-sf-existence` (c): the compact-support comparison
+  an earlier form of blueprint `sk-prop-sf-existence`: the compact-support comparison
   `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`, the adjunction
   `ν^* ⊣ Rν_*`, the étale adjunction `Rf_! ⊣ f^×` and the full faithfulness of `ν^*` on `D⁺`
   (`AlgebraicGeometry.ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map`).
-* The ambient right adjoint of `Rf_!` of blueprint `sk-prop-sf-existence` (b) is not defined
-  here: it does not exist for proper curves, and nothing needs it.
+* The ambient right adjoint of `Rf_!` on all of `D(X_proét)` is not defined
+  here: it does not exist for proper curves. The right adjoint of blueprint
+  `sk-prop-sf-existence` lives on the localizing closures `Loc(Dctf)`, see
+  `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizing` in
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizing`.
 * The definition of `Rf^!` only needs the étale `Rf_!` to be a left adjoint, so that `f^×`
   exists; for torsion coefficients this is the instance
   `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`. The results on bounded below
@@ -95,13 +97,17 @@ section Definition
 
 variable [(Etale.rightDerivedLowerShriek A f).IsLeftAdjoint]
 
-/-- Blueprint `sk-def-sf-operations` (vi): the exceptional inverse image
+/-- Blueprint `sk-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
+(at a finite stage `A = A_{E,n}`) the exceptional inverse image
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, where `f^×` is the étale exceptional inverse image
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, the right adjoint of the étale `Rf_!`. It is
 the constructible exceptional inverse image of the blueprint, meaningful on bounded below
 complexes, where it is right adjoint to `Rf_!` on objects of étale origin
-(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). -/
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). For `f` separated of finite type
+over a finite-type scheme over a field, it carries `D_c^[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`
+and Tor amplitude `[a, b]` to `[a - 2D, b + 2 dim Y + 1]`, with `D` independent of the stage
+(`AlgebraicGeometry.ProEtale.exists_preservationClauses`). -/
 noncomputable def rightDerivedUpperShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=

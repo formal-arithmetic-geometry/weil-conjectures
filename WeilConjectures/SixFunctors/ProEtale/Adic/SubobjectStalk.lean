@@ -301,11 +301,4 @@ lemma linearEquivOfIso_apply_eq_toModuleCat_map {M N : WeilCoefficients.{u} l} (
     linearEquivOfIso e x = ((toModuleCat l).map e.hom).hom x :=
   rfl
 
-lemma toModuleCat_map_comp_apply {M N P : WeilCoefficients.{u} l} (f : M ⟶ N) (g : N ⟶ P)
-    (x : (toModuleCat l).obj M) :
-    ((toModuleCat l).map (f ≫ g)).hom x =
-      ((toModuleCat l).map g).hom (((toModuleCat l).map f).hom x) := by
-  rw [Functor.map_comp]
-  rfl
-
 end AlgebraicGeometry.WeilCoefficients

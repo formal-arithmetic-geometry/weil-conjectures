@@ -8,10 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyNonneg
+public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
-public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.LowerStarPairing
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.StalkPairing
 
@@ -64,15 +67,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-/-- The global sections of a zero Weil sheaf vanish. -/
-theorem WeilSheaf.subsingleton_globalSections_of_isZero {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
-    (hF : Limits.IsZero F) : Subsingleton F.globalSections.carrier :=
-  ModuleCat.subsingleton_of_isZero <| Functor.map_isZero
-    (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
-      Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙ WeilCoefficients.toModuleCat l) hF
 
 /-- The cohomology `Hʳ(Spec k̄, M)` of a Weil complex on `Spec k₀` vanishes outside a finite
 interval of degrees, a Weil complex being bounded. -/
@@ -137,8 +131,6 @@ lemma WeilSheaf.IsUnitCompatible.globalSections_frobenius
     exact congrArg (fun m ↦ ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map m) hη
   exact congrArg (fun m ↦ m.hom (1 : ULift.{u + 1} (PadicAlgCl l))) key
 
-set_option maxHeartbeats 1600000 in
--- The Weil structure of the pushforward unfolds through several module-object isomorphisms.
 /-- A compatible unit of a Weil sheaf pushes forward to a compatible unit of its direct image:
 `𝟙 ⟶ φ̄_* 𝟙 ⟶ φ̄_* F`. -/
 lemma WeilSheaf.IsUnitCompatible.lowerStar {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
@@ -149,32 +141,21 @@ lemma WeilSheaf.IsUnitCompatible.lowerStar {Z : Scheme.{u}} [Z.Over (Spec (CommR
       (ε (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[
           WeilCoefficients.{u} l] ≫
         (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[_].map η) := by
-  set φ' := Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))
-  set FY := (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
-  set FX := (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
-  have hc : φ' ≫ FY = FX ≫ φ' :=
-    Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ
-      (comp_over φ (Spec (CommRingCat.of k₀)))
-  have h₁ := NatTrans.IsMonoidal.unit (τ := (lowerStarComp (WeilCoefficients.{u} l) φ' FY).hom)
-  have h₂ := NatTrans.IsMonoidal.unit (τ := (lowerStarCongr (WeilCoefficients.{u} l) hc).hom)
-  have h₃ := NatTrans.IsMonoidal.unit (τ := (lowerStarComp (WeilCoefficients.{u} l) FX φ').inv)
-  have n₁ := (lowerStarComp (WeilCoefficients.{u} l) φ' FY).hom.naturality η
-  have n₂ := (lowerStarCongr (WeilCoefficients.{u} l) hc).hom.naturality η
-  have n₃ := (lowerStarComp (WeilCoefficients.{u} l) FX φ').inv.naturality η
-  simp only [Functor.comp_map] at n₁ n₃
-  simp only [Functor.LaxMonoidal.comp_ε, Category.assoc] at h₁ h₃
-  rw [IsUnitCompatible, lowerStar_obj_obj_str]
-  rw [Iso.trans_hom, Mod.comp_hom', Iso.app_hom, Functor.mapIso_hom, adicLowerStar_map_hom]
-  unfold adicLowerStarGeometricFiberMapCompFrobeniusIso
-  rw [Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, Mod.comp_hom',
-    Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom, Iso.symm_hom,
-    adicLowerStarComp_inv_app_hom]
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rw [reassoc_of% n₁, reassoc_of% h₁, reassoc_of% n₂, reassoc_of% h₂, reassoc_of% n₃,
-    reassoc_of% h₃]
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  exact congrArg (fun m ↦ ε (φ')_*[WeilCoefficients.{u} l] ≫ (φ')_*[_].map m) hη
+  -- Stay with the named exchange isomorphism `τ`: unfolding the Weil structure of the
+  -- pushforward to module objects produces compositions whose implicit objects differ
+  -- syntactically from those of the naturality squares, which is very slow for the kernel.
+  set τ := lowerStarGeometricFiberMapCompFrobeniusIso (WeilCoefficients.{u} l) φ
+    (comp_over φ (Spec (CommRingCat.of k₀)))
+  rw [IsUnitCompatible, lowerStar_obj_obj_str_hom_hom]
+  have hu := NatTrans.IsMonoidal.unit (τ := τ.hom)
+  have nat := τ.hom.naturality η
+  simp only [Functor.LaxMonoidal.comp_ε, Functor.comp_map, Category.assoc] at hu nat
+  rw [Functor.map_comp, Category.assoc, reassoc_of% nat, reassoc_of% hu, ← Functor.map_comp,
+    ← Functor.map_comp]
+  exact congrArg (fun m ↦
+    ε (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[
+        WeilCoefficients.{u} l] ≫
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map m) hη
 
 end UnitSection
 
@@ -242,7 +223,7 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
     Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier :=
-  sorry
+  subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt k₀ l X e he r hr
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
@@ -357,7 +338,7 @@ theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
     Subsingleton ((adicConstant k₀ l X).cohomology r).carrier :=
-  sorry
+  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X e he hr
 
 end WeilSheaf
 

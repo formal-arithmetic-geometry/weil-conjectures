@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RepresentationTheory.ContinuousIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 
@@ -33,17 +34,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω]
-
-/-- Being an irreducible local system is invariant under isomorphism. -/
-lemma IsIrreducibleAdicLocalSystem.of_iso {F G : AdicSheaf l Y} (e : F ≅ G)
-    (hF : IsIrreducibleAdicLocalSystem F) : IsIrreducibleAdicLocalSystem G := by
-  obtain ⟨hl, hz, h⟩ := hF
-  refine ⟨hl.of_iso e, fun hG ↦ hz (hG.of_iso e), fun H i _ hH ↦ ?_⟩
-  rcases h H (i ≫ e.inv) inferInstance hH with h' | h'
-  · exact Or.inl h'
-  · right
-    have : IsIso ((i ≫ e.inv) ≫ e.hom) := inferInstance
-    simpa using this
 
 /-- The `ℚ̄_ℓ`-linear map of stalks at a geometric point induced by a morphism of lisse
 sheaves. -/

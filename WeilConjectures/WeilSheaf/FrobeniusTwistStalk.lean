@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.FrobeniusTwist
+public import WeilConjectures.WeilSheaf.FrobeniusTwistSubobject
 public import WeilConjectures.WeilSheaf.StalkComparison
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurveConstituent
 

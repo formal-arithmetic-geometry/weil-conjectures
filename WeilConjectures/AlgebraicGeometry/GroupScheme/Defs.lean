@@ -281,6 +281,8 @@ theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : 
 
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 
+This is also blueprint `def-sc-isogeny`.
+
 An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
 kernel. The blueprint defines isogenies between abelian varieties; the definition makes sense
 for arbitrary group schemes, but it is only for abelian varieties that
@@ -293,7 +295,8 @@ class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) 
 
 attribute [instance] IsIsogeny.isFinite_ker
 
-/-- The degree of an isogeny `f : A ⟶ B`: the order of its kernel.
+/-- Blueprint `sk-def-av-isogeny` (also `def-sc-isogeny`): the degree of an isogeny
+`f : A ⟶ B`, the order of its kernel.
 
 This is only the degree of `f` as a finite flat morphism when `f` is an isogeny of abelian
 varieties; outside that range it is the order of the kernel and nothing more. -/

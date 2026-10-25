@@ -23,9 +23,7 @@ stalk functor at `t` is faithful on lisse sheaves; the *rank*
 `AlgebraicGeometry.ProEtale.adicStalkRank` of a lisse sheaf is the dimension of its stalk at `t`.
 
 * The rank is additive in short exact sequences of lisse sheaves, and a lisse sheaf of rank zero
-  is zero. Hence a nonzero lisse subsheaf of minimal rank of a nonzero lisse sheaf `V` is an
-  irreducible local system
-  (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_mono_isIrreducibleAdicLocalSystem`).
+  is zero.
 * Among infinitely many irreducible lisse subsheaves `T₀, T₁, …` of a lisse sheaf `V`, two are
   isomorphic (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_of_mono`): as long as
   `T_k` is not isomorphic to an earlier `T_j`, it meets the sum `P_k` of the earlier ones
@@ -191,24 +189,6 @@ theorem isIso_of_adicStalkRank_eq [IsLocallyNoetherian Y] (hM : M.IsEquivalenceA
 theorem IsIrreducibleAdicLocalSystem.adicStalkRank_pos (hM : M.IsEquivalenceAt t)
     {S : AdicSheaf l Y} (hS : IsIrreducibleAdicLocalSystem S) : 0 < adicStalkRank t S :=
   Nat.pos_of_ne_zero fun h ↦ hS.2.1 (hS.1.isZero_of_adicStalkRank_eq_zero t hM h)
-
-/-- **Existence of irreducible lisse subsheaves.** A nonzero lisse sheaf has a lisse subsheaf
-which is an irreducible local system: a nonzero lisse subsheaf of minimal rank. -/
-theorem IsAdicLisseSheaf.exists_mono_isIrreducibleAdicLocalSystem [IsLocallyNoetherian Y]
-    (hM : M.IsEquivalenceAt t) {V : AdicSheaf l Y} (hV : IsAdicLisseSheaf V) (hV0 : ¬ IsZero V) :
-    ∃ (S : AdicSheaf l Y) (ι : S ⟶ V), Mono ι ∧ IsIrreducibleAdicLocalSystem S := by
-  classical
-  have hex : ∃ r, ∃ (G : AdicSheaf l Y) (i : G ⟶ V), Mono i ∧ IsAdicLisseSheaf G ∧
-      ¬ IsZero G ∧ adicStalkRank t G = r :=
-    ⟨_, V, 𝟙 V, inferInstance, hV, hV0, rfl⟩
-  obtain ⟨S, ι, hι, hS, hS0, hr⟩ := Nat.find_spec hex
-  refine ⟨S, ι, hι, hS, hS0, fun H j hj hH ↦ ?_⟩
-  by_cases hH0 : IsZero H
-  · exact Or.inl hH0
-  refine Or.inr (isIso_of_adicStalkRank_eq t hM hH hS j
-    (le_antisymm (adicStalkRank_le_of_mono t hH hS j) ?_))
-  rw [hr]
-  exact Nat.find_min' hex ⟨H, j ≫ ι, inferInstance, hH, hH0, rfl⟩
 
 /-- The inductive step of `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_of_mono`: if
 every irreducible lisse subsheaf of a lisse subsheaf `P ⊆ V` is isomorphic to one of

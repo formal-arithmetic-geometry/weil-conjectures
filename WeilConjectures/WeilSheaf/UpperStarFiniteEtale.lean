@@ -36,7 +36,7 @@ variable (k₀ l) in
 /-- The composition isomorphism `(φ ≫ ψ)^* ≅ ψ^* ⋙ φ^*` of pullbacks of Weil sheaves, after the
 inclusion into pro-étale Weil sheaves, induced by
 `AlgebraicGeometry.ProEtaleWeilSheaf.upperStarCompIso`. -/
-noncomputable def upperStarCompιIso (φ : X ⟶ Y) (ψ : Y ⟶ Z)
+noncomputable def upperStarCompCompιIso (φ : X ⟶ Y) (ψ : Y ⟶ Z)
     [φ.IsOver (Spec (CommRingCat.of k₀))] [ψ.IsOver (Spec (CommRingCat.of k₀))] :
     upperStar (k₀ := k₀) (l := l) (φ ≫ ψ) ⋙ (WeilSheaf.objectProperty k₀ l X).ι ≅
       (upperStar ψ ⋙ upperStar φ) ⋙ (WeilSheaf.objectProperty k₀ l X).ι :=
@@ -62,7 +62,7 @@ theorem nonempty_upperStar_comp_iso (φ : X ⟶ Y) (ψ : Y ⟶ Z)
     [φ.IsOver (Spec (CommRingCat.of k₀))] [ψ.IsOver (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l Z) :
     Nonempty ((upperStar (φ ≫ ψ)).obj F ≅ (upperStar φ).obj ((upperStar ψ).obj F)) :=
-  ⟨ObjectProperty.isoMk _ ((upperStarCompιIso k₀ l φ ψ).app F)⟩
+  ⟨ObjectProperty.isoMk _ ((upperStarCompCompιIso k₀ l φ ψ).app F)⟩
 
 /-- Pullbacks of Weil sheaves along equal morphisms agree. -/
 theorem upperStar_congr {φ φ' : X ⟶ Y} [φ.IsOver (Spec (CommRingCat.of k₀))]

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 
 /-!
 
@@ -80,8 +81,17 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 pro-étale sheaves: the canonical map `j_!(j^* L ⊗ M) ⟶ L ⊗ j_! M` is an isomorphism. See the
 module docstring. -/
 instance hasProjectionFormula_openImmersion :
-    (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).HasProjectionFormula :=
-  sorry
+    (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).HasProjectionFormula := by
+  refine ⟨fun L M ↦ ?_⟩
+  let adj := ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j
+  have : IsIso adj.unit := adj.unit_isIso_of_L_fully_faithful
+  have : IsIso (adj.counit.app (L ⊗ (j)_!open[Ab.{u + 1}].obj M)) :=
+    adj.isIso_counit_app_of_iso
+      ((β_ L ((j)_!open[Ab.{u + 1}].obj M)) ≪≫
+        ProEtale.openImmersionLowerShriekTensorIso Ab.{u + 1} j M L)
+  change IsIso (adj.projectionFormulaMap L M)
+  rw [Adjunction.projectionFormulaMap, Adjunction.homEquiv_counit]
+  infer_instance
 
 /-- The *linear* extension by zero `Mod_{j^* Λ_X} ⥤ Mod_{Λ_X}` along an open immersion
 `j : U ⟶ X`: the lift of the extension by zero `j_!` on abelian sheaves to module objects

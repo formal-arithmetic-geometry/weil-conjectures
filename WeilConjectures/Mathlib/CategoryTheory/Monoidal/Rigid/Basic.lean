@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
@@ -24,6 +25,8 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
 
 - `CategoryTheory.IsDualizable`: `X` admits a right dual.
 - `CategoryTheory.IsInvertible`: `X` admits a two-sided tensor inverse.
+- `CategoryTheory.hasRightDualOfIso`: a right dual transported along an isomorphism.
+- `CategoryTheory.hasRightDualOfIsZero`: a zero object is its own right dual.
 - `CategoryTheory.exactPairingOfTensorIso`: the exact pairing of an object with a two-sided
   tensor inverse.
 - `CategoryTheory.MonoidalClosed.ihomIsoTensorLeft`: for an exact pairing of `Y` and `X`, the
@@ -82,6 +85,22 @@ theorem IsDualizable.tensorObj {X Y : C} (hX : IsDualizable X) (hY : IsDualizabl
 theorem IsDualizable.of_iso {X Y : C} (e : X ≅ Y) (hX : IsDualizable X) : IsDualizable Y := by
   obtain ⟨_⟩ := hX
   exact ⟨{ rightDual := Xᘁ, exact := exactPairingCongrLeft e.symm }⟩
+
+/-- A right dual of an object transported along an isomorphism. -/
+noncomputable abbrev hasRightDualOfIso {P Q : C} (e : P ≅ Q) [HasRightDual Q] : HasRightDual P :=
+  @HasRightDual.mk _ _ _ _ Qᘁ (exactPairingCongrLeft e)
+
+open Limits in
+/-- A zero object is its own right dual. -/
+@[instance_reducible]
+noncomputable def hasRightDualOfIsZero [HasZeroMorphisms C] {Z : C} (hZ : IsZero Z) :
+    HasRightDual Z where
+  rightDual := Z
+  exact :=
+    { coevaluation' := 0
+      evaluation' := 0
+      coevaluation_evaluation' := (hZ.of_iso (ρ_ Z)).eq_of_src _ _
+      evaluation_coevaluation' := (hZ.of_iso (λ_ Z)).eq_of_src _ _ }
 
 /-- The counit of the adjunction `- ⊗ Y ⊣ - ⊗ Y'` of an exact pairing of `Y` and `Y'` is the
 evaluation `(X ⊗ Y') ⊗ Y ≅ X ⊗ (Y' ⊗ Y) ⟶ X`. -/

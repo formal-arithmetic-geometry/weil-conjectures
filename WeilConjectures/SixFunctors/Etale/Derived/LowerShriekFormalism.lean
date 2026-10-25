@@ -80,8 +80,9 @@ noncomputable def derivedPlusFormalism : CompactSupportFormalism where
     simp
   pf f := R+((f)_*[A])
   adj f := (upperStarLowerStarAdjunction A f).derivedPlus
-  sh j _ := D+((j)_!open[A])
-  shAdj j _ := (openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction
+  sh j hj := haveI := hj.out; D+((j)_!open[A])
+  shAdj j hj := haveI := hj.out
+    (openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 

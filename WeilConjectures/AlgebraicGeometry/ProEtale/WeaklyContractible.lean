@@ -42,9 +42,11 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- A surjective weakly étale morphism from an affine scheme to the spectrum of a
-w-contractible ring has a section. -/
-lemma exists_comp_eq_id_of_isWContractibleRing {R : CommRingCat.{u}} [IsWContractibleRing R]
+/-- A surjective weakly étale morphism from an affine scheme to `Spec R` has a section, if every
+faithfully flat ind-étale `R`-algebra has a retraction. -/
+lemma exists_comp_eq_id_of_forall_exists_retraction {R : CommRingCat.{u}}
+    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
+      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
     {Y : Scheme.{u}} [IsAffine Y] (p : Y ⟶ Spec R) [WeaklyEtale p] [Surjective p] :
     ∃ s : Spec R ⟶ Y, s ≫ p = 𝟙 _ := by
   obtain ⟨φ, hφ⟩ : ∃ φ : R ⟶ Γ(Y, ⊤), Spec.map φ = Y.isoSpec.inv ≫ p :=
@@ -63,12 +65,42 @@ lemma exists_comp_eq_id_of_isWContractibleRing {R : CommRingCat.{u}} [IsWContrac
   have : Module.FaithfullyFlat R T := by
     rw [← RingHom.faithfullyFlat_algebraMap_iff]
     exact RingHom.FaithfullyFlat.stableUnderComposition _ _ hff hgff
-  obtain ⟨r, hr⟩ := IsWContractibleRing.exists_retraction R T
+  obtain ⟨r, hr⟩ := hR T
   refine ⟨Spec.map (CommRingCat.ofHom (r.comp g)) ≫ Y.isoSpec.inv, ?_⟩
   rw [Category.assoc, ← hφ, ← Spec.map_comp, ← Spec.map_id]
   congr 1
   ext x
   exact RingHom.congr_fun hr x
+
+/-- A surjective weakly étale morphism from an affine scheme to the spectrum of a
+w-contractible ring has a section. -/
+lemma exists_comp_eq_id_of_isWContractibleRing {R : CommRingCat.{u}} [IsWContractibleRing R]
+    {Y : Scheme.{u}} [IsAffine Y] (p : Y ⟶ Spec R) [WeaklyEtale p] [Surjective p] :
+    ∃ s : Spec R ⟶ Y, s ≫ p = 𝟙 _ :=
+  exists_comp_eq_id_of_forall_exists_retraction
+    (fun T _ _ _ _ ↦ IsWContractibleRing.exists_retraction R T) p
+
+/-- Let `s` be a section of a morphism `∐ V j ⟶ X`. The preimages under `s` of the components
+`V j` form a cover of `X` by pairwise disjoint open subschemes, and the inclusion of the `j`-th
+one factors through `V j ⟶ X`. -/
+lemma exists_disjoint_opens_of_comp_sigmaDesc_eq_id {X : Scheme.{u}} {κ : Type u}
+    {V : κ → Scheme.{u}} (v : ∀ j, V j ⟶ X) (s : X ⟶ ∐ V) (hs : s ≫ Sigma.desc v = 𝟙 _) :
+    ∃ O : κ → X.Opens, (∀ i j, i ≠ j → Disjoint (O i) (O j)) ∧ (∀ x, ∃ i, x ∈ O i) ∧
+      ∀ j, ∃ c : (O j).toScheme ⟶ V j, c ≫ v j = (O j).ι := by
+  let O (j : κ) : X.Opens := s ⁻¹ᵁ (Sigma.ι V j).opensRange
+  have hO (j : κ) : Set.range ((O j).ι ≫ s).base ⊆ Set.range (Sigma.ι V j).base := by
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Scheme.Opens.range_ι]
+    rintro _ ⟨x, hx, rfl⟩
+    exact hx
+  refine ⟨O, fun i j hij ↦ ?_, fun x ↦ ?_, fun j ↦
+    ⟨IsOpenImmersion.lift (Sigma.ι V j) ((O j).ι ≫ s) (hO j), ?_⟩⟩
+  · rw [disjoint_iff, eq_bot_iff]
+    rintro x ⟨hi, hj⟩
+    exact (disjoint_opensRange_sigmaι V i j hij).le_bot ⟨hi, hj⟩
+  · obtain ⟨j, y, hy⟩ := (sigmaOpenCover V).exists_eq (s x)
+    exact ⟨j, ⟨y, hy⟩⟩
+  · rw [← Sigma.ι_desc v j, ← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, hs,
+      Category.comp_id]
 
 namespace Scheme.ProEt
 
@@ -87,49 +119,43 @@ lemma exists_disjoint_cover_of_comp_sigmaDesc_eq_id {W : T.ProEt} {κ : Type u}
       Sieve.ofArrows Y f ∈ topology T W ∧ (∀ i, S (f i)) ∧ (∀ i, Mono (f i)) ∧
       ∀ i j, i ≠ j → ∀ (Z : T.ProEt) (a : Z ⟶ Y i) (b : Z ⟶ Y j), a ≫ f i = b ≫ f j →
         ⊥ ∈ topology T Z := by
-  let O (j : κ) : W.left.Opens := s ⁻¹ᵁ (Sigma.ι V j).opensRange
-  have hO (j : κ) : Set.range ((O j).ι ≫ s).base ⊆ Set.range (Sigma.ι V j).base := by
-    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Opens.range_ι]
-    rintro _ ⟨x, hx, rfl⟩
-    exact hx
+  obtain ⟨O, hdisj, hcov, hc⟩ := exists_disjoint_opens_of_comp_sigmaDesc_eq_id v s hs
   refine ⟨κ, fun j ↦ ofOpenImmersion W (O j).ι, fun j ↦ ofOpenImmersionHom W (O j).ι,
-    ?_, fun j ↦ hS j _ (IsOpenImmersion.lift (Sigma.ι V j) ((O j).ι ≫ s) (hO j)) ?_,
-    fun j ↦ ?_, ?_⟩
+    ?_, fun j ↦ hS j _ (hc j).choose (hc j).choose_spec, fun j ↦ ?_, ?_⟩
   · refine mem_topology_of_openImmersion _ (fun j ↦ (O j).ι) (fun x ↦ ?_)
       (fun j ↦ Sieve.ofArrows_mk _ _ j)
-    obtain ⟨j, y, hy⟩ := (sigmaOpenCover V).exists_eq (s x)
-    refine ⟨j, ?_⟩
-    rw [Opens.range_ι]
-    exact ⟨y, hy⟩
-  · rw [← Sigma.ι_desc v j, ← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, hs,
-      Category.comp_id]
-    rfl
+    obtain ⟨j, hj⟩ := hcov x
+    exact ⟨j, by rw [Opens.range_ι]; exact hj⟩
   · refine (ProEt.forget T ⋙ CategoryTheory.Over.forget T).mono_of_mono_map ?_
     exact inferInstanceAs (Mono (O j).ι)
   · intro i j hij Z a b hab
     have : IsEmpty Z.left := by
       refine ⟨fun z ↦ ?_⟩
       have hab' : a.left ≫ (O i).ι = b.left ≫ (O j).ι := congrArg (fun g ↦ g.left) hab
-      have hi : (a.left ≫ (O i).ι).base z ∈ O i := by
-        exact (Opens.range_ι (O i)).subset ⟨a.left z, rfl⟩
+      have hi : (a.left ≫ (O i).ι).base z ∈ O i :=
+        (Opens.range_ι (O i)).subset ⟨a.left z, rfl⟩
       have hj : (a.left ≫ (O i).ι).base z ∈ O j := by
         rw [hab']
         exact (Opens.range_ι (O j)).subset ⟨b.left z, rfl⟩
-      exact (disjoint_opensRange_sigmaι V i j hij).le_bot ⟨hi, hj⟩
+      exact (disjoint_iff.1 (hdisj i j hij)).le ⟨hi, hj⟩
     exact bot_mem_topology Z
 
-/-- **Stacks 0990.** An object of the small pro-étale site whose underlying scheme is the
-spectrum of a w-contractible ring is weakly contractible.
+/-- Let `W ≅ Spec R` be an object of the small pro-étale site, where every faithfully flat
+ind-étale `R`-algebra has a retraction, and `S` a covering sieve of `W`. Then there is a morphism
+`∐ V j ⟶ W.left` with a section, such that every morphism to `W` factoring through some `V j`
+lies in `S`.
 
-Every covering sieve `S` of `W ≅ Spec R` contains a quasi-compact weakly étale cover, which
-is refined by finitely many affine schemes `V j`. Then `∐ V j ⟶ Spec R` is weakly étale and
-surjective between affine schemes, so it has a section (`R` being w-contractible), and the
-preimages of the `V j` under this section form a finite disjoint open cover of `W` whose
-members lie in `S`. -/
-@[stacks 0990]
-theorem isWeaklyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}} [IsWContractibleRing R]
-    (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W := by
-  refine GrothendieckTopology.isWeaklyContractible_of_forall_mem.{w, u} fun S hS ↦ ?_
+`S` contains a quasi-compact weakly étale cover, which is refined by finitely many affine
+schemes `V j`; then `∐ V j ⟶ Spec R` is weakly étale and surjective between affine schemes,
+so it has a section by `exists_comp_eq_id_of_forall_exists_retraction`. -/
+lemma exists_comp_sigmaDesc_eq_id_of_forall_exists_retraction {W : T.ProEt}
+    {R : CommRingCat.{u}}
+    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
+      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
+    (e : W.left ≅ Spec R) {S : Sieve W} (hS : S ∈ topology T W) :
+    ∃ (κ : Type u) (V : κ → Scheme.{u}) (v : ∀ j, V j ⟶ W.left) (s : W.left ⟶ ∐ V),
+      s ≫ Sigma.desc v = 𝟙 _ ∧
+      ∀ j {Y : T.ProEt} (a : Y ⟶ W) (b : Y.left ⟶ V j), b ≫ v j = a.left → S a := by
   obtain ⟨P, hP, hPS⟩ := mem_topology_iff.1 hS
   obtain ⟨𝒰, _, h𝒰⟩ := (mem_propQCPrecoverage_iff_exists_quasiCompactCover
     (P := @WeaklyEtale)).1 (mem_precoverage_iff.1 hP)
@@ -150,8 +176,8 @@ theorem isWeaklyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}} [IsWCont
     simp only [v]
     rw [hk]
     exact 𝒱.covers x
-  obtain ⟨s, hs⟩ := exists_comp_eq_id_of_isWContractibleRing (Sigma.desc v ≫ e.hom)
-  refine exists_disjoint_cover_of_comp_sigmaDesc_eq_id v (e.hom ≫ s) ?_ S ?_
+  obtain ⟨s, hs⟩ := exists_comp_eq_id_of_forall_exists_retraction hR (Sigma.desc v ≫ e.hom)
+  refine ⟨_, _, v, e.hom ≫ s, ?_, ?_⟩
   · rw [← cancel_mono e.hom, Category.assoc, Category.assoc, hs]
     simp
   · intro j Y b c hbc
@@ -167,6 +193,45 @@ theorem isWeaklyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}} [IsWCont
       MorphismProperty.Over.Hom.ext hd.symm
     rw [hb]
     exact S.downward_closed (hPS _ _ (ha _)) _
+
+/-- Let `W ≅ Spec R` be an object of the small pro-étale site, where every faithfully flat
+ind-étale `R`-algebra has a retraction. Every covering sieve of `W` contains the inclusions of a
+cover of `W` by pairwise disjoint open subschemes. -/
+lemma exists_disjoint_opens_of_forall_exists_retraction {W : T.ProEt} {R : CommRingCat.{u}}
+    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
+      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
+    (e : W.left ≅ Spec R) {S : Sieve W} (hS : S ∈ topology T W) :
+    ∃ (κ : Type u) (O : κ → W.left.Opens), (∀ i j, i ≠ j → Disjoint (O i) (O j)) ∧
+      (∀ x, ∃ i, x ∈ O i) ∧ ∀ i, S (ofOpenImmersionHom W (O i).ι) := by
+  obtain ⟨κ, V, v, s, hs, hSv⟩ := exists_comp_sigmaDesc_eq_id_of_forall_exists_retraction hR e hS
+  obtain ⟨O, hdisj, hcov, hc⟩ := exists_disjoint_opens_of_comp_sigmaDesc_eq_id v s hs
+  exact ⟨κ, O, hdisj, hcov, fun j ↦ hSv j _ (hc j).choose (hc j).choose_spec⟩
+
+/-- **Stacks 0990**, variant: an object of the small pro-étale site whose underlying scheme is
+`Spec R`, where every faithfully flat ind-étale `R`-algebra has a retraction, is weakly
+contractible.
+
+Every covering sieve `S` of `W ≅ Spec R` contains a quasi-compact weakly étale cover, which
+is refined by finitely many affine schemes `V j`. Then `∐ V j ⟶ Spec R` is weakly étale and
+surjective between affine schemes, so it has a section, and the preimages of the `V j` under
+this section form a finite disjoint open cover of `W` whose members lie in `S`. -/
+@[stacks 0990]
+theorem isWeaklyContractible_of_forall_exists_retraction {W : T.ProEt} {R : CommRingCat.{u}}
+    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
+      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
+    (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W := by
+  refine GrothendieckTopology.isWeaklyContractible_of_forall_mem.{w, u} fun S hS ↦ ?_
+  obtain ⟨κ, V, v, s, hs, hSv⟩ := exists_comp_sigmaDesc_eq_id_of_forall_exists_retraction hR e hS
+  exact exists_disjoint_cover_of_comp_sigmaDesc_eq_id v s hs S hSv
+
+/-- **Stacks 0990.** An object of the small pro-étale site whose underlying scheme is the
+spectrum of a w-contractible ring is weakly contractible
+(see `isWeaklyContractible_of_forall_exists_retraction`). -/
+@[stacks 0990]
+theorem isWeaklyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}} [IsWContractibleRing R]
+    (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W :=
+  isWeaklyContractible_of_forall_exists_retraction
+    (fun T _ _ _ _ ↦ IsWContractibleRing.exists_retraction R T) e
 
 /-- **Stacks 0990.** The small pro-étale site has enough affine weakly contractible objects:
 every object `V` is covered by objects `W i` whose underlying schemes are spectra of

@@ -15,13 +15,14 @@ public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityS
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 
 /-!
-# The tensor comparison of the left derived functor of an exact monoidal functor
+# The tensor comparison of the left derived functor of a monoidal functor
 
-Let `F : C ⥤ D` be an exact strong monoidal functor between monoidal Grothendieck abelian
-categories with functorial flat resolutions, which preserves flat objects and `ℤ`-indexed
-colimits. We show that the bifunctors `(K, M) ↦ LF(K ⊗ᴸ M)` and `(K, M) ↦ LF K ⊗ᴸ LF M` are the
-total left derived functors of `(A, B) ↦ F(A ⊗ B)` and `(A, B) ↦ F A ⊗ F B`, and derive the
-comonoidal structure `δ` of `F` into a natural isomorphism
+Let `F : C ⥤ D` be a strong monoidal functor between monoidal Grothendieck abelian categories
+with functorial flat resolutions, which preserves flat objects, `ℤ`-indexed colimits and the
+quasi-isomorphisms between K-flat complexes (for instance an exact functor). We show that the
+bifunctors `(K, M) ↦ LF(K ⊗ᴸ M)` and `(K, M) ↦ LF K ⊗ᴸ LF M` are the total left derived functors
+of `(A, B) ↦ F(A ⊗ B)` and `(A, B) ↦ F A ⊗ F B`, and derive the comonoidal structure `δ` of `F`
+into a natural isomorphism
 `LF(K ⊗ᴸ M) ≅ LF K ⊗ᴸ LF M`.
 
 This is the common generalisation of the tensor comparisons of the derived pullbacks
@@ -29,13 +30,18 @@ This is the common generalisation of the tensor comparisons of the derived pullb
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`, which are its instances, and
 it applies as well to the comparison functor between étale and pro-étale sheaves.
 
-We then show that this comparison is compatible with the composition of functors and with
+Both are computed on K-flat complexes `P` whose image `F P` is K-flat
+(`CategoryTheory.Functor.kFlatKFlatMap`), on which the counit of `LF` is an isomorphism.
+
+We then show that this comparison is compatible with the composition of exact functors and with
 monoidal natural isomorphisms.
 
 ## Main definitions and results
 
 - `CategoryTheory.Functor.kFlatMap F`: the complexes whose image under `F` is K-flat; they
   form a left derivability structure.
+- `CategoryTheory.Functor.kFlatKFlatMap F`: the K-flat complexes whose image under `F` is
+  K-flat; they form a left derivability structure.
 - `CategoryTheory.Functor.leftDerivedTensorComparison F`: the comparison
   `LF(K ⊗ᴸ M) ⟶ LF K ⊗ᴸ LF M`, an isomorphism.
 - `CategoryTheory.Functor.leftDerivedTensorComparison_comp`: the comparison of `F ⋙ G` is the
@@ -94,6 +100,21 @@ instance isLeftDerivabilityStructure_kFlatMap :
     Λ.reduced.resolutionNatTrans (fun _ ↦ inferInstance)
     (F.kFlatMap_quotient_obj_resolutionFunctor_obj Λ.reduced)
 
+/-- The K-flat complexes in `K(C)` whose image under `F : C ⥤ D` is K-flat. -/
+abbrev kFlatKFlatMap : ObjectProperty (HomotopyCategory C (.up ℤ)) :=
+  (HomotopyCategory.quasiIso C (.up ℤ)).kFlat ⊓ F.kFlatMap
+
+/-- The K-flat complexes whose image under `F` is K-flat form a left derivability structure on
+`K(C)` for the quasi-isomorphisms: the functorial flat resolutions are such complexes. -/
+instance isLeftDerivabilityStructure_kFlatKFlatMap :
+    (HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatKFlatMap).IsLeftDerivabilityStructure :=
+  let Λ := (inferInstance : HasFunctorialFlatResolution C).some
+  HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism _
+    Λ.reduced.resolutionNatTrans (fun _ ↦ inferInstance)
+    (fun K ↦ ⟨(HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K),
+      F.kFlatMap_quotient_obj_resolutionFunctor_obj Λ.reduced K⟩)
+
 end
 
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh M ⟶ Qh (K ⊗ M)` of `Qh : K(C) ⥤ D(C)` is an
@@ -108,7 +129,7 @@ lemma isIso_μNatTrans_Qh_app_app_of_kFlat (K M : HomotopyCategory C (.up ℤ))
 
 section Comparison
 
-variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+variable (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
 
 /-- The bifunctor `(K, M) ↦ LF K ⊗ᴸ LF M`, of type `D(C) ⥤ D(C) ⥤ D(D)`. -/
 noncomputable abbrev derivedTensorLeftDerived :
@@ -153,20 +174,36 @@ noncomputable def leftDerivedDerivedTensorCounit :
   (postcompose₂.obj F.leftDerivedFunctor).map (LaxMonoidal.μNatTrans Qh) ≫
     (postcompose₂.map F.leftDerivedFunctorCounit).app (curriedTensor _)
 
+omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [HasFunctorialFlatResolution D] in
+/-- On a K-flat object of `K(C)`, the counit of the total left derived functor of `F` is an
+isomorphism. -/
+lemma isIso_leftDerivedFunctorCounit_app_of_kFlat' (K : HomotopyCategory C (.up ℤ))
+    (hK : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat K) :
+    IsIso (F.leftDerivedFunctorCounit.app K) := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  exact F.isIso_leftDerivedFunctorCounit_app_of_kFlat K
+    ((HomotopyCategory.kFlat_quotient_obj_iff K).1 hK)
+
 variable [F.PreservesFlat] [F.IsLeftAdjoint]
 
 /-- `(K, M) ↦ LF K ⊗ᴸ LF M` is the total left derived functor of `(A, B) ↦ F A ⊗ F B`. It is
-computed on pairs `(K, M)` with `K` K-flat and `F M` K-flat. -/
+computed on pairs `(K, M)` with `K` K-flat and `M`, `F M` K-flat. -/
 instance isLeftDerivedFunctor₂_derivedTensorLeftDerived :
     (derivedTensorLeftDerived F).IsLeftDerivedFunctor₂ (derivedTensorLeftDerivedCounit F)
       (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
-    (HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatMap) _ (fun X₁ X₂ ↦ ?_)
-  have := isIso_μNatTrans_Qh_app_app_of_kFlat
-    ((F.mapHomotopyCategory _).obj X₁.obj) _ X₂.property
+    (HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatKFlatMap) _ (fun X₁ X₂ ↦ ?_)
+  have hμ := isIso_μNatTrans_Qh_app_app_of_kFlat
+    ((F.mapHomotopyCategory _).obj X₁.obj) _ X₂.property.2
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ X₁.property
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ X₂.property.1
   simp only [derivedTensorLeftDerivedCounit, NatTrans.comp_app]
-  exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance this)
+  exact IsIso.comp_isIso'
+    (inferInstanceAs (IsIso (F.leftDerivedFunctorCounit.app X₁.obj ▷ _)))
+    (IsIso.comp_isIso' (inferInstanceAs (IsIso (_ ◁ F.leftDerivedFunctorCounit.app X₂.obj)))
+      hμ)
 
 /-- `(K, M) ↦ LF(K ⊗ᴸ M)` is the total left derived functor of `(A, B) ↦ F(A ⊗ B)`. It is
 computed on pairs of K-flat complexes. -/
@@ -177,10 +214,12 @@ instance isLeftDerivedFunctor₂_leftDerivedDerivedTensor :
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat _ (fun X₁ X₂ ↦ ?_)
   have := isIso_μNatTrans_Qh_app_app_of_kFlat X₁.obj _ X₂.property
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' _
+    ((HomotopyCategory.quasiIso C (.up ℤ)).kFlat.prop_tensor X₁.property X₂.property)
   simp only [leftDerivedDerivedTensorCounit, NatTrans.comp_app]
   exact IsIso.comp_isIso'
     (Functor.map_isIso F.leftDerivedFunctor (((LaxMonoidal.μNatTrans Qh).app X₁.obj).app X₂.obj))
-    inferInstance
+    (inferInstanceAs (IsIso (F.leftDerivedFunctorCounit.app (X₁.obj ⊗ X₂.obj))))
 
 variable [F.Monoidal]
 
@@ -343,7 +382,7 @@ variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian
 
 section
 
-variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+variable (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
 
 /-- The component of `derivedTensorLeftDerivedCounit F` at `(X₁, X₂)` is the tensor product of
 the counits of `LF`, followed by the lax monoidal structure of `Qh`. -/

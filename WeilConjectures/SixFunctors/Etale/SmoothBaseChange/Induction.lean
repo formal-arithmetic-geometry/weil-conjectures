@@ -64,7 +64,11 @@ fixed-base hypothesis does not supply. The negative degrees in `∀ q' < q` are 
 This statement is a recombination of the lemmas of Stacks, Étale Cohomology, Section 59.88
 rather than a single tagged one: it is the contradiction between
 `AlgebraicGeometry.Etale.exists_curveTestDatum` and
-`AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf`. -/
+`AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf`. These are the
+seams of blueprint `sk-rem-seams` (`rem-seams`): the counterexample lane (Stacks 0F06, 0F07,
+0F08) produces a curve-test datum with `R^q h_* (Λ/dΛ) ≠ 0`, and the curve-test lane, which uses
+the field-extension invariance, the torsor translation and the spreading of Galois covers in
+degree one only, makes it vanish. -/
 theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom p]
     [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)
     {q : ℤ} (hq : 1 ≤ q) (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q') :

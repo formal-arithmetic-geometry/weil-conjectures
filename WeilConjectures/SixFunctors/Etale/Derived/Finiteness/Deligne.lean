@@ -66,6 +66,22 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+/-- Blueprint `lem-asd-smooth-generic-direct-image`: A smooth source with locally constant
+coefficients.
+
+For a separated smooth morphism of finite type `a : X ⟶ S` to an integral scheme of finite type
+over a field on which the exponent of `Λ` is invertible, and a finite locally constant sheaf `F`
+on `X`, there is a nonempty open `U ⊆ S` over which `Ra_* F` is bounded constructible and
+commutes with every base change from a noetherian scheme
+(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`).
+
+This records the form of the node used by the induction for `thm-fin-deligne-generic-open`: the
+blueprint asks for `𝔽_ℓ`-coefficients and finite locally constant cohomology sheaves of
+`Rf_{U,*} L`, whereas this states bounded constructibility (with base change) over any finite
+ring `Λ` whose exponent is invertible on `S`. -/
+theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ :=
+  sorry
+
 /-- Blueprint `thm-fin-deligne-generic-open`: Generic bounded constructibility for an open
 immersion.
 
@@ -83,9 +99,8 @@ theorem exists_hasConstructibleDirectImageBaseChangeOn {k : Type u} [Field k]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧
       HasConstructibleDirectImageBaseChangeOn Λ fY j F U :=
-  -- the remaining input is the smooth case `lem-asd-smooth-generic-direct-image`
   exists_hasConstructibleDirectImageBaseChangeOn_of_smoothGenericDirectImage
-    (Λ := Λ) sorry aS fY j F
+    (Λ := Λ) (smoothGenericDirectImage Λ) aS fY j F
 
 omit [Finite Λ] in
 /-- Blueprint `lem-fin-radicial-exchange-descent`: Descending the exchange property through a

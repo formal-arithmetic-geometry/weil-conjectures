@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.ConstantExtension
-public import WeilConjectures.WeilSheaf.FrobeniusTwist
+public import WeilConjectures.WeilSheaf.FrobeniusTwistSubobject
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.StalkComparison
 public import WeilConjectures.WeilSheaf.EquivariantPullbackExchange
