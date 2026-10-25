@@ -199,12 +199,13 @@ theorem exactAt_overCechComplex_of_forall_exactAt_cechComplex (n : ℕ)
   HomologicalComplex.exactAt_of_forall_exactAt_map_preadditiveCoyoneda _ n fun a ↦
     (h a).of_iso (overCechComplexMapPreadditiveCoyonedaIso U₀ a P).symm
 
-/-- The Čech complex of an injective presheaf with values in an abelian category is exact in
-positive degrees: for every object `a`, the abelian presheaf `Hom(a, P(-))` is a retract of the
-cofree abelian presheaf `Hom(a, piCofree P (-))`, whose Čech complex is exact. -/
-theorem exactAt_overCechComplex_of_injective [HasProducts.{max w v} A] [Injective P] (q : ℕ) :
-    ((overCechComplex U₀).obj P).ExactAt (q + 1) := by
-  refine exactAt_overCechComplex_of_forall_exactAt_cechComplex U₀ P _ fun a ↦ ?_
+/-- For an injective presheaf `P` with values in an abelian category and an object `a`, the
+Čech complex of the abelian presheaf `Hom(a, P(-))` is exact in positive degrees: it is a
+retract of the cofree abelian presheaf `Hom(a, piCofree P (-))`, whose Čech complex is exact. -/
+theorem exactAt_cechComplex_comp_preadditiveCoyoneda_of_injective [HasProducts.{max w v} A]
+    [Injective P] (a : A) (q : ℕ) :
+    ((cechComplex (fun _ : Fin 1 ↦ U₀)).obj
+      (P ⋙ preadditiveCoyoneda.obj (op a))).ExactAt (q + 1) := by
   let F := (Functor.whiskeringRight _ _ _).obj (preadditiveCoyoneda.obj (op a)) ⋙
     cechComplex (fun _ : Fin 1 ↦ U₀)
   refine HomologicalComplex.ExactAt.of_retraction (F.map (toPiCofree P))
@@ -212,6 +213,13 @@ theorem exactAt_overCechComplex_of_injective [HasProducts.{max w v} A] [Injectiv
   · rw [← F.map_comp, Injective.comp_factorThru, F.map_id]
   · exact (exactAt_cechComplex_cofree _ _ q).of_iso
       ((cechComplex _).mapIso (piCofreeCompPreadditiveCoyonedaIso P a)).symm
+
+/-- The Čech complex of an injective presheaf with values in an abelian category is exact in
+positive degrees (`exactAt_cechComplex_comp_preadditiveCoyoneda_of_injective`). -/
+theorem exactAt_overCechComplex_of_injective [HasProducts.{max w v} A] [Injective P] (q : ℕ) :
+    ((overCechComplex U₀).obj P).ExactAt (q + 1) :=
+  exactAt_overCechComplex_of_forall_exactAt_cechComplex U₀ P _ fun a ↦
+    exactAt_cechComplex_comp_preadditiveCoyoneda_of_injective U₀ P a q
 
 end Abelian
 
@@ -229,5 +237,15 @@ theorem exactAt_overCechComplex_of_injective {V : C} [HasFiniteProducts (Over V)
     ((Presheaf.overCechComplex U₀).obj I.obj).ExactAt (q + 1) :=
   have : Injective I.obj := (sheafificationAdjunction _ _).map_injective I inferInstance
   Presheaf.exactAt_overCechComplex_of_injective U₀ I.obj q
+
+
+/-- For an injective sheaf `I` with values in an abelian category and an object `a`, the Čech
+complex of the abelian presheaf `Hom(a, I(-))` is exact in positive degrees. -/
+theorem exactAt_cechComplex_comp_preadditiveCoyoneda_of_injective {V : C}
+    [HasFiniteProducts (Over V)] (U₀ : Over V) (I : Sheaf J A) [Injective I] (a : A) (q : ℕ) :
+    ((Presheaf.cechComplex (fun _ : Fin 1 ↦ U₀)).obj
+      (I.obj ⋙ preadditiveCoyoneda.obj (op a))).ExactAt (q + 1) :=
+  have : Injective I.obj := (sheafificationAdjunction _ _).map_injective I inferInstance
+  Presheaf.exactAt_cechComplex_comp_preadditiveCoyoneda_of_injective U₀ I.obj a q
 
 end CategoryTheory.Sheaf
