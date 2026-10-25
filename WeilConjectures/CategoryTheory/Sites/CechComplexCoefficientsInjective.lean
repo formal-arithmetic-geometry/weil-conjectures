@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficients
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 
@@ -32,8 +34,6 @@ cofree abelian presheaf `CategoryTheory.Presheaf.cofree`, whose Čech complex is
 
 ## Main statements
 
-- `HomologicalComplex.exactAt_of_forall_exactAt_map_preadditiveCoyoneda`: a complex is exact
-  if all its images under the functors `Hom(a, -)` are exact.
 - `CategoryTheory.Presheaf.exactAt_overCechComplex_of_forall_exactAt_cechComplex`: the Čech
   complex `Č(U₀, P)` is exact if all the Čech complexes of the abelian presheaves `Hom(a, P(-))`
   are exact.
@@ -48,46 +48,6 @@ cofree abelian presheaf `CategoryTheory.Presheaf.cofree`, whose Čech complex is
 universe w v u u'
 
 open CategoryTheory Limits Opposite
-
-namespace CategoryTheory.ShortComplex
-
-variable {A : Type u} [Category.{v} A] [Abelian A]
-
-/-- A short complex in an abelian category is exact if its images under all the functors
-`Hom(a, -)` are exact. -/
-lemma exact_of_forall_exact_map_preadditiveCoyoneda (S : ShortComplex A)
-    (h : ∀ a : A, (S.map (preadditiveCoyoneda.obj (Opposite.op a))).Exact) : S.Exact := by
-  obtain ⟨x, hx⟩ := (ShortComplex.ab_exact_iff _).1 (h S.cycles) S.iCycles S.iCycles_g
-  rw [S.exact_iff_epi_toCycles]
-  have hx' : x ≫ S.toCycles = 𝟙 _ := by
-    rw [← cancel_mono S.iCycles, Category.assoc, toCycles_i, Category.id_comp]
-    exact hx
-  have : IsSplitEpi S.toCycles := IsSplitEpi.mk' ⟨x, hx'⟩
-  infer_instance
-
-end CategoryTheory.ShortComplex
-
-namespace HomologicalComplex
-
-variable {A : Type u} [Category.{v} A] [Abelian A] {ι : Type*} {c : ComplexShape ι}
-
-/-- A complex in an abelian category is exact at `i` if its images under all the functors
-`Hom(a, -)` are exact at `i`. -/
-lemma exactAt_of_forall_exactAt_map_preadditiveCoyoneda (K : HomologicalComplex A c) (i : ι)
-    (h : ∀ a : A, (((preadditiveCoyoneda.obj (op a)).mapHomologicalComplex c).obj K).ExactAt i) :
-    K.ExactAt i :=
-  (K.sc i).exact_of_forall_exact_map_preadditiveCoyoneda h
-
-/-- A retract of a complex which is exact at `i` is exact at `i`. -/
-lemma ExactAt.of_retraction {B : Type u'} [Category.{v} B] [Limits.HasZeroMorphisms B]
-    [CategoryWithHomology B] {K L : HomologicalComplex B c} (f : K ⟶ L) (g : L ⟶ K)
-    (hfg : f ≫ g = 𝟙 K) {i : ι} (hL : L.ExactAt i) : K.ExactAt i := by
-  rw [exactAt_iff_isZero_homology] at hL ⊢
-  have : IsSplitMono (homologyMap f i) :=
-    IsSplitMono.mk' ⟨homologyMap g i, by rw [← homologyMap_comp, hfg, homologyMap_id]⟩
-  exact hL.of_mono (homologyMap f i)
-
-end HomologicalComplex
 
 namespace CategoryTheory.Presheaf
 
@@ -237,7 +197,6 @@ theorem exactAt_overCechComplex_of_injective {V : C} [HasFiniteProducts (Over V)
     ((Presheaf.overCechComplex U₀).obj I.obj).ExactAt (q + 1) :=
   have : Injective I.obj := (sheafificationAdjunction _ _).map_injective I inferInstance
   Presheaf.exactAt_overCechComplex_of_injective U₀ I.obj q
-
 
 /-- For an injective sheaf `I` with values in an abelian category and an object `a`, the Čech
 complex of the abelian presheaf `Hom(a, I(-))` is exact in positive degrees. -/

@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.Refinements
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Finite
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficients
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # The augmented Čech complex of a single morphism and the sheaf condition
@@ -44,18 +45,6 @@ and `n + 1`.
 universe w v v' u'
 
 open CategoryTheory Limits Opposite
-
-namespace CategoryTheory.ShortComplex.ShortExact
-
-variable {C : Type w} [Category.{v} C] {A : Type u'} [Category.{v'} A] [Abelian A]
-
-/-- A short exact sequence of presheaves with values in an abelian category is short exact
-objectwise. -/
-lemma map_evaluation {S : ShortComplex (Cᵒᵖ ⥤ A)} (hS : S.ShortExact) (X : Cᵒᵖ) :
-    (S.map ((evaluation Cᵒᵖ A).obj X)).ShortExact :=
-  hS.map_of_exact _
-
-end CategoryTheory.ShortComplex.ShortExact
 
 namespace CategoryTheory.Presheaf
 

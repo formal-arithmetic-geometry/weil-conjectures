@@ -22,7 +22,7 @@ Conversely, a sheaf `G` with values in any category sends such a disjoint finite
 
 * `AlgebraicGeometry.Scheme.AffineProEt.isSheaf_of_isSheafFor_disjoint`: a presheaf of types
   which is a sheaf for disjoint finite open covers and for single surjections is a sheaf.
-* `AlgebraicGeometry.Scheme.AffineProEt.isTerminal_obj_of_isEmpty`: the value of a sheaf at an
+* `AlgebraicGeometry.Scheme.AffineProEt.isTerminalObjOfIsEmpty`: the value of a sheaf at an
   object with empty underlying scheme is terminal.
 * `AlgebraicGeometry.Scheme.AffineProEt.isIso_piLift_map_of_disjoint`: a sheaf turns a disjoint
   open cover into a product.
@@ -221,12 +221,6 @@ noncomputable def isTerminalObjOfIsEmpty (G : Sheaf (topology S) A) {Z : S.Affin
   · have := subsingleton_of_isEmpty ((isSheaf_iff_isSheaf_of_type _ _).mpr (G.property a))
       (inferInstance : IsEmpty Z.left)
     exact @Subsingleton.elim _ this _ _
-
-/-- The value of a sheaf on the affine pro-étale site at an object with empty underlying scheme
-is a terminal object. -/
-lemma isTerminal_obj_of_isEmpty (G : Sheaf (topology S) A) {Z : S.AffineProEt}
-    [IsEmpty Z.left] : Nonempty (IsTerminal (G.obj.obj (op Z))) :=
-  ⟨isTerminalObjOfIsEmpty G⟩
 
 /-- A sheaf on the affine pro-étale site turns a jointly surjective family of open immersions
 `j i : U i ⟶ Y` with pairwise disjoint ranges into a product: the map

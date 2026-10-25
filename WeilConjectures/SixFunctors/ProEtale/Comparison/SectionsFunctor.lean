@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+
 /-!
 # Sections of pro-étale sheaves and their derived functors
 
@@ -75,7 +76,6 @@ lemma ShortComplex.exact_of_exact_sectionsFunctor {X : Scheme.{u}}
   have hT' := hT.map (presheafToSheaf (AffineProEt.topology X) A)
   refine (ShortComplex.exact_iff_of_iso ?_).1 hT'
   exact (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm
-
 
 /-- The global sections functor of the small pro-étale site: the sections over the terminal
 object. -/

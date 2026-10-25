@@ -51,41 +51,6 @@ universe w v u u'
 
 open CategoryTheory Limits Opposite
 
-namespace CategoryTheory.ShortComplex
-
-variable {C : Type u} [Category.{v} C] [Abelian C]
-
-/-- Let `φ : S₁ ⟶ S₂` be a morphism of short complexes such that `S₁.g` is an epimorphism and
-`S₂` is exact with `S₂.g` an epimorphism. If `φ.τ₁` and `φ.τ₂` are isomorphisms, then so is
-`φ.τ₃`. -/
-lemma isIso_τ₃_of_exact {S₁ S₂ : ShortComplex C} (φ : S₁ ⟶ S₂) [Epi S₁.g] (h₂ : S₂.Exact)
-    [Epi S₂.g] [IsIso φ.τ₁] [IsIso φ.τ₂] : IsIso φ.τ₃ := by
-  refine ⟨h₂.desc (inv φ.τ₂ ≫ S₁.g) ?_, ?_, ?_⟩
-  · rw [← cancel_epi φ.τ₁, Limits.comp_zero, ← Category.assoc, φ.comm₁₂, Category.assoc,
-      IsIso.hom_inv_id_assoc, S₁.zero]
-  · rw [← cancel_epi S₁.g, ← Category.assoc, ← φ.comm₂₃, Category.assoc, h₂.g_desc,
-      IsIso.hom_inv_id_assoc, Category.comp_id]
-  · rw [← cancel_epi S₂.g, ← Category.assoc, h₂.g_desc, Category.assoc, ← φ.comm₂₃,
-      IsIso.inv_hom_id_assoc, Category.comp_id]
-
-/-- A product of short exact short complexes is exact. -/
-lemma exact_mk_piMap {ι : Type w} (S : ι → ShortComplex C) [HasProduct fun i ↦ (S i).X₁]
-    [HasProduct fun i ↦ (S i).X₂] [HasProduct fun i ↦ (S i).X₃] (hS : ∀ i, (S i).ShortExact)
-    (w : Limits.Pi.map (fun i ↦ (S i).f) ≫ Limits.Pi.map (fun i ↦ (S i).g) = 0) :
-    (ShortComplex.mk _ _ w).Exact := by
-  have (i : ι) : Mono (S i).f := (hS i).mono_f
-  refine ShortComplex.exact_of_f_is_kernel _ (KernelFork.IsLimit.ofι _ _
-    (fun z hz ↦ Pi.lift fun i ↦ (hS i).exact.lift (z ≫ Pi.π (fun i ↦ (S i).X₂) i) ?_)
-      (fun z hz ↦ ?_) (fun z hz m hm ↦ ?_))
-  · simpa using congrArg (· ≫ Pi.π (fun i ↦ (S i).X₃) i) hz
-  · refine Pi.hom_ext _ _ fun i ↦ ?_
-    rw [Category.assoc, Pi.map_π, Pi.lift_π_assoc, Exact.lift_f]
-  · refine Pi.hom_ext _ _ fun i ↦ ?_
-    rw [Pi.lift_π, ← cancel_mono (S i).f, Exact.lift_f, ← hm, Category.assoc, Category.assoc,
-      Pi.map_π]
-
-end CategoryTheory.ShortComplex
-
 namespace AlgebraicGeometry.Scheme.AffineProEt
 
 open Presheaf

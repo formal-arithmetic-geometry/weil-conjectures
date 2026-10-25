@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficients
 public import WeilConjectures.CategoryTheory.Sites.CechComplexRelativeLimit
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 
 /-!
 # Čech complexes with coefficients along a cofiltered limit of morphisms
@@ -26,8 +27,6 @@ for an arbitrary abelian coefficient category, with an element-free proof.
 
 ## Main statements
 
-- `CategoryTheory.ShortComplex.exact_of_exact_evaluation`: a short complex in a functor category
-  with abelian values is exact if it is so pointwise.
 - `CategoryTheory.Presheaf.exactAt_overCechComplex_of_relativeLimitPresentation`: exactness of
   Čech complexes passes to the limit.
 -/
@@ -39,16 +38,6 @@ universe t w v v' u'
 open CategoryTheory Limits Opposite
 
 namespace CategoryTheory
-
-/-- A short complex in a functor category with values in an abelian category is exact as soon as
-it is exact pointwise. -/
-lemma ShortComplex.exact_of_exact_evaluation {K : Type*} [Category* K] {A : Type*} [Category* A]
-    [Abelian A] (S : ShortComplex (K ⥤ A))
-    (hS : ∀ k, (S.map ((evaluation K A).obj k)).Exact) : S.Exact := by
-  rw [S.exact_iff_isZero_homology]
-  refine Functor.isZero _ fun k ↦ ?_
-  exact ((S.map _).exact_iff_isZero_homology.1 (hS k)).of_iso
-    (S.mapHomologyIso ((evaluation K A).obj k)).symm
 
 namespace Presheaf
 
@@ -121,7 +110,7 @@ theorem exactAt_overCechComplex_of_relativeLimitPresentation
     ShortComplex.mk (stageCechDiagramD h P q) (stageCechDiagramD h P (q + 1)) (by
       ext j
       exact ((overCechComplex (Over.mk (h.natTrans.app j.unop))).obj (F.op ⋙ P)).d_comp_d _ _ _)
-  have hS : S.Exact := ShortComplex.exact_of_exact_evaluation S fun j ↦ by
+  have hS : S.Exact := (ShortComplex.exact_iff_evaluation S).2 fun j ↦ by
     have := hstage j.unop q
     rwa [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp)] at this
   rw [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp)]
