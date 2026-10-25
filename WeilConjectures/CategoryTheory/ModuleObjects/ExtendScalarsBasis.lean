@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
+public import WeilConjectures.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
 
 /-!
 # Bases of extensions of commutative algebra objects

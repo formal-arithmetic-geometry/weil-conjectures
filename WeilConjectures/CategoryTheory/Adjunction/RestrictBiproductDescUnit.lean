@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
+public import WeilConjectures.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
 
 /-!
 # Biproduct decompositions by the unit of an adjunction restricted to full subcategories
