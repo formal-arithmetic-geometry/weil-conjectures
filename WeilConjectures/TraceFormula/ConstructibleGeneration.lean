@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.TraceFormula.OpenClosedTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
 public import WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeDualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
 public import WeilConjectures.Topology.StratificationDense
@@ -251,17 +251,6 @@ theorem exists_isLocallyFree_upperStar_of_isLocallyFinitelyPresented (Z : Over (
         (((overRestrictι Z W).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) :=
   sorry
 
-/-- TEMPORARY stub, to be replaced by the proved statement. -/
-theorem isDualizable_singleFunctor_of_isLocallyFree (Z : Over (Spec (.of k)))
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left))
-    (hM : IsLocallyFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) M)
-    (hM' : IsConstructibleModuleObject (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) M) :
-    IsDualizable (C := Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-      ⟨(DerivedCategory.singleFunctor _ 0).obj M,
-        boundedConstructible_singleFunctor_obj _ Z.left 0 M hM'⟩ := sorry
-
 /-- **Generic lisseness** (the local input of the constructible dévissage): let `M` be a
 constructible `ℚ̄_ℓ`-sheaf on a reduced separated `k`-scheme of finite type `Z`, placed in degree
 `0`. Every nonempty open subscheme `V` of `Z` contains a nonempty open subscheme `W` on which `M`
@@ -300,7 +289,6 @@ theorem exists_isDualizable_upperStar_singleFunctor (Z : Over (Spec (.of k)))
     (boundedConstructibleUpperStarSingleFunctorIso ℓ (overRestrictι Z W) M hM).symm ?_⟩
   exact isDualizable_singleFunctor_of_isLocallyFree ℓ (overRestrict Z W)
     (((overRestrictι Z W).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) hWM
-    (IsConstructibleModuleObject.upperStar _ (overRestrictι Z W).left hM)
 
 /-- **Generic dualizability**: a bounded constructible `ℚ̄_ℓ`-complex `N` on a nonempty separated
 `k`-scheme of finite type `Z` lies, on some nonempty affine open subscheme `U` of `Z`, in the

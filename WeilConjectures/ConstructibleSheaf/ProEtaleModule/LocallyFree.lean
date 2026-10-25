@@ -26,6 +26,20 @@ universe u' u
 
 open CategoryTheory MonoidalCategory MonObj Limits
 
+open scoped Obj
+
+namespace CategoryTheory.Mod
+
+/-- A free module object of finite rank is finitely presented: `R^n` is the cokernel of the zero
+morphism `R^0 ⟶ R^n`. -/
+lemma IsFree.isFinitelyPresented {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C]
+    [MonoidalPreadditive C] {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
+    {M : Mod C R} (hM : IsFree R M) : IsFinitelyPresented R M :=
+  let ⟨n, ⟨e⟩⟩ := hM
+  ⟨n, 0, 0, ⟨e ≪≫ (cokernelZeroIsoTarget (X := finiteFree R 0)).symm⟩⟩
+
+end CategoryTheory.Mod
+
 namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
@@ -39,5 +53,13 @@ def IsLocallyFree (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
     Mod.IsFree ((ProEtale.upperStar A (𝒰.f i)).obj R)
       (((ProEtale.upperStar A (𝒰.f i)).mapMod R).obj M)
+
+variable {R} in
+/-- A locally free module object is locally finitely presented, a free module object of finite
+rank `R^n` being the cokernel of `0 : R^0 ⟶ R^n`. -/
+lemma IsLocallyFree.isLocallyFinitelyPresented {M : Mod (Sheaf (Scheme.ProEt.topology X) A) R}
+    (hM : IsLocallyFree R M) : IsLocallyFinitelyPresented R M :=
+  let ⟨𝒰, h𝒰⟩ := hM
+  ⟨𝒰, fun i ↦ (h𝒰 i).isFinitelyPresented⟩
 
 end AlgebraicGeometry.ProEtale
