@@ -81,44 +81,53 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 -- tensor product.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- The tensor map `τ_f(M, N) : Rf^! M ⊗ᴸ Lf^* N ⟶ Rf^!(M ⊗ᴸ N)`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), with source and target written
-with the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
-noncomputable def rightDerivedUpperShriekTensorMapOfDerivedTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((R(f)^![Λ]).obj M)).obj ((L((f)^*[ModuleCat.{u +
-        1} Λ])).obj N) ⟶
-      (R(f)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj N) :=
-  rightDerivedUpperShriekTensorMap f M N
+section TensorMap
 
-lemma isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (rightDerivedUpperShriekTensorMapOfDerivedTensor f M N) ↔
-      IsIso (rightDerivedUpperShriekTensorMap f M N) :=
+variable {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [IsIso (projectionMap A f)]
+  {G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (adj : R(f)_![A] ⊣ G)
+
+/-- The tensor map `τ_f(M, N) : G M ⊗ᴸ Lf^* N ⟶ G(M ⊗ᴸ N)` of a right adjoint `G` of `Rf_!`
+(`AlgebraicGeometry.Etale.lowerShriekRightAdjointTensorMap`), with source and target written
+with the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
+noncomputable def lowerShriekRightAdjointTensorMapOfDerivedTensor
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj (G.obj M)).obj ((L((f)^*[A])).obj N) ⟶
+      G.obj (((derivedTensor A Y).obj M).obj N) :=
+  lowerShriekRightAdjointTensorMap adj M N
+
+lemma isIso_lowerShriekRightAdjointTensorMapOfDerivedTensor_iff
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    IsIso (lowerShriekRightAdjointTensorMapOfDerivedTensor adj M N) ↔
+      IsIso (lowerShriekRightAdjointTensorMap adj M N) :=
   Iff.rfl
 
-/-- The proposition that the tensor map `τ_f(M, N) : Rf^! M ⊗ᴸ Lf^* N ⟶ Rf^!(M ⊗ᴸ N)` is an
+/-- The proposition that the tensor map `τ_f(M, N) : G M ⊗ᴸ Lf^* N ⟶ G(M ⊗ᴸ N)` is an
 isomorphism. Stated for a general coefficient category, so that its specialization to a finite
 ring of coefficients does not involve comparing monoidal structures. -/
-def IsIsoRightDerivedUpperShriekTensorMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
-  IsIso (rightDerivedUpperShriekTensorMap f M N)
+def IsIsoLowerShriekRightAdjointTensorMap
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
+  IsIso (lowerShriekRightAdjointTensorMap adj M N)
 
-lemma isIsoRightDerivedUpperShriekTensorMap_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIsoRightDerivedUpperShriekTensorMap f M N ↔
-      IsIso (rightDerivedUpperShriekTensorMap f M N) :=
+lemma isIsoLowerShriekRightAdjointTensorMap_iff
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    IsIsoLowerShriekRightAdjointTensorMap adj M N ↔
+      IsIso (lowerShriekRightAdjointTensorMap adj M N) :=
   Iff.rfl
+
+end TensorMap
 
 section Composition
 
-variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h)
+variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : X ⟶ Z} (w : f ≫ g = h)
   [HasCompactification f] [HasCompactification g] [HasCompactification h]
   [IsIso (projectionMap A f)] [IsIso (projectionMap A g)] [IsIso (projectionMap A h)]
+  {Gf : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (adjf : R(f)_![A] ⊣ Gf)
+  {Gg : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
+    _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (adjg : R(g)_![A] ⊣ Gg)
+  {Gh : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
+    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (adjh : R(h)_![A] ⊣ Gh)
   (e : R(h)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
   (he : Adjunction.ProjectionCompCompatible (fun M N ↦ ((projectionMap A f).app M).app N)
     (fun M N ↦ ((projectionMap A g).app M).app N) (fun M N ↦ ((projectionMap A h).app M).app N)
@@ -126,39 +135,38 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f �
 include he
 
 set_option hygiene false in
-/-- The isomorphism `Rh^! ≅ Rg^! ⋙ Rf^!` of right adjoints induced by `e`. -/
+/-- The isomorphism `Gh ≅ Gg ⋙ Gf` of right adjoints induced by `e`. -/
 local notation "ρ[" e "]" =>
-  Adjunction.rightAdjointUniq ((rightDerivedUpperShriekAdjunction A h).ofNatIsoLeft e)
-    ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
+  Adjunction.rightAdjointUniq (adjh.ofNatIsoLeft e) (adjf.comp adjg)
 
-/-- **The tensor map of a composite.** For `h = f ≫ g`, the tensor map of `h` at `(M, N)` is an
-isomorphism if the tensor maps of `f` at `(Rg^! M, Lg^* N)` and of `g` at `(M, N)` are. -/
-theorem isIso_rightDerivedUpperShriekTensorMap_comp
-    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hf : IsIso (rightDerivedUpperShriekTensorMap f ((R(g)^![Λ]).obj M) ((L((g)^*[ModuleCat.{u + 1}
-        Λ])).obj N)))
-    (hg : IsIso (rightDerivedUpperShriekTensorMap g M N)) :
-    IsIso (rightDerivedUpperShriekTensorMap h M N) := by
-  have hc := rightDerivedUpperShriekTensorMap_comp f g h w e he M N
-  have : IsIso (rightDerivedUpperShriekTensorMap h M N ≫ (ρ[e]).hom.app (M ⊗ N)) := by
+/-- **The tensor map of a composite.** For `h = f ≫ g` and right adjoints `Gf`, `Gg`, `Gh` of
+`Rf_!`, `Rg_!`, `Rh_!` (for finite coefficients, `Rf^!`, `Rg^!`, `Rh^!`), the tensor map of `h`
+at `(M, N)` is an isomorphism if the tensor maps of `f` at `(Gg M, Lg^* N)` and of `g` at
+`(M, N)` are. -/
+theorem isIso_lowerShriekRightAdjointTensorMap_comp
+    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (hf : IsIso (lowerShriekRightAdjointTensorMap adjf (Gg.obj M) ((L((g)^*[A])).obj N)))
+    (hg : IsIso (lowerShriekRightAdjointTensorMap adjg M N)) :
+    IsIso (lowerShriekRightAdjointTensorMap adjh M N) := by
+  have hc := lowerShriekRightAdjointTensorMap_comp w adjf adjg adjh e he M N
+  have : IsIso (lowerShriekRightAdjointTensorMap adjh M N ≫ (ρ[e]).hom.app (M ⊗ N)) := by
     rw [hc]
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((ρ[e]).hom.app (M ⊗ N))
 
 /-- **Descent of the tensor maps along a composite.** For `h = f ≫ g` with an associative
 projection map of `f` and `θ_f` invertible everywhere, if the tensor map of `h` at `(M, N)` is
-an isomorphism, then so is `Rf^!` of the tensor map of `g` at `(M, N)`. -/
-theorem isIso_map_rightDerivedUpperShriekTensorMap_of_comp
-    (hassoc : ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f)
-    (hθ : ∀ P, IsIso (dualizingComplexTensorMapOfIsIso ((ModuleCat.{u + 1} Λ) := (ModuleCat.{u + 1}
-        Λ)) f P))
-    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hh : IsIso (rightDerivedUpperShriekTensorMap h M N)) :
-    IsIso ((R(f)^![Λ]).map (rightDerivedUpperShriekTensorMap g M N)) := by
-  have := isIso_rightDerivedUpperShriekTensorMap_of_forall hassoc hθ ((R(g)^![Λ]).obj M)
-    ((L((g)^*[ModuleCat.{u + 1} Λ])).obj N)
-  have hc := rightDerivedUpperShriekTensorMap_comp f g h w e he M N
-  have : IsIso (rightDerivedUpperShriekTensorMap h M N ≫ (ρ[e]).hom.app (M ⊗ N)) :=
+an isomorphism, then so is `Gf` of the tensor map of `g` at `(M, N)`. -/
+theorem isIso_map_lowerShriekRightAdjointTensorMap_of_comp
+    (hassoc : ProjectionMapAssociativity A f)
+    (hθ : ∀ P, IsIso (lowerShriekRightAdjointUnitTensorMap adjf P))
+    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (hh : IsIso (lowerShriekRightAdjointTensorMap adjh M N)) :
+    IsIso (Gf.map (lowerShriekRightAdjointTensorMap adjg M N)) := by
+  have := isIso_lowerShriekRightAdjointTensorMap_of_forall adjf hassoc hθ (Gg.obj M)
+    ((L((g)^*[A])).obj N)
+  have hc := lowerShriekRightAdjointTensorMap_comp w adjf adjg adjh e he M N
+  have : IsIso (lowerShriekRightAdjointTensorMap adjh M N ≫ (ρ[e]).hom.app (M ⊗ N)) :=
     inferInstance
   rw [hc] at this
   have := (isIso_comp_left_iff _ _).1 this
@@ -185,7 +193,7 @@ include d in
 object (`thm-asd-smooth-tensor`). -/
 lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
     (P : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (dualizingComplexTensorMapOfIsIso (A := ModuleCat.{u + 1} Λ) f P) := by
+    IsIso (dualizingComplexTensorMap Λ f P) := by
   obtain ⟨-, -, -, -, h⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   exact h P
 
@@ -213,7 +221,7 @@ def IsExceptionalKunneth {T S : Scheme.{u}} (g : T ⟶ S) [HasCompactification g
     {q : P ⟶ S} {r : P ⟶ W} (_ : IsPullback q r b c) {q' : Q ⟶ T} {h : Q ⟶ P}
     (sq : IsPullback q' h g q) [HasCompactification h] [QuasiCompact h],
     (∀ N, IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app N)) ∧
-      ∀ N M, IsIsoRightDerivedUpperShriekTensorMap (A := ModuleCat.{u + 1} Λ) h
+      ∀ N M, IsIsoLowerShriekRightAdjointTensorMap (rightDerivedUpperShriekAdjunction Λ h)
         ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M)
 
 variable {Λ k}
@@ -244,8 +252,8 @@ theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}}
   refine ⟨fun N ↦ ?_, fun N M ↦ ?_⟩
   · have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ g d sq
     infer_instance
-  · exact (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2
-      (isIso_rightDerivedUpperShriekTensorMap_of_forall (projectionMapAssociativity Λ h)
+  · exact (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).2
+      (isIso_lowerShriekRightAdjointTensorMap_of_forall _ (projectionMapAssociativity Λ h)
         (isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension Λ h d) _ _)
 
 /-- **Closed immersions** satisfy the exceptional Künneth formula
@@ -256,14 +264,14 @@ theorem isExceptionalKunneth_of_isClosedImmersion {T S : Scheme.{u}} (i : T ⟶ 
     [IsClosedImmersion i] : IsExceptionalKunneth Λ k i := by
   intro W P Q b c _ _ _ _ q r sqP q' h sq _ _
   exact ⟨isIso_rightDerivedUpperShriekBaseChangeMap_of_isClosedImmersion Λ b c sqP i sq,
-    fun N M ↦ (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2
+    fun N M ↦ (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).2
       (isIso_rightDerivedUpperShriekTensorMap_pullback_of_isClosedImmersion Λ b c sqP i sq N M)⟩
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- **Composition.** The exceptional Künneth property is stable under composition, by the
 composition laws of the base change maps
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`) and of the
-tensor maps (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_comp`). -/
+tensor maps (`AlgebraicGeometry.Etale.isIso_lowerShriekRightAdjointTensorMap_comp`). -/
 theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g₂ : T₂ ⟶ S)
     [HasCompactification g₁] [HasCompactification g₂] [HasCompactification (g₁ ≫ g₂)]
     [QuasiCompact g₁] [QuasiCompact g₂] (hg₁ : IsExceptionalKunneth Λ k g₁)
@@ -286,23 +294,26 @@ theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g
   · have := H₂.1 N
     exact (isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff sq₁ sq₂ sq rfl hw N
       (H₁.1 _)).2 inferInstance
-  · refine (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2 ?_
-    have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 (H₂.2 N M)
-    have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1
+  · refine (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).2 ?_
+    have := (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).1 (H₂.2 N M)
+    have := (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).1
       (H₁.2 ((R(g₂)^![Λ]).obj N) M)
     have := H₂.1 N
     let e₁ : (L((pullback.fst g₂ q)^*[ModuleCat.{u + 1} Λ])).obj
         ((R(g₂)^![Λ]).obj N) ≅ (R(pullback.snd g₂ q)^![Λ]).obj
           ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
       asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq₂).app N)
-    have := isIso_rightDerivedUpperShriekTensorMap_of_iso_left h₁ e₁
+    have := isIso_lowerShriekRightAdjointTensorMap_of_iso_left
+      (rightDerivedUpperShriekAdjunction Λ h₁) e₁
       (N := (L((pullback.snd g₂ q ≫ r)^*[ModuleCat.{u + 1} Λ])).obj M)
-    have := isIso_rightDerivedUpperShriekTensorMap_of_iso_right h₁
+    have := isIso_lowerShriekRightAdjointTensorMap_of_iso_right
+      (rightDerivedUpperShriekAdjunction Λ h₁)
       ((leftDerivedUpperStarComp _ (pullback.snd g₂ q) r).app M)
       (M := (R(pullback.snd g₂ q)^![Λ]).obj
         ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N))
-    exact isIso_rightDerivedUpperShriekTensorMap_comp h₁ (pullback.snd g₂ q) h hw (E _ _ _ hw)
-      (hPF _ _ _ hw) _ _ ‹_› ‹_›
+    exact isIso_lowerShriekRightAdjointTensorMap_comp hw (rightDerivedUpperShriekAdjunction Λ h₁)
+      (rightDerivedUpperShriekAdjunction Λ (pullback.snd g₂ q))
+      (rightDerivedUpperShriekAdjunction Λ h) (E _ _ _ hw) (hPF _ _ _ hw) _ _ ‹_› ‹_›
 
 /-- **Locality on the source.** If `u_i : U_i ⟶ T` is a jointly surjective family of
 quasi-compact open immersions and every `u_i ≫ g` satisfies the exceptional Künneth formula,
@@ -341,14 +352,17 @@ theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ 
     have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ (sqv i)
     have := (isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff (sqv i) sq (sqi i) rfl rfl N
       inferInstance).1 ((H i b c sqP (sqi i)).1 N)
-    exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (v i) (hθ i)
-      (hω i) _ this
-  · refine (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2 ?_
+    exact isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
+      (rightDerivedUpperShriekAdjunction Λ (v i)) (hθ i) (hω i) _ this
+  · refine (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).2 ?_
     refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ v hv _ fun i ↦ ?_
-    exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (v i) (hθ i)
-      (hω i) _ (isIso_map_rightDerivedUpperShriekTensorMap_of_comp (v i) h (v i ≫ h) rfl
+    exact isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
+      (rightDerivedUpperShriekAdjunction Λ (v i)) (hθ i) (hω i) _
+      (isIso_map_lowerShriekRightAdjointTensorMap_of_comp rfl
+        (rightDerivedUpperShriekAdjunction Λ (v i)) (rightDerivedUpperShriekAdjunction Λ h)
+        (rightDerivedUpperShriekAdjunction Λ (v i ≫ h))
         (E _ _ _ rfl) (hPF _ _ _ rfl) (projectionMapAssociativity Λ (v i)) (hθ i) _ _
-        ((isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 ((H i b c sqP (sqi i)).2 N M)))
+        ((isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).1 ((H i b c sqP (sqi i)).2 N M)))
 
 /-- A morphism locally of finite type between affine schemes factors as a closed immersion into
 an affine space of finite dimension followed by the projection. -/

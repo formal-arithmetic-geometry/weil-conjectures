@@ -121,7 +121,6 @@ theorem torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1) ((R(i)^![Λ]).obj K) := by
-  let (ModuleCat.{u + 1} Λ) := ModuleCat.{u + 1} Λ
   have h₃ := torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage j hc
     (torAmplitudeIn_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) j a b hta)
   have h₁ := torAmplitudeIn_obj₁_of_distTriang _

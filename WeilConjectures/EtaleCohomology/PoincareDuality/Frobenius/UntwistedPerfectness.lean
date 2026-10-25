@@ -66,7 +66,7 @@ theorem bijective_comp_untwistedSmoothTrace (hΛ : Function.Surjective (Int.cast
       dualizingComplex Λ a :=
     (shiftFunctor _ (2 * d : ℤ)).mapIso (tateObjectIsoUnit a ψ).symm ≪≫ γ.dualizingComplexIso
   have hb := bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace
-    Λ a γ'
+    (ModuleCat.{u + 1} Λ) a (rightDerivedUpperShriekAdjunction Λ a) γ'
   let c := ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).app
     (𝟙_ (DerivedCategoryModule Λ X))
   obtain ⟨w, hw⟩ := (hb (𝟙_ _)).2 (c.hom ≫ γ.untwistedSmoothTrace ≫ ι.hom)
@@ -80,7 +80,7 @@ theorem bijective_comp_untwistedSmoothTrace (hΛ : Function.Surjective (Int.cast
     rw [← Category.assoc]
     exact (congrArg (· ≫ ι.hom) hz').trans ι.inv_hom_id
   obtain ⟨r', hr'⟩ := (bijective_smul_id_unit Λ (Spec (.of k))).2
-    (z' ≫ c.inv ≫ Etale.smoothTrace γ')
+    (z' ≫ c.inv ≫ Etale.smoothTrace (rightDerivedUpperShriekAdjunction Λ a) γ')
   obtain ⟨n', rfl⟩ := hΛ r'
   simp only at hr'
   have h1 : (𝟙 _ : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ _) =
@@ -97,7 +97,7 @@ theorem bijective_comp_untwistedSmoothTrace (hΛ : Function.Surjective (Int.cast
       ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).hom.app _ ≫
         γ.untwistedSmoothTrace ≫ ι.hom) =
       (fun z : U ⟶ 𝟙_ _ ↦ (R(a)_![ModuleCat.{u + 1} Λ]).map (z⟦(2 * d : ℤ)⟧') ≫
-        Etale.smoothTrace γ') ∘ (fun z ↦ n • z) := by
+        Etale.smoothTrace (rightDerivedUpperShriekAdjunction Λ a) γ') ∘ (fun z ↦ n • z) := by
     funext z
     simp only [Function.comp_apply, Functor.map_zsmul, Preadditive.zsmul_comp]
     rw [← Preadditive.comp_zsmul, hw]
@@ -118,7 +118,7 @@ theorem isPerfectPairing_untwistedPoincarePairing_comp
     (ι : tateObject Λ (Spec (.of k)) (-d) ≅ 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))))
     (K : DerivedCategoryModule Λ X) :
     IsPerfectPairing (γ.untwistedPoincarePairing K ≫ ι.hom) := by
-  have h := isPerfectPairing_poincarePairingOfTrace_aux Λ a K (2 * d : ℤ)
+  have h := isPerfectPairing_poincarePairingOfTrace_aux (ModuleCat.{u + 1} Λ) a K (2 * d : ℤ)
     _ (bijective_comp_untwistedSmoothTrace hΛ γ ι)
     (fun N ↦ hasProjectionFormula_of_finite Λ a K N)
   rw [Iso.inv_hom_id_app_assoc] at h

@@ -32,8 +32,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
@@ -58,8 +56,7 @@ noncomputable def boundedConstructibleExceptionalProjectionOfCompactificationNat
       (K ⊗ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj B))
     (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c K.obj B.obj)
   naturality _ _ h :=
-    boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right
-        (Profinite.padicAlgClRingObj ℓ) ℓ f c K h
+    boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right ℓ f c K h
 
 set_option linter.flexible false in
 set_option synthInstance.maxSize 4096 in

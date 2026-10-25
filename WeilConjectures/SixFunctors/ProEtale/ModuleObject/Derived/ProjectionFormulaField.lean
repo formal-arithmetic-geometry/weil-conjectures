@@ -119,7 +119,7 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_continuousMapRingO
       p).1
     ((localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj (X' := X) ℓ E).1
       p).2
-    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐄 ℓ p L hL)
+    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐄 ℓ p ⟨L, hL⟩)
     (fun _ _ hK hL ↦ boundedConstructible_tensor_continuousMapRingObj ℓ E hK hL)
     (properDirectImage_baseChange_projectionFormula_continuousMapRingObj (X' := X) (Y' := Y) ℓ E
       p).2.2 hA hB
@@ -196,7 +196,7 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicAlgClRingObj
   isIso_projectionMap_of_localizingBoundedConstructible 𝐐 p.left
     ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).1
     ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).2
-    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐐 ℓ p L hL)
+    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐐 ℓ p ⟨L, hL⟩)
     (fun _ _ hK hL ↦ boundedConstructible_tensor_padicAlgClRingObj ℓ hK hL)
     (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (X' := X) (Y' := Y) ℓ
       p).2.2 hA hB

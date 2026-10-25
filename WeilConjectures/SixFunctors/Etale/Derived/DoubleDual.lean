@@ -342,11 +342,28 @@ attribute [local instance] derivedBraidedCategory
 
 /-- Blueprint `lem-weil-duality-pairing` (auxiliary): the Verdier dual on morphisms is
 `RHom(-, ω_X)`. -/
-lemma verdierDual_map {K K' : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
-    Λ)))ᵒᵖ}
+lemma verdierDual_map
+    {K K' : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))ᵒᵖ}
     (f : K ⟶ K') :
     (verdierDual Λ a).map f = ((RHom(X)[ModuleCat.{u + 1} Λ]).map f).app (dualizingComplex Λ a) :=
   rfl
+
+/-- The double internal hom `RHom(RHom(-, ω), ω)` into an object `ω` carries a distinguished
+triangle to a triangle whose first two maps are induced by those of the given triangle and which
+is distinguished for a suitable third map: `RHom(-, ω)` is exact
+(`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`), applied twice. It is stated for a
+general coefficient category `A`, where the kernel checks it without unfolding the derived
+categories of `ModuleCat Λ`. -/
+theorem exists_distTriang_derivedHom_flip_derivedHom_flip
+    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
+    (hT : T ∈ distTriang _) :
+    ∃ w, Triangle.mk ((((RHom(X)[A]).flip.obj ω).rightOp ⋙ (RHom(X)[A]).flip.obj ω).map T.mor₁)
+      ((((RHom(X)[A]).flip.obj ω).rightOp ⋙ (RHom(X)[A]).flip.obj ω).map T.mor₂) w ∈
+        distTriang _ := by
+  obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left ω T hT
+  obtain ⟨w', hw'⟩ := exists_distTriang_derivedHom_left ω _ hw
+  exact ⟨w', hw'⟩
 
 /-- Blueprint `lem-weil-duality-pairing`: the double dual `𝔻_X 𝔻_X` carries a distinguished
 triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` to a triangle `𝔻𝔻K₁ ⟶ 𝔻𝔻K₂ ⟶ 𝔻𝔻K₃ ⟶ 𝔻𝔻K₁⟦1⟧` whose first
@@ -358,16 +375,15 @@ theorem exists_distTriang_verdierDual_verdierDual
     (hT : T ∈ distTriang _) :
     ∃ w, Triangle.mk (((verdierDual Λ a).rightOp ⋙ verdierDual Λ a).map T.mor₁)
       (((verdierDual Λ a).rightOp ⋙ verdierDual Λ a).map T.mor₂) w ∈ distTriang _ := by
-  obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left (dualizingComplex Λ a) T hT
-  obtain ⟨w', hw'⟩ := exists_distTriang_derivedHom_left (dualizingComplex Λ a) _ hw
-  simp only [Functor.comp_map, Functor.rightOp_map, verdierDual_map]
-  exact ⟨w', hw'⟩
+  rw [show verdierDual Λ a =
+    (RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj (dualizingComplex Λ a) from rfl]
+  exact exists_distTriang_derivedHom_flip_derivedHom_flip _ (dualizingComplex Λ a) T hT
 
 /-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism `δ_K` is natural, so whether
 it is an isomorphism only depends on `K` up to isomorphism. -/
 theorem isIso_verdierDualDoubleDual_app_iff_of_iso
-    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (e : K ≅ K')
-        :
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : K ≅ K') :
     IsIso ((verdierDualDoubleDual Λ a).app K) ↔ IsIso ((verdierDualDoubleDual Λ a).app K') :=
   NatTrans.isIso_app_iff_of_iso _ e
 
@@ -447,9 +463,8 @@ instance verdierBidualityLocus_isTriangulated :
 
 section Localization
 
-variable (Λ : Type (u + 1)) [CommRing Λ] {X U S : Scheme.{u}} (a : X ⟶ S) (b : U ⟶ S)
-  [HasCompactification a] [HasCompactification b] [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-  [(R(b)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] (j : U ⟶ X) [Etale j] [Surjective j]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X U S : Scheme.{u}} (a : X ⟶ S) (b : U ⟶ S)
+  [HasCompactification a] [HasCompactification b] (j : U ⟶ X) [Etale j] [Surjective j]
 
 /-- Blueprint `lem-weil-delta-restriction`: biduality is local for the étale topology, the
 descent step. Let `j : U ⟶ X` be étale and surjective (for instance the disjoint union of the

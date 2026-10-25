@@ -117,7 +117,6 @@ noncomputable def verdierDualRightDerivedLowerShriekIso [IsIso (projectionMap (M
         congr 1
         exact (((RHom(X)[ModuleCat.{u + 1} Λ]).map g).naturality _).symm)
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- The component of the Verdier-duality exchange: the inverse of the tensor–Hom exchange at
 `N = ω_Y`, followed by `Rf_* RHom(M, -)` of `Rf^! ω_Y ≅ ω_X`. -/
 lemma verdierDualRightDerivedLowerShriekIso_hom_app [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]

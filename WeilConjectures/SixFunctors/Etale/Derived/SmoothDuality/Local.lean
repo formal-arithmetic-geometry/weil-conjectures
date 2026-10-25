@@ -288,8 +288,10 @@ theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ 
     (hb : IsIso (dualizingComplexTensorMap Λ b K)) :
     IsIso (dualizingComplexTensorMap Λ h K) := by
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-  exact isIso_dualizingComplexTensorMapOfIsIso_comp a b h w (E a b h w) (hPF a b h w)
-    (projectionMapAssociativity Λ a) K (ha _) hb ((isInvertible_iff_exists_derivedTensor _).2 hω)
+  exact isIso_lowerShriekRightAdjointUnitTensorMap_comp w (rightDerivedUpperShriekAdjunction Λ a)
+    (rightDerivedUpperShriekAdjunction Λ b) (rightDerivedUpperShriekAdjunction Λ h) (E a b h w)
+    (hPF a b h w) (projectionMapAssociativity Λ a) K (ha _) hb
+    ((isInvertible_iff_exists_derivedTensor _).2 hω)
 
 /-- **Descent of the canonical tensor maps.** Let `u_i : U_i ⟶ X` be a jointly surjective family
 of étale morphisms with `θ_{u_i}` invertible at every object and `ω_{u_i}` invertible, and let
@@ -307,10 +309,13 @@ theorem isIso_dualizingComplexTensorMap_of_jointlySurjective {ι : Type u} {U : 
     IsIso (dualizingComplexTensorMap Λ f K) := by
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ u hu _ fun i ↦ ?_
-  exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (u i) (hθ i)
+  exact isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
+    (rightDerivedUpperShriekAdjunction Λ (u i)) (hθ i)
     ((isInvertible_iff_exists_derivedTensor _).2 (hω i)) _
-    (isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (u i) f (u i ≫ f) rfl
-      (E (u i) f _ rfl) (hPF (u i) f _ rfl) (projectionMapAssociativity Λ (u i)) (hθ i) K (hK i))
+    (isIso_map_lowerShriekRightAdjointUnitTensorMap_of_comp rfl
+      (rightDerivedUpperShriekAdjunction Λ (u i)) (rightDerivedUpperShriekAdjunction Λ f)
+      (rightDerivedUpperShriekAdjunction Λ (u i ≫ f)) (E (u i) f _ rfl) (hPF (u i) f _ rfl)
+      (projectionMapAssociativity Λ (u i)) (hθ i) K (hK i))
 
 end Composition
 

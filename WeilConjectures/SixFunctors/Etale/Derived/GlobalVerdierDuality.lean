@@ -53,7 +53,59 @@ open Scheme
 
 namespace Etale
 
-@@@
+section Adjunction
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+  {X S : Scheme.{u}} {aX : X ⟶ S} [HasCompactification aX] [IsIso (projectionMap A aX)]
+  {G : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A) ⥤
+    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (adj : R(aX)_![A] ⊣ G)
+
+/-- Global Verdier duality for an arbitrary right adjoint `G` of `Ra_{X!}` (for a finite
+coefficient ring, `G = Ra_X^!`: `AlgebraicGeometry.Etale.globalVerdierDualityIso`): the inverse
+`(Ra_{X!} K)^∨ ≅ Ra_{X*} RHom(K, G Λ_S)` of the tensor–Hom exchange
+(`AlgebraicGeometry.Etale.derivedHomLowerShriekIsoOfAdjunction`) at `N = Λ_S`. -/
+noncomputable def globalVerdierDualityIsoOfAdjunction
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj K)) ≅
+      (R((aX)_*[A])).obj (((RHom(X)[A]).flip.obj (G.obj (𝟙_ _))).obj (op K)) :=
+  (((derivedHomLowerShriekIsoOfAdjunction A aX adj).app (op K)).app (𝟙_ _)).symm
+
+omit [HasSmallSiteSheafify A] in
+lemma globalVerdierDualityIsoOfAdjunction_eq
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    globalVerdierDualityIsoOfAdjunction A adj K =
+      (((derivedHomLowerShriekIsoOfAdjunction A aX adj).app (op K)).app (𝟙_ _)).symm :=
+  rfl
+
+-- A proof by `rfl` (or by `simp`/`rw` closing with `rfl`) makes the kernel reduce the
+-- projections of `derivedHomLowerShriekIsoOfAdjunction`, which times out.
+omit [HasSmallSiteSheafify A] in
+lemma globalVerdierDualityIsoOfAdjunction_inv
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (globalVerdierDualityIsoOfAdjunction A adj K).inv =
+      ((derivedHomLowerShriekIsoOfAdjunction A aX adj).app (op K)).hom.app (𝟙_ _) :=
+  (congrArg Iso.inv (globalVerdierDualityIsoOfAdjunction_eq A adj K)).trans
+    ((Iso.symm_inv _).trans (Iso.app_hom _ _))
+
+omit [HasSmallSiteSheafify A] in
+lemma globalVerdierDualityIsoOfAdjunction_hom_naturality
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : K ⟶ K') :
+    (DerivedCategory.coefficientDual A S).map ((R(aX)_![A]).map g).op ≫
+        (globalVerdierDualityIsoOfAdjunction A adj K).hom =
+      (globalVerdierDualityIsoOfAdjunction A adj K').hom ≫
+        (R((aX)_*[A])).map (((RHom(X)[A]).flip.obj (G.obj (𝟙_ _))).map g.op) :=
+  NatTrans.congr_app ((derivedHomLowerShriekIsoOfAdjunction A aX adj).inv.naturality g.op) (𝟙_ _)
+
+end Adjunction
+
 section General
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

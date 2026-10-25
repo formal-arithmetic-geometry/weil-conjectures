@@ -55,14 +55,14 @@ namespace Etale
 
 section FullyFaithful
 
-variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)
+  [IsClosedImmersion i]
 
 /-- For a closed immersion `i`, the derived lower shriek `Ri_!` is fully faithful: the unit of
 `Ri_! ⊣ Ri^!` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`). -/
-noncomputable def fullyFaithfulRightDerivedLowerShriek : (R(i)_![ModuleCat.{u + 1} Λ]).FullyFaithful
-    :=
+noncomputable def fullyFaithfulRightDerivedLowerShriek :
+    (R(i)_![ModuleCat.{u + 1} Λ]).FullyFaithful :=
   have (Q : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
       IsIso ((rightDerivedUpperShriekAdjunction Λ i).unit.app Q) :=
     isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i Q
@@ -165,7 +165,7 @@ theorem supportedRestrictionMap_comp_map_supportedTranspose
 
 /-- The restriction map `Λ_X ⟶ Ri_! Λ_Z` is a reflection of `Λ_X` into the objects of the form
 `Ri_! N`: precomposition with it is a bijection `Hom(Ri_! Λ_Z, Ri_! N) ≅ Hom(Λ_X, Ri_! N)`. -/
-theorem bijective_supportedRestrictionMap_comp [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+theorem bijective_supportedRestrictionMap_comp [Finite Λ]
     (N : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Function.Bijective (fun h : (R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z) ⟶
       (R(i)_![ModuleCat.{u + 1} Λ]).obj N ↦ supportedRestrictionMap Λ i ≫ h) := by
@@ -208,7 +208,7 @@ include hg in
 /-- The pullback `Λ_U ≅ Le^* Λ_X ⟶ Le^* Ri_! Λ_Z` of the restriction map is a reflection of
 `Λ_U` into the objects of the form `Ri'_! N`. -/
 theorem bijective_leftDerivedUpperStar_map_supportedRestrictionMap_comp
-    [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    [Finite Λ]
     (N : DerivedCategory (Sheaf Z'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Function.Bijective (fun h : (L((e)^*[ModuleCat.{u + 1} Λ])).obj
         ((R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z)) ⟶
@@ -256,7 +256,7 @@ lemma isZero_leftDerivedUpperStar_openComplement_obj
 omit [IsClosedImmersion i] in
 /-- The counit `Ri'_! Ri'^! K ⟶ K` is an isomorphism for `K` supported on `Z'`, by the supported
 localization triangle. -/
-lemma isIso_counit_app_of_isZero [(R(i')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+lemma isIso_counit_app_of_isZero [Finite Λ]
     (K : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     IsIso ((rightDerivedUpperShriekAdjunction Λ i').counit.app K) :=
@@ -277,7 +277,7 @@ lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion :
 omit [IsClosedImmersion i] in
 /-- `Li'^*` reflects isomorphisms between objects supported on `Z'`. -/
 lemma isIso_of_isIso_leftDerivedUpperStar_map_of_isZero
-    [(R(i')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    [Finite Λ]
     {K₁ K₂ : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK₁ : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj K₁))
     (hK₂ : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj K₂)) (f : K₁ ⟶ K₂)
@@ -313,7 +313,7 @@ lemma isIso_of_isIso_leftDerivedUpperStar_map_of_isZero
 include hg in
 /-- `Le^* Ri_!(φ)` is an isomorphism if and only if `Lg^*(φ)` is one. -/
 lemma isIso_leftDerivedUpperStar_map_rightDerivedLowerShriek_map_iff
-    [(R(i')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    [Finite Λ]
     {B₁ B₂ : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : B₁ ⟶ B₂) :
     IsIso ((L((e)^*[ModuleCat.{u + 1} Λ])).map ((R(i)_![ModuleCat.{u + 1} Λ]).map φ)) ↔
       IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map φ) := by

@@ -264,7 +264,7 @@ structure ProEtaleRealization where
   /-- The realization of the étale dualizing complex is the pro-étale one. -/
   dualizingComplexIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] :
+    [CompactSpace Y] :
     D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj (dualizingComplex Λ f) ≅
       ProEtale.dualizingComplex Λ f
 
@@ -279,12 +279,12 @@ def OrientationDatum.IsCompatibleProEtaleRealization {C : OrientationComparisonD
     (o : OrientationDatum Λ C) (ν : ProEtaleRealization Λ)
     (γ : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f] [QuasiCompact f]
       [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-      [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f],
+      [CompactSpace Y],
       D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ≅
         ProEtale.dualizingComplex Λ f) : Prop :=
   ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f] [QuasiCompact f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f],
+    [CompactSpace Y],
     γ f d = D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso (o.orientation f d).purity ≪≫
       ν.dualizingComplexIso f d
 

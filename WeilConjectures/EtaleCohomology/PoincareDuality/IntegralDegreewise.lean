@@ -346,7 +346,7 @@ section Duality
 
 variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ]
   {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [HasCompactification a]
-  [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {d : ℕ}
+  {G : DerivedCategoryModule Λ (Spec (.of k)) ⥤ DerivedCategoryModule Λ X} {d : ℕ}
 
 /-- The cohomology `H^{2d-i}(X, L)` of the second variable is the `(-i)`-th cohomology of
 `RΓ(Spec k, Ra_* L[2d])`. -/
@@ -367,7 +367,8 @@ noncomputable def cohomologyIsoHomologyShift (L : DerivedCategoryModule Λ X) (i
 duality, non-canonical form).
 
 Let `k` be separably closed, `Λ` a commutative ring (the integral stage `𝒪_E`),
-`γ : T[2d] ≅ Ra^! Λ` a purity isomorphism (for `T = Λ_X(d)`, so that `K^∨ ⊗ᴸ T = K^∨(d)`) and
+`γ : T[2d] ≅ Ra^! Λ` a purity isomorphism, for any right adjoint `Ra^!` of `Ra_!` (for
+`T = Λ_X(d)`, so that `K^∨ ⊗ᴸ T = K^∨(d)`), and
 `K` perfect over `Λ_X`. If `RΓ_c(X, K)` is a perfect complex of `Λ`-modules and its cohomology
 modules `Hʲ_c(X, K)` are finite projective, then for every `i` the module
 `H^{2d-i}(X, K^∨(d))` is finite projective and
@@ -383,8 +384,8 @@ isomorphism is proved (see the implementation notes of this file). The Tor terms
 universal coefficient sequences of both variables then vanish
 (`AlgebraicGeometry.Etale.isIso_compactlySupportedReductionSequence_f`,
 `AlgebraicGeometry.Etale.isIso_cohomologyReductionSequence_f`). -/
-theorem integralDegreewiseDuality {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
+theorem integralDegreewiseDuality (adj : R(a)_![ModuleCat.{u + 1} Λ] ⊣ G)
+    {T : DerivedCategoryModule Λ X} (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K)
     (hperf : ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K).IsPerfect)
     (hproj : ∀ j, Module.Projective Λ ((H_c(a)[ModuleCat.{u + 1} Λ](j)).obj K) ∧
@@ -398,7 +399,7 @@ theorem integralDegreewiseDuality {T : DerivedCategoryModule Λ X}
         ModuleCat.of Λ (Module.Dual Λ ((H_c(a)[ModuleCat.{u + 1} Λ](i)).obj K))) := by
   let RΓ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
   let C := (R(a)_![ModuleCat.{u + 1} Λ]).obj K
-  have hb := isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a γ hKd
+  have hb := isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a adj γ hKd
   obtain ⟨eA⟩ := (nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence _ _
     C).map fun e ↦ RΓ.mapIso hb.iso ≪≫ e
   obtain ⟨a', b', hab⟩ := hperf.exists_homologyConcentratedIn
@@ -424,8 +425,8 @@ cohomology of `RΓ_c(X, K)^∨` with that of the second variable,
 `H^{-i}(RΓ_c(X, K)^∨) ≅ H^{2d-i}(X, K^∨(d))`, so that these sequences correspond to the
 sequences of the second variable
 (`AlgebraicGeometry.Etale.shortExact_cohomologyReductionSequence`). -/
-theorem integralDegreewise_adjoint {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
+theorem integralDegreewise_adjoint (adj : R(a)_![ModuleCat.{u + 1} Λ] ⊣ G)
+    {T : DerivedCategoryModule Λ X} (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) {ϖ : Λ} (n : ℕ)
     {D : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)}
     {g : (ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj
@@ -442,7 +443,7 @@ theorem integralDegreewise_adjoint {T : DerivedCategoryModule Λ X}
             T)) := by
   refine ⟨_root_.DerivedCategory.universalCoefficientSequence_shortExact _ _ _ _, ?_⟩
   let RΓ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
-  have hb := isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a γ hKd
+  have hb := isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a adj γ hKd
   obtain ⟨eA⟩ := (nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence _ _
     ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).map fun e ↦ RΓ.mapIso hb.iso ≪≫ e
   exact ⟨((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (-i)).mapIso eA.symm ≪≫

@@ -98,9 +98,8 @@ target: a map `T ⟶ L'` out of an object `T` supported on `Z'` lifts uniquely t
 counit of `Ri_! ⊣ Ri^!`, which exist uniquely since `e_! T` is supported on `Z`
 (`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek`). -/
 theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Etale e]
-    (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i]
-    [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsClosedImmersion i']
-    [(R(i')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i'] [Finite Λ]
+    (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :

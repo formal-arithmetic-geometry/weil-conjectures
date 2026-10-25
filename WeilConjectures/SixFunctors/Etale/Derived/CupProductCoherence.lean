@@ -66,7 +66,6 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The derived category `D(X_ét, A)` of `A`-valued étale sheaves on `X`. -/
 local notation "𝐃(" X ", " A ")" =>
@@ -233,67 +232,55 @@ lemma rightDerivedLowerShriek_map_eq {K K' : 𝐃(X, A)} (x : K ⟶ K') :
 
 /-- The mixed-support cup product is the cup product attached to the projection map of the
 chosen compactification (`CategoryTheory.Adjunction.cupProductOfProjection`). -/
-lemma mixedSupportCupProduct_eq (K L : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
-    mixedSupportCupProduct Λ a K L =
-      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).cupProductOfProjection
-        (D(((HasCompactification.compactification a).i)_!open[ModuleCat.{u + 1} Λ]) ⋙
-          R(((HasCompactification.compactification a).g)_*[ModuleCat.{u + 1} Λ]))
-        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+lemma mixedSupportCupProduct_eq (K L : 𝐃(X, A)) :
+    mixedSupportCupProduct A a K L =
+      (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection
+        (D(((HasCompactification.compactification a).i)_!open[A]) ⋙
+          R(((HasCompactification.compactification a).g)_*[A]))
+        ((derivedUpperStarLowerStarAdjunction A
           (HasCompactification.compactification a).g).compProjectionMap
-          (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ)
-              (HasCompactification.compactification a).g)
-          D(((HasCompactification.compactification a).i)_!open[ModuleCat.{u + 1} Λ])
-          (fun K N ↦ ((derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} Λ)
+          (leftDerivedUpperStarTensorComparison A (HasCompactification.compactification a).g)
+          D(((HasCompactification.compactification a).i)_!open[A])
+          (fun K N ↦ ((derivedOpenImmersionLowerShriekProjectionIso A
             (HasCompactification.compactification a).i).inv.app K).app N)
-          (fun L ↦ (leftDerivedUpperStarCompactificationIso (ModuleCat.{u + 1} Λ)
+          (fun L ↦ (leftDerivedUpperStarCompactificationIso A
             (HasCompactification.compactification a)).hom.app L)) K L := by
   rw [mixedSupportCupProduct, projectionMap_app_app_eq, derivedTensor_obj_map,
     rightDerivedLowerShriek_map_eq, Adjunction.cupProductOfProjection]
 
 /-- Blueprint `prop-pod-cup-product-coherence`: the mixed-support cup product is natural in its
 first variable. -/
-lemma mixedSupportCupProduct_naturality_left {K K' : 𝐃(X, (ModuleCat.{u + 1} Λ))} (x : K ⟶ K') (L :
-    𝐃(X, (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map ((R(a)_![ModuleCat.{u + 1} Λ]).map x)).app
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj L) ≫
-        mixedSupportCupProduct Λ a K' L =
-      mixedSupportCupProduct Λ a K L ≫ (R(a)_![ModuleCat.{u + 1} Λ]).map (((derivedTensor
-          (ModuleCat.{u + 1} Λ) X).map x).app L) := by
+lemma mixedSupportCupProduct_naturality_left {K K' : 𝐃(X, A)} (x : K ⟶ K') (L : 𝐃(X, A)) :
+    ((derivedTensor A Y).map ((R(a)_![A]).map x)).app ((R((a)_*[A])).obj L) ≫
+        mixedSupportCupProduct A a K' L =
+      mixedSupportCupProduct A a K L ≫ (R(a)_![A]).map (((derivedTensor A X).map x).app L) := by
   simp only [mixedSupportCupProduct_eq, derivedTensor_map_app, rightDerivedLowerShriek_map_eq]
-  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-      a).cupProductOfProjection_naturality_left
-    (fun x L ↦ compactificationProjectionMap_naturality_left (ModuleCat.{u + 1} Λ)
+  exact (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection_naturality_left
+    (fun x L ↦ compactificationProjectionMap_naturality_left A
       (HasCompactification.compactification a) x L) x L
 
 /-- Blueprint `prop-pod-cup-product-coherence`: the mixed-support cup product is natural in its
 second variable. -/
-lemma mixedSupportCupProduct_naturality_right (K : 𝐃(X, (ModuleCat.{u + 1} Λ))) {L L' : 𝐃(X,
-    (ModuleCat.{u + 1} Λ))} (y : L ⟶ L') :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).map
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).map y) ≫
-        mixedSupportCupProduct Λ a K L' =
-      mixedSupportCupProduct Λ a K L ≫ (R(a)_![ModuleCat.{u + 1} Λ]).map (((derivedTensor
-          (ModuleCat.{u + 1} Λ) X).obj K).map y) := by
+lemma mixedSupportCupProduct_naturality_right (K : 𝐃(X, A)) {L L' : 𝐃(X, A)} (y : L ⟶ L') :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map ((R((a)_*[A])).map y) ≫
+        mixedSupportCupProduct A a K L' =
+      mixedSupportCupProduct A a K L ≫ (R(a)_![A]).map (((derivedTensor A X).obj K).map y) := by
   simp only [mixedSupportCupProduct_eq, derivedTensor_obj_map, rightDerivedLowerShriek_map_eq]
-  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-      a).cupProductOfProjection_naturality_right
-    (fun K _ _ y ↦ compactificationProjectionMap_naturality_right (ModuleCat.{u + 1} Λ)
+  exact (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection_naturality_right
+    (fun K _ _ y ↦ compactificationProjectionMap_naturality_right A
       (HasCompactification.compactification a) K y) K y
 
 /-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
 
 The mixed-support cup product `⌣_c : Ra_! K ⊗ᴸ Ra_* L ⟶ Ra_!(K ⊗ᴸ L)` is natural in `K` and
 `L`. -/
-theorem mixedSupportCupProduct_naturality {K K' L L' : 𝐃(X, (ModuleCat.{u + 1} Λ))} (x : K ⟶ K') (y
-    : L ⟶ L') :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map ((R(a)_![ModuleCat.{u + 1} Λ]).map x)).app
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj L) ≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K')).map
-            ((R((a)_*[ModuleCat.{u + 1} Λ])).map y) ≫
-        mixedSupportCupProduct Λ a K' L' =
-      mixedSupportCupProduct Λ a K L ≫
-        (R(a)_![ModuleCat.{u + 1} Λ]).map (((derivedTensor (ModuleCat.{u + 1} Λ) X).map x).app L ≫
-          ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K').map y) := by
+theorem mixedSupportCupProduct_naturality {K K' L L' : 𝐃(X, A)} (x : K ⟶ K') (y : L ⟶ L') :
+    ((derivedTensor A Y).map ((R(a)_![A]).map x)).app ((R((a)_*[A])).obj L) ≫
+        ((derivedTensor A Y).obj ((R(a)_![A]).obj K')).map ((R((a)_*[A])).map y) ≫
+        mixedSupportCupProduct A a K' L' =
+      mixedSupportCupProduct A a K L ≫
+        (R(a)_![A]).map (((derivedTensor A X).map x).app L ≫
+          ((derivedTensor A X).obj K').map y) := by
   rw [mixedSupportCupProduct_naturality_right, reassoc_of% mixedSupportCupProduct_naturality_left,
     Functor.map_comp]
 
@@ -308,27 +295,23 @@ theorem mixedSupportCupProduct_naturality {K K' L L' : 𝐃(X, (ModuleCat.{u + 1
 Ra_! K ⊗ᴸ (Ra_* L ⊗ᴸ Ra_* M) --1 ⊗ ∪--> Ra_! K ⊗ᴸ Ra_*(L ⊗ᴸ M) --⌣_c--> Ra_!(K ⊗ᴸ (L ⊗ᴸ M))
 ```
 -/
-theorem mixedSupportCupProduct_associativity (K L M : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map (mixedSupportCupProduct Λ a K L)).app
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj M) ≫
-        mixedSupportCupProduct Λ a (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) M ≫
-        (R(a)_![ModuleCat.{u + 1} Λ]).map (derivedTensorAssociator (ModuleCat.{u + 1} Λ) X K L
-            M).hom =
-      (derivedTensorAssociator (ModuleCat.{u + 1} Λ) Y _ _ _).hom ≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).map
-          (rightDerivedLowerStarCupProduct (ModuleCat.{u + 1} Λ) a L M) ≫
-        mixedSupportCupProduct Λ a K (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj M) := by
+theorem mixedSupportCupProduct_associativity (K L M : 𝐃(X, A)) :
+    ((derivedTensor A Y).map (mixedSupportCupProduct A a K L)).app ((R((a)_*[A])).obj M) ≫
+        mixedSupportCupProduct A a (((derivedTensor A X).obj K).obj L) M ≫
+        (R(a)_![A]).map (derivedTensorAssociator A X K L M).hom =
+      (derivedTensorAssociator A Y _ _ _).hom ≫
+        ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map
+          (rightDerivedLowerStarCupProduct A a L M) ≫
+        mixedSupportCupProduct A a K (((derivedTensor A X).obj L).obj M) := by
   simp only [mixedSupportCupProduct_eq, derivedTensor_map_app, derivedTensor_obj_map,
     derivedTensorAssociator_eq, rightDerivedLowerStarCupProduct, rightDerivedLowerShriek_map_eq]
-  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-      a).cupProductOfProjection_associativity
-    (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ) a)
-    (fun x L ↦ compactificationProjectionMap_naturality_left (ModuleCat.{u + 1} Λ)
+  exact (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection_associativity
+    (leftDerivedUpperStarTensorComparison A a)
+    (fun x L ↦ compactificationProjectionMap_naturality_left A
       (HasCompactification.compactification a) x L)
-    (fun K _ _ y ↦ compactificationProjectionMap_naturality_right (ModuleCat.{u + 1} Λ)
+    (fun K _ _ y ↦ compactificationProjectionMap_naturality_right A
       (HasCompactification.compactification a) K y)
-    (compactificationProjectionMap_associativity (ModuleCat.{u + 1} Λ)
-        (HasCompactification.compactification a))
+    (compactificationProjectionMap_associativity A (HasCompactification.compactification a))
     K L M
 
 /-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
@@ -336,21 +319,18 @@ theorem mixedSupportCupProduct_associativity (K L M : 𝐃(X, (ModuleCat.{u + 1}
 **Unitality**: the unit `1 ∈ H⁰(X, Λ)` (`AlgebraicGeometry.Etale.rightDerivedLowerStarUnit`)
 acts as the identity: `Ra_! K ⊗ᴸ Λ_Y ⟶ Ra_! K ⊗ᴸ Ra_* Λ_X ⟶ Ra_!(K ⊗ᴸ Λ_X) ≅ Ra_! K` is the
 right unitor. -/
-theorem mixedSupportCupProduct_rightUnitality (K : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).map
-        (rightDerivedLowerStarUnit (ModuleCat.{u + 1} Λ) a) ≫
-        mixedSupportCupProduct Λ a K (𝟙_ _) ≫
-        (R(a)_![ModuleCat.{u + 1} Λ]).map (derivedTensorRightUnitor (ModuleCat.{u + 1} Λ) X K).hom =
-      (derivedTensorRightUnitor (ModuleCat.{u + 1} Λ) Y _).hom := by
+theorem mixedSupportCupProduct_rightUnitality (K : 𝐃(X, A)) :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map (rightDerivedLowerStarUnit A a) ≫
+        mixedSupportCupProduct A a K (𝟙_ _) ≫
+        (R(a)_![A]).map (derivedTensorRightUnitor A X K).hom =
+      (derivedTensorRightUnitor A Y _).hom := by
   simp only [mixedSupportCupProduct_eq, derivedTensor_obj_map, derivedTensorRightUnitor_eq,
     rightDerivedLowerStarUnit, rightDerivedLowerShriek_map_eq]
-  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-      a).cupProductOfProjection_rightUnitality
-    (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) a).hom
-    (fun K _ _ y ↦ compactificationProjectionMap_naturality_right (ModuleCat.{u + 1} Λ)
+  exact (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection_rightUnitality
+    (leftDerivedUpperStarUnitIso A a).hom
+    (fun K _ _ y ↦ compactificationProjectionMap_naturality_right A
       (HasCompactification.compactification a) K y)
-    (compactificationProjectionMap_rightUnitality (ModuleCat.{u + 1} Λ)
-        (HasCompactification.compactification a)) K
+    (compactificationProjectionMap_rightUnitality A (HasCompactification.compactification a)) K
 
 omit [Etale.UpperStarPreservesFlat A]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] in
@@ -374,24 +354,20 @@ lemma rightDerivedLowerShriekToLowerStarComp_comp_eq :
 The mixed-support cup product is compatible with the cup product
 `∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)` through the forget-supports map `s : Ra_! ⟶ Ra_*`:
 `⌣_c ≫ s = (s ⊗ 1) ≫ ∪`. -/
-theorem mixedSupportCupProduct_comp_forgetSupports (K L : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
-    mixedSupportCupProduct Λ a K L ≫
-        (rightDerivedLowerShriekToLowerStarComp (ModuleCat.{u + 1} Λ) a ≫ (rightDerivedLowerStarComp
-            (ModuleCat.{u + 1} Λ) _ _).hom ≫
-          (rightDerivedLowerStarCongr (ModuleCat.{u + 1} Λ)
+theorem mixedSupportCupProduct_comp_forgetSupports (K L : 𝐃(X, A)) :
+    mixedSupportCupProduct A a K L ≫
+        (rightDerivedLowerShriekToLowerStarComp A a ≫ (rightDerivedLowerStarComp A _ _).hom ≫
+          (rightDerivedLowerStarCongr A
             (HasCompactification.compactification a).comm.symm).hom).app _ =
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map ((rightDerivedLowerShriekToLowerStarComp
-          (ModuleCat.{u + 1} Λ) a ≫
-          (rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) _ _).hom ≫ (rightDerivedLowerStarCongr
-              (ModuleCat.{u + 1} Λ)
+      ((derivedTensor A Y).map ((rightDerivedLowerShriekToLowerStarComp A a ≫
+          (rightDerivedLowerStarComp A _ _).hom ≫ (rightDerivedLowerStarCongr A
             (HasCompactification.compactification a).comm.symm).hom).app K)).app _ ≫
-        rightDerivedLowerStarCupProduct (ModuleCat.{u + 1} Λ) a K L := by
+        rightDerivedLowerStarCupProduct A a K L := by
   simp only [rightDerivedLowerShriekToLowerStarComp_comp_eq, mixedSupportCupProduct_eq,
     derivedTensor_map_app, rightDerivedLowerStarCupProduct]
-  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).cupProductOfProjection_comp
-    (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ) a) _
-    (compactificationProjectionMap_comp_forgetSupports (ModuleCat.{u + 1} Λ)
-        (HasCompactification.compactification a))
+  exact (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection_comp
+    (leftDerivedUpperStarTensorComparison A a) _
+    (compactificationProjectionMap_comp_forgetSupports A (HasCompactification.compactification a))
     K L
 
 /-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
@@ -401,15 +377,14 @@ For a proper morphism `a`, the mixed-support cup product is the cup product
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), i.e. through
 `RΓ_c(X, -) ≅ RΓ(X, -)`. -/
 theorem mixedSupportCupProduct_comp_lowerShriekIsoLowerStar [IsProper a]
-    (K L : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
-    mixedSupportCupProduct Λ a K L ≫
-        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).hom.app _ =
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar
-          (ModuleCat.{u + 1} Λ) a).hom.app
+    (K L : 𝐃(X, A)) :
+    mixedSupportCupProduct A a K L ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar A a).hom.app _ =
+      ((derivedTensor A Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A a).hom.app
           K)).app _ ≫
-        rightDerivedLowerStarCupProduct (ModuleCat.{u + 1} Λ) a K L := by
+        rightDerivedLowerStarCupProduct A a K L := by
   rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom]
-  exact mixedSupportCupProduct_comp_forgetSupports Λ a K L
+  exact mixedSupportCupProduct_comp_forgetSupports A a K L
 
 end MixedSupport
 

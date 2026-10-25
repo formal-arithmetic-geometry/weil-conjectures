@@ -144,6 +144,8 @@ lemma homologyConcentratedIn_obj₁ {X : Scheme.{u}}
     _root_.DerivedCategory.TStructure.t.isLE₂ _ hT' (e + 1) ‹_›
       (_root_.DerivedCategory.TStructure.t.isLE_of_le _ b (e + 1))⟩
 
+set_option maxHeartbeats 2000000 in
+-- The kernel check unfolds the derived-category instances at `ModuleCat Λ`.
 /-- **The exceptional inverse image along a closed immersion, from the open complement.**
 Let `i : Z ⟶ T` be a closed immersion with open complement `j`. If `K` lies in `D_c^[a, b]` with
 Tor amplitude in `[a, b]`, and `Rj_* j^* K` in `D_c^[a, e]` with Tor amplitude in `[a, e]`,
@@ -189,7 +191,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     exact homologyConcentratedIn_obj₁ (ModuleCat.{u + 1} Λ) _ (G.map_distinguished _ hT) hbe (hKt F)
         (hMt F)
   -- `Ri^! K ≅ i^* N`
-  let ε := mapDerivedCategoryUpperStarRightDerivedLowerShriekIso (FC := FC) (ModuleCat.{u + 1} Λ) i
+  let ε := mapDerivedCategoryUpperStarRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) i
   refine ⟨⟨(boundedConstructible (ModuleCat.{u + 1} Λ) Z).prop_of_iso (ε.app _)
       (hNbc.mapDerivedCategory_upperStar i),
     homologyConcentratedIn_of_iso (ModuleCat.{u + 1} Λ) (ε.app _)

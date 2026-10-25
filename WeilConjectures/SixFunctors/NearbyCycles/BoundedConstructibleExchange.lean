@@ -84,16 +84,17 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
 
 /-- The specialization unit `σ : ℚ̲̄_ℓ ⟶ Ψ ℚ̲̄_ℓ` on bounded constructible complexes: the ambient
 specialization unit `NearbyCyclesModel.unit`. -/
-noncomputable def boundedConstructibleUnit (hM : M.PreservesBoundedConstructible
-    (Profinite.padicAlgClRingObj ℓ)) :
-    𝟙_ (Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ (boundedConstructibleNearbyCycles hM).obj (𝟙_
-        _) :=
+noncomputable def boundedConstructibleUnit
+    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) :
+    𝟙_ (Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
+      (boundedConstructibleNearbyCycles hM).obj (𝟙_ _) :=
   ObjectProperty.homMk (M.unit (Profinite.padicAlgClRingObj ℓ))
 
 namespace Hom
 
-variable (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
-  (hN : N.PreservesBoundedConstructible Λ)
+variable (φ : M.Hom N f.left f'.left)
+  (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 /-- The pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` on bounded constructible complexes: the
 restriction of `NearbyCyclesModel.Hom.pushforwardExchange`. -/

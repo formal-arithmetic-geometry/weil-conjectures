@@ -195,8 +195,10 @@ theorem coefficientTransport_status :
           (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
             (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln))) ∧
     (∀ (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℕ),
-        Nonempty ((reductionModIdeal Λ X (I ^ n)).obj ((R(f)^![Λ]).obj L) ≅
-          (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
+        Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
+            ((R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L) ≅
+          (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
+            ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
     ∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
       (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
         DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt := by
@@ -209,7 +211,7 @@ theorem coefficientTransport_status :
       (isPrincipal_pow_of_eq_span I hI n), hhom, fun L n ↦ ?_, heff⟩
   have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
   subst hI
-  obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![Λ]) hϖ n L
+  obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint hϖ n L
   exact ⟨e.symm⟩
 
 include hϖ hI hf in
@@ -240,10 +242,10 @@ theorem NormalizedTower.reconstruction_and_integral_comparisons :
     ∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
       ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-        R(f)^![Λ]), Pretriangulated.IsHomotopyLimit c →
+        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint), Pretriangulated.IsHomotopyLimit c →
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
-          ∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-            e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
+          ∃ e : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L ≅ c.pt, ∀ n : ℕ,
+            e.hom ≫ c.π.app (op n) = (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.map
               ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n)) := by
   obtain ⟨-, hhom, -, -, hexc, -, heff⟩ := preservationMatrix_integral I hϖ hI aX aY f hf
   exact ⟨heff, hhom, fun L hL c hc ↦ ⟨(hexc L hL c hc).1, (hexc L hL c hc).2.1⟩⟩
@@ -261,13 +263,14 @@ theorem exceptionalAdjoint_admissibility_constructible :
     (∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
       ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-        R(f)^![Λ]), Pretriangulated.IsHomotopyLimit c →
+        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint), Pretriangulated.IsHomotopyLimit c →
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
-          (∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-            e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
+          (∃ e : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L ≅ c.pt, ∀ n : ℕ,
+            e.hom ≫ c.π.app (op n) = (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.map
               ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n))) ∧
           ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-            (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
+            (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
+              ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
     ∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
       (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
         DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt := by
@@ -290,13 +293,14 @@ theorem exceptionalAdjoint_traceAdmissibility_coefficients :
     ∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
       ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-        R(f)^![Λ]), Pretriangulated.IsHomotopyLimit c →
+        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint), Pretriangulated.IsHomotopyLimit c →
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
-          (∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-            e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
+          (∃ e : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L ≅ c.pt, ∀ n : ℕ,
+            e.hom ≫ c.π.app (op n) = (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.map
               ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n))) ∧
           ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-            (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L)) :=
+            (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
+              ((reductionModIdeal Λ Y (I ^ n)).obj L)) :=
   ⟨fun n ↦ nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal Λ f _
       (isPrincipal_pow_of_eq_span I hI n),
     (exceptionalAdjoint_admissibility_constructible I hϖ hI aX aY f hf).1⟩

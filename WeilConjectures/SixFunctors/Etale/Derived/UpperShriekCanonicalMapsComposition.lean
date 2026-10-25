@@ -71,8 +71,9 @@ theorem isIso_dualizingComplexTensorMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
     (hg : IsIso (dualizingComplexTensorMap Λ g K)) :
     IsIso (dualizingComplexTensorMap Λ (f ≫ g) K) := by
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-  exact isIso_dualizingComplexTensorMapOfIsIso_comp f g (f ≫ g) rfl (E f g _ rfl)
-    (hPF f g _ rfl) (projectionMapAssociativity Λ f) K
+  exact isIso_lowerShriekRightAdjointUnitTensorMap_comp rfl (rightDerivedUpperShriekAdjunction Λ f)
+    (rightDerivedUpperShriekAdjunction Λ g) (rightDerivedUpperShriekAdjunction Λ (f ≫ g))
+    (E f g _ rfl) (hPF f g _ rfl) (projectionMapAssociativity Λ f) K
     (hf _ (constructibleFiniteTor_leftDerivedUpperStar _ g hK)) hg
     ((isInvertible_iff_exists_derivedTensor _).2 hω)
 
@@ -84,7 +85,8 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map {U X : Scheme.{u}} (u : U ⟶
     {P Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : P ⟶ Q) (h : IsIso ((R(u)^![Λ]).map φ)) : IsIso φ :=
   isIso_of_isIso_leftDerivedUpperStar_map_of_surjective Λ u φ
-    (isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map u hu
+    (isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
+      (rightDerivedUpperShriekAdjunction Λ u) hu
       ((isInvertible_iff_exists_derivedTensor _).2 hω) φ h)
 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (step 3).
@@ -100,8 +102,10 @@ theorem isIso_dualizingComplexTensorMap_of_comp {U X Y : Scheme.{u}} (u : U ⟶ 
     IsIso (dualizingComplexTensorMap Λ f K) := by
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   exact isIso_of_isIso_rightDerivedUpperShriek_map u hu hω _
-    (isIso_map_dualizingComplexTensorMapOfIsIso_of_comp u f (u ≫ f) rfl (E u f _ rfl)
-      (hPF u f _ rfl) (projectionMapAssociativity Λ u) hu K hK)
+    (isIso_map_lowerShriekRightAdjointUnitTensorMap_of_comp rfl
+      (rightDerivedUpperShriekAdjunction Λ u) (rightDerivedUpperShriekAdjunction Λ f)
+      (rightDerivedUpperShriekAdjunction Λ (u ≫ f)) (E u f _ rfl) (hPF u f _ rfl)
+      (projectionMapAssociativity Λ u) hu K hK)
 
 omit [Finite Λ] in
 /-- If `W` and `W ⊗ᴸ P` are invertible, then so is `P`. -/

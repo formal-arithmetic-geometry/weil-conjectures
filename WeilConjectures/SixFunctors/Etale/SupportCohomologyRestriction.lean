@@ -113,8 +113,6 @@ end UpperShriek
 
 section Triangle
 
-omit
- in
 /-- `Ri^!` of a zero object is zero. -/
 lemma isZero_rightDerivedUpperShriek_obj {Z X : Scheme.{u}} (i : Z ⟶ X) [HasCompactification i]
  {Y : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -335,7 +333,7 @@ For every complex `F` of étale sheaves on `T` there is a distinguished triangle
 
 `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F) ⟶ RΓ_{B ∩ C}(T, F)[1]`
 
-in `D((ModuleCat.{u + 1} Λ))`, where `RΓ_Z` is the derived functor of the sections supported on `Z`
+in `D(Λ)`, where `RΓ_Z` is the derived functor of the sections supported on `Z`
 (`AlgebraicGeometry.Etale.rightDerivedSectionsWithSupport`). The first map is induced by the
 inclusion of supports and the second by the restriction to `V`
 (`AlgebraicGeometry.Etale.supportInclusionMap`, `AlgebraicGeometry.Etale.supportRestrictionMap`).

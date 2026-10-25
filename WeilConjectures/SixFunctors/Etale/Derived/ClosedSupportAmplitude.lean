@@ -81,7 +81,6 @@ lemma homologyConcentratedIn_rightDerivedLowerShriek_rightDerivedUpperShriek {c 
     _root_.DerivedCategory.homologyConcentratedIn a (b + c + 1)
       ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)) := by
   obtain ⟨hKa, hKb⟩ := hK
-  let (ModuleCat.{u + 1} Λ) := ModuleCat.{u + 1} Λ
   let T' := (supportedLocalizationTriangle Λ i j K (supportedLocalizationBoundary Λ i j hij K))
   have hT : T'.invRotate ∈ distTriang _ :=
     inv_rot_of_distTriang _ (supportedLocalizationTriangle_mem_distTriang Λ i j hij K)
@@ -155,7 +154,6 @@ lemma boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek {c : 
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T
       ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)) := by
-  let (ModuleCat.{u + 1} Λ) := ModuleCat.{u + 1} Λ
   let P := DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T
   have hjK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U ((L((j)^*[ModuleCat.{u +
       1} Λ])).obj K) :=

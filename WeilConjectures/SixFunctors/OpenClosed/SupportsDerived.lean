@@ -246,7 +246,7 @@ variable {U Z X : Scheme.{u}}
 /-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
 inverse image
 
-**Functoriality.** (ModuleCat.{u + 1} Λ) morphism `φ : L ⟶ L'` induces the morphism of supported
+**Functoriality.** A morphism `φ : L ⟶ L'` induces the morphism of supported
 localization
 triangles with components `(s_* Rs^! φ, φ, Rj_* Lj^* φ)`, in the sense of
 `def-pur-triangle-meaning`. -/

@@ -241,18 +241,16 @@ lemma isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_rightDeriv
   rw [Scheme.range_snd_of_isPullback hg]
   exact ⟨z, hx.symm⟩
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- **Restriction of supports commutes with shifts.** Restricting the class
 `γ : K ⟶ Ri_! Ri^! (L[n])` read from a degree-`n` class `γ : K ⟶ (Ri_! Ri^! L)[n]`
 (`AlgebraicGeometry.Etale.shiftSupportedClass`) along `e` is the same as restricting `γ` in
 degree `n` and reading the result as a class with coefficients `L'[n]`. -/
 lemma restrictSupportedClass_shiftSupportedClass (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
-    [IsClosedImmersion i] [IsClosedImmersion i']
- (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
+    [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
     {K L : DerivedCategory (Sheaf X₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {K' L' : DerivedCategory (Sheaf U₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K) (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅
-        L') (n : ℤ)
+    (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K)
+    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') (n : ℤ)
     (γ : K ⟶ ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦n⟧) :
     restrictSupportedClass Λ e i i' g hg σ
         (((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ)

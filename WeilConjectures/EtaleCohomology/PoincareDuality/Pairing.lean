@@ -109,7 +109,7 @@ The smooth trace `Tr_γ : Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y` of a Tate orientation
 (`AlgebraicGeometry.Etale.smoothTrace`). -/
 noncomputable def smoothTrace (γ : TateOrientation Λ a d) :
     (R(a)_![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
-  Etale.smoothTrace γ.dualizingComplexIso
+  Etale.smoothTrace (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso
 
 /-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing.
 
@@ -123,7 +123,7 @@ noncomputable def poincarePairing (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) :
     ((derivedTensor _ Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).obj
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
-  Etale.poincarePairing a γ.dualizingComplexIso K
+  Etale.poincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso K
 
 /-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality, at a finite
 coefficient stage `Λ = A`. This is also the derived part of blueprint `sk-thm-derived-duality`.
@@ -147,7 +147,7 @@ noncomputable def properPoincarePairing [IsProper a] (γ : TateOrientation Λ a 
     (K : DerivedCategoryModule Λ X) :
     ((derivedTensor _ Y).obj ((R((a)_*[ModuleCat.{u + 1} Λ])).obj K)).obj
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
-  Etale.properPoincarePairing a γ.dualizingComplexIso K
+  Etale.properPoincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso K
 
 /-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
 

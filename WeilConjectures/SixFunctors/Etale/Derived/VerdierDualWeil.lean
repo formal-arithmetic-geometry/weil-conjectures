@@ -212,9 +212,8 @@ which for an automorphism `g` is `Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ⟶ RHom
 (`CategoryTheory.MonoidalClosed.dualWeilDatum`). Only `φ` and its inverse enter; no integral
 lattice is used.
 
-The statements are made for a general coefficient category `(ModuleCat.{u + 1} Λ)`, in which the
-monoidal structure
-of `D(X_ét)` and of `Lg^*` are those of the generic constructions. -/
+The statements are made for a finite coefficient ring `Λ`; the monoidal structures of `D(X_ét)`
+and of `Lg^*` are those of the generic constructions. -/
 noncomputable def verdierDualWeilDatum {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)

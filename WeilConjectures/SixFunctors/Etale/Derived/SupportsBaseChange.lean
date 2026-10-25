@@ -87,7 +87,7 @@ lemma isZero_leftDerivedUpperStar_derivedTensor_rightDerivedLowerShriek (i₁ : 
   exact ((L((IsOpenImmersion.lift j w hw)^*[ModuleCat.{u + 1} Λ])).map_isZero hj).of_iso
     ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _)
 
-variable (e : U' ⟶ U) [(e)^*[A].PreservesFlat]
+variable (e : U' ⟶ U) [(e)^*[A].PreservesFlat] [(e)^*[ModuleCat.{u + 1} Λ].PreservesFlat]
 
 /-- The comparison `Le^*(K ⊗ M) ≅ Le^* K ⊗ Le^* M` is natural in both variables:
 ```

@@ -231,7 +231,6 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     ((derivedTensor _ _).obj _).mapIso ((L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
       ((e _ _ f₂).app N₂)) ≪≫ p.symm ≪≫ ((e _ _ ψ).app _).symm⟩
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- The Künneth–Verdier map `κ` of `AlgebraicGeometry.Etale.HasKunnethComparisons` for a
 **dualizable** `N` reduces to the case `N = Λ_Y`: given `M ⊠ ω_Y ≅ Rp_X^! M`,
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. Indeed `𝔻_Y N = RHom(N, ω_Y) ≅ N^∨ ⊗ ω_Y` and

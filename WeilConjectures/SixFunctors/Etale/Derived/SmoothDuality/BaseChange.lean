@@ -155,8 +155,10 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_forall_isIso
   have (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
       IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app N) :=
     isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso_tensorMap sq h₁
-      ((isIso_dualizingComplexTensorMapOfIsIso_iff f N).1 (hθ N))
-      (isIso_rightDerivedUpperShriekTensorMap_of_forall (projectionMapAssociativity Λ f') hθ' _ _)
+      ((isIso_lowerShriekRightAdjointUnitTensorMap_iff (rightDerivedUpperShriekAdjunction Λ f) N).1
+        (hθ N))
+      (isIso_lowerShriekRightAdjointTensorMap_of_forall (rightDerivedUpperShriekAdjunction Λ f')
+        (projectionMapAssociativity Λ f') hθ' _ _)
   exact NatIso.isIso_of_isIso_app _
 
 end Etale

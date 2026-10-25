@@ -77,7 +77,7 @@ an isomorphism; since a closed immersion is proper, `Ri_!` is `Ri_*`, so this sa
 is fully faithful on the exceptional side. It is the derived counterpart of the full
 faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`.
 
-The unit is invertible for every `Q ∈ D(Z_ét, (ModuleCat.{u + 1} Λ))` because `Ri_!` is fully
+The unit is invertible for every `Q ∈ D(Z_ét, Λ)` because `Ri_!` is fully
 faithful. Write
 `Ri_! = D(k_!) ⋙ Rg_*` for the chosen compactification `Z ⟶[k] Z̄ ⟶[g] X` of `i`. As `i` is
 proper, `k` has closed range, so `k_! ≅ k_*`
@@ -89,7 +89,7 @@ derived functor of a fully faithful functor preserving K-injective complexes is 
 (`CategoryTheory.Functor.full_rightDerivedFunctor`). -/
 theorem isIso_rightDerivedUpperShriekAdjunction_unit_app (i : Z ⟶ X) [IsClosedImmersion i]
     [HasCompactification i]
- (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((rightDerivedUpperShriekAdjunction Λ i).unit.app Q) := by
   let c := HasCompactification.compactification i
   -- `k_! ≅ k_*` for the open immersion `k` of the compactification, whose range is closed
@@ -396,7 +396,7 @@ theorem exists_triangleHom_supportedLocalization (i : Z ⟶ X) [HasCompactificat
 
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
-**(ModuleCat.{u + 1} Λ) morphism of supported localization triangles is determined by its middle
+**A morphism of supported localization triangles is determined by its middle
 component.** Let
 `i : Z ⟶ X` be compactifiable and `j : U ⟶ X` an open immersion, with disjoint images. Two
 morphisms between distinguished supported localization triangles with the same middle component

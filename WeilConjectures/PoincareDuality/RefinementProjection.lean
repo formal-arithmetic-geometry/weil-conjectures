@@ -56,7 +56,6 @@ lemma boundedConstructibleOpenImmersionLowerShriekRefinement_app (w : i ≫ h = 
     Adjunction.restrictionComparison, Functor.squareTransport]
 
 omit [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] in
-variable in
 /-- The triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*` is compatible with the multiplications of the
 monoidal derived pullbacks. -/
 lemma boundedConstructibleUpperStarTriangleComparison_μ (w : i ≫ h = i₁)

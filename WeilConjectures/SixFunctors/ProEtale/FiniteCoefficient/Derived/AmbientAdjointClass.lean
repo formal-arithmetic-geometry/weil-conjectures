@@ -153,8 +153,6 @@ lemma plus_obj_rightDerivedFunctor_comparisonLowerStar_obj
     DerivedCategory.TStructure.t.plus (G.obj (R(ν_*(Y)[A]).obj L)) :=
   hG _ (plus_rightDerivedFunctor_comparisonLowerStar_obj hL)
 
-omit
- in
 /-- `Rf^×(c)` sends a bounded below object to an object bounded below of étale origin. -/
 lemma plusEtaleOrigin_rightDerivedUpperShriekOfAdjunction_obj
     (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c ⊣ G)

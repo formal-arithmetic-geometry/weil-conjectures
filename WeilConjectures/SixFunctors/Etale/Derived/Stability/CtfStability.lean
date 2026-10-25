@@ -328,13 +328,14 @@ theorem boundedConstructibleIntegral_stability {X Y : Scheme.{u}}
     ∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
       ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-        R(f)^![Λ]), Pretriangulated.IsHomotopyLimit c →
+        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint), Pretriangulated.IsHomotopyLimit c →
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
-          (∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-            e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
+          (∃ e : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L ≅ c.pt, ∀ n : ℕ,
+            e.hom ≫ c.π.app (op n) = (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.map
               ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n))) ∧
           ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-            (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
+            (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
+              ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
   obtain ⟨-, hhom, -, hhomc, hexc, -, -⟩ := preservationMatrix_integral I hϖ hI aX aY f hf
   exact ⟨(exists_normalizedTower_and_boundedConstructibleIntegral_iff (I := I) (X := X)).2,
     hhomc, hhom, hexc⟩

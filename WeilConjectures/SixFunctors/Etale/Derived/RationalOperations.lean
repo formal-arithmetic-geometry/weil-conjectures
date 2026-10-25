@@ -145,7 +145,7 @@ noncomputable def boundedConstructibleIntegralLowerShriekUpperShriekAdjunction
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
     boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf ⊣
       boundedConstructibleIntegralUpperShriek I aX aY f hf :=
-  (rightDerivedUpperShriekAdjunction Λ f).restrictFullyFaithful
+  (Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
 
 end Integral
@@ -199,10 +199,10 @@ localization functor; every object of `Dᵇc(Y, E)` is the image of some `L`. -/
 theorem nonempty_iso_boundedConstructibleRationalUpperShriek
     (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory)
     (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(aX)^![Λ])) (hωX : Pretriangulated.IsHomotopyLimit ωX)
+      (R(aX)_![ModuleCat.{u + 1} Λ]).rightAdjoint)) (hωX : Pretriangulated.IsHomotopyLimit ωX)
     (hωXc : DerivedCategory.boundedConstructibleIntegral I X ωX.pt)
     (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(aY)^![Λ])) (hωY : Pretriangulated.IsHomotopyLimit ωY)
+      (R(aY)_![ModuleCat.{u + 1} Λ]).rightAdjoint)) (hωY : Pretriangulated.IsHomotopyLimit ωY)
     (N : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
     (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
       (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L.obj)).obj ωY.pt) ⟶ N.obj)
@@ -215,7 +215,7 @@ theorem nonempty_iso_boundedConstructibleRationalUpperShriek
   obtain ⟨ϖ, hϖ, hI⟩ := hϖI.out
   have hD := (boundedConstructibleIntegral_derivedHom I hϖ hI aX N.property hωXc).1
   refine ⟨hD, ?_⟩
-  have hc := L.property.1.map (R(f)^![Λ])
+  have hc := L.property.1.map (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint
   obtain ⟨e⟩ := (boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf L.property
     hc).2.2.1 ωX hωX ωY hωY N.obj φ N.property.1 hφ
   exact ⟨(Rationalization.mapFac M _).app L ≪≫

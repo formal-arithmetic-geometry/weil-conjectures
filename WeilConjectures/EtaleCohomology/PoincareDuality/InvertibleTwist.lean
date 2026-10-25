@@ -64,7 +64,6 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
@@ -79,34 +78,32 @@ local notation "𝐃(" X ", " A ")" =>
 
 namespace Etale
 
-variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
-  {d : ℕ}
+variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] {d : ℕ}
+  {G : 𝐃(Y, A) ⥤ 𝐃(X, A)} (adj : R(a)_![A] ⊣ G)
 
 section Perfectness
 
-omit [ConcreteCategory (ModuleCat.{u + 1} Λ) FA] [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)]
-    [Etale.UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)]
-  [(CategoryTheory.forget (ModuleCat.{u + 1} Λ)).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget (ModuleCat.{u + 1} Λ))]
-  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget (ModuleCat.{u + 1}
-      Λ))] in
+omit [ConcreteCategory A FA] [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] in
 /-- If the comparison map `K^∨ ⊗ᴸ T ⟶ RHom(K, T)` is an isomorphism, the twisted evaluation
 `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T` is a counit: every map `K ⊗ᴸ Z ⟶ T` factors uniquely as `K ⊗ᴸ y` followed
 by the twisted evaluation. -/
 theorem bijective_derivedTensor_map_comp_twistedEvaluation_of_isIso
-    {T K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {T K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hi : IsIso (MonoidalClosed.ihomUnitTensorToIhom K T))
-    (Z : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Function.Bijective (fun y : Z ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj T ↦
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map y ≫ twistedEvaluation T K) := by
+    (Z : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Function.Bijective (fun y : Z ⟶ ((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T ↦
+      ((derivedTensor A X).obj K).map y ≫ twistedEvaluation T K) := by
   have ht : twistedEvaluation T K =
       MonoidalClosed.uncurry (MonoidalClosed.ihomUnitTensorToIhom K T) := by
     rw [MonoidalClosed.ihomUnitTensorToIhom, MonoidalClosed.uncurry_curry]
     rfl
-  have he : (fun y : Z ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj T ↦
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map y ≫ twistedEvaluation T K) =
+  have he : (fun y : Z ⟶ ((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T ↦
+      ((derivedTensor A X).obj K).map y ≫ twistedEvaluation T K) =
       MonoidalClosed.uncurry ∘ (fun y ↦ y ≫ MonoidalClosed.ihomUnitTensorToIhom K T) := by
     funext y
     rw [ht]
@@ -116,70 +113,62 @@ theorem bijective_derivedTensor_map_comp_twistedEvaluation_of_isIso
     fun g ↦ ⟨MonoidalClosed.curry g, MonoidalClosed.uncurry_curry g⟩⟩
     ((isIso_iff_yoneda_map_bijective _).1 hi _)
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] [Etale.UpperStarPreservesFlat (ModuleCat.{u + 1}
-    Λ)] [HasCompactification a]
- in
+omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] [HasCompactification a] in
 /-- The adjoint description of the evaluation part of the derived Poincaré pairing, when the
 comparison map `K^∨ ⊗ᴸ T ⟶ RHom(K, T)` is an isomorphism: maps `h : N ⟶ Ra_*(K^∨ ⊗ᴸ T)`
 correspond bijectively to maps `K ⊗ᴸ La^* N ⟶ T`. -/
 theorem bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation_of_isIso
-    {T K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {T K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hi : IsIso (MonoidalClosed.ihomUnitTensorToIhom K T))
-    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Function.Bijective (fun h : N ⟶ (R((a)_*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor
-        (ModuleCat.{u + 1} Λ) X).obj
-        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj T) ↦
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map ((L((a)^*[ModuleCat.{u + 1} Λ])).map h) ≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map ((derivedUpperStarLowerStarAdjunction
-            (ModuleCat.{u + 1} Λ) a).counit.app _) ≫
+    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Function.Bijective (fun h : N ⟶ (R((a)_*[A])).obj (((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T) ↦
+      ((derivedTensor A X).obj K).map ((L((a)^*[A])).map h) ≫
+        ((derivedTensor A X).obj K).map ((derivedUpperStarLowerStarAdjunction A a).counit.app _) ≫
           twistedEvaluation T K) := by
-  have e : (fun h : N ⟶ (R((a)_*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor (ModuleCat.{u + 1} Λ)
-      X).obj
-        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj T) ↦
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map ((L((a)^*[ModuleCat.{u + 1} Λ])).map h) ≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map ((derivedUpperStarLowerStarAdjunction
-            (ModuleCat.{u + 1} Λ) a).counit.app _) ≫
+  have e : (fun h : N ⟶ (R((a)_*[A])).obj (((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T) ↦
+      ((derivedTensor A X).obj K).map ((L((a)^*[A])).map h) ≫
+        ((derivedTensor A X).obj K).map ((derivedUpperStarLowerStarAdjunction A a).counit.app _) ≫
           twistedEvaluation T K) =
-      (fun y ↦ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map y ≫ twistedEvaluation T K) ∘
-        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).homEquiv _ _).symm := by
+      (fun y ↦ ((derivedTensor A X).obj K).map y ≫ twistedEvaluation T K) ∘
+        ((derivedUpperStarLowerStarAdjunction A a).homEquiv _ _).symm := by
     funext h
     simp [Adjunction.homEquiv_counit]
   rw [e]
-  exact (bijective_derivedTensor_map_comp_twistedEvaluation_of_isIso Λ hi _).comp
+  exact (bijective_derivedTensor_map_comp_twistedEvaluation_of_isIso A hi _).comp
     (Equiv.bijective _)
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
+omit [HasSmallSiteSheafify A] in
 /-- The derived Poincaré pairing `β_K` is perfect as soon as the comparison map
 `K^∨ ⊗ᴸ T ⟶ RHom(K, T)` is an isomorphism and the projection formula holds at a class of test
 objects detecting isomorphisms after the shift by `2d`. This is
 `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isDetecting` with the
 dualizability of `K` replaced by its only consequence used in the proof. -/
-theorem isPerfectPairing_poincarePairing_of_isDetecting_of_isIso {T : 𝐃(X, (ModuleCat.{u + 1} Λ))}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+theorem isPerfectPairing_poincarePairing_of_isDetecting_of_isIso {T : 𝐃(X, A)}
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hi : IsIso (MonoidalClosed.ihomUnitTensorToIhom K T))
-    (S : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) → Prop)
-    (hS : ∀ ⦃P Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))⦄ (u : P
-        ⟶ Q),
+    (S : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) → Prop)
+    (hS : ∀ ⦃P Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)⦄ (u : P ⟶ Q),
       (∀ N, S N → Function.Bijective (fun g : N⟦(2 * d : ℤ)⟧ ⟶ P ↦ g ≫ u)) → IsIso u)
-    (hPF : ∀ N, S N → HasProjectionFormula (ModuleCat.{u + 1} Λ) a K N) :
-    IsPerfectPairing (poincarePairing a γ K) := by
+    (hPF : ∀ N, S N → HasProjectionFormula A a K N) :
+    IsPerfectPairing (poincarePairing adj γ K) := by
   constructor
   rw [poincarePairing, poincarePairingEvaluation, mixedSupportCupProduct]
   exact MonoidalClosed.isIso_curry_of_projection _ _ _ _ _ _ _ _ _ S hS hPF
-    (bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation_of_isIso Λ a hi)
-    (bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace Λ a γ)
+    (bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation_of_isIso A a hi)
+    (bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace A a adj γ)
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
+omit [HasSmallSiteSheafify A] in
 /-- The derived Poincaré pairing `β_K` is perfect for every `K` at which the projection formula
 holds against every object, as soon as the twist `T` is invertible. -/
-theorem isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula {T : 𝐃(X,
-    (ModuleCat.{u + 1} Λ))}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) (hT : IsInvertible T)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hPF : ∀ N, HasProjectionFormula (ModuleCat.{u + 1} Λ) a K N) :
-    IsPerfectPairing (poincarePairing a γ K) :=
-  isPerfectPairing_poincarePairing_of_isDetecting_of_isIso Λ a γ
+theorem isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula {T : 𝐃(X, A)}
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _)) (hT : IsInvertible T)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hPF : ∀ N, HasProjectionFormula A a K N) :
+    IsPerfectPairing (poincarePairing adj γ K) :=
+  isPerfectPairing_poincarePairing_of_isDetecting_of_isIso A a adj γ
     (MonoidalClosed.isIso_ihomUnitTensorToIhom_of_isInvertible K hT) (fun _ ↦ True)
     (fun _ _ u hu ↦ isIso_of_bijective_comp_shift (2 * d : ℤ) u fun N ↦ hu N trivial)
     (fun N _ ↦ hPF N)
@@ -200,8 +189,8 @@ use of the dualizability of `K` in `AlgebraicGeometry.Etale.isPerfectPairing_poi
 theorem isPerfectPairing_poincarePairing_of_isInvertible {T : DerivedCategoryModule Λ X}
     (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) (hT : IsInvertible T)
     (K : DerivedCategoryModule Λ X) :
-    IsPerfectPairing (poincarePairing a γ K) :=
-  isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula _ a γ hT fun N ↦
+    IsPerfectPairing (poincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ K) :=
+  isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula _ a _ γ hT fun N ↦
     hasProjectionFormula_of_finite Λ a K N
 
 end ModuleCat

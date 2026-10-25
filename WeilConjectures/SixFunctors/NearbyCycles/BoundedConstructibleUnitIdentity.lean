@@ -165,7 +165,6 @@ noncomputable def boundedConstructiblePullbackExchange :
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K.obj
         K.property)
 
-omit in
 /-- The restricted pullback exchange is `NearbyCyclesModel.liftExchange` of the ambient one. -/
 lemma boundedConstructiblePullbackExchange_eq_liftExchange :
     φ.boundedConstructiblePullbackExchange ℓ hM hN =
@@ -178,7 +177,6 @@ lemma boundedConstructiblePullbackExchange_eq_liftExchange :
             K.obj K.property) :=
   rfl
 
-omit in
 /-- The components of `NearbyCyclesModel.liftExchange` of any transformation
 `α : Ψ_N ⋙ Lf'^* ⟶ Lf^* ⋙ Ψ_M`, viewed as a transformation between the restricted functors. -/
 private lemma liftExchange_pullback_app_hom_aux (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -197,7 +195,6 @@ private lemma liftExchange_pullback_app_hom_aux (K : Dᵇc(Y.left)⟦Profinite.p
       α.app K.obj :=
   liftExchange_app_hom _ _ _ _ _ K
 
-omit in
 /-- The components of the restricted pullback exchange are those of the ambient one. -/
 @[simp]
 lemma boundedConstructiblePullbackExchange_app_hom (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)

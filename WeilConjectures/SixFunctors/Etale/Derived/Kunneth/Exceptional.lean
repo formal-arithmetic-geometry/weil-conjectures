@@ -82,14 +82,16 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor {T S W P Q : Scheme.{
         ((R(g)^![Λ]).obj N))).obj
           ((L((h ≫ r)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
   obtain ⟨hBC, hτ⟩ := isExceptionalKunneth Λ k g b b c sqP sq
-  have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 (hτ N M)
-  have := (isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff h
+  have := (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).1 (hτ N M)
+  have := (isIso_lowerShriekRightAdjointTensorMapOfDerivedTensor_iff
+    (rightDerivedUpperShriekAdjunction Λ h)
     ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M)).2 this
   have := hBC N
   let e : (L((q')^*[ModuleCat.{u + 1} Λ])).obj ((R(g)^![Λ]).obj N) ≅
       (R(h)^![Λ]).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
     asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app N)
-  exact ⟨(asIso (rightDerivedUpperShriekTensorMapOfDerivedTensor h _ _)).symm ≪≫
+  exact ⟨(asIso (lowerShriekRightAdjointTensorMapOfDerivedTensor
+      (rightDerivedUpperShriekAdjunction Λ h) _ _)).symm ≪≫
     ((derivedTensor _ Q).mapIso e.symm).app _ ≪≫
     ((derivedTensor _ Q).obj _).mapIso ((leftDerivedUpperStarComp _ h r).app M).symm⟩
 
@@ -188,8 +190,6 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek
     (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
     [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    [(R(f₁)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(f₂)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    [(R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     {N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))} :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₁ N₁ →

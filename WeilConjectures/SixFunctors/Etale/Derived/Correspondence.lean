@@ -13,10 +13,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 # Cohomological correspondences
 
 Let `X` be a scheme over a base `s` with structure morphism `aX : X ⟶ s`, and `K` an object of
-the derived category `D(X_ét, A)` of étale sheaves. A *cohomological correspondence* on `K` is a
-scheme `C` with two morphisms `c₁ c₂ : C ⟶ X` over `s`, i.e. `c = (c₁, c₂) : C ⟶ X ×_s X`,
-together with a morphism `u : c₂^* K ⟶ Rc₁^! K` in `D(C_ét, A)`. Here `c₂` is the pullback
-leg and `c₁` the exceptional leg. The *graph correspondence* of an endomorphism `h : X ⟶ X`
+the derived category `D(X_ét, Λ)` of étale sheaves of modules over a finite ring `Λ`. A
+*cohomological correspondence* on `K` is a scheme `C` with two morphisms `c₁ c₂ : C ⟶ X` over
+`s`, i.e. `c = (c₁, c₂) : C ⟶ X ×_s X`, together with a morphism `u : c₂^* K ⟶ Rc₁^! K` in
+`D(C_ét, Λ)`. Here `c₂` is the pullback leg and `c₁` the exceptional leg. The *graph correspondence* of an endomorphism `h : X ⟶ X`
 over `s` and a morphism `v : h^* K ⟶ K` is `C = X`, `c₁ = 𝟙`, `c₂ = h`, `u = v`; its fixed scheme
 is the fixed scheme `Fix(h)` of `h`.
 
@@ -32,12 +32,11 @@ is the fixed scheme `Fix(h)` of `h`.
 
 ## Implementation notes
 
-The pullback leg is the derived pullback `D((c₂)^*[A])` along `c₂`, which is the derived
-functor `L((c₂)^*[A])` since `c₂^*` is exact
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`); using it needs no
-monoidal structure on `A`. The exceptional leg is the ambient exceptional inverse image
-`R(c₁)^![A]`, which needs `c₁` to admit a compactification and `R(c₁)_![A]` to be a left
-adjoint; both are recorded as instance fields. The blueprint's admissibility of `c₁`
+The pullback leg is the derived pullback `D((c₂)^*[ModuleCat Λ])` along `c₂`, which is the derived
+functor `L((c₂)^*[ModuleCat Λ])` since `c₂^*` is exact
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`). The exceptional leg is the
+exceptional inverse image `R(c₁)^![Λ]`, which needs `c₁` to admit a compactification; this is
+recorded as an instance field. The blueprint's admissibility of `c₁`
 (`def-trf-admissibility`, the existence of the adjunction `Rc₁_! ⊣ Rc₁^!` with its exchange
 isomorphisms) is a theorem for separated finite type morphisms, and is not part of the data.
 -/
@@ -54,18 +53,17 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-variable {X s : Scheme.{u}} (aX : X ⟶ s) (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+variable {X s : Scheme.{u}} (aX : X ⟶ s)
+  (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
 
 /-- Blueprint `def-trf-correspondence`: Cohomological correspondence.
 
-(ModuleCat.{u + 1} Λ) cohomological correspondence on an object `K` of
-`D(X_ét, (ModuleCat.{u + 1} Λ))`, for `X` over `s` via `aX`: a
+A cohomological correspondence on an object `K` of `D(X_ét, Λ)`, for `X` over `s` via `aX`: a
 separated scheme `C` of finite type over `s` with morphisms `c = (c₁, c₂) : C ⟶ X ×_s X`, that
 is `c₁ c₂ : C ⟶ X` with `c₁ ≫ aX = c₂ ≫ aX`, and a morphism `u : c₂^* K ⟶ Rc₁^! K` in
-`D(C_ét, (ModuleCat.{u + 1} Λ))`. The leg `c₂` is the pullback leg and `c₁` the exceptional leg. -/
+`D(C_ét, Λ)`. The leg `c₂` is the pullback leg and `c₁` the exceptional leg. -/
 structure CohomologicalCorrespondence where
   /-- The correspondence scheme `C`. -/
   C : Scheme.{u}
@@ -83,17 +81,14 @@ structure CohomologicalCorrespondence where
   quasiCompact : QuasiCompact (c₁ ≫ aX)
   /-- The exceptional leg admits a compactification. -/
   [hasCompactification : HasCompactification c₁]
-  /-- The derived lower shriek along the exceptional leg is a left adjoint, so that the
-  exceptional inverse image `Rc₁^!` is defined. -/
-  [isLeftAdjoint : (R(c₁)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
   /-- The cohomological correspondence `u : c₂^* K ⟶ Rc₁^! K`. -/
   u : (D((c₂)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ (R(c₁)^![Λ]).obj K
 
 namespace CohomologicalCorrespondence
 
-attribute [instance] hasCompactification isLeftAdjoint
+attribute [instance] hasCompactification
 
-variable {A aX K} (c : CohomologicalCorrespondence A aX K)
+variable {Λ aX K} (c : CohomologicalCorrespondence Λ aX K)
 
 /-- The fixed scheme `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` of a cohomological correspondence
 (blueprint `def-trf-fixed-scheme`). -/
@@ -102,8 +97,7 @@ noncomputable abbrev fixedScheme : Scheme.{u} :=
 
 section Graph
 
-variable (A) (Λ) [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
-  [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+variable (Λ)
 
 /-- Blueprint `def-trf-graph-correspondence`: Graph correspondence.
 
@@ -123,7 +117,7 @@ noncomputable def graph [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact 
   quasiCompact := by rwa [Category.id_comp]
   u := v ≫ (rightDerivedUpperShriekIdIso Λ X).inv.app K
 
-variable {A} {Λ} [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
+variable {Λ} [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
 
 @[simp]
 lemma graph_C (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
@@ -142,8 +136,8 @@ lemma graph_c₂ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u +
 
 /-- The fixed scheme of the graph correspondence of `h` is the fixed scheme `Fix(h)` of `h`,
 the scheme-theoretic equalizer of `𝟙 X` and `h` (blueprint `def-trf-graph-correspondence`). -/
-lemma fixedScheme_graph (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶
-    K) :
+lemma fixedScheme_graph (h : X ⟶ X) (hh : h ≫ aX = aX)
+    (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     (graph Λ h hh v).fixedScheme = Hom.fixedScheme aX h hh :=
   rfl
 

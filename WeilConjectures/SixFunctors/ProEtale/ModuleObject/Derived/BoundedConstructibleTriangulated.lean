@@ -89,14 +89,13 @@ instance isTriangulated_boundedConstructibleLowerShriek (f : X ⟶ Y) :
   delta boundedConstructibleLowerShriek
   infer_instance
 
-instance isTriangulated_boundedConstructibleUpperShriek (f : X ⟶ Y)
-    [(boundedConstructibleLowerStar ℓ (compactificationOverField f).overG).IsLeftAdjoint] :
+instance isTriangulated_boundedConstructibleUpperShriek (f : X ⟶ Y) :
     (boundedConstructibleUpperShriek ℓ f).IsTriangulated :=
   (boundedConstructibleUpperShriekAdjunction ℓ f).isTriangulated_rightAdjoint
 
 section Tensor
 
-variable {(Profinite.padicAlgClRingObj ℓ) ℓ}
+variable {ℓ}
 
 instance isTriangulated_boundedConstructible_tensorRight (K :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
