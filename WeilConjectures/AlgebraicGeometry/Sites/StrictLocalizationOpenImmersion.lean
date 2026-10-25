@@ -36,7 +36,7 @@ variable {S U : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (j : U ⟶
 /-- The strict localization at `s` maps into every open subset containing the image of `s`: its
 points all specialize to the closed point. -/
 lemma range_strictLocalizationToBase_subset {S : Scheme.{u}} (s : Spec (.of Ω) ⟶ S) (O : Set S)
-    (hO : IsOpen O) (hs : s.base (IsLocalRing.closedPoint Ω) ∈ O) :
+    (hO : IsOpen O) (x₀ : Spec (.of Ω)) (hs : s.base x₀ ∈ O) :
     Set.range (strictLocalizationToBase s).base ⊆ O := by
   rintro _ ⟨x, rfl⟩
   have hsp : x ⤳ IsLocalRing.closedPoint (strictHenselization s) :=
@@ -45,7 +45,7 @@ lemma range_strictLocalizationToBase_subset {S : Scheme.{u}} (s : Spec (.of Ω) 
       (IsLocalRing.closedPoint (strictHenselization s)) ∈ O := by
     rw [← spec_map_strictHenselizationEval_apply s (IsLocalRing.closedPoint Ω),
       ← Scheme.Hom.comp_apply, spec_map_strictHenselizationEval_comp_strictLocalizationToBase]
-    exact hs
+    exact Subsingleton.elim x₀ (IsLocalRing.closedPoint Ω) ▸ hs
   exact hO.stableUnderGeneralization (hsp.map (strictLocalizationToBase s).base.hom.continuous) hcl
 
 lemma range_strictLocalizationToBase_subset_range_of_isOpenImmersion :
