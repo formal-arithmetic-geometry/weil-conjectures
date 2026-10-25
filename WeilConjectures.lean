@@ -12609,6 +12609,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraidingShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
@@ -13106,6 +13107,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Stalk
