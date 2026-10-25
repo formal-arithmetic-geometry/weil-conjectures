@@ -20,11 +20,19 @@ packaged for all models and coefficient rings as
 `AlgebraicGeometry.Etale.CurveLocalModel.restrictionZero`). Its last step, as in the blueprint
 proof ("the comparison theorems transport this identity back to the proétale formulation"),
 transports this vanishing to the `ℚ̄_ℓ`-coefficient pro-étale supported restriction `ρ_P` of
-`Correspondence.FixedLocus.supportedRestriction`: the stalk of `ρ_P` at the fixed point is the
-supported restriction on the strict localization `T` of `X ×_k X` at `(x, x)`, the comparison
-theorems identify it with the étale one, and the integral models of `sk-lem-tf-rational-model`
-reduce `ℚ̄_ℓ` to the finite rings `𝒪_E / π_E^n`. This transport is stated as a compatibility
+`Correspondence.FixedLocus.supportedRestriction`
 (`Correspondence.upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_restrictionZero`).
+This is the passage `ℚ̄_ℓ = colim_E E`, `E = 𝒪_E[1/ℓ]`, `𝒪_E = lim_n 𝒪_E / π_E^n`:
+
+* `K` descends to a finite subextension `E` and has an integral model `K₀` over `𝒪_E`
+  (`ProEtale.exists_padicAlgCl_iso_integralModel`, blueprints `sk-thm-sfb-qlbar-two-colimit` and
+  `sk-lem-tf-rational-model`, the latter proved in `WeilConjectures.TraceFormula.RationalModel`);
+* the comparison theorems of the six-functor formalism identify the stalk of `ρ_P` at the fixed
+  point with `ℚ̄_ℓ ⊗ᴸ_{𝒪_E}` of the integral supported restriction, whose reductions modulo
+  `π_E^n` are the supported restrictions on the strict localization `T` of `X ×_k X` at `(x, x)`
+  with étale `𝒪_E / π_E^n`-coefficients. This step is stated as a compatibility required from the
+  six-functor formalism
+  (`Correspondence.upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_integralModel`).
 
 -/
 

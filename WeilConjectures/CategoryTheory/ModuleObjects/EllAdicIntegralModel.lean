@@ -43,32 +43,11 @@ inverse up to `m` (`CategoryTheory.Rationalization.exists_comp_eq_smul_id`).
 
 @[expose] public section
 
-universe w u₁ u₂ v₁ v₂ u
+universe u
 
 open CategoryTheory Category Limits MonoidalCategory MonObj
 
 open scoped CategoryTheory.Obj
-
-namespace CategoryTheory.Rationalization
-
-variable {R : Type w} [CommRing R] {M : Submonoid R}
-  {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C] [HasZeroObject C]
-  [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor C n).Linear R]
-  [Pretriangulated C] [IsTriangulated C]
-  {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear R D]
-
-/-- For a localization functor `L` at the morphisms with `M`-torsion mapping cone, every morphism
-`L X ⟶ L Y` becomes the image of a morphism `X ⟶ Y` after multiplication by an element of `M`. -/
-lemma exists_smul_eq_map_of_isLocalization (L : C ⥤ D) [L.IsLocalization (W M C)]
-    [L.Linear R] {X Y : C} (φ : L.obj X ⟶ L.obj Y) :
-    ∃ m ∈ M, ∃ f : X ⟶ Y, m • φ = L.map f := by
-  obtain ⟨ψ, rfl⟩ := Localization.exists_leftFraction L (W M C) φ
-  obtain ⟨m, hm, t, ht⟩ := exists_comp_eq_smul_id ψ.hs
-  refine ⟨m, hm, ψ.f ≫ t, ?_⟩
-  rw [L.map_comp, ← MorphismProperty.LeftFraction.map_comp_map_s, assoc,
-    ← L.map_comp, ht, Functor.map_smul, L.map_id, Linear.comp_smul, comp_id]
-
-end CategoryTheory.Rationalization
 
 namespace AlgebraicGeometry.ProEtale
 
