@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
+public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 

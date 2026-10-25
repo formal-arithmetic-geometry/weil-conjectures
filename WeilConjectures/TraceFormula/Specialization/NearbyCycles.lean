@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneric
+public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
@@ -207,13 +209,22 @@ generic point; the duality on the geometric generic fibre `X_Ω` is relative to 
 `Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
 fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
 asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
-isomorphism. -/
+isomorphism. It is the instance of `NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso` for
+the deformation model, whose geometric generic fibre is the base change of `X`
+(`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅
       verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
         ((specialization k' x).obj K)) :=
-  sorry
+  NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
+    (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
+    ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+      isPullback_deformationSpecialFibre X _ k'⟩
+    (deformationModel_exists_comp_ε X x.left.ker k') (isPullback_deformationModel_ε k' x)
+    ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
+      (isTraitModel_deformationModel X x.left.ker k')
+      (deformationModel_exists_comp_ε X x.left.ker k')) K
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
 `K ⊠ D K` is the universal kernel of the specialization,
