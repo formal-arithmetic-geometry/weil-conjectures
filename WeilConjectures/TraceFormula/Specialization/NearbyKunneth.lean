@@ -96,6 +96,10 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
     inferInstanceAs (QuasiCompact (𝟙 _))
   have : IsSeparated (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
     inferInstanceAs (IsSeparated (𝟙 _))
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
+  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
   have hΨA := preservesBoundedConstructible_of_exists_comp M hM.isTraitModel ⟨eM, heM⟩ A hA
   have hΨB := preservesBoundedConstructible_of_exists_comp N hN.isTraitModel ⟨eN, heN⟩ B hB
   have hpush := boundedConstructible_rightDerivedLowerStar_obj _ ℓ
@@ -108,6 +112,7 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
       heM heN hA hB)
     (isIso_kunnethMap_traitGenericModel_of_shiftDecomposition _ k' _ _
       (nonempty_shiftDecomposition_of_boundedConstructible ℓ _ hpush))
+    (fun S hS C hC hU hΓ ↦ isZero_of_isZero_upperStar_finsetComplOpens ℓ S hS C hC hU hΓ)
 
 end Product
 
