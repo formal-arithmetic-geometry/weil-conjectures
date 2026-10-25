@@ -138,7 +138,9 @@ lemma commSq_prodMap_snd (f : U ⟶ Y) :
     CommSq (prod.snd : X ⨯ U ⟶ U) (prod.map (𝟙 X) f) f prod.snd :=
   ⟨(prod.map_snd _ _).symm⟩
 
-/-- **Generic base change over the field `k`**: for any morphism `f : U ⟶ Y` of separated
+/-- Compatibility required from the six-functor section (blueprint
+`sk-lem-tf-independent-base-change`, stated there for finite coefficients), to be proved there:
+**generic base change over the field `k`**: for any morphism `f : U ⟶ Y` of separated
 `k`-schemes of finite type and any `X`, the base change morphism
 `Lp_Y^* Rf_* ⟶ R(𝟙 × f)_* Lp_U^*` of the square `commSq_prodMap_snd`, i.e. of the base change
 of `f` along `X ⨯ Y ⟶ Y`, is an isomorphism on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`. This is Deligne's generic base
