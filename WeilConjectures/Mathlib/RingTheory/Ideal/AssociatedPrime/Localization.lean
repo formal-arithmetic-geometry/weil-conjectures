@@ -85,14 +85,4 @@ theorem exists_mem_annihilatorAssociatedPrimes_quotient_pow_of_isNoetherianRing
   rw [annihilatorAssociatedPrimes_eq_associatedPrimes]
   exact associatedPrimes.subset_of_injective hinj hqR
 
-/-- Let `(R, 𝔪)` be a Noetherian local ring, `M` a finite `R`-module, `x ∈ 𝔪`, `p` an associated
-prime of `M` (in the sense of exact annihilators) and `q` a prime minimal over `p + (x)`. Then
-`q` is an associated prime of `M / xⁿ M` for some `n ≥ 1` (Stacks `0CN5`).
-(blueprint: `lem-weil-pbc-associated-prime-power-quotient`) -/
-theorem exists_mem_associatedPrimes_quotient_pow [IsNoetherianRing R] [IsLocalRing R]
-    [Module.Finite R M] {x : R} (_hx : x ∈ IsLocalRing.maximalIdeal R) {p q : Ideal R}
-    (hp : p ∈ annihilatorAssociatedPrimes R M) (hq : q ∈ (p ⊔ Ideal.span {x}).minimalPrimes) :
-    ∃ n ≥ 1, q ∈ annihilatorAssociatedPrimes R (M ⧸ (x ^ n • ⊤ : Submodule R M)) :=
-  exists_mem_annihilatorAssociatedPrimes_quotient_pow_of_isNoetherianRing hp hq
-
 end Module

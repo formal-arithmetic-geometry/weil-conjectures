@@ -21,11 +21,6 @@ We record the descent of properties of morphisms of schemes along fpqc coverings
 - `AlgebraicGeometry.fpqc_local_on_base_criterion`: a property of morphisms which is invariant
   under isomorphisms, stable under flat base change, Zariski local on the base and which descends
   along faithfully flat morphisms of affine schemes descends along fpqc coverings (Stacks 02KP).
-- `AlgebraicGeometry.isFinite_of_fpqc_cover`, `AlgebraicGeometry.flat_of_fpqc_cover`: being
-  finite resp. flat descends along fpqc coverings (Stacks 02LA, 02L2).
-- `AlgebraicGeometry.quasiCompact_of_fpqc_baseChange`,
-  `AlgebraicGeometry.isSeparated_of_flat_surjective_baseChange`: quasi-compactness and
-  separatedness descend along flat, surjective, quasi-compact morphisms (Stacks 02KQ, 02KU).
 - `AlgebraicGeometry.Scheme.fpqcCover_of_smallEtaleCover`: a covering family of the small étale
   site is an fpqc covering.
 -/
@@ -174,86 +169,6 @@ theorem fpqc_local_on_base_criterion
   exact of_ofArrows_mem_fpqcPrecoverage hP f g hg H
 
 end Criterion
-
-section Covering
-
-variable {X S : Scheme.{u}} (f : X ⟶ S) {ι : Type v} {T : ι → Scheme.{u}}
-  (g : ∀ i, T i ⟶ S)
-
-set_option backward.isDefEq.respectTransparency.types false in
-/-- **Being finite descends along fpqc coverings** (Stacks 02LA): if the base changes of
-`f : X ⟶ S` along the members of an fpqc covering `{g i : T i ⟶ S}` are finite, then `f` is
-finite.
-
-(blueprint: `lem-weil-pbc-fpqc-descend-finite`) -/
-theorem isFinite_of_fpqc_cover (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)
-    (H : ∀ i, IsFinite (pullback.snd f (g i))) : IsFinite f := by
-  have := IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
-  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology
-    (P := (@IsFinite : MorphismProperty Scheme.{u})) (Precoverage.generate_mem_toGrothendieck hg) f
-    _ _ (fun i ↦ .of_hasPullback f (g i)) H
-
-set_option backward.isDefEq.respectTransparency.types false in
-/-- **Being flat descends along fpqc coverings** (Stacks 02L2): if the base changes of
-`f : X ⟶ S` along the members of an fpqc covering `{g i : T i ⟶ S}` are flat, then `f` is
-flat.
-
-(blueprint: `lem-weil-pbc-fpqc-descend-flat`) -/
-theorem flat_of_fpqc_cover (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)
-    (H : ∀ i, Flat (pullback.snd f (g i))) : Flat f :=
-  Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology
-    (P := (@Flat : MorphismProperty Scheme.{u})) (Precoverage.generate_mem_toGrothendieck hg) f
-    _ _ (fun i ↦ .of_hasPullback f (g i)) H
-
-end Covering
-
-section FlatSurjective
-
-variable {X S S' : Scheme.{u}} (g : S' ⟶ S) [Flat g] [Surjective g] [QuasiCompact g] (f : X ⟶ S)
-
-omit [Flat g] in
-include g in
-/-- **Quasi-compactness descends along flat, surjective, quasi-compact morphisms**
-(Stacks 02KQ): if the base change `X ×_S S' ⟶ S'` of `f : X ⟶ S` along such a `g : S' ⟶ S` is
-quasi-compact, then so is `f`. (Flatness of `g` is not needed.)
-
-(blueprint: `lem-weil-pbc-fpqc-descend-quasi-compact`) -/
-theorem quasiCompact_of_fpqc_baseChange [QuasiCompact (pullback.snd f g)] : QuasiCompact f := by
-  refine ⟨fun U hU hc ↦ ?_⟩
-  have e : f ⁻¹' U = pullback.fst f g '' (pullback.snd f g ⁻¹' (g ⁻¹' U)) := by
-    ext x
-    constructor
-    · intro hx
-      obtain ⟨y, rfl⟩ := (pullback.fst f g).surjective x
-      refine ⟨y, ?_, rfl⟩
-      change g (pullback.snd f g y) ∈ U
-      rw [← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
-      exact hx
-    · rintro ⟨y, hy, rfl⟩
-      change f (pullback.fst f g y) ∈ U
-      rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
-      exact hy
-  rw [e]
-  exact (QuasiCompact.isCompact_preimage _ (hU.preimage g.continuous)
-    (QuasiCompact.isCompact_preimage _ hU hc)).image (pullback.fst f g).continuous
-
-set_option backward.isDefEq.respectTransparency.types false in
-/-- **Separatedness descends along flat, surjective, quasi-compact morphisms** (Stacks 02KU): if
-the base change `X ×_S S' ⟶ S'` of `f : X ⟶ S` along such a `g : S' ⟶ S` is separated, then
-so
-is `f`.
-
-(blueprint: `lem-weil-pbc-fpqc-descend-separated`) -/
-theorem isSeparated_of_flat_surjective_baseChange [IsSeparated (pullback.snd f g)] :
-    IsSeparated f := by
-  have := IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
-  have : DescendsAlong @IsSeparated (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by
-    rw [IsSeparated.isSeparated_eq_diagonal_isClosedImmersion]
-    infer_instance
-  exact MorphismProperty.of_pullback_snd_of_descendsAlong (P := @IsSeparated)
-    (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) ⟨⟨‹_›, ‹_›⟩, ‹_›⟩ ‹_›
-
-end FlatSurjective
 
 /-- **The fpqc topology is finer than the small étale topology**: a covering family
 `{f i : V i ⟶ U}` of the small étale site of `T` is an fpqc covering of `U`; in particular every

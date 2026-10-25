@@ -16,7 +16,7 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 Let `M` be a finite-dimensional representation of a group `P` over `ZMod ℓ` and let
 `0 = F 0 ⊆ F 1 ⊆ ⋯ ⊆ F n = M` be a full flag of `P`-stable subspaces such that `P` acts trivially
-on each `F (i + 1) / F i`. We realise this flag inside the abelian category `Rep (ZMod ℓ) P`: a
+on each `F (i + 1) / F i`. This file provides tools to realise this flag inside `Rep (ZMod ℓ) P`: a
 sequence of monomorphisms `W 0 ⟶ W 1 ⟶ ⋯ ⟶ W n` with `W 0 = 0`, `W n ≅ M` and all cokernels
 isomorphic to the trivial representation on `ULift (ZMod ℓ)`.
 
@@ -25,7 +25,9 @@ isomorphic to the trivial representation on `ULift (ZMod ℓ)`.
 * `Rep.ofStableSubmodule`: the subrepresentation on a `G`-stable submodule, as an object of `Rep`.
 * `Rep.cokernelIsoOfRangeEqKer`: the cokernel of `f` is the target of a surjection `p` with
   `ker p = range f`.
-* `Rep.exists_categorical_filtration_of_invariant_flag`: the main statement.
+
+The filtration itself is `Rep.exists_categorical_filtration_of_invariant_flag` in
+`WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration`.
 -/
 
 @[expose] public section
@@ -110,60 +112,5 @@ theorem nonempty_cokernel_ofStableSubmoduleInclusion_iso_trivial (A : Rep.{w} k 
   exact (Submodule.range_inclusion _ _ _).trans (by rw [LinearEquiv.ker_comp, Submodule.ker_mkQ])
 
 end Field
-
-/-- **Categorical realization of an invariant rank-one flag.** Let `ℓ` be a prime, `P` a group
-and `M` a finite-dimensional representation of `P` over `ZMod ℓ`, of dimension `n`. Let
-`F : ℕ → Submodule (ZMod ℓ) M` with `F 0 = 0`, `F n = M`, `F i` stable under `P` for `i ≤ n`, and
-for `i < n`: `F i ≤ F (i + 1)`, `dim F (i + 1) = i + 1` and `g • x - x ∈ F i` for `g : P`,
-`x ∈ F (i + 1)`. Then there are representations `W i` and morphisms `ι i : W i ⟶ W (i + 1)` in
-`Rep (ZMod ℓ) P` with `W 0` zero, `W n ≅ M`, and for `i < n`, `ι i` a monomorphism whose
-cokernel is isomorphic to the trivial representation on `ULift (ZMod ℓ)`.
-(blueprint: `lem-weil-pbc-invariant-flag-categorical-filtration`) -/
-theorem exists_categorical_filtration_of_invariant_flag {ℓ : ℕ} [Fact ℓ.Prime] {P : Type v}
-    [Group P] (M : Rep.{w} (ZMod ℓ) P) [FiniteDimensional (ZMod ℓ) M]
-    (F : ℕ → Submodule (ZMod ℓ) M) (hF0 : F 0 = ⊥) (hFn : F (finrank (ZMod ℓ) M) = ⊤)
-    (hstable : ∀ i ≤ finrank (ZMod ℓ) M, ∀ (g : P), ∀ x ∈ F i, M.ρ g x ∈ F i)
-    (hle : ∀ i < finrank (ZMod ℓ) M, F i ≤ F (i + 1))
-    (hdim : ∀ i < finrank (ZMod ℓ) M, finrank (ZMod ℓ) (F (i + 1)) = i + 1)
-    (hquot : ∀ i < finrank (ZMod ℓ) M, ∀ (g : P), ∀ x ∈ F (i + 1), M.ρ g x - x ∈ F i) :
-    ∃ (W : ℕ → Rep.{w} (ZMod ℓ) P) (ι : ∀ i, W i ⟶ W (i + 1)), IsZero (W 0) ∧
-      Nonempty (W (finrank (ZMod ℓ) M) ≅ M) ∧ ∀ i < finrank (ZMod ℓ) M, Mono (ι i) ∧
-        Nonempty (cokernel (ι i) ≅ Rep.trivial (ZMod ℓ) P (ULift.{w} (ZMod ℓ))) := by
-  set n := finrank (ZMod ℓ) M
-  have hB (i : ℕ) : ∀ (g : P), ∀ x ∈ F (min i n), M.ρ g x ∈ F (min i n) :=
-    hstable _ (min_le_right _ _)
-  have hBle (i : ℕ) : F (min i n) ≤ F (min (i + 1) n) := by
-    rcases lt_or_ge i n with h | h
-    · rw [min_eq_left h.le, min_eq_left (by omega : i + 1 ≤ n)]
-      exact hle i h
-    · rw [min_eq_right h, min_eq_right (by omega : n ≤ i + 1)]
-  have hrank (i : ℕ) (hi : i ≤ n) : finrank (ZMod ℓ) (F i) = i := by
-    rcases i with _ | i
-    · rw [hF0, finrank_bot]
-    · exact hdim i (by omega)
-  refine ⟨fun i ↦ M.ofStableSubmodule (F (min i n)) (hB i),
-    fun i ↦ M.ofStableSubmoduleInclusion (hB i) (hB (i + 1)) (hBle i), ?_, ?_,
-    fun i hi ↦ ⟨?_, ?_⟩⟩
-  · rw [Rep.isZero_iff]
-    refine ⟨fun a b ↦ Subtype.ext ?_⟩
-    have ha := a.2
-    have hb := b.2
-    simp only [Nat.zero_min, hF0, Submodule.mem_bot] at ha hb
-    rw [ha, hb]
-  · refine ⟨Rep.mkIso (Representation.IntertwiningMap.ofBijective
-      (M.ofStableSubmoduleSubtype (F (min n n)) (hB n)).hom ⟨Subtype.val_injective, ?_⟩)⟩
-    intro x
-    have hx : x ∈ F (min n n) := by
-      rw [min_self, hFn]
-      exact Submodule.mem_top
-    exact ⟨⟨x, hx⟩, rfl⟩
-  · rw [Rep.mono_iff_injective]
-    exact Submodule.inclusion_injective (hBle i)
-  · apply nonempty_cokernel_ofStableSubmoduleInclusion_iso_trivial
-    · rw [min_eq_left hi.le, min_eq_left (by omega : i + 1 ≤ n), hrank i hi.le,
-        hrank (i + 1) (by omega)]
-    · rw [min_eq_left hi.le, min_eq_left (by omega : i + 1 ≤ n)]
-      exact hquot i hi
-    · rw [finrank_ulift, finrank_self]
 
 end Rep

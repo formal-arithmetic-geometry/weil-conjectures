@@ -6772,7 +6772,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleGraphSectionExtensionMap
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleGrothendieckAbelian
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
@@ -9997,7 +9996,6 @@ public import WeilConjectures.RingTheory.ComparisonTensorTransitionPushout
 public import WeilConjectures.RingTheory.CompatibleModuleModelDescent
 public import WeilConjectures.RingTheory.CompatibleRingTowerRecursion
 public import WeilConjectures.RingTheory.CompleteIdealFiniteOfAssociatedGraded
-public import WeilConjectures.RingTheory.CompleteIntersection.Defs
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.RingTheory.CompleteIntersectionPresentationStableConormal
 public import WeilConjectures.RingTheory.CompleteLocalBaseChangeFiber
@@ -10171,8 +10169,6 @@ public import WeilConjectures.RingTheory.EtaleSectionLiftingOfGabberRoots
 public import WeilConjectures.RingTheory.EtaleSectionLocalization
 public import WeilConjectures.RingTheory.EtaleSectionNeighbourhoodRefinement
 public import WeilConjectures.RingTheory.Excellent
-public import WeilConjectures.RingTheory.Excellent.Defs
-public import WeilConjectures.RingTheory.Excellent.GeometricallyRegular
 public import WeilConjectures.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 public import WeilConjectures.RingTheory.ExistsCoefficientSubring
 public import WeilConjectures.RingTheory.ExistsCompleteLocalFlatPresentation
@@ -10462,7 +10458,6 @@ public import WeilConjectures.RingTheory.HenselianFactorizationCriterion
 public import WeilConjectures.RingTheory.HenselianIntegralIdempotentLifting
 public import WeilConjectures.RingTheory.HenselianLocalRootLifting
 public import WeilConjectures.RingTheory.HenselianOfEtaleSectionLifting
-public import WeilConjectures.RingTheory.HenselianOfNilMaximalIdeal
 public import WeilConjectures.RingTheory.HenselianPairApproximation
 public import WeilConjectures.RingTheory.HenselianPairDomainConnected
 public import WeilConjectures.RingTheory.HenselianPairPrimeConnected
@@ -10788,7 +10783,6 @@ public import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimens
 public import WeilConjectures.RingTheory.PolynomialRingN2
 public import WeilConjectures.RingTheory.PolynomialSuccessorTorBound
 public import WeilConjectures.RingTheory.PolynomialTorBound
-public import WeilConjectures.RingTheory.Popescu.Defs
 public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
 public import WeilConjectures.RingTheory.PopescuAlgebraicResidueEnlargement
 public import WeilConjectures.RingTheory.PopescuAppendFlatParameters
@@ -11323,7 +11317,6 @@ public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 public import WeilConjectures.SixFunctors.BaseChange.Forget
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
-public import WeilConjectures.SixFunctors.BaseChange.OpenImmersionSquare
 public import WeilConjectures.SixFunctors.BaseChange.Pasting
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.Sections
@@ -11847,7 +11840,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilDual
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilOperations
-public import WeilConjectures.SixFunctors.Etale.FiniteEtaleTrace.SplittingData
 public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius

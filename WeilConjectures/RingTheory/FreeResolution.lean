@@ -12,13 +12,14 @@ public import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Free resolutions of modules
 
-This file collects two elementary facts about resolutions of modules by free modules,
+This file collects elementary facts about resolutions of modules by free modules,
 stated concretely in terms of `LinearMap.range` and `LinearMap.ker`.
 
-* `Module.exists_finite_free_resolution`: a finite module over a Noetherian ring has a
-  resolution `⋯ → R^{n₁} → R^{n₀} → M → 0` by finite free modules (Stacks 00LP).
 * `Module.free_complex_maps_to_resolution`: a complex of free modules over `M` maps to any
   resolution of `N` over a linear map `M → N` (Stacks 00LS, part (1)).
+
+The existence of finite free resolutions over Noetherian rings (Stacks 00LP) is
+`Module.exists_finite_free_resolution` in `WeilConjectures.RingTheory.FiniteFreeResolution`.
 -/
 
 @[expose] public section
@@ -42,33 +43,6 @@ theorem Projective.exists_comp_eq_of_range_eq_ker {R : Type*} [Ring R] {P A B C 
       exact ⟨a, rfl⟩)
   refine ⟨k, LinearMap.ext fun p => ?_⟩
   simpa using congrArg Subtype.val (LinearMap.congr_fun hk p)
-
-/-- **Finite free resolutions over Noetherian rings** (Stacks 00LP, part (2)).
-A finite module `M` over a (left) Noetherian ring `R` has a resolution
-`⋯ → R^{n₂} → R^{n₁} → R^{n₀} → M → 0` by finite free modules: there are `n : ℕ → ℕ`, a
-surjection `ε : R^{n₀} → M` and maps `d i : R^{n_{i+1}} → R^{n_i}` with `range (d 0) = ker ε`
-and `range (d (i + 1)) = ker (d i)` for all `i`.
-(blueprint: `lem-weil-pbc-finite-free-resolution-noetherian`) -/
-theorem exists_finite_free_resolution (R : Type*) [Ring R] [IsNoetherianRing R] (M : Type*)
-    [AddCommGroup M] [Module R M] [Module.Finite R M] :
-    ∃ (n : ℕ → ℕ) (ε : (Fin (n 0) → R) →ₗ[R] M)
-      (d : ∀ i, (Fin (n (i + 1)) → R) →ₗ[R] (Fin (n i) → R)),
-      Function.Surjective ε ∧ LinearMap.range (d 0) = LinearMap.ker ε ∧
-        ∀ i, LinearMap.range (d (i + 1)) = LinearMap.ker (d i) := by
-  obtain ⟨n₀, ε, hε⟩ := Module.Finite.exists_fin' R M
-  have key (k : ℕ) (K : Submodule R (Fin k → R)) :
-      ∃ (m : ℕ) (g : (Fin m → R) →ₗ[R] K), Function.Surjective g :=
-    Module.Finite.exists_fin' R K
-  choose m g hg using key
-  let stage : ℕ → Σ k : ℕ, Submodule R (Fin k → R) := fun i =>
-    Nat.rec ⟨n₀, LinearMap.ker ε⟩ (fun _ s => ⟨m s.1 s.2, LinearMap.ker (g s.1 s.2)⟩) i
-  have hrange (i : ℕ) :
-      LinearMap.range ((stage i).2.subtype ∘ₗ g (stage i).1 (stage i).2) = (stage i).2 := by
-    rw [LinearMap.range_comp, LinearMap.range_eq_top.mpr (hg _ _), Submodule.map_top,
-      Submodule.range_subtype]
-  refine ⟨fun i => (stage i).1, ε, fun i => (stage i).2.subtype ∘ₗ g (stage i).1 (stage i).2,
-    hε, hrange 0, fun i => ?_⟩
-  rw [hrange (i + 1), LinearMap.ker_comp, Submodule.ker_subtype, Submodule.comap_bot]
 
 /-- **A complex of free modules maps to a resolution** (Stacks 00LS, part (1)).
 Let `φ : M → N` be a linear map, `⋯ → N₂ → N₁ → N₀ → N → 0` an exact sequence (with

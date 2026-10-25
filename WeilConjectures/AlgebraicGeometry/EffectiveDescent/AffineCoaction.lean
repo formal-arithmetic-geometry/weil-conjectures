@@ -53,11 +53,11 @@ noncomputable abbrev coactionMap (γ : pullback (v ≫ p) p ⟶ V)
 /-- **Affine flat descent in coaction form.** Let `p : X ⟶ Y` be a flat morphism of affine
 schemes and `v : V ⟶ X` with `V` affine. A coaction `γ : V ×_Y X ⟶ V` over the second projection
 satisfying the counit and coassociativity identities exhibits `V` as the base change along `p`
-of a `Y`-scheme `N`, through a morphism `q : V ⟶ N` with `γ ≫ q = pr₁ ≫ q`. -/
+of an affine `Y`-scheme `N`, through a morphism `q : V ⟶ N` with `γ ≫ q = pr₁ ≫ q`. -/
 theorem exists_isPullback_of_coaction (γ : pullback (v ≫ p) p ⟶ V)
     (hγv : γ ≫ v = pullback.snd _ _) (hd : coactionUnit p v ≫ γ = 𝟙 V)
     (hγ₁ : coactionMap p v γ hγv ≫ γ = coactionForget p v ≫ γ) :
-    ∃ (N : Scheme.{u}) (nY : N ⟶ Y) (q : V ⟶ N), IsPullback q v nY p ∧
+    ∃ (N : Scheme.{u}) (_ : IsAffine N) (nY : N ⟶ Y) (q : V ⟶ N), IsPullback q v nY p ∧
       γ ≫ q = pullback.fst _ _ ≫ q := by
   -- the rings and their algebra structures
   let R : CommRingCat.{u} := Γ(Y, ⊤)
@@ -209,7 +209,8 @@ theorem exists_isPullback_of_coaction (γ : pullback (v ≫ p) p ⟶ V)
   have hV : IsPullback V.toSpecΓ v
       (Spec.map (CommRingCat.ofHom (algebraMap A' E)) ≫ X.isoSpec.inv) (𝟙 X) :=
     IsPullback.of_horiz_isIso ⟨by rw [hjw, Category.comp_id]⟩
-  refine ⟨Spec (.of D₀), Spec.map (CommRingCat.ofHom (algebraMap R D₀)) ≫ Y.isoSpec.inv,
+  refine ⟨Spec (.of D₀), inferInstance,
+    Spec.map (CommRingCat.ofHom (algebraMap R D₀)) ≫ Y.isoSpec.inv,
     V.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (algebraMap D₀ E)), ?_, ?_⟩
   · simpa using hV.paste_horiz hQ.flip
   rw [← Category.assoc, Scheme.toSpecΓ_naturality, ← Category.assoc (pullback.fst _ _),

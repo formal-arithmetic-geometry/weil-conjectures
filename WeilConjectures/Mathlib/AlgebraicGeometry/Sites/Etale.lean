@@ -57,12 +57,16 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
 
 variable (X) in
+/-- The small étale site of a scheme `X : Scheme.{u}` has morphisms in `Type u`, so it is locally
+small with respect to `u + 1`. Instance search does not derive this from
+`locallySmall_of_univLE`, since it cannot solve the universe constraint `UnivLE.{u, u + 1}`. -/
+instance Etale.locallySmall : LocallySmall.{u + 1} X.Etale :=
+  @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+
+variable (X) in
 /-- The small étale site of a scheme `X : Scheme.{u}` is essentially small in the universe
-`u + 1` of its objects. Instance search does not always find this, so it is used as a local
-instance where needed. -/
-theorem Etale.essentiallySmall : EssentiallySmall.{u + 1} X.Etale :=
-  have : LocallySmall.{u + 1} X.Etale :=
-    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+`u + 1` of its objects. -/
+instance Etale.essentiallySmall : EssentiallySmall.{u + 1} X.Etale :=
   essentiallySmall_of_small_of_locallySmall _
 
 section Functoriality

@@ -7,13 +7,13 @@ module
 
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Topology.LocallyConstant.Basic
+import WeilConjectures.Topology.LocallyConstantMapsPresheaf
 
 /-!
-# Sections of colimits of sheaves, and the presheaf of locally constant maps
+# Sections of colimits of sheaves
 
 - `TopCat.Sheaf.colimitSectionsMap`: for a diagram `D` of sheaves with a colimit and an open `U`,
   the canonical map `colim_i D_i(U) → (colim D)(U)` (Stacks 009F).
-- `TopCat.locallyConstantMapsPresheaf`: the presheaf `V ↦ {locally constant maps V → R}`.
 -/
 
 @[expose] public section
@@ -42,15 +42,5 @@ lemma Sheaf.ι_colimitSectionsMap {J : Type*} [Category J] (D : J ⥤ X.Sheaf C)
     colimit.ι (D ⋙ sheafToPresheaf _ C ⋙ (evaluation _ C).obj U) j ≫
       Sheaf.colimitSectionsMap D U = (colimit.ι D j).hom.app U :=
   colimit.ι_post _ _ _
-
-variable (X) in
-/-- The presheaf on `X` sending an open `V` to the set of locally constant maps `V → R`, with
-restriction given by precomposition. (blueprint: `def-weil-pbc-locally-constant-maps-presheaf`) -/
-@[simps!]
-def locallyConstantMapsPresheaf (R : Type u) : X.Presheaf (Type u) where
-  obj V := LocallyConstant V.unop R
-  map {V W} i := ↾fun f ↦ f.comap ⟨fun x ↦ ⟨x.1, i.unop.le x.2⟩, by fun_prop⟩
-  map_id _ := rfl
-  map_comp _ _ := rfl
 
 end TopCat

@@ -17,7 +17,6 @@ Let `R → S` be a ring map and `p` a prime of `R`. We study the fibre ring
 
 ## Main results
 
-* `Ideal.isNoetherianRing_fiber`: the fibre ring of a Noetherian ring is Noetherian.
 * `Ideal.Fiber.toResidueField`: for a prime `q` of `S` over `p`, the map
   `κ(p) ⊗[R] S → κ(q)`, `λ ⊗ b ↦ λ̄ b̄`.
 * `Ideal.Fiber.primes_residueField`: the primes of the fibre ring correspond to the primes of `S`
@@ -32,15 +31,6 @@ open Algebra TensorProduct
 namespace Ideal
 
 variable {R S : Type*} [CommRing R] [CommRing S] [Algebra R S] (p : Ideal R) [p.IsPrime]
-
-/-- The fibre ring `κ(p) ⊗[R] S` of a Noetherian ring `S` is Noetherian: it is a quotient of a
-localization of `S`. (blueprint: `lem-weil-pbc-fibre-ring-noetherian`) -/
-theorem isNoetherianRing_fiber [IsNoetherianRing S] : IsNoetherianRing (p.Fiber S) := by
-  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := p.ResidueField) (B := S)
-  let Sp := Localization (Algebra.algebraMapSubmonoid S p.primeCompl)
-  have : IsNoetherianRing Sp := IsLocalization.isNoetherianRing
-    (Algebra.algebraMapSubmonoid S p.primeCompl) Sp inferInstance
-  exact isNoetherianRing_of_ringEquiv _ (Fiber.algEquivQuotient p).symm.toRingEquiv
 
 /-- The map `κ(p) ⊗[R] S → κ(q)`, `λ ⊗ b ↦ λ̄ b̄`, for a prime `q` of `S` over `p`. -/
 noncomputable def Fiber.toResidueField (q : Ideal S) [q.IsPrime] (hq : q.under R = p) :

@@ -11,7 +11,6 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Idempotents
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.KrullDimension.Zero
-import WeilConjectures.RingTheory.HenselianOfNilMaximalIdeal
 
 /-!
 # Zero-dimensional local rings with separably closed residue field

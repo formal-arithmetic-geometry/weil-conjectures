@@ -21,7 +21,9 @@ map `θ = AdicCompletion.mapRingHom f I : Â_I → B̂_{IB}` of adic completions
 - `AdicCompletion.mapRingHom_surjective`
 - `AdicCompletion.ker_mapRingHom`
 - `AdicCompletion.quotientKerEquiv`
-- `AdicCompletion.exists_local_completion_quotient`
+
+The local statement (Stacks 00MA (2), (3)) is `AdicCompletion.exists_local_completion_quotient`
+in `WeilConjectures.RingTheory.LocalCompletionQuotient`.
 
 ## References
 
@@ -133,22 +135,5 @@ theorem quotientKerEquiv_mk [IsNoetherianRing A] {f : A →+* B} (hf : Function.
     (I : Ideal A) (x : AdicCompletion I A) :
     quotientKerEquiv hf I (Ideal.Quotient.mk _ x) = mapRingHom f I x := by
   simp [quotientKerEquiv]
-
-/-- Let `(A, 𝔪)` be a Noetherian local ring and `f : A → B` a surjective ring map with kernel
-`J`, and put `𝔫 = f(𝔪)`. Then the induced map `θ : Â → B̂` of the `𝔪`-adic completion of `A` to
-the `𝔫`-adic completion of `B` satisfies `θ ∘ c_A = c_B ∘ f`, is surjective with kernel `J Â`,
-and hence induces `Â ⧸ J Â ≃ B̂`. (blueprint: `lem-weil-pbc-local-completion-quotient`) -/
-theorem exists_local_completion_quotient [IsNoetherianRing A] [IsLocalRing A] (f : A →+* B)
-    (hf : Function.Surjective f) :
-    ∃ θ : AdicCompletion (IsLocalRing.maximalIdeal A) A →+*
-        AdicCompletion ((IsLocalRing.maximalIdeal A).map f) B,
-      (∀ a, θ (algebraMap A _ a) = algebraMap B _ (f a)) ∧ Function.Surjective θ ∧
-      RingHom.ker θ =
-        (RingHom.ker f).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) ∧
-      Nonempty (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸
-          (RingHom.ker f).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) ≃+*
-        AdicCompletion ((IsLocalRing.maximalIdeal A).map f) B) :=
-  ⟨mapRingHom f _, mapRingHom_algebraMap f _, mapRingHom_surjective hf _, ker_mapRingHom hf _,
-    ⟨quotientKerEquiv hf _⟩⟩
 
 end AdicCompletion

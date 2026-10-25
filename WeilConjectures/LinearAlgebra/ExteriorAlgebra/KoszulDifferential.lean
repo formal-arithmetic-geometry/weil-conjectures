@@ -20,7 +20,12 @@ degree `-1` (Stacks, Tag 0622).
 
 ## Main results
 
-* `ExteriorAlgebra.koszul_differential`: all of the above, including both uniqueness statements.
+* `ExteriorAlgebra.eq_koszulDifferential`, `ExteriorAlgebra.koszulDifferential_mem_exteriorPower`,
+  `ExteriorAlgebra.koszulDifferential_ιMulti`, `ExteriorAlgebra.koszulDifferential_mul`,
+  `ExteriorAlgebra.eq_koszulDifferential_of_derivation`.
+
+The packaged existence-and-uniqueness statement is `ExteriorAlgebra.koszul_differential` in
+`WeilConjectures.AlgebraicGeometry.KoszulDifferential`.
 -/
 
 @[expose] public section
@@ -140,41 +145,5 @@ theorem eq_koszulDifferential_of_derivation {D : ExteriorAlgebra R M →ₗ[R] E
   refine eq_koszulDifferential φ h1 fun v x ↦ ?_
   have hv : ι R v ∈ ⋀[R]^1 M := by simp
   rw [hmul 1 _ hv, hι, pow_one, neg_one_smul, Algebra.smul_def, sub_eq_add_neg]
-
-/-- **The Koszul differential.** For `φ : M →ₗ[R] R`:
-(i) there is a unique linear `D : ⋀ M → ⋀ M` with `D 1 = 0` and `D (v ∧ x) = φ v • x - v ∧ D x`,
-namely `D = koszulDifferential φ`;
-(ii) `D v = φ v`, and `D` maps `⋀ⁿ M` into `⋀ⁿ⁻¹ M` (and kills `⋀⁰ M`);
-(iii) `D(v₁ ∧ ⋯ ∧ vₙ) = ∑ᵢ (-1)^(i+1) φ(vᵢ) v₁ ∧ ⋯ ∧ v̂ᵢ ∧ ⋯ ∧ vₙ` (indices from `0` in Lean);
-(iv) `D (x ∧ y) = D x ∧ y + (-1)ᵐ x ∧ D y` for `x ∈ ⋀ᵐ M`, and `D` is the unique linear map
-with this property and `D v = φ v`.
-(blueprint: `lem-weil-pbc-koszul-differential`) -/
-theorem koszul_differential (φ : Dual R M) :
-    -- (i)
-    (∃! D : ExteriorAlgebra R M →ₗ[R] ExteriorAlgebra R M,
-      D 1 = 0 ∧ ∀ v x, D (ι R v * x) = φ v • x - ι R v * D x) ∧
-    koszulDifferential φ 1 = 0 ∧
-    (∀ v x, koszulDifferential φ (ι R v * x) = φ v • x - ι R v * koszulDifferential φ x) ∧
-    -- (ii)
-    (∀ v, koszulDifferential φ (ι R v) = algebraMap R _ (φ v)) ∧
-    (∀ x ∈ ⋀[R]^0 M, koszulDifferential φ x = 0) ∧
-    (∀ (n : ℕ), ∀ x ∈ ⋀[R]^(n + 1) M, koszulDifferential φ x ∈ ⋀[R]^n M) ∧
-    -- (iii)
-    (∀ (n : ℕ) (v : Fin (n + 1) → M), koszulDifferential φ (ιMulti R (n + 1) v) =
-      ∑ i : Fin (n + 1), (-1 : R) ^ (i : ℕ) • φ (v i) • ιMulti R n (i.removeNth v)) ∧
-    -- (iv)
-    (∀ (m : ℕ), ∀ x ∈ ⋀[R]^m M, ∀ y, koszulDifferential φ (x * y) =
-      koszulDifferential φ x * y + (-1 : R) ^ m • (x * koszulDifferential φ y)) ∧
-    (∀ D : ExteriorAlgebra R M →ₗ[R] ExteriorAlgebra R M,
-      (∀ (m : ℕ), ∀ x ∈ ⋀[R]^m M, ∀ y, D (x * y) = D x * y + (-1 : R) ^ m • (x * D y)) →
-      (∀ v, D (ι R v) = algebraMap R _ (φ v)) → D = koszulDifferential φ) :=
-  ⟨⟨koszulDifferential φ, ⟨koszulDifferential_one φ, koszulDifferential_ι_mul φ⟩,
-      fun _ hD ↦ eq_koszulDifferential φ hD.1 hD.2⟩,
-    koszulDifferential_one φ, koszulDifferential_ι_mul φ, koszulDifferential_ι φ,
-    fun _ hx ↦ (koszulDifferential_mem_exteriorPower φ hx).1 rfl,
-    fun _ _ hx ↦ (koszulDifferential_mem_exteriorPower φ hx).2,
-    koszulDifferential_ιMulti φ,
-    fun _ _ hx y ↦ koszulDifferential_mul φ hx y,
-    fun _ hD hι ↦ eq_koszulDifferential_of_derivation φ hD hι⟩
 
 end ExteriorAlgebra

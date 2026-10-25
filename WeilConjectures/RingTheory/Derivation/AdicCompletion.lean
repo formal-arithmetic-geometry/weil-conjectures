@@ -26,7 +26,10 @@ Let `D : R → R` be a derivation of a commutative ring.
 - `Derivation.quotPowSucc`: the maps `Dₙ`.
 - `Derivation.adicCompletion`: the derivation `D^∧`.
 - `Derivation.localization`: the derivation `D_W`.
-- `Derivation.exists_completion_and_unique_localization`: Stacks, Lemma 07PE (1), (2).
+
+The packaged statement of Stacks, Lemma 07PE (1), (2) is
+`Derivation.exists_completion_and_unique_localization` in
+`WeilConjectures.RingTheory.Derivation.CompletionAndLocalization`.
 
 ## References
 
@@ -172,23 +175,5 @@ lemma localization_mk' (a : R) (w : W) :
     algebraMap R L (D w) * h3
 
 end Localization
-
-/-- **A derivation extends to adic completions and to localizations.** Let `D` be a derivation
-of a commutative ring `R`. (1) For every ideal `I`, there is a derivation `D^∧` of the `I`-adic
-completion with `D^∧ ∘ c = c ∘ D`, given by `D^∧ ((xₙ)ₙ) = (Dₙ (x_{n+1}))ₙ`. (2) For every
-multiplicative subset `W` and localization `L = W⁻¹R`, there is a unique derivation `D_W` of `L`
-with `D_W ∘ λ = λ ∘ D`, and it satisfies `D_W (a / w) = D a / w - a D w / w ^ 2`.
-(blueprint: `lem-weil-pbc-derivation-extends`) -/
-theorem exists_completion_and_unique_localization :
-    (∀ I : Ideal R, ∃ D' : Derivation ℤ (AdicCompletion I R) (AdicCompletion I R),
-      (∀ a, D' (algebraMap R _ a) = algebraMap R _ (D a)) ∧
-      ∀ x n, (D' x).val n = D.quotPowSucc I n (x.val (n + 1))) ∧
-    (∀ (W : Submonoid R) (L : Type*) [CommRing L] [Algebra R L] [IsLocalization W L],
-      ∃! D' : Derivation ℤ L L, (∀ a, D' (algebraMap R L a) = algebraMap R L (D a)) ∧
-        ∀ (a : R) (w : W), D' (IsLocalization.mk' L a w) =
-          IsLocalization.mk' L (D a) w - IsLocalization.mk' L (a * D w) (w ^ 2)) :=
-  ⟨fun I ↦ ⟨D.adicCompletion I, D.adicCompletion_algebraMap I, D.adicCompletion_val I⟩,
-    fun W L _ _ _ ↦ ⟨D.localization W L, ⟨D.localization_algebraMap W L,
-      D.localization_mk' W L⟩, fun δ hδ ↦ D.eq_localization W L δ hδ.1⟩⟩
 
 end Derivation

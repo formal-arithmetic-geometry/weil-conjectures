@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.AffineDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
@@ -92,9 +93,6 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 namespace Etale
-
-lemma hom_ext {U V : Y.Etale} {f g : U ⟶ V} (h : f.left = g.left) : f = g :=
-  MorphismProperty.Over.Hom.ext h
 
 @[simp, reassoc]
 lemma comp_left {U V W : Y.Etale} (f : U ⟶ V) (g : V ⟶ W) : (f ≫ g).left = f.left ≫ g.left :=
@@ -246,6 +244,7 @@ variable {N : Scheme.{u}} {n : N ⟶ B.left} {q : V.left.left ⟶ N}
   (hpb : IsPullback q V.hom.left n p.left)
   (hq : (γC F p r).left ≫ q = pullback.fst (V.hom.left ≫ p.left) p.left ≫ q)
 
+set_option linter.unusedSectionVars false in
 include hpb hq in
 /-- Two points of `V` over the same point of `B` representing the same section of `F` have the
 same image in the descended scheme. -/
@@ -396,7 +395,7 @@ lemma desc_naturality [Surjective p.left] [AlgebraicGeometry.Etale n] {Z Z' : Ov
   let hW : ZW p Z' ⟶ ZW p Z := homMk (pullback.map _ _ _ _ f.left.left (𝟙 _) (𝟙 _)
     (by simp [← comp_left, Over.w f]) (by simp)) (by
       change _ ≫ pullback.fst _ _ ≫ Z.left.hom = pullback.fst _ _ ≫ Z'.left.hom
-      simp [w_left])
+      simp)
   have h₁ : hW ≫ prW p Z = prW p Z' := hom_ext (by simp [hW])
   have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := hom_ext (by simp [hW])
   refine desc_ext ?_

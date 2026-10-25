@@ -17,8 +17,9 @@ Let `u : M →ₗ[A] N` be a linear map over a commutative ring whose kernel and
 `LinearMap.fgMap u hker hcoker hf hg : N →ₗ[A] M` ("`fg`"), `y ↦ g • x` for any `x` with
 `u x = f • y`, which satisfies `fgMap ∘ u = (f * g) • id` and `u ∘ fgMap = (f * g) • id`.
 We prove its naturality, a converse criterion, and deduce that the kernel and cokernel of the
-reduction `M ⧸ J • ⊤ → N ⧸ J • ⊤` modulo any ideal `J` are killed by `I * I`, so by `K ^ (2 t)`
-when `I = K ^ t` (Stacks, Tag 0888).
+reduction `M ⧸ J • ⊤ → N ⧸ J • ⊤` modulo any ideal `J` are killed by `I * I` (Stacks, Tag 0888).
+The packaged statement for `I = K ^ t` is `LinearMap.ker_coker_annihilated_mod_ideal` in
+`WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal`.
 -/
 
 @[expose] public section
@@ -141,45 +142,5 @@ theorem mul_le_annihilator_ker_and_coker_reduceModIdeal (J : Ideal A) :
     simp [← comp_apply (fgMap u hker hcoker hf hg) u, fgMap_comp_self]
   · ext y
     simp [← comp_apply u (fgMap u hker hcoker hf hg), comp_fgMap]
-
-/-- **Kernel and cokernel killed by `K ^ t`** (blueprint:
-`lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal`; Stacks, Tag 0888). Let `u : M →ₗ[A] N`
-have kernel and cokernel `N ⧸ range u` killed by `K ^ t`.
-(a) For `f g ∈ K ^ t` and `y : N` there is `x` with `u x = f • y`, `g • x` is independent of the
-choice of `x`, and the resulting map `fgMap` is linear (it is a `LinearMap`) with
-`fgMap ∘ u = (f * g) • id`, `u ∘ fgMap = (f * g) • id`.
-(b) `fgMap` is natural in commutative squares.
-(c) Kernel and cokernel of `M ⧸ J • ⊤ → N ⧸ J • ⊤` are killed by `K ^ (2 * t)`.
-(d) Any `v` admitting maps `k` with `k ∘ v = (f * g) • id = v ∘ k` for all `f g ∈ K ^ t` has
-kernel and cokernel killed by `K ^ (2 * t)`. -/
-theorem ker_coker_annihilated_mod_ideal (K : Ideal A) (t : ℕ) (u : M →ₗ[A] N)
-    (hker : K ^ t ≤ Module.annihilator A (ker u))
-    (hcoker : K ^ t ≤ Module.annihilator A (N ⧸ range u)) :
-    (∀ f g (hf : f ∈ K ^ t) (hg : g ∈ K ^ t),
-      (∀ y : N, ∃ x, u x = f • y) ∧
-      (∀ (y : N) (x x' : M), u x = f • y → u x' = f • y → g • x = g • x') ∧
-      (∀ (y : N) (x : M), u x = f • y → fgMap u hker hcoker hf hg y = g • x) ∧
-      fgMap u hker hcoker hf hg ∘ₗ u = (f * g) • LinearMap.id ∧
-      u ∘ₗ fgMap u hker hcoker hf hg = (f * g) • LinearMap.id) ∧
-    (∀ (u' : M' →ₗ[A] N') (hker' : K ^ t ≤ Module.annihilator A (ker u'))
-      (hcoker' : K ^ t ≤ Module.annihilator A (N' ⧸ range u')) (a : M →ₗ[A] M')
-      (b : N →ₗ[A] N'), u' ∘ₗ a = b ∘ₗ u → ∀ f g (hf : f ∈ K ^ t) (hg : g ∈ K ^ t),
-        a ∘ₗ fgMap u hker hcoker hf hg = fgMap u' hker' hcoker' hf hg ∘ₗ b) ∧
-    (∀ J : Ideal A, K ^ (2 * t) ≤ Module.annihilator A (ker (u.mapQSmulTop J)) ∧
-      K ^ (2 * t) ≤ Module.annihilator A
-        ((N ⧸ (J • ⊤ : Submodule A N)) ⧸ range (u.mapQSmulTop J))) ∧
-    (∀ v : P →ₗ[A] R, (∀ f ∈ K ^ t, ∀ g ∈ K ^ t, ∃ k : R →ₗ[A] P,
-      k ∘ₗ v = (f * g) • LinearMap.id ∧ v ∘ₗ k = (f * g) • LinearMap.id) →
-      K ^ (2 * t) ≤ Module.annihilator A (ker v) ∧
-        K ^ (2 * t) ≤ Module.annihilator A (R ⧸ range v)) := by
-  rw [two_mul, pow_add]
-  refine ⟨fun f g hf hg => ⟨exists_apply_eq_smul_of_le_annihilator_coker hcoker hf,
-    fun y x x' hx hx' => smul_eq_smul_of_le_annihilator_ker hker hg (hx.trans hx'.symm),
-    fun y x hx => fgMap_apply_of_apply_eq hker hcoker hf hg hx,
-    fgMap_comp_self hker hcoker hf hg, comp_fgMap hker hcoker hf hg⟩,
-    fun u' hker' hcoker' a b hab f g hf hg => comp_fgMap_eq_fgMap_comp hker hcoker hf hg
-      hker' hcoker' hab,
-    fun J => mul_le_annihilator_ker_and_coker_reduceModIdeal hker hcoker J,
-    fun v hv => mul_le_annihilator_ker_and_coker hv⟩
 
 end LinearMap

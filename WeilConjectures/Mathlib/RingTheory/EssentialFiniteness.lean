@@ -19,7 +19,6 @@ as its residue field is (Stacks, Tag 07DT (3)).
 ## Main results
 
 - `Algebra.EssFiniteType.of_isArtinianRing_of_residueField`
-- `RingHom.essFiniteType_of_artinian_local_residue`
 -/
 
 @[expose] public section
@@ -82,13 +81,3 @@ theorem of_isArtinianRing_of_residueField [IsArtinianRing S] [IsLocalRing S]
   exact comp R L S
 
 end Algebra.EssFiniteType
-
-/-- Let `f : R → S` be a ring map into an Artinian local ring. If the composite of `f` with the
-residue map of `S` is essentially of finite type, then so is `f` (Stacks, Tag 07DT (3)).
-(blueprint: `lem-weil-pbc-artinian-local-essentially-finite-type-residue`) -/
-theorem RingHom.essFiniteType_of_artinian_local_residue {R S : Type*} [CommRing R] [CommRing S]
-    [IsArtinianRing S] [IsLocalRing S] (f : R →+* S)
-    (hf : ((residue S).comp f).EssFiniteType) : f.EssFiniteType := by
-  let _ := f.toAlgebra
-  have : Algebra.EssFiniteType R (ResidueField S) := hf
-  exact Algebra.EssFiniteType.of_isArtinianRing_of_residueField R S

@@ -51,6 +51,7 @@ noncomputable def sigmaIndex (φ : Z ⟶ ∐ fun _ : S ↦ W) : C(Z, S) :=
     (continuous_sigma_iff.2 fun _ ↦ continuous_const).comp
       ((sigmaMk fun _ : S ↦ W).symm.continuous.comp φ.continuous)⟩
 
+omit [DiscreteTopology S] in
 lemma sigmaIndex_eq_iff (φ : Z ⟶ ∐ fun _ : S ↦ W) (z : Z) (s : S) :
     sigmaIndex φ z = s ↔ φ z ∈ Set.range (Sigma.ι (fun _ : S ↦ W) s) := by
   constructor
@@ -62,6 +63,7 @@ lemma sigmaIndex_eq_iff (φ : Z ⟶ ∐ fun _ : S ↦ W) (z : Z) (s : S) :
     change ((sigmaMk fun _ : S ↦ W).symm (φ z)).1 = s
     rw [← hw, ← sigmaMk_mk, Homeomorph.symm_apply_apply]
 
+omit [DiscreteTopology S] in
 lemma sigmaIndex_comp {Z' : Scheme.{u}} (h : Z' ⟶ Z) (φ : Z ⟶ ∐ fun _ : S ↦ W) :
     sigmaIndex (h ≫ φ) = (sigmaIndex φ).comp h.base.hom := by
   ext z

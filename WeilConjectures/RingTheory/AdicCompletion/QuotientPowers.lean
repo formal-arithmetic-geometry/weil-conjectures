@@ -13,19 +13,18 @@ public import Mathlib.RingTheory.TensorProduct.Quotient
 /-!
 # Ring maps which are isomorphisms modulo powers of an ideal
 
-Let `f : A → B` be a ring map and `I ⊆ A` an ideal.
-
-* If `f` is flat and `A / I → B / IB` is bijective, then `A / Iⁿ → B / IⁿB` is bijective for
-  every `n` (Stacks, proof of Lemma 0AGU).
-* If all maps `A / Iⁿ → B / IⁿB` are bijective, then `f` induces a ring isomorphism of adic
-  completions `Â_I ≃ B̂_{IB}` compatible with the completion maps (Stacks, Lemma 0AGV).
+Let `f : A → B` be a ring map and `I ⊆ A` an ideal. If all maps `A / Iⁿ → B / IⁿB` are
+bijective, then `f` induces a ring isomorphism of adic completions `Â_I ≃ B̂_{IB}` compatible
+with the completion maps (Stacks, Lemma 0AGV). For flat `f` with `A / I → B / IB` bijective,
+the bijectivity of all `A / Iⁿ → B / IⁿB` (Stacks, proof of Lemma 0AGU) is
+`RingHom.bijective_quotientMap_pow_of_flat` in
+`WeilConjectures.RingTheory.BijectiveQuotientMapPowOfFlat`.
 
 We also construct the ring map `AdicCompletion.mapRingHom f I : Â_I → B̂_{IB}` induced by `f`.
 
 ## Main results
 
 - `RingHom.injective_of_flat_of_surjective_of_le_nilpotent`
-- `RingHom.bijective_quotientMap_pow_of_flat`
 - `AdicCompletion.mapRingHom`
 - `AdicCompletion.exists_ringEquiv_of_bijective_quotientMap`
 
@@ -71,59 +70,6 @@ theorem Ideal.range_sup_pow_smul_top_eq_top [Algebra A B] (I : Ideal A)
     refine top_le_iff.mp ?_
     calc ⊤ = LinearMap.range (Algebra.linearMap A B) ⊔ I ^ n • ⊤ := ih.symm
       _ ≤ _ := sup_le le_sup_left key
-
-/-- Let `φ : A → B` be a flat ring map and `I ⊆ A` an ideal such that `A / I → B / IB` is an
-isomorphism. Then `A / Iⁿ → B / IⁿB` is an isomorphism for every `n` (in particular for every
-`n ≥ 1`). (blueprint: `lem-weil-pbc-flat-iso-mod-ideal-powers`) -/
-theorem RingHom.bijective_quotientMap_pow_of_flat (φ : A →+* B) (hφ : φ.Flat) (I : Ideal A)
-    (h1 : Function.Bijective (Ideal.quotientMap (I.map φ) φ le_comap_map)) (n : ℕ) :
-    Function.Bijective (Ideal.quotientMap ((I ^ n).map φ) φ le_comap_map) := by
-  let _ := φ.toAlgebra
-  have : Module.Flat A B := hφ
-  have hφ' : φ = algebraMap A B := rfl
-  -- surjectivity
-  have hsurj : Function.Surjective (Ideal.quotientMap ((I ^ n).map φ) φ le_comap_map) := by
-    have hN : LinearMap.range (Algebra.linearMap A B) ⊔ I • ⊤ = ⊤ := by
-      rw [eq_top_iff]
-      intro b _
-      obtain ⟨a', ha'⟩ := h1.2 (Ideal.Quotient.mk _ b)
-      obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a'
-      rw [Ideal.quotientMap_mk, Ideal.Quotient.eq] at ha'
-      rw [← add_sub_cancel (φ a) b]
-      refine Submodule.add_mem_sup ⟨a, rfl⟩ ?_
-      rw [Ideal.smul_top_eq_map, Submodule.restrictScalars_mem, ← neg_sub, ← hφ']
-      exact neg_mem ha'
-    intro y
-    obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective y
-    have hb : b ∈ LinearMap.range (Algebra.linearMap A B) ⊔ I ^ n • ⊤ := by
-      rw [Ideal.range_sup_pow_smul_top_eq_top I hN n]; trivial
-    obtain ⟨y, ⟨a, rfl⟩, z, hz, rfl⟩ := Submodule.mem_sup.mp hb
-    refine ⟨Ideal.Quotient.mk _ a, ?_⟩
-    rw [Ideal.quotientMap_mk, Ideal.Quotient.eq]
-    rw [Ideal.smul_top_eq_map, Submodule.restrictScalars_mem, ← hφ'] at hz
-    simpa [hφ'] using neg_mem hz
-  refine ⟨?_, hsurj⟩
-  obtain _ | k := n
-  · have : Subsingleton (A ⧸ I ^ 0) := Ideal.Quotient.subsingleton_iff.mpr (by simp)
-    exact Function.injective_of_subsingleton _
-  -- injectivity
-  have hflat : (Ideal.quotientMap ((I ^ (k + 1)).map φ) φ le_comap_map).Flat := by
-    have e := Algebra.TensorProduct.quotIdealMapEquivQuotTensor B (I ^ (k + 1))
-    have : Module.Flat (A ⧸ I ^ (k + 1)) (B ⧸ (I ^ (k + 1)).map (algebraMap A B)) :=
-      Module.Flat.of_linearEquiv e.toLinearEquiv
-    exact RingHom.flat_algebraMap_iff.mpr this
-  refine RingHom.injective_of_flat_of_surjective_of_le_nilpotent _ hflat hsurj
-    (K := I.map (Ideal.Quotient.mk (I ^ (k + 1)))) ?_ (n := k) ?_
-  · intro x hx
-    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
-    rw [RingHom.mem_ker, Ideal.quotientMap_mk, Ideal.Quotient.eq_zero_iff_mem] at hx
-    have : Ideal.quotientMap (I.map φ) φ le_comap_map (Ideal.Quotient.mk I a) = 0 := by
-      rw [Ideal.quotientMap_mk, Ideal.Quotient.eq_zero_iff_mem]
-      exact Ideal.map_mono (Ideal.pow_le_self (Nat.succ_ne_zero k)) hx
-    rw [← map_zero (Ideal.quotientMap (I.map φ) φ le_comap_map)] at this
-    have ha := Ideal.Quotient.eq_zero_iff_mem.mp (h1.1 this)
-    exact Ideal.mem_map_of_mem _ ha
-  · rw [← Ideal.map_pow, Ideal.map_quotient_self]
 
 namespace AdicCompletion
 
