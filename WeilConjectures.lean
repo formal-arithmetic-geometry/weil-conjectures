@@ -8473,7 +8473,6 @@ public import WeilConjectures.Compactification.IsomorphismNearClosure
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.Over
-public import WeilConjectures.Compactification.OverRefinement
 public import WeilConjectures.Compactification.OverRefinementBaseChange
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.ProperOpenSection
