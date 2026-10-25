@@ -40,7 +40,7 @@ the Leray isomorphism. Complete `η` to a distinguished triangle `K ⟶ Rs_* s^*
 
 universe u
 
-open CategoryTheory Limits Opposite Pretriangulated
+open CategoryTheory Limits Opposite Pretriangulated ZeroObject
 
 namespace AlgebraicGeometry.Etale
 
@@ -89,7 +89,7 @@ pair `(R, 𝔪)`). -/
 instance isIso_globalSectionsUpperStarMap_closedGeometricPoint
     (F : Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (closedGeometricPoint R) F) :=
-  isIso_globalSectionsUpperStarMap_of_henselianRing (IsLocalRing.maximalIdeal R) (𝟙 _)
+  isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal R) (𝟙 _)
     (closedGeometricPoint R) (𝟙 _) IsPullback.of_id_snd F
 
 /-- Over a strictly henselian local ring `R`, a complex `C` of étale sheaves on `Spec R` whose
@@ -109,7 +109,8 @@ lemma isZero_rightDerivedGlobalSections_of_isZero_upperStar_closedGeometricPoint
       refine IsZero.of_iso ?_ (asIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ)
         (closedGeometricPoint R) ((DerivedCategory.homologyFunctor _ n).obj C)))
       refine Functor.map_isZero _ (IsZero.of_iso ?_
-        ((Functor.mapDerivedCategoryHomologyFunctorIso _ n).app C))
+        ((Functor.mapDerivedCategoryHomologyFunctorIso
+          ((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]) n).app C))
       exact Functor.map_isZero _ hC
     exact isIso_of_source_target_iso_zero _ hn.isoZero
       ((Functor.map_isZero _ (isZero_zero _)).isoZero)
@@ -123,11 +124,13 @@ theorem isIso_globalSectionsRestriction_closedGeometricPoint
     (K : DerivedCategory (Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (globalSectionsRestriction (closedGeometricPoint R) K) := by
   let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (closedGeometricPoint R)
-  have : IsIso (((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map
+  have hη : IsIso (((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map
       (adj.unit.app K)) := by
     have : IsIso (((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map
         (adj.unit.app K) ≫ adj.counit.app _) := by
-      rw [adj.left_triangle_components]
+      have e := adj.left_triangle_components K
+      dsimp only [Functor.id_obj, Functor.comp_obj] at e
+      erw [e]
       infer_instance
     exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
   have : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of R))).IsTriangulated :=
@@ -136,7 +139,7 @@ theorem isIso_globalSectionsRestriction_closedGeometricPoint
   obtain ⟨C, g, h, hT⟩ := distinguished_cocone_triangle (adj.unit.app K)
   have hC := (Triangle.isZero₃_iff_isIso₁ _
     (((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map_distinguished _
-      hT)).2 (by dsimp; infer_instance)
+      hT)).2 (by dsimp; exact hη)
   have : IsIso ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of R))).map
       (adj.unit.app K)) :=
     (Triangle.isZero₃_iff_isIso₁ _
