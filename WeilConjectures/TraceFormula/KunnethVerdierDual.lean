@@ -25,9 +25,8 @@ as a function of `N`, in which it is contravariant.
   left dual and the exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp^! M` is an isomorphism, then `κ_{M,N}`
   is an isomorphism, since `κ = RHom(1, α) ∘ β` and the external Hom map `β` is an isomorphism for
   dualizable `N`.
-* **Naturality** (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_right_whiskerLeft`):
-  `κ_{M,N}` is natural
-  in `N`.
+* **Naturality** (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_right_pre`): `κ_{M,N}` is
+  natural in `N`.
 * **Two out of three** (`ProEtale.CondensedRing.isIso_kunnethVerdierMap_of_triangEnvelope_right`):
   the objects `N` such that `κ_{M,N⟦n⟧}` is an isomorphism for all `n` form a triangulated
   subcategory closed under retracts. No compatibility of `κ` with the shifts in `N` is used:
@@ -68,6 +67,12 @@ lemma externalHomMap_eq_externalIhomMap {C₁ C₂ C : Type*} [Category* C₁] [
 namespace MonoidalClosed
 
 variable {𝒞 : Type*} [Category* 𝒞] [MonoidalCategory 𝒞] [MonoidalClosed 𝒞]
+
+/-- Precomposition with an isomorphism is an isomorphism. -/
+lemma isIso_pre_app_of_isIso {A B : 𝒞} (f : B ⟶ A) [IsIso f] (Z : 𝒞) :
+    IsIso ((pre f).app Z) :=
+  ⟨(pre (inv f)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
+    by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
 
 /-- The internal uncurrying `[y', [x, z]] ⟶ [x ⊗ y', z]` is natural in `y'`. -/
 @[reassoc]
@@ -262,7 +267,7 @@ theorem isIso_kunnethVerdierMap_of_exactPairing (M : Dᵇc(X.left)⟦Profinite.p
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) (𝟙_ _) (𝟙_ _) M N' N
     (dualizingComplex' ℓ Y)
-  have := isIso_pre_app (unitExternalMap
+  have := isIso_pre_app_of_isIso (unitExternalMap
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) N)
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ⊗
@@ -282,8 +287,7 @@ M ⊠ D_Y N ───── κ_{M,N} ─────▶ RHom(Lq^* N, Rp^! M)
 ```
 commutes. -/
 @[reassoc]
-lemma kunnethVerdierMap_naturality_right_whiskerLeft
-    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+lemma kunnethVerdierMap_naturality_right_pre (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {N N' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : N ⟶ N') :
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
         (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
@@ -321,7 +325,7 @@ variable (Y) in
 noncomputable def kunnethVerdierNatTransRight (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     kunnethVerdierSource ℓ Y M ⟶ kunnethVerdierTarget ℓ Y M where
   app N := kunnethVerdierMap ℓ M N.unop
-  naturality _ _ f := kunnethVerdierMap_naturality_right_whiskerLeft ℓ M f.unop
+  naturality _ _ f := kunnethVerdierMap_naturality_right_pre ℓ M f.unop
 
 instance (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (kunnethVerdierSource ℓ Y M).PreservesZeroMorphisms := by

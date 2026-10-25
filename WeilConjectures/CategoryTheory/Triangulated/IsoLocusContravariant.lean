@@ -124,7 +124,14 @@ variable {S T : Cᵒᵖ ⥤ D}
 
 /-- **The five lemma for a natural transformation of contravariant functors.** Let `κ : S ⟶ T`
 with `S` and `T` satisfying `IsHomExact`. For a distinguished triangle `N₁ ⟶ N₂ ⟶ N₃ ⟶ N₁⟦1⟧`,
-if `κ` is an isomorphism at `N₁`, `N₃`, `N₁⟦1⟧` and `N₃⟦-1⟧`, it is an isomorphism at `N₂`. -/
+if `κ` is an isomorphism at `N₁`, `N₃`, `N₁⟦1⟧` and `N₃⟦-1⟧`, it is an isomorphism at `N₂`: for
+every `T'`, the rows of
+```
+(S N₁⟦1⟧, T') ⟶ (S N₃, T') ⟶ (S N₂, T') ⟶ (S N₁, T') ⟶ (S N₃⟦-1⟧, T')
+      ▲                ▲              ▲              ▲                 ▲
+(T N₁⟦1⟧, T') ⟶ (T N₃, T') ⟶ (T N₂, T') ⟶ (T N₁, T') ⟶ (T N₃⟦-1⟧, T')
+```
+(the vertical maps precomposition with `κ`) are exact in the middle, so the five lemma applies. -/
 lemma isIso_app_obj₂_of_isHomExact [S.PreservesZeroMorphisms] [T.PreservesZeroMorphisms]
     [S.IsHomExact] [T.IsHomExact] (κ : S ⟶ T) (Tr : Triangle C) (hTr : Tr ∈ distTriang C)
     (h₁ : IsIso (κ.app (op Tr.obj₁))) (h₃ : IsIso (κ.app (op Tr.obj₃)))

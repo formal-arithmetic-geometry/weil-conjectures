@@ -104,13 +104,13 @@ noncomputable def stalkFrobeniusTrace {x : P ⟶ Z.left} (hx : x ≫ e.hom.left 
     (φ : (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M ⟶ M) :
     End (MonoidalCategory.tensorUnit (Mod (Sheaf (Scheme.ProEt.topology P) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P))) :=
-  categoricalTrace (stalkFrobenius ℓ τ e hx φ)
+  traceOrZero (stalkFrobenius ℓ τ e hx φ)
 
 lemma stalkFrobeniusTrace_eq {x : P ⟶ Z.left} (hx : x ≫ e.hom.left = σ ≫ x)
     {M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)}
     (φ : (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M ⟶ M) :
-    stalkFrobeniusTrace ℓ τ e hx φ = categoricalTrace (stalkFrobenius ℓ τ e hx φ) :=
+    stalkFrobeniusTrace ℓ τ e hx φ = traceOrZero (stalkFrobenius ℓ τ e hx φ) :=
   rfl
 
 /-- The stalk at a point `x̄ : P ⟶ Z` with `x̄ ≫ e = σ ≫ x̄` of Weil sheaves, with its Frobenius
@@ -138,7 +138,7 @@ lemma WeilSheaf.pointStalkFunctor_obj_str_hom {x : P ⟶ Z.left} (hx : x ≫ e.h
 lemma stalkFrobeniusTrace_congr {x : P ⟶ Z.left} (hx : x ≫ e.hom.left = σ ≫ x)
     {F G : WeilSheaf ℓ e} (i : F ≅ G) :
     stalkFrobeniusTrace ℓ τ e hx F.str.hom = stalkFrobeniusTrace ℓ τ e hx G.str.hom := by
-  have h := IsoAlgebra.categoricalTrace_str_congr ((WeilSheaf.pointStalkFunctor ℓ τ e hx).mapIso i)
+  have h := IsoAlgebra.traceOrZero_str_congr ((WeilSheaf.pointStalkFunctor ℓ τ e hx).mapIso i)
   rw [WeilSheaf.pointStalkFunctor_obj_str_hom, WeilSheaf.pointStalkFunctor_obj_str_hom] at h
   exact h.symm
 
@@ -224,7 +224,7 @@ theorem stalkFrobeniusTrace_lowerStar [IsFinite f.left] [Etale f.left] [IsIso σ
   have := Fintype.ofFinite (FibrePoints f.left y)
   obtain ⟨hlim⟩ := isLimit_stalkLowerStarFan (Profinite.padicAlgClRingObj ℓ) f.left y eP F.carrier
   have hsq := (commSq_left_of_comp_eq eX eY hf).w
-  rw [stalkFrobeniusTrace_eq, categoricalTrace_eq_sum_of_isLimit_fan _ hlim hF _
+  rw [stalkFrobeniusTrace_eq, traceOrZero_eq_sum_of_isLimit_fan _ hlim hF _
     (fun x ↦ x.1 ≫ eX.hom.left = σ ≫ x.1) (fun x h ↦ stalkFrobenius ℓ τ eX h F.str.hom)
     (fun x h ↦ stalkFrobenius_lowerStar_comp_stalkLowerStarProj ℓ eX eY hf τ hy x.2 x.2 h F)
     (fun x h ↦ ⟨⟨inv σ ≫ x.1 ≫ eX.hom.left, by
@@ -238,7 +238,7 @@ theorem stalkFrobeniusTrace_lowerStar [IsFinite f.left] [Etale f.left] [IsIso σ
         (by rw [IsIso.hom_inv_id_assoc]) F⟩)]
   rw [← finsum_eq_sum_of_fintype]
   set G := fun x : FibrePoints f.left y ↦ if h : x.1 ≫ eX.hom.left = σ ≫ x.1 then
-    categoricalTrace (stalkFrobenius ℓ τ eX h F.str.hom) else 0 with hG
+    traceOrZero (stalkFrobenius ℓ τ eX h F.str.hom) else 0 with hG
   have hR : (∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1},
       stalkFrobeniusTrace ℓ τ eX x.2 F.str.hom) =
       ∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1}, G x.1 :=

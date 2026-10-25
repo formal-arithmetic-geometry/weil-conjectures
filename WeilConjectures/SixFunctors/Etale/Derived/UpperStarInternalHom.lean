@@ -49,7 +49,7 @@ is the restriction to the slice site `X_ét/U`, which has an exact left adjoint 
 comparison is conjugate to the projection map `u_!(Lu^*M ⊗ᴸ T) ⟶ M ⊗ᴸ u_!T` of the derived
 adjunction `D(u_!) ⊣ Lu^*`, an isomorphism by the derived projection formula
 (`AlgebraicGeometry.Etale.isIso_projectionMap_derivedEtaleLowerShriek`). -/
-theorem isIso_ihomComparison_leftDerivedUpperStar_of_etale [Finite Λ] {U X : Scheme.{u}}
+theorem isIso_ihomComparison_leftDerivedUpperStar_of_etale {U X : Scheme.{u}}
     (u : U ⟶ X) [Etale u]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) u

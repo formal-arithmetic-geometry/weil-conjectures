@@ -160,7 +160,8 @@ instance isLocalizing_localizingClosureInverseImage
     exact ⟨hX, P₂.localizingClosure.prop_of_isColimit
       (isColimitOfPreserves (P₁.localizingClosure.ι ⋙ Φ) hc) fun j ↦ (h.prop_diag_obj j).2⟩⟩
 
-/-- The argument of blueprint `sk-prop-proper-image-localizing`: let `Φ : C₁ ⥤ C₂` be a
+/-- The argument of blueprint `sk-prop-proper-image-localizing` (its detailed node
+`det-proper-image-localizing-principle`): let `Φ : C₁ ⥤ C₂` be a
 triangulated functor mapping `P₁` into `Loc(P₂)`, whose restriction to `Loc(P₁)` preserves
 coproducts. Then `Φ` maps `Loc(P₁)` into `Loc(P₂)`. -/
 theorem localizingClosure_obj_of_le

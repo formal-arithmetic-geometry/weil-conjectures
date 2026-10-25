@@ -47,12 +47,6 @@ namespace Correspondence.FixedLocus
 
 variable {c : Correspondence ℓ K} (F : c.FixedLocus)
 
-/-- The inclusion of the fixed locus is a closed immersion: it is the base change of the
-diagonal. -/
-instance isClosedImmersion_ι : IsClosedImmersion F.ι.left :=
-  MorphismProperty.of_isPullback (P := @IsClosedImmersion)
-    (F.isPullback.map (Over.forget _)).flip (inferInstanceAs (IsClosedImmersion (diag X).left))
-
 set_option maxHeartbeats 1000000 in
 -- the pullbacks and shrieks of bounded constructible complexes are unfolded in defeq checks
 /-- **The exceptional adjoint of the support isomorphism** (blueprint

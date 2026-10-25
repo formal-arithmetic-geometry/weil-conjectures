@@ -13,7 +13,7 @@ public import WeilConjectures.ZetaSeries
 # The points of degree `n + 1` for the identity are the `𝔽_{q^{n+1}}`-rational points
 
 For a scheme `X` over a finite field `k = 𝔽_q`, the points of degree `n + 1` for the identity
-(`ProEtale.CondensedRing.frobeniusFixedPoints (Iso.refl X) n`) are the geometric points
+(`ProEtale.CondensedRing.frobeniusFixedPoints (Iso.refl X) (n + 1)`) are the geometric points
 `x̄ : Spec k̄ ⟶ X` over `Spec k` with `σ^{n+1} ≫ x̄ = x̄`. They are in bijection with the
 `𝔽_{q^{n+1}}`-rational points of `X`: for the embedding `ι : 𝔽_{q^{n+1}} ↪ k̄` chosen by
 `IsAlgClosed.lift`, a rational point `y : Spec 𝔽_{q^{n+1}} ⟶ X` gives the geometric point
@@ -23,7 +23,7 @@ For a scheme `X` over a finite field `k = 𝔽_q`, the points of degree `n + 1` 
 ## Main definitions
 
 - `ProEtale.CondensedRing.fieldPointsEquivFrobeniusFixedPointsRefl`: the bijection
-  `X(𝔽_{q^{n+1}}) ≃ frobeniusFixedPoints (Iso.refl X) n`, with
+  `X(𝔽_{q^{n+1}}) ≃ frobeniusFixedPoints (Iso.refl X) (n + 1)`, with
   `ProEtale.CondensedRing.fieldPointsEquivFrobeniusFixedPointsRefl_apply_coe`: the geometric point
   of a rational point `y` is `Spec ι ≫ y`.
 
@@ -101,11 +101,11 @@ lemma mem_fieldRange_lift_of_geometricFrobenius_pow (n : ℕ) {y : AlgebraicClos
 
 /-- `σ^{n+1}` acts trivially on `Spec 𝔽_{q^{n+1}}` through the embedding `ι` chosen by
 `IsAlgClosed.lift`: `σ^{n+1} ≫ Spec ι = Spec ι`. -/
-lemma geometricFrobeniusField_powSucc_hom_comp_specMap_lift (n : ℕ) :
-    ((geometricFrobeniusField k).powSucc n).hom ≫
+lemma geometricFrobeniusField_pow_hom_comp_specMap_lift (n : ℕ) :
+    ((geometricFrobeniusField k).pow (n + 1)).hom ≫
         Spec.map (CommRingCat.ofHom (liftAlgebraicClosure k (n + 1)).toRingHom) =
       Spec.map (CommRingCat.ofHom (liftAlgebraicClosure k (n + 1)).toRingHom) := by
-  rw [Iso.powSucc_hom_eq_pow, geometricFrobeniusField_hom_pow, ← Spec.map_comp]
+  rw [Iso.pow_hom_eq_pow, geometricFrobeniusField_hom_pow, ← Spec.map_comp]
   congr 1
   ext a
   exact geometricFrobenius_pow_lift_apply n a
@@ -114,10 +114,10 @@ lemma geometricFrobeniusField_powSucc_hom_comp_specMap_lift (n : ℕ) :
 embedding `ι : 𝔽_{q^{n+1}} ↪ k̄` chosen by `IsAlgClosed.lift`. -/
 lemma exists_specMap_lift_comp_eq {T : Scheme.{u}} (n : ℕ)
     (x : Spec (.of (AlgebraicClosure k)) ⟶ T)
-    (hx : ((geometricFrobeniusField k).powSucc n).hom ≫ x = x) :
+    (hx : ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x = x) :
     ∃ g : Spec (.of (galoisExtension k (n + 1))) ⟶ T,
       Spec.map (CommRingCat.ofHom (liftAlgebraicClosure k (n + 1)).toRingHom) ≫ g = x := by
-  rw [Iso.powSucc_hom_eq_pow] at hx
+  rw [Iso.pow_hom_eq_pow] at hx
   obtain ⟨g, hg⟩ := exists_comp_eq_of_geometricFrobenius_pow (n + 1) x hx
   set ι := liftAlgebraicClosure k (n + 1)
   have hle : geometricFrobeniusPowFixedField k (n + 1) ≤ ι.fieldRange :=
@@ -148,26 +148,26 @@ variable {X : Over (Spec (.of k))} (n : ℕ)
 embedding `ι` chosen by `IsAlgClosed.lift`, is a point of degree `n + 1` for the identity. -/
 noncomputable def frobeniusFixedPointsReflOfFieldPoint
     (y : X.hom.fieldPoints (galoisExtension k (n + 1))) :
-    frobeniusFixedPoints (Iso.refl X) n :=
+    frobeniusFixedPoints (Iso.refl X) (n + 1) :=
   ⟨Spec.map (CommRingCat.ofHom (liftAlgebraicClosure k (n + 1)).toRingHom) ≫ y.1, by
     rw [Category.assoc, y.2, ← Spec.map_comp, specAlgebraicClosure]
     congr 1
     ext a
     exact (liftAlgebraicClosure k (n + 1)).commutes a, by
-    rw [Iso.powSucc_refl, Iso.refl_hom, Over.id_left, Category.comp_id, ← Category.assoc,
-      geometricFrobeniusField_powSucc_hom_comp_specMap_lift]⟩
+    rw [Iso.pow_refl, Iso.refl_hom, Over.id_left, Category.comp_id, ← Category.assoc,
+      geometricFrobeniusField_pow_hom_comp_specMap_lift]⟩
 
 /-- **The points of degree `n + 1` for the identity are the `𝔽_{q^{n+1}}`-rational points**: the
-bijection `X(𝔽_{q^{n+1}}) ≃ frobeniusFixedPoints (Iso.refl X) n`, `y ↦ Spec ι ≫ y`, for the
+bijection `X(𝔽_{q^{n+1}}) ≃ frobeniusFixedPoints (Iso.refl X) (n + 1)`, `y ↦ Spec ι ≫ y`, for the
 embedding `ι : 𝔽_{q^{n+1}} ↪ k̄` chosen by `IsAlgClosed.lift`. A point of degree `n + 1` is fixed
 by `σ^{n+1}`, so it factors through `Spec ι` (`exists_specMap_lift_comp_eq`), uniquely since
 `Spec ι` is an epimorphism. -/
 noncomputable def fieldPointsEquivFrobeniusFixedPointsRefl :
-    X.hom.fieldPoints (galoisExtension k (n + 1)) ≃ frobeniusFixedPoints (Iso.refl X) n :=
+    X.hom.fieldPoints (galoisExtension k (n + 1)) ≃ frobeniusFixedPoints (Iso.refl X) (n + 1) :=
   Equiv.ofBijective (frobeniusFixedPointsReflOfFieldPoint n) (by
     refine ⟨fun y₁ y₂ h ↦ Subtype.ext ((cancel_epi _).1 (congrArg Subtype.val h)),
       fun ⟨x, hx₁, hx₂⟩ ↦ ?_⟩
-    rw [Iso.powSucc_refl, Iso.refl_hom, Over.id_left, Category.comp_id] at hx₂
+    rw [Iso.pow_refl, Iso.refl_hom, Over.id_left, Category.comp_id] at hx₂
     obtain ⟨g, hg⟩ := exists_specMap_lift_comp_eq n x hx₂.symm
     refine ⟨⟨g, ?_⟩, Subtype.ext hg⟩
     refine (cancel_epi

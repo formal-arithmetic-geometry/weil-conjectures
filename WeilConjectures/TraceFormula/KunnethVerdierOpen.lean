@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
-public import WeilConjectures.TraceFormula.KunnethVerdierOpenAux
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.SwapEvPairing
 public import WeilConjectures.TraceFormula.OrdinaryKunneth
 
 /-!
@@ -62,7 +62,7 @@ functors; it is a hypothesis of the results below.
 ## Implementation notes
 
 The diagram chases are carried out for abstract monoidal categories in
-`WeilConjectures.TraceFormula.KunnethVerdierOpenAux`. The tensor products of bounded
+`WeilConjectures.CategoryTheory.Monoidal.Closed.SwapEvPairing`. The tensor products of bounded
 constructible complexes are elaborated in two ways: through the monoidal structure of the full
 subcategory directly (`ObjectProperty.instMonoidalCategoryStructFullSubcategory`), as in the
 statements of `WeilConjectures.TraceFormula.KunnethVerdier`, or through the projection of the

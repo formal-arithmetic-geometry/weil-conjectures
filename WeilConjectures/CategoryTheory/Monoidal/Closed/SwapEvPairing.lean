@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 
 /-!
 
-# Formal lemmas for the restriction of the Künneth–Verdier map to an open subscheme
+# Pairings with the evaluation, and their transport along monoidal functors
 
 This file collects the category-theoretic statements behind
 `WeilConjectures.TraceFormula.KunnethVerdierOpen`, for abstract monoidal (closed, braided)

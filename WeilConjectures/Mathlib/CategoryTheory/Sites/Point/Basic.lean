@@ -45,7 +45,8 @@ namespace GrothendieckTopology.Point
 variable (Φ : Point.{w} J)
 
 /-- A point of a site whose fibre functor takes values in `Type w` may be seen as a point
-whose fibre functor takes values in `Type (max w w')`, by composing with `uliftFunctor`. -/
+whose fibre functor takes values in `Type (max w w')`, by composing with `uliftFunctor`
+(blueprint `lemma-openclosed-point-ulift`). -/
 @[simps fiber]
 noncomputable def ulift : Point.{max w w'} J where
   fiber := Φ.fiber ⋙ uliftFunctor.{w', w}
@@ -81,7 +82,8 @@ noncomputable def uliftPresheafFiberIso :
     (Functor.Final.colimIso (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).functor.op)
 
 /-- Taking the fibre of an `A`-valued sheaf at a point of a site does not depend on the
-universe in which the fibre functor of the point is considered. -/
+universe in which the fibre functor of the point is considered
+(blueprint `lemma-openclosed-point-ulift`). -/
 noncomputable def uliftSheafFiberIso :
     (Φ.ulift.{w'}).sheafFiber (A := A) ≅ Φ.sheafFiber (A := A) :=
   Functor.isoWhiskerLeft (sheafToPresheaf J A) (Φ.uliftPresheafFiberIso A)
