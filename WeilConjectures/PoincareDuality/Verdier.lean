@@ -197,9 +197,10 @@ instance : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=
 variable {X : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **Constructible Verdier biduality**: for the structure morphism `a : X ⟶ Spec k` of a
-separated `k`-scheme of finite type, the double-dual morphism `δ_K` for the dualizing complex
-`ω_X = Ra^! ℚ̄_ℓ` is an isomorphism for `K` bounded constructible. See the module docstring.
+/-- **Constructible Verdier biduality** (blueprint `sk-thm-pd-verdier-duality`): for the structure
+morphism `a : X ⟶ Spec k` of a separated `k`-scheme of finite type, the double-dual morphism `δ_K`
+for the dualizing complex `ω_X = Ra^! ℚ̄_ℓ` is an isomorphism for `K` bounded constructible. See the
+module docstring.
 
 The base must be `Spec k` (or at least regular): for `a = 𝟙` on a nodal curve and `K` the
 skyscraper `ℚ̄_ℓ` at the node, `𝔻𝔻K` has rank `9`. -/
