@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictionGenerization
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerVanishing
 public import WeilConjectures.TraceFormula.TransverseBoundary.TameLocalConstancy
@@ -60,7 +62,40 @@ theorem derivedGlobalSectionsRestriction_boundaryComplex_eq_zero [ConnectedSpace
     (sbar : Spec (.of Ω) ⟶ C.Y) (hs : C.z ∉ Set.range (sbar ≫ C.iY)) :
     Etale.derivedGlobalSectionsRestriction Λ sbar
       ((L((C.iY)^*[ModuleCat.{u + 1} Λ])).obj (C.boundaryComplex Λ E)) = 0 := by
-  sorry
+  have hz : C.z ∈ Set.range C.iX ∩ Set.range C.iY := C.range_inter ▸ rfl
+  obtain ⟨zY, hzY⟩ := hz.2
+  have hpre : C.iY ⁻¹' {C.z} = {zY} := by
+    ext y
+    simp only [Set.mem_preimage, Set.mem_singleton_iff]
+    exact ⟨fun h ↦ C.iY.isClosedEmbedding.injective (h.trans hzY.symm), fun h ↦ h ▸ hzY⟩
+  have hzYc : IsClosed ({zY} : Set C.Y) := hpre ▸ C.isClosed_singleton_z.preimage C.iY.continuous
+  have : IsLocallyNoetherian C.Y := LocallyOfFiniteType.isLocallyNoetherian C.iY
+  have : IrreducibleSpace C.Y := IsRegular.irreducibleSpace C.Y
+  have hO : C.puncturedY = ⟨({zY} : Set C.Y)ᶜ, hzYc.isOpen_compl⟩ := by
+    ext1
+    exact congrArg compl hpre
+  refine Etale.derivedGlobalSectionsRestriction_eq_zero_of_isZero_of_isLocallyConstant Λ zY hzYc _
+    ?_ ?_ ?_ sbar ?_
+  · obtain ⟨a, -, ha, -⟩ := hE.1
+    refine ⟨a, ?_⟩
+    have := ((C.i)_!open[ModuleCat.{u + 1} Λ]).isGE_mapDerivedCategory_obj E a
+    have : (C.boundaryComplex Λ E).IsGE a :=
+      ((C.j)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj
+        (((C.i)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) a
+    have := ((C.iY)^*[ModuleCat.{u + 1} Λ]).isGE_mapDerivedCategory_obj (C.boundaryComplex Λ E) a
+    exact DerivedCategory.TStructure.t.isGE_of_iso
+      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory _ C.iY).app _).symm a
+  · intro Ω _ _ zbar hz
+    refine (C.isZero_leftDerivedUpperStar_boundaryComplex hℓ Λ hΛ E hE (zbar ≫ C.iY) ?_).of_iso
+      ((Etale.leftDerivedUpperStarComp _ zbar C.iY).app _).symm
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, hz, Set.image_singleton, hzY]
+  · intro n
+    have := C.isFiniteLocallyConstantSheaf_homology_boundaryComplex hℓ Λ hΛ E hE n
+    rw [hO] at this
+    exact IsLocallyConstantSheaf.of_iso ((DerivedCategory.homologyFunctor _ n).mapIso
+      ((Etale.leftDerivedUpperStarComp _ _ C.iY).app _))
+  · rintro ⟨x, rfl⟩
+    exact hs ⟨x, by rw [Scheme.Hom.comp_apply, hzY]⟩
 
 include hℓ hΛ in
 /-- Blueprint `sk-lem-tf-transverse-boundary`: Transverse boundary calculation. For a bounded

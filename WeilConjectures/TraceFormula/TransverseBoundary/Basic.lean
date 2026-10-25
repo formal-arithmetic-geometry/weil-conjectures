@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
@@ -94,8 +95,8 @@ structure TransverseCorner where
   iY : Y ⟶ Z
   [isRegularImmersion_iX : IsRegularImmersion 1 iX]
   [isRegularImmersion_iY : IsRegularImmersion 1 iY]
-  isRegularLocalRing_X : ∀ x : X, IsRegularLocalRing (X.presheaf.stalk x)
-  isRegularLocalRing_Y : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)
+  [isRegular_X : IsRegular X]
+  [isRegular_Y : IsRegular Y]
   /-- The two divisors meet transversely. -/
   isRegularImmersion_inter : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX)
   /-- The corner point. -/
@@ -114,7 +115,8 @@ structure TransverseCorner where
   [isOpenImmersion_i : IsOpenImmersion i]
   range_i_j : Set.range (i ≫ j) = (Set.range iX ∪ Set.range iY)ᶜ
 
-attribute [instance] TransverseCorner.isLocallyNoetherian TransverseCorner.isRegularImmersion_iX
+attribute [instance] TransverseCorner.isLocallyNoetherian TransverseCorner.isRegular_X
+  TransverseCorner.isRegular_Y TransverseCorner.isRegularImmersion_iX
   TransverseCorner.isRegularImmersion_iY
   TransverseCorner.isOpenImmersion_j TransverseCorner.isOpenImmersion_i
 
