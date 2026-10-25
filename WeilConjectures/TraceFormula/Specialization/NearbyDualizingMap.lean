@@ -66,14 +66,17 @@ variable (k : Type u) [Field k] {k' : Type u} [Field k'] [Algebra k k']
 /-- A nearby-cycles model `M` of a `k`-scheme `X` with special fibre `X'` is a *trait model of `X`
 over the base* along `q : 𝒳 ⟶ S` and `g : 𝒳_Ω ⟶ Spec Ω` if it is of finite type over the trait
 `S = Spec k'⟦t⟧` along `q` and `g`, its identification `ε` factors through the total space, and
-the square `ε : 𝒳_Ω ⟶ X`, `g`, `X ⟶ Spec k`, `Spec Ω ⟶ S ⟶ Spec k` is a pullback, so that the
-geometric generic fibre is the base change `X ×_k Spec Ω`. -/
+`(ε, g) : 𝒳_Ω ⟶ X ×_k Spec Ω` is an open immersion into the base change of `X` along
+`Spec Ω ⟶ S ⟶ Spec k`, so that the geometric generic fibre is an open of `X_Ω` (it is all of `X_Ω`
+for the deformation to the normal cone, and an open of it for restrictions of models to opens of
+the total space). -/
 structure IsTraitModelOfBase {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))}
     (M : NearbyCyclesModel X.left X'.left) (q : M.total ⟶ trait k')
     (g : M.generic ⟶ Spec (.of (traitGenericField k'))) : Prop where
   isTraitModelOver : M.IsTraitModelOver q g
   exists_comp_ε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε
-  isPullback_ε : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k')
+  exists_openImmersion : ∃ u : M.generic ⟶ pullback X.hom (traitGenericPoint k' ≫ traitToBase k k'),
+    IsOpenImmersion u ∧ u ≫ pullback.fst _ _ = M.ε ∧ u ≫ pullback.snd _ _ = g
 
 variable {k} {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
@@ -98,8 +101,18 @@ noncomputable def toTrait (h : M.IsTraitModelOfBase k q g) :
   comm_j := h.isTraitModelOver.isPullback_j.w.symm
   comm_i := h.isTraitModelOver.isPullback_i.w.symm
   comm_ε := by
+    obtain ⟨u, -, hu₁, hu₂⟩ := h.exists_openImmersion
     rw [← traitModel_j_traitToBase]
-    exact h.isPullback_ε.w.symm
+    change g ≫ traitGenericPoint k' ≫ traitToBase k k' = M.ε ≫ X.hom
+    rw [← hu₁, ← hu₂, Category.assoc, Category.assoc, ← pullback.condition]
+
+/-- A model whose geometric generic fibre is the base change of `X` (a pullback square) is a trait
+model of `X` over the base. -/
+lemma of_isPullback (hM : M.IsTraitModelOver q g) (hε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε)
+    (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k')) :
+    M.IsTraitModelOfBase k q g :=
+  ⟨hM, hε, hgen.isoPullback.hom, inferInstance, hgen.isoPullback_hom_fst,
+    hgen.isoPullback_hom_snd⟩
 
 end IsTraitModelOfBase
 
