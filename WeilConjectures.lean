@@ -12981,6 +12981,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
 public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusGraphSquare
 public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusModel
+public import WeilConjectures.TraceFormula.CurveLocal.IntegralModelPointStalk
 public import WeilConjectures.TraceFormula.CurveLocal.LocalExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.Model
 public import WeilConjectures.TraceFormula.CurveLocal.ModelAxes
@@ -12999,6 +13000,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverProper
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCovers
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroDescent
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization
+public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroQbar
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTraceDescent
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
@@ -13071,6 +13073,7 @@ public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.PointFiberFunctor
 public import WeilConjectures.TraceFormula.PointFiberFunctorIntegral
+public import WeilConjectures.TraceFormula.PointFiberFunctorIntegralPerfect
 public import WeilConjectures.TraceFormula.PointFiberReduction
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
