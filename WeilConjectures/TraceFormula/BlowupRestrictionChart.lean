@@ -229,7 +229,8 @@ The configuration `(Z, X, Y)` with the blow-up map `φ : Z - Y ⟶ T - D` is a t
 configuration (`det-tf-blowup-configuration`), and the map `B - t ⟶ T - D` factors through
 `Z - Y` and, inside `Z`, through the strict transform `B' = Spec A'` of `B`, a finite disjoint
 union of strictly local schemes centred on `Y` (`det-tf-blowup-strict-transform`); so the
-restriction vanishes by `AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_transverse`. -/
+restriction vanishes by
+`AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_transverse`. -/
 theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClosed k] {ℓ : ℕ}
     [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (hΛ : IsNilpotent (ℓ : Λ)) {R : Type u} [CommRing R] [HenselianLocalRing R]
