@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalizatio
 
 This file sets up the classical étale models of blueprint `det-tf-restriction-zero-localization`
 (in the situation of `det-tf-supported-restriction`). Let `k` be an algebraically closed field,
-`f : X ⟶ Spec k` a separated smooth curve, `h : X ⟶ X` a `k`-endomorphism (in the blueprint the
+`f : X ⟶ Spec k` a separated quasi-compact smooth curve, `h : X ⟶ X` a `k`-endomorphism (in the blueprint the
 `m`-th power `Φ_X^m` of the `k`-linear Frobenius) and `y` a `k`-point of `X` fixed by `h` at which
 `h` contracts: `h^♯ 𝔪_y ⊆ 𝔪_y²` (for `Φ_X^m` this holds since `Φ_X^m(t - a) = (t - a)^{q^m}`
 in a local coordinate `t` with `t(y) = a`, see
@@ -55,6 +55,7 @@ structure CurveLocalModel where
   f : X ⟶ Spec (.of k)
   [smoothOfRelativeDimension : SmoothOfRelativeDimension 1 f]
   [isSeparated : IsSeparated f]
+  [quasiCompact : QuasiCompact f]
   /-- The endomorphism (the iterate of the Frobenius). -/
   h : X ⟶ X
   h_comp : h ≫ f = f
@@ -70,7 +71,7 @@ structure CurveLocalModel where
 
 namespace CurveLocalModel
 
-attribute [instance] smoothOfRelativeDimension isSeparated
+attribute [instance] smoothOfRelativeDimension isSeparated quasiCompact
 
 variable {k} (M : CurveLocalModel k)
 

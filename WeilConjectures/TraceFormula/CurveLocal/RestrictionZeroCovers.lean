@@ -6,9 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatConstructibleModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestriction
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverDatum
+public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverProperties
 
 /-!
 
@@ -67,8 +68,10 @@ theorem exists_flatConstructibleModel {Λ : Type (u + 1)} [CommRing Λ] [Finite 
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ M.X K) :
     ∃ P : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
       (∃ a b, IsBoundedFlatComplex Λ a b P) ∧ (∀ q : ℤ, IsConstructibleSheaf (P.X q)) ∧
-        Nonempty (K ≅ DerivedCategory.Q.obj P) :=
-  sorry
+        Nonempty (K ≅ DerivedCategory.Q.obj P) := by
+  have := SmoothOfRelativeDimension.smooth 1 M.f
+  have : CompactSpace M.X := QuasiCompact.compactSpace_of_compactSpace M.f
+  exact DerivedCategory.exists_flatConstructibleModel_of_locallyOfFiniteType M.f K hK
 
 /-- **Existence of the cover datum** (blueprint `det-tf-restriction-zero-covers` (i), first
 half): for bounded complexes `PL`, `PK` of flat constructible sheaves on `X` there is a cover
@@ -138,8 +141,37 @@ theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] (
           ((π)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj P) ≅
         ((strictLocalization s').homOfLE (inf_le_left :
           dD'.openComplement ⊓ dH'.openComplement ≤ dD'.openComplement))_!open[ModuleCat.{u + 1} Λ]
-          |>.mapDerivedCategory.obj E') :=
-  sorry
+          |>.mapDerivedCategory.obj E') := by
+  have hψM : ψ = M.ψ := by
+    rw [← cancel_mono M.O.ι, hψ, M.ψ_comp_ι]
+  subst hψM
+  have he : IsUnit ((D.e ^ 2 : ℕ) : Λ) := by
+    obtain ⟨n, hn⟩ := hΛ
+    have hcop : Nat.Coprime (D.e ^ 2) (ℓ ^ n) :=
+      Nat.Coprime.pow _ _ ((Nat.coprime_comm.1 ((Nat.Prime.coprime_iff_not_dvd
+        (Fact.out : ℓ.Prime)).2 D.not_dvd_e)))
+    obtain ⟨a, b, hab⟩ : ∃ a b : ℤ, a * (D.e ^ 2 : ℕ) + b * (ℓ ^ n : ℕ) = 1 := by
+      have h := Nat.gcd_eq_gcd_ab (D.e ^ 2) (ℓ ^ n)
+      rw [hcop.gcd_eq_one] at h
+      exact ⟨Nat.gcdA (D.e ^ 2) (ℓ ^ n), Nat.gcdB (D.e ^ 2) (ℓ ^ n), by
+        push_cast at h ⊢; linarith⟩
+    refine IsUnit.of_mul_eq_one (a : Λ) ?_
+    have := congrArg (Int.cast : ℤ → Λ) hab
+    push_cast at this
+    rw [hn, mul_zero, add_zero] at this
+    rw [mul_comm]
+    exact_mod_cast this
+  obtain ⟨hnD, hnH, hnB⟩ := D.nonempty_curves
+  obtain ⟨hdD, hdB⟩ := D.ringKrullDim_D'_B'
+  obtain ⟨hDB, hDH⟩ := D.tangentConesMeetAtOrigin
+  obtain ⟨πU, hfin, het, hdeg, hsq⟩ := D.exists_puncturedDiagonal_finite_etale
+  obtain ⟨E', hE', hiso⟩ := D.exists_E' hℓ L K hKy hPL hPK eL eK P eP
+  have : SmoothOfRelativeDimension 2 (pullback.fst D.fC D.fC ≫ D.fC) :=
+    show SmoothOfRelativeDimension (1 + 1) _ from inferInstance
+  exact ⟨D.S', pullback.fst D.fC D.fC ≫ D.fC, this, D.s', by simp [CoverDatum.s', D.c_comp_fC],
+    D.π, D.D', D.H', D.B', D.dD', D.dH', D.dB', inferInstance, inferInstance, inferInstance, hnD,
+    hnH, hnB, D.isDiscreteValuationRing_H', ⟨inferInstance, hdD⟩, ⟨inferInstance, hdB⟩, hDB, hDH,
+    D.openComplement_dD'_le, πU, hfin, het, D.e ^ 2, hdeg, he, hsq, E', hE', hiso⟩
 
 /-- **Prime-to-`ℓ` covers separating the graph and the diagonal** (blueprint
 `det-tf-restriction-zero-covers`, with the identification of
