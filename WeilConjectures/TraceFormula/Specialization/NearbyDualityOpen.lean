@@ -98,15 +98,16 @@ attribute [-instance] monoidalCategory_boundedConstructible
 
 namespace NearbyCyclesModel
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ]
-  [IsCommMonObj Λ] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+  [MonObj Λ] [IsCommMonObj Λ] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+  [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
+omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] in
 /-- The lax tensor map of nearby cycles on bounded constructible complexes is natural. -/
@@ -123,6 +124,7 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
   [QuasiCompact Y'.hom] [IsSeparated Y'.hom] {N : NearbyCyclesModel Y.left Y'.left}
   {j : Y ⟶ X} {j' : Y' ⟶ X'} (φ : N.Hom M j.left j'.left)
 
+omit [IsEllAdicFinitenessCoefficient ℓ Λ] in
 /-- The restricted pullback exchange is `NearbyCyclesModel.liftExchange` of the ambient one. -/
 lemma Hom.boundedConstructiblePullbackExchange_eq_liftExchange'
     (hN : N.PreservesBoundedConstructible Λ) (hM : M.PreservesBoundedConstructible Λ) :
@@ -230,6 +232,103 @@ theorem nearbyDualityMap_restrict_boundedConstructible
     (fun x y ↦ boundedConstructibleTensorMap_natural hN x y)
     (φ.boundedConstructiblePullbackExchange ℓ hN hM)
     (fun A B ↦ φ.boundedConstructiblePullbackExchange_tensor hN hM A B) hθ K
+
+section OpenIhom
+
+variable {V W : Over (Spec (.of k'))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
+  [IsSeparated V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
+  (i : V ⟶ W) [IsOpenImmersion i.left]
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
+/-- The projection map of `j_! ⊣ Lj^*` on `Dᵇc` is invertible
+(`isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction`),
+for the monoidal structure `ObjectProperty.fullMonoidalSubcategory` of `Dᵇc`. -/
+private lemma isIso_projectionMap_openImmersion_aux
+    (A : Dᵇc(W.left)⟦Λ⟧) :
+    IsIso (Functor.Monoidal.projectionMap
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i) A) := by
+  set adj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i
+  have hη (T : Dᵇc(V.left)⟦Λ⟧) : IsIso (adj.unit.app T) := by
+    have : IsIso ((boundedConstructible _).ι.map (adj.unit.app T)) := by
+      simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
+        Adjunction.map_restrictFullyFaithful_unit_app]
+      have := NatIso.isIso_app_of_isIso
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ i.left).unit
+        ((boundedConstructible _).ι.obj T)
+      exact IsIso.comp_isIso' this inferInstance
+    exact isIso_of_reflects_iso _ (boundedConstructible _).ι
+  refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun T ↦ ?_
+  have hε : IsIso (adj.counit.app (A ⊗ (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj
+      T)) := by
+    have : IsIso ((boundedConstructible _).ι.map (adj.counit.app
+        (A ⊗ (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj T))) := by
+      simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
+        Adjunction.map_restrictFullyFaithful_counit_app]
+      have :=
+        isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit_app_tensorObj
+          Λ i.left A.obj T.obj
+      exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance this)
+    exact isIso_of_reflects_iso _ (boundedConstructible _).ι
+  have := hη T
+  dsimp only [Functor.Monoidal.projectionMap]
+  infer_instance
+
+/-- The comparison `j^* D ⟶ D j^*` of the duality functors along an open immersion `j`, for an
+isomorphism `ρ : j^* ω ≅ ω'`, is an isomorphism: it is the internal-hom comparison of `j^*`, which
+is invertible, followed by `ρ`. -/
+lemma isIso_nearbyDualityMap_upperStar_of_isOpenImmersion {Ω : Dᵇc(W.left)⟦Λ⟧}
+    {Ω' : Dᵇc(V.left)⟦Λ⟧} (ρ : (boundedConstructibleUpperStar Λ ℓ i).obj Ω ≅ Ω')
+    (A : Dᵇc(W.left)⟦Λ⟧) :
+    IsIso (Verdier.nearbyDualityMap (Functor.LaxMonoidal.μ
+      (boundedConstructibleUpperStar Λ ℓ i)) ρ.hom A) := by
+  rw [Verdier.nearbyDualityMap_eq_ihomComparison]
+  have := isIso_projectionMap_openImmersion_aux (Λ := Λ) (ℓ := ℓ) i
+  have := Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i) A
+  infer_instance
+
+end OpenIhom
+
+variable (ℓ) [IsSepClosed k'] [Algebra k k'] [IsOpenImmersion j.left] [IsOpenImmersion j'.left]
+  {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+  {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
+
+/-- **Nearby duality and open restriction** (blueprint `det-tf-nearby-duality-proper` (2)): for a
+morphism `φ : N ⟶ M` of trait models over the base, over open immersions `j : Y ⟶ X` and
+`j' : Y' ⟶ X'`, whose map of total spaces is an open immersion compatible with the structure
+morphisms and whose square of geometric generic fibres is cartesian, the restriction `j'^* δ_{M,K}`
+of the duality map of `M` is an isomorphism if and only if the duality map `δ_{N, j^* K}` of `N`
+is: they are identified up to isomorphisms by `nearbyDualityMap_restrict_boundedConstructible`,
+since the pullback exchange is invertible and `j^*` commutes with internal homs. -/
+theorem isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (hM : M.IsTraitModelOfBase k q g)
+    (hN : N.IsTraitModelOfBase k qN gN) [IsOpenImmersion φ.total]
+    (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : qN = φ.total ≫ q)
+    (hg : gN = φ.generic ≫ g) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
+        (nearbyDualityMap ℓ hM K)) ↔
+      IsIso (nearbyDualityMap ℓ hN
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) := by
+  have e := nearbyDualityMap_restrict_boundedConstructible φ (hN.preservesBoundedConstructible ℓ)
+    (hM.preservesBoundedConstructible ℓ) ((nearbyDualizingData k k' ℓ).θ hM)
+    ((nearbyDualizingData k k' ℓ).θ hN) (dualizingComplexUpperStarIso ℓ j).hom
+    (dualizingComplexUpperStarIso ℓ j').hom
+    ((nearbyDualizingData k k' ℓ).map_θ_comp_dualizingComplexUpperStarIso hM hN j j' φ hφ hq hg)
+    K
+  have : IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) :=
+    φ.isIso_pullbackExchange_of_isOpenImmersion _ hφ
+  have : IsIso (φ.boundedConstructiblePullbackExchange ℓ (hN.preservesBoundedConstructible ℓ)
+      (hM.preservesBoundedConstructible ℓ)) :=
+    φ.isIso_boundedConstructiblePullbackExchange ℓ _ _
+  have := isIso_nearbyDualityMap_upperStar_of_isOpenImmersion j' (dualizingComplexUpperStarIso ℓ j')
+    ((boundedConstructibleNearbyCycles (hM.preservesBoundedConstructible ℓ)).obj K)
+  have := isIso_nearbyDualityMap_upperStar_of_isOpenImmersion j (dualizingComplexUpperStarIso ℓ j) K
+  rw [← isIso_comp_right_iff _ (Verdier.nearbyDualityMap (Functor.LaxMonoidal.μ
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j'))
+    (dualizingComplexUpperStarIso ℓ j').hom
+    ((boundedConstructibleNearbyCycles (hM.preservesBoundedConstructible ℓ)).obj K))]
+  unfold nearbyDualityMap
+  rw [e, isIso_comp_left_iff, isIso_comp_left_iff, isIso_comp_right_iff]
 
 end NearbyCyclesModel
 
