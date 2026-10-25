@@ -353,8 +353,13 @@ lemma externalProductMap_comp_evaluationKernel
       externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ (toPoint X) f) ≫
         evaluationKernel ℓ K' := by
   rw [evaluationKernel, evaluationKernel, ← Adjunction.homEquiv_naturality_left,
-    ← Adjunction.homEquiv_naturality_left, diagUpperStarExternalProductIso_hom_naturality₂_assoc,
-    diagUpperStarExternalProductIso_hom_naturality₂_assoc, tensorHom_id_comp_ev_verdierDual]
+    ← Adjunction.homEquiv_naturality_left,
+    diagUpperStarExternalProductIso_hom_naturality₂_assoc ℓ f (𝟙 (verdierDual ℓ (toPoint X) K)),
+    diagUpperStarExternalProductIso_hom_naturality₂_assoc ℓ (𝟙 K') (verdierDualMap ℓ (toPoint X) f)]
+  exact congrArg (fun x ↦ ((boundedConstructibleUpperStarLowerStarAdjunction
+    (Profinite.padicAlgClRingObj ℓ) ℓ (diag X)).homEquiv _ _)
+      ((diagUpperStarExternalProductIso ℓ K' (verdierDual ℓ (toPoint X) K)).hom ≫ x))
+    (tensorHom_id_comp_ev_verdierDual ℓ f)
 
 end Evaluation
 

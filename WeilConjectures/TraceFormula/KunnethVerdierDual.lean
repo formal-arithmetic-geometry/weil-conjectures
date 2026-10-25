@@ -25,7 +25,8 @@ as a function of `N`, in which it is contravariant.
   left dual and the exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp^! M` is an isomorphism, then `κ_{M,N}`
   is an isomorphism, since `κ = RHom(1, α) ∘ β` and the external Hom map `β` is an isomorphism for
   dualizable `N`.
-* **Naturality** (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_right`): `κ_{M,N}` is natural
+* **Naturality** (`ProEtale.CondensedRing.kunnethVerdierMap_naturality_right_whiskerLeft`):
+  `κ_{M,N}` is natural
   in `N`.
 * **Two out of three** (`ProEtale.CondensedRing.isIso_kunnethVerdierMap_of_triangEnvelope_right`):
   the objects `N` such that `κ_{M,N⟦n⟧}` is an isomorphism for all `n` form a triangulated
@@ -281,7 +282,8 @@ M ⊠ D_Y N ───── κ_{M,N} ─────▶ RHom(Lq^* N, Rp^! M)
 ```
 commutes. -/
 @[reassoc]
-lemma kunnethVerdierMap_naturality_right (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+lemma kunnethVerdierMap_naturality_right_whiskerLeft
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {N N' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : N ⟶ N') :
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
         (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
@@ -319,7 +321,7 @@ variable (Y) in
 noncomputable def kunnethVerdierNatTransRight (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     kunnethVerdierSource ℓ Y M ⟶ kunnethVerdierTarget ℓ Y M where
   app N := kunnethVerdierMap ℓ M N.unop
-  naturality _ _ f := kunnethVerdierMap_naturality_right ℓ M f.unop
+  naturality _ _ f := kunnethVerdierMap_naturality_right_whiskerLeft ℓ M f.unop
 
 instance (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (kunnethVerdierSource ℓ Y M).PreservesZeroMorphisms := by
