@@ -179,6 +179,13 @@ lemma pullbackCongrIso_hom_app {A B : 𝒞} {t t' : A ⟶ B} (h : t = t') (M : D
     (pullbackCongrIso U h).hom.app M = eqToHom (congrArg (fun s ↦ (U s).obj M) h) :=
   rfl
 
+
+/-- `pullbackCongrIso` is `eqToIso` of the induced equality of functors. -/
+lemma pullbackCongrIso_eq_eqToIso {A B : 𝒞} {t t' : A ⟶ B} (h : t = t') :
+    pullbackCongrIso U h = eqToIso (congrArg (fun s ↦ U s) h) := by
+  subst h
+  ext M
+  simp
 end Pullback
 
 section Homology

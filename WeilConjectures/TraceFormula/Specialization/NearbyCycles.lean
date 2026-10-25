@@ -1,0 +1,280 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
+public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
+public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.ZeroSection
+public import WeilConjectures.TraceFormula.KunnethVerdier
+
+/-!
+
+# Nearby cycles of the deformation of a contracting correspondence
+
+Let `c = (c₁, c₂) : C ⟶ X × X` be contracting at the `k`-point `y` of its support, with
+`x = c₁(y) = c₂(y)`, and let `k'` be a separably closed extension of `k`. The deformations to the
+normal cones of `x ∈ X` and `y ∈ C`, base changed to the strictly henselian trait `Spec k'⟦t⟧`, are
+models of `X` and `C` of finite type over the trait; so are the product model of `X × X` and the
+model of the fixed locus. Their nearby cycles `Ψ = i^* Rj_* ε^*` restrict to the bounded
+constructible derived categories by Deligne's finiteness theorem
+(`ProEtale.CondensedRing.NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`).
+
+This file defines
+* the specialization functors `Ψ_X`, `Ψ_C`, `Ψ_{X×X}`, `Ψ_F`
+  (`ProEtale.CondensedRing.specialization`, `ProEtale.CondensedRing.specializationProd`,
+  `ProEtale.CondensedRing.Correspondence.IsContractingAt.specializationFixedLocus`);
+* the *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of
+  `(N_x X ⊗ k', Ψ_X K)`
+  (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialCorrespondence`) and its fixed
+  locus
+  (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialFixedLocus`);
+
+and states the two theorems on nearby cycles that Varshavsky's vanishing argument uses:
+* Gabber's Künneth formula and the commutation of nearby cycles with Verdier duality, in the form
+  `Ψ_{X×X}(K ⊠ D K) ≅ Ψ_X K ⊠ D Ψ_X K`
+  (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`);
+* Verdier's zero-section theorem: the specialization `Sp_{X,x}(K) = Ψ_X K` restricted to the zero
+  section vanishes if `K_x` does
+  (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`). It is deduced from its
+  exchange form: the pullback exchange along the section `ẽ : S ⟶ 𝒳` of the deformation to the
+  normal cone is invertible
+  (`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app`).
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory
+
+open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
+  [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+
+/-- **Deligne's finiteness theorem for nearby cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for
+`ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze §6.8): over the strictly henselian
+trait `Spec k'⟦t⟧`, `k'` separably closed, the nearby cycles `Ψ = Li^* Rj_* Lε^*` of a model of
+finite type whose identification `ε = j ≫ e` factors through the total space preserve bounded
+constructible complexes. The pullback `Le^*` to the total space preserves them, the complex
+`Lj^* Le^* A` comes from the generic fibre, and `Li^* Rj_*` preserves such complexes by Deligne's
+theorem. (Without the factorization of `ε`, `Ψ` would have to be finite on all bounded
+constructible `ℚ̄_ℓ`-complexes on the geometric generic fibre, also those not defined over any
+finite extension of the generic point, which Deligne's theorem does not cover.)
+
+No blueprint node states this theorem; it is the analogue over the trait of
+`lem-sfb-dc-lower-star-preserves`
+(`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`, for morphisms of finite
+type over a field). -/
+theorem NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel {X : Scheme.{u}}
+    {X' : Over (Spec (.of k'))} (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel)
+    (hε : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε) :
+    M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
+  sorry
+
+
+variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k k']
+  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+section ZeroSection
+
+variable (k') (x : RationalPoint X)
+
+/-- The *specialization* `Sp_{X,x} : Dᵇc(X) ⥤ Dᵇc(N_x X ⊗ k')` to the normal cone of a rational
+point `x` (Verdier, *Spécialisation de faisceaux et monodromie modérée*): the nearby cycles of the
+deformation to the normal cone of `x`, base changed to the trait `Spec k'⟦t⟧`. -/
+noncomputable def specialization :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc((deformationSpecialFibre X x.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  NearbyCyclesModel.boundedConstructibleNearbyCycles
+    ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
+      (isTraitModel_deformationModel X x.left.ker k')
+      (deformationModel_exists_comp_ε X x.left.ker k'))
+
+/-- **Verdier's zero-section theorem, exchange form** (Verdier, *Spécialisation de faisceaux et
+monodromie modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, for the closed
+subscheme `Z = x`, with the constant family identification of `sk-lem-tf-sp-constant-family`):
+for `K` bounded constructible on `X`, the pullback exchange
+`α : Le^* Sp_{X,x}(K) ⟶ Ψ_S(Lx^* K)` along the section `ẽ : S ⟶ 𝒳` of the deformation to the
+normal cone (`ProEtale.CondensedRing.zeroSectionModelHom`) is an isomorphism. Followed by the
+inverse of the (invertible) specialization unit of the constant family `S`, it is the zero-section
+map `ε_{X,x}(K) : e^* Sp_{X,x}(K) ⟶ x^* K` of blueprint `det-sp-defect-definition`, which the
+blueprint node asserts to be an isomorphism. -/
+theorem isIso_pullbackExchange_zeroSectionModelHom_app
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (((zeroSectionModelHom X x k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
+      K.obj) :=
+  sorry
+
+/-- **Verdier's zero-section theorem** (Verdier, *Spécialisation de faisceaux et monodromie
+modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, `sk-thm-tf-sp-zero-section`):
+the restriction of the specialization `Sp_{X,x}(K)` to the zero section `x ⊗ k'` of the normal
+cone is the base change of the stalk `K_x`; in particular it vanishes if `K_x` does. -/
+theorem isZero_upperStar_zeroSection_specialization
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (deformationSpecialFibreZeroSection X x.left.ker k')).obj
+        ((specialization k' x).obj K)) := by
+  have := isIso_pullbackExchange_zeroSectionModelHom_app (ℓ := ℓ) k' x K
+  have h₁ : IsZero ((L((x.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) :=
+    ((boundedConstructible _).ι.map_isZero hK).of_iso
+      ((boundedConstructibleUpperStarCompatibility _ ℓ x).app K).symm
+  have h₃ := (zeroSectionModelHom X x k').isZero_upperStar_nearbyCycles_obj _ h₁
+  exact IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _
+    (h₃.of_iso ((boundedConstructibleUpperStarCompatibility _ ℓ
+      (deformationSpecialFibreZeroSection X x.left.ker k')).app ((specialization k' x).obj K)))
+
+/-- The specialization `Dᵇc(X × X) ⥤ Dᵇc((N_x X ⊗ k') × (N_x X ⊗ k'))` of the product: the nearby
+cycles of the product over the trait of two copies of the deformation to the normal cone of
+`x`. -/
+noncomputable def specializationProd :
+    Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc((deformationSpecialFibre X x.left.ker k' ⨯
+        deformationSpecialFibre X x.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  NearbyCyclesModel.boundedConstructibleNearbyCycles
+    (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
+      (deformationProdModel X x.left.ker X x.left.ker k')
+      (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
+      (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k'))
+
+private lemma isIso_homMk_aux {C : Type*} [Category* C] {P : ObjectProperty C}
+    {A B : P.FullSubcategory} (f : A.obj ⟶ B.obj) [hf : IsIso f] : IsIso (P.homMk f) :=
+  haveI : IsIso (P.ι.map (P.homMk f)) := hf
+  isIso_of_fully_faithful P.ι _
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k).Prime] in
+/-- The product of two deformation models is their product over the trait, with the projections
+`deformationProdFstModelHom` and `deformationProdSndModelHom`. -/
+theorem isTraitProduct_deformationProdModel (I : X.left.IdealSheafData) :
+    NearbyCyclesModel.IsTraitProduct (deformationProdFstModelHom X I X I k')
+      (deformationProdSndModelHom X I X I k') where
+  exists_isTraitModelOver :=
+    ⟨deformationTotalToTrait X I k', pullback.snd _ _, deformationTotalToTrait X I k',
+      pullback.snd _ _,
+      ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+        isPullback_deformationSpecialFibre X I k'⟩,
+      ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+        isPullback_deformationSpecialFibre X I k'⟩,
+      IsPullback.of_hasPullback _ _,
+      ⟨inferInstanceAs (LocallyOfFiniteType (deformationProdTotalToTrait X I X I k')),
+        inferInstanceAs (QuasiCompact (deformationProdTotalToTrait X I X I k')),
+        inferInstanceAs (IsSeparated (deformationProdTotalToTrait X I X I k')),
+        by
+          change IsPullback _ (deformationProdFstGeneric X I X I k' ≫ pullback.snd _ _)
+            (deformationProdTotalToTrait X I X I k') _
+          rw [deformationProdFstGeneric, pullback.lift_snd, Category.comp_id]
+          exact IsPullback.of_hasPullback _ _,
+        isPullback_deformationProdSpecialToTotal X I X I k'⟩⟩
+  exists_comp_ε_left := deformationModel_exists_comp_ε X I k'
+  exists_comp_ε_right := deformationModel_exists_comp_ε X I k'
+
+/-- The Künneth map `Π_{K,L} : Sp_{X,x} K ⊠ Sp_{X,x} L ⟶ Sp_{X × X,(x,x)} (K ⊠ L)` of the
+specialization (blueprint `sk-prop-tf-nearby-external-kunneth`): the Künneth map of nearby cycles
+`NearbyCyclesModel.kunnethMap` of the projections of the product of the deformation models. -/
+noncomputable def specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    externalProduct ℓ ((specialization k' x).obj K) ((specialization k' x).obj L) ⟶
+      (specializationProd k' x).obj (externalProduct ℓ K L) :=
+  ObjectProperty.homMk (NearbyCyclesModel.kunnethMap (Profinite.padicAlgClRingObj ℓ)
+    (deformationProdFstModelHom X x.left.ker X x.left.ker k')
+    (deformationProdSndModelHom X x.left.ker X x.left.ker k') K.obj L.obj)
+
+/-- **Gabber's Künneth formula for the specialization** (blueprint
+`sk-prop-tf-nearby-external-kunneth`): `Π_{K,L} : Sp_{X,x} K ⊠ Sp_{X,x} L ⟶ Sp (K ⊠ L)` is an
+isomorphism, by `NearbyCyclesModel.isIso_kunnethMap`. -/
+instance isIso_specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (specializationKunnethMap (ℓ := ℓ) k' x K L) := by
+  have h := NearbyCyclesModel.isIso_kunnethMap ℓ
+    (isTraitProduct_deformationProdModel k' x.left.ker) K.property L.property
+  exact isIso_homMk_aux _
+
+/-- **Nearby cycles commute with Verdier duality** (Gabber; Illusie, *Autour du théorème de
+monodromie locale*, Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`), for the
+specialization to the normal cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here
+`Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric
+generic point; the duality on the geometric generic fibre `X_Ω` is relative to `Ω`, and
+`Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
+fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
+asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
+isomorphism. -/
+theorem nonempty_specialization_verdierDual_iso
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅
+      verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
+        ((specialization k' x).obj K)) :=
+  sorry
+
+/-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
+`K ⊠ D K` is the universal kernel of the specialization,
+`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ Ψ_X D_X K ≅ Ψ_X K ⊠ D Ψ_X K`, by Gabber's Künneth formula
+(`ProEtale.CondensedRing.isIso_specializationKunnethMap`, blueprint
+`sk-prop-tf-nearby-external-kunneth`) and the commutation of nearby cycles with Verdier duality
+(`ProEtale.CondensedRing.nonempty_specialization_verdierDual_iso`, blueprint
+`sk-prop-tf-nearby-duality-foundation`). -/
+theorem nonempty_specializationProd_externalProduct_iso
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≅
+      externalProduct ℓ ((specialization k' x).obj K)
+        (verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
+          ((specialization k' x).obj K))) :=
+  have e := nonempty_specialization_verdierDual_iso (ℓ := ℓ) k' x K
+  ⟨(asIso (specializationKunnethMap (ℓ := ℓ) k' x K _)).symm ≪≫
+    whiskerLeftIso _ ((boundedConstructibleUpperStar _ ℓ _).mapIso e.some)⟩
+
+end ZeroSection
+
+namespace Correspondence
+
+variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
+  {y : RationalPoint c.C} (hc : c.IsContractingAt y)
+
+namespace IsContractingAt
+
+variable (k')
+
+/-- The *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of the
+specialization `Ψ_X K` of `K` to the normal cone of `x = c₁(y)`: the special fibre of the
+deformation of `c` to the normal cones (blueprint `det-tf-contracting-vanishing`). Its coefficient
+map plays no role in the vanishing argument and is taken to be zero. -/
+noncomputable def specialCorrespondence :
+    Correspondence ℓ ((specialization k' (y ≫ c.c₁)).obj K) where
+  C := deformationSpecialFibre c.C y.left.ker k'
+  c₁ := hc.specialLeg₁ k'
+  c₂ := hc.specialLeg₂ k'
+  u := 0
+
+/-- The fixed locus of the specialized correspondence, the fibre product `C' ×_{X' × X'} X'`. -/
+noncomputable def specialFixedLocus : (hc.specialCorrespondence k').FixedLocus where
+  F := fixedLocusOfDiag (hc.specialLeg₁ k') (hc.specialLeg₂ k')
+  ι := fixedLocusOfDiag.ι _ _
+  w := fixedLocusOfDiag.w _ _
+  isLimit := fixedLocusOfDiag.isLimit _ _
+
+/-- The specialization `Ψ_F` of the fixed locus `F`: the nearby cycles of the fibre product over
+the trait of the deformed support `𝒞 ⟶ 𝒳 ×_S 𝒳` with the diagonal of `𝒳`, whose special fibre is
+the fixed locus of the specialized correspondence. -/
+noncomputable def specializationFixedLocus (F : c.FixedLocus) :
+    Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc((hc.specialFixedLocus k').F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  NearbyCyclesModel.boundedConstructibleNearbyCycles
+    ((deformationFixedLocusModel k' c.c₁ c.c₂ hc.ker_map_le_c₁ hc.ker_map_le_c₂
+      F.isPullback).preservesBoundedConstructible_of_isTraitModel
+      (isTraitModel_deformationFixedLocusModel k' c.c₁ c.c₂ _ _ F.isPullback)
+      (deformationFixedLocusModel_exists_comp_ε k' c.c₁ c.c₂ _ _ F.isPullback))
+
+end IsContractingAt
+
+end Correspondence
+
+end AlgebraicGeometry.ProEtale.CondensedRing
