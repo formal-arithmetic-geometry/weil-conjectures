@@ -7,9 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleLimitSmoothSurface
 public import WeilConjectures.AlgebraicGeometry.RegularDivisor
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianLift
 public import WeilConjectures.ConstructibleSheaf.EllMonodromy
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 /-!
 # Restriction to a transverse punctured curve
@@ -91,5 +93,137 @@ theorem transverseBoundary (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent (ℓ : Λ
         globalSectionsRestriction s' (((iY)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
           (transverseBoundaryComplex hle E)) = 0) :=
   sorry
+
+
+section Vanishing
+
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+/-- The restriction map along a composite `g ≫ f` vanishes as soon as the restriction along `f`
+does. -/
+lemma globalSectionsRestriction_comp_eq_zero {X₁ X₂ X₃ : Scheme.{u}} (f : X₂ ⟶ X₁)
+    (g : X₃ ⟶ X₂) (K : DerivedCategory (Sheaf X₁.smallEtaleTopology A))
+    (h : globalSectionsRestriction f K = 0) : globalSectionsRestriction (g ≫ f) K = 0 := by
+  have hc := globalSectionsRestriction_comp f g K
+  rw [h, zero_comp] at hc
+  rwa [← cancel_mono ((rightDerivedGlobalSections A X₃).map
+    ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
+      Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).hom.app K)), zero_comp]
+
+/-- The restriction map along a composite `g ≫ f` vanishes as soon as the restriction along `g`
+of the pullback vanishes. -/
+lemma globalSectionsRestriction_comp_eq_zero_of_right {X₁ X₂ X₃ : Scheme.{u}} (f : X₂ ⟶ X₁)
+    (g : X₃ ⟶ X₂) (K : DerivedCategory (Sheaf X₁.smallEtaleTopology A))
+    (h : globalSectionsRestriction g (((f)^*[A]).mapDerivedCategory.obj K) = 0) :
+    globalSectionsRestriction (g ≫ f) K = 0 := by
+  have hc := globalSectionsRestriction_comp f g K
+  rw [h, comp_zero] at hc
+  rwa [← cancel_mono ((rightDerivedGlobalSections A X₃).map
+    ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
+      Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).hom.app K)), zero_comp]
+
+/-- If the restriction along `f` followed by the restriction along `g` vanishes and the latter
+is an isomorphism, the restriction along `f` vanishes. -/
+lemma globalSectionsRestriction_eq_zero_of_comp {X₁ X₂ X₃ : Scheme.{u}} (f : X₂ ⟶ X₁)
+    (g : X₃ ⟶ X₂) (K : DerivedCategory (Sheaf X₁.smallEtaleTopology A))
+    [IsIso (globalSectionsRestriction g (((f)^*[A]).mapDerivedCategory.obj K))]
+    (h : globalSectionsRestriction (g ≫ f) K = 0) : globalSectionsRestriction f K = 0 := by
+  have hc := globalSectionsRestriction_comp f g K
+  rw [h, zero_comp] at hc
+  rw [← cancel_mono (globalSectionsRestriction g (((f)^*[A]).mapDerivedCategory.obj K)),
+    zero_comp, ← hc]
+
+/-- Let `j : U ⟶ Z` be a morphism and `F` a complex on `U`. If the restriction of
+`Rj_* F` along `ι ≫ j` vanishes, so does the restriction of `F` along `ι`: the restriction of
+`Rj_* F` along `j` followed by the counit `j^* Rj_* F ⟶ F` is the Leray isomorphism
+`RΓ(Z, Rj_* F) ≅ RΓ(U, F)` (`globalSectionsRestriction_comp_map_counit`). -/
+lemma globalSectionsRestriction_eq_zero_of_lowerStar {U Z W : Scheme.{u}} (j : U ⟶ Z)
+    (ι : W ⟶ U) (F : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (h : globalSectionsRestriction (ι ≫ j) (((j)_*[A]).rightDerivedFunctor.obj F) = 0) :
+    globalSectionsRestriction ι F = 0 := by
+  have hc := globalSectionsRestriction_comp j ι (((j)_*[A]).rightDerivedFunctor.obj F)
+  rw [h, zero_comp] at hc
+  have hn := globalSectionsRestriction_naturality ι
+    ((mapDerivedUpperStarLowerStarAdjunction A j).counit.app F)
+  have hl := globalSectionsRestriction_comp_map_counit j F
+  dsimp only [Functor.id_obj] at hn
+  rw [← cancel_epi ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A j).hom.app F),
+    comp_zero, ← hl, Category.assoc, hn, ← Category.assoc]
+  erw [← hc]
+  rw [zero_comp]
+
+end Vanishing
+
+/-- **Restriction through a strictly local scheme vanishes** (blueprint
+`det-tf-punctured-restriction-factorization` and the proof of `sk-lem-tf-punctured-restriction`,
+with the stalk `M_s` computed on the strictly local scheme `S` instead of the strict localization
+of `Z`). In the situation of the transverse boundary calculation
+(`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `c : S = Spec R ⟶ Z` be a
+morphism from a strictly local scheme whose closed point maps to a closed point `s` of `Y`, and
+let `ι : W ⟶ Z - Y` be a morphism factoring as `W ⟶ S ⟶ Z`. Then the restriction map
+`RΓ(Z - Y, i_! E) ⟶ RΓ(W, ι^* i_! E)` is zero.
+
+Indeed it factors as `RΓ(Z - Y, i_! E) = RΓ(Z, M) ⟶ RΓ(S, c^* M) ⟶ RΓ(W, ...)`, and
+`RΓ(S, c^* M) ⟶ M_s` is an isomorphism (`S` is strictly local), so it suffices that the
+restriction `RΓ(Z, M) ⟶ M_s` vanishes. If `s = z` its target `M_z` is zero; otherwise it factors
+through the restriction `RΓ(Y, M|_Y) ⟶ M_s`, which is zero by the transverse boundary
+calculation. -/
+theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠ 0)
+    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
+    (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
+    (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
+    (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hE : HasFiniteEllMonodromy ℓ E) [ConnectedSpace Y] {R : Type u} [CommRing R]
+    [IsStrictlyHenselianLocalRing R] (c : Spec (.of R) ⟶ Z.left) (s : Y)
+    (hs : IsClosed ({s} : Set Y)) (hcs : c (IsLocalRing.closedPoint R) = iY s) {W : Scheme.{u}}
+    (ι : W ⟶ UY.toScheme) (jW : W ⟶ Spec (.of R)) (hι : ι ≫ UY.ι = jW ≫ c) :
+    globalSectionsRestriction ι
+      (((Z.left.homOfLE hle)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) = 0 := by
+  obtain ⟨h₁, -, h₃⟩ := transverseBoundary hℓ hΛ hZ hX hY z hz hUY hUXY hle E hE
+  have := hY.isClosedImmersion
+  let t := Scheme.closedGeometricPoint R
+  have ht : Set.range (t ≫ c) = {iY s} := by
+    ext w
+    refine ⟨?_, fun hw ↦ ⟨IsLocalRing.closedPoint _, ?_⟩⟩
+    · rintro ⟨a, rfl⟩
+      rw [Scheme.Hom.comp_apply, Scheme.closedGeometricPoint_apply, hcs]
+      rfl
+    · rw [Set.mem_singleton_iff.1 hw, Scheme.Hom.comp_apply, Scheme.closedGeometricPoint_apply, hcs]
+  have hc : globalSectionsRestriction c (transverseBoundaryComplex hle E) = 0 := by
+    have : IsIso (globalSectionsRestriction t
+        (((c)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (transverseBoundaryComplex hle E))) :=
+      sorry
+    refine globalSectionsRestriction_eq_zero_of_comp c t _ ?_
+    by_cases hsz : iY s = z
+    · exact (Functor.map_isZero _ (h₁ _ (t ≫ c) (ht.trans (by rw [hsz])))).eq_of_tgt _ _
+    · have hsub : Set.range (t ≫ c) ⊆ Set.range iY := by
+        rw [ht]
+        rintro _ rfl
+        exact ⟨s, rfl⟩
+      have hker : iY.ker ≤ (t ≫ c).ker := by
+        rw [Scheme.IdealSheafData.le_ker_iff_range_subset_support, Scheme.Hom.support_ker,
+          iY.isClosedMap.isClosed_range.closure_eq]
+        exact hsub
+      have hfac := IsClosedImmersion.lift_fac iY (t ≫ c) hker
+      rw [← hfac]
+      refine globalSectionsRestriction_comp_eq_zero_of_right _ _ _
+        (h₃ ‹_› s hs hsz _ _ ?_)
+      have hinj : Function.Injective iY := iY.isClosedEmbedding.injective
+      ext y
+      constructor
+      · rintro ⟨a, rfl⟩
+        apply hinj
+        rw [← Scheme.Hom.comp_apply, hfac, ← Set.mem_singleton_iff, ← ht]
+        exact ⟨a, rfl⟩
+      · intro hy
+        rw [Set.mem_singleton_iff.1 hy]
+        obtain ⟨a, ha⟩ : iY s ∈ Set.range (t ≫ c) := by rw [ht]; rfl
+        refine ⟨a, hinj ?_⟩
+        rw [← Scheme.Hom.comp_apply, hfac, ha]
+  have hjc : globalSectionsRestriction (jW ≫ c) (transverseBoundaryComplex hle E) = 0 :=
+    globalSectionsRestriction_comp_eq_zero _ _ _ hc
+  rw [← hι] at hjc
+  exact globalSectionsRestriction_eq_zero_of_lowerStar _ _ _ hjc
 
 end AlgebraicGeometry.Etale
