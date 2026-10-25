@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
@@ -96,13 +97,6 @@ variable {C D₁ D₂ : Type*} [Category* C] [Category* D₁] [Category* D₂] [
   [SymmetricCategory C] [MonoidalClosed C] [MonoidalCategory D₁] [MonoidalClosed D₁]
   [MonoidalCategory D₂] [MonoidalClosed D₂] (F₁ : D₁ ⥤ C) (F₂ : D₂ ⥤ C) [F₁.LaxMonoidal]
   [F₂.LaxMonoidal]
-
-omit [SymmetricCategory C] in
-/-- Precomposition with an isomorphism is an isomorphism. (A copy of
-`CategoryTheory.MonoidalClosed.isIso_pre_app` in `DoubleDual.lean`, which is not imported.) -/
-private lemma isIso_pre_app {A B : C} (f : B ⟶ A) [IsIso f] (Z : C) : IsIso ((pre f).app Z) :=
-  ⟨(pre (inv f)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
-    by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
 
 /-- **Exchanging the two factors.** For a symmetric `C`, the external internal-hom map of
 `(F₂, F₁)` is that of `(F₁, F₂)` conjugated by the braidings. -/
