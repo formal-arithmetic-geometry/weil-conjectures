@@ -89,7 +89,9 @@ namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Blueprint `sk-def-perfect` (also `def-pod-perfect-point-complex`): perfect point complexes.
+/-- Blueprint `pur9-def-perfect-complex`: Perfect complex of finite modules.
+
+Also blueprint `sk-def-perfect` (also `def-pod-perfect-point-complex`): perfect point complexes.
 
 An object `C` of `D(R)` is *perfect* if it is isomorphic to the image of a bounded complex of
 finitely generated projective `R`-modules. -/
@@ -433,21 +435,64 @@ bounded complex `P` of finitely generated projective modules, `C^∨` is represe
 termwise dual complex `Hom_R(P^{-i}, R)`, again bounded with finitely generated projective
 terms. -/
 theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    ((ihom C).obj (𝟙_ _)).IsPerfect :=
-  sorry
+    ((ihom C).obj (𝟙_ _)).IsPerfect := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  have hd (n : ℤ) : IsDualizable (P.X n) := by
+    have := (hP n).1
+    have := (hP n).2
+    exact ModuleCat.isDualizable_of_projective (P.X n)
+  let _ : ∀ n, HasRightDual (P.X n) := fun n ↦ (hd n).some
+  have hD (n : ℤ) : Module.Projective R (P.rightDual.X n) ∧
+      Module.Finite R (P.rightDual.X n) := by
+    have := (hP (-n)).1
+    have := (hP (-n)).2
+    let f : P.rightDual.X n ≅ ModuleCat.of R (Module.Dual R (P.X (-n))) :=
+      (ihomUnitIsoRightDual (P.X (-n))).symm ≪≫
+        (ModuleCat.homLinearEquiv (S := R)).toModuleIso
+    exact ⟨Module.Projective.of_equiv f.toLinearEquiv.symm,
+      Module.Finite.equiv f.toLinearEquiv.symm⟩
+  let _ := CochainComplex.exactPairingRightDual P a b
+  let H := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)
+  have hd' (n : ℤ) : IsDualizable (P.rightDual.X n) :=
+    ⟨{ rightDual := P.X (-n)
+       exact := (BraidedCategory.exactPairing_swap (P.X (-n)) (P.X (-n))ᘁ :) }⟩
+  let X : (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat.FullSubcategory :=
+    ⟨H.obj P, (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (CochainComplex.kFlat_of_bounded_of_flat P a b (fun n ↦ (hd n).flat))⟩
+  let Y : (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat.FullSubcategory :=
+    ⟨H.obj P.rightDual, (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (CochainComplex.kFlat_of_bounded_of_flat P.rightDual (-b) (-a)
+        (fun n ↦ (hd' n).flat))⟩
+  let _ : ExactPairing ((ObjectProperty.ι _).obj X) ((ObjectProperty.ι _).obj Y) :=
+    ExactPairing.map H P P.rightDual
+  let _ : ExactPairing X Y := ExactPairing.ofFullyFaithful (ObjectProperty.ι _) X Y
+  let _ := Functor.Monoidal.ofLaxMonoidal (kFlatQh (ModuleCat.{u} R))
+  let _ : ExactPairing ((kFlatQh (ModuleCat.{u} R)).obj X)
+      ((kFlatQh (ModuleCat.{u} R)).obj Y) :=
+    ExactPairing.map (kFlatQh (ModuleCat.{u} R)) X Y
+  let _ : HasRightDual ((kFlatQh (ModuleCat.{u} R)).obj X) :=
+    ⟨(kFlatQh (ModuleCat.{u} R)).obj Y⟩
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  let f : (ihom C).obj (𝟙_ _) ≅ Q.obj P.rightDual :=
+    (MonoidalClosed.internalHom.mapIso
+      ((quotientCompQhIso _).app P ≪≫ e.symm).op).app _ ≪≫
+      ihomUnitIsoRightDual ((kFlatQh (ModuleCat.{u} R)).obj X) ≪≫
+      (quotientCompQhIso _).app P.rightDual
+  exact (isPerfect_Q_obj P.rightDual (-b) (-a) hD).of_iso f.symm
 
 omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
-/-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the
-complex of its cohomology modules with zero differential: a choice of sections of the
-surjections `Z^i(L) ↠ H^i(L)` defines a quasi-isomorphism from the latter to `L`. -/
-private theorem exists_quasiIso_of_zero_differential [IsSemisimpleRing R]
-    (L : CochainComplex (ModuleCat.{u} R) ℤ) :
+/-- A complex of modules whose cohomology modules are projective (for example any complex over a
+semisimple ring, such as a field) is quasi-isomorphic to the complex of its cohomology modules
+with zero differential: a choice of sections of the surjections `Z^i(L) ↠ H^i(L)` defines a
+quasi-isomorphism from the latter to `L`. -/
+theorem exists_quasiIso_of_zero_differential_of_projective
+    (L : CochainComplex (ModuleCat.{u} R) ℤ) (hL : ∀ i, Module.Projective R (L.homology i)) :
     ∃ (H : CochainComplex (ModuleCat.{u} R) ℤ) (φ : H ⟶ L), QuasiIso φ ∧ (∀ i j, H.d i j = 0) ∧
       ∀ i, Nonempty (H.X i ≅ L.homology i) := by
   have hs : ∀ i, ∃ s : L.homology i ⟶ L.cycles i, s ≫ L.homologyπ i = 𝟙 _ := fun i ↦ by
     have hπ : Function.Surjective (L.homologyπ i).hom :=
       (ModuleCat.epi_iff_surjective _).1 inferInstance
-    have := Module.projective_of_isSemisimpleRing R (L.homology i)
+    have := hL i
     obtain ⟨g, hg⟩ := Module.projective_lifting_property (L.homologyπ i).hom LinearMap.id hπ
     exact ⟨ModuleCat.ofHom g, ModuleCat.hom_ext hg⟩
   choose s hs using hs
@@ -467,6 +512,16 @@ private theorem exists_quasiIso_of_zero_differential [IsSemisimpleRing R]
       Category.assoc, hs, Category.comp_id, IsIso.hom_inv_id_assoc]
   rw [this]
   infer_instance
+
+omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
+/-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the
+complex of its cohomology modules with zero differential. -/
+theorem exists_quasiIso_of_zero_differential [IsSemisimpleRing R]
+    (L : CochainComplex (ModuleCat.{u} R) ℤ) :
+    ∃ (H : CochainComplex (ModuleCat.{u} R) ℤ) (φ : H ⟶ L), QuasiIso φ ∧ (∀ i j, H.d i j = 0) ∧
+      ∀ i, Nonempty (H.X i ≅ L.homology i) :=
+  exists_quasiIso_of_zero_differential_of_projective L fun i ↦
+    Module.projective_of_isSemisimpleRing R (L.homology i)
 
 section Field
 
@@ -655,6 +710,70 @@ theorem nonempty_iso_homology_ihom (hR : IsField R) (C : DerivedCategory (Module
     (homologyFunctorFactors _ (-i)).app K ≪≫ e₂ ≪≫ e₃ ≪≫
     (ModuleCat.homLinearEquiv (S := R)).toModuleIso ≪≫
     (f.symm.toLinearEquiv.dualMap).toModuleIso⟩
+
+/-- Cohomology of the dual of a complex with projective cohomology. If `C` is bounded and its
+cohomology modules `Hʲ(C)` are finitely generated projective `R`-modules, then the cohomology of
+the dual `C^∨ = RHom_R(C, R)` is the dual of the cohomology: `H^{-i}(C^∨) ≅ Hom_R(H^i(C), R)`.
+This is the form of `DerivedCategory.nonempty_iso_homology_ihom` over a ring which is not a
+field, used for the degreewise duality at the integral stage `𝒪_E`
+(`prop-pod-integral-degreewise-form`).
+
+As over a field, `C` is split: it is quasi-isomorphic to the bounded complex `H` of its
+cohomology modules with zero differential
+(`DerivedCategory.exists_quasiIso_of_zero_differential_of_projective`), whose dual is the
+termwise dual complex, again with zero differential. -/
+theorem nonempty_iso_homology_ihom_of_projective {C : DerivedCategory (ModuleCat.{u} R)}
+    {a b : ℤ} (ha : C.IsGE a) (hb : C.IsLE b)
+    (hC : ∀ j, Module.Projective R ((homologyFunctor (ModuleCat.{u} R) j).obj C) ∧
+      Module.Finite R ((homologyFunctor (ModuleCat.{u} R) j).obj C)) (i : ℤ) :
+    Nonempty ((homologyFunctor (ModuleCat.{u} R) (-i)).obj ((ihom C).obj (𝟙_ _)) ≅
+      ModuleCat.of R (Module.Dual R ((homologyFunctor (ModuleCat.{u} R) i).obj C))) := by
+  let L := Q.objPreimage C
+  let eL : Q.obj L ≅ C := Q.objObjPreimageIso C
+  let fL : ∀ j, L.homology j ≅ (homologyFunctor (ModuleCat.{u} R) j).obj C := fun j ↦
+    ((homologyFunctorFactors _ j).app L).symm ≪≫ (homologyFunctor _ j).mapIso eL
+  obtain ⟨H, φ, hφ, hd, eH⟩ := exists_quasiIso_of_zero_differential_of_projective L fun j ↦
+    have := (hC j).1
+    Module.Projective.of_equiv (fL j).toLinearEquiv.symm
+  let gH : ∀ j, H.X j ≅ (homologyFunctor (ModuleCat.{u} R) j).obj C := fun j ↦
+    (eH j).some ≪≫ fL j
+  have hH : ∀ j, Module.Projective R (H.X j) ∧ Module.Finite R (H.X j) := fun j ↦
+    have := (hC j).1
+    have := (hC j).2
+    ⟨Module.Projective.of_equiv (gH j).toLinearEquiv.symm,
+      Module.Finite.equiv (gH j).toLinearEquiv.symm⟩
+  have : H.IsStrictlyGE a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    intro j hj
+    exact ((C.isGE_iff a).1 ha j hj).of_iso (gH j)
+  have : H.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro j hj
+    exact ((C.isLE_iff b).1 hb j hj).of_iso (gH j)
+  have : IsIso (Q.map φ) := (isIso_Q_map_iff_quasiIso (C := ModuleCat.{u} R) φ).2 hφ
+  let eC : C ≅ Q.obj H := (asIso (Q.map φ) ≪≫ eL).symm
+  let _ (n : ℤ) : HasRightDual (H.X n) :=
+    have := (hH n).1
+    have := (hH n).2
+    (ModuleCat.isDualizable_of_projective (H.X n)).some
+  obtain ⟨_⟩ := nonempty_exactPairing_Q_obj H a b
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  let _ := BraidedCategory.exactPairing_swap (Q.obj H) (Q.obj H.rightDual)
+  let _ : ExactPairing (Q.obj H.rightDual) C := exactPairingCongrRight eC
+  have hd' : ∀ p q, H.rightDual.d p q = 0 := fun p q ↦ by
+    rw [CochainComplex.rightDual_d, hd]
+    simp [rightAdjointMate]
+  let e₂ : H.rightDual.homology (-i) ≅ H.rightDual.X (-i) :=
+    (H.rightDual.isoHomologyπ (-i - 1) (-i) (by simp) (hd' _ _)).symm ≪≫
+      H.rightDual.iCyclesIso (-i) (-i + 1) (by simp) (hd' _ _)
+  have := (hH (-(-i))).1
+  have := (hH (-(-i))).2
+  let e₃ : H.rightDual.X (-i) ≃ₗ[R] Module.Dual R (H.X (-(-i))) :=
+    (ihomUnitIsoRightDual (H.X (-(-i)))).toLinearEquiv.symm ≪≫ₗ ModuleCat.homLinearEquiv
+  exact ⟨(homologyFunctor (ModuleCat.{u} R) (-i)).mapIso
+      (MonoidalClosed.ihomObjUnitIso (Q.obj H.rightDual) C) ≪≫
+    (homologyFunctorFactors _ (-i)).app _ ≪≫ e₂ ≪≫
+    (e₃ ≪≫ₗ ((H.XIsoOfEq (neg_neg i)) ≪≫ gH i).toLinearEquiv.symm.dualMap).toModuleIso⟩
 
 end CohomologyDual
 

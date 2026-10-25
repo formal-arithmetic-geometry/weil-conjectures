@@ -5,18 +5,16 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
-public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
-public import WeilConjectures.WeilSheaf.DirectImageRestriction
-public import WeilConjectures.WeilSheaf.DirectImageStalk
+public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
+public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
 public import WeilConjectures.WeilSheaf.FourierTateTwist
+public import WeilConjectures.WeilSheaf.FourierTraceAux
 public import WeilConjectures.WeilSheaf.HomologyShift
-public import WeilConjectures.WeilSheaf.LisseLocus
-public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.Stalk
-public import WeilConjectures.WeilSheaf.StalkFrobenius
+public import WeilConjectures.WeilSheaf.StalkRationalPoint
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
 
 /-!
@@ -25,24 +23,18 @@ public import WeilConjectures.WeilSheaf.TraceFunctionOps
 At a `k₀`-rational point `a` of the dual line, the stalk of the Fourier–Deligne transform of a
 Weil complex `K` is the compactly supported cohomology of `K ⊗ ℒ_{ψ(a x)}`, shifted by one, with
 its Frobenius: this is the stalk formula of the transform, a consequence of compact support base
-change along `a : Spec k₀ ⟶ 𝔸¹`. Tensoring with a lisse Weil sheaf isomorphic to the
-constant sheaf does nothing; this applies at the origin, where the kernel `ℒ_{ψ(0 · x)}` is
-constant.
-
-The stalk of a Weil sheaf on `Spec k₀` at its point is its global sections: the geometric point
-is an isomorphism `Spec k̄ ≅ Spec k₀ ×_{k₀} k̄`. The stalk of `𝓗ʳ FT_ψ(K)` at `a` is therefore
-`Hʳ(Spec k̄, a^* FT_ψ(K))`, and compact support base change for the cartesian square formed by
-the fibre `x ↦ (x, a)` of `pr₂ : 𝔸² ⟶ 𝔸¹` identifies `a^* Rpr₂!` with `RΓ_c` of the fibre.
+change along `a : Spec k₀ ⟶ 𝔸¹`. At the origin the kernel `ℒ_{ψ(0 · x)}` is the constant sheaf,
+and tensoring with it does nothing.
 
 ## Main declarations
 
 - `AlgebraicGeometry.affineLine.rationalPoint`: the closed point `x = a` of `𝔸¹_{k₀}`.
-- `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_globalSections_of_spec`: the stalk of a Weil
-  sheaf on `Spec k₀` is its global sections, with the Frobenius.
-- `AlgebraicGeometry.affinePlane.isPullback_sndFiberIncl`: the line `x ↦ (x, a)` is the fibre of
-  `pr₂` over `a`.
 - `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint`: the
-  stalk formula at rational points (blueprint `lem-fd-stalk-formula`).
+  stalk formula at rational points (blueprint `lem-fd-stalk-formula`), by compact support base
+  change along `AlgebraicGeometry.affineLine.rationalPointHom` and the restriction of the kernel
+  to the fibre `AlgebraicGeometry.affineLine.fibreInclusion`.
+- `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ` (blueprint
+  `lem-fd-as-characters`), from `AS^* ℒ_ψ ≅ ℚ̄_ℓ`.
 - `AlgebraicGeometry.WeilComplex.tensorLisseObjIsoOfIso`: tensoring with a Weil sheaf isomorphic
   to `ℚ̄_ℓ` is the identity.
 -/
@@ -93,224 +85,160 @@ noncomputable def tensorLisseObjIsoOfIso (F : WeilSheaf k₀ l X) (hF : F.IsLiss
 
 end WeilComplex
 
+/-- `ℒ_{ψ(0 · x)}`, the Artin–Schreier sheaf of the zero function, is the constant Weil sheaf
+`ℚ̄_ℓ`: over the zero function the Artin–Schreier cover is split, `#k₀` copies of the line with
+trivial Frobenius, so all the isotypic summands of the pushforward are constant. It is the unit
+of the kernel family `ℒ_{ψ(a x)}`. (blueprint: `lem-fd-as-characters`, the case `f = 0`) -/
+theorem nonempty_iso_artinSchreier_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
+    Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) :=
+  nonempty_artinSchreier_zero_iso_adicConstant ψ
 
-namespace WeilSheaf
+section RationalPoint
 
-open scoped ProEtale
-
-/-- An isomorphism of Frobenius modules given by a bijective linear map intertwining the two
-Frobenius automorphisms. -/
-noncomputable def _root_.FrobeniusModule.Equiv.ofBijective {K : Type*} [Field K]
-    {M N : FrobeniusModule K} (f : M.carrier →ₗ[K] N.carrier) (hf : Function.Bijective f)
-    (h : ∀ x, f (M.frobenius x) = N.frobenius (f x)) : M.Equiv N where
-  toLinearEquiv := LinearEquiv.ofBijective f hf
-  map_frobenius x := (LinearEquiv.ofBijective_apply _ _).trans
-    ((h x).trans (congrArg N.frobenius (LinearEquiv.ofBijective_apply _ _).symm))
-
-section GlobalSectionsToStalk
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
-  (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom =
-    (specGeometricFrobenius k₀ ^ 1).hom ≫ s)
-
-/-- The restriction `Γ(X̄, F) ⟶ F_s` of global sections to the stalk at a geometric point `s`
-with `s ≫ Fr = σ ≫ s`, as a linear map of the underlying spaces of the Frobenius modules. -/
-noncomputable def globalSectionsToStalkAt :
-    F.globalSections.carrier →ₗ[PadicAlgCl l] (F.stalkAt s 1 hs).carrier :=
-  ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom
-
-theorem globalSectionsToStalkAt_apply (y : F.globalSections.carrier) :
-    globalSectionsToStalkAt F s hs y =
-      ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom y :=
-  rfl
-
-/-- The restriction of global sections to the stalk intertwines the Frobenius automorphisms. -/
-theorem globalSectionsToStalkAt_frobenius (a : F.globalSections.carrier) :
-    globalSectionsToStalkAt F s hs (F.globalSections.frobenius a) =
-      (F.stalkAt s 1 hs).frobenius (globalSectionsToStalkAt F s hs a) :=
-  (globalSectionsToStalkAt_apply F s hs _).trans
-    ((F.globalSectionsToStalkObj_frobenius s hs a).trans
-      (congrArg (F.stalkAt s 1 hs).frobenius (globalSectionsToStalkAt_apply F s hs a).symm))
-
-theorem bijective_globalSectionsToStalkAt [IsIso (F.globalSectionsToStalkObj s)] :
-    Function.Bijective (globalSectionsToStalkAt F s hs) := by
-  rw [show ⇑(globalSectionsToStalkAt F s hs) = fun y ↦
-      ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom y from
-    funext (globalSectionsToStalkAt_apply F s hs)]
-  exact ConcreteCategory.bijective_of_isIso
-    ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s))
-
-/-- If the restriction `Γ(X̄, F) ⟶ F_s` of global sections to the stalk at a geometric point `s`
-with `s ≫ Fr = σ ≫ s` is an isomorphism, it is an isomorphism of Frobenius modules. -/
-noncomputable def globalSectionsEquivStalkAt [IsIso (F.globalSectionsToStalkObj s)] :
-    F.globalSections.Equiv (F.stalkAt s 1 hs) :=
-  FrobeniusModule.Equiv.ofBijective _ (bijective_globalSectionsToStalkAt F s hs)
-    (globalSectionsToStalkAt_frobenius F s hs)
-
-end GlobalSectionsToStalk
-
-/-- **The stalk of a Weil sheaf on `Spec k₀` is its global sections.** The geometric fibre of
-`Spec k₀` over itself is `Spec k̄`, so the geometric point `s` at the (unique) point `x` is an
-isomorphism; the restriction `Γ(Spec k̄, G) ⟶ Γ(Spec k̄, s^* G) = G_s` of global sections to the
-stalk is then an isomorphism, and it intertwines the two Frobenius automorphisms. -/
-theorem nonempty_equiv_stalk_globalSections_of_spec
-    (G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) (x : (Spec (CommRingCat.of k₀)).finitePoints) :
-    Nonempty ((G.stalk x).Equiv G.globalSections) := by
-  set f := Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)
-  set s := f.geometricFiberPointOfFinitePoint x with hs_def
-  -- `s` is an isomorphism: it is a section of the isomorphism `X̄ = Spec k₀ ×_{k₀} k̄ ⟶ Spec k̄`
-  have hs₁ : s ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ := by
-    simp only [hs_def, Scheme.Hom.geometricFiberPointOfFinitePoint,
-      Scheme.Hom.geometricFiberPoint, Scheme.Hom.geometricFiberToAlgebraicClosure,
-      pullback.lift_snd]
-  have : IsIso f.geometricFiberToAlgebraicClosure := by
-    unfold Scheme.Hom.geometricFiberToAlgebraicClosure
-    infer_instance
-  have : IsIso s := by
-    rw [IsIso.eq_inv_of_inv_hom_id hs₁]
-    infer_instance
-  -- hence the unit of `s^* ⊣ s_*` is an isomorphism, and so is the restriction to the stalk
-  have : ((s)_*[WeilCoefficients.{u} l]).IsEquivalence :=
-    (ProEtale.lowerStarEquivalence _ (asIso s)).isEquivalence_functor
-  have := (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l)
-    s).isEquivalence_left_of_isEquivalence_right
-  have : IsIso (G.globalSectionsToStalkObj s) := by
-    unfold globalSectionsToStalkObj
-    infer_instance
-  -- the point `x` has degree one
-  have hdeg : f.degreeOver x.1 = 1 := by
-    simpa using Scheme.Hom.degreeOver_eq_one_of_comp_eq_id f (𝟙 _) (by simp [f]) x.1
-  have hx := f.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow x
-  have hs : s ≫ (f.geometricGaloisFrobenius ^ 1).hom =
-      (specGeometricFrobenius k₀ ^ 1).hom ≫ s := by
-    rw [← hdeg]
-    exact hx
-  obtain ⟨E⟩ := nonempty_equiv_stalkAt_of_eq G s hdeg hx hs
-  exact ⟨E.trans (FrobeniusModule.Equiv.symm
-    (globalSectionsEquivStalkAt G s hs))⟩
-
-end WeilSheaf
-
-/-- The `k₀`-rational point `a : Spec k₀ ⟶ 𝔸¹`, a section of the structure morphism. -/
-noncomputable abbrev affineLine.rationalSection (a : k₀) :
+variable (k₀) in
+/-- The `k₀`-rational point `x = a` of the affine line, as a morphism `Spec k₀ ⟶ 𝔸¹`. -/
+noncomputable def affineLine.rationalPointHom (a : k₀) :
     Spec (CommRingCat.of k₀) ⟶ affineLine k₀ :=
   AffineSpace.homOfVector (𝟙 (Spec (CommRingCat.of k₀)))
     fun _ ↦ (Scheme.ΓSpecIso (.of k₀)).inv.hom a
 
-instance (a : k₀) : (affineLine.rationalSection a).IsOver (Spec (CommRingCat.of k₀)) :=
+instance (a : k₀) : (affineLine.rationalPointHom k₀ a).IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨AffineSpace.homOfVector_over _ _⟩
 
-/-- The fibre `x ↦ (x, a)` of the second projection `pr₂ : 𝔸² ⟶ 𝔸¹` over `a ∈ k₀`. -/
-noncomputable def affinePlane.sndFiberIncl (a : k₀) : affineLine k₀ ⟶ affinePlane k₀ :=
-  pullback.lift (𝟙 _) ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)) ≫ affineLine.rationalSection a)
-    (by simp)
+omit [Finite k₀] in
+lemma affineLine.rationalPointHom_comp_over (a : k₀) :
+    affineLine.rationalPointHom k₀ a ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀) = 𝟙 _ :=
+  AffineSpace.homOfVector_over _ _
+
+variable (k₀) in
+/-- The fibre `x ↦ (x, a)` of the second projection `pr₂ : 𝔸² ⟶ 𝔸¹` over the rational point
+`a`. -/
+noncomputable def affineLine.fibreInclusion (a : k₀) : affineLine k₀ ⟶ affinePlane k₀ :=
+  pullback.lift (𝟙 _) (affineLine k₀ ↘ Spec (CommRingCat.of k₀) ≫ affineLine.rationalPointHom k₀ a)
+    (by rw [Category.assoc, affineLine.rationalPointHom_comp_over, Category.comp_id,
+      Category.id_comp])
 
 omit [Finite k₀] in
-@[reassoc (attr := simp)]
-lemma affinePlane.sndFiberIncl_fst (a : k₀) :
-    affinePlane.sndFiberIncl a ≫ affinePlane.fst k₀ = 𝟙 _ :=
+lemma affineLine.fibreInclusion_fst (a : k₀) :
+    affineLine.fibreInclusion k₀ a ≫ affinePlane.fst k₀ = 𝟙 _ :=
   pullback.lift_fst _ _ _
 
 omit [Finite k₀] in
-@[reassoc (attr := simp)]
-lemma affinePlane.sndFiberIncl_snd (a : k₀) :
-    affinePlane.sndFiberIncl a ≫ affinePlane.snd k₀ =
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) ≫ affineLine.rationalSection a :=
+lemma affineLine.fibreInclusion_snd (a : k₀) :
+    affineLine.fibreInclusion k₀ a ≫ affinePlane.snd k₀ =
+      affineLine k₀ ↘ Spec (CommRingCat.of k₀) ≫ affineLine.rationalPointHom k₀ a :=
   pullback.lift_snd _ _ _
 
-instance (a : k₀) : (affinePlane.sndFiberIncl a).IsOver (Spec (CommRingCat.of k₀)) :=
+instance (a : k₀) : (affineLine.fibreInclusion k₀ a).IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨by
     change _ ≫ pullback.fst _ _ ≫ _ = _
-    rw [affinePlane.sndFiberIncl, pullback.lift_fst_assoc, Category.id_comp]⟩
+    rw [← Category.assoc]
+    exact (congrArg (· ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+      (affineLine.fibreInclusion_fst a)).trans (Category.id_comp _)⟩
 
 omit [Finite k₀] in
-/-- The line `x ↦ (x, a)` is the fibre of the second projection over `a`. -/
-lemma affinePlane.isPullback_sndFiberIncl (a : k₀) :
-    IsPullback (affinePlane.sndFiberIncl a) (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
-      (affinePlane.snd k₀) (affineLine.rationalSection a) := by
-  refine IsPullback.of_right ?_ (affinePlane.sndFiberIncl_snd a)
-    (IsPullback.of_hasPullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
-  have h₁ : affinePlane.sndFiberIncl a ≫ pullback.fst _ _ = 𝟙 _ := affinePlane.sndFiberIncl_fst a
-  have h₂ : affineLine.rationalSection a ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) = 𝟙 _ :=
-    AffineSpace.homOfVector_over _ _
-  rw [h₁, h₂]
-  exact IsPullback.id_horiz _
+/-- The fibre of `pr₂ : 𝔸² ⟶ 𝔸¹` over the rational point `a` is the line `x ↦ (x, a)`. -/
+lemma affineLine.isPullback_fibreInclusion (a : k₀) :
+    IsPullback (affineLine.fibreInclusion k₀ a) (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+      (affinePlane.snd k₀) (affineLine.rationalPointHom k₀ a) := by
+  have hout : IsPullback (affineLine.fibreInclusion k₀ a ≫ affinePlane.fst k₀)
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+      (affineLine.rationalPointHom k₀ a ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    rw [affineLine.fibreInclusion_fst, affineLine.rationalPointHom_comp_over]
+    exact IsPullback.of_horiz_isIso ⟨by rw [Category.id_comp, Category.comp_id]⟩
+  exact hout.of_right (affineLine.fibreInclusion_snd a) (IsPullback.of_hasPullback _ _)
 
 omit [Finite k₀] in
-/-- Along the line `x ↦ (x, a)` the multiplication `μ` restricts to `x ↦ a x`. -/
-lemma affinePlane.sndFiberIncl_mul (a : k₀) :
-    affinePlane.sndFiberIncl a ≫ affinePlane.mul k₀ = affineLine.smul k₀ a := by
-  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
-  · rw [Category.assoc, affinePlane.mul, AffineSpace.homOfVector_over, affineLine.smul,
-      AffineSpace.smul_over]
-    exact comp_over (affinePlane.sndFiberIncl a) _
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affinePlane.mul,
-      AffineSpace.homOfVector_appTop_coord, map_mul, ← CommRingCat.comp_apply,
-      ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← Scheme.Hom.comp_appTop,
-      affinePlane.sndFiberIncl_fst, affinePlane.sndFiberIncl_snd, Scheme.Hom.comp_appTop,
-      CommRingCat.comp_apply, AffineSpace.homOfVector_appTop_coord, affineLine.smul,
-      AffineSpace.smul_appTop_coord, mul_comm]
+/-- Along the fibre `x ↦ (x, a)`, the product `x ξ` restricts to `a x`: with the scaling,
+`ι_a ≫ μ ≫ (1 ·) = (a ·)`. -/
+lemma affineLine.fibreInclusion_comp_mul_comp_smul_one (a : k₀) :
+    affineLine.fibreInclusion k₀ a ≫ affinePlane.mul k₀ ≫ affineLine.smul k₀ 1 =
+      affineLine.smul k₀ a := by
+  have hc : (affineLine.fibreInclusion k₀ a).appTop
+      ((affinePlane k₀ ↘ Spec (CommRingCat.of k₀)).appTop ((Scheme.ΓSpecIso (.of k₀)).inv.hom 1) *
+        ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
+          (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit))) =
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).appTop ((Scheme.ΓSpecIso (.of k₀)).inv.hom a) *
+        AffineSpace.coord _ PUnit.unit := by
+    have h₁ : (affineLine.fibreInclusion k₀ a).appTop
+        ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit)) =
+          (affineLine.fibreInclusion k₀ a ≫ affinePlane.fst k₀).appTop
+            (AffineSpace.coord _ PUnit.unit) := rfl
+    have h₂ : (affineLine.fibreInclusion k₀ a).appTop
+        ((affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) =
+          (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).appTop
+            ((affineLine.rationalPointHom k₀ a).appTop (AffineSpace.coord _ PUnit.unit)) := by
+      change (affineLine.fibreInclusion k₀ a ≫ affinePlane.snd k₀).appTop _ = _
+      rw [affineLine.fibreInclusion_snd]
+      rfl
+    rw [map_mul, map_mul, h₁, h₂, affineLine.fibreInclusion_fst, affineLine.rationalPointHom,
+      AffineSpace.homOfVector_appTop_coord, map_one, map_one, map_one, one_mul, mul_comm]
     rfl
+  rw [affinePlane.mul_eq_homOfSection, affineLine.homOfSection_comp_smul,
+    affineLine.comp_homOfSection, hc, ← affineLine.homOfSection_comp_smul,
+    affineLine.homOfSection_coord, Category.id_comp]
 
-/-- The Fourier kernel is the pullback of `ℒ_ψ` along the multiplication. -/
-lemma fourierKernel_eq (ψ : AddChar k₀ (PadicAlgCl l)) :
-    fourierKernel ψ = (WeilSheaf.upperStar (affinePlane.mul k₀)).obj (artinSchreier ψ 1) :=
-  rfl
+end RationalPoint
 
-omit [Finite k₀] in
-/-- Multiplication by `a` followed by multiplication by `1` is multiplication by `a`. -/
-lemma affineLine.smul_comp_smul_one (a : k₀) :
-    affineLine.smul k₀ a ≫ affineLine.smul k₀ 1 = affineLine.smul k₀ a := by
-  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
-  · simp [affineLine.smul]
-  · simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affineLine.smul,
-      AffineSpace.smul_appTop_coord, map_one, one_mul]
+/-- Restricted to the fibre `x ↦ (x, a)`, the pullback along `(x, ξ) ↦ 1 · x ξ` is the pullback
+along `x ↦ a x`. -/
+theorem nonempty_iso_upperStar_fibreInclusion_mul_smul_one (a : k₀)
+    (F : WeilSheaf k₀ l (affineLine k₀)) :
+    Nonempty ((WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).obj
+      ((WeilSheaf.upperStar (affinePlane.mul k₀)).obj
+        ((WeilSheaf.upperStar (affineLine.smul k₀ 1)).obj F)) ≅
+      (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj F) := by
+  obtain ⟨e₁⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj (affinePlane.mul k₀)
+    (affineLine.smul k₀ 1) _ rfl F
+  obtain ⟨e₂⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj
+    (affineLine.fibreInclusion k₀ a) (affinePlane.mul k₀ ≫ affineLine.smul k₀ 1) _
+    (affineLine.fibreInclusion_comp_mul_comp_smul_one a) F
+  exact ⟨(WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).mapIso e₁ ≪≫ e₂⟩
 
-/-- Along the line `x ↦ (x, a)`, the Fourier kernel `μ^* ℒ_ψ` restricts to `ℒ_{ψ(a x)}`. -/
-theorem nonempty_iso_upperStar_sndFiberIncl_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l))
+/-- The Fourier kernel restricted to the fibre `x ↦ (x, a)` is `ℒ_{ψ(a x)}`. -/
+theorem nonempty_iso_upperStar_fibreInclusion_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l))
     (a : k₀) :
-    Nonempty ((WeilSheaf.upperStar (affinePlane.sndFiberIncl a)).obj (fourierKernel ψ) ≅
+    Nonempty ((WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).obj (fourierKernel ψ) ≅
       artinSchreier ψ a) := by
-  obtain ⟨I, hI⟩ : ∃ I : WeilSheaf k₀ l (affineLine k₀), ∀ b : k₀,
-      Nonempty (artinSchreier ψ b ≅ (WeilSheaf.upperStar (affineLine.smul k₀ b)).obj I) :=
-    ⟨_, fun _ ↦ ⟨Iso.refl _⟩⟩
-  rw [fourierKernel_eq]
-  exact ⟨(WeilSheaf.nonempty_iso_upperStar_comp (affinePlane.sndFiberIncl a) (affinePlane.mul k₀)
-      (artinSchreier ψ 1)).some.symm ≪≫
-    (WeilSheaf.nonempty_iso_upperStar_of_eq (affinePlane.sndFiberIncl_mul a)
-      (artinSchreier ψ 1)).some ≪≫
-    (WeilSheaf.upperStar (affineLine.smul k₀ a)).mapIso (hI 1).some ≪≫
-    (WeilSheaf.nonempty_iso_upperStar_comp (affineLine.smul k₀ a) (affineLine.smul k₀ 1)
-      I).some.symm ≪≫
-    (WeilSheaf.nonempty_iso_upperStar_of_eq (affineLine.smul_comp_smul_one a) I).some ≪≫
-    (hI a).some.symm⟩
+  rw [fourierKernel, artinSchreier, artinSchreier]
+  exact nonempty_iso_upperStar_fibreInclusion_mul_smul_one a _
 
-/-- Along the line `x ↦ (x, a)`, the integrand `pr₁^* K ⊗ μ^* ℒ_ψ` of the Fourier transform
-restricts to `K ⊗ ℒ_{ψ(a x)}`. -/
-theorem nonempty_iso_upperStar_sndFiberIncl_fourierIntegrand (ψ : AddChar k₀ (PadicAlgCl l))
-    (K : WeilComplex k₀ l (affineLine k₀)) (a : k₀) :
-    Nonempty ((WeilComplex.upperStar (affinePlane.sndFiberIncl a)).obj
-      ((WeilComplex.tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ)).obj
-        ((WeilComplex.upperStar (affinePlane.fst k₀)).obj K)) ≅
-      (WeilComplex.tensorLisse (artinSchreier ψ a) (isLisse_artinSchreier ψ a)).obj K) := by
-  obtain ⟨t₁⟩ := WeilComplex.nonempty_iso_tensorLisse_comp_upperStar
-    (affinePlane.sndFiberIncl a) (fourierKernel ψ) (isLisse_fourierKernel ψ)
-  obtain ⟨u₁⟩ := WeilComplex.nonempty_iso_upperStar_comp (k₀ := k₀) (l := l)
-    (affinePlane.sndFiberIncl a) (affinePlane.fst k₀)
-  have key : ∀ (φ : affineLine k₀ ⟶ affineLine k₀) (_ : φ.IsOver (Spec (CommRingCat.of k₀))),
-      φ = 𝟙 _ → Nonempty (WeilComplex.upperStar (k₀ := k₀) (l := l) φ ≅ 𝟭 _) := by
-    rintro φ _ rfl
-    exact WeilComplex.nonempty_iso_upperStar_id
-  obtain ⟨u₀⟩ := key _ inferInstance (affinePlane.sndFiberIncl_fst a)
-  obtain ⟨t₂⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
-    (nonempty_iso_upperStar_sndFiberIncl_fourierKernel ψ a).some
-    ((isLisse_fourierKernel ψ).upperStar (affinePlane.sndFiberIncl a)) (isLisse_artinSchreier ψ a)
-  exact ⟨t₁.app _ ≪≫ (WeilComplex.tensorLisse _ _).mapIso ((u₁.app K).symm ≪≫ u₀.app K) ≪≫
-    t₂.app K⟩
+/-- **The fibre of the Fourier transform over a rational point**: pulled back to the point
+`a : Spec k₀ ⟶ 𝔸¹`, the transform `FT_ψ(K)` is `RΓ_c(𝔸¹, K ⊗ ℒ_{ψ(a x)})[1]`, by compact support
+base change along `a` and the restriction `ℒ_{ψ(a x)}` of the kernel to the fibre. -/
+theorem nonempty_iso_fourierTransform_comp_upperStar_rationalPointHom
+    (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
+    Nonempty (fourierTransform ψ ⋙ WeilComplex.upperStar (affineLine.rationalPointHom k₀ a) ≅
+      WeilComplex.tensorLisse (artinSchreier ψ a) (isLisse_artinSchreier ψ a) ⋙
+        WeilComplex.derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) ⋙
+          shiftFunctor _ (1 : ℤ)) := by
+  obtain ⟨BC⟩ := WeilComplex.nonempty_iso_derivedLowerShriek_upperStar (k₀ := k₀) (l := l)
+    (affinePlane.snd k₀) (affineLine.rationalPointHom k₀ a)
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) (affineLine.fibreInclusion k₀ a)
+    (affineLine.isPullback_fibreInclusion a)
+  obtain ⟨TL⟩ := WeilComplex.nonempty_iso_tensorLisse_comp_upperStar
+    (affineLine.fibreInclusion k₀ a) (fourierKernel ψ) (isLisse_fourierKernel ψ)
+  obtain ⟨eK⟩ := nonempty_iso_upperStar_fibreInclusion_fourierKernel (l := l) ψ a
+  obtain ⟨eT⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso eK
+    (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ)) (isLisse_artinSchreier ψ a)
+  -- `ι_a^* ∘ pr₁^* ≅ (ι_a ≫ pr₁)^* = 𝟙^* ≅ 𝟭`
+  have eP : WeilComplex.upperStar (k₀ := k₀) (l := l) (affinePlane.fst k₀) ⋙
+      WeilComplex.upperStar (affineLine.fibreInclusion k₀ a) ≅ 𝟭 _ :=
+    (WeilComplex.upperStarCompIso _ _).symm ≪≫
+      WeilComplex.upperStarCongrIso (affineLine.fibreInclusion_fst a) ≪≫
+      WeilComplex.upperStarIdIso _
+  rw [fourierTransform]
+  exact ⟨Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ ((WeilComplex.upperStar
+          (affineLine.rationalPointHom k₀ a)).commShiftIso (1 : ℤ)) ≪≫
+        (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight BC _ ≪≫
+        Functor.associator _ _ _) ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight TL _ ≪≫
+      Functor.associator _ _ _) ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eP _ ≪≫ Functor.leftUnitor _ ≪≫
+    Functor.isoWhiskerRight eT _⟩
 
 /-- **Stalks of the Fourier transform are fibre integrals**, at the `k₀`-rational points of the
 dual line: for a Weil complex `K` on `𝔸¹` and `a ∈ k₀`, the stalk of `𝓗ʳ FT_ψ(K)` at the point
@@ -326,44 +254,48 @@ theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint
       (affineLine.rationalPoint k₀ a)).Equiv
         (((WeilComplex.tensorLisse (artinSchreier ψ a) (isLisse_artinSchreier ψ a)).obj
           K).compactlySupportedCohomology (r + 1))) := by
-  let σ := affineLine.rationalSection a
-  have hσ : σ ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) = 𝟙 _ :=
-    AffineSpace.homOfVector_over _ _
-  have hpt := Scheme.Hom.mem_finitePoints_of_comp_eq_id
-    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) (𝟙 _) (by simp)
+  set p := affineLine.rationalPointHom k₀ a
+  -- the unique point of `Spec k₀`, of degree one, mapping to the rational point `a`
+  have hy := Scheme.Hom.mem_finitePoints_of_comp_eq_id
+    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) (𝟙 _) (Category.id_comp _)
     (IsLocalRing.closedPoint k₀)
-  have hdeg := Scheme.Hom.degreeOver_eq_one_of_comp_eq_id
-    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) (𝟙 _) (by simp)
-    (IsLocalRing.closedPoint k₀)
-  simp only [Scheme.Hom.id_base, TopCat.hom_id, ContinuousMap.id_apply] at hpt hdeg
-  let pt : (Spec (CommRingCat.of k₀)).finitePoints := ⟨IsLocalRing.closedPoint k₀, hpt⟩
-  -- the stalk at `a` is the stalk of the pullback along `a : Spec k₀ ⟶ 𝔸¹`
-  obtain ⟨E₁⟩ := WeilSheaf.nonempty_equiv_stalk_upperStar σ
-    ((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)) pt
-    (affineLine.rationalPoint k₀ a) rfl (by
-      rw [hdeg]
-      exact (Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ σ hσ _).symm)
-  -- a Weil sheaf on `Spec k₀` is its global sections
-  obtain ⟨E₂⟩ := WeilSheaf.nonempty_equiv_stalk_globalSections_of_spec
-    ((WeilSheaf.upperStar σ).obj
-      ((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K))) pt
-  -- compact support base change along `a`, and the restriction of the integrand to the fibre
-  obtain ⟨bc⟩ := WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l)
-    (affinePlane.isPullback_sndFiberIncl a)
-  obtain ⟨eN⟩ := nonempty_iso_upperStar_sndFiberIncl_fourierIntegrand ψ K a
-  let M := (WeilComplex.tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ)).obj
-    ((WeilComplex.upperStar (affinePlane.fst k₀)).obj K)
-  let L := (WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀)).obj M
-  let T := (WeilComplex.tensorLisse (artinSchreier ψ a) (isLisse_artinSchreier ψ a)).obj K
-  let eF : (WeilComplex.upperStar σ).obj ((fourierTransform ψ).obj K) ≅
-      ((WeilComplex.derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj
-        T)⟦(1 : ℤ)⟧ :=
-    ((WeilComplex.upperStar σ).commShiftIso (1 : ℤ)).app L ≪≫
-    (shiftFunctor _ (1 : ℤ)).mapIso (bc.app M ≪≫
-      (WeilComplex.derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).mapIso eN)
-  let Ψ := (WeilComplex.homologySheafUpperStarIso σ r _).symm ≪≫
-    (WeilComplex.homologySheaf r).mapIso eF ≪≫
-    WeilComplex.homologySheafShiftIso _ 1 r (r + 1) (by omega)
-  exact ⟨E₁.symm.trans (E₂.trans (WeilSheaf.globalSectionsEquivOfIso Ψ))⟩
+  let y : (Spec (CommRingCat.of k₀)).finitePoints := ⟨_, hy⟩
+  have hdy : (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).degreeOver y.1 = 1 :=
+    Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ (𝟙 _) (Category.id_comp _) _
+  have hdx : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).degreeOver
+      (affineLine.rationalPoint k₀ a).1 = 1 :=
+    Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ p (affineLine.rationalPointHom_comp_over a) _
+  obtain ⟨e₁⟩ := WeilSheaf.nonempty_equiv_stalk_upperStar p
+    ((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)) y
+    (affineLine.rationalPoint k₀ a) rfl (hdy.trans hdx.symm)
+  replace e₁ := e₁.symm
+  -- the stalk on the point is the global sections
+  set G := (WeilSheaf.upperStar p).obj ((WeilComplex.homologySheaf r).obj
+    ((fourierTransform ψ).obj K))
+  set s := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y
+  have hs₁ : s ≫ ((Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
+      1).hom = (specGeometricFrobenius k₀ ^ 1).hom ≫ s :=
+    hdy ▸ Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ y
+  have : IsIso s := by
+    have : IsIso (pullback.snd (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
+        (Scheme.specAlgebraicClosure k₀).hom) := by
+      change IsIso (pullback.snd (𝟙 _) _)
+      infer_instance
+    have hs : s ≫ pullback.snd _ _ = 𝟙 _ := pullback.lift_snd _ _ _
+    have : IsIso (s ≫ pullback.snd _ _) := by rw [hs]; infer_instance
+    exact IsIso.of_isIso_comp_right s (pullback.snd _ _)
+  obtain ⟨e₂⟩ := G.nonempty_equiv_stalkAt_of_eq s hdy
+    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ y) hs₁
+  obtain ⟨e₃⟩ := G.nonempty_equiv_globalSections_stalkAt s hs₁
+  -- the pullback of the transform to the point
+  obtain ⟨E⟩ := nonempty_iso_fourierTransform_comp_upperStar_rationalPointHom (l := l) ψ a
+  have E' := E.app K
+  simp only [Functor.comp_obj] at E'
+  have e₄ := WeilSheaf.globalSectionsEquivOfIso
+    ((WeilComplex.homologySheafUpperStarIso p r ((fourierTransform ψ).obj K)).symm ≪≫
+      (WeilComplex.homologySheaf r).mapIso E' ≪≫
+      WeilComplex.homologySheafShiftIso _ 1 r (r + 1) (add_comm 1 r))
+  exact ⟨(e₁.trans (e₂.trans e₃.symm)).trans e₄⟩
+
 
 end AlgebraicGeometry

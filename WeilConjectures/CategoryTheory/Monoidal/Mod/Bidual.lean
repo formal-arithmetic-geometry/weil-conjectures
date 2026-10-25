@@ -57,6 +57,7 @@ lemma bidual_comp_ihom_map (M : Mod C A) {N N' : Mod C A} (f : N ⟶ N') :
   rw [uncurryHom_comp_ihom_map, uncurryHom_comp_ihomMap, uncurryHom_bidual, uncurryHom_bidual,
     BraidedCategory.braiding_naturality_right_assoc, evaluation_naturality, Category.assoc]
 
+/-- The internal hom out of an isomorphism is an isomorphism. -/
 lemma isIso_ihomMap_app {M M' : Mod C A} (g : M ⟶ M') [IsIso g] (N : Mod C A) :
     IsIso ((ihomMap g).app N) :=
   inferInstanceAs (IsIso ((ihomMapIso (asIso g)).hom.app N))

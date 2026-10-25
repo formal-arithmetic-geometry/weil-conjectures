@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
@@ -43,38 +44,6 @@ namespace AlgebraicGeometry.Scheme
 section Points
 
 variable {W Z : Scheme.{u}} (p : W ⟶ Z) [SurjectiveOnStalks p]
-
-/-- The residue field map of a morphism which is surjective on stalks is surjective. -/
-lemma Hom.residueFieldMap_surjective (w : W) : Function.Surjective (p.residueFieldMap w) := by
-  have h : Function.Surjective (Z.residue (p w) ≫ p.residueFieldMap w) := by
-    rw [residue_residueFieldMap]
-    intro y
-    obtain ⟨x, rfl⟩ := IsLocalRing.residue_surjective y
-    obtain ⟨x, rfl⟩ := p.stalkMap_surjective w x
-    exact ⟨x, by rw [CommRingCat.comp_apply]; rfl⟩
-  intro y
-  obtain ⟨x, hx⟩ := h y
-  exact ⟨Z.residue (p w) x, by rw [CommRingCat.comp_apply] at hx; exact hx⟩
-
-/-- The residue field map of a morphism which is surjective on stalks is an isomorphism, a
-surjective map of fields being bijective. -/
-lemma Hom.isIso_residueFieldMap (w : W) : IsIso (p.residueFieldMap w) :=
-  (ConcreteCategory.isIso_iff_bijective _).mpr
-    ⟨(p.residueFieldMap w).hom.injective, p.residueFieldMap_surjective w⟩
-
-/-- **Field-valued points lift along a morphism which is surjective on stalks**: if the image
-of `s : Spec K ⟶ Z` lies in the image of `p`, then `s` factors through `p`. -/
-lemma exists_comp_eq_of_mem_range {K : Type u} [Field K] (s : Spec (.of K) ⟶ Z)
-    (hs : s (IsLocalRing.closedPoint _) ∈ Set.range p) : ∃ s' : Spec (.of K) ⟶ W, s' ≫ p = s := by
-  obtain ⟨⟨z, φ⟩, rfl⟩ := (SpecToEquivOfField K Z).symm.surjective s
-  obtain ⟨w, hw⟩ := hs
-  simp only [SpecToEquivOfField_symm_apply, Hom.comp_apply, fromSpecResidueField_apply] at hw
-  subst hw
-  have := p.isIso_residueFieldMap w
-  refine ⟨Spec.map (inv (p.residueFieldMap w) ≫ φ) ≫ W.fromSpecResidueField w, ?_⟩
-  simp only [SpecToEquivOfField_symm_apply]
-  rw [Category.assoc, ← Hom.SpecMap_residueFieldMap_fromSpecResidueField, ← Category.assoc,
-    ← Spec.map_comp, IsIso.hom_inv_id_assoc]
 
 /-- Field-valued points lift along a surjective morphism which is surjective on stalks, for
 instance along a surjective closed immersion. -/

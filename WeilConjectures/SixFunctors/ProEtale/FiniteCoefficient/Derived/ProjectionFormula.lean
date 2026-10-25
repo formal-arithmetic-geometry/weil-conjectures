@@ -67,8 +67,9 @@ comparison carries the étale projection map of `Rg_*` to the pro-étale one
 `ν^*` commutes with extension by zero. The étale inputs are
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite` at the finite
 stages (`sk-thm-sf-pf-finite`) and
-`AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral` at the integral stage
-(`sk-thm-sf-pf-adic`); the rational stage is the image of the integral one under the
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map` at the integral
+stage (`sk-thm-sf-pf-adic`, assuming the two sides of the étale projection map derived
+complete); the rational stage is the image of the integral one under the
 rationalization (`sk-thm-sf-pf-field`). The finite Tor amplitude of `L` keeps
 `i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to commute with `Rg_*`.
 
@@ -157,21 +158,18 @@ lemma plus_derivedTensor_leftDerivedUpperStar_of_comparison [Etale.UpperStarPres
       (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀)) := by
   let P := (L(ProEtale.upperStar A g)).obj L
   obtain ⟨p, q, hNpq⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded N).2 hN
-  have hPN := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left
-    (torAmplitudeIn_leftDerivedUpperStar A g a b hL) hNpq
-  obtain ⟨β⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf (Scheme.ProEt.topology Z) A)
+  have hNP := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_right hNpq
+    (torAmplitudeIn_leftDerivedUpperStar A g a b hL)
   let e : D(ν^*(Z)[A]).obj
-      (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀)) ≅ P ⊗ N :=
+      (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀)) ≅ N ⊗ P :=
     ((ν^*(Z)[A]).leftDerivedFunctorIsoMapDerivedCategory.app _).symm ≪≫
       asIso (((ν^*(Z)[A]).leftDerivedTensorComparison.app M₀).app _) ≪≫
       tensorIso eM.symm (((leftDerivedComparisonUpperStarCompUpperStarIso A g).app L₀).symm ≪≫
-        (L(ProEtale.upperStar A g)).mapIso eL.symm) ≪≫
-      @BraidedCategory.braiding _ _ _ β N P
+        (L(ProEtale.upperStar A g)).mapIso eL.symm)
   have hb : _root_.DerivedCategory.TStructure.t.bounded (D(ν^*(Z)[A]).obj
       (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀))) :=
     _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e.symm
-      ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPN⟩)
+      ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hNP⟩)
   exact ((ν^*(Z)[A]).bounded_of_bounded_mapDerivedCategory_obj hb).1
 
 omit [ProEtale.UpperStarPreservesFlat A] in
@@ -188,12 +186,9 @@ lemma _root_.AlgebraicGeometry.Etale.plus_derivedTensor_leftDerivedUpperStar
     _root_.DerivedCategory.TStructure.t.plus
       (((Etale.derivedTensor A Z).obj M).obj ((L(Etale.upperStar A g)).obj L)) := by
   obtain ⟨p, q, hMpq⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).2 hM
-  have hPM := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left
-    (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL) hMpq
-  obtain ⟨β⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z.smallEtaleTopology A)
-  exact (_root_.DerivedCategory.TStructure.t.bounded.prop_of_iso
-    (@BraidedCategory.braiding _ _ _ β _ _)
-    ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPM⟩)).1
+  have hMP := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_right hMpq
+    (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL)
+  exact ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hMP⟩).1
 
 variable {A} in
 /-- **The pro-étale projection formula from the étale one.** Let `c = (X ⟶[i] Z ⟶[g] Y)` be a
@@ -259,15 +254,19 @@ the pro-étale one
 (`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`),
 and the étale projection formula for the proper `g` at finite coefficients is
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. The finite Tor
-amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`. -/
-theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite Λ] {f : X ⟶ Y}
+amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`.
+
+Only the bounded constructibility of `K` is used, as in the pro-étale half of blueprint
+`lem-weil-finite-compact-projection-formula`. -/
+theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite Λ] {f : X ⟶ Y}
     (c : Compactification f)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
-  obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK.1
+  have hKb := hK.bounded
+  obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK
   obtain ⟨L₀, -, ⟨eL⟩⟩ := hL.1
   obtain ⟨a, b, hLt⟩ := hL.2
   -- `i_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `i_! K ⊗ᴸ Lg^* L` is
@@ -281,10 +280,22 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
     (eL.symm ≪≫
       ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm)
     ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).bounded_mapDerivedCategory_obj
-      hK.1.bounded) hLt
+      hKb) hLt
   -- the étale projection formula for the proper `g`
   have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
   exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
+
+/-- The projection formula of `sk-thm-sf-pf-proetale` for `Rf_!` computed with an arbitrary
+compactification `c` of `f`, for `K` and `L` in `Dctf`: a special case of
+`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_boundedConstructible`. -/
+theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite Λ] {f : X ⟶ Y}
+    (c : Compactification f)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L :=
+  hasProjectionFormulaOfCompactification_of_boundedConstructible Λ c hK.1 hL
 
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`: Projection formula: the pro-étale
 realization; the finite stages.
@@ -304,6 +315,47 @@ theorem hasProjectionFormula_of_constructibleFiniteTor [Finite Λ] (f : X ⟶ Y)
   hasProjectionFormulaOfCompactification_of_constructibleFiniteTor Λ
     (HasCompactification.compactification f) hK hL
 
+/-- The pro-étale projection formula at a finite coefficient stage for `K` bounded constructible
+(of étale origin) and `L` in `Dctf`, computed with the chosen compactification of `f`. -/
+theorem hasProjectionFormula_of_boundedConstructible [Finite Λ] (f : X ⟶ Y)
+    [HasCompactification f]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  hasProjectionFormulaOfCompactification_of_boundedConstructible Λ
+    (HasCompactification.compactification f) hK hL
+
+/-- Blueprint `lem-weil-finite-compact-projection-formula`: Finite-coefficient compact-support
+projection formula.
+
+Let `Λ` be a finite coefficient ring and `f : X ⟶ Y` a morphism admitting a compactification.
+On the small étale sites, for `K ∈ Dᵇc(X_ét, Λ)` and `L ∈ Dᵇc(Y_ét, Λ)` of finite Tor amplitude,
+the projection transformation `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism; and the same
+holds on the small pro-étale sites for the pro-étale realizations, i.e. for `K` bounded
+constructible (of étale origin) and `L` in `Dctf(Y_proét, Λ)`. Naturality in `K` and `L` holds
+because the projection map is a natural transformation of bifunctors
+(`AlgebraicGeometry.Etale.projectionMap`, `AlgebraicGeometry.ProEtale.projectionMap`).
+
+The étale half is `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, the pro-étale half
+`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_boundedConstructible`, transported along
+the comparison `ν^*`. -/
+theorem hasProjectionFormula_etale_and_proEtale_of_finite [Finite Λ] (f : X ⟶ Y)
+    [HasCompactification f] :
+    (∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+        (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+        Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        Etale.DerivedCategory.boundedConstructibleFiniteTor Λ Y L →
+        Etale.HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L) ∧
+      ∀ (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+        (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))),
+        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
+        HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  ⟨fun K L _ _ ↦ Etale.hasProjectionFormula_of_finite Λ f K L,
+    fun _ _ hK hL ↦ hasProjectionFormula_of_boundedConstructible Λ f hK hL⟩
+
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale
@@ -313,8 +365,11 @@ open Scheme
 section Integral
 
 set_option hygiene false in
-/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. -/
-local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. The ring structure is written
+as the one underlying the commutative ring structure, as in the statements of the lemmas for
+general commutative coefficient rings that are applied to it. -/
+local notation "𝐌" =>
+  @ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)) CommRing.toRing
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
   [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
@@ -333,12 +388,20 @@ variable {X Y : Scheme.{u}}
 
 Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
 derived complete complexes `K₀`, `L₀` of étale sheaves of `𝒪_E`-modules of finite Tor amplitude,
-with the given étale-origin witnesses. Then the projection map
+with the given étale-origin witnesses, and assume that both sides `Rf_! K₀ ⊗ᴸ L₀` and
+`Rf_!(K₀ ⊗ᴸ Lf^* L₀)` of the étale projection map are derived complete. Then the projection map
 `(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. As in the blueprint, this is the étale
-projection formula at the integral stage
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral`, blueprint
-`sk-thm-sf-pf-adic`) transported along the comparison `ν^*`
-(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). -/
+projection formula at the integral stage transported along the comparison `ν^*`
+(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). The étale
+input is the plain projection map of `D(Y_ét, 𝒪_E)`, an isomorphism because its reduction modulo
+`𝔪_E` is (`sk-thm-sf-pf-adic`, Steps 1 and 2) and both its sides are derived complete
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`).
+
+The derived completeness of the two sides is a hypothesis: the étale integral stage
+(`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`) only gives the projection formula
+after derived completion, and the plain operations of `D(Y_ét, 𝒪_E)` need not preserve derived
+completeness (see the module docstring of
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`). -/
 theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}
@@ -350,10 +413,16 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
     (hKt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 X K₀)
     (hLc : Etale.DerivedCategory.boundedConstructible 𝐌 Y L₀)
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
-    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
+    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((Etale.derivedTensor 𝐌 Y).obj ((Etale.rightDerivedLowerShriek 𝐌 f).obj K₀)).obj L₀))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      ((Etale.rightDerivedLowerShriek 𝐌 f).obj
+        (((Etale.derivedTensor 𝐌 X).obj K₀).obj ((L(Etale.upperStar 𝐌 f)).obj L₀)))) :
     HasProjectionFormula 𝐌 f K L := by
-  have hPF := Etale.hasProjectionFormula_of_derivedCompleteIntegral l E f K₀ L₀
-    hKc hK hKt hLc hL hLt
+  have hPF := Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map l E f K₀ L₀ hs ht
+    (Etale.isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral l E f K₀ L₀
+      hKc hK hKt hLc hL hLt)
   rw [Etale.HasProjectionFormula, Etale.HasProjectionFormulaOfCompactification,
     Etale.projectionMapOfCompactification_app_app] at hPF
   have hPF' := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ _ hPF
@@ -374,7 +443,8 @@ Verdier quotient by the objects killed by a nonzero element of `𝒪_E`, and the
 over `E` for objects obtained by rationalization from the integral stage is the image of the
 integral projection map under the localization functor. It is an isomorphism, as in the blueprint
 (`thm-sf-pf-field`): the integral projection map is
-(`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`). -/
+(`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`, which assumes
+that both sides of the étale projection map are derived complete). -/
 theorem isIso_rationalization_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}
@@ -386,12 +456,17 @@ theorem isIso_rationalization_map_projectionMap (f : X ⟶ Y) [HasCompactificati
     (hKt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 X K₀)
     (hLc : Etale.DerivedCategory.boundedConstructible 𝐌 Y L₀)
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
-    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
+    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((Etale.derivedTensor 𝐌 Y).obj ((Etale.rightDerivedLowerShriek 𝐌 f).obj K₀)).obj L₀))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      ((Etale.rightDerivedLowerShriek 𝐌 f).obj
+        (((Etale.derivedTensor 𝐌 X).obj K₀).obj ((L(Etale.upperStar 𝐌 f)).obj L₀)))) :
     IsIso ((Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
       (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌))).map
         (((projectionMap 𝐌 f).app K).app L)) :=
   have : IsIso (((projectionMap 𝐌 f).app K).app L) :=
-    hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt
+    hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt hs ht
   inferInstance
 
 end Integral

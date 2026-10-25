@@ -44,9 +44,13 @@ In this repository the stages are realised as follows.
   `𝒪_E`-linear fully faithful triangulated functor is fully faithful
   (`CategoryTheory.Rationalization.full_map`), which is the blueprint's argument that
   bijectivity persists after tensoring with `E`.
-* `ℚ̄_ℓ`: pro-étale sheaves of `ℚ̄_ℓ`-modules (`AlgebraicGeometry.WeilCoefficients`), the
-  coefficients of the Weil sheaves of `WeilConjectures.WeilSheaf.Category`. Again `Ri_*` is fully
-  faithful on the whole derived category.
+* `ℚ̄_ℓ`: the bounded constructible objects `Dᵇc(X, ℚ̄_ℓ)` of the derived category of `ℓ`-adic
+  sheaves `AlgebraicGeometry.ProEtale.AdicSheaf l X`, i.e. pro-étale sheaves of modules over the
+  constant `ℓ`-adic sheaf `ℚ̄_ℓ,X`
+  (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic`). The `ℓ`-adic `i_*` is
+  fully faithful and preserves K-injective complexes, so `Ri_*` is fully faithful on the whole
+  derived category
+  (`AlgebraicGeometry.ProEtale.full_boundedConstructibleAdic_ι_comp_rightDerivedLowerStar`).
 
 At each stage the full faithfulness is stated for the inclusion of the stage category followed by
 `Ri_*`, which is full faithfulness of `i_* : Dᵇc(Z, Λ) ⥤ Dᵇc(X, Λ)` whatever the target
@@ -238,34 +242,6 @@ theorem Etale.isIso_unit_app_rightDerivedLowerStarDerivedCompleteRational
 
 end Integral
 
-section AlgebraicClosure
-
-variable (l : ℕ) [Fact l.Prime]
-
-/-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image `Ri_*` along a
-closed immersion is fully faithful on the derived category of pro-étale sheaves of
-`ℚ̄_ℓ`-modules, hence on any full subcategory of constructible objects. -/
-instance ProEtale.full_rightDerivedFunctor_lowerStar_weilCoefficients :
-    (ProEtale.lowerStar (WeilCoefficients.{u} l) i).rightDerivedFunctor.Full :=
-  inferInstance
-
-instance ProEtale.faithful_rightDerivedFunctor_lowerStar_weilCoefficients :
-    (ProEtale.lowerStar (WeilCoefficients.{u} l) i).rightDerivedFunctor.Faithful :=
-  inferInstance
-
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the stage `ℚ̄_ℓ`: for any right adjoint
-`Ri^!` of `Ri_*` on pro-étale sheaves of `ℚ̄_ℓ`-modules, the unit `Q ⟶ Ri^! Ri_* Q` is an
-isomorphism. -/
-theorem ProEtale.isIso_unit_app_weilCoefficients
-    {G : DerivedCategory (Sheaf (ProEt.topology X) (WeilCoefficients.{u} l)) ⥤
-      DerivedCategory (Sheaf (ProEt.topology Z) (WeilCoefficients.{u} l))}
-    (adj : (ProEtale.lowerStar (WeilCoefficients.{u} l) i).rightDerivedFunctor ⊣ G)
-    (Q : DerivedCategory (Sheaf (ProEt.topology Z) (WeilCoefficients.{u} l))) :
-    IsIso (adj.unit.app Q) :=
-  inferInstance
-
-end AlgebraicClosure
-
 section BoundedConstructible
 
 /-! ### The categories `Dᵇc(-, Λ)` at the integral, rational and `ℚ̄_ℓ` stages -/
@@ -297,7 +273,10 @@ instance Etale.faithful_boundedConstructibleIntegral_ι_comp_rightDerivedLowerSt
         i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
+/-- Blueprint `def-weil-rationalization-karoubi`: Rationalization (scalar localization), the
+category `Dᵇc(Y, E) = Dᵇc(Y, 𝒪_E)[1/ϖ_E]` (as its full subcategory, with no Karoubi completion).
+
+The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
 `Dᵇc(X, 𝒪_E)`, as a full subcategory of `D_comp(X_ét, E)`. Its `Hom` groups are those of
 `Dᵇc(X, 𝒪_E)` with the nonzero elements of `𝒪_E` inverted
 (`CategoryTheory.Rationalization.exists_smul_eq_map`,
@@ -309,7 +288,9 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
       ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj L) ∧
     Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K)
 
-/-- The rational stage `Dᵇc(X, E)` of blueprint `def-weil-rationalization-karoubi`: the Karoubi
+/-- The Karoubi envelope of the rational stage `Dᵇc(X, E)` of blueprint
+`def-weil-rationalization-karoubi` (which takes no Karoubi completion; the canonical functor into
+the envelope is an equivalence by `lem-weil-rationalization-idempotent-complete`): the Karoubi
 envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=
   Idempotents.Karoubi (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory
@@ -377,7 +358,10 @@ instance ProEtale.full_adicLowerStar : (ProEtale.adicLowerStar l i).Full :=
 instance ProEtale.faithful_adicLowerStar : (ProEtale.adicLowerStar l i).Faithful :=
   (ProEtale.adicUpperStarLowerStarAdjunction l i).fullyFaithfulROfIsIsoCounit.faithful
 
-/-- The stage `ℚ̄_ℓ` of `Dᵇc(X, ℚ̄_ℓ)`: bounded complexes of sheaves of modules over the
+/-- Blueprint `def-weil-algebraically-closed-coefficients`: Algebraically closed coefficient
+category
+
+The stage `ℚ̄_ℓ` of `Dᵇc(X, ℚ̄_ℓ)`: bounded complexes of sheaves of modules over the
 constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` with constructible cohomology sheaves
 (`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of
 blueprint `def-weil-algebraically-closed-coefficients` realised in the Bhatt–Scholze model. -/

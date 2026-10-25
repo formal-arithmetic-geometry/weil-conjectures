@@ -84,7 +84,8 @@ noncomputable abbrev boundedConstructibleIntegralUpperStar (j : U ⟶ X) [IsOpen
     have ⟨_, hϖ, hI⟩ := hϖI.out
     boundedConstructibleIntegral_leftDerivedUpperStar hϖ hI j hK
 
-variable [IsNoetherianRing Λ] {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+variable [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] {k : Type u} [Field k]
+  [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 variable (I) in
 /-- The direct image `Rf_* : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)`, the restriction of `Rf_*`
@@ -138,7 +139,7 @@ faithful, that `j^* ⊣ Rj_*` has invertible counit, that `j^* Ri_* = 0`, and th
 
 section ClosedSupport
 
-variable {U Z X : Scheme.{u}} [IsNoetherianRing Λ]
+variable {U Z X : Scheme.{u}} [IsNoetherianRing Λ] [Finite (Λ ⧸ I)]
   [Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})] {k : Type u} [Field k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))] (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
@@ -177,8 +178,6 @@ lemma boundedConstructibleIntegralRightDerivedLowerStar_essImage_of_isZero
   exact ⟨⟨_, boundedConstructibleIntegral_of_rightDerivedLowerStar_obj hϖ hI i
     ((DerivedCategory.boundedConstructibleIntegral I X).prop_of_iso e K.property)⟩,
     ⟨ObjectProperty.isoMk _ e.symm⟩⟩
-
-variable [Finite (Λ ⧸ I)]
 
 include hij in
 /-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`, the
@@ -330,7 +329,7 @@ section Comparison
 
 variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
   [Finite (Λ ⧸ I)] [Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
-  {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
   (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]

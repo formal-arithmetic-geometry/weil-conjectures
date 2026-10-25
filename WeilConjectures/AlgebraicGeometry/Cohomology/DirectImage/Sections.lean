@@ -5,7 +5,13 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionDenominators
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionTorsion
+public import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+
+
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -18,6 +24,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolutio
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
+public import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-!
 # Sections of higher direct images over an affine base
@@ -486,6 +494,63 @@ theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Ty
 
 section BaseChange
 
+/-- **The derived direct image commutes with restriction to an open subscheme of the base.** Let
+`g : T' ⟶ T` be an open immersion, and let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be the base change
+of `f` along `g`, in the cartesian square `sq`
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+T' --g---> T
+```
+Then `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in `D(𝒪_{T'})`.
+
+The base change `g'` is an open immersion, and restriction along an open immersion is exact and
+preserves K-injective complexes (`AlgebraicGeometry.openImmersion_restriction_derived_properties`).
+Hence deriving the underived isomorphism `f_* ⋙ (-)|_{T'} ≅ (-)|_{X'} ⋙ f'_*`
+(`AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`) gives
+`R f_* ⋙ (-)|_{T'} ≅ (-)|_{X'} ⋙ R f'_*`. The per-degree form is
+`AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`; the same argument for
+the restriction `f ∣_ V` to an open `V` of the base, with `schemeDerivedDirectImage`, is
+`AlgebraicGeometry.schemeDerivedDirectImage_openRestriction`. -/
+noncomputable def derivedPushforwardIsoRestrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
+    [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
+    (derivedPushforward f').obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ)) ≅
+      (restrictFunctor g).mapDerivedCategory.obj
+        ((derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ)) :=
+  have : IsOpenImmersion g' :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback (P := @IsOpenImmersion) sq.flip ‹_›
+  have : PreservesFiniteLimits (restrictFunctor g') :=
+    (openImmersion_restriction_derived_properties g').1
+  have : (restrictFunctor g').PreservesKInjectiveComplexes :=
+    (openImmersion_restriction_derived_properties g').2
+  have : PreservesColimitsOfSize.{u, u} (restrictFunctor g') :=
+    (restrictAdjunction g').leftAdjoint_preservesColimits
+  -- `D((-)|_{X'}) ⋙ R f'_* ≅ R((-)|_{X'} ⋙ f'_*) ≅ R(f_* ⋙ (-)|_{T'}) ≅ R f_* ⋙ D((-)|_{T'})`
+  let e : (restrictFunctor g').mapDerivedCategory ⋙ derivedPushforward f' ≅
+      derivedPushforward f ⋙ (restrictFunctor g).mapDerivedCategory :=
+    Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm _ ≪≫
+      (Functor.rightDerivedFunctorCompIso _ _).symm ≪≫
+      Functor.rightDerivedFunctorNatIso (pushforwardRestrictIso sq).symm ≪≫
+      Functor.rightDerivedFunctorCompMapDerivedCategoryIso _ _
+  (derivedPushforward f').mapIso ((DerivedCategory.singleFunctor _ 0).mapIso
+      ((restrictFunctorIsoPullback g').app ℱ).symm ≪≫
+    ((restrictFunctor g').mapDerivedCategorySingleFunctor 0).symm.app ℱ) ≪≫
+    e.app _
+
+/-- **The derived direct image commutes with restriction to an open subscheme of the base**: for
+the base change `f'` of `f` along an open immersion `g`, `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in
+`D(𝒪_{T'})` (`AlgebraicGeometry.Scheme.Modules.derivedPushforwardIsoRestrict`). -/
+theorem nonempty_derivedPushforward_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
+    [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
+    Nonempty ((derivedPushforward f').obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ)) ≅
+      (restrictFunctor g).mapDerivedCategory.obj
+        ((derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ))) :=
+  ⟨derivedPushforwardIsoRestrict f ℱ g g' f' sq⟩
+
 variable [HasInjectiveResolutions X.Modules]
 
 /-- **The higher direct images commute with restriction to an open subscheme of the base.** Let
@@ -636,3 +701,137 @@ theorem exists_isZero_higherDirectImage [CompactSpace T] :
 end Vanishing
 
 end AlgebraicGeometry.Scheme.Modules
+
+section
+
+/-!
+# Sections of higher direct images over an affine base
+
+Over an affine base, the sections of `R^q f_* ℱ` are the cohomology `H^q(X, ℱ)` for a
+quasi-compact separated morphism and a quasi-coherent `ℱ`. Also the compatibility of higher
+direct images with flat base change and with restriction to opens, their quasi-coherence, and
+their vanishing in high degrees.
+-/
+
+@[expose] public section
+
+
+
+open CategoryTheory Limits
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+variable {X T : Scheme.{u}}
+variable (f : X ⟶ T) (ℱ : X.Modules)
+
+section QuasiCoherence
+
+variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+set_option backward.isDefEq.respectTransparency.types true in
+/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
+quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
+
+Proof: the two localization assertions for sections of the higher direct image give the
+quasi-coherence criterion `isQuasicoherent_of_forall_isAffineOpen`: sections on a principal
+open lift after multiplying by a power of its defining function, and sections restricting
+to zero are annihilated by a power. Apply the criterion and restrict to each affine open.
+The two assertions are stated in separate acyclic modules, with proofs through localization
+of cohomology (Stacks, Tag 09MR) and the cohomology-presheaf description (Tag 01E4).
+
+(blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
+(blueprint: `sk-thm-picard-coherence`)
+(blueprint: new-higher-direct-image-affine-local-qcoherent) -/
+theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
+    ∀ U : T.affineOpens,
+      (((higherDirectImage f q).obj ℱ).over U.1).IsQuasicoherent := by
+  have hqc : ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
+    isQuasicoherent_of_forall_isAffineOpen _
+      (fun W hW a s ↦ higherDirectImage_section_clearDenominators f ℱ q W hW a s)
+      (fun W hW a t ht ↦ higherDirectImage_section_pow_annihilates f ℱ q W hW a t ht)
+  intro U
+  exact SheafOfModules.isQuasicoherent_over _ U.1
+
+
+
+end QuasiCoherence
+section Comparison
+
+
+
+
+
+variable [IsAffine T] [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end Comparison
+
+section RightDerivedGlobalSections
+
+
+
+
+variable [HasInjectiveResolutions X.Modules]
+
+
+
+
+
+
+
+
+
+
+
+end RightDerivedGlobalSections
+
+
+
+
+
+
+
+
+
+
+
+section BaseChange
+
+variable [HasInjectiveResolutions X.Modules]
+
+
+
+
+
+end BaseChange
+
+
+section Vanishing
+
+variable [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+
+
+
+
+end Vanishing
+
+end AlgebraicGeometry.Scheme.Modules
+
+end

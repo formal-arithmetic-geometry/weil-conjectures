@@ -267,8 +267,39 @@ lemma pentagon :
         ← reassoc_of% h₅, associator_hom_fac_app_app_app, reassoc_of% h₆, ← reassoc_of% h₇,
         associator_hom_fac_app_app_app_assoc]
 
-noncomputable instance : MonoidalCategory (DerivedMonoidal L W) :=
-  .ofBifunctor _ _ _ _ _ (pentagon L W) (triangle L W)
+/-! The tensor product and the whiskerings of the derived monoidal structure are separate
+constants, definitionally equal to the corresponding fields of `MonoidalCategory.ofBifunctor`.
+When two terms differ only in nested instance proofs, the kernel then compares these constants
+argument by argument instead of unfolding the left derived bifunctor. -/
+
+/-- The derived tensor product of two objects, `((bifunctor L W).obj X₁).obj X₂`. -/
+@[reducible] noncomputable def tensorObjAux (X₁ X₂ : DerivedMonoidal L W) : DerivedMonoidal L W :=
+  ((bifunctor L W).obj X₁).obj X₂
+
+/-- The left whiskering of the derived tensor product, `((bifunctor L W).obj X₁).map f₂`. -/
+@[reducible] noncomputable def whiskerLeftAux (X₁ : DerivedMonoidal L W)
+    {X₂ Y₂ : DerivedMonoidal L W} (f₂ : X₂ ⟶ Y₂) :
+    tensorObjAux L W X₁ X₂ ⟶ tensorObjAux L W X₁ Y₂ :=
+  ((bifunctor L W).obj X₁).map f₂
+
+/-- The right whiskering of the derived tensor product, `((bifunctor L W).map f₁).app X₂`. -/
+@[reducible] noncomputable def whiskerRightAux {X₁ Y₁ : DerivedMonoidal L W} (f₁ : X₁ ⟶ Y₁)
+    (X₂ : DerivedMonoidal L W) : tensorObjAux L W X₁ X₂ ⟶ tensorObjAux L W Y₁ X₂ :=
+  ((bifunctor L W).map f₁).app X₂
+
+/-- The derived monoidal structure: the data of
+`MonoidalCategory.ofBifunctor _ _ _ _ _ (pentagon L W) (triangle L W)`, with the tensor product
+and the whiskerings given by the constants above; the axioms are those of `ofBifunctor`. -/
+noncomputable instance : MonoidalCategory (DerivedMonoidal L W) where
+  __ := MonoidalCategory.ofBifunctor _ _ _ _ _ (pentagon L W) (triangle L W)
+  tensorObj := tensorObjAux L W
+  whiskerLeft := whiskerLeftAux L W
+  whiskerRight := whiskerRightAux L W
+  tensorHom f₁ f₂ := whiskerRightAux L W f₁ _ ≫ whiskerLeftAux L W _ f₂
+  tensorUnit := (L').obj (𝟙_ C)
+  associator X₁ X₂ X₃ := (((associator L W).app X₁).app X₂).app X₃
+  leftUnitor := (leftUnitor L W).app
+  rightUnitor := (rightUnitor L W).app
 
 lemma tensorObj_eq (X₁ X₂ : DerivedMonoidal L W) :
     X₁ ⊗ X₂ = ((bifunctor L W).obj X₁).obj X₂ :=

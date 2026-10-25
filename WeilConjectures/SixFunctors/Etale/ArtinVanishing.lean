@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationGeneric
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionOverMap
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionSplit
 
 /-!
