@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.RingTheory.KrullDimension.Field
 public import Mathlib.RingTheory.KrullDimension.Polynomial
 public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-public import WeilConjectures.Mathlib.Topology.ConstructibleGenericPoint
+public import WeilConjectures.Topology.ConstructibleGenericPoint
 
 /-!
 

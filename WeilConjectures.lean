@@ -6248,6 +6248,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 public import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteAffineOpenInFinite
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteClosedPoints
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteDegreeSublevelFiniteEquations
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompact
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompactAux
@@ -9394,7 +9395,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFiniteClosedPoints
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
@@ -9874,7 +9874,6 @@ public import WeilConjectures.Mathlib.Topology.Connected.Basic
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.Connected.TotallyDisconnected
 public import WeilConjectures.Mathlib.Topology.Constructible
-public import WeilConjectures.Mathlib.Topology.ConstructibleGenericPoint
 public import WeilConjectures.Mathlib.Topology.Constructions
 public import WeilConjectures.Mathlib.Topology.ExtremallyDisconnected
 public import WeilConjectures.Mathlib.Topology.Inseparable
@@ -12833,6 +12832,7 @@ public import WeilConjectures.Topology.ConstantSubsheafQuotientStalkIso
 public import WeilConjectures.Topology.ConstantSubsheafSelectedStalkRange
 public import WeilConjectures.Topology.ConstantSubsheafStalkBound
 public import WeilConjectures.Topology.ConstantSubsheafUnboundedNormalization
+public import WeilConjectures.Topology.ConstructibleGenericPoint
 public import WeilConjectures.Topology.ConstructibleInConstructible
 public import WeilConjectures.Topology.ConstructibleIntersection
 public import WeilConjectures.Topology.ConstructibleIsRetrocompact
