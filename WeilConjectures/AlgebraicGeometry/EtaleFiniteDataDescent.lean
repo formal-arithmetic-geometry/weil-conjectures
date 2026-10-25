@@ -47,6 +47,8 @@ private theorem comparison_fst {X Y Z : Scheme.{u}}
   subst k
   simpa using pullbackComp_inv_fst f g W
 
+-- the statement binds `α` in its last clause without using it
+set_option linter.unusedVariables false in
 /-- Blueprint: lem-weil-pbc-etale-finite-data-descent. -/
 theorem etale_finite_data_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
