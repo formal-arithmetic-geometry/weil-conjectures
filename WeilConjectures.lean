@@ -12076,6 +12076,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
 public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
