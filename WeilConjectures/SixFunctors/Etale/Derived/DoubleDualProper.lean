@@ -260,7 +260,7 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (aY : Y ⟶ S)
   (f : X ⟶ Y) [IsProper f] [HasCompactification f] [HasCompactification aY]
-  [HasCompactification (f ≫ aY)] [QuasiCompact (f ≫ aY)]
+  [HasCompactification (f ≫ aY)]
 
 /-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y` and a finite ring
 `Λ`, given the braided axiom for `Lf^*`, `Rf_* δ_K` is an isomorphism if and only if

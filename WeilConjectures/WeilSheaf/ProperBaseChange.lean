@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.WeilSheaf.LowerStar
+public import WeilConjectures.WeilSheaf.ProperBaseChangeFunctor
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
 
 /-!
@@ -92,7 +93,8 @@ theorem WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper
     (hf : IsProper f) (h : IsPullback g' f' f g) (K : WeilComplex k₀ l X) :
     Nonempty ((WeilComplex.upperStar g).obj ((WeilComplex.derivedLowerStar f).obj K) ≅
       (WeilComplex.derivedLowerStar f').obj ((WeilComplex.upperStar g').obj K)) :=
-  sorry
+  let ⟨e⟩ := WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper (l := l) hf h
+  ⟨e.app K⟩
 
 /-- **Proper base change for higher direct images**: for a cartesian square of `k₀`-schemes
 `X' = X ×_Y Y'` with `f : X ⟶ Y` proper, and a Weil sheaf `F` on `X`, there is an isomorphism of

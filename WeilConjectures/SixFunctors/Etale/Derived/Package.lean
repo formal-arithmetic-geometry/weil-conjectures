@@ -256,11 +256,11 @@ theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩
-  baseChangeLowerShriek g g' f' sq _ :=
+  baseChangeLowerShriek _ _ f' sq _ :=
     have : QuasiCompact f' := MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
     have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
     ⟨asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)⟩
-  baseChangeLowerStarOfProper g g' f' sq _ :=
+  baseChangeLowerStarOfProper _ _ _ sq _ :=
     have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
     ⟨asIso (derivedBaseChangeMap _ sq.toCommSq)⟩
   baseChangeLowerStarOfSmooth g _ _ sq hg := by
