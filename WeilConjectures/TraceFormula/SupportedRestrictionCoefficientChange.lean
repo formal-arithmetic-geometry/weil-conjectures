@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
 public import WeilConjectures.TraceFormula.SupportedRestriction
 
 /-!
@@ -37,20 +38,6 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
-
-/-- For adjunctions `L ⊣ R`, `L' ⊣ R'` and an isomorphism `τ : L ⋙ H ≅ G ⋙ L'`, the `L' ⊣ R'`
-adjoint of `G f` followed by the mate `G ⋙ R' ⟵ R ⋙ H` of `τ⁻¹` is `τ⁻¹` followed by `H` of the
-`L ⊣ R` adjoint of `f`. -/
-lemma Adjunction.homEquiv_symm_map_comp_mateEquiv_app {A B A' B' : Type*} [Category* A]
-    [Category* B] [Category* A'] [Category* B'] {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R)
-    {L' : A' ⥤ B'} {R' : B' ⥤ A'} (adj' : L' ⊣ R') (G : A ⥤ A') (H : B ⥤ B')
-    (τ : L ⋙ H ≅ G ⋙ L') {M : A} {N : B} (f : M ⟶ R.obj N) :
-    (adj'.homEquiv _ _).symm
-        (G.map f ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv)).natTrans.app N) =
-      τ.inv.app M ≫ H.map ((adj.homEquiv _ _).symm f) := by
-  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
-    mateEquiv_counit, Functor.map_comp]
-  exact τ.inv.naturality_assoc f _
 
 variable {C₂ : Type u₁} {CC : Type u₂} {CF : Type u₃} {CX : Type u₄}
   [Category.{v₁} C₂] [Category.{v₂} CC] [Category.{v₃} CF] [Category.{v₄} CX]
