@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Cospecialization
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representable
 
 /-!
 # Functoriality of the strict localization
@@ -40,15 +41,6 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 variable {S S' : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-
-/-- The underlying morphism of an identity in the small étale site. -/
-lemma Etale.id_left (X : S.Etale) : (𝟙 X : X ⟶ X).left = 𝟙 X.left :=
-  rfl
-
-/-- The underlying morphism of a composite in the small étale site. -/
-lemma Etale.comp_left {X Y Z : S.Etale} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (f ≫ g).left = f.left ≫ g.left :=
-  rfl
 
 namespace PointedEtaleNeighborhood
 
@@ -91,7 +83,7 @@ noncomputable def pullback :
   map_comp f g := by
     apply Subtype.ext
     apply MorphismProperty.Over.Hom.ext
-    apply pullback.hom_ext <;> simp [CategoryOfElements.comp_val, Etale.comp_left]
+    apply pullback.hom_ext <;> simp [CategoryOfElements.comp_val]
 
 end PointedEtaleNeighborhood
 
