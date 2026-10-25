@@ -32,18 +32,20 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
+variable  {ℓ : ℕ} {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))}
 
 attribute [local instance] boundedConstructibleBraiding DerivedCategory.braidedCategory'
 
-/-- The Koszul braiding of `Dᵇc(X)⟦Λ⟧` commutes with the shifts. -/
-lemma boundedConstructible_braiding_hom_commShiftIso_hom_app (a : ℤ) (K M : Dᵇc(X.left)⟦Λ⟧) :
-    (β_ K ((shiftFunctor (Dᵇc(X.left)⟦Λ⟧) a).obj M)).hom ≫
-        (((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).flip.obj K).commShiftIso a).hom.app M =
-      (((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj K).commShiftIso a).hom.app M ≫
-        (shiftFunctor (Dᵇc(X.left)⟦Λ⟧) a).map (β_ K M).hom :=
+/-- The Koszul braiding of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` commutes with the shifts. -/
+lemma boundedConstructible_braiding_hom_commShiftIso_hom_app (a : ℤ) (K M :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (β_ K ((shiftFunctor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) a).obj M)).hom ≫
+        (((curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).flip.obj K).commShiftIso
+            a).hom.app M =
+      (((curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K).commShiftIso a).hom.app
+          M ≫
+        (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) a).map (β_ K M).hom :=
   ObjectProperty.braiding_hom_commShiftIso_hom_app_of_ι _ a
     (fun K M ↦ DerivedCategory.braiding_hom_commShiftIso_hom_app K M a) K M
 

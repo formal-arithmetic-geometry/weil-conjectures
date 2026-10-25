@@ -210,7 +210,7 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
 
 section BoundedConstructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -220,27 +220,29 @@ variable {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
 /-- On the ambient derived category, the inverse of the unit comparison of the derived pullback
 on bounded constructible complexes is `ProEtale.CondensedRing.leftDerivedUpperStarUnitIso`. -/
 lemma boundedConstructibleUpperStar_εIso_inv_hom (f : X ⟶ Y) :
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStar Λ ℓ f)).inv.hom =
-      (leftDerivedUpperStarUnitIso Λ f.left).hom :=
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        f)).inv.hom =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f.left).hom :=
   rfl
 
 variable (X) in
 /-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on bounded constructible
 complexes is, at the unit, the inverse of the unit comparison `ε : Λ_X ≅ L(𝟙 X)^* Λ_X`. -/
 lemma boundedConstructibleUpperStarId_hom_app_unit :
-    (boundedConstructibleUpperStarId Λ ℓ X).hom.app (𝟙_ _) =
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar Λ ℓ (𝟙 X))).inv := by
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app (𝟙_ _) =
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙
+          X))).inv := by
   ext1
   rw [boundedConstructibleUpperStarId_hom_app_hom, boundedConstructibleUpperStar_εIso_inv_hom]
-  exact leftDerivedUpperStarId_hom_app_unit Λ X.left
+  exact leftDerivedUpperStarId_hom_app_unit (Profinite.padicAlgClRingObj ℓ) X.left
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 private lemma leftDerivedUpperStarUnitIso_hom_comp_left (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (leftDerivedUpperStarUnitIso Λ (f ≫ g).left).hom =
-      (leftDerivedUpperStarUnitIso Λ (f.left ≫ g.left)).hom :=
+    (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) (f ≫ g).left).hom =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) (f.left ≫ g.left)).hom :=
   rfl
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -248,8 +250,9 @@ omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [Fact ℓ.Prime] in
 private lemma leftDerivedUpperStarComp_hom_app_unit_obj (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (leftDerivedUpperStarComp Λ f.left g.left).hom.app (𝟙_ Dᵇc(Z.left)⟦Λ⟧).obj =
-      (leftDerivedUpperStarComp Λ f.left g.left).hom.app (𝟙_ _) :=
+    (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left).hom.app (𝟙_
+        Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧).obj =
+      (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left).hom.app (𝟙_ _) :=
   rfl
 
 /-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of the derived pullbacks on bounded
@@ -257,30 +260,34 @@ constructible complexes is compatible with the unit comparisons:
 `L(f ≫ g)^* Λ_Z ≅ Lf^* Lg^* Λ_Z ≅ Lf^* Λ_Y ≅ Λ_X` is the inverse of the unit comparison of
 `L(f ≫ g)^*`. -/
 lemma boundedConstructibleUpperStarComp_hom_app_unit (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (boundedConstructibleUpperStarComp Λ ℓ f g).hom.app (𝟙_ _) ≫
-        (boundedConstructibleUpperStar Λ ℓ f).map
-          (Functor.Monoidal.εIso (boundedConstructibleUpperStar Λ ℓ g)).inv ≫
-        (Functor.Monoidal.εIso (boundedConstructibleUpperStar Λ ℓ f)).inv =
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar Λ ℓ (f ≫ g))).inv := by
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).hom.app (𝟙_ _) ≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+          (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+              g)).inv ≫
+        (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            f)).inv =
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫
+          g))).inv := by
   ext1
   simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarComp_hom_app_hom,
     boundedConstructibleUpperStar_map_hom, boundedConstructibleUpperStar_εIso_inv_hom]
-  exact (congrArg (· ≫ _) (leftDerivedUpperStarComp_hom_app_unit_obj Λ ℓ f g)).trans
-    ((leftDerivedUpperStarComp_hom_app_unit Λ f.left g.left).trans
-      (leftDerivedUpperStarUnitIso_hom_comp_left Λ f g).symm)
+  exact (congrArg (· ≫ _) (leftDerivedUpperStarComp_hom_app_unit_obj ℓ f g)).trans
+    ((leftDerivedUpperStarComp_hom_app_unit (Profinite.padicAlgClRingObj ℓ) f.left g.left).trans
+      (leftDerivedUpperStarUnitIso_hom_comp_left f g).symm)
 
 variable (X) in
 /-- The identity isomorphism `R(𝟙 X)_* ≅ 𝟭` of the derived pushforward on bounded constructible
 complexes is, at the unit, the unit of `L(𝟙 X)^* ⊣ R(𝟙 X)_*` followed by the inverse of the unit
 comparison of `L(𝟙 X)^*`. -/
 lemma boundedConstructibleLowerStarId_inv_app_unit :
-    (boundedConstructibleLowerStarId Λ ℓ X).inv.app (𝟙_ _) =
-      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar Λ ℓ (𝟙 X)).map
-          (Functor.Monoidal.εIso (boundedConstructibleUpperStar Λ ℓ (𝟙 X))).inv := by
+    (boundedConstructibleLowerStarId ℓ X).inv.app (𝟙_ _) =
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 X)).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ (𝟙 X)).map
+          (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙
+              X))).inv := by
   have h := homEquiv_comp_conjugateEquiv_app Adjunction.id
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X))
-    (boundedConstructibleUpperStarId Λ ℓ X).hom (𝟙 (𝟙_ _))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 X))
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom (𝟙 (𝟙_ _))
   erw [Adjunction.id_homEquiv_apply, Category.id_comp, Category.comp_id] at h
   rw [boundedConstructibleUpperStarId_hom_app_unit, Adjunction.homEquiv_unit] at h
   rw [boundedConstructibleLowerStarId, conjugateIsoEquiv_apply_inv, Iso.symm_inv]

@@ -67,7 +67,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -186,8 +186,8 @@ map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R
 extension-by-zero exchange morphism, is `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmersion
     (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ)
-        ℓ (Compactification.ofIsOpenImmersion f.left) (Compactification.ofIsOpenImmersion f'.left)
+    boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
+        (Compactification.ofIsOpenImmersion f.left) (Compactification.ofIsOpenImmersion f'.left)
         (ofIsOpenImmersionBaseChangeHom g) (isPullback_ofIsOpenImmersion_overI sq)
         isPullback_ofIsOpenImmersion_overG ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')

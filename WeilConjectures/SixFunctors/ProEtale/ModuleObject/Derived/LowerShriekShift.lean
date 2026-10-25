@@ -68,7 +68,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 section OfCompactification
 
-variable [IsFinitenessCoefficient ℓ Λ] {X Y : Over (Spec (.of k))}
+variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
@@ -158,7 +158,7 @@ instance commShift_boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_ho
 
 end BaseChange
 
-variable [IsFinitenessCoefficient ℓ Λ] {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
+variable {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
   [IsOpenImmersion j.left] [IsOpenImmersion i'.left]
 
 set_option synthInstance.maxSize 1024 in
@@ -167,7 +167,7 @@ shifts. -/
 instance commShift_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
     (sq : IsPullback p i' j p') :
     NatTrans.CommShift
-      (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq) ℤ := by
+      (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq) ℤ := by
   unfold boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep'
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep'
@@ -182,7 +182,7 @@ end Exchange
 
 section Refinement
 
-variable [IsFinitenessCoefficient ℓ Λ] {X Z Z₁ Y : Over (Spec (.of k))}
+variable {X Z Z₁ Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
   [IsSeparated Z₁.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -191,11 +191,11 @@ variable [IsFinitenessCoefficient ℓ Λ] {X Z Z₁ Y : Over (Spec (.of k))}
 /-- The comparison `Rf_!^{c₁} ≅ Rf_!^c` along a refinement commutes with the shifts. -/
 instance commShift_boundedConstructibleLowerShriekRefinementIso'_hom
     (sq : IsPullback (𝟙 X) i i₁ h) {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)] :
-    NatTrans.CommShift (boundedConstructibleLowerShriekRefinementIso' Λ ℓ sq wp).hom ℤ := by
-  have : NatTrans.CommShift (eqToHom (show boundedConstructibleLowerStar Λ ℓ (h ≫ p₁) =
-      boundedConstructibleLowerStar Λ ℓ p by rw [wp])) ℤ :=
-    NatTrans.CommShift.eqToHom_congrArg (fun m : Z ⟶ Y ↦ boundedConstructibleLowerStar Λ ℓ m) wp
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)] :
+    NatTrans.CommShift (boundedConstructibleLowerShriekRefinementIso' ℓ sq wp).hom ℤ := by
+  have : NatTrans.CommShift (eqToHom (show boundedConstructibleLowerStar ℓ (h ≫ p₁) =
+      boundedConstructibleLowerStar ℓ p by rw [wp])) ℤ :=
+    NatTrans.CommShift.eqToHom_congrArg (fun m : Z ⟶ Y ↦ boundedConstructibleLowerStar ℓ m) wp
   unfold boundedConstructibleLowerShriekRefinementIso'
   dsimp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Iso.symm_hom, asIso_hom, eqToIso.hom]
@@ -240,13 +240,13 @@ instance commShift_boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_hom
   unfold boundedConstructibleOpenImmersionLowerShriekOfIsProperIso
   infer_instance
 
-instance commShift_boundedConstructibleLowerShriekOfCompactificationOfIsProperIso_hom
-    [IsFinitenessCoefficient ℓ Λ] :
+instance commShift_boundedConstructibleLowerShriekOfCompactificationOfIsProperIso_hom :
     NatTrans.CommShift
-      (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso Λ ℓ f).hom ℤ := by
+      (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ f).hom ℤ := by
   have : NatTrans.CommShift (Functor.isoWhiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso Λ ℓ f)
-      (boundedConstructibleLowerStar Λ ℓ (Compactification.ofIsProper f.left).overG) ≪≫
+      (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso (Profinite.padicAlgClRingObj ℓ) ℓ
+          f)
+      (boundedConstructibleLowerStar ℓ (Compactification.ofIsProper f.left).overG) ≪≫
       Functor.leftUnitor _).hom ℤ := inferInstance
   exact this
 

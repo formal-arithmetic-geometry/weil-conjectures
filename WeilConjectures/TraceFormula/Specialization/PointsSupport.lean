@@ -159,14 +159,17 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- If `C` vanishes on the open `W`, then `Lg^* C = 0` for every `g` with range in `W`. -/
 lemma isZero_upperStar_of_range_subset (W : X.left.Opens) {Y : Over (Spec (.of k))}
-    [IsFinitenessCoefficient ℓ Λ] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+ [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] (g : Y ⟶ X)
-    (h : Set.range g.left.base ⊆ W) (C : Dᵇc(X.left)⟦Λ⟧)
-    (hW : IsZero ((boundedConstructibleUpperStar Λ ℓ (opensOverι W)).obj C)) :
-    IsZero ((boundedConstructibleUpperStar Λ ℓ g).obj C) :=
-  ((boundedConstructibleUpperStar Λ ℓ (opensOverLift W g h)).map_isZero hW).of_iso
+    (h : Set.range g.left.base ⊆ W) (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hW : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι
+        W)).obj C)) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj C) :=
+  ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverLift W g
+      h)).map_isZero hW).of_iso
     (eqToIso (by rw [opensOverLift_ι]) ≪≫
-      (boundedConstructibleUpperStarComp Λ ℓ (opensOverLift W g h) (opensOverι W)).app C)
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverLift W g h)
+          (opensOverι W)).app C)
 
 /-- **Open–closed detection of vanishing at a rational point**: if `x` is a rational point of
 `V` and `g : Y ⟶ V` a quasi-compact morphism with range the complement of `x`, then a complex `E`

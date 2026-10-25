@@ -72,7 +72,7 @@ end Abstract
 
 section Exchange
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k k' : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -82,11 +82,13 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k
   {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
-/-- The specialization unit `σ : Λ ⟶ Ψ Λ` on bounded constructible complexes: the ambient
+/-- The specialization unit `σ : ℚ̲̄_ℓ ⟶ Ψ ℚ̲̄_ℓ` on bounded constructible complexes: the ambient
 specialization unit `NearbyCyclesModel.unit`. -/
-noncomputable def boundedConstructibleUnit (hM : M.PreservesBoundedConstructible Λ) :
-    𝟙_ (Dᵇc(X'.left)⟦Λ⟧) ⟶ (boundedConstructibleNearbyCycles hM).obj (𝟙_ _) :=
-  ObjectProperty.homMk (M.unit Λ)
+noncomputable def boundedConstructibleUnit (hM : M.PreservesBoundedConstructible
+    (Profinite.padicAlgClRingObj ℓ)) :
+    𝟙_ (Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ (boundedConstructibleNearbyCycles hM).obj (𝟙_
+        _) :=
+  ObjectProperty.homMk (M.unit (Profinite.padicAlgClRingObj ℓ))
 
 namespace Hom
 
@@ -96,9 +98,9 @@ variable (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
 /-- The pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` on bounded constructible complexes: the
 restriction of `NearbyCyclesModel.Hom.pushforwardExchange`. -/
 noncomputable def boundedConstructiblePushforwardExchange :
-    boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
-      boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
-  liftExchange (φ.pushforwardExchange Λ) _ _ _ _
+    boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
+      boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar ℓ f' :=
+  liftExchange (φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) _ _ _ _
 
 
 end Hom

@@ -251,56 +251,68 @@ variable {X Z X' Z' : Over (Spec (.of k))}
   {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
   [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p'.left]
 
-/-- **Interchanging proper direct image and extension by zero**, for any coefficient ring `Λ`
+/-- **Interchanging proper direct image and extension by zero**, for any coefficient ring `ℚ̲̄_ℓ`
 satisfying proper base change for the two cartesian squares involved: the square itself, and
 the base change of `p'` along the closed complement of `j`. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso
-    [IsFinitenessCoefficient ℓ Λ]
+
     (sq : IsPullback p i' j p')
-    (h₁ : IsIso (boundedConstructibleBaseChange Λ ℓ sq.flip.toCommSq))
-    (h₂ : IsIso (boundedConstructibleBaseChange Λ ℓ
+    (h₁ : IsIso (boundedConstructibleBaseChange ℓ sq.flip.toCommSq))
+    (h₂ : IsIso (boundedConstructibleBaseChange ℓ
       (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)).toCommSq)) :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq) := by
+    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq) := by
   have : QuasiCompact (j.left ≫ Z.hom) := by
     rw [Over.w j]
     infer_instance
   have : QuasiCompact j.left := QuasiCompact.of_comp j.left Z.hom
-  have hK (K : Dᵇc(X'.left)⟦Λ⟧) :
-      IsIso ((boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq).app K) := by
-    refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl Λ ℓ
+  have hK (K : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      IsIso ((boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq).app K) := by
+    refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl (Profinite.padicAlgClRingObj
+        ℓ) ℓ
       (overClosedComplement j) j (isCompl_range_overClosedComplement j) _ ?_ ?_
     · -- Over the open `X`, by the mate calculus and proper base change.
       rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchangeRight]
       have : IsIso ((Adjunction.exchangeRight
-          (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p')
-          (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p)
-          (boundedConstructiblePullbackSquareComparison Λ ℓ sq.toCommSq.flip)).app
-            ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i').obj K)) := by
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ p')
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
+          (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+              sq.toCommSq.flip)).app
+            ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i').obj
+                K)) := by
         rw [← boundedConstructibleBaseChange_eq_exchangeRight]
         infer_instance
       exact Adjunction.isIso_map_exchangeRight_app
-        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p)
-        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p')
-        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
-        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i') _ _
-        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv Λ ℓ sq) K
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ p')
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.padicAlgClRingObj ℓ) ℓ j)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.padicAlgClRingObj ℓ) ℓ i') _ _
+        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv (Profinite.padicAlgClRingObj
+            ℓ) ℓ sq) K
     · -- Over the closed complement both sides vanish.
-      have hS : IsZero ((boundedConstructibleUpperStar Λ ℓ (overClosedComplement j)).obj
-          ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj
-            ((boundedConstructibleLowerStar Λ ℓ p).obj K))) :=
-        isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ j
+      have hS : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (overClosedComplement j)).obj
+          ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleLowerStar ℓ p).obj K))) :=
+        isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek
+            (Profinite.padicAlgClRingObj ℓ) ℓ j
           (overClosedComplement j) (isCompl_range_overClosedComplement j).disjoint.symm _
-      have hT : IsZero ((boundedConstructibleUpperStar Λ ℓ (overClosedComplement j)).obj
-          ((boundedConstructibleLowerStar Λ ℓ p').obj
-            ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i').obj K))) :=
-        ((boundedConstructibleLowerStar Λ ℓ
+      have hT : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (overClosedComplement j)).obj
+          ((boundedConstructibleLowerStar ℓ p').obj
+            ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i').obj
+                K))) :=
+        ((boundedConstructibleLowerStar ℓ
           (overPullbackSnd p' (overClosedComplement j))).map_isZero
-          (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ i'
+          (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek
+              (Profinite.padicAlgClRingObj ℓ) ℓ i'
             (overPullbackFst p' (overClosedComplement j))
             (disjoint_range_overPullbackFst_overClosedComplement sq.toCommSq) K)).of_iso
-          (asIso ((boundedConstructibleBaseChange Λ ℓ
+          (asIso ((boundedConstructibleBaseChange ℓ
             (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)).toCommSq).app
-              ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i').obj K)))
+              ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+                  i').obj K)))
       exact ⟨⟨hT.to_ _, hS.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
   exact NatIso.isIso_of_isIso_app _
 
@@ -342,7 +354,7 @@ omit [MonObj Λ] [IsCommMonObj Λ] in
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl
     (sq : IsPullback p i' j p') :
     IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
-      (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
+      ℓ sq) :=
   isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso _ ℓ sq
     (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq.flip)
     (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ

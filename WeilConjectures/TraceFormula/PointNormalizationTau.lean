@@ -116,7 +116,7 @@ lemma tau_comp_counit_of_id (Δ : X ⟶ P) [IsProper Δ.left] {ι d : X ⟶ X} (
   have h₂ := upperStarLowerShriekAdjunction_id_unit_app ℓ X (𝟙_ _)
   have h₃ := upperShriekAdjunction_id_unit_app ℓ X
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj (𝟙_ _))
-  have h₄ := boundedConstructibleUpperStarId_hom_app_unit (Profinite.padicAlgClRingObj ℓ) ℓ X
+  have h₄ := boundedConstructibleUpperStarId_hom_app_unit ℓ X
   have key : (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app (𝟙_ _) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ Δ).counit.app (𝟙_ _) =
       (boundedConstructibleLowerShriekId ℓ X).hom.app

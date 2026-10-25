@@ -215,7 +215,7 @@ lemma upperStar_map_upperStar_map_comp_εIso_inv {S : Over (Spec (.of k))}
       (boundedConstructibleUpperStar _ ℓ aX).map v ≫
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ aX)).inv := by
   subst hA
-  have hu := boundedConstructibleUpperStarComp_hom_app_unit (Profinite.padicAlgClRingObj ℓ) ℓ f aY
+  have hu := boundedConstructibleUpperStarComp_hom_app_unit ℓ f aY
   have hn := (boundedConstructibleUpperStarComp _ ℓ f aY).inv.naturality v
   simp only [Functor.comp_map] at hn
   rw [← hu, eqToHom_refl, Category.comp_id, ← reassoc_of% hn, Iso.inv_hom_id_app_assoc]

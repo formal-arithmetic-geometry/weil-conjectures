@@ -88,7 +88,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_left (f : X ⟶ Y)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 X) f).hom.app K ≫
         (boundedConstructibleLowerShriek ℓ f).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).hom.app K ≫
-            (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app K) =
+            (boundedConstructibleLowerStarId ℓ X).hom.app K) =
       eqToHom (by rw [Category.id_comp]; rfl) :=
   sorry
 
@@ -100,7 +100,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_right (f : X ⟶ Y)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (𝟙 Y)).hom.app K ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 Y)).hom.app
           ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
-        (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).hom.app
+        (boundedConstructibleLowerStarId ℓ Y).hom.app
           ((boundedConstructibleLowerShriek ℓ f).obj K) =
       eqToHom (by rw [Category.comp_id]; rfl) :=
   sorry

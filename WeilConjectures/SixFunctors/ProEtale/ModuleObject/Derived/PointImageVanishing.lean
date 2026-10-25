@@ -97,9 +97,8 @@ lemma exists_overReductionι_comp_eq_of_range_subset {X Y P : Over (Spec (.of k)
   rw [← Over.w e, ← Category.assoc, hl]
   simp [t, overReduction, overReductionι]
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [IsFinitenessCoefficient ℓ Λ]
+variable  (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+
 
 /-- Let `e : P ⟶ X` be a closed immersion (for instance a rational point) and `f : Y ⟶ X` a
 morphism with image in the image of `e`. If `Le^* M = 0`, then `Lf^* M = 0`: the restriction of
@@ -110,18 +109,20 @@ theorem isZero_boundedConstructibleUpperStar_obj_of_range_subset {X Y P : Over (
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
     (f : Y ⟶ X) (e : P ⟶ X) [IsClosedImmersion e.left]
-    (hf : Set.range f.left.base ⊆ Set.range e.left.base) (M : Dᵇc(X.left)⟦Λ⟧)
-    (hM : IsZero ((boundedConstructibleUpperStar Λ ℓ e).obj M)) :
-    IsZero ((boundedConstructibleUpperStar Λ ℓ f).obj M) := by
+    (hf : Set.range f.left.base ⊆ Set.range e.left.base) (M :
+        Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e).obj M)) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M) := by
   obtain ⟨g, hg⟩ := exists_overReductionι_comp_eq_of_range_subset f e hf
   set r := overReductionι Y
-  have hr : IsZero ((boundedConstructibleUpperStar Λ ℓ r).obj
-      ((boundedConstructibleUpperStar Λ ℓ f).obj M)) :=
-    ((boundedConstructibleUpperStar Λ ℓ g).map_isZero hM).of_iso
-      ((boundedConstructibleUpperStarComp Λ ℓ r f).symm.app M ≪≫ eqToIso (by rw [hg]) ≪≫
-        (boundedConstructibleUpperStarComp Λ ℓ g e).app M)
-  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ r
-  exact ((boundedConstructibleLowerStar Λ ℓ r).map_isZero hr).of_iso
-    (asIso ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ r).unit.app _))
+  have hr : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M)) :=
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map_isZero hM).of_iso
+      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f).symm.app M ≪≫
+          eqToIso (by rw [hg]) ≪≫
+        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g e).app M)
+  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction ℓ r
+  exact ((boundedConstructibleLowerStar ℓ r).map_isZero hr).of_iso
+    (asIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit.app _))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

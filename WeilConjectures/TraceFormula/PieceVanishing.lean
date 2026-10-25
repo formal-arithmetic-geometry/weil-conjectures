@@ -160,7 +160,7 @@ lemma isZero_upperStar_verdierDual_lowerStar :
     IsZero ((boundedConstructibleUpperStar _ ℓ j).obj
       (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A))) := by
   have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) ℓ j ((boundedConstructibleLowerStar _ ℓ x).obj A)
+    ℓ j ((boundedConstructibleLowerStar _ ℓ x).obj A)
   exact (isZero_ihom_obj_of_isZero
     (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j x hjx A) _).of_iso
     (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)

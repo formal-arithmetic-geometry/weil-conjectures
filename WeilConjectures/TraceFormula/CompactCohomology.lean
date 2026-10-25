@@ -130,7 +130,7 @@ noncomputable def weilLowerShriekFrobeniusComparison :
         boundedConstructibleLowerShriek ℓ f :=
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ r
+    ℓ r
   asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq) ≪≫
     Functor.isoWhiskerLeft _ (Functor.leftUnitor _).symm ≪≫
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight

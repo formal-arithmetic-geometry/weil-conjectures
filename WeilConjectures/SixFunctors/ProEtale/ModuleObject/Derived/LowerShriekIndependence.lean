@@ -100,16 +100,18 @@ composition isomorphism `boundedConstructibleLowerStarComp`. For compactificatio
 of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and `p₁ = c₁.overG`, it is an
 isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso'
-    [IsFinitenessCoefficient ℓ Λ] (sq : IsPullback (𝟙 X) i i₁ h)
+ (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)] :
-    boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
-      boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ p :=
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)] :
+    boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i₁ ⋙
+        boundedConstructibleLowerStar ℓ p₁ ≅
+      boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i ⋙
+          boundedConstructibleLowerStar ℓ p :=
   Functor.isoWhiskerRight ((Functor.leftUnitor _).symm ≪≫
-      Functor.isoWhiskerRight (boundedConstructibleLowerStarId Λ ℓ X).symm _ ≪≫
-      asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)) _ ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleLowerStarId ℓ X).symm _ ≪≫
+      asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)) _ ≪≫
     Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp Λ ℓ h p₁ ≪≫ eqToIso (by rw [wp]))
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp ℓ h p₁ ≪≫ eqToIso (by rw [wp]))
 
 end Refinement
 

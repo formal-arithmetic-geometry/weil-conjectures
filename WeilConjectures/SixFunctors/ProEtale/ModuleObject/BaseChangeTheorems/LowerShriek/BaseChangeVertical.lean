@@ -97,7 +97,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X₁ X₂ X₃ Y₁ Y₂ Y₃ : Over (Spec (.of k))}
   [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
@@ -167,7 +167,7 @@ lemma pasteVert_compIso_shriekBaseChange :
     Functor.whiskerRight
         ((𝔽).compIso (triangleShriekTriangle (pasteVertTriangle v₂ w₂))).hom
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ l) ≫
-      boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
         (Compactification.Triangle.overCfg (pasteVertTriangle v₂ w₂))
         ((Compactification.Triangle.overCfg (pasteVertTriangle v₂ w₂)).ofIsPullback
           (sq₁.paste_vert sq₂).overLeft)
@@ -179,13 +179,13 @@ lemma pasteVert_compIso_shriekBaseChange :
           (sq₁.paste_vert sq₂)) =
     (TwoSquare.hComp
         (boundedConstructibleLowerShriekOfCompactificationBaseChange
-          (Profinite.padicAlgClRingObj ℓ) ℓ
+          ℓ
           (compactificationOverField v₂) ((compactificationOverField v₂).ofIsPullback sq₁.overLeft)
           ((compactificationOverField v₂).overBaseChangeFst sq₁)
           ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁)
           ((compactificationOverField v₂).overBaseChange_isPullback_g sq₁))
         (boundedConstructibleLowerShriekOfCompactificationBaseChange
-          (Profinite.padicAlgClRingObj ℓ) ℓ
+          ℓ
           (compactificationOverField w₂) ((compactificationOverField w₂).ofIsPullback sq₂.overLeft)
           ((compactificationOverField w₂).overBaseChangeFst sq₂)
           ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂)
@@ -202,7 +202,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (SepFinType.homMk ((compactificationOverField v₂).overBaseChangeFst sq₁))
       (SepFinType.homMk_comp_homMk
         ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁).w)).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁)
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g)
       (triangleShriekTriangle (pasteVertTriangle' sq₁ sq₂)).i₂
@@ -210,7 +210,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (SepFinType.homMk ((compactificationOverField w₂).overBaseChangeFst sq₂))
       (SepFinType.homMk_comp_homMk
         ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂).w)).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂)
   have : IsIso ((𝔽).baseChange (SepFinType.homMk h)
       (triangleShriekTriangle (pasteVertTriangle' sq₁ sq₂)).i
@@ -220,7 +220,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (SepFinType.homMk_comp_homMk ((Compactification.Triangle.overCfg
         (pasteVertTriangle v₂ w₂)).overBaseChange_isPullback_i
           (sq₁.paste_vert sq₂)).w)).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       ((Compactification.Triangle.overCfg (pasteVertTriangle v₂ w₂)).overBaseChange_isPullback_i
         (sq₁.paste_vert sq₂))
   have : IsIso ((𝔽).baseChange
@@ -230,7 +230,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (SepFinType.homMk ((Compactification.Triangle.overCfg
         (pasteVertTriangle v₂ w₂)).overBaseChangeFst (sq₁.paste_vert sq₂)))
       (SepFinType.homMk_comp_homMk (isPullback_pasteVertTriangle_q sq₁ sq₂).w)).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (isPullback_pasteVertTriangle_q sq₁ sq₂)
   unfold boundedConstructibleLowerShriekOfCompactificationBaseChange
   exact (𝔽).compIso_shriekBaseChange (triangleShriekTriangle (pasteVertTriangle v₂ w₂))

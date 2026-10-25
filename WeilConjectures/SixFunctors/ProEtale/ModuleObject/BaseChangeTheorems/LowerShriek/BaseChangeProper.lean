@@ -44,7 +44,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -120,7 +120,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper_eq
     (hw : SepFinType.homMk g' ≫ 𝟙 (SepFinType.mk X) = 𝟙 (SepFinType.mk X') ≫ SepFinType.homMk g')
     [IsIso ((𝔽).baseChange (SepFinType.homMk g') (𝟙 (SepFinType.mk X')) (𝟙 (SepFinType.mk X))
       (SepFinType.homMk g') hw).natTrans] :
-    boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
         (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
         (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
         (isPullback_ofIsProper_overG sq) =
@@ -141,7 +141,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper_eq
 is the base change `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*`, through `Rf_!^c ≅ Rf_*`. -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
     (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
         (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
         (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
         (isPullback_ofIsProper_overG sq) ≫

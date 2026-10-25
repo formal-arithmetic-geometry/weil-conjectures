@@ -73,38 +73,41 @@ include ℓ k
 /-- The derived pushforward `Ri_*` along a closed immersion is fully faithful on bounded
 constructible complexes: the counit `Li^* Ri_* ⟶ 𝟭` is an isomorphism. -/
 instance isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit
-    [IsFinitenessCoefficient ℓ Λ] {Z X : Over (Spec (.of k))}
+ {Z X : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (i : Z ⟶ X) [IsClosedImmersion i.left] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ i).counit := by
-  have h : (boundedConstructibleLowerStar Λ ℓ i ⋙ (boundedConstructible _).ι).FullyFaithful :=
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ i).counit := by
+  have h : (boundedConstructibleLowerStar ℓ i ⋙ (boundedConstructible _).ι).FullyFaithful :=
     ((ObjectProperty.fullyFaithfulι _).comp
       (Functor.FullyFaithful.ofFullyFaithful _)).ofIso
-      (boundedConstructibleLowerStarCompatibility Λ ℓ i).symm
+      (boundedConstructibleLowerStarCompatibility ℓ i).symm
   have h' := h.ofCompFaithful
   have := h'.full
   have := h'.faithful
-  exact (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ i).counit_isIso_of_R_fully_faithful
+  exact (boundedConstructibleUpperStarLowerStarAdjunction ℓ i).counit_isIso_of_R_fully_faithful
 
 /-- **`Lj^* Ri_*` vanishes on bounded constructible complexes** when the ranges of the open
 immersion `j` and of `i` are disjoint: by the adjunctions `j_! ⊣ Lj^*` and `Li^* ⊣ Ri_*`, a
 morphism `M ⟶ Lj^* Ri_* N` is a morphism `Li^* j_! M ⟶ N`, and `Li^* j_! = 0`
 (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek`). -/
-lemma isZero_boundedConstructibleUpperStar_obj_lowerStar_obj [IsFinitenessCoefficient ℓ Λ]
+lemma isZero_boundedConstructibleUpperStar_obj_lowerStar_obj
     {Z U X : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (j : U ⟶ X) [IsOpenImmersion j.left] (i : Z ⟶ X)
-    (hji : Disjoint (Set.range j.left.base) (Set.range i.left.base)) (N : Dᵇc(Z.left)⟦Λ⟧) :
-    IsZero ((boundedConstructibleUpperStar Λ ℓ j).obj
-      ((boundedConstructibleLowerStar Λ ℓ i).obj N)) := by
-  set adjj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j
-  set adji := boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ i
+    (hji : Disjoint (Set.range j.left.base) (Set.range i.left.base)) (N :
+        Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      ((boundedConstructibleLowerStar ℓ i).obj N)) := by
+  set adjj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j
+  set adji := boundedConstructibleUpperStarLowerStarAdjunction ℓ i
   rw [IsZero.iff_id_eq_zero]
   refine (adjj.homEquiv _ _).symm.injective ((adji.homEquiv _ _).symm.injective ?_)
-  exact (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ j i hji
+  exact (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ j i hji
     _).eq_of_src _ _
 
 end BoundedConstructible

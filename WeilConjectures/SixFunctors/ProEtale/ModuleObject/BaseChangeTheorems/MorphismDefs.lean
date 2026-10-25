@@ -100,7 +100,7 @@ end PullbackComparison
 
 section BaseChange
 
-variable [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
+variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes
@@ -174,10 +174,10 @@ variable {f g f' g'} in
 `CategoryTheory.Adjunction.exchangeRight` of the pullback comparison `θ_sq` under the
 adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
 lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
-    boundedConstructibleBaseChange Λ ℓ sq =
-      Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
-        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f')
-        (boundedConstructiblePullbackSquareComparison Λ ℓ sq) := by
+    boundedConstructibleBaseChange ℓ sq =
+      Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
+        (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
   unfold boundedConstructibleBaseChange boundedConstructibleBaseChangeUnitStep
     boundedConstructibleBaseChangeSquareStep boundedConstructibleBaseChangeCounitStep
     Adjunction.exchangeRight

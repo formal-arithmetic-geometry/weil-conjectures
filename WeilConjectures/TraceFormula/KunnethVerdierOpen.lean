@@ -217,11 +217,11 @@ lemma μ_prodMapUpperStarSndIso_hom_app (j : U ⟶ Y)
   rw [prodMapUpperStarSndIso_hom_eq ℓ j h]
   simp only [NatTrans.comp_app]
   rw [Functor.Monoidal.μ_comp_inv_app_of_δ_assoc _ _ _ _
-      (boundedConstructibleUpperStarComp_hom_app_tensor_δ (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ
         (prod.map (𝟙 X) j) prod.snd),
     μ_boundedConstructibleUpperStar_eqToHom_app_assoc ℓ (prod.map_snd (𝟙 X) j) h,
     Functor.Monoidal.μ_comp_hom_app_of_δ _ _ _ _
-      (boundedConstructibleUpperStarComp_hom_app_tensor_δ (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ
         prod.snd j),
     tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom_assoc, Category.assoc,
     Category.assoc]
@@ -255,7 +255,7 @@ noncomputable def verdierDualUpperStarIso (j : U ⟶ Y) [IsOpenImmersion j.left]
       verdierDual ℓ (toPoint U)
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N) :=
   haveI := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) ℓ j N
+    ℓ j N
   asIso ((Functor.LaxMonoidal.ihomComparison
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) N).natTrans.app
         (dualizingComplex' ℓ Y)) ≪≫
@@ -317,7 +317,7 @@ noncomputable def kunnethVerdierTargetRestrictionIso (j : U ⟶ Y) [IsOpenImmers
         ((boundedConstructibleUpperShriek ℓ
           (prod.fst : X ⨯ U ⟶ X)).obj M) :=
   haveI := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)
+    ℓ (prod.map (𝟙 X) j)
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.snd : X ⨯ Y ⟶ Y)).obj N)
   asIso ((Functor.LaxMonoidal.ihomComparison

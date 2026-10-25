@@ -185,27 +185,36 @@ lemma upperStar_map_comp_eqToHom_congrArg {u u' : V ⟶ Y} (h : u = u') {M M' : 
 
 /-- The identification `Lq^* Lπ^* ≅ Lp^* Lf^*` of a commutative square `q ≫ π = p ≫ f` is
 compatible with the tensor structures. -/
-lemma upperStarComp_square_tensor_δ [IsEllAdicFinitenessCoefficient ℓ Λ] {q : V ⟶ W} {π : W ⟶ Y}
+lemma upperStarComp_square_tensor_δ {q : V ⟶ W} {π : W ⟶ Y}
     {p : V ⟶ X} {f : X ⟶ Y}
-    (w : q ≫ π = p ≫ f) (M₁ M₂ : Dᵇc(Y.left)⟦Λ⟧) :
-    (boundedConstructibleUpperStarComp Λ ℓ q π).inv.app (M₁ ⊗ M₂) ≫
-        eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj (M₁ ⊗ M₂)) w) ≫
-        (boundedConstructibleUpperStarComp Λ ℓ p f).hom.app (M₁ ⊗ M₂) ≫
-        (boundedConstructibleUpperStar Λ ℓ p).map
-          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ f) M₁ M₂) ≫
-        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ p) _ _ =
-      (boundedConstructibleUpperStar Λ ℓ q).map
-          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ π) M₁ M₂) ≫
-        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ q) _ _ ≫
-        (((boundedConstructibleUpperStarComp Λ ℓ q π).inv.app M₁ ≫
-            eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj M₁) w) ≫
-            (boundedConstructibleUpperStarComp Λ ℓ p f).hom.app M₁) ⊗ₘ
-          ((boundedConstructibleUpperStarComp Λ ℓ q π).inv.app M₂ ≫
-            eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar Λ ℓ u).obj M₂) w) ≫
-            (boundedConstructibleUpperStarComp Λ ℓ p f).hom.app M₂)) := by
+    (w : q ≫ π = p ≫ f) (M₁ M₂ : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ q π).inv.app (M₁ ⊗ M₂) ≫
+        eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            u).obj (M₁ ⊗ M₂)) w) ≫
+        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ p f).hom.app (M₁ ⊗ M₂)
+            ≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).map
+          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+              f) M₁ M₂) ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p)
+            _ _ =
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q).map
+          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+              π) M₁ M₂) ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q)
+            _ _ ≫
+        (((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ q π).inv.app M₁ ≫
+            eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj
+                ℓ) ℓ u).obj M₁) w) ≫
+            (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ p f).hom.app M₁) ⊗ₘ
+          ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ q π).inv.app M₂ ≫
+            eqToHom (congrArg (fun u ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj
+                ℓ) ℓ u).obj M₂) w) ≫
+            (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ p f).hom.app M₂))
+                := by
   rw [← boundedConstructibleUpperStarComp_hom_app_tensor_δ,
-    reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar Λ ℓ w M₁ M₂),
-    reassoc_of% (boundedConstructibleUpperStarComp_inv_app_tensor_δ Λ ℓ q π M₁ M₂)]
+    reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar ℓ w M₁ M₂),
+    reassoc_of% (boundedConstructibleUpperStarComp_inv_app_tensor_δ ℓ q π M₁ M₂)]
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
 
 end Pullback
