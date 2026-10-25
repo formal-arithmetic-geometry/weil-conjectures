@@ -142,6 +142,14 @@ lemma overCechAugmentation_eq :
     overCechAugmentation U₀ P = P.map U₀.hom.op ≫ (overCechObjZeroIso U₀ P).hom := by
   rw [overCechAugmentation, overCechObjZeroIso_hom, ← P.map_comp, ← op_comp, Over.w]
 
+/-- The augmentation of the Čech complex is natural in the presheaf: for `φ : P ⟶ Q` the square
+```
+P(V) ──aug──▶ Č⁰(U₀, P)
+  │φ_V           │φ
+  ▼              ▼
+Q(V) ──aug──▶ Č⁰(U₀, Q)
+```
+commutes. -/
 @[reassoc]
 lemma overCechAugmentation_naturality {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) :
     overCechAugmentation U₀ P ≫ ((overCechComplex U₀).map φ).f 0 =

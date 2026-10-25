@@ -57,7 +57,15 @@ noncomputable abbrev stageCechDiagram (k : ℕ) : Jᵒᵖ ⥤ A :=
 
 omit [HasFiniteProducts (Over V)]
   [∀ j, PreservesFiniteProducts (Over.post F (X := pV.diag.obj j))] in
-/-- The Čech differentials of the stages commute with the transition maps. -/
+/-- The Čech differentials of the stages commute with the transition maps: for `g : i ⟶ j` the
+square
+```
+Čᵏ(αⱼ, F.op ⋙ P) ──d──▶ Čᵏ⁺¹(αⱼ, F.op ⋙ P)
+       │g^*                       │g^*
+       ▼                          ▼
+Čᵏ(αᵢ, F.op ⋙ P) ──d──▶ Čᵏ⁺¹(αᵢ, F.op ⋙ P)
+```
+commutes. -/
 lemma stageTransition_overCechComplex_d {i j : J} (g : i ⟶ j) (k : ℕ) :
     P.map (F.map (stageNerveMap h g (fun _ : Fin (k + 1) ↦ 0))).op ≫
         ((overCechComplex (Over.mk (h.natTrans.app i))).obj (F.op ⋙ P)).d k (k + 1) =
@@ -77,7 +85,14 @@ noncomputable def stageCechDiagramD (k : ℕ) :
   app j := ((overCechComplex (Over.mk (h.natTrans.app j.unop))).obj (F.op ⋙ P)).d k (k + 1)
   naturality _ _ g := stageTransition_overCechComplex_d h P g.unop k
 
-/-- The Čech differential of the limit commutes with the projections to the stages. -/
+/-- The Čech differential of the limit commutes with the projections to the stages: the square
+```
+Čᵏ(αⱼ, F.op ⋙ P) ──d──▶ Čᵏ⁺¹(αⱼ, F.op ⋙ P)
+       │                          │
+       ▼                          ▼
+   Čᵏ(q, P)      ──d──▶    Čᵏ⁺¹(q, P)
+```
+whose vertical maps are induced by the projections of the limit to the stage `j` commutes. -/
 lemma overCechComplex_d_limitNerveLeg (j : J) (k : ℕ) :
     ((overCechComplex (Over.mk (h.natTrans.app j))).obj (F.op ⋙ P)).d k (k + 1) ≫
         P.map (limitNerveLeg h j (fun _ : Fin (k + 2) ↦ 0)).op =
