@@ -12950,7 +12950,11 @@ public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
 public import WeilConjectures.TraceFormula.CompactTrace
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
+public import WeilConjectures.TraceFormula.ContractingAdditivity
+public import WeilConjectures.TraceFormula.ContractingClosedPiece
 public import WeilConjectures.TraceFormula.ContractingGraph
+public import WeilConjectures.TraceFormula.ContractingLocalTerm
+public import WeilConjectures.TraceFormula.ContractingOpenPiece
 public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
