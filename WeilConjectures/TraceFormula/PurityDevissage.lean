@@ -45,7 +45,7 @@ dualizable (`triangEnvelope_lisseLowerStarGenerator`). For such a generator:
    `Lg'^*` is conservative.
 
 This is applied to the open immersion `j`, where `Lf_Z^* Rj_* L ≅ Rj'_* Lf_U^* L` is smooth base
-change (`isIso_boundedConstructibleLowerStarBaseChange_of_smooth`), and to the closed immersion
+change (`isIso_boundedConstructibleBaseChange_of_smooth`), and to the closed immersion
 `g`, where `Lf^* Rg_* ≅ Rg'_* Lf_Z^*` is proper base change.
 
 -/
@@ -209,10 +209,10 @@ theorem isIso_upperShriekUnitTensorMap_lowerStar_lowerStar (f : X ⟶ Y) [Smooth
   have := isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion ℓ
     (pullback.fst (pullback.snd f g) j)
   have := isIso_upperShriekBaseChange_unit_of_smooth ℓ sq₂
-  have := isIso_boundedConstructibleLowerStarBaseChange_of_smooth ℓ sq₂.flip L
+  have := isIso_boundedConstructibleBaseChange_of_smooth ℓ sq₂.flip L
   have := isIso_upperShriekUnitTensorMap_lowerStar ℓ sq₂
     (isDualizable_upperShriek_unit_of_smooth ℓ (pullback.snd f g)) L _
-    (asIso ((boundedConstructibleLowerStarBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    (asIso ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
       sq₂.flip.toCommSq).app L))
   -- the closed step
   have := isIso_upperShriekBaseChange_unit_of_smooth ℓ sq₁

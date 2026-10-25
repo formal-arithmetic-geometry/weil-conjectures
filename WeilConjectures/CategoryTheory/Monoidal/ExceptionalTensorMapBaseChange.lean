@@ -11,12 +11,13 @@ public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 
 # The tensor map of an exceptional inverse image under base change
 
-The data model a cartesian square
+The data model the derived categories `𝒵 = D(X)`, `𝒴 = D(Y)`, `𝒱 = D(X')`, `𝒲 = D(Y')` of a
+cartesian square of schemes, the base change of `f : X ⟶ Y` along `Y' ⟶ Y`:
 ```
-𝒱 ──qZ──▶ ... (inverse images)       X' ──g'──▶ X
-                                     │f'        │f
-                                     ▼          ▼
-                                     Y' ──g───▶ Y
+𝒵 ──qZ──▶ 𝒱
+│g        │G
+▼         ▼
+𝒴 ──q───▶ 𝒲
 ```
 as in `WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange`: `g : 𝒵 ⥤ 𝒴` and
 `G : 𝒱 ⥤ 𝒲` play the compactly supported direct images `Rf_!` and `Rf'_!`, with right adjoints

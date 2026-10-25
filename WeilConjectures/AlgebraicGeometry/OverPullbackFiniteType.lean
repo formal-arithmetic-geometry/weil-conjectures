@@ -46,30 +46,36 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
+/-- A morphism of `k`-schemes of finite type is locally of finite type. -/
 instance locallyOfFiniteType_left_of_over : LocallyOfFiniteType f.left := by
   have : LocallyOfFiniteType (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact locallyOfFiniteType_of_comp f.left Y.hom
 
+/-- A morphism of `k`-schemes of finite type is quasi-compact. -/
 instance quasiCompact_left_of_over : QuasiCompact f.left := by
   have : QuasiCompact (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact QuasiCompact.of_comp f.left Y.hom
 
+/-- A morphism of separated `k`-schemes is separated. -/
 instance isSeparated_left_of_over : IsSeparated f.left := by
   have : IsSeparated (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact IsSeparated.of_comp f.left Y.hom
 
+/-- The fibre product of `k`-schemes of finite type is of finite type. -/
 instance locallyOfFiniteType_over_pullback_hom : LocallyOfFiniteType (pullback f g).hom := by
   have : LocallyOfFiniteType (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
+/-- The fibre product of `k`-schemes of finite type is quasi-compact. -/
 instance quasiCompact_over_pullback_hom : QuasiCompact (pullback f g).hom := by
   have : QuasiCompact (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
   rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
+/-- The fibre product of separated `k`-schemes is separated. -/
 instance isSeparated_over_pullback_hom : IsSeparated (pullback f g).hom := by
   have : IsSeparated (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
@@ -80,7 +86,8 @@ omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 /-- The base change of a smooth morphism is smooth. -/
-instance smooth_over_pullback_snd_left [Smooth f.left] : Smooth (pullback.snd f g).left :=
+instance smooth_over_pullback_snd_left [Smooth f.left] :
+    Smooth (pullback.snd f g).left :=
   MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]

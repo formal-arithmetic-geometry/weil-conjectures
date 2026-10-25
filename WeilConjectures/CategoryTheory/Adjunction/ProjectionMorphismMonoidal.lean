@@ -238,33 +238,3 @@ lemma projection_comp_tensor
 end Composite
 
 end CategoryTheory.Adjunction
-
-namespace CategoryTheory.ObjectProperty
-
-variable {C : Type*} [Category* C] [MonoidalCategory C] (P : ObjectProperty C) [P.IsMonoidal]
-
-/-- The underlying object of a tensor product in a full monoidal subcategory. -/
-lemma FullSubcategory.tensorObj_obj (X Y : P.FullSubcategory) : (X ⊗ Y).obj = X.obj ⊗ Y.obj :=
-  rfl
-
-/-- The underlying morphism of a left whiskering in a full monoidal subcategory. -/
-lemma FullSubcategory.whiskerLeft_hom (X : P.FullSubcategory) {Y Z : P.FullSubcategory}
-    (f : Y ⟶ Z) : (X ◁ f).hom = X.obj ◁ f.hom :=
-  rfl
-
-/-- The underlying morphism of a right whiskering in a full monoidal subcategory. -/
-lemma FullSubcategory.whiskerRight_hom {X Y : P.FullSubcategory} (f : X ⟶ Y)
-    (Z : P.FullSubcategory) : (f ▷ Z).hom = f.hom ▷ Z.obj :=
-  rfl
-
-/-- The underlying morphism of the associator in a full monoidal subcategory. -/
-lemma FullSubcategory.associator_hom_hom (X Y Z : P.FullSubcategory) :
-    (α_ X Y Z).hom.hom = (α_ X.obj Y.obj Z.obj).hom :=
-  rfl
-
-/-- The underlying morphism of the inverse associator in a full monoidal subcategory. -/
-lemma FullSubcategory.associator_inv_hom (X Y Z : P.FullSubcategory) :
-    (α_ X Y Z).inv.hom = (α_ X.obj Y.obj Z.obj).inv :=
-  rfl
-
-end CategoryTheory.ObjectProperty
