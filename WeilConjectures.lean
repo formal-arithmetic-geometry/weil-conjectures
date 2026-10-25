@@ -7489,6 +7489,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTrans
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTransRestriction
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.MateComp
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
@@ -8429,6 +8430,7 @@ public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleExactProducts
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleMittagLeffler
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleProducts
+public import WeilConjectures.CategoryTheory.Sites.ZModModuleLift
 public import WeilConjectures.CategoryTheory.Sites.ZariskiTorsorFreeExtension
 public import WeilConjectures.CategoryTheory.Sites.ZariskiTorsorRepresentativeExists
 public import WeilConjectures.CategoryTheory.SmallCechFreeComparison
@@ -9903,6 +9905,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.NumberTheory.Padics.IntegersResidueField
 public import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersSubalgebra
 public import WeilConjectures.NumberTheory.Padics.IntegersToAlgCl
@@ -12389,6 +12392,7 @@ public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexampleCoproduc
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.AdicBaseChangeTower
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.AdicSmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ClosedLocalization
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.OpenImmersionFieldBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.TorsionSmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
@@ -12612,6 +12616,7 @@ public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.KummerCover
 public import WeilConjectures.SixFunctors.ProEtale.LowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeProper
@@ -12739,6 +12744,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
@@ -13110,6 +13116,7 @@ public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.OrdinaryKunneth
 public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
+public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement

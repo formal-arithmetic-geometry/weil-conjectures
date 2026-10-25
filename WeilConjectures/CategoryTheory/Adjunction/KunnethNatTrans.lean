@@ -65,7 +65,11 @@ section Oplax
 variable [F.OplaxMonoidal]
 
 /-- The transpose of the Künneth map, `F (P M ⊗ C₀) ⟶ Q M ⊗ D₀`, as a natural transformation in
-`M`: the oplax structure map of `F` followed by `e_M ⊗ c`. -/
+`M`: the oplax structure map of `F` followed by `e_M ⊗ c`,
+```
+F (P M ⊗ C₀) ──δ──▶ F (P M) ⊗ F C₀ ──e_M ⊗ c──▶ Q M ⊗ D₀.
+```
+-/
 def kunnethAdjointNatTrans :
     (P ⋙ (curriedTensor D).flip.obj C₀) ⋙ F ⟶ Q ⋙ (curriedTensor C).flip.obj D₀ :=
   (Functor.associator _ _ _).hom ≫
@@ -80,7 +84,11 @@ lemma kunnethAdjointNatTrans_app (M : 𝒳) :
   simp [kunnethAdjointNatTrans, tensorHom_def]
 
 /-- **The Künneth map** `P M ⊗ C₀ ⟶ G (Q M ⊗ D₀)`, as a natural transformation in `M`: the
-transpose along `F ⊣ G` of `kunnethAdjointNatTrans`. -/
+transpose along `F ⊣ G` of `kunnethAdjointNatTrans`, that is, the composite
+```
+P M ⊗ C₀ ──η──▶ G F (P M ⊗ C₀) ──G (δ ≫ (e_M ⊗ c))──▶ G (Q M ⊗ D₀).
+```
+-/
 def kunnethNatTrans :
     P ⋙ (curriedTensor D).flip.obj C₀ ⟶ (Q ⋙ (curriedTensor C).flip.obj D₀) ⋙ G :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ adj.unit ≫
@@ -98,6 +106,14 @@ lemma kunnethNatTrans_app (M : 𝒳) :
   rfl
 
 end Oplax
+
+/-- The invertibility of the transpose `C₀ ⟶ G D₀` of the second factor `c`, with `adj`, `e` and
+`c` read off from a statement about the Künneth map. This instantiates them by unification with
+the body of a concrete Künneth map, whose terms may differ from separately elaborated ones. -/
+lemma isIso_homEquiv_of_isIso_kunnethNatTrans_app [F.OplaxMonoidal] {M : 𝒳}
+    (_ : IsIso ((adj.kunnethNatTrans e c).app M))
+    (hc : IsIso (adj.homEquiv _ _ c)) : IsIso (adj.homEquiv _ _ c) :=
+  hc
 
 /-- **Künneth maps at dualizable objects**: if `F` is strong monoidal, `P M` is dualizable and the
 transpose `C₀ ⟶ G D₀` of `c` is an isomorphism, the Künneth map at `M` is an isomorphism. -/

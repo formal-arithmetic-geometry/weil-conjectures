@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
+public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarDeltaShift
@@ -18,24 +19,33 @@ the component at `M` of the natural transformation `CategoryTheory.Adjunction.ku
 between triangulated functors of `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, and it commutes with the shifts. Hence the
 objects `M` for which it is an isomorphism form a triangulated subcategory
 (`ProEtale.CondensedRing.isIso_openKunnethMap_of_triangEnvelope`), and it suffices to treat the
-generators `Rg_! Rj'_! L` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`triangEnvelope_lisseGenerator`).
-The closed pushforward `Rg_!` is removed by `isIso_openKunnethMap_lowerStar_of_isClosedImmersion`.
+generators `Rg_! Rj'_! L` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`triangEnvelope_lisseGenerator`), with `g` a closed
+immersion, `j'` an open immersion and `L` dualizable. The closed pushforward `Rg_!` is removed by
+`ProEtale.CondensedRing.isIso_openKunnethMap_lowerStar_of_isClosedImmersion`. For `Rj'_! L`, the
+Künneth map restricts over `V ⨯ Y` to the dualizable case
+(`ProEtale.CondensedRing.isIso_upperStar_map_openKunnethMap_of_isOpenImmersion`), and over the
+closed complement `Z ⨯ Y` its source vanishes, so that it remains to show that its target
+vanishes there.
 
-## Main statements
+The extension by zero `Rj'_! Lj'^* K` of the restriction of a dualizable `K` on `X` is formal
+(`ProEtale.CondensedRing.isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable`, by the
+open–closed triangle).
 
-- `ProEtale.CondensedRing.isIso_openKunnethMap_of_triangEnvelope`,
-  `ProEtale.CondensedRing.isIso_openKunnethMap_of_distTriang₁`: dévissage and two out of three.
-- `ProEtale.CondensedRing.isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable`: the
-  Künneth map of `Rj'_! Lj'^* K` for dualizable `K` is an isomorphism (open–closed triangle).
-- `ProEtale.CondensedRing.isIso_openKunnethMap`: the ordinary Künneth formula.
+## Unfinished
 
-## Sorried statement
-
-- `ProEtale.CondensedRing.isIso_openKunnethMap_lowerShriek_of_isDualizable`: the generator case
-  `Rj'_! L` for a dualizable `L` on an open `V ⊆ X` that need not extend to `X`. It amounts to the
-  vanishing of `R(𝟙 × j)_* (Rj'_! L ⊠ B)` on `(X ∖ V) ⨯ Y`; for `ℚ̄_ℓ`-coefficients this needs
-  the passage from finite coefficients (blueprint `lem-trf-ordinary-kunneth`, Stacks 0F1N), which
-  is not formalized for condensed module objects.
+- `ProEtale.CondensedRing.isZero_upperStar_lowerStar_externalProduct_lowerShriek`: the vanishing
+  of `R(𝟙 × j)_* (Rj'_! L ⊠ B)` on `Z ⨯ Y`, the remaining content of blueprint
+  `lem-trf-ordinary-kunneth`. It is not formal in `ℚ̄_ℓ`: a dualizable `L` on `V` need not
+  extend to `X`, and every dévissage meets the exchange `R(j' × 𝟙)_! R(𝟙 × j)_* ≅
+  R(𝟙 × j)_* R(j' × 𝟙)_!`, itself a Künneth statement. The blueprint proves it with finite
+  coefficients (`lem-kun-0f1n`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`). Its
+  transport to `ℚ̄_ℓ` along the coefficient passage of
+  `WeilConjectures.TraceFormula.GenericBaseChange` needs the compatibility of the coefficient
+  changes `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` and of `ProEtale.derivedReduction` with the tensor product, which is
+  not in the repository. Moreover `ProEtale.derivedReduction` lands in sheaves of
+  `ℤ/ℓ`-modules, where the reduction of `A ⊗_{𝒪_E} B` is a tensor product over the residue
+  field `𝔽_E`, not over `ℤ/ℓ`. The transport therefore needs a finite-coefficient stage over
+  `𝔽_E` as well.
 
 -/
 
@@ -148,19 +158,113 @@ theorem isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable [IsOpenImmers
       (isIso_openKunnethMap_of_isDualizable ℓ j
         (isDualizable_boundedConstructibleUpperStar_obj ℓ _ hK) B))
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+/-- The products `i × 𝟙_Y` and `j' × 𝟙_Y` of complementary closed and open immersions have
+complementary ranges. -/
+lemma isCompl_range_prodMap_id {Z V : Over (Spec (.of k))} (i : Z ⟶ X) (j' : V ⟶ X)
+    (hij : IsCompl (Set.range i.left.base) (Set.range j'.left.base)) :
+    IsCompl (Set.range (prod.map i (𝟙 Y)).left.base)
+      (Set.range (prod.map j' (𝟙 Y)).left.base) := by
+  have hr {T : Over (Spec (.of k))} (a : T ⟶ X) :
+      Set.range (prod.map a (𝟙 Y)).left.base =
+        (prod.fst : X ⨯ Y ⟶ X).left.base ⁻¹' Set.range a.left.base := by
+    have s := (IsPullback.of_prod_fst_with_id a Y).map (Over.forget _)
+    exact Scheme.range_snd_of_isPullback (f := a.left) s
+  rw [hr i, hr j']
+  exact hij.preimage _
+
+attribute [local instance] boundedConstructibleBraiding in
+/-- **The generator case as a vanishing statement**: for an open immersion `j' : V ⟶ X` with
+closed complement `i : Z ⟶ X` and a dualizable `L` on `V`, the Künneth map of `Rj'_! L` is an
+isomorphism as soon as `R(𝟙 × j)_* (Rj'_! L ⊠ B)` vanishes on `Z ⨯ Y`. Over `V ⨯ Y` the Künneth
+map restricts to the dualizable case, and over `Z ⨯ Y` its source vanishes. -/
+theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
+    {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    (j' : V ⟶ X) [IsOpenImmersion j'.left]
+    {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L)
+    (h₀ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.map (overClosedComplement j') (𝟙 Y))).obj
+      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
+        (externalProduct ℓ
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B)))) :
+    IsIso (openKunnethMap ℓ j
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) := by
+  have : QuasiCompact j'.left := by
+    have : QuasiCompact (j'.left ≫ X.hom) := by rw [Over.w j']; infer_instance
+    exact QuasiCompact.of_comp j'.left X.hom
+  have : QuasiCompact (prod.map j' (𝟙 Y)).left :=
+    MorphismProperty.of_isPullback ((IsPullback.of_prod_fst_with_id j' Y).map (Over.forget _))
+      (inferInstanceAs (QuasiCompact j'.left))
+  have : IsClosedImmersion (prod.map (overClosedComplement j') (𝟙 Y)).left :=
+    MorphismProperty.of_isPullback
+      ((IsPullback.of_prod_fst_with_id (overClosedComplement j') Y).map (Over.forget _))
+      (inferInstanceAs (IsClosedImmersion (overClosedComplement j').left))
+  refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl _ ℓ
+    (prod.map (overClosedComplement j') (𝟙 Y)) (prod.map j' (𝟙 Y))
+    (isCompl_range_prodMap_id _ _ (isCompl_range_overClosedComplement j')) _ ?_ ?_
+  · refine isIso_upperStar_map_openKunnethMap_of_isOpenImmersion ℓ j' j _ B ?_
+    have e : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').obj
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) ≅ L :=
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').mapIso
+          ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').app L) ≪≫
+        (asIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ j').unit.app L)).symm
+    exact isIso_openKunnethMap_of_iso ℓ j B e (isIso_openKunnethMap_of_isDualizable ℓ j hL B)
+  · have hg : Disjoint (Set.range j'.left.base)
+        (Set.range (prod.map (overClosedComplement j') (𝟙 Y) ≫ prod.fst).left.base) := by
+      rw [prod.map_fst, Over.comp_left, Scheme.Hom.comp_base, TopCat.coe_comp]
+      exact (isCompl_range_overClosedComplement j').disjoint.symm.mono_right
+        (Set.range_comp_subset_range _ _)
+    have h₁ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (prod.map (overClosedComplement j') (𝟙 Y))).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.fst : X ⨯ Y ⟶ X)).obj
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L))) :=
+      (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j' _ hg L).of_iso
+        ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ _ _).symm.app _ ≪≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ _).mapIso
+            ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').app L))
+    have h₂ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (prod.map (overClosedComplement j') (𝟙 Y))).obj
+        (externalProduct ℓ ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          j').obj L)
+          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))) := by
+      refine IsZero.of_iso ?_ (Functor.Monoidal.μIso _ _ _).symm
+      exact isZero_tensorObj_of_isZero_left h₁ _
+    exact ⟨⟨0, h₂.eq_of_src _ _, h₀.eq_of_src _ _⟩⟩
+
+/-- **Vanishing on the boundary** (the remaining content of the ordinary Künneth formula, blueprint
+`lem-trf-ordinary-kunneth`; SGA 4½, [Th. finitude], Corollaire 1.11): for an open immersion
+`j' : V ⟶ X` with closed complement `i : Z ⟶ X` and a dualizable `L` on `V`, the complex
+`R(𝟙 × j)_* (Rj'_! L ⊠ B)` vanishes on `Z ⨯ Y`. Equivalently, its stalks at the geometric points of
+`Z ⨯ Y`, the cohomology of `(Rj'_! L ⊠ B)` on the punctured strict henselizations of `X ⨯ Y` along
+`Z ⨯ Y` intersected with `X ⨯ U`, vanish. -/
+theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek [IsOpenImmersion j.left]
+    {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    (j' : V ⟶ X) [IsOpenImmersion j'.left]
+    {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.map (overClosedComplement j') (𝟙 Y))).obj
+      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
+        (externalProduct ℓ
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B))) :=
+  sorry
+
 /-- **The ordinary Künneth formula for the extension by zero of a dualizable object**: for an
-open immersion `j' : V ⟶ X` with `V` affine and a dualizable `L ∈ Dᵇc(V)⟦ℚ̲̄_ℓ⟧`, the Künneth map
+open immersion `j' : V ⟶ X` and a dualizable `L ∈ Dᵇc(V)⟦ℚ̲̄_ℓ⟧`, the Künneth map
 `Rj'_! L ⊠ Rj_* B ⟶ R(𝟙 × j)_* (Rj'_! L ⊠ B)` is an isomorphism. This is the generator case of the
 ordinary Künneth formula (blueprint `lem-trf-ordinary-kunneth`; SGA 4½, [Th. finitude],
 Corollaire 1.11), the only case not reached by generic base change and the dévissage: it amounts to
 the vanishing of `R(𝟙 × j)_* (Rj'_! L ⊠ B)` on `(X ∖ V) ⨯ Y`. -/
 theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left]
     {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
-    [IsAffine V.left] (j' : V ⟶ X) [IsOpenImmersion j'.left]
+    (j' : V ⟶ X) [IsOpenImmersion j'.left]
     {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
     IsIso (openKunnethMap ℓ j
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) :=
-  sorry
+  isIso_openKunnethMap_lowerShriek_of_isZero ℓ j B j' hL
+    (isZero_upperStar_lowerStar_externalProduct_lowerShriek ℓ j B j' hL)
 
 omit j B in
 /-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
