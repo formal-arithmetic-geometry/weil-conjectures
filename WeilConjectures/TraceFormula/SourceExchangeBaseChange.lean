@@ -1,0 +1,253 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
+public import WeilConjectures.TraceFormula.BaseChangeCoherence
+public import WeilConjectures.TraceFormula.ProperKunneth
+
+/-!
+
+# The base-change core of the exceptional Künneth part of the source exchange
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory
+
+open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace CategoryTheory
+
+section CoreAbstract
+
+variable {𝒲 𝒰 : Type*} [Category 𝒲] [Category 𝒰] [MonoidalCategory 𝒲] [MonoidalCategory 𝒰]
+  (G : 𝒲 ⥤ 𝒰) [G.Monoidal] {L : 𝒰 ⥤ 𝒲} (adj : G ⊣ L)
+  (pf : ∀ (T : 𝒰) (M : 𝒲), L.obj T ⊗ M ⟶ L.obj (T ⊗ G.obj M))
+
+/-- The projection morphism after a unit, for a projection morphism adjoint to the counit. -/
+lemma Adjunction.unit_whiskerRight_comp_projection
+    (hcounit : ∀ (T : 𝒰) (M : 𝒲), G.map (pf T M) ≫ adj.counit.app (T ⊗ G.obj M) =
+      Functor.OplaxMonoidal.δ G (L.obj T) M ≫ adj.counit.app T ▷ G.obj M) (A M : 𝒲) :
+    adj.unit.app A ▷ M ≫ pf (G.obj A) M =
+      adj.unit.app (A ⊗ M) ≫ L.map (Functor.OplaxMonoidal.δ G A M) := by
+  apply (adj.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc, hcounit]
+  have h₁ := Functor.OplaxMonoidal.δ_natural_left G (adj.unit.app A) M
+  have h₂ := adj.counit.naturality (Functor.OplaxMonoidal.δ G A M)
+  simp only [Functor.comp_map, Functor.id_map] at h₂
+  rw [← reassoc_of% h₁, ← MonoidalCategory.comp_whiskerRight, adj.left_triangle_components,
+    MonoidalCategory.id_whiskerRight, Category.comp_id, h₂]
+  simp
+
+/-- The abstract form of the core identity of the base-change part of the source exchange. -/
+lemma Adjunction.comp_tensorHom_eq_unit_comp_map_comp_inv_projection
+    (hcounit : ∀ (T : 𝒰) (M : 𝒲), G.map (pf T M) ≫ adj.counit.app (T ⊗ G.obj M) =
+      Functor.OplaxMonoidal.δ G (L.obj T) M ≫ adj.counit.app T ▷ G.obj M)
+    (hnatl : ∀ {T T' : 𝒰} (x : T ⟶ T') (M : 𝒲),
+      L.map x ▷ M ≫ pf T' M = pf T M ≫ L.map (x ▷ G.obj M))
+    (hnatr : ∀ (T : 𝒰) {M M' : 𝒲} (y : M ⟶ M'),
+      L.obj T ◁ y ≫ pf T M' = pf T M ≫ L.map (T ◁ G.map y))
+    {V V' A M M' B : 𝒲} {T₀ T : 𝒰} (g₁ : V ⟶ V') (g₂ : V' ⟶ A ⊗ M)
+    (φ₁ : G.obj V ⟶ T₀) (φ₂ : T₀ ⟶ T ⊗ G.obj M')
+    [IsIso (pf T M')] (x : G.obj A ⟶ T) (y : M ⟶ M') (e : L.obj T ⟶ B) (z : A ⟶ B)
+    (h₁ : φ₁ ≫ φ₂ = G.map (g₁ ≫ g₂) ≫ Functor.OplaxMonoidal.δ G A M ≫ (x ⊗ₘ G.map y))
+    (h₂ : adj.unit.app A ≫ L.map x ≫ e = z) :
+    g₁ ≫ g₂ ≫ (z ⊗ₘ y) =
+      adj.unit.app V ≫ L.map φ₁ ≫ L.map φ₂ ≫ inv (pf T M') ≫ (e ▷ M') := by
+  rw [← L.map_comp_assoc, h₁, ← Category.assoc g₁ g₂]
+  have hu := adj.unit.naturality (g₁ ≫ g₂)
+  simp only [Functor.id_map, Functor.comp_map] at hu
+  rw [L.map_comp, L.map_comp]
+  simp only [Category.assoc]
+  rw [← reassoc_of% hu,
+    ← reassoc_of% (Adjunction.unit_whiskerRight_comp_projection G adj pf hcounit A M)]
+  rw [MonoidalCategory.tensorHom_def x (G.map y), L.map_comp, Category.assoc,
+    ← reassoc_of% (hnatl x M),
+    ← reassoc_of% (hnatr T y), IsIso.hom_inv_id_assoc, MonoidalCategory.whisker_exchange,
+    ← h₂, MonoidalCategory.tensorHom_def]
+  simp only [MonoidalCategory.comp_whiskerRight, Category.assoc]
+
+end CoreAbstract
+
+end CategoryTheory
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+attribute [local instance] boundedConstructibleBraiding
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+section Core
+
+variable {P X Y W U V : Over (Spec (.of k))}
+  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
+  [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+  (aY : Y ⟶ P) (f : X ⟶ Y) [IsProper f.left] (p₂ : U ⟶ X) (π₁ π₂ : V ⟶ Y)
+  (zX : W ⟶ X) (h : W ⟶ V) [IsProper h.left] (r : U ⟶ W) [IsProper r.left]
+  (hA : IsPullback h zX π₁ f) (hB : IsPullback p₂ r f (h ≫ π₂))
+  (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+
+/-- The tensor part of the core identity: `Π_f` transposed along `h` and `r`. -/
+lemma sourceExchange_T1 [IsProper (r ≫ h).left] (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f)
+    (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f) :
+    ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app
+        ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f).obj K) ⊗
+          (boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ≫
+      (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
+      (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
+        ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ≫
+      ((β_ _ _).hom ≫ (_ ◁ (boundedConstructibleUpperStarComp _ ℓ r zX).hom.app K)) =
+    (boundedConstructibleUpperStar _ ℓ r).map
+        ((boundedConstructibleUpperStar _ ℓ h).map (β_ _ _).hom ≫
+          Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ h) _ _) ≫
+      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ r) _ _ ≫
+      (((boundedConstructibleUpperStarComp _ ℓ r h).inv.app
+          ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ≫
+        prodUpperStarCounit ℓ wq₂ ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ⊗ₘ
+        (boundedConstructibleUpperStar _ ℓ r).map (prodUpperStarCounit ℓ hA.w K)) :=
+  sorry
+
+/-- The unit part of the core identity: the compact-support base change of the square
+`r ≫ (h ≫ π₂) = p₂ ≫ f` read through the transported counit. -/
+lemma sourceExchange_T2 [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)]
+    [IsProper (r ≫ h).left] (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f) :
+    (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app
+        ((boundedConstructibleUpperStar _ ℓ h).obj ((boundedConstructibleUpperStar _ ℓ π₂).obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
+      (boundedConstructibleLowerShriek _ ℓ r).map
+        ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app
+          ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ≫
+        prodUpperStarCounit ℓ wq₂ ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+      (inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)).app
+        ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) =
+    (boundedConstructibleUpperStarComp _ ℓ h π₂).inv.app
+        ((boundedConstructibleLowerStar _ ℓ f).obj
+          ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+      (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
+          ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) :=
+  sorry
+
+/-- The core identity on `X × Y` of the base-change part of the source exchange. -/
+theorem sourceExchange_coreZ [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)]
+    [IsProper (r ≫ h).left] (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f)
+    (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f) :
+    (boundedConstructibleUpperStar _ ℓ h).map
+        (β_ ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f).obj K))
+          ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).hom ≫
+      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ h) _ _ ≫
+      (((boundedConstructibleUpperStarComp _ ℓ h π₂).inv.app
+          ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+        (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ⊗ₘ
+        prodUpperStarCounit ℓ hA.w K) =
+    (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app _ ≫
+      (boundedConstructibleLowerShriek _ ℓ r).map
+        ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app _ ≫
+          (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
+          (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ≫
+      (boundedConstructibleLowerShriek _ ℓ r).map
+        ((β_ _ _).hom ≫ (_ ◁ (boundedConstructibleUpperStarComp _ ℓ r zX).hom.app K)) ≫
+      inv (((boundedConstructibleExceptionalProjection _ ℓ r).app
+        ((boundedConstructibleUpperStar _ ℓ p₂).obj
+          ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))).app
+        ((boundedConstructibleUpperStar _ ℓ zX).obj K)) ≫
+      ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)).app
+        ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) ▷
+        (boundedConstructibleUpperStar _ ℓ zX).obj K) :=
+  sorry
+
+end Core
+
+section Generic
+
+variable {P X Y W U V : Over (Spec (.of k))}
+  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
+  [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+
+/-- The generic form of `lowerShriek_exceptionalKunneth_baseChange`. -/
+theorem lowerShriek_exceptionalKunneth_baseChange_generic
+    (aX : X ⟶ P) (aY : Y ⟶ P) (f : X ⟶ Y) [IsProper f.left] (p₁ p₂ : U ⟶ X) (π₁ π₂ : V ⟶ Y)
+    (zX : W ⟶ X) (zY : W ⟶ Y) (h : W ⟶ V) [IsProper h.left] (r : U ⟶ W) [IsProper r.left]
+    (q : U ⟶ V) [IsProper q.left]
+    (hA : IsPullback h zX π₁ f) (hB : IsPullback p₂ r f zY)
+    (sqY : IsPullback π₂ π₁ aY aY) (sqX : IsPullback p₂ p₁ aX aX)
+    (hzY : h ≫ π₂ = zY) (hp₁ : r ≫ zX = p₁) (hq : r ≫ h = q) (haX : f ≫ aY = aX)
+    (wq₁ : q ≫ π₁ = p₁ ≫ f) (wq₂ : q ≫ π₂ = p₂ ≫ f)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY)]
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX)] :
+    (boundedConstructibleLowerShriek _ ℓ π₁).map (β_ _ _).hom ≫
+      inv (((boundedConstructibleExceptionalProjection _ ℓ π₁).app
+        ((boundedConstructibleUpperStar _ ℓ π₂).obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _))))).app
+        ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
+      (((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY)).app
+          ((boundedConstructibleLowerStar _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _))) ≫
+        (boundedConstructibleUpperStar _ ℓ aY).map
+          ((boundedConstructibleLowerShriek _ ℓ aY).map
+              ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
+                ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _))) ≫
+            (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app
+              ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _)) ≫
+            eqToHom (by rw [haX] : (boundedConstructibleLowerShriek _ ℓ (f ≫ aY)).obj
+              ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _)) =
+              (boundedConstructibleLowerShriek _ ℓ aX).obj
+                ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _))) ≫
+            (boundedConstructibleUpperShriekAdjunction _ ℓ aX).counit.app (𝟙_ _))) ▷
+        (boundedConstructibleLowerStar _ ℓ f).obj K) ≫
+      ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ aY)).inv ▷ _) ≫
+      (λ_ _).hom =
+    (boundedConstructibleLowerShriek _ ℓ π₁).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).homEquiv _ _
+          ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ q) _ _).inv ≫
+            (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
+              ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _))))) ≫
+      (boundedConstructibleLowerShriek _ ℓ π₁).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ q).inv.app _) ≫
+      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wq₁).hom.app _ ≫
+      (boundedConstructibleLowerShriek _ ℓ f).map
+        ((boundedConstructibleLowerShriek _ ℓ p₁).map (β_ _ _).hom ≫
+          inv (((boundedConstructibleExceptionalProjection _ ℓ p₁).app
+            ((boundedConstructibleUpperStar _ ℓ p₂).obj
+              ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _)))).app K) ≫
+          ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX)).app
+            ((boundedConstructibleUpperShriek _ ℓ aX).obj (𝟙_ _)) ▷ K) ≫
+          ((boundedConstructibleUpperStar _ ℓ aX).map
+            ((boundedConstructibleUpperShriekAdjunction _ ℓ aX).counit.app (𝟙_ _)) ▷ K) ≫
+          ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ aX)).inv ▷ K) ≫
+          (λ_ K).hom) ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
+  sorry
+
+end Generic
+
+end AlgebraicGeometry.ProEtale.CondensedRing
