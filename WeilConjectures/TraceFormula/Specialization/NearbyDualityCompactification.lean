@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 
@@ -98,13 +99,17 @@ structure morphism `a` (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchang
 for proper `q`) and global Verdier duality identify it with the identity of
 `RHom(RΓ(X ×_k Spec Ω, K), ℚ̄_ℓ)`.
 
-Unfinished. The formal part is `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper`
-(blueprint `det-tf-nearby-duality-proper` (1)); its inputs are the lax monoidal structure of
-`Ra_*` on bounded constructible complexes and its compatibility with the proper exchange `χ_a`,
-the invertibility of `χ_a` for proper `q`, the trace normalization of the dualizing map `θ` for
-proper models (`NearbyCyclesModel.NearbyDualizingData`), and global Verdier duality
-(`ProEtale.CondensedRing.isIso_verdierExchange`) on both fibres together with the
-identification of the duality map of the trait model of the point with the identity. -/
+Unfinished. `NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isIso` proves the claim (with
+the lax monoidal structure of `Ra_*`, its compatibility with `χ_a`, the proper axiom of `D` and
+global Verdier duality on both fibres) from two remaining inputs: the invertibility of `χ_a`, and
+the invertibility of the duality map of the trait `S` itself at `Ra_* K` (blueprint: on `S`,
+`δ_{S,N}` is the identity of `RHom(N_η̄, ℚ̄_ℓ)`; this needs `Lε^*` along `Spec Ω ⟶ Spec k` to
+commute with `RHom(N, ℚ̄_ℓ)` for constructible `N`, and the monoidality of the nearby cycles of the
+trait, `NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`). The first
+input is false as stated: `χ_a` is not invertible when the geometric generic fibre of `M` is a
+proper open of `X ×_k Spec Ω` (e.g. `X = Spec k ⊔ Spec k`, `M` the trait mapping to the first
+copy), and for such models the proper axiom of `NearbyCyclesModel.NearbyDualizingData` fails too,
+so the proper case needs the hypothesis that the generic fibre is all of `X ×_k Spec Ω`. -/
 theorem isIso_lowerStar_nearbyDualityMap_of_isProper (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
     [IsProper q]
