@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
+public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 
 /-!
 
@@ -184,6 +185,103 @@ theorem isIso_kunnethMap_of_isProper (hM : M.IsTraitModelOver qM gM)
     (L(((finsetComplOpens S hS).ι)^*⟦Λ⟧).map_distinguished _ hT) hU
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
     (isZero_of_isZero_upperStar_finsetComplOpens Λ S hS C hC h₂ h₁)
+
+include hΛ in
+/-- The source `Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B` of the Künneth map is bounded constructible if the
+nearby cycles `Ψ_M A`, `Ψ_N B` are. -/
+lemma boundedConstructible_kunnethMap_source (hM : M.IsTraitModelOver qM gM)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))}
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))}
+    (hΨA : boundedConstructible (condensedRingObj Λ X'.left) ((M.nearbyCycles Λ).obj A))
+    (hΨB : boundedConstructible (condensedRingObj Λ Y'.left) ((N.nearbyCycles Λ).obj B)) :
+    boundedConstructible (condensedRingObj Λ Z'.left)
+      (L((f₁')^*⟦Λ⟧).obj ((M.nearbyCycles Λ).obj A) ⊗
+        L((f₂')^*⟦Λ⟧).obj ((N.nearbyCycles Λ).obj B)) := by
+  have : (boundedConstructible (condensedRingObj Λ Z'.left)).IsMonoidal :=
+    isMonoidal_boundedConstructible Λ (X := Z') (ℓ := ℓ)
+  exact CategoryTheory.ObjectProperty.prop_tensor
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
+
+include hΛ φ₂ in
+/-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
+geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
+`ε_M` and `ε_N` factor through the total spaces, `Lε_P^* (Lf₁^* A ⊗ Lf₂^* B)` is the pullback
+`Lj^* C₀` of a bounded constructible complex on the total space of `P`. -/
+lemma boundedConstructible_kunnethMap_target (hM : M.IsTraitModelOver qM gM)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgeom : ∀ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+        (condensedRingObj Λ P.total)), boundedConstructible (condensedRingObj Λ P.total) C₀ →
+      boundedConstructible (condensedRingObj Λ Z'.left) ((P.geometric.nearbyCycles Λ).obj C₀))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))}
+    (hA : boundedConstructible (condensedRingObj Λ X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))}
+    (hB : boundedConstructible (condensedRingObj Λ Y) B) :
+    boundedConstructible (condensedRingObj Λ Z'.left)
+      ((P.nearbyCycles Λ).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) := by
+  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+      (condensedRingObj Λ P.total)), boundedConstructible (condensedRingObj Λ P.total) C →
+        boundedConstructible (condensedRingObj Λ P.total) D →
+          boundedConstructible (condensedRingObj Λ P.total) (C ⊗ D) := by
+    have : (boundedConstructible (condensedRingObj Λ P.total)).IsMonoidal :=
+      isMonoidal_boundedConstructible Λ (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k'))
+        (ℓ := ℓ)
+    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso Λ φ₁ φ₂ heM heN hA hB htensor
+  exact (boundedConstructible _).prop_of_iso (L((P.i)^*⟦Λ⟧).mapIso (R((P.j)_*⟦Λ⟧).mapIso
+    ((Functor.Monoidal.μIso L((P.ε)^*⟦Λ⟧) _ _).symm ≪≫
+      (((pullbackSquareComparison Λ φ₁.commSq_ε).app A).symm ⊗ᵢ
+        ((pullbackSquareComparison Λ φ₂.commSq_ε).app B).symm) ≪≫ e).symm)) (hgeom C₀ hC₀)
+
+include hΛ in
+/-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
+`sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
+*Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
+for all products over the trait of models of finite type along proper structure morphisms, with
+projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,
+then it is an isomorphism for all products over the trait.
+
+The assertion is local on the special fibre `X_s × Y_s`: the Künneth map is compatible with the
+pullback exchanges along open immersions of the total spaces, which are invertible
+(`WeilConjectures.SixFunctors.NearbyCycles.OpenExchange`). On affine opens of the total spaces
+one takes projective closures over the trait and extends the coefficients by zero on the generic
+fibres. Finally the morphism of geometric generic fibres of the second projection may be replaced
+by the one compatible with the structure morphisms to `Spec Ω`: the two differ by an automorphism
+of the geometric generic fibre of `P` over its total space (a Galois twist on each connected
+component), whose pullback exchange is invertible. -/
+theorem isIso_kunnethMap_of_forall_isProper
+    (hproper : ∀ {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
+      {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
+      {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X} {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y}
+      {f₂' : Z'.left ⟶ Y'.left} (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
+      {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
+      {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))},
+      M.IsTraitModelOver qM gM → N.IsTraitModelOver qN gN →
+      IsPullback φ₁.total φ₂.total qM qN →
+      P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM) →
+      φ₂.generic ≫ gN = φ₁.generic ≫ gM → IsProper qM → IsProper qN →
+      ∀ {eM : M.total ⟶ X}, M.j ≫ eM = M.ε → ∀ {eN : N.total ⟶ Y}, N.j ≫ eN = N.ε →
+      ∀ {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X))}
+        {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+          (condensedRingObj Λ Y))},
+        boundedConstructible (condensedRingObj Λ X) A →
+          boundedConstructible (condensedRingObj Λ Y) B → IsIso (kunnethMap Λ φ₁ φ₂ A B))
+    (h : IsTraitProduct φ₁ φ₂)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))}
+    (hA : boundedConstructible (condensedRingObj Λ X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))}
+    (hB : boundedConstructible (condensedRingObj Λ Y) B) :
+    IsIso (kunnethMap Λ φ₁ φ₂ A B) :=
+  sorry
 
 end NearbyCyclesModel
 

@@ -255,6 +255,18 @@ lemma isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition
 
 end TensorMap
 
+/-- Over a separably closed field, every bounded constructible `ℚ̄_ℓ`-complex on the point is a
+finite direct sum of shifts of the unit (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`),
+in the ambient derived category. -/
+lemma nonempty_shiftDecomposition_of_boundedConstructible (ℓ : ℕ) [Fact ℓ.Prime] {K : Type u}
+    [Field K] [IsSepClosed K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ ℓ)]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K)))))
+    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      (Spec (.of K))) C) :
+    Nonempty (ShiftDecomposition (𝟙_ _) C) :=
+  ⟨(nonempty_shiftDecomposition_point ℓ K ⟨C, hC⟩).some.map (boundedConstructible _).ι⟩
+
 /-! ### The Künneth map of the trait -/
 
 namespace NearbyCyclesModel
