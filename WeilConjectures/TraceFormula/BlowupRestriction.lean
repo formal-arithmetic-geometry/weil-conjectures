@@ -66,8 +66,10 @@ noncomputable def isColimitCofanSpecPi {J : Type u} [Finite J] (R : J → Type u
 `globalSectionsRestriction_transverseBoundaryComplex_eq_zero` for `S = Spec (∏ R_j)` a finite
 disjoint union of strictly local schemes whose closed points map to closed points of `Y`. -/
 theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero_of_pi (hℓ : (ℓ : k) ≠ 0)
-    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
+    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z)
+    [IsLocallyNoetherian Z.left] [IsRegular Z.left] (hX : IsRegularDivisor iX)
     (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX))
     (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
     (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -81,7 +83,7 @@ theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero_of_pi (hℓ 
     fun j ↦ ?_
   have hc := globalSectionsRestriction_comp c
     (Spec.map (CommRingCat.ofHom (Pi.evalRingHom R j))) (transverseBoundaryComplex hle E)
-  rw [globalSectionsRestriction_transverseBoundaryComplex_eq_zero hℓ hΛ hZ hX hY z hz hUY hUXY
+  rw [globalSectionsRestriction_transverseBoundaryComplex_eq_zero hℓ hΛ hZ hX hY z hz hXY hUY hUXY
     hle E hE _ (s j) (hs j) (hcs j), zero_comp] at hc
   exact hc.symm
 
@@ -93,8 +95,10 @@ theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero_of_pi (hℓ 
 disjoint union `S = Spec (∏ R_j) ⟶ Z` of strictly local schemes mapping their closed points to
 closed points of `Y`. Then the restriction map `RΓ(T', i'_! E) ⟶ RΓ(W, ψ^* i'_! E)` is zero. -/
 theorem globalSectionsRestriction_eq_zero_of_transverse (hℓ : (ℓ : k) ≠ 0)
-    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z) (hX : IsRegularDivisor iX)
+    (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z)
+    [IsLocallyNoetherian Z.left] [IsRegular Z.left] (hX : IsRegularDivisor iX)
     (hY : IsRegularDivisor iY) (z : Z.left) (hz : MeetTransverselyAt iX iY z)
+    (hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX))
     (hUY : (UY : Set Z.left) = (Set.range iY)ᶜ)
     (hUXY : (UXY : Set Z.left) = (Set.range iX ∪ Set.range iY)ᶜ) (hle : UXY ≤ UY)
     [ConnectedSpace Y] {T' U' : Scheme.{u}} (i' : U' ⟶ T') [IsOpenImmersion i']
@@ -115,7 +119,7 @@ theorem globalSectionsRestriction_eq_zero_of_transverse (hℓ : (ℓ : k) ≠ 0)
   have hZero : globalSectionsRestriction ι
       (((Z.left.homOfLE hle)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj EZ) = 0 :=
     globalSectionsRestriction_eq_zero_of_factor UY.ι c _
-      (globalSectionsRestriction_transverseBoundaryComplex_eq_zero_of_pi hℓ hΛ hZ hX hY z hz hUY
+      (globalSectionsRestriction_transverseBoundaryComplex_eq_zero_of_pi hℓ hΛ hZ hX hY z hz hXY hUY
         hUXY hle EZ (hE.upperStar φU) R c s hs hcs) ι jW hι
   have hφι : globalSectionsRestriction ι
       (((φ)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj F) = 0 := by
@@ -125,8 +129,14 @@ theorem globalSectionsRestriction_eq_zero_of_transverse (hℓ : (ℓ : k) ≠ 0)
         (ModuleCat.{u + 1} Λ) hφ).app E).symm
     have hn := globalSectionsRestriction_naturality ι e.hom
     rw [hZero, comp_zero] at hn
-    rw [← cancel_mono ((rightDerivedGlobalSections _ _).map
-      (((ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map e.hom)), zero_comp, ← hn]
+    have hid : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map
+        (((ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map e.hom) ≫
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map
+          (((ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map e.inv) = 𝟙 _ := by
+      rw [← Functor.map_comp, ← Functor.map_comp, e.hom_inv_id, CategoryTheory.Functor.map_id,
+        CategoryTheory.Functor.map_id]
+    rw [← Category.comp_id (globalSectionsRestriction ι _), ← hid, ← Category.assoc, ← hn,
+      zero_comp]
   rw [hψ]
   exact globalSectionsRestriction_comp_eq_zero_of_right _ _ _ hφι
 
