@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
+public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
+public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
+public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnitSingle
 
 /-!
 
@@ -77,5 +80,12 @@ noncomputable def traitSpecialization :
 noncomputable def traitSpecializationUnit :
     𝟙_ _ ⟶ (traitSpecialization k k' (ℓ := ℓ)).obj (𝟙_ _) :=
   NearbyCyclesModel.boundedConstructibleUnit ℓ _
+
+/-- For the strictly henselian trait `S = Spec k'⟦t⟧`, the specialization unit
+`σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ = i^* Rj_* ℚ̄_ℓ` is an isomorphism: the cohomology of the geometric
+generic point of `S` is that of its closed point. This is the case `Y = Spec k'`, `L = ℚ̄_ℓ` of
+blueprint `det-sp-constant-family-vanishing`. -/
+theorem isIso_traitSpecializationUnit : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) :=
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
