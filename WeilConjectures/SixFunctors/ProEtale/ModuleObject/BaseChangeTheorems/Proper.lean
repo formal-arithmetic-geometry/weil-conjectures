@@ -82,8 +82,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 
 include ℓ k in
-/-- **The proper base change theorem** for bounded constructible `E`-sheaves, `E` a finite
-extension of `ℚ_ℓ`: for a cartesian square of schemes
+/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
+constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
 X' --g'--> X
@@ -100,8 +100,9 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
     IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) :=
   sorry
 
-/-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves: for a cartesian
-square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change morphism
+/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
+constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g` with
+`f` proper, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
