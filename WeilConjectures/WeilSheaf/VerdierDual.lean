@@ -37,7 +37,8 @@ they are stated here with `sorry`, each with the blueprint node it renders:
 - `fix-cor-verdier-exchange`: `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X`;
 - `cor-pur-adic-and-rational-smooth-dualizing-complexes`: `ω_X ≅ ℚ̄_ℓ(d)[2d]` for `X` smooth of
   pure dimension `d`;
-- `lem-sf-hom-finite-projective`: `RHom(P, N) ≅ P^∨ ⊗ N` and `P ≅ P^∨∨` for a lisse `P`;
+- `lem-sf-hom-finite-projective`: `RHom(P, N) ≅ P^∨ ⊗ N` for a lisse `P` (the biduality
+  `P ≅ P^∨∨` is proved in `WeilConjectures.WeilSheaf.Bidual`);
 - `prop-sf-localization-all-stages`, clause (4): `Ri^! Rj_* = 0` and the unit
   `Q ⟶ Ri^! Ri_* Q` is an isomorphism, for complementary immersions `i` and `j`.
 
@@ -256,7 +257,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- **The internal hom out of a lisse sheaf** (blueprint: `lem-sf-hom-finite-projective`): for
 a lisse Weil sheaf `P`, a locally free `ℚ̄_ℓ,X̄`-module of finite rank, and a Weil complex `N`,
-the canonical map `P^∨ ⊗ N ⟶ RHom(P, N)` is an isomorphism. -/
+`P^∨ ⊗ N` and `RHom(P, N)` are isomorphic. The blueprint asserts that the canonical map
+`P^∨ ⊗ N ⟶ RHom(P, N)` is an isomorphism; only the existence of an isomorphism is stated here. -/
 theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : P.IsLisse)
     (N : WeilComplex k₀ l X) :
     Nonempty (((tensorLisse (P.dual hP) hP.dual).obj N).obj ≅
@@ -266,17 +268,5 @@ theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : 
 end Lisse
 
 end WeilComplex
-
-namespace WeilSheaf
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- **Biduality of a lisse sheaf** (blueprint: `lem-sf-hom-finite-projective`, "the canonical
-map `P ⟶ P^∨∨` is an isomorphism"). -/
-theorem nonempty_iso_dual_dual (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
-    Nonempty (P ≅ (P.dual hP).dual hP.dual) :=
-  sorry
-
-end WeilSheaf
 
 end AlgebraicGeometry

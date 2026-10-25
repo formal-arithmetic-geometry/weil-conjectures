@@ -262,6 +262,7 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
   have hDK : IsPerverseLE (-n) DY :=
     SupportCondition.of_iso (verdierDualShiftIso _ aY K n) hK
   have h₁ := isPerverseLE_upperStar aY d f hDK
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
   obtain ⟨L₀, _, hL₀, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨-, hL₀f⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L₀ hL₀
   have h₂ := SupportCondition.derivedTensor h₁ (torAmplitudeIn_singleFunctor_zero_of_flat _ L₀ hL₀f)
