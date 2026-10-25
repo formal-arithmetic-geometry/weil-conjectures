@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.FirstCokernel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.SixFunctors.Finite.Exact
 
@@ -66,20 +67,14 @@ namespace AddCommGrpCat
 
 variable (n : ℕ)
 
-/-- The reduction map `ℤ ⟶ ℤ/n`, in `AddCommGrpCat.{u + 1}`. -/
-def uliftIntToZMod :
-    AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ AddCommGrpCat.of (ULift.{u + 1} (ZMod n)) :=
-  AddCommGrpCat.ofHom ((AddEquiv.ulift.symm.toAddMonoidHom.comp (Int.castAddHom (ZMod n))).comp
-    AddEquiv.ulift.toAddMonoidHom)
-
 @[simp]
 lemma uliftIntToZMod_apply (a : ULift.{u + 1} ℤ) :
-    uliftIntToZMod n a = ULift.up ((a.down : ℤ) : ZMod n) :=
+    uliftIntToZMod.{u + 1} n a = ULift.up ((a.down : ℤ) : ZMod n) :=
   rfl
 
 @[reassoc (attr := simp)]
 lemma nsmul_id_comp_uliftIntToZMod :
-    (n • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ≫ uliftIntToZMod.{u} n = 0 := by
+    (n • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ≫ uliftIntToZMod.{u + 1} n = 0 := by
   ext a
   simp
 
@@ -94,9 +89,7 @@ def isColimitUliftIntToZMod :
     obtain ⟨b, hb⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).1 ha
     exact ⟨ULift.up b, ULift.ext _ _ (by simp [S, hb])⟩
   have : Epi S.g := (AddCommGrpCat.epi_iff_surjective _).2 fun a ↦
-    ⟨ULift.up (a.down : ZMod n).valMinAbs, by
-      rw [show S.g = uliftIntToZMod n from rfl, uliftIntToZMod_apply]
-      exact ULift.ext _ _ (ZMod.coe_valMinAbs _)⟩
+    ⟨ULift.up (a.down : ZMod n).valMinAbs, ULift.ext _ _ (ZMod.coe_valMinAbs (a.down : ZMod n))⟩
   exact hS.gIsCokernel
 
 end AddCommGrpCat
@@ -116,7 +109,7 @@ def pointConstantZMod (x : X) : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}
 /-- The reduction map `i_{x*} ℤ ⟶ i_{x*} ℤ/n`. -/
 def pointConstantIntToZMod (x : X) : X.pointConstantInt x ⟶ X.pointConstantZMod n x :=
   (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).map
-    ((constantSheaf _ AddCommGrpCat.{u + 1}).map (AddCommGrpCat.uliftIntToZMod.{u} n))
+    ((constantSheaf _ AddCommGrpCat.{u + 1}).map (AddCommGrpCat.uliftIntToZMod.{u + 1} n))
 
 @[reassoc (attr := simp)]
 lemma nsmul_id_comp_pointConstantIntToZMod (x : X) :

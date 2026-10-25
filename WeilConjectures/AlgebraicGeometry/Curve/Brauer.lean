@@ -14,15 +14,27 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
+import WeilConjectures.AlgebraicGeometry.Curve.BrauerReductionInjection
+import WeilConjectures.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
+import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherent
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import WeilConjectures.SixFunctors.Finite.Exact
+
 /-!
 # Tsen's theorem and the Brauer group of a curve
 
 The function field of an integral curve over an algebraically closed field is `C₁`, so its
 Brauer group vanishes; the Brauer group of a smooth curve over an algebraically closed field
-vanishes, since it injects into that of its function field on each connected component. The
-Brauer group of every curve over an algebraically closed field vanishes, see
-`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup` in
-`WeilConjectures.AlgebraicGeometry.Curve.BrauerNonreduced`.
+vanishes, since it injects into that of its function field on each connected component; and the
+Brauer group of every curve over an algebraically closed field vanishes.
 
 Curves are given by a structure morphism `f : C ⟶ Spec k` satisfying
 `AlgebraicGeometry.IsCurve`.
@@ -37,6 +49,8 @@ Curves are given by a structure morphism `f : C ⟶ Spec k` satisfying
   Brauer group of a smooth connected curve over an algebraically closed field vanishes.
 - `AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_smooth`: the Brauer group
   of a smooth curve over an algebraically closed field vanishes.
+- `AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup`: the Brauer group of a
+  curve over an algebraically closed field vanishes.
 
 ## Implementation notes
 
@@ -118,7 +132,9 @@ theorem subsingleton_cohomologicalBrauerGroup_functionField (f : C ⟶ Spec (.of
 integral, noetherian and regular, so `Br(C)` injects into `Br(k(C))`
 (`AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two`), and `Br(k(C)) = 0` by Tsen's
 theorem. Properness is not needed, so no compactification is used.
-(blueprint: `lem-sc-brauer-zero`) -/
+(blueprint: `lem-sc-brauer-zero`) 
+(blueprint: lem-sc-brauer-zero)
+-/
 theorem subsingleton_cohomologicalBrauerGroup_of_connectedSpace (f : C ⟶ Spec (.of k))
     [IsCurve f] [Smooth f] [ConnectedSpace C] : Subsingleton C.CohomologicalBrauerGroup := by
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
@@ -175,5 +191,46 @@ theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k))
   let e := Scheme.upperStarGmSheafIso (U c).ι
   exact (Function.LeftInverse.injective (f := Sheaf.H.map e.hom 2) (g := Sheaf.H.map e.inv 2)
     fun x ↦ by rw [← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply]).subsingleton
+
+/-- **The Brauer group of a curve vanishes.** For a curve `C` over an algebraically closed
+field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. Neither smoothness nor properness is assumed.
+(blueprint: `lem-sc-brauer-zero-all-curves`) 
+(blueprint: lem-sc-brauer-zero-all-curves)
+-/
+theorem subsingleton_cohomologicalBrauerGroup (f : C ⟶ Spec (.of k)) [IsCurve f] :
+    Subsingleton C.CohomologicalBrauerGroup := by
+  let C₀ := C.nilradical.subscheme
+  let i : C₀ ⟶ C := C.nilradical.subschemeι
+  have hi : Function.Surjective i := by
+    apply Set.range_eq_univ.mp
+    change Set.range C.nilradical.subschemeι = Set.univ
+    rw [Scheme.IdealSheafData.range_subschemeι, C.support_nilradical]
+    rfl
+  have hi_homeo : IsHomeomorph i :=
+    isHomeomorph_iff_isEmbedding_surjective.mpr ⟨i.isClosedEmbedding.isEmbedding, hi⟩
+  have : IsCurve (i ≫ f) :=
+    { krullDim_le_one := by
+        rw [IsHomeomorph.topologicalKrullDim_eq i hi_homeo]
+        exact IsCurve.krullDim_le_one f }
+  let : C₀.Over (Spec (.of k)) := ⟨i ≫ f⟩
+  have : IsSeparated (C₀ ↘ Spec (.of k)) := inferInstanceAs (IsSeparated (i ≫ f))
+  have : LocallyOfFiniteType (C₀ ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (i ≫ f))
+  have : QuasiCompact (C₀ ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact (i ≫ f))
+  obtain ⟨Y, ν, hsep, hft, hqc, hdim, hsm, hfin, V, hV, hiso⟩ :=
+    exists_finite_smooth_modification_of_reduced_curve (k := k) C₀
+      (IsCurve.krullDim_le_one (i ≫ f))
+  have : IsSeparated (ν ≫ (i ≫ f)) := hsep
+  have : LocallyOfFiniteType (ν ≫ (i ≫ f)) := hft
+  have : QuasiCompact (ν ≫ (i ≫ f)) := hqc
+  have : IsCurve (ν ≫ (i ≫ f)) := { krullDim_le_one := hdim }
+  have : Smooth (ν ≫ (i ≫ f)) := hsm
+  have : IsFinite ν := hfin
+  have : IsIso (ν ∣_ V) := hiso
+  have : Subsingleton Y.CohomologicalBrauerGroup :=
+    subsingleton_cohomologicalBrauerGroup_of_smooth (ν ≫ (i ≫ f))
+  have : Subsingleton C₀.CohomologicalBrauerGroup :=
+    (injective_brauer_pullback_finite_modification (i ≫ f) ν V hV).subsingleton
+  exact (injective_brauer_pullback_reduction f).subsingleton
 
 end AlgebraicGeometry.IsCurve

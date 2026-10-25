@@ -22,9 +22,6 @@ identity of `G`.
 - `CategoryTheory.conjugateEquiv_leftAdjointUniq_hom` and
   `CategoryTheory.conjugateEquiv_leftAdjointUniq_inv`: the conjugates of the two
   directions of `Adjunction.leftAdjointUniq` are the identity of the common right adjoint.
-- `CategoryTheory.Adjunction.leftAdjointUniq_eq_of_unit`: `Adjunction.leftAdjointUniq` is unchanged
-  when both adjunctions are transported along a morphism of right adjoints compatible with the
-  units.
 
 -/
 
@@ -86,21 +83,32 @@ lemma mateEquiv_leftAdjointUniq (adj₁ : L₁ ⊣ R₁) (adj₁' : L₁' ⊣ R�
 
 end Mates
 
-namespace Adjunction
+section RightAdjointUniq
 
-/-- The canonical isomorphism `Adjunction.leftAdjointUniq` of two left adjoints of `G` does not
-change when both adjunctions are transported along a morphism `κ : G ⟶ G'` to adjunctions with
-right adjoint `G'` which is compatible with the units. -/
-lemma leftAdjointUniq_eq_of_unit {G' : D ⥤ C} (adj₁ : F ⊣ G) (adj₂ : F' ⊣ G) (adj₁' : F ⊣ G')
-    (adj₂' : F' ⊣ G') (κ : G ⟶ G')
-    (h₁ : ∀ x, adj₁'.unit.app x = adj₁.unit.app x ≫ κ.app (F.obj x))
-    (h₂ : ∀ x, adj₂'.unit.app x = adj₂.unit.app x ≫ κ.app (F'.obj x)) :
-    leftAdjointUniq adj₁ adj₂ = leftAdjointUniq adj₁' adj₂' := by
-  ext x
-  apply (adj₁'.homEquiv _ _).injective
-  rw [homEquiv_leftAdjointUniq_hom_app, homEquiv_unit, h₁, Category.assoc, ← κ.naturality,
-    ← Category.assoc, ← homEquiv_unit, homEquiv_leftAdjointUniq_hom_app, h₂]
+variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G G' : D ⥤ C}
 
-end Adjunction
+/-- An isomorphism `e : G ≅ G'` between two right adjoints of `F` transports the first
+adjunction to the second if and only if it is `Adjunction.rightAdjointUniq`. -/
+lemma Adjunction.ofNatIsoRight_eq_iff (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') (e : G ≅ G') :
+    adj₁.ofNatIsoRight e = adj₂ ↔ e = adj₁.rightAdjointUniq adj₂ := by
+  constructor
+  · rintro rfl
+    ext Y
+    rw [← Equiv.apply_symm_apply ((adj₁.ofNatIsoRight e).homEquiv _ _)
+      ((adj₁.rightAdjointUniq (adj₁.ofNatIsoRight e)).hom.app Y),
+      Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, Adjunction.homEquiv_ofNatIsoRight_apply]
+    rw [Adjunction.homEquiv_unit, Adjunction.right_triangle_components, Category.id_comp]
+  · rintro rfl
+    apply Adjunction.ext
+    ext X
+    simp [Adjunction.ofNatIsoRight]
+
+/-- If `G` and `G'` are both right adjoint to `F`, there is a unique isomorphism `G ≅ G'`
+compatible with the two adjunctions, namely `Adjunction.rightAdjointUniq`. -/
+lemma Adjunction.existsUnique_ofNatIsoRight_eq (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') :
+    ∃! e : G ≅ G', adj₁.ofNatIsoRight e = adj₂ :=
+  ⟨_, (adj₁.ofNatIsoRight_eq_iff adj₂ _).2 rfl, fun _ h ↦ (adj₁.ofNatIsoRight_eq_iff adj₂ _).1 h⟩
+
+end RightAdjointUniq
 
 end CategoryTheory

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
@@ -20,7 +21,9 @@ A projective object placed in a single degree is K-projective
 (`CochainComplex.isKProjective_singleFunctor_obj`). Hence, for a projective object `P` and `K`
 in the derived category, there are no nonzero morphisms `P[0] ⟶ K[n]` if and only if there are
 no nonzero morphisms `P ⟶ H^n(K)`
-(`DerivedCategory.subsingleton_singleFunctor_hom_shift_iff_of_projective`).
+(`DerivedCategory.subsingleton_singleFunctor_hom_shift_iff_of_projective`). In particular, there
+are no nonzero morphisms `P[0] ⟶ Q[n]` for objects `P`, `Q` with `P` projective and `n ≠ 0`
+(`DerivedCategory.subsingleton_singleFunctor_hom_shift`).
 -/
 
 @[expose] public section
@@ -91,5 +94,15 @@ lemma subsingleton_singleFunctor_hom_shift_iff_of_projective (P : C) [Projective
   exact (CochainComplex.subsingleton_cohomologyClass_singleFunctor_iff P L n).trans
     (L.subsingleton_hom_homology_iff_of_projective (i := n - 1) (j := n) (k := n + 1)
       (by simp) (by simp) P).symm
+
+/-- There are no nonzero morphisms `P[0] ⟶ Q[b]` from a projective object `P` when `b ≠ 0`. -/
+lemma subsingleton_singleFunctor_hom_shift (P : C) [Projective P] (Q : C) {b : ℤ} (hb : b ≠ 0) :
+    Subsingleton ((singleFunctor C 0).obj P ⟶ ((singleFunctor C 0).obj Q)⟦b⟧) := by
+  refine (subsingleton_singleFunctor_hom_shift_iff_of_projective P _ b).2 ⟨fun f g ↦ ?_⟩
+  have : Limits.IsZero ((homologyFunctor C b).obj ((singleFunctor C 0).obj Q)) := by
+    rcases lt_or_gt_of_ne hb with h | h
+    · exact isZero_of_isGE _ 0 b h
+    · exact isZero_of_isLE _ 0 b h
+  exact this.eq_of_tgt f g
 
 end DerivedCategory

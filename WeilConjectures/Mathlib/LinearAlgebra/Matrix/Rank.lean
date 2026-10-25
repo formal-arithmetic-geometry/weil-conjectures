@@ -24,6 +24,8 @@ the rank of a matrix of functions lower semicontinuous.
 - `Matrix.bddAbove_range_rank_submatrix_iff`: the ranks of the finite square submatrices of a
   matrix with arbitrary row and column index types are bounded if and only if its rows span a
   finite-dimensional space.
+- `Matrix.rank_add_rank_eq_card_of_exact`: over a field, the ranks of the two maps of an exact
+  sequence add up to the dimension of the middle term.
 -/
 
 @[expose] public section
@@ -125,5 +127,28 @@ theorem bddAbove_range_rank_submatrix_iff {m n : Type*} (A : Matrix m n K) :
           Submodule.finrank_map_le _ _
       _ ≤ finrank K (Submodule.span K (Set.range A.row)) :=
           Submodule.finrank_mono (Submodule.span_mono (Set.range_comp_subset_range _ _))
+
+section Exact
+
+variable {ι₀ ι₁ ι₂ : Type*} [Fintype ι₀] [Fintype ι₁]
+
+/-- **Ranks in an exact sequence over a field.** If `B * A = 0` and every vector killed by `B` is
+in the image of `A`, then `rank A + rank B` is the size of the middle term. -/
+theorem rank_add_rank_eq_card_of_exact (A : Matrix ι₁ ι₀ K) (B : Matrix ι₂ ι₁ K)
+    (hBA : B * A = 0) (h : ∀ v : ι₁ → K, B *ᵥ v = 0 → ∃ w, A *ᵥ w = v) :
+    A.rank + B.rank = Fintype.card ι₁ := by
+  have hker : LinearMap.ker B.mulVecLin = LinearMap.range A.mulVecLin := by
+    refine le_antisymm (fun v hv ↦ ?_) ?_
+    · obtain ⟨w, hw⟩ := h v hv
+      exact ⟨w, hw⟩
+    · rintro _ ⟨w, rfl⟩
+      change B *ᵥ (A *ᵥ w) = 0
+      rw [Matrix.mulVec_mulVec, hBA, Matrix.zero_mulVec]
+  have := LinearMap.finrank_range_add_finrank_ker B.mulVecLin
+  rw [hker, Module.finrank_fintype_fun_eq_card] at this
+  rw [Matrix.rank, Matrix.rank]
+  omega
+
+end Exact
 
 end Matrix

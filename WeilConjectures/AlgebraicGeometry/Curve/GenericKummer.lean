@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityCohomology
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.GenericKummer
 
@@ -42,11 +43,6 @@ lemma IsCurve.isNoetherian (f : C ⟶ Spec (.of k)) [IsCurve f] : IsNoetherian C
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
   ⟨⟩
-
-/-- An integer invertible in `k` is invertible on a `k`-scheme. -/
-lemma Scheme.isUnit_natCast_of_ne_zero (f : C ⟶ Spec (.of k)) {n : ℕ} (hn : (n : k) ≠ 0) :
-    IsUnit (n : Γ(C, ⊤)) := by
-  simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
 
 variable (f : C ⟶ Spec (.of k)) [Smooth f] [IsConnectedCurve f] [IsIntegral C] {n : ℕ}
   (hn : (n : k) ≠ 0)

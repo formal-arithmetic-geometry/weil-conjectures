@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericCohomologicalDimension
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 
 /-!
 # Cohomological dimension of a curve: complexes and variants
@@ -42,17 +43,6 @@ open CategoryTheory Limits
 namespace CategoryTheory.Sheaf
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
-
-/-- Being a torsion sheaf is invariant under isomorphism. -/
-lemma IsTorsion.of_iso {F G : Sheaf J AddCommGrpCat.{w}} (e : F ≅ G) (hF : F.IsTorsion) :
-    G.IsTorsion := by
-  intro U s
-  obtain ⟨S, hS, h⟩ := hF (e.inv.hom.app U s)
-  refine ⟨S, hS, fun V f hf ↦ ?_⟩
-  have h' := (e.hom.hom.app (Opposite.op V)).hom.isOfFinAddOrder (h hf)
-  have := congr($(NatTrans.naturality_apply e.inv.hom f.op s))
-  rwa [← this, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← InducedCategory.comp_hom,
-    e.inv_hom_id, InducedCategory.id_hom, NatTrans.id_app, ConcreteCategory.id_apply] at h'
 
 instance : ObjectProperty.IsClosedUnderIsomorphisms
     (fun F : Sheaf J AddCommGrpCat.{w} ↦ F.IsTorsion) where

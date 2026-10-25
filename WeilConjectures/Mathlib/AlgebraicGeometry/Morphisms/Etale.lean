@@ -360,7 +360,7 @@ theorem Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk {S : Sch
 integral normal scheme — normality being spelled out as the hypothesis `hS` that every stalk of
 `S` is integrally closed — whose function field `S.functionField` is separably closed, and let
 `p : V ⟶ S` be separated and étale. Then `V` is the disjoint union of a family of opens `U i`
-each of which maps isomorphically onto an open of `S`. -/
+each of which maps isomorphically onto an open of `S` (blueprint `sk-prop-etale-normal`). -/
 @[stacks 09Z9]
 theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
     {V S : Scheme.{u}} [IsIntegral S]
@@ -374,7 +374,7 @@ theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
 
 /-- The quasi-compact refinement of
 `AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: if `V` is
-in addition quasi-compact, then finitely many opens suffice. -/
+in addition quasi-compact, then finitely many opens suffice (blueprint `sk-prop-etale-normal`). -/
 @[stacks 09Z9]
 theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
     {V S : Scheme.{u}} [IsIntegral S]

@@ -93,7 +93,7 @@ lemma derivedPlusFormalism_sqIso (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b
     intro d hd h
     subst hd
     simp
-  simp only [CompactSupportFormalism.sqIso, CompactSupportFormalism.pbComp',
+  simp only [ExchangeFormalism.sqIso, ExchangeFormalism.pbComp',
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Iso.trans_inv, Iso.symm_inv]
   simp only [eqToIso_refl, Iso.refl_inv, NatTrans.id_app, Category.comp_id]
   exact congrArg _ (key (t ≫ r) w _)
@@ -110,7 +110,7 @@ lemma derivedPlusFormalism_pfBaseChange_eq_mateEquiv (t : U' ⟶ U) (l : U' ⟶ 
       mateEquiv (upperStarLowerStarAdjunction A r).derivedPlus
         (upperStarLowerStarAdjunction A l).derivedPlus
         (TwoSquare.mk _ _ _ _ (pullbackSquareComparison A (CommSq.mk w)).hom) := by
-  rw [CompactSupportFormalism.pfBaseChange, derivedPlusFormalism_sqIso]
+  rw [ExchangeFormalism.pfBaseChange, derivedPlusFormalism_sqIso]
   rfl
 
 /-- **The base change map of pushforwards of the compact support formalism of `D⁺`** is the
@@ -154,9 +154,9 @@ with `l` and `r` open immersions and `Λ` finite, the base change map `t^* ⋙ l
 i.e. `l_! t^* K ⟶ b^* r_! K`, of the extension by zero on `D⁺(-_ét, Λ)` is an isomorphism; its
 inverse is the map `b^{-1} r_! K ⟶ l_! t^{-1} K` of the blueprint. It is natural, being a
 natural transformation; it is the identity for an identity square
-(`CompactSupportFormalism.baseChange_id_horiz`, `CompactSupportFormalism.baseChange_id_vert`)
-and compatible with pasting (`CompactSupportFormalism.baseChange_paste_horiz`,
-`CompactSupportFormalism.baseChange_paste_vert`). On sheaves this is
+(`ExchangeFormalism.baseChange_id_horiz`, `ExchangeFormalism.baseChange_id_vert`)
+and compatible with pasting (`ExchangeFormalism.baseChange_paste_horiz`,
+`ExchangeFormalism.baseChange_paste_vert`). On sheaves this is
 `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap`
 (`lem-cbc-extension-zero-base-change`), and on the unbounded derived categories
 `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekBaseChangeIso`. -/

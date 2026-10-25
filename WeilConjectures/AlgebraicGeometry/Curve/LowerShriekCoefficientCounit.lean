@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
@@ -28,17 +29,6 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
-
-private theorem sheafCompose_isEquivalence
-    {C A B : Type*} [Category C] [Category A] [Category B]
-    (J : GrothendieckTopology C) (E : A ⥤ B) [E.IsEquivalence]
-    [J.HasSheafCompose E] [J.HasSheafCompose E.inv] :
-    (sheafCompose J E).IsEquivalence := by
-  let a := (E.adjunction.whiskerRight Cᵒᵖ).restrictFullyFaithful
-    (fullyFaithfulSheafToPresheaf J A) (fullyFaithfulSheafToPresheaf J B)
-    (L := sheafCompose J E) (R := sheafCompose J E.inv)
-    (Iso.refl _) (Iso.refl _)
-  exact a.toEquivalence.isEquivalence_functor
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Coefficient conversion identifies the two extension-by-zero objects and their counits.
@@ -78,8 +68,8 @@ theorem exists_lowerShriek_coefficient_counit {X : Scheme.{u}}
   let TX := sheafCompose X.smallEtaleTopology E
   let TU := sheafCompose U.toScheme.smallEtaleTopology E
   have : E.IsEquivalence := inferInstance
-  have : TX.IsEquivalence := sheafCompose_isEquivalence _ E
-  have : TU.IsEquivalence := sheafCompose_isEquivalence _ E
+  have : TX.IsEquivalence := isEquivalence_sheafCompose_of_isEquivalence _ E
+  have : TU.IsEquivalence := isEquivalence_sheafCompose_of_isEquivalence _ E
   let SX := sheafCompose X.smallEtaleTopology E.inv
   let SU := sheafCompose U.toScheme.smallEtaleTopology E.inv
   let ax := (E.adjunction.whiskerRight X.Etaleᵒᵖ).restrictFullyFaithful

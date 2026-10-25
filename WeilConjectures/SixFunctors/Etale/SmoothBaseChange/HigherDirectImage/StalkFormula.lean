@@ -146,7 +146,7 @@ noncomputable def freeSheafPullbackSection {T : Scheme.{u}} (t : T ⟶ X) (V : S
   ModuleSheaf.pullSection t ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V))
     (V := Etale.finalObject T) (U := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V)
     (pullback.lift b t hb) ((pullback.lift_snd _ _ _).trans (Category.id_comp t).symm)
-    (Etale.pullbackSection Λ f _ V (freeSheafGenerator Λ V))
+    (Etale.modulePullbackSection Λ f _ V (freeSheafGenerator Λ V))
 
 /-- The morphism `Λ ⟶ t^* f^* Λ[V]` corresponding to `freeSheafPullbackSection`. -/
 noncomputable def freeSheafPullbackMap {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale)
@@ -185,8 +185,8 @@ lemma cohomologyPresheafRestrict_map {T : Scheme.{u}} (t : T ⟶ X) {V V' : S.Et
       freeSheafPullbackSection Λ f t V (b ≫ a.left)
         (by rw [Category.assoc, MorphismProperty.Over.w a, hb]) := by
     simp only [freeSheafPullbackSection]
-    rw [ModuleSheaf.pullSection_naturality, Etale.pullbackSection_naturality,
-      freeSheaf_map_freeSheafGenerator, ← Etale.pullbackSection_map,
+    rw [ModuleSheaf.pullSection_naturality, Etale.modulePullbackSection_naturality,
+      freeSheaf_map_freeSheafGenerator, ← Etale.modulePullbackSection_map,
       ← ModuleSheaf.pullSection_comp]
     exact ModuleSheaf.pullSection_congr _ _ _ (by apply pullback.hom_ext <;> simp) _
   have hσ : freeSheafPullbackMap Λ f t V' b hb ≫ (t)^*[ModuleCat.{u + 1} Λ].map
@@ -238,7 +238,7 @@ lemma cohomologyPresheafRestrict_comp {T T' : Scheme.{u}} (t : T ⟶ X) (h : T' 
         (Etale.constSheafOne Λ (Etale.finalObject T')) =
         ((h)^*[ModuleCat.{u + 1} Λ].obj
           (SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ)).obj.map ι.op
-          (Etale.pullbackSection Λ h _ (Etale.finalObject T)
+          (Etale.modulePullbackSection Λ h _ (Etale.finalObject T)
             (Etale.constSheafOne Λ (Etale.finalObject T))) := by
       rw [← Etale.constSheafOne_map Λ ι, ← Etale.constantSheafCompUpperStarIso_inv_one]
       exact NatTrans.naturality_apply c.inv.hom ι.op _
@@ -246,12 +246,12 @@ lemma cohomologyPresheafRestrict_comp {T T' : Scheme.{u}} (t : T ⟶ X) (h : T' 
         (op (Etale.finalObject T')) (c.inv.hom.app (op (Etale.finalObject T'))
           (Etale.constSheafOne Λ (Etale.finalObject T'))) =
         ((h)^*[ModuleCat.{u + 1} Λ].obj ((t)^*[ModuleCat.{u + 1} Λ].obj A)).obj.map ι.op
-          (Etale.pullbackSection Λ h _ (Etale.finalObject T)
+          (Etale.modulePullbackSection Λ h _ (Etale.finalObject T)
             (freeSheafPullbackSection Λ f t V b hb)) := by
       rw [e1]
       refine (NatTrans.naturality_apply
         ((h)^*[ModuleCat.{u + 1} Λ].map (freeSheafPullbackMap Λ f t V b hb)).hom ι.op _).trans ?_
-      rw [Etale.pullbackSection_naturality, hσ₂]
+      rw [Etale.modulePullbackSection_naturality, hσ₂]
     have e2 : freeSheafPullbackSection Λ f (h ≫ t) V (h ≫ b)
         (by rw [Category.assoc, hb, Category.assoc]) =
         ModuleSheaf.restrictAlong t A h (h ≫ t) rfl (V := Etale.finalObject T)
@@ -263,7 +263,7 @@ lemma cohomologyPresheafRestrict_comp {T T' : Scheme.{u}} (t : T ⟶ X) (h : T' 
         (V' := Etale.finalObject T') h hι (freeSheafPullbackSection Λ f t V b hb) =
         (τ.inv.app A).hom.app (op (Etale.finalObject T'))
           (((h)^*[ModuleCat.{u + 1} Λ].obj ((t)^*[ModuleCat.{u + 1} Λ].obj A)).obj.map ι.op
-            (Etale.pullbackSection Λ h _ (Etale.finalObject T)
+            (Etale.modulePullbackSection Λ h _ (Etale.finalObject T)
               (freeSheafPullbackSection Λ f t V b hb))) :=
       (NatTrans.naturality_apply (τ.inv.app A).hom ι.op _).symm
     rw [hσ₁]
@@ -334,7 +334,7 @@ lemma bijective_cohomologyPresheafRestrict (V : S.Etale) :
       have hg : Etale.freeSheafHomEquiv Λ V _
           ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app
             ((Etale.freeSheaf Λ S).obj V)) =
-          Etale.pullbackSection Λ f _ V (freeSheafGenerator Λ V) := by
+          Etale.modulePullbackSection Λ f _ V (freeSheafGenerator Λ V) := by
         rw [← Category.id_comp ((Etale.upperStarLowerStarAdjunction _ f).unit.app _),
           Etale.freeSheafHomEquiv_comp]
         rfl

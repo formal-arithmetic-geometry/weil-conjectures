@@ -48,7 +48,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
+/-- Blueprint `def-weil-pbc-derived-categories`: Derived categories of etale sheaves
+
+The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`: the localization of
+the cochain complexes of sheaves of `Λ`-modules on the small étale site at the quasi-isomorphisms
+(`DerivedCategory`). Its subcategories `D⁺(X_ét, Λ)` and `Dᵇ(X_ét, Λ)` are
+`DerivedCategory.Plus` and `DerivedCategory.Bounded`, the objects whose cohomology sheaves
+`DerivedCategory.homologyFunctor _ i` vanish below some degree, resp. outside a finite range
+(`DerivedCategory.isGE_iff`, `DerivedCategory.isLE_iff`). -/
 abbrev DerivedCategoryModule : Type (u + 2) :=
   DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
@@ -129,6 +136,26 @@ lemma nsmul_id_reductionModIdeal {J : Ideal Λ} {N : ℕ} (hN : (N : Λ) ∈ J)
   rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul,
     ← (DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_nsmul,
     ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_nsmul, hM,
+    Functor.map_zero, Functor.map_zero, Functor.map_zero]
+
+/-- An element `r` of the ideal `J` kills the reduction `K ⊗ᴸ (Λ ⧸ J)_X` of every object `K` of
+`D(X_ét, Λ)`: it kills `Λ ⧸ J`, hence the constant complex `(Λ ⧸ J)_X`, and tensoring with `K`
+is `Λ`-linear. -/
+lemma smul_id_reductionModIdeal {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
+  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
+    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
+      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
+    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
+      Ideal.Quotient.eq_zero_iff_mem]
+    exact J.mul_mem_right _ hr
+  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
+    ← (DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
+    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
     Functor.map_zero, Functor.map_zero, Functor.map_zero]
 
 end Etale

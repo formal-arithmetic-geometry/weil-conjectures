@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineCoaction
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
@@ -92,9 +93,6 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 namespace Etale
-
-lemma hom_ext {U V : Y.Etale} {f g : U ⟶ V} (h : f.left = g.left) : f = g :=
-  MorphismProperty.Over.Hom.ext h
 
 @[simp, reassoc]
 lemma comp_left {U V W : Y.Etale} (f : U ⟶ V) (g : V ⟶ W) : (f ≫ g).left = f.left ≫ g.left :=

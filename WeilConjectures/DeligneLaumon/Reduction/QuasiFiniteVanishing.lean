@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.WeilSheaf.FiniteLowerStar
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
@@ -26,9 +28,8 @@ Frobenius of quasi-finite direct images in
 - `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerStar_of_neg` and
   `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg`: vanishing in
   negative degrees.
-- `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: the analogue for Weil sheaves
-  of the exactness of finite direct images of étale sheaves
-  (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isFinite`).
+- `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: blueprint
+  `lemma-weil-pbc-finite-direct-image-exact`.
 - `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`: blueprint
   `sk-l-dl-general-quasifinite`, `lem-zl-quasi-finite`, part 1.
 -/
@@ -105,21 +106,34 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 
 end LowerShriek
 
-/-- **Finite direct images of Weil sheaves are exact**: for a finite morphism `p : T ⟶ Y` of
-`k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for `r > 0`.
-
-This is the analogue, for pro-étale `ℚ̄_ℓ`-sheaves with Weil structure
-(`def-weil-pbc-qbar-category`), of the exactness of finite direct images of étale sheaves
-(blueprint `lemma-weil-pbc-finite-direct-image-exact`, formalised as
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isFinite`); the passage to pro-étale
-`ℚ̄_ℓ`-coefficients is not formalised here. -/
+/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
+with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
+`p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
+`r > 0`: the pushforward `p₀*` is exact
+(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`), hence is
+its own right derived functor. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
-    IsZero ((WeilSheaf.higherLowerStar p r).obj G) :=
-  sorry
+    IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
+  -- `Y` is locally noetherian, so the finite morphism `p` is of finite presentation and `p₀*`
+  -- is exact (`ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`).
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite k₀ l p
+  change IsZero ((WeilComplex.homologySheaf r).obj
+    ((WeilComplex.derivedLowerStar p).obj (WeilSheaf.toComplex.obj G)))
+  rw [WeilComplex.isZero_homologySheaf_obj_iff]
+  -- An exact functor is its own right derived functor, so `Rp₀*G` is `p₀*G` in degree `0`.
+  let F := ProEtaleWeilSheaf.lowerStar k₀ l p
+  let e : F.rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G.obj) ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj (F.obj G.obj) :=
+    F.rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
+      (F.mapDerivedCategorySingleFunctor 0).app G.obj
+  exact (_root_.DerivedCategory.isZero_of_isLE _ 0 r (by omega)).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ r).mapIso e)
 
 section QuasiFinite
 

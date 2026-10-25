@@ -269,7 +269,7 @@ lemma IsQcqsHypercover.baseChange [QuasiCompact g] [QuasiSeparated g]
 
 /-- The pullback of a section of `F` over an étale `X`-scheme `V` to a section of `g^* F` over
 `V ×_X Y`: the unit `F ⟶ g_* g^* F` evaluated at `V`. -/
-noncomputable def _root_.AlgebraicGeometry.Etale.pullbackSection
+noncomputable def _root_.AlgebraicGeometry.Etale.modulePullbackSection
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale) :
     F.obj.obj (op V) →ₗ[Λ] ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj F).obj.obj
       (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V)) :=
@@ -277,25 +277,25 @@ noncomputable def _root_.AlgebraicGeometry.Etale.pullbackSection
     (op V)).hom
 
 
-/-- Naturality of `Etale.pullbackSection` in the sheaf. -/
-lemma _root_.AlgebraicGeometry.Etale.pullbackSection_naturality
+/-- Naturality of `Etale.modulePullbackSection` in the sheaf. -/
+lemma _root_.AlgebraicGeometry.Etale.modulePullbackSection_naturality
     {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ F') (V : X.Etale)
     (s : F.obj.obj (op V)) :
     (((Etale.upperStar (ModuleCat.{u + 1} Λ) g).map φ).hom.app _).hom
-        (Etale.pullbackSection Λ g F V s) =
-      Etale.pullbackSection Λ g F' V ((φ.hom.app _).hom s) := by
+        (Etale.modulePullbackSection Λ g F V s) =
+      Etale.modulePullbackSection Λ g F' V ((φ.hom.app _).hom s) := by
   have h := congrArg (fun k ↦ (k.hom.app (op V)).hom s)
     ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.naturality φ)
   exact h.symm
 
-/-- Naturality of `Etale.pullbackSection` in the étale `X`-scheme. -/
-lemma _root_.AlgebraicGeometry.Etale.pullbackSection_map
+/-- Naturality of `Etale.modulePullbackSection` in the étale `X`-scheme. -/
+lemma _root_.AlgebraicGeometry.Etale.modulePullbackSection_map
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V V' : X.Etale} (a : V' ⟶ V)
     (s : F.obj.obj (op V)) :
     (((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj F).obj.map
         ((MorphismProperty.Over.pullback @Etale ⊤ g).map a).op).hom
-        (Etale.pullbackSection Λ g F V s) =
-      Etale.pullbackSection Λ g F V' ((F.obj.map a.op).hom s) := by
+        (Etale.modulePullbackSection Λ g F V s) =
+      Etale.modulePullbackSection Λ g F V' ((F.obj.map a.op).hom s) := by
   have h := congrArg (fun k ↦ k.hom s)
     (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F).hom.naturality
       a.op)
@@ -318,10 +318,10 @@ lemma _root_.AlgebraicGeometry.Etale.constSheafOne_map {S : Scheme.{u}} {V V' : 
 
 /-- The isomorphism `g^* Λ ≅ Λ` maps the pullback of the section `1` over `X` to the section `1`
 over `X ×_X Y`. -/
-lemma _root_.AlgebraicGeometry.Etale.constantSheafCompUpperStarIso_hom_pullbackSection_one :
+lemma _root_.AlgebraicGeometry.Etale.constantSheafCompUpperStarIso_hom_modulePullbackSection_one :
     (((Etale.constantSheafCompUpperStarIso Λ g).app (ModuleCat.of Λ Λ)).hom.hom.app
       (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj (Scheme.Etale.mk (𝟙 X))))).hom
-      (Etale.pullbackSection Λ g _ _ (Etale.constSheafOne Λ (Scheme.Etale.mk (𝟙 X)))) =
+      (Etale.modulePullbackSection Λ g _ _ (Etale.constSheafOne Λ (Scheme.Etale.mk (𝟙 X)))) =
       Etale.constSheafOne Λ
         ((MorphismProperty.Over.pullback @Etale ⊤ g).obj (Scheme.Etale.mk (𝟙 X))) := by
   have h := Adjunction.unit_leftAdjointUniq_hom_app
@@ -337,20 +337,20 @@ lemma _root_.AlgebraicGeometry.Etale.constantSheafCompUpperStarIso_inv_one (V : 
     (((Etale.constantSheafCompUpperStarIso Λ g).app (ModuleCat.of Λ Λ)).inv.hom.app
       (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V))).hom
       (Etale.constSheafOne Λ ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V)) =
-      Etale.pullbackSection Λ g _ V (Etale.constSheafOne Λ V) := by
+      Etale.modulePullbackSection Λ g _ V (Etale.constSheafOne Λ V) := by
   let T : X.Etale := Scheme.Etale.mk (𝟙 X)
   let t : V ⟶ T := (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X).from V
   let e := (Etale.constantSheafCompUpperStarIso Λ g).app (ModuleCat.of Λ Λ)
   rw [← Etale.constSheafOne_map Λ ((MorphismProperty.Over.pullback @Etale ⊤ g).map t),
-    ← Etale.constSheafOne_map Λ t, ← Etale.pullbackSection_map]
+    ← Etale.constSheafOne_map Λ t, ← Etale.modulePullbackSection_map]
   refine (congrArg (fun k ↦ k.hom (Etale.constSheafOne Λ
     ((MorphismProperty.Over.pullback @Etale ⊤ g).obj T)))
     (e.inv.hom.naturality ((MorphismProperty.Over.pullback @Etale ⊤ g).map t).op)).trans ?_
   simp only [Functor.comp_obj, ModuleCat.hom_comp, LinearMap.comp_apply]
   congr 1
-  rw [← Etale.constantSheafCompUpperStarIso_hom_pullbackSection_one]
+  rw [← Etale.constantSheafCompUpperStarIso_hom_modulePullbackSection_one]
   exact congrArg (fun k ↦ (k.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj T))).hom
-    (Etale.pullbackSection Λ g _ _ (Etale.constSheafOne Λ T))) e.hom_inv_id
+    (Etale.modulePullbackSection Λ g _ _ (Etale.constSheafOne Λ T))) e.hom_inv_id
 
 open SemiSimplicialObject in
 /-- The section of the constant sheaf corresponding to the augmentation `Λ[V] ⟶ Λ` is `1`. -/
@@ -378,7 +378,7 @@ of the tautological section of `Λ[V]` over `V`. -/
 noncomputable def _root_.AlgebraicGeometry.Etale.freeSheafBaseChange (V : X.Etale) :
     (freeSheaf Y.smallEtaleTopology Λ).obj ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V) ⟶
       (Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj ((freeSheaf X.smallEtaleTopology Λ).obj V) :=
-  (freeSheafHomEquiv _ _ _ _).symm (Etale.pullbackSection Λ g _ V
+  (freeSheafHomEquiv _ _ _ _).symm (Etale.modulePullbackSection Λ g _ V
     (freeSheafHomEquiv _ _ _ _ (𝟙 _)))
 
 open SemiSimplicialObject in
@@ -387,9 +387,9 @@ lemma _root_.AlgebraicGeometry.Etale.freeSheafHomEquiv_freeSheafBaseChange_comp 
     (φ : (freeSheaf X.smallEtaleTopology Λ).obj V ⟶ M) :
     freeSheafHomEquiv _ _ _ _
         (Etale.freeSheafBaseChange Λ g V ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) g).map φ) =
-      Etale.pullbackSection Λ g M V (freeSheafHomEquiv _ _ _ _ φ) := by
+      Etale.modulePullbackSection Λ g M V (freeSheafHomEquiv _ _ _ _ φ) := by
   rw [freeSheafHomEquiv_comp, Etale.freeSheafBaseChange, Equiv.apply_symm_apply,
-    Etale.pullbackSection_naturality, ← freeSheafHomEquiv_comp, Category.id_comp]
+    Etale.modulePullbackSection_naturality, ← freeSheafHomEquiv_comp, Category.id_comp]
 
 open SemiSimplicialObject in
 lemma _root_.AlgebraicGeometry.Etale.map_comp_freeSheafBaseChange {V V' : X.Etale}
@@ -401,7 +401,7 @@ lemma _root_.AlgebraicGeometry.Etale.map_comp_freeSheafBaseChange {V V' : X.Etal
           ((freeSheaf X.smallEtaleTopology Λ).map a) := by
   apply (freeSheafHomEquiv _ _ _ _).injective
   rw [freeSheafHomEquiv_map_comp, Etale.freeSheafHomEquiv_freeSheafBaseChange_comp,
-    Etale.freeSheafBaseChange, Equiv.apply_symm_apply, Etale.pullbackSection_map,
+    Etale.freeSheafBaseChange, Equiv.apply_symm_apply, Etale.modulePullbackSection_map,
     ← freeSheafHomEquiv_map_comp, Category.comp_id]
 
 open SemiSimplicialObject in
@@ -457,7 +457,7 @@ theorem _root_.AlgebraicGeometry.Etale.cohomologyRestrict_cohomologyClass
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (z : F.obj.obj (op (U.obj q)))
     (hz : U.IsCocycle F q z) :
     Etale.cohomologyRestrict Λ g F q (hU.cohomologyClass F q z hz) =
-      (hU.baseChange g).cohomologyClass _ q (Etale.pullbackSection Λ g F (U.obj q) z)
+      (hU.baseChange g).cohomologyClass _ q (Etale.modulePullbackSection Λ g F (U.obj q) z)
         (hz.map ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F)) := by
   have hK := hU.isResolution (R := Λ)
   have hK' := (hU.baseChange g).isResolution (R := Λ)
@@ -465,7 +465,7 @@ theorem _root_.AlgebraicGeometry.Etale.cohomologyRestrict_cohomologyClass
   let φ := (SemiSimplicialObject.freeSheafHomEquiv _ _ (U.obj q) F).symm z
   let c := Etale.freeComplexBaseChange Λ g U
   have hcφ : c.f q ≫ G.map φ = (SemiSimplicialObject.freeSheafHomEquiv _ _ _ _).symm
-      (Etale.pullbackSection Λ g F (U.obj q) z) := by
+      (Etale.modulePullbackSection Λ g F (U.obj q) z) := by
     apply (SemiSimplicialObject.freeSheafHomEquiv _ _ _ _).injective
     refine (Etale.freeSheafHomEquiv_freeSheafBaseChange_comp Λ g _ φ).trans ?_
     erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]

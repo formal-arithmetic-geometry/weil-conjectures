@@ -66,6 +66,11 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 -- is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
+-- Braid étale sheaves through `Etale.sheafBraidedCategory`, as the generic definitions of the
+-- derived tensor product do (see `LowerShriekProjectionExchange`), rather than through the
+-- symmetric structure found by the line above.
+attribute [local instance 20000] Etale.sheafBraidedCategory
+
 section Predicates
 
 variable (A)

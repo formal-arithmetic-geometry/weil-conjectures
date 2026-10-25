@@ -131,14 +131,14 @@ lemma unit_map_refinementLowerShriekBaseChangeDerivedPlusIso_hom_app
   rw [hnatC, reassoc_of% Uc, ← reassoc_of% hnatUp, hup, reassoc_of% Ud,
     ← Functor.map_comp, ← Functor.map_comp, hhot]
 
-/-- The composition isomorphism `CompactSupportFormalism.pbComp'` of the pullbacks in
+/-- The composition isomorphism `ExchangeFormalism.pbComp'` of the pullbacks in
 `derivedPlusFormalism A` is `AlgebraicGeometry.Etale.upperStarCompDerivedPlus`. -/
 lemma derivedPlusFormalism_pbComp' {T S R : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
     (h₁₂ : T ⟶ R) (w : h₁ ≫ h₂ = h₁₂) :
     (derivedPlusFormalism A).pbComp' h₁ h₂ h₁₂ w =
       upperStarCompDerivedPlus A h₁ h₂ h₁₂ w.symm := by
   subst w
-  rw [CompactSupportFormalism.pbComp'_rfl]
+  rw [ExchangeFormalism.pbComp'_rfl]
   rfl
 
 /-- The base change map of the compact support formalism `derivedPlusFormalism A` for the square
@@ -158,12 +158,12 @@ lemma derivedPlusFormalism_baseChange_refinement (hcart : IsPullback c.i (𝟙 X
       ((derivedPlusFormalism A).sh c.i) ≫ (Functor.leftUnitor _).hom ≫
         (refinementLowerShriekBaseChangeDerivedPlusIso A r hcart).hom))
     ((derivedPlusFormalism A).sqIso (𝟙 X) c.i d.i r.hom hcart.flip.w).hom (fun K ↦ ?_)
-  · rw [CompactSupportFormalism.baseChange, ← key]
+  · rw [ExchangeFormalism.baseChange, ← key]
     exact congrArg TwoSquare.natTrans (Equiv.symm_apply_apply _ _)
-  rw [CompactSupportFormalism.sqIso_eq _ _ _ _ _ _ d.i (Category.id_comp _) r.i_hom]
+  rw [ExchangeFormalism.sqIso_eq _ _ _ _ _ _ d.i (Category.id_comp _) r.i_hom]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Functor.map_comp]
-  rw [CompactSupportFormalism.pbComp'_id_left_inv_app, derivedPlusFormalism_pbComp']
+  rw [ExchangeFormalism.pbComp'_id_left_inv_app, derivedPlusFormalism_pbComp']
   have h₁ := ((derivedPlusFormalism A).pbId X).hom.naturality
     (((derivedPlusFormalism A).shAdj d.i).unit.app K)
   have h₂ := ((derivedPlusFormalism A).shAdj c.i).unit_naturality
@@ -186,7 +186,7 @@ lemma derivedPlusFormalism_pfComp'_inv {T S R : Scheme.{u}} (h₁ : T ⟶ S) (h�
         (lowerStarComp A h₁ h₂ h₁₂ w.symm)).hom := by
   subst w
   refine conjugateEquiv_eq_of_unit _ _ _ _ (fun Z ↦ ?_)
-  rw [Adjunction.comp_unit_app, Iso.symm_inv, CompactSupportFormalism.pbComp'_rfl,
+  rw [Adjunction.comp_unit_app, Iso.symm_inv, ExchangeFormalism.pbComp'_rfl,
     Category.assoc]
   exact (derivedPlus_unit_comp_upperStarCompDerivedPlus A h₁ h₂ (h₁ ≫ h₂) rfl Z).symm
 
