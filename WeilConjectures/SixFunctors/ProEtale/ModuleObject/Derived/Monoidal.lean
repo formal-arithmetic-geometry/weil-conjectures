@@ -144,6 +144,29 @@ noncomputable def upperStarTensorComplexHomX
     Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
       (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)
 
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The degreewise comparison `upperStarTensorComplexHomX` is a section of the comparison
+`f^* ((A ⊗ B)^n) ⟶ (f^* A ⊗ f^* B)^n` induced by the comonoidal structure of `f^*`. -/
+lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) (n : ℤ) :
+    upperStarTensorComplexHomX Λ f A B n ≫
+      (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B).f n =
+      𝟙 _ := by
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro i₁ i₂ h
+  simp only [Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
+    HomologicalComplex.mapBifunctorComparison_f]
+  dsimp only [upperStarTensorComplexHomX]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  rw [Category.assoc]
+  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
+  erw [Category.comp_id]
+  exact Functor.Monoidal.μ_δ_assoc _ _ _ _
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
 /-- The degreewise comparisons `upperStarTensorComplexHomX` commute with the differentials. -/
 lemma upperStarTensorComplexHom_comm
     (A B : CochainComplex
@@ -153,8 +176,18 @@ lemma upperStarTensorComplexHom_comm
         (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj (A ⊗ B)).d n n' =
       (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A ⊗
         ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B).d n n' ≫
-        upperStarTensorComplexHomX Λ f A B n' :=
-  sorry
+        upperStarTensorComplexHomX Λ f A B n' := by
+  have hc := HomologicalComplex.Hom.comm
+    (HomologicalComplex.mapBifunctorComparison (Functor.OplaxMonoidal.δNatTrans (f)^*⟦Λ⟧)
+      (.up ℤ) A B) n n'
+  have hX := upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B
+  simp only [Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app] at hX
+  rw [← cancel_mono ((HomologicalComplex.mapBifunctorComparison
+      (Functor.OplaxMonoidal.δNatTrans (f)^*⟦Λ⟧) (.up ℤ) A B).f n'), Category.assoc,
+    Category.assoc,
+    hX, Category.comp_id]
+  exact (congrArg (upperStarTensorComplexHomX Λ f A B n ≫ ·) hc).symm.trans
+    ((Category.assoc _ _ _).symm.trans ((congrArg (· ≫ _) (hX n)).trans (Category.id_comp _)))
 
 /-- The comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` of complexes of module objects, induced
 degreewise by the tensorator of the strong monoidal pullback `f^*`. -/
@@ -166,6 +199,36 @@ noncomputable def upperStarTensorComplexHom
       ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj (A ⊗ B) where
   f n := upperStarTensorComplexHomX Λ f A B n
   comm' n n' h := upperStarTensorComplexHom_comm Λ f A B n n' h
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The comparison `upperStarTensorComplexHom` is the inverse of the comparison
+`f^* (A ⊗ B) ⟶ f^* A ⊗ f^* B` induced by the comonoidal structure of `f^*`. -/
+lemma upperStarTensorComplexHom_eq_inv
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    upperStarTensorComplexHom Λ f A B =
+      inv (HomologicalComplex.mapBifunctorComparison (Functor.OplaxMonoidal.δNatTrans (f)^*⟦Λ⟧)
+        (.up ℤ) A B) := by
+  refine (IsIso.inv_eq_of_inv_hom_id (HomologicalComplex.hom_ext _ _ fun n ↦ ?_)).symm
+  exact upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B n
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The comparison `upperStarTensorComplexHom` is natural in both complexes. -/
+lemma upperStarTensorComplexHom_naturality
+    {A A' B B' : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ}
+    (φ : A ⟶ A') (ψ : B ⟶ B') :
+    (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map φ ⊗ₘ
+        ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map ψ) ≫
+        upperStarTensorComplexHom Λ f A' B' =
+      upperStarTensorComplexHom Λ f A B ≫
+        ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map (φ ⊗ₘ ψ) := by
+  rw [upperStarTensorComplexHom_eq_inv, upperStarTensorComplexHom_eq_inv, IsIso.comp_inv_eq,
+    Category.assoc, IsIso.eq_inv_comp]
+  exact (HomologicalComplex.mapBifunctorComparison_naturality
+    (Functor.OplaxMonoidal.δNatTrans (f)^*⟦Λ⟧) (.up ℤ) φ ψ).symm
 
 /-! ### The homotopy category -/
 
