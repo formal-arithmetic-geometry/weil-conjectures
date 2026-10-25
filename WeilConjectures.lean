@@ -13052,6 +13052,7 @@ public import WeilConjectures.TraceFormula.ExternalProductCoefficients
 public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FibreModel
+public import WeilConjectures.TraceFormula.FieldDualizable
 public import WeilConjectures.TraceFormula.FiniteEtaleStalkTrace
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointAlgebra

@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
+public import WeilConjectures.TraceFormula.FieldDualizable
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 
 /-!
@@ -230,6 +232,73 @@ theorem isIso_map_nearbyDualityMap_of_proper'
 
 end Proper
 
+section Rigid
+
+variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
+  {C' : Type*} [Category* C'] [MonoidalCategory C'] [MonoidalClosed C']
+
+omit [MonoidalClosed C] [MonoidalClosed C'] in
+/-- A monoidal functor carries the counit `X ⊗ (Y ⊗ K) ⟶ K` of the adjunction
+`tensorLeft X ⊣ tensorLeft Y` of an exact pairing to the counit of the image exact pairing
+(`CategoryTheory.ExactPairing.map`), up to the tensor maps. -/
+lemma μ_comp_map_tensorLeftAdjunction_counit_app (F : C ⥤ C') [F.Monoidal] (Y X K : C)
+    [ExactPairing Y X] :
+    Functor.LaxMonoidal.μ F X (Y ⊗ K) ≫ F.map ((tensorLeftAdjunction Y X).counit.app K) =
+      F.obj X ◁ Functor.OplaxMonoidal.δ F Y K ≫
+        (@tensorLeftAdjunction C' _ _ (F.obj Y) (F.obj X)
+          (ExactPairing.map F Y X)).counit.app (F.obj K) := by
+  let := ExactPairing.map F Y X
+  rw [tensorLeftAdjunction_counit_app, tensorLeftAdjunction_counit_app]
+  change _ = _ ≫ (α_ _ _ _).inv ≫ (Functor.LaxMonoidal.μ F X Y ≫ F.map (ε_ Y X) ≫
+    Functor.OplaxMonoidal.η F) ▷ F.obj K ≫ (λ_ _).hom
+  simp only [Functor.map_comp, Functor.Monoidal.map_associator_inv,
+    Functor.Monoidal.map_whiskerRight, comp_whiskerRight, Category.assoc,
+    Functor.Monoidal.μ_δ_assoc]
+  rw [Functor.Monoidal.map_leftUnitor F K, Functor.Monoidal.μ_δ_assoc]
+
+/-- **Monoidal functors commute with duals**: for a monoidal functor `F` (lax tensor maps `μ`,
+dualizing map the inverse `η` of the unit map) and an object `X` with a left dual `Y`, the duality
+map `F RHom(X, 𝟙) ⟶ RHom(F X, 𝟙)` is an isomorphism. Both internal homs are identified with
+tensoring with the duals `Y` and `F Y` (`CategoryTheory.ExactPairing.map`), and under these
+identifications the duality map is `F (Y ⊗ 𝟙) ≅ F Y ⊗ F 𝟙 ≅ F Y ⊗ 𝟙`. -/
+theorem isIso_nearbyDualityMap_of_monoidal (F : C ⥤ C') [F.Monoidal] (Y X : C)
+    [ExactPairing Y X] :
+    IsIso (nearbyDualityMap (fun A B ↦ Functor.LaxMonoidal.μ F A B)
+      (Functor.OplaxMonoidal.η F) X) := by
+  let := ExactPairing.map F Y X
+  let s := (tensorLeftAdjunction Y X).rightAdjointUniq (ihom.adjunction X)
+  let s' := (tensorLeftAdjunction (F.obj Y) (F.obj X)).rightAdjointUniq
+    (ihom.adjunction (F.obj X))
+  have e1 : X ◁ s.hom.app (𝟙_ C) ≫ (ihom.ev X).app (𝟙_ C) =
+      (tensorLeftAdjunction Y X).counit.app (𝟙_ C) :=
+    (tensorLeftAdjunction Y X).rightAdjointUniq_hom_app_counit (ihom.adjunction X) (𝟙_ C)
+  have e2 : F.obj X ◁ s'.hom.app (𝟙_ C') ≫ (ihom.ev (F.obj X)).app (𝟙_ C') =
+      (tensorLeftAdjunction (F.obj Y) (F.obj X)).counit.app (𝟙_ C') :=
+    (tensorLeftAdjunction (F.obj Y) (F.obj X)).rightAdjointUniq_hom_app_counit
+      (ihom.adjunction (F.obj X)) (𝟙_ C')
+  have e3 : F.obj X ◁ F.obj Y ◁ Functor.OplaxMonoidal.η F ≫
+      (tensorLeftAdjunction (F.obj Y) (F.obj X)).counit.app (𝟙_ C') =
+      (tensorLeftAdjunction (F.obj Y) (F.obj X)).counit.app (F.obj (𝟙_ C)) ≫
+        Functor.OplaxMonoidal.η F :=
+    (tensorLeftAdjunction (F.obj Y) (F.obj X)).counit.naturality (Functor.OplaxMonoidal.η F)
+  have h : F.map (s.hom.app (𝟙_ C)) ≫ nearbyDualityMap (fun A B ↦ Functor.LaxMonoidal.μ F A B)
+      (Functor.OplaxMonoidal.η F) X =
+      Functor.OplaxMonoidal.δ F Y (𝟙_ C) ≫ F.obj Y ◁ Functor.OplaxMonoidal.η F ≫
+        s'.hom.app (𝟙_ C') := by
+    apply uncurry_injective
+    rw [uncurry_natural_left, uncurry_nearbyDualityMap, Functor.LaxMonoidal.μ_natural_right_assoc,
+      ← F.map_comp_assoc, e1]
+    erw [reassoc_of% (μ_comp_map_tensorLeftAdjunction_counit_app F Y X (𝟙_ C))]
+    rw [uncurry_eq, MonoidalCategory.whiskerLeft_comp, MonoidalCategory.whiskerLeft_comp,
+      Category.assoc, Category.assoc, e2, e3]
+  have : IsIso (F.map (s.hom.app (𝟙_ C)) ≫ nearbyDualityMap
+      (fun A B ↦ Functor.LaxMonoidal.μ F A B) (Functor.OplaxMonoidal.η F) X) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (F.map (s.hom.app (𝟙_ C))) _
+
+end Rigid
+
 end Verdier
 
 end CategoryTheory
@@ -424,29 +493,62 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+/-- **The nearby cycles of the trait are monoidal on the base point**: the nearby cycles
+`Ψ_S : Dᵇc(Spec k) ⥤ Dᵇc(Spec k')` of the trait `S` as a model of `Spec k` are a monoidal functor
+with tensor maps the lax tensor maps of nearby cycles (`boundedConstructibleTensorMap`) and unit
+map the specialization unit `σ_s` (`traitSpecializationUnit`).
+
+Unfinished. Two inputs are missing. (a) The lax tensor maps and the specialization unit of
+nearby cycles satisfy the associativity and unit axioms of a lax monoidal functor: with
+`Ψ = Li^* ∘ Rj_* ∘ Lε^*`, they are those of the composite of the monoidal functors `Li^*`, `Lε^*`
+and of the lax monoidal right adjoint `Rj_*` (`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`).
+(b) The tensor maps are invertible: `Lε^* A` is a finite direct sum of shifts of the unit on the
+geometric generic point `Spec Ω` (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), where
+the Künneth map of the trait is invertible
+(`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`); the unit map
+`σ_s` is invertible by `ProEtale.CondensedRing.isIso_traitSpecializationUnit`. -/
+theorem exists_monoidal_traitSpecialization :
+    ∃ L : (boundedConstructibleNearbyCycles
+        (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ)).Monoidal,
+      (∀ A B, (letI := L; Functor.LaxMonoidal.μ (boundedConstructibleNearbyCycles
+          (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ)) A B) =
+        boundedConstructibleTensorMap (preservesBoundedConstructible_traitModel ℓ) A B) ∧
+      (letI := L; Functor.LaxMonoidal.ε (boundedConstructibleNearbyCycles
+          (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))) =
+        traitSpecializationUnit k k' (ℓ := ℓ) :=
+  sorry
+
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- **The duality map of the trait itself** (blueprint `det-tf-nearby-duality-proper` (3), "with
 `θ_S` the identity of `A` the normalized pairing on `S` is ordinary evaluation"): for the trait `S`
 as a model of the base point `Spec k`, with the lax tensor map of its nearby cycles and the inverse
 of the specialization unit as dualizing map, the duality map
 `δ_{S,N} : Ψ_S RHom(N, ℚ̄_ℓ) ⟶ RHom(Ψ_S N, ℚ̄_ℓ)` is an isomorphism for every bounded
-constructible `N` on `Spec k`.
-
-Unfinished. Here `Ψ_S N = Li^* Rη̄_* Lε^* N` with `ε : Spec Ω ⟶ Spec k`. The duality map
-factors as `Ψ'(δ_ε) ∘ δ_{Ψ'}(Lε^* N)` with `Ψ' = Li^* Rη̄_*` the nearby cycles of the trait as a
-model of its geometric generic point; it remains to show (a) that `Lε^*` commutes with
-`RHom(N, ℚ̄_ℓ)` for constructible `N` on the (not separably closed) point `Spec k` (constructible
-complexes on a field are dualizable), and (b) that `δ_{Ψ'}` is invertible on `Spec Ω`, where every
-bounded constructible complex is a sum of shifts of the unit
-(`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`) and `Ψ'` is monoidal there
-(`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`) with
-`σ_s` invertible. -/
+constructible `N` on `Spec k`: `Ψ_S` is monoidal (`exists_monoidal_traitSpecialization`), `N` is
+dualizable (`ProEtale.CondensedRing.nonempty_hasLeftDual_point`), and monoidal functors commute
+with duals (`CategoryTheory.Verdier.isIso_nearbyDualityMap_of_monoidal`). -/
 theorem isIso_nearbyDualityMap_traitModel
     (N : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (Verdier.nearbyDualityMap
       (boundedConstructibleTensorMap
         (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))
-      (inv (traitSpecializationUnit k k' (ℓ := ℓ))) N) :=
-  sorry
+      (inv (traitSpecializationUnit k k' (ℓ := ℓ))) N) := by
+  obtain ⟨L, hμ, hε⟩ := exists_monoidal_traitSpecialization ℓ (k := k) (k' := k')
+  obtain ⟨hN⟩ := nonempty_hasLeftDual_point ℓ (k := k) N
+  let := L
+  have h := Verdier.isIso_nearbyDualityMap_of_monoidal (boundedConstructibleNearbyCycles
+    (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ)) (ᘁN) N
+  have e₁ : (fun A B ↦ Functor.LaxMonoidal.μ (boundedConstructibleNearbyCycles
+      (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ)) A B) =
+      boundedConstructibleTensorMap (preservesBoundedConstructible_traitModel ℓ) :=
+    funext₂ hμ
+  have e₂ : Functor.OplaxMonoidal.η (boundedConstructibleNearbyCycles
+      (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ)) =
+      inv (traitSpecializationUnit k k' (ℓ := ℓ)) :=
+    IsIso.eq_inv_of_hom_inv_id (by rw [← hε]; exact Functor.Monoidal.ε_η _)
+  rw [e₁, e₂] at h
+  exact h
 
 /-- **Global sections of the duality map of a proper model, reduced to the trait** (blueprint
 `det-tf-nearby-duality-proper` (1) and (3)): if `X`, `X'` and the total space of the trait model
