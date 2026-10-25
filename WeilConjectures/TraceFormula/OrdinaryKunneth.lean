@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTrans
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.GenericBaseChange
 
@@ -104,33 +104,35 @@ noncomputable def prodMapUpperStarSndIso (j : U ⟶ Y) :
     eqToIso (by rw [prod.map_snd]) ≪≫
     boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ prod.snd j
 
+/-- The second factor `L(𝟙 × j)^* Lp_Y^* Rj_* B ⟶ Lp_U^* B` of the transpose of the Künneth map:
+the composition isomorphism `prodMapUpperStarSndIso` followed by the counit of `Lj^* ⊣ Rj_*`. -/
+noncomputable def openKunnethSecondFactor (j : U ⟶ Y)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.snd : X ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B)) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (prod.snd : X ⨯ U ⟶ U)).obj ((𝟭 _).obj B) :=
+  (prodMapUpperStarSndIso ℓ j).hom.app _ ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.snd : X ⨯ U ⟶ U)).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        j).counit.app B)
+
 /-- The *Künneth map* `M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` for an open immersion `j : U ⟶ Y`: the
 adjoint, for `L(𝟙 × j)^* ⊣ R(𝟙 × j)_*`, of the monoidal structure of `L(𝟙 × j)^*`, the
-composition isomorphisms of the pullbacks and the counit `Lj^* Rj_* B ⟶ B`. -/
+composition isomorphisms of the pullbacks and the counit `Lj^* Rj_* B ⟶ B`. It is the component at
+`M` of the generic Künneth natural transformation `CategoryTheory.Adjunction.kunnethNatTrans`. -/
 noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ (Y := Y) M
         ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B) ⟶
       (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.map (𝟙 X) j)).obj (externalProduct ℓ M B) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-      (prod.map (𝟙 X) j)).homEquiv
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (prod.fst : X ⨯ Y ⟶ X)).obj M ⊗
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (prod.snd : X ⨯ Y ⟶ Y)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (prod.fst : X ⨯ U ⟶ X)).obj M ⊗
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (prod.snd : X ⨯ U ⟶ U)).obj ((𝟭 _).obj B))
-    (Functor.OplaxMonoidal.δ _ _ _ ≫
-      ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
-        ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-            (prod.snd : X ⨯ U ⟶ U)).map
-            ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-              j).counit.app B))))
+  ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.map (𝟙 X) j)).kunnethNatTrans (prodMapUpperStarFstIso ℓ j)
+      (openKunnethSecondFactor ℓ j B)).app M
 
 /-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
 (blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it for finite
@@ -203,16 +205,12 @@ theorem isIso_openKunnethMap_of_isDualizable (j : U ⟶ Y)
     {M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hM : IsDualizable M)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (openKunnethMap ℓ j M B) := by
-  have hE : IsDualizable ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (prod.fst : X ⨯ Y ⟶ X)).obj M) := by
-    obtain ⟨_⟩ := hM
-    exact ⟨@HasRightDual.mk _ _ _ _ _ (ExactPairing.map
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.fst : X ⨯ Y ⟶ X))
-      M Mᘁ)⟩
   unfold openKunnethMap
-  refine Adjunction.isIso_homEquiv_δ_tensorHom_exchangeRight_of_isDualizable _ _ _ ?_ _ ?_ _ ?_
-  · exact hE
-  · infer_instance
-  · exact isIso_exchangeRight_prodMapUpperStarSndIso ℓ j
+  refine Adjunction.isIso_kunnethNatTrans_app_of_isDualizable _ _ _ ?_ ?_
+  · obtain ⟨_⟩ := hM
+    exact ⟨@HasRightDual.mk _ _ _ _ _ (ExactPairing.map _ M Mᘁ)⟩
+  · unfold openKunnethSecondFactor
+    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
+      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
