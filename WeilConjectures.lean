@@ -7416,6 +7416,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.CompUnitCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
@@ -7639,6 +7640,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstant
 public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion
 public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExactFunctorShiftMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExchangeLeftAdjoint
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExtendScalarsLocalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.FieldDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.FieldExtensionHom
@@ -12377,6 +12379,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Stalk
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.SmoothProperLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Braided
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
@@ -12427,9 +12430,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
@@ -12497,6 +12500,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
