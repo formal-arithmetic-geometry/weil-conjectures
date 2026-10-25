@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 
@@ -33,8 +33,9 @@ invertible by weakly étale base change
 (`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`).
 
 The pullback exchange restricts to bounded constructible complexes
-(`NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange`), where it is again an isomorphism
-in the weakly étale case
+(`NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange`, defined in
+`WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity`), where it is again an
+isomorphism in the weakly étale case
 (`NearbyCyclesModel.Hom.isIso_boundedConstructiblePullbackExchange_of_weaklyEtale`).
 
 -/
@@ -144,7 +145,7 @@ end Ambient
 section BoundedConstructible
 
 variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
+  (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k k' : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -155,17 +156,6 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [I
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
   (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
   (hN : N.PreservesBoundedConstructible Λ)
-
-/-- The pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` on bounded constructible complexes: the
-restriction of `NearbyCyclesModel.Hom.pullbackExchange`. -/
-noncomputable def boundedConstructiblePullbackExchange :
-    boundedConstructibleNearbyCycles hN ⋙ boundedConstructibleUpperStar Λ ℓ f' ⟶
-      boundedConstructibleUpperStar Λ ℓ f ⋙ boundedConstructibleNearbyCycles hM :=
-  liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
-    (PY' := boundedConstructible _) (PX' := boundedConstructible _) (φ.pullbackExchange Λ)
-    (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f' K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f K.obj K.property)
 
 /-- The restricted pullback exchange is an isomorphism if the pullback exchange is. -/
 theorem isIso_boundedConstructiblePullbackExchange [IsIso (φ.pullbackExchange Λ)] :

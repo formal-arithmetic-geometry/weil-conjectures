@@ -155,6 +155,8 @@ variable {T Y : Scheme.{u}} [(boundedConstructible (condensedRingObj Λ Y)).IsTr
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)))
   [Φ.CommShift ℤ] [Φ.IsTriangulated]
 
+omit [(boundedConstructible (condensedRingObj Λ Y)).IsTriangulated] [Φ.CommShift ℤ]
+  [Φ.IsTriangulated] in
 /-- The hypothesis of the dévissage to lisse sheaves: `Φ` maps the extensions by zero
 `Rc_* j_! Rc'_* L` of the lisse sheaves `L` along the locally closed immersions
 `E ⟶ W ⊆ D ⟶ T` (`c`, `c'` closed immersions, `W` open in `D`) to bounded constructible
@@ -169,6 +171,8 @@ def LisseHypothesis : Prop :=
 
 variable {Λ Φ}
 
+omit [(boundedConstructible (condensedRingObj Λ Y)).IsTriangulated] [Φ.CommShift ℤ]
+  [Φ.IsTriangulated] in
 /-- The open piece of the dévissage step: the restriction of a constructible sheaf `G` on `D` to
 a nonempty open `V` contained in a stratum is (the pushforward along a surjective closed immersion
 of) a lisse sheaf, so `Φ (Rc_* j_! Lj^* G)` is bounded constructible. -/
