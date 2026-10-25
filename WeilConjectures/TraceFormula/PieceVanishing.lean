@@ -44,6 +44,21 @@ open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Shifting a vanishing statement: no nonzero morphism `T ⟶ Z⟦-1⟧` if there is no nonzero
+morphism `T⟦1⟧ ⟶ Z`. -/
+lemma eq_zero_of_shift {𝒞 : Type*} [Category 𝒞] [Preadditive 𝒞] [HasShift 𝒞 ℤ]
+    [∀ n : ℤ, (shiftFunctor 𝒞 n).Additive] {T Z : 𝒞}
+    (h : ∀ ψ : T⟦(1 : ℤ)⟧ ⟶ Z, ψ = 0) (φ : T ⟶ Z⟦(-1 : ℤ)⟧) : φ = 0 := by
+  apply (shiftFunctor 𝒞 (1 : ℤ)).map_injective
+  rw [Functor.map_zero]
+  have := h ((shiftFunctor 𝒞 (1 : ℤ)).map φ ≫ (shiftFunctorCompIsoId 𝒞 (-1 : ℤ) 1
+    (neg_add_cancel 1)).hom.app Z)
+  rwa [Preadditive.IsIso.comp_right_eq_zero] at this
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -60,29 +75,6 @@ section General
 
 variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-  [IsSeparated Y.hom] in
-/-- A tensor product with a zero object is zero. -/
-lemma isZero_tensor_left {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hM : IsZero M)
-    (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsZero (M ⊗ N) :=
-  ((curriedTensor (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).flip.obj N).map_isZero hM
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-  [IsSeparated Y.hom] in
-/-- A tensor product with a zero object is zero. -/
-lemma isZero_tensor_right (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hN : IsZero N) : IsZero (M ⊗ N) :=
-  ((curriedTensor (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).obj M).map_isZero hN
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-  [IsSeparated Y.hom] in
-/-- The internal hom out of a zero object is zero. -/
-lemma isZero_ihom_obj {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hM : IsZero M)
-    (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsZero ((ihom M).obj N) := by
-  rw [IsZero.iff_id_eq_zero]
-  apply ((ihom.adjunction M).homEquiv _ _).symm.injective
-  exact (isZero_tensor_left hM _).eq_of_src _ _
 
 /-- No nonzero morphism `Y ⟶ L ⊠ D N` if there is no nonzero morphism `Rp₁_! (Lp₂^* N ⊗ Y) ⟶ L`:
 the Künneth–Verdier isomorphism `L ⊠ D N ≅ RHom(Lp₂^* N, Rp₁^! L)`, the tensor–hom adjunction and
@@ -112,17 +104,6 @@ lemma eq_zero_of_isZero_upperStar {P : Over (Spec (.of k))} [LocallyOfFiniteType
   apply ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).homEquiv _ _).symm.injective
   exact hM.eq_of_src _ _
 
-/-- Shifting a vanishing statement: no nonzero morphism `T ⟶ Z⟦-1⟧` if there is no nonzero
-morphism `T⟦1⟧ ⟶ Z`. -/
-lemma eq_zero_of_shift {𝒞 : Type*} [Category 𝒞] [Preadditive 𝒞] [HasShift 𝒞 ℤ]
-    [∀ n : ℤ, (shiftFunctor 𝒞 n).Additive] {T Z : 𝒞}
-    (h : ∀ ψ : T⟦(1 : ℤ)⟧ ⟶ Z, ψ = 0) (φ : T ⟶ Z⟦(-1 : ℤ)⟧) : φ = 0 := by
-  apply (shiftFunctor 𝒞 (1 : ℤ)).map_injective
-  rw [Functor.map_zero]
-  have := h ((shiftFunctor 𝒞 (1 : ℤ)).map φ ≫ (shiftFunctorCompIsoId 𝒞 (-1 : ℤ) 1
-    (neg_add_cancel 1)).hom.app Z)
-  rwa [Preadditive.IsIso.comp_right_eq_zero] at this
-
 /-- `Lx^* Rp₁_! (W ⊗ Lp₁^* M) = 0` if `Lx^* M = 0`: the projection formula for `p₁` and the
 monoidality of `Lx^*`. -/
 lemma isZero_upperStar_lowerShriek_tensor {P : Over (Spec (.of k))} [LocallyOfFiniteType P.hom]
@@ -133,7 +114,7 @@ lemma isZero_upperStar_lowerShriek_tensor {P : Over (Spec (.of k))} [LocallyOfFi
     IsZero ((boundedConstructibleUpperStar _ ℓ x).obj
       ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
         (W ⊗ (boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj M))) :=
-  (isZero_tensor_right _ hM).of_iso
+  (isZero_tensorObj_of_isZero_right _ hM).of_iso
     ((boundedConstructibleUpperStar _ ℓ x).mapIso
         (asIso (boundedConstructibleExceptionalProjectionMorphism _ ℓ
           (prod.fst : Y ⨯ X ⟶ Y) W M)).symm ≪≫
@@ -180,8 +161,9 @@ lemma isZero_upperStar_verdierDual_lowerStar :
       (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A))) := by
   have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
     (Profinite.padicAlgClRingObj ℓ) ℓ j ((boundedConstructibleLowerStar _ ℓ x).obj A)
-  exact (isZero_ihom_obj (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j x hjx A)
-    _).of_iso (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)
+  exact (isZero_ihom_obj_of_isZero
+    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j x hjx A) _).of_iso
+    (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)
       ((boundedConstructibleLowerStar _ ℓ x).obj A)).natTrans.app _))
 
 /-- The tensor product of the open piece with the dual of the closed piece vanishes:
@@ -194,7 +176,7 @@ lemma isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar :
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
     (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A))) B
   exact ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).map_isZero
-    (isZero_tensor_left (isZero_upperStar_verdierDual_lowerStar j x hjx A) B)).of_iso
+    (isZero_tensorObj_of_isZero_left (isZero_upperStar_verdierDual_lowerStar j x hjx A) B)).of_iso
     ((β_ _ _) ≪≫ (asIso ((Functor.Monoidal.projectionMap
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j) _).app B)).symm)
 
@@ -241,7 +223,7 @@ lemma eq_zero_of_externalProduct_closedPiece (K : Dᵇc(X.left)⟦Profinite.padi
     eq_zero_of_isZero_upperStar x (isZero_upperStar_lowerShriek_tensor_shift x _ ?_) _) _) φ
   exact (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map_isZero
     ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ _).map_isZero
-    ((isZero_tensor_right _ ((boundedConstructibleUpperStar _ ℓ _).map_isZero
+    ((isZero_tensorObj_of_isZero_right _ ((boundedConstructibleUpperStar _ ℓ _).map_isZero
       (isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar j x hjx B A))).of_iso
       ((α_ _ _ _).symm ≪≫ whiskerRightIso (β_ _ _) _ ≪≫ (α_ _ _ _) ≪≫
         whiskerLeftIso _ (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ _) _ _))))
