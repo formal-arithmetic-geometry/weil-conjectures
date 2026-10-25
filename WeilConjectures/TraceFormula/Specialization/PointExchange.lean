@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 
 /-!
@@ -35,21 +36,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-- **Proper base change for nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (2),
-proper half; SGA 7 XIII 2.1.7): if the morphism of total spaces and `f` are proper and the squares
-of special fibres and of identifications `ε` are cartesian, the pushforward exchange
-`χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` is invertible on bounded constructible complexes. (The `ε`-square
-cannot be dropped: `Rf_*` must commute with the base change to the geometric generic fibre.) -/
-theorem NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper {ℓ : ℕ} [Fact ℓ.Prime]
-    {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
-    {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f') [IsProper φ.total] [IsProper f]
-    (hi : IsPullback M.i f' φ.total N.i) (hε : IsPullback M.ε φ.generic f N.ε)
-    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    (hK : boundedConstructible _ K) :
-    IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
-  sorry
 
 /-- A transformation `χ : F ⟶ G` is invertible on the objects of the subcategory `ι`. -/
 def IsIsoOn {C D E : Type*} [Category C] [Category D] [Category E] (ι : C ⥤ D) {F G : D ⥤ E}
@@ -105,14 +91,15 @@ lemma isPullback_compactifiedGenericToBase :
     IsPullback (compactifiedGenericToBase X x k') (compactifiedGenericToPoint X x k') X.hom
       (traitModel k k').ε := by
   have h₁ : IsPullback (compactifiedGenericToPunctured X x k') (compactifiedGenericToPoint X x k')
-      (pullback.snd _ _) (traitGenericToPuncturedLine k k') := by
+      (pullback.snd _ _) (traitGenericPointToPuncturedLine k k') := by
     refine IsPullback.of_right ?_ (compactifiedGenericToPunctured_snd X x k')
       (isPullback_deformationCompactificationOf X x)
-    rw [compactifiedGenericToPunctured_generic, traitGenericToPuncturedLine_ι]
+    rw [compactifiedGenericToPunctured_generic, traitGenericPointToPuncturedLine_ι]
     exact (isPullback_compactifiedGeneric X x k').paste_horiz (isPullback_compactifiedTotal X x k')
-  have e : traitGenericToPuncturedLine k k' ≫ (Scheme.Hom.puncturedLine _).ι ≫
+  have e : traitGenericPointToPuncturedLine k k' ≫ (Scheme.Hom.puncturedLine _).ι ≫
       𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k) = (traitModel k k').ε := by
-    rw [← traitModel_j_traitToBase, traitGenericToPuncturedLine_ι_assoc, traitToAffineLine_over]
+    rw [← traitModel_j_traitToBase, traitGenericPointToPuncturedLine_ι_assoc,
+      traitToAffineLine_over]
     rfl
   exact e ▸ h₁.paste_horiz (IsPullback.of_hasPullback X.hom _)
 

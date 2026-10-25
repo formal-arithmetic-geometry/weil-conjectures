@@ -18,7 +18,7 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be contracting at the `k`-point `y` of its
 `x = c₁(y) = c₂(y)`, let `B` be an open and closed subscheme of the fixed locus, proper over `k`,
 with underlying set `{y}`, and assume that the stalk `K_x` vanishes. Then the trait class of `c`
 restricted to `B` vanishes, whatever the coefficient map `u`
-(`ProEtale.CondensedRing.Correspondence.restrict_traceClass_eq_zero_of_isContractingAt'`, blueprint
+(`ProEtale.CondensedRing.Correspondence.restrict_traceClass_eq_zero_of_isContractingAt`, blueprint
 `det-tf-contracting-vanishing`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization
 of a theorem of Fujiwara*, Thm. 2.1.3).
 
@@ -98,7 +98,7 @@ theorem exists_traceSpecialization (F : c.FixedLocus) {B : Over (Spec (.of k))}
     exact hc.restrict_eq_zero_of_sp_eq_zero k' j hB hS z hz
 
 include k' in
-/-- The vanishing lemma `restrict_traceClass_eq_zero_of_isContractingAt'`, proved with nearby
+/-- The vanishing lemma `restrict_traceClass_eq_zero_of_isContractingAt`, proved with nearby
 cycles over the trait `Spec k'⟦t⟧` for any separably closed extension `k'` of `k`. -/
 theorem restrict_traceClass_eq_zero (F : c.FixedLocus) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
@@ -132,7 +132,7 @@ Fujiwara*, Thm. 2.1.3, the case `K|_Z = 0` of its proof): let `c` be contracting
 `{y}`. If the stalk `K_x` vanishes, the restriction of the trace class of `c` to `B` is zero,
 whatever the coefficient map `u`. The proof specializes to the normal cone over the trait
 `Spec k̄⟦t⟧` (`IsContractingAt.restrict_traceClass_eq_zero`). -/
-theorem restrict_traceClass_eq_zero_of_isContractingAt' (F : c.FixedLocus)
+theorem restrict_traceClass_eq_zero_of_isContractingAt (F : c.FixedLocus)
     {y : RationalPoint c.C} (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     [IsClosedImmersion j.left]

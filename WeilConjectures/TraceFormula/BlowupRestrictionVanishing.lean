@@ -101,6 +101,9 @@ theorem blowupRestriction_eq_zero {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : (ℓ : k)
     rw [hm]
     exact add_mem (Ideal.subset_span (Set.mem_insert _ _))
       (Ideal.mul_mem_left _ _ (Ideal.subset_span (Set.mem_insert_of_mem _ rfl)))
-  exact blowupRestriction_eq_zero_of_chartData hℓ hΛ _ D hx (hlim D.i D.f') E hE
+  have hm' : maximalIdeal (Scheme.strictHenselization t) = Ideal.span {D.x, y₀} := by
+    rw [BlowupChart.span_pair_add_mul]
+    exact hm
+  exact blowupRestriction_eq_zero_of_chartData hℓ hΛ _ D hx hm' (hlim D.i D.f') E hE
 
 end AlgebraicGeometry.Etale

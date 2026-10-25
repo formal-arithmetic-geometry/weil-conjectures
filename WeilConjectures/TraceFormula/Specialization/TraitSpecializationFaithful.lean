@@ -102,6 +102,8 @@ section Point
 
 variable (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
 
+set_option synthInstance.maxHeartbeats 80000 in
+-- the ring structure on `End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is found by a long instance search
 /-- The endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are `H⁰(Spec k, ℚ̄_ℓ)`, the continuous
 functions on the one-point space `Spec k` with values in a finite subextension of
 `ℚ̄_ℓ / ℚ_ℓ`: placing the endomorphisms of the unit module in degree `0` is bijective, the
@@ -127,6 +129,9 @@ theorem exists_bijective_unitEnd_point :
     (ObjectProperty.fullyFaithfulι _).map_bijective _ _
   have : IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := A))) :=
     inferInstanceAs (IsIso (𝟙 _))
+  have : CompactSpace (point k).left := inferInstanceAs (CompactSpace (Spec (.of k)))
+  have : QuasiSeparatedSpace (point k).left :=
+    inferInstanceAs (QuasiSeparatedSpace (Spec (.of k)))
   let e₁ := (RingEquiv.ofBijective _ hι).symm
   let e₂ := (asIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := A)))).symm.conjRingEquiv
   exact ⟨e₁.toRingHom.comp (e₂.toRingHom.comp
