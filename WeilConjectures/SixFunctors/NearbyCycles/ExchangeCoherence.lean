@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
+public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 
 /-!
 
@@ -25,6 +27,20 @@ universe u
 open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace CategoryTheory.Adjunction
+
+variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']
+
+/-- The counit identity of the exchange morphism `exchangeRight af af' θ : Rf ⋙ G ⟶ G' ⋙ Rf'`. -/
+lemma exchangeRight_app_comp_counit {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ A'} {Rf' : A' ⥤ B'}
+    {G : B ⥤ B'} {G' : A ⥤ A'} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (θ : G ⋙ Lf' ≅ Lf ⋙ G')
+    (K : A) :
+    Lf'.map ((exchangeRight af af' θ).app K) ≫ af'.counit.app (G'.obj K) =
+      θ.hom.app (Rf.obj K) ≫ G'.map (af.counit.app K) := by
+  simp [exchangeRight_app]
+
+end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -254,5 +270,59 @@ lemma pullbackExchange_tensor_aux {SN SM DY DX : Type*} [Category SN] [Category 
 end Monoidal
 
 end Abstract
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-! ### Exchange maps -/
+
+namespace NearbyCyclesModel.Hom
+
+variable {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
+  {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
+
+/-- **The pullback exchange is monoidal** (blueprint `sk-lem-tf-nearby-mate-coherences`, "`α_f`
+is monoidal"): `α_φ(A ⊗ B) ∘ Lf'^* μ_N = Ψ_M(m⁻¹) ∘ μ_M ∘ (α_φ A ⊗ α_φ B) ∘ m`, where `μ` are
+the lax tensor maps of nearby cycles and `m` the tensor comparisons of the derived pullbacks. -/
+lemma map_tensorMap_comp_pullbackExchange_app
+    (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    L((f')^*⟦Λ⟧).map (N.tensorMap Λ A B) ≫ (φ.pullbackExchange Λ).app (A ⊗ B) ≫
+        (M.nearbyCycles Λ).map (Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) A B) =
+      Functor.OplaxMonoidal.δ L((f')^*⟦Λ⟧) _ _ ≫
+        ((φ.pullbackExchange Λ).app A ⊗ₘ (φ.pullbackExchange Λ).app B) ≫
+          M.tensorMap Λ _ _ := by
+  -- The proof is `pullbackExchange_tensor_aux` instantiated with the comparisons of `φ`; the
+  -- instantiation currently times out at `whnf` on the derived categories.
+  sorry
+
+variable {Z Z' X₁ X₁' Z₁ Z₁' : Scheme.{u}} {P : NearbyCyclesModel Z Z'}
+  {M₁ : NearbyCyclesModel X₁ X₁'} {P₁ : NearbyCyclesModel Z₁ Z₁'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'}
+  {k : Z ⟶ Z₁} {k' : Z' ⟶ Z₁'} {e : Z₁ ⟶ X₁} {e' : Z₁' ⟶ X₁'} {f₀ : Z ⟶ X} {f₀' : Z' ⟶ X'}
+
+/-- **The square law of the pullback exchanges** (blueprint `sk-lem-tf-nearby-mate-coherences`
+(2), `α_{gf} = α_f(g^*) f_s^* α_g`, for the two factorizations of a commutative square of
+morphisms of models): for morphisms of models `φ₀ : P ⟶ M`, `ψ : M ⟶ M₁`, `ψ' : P ⟶ P₁` and
+`φ₁ : P₁ ⟶ M₁` with `φ₀ ≫ ψ = ψ' ≫ φ₁`, the two composite pullback exchanges
+`Lk'^* Le'^* Ψ_{M₁} ⟶ Ψ_P Lf₀^* Lg^*` agree, up to the comparisons of the squares of special
+fibres and of bases. -/
+lemma pullbackExchange_square (φ₀ : P.Hom M f₀ f₀') (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k k')
+    (φ₁ : P₁.Hom M₁ e e') (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)
+    (hgen : φ₀.generic ≫ ψ.generic = ψ'.generic ≫ φ₁.generic) (hb : f₀ ≫ g = k ≫ e)
+    (hs : f₀' ≫ g' = k' ≫ e')
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₁) Ab.{u + 1})
+      (condensedRingObj Λ X₁))) :
+    (pullbackSquareComparison Λ (⟨hs⟩ : CommSq f₀' k' g' e')).hom.app
+        ((M₁.nearbyCycles Λ).obj C) ≫ L((f₀')^*⟦Λ⟧).map ((ψ.pullbackExchange Λ).app C) ≫
+        (φ₀.pullbackExchange Λ).app (L((g)^*⟦Λ⟧).obj C) =
+      L((k')^*⟦Λ⟧).map ((φ₁.pullbackExchange Λ).app C) ≫
+        (ψ'.pullbackExchange Λ).app (L((e)^*⟦Λ⟧).obj C) ≫
+        (P.nearbyCycles Λ).map
+          ((pullbackSquareComparison Λ (⟨hb⟩ : CommSq f₀ k g e)).hom.app C) := by
+  -- The proof is `exchange_square_aux` and `exchange_square_total_aux` instantiated with the
+  -- cubes of comparisons `pullbackSquareComparison_cube`; the instantiation currently times out
+  -- at `whnf` on the derived categories.
+  sorry
+
+end NearbyCyclesModel.Hom
 
 end AlgebraicGeometry.ProEtale.CondensedRing

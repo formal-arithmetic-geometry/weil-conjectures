@@ -67,6 +67,29 @@ noncomputable def lowerStarTensorMap'
       ((derivedUpperStarLowerStarAdjunction Λ j).counit.app A ⊗ₘ
         (derivedUpperStarLowerStarAdjunction Λ j).counit.app B))
 
+/-- The adjoint of the lax tensor map of `Rj_*` is the tensor product of the counits. -/
+lemma lowerStarTensorMap'_comp_counit
+    (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U))) :
+    L((j)^*⟦Λ⟧).map (lowerStarTensorMap' Λ j A B) ≫
+        (derivedUpperStarLowerStarAdjunction Λ j).counit.app (A ⊗ B) =
+      Functor.OplaxMonoidal.δ L((j)^*⟦Λ⟧) _ _ ≫
+        ((derivedUpperStarLowerStarAdjunction Λ j).counit.app A ⊗ₘ
+          (derivedUpperStarLowerStarAdjunction Λ j).counit.app B) := by
+  exact ((derivedUpperStarLowerStarAdjunction Λ j).homEquiv_counit (g := _)).symm.trans
+    (((derivedUpperStarLowerStarAdjunction Λ j).homEquiv _ _).symm_apply_apply _)
+
+/-- The lax tensor map of the derived pushforward is natural. -/
+lemma lowerStarTensorMap'_natural
+    {A A' B B' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U))} (x : A ⟶ A') (y : B ⟶ B') :
+    (R((j)_*⟦Λ⟧).map x ⊗ₘ R((j)_*⟦Λ⟧).map y) ≫ lowerStarTensorMap' Λ j A' B' =
+      lowerStarTensorMap' Λ j A B ≫ R((j)_*⟦Λ⟧).map (x ⊗ₘ y) := by
+  let := (derivedUpperStarLowerStarAdjunction Λ j).rightAdjointLaxMonoidal
+  have := Functor.LaxMonoidal.μ_natural R((j)_*⟦Λ⟧) x y
+  simp only [Adjunction.rightAdjointLaxMonoidal_μ] at this
+  exact this
+
 section Kunneth
 
 variable {X X₁ Y Y₁ Z Z₁ : Scheme.{u}} {f₁ : Z ⟶ X} {f₂ : Z ⟶ Y} {g : X ⟶ X₁} {h : Y ⟶ Y₁}
@@ -103,6 +126,30 @@ noncomputable def tensorMap
   Functor.LaxMonoidal.μ L((M.i)^*⟦Λ⟧) _ _ ≫
     L((M.i)^*⟦Λ⟧).map (lowerStarTensorMap' Λ M.j _ _ ≫
       R((M.j)_*⟦Λ⟧).map (Functor.LaxMonoidal.μ L((M.ε)^*⟦Λ⟧) A B))
+
+private lemma tensorMap_natural_aux {C D T S : Type*} [Category C] [Category D] [Category T]
+    [Category S] [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory T]
+    [MonoidalCategory S] {E : C ⥤ D} {R : D ⥤ T} {I : T ⥤ S} [E.LaxMonoidal] [I.LaxMonoidal]
+        (μR : ∀ U V, R.obj U ⊗ R.obj V ⟶ R.obj (U ⊗ V))
+    (hμR : ∀ {U U' V V' : D} (x : U ⟶ U') (y : V ⟶ V'),
+      (R.map x ⊗ₘ R.map y) ≫ μR U' V' = μR U V ≫ R.map (x ⊗ₘ y))
+    {A A' B B' : C} (x : A ⟶ A') (y : B ⟶ B') :
+    ((E ⋙ R ⋙ I).map x ⊗ₘ (E ⋙ R ⋙ I).map y) ≫ Functor.LaxMonoidal.μ I _ _ ≫
+        I.map (μR _ _ ≫ R.map (Functor.LaxMonoidal.μ E A' B')) =
+      (Functor.LaxMonoidal.μ I _ _ ≫ I.map (μR _ _ ≫ R.map (Functor.LaxMonoidal.μ E A B))) ≫
+        (E ⋙ R ⋙ I).map (x ⊗ₘ y) := by
+  simp only [Functor.comp_map, Functor.LaxMonoidal.μ_natural_assoc, ← I.map_comp,
+    Category.assoc, ← R.map_comp]
+  rw [reassoc_of% (hμR (E.map x) (E.map y)), ← R.map_comp, Functor.LaxMonoidal.μ_natural]
+
+/-- The lax tensor map of nearby cycles is natural. -/
+lemma tensorMap_natural
+    {A A' B B' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (x : A ⟶ A') (y : B ⟶ B') :
+    ((M.nearbyCycles Λ).map x ⊗ₘ (M.nearbyCycles Λ).map y) ≫ M.tensorMap Λ A' B' =
+      M.tensorMap Λ A B ≫ (M.nearbyCycles Λ).map (x ⊗ₘ y) :=
+  tensorMap_natural_aux (E := L((M.ε)^*⟦Λ⟧)) (I := L((M.i)^*⟦Λ⟧))
+    (lowerStarTensorMap' Λ M.j) (fun x y ↦ lowerStarTensorMap'_natural Λ M.j x y) x y
 
 variable {Y Y' Z Z' : Scheme.{u}} {M} {N : NearbyCyclesModel Y Y'} {P : NearbyCyclesModel Z Z'}
   {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}

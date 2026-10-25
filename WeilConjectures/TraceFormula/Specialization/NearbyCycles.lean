@@ -175,9 +175,10 @@ instance isIso_specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAl
 /-- **Nearby cycles commute with Verdier duality** (Gabber; Illusie, *Autour du théorème de
 monodromie locale*, Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`), for the
 specialization to the normal cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here
-`Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric generic point; the duality on the geometric
-generic fibre `X_Ω` is relative to `Ω`, and `Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible
-complexes since `ε` is a base change of fields. -/
+`Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric
+generic point; the duality on the geometric generic fibre `X_Ω` is relative to `Ω`, and
+`Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
+fields. -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅

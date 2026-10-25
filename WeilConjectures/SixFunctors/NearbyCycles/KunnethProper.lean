@@ -156,4 +156,49 @@ lemma kunnethMap_comp_pushforwardExchange_aux (ag : g ⊣ Rg) (ah : h ⊣ Rh) (a
 
 end Abstract
 
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+namespace NearbyCyclesModel
+
+variable {X X' Y Y' Z Z' X₁ X₁' Y₁ Y₁' Z₁ Z₁' : Scheme.{u}} {M : NearbyCyclesModel X X'}
+  {N : NearbyCyclesModel Y Y'} {P : NearbyCyclesModel Z Z'} {M₁ : NearbyCyclesModel X₁ X₁'}
+  {N₁ : NearbyCyclesModel Y₁ Y₁'} {P₁ : NearbyCyclesModel Z₁ Z₁'}
+  {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'} {e₁ : Z₁ ⟶ X₁} {e₁' : Z₁' ⟶ X₁'}
+  {e₂ : Z₁ ⟶ Y₁} {e₂' : Z₁' ⟶ Y₁'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'} {h : Y ⟶ Y₁} {h' : Y' ⟶ Y₁'}
+  {k : Z ⟶ Z₁} {k' : Z' ⟶ Z₁'}
+
+/-- **The Künneth map of nearby cycles and direct images** (blueprint `det-nearby-kunneth-proper`):
+for morphisms of models `ψ_M : M ⟶ M₁`, `ψ_N : N ⟶ N₁`, `ψ_P : P ⟶ P₁` compatible with
+`φ₁ : P ⟶ M`, `φ₂ : P ⟶ N`, `φ₁' : P₁ ⟶ M₁`, `φ₂' : P₁ ⟶ N₁`, the Künneth maps `Π` of nearby
+cycles, the ordinary Künneth maps `κ` and the pushforward exchanges `χ` form a commutative square
+`Rk'_* Π_{A,B} ∘ κ ∘ (χ ⊠ χ) = χ ∘ Ψ_{P₁}(κ) ∘ Π_{Rg_* A, Rh_* B}`. For proper morphisms the
+exchanges `χ` are the proper exchange isomorphisms, and this identifies `R(g × h)_* Π_{A,B}`
+with `Π_{Rg_* A, Rh_* B}`. -/
+lemma kunnethMap_comp_pushforwardExchange (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
+    (φ₁' : P₁.Hom M₁ e₁ e₁') (φ₂' : P₁.Hom N₁ e₂ e₂') (ψM : M.Hom M₁ g g')
+    (ψN : N.Hom N₁ h h') (ψP : P.Hom P₁ k k')
+    (htot₁ : φ₁.total ≫ ψM.total = ψP.total ≫ φ₁'.total)
+    (hgen₁ : φ₁.generic ≫ ψM.generic = ψP.generic ≫ φ₁'.generic)
+    (htot₂ : φ₂.total ≫ ψN.total = ψP.total ≫ φ₂'.total)
+    (hgen₂ : φ₂.generic ≫ ψN.generic = ψP.generic ≫ φ₂'.generic)
+    (hb₁ : f₁ ≫ g = k ≫ e₁) (hs₁ : f₁' ≫ g' = k' ≫ e₁') (hb₂ : f₂ ≫ h = k ≫ e₂)
+    (hs₂ : f₂' ≫ h' = k' ≫ e₂')
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    (L((e₁')^*⟦Λ⟧).map ((ψM.pushforwardExchange Λ).app A) ⊗ₘ
+        L((e₂')^*⟦Λ⟧).map ((ψN.pushforwardExchange Λ).app B)) ≫
+        lowerStarKunnethMap' Λ ⟨hs₁⟩ ⟨hs₂⟩ ((M.nearbyCycles Λ).obj A)
+          ((N.nearbyCycles Λ).obj B) ≫
+        R((k')_*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B) =
+      kunnethMap Λ φ₁' φ₂' (R((g)_*⟦Λ⟧).obj A) (R((h)_*⟦Λ⟧).obj B) ≫
+        (P₁.nearbyCycles Λ).map (lowerStarKunnethMap' Λ ⟨hb₁⟩ ⟨hb₂⟩ A B) ≫
+        (ψP.pushforwardExchange Λ).app _ := by
+  -- The proof is `kunnethMap_comp_pushforwardExchange_aux` instantiated with the adjunctions,
+  -- exchanges and comparisons above; the instantiation currently times out at `whnf`.
+  sorry
+
+end NearbyCyclesModel
+
 end AlgebraicGeometry.ProEtale.CondensedRing
