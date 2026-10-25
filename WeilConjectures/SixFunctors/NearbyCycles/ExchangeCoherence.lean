@@ -145,6 +145,62 @@ lemma exchange_square_aux {SM1 SM SP1 SP : Type*} [Category SM1] [Category SM] [
   rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% (hI (ΦM1.obj C)), ← iP.map_comp,
     ← iP.map_comp, ← iP.map_comp, ← iP.map_comp, hβ]
 
+/-- The square law of the pullback exchanges of nearby cycles, in abstract categories, with the
+four pullback exchanges as variables characterized by their definitions and the nearby cycles as
+the composites `ε ⋙ R ⋙ i`. -/
+lemma pullbackExchange_square_aux {SM1 SM SP1 SP : Type*} [Category SM1] [Category SM]
+    [Category SP1] [Category SP] {e' : SM1 ⥤ SP1} {k' : SP1 ⥤ SP} {g' : SM1 ⥤ SM}
+    {f' : SM ⥤ SP} {iM1 : TM1 ⥤ SM1} {iM : TM ⥤ SM} {iP1 : TP1 ⥤ SP1} {iP : TP ⥤ SP}
+    (aM1 : jM1 ⊣ RM1) (aM : jM ⊣ RM) (aP1 : jP1 ⊣ RP1) (aP : jP ⊣ RP)
+    (cEψ : εM1 ⋙ gψ ⟶ g ⋙ εM) (cEφ : εM ⋙ gφ ⟶ f ⋙ εP) (cEφ' : εM1 ⋙ gφ' ⟶ e ⋙ εP1)
+    (cEψ' : εP1 ⋙ gψ' ⟶ k ⋙ εP)
+    (cJψ : tψ ⋙ jM ⟶ jM1 ⋙ gψ) (cJφ : tφ ⋙ jP ⟶ jM ⋙ gφ) (cJφ' : tφ' ⋙ jP1 ⟶ jM1 ⋙ gφ')
+    (cJψ' : tψ' ⋙ jP ⟶ jP1 ⋙ gψ')
+    (cIψ : iM1 ⋙ g' ⟶ tψ ⋙ iM) (cIφ : iM ⋙ f' ⟶ tφ ⋙ iP) (cIφ' : iM1 ⋙ e' ⟶ tφ' ⋙ iP1)
+    (cIψ' : iP1 ⋙ k' ⟶ tψ' ⋙ iP) (cS : e' ⋙ k' ⟶ g' ⋙ f')
+    (cT : tφ' ⋙ tψ' ⟶ tψ ⋙ tφ) (cG : gφ' ⋙ gψ' ⟶ gψ ⋙ gφ) (cB : e ⋙ k ⟶ g ⋙ f)
+    (hI : ∀ K, cS.app (iM1.obj K) ≫ f'.map (cIψ.app K) ≫ cIφ.app (tψ.obj K) =
+      k'.map (cIφ'.app K) ≫ cIψ'.app (tφ'.obj K) ≫ iP.map (cT.app K))
+    (hJ : ∀ K, jP.map (cT.app K) ≫ cJφ.app (tψ.obj K) ≫ gφ.map (cJψ.app K) =
+      cJψ'.app (tφ'.obj K) ≫ gψ'.map (cJφ'.app K) ≫ cG.app (jM1.obj K))
+    (hE : ∀ C, cG.app (εM1.obj C) ≫ gφ.map (cEψ.app C) ≫ cEφ.app (g.obj C) =
+      gψ'.map (cEφ'.app C) ≫ cEψ'.app (e.obj C) ≫ εP.map (cB.app C))
+    (αψ : (εM1 ⋙ RM1 ⋙ iM1) ⋙ g' ⟶ g ⋙ εM ⋙ RM ⋙ iM)
+    (hαψ : αψ = Functor.whiskerLeft (εM1 ⋙ RM1) cIψ ≫ Functor.whiskerRight
+      (Functor.whiskerLeft εM1 (mateEquiv aM1 aM cJψ).natTrans ≫
+        Functor.whiskerRight cEψ RM) iM)
+    (αφ : (εM ⋙ RM ⋙ iM) ⋙ f' ⟶ f ⋙ εP ⋙ RP ⋙ iP)
+    (hαφ : αφ = Functor.whiskerLeft (εM ⋙ RM) cIφ ≫ Functor.whiskerRight
+      (Functor.whiskerLeft εM (mateEquiv aM aP cJφ).natTrans ≫
+        Functor.whiskerRight cEφ RP) iP)
+    (αφ' : (εM1 ⋙ RM1 ⋙ iM1) ⋙ e' ⟶ e ⋙ εP1 ⋙ RP1 ⋙ iP1)
+    (hαφ' : αφ' = Functor.whiskerLeft (εM1 ⋙ RM1) cIφ' ≫ Functor.whiskerRight
+      (Functor.whiskerLeft εM1 (mateEquiv aM1 aP1 cJφ').natTrans ≫
+        Functor.whiskerRight cEφ' RP1) iP1)
+    (αψ' : (εP1 ⋙ RP1 ⋙ iP1) ⋙ k' ⟶ k ⋙ εP ⋙ RP ⋙ iP)
+    (hαψ' : αψ' = Functor.whiskerLeft (εP1 ⋙ RP1) cIψ' ≫ Functor.whiskerRight
+      (Functor.whiskerLeft εP1 (mateEquiv aP1 aP cJψ').natTrans ≫
+        Functor.whiskerRight cEψ' RP) iP)
+    (C : DX1) :
+    cS.app ((εM1 ⋙ RM1 ⋙ iM1).obj C) ≫ f'.map (αψ.app C) ≫ αφ.app (g.obj C) =
+      k'.map (αφ'.app C) ≫ αψ'.app (e.obj C) ≫ (εP ⋙ RP ⋙ iP).map (cB.app C) := by
+  subst hαψ hαφ hαφ' hαψ'
+  have h := exchange_square_aux (ΦM1 := εM1 ⋙ RM1) (ΦM := εM ⋙ RM) (ΦP1 := εP1 ⋙ RP1)
+    (ΦP := εP ⋙ RP) cIψ cIφ cIφ' cIψ' cS cT cB hI C
+    ((mateEquiv aM1 aM cJψ).app (εM1.obj C) ≫ RM.map (cEψ.app C))
+    ((mateEquiv aM aP cJφ).app (εM.obj (g.obj C)) ≫ RP.map (cEφ.app (g.obj C)))
+    ((mateEquiv aM1 aP1 cJφ').app (εM1.obj C) ≫ RP1.map (cEφ'.app C))
+    ((mateEquiv aP1 aP cJψ').app (εP1.obj (e.obj C)) ≫ RP.map (cEψ'.app (e.obj C)))
+    (by
+      have := exchange_square_total_aux aM1 aM aP1 aP cEψ cEφ cEφ' cEψ' cJψ cJφ cJφ' cJψ'
+        _ _ _ _ (fun D ↦ mateEquiv_counit _ _ _ D) (fun D ↦ mateEquiv_counit _ _ _ D)
+        (fun D ↦ mateEquiv_counit _ _ _ D) (fun D ↦ mateEquiv_counit _ _ _ D) cT cG cB hJ hE C
+      simp only [Category.assoc, Functor.comp_map] at this ⊢
+      exact this)
+  simp only [Category.assoc, Functor.comp_map, Functor.map_comp, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj] at h ⊢
+  exact h
+
 section Monoidal
 
 variable {TN TM GN GM : Type*} [Category TN] [Category TM] [Category GN] [Category GM]
@@ -267,6 +323,45 @@ lemma pullbackExchange_tensor_aux {SN SM DY DX : Type*} [Category SN] [Category 
   rw [← Functor.LaxMonoidal.μ_natural_assoc, ← Functor.LaxMonoidal.μ_natural_assoc]
   rfl
 
+/-- `pullbackExchange_tensor_aux` with the pullback exchange `α` and the lax tensor maps `μ_N`,
+`μ_M` of nearby cycles as variables characterized by their definitions, and the nearby cycles
+as the composites `ε ⋙ R ⋙ i`. -/
+lemma pullbackExchange_tensor_aux' {SN SM DY DX : Type*} [Category SN] [Category SM]
+    [Category DY] [Category DX] [MonoidalCategory SN] [MonoidalCategory SM]
+    [MonoidalCategory DY] [MonoidalCategory DX] {f' : SN ⥤ SM} {iN : TN ⥤ SN} {iM : TM ⥤ SM}
+    {f : DY ⥤ DX} {εN : DY ⥤ GN} {εM : DX ⥤ GM} [f'.OplaxMonoidal] [iN.Monoidal] [iM.Monoidal]
+    [f.OplaxMonoidal] [εN.Monoidal] [εM.Monoidal]
+    (cI : iN ⋙ f' ⟶ t ⋙ iM) (cE : εN ⋙ gen ⟶ f ⋙ εM) (bc : RN ⋙ t ⟶ gen ⋙ RM)
+    (μjN : ∀ U V : GN, RN.obj U ⊗ RN.obj V ⟶ RN.obj (U ⊗ V))
+    (μjM : ∀ U V : GM, RM.obj U ⊗ RM.obj V ⟶ RM.obj (U ⊗ V))
+    (hμjM : ∀ {U U' V V' : GM} (x : U ⟶ U') (y : V ⟶ V'),
+      (RM.map x ⊗ₘ RM.map y) ≫ μjM U' V' = μjM U V ≫ RM.map (x ⊗ₘ y))
+    (hcI : ∀ X Y, f'.map (Functor.OplaxMonoidal.δ iN X Y) ≫ Functor.OplaxMonoidal.δ f' _ _ ≫
+      (cI.app X ⊗ₘ cI.app Y) =
+        cI.app (X ⊗ Y) ≫ iM.map (Functor.OplaxMonoidal.δ t X Y) ≫
+          Functor.OplaxMonoidal.δ iM _ _)
+    (hcE : ∀ A B, gen.map (Functor.OplaxMonoidal.δ εN A B) ≫ Functor.OplaxMonoidal.δ gen _ _ ≫
+      (cE.app A ⊗ₘ cE.app B) =
+        cE.app (A ⊗ B) ≫ εM.map (Functor.OplaxMonoidal.δ f A B) ≫
+          Functor.OplaxMonoidal.δ εM _ _)
+    (hbc : ∀ U V, t.map (μjN U V) ≫ bc.app (U ⊗ V) ≫ RM.map (Functor.OplaxMonoidal.δ gen U V) =
+      Functor.OplaxMonoidal.δ t (RN.obj U) (RN.obj V) ≫ (bc.app U ⊗ₘ bc.app V) ≫
+        μjM (gen.obj U) (gen.obj V))
+    (α : (εN ⋙ RN ⋙ iN) ⋙ f' ⟶ f ⋙ εM ⋙ RM ⋙ iM)
+    (hα : α = Functor.whiskerLeft (εN ⋙ RN) cI ≫
+      Functor.whiskerRight (Functor.whiskerLeft εN bc ≫ Functor.whiskerRight cE RM) iM)
+    (μN : ∀ A B, (εN ⋙ RN ⋙ iN).obj A ⊗ (εN ⋙ RN ⋙ iN).obj B ⟶ (εN ⋙ RN ⋙ iN).obj (A ⊗ B))
+    (hμN : μN = fun A B ↦ Functor.LaxMonoidal.μ iN _ _ ≫
+      iN.map (μjN _ _ ≫ RN.map (Functor.LaxMonoidal.μ εN A B)))
+    (μM : ∀ A B, (εM ⋙ RM ⋙ iM).obj A ⊗ (εM ⋙ RM ⋙ iM).obj B ⟶ (εM ⋙ RM ⋙ iM).obj (A ⊗ B))
+    (hμM : μM = fun A B ↦ Functor.LaxMonoidal.μ iM _ _ ≫
+      iM.map (μjM _ _ ≫ RM.map (Functor.LaxMonoidal.μ εM A B)))
+    (A B : DY) :
+    f'.map (μN A B) ≫ α.app (A ⊗ B) ≫ (εM ⋙ RM ⋙ iM).map (Functor.OplaxMonoidal.δ f A B) =
+      Functor.OplaxMonoidal.δ f' _ _ ≫ (α.app A ⊗ₘ α.app B) ≫ μM _ _ := by
+  subst hα hμN hμM
+  exact pullbackExchange_tensor_aux cI cE bc μjN μjM hμjM hcI hcE hbc A B
+
 end Monoidal
 
 end Abstract
@@ -291,9 +386,20 @@ lemma map_tensorMap_comp_pullbackExchange_app
       Functor.OplaxMonoidal.δ L((f')^*⟦Λ⟧) _ _ ≫
         ((φ.pullbackExchange Λ).app A ⊗ₘ (φ.pullbackExchange Λ).app B) ≫
           M.tensorMap Λ _ _ := by
-  -- The proof is `pullbackExchange_tensor_aux` instantiated with the comparisons of `φ`; the
-  -- instantiation currently times out at `whnf` on the derived categories.
-  sorry
+  exact pullbackExchange_tensor_aux' (pullbackSquareComparison Λ φ.commSq_i).hom
+    (pullbackSquareComparison Λ φ.commSq_ε).hom
+    (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
+      (derivedUpperStarLowerStarAdjunction Λ M.j)
+      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+    (lowerStarTensorMap' Λ N.j) (lowerStarTensorMap' Λ M.j)
+    (fun x y ↦ lowerStarTensorMap'_natural Λ M.j x y)
+    (fun X Y ↦ pullbackSquareComparison_tensor Λ φ.commSq_i X Y)
+    (fun X Y ↦ pullbackSquareComparison_tensor Λ φ.commSq_ε X Y)
+    (fun U V ↦ baseChange_tensor_aux (derivedUpperStarLowerStarAdjunction Λ N.j)
+      (derivedUpperStarLowerStarAdjunction Λ M.j) (pullbackSquareComparison Λ φ.commSq_j).hom
+      _ (fun D ↦ mateEquiv_counit _ _ _ D)
+      (fun X Y ↦ pullbackSquareComparison_tensor Λ φ.commSq_j X Y) U V)
+    (φ.pullbackExchange Λ) rfl (N.tensorMap Λ) rfl (M.tensorMap Λ) rfl A B
 
 variable {Z Z' X₁ X₁' Z₁ Z₁' : Scheme.{u}} {P : NearbyCyclesModel Z Z'}
   {M₁ : NearbyCyclesModel X₁ X₁'} {P₁ : NearbyCyclesModel Z₁ Z₁'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'}
@@ -318,10 +424,29 @@ lemma pullbackExchange_square (φ₀ : P.Hom M f₀ f₀') (ψ : M.Hom M₁ g g'
         (ψ'.pullbackExchange Λ).app (L((e)^*⟦Λ⟧).obj C) ≫
         (P.nearbyCycles Λ).map
           ((pullbackSquareComparison Λ (⟨hb⟩ : CommSq f₀ k g e)).hom.app C) := by
-  -- The proof is `exchange_square_aux` and `exchange_square_total_aux` instantiated with the
-  -- cubes of comparisons `pullbackSquareComparison_cube`; the instantiation currently times out
-  -- at `whnf` on the derived categories.
-  sorry
+  have h := pullbackExchange_square_aux (derivedUpperStarLowerStarAdjunction Λ M₁.j)
+    (derivedUpperStarLowerStarAdjunction Λ M.j) (derivedUpperStarLowerStarAdjunction Λ P₁.j)
+    (derivedUpperStarLowerStarAdjunction Λ P.j)
+    (pullbackSquareComparison Λ ψ.commSq_ε).hom (pullbackSquareComparison Λ φ₀.commSq_ε).hom
+    (pullbackSquareComparison Λ φ₁.commSq_ε).hom (pullbackSquareComparison Λ ψ'.commSq_ε).hom
+    (pullbackSquareComparison Λ ψ.commSq_j).hom (pullbackSquareComparison Λ φ₀.commSq_j).hom
+    (pullbackSquareComparison Λ φ₁.commSq_j).hom (pullbackSquareComparison Λ ψ'.commSq_j).hom
+    (pullbackSquareComparison Λ ψ.commSq_i).hom (pullbackSquareComparison Λ φ₀.commSq_i).hom
+    (pullbackSquareComparison Λ φ₁.commSq_i).hom (pullbackSquareComparison Λ ψ'.commSq_i).hom
+    (pullbackSquareComparison Λ (⟨hs⟩ : CommSq f₀' k' g' e')).hom
+    (pullbackSquareComparison Λ (⟨htot⟩ : CommSq φ₀.total ψ'.total ψ.total φ₁.total)).hom
+    (pullbackSquareComparison Λ
+      (⟨hgen⟩ : CommSq φ₀.generic ψ'.generic ψ.generic φ₁.generic)).hom
+    (pullbackSquareComparison Λ (⟨hb⟩ : CommSq f₀ k g e)).hom
+    (fun K ↦ pullbackSquareComparison_cube Λ ⟨hs⟩ ⟨htot⟩ φ₀.commSq_i ψ.commSq_i
+      ψ'.commSq_i φ₁.commSq_i K)
+    (fun K ↦ (pullbackSquareComparison_cube Λ ψ'.commSq_j ψ.commSq_j ⟨hgen⟩ φ₁.commSq_j
+      φ₀.commSq_j ⟨htot⟩ K).symm)
+    (fun C ↦ pullbackSquareComparison_cube Λ ⟨hgen⟩ ⟨hb⟩ φ₀.commSq_ε ψ.commSq_ε
+      ψ'.commSq_ε φ₁.commSq_ε C)
+    (ψ.pullbackExchange Λ) rfl (φ₀.pullbackExchange Λ) rfl (φ₁.pullbackExchange Λ) rfl
+    (ψ'.pullbackExchange Λ) rfl C
+  convert h using 3 <;> rfl
 
 end NearbyCyclesModel.Hom
 
