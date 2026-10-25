@@ -99,8 +99,10 @@ lemma isPullback_lift_smul (γ : G) :
       (pullback.lift (c.smul γ) (𝟙 _) (by simp [c.smul_π])) := by
   refine IsPullback.of_right ?_ ?_ (c.isPullback_pullbackPairMap_snd g)
   · simpa using IsPullback.id_horiz (pullback.fst c.π g)
-  · apply pullback.hom_ext <;> simp [pullbackPairMap]
-    exact Category.id_comp _
+  · apply pullback.hom_ext
+    · simp [pullbackPairMap]
+    · simp only [pullbackPairMap, Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc]
+      exact Category.id_comp _
 
 /-- **Base change of a Galois cover**: for a finite étale Galois cover `P ⟶ Y` with group `G`
 and any `g : Y' ⟶ Y`, the base change `P ×_Y Y' ⟶ Y'` is a finite étale Galois cover with
