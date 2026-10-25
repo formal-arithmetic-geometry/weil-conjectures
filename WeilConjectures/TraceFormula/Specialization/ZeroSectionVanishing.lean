@@ -103,26 +103,35 @@ theorem isZero_specializationDefect_of_isInvertible (I : X.left.IdealSheafData)
     exact isZero_specializationDefect_ofIdealTop_span_singleton k' _ _
 
 variable (X) in
+/-- **Reduction to complexes vanishing on the centre** (first step of the proof of blueprint
+`det-sp-zero-section-vanishing`, by `det-sp-defect-closed-vanishing`): if the defect vanishes for
+every `L` with `Li^* L = 0`, it vanishes for every `L`, since `C_{X,Z}(L) ≅ C_{X,Z}(j_! j^* L)`. -/
+theorem isZero_specializationDefect_of_forall_isZero_upperStar (I : X.left.IdealSheafData)
+    (h : ∀ L₀ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      IsZero ((boundedConstructibleUpperStar _ ℓ (centreι X I)).obj L₀) →
+        IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L₀.obj))
+    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
+  set Λ := Profinite.padicAlgClRingObj ℓ
+  have e := (nonempty_specializationDefect_lowerShriek_upperStar_iso X I k' (centreComplι X I)
+    (isCompl_range_centreComplι X I) L).some
+  exact (h _ (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ
+    (centreComplι X I) (centreι X I) (isCompl_range_centreComplι X I).disjoint _)).of_iso e.symm
+
+variable (X) in
 /-- **The zero-section map is invertible** (blueprint `det-sp-zero-section-vanishing`, for
 `ℚ̄_ℓ`-coefficients): for every closed subscheme `Z = V(I)` of `X` and every bounded constructible
 `L`, the defect `C_{X,Z}(L)` vanishes. -/
 theorem isZero_specializationDefect (I : X.left.IdealSheafData)
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
+  refine isZero_specializationDefect_of_forall_isZero_upperStar k' X I (fun L₀ h₀ ↦ ?_) L
   set Λ := Profinite.padicAlgClRingObj ℓ
-  set L₀ := (boundedConstructibleOpenImmersionLowerShriek Λ ℓ (centreComplι X I)).obj
-    ((boundedConstructibleUpperStar Λ ℓ (centreComplι X I)).obj L)
-  have e := (nonempty_specializationDefect_lowerShriek_upperStar_iso X I k' (centreComplι X I)
-    (isCompl_range_centreComplι X I) L).some
-  have h₀ : IsZero ((boundedConstructibleUpperStar Λ ℓ (centreι X I)).obj L₀) :=
-    isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ (centreComplι X I)
-      (centreι X I) (isCompl_range_centreComplι X I).disjoint _
   have e₂ := (nonempty_specializationDefect_iso_blowup X I k' L₀ h₀).some
   have h₃ := isZero_specializationDefect_of_isInvertible k' _
     (isInvertible_comap_blowupOverHom X I)
     ((boundedConstructibleUpperStar Λ ℓ (blowupOverHom X I)).obj L₀)
-  exact ((R(((centreSpecialFibreMap (blowupOverHom X I) I k').left)_*⟦Λ⟧).map_isZero h₃).of_iso
-    e₂).of_iso e.symm
+  exact (R(((centreSpecialFibreMap (blowupOverHom X I) I k').left)_*⟦Λ⟧).map_isZero h₃).of_iso e₂
 
 variable (X) in
 /-- **The zero-section map is invertible** (blueprint `det-sp-zero-section-vanishing`, for
