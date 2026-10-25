@@ -107,6 +107,23 @@ instance isClosedImmersion_vertical : IsClosedImmersion M.vertical := by
     infer_instance
   exact IsClosedImmersion.of_comp M.vertical (pullback.snd M.f M.f)
 
+
+/-- The horizontal axis `x ↦ (x, y)`, `X ⟶ X ×_k X`, with image `X × {y}`. -/
+noncomputable def horizontal : M.X ⟶ pullback M.f M.f :=
+  pullback.lift (𝟙 M.X) (M.f ≫ M.y) (by rw [Category.assoc, M.y_comp, Category.comp_id,
+    Category.id_comp])
+
+instance isClosedImmersion_horizontal : IsClosedImmersion M.horizontal := by
+  have : IsClosedImmersion (M.horizontal ≫ pullback.fst M.f M.f) := by
+    rw [horizontal, pullback.lift_fst]
+    infer_instance
+  exact IsClosedImmersion.of_comp M.horizontal (pullback.fst M.f M.f)
+
+/-- The horizontal axis `H` inside `T`. -/
+noncomputable abbrev H : Scheme.{u} := pullback M.horizontal M.τ
+
+/-- The closed immersion `hH : H ⟶ T`. -/
+noncomputable abbrev hH : M.H ⟶ M.T := pullback.snd M.horizontal M.τ
 /-- The graph `G` of `h` inside `T`. -/
 noncomputable abbrev G : Scheme.{u} := pullback M.graph M.τ
 
