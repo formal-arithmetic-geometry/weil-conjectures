@@ -169,7 +169,8 @@ theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime]
   obtain ⟨E', hE', hiso⟩ := D.exists_E' L K hKy hPL hPK eL eK P eP
   have : SmoothOfRelativeDimension 2 (pullback.fst D.fC D.fC ≫ D.fC) :=
     show SmoothOfRelativeDimension (1 + 1) _ from inferInstance
-  exact ⟨D.S', pullback.fst D.fC D.fC ≫ D.fC, this, D.s', by simp [CoverDatum.s', D.c_comp_fC],
+  exact ⟨D.S', pullback.fst D.fC D.fC ≫ D.fC, this, D.s',
+    by rw [CoverDatum.s', pullback.lift_fst_assoc, D.c_comp_fC],
     D.π, D.D', D.H', D.B', D.dD', D.dH', D.dB', inferInstance, inferInstance, inferInstance, hnD,
     hnH, hnB, D.isDiscreteValuationRing_H', ⟨inferInstance, hdD⟩, ⟨inferInstance, hdB⟩, hDB, hDH,
     D.openComplement_dD'_le, πU, hfin, het, D.e ^ 2, hdeg, he, hsq, E', hE', hiso⟩
