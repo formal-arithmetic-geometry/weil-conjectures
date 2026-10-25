@@ -43,6 +43,13 @@ noncomputable def leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso :
         (finiteCoefficientDerivedEquivalence X T).functor ≅
       (finiteCoefficientDerivedEquivalence Y T).functor ⋙
         L(ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) f) :=
-  sorry
+  Functor.isoWhiskerRight
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+        (Profinite.continuousMapRingObj T) f) _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (upperStarFiniteCoefficientModEquivalenceIso f T) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} T)) f).symm
 
 end AlgebraicGeometry.ProEtale

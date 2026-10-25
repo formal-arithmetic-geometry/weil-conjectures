@@ -48,7 +48,11 @@ being induced by exact functors. -/
 noncomputable def derivedComparisonUpperStarUpperStarIso :
     D(ν^*(Y)[A]) ⋙ L(ProEtale.upperStar A g) ≅
       L(Etale.upperStar A g) ⋙ D(ν^*(Z)[A]) :=
-  sorry
+  Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory A g) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A g) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.isoWhiskerRight (Etale.leftDerivedUpperStarIsoMapDerivedCategory A g).symm _
 
 /-- **The base change morphism for `Rν_*` and the pullbacks**,
 `Lg^*_{ét} ∘ Rν_{Y,*} ⟶ Rν_{Z,*} ∘ Lg^*_{proét}`: the mate of the inverse of
@@ -66,7 +70,22 @@ the base change morphism is identified with their composite. -/
 theorem isIso_rightDerivedComparisonBaseChange_app
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
     (hK : DerivedCategory.plusEtaleOrigin A Y K) :
-    IsIso ((rightDerivedComparisonBaseChange A g).app K) :=
-  sorry
+    IsIso ((rightDerivedComparisonBaseChange A g).app K) := by
+  obtain ⟨K', hK', ⟨e⟩⟩ := hK
+  rw [← NatTrans.isIso_app_iff_of_iso _ e]
+  have := isIso_derivedComparisonAdjunction_unit_app A Y K' hK'
+  have hGK' : DerivedCategory.TStructure.t.plus ((L(Etale.upperStar A g)).obj K') := by
+    obtain ⟨n, hn⟩ := hK'
+    exact DerivedCategory.TStructure.t.plus.prop_of_iso
+      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory A g).app K').symm
+      ⟨n, (Etale.upperStar A g).isGE_mapDerivedCategory_obj K' n⟩
+  have := isIso_derivedComparisonAdjunction_unit_app A Z _ hGK'
+  have : IsIso ((L(Etale.upperStar A g)).map ((derivedComparisonAdjunction A Y).unit.app K') ≫
+      (rightDerivedComparisonBaseChange A g).app ((D(ν^*(Y)[A])).obj K')) := by
+    rw [rightDerivedComparisonBaseChange, unit_mateEquiv]
+    dsimp only [Functor.id_obj]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    ((L(Etale.upperStar A g)).map ((derivedComparisonAdjunction A Y).unit.app K')) _
 
 end AlgebraicGeometry.ProEtale
