@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.KunnethVerdier
@@ -81,7 +82,7 @@ theorem NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel {X : Sch
     {X' : Over (Spec (.of k'))} (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel)
     (hε : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε) :
     M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
-  sorry
+  M.preservesBoundedConstructible_of_exists_comp hM hε
 
 
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k k']
