@@ -45,7 +45,7 @@ noncomputable def deformationToTraitModelHom :
   generic := pullback.snd (deformationTotalToTrait X I k') (traitGenericPoint k')
   comm_j := pullback.condition.symm
   comm_i := (isPullback_deformationSpecialFibre X I k').w.symm
-  comm_ε := (isPullback_deformationModel_ε (X := X) k' I).w.symm
+  comm_ε := (isPullback_deformationModel_ε_traitModel (X := X) k' I).w.symm
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [IsProper X.hom]
@@ -66,7 +66,8 @@ noncomputable def deformationCompactSupportExchange :=
       (isTraitModel_deformationModel X I k') (deformationModel_exists_comp_ε X I k'))
     ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
       (isTraitModel_traitModel k k') ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)
-    (isPullback_deformationSpecialFibre X I k') (isPullback_deformationModel_ε (X := X) k' I)
+    (isPullback_deformationSpecialFibre X I k')
+    (isPullback_deformationModel_ε_traitModel (X := X) k' I)
 
 /-- **The inverse proper exchange of a proper deformation specializes the unit class**:
 `ν_a(ℚ̄_ℓ) ∘ Ra'_!(σ_𝒳) ∘ [𝒳_s] = Ψ_s([X]) ∘ σ_s`. -/
@@ -81,6 +82,7 @@ theorem unitClass_comp_map_comp_deformationCompactSupportExchange_app :
       traitSpecializationUnit k k' ≫
         (traitSpecialization k k').map (BorelMooreSection.unitClass ℓ X) :=
   (deformationToTraitModelHom X I k').unitClass_comp_map_comp_properCompactSupportExchange_app _ _
-    (isPullback_deformationSpecialFibre X I k') (isPullback_deformationModel_ε (X := X) k' I)
+    (isPullback_deformationSpecialFibre X I k')
+    (isPullback_deformationModel_ε_traitModel (X := X) k' I)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -254,6 +254,11 @@ lemma whiskerLeft_unitNatIso_hom_app_ihom_ev_app (X : C) :
     𝟙_ C ◁ unitNatIso.hom.app X ≫ (ihom.ev (𝟙_ C)).app X = (λ_ X).hom := by
   rw [unitNatIso_hom_app, whiskerLeft_curry_ihom_ev_app]
 
+/-- Precomposition `[Y, Z] ⟶ [X, Z]` with an isomorphism `f : X ⟶ Y` is an isomorphism. -/
+lemma isIso_pre_app {X Y : C} (f : X ⟶ Y) [IsIso f] (Z : C) : IsIso ((pre f).app Z) :=
+  ⟨(pre (inv f)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
+    by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
+
 end CategoryTheory.MonoidalClosed
 
 namespace CategoryTheory.Functor.LaxMonoidal

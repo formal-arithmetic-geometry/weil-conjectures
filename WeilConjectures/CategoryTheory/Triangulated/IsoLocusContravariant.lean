@@ -66,15 +66,18 @@ lemma isIso_app_op_shift_shift (κ : S ⟶ T) {N : C} (hN : κ.shiftIsoLocusOp N
     IsIso (κ.app (op (N⟦n⟧⟦m⟧))) :=
   κ.isIso_app_op_of_iso ((shiftFunctorAdd C n m).app N).symm (hN (n + m))
 
-instance (κ : S ⟶ T) : κ.shiftIsoLocusOp.IsClosedUnderIsomorphisms where
+instance isClosedUnderIsomorphisms_shiftIsoLocusOp (κ : S ⟶ T) :
+    κ.shiftIsoLocusOp.IsClosedUnderIsomorphisms where
   of_iso e h n := κ.isIso_app_op_of_iso ((shiftFunctor C n).mapIso e.symm) (h n)
 
-instance (κ : S ⟶ T) : κ.shiftIsoLocusOp.IsStableUnderRetracts where
+instance isStableUnderRetracts_shiftIsoLocusOp (κ : S ⟶ T) :
+    κ.shiftIsoLocusOp.IsStableUnderRetracts where
   of_retract h hY n :=
     have := hY n
     κ.isIso_app_of_retract (h.map (shiftFunctor C n)).op
 
-instance (κ : S ⟶ T) : κ.shiftIsoLocusOp.IsStableUnderShift ℤ where
+instance isStableUnderShift_shiftIsoLocusOp (κ : S ⟶ T) :
+    κ.shiftIsoLocusOp.IsStableUnderShift ℤ where
   isStableUnderShiftBy a :=
     { le_shift N hN := by
         rw [prop_shift_iff]
@@ -182,7 +185,8 @@ lemma isIso_app_obj₂_of_isHomExact [S.PreservesZeroMorphisms] [T.PreservesZero
     rw [comp_add, ← reassoc_of% (nat Tr.mor₁), IsIso.hom_inv_id_assoc, hz₁,
       add_sub_cancel]
 
-instance [S.PreservesZeroMorphisms] [T.PreservesZeroMorphisms] (κ : S ⟶ T) :
+instance containsZero_shiftIsoLocusOp [S.PreservesZeroMorphisms] [T.PreservesZeroMorphisms]
+    (κ : S ⟶ T) :
     κ.shiftIsoLocusOp.ContainsZero where
   exists_zero := ⟨0, isZero_zero C, fun n ↦ by
     have hZ : IsZero ((0 : C)⟦n⟧) := (shiftFunctor C n).map_isZero (isZero_zero C)

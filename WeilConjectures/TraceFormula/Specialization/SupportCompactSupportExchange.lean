@@ -267,39 +267,14 @@ lemma deformationSpecialFibreMap_congr {f' : X ⟶ Z} (e : f' = f ≫ g)
   rfl
 
 omit [IsOpenImmersion f.left] in
-/-- Over the punctured line, `D_I X ⟶ X` is the projection `𝔾_{m,X} ⟶ X`. -/
-lemma laurentSpecToDeformationSpace_deformationSpaceProj (I : X.left.IdealSheafData) :
-    I.laurentSpecToDeformationSpace ≫ I.deformationSpaceProj =
-      X.left.laurentSpecToPolynomialSpec ≫ X.left.polynomialSpecProj := by
-  rw [IdealSheafData.laurentSpecToDeformationSpace,
-    AffineZariskiSite.relativeGluingMap_toBase _ _ _ I.toReesPresheaf_comp_reesToLaurent,
-    Scheme.laurentSpecToPolynomialSpec, AffineZariskiSite.relativeGluingMap_toBase _ _ _
-      IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
-
-omit [IsOpenImmersion f.left] in
-/-- The geometric generic fibre of the deformation model is `X ×_k Spec Ω`, the identification
-`ε` being the first projection. -/
-lemma isPullback_deformationModel_ε (I : X.left.IdealSheafData) :
+/-- The geometric generic fibre of the deformation model is `X ×_k Spec Ω`, with the bottom map the
+identification `ε` of the trait model (`isPullback_deformationModel_ε`). -/
+lemma isPullback_deformationModel_ε_traitModel (I : X.left.IdealSheafData) :
     IsPullback (deformationModel X I k').ε
       (pullback.snd (deformationTotalToTrait X I k') (traitGenericPoint k')) X.hom
       (traitModel k k').ε := by
-  have hL : IsPullback I.laurentSpecToDeformationSpace
-      (Scheme.Hom.laurentSpecToPuncturedLine X.hom) (deformationSpaceToAffineLine X I)
-      (Scheme.Hom.puncturedLine _).ι := by
-    have := I.isPullback_laurentSpecToDeformationSpace.paste_vert
-      (Scheme.Hom.isPullback_laurentSpecToPuncturedLine X.hom)
-    rwa [Category.id_comp] at this
-  have hG := (IsPullback.of_hasPullback (deformationTotalToTrait X I k')
-    (traitGenericPoint k')).paste_horiz (isPullback_deformationTotal X I k')
-  rw [← traitGenericToPuncturedLine_ι] at hG
-  have h := (IsPullback.of_right' hG hL).paste_horiz (Scheme.Hom.isPullback_laurentSpec X.hom)
-  have e : traitGenericToPuncturedLine k k' ≫ (Scheme.Hom.puncturedLine _).ι ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k) = (traitModel k k').ε := by
-    rw [← traitModel_j_traitToBase, traitGenericToPuncturedLine_ι_assoc, traitToAffineLine_over]
-    rfl
-  rw [e, ← laurentSpecToDeformationSpace_deformationSpaceProj, ← Category.assoc,
-    IsPullback.lift_fst, Category.assoc] at h
-  exact h
+  rw [← traitModel_j_traitToBase]
+  exact isPullback_deformationModel_ε k' I
 
 section Product
 
@@ -340,10 +315,11 @@ lemma isPullback_deformationProdModel_ε :
       (pullback.snd (deformationProdTotalToTrait X I Y J k') (traitGenericPoint k')) (X ⨯ Y).hom
       (traitModel k k').ε := by
   have h := IsPullback.of_isPullback_of_baseChange (z := (deformationProdModel X I Y J k').ε)
-    (isPullback_deformationModel_ε k' (X := X) I) (isPullback_deformationModel_ε k' (X := Y) J)
+    (isPullback_deformationModel_ε_traitModel k' (X := X) I)
+    (isPullback_deformationModel_ε_traitModel k' (X := Y) J)
     (IsPullback.id_vert (traitModel k k').ε) (Category.comp_id _) (Category.comp_id _)
-    (isPullback_deformationModel_ε k' (X := X) I).w.symm
-    (isPullback_deformationModel_ε k' (X := Y) J).w.symm
+    (isPullback_deformationModel_ε_traitModel k' (X := X) I).w.symm
+    (isPullback_deformationModel_ε_traitModel k' (X := Y) J).w.symm
     (isPullback_prod_left X Y) (isPullback_deformationProdGeneric k' X Y I J)
     (deformationProdFstModelHom X I Y J k').comm_ε.symm
     (deformationProdSndModelHom X I Y J k').comm_ε.symm
@@ -388,7 +364,7 @@ lemma isPullback_deformationProdLiftModelHom_ε :
   change IsPullback _ (deformationProdLiftGeneric k' c₁ hJ₁ c₂ hJ₂ ≫ pullback.snd _ _) _ _
   rw [show deformationProdLiftGeneric k' c₁ hJ₁ c₂ hJ₂ ≫ pullback.snd _ _ = pullback.snd _ _ from
     (pullback.lift_snd _ _ _).trans (Category.comp_id _)]
-  exact isPullback_deformationModel_ε k' (X := C) K
+  exact isPullback_deformationModel_ε_traitModel k' (X := C) K
 
 
 /-- The morphism `(c₁, c₂) : D_K C ⟶ D_I X ×_{𝔸¹} D_J Y` of deformation spaces. -/

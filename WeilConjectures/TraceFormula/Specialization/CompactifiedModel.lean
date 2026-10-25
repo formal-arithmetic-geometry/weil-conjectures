@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Compactification
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneric
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 
@@ -19,8 +20,8 @@ compactification `D_x X ⟶ P ⟶ 𝔸¹_k` which does not change it over the pu
 (`AlgebraicGeometry.Scheme.Hom.deformationCompactification`). Base changing `P` along the
 coordinate `t : S = Spec k'⟦t⟧ ⟶ 𝔸¹_k` gives a proper scheme `𝒫 = P ×_{𝔸¹_k} S` over the trait
 (`AlgebraicGeometry.ProEtale.CondensedRing.compactifiedTotal`). Since the generic point of the
-trait lies over `𝔾_{m,k}` (`AlgebraicGeometry.traitGenericToPuncturedLine`), the geometric generic
-fibre of `𝒫` maps to `X`, and `𝒫` is a nearby cycles model of `X`
+trait lies over `𝔾_{m,k}` (`AlgebraicGeometry.traitGenericPointToPuncturedLine`), the geometric
+generic fibre of `𝒫` maps to `X`, and `𝒫` is a nearby cycles model of `X`
 (`AlgebraicGeometry.ProEtale.CondensedRing.compactifiedDeformationModel`) of finite type over the
 trait.
 
@@ -73,26 +74,6 @@ lemma algebraMap_traitGenericField_X_ne_zero :
   refine (map_ne_zero _).2 ?_
   rw [Ne, IsFractionRing.to_map_eq_zero_iff]
   exact PowerSeries.X_ne_zero
-
-/-- The geometric generic point of the trait lies over the punctured line `𝔾_{m,k} ⊆ 𝔸¹_k`. -/
-noncomputable def traitGenericToPuncturedLine :
-    Spec (.of (traitGenericField k')) ⟶ Scheme.Hom.puncturedLine (Spec (.of k)) :=
-  IsOpenImmersion.lift (Scheme.Hom.puncturedLine _).ι
-    (traitGenericPoint k' ≫ traitToAffineLine k k') (by
-      rw [Scheme.Opens.range_ι]
-      rintro _ ⟨y, rfl⟩
-      change y ∈ (traitGenericPoint k' ≫ traitToAffineLine k k') ⁻¹ᵁ
-        Scheme.Hom.puncturedLine (Spec (.of k))
-      rw [Scheme.preimage_basicOpen_top, traitGenericPoint_traitToAffineLine_appTop_coord,
-        Scheme.basicOpen_of_isUnit _
-          ((isUnit_iff_ne_zero.2 (algebraMap_traitGenericField_X_ne_zero k')).map _)]
-      trivial)
-
-@[reassoc (attr := simp)]
-lemma traitGenericToPuncturedLine_ι :
-    traitGenericToPuncturedLine k k' ≫ (Scheme.Hom.puncturedLine _).ι =
-      traitGenericPoint k' ≫ traitToAffineLine k k' :=
-  IsOpenImmersion.lift_fac _ _ _
 
 end Trait
 
@@ -182,11 +163,11 @@ instance : IsProper (compactifiedSpecialFibre X x k').hom :=
 lemma compactifiedGeneric_w :
     (compactifiedGenericToTotal X x k' ≫ compactifiedTotalToSpace X x k') ≫
         (deformationCompactificationOf X x).g =
-      (compactifiedGenericToPoint X x k' ≫ traitGenericToPuncturedLine k k') ≫
+      (compactifiedGenericToPoint X x k' ≫ traitGenericPointToPuncturedLine k k') ≫
         (Scheme.Hom.puncturedLine _).ι := by
   rw [Category.assoc, (isPullback_compactifiedTotal X x k').w,
     (isPullback_compactifiedGeneric X x k').w_assoc, Category.assoc,
-    traitGenericToPuncturedLine_ι]
+    traitGenericPointToPuncturedLine_ι]
 
 /-- The map `𝒫_Ω ⟶ X ×_k 𝔾_{m,k}` of the geometric generic fibre to the punctured part of `P`. -/
 noncomputable def compactifiedGenericToPunctured :
@@ -198,7 +179,7 @@ noncomputable def compactifiedGenericToPunctured :
 @[reassoc (attr := simp)]
 lemma compactifiedGenericToPunctured_snd :
     compactifiedGenericToPunctured X x k' ≫ pullback.snd _ _ =
-      compactifiedGenericToPoint X x k' ≫ traitGenericToPuncturedLine k k' :=
+      compactifiedGenericToPoint X x k' ≫ traitGenericPointToPuncturedLine k k' :=
   IsPullback.lift_snd _ _ _ _
 
 @[reassoc]
@@ -332,11 +313,12 @@ omit [IsProper X.hom] in
 lemma deformationGeneric_w :
     (deformationGenericToTotal X x.left.ker k' ≫ deformationTotalToSpace X x.left.ker k') ≫
         X.hom.deformationSpaceProj x.left =
-      (pullback.snd _ _ ≫ traitGenericToPuncturedLine k k') ≫ (Scheme.Hom.puncturedLine _).ι := by
+      (pullback.snd _ _ ≫ traitGenericPointToPuncturedLine k k') ≫
+        (Scheme.Hom.puncturedLine _).ι := by
   have h := (IsPullback.of_hasPullback (deformationTotalToTrait X x.left.ker k')
     (traitGenericPoint k')).w
   rw [Category.assoc, ← deformationSpaceToAffineLine_eq, (isPullback_deformationTotal _ _ k').w,
-    Category.assoc, traitGenericToPuncturedLine_ι]
+    Category.assoc, traitGenericPointToPuncturedLine_ι]
   have h' := h =≫ traitToAffineLine k k'
   simp only [Category.assoc] at h'
   exact h'
@@ -395,7 +377,7 @@ lemma compactifiedGenericToBase_hom :
       compactifiedGenericToPoint X x k' ≫ (traitModel k k').ε := by
   rw [compactifiedGenericToBase, Category.assoc, pullback.condition,
     compactifiedGenericToPunctured_snd_assoc, ← traitModel_j_traitToBase,
-    traitGenericToPuncturedLine_ι_assoc, traitToAffineLine_over]
+    traitGenericPointToPuncturedLine_ι_assoc, traitToAffineLine_over]
   rfl
 
 /-- The compactified deformation model `𝒫` maps to the trait model `S` over the structure
