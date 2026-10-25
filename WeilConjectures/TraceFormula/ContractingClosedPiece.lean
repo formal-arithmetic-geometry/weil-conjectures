@@ -214,6 +214,8 @@ end Unit
 
 namespace Correspondence
 
+set_option maxHeartbeats 800000 in
+-- matching the per-ring adjunctions against the generic mate lemma unfolds the pullbacks
 /-- The double transpose of a composite with the coefficient pushforward of a proper pushforward
 diagram, for the adjunctions `Rb₁_! ⊣ Rb₁^!` and `Lf^* ⊣ Rf_*`. -/
 lemma ProperPushforwardDiagram.map_map_comp_pushforwardCoeff_comp_counit
