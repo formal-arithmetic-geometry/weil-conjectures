@@ -39,62 +39,64 @@ lemma isPullback_pullback_left :
 
 /-- The structure morphism of the fibre product is the second projection followed by that
 of `Z`. -/
-lemma pullback_hom_eq : (pullback f g).hom = (pullback.snd f g).left ≫ Z.hom := by
+lemma pullback_hom_eq_snd_left_comp : (pullback f g).hom = (pullback.snd f g).left ≫ Z.hom := by
   rw [← Over.w (pullback.snd f g)]
 
 variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-instance : LocallyOfFiniteType f.left := by
+instance locallyOfFiniteType_left_of_over : LocallyOfFiniteType f.left := by
   have : LocallyOfFiniteType (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact locallyOfFiniteType_of_comp f.left Y.hom
 
-instance : QuasiCompact f.left := by
+instance quasiCompact_left_of_over : QuasiCompact f.left := by
   have : QuasiCompact (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact QuasiCompact.of_comp f.left Y.hom
 
-instance : IsSeparated f.left := by
+instance isSeparated_left_of_over : IsSeparated f.left := by
   have : IsSeparated (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact IsSeparated.of_comp f.left Y.hom
 
-instance : LocallyOfFiniteType (pullback f g).hom := by
+instance locallyOfFiniteType_over_pullback_hom : LocallyOfFiniteType (pullback f g).hom := by
   have : LocallyOfFiniteType (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
-  rw [pullback_hom_eq]
+  rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
-instance : QuasiCompact (pullback f g).hom := by
+instance quasiCompact_over_pullback_hom : QuasiCompact (pullback f g).hom := by
   have : QuasiCompact (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
-  rw [pullback_hom_eq]
+  rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
-instance : IsSeparated (pullback f g).hom := by
+instance isSeparated_over_pullback_hom : IsSeparated (pullback f g).hom := by
   have : IsSeparated (pullback.snd f g).left :=
     MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
-  rw [pullback_hom_eq]
+  rw [pullback_hom_eq_snd_left_comp]
   infer_instance
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 /-- The base change of a smooth morphism is smooth. -/
-instance [Smooth f.left] : Smooth (pullback.snd f g).left :=
+instance smooth_over_pullback_snd_left [Smooth f.left] : Smooth (pullback.snd f g).left :=
   MorphismProperty.of_isPullback (isPullback_pullback_left f g) inferInstance
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 /-- The base change of a closed immersion is a closed immersion. -/
-instance [IsClosedImmersion g.left] : IsClosedImmersion (pullback.fst f g).left :=
+instance isClosedImmersion_over_pullback_fst_left [IsClosedImmersion g.left] :
+    IsClosedImmersion (pullback.fst f g).left :=
   MorphismProperty.of_isPullback (isPullback_pullback_left f g).flip inferInstance
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 /-- The base change of an open immersion is an open immersion. -/
-instance [IsOpenImmersion g.left] : IsOpenImmersion (pullback.fst f g).left :=
+instance isOpenImmersion_over_pullback_fst_left [IsOpenImmersion g.left] :
+    IsOpenImmersion (pullback.fst f g).left :=
   MorphismProperty.of_isPullback (isPullback_pullback_left f g).flip inferInstance
 
 end AlgebraicGeometry
