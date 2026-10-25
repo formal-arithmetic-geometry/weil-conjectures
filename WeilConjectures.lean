@@ -8930,6 +8930,9 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilEquivariance
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLine
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDatum
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescent
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentClauses
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.Cohomology
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
@@ -12668,6 +12671,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedComplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
