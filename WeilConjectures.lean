@@ -7631,6 +7631,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.PowIntersection
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
@@ -8028,6 +8029,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsOfIsIso
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
@@ -9786,6 +9788,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersSubalgebra
+public import WeilConjectures.NumberTheory.Padics.IntegersToAlgCl
 public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.Padics.ULiftAdicComplete
 public import WeilConjectures.NumberTheory.Padics.ULiftDiscreteValuationRing
@@ -12456,6 +12459,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
@@ -12794,6 +12798,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace
 public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
+public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusModel
 public import WeilConjectures.TraceFormula.CurveLocal.Model
 public import WeilConjectures.TraceFormula.CurveLocal.ModelAxes
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
