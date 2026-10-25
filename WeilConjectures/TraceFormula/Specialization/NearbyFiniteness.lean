@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleDevissage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitModelEmbedding
@@ -29,7 +29,7 @@ space preserve bounded constructible complexes
 pullback `Le^*` preserves bounded constructible complexes.
 
 Following Deligne's proof, the theorem is reduced to the affine spaces `𝔸ⁿ_S` and to
-constructible sheaves:
+extensions by zero of lisse sheaves:
 * **locality**: bounded constructibility on the special fibre is local on a finite open cover
   (`ProEtale.CondensedRing.boundedConstructible_of_openCover`), and nearby cycles commute with
   restriction to the members `V` of a finite affine open cover of `𝒳`
@@ -43,13 +43,15 @@ constructible sheaves:
   this reduces to `𝒳 = 𝔸ⁿ_S` with its standard model `NearbyCyclesModel.traitStdModel`
   (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj`);
 * **dévissage**: along the truncation triangles, to constructible sheaves placed in degree `0`
-  (`ProEtale.boundedConstructible_obj_of_forall_singleFunctor`).
+  (`ProEtale.boundedConstructible_obj_of_forall_singleFunctor`), and by noetherian induction along
+  the open–closed triangles, to the extensions by zero `v_! L` of lisse sheaves `L` along locally
+  closed immersions `v` (`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`).
 
 ## Unfinished input
 
-The theorem for a constructible sheaf on an affine space `𝔸ⁿ_S`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_singleFunctor`) is `sorry`ed: it
-is Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
+The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally closed immersion
+into an affine space `𝔸ⁿ_S`
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) is `sorry`ed: it is Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
 `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices, derived completeness and the Milnor sequence
 (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). The reductions also use the proper
 exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
@@ -98,44 +100,56 @@ lemma isTraitModel_affineSpaceModel (n : ℕ) : (affineSpaceModel k' n).IsTraitM
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **Deligne's finiteness theorem for nearby cycles, for a constructible sheaf on an affine
-space** (SGA 4½, [Th. finitude], Thm. 3.2; for `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and
-passage to the limit, Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8): over the strictly
-henselian trait `S = Spec k'⟦t⟧` (`k'` separably closed, `ℓ ≠ char k'`), for a constructible
-sheaf `F` of `ℚ̄_ℓ`-modules on the affine space `𝔸ⁿ_S`, the geometric nearby cycles
-`Li^* Rj_* Lj^* F` of `F`, with `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded
+/-- **Deligne's finiteness theorem for nearby cycles, for the extension by zero of a lisse sheaf
+on a locally closed subscheme of an affine space** (SGA 4½, [Th. finitude], Thm. 3.2; for
+`ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and passage to the limit, Bhatt–Scholze, *The
+pro-étale topology for schemes*, §6.8): over the strictly henselian trait `S = Spec k'⟦t⟧`
+(`k'` separably closed, `ℓ ≠ char k'`), let `v : E ⟶ 𝔸ⁿ_S` be a locally closed immersion,
+factored as a closed immersion `c' : E ⟶ W` into an open `W` of a closed subscheme
+`c : D ⟶ 𝔸ⁿ_S`, and let `L` be a lisse (pro-étale locally finitely presented) sheaf of
+`ℚ̄_ℓ`-modules on `E`. Then the geometric nearby cycles `Li^* Rj_* Lj^*` of its extension by zero
+`v_! L = Rc_* j_{W!} Rc'_* L`, with `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded
 constructible complex on the special fibre `𝔸ⁿ_s`. -/
-theorem boundedConstructible_nearbyCycles_affineSpace_singleFunctor (n : ℕ)
-    (F : Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' n).total) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (affineSpaceModel k' n).total))
-    (hF : IsConstructibleModuleObject _ F) :
+theorem boundedConstructible_nearbyCycles_affineSpace_lisse (n : ℕ) (D : Scheme.{u})
+    (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens) (E : Scheme.{u})
+    (c' : E ⟶ W) [IsClosedImmersion c']
+    (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E))
+    (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E) L) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)
       (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        ((DerivedCategory.singleFunctor _ 0).obj F)) :=
+        ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+          (D((W.ι)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+            ((R((c')_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+              ((DerivedCategory.singleFunctor _ 0).obj L))))) :=
   sorry
 
 /-- Deligne's finiteness theorem for nearby cycles on an affine space `𝔸ⁿ_S`: the geometric
 nearby cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes. This is
-reduced to constructible sheaves
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_singleFunctor`) by dévissage
-along the truncation triangles. -/
+reduced to the extensions by zero of lisse sheaves on locally closed subschemes
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) by the dévissage
+`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' n).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (affineSpaceModel k' n).total))}
     (hB : boundedConstructible _ B) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)
-      (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B) := by
+      (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+        B) := by
   have := isNoetherian_of_isTraitModel (isTraitModel_affineSpaceModel (k' := k') n)
+  have : IsNoetherian (affineSpaceModel k' n).total :=
+    (isTraitModel_affineSpaceModel (k' := k') n).isNoetherian_total
   have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)).IsTriangulated :=
     isTriangulated_boundedConstructible (ℓ := ℓ) _ _
-  exact boundedConstructible_obj_of_forall_singleFunctor
-    (L(((affineSpaceModel k' n).geometric.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
+  exact boundedConstructible_obj_of_forall_lisse
+    (Φ := L(((affineSpaceModel k' n).geometric.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
       R(((affineSpaceModel k' n).geometric.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L(((affineSpaceModel k' n).geometric.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
-    (fun F hF ↦ boundedConstructible_nearbyCycles_affineSpace_singleFunctor n F hF) hB
+    (fun D c _ W E c' _ L hL ↦ by
+      exact boundedConstructible_nearbyCycles_affineSpace_lisse n D c W E c' L hL) hB
 
 /-- **Reduction along a closed embedding**: let `φ : M.geometric ⟶ N.geometric` be a morphism of
 the geometric models of two models of finite type over the trait, whose morphism of total spaces
