@@ -5,49 +5,61 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-!
 
 # The iterated Frobenius operators of a Weil sheaf
 
-Let `e : X ≅ X` be an automorphism. The trace formula for the `(n + 1)`-st Frobenius, `n : ℕ`,
-uses the power `e^{n+1}` of `e` (`CategoryTheory.Iso.powSucc e n`) and, for a Weil sheaf
-`(F, φ_F)` of `ℚ̄_ℓ`-modules for `e`, the `(n + 1)`-fold iterate of its structure isomorphism,
-which makes `F` a Weil sheaf for `e^{n+1}` (`ProEtale.CondensedRing.WeilSheaf.powSucc`):
+Let `e : X ≅ X` be an automorphism. The trace formula for the `n`-th Frobenius, `n : ℕ`, uses the
+power `eⁿ` of `e` (`CategoryTheory.Iso.pow e n`), defined like the power in a monoid by `e⁰ = 𝟙`
+and `e^{n+1} = eⁿ ≫ e`. For a Weil sheaf `(F, φ_F)` of `ℚ̄_ℓ`-modules for `e`, the `n`-fold iterate
+of its structure isomorphism makes `F` a Weil sheaf for `eⁿ`
+(`ProEtale.CondensedRing.WeilSheaf.pow`):
 ```
-φ_F^{(n+2)} : (e^{n+1} ≫ e)^* F ≅ (e^{n+1})^* e^* F --(e^{n+1})^* φ_F--> (e^{n+1})^* F
-  --φ_F^{(n+1)}--> F,
+φ_F^{(0)} : 𝟙^* F ≅ F,
+φ_F^{(n+1)} : (eⁿ ≫ e)^* F ≅ (eⁿ)^* e^* F --(eⁿ)^* φ_F--> (eⁿ)^* F --φ_F^{(n)}--> F,
 ```
-the first isomorphism being the composition isomorphism `ProEtale.CondensedRing.upperStarComp` of
-pullbacks on module objects. The powers are indexed so that `n = 0` gives `e¹ = e`: the identity
-isomorphism `𝟙^* ≅ 𝟭` of the pullback on module objects, which a power `e⁰ = 𝟙` would need, is
-not available, and the trace formula does not use it.
+the first isomorphism being the identity isomorphism `ProEtale.CondensedRing.upperStarId` and the
+second the composition isomorphism `ProEtale.CondensedRing.upperStarComp` of pullbacks on module
+objects.
 
-The stalk at a geometric point `x̄` with `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` of the Weil sheaf
-`(F, φ_F^{(n+1)})` for `e^{n+1}` (`ProEtale.CondensedRing.WeilSheaf.stalkFunctor`) is the stalk
-of `F` with its `(n + 1)`-st Frobenius operator. For `x̄` the geometric point over an
-`𝔽_{q^{n+1}}`-rational point this is the action of the Frobenius of `𝔽_{q^{n+1}}` on the stalk; no
-fixed-point isomorphism for the first iterate is imposed.
+The stalk at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄` of the Weil sheaf `(F, φ_F^{(n)})` for
+`eⁿ` (`ProEtale.CondensedRing.WeilSheaf.stalkFunctor`) is the stalk of `F` with its `n`-th
+Frobenius operator. For `x̄` the geometric point over an `𝔽_{qⁿ}`-rational point this is the
+action of the Frobenius of `𝔽_{qⁿ}` on the stalk.
 
 ## Main definitions
 
-- `CategoryTheory.Iso.powSucc`: the power `e^{n+1}` of an automorphism.
+- `CategoryTheory.Iso.pow`: the power `eⁿ` of an automorphism.
+- `CategoryTheory.Iso.powStr`: the iterated structure isomorphism `(P eⁿ) a ≅ a` for a family of
+  endofunctors `P` contravariant in endomorphisms up to identity and composition isomorphisms.
 - `CategoryTheory.Iso.powSuccStr`: the iterated structure isomorphism `(P e^{n+1}) a ≅ a` for a
-  family of endofunctors `P` contravariant in endomorphisms up to composition isomorphisms.
-- `ProEtale.CondensedRing.WeilSheaf.powSucc`: a Weil sheaf for `e` as a Weil sheaf for `e^{n+1}`,
-  functorially in `ProEtale.CondensedRing.WeilSheaf.powSuccFunctor`.
+  family `P` with composition isomorphisms only, without an identity isomorphism `P 𝟙 ≅ 𝟭`.
+- `ProEtale.CondensedRing.WeilSheaf.pow`: a Weil sheaf for `e` as a Weil sheaf for `eⁿ`,
+  functorially in `ProEtale.CondensedRing.WeilSheaf.powFunctor`.
+
+## Main results
+
+- `CategoryTheory.Iso.powStr_succ_eq_powSuccStr`: for an identity isomorphism compatible with the
+  composition isomorphisms, `Iso.powStr` at `n + 1` is `Iso.powSuccStr` at `n`.
+- `ProEtale.CondensedRing.WeilSheaf.pow_succ`: the Weil sheaf `F^{(n+1)}` is computed with
+  `Iso.powSuccStr`, by the unit law `upperStarComp_id_left` of the pullbacks.
 
 ## Implementation notes
 
-The recursion is carried out in the generic `CategoryTheory.Iso.powSuccStr` and only then
+The recursions are carried out in the generic `CategoryTheory.Iso.powStr` and
+`CategoryTheory.Iso.powSuccStr` and only then
 instantiated with the pullbacks on module objects: done directly on module objects, the kernel
-times out while checking the recursive definition.
+times out while checking the recursive definition. The iterates `e^{n+1}` of the Weil objects
+of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` are computed with `Iso.powSuccStr`, since no identity isomorphism of the derived
+pullback compatible with the other coherences is available there.
 
-The coherence of `φ_F^{(n+1)}` with the iterated structure isomorphism
+The coherence of `φ_F^{(n)}` with the iterated structure isomorphism
 `CategoryTheory.Endofunctor.IsoAlgebra.strIterate`, through the iterated composition isomorphism
-`(e^{n+1})^* ≅ (e^*)^{n+1}`, and the identity relating `φ_F^{(n+m+2)}` to `φ_F^{(n+1)}` and
-`φ_F^{(m+1)}` up to the composition isomorphisms, are not proved here.
+`(eⁿ)^* ≅ (e^*)ⁿ`, and the identity relating `φ_F^{(n+m)}` to `φ_F^{(n)}` and `φ_F^{(m)}` up to
+the composition isomorphisms, are not proved here.
 
 -/
 
@@ -63,68 +75,153 @@ namespace CategoryTheory.Iso
 
 variable {C : Type u} [Category.{v} C] {X : C} (e : X ≅ X)
 
-/-- The power `e.powSucc n = e^{n+1}` of an automorphism, defined recursively by `e¹ = e` and
-`e^{n+2} = e^{n+1} ≫ e`. -/
-def powSucc (e : X ≅ X) : ℕ → (X ≅ X)
-  | 0 => e
-  | n + 1 => powSucc e n ≪≫ e
+/-- The power `e.pow n = eⁿ` of an automorphism, defined recursively by `e⁰ = 𝟙` and
+`e^{n+1} = eⁿ ≫ e`. -/
+def pow (e : X ≅ X) : ℕ → (X ≅ X)
+  | 0 => Iso.refl X
+  | n + 1 => pow e n ≪≫ e
 
 @[simp]
-lemma powSucc_zero : e.powSucc 0 = e :=
+lemma pow_zero : e.pow 0 = Iso.refl X :=
   rfl
 
-lemma powSucc_succ (n : ℕ) : e.powSucc (n + 1) = e.powSucc n ≪≫ e :=
+lemma pow_succ (n : ℕ) : e.pow (n + 1) = e.pow n ≪≫ e :=
   rfl
-
-/-- The powers `e.powSucc n` of an automorphism are the monoid powers `e.hom ^ (n + 1)` in
-`End X`. -/
-lemma powSucc_hom_eq_pow (n : ℕ) : (e.powSucc n).hom = (show End X from e.hom) ^ (n + 1) := by
-  induction n with
-  | zero => simp
-  | succ n ih => rw [Iso.powSucc_succ, Iso.trans_hom, ih, pow_succ' _ (n + 1)]; rfl
 
 @[simp]
-lemma powSucc_refl (n : ℕ) : (Iso.refl X).powSucc n = Iso.refl X := by
+lemma pow_one : e.pow 1 = e :=
+  Iso.refl_trans e
+
+@[simp]
+lemma pow_refl (n : ℕ) : (Iso.refl X).pow n = Iso.refl X := by
   induction n with
   | zero => rfl
-  | succ n ih => rw [powSucc_succ, ih, Iso.refl_trans]
+  | succ n ih => rw [pow_succ, ih, Iso.refl_trans]
 
-/-- A morphism `s` with `e ≫ s = s` satisfies `e^{n+1} ≫ s = s`. -/
-lemma powSucc_hom_comp_of_hom_comp {Y : C} {s : X ⟶ Y} (h : e.hom ≫ s = s) (n : ℕ) :
-    (e.powSucc n).hom ≫ s = s := by
+/-- The powers `e.pow n` of an automorphism are the monoid powers `e.hom ^ n` in `End X`. -/
+lemma pow_hom_eq_pow (n : ℕ) : (e.pow n).hom = (show End X from e.hom) ^ n := by
   induction n with
-  | zero => exact h
-  | succ n ih => rw [powSucc_succ, Iso.trans_hom, Category.assoc, h, ih]
+  | zero => exact (_root_.pow_zero (show End X from e.hom)).symm
+  | succ n ih => rw [pow_succ, Iso.trans_hom, ih, _root_.pow_succ' _ n]; rfl
 
-/-- The iterated structure isomorphism `(P e^{n+1}) a ≅ a` of an object `a` with an isomorphism
+/-- A morphism `s` with `e ≫ s = s` satisfies `eⁿ ≫ s = s`. -/
+lemma pow_hom_comp_of_hom_comp {Y : C} {s : X ⟶ Y} (h : e.hom ≫ s = s) (n : ℕ) :
+    (e.pow n).hom ≫ s = s := by
+  induction n with
+  | zero => exact Category.id_comp s
+  | succ n ih => rw [pow_succ, Iso.trans_hom, Category.assoc, h, ih]
+
+/-- The iterated structure isomorphism `(P eⁿ) a ≅ a` of an object `a` with an isomorphism
 `φ : P e a ≅ a`, for a family of endofunctors `P g` indexed by the endomorphisms `g` of `X`,
-contravariant up to the composition isomorphisms `P (f ≫ g) ≅ P g ⋙ P f`: it is `φ` for `n = 0`,
-and the composite `P (e^{n+1} ≫ e) a ≅ P e^{n+1} (P e a) ≅ P e^{n+1} a ≅ a` of the composition
-isomorphism, `P e^{n+1} φ` and the iterated structure isomorphism for `n`. -/
-noncomputable def powSuccStr {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
-    (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D} (φ : (P e.hom).obj a ≅ a) :
-    ∀ n : ℕ, (P (e.powSucc n).hom).obj a ≅ a
-  | 0 => φ
+contravariant up to an identity isomorphism `P 𝟙 ≅ 𝟭` and the composition isomorphisms
+`P (f ≫ g) ≅ P g ⋙ P f`: it is the identity isomorphism at `a` for `n = 0`, and the composite
+`P (eⁿ ≫ e) a ≅ P eⁿ (P e a) ≅ P eⁿ a ≅ a` of the composition isomorphism, `P eⁿ φ` and the
+iterated structure isomorphism for `n`. -/
+noncomputable def powStr {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (id : P (𝟙 X) ≅ 𝟭 D) (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D}
+    (φ : (P e.hom).obj a ≅ a) : ∀ n : ℕ, (P (e.pow n).hom).obj a ≅ a
+  | 0 => id.app a
   | n + 1 =>
-    (comp (e.powSucc n).hom e.hom).app a ≪≫ (P (e.powSucc n).hom).mapIso φ ≪≫
-      powSuccStr P comp φ n
+    (comp (e.pow n).hom e.hom).app a ≪≫ (P (e.pow n).hom).mapIso φ ≪≫ powStr P id comp φ n
 
 /-- The iterated structure isomorphisms are natural: a morphism `u : a ⟶ b` compatible with
 `φ : P e a ≅ a` and `ψ : P e b ≅ b` is compatible with their iterates. -/
+lemma powStr_hom_naturality {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (id : P (𝟙 X) ≅ 𝟭 D) (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a b : D}
+    {φ : (P e.hom).obj a ≅ a} {ψ : (P e.hom).obj b ≅ b} (u : a ⟶ b)
+    (hu : (P e.hom).map u ≫ ψ.hom = φ.hom ≫ u) (n : ℕ) :
+    (P (e.pow n).hom).map u ≫ (e.powStr P id comp ψ n).hom =
+      (e.powStr P id comp φ n).hom ≫ u := by
+  induction n with
+  | zero => exact id.hom.naturality u
+  | succ n ih =>
+    change (P ((e.pow n).hom ≫ e.hom)).map u ≫ (comp _ _).hom.app b ≫
+        (P (e.pow n).hom).map ψ.hom ≫ (e.powStr P id comp ψ n).hom =
+      ((comp _ _).hom.app a ≫ (P (e.pow n).hom).map φ.hom ≫
+        (e.powStr P id comp φ n).hom) ≫ u
+    rw [(comp _ _).hom.naturality_assoc, Functor.comp_map, ← Functor.map_comp_assoc, hu,
+      Functor.map_comp_assoc, ih, Category.assoc, Category.assoc]
+
+/-- The iterated structure isomorphism `(P e^{n+1}) a ≅ a` of an object `a` with an isomorphism
+`φ : P e a ≅ a`, for a family of endofunctors `P g` indexed by the endomorphisms `g` of `X`,
+contravariant up to the composition isomorphisms `P (f ≫ g) ≅ P g ⋙ P f`: it is `φ`, transported
+along `𝟙 ≫ e = e`, for `n = 0`, and the composite `P (e^{n+1} ≫ e) a ≅ P e^{n+1} (P e a) ≅
+P e^{n+1} a ≅ a` of the composition isomorphism, `P e^{n+1} φ` and the iterated structure
+isomorphism for `n`.
+
+Unlike `Iso.powStr` it needs no identity isomorphism `P 𝟙 ≅ 𝟭`; when one is given, compatible
+with the composition isomorphisms, the two agree (`Iso.powStr_succ_eq_powSuccStr`). -/
+noncomputable def powSuccStr {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D} (φ : (P e.hom).obj a ≅ a) :
+    ∀ n : ℕ, (P (e.pow (n + 1)).hom).obj a ≅ a
+  | 0 => eqToIso (congrArg (fun g ↦ (P g).obj a) (Category.id_comp e.hom)) ≪≫ φ
+  | n + 1 =>
+    (comp (e.pow (n + 1)).hom e.hom).app a ≪≫ (P (e.pow (n + 1)).hom).mapIso φ ≪≫
+      powSuccStr P comp φ n
+
+lemma powSuccStr_zero {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D} (φ : (P e.hom).obj a ≅ a) :
+    e.powSuccStr P comp φ 0 =
+      eqToIso (congrArg (fun g ↦ (P g).obj a) (Category.id_comp e.hom)) ≪≫ φ :=
+  rfl
+
+lemma powSuccStr_succ {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D} (φ : (P e.hom).obj a ≅ a) (n : ℕ) :
+    e.powSuccStr P comp φ (n + 1) =
+      (comp (e.pow (n + 1)).hom e.hom).app a ≪≫ (P (e.pow (n + 1)).hom).mapIso φ ≪≫
+        e.powSuccStr P comp φ n :=
+  rfl
+
+/-- The iterated structure isomorphisms `Iso.powSuccStr` are natural: a morphism `u : a ⟶ b`
+compatible with `φ : P e a ≅ a` and `ψ : P e b ≅ b` is compatible with their iterates. -/
 lemma powSuccStr_hom_naturality {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
     (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a b : D} {φ : (P e.hom).obj a ≅ a}
     {ψ : (P e.hom).obj b ≅ b} (u : a ⟶ b) (hu : (P e.hom).map u ≫ ψ.hom = φ.hom ≫ u) (n : ℕ) :
-    (P (e.powSucc n).hom).map u ≫ (e.powSuccStr P comp ψ n).hom =
+    (P (e.pow (n + 1)).hom).map u ≫ (e.powSuccStr P comp ψ n).hom =
       (e.powSuccStr P comp φ n).hom ≫ u := by
   induction n with
-  | zero => exact hu
+  | zero =>
+    have key : ∀ (g g' : X ⟶ X) (h : g = g'),
+        (P g).map u ≫ eqToHom (congrArg (fun g ↦ (P g).obj b) h) =
+          eqToHom (congrArg (fun g ↦ (P g).obj a) h) ≫ (P g').map u := by
+      rintro g _ rfl
+      simp
+    change (P (𝟙 X ≫ e.hom)).map u ≫
+        eqToHom (congrArg (fun g ↦ (P g).obj b) (Category.id_comp e.hom)) ≫ ψ.hom =
+      (eqToHom (congrArg (fun g ↦ (P g).obj a) (Category.id_comp e.hom)) ≫ φ.hom) ≫ u
+    rw [reassoc_of% key _ _ (Category.id_comp e.hom), hu, Category.assoc]
   | succ n ih =>
-    change (P ((e.powSucc n).hom ≫ e.hom)).map u ≫ (comp _ _).hom.app b ≫
-        (P (e.powSucc n).hom).map ψ.hom ≫ (e.powSuccStr P comp ψ n).hom =
-      ((comp _ _).hom.app a ≫ (P (e.powSucc n).hom).map φ.hom ≫
+    change (P ((e.pow (n + 1)).hom ≫ e.hom)).map u ≫ (comp _ _).hom.app b ≫
+        (P (e.pow (n + 1)).hom).map ψ.hom ≫ (e.powSuccStr P comp ψ n).hom =
+      ((comp _ _).hom.app a ≫ (P (e.pow (n + 1)).hom).map φ.hom ≫
         (e.powSuccStr P comp φ n).hom) ≫ u
     rw [(comp _ _).hom.naturality_assoc, Functor.comp_map, ← Functor.map_comp_assoc, hu,
       Functor.map_comp_assoc, ih, Category.assoc, Category.assoc]
+
+/-- For an identity isomorphism `P 𝟙 ≅ 𝟭` compatible with the composition isomorphism
+`P (𝟙 ≫ e) ≅ P e ⋙ P 𝟙`, the iterated structure isomorphisms `Iso.powStr` for `n + 1` are
+the iterated structure isomorphisms `Iso.powSuccStr` for `n`. -/
+lemma powStr_succ_eq_powSuccStr {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (id : P (𝟙 X) ≅ 𝟭 D) (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D}
+    (φ : (P e.hom).obj a ≅ a)
+    (hid : comp (𝟙 X) e.hom ≪≫ Functor.isoWhiskerLeft (P e.hom) id ≪≫
+      Functor.rightUnitor (P e.hom) = eqToIso (congrArg P (Category.id_comp e.hom))) (n : ℕ) :
+    e.powStr P id comp φ (n + 1) = e.powSuccStr P comp φ n := by
+  induction n with
+  | zero =>
+    have hid : (comp (𝟙 X) e.hom).hom.app a ≫ id.hom.app ((P e.hom).obj a) =
+        eqToHom (congrArg (fun g ↦ (P g).obj a) (Category.id_comp e.hom)) := by
+      simpa using congrArg (fun i ↦ i.hom.app a) hid
+    ext
+    change (comp (𝟙 X) e.hom).hom.app a ≫ (P (𝟙 X)).map φ.hom ≫ id.hom.app a =
+      eqToHom (congrArg (fun g ↦ (P g).obj a) (Category.id_comp e.hom)) ≫ φ.hom
+    rw [← hid, Category.assoc]
+    exact congrArg _ (id.hom.naturality φ.hom)
+  | succ n ih =>
+    change (comp (e.pow (n + 1)).hom e.hom).app a ≪≫ (P (e.pow (n + 1)).hom).mapIso φ ≪≫
+        e.powStr P id comp φ (n + 1) = _
+    rw [ih]
+    rfl
 
 end CategoryTheory.Iso
 
@@ -161,35 +258,73 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] {X : Over (Spec (.of k))} {e : X ≅ X}
 
-/-- A Weil sheaf `(F, φ_F)` for `e` as a Weil sheaf for `e^{n+1}`, with the iterated structure
-isomorphism `φ_F^{(n+1)} : (e^{n+1})^* F ≅ F`: `φ_F^{(1)} = φ_F` and `φ_F^{(n+2)}` is the
-composite `(e^{n+1} ≫ e)^* F ≅ (e^{n+1})^* e^* F ≅ (e^{n+1})^* F ≅ F` of the composition
-isomorphism `upperStarComp`, `(e^{n+1})^* φ_F` and `φ_F^{(n+1)}`. -/
-noncomputable def WeilSheaf.powSucc (F : WeilSheaf ℓ e) (n : ℕ) : WeilSheaf ℓ (e.powSucc n) :=
+/-- A Weil sheaf `(F, φ_F)` for `e` as a Weil sheaf for `eⁿ`, with the iterated structure
+isomorphism `φ_F^{(n)} : (eⁿ)^* F ≅ F`: `φ_F^{(0)}` is the identity isomorphism `upperStarId`
+and `φ_F^{(n+1)}` is the composite `(eⁿ ≫ e)^* F ≅ (eⁿ)^* e^* F ≅ (eⁿ)^* F ≅ F` of the composition
+isomorphism `upperStarComp`, `(eⁿ)^* φ_F` and `φ_F^{(n)}`. -/
+noncomputable def WeilSheaf.pow (F : WeilSheaf ℓ e) (n : ℕ) : WeilSheaf ℓ (e.pow n) :=
   IsoAlgebra.mk F.carrier
-    (e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (e.powStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left)
       (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) F.str n)
 
+@[simp]
+lemma WeilSheaf.pow_carrier (F : WeilSheaf ℓ e) (n : ℕ) :
+    (WeilSheaf.pow ℓ F n).carrier = F.carrier :=
+  IsoAlgebra.mk_carrier _ _
+
 variable (e) in
-/-- A Weil sheaf for `e` as a Weil sheaf for `e^{n+1}` (`WeilSheaf.powSucc`), as a functor: a
-morphism of Weil sheaves for `e` is compatible with the iterated structure isomorphisms. -/
-noncomputable def WeilSheaf.powSuccFunctor (n : ℕ) : WeilSheaf ℓ e ⥤ WeilSheaf ℓ (e.powSucc n) where
-  obj F := WeilSheaf.powSucc ℓ F n
+/-- A Weil sheaf for `e` as a Weil sheaf for `eⁿ` (`WeilSheaf.pow`), as a functor: a morphism of
+Weil sheaves for `e` is compatible with the iterated structure isomorphisms. -/
+noncomputable def WeilSheaf.powFunctor (n : ℕ) : WeilSheaf ℓ e ⥤ WeilSheaf ℓ (e.pow n) where
+  obj F := WeilSheaf.pow ℓ F n
   map {F G} φ := IsoAlgebra.mkHom φ.hom.f
-    (e.powSuccStr_hom_naturality (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (e.powStr_hom_naturality (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left)
       (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) (φ := F.str)
       (ψ := G.str) φ.hom.f φ.hom.h n)
   map_id _ := IsoAlgebra.mkHom_id _
   map_comp _ _ := IsoAlgebra.mkHom_comp _ _ _ _ _
 
 @[simp]
-lemma WeilSheaf.powSuccFunctor_obj (n : ℕ) (F : WeilSheaf ℓ e) :
-    (WeilSheaf.powSuccFunctor ℓ e n).obj F = WeilSheaf.powSucc ℓ F n :=
+lemma WeilSheaf.powFunctor_obj (n : ℕ) (F : WeilSheaf ℓ e) :
+    (WeilSheaf.powFunctor ℓ e n).obj F = WeilSheaf.pow ℓ F n :=
   rfl
 
-@[simp]
-lemma WeilSheaf.powSuccFunctor_obj_carrier (n : ℕ) (F : WeilSheaf ℓ e) :
-    ((WeilSheaf.powSuccFunctor ℓ e n).obj F).carrier = F.carrier := by
-  rw [powSuccFunctor_obj, WeilSheaf.powSucc, IsoAlgebra.mk_carrier]
+/-- The composition isomorphism `(𝟙 ≫ t)^* ≅ t^* ⋙ 𝟙^*` of the pullbacks of module objects,
+followed by the identity isomorphism `𝟙^* ≅ 𝟭`, is the transport along `𝟙 ≫ t = t`. -/
+lemma upperStarComp_id_trans_isoWhiskerLeft_upperStarId {Y Z : Scheme.{u}} (t : Y ⟶ Z) :
+    upperStarComp (Profinite.padicAlgClRingObj ℓ) (𝟙 Y) t ≪≫
+        Functor.isoWhiskerLeft _ (upperStarId (Profinite.padicAlgClRingObj ℓ) Y) ≪≫
+          Functor.rightUnitor _ =
+      upperStarCongr (Profinite.padicAlgClRingObj ℓ) (Category.id_comp t) := by
+  rw [upperStarComp_id_left]
+  ext M
+  simp
+
+variable (e) in
+/-- The `(n + 1)`-st iterated structure isomorphism of a Weil sheaf is `Iso.powSuccStr`, which
+does not involve the identity isomorphism `upperStarId`. -/
+lemma powStr_succ_upperStar_eq_powSuccStr
+    {M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)}
+    (φ : (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M ≅ M) (n : ℕ) :
+    e.powStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left)
+        (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) φ (n + 1) =
+      e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) φ n :=
+  e.powStr_succ_eq_powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left)
+    (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) φ
+    (upperStarComp_id_trans_isoWhiskerLeft_upperStarId ℓ e.hom.left) n
+
+/-- A Weil sheaf as a Weil sheaf for `e^{n+1}` has the iterated structure isomorphism
+`Iso.powSuccStr`. -/
+lemma WeilSheaf.pow_succ (F : WeilSheaf ℓ e) (n : ℕ) :
+    WeilSheaf.pow ℓ F (n + 1) = IsoAlgebra.mk F.carrier
+      (e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+        (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) F.str n) :=
+  congrArg (IsoAlgebra.mk F.carrier) (powStr_succ_upperStar_eq_powSuccStr ℓ e F.str n)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

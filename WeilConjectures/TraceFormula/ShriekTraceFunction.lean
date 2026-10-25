@@ -22,7 +22,7 @@ of `ProEtale.CondensedRing.weilShriekTraceFunction`, for one triple `(f, e_X, e_
 proves the formal reduction steps of its proof:
 
 - the local trace only depends on the Weil object up to isomorphism
-  (`ProEtale.CondensedRing.weilStalkSupertrace_congr`);
+  (`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_congr`);
 - the lower shriek of Weil objects is compatible with composition
   (`ProEtale.CondensedRing.weilLowerShriekCompIso`), through the pasting law of the
   compact-support base change (blueprint `fix-lem-exchanges`, item (2));
@@ -43,12 +43,12 @@ namespace CategoryTheory.Iso
 variable {C : Type*} [Category C] {X Y : C} (e : X ≅ X) (e' : Y ≅ Y)
 
 /-- A morphism intertwining two automorphisms intertwines their powers. -/
-lemma powSucc_hom_comp_eq_comp_powSucc_hom {s : X ⟶ Y} (h : e.hom ≫ s = s ≫ e'.hom) (n : ℕ) :
-    (e.powSucc n).hom ≫ s = s ≫ (e'.powSucc n).hom := by
+lemma pow_hom_comp_eq_comp_pow_hom {s : X ⟶ Y} (h : e.hom ≫ s = s ≫ e'.hom) (n : ℕ) :
+    (e.pow (n + 1)).hom ≫ s = s ≫ (e'.pow (n + 1)).hom := by
   induction n with
-  | zero => exact h
+  | zero => simpa using h
   | succ n ih =>
-    rw [powSucc_succ, powSucc_succ, trans_hom, trans_hom, Category.assoc, h,
+    rw [pow_succ _ (n + 1), pow_succ _ (n + 1), trans_hom, trans_hom, Category.assoc, h,
       ← Category.assoc, ih, Category.assoc]
 
 end CategoryTheory.Iso
@@ -61,15 +61,17 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The local trace only depends on the Weil object up to isomorphism. -/
-lemma weilStalkSupertrace_congr {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+lemma weilStalkTraceAlternatingSum_congr {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] {e : X ≅ X} (n : ℕ)
     (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ (e.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x)
+    (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x)
     {K K' : WeilBoundedConstructible ℓ e.hom} (i : K ≅ K') :
-    weilStalkSupertrace ℓ n x hx K = weilStalkSupertrace ℓ n x hx K' := by
-  rw [weilStalkSupertrace_eq, weilStalkSupertrace_eq]
+    weilStalkTraceAlternatingSum ℓ (n + 1) x hx K =
+      weilStalkTraceAlternatingSum ℓ (n + 1) x hx K' := by
+  rw [weilStalkTraceAlternatingSum, weilStalkTraceAlternatingSum]
   exact finsum_congr fun j ↦ congrArg _
-    (weilSheafStalkTrace_congr ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e j).mapIso i))
+    (weilSheafStalkTrace_congr ℓ (n + 1) x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).mapIso i))
 
 variable {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -81,10 +83,10 @@ variable {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
 `n + 1`, `t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄)`. It is the conclusion of
 `weilShriekTraceFunction` for one triple `(f, e_X, e_Y)`. -/
 def ShriekTraceFunctionAt {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom) : Prop :=
-  ∀ (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) (y : frobeniusFixedPoints eY n),
-    weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
-      ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
-        weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K
+  ∀ (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) (y : frobeniusFixedPoints eY (n + 1)),
+    weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
+      ∑ᶠ x : {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1},
+        weilStalkTraceAlternatingSum ℓ (n + 1) x.1.1 x.1.2.2 K
 
 variable {h : X ⟶ Z} {g : Z ⟶ Y} (hh : eX.hom ≫ h = h ≫ eZ.hom) (hg : eZ.hom ≫ g = g ≫ eY.hom)
 
@@ -123,19 +125,19 @@ noncomputable def weilLowerShriekCompIso (K : WeilBoundedConstructible ℓ eX.ho
       rfl))
 
 /-- A point `x̄` of `X` of degree `n + 1` maps to a point `x̄ ≫ h` of `Z` of degree `n + 1`. -/
-noncomputable def frobeniusFixedPointsMap (n : ℕ) (x : frobeniusFixedPoints eX n) :
-    frobeniusFixedPoints eZ n :=
+noncomputable def frobeniusFixedPointsMap (n : ℕ) (x : frobeniusFixedPoints eX (n + 1)) :
+    frobeniusFixedPoints eZ (n + 1) :=
   ⟨x.1 ≫ h.left, by rw [Category.assoc, Over.w h, x.2.1], by
     rw [Category.assoc, ← Over.comp_left,
-      ← Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eZ hh n, Over.comp_left, ← Category.assoc,
+      ← Iso.pow_hom_comp_eq_comp_pow_hom eX eZ hh n, Over.comp_left, ← Category.assoc,
       x.2.2, Category.assoc]⟩
 
 /-- The points of `X` over a point `ȳ` of `Y` are the points of `X` over the points of `Z` over
 `ȳ`. -/
-noncomputable def frobeniusFixedPointsFiberEquiv (n : ℕ) (y : frobeniusFixedPoints eY n) :
-    {x : frobeniusFixedPoints eX n // x.1 ≫ (h ≫ g).left = y.1} ≃
-      Σ z : {z : frobeniusFixedPoints eZ n // z.1 ≫ g.left = y.1},
-        {x : frobeniusFixedPoints eX n // x.1 ≫ h.left = z.1.1} where
+noncomputable def frobeniusFixedPointsFiberEquiv (n : ℕ) (y : frobeniusFixedPoints eY (n + 1)) :
+    {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ (h ≫ g).left = y.1} ≃
+      Σ z : {z : frobeniusFixedPoints eZ (n + 1) // z.1 ≫ g.left = y.1},
+        {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ h.left = z.1.1} where
   toFun x := ⟨⟨frobeniusFixedPointsMap eX eZ hh n x.1, by
     simpa only [frobeniusFixedPointsMap, Over.comp_left, Category.assoc] using x.2⟩, ⟨x.1, rfl⟩⟩
   invFun p := ⟨p.2.1, by rw [Over.comp_left, ← Category.assoc, p.2.2, p.1.2]⟩
@@ -147,24 +149,26 @@ noncomputable def frobeniusFixedPointsFiberEquiv (n : ℕ) (y : frobeniusFixedPo
 
 /-- **Fibrations**: the sheaf–function compatibility along `h : X ⟶ Z` and along `g : Z ⟶ Y`
 gives it along `h ≫ g`, for automorphisms `e_X`, `e_Z` of finite order. -/
-theorem shriekTraceFunctionAt_comp (heX : ∃ m : ℕ, eX.powSucc m = Iso.refl X)
-    (heZ : ∃ m : ℕ, eZ.powSucc m = Iso.refl Z) (H₁ : ShriekTraceFunctionAt ℓ eX eZ hh)
+theorem shriekTraceFunctionAt_comp (heX : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X)
+    (heZ : ∃ m : ℕ, eZ.pow (m + 1) = Iso.refl Z) (H₁ : ShriekTraceFunctionAt ℓ eX eZ hh)
     (H₂ : ShriekTraceFunctionAt ℓ eZ eY hg) :
     ShriekTraceFunctionAt ℓ eX eY (comp_comm_of_comp_comm eX eY eZ hh hg) := by
   intro K n y
-  have h1 := weilStalkSupertrace_congr ℓ n y.1 y.2.2 (weilLowerShriekCompIso ℓ eX eY eZ hh hg K)
+  have h1 := weilStalkTraceAlternatingSum_congr ℓ n y.1 y.2.2 (weilLowerShriekCompIso ℓ eX eY eZ hh
+      hg K)
   have h2 := H₂ ((weilLowerShriek ℓ eX eZ hh).obj K) n y
   refine h1.trans (h2.trans ?_)
-  refine (finsum_congr fun z : {z : frobeniusFixedPoints eZ n // z.1 ≫ g.left = y.1} ↦
+  refine (finsum_congr fun z : {z : frobeniusFixedPoints eZ (n + 1) // z.1 ≫ g.left = y.1} ↦
     H₁ K n z.1).trans ?_
   classical
-  have := finite_frobeniusFixedPoints_of_powSucc_eq_refl eX heX n
-  have := finite_frobeniusFixedPoints_of_powSucc_eq_refl eZ heZ n
-  let := Fintype.ofFinite (frobeniusFixedPoints eX n)
-  let := Fintype.ofFinite (frobeniusFixedPoints eZ n)
+  have := finite_frobeniusFixedPoints_of_pow_eq_refl eX heX n
+  have := finite_frobeniusFixedPoints_of_pow_eq_refl eZ heZ n
+  let := Fintype.ofFinite (frobeniusFixedPoints eX (n + 1))
+  let := Fintype.ofFinite (frobeniusFixedPoints eZ (n + 1))
   simp only [finsum_eq_sum_of_fintype]
   symm
   rw [← Fintype.sum_equiv (frobeniusFixedPointsFiberEquiv eX eY eZ hh n y).symm
-    (fun p ↦ weilStalkSupertrace ℓ n p.2.1.1 p.2.1.2.2 K) _ fun _ ↦ rfl, Fintype.sum_sigma]
+    (fun p ↦ weilStalkTraceAlternatingSum ℓ (n + 1) p.2.1.1 p.2.1.2.2 K) _ fun _ ↦ rfl,
+        Fintype.sum_sigma]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

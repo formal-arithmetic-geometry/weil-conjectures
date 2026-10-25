@@ -28,7 +28,7 @@ The base-change morphism of module objects is defined in
 
 ## Main results
 
-- `ProEtale.CondensedRing.nonempty_powSucc_weilSheafLowerStar_iso`: the pushforward commutes with
+- `ProEtale.CondensedRing.nonempty_pow_weilSheafLowerStar_iso`: the pushforward commutes with
   the iterated Weil structures, `(f_* F)^{(n+1)} ≅ f_* F^{(n+1)}` as Weil sheaves for `e_Y^{n+1}`.
 
 -/
@@ -94,11 +94,11 @@ lemma weilSheafLowerStar_eq :
 `e_X`, the Weil sheaf `(f_* F)^{(n+1)}` for `e_Y^{n+1}` is the pushforward of the Weil sheaf
 `F^{(n+1)}` for `e_X^{n+1}`: the iterated structure isomorphisms agree by the pasting law of the
 base-change morphisms (`CategoryTheory.Iso.powSuccStr_pushforwardBaseChange`). -/
-theorem nonempty_powSucc_weilSheafLowerStar_iso (F : WeilSheaf ℓ eX) (n : ℕ) :
-    Nonempty (WeilSheaf.powSucc ℓ ((weilSheafLowerStar ℓ eX eY hf).obj F) n ≅
-      (weilSheafLowerStar ℓ (eX.powSucc n) (eY.powSucc n)
-        (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)).obj
-        (WeilSheaf.powSucc ℓ F n)) := by
+theorem nonempty_pow_weilSheafLowerStar_iso (F : WeilSheaf ℓ eX) (n : ℕ) :
+    Nonempty (WeilSheaf.pow ℓ ((weilSheafLowerStar ℓ eX eY hf).obj F) (n + 1) ≅
+      (weilSheafLowerStar ℓ (eX.pow (n + 1)) (eY.pow (n + 1))
+        (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)).obj
+        (WeilSheaf.pow ℓ F (n + 1))) := by
   have H := Endofunctor.IsoAlgebra.nonempty_overPowSucc_mapOfNatIso_iso_of_eq
     (P := upperStar (Profinite.padicAlgClRingObj ℓ))
     (c := fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
@@ -107,15 +107,18 @@ theorem nonempty_powSucc_weilSheafLowerStar_iso (F : WeilSheaf ℓ eX) (n : ℕ)
     (fun {X Y : Scheme.{u}} (f : X ⟶ Y) ↦ upperStarLowerStarAdjunction _ f)
     (fun f g h ↦ upperStarComp_assoc _ f g h) eX eY f hf n
     (weilSheafLowerStarComparison ℓ eX eY hf) rfl
-    (weilSheafLowerStarComparison ℓ (eX.powSucc n) (eY.powSucc n)
-      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)) rfl
-    (WeilSheaf ℓ eX) (WeilSheaf ℓ eY) (WeilSheaf ℓ (eX.powSucc n)) (WeilSheaf ℓ (eY.powSucc n)) F
+    (weilSheafLowerStarComparison ℓ (eX.pow (n + 1)) (eY.pow (n + 1))
+      (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)) rfl
+    (WeilSheaf ℓ eX) (WeilSheaf ℓ eY) (WeilSheaf ℓ (eX.pow (n + 1)))
+    (WeilSheaf ℓ (eY.pow (n + 1))) F
     (weilSheafLowerStar ℓ eX eY hf)
-    (weilSheafLowerStar ℓ (eX.powSucc n) (eY.powSucc n)
-      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n))
-    (WeilSheaf.powSuccFunctor ℓ eX n) (WeilSheaf.powSuccFunctor ℓ eY n) rfl rfl rfl rfl HEq.rfl
-    HEq.rfl HEq.rfl HEq.rfl
-  rw [WeilSheaf.powSuccFunctor_obj, WeilSheaf.powSuccFunctor_obj] at H
-  exact H
+    (weilSheafLowerStar ℓ (eX.pow (n + 1)) (eY.pow (n + 1))
+      (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n))
+    _ _ rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+  obtain ⟨i⟩ := H
+  exact ⟨eqToIso (WeilSheaf.pow_succ ℓ _ n) ≪≫ i ≪≫
+    (weilSheafLowerStar ℓ (eX.pow (n + 1)) (eY.pow (n + 1))
+      (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)).mapIso
+        (eqToIso (WeilSheaf.pow_succ ℓ F n)).symm⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

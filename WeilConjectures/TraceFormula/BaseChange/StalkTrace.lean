@@ -32,7 +32,7 @@ trivialization of the Frobenius pullback (`IsGaloisCompatibleFrobeniusIsoAt`).
 
 ## Main results
 
-- `ProEtale.CondensedRing.categoricalTrace_stalkFunctor_homologyFunctor_eq`:
+- `ProEtale.CondensedRing.traceOrZero_stalkFunctor_homologyFunctor_eq`:
   `Tr(Fr_x̄ | Hʲ(L)_x̄) = Tr(Hʲ(F_x̄') | Hʲ((Lπ^* L)_x̄'))`.
 
 -/
@@ -260,12 +260,12 @@ lemma weilStalkComparison_hom_app' (M) :
         (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app M)
         (upperStarEqToIso_hom_app _ hx.symm M)))
 
-/-- `categoricalTrace_stalkFunctor_homologyFunctor_eq` for an abstract trivialization `τ` of the
+/-- `traceOrZero_stalkFunctor_homologyFunctor_eq` for an abstract trivialization `τ` of the
 Galois pullback compatible with the trivialization of the Frobenius pullback. -/
-lemma categoricalTrace_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ e.hom) (j : ℤ)
+lemma traceOrZero_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ e.hom) (j : ℤ)
     (τ : (σ.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
     (hτ : IsGaloisCompatibleFrobeniusIsoAt ℓ X N (upperStarFrobeniusIso ℓ X N) σ hσ x τ) :
-    categoricalTrace (τ.inv.app ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj
+    traceOrZero (τ.inv.app ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj
           ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier) ≫
         (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app
           ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier ≫
@@ -276,7 +276,7 @@ lemma categoricalTrace_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ 
           ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).carrier ≫
         (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
           ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L).str.hom) =
-      categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
+      traceOrZero ((DerivedCategory.homologyFunctor _ j).map
         ((weilStalk ℓ (baseChangeModelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
           ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
@@ -321,10 +321,10 @@ lemma categoricalTrace_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ 
     (weilStalk_weilGeometricBaseChange_frobenius_hom ℓ (geometricBaseChangePoint x hxk)
       ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx) L)).trans
     (modelStalkFrobenius_hom ℓ (geometricBaseChangePoint x hxk) hx' L.carrier L.str.hom)
-  refine (categoricalTrace_conj (eqToIso (congrArg ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+  refine (traceOrZero_conj (eqToIso (congrArg ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
     hc)) _).symm.trans ?_
-  refine (congrArg categoricalTrace (hT.trans hconj)).trans ((categoricalTrace_conj _ _).trans ?_)
-  have hG := congrArg categoricalTrace (congrArg (DerivedCategory.homologyFunctor _ j).map hF)
+  refine (congrArg traceOrZero (hT.trans hconj)).trans ((traceOrZero_conj _ _).trans ?_)
+  have hG := congrArg traceOrZero (congrArg (DerivedCategory.homologyFunctor _ j).map hF)
   exact hG.symm
 
 /-- **The comparison of the local traces of a Weil object and of its base change.** Let
@@ -338,32 +338,32 @@ Frobenius at `x̄'` of the base change `Lπ^* L` for the model Frobenius:
 Tr(Fr_{x̄} | Hʲ(L)_x̄) = Tr(Hʲ(F_{x̄'}) | Hʲ((Lπ^* L)_x̄')).
 ```
 -/
-theorem categoricalTrace_stalkFunctor_homologyFunctor_eq (L : WeilBoundedConstructible ℓ e.hom)
+theorem traceOrZero_stalkFunctor_homologyFunctor_eq (L : WeilBoundedConstructible ℓ e.hom)
     (j : ℤ) :
-    categoricalTrace (((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj
+    traceOrZero (((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj
         ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L)).str.hom) =
-      categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
+      traceOrZero ((DerivedCategory.homologyFunctor _ j).map
         ((weilStalk ℓ (baseChangeModelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
           ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
-  exact (congrArg categoricalTrace (stalkFunctor_obj_str_hom ℓ e σ x hx _)).trans
-    (categoricalTrace_galoisFrobenius_eq_aux (ℓ := ℓ) (hσ := hσ) (hxk := hxk) (hx := hx) (L := L)
+  exact (congrArg traceOrZero (stalkFunctor_obj_str_hom ℓ e σ x hx _)).trans
+    (traceOrZero_galoisFrobenius_eq_aux (ℓ := ℓ) (hσ := hσ) (hxk := hxk) (hx := hx) (L := L)
       (j := j) (τ := upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
       (hτ := isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso ℓ X N Ω σ hσ x))
 
-/-- `categoricalTrace_stalkFunctor_homologyFunctor_eq` for the stalk functor along a morphism
+/-- `traceOrZero_stalkFunctor_homologyFunctor_eq` for the stalk functor along a morphism
 `σ'` equal to `σ.hom` (for instance with a different presentation of `Spec Ω`). -/
-theorem categoricalTrace_stalkFunctor_homologyFunctor_eq_of_hom_eq
+theorem traceOrZero_stalkFunctor_homologyFunctor_eq_of_hom_eq
     (σ' : Spec (.of Ω) ⟶ Spec (.of Ω)) (hσ' : σ.hom = σ') (hx' : x ≫ e.hom.left = σ' ≫ x)
     (L : WeilBoundedConstructible ℓ e.hom) (j : ℤ) :
-    categoricalTrace (((WeilSheaf.stalkFunctor ℓ e σ' x hx').obj
+    traceOrZero (((WeilSheaf.stalkFunctor ℓ e σ' x hx').obj
         ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj L)).str.hom) =
-      categoricalTrace ((DerivedCategory.homologyFunctor _ j).map
+      traceOrZero ((DerivedCategory.homologyFunctor _ j).map
         ((weilStalk ℓ (baseChangeModelFrobenius Ω X N e.hom) (geometricBaseChangePoint x hxk)
           ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff x hxk N e.hom σ hσ).2 hx)).obj
           ((weilGeometricBaseChange Ω ℓ X N e.hom).obj L)).frobenius.hom.hom) := by
   subst hσ'
-  exact categoricalTrace_stalkFunctor_homologyFunctor_eq ℓ N e σ hσ x hxk hx L j
+  exact traceOrZero_stalkFunctor_homologyFunctor_eq ℓ N e σ hσ x hxk hx L j
 
 end Comparison
 
