@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
+public import WeilConjectures.SixFunctors.BaseChange.EtaleDerivedUnbounded
 public import WeilConjectures.TraceFormula.TransverseBoundary.Basic
 
 /-!
@@ -98,19 +98,9 @@ noncomputable def leftDerivedUpperStarBoundaryComplexIso
       (R((C.jW)_*[ModuleCat.{u + 1} Λ])).obj E := by
   let K := ((C.i)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E
   have : K.IsGE a := ((C.i)_!open[ModuleCat.{u + 1} Λ]).isGE_mapDerivedCategory_obj E a
-  let Kp : DerivedCategory.Plus (Sheaf C.U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-    ⟨K, ⟨a, inferInstance⟩⟩
-  have := Etale.isIso_derivedBaseChangeMapPlus_of_etale Λ C.isPullback_i_jW
-  exact (Etale.leftDerivedUpperStarIsoMapDerivedCategory _ C.W.ι).app _ ≪≫
-    ((C.W.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.mapIso
-      ((((C.j)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility.app Kp).symm) ≪≫
-    (((C.W.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusCompatibility.app _).symm ≪≫
-    DerivedCategory.Plus.ι.mapIso
-      (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ)
-        C.isPullback_i_jW.toCommSq).app Kp)) ≪≫
-    ((C.jW)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility.app _ ≪≫
+  exact Etale.leftDerivedUpperStarRightDerivedLowerStarIsoOfEtale Λ C.isPullback_i_jW K a ≪≫
     (R((C.jW)_*[ModuleCat.{u + 1} Λ])).mapIso
-      (((C.i)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusCompatibility.app Kp ≪≫
+      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory _ C.i).app K ≪≫
         (asIso ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction _ C.i).unit.app
           E)).symm)
 
