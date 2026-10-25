@@ -13099,6 +13099,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Stalk

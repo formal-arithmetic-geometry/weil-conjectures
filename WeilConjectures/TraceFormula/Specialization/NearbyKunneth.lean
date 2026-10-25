@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.TraceFormula.Specialization.TraitModel
+public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 
 /-!
 
@@ -55,48 +55,11 @@ namespace NearbyCyclesModel
 
 variable {k' : Type u} [Field k']
 
-section TraitModel
-
-variable {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
-
-/-- A nearby-cycles model of `X` with special fibre `X'` is *of finite type over the trait*
-`S = Spec k'⟦t⟧` *along* `q : 𝒳 ⟶ S` and `g : 𝒳_η̄ ⟶ Spec Ω` if `q` is separated, quasi-compact
-and locally of finite type, `j` is the base change of `q` along the geometric generic point
-(with projection `g`) and `i` is the base change of `q` along the closed point. -/
-structure IsTraitModelOver (M : NearbyCyclesModel X X'.left) (q : M.total ⟶ trait k')
-    (g : M.generic ⟶ Spec (.of (traitGenericField k'))) : Prop where
-  locallyOfFiniteType : LocallyOfFiniteType q
-  quasiCompact : QuasiCompact q
-  isSeparated : IsSeparated q
-  isPullback_j : IsPullback M.j g q (traitGenericPoint k')
-  isPullback_i : IsPullback M.i X'.hom q (traitClosedPoint k')
-
-lemma IsTraitModelOver.isTraitModel {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (h : M.IsTraitModelOver q g) :
-    M.IsTraitModel :=
-  ⟨⟨q, g, h.locallyOfFiniteType, h.quasiCompact, h.isSeparated, h.isPullback_j, h.isPullback_i⟩⟩
-
-end TraitModel
-
 section Product
 
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {N : NearbyCyclesModel Y Y'.left} {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X}
   {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y} {f₂' : Z'.left ⟶ Y'.left}
-
-/-- Morphisms of models `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N` exhibit `P` as the *product over the trait*
-of the models `M` and `N` of finite type over `S = Spec k'⟦t⟧`: the total space of `P` is the
-fibre product `𝒳 ×_S 𝒴` of the total spaces (with the projections `φ₁.total`, `φ₂.total`), `P` is
-a model of finite type over the trait along the induced structure morphism, and the
-identifications `ε` of `M` and `N` factor through their total spaces. -/
-structure IsTraitProduct (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂') : Prop where
-  exists_isTraitModelOver : ∃ (qM : M.total ⟶ trait k')
-      (gM : M.generic ⟶ Spec (.of (traitGenericField k'))) (qN : N.total ⟶ trait k')
-      (gN : N.generic ⟶ Spec (.of (traitGenericField k'))),
-    M.IsTraitModelOver qM gM ∧ N.IsTraitModelOver qN gN ∧ IsPullback φ₁.total φ₂.total qM qN ∧
-      P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM)
-  exists_comp_ε_left : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε
-  exists_comp_ε_right : ∃ e : N.total ⟶ Y, N.j ≫ e = N.ε
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)]
 
