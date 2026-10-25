@@ -6002,6 +6002,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineInfinityMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineIrreducible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineOver
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTower
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
@@ -12680,6 +12681,7 @@ public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
 public import WeilConjectures.TraceFormula.CoefficientMorphism
 public import WeilConjectures.TraceFormula.CoefficientMorphismAdditivity
 public import WeilConjectures.TraceFormula.CoefficientMorphismBasic
+public import WeilConjectures.TraceFormula.CoefficientMorphismCurve
 public import WeilConjectures.TraceFormula.CoefficientMorphismFixedPoints
 public import WeilConjectures.TraceFormula.CoefficientMorphismPieces
 public import WeilConjectures.TraceFormula.CoefficientMorphismProper
@@ -12703,6 +12705,7 @@ public import WeilConjectures.TraceFormula.FixedPointAlgebra
 public import WeilConjectures.TraceFormula.FixedPointComponent
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.FrobeniusCurveLocalTerm
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
@@ -12721,6 +12724,7 @@ public import WeilConjectures.TraceFormula.LocalTermLocality
 public import WeilConjectures.TraceFormula.LocalizationFrobenius
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.ModelExtension
+public import WeilConjectures.TraceFormula.ModelLineTower
 public import WeilConjectures.TraceFormula.ModelOpenClosed
 public import WeilConjectures.TraceFormula.ModelProjectiveImmersion
 public import WeilConjectures.TraceFormula.OpenCover
