@@ -115,16 +115,12 @@ lemma upperStarLowerStarAdjunction_homEquiv_upperStarFromPointModComp_hom_app_ho
   rw [upperStarLowerStarAdjunction_homEquiv_hom,
     extendUnitHom_comp_upperStarFromPointModComp_hom_app_hom]
 
-omit [IsCommMonObj Λ] in
 /-- On underlying sheaves, the inverse of the identity isomorphism of the pushforward of module
 objects is that of the pushforward of sheaves. -/
 lemma lowerStarId_inv_app_hom (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    ((lowerStarId Λ X).inv.app M).hom = (ProEtale.lowerStarId Ab.{u + 1} X).inv.app M.X := by
-  have h := congrArg Mod.Hom.hom ((lowerStarId Λ X).inv_hom_id_app M)
-  rw [Mod.comp_hom', lowerStarId_hom_app_hom] at h
-  rw [← cancel_mono ((ProEtale.lowerStarId Ab.{u + 1} X).hom.app _), Iso.inv_hom_id_app]
-  exact h
+    ((lowerStarId Λ X).inv.app M).hom = (ProEtale.lowerStarId Ab.{u + 1} X).inv.app M.X :=
+  rfl
 
 /-- **The comparison `p_X^* ⋙ (𝟙 X)^* ≅ p_X^*` is the identity isomorphism** of the pullback
 along `𝟙 X`, on modules pulled back from the point. -/

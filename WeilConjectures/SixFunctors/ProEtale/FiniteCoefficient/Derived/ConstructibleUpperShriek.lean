@@ -358,7 +358,7 @@ lemma rightDerivedUpperShriekHomEquiv_symm_apply
 
 /-- The counit is the image of the identity under the exceptional adjunction. -/
 lemma rightDerivedUpperShriekHomEquiv_symm_id
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
     (rightDerivedUpperShriekHomEquiv f (plusEtaleOrigin_rightDerivedUpperShriek_obj f hL) hL).symm
         (𝟙 _) = rightDerivedUpperShriekCounit f L hL := by
@@ -389,12 +389,14 @@ lemma rightDerivedUpperShriekHomEquiv_naturality_right_symm
 
 /-- Naturality of the exceptional adjunction in the source, forward direction. -/
 lemma rightDerivedUpperShriekHomEquiv_naturality_left
-    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K) (hK' : DerivedCategory.plusEtaleOrigin A X K')
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) (hK' :
+        DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) (φ : K ⟶ K')
-    (g : (ProEtale.rightDerivedLowerShriek A f).obj K' ⟶ L) :
-    rightDerivedUpperShriekHomEquiv f hK hL ((ProEtale.rightDerivedLowerShriek A f).map φ ≫ g) =
+    (g : (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K' ⟶ L) :
+    rightDerivedUpperShriekHomEquiv f hK hL ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ)
+        f).map φ ≫ g) =
       φ ≫ rightDerivedUpperShriekHomEquiv f hK' hL g := by
   rw [← Equiv.eq_symm_apply, rightDerivedUpperShriekHomEquiv_naturality_left_symm f hK hK',
     Equiv.symm_apply_apply]

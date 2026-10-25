@@ -87,11 +87,11 @@ faithful inclusion of `leftDerivedUpperStarTensorIso`, through the compatibility
 the restricted pullback (`boundedConstructibleUpperStarCompatibility`) and tensor product with
 the inclusions. -/
 noncomputable def weilTensorComparison :
-    Functor.uncurry.obj (boundedConstructibleTensor X) ⋙
+    Functor.uncurry.obj (boundedConstructibleTensor ℓ X) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ ≅
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).prod
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ) ⋙
-        Functor.uncurry.obj (boundedConstructibleTensor X) :=
+        Functor.uncurry.obj (boundedConstructibleTensor ℓ X) :=
   NatIso.ofComponents
     (fun KL ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
       ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -112,14 +112,14 @@ for `Φ` is sent to `K ⊗ᴸ L` with the structure isomorphism
 noncomputable def weilTensor :
     WeilBoundedConstructible ℓ Φ ⥤ WeilBoundedConstructible ℓ Φ ⥤
       WeilBoundedConstructible ℓ Φ :=
-  IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor X)
+  IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor ℓ X)
     (weilTensorComparison ℓ Φ)
 
 /-- The underlying complex of the image under `weilTensor` (`ℚ̄_ℓ`-coefficient). -/
 @[simp]
 lemma weilTensor_obj_obj_carrier (K L : WeilBoundedConstructible ℓ Φ) :
     (((weilTensor ℓ Φ).obj K).obj L).carrier =
-      ((boundedConstructibleTensor X).obj K.carrier).obj
+      ((boundedConstructibleTensor ℓ X).obj K.carrier).obj
         L.carrier :=
   rfl
 
