@@ -117,10 +117,8 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral
     infer_instance)
 
 /-- Blueprint `sk-lem-sbc-exchange-compatibility` (section `sec-smooth-base-change`), its last
-assertion for the residue map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring of `sk-prop-scalar-six`,
-followed by the restriction of scalars to `ℤ/ℓ` (which commutes with the inverse and direct
-images, Stacks, Tag 0D6J): for a cartesian square of schemes separated and of
-finite type over `k`
+assertion for the residue map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring of `sk-prop-scalar-six`: for a
+cartesian square of schemes separated and of finite type over `k`
 
 ```
 X' --g'--> X
@@ -132,7 +130,7 @@ Y' --g---> Y
 
 and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar comparisons identify the first derived reduction
 `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` of the integral base-change morphism with the pro-étale base-change
-morphism `g^* Rf_* ⟶ Rf'_* g'^*` with finite coefficients `ℤ/ℓ` at the first derived reduction of
+morphism `g^* Rf_* ⟶ Rf'_* g'^*` with finite coefficients `𝔽_E` at the first derived reduction of
 `K₀` (`ProEtale.derivedReduction`). Here we only record that the two morphisms are isomorphic as
 arrows. -/
 theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
@@ -141,13 +139,14 @@ theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
     Nonempty (Arrow.mk ((derivedReduction Y'.left ℓ E).map ((boundedConstructible _).ι.map
         ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app
           K₀))) ≅
-      Arrow.mk ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))
-        hsq.toCommSq).app ((derivedReduction X.left ℓ E).obj K₀.obj))) :=
+      Arrow.mk ((ProEtale.derivedBaseChangeMap
+        (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) hsq.toCommSq).app
+        ((derivedReduction X.left ℓ E).obj K₀.obj))) :=
   sorry
 
 /-- The invertibility of an integral base-change morphism reduces to finite coefficients: for a
 cartesian square with noetherian `Y'` and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, if the pro-étale base-change
-morphism with coefficients `ℤ/ℓ` is invertible at the first derived reduction of `K₀`, then
+morphism with coefficients `𝔽_E` is invertible at the first derived reduction of `K₀`, then
 `BC_sq(K₀)` is invertible. The scalar comparisons identify the first derived reduction of
 `BC_sq(K₀)` with the former
 (`nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange`), and a morphism of bounded
@@ -156,8 +155,9 @@ Nakayama, `ProEtale.isIso_of_isIso_derivedReduction_map`). -/
 theorem isIso_boundedConstructibleBaseChange_integral_app_of_reduction [IsNoetherian Y'.left]
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
-    (h : IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))
-      hsq.toCommSq).app ((derivedReduction X.left ℓ E).obj K₀.obj))) :
+    (h : IsIso ((ProEtale.derivedBaseChangeMap
+      (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) hsq.toCommSq).app
+        ((derivedReduction X.left ℓ E).obj K₀.obj))) :
     IsIso ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app
       K₀) := by
   apply isIso_of_isIso_derivedReduction_map Y'.left ℓ E

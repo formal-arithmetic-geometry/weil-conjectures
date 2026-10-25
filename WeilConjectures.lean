@@ -8121,6 +8121,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndSurjective
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularProjective
+public import WeilConjectures.CategoryTheory.ModuleObjects.SectionAction
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
@@ -8364,6 +8365,7 @@ public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.LocallyBijectiveFiniteLimit
 public import WeilConjectures.CategoryTheory.Sites.LocallyExact
 public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
+public import WeilConjectures.CategoryTheory.Sites.ModuleLift
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.MonoidalUnitSections
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
@@ -8431,7 +8433,6 @@ public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleExactProducts
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleMittagLeffler
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleProducts
-public import WeilConjectures.CategoryTheory.Sites.ZModModuleLift
 public import WeilConjectures.CategoryTheory.Sites.ZariskiTorsorFreeExtension
 public import WeilConjectures.CategoryTheory.Sites.ZariskiTorsorRepresentativeExists
 public import WeilConjectures.CategoryTheory.SmallCechFreeComparison
@@ -12652,6 +12653,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColim
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleNakayama
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCoefficientSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
