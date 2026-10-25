@@ -12923,6 +12923,7 @@ public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
+public import WeilConjectures.TraceFormula.GenericBaseChange
 public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.HomologyUnit

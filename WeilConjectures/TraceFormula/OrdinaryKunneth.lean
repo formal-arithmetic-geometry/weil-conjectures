@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.TraceFormula.GenericBaseChange
 
 /-!
 
@@ -122,34 +123,6 @@ theorem isIso_openKunnethMap (j : U ⟶ Y) [IsOpenImmersion j.left]
     IsIso (openKunnethMap ℓ j M B) :=
   sorry
 
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType U.hom]
-  [QuasiCompact U.hom] [IsSeparated U.hom] in
-/-- The commutative square
-```
-X ⨯ U ──(𝟙 × f)──▶ X ⨯ Y
-  │ p_U               │ p_Y
-  ▼                   ▼
-  U ────── f ───────▶ Y
-```
-of the second projections, the base change of `f` along `X ⨯ Y ⟶ Y`. -/
-lemma commSq_prodMap_snd (f : U ⟶ Y) :
-    CommSq (prod.snd : X ⨯ U ⟶ U) (prod.map (𝟙 X) f) f prod.snd :=
-  ⟨(prod.map_snd _ _).symm⟩
-
-/-- **Generic base change over the field `k`**: for any morphism `f : U ⟶ Y` of separated
-`k`-schemes of finite type and any `X`, the base change morphism
-`Lp_Y^* Rf_* ⟶ R(𝟙 × f)_* Lp_U^*` of the square `commSq_prodMap_snd`, i.e. of the base change
-of `f` along `X ⨯ Y ⟶ Y`, is an isomorphism on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`. This is Deligne's generic base
-change theorem (SGA 4½, [Th. finitude], Théorème 1.9) over the base `Spec k`, where the generic
-point is the only point, applied to the base change along `X ⟶ Spec k`; for
-`ℚ̄_ℓ`-coefficients it follows by passage to the limit (Bhatt–Scholze, Section 6.8). The
-blueprint states it for finite coefficients (`sk-lem-tf-independent-base-change`). -/
-theorem isIso_boundedConstructibleBaseChange_prodMap (f : U ⟶ Y) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
-      (commSq_prodMap_snd (X := X) f)) :=
-  sorry
 
 /-- `prodMapUpperStarSndIso` is the pullback comparison of the square `commSq_prodMap_snd`. -/
 lemma prodMapUpperStarSndIso_eq_pullbackSquareComparison (j : U ⟶ Y) :
