@@ -124,8 +124,9 @@ noncomputable def specializationProd :
       (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k'))
 
 private lemma isIso_homMk_aux {C : Type*} [Category* C] {P : ObjectProperty C}
-    {A B : P.FullSubcategory} (f : A.obj ⟶ B.obj) [IsIso f] : IsIso (P.homMk f) :=
-  ⟨P.homMk (inv f), P.hom_ext (IsIso.hom_inv_id f), P.hom_ext (IsIso.inv_hom_id f)⟩
+    {A B : P.FullSubcategory} (f : A.obj ⟶ B.obj) [hf : IsIso f] : IsIso (P.homMk f) :=
+  haveI : IsIso (P.ι.map (P.homMk f)) := hf
+  isIso_of_fully_faithful P.ι _
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k).Prime] in
 /-- The product of two deformation models is their product over the trait, with the projections
@@ -178,7 +179,9 @@ specialization to the normal cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here
 `Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric
 generic point; the duality on the geometric generic fibre `X_Ω` is relative to `Ω`, and
 `Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
-fields. -/
+fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
+asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
+isomorphism. -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅

@@ -195,9 +195,36 @@ lemma kunnethMap_comp_pushforwardExchange (φ₁ : P.Hom M f₁ f₁') (φ₂ : 
       kunnethMap Λ φ₁' φ₂' (R((g)_*⟦Λ⟧).obj A) (R((h)_*⟦Λ⟧).obj B) ≫
         (P₁.nearbyCycles Λ).map (lowerStarKunnethMap' Λ ⟨hb₁⟩ ⟨hb₂⟩ A B) ≫
         (ψP.pushforwardExchange Λ).app _ := by
-  -- The proof is `kunnethMap_comp_pushforwardExchange_aux` instantiated with the adjunctions,
-  -- exchanges and comparisons above; the instantiation currently times out at `whnf`.
-  sorry
+  have hμ : ∀ {U U' V V' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))} (x : U ⟶ U') (y : V ⟶ V'),
+      ((P.nearbyCycles Λ).map x ⊗ₘ (P.nearbyCycles Λ).map y) ≫ P.tensorMap Λ U' V' =
+        P.tensorMap Λ U V ≫ (P.nearbyCycles Λ).map (x ⊗ₘ y) :=
+    fun x y ↦ P.tensorMap_natural Λ x y
+  have h := kunnethMap_comp_pushforwardExchange_aux (derivedUpperStarLowerStarAdjunction Λ g)
+    (derivedUpperStarLowerStarAdjunction Λ h) (derivedUpperStarLowerStarAdjunction Λ k)
+    (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ h')
+    (derivedUpperStarLowerStarAdjunction Λ k') (P.tensorMap Λ) (P₁.tensorMap Λ) hμ
+    (φ₁.pullbackExchange Λ) (φ₂.pullbackExchange Λ) (φ₁'.pullbackExchange Λ)
+    (φ₂'.pullbackExchange Λ) (ψM.pullbackExchange Λ) (ψN.pullbackExchange Λ)
+    (ψP.pullbackExchange Λ) (ψM.pushforwardExchange Λ) (ψN.pushforwardExchange Λ)
+    (ψP.pushforwardExchange Λ) (ψM.map_pushforwardExchange_app_comp_counit_app Λ)
+    (ψN.map_pushforwardExchange_app_comp_counit_app Λ)
+    (ψP.map_pushforwardExchange_app_comp_counit_app Λ)
+    (pullbackSquareComparison Λ ⟨hb₁⟩).hom (pullbackSquareComparison Λ ⟨hb₂⟩).hom
+    (pullbackSquareComparison Λ ⟨hs₁⟩).hom (pullbackSquareComparison Λ ⟨hs₂⟩).hom
+    (baseChangeMap Λ ⟨hb₁⟩) (baseChangeMap Λ ⟨hb₂⟩) (baseChangeMap Λ ⟨hs₁⟩)
+    (baseChangeMap Λ ⟨hs₂⟩)
+    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
+    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
+    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
+    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
+    (lowerStarTensorMap' Λ k) (lowerStarTensorMap' Λ k')
+    (fun U V ↦ lowerStarTensorMap'_comp_counit Λ k U V)
+    (fun U V ↦ lowerStarTensorMap'_comp_counit Λ k' U V)
+    (fun C ↦ Hom.pullbackExchange_square Λ φ₁ ψM ψP φ₁' htot₁ hgen₁ hb₁ hs₁ C)
+    (fun C ↦ Hom.pullbackExchange_square Λ φ₂ ψN ψP φ₂' htot₂ hgen₂ hb₂ hs₂ C)
+    (fun U V ↦ ψP.map_tensorMap_comp_pullbackExchange_app Λ U V) A B
+  convert h using 3 <;> rfl
 
 end NearbyCyclesModel
 

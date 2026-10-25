@@ -40,6 +40,15 @@ lemma exchangeRight_app_comp_counit {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ 
       θ.hom.app (Rf.obj K) ≫ G'.map (af.counit.app K) := by
   simp [exchangeRight_app]
 
+/-- `exchangeRight_app_comp_counit` for a transformation `bc` equal to the exchange morphism. -/
+lemma exchangeRight_app_comp_counit' {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ A'} {Rf' : A' ⥤ B'}
+    {G : B ⥤ B'} {G' : A ⥤ A'} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (θ : G ⋙ Lf' ≅ Lf ⋙ G')
+    (bc : Rf ⋙ G ⟶ G' ⋙ Rf') (h : bc = exchangeRight af af' θ) (K : A) :
+    Lf'.map (bc.app K) ≫ af'.counit.app (G'.obj K) =
+      θ.hom.app (Rf.obj K) ≫ G'.map (af.counit.app K) := by
+  subst h
+  exact exchangeRight_app_comp_counit af af' θ K
+
 end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
