@@ -13086,6 +13086,7 @@ public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
 public import WeilConjectures.TraceFormula.Specialization.ComponentClass
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
+public import WeilConjectures.TraceFormula.Specialization.DeformationExchange
 public import WeilConjectures.TraceFormula.Specialization.DeformationModel
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
