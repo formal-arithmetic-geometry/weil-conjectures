@@ -100,6 +100,9 @@ structure TransverseCorner where
   [isRegular_Y : IsRegular Y]
   /-- The two divisors meet transversely. -/
   isRegularImmersion_inter : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX)
+  /-- The scheme-theoretic intersection is regular (a reduced point): local equations of `X` and
+  `Y` form a regular system of parameters, i.e. the divisors are not tangent. -/
+  [isRegular_inter : IsRegular (pullback iX iY)]
   /-- The corner point. -/
   z : Z
   range_inter : Set.range iX ∩ Set.range iY = {z}
@@ -117,8 +120,8 @@ structure TransverseCorner where
   range_i_j : Set.range (i ≫ j) = (Set.range iX ∪ Set.range iY)ᶜ
 
 attribute [instance] TransverseCorner.isLocallyNoetherian TransverseCorner.isRegular_Z
-  TransverseCorner.isRegular_X
-  TransverseCorner.isRegular_Y TransverseCorner.isRegularImmersion_iX
+  TransverseCorner.isRegular_X TransverseCorner.isRegular_Y TransverseCorner.isRegular_inter
+  TransverseCorner.isRegularImmersion_iX
   TransverseCorner.isRegularImmersion_iY
   TransverseCorner.isOpenImmersion_j TransverseCorner.isOpenImmersion_i
 

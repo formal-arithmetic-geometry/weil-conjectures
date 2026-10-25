@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.AlgebraicGeometry.RegularOpens
 public import WeilConjectures.ConstructibleSheaf.DistTriang
 public import WeilConjectures.ConstructibleSheaf.OpenCover
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.DistTriang
 public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisor
+public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisorDevissage
 
 /-!
 # Local constancy along the boundary divisor
@@ -39,6 +40,22 @@ namespace AlgebraicGeometry.Scheme.TransverseCorner
 variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {ℓ : ℕ} [Fact ℓ.Prime]
   (hℓ : (ℓ : k) ≠ 0) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
 
+include hℓ in
+/-- Blueprint `det-tf-transverse-tame-local-constancy`, constant coefficients: for a finite
+`Λ`-module `N` killed by `ℓ`, the restriction of `R j_{W*} N` to the regular divisor `Y - z` of
+`W = Z - X` has finite locally constant cohomology sheaves. Near every point of `Y - z`, purity
+for the regular divisor `Y` of the étale limit of smooth surfaces `Z`
+(`AlgebraicGeometry.Scheme.exists_higherDirectImage_of_isEtaleLimitOfSmoothSurfaces`) computes
+`R^q j_* 𝔽_ℓ` as `𝔽_ℓ`, `i_* 𝔽_ℓ(-1)` and `0`, and `N` is a finite direct sum of copies of `𝔽_ℓ`
+as an abelian group. -/
+theorem hasFiniteLocallyConstantHomology_puncturedYι_jW_constantSheaf
+    (N : ModuleCat.{u + 1} Λ) [Finite N] (hN : ∀ n : N, (ℓ : Λ) • n = 0) :
+    HasFiniteLocallyConstantHomology C.puncturedY
+      ((L((C.puncturedYι)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R((C.jW)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N)))) := by
+  sorry
+
 include hℓ hΛ in
 /-- Blueprint `det-tf-transverse-tame-local-constancy`, after the reduction to one divisor: for
 `j_W : Z - (X ∪ Y) ⟶ W = Z - X`, the restriction of `R j_{W*} E` to the regular divisor
@@ -50,7 +67,8 @@ theorem hasFiniteLocallyConstantHomology_puncturedYι_jW
     HasFiniteLocallyConstantHomology C.puncturedY
       ((L((C.puncturedYι)^*[ModuleCat.{u + 1} Λ])).obj
         ((R((C.jW)_*[ModuleCat.{u + 1} Λ])).obj E)) := by
-  sorry
+  exact Etale.hasFiniteLocallyConstantHomology_of_constantSheaf ℓ hΛ C.jW C.puncturedYι
+    (fun N _ hN ↦ C.hasFiniteLocallyConstantHomology_puncturedYι_jW_constantSheaf hℓ Λ N hN) E hE
 
 include hℓ hΛ in
 /-- Blueprint `det-tf-transverse-tame-local-constancy`: Local constancy along the boundary
