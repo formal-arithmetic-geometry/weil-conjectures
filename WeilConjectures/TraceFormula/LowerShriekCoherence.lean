@@ -241,8 +241,6 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_δ (sq : CommSq g' f'
     h₁ h₂ p (boundedConstructiblePullbackSquareComparison _ ℓ sq) e A B
   exact key
 
-set_option maxHeartbeats 1000000 in
--- checking the unit compatibility unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **The projection formula is compatible with base change** (blueprint `prop-sf-pf-coherence`,
 the base change square; SGA 4, Exposé XVII, 5.2.2 and 5.2.9), for proper vertical maps: for a
 cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` proper, under compact-support base change
@@ -262,10 +260,12 @@ the adjunctions `Lf^* ⊣ Rf_!` and `Lf'^* ⊣ Rf'_!`
 `CategoryTheory.ProjectionBaseChange.pfBaseChange_of_counit`. -/
 theorem boundedConstructibleExceptionalProjectionMorphism_baseChange (sq : IsPullback g' f' f g)
     [IsProper f.left] [IsProper f'.left] :
-    ProjectionBaseChange.PFBaseChange (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+    ProjectionBaseChange.PFBaseChange
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
-      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        sq.toCommSq)
       (boundedConstructibleExceptionalProjection ℓ f)
       (boundedConstructibleExceptionalProjection ℓ f') := by
   refine ProjectionBaseChange.pfBaseChange_of_counit
@@ -275,9 +275,16 @@ theorem boundedConstructibleExceptionalProjectionMorphism_baseChange (sq : IsPul
   · exact fun A B ↦ upperStar_map_exceptionalProjection_comp_counit ℓ f A B
   · exact fun A B ↦ upperStar_map_exceptionalProjection_comp_counit ℓ f' A B
   · intro K
-    apply ProjectionBaseChange.counit_mate_of_unit
-    intro M
-    sorry
+    refine ProjectionBaseChange.counit_mate_of_unit
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f')
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f)
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        sq.toCommSq)
+      (fun M ↦ ?_) K
+    exact map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app ℓ sq M
   · exact fun A B ↦ boundedConstructiblePullbackSquareComparison_hom_app_δ ℓ sq.toCommSq A B
 
 

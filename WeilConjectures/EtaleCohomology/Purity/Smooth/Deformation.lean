@@ -202,7 +202,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
   have : HasCompactification (c ≫ 𝔸(ULift.{u} (Fin d); T) ↘ T) := .of_eq hjc
   have : QuasiCompact (j ≫ g') := hjc ▸ inferInstance
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j g'
-  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (A := ModuleCat.{u + 1} Λ) hjc
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ hjc
   obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ c (𝔸(ULift.{u} (Fin d); T) ↘ T)
   obtain ⟨e₄⟩ := nonempty_iso_rightDerivedUpperShriek_obj_of_etale Λ c K hK
   exact ⟨(leftDerivedUpperStarComp _ σ j).app _ ≪≫

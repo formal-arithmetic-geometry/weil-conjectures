@@ -148,6 +148,22 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+/-- Global Verdier duality as a natural isomorphism for an arbitrary right adjoint `G` of
+`Ra_{X!}`: `(Ra_{X!} K)^∨ ≅ Ra_{X*} RHom(K, G Λ_S)`, the tensor–Hom exchange
+(`AlgebraicGeometry.Etale.derivedHomLowerShriekIsoOfAdjunction`) at the unit. It is stated for a
+general coefficient category, where the kernel checks it without unfolding the derived
+categories of `ModuleCat Λ`; see
+`AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`.
+-/
+noncomputable def coefficientDualRightDerivedLowerShriekIsoOfAdjunction
+    {G : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (adj : R(aX)_![A] ⊣ G)
+    [IsIso (projectionMap A aX)] :
+    (R(aX)_![A]).op ⋙ DerivedCategory.coefficientDual A S ≅
+        (RHom(X)[A]).flip.obj (G.obj (𝟙_ _)) ⋙ R((aX)_*[A]) :=
+  (Functor.isoWhiskerRight (derivedHomLowerShriekIsoOfAdjunction A aX adj)
+    ((CategoryTheory.evaluation _ _).obj (𝟙_ _))).symm
+
 /-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality, as a natural isomorphism.
 This is also blueprint `thm-sf-global-duality`.
 
@@ -170,12 +186,12 @@ coefficients `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso_
 and its value at `K = Λ_X` is `AlgebraicGeometry.Etale.globalVerdierDualityUnitIso`. As in
 the blueprint, neither the properness of `X` nor any comparison `Ra_{X!} ≅ Ra_{X*}` is used:
 `Ra_{X!}` and `Ra_{X*}` enter as two different functors. -/
-noncomputable def coefficientDualRightDerivedLowerShriekIso [IsIso (projectionMap (ModuleCat.{u + 1}
-    Λ) aX)] :
+noncomputable def coefficientDualRightDerivedLowerShriekIso
+    [IsIso (projectionMap (ModuleCat.{u + 1} Λ) aX)] :
     (R(aX)_![ModuleCat.{u + 1} Λ]).op ⋙ DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S ≅
         verdierDual Λ aX ⋙ R((aX)_*[ModuleCat.{u + 1} Λ]) :=
-  (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso Λ aX)
-    ((CategoryTheory.evaluation _ _).obj (𝟙_ _))).symm
+  coefficientDualRightDerivedLowerShriekIsoOfAdjunction (ModuleCat.{u + 1} Λ) aX
+    (rightDerivedUpperShriekAdjunction Λ aX)
 
 section Shift
 

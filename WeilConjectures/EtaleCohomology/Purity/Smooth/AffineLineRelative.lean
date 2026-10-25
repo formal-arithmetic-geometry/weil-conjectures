@@ -360,7 +360,7 @@ end Unit
 section Localization
 
 variable {X Y Z U : Scheme.{u}} (p : X ⟶ Y) (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
-  [HasCompactification i] [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsOpenImmersion j]
+  [HasCompactification i] [Finite Λ] [IsOpenImmersion j]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
   (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
 

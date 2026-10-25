@@ -27,9 +27,11 @@ double-dual morphism `δ_K : K ⟶ 𝔻 𝔻 K` is the unit of the self-adjuncti
 - `AlgebraicGeometry.Etale.map_verdierDualDoubleDual_app_comp_mateEquiv`
   (`lem-weil-delta-proper-pushforward`, formal core): `Rf_* δ_K ≫ m_{𝔻 K} = δ_{Rf_* K} ≫ 𝔻 α_K`
   for every square `α : 𝔻_Y Rf_* ⟶ Rf_* 𝔻_X` and its mate `m`.
-- `AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_iff_of_isIso_mateEquiv`:
-  for proper `f`, `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is, provided the
-  mate of the Verdier exchange is invertible at `𝔻_X K`.
+- `AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv`:
+  `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is, provided a square
+  `α : 𝔻_Y Rf_* ⟶ Rf_* 𝔻_X` is invertible at `K` and its mate at `𝔻_X K`; for proper `f` and
+  finite coefficients, `α` is the Verdier exchange
+  `AlgebraicGeometry.Etale.verdierDualRightDerivedLowerStarSquare`.
 
 ## Implementation notes
 
@@ -96,7 +98,8 @@ theorem isIso_verdierDualDoubleDual_app_iff_lowerShriek
       ((RHom(W)[A]).flip.obj ωW).rightOp ⋙ (R((j)_*[A])).op)
     (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology A)) :
     IsIso ((derivedHomToIhomIhomNatTrans A W ωW).app M) ↔
-      IsIso (D((j)^*[A]).map ((derivedHomToIhomIhomNatTrans A Y ωY).app (D((j)_!open[A]).obj M))) := by
+      IsIso (D((j)^*[A]).map
+        ((derivedHomToIhomIhomNatTrans A Y ωY).app (D((j)_!open[A]).obj M))) := by
   let adjY : ((RHom(Y)[A]).flip.obj ωY).rightOp ⊣ (RHom(Y)[A]).flip.obj ωY :=
     MonoidalClosed.ihomFlipSelfAdjunction _
   let adjW : ((RHom(W)[A]).flip.obj ωW).rightOp ⊣ (RHom(W)[A]).flip.obj ωW :=
@@ -135,16 +138,18 @@ theorem isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
     obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_derivedHom (FC := FC) A j Z
       (ωY)
     exact (isZero_ihom_obj_of_isZero hZ _).of_iso e
-  have hdd : IsIso (D((j)^*[A]).map ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).map f)) := by
+  have hdd : IsIso (D((j)^*[A]).map
+      ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).map f)) := by
     obtain ⟨Z, g, h, hT⟩ := distinguished_cocone_triangle f
     have hZ : IsZero (D((j)^*[A]).obj Z) :=
       (Triangle.isZero₃_iff_isIso₁ _ (D((j)^*[A]).map_distinguished _ hT)).2 hf
-    obtain ⟨w, hw⟩ := exists_distTriang_verdierDual_(RHom(Y)[A]).flip.obj ωY _ hT
+    obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_flip_derivedHom_flip A ωY _ hT
     have h3 : IsZero (D((j)^*[A]).obj
         (((RHom(Y)[A]).flip.obj ωY).obj (op (((RHom(Y)[A]).flip.obj ωY).obj (op Z))))) :=
       hz (((RHom(Y)[A]).flip.obj ωY).obj (op Z)) (hz Z hZ)
     have hw' := D((j)^*[A]).map_distinguished _ hw
-    have h4 : IsZero (D((j)^*[A]).obj ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).obj Z)) := h3
+    have h4 : IsZero (D((j)^*[A]).obj
+        ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).obj Z)) := h3
     have key := (Triangle.isZero₃_iff_isIso₁ _ hw').1 h4
     exact key
   have nat := congrArg D((j)^*[A]).map ((derivedHomToIhomIhomNatTrans A Y ωY).naturality f)
@@ -152,13 +157,15 @@ theorem isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
   constructor
   · intro h
     have : IsIso (D((j)^*[A]).map ((derivedHomToIhomIhomNatTrans A Y ωY).app K') ≫
-        D((j)^*[A]).map ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).map f)) := by
+        D((j)^*[A]).map
+          ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).map f)) := by
       rw [← nat]
       infer_instance
     exact IsIso.of_isIso_comp_right _
       (D((j)^*[A]).map ((((RHom(Y)[A]).flip.obj ωY).rightOp ⋙ (RHom(Y)[A]).flip.obj ωY).map f))
   · intro h
-    have : IsIso (D((j)^*[A]).map f ≫ D((j)^*[A]).map ((derivedHomToIhomIhomNatTrans A Y ωY).app K)) := by
+    have : IsIso (D((j)^*[A]).map f ≫
+        D((j)^*[A]).map ((derivedHomToIhomIhomNatTrans A Y ωY).app K)) := by
       rw [nat]
       infer_instance
     exact IsIso.of_isIso_comp_left (D((j)^*[A]).map f) _
@@ -347,10 +354,9 @@ theorem map_verdierDualDoubleDual_app_comp_mateEquiv
 /-- Blueprint `lem-weil-delta-proper-pushforward`, conditional form over a general coefficient
 category: if the square `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` is invertible at `K` and its mate is
 invertible at `𝔻_X K`, then `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is.
-
-The coefficient category in `hm` is left to unification, as in
-`AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_iff_of_isIso_mateEquiv`, so that
-both hypotheses elaborate to the same term and the kernel need not compare them. -/
+It is stated for arbitrary objects `ω_X`, `ω_Y` in place of the dualizing complexes; for proper
+`f` and finite coefficients the square is
+`AlgebraicGeometry.Etale.verdierDualRightDerivedLowerStarSquare`. -/
 theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv
     (α : TwoSquare R((f)_*[A]) ((RHom(X)[A]).flip.obj ωX).rightOp ((RHom(Y)[A]).flip.obj ωY).rightOp
       (R((f)_*[A])).op)
@@ -391,21 +397,6 @@ instance isIso_verdierDualRightDerivedLowerStarSquare_app
     IsIso ((verdierDualRightDerivedLowerStarSquare Λ a f).app K) := by
   dsimp only [verdierDualRightDerivedLowerStarSquare]
   infer_instance
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`, conditional form: for proper `f` and finite
-coefficients, if the mate of the Verdier exchange (the canonical comparison
-`Rf_* 𝔻_X M ⟶ 𝔻_Y Rf_* M`) is invertible at `M = 𝔻_X K`, then `Rf_* δ_K` is an isomorphism if
-and only if `δ_{Rf_* K}` is. -/
-theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_mateEquiv
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hm : IsIso ((mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex Λ (f ≫ a)))
-      (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex Λ a))
-        (verdierDualRightDerivedLowerStarSquare Λ a f)).app
-          (op ((verdierDual Λ (f ≫ a)).obj (op K))))) :
-    IsIso ((R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ (f ≫ a)).app K)) ↔
-      IsIso ((verdierDualDoubleDual Λ a).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) :=
-  isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv _ (dualizingComplex Λ (f ≫ a))
-    (dualizingComplex Λ a) f _ K hm
 
 end ProperFinite
 

@@ -266,9 +266,10 @@ theorem isWeilEquivariant_verdierDualDoubleDual
     IsWeilEquivariant L((g)^*[ModuleCat.{u + 1} Λ]) φ.hom
       (verdierDualWeilDatum Λ a (asIso (verdierDualWeilDatum Λ a φ φω)) φω)
       ((verdierDualDoubleDual Λ a).app K) :=
-  letI : (L((g)^*[ModuleCat.{u + 1} Λ])).Braided := { braided :=
-      leftDerivedUpperStar_μ_map_braiding_hom (ModuleCat.{u + 1} Λ) g }
+  letI : (L((g)^*[ModuleCat.{u + 1} Λ])).Braided :=
+    { braided := leftDerivedUpperStar_μ_map_braiding_hom (ModuleCat.{u + 1} Λ) g }
   MonoidalClosed.isWeilEquivariant_toIhomIhom _ φ φω _ rfl
+
 end DualWeilDatum
 
 section Dualizing

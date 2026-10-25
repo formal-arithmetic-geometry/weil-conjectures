@@ -81,6 +81,13 @@ noncomputable instance commShiftRightDerivedUpperShriek {X Y : Scheme.{u}} (f : 
     [HasCompactification f] : (R(f)^![Λ]).CommShift ℤ :=
   (rightDerivedUpperShriekAdjunction Λ f).rightAdjointCommShift ℤ
 
+/-- A right adjoint of `Rf_!` (for instance `Rf^!` at integral coefficients, where it is only
+assumed to exist) commutes with shifts, being right adjoint to `Rf_!`. -/
+noncomputable instance commShiftRightAdjointRightDerivedLowerShriek {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] :
+    (R(f)_![A]).rightAdjoint.CommShift ℤ :=
+  (Adjunction.ofIsLeftAdjoint (R(f)_![A])).rightAdjointCommShift ℤ
+
 section Monoidal
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]

@@ -123,6 +123,8 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 -- tensor product.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+
 /-- **The tensor map of a closed immersion.** Let `i : Z ⟶ X` be a closed immersion with open
 complement `j : U ⟶ X`. If `Rj_* Lj^* M ⊗ᴸ N` receives no maps from the shifts of objects
 `Ri_! D`, then the tensor map `Ri^! M ⊗ᴸ Li^* N ⟶ Ri^!(M ⊗ᴸ N)` is an isomorphism: its transpose
@@ -130,7 +132,7 @@ is, up to the projection formula, the supported localization triangle of `M` ten
 `N`. -/
 theorem isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion {Z X U : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [HasCompactification i]
- [IsIso (projectionMap (ModuleCat.{u + 1} Λ) i)] [IsOpenImmersion j]
+    [IsIso (projectionMap (ModuleCat.{u + 1} Λ) i)] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (h : ∀ (D : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ),

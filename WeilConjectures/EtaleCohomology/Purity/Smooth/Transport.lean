@@ -93,15 +93,15 @@ theorem derivedCompleteIntegral_rightDerivedUpperShriek
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     (hK : DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :
     DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
-      ((rightDerivedUpperShriek
-        (Shrink.{u + 1} (PadicAlgCl.integers l E)) f).obj K) := by
+      ((R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).rightAdjoint.obj
+        K) := by
   obtain ⟨ϖ, hϖ, hI⟩ :=
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
   rw [DerivedCategory.derivedCompleteIntegral,
     DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI] at hK ⊢
   intro L φ (hL : IsIso (ϖ • 𝟙 L))
-  let adj := rightDerivedUpperShriekAdjunction
-    (Shrink.{u + 1} (PadicAlgCl.integers l E)) f
+  let adj := Adjunction.ofIsLeftAdjoint
+    (R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))])
   have hL' : DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ
       ((R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).obj L) := by
     change IsIso (ϖ • 𝟙 _)

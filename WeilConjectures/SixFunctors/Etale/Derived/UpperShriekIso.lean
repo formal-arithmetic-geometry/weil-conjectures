@@ -50,8 +50,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 exceptional inverse image along an equation of morphisms, which a rewrite cannot do since the
 functor also depends on the `HasCompactification` instance. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_eq {X Y : Scheme.{u}} {f g : X ⟶ Y}
-    [HasCompactification f] [HasCompactification g]
- (h : f = g) :
+    [HasCompactification f] [HasCompactification g] (h : f = g) :
     Nonempty (R(f)^![Λ] ≅ R(g)^![Λ]) := by
   subst h
   exact ⟨Iso.refl _⟩
