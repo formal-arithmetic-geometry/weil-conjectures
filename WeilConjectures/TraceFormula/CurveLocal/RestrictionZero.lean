@@ -71,7 +71,7 @@ theorem supportedRestrictionMap_eq_zero (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (�
   -- Step 2: the prime-to-`ℓ` covers
   obtain ⟨S', aS', _, s', hs', π, D', H', B', dD', dH', dB', _, _, _, _, _, _, hH', hD', hB',
     hDB, hDH, hO, πU, _, _, d, hdeg, hd, hπ, E', hE', ⟨e⟩⟩ :=
-    M.exists_restrictionZeroCover ℓ hℓ hΛ L K hL hK hKy P.obj eP M.ψ M.ψ_comp_ι
+    M.exists_restrictionZeroCover ℓ hΛ L K hL hK hKy P.obj eP M.ψ M.ψ_comp_ι
   -- Step 3: descent along the finite étale trace on the punctured diagonal
   refine sectionsRestriction_app_eq_zero_of_finite_etale π M.O dD'.openComplement hO M.ψ
     (dB'.resLE dD'.openComplement (dB' ⁻¹ᵁ dD'.openComplement) le_rfl) πU hπ P.obj d hdeg hd ?_

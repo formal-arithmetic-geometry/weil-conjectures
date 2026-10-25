@@ -61,6 +61,7 @@ open Scheme
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
+omit [IsAlgClosed k] in
 /-- **Flat constructible models** (blueprint `sk-lem-sf-flat-model`, used in
 `det-tf-restriction-zero-covers` (i)): an object of `D^b_{ctf}(X, Λ)` is represented by a bounded
 complex of flat constructible sheaves. -/
@@ -91,11 +92,9 @@ and the pulled back identification of `det-tf-restriction-zero-localization` (i)
 datum `p : C ⟶ X`, `c`, `e`, take `T'` the strict localization of `C ×_k C` at `(c, c)`, the
 reduced inverse images `D' = G' ∪ V'`, `H'`, `B'` of the curves, the finite étale map
 `B' ∖ y' ⟶ B ∖ y` of degree `e²`, and `E'` the restriction of `N ⊠ Q` to `T' ∖ (D' ∪ H')`. -/
-theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
+theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hL : DerivedCategory.boundedConstructibleFiniteTor Λ M.X L)
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ M.X K)
     (hKy : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))
     (PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)
     (hPL : ∃ a b, IsBoundedFlatComplex Λ a b PL) (hPK : ∃ a b, IsBoundedFlatComplex Λ a b PK)
@@ -129,7 +128,8 @@ theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] (
       (_ : πU ≫ ψ ≫ M.O.ι =
         dB'.resLE dD'.openComplement (dB' ⁻¹ᵁ dD'.openComplement) le_rfl ≫
           dD'.openComplement.ι ≫ π)
-      (E' : DerivedCategory (Sheaf (dD'.openComplement ⊓ dH'.openComplement).toScheme.smallEtaleTopology
+      (E' : DerivedCategory (Sheaf
+        (dD'.openComplement ⊓ dH'.openComplement).toScheme.smallEtaleTopology
         (ModuleCat.{u + 1} Λ)))
       (_ : (∃ a b : ℤ, E'.IsGE a ∧ E'.IsLE b) ∧ ∀ n : ℤ,
         ∃ (G : Type (u + 1)) (_ : Group G) (_ : Finite G) (_ : IsPGroup ℓ G)
@@ -166,7 +166,7 @@ theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] (
   obtain ⟨hdD, hdB⟩ := D.ringKrullDim_D'_B'
   obtain ⟨hDB, hDH⟩ := D.tangentConesMeetAtOrigin
   obtain ⟨πU, hfin, het, hdeg, hsq⟩ := D.exists_puncturedDiagonal_finite_etale
-  obtain ⟨E', hE', hiso⟩ := D.exists_E' hℓ L K hKy hPL hPK eL eK P eP
+  obtain ⟨E', hE', hiso⟩ := D.exists_E' L K hKy hPL hPK eL eK P eP
   have : SmoothOfRelativeDimension 2 (pullback.fst D.fC D.fC ≫ D.fC) :=
     show SmoothOfRelativeDimension (1 + 1) _ from inferInstance
   exact ⟨D.S', pullback.fst D.fC D.fC ≫ D.fC, this, D.s', by simp [CoverDatum.s', D.c_comp_fC],
@@ -187,7 +187,7 @@ reduced curves, `C_t D' ∩ C_t B' = {0}`, `C_t D' ∩ T_t H' = {0}`), with
 fibres have `d` points (`d` prime to `ℓ`) compatible with `ψ`, and a bounded complex `E'` on
 `T' ∖ (D' ∪ H')` with finite locally constant cohomology and finite `ℓ`-group monodromy whose
 extension by zero to `T' ∖ D'` is the pullback of `P`. -/
-theorem exists_restrictionZeroCover (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
+theorem exists_restrictionZeroCover (ℓ : ℕ) [Fact ℓ.Prime]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hL : DerivedCategory.boundedConstructibleFiniteTor Λ M.X L)
@@ -221,7 +221,8 @@ theorem exists_restrictionZeroCover (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : 
       (_ : πU ≫ ψ ≫ M.O.ι =
         dB'.resLE dD'.openComplement (dB' ⁻¹ᵁ dD'.openComplement) le_rfl ≫
           dD'.openComplement.ι ≫ π)
-      (E' : DerivedCategory (Sheaf (dD'.openComplement ⊓ dH'.openComplement).toScheme.smallEtaleTopology
+      (E' : DerivedCategory (Sheaf
+        (dD'.openComplement ⊓ dH'.openComplement).toScheme.smallEtaleTopology
         (ModuleCat.{u + 1} Λ)))
       (_ : (∃ a b : ℤ, E'.IsGE a ∧ E'.IsLE b) ∧ ∀ n : ℤ,
         ∃ (G : Type (u + 1)) (_ : Group G) (_ : Finite G) (_ : IsPGroup ℓ G)
@@ -238,7 +239,7 @@ theorem exists_restrictionZeroCover (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : 
   obtain ⟨PL, hPL, hcL, ⟨eL⟩⟩ := M.exists_flatConstructibleModel L hL
   obtain ⟨PK, hPK, hcK, ⟨eK⟩⟩ := M.exists_flatConstructibleModel K hK
   obtain ⟨D⟩ := M.exists_coverDatum ℓ PL PK hPL hPK hcL hcK
-  exact M.exists_restrictionZeroCover_of_coverDatum ℓ hℓ hΛ L K hL hK hKy PL PK hPL hPK eL eK D P eP
+  exact M.exists_restrictionZeroCover_of_coverDatum ℓ hΛ L K hKy PL PK hPL hPK eL eK D P eP
     ψ hψ
 
 end AlgebraicGeometry.Etale.CurveLocalModel

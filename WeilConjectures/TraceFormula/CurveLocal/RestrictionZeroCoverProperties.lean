@@ -56,7 +56,8 @@ theorem nonempty_curves : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' :=
 
 /-- The curve `H'` is regular: its ring is a discrete valuation ring (blueprint
 `det-tf-restriction-zero-covers` (ii): `H'` is the axis `η = 0` of `T'`). -/
-theorem isDiscreteValuationRing_H' : ∃ _ : IsDomain Γ(D.H', ⊤), IsDiscreteValuationRing Γ(D.H', ⊤) :=
+theorem isDiscreteValuationRing_H' :
+    ∃ _ : IsDomain Γ(D.H', ⊤), IsDiscreteValuationRing Γ(D.H', ⊤) :=
   D.isDiscreteValuationRing_H''
 
 /-- The curves `D'` and `B'` have dimension one (blueprint `det-tf-restriction-zero-covers`). -/
@@ -91,7 +92,7 @@ theorem exists_puncturedDiagonal_finite_etale :
 `P = (L ⊠ K)|_T`, the pullback of `P` to `T' ∖ D'` is the extension by zero of a bounded complex
 `E'` on `T' ∖ (D' ∪ H')` whose cohomology sheaves are trivialized by a finite étale Galois cover
 with group a finite `ℓ`-group, with finite values. -/
-theorem exists_E' (hℓ : (ℓ : k) ≠ 0) [Finite Λ]
+theorem exists_E' [Finite Λ]
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hKy : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))
     (hPL : ∃ a b, IsBoundedFlatComplex Λ a b PL) (hPK : ∃ a b, IsBoundedFlatComplex Λ a b PK)
@@ -112,7 +113,8 @@ theorem exists_E' (hℓ : (ℓ : k) ≠ 0) [Finite Λ]
       Nonempty ((D.dD'.openComplement.ι)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj
           ((D.π)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj P) ≅
         ((strictLocalization D.s').homOfLE (inf_le_left :
-          D.dD'.openComplement ⊓ D.dH'.openComplement ≤ D.dD'.openComplement))_!open[ModuleCat.{u + 1} Λ]
+          D.dD'.openComplement ⊓ D.dH'.openComplement ≤ D.dD'.openComplement))_!open[
+            ModuleCat.{u + 1} Λ]
           |>.mapDerivedCategory.obj E') :=
   D.exists_complexE L K P hKy hPL hPK eL eK eP
 
