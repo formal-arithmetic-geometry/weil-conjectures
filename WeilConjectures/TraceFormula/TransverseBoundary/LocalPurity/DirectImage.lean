@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
+public import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImageGerm
 public import WeilConjectures.SixFunctors.Etale.EtaleAffineLimitBaseChange
 public import WeilConjectures.TraceFormula.TransverseBoundary.Basic
@@ -50,15 +52,6 @@ open scoped AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Scheme
 
 open AlgebraicGeometry.Etale
-
-/-- The natural number `ℓ` is invertible on every scheme over a field in which it is nonzero. -/
-lemma isUnit_natCast_of_hom_spec {k : Type u} [Field k] {X : Scheme.{u}}
-    (aX : X ⟶ Spec (.of k)) {ℓ : ℕ} (hℓ : (ℓ : k) ≠ 0) : IsUnit (ℓ : Γ(X, ⊤)) := by
-  have h : IsUnit (ℓ : Γ(Spec (.of k), ⊤)) := by
-    have := (isUnit_iff_ne_zero.mpr hℓ).map (Scheme.ΓSpecIso (.of k)).inv.hom
-    rwa [map_natCast] at this
-  have := h.map aX.appTop.hom
-  rwa [map_natCast] at this
 
 /-- **Direct images from the complement of a regular divisor** (blueprint
 `det-tf-transverse-corner-constant`, *the surface*). Let `Z` be an étale limit of smooth
@@ -143,8 +136,8 @@ theorem exists_hasDivisorComplementDirectImages_of_isEtaleLimitOfSmoothSurfaces 
   have sq₂ := IsPullback.of_hasPullback U₀.ι (π ∣_ X₀)
   have sq₁ := IsPullback.of_right' sq sq₂
   have : IsTorsionSheafOfInvertibleOrder X₀ (constantZModModule U₀ ℓ) :=
-    isTorsionSheafOfInvertibleOrder_zmodCoeff ℓ X₀
-      (isUnit_natCast_of_hom_spec (X₀.ι ≫ a i) hℓ) _
+    IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero (ZModCoeff.{u} ℓ) ℓ (NeZero.ne ℓ)
+      (by ext; simp) (AffineSpace.isUnit_natCast_of_ne_zero (X₀.ι ≫ a i) hℓ) _
   have H (q : ℕ) : IsIso (baseChangeHomologyMap (ZModCoeff.{u} ℓ) sq q
       (constantZModModule U₀ ℓ)) :=
     isIso_baseChangeHomologyMap_of_etale_restriction _ sq₂ sq₁ sq (sq₂.lift_fst _ _ _) rfl q _

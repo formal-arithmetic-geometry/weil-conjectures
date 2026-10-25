@@ -50,19 +50,6 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- Every sheaf of `ℤ/ℓ`-modules is torsion of order invertible on `S`, when `ℓ` is invertible
-on `S`: its stalks are killed by `ℓ`. -/
-theorem isTorsionSheafOfInvertibleOrder_zmodCoeff (ℓ : ℕ) [NeZero ℓ] (S : Scheme.{u})
-    (hℓ : IsUnit (ℓ : Γ(S, ⊤))) {T : Scheme.{u}}
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ZModCoeff.{u} ℓ))) :
-    IsTorsionSheafOfInvertibleOrder S F where
-  exists_isUnit_nsmul_eq_zero _ _ _ _ x := by
-    refine ⟨ℓ, Nat.pos_of_ne_zero (NeZero.ne ℓ), hℓ, ?_⟩
-    have h : ((ℓ : ℕ) : ZModCoeff.{u} ℓ) = 0 := by
-      ext
-      simp
-    rw [← Nat.cast_smul_eq_nsmul (ZModCoeff.{u} ℓ), h, zero_smul]
-
 /-- The higher direct images of the constant sheaf `ℤ/ℓ` commute with base change along `p`
 as soon as the degree-`q` base change map of the Cartesian square at `ℤ/ℓ` is an isomorphism:
 `p^* R^q g_* ℤ/ℓ ≅ R^q h_* ℤ/ℓ`. -/

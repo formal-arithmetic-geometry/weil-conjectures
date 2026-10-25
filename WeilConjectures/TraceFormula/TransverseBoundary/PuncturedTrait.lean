@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
 public import WeilConjectures.AlgebraicGeometry.Sites.HenselianTraitCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.KummerNaturality
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
@@ -60,12 +61,6 @@ noncomputable def sheafHConstantZModAddEquivOfIso {X Y : Scheme.{u}} (e : X ≅ 
       right_inv x := by rw [← Sheaf.H.map_comp_apply, c.inv_hom_id, Sheaf.H.map_id_apply]
       map_add' := map_add _ }).symm
 
-/-- `n` is invertible on a scheme over a field in which `n` is nonzero. -/
-lemma isUnit_natCast_of_hom_spec {k : Type u} [Field k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) {n : ℕ} (hn : (n : k) ≠ 0) : IsUnit (n : Γ(X, ⊤)) := by
-  have h := (isUnit_iff_ne_zero.2 hn).map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
-  rwa [map_natCast] at h
-
 /-- **Kummer classes detect nonvanishing of `H¹` restriction maps.** Let `g : X ⟶ Y` be a
 morphism of schemes, `f : Y ⟶ Spec k` a structure map to a field in which `n` is nonzero and
 which contains a primitive `n`-th root of unity, and `a` a unit on `Y` whose pullback to `X` is
@@ -77,8 +72,8 @@ theorem Etale.cohomologyMap_one_constantZMod_ne_zero_of_forall_pow_ne {k : Type 
     (hn : (n : k) ≠ 0) {ζ : k} (hζ : IsPrimitiveRoot ζ n) (a : Γ(Y, ⊤)ˣ)
     (ha : ∀ v : Γ(X, ⊤), v ^ n ≠ g.appTop.hom a) :
     Etale.cohomologyMap g (Y.constantZMod n) 1 ≠ 0 := by
-  have hY : IsUnit (n : Γ(Y, ⊤)) := isUnit_natCast_of_hom_spec f hn
-  have hX : IsUnit (n : Γ(X, ⊤)) := isUnit_natCast_of_hom_spec (g ≫ f) hn
+  have hY : IsUnit (n : Γ(Y, ⊤)) := AffineSpace.isUnit_natCast_of_ne_zero f hn
+  have hX : IsUnit (n : Γ(X, ⊤)) := AffineSpace.isUnit_natCast_of_ne_zero (g ≫ f) hn
   let θ := Y.constantZModIsoRootsOfUnitySheaf n f hζ
   intro h0
   have hx : Etale.cohomologyMap g (Y.constantZMod n) 1

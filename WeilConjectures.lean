@@ -8525,7 +8525,6 @@ public import WeilConjectures.ConstructibleSheaf.LisseRankOne
 public import WeilConjectures.ConstructibleSheaf.LisseTrivialization
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltration
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltrationExtension
-public import WeilConjectures.ConstructibleSheaf.LocallyConstantOpenCover
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantRetractionExtension
@@ -9538,7 +9537,6 @@ public import WeilConjectures.Mathlib.FieldTheory.PurelyInseparable.Basic
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.Exponent
 public import WeilConjectures.Mathlib.GroupTheory.GroupAction.Quotient
-public import WeilConjectures.Mathlib.GroupTheory.PGroup.FixedPoints
 public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
 public import WeilConjectures.Mathlib.GroupTheory.SpecificGroups.Cyclic
 public import WeilConjectures.Mathlib.LinearAlgebra.Basis.Exact
@@ -11882,7 +11880,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.UnitMono
-public import WeilConjectures.SixFunctors.Etale.UpperStarSurjective
 public import WeilConjectures.SixFunctors.Etale.ZModCoefficients
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.ConstantSheafEnd

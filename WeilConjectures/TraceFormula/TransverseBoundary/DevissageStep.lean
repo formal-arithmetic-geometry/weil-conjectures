@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafModuleMap
 public import WeilConjectures.AlgebraicGeometry.Sites.GaloisCoverInvariantSections
 public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarEtaleSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-public import WeilConjectures.Mathlib.GroupTheory.PGroup.FixedPoints
-public import WeilConjectures.SixFunctors.Etale.UpperStarSurjective
+public import WeilConjectures.RepresentationTheory.DiscreteModule.Sylow
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyPullback
 
 /-!
@@ -75,7 +75,9 @@ theorem exists_ne_zero_smul_eq_zero_of_connected_cover [Fact ℓ.Prime]
       smul_zero _ := map_zero _
       smul_add _ _ _ := map_add _ _ _ }
   obtain ⟨n, hn⟩ := hΛ
-  obtain ⟨v, hv0, hvℓ, hvG⟩ := hG.exists_fixed_ne_zero_nsmul_eq_zero (A := A) fun a ↦
+  obtain ⟨v, hv0, hvℓ, hvG⟩ := exists_ne_zero_nsmul_eq_zero_smul_eq_of_isPGroup (A := A) ℓ ⊥
+    (fun g hg a ↦ by rw [Subgroup.mem_bot.1 hg, one_smul])
+    (fun g ↦ (hG g).imp fun j hj ↦ hj ▸ Subgroup.one_mem _) fun a ↦
     ⟨n, by rw [← Nat.cast_smul_eq_nsmul Λ, Nat.cast_pow, hn, zero_smul]⟩
   have hE : Presheaf.IsSheaf V.smallEtaleTopology (H.obj ⋙ forget (ModuleCat.{u + 1} Λ)) :=
     (Presheaf.isSheaf_iff_isSheaf_forget _ _ _).mp H.property
@@ -174,7 +176,8 @@ theorem exists_mono_constantSheaf_of_connected_cover
   have : Mono ((c.π)^*[ModuleCat.{u + 1} Λ].map χ) := by
     rw [hπχ']
     infer_instance
-  have : Mono χ := mono_of_mono_upperStar_map c.π c.surjective.surj χ
+  have := Etale.faithful_upperStar_of_surjective Λ c.π c.surjective.surj
+  have : Mono χ := Functor.mono_of_mono_map ((c.π)^*[ModuleCat.{u + 1} Λ]) inferInstance
   have : Finite (M ⧸ LinearMap.range f.hom) := Module.finite_of_finite Λ
   refine ⟨N, inferInstance, fun n ↦ ?_, χ, inferInstance,
     ModuleCat.of Λ (M ⧸ LinearMap.range f.hom),

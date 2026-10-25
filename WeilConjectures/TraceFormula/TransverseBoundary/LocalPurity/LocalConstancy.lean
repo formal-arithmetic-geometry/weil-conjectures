@@ -58,8 +58,9 @@ theorem hasFiniteLocallyConstantHomology_puncturedYι_jW_constantZModModule
   let Q (d : C.puncturedY) : C.W.toScheme.Opens := C.W.ι ⁻¹ᵁ O d
   have hι (d : C.puncturedY) : C.W.ι (C.puncturedYι d) = C.iY (C.puncturedY.ι d) := by
     rw [← Scheme.Hom.comp_apply, puncturedYι_ι, Scheme.Hom.comp_apply]
-  refine IsFiniteLocallyConstantSheaf.of_opens (fun d ↦ C.puncturedYι ⁻¹ᵁ Q d)
-    (fun d ↦ ⟨d, by simpa [Q, hι] using hO d⟩) _ fun d ↦ ?_
+  refine @IsFiniteLocallyConstantSheaf.of_openCover _ _ _ _ _ _ _ _ _ _
+    (Scheme.openCoverOfIsOpenCover _ (fun d ↦ C.puncturedYι ⁻¹ᵁ Q d) (eq_top_iff.2 fun d _ ↦
+      TopologicalSpace.Opens.mem_iSup.2 ⟨d, by simpa [Q, hι] using hO d⟩)) _ fun d ↦ ?_
   let E := (DerivedCategory.singleFunctor _ 0).obj (constantZModModule C.V ℓ)
   suffices h : HasFiniteLocallyConstantHomology (C.puncturedYι ⁻¹ᵁ Q d)
       ((L((C.puncturedYι ∣_ Q d)^*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)])).obj

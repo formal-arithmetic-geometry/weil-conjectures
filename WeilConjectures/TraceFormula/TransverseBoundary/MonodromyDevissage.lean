@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCoverConnected
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDual
 public import WeilConjectures.TraceFormula.TransverseBoundary.DevissageStep
 
 /-!
@@ -91,7 +92,7 @@ theorem prop_singleFunctor_of_connected_cover {G : Type (u + 1)} [Group G] [Fini
   subst hn
   by_cases hM : Subsingleton M
   · refine prop_of_isZero ℓ P hconst _ (Functor.map_isZero _ ?_)
-    exact isZero_of_isZero_upperStar_obj c.π c.surjective.surj
+    exact isZero_of_isZero_upperStar_of_surjective _ c.π c.surjective.surj
       ((Functor.map_isZero _ (ModuleCat.isZero_of_subsingleton M)).of_iso φ)
   rw [not_subsingleton_iff_nontrivial] at hM
   obtain ⟨y, hy0, hyℓ⟩ := exists_ne_zero_smul_eq_zero_of_connected_cover ℓ c hΛ hG H M φ

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 
@@ -17,7 +18,6 @@ groups (blueprint `det-tf-transverse-corner-vanishing`, forgetting `Λ`).
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.sheafForget₂CoinduceAdjunction`
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekSheafForget₂Iso`
 -/
 
@@ -33,19 +33,6 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The forgetful functor from étale sheaves of `Λ`-modules to abelian étale sheaves is left
-adjoint to postcomposition with the coinduction `ModuleCat.coinduce Λ`, the right adjoint of
-the forgetful functor `ModuleCat Λ ⥤ Ab`. -/
-noncomputable def sheafForget₂CoinduceAdjunction (X : Scheme.{u}) :
-    sheafForget₂ Λ X ⊣ sheafCompose X.smallEtaleTopology (ModuleCat.coinduce.{u + 1} Λ) :=
-  have hadj := ModuleCat.forget₂CoinduceAdj.{u + 1} Λ
-  have : PreservesLimitsOfSize.{u, u + 1} (ModuleCat.coinduce.{u + 1} Λ) :=
-    hadj.rightAdjoint_preservesLimits
-  have : X.smallEtaleTopology.HasSheafCompose (ModuleCat.coinduce.{u + 1} Λ) :=
-    hasSheafCompose_of_preservesLimitsOfSize _
-  (Sheaf.adjunction X.smallEtaleTopology hadj).ofNatIsoLeft
-    (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso _ _)
-
 /-- The extension by zero along an open immersion commutes with forgetting the
 `Λ`-module structure: both composites are left adjoint to the functor sending an abelian
 sheaf `G` on `X` to the coinduced sheaf of `Λ`-modules `Hom_ℤ(Λ, j^* G)` on `U`, as
@@ -54,8 +41,8 @@ noncomputable def openImmersionLowerShriekSheafForget₂Iso :
     (j)_!open[ModuleCat.{u + 1} Λ] ⋙ sheafForget₂ Λ X ≅
       sheafForget₂ Λ U ⋙ (j)_!open[AddCommGrpCat.{u + 1}] :=
   ((openImmersionLowerShriekAdjunction _ j).comp
-    (sheafForget₂CoinduceAdjunction Λ X)).leftAdjointUniq
-    (((sheafForget₂CoinduceAdjunction Λ U).comp
+    (Sheaf.forget₂CoinduceAdj X.smallEtaleTopology Λ)).leftAdjointUniq
+    (((Sheaf.forget₂CoinduceAdj U.smallEtaleTopology Λ).comp
       (openImmersionLowerShriekAdjunction _ j)).ofNatIsoRight (Iso.refl _))
 
 end AlgebraicGeometry.Etale

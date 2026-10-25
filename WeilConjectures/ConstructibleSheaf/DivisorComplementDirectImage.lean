@@ -42,19 +42,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- Finite local constancy of sheaves of `ℤ/ℓ`-modules is invariant under isomorphism
-(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_iso` with an explicit hypothesis). -/
-lemma isFiniteLocallyConstantSheaf_zmodCoeff_of_iso {X : Scheme.{u}}
-    {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ZModCoeff.{u} ℓ))} (e : F ≅ F')
-    (h : IsFiniteLocallyConstantSheaf
-      (FA := fun M N : ModuleCat.{u + 1} (ZModCoeff.{u} ℓ) ↦ M →ₗ[ZModCoeff.{u} ℓ] N)
-      (CA := fun M : ModuleCat.{u + 1} (ZModCoeff.{u} ℓ) ↦ M) F) :
-    IsFiniteLocallyConstantSheaf
-      (FA := fun M N : ModuleCat.{u + 1} (ZModCoeff.{u} ℓ) ↦ M →ₗ[ZModCoeff.{u} ℓ] N)
-      (CA := fun M : ModuleCat.{u + 1} (ZModCoeff.{u} ℓ) ↦ M) F' :=
-  have := h
-  IsFiniteLocallyConstantSheaf.of_iso e
-
 /-- The pushforward of the constant sheaf `ℤ/ℓ` along a surjective closed immersion is finite
 locally constant. -/
 theorem isFiniteLocallyConstantSheaf_lowerStar_constantZModModule {W Y : Scheme.{u}}
@@ -67,7 +54,7 @@ theorem isFiniteLocallyConstantSheaf_lowerStar_constantZModModule {W Y : Scheme.
       (CA := fun M : ModuleCat.{u + 1} (ZModCoeff.{u} ℓ) ↦ M)
       ((p)^*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].obj
         ((p)_*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].obj (constantZModModule W ℓ))) :=
-    isFiniteLocallyConstantSheaf_zmodCoeff_of_iso ℓ (asIso
+    @IsFiniteLocallyConstantSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _ (asIso
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)) p).counit.app
       (constantZModModule W ℓ))).symm (isFiniteLocallyConstantSheaf_constantSheaf _)
   exact IsFiniteLocallyConstantSheaf.of_upperStar p _
@@ -87,7 +74,7 @@ theorem HasDivisorComplementDirectImages.hasFiniteLocallyConstantHomology {U X D
   intro n
   let K := (R((j)_*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)])).obj
     ((DerivedCategory.singleFunctor _ 0).obj (constantZModModule U ℓ))
-  refine isFiniteLocallyConstantSheaf_zmodCoeff_of_iso ℓ
+  refine @IsFiniteLocallyConstantSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
     ((leftDerivedUpperStarHomologyFunctorIso _ ι n).app K) ?_
   obtain ⟨q, rfl⟩ | hn : (∃ q : ℕ, n = q) ∨ n < 0 := by
     rcases le_or_gt 0 n with h | h
@@ -97,12 +84,12 @@ theorem HasDivisorComplementDirectImages.hasFiniteLocallyConstantHomology {U X D
         higherDirectImage (ZModCoeff.{u} ℓ) j q (constantZModModule U ℓ) :=
       Functor.homologyRightDerivedFunctorObjSingleFunctorIso _ _ q ≪≫
         (Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso _ _ q).symm
-    refine isFiniteLocallyConstantSheaf_zmodCoeff_of_iso ℓ
+    refine @IsFiniteLocallyConstantSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
       ((ι)^*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].mapIso e).symm ?_
     obtain hq | rfl | rfl : 2 ≤ q ∨ q = 0 ∨ q = 1 := by lia
     · exact IsFiniteLocallyConstantSheaf.of_isZero (Functor.map_isZero _ (hj.1 q hq))
     · obtain ⟨e₀⟩ := hj.2.1
-      exact isFiniteLocallyConstantSheaf_zmodCoeff_of_iso ℓ
+      exact @IsFiniteLocallyConstantSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
         (((ι)^*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].mapIso e₀ ≪≫
           (Scheme.upperStarConstantSheafIso _ ι).app _).symm) inferInstance
     · obtain ⟨e₁⟩ := hj.2.2
@@ -111,7 +98,7 @@ theorem HasDivisorComplementDirectImages.hasFiniteLocallyConstantHomology {U X D
         rw [← Set.range_eq_univ, Pullback.range_snd, Set.preimage_eq_univ_iff]
         exact hι⟩
       have := isFiniteLocallyConstantSheaf_lowerStar_constantZModModule ℓ (pullback.snd i ι)
-      exact isFiniteLocallyConstantSheaf_zmodCoeff_of_iso ℓ
+      exact @IsFiniteLocallyConstantSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
         (((ι)^*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].mapIso e₁ ≪≫ e₂).symm) this
   · have := Functor.isGE_rightDerivedFunctor_obj_singleFunctor
       (j)_*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)] (constantZModModule U ℓ)

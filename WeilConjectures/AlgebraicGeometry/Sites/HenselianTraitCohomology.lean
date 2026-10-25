@@ -30,8 +30,6 @@ character `χ : G → ℤ_ℓ` with `χ τ = 1` whose kernel has finite quotient
   vanishing in degrees `q ≥ 2`.
 - `IsDiscreteValuationRing.nonempty_addEquiv_sheafH_one_constantZMod_spec_of_isFractionRing`:
   `H¹(Spec K, ℤ/ℓ) ≃ ℤ/ℓ`.
-- `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod_spec`:
-  `H⁰(Spec K, ℤ/ℓ) ≃ ℤ/ℓ` for every field `K`.
 -/
 
 @[expose] public section
@@ -47,13 +45,6 @@ lemma DiscreteModule.isPrimary_trivial_zmod {G : Type u} [Group G] [TopologicalS
   refine fun x ↦ ⟨1, ULift.ext _ _ ((ULift.smul_down x _).trans ?_)⟩
   rw [pow_one, nsmul_eq_mul, ZMod.natCast_self, zero_mul]
   rfl
-
-/-- The global sections of the constant sheaf `ℤ/n` on the spectrum of a field are `ℤ/n`.
-(blueprint `det-tf-transverse-corner-constant`) -/
-theorem AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod_spec
-    (K : Type u) [Field K] (n : ℕ) :
-    Nonempty (Sheaf.H ((Spec (.of K)).constantZMod n) 0 ≃+ ZMod n) :=
-  (Spec (.of K)).nonempty_addEquiv_sheafH_zero_constantZMod n
 
 namespace IsDiscreteValuationRing
 

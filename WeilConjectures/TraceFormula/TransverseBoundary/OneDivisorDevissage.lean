@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RegularOpens
 public import WeilConjectures.ConstructibleSheaf.DistTriang
-public import WeilConjectures.ConstructibleSheaf.LocallyConstantOpenCover
+public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerivedUnbounded
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyDevissage
@@ -138,8 +138,9 @@ theorem hasFiniteLocallyConstantHomology_of_constantSheaf {W V D : Scheme.{u}}
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj E)) := by
   intro n
   let Q : D → W.Opens := fun d ↦ ⟨connectedComponent (ι d), isOpen_connectedComponent⟩
-  refine IsFiniteLocallyConstantSheaf.of_opens (fun d ↦ ι ⁻¹ᵁ Q d)
-    (fun d ↦ ⟨d, mem_connectedComponent⟩) _ fun d ↦ ?_
+  refine @IsFiniteLocallyConstantSheaf.of_openCover _ _ _ _ _ _ _ _ _ _
+    (Scheme.openCoverOfIsOpenCover _ (fun d ↦ ι ⁻¹ᵁ Q d) (eq_top_iff.2 fun d _ ↦
+      TopologicalSpace.Opens.mem_iSup.2 ⟨d, mem_connectedComponent⟩)) _ fun d ↦ ?_
   obtain ⟨a, -, ha, -⟩ := hE.1
   let E' := (L(((j ⁻¹ᵁ Q d).ι)^*[ModuleCat.{u + 1} Λ])).obj E
   suffices h : HasFiniteLocallyConstantHomology (ι ⁻¹ᵁ Q d)
