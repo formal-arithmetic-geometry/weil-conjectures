@@ -183,13 +183,14 @@ theorem IsTraitProduct.restrictOpen {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom 
       (Z' := P.restrictSpecialFibre (productOpen φ₁ φ₂ V W))
       (φ₁.restrictOpen (productOpen φ₁ φ₂ V W) V inf_le_left)
       (φ₂.restrictOpen (productOpen φ₁ φ₂ V W) W inf_le_right) := by
-  obtain ⟨qM, gM, qN, gN, hM, hN, hpb, hP⟩ := h.exists_isTraitModelOver
+  obtain ⟨qM, gM, qN, gN, hM, hN, hpb, hP, hc⟩ := h.exists_isTraitModelOver
   obtain ⟨eM, heM⟩ := h.exists_comp_ε_left
   obtain ⟨eN, heN⟩ := h.exists_comp_ε_right
   refine ⟨⟨V.ι ≫ qM, (M.j ⁻¹ᵁ V).ι ≫ gM, W.ι ≫ qN, (N.j ⁻¹ᵁ W).ι ≫ gN, hM.restrictOpen V,
-    hN.restrictOpen W, isPullback_resLE_inf hpb V W, ?_⟩, ⟨V.ι ≫ eM, ?_⟩, ⟨W.ι ≫ eN, ?_⟩⟩
+    hN.restrictOpen W, isPullback_resLE_inf hpb V W, ?_, ?_⟩, ⟨V.ι ≫ eM, ?_⟩, ⟨W.ι ≫ eN, ?_⟩⟩
   · convert hP.restrictOpen (productOpen φ₁ φ₂ V W) using 1 <;>
       simp [Scheme.Hom.resLE_comp_ι_assoc]
+  · simp [Scheme.Hom.resLE_comp_ι_assoc, hc]
   · simp [← heM]
   · simp [← heN]
 

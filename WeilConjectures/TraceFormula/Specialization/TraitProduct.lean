@@ -80,14 +80,16 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCycle
 /-- Morphisms of models `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N` exhibit `P` as the *product over the trait*
 of the models `M` and `N` of finite type over `S = Spec k'⟦t⟧`: the total space of `P` is the
 fibre product `𝒳 ×_S 𝒴` of the total spaces (with the projections `φ₁.total`, `φ₂.total`), `P` is
-a model of finite type over the trait along the induced structure morphism, and the
-identifications `ε` of `M` and `N` factor through their total spaces. -/
+a model of finite type over the trait along the induced structure morphism, the geometric generic
+fibre of `P` is the product of those of `M` and `N` over the same geometric generic point
+`Spec Ω` (the projections are compatible with the structure morphisms `gM`, `gN` to `Spec Ω`),
+and the identifications `ε` of `M` and `N` factor through their total spaces. -/
 structure IsTraitProduct (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂') : Prop where
   exists_isTraitModelOver : ∃ (qM : M.total ⟶ trait k')
       (gM : M.generic ⟶ Spec (.of (traitGenericField k'))) (qN : N.total ⟶ trait k')
       (gN : N.generic ⟶ Spec (.of (traitGenericField k'))),
     M.IsTraitModelOver qM gM ∧ N.IsTraitModelOver qN gN ∧ IsPullback φ₁.total φ₂.total qM qN ∧
-      P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM)
+      P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM) ∧ φ₂.generic ≫ gN = φ₁.generic ≫ gM
   exists_comp_ε_left : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε
   exists_comp_ε_right : ∃ e : N.total ⟶ Y, N.j ≫ e = N.ε
 

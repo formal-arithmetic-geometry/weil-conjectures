@@ -44,9 +44,6 @@ sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ
 * `NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`: projective closures over the
   trait of affine schemes of finite type (projective space over `k'⟦t⟧` and closures in it are
   not formalised).
-* `NearbyCyclesModel.isIso_kunnethMap_of_isIso_kunnethMap_twistSnd`: the Galois twist relating
-  the Künneth maps of the second projection and of its twist compatible with the structure
-  morphisms of the geometric generic fibres to `Spec Ω`.
 
 The reduction to proper models is proved from these: locality on the special fibre reduces to
 affine total spaces (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), and for affine
@@ -220,6 +217,7 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
       (((pullbackSquareComparison Λ φ₁.commSq_ε).app A).symm ⊗ᵢ
         ((pullbackSquareComparison Λ φ₂.commSq_ε).app B).symm) ≪≫ e).symm)) (hgeom C₀ hC₀)
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
 `S = Spec k'⟦t⟧` is an open subscheme of a proper `S`-scheme (its closure in `ℙⁿ_S` along a
 closed embedding into `𝔸ⁿ_S ⊆ ℙⁿ_S`). -/
@@ -227,47 +225,6 @@ theorem exists_isProper_openImmersion_of_isAffine {T : Scheme.{u}} (q : T ⟶ tr
     [IsAffine T] [LocallyOfFiniteType q] :
     ∃ (Tc : Scheme.{u}) (qc : Tc ⟶ trait k') (c : T ⟶ Tc), IsProper qc ∧ IsOpenImmersion c ∧
       c ≫ qc = q :=
-  sorry
-
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
-/-- The *twist* of the second projection of a product over the trait: the morphism of models
-`P ⟶ N` with the same morphism of total spaces, whose morphism of geometric generic fibres is
-compatible with the structure morphisms `φ₁.generic ≫ gM` and `gN` to `Spec Ω`. It differs from
-`φ₂` by an automorphism of the geometric generic fibre of `P` over its total space (a Galois
-twist on each connected component). -/
-@[simps]
-noncomputable def Hom.twistSnd (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
-    (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
-    (hpb : IsPullback φ₁.total φ₂.total qM qN) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε) :
-    P.Hom N f₂ f₂' where
-  total := φ₂.total
-  generic := hN.isPullback_j.lift (P.j ≫ φ₂.total) (φ₁.generic ≫ gM) (by
-    rw [Category.assoc, ← hpb.w, ← Category.assoc, ← φ₁.comm_j, Category.assoc,
-      hM.isPullback_j.w, Category.assoc])
-  comm_j := hN.isPullback_j.lift_fst _ _ _
-  comm_i := φ₂.comm_i
-  comm_ε := by
-    rw [← heN, IsPullback.lift_fst_assoc, ← φ₂.comm_ε, ← heN, ← Category.assoc, φ₂.comm_j,
-      Category.assoc]
-
-include hΛ in
-/-- **The Galois twist** (Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7):
-the Künneth map of a product over the trait is invertible on bounded constructible complexes if
-the Künneth map with the second projection replaced by its twist `Hom.twistSnd`, compatible with
-the structure morphisms of the geometric generic fibres to `Spec Ω`, is. The two projections
-differ by an automorphism of the geometric generic fibre of `P` over its total space. -/
-theorem isIso_kunnethMap_of_isIso_kunnethMap_twistSnd (hM : M.IsTraitModelOver qM gM)
-    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
-    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM)) {eM : M.total ⟶ X}
-    (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))}
-    (hA : boundedConstructible (condensedRingObj Λ X) A)
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))}
-    (hB : boundedConstructible (condensedRingObj Λ Y) B)
-    (h : IsIso (kunnethMap Λ φ₁ (Hom.twistSnd φ₁ φ₂ hM hN hpb heN) A B)) :
-    IsIso (kunnethMap Λ φ₁ φ₂ A B) :=
   sorry
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
@@ -328,7 +285,7 @@ theorem isIso_kunnethMap_closure_of_forall_isProper
   rw [e]
   exact IsPullback.of_hasPullback _ _
 
-include hΛ in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Reduction of Gabber's Künneth formula to proper models, affine case** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
@@ -336,10 +293,9 @@ for all products over the trait of models of finite type along proper structure 
 projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,
 then it is an isomorphism for products over the trait of models with affine total spaces.
 
-The second projection is replaced by its twist compatible with the structure morphisms to
-`Spec Ω` (`NearbyCyclesModel.isIso_kunnethMap_of_isIso_kunnethMap_twistSnd`); the Künneth map is
-that of the models of the total spaces (`NearbyCyclesModel.isIso_kunnethMap_of_toGeometricGeneric`);
-these are restrictions of the standard models of projective closures of the total spaces
+The Künneth map is that of the models of the total spaces
+(`NearbyCyclesModel.isIso_kunnethMap_of_toGeometricGeneric`); these are restrictions of the
+standard models of projective closures of the total spaces
 (`NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`), and the coefficients are
 extended by zero (`NearbyCyclesModel.isIso_kunnethMap_toGeometricGeneric_of_closure`). -/
 theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
@@ -368,10 +324,9 @@ theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
       (condensedRingObj Λ Y))}
     (hB : boundedConstructible (condensedRingObj Λ Y) B) :
     IsIso (kunnethMap Λ φ₁ φ₂ A B) := by
-  obtain ⟨qM, gM, qN, gN, hM, hN, hpb, hP⟩ := h.exists_isTraitModelOver
+  obtain ⟨qM, gM, qN, gN, hM, hN, hpb, hP, hc⟩ := h.exists_isTraitModelOver
   obtain ⟨eM, heM⟩ := h.exists_comp_ε_left
   obtain ⟨eN, heN⟩ := h.exists_comp_ε_right
-  refine isIso_kunnethMap_of_isIso_kunnethMap_twistSnd Λ hM hN hpb hP heM heN hA hB ?_
   have := hMa
   have := hNa
   have := hM.locallyOfFiniteType
@@ -381,14 +336,13 @@ theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
   have := noetherianSpace_of_isProper qcM
   have := noetherianSpace_of_isProper qcN
   refine isIso_kunnethMap_of_toGeometricGeneric Λ _ _ heM heN A B ?_
-  exact isIso_kunnethMap_toGeometricGeneric_of_closure Λ (φ₂ := Hom.twistSnd φ₁ φ₂ hM hN hpb heN)
-    hM hN hpb hP (by simp) uM uN hcM hcN
+  exact isIso_kunnethMap_toGeometricGeneric_of_closure Λ hM hN hpb hP hc uM uN hcM hcN
     (fun A' B' hA' hB' ↦ isIso_kunnethMap_closure_of_forall_isProper Λ hproper qcM qcN A' B' hA'
       hB')
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
 
-include hΛ in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
@@ -427,7 +381,7 @@ theorem isIso_kunnethMap_of_forall_isProper
       (condensedRingObj Λ Y))}
     (hB : boundedConstructible (condensedRingObj Λ Y) B) :
     IsIso (kunnethMap Λ φ₁ φ₂ A B) := by
-  obtain ⟨qM, gM, qN, gN, hM, hN, -, hP⟩ := h.exists_isTraitModelOver
+  obtain ⟨qM, gM, qN, gN, hM, hN, -, hP, -⟩ := h.exists_isTraitModelOver
   have := hM.isTraitModel.isNoetherian_total
   have := hN.isTraitModel.isNoetherian_total
   have := hP.isTraitModel.isNoetherian_total

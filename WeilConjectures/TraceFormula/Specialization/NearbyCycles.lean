@@ -179,7 +179,9 @@ theorem isTraitProduct_deformationProdModel (I : X.left.IdealSheafData) :
             (deformationProdTotalToTrait X I X I k') _
           rw [deformationProdFstGeneric, pullback.lift_snd, Category.comp_id]
           exact IsPullback.of_hasPullback _ _,
-        isPullback_deformationProdSpecialToTotal X I X I k'⟩⟩
+        isPullback_deformationProdSpecialToTotal X I X I k'⟩,
+      by simp [deformationProdSndModelHom, deformationProdFstModelHom, deformationProdFstGeneric,
+        deformationProdSndGeneric]⟩
   exists_comp_ε_left := deformationModel_exists_comp_ε X I k'
   exists_comp_ε_right := deformationModel_exists_comp_ε X I k'
 
