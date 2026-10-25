@@ -47,8 +47,6 @@ private theorem comparison_fst {X Y Z : Scheme.{u}}
   subst k
   simpa using pullbackComp_inv_fst f g W
 
--- the statement binds `α` in its last clause without using it
-set_option linter.unusedVariables false in
 /-- Blueprint: lem-weil-pbc-etale-finite-data-descent. -/
 theorem etale_finite_data_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
@@ -116,7 +114,7 @@ theorem etale_finite_data_descent
     (∀ (A : Type v) [Finite A] [Quiver.{v} A]
       [Finite (Σ a b : A, Quiver.Hom a b)]
       (i : Iᵒᵖ) (G : Paths A ⥤ Over (D.obj i)) (F : Paths A ⥤ Over c.pt)
-      (α : G ⋙ Over.pullback (c.π.app i) ≅ F),
+      (_α : G ⋙ Over.pullback (c.π.app i) ≅ F),
       (∀ a, Etale (G.obj a).hom ∧ LocallyOfFinitePresentation (G.obj a).hom ∧
         QuasiCompact (G.obj a).hom ∧ QuasiSeparated (G.obj a).hom) →
       ∀ (b : A) (B : Finset (Σ a : A, Quiver.Hom a b)),
