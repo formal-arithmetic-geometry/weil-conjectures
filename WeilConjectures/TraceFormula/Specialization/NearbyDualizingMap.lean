@@ -18,7 +18,8 @@ public import WeilConjectures.TraceFormula.Specialization.PointModel
 Let `S = Spec k'⟦t⟧` be the strictly henselian trait, `k'` separably closed. A model `M` of a
 separated `k`-scheme `X` of finite type is a *trait model of `X` over the base*
 (`NearbyCyclesModel.IsTraitModelOfBase`) if it is of finite type over `S` along `q : 𝒳 ⟶ S`,
-its identification `ε : 𝒳_Ω ⟶ X` factors through the total space, and its geometric generic fibre
+its identification `ε : 𝒳_Ω ⟶ X` factors through a `k`-morphism `𝒳 ⟶ X` (`𝒳` being a `k`-scheme
+through `q` and `S ⟶ Spec k`), and its geometric generic fibre
 is the base change `X ×_k Spec Ω`. Such a model maps to the trait model of the point
 (`ProEtale.CondensedRing.traitModel`) over the structure morphisms
 (`NearbyCyclesModel.IsTraitModelOfBase.toTrait`), with proper exchange
@@ -65,7 +66,8 @@ variable (k : Type u) [Field k] {k' : Type u} [Field k'] [Algebra k k']
 
 /-- A nearby-cycles model `M` of a `k`-scheme `X` with special fibre `X'` is a *trait model of `X`
 over the base* along `q : 𝒳 ⟶ S` and `g : 𝒳_Ω ⟶ Spec Ω` if it is of finite type over the trait
-`S = Spec k'⟦t⟧` along `q` and `g`, its identification `ε` factors through the total space, and
+`S = Spec k'⟦t⟧` along `q` and `g`, its identification `ε` factors through a morphism `e : 𝒳 ⟶ X`
+of `k`-schemes (`e ≫ (X ⟶ Spec k) = q ≫ (S ⟶ Spec k)`), and
 `(ε, g) : 𝒳_Ω ⟶ X ×_k Spec Ω` is an open immersion into the base change of `X` along
 `Spec Ω ⟶ S ⟶ Spec k`, so that the geometric generic fibre is an open of `X_Ω` (it is all of `X_Ω`
 for the deformation to the normal cone, and an open of it for restrictions of models to opens of
@@ -74,7 +76,7 @@ structure IsTraitModelOfBase {X : Over (Spec (.of k))} {X' : Over (Spec (.of k')
     (M : NearbyCyclesModel X.left X'.left) (q : M.total ⟶ trait k')
     (g : M.generic ⟶ Spec (.of (traitGenericField k'))) : Prop where
   isTraitModelOver : M.IsTraitModelOver q g
-  exists_comp_ε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε
+  exists_comp_ε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε ∧ e ≫ X.hom = q ≫ traitToBase k k'
   exists_openImmersion : ∃ u : M.generic ⟶ pullback X.hom (traitGenericPoint k' ≫ traitToBase k k'),
     IsOpenImmersion u ∧ u ≫ pullback.fst _ _ = M.ε ∧ u ≫ pullback.snd _ _ = g
 
@@ -90,7 +92,8 @@ lemma preservesBoundedConstructible (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar
     [Fact (ringChar k' ≠ ℓ)]
     [IsSepClosed k'] (h : M.IsTraitModelOfBase k q g) :
     M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
-  M.preservesBoundedConstructible_of_isTraitModel h.isTraitModelOver.isTraitModel h.exists_comp_ε
+  M.preservesBoundedConstructible_of_isTraitModel h.isTraitModelOver.isTraitModel
+    (h.exists_comp_ε.imp fun _ he ↦ he.1)
 
 /-- The morphism of models `a : M ⟶ S` from a trait model of `X` over the base to the trait
 model of the point, over the structure morphisms `X ⟶ Spec k` and `X' ⟶ Spec k'`. -/
@@ -108,7 +111,8 @@ noncomputable def toTrait (h : M.IsTraitModelOfBase k q g) :
 
 /-- A model whose geometric generic fibre is the base change of `X` (a pullback square) is a trait
 model of `X` over the base. -/
-lemma of_isPullback (hM : M.IsTraitModelOver q g) (hε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε)
+lemma of_isPullback (hM : M.IsTraitModelOver q g)
+    (hε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε ∧ e ≫ X.hom = q ≫ traitToBase k k')
     (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k')) :
     M.IsTraitModelOfBase k q g :=
   ⟨hM, hε, hgen.isoPullback.hom, inferInstance, hgen.isoPullback_hom_fst,

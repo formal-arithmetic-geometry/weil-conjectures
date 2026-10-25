@@ -202,7 +202,8 @@ theorem nonempty_specialization_verdierDual_iso
   NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
     (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
     (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
-      isPullback_deformationSpecialFibre X _ k'⟩ (deformationModel_exists_comp_ε X x.left.ker k')
+      isPullback_deformationSpecialFibre X _ k'⟩ ⟨deformationTotalToBase X _ k', rfl,
+        deformationTotalToBase_hom X _ k'⟩
       (isPullback_deformationModel_ε k' x)) K
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
