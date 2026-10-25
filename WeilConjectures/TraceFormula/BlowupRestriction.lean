@@ -8,7 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.EllMonodromyPullback
 public import WeilConjectures.TraceFormula.PuncturedRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionCoproduct
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
 
 /-!
 # Restriction through the blow-up of a strictly local surface
@@ -46,23 +46,6 @@ lemma HasFiniteEllMonodromy.upperStar {ℓ : ℕ} {U V : Scheme.{u}} (f : V ⟶ 
     (hE : HasFiniteEllMonodromy ℓ E) :
     HasFiniteEllMonodromy ℓ (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) :=
   hE.upperStar' f
-
-/-- Base change for the derived extension by zero along a cartesian square of schemes
-`g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions: `g''^* j_! E ≅ j'_! g'^* E`. -/
-noncomputable def derivedOpenImmersionLowerShriekBaseChangeIso {U' U Z' Z : Scheme.{u}}
-    {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z} [IsOpenImmersion j]
-    [IsOpenImmersion j'] (hsq : IsPullback g' j' j g'')
-    (E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((g'')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
-        (((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) ≅
-      ((j')_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
-        (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) :=
-  have := isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) hsq
-  ((Functor.mapDerivedCategoryCompIso _ _).app E).symm ≪≫
-    (Functor.mapDerivedCategoryNatIso
-      (asIso (openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ)
-        hsq.toCommSq))).symm.app E ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app E
 
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {ℓ : ℕ} [Fact ℓ.Prime] [Finite Λ]
@@ -136,7 +119,10 @@ theorem globalSectionsRestriction_eq_zero_of_transverse (hℓ : (ℓ : k) ≠ 0)
         hUXY hle EZ (hE.upperStar φU) R c s hs hcs) ι jW hι
   have hφι : globalSectionsRestriction ι
       (((φ)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj F) = 0 := by
-    let e := derivedOpenImmersionLowerShriekBaseChangeIso hφ E
+    let e : ((φ)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj F ≅
+        ((Z.left.homOfLE hle)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj EZ :=
+      ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
+        (ModuleCat.{u + 1} Λ) hφ).app E).symm
     have hn := globalSectionsRestriction_naturality ι e.hom
     rw [hZero, comp_zero] at hn
     rw [← cancel_mono ((rightDerivedGlobalSections _ _).map
