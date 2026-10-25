@@ -13123,6 +13123,7 @@ public import WeilConjectures.TraceFormula.SupportedClass
 public import WeilConjectures.TraceFormula.SupportedClassNaturality
 public import WeilConjectures.TraceFormula.SupportedPairing
 public import WeilConjectures.TraceFormula.SupportedRestriction
+public import WeilConjectures.TraceFormula.SupportedRestrictionCoefficientChange
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
 public import WeilConjectures.TraceFormula.TraceClassDiagonal
