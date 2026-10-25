@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
 public import WeilConjectures.TraceFormula.Specialization.Trait
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftStrictlyHenselian
+public import WeilConjectures.RingTheory.ProEtale.SpanIdempotents
 
 /-!
 
@@ -30,6 +32,7 @@ generic point `Spec Ω ⟶ S` is weakly contractible
 universe u
 
 open CategoryTheory Limits
+open scoped TensorProduct
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -37,6 +40,7 @@ open Scheme
 
 variable {k' : Type u} [Field k'] [IsSepClosed k']
 
+attribute [local instance] Algebra.TensorProduct.rightAlgebra in
 /-- The henselian lift `W = Spec H_{k'⟦t⟧}(C̄)` of a w-contractible ind-étale
 `k'⟦t⟧ ⧸ (t)`-algebra `C̄` has a weakly contractible geometric generic fibre
 `W ×_S Spec Ω`. -/
@@ -46,7 +50,80 @@ theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type
     [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C] (hC : IsWContractibleRing C) :
     (ProEt.topology (Spec (.of (traitGenericField k')))).IsWeaklyContractible.{u + 1}
       ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (traitGenericPoint k')).obj
-        (closedLiftSpec (.of (PowerSeries k')) C)) :=
-  sorry
+        (closedLiftSpec (.of (PowerSeries k')) C)) := by
+  let H := Algebra.ClosedLift (PowerSeries k') C
+  let Ω := traitGenericField k'
+  let φ : H →ₐ[PowerSeries k'] H ⊗[PowerSeries k'] Ω := Algebra.TensorProduct.includeLeft
+  let E : Set (H ⊗[PowerSeries k'] Ω) := φ '' {e | IsIdempotentElem e}
+  have hE : ∀ x ∈ E, IsIdempotentElem x := by
+    rintro _ ⟨e, he, rfl⟩
+    exact he.map φ
+  have hC0 (a : PowerSeries k') (ha : a ∈ IsLocalRing.maximalIdeal (PowerSeries k')) :
+      algebraMap (PowerSeries k') C a = 0 := by
+    rw [PowerSeries.maximalIdeal_eq_span_X] at ha
+    rw [IsScalarTower.algebraMap_apply (PowerSeries k')
+      (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C,
+      Ideal.Quotient.algebraMap_eq, Ideal.Quotient.eq_zero_iff_mem.mpr ha, map_zero]
+  -- `H ⊗[A] Ω` is spanned over `Ω` by the images of the idempotents of `H`.
+  have hR (x : H ⊗[PowerSeries k'] Ω) : x ∈ Submodule.span Ω E := by
+    have htmul (h : H) (hh : h ∈ Submodule.span (PowerSeries k') {e : H | IsIdempotentElem e})
+        (ω : Ω) : h ⊗ₜ[PowerSeries k'] ω ∈ Submodule.span Ω E := by
+      induction hh using Submodule.span_induction generalizing ω with
+      | mem e he =>
+        have : e ⊗ₜ[PowerSeries k'] ω = ω • φ e := by
+          simp [φ, Algebra.smul_def, Algebra.TensorProduct.right_algebraMap_apply]
+        rw [this]
+        exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨e, he, rfl⟩)
+      | zero => simp
+      | add x y _ _ hx hy => simpa [TensorProduct.add_tmul] using add_mem (hx ω) (hy ω)
+      | smul a x _ hx => simpa [TensorProduct.smul_tmul] using hx (a • ω)
+    induction x using TensorProduct.induction_on with
+    | zero => exact zero_mem _
+    | tmul h ω => exact htmul h (Algebra.ClosedLift.mem_span_isIdempotentElem hC0 h) ω
+    | add x y hx hy => exact add_mem hx hy
+  -- `H → H ⊗[A] Ω` is injective, `H` being flat over the domain `A`.
+  have hφ : Function.Injective φ := by
+    have hinj : Function.Injective (algebraMap (PowerSeries k') Ω) := by
+      rw [IsScalarTower.algebraMap_eq (PowerSeries k') (FractionRing (PowerSeries k')) Ω]
+      exact (algebraMap (FractionRing (PowerSeries k')) Ω).injective.comp
+        (IsFractionRing.injective _ _)
+    have := Module.Flat.lTensor_preserves_injective_linearMap (M := H)
+      (Algebra.linearMap (PowerSeries k') Ω) hinj
+    intro x y hxy
+    apply (TensorProduct.rid (PowerSeries k') H).symm.injective
+    apply this
+    simpa [φ] using hxy
+  -- `π₀(Spec H) ≅ π₀(Spec C̄)` is extremally disconnected.
+  have : ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum H)) := by
+    have := hC.extremallyDisconnected_connectedComponents
+    refine extremallyDisconnected_of_homeo (PrimeSpectrum.isHomeomorph_connectedComponentsMap_comap
+      (Algebra.ClosedLift.toAlgHom (PowerSeries k') C).toRingHom (fun p₁ p₂ h ↦ ?_)
+      fun e he h0 ↦ Algebra.ClosedLift.eq_zero_of_isIdempotentElem he h0).homeomorph
+    obtain ⟨c, hc, h₁, h₂⟩ := PrimeSpectrum.exists_isIdempotentElem_of_connectedComponents_mk_ne h
+    obtain ⟨e, he, rfl⟩ := Algebra.ClosedLift.exists_isIdempotentElem_toAlgHom_eq
+      (Ideal.span {(PowerSeries.X : PowerSeries k')}) hc
+    exact ⟨e, he, h₁, h₂⟩
+  -- `π₀(Spec (H ⊗[A] Ω)) ≅ π₀(Spec H)` is extremally disconnected.
+  have : ExtremallyDisconnected
+      (ConnectedComponents (PrimeSpectrum (H ⊗[PowerSeries k'] Ω))) := by
+    refine extremallyDisconnected_of_homeo (PrimeSpectrum.isHomeomorph_connectedComponentsMap_comap
+      φ.toRingHom (fun p₁ p₂ h ↦ ?_) fun e _ h0 ↦ hφ (by simpa using h0)).homeomorph.symm
+    by_contra hcon
+    push Not at hcon
+    refine h (congrArg ConnectedComponents.mk (PrimeSpectrum.ext
+      (Ideal.eq_of_forall_mem_span_isIdempotentElem hE hR ?_)))
+    rintro _ ⟨e, he, rfl⟩
+    have hmul : φ e * φ (1 - e) = 0 := by
+      rw [← map_mul, mul_sub, mul_one, he.eq, sub_self, map_zero]
+    have hadd : φ e + φ (1 - e) = 1 := by
+      rw [← map_add, add_sub_cancel, map_one]
+    refine ⟨fun h₁ ↦ ?_, fun h₂ ↦ by_contra fun h₁ ↦ hcon e he h₁ h₂⟩
+    have h₁' : φ (1 - e) ∉ p₁.asIdeal := fun h ↦
+      p₁.isPrime.one_notMem (hadd ▸ add_mem h₁ h)
+    exact ((p₂.isPrime.mem_or_mem (hmul ▸ p₂.asIdeal.zero_mem)).resolve_right
+      (hcon _ he.one_sub h₁'))
+  have : IsWContractibleRing (CommRingCat.of (H ⊗[PowerSeries k'] Ω)) :=
+    IsWContractibleRing.of_forall_mem_span_isIdempotentElem hE hR
+  exact Scheme.ProEt.isWeaklyContractible_of_iso (pullbackSpecIso (PowerSeries k') H Ω)
 
 end AlgebraicGeometry.ProEtale
