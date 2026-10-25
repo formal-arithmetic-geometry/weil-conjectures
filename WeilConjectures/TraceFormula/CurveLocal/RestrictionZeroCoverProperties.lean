@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.TraceFormula.CurveLocal.CoverComplexE
 public import WeilConjectures.TraceFormula.CurveLocal.CoverCurves
+public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonal
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstruction
@@ -83,7 +84,7 @@ theorem exists_puncturedDiagonal_finite_etale :
       πU ≫ M.ψ ≫ M.O.ι =
         D.dB'.resLE D.dD'.openComplement (D.dB' ⁻¹ᵁ D.dD'.openComplement) le_rfl ≫
           D.dD'.openComplement.ι ≫ D.π :=
-  sorry
+  D.exists_puncturedDiagonal_finite_etale'
 
 /-- **The complex `E'`** (blueprint `det-tf-restriction-zero-covers` (i) and
 `det-tf-restriction-zero-localization` (i)): for `L ≅ PL`, `K ≅ PK` with `K_ȳ = 0` and

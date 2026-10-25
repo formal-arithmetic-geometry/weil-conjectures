@@ -3966,6 +3966,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericStalkVanishingPropagation
 public import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceAnnihilator
 public import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceDescent
 public import WeilConjectures.AlgebraicGeometry.GenusInvariant
+public import WeilConjectures.AlgebraicGeometry.GeometricFiberEtaleCount
 public import WeilConjectures.AlgebraicGeometry.GeometricFiberFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.GeometricFiberFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
@@ -10043,6 +10044,7 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevel
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
+public import WeilConjectures.RingTheory.DiscreteValuationRingFiniteRank
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.DualDepthTwo
 public import WeilConjectures.RingTheory.DvrAbhyankarLocalMaximalIdeal
@@ -12751,6 +12753,9 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverComplexE
 public import WeilConjectures.TraceFormula.CurveLocal.CoverCurves
 public import WeilConjectures.TraceFormula.CurveLocal.CoverDatumExistence
 public import WeilConjectures.TraceFormula.CurveLocal.CoverPiFinite
+public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonal
+public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonalLocal
+public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonalProduct
 public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace

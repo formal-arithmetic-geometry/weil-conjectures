@@ -24,7 +24,7 @@ vanish (blueprint `det-tf-restriction-zero-localization`, item (ii)).
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.preservesFiniteColimits_Γ_of_isStrictlyHenselianLocalRing`: the
+- `AlgebraicGeometry.Etale.preservesFiniteColimits_Γ_of_iso_isStrictlyHenselianLocalRing`: the
   global sections functor of `T_ét` is exact.
 - `AlgebraicGeometry.Etale.isZero_rightDerivedGlobalSections_of_isStrictlyHenselianLocalRing`:
   `RΓ(T, P) = 0` if `t^* P = 0`.
@@ -97,7 +97,7 @@ noncomputable def isTerminalEtaleMkId (X : Scheme.{u}) : IsTerminal (Scheme.Etal
 
 /-- Over a scheme `T ≅ Spec R`, `R` strictly henselian local, the global sections functor on
 étale sheaves of `Λ`-modules is exact. -/
-lemma preservesFiniteColimits_Γ_of_isStrictlyHenselianLocalRing (e : T ≅ Spec (.of R)) :
+lemma preservesFiniteColimits_Γ_of_iso_isStrictlyHenselianLocalRing (e : T ≅ Spec (.of R)) :
     PreservesFiniteColimits (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
   have : ((sheafSections T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
       (op (Scheme.Etale.mk (𝟙 T)))).PreservesEpimorphisms :=
@@ -164,7 +164,7 @@ theorem isZero_rightDerivedGlobalSections_of_isStrictlyHenselianLocalRing
     (hP : IsZero ((Functor.mapDerivedCategoryPlus (t)^*[ModuleCat.{u + 1} Λ]).obj P)) :
     IsZero ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).obj
       (DerivedCategory.Plus.ι.obj P)) := by
-  have := preservesFiniteColimits_Γ_of_isStrictlyHenselianLocalRing (Λ := Λ) e
+  have := preservesFiniteColimits_Γ_of_iso_isStrictlyHenselianLocalRing (Λ := Λ) e
   refine IsZero.of_iso ?_
     ((Sheaf.Γ T.smallEtaleTopology _).rightDerivedFunctorIsoMapDerivedCategory.app _)
   rw [DerivedCategory.isZero_iff]

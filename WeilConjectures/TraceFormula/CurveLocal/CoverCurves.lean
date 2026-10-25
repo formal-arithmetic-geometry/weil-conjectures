@@ -363,7 +363,7 @@ theorem exists_strictHenselization_parameters {k : Type u} [Field k] [IsAlgClose
 
 /-- A point of the strict localization of a smooth curve over an algebraically closed field `k`
 at a `k`-point `c` lying over `c` is the closed point. -/
-theorem eq_closedPoint_of_strictLocalizationToBase_eq {k : Type u} [Field k] [IsAlgClosed k]
+theorem eq_closedPoint_of_strictLocalizationToBase_eq_of_smooth {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f]
     (c : Spec (.of k) ⟶ C) (hc : c ≫ f = 𝟙 _) (z : strictLocalization c)
     (hz : strictLocalizationToBase c z = c (closedPoint k)) :
@@ -618,7 +618,7 @@ lemma exists_mem_b_ne_closedPoint : ∃ P : D.T', D.π P ∈ Set.range M.b ∧
   · rw [D.π_mem_range_iff, ← Scheme.Hom.comp_apply ψ (strictLocalizationToBase D.s'), hψ,
       ← Scheme.Hom.comp_apply, Category.assoc, hΔg, ← Category.assoc, Scheme.Hom.comp_apply]
     exact ⟨_, rfl⟩
-  · refine eq_closedPoint_of_strictLocalizationToBase_eq D.fC D.c D.c_comp_fC γ ?_
+  · refine eq_closedPoint_of_strictLocalizationToBase_eq_of_smooth D.fC D.c D.c_comp_fC γ ?_
     have h1 := congrArg (strictLocalizationToBase D.s') h
     rw [← Scheme.Hom.comp_apply, hψ, D.τ'_closedPoint, Scheme.Hom.comp_apply] at h1
     have h2 := congrArg (pullback.fst D.fC D.fC) h1
