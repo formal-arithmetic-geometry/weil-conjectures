@@ -61,6 +61,7 @@ noncomputable abbrev pullbackSMul {P : Scheme.{u}} (π : P ⟶ Y) (f : X ⟶ Y) 
     (ha : a ≫ π = π) : Limits.pullback π f ⟶ Limits.pullback π f :=
   pullback.map π f π f a (𝟙 X) (𝟙 Y) (by simp [ha]) (by simp)
 
+omit [Group G] in
 /-- Simple transitivity of a group action over `Y` is stable under base change: if
 `∐_{g ∈ G} P ⟶ P ×_Y P`, `(g • -, id)` on the `g`-th summand, is an isomorphism, then so is the
 corresponding morphism for the base change `P ×_Y X`. -/
@@ -100,7 +101,12 @@ lemma isIso_sigmaDesc_pullback {P : Scheme.{u}} (π : P ⟶ Y) (f : X ⟶ Y) (sm
     exact this
   have hD : D ≫ pullback.fst π π ≫ π = v := Sigma.hom_ext _ _ fun g ↦ by simp [D, v, hsmul]
   have hm : D' ≫ m = k ≫ D := Sigma.hom_ext _ _ fun g ↦ by
-    apply pullback.hom_ext <;> simp [D', D, m, k] <;> exact Category.id_comp _
+    apply pullback.hom_ext
+    · simp [D', D, m, k]
+    · simp only [colimit.ι_desc_assoc, Discrete.functor_obj_eq_as, Cofan.mk_pt, Cofan.mk_ι_app,
+        Category.assoc, limit.lift_π, PullbackCone.mk_π_app, limit.lift_π_assoc, cospan_right,
+        colimit.ι_desc, Category.comp_id, D', m, k, D]
+      exact Category.id_comp _
   have hq : D' ≫ q = s := Sigma.hom_ext _ _ fun g ↦ by simp [D', q, s]
   let E : Limits.pullback (pullback.snd π f) (pullback.snd π f) ⟶
       ∐ (fun _ : G ↦ Limits.pullback π f) :=
