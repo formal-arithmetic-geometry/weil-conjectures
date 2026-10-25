@@ -12794,6 +12794,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace
 public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
+public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusModel
 public import WeilConjectures.TraceFormula.CurveLocal.Model
 public import WeilConjectures.TraceFormula.CurveLocal.ModelAxes
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
