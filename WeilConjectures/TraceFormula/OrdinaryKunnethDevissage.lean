@@ -155,7 +155,7 @@ theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) :=
   sorry
 
-variable (X) in
+omit j B in
 /-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
 (blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it for finite
 coefficients and a general morphism `f`; here `f = j` is an open immersion). For an open immersion
@@ -166,8 +166,9 @@ By dévissage (`isIso_openKunnethMap_of_triangEnvelope`, `triangEnvelope_lisseGe
 reduces to the generators `Rg_! Rj'_! L`; the closed pushforward `Rg_!` is removed by
 `isIso_openKunnethMap_lowerStar_of_isClosedImmersion`, and the extension by zero of a dualizable
 object is `isIso_openKunnethMap_lowerShriek_of_isDualizable`. -/
-theorem isIso_openKunnethMap [IsOpenImmersion j.left]
-    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+theorem isIso_openKunnethMap (j : U ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (openKunnethMap ℓ j M B) := by
   refine isIso_openKunnethMap_of_triangEnvelope ℓ j B ?_ (triangEnvelope_lisseGenerator ℓ X M)
   rintro N ⟨Z, _, _, _, g, _, V, _, _, _, _, j', _, L, hL, ⟨eN⟩⟩

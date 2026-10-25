@@ -35,7 +35,8 @@ structure of `LG^*`, the composition isomorphisms `LG^* Lp_X^* ≅ Lp_X^*` and
   isomorphism for dualizable `M`, by generic base change and the projection formula at the
   dualizable object `Lp_X^* M`.
 
-The general case, by dévissage in `M`, is in `WeilConjectures.TraceFormula.OrdinaryKunnethDevissage`.
+The general case, by dévissage in `M`, is in
+`WeilConjectures.TraceFormula.OrdinaryKunnethDevissage`.
 
 ## Implementation notes
 
