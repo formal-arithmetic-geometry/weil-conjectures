@@ -178,6 +178,8 @@ variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶
 
 namespace WeilBoundedConstructible
 
+set_option maxHeartbeats 1000000 in
+-- matching the composites of the restricted `ℚ̲̄_ℓ`-pullbacks is expensive
 omit [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦZ.left] in
 /-- The pullback square of the closed piece on compactly supported cohomology: for
 `Φ_Z ≫ i = i ≫ Φ`, `i^♯ ≫ Φ_Z^♯ ≫ RΓ_c(Z, cmp) = Φ^♯ ≫ i^♯`, where
@@ -198,13 +200,15 @@ lemma compactPullback_comp_compactPullback_comparison (hi : ΦZ ≫ i = i ≫ Φ
   have : IsProper (ΦZ ≫ i).left := by
     rw [Over.comp_left]
     infer_instance
-  exact closedPiece_pullback_comm_of_comp (compactPullback ℓ Φ) (compactPullback ℓ i)
+  refine closedPiece_pullback_comm_of_comp (compactPullback ℓ Φ) (compactPullback ℓ i)
     (compactPullback ℓ ΦZ) (compactPullback ℓ (i ≫ Φ)) (compactPullback ℓ (ΦZ ≫ i))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ i Φ)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ ΦZ i) M
-    (eqToHom (by rw [hi])) (compactPullback_comp_app ℓ i Φ M)
-    (compactPullback_comp_app ℓ ΦZ i M) (compactPullback_app_congr ℓ hi M) _
-    (weilUpperStarComparison_hom_app ℓ ΦZ Φ i hi M)
+    (eqToHom (by rw [hi])) ?_ ?_ ?_ _ ?_
+  · exact compactPullback_comp_app ℓ i Φ M
+  · exact compactPullback_comp_app ℓ ΦZ i M
+  · exact compactPullback_app_congr ℓ hi M
+  · exact weilUpperStarComparison_hom_app ℓ ΦZ Φ i hi M
 
 variable (ℓ) in
 /-- The Frobenius coefficient `ψ_Z : LΦ^* Ri_* Li^* K ⟶ Ri_* Li^* K` of the closed piece: the

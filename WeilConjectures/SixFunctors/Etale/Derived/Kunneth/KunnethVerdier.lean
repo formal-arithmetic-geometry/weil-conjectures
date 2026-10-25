@@ -216,13 +216,13 @@ theorem hasKunnethComparisons [HasInvertibleExponent Λ (Spec (.of k))] :
     exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
       hM₁ hM₂
   exceptional := by
-    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ _ _ _ hN₁ hN₂
+    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hN₁ hN₂
     exact nonempty_iso_externalProduct_rightDerivedUpperShriek Λ b₁ b₂ f₁ f₂ hN₁ hN₂
   externalHom := by
     intro _ _ c₁ c₂ _ _ _ _ _ _ _ _ _ _ hE₁ hE₂ hN₁ hN₂
     exact nonempty_iso_externalHom Λ c₁ c₂ hE₁ hE₂ hN₁ hN₂
   kunnethVerdier := by
-    intro _ _ a b _ _ _ _ _ _ _ _ _ _ hM hN
+    intro _ _ a b _ _ _ _ _ _ _ _ hM hN
     exact nonempty_iso_kunnethVerdier Λ a b hM hN
 
 end Etale

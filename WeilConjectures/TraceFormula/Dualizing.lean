@@ -161,9 +161,16 @@ variable (X) in
 noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
     (dualizingComplex' ℓ X).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
-  haveI : SmoothOfRelativeDimension d (toPoint X).left :=
-    inferInstanceAs (SmoothOfRelativeDimension d X.hom)
+  haveI : SmoothOfRelativeDimension d (toPoint X).left := by
+    rw [toPoint_left]
+    infer_instance
   smoothPurityIso ℓ (toPoint X) d
+
+/-- The identity isomorphism `Ra^! ℚ̄_ℓ,s ≅ ℚ̄_ℓ,s` for an endomorphism `a = 𝟙` of `s`. -/
+noncomputable def upperShriekUnitIsoOfEqId (a : point k ⟶ point k) (ha : a = 𝟙 (point k)) :
+    (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _) ≅
+      𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  eqToIso (by rw [ha]) ≪≫ (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
 variable (k) in
 /-- The dualizing complex of the base point is the unit, `ω_s ≅ ℚ̄_ℓ,s`: the structure morphism
@@ -172,7 +179,7 @@ variable (k) in
 unit. -/
 noncomputable def dualizingComplexPointIso :
     dualizingComplex' ℓ (point k) ≅ 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
+  upperShriekUnitIsoOfEqId ℓ (toPoint (point k)) (toPoint_ext _ _)
 
 end Dualizing
 
@@ -217,7 +224,9 @@ identification `Ra_{X!} ≅ Ra_{X*}` for the proper `a_X`, and the adjoint `α^�
 `Ra_{X!} ⊣ Ra_X^!` (blueprint `def-trf-integration`). -/
 noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  haveI : IsProper (toPoint X).left := inferInstanceAs (IsProper X.hom)
+  haveI : IsProper (toPoint X).left := by
+    rw [toPoint_left]
+    infer_instance
   (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (toPoint X)).unit.app (𝟙_ _) ≫
     (boundedConstructibleLowerStar ℓ (toPoint X)).map
@@ -246,10 +255,20 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
-/-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
-(`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
-theorem integral_point (α : BorelMooreSection ℓ (point k)) :
-    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom := by
+/-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
+its structure morphism. -/
+private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point k))
+    [IsProper a.left]
+    (α : 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
+      (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)) :
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ a).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ a).map
+          (Functor.Monoidal.εIso
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ a).inv.app (𝟙_ _) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ a).homEquiv _ _).symm α =
+      α ≫ (upperShriekUnitIsoOfEqId ℓ a ha).hom := by
+  subst ha
   have h := homEquiv_comp_conjugateEquiv_app
     (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
@@ -257,7 +276,8 @@ theorem integral_point (α : BorelMooreSection ℓ (point k)) :
       (𝟙 (point k))).homEquiv _ _).symm α)
   rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
     ← conjugateIsoEquiv_apply_hom] at h
-  rw [dualizingComplexPointIso, Iso.app_hom, boundedConstructibleUpperShriekId]
+  rw [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom,
+    boundedConstructibleUpperShriekId]
   erw [h]
   have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ
@@ -273,6 +293,12 @@ theorem integral_point (α : BorelMooreSection ℓ (point k)) :
     ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
   simp only [Category.assoc]
   rfl
+
+/-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
+(`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
+theorem integral_point (α : BorelMooreSection ℓ (point k)) :
+    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom :=
+  integral_point_aux (toPoint (point k)) (toPoint_ext _ _) α
 
 end BorelMooreSection
 
