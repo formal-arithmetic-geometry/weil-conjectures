@@ -5,7 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
@@ -55,27 +58,22 @@ followed by the unit comparison of `monoidal_upperStar` in degree `0`. Together 
 of `m` as tensorator, it makes `Lf^*` strong monoidal
 (`ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`).
 
-## Sorried input
+## Proofs
 
-All the data is constructed; the following properties are `sorry`ed.
-
-- `ProEtale.CondensedRing.upperStarTensorComplexHom_comm`: the degreewise maps of step 1
-  commute with the differentials. This is the naturality of `μ` together with the additivity of
-  `f^*`.
-- the naturality of the transformations `upperStarTensorCounit` and
-  `leftDerivedUpperStarTensorLeftCounit` (in both variables): the naturality of `μ`, of the lax
-  structure of `Qh` and of the counit of `Lf^*`, checked on representatives in the homotopy
-  category.
-- `ProEtale.CondensedRing.isLeftDerivedFunctor₂_upperStarTensor`: the bifunctor
-  `Lf^* - ⊗ᴸ Lf^* -` is a left derived bifunctor. It is computed on pairs of K-flat complexes,
-  `f^*` preserving K-flat complexes; on such a pair both the counits of `Lf^*` and the lax
-  structure of `Qh` are isomorphisms.
-- `ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor`: the comparison `m` is an
-  isomorphism. On a pair of K-flat complexes both sides are computed by `f^* A ⊗ f^* B` and
-  `f^* (A ⊗ B)`, and `m` is induced by `μ`, an isomorphism.
-- the associativity and the unitality of `monoidal_leftDerivedUpperStar`. They are checked on
-  pairs (resp. triples) of K-flat complexes, where all the comparisons are induced by the
-  coherent tensorator `μ`.
+- `ProEtale.CondensedRing.upperStarTensorComplexHom_comm`: the degreewise comparison is a section
+  of the comparison induced by the comonoidal structure `δ` of `f^*`, which commutes with the
+  differentials and is an isomorphism; so `upperStarTensorComplexHom` is its inverse
+  (`ProEtale.CondensedRing.upperStarTensorComplexHom_eq_inv`) and is natural.
+- `ProEtale.CondensedRing.isLeftDerivedFunctor₂_upperStarTensor` and
+  `ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor` are computed on pairs of K-flat
+  complexes, `f^*` preserving K-flat complexes
+  (`ProEtale.CondensedRing.kFlat_upperStar_mapHomologicalComplex_obj`): on such a pair the
+  counits of `Lf^*` and the lax structure of `Qh` are isomorphisms.
+- The coherences of `monoidal_leftDerivedUpperStar` are those of the oplax monoidal structure
+  `ProEtale.CondensedRing.leftDerivedUpperStarOplaxMonoidal` with comonoidal structure `m`,
+  obtained from `CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'` by checking them on
+  K-flat complexes; its counit is `leftDerivedUpperStarUnitIso`
+  (`ProEtale.CondensedRing.leftDerivedUpperStarOplaxMonoidal_η`).
 
 ## Main definitions
 
@@ -719,10 +717,98 @@ noncomputable def leftDerivedUpperStarUnitIso :
               (ComplexShape.up ℤ) 0).app (𝟙_ _) ≪≫
             (HomologicalComplex.single _ _ 0).mapIso (Functor.Monoidal.εIso (f)^*⟦Λ⟧).symm))
 
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The compatibility of the comparison `m` with the comonoidal structure of `f^*` on the
+homotopy category, in the form of the hypothesis of
+`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`. -/
+lemma leftDerivedUpperStarTensor_laxSquare (A B : HomotopyCategory
+    (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (ComplexShape.up ℤ)) :
+    ((leftDerivedUpperStarTensor Λ f).app (DerivedCategory.Qh.obj A)).app
+        (DerivedCategory.Qh.obj B) ≫
+      ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ⊗ₘ (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B) ≫
+        Functor.LaxMonoidal.μ DerivedCategory.Qh
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) =
+      L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B) ≫
+        DerivedCategory.Qh.map
+          (Functor.OplaxMonoidal.δ ((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)) A B) := by
+  rw [MonoidalCategory.tensorHom_def, Category.assoc]
+  exact leftDerivedUpperStarTensor_app_app_fac Λ f A B
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the K-flat derivability structure on complexes of module objects is found by instance search
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The oplax monoidal structure on `Lf^*` whose comonoidal structure is the comparison `m`
+(`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`): its coherences are checked on K-flat
+complexes, whose pullbacks are K-flat. -/
+@[instance_reducible]
+noncomputable def leftDerivedUpperStarOplaxMonoidal : L((f)^*⟦Λ⟧).OplaxMonoidal :=
+  haveI := DerivedCategory.isIso_ε_Qh
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+  Functor.OplaxMonoidal.ofLaxSquare' (Q₁ := DerivedCategory.Qh) (Q₂ := DerivedCategory.Qh)
+    (F := (f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)) (leftDerivedUpperStarTensor Λ f)
+    (fun a ↦ (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app a)
+    (fun _ _ g ↦ (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality g)
+    (leftDerivedUpperStarTensor_laxSquare Λ f) (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
+    (exists_kFlat_iso_Qh_obj Λ)
+    (fun a ha ↦ (f)^*⟦Λ⟧.isIso_leftDerivedFunctorCounit_app_of_kFlat' a ha)
+    (fun x b hb ↦ by
+      obtain ⟨B, rfl⟩ := b.quotient_obj_surjective
+      exact isIso_μNatTrans_Qh_app_app_of_kFlat x _ (kFlat_upperStar_mapHomotopyCategory_obj Λ f
+        ((HomotopyCategory.kFlat_quotient_obj_iff B).1 hb)))
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The counit of the oplax monoidal structure `leftDerivedUpperStarOplaxMonoidal` is the unit
+comparison `leftDerivedUpperStarUnitIso`. -/
+lemma leftDerivedUpperStarOplaxMonoidal_η :
+    letI := leftDerivedUpperStarOplaxMonoidal Λ f
+    Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧) = (leftDerivedUpperStarUnitIso Λ f).hom := by
+  let := leftDerivedUpperStarOplaxMonoidal Λ f
+  have hY : Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology Y)
+      Ab.{u + 1}) (condensedRingObj Λ Y))) = 𝟙 _ := rfl
+  have hX : Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X)
+      Ab.{u + 1}) (condensedRingObj Λ X))) = 𝟙 _ := rfl
+  have := DerivedCategory.isIso_ε_Qh
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+  change L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.ε DerivedCategory.Qh) ≫
+      (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (𝟙_ _) ≫
+        DerivedCategory.Qh.map (Functor.OplaxMonoidal.η ((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ))) ≫
+          CategoryTheory.inv (Functor.LaxMonoidal.ε DerivedCategory.Qh) = _
+  simp only [hY, hX, CategoryTheory.Functor.map_id, IsIso.inv_id, Category.id_comp]
+  rw [Functor.mapHomotopyCategory_η, Functor.mapCochainComplex_η]
+  erw [Category.comp_id]
+  rfl
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
 /-- The derived pullback `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` on module objects over `Λ` is
 strong monoidal for the derived tensor products, with tensorator the inverse of
 `leftDerivedUpperStarTensorIso` and unit comparison `leftDerivedUpperStarUnitIso`. -/
 noncomputable instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal :=
+  letI := leftDerivedUpperStarOplaxMonoidal Λ f
+  haveI (K L : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+      IsIso (Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) K L) :=
+    inferInstanceAs (IsIso (((leftDerivedUpperStarTensor Λ f).app K).app L))
+  haveI : IsIso (Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧)) := by
+    rw [leftDerivedUpperStarOplaxMonoidal_η]
+    infer_instance
+  have hμ (K L : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+      (((leftDerivedUpperStarTensorIso Λ f).app K).app L).symm =
+        (asIso (Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) K L)).symm := by
+    ext
+    exact (IsIso.inv_eq_of_hom_inv_id
+      (((leftDerivedUpperStarTensorIso Λ f).app K).app L).hom_inv_id).symm
+  have hε : (leftDerivedUpperStarUnitIso Λ f).symm =
+      (asIso (Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧))).symm := by
+    ext
+    refine (IsIso.inv_eq_of_hom_inv_id ?_).symm
+    rw [leftDerivedUpperStarOplaxMonoidal_η, Iso.symm_hom, Iso.hom_inv_id]
   Functor.CoreMonoidal.toMonoidal
     { εIso := (leftDerivedUpperStarUnitIso Λ f).symm
       μIso K L := (((leftDerivedUpperStarTensorIso Λ f).app K).app L).symm
@@ -730,8 +816,14 @@ noncomputable instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal
         NatTrans.congr_app ((leftDerivedUpperStarTensorIso Λ f).inv.naturality φ) L
       μIso_hom_natural_right K ψ :=
         ((leftDerivedUpperStarTensorIso Λ f).inv.app K).naturality ψ
-      associativity := sorry
-      left_unitality := sorry
-      right_unitality := sorry }
+      associativity K L M := by
+        rw [hμ, hμ, hμ, hμ]
+        exact (Functor.CoreMonoidal.ofOplaxMonoidal L((f)^*⟦Λ⟧)).associativity K L M
+      left_unitality K := by
+        rw [hμ, hε]
+        exact (Functor.CoreMonoidal.ofOplaxMonoidal L((f)^*⟦Λ⟧)).left_unitality K
+      right_unitality K := by
+        rw [hμ, hε]
+        exact (Functor.CoreMonoidal.ofOplaxMonoidal L((f)^*⟦Λ⟧)).right_unitality K }
 
 end AlgebraicGeometry.ProEtale.CondensedRing
