@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.CurveLocal.LocalExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalUpperShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
+public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalExchangeRestriction
 
 /-!
 
@@ -28,9 +28,9 @@ The proof pulls the fixed square back along `τ : T ⟶ X ×_k X`
 (`CategoryTheory.Adjunction.exists_map_exchangeRestriction_comp_eq`, with compact-support base
 change for the closed immersions), uses that the exceptional pullback commutes with this pullback
 on global sections over `Y`
-(`AlgebraicGeometry.Etale.CurveLocalModel.isIso_rightDerivedGlobalSections_map_rightDerivedUpperShriekBaseChangeMap`),
+(`CurveLocalModel.isIso_rightDerivedGlobalSections_map_rightDerivedUpperShriekBaseChangeMap`),
 and compares with `ρ_{a,b}` on `T`
-(`AlgebraicGeometry.Etale.CurveLocalModel.exists_rightDerivedGlobalSections_map_exchangeRestriction`).
+(`AlgebraicGeometry.Etale.CurveLocalModel.exists_sectionsWithSupportRestriction_eq`).
 
 -/
 
@@ -68,7 +68,27 @@ theorem exists_geometricStalk_map_exchangeRestriction (z : Spec (.of k) ⟶ F) (
           ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P)).obj₁),
       (geometricStalk Λ z).map (exchangeRestriction Λ hsq P.obj) ≫ e.hom =
         s ≫ sectionsWithSupportRestriction (ModuleCat.{u + 1} Λ) M.b M.a M.yB
-          M.openComplement_yB_le ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P) :=
-  sorry
+          M.openComplement_yB_le
+            ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P) := by
+  obtain ⟨s₁, h₁⟩ := M.exists_map_exchangeRestriction_τY Λ hsq P.obj
+  obtain ⟨t, e₂, h₃⟩ := M.exists_sectionsWithSupportRestriction_eq Λ
+    ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P)
+  let N : DerivedCategory.Plus (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    ⟨(L((pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ])).obj P.obj,
+      DerivedCategory.TStructure.t.plus.prop_of_iso
+        ((leftDerivedUpperStarIsoMapDerivedCategory _ (pullback.diagonal M.f)).app P.obj).symm
+        ((Functor.mapDerivedCategoryPlus
+          (pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ]).obj P).property⟩
+  have := M.isIso_rightDerivedGlobalSections_map_rightDerivedUpperShriekBaseChangeMap Λ hsq N
+  have := M.isIso_globalSectionsRestriction_ιY ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj
+    ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P).obj)
+  let φ := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.τ).app P.obj
+  exact exists_map_comp_eq_of_factorization _ _ _ (M.geometricStalkIso Λ hsq z hz) _ _
+    ((R(M.yB)^![ModuleCat.{u + 1} Λ]).map ((M.diagonalPullbackIso Λ).hom.app P.obj)) s₁ _ h₁
+    ((R(M.yB)^![ModuleCat.{u + 1} Λ]).map ((L((M.b)^*[ModuleCat.{u + 1} Λ])).map φ.hom))
+    ((L((M.ιY)^*[ModuleCat.{u + 1} Λ])).map ((R(M.a)^![ModuleCat.{u + 1} Λ]).map φ.hom)) _
+    (exchangeRestriction_naturality Λ M.isPullback_ιY φ.hom)
+    ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.ιY).inv.app _) t
+    (globalSectionsRestriction M.ιY _) e₂ _ h₃
 
 end AlgebraicGeometry.Etale.CurveLocalModel

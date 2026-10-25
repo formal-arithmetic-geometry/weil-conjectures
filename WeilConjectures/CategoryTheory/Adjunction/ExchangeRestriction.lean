@@ -137,7 +137,8 @@ theorem Adjunction.exists_map_exchangeRestriction_comp_eq [dL'.Full] (P : C₂) 
   apply (g'.homEquiv _ _).symm.injective
   rw [← Category.assoc, Adjunction.homEquiv_naturality_right_symm,
     Adjunction.homEquiv_symm_map_comp_mateEquiv_app, Adjunction.exchangeRestriction,
-    Equiv.symm_apply_apply, Adjunction.exchangeRestriction, Adjunction.homEquiv_naturality_left_symm]
+    Equiv.symm_apply_apply, Adjunction.exchangeRestriction,
+    Adjunction.homEquiv_naturality_left_symm]
   erw [Equiv.symm_apply_apply]
   rw [Functor.map_preimage]
   have hc := Adjunction.homEquiv_symm_map_comp_mateEquiv_app a a' TC T₂ τc (𝟙 (cR.obj P))

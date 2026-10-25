@@ -7480,6 +7480,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionNaturality
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
@@ -11875,6 +11877,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.SepClosedPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.StrictLocalizationVanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Torsion
+public import WeilConjectures.SixFunctors.Etale.Derived.StrictLocalizationBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.StrictLocalizationPoints
 public import WeilConjectures.SixFunctors.Etale.Derived.StrictlyHenselianConstantSections
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
@@ -12965,10 +12968,13 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonalProd
 public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace
+public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
 public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusModel
+public import WeilConjectures.TraceFormula.CurveLocal.LocalExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.Model
 public import WeilConjectures.TraceFormula.CurveLocal.ModelAxes
+public import WeilConjectures.TraceFormula.CurveLocal.ModelRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZero
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroChain
@@ -12983,7 +12989,13 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionGlobal
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionOpen
+public import WeilConjectures.TraceFormula.CurveLocal.StalkExchangeRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalExchangeRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalModelRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalUpperShriek
 public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalVanishing
+public import WeilConjectures.TraceFormula.CurveLocal.SupportTriangleCounit
 public import WeilConjectures.TraceFormula.CurveLocal.TensorMonodromy
 public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.CurvePiecesAdditivity

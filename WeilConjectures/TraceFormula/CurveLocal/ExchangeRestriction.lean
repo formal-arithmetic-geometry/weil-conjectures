@@ -51,7 +51,8 @@ variable {S C X F : Scheme.{u}} {c : C ⟶ S} {Δ : X ⟶ S} {ι : F ⟶ C} {d :
   [HasCompactification c] [HasCompactification d] [QuasiCompact d]
 
 /-- Compact-support base change `Rc_! ⋙ LΔ^* ≅ Lι^* ⋙ Rd_!` for a cartesian square
-`ι ≫ c = d ≫ Δ`, with finite coefficients (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
+`ι ≫ c = d ≫ Δ`, with finite coefficients
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
 noncomputable def lowerShriekBaseChangeIso (sq : IsPullback ι d c Δ) :
     R(c)_![ModuleCat.{u + 1} Λ] ⋙ L((Δ)^*[ModuleCat.{u + 1} Λ]) ≅
       L((ι)^*[ModuleCat.{u + 1} Λ]) ⋙ R(d)_![ModuleCat.{u + 1} Λ] :=
