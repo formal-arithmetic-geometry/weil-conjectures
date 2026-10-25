@@ -108,3 +108,50 @@ theorem mateEquiv_app_comp_conjugateIsoEquiv_hom_app
     rw [reassoc_of% hh', reassoc_of% he', reassoc_of% hν₃, hK]
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+section Exchanges
+
+variable {A B A' B' C C' : Type*} [Category A] [Category B] [Category A'] [Category B']
+  [Category C] [Category C']
+
+/-- The exchange `G ⋙ L₃' ⟶ L₃ ⋙ K` of a composite, built from exchanges
+`ν₁ : G ⋙ L₁' ⟶ L₁ ⋙ H` and `ν₂ : H ⋙ L₂' ⟶ L₂ ⋙ K` through composition isomorphisms
+`e : L₃ ≅ L₁ ⋙ L₂` and `e' : L₃' ≅ L₁' ⋙ L₂'`. -/
+def compExchange {L₁ : A ⥤ B} {L₂ : B ⥤ C} {L₃ : A ⥤ C} {L₁' : A' ⥤ B'} {L₂' : B' ⥤ C'}
+    {L₃' : A' ⥤ C'} {G : A ⥤ A'} {H : B ⥤ B'} {K : C ⥤ C'} (e : L₃ ≅ L₁ ⋙ L₂)
+    (e' : L₃' ≅ L₁' ⋙ L₂') (ν₁ : G ⋙ L₁' ⟶ L₁ ⋙ H) (ν₂ : H ⋙ L₂' ⟶ L₂ ⋙ K) :
+    G ⋙ L₃' ⟶ L₃ ⋙ K :=
+  Functor.whiskerLeft G e'.hom ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight ν₁ L₂' ≫
+    (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L₁ ν₂ ≫ (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight e.inv K
+
+lemma compExchange_app_comp {L₁ : A ⥤ B} {L₂ : B ⥤ C} {L₃ : A ⥤ C} {L₁' : A' ⥤ B'}
+    {L₂' : B' ⥤ C'} {L₃' : A' ⥤ C'} {G : A ⥤ A'} {H : B ⥤ B'} {K : C ⥤ C'} (e : L₃ ≅ L₁ ⋙ L₂)
+    (e' : L₃' ≅ L₁' ⋙ L₂') (ν₁ : G ⋙ L₁' ⟶ L₁ ⋙ H) (ν₂ : H ⋙ L₂' ⟶ L₂ ⋙ K) (a : A) :
+    (compExchange e e' ν₁ ν₂).app a ≫ K.map (e.hom.app a) =
+      e'.hom.app (G.obj a) ≫ L₂'.map (ν₁.app a) ≫ ν₂.app (L₁.obj a) := by
+  simp [compExchange, ← K.map_comp]
+
+/-- The exchange `Φ ⋙ L' ⟶ L ⋙ Ψ` inverse to an invertible exchange `χ : S ⋙ Ψ ⟶ Φ ⋙ S'`, through
+isomorphisms `L ≅ S` and `L' ≅ S'`. -/
+noncomputable def invExchange {S L : A ⥤ B} {S' L' : A' ⥤ B'} {Φ : A ⥤ A'} {Ψ : B ⥤ B'}
+    (i : L ≅ S) (i' : L' ≅ S') (χ : S ⋙ Ψ ⟶ Φ ⋙ S') [IsIso χ] : Φ ⋙ L' ⟶ L ⋙ Ψ :=
+  Functor.whiskerLeft Φ i'.hom ≫ inv χ ≫ Functor.whiskerRight i.inv Ψ
+
+lemma map_hom_app_comp_app_comp_invExchange_app {S L : A ⥤ B} {S' L' : A' ⥤ B'} {Φ : A ⥤ A'}
+    {Ψ : B ⥤ B'} (i : L ≅ S) (i' : L' ≅ S') (χ : S ⋙ Ψ ⟶ Φ ⋙ S') [IsIso χ] (a : A) :
+    Ψ.map (i.hom.app a) ≫ χ.app a ≫ i'.inv.app (Φ.obj a) ≫ (invExchange i i' χ).app a =
+      𝟙 _ := by
+  simp [invExchange, ← Ψ.map_comp]
+
+lemma invExchange_app_comp_map_hom_app_comp_app {S L : A ⥤ B} {S' L' : A' ⥤ B'} {Φ : A ⥤ A'}
+    {Ψ : B ⥤ B'} (i : L ≅ S) (i' : L' ≅ S') (χ : S ⋙ Ψ ⟶ Φ ⋙ S') [IsIso χ] (a : A) :
+    (invExchange i i' χ).app a ≫ Ψ.map (i.hom.app a) ≫ χ.app a ≫ i'.inv.app (Φ.obj a) =
+      𝟙 _ := by
+  simp [invExchange, ← Ψ.map_comp_assoc]
+
+end Exchanges
+
+end CategoryTheory
