@@ -92,20 +92,20 @@ being zero (`isZero_derivedCategory_proEt_of_isEmpty`). -/
 theorem shriekTraceFunctionAt_of_isEmpty [IsEmpty X.left] {f : X ⟶ Y}
     (hf : eX.hom ≫ f = f ≫ eY.hom) : ShriekTraceFunctionAt ℓ eX eY hf := by
   intro K n y
-  have : IsEmpty (frobeniusFixedPoints eX n) := ⟨fun x ↦ isEmptyElim (x.1.base default)⟩
-  rw [finsum_of_isEmpty, weilStalkSupertrace_eq]
+  have : IsEmpty (frobeniusFixedPoints eX (n + 1)) := ⟨fun x ↦ isEmptyElim (x.1.base default)⟩
+  rw [finsum_of_isEmpty, weilStalkTraceAlternatingSum]
   refine finsum_eq_zero_of_forall_eq_zero fun j ↦ ?_
   have hK : IsZero ((weilLowerShriek ℓ eX eY hf).obj K).carrier :=
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map_isZero
       (IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _
         (isZero_derivedCategory_proEt_of_isEmpty _ K.carrier.obj))
-  suffices h : weilSheafStalkTrace ℓ n y.1 y.2.2
+  suffices h : weilSheafStalkTrace ℓ (n + 1) y.1 y.2.2
       ((WeilBoundedConstructible.homologyFunctor ℓ eY j).obj
         ((weilLowerShriek ℓ eX eY hf).obj K)) = 0 by
     rw [h, smul_zero]
-  refine categoricalTrace_eq_zero_of_isZero ?_ _
-  rw [Functor.id_obj, WeilSheaf.frobeniusStalk, WeilSheaf.powSuccStalkFunctor, Functor.comp_obj,
-    WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powSuccFunctor_obj_carrier,
+  refine traceOrZero_eq_zero_of_isZero ?_ _
+  rw [Functor.id_obj, WeilSheaf.frobeniusStalk, WeilSheaf.powStalkFunctor, Functor.comp_obj,
+    WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powFunctor_obj, WeilSheaf.pow_carrier,
     WeilBoundedConstructible.homologyFunctor_obj_carrier]
   exact Functor.map_isZero _ (Functor.map_isZero _ (Functor.map_isZero (ObjectProperty.ι _) hK))
 
@@ -216,7 +216,7 @@ def ShriekTraceFunctionGenericallyHolds : Prop :=
   ∀ (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) (f : X ⟶ Y) (hf : eX.hom ≫ f = f ≫ eY.hom),
-    (∃ m : ℕ, eX.powSucc m = Iso.refl X) → Nonempty X.left →
+    (∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) → Nonempty X.left →
     ∃ (U : Over (Spec (.of k))) (_ : LocallyOfFiniteType U.hom) (_ : QuasiCompact U.hom)
       (_ : IsSeparated U.hom) (eU : U ≅ U) (j : U ⟶ X) (_ : IsOpenImmersion j.left)
       (hj : eU.hom ≫ j = j ≫ eX.hom),
@@ -231,7 +231,7 @@ omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 range. -/
 lemma shriekTraceFunctionAt_closedImmersion_of_lt (H : ShriekTraceFunctionGenericallyHolds ℓ k)
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) (T : Closeds X.left)
+    (he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) (T : Closeds X.left)
     (ih : ∀ T' < T, ∀ (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
       [IsSeparated Z.hom] (eZ : Z ≅ Z) (i : Z ⟶ X) [IsClosedImmersion i.left]
       (hi : eZ.hom ≫ i = i ≫ eX.hom), Set.range i.left.base = T' →
@@ -240,7 +240,7 @@ lemma shriekTraceFunctionAt_closedImmersion_of_lt (H : ShriekTraceFunctionGeneri
     [IsSeparated Z.hom] (eZ : Z ≅ Z) (i : Z ⟶ X) [IsClosedImmersion i.left]
     (hi : eZ.hom ≫ i = i ≫ eX.hom) (hT : Set.range i.left.base = T) :
     ShriekTraceFunctionAt ℓ eZ eY (comp_comm_of_comp_comm eZ eY eX hi hf) := by
-  have heZ := exists_powSucc_eq_refl_of_mono eX hi he
+  have heZ := exists_pow_eq_refl_of_mono eX hi he
   rcases isEmpty_or_nonempty Z.left with hZ | hZ
   · exact shriekTraceFunctionAt_of_isEmpty ℓ eZ eY _
   obtain ⟨U, _, _, _, eU, j, _, hj, ⟨u⟩, HU⟩ :=
@@ -268,7 +268,7 @@ lemma shriekTraceFunctionAt_closedImmersion_of_lt (H : ShriekTraceFunctionGeneri
 `f`. -/
 theorem shriekTraceFunctionAt_of_exists_isOpenImmersion
     (H : ShriekTraceFunctionGenericallyHolds ℓ k) (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y}
-    (hf : eX.hom ≫ f = f ≫ eY.hom) (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X) :
+    (hf : eX.hom ≫ f = f ≫ eY.hom) (he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) :
     ShriekTraceFunctionAt ℓ eX eY hf := by
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
@@ -287,11 +287,11 @@ theorem shriekTraceFunctionAt_of_exists_isOpenImmersion
 (`ProEtale.CondensedRing.weilShriekTraceFunction`), assuming that it holds generically. -/
 theorem weilShriekTraceFunction_of_genericallyHolds (H : ShriekTraceFunctionGenericallyHolds ℓ k)
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X)
-    (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) (y : frobeniusFixedPoints eY n) :
-    weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
-      ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
-        weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K :=
+    (he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X)
+    (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) (y : frobeniusFixedPoints eY (n + 1)) :
+    weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
+      ∑ᶠ x : {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1},
+        weilStalkTraceAlternatingSum ℓ (n + 1) x.1.1 x.1.2.2 K :=
   shriekTraceFunctionAt_of_exists_isOpenImmersion ℓ H eX eY hf he K n y
 
 end AlgebraicGeometry.ProEtale.CondensedRing

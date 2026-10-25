@@ -50,9 +50,9 @@ variable {C : Type*} [Category C] {X Y : C} (eX : X ≅ X) (eY : Y ≅ Y) {f : X
 /-- A cartesian square `e_X ≫ f = f ≫ e_Y` along automorphisms induces cartesian squares
 `e_X^{n+1} ≫ f = f ≫ e_Y^{n+1}`, by horizontal pasting. -/
 theorem IsPullback.powSucc (hf : IsPullback eX.hom f f eY.hom) (n : ℕ) :
-    IsPullback (eX.powSucc n).hom f f (eY.powSucc n).hom := by
+    IsPullback (eX.pow (n + 1)).hom f f (eY.pow (n + 1)).hom := by
   induction n with
-  | zero => exact hf
+  | zero => simpa using hf
   | succ n ih => exact ih.paste_horiz hf
 
 /-- Cancelling `F (α⁻¹_K) ≫ F (α_K)` at the end of a composite of four morphisms. -/
@@ -85,13 +85,22 @@ theorem powSuccStr_hom_eq_of_isPullback (hf : IsPullback eX.hom f f eY.hom)
     (eY.powSuccStr Q compQ ψ n).hom =
       (h (hf.powSucc eX eY n)).hom.app a ≫ H.map (eX.powSuccStr P compP φ n).hom := by
   induction n with
-  | zero => exact hψ
+  | zero =>
+    have key : ∀ {gX gX' : X ⟶ X} {gY gY' : Y ⟶ Y} (hX : gX = gX') (hY : gY = gY')
+        (s : IsPullback gX f f gY) (s' : IsPullback gX' f f gY'),
+        eqToHom (congrArg (fun g ↦ (Q g).obj (H.obj a)) hY) ≫ (h s').hom.app a =
+          (h s).hom.app a ≫ H.map (eqToHom (congrArg (fun g ↦ (P g).obj a) hX)) := by
+      rintro gX _ gY _ rfl rfl s s'
+      simp
+    rw [powSuccStr_zero, powSuccStr_zero]
+    simp only [Iso.trans_hom, eqToIso.hom, Functor.map_comp, hψ]
+    exact (reassoc_of% key (Category.id_comp eX.hom) (Category.id_comp eY.hom) _ hf) _
   | succ n ih =>
-    change (compQ (eY.powSucc n).hom eY.hom).hom.app (H.obj a) ≫
-        (Q (eY.powSucc n).hom).map ψ.hom ≫ (eY.powSuccStr Q compQ ψ n).hom =
+    change (compQ (eY.pow (n + 1)).hom eY.hom).hom.app (H.obj a) ≫
+        (Q (eY.pow (n + 1)).hom).map ψ.hom ≫ (eY.powSuccStr Q compQ ψ n).hom =
       (h ((hf.powSucc eX eY n).paste_horiz hf)).hom.app a ≫
-        H.map ((compP (eX.powSucc n).hom eX.hom).hom.app a ≫
-          (P (eX.powSucc n).hom).map φ.hom ≫ (eX.powSuccStr P compP φ n).hom)
+        H.map ((compP (eX.pow (n + 1)).hom eX.hom).hom.app a ≫
+          (P (eX.pow (n + 1)).hom).map φ.hom ≫ (eX.powSuccStr P compP φ n).hom)
     have nat := (h (hf.powSucc eX eY n)).hom.naturality φ.hom
     simp only [Functor.comp_map] at nat
     rw [ih, hψ, Functor.map_comp_assoc, reassoc_of% nat, Functor.map_comp, Functor.map_comp,
@@ -181,8 +190,8 @@ the iterate `(Rf_!^Weil (K, φ))^{(n+1)}` is isomorphic, through the identity of
 lower shriek `Rf_!^Weil (K, φ^{(n+1)})` for `e_X^{n+1}` and `e_Y^{n+1}`. -/
 noncomputable def weilLowerShriekPowSuccIso (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) :
     ((weilLowerShriek ℓ eX eY hf).obj K).powSucc ℓ n ≅
-      (weilLowerShriek ℓ (eX.powSucc n) (eY.powSucc n)
-        (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)).obj (K.powSucc ℓ n) :=
+      (weilLowerShriek ℓ (eX.pow (n + 1)) (eY.pow (n + 1))
+        (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)).obj (K.powSucc ℓ n) :=
   eX.mapOfNatIsoPowSuccIsoOfIsPullback eY (weilFrobeniusSquare eX eY hf)
     (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     (fun g g' ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g g')

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.GraphPieces
+public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
 
 /-!
 
@@ -40,7 +41,12 @@ namespace CategoryTheory.Adjunction
 variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C}
 
 /-- A composite through `G.map` of a transpose `φ ≫ adj.homEquiv θ` is the transpose of
-`F.map v` when `F.map φ ≫ θ ≫ u₁ ≫ u₂ = F.map v`. -/
+`F.map v` when `F.map φ ≫ θ ≫ u₁ ≫ u₂ = F.map v`: the two composites
+```
+T --φ--> T' --adj.homEquiv θ--> G B --G u₁--> G B' --G u₂--> G (F K₀) --r--> M
+T --v--> K₀ --η--> G (F K₀) --r--> M
+```
+agree. -/
 lemma comp_homEquiv_comp_map_comp_map_comp (adj : F ⊣ G) {T T' K₀ : C} {B B' : D} {M : C}
     (φ : T ⟶ T') (θ : F.obj T' ⟶ B) (u₁ : B ⟶ B') (u₂ : B' ⟶ F.obj K₀) (v : T ⟶ K₀)
     (r : G.obj (F.obj K₀) ⟶ M) (h : F.map φ ≫ θ ≫ u₁ ≫ u₂ = F.map v) :
@@ -60,17 +66,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 namespace Correspondence
-
-/-- Transport of `Ly^* a` along an equality `y = x` of morphisms. -/
-private lemma upperStar_map_comp_eqToHom_of_eq {P : Over (Spec (.of k))}
-    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom] {y x : P ⟶ X}
-    (e : y = x) {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a : A ⟶ B) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map a ≫
-        eqToHom (by rw [e]) =
-      eqToHom (by rw [e]) ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map a := by
-  subst e
-  simp
 
 variable (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {h : X ⟶ X}
   (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
@@ -106,7 +101,7 @@ lemma upperStar_map_unit_comp_comp_graphStalkMap :
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K))
   have h₃ := boundedConstructibleUpperStarComp_id_left_app (Profinite.padicAlgClRingObj ℓ) ℓ x
     (pointClosedPiece K x)
-  have h₄ := upperStar_map_comp_eqToHom_of_eq hx
+  have h₄ := upperStar_map_comp_eqToHom_congrArg ℓ _ hx
     ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)
   have h₅ := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).left_triangle_components K
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₂

@@ -18,7 +18,7 @@ Let `g : W ⟶ X` be a morphism over a finite field `k` with automorphisms `e_W`
 `e_W ≫ g = g ≫ e_X`. The pullback `g^*` of module objects sends a Weil sheaf `(F, φ_F)` for `e_X`
 to the Weil sheaf `g^* F` for `e_W` (`ProEtale.CondensedRing.weilSheafUpperStar`). This file
 proves the two inputs of the dévissage of the local trace along a pullback
-(`ProEtale.CondensedRing.weilStalkSupertrace_weilUpperStar`):
+(`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar`):
 
 - `ProEtale.CondensedRing.nonempty_homologyFunctor_weilUpperStar_iso`: for a Weil object `K` of
   `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, `Hʲ(Lg^* K) ≅ g^* Hʲ(K)` as Weil sheaves;
@@ -224,33 +224,60 @@ lemma weilSheafUpperStar_eq :
   rfl
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- The stalk functor of Weil sheaves with the `(n + 1)`-st Frobenius operator is the Frobenius
-stalk functor of algebras for the family of pullbacks of module objects. -/
-lemma WeilSheaf.powSuccStalkFunctor_eq (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ W.left)
-    (hx : x ≫ (eW.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x) :
-    WeilSheaf.powSuccStalkFunctor ℓ n x hx =
+/-- The stalk functor of Weil sheaves for `e^{n+1}`, after the iterated structure isomorphisms
+`Iso.powSuccStr`, is the Frobenius stalk functor of algebras for the family of pullbacks of
+module objects. -/
+lemma overPowSuccFunctor_comp_stalkFunctor (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ W.left)
+    (hx : x ≫ (eW.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
+    Endofunctor.IsoAlgebra.overPowSuccFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+          upperStarComp (Profinite.padicAlgClRingObj ℓ) f g) eW n ⋙
+      WeilSheaf.stalkFunctor ℓ (eW.pow (n + 1)) ((geometricFrobeniusField k).pow (n + 1)).hom x hx =
       Endofunctor.IsoAlgebra.frobeniusStalkFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
         (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
           upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
         (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
-          ((geometricFrobeniusField k).powSucc n).hom) eW n x hx :=
-  by
-  rw [WeilSheaf.powSuccStalkFunctor, WeilSheaf.stalkFunctor, weilStalkComparison,
-    upperStarEqToIso_eq_eqToIso]
+          ((geometricFrobeniusField k).pow (n + 1)).hom) eW n x hx := by
+  rw [WeilSheaf.stalkFunctor, weilStalkComparison, upperStarEqToIso_eq_eqToIso]
   rfl
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- The stalk functor of Weil sheaves with the `(n + 1)`-st Frobenius operator is the Frobenius
+stalk functor of algebras for the family of pullbacks of module objects. -/
+lemma WeilSheaf.powStalkFunctor_eq (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ W.left)
+    (hx : x ≫ (eW.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
+    WeilSheaf.powStalkFunctor ℓ (n + 1) x hx =
+      Endofunctor.IsoAlgebra.frobeniusStalkFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+          upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+        (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
+          ((geometricFrobeniusField k).pow (n + 1)).hom) eW n x hx := by
+  have h : WeilSheaf.powFunctor ℓ eW (n + 1) =
+      Endofunctor.IsoAlgebra.overPowFunctor (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+        (fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+          upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+        (fun Y ↦ upperStarId (Profinite.padicAlgClRingObj ℓ) Y) eW (n + 1) :=
+    rfl
+  rw [WeilSheaf.powStalkFunctor, h, Endofunctor.IsoAlgebra.overPowFunctor_succ
+    (P := upperStar (Profinite.padicAlgClRingObj ℓ))
+    (c := fun {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) ↦
+      upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
+    (fun Y ↦ upperStarId (Profinite.padicAlgClRingObj ℓ) Y)
+    (fun t ↦ upperStarComp_id_trans_isoWhiskerLeft_upperStarId ℓ t)]
+  exact overPowSuccFunctor_comp_stalkFunctor ℓ eW n x hx
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- The trace of the Frobenius on the stalk only depends on the stalk with its Frobenius operator
 up to isomorphism, for possibly different Weil sheaves and points. -/
 lemma weilSheafStalkTrace_eq_of_iso (n : ℕ) {x : Spec (.of (AlgebraicClosure k)) ⟶ W.left}
-    {hx : x ≫ (eW.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x}
+    {hx : x ≫ (eW.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x}
     {x' : Spec (.of (AlgebraicClosure k)) ⟶ X.left}
-    {hx' : x' ≫ (eX.powSucc n).hom.left = ((geometricFrobeniusField k).powSucc n).hom ≫ x'}
+    {hx' : x' ≫ (eX.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x'}
     {G : WeilSheaf ℓ eW} {F : WeilSheaf ℓ eX}
-    (i : (WeilSheaf.powSuccStalkFunctor ℓ n x hx).obj G ≅
-      (WeilSheaf.powSuccStalkFunctor ℓ n x' hx').obj F) :
-    weilSheafStalkTrace ℓ n x hx G = weilSheafStalkTrace ℓ n x' hx' F :=
-  (IsoAlgebra.categoricalTrace_str_congr i).symm
+    (i : (WeilSheaf.powStalkFunctor ℓ (n + 1) x hx).obj G ≅
+      (WeilSheaf.powStalkFunctor ℓ (n + 1) x' hx').obj F) :
+    weilSheafStalkTrace ℓ (n + 1) x hx G = weilSheafStalkTrace ℓ (n + 1) x' hx' F :=
+  (IsoAlgebra.traceOrZero_str_congr i).symm
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **Stalks of a pullback of Weil sheaves**: for `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X`, a Weil
 sheaf `F` for `e_X` and a point `w̄` of `W` of degree `n + 1`, the trace of the `(n + 1)`-st
@@ -261,9 +288,9 @@ iterated structure
 isomorphism of `g^* F` is identified with the pullback of that of `F`
 (`CategoryTheory.Iso.powSuccStr_pullbackFamilyComparison`). -/
 theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
-    (w : frobeniusFixedPoints eW n) :
-    weilSheafStalkTrace ℓ n w.1 w.2.2 ((weilSheafUpperStar ℓ eX eW hg).obj F) =
-      weilSheafStalkTrace ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
+    (w : frobeniusFixedPoints eW (n + 1)) :
+    weilSheafStalkTrace ℓ (n + 1) w.1 w.2.2 ((weilSheafUpperStar ℓ eX eW hg).obj F) =
+      weilSheafStalkTrace ℓ (n + 1) (frobeniusFixedPointsMap eW eX hg n w).1
         (frobeniusFixedPointsMap eW eX hg n w).2.2 F := by
   have I := Classical.choice
     (Endofunctor.IsoAlgebra.nonempty_obj_obj_iso_of_eq
@@ -271,16 +298,16 @@ theorem weilSheafStalkTrace_weilSheafUpperStar (F : WeilSheaf ℓ eX) (n : ℕ)
         upperStarComp (Profinite.padicAlgClRingObj ℓ) f g)
       (pullbackAssoc_upperStar ℓ) eX eW hg n
       (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
-        ((geometricFrobeniusField k).powSucc n).hom) w.1 w.2.2
+        ((geometricFrobeniusField k).pow (n + 1)).hom) w.1 w.2.2
       (x := (frobeniusFixedPointsMap eW eX hg n w).1) rfl
       (frobeniusFixedPointsMap eW eX hg n w).2.2 (WeilSheaf ℓ eX) (WeilSheaf ℓ eW)
       (IsoAlgebra (𝟭 (GeometricPointMod ℓ (AlgebraicClosure k)))) F
-      (weilSheafUpperStar ℓ eX eW hg) (WeilSheaf.powSuccStalkFunctor ℓ n w.1 w.2.2)
-      (WeilSheaf.powSuccStalkFunctor ℓ n (frobeniusFixedPointsMap eW eX hg n w).1
+      (weilSheafUpperStar ℓ eX eW hg) (WeilSheaf.powStalkFunctor ℓ (n + 1) w.1 w.2.2)
+      (WeilSheaf.powStalkFunctor ℓ (n + 1) (frobeniusFixedPointsMap eW eX hg n w).1
         (frobeniusFixedPointsMap eW eX hg n w).2.2) rfl rfl rfl
       (heq_of_eq (weilSheafUpperStar_eq ℓ eX eW hg))
-      (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eW n _ _))
-      (heq_of_eq (WeilSheaf.powSuccStalkFunctor_eq ℓ eX n _ _)))
+      (heq_of_eq (WeilSheaf.powStalkFunctor_eq ℓ eW n _ _))
+      (heq_of_eq (WeilSheaf.powStalkFunctor_eq ℓ eX n _ _)))
   exact weilSheafStalkTrace_eq_of_iso ℓ eX eW n I
 
 omit [Finite k] in

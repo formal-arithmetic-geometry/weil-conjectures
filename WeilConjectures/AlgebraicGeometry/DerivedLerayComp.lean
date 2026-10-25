@@ -14,30 +14,33 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 
 @[expose] public section
 
-universe u
+universe u' u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+
 private theorem lowerStarCompGlobalSectionsIso_comp_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    (P : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    (Sheaf.Γ Z.smallEtaleTopology AddCommGrpCat.{u + 1}).map
-        ((lowerStarComp AddCommGrpCat.{u + 1} f g (f ≫ g) rfl).hom.app P) ≫
-      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} (f ≫ g)).hom.app P =
-    (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g).hom.app
-        (((f)_*[AddCommGrpCat.{u + 1}]).obj P) ≫
-      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} f).hom.app P := by
+    (P : Sheaf X.smallEtaleTopology A) :
+    (Sheaf.Γ Z.smallEtaleTopology A).map
+        ((lowerStarComp A f g (f ≫ g) rfl).hom.app P) ≫
+      (lowerStarCompGlobalSectionsIso A (f ≫ g)).hom.app P =
+    (lowerStarCompGlobalSectionsIso A g).hom.app
+        (((f)_*[A]).obj P) ≫
+      (lowerStarCompGlobalSectionsIso A f).hom.app P := by
   apply (cancel_mono ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app P)).1
   simp only [lowerStarCompGlobalSectionsIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.assoc,
     Iso.inv_hom_id_app, Iso.inv_hom_id_app_assoc, Category.comp_id]
   rw [reassoc_of% ((Sheaf.ΓNatIsoSheafSections Z.smallEtaleTopology
-    AddCommGrpCat.{u + 1} terminalIsTerminal).hom.naturality
-    ((lowerStarComp AddCommGrpCat.{u + 1} f g (f ≫ g) rfl).hom.app P))]
+    A terminalIsTerminal).hom.naturality
+    ((lowerStarComp A f g (f ≫ g) rfl).hom.app P))]
   simp only [lowerStarCompSheafSectionsTerminalIso, NatIso.ofComponents_hom_app,
     Functor.mapIso_hom, Iso.symm_hom, Iso.op_inv]
   congr 1
-  change ((lowerStarComp AddCommGrpCat.{u + 1} f g (f ≫ g) rfl).hom.app P).hom.app
+  change ((lowerStarComp A f g (f ≫ g) rfl).hom.app P).hom.app
     (Opposite.op (⊤_ Z.Etale)) ≫ P.obj.map (PreservesTerminal.iso (f ≫ g).Etale).inv.op = _
   simp only [lowerStarComp, Functor.sheafPushforwardContinuousComp'_hom_app_hom_app,
     Iso.symm_inv, lowerStar_obj_val_map, ← Functor.map_comp, ← op_comp]
@@ -45,17 +48,17 @@ private theorem lowerStarCompGlobalSectionsIso_comp_comp
   exact ((terminalIsTerminal.isTerminalObj g.Etale).isTerminalObj f.Etale).hom_ext _ _
 
 private lemma derived_comp_eq {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) :
-    (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} g f).hom =
+    (rightDerivedLowerStarComp A g f).hom =
       (Functor.rightDerivedFunctorCompIso'
-        (lowerStar AddCommGrpCat.{u + 1} g) (lowerStar AddCommGrpCat.{u + 1} f)
-        (lowerStarComp AddCommGrpCat.{u + 1} g f)).hom := by
+        (lowerStar A g) (lowerStar A f)
+        (lowerStarComp A g f)).hom := by
   rw [Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g)
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f))
-    _ (upperStarComp AddCommGrpCat.{u + 1} g f) (by
+    (upperStarLowerStarAdjunction A g)
+    (upperStarLowerStarAdjunction A f)
+    (upperStarLowerStarAdjunction A (g ≫ f))
+    _ (upperStarComp A g f) (by
       exact (congrArg Iso.hom
-        (conjugateIsoEquiv_upperStarComp AddCommGrpCat.{u + 1} g f)).symm)]
+        (conjugateIsoEquiv_upperStarComp A g f)).symm)]
   simp only [rightDerivedLowerStarComp, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
     Iso.symm_inv]
   rfl
@@ -113,26 +116,26 @@ set_option maxHeartbeats 1000000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 private lemma derived_leray_composition {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) :
-    Functor.whiskerRight (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} g f).hom
-        (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X) ≫
+    Functor.whiskerRight (rightDerivedLowerStarComp A g f).hom
+        (rightDerivedGlobalSections A X) ≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-        AddCommGrpCat.{u + 1} (g ≫ f)).hom =
+        A (g ≫ f)).hom =
     (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft (lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctor
+      Functor.whiskerLeft (lowerStar A g).rightDerivedFunctor
         (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-          AddCommGrpCat.{u + 1} f).hom ≫
+          A f).hom ≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-        AddCommGrpCat.{u + 1} g).hom := by
-  let F := lowerStar AddCommGrpCat.{u + 1} g
-  let G := lowerStar AddCommGrpCat.{u + 1} f
-  let H := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
-  let K := lowerStar AddCommGrpCat.{u + 1} (g ≫ f)
-  let J := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}
-  let L := Sheaf.Γ Z.smallEtaleTopology AddCommGrpCat.{u + 1}
-  let e := lowerStarComp AddCommGrpCat.{u + 1} g f
-  let a := lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} f
-  let b := lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g
-  let c := lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} (g ≫ f)
+        A g).hom := by
+  let F := lowerStar A g
+  let G := lowerStar A f
+  let H := Sheaf.Γ X.smallEtaleTopology A
+  let K := lowerStar A (g ≫ f)
+  let J := Sheaf.Γ Y.smallEtaleTopology A
+  let L := Sheaf.Γ Z.smallEtaleTopology A
+  let e := lowerStarComp A g f
+  let a := lowerStarCompGlobalSectionsIso A f
+  let b := lowerStarCompGlobalSectionsIso A g
+  let c := lowerStarCompGlobalSectionsIso A (g ≫ f)
   let d := Functor.rightDerivedFunctorCompIso' F G e
   have : (F ⋙ G).PreservesKInjectiveComplexes := ⟨fun T _ => by
     change CochainComplex.IsKInjective
@@ -147,7 +150,7 @@ private lemma derived_leray_composition {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : 
     (Functor.isRightDerivedFunctor_iff_of_iso
       (Functor.rightDerivedFunctorCompUnit (F ⋙ G) H) α
       (HomotopyCategory.quasiIso _ (.up ℤ)) i rfl).mp inferInstance
-  rw [derived_comp_eq]
+  rw [derived_comp_eq (A := A)]
   refine Functor.rightDerived_ext _ α (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
   ext T : 2
   have hα : α.app T =
@@ -203,7 +206,7 @@ private lemma derived_leray_composition {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : 
       (NatTrans.mapHomologicalComplex b.hom (.up ℤ)).app T := by
     ext n : 1
     exact lowerStarCompGlobalSectionsIso_comp_comp g f (T.X n)
-  have hq := (HomotopyCategory.quotient AddCommGrpCat.{u + 1} (.up ℤ)).congr_map ht
+  have hq := (HomotopyCategory.quotient A (.up ℤ)).congr_map ht
   simpa only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_obj,
     Functor.mapHomotopyCategory_map, HomotopyCategory.quotient_obj_as,
     Functor.map_comp] using hq
@@ -226,18 +229,18 @@ the localization of the same underived terminal-section comparison. The universa
 of this composite right-derived functor identifies the transformations; evaluate at M.
 This works on the unbounded category, using K-injectives, with no boundedness hypothesis. -/
 theorem derivedLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
-    (M : DerivedCategory (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})) :
-    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map
-      ((rightDerivedLowerStarComp AddCommGrpCat.{u + 1} g f).hom.app M) ≫
+    (M : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (rightDerivedGlobalSections A X).map
+      ((rightDerivedLowerStarComp A g f).hom.app M) ≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-        AddCommGrpCat.{u + 1} (g ≫ f)).hom.app M =
+        A (g ≫ f)).hom.app M =
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-      AddCommGrpCat.{u + 1} f).hom.app
-        ((lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctor.obj M) ≫
+      A f).hom.app
+        ((lowerStar A g).rightDerivedFunctor.obj M) ≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-        AddCommGrpCat.{u + 1} g).hom.app M := by
+        A g).hom.app M := by
   simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.id_comp] using
-      NatTrans.congr_app (derived_leray_composition f g) M
+      NatTrans.congr_app (derived_leray_composition (A := A) f g) M
 
 end AlgebraicGeometry.Etale
