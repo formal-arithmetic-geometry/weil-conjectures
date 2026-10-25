@@ -51,8 +51,22 @@ constructible cohomology since `ν^*` is exact and fully faithful. -/
 theorem DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructibleIntrinsic Λ X K) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K :=
-  sorry
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K := by
+  obtain ⟨hb, hc⟩ := hK
+  have hE : DerivedCategory.etaleOriginHomology Λ X K := fun n ↦
+    have ⟨G, _, he⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ (hc n)
+    ⟨G, he⟩
+  obtain ⟨K', -, ⟨e⟩⟩ := DerivedCategory.plusEtaleOrigin_of_etaleOriginHomology Λ X hE hb
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hb
+  refine ⟨K', ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun n ↦ ?_⟩, ⟨e⟩⟩
+  · exact isGE_of_isGE_mapDerivedCategory_comparisonUpperStar
+      (_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a)
+  · exact isLE_of_isLE_mapDerivedCategory_comparisonUpperStar
+      (_root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm b)
+  · obtain ⟨G, hG, ⟨e'⟩⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ (hc n)
+    let f := ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n).app K' ≪≫
+      (_root_.DerivedCategory.homologyFunctor _ n).mapIso e ≪≫ e'.symm
+    exact IsConstructibleSheaf.of_iso ((ν^*(X)[ModuleCat.{u + 1} Λ]).preimageIso f).symm
 
 variable (Λ X) in
 /-- Blueprint `lem-sf-proetale-constructible-origin`, clause (ii): at a finite coefficient ring,

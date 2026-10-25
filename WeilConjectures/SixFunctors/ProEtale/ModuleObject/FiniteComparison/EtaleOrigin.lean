@@ -64,6 +64,11 @@ theorem isEtaleOrigin_of_isConstructible
     (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) X) K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
       ((finiteCoefficientDerivedEquivalence X T).functor.obj K) :=
-  sorry
+  DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic
+    ⟨(finiteCoefficientModEquivalence X T).functor.bounded_mapDerivedCategory_obj hK.1, fun n ↦
+      isConstructible_of_iso
+        (((finiteCoefficientModEquivalence X T).functor.mapDerivedCategoryHomologyFunctorIso
+          n).app K)
+        (isConstructible_finiteCoefficientModEquivalence_functor_obj T (hK.2 n))⟩
 
 end AlgebraicGeometry.ProEtale
