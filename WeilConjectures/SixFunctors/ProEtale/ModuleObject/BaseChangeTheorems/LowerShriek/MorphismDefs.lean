@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 
 /-!
 
@@ -65,10 +66,14 @@ All schemes are separated and of finite type over a field `k` of characteristic 
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl`: the morphism
   `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for `E`- and `ℚ̄_ℓ`-sheaves.
 
-## Sorried input
+## Main results
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`: base
-  change for extension by zero.
+  change for extension by zero. The morphism is the exchange morphism
+  `boundedConstructibleOpenImmersionLowerShriekBaseChange'` of
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange`, which is
+  an isomorphism by `isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'` (blueprint
+  `sk-def-sfb-open-base-change`, `sorry`ed there).
 
 -/
 
@@ -191,16 +196,19 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
     boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Adjunction.exchangeLeft
   rfl
 
-/-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
-square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
-an isomorphism.
+/-- **Base change for extension by zero** (blueprint `sk-def-sfb-open-base-change`) on bounded
+constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange
+morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
 
 Mathematically, since the square is cartesian, `X'` is the preimage of the open subscheme
 `X ⊆ Z` under `g`, and on stalks at points of `Z'_proét` both sides are the pulled-back stalk at
 points of `X'` and vanish outside `X'`. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
-    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) :=
-  sorry
+    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) := by
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft] at this
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft]
+  exact this
 
 /-- The extension-by-zero exchange isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` on bounded
 constructible complexes for a cartesian square of open immersions: the inverse of the canonical
