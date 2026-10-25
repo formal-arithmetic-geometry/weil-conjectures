@@ -359,7 +359,7 @@ noncomputable def exceptionalKunnethTraceOfSquare (pW : W ⟶ X) (qW : W ⟶ Z) 
     (boundedConstructibleExceptionalProjectionMorphism _ ℓ G
       ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z))
       ((boundedConstructibleUpperStar _ ℓ pV).obj M))
-    (isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ _ _ _)
+    (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _)
 
 set_option maxHeartbeats 400000 in
 -- The instantiation of the abstract chase involves large terms.
@@ -434,14 +434,14 @@ theorem exceptionalKunnethAdjoint_comp_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     ((boundedConstructibleUpperStar _ ℓ pV).obj M)
     (boundedConstructibleExceptionalProjectionMorphism _ ℓ pW
       ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z)) M)
-    (isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ _ _ _)
+    (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _)
     (fun W ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ pV W M)
-    (fun W ↦ isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ _ W M)
+    (fun W ↦ isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ W M)
     (fun f ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _ f M)
     (boundedConstructibleExceptionalProjectionMorphism _ ℓ G
       ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z))
       ((boundedConstructibleUpperStar _ ℓ pV).obj M))
-    (isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ _ _ _) h₁ h₂
+    (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _) h₁ h₂
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv _ rfl _ rfl
 
 end Square

@@ -125,7 +125,7 @@ projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierExchange ℓ f K L) := by
-  have := isIso_boundedConstructibleExceptionalProjection_app_app _ ℓ f K
+  have := isIso_boundedConstructibleExceptionalProjection_app_app ℓ f K
   exact Verdier.isIso_exchange_of_isIso _ _ _ K L
 
 end Exchange
