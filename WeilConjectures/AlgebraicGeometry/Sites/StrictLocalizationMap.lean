@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representable
 public import WeilConjectures.AlgebraicGeometry.Sites.Cospecialization
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representable
 
