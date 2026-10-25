@@ -160,7 +160,15 @@ proper maps are inverse to the proper exchanges `χ_ι`, `χ_Δ` (the mates of `
 the compact-support exchanges are compatible with the composition `cι = Δd`, then the mates
 `β_c`, `β_d` of `ν_c`, `ν_d` satisfy
 `Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(Δ_*)`, where `B` and `B'` are the conjugates
-of `BC⁻¹` and `BC'⁻¹`. -/
+of `BC⁻¹` and `BC'⁻¹`. That is, for `M : DX` the square
+```
+Ψ_C c^! Δ_* M --Ψ_C(B)--> Ψ_C ι_* d^! M --χ_ι--> ι'_* Ψ_F d^! M
+      |                                                 |
+   β_c(Δ_* M)                                       ι'_* β_d
+      v                                                 v
+c'^! Ψ_P Δ_* M --c'^!(χ_Δ)--> c'^! Δ'_* Ψ_X M --B'--> ι'_* d'^! Ψ_X M
+```
+commutes. -/
 theorem fixedSquare_of_compactSupportExchange
     (hBC : BC.hom = (mateEquiv (adjι.ofNatIsoRight isoι.symm)
       (adjΔ.ofNatIsoRight isoΔ.symm)).symm Sq.hom)

@@ -285,7 +285,15 @@ variable
 `sk-lem-tf-nearby-mate-coherences` (6)): if `ν_ι`, `ν_Δ` are inverse to the proper exchanges
 `χ_ι`, `χ_Δ` (the mates of `α_ι`, `α_Δ`) and the compact-support exchanges are compatible with
 the composition `cι = Δd`, then
-`Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(RΔ_*)`. -/
+`Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(RΔ_*)`. That is, for `M ∈ Dᵇc(X)` the square
+```
+Ψ_C c^! RΔ_* M --Ψ_C(B)--> Ψ_C Rι_* d^! M --χ_ι--> Rι'_* Ψ_F d^! M
+      |                                                   |
+   β_c(RΔ_* M)                                       Rι'_* β_d
+      v                                                   v
+c'^! Ψ_{X×X} RΔ_* M --c'^!(χ_Δ)--> c'^! RΔ'_* Ψ_X M --B'--> Rι'_* d'^! Ψ_X M
+```
+commutes. -/
 theorem fixedSquare_of_compactSupportExchange_app
     (hι : ∀ Q, ΨC.map ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).hom.app Q) ≫
       (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)

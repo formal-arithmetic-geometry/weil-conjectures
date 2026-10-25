@@ -16,10 +16,17 @@ The trait `S = Spec k'⟦t⟧` is a model of the base point `Spec k` with specia
 (`ProEtale.CondensedRing.traitModel`): its geometric generic fibre `Spec Ω` maps to `Spec k`.
 Its nearby cycles `Ψ_s` on bounded constructible complexes
 (`ProEtale.CondensedRing.traitSpecialization`) are the target of the dualizing maps
-`θ_X : Ψ_X ω_X ⟶ ω_{X'}`, which are read through the specialization unit `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ`.
-For a strictly henselian trait the unit `σ_s` is an isomorphism
-(`ProEtale.CondensedRing.isIso_traitSpecializationUnit`, the case of the point of blueprint
-`det-sp-constant-family-vanishing`).
+`θ_X : Ψ_X ω_X ⟶ ω_{X'}`, which are read through the specialization unit `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ`
+(`ProEtale.CondensedRing.traitSpecializationUnit`).
+
+## Implementation notes
+
+Nothing uses these declarations yet. They are the base point of the compact-support exchange
+`ν_{a_X}` of the structure map `a_X : X ⟶ Spec k`, which builds the dualizing maps `θ_X` from the
+exceptional exchange `β_{a_X}` (`ProEtale.CondensedRing.dualizingExchange` takes `σ_s` as a
+parameter). Reading `θ_X` through `σ_s⁻¹` needs `σ_s` to be an isomorphism. This is the point
+case of blueprint `det-sp-constant-family-vanishing` and is not formalised: it needs the
+pro-étale computation `i^* Rj_* ℚ̄_ℓ ≅ ℚ̄_ℓ` over the strictly henselian trait.
 
 -/
 
@@ -70,13 +77,5 @@ noncomputable def traitSpecialization :
 noncomputable def traitSpecializationUnit :
     𝟙_ _ ⟶ (traitSpecialization k k' (ℓ := ℓ)).obj (𝟙_ _) :=
   NearbyCyclesModel.boundedConstructibleUnit ℓ _
-
-/-- Compatibility required from the nearby-cycles section (blueprint
-`det-sp-constant-family-vanishing`, the case `Y = Spec k'` of the constant family `Y × S`, to be
-proved there): over the strictly henselian trait `S = Spec k'⟦t⟧`, the specialization unit
-`σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ = i^* Rj_* ℚ̄_ℓ` is an isomorphism; that is, the cohomology of the geometric
-generic point of `S` is that of its closed point. -/
-instance isIso_traitSpecializationUnit : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) :=
-  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
