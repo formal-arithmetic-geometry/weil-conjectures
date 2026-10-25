@@ -44,6 +44,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+-- `Dᵇc` is monoidal through `ObjectProperty.fullMonoidalSubcategory` everywhere, so that the
+-- monoidal structures of concrete statements and of instantiated abstract ones agree syntactically.
+attribute [-instance] monoidalCategory_boundedConstructible
+  ObjectProperty.instMonoidalCategoryStructFullSubcategory
+
 namespace NearbyCyclesModel
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -56,11 +61,12 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The lax tensor map `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` of nearby cycles
 (`NearbyCyclesModel.tensorMap`) on bounded constructible complexes. -/
 noncomputable def boundedConstructibleTensorMap
-    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+    [IsEllAdicFinitenessCoefficient ℓ Λ] (hP : M.PreservesBoundedConstructible Λ)
+    (A B : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleNearbyCycles hP).obj A ⊗ (boundedConstructibleNearbyCycles hP).obj B ⟶
       (boundedConstructibleNearbyCycles hP).obj (A ⊗ B) :=
-  ObjectProperty.homMk (M.tensorMap (Profinite.padicAlgClRingObj ℓ) A.obj B.obj)
+  ObjectProperty.homMk (M.tensorMap Λ A.obj B.obj)
 
 variable (ℓ) [IsSepClosed k'] [Algebra k k'] {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
