@@ -188,6 +188,12 @@ theorem isPullback : IsPullback F.ι F.d c.support (diag X) := by
     exact Fork.IsLimit.hom_ext F.isLimit
       (h₁.trans (F.isLimit.fac (Fork.ofι s.fst _) WalkingParallelPair.zero).symm)
 
+/-- The inclusion of the fixed locus is a closed immersion: it is the base change of the
+diagonal. -/
+instance isClosedImmersion_ι : IsClosedImmersion F.ι.left :=
+  MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+    (F.isPullback.map (Over.forget _)).flip (inferInstanceAs (IsClosedImmersion (diag X).left))
+
 /-- The exceptional composition isomorphism of the fixed square (blueprint
 `prop-trf-fixed-square-cartesian`): `Rd^! ≅ Rc₁^! ⋙ Rι^!`, from `d = ι ≫ c₁`, the only
 unconditional `!`-transport of the two legs in the fixed square. -/

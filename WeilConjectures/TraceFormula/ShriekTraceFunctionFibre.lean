@@ -22,8 +22,10 @@ fixed by `Φ_Y`. Let `Z` be the fibre of `f̄` at `ȳ'`, with an endomorphism `�
 
 1. `t_{n+1}(Rf_!^Weil K; ȳ)` is the trace of the compactly supported Frobenius of the restriction
    `K̄|_Z` of the base change `K̄ = Lπ_X^* K` of the iterate `(K, φ^{(n+1)})`
-   (`ProEtale.CondensedRing.homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek`): by the
-   local trace of a base change (`homologyUnitEndRingHom_weilStalkSupertrace`), the iterates of
+   (`ProEtale.CondensedRing.homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek`):
+   by the
+   local trace of a base change (`homologyUnitEndRingHom_weilStalkTraceAlternatingSum`), the
+   iterates of
    the Weil lower shriek (`weilLowerShriekPowSuccIso`), its geometric base change
    (`nonempty_weilGeometricBaseChange_weilLowerShriek_iso`) and proper base change for the model
    Weil lower shriek (`nonempty_weilStalk_weilLowerShriekOfFrobenius_iso`);
@@ -31,7 +33,7 @@ fixed by `Φ_Y`. Let `Z` be the fibre of `f̄` at `ȳ'`, with an endomorphism `�
    (`ProEtale.CondensedRing.fibreFixedPointEquiv`), with the same local traces.
 
 Hence the trace formula on the fibre `Z` gives the sheaf–function compatibility at `ȳ`
-(`ProEtale.CondensedRing.weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre`).
+(`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre`).
 
 -/
 
@@ -186,10 +188,10 @@ section Fibre
 
 variable {k : Type u} [Field k] [Finite k]
   {X Y : Over (Spec (.of k))} {eX : X ≅ X} {eY : Y ≅ Y} {f : X ⟶ Y}
-  (hf : eX.hom ≫ f = f ≫ eY.hom) {n : ℕ} (y : frobeniusFixedPoints eY n)
+  (hf : eX.hom ≫ f = f ≫ eY.hom) {n : ℕ} (y : frobeniusFixedPoints eY (n + 1))
   {Z : Over (Spec (.of (AlgebraicClosure k)))} {ΦZ : Z ⟶ Z}
   {i : Z ⟶ (geometricBaseChange k (AlgebraicClosure k)).obj X}
-  (hi : ΦZ ≫ i = i ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (eX.powSucc n).hom)
+  (hi : ΦZ ≫ i = i ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (eX.pow (n + 1)).hom)
   (hZ : IsPullback i (toPoint Z) ((geometricBaseChange k (AlgebraicClosure k)).map f)
     (geometricBaseChangePoint y.1 y.2.1))
 
@@ -207,7 +209,7 @@ include hi hZ in
 /-- **The fixed points of the fibre**: the rational points of the fibre `Z` of `f̄` at `ȳ'`
 fixed by `Φ_Z` are the points of `X` of degree `n + 1` over `ȳ`, through `z ↦ (z ≫ i) ≫ π_X`. -/
 noncomputable def fibreFixedPointEquiv :
-    FixedPoint ΦZ 1 ≃ {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1} where
+    FixedPoint ΦZ 1 ≃ {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} where
   toFun z := ⟨(frobeniusFixedPointsEquiv eX n).symm ⟨z.1 ≫ i, by
     have hz : z.1 ≫ ΦZ = z.1 := (congrArg (z.1 ≫ ·) (frobeniusIterate_one ΦZ)).symm.trans z.2
     rw [Category.assoc, ← hi, ← Category.assoc, hz]⟩,
@@ -239,11 +241,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {eX : X ≅ X} {eY : Y ≅ Y} {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom) {n : ℕ}
-  (y : frobeniusFixedPoints eY n)
+  (y : frobeniusFixedPoints eY (n + 1))
   {Z : Over (Spec (.of (AlgebraicClosure k)))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] {ΦZ : Z ⟶ Z} [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
   {i : Z ⟶ (geometricBaseChange k (AlgebraicClosure k)).obj X}
-  (hi : ΦZ ≫ i = i ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (eX.powSucc n).hom)
+  (hi : ΦZ ≫ i = i ≫ baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (eX.pow (n + 1)).hom)
   (hZ : IsPullback i (toPoint Z) ((geometricBaseChange k (AlgebraicClosure k)).map f)
     (geometricBaseChangePoint y.1 y.2.1))
 
@@ -255,39 +257,39 @@ include hZ in
 of the restriction `K̄|_Z` to the fibre `Z` of `f̄` at `ȳ'` of the base change `K̄ = Lπ_X^* K` of
 the iterate `(K, φ^{(n+1)})`, a Weil object for the model Frobenius
 `Φ_X = (e_X^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
-theorem homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek [IsProper f.left]
+theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
     homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point (AlgebraicClosure k))
-        (weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
+        (weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
       trace ((weilUpperStar ℓ ΦZ _ i hi).obj
-        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).compactFrobenius := by
-  refine (homologyUnitEndRingHom_weilStalkSupertrace ℓ n y.1 y.2.1 y.2.2 _).trans ?_
+  refine (homologyUnitEndRingHom_weilStalkTraceAlternatingSum ℓ n y.1 y.2.1 y.2.2 _).trans ?_
   refine (WeilBoundedConstructible.trace_frobenius_congr
     ((weilStalk ℓ _ _ ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff y.1 y.2.1 (n + 1)
-      (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
-        (geometricFrobeniusField_powSucc_inv n)).2 y.2.2)).mapIso
-      ((weilGeometricBaseChange (AlgebraicClosure k) ℓ Y (n + 1) (eY.powSucc n).hom).mapIso
+      (eY.pow (n + 1)).hom ((geometricFrobeniusField k).pow (n + 1))
+        (geometricFrobeniusField_pow_inv n)).2 y.2.2)).mapIso
+      ((weilGeometricBaseChange (AlgebraicClosure k) ℓ Y (n + 1) (eY.pow (n + 1)).hom).mapIso
         (weilLowerShriekPowSuccIso ℓ hf K n)))).trans ?_
   refine (WeilBoundedConstructible.trace_frobenius_congr
     ((weilStalk ℓ _ _ ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff y.1 y.2.1 (n + 1)
-      (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
-        (geometricFrobeniusField_powSucc_inv n)).2 y.2.2)).mapIso
+      (eY.pow (n + 1)).hom ((geometricFrobeniusField k).pow (n + 1))
+        (geometricFrobeniusField_pow_inv n)).2 y.2.2)).mapIso
       (nonempty_weilGeometricBaseChange_weilLowerShriek_iso ℓ (AlgebraicClosure k)
-        (eX.powSucc n) (eY.powSucc n) (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)
+        (eX.pow (n + 1)) (eY.pow (n + 1)) (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)
         (n + 1) (K.powSucc ℓ n)).some)).trans ?_
   exact WeilBoundedConstructible.trace_frobenius_congr
     (nonempty_weilStalk_weilLowerShriekOfFrobenius_iso ℓ
       (IsPullback.of_hasPullback
-        (baseChangeModelFrobenius (AlgebraicClosure k) Y (n + 1) (eY.powSucc n).hom)
+        (baseChangeModelFrobenius (AlgebraicClosure k) Y (n + 1) (eY.pow (n + 1)).hom)
         ((geometricBaseChange k (AlgebraicClosure k)).map f)).flip
       (r := geometricBaseChangeRelativeFrobenius (n + 1)
-        (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n))
+        (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n))
       (relativeFrobenius_snd _ _ _ _) (relativeFrobenius_fst _ _ _ _) hi
       ((geometricBaseChangePoint_comp_modelFrobenius_eq_iff y.1 y.2.1 (n + 1)
-        (eY.powSucc n).hom ((geometricFrobeniusField k).powSucc n)
-          (geometricFrobeniusField_powSucc_inv n)).2 y.2.2) hZ
-      ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+        (eY.pow (n + 1)).hom ((geometricFrobeniusField k).pow (n + 1))
+          (geometricFrobeniusField_pow_inv n)).2 y.2.2) hZ
+      ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
         (K.powSucc ℓ n))).some
 
 omit [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
@@ -312,34 +314,34 @@ fibre**: if the restriction `K̄|_Z` of the base change of the iterate `(K, φ^{
 fibre `Z` of `f̄` at `ȳ'` satisfies the trace formula
 `tr(F_{c,1} | RΓ_c(Z, K̄|_Z)) = ∑_{z ∈ Z^{Φ_Z}} tr(F_{z,1} | (K̄|_Z)_z)`, then
 `t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄)`. -/
-theorem weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre [IsProper f.left]
+theorem weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) [Fintype (FixedPoint ΦZ 1)]
     [IsFinite (frobeniusIterate ΦZ 1).left]
     [IsUniversalHomeomorphism (frobeniusIterate ΦZ 1).left]
     (htf : trace (((weilUpperStar ℓ ΦZ _ i hi).obj
-        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).globalOperator 1) =
       ∑ z : FixedPoint ΦZ 1, trace (((weilUpperStar ℓ ΦZ _ i hi).obj
-        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.powSucc n).hom).obj
+        ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).stalkFrobenius 1 z.1 z.2)) :
-    weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
-      ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
-        weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K := by
+    weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
+      ∑ᶠ x : {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1},
+        weilStalkTraceAlternatingSum ℓ (n + 1) x.1.1 x.1.2.2 K := by
   classical
   let e := fibreFixedPointEquiv y hi hZ
-  let _ : Fintype {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
+  let _ : Fintype {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
   refine homologyUnitEndRingHom_injective (Profinite.padicAlgClRingObj ℓ) ℓ
     (point (AlgebraicClosure k)) ?_
-  rw [homologyUnitEndRingHom_weilStalkSupertrace_weilLowerShriek ℓ hf y hi hZ K,
+  rw [homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek ℓ hf y hi hZ K,
     ← WeilBoundedConstructible.globalOperator_one, htf, finsum_eq_sum_of_fintype, map_sum,
     ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
   refine Finset.sum_congr rfl fun z _ ↦ ?_
   rw [WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar hi,
     WeilBoundedConstructible.trace_stalkFrobenius_one _ _ _ (by
       rw [← frobeniusIterate_one (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1)
-        (eX.powSucc n).hom)]
+        (eX.pow (n + 1)).hom)]
       exact comp_comp_frobeniusIterate_of_comp hi z.2),
-    homologyUnitEndRingHom_weilStalkSupertrace ℓ n _ (e z).1.2.1 (e z).1.2.2 K]
+    homologyUnitEndRingHom_weilStalkTraceAlternatingSum ℓ n _ (e z).1.2.1 (e z).1.2.2 K]
   have h : z.1 ≫ i = geometricBaseChangePoint (e z).1.1 (e z).1.2.1 :=
     rationalPoint_ext (geometricBaseChangePoint_left_comp_proj _ _).symm
   exact trace_weilStalk_frobenius_congr ℓ h _ _ _

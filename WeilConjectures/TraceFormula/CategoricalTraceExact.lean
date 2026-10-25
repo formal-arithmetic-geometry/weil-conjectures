@@ -85,7 +85,7 @@ theorem superTrace_eq_add_of_exact (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIs
     exact b.moduleFinite
   have htr {X : C} (hX : IsFiniteFree X) (φ : X ⟶ X) :
       LinearMap.trace (End (𝟙_ C))ᵐᵒᵖ (𝟙_ C ⟶ X) (Preadditive.rightCompEndOp _ φ) =
-        .op (categoricalTrace φ) := by
+        .op (traceOrZero φ) := by
     obtain ⟨n, ⟨b⟩⟩ := hX.exists_unitBasis
     exact b.trace_rightCompEndOp φ
   have hex {X Y Z : C} (hX : IsFiniteFree X) (hY : IsFiniteFree Y) {f : X ⟶ Y} {g : Y ⟶ Z}
@@ -148,8 +148,8 @@ theorem superTrace_eq_add_of_exact (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIs
   -- the supertraces are the sums over `s` of the reindexed traces
   have hsum {X : ℤ → C} (hX : ∀ j, IsFiniteFree (X j))
       (hX₀ : ∀ j, (j < a ∨ b < j) → IsZero (X j)) (φ : ∀ j, X j ⟶ X j) :
-      superTrace X φ = ∑ n ∈ s, (n.negOnePow : ℤ) • categoricalTrace (φ (-n)) := by
-    have h₀ {n : ℤ} (hn : n ∉ s) : categoricalTrace (φ (-n)) = 0 := by
+      superTrace X φ = ∑ n ∈ s, (n.negOnePow : ℤ) • traceOrZero (φ (-n)) := by
+    have h₀ {n : ℤ} (hn : n ∉ s) : traceOrZero (φ (-n)) = 0 := by
       have := hsub (hX₀ _ (hs hn))
       apply MulOpposite.op_injective
       rw [← htr (hX _), LinearMap.trace_eq_zero_of_subsingleton, MulOpposite.op_zero]
@@ -158,9 +158,9 @@ theorem superTrace_eq_add_of_exact (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIs
       (Finset.sum_congr rfl fun n _ ↦ ?_)
     · by_contra h
       apply hn
-      change ((-n).negOnePow : ℤ) • categoricalTrace (φ (-n)) = 0
+      change ((-n).negOnePow : ℤ) • traceOrZero (φ (-n)) = 0
       rw [h₀ h, smul_zero]
-    · change ((-n).negOnePow : ℤ) • categoricalTrace (φ (-n)) = _
+    · change ((-n).negOnePow : ℤ) • traceOrZero (φ (-n)) = _
       rw [Int.negOnePow_neg]
   rw [hsum hA (fun j hj ↦ (hab j hj).1), hsum hB (fun j hj ↦ (hab j hj).2.1),
     hsum hD (fun j hj ↦ (hab j hj).2.2), ← sub_eq_zero, ← Finset.sum_add_distrib,

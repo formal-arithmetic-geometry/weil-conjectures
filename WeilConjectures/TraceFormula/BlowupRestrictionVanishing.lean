@@ -76,7 +76,7 @@ theorem blowupRestriction_eq_zero {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : (ℓ : k)
     (hf : f ≠ 0) (hg : g ≠ 0) (hh : HasOrder h 1)
     (hDB : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {g}))
     (hDH : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {h}))
-    (E : DerivedCategory (Sheaf (Scheme.basicOpenSpec (f * h)).toScheme.smallEtaleTopology
+    (E : DerivedCategory (Sheaf (Scheme.specBasicOpen (f * h)).toScheme.smallEtaleTopology
       (ModuleCat.{u + 1} Λ)))
     (hE : HasFiniteEllMonodromy ℓ E) :
     globalSectionsRestriction

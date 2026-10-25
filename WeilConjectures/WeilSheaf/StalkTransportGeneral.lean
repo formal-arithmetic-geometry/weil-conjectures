@@ -64,6 +64,16 @@ lemma globalSectionsTransport_comp_resOver {Y S₁ S₂ : Scheme.{u}} {t₁ : S�
     (Category.comp_id g) _ _ ψ hψr]
   exact globalSectionsTransport_congr_left A k₁ hτ.symm ψ
 
+/-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` for `f = 𝟙`, followed by `f^* = (𝟙)^* ≅ 𝟭`,
+is the identification `(f ≫ g)^* = g^*`. -/
+lemma upperStarComp_hom_app_comp_upperStarCongr_id {Y Y' : Scheme.{u}} {f : Y' ⟶ Y'}
+    (p : f = 𝟙 Y') (g : Y' ⟶ Y) (h : f ≫ g = g) (G : Sheaf (Scheme.ProEt.topology Y) A) :
+    (upperStarComp A f g).hom.app G ≫ (upperStarCongr A p).hom.app ((g)^*[A].obj G) ≫
+        (upperStarId A Y').hom.app ((g)^*[A].obj G) =
+      (upperStarCongr A h).hom.app G := by
+  subst p
+  simpa [upperStarCongr] using upperStarComp_id_left_hom_app A g G
+
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.WeilSheaf
@@ -73,13 +83,45 @@ open scoped AlgebraicGeometry.ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The transports along the iterated Weil structures compose, over arbitrary schemes: for
-`b ≥ 1`, transporting along `φ_a` and then along `φ_b` is transporting along `φ_{a+b}`. -/
+/-- The transports along the iterated Weil structures compose, over arbitrary schemes, for
+`b = 0`. -/
+lemma globalSectionsTransport_frobeniusPowStr_comp_zero (F : WeilSheaf k₀ l X)
+    {P P' P'' : Scheme.{u}} {t : P ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {t' : P' ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {t'' : P'' ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {τ'' : P'' ⟶ P} (a : ℕ)
+    (ha : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom)
+    (hb' : τ' ≫ t' = t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom)
+    (hτ : τ' ≫ τ = τ'')
+    (hab : τ'' ≫ t =
+      t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a + 0)).hom) :
+    ProEtale.globalSectionsTransport _ ha (F.frobeniusPowStr a) ≫
+        ProEtale.globalSectionsTransport _ hb' (F.frobeniusPowStr 0) =
+      ProEtale.globalSectionsTransport _ hab (F.frobeniusPowStr (a + 0)) := by
+  have p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom = 𝟙 _ := by
+    rw [pow_zero]
+    rfl
+  refine ProEtale.globalSectionsTransport_comp_eq _ ha hb' hab hτ
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom a 0) _ _ _ ?_
+  have n₁ := (ProEtale.upperStarCongr (WeilCoefficients.{u} l) p).hom.naturality
+    (F.frobeniusPowStr a)
+  have n₂ := (ProEtale.upperStarId (WeilCoefficients.{u} l) _).hom.naturality
+    (F.frobeniusPowStr a)
+  simp only [Functor.id_map] at n₂
+  rw [F.frobeniusPowStr_zero p]
+  rw [reassoc_of% n₁, n₂, reassoc_of% (ProEtale.upperStarComp_hom_app_comp_upperStarCongr_id p
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom a 0)
+    F.obj.carrier.X)]
+  rfl
+
+/-- The transports along the iterated Weil structures compose, over arbitrary schemes:
+transporting along `φ_a` and then along `φ_b` is transporting along `φ_{a+b}`. -/
 lemma globalSectionsTransport_frobeniusPowStr_comp' (F : WeilSheaf k₀ l X) {P P' P'' : Scheme.{u}}
     {t : P ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {t' : P' ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {t'' : P'' ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {τ'' : P'' ⟶ P} (a b : ℕ) (hb : 1 ≤ b)
+    {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {τ'' : P'' ⟶ P} (a b : ℕ)
     (ha : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom)
     (hb' : τ' ≫ t' = t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom)
     (hτ : τ' ≫ τ = τ'')
@@ -88,6 +130,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp' (F : WeilSheaf k₀ l X) {P 
     ProEtale.globalSectionsTransport _ ha (F.frobeniusPowStr a) ≫
         ProEtale.globalSectionsTransport _ hb' (F.frobeniusPowStr b) =
       ProEtale.globalSectionsTransport _ hab (F.frobeniusPowStr (a + b)) := by
+  rcases Nat.eq_zero_or_pos b with rfl | hb
+  · exact F.globalSectionsTransport_frobeniusPowStr_comp_zero a ha hb' hτ hab
   have hg := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom a b
   have h'' : (τ' ≫ τ) ≫ t = t'' ≫
       (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom ≫
@@ -183,8 +227,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_upperStar
       rw [Category.assoc t', pc, ← Category.assoc t', ← hbX]
       simp
     have hτ : τ ≫ (Iso.refl _).hom = τ := Category.comp_id τ
-    rw [← G.globalSectionsTransport_frobeniusPowStr_comp' m 1 le_rfl haY hbY hτ hY,
-      ← F.globalSectionsTransport_frobeniusPowStr_comp' m 1 le_rfl haX hbX hτ hX,
+    rw [← G.globalSectionsTransport_frobeniusPowStr_comp' m 1 haY hbY hτ hY,
+      ← F.globalSectionsTransport_frobeniusPowStr_comp' m 1 haX hbX hτ hX,
       Category.assoc, globalSectionsTransport_frobeniusPowStr_one_comp_upperStar hθ
         hbX hbY, ← Category.assoc, ih haX haY, Category.assoc]
 

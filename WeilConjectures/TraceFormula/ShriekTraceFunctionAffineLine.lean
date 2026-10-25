@@ -25,7 +25,7 @@ The sheaf–function compatibility (`ProEtale.CondensedRing.ShriekTraceFunctionA
    Lefschetz–Verdier formula for the Frobenius graph on a proper smooth curve
    (`WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one`), and
    the compatibility at `ȳ` follows from the trace formula on the fibre
-   (`weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre`);
+   (`weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre`);
 2. the relative affine line `𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`
    (`ProEtale.CondensedRing.shriekTraceFunctionAt_overProdMap_polyAffineProj`), the composite of
    the open immersion into `ℙ¹_{𝔸ʲ_k ×_k E}` (`shriekTraceFunctionAt_of_isOpenImmersion`) and of
@@ -67,7 +67,7 @@ theorem shriekTraceFunctionAt_overProjectiveLineProj (B : Over (Spec (.of k)))
   have h₁ := hΦ.isFinite 1
   have h₂ := hΦ.isUniversalHomeomorphism 1
   rw [frobeniusIterate_one] at h₁ h₂
-  exact weilStalkSupertrace_weilLowerShriek_eq_finsum_of_fibre ℓ
+  exact weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre ℓ
     (overProjectiveLineMap_proj eB.hom) y (projectiveLineFibreι_comp eB y)
     (isPullback_projectiveLineFibreι eB y) K
     (WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one hΦ _
@@ -82,7 +82,7 @@ along the open immersion (`shriekTraceFunctionAt_of_isOpenImmersion`) and the on
 line in blueprint `thm-trf-coefficient-morphism-trace-formula`. -/
 theorem shriekTraceFunctionAt_overProdMap_polyAffineProj (j : ℕ) (E : Over (Spec (.of k)))
     [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [IsSeparated E.hom] (eE : E ≅ E)
-    (he : ∃ m : ℕ, eE.powSucc m = Iso.refl E) :
+    (he : ∃ m : ℕ, eE.pow (m + 1) = Iso.refl E) :
     ShriekTraceFunctionAt ℓ (overProdIso (Iso.refl (polyAffine k (j + 1))) eE)
       (overProdIso (Iso.refl (polyAffine k j)) eE)
       (overProdIso_refl_hom_comp_overProdMap (polyAffineProj k j) eE) := by
@@ -92,11 +92,11 @@ theorem shriekTraceFunctionAt_overProdMap_polyAffineProj (j : ℕ) (E : Over (Sp
         (overProjectiveLineIso (overProdIso (Iso.refl (polyAffine k j)) eE)).hom := by
     simpa only [overProdIso_hom, Iso.refl_hom, overProjectiveLineIso_hom] using
       overAffineLineι_naturality j eE.hom
-  have hX : (overProdIso (Iso.refl (polyAffine k (j + 1))) eE).powSucc m = Iso.refl _ := by
-    rw [overProdIso_powSucc, hm, Iso.powSucc_refl, overProdIso_refl]
-  have hZ : (overProjectiveLineIso (overProdIso (Iso.refl (polyAffine k j)) eE)).powSucc m =
+  have hX : (overProdIso (Iso.refl (polyAffine k (j + 1))) eE).pow (m + 1) = Iso.refl _ := by
+    rw [overProdIso_pow, hm, Iso.pow_refl, overProdIso_refl]
+  have hZ : (overProjectiveLineIso (overProdIso (Iso.refl (polyAffine k j)) eE)).pow (m + 1) =
       Iso.refl _ := by
-    rw [overProjectiveLineIso_powSucc, overProdIso_powSucc, hm, Iso.powSucc_refl,
+    rw [overProjectiveLineIso_pow, overProdIso_pow, hm, Iso.pow_refl,
       overProdIso_refl, overProjectiveLineIso_refl]
   exact ShriekTraceFunctionAt.of_eq ℓ (overAffineLineι_proj j E)
     (shriekTraceFunctionAt_comp ℓ _ _ _ hh (overProjectiveLineMap_proj _) ⟨m, hX⟩ ⟨m, hZ⟩

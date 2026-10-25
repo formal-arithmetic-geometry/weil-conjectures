@@ -79,7 +79,8 @@ noncomputable def reductionModIdealDerivedTensorIso {X : Scheme.{u}}
 
 /-- Blueprint `lem-coef-finite-direct-image`: Finite coefficient change for direct image.
 
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes and `K ∈ Dctf(X, Λ)`. The canonical
+Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes and `K` a bounded above complex (for
+instance `K ∈ Dctf(X, Λ)`, as in the blueprint). The canonical
 projection map `(Rf_* K) ⊗ᴸ (Λ/J)_Y ⟶ Rf_*(K ⊗ᴸ (Λ/J)_X)`
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarReductionModIdealMap`), that is
 `(Rf_* K)_B ⟶ Rf_*(K_B)` read after restriction of scalars, is an isomorphism. It is natural in
@@ -91,11 +92,9 @@ constant coefficient (`lem-sf-projection-finite-constant`,
 theorem isIso_rightDerivedLowerStarReductionModIdealMap_app {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (b : ℤ)
+    [K.IsLE b] :
     IsIso ((rightDerivedLowerStarReductionModIdealMap Λ J f).app K) := by
-  obtain ⟨-, a, b, hta⟩ := hK
-  have : K.IsLE b := (_root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta).2
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
   have := isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle Λ aX aY f hf d hd K b
     (ModuleCat.of Λ (Λ ⧸ J))
@@ -292,9 +291,11 @@ theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
   obtain ⟨eS⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite Λ f J
   refine ⟨fun K ↦ ⟨((leftDerivedUpperStarReductionModIdealIso Λ J f).app K).symm⟩,
     fun K M ↦ ⟨reductionModIdealDerivedTensorIso Λ J K M⟩,
-    fun K hK ↦
-      have := isIso_rightDerivedLowerStarReductionModIdealMap_app Λ J aX aY f hf hK
-      ⟨@asIso _ _ _ _ _ this⟩,
+    fun K hK ↦ by
+      obtain ⟨-, a, b, hta⟩ := hK
+      have : K.IsLE b := (_root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta).2
+      have := isIso_rightDerivedLowerStarReductionModIdealMap_app Λ J aX aY f hf K b
+      exact ⟨@asIso _ _ _ _ _ this⟩,
     fun K ↦ ⟨eS.app K⟩,
     fun K M hK hM ↦
       nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor Λ J aX hK hM,

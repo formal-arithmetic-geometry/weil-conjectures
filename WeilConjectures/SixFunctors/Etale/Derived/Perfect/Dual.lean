@@ -20,9 +20,10 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`: `K ↦ K^∨ = RHom(K, Λ_X)`.
-- `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`: the evaluation
-  `K ⊗ᴸ K^∨ ⟶ Λ_X`.
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual` (`def-pod-coefficient-dual-on-x`):
+  `K ↦ K^∨ = RHom(K, Λ_X)`.
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`
+  (`def-pod-coefficient-dual-on-x`): the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualIsoOfExactPairing`: `K^∨ ≅ L` for a
   left dual `L` of `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap`: the canonical map
