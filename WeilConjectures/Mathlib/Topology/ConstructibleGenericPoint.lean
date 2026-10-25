@@ -43,7 +43,8 @@ theorem IsConstructible.generic_dichotomy (hη : IsGenericPoint η univ) {s : Se
       (η ∉ s → ∃ Z, IsClosed Z ∧ η ∉ Z ∧ s ⊆ Z) := by
   induction hs using IsConstructible.empty_union_induction with
   | open_retrocompact U hU _ =>
-    refine ⟨fun h ↦ ⟨U, hU, h, subset_rfl⟩, fun h ↦ ⟨∅, isClosed_empty, notMem_empty η, ?_⟩⟩
+    refine ⟨fun h ↦ ⟨U, hU, h, subset_rfl⟩,
+      fun h ↦ ⟨∅, isClosed_empty, notMem_empty η, ?_⟩⟩
     intro x hx
     exact h ((hη.mem_open_set_iff hU).2 ⟨x, mem_univ x, hx⟩)
   | union s _ t _ hs' ht' =>
