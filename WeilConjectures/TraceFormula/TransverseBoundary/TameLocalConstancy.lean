@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.DistTriang
+public import WeilConjectures.ConstructibleSheaf.ElementaryAbelianCoefficients
+public import WeilConjectures.TraceFormula.TransverseBoundary.LocalPurity.LocalConstancy
 public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisor
 public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisorDevissage
 
@@ -45,16 +47,18 @@ include hℓ in
 `Λ`-module `N` killed by `ℓ`, the restriction of `R j_{W*} N` to the regular divisor `Y - z` of
 `W = Z - X` has finite locally constant cohomology sheaves. Near every point of `Y - z`, purity
 for the regular divisor `Y` of the étale limit of smooth surfaces `Z`
-(`AlgebraicGeometry.Scheme.exists_higherDirectImage_of_isEtaleLimitOfSmoothSurfaces`) computes
-`R^q j_* 𝔽_ℓ` as `𝔽_ℓ`, `i_* 𝔽_ℓ(-1)` and `0`, and `N` is a finite direct sum of copies of `𝔽_ℓ`
-as an abelian group. -/
+(`Scheme.TransverseCorner.hasFiniteLocallyConstantHomology_puncturedYι_jW_constantZModModule`)
+computes `R^q j_* 𝔽_ℓ` as `𝔽_ℓ`, `i_* 𝔽_ℓ(-1)` and `0`, and `N` is a finite direct sum of copies
+of `𝔽_ℓ` as an abelian group
+(`Scheme.HasFiniteLocallyConstantHomology.constantSheaf_of_constantZModModule`). -/
 theorem hasFiniteLocallyConstantHomology_puncturedYι_jW_constantSheaf
     (N : ModuleCat.{u + 1} Λ) [Finite N] (hN : ∀ n : N, (ℓ : Λ) • n = 0) :
     HasFiniteLocallyConstantHomology C.puncturedY
       ((L((C.puncturedYι)^*[ModuleCat.{u + 1} Λ])).obj
         ((R((C.jW)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj
-          ((constantSheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N)))) := by
-  sorry
+          ((constantSheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N)))) :=
+  HasFiniteLocallyConstantHomology.constantSheaf_of_constantZModModule C.jW C.puncturedYι ℓ
+    (C.hasFiniteLocallyConstantHomology_puncturedYι_jW_constantZModModule hℓ) N hN
 
 include hℓ hΛ in
 /-- Blueprint `det-tf-transverse-tame-local-constancy`, after the reduction to one divisor: for

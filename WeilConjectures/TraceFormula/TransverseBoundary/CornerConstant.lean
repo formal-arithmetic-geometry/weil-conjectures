@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-public import WeilConjectures.Mathlib.GroupTheory.SpecificGroups.Cyclic
 public import WeilConjectures.TraceFormula.TransverseBoundary.Basic
 
 /-!
@@ -68,49 +67,7 @@ noncomputable abbrev puncturedTrait : Scheme.{u} :=
 noncomputable abbrev puncturedTraitι : C.puncturedTrait zbar ⟶ C.puncturedStrictLocalization zbar :=
   pullback.snd _ _
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] [IsAlgClosed k] (hℓ : (ℓ : k) ≠ 0) (hz : Set.range zbar = {C.z})
-
-include hℓ hz
-
-/-- Blueprint `det-tf-transverse-corner-constant`: `H^q(S - Y_S, ℤ/ℓ) = 0` for `q ≥ 2`. -/
-theorem subsingleton_sheafH_puncturedStrictLocalization (q : ℕ) (hq : 2 ≤ q) :
-    Subsingleton (Sheaf.H ((C.puncturedStrictLocalization zbar).constantZMod ℓ) q) := by
-  sorry
-
-/-- Blueprint `det-tf-transverse-corner-constant`: `H^q(X_S - z, ℤ/ℓ) = 0` for `q ≥ 2`. -/
-theorem subsingleton_sheafH_puncturedTrait (q : ℕ) (hq : 2 ≤ q) :
-    Subsingleton (Sheaf.H ((C.puncturedTrait zbar).constantZMod ℓ) q) := by
-  sorry
-
-/-- Blueprint `det-tf-transverse-corner-constant`: `H^0(S - Y_S, ℤ/ℓ)` and
-`H^1(S - Y_S, ℤ/ℓ) ≅ 𝔽_ℓ(-1)` are free of rank one over `𝔽_ℓ`. -/
-theorem nonempty_addEquiv_sheafH_puncturedStrictLocalization (q : ℕ) (hq : q ≤ 1) :
-    Nonempty (Sheaf.H ((C.puncturedStrictLocalization zbar).constantZMod ℓ) q ≃+ ZMod ℓ) := by
-  sorry
-
-/-- Blueprint `det-tf-transverse-corner-constant`: `H^0(X_S - z, ℤ/ℓ)` and
-`H^1(X_S - z, ℤ/ℓ) ≅ 𝔽_ℓ(-1)` are free of rank one over `𝔽_ℓ`. -/
-theorem nonempty_addEquiv_sheafH_puncturedTrait (q : ℕ) (hq : q ≤ 1) :
-    Nonempty (Sheaf.H ((C.puncturedTrait zbar).constantZMod ℓ) q ≃+ ZMod ℓ) := by
-  sorry
-
-/-- Blueprint `det-tf-transverse-corner-constant`, *the restriction* in degree `0`: both
-`S - Y_S` and `X_S - z` are connected, so the restriction of the constants is bijective. -/
-theorem bijective_cohomologyMap_zero_puncturedTraitι :
-    Function.Bijective
-      (Etale.cohomologyMap (C.puncturedTraitι zbar)
-        ((C.puncturedStrictLocalization zbar).constantZMod ℓ) 0) := by
-  sorry
-
-/-- Blueprint `det-tf-transverse-corner-constant`, *the restriction* in degree `1`: the Kummer
-class of a local equation of `Y_S` restricts to the Kummer class of a uniformizer of `X_S`,
-which is nonzero, so the restriction map is nonzero. -/
-theorem cohomologyMap_one_puncturedTraitι_ne_zero :
-    Etale.cohomologyMap (C.puncturedTraitι zbar)
-      ((C.puncturedStrictLocalization zbar).constantZMod ℓ) 1 ≠ 0 := by
-  sorry
-
-omit hℓ hz in
+variable {ℓ : ℕ} in
 /-- The cohomology of the pullback of the constant sheaf `ℤ/ℓ` along `X_S - z ⟶ S - Y_S` is
 that of the constant sheaf `ℤ/ℓ` on `X_S - z`. -/
 noncomputable def sheafHUpperStarConstantZModEquiv (q : ℕ) :
@@ -122,30 +79,5 @@ noncomputable def sheafHUpperStarConstantZModEquiv (q : ℕ) :
   refine ⟨Sheaf.H.map e.hom q, Sheaf.H.map e.inv q, fun x ↦ ?_, fun x ↦ ?_⟩
   · rw [← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply]
   · rw [← Sheaf.H.map_comp_apply, e.inv_hom_id, Sheaf.H.map_id_apply]
-
-/-- Blueprint `det-tf-transverse-corner-constant`: Constant coefficients near a transverse
-corner. The restriction map `RΓ(S - Y_S, 𝔽_ℓ) ⟶ RΓ(X_S - z, 𝔽_ℓ)` is an isomorphism: in every
-degree `q` the restriction `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` is bijective. In degree `0`
-both sides are the constants of connected schemes; in degrees `q ≥ 2` both sides vanish; in
-degree `1` both sides have `ℓ` elements and the map is nonzero (Kummer classes). -/
-theorem bijective_cohomologyMap_puncturedTraitι (q : ℕ) :
-    Function.Bijective
-      (Etale.cohomologyMap (C.puncturedTraitι zbar)
-        ((C.puncturedStrictLocalization zbar).constantZMod ℓ) q) := by
-  rcases Nat.lt_or_ge q 2 with hq | hq
-  · interval_cases q
-    · exact C.bijective_cohomologyMap_zero_puncturedTraitι zbar hℓ hz
-    · obtain ⟨e₁⟩ := C.nonempty_addEquiv_sheafH_puncturedStrictLocalization zbar hℓ hz 1 le_rfl
-      obtain ⟨e₂⟩ := C.nonempty_addEquiv_sheafH_puncturedTrait zbar hℓ hz 1 le_rfl
-      refine AddMonoidHom.bijective_of_card_eq_prime (p := ℓ) ?_ ?_ _
-        (C.cohomologyMap_one_puncturedTraitι_ne_zero zbar hℓ hz)
-      · rw [Nat.card_congr e₁.toEquiv, Nat.card_zmod]
-      · rw [Nat.card_congr (C.sheafHUpperStarConstantZModEquiv zbar 1), Nat.card_congr e₂.toEquiv, Nat.card_zmod]
-  · have := C.subsingleton_sheafH_puncturedStrictLocalization zbar hℓ hz q hq
-    have : Subsingleton (Sheaf.H (((C.puncturedTraitι zbar)^*[AddCommGrpCat.{u + 1}]).obj
-        ((C.puncturedStrictLocalization zbar).constantZMod ℓ)) q) := by
-      have := C.subsingleton_sheafH_puncturedTrait zbar hℓ hz q hq
-      exact (C.sheafHUpperStarConstantZModEquiv zbar q).subsingleton
-    exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
 
 end AlgebraicGeometry.Scheme.TransverseCorner

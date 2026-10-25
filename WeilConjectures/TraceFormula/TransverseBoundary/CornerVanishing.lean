@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.SepClosedPoint
-public import WeilConjectures.TraceFormula.TransverseBoundary.CornerConstant
+public import WeilConjectures.TraceFormula.TransverseBoundary.CornerRestriction
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerVanishingDevissage
 
 /-!
