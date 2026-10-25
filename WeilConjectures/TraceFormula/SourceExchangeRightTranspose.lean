@@ -216,7 +216,8 @@ set_option maxHeartbeats 2000000 in
 theorem sourceExchange_rightTranspose [IsProper (r ≫ h).left]
     (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f) (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f)
     (e : (boundedConstructibleLowerShriek _ ℓ (r ≫ zX)).obj
-      ((boundedConstructibleUpperStar _ ℓ (r ≫ zX)).obj K ⊗ (boundedConstructibleUpperStar _ ℓ p₂).obj
+      ((boundedConstructibleUpperStar _ ℓ (r ≫ zX)).obj K ⊗
+        (boundedConstructibleUpperStar _ ℓ p₂).obj
         ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ⟶ K) :
     (boundedConstructibleUpperStar _ ℓ f).map
         ((boundedConstructibleLowerShriek _ ℓ π₁).map

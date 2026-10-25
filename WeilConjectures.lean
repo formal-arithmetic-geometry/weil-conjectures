@@ -12765,7 +12765,9 @@ public import WeilConjectures.TraceFormula.SourceExchangeCoherence
 public import WeilConjectures.TraceFormula.SourceExchangeKernel
 public import WeilConjectures.TraceFormula.SourceExchangeKunneth
 public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
+public import WeilConjectures.TraceFormula.SourceExchangeLeftTranspose
 public import WeilConjectures.TraceFormula.SourceExchangeProjection
+public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.Basic
