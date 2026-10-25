@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
 
 /-!
 # Irreducible local systems and irreducible monodromy representations
@@ -66,12 +67,6 @@ lemma lisseStalkMap_bijective {G H : LisseSheaf l Y} (f : G ⟶ H) [IsIso f] :
       LinearMap.id_apply]
   · rw [← LinearMap.comp_apply, ← lisseStalkMap_comp, IsIso.inv_hom_id, lisseStalkMap_id,
       LinearMap.id_apply]
-
-/-- The stalks of a lisse sheaf are finite-dimensional. -/
-instance LisseMonodromy.finiteDimensional_stalkSpace (G : LisseSheaf l Y) :
-    FiniteDimensional (PadicAlgCl l) (LisseMonodromy.StalkSpace t G) :=
-  (IsAdicLisseSheaf.upperStar t G.property).isAdicConstructibleSheaf
-    |>.finiteDimensional_globalSections
 
 /-- The stalks of a zero lisse sheaf vanish. -/
 lemma subsingleton_stalkSpace_of_isZero (G : LisseSheaf l Y) (h : IsZero G.obj) :
