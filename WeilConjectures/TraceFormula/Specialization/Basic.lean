@@ -153,7 +153,6 @@ structure TraceSpecialization where
       βc.app _ ≫ (boundedConstructibleUpperShriek ℓ c'.support).map
           (χΔ.app M) ≫ (F'.upperShriekLowerStarIso.app (ΨX.obj M)).hom
 
-
 variable {c'} in
 /-- The exceptional pullback `Rc'^! (K' ⊠ D K')` of the universal kernel along the support of
 `c'` vanishes as soon as the ordinary pullback `Lc₂'^* K'` does: by external duality

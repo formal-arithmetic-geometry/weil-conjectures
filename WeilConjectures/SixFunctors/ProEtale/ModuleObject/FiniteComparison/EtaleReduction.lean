@@ -163,7 +163,7 @@ only proper `f`, and it only asserts that some isomorphism `γ` with invertible 
 without identifying `γ` with the canonical `γ^!` of the blueprint (nor `β` with its canonical
 comparison). -/
 theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsProper f.left] :
-    ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+    ∃ γ : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,

@@ -86,9 +86,9 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     Nonempty (Arrow.mk ((constructibleToPadicAlgCl Y'.left ℓ E).map
         ((boundedConstructibleExtendScalars Y'.left ℓ E).map
-          ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app
+          ((PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq).app
             K₀))) ≅
-      Arrow.mk ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq).app
+      Arrow.mk ((boundedConstructibleBaseChange ℓ sq).app
         ((constructibleToPadicAlgCl X.left ℓ E).obj
           ((boundedConstructibleExtendScalars X.left ℓ E).obj K₀)))) :=
   sorry
@@ -104,8 +104,8 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral
     [TopologicalSpace.NoetherianSpace X.left]
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
     (h : ∀ (E : FiniteIntermediateField ℓ) (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧),
-      IsIso ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app K₀)) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
+      IsIso ((PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq).app K₀)) :
+    IsIso (boundedConstructibleBaseChange ℓ sq) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro K
   obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X.left ℓ K
@@ -139,7 +139,7 @@ theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     Nonempty (Arrow.mk ((derivedReduction Y'.left ℓ E).map ((boundedConstructible _).ι.map
-        ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app
+        ((PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq).app
           K₀))) ≅
       Arrow.mk ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))
         hsq.toCommSq).app ((derivedReduction X.left ℓ E).obj K₀.obj))) :=
@@ -158,7 +158,7 @@ theorem isIso_boundedConstructibleBaseChange_integral_app_of_reduction [IsNoethe
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
     (h : IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))
       hsq.toCommSq).app ((derivedReduction X.left ℓ E).obj K₀.obj))) :
-    IsIso ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app
+    IsIso ((PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq).app
       K₀) := by
   apply isIso_of_isIso_derivedReduction_map Y'.left ℓ E
   obtain ⟨β⟩ := nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange ℓ E sq hsq K₀

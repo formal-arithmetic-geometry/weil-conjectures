@@ -120,7 +120,7 @@ first derived reduction, the pro-étale base change morphism with coefficients `
 of étale origin (`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U ⟶ Y)
     [IsOpenImmersion j.left] :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) j)) := by
   have hW : IsPullback (prod.snd : X ⨯ Y ⟶ Y).left (prod.fst : X ⨯ Y ⟶ X).left Y.hom X.hom :=
     (isPullback_prod_left X Y).flip

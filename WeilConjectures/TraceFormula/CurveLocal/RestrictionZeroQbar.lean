@@ -230,7 +230,7 @@ theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (z ≫ F.ι)).obj K)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
-    (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 := by
+    (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0 := by
   have hM := exists_integralModel_isZero_upperStar K (z ≫ F.ι) hK
   have h0 := pointIntegralSupportedRestriction_hom_eq_zero hΦ hm v F z hM.choose
     hM.choose_spec.choose

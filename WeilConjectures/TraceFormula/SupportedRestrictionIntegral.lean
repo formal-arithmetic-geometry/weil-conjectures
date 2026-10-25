@@ -50,10 +50,10 @@ variable (F : c.FixedLocus) (E : FiniteIntermediateField ℓ)
 /-- Compact-support base change `Rc_! ⋙ LΔ^* ≅ Lι^* ⋙ Rd_!` in the fixed square, with
 `𝒪_E`-coefficients. -/
 noncomputable def lowerShriekBaseChangeIsoIntegral :
-    boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E.1) ℓ c.support ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 c.support ⋙
         boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ (diag X) ≅
       boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ F.ι ⋙
-        boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E.1) ℓ F.d :=
+        PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 F.d :=
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 F.isPullback
   asIso (boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 F.isPullback)
 
@@ -88,8 +88,8 @@ theorem map_supportedRestrictionIntegral_comp
     (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
     (boundedConstructibleUpperStar _ ℓ F.ι) (boundedConstructibleUpperStar _ ℓ (diag X))
     (F.lowerShriekBaseChangeIsoIntegral E)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.continuousMapRingObj E) ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.continuousMapRingObj E) ℓ F.d)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E F.d)
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ F.ι)
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (diag X))
     (F.lowerShriekBaseChangeIsoE E)

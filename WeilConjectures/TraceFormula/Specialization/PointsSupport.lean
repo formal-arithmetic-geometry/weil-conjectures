@@ -224,7 +224,6 @@ theorem isZero_upperStar_opensOverι_of_isCompl (W' : X.left.Opens) (x : Rationa
   rw [Scheme.Opens.range_ι]
   exact hW'
 
-
 end Vanishing
 
 /-! ### The splitting at a rational point -/

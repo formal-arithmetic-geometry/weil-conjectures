@@ -191,10 +191,10 @@ morphism `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
 `ProEtale.CondensedRing.derivedPushHom`, which is an isomorphism for proper `g`
 (`ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`). -/
 noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
-    boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g ⋙
         boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
       boundedConstructibleToPadicAlgCl Z.left ℓ E ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g :=
+        boundedConstructibleLowerStar ℓ g :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
@@ -281,10 +281,10 @@ variable {f : X ⟶ Y} (c : Compactification f.left)
 `Rf_!(c)^E ⋙ T_Y ≅ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}`, composed of (Shriek) for the open immersion `i` and
 (Push) for the proper `g`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙
         boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
       boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
-        boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c :=
+        boundedConstructibleLowerShriekOfCompactification ℓ c :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG) ≪≫
     (Functor.associator _ _ _).symm ≪≫
@@ -295,20 +295,20 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClI
 /-- The exchange `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_{ℚ̄_ℓ}` for the proper part `g` of a compactification:
 the mate of the inverse of (Push) under the adjunctions `Rg_* ⊣ Rg^!`. -/
 noncomputable def boundedConstructibleProperUpperShriekToPadicAlgCl :
-    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ c.overG).rightAdjoint ⋙
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
         boundedConstructibleToPadicAlgCl c.overObj.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overG).rightAdjoint :=
+        (boundedConstructibleLowerStar ℓ c.overG).rightAdjoint :=
   mateEquiv (Adjunction.ofIsLeftAdjoint _) (Adjunction.ofIsLeftAdjoint _)
     (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
 
 /-- The exchange `Rf^!(c)_E ⋙ T_X ⟶ T_Y ⋙ Rf^!(c)_{ℚ̄_ℓ}` along a compactification `c`: the mate
 of the inverse of (Shriek) under the adjunctions `Rf_!(c) ⊣ Rf^!(c)`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl :
-    boundedConstructibleUpperShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c ⋙
+    ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactification ℓ E c ⋙
         boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
-        boundedConstructibleUpperShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c :=
+        boundedConstructibleUpperShriekOfCompactification ℓ c :=
   mateEquiv (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
     (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
     (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
@@ -356,20 +356,20 @@ variable (f : X ⟶ Y)
 /-- **(Shriek)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ`:
 `Rf_!^E ⋙ T_Y ≅ T_X ⋙ Rf_!^{ℚ̄_ℓ}`, along the chosen compactification. -/
 noncomputable def boundedConstructibleLowerShriekToPadicAlgClIso :
-    boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
         boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
       boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleLowerShriek ℓ f :=
   boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E (compactificationOverField f)
 
 /-- **The exchange for `f^!`**, for the inclusion `E ⟶ ℚ̄_ℓ`: the canonical natural transformation
 `Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}`, the mate of the inverse of (Shriek)
 (`boundedConstructibleLowerShriekToPadicAlgClIso`) under the adjunctions `Rf_! ⊣ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekToPadicAlgCl :
-    boundedConstructibleUpperShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
+    ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E f ⋙
         boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleUpperShriek ℓ f :=
   mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv

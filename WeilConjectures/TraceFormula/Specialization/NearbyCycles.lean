@@ -196,7 +196,7 @@ the deformation model, whose geometric generic fibre is the base change of `X`
 (`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅
+    Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
       verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
         ((specialization k' x).obj K)) :=
   NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ

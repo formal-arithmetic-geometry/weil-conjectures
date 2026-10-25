@@ -52,10 +52,10 @@ variable (F : c.FixedLocus) (E : FiniteIntermediateField ℓ)
 /-- Compact-support base change `Rc_! ⋙ LΔ^* ≅ Lι^* ⋙ Rd_!` in the fixed square, with
 `E`-coefficients. -/
 noncomputable def lowerShriekBaseChangeIsoE :
-    boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ c.support ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E c.support ⋙
         boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (diag X) ≅
       boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ F.ι ⋙
-        boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ F.d :=
+        ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E F.d :=
   asIso (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E F.isPullback)
 
 /-- The supported restriction `Lι^* Rc^! P ⟶ Rd^! LΔ^* P` with `E`-coefficients: the mate
@@ -89,8 +89,8 @@ theorem map_supportedRestrictionE_comp
     (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
     (boundedConstructibleUpperStar _ ℓ F.ι) (boundedConstructibleUpperStar _ ℓ (diag X))
     (F.lowerShriekBaseChangeIsoE E)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ F.d)
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ F.d)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X))
     F.lowerShriekBaseChangeIso

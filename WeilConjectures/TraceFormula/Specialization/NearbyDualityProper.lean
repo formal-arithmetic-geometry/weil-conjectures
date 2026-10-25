@@ -62,14 +62,14 @@ theorem isIso_of_isIso_upperStar_finsetComplOpens_of_isIso_lowerStar (S : Finset
     (hS : ∀ x ∈ S, IsClosed {x}) {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : A ⟶ B)
     (hU : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (opensOverι (finsetComplOpens S hS))).map f))
-    (hΓ : IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hΓ : IsIso ((boundedConstructibleLowerStar ℓ
       (toPoint X)).map f)) : IsIso f := by
   have hU' : IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f.hom) :=
     (boundedConstructible _).ι.map_isIso ((boundedConstructibleUpperStar _ ℓ
       (opensOverι (finsetComplOpens S hS))).map f)
   have hΓ' : IsIso (R((X.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f.hom) :=
     (boundedConstructible _).ι.map_isIso
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map f)
+      ((boundedConstructibleLowerStar ℓ (toPoint X)).map f)
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f.hom
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
@@ -111,7 +111,7 @@ theorem isIso_nearbyDualityMap_of_isIso_lowerStar (D : NearbyDualizingData k k' 
     (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x})
     (hU : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (opensOverι (finsetComplOpens S hS))).map (nearbyDualityMap ℓ D h K)))
-    (hΓ : IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hΓ : IsIso ((boundedConstructibleLowerStar ℓ
       (toPoint X')).map (nearbyDualityMap ℓ D h K))) :
     IsIso (nearbyDualityMap ℓ D h K) :=
   isIso_of_isIso_upperStar_finsetComplOpens_of_isIso_lowerStar ℓ S hS _ hU hΓ

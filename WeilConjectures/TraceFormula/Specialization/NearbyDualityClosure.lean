@@ -78,11 +78,11 @@ lemma isIso_nearbyDualityMap_of_iso (D : NearbyDualizingData k k' ℓ)
     (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ)) (D.θ h)
     (fun x y ↦ boundedConstructibleTensorMap_natural (h.preservesBoundedConstructible ℓ) x y)
     e.hom
-  have := isIso_pre_app e.hom (dualizingComplex ℓ (toPoint X))
+  have := isIso_pre_app e.hom (dualizingComplex ℓ X)
   have := isIso_pre_app ((boundedConstructibleNearbyCycles
-    (h.preservesBoundedConstructible ℓ)).map e.hom) (dualizingComplex ℓ (toPoint X'))
+    (h.preservesBoundedConstructible ℓ)).map e.hom) (dualizingComplex ℓ X')
   have : IsIso ((boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).map
-      ((pre e.hom).app (dualizingComplex ℓ (toPoint X))) ≫ nearbyDualityMap ℓ D h K) := by
+      ((pre e.hom).app (dualizingComplex ℓ X)) ≫ nearbyDualityMap ℓ D h K) := by
     have : IsIso (Verdier.nearbyDualityMap
         (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ)) (D.θ h) K') :=
       ‹IsIso (nearbyDualityMap ℓ D h K')›
@@ -90,7 +90,7 @@ lemma isIso_nearbyDualityMap_of_iso (D : NearbyDualizingData k k' ℓ)
       (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ)) (D.θ h) K from rfl, hsq]
     infer_instance
   exact IsIso.of_isIso_comp_left ((boundedConstructibleNearbyCycles
-    (h.preservesBoundedConstructible ℓ)).map ((pre e.hom).app (dualizingComplex ℓ (toPoint X))))
+    (h.preservesBoundedConstructible ℓ)).map ((pre e.hom).app (dualizingComplex ℓ X)))
       (nearbyDualityMap ℓ D h K)
 
 variable {Xc : Over (Spec (.of k))} [LocallyOfFiniteType Xc.hom] [QuasiCompact Xc.hom]
