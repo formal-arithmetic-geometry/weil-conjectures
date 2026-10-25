@@ -1,9 +1,27 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+
+/-!
+
+# The derived comparison of the two finite-coefficient models
+
+For a finite discrete commutative ring `T`, the abelian equivalence
+`ProEtale.finiteCoefficientModEquivalence` between module objects over the condensed ring
+`C(-, T)` pulled back to `X_proét` and pro-étale sheaves of `T`-modules is additive, and induces an
+equivalence of derived categories (`ProEtale.finiteCoefficientDerivedEquivalence`). This is the
+bridge from the condensed finite-coefficient model to the `ModuleCat` model of
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient`, which is compared with the étale site.
+
+-/
 
 @[expose] public section
 

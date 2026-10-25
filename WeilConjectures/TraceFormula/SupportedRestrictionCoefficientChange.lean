@@ -15,12 +15,11 @@ public import WeilConjectures.TraceFormula.SupportedRestriction
 The supported restriction `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P` of a fixed square
 (`ProEtale.CondensedRing.Correspondence.FixedLocus.supportedRestriction`, blueprint
 `det-tf-supported-restriction`) is a formal consequence of the adjunctions `c_! ⊣ c^!`,
-`d_! ⊣ d^!` and of compact-support base change `σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`: its `d_! ⊣ d^!`
-adjoint is `σ⁻¹` followed by `Δ^*` of the counit of `c_! ⊣ c^!`
-(`FixedLocus.homEquiv_symm_supportedRestriction`). This file isolates that construction,
-`CategoryTheory.Adjunction.exchangeRestriction`, and proves that it commutes with any change of
-coefficients `T` which commutes with `c_!`, `d_!`, `ι^*` and `Δ^*` compatibly with base change
-(`CategoryTheory.Adjunction.map_exchangeRestriction_comp`): the image under `T` of the supported
+`d_! ⊣ d^!` and of compact-support base change `σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`: it is the mate
+`c^! ⋙ ι^* ⟶ Δ^* ⋙ d^!` of `σ⁻¹` (`FixedLocus.supportedRestriction_eq_mateEquiv`). This file
+proves that such a mate commutes with any change of coefficients `T` which commutes with `c_!`,
+`d_!`, `ι^*` and `Δ^*` compatibly with base change
+(`CategoryTheory.Adjunction.map_mateEquiv_app_comp`): the image under `T` of the supported
 restriction, followed by the exchange `T ⋙ Rd^! ⟶ Rd'^! ⋙ T` (the mate of the lower-shriek
 comparison), is the exchange for `c^!` followed by the supported restriction for the new
 coefficients. This is the coefficient compatibility of `ρ` used to transport the vanishing of the
@@ -45,15 +44,15 @@ variable {C₂ : Type u₁} {CC : Type u₂} {CF : Type u₃} {CX : Type u₄}
   {C₂' : Type u₅} {CC' : Type u₆} {CF' : Type u₇} {CX' : Type u₈}
   [Category.{v₅} C₂'] [Category.{v₆} CC'] [Category.{v₇} CF'] [Category.{v₈} CX']
 
-/-- The *exchange restriction* of a base-change square: for adjunctions `c_! ⊣ c^!` and
-`d_! ⊣ d^!`, functors `ι^*` and `Δ^*` and an isomorphism `σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`, the morphism
-`ι^* c^! P ⟶ d^! Δ^* P` adjoint to `σ⁻¹` followed by `Δ^*` of the counit of `c_! ⊣ c^!`. For the
-fixed square of a correspondence this is the supported restriction
-(`ProEtale.CondensedRing.Correspondence.FixedLocus.supportedRestriction_eq_exchangeRestriction`). -/
-def Adjunction.exchangeRestriction {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR) {dL : CF ⥤ CX}
-    {dR : CX ⥤ CF} (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX) (σ : cL ⋙ Δ ≅ ι ⋙ dL) (P : C₂) :
-    ι.obj (cR.obj P) ⟶ dR.obj (Δ.obj P) :=
-  g.homEquiv _ _ (σ.inv.app _ ≫ Δ.map (a.counit.app P))
+/-- The component at `P` of the mate `c^! ⋙ ι^* ⟶ Δ^* ⋙ d^!` of `σ⁻¹ : ι^* ⋙ d_! ⟶ c_! ⋙ Δ^*`
+is the `d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of `c_! ⊣ c^!`. -/
+lemma Adjunction.mateEquiv_app_eq_homEquiv {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR)
+    {dL : CF ⥤ CX} {dR : CX ⥤ CF} (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX)
+    (σ : cL ⋙ Δ ≅ ι ⋙ dL) (P : C₂) :
+    (mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P =
+      g.homEquiv (ι.obj (cR.obj P)) (Δ.obj P) (σ.inv.app (cR.obj P) ≫ Δ.map (a.counit.app P)) := by
+  rw [Adjunction.homEquiv_unit]
+  simp [mateEquiv_apply]
 
 variable {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR) {dL : CF ⥤ CX} {dR : CX ⥤ CF}
     (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX) (σ : cL ⋙ Δ ≅ ι ⋙ dL)
@@ -63,26 +62,36 @@ variable {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR) {dL : CF ⥤ CX} 
   (τc : cL ⋙ T₂ ≅ TC ⋙ cL') (τd : dL ⋙ TX ≅ TF ⋙ dL')
   (τι : ι ⋙ TF ≅ TC ⋙ ι') (τΔ : Δ ⋙ TX ≅ T₂ ⋙ Δ')
 
-/-- **The exchange restriction commutes with a change of coefficients**: let `T` be a change of
-coefficients commuting with `c_!`, `d_!`, `ι^*` and `Δ^*` (isomorphisms `τ`), compatibly with base
-change `σ`, `σ'` (`hσ`). Then `T` of the exchange restriction, followed by the exchange
-`T ⋙ d'^! ⟵ d^! ⋙ T` (the mate of `τ_d⁻¹`) and `d'^!` of `τ_Δ`, is `τ_ι`, then `ι'^*` of the
-exchange for `c^!` (the mate of `τ_c⁻¹`), then the exchange restriction for the new
-coefficients. -/
-theorem Adjunction.map_exchangeRestriction_comp
+/-- **The mate of a base-change isomorphism commutes with a change of coefficients**: let `T` be a
+change of coefficients commuting with `c_!`, `d_!`, `ι^*` and `Δ^*` (isomorphisms `τ`), compatibly
+with base change `σ`, `σ'` (`hσ`), and write `ρ` and `ρ'` for the mates of `σ⁻¹` and `σ'⁻¹`
+(for a fixed square, the supported restrictions). Then the square
+```
+T ι^* c^! P ---T ρ_P---> T d^! Δ^* P --ex_d--> d'^! T Δ^* P --d'^! τ_Δ--> d'^! Δ'^* T P
+    |                                                                         ‖
+   τ_ι                                                                        ‖
+    v                                                                         ‖
+ι'^* T c^! P --ι'^* ex_c--> ι'^* c'^! T P ---------------ρ'_{T P}-----------> d'^! Δ'^* T P
+```
+commutes, where `ex_c` and `ex_d` are the exchanges `T ⋙ c'^! ⟵ c^! ⋙ T` (the mates of `τ_c⁻¹`
+and `τ_d⁻¹`). -/
+theorem Adjunction.map_mateEquiv_app_comp
     (hσ : ∀ M : CC, TX.map (σ.hom.app M) ≫ τd.hom.app (ι.obj M) ≫ dL'.map (τι.hom.app M) =
       τΔ.hom.app (cL.obj M) ≫ Δ'.map (τc.hom.app M) ≫ σ'.hom.app (TC.obj M)) (P : C₂) :
-    TF.map (a.exchangeRestriction g ι Δ σ P) ≫
+    TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫
         (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
           dR'.map (τΔ.hom.app P) =
       τι.hom.app (cR.obj P) ≫
         ι'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P) ≫
-          a'.exchangeRestriction g' ι' Δ' σ' (T₂.obj P) := by
+          (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).natTrans.app (T₂.obj P) := by
+  rw [Adjunction.mateEquiv_app_eq_homEquiv a g ι Δ σ P,
+    Adjunction.mateEquiv_app_eq_homEquiv a' g' ι' Δ' σ' (T₂.obj P)]
   apply (g'.homEquiv _ _).symm.injective
+  dsimp only [Functor.comp_obj, Functor.id_obj]
   rw [← Category.assoc, Adjunction.homEquiv_naturality_right_symm,
-    Adjunction.homEquiv_symm_map_comp_mateEquiv_app, Adjunction.exchangeRestriction,
-    Equiv.symm_apply_apply]
-  simp only [Adjunction.exchangeRestriction, Adjunction.homEquiv_naturality_left_symm]
+    Adjunction.homEquiv_symm_map_comp_mateEquiv_app]
+  erw [Equiv.symm_apply_apply]
+  simp only [Adjunction.homEquiv_naturality_left_symm]
   have hc := Adjunction.homEquiv_symm_map_comp_mateEquiv_app a a' TC T₂ τc (𝟙 (cR.obj P))
   simp only [Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit] at hc
   have hσ' : τd.inv.app (ι.obj (cR.obj P)) ≫ TX.map (σ.inv.app (cR.obj P)) =
@@ -109,6 +118,7 @@ theorem Adjunction.map_exchangeRestriction_comp
   erw [Category.comp_id]
   exact hΔ.symm
 
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -122,16 +132,15 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact X.hom] [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   {c : Correspondence ℓ K}
 
-/-- The supported restriction is the exchange restriction of the fixed square: the adjoint of
-compact-support base change followed by `Δ^*` of the counit of `Rc_! ⊣ Rc^!`. -/
-lemma Correspondence.FixedLocus.supportedRestriction_eq_exchangeRestriction (F : c.FixedLocus)
+/-- The supported restriction is the mate `Rc^! ⋙ Lι^* ⟶ LΔ^* ⋙ Rd^!` of the inverse of
+compact-support base change in the fixed square. -/
+lemma Correspondence.FixedLocus.supportedRestriction_eq_mateEquiv (F : c.FixedLocus)
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     F.supportedRestriction P =
-      (boundedConstructibleUpperShriekAdjunction _ ℓ c.support).exchangeRestriction
+      (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
         (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
-        (boundedConstructibleUpperStar _ ℓ F.ι)
-        (boundedConstructibleUpperStar _ ℓ (diag X)) F.lowerShriekBaseChangeIso P := by
-  rw [Adjunction.exchangeRestriction, ← F.homEquiv_symm_supportedRestriction]
+        (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).natTrans.app P := by
+  rw [Adjunction.mateEquiv_app_eq_homEquiv, ← F.homEquiv_symm_supportedRestriction]
   exact (Equiv.apply_symm_apply _ _).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

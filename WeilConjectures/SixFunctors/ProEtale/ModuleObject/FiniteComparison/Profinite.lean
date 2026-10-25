@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantSheaf
+public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingSheaf
 
 /-!
 # The condensed ring of a finite discrete ring is constant
