@@ -10,7 +10,7 @@ public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
 
 /-!
@@ -409,7 +409,7 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforw
 /-- The pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism if the proper interchange
 `boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'` of the cartesian square is: its
 other factors are isomorphisms, so the unit of `Lh^* ⊣ Rh_*` is an isomorphism on `i₁_! K`. -/
-private theorem isIso_refinementPushforward_of_isIso_lowerStarOpenImmersionLowerShriekExchange
+theorem isIso_refinementPushforward_of_isIso_lowerStarOpenImmersionLowerShriekExchange
     [IsFinitenessCoefficient ℓ Λ] (sq : IsPullback (𝟙 X) i i₁ h)
     (he : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq) := by

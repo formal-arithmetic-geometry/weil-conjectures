@@ -16,6 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-!
 
@@ -91,10 +92,10 @@ coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
 
 ## Sorried input
 
-That the derived pushforward and extension by zero preserve bounded constructible complexes is
-`sorry`ed (the pullback is `boundedConstructible_leftDerivedUpperStar_obj_of_scheme`):
-`boundedConstructible_rightDerivedLowerStar_obj`
-and `boundedConstructible_openImmersionLowerShriek_obj`, and the instances
+The pullback and the extension by zero preserve bounded constructible complexes
+(`boundedConstructible_leftDerivedUpperStar_obj_of_scheme`,
+`boundedConstructible_openImmersionLowerShriek_obj`). That the derived pushforward does is
+`sorry`ed: `boundedConstructible_rightDerivedLowerStar_obj`, and so are the instances
 `isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
 `isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
 
@@ -193,7 +194,8 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       (Functor.associator _ _ _).symm)
 
 /-- The derived pushforward `Rf_*` on module objects over a coefficient ring `Λ` of Deligne's
-finiteness theorems preserves bounded constructible complexes. For a general `Λ` this is false:
+finiteness theorems preserves bounded constructible complexes (part of blueprint
+`sk-def-sfb-dc-restricted-functors`). For a general `Λ` this is false:
 for the constant discrete ring `𝔽_p` and the affine line over an algebraically closed field of
 characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj [IsFinitenessCoefficient ℓ Λ]
@@ -264,14 +266,29 @@ variable {U X : Over (Spec (.of k))}
   [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
 
+-- The section variables are kept, as for all functors on `Dᵇc(-)⟦Λ⟧`, so that the restricted
+-- functor `boundedConstructibleOpenImmersionLowerShriek` has the same arguments as the others.
+set_option linter.unusedSectionVars false in
 /-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
-module objects over `Λ`, preserves bounded constructible complexes. -/
+module objects over `Λ`, preserves bounded constructible complexes: `j_!` is exact, so it commutes
+with the cohomology sheaves, and it preserves zero objects and constructible module objects
+(`ProEtale.CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek_obj`). -/
 lemma boundedConstructible_openImmersionLowerShriek_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1})
       (condensedRingObj Λ U.left)))
     (hK : boundedConstructible (condensedRingObj Λ U.left) K) :
-    boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K) := by
+  have : TopologicalSpace.NoetherianSpace X.left := by
+    have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+    have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+    have : IsNoetherian X.left := {}
+    infer_instance
+  obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff _ K).1 hK
+  refine (mem_boundedConstructible_iff _ _).2 ⟨⟨a, b, fun i hi ↦ ?_⟩, fun n ↦ ?_⟩
+  · exact ((j.left)_!open⟦Λ⟧.map_isZero (hab i hi)).of_iso
+      ((Functor.mapDerivedCategoryHomologyFunctorIso _ i).app K).symm
+  · exact (isConstructibleModuleObject_openImmersionLowerShriek_obj Λ j.left _ (hc n)).of_iso
+      ((Functor.mapDerivedCategoryHomologyFunctorIso _ n).app K)
 
 /-- The extension by zero `j_! : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` along an open immersion on bounded
 constructible complexes: the restriction of the levelwise functor `D((j)_!open⟦Λ⟧)`. -/
@@ -408,20 +425,21 @@ section TensorHom
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
-/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
-form a monoidal subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the
-unit `Λ_X` and are stable under `- ⊗ᴸ -`. For a general `Λ` this is false: for `Λ = ℤ/4` on a
-geometric point of characteristic `3`, `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`, so the
-derived self-tensor of `ℤ/2` is unbounded. -/
+/-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of module objects
+over an `ℓ`-adic coefficient ring `Λ` form a monoidal subcategory of `D(Mod_{Λ_X})` for the
+derived tensor product: they contain the unit `Λ_X` and are stable under `- ⊗ᴸ -`. For a general
+`Λ` this is false: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
+`Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`, so the derived self-tensor of `ℤ/2` is
+unbounded. -/
 instance isMonoidal_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
   sorry
 
-/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
-are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. For a general
-`Λ` this is false: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
-`Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
+/-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of module objects
+over an `ℓ`-adic coefficient ring `Λ` are stable under the derived hom `RHom(-, -)`, the
+internal hom of `D(Mod_{Λ_X})`. For a general `Λ` this is false: for `Λ = ℤ/4` on a geometric
+point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidalClosed_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=

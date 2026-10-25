@@ -74,6 +74,8 @@ lemma leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom {W : Scheme.{u}
   refine (Category.id_comp _).trans ((Category.id_comp _).trans ?_)
   rfl
 
+set_option maxHeartbeats 1000000 in
+-- the derived pullbacks of module objects are unfolded to the derived functors of exact functors
 /-- On the image of a complex, the composition isomorphism of the derived pullbacks of module
 objects is that of the underived pullbacks, read through the counits of the derived pullbacks. -/
 @[reassoc]
@@ -87,6 +89,8 @@ lemma leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit
         Qh.map ((NatTrans.mapHomotopyCategory (upperStarComp Λ f g).hom (.up ℤ)).app K) :=
   Functor.leftDerivedFunctorFactorIso_hom_app_comp_counit (upperStarComp Λ f g) K
 
+set_option maxHeartbeats 1000000 in
+-- the derived pullbacks of module objects are unfolded to the derived functors of exact functors
 /-- The inverse form of `leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit`. -/
 @[reassoc]
 lemma leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit
@@ -99,6 +103,8 @@ lemma leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit
         (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj K) := by
   rw [← leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit, Iso.inv_hom_id_app_assoc]
 
+set_option maxHeartbeats 1000000 in
+-- the lax monoidal structure of the localization functor is unfolded
 variable {f} in
 lemma leftDerivedUpperStarTensorLeftCounit_app_app {W : Scheme.{u}} (h : W ⟶ Y)
     (P Q : HomotopyCategory
@@ -131,6 +137,8 @@ lemma leftDerivedUpperStarTensor_app_app_comp {W : Scheme.{u}} (h : W ⟶ Y)
     at h1
   exact h1
 
+set_option maxHeartbeats 1000000 in
+-- the derived tensor products of module objects are unfolded
 variable {f} in
 /-- The comparison `Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M` is natural in both variables. -/
 @[reassoc]
@@ -146,24 +154,8 @@ lemma leftDerivedUpperStarTensor_naturality {W : Scheme.{u}} (h : W ⟶ Y)
   rw [MonoidalCategory.tensorHom_def, MonoidalCategory.tensorHom_def, Functor.map_comp,
     Category.assoc, ← reassoc_of% h₁, ← h₂]
 
-private lemma quotient_map_whiskerRight_mod
-    {K₁ L₁ : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ} (f₁ : K₁ ⟶ L₁)
-    (K₂ : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) :
-    (HomotopyCategory.quotient _ (.up ℤ)).map (f₁ ▷ K₂) =
-      (HomotopyCategory.quotient _ (.up ℤ)).map f₁ ▷ (HomotopyCategory.quotient _ (.up ℤ)).obj K₂ :=
-  HomotopyCategory.MonoidalCategory.quotient_map_whiskerRight _ (.up ℤ) f₁ K₂
-
-private lemma quotient_map_whiskerLeft_mod
-    (K₁ : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
-    {K₂ L₂ : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ} (f₂ : K₂ ⟶ L₂) :
-    (HomotopyCategory.quotient _ (.up ℤ)).map (K₁ ◁ f₂) =
-      (HomotopyCategory.quotient _ (.up ℤ)).obj K₁ ◁ (HomotopyCategory.quotient _ (.up ℤ)).map f₂ :=
-  HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft _ (.up ℤ) K₁ f₂
-
+set_option maxHeartbeats 1000000 in
+-- the monoidal structure of the homotopy category of module objects is unfolded
 /-- `upperStarTensorComplexHom_comp` in the homotopy category. -/
 @[reassoc]
 lemma quotient_map_upperStarTensorComplexHom_comp
@@ -181,7 +173,8 @@ lemma quotient_map_upperStarTensorComplexHom_comp
         (HomotopyCategory.quotient _ _).map
           ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app (A ⊗ B)) := by
   rw [MonoidalCategory.tensorHom_def,
-    ← quotient_map_whiskerRight_mod, ← quotient_map_whiskerLeft_mod]
+    ← HomotopyCategory.MonoidalCategory.quotient_map_whiskerRight',
+    ← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
   simp only [← Functor.map_comp, Category.assoc]
   congr 1
   rw [← upperStarTensorComplexHom_comp, MonoidalCategory.tensorHom_def, Category.assoc]
@@ -258,7 +251,8 @@ lemma quotient_map_upperStarTensorComplexHom_id (W : Scheme.{u})
   simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategoryIdIso_hom_app,
     ← Functor.map_comp]
   rw [MonoidalCategory.tensorHom_def]
-  erw [← quotient_map_whiskerRight_mod, ← quotient_map_whiskerLeft_mod]
+  erw [← HomotopyCategory.MonoidalCategory.quotient_map_whiskerRight',
+    ← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
   rw [← Functor.map_comp]
   erw [← MonoidalCategory.tensorHom_def, upperStarTensorComplexHom_id']
   rfl
