@@ -194,7 +194,8 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       (Functor.associator _ _ _).symm)
 
 /-- The derived pushforward `Rf_*` on module objects over a coefficient ring `Λ` of Deligne's
-finiteness theorems preserves bounded constructible complexes. For a general `Λ` this is false:
+finiteness theorems preserves bounded constructible complexes (part of blueprint
+`sk-def-sfb-dc-restricted-functors`). For a general `Λ` this is false:
 for the constant discrete ring `𝔽_p` and the affine line over an algebraically closed field of
 characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj [IsFinitenessCoefficient ℓ Λ]
@@ -424,20 +425,21 @@ section TensorHom
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
-/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
-form a monoidal subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the
-unit `Λ_X` and are stable under `- ⊗ᴸ -`. For a general `Λ` this is false: for `Λ = ℤ/4` on a
-geometric point of characteristic `3`, `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`, so the
-derived self-tensor of `ℤ/2` is unbounded. -/
+/-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of module objects
+over an `ℓ`-adic coefficient ring `Λ` form a monoidal subcategory of `D(Mod_{Λ_X})` for the
+derived tensor product: they contain the unit `Λ_X` and are stable under `- ⊗ᴸ -`. For a general
+`Λ` this is false: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
+`Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`, so the derived self-tensor of `ℤ/2` is
+unbounded. -/
 instance isMonoidal_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
   sorry
 
-/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
-are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. For a general
-`Λ` this is false: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
-`Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
+/-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of module objects
+over an `ℓ`-adic coefficient ring `Λ` are stable under the derived hom `RHom(-, -)`, the
+internal hom of `D(Mod_{Λ_X})`. For a general `Λ` this is false: for `Λ = ℤ/4` on a geometric
+point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidalClosed_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
