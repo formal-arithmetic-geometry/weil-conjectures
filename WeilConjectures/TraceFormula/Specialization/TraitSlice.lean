@@ -179,4 +179,97 @@ lemma isGenericPoint_traitSlicePoint (hx : Transcendental k' x) (p : Spec (.of K
 
 end TraitSlice
 
+namespace ProEtale.CondensedRing
+
+open Scheme
+
+namespace NearbyCyclesModel
+
+variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] (x : K)
+  {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+  {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+  (hM : M.IsTraitModelOver q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
+  (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
+  {E : Scheme.{u}} {γ : E ⟶ trait K} {δ : E ⟶ Spec (.of (traitGenericField k'))}
+  (hγδ : γ ≫ traitMap k' K = δ ≫ traitGenericPoint k')
+
+include hb in
+/-- On the total space `𝒳'' = 𝒳 ×_{𝔸¹_S} Spec K⟦t⟧` of the slice, the two maps to the trait
+`S = Spec k'⟦t⟧` agree. -/
+@[reassoc]
+lemma pullback_fst_comp_eq_snd_traitMap :
+    pullback.fst b (traitSlice x) ≫ q = pullback.snd b (traitSlice x) ≫ traitMap k' K := by
+  rw [← hb, pullback.condition_assoc, traitSlice_over]
+
+/-- The special fibre `𝒳''_s = 𝒳'' ×_{Spec K⟦t⟧} Spec K` of the slice model. -/
+noncomputable abbrev sliceSpecial (b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) : Scheme.{u} :=
+  pullback (pullback.snd b (traitSlice x)) (traitClosedPoint K)
+
+/-- The geometric generic fibre `𝒳'' ×_{Spec K⟦t⟧} E` of the slice model. -/
+noncomputable abbrev sliceGeneric (b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k'))
+    (γ : E ⟶ trait K) : Scheme.{u} :=
+  pullback (pullback.snd b (traitSlice x)) γ
+
+/-- The map of geometric generic fibres `𝒳'' ×_{Spec K⟦t⟧} E ⟶ 𝒳_η̄ = 𝒳 ×_S Spec Ω` of the
+slice, induced by `δ : E ⟶ Spec Ω`. -/
+noncomputable def sliceGenericMap : sliceGeneric x b γ ⟶ M.generic :=
+  hM.isPullback_j.lift (pullback.fst _ _ ≫ pullback.fst _ _) (pullback.snd _ _ ≫ δ) (by
+    rw [Category.assoc, pullback_fst_comp_eq_snd_traitMap x hb, pullback.condition_assoc, hγδ,
+      Category.assoc])
+
+/-- The map of special fibres `𝒳''_s ⟶ 𝒳_s` of the slice. -/
+noncomputable def sliceSpecialMap : sliceSpecial x b ⟶ X'.left :=
+  hM.isPullback_i.lift (pullback.fst _ _ ≫ pullback.fst _ _)
+    (pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom (algebraMap k' K))) (by
+    rw [Category.assoc, pullback_fst_comp_eq_snd_traitMap x hb, pullback.condition_assoc,
+      traitClosedPoint_traitMap, Category.assoc])
+
+/-- The *slice model* `M''` of a model `M` over `S = Spec k'⟦t⟧` with a coordinate
+`b : 𝒳 ⟶ 𝔸¹_S`, along the generic slice `σ : Spec K⟦t⟧ ⟶ 𝔸¹_S`: total space
+`𝒳'' = 𝒳 ×_{𝔸¹_S} Spec K⟦t⟧`, special fibre `𝒳'' ×_{Spec K⟦t⟧} Spec K`, geometric generic fibre
+`𝒳'' ×_{Spec K⟦t⟧} E`, mapping to `X` through `𝒳_η̄`. -/
+noncomputable def sliceModel : NearbyCyclesModel X (sliceSpecial x b) where
+  total := pullback b (traitSlice x)
+  generic := sliceGeneric x b γ
+  j := pullback.fst _ _
+  i := pullback.fst _ _
+  ε := sliceGenericMap x hM hb hγδ ≫ M.ε
+
+/-- The projection `M'' ⟶ M` from the slice model, a morphism of models over `𝟙 X` and the map of
+special fibres `𝒳''_s ⟶ 𝒳_s`. -/
+noncomputable def sliceHom :
+    (sliceModel x hM hb hγδ).Hom M (𝟙 X) (sliceSpecialMap x hM hb) where
+  total := pullback.fst _ _
+  generic := sliceGenericMap x hM hb hγδ
+  comm_j := hM.isPullback_j.lift_fst _ _ _
+  comm_i := hM.isPullback_i.lift_fst _ _ _
+  comm_ε := (Category.comp_id _).symm
+
+/-- **The special-fibre square of the slice is cartesian**: `𝒳''_s = 𝒳_s ×_𝒳 𝒳''`. This uses
+that the square of traits `Spec K = Spec K⟦t⟧ ×_{Spec k'⟦t⟧} Spec k'` is cartesian. -/
+lemma isPullback_sliceHom_i :
+    IsPullback (sliceSpecialMap x hM hb) (sliceModel x hM hb hγδ).i M.i
+      (sliceHom x hM hb hγδ).total := by
+  have hs := (IsPullback.of_hasPullback (pullback.snd b (traitSlice x))
+    (traitClosedPoint K)).flip.paste_horiz (isPullback_traitClosedPoint_traitMap k' K).flip
+  have e : sliceSpecialMap x hM hb ≫ X'.hom =
+      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom (algebraMap k' K)) :=
+    hM.isPullback_i.lift_snd _ _ _
+  rw [← e, ← pullback_fst_comp_eq_snd_traitMap x hb] at hs
+  exact IsPullback.of_right hs (hM.isPullback_i.lift_fst _ _ _) hM.isPullback_i.flip
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- **Reduction of the slice identification to generic base change**: the pullback exchange
+`α : Lf'^* Ψ_M ⟶ Ψ_{M''}` of the slice is an isomorphism as soon as the base change morphism of
+its square of geometric generic fibres is. -/
+theorem isIso_pullbackExchange_sliceHom
+    [IsIso (baseChangeMap Λ (sliceHom x hM hb hγδ).commSq_j)] :
+    IsIso ((sliceHom x hM hb hγδ).pullbackExchange Λ) :=
+  (sliceHom x hM hb hγδ).isIso_pullbackExchange_of_isIso_baseChangeMap Λ
+
+end NearbyCyclesModel
+
+end ProEtale.CondensedRing
+
 end AlgebraicGeometry
