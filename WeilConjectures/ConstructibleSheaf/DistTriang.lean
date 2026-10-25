@@ -95,4 +95,42 @@ theorem IsFiniteLocallyConstantSheaf.homology_obj₂_of_distTriang
   have hSE : S.ShortExact := { exact := hS, mono_f := hf, epi_g := hg }
   exact IsFiniteLocallyConstantSheaf.of_shortExact (S := S) hSE
 
+variable (X) in
+/-- An object of the derived category of étale sheaves of `Λ`-modules on `X` *has finite locally
+constant cohomology* if all its cohomology sheaves are finite locally constant. -/
+def HasFiniteLocallyConstantHomology
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
+  ∀ n : ℤ, IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) ((DerivedCategory.homologyFunctor _ n).obj K)
+
+namespace HasFiniteLocallyConstantHomology
+
+variable {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+
+omit [Finite Λ] in
+/-- Having finite locally constant cohomology is invariant under isomorphism. -/
+lemma of_iso (hK : HasFiniteLocallyConstantHomology X K) (e : K ≅ L) :
+    HasFiniteLocallyConstantHomology X L := fun n ↦
+  have := hK n
+  IsFiniteLocallyConstantSheaf.of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e)
+
+omit [Finite Λ] in
+/-- Having finite locally constant cohomology is invariant under shifts. -/
+lemma shift (hK : HasFiniteLocallyConstantHomology X K) (a : ℤ) :
+    HasFiniteLocallyConstantHomology X (K⟦a⟧) := fun n ↦
+  have := hK (a + n)
+  IsFiniteLocallyConstantSheaf.of_iso (F := (DerivedCategory.homologyFunctor _ (a + n)).obj K)
+    ((((DerivedCategory.homologyFunctor _ 0).shiftIso a n (a + n) rfl).app K).symm)
+
+/-- In a distinguished triangle, the middle object has finite locally constant cohomology if
+the outer ones have. -/
+lemma of_distTriang
+    (T : Triangle (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
+    (hT : T ∈ distTriang _) (h₁ : HasFiniteLocallyConstantHomology X T.obj₁)
+    (h₃ : HasFiniteLocallyConstantHomology X T.obj₃) :
+    HasFiniteLocallyConstantHomology X T.obj₂ :=
+  IsFiniteLocallyConstantSheaf.homology_obj₂_of_distTriang T hT h₁ h₃
+
+end HasFiniteLocallyConstantHomology
+
 end AlgebraicGeometry.Scheme
