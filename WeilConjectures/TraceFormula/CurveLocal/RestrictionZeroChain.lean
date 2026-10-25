@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization
-public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionOpen
 
 /-!
 
@@ -92,24 +92,21 @@ include hw hψ in
 `det-tf-restriction-zero-localization` (iii), as used in the proof of
 `sk-lem-tf-curve-restriction-zero`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
 `RΓ(T ∖ W, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ T ∖ W` vanishes, where `G ⊆ W`, then the
-supported restriction `ρ_{a,b}` vanishes. The identification of the sections over
-the open `B ∖ Y` of `B` with the global sections of the scheme `B ∖ Y` is the hypothesis
-`hU` (`AlgebraicGeometry.Etale.isIso_sectionsRestriction_of_isOpenImmersion`). -/
+supported restriction `ρ_{a,b}` vanishes. -/
 theorem supportedRestrictionMap_eq_zero_of_restriction
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
     (hT : IsZero ((sectionsWithSupportTriangle A a).obj P).obj₂)
     (hB : IsZero ((sectionsWithSupportTriangle A y).obj
       ((Functor.mapDerivedCategoryPlus (b)^*[A]).obj P)).obj₂)
-    (hU : IsIso ((sectionsRestriction A y.openComplement.ι (V := Scheme.Etale.mk y.openComplement.ι)
-      (W := Scheme.Etale.mk (𝟙 _)) (𝟙 _) rfl).app
-        ((b)^*[A].mapDerivedCategory.obj P.obj)))
     (hr : (sectionsRestriction A (ψ ≫ w.openComplement.ι) (V := Scheme.Etale.mk w.openComplement.ι)
       (W := Scheme.Etale.mk (𝟙 _)) ψ (Category.id_comp _).symm).app P.obj = 0) :
     supportedRestrictionMap A b a y h P = 0 := by
   rw [supportedRestrictionMap_eq_zero_iff A b a y h P hT hB, puncturedRestrictionMap,
     sectionsWithSupportTrianglePullback_app_hom₃]
-  -- the restriction to `B ∖ Y`, composed with the isomorphism `hU`, is the restriction along
+  -- the restriction to `B ∖ Y`, composed with the identification of the sections over the open
+  -- `B ∖ Y` with the global sections of the scheme `B ∖ Y`, is the restriction along
   -- `B ∖ Y ⟶ T ∖ G`, which factors through `T ∖ W`
+  have := isIso_sectionsRestriction_openComplement A y rfl ((b)^*[A].mapDerivedCategory.obj P.obj)
   refine (Preadditive.IsIso.comp_right_eq_zero _ ((sectionsRestriction A y.openComplement.ι
     (V := Scheme.Etale.mk y.openComplement.ι) (W := Scheme.Etale.mk (𝟙 _)) (𝟙 _)
     rfl).app ((b)^*[A].mapDerivedCategory.obj P.obj))).1 ?_
