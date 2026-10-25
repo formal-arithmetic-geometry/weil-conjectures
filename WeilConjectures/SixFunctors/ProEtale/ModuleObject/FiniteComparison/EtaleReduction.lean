@@ -126,7 +126,7 @@ theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
   let P := RY ⋙ ιY ⋙ ΦY
   have hP (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
       DerivedCategory.plusEtaleOrigin A Y.left (P.obj K) :=
-    (isEtaleOrigin_of_isConstructible Y T (RY.obj K)).plusEtaleOrigin
+    (isEtaleOrigin_of_isConstructible T (RY.obj K).property).plusEtaleOrigin
   have : IsIso (Functor.whiskerLeft P (rightDerivedComparisonBaseChange A f.left)) := by
     rw [NatTrans.isIso_iff_isIso_app]
     exact fun K ↦ isIso_rightDerivedComparisonBaseChange_app A f.left _ (hP K)
