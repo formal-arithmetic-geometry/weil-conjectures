@@ -36,6 +36,13 @@ in the same way as
   (Shriek) under the adjunctions `Rf_! ⊣ Rf^!`
   (`ProEtale.CondensedRing.boundedConstructibleUpperShriekExtendScalars`).
 
+## Inputs from `sec-six-functors-basics`
+
+* `ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarExtendScalars`: blueprint
+  `det-prop-scalar-six-direct-image`, (Push) is an isomorphism.
+* `ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekExtendScalars`: blueprint
+  `det-prop-scalar-six-exceptional`, the exchange for `f^!` is an isomorphism.
+
 -/
 
 @[expose] public section
