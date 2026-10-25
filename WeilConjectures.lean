@@ -7699,6 +7699,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryC
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatFiniteResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope
@@ -8029,6 +8030,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsOfIsIso
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
@@ -8124,6 +8126,7 @@ public import WeilConjectures.CategoryTheory.OpcyclesTorSurjection
 public import WeilConjectures.CategoryTheory.PBCFiltration
 public import WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.Preadditive.CokernelBiproduct
+public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendScalars
 public import WeilConjectures.CategoryTheory.Preadditive.EndModule
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
@@ -8161,6 +8164,7 @@ public import WeilConjectures.CategoryTheory.RightDerivedZeroTransformation
 public import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
@@ -9396,6 +9400,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.NatTransIsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
@@ -12863,6 +12868,7 @@ public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.PointFiberFunctor
+public import WeilConjectures.TraceFormula.PointFiberFunctorIntegral
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
 public import WeilConjectures.TraceFormula.PointNormalizationClass
