@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.SepClosedPoint
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerConstant
+public import WeilConjectures.TraceFormula.TransverseBoundary.CornerVanishingDevissage
 
 /-!
 # Vanishing at the transverse corner
@@ -49,6 +51,18 @@ theorem isZero_leftDerivedUpperStar_boundaryComplex
     (hE : Etale.IsBoundedFiniteEllGroupMonodromy ℓ E) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (zbar : Spec (.of Ω) ⟶ C.Z) (hz : Set.range zbar = {C.z}) :
     IsZero ((L((zbar)^*[ModuleCat.{u + 1} Λ])).obj (C.boundaryComplex Λ E)) := by
-  sorry
+  let a : Spec (.of (AlgebraicClosure Ω)) ⟶ Spec (.of Ω) :=
+    Spec.map (CommRingCat.ofHom (algebraMap Ω (AlgebraicClosure Ω)))
+  refine Etale.isZero_leftDerivedUpperStar_of_isZero_comp a zbar _ ?_
+  have hz' : Set.range (a ≫ zbar) = {C.z} := by
+    rw [← hz]
+    refine subset_antisymm ?_ ?_
+    · rintro _ ⟨x, rfl⟩
+      exact ⟨a x, rfl⟩
+    · rintro _ ⟨x, rfl⟩
+      refine ⟨IsLocalRing.closedPoint _, ?_⟩
+      rw [Scheme.Hom.comp_apply, Subsingleton.elim (a _) x]
+  exact C.isZero_leftDerivedUpperStar_boundaryComplex_of_bijective Λ (a ≫ zbar) hΛ
+    (C.bijective_cohomologyMap_puncturedTraitι (a ≫ zbar) hℓ hz') E hE
 
 end AlgebraicGeometry.Scheme.TransverseCorner
