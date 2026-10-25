@@ -53,9 +53,9 @@ variable {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A
 lemma lowerStar_map_comp_eqToHom_of_eq {p q : A ⟶ B} (h : p = q)
     {a b : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (x : a ⟶ b) :
     (boundedConstructibleLowerStar _ ℓ p).map x ≫ eqToHom (congrArg (fun r : A ⟶ B ↦
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj b) h) =
+      (boundedConstructibleLowerStar ℓ r).obj b) h) =
       eqToHom (congrArg (fun r : A ⟶ B ↦
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj a) h) ≫
+        (boundedConstructibleLowerStar ℓ r).obj a) h) ≫
         (boundedConstructibleLowerStar _ ℓ q).map x := by
   subst h
   simp
@@ -66,7 +66,7 @@ lemma unit_comp_map_εIso_inv_comp_eqToHom_of_eq {p q : A ⟶ B} (h : p = q) :
         (boundedConstructibleLowerStar _ ℓ p).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ p)).inv) ≫
       eqToHom (congrArg (fun r : A ⟶ B ↦
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj (𝟙_ _)) h) =
+        (boundedConstructibleLowerStar ℓ r).obj (𝟙_ _)) h) =
       (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).unit.app (𝟙_ _) ≫
         (boundedConstructibleLowerStar _ ℓ q).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ q)).inv := by

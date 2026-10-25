@@ -121,36 +121,36 @@ structure TraceSpecialization where
   /-- the dualizing map `θ_F : Ψ_F ω_F ⟶ ω_F'`. -/
   θF : ΨF.obj (dualizingComplex' ℓ F.F) ⟶ dualizingComplex' ℓ F'.F
   /-- the proper exchange `χ_ι : Ψ_C Rι_* ⟶ Rι'_* Ψ_F`. -/
-  χι : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι ⋙ ΨC ⟶
-    ΨF ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι
+  χι : boundedConstructibleLowerStar ℓ F.ι ⋙ ΨC ⟶
+    ΨF ⋙ boundedConstructibleLowerStar ℓ F'.ι
   /-- the proper exchange `χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X`. -/
-  χΔ : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙ ΨXX ⟶
-    ΨX ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X')
+  χΔ : boundedConstructibleLowerStar ℓ (diag X) ⋙ ΨXX ⟶
+    ΨX ⋙ boundedConstructibleLowerStar ℓ (diag X')
   /-- the exceptional exchange `β_c : Ψ_C Rc^! ⟶ Rc'^! Ψ_{X×X}` of the support maps. -/
-  βc : boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ⋙ ΨC ⟶
-    ΨXX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support
+  βc : boundedConstructibleUpperShriek ℓ c.support ⋙ ΨC ⟶
+    ΨXX ⋙ boundedConstructibleUpperShriek ℓ c'.support
   /-- the exceptional exchange `β_d : Ψ_F Rd^! ⟶ Rd'^! Ψ_X`. -/
-  βd : boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ⋙ ΨF ⟶
-    ΨX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d
+  βd : boundedConstructibleUpperShriek ℓ F.d ⋙ ΨF ⟶
+    ΨX ⋙ boundedConstructibleUpperShriek ℓ F'.d
   /-- the unit identity `χ_ι Ψ_C(η_ι) σ_C = Rι'_*(σ_F) η_ι'` (blueprint `det-tf-sp-trace-morphism`),
   read through the unit isomorphisms `Lι^* ℚ̄_ℓ ≅ ℚ̄_ℓ` of the monoidal pullbacks. -/
   unit_comp : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).unit.app
       (𝟙_ _)) ≫ χι.app _ =
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
+      (boundedConstructibleLowerStar ℓ F'.ι).map
         ((Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).inv ≫ σF ≫
           ΨF.map (Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom)
   θF_eq : θF = ΨF.map (dualizingComplexComp ℓ F.d).inv ≫ βd.app (dualizingComplex' ℓ X) ≫
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d).map θX ≫
+    (boundedConstructibleUpperShriek ℓ F'.d).map θX ≫
     (dualizingComplexComp ℓ F'.d).hom
   /-- the fixed-square identity `Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ Rc'^!(χ_Δ) ∘ β_c(RΔ_*)`. -/
   fixedSquare (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ΨC.map (F.upperShriekLowerStarIso.app M).hom ≫
-        χι.app _ ≫ (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
+        χι.app _ ≫ (boundedConstructibleLowerStar ℓ F'.ι).map
           (βd.app M) =
-      βc.app _ ≫ (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).map
+      βc.app _ ≫ (boundedConstructibleUpperShriek ℓ c'.support).map
           (χΔ.app M) ≫ (F'.upperShriekLowerStarIso.app (ΨX.obj M)).hom
 
 
@@ -160,7 +160,7 @@ variable {c'} in
 (`verdierDualityIso`) it is `RHom(Lc₂'^* K', Rc₁'^! K')`. -/
 lemma isZero_upperShriek_externalProduct_of_isZero
     (h : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c'.c₂).obj K')) :
-    IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).obj
+    IsZero ((boundedConstructibleUpperShriek ℓ c'.support).obj
       (externalProduct ℓ K' (verdierDual ℓ (toPoint X') K'))) :=
   (isZero_ihom_obj_of_isZero h _).of_iso c'.verdierDualityIso.symm
 
@@ -200,7 +200,7 @@ lemma σF_comp_map_eq_homEquiv_symm (M : Dᵇc(F.F.left)⟦Profinite.padicAlgClR
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom ≫ g)) := by
     rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, T.ΨC.map_comp]
     exact comp_eq_of_unit_comp _ _ _ _ _ _ _ _ _ (T.χι.naturality g) T.unit_comp
-      (((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map_comp _
+      (((boundedConstructibleLowerStar ℓ F'.ι).map_comp _
         _).symm.trans (congrArg _ (by rw [T.ΨF.map_comp]; simp only [Category.assoc])))
   rw [key, Equiv.symm_apply_apply, (Functor.Monoidal.εIso _).hom_inv_id_assoc]
 
@@ -217,7 +217,7 @@ lemma sp_traceClass : T.sp (c.traceClass F) =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).hom ≫
       ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _).symm
         (T.σC ≫ T.ΨC.map c.mate ≫ T.ΨC.map (c.traceMap F) ≫ T.χι.app _ ≫
-          (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map T.θF) := by
+          (boundedConstructibleLowerStar ℓ F'.ι).map T.θF) := by
   have h1 := T.σF_comp_map_eq_homEquiv_symm (dualizingComplex' ℓ F.F)
     (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
       (c.mate ≫ c.traceMap F))
@@ -247,36 +247,36 @@ map `e : P ⟶ RΔ_* ω_X`, the fixed-square base change and the composition iso
 dualizing complexes factors through `β_c(P)`. This is the formal part of
 `traceMap_specialization`, for an arbitrary `e`. -/
 theorem map_traceKernel_specialization {P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (e : P ⟶ (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X)).obj
+    (e : P ⟶ (boundedConstructibleLowerStar ℓ (diag X)).obj
       (dualizingComplex' ℓ X)) :
-    T.ΨC.map ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support).map e)
+    T.ΨC.map ((boundedConstructibleUpperShriek ℓ c.support).map e)
         ≫ T.ΨC.map (F.upperShriekLowerStarIso.app (dualizingComplex' ℓ X)).hom ≫
-        T.ΨC.map ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).map
+        T.ΨC.map ((boundedConstructibleLowerStar ℓ F.ι).map
           (dualizingComplexComp ℓ F.d).hom) ≫ T.χι.app _ ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map T.θF =
+        (boundedConstructibleLowerStar ℓ F'.ι).map T.θF =
       T.βc.app P ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).map
+        (boundedConstructibleUpperShriek ℓ c'.support).map
           (T.ΨXX.map e) ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).map
+        (boundedConstructibleUpperShriek ℓ c'.support).map
           (T.χΔ.app _) ≫
         (F'.upperShriekLowerStarIso.app (T.ΨX.obj (dualizingComplex' ℓ X))).hom ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d).map T.θX ≫
+        (boundedConstructibleLowerStar ℓ F'.ι).map
+          ((boundedConstructibleUpperShriek ℓ F'.d).map T.θX ≫
             (dualizingComplexComp ℓ F'.d).hom) := by
-  have hχ : T.ΨC.map ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).map
+  have hχ : T.ΨC.map ((boundedConstructibleLowerStar ℓ F.ι).map
         (dualizingComplexComp ℓ F.d).hom) ≫ T.χι.app _ =
-      T.χι.app _ ≫ (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
+      T.χι.app _ ≫ (boundedConstructibleLowerStar ℓ F'.ι).map
         (T.ΨF.map (dualizingComplexComp ℓ F.d).hom) :=
     T.χι.naturality (dualizingComplexComp ℓ F.d).hom
   have hθ : T.ΨF.map (dualizingComplexComp ℓ F.d).hom ≫ T.θF =
       T.βd.app (dualizingComplex' ℓ X) ≫
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d).map T.θX ≫
+        ((boundedConstructibleUpperShriek ℓ F'.d).map T.θX ≫
         (dualizingComplexComp ℓ F'.d).hom) := by
     rw [T.θF_eq, ← T.ΨF.map_comp_assoc, Iso.hom_inv_id, T.ΨF.map_id, Category.id_comp]
-  have hθ' := ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map_comp
+  have hθ' := ((boundedConstructibleLowerStar ℓ F'.ι).map_comp
       _ _).symm.trans ((congrArg
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map hθ).trans
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map_comp _ _))
+        (boundedConstructibleLowerStar ℓ F'.ι).map hθ).trans
+      ((boundedConstructibleLowerStar ℓ F'.ι).map_comp _ _))
   exact comp_eq_of_fixedSquare _ _ _ _ _ _ _ _ _ _ _ _ _ _ hχ hθ' (T.βc.naturality e)
     (T.fixedSquare (dualizingComplex' ℓ X))
 
@@ -293,15 +293,15 @@ It follows from the composition law for `θ`, the fixed-square identity and the 
 `χ_ι` and `β_c` (`map_traceKernel_specialization`). -/
 theorem traceMap_specialization :
     T.ΨC.map (c.traceMap F) ≫ T.χι.app _ ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map T.θF =
+        (boundedConstructibleLowerStar ℓ F'.ι).map T.θF =
       T.ΨC.map c.verdierDualityIso.hom ≫ T.βc.app _ ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).map
+        (boundedConstructibleUpperShriek ℓ c'.support).map
           (T.ΨXX.map (evaluationKernel ℓ K)) ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).map
+        (boundedConstructibleUpperShriek ℓ c'.support).map
           (T.χΔ.app _) ≫
         (F'.upperShriekLowerStarIso.app (T.ΨX.obj (dualizingComplex' ℓ X))).hom ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d).map T.θX ≫
+        (boundedConstructibleLowerStar ℓ F'.ι).map
+          ((boundedConstructibleUpperShriek ℓ F'.d).map T.θX ≫
             (dualizingComplexComp ℓ F'.d).hom) := by
   rw [← T.map_traceKernel_specialization (evaluationKernel ℓ K)]
   simp only [traceMap, Functor.map_comp, Category.assoc]
@@ -311,7 +311,7 @@ theorem traceMap_specialization :
 of the trace class of `u` vanishes, whatever the coefficient map `u`. This is the mechanism of
 Varshavsky's vanishing argument (blueprint `det-tf-contracting-vanishing`). -/
 theorem sp_traceClass_eq_zero
-    (h : IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).obj
+    (h : IsZero ((boundedConstructibleUpperShriek ℓ c'.support).obj
       (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))))) :
     T.sp (c.traceClass F) = 0 := by
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).IsLeftAdjoint :=

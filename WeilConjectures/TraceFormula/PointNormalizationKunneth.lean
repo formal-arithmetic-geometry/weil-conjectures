@@ -57,14 +57,14 @@ lemma exceptionalProjection_of_eq_id {g : X ⟶ X} (hg : g = 𝟙 X)
     (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructibleExceptionalProjectionMorphism _ ℓ g T M ≫
         eqToHom (congrArg (fun g' : X ⟶ X ↦ (boundedConstructibleLowerShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g').obj
+          ℓ g').obj
             (T ⊗ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M)) hg) ≫
         (boundedConstructibleLowerShriekId ℓ X).hom.app _ ≫
         T ◁ (eqToHom (congrArg (fun g : X ⟶ X ↦ (boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M) hg) ≫
             (boundedConstructibleUpperStarId _ ℓ X).hom.app M) =
       (eqToHom (congrArg (fun g : X ⟶ X ↦ (boundedConstructibleLowerShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g).obj T) hg) ≫
+          ℓ g).obj T) hg) ≫
             (boundedConstructibleLowerShriekId ℓ X).hom.app T) ▷ M := by
   -- `subst` on the statement with `eqToIso` of functors makes the kernel time out
   subst hg
@@ -113,7 +113,7 @@ lemma pointDiag_μ_transportζ (W : Dᵇc((point k ⨯ point k).left)⟦Profinit
     (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst)
     (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+      ℓ g) diag_point_fst) ≪≫
         boundedConstructibleLowerShriekId ℓ (point k))
     (boundedConstructibleUpperStarComp _ ℓ (diag (point k)) prod.fst)
     (pointDiagFstUpperStarIso ℓ k)

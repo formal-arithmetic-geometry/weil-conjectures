@@ -73,8 +73,8 @@ def lisseGenerator : ObjectProperty (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj
     (U : Over (Spec (.of k))) (_ : LocallyOfFiniteType U.hom) (_ : QuasiCompact U.hom)
     (_ : IsSeparated U.hom) (_ : IsAffine U.left) (j : U ⟶ Z) (_ : IsOpenImmersion j.left)
     (L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (_ : IsDualizable L),
-    Nonempty (N ≅ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L))
+    Nonempty (N ≅ (boundedConstructibleLowerShriek ℓ g).obj
+      ((boundedConstructibleLowerShriek ℓ j).obj L))
 
 /-- The lisse generators form a nonempty family: `Rj_! 𝟙` for the empty open subscheme `j` of `Y`
 is one. -/
@@ -123,10 +123,10 @@ lemma triangEnvelope_lisseGenerator_lowerStar_lowerShriek {Z U : Over (Spec (.of
     (hL : ObjectProperty.triangEnvelope (C := Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
       IsDualizable L) :
     (lisseGenerator ℓ Y).triangEnvelope
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)) := by
-  let F := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g
+      ((boundedConstructibleLowerStar ℓ g).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj L)) := by
+  let F := boundedConstructibleLowerShriek ℓ j ⋙
+    boundedConstructibleLowerStar ℓ g
   have : ((lisseGenerator ℓ Y).triangEnvelope.inverseImage F).IsStableUnderRetracts :=
     ⟨fun r h ↦ ObjectProperty.IsStableUnderRetracts.of_retract
       (P := (lisseGenerator ℓ Y).triangEnvelope) (r.map F) h⟩
@@ -283,7 +283,7 @@ theorem triangEnvelope_lisseGenerator_lowerStar (C : TopologicalSpace.Closeds Y.
       [IsSeparated Z.hom] (g : Z ⟶ Y) [IsClosedImmersion g.left],
       Set.range g.left.base ⊆ C → ∀ N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
         (lisseGenerator ℓ Y).triangEnvelope
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) := by
+          ((boundedConstructibleLowerStar ℓ g).obj N) := by
   induction C using WellFoundedLT.induction with
   | _ C ih =>
   intro Z _ _ _ g _ hg N
@@ -306,10 +306,10 @@ theorem triangEnvelope_lisseGenerator_lowerStar (C : TopologicalSpace.Closeds Y.
       g.left.isClosedEmbedding.injective (by simpa using hz)
     exact Set.disjoint_left.1 hcompl.disjoint ⟨z, hz'⟩ ⟨u, rfl⟩
   refine ObjectProperty.ext_of_isTriangulatedClosed₂ _ _
-    ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map_distinguished _ hT)
+    ((boundedConstructibleLowerStar ℓ g).map_distinguished _ hT)
     (triangEnvelope_lisseGenerator_lowerStar_lowerShriek ℓ g j hN) ?_
   exact ObjectProperty.prop_of_iso _
-    ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ i g).app _).symm
+    ((boundedConstructibleLowerStarComp ℓ i g).app _).symm
     (ih _ hlt _ (i ≫ g) subset_rfl _)
 
 variable (Y) in

@@ -198,13 +198,13 @@ lemma isIso_baseChange_compShriekTriangle :
 the exchange of `Rc'.overG_*` with the extension by zero along `d.overI` is. -/
 lemma isIso_exchange_compShriekTriangle
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ hd)] :
+      ℓ hd)] :
     haveI := isIso_baseChange_compShriekTriangle ℓ c c' d hd
     IsIso ((𝔽).exchange (compShriekTriangle c c' d hd).p₁ (compShriekTriangle c c' d hd).q
       (compShriekTriangle c c' d hd).i₂ (compShriekTriangle c c' d hd).r
       (compShriekTriangle c c' d hd).w).natTrans := by
   have h : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ hd) := inferInstance
+      ℓ hd) := inferInstance
   rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq_exchange] at h
   exact h
 
@@ -213,7 +213,7 @@ the composition isomorphism of the lower shriek is the inverse of the compositio
 the triangle of factorizations. -/
 lemma compShriekTriangle_compIso_symm
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ hd)] :
+      ℓ hd)] :
     haveI := isIso_baseChange_compShriekTriangle ℓ c c' d hd
     haveI := isIso_exchange_compShriekTriangle ℓ c c' d hd
     Functor.isoWhiskerRight
@@ -393,7 +393,7 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
     ℓ sqe (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d)
   have key : (𝔽).compIso (triangleShriekTriangle (triangleOfCompactifications c c' d hd)) =
       (𝔽).compIso (compShriekTriangle c c' d hd) ≪≫
-        boundedConstructibleLowerShriekRefinementIso (Profinite.padicAlgClRingObj ℓ) ℓ sqe
+        boundedConstructibleLowerShriekRefinementIso ℓ sqe
           (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d) := by
     ext1
     rw [Iso.trans_hom, hρ]

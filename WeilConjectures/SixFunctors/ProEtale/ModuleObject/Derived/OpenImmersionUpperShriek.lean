@@ -89,7 +89,7 @@ constructible `ℚ̄_ℓ`-complexes: by independence of the compactification
 for the trivial compactification `U ⟶[j] X ⟶[𝟙] X`
 (`AlgebraicGeometry.Compactification.ofIsOpenImmersion`), and `R(𝟙 X)_* ≅ 𝟭`. -/
 noncomputable def boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
+    boundedConstructibleLowerShriek ℓ j ≅
       boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
   boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
       (compactificationOverField j) (.ofIsOpenImmersion j.left) ≪≫
@@ -102,7 +102,7 @@ bounded constructible `ℚ̄_ℓ`-complexes: the conjugate of
 `boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl` under the adjunctions
 `Rj_! ⊣ Rj^!` and `j_! ⊣ j^*`. -/
 noncomputable def boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
+    boundedConstructibleUpperShriek ℓ j ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j :=
   conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ j)
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
@@ -112,7 +112,7 @@ noncomputable def boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl :
 `boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl` at the unit, followed by the unit
 isomorphism of the monoidal functor `j^*`. -/
 noncomputable def boundedConstructibleUpperShriekUnitIso_padicAlgCl :
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+    (boundedConstructibleUpperShriek ℓ j).obj
         (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≅
       𝟙_ (Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).app _ ≪≫

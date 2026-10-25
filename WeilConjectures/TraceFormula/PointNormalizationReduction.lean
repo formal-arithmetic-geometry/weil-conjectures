@@ -187,7 +187,7 @@ lemma fixedLocusOfEnd_d (v : K ⟶ K) : (fixedLocusOfEnd v).d = 𝟙 (point k) :
 /-- The identification `Rd^! ≅ 𝟭` for the map `d = 𝟙` of the fixed square of a diagonal
 correspondence over the base point. -/
 noncomputable def fixedLocusOfEndUpperShriekIso (v : K ⟶ K) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (fixedLocusOfEnd v).d ≅
+    boundedConstructibleUpperShriek ℓ (fixedLocusOfEnd v).d ≅
       𝟭 _ :=
   eqToIso (by rw [fixedLocusOfEnd_d]) ≪≫ boundedConstructibleUpperShriekId ℓ (point k)
 

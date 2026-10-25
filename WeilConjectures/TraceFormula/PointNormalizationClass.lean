@@ -83,33 +83,33 @@ instance (Z : Dᵇc((point k ⨯ point k).left)⟦Profinite.padicAlgClRingObj �
 variable (ℓ k) in
 /-- `RΔ_! ⋙ Rp₁_! ≅ R(Δ ≫ p₁)_! = R(𝟙)_! ≅ 𝟭`. -/
 noncomputable def pointLowerShriekιΦ :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (diag (point k)) ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleLowerShriek ℓ (diag (point k)) ⋙
+        boundedConstructibleLowerShriek ℓ
           (prod.fst : point k ⨯ point k ⟶ point k) ≅ 𝟭 _ :=
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm ≪≫
     eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+      ℓ g) diag_point_fst) ≪≫
     boundedConstructibleLowerShriekId ℓ (point k)
 
 variable (ℓ k) in
 /-- `Rp₁^! ⋙ RΔ^! ≅ R(Δ ≫ p₁)^! = R(𝟙)^! ≅ 𝟭`. -/
 noncomputable def pointUpperShriekιΨ :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleUpperShriek ℓ
           (prod.fst : point k ⨯ point k ⟶ point k) ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (diag (point k)) ≅
+        boundedConstructibleUpperShriek ℓ (diag (point k)) ≅
       𝟭 _ :=
   (boundedConstructibleUpperShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm ≪≫
     eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+      ℓ g) diag_point_fst) ≪≫
     boundedConstructibleUpperShriekId ℓ (point k)
 
 lemma eqToHom_counit_point {u₁ u₂ : point k ⟶ point k} (h : u₁ = u₂)
     (d : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriek _ ℓ u₁).map
         ((eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g) h)).hom.app d) ≫
+          ℓ g) h)).hom.app d) ≫
       (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g) h)).hom.app _ ≫
+          ℓ g) h)).hom.app _ ≫
       (boundedConstructibleUpperShriekAdjunction _ ℓ u₂).counit.app d =
     (boundedConstructibleUpperShriekAdjunction _ ℓ u₁).counit.app d := by
   subst h
@@ -130,9 +130,9 @@ lemma pointUpperShriekιΨ_conj (K : Dᵇc((point k).left)⟦Profinite.padicAlgC
     (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 (point k)))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm
     (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst))
+      ℓ g) diag_point_fst))
     (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst))
+      ℓ g) diag_point_fst))
     (boundedConstructibleLowerShriekId ℓ (point k)) (eqToHom_counit_point diag_point_fst) K
   simp only [Adjunction.comp_counit_app] at h
   simp only [pointLowerShriekιΦ, pointUpperShriekιΨ, Iso.trans_inv, Iso.trans_hom,
@@ -149,7 +149,7 @@ lemma pointClass_coeff :
     ((boundedConstructibleUpperShriekId ℓ (point k)).app K)
     (eqToHom (by rw [← diag_point_fst]))
     ((eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst)).hom.app K)
+      ℓ g) diag_point_fst)).hom.app K)
     (by simp)
     ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).app K)
   convert h using 2 <;> first

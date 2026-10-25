@@ -96,10 +96,10 @@ variable (ℓ) in
 lemma boundedConstructibleLowerShriekSquareIso_id_hom_app (g : X' ⟶ X)
     (w : g ≫ 𝟙 X = 𝟙 X' ≫ g) (N : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app N ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+        (boundedConstructibleLowerShriek ℓ g).map
           ((boundedConstructibleLowerShriekId ℓ X').hom.app N) =
       (boundedConstructibleLowerShriekId ℓ X).hom.app
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) := by
+        ((boundedConstructibleLowerShriek ℓ g).obj N) := by
   rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (𝟙 X)).hom.app N)]
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, boundedConstructibleLowerShriekId,
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app, Category.assoc,
@@ -217,11 +217,11 @@ lemma boundedConstructibleUpperStar_map_comp_eqToHom {P : Over (Spec (.of k))}
 `R(𝟙)_! ≅ 𝟭`. -/
 lemma boundedConstructibleUpperShriekAdjunction_id_homEquiv_comp
     {M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (f : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj M ⟶ N) :
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (f : (boundedConstructibleLowerShriek ℓ (𝟙 X)).obj M ⟶ N) :
+    (boundedConstructibleUpperShriekAdjunction ℓ
         (𝟙 X)).homEquiv _ _ f ≫ (boundedConstructibleUpperShriekId ℓ X).hom.app N =
       (boundedConstructibleLowerShriekId ℓ X).inv.app M ≫ f := by
-  obtain ⟨g, rfl⟩ := ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  obtain ⟨g, rfl⟩ := ((boundedConstructibleUpperShriekAdjunction ℓ
     (𝟙 X)).homEquiv M N).symm.surjective f
   have hn := (boundedConstructibleLowerShriekId ℓ X).hom.naturality g
   dsimp only [Functor.id_map, Functor.id_obj] at hn
@@ -259,20 +259,20 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).hom.app K ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
         (v ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app K) ≫
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperShriekAdjunction ℓ
         (𝟙 (point k))).homEquiv
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K))
+          ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj K))
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).obj K)
         ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app
-            ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K) ≫
+            ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj K) ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).map
-            ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            ((boundedConstructibleUpperShriekAdjunction ℓ
               (𝟙 X)).counit.app K)) ≫
       (boundedConstructibleUpperShriekId ℓ (point k)).hom.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).obj K) = _
   have hinv : (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
-      sq)).inv.app ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq)).inv.app ((boundedConstructibleUpperShriek ℓ
         (𝟙 X)).obj K) =
       (boundedConstructibleLowerShriekId ℓ (point k)).hom.app _ ≫ eqToHom (by
         rw [Category.comp_id]; rfl) ≫
@@ -290,7 +290,7 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
   have e₁ := ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).mapIso
     ((boundedConstructibleLowerShriekId ℓ X).app
-      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj
+      ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj
         K))).inv_hom_id_assoc
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ 𝟙 X)).map
       ((boundedConstructibleUpperShriekId ℓ X).hom.app K))

@@ -72,13 +72,13 @@ variable {X Z U : Over (Spec (.of k))}
 theorem exists_distTriang_openClosed_boundedConstructible
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ∃ δ : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+    ∃ δ : (boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) ⟶
         (shiftFunctor _ (1 : ℤ)).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleLowerShriek ℓ j).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)),
       Triangle.mk ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K)
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K) δ ∈ distTriang _ := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed ℓ j i hcompl K
   exact ObjectProperty.exists_distTriang_of_ι _ _ _ δ hδ

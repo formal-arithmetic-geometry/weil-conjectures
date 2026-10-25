@@ -81,7 +81,7 @@ lemma isPullback_inv_hom (e : X ≅ Y) : IsPullback e.inv (𝟙 Y) e.hom (𝟙 Y
 /-- For an isomorphism `e : X ≅ Y`, the lower shriek `Re_!` is the pullback `L(e⁻¹)^*`, by
 compact-support base change in the cartesian square `e⁻¹ ≫ e = 𝟙 ≫ 𝟙`. -/
 noncomputable def lowerShriekIsoUpperStarInv (e : X ≅ Y) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ e.hom ≅
+    boundedConstructibleLowerShriek ℓ e.hom ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.inv :=
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (isPullback_inv_hom e)
   (Functor.rightUnitor _).symm ≪≫
@@ -196,7 +196,7 @@ R(eC ≫ c)_! ℚ̄_ℓ,E ≅ Rc_! ReC_! LeD^* ℚ̄_ℓ,D ≅ Rc_! (Lc^* Rd'_! 
 the composition of the lower shrieks, compact-support base change and the projection formula
 for `c`. -/
 noncomputable def supportProductIso (hE : IsPullback eC eD c d') :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (eC ≫ c)).obj (𝟙_ _) ≅
+    (boundedConstructibleLowerShriek ℓ (eC ≫ c)).obj (𝟙_ _) ≅
       (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⊗
         (boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _) :=
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hE.flip
@@ -241,7 +241,7 @@ noncomputable def pairingMorphism (hE : IsPullback eC eD c d')
       externalProduct ℓ L (verdierDual ℓ (toPoint X) K))
     (vc : (boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _) ⟶
       externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (eC ≫ c)).obj (𝟙_ _) ⟶
+    (boundedConstructibleLowerShriek ℓ (eC ≫ c)).obj (𝟙_ _) ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=
   (supportProductIso ℓ hE).hom ≫ (uc ⊗ₘ vc) ≫ kernelContraction ℓ K L
 

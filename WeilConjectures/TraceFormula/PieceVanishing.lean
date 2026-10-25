@@ -136,7 +136,7 @@ lemma isZero_upperStar_lowerShriek_tensor_shift {P : Over (Spec (.of k))}
         ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).mapIso
           ((((curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ
             (prod.snd : Y ⨯ X ⟶ X)).obj N)).commShiftIso (1 : ℤ)).app T) ≪≫
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleLowerShriek ℓ
             (prod.fst : Y ⨯ X ⟶ Y)).commShiftIso
             (1 : ℤ)).app _) ≪≫
       ((boundedConstructibleUpperStar _ ℓ x).commShiftIso (1 : ℤ)).app _)
@@ -222,7 +222,7 @@ lemma eq_zero_of_externalProduct_closedPiece (K : Dᵇc(X.left)⟦Profinite.padi
   refine eq_zero_of_shift (fun _ ↦ eq_zero_of_externalProduct (fun _ ↦
     eq_zero_of_isZero_upperStar x (isZero_upperStar_lowerShriek_tensor_shift x _ ?_) _) _) φ
   exact (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map_isZero
-    ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ _).map_isZero
+    ((boundedConstructibleLowerShriek ℓ _).map_isZero
     ((isZero_tensorObj_of_isZero_right _ ((boundedConstructibleUpperStar _ ℓ _).map_isZero
       (isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar j x hjx B A))).of_iso
       ((α_ _ _ _).symm ≪≫ whiskerRightIso (β_ _ _) _ ≪≫ (α_ _ _ _) ≪≫

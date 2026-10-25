@@ -259,8 +259,8 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' :
     boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (sq₁.paste_vert sq₂) =
       Functor.whiskerRight (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₂ w₂).hom
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ l) ≫
-        (TwoSquare.hComp (T := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ v₂)
-          (B := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ v₁)
+        (TwoSquare.hComp (T := boundedConstructibleLowerShriek ℓ v₂)
+          (B := boundedConstructibleLowerShriek ℓ v₁)
           (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁)
           (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)).natTrans ≫
         Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h)

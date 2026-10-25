@@ -112,7 +112,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 with its pushforward, followed by `R(𝟙 X)_* ≅ 𝟭`. -/
 noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
+    boundedConstructibleLowerShriek ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X) ≪≫
     boundedConstructibleLowerStarId _ ℓ X
@@ -121,10 +121,10 @@ noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
 `boundedConstructibleLowerShriekId` for the adjunctions `R(𝟙 X)_! ⊣ R(𝟙 X)^!` and `𝟭 ⊣ 𝟭`. -/
 noncomputable def boundedConstructibleUpperShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
+    boundedConstructibleUpperShriek ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   conjugateIsoEquiv
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ X).symm
 
 end Comparison
@@ -140,7 +140,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 (blueprint `def-trf-dualizing-complex`). -/
 noncomputable abbrev dualizingComplex' (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj (𝟙_ _)
+  (boundedConstructibleUpperShriek ℓ (toPoint X)).obj (𝟙_ _)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -149,7 +149,7 @@ variable {X Y : Over (Spec (.of k))}
 /-- The composition isomorphism `Rf^! ω_Y ≅ ω_X` of the dualizing complexes (blueprint
 `thm-trf-dualizing-complex-composition`). -/
 noncomputable def dualizingComplexComp (f : X ⟶ Y) :
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    (boundedConstructibleUpperShriek ℓ f).obj
         (dualizingComplex' ℓ Y) ≅ dualizingComplex' ℓ X :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
@@ -205,7 +205,7 @@ through the canonical identification `Rj^! ℚ̄_ℓ,X ≅ j^* ℚ̄_ℓ,X ≅ �
 noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
     (α : BorelMooreSection ℓ X) : BorelMooreSection ℓ U :=
   (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map α ≫
+    (boundedConstructibleUpperShriek ℓ j).map α ≫
     (dualizingComplexComp ℓ j).hom
 
 /-- The *integral* `∫_X α ∈ End ℚ̄_ℓ,s` of a Borel–Moore section of a scheme proper over `s`:
@@ -218,14 +218,14 @@ identification `Ra_{X!} ≅ Ra_{X*}` for the proper `a_X`, and the adjoint `α^�
 noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   haveI : IsProper (toPoint X).left := inferInstanceAs (IsProper X.hom)
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (toPoint X)).unit.app (𝟙_ _) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerStar ℓ (toPoint X)).map
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv ≫
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
       (toPoint X)).inv.app (𝟙_ _) ≫
-    ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    ((boundedConstructibleUpperShriekAdjunction ℓ
       (toPoint X)).homEquiv _ _).symm α
 
 /-- The integral is additive (blueprint `lem-trf-integration-linear`). -/
@@ -251,18 +251,18 @@ instance : IsProper (point k).hom :=
 theorem integral_point (α : BorelMooreSection ℓ (point k)) :
     α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom := by
   have h := homEquiv_comp_conjugateEquiv_app
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k)))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
-    (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (((boundedConstructibleUpperShriekAdjunction ℓ
       (𝟙 (point k))).homEquiv _ _).symm α)
   rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
     ← conjugateIsoEquiv_apply_hom] at h
   rw [dualizingComplexPointIso, Iso.app_hom, boundedConstructibleUpperShriekId]
   erw [h]
   have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (𝟙 (point k))).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).map
+        (boundedConstructibleLowerStar ℓ (𝟙 (point k))).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (𝟙 (point k)))).inv ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 (point k))).inv.app
@@ -270,7 +270,7 @@ theorem integral_point (α : BorelMooreSection ℓ (point k)) :
     rw [boundedConstructibleLowerShriekId, Iso.trans_inv, NatTrans.comp_app,
       boundedConstructibleLowerStarId_inv_app_unit, Category.assoc]
   refine Eq.trans ?_ (congrArg (· ≫ ((boundedConstructibleUpperShriekAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
+    ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
   simp only [Category.assoc]
   rfl
 

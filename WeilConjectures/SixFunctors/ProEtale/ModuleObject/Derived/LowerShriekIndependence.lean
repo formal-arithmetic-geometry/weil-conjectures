@@ -151,8 +151,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
     (c₁ c₂ : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c₁ ≅
-      boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c₂ :=
+    boundedConstructibleLowerShriekOfCompactification ℓ c₁ ≅
+      boundedConstructibleLowerShriekOfCompactification ℓ c₂ :=
   have hc := Compactification.exists_overRefinement c₁ c₂
   let r₁ := hc.choose_spec.1.some
   let r₂ := hc.choose_spec.2.some

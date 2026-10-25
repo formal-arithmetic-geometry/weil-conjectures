@@ -131,44 +131,44 @@ theorem traceClassPushforward_eq :
     simp only [Adjunction.homEquiv_unit, traceClassPushforward, BorelMooreSection.pushforward,
       lowerStarDualizingComplexTrace, Functor.map_comp, Category.assoc]
     have hpg := Adjunction.unit_map_comp_unit_map
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ P.g)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fc.ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (Fc.ι ≫ P.g))
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι P.g)
-      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι P.g)
+      (boundedConstructibleLowerStarComp ℓ Fc.ι P.g)
       rfl _ _ _ (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ Fc.ι P.g)
     have hhb := Adjunction.unit_map_comp_unit_map
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (P.fixMap Fc Fb))
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Fb.ι)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fb.ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (P.fixMap Fc Fb ≫ Fb.ι))
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (P.fixMap Fc Fb) Fb.ι)
-      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerStarComp ℓ
         (P.fixMap Fc Fb) Fb.ι)
       rfl _ _ _
       (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ (P.fixMap Fc Fb) Fb.ι)
     have htr := unit_comp_map_εIso_inv_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
-    have n1 := (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+    have n1 := (boundedConstructibleLowerStarComp ℓ
       Fc.ι P.g).hom.naturality (c.traceClass Fc)
     have n2 := lowerStar_map_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
       (c.traceClass Fc)
-    have n3 := (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+    have n3 := (boundedConstructibleLowerStarComp ℓ
       (P.fixMap Fc Fb) Fb.ι).inv.naturality (c.traceClass Fc)
     simp only [Functor.comp_map] at n1 n3
     refine comp_eq_comp_of_points _ _ _ _ _ _ _ _ _ _ _ _ _
-      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleLowerStarComp ℓ
         Fc.ι P.g).hom.app (𝟙_ _))
       (eqToHom (congrArg (fun r : Fc.F ⟶ P.D ↦
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj (𝟙_ _))
+        (boundedConstructibleLowerStar ℓ r).obj (𝟙_ _))
           (P.fixMap_ι Fc Fb).symm))
-      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (P.fixMap Fc Fb)
+      ((boundedConstructibleLowerStarComp ℓ (P.fixMap Fc Fb)
         Fb.ι).inv.app (𝟙_ _))
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           (Fc.ι ≫ P.g)).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (Fc.ι ≫ P.g)).map
+        (boundedConstructibleLowerStar ℓ (Fc.ι ≫ P.g)).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (Fc.ι ≫ P.g))).inv) _ _
       ?_ ?_ htr ?_

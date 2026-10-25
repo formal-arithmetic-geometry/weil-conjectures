@@ -93,9 +93,9 @@ variable (X Y) in
 `Rp_X! ⋙ ... : Lp_Y^* ⋙ Rp_X! ≅ Ra_Y! ⋙ La_X^*`. -/
 noncomputable def prodBaseChangeIso :
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y) ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        boundedConstructibleLowerShriek ℓ
           (prod.fst : X ⨯ Y ⟶ X) ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y) ⋙
+      boundedConstructibleLowerShriek ℓ (toPoint Y) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) :=
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
     (isPullback_prod_toPoint X Y)

@@ -72,10 +72,10 @@ lemma upperStarLowerShriekAdjunction_id_unit_app (x : Dᵇc(X.left)⟦Profinite.
         (boundedConstructibleLowerShriekId ℓ X).hom.app _ =
       (boundedConstructibleUpperStarId _ ℓ X).inv.app x := by
   have h := unit_conjugateEquiv
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleUpperStarId _ ℓ X).inv x
   have hu := Adjunction.homEquiv_ofNatIsoRight_apply
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 X))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).symm
     (𝟙 ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj x))
   simp only [Adjunction.homEquiv_unit, Iso.symm_hom] at hu
@@ -93,7 +93,7 @@ lemma upperShriekAdjunction_id_unit_app (x : Dᵇc(X.left)⟦Profinite.padicAlgC
         (boundedConstructibleUpperShriekId ℓ X).hom.app _ =
       (boundedConstructibleLowerShriekId ℓ X).inv.app x := by
   have h := unit_conjugateEquiv
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ X).inv x
   exact h.trans (by simp [Adjunction.id])
 
@@ -106,7 +106,7 @@ lemma tau_comp_counit_of_id (Δ : X ⟶ P) [IsProper Δ.left] {ι d : X ⟶ X} (
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι)).hom ≫
       (boundedConstructibleUpperShriekAdjunction _ ℓ d).unit.app _ ≫
       (eqToIso (congrArg (fun g : X ⟶ X ↦ boundedConstructibleUpperShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g) hd) ≪≫
+          ℓ g) hd) ≪≫
         boundedConstructibleUpperShriekId ℓ X).hom.app _ ≫
       (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app (𝟙_ _) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ Δ).counit.app (𝟙_ _) =

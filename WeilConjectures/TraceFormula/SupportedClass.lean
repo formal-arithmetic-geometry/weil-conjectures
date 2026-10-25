@@ -210,7 +210,7 @@ lemma class_ofEnd (v : K ⟶ K) :
         (ihom _).map ((boundedConstructibleUpperShriek _ ℓ prod.fst).map v) := by
   have hv := (boundedConstructibleUpperShriekId ℓ X).inv.naturality v
   have he := map_comp_eqToHom_of_eq ℓ (fun g : X ⟶ X ↦ boundedConstructibleUpperShriek
-    (Profinite.padicAlgClRingObj ℓ) ℓ g) (Correspondence.ofEnd K v).support_fst.symm v
+    ℓ g) (Correspondence.ofEnd K v).support_fst.symm v
   have key := Verdier.comp_comp_eq_of_naturality
     (eqToHom (by rw [Correspondence.support_snd]) :
       (boundedConstructibleUpperStar _ ℓ ((Correspondence.ofEnd K v).support ≫ prod.snd)).obj K ⟶

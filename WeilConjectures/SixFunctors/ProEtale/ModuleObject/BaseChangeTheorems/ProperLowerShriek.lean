@@ -120,8 +120,8 @@ independence of the compactification, `Rf_!` is `Rf_!^c` for the trivial compact
 `c = (X ⟶[𝟙] X ⟶[f] Y)`, which is `Rf_*`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
-      boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+    boundedConstructibleLowerShriek ℓ f ≅
+      boundedConstructibleLowerStar ℓ f :=
   boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
       (compactificationOverField f) (.ofIsProper f.left) ≪≫
     boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f

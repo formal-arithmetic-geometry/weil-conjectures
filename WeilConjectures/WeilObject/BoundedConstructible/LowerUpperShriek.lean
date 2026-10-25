@@ -156,7 +156,7 @@ functors. -/
 lemma weilLowerShriek_comp_forget :
     weilLowerShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eY.hom =
       WeilBoundedConstructible.forget ℓ eX.hom ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleLowerShriek ℓ f :=
   rfl
 
 end LowerShriek
@@ -213,7 +213,7 @@ forgetful functors. -/
 lemma weilUpperShriek_comp_forget :
     weilUpperShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eX.hom =
       WeilBoundedConstructible.forget ℓ eY.hom ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleUpperShriek ℓ f :=
   rfl
 
 end UpperShriek

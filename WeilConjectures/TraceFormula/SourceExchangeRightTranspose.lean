@@ -145,20 +145,20 @@ lemma upperStarLowerShriekAdjunction_unit_app_comp (r : U ⟶ W) (h : W ⟶ V) [
         (boundedConstructibleLowerShriek _ ℓ (r ≫ h)).map
           ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app D) := by
   have hu := unit_conjugateEquiv
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ h))
-    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h).comp
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h))
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ h).comp
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ r))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r h).inv D
   rw [Adjunction.comp_unit_app, Category.assoc] at hu
   have key := Adjunction.unit_app_comp_inv_app_of_comp
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ h))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ h)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ r)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (r ≫ h))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r h)
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r h)
+    (boundedConstructibleLowerStarComp ℓ r h)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r h) D hu
     (fun P ↦ boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp ℓ r h P)
   simp only [boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl,

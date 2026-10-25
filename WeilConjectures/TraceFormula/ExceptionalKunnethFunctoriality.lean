@@ -88,9 +88,9 @@ variable {X Y S : Over (Spec (.of k))}
 
 /-- The composition isomorphism `Rf_! ≅ Rf₁_! ⋙ Rf₂_!` for a factorisation `f₁ ≫ f₂ = f`. -/
 noncomputable def boundedConstructibleLowerShriekCompOfEq (h : f₁ ≫ f₂ = f) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁ ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₂ :=
+    boundedConstructibleLowerShriek ℓ f ≅
+      boundedConstructibleLowerShriek ℓ f₁ ⋙
+        boundedConstructibleLowerShriek ℓ f₂ :=
   eqToIso (by rw [h]) ≪≫ boundedConstructibleLowerShriekComp_padicAlgCl ℓ f₁ f₂
 
 /-- The composition isomorphism `Lf^* ≅ Lf₂^* ⋙ Lf₁^*` for a factorisation `f₁ ≫ f₂ = f`. -/
@@ -102,9 +102,9 @@ noncomputable def boundedConstructibleUpperStarCompOfEq (h : f₁ ≫ f₂ = f) 
 
 /-- The composition isomorphism `Rf^! ≅ Rf₂^! ⋙ Rf₁^!` for a factorisation `f₁ ≫ f₂ = f`. -/
 noncomputable def boundedConstructibleUpperShriekCompOfEq (h : f₁ ≫ f₂ = f) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
-      boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₂ ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁ :=
+    boundedConstructibleUpperShriek ℓ f ≅
+      boundedConstructibleUpperShriek ℓ f₂ ⋙
+        boundedConstructibleUpperShriek ℓ f₁ :=
   eqToIso (by rw [h]) ≪≫ boundedConstructibleUpperShriekComp_padicAlgCl ℓ f₁ f₂
 
 /-- The composition isomorphism of the exceptional inverse images along a factorisation is the
@@ -374,13 +374,13 @@ theorem exceptionalKunnethAdjoint_comp_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     (sqZ : IsPullback qW pW (toPoint Z) (toPoint X))
     (sqY : IsPullback qV pV (toPoint Y) (toPoint X))
     (bcZ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qW ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ pW ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z) ⋙
+        boundedConstructibleLowerShriek ℓ pW ≅
+      boundedConstructibleLowerShriek ℓ (toPoint Z) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
     (hbcZ : ∀ K, bcZ.inv.app K = (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqZ).app K)
     (bcY : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qV ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ pV ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y) ⋙
+        boundedConstructibleLowerShriek ℓ pV ≅
+      boundedConstructibleLowerShriek ℓ (toPoint Y) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
     (hbcY : ∀ K, bcY.inv.app K = (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app K)
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)

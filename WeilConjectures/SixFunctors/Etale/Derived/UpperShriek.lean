@@ -115,6 +115,7 @@ instance isLeftAdjoint_rightDerivedLowerStar_of_isProper [Finite Λ] {Z Y : Sche
   have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
   let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g
   let : (R((g)_*[ModuleCat.{u + 1} Λ])).CommShift ℤ := adj.rightAdjointCommShift ℤ
+  have : adj.CommShift ℤ := adj.commShift_of_leftAdjoint ℤ
   have : (R((g)_*[ModuleCat.{u + 1} Λ])).IsTriangulated := adj.isTriangulated_rightAdjoint
   have (J : Type (u + 1)) :
       PreservesColimitsOfShape (Discrete J) (R((g)_*[ModuleCat.{u + 1} Λ])) :=

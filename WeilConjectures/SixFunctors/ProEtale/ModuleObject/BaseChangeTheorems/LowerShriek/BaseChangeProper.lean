@@ -149,7 +149,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
         (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f').hom =
     Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f).hom
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
-      boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq := by
+      boundedConstructibleBaseChange ℓ sq.toCommSq := by
   have hw : SepFinType.homMk g' ≫ 𝟙 (SepFinType.mk X) =
       𝟙 (SepFinType.mk X') ≫ SepFinType.homMk g' := by
     rw [Category.comp_id, Category.id_comp]

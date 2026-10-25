@@ -76,8 +76,8 @@ composition isomorphisms of the pullbacks and the counit `Lj^* Rj_* B ⟶ B`. -/
 noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ (Y := Y) M
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleLowerStar ℓ j).obj B) ⟶
+      (boundedConstructibleLowerStar ℓ
         (prod.map (𝟙 X) j)).obj (externalProduct ℓ M B) :=
   (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map (𝟙 X) j)).homEquiv _ _
     ((Functor.Monoidal.μIso _ _ _).inv ≫

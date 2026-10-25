@@ -95,7 +95,7 @@ lemma isIso_kunnethVerdierMap_of_isDualizable (M : Dᵇc(X.left)⟦Profinite.pad
 noncomputable def upperStarLowerShriekIsoOfIsOpenImmersion (j : U ⟶ Y) [IsOpenImmersion j.left]
     (L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L) ≅ L :=
+      ((boundedConstructibleLowerShriek ℓ j).obj L) ≅ L :=
   (boundedConstructibleUpperStar _ ℓ j).mapIso
       ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app L) ≪≫
     (asIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).unit.app
@@ -108,7 +108,7 @@ lemma isIso_kunnethVerdierMap_lowerShriek_of_isDualizable (j : U ⟶ Y) [IsOpenI
     {L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L)
     [IsIso (exceptionalKunnethMap ℓ (Y := U) M)] :
     IsIso (kunnethVerdierMap ℓ (Y := Y) M
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)) :=
+      ((boundedConstructibleLowerShriek ℓ j).obj L)) :=
   isIso_kunnethVerdierMap_lowerShriek ℓ j M (exceptionalKunnethMapRestriction ℓ j M) L
     (isIso_kunnethVerdierMap_of_iso_right ℓ M (upperStarLowerShriekIsoOfIsOpenImmersion ℓ j L)
       (isIso_kunnethVerdierMap_of_isDualizable ℓ M hL))
@@ -138,11 +138,11 @@ theorem isIso_exceptionalKunnethMap_of_isAffine {X : Over (Spec (.of k))}
   have h₃ : ∀ n : ℤ, IsIso (kunnethVerdierMap ℓ M
       ((shiftFunctor (Dᵇc((affineSpaceOver k e.n).left)⟦Profinite.padicAlgClRingObj ℓ⟧) n).obj
         ((shiftFunctor _ (1 : ℤ)).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ e.complι).obj
+          ((boundedConstructibleLowerShriek ℓ e.complι).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.complι).obj
               (𝟙_ _)))))) := by
     intro n
-    let F := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ e.complι
+    let F := boundedConstructibleLowerShriek ℓ e.complι
     let L := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.complι).obj
       (𝟙_ _)
     have hL : IsDualizable L :=
@@ -173,8 +173,8 @@ instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingOb
     (triangEnvelope_lisseGenerator ℓ Y N)
   rintro N ⟨Z, _, _, _, g, _, U, _, _, _, _, j, _, L, hL, ⟨eN⟩⟩ n
   have := isIso_exceptionalKunnethMap_of_isAffine ℓ U M
-  let F := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g
-  let G := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j
+  let F := boundedConstructibleLowerShriek ℓ g
+  let G := boundedConstructibleLowerShriek ℓ j
   refine isIso_kunnethVerdierMap_of_iso_right ℓ M
     ((shiftFunctor _ n).mapIso eN ≪≫ ((F.commShiftIso n).app _).symm ≪≫
       F.mapIso ((G.commShiftIso n).app L).symm) ?_

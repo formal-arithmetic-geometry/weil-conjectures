@@ -126,9 +126,9 @@ lemma ProperPushforwardDiagram.pushforwardCoeff_eq_homEquiv {S Y : Over (Spec (.
             (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂ P.f).hom.app
               _ ≫
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
-              ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+              ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
                 P.f).counit.app A)) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).map c.u ≫
+        (boundedConstructibleLowerStar ℓ P.g).map c.u ≫
         (lowerStarUpperShriekExchange ℓ P.w₁).app A := by
   rw [Adjunction.homEquiv_unit]
   rfl
@@ -150,7 +150,7 @@ theorem upperStar_map_unit_comp_graphClosedPieceCoeff :
   have e₁ := ProperPushforwardDiagram.pushforwardCoeff_eq_homEquiv (graphClosedPieceDiagram K v hx)
   have e₂ : (lowerStarUpperShriekExchange ℓ (graphClosedPieceDiagram K v hx).w₁).app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K) =
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
+      (boundedConstructibleLowerStar ℓ x).map
           ((boundedConstructibleUpperShriekId ℓ (point k)).hom.app
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) ≫
         (boundedConstructibleUpperShriekId ℓ X).inv.app (pointClosedPiece K x) :=
@@ -180,7 +180,7 @@ lemma ProperPushforwardDiagram.pushforwardCoeff_congr {S Y C D : Over (Spec (.of
     [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
     {A : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c₁ c₂ : C ⟶ S)
     {u u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj A ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj A}
+      (boundedConstructibleUpperShriek ℓ c₁).obj A}
     (hu : u = u') (f : S ⟶ Y) [IsProper f.left] (b₁ b₂ : D ⟶ Y) (g : C ⟶ D) [IsProper g.left]
     (w₁ : g ≫ b₁ = c₁ ≫ f) (w₂ : g ≫ b₂ = c₂ ≫ f) :
     (ProperPushforwardDiagram.mk (c := ⟨C, c₁, c₂, u⟩) f D b₁ b₂ g w₁ w₂).pushforwardCoeff =

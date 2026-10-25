@@ -138,12 +138,12 @@ noncomputable def restrictedStalkMap {y : RationalPoint c.C} (hy : y ≫ c.c₁ 
   eqToHom (by rw [hy]) ≫
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y c.c₂).hom.app K ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map c.u ≫
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperShriekAdjunction ℓ
       (𝟙 (point k))).homEquiv _ _
       ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv.app
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K) ≫
+          ((boundedConstructibleUpperShriek ℓ c.c₁).obj K) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (y ≫ c.c₁)).map
-          ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperShriekAdjunction ℓ
             c.c₁).counit.app K)) ≫
     (boundedConstructibleUpperShriekId ℓ (point k)).hom.app _
 
@@ -324,14 +324,14 @@ variable {c}
 lemma IsContractingAt.withCoeff {y : RationalPoint c.C} (hc : c.IsContractingAt y)
     (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K') :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     (c.withCoeff K' u').IsContractingAt y :=
   ⟨hc.1, hc.2, hc.3⟩
 
 lemma FixedLocus.liftPoint_withCoeff (F : c.FixedLocus)
     (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K')
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K')
     (y : RationalPoint c.C) (hy : y ≫ c.c₁ = y ≫ c.c₂) :
     (F.withCoeff K' u').liftPoint y hy = F.liftPoint y hy :=
   rfl

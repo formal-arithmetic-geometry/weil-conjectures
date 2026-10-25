@@ -83,13 +83,13 @@ theorem trace_compactFrobenius_eq_add [IsSepClosed k]
     [IsUniversalHomeomorphism ΦU.left] [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
     (K : WeilBoundedConstructible ℓ Φ)
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
         K.carrier)]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint U)).obj
         ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier)]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint Z)).obj
         ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier)] :
     trace K.compactFrobenius =
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +

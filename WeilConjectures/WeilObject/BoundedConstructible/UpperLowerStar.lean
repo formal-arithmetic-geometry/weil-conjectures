@@ -204,7 +204,7 @@ the forgetful functors. -/
 lemma weilLowerStar_comp_forget :
     weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY.hom =
       WeilBoundedConstructible.forget ℓ eX.hom ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleLowerStar ℓ f :=
   rfl
 
 end LowerStar

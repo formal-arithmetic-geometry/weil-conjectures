@@ -88,12 +88,12 @@ Rf_* ω_X ≅ Rf_! ω_X ≅ Rf_! Rf^! ω_Y --ε--> ω_Y,
 using `Rf_! ≅ Rf_*` for the proper `f`, the composition isomorphism `Rf^! ω_Y ≅ ω_X`
 (`dualizingComplexComp`) and the counit of `Rf_! ⊣ Rf^!`. -/
 noncomputable def lowerStarDualizingComplexTrace (f : X ⟶ Y) [IsProper f.left] :
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    (boundedConstructibleLowerStar ℓ f).obj
         (dualizingComplex' ℓ X) ⟶ dualizingComplex' ℓ Y :=
   (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app _ ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+    (boundedConstructibleLowerShriek ℓ f).map
       (dualizingComplexComp ℓ f).inv ≫
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f).counit.app _
+    (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app _
 
 /-- The *multiplication* `μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)` (blueprint
 `def-trf-kernel-pushforward-maps`, item 3): the adjoint for `Lf^* ⊣ Rf_*` of
@@ -103,16 +103,16 @@ Lf^* (Rf_* M ⊗ Rf_* N) ≅ Lf^* Rf_* M ⊗ Lf^* Rf_* N --ε ⊗ ε--> M ⊗ N,
 the monoidal structure of `Lf^*` followed by the counits. -/
 noncomputable def lowerStarTensorMap (f : X ⟶ Y)
     (M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M ⊗
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj N ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj (M ⊗ N) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f).homEquiv
+    (boundedConstructibleLowerStar ℓ f).obj M ⊗
+        (boundedConstructibleLowerStar ℓ f).obj N ⟶
+      (boundedConstructibleLowerStar ℓ f).obj (M ⊗ N) :=
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).homEquiv
     _ _
     (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f)
         _ _ ≫
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           f).counit.app M ⊗ₘ
-        (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ
           f).counit.app N))
 
 end ProperMaps
@@ -133,10 +133,10 @@ Rb_! Rg_* ≅ Rb_! Rg_! ≅ R(g ≫ b)_! = R(c ≫ f)_! ≅ Rf_! Rc_! ≅ Rf_* R
 ```
 using `Rg_! ≅ Rg_*`, `Rf_! ≅ Rf_*` and the composition isomorphisms of the lower shriek. -/
 noncomputable def lowerStarLowerShriekCompIso (w : g ≫ b = c ≫ f) :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ b ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+    boundedConstructibleLowerStar ℓ g ⋙
+        boundedConstructibleLowerShriek ℓ b ≅
+      boundedConstructibleLowerShriek ℓ c ⋙
+        boundedConstructibleLowerStar ℓ f :=
   Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).symm _ ≪≫
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).symm ≪≫
     eqToIso (by rw [w]) ≪≫
@@ -152,12 +152,12 @@ Rb_! Rg_* Rc^! ≅ Rf_* Rc_! Rc^! --Rf_* ε_c--> Rf_*,
 that is, the mate of the composition isomorphism `lowerStarLowerShriekCompIso` for the
 adjunctions `Rc_! ⊣ Rc^!` and `Rb_! ⊣ Rb^!`. No cartesian condition on the square is needed. -/
 noncomputable def lowerStarUpperShriekExchange (w : g ≫ b = c ≫ f) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶
-      boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ b :=
-  mateEquiv (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ c)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ b)
+    boundedConstructibleUpperShriek ℓ c ⋙
+        boundedConstructibleLowerStar ℓ g ⟶
+      boundedConstructibleLowerStar ℓ f ⋙
+        boundedConstructibleUpperShriek ℓ b :=
+  mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ c)
+    (boundedConstructibleUpperShriekAdjunction ℓ b)
     (lowerStarLowerShriekCompIso ℓ w).hom
 
 end Exchange
@@ -220,7 +220,7 @@ variable {c Y} (P : c.ProperPushforwardDiagram Y)
 
 /-- The pushforward coefficient `K' = Rf_* K` of a proper pushforward diagram. -/
 noncomputable abbrev coeff : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.f).obj K
+  (boundedConstructibleLowerStar ℓ P.f).obj K
 
 /-- The *ordinary half* `γ : Lb₂^* K' ⟶ Rg_* Lc₂^* K` of the coefficient pushforward (blueprint
 `def-trf-coefficient-pushforward`, item 1):
@@ -231,16 +231,16 @@ Lb₂^* K' --η_g--> Rg_* Lg^* Lb₂^* K' ≅ Rg_* L(g ≫ b₂)^* K' = Rg_* L(c
 -/
 noncomputable def pushforwardCoeffUnit :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ P.b₂).obj P.coeff ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).obj
+      (boundedConstructibleLowerStar ℓ P.g).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       P.g).unit.app _ ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).map
+    (boundedConstructibleLowerStar ℓ P.g).map
       ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ P.g P.b₂).inv.app _ ≫
         eqToHom (by rw [P.w₂]) ≫
         (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂ P.f).hom.app _ ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             P.f).counit.app K))
 
 /-- The *exceptional half* `δ : Rg_* Rc₁^! K ⟶ Rb₁^! K'` of the coefficient pushforward
@@ -253,9 +253,9 @@ using `Rg_! ≅ Rg_*`, `Rf_! ≅ Rf_*` for the proper `g`, `f` and the compositi
 the lower shriek: the exchange map `lowerStarUpperShriekExchange` of the square
 `g ≫ b₁ = c₁ ≫ f` at `K`. -/
 noncomputable def pushforwardCoeffCounit :
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).obj
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K) ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ P.b₁).obj P.coeff :=
+    (boundedConstructibleLowerStar ℓ P.g).obj
+        ((boundedConstructibleUpperShriek ℓ c.c₁).obj K) ⟶
+      (boundedConstructibleUpperShriek ℓ P.b₁).obj P.coeff :=
   (lowerStarUpperShriekExchange ℓ P.w₁).app K
 
 /-- The *coefficient pushforward* `[f, g]_! u = δ ∘ Rg_* u ∘ γ : Lb₂^* K' ⟶ Rb₁^! K'` of the
@@ -263,9 +263,9 @@ coefficient map of `c` along a proper pushforward diagram (blueprint
 `def-trf-coefficient-pushforward`, item 3). -/
 noncomputable def pushforwardCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ P.b₂).obj P.coeff ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ P.b₁).obj P.coeff :=
+      (boundedConstructibleUpperShriek ℓ P.b₁).obj P.coeff :=
   P.pushforwardCoeffUnit ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).map c.u ≫
+    (boundedConstructibleLowerStar ℓ P.g).map c.u ≫
     P.pushforwardCoeffCounit
 
 /-- The *proper pushforward* `(D, b₁, b₂, [f, g]_! u)` of the correspondence `c`, a

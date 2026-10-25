@@ -73,7 +73,7 @@ noncomputable def exceptionalKunnethAdjointNatTrans :
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y))) ⋙
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleLowerShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) ⟶ 𝟭 _ where
   app M := exceptionalKunnethAdjoint ℓ (Y := Y) M
   naturality _ _ φ := by
@@ -147,7 +147,7 @@ noncomputable def exceptionalKunnethMapNatTrans :
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y)) ⟶
-      𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) where
   app M := exceptionalKunnethMap ℓ (Y := Y) M
   naturality _ _ φ := by
@@ -188,7 +188,7 @@ noncomputable def kunnethVerdierPairingNatTrans :
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (verdierDual ℓ (toPoint Y) N))) ⋙
       (curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) ⟶
-      𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) where
   app M := kunnethVerdierPairing ℓ M N
   naturality _ _ φ := by
@@ -258,7 +258,7 @@ noncomputable def kunnethVerdierNatTrans :
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (verdierDual ℓ (toPoint Y) N)) ⟶
-      (𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      (𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)) ⋙
         ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) where
   app M := kunnethVerdierMap ℓ M N
@@ -277,13 +277,13 @@ instance isTriangulated_isoLocus_kunnethVerdierNatTrans :
     (kunnethVerdierNatTrans ℓ X N).isoLocus.IsTriangulated := by
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.fst : X ⨯ Y ⟶ X)).IsTriangulated := inferInstance
-  have : (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have : (boundedConstructibleUpperShriek ℓ
       (prod.fst : X ⨯ Y ⟶ X)).IsTriangulated := inferInstance
   have : (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (verdierDual ℓ (toPoint Y) N))).IsTriangulated := inferInstance
-  have : ((𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have : ((𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)) ⋙
         ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).IsTriangulated :=
     inferInstance

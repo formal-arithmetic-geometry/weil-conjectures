@@ -279,10 +279,10 @@ variable {c} (F : c.FixedLocus)
 /-- **Base change in the fixed square** (blueprint `thm-trf-fixed-point-base-change`, (2)):
 compact-support base change `LΔ_X^* Rc_! ≅ Rd_! Lι^*` in the cartesian fixed square. -/
 noncomputable def lowerShriekBaseChangeIso :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ⋙
+    boundedConstructibleLowerShriek ℓ c.support ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d :=
+        boundedConstructibleLowerShriek ℓ F.d :=
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ F.isPullback
   asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ F.isPullback)
 
@@ -291,10 +291,10 @@ noncomputable def lowerShriekBaseChangeIso :
 `lowerShriekBaseChangeIso` for the composite adjunctions `Rc_! ⋙ LΔ^* ⊣ RΔ_* ⋙ Rc^!` and
 `Lι^* ⋙ Rd_! ⊣ Rd^! ⋙ Rι_*`. -/
 noncomputable def upperShriekLowerStarIso :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ≅
-      boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι :=
+    boundedConstructibleLowerStar ℓ (diag X) ⋙
+        boundedConstructibleUpperShriek ℓ c.support ≅
+      boundedConstructibleUpperShriek ℓ F.d ⋙
+        boundedConstructibleLowerStar ℓ F.ι :=
   conjugateIsoEquiv
     ((boundedConstructibleUpperShriekAdjunction _ ℓ c.support).comp
       (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)))

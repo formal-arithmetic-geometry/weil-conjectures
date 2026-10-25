@@ -187,7 +187,7 @@ lemma compactPullback_comp_compactPullback_comparison (hi : ΦZ ≫ i = i ≫ Φ
     (compactPullback ℓ i).app M ≫
         (compactPullback ℓ ΦZ).app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj M) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
           ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app M) =
       (compactPullback ℓ Φ).app M ≫
         (compactPullback ℓ i).app
@@ -213,12 +213,12 @@ of the pullback comparison, the counit of `Li^* ⊣ Ri_*` and `Li^* φ`. -/
 noncomputable def closedPieceFrobeniusCoeff (hi : ΦZ ≫ i = i ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+      (boundedConstructibleLowerStar ℓ i).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) :=
   closedPieceCoeff
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi) _
     ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom)
@@ -230,14 +230,14 @@ omit [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦZ.left] in
 lemma compactFrobeniusClosedPiece_eq (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) :
     compactFrobeniusClosedPiece ℓ hi K =
       (compactPullback ℓ Φ).app
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
               K.carrier)) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           (closedPieceFrobeniusCoeff ℓ hi K) := by
   rw [compactFrobeniusClosedPiece]
   exact closedPiece_conj_eq_closedPieceCoeff
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (compactPullback ℓ Φ) (compactPullback ℓ i) (compactPullback ℓ ΦZ)
     (boundedConstructibleLowerStarCompToPoint ℓ i) (compactPullback_app_eq (ℓ := ℓ) i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi) (compactPullback_comp_compactPullback_comparison hi)
@@ -254,12 +254,12 @@ omit [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦZ.left]
 lemma upperStar_map_unit_comp_closedPieceFrobeniusCoeff (hi : ΦZ ≫ i = i ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K.carrier) ≫ closedPieceFrobeniusCoeff ℓ hi K =
       K.str.hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K.carrier := by
+        ℓ i).unit.app K.carrier := by
   exact closedPieceCoeff_unit_comm
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi) K.carrier K.str.hom
 
 end WeilBoundedConstructible
