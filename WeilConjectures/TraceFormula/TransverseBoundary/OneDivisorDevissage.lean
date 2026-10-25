@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RegularOpens
 public import WeilConjectures.ConstructibleSheaf.DistTriang
-public import WeilConjectures.ConstructibleSheaf.OpenCover
+public import WeilConjectures.ConstructibleSheaf.LocallyConstantOpenCover
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerivedUnbounded
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyDevissage

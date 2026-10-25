@@ -24,7 +24,7 @@ surface by purity along the regular divisor `Y`
 punctured trait by Galois cohomology
 (`AlgebraicGeometry.Scheme.TransverseCorner.nonempty_addEquiv_sheafH_puncturedTrait`). In degree
 `0` both are the constants of connected schemes, and in degree `1` the restriction is nonzero
-(Kummer classes, `AlgebraicGeometry.Scheme.TransverseCorner.cohomologyMap_one_puncturedTraitι_ne_zero`),
+(Kummer classes, `TransverseCorner.cohomologyMap_one_puncturedTraitι_ne_zero`),
 hence bijective between groups of order `ℓ`.
 
 ## Main statements
@@ -46,6 +46,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {Ω : T
   [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ C.Z) {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
   (hz : Set.range zbar = {C.z})
 
+omit [IsAlgClosed k] [IsAlgClosed Ω] in
 include hz in
 /-- The geometric point `z̄` lies on the divisor `Y`. -/
 lemma range_zbar_subset_range_iY : Set.range zbar ⊆ Set.range C.iY := by
@@ -85,7 +86,8 @@ theorem bijective_cohomologyMap_puncturedTraitι (q : ℕ) :
       refine AddMonoidHom.bijective_of_card_eq_prime (p := ℓ) ?_ ?_ _
         (C.cohomologyMap_one_puncturedTraitι_ne_zero zbar hℓ hz)
       · rw [Nat.card_congr e₁.toEquiv, Nat.card_zmod]
-      · rw [Nat.card_congr (C.sheafHUpperStarConstantZModEquiv zbar 1), Nat.card_congr e₂.toEquiv, Nat.card_zmod]
+      · rw [Nat.card_congr (C.sheafHUpperStarConstantZModEquiv zbar 1), Nat.card_congr e₂.toEquiv,
+          Nat.card_zmod]
   · have := C.subsingleton_sheafH_puncturedStrictLocalization zbar hℓ hz q hq
     have : Subsingleton (Sheaf.H (((C.puncturedTraitι zbar)^*[AddCommGrpCat.{u + 1}]).obj
         ((C.puncturedStrictLocalization zbar).constantZMod ℓ)) q) := by

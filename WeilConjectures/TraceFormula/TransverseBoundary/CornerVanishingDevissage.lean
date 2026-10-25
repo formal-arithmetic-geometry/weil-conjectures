@@ -31,13 +31,13 @@ bounded `E` with finite `ℓ`-group monodromy (blueprint `det-tf-transverse-corn
   (`AlgebraicGeometry.Etale.prop_singleFunctor_of_hasFiniteEllGroupMonodromy`) gives
   `RΓ(S - Y_S, i'_! p'^* H) = 0` for every sheaf `H` with finite `ℓ`-group monodromy;
 * *stalk formula*: `(R^q j_* i_! H)_z̄ = H^q(S - Y_S, (i_! H)|) = H^q(S - Y_S, i'_! p'^* H)`
-  (`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_rightDerivedLowerStar_of_subsingleton_sheafH`
+  (`Etale.isZero_leftDerivedUpperStar_rightDerivedLowerStar_of_subsingleton_sheafH`
   and base change of the extension by zero);
 * *dévissage* of the bounded complex `E` by truncation.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.TransverseCorner.isZero_leftDerivedUpperStar_boundaryComplex_of_bijective`
+- `TransverseCorner.isZero_leftDerivedUpperStar_boundaryComplex_of_bijective`
 -/
 
 @[expose] public section
@@ -68,6 +68,7 @@ instance : (C.IsAcyclicExtension Λ zbar).IsClosedUnderIsomorphisms where
     ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).mapIso
       ((D((C.strictLocalizationComplementι zbar)_!open[ModuleCat.{u + 1} Λ])).mapIso e)).symm
 
+omit [Finite Λ] in
 /-- `IsAcyclicExtension` is stable under shifts. -/
 lemma isAcyclicExtension_shift
     (K : DerivedCategory
@@ -77,6 +78,7 @@ lemma isAcyclicExtension_shift
     (((D((C.strictLocalizationComplementι zbar)_!open[ModuleCat.{u + 1} Λ]) ⋙
       Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).commShiftIso n).app K)
 
+omit [Finite Λ] in
 /-- `IsAcyclicExtension` is stable under extensions. -/
 lemma isAcyclicExtension_ext (T : Pretriangulated.Triangle (DerivedCategory
       (Sheaf (C.strictLocalizationComplement zbar).smallEtaleTopology (ModuleCat.{u + 1} Λ))))
@@ -90,6 +92,7 @@ lemma isAcyclicExtension_ext (T : Pretriangulated.Triangle (DerivedCategory
       ((D((C.strictLocalizationComplementι zbar)_!open[ModuleCat.{u + 1} Λ])).map_distinguished
         T hT)) h₁ h₃
 
+omit [Finite Λ] in
 /-- Constant coefficients (blueprint `det-tf-transverse-corner-vanishing`): if the restriction
 maps `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective, then `RΓ(S - Y_S, i'_! N) = 0` for
 every finite `Λ`-module `N` killed by `ℓ`. -/
