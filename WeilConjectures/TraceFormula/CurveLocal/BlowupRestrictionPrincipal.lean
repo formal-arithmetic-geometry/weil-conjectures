@@ -295,8 +295,9 @@ theorem globalSectionsRestriction_eq_zero_of_eq_basicOpen {ℓ : ℕ} [Fact ℓ.
     (hf : f ≠ 0) (hg : g ≠ 0) (hh : HasOrder h 1)
     (hDB : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {g}))
     (hDH : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {h}))
-    {U V : (Spec (.of (Scheme.strictHenselization t))).Opens} (hU : U = basicOpenSpec f)
-    (hV : V = basicOpenSpec (f * h)) (hVU : V ≤ U) {Y : Scheme.{u}} (ψ : Y ⟶ U)
+    {U V : (Spec (.of (Scheme.strictHenselization t))).Opens}
+    (hU : U = specBasicOpen (R := .of _) f)
+    (hV : V = specBasicOpen (R := .of _) (f * h)) (hVU : V ≤ U) {Y : Scheme.{u}} (ψ : Y ⟶ U)
     (χ : Y ⟶ (puncturedSpec (Scheme.strictHenselization t ⧸ Ideal.span {g})).toScheme)
     (hχ : χ ≫ (puncturedSpec _).ι ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) =
       ψ ≫ U.ι)
@@ -307,7 +308,7 @@ theorem globalSectionsRestriction_eq_zero_of_eq_basicOpen {ℓ : ℕ} [Fact ℓ.
         0 := by
   subst hU hV
   obtain rfl : χ ≫ Scheme.puncturedCurveMap (maximalIdeal_le_radical_of_smooth S t ht hDB) = ψ := by
-    rw [← cancel_mono (basicOpenSpec f).ι, Category.assoc, Scheme.puncturedCurveMap,
+    rw [← cancel_mono (specBasicOpen (R := .of _) f).ι, Category.assoc, Scheme.puncturedCurveMap,
       IsOpenImmersion.lift_fac, hχ]
   have hc := globalSectionsRestriction_comp
     (Scheme.puncturedCurveMap (maximalIdeal_le_radical_of_smooth S t ht hDB)) χ

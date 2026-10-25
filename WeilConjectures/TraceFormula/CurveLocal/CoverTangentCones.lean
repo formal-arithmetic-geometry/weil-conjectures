@@ -100,7 +100,7 @@ lemma ΓSpecIso_hom_appLE_mem_asIdeal_iff (ψ : Spec R ⟶ X) {U : X.Opens} (e :
     TopologicalSpace.Opens.mem_inf]
   exact ⟨fun h ↦ h.2, fun h ↦ ⟨trivial, h⟩⟩
 
-private lemma appLE_congr_hom {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : X.Opens)
+private lemma appLE_eq_appLE_of_eq {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : X.Opens)
     (e : V ≤ f ⁻¹ᵁ U) :
     f.appLE U V e = g.appLE U V (h ▸ e) := by
   subst h
@@ -118,7 +118,7 @@ lemma notMem_basicOpen_appLE_sub_appLE {Z : Scheme.{u}} (φ₁ φ₂ : Y ⟶ X) 
     (φ₁.appLE U (φ₁ ⁻¹ᵁ U ⊓ φ₂ ⁻¹ᵁ U) inf_le_left s -
       φ₂.appLE U (φ₁ ⁻¹ᵁ U ⊓ φ₂ ⁻¹ᵁ U) inf_le_right s)
   rw [map_sub, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, Hom.appLE_comp_appLE,
-    Hom.appLE_comp_appLE, appLE_congr_hom hι, sub_self, basicOpen_zero] at h
+    Hom.appLE_comp_appLE, appLE_eq_appLE_of_eq hι, sub_self, basicOpen_zero] at h
   have : t ∈ (⊥ : Z.Opens) := by
     rw [h]
     exact ⟨ht, hmem⟩
@@ -227,7 +227,7 @@ lemma exists_affineChart_of_point {k : Type u} [Field k] {C : Scheme.{u}}
     ((ΓSpecIso (.of k)).inv ≫ a.appLE ⊤ V le_top).hom.toAlgebra
   have hcomm : (ΓSpecIso (.of k)).inv ≫ a.appLE ⊤ V le_top ≫ c.appLE V ⊤ eV ≫
       (ΓSpecIso (.of k)).hom = 𝟙 _ := by
-    rw [Hom.appLE_comp_appLE_assoc, appLE_congr_hom hc]
+    rw [Hom.appLE_comp_appLE_assoc, appLE_eq_appLE_of_eq hc]
     simp [Hom.appLE]
   let φ : Γ(C, V) →ₐ[k] k :=
     { toRingHom := (c.appLE V ⊤ eV ≫ (ΓSpecIso (.of k)).hom).hom

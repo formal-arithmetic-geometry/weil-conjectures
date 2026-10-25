@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZero
 public import WeilConjectures.TraceFormula.CurveSupportedPairing
 
@@ -87,25 +88,64 @@ lemma natCast_ne_zero_of_ringChar_ne : (ℓ : k) ≠ 0 := by
 
 namespace Correspondence
 
+open PadicAlgCl
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
 
-/-- Compatibility required from `sk-lem-tf-rational-model` and from the comparison theorems of the
-six-functor formalism (`sk-thm-sf-package`: étale and pro-étale six operations, supports and
-strict localizations) (to be proved there): **transport of the vanishing of the supported
-restriction from finite coefficients to `ℚ̄_ℓ`**. If the supported restriction on the classical
-strictly local models vanishes for all finite `ℓ`-primary coefficient rings
+/-- Compatibility required from the comparison theorems of the six-functor formalism
+(`sk-thm-sf-package`: for finite coefficients the six operations, supports and strict
+localizations may be read on the small étale site; `sk-prop-scalar-six`: the coefficient changes
+`𝒪_E ⟶ ℚ̄_ℓ` and `𝒪_E ⟶ 𝒪_E / π_E^n` commute with the six operations, their units, counits and
+exchange maps; `sk-prop-sf-comparison`: comparison with the étale site) (to be proved there):
+**transport of the vanishing of the supported restriction from finite coefficients to an
+integral model**. Let `X` be smooth of relative dimension one over the algebraically closed field
+`k` with the model Frobenius `Φ` of a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K`, and
+`z` a point of the fixed locus of `(𝟙, Φ_m)` whose image `x` in `X` has `K_x = 0`. Suppose that
+`K ≅ ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for a finite subextension `E` and a bounded constructible `𝒪_E`-complex
+`K₀`. If the supported restriction on the classical strictly local models vanishes for all finite
+`ℓ`-primary coefficient rings (`AlgebraicGeometry.Etale.CurveLocalModel.RestrictionZero`), then
+the stalk at `z` of the supported restriction `ρ_P`, `P = K ⊠ D_X K`, vanishes.
+
+The comparison theorems identify the stalk at `z` of `ρ_P` with `ℚ̄_ℓ ⊗ᴸ_{𝒪_E}` of the integral
+supported restriction of `P₀ = K₀ ⊠ D_X K₀`, whose reductions modulo `π_E^n` are the supported
+restrictions `ρ_{a,b}` of the reductions of `P₀` on the strict localization of `X × X` at
+`(x, x)` (blueprint `det-tf-supported-restriction`), with étale `𝒪_E / π_E^n`-coefficients. These
+vanish by hypothesis, and a morphism of perfect `𝒪_E`-complexes vanishing modulo every `π_E^n`
+vanishes. -/
+theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_integralModel
+    [IsAlgClosed k] [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀]
+    (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : 1 ≤ m)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (frobeniusIterate Φ m)).obj K ⟶ K)
+    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (z : RationalPoint F.F)
+    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (z ≫ F.ι)).obj K))
+    (E : FiniteIntermediateField ℓ)
+    (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
+    (e : (constructibleToPadicAlgCl X.left ℓ E).obj
+      ((boundedConstructibleExtendScalars X.left ℓ E).obj K₀) ≅ K)
+    (_ : Etale.CurveLocalModel.RestrictionZero k ℓ) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
+      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 :=
+  sorry
+
+/-- **Transport of the vanishing of the supported restriction from finite coefficients to
+`ℚ̄_ℓ`** (blueprints `sk-lem-tf-curve-restriction-zero`, last step, and
+`sk-lem-tf-rational-model`). If the supported restriction on the classical strictly local models
+vanishes for all finite `ℓ`-primary coefficient rings
 (`AlgebraicGeometry.Etale.CurveLocalModel.RestrictionZero`), then, for `X` smooth of relative
 dimension one over the algebraically closed field `k` with the model Frobenius `Φ` of a model over
 a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K`, and a point `z` of the fixed locus of `(𝟙, Φ_m)`
 whose image `x` in `X` has `K_x = 0`, the stalk at `z` of the `ℚ̄_ℓ`-coefficient supported
-restriction `ρ_P`, `P = K ⊠ D_X K`, vanishes. The stalk of `ρ_P` at `z` is the supported
-restriction on the strict localization of `X × X` at `(x, x)` (blueprint
-`det-tf-supported-restriction-local-term`); by `sk-lem-tf-rational-model` the complex `K` has an
-integral model whose reductions `K_n` modulo `π_E^n` satisfy `(K_n)_x = 0`, the comparison
-theorems identify the pro-étale supported restriction of `K_n ⊠ D_X K_n` with the étale one on the
-classical model, and a morphism of perfect `𝒪_E`-complexes vanishing modulo every `π_E^n`
-vanishes. -/
+restriction `ρ_P`, `P = K ⊠ D_X K`, vanishes.
+
+This is the passage `ℚ̄_ℓ = colim_E E`, `E = 𝒪_E[1/ℓ]`, `𝒪_E = lim_n 𝒪_E / π_E^n`: `K` descends
+to a finite subextension `E` and has an integral model `K₀` over `𝒪_E`
+(`ProEtale.exists_padicAlgCl_iso_integralModel`, blueprints `sk-thm-sfb-qlbar-two-colimit` and
+`sk-lem-tf-rational-model`), and the comparison theorems transport the vanishing from the
+reductions of `K₀` (`upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_integralModel`).
+-/
 theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_restrictionZero
     [IsAlgClosed k] [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀]
     (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : 1 ≤ m)
@@ -114,10 +154,15 @@ theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_restriction
     (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (z : RationalPoint F.F)
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (z ≫ F.ι)).obj K))
-    (_ : Etale.CurveLocalModel.RestrictionZero k ℓ) :
+    (h : Etale.CurveLocalModel.RestrictionZero k ℓ) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
-      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 :=
-  sorry
+      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  have hK₀ := ProEtale.exists_padicAlgCl_iso_integralModel X.left ℓ K
+  exact upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_integralModel hΦ hm v F z hK
+    hK₀.choose hK₀.choose_spec.choose hK₀.choose_spec.choose_spec.some h
 
 end Correspondence
 
