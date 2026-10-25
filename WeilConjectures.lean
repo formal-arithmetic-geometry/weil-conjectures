@@ -12074,6 +12074,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExcha
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeShift
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
@@ -13085,7 +13086,9 @@ public import WeilConjectures.TraceFormula.Specialization.ConstantFamilyUnitAffi
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.Defect
 public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
+public import WeilConjectures.TraceFormula.Specialization.DefectGenerators
 public import WeilConjectures.TraceFormula.Specialization.DefectLocal
+public import WeilConjectures.TraceFormula.Specialization.DefectTriangulated
 public import WeilConjectures.TraceFormula.Specialization.DeformationModel
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
