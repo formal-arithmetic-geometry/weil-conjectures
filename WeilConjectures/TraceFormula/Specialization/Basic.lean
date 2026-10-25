@@ -314,6 +314,11 @@ theorem sp_traceClass_eq_zero
     (h : IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support).obj
       (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))))) :
     T.sp (c.traceClass F) = 0 := by
+  -- the left adjoint `Lι'^*` preserves zero morphisms; this instance is much cheaper to find
+  -- than the one through the triangulated structure of `Dᵇc`
+  have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      F'.ι).PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint _
   rw [sp_traceClass, T.traceMap_specialization, h.eq_of_tgt (T.βc.app _) 0, zero_comp,
     comp_zero, comp_zero, comp_zero, Adjunction.homEquiv_counit, Functor.map_zero, zero_comp,
     comp_zero]
