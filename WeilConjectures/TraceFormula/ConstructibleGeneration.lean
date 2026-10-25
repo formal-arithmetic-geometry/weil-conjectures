@@ -396,8 +396,7 @@ theorem triangEnvelope_lisseGenerator_lowerStar (C : TopologicalSpace.Closeds Y.
     intro Z _ _ _ g _ hg N
     let r := overReductionι Z
     have : IsClosedImmersion (r ≫ g).left := by rw [Over.comp_left]; infer_instance
-    have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ r
+    have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction ℓ r
     refine ObjectProperty.prop_of_iso _
       ((boundedConstructibleLowerStar ℓ g).mapIso
         (asIso ((boundedConstructibleUpperStarLowerStarAdjunction

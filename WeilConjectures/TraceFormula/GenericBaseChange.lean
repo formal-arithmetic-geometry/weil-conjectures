@@ -110,7 +110,7 @@ theorem isIso_boundedConstructibleBaseChange_prodMap_of_isProper (p : U ⟶ Y) [
     (IsPullback.of_prod_snd_with_id p X)
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 /-- **Pasting of base change along a product projection**: if the base change morphisms of the
 squares `commSq_prodMap_snd i` and `commSq_prodMap_snd p` are isomorphisms, so is the one of

@@ -43,11 +43,14 @@ instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
   unfold boundedConstructibleLowerStar
   infer_instance
 
-/-- The derived pullback `Lf^*` on bounded constructible complexes is additive. -/
+/-- The derived pullback `Lf^*` on bounded constructible `ℚ̄_ℓ`-complexes is additive: it is a left
+adjoint. -/
 instance additive_boundedConstructibleUpperStar (f : X ⟶ Y) :
-    (boundedConstructibleUpperStar Λ ℓ f).Additive := by
-  unfold boundedConstructibleUpperStar
-  infer_instance
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).Additive := by
+  refine ⟨fun {_ _ g g'} ↦ ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).homEquiv
+    _ _).injective ?_⟩
+  simp only [Adjunction.homEquiv_unit, Functor.map_add, Preadditive.comp_add,
+    Adjunction.unit_naturality, Preadditive.add_comp]
 
 /-- The extension by zero along an open immersion on bounded constructible complexes is
 additive. -/
