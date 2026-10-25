@@ -42,6 +42,7 @@ namespace AlgebraicGeometry
 
 section ChartMap
 
+/-- The structure map `A → A[T]/(xT - y)` sends `r` to the class of the constant `r`. -/
 lemma blowupChart_algebraMap_apply {A : Type u} [CommRing A] (x y r : A) :
     algebraMap A (blowupChart x y) r = Ideal.Quotient.mk _ (C r) :=
   rfl
@@ -58,11 +59,14 @@ noncomputable def blowupChartMap : blowupChart x y →+* blowupChart x' y' :=
     rw [RingHom.comp_apply, Ideal.Quotient.eq_zero_iff_mem]
     exact Ideal.mem_span_singleton'.mpr ⟨q.map f, by simp [hx, hy]⟩)
 
+/-- `blowupChartMap` on the class of a polynomial `p` is the class of `p.map f`. -/
 @[simp]
 lemma blowupChartMap_mk (p : A[X]) :
     blowupChartMap f hx hy (Ideal.Quotient.mk _ p) = Ideal.Quotient.mk _ (p.map f) :=
   rfl
 
+/-- `blowupChartMap f` is compatible with the structure maps `A → A[T]/(xT - y)` and
+`A' → A'[T]/(x'T - y')`. -/
 lemma blowupChartMap_comp_algebraMap :
     (blowupChartMap f hx hy).comp (algebraMap A (blowupChart x y)) =
       (algebraMap A' (blowupChart x' y')).comp f := by
@@ -129,7 +133,8 @@ lemma blowupChart_away_hom_ext {T : Type u} [CommRing T]
     (h₁ : m.comp (Localization.awayMap (blowupChartMap f.hom hx hy) uA) =
       m'.comp (Localization.awayMap (blowupChartMap f.hom hx hy) uA))
     (h₂ : m.comp ((algebraMap (blowupChart x' y') _).comp (algebraMap R (blowupChart x' y'))) =
-      m'.comp ((algebraMap (blowupChart x' y') _).comp (algebraMap R (blowupChart x' y')))) : m = m' := by
+      m'.comp ((algebraMap (blowupChart x' y') _).comp (algebraMap R (blowupChart x' y')))) :
+    m = m' := by
   apply IsLocalization.ringHom_ext (Submonoid.powers (blowupChartMap f.hom hx hy uA))
   apply Ideal.Quotient.ringHom_ext
   apply Polynomial.ringHom_ext

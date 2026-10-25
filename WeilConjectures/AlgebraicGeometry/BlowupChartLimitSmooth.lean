@@ -72,21 +72,26 @@ section AffineSubst
 variable {R₀ : Type u} [CommRing R₀]
 
 /-- The affine change of coordinates `X₀ ↦ X₀ + aX₁ + c₀`, `X₁ ↦ X₁ + c₁` of the plane. -/
-noncomputable def affineSubst (a c₀ c₁ : R₀) : MvPolynomial (Fin 2) R₀ →ₐ[R₀] MvPolynomial (Fin 2) R₀ :=
+noncomputable def affineSubst (a c₀ c₁ : R₀) :
+    MvPolynomial (Fin 2) R₀ →ₐ[R₀] MvPolynomial (Fin 2) R₀ :=
   aeval ![X 0 + C a * X 1 + C c₀, X 1 + C c₁]
 
+/-- `affineSubst a c₀ c₁` sends `X₀` to `X₀ + aX₁ + c₀`. -/
 @[simp]
 lemma affineSubst_X_zero (a c₀ c₁ : R₀) : affineSubst a c₀ c₁ (X 0) = X 0 + C a * X 1 + C c₀ := by
   simp [affineSubst]
 
+/-- `affineSubst a c₀ c₁` sends `X₁` to `X₁ + c₁`. -/
 @[simp]
 lemma affineSubst_X_one (a c₀ c₁ : R₀) : affineSubst a c₀ c₁ (X 1) = X 1 + C c₁ := by
   simp [affineSubst]
 
+/-- `affineSubst a c₀ c₁` fixes the constants. -/
 @[simp]
 lemma affineSubst_C (a c₀ c₁ r : R₀) : affineSubst a c₀ c₁ (C r) = C r := by
   simp [affineSubst]
 
+/-- The inverse affine change of coordinates, as a right inverse. -/
 lemma affineSubst_comp_affineSubst_neg (a c₀ c₁ : R₀) :
     (affineSubst a c₀ c₁).comp (affineSubst (-a) (-c₀ + a * c₁) (-c₁)) = AlgHom.id _ _ := by
   apply MvPolynomial.algHom_ext
@@ -96,6 +101,7 @@ lemma affineSubst_comp_affineSubst_neg (a c₀ c₁ : R₀) :
     ring
   · simp [affineSubst]
 
+/-- The inverse affine change of coordinates, as a left inverse. -/
 lemma affineSubst_neg_comp_affineSubst (a c₀ c₁ : R₀) :
     (affineSubst (-a) (-c₀ + a * c₁) (-c₁)).comp (affineSubst a c₀ c₁) = AlgHom.id _ _ := by
   apply MvPolynomial.algHom_ext
@@ -105,6 +111,7 @@ lemma affineSubst_neg_comp_affineSubst (a c₀ c₁ : R₀) :
     ring
   · simp [affineSubst]
 
+/-- Affine changes of coordinates of the plane are bijective. -/
 lemma bijective_affineSubst (a c₀ c₁ : R₀) : Function.Bijective (affineSubst a c₀ c₁) := by
   refine Function.bijective_iff_has_inverse.mpr ⟨affineSubst (-a) (-c₀ + a * c₁) (-c₁), ?_, ?_⟩
   · intro p
@@ -116,8 +123,8 @@ lemma bijective_affineSubst (a c₀ c₁ : R₀) : Function.Bijective (affineSub
 étale ring map. -/
 lemma etale_comp_affineSubst {A : Type u} [CommRing A] {g : MvPolynomial (Fin 2) R₀ →+* A}
     (hg : g.Etale) (a c₀ c₁ : R₀) : (g.comp (affineSubst a c₀ c₁).toRingHom).Etale :=
-  RingHom.Etale.stableUnderComposition _ _ (RingHom.Etale.of_bijective (bijective_affineSubst _ _ _))
-    hg
+  RingHom.Etale.stableUnderComposition _ _
+    (RingHom.Etale.of_bijective (bijective_affineSubst _ _ _)) hg
 
 end AffineSubst
 
@@ -129,7 +136,8 @@ theorem isStandardSmoothOfRelativeDimension_blowupChart_away {k : Type u} [CommR
     {A : CommRingCat.{u}} (g : CommRingCat.of (MvPolynomial (Fin 2) k) ⟶ A) (hg : g.hom.Etale)
     {x y : A} (hx : g.hom (X 0) = x) (hy : g.hom (X 1) = y) (uA : blowupChart x y) :
     ((algebraMap (blowupChart x y) (Localization.Away uA)).comp
-      ((algebraMap A (blowupChart x y)).comp (g.hom.comp MvPolynomial.C))).IsStandardSmoothOfRelativeDimension 2 := by
+      ((algebraMap A (blowupChart x y)).comp
+        (g.hom.comp MvPolynomial.C))).IsStandardSmoothOfRelativeDimension 2 := by
   have hsq := isPushout_blowupChart_plane g x y hx hy
   have hψ : (planeToBlowupChart g x y).Etale := etale_of_isPushout hsq hg
   have heq : (algebraMap A (blowupChart x y)).comp (g.hom.comp MvPolynomial.C) =
@@ -138,7 +146,8 @@ theorem isStandardSmoothOfRelativeDimension_blowupChart_away {k : Type u} [CommR
     have := congr($(hsq.w).hom (MvPolynomial.C r))
     simpa [planeChartMap] using this
   rw [heq]
-  have h₁ : (algebraMap (blowupChart x y) (Localization.Away uA)).IsStandardSmoothOfRelativeDimension 0 :=
+  have h₁ : (algebraMap (blowupChart x y)
+      (Localization.Away uA)).IsStandardSmoothOfRelativeDimension 0 :=
     RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway uA
   have h₂ : (planeToBlowupChart g x y).IsStandardSmoothOfRelativeDimension 0 :=
     RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero.mp hψ
