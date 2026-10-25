@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 
@@ -22,7 +23,9 @@ K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_E ⧸ ℓⁿ : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{(𝒪
 sends bounded constructible complexes to bounded constructible complexes
 (`ProEtale.boundedConstructible_derivedExtendScalars_integersModPowReduction`), hence restricts to
 a functor `D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, 𝒪_E ⧸ ℓⁿ)`
-(`ProEtale.boundedConstructibleIntegersModPowReduction`).
+(`ProEtale.boundedConstructibleIntegersModPowReduction`), which commutes with the derived pullback
+along morphisms of separated schemes of finite type over a field
+(`ProEtale.CondensedRing.boundedConstructibleUpperStarIntegersModPowReductionIso`).
 
 The proof uses the reduction triangle `K --ℓⁿ--> K ⟶ K ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ K[1]` of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction`: the bounded
@@ -190,3 +193,41 @@ noncomputable def boundedConstructibleIntegersModPowReductionCompatibility :
 end Reduction
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [TopologicalSpace.NoetherianSpace X.left]
+  [TopologicalSpace.NoetherianSpace Y.left] (f : X ⟶ Y)
+
+/-- **The reduction modulo `ℓⁿ` commutes with the pullback on bounded constructible
+complexes**: `Lf^*_{𝒪_E} ⋙ (- ⊗ᴸ_{𝒪_E} 𝒪_E ⧸ ℓⁿ) ≅ (- ⊗ᴸ_{𝒪_E} 𝒪_E ⧸ ℓⁿ) ⋙ Lf^*_{𝒪_E ⧸ ℓⁿ}`, the
+restriction of `ProEtale.integersModPowReductionUpperStarIso` along the fully faithful
+inclusions. -/
+noncomputable def boundedConstructibleUpperStarIntegersModPowReductionIso :
+    boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+        boundedConstructibleIntegersModPowReduction X.left ℓ E n ≅
+      boundedConstructibleIntegersModPowReduction Y.left ℓ E n ⋙
+        boundedConstructibleUpperStar (Profinite.integersModPowRingObj ℓ E n) ℓ f :=
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _
+        (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility _ ℓ f) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (integersModPowReductionUpperStarIso ℓ E n f.left) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (boundedConstructibleIntegersModPowReductionCompatibility Y.left ℓ E n).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility _ ℓ f).symm ≪≫
+      (Functor.associator _ _ _).symm)
+
+end AlgebraicGeometry.ProEtale.CondensedRing
