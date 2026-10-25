@@ -9178,6 +9178,7 @@ public import WeilConjectures.Mathlib.Algebra.Module.Submodule.Defs
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
+public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Expand
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators
@@ -12686,16 +12687,20 @@ public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.TraceFormula.CompactTrace
 public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
+public import WeilConjectures.TraceFormula.CurveSupportedPairing
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.FiniteEtaleStalkTrace
 public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.TraceFormula.FixedPointAlgebra
+public import WeilConjectures.TraceFormula.FixedPointComponent
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
@@ -12784,6 +12789,7 @@ public import WeilConjectures.TraceFormula.StalkDualizable
 public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.SupportedClass
 public import WeilConjectures.TraceFormula.SupportedPairing
+public import WeilConjectures.TraceFormula.SupportedRestriction
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
 public import WeilConjectures.TraceFormula.TraceClassDiagonal
