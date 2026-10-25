@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.BlowupRestrictionCurve
 public import WeilConjectures.RingTheory.BlowupChartData
 public import WeilConjectures.RingTheory.BlowupChartRegularity
 public import WeilConjectures.AlgebraicGeometry.RegularDivisorSpec
+public import WeilConjectures.AlgebraicGeometry.RegularImmersionSpecQuotient
 public import WeilConjectures.RingTheory.FiniteOverStrictlyHenselian
 
 /-!
@@ -274,30 +275,8 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
   have : IsRegular Z.left := isRegular_spec (S := D.Rx)
   have : IsLocallyNoetherian Z.left :=
     inferInstanceAs (IsLocallyNoetherian (Spec (.of D.Rx)))
-  have hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX) := by
-    have hspan : Ideal.span {D.hh, D.xx} = Ideal.span {D.hh} ⊔ Ideal.span {D.xx} := by
-      rw [← Ideal.span_union, Set.singleton_union]
-    have hI : Ideal.span {D.hh} ≤ Ideal.span {D.hh, D.xx} := hspan ▸ le_sup_left
-    have hJ : Ideal.span {D.xx} ≤ Ideal.span {D.hh, D.xx} := hspan ▸ le_sup_right
-    have hp := isPullback_SpecMap_of_isPushout _ _ _ _ (isPushout_quotient_factor hI hJ hspan.le)
-    have hfst : pullback.fst iX iY ≫ iX = hp.isoPullback.inv ≫
-        Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {D.hh, D.xx}))) := by
-      rw [← hp.isoPullback_inv_fst, Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
-        Ideal.Quotient.factor_comp_mk]
-    have hreg : IsRegularImmersion 2
-        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {D.hh, D.xx})))) := by
-      have hle : Ideal.span {D.hh, D.xx} ≤ Ideal.ofList [D.xx, D.hh] :=
-        Ideal.span_le.mpr fun r hr ↦ Ideal.subset_span (by
-          rcases hr with rfl | rfl <;> simp)
-      refine isRegularImmersion_specMap two_ne_zero _ Ideal.Quotient.mk_surjective [D.xx, D.hh]
-        rfl (D.isWeaklyRegular hm) ?_ 1 (map_one _) fun a ha ↦ ?_
-      · rw [Ideal.mk_ker]
-        exact Ideal.span_le.mpr fun r hr ↦ Ideal.subset_span (by simpa [or_comm] using hr)
-      · rw [Ideal.mk_ker] at ha
-        rw [one_mul]
-        exact hle ha
-    rw [hfst]
-    infer_instance
+  have hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX) :=
+    isRegularImmersion_pullback_fst_specMap_quotient (D.isWeaklyRegular hm)
   have hUY : (D.UY : Set (Spec (.of D.Rx))) = (Set.range iY)ᶜ := by
     simp only [iY]
     erw [range_specMap_quotient]
