@@ -104,10 +104,6 @@ lemma τY_ι : M.τY hsq ≫ ι = M.ιY ≫ M.τG :=
 lemma τY_d : M.τY hsq ≫ d = M.yB ≫ M.τB :=
   hsq.lift_snd _ _ _
 
-/-- `Y = F ×_X B`: the square `τ_Y ≫ d = y_B ≫ τ_B` is cartesian. -/
-lemma isPullback_τY : IsPullback (M.τY hsq) M.yB d M.τB :=
-  sorry
-
 /-- `G = X ×_{X × X} T`: the square `τ_G ≫ graph = a ≫ τ` is cartesian. -/
 lemma isPullback_τG : IsPullback M.τG M.a M.graph M.τ :=
   IsPullback.of_hasPullback M.graph M.τ
@@ -115,6 +111,12 @@ lemma isPullback_τG : IsPullback M.τG M.a M.graph M.τ :=
 /-- `B = X ×_{X × X} T`: the square `τ_B ≫ diagonal = b ≫ τ` is cartesian. -/
 lemma isPullback_τB : IsPullback M.τB M.b (pullback.diagonal M.f) M.τ :=
   IsPullback.of_hasPullback (pullback.diagonal M.f) M.τ
+
+/-- `Y = F ×_X B`: the square `τ_Y ≫ d = y_B ≫ τ_B` is cartesian. -/
+lemma isPullback_τY : IsPullback (M.τY hsq) M.yB d M.τB := by
+  refine IsPullback.of_right ?_ (M.τY_d hsq) hsq
+  rw [M.τY_ι hsq, M.isPullback_τB.w]
+  exact M.isPullback_ιY.paste_horiz M.isPullback_τG
 
 end CurveLocalModel
 
