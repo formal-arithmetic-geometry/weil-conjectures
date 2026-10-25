@@ -51,7 +51,8 @@ extensions by zero of lisse sheaves:
 
 The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally closed immersion
 into an affine space `𝔸ⁿ_S`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) is `sorry`ed: it is Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) is `sorry`ed: it is
+Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
 `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices, derived completeness and the Milnor sequence
 (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). The reductions also use the proper
 exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
