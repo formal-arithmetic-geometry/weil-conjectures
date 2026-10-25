@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullbac
 Let `b : B ⟶ T` be a morphism of schemes, `a : G ⟶ T` and `y : Y ⟶ B` closed immersions with
 `b⁻¹(G) ⊆ Y`. For a bounded below complex `P` of étale sheaves on `T`, the *supported restriction*
 `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_Y(B, b^* P)` is the pullback of sections with supports along `b`
-(`AlgebraicGeometry.Etale.supportedRestrictionMap`, blueprint `det-tf-supported-restriction`,
+(`AlgebraicGeometry.Etale.sectionsWithSupportRestriction`, blueprint `det-tf-supported-restriction`,
 item 2: the ordinary pullback along `b` of the support object, followed by the exchange to local
 cohomology with support in the intersection). It is the first component of the morphism of
 localization triangles
@@ -27,7 +27,7 @@ RΓ_Y(B, b^*P) ⟶ RΓ(B, b^*P) ⟶ RΓ(B ∖ Y, b^*P) ⟶ RΓ_Y(B, b^*P)[1]
 the connecting maps are isomorphisms and identify `ρ_{a,b}`, shifted by one, with the ordinary
 restriction `r` (blueprint `det-tf-restriction-zero-localization`, item (iii)); in particular
 `ρ_{a,b} = 0` if and only if `r = 0`
-(`AlgebraicGeometry.Etale.supportedRestrictionMap_eq_zero_iff`).
+(`AlgebraicGeometry.Etale.sectionsWithSupportRestriction_eq_zero_iff`).
 
 -/
 
@@ -75,7 +75,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 `det-tf-supported-restriction`, item 2) along `b : B ⟶ T`, for closed immersions `a : G ⟶ T` and
 `y : Y ⟶ B` with `b⁻¹(G) ⊆ Y`: the pullback of sections with supports, the first component of the
 morphism of localization triangles `sectionsWithSupportTrianglePullback`. -/
-noncomputable def supportedRestrictionMap
+noncomputable def sectionsWithSupportRestriction
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A)) :
     ((sectionsWithSupportTriangle A a).obj P).obj₁ ⟶
       ((sectionsWithSupportTriangle A y).obj
@@ -96,12 +96,12 @@ item (iii)): if `RΓ(T, P) = 0` and `RΓ(B, b^* P) = 0`, the localization triang
 supported restriction `ρ_{a,b}`, shifted by one, with the restriction
 `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ Y, b^* P)`; in particular `ρ_{a,b} = 0` if and only if this restriction
 is zero. -/
-theorem supportedRestrictionMap_eq_zero_iff
+theorem sectionsWithSupportRestriction_eq_zero_iff
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
     (hT : IsZero ((sectionsWithSupportTriangle A a).obj P).obj₂)
     (hB : IsZero ((sectionsWithSupportTriangle A y).obj
       ((Functor.mapDerivedCategoryPlus (b)^*[A]).obj P)).obj₂) :
-    supportedRestrictionMap A b a y h P = 0 ↔ puncturedRestrictionMap A b a y h P = 0 :=
+    sectionsWithSupportRestriction A b a y h P = 0 ↔ puncturedRestrictionMap A b a y h P = 0 :=
   hom₁_eq_zero_iff_hom₃_eq_zero _ (sectionsWithSupportTriangle_obj_distinguished A a P)
     (sectionsWithSupportTriangle_obj_distinguished A y _) hT hB
 

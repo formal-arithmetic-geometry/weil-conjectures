@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+public import WeilConjectures.AlgebraicGeometry.Sites.Cospecialization
 
 /-!
 # Functoriality of the strict localization
@@ -173,14 +173,6 @@ lemma strictLocalizationMap_comp_strictLocalizationCone_π_app
           ((PointedEtaleNeighborhood.pullback g s').obj
             ((AffinePointedEtaleNeighborhood.ι _).obj x)) ≫ pullback.fst x.obj.1.hom g :=
   (isLimitStrictLocalizationCone (s' ≫ g)).fac _ x
-
-/-- The leg of the limit cone of `S'_(s')` at a pointed étale neighbourhood `(V, v)`, followed by
-the structure morphism `V ⟶ S'`, is the structure morphism `S'_(s') ⟶ S'`. -/
-@[reassoc (attr := simp)]
-lemma strictLocalizationConeAll_π_app_hom (s : Spec (.of Ω) ⟶ S)
-    (y : PointedEtaleNeighborhood s) :
-    (strictLocalizationConeAll s).π.app y ≫ y.1.hom = strictLocalizationToBase s :=
-  (strictLocalizationConeAll s).w (PointedEtaleNeighborhood.toBase s y)
 
 /-- The morphism `strictLocalizationMap g s'` lies over `g`.
 

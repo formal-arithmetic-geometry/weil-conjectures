@@ -20,7 +20,8 @@ the strictly local model `T` of a `CurveLocalModel` (the strict localization of 
 ```
 ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_y(B, b^* P)
 ```
-is zero in `D(Λ)` (`AlgebraicGeometry.Etale.CurveLocalModel.supportedRestrictionMap_eq_zero`).
+is zero in `D(Λ)`
+(`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`).
 In the blueprint `L = 𝔻_X K`; the argument uses only that `L` is constructible of finite
 Tor-dimension.
 
@@ -55,7 +56,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 invertible in `k`, a finite commutative `ℓ`-primary ring `Λ`, `L, K ∈ D^b_{ctf}(X, Λ)` with
 `K_ȳ = 0` and `P = (L ⊠ K)|_T`, the supported restriction
 `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_y(B, b^* P)` is zero in `D(Λ)`. -/
-theorem supportedRestrictionMap_eq_zero (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
+theorem sectionsWithSupportRestriction_eq_zero (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hL : DerivedCategory.boundedConstructibleFiniteTor Λ M.X L)
@@ -64,9 +65,10 @@ theorem supportedRestrictionMap_eq_zero (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (�
     (P : DerivedCategory.Plus (Sheaf M.T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (eP : P.obj ≅ (L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj
       (externalProduct (ModuleCat.{u + 1} Λ) M.f M.f L K)) :
-    supportedRestrictionMap (ModuleCat.{u + 1} Λ) M.b M.a M.yB M.openComplement_yB_le P = 0 := by
+    sectionsWithSupportRestriction (ModuleCat.{u + 1} Λ) M.b M.a M.yB M.openComplement_yB_le P =
+      0 := by
   -- Step 1: localization, and the factorization through `T ∖ (G ∪ V)`
-  refine supportedRestrictionMap_eq_zero_of_restriction _ M.b M.a M.yB _ M.O inf_le_left M.ψ
+  refine sectionsWithSupportRestriction_eq_zero_of_restriction _ M.b M.a M.yB _ M.O inf_le_left M.ψ
     M.ψ_comp_ι P (M.isZero_obj₂_a L K hKy P eP) (M.isZero_obj₂_yB L K hKy P eP) ?_
   -- Step 2: the prime-to-`ℓ` covers
   obtain ⟨S', aS', _, s', hs', π, D', H', B', dD', dH', dB', _, _, _, _, _, _, hH', hD', hB',

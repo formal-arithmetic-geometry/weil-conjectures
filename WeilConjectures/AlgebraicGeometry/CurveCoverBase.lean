@@ -21,8 +21,9 @@ Small lemmas used in the covering step of blueprint `det-tf-restriction-zero-cov
   scheme is that of the ring of sections over an affine open covering it.
 * `AlgebraicGeometry.isIntegral_of_smooth_of_irreducibleSpace`: an irreducible scheme smooth over
   a field is integral.
-* `AlgebraicGeometry.isDedekindDomain_of_isAffineOpen`: the ring of sections over an affine open
-  of a locally noetherian normal integral scheme of dimension `≤ 1` is a Dedekind domain.
+* `AlgebraicGeometry.isDedekindDomain_of_isAffineOpen_of_isIntegrallyClosed_stalk`: the ring
+  of sections over an affine open of a locally noetherian normal integral scheme of dimension
+  `≤ 1` is a Dedekind domain.
 * `IsLocalRing.eq_maximalIdeal_of_map_eq`: an ideal mapping onto the maximal ideal under a ring
   isomorphism of local rings is the maximal ideal.
 -/
@@ -68,7 +69,8 @@ lemma isIntegral_of_smooth_of_irreducibleSpace {K : Type u} [Field K] {X : Schem
 
 /-- The ring of sections over a nonempty affine open of a locally noetherian integral scheme with
 integrally closed local rings is a Dedekind domain if it has dimension at most one. -/
-lemma isDedekindDomain_of_isAffineOpen {X : Scheme.{u}} [IsIntegral X] [IsLocallyNoetherian X]
+lemma isDedekindDomain_of_isAffineOpen_of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsIntegral X]
+    [IsLocallyNoetherian X]
     {U : X.Opens} (hU : IsAffineOpen U) [Nonempty U]
     (hint : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))
     (hdim : ringKrullDim Γ(X, U) ≤ 1) : IsDedekindDomain Γ(X, U) := by

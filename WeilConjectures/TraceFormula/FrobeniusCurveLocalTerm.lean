@@ -176,7 +176,7 @@ diagonal, covers of degree prime to `ℓ`, and the blowup argument of
 correspondence and on `P`.
 
 The finite-coefficient statement is
-`AlgebraicGeometry.Etale.CurveLocalModel.supportedRestrictionMap_eq_zero`; the transport to
+`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`; the transport to
 `ℚ̄_ℓ` is `upperStar_map_supportedRestriction_frobeniusGraph_eq_zero_of_restrictionZero`. -/
 theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)

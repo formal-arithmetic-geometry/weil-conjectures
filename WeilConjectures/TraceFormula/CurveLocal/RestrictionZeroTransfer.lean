@@ -13,7 +13,8 @@ public import WeilConjectures.TraceFormula.CurveSupportedPairing
 # From finite coefficients to `ℚ̄_ℓ`: the supported restriction is zero for Frobenius
 
 Blueprint `sk-lem-tf-curve-restriction-zero` is proved on the classical étale models with finite
-`ℓ`-primary coefficients (`AlgebraicGeometry.Etale.CurveLocalModel.supportedRestrictionMap_eq_zero`,
+`ℓ`-primary coefficients
+(`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`,
 packaged for all models and coefficient rings as
 `AlgebraicGeometry.Etale.CurveLocalModel.restrictionZero`). Its last step, as in the blueprint
 proof ("the comparison theorems transport this identity back to the proétale formulation"),
@@ -52,14 +53,16 @@ def RestrictionZero : Prop :=
       ∀ (P : DerivedCategory.Plus (Sheaf M.T.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         (P.obj ≅ (L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj
           (externalProduct (ModuleCat.{u + 1} Λ) M.f M.f L K)) →
-        supportedRestrictionMap (ModuleCat.{u + 1} Λ) M.b M.a M.yB M.openComplement_yB_le P = 0
+        sectionsWithSupportRestriction (ModuleCat.{u + 1} Λ) M.b M.a M.yB
+          M.openComplement_yB_le P = 0
 
 variable {k ℓ}
 
 /-- `RestrictionZero` holds for every prime `ℓ` invertible in `k` (blueprint
 `sk-lem-tf-curve-restriction-zero`). -/
 theorem restrictionZero [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) : RestrictionZero k ℓ :=
-  fun M _ _ _ hΛ L K hL hK hKy P eP ↦ M.supportedRestrictionMap_eq_zero ℓ hℓ hΛ L K hL hK hKy P eP
+  fun M _ _ _ hΛ L K hL hK hKy P eP ↦
+    M.sectionsWithSupportRestriction_eq_zero ℓ hℓ hΛ L K hL hK hKy P eP
 
 end AlgebraicGeometry.Etale.CurveLocalModel
 

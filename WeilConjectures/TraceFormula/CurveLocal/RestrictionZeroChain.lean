@@ -23,7 +23,7 @@ and the restriction
 RΓ(O, P) ⟶ RΓ(U, P|_U)
 ```
 vanishes, then `ρ_{a,b} = 0`
-(`AlgebraicGeometry.Etale.supportedRestrictionMap_eq_zero_of_restriction`).
+(`AlgebraicGeometry.Etale.sectionsWithSupportRestriction_eq_zero_of_restriction`).
 
 This is the reduction step of the proof of blueprint `sk-lem-tf-curve-restriction-zero`
 (`det-tf-restriction-zero-localization` (iii)): by the localization triangles `ρ_{a,b}` vanishes
@@ -93,15 +93,15 @@ include hw hψ in
 `sk-lem-tf-curve-restriction-zero`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
 `RΓ(O, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ O` vanishes, where `O ⊆ T ∖ G`, then the
 supported restriction `ρ_{a,b}` vanishes. -/
-theorem supportedRestrictionMap_eq_zero_of_restriction
+theorem sectionsWithSupportRestriction_eq_zero_of_restriction
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
     (hT : IsZero ((sectionsWithSupportTriangle A a).obj P).obj₂)
     (hB : IsZero ((sectionsWithSupportTriangle A y).obj
       ((Functor.mapDerivedCategoryPlus (b)^*[A]).obj P)).obj₂)
     (hr : (sectionsRestriction A (ψ ≫ O.ι) (V := Scheme.Etale.mk O.ι)
       (W := Scheme.Etale.mk (𝟙 _)) ψ (Category.id_comp _).symm).app P.obj = 0) :
-    supportedRestrictionMap A b a y h P = 0 := by
-  rw [supportedRestrictionMap_eq_zero_iff A b a y h P hT hB, puncturedRestrictionMap,
+    sectionsWithSupportRestriction A b a y h P = 0 := by
+  rw [sectionsWithSupportRestriction_eq_zero_iff A b a y h P hT hB, puncturedRestrictionMap,
     sectionsWithSupportTrianglePullback_app_hom₃]
   -- the restriction to `B ∖ Y`, composed with the identification of the sections over the open
   -- `B ∖ Y` with the global sections of the scheme `B ∖ Y`, is the restriction along

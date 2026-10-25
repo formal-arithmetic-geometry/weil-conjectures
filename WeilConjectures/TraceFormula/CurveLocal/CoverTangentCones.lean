@@ -100,7 +100,8 @@ lemma ΓSpecIso_hom_appLE_mem_asIdeal_iff (ψ : Spec R ⟶ X) {U : X.Opens} (e :
     TopologicalSpace.Opens.mem_inf]
   exact ⟨fun h ↦ h.2, fun h ↦ ⟨trivial, h⟩⟩
 
-lemma appLE_congr_hom {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) :
+private lemma appLE_congr_hom {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : X.Opens)
+    (e : V ≤ f ⁻¹ᵁ U) :
     f.appLE U V e = g.appLE U V (h ▸ e) := by
   subst h
   rfl

@@ -184,7 +184,8 @@ theorem exists_finite_smooth_cover_not_dvd_ramificationIdx {k : Type u} [Field k
     rw [topologicalKrullDim_eq_ringKrullDim_of_isAffineOpen hB
       (Set.eq_univ_of_forall fun _ ↦ trivial), ringKrullDim_eq_of_isIntegral Γ(U, ⊤), hdimA]
   have : Nonempty (⊤ : U.toScheme.Opens) := ⟨⟨yU default, trivial⟩⟩
-  have : IsDedekindDomain Γ(U, ⊤) := isDedekindDomain_of_isAffineOpen hA
+  have : IsDedekindDomain Γ(U, ⊤) :=
+    isDedekindDomain_of_isAffineOpen_of_isIntegrallyClosed_stalk hA
     (fun x ↦ IsRegular.isIntegrallyClosed_stalk x) hdimA.le
   -- `C` is a smooth curve
   have hCsm : SmoothOfRelativeDimension 1 (p ≫ U.ι ≫ f) :=
