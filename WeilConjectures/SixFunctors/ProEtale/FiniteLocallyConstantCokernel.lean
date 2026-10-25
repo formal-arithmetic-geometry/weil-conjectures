@@ -94,7 +94,7 @@ theorem isFiniteLocallyConstant_cokernel_of_free {X : Scheme.{u}} {n : ℕ}
       exact (hm j).symm
     refine ⟨ModuleCat.of Λ (N ⧸ LinearMap.range ψ.hom),
       Finite.of_surjective _ (Submodule.mkQ_surjective _), ⟨upperStarCokernelIsoOfEq _ φ ψ
-        (constantSheafCompUpperStarIso_inv_app_comp_map_comp_hom_app _ _ (f i)
+        (constantSheafCompUpperStarMkIdIso_inv_app_comp_map_comp_hom_app _ _ (f i)
           (MorphismProperty.Over.homMk (pullback.lift (𝟙 _) (𝟙 _) rfl)
             (pullback.lift_snd _ _ _)) φ ψ h)⟩⟩
 

@@ -12,14 +12,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 # Pullbacks of constant pro-étale sheaves
 
 For a morphism of schemes `g : Z ⟶ Y`, the pro-étale pullback `g^*` sends the constant sheaf
-`M_Y` to the constant sheaf `M_Z` (`AlgebraicGeometry.ProEtale.constantSheafCompUpperStarIso`):
+`M_Y` to the constant sheaf `M_Z` (`AlgebraicGeometry.ProEtale.constantSheafCompUpperStarMkIdIso`):
 both `constantSheaf ⋙ g^*` and `constantSheaf` are left adjoint to the sections over the
 terminal object, since base change sends the terminal object `Y` of `Y_proét` to `Y ×_Y Z ≅ Z`.
 
 Through this identification, a morphism `φ : M_Y ⟶ N_Y` pulls back to the constant morphism
 `ψ_Z` of a morphism `ψ : M ⟶ N` as soon as the global section map `M ⟶ Γ(Y, N_Y)` of `φ` agrees
 with `ψ` followed by `N ⟶ Γ(Y, N_Y)` after restriction to an object `V ⟶ Y` of `Y_proét` admitting
-a section `Z ⟶ V ×_Y Z` (`constantSheafCompUpperStarIso_inv_app_comp_map_comp_hom_app`). For
+a section `Z ⟶ V ×_Y Z` (`constantSheafCompUpperStarMkIdIso_inv_app_comp_map_comp_hom_app`). For
 sheaves of modules, `g^*` then sends the cokernel of `φ` to the constant sheaf of `N ⧸ ψ(M)`
 (`AlgebraicGeometry.ProEtale.upperStarCokernelIsoOfEq`).
 -/
@@ -67,7 +67,7 @@ noncomputable def lowerStarCompSectionsMkIdIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) 
 
 /-- The pro-étale pullback of a constant sheaf is constant: `g^* (M_Y) ≅ M_Z`. Both sides are
 left adjoint to the sections over the terminal object `Z` of `Z_proét`. -/
-noncomputable def constantSheafCompUpperStarIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+noncomputable def constantSheafCompUpperStarMkIdIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     constantSheaf (ProEt.topology Y) A ⋙ (g)^*[A] ≅ constantSheaf (ProEt.topology Z) A :=
   (((constantSheafAdj (ProEt.topology Y) A (ProEt.isTerminalMkId Y)).comp
       (upperStarLowerStarAdjunction A g)).ofNatIsoRight
@@ -77,17 +77,17 @@ noncomputable def constantSheafCompUpperStarIso {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 /-- The global section map `M ⟶ Γ(Z, N_Z)` of the pullback `g^* φ` of a morphism
 `φ : M_Y ⟶ N_Y` of constant sheaves is the global section map of `φ` followed by the map
 `Γ(Y, N_Y) ⟶ Γ(Z, g^* N_Y) ≅ Γ(Z, N_Z)` induced by the unit of `g^* ⊣ g_*`. -/
-lemma homEquiv_constantSheafCompUpperStarIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) {M N : A}
+lemma homEquiv_constantSheafCompUpperStarMkIdIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) {M N : A}
     (φ : (constantSheaf (ProEt.topology Y) A).obj M ⟶ (constantSheaf (ProEt.topology Y) A).obj N) :
     (constantSheafAdj (ProEt.topology Z) A (ProEt.isTerminalMkId Z)).homEquiv _ _
-      ((constantSheafCompUpperStarIso A g).inv.app M ≫ (g)^*[A].map φ ≫
-        (constantSheafCompUpperStarIso A g).hom.app N) =
+      ((constantSheafCompUpperStarMkIdIso A g).inv.app M ≫ (g)^*[A].map φ ≫
+        (constantSheafCompUpperStarMkIdIso A g).hom.app N) =
     (constantSheafAdj (ProEt.topology Y) A (ProEt.isTerminalMkId Y)).homEquiv _ _ φ ≫
       ((upperStarLowerStarAdjunction A g).unit.app ((constantSheaf _ A).obj N)).hom.app
         (op (ProEt.mk (𝟙 Y))) ≫
       ((g)^*[A].obj ((constantSheaf _ A).obj N)).obj.map (overPullbackObjMkIdIso g).inv.op ≫
-      ((constantSheafCompUpperStarIso A g).hom.app N).hom.app (op (ProEt.mk (𝟙 Z))) := by
-  rw [constantSheafCompUpperStarIso, Adjunction.homEquiv_leftAdjointUniq_inv_app_comp,
+      ((constantSheafCompUpperStarMkIdIso A g).hom.app N).hom.app (op (ProEt.mk (𝟙 Z))) := by
+  rw [constantSheafCompUpperStarMkIdIso, Adjunction.homEquiv_leftAdjointUniq_inv_app_comp,
     Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv]
   dsimp only
   erw [Equiv.trans_apply, Adjunction.homEquiv_naturality_left]
@@ -117,7 +117,7 @@ lemma unit_app_hom_app_mkId_comp_map {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 `φ : M_Y ⟶ N_Y` and `ψ : M ⟶ N`. If, after restriction to some `V ⟶ Y` admitting a lift
 `Z ⟶ V ×_Y Z`, the global section map of `φ` agrees with `ψ` followed by `N ⟶ Γ(Y, N_Y)`, then
 `g^* φ` is identified with the constant morphism `ψ_Z`. -/
-lemma constantSheafCompUpperStarIso_inv_app_comp_map_comp_hom_app {Z X : Scheme.{u}}
+lemma constantSheafCompUpperStarMkIdIso_inv_app_comp_map_comp_hom_app {Z X : Scheme.{u}}
     (g : Z ⟶ X) {V : X.ProEt} (f : V ⟶ ProEt.mk (𝟙 X))
     (t : ProEt.mk (𝟙 Z) ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V) {M N : A}
     (φ : (constantSheaf (ProEt.topology X) A).obj M ⟶ (constantSheaf (ProEt.topology X) A).obj N)
@@ -126,17 +126,17 @@ lemma constantSheafCompUpperStarIso_inv_app_comp_map_comp_hom_app {Z X : Scheme.
         ((constantSheaf _ A).obj N).obj.map f.op =
       ψ ≫ (constantSheafAdj (ProEt.topology X) A (ProEt.isTerminalMkId X)).unit.app N ≫
         ((constantSheaf _ A).obj N).obj.map f.op) :
-    (constantSheafCompUpperStarIso A g).inv.app M ≫ (g)^*[A].map φ ≫
-        (constantSheafCompUpperStarIso A g).hom.app N =
+    (constantSheafCompUpperStarMkIdIso A g).inv.app M ≫ (g)^*[A].map φ ≫
+        (constantSheafCompUpperStarMkIdIso A g).hom.app N =
       (constantSheaf (ProEt.topology Z) A).map ψ := by
   apply ((constantSheafAdj (ProEt.topology Z) A (ProEt.isTerminalMkId Z)).homEquiv _ _).injective
   have hψ : (constantSheaf (ProEt.topology Z) A).map ψ =
-      (constantSheafCompUpperStarIso A g).inv.app M ≫
+      (constantSheafCompUpperStarMkIdIso A g).inv.app M ≫
         (g)^*[A].map ((constantSheaf _ A).map ψ) ≫
-          (constantSheafCompUpperStarIso A g).hom.app N := by
-    rw [← Functor.comp_map, (constantSheafCompUpperStarIso A g).hom.naturality,
+          (constantSheafCompUpperStarMkIdIso A g).hom.app N := by
+    rw [← Functor.comp_map, (constantSheafCompUpperStarMkIdIso A g).hom.naturality,
       Iso.inv_hom_id_app_assoc]
-  rw [hψ, homEquiv_constantSheafCompUpperStarIso, homEquiv_constantSheafCompUpperStarIso,
+  rw [hψ, homEquiv_constantSheafCompUpperStarMkIdIso, homEquiv_constantSheafCompUpperStarMkIdIso,
     unit_app_hom_app_mkId_comp_map_assoc _ _ _ f t,
     Adjunction.homEquiv_unit _ _ _ ((constantSheaf (ProEt.topology X) A).map ψ),
     Adjunction.unit_naturality]
@@ -144,16 +144,16 @@ lemma constantSheafCompUpperStarIso_inv_app_comp_map_comp_hom_app {Z X : Scheme.
   rw [reassoc_of% h]
 
 /-- Solving the identification `g^* φ ≅ ψ_Z` for `g^* φ`. -/
-lemma upperStar_map_eq_of_constantSheafCompUpperStarIso {Z X : Scheme.{u}} (g : Z ⟶ X)
+lemma upperStar_map_eq_of_constantSheafCompUpperStarMkIdIso {Z X : Scheme.{u}} (g : Z ⟶ X)
     {M N : A}
     (φ : (constantSheaf (ProEt.topology X) A).obj M ⟶ (constantSheaf (ProEt.topology X) A).obj N)
     (ψ : M ⟶ N)
-    (h : (constantSheafCompUpperStarIso A g).inv.app M ≫ (g)^*[A].map φ ≫
-        (constantSheafCompUpperStarIso A g).hom.app N =
+    (h : (constantSheafCompUpperStarMkIdIso A g).inv.app M ≫ (g)^*[A].map φ ≫
+        (constantSheafCompUpperStarMkIdIso A g).hom.app N =
       (constantSheaf (ProEt.topology Z) A).map ψ) :
-    (g)^*[A].map φ = (constantSheafCompUpperStarIso A g).hom.app M ≫
+    (g)^*[A].map φ = (constantSheafCompUpperStarMkIdIso A g).hom.app M ≫
       (constantSheaf (ProEt.topology Z) A).map ψ ≫
-        (constantSheafCompUpperStarIso A g).inv.app N := by
+        (constantSheafCompUpperStarMkIdIso A g).inv.app N := by
   rw [← h]
   simp
 
@@ -167,14 +167,14 @@ noncomputable def upperStarCokernelIsoOfEq {Z X : Scheme.{u}} (g : Z ⟶ X)
     {M N : ModuleCat.{u + 1} Λ}
     (φ : (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj M ⟶
       (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj N) (ψ : M ⟶ N)
-    (h : (constantSheafCompUpperStarIso _ g).inv.app M ≫ (g)^*[ModuleCat.{u + 1} Λ].map φ ≫
-        (constantSheafCompUpperStarIso _ g).hom.app N =
+    (h : (constantSheafCompUpperStarMkIdIso _ g).inv.app M ≫ (g)^*[ModuleCat.{u + 1} Λ].map φ ≫
+        (constantSheafCompUpperStarMkIdIso _ g).hom.app N =
       (constantSheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)).map ψ) :
     (g)^*[ModuleCat.{u + 1} Λ].obj (cokernel φ) ≅
       (constantSheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (N ⧸ LinearMap.range ψ.hom)) :=
   PreservesCokernel.iso _ φ ≪≫
-    cokernelIsoOfEq (upperStar_map_eq_of_constantSheafCompUpperStarIso _ g φ ψ h) ≪≫
+    cokernelIsoOfEq (upperStar_map_eq_of_constantSheafCompUpperStarMkIdIso _ g φ ψ h) ≪≫
     cokernelEpiComp _ _ ≪≫ cokernelCompIsIso _ _ ≪≫ (PreservesCokernel.iso _ ψ).symm ≪≫
     (constantSheaf _ _).mapIso (ModuleCat.cokernelIsoRangeQuotient ψ)
 
