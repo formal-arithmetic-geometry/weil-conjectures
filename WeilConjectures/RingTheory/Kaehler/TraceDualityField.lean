@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import WeilConjectures.RingTheory.Kaehler.TraceIdempotent
 public import WeilConjectures.RingTheory.RegularLocalRing.Smooth
 public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
+public import WeilConjectures.RingTheory.Polynomial.LocalizationAway
 
 /-!
 # Duality for the trace of differentials over an arbitrary field
@@ -318,24 +319,6 @@ theorem _root_.IsLocalization.isPrincipalIdealRing {A S : Type*} [CommRing A] [C
     change Ideal.map _ (Ideal.under A J) = _
     rw [ha, Ideal.map_span, Set.image_singleton]
 
-/-- The localization `K[X]_f` of a polynomial ring over an infinite field at a nonzero `f` is not a
-field: `X - c` is not invertible for `f(c) ≠ 0`. -/
-theorem _root_.Polynomial.not_isField_localization_away {K : Type*} [Field K] [Infinite K]
-    {f : K[X]} (hf : f ≠ 0) : ¬ IsField (Localization.Away f) := by
-  obtain ⟨c, hc⟩ : ∃ c, f.eval c ≠ 0 := by
-    by_contra! h
-    exact hf (Polynomial.zero_of_eval_zero f h)
-  let ev : Localization.Away f →+* K :=
-    IsLocalization.Away.lift f (g := Polynomial.evalRingHom c) (isUnit_iff_ne_zero.2 hc)
-  intro hfield
-  have hne : algebraMap K[X] (Localization.Away f) (X - C c) ≠ 0 :=
-    (map_ne_zero_iff _ (IsLocalization.injective _
-      (powers_le_nonZeroDivisors_of_noZeroDivisors hf))).2 (X_sub_C_ne_zero c)
-  obtain ⟨b, hb⟩ := hfield.mul_inv_cancel hne
-  have := congrArg ev hb
-  rw [map_mul, map_one] at this
-  simp [ev, IsLocalization.Away.lift, IsLocalization.lift_eq] at this
-
 open TensorProduct in
 /-- For `R = k[X]_g`, the base change `k' ⊗[k] R` is the localization `k'[X]_g`. -/
 noncomputable def _root_.Polynomial.tensorLocalizationAwayEquiv (k k' : Type*) [Field k]
@@ -395,7 +378,7 @@ theorem bijective_liftKaehlerDifferential_traceDerivation_of_smooth {k R B : Typ
     IsLocalization.isPrincipalIdealRing (Submonoid.powers (g.map (algebraMap k k')))
   have : IsPrincipalIdealRing (k' ⊗[k] R) := .of_surjective e.symm.toRingHom e.symm.surjective
   have hR : ¬ IsField (k' ⊗[k] R) := fun h ↦
-    Polynomial.not_isField_localization_away hg' (MulEquiv.isField h e.symm.toMulEquiv)
+    Polynomial.not_isField_localization_away _ (MulEquiv.isField h e.symm.toMulEquiv)
   refine bijective_liftKaehlerDifferential_traceDerivation_of_perfectField (D.baseChange k') hR
     (1 ⊗ₜ algebraMap k[X] R X) ?_ (exists_smul_eq_smul_baseChange k' hsm)
     (exists_mem_nonZeroDivisors_smul_eq_zero_baseChange k' hunr)
