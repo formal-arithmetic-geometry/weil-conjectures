@@ -75,16 +75,7 @@ theorem derivedGlobalSectionsRestriction_boundaryComplex_eq_zero [ConnectedSpace
     ext1
     exact congrArg compl hpre
   refine Etale.derivedGlobalSectionsRestriction_eq_zero_of_isZero_of_isLocallyConstant Λ zY hzYc _
-    ?_ ?_ ?_ sbar ?_
-  · obtain ⟨a, -, ha, -⟩ := hE.1
-    refine ⟨a, ?_⟩
-    have := ((C.i)_!open[ModuleCat.{u + 1} Λ]).isGE_mapDerivedCategory_obj E a
-    have : (C.boundaryComplex Λ E).IsGE a :=
-      ((C.j)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj
-        (((C.i)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) a
-    have := ((C.iY)^*[ModuleCat.{u + 1} Λ]).isGE_mapDerivedCategory_obj (C.boundaryComplex Λ E) a
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory _ C.iY).app _).symm a
+    ?_ ?_ sbar ?_
   · intro Ω _ _ zbar hz
     refine (C.isZero_leftDerivedUpperStar_boundaryComplex hℓ Λ hΛ E hE (zbar ≫ C.iY) ?_).of_iso
       ((Etale.leftDerivedUpperStarComp _ zbar C.iY).app _).symm
