@@ -78,17 +78,17 @@ lemma isIso_unit_app_of_isZero (K : DerivedCategory (Sheaf X.smallEtaleTopology
   have := isIso_counit_app_of_isZero Λ i K hK
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar
     (ModuleCat.{u + 1} Λ) i
-  let φ : (R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) ≅ K :=
-    (e.app _).symm ≪≫ asIso ((rightDerivedUpperShriekAdjunction _ i).counit.app K)
+  let φ : (R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj K) ≅ K :=
+    (e.app _).symm ≪≫ asIso ((rightDerivedUpperShriekAdjunction Λ i).counit.app K)
   rw [NatTrans.isIso_app_iff_of_iso _ φ.symm]
-  have h := adj.right_triangle_components ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)
+  have h := adj.right_triangle_components ((R(i)^![Λ]).obj K)
   have : IsIso (adj.unit.app ((R((i)_*[ModuleCat.{u + 1} Λ])).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) ≫ (R((i)_*[ModuleCat.{u + 1} Λ])).map
-        (adj.counit.app ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))) := by
+      ((R(i)^![Λ]).obj K)) ≫ (R((i)_*[ModuleCat.{u + 1} Λ])).map
+        (adj.counit.app ((R(i)^![Λ]).obj K))) := by
     rw [h]
     exact IsIso.id _
   exact IsIso.of_isIso_comp_right _ ((R((i)_*[ModuleCat.{u + 1} Λ])).map
-    (adj.counit.app ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)))
+    (adj.counit.app ((R(i)^![Λ]).obj K)))
 
 /-- For an object `K` supported on `Z`, the derived pullback `Li^*` is bijective on morphisms with
 target `K`. -/
@@ -108,19 +108,17 @@ lemma bijective_leftDerivedUpperStar_map_of_isZero
   rw [this]
   exact (Equiv.bijective _).comp (bijective_comp_right_of_isIso _)
 
-omit [Finite Λ] in
 /-- Morphisms from an object supported on `Z` to `L` factor uniquely through the counit
 `Ri_! Ri^! L ⟶ L`. -/
-lemma bijective_comp_counit_of_isZero [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+lemma bijective_comp_counit_of_isZero
     (S : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hS : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj S))
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Function.Bijective (fun f : S ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj L) ↦
-      f ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app L) :=
-  ⟨fun _ f₂ hf ↦ (existsUnique_comp_counit_of_isZero _ i i.openComplement.ι
+    Function.Bijective (fun f : S ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ↦
+      f ≫ (rightDerivedUpperShriekAdjunction Λ i).counit.app L) :=
+  ⟨fun _ f₂ hf ↦ (existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
       i.range_eq_compl_range_openComplement_ι hS (f₂ ≫ _)).unique hf rfl,
-    fun g ↦ (existsUnique_comp_counit_of_isZero _ i i.openComplement.ι
+    fun g ↦ (existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
       i.range_eq_compl_range_openComplement_ι hS g).exists⟩
 
 end Support
@@ -193,7 +191,7 @@ lemma isSupportReflection_supportedRestrictionMap :
   intro S hS
   have := isIso_counit_app_of_isZero Λ i S hS
   exact bijective_comp_of_iso _
-    (asIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app S)).symm
+    (asIso ((rightDerivedUpperShriekAdjunction Λ i).counit.app S)).symm
     (bijective_supportedRestrictionMap_comp Λ i _)
 
 variable (Λ) in
@@ -203,7 +201,7 @@ only if `γ` is a reflection into the objects supported on `Z`. -/
 theorem isIso_supportedClassMap_iff_isSupportReflection
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     IsIso (supportedClassMap Λ i γ) ↔ IsSupportReflection i γ := by
   have hγ := supportedRestrictionMap_comp_map_supportedTranspose Λ i γ
   rw [← supportedClassMap_eq_supportedTranspose] at hγ

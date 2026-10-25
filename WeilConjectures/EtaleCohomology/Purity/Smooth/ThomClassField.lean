@@ -115,7 +115,7 @@ the restriction map `Λ_X ⟶ Ri_! Λ_Z`, a reflection into the objects `Ri_! N`
 lemma isIso_supportedClassMap_of_isIso {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) [IsIso γ] :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) [IsIso γ] :
     IsIso (supportedClassMap Λ i γ) := by
   set a := (R(i)_![ModuleCat.{u + 1} Λ]).map (supportedClassMap Λ i γ)
   have hγ : supportedRestrictionMap Λ i ≫ a = γ :=
@@ -135,13 +135,13 @@ coefficients. -/
 lemma isIso_supportedClassMap_comp_map {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {L L' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) (f : L ⟶ L')
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) (f : L ⟶ L')
     [IsIso f] (hγ : IsIso (supportedClassMap Λ i γ)) :
     IsIso (supportedClassMap Λ i (γ ≫ (R(i)_![ModuleCat.{u + 1} Λ]).map
-      ((R(i)^![ModuleCat.{u + 1} Λ]).map f))) := by
+      ((R(i)^![Λ]).map f))) := by
   have : supportedClassMap Λ i (γ ≫ (R(i)_![ModuleCat.{u + 1} Λ]).map
-      ((R(i)^![ModuleCat.{u + 1} Λ]).map f)) =
-      supportedClassMap Λ i γ ≫ (R(i)^![ModuleCat.{u + 1} Λ]).map f :=
+      ((R(i)^![Λ]).map f)) =
+      supportedClassMap Λ i γ ≫ (R(i)^![Λ]).map f :=
     supportedTranspose_comp Λ i γ _
   rw [this]
   infer_instance
@@ -152,26 +152,26 @@ is one, the open complement of `i` being empty. -/
 lemma isIso_liftCounitOfRangeEqUniv {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (hi : Set.range i.base = Set.univ)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : K ⟶ L)
-    [IsIso φ] : IsIso (liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) i hi φ) := by
+    [IsIso φ] : IsIso (liftCounitOfRangeEqUniv Λ i hi φ) := by
   have : IsEmpty i.openComplement.toScheme := ⟨fun x ↦ x.2 (hi ▸ Set.mem_univ _)⟩
   have := isIso_counit_app_of_isZero Λ i L (isZero_derivedCategory_of_isEmpty _ _ _)
-  have hγ : liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) i hi φ ≫
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app L = φ :=
-    (existsUnique_comp_counit_of_range_eq_univ (ModuleCat.{u + 1} Λ) i hi φ).exists.choose_spec
-  have : IsIso (liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) i hi φ ≫
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app L) := by
+  have hγ : liftCounitOfRangeEqUniv Λ i hi φ ≫
+      (rightDerivedUpperShriekAdjunction Λ i).counit.app L = φ :=
+    (existsUnique_comp_counit_of_range_eq_univ Λ i hi φ).exists.choose_spec
+  have : IsIso (liftCounitOfRangeEqUniv Λ i hi φ ≫
+      (rightDerivedUpperShriekAdjunction Λ i).counit.app L) := by
     rw [hγ]
     infer_instance
-  exact IsIso.of_isIso_comp_right _ ((rightDerivedUpperShriekAdjunction _ i).counit.app L)
+  exact IsIso.of_isIso_comp_right _ ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)
 
 /-- `eqToHom` between objects `Ri_! Ri^! L` and `Ri_! Ri^! L'` with `L = L'` is
 `Ri_! Ri^!` of `eqToHom`. -/
 lemma eqToHom_eq_map_map {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {L L' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (e : L = L') :
     (eqToHom (by rw [e]) : (R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj L) ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-          ((R(i)^![ModuleCat.{u + 1} Λ]).obj L')) =
-      (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![ModuleCat.{u + 1} Λ]).map (eqToHom e)) := by
+        ((R(i)^![Λ]).obj L) ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+          ((R(i)^![Λ]).obj L')) =
+      (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![Λ]).map (eqToHom e)) := by
   subst e
   simp only [eqToHom_refl, CategoryTheory.Functor.map_id]
 
@@ -251,7 +251,7 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord {k : Type u} [F
     rfl
   have hg := isPullback_zeroLocusSubschemeι i₁ (Set.range g) _ hs
   -- the restriction of `∂κ(p^* g₁) ∪ ⋯ ∪ ∂κ(p^* g_c)` to `V(t) ≅ B'` is `∂κ(g₁) ∪ ⋯ ∪ ∂κ(g_c)`
-  have hβ : IsIso (supportedClassMap Λ _ (restrictSupportedClass (ModuleCat.{u + 1} Λ) i₁ _ _ _
+  have hβ : IsIso (supportedClassMap Λ _ (restrictSupportedClass Λ i₁ _ _ _
       hg (leftDerivedUpperStarConstantComplexIso Λ i₁).inv
       (leftDerivedUpperStarTateShiftIso Λ i₁ c) (kummerBoundaryProduct Λ g))) := by
     rw [restrictSupportedClass_kummerBoundaryProduct Λ i₁ g _ (fun _ ↦ rfl) _ hg]
