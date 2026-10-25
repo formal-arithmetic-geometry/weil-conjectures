@@ -37,8 +37,9 @@ natural in `M`. This file constructs it as a natural isomorphism of functors
   in particular its compatibility with changes of coefficients is that of the tensor–Hom
   exchange (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`)
   and of the mate `Rf^! ω_Y ≅ ω_X`.
-- `AlgebraicGeometry.Etale.nonempty_verdierDualRightDerivedLowerShriekIso`
-  (`thm-sf-verdier-exchange`): at finite coefficients, the natural isomorphism exists.
+
+At finite coefficients the existence of the natural isomorphism is
+`AlgebraicGeometry.Etale.nonempty_verdierDual_rightDerivedLowerShriek_natIso`.
 -/
 
 @[expose] public section
@@ -138,39 +139,6 @@ noncomputable def verdierDualRightDerivedLowerShriekShiftIso [IsIso (projectionM
       (shiftFunctor _ (-a)).mapIso ((verdierDualRightDerivedLowerShriekIso A f aY e).app (op M))
 
 end General
-
-section Finite
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (f : X ⟶ Y)
-  (aY : Y ⟶ S) [HasCompactification f] [HasCompactification aY] [HasCompactification (f ≫ aY)]
-
-/-- Blueprint `thm-sf-verdier-exchange`: Verdier-duality exchange.
-
-For `f : X ⟶ Y` separated of finite type over the structure morphism `a_Y : Y ⟶ S` (all of
-`f`, `a_Y` and `a_X = f ≫ a_Y` admitting compactifications, which by Nagata holds for every
-separated finite-type morphism over a quasi-compact quasi-separated base) and a finite
-coefficient ring `Λ`, there is an isomorphism
-
-`𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`,
-
-natural in `M ∈ D(X_ét, Λ)`, with `ω_X = Ra_X^! Λ` and `ω_Y = Ra_Y^! Λ` formed with the
-exceptional inverse image of `def-weil-exceptional-inverse-image` (no admissibility datum is
-assumed). It is `AlgebraicGeometry.Etale.verdierDualRightDerivedLowerShriekIso` for the
-composition isomorphism of `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`,
-the projection formula holding at finite coefficients
-(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). Its compatibility with shifts is
-`AlgebraicGeometry.Etale.verdierDualRightDerivedLowerShriekShiftIso`, and its compatibility
-with finite reduction and scalar extension is that of its two ingredients
-(`AlgebraicGeometry.Etale.verdierDualRightDerivedLowerShriekIso_hom_app`,
-`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`). -/
-theorem nonempty_verdierDualRightDerivedLowerShriekIso :
-    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ verdierDual _ aY ≅
-      verdierDual _ (f ≫ aY) ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f aY
-  have := isIso_projectionMap_of_finite Λ f
-  exact ⟨verdierDualRightDerivedLowerShriekIso _ f aY e⟩
-
-end Finite
 
 end Etale
 

@@ -37,7 +37,7 @@ restriction of scalars and monoidal. We deduce:
 ## Implementation notes
 
 The monoidal comparison of the derived extension of scalars is obtained from the general
-`CategoryTheory.Functor.leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor`. For the kernel to
+`CategoryTheory.Functor.leftDerivedTensorIsoOfIsLeftDerivedFunctor`. For the kernel to
 compare its monoidal structures with those inside `AlgebraicGeometry.Etale.derivedTensor` cheaply,
 instance search must produce syntactically the same terms; this is ensured by the local instance
 attributes below (the braiding `SymmetricCategory.toBraidedCategory` of `ModuleCat` and
@@ -96,9 +96,9 @@ back, it is tensoring with a constant sheaf. -/
 lemma preservesKFlatQuasiIso_extendScalars :
     (Sheaf.extendScalars X.smallEtaleTopology φ).PreservesKFlatQuasiIso where
   quasiIso_map hK hL f _ :=
-    have := Sheaf.reflectsIsomorphisms_restrictScalars X.smallEtaleTopology hφ
+    have := Sheaf.reflectsIsomorphisms_restrictScalars X.smallEtaleTopology φ
     CochainComplex.quasiIso_map_of_iso_tensorRight _ _
-      (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) f hK hL
+      (Sheaf.extendScalarsCompRestrictScalarsQuotientIso X.smallEtaleTopology hφ ha) f hK hL
 
 /-- The derived extension of scalars `K ↦ K ⊗ᴸ_Λ Λ'`, from `D(X_ét, Λ)` to `D(X_ét, Λ')`, along
 a surjective ring morphism `φ : Λ →+* Λ'` with principal kernel: the total left derived functor
@@ -158,8 +158,8 @@ theorem nonempty_derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
       derivedExtendScalars hφ ha X ⋙
         (derivedTensor (ModuleCat.{u + 1} Λ') X).obj ((derivedExtendScalars hφ ha X).obj K)) := by
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
-  have := Sheaf.preservesFlat_extendScalars X.smallEtaleTopology hφ ha
-  exact ⟨(Functor.leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor
+  have := Sheaf.preservesFlat_extendScalars X.smallEtaleTopology (f := φ)
+  exact ⟨(Functor.leftDerivedTensorIsoOfIsLeftDerivedFunctor
     (Sheaf.extendScalars X.smallEtaleTopology φ) (derivedExtendScalars hφ ha X)
     (derivedExtendScalarsCounit hφ ha X) K :)⟩
 
@@ -219,7 +219,7 @@ lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ))
         (_root_.DerivedCategory.quotientCompQhIso _).app ((F.mapHomologicalComplex _).obj P'))
   let i4 := R.mapDerivedCategoryFactors.app ((F.mapHomologicalComplex _).obj P')
   let i5 := (Functor.mapHomologicalComplexCompIso
-          (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) _).app P'
+          (Sheaf.extendScalarsCompRestrictScalarsQuotientIso X.smallEtaleTopology hφ ha) _).app P'
   let i6 := ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor _) c).app
           P').symm
   let i7 := ((_root_.DerivedCategory.quotientCompQhIso _).app (P' ⊗ S)).symm

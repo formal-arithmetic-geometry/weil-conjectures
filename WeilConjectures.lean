@@ -7427,7 +7427,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIhom
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingHomEquivCore
@@ -8350,7 +8349,6 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 public import WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom
 public import WeilConjectures.CategoryTheory.Triangulated.CompactFamily
 public import WeilConjectures.CategoryTheory.Triangulated.CompactObjExtension
-public import WeilConjectures.CategoryTheory.Triangulated.CounitIso
 public import WeilConjectures.CategoryTheory.Triangulated.DenominatorTriangleCompletion
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
@@ -11348,10 +11346,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
-public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsUpperStar
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
-public import WeilConjectures.SixFunctors.Etale.Derived.FiniteCoefficientChange
-public import WeilConjectures.SixFunctors.Etale.Derived.FiniteExceptional
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.AbelianConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BettiCardinalities
@@ -11458,8 +11453,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Finite
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniversalHomeomorphism
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CanonicalMapsComp
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CanonicalMapsSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
@@ -11471,11 +11464,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalClosed
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalComp
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCore
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCoreInduction
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FailureNormalBase
@@ -11504,10 +11492,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.TopHo
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdier
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierBase
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierDevissage
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierInduction
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.LimitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.CommShiftPlus
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.DescentColimit
@@ -11553,7 +11537,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SepClosedPushfor
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Verdier
 public import WeilConjectures.SixFunctors.Etale.Derived.KunnethInputs.ChangeOfRings
 public import WeilConjectures.SixFunctors.Etale.Derived.KunnethInputs.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.KunnethInputs.ProjectionFormula
@@ -11572,7 +11555,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompCoherenceStatement
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompactificationExact
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
@@ -11638,14 +11620,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberRational
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.CompactSupportRational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.ReductionLeft
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Torsion
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.TorsionReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
@@ -11762,7 +11742,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
-public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualPullbackSmooth
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation

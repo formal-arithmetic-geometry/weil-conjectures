@@ -92,7 +92,7 @@ noncomputable def extendScalarsTensorRestrictScalarsIso :
       curriedTensor _ ⋙ (Functor.whiskeringLeft _ _ _).obj (restrictScalars J f) :=
   have := isIso_extendScalarsAdjunction_counit J hf
   MonoidalCategory.projectionNatIsoOfCompIso _ _ (asIso (extendScalarsAdjunction J f).counit) _
-    (extendScalarsCompRestrictScalarsIso J hf ha)
+    (extendScalarsCompRestrictScalarsQuotientIso J hf ha)
 
 end CategoryTheory.Sheaf
 

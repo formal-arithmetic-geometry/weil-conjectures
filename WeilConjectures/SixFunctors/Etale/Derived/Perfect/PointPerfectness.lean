@@ -24,14 +24,17 @@ complexes (`DerivedCategory.IsPerfect`); this file adds the amplitude bounds of 
   over a Noetherian ring, a complex of Tor amplitude in `[a, b]` with finitely generated
   cohomology is represented by a complex of finite projective modules in degrees `[a, b]`.
 - `DerivedCategory.torAmplitudeIn_ihom_unit`: its dual then has Tor amplitude in `[-b, -a]`.
-- `AlgebraicGeometry.Etale.isPerfect_and_torAmplitudeIn_globalSections`: the finite stage of
-  `thm-pod-point-perfectness`, with the amplitudes `[a, b + 2d]` and `[-b - 2d, -a]`.
-- `AlgebraicGeometry.Etale.isPerfect_and_reduction_globalSections_integral`: the integral stage:
-  perfectness, and the reductions modulo `Iⁿ⁺¹` are the global sections of the reductions.
+- `AlgebraicGeometry.Etale.torAmplitudeIn_globalSections`: the amplitudes `[a, b + 2d]` and
+  `[-b - 2d, -a]` of the finite stage of `thm-pod-point-perfectness`.
+- `AlgebraicGeometry.Etale.nonempty_iso_tensor_compactlySupportedGlobalSections` and
+  `AlgebraicGeometry.Etale.nonempty_iso_tensor_rightDerivedGlobalSections`: over a domain, the
+  reductions modulo a principal ideal of the global sections are the global sections of the
+  reductions.
 
-The rational stage `E` is `AlgebraicGeometry.Etale.rationalHomology_globalSections` and the
-stage `ℚ̄_ℓ` is `AlgebraicGeometry.ProEtale.isPerfect_compactlySupportedGlobalSections_adic` and
-its companions, in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`.
+Perfectness at all stages (`AlgebraicGeometry.Etale.isPerfect_globalSections`,
+`AlgebraicGeometry.Etale.isPerfect_globalSections_integral`,
+`AlgebraicGeometry.ProEtale.isPerfect_globalSections_adic`) is in
+`WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`.
 -/
 
 @[expose] public section
@@ -249,50 +252,40 @@ theorem torAmplitudeIn_rightDerivedGlobalSections_of_le [IsSeparated aX] (a b : 
         hNY hbc hta))
 
 include hd in
-/-- Blueprint `thm-pod-point-perfectness`, finite level (Step 1).
+/-- Blueprint `thm-pod-point-perfectness`, finite level (Step 1), the amplitudes.
 
 Let `Λ = A_{E,n}` be a finite ring whose exponent is invertible in the separably closed field
 `k`, `X` a separated scheme of finite type over `k` with structure morphism `a_X`, and `d` a
 bound for the dimension of every base change of `X` to a field (in particular `dim X ≤ d`). Let
-`K ∈ Dctf(X, Λ)` have Tor amplitude in `[a, b]`. Then `RΓ_c(X, K)` and `RΓ(X, K)` are perfect
-point complexes with Tor amplitude in `[a, b + 2d]`, and their duals `RHom_Λ(-, Λ)` are perfect
-with Tor amplitude in `[-b - 2d, -a]`. Neither properness nor smoothness of `X` is assumed.
+`K ∈ Dctf(X, Λ)` have Tor amplitude in `[a, b]`. Then `RΓ_c(X, K)` and `RΓ(X, K)` have Tor
+amplitude in `[a, b + 2d]`, and their duals `RHom_Λ(-, Λ)` have Tor amplitude in
+`[-b - 2d, -a]`. Neither properness nor smoothness of `X` is assumed.
 
-Perfectness is `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections` and its
-companions; the amplitudes are
-`AlgebraicGeometry.Etale.torAmplitudeIn_compactlySupportedGlobalSections`,
+Perfectness of the four complexes is `AlgebraicGeometry.Etale.isPerfect_globalSections`; the
+amplitudes are `AlgebraicGeometry.Etale.torAmplitudeIn_compactlySupportedGlobalSections`,
 `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedGlobalSections_of_le`, and for the duals
 the termwise dual of a finite projective model in degrees `[a, b + 2d]`
-(`DerivedCategory.torAmplitudeIn_ihom_unit`, `lem-trf-finite-tor-amplitude-perfect`). For `X`
-proper, `RΓ_c(X, K) ≅ RΓ(X, K)`
-(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsIsoOfIsProper`). -/
-theorem isPerfect_and_torAmplitudeIn_globalSections [IsSeparated aX] (a b : ℤ)
+(`DerivedCategory.torAmplitudeIn_ihom_unit`, `lem-trf-finite-tor-amplitude-perfect`). -/
+theorem torAmplitudeIn_globalSections [IsSeparated aX] (a b : ℤ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hbc : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hta : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
-    (((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect ∧
+    _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) a (b + 2 * (d : ℤ))
+        ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K) ∧
       _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) a (b + 2 * (d : ℤ))
-        ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)) ∧
-    (((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
-      _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) a (b + 2 * (d : ℤ))
-        ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)) ∧
-    (((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
-        (𝟙_ _)).IsPerfect ∧
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K) ∧
       _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (-(b + 2 * (d : ℤ))) (-a)
         ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
-          (𝟙_ _))) ∧
-    (((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
-        (𝟙_ _)).IsPerfect ∧
+          (𝟙_ _)) ∧
       _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (-(b + 2 * (d : ℤ))) (-a)
-        ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj (𝟙_ _))) := by
+        ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj (𝟙_ _)) := by
   have hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K := ⟨hbc, a, b, hta⟩
   have hc := isPerfect_compactlySupportedGlobalSections Λ aX K hK
   have hr := isPerfect_rightDerivedGlobalSections Λ aX K hK
   have htc := torAmplitudeIn_compactlySupportedGlobalSections Λ aX d hd a b K hta
   have htr := torAmplitudeIn_rightDerivedGlobalSections_of_le Λ aX d hd a b K hbc hta
-  exact ⟨⟨hc, htc⟩, ⟨hr, htr⟩, ⟨hc.ihom_unit,
-    _root_.DerivedCategory.torAmplitudeIn_ihom_unit htc hc.finite_homology⟩, ⟨hr.ihom_unit,
-    _root_.DerivedCategory.torAmplitudeIn_ihom_unit htr hr.finite_homology⟩⟩
+  exact ⟨htc, htr, _root_.DerivedCategory.torAmplitudeIn_ihom_unit htc hc.finite_homology,
+    _root_.DerivedCategory.torAmplitudeIn_ihom_unit htr hr.finite_homology⟩
 
 end Finite
 
@@ -366,70 +359,6 @@ theorem nonempty_iso_tensor_rightDerivedGlobalSections (J : Ideal Λ) (hJ : J.Is
     eΓ.app _⟩
 
 end Reduction
-
-section Integral
-
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
-  have : LocallySmall.{u + 1} X.Etale :=
-    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
-  essentiallySmall_of_small_of_locallySmall _
-
-variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoetherianRing Λ]
-  [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
-  {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
-  {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
-  [QuasiCompact aX] [HasCompactification aX]
-
-/-- Blueprint `thm-pod-point-perfectness`, integral stage (Step 2).
-
-Let `Λ = 𝒪_E` (a Noetherian domain, complete for the principal ideal `I = 𝔪_E`, with `Λ/I`
-finite of exponent invertible in the separably closed field `k`), `X` separated of finite type
-over `k`, and `K ∈ D^b_c(X, Λ)`
-(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`).
-Then `RΓ_c(X, K)`, `RΓ(X, K)` and their duals are perfect complexes of `Λ`-modules (in
-particular in `D^b_fg(Λ)`), and for every `n` the reductions modulo `Iⁿ⁺¹` of `RΓ_c(X, K)` and
-`RΓ(X, K)` are the compactly supported, resp. ordinary, cohomology of the reduction
-`K_{n+1} = K ⊗ᴸ (Λ/Iⁿ⁺¹)_X`.
-
-Perfectness is `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`
-and its companions; the reductions are
-`AlgebraicGeometry.Etale.nonempty_iso_tensor_compactlySupportedGlobalSections` and
-`AlgebraicGeometry.Etale.nonempty_iso_tensor_rightDerivedGlobalSections`. The uniform finite
-level amplitude of the reductions is not stated here: the `K_{n+1}` are complexes of
-`Λ`-modules, and the repository does not identify them with complexes of
-`Λ/Iⁿ⁺¹`-modules, to which the finite level
-`AlgebraicGeometry.Etale.isPerfect_and_torAmplitudeIn_globalSections` would apply. -/
-theorem isPerfect_and_reduction_globalSections_integral (hI : I.IsPrincipal)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect ∧
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
-    ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
-      (𝟙_ _)).IsPerfect ∧
-    ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
-      (𝟙_ _)).IsPerfect ∧
-    ∀ n : ℕ,
-      Nonempty ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K ⊗
-          (_root_.DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of Λ (Λ ⧸ I ^ (n + 1))) ≅
-        (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj
-          ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) ∧
-      Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K ⊗
-          (_root_.DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of Λ (Λ ⧸ I ^ (n + 1))) ≅
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
-          ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) := by
-  refine ⟨isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK,
-    isPerfect_rightDerivedGlobalSections_integral I aX hI K hK,
-    isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK,
-    isPerfect_ihom_rightDerivedGlobalSections_integral I aX hI K hK, fun n ↦ ?_⟩
-  obtain ⟨x, hx⟩ := hI.principal
-  have hJ : (I ^ (n + 1)).IsPrincipal :=
-    ⟨⟨x ^ (n + 1), by rw [hx, Ideal.submodule_span_eq, Ideal.span_singleton_pow]⟩⟩
-  exact ⟨nonempty_iso_tensor_compactlySupportedGlobalSections aX _ hJ K,
-    nonempty_iso_tensor_rightDerivedGlobalSections aX _ hJ K⟩
-
-end Integral
 
 end Etale
 

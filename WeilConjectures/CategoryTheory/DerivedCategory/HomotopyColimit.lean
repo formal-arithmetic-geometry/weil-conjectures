@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.GrothendieckAbelian
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.Abelian.SequentialColimit
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
@@ -23,12 +24,12 @@ site of a scheme), with K-injective resolutions.
 
 * For a sequence `F₀ ⟶ F₁ ⟶ ⋯` of cochain complexes, the image in `D(C)` of its termwise colimit
   is a homotopy colimit of the images of the `Fₙ`
-  (`DerivedCategory.isHomotopyColimit_mapCocone_Q`): the sequence
+  (`DerivedCategory.isHomotopyColimitCocone_mapCocone_Q`): the sequence
   `0 ⟶ ∐ Fₙ ──1 - t──▶ ∐ Fₙ ⟶ colim Fₙ ⟶ 0` is short exact
-  (`CategoryTheory.Limits.shortExact_sequenceShift`), and the coproduct of complexes is a
-  coproduct in `D(C)`.
+  (`CategoryTheory.Limits.shortExact_telescopeShortComplex_of_isColimit`), and the
+  coproduct of complexes is a coproduct in `D(C)`.
 * Every `E ∈ D(C)` is the homotopy colimit of its truncations `τ^{≤ N} E`
-  (`DerivedCategory.isHomotopyColimit_truncLECocone`): if `E = Q(K)`, then
+  (`DerivedCategory.isHomotopyColimitCocone_truncLECocone`): if `E = Q(K)`, then
   `τ^{≤ N} E = Q(τ^{≤ N} K)`
   and `K` is the termwise colimit of the `τ^{≤ N} K`, the sequence of terms in each degree being
   eventually constant.
@@ -53,30 +54,32 @@ For a sequence `F₀ ⟶ F₁ ⟶ ⋯` of cochain complexes in an abelian catego
 of shape `ℕ` (e.g. étale sheaves of modules), the image in `D(C)` of a colimit cocone of the
 sequence is a homotopy colimit cocone: the termwise colimit is the homotopy colimit
 `hocolim Q(Fₙ)`. Indeed `0 ⟶ ∐ Fₙ ──1 - t──▶ ∐ Fₙ ⟶ colim Fₙ ⟶ 0` is a short exact sequence of
-complexes (`CategoryTheory.Limits.shortExact_sequenceShift`), whose distinguished triangle in
-`D(C)` is the defining triangle of the homotopy colimit, the coproduct of complexes being a
-coproduct in `D(C)` (`DerivedCategory.isColimitCofanMkQObj`). -/
-theorem isHomotopyColimit_mapCocone_Q (F : ℕ ⥤ CochainComplex C ℤ) {c : Cocone F}
-    (hc : IsColimit c) : IsHomotopyColimit (Q.mapCocone c) := by
+complexes (`CategoryTheory.Limits.shortExact_telescopeShortComplex_of_isColimit`), whose
+distinguished triangle in `D(C)` is the defining triangle of the homotopy colimit, the coproduct
+of complexes being a coproduct in `D(C)` (`DerivedCategory.isColimitCofanMkQObj`). -/
+theorem isHomotopyColimitCocone_mapCocone_Q (F : ℕ ⥤ CochainComplex C ℤ) {c : Cocone F}
+    (hc : IsColimit c) : IsHomotopyColimitCocone (Q.mapCocone c) := by
   let P : Cofan fun n : ℕ ↦ F.obj n := Cofan.mk (∐ fun n ↦ F.obj n) (Sigma.ι _)
   let hP : IsColimit P := coproductIsCoproduct _
-  have hS := shortExact_sequenceShift F hP hc
+  have hS := shortExact_telescopeShortComplex_of_isColimit F hP hc
   let P' : Cofan fun n : ℕ ↦ (F ⋙ Q).obj n := Cofan.mk (Q.obj P.pt) fun n ↦ Q.map (P.inj n)
   let hP' : IsColimit P' := isColimitCofanMkQObj hP
-  have ht : Q.map (sequenceShift hP) = sequenceShift hP' :=
+  have ht : Q.map (Cofan.telescopeShift hP) = Cofan.telescopeShift hP' :=
     Cofan.IsColimit.hom_ext hP' _ _ fun n ↦ by
       change Q.map (P.inj n) ≫ _ = Q.map (P.inj n) ≫ _
-      rw [← Q.map_comp, inj_sequenceShift, Q.map_comp]
-      exact (inj_sequenceShift hP' n).symm
+      rw [← Q.map_comp, Cofan.inj_telescopeShift, Q.map_comp]
+      exact (Cofan.inj_telescopeShift hP' n).symm
   refine ⟨P', hP', triangleOfSESδ hS, isomorphic_distinguished _
     (triangleOfSES_distinguished hS) _ (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
       (Iso.refl _) ?_ ?_ ?_)⟩
-  · simp [triangleOfSES, ht, Functor.map_sub]
-    rfl
+  · simp only [triangleOfSES, Triangle.mk_mor₁, Iso.refl_hom, Category.comp_id,
+      Category.id_comp, Cofan.telescopeShortComplex_f, Functor.map_sub, ht]
+    exact congrArg (fun f ↦ f - Cofan.telescopeShift hP') (Q.map_id P.pt).symm
   · refine Cofan.IsColimit.hom_ext hP' _ _ fun n ↦ ?_
     change Q.map (P.inj n) ≫ _ = Q.map (P.inj n) ≫ _
     simp only [triangleOfSES, Triangle.mk_mor₂,
-      Iso.refl_hom, Category.comp_id, Category.id_comp, ← Q.map_comp, Cofan.IsColimit.fac]
+      Iso.refl_hom, Category.comp_id, Category.id_comp, ← Q.map_comp,
+      Cofan.telescopeShortComplex_g, Cofan.inj_telescopeDesc]
     exact Cofan.IsColimit.fac hP' _ n
   · simp [triangleOfSES]
 
@@ -188,14 +191,14 @@ sheaves of modules), the canonical morphism `hocolim_N τ^{≤ N} E ⟶ E` is an
 cocone `τ^{≤ N} E ⟶ E` is a homotopy colimit cocone. Writing `E = Q(K)`, the complex `K` is the
 termwise colimit of its truncations `τ^{≤ N} K` (in each degree they are eventually constant),
 so `Q(K)` is the homotopy colimit of the `Q(τ^{≤ N} K) = τ^{≤ N} E`
-(`DerivedCategory.isHomotopyColimit_mapCocone_Q`, `lem-kun-complex-colimit-hocolim`). -/
-theorem isHomotopyColimit_truncLECocone [Abelian.HasKInjectiveResolutions C]
+(`DerivedCategory.isHomotopyColimitCocone_mapCocone_Q`, `lem-kun-complex-colimit-hocolim`). -/
+theorem isHomotopyColimitCocone_truncLECocone [Abelian.HasKInjectiveResolutions C]
     [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] [HasCoproductsOfShape ℕ C]
-    (E : DerivedCategory C) : IsHomotopyColimit (truncLECocone E) := by
+    (E : DerivedCategory C) : IsHomotopyColimitCocone (truncLECocone E) := by
   let K := Q.objPreimage E
   let e : Q.obj K ≅ E := Q.objObjPreimageIso E
-  have h₁ : IsHomotopyColimit (truncLECocone (Q.obj K)) :=
-    (isHomotopyColimit_mapCocone_Q _ (isColimitComplexTruncLECocone K)).of_iso
+  have h₁ : IsHomotopyColimitCocone (truncLECocone (Q.obj K)) :=
+    (isHomotopyColimitCocone_mapCocone_Q _ (isColimitComplexTruncLECocone K)).of_iso
       (complexTruncLESequenceCompQIso K) _ (Iso.refl _) fun n ↦ by
         simp [complexTruncLESequenceCompQIso, complexTruncLESequenceCompQHom, complexTruncLECocone]
   have : IsIso (truncLESequenceMap e.hom) := by

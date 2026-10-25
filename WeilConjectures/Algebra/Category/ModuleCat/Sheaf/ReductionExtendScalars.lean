@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
@@ -24,9 +25,9 @@ monoidal left adjoint of restriction of scalars. We show:
   it sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms and computes the
   derived base change on K-flat complexes;
 - with scalars restricted back to `A`, it is the tensor product with the constant sheaf
-  `A ⧸ (a)` (`CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsIso`);
-- it preserves flat objects (`CategoryTheory.Sheaf.preservesFlat_extendScalars`): with
-  scalars restricted to `A`, tensoring with `A' ⊗_A P` is tensoring with `P`.
+  `A ⧸ (a)` (`CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsQuotientIso`);
+- it preserves flat objects (`CategoryTheory.Sheaf.preservesFlat_extendScalars`, an instance
+  form of `CategoryTheory.Sheaf.flat_extendScalars_obj`).
 
 We first show that the functor of a reduction datum along a fully faithful functor is a left
 adjoint (`CategoryTheory.Functor.ReductionDatum.adjunction`).
@@ -145,20 +146,14 @@ lemma extendScalarsAdjunction_unit_app (F : Sheaf J (ModuleCat.{u + 1} A)) :
   exact (Category.comp_id _).symm
 
 /-- With scalars restricted back to `A`, the extension of scalars of `F` is
-`F ⊗ A ⧸ ker f`. -/
-noncomputable def extendScalarsCompRestrictScalarsIso :
+`F ⊗ A ⧸ ker f`: the form of `CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsIso` for a
+surjective `f` with principal kernel, obtained through the reduction functor. -/
+noncomputable def extendScalarsCompRestrictScalarsQuotientIso :
     extendScalars J f ⋙ restrictScalars J f ≅
       tensorRight ((constantSheaf J (ModuleCat.{u + 1} A)).obj
         (ModuleCat.of A (A ⧸ RingHom.ker f))) :=
   Functor.isoWhiskerRight (extendScalarsIsoReductionFunctor J hf ha) _ ≪≫
     reductionFunctorCompRestrictScalarsIso J f hf
-
-omit [EssentiallySmall.{u + 1} C] in
-include hf in
-/-- Restriction of scalars along a surjective ring morphism reflects isomorphisms. -/
-lemma reflectsIsomorphisms_restrictScalars : (restrictScalars J f).ReflectsIsomorphisms :=
-  have := restrictScalars_full J f hf
-  reflectsIsomorphisms_of_full_and_faithful _
 
 include hf in
 /-- The counit `A' ⊗_A M ⟶ M` of extension of scalars is an isomorphism, restriction of scalars
@@ -192,60 +187,14 @@ noncomputable def extendScalarsReductionDatum :
       ((restrictScalars J f).mapIso ((extendScalarsIsoReductionFunctor J hf ha).app F).symm)
       (by simp) (by simp [extendScalarsAdjunction_unit_app J hf ha])
   quasiIso_map φ _ h₁ h₂ := by
-    have := reflectsIsomorphisms_restrictScalars J hf
+    have := restrictScalars_full J f hf
+    have := reflectsIsomorphisms_of_full_and_faithful (restrictScalars J f)
     exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
-      (extendScalarsCompRestrictScalarsIso J hf ha) φ h₁ h₂
+      (extendScalarsCompRestrictScalarsQuotientIso J hf ha) φ h₁ h₂
 
-include hf ha in
-/-- With scalars restricted to `A`, tensoring with the extension of scalars `A' ⊗_A P` is
-tensoring with `P`: `Res((A' ⊗_A P) ⊗ M) ≅ Res(A' ⊗_A (P ⊗ Res M)) ≅ (P ⊗ Res M) ⊗ A ⧸ (a)`,
-and `Res M ⊗ A ⧸ (a) ≅ Res(A' ⊗_A Res M) ≅ Res M`. -/
-lemma nonempty_tensorLeft_extendScalars_obj_comp_restrictScalars_iso
-    (P : Sheaf J (ModuleCat.{u + 1} A)) :
-    Nonempty (tensorLeft ((extendScalars J f).obj P) ⋙ restrictScalars J f ≅
-      restrictScalars J f ⋙ tensorLeft P) := by
-  have := isIso_extendScalarsAdjunction_counit J hf
-  let Fe := extendScalars J f
-  let Res := restrictScalars J f
-  let c := (constantSheaf J (ModuleCat.{u + 1} A)).obj (ModuleCat.of A (A ⧸ RingHom.ker f))
-  let T : Fe ⋙ Res ≅ tensorRight c := extendScalarsCompRestrictScalarsIso J hf ha
-  let ε : Res ⋙ Fe ≅ 𝟭 _ := asIso (extendScalarsAdjunction J f).counit
-  let assoc : tensorLeft P ⋙ tensorRight c ≅ tensorRight c ⋙ tensorLeft P :=
-    NatIso.ofComponents (fun X ↦ α_ P X c) (fun g ↦ by simp)
-  let e₁ : Fe ⋙ tensorLeft (Fe.obj P) ⋙ Res ≅ tensorLeft P ⋙ tensorRight c :=
-    (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (Functor.Monoidal.commTensorLeft Fe P) Res ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft (tensorLeft P) T
-  let e₂ : Res ⋙ tensorRight c ≅ Res :=
-    Functor.isoWhiskerLeft Res T.symm ≪≫ (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight ε Res ≪≫ Functor.leftUnitor Res
-  exact ⟨(Functor.leftUnitor _).symm ≪≫ Functor.isoWhiskerRight ε.symm _ ≪≫
-    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft Res (e₁ ≪≫ assoc) ≪≫
-    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₂ (tensorLeft P)⟩
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-include hf ha in
-/-- Extension of scalars along a surjective ring morphism with principal kernel preserves flat
-objects. -/
-lemma preservesFlat_extendScalars : (extendScalars J f).PreservesFlat where
-  flat_obj {P} hP := by
-    have := reflectsIsomorphisms_restrictScalars J hf
-    have := hP.tensorLeft.preservesFiniteLimits
-    have := hP.tensorLeft.preservesFiniteColimits
-    obtain ⟨e⟩ := nonempty_tensorLeft_extendScalars_obj_comp_restrictScalars_iso J hf ha P
-    have : PreservesFiniteLimits
-        (tensorLeft ((extendScalars J f).obj P) ⋙ restrictScalars J f) :=
-      preservesFiniteLimits_of_natIso e.symm
-    have : PreservesFiniteColimits
-        (tensorLeft ((extendScalars J f).obj P) ⋙ restrictScalars J f) :=
-      preservesFiniteColimits_of_natIso e.symm
-    have hL : PreservesFiniteLimits (tensorLeft ((extendScalars J f).obj P)) :=
-      preservesFiniteLimits_of_reflects_of_preserves _ (restrictScalars J f)
-    have hC : PreservesFiniteColimits (tensorLeft ((extendScalars J f).obj P)) :=
-      preservesFiniteColimits_of_reflects_of_preserves _ (restrictScalars J f)
-    let β' : tensorLeft ((extendScalars J f).obj P) ≅ tensorRight ((extendScalars J f).obj P) :=
-      NatIso.ofComponents (fun Y ↦ β_ _ Y) (fun g ↦ by simp)
-    exact ⟨(exactFunctor_iff _).2 ⟨hL, hC⟩, (exactFunctor_iff _).2
-      ⟨preservesFiniteLimits_of_natIso β', preservesFiniteColimits_of_natIso β'⟩⟩
+/-- Extension of scalars of sheaves of modules preserves flat objects
+(`CategoryTheory.Sheaf.flat_extendScalars_obj`). -/
+instance preservesFlat_extendScalars : (extendScalars J f).PreservesFlat where
+  flat_obj hP := flat_extendScalars_obj J f hP
 
 end CategoryTheory.Sheaf

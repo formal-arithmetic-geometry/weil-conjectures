@@ -8,20 +8,20 @@ module
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 public import Mathlib.CategoryTheory.Functor.OfSequence
-public import WeilConjectures.CategoryTheory.Triangulated.HomotopyColimit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
 
 /-!
 # Sequential colimits as cokernels of `1 - shift`
 
 Let `F : ℕ ⥤ C` be a sequence `F₀ ⟶ F₁ ⟶ ⋯` in a preadditive category, with a coproduct
-`∐ₙ Fₙ` and the shift `t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ` (`CategoryTheory.Limits.sequenceShift`). Then:
+`∐ₙ Fₙ` and the shift `t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ` (`CategoryTheory.Limits.Cofan.telescopeShift`). Then:
 
 * the colimit of `F` is the cokernel of `1 - t`
-  (`CategoryTheory.Limits.isColimitCokernelCoforkSubSequenceShift`);
+  (`CategoryTheory.Limits.isColimitCokernelCoforkSubTelescopeShift`);
 * if `C` is abelian and colimits of shape `ℕ` are exact (for instance if `C` satisfies AB5), then
-  `1 - t` is a monomorphism (`CategoryTheory.Limits.mono_id_sub_sequenceShift`), so that
+  `1 - t` is a monomorphism (`CategoryTheory.Limits.mono_id_sub_telescopeShift`), so that
   `0 ⟶ ∐ₙ Fₙ ⟶ ∐ₙ Fₙ ⟶ colim F ⟶ 0` is a short exact sequence
-  (`CategoryTheory.Limits.shortExact_sequenceShift`).
+  (`CategoryTheory.Limits.shortExact_telescopeShortComplex_of_isColimit`).
 
 The injectivity of `1 - t` is reduced to the finite stages: `∐ₙ Fₙ` is the colimit of the finite
 biproducts `⨁_{i ≤ N} Fᵢ`, and `1 - t` is the colimit of the maps
@@ -44,37 +44,37 @@ variable [Preadditive C] {F : ℕ ⥤ C} {P : Cofan fun n : ℕ ↦ F.obj n} (hP
 /-- The cocone over a sequence `F` given by a morphism out of `∐ₙ Fₙ` which is killed by
 `1 - t`. -/
 @[simps pt]
-noncomputable def coconeOfSubSequenceShift {T : C} (h : P.pt ⟶ T)
-    (hh : (𝟙 _ - sequenceShift hP) ≫ h = 0) : Cocone F where
+noncomputable def coconeOfSubTelescopeShift {T : C} (h : P.pt ⟶ T)
+    (hh : (𝟙 _ - Cofan.telescopeShift hP) ≫ h = 0) : Cocone F where
   pt := T
   ι := NatTrans.ofSequence (fun n ↦ P.inj n ≫ h) (fun n ↦ by
-    have : P.inj n ≫ (𝟙 _ - sequenceShift hP) ≫ h = 0 := by rw [hh, comp_zero]
-    rw [Preadditive.sub_comp, Preadditive.comp_sub, id_comp, inj_sequenceShift_assoc,
+    have : P.inj n ≫ (𝟙 _ - Cofan.telescopeShift hP) ≫ h = 0 := by rw [hh, comp_zero]
+    rw [Preadditive.sub_comp, Preadditive.comp_sub, id_comp, Cofan.inj_telescopeShift_assoc,
       sub_eq_zero] at this
     simp [← this])
 
 @[simp]
-lemma coconeOfSubSequenceShift_ι_app {T : C} (h : P.pt ⟶ T)
-    (hh : (𝟙 _ - sequenceShift hP) ≫ h = 0) (n : ℕ) :
-    (coconeOfSubSequenceShift hP h hh).ι.app n = P.inj n ≫ h := rfl
+lemma coconeOfSubTelescopeShift_ι_app {T : C} (h : P.pt ⟶ T)
+    (hh : (𝟙 _ - Cofan.telescopeShift hP) ≫ h = 0) (n : ℕ) :
+    (coconeOfSubTelescopeShift hP h hh).ι.app n = P.inj n ≫ h := rfl
 
 variable {c : Cocone F} (hc : IsColimit c)
 
-lemma id_sub_sequenceShift_comp_desc :
-    (𝟙 P.pt - sequenceShift hP) ≫ Cofan.IsColimit.desc hP (fun n ↦ c.ι.app n) = 0 :=
+lemma id_sub_telescopeShift_comp_desc :
+    (𝟙 P.pt - Cofan.telescopeShift hP) ≫ Cofan.IsColimit.desc hP (fun n ↦ c.ι.app n) = 0 :=
   Cofan.IsColimit.hom_ext hP _ _ fun n ↦ by
     simp [Preadditive.comp_sub, Preadditive.sub_comp, Cofan.IsColimit.fac, c.w]
 
 /-- The colimit of a sequence `F` is the cokernel of `1 - t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ`. -/
-noncomputable def isColimitCokernelCoforkSubSequenceShift :
+noncomputable def isColimitCokernelCoforkSubTelescopeShift :
     IsColimit (CokernelCofork.ofπ (Cofan.IsColimit.desc hP (fun n ↦ c.ι.app n))
-      (id_sub_sequenceShift_comp_desc hP)) :=
+      (id_sub_telescopeShift_comp_desc hP)) :=
   CokernelCofork.IsColimit.ofπ _ _
-    (fun h hh ↦ hc.desc (coconeOfSubSequenceShift hP h hh))
+    (fun h hh ↦ hc.desc (coconeOfSubTelescopeShift hP h hh))
     (fun h hh ↦ Cofan.IsColimit.hom_ext hP _ _ fun n ↦ by
-      simp only [Cofan.IsColimit.fac_assoc, IsColimit.fac, coconeOfSubSequenceShift_ι_app])
+      simp only [Cofan.IsColimit.fac_assoc, IsColimit.fac, coconeOfSubTelescopeShift_ι_app])
     (fun h hh m hm ↦ hc.hom_ext fun n ↦ by
-      simp only [IsColimit.fac, coconeOfSubSequenceShift_ι_app, ← hm,
+      simp only [IsColimit.fac, coconeOfSubTelescopeShift_ι_app, ← hm,
         Cofan.IsColimit.fac_assoc])
 
 end Cokernel
@@ -215,8 +215,8 @@ variable [Abelian C] (F : ℕ ⥤ C) {P : Cofan fun n : ℕ ↦ F.obj n} (hP : I
 set_option linter.flexible false in
 /-- In an abelian category with exact colimits of shape `ℕ`, the map
 `1 - t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ` is a monomorphism. -/
-lemma mono_id_sub_sequenceShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] :
-    Mono (𝟙 P.pt - sequenceShift hP) := by
+lemma mono_id_sub_telescopeShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] :
+    Mono (𝟙 P.pt - Cofan.telescopeShift hP) := by
   have : Mono (partialSumSubShiftNatTrans F) := by
     have (N : ℕ) : Mono ((partialSumSubShiftNatTrans F).app N) :=
       mono_partialSumSubShift F N
@@ -233,13 +233,13 @@ variable {c : Cocone F} (hc : IsColimit c)
 include hc in
 /-- In an abelian category with exact colimits of shape `ℕ`, a sequence `F` gives a short exact
 sequence `0 ⟶ ∐ₙ Fₙ ──1 - t──▶ ∐ₙ Fₙ ⟶ colim F ⟶ 0`. -/
-lemma shortExact_sequenceShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] :
-    (ShortComplex.mk _ _ (id_sub_sequenceShift_comp_desc hP (c := c))).ShortExact :=
-  have := mono_id_sub_sequenceShift F hP
-  have : Epi (Cofan.IsColimit.desc hP fun n ↦ c.ι.app n) :=
-    Cofork.IsColimit.epi (isColimitCokernelCoforkSubSequenceShift hP hc)
+lemma shortExact_telescopeShortComplex_of_isColimit [HasColimitsOfShape ℕ C]
+    [HasExactColimitsOfShape ℕ C] : (Cofan.telescopeShortComplex hP c).ShortExact :=
+  have : Mono (Cofan.telescopeShortComplex hP c).f := mono_id_sub_telescopeShift F hP
+  have : Epi (Cofan.telescopeShortComplex hP c).g :=
+    Cofork.IsColimit.epi (isColimitCokernelCoforkSubTelescopeShift hP hc)
   { exact := ShortComplex.exact_of_g_is_cokernel _
-      (isColimitCokernelCoforkSubSequenceShift hP hc) }
+      (isColimitCokernelCoforkSubTelescopeShift hP hc) }
 
 end Abelian
 

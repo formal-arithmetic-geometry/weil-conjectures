@@ -310,32 +310,6 @@ lemma boundedConstructible_derivedRestrictScalars_iff (J : Ideal Λ) [Finite (Λ
       (Scheme.isConstructibleSheaf_restrictScalars_iff J _).2 (hc n)
     exact IsConstructibleSheaf.of_iso ((R.mapDerivedCategoryHomologyFunctorIso n).app N)
 
-section General₂
-
-variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-
-variable {A} in
-/-- Tor amplitude in `[a, b]` is closed under extensions. -/
-lemma torAmplitudeIn_obj₂_of_distTriang
-    {T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))} (hT : T ∈ distTriang _)
-    {a b : ℤ} (h₁ : DerivedCategory.torAmplitudeIn A X a b T.obj₁)
-    (h₃ : DerivedCategory.torAmplitudeIn A X a b T.obj₃) :
-    DerivedCategory.torAmplitudeIn A X a b T.obj₂ :=
-  fun F ↦ by
-    let G := (-⊗ᴸ-(X)[A]).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
-    let := _root_.DerivedCategory.commShiftTensorRight
-      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
-    have : G.IsTriangulated := _root_.DerivedCategory.isTriangulated_tensorRight
-      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
-    obtain ⟨g₁, l₁⟩ := h₁ F
-    obtain ⟨g₃, l₃⟩ := h₃ F
-    exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ (G.map_distinguished _ hT) _ g₁ g₃,
-      _root_.DerivedCategory.TStructure.t.isLE₂ _ (G.map_distinguished _ hT) _ l₁ l₃⟩
-
-end General₂
-
 end Etale
 
 end AlgebraicGeometry

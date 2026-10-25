@@ -35,10 +35,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_verdierDual_of_isDualizable`: `κ` for a
-  dualizable `N`, given `α` for `𝟙_X × b`. The full theorem `sk-thm-sf-kunneth-verdier` is
-  `AlgebraicGeometry.Etale.hasKunnethComparisons` in
-  `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Verdier`.
+- `AlgebraicGeometry.Etale.hasKunnethComparisons` (`sk-thm-sf-kunneth-verdier`): the four
+  comparison maps are isomorphisms.
 
 -/
 
@@ -111,8 +109,7 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
         externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂))
   /-- The exceptional Künneth map `α` is an isomorphism. -/
   exceptional : ∀ {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
-      [IsSeparated b₁] [LocallyOfFiniteType b₁] [QuasiCompact b₁]
-      [IsSeparated b₂] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
+      [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
       (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
       [QuasiCompact f₁] [QuasiCompact f₂]
       [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
