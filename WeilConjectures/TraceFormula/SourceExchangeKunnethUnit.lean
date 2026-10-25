@@ -78,7 +78,7 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
       (boundedConstructibleLowerShriek _ ℓ p').map ((boundedConstructibleLowerShriek _ ℓ q).map
         (S ◁ ((boundedConstructibleUpperStarComp _ ℓ q p').inv.app M ≫
           eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) w) ≫
-          (boundedConstructibleUpperStarComp _ ℓ p f).hom.app M))) ≫
+          ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M : _ ⟶ (boundedConstructibleUpperStar _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ f).obj M))))) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
         (S ⊗ (boundedConstructibleUpperStar _ ℓ p).obj
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) =
@@ -166,7 +166,7 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
               ((boundedConstructibleUpperStar _ ℓ q).obj T ◁
                 ((boundedConstructibleUpperStarComp _ ℓ q p').inv.app M ≫
                   eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) w) ≫
-                  (boundedConstructibleUpperStarComp _ ℓ p f).hom.app M)))) ≫
+                  ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M : _ ⟶ (boundedConstructibleUpperStar _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ f).obj M)))))) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
         ((boundedConstructibleUpperStar _ ℓ q).obj T ⊗ (boundedConstructibleUpperStar _ ℓ p).obj
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) =
