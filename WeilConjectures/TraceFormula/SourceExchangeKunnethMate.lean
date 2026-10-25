@@ -85,14 +85,26 @@ theorem upperStar_map_unit_comp_squareIso_comp_counit_comp_prodUpperStarCounit
         ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
           ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj B)))) ≫
+              ((boundedConstructibleLowerStar _ ℓ f).obj B))) :
+          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj
+            ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj
+              ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
+                ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+                  ((boundedConstructibleLowerStar _ ℓ f).obj B))))) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app _ ≫
       (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
         (prodUpperStarCounit ℓ (prod.map_snd f f) B) =
-    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+    ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
         (IsPullback.of_prod_fst_with_id f Y).flip).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj B)) ≫
+          ((boundedConstructibleLowerStar _ ℓ f).obj B)) :
+        (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ
+          (prod.fst : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleUpperStar _ ℓ
+            (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar _ ℓ f).obj B))) ⟶
+        (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
+          ((boundedConstructibleUpperStar _ ℓ (prod.map f (𝟙 Y))).obj
+            ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+              ((boundedConstructibleLowerStar _ ℓ f).obj B)))) ≫
       (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStarComp _ ℓ (prod.map f (𝟙 Y)) prod.snd).inv.app
             ((boundedConstructibleLowerStar _ ℓ f).obj B) ≫
