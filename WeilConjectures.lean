@@ -6369,8 +6369,10 @@ public import WeilConjectures.AlgebraicGeometry.RefinementLocalizationGeometry
 public import WeilConjectures.AlgebraicGeometry.RefinementPreservesFiniteLisse
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RegularDivisor
+public import WeilConjectures.AlgebraicGeometry.RegularDivisorRegularImmersion
 public import WeilConjectures.AlgebraicGeometry.RegularDivisorSpec
 public import WeilConjectures.AlgebraicGeometry.RegularImmersionChart
+public import WeilConjectures.AlgebraicGeometry.RegularImmersionSpecQuotient
 public import WeilConjectures.AlgebraicGeometry.RegularMaximalJacobianPresentation
 public import WeilConjectures.AlgebraicGeometry.RegularOpens
 public import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineChartDerivation
@@ -10039,6 +10041,7 @@ public import WeilConjectures.RingTheory.BlowupChartExpansion
 public import WeilConjectures.RingTheory.BlowupChartLocalization
 public import WeilConjectures.RingTheory.BlowupChartQuotients
 public import WeilConjectures.RingTheory.BlowupChartRegular
+public import WeilConjectures.RingTheory.BlowupChartRegularity
 public import WeilConjectures.RingTheory.BlowupChartStrictB
 public import WeilConjectures.RingTheory.BlowupChartStrictH
 public import WeilConjectures.RingTheory.BlowupChartTangent
@@ -10816,6 +10819,7 @@ public import WeilConjectures.RingTheory.PointedEtaleQuotientMorphismLift
 public import WeilConjectures.RingTheory.PointedEtaleQuotientPoint
 public import WeilConjectures.RingTheory.PointedEtaleQuotientPointBijective
 public import WeilConjectures.RingTheory.PointedEtaleSmallFiltered
+public import WeilConjectures.RingTheory.Polynomial.LocalizationAway
 public import WeilConjectures.RingTheory.PolynomialAppendClosedFibreParameters
 public import WeilConjectures.RingTheory.PolynomialCoefficientConormalInclusion
 public import WeilConjectures.RingTheory.PolynomialCoefficientKernelRescaling
@@ -11134,6 +11138,7 @@ public import WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
 public import WeilConjectures.RingTheory.RegularRingEquiv
 public import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
 public import WeilConjectures.RingTheory.RegularRingNormal
+public import WeilConjectures.RingTheory.RegularRingOfQuotientAway
 public import WeilConjectures.RingTheory.RegularRingSmoothAscent
 public import WeilConjectures.RingTheory.RegularSequenceConormal
 public import WeilConjectures.RingTheory.RegularSequenceDimensionAtPoint
@@ -13161,6 +13166,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.LocalPurity.Direct
 public import WeilConjectures.TraceFormula.TransverseBoundary.LocalPurity.LocalConstancy
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyDevissage
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyPullback
+public import WeilConjectures.TraceFormula.TransverseBoundary.OfRegularDivisors
 public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisor
 public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisorDevissage
 public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTrait

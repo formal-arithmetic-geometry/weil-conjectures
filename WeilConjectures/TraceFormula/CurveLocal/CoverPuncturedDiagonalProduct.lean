@@ -160,7 +160,7 @@ noncomputable def φQ : D.T' ⟶ D.Q :=
 
 @[reassoc (attr := simp)]
 lemma φQ_hQ : D.φQ ≫ D.hQ = D.π := by
-  simp [φQ]
+  rw [φQ, hQ, pullback.lift_fst_assoc, pullback.lift_snd]
 
 /-- The morphism `Q ⟶ C ×_k C`. -/
 noncomputable def γ : D.Q ⟶ D.S' :=
