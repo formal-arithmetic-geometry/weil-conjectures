@@ -282,7 +282,38 @@ theorem sourceExchange_coreZ [IsIso (boundedConstructibleLowerShriekBaseChange_p
       ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)).app
         ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) ▷
         (boundedConstructibleUpperStar _ ℓ zX).obj K) :=
-  sorry
+  Adjunction.comp_tensorHom_eq_unit_comp_map_comp_inv_projection _
+    (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r)
+    (fun T M ↦ ((boundedConstructibleExceptionalProjection _ ℓ r).app T).app M)
+    (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ r T M)
+    (fun x M ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ r x M)
+    (fun T _ _ y ↦ boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ r T y)
+    _ _ _ _ _ _ _ _ (sourceExchange_T1 ℓ aY f p₂ π₁ π₂ zX h r hA K wq₁ wq₂)
+    (sourceExchange_T2 ℓ aY f p₂ π₂ h r hB wq₂)
+
+/-- The compact-support base change of the vertically pasted rectangle `sqX`, inverted. -/
+lemma sourceExchange_inv_baseChange_paste (sqY : IsPullback π₂ π₁ aY aY)
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)]
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))]
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+      (hB.paste_vert (hA.paste_horiz sqY)))] (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+      (hB.paste_vert (hA.paste_horiz sqY)))).app M =
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).hom.app
+        ((boundedConstructibleUpperStar _ ℓ p₂).obj M) ≫
+      (boundedConstructibleLowerShriek _ ℓ zX).map
+        ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)).app M) ≫
+      (inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))).app
+        ((boundedConstructibleLowerShriek _ ℓ f).obj M) ≫
+      (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app M) := by
+  have hP := boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ hB
+    (hA.paste_horiz sqY) M
+  simp only [NatIso.isIso_inv_app]
+  apply IsIso.inv_eq_of_hom_inv_id
+  rw [hP]
+  simp [← Functor.map_comp_assoc, ← Functor.map_comp]
+
 
 end Core
 
