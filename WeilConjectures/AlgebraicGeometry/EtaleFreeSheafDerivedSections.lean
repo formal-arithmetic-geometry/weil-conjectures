@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 -- Reuse the private generic postcomposition comparisons only in this proof.
 import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison

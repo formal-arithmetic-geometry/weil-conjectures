@@ -5,31 +5,40 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
 
 /-!
 # Extension by zero on the localizing closures of `Dctf`
 
-For a finite coefficient ring `Λ` and a quasi-compact open immersion `j : U ⟶ X`, the extension
-by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` (applied levelwise, `j_!` being exact)
+Let `Λ` be a finite ring and `j : U ⟶ X` a quasi-compact open immersion. This file shows that
+the extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)`, applied levelwise to complexes,
+carries `Dctf(U, Λ)` into `Dctf(X, Λ)`, preserves direct sums and therefore restricts to an
+exact, sum-preserving functor `Loc(Dctf(U, Λ)) ⥤ Loc(Dctf(X, Λ))` between the localizing
+closures (`CategoryTheory.ObjectProperty.localizingClosure`).
 
-* maps `Dctf(U, Λ)` into `Dctf(X, Λ)`
-  (`ProEtale.DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek`):
-  an object of `Dctf(U, Λ)` is `ν_U^* K'` for an étale `K' ∈ Dctf(U, Λ)`, and
-  `j_! ν_U^* K' ≅ ν_X^* j_! K'` with `j_! K' ∈ Dctf(X, Λ)` (`lem-trf-open-ctf`);
-* preserves coproducts, being a left adjoint;
-* hence maps the localizing closure `Loc(Dctf(U, Λ))` into `Loc(Dctf(X, Λ))`
-  (`AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`,
-  blueprint `det-proper-image-localizing-open`).
+## Main statements
+
+- `AlgebraicGeometry.ProEtale.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek`:
+  `j_!` preserves `Dctf`.
+- `AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`
+  (`det-proper-image-localizing-open`, finite coefficient stages).
+
+## Implementation notes
+
+On the pro-étale site, bounded constructibility at a finite coefficient ring is étale origin
+(`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`). An object of
+`Dctf(U_proét, Λ)` is `ν^* K'` with `K'` in `Dctf(U_ét, Λ)` (the comparison `ν^*` detects Tor
+amplitude), and `j_! ν^* K' ≅ ν^* j_! K'`, so the statement reduces to its étale counterpart (in the
+namespace `AlgebraicGeometry.Etale`)
+`boundedConstructible_and_torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`
+(`lem-trf-open-ctf`).
 -/
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory Limits
 
@@ -43,68 +52,62 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U
   [IsOpenImmersion j] [QuasiCompact j]
 
 /-- For a finite ring `Λ` and a quasi-compact open immersion `j : U ⟶ X`, the extension by zero
-`j_!` maps `Dctf(U_proét, Λ)` into `Dctf(X_proét, Λ)`: an object of `Dctf(U, Λ)` is `ν_U^* K'`
-for an étale `K' ∈ Dctf(U, Λ)` (`ν^*` detects Tor amplitude), and
-`j_! ν_U^* K' ≅ ν_X^* j_! K'` with `j_! K' ∈ Dctf(X, Λ)` on the étale site
-(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`,
-`lem-trf-open-ctf`). -/
-theorem DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek
+`j_!` carries `Dctf(U_proét, Λ)` into `Dctf(X_proét, Λ)`. Writing an object of `Dctf(U_proét, Λ)`
+as `ν^* K'` for some `K'` in `Dctf(U_ét, Λ)`, this follows from `j_! ν^* K' ≅ ν^* j_! K'` and the
+étale case `lem-trf-open-ctf`. -/
+theorem constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U K) :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      ((D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)).obj K) := by
-  obtain ⟨⟨K', hK', ⟨e⟩⟩, a, b, hKt⟩ := hK
-  have hK't : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K' :=
-    (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b K').1
-      ((DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b).prop_of_iso e.symm hKt)
-  obtain ⟨a', b', h⟩ :=
+      (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).obj K) := by
+  obtain ⟨hbc, a', b', hta⟩ := hK
+  obtain ⟨K', hK', ⟨e⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ K).1 hbc
+  have hta' : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) U a' b' K' :=
+    (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a' b' K').1
+      ((DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) U a' b').prop_of_iso e.symm hta)
+  obtain ⟨a, b, h⟩ :=
     (Etale.DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor K').2
-      ⟨hK', a, b, hK't⟩
-  obtain ⟨⟨hbc, -⟩, ht⟩ :=
-    Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ j a' b' h
-  let E := (mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso
-    (ModuleCat.{u + 1} Λ) j).app K' ≪≫
-      (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)).mapIso e
-  exact ⟨⟨_, hbc, ⟨E⟩⟩, a', b',
-    (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a' b').prop_of_iso E
-      ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a' b' _).2 ht)⟩
+      ⟨hK', a', b', hta'⟩
+  have h' := Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek
+    Λ j a b h
+  exact (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).prop_of_iso
+    ((mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso _ j).app K' ≪≫
+      D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapIso e)
+    (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ ⟨h'.1.1, a, b, h'.2⟩)
 
-omit [Finite Λ] [QuasiCompact j] in
-/-- The extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` along an open immersion
-preserves coproducts, being left adjoint to `j^*`. -/
-lemma preservesColimitsOfShape_mapDerivedCategory_openImmersionLowerShriek (J : Type (u + 1)) :
+/-- The extension by zero `j_! : D(U_proét) ⥤ D(X_proét)` along an open immersion preserves
+direct sums (indeed all colimits), being left adjoint to `j^*`. -/
+instance (J : Type w) :
     PreservesColimitsOfShape (Discrete J)
-      (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)) :=
-  (ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
-    j).leftAdjoint_preservesColimits.preservesColimitsOfShape
+      D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) :=
+  have : PreservesColimitsOfSize.{w, w}
+      D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) :=
+    (ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction _ j).leftAdjoint_preservesColimits
+  this.preservesColimitsOfShape
 
 /-- Blueprint `det-proper-image-localizing-open`: Extension by zero on the localizing
 categories.
 
-For a finite coefficient ring `Λ` and a quasi-compact open immersion `j : U ⟶ X`, the extension
-by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` maps `Dctf(U, Λ)` into `Dctf(X, Λ)`, preserves
-coproducts, and maps the localizing closure `Loc(Dctf(U, Λ))` into `Loc(Dctf(X, Λ))` (so that it
-restricts to a triangulated, coproduct-preserving functor between them, the triangulated
-structures and coproducts of the localizing closures being the ambient ones). The last part is
-the principle `det-proper-image-localizing-principle`
-(`CategoryTheory.ObjectProperty.localizingClosure_obj_of_le`), applied to the triangulated functor
-`j_!`. This is the finite-coefficient case of the blueprint statement, for which `Dctf` is
-`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`. -/
+Let `Λ` be a finite ring (a finite coefficient stage `A`) and `j : U ⟶ X` a quasi-compact open
+immersion. Then the extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` maps `Dctf(U, Λ)`
+into `Dctf(X, Λ)`, preserves direct sums, and maps `Loc(Dctf(U, Λ))` into `Loc(Dctf(X, Λ))`.
+The functor `j_!` is exact (`Functor.mapDerivedCategory` of an exact functor is triangulated),
+so its restriction `Loc(Dctf(U, Λ)) ⥤ Loc(Dctf(X, Λ))` is exact and preserves direct sums. The
+last assertion is `det-proper-image-localizing-principle`
+(`CategoryTheory.ObjectProperty.localizingClosure_le_inverseImage`) applied to the first two. -/
 theorem localizingClosure_constructibleFiniteTor_openImmersionLowerShriek :
-    (∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U K →
-      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)).obj K)) ∧
-    (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J)
-      (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j))) ∧
-    (∀ K, (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U).localizingClosure K →
-      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure
-        ((D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)).obj K)) := by
-  have h₁ := fun K (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U K) ↦
-    DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek Λ j hK
-  have h₂ := preservesColimitsOfShape_mapDerivedCategory_openImmersionLowerShriek Λ j
-  refine ⟨h₁, h₂, fun K hK ↦ ?_⟩
-  have := h₂
-  exact ObjectProperty.localizingClosure_obj_of_le _ _ _
-    (fun K hK ↦ ObjectProperty.le_localizingClosure _ _ (h₁ K hK)) K hK
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U ≤
+        (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).inverseImage
+          D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) ∧
+      (∀ J : Type w, PreservesColimitsOfShape (Discrete J)
+        D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)) ∧
+      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U).localizingClosure ≤
+        ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure
+          ).inverseImage D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) :=
+  ⟨fun _ hK ↦ constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek Λ j hK,
+    fun _ ↦ inferInstance,
+    ObjectProperty.localizingClosure_le_inverseImage _ _ fun _ hK ↦
+      ObjectProperty.le_localizingClosure _ _
+        (constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek Λ j hK)⟩
 
 end AlgebraicGeometry.ProEtale

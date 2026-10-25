@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
@@ -123,7 +124,8 @@ variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).I
   {d : ℕ}
 
 /-- Blueprint `sk-def-pairing-data`: The pairing data. This is also blueprint `def-sf-cup`
-(Mixed-support cup product) and blueprint `def-pod-mixed-support-cup-product`.
+(Mixed-support cup product) and blueprint `def-pod-mixed-support-cup-product`
+(Mixed-support cup product, at the finite stage).
 
 The *mixed-support cup product* of the pairing data,
 
@@ -191,9 +193,8 @@ noncomputable def poincarePairingEvaluation (T K : 𝐃(X, A)) :
   mixedSupportCupProduct A a _ _ ≫ (R(a)_![A]).map (twistedEvaluation T K)
 
 /-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing. This is also
-blueprint `def-sf-pairing` and blueprint `def-pod-derived-poincare-pairing` (Derived Poincaré
-pairing); perfectness of a pairing is
-`AlgebraicGeometry.Etale.IsPerfectPairing`.
+blueprint `def-sf-pairing` and `def-pod-derived-poincare-pairing` (Derived Poincaré pairing);
+perfectness of a pairing is `AlgebraicGeometry.Etale.IsPerfectPairing`.
 
 The *derived Poincaré pairing* of a purity isomorphism `γ : T[2d] ≅ Ra^! Λ_Y`,
 
@@ -414,7 +415,8 @@ section ModuleCat
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
+/-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality, at a finite
+coefficient stage `Λ = A`. This is also the derived part of blueprint `sk-thm-derived-duality`.
 
 **The derived pairing is perfect.** For a finite coefficient ring `Λ`, a purity isomorphism
 `γ : T[2d] ≅ Ra^! Λ_Y` of `a : X ⟶ Y` (from an orientation, with `T = Λ_X(d)`), and `K`
@@ -459,8 +461,9 @@ end ModuleCat
 
 section Point
 
-variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-  {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [HasCompactification a] {d : ℕ}
+variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ]
+  {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [HasCompactification a]
+  [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {d : ℕ}
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.
@@ -506,6 +509,40 @@ theorem isPerfectPairing_poincarePairing_of_isSepClosed
   rw [hc]
   exact ((isIso_iff_coyoneda_map_bijective E.inv).1 inferInstance _).comp
     ((hu _ ⟨r - 2 * d, rfl⟩).comp ((isIso_iff_coyoneda_map_bijective E.hom).1 inferInstance _))
+
+/-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality, at every
+coefficient ring `Λ`, in particular at the integral stage `Λ = 𝒪_E`.
+
+**The derived Poincaré pairing over a separably closed field is perfect.** Let `k` be
+separably closed, `Λ` a commutative ring, `a : X ⟶ Spec k` admit a compactification for which
+`Ra_!` has a right adjoint `Ra^!`, `γ : V[2d] ≅ Ra^! Λ` a purity isomorphism (for `V = Λ_X(d)`
+the smooth purity orientation), and `K` perfect over `Λ_X`. Then the derived Poincaré pairing
+
+`β_K : RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`
+
+is perfect: its adjoint `RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` is an isomorphism of the point
+category `D(Spec k_ét, Λ)`.
+
+The proof is that of `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`: perfectness
+reduces to the projection formula at the objects `Λ_s[r]`, which detect isomorphisms at the
+point (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed`),
+and it holds there for every coefficient ring, the `Λ_s[r]` being dualizable
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`). So, unlike
+`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`, no finiteness of `Λ` is used: at
+`Λ = 𝒪_E` the only inputs are the right adjoint `Ra^!` and the purity isomorphism `γ` of the
+`𝒪_E` stage. -/
+theorem isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable
+    {V : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (γ : V⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) :
+    IsPerfectPairing (poincarePairing a γ K) :=
+  isPerfectPairing_poincarePairing_of_isSepClosed a γ hK fun r ↦
+    hasProjectionFormula_of_isDualizable _ a K
+      (IsDualizable.of_iso ((shiftFunctor _ r).mapIso
+        (singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) (Spec (.of k))).symm)
+        (DerivedCategory.isDualizable_of_isInvertible
+          (DerivedCategory.isInvertible_shift isInvertible_unit r)))
 
 end Point
 

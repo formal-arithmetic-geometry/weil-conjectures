@@ -29,7 +29,7 @@ object of the derived Poincaré pairing at `Λ = 𝒪_E` in the adic category.
 - `AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`: `Rf_*` preserves derived
   completeness.
 - `AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`: so does `Rf_!` for proper
-  `f` (but not in general on the small étale site).
+  `f`, `Rf_!` being `Rf_*` then. It fails for open immersions.
 - `AlgebraicGeometry.Etale.derivedComplete_coefficientDual`: so does the coefficient dual
   `K ↦ K^∨`, provided the constant complex `Λ_X` is itself derived complete.
 
@@ -58,6 +58,30 @@ universe w u
 open CategoryTheory Opposite
 
 open scoped CategoryTheory.Functor
+
+namespace DerivedCategory
+
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  {J : GrothendieckTopology C} {R : Type (u + 1)} [CommRing R]
+
+/-- Derived completeness for a principal ideal of a domain is invariant under isomorphism: it is
+right orthogonality to the objects on which a generator acts invertibly
+(`DerivedCategory.derivedComplete_iff_rightOrthogonal`), or holds for every object if the
+ideal is zero. -/
+lemma derivedComplete_of_iso [IsDomain R] {I : Ideal R} (hI : I.IsPrincipal)
+    {K L : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (e : K ≅ L)
+    (hK : derivedComplete J I K) : derivedComplete J I L := by
+  obtain ⟨ϖ, hϖ⟩ := hI.principal
+  rw [Ideal.submodule_span_eq] at hϖ
+  by_cases h0 : ϖ = 0
+  · rw [hϖ, h0, Ideal.span_singleton_eq_bot.mpr rfl]
+    exact derivedComplete_bot _
+  · have hϖ0 := mem_nonZeroDivisors_of_ne_zero h0
+    rw [derivedComplete_iff_rightOrthogonal hϖ0 hϖ] at hK ⊢
+    intro Z φ hZ
+    rw [← Category.comp_id φ, ← e.inv_hom_id, ← Category.assoc, hK (φ ≫ e.inv) hZ, Limits.zero_comp]
+
+end DerivedCategory
 
 namespace AlgebraicGeometry
 
@@ -146,36 +170,28 @@ theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (
   rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hK ⊢
   exact rightOrthogonal_smulInvertible_rightDerivedLowerStar ϖ f K hK
 
-/-- **`Rf_!` preserves derived completeness for proper `f`.** For a principal ideal `I` of a
-domain `Λ` and a proper `f : X ⟶ Y`, `Rf_!` carries objects of `D(X_ét, Λ)` that are derived
-complete for `I` to derived complete objects of `D(Y_ét, Λ)`: `Rf_! ≅ Rf_*` for proper `f`
+/-- **`Rf_!` preserves derived completeness along proper morphisms.** For a principal ideal `I`
+of a domain `Λ` and a proper morphism `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
+objects of `D(X_ét, Λ)` that are derived complete for `I` to derived complete objects of
+`D(Y_ét, Λ)`: for proper `f` one has `Rf_! ≅ Rf_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and `Rf_*`
 preserves derived completeness (`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`).
 
-Properness cannot be dropped: for an open immersion `j`, `j_!` does not preserve derived
-completeness on the small étale site with discrete coefficients. Take `j : 𝔾_m ⟶ 𝔸¹` over an
-algebraically closed field, closed points `x_n ≠ 0` of `𝔾_m` converging to `0` and
-`K = ∏_n (x_n)_* (Λ/ϖⁿ)`, derived complete as a product of objects killed by a power of `ϖ`. Then
-`j_! K` is derived complete if and only if `i^* Rj_* K` is, for `i` the inclusion of `0`; but
-`H⁰(i^* Rj_* K)` is the quotient of `∏_n Λ/ϖⁿ` by the finitely supported sequences, which receives
-a nonzero map from `Λ[1/ϖ]` (the classes of `(ϖ^(⌊n/2⌋ - k))_n`), so it is not derived complete.
-In the blueprint (`sk-thm-transport`) the coefficients are pro-étale, where this does not occur.
--/
+Properness cannot be dropped: the extension by zero `j_!` along an open immersion does not
+preserve derived completeness. For `j : 𝔸¹ ⟶ ℙ¹` over an algebraically closed field,
+`Λ = ℤ_ℓ` and the derived complete `K = R lim_n (ℤ/ℓⁿ)_{𝔸¹}`, `j_!` does not commute with the
+derived limit: the stalk at `∞` of `i^* Rj_* K` is `colim_V Hom(π₁(V ∖ ∞), ℤ_ℓ)` over the étale
+neighbourhoods `V` of `∞`, and `RΓ_c(𝔸¹, K)` has a non finitely generated `H²`, whereas the
+derived limit of the perfect complexes `RΓ_c(𝔸¹, ℤ/ℓⁿ)` is perfect. So on non-proper morphisms
+the integral `Rf_!` of the `ℓ`-adic formalism is the derived completion of the naive one. -/
 theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [IsProper f] (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete Y.smallEtaleTopology I
-      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
-  obtain ⟨ϖ, hϖI⟩ := hI.principal
-  by_cases h0 : ϖ = 0
-  · obtain rfl : I = ⊥ := by rw [hϖI, h0, Ideal.span_singleton_eq_bot]
-    exact _root_.DerivedCategory.derivedComplete_bot _
-  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
-  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hK ⊢
-  intro Z g hZ
-  let e := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f).app K
-  have h := rightOrthogonal_smulInvertible_rightDerivedLowerStar ϖ f K hK (g ≫ e.hom) hZ
-  rw [← Category.comp_id g, ← e.hom_inv_id, ← Category.assoc, h, Limits.zero_comp]
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
+  _root_.DerivedCategory.derivedComplete_of_iso hI
+    ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ f).app K).symm
+    (derivedComplete_rightDerivedLowerStar I hI f K hK)
 
 /-- **The coefficient dual preserves derived completeness.** For a principal ideal `I` of a
 domain `Λ` and a scheme `X` on which the constant complex `Λ_X` is derived complete for
@@ -224,13 +240,13 @@ theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X 
 /-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
 
 **`Rf_!` preserves derived completeness at the integral stage, for proper `f`.** For `E` finite
-over `ℚ_ℓ` and a proper `f : X ⟶ Y`, `Rf_!` carries derived-complete objects of `D(X_ét, 𝒪_E)` to
-derived-complete objects of `D(Y_ét, 𝒪_E)`. For `X` proper over `Y = Spec k` this says that
-`RΓ_c(X, K)` is an object of the adic category `D_comp(Spec k, 𝒪_E)`. Without properness this
-fails on the small étale site with discrete coefficients, see
-`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`. -/
+over `ℚ_ℓ` and a proper `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
+derived-complete objects of `D(X_ét, 𝒪_E)` to derived-complete objects of `D(Y_ét, 𝒪_E)`. For
+non-proper `f` this fails for the naive `Rf_!` (see
+`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`). -/
 theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsProper f] (K : 𝐃(X, Shrink.{u + 1} (PadicAlgCl.integers l E)))
+    [HasCompactification f] [IsProper f]
+    (K : 𝐃(X, Shrink.{u + 1} (PadicAlgCl.integers l E)))
     (hK : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K) :
     DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
       ((R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).obj K) :=

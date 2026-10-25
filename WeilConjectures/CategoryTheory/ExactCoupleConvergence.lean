@@ -182,12 +182,13 @@ Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
 noncomputable def cycleBoundaryTower (X : BigradedExactCouple C 0) : CycleBoundaryTower X :=
   Classical.choice (cycleBoundaryTower_exists X)
 
-/-- Regularity means eventual constancy of cycles at every bidegree, with a bound that may
-vary with the bidegree. Source: blueprint def-sp-convergence; Stacks Section 12.20
+/-- Regularity means eventual constancy of boundaries at every bidegree, with a bound that may
+vary with the bidegree, i.e. the incoming differentials vanish for `r ≫ 0`.
+Source: blueprint def-sp-convergence; Stacks Section 12.20
 (blueprint: def-sp-convergence). -/
 def IsRegular (X : BigradedExactCouple C 0) : Prop :=
   ∀ p q : ℤ, ∃ r : ℕ, ∀ t : ℕ, r ≤ t →
-    X.cycleBoundaryTower.Z t p q = X.cycleBoundaryTower.Z r p q
+    X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B r p q
 
 /-- Iterate `alpha` to the left along a fixed total degree.
 Source: blueprint def-sp-convergence, completeness clause (blueprint: def-sp-convergence). -/

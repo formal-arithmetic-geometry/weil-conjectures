@@ -323,7 +323,8 @@ section Exchange
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `fix-prop-adjunctions` (4): the transpose of the compact-support exchange
+/-- Blueprint `fix-prop-adjunctions` (4), and blueprint `thm-sf-dual-base-change` (Dual base
+change): the transpose of the compact-support exchange
 `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of a cartesian square
 ```
   X' --g'--> X
@@ -344,7 +345,10 @@ noncomputable def rightDerivedUpperShriekLowerStarBaseChangeMap [HasCompactifica
     ((rightDerivedUpperShriekAdjunction _ f).comp (derivedUpperStarLowerStarAdjunction _ g))
     (rightDerivedLowerShriekBaseChangeMap Λ sq)
 
-/-- Blueprint `fix-prop-adjunctions` (4): the exceptional-inverse-image exchange
+/-- Blueprint `fix-prop-adjunctions` (4), and blueprint `thm-sf-dual-base-change` (Dual base
+change; its isomorphism form is
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso`): the
+exceptional-inverse-image exchange
 `Rg'_* Rf'^! ⟶ Rf^! Rg_*` is an isomorphism, being the conjugate of the compact-support exchange
 `Ex_!`, which is an isomorphism by compact-support base change
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/

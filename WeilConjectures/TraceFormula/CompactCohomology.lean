@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
+public import WeilConjectures.TraceFormula.CompactPullback
+public import WeilConjectures.TraceFormula.FibreCoherence
+public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
@@ -48,11 +52,9 @@ automorphism of `RΓ_c(X, K) = Ra_{X!} K`
 (`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator`, blueprint
 `def-trf-frobenius-coefficient-morphism` and `lem-trf-frobenius-operator-compact-description`).
 
-## Sorried input
-
-- `ProEtale.CondensedRing.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction`:
-  topological invariance, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` is an isomorphism for a finite universal
-  homeomorphism `r`.
+The comparison uses topological invariance
+(`ProEtale.CondensedRing.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction`): the unit
+`𝟭 ⟶ Lr^* ⋙ Rr_*` is an isomorphism for a finite universal homeomorphism `r`.
 
 ## Main definitions
 
@@ -90,26 +92,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-! ### Topological invariance -/
-
-section TopologicalInvariance
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X X' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom]
-  [QuasiCompact X'.hom] [IsSeparated X'.hom]
-  (r : X ⟶ X') [IsFinite r.left] [IsUniversalHomeomorphism r.left]
-
-/-- **Topological invariance** of the bounded constructible derived category: for a finite
-universal homeomorphism `r`, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of the adjunction `Lr^* ⊣ Rr_*` is an
-isomorphism, so that `Lr^*` is an equivalence with inverse `Rr_*` (blueprint `i-topology`). -/
-theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction [IsFinitenessCoefficient ℓ Λ] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ r).unit :=
-  sorry
-
-end TopologicalInvariance
 
 /-! ### The lower shriek of Weil objects -/
 
@@ -186,6 +168,12 @@ lemma weilLowerShriekOfFrobenius_comp_forget :
         boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   rfl
 
+lemma weilLowerShriekOfFrobenius_obj_str (K : WeilBoundedConstructible ℓ ΦX) :
+    ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K).str =
+      (weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).app K.carrier ≪≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
+  IsoAlgebra.mapOfNatIso_obj_str _ K
+
 end LowerShriek
 
 /-! ### Compactly supported cohomology -/
@@ -219,6 +207,66 @@ lemma weilCompactCohomology_obj_carrier (K : WeilBoundedConstructible ℓ Φ) :
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         K.carrier :=
   rfl
+
+lemma weilCompactCohomology_obj_str (K : WeilBoundedConstructible ℓ Φ) :
+    ((weilCompactCohomology ℓ Φ).obj K).str =
+      (weilLowerShriekFrobeniusComparison ℓ Φ (𝟙 (point k)) (toPoint X) (isPullback_toPoint X) Φ
+        (Category.comp_id Φ) (comp_toPoint Φ)).app K.carrier ≪≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).mapIso
+          K.str :=
+  weilLowerShriekOfFrobenius_obj_str ℓ _ _ _ _ _ _ _ K
+
+/-- **The Frobenius comparison of `RΓ_c` is the pullback along `Φ`** (blueprint
+`lem-trf-frobenius-operator-compact-description`): for the trivial square of the structure
+morphism, the Frobenius comparison `θ : L(𝟙 s)^* Ra_{X!} ≅ Ra_{X!} LΦ^*` composed with the
+identity isomorphism `𝟭 ≅ L(𝟙 s)^*` is the pullback `Φ^♯ : RΓ_c(X, M) ⟶ RΓ_c(X, LΦ^* M)` of
+`ProEtale.CondensedRing.compactPullback`. -/
+lemma boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusComparison_hom_app
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStarId _ ℓ (point k)).inv.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj M) ≫
+      (weilLowerShriekFrobeniusComparison ℓ Φ (𝟙 (point k)) (toPoint X) (isPullback_toPoint X) Φ
+        (Category.comp_id Φ) (comp_toPoint Φ)).hom.app M =
+      (compactPullback ℓ Φ).app M := by
+  have h₁ := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      Φ).unit_naturality ((boundedConstructibleUpperStarId _ ℓ X).inv.app M))
+  have h₂ := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Φ).inv.naturality
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
+        ((boundedConstructibleUpperStarId _ ℓ X).inv.app M)))
+  have h₃ := (boundedConstructibleLowerShriekComp_padicAlgCl ℓ Φ (toPoint X)).inv.naturality
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
+      ((boundedConstructibleUpperStarId _ ℓ X).inv.app M))
+  have h₄ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
+        ((boundedConstructibleUpperStarId _ ℓ X).inv.app M) ≫
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Φ (𝟙 X)).inv.app M =
+      eqToHom (by rw [Category.comp_id]; rfl) := by
+    rw [← cancel_mono
+      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Φ (𝟙 X)).hom.app M),
+      Category.assoc, Iso.inv_hom_id_app]
+    simp only [Functor.comp_obj, Category.comp_id]
+    rw [← cancel_mono
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
+        ((boundedConstructibleUpperStarId _ ℓ X).hom.app M)), ← CategoryTheory.Functor.map_comp,
+      Iso.inv_hom_id_app, Category.assoc, boundedConstructibleUpperStarComp_id_right_app,
+      eqToHom_trans]
+    simp
+  have h₄' := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (Φ ≫ toPoint X)).map h₄
+  simp only [CategoryTheory.Functor.map_comp, Functor.comp_map, eqToHom_map, Functor.comp_obj,
+    Functor.id_obj] at h₁ h₂ h₃ h₄'
+  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
+    Category.id_comp, Functor.comp_obj, Functor.id_obj]
+  rw [reassoc_of% (boundedConstructibleUpperStarId_inv_app_comp_baseChange_app ℓ
+      (isPullback_toPoint X) M), ← reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃,
+    reassoc_of% h₄', eqToHom_trans, compactPullback_app,
+    boundedConstructibleLowerShriekCompToPoint_hom_app]
 
 end CompactCohomology
 
@@ -279,6 +327,71 @@ instance isIso_globalOperator (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
   dsimp only [globalOperator]
   infer_instance
 
+
+/-- An isomorphism of the carriers of Weil objects for the identity intertwining their
+Frobenii is compatible with the structure isomorphisms. -/
+lemma isoMk_condition_of_frobenius {A B : WeilBoundedConstructible ℓ (𝟙 X)}
+    (e : A.carrier ≅ B.carrier) (h : A.frobenius.hom ≫ e.hom = e.hom ≫ B.frobenius.hom) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).map e.hom ≫
+      B.obj.str = A.obj.str ≫ e.hom := by
+  have hA := frobenius_hom A
+  have hB := frobenius_hom B
+  rw [IsoAlgebra.str_hom] at hA hB
+  rw [← cancel_epi ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.app
+    A.carrier),
+    ← (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.naturality_assoc,
+    Functor.id_map, ← hB, ← reassoc_of% hA]
+  exact h.symm
+/-- The compactly supported Frobenius of a Weil object `(K, φ)` is
+`RΓ_c(X, φ) ∘ Φ^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ^* K) ⟶ RΓ_c(X, K)` (blueprint
+`lem-trf-frobenius-operator-compact-description`). -/
+lemma compactFrobenius_eq (K : WeilBoundedConstructible ℓ Φ) [IsFinite Φ.left]
+    [IsUniversalHomeomorphism Φ.left] :
+    K.compactFrobenius =
+      (compactPullback ℓ Φ).app K.carrier ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          K.str.hom := by
+  rw [compactFrobenius, frobenius_hom, weilCompactCohomology_obj_str, Iso.trans_hom, Iso.app_hom,
+    Functor.mapIso_hom, ← Category.assoc]
+  exact congrArg (· ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    (toPoint X)).map K.str.hom)
+    (boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusComparison_hom_app ℓ Φ
+      K.carrier)
+
+/-- **The global operator as an explicit composite** (blueprint
+`lem-trf-frobenius-operator-compact-description`): `F_{c,m} = RΓ_c(X, φ_m) ∘ Φ_m^♯`, the
+pullback `Φ_m^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ_m^* K)` of
+`ProEtale.CondensedRing.compactPullback` followed by the iterated Weil structure `φ_m`. -/
+theorem globalOperator_eq (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
+    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] :
+    K.globalOperator m =
+      (compactPullback ℓ (frobeniusIterate Φ m)).app K.carrier ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          (K.iterateStr m).hom := by
+  have key (a : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (h : a = K.carrier) :
+      eqToHom (by rw [h]) ≫ (compactPullback ℓ (frobeniusIterate Φ m)).app a ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (frobeniusIterate Φ m)).map (eqToHom h) ≫ (K.iterateStr m).hom ≫ eqToHom h.symm) ≫
+        eqToHom (by rw [h]) =
+      (compactPullback ℓ (frobeniusIterate Φ m)).app K.carrier ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          (K.iterateStr m).hom := by
+    subst h
+    simp
+  rw [globalOperator, compactFrobenius_eq, iterate_str]
+  simp only [Iso.trans_hom, Functor.mapIso_hom, eqToIso.hom, Category.assoc]
+  exact key _ (K.iterate_carrier m)
+
+/-- The global operator `F_{c,m}` of a Weil object is the global operator `F_{c,m}(φ)` of its
+structure isomorphism `φ` as a Frobenius coefficient morphism (blueprint
+`def-trf-frobenius-coefficient-morphism`). -/
+lemma globalOperator_eq_frobeniusCompactOperator (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
+    [IsProper Φ.left] [IsFinite (frobeniusIterate Φ m).left]
+    [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] :
+    K.globalOperator m = frobeniusCompactOperator ℓ K.str.hom m := by
+  rw [globalOperator_eq, iterateStr_hom_eq_frobeniusCoefficientIterate, frobeniusCompactOperator]
+
 /-- The global operator of degree `m` is the `m`-th power of the global operator of degree
 one, `F_{c,m} = F_{c,1}^m` (blueprint `lem-trf-weil-shriek-iterates`). -/
 lemma globalOperator_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
@@ -286,8 +399,12 @@ lemma globalOperator_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     [IsFinite (frobeniusIterate Φ 1).left] [IsUniversalHomeomorphism (frobeniusIterate Φ 1).left] :
     K.globalOperator m =
       (show End ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
-          (toPoint X)).obj K.carrier) from K.globalOperator 1) ^ m :=
-  sorry
+          (toPoint X)).obj K.carrier) from K.globalOperator 1) ^ m := by
+  have : IsFinite Φ.left := by
+    rw [← frobeniusIterate_one Φ]
+    infer_instance
+  rw [globalOperator_eq_frobeniusCompactOperator, globalOperator_eq_frobeniusCompactOperator]
+  exact frobeniusCompactOperator_eq_pow ℓ K.str.hom m
 
 /-- **Perfectness of compactly supported cohomology** (blueprint
 `prop-trf-compact-support-perfectness`): for `k` separably closed, `RΓ_c(X, K)` is a perfect
@@ -296,18 +413,81 @@ theorem nonempty_hasRightDual_compactCohomology [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty (HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)) :=
-  sorry
+  nonempty_hasRightDual_point ℓ k _
 
-/-- **Perfectness of the geometric stalks**: for `k` separably closed, the stalk `K_x̄ = Lx^* K`
-of a bounded constructible complex at a rational point is a perfect complex, that is a
-dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+/-- **Perfectness of the geometric stalks** (blueprint `prop-trf-compact-support-perfectness`,
+clause on derived geometric stalks; section `sec-smooth-purity`): for `k` separably closed,
+the stalk `K_x̄ = Lx^* K` of a bounded constructible complex at a rational point is a perfect
+complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
 theorem nonempty_hasRightDual_stalk [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (x : RationalPoint X) :
     Nonempty (HasRightDual
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :=
-  sorry
+  nonempty_hasRightDual_point ℓ k _
 
 end WeilBoundedConstructible
+
+/-! ### The Frobenius comparison at a fibre -/
+
+section Fibre
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+  {X Y X' Z : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+
+set_option maxHeartbeats 1000000 in
+-- the instances of the categories of sheaves make the rewriting slow
+/-- **The Frobenius comparison at a fibre** (blueprint `lem-trf-weil-shriek-operator-fibres`,
+proof of (2)): for the fibre `Z` of `f = r ≫ f'` over a point `y` fixed by `Φ_Y`, the base change
+`β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the pullback `Φ_Z^♯`. -/
+@[reassoc]
+lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {p : X' ⟶ X}
+    {f' : X' ⟶ Y} {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y}
+    [IsFinite r.left] [IsUniversalHomeomorphism r.left] [IsProper ΦZ.left]
+    (sq : IsPullback p f' (r ≫ f') ΦY) (hy : y ≫ ΦY = y)
+    (hZ : IsPullback (j ≫ p) (toPoint Z) (r ≫ f') y) (hL : IsPullback j (toPoint Z) f' y)
+    (hT : IsPullback (j ≫ p) ΦZ r j) (hi : ΦZ ≫ j ≫ p = (j ≫ p) ≫ r ≫ p)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          (r ≫ f')).obj K)) hy.symm) ≫
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y ΦY).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).obj K) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((weilLowerShriekFrobeniusComparison ℓ (r ≫ p) ΦY (r ≫ f') sq r rfl rfl).hom.app K) ≫
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K) =
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K ≫
+      (compactPullback ℓ ΦZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        ((weilUpperStarComparison ℓ ΦZ (r ≫ p) (j ≫ p) hi).hom.app K) := by
+  have hH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hL sq K
+  have cH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app_bottom ℓ hZ
+    (hL.paste_horiz sq) hy.symm K
+  have hk := baseChange_comp_relativeFrobenius_stalk ℓ hZ hL hT hi K
+  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
+    Category.id_comp, Functor.comp_obj, Functor.id_obj]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [cH, hH]
+  rw [eqToHom_refl ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      (r ≫ f')).obj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (r ≫ p)).obj K))]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp
+      (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K)))
+      ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app _)]
+  simp only [Category.assoc]
+  rw [hk]
+
+end Fibre
 
 /-! ### Compatibilities with the lower shriek -/
 
@@ -325,6 +505,114 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsFinite ΦX.left] [IsUniversalHomeomorphism ΦX.left]
   [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left]
 
+omit [IsFinite ΦX.left]
+  [IsUniversalHomeomorphism ΦX.left] [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left]
+  [IsFinite r.left] [IsUniversalHomeomorphism r.left] in
+/-- The relative Frobenius part of `θ_f` is the pullback along `r` on compactly supported
+cohomology: `Rf'_!(η_r)` followed by `Rf'_! Rr_* ≅ Rf'_! Rr_! ≅ R(r ≫ f')_!` is `r^♯` under the
+composition isomorphisms. -/
+lemma compToPoint_inv_app_comp_relativeFrobenius (r : X ⟶ X') (f' : X' ⟶ Y) [IsProper r.left]
+    (M : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekCompToPoint ℓ f').inv.app M ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            r).unit.app M)) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M))) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').inv.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M)) =
+    (compactPullback ℓ r).app M ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ (r ≫ f')).inv.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M) := by
+  have h₁ := (boundedConstructibleLowerShriekCompToPoint ℓ f').inv.naturality
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      r).unit.app M)
+  have h₂ := (boundedConstructibleLowerShriekCompToPoint ℓ f').inv.naturality
+    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M))
+  have h₃ := boundedConstructibleLowerShriekCompToPoint_assoc ℓ r f'
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M)
+  simp only [Functor.comp_map] at h₁ h₂
+  have h₃' : (boundedConstructibleLowerShriekCompToPoint ℓ f').inv.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M)) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').inv.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M)) =
+      (boundedConstructibleLowerShriekCompToPoint ℓ r).hom.app _ ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ (r ≫ f')).inv.app _ := by
+    rw [← cancel_epi ((boundedConstructibleLowerShriekCompToPoint ℓ r).inv.app _),
+      ← reassoc_of% h₃, Iso.inv_hom_id_app_assoc, ← Functor.map_comp,
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [← reassoc_of% h₁, ← reassoc_of% h₂, h₃', compactPullback_app]
+  simp only [Category.assoc]
+
+omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] [IsFinite ΦX.left]
+  [IsUniversalHomeomorphism ΦX.left] [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left] in
+/-- The casts at the end of `θ_f`. -/
+lemma compToPoint_inv_app_comp_eqToHom {a : X ⟶ X} {b : X ⟶ Y} (ha : a = ΦX) (hb : b = f)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (e : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ b).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a).obj K) =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K)) :
+    (boundedConstructibleLowerShriekCompToPoint ℓ b).inv.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        (eqToHom e) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K) =
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+      (eqToHom (by rw [ha])) := by
+  subst ha hb
+  simp
+
+omit [IsUniversalHomeomorphism ΦX.left] [IsUniversalHomeomorphism ΦY.left] in
+include sq hrp hrf in
+/-- **The Frobenius comparison of `Rf_!` on compactly supported cohomology** (blueprint
+`lem-trf-weil-shriek-operator-fibres`, proof of (1)): under the composition isomorphism
+`c_f : RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, `RΓ_c(Y, θ_f) ∘ Φ_Y^♯` is `Φ_X^♯`. -/
+@[reassoc]
+lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (compactPullback ℓ ΦY).app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).hom.app K) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K) =
+    (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K ≫ (compactPullback ℓ ΦX).app K := by
+  have : IsFinite p.left := MorphismProperty.of_isPullback sq.overLeft.flip inferInstance
+  have : IsProper (r ≫ p).left := by
+    rw [Over.comp_left]
+    infer_instance
+  have hB : (compactPullback ℓ ΦY).app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app K) =
+      (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K ≫ (compactPullback ℓ p).app K ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ f').inv.app _ := by
+    rw [← reassoc_of% (compactPullback_app_comp_baseChange ℓ sq K), Iso.hom_inv_id_app]
+    simp only [Functor.comp_obj, Category.comp_id]
+  have hn := (boundedConstructibleLowerShriekCompToPoint ℓ (r ≫ f')).inv.naturality
+    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K)
+  simp only [Functor.comp_map] at hn
+  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
+    Category.id_comp, Functor.comp_obj, Functor.id_obj, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hB, reassoc_of% (compToPoint_inv_app_comp_relativeFrobenius ℓ r f' _),
+    ← reassoc_of% hn, compToPoint_inv_app_comp_eqToHom ℓ hrp hrf,
+    ← compactPullback_app_congr ℓ hrp, compactPullback_comp_app]
+  simp only [Category.assoc]
+
+set_option maxHeartbeats 1000000 in
+-- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
 /-- **The Leray isomorphism for Weil objects** (blueprint `lem-trf-weil-shriek-operator-fibres`,
 the global operators): the compactly supported cohomology of `Rf_! K` is that of `K`,
 `RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, as Weil objects for the identity of the base point. In
@@ -333,14 +621,26 @@ theorem nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso
     (K : WeilBoundedConstructible ℓ ΦX) :
     Nonempty ((weilCompactCohomology ℓ ΦY).obj
         ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K) ≅
-      (weilCompactCohomology ℓ ΦX).obj K) :=
-  sorry
+      (weilCompactCohomology ℓ ΦX).obj K) := by
+  refine ⟨IsoAlgebra.isoMk ((boundedConstructibleLowerShriekCompToPoint ℓ f).app K.carrier)
+    (WeilBoundedConstructible.isoMk_condition_of_frobenius _ ?_)⟩
+  have hn := (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.naturality K.str.hom
+  simp only [Functor.comp_map] at hn
+  rw [← WeilBoundedConstructible.compactFrobenius, ← WeilBoundedConstructible.compactFrobenius,
+    WeilBoundedConstructible.compactFrobenius_eq, WeilBoundedConstructible.compactFrobenius_eq,
+    weilLowerShriekOfFrobenius_obj_str]
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+  rw [hn]
+  exact compactPullback_comp_weilLowerShriekFrobeniusComparison_assoc ℓ sq hrp hrf K.carrier _
 
 variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] {ΦZ : Z ⟶ Z} [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
   {i : Z ⟶ X} (hi : ΦZ ≫ i = i ≫ ΦX) {y : RationalPoint Y} (hy : y ≫ ΦY = y)
   (hZ : IsPullback i (toPoint Z) f y)
 
+set_option maxHeartbeats 1000000 in
+-- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
+omit [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left] in
 include hZ in
 /-- **Proper base change for Weil objects** (blueprint `lem-trf-weil-shriek-operator-fibres`, the
 stalks): for a rational point `y` of `Y` fixed by `Φ_Y` with fibre `Z = X ×_Y y` carrying a
@@ -351,8 +651,29 @@ global operator of `K|_Z` have the same trace. -/
 theorem nonempty_weilStalk_weilLowerShriekOfFrobenius_iso (K : WeilBoundedConstructible ℓ ΦX) :
     Nonempty ((weilStalk ℓ ΦY y hy).obj
         ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K) ≅
-      (weilCompactCohomology ℓ ΦZ).obj ((weilUpperStar ℓ ΦZ ΦX i hi).obj K)) :=
-  sorry
+      (weilCompactCohomology ℓ ΦZ).obj ((weilUpperStar ℓ ΦZ ΦX i hi).obj K)) := by
+  obtain ⟨j, hj₁, hj₂⟩ : ∃ j : Z ⟶ X', j ≫ p = i ∧ j ≫ f' = toPoint Z ≫ y :=
+    ⟨sq.lift i (toPoint Z ≫ y) (by rw [hZ.w, Category.assoc, hy]), sq.lift_fst _ _ _,
+      sq.lift_snd _ _ _⟩
+  subst hj₁ hrp hrf
+  have hL : IsPullback j (toPoint Z) f' y := IsPullback.of_right (by rw [hy]; exact hZ) hj₂ sq
+  have hTw : (j ≫ p) ≫ r = ΦZ ≫ j := sq.hom_ext
+    (by simp only [Category.assoc] at hi ⊢; exact hi.symm)
+    (by rw [Category.assoc, hZ.w, Category.assoc, hj₂, ← Category.assoc, comp_toPoint])
+  have hT : IsPullback (j ≫ p) ΦZ r j := IsPullback.of_bot (by rw [comp_toPoint]; exact hZ) hTw hL
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ
+  refine ⟨IsoAlgebra.isoMk (asIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+    hZ).app K.carrier)) (WeilBoundedConstructible.isoMk_condition_of_frobenius _ ?_)⟩
+  rw [asIso_hom, WeilBoundedConstructible.weilStalk_obj_frobenius_hom_eq,
+    ← WeilBoundedConstructible.compactFrobenius,
+    WeilBoundedConstructible.compactFrobenius_eq, weilLowerShriekOfFrobenius_obj_str,
+    weilUpperStar_obj_str]
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+  have hn := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).naturality K.str.hom
+  simp only [Functor.comp_map] at hn
+  rw [hn]
+  exact baseChange_comp_weilLowerShriekFrobeniusComparison_stalk_assoc ℓ sq hy hZ hL hT hi
+    K.carrier _
 
 end Compatibilities
 

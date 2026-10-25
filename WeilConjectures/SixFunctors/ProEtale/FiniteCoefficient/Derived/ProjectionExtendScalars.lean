@@ -83,7 +83,8 @@ end General
 
 set_option hygiene false in
 /-- The coefficient category `ModuleCat 𝒪_E` of the integral stage `E`. -/
-local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+local notation "𝐌" =>
+  @ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)) CommRing.toRing
 
 set_option hygiene false in
 /-- The coefficient category `ModuleCat 𝒪_{E'}` of the integral stage `E'`. The ring structure is
@@ -129,17 +130,13 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
--- `𝐌` is elaborated with the ring structure `CommRing.toRing` of `Shrink 𝒪_E`, as in
--- `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
-attribute [-instance] Shrink.instRing
-
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stages `𝒪_{E'}`
 for scalar extensions.
 
 Let `E ⊆ E'` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, and let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be
 the pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of
-étale sheaves of `𝒪_E`-modules of finite Tor amplitude, with derived complete étale projection
-map sides `hs`, `ht`. Then the projection map over `𝒪_{E'}` at
+étale sheaves of `𝒪_E`-modules of finite Tor amplitude, such that both sides of the étale
+projection map at `K₀` and `L₀` are derived complete. Then the projection map over `𝒪_{E'}` at
 the scalar extensions `𝒪_{E'} ⊗ᴸ_{𝒪_E} K` and `𝒪_{E'} ⊗ᴸ_{𝒪_E} L` is an isomorphism: it is the
 scalar extension of the projection map over `𝒪_E`
 (`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_extendScalars`, `𝒪_{E'}`
@@ -161,10 +158,11 @@ theorem hasProjectionFormula_extendScalars_of_derivedCompleteIntegral (f : X ⟶
     (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
       (((Etale.derivedTensor 𝐌 Y).obj ((Etale.rightDerivedLowerShriek 𝐌 f).obj K₀)).obj L₀))
     (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
-      ((Etale.rightDerivedLowerShriek 𝐌 f).obj (((Etale.derivedTensor 𝐌 X).obj K₀).obj
-        ((Etale.upperStar 𝐌 f).leftDerivedFunctor.obj L₀)))) :
+      ((Etale.rightDerivedLowerShriek 𝐌 f).obj
+        (((Etale.derivedTensor 𝐌 X).obj K₀).obj ((L(Etale.upperStar 𝐌 f)).obj L₀)))) :
     HasProjectionFormula 𝐌' f ((𝐍 X).obj K) ((𝐍 Y).obj L) := by
-  have h := hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt hs ht
+  have h := hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt
+    hs ht
   exact hasProjectionFormula_extendScalars f K L h
 
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the stage `ℚ̄_ℓ`.
@@ -173,8 +171,7 @@ An object of the stage `ℚ̄_ℓ` is represented at a finite stage `E`, and it 
 larger finite stage `E' ⊇ E` inside `ℚ̄_ℓ` by extension of scalars; the projection map at the
 stage `ℚ̄_ℓ` is represented at the stages `E'`. Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the
 pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of étale
-sheaves of `𝒪_E`-modules of finite Tor amplitude, with derived complete étale projection map sides
-`hs`, `ht`. Then for every `E'`, the projection map over
+sheaves of `𝒪_E`-modules of finite Tor amplitude. Then for every `E'`, the projection map over
 `E'` at the scalar extensions of `K` and `L`, the image under the rationalization
 `D(Y_proét, 𝒪_{E'}) ⥤ D(Y_proét, 𝒪_{E'})[1/ℓ]` of the projection map over `𝒪_{E'}`, is an
 isomorphism
@@ -196,8 +193,8 @@ theorem isIso_rationalization_map_projectionMap_extendScalars (f : X ⟶ Y)
     (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
       (((Etale.derivedTensor 𝐌 Y).obj ((Etale.rightDerivedLowerShriek 𝐌 f).obj K₀)).obj L₀))
     (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
-      ((Etale.rightDerivedLowerShriek 𝐌 f).obj (((Etale.derivedTensor 𝐌 X).obj K₀).obj
-        ((Etale.upperStar 𝐌 f).leftDerivedFunctor.obj L₀)))) :
+      ((Etale.rightDerivedLowerShriek 𝐌 f).obj
+        (((Etale.derivedTensor 𝐌 X).obj K₀).obj ((L(Etale.upperStar 𝐌 f)).obj L₀)))) :
     IsIso ((Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E')))
       (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌'))).map
         (((projectionMap 𝐌' f).app ((𝐍 X).obj K)).app ((𝐍 Y).obj L))) :=

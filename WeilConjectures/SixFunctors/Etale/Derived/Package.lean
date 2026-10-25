@@ -8,14 +8,15 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Verdier
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdier
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteStage
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Unbounded
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
 
@@ -48,10 +49,10 @@ type over `k`. For a general coefficient category the clauses are false: for `Λ
 (Artin–Schreier).
 
 Each clause is one of the statements of this directory, and `sixOperationsPackage` is the
-assembly: the clauses are proved from the corresponding statements. Smooth base change is
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_smooth`, the unbounded upgrade of the
-smooth base change theorem, and the orientation is smooth purity
-(`AlgebraicGeometry.Etale.Orientation.nonempty`).
+assembly: the clauses are proved from the corresponding statements. Smooth base change for `Rf_*`
+is stated, as in the blueprint, on the bounded below derived categories `D⁺`, where it is the
+smooth base change theorem of the smooth base change chapter; the comparison of the `D⁺` base
+change map with the unbounded `AlgebraicGeometry.Etale.derivedBaseChangeMap` is not available.
 
 The clauses of the blueprint that this statement does not carry are the ones whose content is
 an identity *between canonical comparison transformations* rather than the existence of an
@@ -66,6 +67,30 @@ needs an orientation and is
 `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual`, and global
 duality and the derived Poincaré pairing need `X` smooth proper geometrically connected and
 are the two statements of `WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality`.
+
+## Expository remarks of the package
+
+The following remarks of the blueprint subsection `sk-thm-sf-package` are pointers or scope
+statements and carry no mathematical content beyond the results they cite:
+
+- `rem-sf-yoga` (the dictionary from the axioms of the six-functor datum to the classical duality
+  statements) and `rem-sf-axiom-verification` (each axiom is supplied by the corresponding result
+  of this directory): this is the assembly `sixOperationsPackage` itself.
+- `rem-sf-ctf-descent`, `rem-ptr-trf-admissibility-14`,
+  `rem-ptr-weil-exceptional-adjoint-admissibility-10` and
+  `rem-ptr-weil-exceptional-inverse-image-16`: the coefficient comparisons of the exceptional
+  adjoint are
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal`
+  (`lem-coef-finite-exceptional`) and
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`
+  (`prop-coef-integral-exceptional-adjoint`).
+- `rem-ptr-sf-datum-1b`, `rem-weil-biduality-boundary-status` and `open-sf-preservation-gaps`:
+  finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
+  Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
+  the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
+  (`thm-coef-qbar-verdier`).
+- `rem-sf-finite-level-comparison-ingredient`: the reconstruction of normalized towers is
+  `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
 
 -/
 
@@ -106,8 +131,8 @@ The eight clauses of the blueprint, one group of fields each:
      v          v
      Y' --g---> Y
    ```
-   one has `Lg^* Rf_! ≅ Rf'_! Lg'^*`; and `Lg^* Rf_* ≅ Rf'_* Lg'^*` for proper `f` and for
-   smooth `g`.
+   one has `Lg^* Rf_! ≅ Rf'_! Lg'^*`; and `Lg^* Rf_* ≅ Rf'_* Lg'^*` for proper `f`, and for
+   smooth `g` on `D⁺`, where the base change map `g^* Rf_* ⟶ Rf'_* g'^*` is an isomorphism.
 3. **Projection formula.** `Rf_!(K ⊗ᴸ Lf^* L) ≅ Rf_! K ⊗ᴸ L` at every `K` and `L`.
 4. **Compactifications and proper coincidence.** `Rf_!` is independent of the compactification,
    `R(f ≫ h)_! ≅ Rh_! Rf_!`, and `Rf_! ≅ Rf_*` for proper `f`.
@@ -151,12 +176,12 @@ structure SixOperationsPackage : Prop where
       IsPullback g' f' f g → IsProper f →
       Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
         L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R((f')_*[ModuleCat.{u + 1} Λ]))
-  /-- (2) Smooth base change for `Rf_*`. -/
+  /-- (2) Smooth base change for `Rf_*`: for smooth `g` the base change map
+  `g^* Rf_* ⟶ Rf'_* g'^*` is an isomorphism of functors `D⁺(X_ét, Λ) ⥤ D⁺(Y'_ét, Λ)`. -/
   baseChangeLowerStarOfSmooth :
-    ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
-      IsPullback g' f' f g → Smooth g →
-      Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
-        L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R((f')_*[ModuleCat.{u + 1} Λ]))
+    ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y')
+      (sq : IsPullback g' f' f g), Smooth g →
+      IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq)
   /-- (3) The projection formula. -/
   projectionFormula : ∀ K L, HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L
   /-- (4) `Rf_!` is independent of the chosen compactification. -/
@@ -220,11 +245,12 @@ structure SixOperationsPackage : Prop where
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
 exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
 biduality is proved over algebraically closed fields). Every clause is one of the propositions of
-this directory, and the proof is the assembly; smooth base change on the unbounded derived
-categories is `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_smooth` and the orientation
-is smooth purity (`AlgebraicGeometry.Etale.Orientation.nonempty`). The Tate twist datum is
-assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause fails
-over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
+this directory, and the proof is the assembly: smooth base change is
+`AlgebraicGeometry.Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder`,
+every sheaf of `Λ`-modules being torsion of order invertible on `Y`, and the orientation is
+smooth purity (`AlgebraicGeometry.Etale.Orientation.nonempty`). The Tate twist datum is assumed
+normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`,
+where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
 theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
@@ -237,11 +263,22 @@ theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
   baseChangeLowerStarOfProper _ _ _ sq _ :=
     have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
     ⟨asIso (derivedBaseChangeMap _ sq.toCommSq)⟩
-  baseChangeLowerStarOfSmooth g _ _ sq hg :=
-    have : Smooth g := hg
+  baseChangeLowerStarOfSmooth g _ _ sq hg := by
+    have := hg
     have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
-    have := isIso_derivedBaseChangeMap_of_smooth Λ aY sq
-    ⟨asIso (derivedBaseChangeMap _ sq.toCommSq)⟩
+    obtain ⟨N, hN₀, hN, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
+    have (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+        IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
+      have h₀ := Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ g sq K
+        fun _ ↦ IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀.ne' hN hNY _
+      -- `h₀` is stated with the Mathlib instance `IsGrothendieckAbelian (ModuleCat Λ)`, the goal
+      -- with the shortcut `ModuleCat.isGrothendieckAbelian_of_commRing`; comparing them directly
+      -- is a kernel deterministic timeout, so the instance is generalized first.
+      revert h₀
+      generalize ModuleCat.isGrothendieckAbelian_of_commRing Λ = i
+      intro h₀
+      exact (Subsingleton.elim _ i) ▸ h₀
+    exact NatIso.isIso_of_isIso_app _
   projectionFormula K L := hasProjectionFormula_of_finite Λ f K L
   lowerShriekCompactificationIndependent c c' :=
     ⟨rightDerivedLowerShriekOfCompactificationIso Λ c c'⟩
@@ -267,6 +304,86 @@ theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
     constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK
   ctfVerdierDual _ hK := constructibleFiniteTor_verdierDual Λ (f ≫ aY) hK
+
+omit [HasTateTwist Λ] in
+/-- Blueprint `prop-functor-package`, clause (3): **compactly supported direct image of the
+localization triangle.** For a quasi-compact open immersion `j : U ⟶ X` with closed complement
+`i : Z ⟶ X`, a morphism `f : X ⟶ Y` and finite coefficients, applying `Rf_!` to the open–closed
+triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` (`AlgebraicGeometry.Etale.exists_distTriang_openClosed`)
+and the composition law (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`)
+gives a distinguished triangle `R(j ≫ f)_! j^* K ⟶ Rf_! K ⟶ R(i ≫ f)_! i^* K ⟶`. -/
+theorem exists_distTriang_rightDerivedLowerShriek_openClosed {U Z X Y : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) (f : X ⟶ Y) [HasCompactification f]
+    [HasCompactification j] [HasCompactification i] [HasCompactification (j ≫ f)]
+    [HasCompactification (i ≫ f)] (K : DerivedCategoryModule Λ X) :
+    ∃ T ∈ distTriang (DerivedCategoryModule Λ Y),
+      Nonempty (T.obj₁ ≅ (R(j ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+        ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
+      Nonempty (T.obj₂ ≅ (R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
+      Nonempty (T.obj₃ ≅ (R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) j i hij K
+  obtain ⟨cj⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ j f
+  obtain ⟨ci⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ i f
+  let F := R(f)_![ModuleCat.{u + 1} Λ]
+  let ej : D((j)_!open[ModuleCat.{u + 1} Λ]) ≅ R(j)_![ModuleCat.{u + 1} Λ] :=
+    (Functor.rightUnitor _).symm ≪≫
+      Functor.isoWhiskerLeft _ (rightDerivedLowerStarIdIso Λ X).symm ≪≫
+      rightDerivedLowerShriekIso Λ (Compactification.ofIsOpenImmersion j)
+  refine ⟨F.mapTriangle.obj _, F.map_distinguished _ hw, ⟨?_⟩, ⟨Iso.refl _⟩, ⟨?_⟩⟩
+  · exact F.mapIso (ej.app _ ≪≫ (R(j)_![ModuleCat.{u + 1} Λ]).mapIso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app K).symm) ≪≫ (cj.app _).symm
+  · exact F.mapIso ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ i).symm.app _ ≪≫
+      (R(i)_![ModuleCat.{u + 1} Λ]).mapIso
+        ((leftDerivedUpperStarIsoMapDerivedCategory _ i).app K).symm) ≪≫ (ci.app _).symm
+
+/-- Blueprint `prop-functor-package`: **the coefficient and functor package on the proved
+domains**, at the finite stages `Λ = A_{E,n}`.
+
+For `k` algebraically closed, a finite ring `Λ` with a normalized Tate twist datum whose exponent is
+invertible on `k`, and a separated finite-type morphism `f : X ⟶ Y` of separated finite-type
+`k`-schemes:
+
+* the clauses of the six-operations package hold (`AlgebraicGeometry.Etale.SixOperationsPackage`):
+  compactification independence and the composition law of `Rf_!` and `Rf_! ≅ Rf_*` for proper
+  `f` (clauses (2) and (3)), base change (clause (4)), the projection formula (clause (5)), smooth
+  purity (clause (6)), biduality and the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` on `Dctf`
+  (clause (7));
+* applying `Rf_!` to the localization triangle of a quasi-compact open immersion and its closed
+  complement gives a distinguished triangle (clause (3),
+  `AlgebraicGeometry.Etale.exists_distTriang_rightDerivedLowerShriek_openClosed`);
+* on `Dctf(Y, Λ)` the exceptional inverse image is `Rf^! = 𝔻_X Lf^* 𝔻_Y` (clause (7),
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`).
+
+The integral reduction compatibilities of clause (2) are
+`AlgebraicGeometry.Etale.functorPackage_integral`. Clause (1) (finite coefficient-field extension
+and descent to `ℚ̄_ℓ`) and the integral and field stages of clause (7) are not part of this
+statement; for strict Weil complexes over a finite field, clauses (2)–(4) are the statements of
+`WeilConjectures.WeilSheaf.LowerShriekFunctoriality`. -/
+theorem functorPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
+    SixOperationsPackage Λ k f aY ∧
+    (∀ {U Z : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X)
+      [IsClosedImmersion i], Set.range i.base = (Set.range j.base)ᶜ →
+      ∀ [HasCompactification j] [HasCompactification i] [HasCompactification (j ≫ f)]
+        [HasCompactification (i ≫ f)] (K : DerivedCategoryModule Λ X),
+        ∃ T ∈ distTriang (DerivedCategoryModule Λ Y),
+          Nonempty (T.obj₁ ≅ (R(j ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+            ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
+          Nonempty (T.obj₂ ≅ (R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
+          Nonempty (T.obj₃ ≅ (R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+            ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
+    ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
+      Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅
+        (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
+          (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
+            ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) :=
+  ⟨sixOperationsPackage Λ k f aY,
+    fun j _ _ i _ hij _ _ _ _ K ↦
+      exists_distTriang_rightDerivedLowerShriek_openClosed Λ j i hij f K,
+    fun _ hL ↦
+      nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ (f ≫ aY) aY f rfl hL⟩
 
 end Etale
 

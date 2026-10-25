@@ -175,6 +175,22 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : C
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep Λ ℓ sq).hom ≫
       boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Λ ℓ j g j'
 
+/-- The exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is the exchange morphism
+`CategoryTheory.Adjunction.exchangeLeft` of the pullback comparison of the square under the
+adjunctions `j_! ⊣ Lj^*` and `j'_! ⊣ Lj'^*`. -/
+lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
+    (sq : CommSq g' j' j g) :
+    boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq =
+      Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j')
+        (boundedConstructiblePullbackSquareComparison Λ ℓ sq.flip) := by
+  unfold boundedConstructibleOpenImmersionLowerShriekBaseChange
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Adjunction.exchangeLeft
+  rfl
+
 /-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
 square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
 an isomorphism.

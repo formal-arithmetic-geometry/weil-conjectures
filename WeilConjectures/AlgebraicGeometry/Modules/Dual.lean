@@ -249,6 +249,27 @@ noncomputable def dualTensorFunctor (ω : X.Modules)
       have : ω.IsFiniteLocallyFree := SheafOfModules.IsInvertible.isFiniteLocallyFree ω
       exact IsFiniteLocallyFree.tensorObj ℱ.unop.objᵛ ω
 
+open Opposite in
+/-- The biduality morphism of `𝒪_X`-modules is natural, stated with `dualMap`. Unlike
+`SheafOfModules.bidual_naturality`, whose statement spells the ring sheaf as
+`(sheafCompose _ _).obj X.sheaf`, this is stated over `X.ringCatSheaf`, so that it applies
+without a kernel conversion between the two spellings. -/
+@[reassoc]
+lemma bidual_naturality {M M' : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ M') :
+    f ≫ SheafOfModules.bidual (R := X.sheaf) M' =
+      SheafOfModules.bidual (R := X.sheaf) M ≫ dualMap (dualMap f) := by
+  ext1
+  ext U m : 3
+  refine PresheafOfModules.hom_ext
+    (M₁ := (PresheafOfModules.restrictOver X.sheaf.obj U.unop).obj
+      (PresheafOfModules.homObj M'.val (PresheafOfModules.unit _)))
+    (M₂ := (PresheafOfModules.restrictOver X.sheaf.obj U.unop).obj (PresheafOfModules.unit _))
+    fun W ↦ ?_
+  ext φ
+  change φ.app (op (Over.mk (𝟙 W.unop.left))) (M'.val.map W.unop.hom.op (f.val.app U m)) =
+    φ.app (op (Over.mk (𝟙 W.unop.left))) (f.val.app (op W.unop.left) (M.val.map W.unop.hom.op m))
+  rw [PresheafOfModules.naturality_apply]
+
 /-- **Biduality twisted by an invertible module.** For an invertible `ω`, `ℱ ≅ (ℱᵛ ⊗ ω)ᵛ ⊗ ω`,
 naturally in finite locally free `ℱ`: the biduality morphism `ℱ ⟶ ℱᵛᵛ` is an isomorphism
 (`SheafOfModules.isIso_bidual`), and twisting by `ω` cancels in internal homs,
@@ -276,7 +297,7 @@ theorem nonempty_iso_dual_tensorObj_dual_tensorObj (ω : X.Modules)
     exact asIso (SheafOfModules.bidual (R := X.sheaf) ℱ.obj) ≪≫ (κ ℱ.objᵛ).symm
   · have h₁ : f.hom ≫ SheafOfModules.bidual (R := X.sheaf) 𝒢.obj =
         SheafOfModules.bidual (R := X.sheaf) ℱ.obj ≫ dualMap (dualMap f.hom) :=
-      SheafOfModules.bidual_naturality (R := X.sheaf) f.hom
+      bidual_naturality f.hom
     have h₂ : dualMap (dualMap f.hom) ≫ (κ 𝒢.objᵛ).inv =
         (κ ℱ.objᵛ).inv ≫ dualMap (dualMap f.hom ▷ ω) ▷ ω := by
       rw [Iso.comp_inv_eq, Category.assoc, hκ, Iso.inv_hom_id_assoc]

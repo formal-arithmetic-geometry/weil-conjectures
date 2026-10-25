@@ -96,7 +96,8 @@ abbrev HasUpperShriek : Prop :=
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The constructible exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`", and `def-weil-exceptional-inverse-image`): for a
+constructible adjunction `Rf_! ⊣ Rf^!`"; the exceptional inverse image itself is defined at the
+finite stage as `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a
 separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, the direct image
 with compact support `Rf₀!` of Weil complexes has a right adjoint. -/
 theorem isLeftAdjoint_derivedLowerShriek : HasUpperShriek k₀ l f := by

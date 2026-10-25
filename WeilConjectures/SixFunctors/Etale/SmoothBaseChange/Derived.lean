@@ -36,6 +36,9 @@ whose cohomology sheaves are torsion of orders invertible on `S`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs`: the classical form of
+  the theorem, `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` for `g` smooth and `f` qcqs (blueprint
+  `sk-rem-rest`).
 - `AlgebraicGeometry.Etale.isIso_baseChange_app_of_isGE_of_isLE`: the finite-range comparison
   (blueprint `sbc-lem-finite-range-comparison`).
 - `AlgebraicGeometry.Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app`
@@ -113,6 +116,48 @@ instance (S T : Scheme.{u}) :
   of_iso φ h := by
     have : IsTorsionSheafOfInvertibleOrder S _ := h
     exact IsTorsionSheafOfInvertibleOrder.of_iso Λ φ
+
+/-- Blueprint `sk-rem-rest`: the *classical form* of the smooth base change theorem, in which
+the roles of the two legs of the square are exchanged with respect to `sk-def-bc`. For a
+Cartesian square
+
+```
+X' --v--> X
+|         |
+f'        f
+v         v
+S' --g--> S
+```
+
+with `g` **smooth** and `f` quasi-compact and quasi-separated, and a sheaf `F` of `Λ`-modules
+on `X_ét` all of whose geometric stalks are torsion of orders invertible on `S`, the
+base-change map `g⁻¹ R^q f_* F ⟶ R^q f'_* v⁻¹ F` is an isomorphism in every degree `q`.
+
+The base-change map of `AlgebraicGeometry.Etale.baseChangeHomologyMap` attached to the square
+`sq : IsPullback v f' f g` is by construction `g⁻¹ R^q f_* F ⟶ R^q f'_* v⁻¹ F`: it pulls back
+along the bottom leg and pushes forward along the right leg. So the classical form is
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth` for this square, with the smooth
+morphism `g` in the role of the morphism pulled back along. -/
+theorem Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs {X S S' X' : Scheme.{u}}
+    (f : X ⟶ S) (g : S' ⟶ S) (v : X' ⟶ X) (f' : X' ⟶ S') [Smooth g] [QuasiCompact f]
+    [QuasiSeparated f] (sq : IsPullback v f' f g) (q : ℤ)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsTorsionSheafOfInvertibleOrder S F] :
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
+  Etale.isIso_baseChangeHomologyMap_of_smooth Λ g f v f' sq q F
+
+/-- Blueprint `sk-rem-rest`: the isomorphism `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` of the classical
+form of the smooth base change theorem
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs`). -/
+noncomputable def Etale.smoothBaseChangeHomologyIso {X S S' X' : Scheme.{u}}
+    (f : X ⟶ S) (g : S' ⟶ S) (v : X' ⟶ X) (f' : X' ⟶ S') [Smooth g] [QuasiCompact f]
+    [QuasiSeparated f] (sq : IsPullback v f' f g) (q : ℤ)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsTorsionSheafOfInvertibleOrder S F] :
+    (Etale.baseChangeSourceFunctor Λ g f q).obj F ≅
+      (Etale.baseChangeTargetFunctor Λ v f' q).obj F :=
+  have := Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs Λ f g v f' sq q F
+  asIso (Etale.baseChangeHomologyMap Λ sq q F)
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 

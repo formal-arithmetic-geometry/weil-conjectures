@@ -5,68 +5,69 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
-public import WeilConjectures.SixFunctors.Etale.Derived.CompactSupportIntegral
-public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleUpperShriek
 
 /-!
-# The rational internal hom and exceptional inverse image
+# The exceptional adjunction at the integral and rational stages
 
-Let `E/ℚ_ℓ` be finite inside `ℚ̄_ℓ` with ring of integers `𝒪_E`. As in
-`WeilConjectures.SixFunctors.Etale.Derived.CompactSupportIntegral`, the integral stage is the
-category `D_comp(X_ét, 𝒪_E)` of derived complete objects
-(`DerivedCategoryDerivedCompleteIntegral`) and the rational stage its rationalization
-`D_comp(X_ét, E)` (`DerivedCategoryDerivedCompleteRational`); the rational operations are the
-ones *defined by coefficient passage*: the functors induced on rationalizations by `𝒪_E`-linear
-triangulated integral functors (`CategoryTheory.Rationalization.map`).
+Let `Λ` be a Noetherian domain, complete for a principal ideal `I = (ϖ)` with `Λ ⧸ I` finite of
+exponent invertible on a field `k` (the integral stage `Λ = 𝒪_E`, `I = 𝔪_E`), and `M` a submonoid
+of `Λ` (the nonzero elements, or the powers of `ϖ`), so that the rational stage is
+`Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]` (`CategoryTheory.Rationalization`, blueprint
+`def-weil-rationalization-karoubi`). For a separated finite-type morphism `f : X ⟶ Y` of
+separated finite-type `k`-schemes this file constructs the compact-support direct image and the
+exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`
+(blueprint `lem-coef-rational-operations`):
 
-This file proves the parts of blueprint `lem-coef-rational-operations` that this model can
-express:
+* at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)` (blueprint
+  `lem-coef-integral-compact-support`,
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`) and so does
+  `Rf^!` (blueprint `prop-coef-integral-exceptional-adjoint`,
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), so that the
+  adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the constructible categories
+  (`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`);
+* at the rational stage, the functors and the adjunction are the rationalizations of the integral
+  ones (`AlgebraicGeometry.Etale.boundedConstructibleRationalLowerShriekUpperShriekAdjunction`),
+  so that the rational `Rf_E^!` is right adjoint to the rational `Rf_{!,E}` with the localized
+  units and counits;
+* the rational `Rf_E^!` is computed by coefficient passage from the integral formula
+  `Rf^! L ≅ 𝔻_X f^*_comp 𝔻_Y L` of `prop-coef-integral-exceptional-adjoint`
+  (`AlgebraicGeometry.Etale.nonempty_iso_boundedConstructibleRationalUpperShriek`).
 
-- **the exceptional adjunction.** The integral `Rf^!` preserves derived completeness
-  (`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`), and on
-  `D_comp(-, 𝒪_E)` it is right adjoint to the integral compact support `(Rf_! -)^`
-  (`AlgebraicGeometry.Etale.rightDerivedLowerShriekUpperShriekDerivedCompleteIntegralAdjunction`).
-  Localizing this adjunction gives the adjunction `Rf_{!,E} ⊣ Rf_E^!` at `E`, whose unit and
-  counit are the rationalizations of the integral ones
-  (`AlgebraicGeometry.Etale.rightDerivedLowerShriekUpperShriekDerivedCompleteRationalAdjunction`),
-  and the rational dualizing object `ω_{X,E} = Ra_{X,E}^! E`
-  (`AlgebraicGeometry.Etale.dualizingComplexDerivedCompleteRational`).
-- **the completion adjunction and the internal hom.** For a derived complete `K`, the
-  completed tensor product `P ↦ (K ⊗ᴸ P)^` is left adjoint to `RHom_{𝒪_E}(K, -)` on
-  `D_comp(-, 𝒪_E)` (`AlgebraicGeometry.Etale.completedTensorDerivedHomAdjunction`), the
-  ambient tensor–hom adjunction followed by the completion adjunction. Localizing it identifies
-  the rational internal hom `RHom_E(K, -)` (coefficient passage) as the right adjoint of the
-  rational completed tensor product, with the localized evaluation as counit
-  (`AlgebraicGeometry.Etale.completedTensorDerivedHomRationalAdjunction`), and the rational
-  Verdier dual is `D_{X,E} K = RHom_E(K, ω_{X,E})`
-  (`AlgebraicGeometry.Etale.verdierDualDerivedCompleteRational`).
+## Implementation notes
 
-## What is not stated
+The rational internal hom and the rational dualizing object are those obtained by coefficient
+passage, that is the images under the localization functor of the integral ones; they are not
+introduced as separate functors here, and the formula for `Rf_E^!` is stated on objects coming
+from the integral stage, which are all the objects of `Dᵇc(X, E)`. The compatibilities of the
+identifications with evaluations, units and counits under finite scalar extension are not
+recorded.
 
-- The formula `Rf_E^! ≅ D_{X,E} f^* D_{Y,E}` and the duality theory of `D_{X,E}` (biduality,
-  `thm-coef-rational-verdier`) are not in the repository: the integral formula
-  `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L` of `prop-coef-integral-exceptional-adjoint`
-  (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) is only an
-  objectwise `Nonempty` isomorphism, which does not localize, and there is no integral or
-  rational Verdier dual functor.
-- The compatibility with finite scalar extension `E ⊆ E'` (`lem-coef-integral-finite-extension`)
-  is not stated.
-- The operations are defined on all of `D_comp(-, E)`; their preservation of the constructible
-  subcategories is `prop-coef-integral-exceptional-adjoint` and `cor-coef-integral-internal-hom`.
+The exceptional inverse images at both stages are
+`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek` and
+`AlgebraicGeometry.Etale.boundedConstructibleRationalUpperShriek`. As there, the lower shrieks on
+`D(-_ét, Λ)` along `f` and the structure morphisms are assumed to be left adjoints, which is how
+`Rf^!` on `D(-_ét, Λ)` is defined.
 -/
 
 @[expose] public section
 
-universe w u
+universe u
 
-open CategoryTheory Limits Pretriangulated Opposite
+open CategoryTheory Limits Opposite
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
 open Scheme
 
 namespace Etale
+
+set_option hygiene false in
+/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
+local notation "𝐃(" X ", " Λ ")" =>
+  _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
@@ -75,161 +76,152 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
-  [Small.{u + 1} E] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
-  [FiniteDimensional ℚ_[l] E]
+variable {Λ : Type (u + 1)} [CommRing Λ] (M : Submonoid Λ) {I : Ideal Λ}
 
-set_option hygiene false in
-/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. -/
-local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+section Integral
 
-set_option hygiene false in
-/-- The derived category `D(X_ét, 𝒪_E)`. -/
-local notation "𝐃(" X ")" => _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) 𝐌)
+variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {X Y : Scheme.{u}}
 
-section Exceptional
+/-- Blueprint `lem-coef-integral-compact-support`: Integral compact support.
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![𝐌]).IsLeftAdjoint]
+Let `f : X ⟶ Y` be a separated finite-type morphism of separated finite-type `k`-schemes and
+`K ∈ Dᵇc(X, Λ)`, at the integral stage `Λ = 𝒪_E`, `I = (ϖ)`. Then `Rf_! K ∈ Dᵇc(Y, Λ)`, the
+canonical compact-support coefficient comparison `(Rf_! K) ⊗ᴸ A_n ≅ Rf_{!,n} K_n` is an
+isomorphism (read after restriction of scalars to `Λ`, where `Rf_{!,n} K_n` is `Rf_!(K ⊗ᴸ A_n)`),
+and if `dim X ≤ d` and the reductions of `K` have Tor amplitude in `[a, b]`, those of `Rf_! K`
+have Tor amplitude in `[a, b + 2d]`.
 
-local instance : (rightDerivedUpperShriekAdjunction 𝐌 f).CommShift ℤ :=
-  (rightDerivedUpperShriekAdjunction 𝐌 f).commShift_of_leftAdjoint ℤ
+The coefficient comparison is proved here
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`); the
+constructibility and the Tor bound belong to the coefficient chapter. -/
+theorem boundedConstructibleIntegral_rightDerivedLowerShriek {ϖ : Λ}
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
+    [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [QuasiCompact f] [HasCompactification f] {K : 𝐃(X, Λ)}
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
+    DerivedCategory.boundedConstructibleIntegral I Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
+      (∀ n : ℕ, IsIso ((rightDerivedLowerShriekReductionModIdealMap Λ (I ^ n)
+        (HasCompactification.compactification f)).app K)) ∧
+      ∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ a b : ℤ,
+        (∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) →
+        ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
+          ((reductionModIdeal Λ Y (I ^ (n + 1))).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) := by
+  refine ⟨sorry, fun n ↦ ?_, sorry⟩
+  subst hI
+  have := isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow
+    (HasCompactification.compactification f) hϖ n
+  infer_instance
 
-local instance : (R(f)^![𝐌]).IsTriangulated :=
-  (rightDerivedUpperShriekAdjunction 𝐌 f).isTriangulated_rightAdjoint
+variable [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
 
-local instance : (R(f)^![𝐌]).Linear (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
-  (rightDerivedUpperShriekAdjunction 𝐌 f).right_adjoint_linear
+variable (I) in
+/-- The compact-support direct image `Rf_! : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` at the integral stage, the
+restriction of `Rf_!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`,
+blueprint `lem-coef-integral-compact-support`). -/
+noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X ⟶ Spec (.of k))
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
+    [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [QuasiCompact f] [HasCompactification f] :
+    (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory ⥤
+      (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory :=
+  ObjectProperty.liftFullSubcategory _ _ (R(f)_![ModuleCat.{u + 1} Λ]) fun _ hK ↦
+    have ⟨_, hϖ, hI⟩ := hϖI.out
+    (boundedConstructibleIntegral_rightDerivedLowerShriek hϖ hI aX aY f hf hK).1
 
-/-- The exceptional inverse image `Rf^!` preserves derived completeness at the integral stage:
-it is right adjoint to the `𝒪_E`-linear `Rf_!`, which preserves the objects on which a
-uniformizer acts invertibly, and the derived complete objects are those right orthogonal to
-these. -/
-theorem derivedCompleteIntegral_rightDerivedUpperShriek (L : 𝐃(Y))
-    (hL : DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L) :
-    DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E ((R(f)^![𝐌]).obj L) := by
-  obtain ⟨ϖ, hϖ, hI⟩ := PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
-  change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at hL ⊢
-  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI] at hL ⊢
-  intro Z g (hZ : IsIso (ϖ • 𝟙 Z))
-  let adj := rightDerivedUpperShriekAdjunction 𝐌 f
-  have hZ' : _root_.DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ
-      ((R(f)_![𝐌]).obj Z) := by
-    change IsIso (ϖ • 𝟙 _)
-    rw [← (R(f)_![𝐌]).map_id, ← Functor.map_smul]
-    infer_instance
-  rw [← (adj.homEquiv Z L).apply_symm_apply g, hL ((adj.homEquiv Z L).symm g) hZ',
-    Adjunction.homEquiv_unit, Functor.map_zero, Limits.comp_zero]
+/-- Blueprint `lem-coef-rational-operations`, the integral exceptional adjunction: the adjunction
+`Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the integral constructible categories
+(blueprint `prop-coef-integral-exceptional-adjoint`). -/
+noncomputable def boundedConstructibleIntegralLowerShriekUpperShriekAdjunction
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
+    boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf ⊣
+      boundedConstructibleIntegralUpperShriek I aX aY f hf :=
+  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
 
-/-- `Rf^!` on derived complete objects, as a functor between the full subcategories. -/
-noncomputable abbrev rightDerivedUpperShriekDerivedCompleteIntegralAux :
-    (DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).FullSubcategory ⥤
-      (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).FullSubcategory :=
-  (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).lift
-    ((DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι ⋙ R(f)^![𝐌])
-    (fun L ↦ derivedCompleteIntegral_rightDerivedUpperShriek l E f _ L.property)
+end Integral
 
-/-- Blueprint `prop-coef-integral-exceptional-adjoint` (the functor): the integral exceptional
-inverse image `Rf^! : D_comp(Y_ét, 𝒪_E) ⥤ D_comp(X_ét, 𝒪_E)`, the restriction of `Rf^!`
-(`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`). -/
-noncomputable def rightDerivedUpperShriekDerivedCompleteIntegral :
-    DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E ⥤
-      DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E :=
-  rightDerivedUpperShriekDerivedCompleteIntegralAux l E f
+section Rational
 
-noncomputable instance : (rightDerivedUpperShriekDerivedCompleteIntegral l E f).CommShift ℤ :=
-  inferInstanceAs ((rightDerivedUpperShriekDerivedCompleteIntegralAux l E f).CommShift ℤ)
+variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
+  [Finite (Λ ⧸ I)] [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+  [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+  [HasCompactification aX] [HasCompactification aY]
+  [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+  (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+  [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
-instance : (rightDerivedUpperShriekDerivedCompleteIntegral l E f).IsTriangulated :=
-  inferInstanceAs (rightDerivedUpperShriekDerivedCompleteIntegralAux l E f).IsTriangulated
+variable (I) in
+/-- The compact-support direct image `Rf_{!,E} : Dᵇc(X, E) ⥤ Dᵇc(Y, E)` at the rational stage,
+induced by the integral `Rf_!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegralRightDerivedLowerShriek`). -/
+noncomputable abbrev boundedConstructibleRationalRightDerivedLowerShriek :=
+  Rationalization.map M (boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf)
 
-instance : (rightDerivedUpperShriekDerivedCompleteIntegral l E f).Linear
-    (Shrink.{u + 1} (PadicAlgCl.integers l E)) where
-  map_smul _ _ :=
-    (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).ι.map_injective <|
-      (R(f)^![𝐌]).map_smul _ _
+/-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
+exceptional inverse image, the adjunction.
 
-/-- Blueprint `prop-coef-integral-exceptional-adjoint` (the adjunction): on derived complete
-objects, the integral exceptional inverse image is right adjoint to the integral compact support
-`K ↦ (Rf_! K)^` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedCompleteIntegral`). It is
-the adjunction `Rf_! ⊣ Rf^!` composed with the completion adjunction `(-)^ ⊣ ι`, restricted to
-`D_comp(X_ét, 𝒪_E)`: `Hom((Rf_! K)^, L) = Hom(Rf_! K, L) = Hom(K, Rf^! L)` for `L` complete. -/
-noncomputable def rightDerivedLowerShriekUpperShriekDerivedCompleteIntegralAdjunction :
-    rightDerivedLowerShriekDerivedCompleteIntegral l E f ⊣
-      rightDerivedUpperShriekDerivedCompleteIntegral l E f :=
-  ((rightDerivedUpperShriekAdjunction 𝐌 f).comp
-      (DerivedCategoryDerivedCompleteIntegral.completionAdjunction _ l E)).restrictFullyFaithful
-    (ObjectProperty.fullyFaithfulι _) (Functor.FullyFaithful.id _)
-    (Functor.rightUnitor _).symm
-    (Functor.leftUnitor _ ≪≫ (ObjectProperty.liftCompιIso _ _ _).symm)
+On the rationalized constructible categories `Dᵇc(-, E) = Dᵇc(-, 𝒪_E)[M⁻¹]`, the exceptional
+inverse image `Rf_E^!` obtained by coefficient passage from the integral `Rf^!` is right adjoint
+to the compact-support direct image `Rf_{!,E}`, with the localized units and counits: this is the
+localization (`CategoryTheory.Rationalization.mapAdjunction`) of the integral adjunction
+`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`
+(`prop-coef-integral-exceptional-adjoint`). -/
+noncomputable def boundedConstructibleRationalLowerShriekUpperShriekAdjunction :
+    boundedConstructibleRationalRightDerivedLowerShriek M I aX aY f hf ⊣
+      boundedConstructibleRationalUpperShriek (M := M) I aX aY f hf :=
+  Rationalization.mapAdjunction M
+    (boundedConstructibleIntegralLowerShriekUpperShriekAdjunction (I := I) aX aY f hf)
 
-/-- Blueprint `lem-coef-rational-operations` (the exceptional inverse image): the rational
-exceptional inverse image `Rf_E^! : D_comp(Y_ét, E) ⥤ D_comp(X_ét, E)`, induced on the
-rationalizations by the `𝒪_E`-linear triangulated integral `Rf^!` (coefficient passage). -/
-noncomputable def rightDerivedUpperShriekDerivedCompleteRational :
-    DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E ⥤
-      DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E :=
-  Rationalization.map _ (rightDerivedUpperShriekDerivedCompleteIntegral l E f)
+/-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
+exceptional inverse image, the dual formula `Rf_E^! M ≅ 𝔻_{X,E} f^* 𝔻_{Y,E} M`.
 
-/-- Blueprint `lem-coef-rational-operations` (the exceptional adjunction): `Rf_E^!` is right
-adjoint to the rational compact support `Rf_{!,E}`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedCompleteRational`, blueprint
-`def-weil-integral-rational-qbar-compact-support`). The adjunction is the localization of the
-integral exceptional adjunction
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekUpperShriekDerivedCompleteIntegralAdjunction`,
-`prop-coef-integral-exceptional-adjoint`), so its unit and counit are the rationalizations of the
-integral ones
-(`CategoryTheory.Rationalization.mapAdjunction_unit_app`,
-`CategoryTheory.Rationalization.mapAdjunction_counit_app`). -/
-noncomputable def rightDerivedLowerShriekUpperShriekDerivedCompleteRationalAdjunction :
-    rightDerivedLowerShriekDerivedCompleteRational l E f ⊣
-      rightDerivedUpperShriekDerivedCompleteRational l E f :=
-  Rationalization.mapAdjunction _
-    (rightDerivedLowerShriekUpperShriekDerivedCompleteIntegralAdjunction l E f)
+Let `ω_X`, `ω_Y` be the integral dualizing complexes, the homotopy limits of the towers
+`n ↦ Ra^!(Λ ⧸ Iⁿ)`, with `ω_X ∈ Dᵇc(X, 𝒪_E)`, so that the integral Verdier dual is
+`𝔻_X = RHom(-, ω_X)` and the rational one is its image `𝔻_{X,E}`. For `L ∈ Dᵇc(Y, 𝒪_E)` and a
+completed pullback `N ∈ Dᵇc(X, 𝒪_E)` of `𝔻_Y L` (a morphism `Lf^* 𝔻_Y L ⟶ N` inducing
+isomorphisms on all reductions), the rational exceptional inverse image of the image of `L` in
+`Dᵇc(Y, E)` is the image of `𝔻_X N` in `Dᵇc(X, E)`. It is the image of the integral formula of
+`prop-coef-integral-exceptional-adjoint`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) under the
+localization functor; every object of `Dᵇc(Y, E)` is the image of some `L`. -/
+theorem nonempty_iso_boundedConstructibleRationalUpperShriek
+    (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory)
+    (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+      R(aX)^![ModuleCat.{u + 1} Λ])) (hωX : Pretriangulated.IsHomotopyLimit ωX)
+    (hωXc : DerivedCategory.boundedConstructibleIntegral I X ωX.pt)
+    (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+      R(aY)^![ModuleCat.{u + 1} Λ])) (hωY : Pretriangulated.IsHomotopyLimit ωY)
+    (N : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
+    (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
+      (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L.obj)).obj ωY.pt) ⟶ N.obj)
+    (hφ : ∀ n : ℕ, IsIso ((reductionModIdeal Λ X (I ^ n)).map φ)) :
+    ∃ hD : DerivedCategory.boundedConstructibleIntegral I X
+        (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N.obj)).obj ωX.pt),
+      Nonempty ((boundedConstructibleRationalUpperShriek (M := M) I aX aY f hf).obj
+          ((Rationalization.Q M _).obj L) ≅
+        (Rationalization.Q M _).obj ⟨_, hD⟩) := by
+  obtain ⟨ϖ, hϖ, hI⟩ := hϖI.out
+  have hD := (boundedConstructibleIntegral_derivedHom I hϖ hI aX N.property hωXc).1
+  refine ⟨hD, ?_⟩
+  have hc := L.property.1.map (R(f)^![ModuleCat.{u + 1} Λ])
+  obtain ⟨e⟩ := (boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf L.property
+    hc).2.2.1 ωX hωX ωY hωY N.obj φ N.property.1 hφ
+  exact ⟨(Rationalization.mapFac M _).app L ≪≫
+    (Rationalization.Q M _).mapIso (ObjectProperty.isoMk _ e)⟩
 
-end Exceptional
-
-section InternalHom
-
-variable {X : Scheme.{u}} (K : 𝐃(X))
-
-local instance : ((derivedHom 𝐌 X).obj (op K)).CommShift ℤ :=
-  (derivedTensorHomAdjunction 𝐌 K).rightAdjointCommShift ℤ
-
-local instance : (derivedTensorHomAdjunction 𝐌 K).CommShift ℤ :=
-  (derivedTensorHomAdjunction 𝐌 K).commShift_of_leftAdjoint ℤ
-
-local instance : ((derivedHom 𝐌 X).obj (op K)).IsTriangulated :=
-  (derivedTensorHomAdjunction 𝐌 K).isTriangulated_rightAdjoint
-
-local instance : ((derivedHom 𝐌 X).obj (op K)).Linear
-    (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
-  (derivedTensorHomAdjunction 𝐌 K).right_adjoint_linear
-
-/-- The completed tensor product `P ↦ (K ⊗ᴸ P)^` of `D_comp(X_ét, 𝒪_E)`: the derived tensor
-product followed by the derived completion (`R lim_n (K ⊗ᴸ P) ⊗ᴸ 𝒪_E/𝔪_Eⁿ`, the blueprint's
-`K ⊗̂ᴸ P`). -/
-noncomputable def completedTensorDerivedCompleteIntegral :
-    DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E ⥤
-      DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E :=
-  DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ (derivedTensor 𝐌 X).obj K ⋙
-    DerivedCategoryDerivedCompleteIntegral.completion _ l E
-
-noncomputable instance : (completedTensorDerivedCompleteIntegral l E K).CommShift ℤ :=
-  inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙
-    (derivedTensor 𝐌 X).obj K ⋙ DerivedCategoryDerivedCompleteIntegral.completion _ l E).CommShift
-      ℤ)
-
-instance : (completedTensorDerivedCompleteIntegral l E K).IsTriangulated :=
-  inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙
-    (derivedTensor 𝐌 X).obj K ⋙
-      DerivedCategoryDerivedCompleteIntegral.completion _ l E).IsTriangulated)
-
-instance : (completedTensorDerivedCompleteIntegral l E K).Linear
-    (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
-  inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙
-    (derivedTensor 𝐌 X).obj K ⋙ DerivedCategoryDerivedCompleteIntegral.completion _ l E).Linear _)
-
-end InternalHom
+end Rational
 
 end Etale
 

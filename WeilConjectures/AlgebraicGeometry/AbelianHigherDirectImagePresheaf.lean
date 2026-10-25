@@ -33,7 +33,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /- The following local comparisons adapt the proved module-coefficient argument in
-WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 (the sections DerivedSections and CohomologyPresheaf) to free abelian sheaves.
 The local lifting argument is Stacks 072W/03Q8; it avoids restricting injectives to
 individual etale schemes by working directly with derived Hom and local cycles. -/

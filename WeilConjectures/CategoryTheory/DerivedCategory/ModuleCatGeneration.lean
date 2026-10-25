@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.Projective.Extend
 public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope
+public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
@@ -41,7 +42,8 @@ Hence it contains:
 
 ## Main statements
 
-- `CategoryTheory.NatTrans.isIso_app_of_isColimit_cofan`: closure under coproducts. Closure
+- `CategoryTheory.NatTrans.isIso_app_of_isColimit_cofan` (in
+  `WeilConjectures.CategoryTheory.DerivedCategory.Telescope`): closure under coproducts. Closure
   under shifts and retracts is in `WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators`.
 - `DerivedCategory.isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE`: bounded complexes.
 - `DerivedCategory.isIso_app_Q_obj_of_telescope`: telescopes.
@@ -53,26 +55,6 @@ Hence it contains:
 universe w v
 
 open CategoryTheory Category Limits Pretriangulated
-
-namespace CategoryTheory.NatTrans
-
-variable {C D : Type*} [Category* C] [Category* D] {F G : C ⥤ D} (τ : F ⟶ G)
-
-/-- If `F` and `G` preserve a coproduct and a natural transformation `τ : F ⟶ G` is an
-isomorphism at the summands, it is an isomorphism at the coproduct. -/
-lemma isIso_app_of_isColimit_cofan {J : Type*} {X : J → C} {c : Cofan X} (hc : IsColimit c)
-    [PreservesColimit (Discrete.functor X) F] [PreservesColimit (Discrete.functor X) G]
-    (h : ∀ j, IsIso (τ.app (X j))) : IsIso (τ.app c.pt) := by
-  let hF := isColimitOfPreserves F hc
-  let hG := isColimitOfPreserves G hc
-  have : τ.app c.pt = (IsColimit.coconePointsIsoOfNatIso hF hG
-      (Discrete.natIso fun j ↦ asIso (τ.app (X j.as)))).hom := hF.hom_ext fun j ↦ by
-    rw [IsColimit.comp_coconePointsIsoOfNatIso_hom]
-    simp
-  rw [this]
-  infer_instance
-
-end CategoryTheory.NatTrans
 
 namespace DerivedCategory
 
