@@ -247,9 +247,9 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
         ((Spec (.of R)).homOfLE (PrimeSpectrum.basicOpen_mul_le_left f h))).mapDerivedCategory.obj
           E) = 0 := by
   classical
-  haveI := D.isRegularRing_quotient_x
-  haveI := D.isRegularRing_quotient_h'
-  haveI := D.isDomain_quotient_x
+  have := D.isRegularRing_quotient_x
+  have := D.isRegularRing_quotient_h'
+  have := D.isDomain_quotient_x
   let Z : Over (Spec (.of k)) := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k D.Rx)))
   let iY : Spec (.of (D.Rx ⧸ Ideal.span {D.xx})) ⟶ Z.left :=
     Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _))
@@ -325,7 +325,7 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
     intro j
     rw [← Scheme.closedGeometricPoint_apply (IsLocalRing.closedPoint (ResidueField (A j))),
       ← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
-    simp only [s, iY, c, Scheme.closedGeometricPoint, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    simp only [iY, c, Scheme.closedGeometricPoint, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
     rfl
   have := D.isLocalization_A'
   let ε : Localization.Away D.xA ≃ₐ[R ⧸ Ideal.span {g}]

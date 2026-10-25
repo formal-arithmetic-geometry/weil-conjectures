@@ -36,32 +36,25 @@ lemma HasFiniteEllMonodromy.upperStar' {ℓ : ℕ} {U V : Scheme.{u}} (f : V ⟶
     {E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hE : HasFiniteEllMonodromy ℓ E) :
     HasFiniteEllMonodromy ℓ (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) := by
-  obtain ⟨⟨a, b, hab⟩, hfl, G, _, _, hG, c, hc⟩ := hE
+  obtain ⟨⟨a, b, ha, hb⟩, hc⟩ := hE
   let e (n : ℤ) :
       ((f)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.homologyFunctor _ n).obj E) ≅
       (DerivedCategory.homologyFunctor _ n).obj
         (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E) :=
     (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n).app E
-  refine ⟨⟨a, b, fun n hn ↦
-    (((f)^*[ModuleCat.{u + 1} Λ]).map_isZero (hab n hn)).of_iso (e n).symm⟩, fun n ↦ ?_,
-    G, inferInstance, inferInstance, hG, c.pullback f, fun n ↦ ?_⟩
-  · have := hfl n
-    have := Scheme.IsFiniteLocallyConstantSheaf.upperStar f
-      ((DerivedCategory.homologyFunctor _ n).obj E)
-    exact Scheme.IsFiniteLocallyConstantSheaf.of_iso (e n)
-  · set H := (DerivedCategory.homologyFunctor _ n).obj E
-    have := hc n
-    have := Sheaf.IsConstant.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst c.π f)
-      ((c.π)^*[ModuleCat.{u + 1} Λ].obj H)
-    let i : ((pullback.fst c.π f)^*[ModuleCat.{u + 1} Λ]).obj
-        ((c.π)^*[ModuleCat.{u + 1} Λ].obj H) ≅
-        ((pullback.snd c.π f)^*[ModuleCat.{u + 1} Λ]).obj
-          ((DerivedCategory.homologyFunctor _ n).obj
-            (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E)) :=
-      ((upperStarComp _ (pullback.fst c.π f) c.π).app H).symm ≪≫
-        eqToIso (congrArg (fun m ↦ ((m)^*[ModuleCat.{u + 1} Λ]).obj H) pullback.condition) ≪≫
-        (upperStarComp _ (pullback.snd c.π f) f).app H ≪≫
-        ((pullback.snd c.π f)^*[ModuleCat.{u + 1} Λ]).mapIso (e n)
-    exact Sheaf.isConstant_congr (Limits.pullback c.π f).smallEtaleTopology i
+  refine ⟨⟨a, b, ?_, ?_⟩, fun n ↦ ?_⟩
+  · rw [DerivedCategory.isGE_iff] at ha ⊢
+    exact fun i hi ↦ (((f)^*[ModuleCat.{u + 1} Λ]).map_isZero (ha i hi)).of_iso (e i).symm
+  · rw [DerivedCategory.isLE_iff] at hb ⊢
+    exact fun i hi ↦ (((f)^*[ModuleCat.{u + 1} Λ]).map_isZero (hb i hi)).of_iso (e i).symm
+  · obtain ⟨G, _, _, hG, c, M, hM, ⟨i⟩⟩ := hc n
+    set H := (DerivedCategory.homologyFunctor _ n).obj E
+    refine ⟨G, inferInstance, inferInstance, hG, c.pullback f, M, hM, ⟨?_⟩⟩
+    exact ((pullback.snd c.π f)^*[ModuleCat.{u + 1} Λ]).mapIso (e n).symm ≪≫
+      ((upperStarComp _ (pullback.snd c.π f) f).app H).symm ≪≫
+      eqToIso (congrArg (fun m ↦ ((m)^*[ModuleCat.{u + 1} Λ]).obj H) pullback.condition.symm) ≪≫
+      (upperStarComp _ (pullback.fst c.π f) c.π).app H ≪≫
+      ((pullback.fst c.π f)^*[ModuleCat.{u + 1} Λ]).mapIso i ≪≫
+      (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) (pullback.fst c.π f)).app M
 
 end AlgebraicGeometry.Etale

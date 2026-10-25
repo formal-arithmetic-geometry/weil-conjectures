@@ -40,19 +40,17 @@ namespace AlgebraicGeometry.Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] {U : Scheme.{u}}
 
 /-- A complex `E` of étale sheaves of `Λ`-modules on `U` *has finite `ℓ`-group monodromy*: it is
-bounded, its cohomology sheaves are finite locally constant, and there is a finite étale Galois
-cover `c : P ⟶ U` whose group `G` is a finite `ℓ`-group such that every cohomology sheaf of `E`
-becomes constant on `P` (blueprint `sk-lem-tf-transverse-boundary`: "a bounded complex of
-`A`-modules on `Z - (X ∪ Y)` with finite locally constant cohomology whose monodromy factors
-through a finite `ℓ`-group"). -/
+bounded, and each of its cohomology sheaves is trivialized by a finite étale Galois cover
+`c : P ⟶ U` whose group is a finite `ℓ`-group: its pullback to `P` is the constant sheaf on a
+finite `Λ`-module (blueprint `sk-lem-tf-transverse-boundary`: "a bounded complex of `A`-modules
+on `Z - (X ∪ Y)` with finite locally constant cohomology whose monodromy factors through a finite
+`ℓ`-group"). -/
 def HasFiniteEllMonodromy (ℓ : ℕ)
     (E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
-  (∃ a b : ℤ, ∀ n : ℤ, (n < a ∨ b < n) →
-    IsZero ((DerivedCategory.homologyFunctor _ n).obj E)) ∧
-  (∀ n : ℤ, Scheme.IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ n).obj E)) ∧
-  ∃ (G : Type (u + 1)) (_ : Group G) (_ : Finite G), IsPGroup ℓ G ∧
-    ∃ c : Scheme.GaloisCover G U, ∀ n : ℤ,
-      ((c.π)^*[ModuleCat.{u + 1} Λ].obj ((DerivedCategory.homologyFunctor _ n).obj E)).IsConstant
-        c.P.smallEtaleTopology
+  (∃ a b : ℤ, E.IsGE a ∧ E.IsLE b) ∧ ∀ n : ℤ,
+    ∃ (G : Type (u + 1)) (_ : Group G) (_ : Finite G) (_ : IsPGroup ℓ G)
+      (c : Scheme.GaloisCover G U) (M : ModuleCat.{u + 1} Λ) (_ : Finite M),
+      Nonempty ((c.π)^*[ModuleCat.{u + 1} Λ].obj ((DerivedCategory.homologyFunctor _ n).obj E) ≅
+        (constantSheaf c.P.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
 
 end AlgebraicGeometry.Etale

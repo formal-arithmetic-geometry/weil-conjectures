@@ -154,7 +154,7 @@ theorem nonempty_blowupChartData [IsRegularLocalRing R]
   classical
   obtain ⟨d, e, hfd, hge, hT⟩ := hDB
   obtain ⟨d', e', hfd', hhe', hT'⟩ := hDH
-  obtain rfl := hfd'.unique hfd
+  obtain rfl := hfd.unique hfd'
   obtain rfl := hhe'.unique hh
   have hx₀ : x₀ ∈ maximalIdeal R := hm ▸ Ideal.subset_span (by simp)
   have hy₀ : y₀ ∈ maximalIdeal R := hm ▸ Ideal.subset_span (by simp)
@@ -249,7 +249,7 @@ theorem nonempty_blowupChartData [IsRegularLocalRing R]
     maximalIdeal_le_radical := by
       rw [hmx, Ideal.span_le]
       rintro _ (rfl | rfl)
-      · exact Ideal.le_radical (Ideal.subset_span (by simp))
+      · exact Ideal.le_radical (Ideal.subset_span (Set.mem_insert _ _))
       · exact ⟨e, pow_mem_span_pair_of_isUnit_coeff hgexp' hqu⟩
     A' := BlowupChart.strictTransform g x y₀
     finite := hfin
