@@ -63,6 +63,7 @@ lemma fact_ringChar_prime_of_finite : Fact (ringChar k₀).Prime :=
   ⟨CharP.char_is_prime k₀ (ringChar k₀)⟩
 
 attribute [local instance] fact_ringChar_prime_of_finite
+    ProEtale.CondensedRing.fintypeFrobeniusFixedPoints
 
 /-- The scheme `X₀` over `Spec k₀` as an object of `Over (Spec k₀)`. -/
 noncomputable abbrev WeilComplex.overSpec (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
@@ -98,12 +99,14 @@ becomes the automorphism of `K'`, and the traces only depend on the semisimplifi
 theorem WeilComplex.exists_weilBoundedConstructible_comparison (K : WeilComplex k₀ l X) :
     ∃ (K' : WeilBoundedConstructible l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)).hom)
       (ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l),
-      (∀ n : ℕ, ι (weilGlobalSupertrace l (Iso.refl _) K' n) =
+      (∀ n : ℕ, ι (weilStalkTraceAlternatingSum l (n + 1) (specAlgebraicClosure k₀)
+          (specAlgebraicClosure_comp_pow (n + 1))
+          ((weilCompactSupportCohomology l (Iso.refl _)).obj K')) =
         ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
           ((K.compactlySupportedCohomology i).frobeniusEnd ^ (n + 1))) ∧
       ∀ (n : ℕ)
         (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ (n + 1))),
-        ι (weilStalkSupertrace l n _
+        ι (weilStalkTraceAlternatingSum l (n + 1) _
           (frobeniusFixedPointsReflOfFieldPoint (X := WeilComplex.overSpec X) n y).2.2 K') =
           K.traceFunction (n + 1) y :=
   sorry
@@ -122,16 +125,14 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison
   obtain ⟨K', ι, hglob, hloc⟩ := K.exists_weilBoundedConstructible_comparison
   set eqv := (fieldPointsEquivFrobeniusFixedPointsRefl
     (X := WeilComplex.overSpec (k₀ := k₀) X) n).symm
-  have heqv : ∀ x, ι (weilStalkSupertrace l n x.1 x.2.2 K') = K.traceFunction (n + 1) (eqv x) := by
+  have heqv : ∀ x, ι (weilStalkTraceAlternatingSum l (n + 1) x.1 x.2.2 K') =
+      K.traceFunction (n + 1) (eqv x) := by
     intro x
     obtain ⟨y, rfl⟩ := (fieldPointsEquivFrobeniusFixedPointsRefl n).surjective x
     exact (hloc n y).trans (congrArg (K.traceFunction (n + 1))
       ((fieldPointsEquivFrobeniusFixedPointsRefl n).symm_apply_apply y).symm)
-  have := finite_frobeniusFixedPoints_of_powSucc_eq_refl
-    (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)) ⟨0, rfl⟩ n
-  rw [← hglob n,
-    weilTraceFormula l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)) ⟨0, rfl⟩ K' n,
-    map_finsum ι (Set.toFinite _)]
+  rw [← hglob n, weilTraceFormula l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X))
+    ⟨1, Nat.one_pos, Iso.pow_refl 1⟩ K' (n + 1), map_sum, ← finsum_eq_sum_of_fintype]
   exact (finsum_congr heqv).trans (finsum_comp_equiv eqv)
 
 end AlgebraicGeometry

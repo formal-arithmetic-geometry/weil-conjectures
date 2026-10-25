@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.TangentConeInitialForms
 public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.GluedStagesCharts
 public import Mathlib.RingTheory.Nakayama
 
 /-!
@@ -65,10 +66,6 @@ noncomputable def puncturedSpec (A : Type u) [CommRing A] [IsLocalRing A] :
 
 variable {R : Type u} [CommRing R] [IsLocalRing R]
 
-/-- The basic open `D(f) ⊆ Spec R`, as an open subscheme. -/
-noncomputable abbrev basicOpenSpec (f : R) : (Spec (.of R)).Opens :=
-  PrimeSpectrum.basicOpen f
-
 /-- A quotient of a local ring by an element of the maximal ideal is local. -/
 instance isLocalRing_quotient_span_singleton (g : R) [Fact (g ∈ maximalIdeal R)] :
     IsLocalRing (R ⧸ Ideal.span {g}) :=
@@ -85,7 +82,7 @@ lemma range_puncturedSpec_subset
     (hfg : maximalIdeal R ≤ (Ideal.span {f, g}).radical) :
     Set.range ((puncturedSpec (R ⧸ Ideal.span {g})).ι ≫
         Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {g})))) ⊆
-      Set.range (basicOpenSpec f).ι := by
+      Set.range (specBasicOpen (R := .of R) f).ι := by
   rintro _ ⟨p, rfl⟩
   rw [Scheme.Opens.range_ι]
   set q : PrimeSpectrum R := PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span {g})) p.val
@@ -112,7 +109,7 @@ when `V(f) ∩ V(g)` is the closed point. -/
 noncomputable def puncturedCurveMap
     (hfg : maximalIdeal R ≤ (Ideal.span {f, g}).radical) :
     (puncturedSpec (R ⧸ Ideal.span {g})).toScheme ⟶
-      (basicOpenSpec f).toScheme :=
+      (specBasicOpen (R := .of R) f).toScheme :=
   IsOpenImmersion.lift _ _ (range_puncturedSpec_subset hfg)
 
 end AlgebraicGeometry.Scheme

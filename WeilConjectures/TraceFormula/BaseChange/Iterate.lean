@@ -16,7 +16,7 @@ Let `e : X ≅ X` be an automorphism of a scheme over `Spec k` and `(K, φ)` a W
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `e`. Its iterate `(K, φ^{(n+1)})`
 (`ProEtale.CondensedRing.WeilBoundedConstructible.powSucc`) is a Weil object for `e^{n+1}`, with
 the iterated structure isomorphism `Iso.powSuccStr` of the derived pullbacks, as for Weil sheaves
-(`ProEtale.CondensedRing.WeilSheaf.powSucc`). The homology sheaves of the iterate are the
+(`ProEtale.CondensedRing.WeilSheaf.pow`). The homology sheaves of the iterate are the
 iterates of the homology sheaves
 (`ProEtale.CondensedRing.WeilBoundedConstructible.homologyPowSuccIso`): the commutation of the
 homology sheaves with the derived pullbacks is compatible with the composition isomorphisms
@@ -66,20 +66,28 @@ theorem powSuccStr_hom_eq_of_comp (P : (X ⟶ X) → D ⥤ D)
         (h f).hom.app ((P g).obj a))
     {a : D} (φ : (P e.hom).obj a ≅ a) (n : ℕ) :
     (e.powSuccStr Q compQ ((h e.hom).app a ≪≫ H.mapIso φ) n).hom =
-      (h (e.powSucc n).hom).hom.app a ≫ H.map (e.powSuccStr P compP φ n).hom := by
+      (h (e.pow (n + 1)).hom).hom.app a ≫ H.map (e.powSuccStr P compP φ n).hom := by
   induction n with
-  | zero => rfl
+  | zero =>
+    have key : ∀ (g g' : X ⟶ X) (hg : g = g'),
+        eqToHom (congrArg (fun g ↦ (Q g).obj (H.obj a)) hg) ≫ (h g').hom.app a =
+          (h g).hom.app a ≫ H.map (eqToHom (congrArg (fun g ↦ (P g).obj a) hg)) := by
+      rintro g _ rfl
+      simp
+    rw [powSuccStr_zero, powSuccStr_zero]
+    simp only [Iso.trans_hom, eqToIso.hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp]
+    exact (reassoc_of% key _ _ (Category.id_comp e.hom)) _
   | succ n ih =>
-    change (compQ (e.powSucc n).hom e.hom).hom.app (H.obj a) ≫
-        (Q (e.powSucc n).hom).map ((h e.hom).hom.app a ≫ H.map φ.hom) ≫
+    change (compQ (e.pow (n + 1)).hom e.hom).hom.app (H.obj a) ≫
+        (Q (e.pow (n + 1)).hom).map ((h e.hom).hom.app a ≫ H.map φ.hom) ≫
           (e.powSuccStr Q compQ ((h e.hom).app a ≪≫ H.mapIso φ) n).hom =
-      (h ((e.powSucc n).hom ≫ e.hom)).hom.app a ≫
-        H.map ((compP (e.powSucc n).hom e.hom).hom.app a ≫ (P (e.powSucc n).hom).map φ.hom ≫
+      (h ((e.pow (n + 1)).hom ≫ e.hom)).hom.app a ≫
+        H.map ((compP (e.pow (n + 1)).hom e.hom).hom.app a ≫ (P (e.pow (n + 1)).hom).map φ.hom ≫
           (e.powSuccStr P compP φ n).hom)
-    have nat := (h (e.powSucc n).hom).hom.naturality φ.hom
+    have nat := (h (e.pow (n + 1)).hom).hom.naturality φ.hom
     simp only [Functor.comp_map] at nat
     rw [ih, Functor.map_comp_assoc, reassoc_of% nat, Functor.map_comp, Functor.map_comp,
-      reassoc_of% (hcomp (e.powSucc n).hom e.hom a)]
+      reassoc_of% (hcomp (e.pow (n + 1)).hom e.hom a)]
 
 /-- The transport along `H` of the iterate of an algebra is the iterate of its transport: for an
 algebra `(a, φ)` for `P e`, the iterate for `Q e^{n+1}` of `(H a, (h e).app a ≪≫ H φ)` is
@@ -96,7 +104,7 @@ noncomputable def mapOfNatIsoPowSuccIso (P : (X ⟶ X) → D ⥤ D)
     (A : IsoAlgebra (P e.hom)) (n : ℕ) :
     IsoAlgebra.mk ((IsoAlgebra.mapOfNatIso (h e.hom)).obj A).carrier
         (e.powSuccStr Q compQ ((IsoAlgebra.mapOfNatIso (h e.hom)).obj A).str n) ≅
-      (IsoAlgebra.mapOfNatIso (h (e.powSucc n).hom)).obj
+      (IsoAlgebra.mapOfNatIso (h (e.pow (n + 1)).hom)).obj
         (IsoAlgebra.mk A.carrier (e.powSuccStr P compP A.str n)) :=
   IsoAlgebra.isoMk (Iso.refl _) (by
     rw [Iso.refl_hom, Functor.map_id, Category.id_comp, Category.comp_id, ← IsoAlgebra.str_hom,
@@ -123,7 +131,7 @@ variable {e : X ≅ X}
 for `e^{n+1}`, with the iterated structure isomorphism `Iso.powSuccStr` of the derived pullbacks,
 `φ^{(1)} = φ` and `φ^{(n+2)} : L(e^{n+1} ≫ e)^* K ≅ L(e^{n+1})^* Le^* K ≅ L(e^{n+1})^* K ≅ K`. -/
 noncomputable abbrev powSucc (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
-    WeilBoundedConstructible ℓ (e.powSucc n).hom :=
+    WeilBoundedConstructible ℓ (e.pow (n + 1)).hom :=
   IsoAlgebra.mk K.carrier
     (e.powSuccStr (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
       (fun f g ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g) K.str n)
@@ -238,9 +246,10 @@ variable {e : X ≅ X} (n : ℕ)
 sheaves: `(Hʲ(K), φ_{Hʲ(K)}^{(n+1)}) ≅ Hʲ(K, φ^{(n+1)})` as Weil sheaves for `e^{n+1}`. -/
 noncomputable def WeilBoundedConstructible.homologyPowSuccIso
     (K : WeilBoundedConstructible ℓ e.hom) (j : ℤ) :
-    (WeilSheaf.powSuccFunctor ℓ e n).obj ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) ≅
-      (WeilBoundedConstructible.homologyFunctor ℓ (e.powSucc n) j).obj (K.powSucc ℓ n) :=
-  e.mapOfNatIsoPowSuccIso
+    (WeilSheaf.powFunctor ℓ e (n + 1)).obj
+        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) ≅
+      (WeilBoundedConstructible.homologyFunctor ℓ (e.pow (n + 1)) j).obj (K.powSucc ℓ n) :=
+  eqToIso (WeilSheaf.pow_succ ℓ _ n) ≪≫ e.mapOfNatIsoPowSuccIso
     (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     (fun f g ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
     (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)

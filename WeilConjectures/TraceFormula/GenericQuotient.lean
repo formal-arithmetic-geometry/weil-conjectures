@@ -15,7 +15,7 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunction
 
 Let `X` be a nonempty separated scheme of finite type over a field `k` with an automorphism `e_X`
 of finite order (`e_X^{m+1} = 𝟙`). This file shows that `X` is generically a finite étale cover of
-a scheme with trivial automorphism (`AlgebraicGeometry.exists_isFinite_etale_of_powSucc_eq_refl`):
+a scheme with trivial automorphism (`AlgebraicGeometry.exists_isFinite_etale_of_pow_eq_refl`):
 there are a nonempty `e_X`-stable open subscheme `U`, its reduction `Z`, and a finite étale
 morphism `π : Z ⟶ V` to an affine scheme of finite type with `e_Z ≫ π = π` (SGA 1, Exposé V,
 Prop. 1.1 and Cor. 2.4). The proof finds a nonempty `e_X`-stable affine open
@@ -25,8 +25,8 @@ translates of a dense affine open), presents it as `Spec B` with `e_X = Spec σ`
 `AlgebraicGeometry.exists_isFinite_etale_specAlgOver`.
 
 It also records the powers of products of automorphisms and of the automorphism of the fixed locus
-of `e_Y^{m+1}` (`AlgebraicGeometry.Scheme.overProdIso_powSucc`,
-`AlgebraicGeometry.Scheme.fixedLocusIso_powSucc`).
+of `e_Y^{m+1}` (`AlgebraicGeometry.Scheme.overProdIso_pow`,
+`AlgebraicGeometry.Scheme.fixedLocusIso_pow`).
 -/
 
 @[expose] public section
@@ -38,11 +38,15 @@ open CategoryTheory Limits TopologicalSpace
 namespace CategoryTheory.Iso
 
 /-- `e^{a+1} ≫ e^{b+1} = e^{a+b+2}`. -/
-lemma powSucc_add {C : Type*} [Category C] {X : C} (e : X ≅ X) (a b : ℕ) :
-    e.powSucc (a + b + 1) = e.powSucc a ≪≫ e.powSucc b := by
+lemma pow_add_one {C : Type*} [Category C] {X : C} (e : X ≅ X) (a b : ℕ) :
+    e.pow (a + b + 2) = e.pow (a + 1) ≪≫ e.pow (b + 1) := by
   induction b with
-  | zero => rfl
-  | succ b ih => rw [← add_assoc, Iso.powSucc_succ, ih, Iso.powSucc_succ, Iso.trans_assoc]
+  | zero =>
+    rw [zero_add, Iso.pow_one]
+    rfl
+  | succ b ih =>
+    rw [show a + (b + 1) + 2 = a + b + 2 + 1 by omega, Iso.pow_succ e (a + b + 2), ih,
+      Iso.pow_succ e (b + 1), Iso.trans_assoc]
 
 end CategoryTheory.Iso
 
@@ -52,20 +56,22 @@ namespace Scheme
 
 variable {S : Scheme.{u}}
 
-lemma overProdIso_powSucc {W T : Over S} (e : W ≅ W) (e' : T ≅ T) (n : ℕ) :
-    (overProdIso e e').powSucc n = overProdIso (e.powSucc n) (e'.powSucc n) := by
+lemma overProdIso_pow {W T : Over S} (e : W ≅ W) (e' : T ≅ T) (n : ℕ) :
+    (overProdIso e e').pow (n + 1) = overProdIso (e.pow (n + 1)) (e'.pow (n + 1)) := by
   induction n with
-  | zero => rfl
-  | succ n ih => rw [Iso.powSucc_succ, ih, Iso.powSucc_succ, Iso.powSucc_succ, overProdIso_trans]
+  | zero => simp only [zero_add, Iso.pow_one]
+  | succ n ih =>
+    rw [Iso.pow_succ _ (n + 1), ih, Iso.pow_succ e (n + 1), Iso.pow_succ e' (n + 1),
+      overProdIso_trans]
 
 /-- The automorphism of the fixed locus of `e_Y^{m+1}` induced by `e_Y` has order dividing
 `m + 1`. -/
-lemma fixedLocusIso_powSucc {Y : Over S} (eY : Y ≅ Y) (m : ℕ) :
-    (fixedLocusIso (eY.powSucc m).hom eY
-      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eY eY rfl m).symm).powSucc m = Iso.refl _ := by
+lemma fixedLocusIso_pow {Y : Over S} (eY : Y ≅ Y) (m : ℕ) :
+    (fixedLocusIso (eY.pow (m + 1)).hom eY
+      (Iso.pow_hom_comp_eq_comp_pow_hom eY eY rfl m).symm).pow (m + 1) = Iso.refl _ := by
   ext1
   refine equalizer.hom_ext ?_
-  rw [Iso.powSucc_hom_comp_eq_comp_powSucc_hom _ _ (fixedLocusIso_hom_ι _ _ _),
+  rw [Iso.pow_hom_comp_eq_comp_pow_hom _ _ (fixedLocusIso_hom_ι _ _ _),
     ← equalizer.condition]
   simp
 
@@ -78,7 +84,7 @@ has a nonempty affine open subscheme stable under `e`: the intersection of the t
 dense affine open. -/
 theorem exists_nonempty_isAffineOpen_preimage_eq_self (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (eX : X ≅ X) {m : ℕ}
-    (hm : eX.powSucc m = Iso.refl X) [Nonempty X.left] :
+    (hm : eX.pow (m + 1) = Iso.refl X) [Nonempty X.left] :
     ∃ W : X.left.Opens, IsAffineOpen W ∧ (W : Set X.left).Nonempty ∧
       eX.hom.left ⁻¹ᵁ W = W := by
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
@@ -87,14 +93,15 @@ theorem exists_nonempty_isAffineOpen_preimage_eq_self (X : Over (Spec (.of k)))
   have : IsSeparated (terminal.from X.left) := by
     rw [Subsingleton.elim (terminal.from X.left) (X.hom ≫ terminal.from _)]; infer_instance
   obtain ⟨V, hV, hVd⟩ := X.left.exists_isAffineOpen_dense
-  let e : ℕ → (X.left ⟶ X.left) := fun n ↦ (eX.powSucc n).hom.left
+  let e : ℕ → (X.left ⟶ X.left) := fun n ↦ (eX.pow (n + 1)).hom.left
   have he : ∀ n, IsIso (e n) := fun n ↦
-    inferInstanceAs (IsIso ((Over.forget _).map (eX.powSucc n).hom))
+    inferInstanceAs (IsIso ((Over.forget _).map (eX.pow (n + 1)).hom))
   have hper : ∀ n, e (n + (m + 1)) = e n := fun n ↦ by
-    simp only [e, ← add_assoc, Iso.powSucc_add, hm, Iso.trans_refl]
+    simp only [e, ← add_assoc, Iso.pow_add_one, hm, Iso.trans_refl]
   have hshift : ∀ n, eX.hom.left ≫ e n = e (n + 1) := fun n ↦ by
-    simp only [e, Iso.powSucc_succ, Iso.trans_hom,
-      Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eX rfl n, Over.comp_left]
+    simp only [e]
+    rw [Iso.pow_succ eX (n + 1), Iso.trans_hom, Iso.pow_hom_comp_eq_comp_pow_hom eX eX rfl n,
+      Over.comp_left]
   let W : X.left.Opens := ⨅ i : Fin (m + 1), e i ⁻¹ᵁ V
   have hmem : ∀ x, x ∈ W ↔ ∀ n : ℕ, (e n).base x ∈ V := by
     intro x
@@ -137,7 +144,7 @@ contains a nonempty `e`-stable affine open subscheme `Spec B`, on which `e` is `
 automorphism `σ` of the `k`-algebra `B` of finite order. -/
 theorem exists_specAlgOver_isOpenImmersion (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] (eX : X ≅ X) {m : ℕ}
-    (hm : eX.powSucc m = Iso.refl X) [Nonempty X.left] :
+    (hm : eX.pow (m + 1) = Iso.refl X) [Nonempty X.left] :
     ∃ (B : Type u) (_ : CommRing B) (_ : Algebra k B) (_ : Algebra.FiniteType k B)
       (_ : Nontrivial B) (σ : B ≃ₐ[k] B) (_ : σ ^ (m + 1) = 1) (ι : specAlgOver B ⟶ X),
       IsOpenImmersion ι.left ∧ (specAlgOverIso σ).hom ≫ ι = ι ≫ eX.hom := by
@@ -150,12 +157,13 @@ theorem exists_specAlgOver_isOpenImmersion (X : Over (Spec (.of k))) [LocallyOfF
     simp only [Scheme.Hom.appLE, Scheme.Hom.id_app, Category.id_comp]
     exact X.left.presheaf.map_id _
   obtain ⟨W, hW, hWne, hWst⟩ := exists_nonempty_isAffineOpen_preimage_eq_self X eX hm
-  have hle : ∀ n, (eX.powSucc n).hom.left ⁻¹ᵁ W = W := by
+  have hle : ∀ n, (eX.pow (n + 1)).hom.left ⁻¹ᵁ W = W := by
     intro n
     induction n with
-    | zero => exact hWst
+    | zero => simpa using hWst
     | succ n ih =>
-      rw [Iso.powSucc_succ, Iso.trans_hom, Over.comp_left, Scheme.Hom.comp_preimage, hWst, ih]
+      rw [Iso.pow_succ eX (n + 1), Iso.trans_hom, Over.comp_left, Scheme.Hom.comp_preimage, hWst,
+          ih]
   have hle' : eX.inv.left ⁻¹ᵁ W = W := by
     conv_lhs => rw [← hWst]
     rw [← Scheme.Hom.comp_preimage, ← Over.comp_left, Iso.inv_hom_id, Over.id_left,
@@ -178,16 +186,20 @@ theorem exists_specAlgOver_isOpenImmersion (X : Over (Spec (.of k))) [LocallyOfF
       (congrArg CommRingCat.Hom.hom hts) (congrArg CommRingCat.Hom.hom hst))
       (fun r ↦ congrArg (fun f : CommRingCat.of k ⟶ Γ(X.left, W) ↦ f.hom r) hφs)
   have hσs : ∀ x, σ x = s.hom x := fun _ ↦ rfl
-  have hkey : ∀ n, (eX.powSucc (n + 1)).hom.left.appLE W W (hle (n + 1)).ge =
-      s ≫ (eX.powSucc n).hom.left.appLE W W (hle n).ge := by
+  have hkey : ∀ n, (eX.pow (n + 2)).hom.left.appLE W W (hle (n + 1)).ge =
+      s ≫ (eX.pow (n + 1)).hom.left.appLE W W (hle n).ge := by
     intro n
     rw [Scheme.Hom.appLE_comp_appLE]
-    exact appLE_of_eq (by rw [Iso.powSucc_succ, Iso.trans_hom, Over.comp_left]) _
+    exact appLE_of_eq (by rw [Iso.pow_succ eX (n + 1), Iso.trans_hom, Over.comp_left]) _
   have hpow : ∀ n (x : Γ(X.left, W)), (σ ^ (n + 1)) x =
-      ((eX.powSucc n).hom.left.appLE W W (hle n).ge).hom x := by
+      ((eX.pow (n + 1)).hom.left.appLE W W (hle n).ge).hom x := by
     intro n
     induction n with
-    | zero => intro x; rw [zero_add, pow_one, hσs]; rfl
+    | zero =>
+      intro x
+      rw [appLE_of_eq (g := eX.hom.left) (by rw [zero_add, Iso.pow_one]) (hle 0).ge]
+      change (σ ^ 1) x = _
+      rw [pow_one, hσs]
     | succ n ih =>
       intro x
       rw [pow_succ, AlgEquiv.mul_apply, ih]
@@ -220,9 +232,9 @@ Cor. 2.4). Let `X` be a nonempty separated scheme of finite type over `k` with a
 closed immersion `i : Z ⟶ U` (the reduction of `U`) stable under an automorphism `e_Z`, and a
 finite étale morphism `π : Z ⟶ V` to an affine scheme of finite type over `k` with
 `e_Z ≫ π = π`. -/
-theorem exists_isFinite_etale_of_powSucc_eq_refl (X : Over (Spec (.of k)))
+theorem exists_isFinite_etale_of_pow_eq_refl (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (eX : X ≅ X) {m : ℕ}
-    (hm : eX.powSucc m = Iso.refl X) [Nonempty X.left] :
+    (hm : eX.pow (m + 1) = Iso.refl X) [Nonempty X.left] :
     ∃ (U : Over (Spec (.of k))) (_ : LocallyOfFiniteType U.hom) (_ : QuasiCompact U.hom)
       (_ : IsSeparated U.hom) (eU : U ≅ U) (j : U ⟶ X) (_ : IsOpenImmersion j.left)
       (_ : eU.hom ≫ j = j ≫ eX.hom) (Z : Over (Spec (.of k))) (_ : LocallyOfFiniteType Z.hom)

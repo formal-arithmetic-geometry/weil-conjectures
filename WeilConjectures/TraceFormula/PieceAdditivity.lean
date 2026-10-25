@@ -49,7 +49,12 @@ namespace CategoryTheory
 
 variable {D : Type*} [Category D] {R : D ⥤ D} (ι : R ≅ 𝟭 D)
 
-/-- Moving `ι⁻¹ : 𝟭 ≅ R` across a commutative square. -/
+/-- Moving `ι⁻¹ : 𝟭 ≅ R` across a commutative square: if `g ≫ ε = a₁ ≫ a₂`, the two composites
+```
+T --a₁--> M --a₂--> K --ι⁻¹--> R K
+T --g--> K' --ι⁻¹--> R K' --R ε--> R K
+```
+agree. -/
 lemma comp_inv_app_eq_of_comp_eq {T M K' K : D} {a₁ : T ⟶ M} {a₂ : M ⟶ K} {g : T ⟶ K'}
     {ε : K' ⟶ K} (h : g ≫ ε = a₁ ≫ a₂) :
     a₁ ≫ a₂ ≫ ι.inv.app K = (g ≫ ι.inv.app K') ≫ R.map ε := by
@@ -57,7 +62,9 @@ lemma comp_inv_app_eq_of_comp_eq {T M K' K : D} {a₁ : T ⟶ M} {a₂ : M ⟶ K
   dsimp only [Functor.id_obj, Functor.id_map] at hn
   rw [Category.assoc, ← hn, ← Category.assoc g, h, Category.assoc]
 
-/-- Moving `ι⁻¹ : 𝟭 ≅ R` across a morphism. -/
+/-- Moving `ι⁻¹ : 𝟭 ≅ R` across a morphism: if `p` is the composite
+`T --v--> K --η--> K'' --ι⁻¹--> R K''`, it is also the composite
+`T --v--> K --ι⁻¹--> R K --R η--> R K''`. -/
 lemma eq_comp_inv_app_comp_map {T K K'' : D} {p : T ⟶ R.obj K''} {v : T ⟶ K} {η : K ⟶ K''}
     (h : p = v ≫ η ≫ ι.inv.app K'') : p = (v ≫ ι.inv.app K) ≫ R.map η := by
   have hn := ι.inv.naturality η

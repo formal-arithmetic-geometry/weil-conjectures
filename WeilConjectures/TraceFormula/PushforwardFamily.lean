@@ -66,24 +66,36 @@ theorem Iso.powSuccStr_pushforwardBaseChange (hc : PullbackAssoc P c) {X Y : Ove
       (Q f.left).map φ.hom) (n : ℕ) :
     (eY.powSuccStr (fun g ↦ P g.left) (fun a b ↦ c a.left b.left) ψ n).hom =
       (pushforwardBaseChange c adj (Over.left_comp_left_eq_of_comp_eq
-          (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n))).app F ≫
+          (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n))).app F ≫
         (Q f.left).map (eX.powSuccStr (fun g ↦ P g.left) (fun a b ↦ c a.left b.left) φ n).hom := by
   induction n with
-  | zero => exact hψ
+  | zero =>
+    have key : ∀ {gX gX' : X ⟶ X} {gY gY' : Y ⟶ Y} (hX : gX = gX') (hY : gY = gY')
+        (s : gX.left ≫ f.left = f.left ≫ gY.left) (s' : gX'.left ≫ f.left = f.left ≫ gY'.left),
+        eqToHom (congrArg (fun g : Y ⟶ Y ↦ (P g.left).obj ((Q f.left).obj F)) hY) ≫
+            (pushforwardBaseChange c adj s').app F =
+          (pushforwardBaseChange c adj s).app F ≫
+            (Q f.left).map (eqToHom (congrArg (fun g : X ⟶ X ↦ (P g.left).obj F) hX)) := by
+      rintro gX _ gY _ rfl rfl s s'
+      simp
+    rw [powSuccStr_zero, powSuccStr_zero]
+    simp only [Iso.trans_hom, eqToIso.hom, Functor.map_comp, hψ]
+    exact (reassoc_of% key (Category.id_comp eX.hom) (Category.id_comp eY.hom) _
+      (Over.left_comp_left_eq_of_comp_eq hf)) _
   | succ n ih =>
     have hn := Over.left_comp_left_eq_of_comp_eq
-      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)
+      (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)
     have hf' := Over.left_comp_left_eq_of_comp_eq hf
     have nat := (pushforwardBaseChange c adj hn).naturality φ.hom
     simp only [Functor.comp_map] at nat
-    change (c (eY.powSucc n).hom.left eY.hom.left).hom.app ((Q f.left).obj F) ≫
-        (P (eY.powSucc n).hom.left).map ψ.hom ≫
+    change (c (eY.pow (n + 1)).hom.left eY.hom.left).hom.app ((Q f.left).obj F) ≫
+        (P (eY.pow (n + 1)).hom.left).map ψ.hom ≫
         (eY.powSuccStr (fun g ↦ P g.left) (fun a b ↦ c a.left b.left) ψ n).hom =
-      (pushforwardBaseChange c adj (show ((eX.powSucc n).hom.left ≫ eX.hom.left) ≫ f.left =
-          f.left ≫ ((eY.powSucc n).hom.left ≫ eY.hom.left)
+      (pushforwardBaseChange c adj (show ((eX.pow (n + 1)).hom.left ≫ eX.hom.left) ≫ f.left =
+          f.left ≫ ((eY.pow (n + 1)).hom.left ≫ eY.hom.left)
           by rw [Category.assoc, hf', ← Category.assoc, hn, Category.assoc])).app F ≫
-        (Q f.left).map ((c (eX.powSucc n).hom.left eX.hom.left).hom.app F ≫
-          (P (eX.powSucc n).hom.left).map φ.hom ≫
+        (Q f.left).map ((c (eX.pow (n + 1)).hom.left eX.hom.left).hom.app F ≫
+          (P (eX.pow (n + 1)).hom.left).map φ.hom ≫
           (eX.powSuccStr (fun g ↦ P g.left) (fun a b ↦ c a.left b.left) φ n).hom)
     rw [ih, hψ, Functor.map_comp_assoc, reassoc_of% nat, Functor.map_comp, Functor.map_comp,
       ← pushforwardBaseChange_app_paste_assoc adj hc hf' hn]
@@ -103,9 +115,9 @@ theorem Endofunctor.IsoAlgebra.nonempty_overPowSucc_mapOfNatIso_iso_of_eq
     (hf : eX.hom ≫ f = f ≫ eY.hom) (n : ℕ)
     (β : Q f.left ⋙ P eY.hom.left ≅ P eX.hom.left ⋙ Q f.left)
     (hβ : β.hom = pushforwardBaseChange c adj (Over.left_comp_left_eq_of_comp_eq hf))
-    (βn : Q f.left ⋙ P (eY.powSucc n).hom.left ≅ P (eX.powSucc n).hom.left ⋙ Q f.left)
+    (βn : Q f.left ⋙ P (eY.pow (n + 1)).hom.left ≅ P (eX.pow (n + 1)).hom.left ⋙ Q f.left)
     (hβn : βn.hom = pushforwardBaseChange c adj (Over.left_comp_left_eq_of_comp_eq
-      (Iso.powSucc_hom_comp_eq_comp_powSucc_hom eX eY hf n)))
+      (Iso.pow_hom_comp_eq_comp_pow_hom eX eY hf n)))
     (𝒜X 𝒜Y 𝒜Xn 𝒜Yn : Type _) {i𝒜X : Category 𝒜X} {i𝒜Y : Category 𝒜Y} {i𝒜Xn : Category 𝒜Xn}
     {i𝒜Yn : Category 𝒜Yn} (F : 𝒜X) (Λ₁ : 𝒜X ⥤ 𝒜Y) (Λn : 𝒜Xn ⥤ 𝒜Yn) (TX : 𝒜X ⥤ 𝒜Xn)
     (TY : 𝒜Y ⥤ 𝒜Yn)
@@ -114,9 +126,9 @@ theorem Endofunctor.IsoAlgebra.nonempty_overPowSucc_mapOfNatIso_iso_of_eq
     (h𝒜Y : (⟨𝒜Y, i𝒜Y⟩ : Σ A : Type _, Category A) =
       ⟨Endofunctor.IsoAlgebra (P eY.hom.left), inferInstance⟩)
     (h𝒜Xn : (⟨𝒜Xn, i𝒜Xn⟩ : Σ A : Type _, Category A) =
-      ⟨Endofunctor.IsoAlgebra (P (eX.powSucc n).hom.left), inferInstance⟩)
+      ⟨Endofunctor.IsoAlgebra (P (eX.pow (n + 1)).hom.left), inferInstance⟩)
     (h𝒜Yn : (⟨𝒜Yn, i𝒜Yn⟩ : Σ A : Type _, Category A) =
-      ⟨Endofunctor.IsoAlgebra (P (eY.powSucc n).hom.left), inferInstance⟩)
+      ⟨Endofunctor.IsoAlgebra (P (eY.pow (n + 1)).hom.left), inferInstance⟩)
     (hΛ₁ : HEq Λ₁ (Endofunctor.IsoAlgebra.mapOfNatIso β))
     (hΛn : HEq Λn (Endofunctor.IsoAlgebra.mapOfNatIso βn))
     (hTX : HEq TX (Endofunctor.IsoAlgebra.overPowSuccFunctor c eX n))
@@ -131,7 +143,7 @@ theorem Endofunctor.IsoAlgebra.nonempty_overPowSucc_mapOfNatIso_iso_of_eq
   cases hTX
   cases hTY
   refine ⟨Endofunctor.IsoAlgebra.isoMk (Iso.refl _) ?_⟩
-  change (P (eY.powSucc n).hom.left).map (𝟙 _) ≫
+  change (P (eY.pow (n + 1)).hom.left).map (𝟙 _) ≫
       (βn.hom.app F.carrier ≫ (Q f.left).map
         (eX.powSuccStr (fun g ↦ P g.left) (fun a b ↦ c a.left b.left) F.str n).hom) =
     (eY.powSuccStr (fun g ↦ P g.left) (fun a b ↦ c a.left b.left)

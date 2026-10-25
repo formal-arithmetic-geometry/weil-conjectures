@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.SourceExchangeBaseChange
 public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
 public import WeilConjectures.TraceFormula.SourceExchangeProjection
 
@@ -183,6 +184,8 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
+set_option maxHeartbeats 2000000 in
+-- the compactly supported direct images are unfolded in the defeq checks
 /-- The base-change core of the exceptional Künneth part of identity (a) (blueprint
 `lem-trf-trace-source-exchange`, Step 3): the projection formula for `p₁'`, compact-support base
 change in the product square of `Y` and the pasted counit of `a_X = f ≫ a_Y` agree, through
@@ -217,7 +220,25 @@ theorem lowerShriek_exceptionalKunneth_baseChange :
         (externalProduct ℓ K (dualizingComplex' ℓ X)) ≫
       (boundedConstructibleLowerShriek _ ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
-  sorry
+  by
+  have : IsProper (prod.map f (𝟙 Y)).left :=
+    MorphismProperty.of_isPullback ((IsPullback.of_prod_fst_with_id f Y).map (Over.forget _))
+      (inferInstanceAs (IsProper f.left))
+  have : IsProper (prod.map (𝟙 X) f).left :=
+    MorphismProperty.of_isPullback ((IsPullback.of_prod_snd_with_id f X).map (Over.forget _))
+      (inferInstanceAs (IsProper f.left))
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (isPullback_prod_toPoint Y Y)
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (isPullback_prod_toPoint X X)
+  unfold exceptionalKunnethAdjoint prodBaseChangeIso prodLowerStarExternalProduct externalProduct
+  simp only [Iso.symm_hom, asIso_inv]
+  have hg := lowerShriek_exceptionalKunneth_baseChange_generic ℓ (toPoint X) (toPoint Y) f prod.fst
+    prod.snd prod.fst prod.snd (prod.fst : X ⨯ Y ⟶ X) prod.snd (prod.map f (𝟙 Y))
+    (prod.map (𝟙 X) f) (prod.map f f) (IsPullback.of_prod_fst_with_id f Y).flip
+    (IsPullback.of_prod_snd_with_id f X) (isPullback_prod_toPoint Y Y) (isPullback_prod_toPoint X X)
+    (by simp) (by simp) (by ext <;> simp) (comp_toPoint f) (prod.map_fst f f) (prod.map_snd f f) K
+  refine Eq.trans ?_ (hg.trans ?_)
+  · rfl
+  · rfl
 
 /-- **The exceptional Künneth adjoint commutes with a proper pushforward** (blueprint
 `lem-trf-trace-source-exchange`, Step 3): through `Π_f`, `Rq_* ≅ Rq_!`, the composition law of
