@@ -64,10 +64,12 @@ lemma isClosed_y : IsClosed ({M.y.base (default : Spec (.of k))} : Set M.X) := b
 
 /-- **The cover datum** of blueprint `det-tf-restriction-zero-covers` for bounded complexes
 `PL`, `PK` of sheaves on `X` (flat constructible models of `L` and `K`): a smooth curve `C` finite
-over `X`, a `k`-point `c` over `y` with ramification index `e` prime to `ℓ` (the image of a
+over an open neighbourhood `U` of `y`, a `k`-point `c` over `y` with ramification index `e` prime to `ℓ` (the image of a
 uniformizer at `y` is a unit times the `e`-th power of a uniformizer at `c`), an open
 neighbourhood `W` of `y` over whose punctured part `p` is étale, and a finite étale Galois cover
-of `p⁻¹(W ∖ y)` with group a finite `ℓ`-group trivializing the pullbacks of all the terms. -/
+of `p⁻¹(W ∖ y)` with group a finite `ℓ`-group over which the pullbacks of `PL`, `PK` are
+isomorphic, as complexes, to constant complexes on bounded complexes of finite modules (the lisse
+models with monodromy through the `ℓ`-group). -/
 structure CoverDatum (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]
     (PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) where
   /-- The cover curve. -/
@@ -78,7 +80,13 @@ structure CoverDatum (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]
   [isSeparated : IsSeparated fC]
   /-- The cover. -/
   p : C ⟶ M.X
-  [isFinite : IsFinite p]
+  /-- An open neighbourhood of `y` over which `p` is finite. -/
+  U : M.X.Opens
+  mem_U : M.y.base (default : Spec (.of k)) ∈ U
+  /-- The finite morphism `C ⟶ U`. -/
+  pU : C ⟶ U.toScheme
+  [isFinite : IsFinite pU]
+  pU_ι : pU ≫ U.ι = p
   p_comp : p ≫ M.f = fC
   /-- The point over `y`. -/
   c : Spec (.of k) ⟶ C
@@ -105,9 +113,12 @@ structure CoverDatum (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]
   isPGroup : IsPGroup ℓ G
   /-- The Galois cover trivializing the terms. -/
   galois : Scheme.GaloisCover G (p ⁻¹ᵁ puncturedOpens W _ M.isClosed_y).toScheme
-  trivializes : ∀ n : ℤ, ∀ P ∈ ({PL, PK} : Set _), ∃ (N : ModuleCat.{u + 1} Λ) (_ : Finite N),
-    Nonempty ((upperStar (ModuleCat.{u + 1} Λ)
-      (galois.π ≫ (p ⁻¹ᵁ puncturedOpens W _ M.isClosed_y).ι ≫ p)).obj (P.X n) ≅
-        (constantSheaf galois.P.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N)
+  trivializes : ∀ P ∈ ({PL, PK} : Set _), ∃ (Cx : CochainComplex (ModuleCat.{u + 1} Λ) ℤ)
+    (a b : ℤ) (_ : Cx.IsStrictlyGE a) (_ : Cx.IsStrictlyLE b) (_ : ∀ n, Finite (Cx.X n)),
+    Nonempty (((upperStar (ModuleCat.{u + 1} Λ)
+      (galois.π ≫ (p ⁻¹ᵁ puncturedOpens W _ M.isClosed_y).ι ≫ p)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj P ≅
+      ((constantSheaf galois.P.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj Cx)
 
 end AlgebraicGeometry.Etale.CurveLocalModel
