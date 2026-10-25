@@ -13022,6 +13022,7 @@ public import WeilConjectures.TraceFormula.OpenPieceFrobenius
 public import WeilConjectures.TraceFormula.OpenPieceTriangle
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.OrdinaryKunneth
+public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing

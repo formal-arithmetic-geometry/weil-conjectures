@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.OrdinaryKunneth
+public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarDeltaShift
@@ -195,16 +195,6 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
       refine IsZero.of_iso ?_ (Functor.Monoidal.μIso _ _ _).symm
       exact isZero_tensorObj_of_isZero_left h₁ _
     exact ⟨⟨0, h₂.eq_of_src _ _, h₀.eq_of_src _ _⟩⟩
-
--- TEMP stand-in
-theorem isIso_openKunnethMap_lowerStar_of_isClosedImmersion {Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    (g : Z ⟶ X) [IsClosedImmersion g.left] (j : U ⟶ Y) [IsOpenImmersion j.left]
-    (N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (h : IsIso (openKunnethMap ℓ (X := Z) j N B)) :
-    IsIso (openKunnethMap ℓ (X := X) j
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) B) := sorry
 
 /-- **The Künneth map for the extension by zero of a restriction**: for an open immersion
 `j' : V ⟶ X` and a dualizable `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the Künneth map of `Rj'_! Lj'^* K` is an
