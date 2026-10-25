@@ -272,30 +272,6 @@ lemma _root_.CategoryTheory.NatTrans.isIso_app_of_iso' {C D : Type*} [Category C
   rw [h]
   infer_instance
 
-/-! ### The nearby cycles of the trait -/
-
-section Trait
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
-  [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
-
-/-- **The nearby cycles of the trait are monoidal on the geometric generic point**: the Künneth
-map of the trait `T` (as a model of its geometric generic point) is an isomorphism at bounded
-constructible complexes `C`, `D` on `Spec Ω`. -/
-theorem isIso_kunnethMap_traitGenericModel
-    (C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of (traitGenericField k'))))
-      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        (Spec (.of (traitGenericField k'))))))
-    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      (Spec (.of (traitGenericField k')))) C)
-    (hD : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      (Spec (.of (traitGenericField k')))) D) :
-    IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) (Hom.id (traitGenericModel k'))
-      (Hom.id (traitGenericModel k')) C D) :=
-  sorry
-
-end Trait
-
 
 /-! ### Transport along pullbacks, for general coefficients -/
 
