@@ -10755,6 +10755,7 @@ public import WeilConjectures.RingTheory.MonogenicRelationFiniteSplitting
 public import WeilConjectures.RingTheory.MonogenicResidueLeadingRelation
 public import WeilConjectures.RingTheory.MonogenicResiduePolynomialModel
 public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
+public import WeilConjectures.RingTheory.MvPolynomial.CoordinateZeroLocus
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
 public import WeilConjectures.RingTheory.MvPolynomial.TwoVariableSyzygy
