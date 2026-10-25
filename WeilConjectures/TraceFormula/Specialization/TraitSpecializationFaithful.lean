@@ -55,7 +55,8 @@ open Scheme
 
 /-- A functor between full subcategories lifting a functor which preserves zero morphisms
 preserves zero morphisms. -/
-lemma ObjectProperty.preservesZeroMorphisms_lift_aux {C D : Type*} [Category* C] [Category* D]
+private lemma ObjectProperty.preservesZeroMorphisms_lift_of_preservesZeroMorphisms {C D : Type*}
+    [Category* C] [Category* D]
     [Preadditive C] [Preadditive D] (P : ObjectProperty C) (Q : ObjectProperty D)
     (G : C ⥤ D) [G.PreservesZeroMorphisms] (h : ∀ X : P.FullSubcategory, Q (G.obj X.obj)) :
     (Q.lift (P.ι ⋙ G) h).PreservesZeroMorphisms where
@@ -64,7 +65,8 @@ lemma ObjectProperty.preservesZeroMorphisms_lift_aux {C D : Type*} [Category* C]
 
 /-- The composite `F₁ ⋙ G₂ ⋙ F₃` of a left adjoint, a right adjoint and a left adjoint preserves
 zero morphisms. -/
-lemma preservesZeroMorphisms_comp_comp_aux {C₁ C₂ C₃ C₄ : Type*} [Category* C₁] [Category* C₂]
+private lemma preservesZeroMorphisms_comp_comp_of_adjunction {C₁ C₂ C₃ C₄ : Type*}
+    [Category* C₁] [Category* C₂]
     [Category* C₃] [Category* C₄] [Preadditive C₁] [Preadditive C₂] [Preadditive C₃]
     [Preadditive C₄] {F₁ : C₁ ⥤ C₂} {G₁ : C₂ ⥤ C₁} {F₂ : C₃ ⥤ C₂} {G₂ : C₂ ⥤ C₃}
     {F₃ : C₃ ⥤ C₄} {G₃ : C₄ ⥤ C₃} (a₁ : F₁ ⊣ G₁) (a₂ : F₂ ⊣ G₂) (a₃ : F₃ ⊣ G₃) :
@@ -178,10 +180,11 @@ theorem traitSpecialization_map_eq_zero_iff
     let Λ := Profinite.padicAlgClRingObj.{u} ℓ
     let M := traitModel k k'
     have : (M.nearbyCycles Λ).PreservesZeroMorphisms :=
-      preservesZeroMorphisms_comp_comp_aux (derivedUpperStarLowerStarAdjunction Λ M.ε)
+      preservesZeroMorphisms_comp_comp_of_adjunction
+        (derivedUpperStarLowerStarAdjunction Λ M.ε)
         (derivedUpperStarLowerStarAdjunction Λ M.j) (derivedUpperStarLowerStarAdjunction Λ M.i)
     have : (traitSpecialization k k' (ℓ := ℓ)).PreservesZeroMorphisms :=
-      ObjectProperty.preservesZeroMorphisms_lift_aux _ _ _ _
+      ObjectProperty.preservesZeroMorphisms_lift_of_preservesZeroMorphisms _ _ _ _
     exact Functor.map_zero _ _ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.TraceFormula.Dualizing
 
@@ -37,20 +38,6 @@ open CategoryTheory Limits MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-- If the left adjoint `F ⋙ F'` of the composite of two adjunctions `F ⊣ G` and `F' ⊣ G'` is
-fully faithful and the unit of `F' ⊣ G'` is an isomorphism, then the unit of `F ⊣ G` is an
-isomorphism. -/
-lemma isIso_unit_of_comp_aux {C D E : Type*} [Category C] [Category D] [Category E]
-    {F : C ⥤ D} {G : D ⥤ C} {F' : D ⥤ E} {G' : E ⥤ D} (adj : F ⊣ G) (adj' : F' ⊣ G')
-    [IsIso adj'.unit] [(F ⋙ F').Full] [(F ⋙ F').Faithful] : IsIso adj.unit := by
-  have := (adj.comp adj').unit_isIso_of_L_fully_faithful
-  have (X : C) : IsIso (adj.unit.app X) := by
-    have h := Adjunction.comp_unit_app adj adj' X
-    have : IsIso ((adj.comp adj').unit.app X) := inferInstance
-    rw [h] at this
-    exact IsIso.of_isIso_comp_right _ (G.map (adj'.unit.app (F.obj X)))
-  exact NatIso.isIso_of_isIso_app _
 
 section RationalPoint
 
@@ -93,7 +80,8 @@ theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction_toPoint
       boundedConstructibleUpperStarId Λ ℓ (point k)
   have := Functor.Full.of_iso e.symm
   have := Functor.Faithful.of_iso e.symm
-  exact isIso_unit_of_comp_aux _ (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ b)
+  exact Adjunction.isIso_unit_of_fullyFaithful_comp _
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ b)
 
 end Unit
 

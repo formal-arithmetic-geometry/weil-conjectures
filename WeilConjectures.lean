@@ -13094,6 +13094,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecia
 public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
+public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport

@@ -71,22 +71,49 @@ section Abstract
 variable {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] {L : 𝒞 ⥤ 𝒟} {R : 𝒟 ⥤ 𝒞} (adj : L ⊣ R)
 
 include adj in
-/-- The unit identity behind `ofSupportExchange`, for an arbitrary adjunction `L ⊣ R`. -/
-lemma unit_comp_aux {A₀ A₁ : 𝒞} (h : A₀ ⟶ A₁) {B : 𝒟} (e : B ≅ L.obj A₀) {Q : 𝒟}
-    (u : L.obj A₁ ≅ Q) :
+/-- The unit identity behind `ofSupportExchange`, for an arbitrary adjunction `L ⊣ R`: for
+`h : A₀ ⟶ A₁` and isomorphisms `e : B ≅ L A₀`, `u : L A₁ ≅ Q`, the square
+```
+  A₀ ------------h------------> A₁
+  |                              |
+  η                              η
+  v                              v
+  R L A₀ --R(e⁻¹ (e L(h) u) u⁻¹)--> R L A₁
+```
+commutes, by naturality of the unit. -/
+lemma comp_unit_app_eq_unit_app_comp_map_conj {A₀ A₁ : 𝒞} (h : A₀ ⟶ A₁) {B : 𝒟}
+    (e : B ≅ L.obj A₀) {Q : 𝒟} (u : L.obj A₁ ≅ Q) :
     h ≫ adj.unit.app A₁ = adj.unit.app A₀ ≫ R.map (e.inv ≫ (e.hom ≫ L.map h ≫ u.hom) ≫ u.inv) := by
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.inv_hom_id_assoc]
   exact adj.unit.naturality h
 
 /-- The fixed-square identity behind `ofSupportExchange`, for an arbitrary adjunction `L ⊣ R`:
-the transpose of `L(b⁻¹ ≫ g) ≫ ε` along the unit, precomposed with `b`, is `g`. -/
-lemma fixedSquare_aux {A₀ A : 𝒞} {Y : 𝒟} (b : A₀ ≅ A) (g : A₀ ⟶ R.obj Y) :
+the transpose of `L(b⁻¹ ≫ g) ≫ ε` along the unit, precomposed with `b`, is `g`, that is, the
+triangle
+```
+  A₀ --b--> A --η--> R L A
+   \                   |
+    g                R(L(b⁻¹ g) ε)
+     \                 v
+      `-----------> R Y
+```
+commutes. -/
+lemma hom_comp_unit_app_comp_map_counit {A₀ A : 𝒞} {Y : 𝒟} (b : A₀ ≅ A) (g : A₀ ⟶ R.obj Y) :
     b.hom ≫ adj.unit.app A ≫ R.map (L.map (b.inv ≫ g) ≫ adj.counit.app Y) = g := by
   rw [R.map_comp, adj.unit_naturality_assoc, adj.right_triangle_components, Category.comp_id,
     Iso.hom_inv_id_assoc]
 
-/-- Naturality of `L(p) ≫ ε` for a natural transformation `p : P ⟶ T ⋙ R`. -/
-lemma naturality_aux {𝒜 : Type*} [Category 𝒜] {P : 𝒜 ⥤ 𝒞} {T : 𝒜 ⥤ 𝒟}
+/-- Naturality of the transpose `L(p) ≫ ε : L P ⟶ T` of a natural transformation
+`p : P ⟶ T ⋙ R`: for `g : M ⟶ N` the square
+```
+  L P M --L(P g)--> L P N
+    |                 |
+  L(p) ε           L(p) ε
+    v                 v
+   T M  ---T g--->   T N
+```
+commutes. -/
+lemma map_comp_counit_naturality {𝒜 : Type*} [Category 𝒜] {P : 𝒜 ⥤ 𝒞} {T : 𝒜 ⥤ 𝒟}
     (p : P ⟶ T ⋙ R) {M N : 𝒜} (g : M ⟶ N) :
     L.map (P.map g) ≫ L.map (p.app N) ≫ adj.counit.app (T.obj N) =
       (L.map (p.app M) ≫ adj.counit.app (T.obj M)) ≫ T.map g := by
@@ -154,7 +181,8 @@ noncomputable def fixedLocusExceptionalExchange :
   app M := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
       ((fixedSquareExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc).app M) ≫
     (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).counit.app _
-  naturality _ _ g := naturality_aux (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
+  naturality _ _ g := map_comp_counit_naturality
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
     (fixedSquareExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) g
 
 variable (σC : 𝟙_ _ ⟶ ΨC.obj (𝟙_ _))
@@ -201,7 +229,8 @@ noncomputable def ofSupportExchange : c.TraceSpecialization F c' F' where
   βc := βc
   βd := fixedLocusExceptionalExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc
   unit_comp := (Category.assoc _ _ _).symm.trans
-    (unit_comp_aux (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) _
+    (comp_unit_app_eq_unit_app_comp_map_conj
+      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) _
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι))
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).mapIso
@@ -209,7 +238,8 @@ noncomputable def ofSupportExchange : c.TraceSpecialization F c' F' where
           (Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).symm))))
   θF_eq := rfl
-  fixedSquare M := fixedSquare_aux (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
+  fixedSquare M := hom_comp_unit_app_comp_map_counit
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
     (ΨC.mapIso (F.upperShriekLowerStarIso.app M)) _
 
 end TraceSpecialization

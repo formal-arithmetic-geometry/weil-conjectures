@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 
@@ -41,27 +41,6 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry
-
-/-- A morphism of finite type from a scheme with at most one point to a Jacobson scheme
-(e.g. the spectrum of a field) is proper. -/
-lemma isProper_of_subsingleton {X Y : Scheme.{u}} (f : X ⟶ Y) [Subsingleton X]
-    [LocallyOfFiniteType f] [IsSeparated f] [JacobsonSpace Y] : IsProper f := by
-  cases isEmpty_or_nonempty X
-  · have : IsClosedImmersion f := .of_isPreimmersion _ (by
-      rw [Set.range_eq_empty]
-      exact isClosed_empty)
-    infer_instance
-  obtain ⟨p⟩ := ‹Nonempty X›
-  have : IsClosedImmersion (X.fromSpecResidueField p) := by
-    rw [← isClosed_singleton_iff_isClosedImmersion, Set.Subsingleton.eq_singleton_of_mem
-      (s := Set.univ) Set.subsingleton_of_subsingleton (Set.mem_univ p) |>.symm]
-    exact isClosed_univ
-  have : Surjective (X.fromSpecResidueField p) :=
-    ⟨fun q ↦ ⟨default, (Subsingleton.elim _ _)⟩⟩
-  have : IsFinite (X.fromSpecResidueField p ≫ f) :=
-    isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.mpr inferInstance
-  have := UniversallyClosed.of_comp_surjective (X.fromSpecResidueField p) f
-  exact ⟨⟩
 
 namespace ProEtale.CondensedRing
 

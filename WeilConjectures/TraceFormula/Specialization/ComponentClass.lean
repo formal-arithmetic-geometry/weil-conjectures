@@ -151,9 +151,16 @@ theorem RationalPoint.exists_lift_of_range_eq_singleton {k : Type u} [Field k]
 
 
 /-- The cancellation behind `map_integral_restrict_eq_zero_of_sp_eq_zero`, in an arbitrary
-category: if `0 = p₁ ≫ p₂ ≫ p₃ ≫ P(z) ≫ σ⁻¹` and `p₁ ≫ p₂ ≫ p₃ = σ ≫ P(a)`, then
-`P(a ≫ z) = 0`. -/
-lemma map_comp_eq_zero_aux {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] [Preadditive 𝒟]
+category: if the square
+```
+  A' --p₁ ≫ p₂ ≫ p₃--> P B
+  |                     ‖
+  σ                     ‖
+  v                     ‖
+  P A -----P(a)-----> P B
+```
+commutes and `0 = p₁ ≫ p₂ ≫ p₃ ≫ P(z) ≫ σ⁻¹`, then `P(a ≫ z) = 0`. -/
+private lemma map_comp_eq_zero_of_comp_eq {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] [Preadditive 𝒟]
     (P : 𝒞 ⥤ 𝒟) {A B : 𝒞} {A' A₁ A₂ : 𝒟} (σ : A' ⟶ P.obj A) [IsIso σ] (a : A ⟶ B)
     (z : B ⟶ A) (p₁ : A' ⟶ A₁) (p₂ : A₁ ⟶ A₂) (p₃ : A₂ ⟶ P.obj B)
     (hS : p₁ ≫ p₂ ≫ p₃ = σ ≫ P.map a) (h : 0 = p₁ ≫ p₂ ≫ p₃ ≫ P.map z ≫ inv σ) :
@@ -209,7 +216,7 @@ theorem map_integral_restrict_eq_zero_of_sp_eq_zero [IsProper F'.F.hom]
   have h := T.integral_sp_eq σpt νF hθ z
   rw [hz, BorelMooreSection.integral_zero] at h
   rw [BorelMooreSection.integral_restrict]
-  exact map_comp_eq_zero_aux Ψpt σpt _ _ _ _ _ hS h
+  exact map_comp_eq_zero_of_comp_eq Ψpt σpt _ _ _ _ _ hS h
 
 end Correspondence.TraceSpecialization
 
