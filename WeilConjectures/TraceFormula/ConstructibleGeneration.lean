@@ -45,15 +45,14 @@ dualizable object of `Dᵇc(U)⟦ℚ̲̄_ℓ⟧` (for instance a lisse sheaf pla
 - `ProEtale.CondensedRing.exists_isDualizable_upperStar_singleFunctor`: **generic lisseness**.
   Every nonempty open subscheme of a reduced `Z` contains a nonempty open subscheme on which a
   given constructible `ℚ̄_ℓ`-sheaf is dualizable: it meets the interior of a stratum, on which the
-  sheaf is locally finitely presented, hence generically locally free, hence dualizable
+  sheaf is locally finitely presented, hence locally free, hence dualizable
   (`ProEtale.CondensedRing.isDualizable_singleFunctor_of_isLocallyFree`).
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.exists_isLocallyFree_upperStar_of_isLocallyFinitelyPresented`: a
-  pro-étale locally finitely presented `ℚ̲̄_ℓ`-module is locally free on a nonempty open subscheme
-  of any nonempty open subscheme on which it is locally finitely presented (Bhatt–Scholze,
-  Section 6.8).
+- `ProEtale.CondensedRing.isLocallyFree_of_isLocallyFinitelyPresented`: a pro-étale locally
+  finitely presented `ℚ̲̄_ℓ`-module on a separated `k`-scheme of finite type is locally free, that
+  is, lisse (Bhatt–Scholze, Section 6.8).
 
 -/
 
@@ -223,36 +222,34 @@ noncomputable def boundedConstructibleUpperStarSingleFunctorIso {Z W : Over (Spe
       (leftDerivedUpperStarIsoMapDerivedCategory _ g.left).app _ ≪≫
       ((g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.mapDerivedCategorySingleFunctor 0).app M)
 
-/-- **Generic local freeness of a locally finitely presented `ℚ̄_ℓ`-module** (Bhatt–Scholze,
-*The pro-étale topology for schemes*, Section 6.8; SGA 5, Exposé VI, 1.2.4 for the `ℓ`-adic
-analogue): let `M` be a sheaf of `ℚ̲̄_ℓ`-modules on `Z_proét` whose restriction to a nonempty open
-subscheme `V` is pro-étale locally finitely presented. Then `M` is locally free (of finite rank)
-on a smaller nonempty open subscheme `W`.
+/-- **A pro-étale locally finitely presented `ℚ̲̄_ℓ`-module is locally free** (of finite rank):
+on a separated `k`-scheme of finite type `Z`, the locally finitely presented sheaves of
+`ℚ̲̄_ℓ`-modules are the lisse `ℚ̄_ℓ`-sheaves of Bhatt–Scholze, *The pro-étale topology for
+schemes*, Definition 6.8.6.
 
-Pro-étale locally, `M` is the cokernel of a matrix of sections of `ℚ̲̄_ℓ`, that is of continuous
-functions with values in finite extensions of `ℚ_ℓ`. Its rank at a geometric point is a lower
-semicontinuous function of the point, independent of the presentation, and `M` is locally free
-on the open locus where it is maximal near the generic point of an irreducible component
-meeting `V`. -/
-theorem exists_isLocallyFree_upperStar_of_isLocallyFinitelyPresented (Z : Over (Spec (.of k)))
+Pro-étale locally on `Z`, `M` is the cokernel of a matrix `φ` of sections of `ℚ̲̄_ℓ`, that is of
+continuous functions with values in finite extensions of `ℚ_ℓ`, which are constant along
+specializations. The rank of `M` at a point of `Z`, computed at a geometric point over it, does
+not depend on the presentation; the covers being flat, it is constant along specializations,
+hence locally constant on the noetherian space `Z`. Near a point where the rank of `φ` is `r`, an
+`r × r`-minor of `φ` is invertible and the rank is `r`, so Gaussian elimination presents `M` as a
+free module. -/
+theorem isLocallyFree_of_isLocallyFinitelyPresented (Z : Over (Spec (.of k)))
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left))
-    (V : Z.left.Opens) (hV : (V : Set Z.left).Nonempty)
-    (hM : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V)
-      ((V.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M)) :
-    ∃ W : Z.left.Opens, W ≤ V ∧ (W : Set Z.left).Nonempty ∧
-      IsLocallyFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (overRestrict Z W).left)
-        (((overRestrictι Z W).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) :=
+    {M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)}
+    (hM : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)
+      M) :
+    IsLocallyFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) M :=
   sorry
 
 /-- **Generic lisseness** (the local input of the constructible dévissage): let `M` be a
 constructible `ℚ̄_ℓ`-sheaf on a reduced separated `k`-scheme of finite type `Z`, placed in degree
 `0`. Every nonempty open subscheme `V` of `Z` contains a nonempty open subscheme `W` on which `M`
 becomes dualizable. Indeed `V` meets the interior of a stratum of a stratification witnessing the
-constructibility of `M` (the union of these interiors is dense), on which `M` is pro-étale locally
-finitely presented, as `Z` is reduced; `M` is locally free on a smaller nonempty open subscheme
-`W` (`exists_isLocallyFree_upperStar_of_isLocallyFinitelyPresented`), hence dualizable there
+constructibility of `M` (the union of these interiors is dense); on the intersection `W`, `M` is
+pro-étale locally finitely presented, as `Z` is reduced, hence locally free
+(`isLocallyFree_of_isLocallyFinitelyPresented`), hence dualizable
 (`isDualizable_singleFunctor_of_isLocallyFree`). -/
 theorem exists_isDualizable_upperStar_singleFunctor (Z : Over (Spec (.of k)))
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [IsReduced Z.left]
@@ -268,22 +265,24 @@ theorem exists_isDualizable_upperStar_singleFunctor (Z : Over (Spec (.of k)))
   obtain ⟨S, hS⟩ := id hM
   obtain ⟨x, hxV, hxS⟩ := S.dense_iUnion_interior_stratum.inter_open_nonempty V V.isOpen hV
   obtain ⟨a, hxa⟩ := Set.mem_iUnion.1 hxS
-  let W₀ : Z.left.Opens := V ⊓ ⟨interior (S.stratum a), isOpen_interior⟩
-  have hW₀ : (W₀ : Set Z.left).Nonempty := ⟨x, hxV, hxa⟩
-  obtain ⟨l, hl⟩ := exists_comp_eq_of_isImmersion_of_isReduced (S.immersion a) W₀.ι (by
-    rw [Scheme.Opens.range_ι, S.range_immersion]
-    exact fun y hy ↦ interior_subset hy.2)
-  have hW₀M : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) W₀)
-      ((W₀.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) :=
+  let W : Z.left.Opens := V ⊓ ⟨interior (S.stratum a), isOpen_interior⟩
+  have : IsReduced (overRestrict Z W).left := inferInstanceAs (IsReduced W.toScheme)
+  obtain ⟨l, hl⟩ := exists_comp_eq_of_isImmersion_of_isReduced (S.immersion a)
+    (overRestrictι Z W).left (by
+      change Set.range W.ι ⊆ _
+      rw [Scheme.Opens.range_ι, S.range_immersion]
+      exact fun y hy ↦ interior_subset hy.2)
+  have hWM : IsLocallyFinitelyPresented
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (overRestrict Z W).left)
+      (((overRestrictι Z W).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) :=
     (IsLocallyFinitelyPresented.upperStar _ l
       ((isLocallyFinitelyPresented_mapMod_iff _ _ _).1 (hS a))).of_iso
       (((upperStarComp _ l (S.immersion a)).app M).symm ≪≫ (upperStarCongr _ hl).app M)
-  obtain ⟨W, hWW₀, hW, hWM⟩ :=
-    exists_isLocallyFree_upperStar_of_isLocallyFinitelyPresented ℓ Z M W₀ hW₀ hW₀M
-  refine ⟨W, hWW₀.trans inf_le_left, hW, IsDualizable.of_iso
+  refine ⟨W, inf_le_left, ⟨x, hxV, hxa⟩, IsDualizable.of_iso
     (boundedConstructibleUpperStarSingleFunctorIso ℓ (overRestrictι Z W) M hM).symm ?_⟩
   exact isDualizable_singleFunctor_of_isLocallyFree ℓ (overRestrict Z W)
-    (((overRestrictι Z W).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) hWM
+    (((overRestrictι Z W).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M)
+    (isLocallyFree_of_isLocallyFinitelyPresented ℓ (overRestrict Z W) hWM)
 
 /-- **Generic dualizability**: a bounded constructible `ℚ̄_ℓ`-complex `N` on a nonempty reduced
 separated `k`-scheme of finite type `Z` lies, on some nonempty affine open subscheme `U` of `Z`, in
