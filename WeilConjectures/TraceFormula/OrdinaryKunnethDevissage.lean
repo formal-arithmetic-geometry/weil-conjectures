@@ -65,7 +65,7 @@ instance commShift_δFlip_boundedConstructibleUpperStar {A B : Over (Spec (.of k
     NatTrans.CommShift (Functor.OplaxMonoidal.δFlip
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) C) ℤ :=
   inferInstanceAs (NatTrans.CommShift
-    (boundedConstructibleUpperStarδFlip (Profinite.padicAlgClRingObj ℓ) ℓ f C) ℤ)
+    (boundedConstructibleUpperStarδFlip ℓ f C) ℤ)
 
 /-- The identification `Lg^* = Lg'^*` along an equality `g = g'` commutes with the shifts. -/
 lemma commShift_eqToHom_boundedConstructibleUpperStar {A B : Over (Spec (.of k))}

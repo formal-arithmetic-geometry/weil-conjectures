@@ -241,12 +241,14 @@ proper projection morphisms. -/
 lemma isIso_leftProjectionMorphism_prodMap_lowerStar (g : Z ⟶ X) [IsProper g.left] (j : U ⟶ Y)
     (N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (h : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 Z) j)).leftProjectionMorphism
+    (h : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (prod.map (𝟙 Z) j)).leftProjectionMorphism
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.fst : Z ⨯ Y ⟶ Z)).obj N)
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : Z ⨯ U ⟶ U)).obj B))) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 X) j)).leftProjectionMorphism
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (prod.map (𝟙 X) j)).leftProjectionMorphism
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.fst : X ⨯ Y ⟶ X)).obj
           ((boundedConstructibleLowerStar ℓ g).obj N))
@@ -344,12 +346,8 @@ theorem isIso_openKunnethMap_lowerStar_of_isProper (g : Z ⟶ X) [IsProper g.lef
     inferInstance _ ?_).mpr (isIso_leftProjectionMorphism_prodMap_lowerStar ℓ g j N B
       ((Adjunction.isIso_homEquiv_δ_tensorHom_iff_isIso_leftProjectionMorphism _ _
         inferInstance _ ?_).mp h))
-  · unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
-  · unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
+  · exact isIso_homEquiv_openKunnethSecondFactor ℓ j B
+  · exact isIso_homEquiv_openKunnethSecondFactor ℓ j B
 
 /-- **The ordinary Künneth map and closed pushforward in the first factor**: for a closed
 immersion `g : Z ⟶ X`, an open immersion `j : U ⟶ Y`, `N ∈ Dᵇc(Z)⟦ℚ̲̄_ℓ⟧` and
