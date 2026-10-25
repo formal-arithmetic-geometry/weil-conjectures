@@ -122,6 +122,21 @@ noncomputable def boundedConstructibleToPadicAlgClCompatibility :
       (boundedConstructible _).ι ⋙ derivedExtendScalarsToPadicAlgCl X ℓ E :=
   ObjectProperty.liftCompιIso _ _ _
 
+/-- The derived extension of scalars is a left adjoint, hence preserves zero morphisms. -/
+instance : (derivedExtendScalarsToPadicAlgCl X ℓ E).PreservesZeroMorphisms :=
+  have := (Mod.derivedExtendMapDerivedCategoryAdjunction
+    (padicSubfieldRingObjToPadicAlgCl X ℓ E)).isLeftAdjoint
+  Functor.preservesZeroMorphisms_of_isLeftAdjoint _
+
+/-- The extension of scalars `T_X` preserves zero morphisms, as the derived extension of scalars
+does. -/
+instance : (boundedConstructibleToPadicAlgCl X ℓ E).PreservesZeroMorphisms where
+  map_zero A B := (boundedConstructible _).ι.map_injective (by
+    have h := (boundedConstructibleToPadicAlgClCompatibility X ℓ E).hom.naturality (0 : A ⟶ B)
+    simp only [Functor.comp_map, Functor.map_zero, Limits.comp_zero] at h
+    rw [(boundedConstructible _).ι.map_zero]
+    exact (cancel_mono _).1 (h.trans (Limits.zero_comp).symm))
+
 end ToPadicAlgCl
 
 open Scheme

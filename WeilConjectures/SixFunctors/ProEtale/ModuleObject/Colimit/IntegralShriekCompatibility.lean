@@ -53,6 +53,27 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
+/-! ### Zero morphisms -/
+
+section Zero
+
+variable (X : Scheme.{u})
+
+/-- The extension of scalars `T_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦E⟧` preserves zero morphisms, as the
+derived extension of scalars, a left adjoint, does. -/
+instance : (boundedConstructibleExtendScalars X ℓ E).PreservesZeroMorphisms where
+  map_zero A B := (boundedConstructible _).ι.map_injective (by
+    have := (Mod.derivedExtendMapDerivedCategoryAdjunction
+      (padicIntegersToPadicSubfield X ℓ E)).isLeftAdjoint
+    have := Functor.preservesZeroMorphisms_of_isLeftAdjoint
+      (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor
+    have h := (boundedConstructibleExtendScalarsCompatibility X ℓ E).hom.naturality (0 : A ⟶ B)
+    simp only [Functor.comp_map, Functor.map_zero, Limits.comp_zero] at h
+    rw [(boundedConstructible _).ι.map_zero]
+    exact (cancel_mono _).1 (h.trans (Limits.zero_comp).symm))
+
+end Zero
+
 /-! ### (Push) -/
 
 section LowerStar
