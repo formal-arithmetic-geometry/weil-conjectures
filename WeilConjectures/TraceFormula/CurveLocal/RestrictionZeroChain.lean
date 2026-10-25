@@ -128,3 +128,28 @@ theorem supportedRestrictionMap_eq_zero_of_restriction
     rw [(NatTrans.app_eq_zero_iff_of_iso _ e).2 hr, comp_zero]
 
 end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+/-- **Restriction from an open subscheme.** For an open `O ⊆ T`, a morphism `ψ : U ⟶ O` and an
+isomorphism `F|_O ≅ G`, the restriction `RΓ(O, F) ⟶ RΓ(U, ψ^* F)` of the sections of `F` over the
+étale `T`-scheme `O` vanishes as soon as the restriction `RΓ(O, G) ⟶ RΓ(U, ψ^* G)` of the global
+sections of the scheme `O` does. -/
+lemma sectionsRestriction_app_eq_zero_of_isOpenImmersion {T U : Scheme.{u}} (O : T.Opens)
+    (ψ : U ⟶ O.toScheme) (F : DerivedCategory (Sheaf T.smallEtaleTopology A))
+    (G : DerivedCategory (Sheaf O.toScheme.smallEtaleTopology A))
+    (e : (O.ι)^*[A].mapDerivedCategory.obj F ≅ G)
+    (hG : (sectionsRestriction A ψ (V := Scheme.Etale.mk (𝟙 _)) (W := Scheme.Etale.mk (𝟙 _)) ψ
+      ((Category.comp_id _).trans (Category.id_comp _).symm)).app G = 0) :
+    (sectionsRestriction A (ψ ≫ O.ι) (V := Scheme.Etale.mk O.ι) (W := Scheme.Etale.mk (𝟙 _)) ψ
+      (Category.id_comp _).symm).app F = 0 := by
+  have := isIso_sectionsRestriction_of_isOpenImmersion A O.ι rfl F
+  have h₁ := (sectionsRestriction_comp_app_eq_zero_iff A O.ι ψ
+    (V := Scheme.Etale.mk O.ι) (W := Scheme.Etale.mk (𝟙 _)) (W'' := Scheme.Etale.mk (𝟙 _))
+    (𝟙 _) rfl ψ ((Category.comp_id _).trans (Category.id_comp _).symm) F).1 (by
+      rw [(NatTrans.app_eq_zero_iff_of_iso _ e).2 hG, comp_zero])
+  exact (sectionsRestriction_app_eq_zero_iff_of_eq A rfl (Category.comp_id ψ) _ _ F).1 h₁
+
+end AlgebraicGeometry.Etale
