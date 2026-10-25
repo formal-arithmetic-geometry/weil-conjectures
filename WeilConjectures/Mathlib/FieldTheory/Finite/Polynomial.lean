@@ -40,4 +40,12 @@ theorem expand_natCard {K : Type*} [Field K] [Finite K] (f : MvPolynomial σ K) 
   rw [Nat.card_eq_fintype_card]
   exact expand_card f
 
+/-- Over a finite field `K` with `q` elements, `expand (q ^ m) f = f ^ (q ^ m)`. -/
+theorem expand_card_pow (m : ℕ) (f : MvPolynomial σ K) :
+    expand (Fintype.card K ^ m) f = f ^ Fintype.card K ^ m := by
+  induction m generalizing f with
+  | zero => simp
+  | succ m ih => rw [pow_succ, expand_mul, expand_card, ih, ← pow_mul, mul_comm]
+
+
 end MvPolynomial
