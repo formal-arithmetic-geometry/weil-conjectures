@@ -32,9 +32,6 @@ coefficients `ℤ/ℓ`, is `ProEtale.derivedReduction`.
 
 - `ProEtale.boundedConstructible_derivedReduction_obj`: blueprint `sk-prop-integral-criterion`
   (section `sec-proetale-coefficients`), implication (1) ⇒ (2), second half.
-- `ProEtale.isIso_of_isIso_derivedReduction_map`: blueprint `sk-lem-pe-derived-nakayama`
-  (section `sec-proetale-coefficients`), for the bounded constructible complexes, which are
-  derived complete by `sk-prop-integral-criterion`, implication (1) ⇒ (2), first half.
 
 -/
 @[expose] public section
@@ -176,17 +173,5 @@ theorem boundedConstructible_derivedReduction_obj
       ((derivedReduction X ℓ E).obj K) :=
   sorry
 
-/-- Blueprint `sk-lem-pe-derived-nakayama` (section `sec-proetale-coefficients`): a morphism
-between derived complete `𝒪_{E,X}`-complexes is an isomorphism whenever its first derived
-reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is one. Here it is applied to bounded constructible
-`𝒪_E`-complexes on a noetherian scheme, which are derived complete by
-`sk-prop-integral-criterion`, implication (1) ⇒ (2); regarding the first derived reduction with
-coefficients `ℤ/ℓ` does not change whether it is an isomorphism. -/
-theorem isIso_of_isIso_derivedReduction_map
-    {K L : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
-    (φ : K ⟶ L)
-    (h : IsIso ((derivedReduction X ℓ E).map ((boundedConstructible _).ι.map φ))) :
-    IsIso φ :=
-  sorry
 
 end AlgebraicGeometry.ProEtale
