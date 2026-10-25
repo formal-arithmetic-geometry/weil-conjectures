@@ -19,7 +19,9 @@ complexes on `Y` form a triangulated subcategory, carries `Dᵇc(T)` into `Dᵇc
 does so for the extensions by zero `Rc_* j_! Rc'_* L` of the pro-étale locally finitely presented
 (lisse) sheaves `L` along the locally closed immersions `E ⟶ W ⊆ D ⟶ T` (with `c` and `c'` closed
 immersions and `W` open in `D`)
-(`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`).
+(`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`). Given an open `U` of `T`, it
+suffices to treat surjective `c'` and opens `W` lying inside `c⁻¹ U` or inside its complement
+(`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse_along`).
 
 The proof is a noetherian induction on the closed subset of `T` containing the image of a closed
 immersion `c : D ⟶ T`, for complexes of the form `Rc_* M` with `M` bounded constructible on `D`.

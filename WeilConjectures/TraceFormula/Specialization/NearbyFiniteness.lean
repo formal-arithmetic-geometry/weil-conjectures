@@ -45,13 +45,18 @@ extensions by zero of lisse sheaves:
 * **dévissage**: along the truncation triangles, to constructible sheaves placed in degree `0`
   (`ProEtale.boundedConstructible_obj_of_forall_singleFunctor`), and by noetherian induction along
   the open–closed triangles, to the extensions by zero `v_! L` of lisse sheaves `L` along locally
-  closed immersions `v` (`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`).
+  closed immersions `v : E ⟶ 𝔸ⁿ_S` whose image lies either in the generic fibre `𝔸ⁿ_η` or in the
+  special fibre (`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse_along`);
+* **special fibre**: if the image of `v` misses the generic fibre, then `Lj^* v_! L = 0`, since
+  `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` factors through the open `𝔸ⁿ_η`, and the nearby cycles vanish
+  (`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`).
 
 ## Unfinished input
 
 The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally closed immersion
-into an affine space `𝔸ⁿ_S`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) is `sorry`ed: it is
+into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) is `sorry`ed:
+it is
 Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
 `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices, derived completeness and the Milnor sequence
 (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). The reductions also use the proper
