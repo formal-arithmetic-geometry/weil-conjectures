@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineNormalization
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentClauses
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 
 /-!
@@ -101,7 +102,10 @@ theorem affineLine_multiplicativeGroup_homology_tateObject :
             ModuleCat.{u + 1} Λ])).obj
           ((L(((𝔸(ULift.{u} (Fin 1); B).basicOpen (AffineSpace.coord B (ULift.up 0))).ι)^*[
             ModuleCat.{u + 1} Λ])).obj (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)))))) :=
-  sorry
+  ⟨isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_field Λ B aB,
+    isIso_homology_zero_map_unit_multiplicativeGroup_of_field Λ B aB,
+    isIso_shiftMap_kummerClassAffineLineDirectImage_of_field Λ B aB,
+    isZero_homology_rightDerivedLowerStar_tateObject_basicOpen_of_field Λ B aB⟩
 
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients

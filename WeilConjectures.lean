@@ -8927,6 +8927,9 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilEquivariance
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLine
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDatum
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescent
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentClauses
+public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.Cohomology
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
