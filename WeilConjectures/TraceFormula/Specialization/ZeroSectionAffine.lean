@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
+public import WeilConjectures.TraceFormula.Specialization.DefectLocal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 
@@ -118,14 +118,6 @@ theorem isZero_specializationDefect_affineSpace (n : ℕ)
     (L : Dᵇc((affineSpaceOver k n).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero (specializationDefect (affineSpaceOver k n) (coordinateHyperplane k n) k'
       (Profinite.padicAlgClRingObj ℓ) L.obj) :=
-  sorry
-
-variable {k'} in
-/-- Over a closed immersion `f : X' ⟶ X`, the map `N_⊥ Z' ⟶ N_⊥ Z` of special fibres of the
-constant families of the centres is a closed immersion (it is `f_Z ⊗ k'`). -/
-lemma isClosedImmersion_centreSpecialFibreMap {X X' : Over (Spec (.of k))} (f : X' ⟶ X)
-    [IsClosedImmersion f.left] (I : X.left.IdealSheafData) :
-    IsClosedImmersion (centreSpecialFibreMap f I k').left :=
   sorry
 
 /-- The defect vanishes for the inverse image of a coordinate hyperplane under a closed immersion

@@ -10,7 +10,8 @@ public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
-public import WeilConjectures.TraceFormula.Specialization.ZeroSection
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
 public import WeilConjectures.TraceFormula.KunnethVerdier
 
 /-!
@@ -114,8 +115,13 @@ blueprint node asserts to be an isomorphism. -/
 theorem isIso_pullbackExchange_zeroSectionModelHom_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (((zeroSectionModelHom X x k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
-      K.obj) :=
-  sorry
+      K.obj) := by
+  have h : IsIso (zeroSectionMap X x.left.ker k' (Profinite.padicAlgClRingObj ℓ) K.obj) :=
+    isIso_zeroSectionMap (ℓ := ℓ) k' X x.left.ker K
+  have h₁ := @isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap _ _ X x k'
+    _ _ (Profinite.padicAlgClRingObj ℓ) _ _
+  have h₂ := h₁ K.obj
+  exact h₂
 
 /-- **Verdier's zero-section theorem** (Verdier, *Spécialisation de faisceaux et monodromie
 modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, `sk-thm-tf-sp-zero-section`):

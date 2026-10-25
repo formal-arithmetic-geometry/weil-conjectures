@@ -62,6 +62,34 @@ lemma isPullback_deformationSpaceMap_of_isOpenImmersion {X X' : Scheme.{u}} (h :
     (show x ∈ (⊤ : X'.Opens) from trivial)
   exact ⟨⟨U, hU⟩, _, _, hx, isPushout_extendedReesPullbackData_imageSite _ _ _ _ hJI _⟩
 
+/-- Along a closed immersion `h : X' ⟶ X`, the morphism `D_⊥ X' ⟶ D_⊥ X` of deformation spaces of
+the zero ideals is a closed immersion: it is the morphism `𝔸¹_{X'} ⟶ 𝔸¹_X` of relative affine
+lines. -/
+lemma isClosedImmersion_deformationSpaceMap_bot {X X' : Scheme.{u}} (h : X' ⟶ X)
+    [IsClosedImmersion h]
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      ((⊥ : X.IdealSheafData).siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤
+        (⊥ : X'.IdealSheafData).siteIdeal U') :
+    IsClosedImmersion (deformationSpaceMap h ⊥ ⊥ hJ) := by
+  have hbij (R : Type u) [CommRing R] :
+      Function.Bijective (⊥ : Ideal R).toExtendedReesAlgebra := by
+    refine ⟨fun p q e ↦ Polynomial.toLaurent_injective (congrArg Subtype.val e), fun x ↦ ?_⟩
+    obtain ⟨p, hp⟩ := Ideal.mapRingHom_mem_range_toLaurent (RingHom.id R) bot_le x.2
+    refine ⟨p, Subtype.ext ?_⟩
+    rw [Ideal.coe_toExtendedReesAlgebra, hp, LaurentPolynomial.mapRingHom_id]
+  have hiso (Y : Scheme.{u}) : IsIso (⊥ : Y.IdealSheafData).deformationSpaceToPolynomialSpec :=
+    AffineZariskiSite.relativeGluingMap_of_forall _ (MorphismProperty.isomorphisms _) _ _
+      (⊥ : Y.IdealSheafData).toPolynomialPresheaf_comp_polynomialToRees fun U ↦ by
+        have : IsIso ((⊥ : Y.IdealSheafData).polynomialToRees.app (Opposite.op U)) :=
+          (ConcreteCategory.isIso_iff_bijective _).mpr (hbij _)
+        exact (inferInstance : IsIso (Spec.map
+          ((⊥ : Y.IdealSheafData).polynomialToRees.app (Opposite.op U))))
+  have : IsClosedImmersion (AffineSpace.map (ULift.{u} (Fin 1)) h) :=
+    MorphismProperty.of_isPullback (AffineSpace.isPullback_map h).flip ‹_›
+  rw [(IsIso.eq_comp_inv _).mpr (deformationSpaceMap_toPolynomialSpec h ⊥ ⊥ hJ),
+    (IsIso.eq_comp_inv _).mpr (polynomialSpecMap_polynomialSpecToAffineSpace h)]
+  infer_instance
+
 end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -150,6 +178,20 @@ of `f`. -/
 lemma range_centreMap :
     Set.range (centreMap f I).left = I.subschemeι ⁻¹' Set.range f.left :=
   Scheme.range_snd_of_isPullback (isPullback_centreMap f I).flip
+
+instance [IsClosedImmersion f.left] : IsClosedImmersion (centreMap f I).left :=
+  MorphismProperty.of_isPullback (isPullback_centreMap f I).flip ‹_›
+
+/-- For a closed immersion `f`, the map `N_⊥ Z' ⟶ N_⊥ Z` of special fibres of the constant
+families is a closed immersion. -/
+lemma isClosedImmersion_centreSpecialFibreMap [IsClosedImmersion f.left] :
+    IsClosedImmersion (centreSpecialFibreMap f I k').left := by
+  have := IdealSheafData.isClosedImmersion_deformationSpaceMap_bot (centreMap f I).left
+    (siteIdeal_map_appLE_le_bot_centreMap f I)
+  have : IsClosedImmersion
+      (deformationTotalMap (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I) k') :=
+    MorphismProperty.of_isPullback (isPullback_deformationTotalMap _ _ k').flip this
+  exact MorphismProperty.of_isPullback (isPullback_deformationSpecialFibreMap _ _ k').flip this
 
 instance [IsOpenImmersion f.left] : IsOpenImmersion (centreSpecialFibreMap f I k').left :=
   isOpenImmersion_deformationSpecialFibreMap_of_isOpenImmersion _ _ k'
