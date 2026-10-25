@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 import WeilConjectures.CategoryTheory.Monoidal.Mod.FreePresentation
 import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
