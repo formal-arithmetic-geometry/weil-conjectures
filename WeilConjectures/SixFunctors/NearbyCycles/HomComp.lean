@@ -13,9 +13,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 
 # Composition of morphisms of models and the exchanges of nearby cycles
 
-This file defines the identity and the composite of morphisms of models
-(`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.id`,
-`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.comp`) and proves that both
+This file defines the composite of morphisms of models
+(`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.comp`) and proves that both
 exchanges of nearby cycles are compatible with composition (blueprint
 `det-sp-nearby-cycles-exchanges`).
 
@@ -230,15 +229,6 @@ end Paste
 namespace NearbyCyclesModel
 
 variable {X X' Y Y' Z Z' : Scheme.{u}}
-
-/-- The identity morphism of a model, over the identities. -/
-@[simps]
-def Hom.id (M : NearbyCyclesModel X X') : M.Hom M (𝟙 X) (𝟙 X') where
-  total := 𝟙 _
-  generic := 𝟙 _
-  comm_j := by simp
-  comm_i := by simp
-  comm_ε := by simp
 
 variable {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {P : NearbyCyclesModel Z Z'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
