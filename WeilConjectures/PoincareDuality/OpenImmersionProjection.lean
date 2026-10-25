@@ -616,7 +616,11 @@ theorem boundedConstructibleExceptionalProjectionMorphismOfFactorization_comp_re
     (eqToIso (congrArg (boundedConstructibleUpperStar Λ ℓ) w₁.symm) ≪≫
       boundedConstructibleUpperStarComp Λ ℓ (i ≫ h) p₁)
     (boundedConstructibleUpperStarComp_refinement_cocycle Λ ℓ h p₁ w w₁ _) K B
-  -- TODO: `exact key` holds up to defeq, but the kernel check runs out of memory
+  -- TODO: `key` and the goal differ only by `Functor.comp_obj` unfoldings (checked with a
+  -- structural Expr diff: after `dsimp only [Functor.comp_obj, Functor.comp_map,
+  -- Functor.id_obj] at key ⊢` they are syntactically equal), but closing the goal with
+  -- `exact key` then loops in `whnf`, and `convert key using 0` runs out of memory in the
+  -- kernel. Likely fix: restate this theorem in exactly the form produced by `key`.
   sorry
 
 end Refinement
