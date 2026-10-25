@@ -218,11 +218,11 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).IsLeftAdjoint :=
   sorry
 
-/-- Blueprint `thm-coef-qbar-verdier` (the constructible adjunction `Rf_! ⊣ Rf^!` at the stage
-`ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`; this is the module-object proper-adjoint
-input of blueprint `pur713-def-upper-shriek-module`). For a proper morphism `g : Z ⟶ Y`, the
-derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible `ℚ̄_ℓ`-sheaves
-is a left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
+/-- Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
+stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper morphism
+`g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded
+constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image
+`Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).IsLeftAdjoint :=
   sorry

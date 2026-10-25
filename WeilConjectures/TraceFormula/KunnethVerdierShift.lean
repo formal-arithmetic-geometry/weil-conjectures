@@ -85,7 +85,7 @@ instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
     IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
       (compactificationOverField f) K).app B) :=
-  isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ f K B
+  isIso_boundedConstructibleExceptionalProjectionMorphism ℓ f K B
 
 instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
     IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
