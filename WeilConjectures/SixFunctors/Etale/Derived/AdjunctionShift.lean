@@ -43,13 +43,14 @@ open Scheme
 namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The adjunction `Rf_! ⊣ Rf^!` commutes with shifts: the shift structure of `Rf^!` is the
 one induced by the adjunction. -/
 instance commShift_rightDerivedUpperShriekAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] :
-    (rightDerivedUpperShriekAdjunction A f).CommShift ℤ :=
-  (rightDerivedUpperShriekAdjunction A f).commShift_of_leftAdjoint ℤ
+    [HasCompactification f] :
+    (rightDerivedUpperShriekAdjunction Λ f).CommShift ℤ :=
+  (rightDerivedUpperShriekAdjunction Λ f).commShift_of_leftAdjoint ℤ
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]

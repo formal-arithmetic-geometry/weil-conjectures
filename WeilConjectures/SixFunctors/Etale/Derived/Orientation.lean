@@ -114,7 +114,7 @@ section InvertibleDualizingComplex
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-  {X S : Scheme.{u}} {a : X ⟶ S} [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+  {X S : Scheme.{u}} {a : X ⟶ S} [HasCompactification a]
   {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
   (γ : T ≅ dualizingComplex A a) (hT : IsInvertible T)
 
@@ -129,16 +129,17 @@ the composite of `RHom(K, γ⁻¹)` and of the twist interchange
 `AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor`
 (`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_app`). -/
 noncomputable def verdierDualIsoCoefficientDualTensor :
-    verdierDual A a ≅
-      DerivedCategory.coefficientDual A X ⋙ (derivedTensor A X).flip.obj T :=
+    verdierDual Λ a ≅
+      DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X ⋙ (derivedTensor (ModuleCat.{u + 1} Λ)
+          X).flip.obj T :=
   MonoidalClosed.ihomFlipIsoIhomUnitTensor γ hT
 
 /-- The component of `θ` at `K` is `RHom(K, γ⁻¹)` followed by the twist interchange
 `RHom(K, T) ≅ K^∨ ⊗ᴸ T`. -/
 lemma verdierDualIsoCoefficientDualTensor_app
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (verdierDualIsoCoefficientDualTensor γ hT).app (op K) =
-      (RHom(X)[A].obj (op K)).mapIso γ.symm ≪≫
+      (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso γ.symm ≪≫
         DerivedCategory.derivedHomIsoCoefficientDualTensor K hT :=
   rfl
 
@@ -157,10 +158,10 @@ Under `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` the evaluation `K ⊗ᴸ 𝔻_X K ⟶
 commutes. -/
 @[reassoc]
 lemma whiskerLeft_verdierDualIsoCoefficientDualTensor_hom_app_comp
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     K ◁ ((verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K)) ≫ (α_ _ _ _).inv ≫
         DerivedCategory.coefficientEvaluation K ▷ T ≫ (λ_ T).hom =
-      (ihom.ev K).app (dualizingComplex A a) ≫ γ.inv :=
+      (ihom.ev K).app (dualizingComplex Λ a) ≫ γ.inv :=
   MonoidalClosed.whiskerLeft_ihomIsoIhomUnitTensor_hom_comp γ hT K
 
 attribute [local instance] derivedBraidedCategory
@@ -168,10 +169,10 @@ attribute [local instance] derivedBraidedCategory
 /-- The isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T`
 (`CategoryTheory.MonoidalClosed.ihomIhomIsoIhomIhomUnit`). -/
 noncomputable def verdierDualVerdierDualIso
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (verdierDual A a).obj (op ((verdierDual A a).obj (op K))) ≅
-      (DerivedCategory.coefficientDual A X).obj
-        (op ((DerivedCategory.coefficientDual A X).obj (op K))) :=
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (verdierDual Λ a).obj (op ((verdierDual Λ a).obj (op K))) ≅
+      (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj
+        (op ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))) :=
   MonoidalClosed.ihomIhomIsoIhomIhomUnit γ hT K
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex (biduality).
@@ -180,8 +181,8 @@ Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `θ`, the double
 `K ⟶ 𝔻_X 𝔻_X K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
 @[reassoc]
 lemma verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (verdierDualDoubleDual A a).app K ≫ (verdierDualVerdierDualIso γ hT K).hom =
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (verdierDualDoubleDual Λ a).app K ≫ (verdierDualVerdierDualIso γ hT K).hom =
       (DerivedCategory.coefficientDualDoubleDual _ X).app K :=
   MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom γ hT K
 
@@ -190,8 +191,9 @@ include γ hT in
 
 For a perfect `K` the double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
 theorem isIso_verdierDualDoubleDual_app_of_isDualizable
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    IsIso ((verdierDualDoubleDual A a).app K) :=
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hK :
+        IsDualizable K) :
+    IsIso ((verdierDualDoubleDual Λ a).app K) :=
   MonoidalClosed.isIso_toIhomIhom_of_isDualizable γ hT hK
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex (anti-equivalence).
@@ -200,17 +202,20 @@ The Verdier dual `𝔻_X` restricts to an anti-equivalence of the perfect object
 its own quasi-inverse, the unit and counit being the double-dual isomorphisms. -/
 noncomputable def verdierDualEquivalenceOfIso :
     (ObjectProperty.FullSubcategory
-      (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))))ᵒᵖ ≌
+      (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+          Λ)))))ᵒᵖ ≌
       ObjectProperty.FullSubcategory
-        (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))) :=
+        (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+            Λ)))) :=
   MonoidalClosed.dualizableIhomEquivalence γ hT
 
 /-- The functor of the anti-equivalence `verdierDualEquivalenceOfIso` is `𝔻_X`. -/
 lemma verdierDualEquivalenceOfIso_functor_obj_obj
     (K : (ObjectProperty.FullSubcategory
-      (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))))ᵒᵖ) :
+      (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+          Λ)))))ᵒᵖ) :
     ((verdierDualEquivalenceOfIso γ hT).functor.obj K).obj =
-      (verdierDual A a).obj (op K.unop.obj) :=
+      (verdierDual Λ a).obj (op K.unop.obj) :=
   rfl
 
 section Shift
@@ -220,27 +225,33 @@ variable (X) in
 `M`, through the symmetry, the commutation of `M ⊗ᴸ -` with the shift
 (`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`) and the right unitor. -/
 noncomputable def tensorLeftUnitShiftIso (n : ℤ) :
-    tensorLeft ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))⟦n⟧) ≅
-      shiftFunctor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) n :=
-  BraidedCategory.tensorLeftIsoTensorRight _ ≪≫ derivedTensorRightShiftIso A (𝟙_ _) n ≪≫
+    tensorLeft ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))⟦n⟧)
+        ≅
+      shiftFunctor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) n :=
+  BraidedCategory.tensorLeftIsoTensorRight _ ≪≫ derivedTensorRightShiftIso (ModuleCat.{u + 1} Λ) (𝟙_
+      _) n ≪≫
     Functor.isoWhiskerRight (NatIso.ofComponents (fun M ↦ ρ_ M) (fun f ↦ rightUnitor_naturality f) :
-      derivedTensorRight A X (𝟙_ _) ≅ 𝟭 _) _
+      derivedTensorRight (ModuleCat.{u + 1} Λ) X (𝟙_ _) ≅ 𝟭 _) _
 
 variable (X) in
 /-- The derived hom out of the shifted unit is the opposite shift, `RHom(Λ_X⟦n⟧, M) ≅ M⟦-n⟧`,
 naturally in `M`: both are right adjoint to `M ↦ M⟦n⟧ ≅ Λ_X⟦n⟧ ⊗ᴸ M`. -/
 noncomputable def ihomUnitShiftIso (n : ℤ) :
-    ihom ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))⟦n⟧) ≅
-      shiftFunctor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (-n) :=
+    ihom ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))⟦n⟧) ≅
+      shiftFunctor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (-n)
+          :=
   (ihom.adjunction _).rightAdjointUniq
-    ((shiftEquiv (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) n).toAdjunction
+    ((shiftEquiv (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+        n).toAdjunction
       |>.ofNatIsoLeft
       (tensorLeftUnitShiftIso X n).symm)
 
 /-- The shift as a twist: `K ⊗ᴸ Λ_X⟦n⟧ ≅ (K ⊗ᴸ Λ_X)⟦n⟧ ≅ K⟦n⟧`. -/
-noncomputable def tensorUnitShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+noncomputable def tensorUnitShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)))
     (n : ℤ) : K ⊗ (𝟙_ _)⟦n⟧ ≅ K⟦n⟧ :=
-  (derivedTensorRightShiftIso A (𝟙_ _) n).app K ≪≫ (shiftFunctor _ n).mapIso (ρ_ K)
+  (derivedTensorRightShiftIso (ModuleCat.{u + 1} Λ) (𝟙_ _) n).app K ≪≫ (shiftFunctor _ n).mapIso (ρ_
+      K)
 
 /-- The derived internal hom turns shifts in the first variable into opposite shifts outside:
 ```
@@ -248,8 +259,9 @@ noncomputable def tensorUnitShiftIso (K : _root_.DerivedCategory (Sheaf X.smallE
 ```
 the composite of `RHom(K ⊗ᴸ Λ_X⟦n⟧ ≅ K⟦n⟧, M)`, of internal currying and of
 `AlgebraicGeometry.Etale.ihomUnitShiftIso`. -/
-noncomputable def ihomShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (n : ℤ) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+noncomputable def ihomShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u
+    + 1} Λ)))
+    (n : ℤ) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (ihom (K⟦n⟧)).obj M ≅ ((ihom K).obj M)⟦-n⟧ :=
   (MonoidalClosed.internalHom.flip.obj M).mapIso (tensorUnitShiftIso K n).op ≪≫
     MonoidalClosed.ihomCurryIso K _ M ≪≫ (ihomUnitShiftIso X n).app _
@@ -267,7 +279,7 @@ associator with shifts is not available. The shift compatibility
 `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift` is stated relative
 to this identification. -/
 noncomputable def shiftTensorIsoOfIsInvertible (n : ℤ)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     M⟦-n⟧ ⊗ T ≅ (M ⊗ T)⟦-n⟧ :=
   haveI := MonoidalClosed.isIso_ihomTensorToIhom ((𝟙_ _)⟦n⟧) M hT
   whiskerRightIso ((ihomUnitShiftIso X n).app M).symm T ≪≫
@@ -280,15 +292,15 @@ The isomorphism `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` commutes with shifts: under
 (`AlgebraicGeometry.Etale.ihomShiftIso`,
 `AlgebraicGeometry.Etale.shiftTensorIsoOfIsInvertible`), `θ_{K⟦n⟧}` is `θ_K⟦-n⟧`. -/
 theorem verdierDualIsoCoefficientDualTensor_hom_app_shift
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) :
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
     (verdierDualIsoCoefficientDualTensor γ hT).hom.app (op (K⟦n⟧)) ≫
         (ihomShiftIso K n (𝟙_ _)).hom ▷ T ≫ (shiftTensorIsoOfIsInvertible hT n _).hom =
-      (ihomShiftIso K n (dualizingComplex A a)).hom ≫
+      (ihomShiftIso K n (dualizingComplex Λ a)).hom ≫
         ((verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K))⟦-n⟧' := by
   have h₁ := MonoidalClosed.pre_app_comp_ihomIsoIhomUnitTensor_hom γ hT
     (tensorUnitShiftIso K n).hom
   have h₂ := MonoidalClosed.ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom γ hT K
-    ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))⟦n⟧)
+    ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))⟦n⟧)
   have h₃ := (ihomUnitShiftIso X n).hom.naturality
     (MonoidalClosed.ihomIsoIhomUnitTensor γ hT K).hom
   have h₄ : (ihomUnitShiftIso X n).hom.app ((ihom K).obj (𝟙_ _)) ▷ T ≫
@@ -333,7 +345,7 @@ structure Orientation (f : X ⟶ Y) (d : ℕ) [HasCompactification f] where
   /-- The morphism is smooth of pure relative dimension `d`. -/
   smoothOfRelativeDimension : SmoothOfRelativeDimension d f
   /-- The purity isomorphism `γ : Λ_X(d)[2d] ≅ Rf^! Λ_Y`. -/
-  purity : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f
+  purity : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ f
 
 variable {Λ}
 
@@ -352,7 +364,7 @@ the form in which smooth purity
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) states it. -/
 noncomputable def Orientation.twistShiftIso {f : X ⟶ Y} {d : ℕ} [HasCompactification f]
     (o : Orientation Λ f d) :
-    (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f :=
+    (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex Λ f :=
   twistShiftConstantComplexIso Λ X d ≪≫ o.purity
 
 /-- Blueprint `rem-sf-orientation-pointer`: Where the orientation is constructed.
@@ -378,7 +390,7 @@ given by an isomorphism `γ : Λ_X(d)⟦2d⟧ ≅ ω_X`. This is how an orientat
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), is turned into an
 `AlgebraicGeometry.Etale.Orientation`. -/
 def Orientation.ofDualizingComplexIso [SmoothOfRelativeDimension d a]
-    (γ : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a) :
+    (γ : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) :
     Orientation Λ a d where
   smoothOfRelativeDimension := inferInstance
   purity := γ
@@ -393,7 +405,7 @@ definition the dualizing complex, so the purity isomorphism reads
 the dualizing complex of a smooth `X` of pure relative dimension `d` over `S` is a shifted Tate
 twist. -/
 theorem Orientation.nonempty_iso_dualizingComplex (o : Orientation Λ a d) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) a ≅ (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
+    Nonempty (dualizingComplex Λ a ≅ (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
   ⟨o.purity.symm⟩
 
 variable (Λ X d) in
@@ -419,7 +431,7 @@ the composite of `RHom_X(K, γ_f⁻¹)` and of the twist interchange
 every `K`; the subsection's perfectness hypothesis is only needed for the biduality
 (`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`). -/
 noncomputable def Orientation.verdierDualIso [HasInvertibleExponent Λ X] (o : Orientation Λ a d) :
-    verdierDual (ModuleCat.{u + 1} Λ) a ≅
+    verdierDual Λ a ≅
       DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X ⋙
         (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
   verdierDualIsoCoefficientDualTensor o.purity (isInvertible_tateObject_shift Λ X d)
@@ -445,7 +457,7 @@ When `[HasInvertibleExponent Λ X]` holds, the component `o.verdierDualIso.app (
 is such an isomorphism. This statement needs no such hypothesis, because `K` is dualizable. -/
 theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
-    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K) ≅
+    Nonempty ((verdierDual Λ a).obj (op K) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj
           ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)) := by
@@ -459,7 +471,7 @@ Under an orientation the Verdier dual of a perfect complex is perfect, so that `
 restricts to a contravariant anti-equivalence of the perfect objects. -/
 theorem Orientation.isDualizable_verdierDual [HasInvertibleExponent Λ X] (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
-    IsDualizable ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) := by
+    IsDualizable ((verdierDual Λ a).obj (op K)) := by
   obtain ⟨e⟩ := o.nonempty_iso_verdierDual_coefficientDual hK
   have hT : IsInvertible (tateObject Λ X d) :=
     (isInvertible_iff_exists_derivedTensor _).2 (isInvertible_tateObject Λ X d)
@@ -482,8 +494,8 @@ noncomputable def Orientation.verdierDualEquivalence [HasInvertibleExponent Λ X
 /-- The isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`. -/
 noncomputable def Orientation.verdierDualVerdierDualIso [HasInvertibleExponent Λ X]
     (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
-    (verdierDual (ModuleCat.{u + 1} Λ) a).obj
-        (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K))) ≅
+    (verdierDual Λ a).obj
+        (op ((verdierDual Λ a).obj (op K))) ≅
       (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj
         (op ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))) :=
   Etale.verdierDualVerdierDualIso o.purity (isInvertible_tateObject_shift Λ X d) K
@@ -495,7 +507,7 @@ Under the isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`, 
 @[reassoc]
 lemma Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
     [HasInvertibleExponent Λ X] (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
-    (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K ≫ (o.verdierDualVerdierDualIso K).hom =
+    (verdierDualDoubleDual Λ a).app K ≫ (o.verdierDualVerdierDualIso K).hom =
       (DerivedCategory.coefficientDualDoubleDual _ X).app K :=
   Etale.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom _ _ K
 
@@ -506,7 +518,7 @@ isomorphism. -/
 theorem Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable [HasInvertibleExponent Λ X]
     (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
+    IsIso ((verdierDualDoubleDual Λ a).app K) :=
   Etale.isIso_verdierDualDoubleDual_app_of_isDualizable o.purity
     (isInvertible_tateObject_shift Λ X d) hK
 

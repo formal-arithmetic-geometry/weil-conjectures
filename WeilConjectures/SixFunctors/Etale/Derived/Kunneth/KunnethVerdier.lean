@@ -80,7 +80,7 @@ theorem verdierDual_obj {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
 /-- Blueprint `def-trf-dualizing-complex`: the dualizing complex of `a : X ⟶ S` is
 `ω_X = Ra^! Λ_S`. -/
 theorem dualizingComplex_eq {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
-    dualizingComplex (ModuleCat.{u + 1} Λ) a = (R(a)^![Λ]).obj (𝟙_ _) :=
+    dualizingComplex Λ a = (R(a)^![Λ]).obj (𝟙_ _) :=
   rfl
 
 /-- The internal hom out of the unit is the identity, `RHom(Λ_X, -) ≅ 𝟭`: both are right
@@ -167,7 +167,7 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
     (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
+        ((verdierDual Λ b).obj (op N)) ≅
       (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
         ((R(pullback.fst a b)^![Λ]).obj M)) := by
@@ -210,7 +210,7 @@ and `N` in `Dctf(Y, A)`,
 
 on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
 theorem hasKunnethComparisons [HasInvertibleExponent Λ (Spec (.of k))] :
-    HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) where
+    HasKunnethComparisons Λ (Spec (.of k)) where
   kunnethShriek := by
     intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
     exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂

@@ -82,7 +82,7 @@ noncomputable abbrev twistedDual (d : ℕ) (K : DerivedCategoryModule Λ X) :
 `γ : Λ_X(d)[2d] ≅ Ra^! Λ_Y`, the form in which smooth purity
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) produces orientations. -/
 abbrev TateOrientation (a : X ⟶ Y) [HasCompactification a] (d : ℕ) : Type (u + 1) :=
-  (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a
+  (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex Λ a
 
 namespace TateOrientation
 
@@ -92,7 +92,7 @@ variable {Λ} {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
 `Λ_X(d)⟦2d⟧ ≅ ω_X` out of the shifted twist itself: `γ` precomposed with the left unitor
 `Λ_X(d) ≅ Λ_X ⊗ᴸ Λ_X(d)`. -/
 noncomputable def dualizingComplexIso (γ : TateOrientation Λ a d) :
-    (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a :=
+    (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a :=
   (shiftFunctor _ (2 * d : ℤ)).mapIso (derivedTensorLeftUnitor _ X _).symm ≪≫ γ
 
 /-- A Tate orientation `γ : Λ_X(d)[2d] ≅ Ra^! Λ_Y` of a morphism `a` smooth of relative dimension

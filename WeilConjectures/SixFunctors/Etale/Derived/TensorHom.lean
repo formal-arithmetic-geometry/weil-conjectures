@@ -91,6 +91,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
@@ -104,7 +105,7 @@ variable [Etale.UpperStarPreservesFlat A]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange.
 
@@ -126,13 +127,16 @@ objectwise the conjugate of the projection formula
 (`CategoryTheory.ParametrizedAdjunction.conjugateIso`). The blueprint takes `M` and `N` in
 `Dᵇctf`; no such hypothesis is needed. For a finite coefficient ring `Λ` the projection
 formula holds (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). -/
-noncomputable def derivedHomRightDerivedLowerShriekIso [IsIso (projectionMap A f)] :
-    RHom(X)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)^![A] ⋙
-        (Functor.whiskeringRight _ _ _).obj R((f)_*[A]) ≅
-      (R(f)_![A]).op ⋙ RHom(Y)[A] :=
-  ((derivedTensorHomAdjunction₂ A X).comp (derivedUpperStarLowerStarAdjunction A f)
-      (rightDerivedUpperShriekAdjunction A f)).conjugateIso
-    ((derivedTensorHomAdjunction₂ A Y).precomp R(f)_![A]) (asIso (projectionMap A f))
+noncomputable def derivedHomRightDerivedLowerShriekIso [IsIso (projectionMap (ModuleCat.{u + 1} Λ)
+    f)] :
+    RHom(X)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)^![Λ] ⋙
+        (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅
+      (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ] :=
+  ((derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) X).comp (derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} Λ) f)
+      (rightDerivedUpperShriekAdjunction Λ f)).conjugateIso
+    ((derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) Y).precomp R(f)_![ModuleCat.{u + 1} Λ])
+        (asIso (projectionMap (ModuleCat.{u + 1} Λ) f))
 
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange, compatibility with shifts.
@@ -150,15 +154,19 @@ shifts in `L` (`AlgebraicGeometry.Etale.commShift_projectionMap_app`), along the
 `AlgebraicGeometry.Etale.commShift_rightDerivedUpperShriekAdjunction`,
 `AlgebraicGeometry.Etale.commShift_derivedTensorHomAdjunction`), and conjugation preserves
 the compatibility with shifts (`CategoryTheory.NatTrans.CommShift.conjugateEquiv`). -/
-theorem commShift_derivedHomRightDerivedLowerShriekIso_app_hom [IsIso (projectionMap A f)]
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    NatTrans.CommShift (F₁ := (R(f)^![A] ⋙ (RHom(X)[A]).obj (op M)) ⋙ R((f)_*[A]))
-      (F₂ := (RHom(Y)[A]).obj (op ((R(f)_![A]).obj M)))
-      ((derivedHomRightDerivedLowerShriekIso A f).app (op M)).hom ℤ :=
+theorem commShift_derivedHomRightDerivedLowerShriekIso_app_hom [IsIso (projectionMap (ModuleCat.{u +
+    1} Λ) f)]
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    NatTrans.CommShift (F₁ := (R(f)^![Λ] ⋙ (RHom(X)[ModuleCat.{u + 1} Λ]).obj (op M)) ⋙
+        R((f)_*[ModuleCat.{u + 1} Λ]))
+      (F₂ := (RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)))
+      ((derivedHomRightDerivedLowerShriekIso Λ f).app (op M)).hom ℤ :=
   NatTrans.CommShift.conjugateEquiv
-    ((derivedUpperStarLowerStarAdjunction A f).comp
-      ((derivedTensorHomAdjunction A M).comp (rightDerivedUpperShriekAdjunction A f)))
-    (derivedTensorHomAdjunction A ((R(f)_![A]).obj M)) ((projectionMap A f).app M)
+    ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).comp
+      ((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) M).comp (rightDerivedUpperShriekAdjunction
+          Λ f)))
+    (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))
+        ((projectionMap (ModuleCat.{u + 1} Λ) f).app M)
 
 section CoefficientChange
 
@@ -180,43 +188,48 @@ omit [HasSmallSiteSheafify A] in
 finite reduction and scalar extension, as an identity of 2-squares.
 
 This is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`
-before evaluation at an object `N`: the isomorphism over `A` followed by the comparison map
+before evaluation at an object `N`: the isomorphism over `(ModuleCat.{u + 1} Λ)` followed by the
+comparison map
 `T_Y RHom(Rf_! M, -) ⟶ RHom(Rf_! M', T_Y -)` is the composite comparison map
 `T_Y Rf_* RHom(M, Rf^! -) ⟶ Rf_* RHom(M', Rf^! T_Y -)` followed by the isomorphism over `A'`.
 -/
-theorem whiskerTop_derivedHomRightDerivedLowerShriekIso_hom [IsIso (projectionMap A f)]
+theorem whiskerTop_derivedHomRightDerivedLowerShriekIso_hom [IsIso (projectionMap (ModuleCat.{u + 1}
+    Λ) f)]
     [IsIso (projectionMap A' f)]
-    (TX : DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+    (TX : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A'))
-    (TY : DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+    (TY : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A'))
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (M' : DerivedCategory (Sheaf X.smallEtaleTopology A'))
-    (σ : TwoSquare TY L((f)^*[A]) L((f)^*[A']) TX)
-    (μ : TwoSquare TX ((-⊗ᴸ-(X)[A]).obj M) ((-⊗ᴸ-(X)[A']).obj M') TX)
-    (ρ : TwoSquare TX R(f)_![A] R(f)_![A'] TY)
-    (ν : TwoSquare TY ((-⊗ᴸ-(Y)[A]).obj ((R(f)_![A]).obj M))
+    (σ : TwoSquare TY L((f)^*[ModuleCat.{u + 1} Λ]) L((f)^*[A']) TX)
+    (μ : TwoSquare TX ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M) ((-⊗ᴸ-(X)[A']).obj M') TX)
+    (ρ : TwoSquare TX R(f)_![ModuleCat.{u + 1} Λ] R(f)_![A'] TY)
+    (ν : TwoSquare TY ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))
       ((-⊗ᴸ-(Y)[A']).obj ((R(f)_![A']).obj M')) TY)
-    (h : ν.whiskerLeft ((projectionMap A f).app M) =
+    (h : ν.whiskerLeft ((projectionMap (ModuleCat.{u + 1} Λ) f).app M) =
       (σ ≫ᵥ μ ≫ᵥ ρ).whiskerRight ((projectionMap A' f).app M')) :
-    (mateEquiv (derivedTensorHomAdjunction A ((R(f)_![A]).obj M))
+    (mateEquiv (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) ((R(f)_![ModuleCat.{u + 1} Λ]).obj
+        M))
         (derivedTensorHomAdjunction A' ((R(f)_![A']).obj M')) ν).whiskerTop
-        ((derivedHomRightDerivedLowerShriekIso A f).app (op M)).hom =
-      ((mateEquiv (rightDerivedUpperShriekAdjunction A f)
-            (rightDerivedUpperShriekAdjunction A' f) ρ ≫ₕ
-          mateEquiv (derivedTensorHomAdjunction A M) (derivedTensorHomAdjunction A' M') μ) ≫ₕ
-          mateEquiv (derivedUpperStarLowerStarAdjunction A f)
+        ((derivedHomRightDerivedLowerShriekIso Λ f).app (op M)).hom =
+      ((mateEquiv (rightDerivedUpperShriekAdjunction Λ f)
+            (rightDerivedUpperShriekAdjunction Λ' f) ρ ≫ₕ
+          mateEquiv (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) M) (derivedTensorHomAdjunction
+              A' M') μ) ≫ₕ
+          mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
             (derivedUpperStarLowerStarAdjunction A' f) σ).whiskerBottom
-        ((derivedHomRightDerivedLowerShriekIso A' f).app (op M')).hom := by
+        ((derivedHomRightDerivedLowerShriekIso Λ' f).app (op M')).hom := by
   rw [← mateEquiv_hcomp, ← mateEquiv_hcomp]
   exact mateEquiv_whiskerTop_conjugateEquiv
-    ((derivedUpperStarLowerStarAdjunction A f).comp
-      ((derivedTensorHomAdjunction A M).comp (rightDerivedUpperShriekAdjunction A f)))
-    (derivedTensorHomAdjunction A ((R(f)_![A]).obj M))
+    ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).comp
+      ((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) M).comp (rightDerivedUpperShriekAdjunction
+          Λ f)))
+    (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))
     ((derivedUpperStarLowerStarAdjunction A' f).comp
-      ((derivedTensorHomAdjunction A' M').comp (rightDerivedUpperShriekAdjunction A' f)))
+      ((derivedTensorHomAdjunction A' M').comp (rightDerivedUpperShriekAdjunction Λ' f)))
     (derivedTensorHomAdjunction A' ((R(f)_![A']).obj M'))
-    ((projectionMap A f).app M) ((projectionMap A' f).app M') _ ν h
+    ((projectionMap (ModuleCat.{u + 1} Λ) f).app M) ((projectionMap A' f).app M') _ ν h
 
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange, compatibility with
@@ -255,35 +268,37 @@ commutes, where the left vertical map is the composite
 `T_Y Rf_* ⟶ Rf_* T_X ⟶ Rf_* RHom(M', T_X -) ⟶ Rf_* RHom(M', Rf^! T_Y -)`. As in the
 blueprint, this is the compatibility of the ingredients
 (`AlgebraicGeometry.Etale.whiskerTop_derivedHomRightDerivedLowerShriekIso_hom`). -/
-theorem derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv [IsIso (projectionMap A f)]
+theorem derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv [IsIso (projectionMap
+    (ModuleCat.{u + 1} Λ) f)]
     [IsIso (projectionMap A' f)]
-    (TX : DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+    (TX : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A'))
-    (TY : DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+    (TY : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A'))
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (M' : DerivedCategory (Sheaf X.smallEtaleTopology A'))
-    (σ : TwoSquare TY L((f)^*[A]) L((f)^*[A']) TX)
-    (μ : TwoSquare TX ((-⊗ᴸ-(X)[A]).obj M) ((-⊗ᴸ-(X)[A']).obj M') TX)
-    (ρ : TwoSquare TX R(f)_![A] R(f)_![A'] TY)
-    (ν : TwoSquare TY ((-⊗ᴸ-(Y)[A]).obj ((R(f)_![A]).obj M))
+    (σ : TwoSquare TY L((f)^*[ModuleCat.{u + 1} Λ]) L((f)^*[A']) TX)
+    (μ : TwoSquare TX ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M) ((-⊗ᴸ-(X)[A']).obj M') TX)
+    (ρ : TwoSquare TX R(f)_![ModuleCat.{u + 1} Λ] R(f)_![A'] TY)
+    (ν : TwoSquare TY ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))
       ((-⊗ᴸ-(Y)[A']).obj ((R(f)_![A']).obj M')) TY)
-    (h : ν.whiskerLeft ((projectionMap A f).app M) =
+    (h : ν.whiskerLeft ((projectionMap (ModuleCat.{u + 1} Λ) f).app M) =
       (σ ≫ᵥ μ ≫ᵥ ρ).whiskerRight ((projectionMap A' f).app M'))
-    (N : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    TY.map (((derivedHomRightDerivedLowerShriekIso A f).app (op M)).hom.app N) ≫
-        (mateEquiv (derivedTensorHomAdjunction A ((R(f)_![A]).obj M))
+    (N : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    TY.map (((derivedHomRightDerivedLowerShriekIso Λ f).app (op M)).hom.app N) ≫
+        (mateEquiv (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) ((R(f)_![ModuleCat.{u + 1}
+            Λ]).obj M))
           (derivedTensorHomAdjunction A' ((R(f)_![A']).obj M')) ν).app N =
-      (mateEquiv (derivedUpperStarLowerStarAdjunction A f)
+      (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
           (derivedUpperStarLowerStarAdjunction A' f) σ).app _ ≫
-        R((f)_*[A']).map ((mateEquiv (derivedTensorHomAdjunction A M)
+        R((f)_*[A']).map ((mateEquiv (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) M)
           (derivedTensorHomAdjunction A' M') μ).app _) ≫
         R((f)_*[A']).map (((RHom(X)[A']).obj (op M')).map
-          ((mateEquiv (rightDerivedUpperShriekAdjunction A f)
-            (rightDerivedUpperShriekAdjunction A' f) ρ).app N)) ≫
-        ((derivedHomRightDerivedLowerShriekIso A' f).app (op M')).hom.app (TY.obj N) := by
+          ((mateEquiv (rightDerivedUpperShriekAdjunction Λ f)
+            (rightDerivedUpperShriekAdjunction Λ' f) ρ).app N)) ≫
+        ((derivedHomRightDerivedLowerShriekIso Λ' f).app (op M')).hom.app (TY.obj N) := by
   have key := congr_app
-    (whiskerTop_derivedHomRightDerivedLowerShriekIso_hom A f A' TX TY M M' σ μ ρ ν h) N
+    (whiskerTop_derivedHomRightDerivedLowerShriekIso_hom Λ f A' TX TY M M' σ μ ρ ν h) N
   simp only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app, TwoSquare.hComp_app,
     Functor.comp_obj, Category.assoc, Functor.map_comp] at key
   exact key

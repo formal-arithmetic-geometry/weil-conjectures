@@ -384,7 +384,7 @@ universal coefficient sequences of both variables then vanish
 (`AlgebraicGeometry.Etale.isIso_compactlySupportedReductionSequence_f`,
 `AlgebraicGeometry.Etale.isIso_cohomologyReductionSequence_f`). -/
 theorem integralDegreewiseDuality {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a)
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K)
     (hperf : ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K).IsPerfect)
     (hproj : ∀ j, Module.Projective Λ ((H_c(a)[ModuleCat.{u + 1} Λ](j)).obj K) ∧
@@ -425,7 +425,7 @@ cohomology of `RΓ_c(X, K)^∨` with that of the second variable,
 sequences of the second variable
 (`AlgebraicGeometry.Etale.shortExact_cohomologyReductionSequence`). -/
 theorem integralDegreewise_adjoint {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a)
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) {ϖ : Λ} (n : ℕ)
     {D : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)}
     {g : (ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj

@@ -104,8 +104,8 @@ theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Eta
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :
-    IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ) := by
-  set ψ := supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ
+    IsIso (supportedRestriction Λ e i i' g hg L L' τ) := by
+  set ψ := supportedRestriction Λ e i i' g hg L L' τ
   set ε := (rightDerivedUpperShriekAdjunction Λ i).counit.app L
   set ε' := (rightDerivedUpperShriekAdjunction Λ i').counit.app L'
   have hψ : ψ ≫ ε' = (L((e)^*[ModuleCat.{u + 1} Λ])).map ε ≫ τ.hom :=

@@ -254,15 +254,15 @@ the smooth pullback exchange of `def-pur-smooth-pullback-exchange`
 noncomputable def upperShriekWeilDatum (sq : IsPullback gX f f gY)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
-    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+    (θ : dualizingComplex Λ f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (φf : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+          (dualizingComplex Λ f) ≅
       (rightDerivedUpperShriek Λ f).obj K)
     (φf' : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+          (dualizingComplex Λ f) ≅
       (rightDerivedUpperShriek Λ f).obj
         ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     (L((gX)^*[ModuleCat.{u + 1} Λ])).obj
@@ -279,15 +279,15 @@ of Weil objects. -/
 theorem smoothPurityIso_hom_comp_upperShriekWeilDatum (sq : IsPullback gX f f gY)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
-    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+    (θ : dualizingComplex Λ f ≅
       (twistShift Λ X d).obj (constantComplex Λ X))
     (φf : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+          (dualizingComplex Λ f) ≅
       (rightDerivedUpperShriek Λ f).obj K)
     (φf' : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+          (dualizingComplex Λ f) ≅
       (rightDerivedUpperShriek Λ f).obj
         ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))
     (hφ : (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ) ≫

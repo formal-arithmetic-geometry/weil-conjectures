@@ -85,15 +85,16 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), with source and target written
 with the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
 noncomputable def rightDerivedUpperShriekTensorMapOfDerivedTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((derivedTensor A X).obj ((R(f)^![A]).obj M)).obj ((L((f)^*[A])).obj N) ⟶
-      (R(f)^![A]).obj (((derivedTensor A Y).obj M).obj N) :=
+    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((R(f)^![Λ]).obj M)).obj ((L((f)^*[ModuleCat.{u +
+        1} Λ])).obj N) ⟶
+      (R(f)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj N) :=
   rightDerivedUpperShriekTensorMap f M N
 
 lemma isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (rightDerivedUpperShriekTensorMapOfDerivedTensor f M N) ↔
       IsIso (rightDerivedUpperShriekTensorMap f M N) :=
   Iff.rfl
@@ -102,13 +103,13 @@ lemma isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff {X Y : Scheme.{u
 isomorphism. Stated for a general coefficient category, so that its specialization to a finite
 ring of coefficients does not involve comparing monoidal structures. -/
 def IsIsoRightDerivedUpperShriekTensorMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
+    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   IsIso (rightDerivedUpperShriekTensorMap f M N)
 
 lemma isIsoRightDerivedUpperShriekTensorMap_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    [HasCompactification f] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIsoRightDerivedUpperShriekTensorMap f M N ↔
       IsIso (rightDerivedUpperShriekTensorMap f M N) :=
   Iff.rfl
@@ -117,7 +118,6 @@ section Composition
 
 variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h)
   [HasCompactification f] [HasCompactification g] [HasCompactification h]
-  [(R(f)_![A]).IsLeftAdjoint] [(R(g)_![A]).IsLeftAdjoint] [(R(h)_![A]).IsLeftAdjoint]
   [IsIso (projectionMap A f)] [IsIso (projectionMap A g)] [IsIso (projectionMap A h)]
   (e : R(h)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
   (he : Adjunction.ProjectionCompCompatible (fun M N ↦ ((projectionMap A f).app M).app N)
@@ -134,8 +134,9 @@ local notation "ρ[" e "]" =>
 /-- **The tensor map of a composite.** For `h = f ≫ g`, the tensor map of `h` at `(M, N)` is an
 isomorphism if the tensor maps of `f` at `(Rg^! M, Lg^* N)` and of `g` at `(M, N)` are. -/
 theorem isIso_rightDerivedUpperShriekTensorMap_comp
-    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (hf : IsIso (rightDerivedUpperShriekTensorMap f ((R(g)^![A]).obj M) ((L((g)^*[A])).obj N)))
+    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hf : IsIso (rightDerivedUpperShriekTensorMap f ((R(g)^![Λ]).obj M) ((L((g)^*[ModuleCat.{u + 1}
+        Λ])).obj N)))
     (hg : IsIso (rightDerivedUpperShriekTensorMap g M N)) :
     IsIso (rightDerivedUpperShriekTensorMap h M N) := by
   have hc := rightDerivedUpperShriekTensorMap_comp f g h w e he M N
@@ -148,13 +149,14 @@ theorem isIso_rightDerivedUpperShriekTensorMap_comp
 projection map of `f` and `θ_f` invertible everywhere, if the tensor map of `h` at `(M, N)` is
 an isomorphism, then so is `Rf^!` of the tensor map of `g` at `(M, N)`. -/
 theorem isIso_map_rightDerivedUpperShriekTensorMap_of_comp
-    (hassoc : ProjectionMapAssociativity A f)
-    (hθ : ∀ P, IsIso (dualizingComplexTensorMapOfIsIso (A := A) f P))
-    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (hassoc : ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f)
+    (hθ : ∀ P, IsIso (dualizingComplexTensorMapOfIsIso ((ModuleCat.{u + 1} Λ) := (ModuleCat.{u + 1}
+        Λ)) f P))
+    (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hh : IsIso (rightDerivedUpperShriekTensorMap h M N)) :
-    IsIso ((R(f)^![A]).map (rightDerivedUpperShriekTensorMap g M N)) := by
-  have := isIso_rightDerivedUpperShriekTensorMap_of_forall hassoc hθ ((R(g)^![A]).obj M)
-    ((L((g)^*[A])).obj N)
+    IsIso ((R(f)^![Λ]).map (rightDerivedUpperShriekTensorMap g M N)) := by
+  have := isIso_rightDerivedUpperShriekTensorMap_of_forall hassoc hθ ((R(g)^![Λ]).obj M)
+    ((L((g)^*[ModuleCat.{u + 1} Λ])).obj N)
   have hc := rightDerivedUpperShriekTensorMap_comp f g h w e he M N
   have : IsIso (rightDerivedUpperShriekTensorMap h M N ≫ (ρ[e]).hom.app (M ⊗ N)) :=
     inferInstance
@@ -191,7 +193,7 @@ include d in
 /-- For a smooth `f` of relative dimension `d`, the dualizing complex `ω_f` is invertible
 (`thm-asd-smooth-tensor`). -/
 lemma isInvertible_dualizingComplex_of_smoothOfRelativeDimension :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
+    DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) := by
   obtain ⟨L, hL₁, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   have := hL₁
   exact DerivedCategory.isInvertible.of_iso e.symm

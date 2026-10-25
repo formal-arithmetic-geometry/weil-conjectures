@@ -245,7 +245,7 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
     (hU : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M)))) :
     IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K M) := by
-  obtain ⟨w, hw⟩ := (existsUnique_distTriang_supportedLocalization (ModuleCat.{u + 1} Λ) i j hij
+  obtain ⟨w, hw⟩ := (existsUnique_distTriang_supportedLocalization Λ i j hij
     M).exists
   obtain ⟨w₁, hw₁⟩ := exists_distTriang_derivedHom_right (op K) _ hw
   have hT₁ := (L((gZ)^*[ModuleCat.{u + 1} Λ])).map_distinguished _ hw₁
@@ -258,7 +258,7 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
       ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))) :=
     (isIso_derivedHomUpperStarComparison_iff_of_iso_right _ gZ K eX).2 hW
   have : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
-      (supportedLocalizationTriangle (ModuleCat.{u + 1} Λ) i j M w).obj₁) := hφ₁
+      (supportedLocalizationTriangle Λ i j M w).obj₁) := hφ₁
   refine Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton hT₁ hw₂ _ _
     (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M)))

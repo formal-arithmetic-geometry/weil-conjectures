@@ -63,10 +63,10 @@ theorem bijective_comp_untwistedSmoothTrace (hΛ : Function.Surjective (Int.cast
         γ.untwistedSmoothTrace ≫ ι.hom) := by
   obtain ⟨ψ⟩ := nonempty_tateObject_iso_unit Λ k (d : ℤ)
   let γ' : (𝟙_ (DerivedCategoryModule Λ X))⟦(2 * d : ℤ)⟧ ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a :=
+      dualizingComplex Λ a :=
     (shiftFunctor _ (2 * d : ℤ)).mapIso (tateObjectIsoUnit a ψ).symm ≪≫ γ.dualizingComplexIso
   have hb := bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace
-    (ModuleCat.{u + 1} Λ) a γ'
+    Λ a γ'
   let c := ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).app
     (𝟙_ (DerivedCategoryModule Λ X))
   obtain ⟨w, hw⟩ := (hb (𝟙_ _)).2 (c.hom ≫ γ.untwistedSmoothTrace ≫ ι.hom)
@@ -118,7 +118,7 @@ theorem isPerfectPairing_untwistedPoincarePairing_comp
     (ι : tateObject Λ (Spec (.of k)) (-d) ≅ 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))))
     (K : DerivedCategoryModule Λ X) :
     IsPerfectPairing (γ.untwistedPoincarePairing K ≫ ι.hom) := by
-  have h := isPerfectPairing_poincarePairingOfTrace_aux (ModuleCat.{u + 1} Λ) a K (2 * d : ℤ)
+  have h := isPerfectPairing_poincarePairingOfTrace_aux Λ a K (2 * d : ℤ)
     _ (bijective_comp_untwistedSmoothTrace hΛ γ ι)
     (fun N ↦ hasProjectionFormula_of_finite Λ a K N)
   rw [Iso.inv_hom_id_app_assoc] at h

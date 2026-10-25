@@ -234,7 +234,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
   have : HasCompactification (e.hom ≫ ι) := .of_eq he.symm
   -- the normalisation: the Kummer boundary of `t` is a fundamental class `Λ_{V(t)} ≅ Rι^! Λ(1)[2]`
   have hφ := hN.isIso_supportedClassMap_kummerBoundary_coord Y aY
-  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) he.symm
+  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ he.symm
   obtain ⟨comp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ e.hom ι
   exact ⟨heq.app _ ≪≫ comp.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ e).app _ ≪≫
     (L((e.hom)^*[ModuleCat.{u + 1} Λ])).mapIso ((R(ι)^![Λ]).mapIso
@@ -418,7 +418,6 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
   have := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible i₁ hi hF _ hγ
   exact Iso.ext (by rw [← Category.comp_id α.hom, ← β.inv_hom_id, ← Category.assoc, this,
     Category.id_comp])
-
 
 set_option linter.unusedSectionVars false in
 include aY in

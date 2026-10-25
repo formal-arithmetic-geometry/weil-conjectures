@@ -61,10 +61,10 @@ section General
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {X Y S : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ S) [HasCompactification f]
-  [HasCompactification aY] [HasCompactification (f ≫ aY)] [(R(f)_![A]).IsLeftAdjoint]
-  [(R(aY)_![A]).IsLeftAdjoint] [(R(f ≫ aY)_![A]).IsLeftAdjoint]
+  [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
 /-- Blueprint `thm-sf-verdier-exchange`, Step 1: `Rf^! ω_Y ≅ ω_X`.
 
@@ -73,11 +73,12 @@ For a composition isomorphism `e : R(f ≫ a_Y)_! ≅ Rf_! ⋙ Ra_{Y!}`
 isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` (`sk-lem-sf-mate`); evaluated at the unit `Λ_S` it
 reads `Rf^! ω_Y ≅ ω_X`. -/
 noncomputable def rightDerivedUpperShriekDualizingComplexIso
-    (e : R(f ≫ aY)_![A] ≅ R(f)_![A] ⋙ R(aY)_![A]) :
-    (R(f)^![A]).obj (dualizingComplex A aY) ≅ dualizingComplex A (f ≫ aY) :=
-  (((rightDerivedUpperShriekAdjunction A (f ≫ aY)).ofNatIsoLeft e).rightAdjointUniq
-    ((rightDerivedUpperShriekAdjunction A f).comp
-      (rightDerivedUpperShriekAdjunction A aY))).symm.app (𝟙_ _)
+    (e : R(f ≫ aY)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(aY)_![ModuleCat.{u + 1}
+        Λ]) :
+    (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ (f ≫ aY) :=
+  (((rightDerivedUpperShriekAdjunction Λ (f ≫ aY)).ofNatIsoLeft e).rightAdjointUniq
+    ((rightDerivedUpperShriekAdjunction Λ f).comp
+      (rightDerivedUpperShriekAdjunction Λ aY))).symm.app (𝟙_ _)
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
@@ -99,29 +100,34 @@ natural in `M ∈ D(X_ét)`. As in the blueprint it is the tensor–Hom exchange
 (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`) at `N = ω_Y`, followed by the
 mate `Rf^! ω_Y ≅ ω_X` of `e` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIso`).
 The blueprint takes `M ∈ Dᵇctf(X, Λ)`; no finiteness of `M` is needed. -/
-noncomputable def verdierDualRightDerivedLowerShriekIso [IsIso (projectionMap A f)]
-    (e : R(f ≫ aY)_![A] ≅ R(f)_![A] ⋙ R(aY)_![A]) :
-    (R(f)_![A]).op ⋙ verdierDual A aY ≅ verdierDual A (f ≫ aY) ⋙ R((f)_*[A]) :=
-  (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso A f)
-      ((CategoryTheory.evaluation _ _).obj (dualizingComplex A aY))).symm ≪≫
-    NatIso.ofComponents (fun M ↦ (R((f)_*[A])).mapIso
-        (((RHom(X)[A]).obj M).mapIso (rightDerivedUpperShriekDualizingComplexIso A f aY e)))
+noncomputable def verdierDualRightDerivedLowerShriekIso [IsIso (projectionMap (ModuleCat.{u + 1} Λ)
+    f)]
+    (e : R(f ≫ aY)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(aY)_![ModuleCat.{u + 1}
+        Λ]) :
+    (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ verdierDual Λ aY ≅ verdierDual Λ (f ≫ aY) ⋙
+        R((f)_*[ModuleCat.{u + 1} Λ]) :=
+  (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso Λ f)
+      ((CategoryTheory.evaluation _ _).obj (dualizingComplex Λ aY))).symm ≪≫
+    NatIso.ofComponents (fun M ↦ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
+        (((RHom(X)[ModuleCat.{u + 1} Λ]).obj M).mapIso (rightDerivedUpperShriekDualizingComplexIso Λ
+            f aY e)))
       (fun {M M'} g ↦ by
         dsimp [verdierDual]
         rw [← Functor.map_comp, ← Functor.map_comp]
         congr 1
-        exact (((RHom(X)[A]).map g).naturality _).symm)
+        exact (((RHom(X)[ModuleCat.{u + 1} Λ]).map g).naturality _).symm)
 
-omit [HasSmallSiteSheafify A] in
+omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- The component of the Verdier-duality exchange: the inverse of the tensor–Hom exchange at
 `N = ω_Y`, followed by `Rf_* RHom(M, -)` of `Rf^! ω_Y ≅ ω_X`. -/
-lemma verdierDualRightDerivedLowerShriekIso_hom_app [IsIso (projectionMap A f)]
-    (e : R(f ≫ aY)_![A] ≅ R(f)_![A] ⋙ R(aY)_![A])
-    (M : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ) :
-    (verdierDualRightDerivedLowerShriekIso A f aY e).hom.app M =
-      ((derivedHomRightDerivedLowerShriekIso A f).inv.app M).app (dualizingComplex A aY) ≫
-        (R((f)_*[A])).map (((RHom(X)[A]).obj M).map
-          (rightDerivedUpperShriekDualizingComplexIso A f aY e).hom) :=
+lemma verdierDualRightDerivedLowerShriekIso_hom_app [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)]
+    (e : R(f ≫ aY)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(aY)_![ModuleCat.{u + 1}
+        Λ])
+    (M : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))ᵒᵖ) :
+    (verdierDualRightDerivedLowerShriekIso Λ f aY e).hom.app M =
+      ((derivedHomRightDerivedLowerShriekIso Λ f).inv.app M).app (dualizingComplex Λ aY) ≫
+        (R((f)_*[ModuleCat.{u + 1} Λ])).map (((RHom(X)[ModuleCat.{u + 1} Λ]).obj M).map
+          (rightDerivedUpperShriekDualizingComplexIso Λ f aY e).hom) :=
   rfl
 
 /-- Blueprint `thm-sf-verdier-exchange`: Verdier-duality exchange, compatibility with shifts.
@@ -129,14 +135,16 @@ lemma verdierDualRightDerivedLowerShriekIso_hom_app [IsIso (projectionMap A f)]
 For every `M` and `a : ℤ`, `𝔻_Y (Rf_!(M⟦a⟧)) ≅ (Rf_* 𝔻_X M)⟦-a⟧`: the Verdier dual of the
 commutation `Rf_!(M⟦a⟧) ≅ (Rf_! M)⟦a⟧`, then `RHom(N⟦a⟧, ω_Y) ≅ RHom(N, ω_Y)⟦-a⟧`
 (`AlgebraicGeometry.Etale.derivedHomShiftIso`), then the shift of the exchange for `M`. -/
-noncomputable def verdierDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap A f)]
-    (e : R(f ≫ aY)_![A] ≅ R(f)_![A] ⋙ R(aY)_![A])
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
-    (verdierDual A aY).obj (op ((R(f)_![A]).obj (M⟦a⟧))) ≅
-      ((R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M)))⟦-a⟧ :=
-  ((verdierDual A aY).mapIso (((R(f)_![A]).commShiftIso a).app M).op).symm ≪≫
-    (derivedHomShiftIso A _ a).app (dualizingComplex A aY) ≪≫
-      (shiftFunctor _ (-a)).mapIso ((verdierDualRightDerivedLowerShriekIso A f aY e).app (op M))
+noncomputable def verdierDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap (ModuleCat.{u +
+    1} Λ) f)]
+    (e : R(f ≫ aY)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(aY)_![ModuleCat.{u + 1}
+        Λ])
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
+    (verdierDual Λ aY).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj (M⟦a⟧))) ≅
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ (f ≫ aY)).obj (op M)))⟦-a⟧ :=
+  ((verdierDual Λ aY).mapIso (((R(f)_![ModuleCat.{u + 1} Λ]).commShiftIso a).app M).op).symm ≪≫
+    (derivedHomShiftIso (ModuleCat.{u + 1} Λ) _ a).app (dualizingComplex Λ aY) ≪≫
+      (shiftFunctor _ (-a)).mapIso ((verdierDualRightDerivedLowerShriekIso Λ f aY e).app (op M))
 
 end General
 

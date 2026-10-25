@@ -275,7 +275,7 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
     [QuasiCompact aX] [SmoothOfRelativeDimension n aX] [HasCompactification aX]
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) i ≅
+    Nonempty (dualizingComplex Λ i ≅
       (twistShift Λ Z (-c : ℤ)).obj (constantComplex Λ Z)) := by
   -- Step 1: `ω_Z ≅ Ri^! ω_X`, `ω_X ≅ Λ_X(n)[2n]` and `ω_Z ≅ Λ_Z(m)[2m]`.
   obtain ⟨eComp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ i aX
@@ -428,7 +428,7 @@ noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i]
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
-  restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i _ F.toZ F.isPullback
+  restrictSupportedClass Λ F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 
 /-- A frame class restricts to the frame class of the pulled back functions. -/
@@ -459,18 +459,18 @@ lemma restrictSupportedClass_comp_tateShift [HasKummerClass Λ] {U U' U₂ Z Z' 
     (g₂ : Z₂ ⟶ Z') (hg₂ : IsPullback g₂ i₂ i' e₁) (g' : Z₂ ⟶ Z) (hg' : IsPullback g' i₂ i e')
     (γ : constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj ((tateObject Λ U c)⟦2 * (c : ℤ)⟧))) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e' i i₂ g' hg'
+    restrictSupportedClass Λ e' i i₂ g' hg'
         (leftDerivedUpperStarConstantComplexIso Λ e').inv
         (leftDerivedUpperStarTateShiftIso Λ e' c) γ =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) e₁ i' i₂ g₂ hg₂
+      restrictSupportedClass Λ e₁ i' i₂ g₂ hg₂
         (leftDerivedUpperStarConstantComplexIso Λ e₁).inv (leftDerivedUpperStarTateShiftIso Λ e₁ c)
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+        (restrictSupportedClass Λ e i i' g hg
           (leftDerivedUpperStarConstantComplexIso Λ e).inv
           (leftDerivedUpperStarTateShiftIso Λ e c) γ) := by
   rw [leftDerivedUpperStarConstantComplexIso_comp Λ e₁ e _ he,
     leftDerivedUpperStarTateShiftIso_comp Λ e₁ e _ he]
   simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Category.assoc]
-  exact restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) e e₁ e' he i
+  exact restrictSupportedClass_restrictSupportedClass Λ e e₁ e' he i
     i' i₂ g hg g₂ hg₂ g' hg' _ _ _ _ γ
 
 /-- A local class `δ : Le^* Λ_X ⟶ Le^* (Ri_! Ri^! Λ(c)[2c])` corresponding to the class `β` with
@@ -501,10 +501,10 @@ lemma constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestrict
         (leftDerivedUpperStarComp _ a e w hw).hom.app _ ≫ (L((a)^*[_])).map δ ≫
           (leftDerivedUpperStarComp _ a e w hw).inv.app _ ≫
             supportedRestriction _ w i i' g' hg' _ _ (leftDerivedUpperStarTateShiftIso Λ w c) =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) a i₁ i' g₂ hg₂
+      restrictSupportedClass Λ a i₁ i' g₂ hg₂
         (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
         β := by
-  have ht := supportedRestriction_trans (ModuleCat.{u + 1} Λ) e a w hw i i₁ i' g₁ hg₁ g₂ hg₂
+  have ht := supportedRestriction_trans Λ e a w hw i i₁ i' g₁ hg₁ g₂ hg₂
     g' hg' _ _ _ (leftDerivedUpperStarTateShiftIso Λ e c) (leftDerivedUpperStarTateShiftIso Λ a c)
   rw [← leftDerivedUpperStarTateShiftIso_comp Λ a e w hw] at ht
   rw [ht, leftDerivedUpperStarConstantComplexIso_comp Λ a e w hw]
@@ -650,7 +650,7 @@ theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smoot
         Subsingleton.elim y' y]
     have he : (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ =
         (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ' := by
-      have hψ := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ) F.e i _ F.toZ
+      have hψ := isIso_supportedRestriction_of_isOpenImmersion Λ F.e i _ F.toZ
         F.isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ F.e c)
       have := hFγ
       simp only [frameRestriction, restrictSupportedClass] at this
@@ -688,10 +688,10 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
     (i' : Z' ⟶ W) [IsClosedImmersion i']
     (g₁ : Z' ⟶ _) (hg₁ : IsPullback g₁ i' (F₁.U.zeroLocusSubschemeι (Set.range F₁.f)) a)
     (g₂ : Z' ⟶ _) (hg₂ : IsPullback g₂ i' (F₂.U.zeroLocusSubschemeι (Set.range F₂.f)) b) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) a _ i' g₁ hg₁
+    restrictSupportedClass Λ a _ i' g₁ hg₁
         (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
         (frameClass Λ F₁) =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) b _ i' g₂ hg₂
+      restrictSupportedClass Λ b _ i' g₂ hg₂
         (leftDerivedUpperStarConstantComplexIso Λ b).inv (leftDerivedUpperStarTateShiftIso Λ b c)
         (frameClass Λ F₂) := by
   have hw := hg₁.paste_horiz F₁.isPullback
@@ -760,7 +760,7 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
       rw [Scheme.Hom.comp_apply, hpB, hp])
     exact ⟨z', hz'⟩
   -- the restriction of the class of `F₁` is the class of `v`
-  have h₁ : frameRestriction Λ H (restrictSupportedClass (ModuleCat.{u + 1} Λ) a _ i' g₁ hg₁
+  have h₁ : frameRestriction Λ H (restrictSupportedClass Λ a _ i' g₁ hg₁
       (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
       (frameClass Λ F₁)) = kummerBoundaryProduct Λ f := by
     rw [frameRestriction, ← restrictSupportedClass_comp_tateShift Λ H.e a _ rfl _ _ _ g₁ hg₁
@@ -787,13 +787,13 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
   have key : ∀ (w'' : Fin c → Γ(B.toScheme, ⊤)) (_ : w'' = M'.mulVec f) (g : _ ⟶ _)
       (hg : IsPullback g (B.toScheme.zeroLocusSubschemeι (Set.range f))
         (B.toScheme.zeroLocusSubschemeι (Set.range w'')) (𝟙 _)),
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
+      restrictSupportedClass Λ (𝟙 _) _ _ g hg
         (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ w'') =
       kummerBoundaryProduct Λ f := by
     rintro _ rfl g hg
     exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ f M' hdet' g hg
-  have h₂ : frameRestriction Λ H (restrictSupportedClass (ModuleCat.{u + 1} Λ) b _ i' g₂ hg₂
+  have h₂ : frameRestriction Λ H (restrictSupportedClass Λ b _ i' g₂ hg₂
       (leftDerivedUpperStarConstantComplexIso Λ b).inv (leftDerivedUpperStarTateShiftIso Λ b c)
       (frameClass Λ F₂)) = kummerBoundaryProduct Λ f := by
     rw [frameRestriction, ← restrictSupportedClass_comp_tateShift Λ H.e b _ rfl _ _ _ g₂ hg₂
@@ -839,7 +839,7 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     rintro (_ | z)
     · exact inferInstanceAs (IsOpenImmersion i.openComplement.ι)
     · exact hFo z
-  have hΨ : ∀ z, IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) (F z).e i _ (F z).toZ
+  have hΨ : ∀ z, IsIso (supportedRestriction Λ (F z).e i _ (F z).toZ
       (F z).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (F z).e c)) := fun z ↦
     have := hFo z
     isIso_supportedRestriction_of_isOpenImmersion _ _ _ _ _ _ _ _ _
@@ -849,9 +849,9 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     fun j ↦ match j with
     | none => 0
     | some z => (leftDerivedUpperStarConstantComplexIso Λ (F z).e).hom ≫ frameClass Λ (F z) ≫
-        inv (supportedRestriction (ModuleCat.{u + 1} Λ) (F z).e i _ (F z).toZ
+        inv (supportedRestriction Λ (F z).e i _ (F z).toZ
           (F z).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (F z).e c))
-  have hδ : ∀ z, δ (some z) ≫ supportedRestriction (ModuleCat.{u + 1} Λ) (F z).e i _ (F z).toZ
+  have hδ : ∀ z, δ (some z) ≫ supportedRestriction Λ (F z).e i _ (F z).toZ
       (F z).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (F z).e c) =
         (leftDerivedUpperStarConstantComplexIso Λ (F z).e).hom ≫ frameClass Λ (F z) := by
     intro z
@@ -902,10 +902,10 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
         IsPullback.of_right (by rw [IsPullback.lift_fst]; exact hout)
           ((F z').isPullback.lift_snd _ _ _)
           (F z').isPullback
-      have := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ) (a ≫ (F z).e) i
+      have := isIso_supportedRestriction_of_isOpenImmersion Λ (a ≫ (F z).e) i
         _ _ hg' _ _ (leftDerivedUpperStarTateShiftIso Λ (a ≫ (F z).e) c)
       rw [← cancel_epi (leftDerivedUpperStarConstantComplexIso Λ (a ≫ (F z).e)).inv,
-        ← cancel_mono (supportedRestriction (ModuleCat.{u + 1} Λ) (a ≫ (F z).e) i _ _ hg' _ _
+        ← cancel_mono (supportedRestriction Λ (a ≫ (F z).e) i _ _ hg' _ _
           (leftDerivedUpperStarTateShiftIso Λ (a ≫ (F z).e) c))]
       simp only [Category.assoc]
       exact (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
@@ -1016,7 +1016,7 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
     [AlgebraicGeometry.Etale e] (i' : Z' ⟶ X') (g : Z' ⟶ Z) (hg : IsPullback g i' i e) :
     haveI := IsRegularImmersion.of_isPullback c hg
     haveI : HasInvertibleExponent Λ X' := .of_hom e
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e c)
         (fundamentalClass Λ c i aX hZ) =
       fundamentalClass Λ c i' (e ≫ aX)
@@ -1030,7 +1030,7 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
   refine eq_of_frameRestriction_eq Λ c i' (e ≫ aX) (isRegularLocalRing_stalk_of_etale g hZ)
     fun F _ ↦ ?_
   rw [frameRestriction_fundamentalClass]
-  have h : restrictSupportedClass (ModuleCat.{u + 1} Λ) (F.e ≫ e) i _ (F.toZ ≫ g)
+  have h : restrictSupportedClass Λ (F.e ≫ e) i _ (F.toZ ≫ g)
       (F.isPullback.paste_horiz hg) (leftDerivedUpperStarConstantComplexIso Λ (F.e ≫ e)).inv
       (leftDerivedUpperStarTateShiftIso Λ (F.e ≫ e) c) (fundamentalClass Λ c i aX hZ) =
         frameClass Λ F :=
@@ -1038,7 +1038,7 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
   rw [leftDerivedUpperStarConstantComplexIso_comp Λ F.e e _ rfl,
     leftDerivedUpperStarTateShiftIso_comp Λ F.e e _ rfl] at h
   simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Category.assoc] at h
-  rw [restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) e F.e (F.e ≫ e) rfl i
+  rw [restrictSupportedClass_restrictSupportedClass Λ e F.e (F.e ≫ e) rfl i
     i' _ g hg F.toZ F.isPullback (F.toZ ≫ g) (F.isPullback.paste_horiz hg)] at h
   exact h
 

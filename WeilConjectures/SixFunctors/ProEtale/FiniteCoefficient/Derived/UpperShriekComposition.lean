@@ -87,6 +87,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section EtaleOrigin
 
@@ -244,7 +245,7 @@ end Composition
 
 section LowerShriek
 
-variable {A} {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+variable {A} {Λ} {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- The pro-étale `Rf_!` carries an object bounded below of étale origin to an object bounded
 below of étale origin, by the compact-support comparison `Rf_! ν^* ≅ ν^* Rf^{ét}_!` on `D⁺`
@@ -347,7 +348,7 @@ end BoundedBelow
 
 section Ambient
 
-variable {A} {X Y Z : Scheme.{u}}
+variable {A} {Λ} {X Y Z : Scheme.{u}}
 
 /-- The ambient adjunction `Rf_! ⊣ Rf^×` on the unbounded derived categories of the small
 pro-étale sites, which the ambient exceptional right adjoint datum supplies
@@ -447,26 +448,27 @@ objects `K` bounded below of étale origin: composing with `φ` is a bijection
 `Hom(K, Rf^! L) ≃ Hom(K, G L)`, under which the adjunction `Rf_! ⊣ G` restricts to the exceptional
 adjunction of `sk-prop-sf-existence` (c). -/
 theorem exists_bijective_comp_and_homEquiv_symm_comp_eq {f : X ⟶ Y} [HasCompactification f]
-    [Etale.HasBoundedBelowUpperShriek A f]
-    {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (adj : R(f)_![A] ⊣ G) {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    [CompactSpace Y]
+    {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (adj : R(f)_![ModuleCat.{u + 1} Λ] ⊣ G) {L : _root_.DerivedCategory (Sheaf
+        (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
-    ∃ φ : (R(f)^![A]).obj L ⟶ G.obj L,
-      ∀ {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-        (hK : DerivedCategory.plusEtaleOrigin A X K),
-        Function.Bijective (fun a : K ⟶ (R(f)^![A]).obj L ↦ a ≫ φ) ∧
-          ∀ a : K ⟶ (R(f)^![A]).obj L,
+    ∃ φ : (R(f)^![Λ]).obj L ⟶ G.obj L,
+      ∀ {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+        (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K),
+        Function.Bijective (fun a : K ⟶ (R(f)^![Λ]).obj L ↦ a ≫ φ) ∧
+          ∀ a : K ⟶ (R(f)^![Λ]).obj L,
             (adj.homEquiv _ _).symm (a ≫ φ) = (rightDerivedUpperShriekHomEquiv f hK hL).symm a := by
   refine ⟨adj.homEquiv _ _ (rightDerivedUpperShriekCounit f L hL), fun {K} hK ↦ ?_⟩
-  have h : ∀ a : K ⟶ (R(f)^![A]).obj L, (adj.homEquiv _ _).symm
+  have h : ∀ a : K ⟶ (R(f)^![Λ]).obj L, (adj.homEquiv _ _).symm
       (a ≫ adj.homEquiv _ _ (rightDerivedUpperShriekCounit f L hL)) =
         (rightDerivedUpperShriekHomEquiv f hK hL).symm a := by
     intro a
     rw [Adjunction.homEquiv_naturality_left_symm, Equiv.symm_apply_apply,
       rightDerivedUpperShriekHomEquiv_symm_apply]
   refine ⟨?_, h⟩
-  have hc : (fun a : K ⟶ (R(f)^![A]).obj L ↦
+  have hc : (fun a : K ⟶ (R(f)^![Λ]).obj L ↦
       a ≫ adj.homEquiv _ _ (rightDerivedUpperShriekCounit f L hL)) =
       ⇑(adj.homEquiv K L) ∘ ⇑(rightDerivedUpperShriekHomEquiv f hK hL).symm := by
     ext a : 1

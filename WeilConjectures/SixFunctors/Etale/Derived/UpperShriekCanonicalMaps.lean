@@ -65,7 +65,7 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
   [IsIso (projectionMap A f)]
 
 /-- The **tensor map** `Rf^! M ⊗ᴸ Lf^* N ⟶ Rf^!(M ⊗ᴸ N)` of a morphism `f` admitting a
@@ -73,20 +73,21 @@ compactification and satisfying the projection formula: the transpose under `Rf_
 `Rf_!(Rf^! M ⊗ᴸ Lf^* N) ≅ Rf_! Rf^! M ⊗ᴸ N ⟶ M ⊗ᴸ N`, the inverse of the projection map
 followed by the counit (`CategoryTheory.Adjunction.projectionTensorMap`). -/
 noncomputable abbrev rightDerivedUpperShriekTensorMap
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (R(f)^![A]).obj M ⊗ (L((f)^*[A])).obj N ⟶ (R(f)^![A]).obj (M ⊗ N) :=
-  (rightDerivedUpperShriekAdjunction A f).projectionTensorMap
-    (fun M N ↦ ((projectionMap A f).app M).app N) M N
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(f)^![Λ]).obj M ⊗ (L((f)^*[ModuleCat.{u + 1} Λ])).obj N ⟶ (R(f)^![Λ]).obj (M ⊗ N) :=
+  (rightDerivedUpperShriekAdjunction Λ f).projectionTensorMap
+    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f).app M).app N) M N
 
 /-- The canonical **tensor map** `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` of a morphism `f` admitting
 a compactification and satisfying the projection formula, for `ω_f = Rf^! Λ_Y`: the tensor map
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap` at `(Λ_Y, K)` followed by the left
 unitor. -/
 noncomputable def dualizingComplexTensorMapOfIsIso
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((derivedTensor A X).obj (dualizingComplex A f)).obj ((L((f)^*[A])).obj K) ⟶
-      (R(f)^![A]).obj K :=
-  rightDerivedUpperShriekTensorMap f (𝟙_ _) K ≫ (R(f)^![A]).map (λ_ K).hom
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ f)).obj ((L((f)^*[ModuleCat.{u
+        + 1} Λ])).obj K) ⟶
+      (R(f)^![Λ]).obj K :=
+  rightDerivedUpperShriekTensorMap f (𝟙_ _) K ≫ (R(f)^![Λ]).map (λ_ K).hom
 
 end General
 
@@ -102,7 +103,7 @@ projection map (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`) followe
 and the left unitor (`AlgebraicGeometry.Etale.dualizingComplexTensorMapOfIsIso`). -/
 noncomputable def dualizingComplexTensorMap
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ f)).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶
       (R(f)^![Λ]).obj K :=
   dualizingComplexTensorMapOfIsIso f K
@@ -140,8 +141,8 @@ square `g' ≫ f = f' ≫ g` (blueprint `def-pur-co-smoothness`): the component 
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap` at `Λ_Y`, followed by
 `Rf'^!(Lg^* Λ_Y ≅ Λ_{Y'})`. -/
 noncomputable def dualizingComplexBaseChangeMap (sq : IsPullback g' f' f g) :
-    (L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ⟶
-      dualizingComplex (ModuleCat.{u + 1} Λ) f' :=
+    (L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ f) ⟶
+      dualizingComplex Λ f' :=
   (rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _) ≫
     (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom
 

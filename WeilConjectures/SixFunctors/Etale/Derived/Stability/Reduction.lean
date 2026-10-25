@@ -145,7 +145,7 @@ For `a_X : X ⟶ Spec k` separated of finite type and `B = Λ ⧸ J`, there is a
 theorem nonempty_iso_reductionModIdeal_dualizingComplex [HasInvertibleExponent Λ (Spec (.of k))]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
     [QuasiCompact aX] [HasCompactification aX] :
-    Nonempty ((reductionModIdeal Λ X J).obj (dualizingComplex (ModuleCat.{u + 1} Λ) aX) ≅
+    Nonempty ((reductionModIdeal Λ X J).obj (dualizingComplex Λ aX) ≅
       (R(aX)^![Λ]).obj
         (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) (ModuleCat.of Λ (Λ ⧸ J)))) :=
   sorry
@@ -173,7 +173,7 @@ theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ 
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    Nonempty ((reductionModIdeal Λ X J).obj ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ≅
+    Nonempty ((reductionModIdeal Λ X J).obj ((verdierDual Λ aX).obj (op K)) ≅
       (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj ((R(aX)^![Λ]).obj
         (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) (ModuleCat.of Λ (Λ ⧸ J))))) := by
   have : HasInvertibleExponent Λ X := .of_hom aX
@@ -209,7 +209,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
   have : HasInvertibleExponent Λ X := .of_hom aX
   have : HasInvertibleExponent Λ Y := .of_hom aY
   let N := constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) (ModuleCat.of Λ (Λ ⧸ J))
-  let DL := (verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L)
+  let DL := (verdierDual Λ aY).obj (op L)
   have hDL := constructibleFiniteTor_verdierDual Λ aY hL
   have hP := constructibleFiniteTor_leftDerivedUpperStar _ f hDL
   have hω := constructibleFiniteTor_dualizingComplex Λ (𝟙 _) aY
@@ -279,7 +279,7 @@ theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         Nonempty ((reductionModIdeal Λ X J).obj
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ≅
+            ((verdierDual Λ aX).obj (op K)) ≅
           (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj ((R(aX)^![Λ]).obj
             (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k))
               (ModuleCat.of Λ (Λ ⧸ J)))))) ∧
@@ -323,9 +323,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal {
     {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     Nonempty ((R(f)^![Λ]).obj L ≅
-      (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+      (verdierDual Λ aX).obj
         (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-          ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) ∧
+          ((verdierDual Λ aY).obj (op L))))) ∧
     Nonempty ((reductionModIdeal Λ X J).obj ((R(f)^![Λ]).obj L) ≅
       (R(f)^![Λ]).obj ((reductionModIdeal Λ Y J).obj L)) :=
   ⟨nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY f hf hL,

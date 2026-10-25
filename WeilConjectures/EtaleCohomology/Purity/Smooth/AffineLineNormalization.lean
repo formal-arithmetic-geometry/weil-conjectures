@@ -253,7 +253,7 @@ Kummer class (`AlgebraicGeometry.Etale.kummerClassAdjoint`) and of the boundary 
 localization triangle. -/
 lemma kummerBoundary_eq_comp (f : Γ(U, ⊤)) :
     kummerBoundary Λ f = ShiftedHom.comp (kummerClassAdjoint Λ f)
-      (supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+      (supportedLocalizationBoundary Λ _ _
         (range_zeroLocusSubschemeι_singleton f) (tateObject Λ U 1)) (by norm_num) := by
   rw [kummerBoundary_eq]
   rfl
@@ -309,7 +309,7 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_affineLine
             ModuleCat.{u + 1} Λ])).obj (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)))))) :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0))))) := by
   let t := AffineSpace.coord B (ULift.up.{u} (0 : Fin 1))
   let X := 𝔸(ULift.{u} (Fin 1); B)
@@ -320,8 +320,8 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_affineLine
     inferInstanceAs (IsIso (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) B
       (s := {t}) Set.range_unique).inv)
   -- the localization triangle of `(V(t), 𝔾_m)`, pushed forward to `B`
-  let T₁ := supportedLocalizationTriangle (ModuleCat.{u + 1} Λ) i (X.basicOpen t).ι
-    (tateObject Λ X 1) (supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+  let T₁ := supportedLocalizationTriangle Λ i (X.basicOpen t).ι
+    (tateObject Λ X 1) (supportedLocalizationBoundary Λ _ _
       (range_zeroLocusSubschemeι_singleton t) (tateObject Λ X 1))
   have hT₁ : T₁ ∈ distTriang _ := supportedLocalizationTriangle_mem_distTriang _ _ _ _ _
   let T₂ := Rp.mapTriangle.obj T₁
@@ -339,12 +339,12 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_affineLine
   let u := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app
       (constantComplex Λ B) ≫ Rp.map (leftDerivedUpperStarConstantComplexIso Λ p).hom
   have hmain' : IsIso (ShiftedHom.comp (kummerClassAffineLineDirectImage Λ B)
-      (ShiftedHom.map (supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+      (ShiftedHom.map (supportedLocalizationBoundary Λ _ _
         (range_zeroLocusSubschemeι_singleton t) (tateObject Λ X 1)) Rp)
       (by norm_num : (1 : ℤ) + 1 = 2)) := hmain
   have hkey : u ≫ Rp.map (kummerBoundary Λ t) =
       ShiftedHom.comp (kummerClassAffineLineDirectImage Λ B)
-        (ShiftedHom.map (supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+        (ShiftedHom.map (supportedLocalizationBoundary Λ _ _
           (range_zeroLocusSubschemeι_singleton t) (tateObject Λ X 1)) Rp) (by norm_num) ≫
         (Rp.commShiftIso (2 : ℤ)).inv.app _ := by
     have h1 : Rp.map (kummerBoundary Λ t) = ShiftedHom.map (kummerBoundary Λ t) Rp ≫
@@ -356,11 +356,11 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_affineLine
   -- the adjoint `φ` of `∂κ(t)`: `Rp_* Ri_! φ` is an isomorphism
   refine isIso_of_isIso_rightDerivedLowerStar_map_rightDerivedLowerShriek_map Λ i p _ ?_
   have hγ := eq_comp_rightDerivedLowerShriek_map_supportedClassMap Λ i
-    (shiftSupportedClass (ModuleCat.{u + 1} Λ) i 2 (kummerBoundary Λ t))
+    (shiftSupportedClass Λ i 2 (kummerBoundary Λ t))
   have hu := isIso_unit_comp_rightDerivedLowerStar_map_unit Λ i p
   rw [Functor.map_comp Rp (leftDerivedUpperStarConstantComplexIso Λ p).hom,
     ← Category.assoc] at hu
-  have h3 : IsIso (u ≫ Rp.map (shiftSupportedClass (ModuleCat.{u + 1} Λ) i 2
+  have h3 : IsIso (u ≫ Rp.map (shiftSupportedClass Λ i 2
       (kummerBoundary Λ t))) := by
     rw [shiftSupportedClass, Functor.map_comp, ← Category.assoc, hkey]
     infer_instance

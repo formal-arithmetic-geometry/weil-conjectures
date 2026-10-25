@@ -143,7 +143,7 @@ theorem not_forall_torAmplitudeIn_derivedHom [IsAlgClosed k] [Nontrivial Λ] [Ha
   -- the normalization of the twist: `Λ_V ≅ Rs^!(Λ(1)[2])`
   have := HasKummerClass.IsNormalized.isIso_supportedClassMap_kummerBoundary_coord (Λ := Λ) B
     (𝟙 B)
-  let ι := asIso (supportedClassMap Λ s (shiftSupportedClass (ModuleCat.{u + 1} Λ) s 2
+  let ι := asIso (supportedClassMap Λ s (shiftSupportedClass Λ s 2
     (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0)))))
   -- the unit of `D(V_ét)` is bounded constructible of Tor amplitude `[0, 0]`
   have hU : boundedConstructible (ModuleCat.{u + 1} Λ) _
@@ -276,7 +276,7 @@ theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactificatio
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-          ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) := by
+          ((verdierDual Λ aX).obj (op K))) := by
   have : HasInvertibleExponent Λ Y := .of_hom aY
   have : IsSeparated f := by
     have : IsSeparated (f ≫ aY) := hf ▸ inferInstance
@@ -359,13 +359,13 @@ theorem torAmplitudeIn_preservation [QuasiCompact f] [HasCompactification f]
       boundedConstructible (ModuleCat.{u + 1} Λ) X K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) ∧
+            ((verdierDual Λ aX).obj (op K))) ∧
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
-          Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
-            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))))) := by
+            ((verdierDual Λ aX).obj (op K)) ∧
+          Nonempty (K ≅ (verdierDual Λ aX).obj
+            (op ((verdierDual Λ aX).obj (op K))))) := by
   have : HasInvertibleExponent Λ X := .of_hom aX
   have : HasInvertibleExponent Λ Y := .of_hom aY
   have : IsSeparated f := by
@@ -499,8 +499,8 @@ theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fac
       (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L →
         Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).leftDerivedFunctor.obj
-            ((Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op L)) ≅
-          (Etale.verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aX)).obj
+            ((Etale.verdierDual Λ aX).obj (op L)) ≅
+          (Etale.verdierDual Λ (i ≫ aX)).obj
             (op ((Etale.rightDerivedUpperShriek Λ i).obj L)))) ∧
     ¬ ∀ (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
       (a b c d : ℤ)

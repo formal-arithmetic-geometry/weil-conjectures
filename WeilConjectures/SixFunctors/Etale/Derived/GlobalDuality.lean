@@ -100,6 +100,7 @@ universe u'
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section Point
 
@@ -122,22 +123,22 @@ instance isLeftAdjoint_rightDerivedLowerShriek_id : (R(𝟙 S)_![A]).IsLeftAdjoi
 /-- Blueprint `lem-sf-point` (the dualizing complex of the base): the exceptional inverse image
 along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to
 `R(𝟙_S)_! ≅ 𝟭`. -/
-noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![A] ≅ 𝟭 _ :=
-  (rightDerivedUpperShriekAdjunction A (𝟙 S)).rightAdjointUniq
-    (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm)
+noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![Λ] ≅ 𝟭 _ :=
+  (rightDerivedUpperShriekAdjunction Λ (𝟙 S)).rightAdjointUniq
+    (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) S).symm)
 
 /-- Blueprint `lem-sf-point`: for the structure morphism `a_s = 𝟙_s` of the base, the dualizing
 complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
-noncomputable def dualizingComplexIdIso : dualizingComplex A (𝟙 S) ≅ 𝟙_ _ :=
-  (rightDerivedUpperShriekIdIso A S).app _
+noncomputable def dualizingComplexIdIso : dualizingComplex Λ (𝟙 S) ≅ 𝟙_ _ :=
+  (rightDerivedUpperShriekIdIso Λ S).app _
 
 end Point
 
-variable {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX] [(R(aX)_![A]).IsLeftAdjoint]
+variable {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX]
 
 /-- The Verdier dual of the unit is the dualizing complex, `𝔻_X Λ_X = RHom(Λ_X, ω_X) ≅ ω_X`. -/
 noncomputable def verdierDualObjUnitIso :
-    (verdierDual A aX).obj (op (𝟙_ _)) ≅ dualizingComplex A aX :=
+    (verdierDual Λ aX).obj (op (𝟙_ _)) ≅ dualizingComplex Λ aX :=
   (MonoidalClosed.unitNatIso.app _).symm
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
@@ -169,9 +170,11 @@ coefficients `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso_
 and its value at `K = Λ_X` is `AlgebraicGeometry.Etale.globalVerdierDualityUnitIso`. As in
 the blueprint, neither the properness of `X` nor any comparison `Ra_{X!} ≅ Ra_{X*}` is used:
 `Ra_{X!}` and `Ra_{X*}` enter as two different functors. -/
-noncomputable def coefficientDualRightDerivedLowerShriekIso [IsIso (projectionMap A aX)] :
-    (R(aX)_![A]).op ⋙ DerivedCategory.coefficientDual A S ≅ verdierDual A aX ⋙ R((aX)_*[A]) :=
-  (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso A aX)
+noncomputable def coefficientDualRightDerivedLowerShriekIso [IsIso (projectionMap (ModuleCat.{u + 1}
+    Λ) aX)] :
+    (R(aX)_![ModuleCat.{u + 1} Λ]).op ⋙ DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S ≅
+        verdierDual Λ aX ⋙ R((aX)_*[ModuleCat.{u + 1} Λ]) :=
+  (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso Λ aX)
     ((CategoryTheory.evaluation _ _).obj (𝟙_ _))).symm
 
 section Shift
@@ -180,10 +183,10 @@ variable {Z : Scheme.{u}}
 
 /-- The coefficient dual turns shifts into opposite shifts, `(K⟦a⟧)^∨ ≅ (K^∨)⟦-a⟧`. -/
 noncomputable def coefficientDualShiftIso
-    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
-    (DerivedCategory.coefficientDual A Z).obj (op (K⟦a⟧)) ≅
-      ((DerivedCategory.coefficientDual A Z).obj (op K))⟦-a⟧ :=
-  (derivedHomShiftIso A K a).app (𝟙_ _)
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
+    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) Z).obj (op (K⟦a⟧)) ≅
+      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) Z).obj (op K))⟦-a⟧ :=
+  (derivedHomShiftIso (ModuleCat.{u + 1} Λ) K a).app (𝟙_ _)
 
 /-- Blueprint `sk-thm-sf-global-duality` (shifts), also `thm-sf-global-duality` (shifts): global
 duality for a shifted complex is the shift of global duality,
@@ -194,13 +197,16 @@ duality for a shifted complex is the shift of global duality,
 This is only the object-level form of the shift compatibility: it does not state that this
 isomorphism agrees with the shift of the global duality isomorphism for `K`, which the
 blueprint also asks for. -/
-noncomputable def coefficientDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap A aX)]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
-    (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj (K⟦a⟧))) ≅
-      ((R((aX)_*[A])).obj ((verdierDual A aX).obj (op K)))⟦-a⟧ :=
-  ((DerivedCategory.coefficientDual A S).mapIso (((R(aX)_![A]).commShiftIso a).app K).op).symm ≪≫
-    coefficientDualShiftIso A _ a ≪≫
-      (shiftFunctor _ (-a)).mapIso ((coefficientDualRightDerivedLowerShriekIso A aX).app (op K))
+noncomputable def coefficientDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap (ModuleCat.{u
+    + 1} Λ) aX)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
+    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj (op ((R(aX)_![ModuleCat.{u + 1}
+        Λ]).obj (K⟦a⟧))) ≅
+      ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ aX).obj (op K)))⟦-a⟧ :=
+  ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).mapIso (((R(aX)_![ModuleCat.{u + 1}
+      Λ]).commShiftIso a).app K).op).symm ≪≫
+    coefficientDualShiftIso Λ _ a ≪≫
+      (shiftFunctor _ (-a)).mapIso ((coefficientDualRightDerivedLowerShriekIso Λ aX).app (op K))
 
 end Shift
 
@@ -228,9 +234,9 @@ theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
         (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
-      (R((aX)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) :=
+      (R((aX)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ aX).obj (op K))) :=
   have := isIso_projectionMap_of_finite Λ aX
-  ⟨(coefficientDualRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) aX).app (op K)⟩
+  ⟨(coefficientDualRightDerivedLowerShriekIso Λ aX).app (op K)⟩
 
 /-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality for the constant coefficients.
 
@@ -240,7 +246,7 @@ For `K = Λ_X`, global duality reads `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`: here, 
 theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit :
     Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
         (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _))) ≅
-      (R((aX)_*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) aX)) :=
+      (R((aX)_*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ aX)) :=
   (nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ aX (𝟙_ _)).map fun e ↦
     e ≪≫ (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso (verdierDualObjUnitIso _ aX)
 
@@ -265,12 +271,12 @@ theorem nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual {k : Type
     Nonempty ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
         (𝟙_ _) ≅
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) := by
+        ((verdierDual Λ aX).obj (op K))) := by
   have := isIso_projectionMap_of_finite Λ aX
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence
     (ModuleCat.{u + 1} Λ) (Spec (.of k)) ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)
   exact ⟨e₁.symm ≪≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso
-      ((coefficientDualRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) aX).app (op K)) ≪≫
+      ((coefficientDualRightDerivedLowerShriekIso Λ aX).app (op K)) ≪≫
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) aX).app _⟩
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality

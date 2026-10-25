@@ -62,8 +62,8 @@ variable {Λ} in
 /-- The Verdier dual only depends on the structure morphism. -/
 lemma verdierDual_obj_congr {X S : Scheme.{u}} {g₁ g₂ : X ⟶ S} (h : g₁ = g₂)
     [HasCompactification g₁] [HasCompactification g₂] (K : DerivedCategoryModule Λ X) :
-    (verdierDual (ModuleCat.{u + 1} Λ) g₁).obj (op K) =
-      (verdierDual (ModuleCat.{u + 1} Λ) g₂).obj (op K) := by
+    (verdierDual Λ g₁).obj (op K) =
+      (verdierDual Λ g₂).obj (op K) := by
   subst h
   rfl
 
@@ -96,7 +96,7 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek_dualizingComplex
     (K : DerivedCategoryModule Λ Y) :
     Nonempty (((RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op K)).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
         ((R(i)^![Λ]).obj (dualizingComplex _ aY))) ≅
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aY)).obj
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((verdierDual Λ (i ≫ aY)).obj
         (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)))) := by
   obtain ⟨eω⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i aY
   let eS := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i
@@ -116,7 +116,7 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerStar_dualizingComplex {U Y S : 
     Nonempty (((RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op K)).obj
         ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
           ((L((j)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex _ aY))) ≅
-      (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) (j ≫ aY)).obj
+      (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ (j ≫ aY)).obj
         (op ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)))) := by
   obtain ⟨eω⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ j aY
   obtain ⟨eH⟩ := nonempty_iso_derivedHom_rightDerivedLowerStar Λ j K
@@ -143,27 +143,27 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization {k :
     [HasCompactification (i ≫ aY)] (hij : Set.range i.base = (Set.range j.base)ᶜ) (e : ℕ)
     (he : topologicalKrullDim U ≤ (e : WithBot ℕ∞)) (K : DerivedCategoryModule Λ Y) {α β : ℤ}
     (hZ : boundedConstructible (ModuleCat.{u + 1} Λ) Z
-        ((verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aY)).obj
+        ((verdierDual Λ (i ≫ aY)).obj
           (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Z α β
-        ((verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aY)).obj
+        ((verdierDual Λ (i ≫ aY)).obj
           (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))))
     (hU : boundedConstructible (ModuleCat.{u + 1} Λ) U
-        ((verdierDual (ModuleCat.{u + 1} Λ) (j ≫ aY)).obj
+        ((verdierDual Λ (j ≫ aY)).obj
           (op ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) U α (β - 2 * e)
-        ((verdierDual (ModuleCat.{u + 1} Λ) (j ≫ aY)).obj
+        ((verdierDual Λ (j ≫ aY)).obj
           (op ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)))) :
     boundedConstructible (ModuleCat.{u + 1} Λ) Y
-        ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)) ∧
+        ((verdierDual Λ aY).obj (op K)) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y α β
-        ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)) := by
+        ((verdierDual Λ aY).obj (op K)) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ Y := .of_hom aY
   let F := (RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op K)
   have : F.IsTriangulated := (derivedTensorHomAdjunction _ K).isTriangulated_rightAdjoint
   have hT := F.map_distinguished _ (supportedLocalizationTriangle_mem_distTriang
-    (ModuleCat.{u + 1} Λ) i j hij (dualizingComplex _ aY))
+    Λ i j hij (dualizingComplex _ aY))
   -- the closed piece
   obtain ⟨eZ⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek_dualizingComplex Λ aY i K
   let eS := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i

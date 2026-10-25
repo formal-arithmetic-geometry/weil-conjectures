@@ -60,6 +60,7 @@ open Scheme
 namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The total right derived pushforward `Rg_*` commutes with shifts: it is right adjoint to the
 functor `D(g^*)` induced by the exact pullback, which does. -/
@@ -77,8 +78,8 @@ noncomputable instance commShiftRightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
 
 /-- The exceptional inverse image `Rf^!` commutes with shifts, being right adjoint to `Rf_!`. -/
 noncomputable instance commShiftRightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] : (R(f)^![A]).CommShift ℤ :=
-  (rightDerivedUpperShriekAdjunction A f).rightAdjointCommShift ℤ
+    [HasCompactification f] : (R(f)^![Λ]).CommShift ℤ :=
+  (rightDerivedUpperShriekAdjunction Λ f).rightAdjointCommShift ℤ
 
 section Monoidal
 

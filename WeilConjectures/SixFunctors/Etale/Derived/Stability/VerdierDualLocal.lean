@@ -321,10 +321,10 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     (hP : IsBoundedFlatComplex Λ a b P) (hPl : ∀ q, IsFiniteLocallyConstantSheaf (P.X q)) :
     ∃ (O' : O.Opens) (_ : QuasiCompact O'.ι), (O' : Set O).Nonempty ∧
       boundedConstructible (ModuleCat.{u + 1} Λ) O'
-        ((verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj
+        ((verdierDual Λ (O'.ι ≫ aO)).obj
           (op (D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)))) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) O' (-b - 2 * n) (-a - 2 * n)
-        ((verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj
+        ((verdierDual Λ (O'.ι ≫ aO)).obj
           (op (D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)))) := by
   have : IsLocallyNoetherian O := LocallyOfFiniteType.isLocallyNoetherian aO
   have : HasInvertibleExponent Λ O := .of_hom aO
@@ -349,7 +349,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     exact ⟨v⟩
   let g := p ≫ O'.ι
   let N := D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)
-  let D := (verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj (op N)
+  let D := (verdierDual Λ (O'.ι ≫ aO)).obj (op N)
   -- the pulled-back model `P'` on `V`
   let P' := (((g)^*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
   have : CochainComplex.IsStrictlyGE P' a := by

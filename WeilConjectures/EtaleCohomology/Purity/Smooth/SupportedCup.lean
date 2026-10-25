@@ -126,18 +126,18 @@ lemma isZero_leftDerivedUpperStar_openComplement_lowerShriekConstantTensor :
     apply x.2
     rw [hr]
     exact ⟨hx₁, hx₂⟩
-  refine isZero_of_isZero_leftDerivedUpperStar_of_disjoint (ModuleCat.{u + 1} Λ)
+  refine isZero_of_isZero_leftDerivedUpperStar_of_disjoint Λ
     (pullback.snd i j) (pullback.snd k j) _ _ (Scheme.Hom.range_eq_compl_range_openComplement_ι _)
     (Scheme.Hom.range_eq_compl_range_openComplement_ι _) hcd ?_ ?_
   · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
     exact (isZero_derivedTensor_obj_obj_of_isZero_left
       (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
-        (ModuleCat.{u + 1} Λ) i j _) _).of_iso
+        Λ i j _) _).of_iso
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
   · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
     exact (isZero_derivedTensor_obj_obj_of_isZero_right _
       (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
-        (ModuleCat.{u + 1} Λ) k j _)).of_iso
+        Λ k j _)).of_iso
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
 
 omit [Finite Λ] in

@@ -56,23 +56,24 @@ namespace Etale
 section FullyFaithful
 
 variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint]
+  {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- For a closed immersion `i`, the derived lower shriek `Ri_!` is fully faithful: the unit of
 `Ri_! ⊣ Ri^!` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`). -/
-noncomputable def fullyFaithfulRightDerivedLowerShriek : (R(i)_![A]).FullyFaithful :=
-  have (Q : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-      IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) :=
-    isIso_rightDerivedUpperShriekAdjunction_unit_app A i Q
-  have : IsIso (rightDerivedUpperShriekAdjunction A i).unit := NatIso.isIso_of_isIso_app _
-  (rightDerivedUpperShriekAdjunction A i).fullyFaithfulLOfIsIsoUnit
+noncomputable def fullyFaithfulRightDerivedLowerShriek : (R(i)_![ModuleCat.{u + 1} Λ]).FullyFaithful
+    :=
+  have (Q : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      IsIso ((rightDerivedUpperShriekAdjunction Λ i).unit.app Q) :=
+    isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i Q
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ i).unit := NatIso.isIso_of_isIso_app _
+  (rightDerivedUpperShriekAdjunction Λ i).fullyFaithfulLOfIsIsoUnit
 
-instance full_rightDerivedLowerShriek : (R(i)_![A]).Full :=
-  (fullyFaithfulRightDerivedLowerShriek A i).full
+instance full_rightDerivedLowerShriek : (R(i)_![ModuleCat.{u + 1} Λ]).Full :=
+  (fullyFaithfulRightDerivedLowerShriek Λ i).full
 
-instance faithful_rightDerivedLowerShriek : (R(i)_![A]).Faithful :=
-  (fullyFaithfulRightDerivedLowerShriek A i).faithful
+instance faithful_rightDerivedLowerShriek : (R(i)_![ModuleCat.{u + 1} Λ]).Faithful :=
+  (fullyFaithfulRightDerivedLowerShriek Λ i).faithful
 
 end FullyFaithful
 
@@ -168,7 +169,7 @@ theorem bijective_supportedRestrictionMap_comp [(R(i)_![ModuleCat.{u + 1} Λ]).I
     (N : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Function.Bijective (fun h : (R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z) ⟶
       (R(i)_![ModuleCat.{u + 1} Λ]).obj N ↦ supportedRestrictionMap Λ i ≫ h) := by
-  have hF := fullyFaithfulRightDerivedLowerShriek (ModuleCat.{u + 1} Λ) i
+  have hF := fullyFaithfulRightDerivedLowerShriek Λ i
   have : (fun h : (R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z) ⟶
       (R(i)_![ModuleCat.{u + 1} Λ]).obj N ↦ supportedRestrictionMap Λ i ≫ h) =
       (Equiv.ofBijective _ (supportedTranspose_bijective Λ i N)).symm ∘ hF.homEquiv.symm := by
@@ -359,13 +360,13 @@ theorem isIso_supportedClassMap_restrictSupportedClass_iff [Finite Λ]
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj L))
-    (hψ : IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ)) :
-    IsIso (supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    (hψ : IsIso (supportedRestriction Λ e i i' g hg L L' τ)) :
+    IsIso (supportedClassMap Λ i' (restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ)) ↔
       IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map (supportedClassMap Λ i γ)) := by
-  set ψ := supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ
+  set ψ := supportedRestriction Λ e i i' g hg L L' τ
   set φ := supportedClassMap Λ i γ
-  set φ' := supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+  set φ' := supportedClassMap Λ i' (restrictSupportedClass Λ e i i' g hg
     (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ)
   set v := (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
     (L((e)^*[ModuleCat.{u + 1} Λ])).map (supportedRestrictionMap Λ i)

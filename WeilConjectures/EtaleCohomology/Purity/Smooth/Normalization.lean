@@ -140,7 +140,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)) :=
     inferInstanceAs (IsIso (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) Y
       (s := {AffineSpace.coord Y (ULift.up 0)}) Set.range_unique).inv)
-  have hb := isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso (ModuleCat.{u + 1} Λ)
+  have hb := isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso Λ
     (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))
   set as := rightDerivedUpperShriekAdjunction Λ

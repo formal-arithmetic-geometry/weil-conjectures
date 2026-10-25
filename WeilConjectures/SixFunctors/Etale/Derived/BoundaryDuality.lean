@@ -97,8 +97,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual {Z T S : Scheme.{u}} (a
     [QuasiCompact (i ≫ aT)]
     (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((R(i)^![Λ]).obj
-        ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op K)) ≅
-      (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
+        ((verdierDual Λ aT).obj (op K)) ≅
+      (verdierDual Λ (i ≫ aT)).obj
         (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ i K (dualizingComplex _ aT)
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i aT
@@ -119,28 +119,28 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
     {L : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) T L) :
     Nonempty ((L((i)^*[ModuleCat.{u + 1} Λ])).obj
-        ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L)) ≅
-      (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
+        ((verdierDual Λ aT).obj (op L)) ≅
+      (verdierDual Λ (i ≫ aT)).obj
         (op ((R(i)^![Λ]).obj L))) := by
   -- `𝔻_Z (i^* K) ≅ Ri^! 𝔻_T K`, from `Ri^! RHom(K, ω_T) ≅ RHom(i^* K, Ri^! ω_T)` and
   -- `Ri^! ω_T ≅ ω_Z`
   have hex (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
     (nonempty_iso_rightDerivedUpperShriek_verdierDual Λ aT i K).map Iso.symm
   have hD : constructibleFiniteTor (ModuleCat.{u + 1} Λ) T
-      ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L)) :=
+      ((verdierDual Λ aT).obj (op L)) :=
     constructibleFiniteTor_verdierDual Λ aT hL
   have hiD : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z
-      ((L((i)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L))) :=
+      ((L((i)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ aT).obj (op L))) :=
     constructibleFiniteTor_leftDerivedUpperStar _ i hD
-  obtain ⟨e₁⟩ := hex ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L))
+  obtain ⟨e₁⟩ := hex ((verdierDual Λ aT).obj (op L))
   obtain ⟨b₁⟩ := nonempty_iso_verdierDual_verdierDual Λ aT hL
   obtain ⟨b₂⟩ := nonempty_iso_verdierDual_verdierDual Λ (i ≫ aT) hiD
   -- `𝔻_Z (i^* 𝔻_T L) ≅ Ri^! L`, then dualize once more on `Z`
-  let e : (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
-      (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj
+  let e : (verdierDual Λ (i ≫ aT)).obj
+      (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ aT).obj
         (op L)))) ≅ (R(i)^![Λ]).obj L :=
     e₁ ≪≫ (R(i)^![Λ]).mapIso b₁.symm
-  exact ⟨b₂ ≪≫ (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).mapIso e.symm.op⟩
+  exact ⟨b₂ ≪≫ (verdierDual Λ (i ≫ aT)).mapIso e.symm.op⟩
 
 /-- Blueprint `def-weil-boundary-duality-input`: The finite-stage boundary duality input.
 
@@ -163,15 +163,15 @@ def HasBoundaryDuality {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) : Prop :=
       {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) T K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) T
-          ((verdierDual (ModuleCat.{u + 1} Λ) (s ≫ aY)).obj (op K))) ∧
+          ((verdierDual Λ (s ≫ aY)).obj (op K))) ∧
   ∀ {Z T : Scheme.{u}} (s : T ⟶ Y) [IsImmersion s] [QuasiCompact s]
     [HasCompactification (s ≫ aY)] (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
     [HasCompactification (i ≫ s ≫ aY)]
     {L : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) T L →
       Nonempty ((L((i)^*[ModuleCat.{u + 1} Λ])).obj
-          ((verdierDual (ModuleCat.{u + 1} Λ) (s ≫ aY)).obj (op L)) ≅
-        (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ s ≫ aY)).obj
+          ((verdierDual Λ (s ≫ aY)).obj (op L)) ≅
+        (verdierDual Λ (i ≫ s ≫ aY)).obj
           (op ((R(i)^![Λ]).obj L)))
 
 /-- Blueprint `cor-weil-boundary-duality-discharge`: The finite-stage boundary input is a
@@ -207,13 +207,13 @@ theorem verdierDual_finiteStage [IsAlgClosed k] {X : Scheme.{u}} (aX : X ⟶ Spe
     (∀ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
-          IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K)) ∧
+            ((verdierDual Λ aX).obj (op K)) ∧
+          IsIso ((verdierDualDoubleDual Λ aX).app K)) ∧
     ∀ (a b : ℤ) {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
       boundedConstructible (ModuleCat.{u + 1} Λ) X K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
+            ((verdierDual Λ aX).obj (op K)) :=
   ⟨fun hK ↦ ⟨constructibleFiniteTor_verdierDual Λ aX hK, isIso_verdierDualDoubleDual_app Λ aX hK⟩,
     fun a b _ hK hKt ↦ torAmplitudeIn_verdierDual Λ aX d hd a b hK hKt⟩
 

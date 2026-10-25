@@ -190,7 +190,7 @@ noncomputable def kummerBoundary :
         kummerClass Λ (U.basicOpenUnit f) ≫
           (leftDerivedUpperStarTateObjectIso (U.basicOpen f).ι 1).inv⟦(1 : ℤ)⟧')) ≫
     ((R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _ ≫
-      (supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+      (supportedLocalizationBoundary Λ _ _
         (range_zeroLocusSubschemeι_singleton f) (tateObject Λ U 1))⟦(1 : ℤ)⟧' ≫
         (shiftFunctorAdd' _ (1 : ℤ) 1 2 rfl).inv.app _
 
@@ -265,7 +265,7 @@ class HasKummerClass.IsNormalized : Prop where
       [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0)))))
 
 end Normalization
@@ -306,7 +306,7 @@ noncomputable def cupWithSupportsTateObject (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶
       ((R(i₂)^![Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
     constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj ((tateObject Λ U (m + m'))⟦2 * (m + m')⟧)) :=
-  cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h (constantComplexDiagonal Λ U) α β ≫
+  cupWithSupports Λ i₁ i₂ i h (constantComplexDiagonal Λ U) α β ≫
     (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![Λ]).map
       (shiftTateObjectAddIso Λ U m m').hom)
 
@@ -326,7 +326,7 @@ noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤
       (R(U.zeroLocusSubschemeι (Set.range f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(U.zeroLocusSubschemeι (Set.range f))^![Λ]).obj
           ((tateObject Λ U n)⟦2 * (n : ℤ)⟧))
-  | 0, f => liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) _
+  | 0, f => liftCounitOfRangeEqUniv Λ _
       (by rw [Set.range_eq_empty f, range_zeroLocusSubschemeι_empty])
       ((HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫
         (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).inv.app _)
@@ -334,7 +334,7 @@ noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤
       cupWithSupportsTateObject Λ (U.zeroLocusSubschemeι {f 0})
           (U.zeroLocusSubschemeι (Set.range (Fin.tail f))) (U.zeroLocusSubschemeι (Set.range f))
           (by rw [Fin.range_fin_succ, range_zeroLocusSubschemeι_insert]) (m := 1)
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2 (kummerBoundary Λ (f 0)))
+          (shiftSupportedClass Λ _ 2 (kummerBoundary Λ (f 0)))
           (kummerBoundaryProduct (Fin.tail f)) ≫
         eqToHom (by rw [Nat.cast_succ, add_comm (1 : ℤ)])
 

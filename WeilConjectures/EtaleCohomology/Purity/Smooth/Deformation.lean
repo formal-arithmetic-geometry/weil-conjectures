@@ -193,7 +193,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
     {K : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin d); T).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ _ K)
-    (ω : dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); T) ↘ T) ≅ K) :
+    (ω : dualizingComplex Λ (𝔸(ULift.{u} (Fin d); T) ↘ T) ≅ K) :
     Nonempty (sectionInvariant Λ g' (σ ≫ j) ≅
       sectionInvariant Λ (𝔸(ULift.{u} (Fin d); T) ↘ T)
         (AffineSpace.zeroSection (ULift.{u} (Fin d)) T)) := by

@@ -78,13 +78,14 @@ section General
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [Etale.UpperStarPreservesFlat A]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `cor-sf-duality-pullback`: Duality against pullback, internal-Hom form.
 
@@ -100,24 +101,31 @@ The bifunctor `(K, M) ↦ K ⊗ᴸ Rf_! M` is left adjoint, with the parameter `
 `(K, N) ↦ RHom_X(Lf^* K, Rf^! N)`. The projection formula, together with the symmetry of
 `⊗ᴸ`, identifies the two left adjoints, and the isomorphism is the conjugate
 (`CategoryTheory.ParametrizedAdjunction.conjugateIso`). -/
-theorem nonempty_rightDerivedUpperShriek_derivedHom_iso [IsIso (projectionMap A f)] :
-    Nonempty (RHom(Y)[A] ⋙ (Functor.whiskeringRight _ _ _).obj R(f)^![A] ≅
-      L((f)^*[A]).op ⋙ RHom(X)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)^![A]) := by
-  obtain ⟨βX⟩ := nonempty_iso_derivedTensor_flip A X
-  obtain ⟨βY⟩ := nonempty_iso_derivedTensor_flip A Y
+theorem nonempty_rightDerivedUpperShriek_derivedHom_iso [IsIso (projectionMap (ModuleCat.{u + 1} Λ)
+    f)] :
+    Nonempty (RHom(Y)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringRight _ _ _).obj R(f)^![Λ] ≅
+      L((f)^*[ModuleCat.{u + 1} Λ]).op ⋙ RHom(X)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringLeft _ _
+          _).obj R(f)^![Λ]) := by
+  obtain ⟨βX⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
+  obtain ⟨βY⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) Y
   -- `Rf_!(Lf^* K ⊗ᴸ M) ≅ Rf_!(M ⊗ᴸ Lf^* K) ≅ Rf_! M ⊗ᴸ K ≅ K ⊗ᴸ Rf_! M`
-  let e : L((f)^*[A]) ⋙ -⊗ᴸ-(X)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj (𝟭 _) ⋙
-        (Functor.whiskeringRight _ _ _).obj R(f)_![A] ≅
-      -⊗ᴸ-(Y)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)_![A] ⋙
+  let e : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ -⊗ᴸ-(X)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringLeft _ _
+      _).obj (𝟭 _) ⋙
+        (Functor.whiskeringRight _ _ _).obj R(f)_![ModuleCat.{u + 1} Λ] ≅
+      -⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)_![ModuleCat.{u + 1} Λ]
+          ⋙
         (Functor.whiskeringRight _ _ _).obj (𝟭 _) :=
-    Functor.isoWhiskerRight (Functor.isoWhiskerLeft L((f)^*[A]) βX)
-        ((Functor.whiskeringRight _ _ _).obj R(f)_![A]) ≪≫
-      (asIso ((flipFunctor _ _ _).map (projectionMap A f))).symm ≪≫
-      Functor.isoWhiskerRight βY.symm ((Functor.whiskeringLeft _ _ _).obj R(f)_![A])
-  exact ⟨((derivedTensorHomAdjunction₂ A Y).comp (rightDerivedUpperShriekAdjunction A f)
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft L((f)^*[ModuleCat.{u + 1} Λ]) βX)
+        ((Functor.whiskeringRight _ _ _).obj R(f)_![ModuleCat.{u + 1} Λ]) ≪≫
+      (asIso ((flipFunctor _ _ _).map (projectionMap (ModuleCat.{u + 1} Λ) f))).symm ≪≫
+      Functor.isoWhiskerRight βY.symm ((Functor.whiskeringLeft _ _ _).obj R(f)_![ModuleCat.{u + 1}
+          Λ])
+  exact ⟨((derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) Y).comp
+      (rightDerivedUpperShriekAdjunction Λ f)
       Adjunction.id).conjugateIso
-    (((derivedTensorHomAdjunction₂ A X).precomp L((f)^*[A])).comp Adjunction.id
-      (rightDerivedUpperShriekAdjunction A f)) e⟩
+    (((derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) X).precomp L((f)^*[ModuleCat.{u + 1}
+        Λ])).comp Adjunction.id
+      (rightDerivedUpperShriekAdjunction Λ f)) e⟩
 
 end General
 

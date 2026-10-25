@@ -5,7 +5,6 @@ Authors: Nailin Guan, Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 
@@ -88,14 +87,13 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 section Definition
-
-variable [(Etale.rightDerivedLowerShriek A f).IsLeftAdjoint]
 
 /-- Blueprint `sk-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
 (at a finite stage `A = A_{E,n}`) the exceptional inverse image
@@ -109,38 +107,40 @@ over a finite-type scheme over a field, it carries `D_c^[a, b]` into `D_c^[a - 2
 and Tor amplitude `[a, b]` to `[a - 2D, b + 2 dim Y + 1]`, with `D` independent of the stage
 (`AlgebraicGeometry.ProEtale.exists_preservationClauses`). -/
 noncomputable def rightDerivedUpperShriek :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  R(ν_*(Y)[A]) ⋙ Etale.rightDerivedUpperShriek A f ⋙ D(ν^*(X)[A])
+    DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
+  R(ν_*(Y)[ModuleCat.{u + 1} Λ]) ⋙ Etale.rightDerivedUpperShriek Λ f ⋙ D(ν^*(X)[ModuleCat.{u + 1}
+      Λ])
 
 @[inherit_doc rightDerivedUpperShriek]
 scoped notation "R(" f ")^![" A "]" =>
   rightDerivedUpperShriek A f
 
-lemma rightDerivedUpperShriek_obj (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    (R(f)^![A]).obj L =
-      D(ν^*(X)[A]).obj ((Etale.rightDerivedUpperShriek A f).obj (R(ν_*(Y)[A]).obj L)) :=
+lemma rightDerivedUpperShriek_obj (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y)
+    (ModuleCat.{u + 1} Λ))) :
+    (R(f)^![Λ]).obj L =
+      D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((Etale.rightDerivedUpperShriek Λ f).obj
+          (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)) :=
   rfl
 
 /-- Transport of the exceptional inverse image along an equality of morphisms:
 `Rf^! ≅ Rg^!` for `f = g`. -/
 noncomputable def rightDerivedUpperShriekCongr {f g : X ⟶ Y} (h : f = g)
     [HasCompactification f] [HasCompactification g]
-    [(Etale.rightDerivedLowerShriek A f).IsLeftAdjoint]
-    [(Etale.rightDerivedLowerShriek A g).IsLeftAdjoint] : R(f)^![A] ≅ R(g)^![A] :=
+ : R(f)^![Λ] ≅ R(g)^![Λ] :=
   -- not `eqToIso`: the kernel would compare `Rf^!` and `Rg^!` when reducing the transport
   by subst h; exact Iso.refl _
 
 @[simp]
 lemma rightDerivedUpperShriekCongr_rfl :
-    rightDerivedUpperShriekCongr A (rfl : f = f) = Iso.refl _ :=
+    rightDerivedUpperShriekCongr Λ (rfl : f = f) = Iso.refl _ :=
   rfl
 
 end Definition
 
 section BoundedBelow
 
-variable {A} [Etale.HasBoundedBelowUpperShriek A f]
+variable {A} {Λ} [CompactSpace Y]
 
 /-- The right derived comparison restriction `Rν_*` sends bounded below objects to bounded
 below objects. -/
@@ -155,36 +155,36 @@ lemma plus_rightDerivedFunctor_comparisonLowerStar_obj
 /-- The étale object `f^× Rν_* L` of which `Rf^! L` is the comparison pullback is bounded
 below when `L` is. -/
 lemma plus_etaleRightDerivedUpperShriek_obj
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
     DerivedCategory.TStructure.t.plus
-      ((Etale.rightDerivedUpperShriek A f).obj (R(ν_*(Y)[A]).obj L)) :=
-  Etale.plus_rightDerivedUpperShriek_obj A f _ (plus_rightDerivedFunctor_comparisonLowerStar_obj hL)
+      ((Etale.rightDerivedUpperShriek Λ f).obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)) :=
+  Etale.plus_rightDerivedUpperShriek_obj Λ f _ (plus_rightDerivedFunctor_comparisonLowerStar_obj hL)
 
 /-- `Rf^!` sends a bounded below object to an object bounded below of étale origin. -/
 lemma plusEtaleOrigin_rightDerivedUpperShriek_obj
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
-    DerivedCategory.plusEtaleOrigin A X ((R(f)^![A]).obj L) :=
+    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj L) :=
   DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj
     (plus_etaleRightDerivedUpperShriek_obj f hL)
 
 /-- The exceptional inverse image `Rf^!` preserves bounded below objects. -/
 lemma plus_rightDerivedUpperShriek_obj
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
-    DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj L) :=
+    DerivedCategory.TStructure.t.plus ((R(f)^![Λ]).obj L) :=
   (plusEtaleOrigin_rightDerivedUpperShriek_obj f hL).plus
 
-variable (A)
+variable (A) (Λ)
 
 /-- The exceptional inverse image `Rf^! : D⁺(Y_proét) ⥤ D⁺(X_proét)` on the *bounded below*
 derived categories of pro-étale sheaves: the restriction of `R(f)^![A]`, which is well defined
 by `plus_rightDerivedUpperShriek_obj`. -/
 noncomputable def rightDerivedUpperShriekPlus :
-    DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-      DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) :=
-  DerivedCategory.TStructure.t.plus.lift (DerivedCategory.Plus.ι ⋙ R(f)^![A])
+    DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
+      DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
+  DerivedCategory.TStructure.t.plus.lift (DerivedCategory.Plus.ι ⋙ R(f)^![Λ])
     (fun K ↦ plus_rightDerivedUpperShriek_obj f K.property)
 
 @[inherit_doc rightDerivedUpperShriekPlus]
@@ -194,7 +194,7 @@ scoped notation "R(" f ")^![" A "]+" =>
 /-- The bounded below `R(f)^![A]+` is compatible with the inclusions of the bounded below
 derived categories, by construction. -/
 noncomputable def rightDerivedUpperShriekPlusCompatibility :
-    R(f)^![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![A] :=
+    R(f)^![Λ]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![Λ] :=
   ObjectProperty.liftCompιIso _ _ _
 
 end BoundedBelow
@@ -204,9 +204,9 @@ section Adjunction
 /- The adjunction `ν^* ⊣ Rν_*` on the unbounded derived categories is obtained by deriving the
 pullback via K-flat resolutions, hence the closed symmetric monoidal structure on `A`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShriek A f]
+  [Abelian.HasFunctorialFlatResolution A] [CompactSpace Y]
 
-variable {A}
+variable {A} {Λ}
 
 /-- Blueprint `sk-prop-sf-existence` (c): the counit `ε_L : Rf_! Rf^! L ⟶ L` of the
 exceptional adjunction at a bounded below `L`: the composite
@@ -219,33 +219,35 @@ of the compact-support comparison `AlgebraicGeometry.ProEtale.rightDerivedLowerS
 (at the bounded below `f^× Rν_* L`), the counit of the étale adjunction `Rf_! ⊣ f^×` and the
 counit of `ν^* ⊣ Rν_*`. -/
 noncomputable def rightDerivedUpperShriekCounit
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
     (hL : DerivedCategory.TStructure.t.plus L) :
-    (ProEtale.rightDerivedLowerShriek A f).obj ((R(f)^![A]).obj L) ⟶ L :=
-  ((rightDerivedLowerShriekComparisonIso A f).app
+    (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj ((R(f)^![Λ]).obj L) ⟶ L :=
+  ((rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).app
       ⟨_, plus_etaleRightDerivedUpperShriek_obj f hL⟩).hom ≫
-    D(ν^*(Y)[A]).map ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app _) ≫
-    (derivedComparisonAdjunction A Y).counit.app L
+    D(ν^*(Y)[ModuleCat.{u + 1} Λ]).map ((Etale.rightDerivedUpperShriekAdjunction Λ f).counit.app _)
+        ≫
+    (derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).counit.app L
 
 /-- The counit of the exceptional adjunction is natural in the bounded below `L`. -/
 @[reassoc]
 lemma rightDerivedUpperShriekCounit_naturality
-    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) (hL' : DerivedCategory.TStructure.t.plus L')
     (φ : L ⟶ L') :
-    (ProEtale.rightDerivedLowerShriek A f).map ((R(f)^![A]).map φ) ≫
+    (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map ((R(f)^![Λ]).map φ) ≫
         rightDerivedUpperShriekCounit f L' hL' =
       rightDerivedUpperShriekCounit f L hL ≫ φ := by
-  have h := (rightDerivedLowerShriekComparisonIso A f).hom.naturality
+  have h := (rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).hom.naturality
     (X := ⟨_, plus_etaleRightDerivedUpperShriek_obj f hL⟩)
     (Y := ⟨_, plus_etaleRightDerivedUpperShriek_obj f hL'⟩)
-    (ObjectProperty.homMk ((Etale.rightDerivedUpperShriek A f).map (R(ν_*(Y)[A]).map φ)))
+    (ObjectProperty.homMk ((Etale.rightDerivedUpperShriek Λ f).map (R(ν_*(Y)[ModuleCat.{u + 1}
+        Λ]).map φ)))
   dsimp at h
   simp only [rightDerivedUpperShriekCounit, rightDerivedUpperShriek, Functor.comp_map,
     Iso.app_hom]
-  have h2 := (Etale.rightDerivedUpperShriekAdjunction A f).counit_naturality
-    (R(ν_*(Y)[A]).map φ)
-  have h3 := (derivedComparisonAdjunction A Y).counit_naturality φ
+  have h2 := (Etale.rightDerivedUpperShriekAdjunction Λ f).counit_naturality
+    (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).map φ)
+  have h3 := (derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).counit_naturality φ
   rw [reassoc_of% h, ← Functor.map_comp_assoc]
   erw [h2]
   rw [Functor.map_comp_assoc]
@@ -256,17 +258,18 @@ lemma rightDerivedUpperShriekCounit_naturality
 `g ↦ Rf_! g ≫ ε_L` sends `ν^* h`, for `h : K' ⟶ f^× Rν_* L`, to the image of `h` under the chain
 of adjunction bijections, read through the compact-support comparison at `K'`. -/
 lemma rightDerivedLowerShriek_map_mapDerivedCategory_map_comp_counit
-    {K' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK' : DerivedCategory.TStructure.t.plus K')
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L)
-    (h : K' ⟶ (Etale.rightDerivedUpperShriek A f).obj (R(ν_*(Y)[A]).obj L)) :
-    (ProEtale.rightDerivedLowerShriek A f).map (D(ν^*(X)[A]).map h) ≫
+    (h : K' ⟶ (Etale.rightDerivedUpperShriek Λ f).obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)) :
+    (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map (D(ν^*(X)[ModuleCat.{u + 1}
+        Λ]).map h) ≫
         rightDerivedUpperShriekCounit f L hL =
-      ((rightDerivedLowerShriekComparisonIso A f).app ⟨K', hK'⟩).hom ≫
-        ((derivedComparisonAdjunction A Y).homEquiv _ _).symm
-          (((Etale.rightDerivedUpperShriekAdjunction A f).homEquiv _ _).symm h) := by
-  have hn := (rightDerivedLowerShriekComparisonIso A f).hom.naturality
+      ((rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).app ⟨K', hK'⟩).hom ≫
+        ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ _).symm
+          (((Etale.rightDerivedUpperShriekAdjunction Λ f).homEquiv _ _).symm h) := by
+  have hn := (rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).hom.naturality
     (X := ⟨K', hK'⟩) (Y := ⟨_, plus_etaleRightDerivedUpperShriek_obj f hL⟩)
     (ObjectProperty.homMk h)
   dsimp at hn
@@ -277,18 +280,21 @@ lemma rightDerivedLowerShriek_map_mapDerivedCategory_map_comp_counit
 /-- For `K'` bounded below and `L` bounded below, `g ↦ Rf_! g ≫ ε_L` is a bijection
 `Hom(ν^* K', Rf^! L) ≃ Hom(Rf_! ν^* K', L)`. -/
 lemma bijective_rightDerivedLowerShriek_map_comp_counit_of_plus
-    {K' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK' : DerivedCategory.TStructure.t.plus K')
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
-    Function.Bijective (fun g : D(ν^*(X)[A]).obj K' ⟶ (R(f)^![A]).obj L ↦
-      (ProEtale.rightDerivedLowerShriek A f).map g ≫ rightDerivedUpperShriekCounit f L hL) := by
-  let E := (((Etale.rightDerivedUpperShriekAdjunction A f).homEquiv K' _).symm.trans
-    ((derivedComparisonAdjunction A Y).homEquiv _ L).symm).trans
-      (((rightDerivedLowerShriekComparisonIso A f).app ⟨K', hK'⟩).symm.homFromEquiv (Z := L))
-  have hcomp : (fun g : D(ν^*(X)[A]).obj K' ⟶ (R(f)^![A]).obj L ↦
-      (ProEtale.rightDerivedLowerShriek A f).map g ≫ rightDerivedUpperShriekCounit f L hL) ∘
-        (fun h ↦ D(ν^*(X)[A]).map h) = ⇑E := by
+    Function.Bijective (fun g : D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K' ⟶ (R(f)^![Λ]).obj L ↦
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+          rightDerivedUpperShriekCounit f L hL) := by
+  let E := (((Etale.rightDerivedUpperShriekAdjunction Λ f).homEquiv K' _).symm.trans
+    ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ L).symm).trans
+      (((rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).app ⟨K',
+          hK'⟩).symm.homFromEquiv (Z := L))
+  have hcomp : (fun g : D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K' ⟶ (R(f)^![Λ]).obj L ↦
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+          rightDerivedUpperShriekCounit f L hL) ∘
+        (fun h ↦ D(ν^*(X)[ModuleCat.{u + 1} Λ]).map h) = ⇑E := by
     ext h
     exact rightDerivedLowerShriek_map_mapDerivedCategory_map_comp_counit f hK' hL h
   have hν := bijective_comparisonUpperStar_mapDerivedCategory_map K' _
@@ -300,24 +306,28 @@ lemma bijective_rightDerivedLowerShriek_map_comp_counit_of_plus
 /-- For `K` bounded below of étale origin and `L` bounded below, `g ↦ Rf_! g ≫ ε_L` is a
 bijection `Hom(K, Rf^! L) ≃ Hom(Rf_! K, L)`. -/
 lemma bijective_rightDerivedLowerShriek_map_comp_counit
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K)
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
-    Function.Bijective (fun g : K ⟶ (R(f)^![A]).obj L ↦
-      (ProEtale.rightDerivedLowerShriek A f).map g ≫ rightDerivedUpperShriekCounit f L hL) := by
+    Function.Bijective (fun g : K ⟶ (R(f)^![Λ]).obj L ↦
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+          rightDerivedUpperShriekCounit f L hL) := by
   obtain ⟨K', hK', ⟨e⟩⟩ := hK
-  have h : (fun g : K ⟶ (R(f)^![A]).obj L ↦
-      (ProEtale.rightDerivedLowerShriek A f).map g ≫ rightDerivedUpperShriekCounit f L hL) =
-      ⇑((ProEtale.rightDerivedLowerShriek A f).mapIso e).homFromEquiv ∘
-        (fun g : D(ν^*(X)[A]).obj K' ⟶ (R(f)^![A]).obj L ↦
-          (ProEtale.rightDerivedLowerShriek A f).map g ≫ rightDerivedUpperShriekCounit f L hL) ∘
+  have h : (fun g : K ⟶ (R(f)^![Λ]).obj L ↦
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+          rightDerivedUpperShriekCounit f L hL) =
+      ⇑((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).mapIso e).homFromEquiv ∘
+        (fun g : D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K' ⟶ (R(f)^![Λ]).obj L ↦
+          (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+              rightDerivedUpperShriekCounit f L hL) ∘
         ⇑e.symm.homFromEquiv := by
     ext g
     simp only [Function.comp_apply, Iso.homFromEquiv_apply, Iso.symm_inv, Functor.mapIso_inv,
       Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc]
   rw [h]
-  exact ((ProEtale.rightDerivedLowerShriek A f).mapIso e).homFromEquiv.bijective.comp
+  exact ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).mapIso
+      e).homFromEquiv.bijective.comp
     ((bijective_rightDerivedLowerShriek_map_comp_counit_of_plus f hK' hL).comp
       e.symm.homFromEquiv.bijective)
 
@@ -327,21 +337,23 @@ Its inverse is `g ↦ Rf_! g ≫ ε_L` (`rightDerivedUpperShriekHomEquiv_symm_ap
 natural in `K` and `L` (`rightDerivedUpperShriekHomEquiv_naturality_left_symm`,
 `rightDerivedUpperShriekHomEquiv_naturality_right_symm`). -/
 noncomputable def rightDerivedUpperShriekHomEquiv
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K)
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) :
-    ((ProEtale.rightDerivedLowerShriek A f).obj K ⟶ L) ≃ (K ⟶ (R(f)^![A]).obj L) :=
+    ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K ⟶ L) ≃ (K ⟶ (R(f)^![Λ]).obj L)
+        :=
   (Equiv.ofBijective _ (bijective_rightDerivedLowerShriek_map_comp_counit f hK hL)).symm
 
 @[simp]
 lemma rightDerivedUpperShriekHomEquiv_symm_apply
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K)
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
-    (hL : DerivedCategory.TStructure.t.plus L) (g : K ⟶ (R(f)^![A]).obj L) :
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hL : DerivedCategory.TStructure.t.plus L) (g : K ⟶ (R(f)^![Λ]).obj L) :
     (rightDerivedUpperShriekHomEquiv f hK hL).symm g =
-      (ProEtale.rightDerivedLowerShriek A f).map g ≫ rightDerivedUpperShriekCounit f L hL :=
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+          rightDerivedUpperShriekCounit f L hL :=
   rfl
 
 /-- The counit is the image of the identity under the exceptional adjunction. -/
@@ -354,23 +366,24 @@ lemma rightDerivedUpperShriekHomEquiv_symm_id
 
 /-- Naturality of the exceptional adjunction in the source. -/
 lemma rightDerivedUpperShriekHomEquiv_naturality_left_symm
-    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K) (hK' : DerivedCategory.plusEtaleOrigin A X K')
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
-    (hL : DerivedCategory.TStructure.t.plus L) (φ : K ⟶ K') (g : K' ⟶ (R(f)^![A]).obj L) :
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) (hK' :
+        DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hL : DerivedCategory.TStructure.t.plus L) (φ : K ⟶ K') (g : K' ⟶ (R(f)^![Λ]).obj L) :
     (rightDerivedUpperShriekHomEquiv f hK hL).symm (φ ≫ g) =
-      (ProEtale.rightDerivedLowerShriek A f).map φ ≫
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map φ ≫
         (rightDerivedUpperShriekHomEquiv f hK' hL).symm g := by
   simp
 
 /-- Naturality of the exceptional adjunction in the target. -/
 lemma rightDerivedUpperShriekHomEquiv_naturality_right_symm
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K)
-    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) (hL' : DerivedCategory.TStructure.t.plus L')
-    (g : K ⟶ (R(f)^![A]).obj L) (φ : L ⟶ L') :
-    (rightDerivedUpperShriekHomEquiv f hK hL').symm (g ≫ (R(f)^![A]).map φ) =
+    (g : K ⟶ (R(f)^![Λ]).obj L) (φ : L ⟶ L') :
+    (rightDerivedUpperShriekHomEquiv f hK hL').symm (g ≫ (R(f)^![Λ]).map φ) =
       (rightDerivedUpperShriekHomEquiv f hK hL).symm g ≫ φ := by
   simp [rightDerivedUpperShriekCounit_naturality f hL hL']
 
@@ -388,13 +401,13 @@ lemma rightDerivedUpperShriekHomEquiv_naturality_left
 
 /-- Naturality of the exceptional adjunction in the target, forward direction. -/
 lemma rightDerivedUpperShriekHomEquiv_naturality_right
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A X K)
-    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.TStructure.t.plus L) (hL' : DerivedCategory.TStructure.t.plus L')
-    (g : (ProEtale.rightDerivedLowerShriek A f).obj K ⟶ L) (φ : L ⟶ L') :
+    (g : (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K ⟶ L) (φ : L ⟶ L') :
     rightDerivedUpperShriekHomEquiv f hK hL' (g ≫ φ) =
-      rightDerivedUpperShriekHomEquiv f hK hL g ≫ (R(f)^![A]).map φ := by
+      rightDerivedUpperShriekHomEquiv f hK hL g ≫ (R(f)^![Λ]).map φ := by
   rw [← Equiv.eq_symm_apply, rightDerivedUpperShriekHomEquiv_naturality_right_symm f hK hL hL',
     Equiv.symm_apply_apply]
 
@@ -405,13 +418,15 @@ of objects of `D(Y_proét)` contained in the bounded below objects, such that `R
 subcategories of `P` and `Q` are adjoint. This applies to the bounded constructible objects of
 finite Tor amplitude. -/
 noncomputable def rightDerivedUpperShriekAdjunction
-    (P : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)))
-    (Q : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)))
-    (hP : P ≤ DerivedCategory.plusEtaleOrigin A X) (hQ : Q ≤ DerivedCategory.TStructure.t.plus)
-    (h₁ : ∀ K, P K → Q ((ProEtale.rightDerivedLowerShriek A f).obj K))
-    (h₂ : ∀ L, Q L → P ((R(f)^![A]).obj L)) :
-    Q.lift (P.ι ⋙ ProEtale.rightDerivedLowerShriek A f) (fun K ↦ h₁ _ K.property) ⊣
-      P.lift (Q.ι ⋙ R(f)^![A]) (fun L ↦ h₂ _ L.property) :=
+    (P : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))
+    (Q : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))))
+    (hP : P ≤ DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X) (hQ : Q ≤
+        DerivedCategory.TStructure.t.plus)
+    (h₁ : ∀ K, P K → Q ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K))
+    (h₂ : ∀ L, Q L → P ((R(f)^![Λ]).obj L)) :
+    Q.lift (P.ι ⋙ ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f) (fun K ↦ h₁ _
+        K.property) ⊣
+      P.lift (Q.ι ⋙ R(f)^![Λ]) (fun L ↦ h₂ _ L.property) :=
   Adjunction.mkOfHomEquiv
     { homEquiv K L :=
         { toFun g := ObjectProperty.homMk

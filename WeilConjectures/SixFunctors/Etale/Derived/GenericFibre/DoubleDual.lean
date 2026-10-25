@@ -113,6 +113,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 attribute [local instance] derivedBraidedCategory
 
@@ -149,19 +150,21 @@ complexes `ω_X`, `ω_{X'}` and Verdier double-dual maps `δ`, and let
 The hypothesis `hbr` (the braided axiom for `Lg^*`) is not yet available in the repository. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff {X X' S S' : Scheme.{u}}
     (a : X ⟶ S) (a' : X' ⟶ S') [HasCompactification a] [HasCompactification a']
-    [(R(a)_![A]).IsLeftAdjoint] [(R(a')_![A]).IsLeftAdjoint] (g : X' ⟶ X)
-    (hbr : LeftDerivedUpperStarBraided A g)
-    {L : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology A)} (hL : IsInvertible L)
-    (e : (L((g)^*[A])).obj (dualizingComplex A a) ≅
-      ((derivedTensor A X').obj (dualizingComplex A a')).obj L)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (h₁ : IsIso (derivedHomUpperStarComparison A g K (dualizingComplex A a)))
-    (h₂ : IsIso (derivedHomUpperStarComparison A g ((verdierDual A a).obj (op K))
-      (dualizingComplex A a))) :
-    IsIso ((L((g)^*[A])).map ((verdierDualDoubleDual A a).app K)) ↔
-      IsIso ((verdierDualDoubleDual A a').app ((L((g)^*[A])).obj K)) := by
-  let := leftDerivedUpperStarLaxBraided A g hbr
-  exact isIso_map_toIhomIhom_iff_of_iso_tensor L((g)^*[A]) hL e K h₁ h₂
+ (g : X' ⟶ X)
+    (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) g)
+    {L : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hL :
+        IsInvertible L)
+    (e : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj (dualizingComplex Λ a')).obj L)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (h₁ : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) g K (dualizingComplex Λ a)))
+    (h₂ : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) g ((verdierDual Λ a).obj (op
+        K))
+      (dualizingComplex Λ a))) :
+    IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ a).app K)) ↔
+      IsIso ((verdierDualDoubleDual Λ a').app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  let := leftDerivedUpperStarLaxBraided (ModuleCat.{u + 1} Λ) g hbr
+  exact isIso_map_toIhomIhom_iff_of_iso_tensor L((g)^*[ModuleCat.{u + 1} Λ]) hL e K h₁ h₂
 
 end Etale
 

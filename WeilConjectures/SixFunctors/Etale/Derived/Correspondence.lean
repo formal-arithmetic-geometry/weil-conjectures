@@ -55,15 +55,17 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {X s : Scheme.{u}} (aX : X ⟶ s) (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
 
 /-- Blueprint `def-trf-correspondence`: Cohomological correspondence.
 
-A cohomological correspondence on an object `K` of `D(X_ét, A)`, for `X` over `s` via `aX`: a
+(ModuleCat.{u + 1} Λ) cohomological correspondence on an object `K` of
+`D(X_ét, (ModuleCat.{u + 1} Λ))`, for `X` over `s` via `aX`: a
 separated scheme `C` of finite type over `s` with morphisms `c = (c₁, c₂) : C ⟶ X ×_s X`, that
 is `c₁ c₂ : C ⟶ X` with `c₁ ≫ aX = c₂ ≫ aX`, and a morphism `u : c₂^* K ⟶ Rc₁^! K` in
-`D(C_ét, A)`. The leg `c₂` is the pullback leg and `c₁` the exceptional leg. -/
+`D(C_ét, (ModuleCat.{u + 1} Λ))`. The leg `c₂` is the pullback leg and `c₁` the exceptional leg. -/
 structure CohomologicalCorrespondence where
   /-- The correspondence scheme `C`. -/
   C : Scheme.{u}
@@ -83,9 +85,9 @@ structure CohomologicalCorrespondence where
   [hasCompactification : HasCompactification c₁]
   /-- The derived lower shriek along the exceptional leg is a left adjoint, so that the
   exceptional inverse image `Rc₁^!` is defined. -/
-  [isLeftAdjoint : (R(c₁)_![A]).IsLeftAdjoint]
+  [isLeftAdjoint : (R(c₁)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
   /-- The cohomological correspondence `u : c₂^* K ⟶ Rc₁^! K`. -/
-  u : (D((c₂)^*[A])).obj K ⟶ (R(c₁)^![A]).obj K
+  u : (D((c₂)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ (R(c₁)^![Λ]).obj K
 
 namespace CohomologicalCorrespondence
 
@@ -100,7 +102,7 @@ noncomputable abbrev fixedScheme : Scheme.{u} :=
 
 section Graph
 
-variable (A) [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
+variable (A) (Λ) [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
   [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
 
 /-- Blueprint `def-trf-graph-correspondence`: Graph correspondence.
@@ -110,8 +112,8 @@ morphism `v : h^* K ⟶ K`: `C = X`, `c₁ = 𝟙 X`, `c₂ = h` and `u = v`, co
 identification `R(𝟙 X)^! ≅ 𝟭` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIdIso`). Its
 fixed scheme is `Fix(h)` (`fixedScheme_graph`). -/
 noncomputable def graph [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
-    (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[A])).obj K ⟶ K) :
-    CohomologicalCorrespondence A aX K where
+    (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
+    CohomologicalCorrespondence Λ aX K where
   C := X
   c₁ := 𝟙 X
   c₂ := h
@@ -119,29 +121,30 @@ noncomputable def graph [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact 
   isSeparated := by rwa [Category.id_comp]
   locallyOfFiniteType := by rwa [Category.id_comp]
   quasiCompact := by rwa [Category.id_comp]
-  u := v ≫ (rightDerivedUpperShriekIdIso A X).inv.app K
+  u := v ≫ (rightDerivedUpperShriekIdIso Λ X).inv.app K
 
-variable {A} [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
+variable {A} {Λ} [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
 
 @[simp]
-lemma graph_C (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[A])).obj K ⟶ K) :
-    (graph A h hh v).C = X :=
+lemma graph_C (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
+    (graph Λ h hh v).C = X :=
   rfl
 
 @[simp]
-lemma graph_c₁ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[A])).obj K ⟶ K) :
-    (graph A h hh v).c₁ = 𝟙 X :=
+lemma graph_c₁ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
+    (graph Λ h hh v).c₁ = 𝟙 X :=
   rfl
 
 @[simp]
-lemma graph_c₂ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[A])).obj K ⟶ K) :
-    (graph A h hh v).c₂ = h :=
+lemma graph_c₂ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
+    (graph Λ h hh v).c₂ = h :=
   rfl
 
 /-- The fixed scheme of the graph correspondence of `h` is the fixed scheme `Fix(h)` of `h`,
 the scheme-theoretic equalizer of `𝟙 X` and `h` (blueprint `def-trf-graph-correspondence`). -/
-lemma fixedScheme_graph (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[A])).obj K ⟶ K) :
-    (graph A h hh v).fixedScheme = Hom.fixedScheme aX h hh :=
+lemma fixedScheme_graph (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶
+    K) :
+    (graph Λ h hh v).fixedScheme = Hom.fixedScheme aX h hh :=
   rfl
 
 end Graph

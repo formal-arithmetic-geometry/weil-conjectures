@@ -49,18 +49,21 @@ section Transport
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {X Z Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X) [IsClosedImmersion i]
-  [IsClosedImmersion i'] [(R(i)_![A]).IsLeftAdjoint] [(R(i')_![A]).IsLeftAdjoint]
+  [IsClosedImmersion i']
 
-omit [(R(i')_![A]).IsLeftAdjoint] in
+omit in
 /-- `Ri_! Ri^! L` is supported on the range of `i`, hence on the range of any closed immersion
 `i'` with the same range. -/
 lemma isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq
     (h : Set.range i.base = Set.range i'.base)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsZero ((L((i'.openComplement.ι)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L))) :=
-  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i i'.openComplement.ι
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(i)^![Λ]).obj L))) :=
+  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) i
+      i'.openComplement.ι
     (by rw [h, i'.range_eq_compl_range_openComplement_ι]; exact disjoint_compl_left) _
     subset_rfl _
 
@@ -69,42 +72,44 @@ uniquely through the counit `Ri'_! Ri'^! L ⟶ L`
 (`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`). It is *defined* as
 `Classical.choose`; uniqueness makes the choice canonical. -/
 noncomputable def supportedTransport (h : Set.range i.base = Set.range i'.base)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (R(i)_![A]).obj ((R(i)^![A]).obj L) ⟶ (R(i')_![A]).obj ((R(i')^![A]).obj L) :=
-  (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ⟶ (R(i')_![ModuleCat.{u + 1} Λ]).obj
+        ((R(i')^![Λ]).obj L) :=
+  (existsUnique_comp_counit_of_isZero Λ i' i'.openComplement.ι
     i'.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq A i i' h L)
-    ((rightDerivedUpperShriekAdjunction A i).counit.app L)).exists.choose
+    (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq Λ i i' h L)
+    ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)).exists.choose
 
 @[reassoc (attr := simp)]
 lemma supportedTransport_comp_counit (h : Set.range i.base = Set.range i'.base)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    supportedTransport A i i' h L ≫ (rightDerivedUpperShriekAdjunction A i').counit.app L =
-      (rightDerivedUpperShriekAdjunction A i).counit.app L :=
-  (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    supportedTransport Λ i i' h L ≫ (rightDerivedUpperShriekAdjunction Λ i').counit.app L =
+      (rightDerivedUpperShriekAdjunction Λ i).counit.app L :=
+  (existsUnique_comp_counit_of_isZero Λ i' i'.openComplement.ι
     i'.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq A i i' h L)
-    ((rightDerivedUpperShriekAdjunction A i).counit.app L)).exists.choose_spec
+    (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq Λ i i' h L)
+    ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)).exists.choose_spec
 
 /-- **Classes with supports only depend on the support.** For closed immersions `i`, `i'` with
 the same range, `Ri_! Ri^! L ≅ Ri'_! Ri'^! L` compatibly with the counits: both lifts are unique,
 and their composites lift the counits to themselves. -/
 noncomputable def supportedTransportIso (h : Set.range i.base = Set.range i'.base)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (R(i)_![A]).obj ((R(i)^![A]).obj L) ≅ (R(i')_![A]).obj ((R(i')^![A]).obj L) where
-  hom := supportedTransport A i i' h L
-  inv := supportedTransport A i' i h.symm L
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ≅ (R(i')_![ModuleCat.{u + 1} Λ]).obj
+        ((R(i')^![Λ]).obj L) where
+  hom := supportedTransport Λ i i' h L
+  inv := supportedTransport Λ i' i h.symm L
   hom_inv_id :=
-    (existsUnique_comp_counit_of_isZero A i i.openComplement.ι
+    (existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
       i.range_eq_compl_range_openComplement_ι
-      (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq A i i rfl L)
-      ((rightDerivedUpperShriekAdjunction A i).counit.app L)).unique (by simp)
+      (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq Λ i i rfl L)
+      ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)).unique (by simp)
         (Category.id_comp _)
   inv_hom_id :=
-    (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+    (existsUnique_comp_counit_of_isZero Λ i' i'.openComplement.ι
       i'.range_eq_compl_range_openComplement_ι
-      (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq A i' i' rfl L)
-      ((rightDerivedUpperShriekAdjunction A i').counit.app L)).unique (by simp)
+      (isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq Λ i' i' rfl L)
+      ((rightDerivedUpperShriekAdjunction Λ i').counit.app L)).unique (by simp)
         (Category.id_comp _)
 
 end Transport
@@ -160,7 +165,7 @@ noncomputable def cl (F : PurityFrame z c) [HasInvertibleExponent Λ V] :
     constantComplex Λ F.U ⟶ (R(pullback.snd z F.e)_![ModuleCat.{u + 1} Λ]).obj
       ((R(pullback.snd z F.e)^![Λ]).obj ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
   haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
-  kummerBoundaryProduct Λ F.f ≫ (supportedTransportIso (ModuleCat.{u + 1} Λ) _ _
+  kummerBoundaryProduct Λ F.f ≫ (supportedTransportIso Λ _ _
     F.range_zeroLocusSubschemeι _).hom
 
 end PurityFrame

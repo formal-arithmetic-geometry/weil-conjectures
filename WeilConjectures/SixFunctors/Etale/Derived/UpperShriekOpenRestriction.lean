@@ -64,7 +64,7 @@ theorem nonempty_iso_mapDerivedCategory_upperStar_rightDerivedUpperShriek (i : Z
     HasCompactification.of_eq (morphismRestrict_ι i W).symm
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (i ⁻¹ᵁ W).ι i
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (i ∣_ W) W.ι
-  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ)
+  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ
     (morphismRestrict_ι i W)
   exact ⟨(rightDerivedUpperShriekIsoOfIsOpenImmersion Λ (i ⁻¹ᵁ W).ι).symm.app _ ≪≫
     (e₁.app M).symm ≪≫ (e₃.app M).symm ≪≫ e₂.app M ≪≫

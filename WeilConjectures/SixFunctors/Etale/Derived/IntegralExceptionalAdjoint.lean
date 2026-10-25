@@ -69,7 +69,6 @@ set_option hygiene false in
 local notation "𝐃(" X ", " Λ ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
-
 /-! ### The formal dual formula -/
 
 section General
@@ -79,13 +78,14 @@ attribute [local instance] derivedBraidedCategory
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- **The dual formula `Rf^! L ≅ RHom(N, ω_X)`.** Let `L, M, ω_Y ∈ D(Y_ét)` with an isomorphism
 `L ≅ RHom(M, ω_Y)`, and assume that the projection maps
@@ -94,19 +94,23 @@ Given `γ : Rf^! ω_Y ≅ ω_X` and `φ : Lf^* M ⟶ N` inducing bijections
 `Hom(K ⊗ᴸ N, ω_X) ≃ Hom(K ⊗ᴸ Lf^* M, ω_X)`, there is an isomorphism `Rf^! L ≅ RHom(N, ω_X)`
 (`CategoryTheory.Verdier.nonempty_iso_obj_of_adjunction`). -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedHom
-    {L M ωY : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (e : L ≅ ((derivedHom A Y).obj (op M)).obj ωY)
-    (hπ : ∀ K, Function.Bijective (fun a : (R(f)_![A]).obj (((derivedTensor A X).obj K).obj
-        ((L((f)^*[A])).obj M)) ⟶ ωY ↦ ((projectionMap A f).app K).app M ≫ a))
-    {ωX N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (γ : (R(f)^![A]).obj ωY ≅ ωX) (φ : (L((f)^*[A])).obj M ⟶ N)
+    {L M ωY : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : L ≅ ((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op M)).obj ωY)
+    (hπ : ∀ K, Function.Bijective (fun a : (R(f)_![ModuleCat.{u + 1} Λ]).obj (((derivedTensor
+        (ModuleCat.{u + 1} Λ) X).obj K).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)) ⟶ ωY ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f).app
+            K).app M ≫ a))
+    {ωX N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (γ : (R(f)^![Λ]).obj ωY ≅ ωX) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ N)
     (hφ : ∀ K, Function.Bijective
-      (fun a : ((derivedTensor A X).obj K).obj N ⟶ ωX ↦ ((derivedTensor A X).obj K).map φ ≫ a)) :
-    Nonempty ((R(f)^![A]).obj L ≅ ((derivedHom A X).obj (op N)).obj ωX) :=
-  Verdier.nonempty_iso_obj_of_adjunction (rightDerivedUpperShriekAdjunction A f)
-    (derivedTensorHomAdjunction A M) e (fun K ↦ ((projectionMap A f).app K).app _)
-    (fun g ↦ NatTrans.congr_app ((projectionMap A f).naturality g) _) hπ
-    (derivedTensorHomAdjunction A N) γ φ hφ
+      (fun a : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj N ⟶ ωX ↦ ((derivedTensor
+          (ModuleCat.{u + 1} Λ) X).obj K).map φ ≫ a)) :
+    Nonempty ((R(f)^![Λ]).obj L ≅ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX) :=
+  Verdier.nonempty_iso_obj_of_adjunction (rightDerivedUpperShriekAdjunction Λ f)
+    (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) M) e (fun K ↦ ((projectionMap (ModuleCat.{u +
+        1} Λ) f).app K).app _)
+    (fun g ↦ NatTrans.congr_app ((projectionMap (ModuleCat.{u + 1} Λ) f).naturality g) _) hπ
+    (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) N) γ φ hφ
 
 end General
 
@@ -272,7 +276,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionMo
     (hφ : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ})).map φ)) :
     Nonempty ((R(f)^![Λ]).obj L ≅
       ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX) :=
-  nonempty_iso_rightDerivedUpperShriek_obj_derivedHom (ModuleCat.{u + 1} Λ) f
+  nonempty_iso_rightDerivedUpperShriek_obj_derivedHom Λ f
     (asIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) Y ωY L))
     (fun K ↦ bijective_comp_of_isIso_reductionModIdeal hϖ (projectionMapApp Λ f K _) (by
       have := isIso_reductionModIdeal_map_projectionMap_of_finite hϖ 1 f K
@@ -347,8 +351,6 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_dualizing {k : Type u} [Field k
   exact ⟨i⟩
 
 end Dualizing
-
-
 
 section DerivedLimit
 
@@ -528,7 +530,6 @@ theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShrie
   subst hI
   obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![Λ]) hϖ n L
   exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
-
 
 include hϖ hI in
 /-- Clause 3 of `prop-coef-integral-exceptional-adjoint`: the dual formula

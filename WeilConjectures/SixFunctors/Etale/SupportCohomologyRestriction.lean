@@ -58,6 +58,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section UpperShriek
 
@@ -88,34 +89,38 @@ instance isLeftAdjoint_rightDerivedLowerShriek_of_isClosedImmersion :
 of the sheaf functor `i^!` of sections supported on `Z`, both being right adjoint to
 `Ri_! ≅ i_*`. -/
 noncomputable def rightDerivedClosedUpperShriekIso :
-    (closedUpperShriek A i i.openComplement.ι).rightDerivedFunctor ≅ R(i)^![A] :=
-  ((mapDerivedCategoryLowerStarClosedUpperShriekAdjunction A i).ofNatIsoLeft
-    (mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek A i)).rightAdjointUniq
-      (rightDerivedUpperShriekAdjunction A i)
+    (closedUpperShriek (ModuleCat.{u + 1} Λ) i i.openComplement.ι).rightDerivedFunctor ≅ R(i)^![Λ]
+        :=
+  ((mapDerivedCategoryLowerStarClosedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).ofNatIsoLeft
+    (mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek (ModuleCat.{u + 1} Λ)
+        i)).rightAdjointUniq
+      (rightDerivedUpperShriekAdjunction Λ i)
 
 /-- `RΓ_Z(X, K) ≅ RΓ(X, Ri_! Ri^! K)`: the derived sections with support in `Z` are the derived
 global sections of the supported term of the localization triangle. -/
 noncomputable def rightDerivedSectionsWithSupportIso :
-    rightDerivedSectionsWithSupport A i ≅
-      R(i)^![A] ⋙ R(i)_![A] ⋙ rightDerivedGlobalSections A X :=
-  (rightDerivedClosedUpperShriekCompIso A i).symm ≪≫
-    Functor.isoWhiskerRight (rightDerivedClosedUpperShriekIso A i) _ ≪≫
-    Functor.isoWhiskerLeft _ ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A i).symm ≪≫
-      Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar A i).symm _)
+    rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) i ≅
+      R(i)^![Λ] ⋙ R(i)_![ModuleCat.{u + 1} Λ] ⋙ rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X
+          :=
+  (rightDerivedClosedUpperShriekCompIso (ModuleCat.{u + 1} Λ) i).symm ≪≫
+    Functor.isoWhiskerRight (rightDerivedClosedUpperShriekIso Λ i) _ ≪≫
+    Functor.isoWhiskerLeft _ ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u
+        + 1} Λ) i).symm ≪≫
+      Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
+          i).symm _)
 
 end UpperShriek
 
 section Triangle
 
-
-omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] in
+omit
+ in
 /-- `Ri^!` of a zero object is zero. -/
 lemma isZero_rightDerivedUpperShriek_obj {Z X : Scheme.{u}} (i : Z ⟶ X) [HasCompactification i]
-    [(R(i)_![A]).IsLeftAdjoint] {Y : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hY : IsZero Y) : IsZero ((R(i)^![A]).obj Y) := by
+ {Y : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hY : IsZero Y) : IsZero ((R(i)^![Λ]).obj Y) := by
   rw [IsZero.iff_id_eq_zero]
-  apply ((rightDerivedUpperShriekAdjunction A i).homEquiv _ _).symm.injective
+  apply ((rightDerivedUpperShriekAdjunction Λ i).homEquiv _ _).symm.injective
   exact hY.eq_of_tgt _ _
 
 variable {T B C D : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T) (d : D ⟶ T)
@@ -133,39 +138,44 @@ omit [IsClosedImmersion c] in
 include hd in
 /-- The supported term of `D` is supported on `B`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_supported_of_inter
-    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    IsZero ((L((b.openComplement.ι)^*[A])).obj ((R(d)_![A]).obj ((R(d)^![A]).obj F))) :=
-  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A d _
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsZero ((L((b.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(d)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(d)^![Λ]).obj F))) :=
+  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) d _
     (disjoint_range_openComplement_ι_of_subset d b (by rw [hd]; exact Set.inter_subset_left))
     _ subset_rfl _
 
 /-- The map `Rd_! Rd^! F ⟶ Rb_! Rb^! F` of supported terms for `D ⊆ B`: the unique lift of the
 counit of `d` through the counit of `b`. It is *defined* as `Classical.choose`. -/
-noncomputable def supportedInclusion (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    (R(d)_![A]).obj ((R(d)^![A]).obj F) ⟶ (R(b)_![A]).obj ((R(b)^![A]).obj F) :=
-  (existsUnique_comp_counit_of_isZero A b b.openComplement.ι
+noncomputable def supportedInclusion (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u
+    + 1} Λ))) :
+    (R(d)_![ModuleCat.{u + 1} Λ]).obj ((R(d)^![Λ]).obj F) ⟶ (R(b)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(b)^![Λ]).obj F) :=
+  (existsUnique_comp_counit_of_isZero Λ b b.openComplement.ι
     b.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_supported_of_inter A b c d hd F)
-    ((rightDerivedUpperShriekAdjunction A d).counit.app F)).exists.choose
+    (isZero_leftDerivedUpperStar_openComplement_supported_of_inter Λ b c d hd F)
+    ((rightDerivedUpperShriekAdjunction Λ d).counit.app F)).exists.choose
 
 omit [IsClosedImmersion c] in
 @[reassoc (attr := simp)]
-lemma supportedInclusion_comp_counit (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    supportedInclusion A b c d hd F ≫ (rightDerivedUpperShriekAdjunction A b).counit.app F =
-      (rightDerivedUpperShriekAdjunction A d).counit.app F :=
-  (existsUnique_comp_counit_of_isZero A b b.openComplement.ι
+lemma supportedInclusion_comp_counit (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u
+    + 1} Λ))) :
+    supportedInclusion Λ b c d hd F ≫ (rightDerivedUpperShriekAdjunction Λ b).counit.app F =
+      (rightDerivedUpperShriekAdjunction Λ d).counit.app F :=
+  (existsUnique_comp_counit_of_isZero Λ b b.openComplement.ι
     b.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_supported_of_inter A b c d hd F)
-    ((rightDerivedUpperShriekAdjunction A d).counit.app F)).exists.choose_spec
+    (isZero_leftDerivedUpperStar_openComplement_supported_of_inter Λ b c d hd F)
+    ((rightDerivedUpperShriekAdjunction Λ d).counit.app F)).exists.choose_spec
 
 include hd in
 /-- `Rc_! Rc^! (Rb_! Rb^! F)` is supported on `D = B ∩ C`: on the open complement `W` of `D`,
 it vanishes on the complement of `C` and, restriction to an open commuting with supports, on the
 complement of `B`; these two opens cover `W`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_supported_supported
-    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    IsZero ((L((d.openComplement.ι)^*[A])).obj ((R(c)_![A]).obj ((R(c)^![A]).obj
-      ((R(b)_![A]).obj ((R(b)^![A]).obj F))))) := by
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsZero ((L((d.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(c)^![Λ]).obj
+      ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F))))) := by
   set ud := d.openComplement.ι
   have hcd : Disjoint (Set.range (pullback.snd c ud).base)
       (Set.range (pullback.snd b ud).base) := by
@@ -174,68 +184,75 @@ lemma isZero_leftDerivedUpperStar_openComplement_supported_supported
     have : ud.base x ∈ Set.range d.base := by rw [hd]; exact ⟨hx₂, hx₁⟩
     exact Set.disjoint_left.mp (disjoint_range_openComplement_ι_of_subset d d subset_rfl) this
       ⟨x, rfl⟩
-  refine isZero_of_isZero_leftDerivedUpperStar_of_disjoint A (pullback.snd c ud)
+  refine isZero_of_isZero_leftDerivedUpperStar_of_disjoint Λ (pullback.snd c ud)
     (pullback.snd b ud) _ _ (Scheme.Hom.range_eq_compl_range_openComplement_ι _)
     (Scheme.Hom.range_eq_compl_range_openComplement_ι _) hcd ?_ ?_
-  · exact (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek A c ud
-      _).of_iso ((leftDerivedUpperStarComp A _ ud).app _).symm
+  · exact (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ c ud
+      _).of_iso ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ ud).app _).symm
   · set o := (pullback.snd b ud).openComplement.ι ≫ ud
-    have hE : IsZero ((L((o)^*[A])).obj ((R(b)_![A]).obj ((R(b)^![A]).obj F))) :=
-      isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek A b ud _
-    have := isIso_supportedRestriction_of_isOpenImmersion A o c (pullback.snd c o)
+    have hE : IsZero ((L((o)^*[ModuleCat.{u + 1} Λ])).obj ((R(b)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(b)^![Λ]).obj F))) :=
+      isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ b ud _
+    have := isIso_supportedRestriction_of_isOpenImmersion Λ o c (pullback.snd c o)
       (pullback.fst c o) (IsPullback.of_hasPullback c o)
-      ((R(b)_![A]).obj ((R(b)^![A]).obj F)) _ (Iso.refl _)
-    refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp A _ ud).app _).symm
-    exact ((R(pullback.snd c o)_![A]).map_isZero
-      (isZero_rightDerivedUpperShriek_obj A _ hE)).of_iso (asIso (supportedRestriction A o c
+      ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F)) _ (Iso.refl _)
+    refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ ud).app _).symm
+    exact ((R(pullback.snd c o)_![ModuleCat.{u + 1} Λ]).map_isZero
+      (isZero_rightDerivedUpperShriek_obj Λ _ hE)).of_iso (asIso (supportedRestriction Λ o c
         (pullback.snd c o) (pullback.fst c o) (IsPullback.of_hasPullback c o) _ _
           (Iso.refl _)))
 
 /-- `Rd_! Rd^! F ≅ Rc_! Rc^! (Rb_! Rb^! F)` over `Rb_! Rb^! F`: both are supported on `D` and
 the maps to `F` lift uniquely. -/
-theorem exists_iso_supported_supported (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    ∃ e : (R(d)_![A]).obj ((R(d)^![A]).obj F) ≅
-        (R(c)_![A]).obj ((R(c)^![A]).obj ((R(b)_![A]).obj ((R(b)^![A]).obj F))),
-      e.hom ≫ (rightDerivedUpperShriekAdjunction A c).counit.app _ =
-        supportedInclusion A b c d hd F := by
-  set E := (R(b)_![A]).obj ((R(b)^![A]).obj F)
-  set εb := (rightDerivedUpperShriekAdjunction A b).counit.app F
-  set εc := (rightDerivedUpperShriekAdjunction A c).counit.app E
-  set εd := (rightDerivedUpperShriekAdjunction A d).counit.app F
-  have hDC : IsZero ((L((c.openComplement.ι)^*[A])).obj ((R(d)_![A]).obj ((R(d)^![A]).obj F))) :=
-    isZero_leftDerivedUpperStar_openComplement_supported_of_inter A c b d
+theorem exists_iso_supported_supported (F : DerivedCategory (Sheaf T.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ))) :
+    ∃ e : (R(d)_![ModuleCat.{u + 1} Λ]).obj ((R(d)^![Λ]).obj F) ≅
+        (R(c)_![ModuleCat.{u + 1} Λ]).obj ((R(c)^![Λ]).obj ((R(b)_![ModuleCat.{u + 1} Λ]).obj
+            ((R(b)^![Λ]).obj F))),
+      e.hom ≫ (rightDerivedUpperShriekAdjunction Λ c).counit.app _ =
+        supportedInclusion Λ b c d hd F := by
+  set E := (R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F)
+  set εb := (rightDerivedUpperShriekAdjunction Λ b).counit.app F
+  set εc := (rightDerivedUpperShriekAdjunction Λ c).counit.app E
+  set εd := (rightDerivedUpperShriekAdjunction Λ d).counit.app F
+  have hDC : IsZero ((L((c.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(d)_![ModuleCat.{u + 1}
+      Λ]).obj ((R(d)^![Λ]).obj F))) :=
+    isZero_leftDerivedUpperStar_openComplement_supported_of_inter Λ c b d
       (hd.trans (Set.inter_comm _ _)) F
-  have hX := isZero_leftDerivedUpperStar_openComplement_supported_supported A b c d hd F
-  have hXc : IsZero ((L((c.openComplement.ι)^*[A])).obj ((R(c)_![A]).obj ((R(c)^![A]).obj E))) :=
-    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A c _
+  have hX := isZero_leftDerivedUpperStar_openComplement_supported_supported Λ b c d hd F
+  have hXc : IsZero ((L((c.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)_![ModuleCat.{u + 1}
+      Λ]).obj ((R(c)^![Λ]).obj E))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) c _
       (disjoint_range_openComplement_ι_of_subset c c subset_rfl) _ subset_rfl _
-  have hXb : IsZero ((L((b.openComplement.ι)^*[A])).obj ((R(c)_![A]).obj ((R(c)^![A]).obj E))) := by
-    have hE : IsZero ((L((b.openComplement.ι)^*[A])).obj E) :=
-      isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A b _
+  have hXb : IsZero ((L((b.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)_![ModuleCat.{u + 1}
+      Λ]).obj ((R(c)^![Λ]).obj E))) := by
+    have hE : IsZero ((L((b.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj E) :=
+      isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) b _
         (disjoint_range_openComplement_ι_of_subset b b subset_rfl) _ subset_rfl _
     set o := b.openComplement.ι
-    have := isIso_supportedRestriction_of_isOpenImmersion A o c (pullback.snd c o)
+    have := isIso_supportedRestriction_of_isOpenImmersion Λ o c (pullback.snd c o)
       (pullback.fst c o) (IsPullback.of_hasPullback c o) E _ (Iso.refl _)
-    exact ((R(pullback.snd c o)_![A]).map_isZero
-      (isZero_rightDerivedUpperShriek_obj A _ hE)).of_iso (asIso (supportedRestriction A o c
+    exact ((R(pullback.snd c o)_![ModuleCat.{u + 1} Λ]).map_isZero
+      (isZero_rightDerivedUpperShriek_obj Λ _ hE)).of_iso (asIso (supportedRestriction Λ o c
         (pullback.snd c o) (pullback.fst c o) (IsPullback.of_hasPullback c o) _ _ (Iso.refl _)))
-  have hDd : IsZero ((L((d.openComplement.ι)^*[A])).obj ((R(d)_![A]).obj ((R(d)^![A]).obj F))) :=
-    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A d _
+  have hDd : IsZero ((L((d.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(d)_![ModuleCat.{u + 1}
+      Λ]).obj ((R(d)^![Λ]).obj F))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) d _
       (disjoint_range_openComplement_ι_of_subset d d subset_rfl) _ subset_rfl _
-  obtain ⟨ψ, hψ, -⟩ := existsUnique_comp_counit_of_isZero A c c.openComplement.ι
-    c.range_eq_compl_range_openComplement_ι hDC (supportedInclusion A b c d hd F)
-  obtain ⟨φ, hφ, -⟩ := existsUnique_comp_counit_of_isZero A d d.openComplement.ι
+  obtain ⟨ψ, hψ, -⟩ := existsUnique_comp_counit_of_isZero Λ c c.openComplement.ι
+    c.range_eq_compl_range_openComplement_ι hDC (supportedInclusion Λ b c d hd F)
+  obtain ⟨φ, hφ, -⟩ := existsUnique_comp_counit_of_isZero Λ d d.openComplement.ι
     d.range_eq_compl_range_openComplement_ι hX (εc ≫ εb)
   have h₁ : ψ ≫ φ = 𝟙 _ :=
-    (existsUnique_comp_counit_of_isZero A d d.openComplement.ι
+    (existsUnique_comp_counit_of_isZero Λ d d.openComplement.ι
       d.range_eq_compl_range_openComplement_ι hDd εd).unique
       (by rw [assoc, hφ, reassoc_of% hψ, supportedInclusion_comp_counit]) (id_comp _)
-  have h₂ : φ ≫ supportedInclusion A b c d hd F = εc :=
-    (existsUnique_comp_counit_of_isZero A b b.openComplement.ι
+  have h₂ : φ ≫ supportedInclusion Λ b c d hd F = εc :=
+    (existsUnique_comp_counit_of_isZero Λ b b.openComplement.ι
       b.range_eq_compl_range_openComplement_ι hXb (εc ≫ εb)).unique
       (by rw [assoc]; erw [supportedInclusion_comp_counit]; exact hφ) rfl
   have h₃ : φ ≫ ψ = 𝟙 _ :=
-    (existsUnique_comp_counit_of_isZero A c c.openComplement.ι
+    (existsUnique_comp_counit_of_isZero Λ c c.openComplement.ι
       c.range_eq_compl_range_openComplement_ι hXc εc).unique
       (by rw [assoc]; erw [hψ]; exact h₂) (id_comp _)
   exact ⟨⟨ψ, φ, h₁, h₃⟩, hψ⟩
@@ -244,15 +261,16 @@ theorem exists_iso_supported_supported (F : DerivedCategory (Sheaf T.smallEtaleT
 is the supported localization triangle of `Rb_! Rb^! F` for the pair `(C, V)`, its first term
 being identified with `Rd_! Rd^! F` (`AlgebraicGeometry.Etale.exists_iso_supported_supported`). -/
 theorem exists_distTriang_supportedInclusion
-    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    ∃ δ, Triangle.mk (supportedInclusion A b c d hd F)
-      ((derivedUpperStarLowerStarAdjunction A c.openComplement.ι).unit.app
-        ((R(b)_![A]).obj ((R(b)^![A]).obj F))) δ ∈ distTriang _ := by
-  obtain ⟨e, he⟩ := exists_iso_supported_supported A b c d hd F
-  have hT := supportedLocalizationTriangle_mem_distTriang A c c.openComplement.ι
-    c.range_eq_compl_range_openComplement_ι ((R(b)_![A]).obj ((R(b)^![A]).obj F))
-  refine ⟨supportedLocalizationBoundary A c c.openComplement.ι
-    c.range_eq_compl_range_openComplement_ι ((R(b)_![A]).obj ((R(b)^![A]).obj F)) ≫
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃ δ, Triangle.mk (supportedInclusion Λ b c d hd F)
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.openComplement.ι).unit.app
+        ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F))) δ ∈ distTriang _ := by
+  obtain ⟨e, he⟩ := exists_iso_supported_supported Λ b c d hd F
+  have hT := supportedLocalizationTriangle_mem_distTriang Λ c c.openComplement.ι
+    c.range_eq_compl_range_openComplement_ι ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F))
+  refine ⟨supportedLocalizationBoundary Λ c c.openComplement.ι
+    c.range_eq_compl_range_openComplement_ι ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F))
+        ≫
       (e.inv)⟦(1 : ℤ)⟧', isomorphic_distinguished _ hT _
     (Triangle.isoMk _ _ e (Iso.refl _) (Iso.refl _) ?_ ?_ ?_)⟩
   · simp [he]
@@ -264,38 +282,47 @@ instance (X : Scheme.{u}) : (rightDerivedGlobalSections A X).IsTriangulated :=
 
 /-- The identification of the last term: for `E = Rb_! Rb^! F`,
 `RΓ_{B ∩ V}(V, Lv^* F) ≅ RΓ(V, Rb'_! Rb'^! Lv^* F) ≅ RΓ(V, Lv^* E) ≅ RΓ(T, Rv_* Lv^* E)`. -/
-noncomputable def supportRestrictionIso₃ (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    (rightDerivedSectionsWithSupport A (pullback.snd b c.openComplement.ι)).obj
-        ((L((c.openComplement.ι)^*[A])).obj F) ≅
-      (rightDerivedGlobalSections A T).obj ((R((c.openComplement.ι)_*[A])).obj
-        ((L((c.openComplement.ι)^*[A])).obj ((R(b)_![A]).obj ((R(b)^![A]).obj F)))) :=
-  haveI := isIso_supportedRestriction_of_isOpenImmersion A c.openComplement.ι b
+noncomputable def supportRestrictionIso₃ (F : DerivedCategory (Sheaf T.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) (pullback.snd b c.openComplement.ι)).obj
+        ((L((c.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj F) ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).obj
+          ((R((c.openComplement.ι)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((c.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(b)_![ModuleCat.{u + 1} Λ]).obj
+            ((R(b)^![Λ]).obj F)))) :=
+  haveI := isIso_supportedRestriction_of_isOpenImmersion Λ c.openComplement.ι b
     (pullback.snd b c.openComplement.ι) (pullback.fst b c.openComplement.ι)
     (IsPullback.of_hasPullback b c.openComplement.ι) F _ (Iso.refl _)
-  (rightDerivedSectionsWithSupportIso A (pullback.snd b c.openComplement.ι)).app _ ≪≫
-    (rightDerivedGlobalSections A _).mapIso (asIso (supportedRestriction A c.openComplement.ι b
+  (rightDerivedSectionsWithSupportIso Λ (pullback.snd b c.openComplement.ι)).app _ ≪≫
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).mapIso (asIso (supportedRestriction Λ
+        c.openComplement.ι b
       (pullback.snd b c.openComplement.ι) (pullback.fst b c.openComplement.ι)
       (IsPullback.of_hasPullback b c.openComplement.ι) F _ (Iso.refl _))).symm ≪≫
-    ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A c.openComplement.ι).app _).symm
+    ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ)
+        c.openComplement.ι).app _).symm
 
 /-- The inclusion of supports `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F)`, through
 `RΓ_Z(T, -) ≅ RΓ(T, Rz_! Rz^! -)`. -/
-noncomputable def supportInclusionMap (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    (rightDerivedSectionsWithSupport A d).obj F ⟶ (rightDerivedSectionsWithSupport A b).obj F :=
-  ((rightDerivedSectionsWithSupportIso A d).app F).hom ≫
-    (rightDerivedGlobalSections A T).map (supportedInclusion A b c d hd F) ≫
-      ((rightDerivedSectionsWithSupportIso A b).app F).inv
+noncomputable def supportInclusionMap (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u
+    + 1} Λ))) :
+    (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) d).obj F ⟶
+        (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) b).obj F :=
+  ((rightDerivedSectionsWithSupportIso Λ d).app F).hom ≫
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).map (supportedInclusion Λ b c d hd F) ≫
+      ((rightDerivedSectionsWithSupportIso Λ b).app F).inv
 
 /-- The restriction `RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F)` to the open complement `V` of `C`,
 induced by the unit `E ⟶ Rv_* Lv^* E` for `E = Rb_! Rb^! F`. -/
-noncomputable def supportRestrictionMap (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    (rightDerivedSectionsWithSupport A b).obj F ⟶
-      (rightDerivedSectionsWithSupport A (pullback.snd b c.openComplement.ι)).obj
-        ((L((c.openComplement.ι)^*[A])).obj F) :=
-  ((rightDerivedSectionsWithSupportIso A b).app F).hom ≫
-    (rightDerivedGlobalSections A T).map
-      ((derivedUpperStarLowerStarAdjunction A c.openComplement.ι).unit.app _) ≫
-    (supportRestrictionIso₃ A b c F).inv
+noncomputable def supportRestrictionMap (F : DerivedCategory (Sheaf T.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) b).obj F ⟶
+      (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) (pullback.snd b
+          c.openComplement.ι)).obj
+        ((L((c.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj F) :=
+  ((rightDerivedSectionsWithSupportIso Λ b).app F).hom ≫
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.openComplement.ι).unit.app _) ≫
+    (supportRestrictionIso₃ Λ b c F).inv
 
 /-- Blueprint `lem-pur-support-restriction-triangle`: Restriction triangle inside a closed
 support
@@ -306,23 +333,23 @@ For every complex `F` of étale sheaves on `T` there is a distinguished triangle
 
 `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F) ⟶ RΓ_{B ∩ C}(T, F)[1]`
 
-in `D(A)`, where `RΓ_Z` is the derived functor of the sections supported on `Z`
+in `D((ModuleCat.{u + 1} Λ))`, where `RΓ_Z` is the derived functor of the sections supported on `Z`
 (`AlgebraicGeometry.Etale.rightDerivedSectionsWithSupport`). The first map is induced by the
 inclusion of supports and the second by the restriction to `V`
 (`AlgebraicGeometry.Etale.supportInclusionMap`, `AlgebraicGeometry.Etale.supportRestrictionMap`).
 -/
 theorem exists_distTriang_supportRestriction
-    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    ∃ δ, Triangle.mk (supportInclusionMap A b c d hd F) (supportRestrictionMap A b c F) δ ∈
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃ δ, Triangle.mk (supportInclusionMap Λ b c d hd F) (supportRestrictionMap Λ b c F) δ ∈
       distTriang _ := by
-  obtain ⟨δ, hδ⟩ := exists_distTriang_supportedInclusion A b c d hd F
-  set G := rightDerivedGlobalSections A T
-  let e₁ := (rightDerivedSectionsWithSupportIso A d).app F
-  let e₂ := (rightDerivedSectionsWithSupportIso A b).app F
-  let e₃ := supportRestrictionIso₃ A b c F
-  refine ⟨e₃.hom ≫ (G.mapTriangle.obj (Triangle.mk (supportedInclusion A b c d hd F)
-      ((derivedUpperStarLowerStarAdjunction A c.openComplement.ι).unit.app
-        ((R(b)_![A]).obj ((R(b)^![A]).obj F))) δ)).mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧',
+  obtain ⟨δ, hδ⟩ := exists_distTriang_supportedInclusion Λ b c d hd F
+  set G := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T
+  let e₁ := (rightDerivedSectionsWithSupportIso Λ d).app F
+  let e₂ := (rightDerivedSectionsWithSupportIso Λ b).app F
+  let e₃ := supportRestrictionIso₃ Λ b c F
+  refine ⟨e₃.hom ≫ (G.mapTriangle.obj (Triangle.mk (supportedInclusion Λ b c d hd F)
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.openComplement.ι).unit.app
+        ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F))) δ)).mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧',
     isomorphic_distinguished _ (G.map_distinguished _ hδ) _
       (Triangle.isoMk _ _ e₁ e₂ e₃ ?_ ?_ ?_)⟩
   · simp [supportInclusionMap, e₁, e₂]

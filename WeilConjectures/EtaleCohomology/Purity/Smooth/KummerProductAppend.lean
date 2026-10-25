@@ -274,15 +274,15 @@ theorem cupWithSupportsTateObject_assoc (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) 
       cupWithSupportsTateObject Λ i₁ i₂₃ i h' α (cupWithSupportsTateObject Λ i₂ i₃ i₂₃ h₂₃ β γ) ≫
         eqToHom (by rw [add_assoc]) := by
   unfold ShiftTateObjectAddIsoAssoc at hμ
-  have e₁ := cupWithSupports_comp_map (ModuleCat.{u + 1} Λ) i₁₂ i₃ i h
+  have e₁ := cupWithSupports_comp_map Λ i₁₂ i₃ i h
     (constantComplexDiagonal Λ U)
     (cupWithSupports _ i₁ i₂ i₁₂ h₁₂ (constantComplexDiagonal Λ U) α β) γ
     (shiftTateObjectAddIso Λ U m₁ m₂).hom (𝟙 _)
-  have e₂ := cupWithSupports_comp_map (ModuleCat.{u + 1} Λ) i₁ i₂₃ i h'
+  have e₂ := cupWithSupports_comp_map Λ i₁ i₂₃ i h'
     (constantComplexDiagonal Λ U) α
     (cupWithSupports _ i₂ i₃ i₂₃ h₂₃ (constantComplexDiagonal Λ U) β γ)
     (𝟙 _) (shiftTateObjectAddIso Λ U m₂ m₃).hom
-  have e₃ := cupWithSupports_assoc (ModuleCat.{u + 1} Λ) i₁ i₂ i₃ i₁₂ i₂₃ i h₁₂ h₂₃ h h'
+  have e₃ := cupWithSupports_assoc Λ i₁ i₂ i₃ i₁₂ i₂₃ i h₁₂ h₂₃ h h'
     (constantComplexDiagonal Λ U) (constantComplexDiagonal_coassoc Λ U) α β γ
   simp only [CategoryTheory.Functor.map_id, Category.comp_id] at e₁ e₂
   simp only [cupWithSupportsTateObject]
@@ -356,7 +356,7 @@ theorem cupWithSupportsTateObject_kummerBoundaryProduct_zero {Z : Scheme.{u}}
       eqToHom (by rw [Nat.cast_zero, zero_add]) :=
     shiftTateObjectAddIso_zero_left Λ U m
   rw [kummerBoundaryProduct, cupWithSupportsTateObject,
-    cupWithSupports_liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) _ i _ h
+    cupWithSupports_liftCounitOfRangeEqUniv Λ _ i _ h
       (constantComplexDiagonal Λ U) (constantComplexDiagonal_comp_derivedTensorLeftUnitor_hom Λ U),
     Category.assoc, ← Functor.map_comp, ← Functor.map_comp, Category.assoc, hunit]
   simp only [eqToHom_map]
@@ -368,7 +368,7 @@ lemma kummerBoundaryProduct_cons {n : ℕ} (x : Γ(U, ⊤)) (f : Fin n → Γ(U,
           (U.zeroLocusSubschemeι (Set.range f))
           (U.zeroLocusSubschemeι (Set.range (Fin.cons x f : Fin (n + 1) → Γ(U, ⊤))))
           (by rw [Fin.range_cons, range_zeroLocusSubschemeι_insert]) (m := 1)
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2 (kummerBoundary Λ x))
+          (shiftSupportedClass Λ _ 2 (kummerBoundary Λ x))
           (kummerBoundaryProduct Λ f) ≫
         eqToHom (by rw [Nat.cast_succ, add_comm (1 : ℤ)]) := by
   rw [kummerBoundaryProduct]

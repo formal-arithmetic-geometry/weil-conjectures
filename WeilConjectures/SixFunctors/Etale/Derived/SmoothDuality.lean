@@ -78,7 +78,7 @@ theorem exists_dualizingComplex_iso_and_tensor :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
         Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
-      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      Nonempty (dualizingComplex Λ f ≅
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) :=

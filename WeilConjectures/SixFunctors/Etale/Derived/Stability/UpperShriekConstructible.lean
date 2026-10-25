@@ -99,7 +99,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion
     simp [V, openComplementOfIsClosedImmersion]
   have hM := boundedConstructible_rightDerivedLowerStar_of_finite Λ (V.ι ≫ aT) aT V.ι rfl
     (boundedConstructible_leftDerivedUpperStar _ V.ι hK)
-  have hT := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i V.ι hij K
+  have hT := supportedLocalizationTriangle_mem_distTriang Λ i V.ι hij K
   have hNbc := (boundedConstructible (ModuleCat.{u + 1} Λ) T).ext_of_isTriangulatedClosed₂ _
     (Pretriangulated.inv_rot_of_distTriang _ hT) ((boundedConstructible _ T).le_shift (-1) _ hM) hK
   exact (boundedConstructible _ Z).prop_of_iso

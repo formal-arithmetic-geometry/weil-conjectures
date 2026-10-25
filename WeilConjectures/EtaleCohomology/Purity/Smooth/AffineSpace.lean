@@ -202,7 +202,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
   set φ := affineSpaceSuccIso c B
   obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B) φ.hom
-  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ)
+  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ
     (zeroSection_comp_affineSpaceSuccIso_hom c B)
   obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)
@@ -231,7 +231,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
     have hz : AffineSpace.zeroSection (ULift.{u} (Fin 0)) B = e.symm.hom := by
       rw [← cancel_mono e.hom]
       simp [e]
-    obtain ⟨i⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) hz
+    obtain ⟨i⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ hz
     exact ⟨i.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ e.symm).app _ ≪≫
       leftDerivedUpperStarTateShiftIso Λ _ _ ≪≫
       (shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _ ≪≫
@@ -325,7 +325,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace_succ (d : ℕ) (Y : Sch
     rw [Category.assoc]
     exact (affineSpaceSuccIso_hom_over_over d Y).symm
   have : HasCompactification ((φ.hom ≫ q) ≫ p) := .of_eq h
-  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) h
+  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ h
   obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (φ.hom ≫ q) p
   obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ φ.hom q
@@ -423,7 +423,7 @@ theorem nonempty_iso_dualizingComplex_affineSpace [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (d : ℕ)
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     [HasInvertibleExponent Λ Y] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); Y) ↘ Y) ≅
+    Nonempty (dualizingComplex Λ (𝔸(ULift.{u} (Fin d); Y) ↘ Y) ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y))) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpace Λ d Y aY (tateObject Λ Y 0)

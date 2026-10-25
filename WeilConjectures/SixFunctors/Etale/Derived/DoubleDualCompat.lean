@@ -67,8 +67,9 @@ section OpenImmersion
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {Y W S : Scheme.{u}} (a : Y ⟶ S) (b : W ⟶ S) [HasCompactification a] [HasCompactification b]
-  [(R(a)_![A]).IsLeftAdjoint] [(R(b)_![A]).IsLeftAdjoint] (j : W ⟶ Y) [IsOpenImmersion j]
+ (j : W ⟶ Y) [IsOpenImmersion j]
 
 attribute [local instance] derivedBraidedCategory
 
@@ -76,9 +77,10 @@ attribute [local instance] derivedBraidedCategory
 `D(j^*) Rj_* ⟶ 𝟭` is an isomorphism, `D(j_!) ⊣ D(j^*) ⊣ Rj_*` being an adjoint triple whose first
 unit is invertible. -/
 instance isIso_mapDerivedUpperStarLowerStarAdjunction_counit :
-    IsIso (mapDerivedUpperStarLowerStarAdjunction A j).counit :=
-  (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
-    (mapDerivedUpperStarLowerStarAdjunction A j)).isIso_unit_iff_isIso_counit.1 inferInstance
+    IsIso (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit :=
+  (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)).isIso_unit_iff_isIso_counit.1
+        inferInstance
 
 /-- Blueprint `lem-weil-delta-restriction`: the extension-by-zero step. Let `j : W ⟶ Y` be an open
 immersion and `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W` an isomorphism (the Verdier exchange,
@@ -92,20 +94,21 @@ their units are invertible at the same objects
 (`CategoryTheory.Adjunction.isIso_unit_app_iff_of_iso`). These units are `j^* δ_{j_! M}` and
 `δ_M`, up to the invertible unit of `j_! ⊣ j^*` and counit of `j^* ⊣ Rj_*`. -/
 theorem isIso_verdierDualDoubleDual_app_iff_lowerShriek
-    (e : D((j)_!open[A]) ⋙ (verdierDual A a).rightOp ≅
-      (verdierDual A b).rightOp ⋙ (R((j)_*[A])).op)
-    (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology A)) :
-    IsIso ((verdierDualDoubleDual A b).app M) ↔
-      IsIso (D((j)^*[A]).map ((verdierDualDoubleDual A a).app (D((j)_!open[A]).obj M))) := by
-  let adjY : (verdierDual A a).rightOp ⊣ verdierDual A a :=
+    (e : D((j)_!open[ModuleCat.{u + 1} Λ]) ⋙ (verdierDual Λ a).rightOp ≅
+      (verdierDual Λ b).rightOp ⋙ (R((j)_*[ModuleCat.{u + 1} Λ])).op)
+    (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((verdierDualDoubleDual Λ b).app M) ↔
+      IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualDoubleDual Λ a).app
+          (D((j)_!open[ModuleCat.{u + 1} Λ]).obj M))) := by
+  let adjY : (verdierDual Λ a).rightOp ⊣ verdierDual Λ a :=
     MonoidalClosed.ihomFlipSelfAdjunction _
-  let adjW : (verdierDual A b).rightOp ⊣ verdierDual A b :=
+  let adjW : (verdierDual Λ b).rightOp ⊣ verdierDual Λ b :=
     MonoidalClosed.ihomFlipSelfAdjunction _
-  let p := mapDerivedUpperStarLowerStarAdjunction A j
-  let q := derivedOpenImmersionLowerShriekUpperStarAdjunction A j
+  let p := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
+  let q := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j
   have h := Adjunction.isIso_unit_app_iff_of_iso (q.comp adjY) (adjW.comp p.op) e M
   rw [Adjunction.comp_unit_app, Adjunction.comp_unit_app] at h
-  have : IsIso (p.op.unit.app ((verdierDual A b).rightOp.obj M)) := by
+  have : IsIso (p.op.unit.app ((verdierDual Λ b).rightOp.obj M)) := by
     dsimp
     infer_instance
   rw [isIso_comp_left_iff, isIso_comp_right_iff, MonoidalClosed.ihomFlipSelfAdjunction_unit_app,
@@ -118,75 +121,86 @@ the open `W`, then so does `𝔻_Y 𝔻_Y f`, because restriction to `W` commute
 (`AlgebraicGeometry.Etale.nonempty_iso_mapDerivedCategory_upperStar_derivedHom`) and kills the
 cone of `f`. By naturality, `j^* δ_K` is then invertible if and only if `j^* δ_{K'}` is. -/
 theorem isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
-    {FC : A → A → Type*} {CC : A → Type (u + 1)}
-    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
-    [(CategoryTheory.forget A).ReflectsIsomorphisms]
-    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-    [Etale.UpperStarPreservesFlat A]
-    [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-    {K' K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (f : K' ⟶ K)
-    (hf : IsIso (D((j)^*[A]).map f)) :
-    IsIso (D((j)^*[A]).map ((verdierDualDoubleDual A a).app K)) ↔
-      IsIso (D((j)^*[A]).map ((verdierDualDoubleDual A a).app K')) := by
-  have hz : ∀ Z : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A),
-      IsZero (D((j)^*[A]).obj Z) →
-        IsZero (D((j)^*[A]).obj ((verdierDual A a).obj (op Z))) := by
+    {FC : (ModuleCat.{u + 1} Λ) → (ModuleCat.{u + 1} Λ) → Type*} {CC : (ModuleCat.{u + 1} Λ) → Type
+        (u + 1)}
+    [∀ (P Q : (ModuleCat.{u + 1} Λ)), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1}
+        (ModuleCat.{u + 1} Λ) FC]
+    [(CategoryTheory.forget (ModuleCat.{u + 1} Λ)).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget (ModuleCat.{u + 1} Λ))]
+    [Etale.UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)]
+    [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget (ModuleCat.{u + 1} Λ))]
+    {K' K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (f : K' ⟶ K)
+    (hf : IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map f)) :
+    IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualDoubleDual Λ a).app K)) ↔
+      IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualDoubleDual Λ a).app K')) := by
+  have hz : ∀ Z : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj Z) →
+        IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj ((verdierDual Λ a).obj (op Z))) := by
     intro Z hZ
-    obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_derivedHom (FC := FC) A j Z
-      (dualizingComplex A a)
+    obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_derivedHom (FC := FC) (ModuleCat.{u + 1}
+        Λ) j Z
+      (dualizingComplex Λ a)
     exact (isZero_ihom_obj_of_isZero hZ _).of_iso e
-  have hdd : IsIso (D((j)^*[A]).map (((verdierDual A a).rightOp ⋙ verdierDual A a).map f)) := by
+  have hdd : IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map (((verdierDual Λ a).rightOp ⋙ verdierDual Λ
+      a).map f)) := by
     obtain ⟨Z, g, h, hT⟩ := distinguished_cocone_triangle f
-    have hZ : IsZero (D((j)^*[A]).obj Z) :=
-      (Triangle.isZero₃_iff_isIso₁ _ (D((j)^*[A]).map_distinguished _ hT)).2 hf
-    obtain ⟨w, hw⟩ := exists_distTriang_verdierDual_verdierDual A a _ hT
-    have h3 : IsZero (D((j)^*[A]).obj
-        ((verdierDual A a).obj (op ((verdierDual A a).obj (op Z))))) :=
-      hz ((verdierDual A a).obj (op Z)) (hz Z hZ)
-    have hw' := D((j)^*[A]).map_distinguished _ hw
-    have h4 : IsZero (D((j)^*[A]).obj (((verdierDual A a).rightOp ⋙ verdierDual A a).obj Z)) := h3
+    have hZ : IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj Z) :=
+      (Triangle.isZero₃_iff_isIso₁ _ (D((j)^*[ModuleCat.{u + 1} Λ]).map_distinguished _ hT)).2 hf
+    obtain ⟨w, hw⟩ := exists_distTriang_verdierDual_verdierDual Λ a _ hT
+    have h3 : IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj
+        ((verdierDual Λ a).obj (op ((verdierDual Λ a).obj (op Z))))) :=
+      hz ((verdierDual Λ a).obj (op Z)) (hz Z hZ)
+    have hw' := D((j)^*[ModuleCat.{u + 1} Λ]).map_distinguished _ hw
+    have h4 : IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj (((verdierDual Λ a).rightOp ⋙ verdierDual Λ
+        a).obj Z)) := h3
     have key := (Triangle.isZero₃_iff_isIso₁ _ hw').1 h4
     exact key
-  have nat := congrArg D((j)^*[A]).map ((verdierDualDoubleDual A a).naturality f)
+  have nat := congrArg D((j)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualDoubleDual Λ a).naturality f)
   simp only [Functor.id_map, Functor.map_comp] at nat
   constructor
   · intro h
-    have : IsIso (D((j)^*[A]).map ((verdierDualDoubleDual A a).app K') ≫
-        D((j)^*[A]).map (((verdierDual A a).rightOp ⋙ verdierDual A a).map f)) := by
+    have : IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualDoubleDual Λ a).app K') ≫
+        D((j)^*[ModuleCat.{u + 1} Λ]).map (((verdierDual Λ a).rightOp ⋙ verdierDual Λ a).map f)) :=
+            by
       rw [← nat]
       infer_instance
     exact IsIso.of_isIso_comp_right _
-      (D((j)^*[A]).map (((verdierDual A a).rightOp ⋙ verdierDual A a).map f))
+      (D((j)^*[ModuleCat.{u + 1} Λ]).map (((verdierDual Λ a).rightOp ⋙ verdierDual Λ a).map f))
   · intro h
-    have : IsIso (D((j)^*[A]).map f ≫ D((j)^*[A]).map ((verdierDualDoubleDual A a).app K)) := by
+    have : IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map f ≫ D((j)^*[ModuleCat.{u + 1} Λ]).map
+        ((verdierDualDoubleDual Λ a).app K)) := by
       rw [nat]
       infer_instance
-    exact IsIso.of_isIso_comp_left (D((j)^*[A]).map f) _
+    exact IsIso.of_isIso_comp_left (D((j)^*[ModuleCat.{u + 1} Λ]).map f) _
 
 /-- Blueprint `lem-weil-delta-restriction`: the double-dual morphism restricts. For an open
 immersion `j : W ⟶ Y` and a Verdier exchange `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W`, the morphism `δ_{j^* K}`
 on `W` is an isomorphism if and only if `j^* δ_K` is. Apply the extension-by-zero step to
 `M = j^* K` and the cone step to the counit `j_! j^* K ⟶ K`. -/
 theorem isIso_verdierDualDoubleDual_app_mapDerivedCategory_upperStar_iff
-    {FC : A → A → Type*} {CC : A → Type (u + 1)}
-    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
-    [(CategoryTheory.forget A).ReflectsIsomorphisms]
-    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-    [Etale.UpperStarPreservesFlat A]
-    [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-    (e : D((j)_!open[A]) ⋙ (verdierDual A a).rightOp ≅
-      (verdierDual A b).rightOp ⋙ (R((j)_*[A])).op)
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso ((verdierDualDoubleDual A b).app (D((j)^*[A]).obj K)) ↔
-      IsIso (D((j)^*[A]).map ((verdierDualDoubleDual A a).app K)) := by
-  rw [isIso_verdierDualDoubleDual_app_iff_lowerShriek A a b j e]
-  let q := derivedOpenImmersionLowerShriekUpperStarAdjunction A j
-  have : IsIso (D((j)^*[A]).map (q.counit.app K)) := by
-    have : IsIso (q.unit.app (D((j)^*[A]).obj K) ≫ D((j)^*[A]).map (q.counit.app K)) := by
+    {FC : (ModuleCat.{u + 1} Λ) → (ModuleCat.{u + 1} Λ) → Type*} {CC : (ModuleCat.{u + 1} Λ) → Type
+        (u + 1)}
+    [∀ (P Q : (ModuleCat.{u + 1} Λ)), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1}
+        (ModuleCat.{u + 1} Λ) FC]
+    [(CategoryTheory.forget (ModuleCat.{u + 1} Λ)).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget (ModuleCat.{u + 1} Λ))]
+    [Etale.UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)]
+    [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget (ModuleCat.{u + 1} Λ))]
+    (e : D((j)_!open[ModuleCat.{u + 1} Λ]) ⋙ (verdierDual Λ a).rightOp ≅
+      (verdierDual Λ b).rightOp ⋙ (R((j)_*[ModuleCat.{u + 1} Λ])).op)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((verdierDualDoubleDual Λ b).app (D((j)^*[ModuleCat.{u + 1} Λ]).obj K)) ↔
+      IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualDoubleDual Λ a).app K)) := by
+  rw [isIso_verdierDualDoubleDual_app_iff_lowerShriek Λ a b j e]
+  let q := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j
+  have : IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map (q.counit.app K)) := by
+    have : IsIso (q.unit.app (D((j)^*[ModuleCat.{u + 1} Λ]).obj K) ≫ D((j)^*[ModuleCat.{u + 1}
+        Λ]).map (q.counit.app K)) := by
       rw [q.right_triangle_components K]
       exact IsIso.id _
     exact IsIso.of_isIso_comp_left (q.unit.app _) _
-  exact (isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso (FC := FC) A a j
+  exact (isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso (FC := FC) (ModuleCat.{u + 1} Λ)
+      a j
     (q.counit.app K) this).symm
 end OpenImmersion
 
@@ -195,45 +209,46 @@ section Exchange
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {Y W S : Scheme.{u}} (a : Y ⟶ S) (j : W ⟶ Y) [HasCompactification j] [HasCompactification a]
-  [HasCompactification (j ≫ a)] [(R(a)_![A]).IsLeftAdjoint] [(R(j ≫ a)_![A]).IsLeftAdjoint]
-  [(R(j)_![A]).IsLeftAdjoint]
+  [HasCompactification (j ≫ a)]
 
 /-- Blueprint `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward`: the Verdier
 exchange `𝔻_Y ∘ G ≅ Rj_* ∘ 𝔻_W` as an isomorphism of functors `D(W) ⥤ D(Y)ᵒᵖ`, for any `G ≅ Rj_!`.
 It is built from the tensor–Hom exchange `χ : Rj_* RHom(M, Rj^! N) ≅ RHom(Rj_! M, N)`
 (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`) and `γ : Rj^! ω_Y ≅ ω_W`. -/
 noncomputable def verdierDualLowerShriekIso
-    {G : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (A)) ⥤
-      _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (A))}
-    (χ : RHom(W)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj R(j)^![A] ⋙
-        (Functor.whiskeringRight _ _ _).obj R((j)_*[A]) ≅ (R(j)_![A]).op ⋙ RHom(Y)[A])
-    (γ : (R(j)^![A]).obj (dualizingComplex A a) ≅ dualizingComplex A (j ≫ a))
-    (ι : R(j)_![A] ≅ G) :
-    G ⋙ (verdierDual A a).rightOp ≅
-      (verdierDual A (j ≫ a)).rightOp ⋙ (R((j)_*[A])).op := by
-  let i : ∀ M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (A)),
-      (R((j)_*[A])).obj ((verdierDual A (j ≫ a)).obj (op M)) ≅
-        (verdierDual A a).obj (op (G.obj M)) := fun M ↦
-    (R((j)_*[A])).mapIso
-        ((RHom(W)[A].obj (op M)).mapIso γ.symm) ≪≫
-      (χ.app (op M)).app (dualizingComplex A a) ≪≫
-        (RHom(Y)[A].mapIso (ι.app M).symm.op).app (dualizingComplex A a)
-  have hnat : ∀ {M M' : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (A))}
-      (g : M ⟶ M'), (i M').hom ≫ (verdierDual A a).map (G.map g).op =
-        (R((j)_*[A])).map ((verdierDual A (j ≫ a)).map g.op) ≫ (i M).hom := by
+    {G : _root_.DerivedCategory (Sheaf W.smallEtaleTopology ((ModuleCat.{u + 1} Λ))) ⥤
+      _root_.DerivedCategory (Sheaf Y.smallEtaleTopology ((ModuleCat.{u + 1} Λ)))}
+    (χ : RHom(W)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringLeft _ _ _).obj R(j)^![Λ] ⋙
+        (Functor.whiskeringRight _ _ _).obj R((j)_*[ModuleCat.{u + 1} Λ]) ≅ (R(j)_![ModuleCat.{u +
+            1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ])
+    (γ : (R(j)^![Λ]).obj (dualizingComplex Λ a) ≅ dualizingComplex Λ (j ≫ a))
+    (ι : R(j)_![ModuleCat.{u + 1} Λ] ≅ G) :
+    G ⋙ (verdierDual Λ a).rightOp ≅
+      (verdierDual Λ (j ≫ a)).rightOp ⋙ (R((j)_*[ModuleCat.{u + 1} Λ])).op := by
+  let i : ∀ M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology ((ModuleCat.{u + 1} Λ))),
+      (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ (j ≫ a)).obj (op M)) ≅
+        (verdierDual Λ a).obj (op (G.obj M)) := fun M ↦
+    (R((j)_*[ModuleCat.{u + 1} Λ])).mapIso
+        ((RHom(W)[ModuleCat.{u + 1} Λ].obj (op M)).mapIso γ.symm) ≪≫
+      (χ.app (op M)).app (dualizingComplex Λ a) ≪≫
+        (RHom(Y)[ModuleCat.{u + 1} Λ].mapIso (ι.app M).symm.op).app (dualizingComplex Λ a)
+  have hnat : ∀ {M M' : _root_.DerivedCategory (Sheaf W.smallEtaleTopology ((ModuleCat.{u + 1} Λ)))}
+      (g : M ⟶ M'), (i M').hom ≫ (verdierDual Λ a).map (G.map g).op =
+        (R((j)_*[ModuleCat.{u + 1} Λ])).map ((verdierDual Λ (j ≫ a)).map g.op) ≫ (i M).hom := by
     intro M M' g
-    have h₁ : (verdierDual A (j ≫ a)).map g.op ≫
-        (RHom(W)[A].obj (op M)).map γ.inv =
-        (RHom(W)[A].obj (op M')).map γ.inv ≫
-          (RHom(W)[A].map g.op).app _ :=
-      (((RHom(W)[A]).map g.op).naturality γ.inv).symm
-    have h₂ := congr_app (χ.hom.naturality g.op) (dualizingComplex A a)
-    have h₃ : (RHom(Y)[A].map ((R(j)_![A]).map g).op).app
-          (dualizingComplex A a) ≫
-        (RHom(Y)[A].map (ι.inv.app M).op).app (dualizingComplex A a) =
-        (RHom(Y)[A].map (ι.inv.app M').op).app (dualizingComplex A a) ≫
-          (verdierDual A a).map (G.map g).op := by
+    have h₁ : (verdierDual Λ (j ≫ a)).map g.op ≫
+        (RHom(W)[ModuleCat.{u + 1} Λ].obj (op M)).map γ.inv =
+        (RHom(W)[ModuleCat.{u + 1} Λ].obj (op M')).map γ.inv ≫
+          (RHom(W)[ModuleCat.{u + 1} Λ].map g.op).app _ :=
+      (((RHom(W)[ModuleCat.{u + 1} Λ]).map g.op).naturality γ.inv).symm
+    have h₂ := congr_app (χ.hom.naturality g.op) (dualizingComplex Λ a)
+    have h₃ : (RHom(Y)[ModuleCat.{u + 1} Λ].map ((R(j)_![ModuleCat.{u + 1} Λ]).map g).op).app
+          (dualizingComplex Λ a) ≫
+        (RHom(Y)[ModuleCat.{u + 1} Λ].map (ι.inv.app M).op).app (dualizingComplex Λ a) =
+        (RHom(Y)[ModuleCat.{u + 1} Λ].map (ι.inv.app M').op).app (dualizingComplex Λ a) ≫
+          (verdierDual Λ a).map (G.map g).op := by
       rw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, ← ι.inv.naturality, op_comp,
         Functor.map_comp, NatTrans.comp_app]
       rfl
@@ -256,7 +271,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y W S : Scheme.{u}} (a :
   (j : W ⟶ Y) [HasCompactification j] [HasCompactification a] [HasCompactification (j ≫ a)]
 
 attribute [local instance] derivedBraidedCategory
-
 
 /-- Blueprint `lem-weil-delta-restriction`: the double-dual morphism restricts. For a
 quasi-compact open immersion `j : W ⟶ Y` and finite coefficients `Λ`, `δ_{Lj^* K}` (relative to
@@ -315,8 +329,9 @@ section Proper
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X Y S : Scheme.{u}} (aX : X ⟶ S) (aY : Y ⟶ S) [HasCompactification aX]
-  [HasCompactification aY] [(R(aX)_![A]).IsLeftAdjoint] [(R(aY)_![A]).IsLeftAdjoint] (f : X ⟶ Y)
+  [HasCompactification aY] (f : X ⟶ Y)
 
 attribute [local instance] derivedBraidedCategory
 
@@ -324,18 +339,19 @@ attribute [local instance] derivedBraidedCategory
 `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` (components `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K`), its mate `m` under the
 self-adjunctions of `𝔻_X` and `𝔻_Y` satisfies `Rf_* δ_K ≫ m_{𝔻_X K} = δ_{Rf_* K} ≫ 𝔻_Y α_K`. -/
 theorem map_verdierDualDoubleDual_app_comp_mateEquiv
-    (α : TwoSquare R((f)_*[A]) (verdierDual A aX).rightOp (verdierDual A aY).rightOp
-      (R((f)_*[A])).op)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (R((f)_*[A])).map ((verdierDualDoubleDual A aX).app K) ≫
-        (mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex A aX))
-          (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex A aY)) α).app
-            (op ((verdierDual A aX).obj (op K))) =
-      (verdierDualDoubleDual A aY).app ((R((f)_*[A])).obj K) ≫
-        (verdierDual A aY).map (α.app K) := by
+    (α : TwoSquare R((f)_*[ModuleCat.{u + 1} Λ]) (verdierDual Λ aX).rightOp (verdierDual Λ
+        aY).rightOp
+      (R((f)_*[ModuleCat.{u + 1} Λ])).op)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ aX).app K) ≫
+        (mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex Λ aX))
+          (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex Λ aY)) α).app
+            (op ((verdierDual Λ aX).obj (op K))) =
+      (verdierDualDoubleDual Λ aY).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) ≫
+        (verdierDual Λ aY).map (α.app K) := by
   have := unit_mateEquiv
-    (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex A aX))
-    (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex A aY)) α K
+    (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex Λ aX))
+    (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex Λ aY)) α K
   rw [MonoidalClosed.ihomFlipSelfAdjunction_unit_app,
     MonoidalClosed.ihomFlipSelfAdjunction_unit_app] at this
   exact this
@@ -348,17 +364,19 @@ The coefficient category in `hm` is left to unification, as in
 `AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_iff_of_isIso_mateEquiv`, so that
 both hypotheses elaborate to the same term and the kernel need not compare them. -/
 theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv
-    (α : TwoSquare R((f)_*[A]) (verdierDual A aX).rightOp (verdierDual A aY).rightOp
-      (R((f)_*[A])).op)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [IsIso (α.app K)]
+    (α : TwoSquare R((f)_*[ModuleCat.{u + 1} Λ]) (verdierDual Λ aX).rightOp (verdierDual Λ
+        aY).rightOp
+      (R((f)_*[ModuleCat.{u + 1} Λ])).op)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) [IsIso (α.app
+        K)]
     (hm : IsIso ((mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex _ aX))
       (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex _ aY)) α).app
         (op ((verdierDual _ aX).obj (op K))))) :
-    IsIso ((R((f)_*[A])).map ((verdierDualDoubleDual A aX).app K)) ↔
-      IsIso ((verdierDualDoubleDual A aY).app ((R((f)_*[A])).obj K)) := by
-  rw [← isIso_comp_right_iff ((verdierDualDoubleDual A aY).app _)
-    ((verdierDual A aY).map (α.app K)),
-    ← map_verdierDualDoubleDual_app_comp_mateEquiv A aX aY f α K, isIso_comp_right_iff]
+    IsIso ((R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ aX).app K)) ↔
+      IsIso ((verdierDualDoubleDual Λ aY).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  rw [← isIso_comp_right_iff ((verdierDualDoubleDual Λ aY).app _)
+    ((verdierDual Λ aY).map (α.app K)),
+    ← map_verdierDualDoubleDual_app_comp_mateEquiv Λ aX aY f α K, isIso_comp_right_iff]
 
 end Proper
 

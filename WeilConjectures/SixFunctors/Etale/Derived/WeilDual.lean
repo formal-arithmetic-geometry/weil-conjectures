@@ -190,6 +190,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 namespace Etale
 
@@ -380,22 +381,26 @@ objects, for the datum on `𝔻_X K = RHom(K, ω_X)` induced by `φ_K` and `χ`
 (`AlgebraicGeometry.Etale.derivedHomWeilDatum`) and the twisted contragredient datum
 `φ_{K^∨} ⊗ τ` on `K^∨ ⊗ᴸ T`. -/
 theorem leftDerivedUpperStar_map_verdierDualIsoCoefficientDualTensor_comp {S : Scheme.{u}}
-    {a : X ⟶ S} [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
-    {T : DerivedCategory (Sheaf X.smallEtaleTopology A)} (γ : T ≅ dualizingComplex A a)
-    (hT : IsInvertible T) (φ : L((g)^*[A]).obj K ≅ K) (τ : L((g)^*[A]).obj T ⟶ T)
-    (χ : L((g)^*[A]).obj (dualizingComplex A a) ⟶ dualizingComplex A a)
-    (hγ : L((g)^*[A]).map γ.hom ≫ χ = τ ≫ γ.hom) :
-    L((g)^*[A]).map ((verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K)) ≫
-        ((leftDerivedUpperStarTensorIso A g _ T).hom ≫
-          ((derivedTensor A X).map (contragredientWeilDatum A g φ)).app _ ≫
-            ((derivedTensor A X).obj _).map τ) =
-      derivedHomWeilDatum A g φ χ ≫ (verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K) := by
-  let := leftDerivedUpperStarMonoidal A g
+    {a : X ⟶ S} [HasCompactification a]
+    {T : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (γ : T ≅
+        dualizingComplex Λ a)
+    (hT : IsInvertible T) (φ : L((g)^*[ModuleCat.{u + 1} Λ]).obj K ≅ K) (τ : L((g)^*[ModuleCat.{u +
+        1} Λ]).obj T ⟶ T)
+    (χ : L((g)^*[ModuleCat.{u + 1} Λ]).obj (dualizingComplex Λ a) ⟶ dualizingComplex Λ a)
+    (hγ : L((g)^*[ModuleCat.{u + 1} Λ]).map γ.hom ≫ χ = τ ≫ γ.hom) :
+    L((g)^*[ModuleCat.{u + 1} Λ]).map ((verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K)) ≫
+        ((leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) g _ T).hom ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (contragredientWeilDatum (ModuleCat.{u + 1}
+              Λ) g φ)).app _ ≫
+            ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).map τ) =
+      derivedHomWeilDatum (ModuleCat.{u + 1} Λ) g φ χ ≫ (verdierDualIsoCoefficientDualTensor γ
+          hT).hom.app (op K) := by
+  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) g
   refine Functor.LaxMonoidal.map_hom_comp_eq_ihomComparison_comp_map_comp_pre_comp _ φ χ τ γ hγ
     ((verdierDualIsoCoefficientDualTensor γ hT).app (op K)) (twistedEvaluation T K)
     (whiskerLeft_verdierDualIsoCoefficientDualTensor_hom_app_comp γ hT K) _ ?_
   rw [leftDerivedUpperStarMonoidal_δ]
-  exact map_twistedEvaluation_comp A g φ τ
+  exact map_twistedEvaluation_comp (ModuleCat.{u + 1} Λ) g φ τ
 
 end Datum
 

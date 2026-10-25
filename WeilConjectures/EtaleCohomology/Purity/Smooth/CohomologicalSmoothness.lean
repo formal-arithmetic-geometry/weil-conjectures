@@ -73,7 +73,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
 
-
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
@@ -83,7 +82,7 @@ include d in
 the form of cohomological smoothness that does not yet name the twist; smooth purity
 identifies `ω_f` with `Λ_X(d)[2d]`. -/
 theorem isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
+    DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) := by
   obtain ⟨L, _, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   exact DerivedCategory.isInvertible.of_iso e.symm
     (isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf L hL _)
@@ -106,7 +105,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
+          (dualizingComplex Λ f) ≅
       (rightDerivedUpperShriek Λ f).obj K) :=
   nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
 
@@ -160,7 +159,7 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSep
 dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`. -/
 theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
     [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ constantComplex Λ X) :=
+    Nonempty (dualizingComplex Λ e ≅ constantComplex Λ X) :=
   sorry
 
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the

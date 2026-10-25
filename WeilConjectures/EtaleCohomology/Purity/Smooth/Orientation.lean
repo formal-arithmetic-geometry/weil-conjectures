@@ -79,7 +79,7 @@ noncomputable def affineLineOrientation :
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
           {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧) :=
-  supportedClassMap Λ _ (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+  supportedClassMap Λ _ (shiftSupportedClass Λ _ 2
     (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))
 
 include aY in
@@ -232,14 +232,14 @@ pullback, and so is the boundary of the supported localization triangle
 theorem supportedClassMap_restrictSupportedClass_affineLineOrientation
     [HasInvertibleExponent Λ Y'] (v : Y' ⟶ Y) :
     supportedClassMap Λ _
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _
+        (restrictSupportedClass Λ (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _
           _ (isPullback_zeroLocusSubschemeι_coord v)
           (leftDerivedUpperStarConstantComplexIso Λ (AffineSpace.map (ULift.{u} (Fin 1)) v)).inv
           (((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).commShiftIso
               (2 : ℤ)).app _ ≪≫
             (shiftFunctor _ (2 : ℤ)).mapIso
               (leftDerivedUpperStarTateObjectIso (AffineSpace.map (ULift.{u} (Fin 1)) v) 1))
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+          (shiftSupportedClass Λ _ 2
             (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))) =
       affineLineOrientation Λ Y' := by
   rw [restrictSupportedClass_shiftSupportedClass,
@@ -284,7 +284,7 @@ theorem restrictAffineLineZeroLocusHom_affineLineOrientation [HasInvertibleExpon
     restrictAffineLineZeroLocusHom Λ v (affineLineOrientation Λ Y) =
       affineLineOrientation Λ Y' := by
   have h : (supportedClassMapEquiv Λ _ _).symm (affineLineOrientation Λ Y) =
-      shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))) :=
     (Equiv.symm_apply_eq _).2 rfl
   rw [restrictAffineLineZeroLocusHom, restrictSupportedHom, h]

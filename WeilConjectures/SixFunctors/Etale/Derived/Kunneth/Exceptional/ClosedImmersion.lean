@@ -130,23 +130,26 @@ is, up to the projection formula, the supported localization triangle of `M` ten
 `N`. -/
 theorem isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion {Z X U : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [HasCompactification i]
-    [(R(i)_![A]).IsLeftAdjoint] [IsIso (projectionMap A i)] [IsOpenImmersion j]
+ [IsIso (projectionMap (ModuleCat.{u + 1} Λ) i)] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (h : ∀ (D : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (n : ℤ),
-      Subsingleton (((R(i)_![A]).obj D)⟦n⟧ ⟶
-        ((derivedTensor A X).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj M))).obj N)) :
+    (M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (h : ∀ (D : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ),
+      Subsingleton (((R(i)_![ModuleCat.{u + 1} Λ]).obj D)⟦n⟧ ⟶
+        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
+            ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M))).obj N)) :
     IsIso (rightDerivedUpperShriekTensorMap i M N) := by
-  have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i
-  have : IsIso (rightDerivedUpperShriekAdjunction A i).unit := NatIso.isIso_of_isIso_app _
-  have hT := ((derivedTensor A X).flip.obj N).map_distinguished _
-    (supportedLocalizationTriangle_mem_distTriang A i j hij M)
-  let e : (R(i)_![A]).obj ((R(i)^![A]).obj M ⊗ (L((i)^*[A])).obj N) ≅
-      ((derivedTensor A X).flip.obj N).obj ((R(i)_![A]).obj ((R(i)^![A]).obj M)) :=
-    (asIso (((projectionMap A i).app ((R(i)^![A]).obj M)).app N)).symm
+  have := isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ i).unit := NatIso.isIso_of_isIso_app _
+  have hT := ((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj N).map_distinguished _
+    (supportedLocalizationTriangle_mem_distTriang Λ i j hij M)
+  let e : (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M ⊗ (L((i)^*[ModuleCat.{u + 1} Λ])).obj
+      N) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj N).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
+          ((R(i)^![Λ]).obj M)) :=
+    (asIso (((projectionMap (ModuleCat.{u + 1} Λ) i).app ((R(i)^![Λ]).obj M)).app N)).symm
   refine Pretriangulated.isIso_of_distTriang_of_subsingleton
-    (rightDerivedUpperShriekAdjunction A i)
-    (rightDerivedUpperShriekAdjunction A i).fullyFaithfulLOfIsIsoUnit hT h
+    (rightDerivedUpperShriekAdjunction Λ i)
+    (rightDerivedUpperShriekAdjunction Λ i).fullyFaithfulLOfIsIsoUnit hT h
     (rightDerivedUpperShriekTensorMap i M N) e ?_
   rw [Adjunction.homEquiv_counit]
   erw [Adjunction.map_projectionTensorMap_comp_counit]
@@ -249,7 +252,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isClosedImmersion
   have hdisj : Disjoint (Set.range iW.base) (Set.range (pullback.snd j q).base) := by
     rw [range_eq_compl_range_pullback_snd i sqZ]
     exact disjoint_compl_left
-  have := isIso_rightDerivedUpperShriekAdjunction_unit_app (ModuleCat.{u + 1} Λ) iW
+  have := isIso_rightDerivedUpperShriekAdjunction_unit_app Λ iW
   have : IsIso (rightDerivedUpperShriekAdjunction Λ iW).unit :=
     NatIso.isIso_of_isIso_app _
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sqZ

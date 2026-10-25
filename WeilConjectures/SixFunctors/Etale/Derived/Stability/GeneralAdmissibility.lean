@@ -214,7 +214,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion_of_ope
       _root_.DerivedCategory.homologyConcentratedIn a (b + e + 1)
         ((R(i)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
-  have hT := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i j hij K
+  have hT := supportedLocalizationTriangle_mem_distTriang Λ i j hij K
   obtain ⟨hMbc, hMc⟩ := boundedConstructible_rightDerivedLowerStar_of_openComplementBound Λ hj
     (boundedConstructible_leftDerivedUpperStar _ j hK)
     (homologyConcentratedIn_of_iso _ ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app K).symm
@@ -255,7 +255,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
   obtain ⟨hMbc, hMc⟩ := boundedConstructible_rightDerivedLowerStar_of_openComplementBound Λ hj
     hbc' hc'
   exact constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
-    (ModuleCat.{u + 1} Λ) i j hij (by lia : b ≤ b + e) ⟨⟨hbc, hc⟩, ht⟩
+    Λ i j hij (by lia : b ≤ b + e) ⟨⟨hbc, hc⟩, ht⟩
     ⟨⟨hMbc, hMc⟩, hjt a b _ ⟨⟨hbc', hc'⟩, ht'⟩⟩ (fun L ↦ hasProjectionFormula_of_finite Λ i _ L)
 
 end ClosedImmersion
@@ -387,7 +387,7 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     have : HasCompactification (U i : X.Opens).ι :=
       (Compactification.ofIsOpenImmersion _).hasCompactification
     obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U i : X.Opens).ι f
-    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) (hc i)
+    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ (hc i)
     exact ⟨Functor.isoWhiskerLeft _
       (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ (U i : X.Opens).ι).symm ≪≫ e₁.symm ≪≫
         e₂.symm⟩

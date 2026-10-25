@@ -62,6 +62,7 @@ open Scheme ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 namespace ProEtale
 
@@ -88,22 +89,23 @@ noncomputable def cohomology (i : ℤ) :
 scoped notation "H(" X ")[" A "](" i ")" => cohomology A X i
 
 variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
-  [Etale.HasBoundedBelowUpperShriek A a]
+  [CompactSpace Y]
 
 /-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
 
 The dualizing complex `ω_{X,Λ} = Ra_X^! Λ` of a scheme `X` with structure morphism
 `a_X : X ⟶ Y`, the exceptional inverse image of the constant sheaf `Λ_Y = 𝟙_ D(Y_proét)`. -/
-noncomputable def dualizingComplex : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (R(a)^![A]).obj (𝟙_ _)
+noncomputable def dualizingComplex : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u
+    + 1} Λ)) :=
+  (R(a)^![Λ]).obj (𝟙_ _)
 
 /-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
 
 The Verdier dual `𝔻_X K = RHom_{Λ_X}(K, ω_{X,Λ})` on `D(X_proét)`. -/
 noncomputable def verdierDual :
-    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (RHom(X)[A]).flip.obj (dualizingComplex A a)
+    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))ᵒᵖ ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
+  (RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj (dualizingComplex Λ a)
 
 end ProEtale
 

@@ -238,10 +238,10 @@ variable [Finite Λ] {X Y Z : Scheme.{u}}
 (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`). -/
 theorem nonempty_dualizingComplex_comp_iso_of_isIso (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
-    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex (ModuleCat.{u + 1} Λ) b))) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) a)).obj
-        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) b))) := by
+    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b))) :
+    Nonempty (dualizingComplex Λ h ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ a)).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ b))) := by
   obtain ⟨E, -, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   exact ⟨(Adjunction.rightAdjointUniq
     ((rightDerivedUpperShriekAdjunction _ h).ofNatIsoLeft (E a b h w))
@@ -254,10 +254,10 @@ at `ω_b` and `ω_a ≅ Λ_X`, then `ω_h ≅ La^* ω_b`. -/
 theorem nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar (a : X ⟶ Y) (b : Y ⟶ Z)
     (h : X ⟶ Z) (w : a ≫ b = h) [HasCompactification a] [HasCompactification b]
     [HasCompactification h]
-    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex (ModuleCat.{u + 1} Λ) b)))
-    (hωa : Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) a ≅ 𝟙_ _)) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      (L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) b)) := by
+    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b)))
+    (hωa : Nonempty (dualizingComplex Λ a ≅ 𝟙_ _)) :
+    Nonempty (dualizingComplex Λ h ≅
+      (L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ b)) := by
   obtain ⟨e⟩ := nonempty_dualizingComplex_comp_iso_of_isIso Λ a b h w ha
   obtain ⟨e'⟩ := hωa
   exact ⟨e ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e').app _ ≪≫
@@ -267,10 +267,10 @@ theorem nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar (a : X ⟶ Y) (b
 at `ω_b` and `ω_b ≅ Λ_Y`, then `ω_h ≅ ω_a`. -/
 theorem nonempty_dualizingComplex_comp_iso_of_unit (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
-    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex (ModuleCat.{u + 1} Λ) b)))
-    (hωb : Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) b ≅ 𝟙_ _)) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a) := by
+    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b)))
+    (hωb : Nonempty (dualizingComplex Λ b ≅ 𝟙_ _)) :
+    Nonempty (dualizingComplex Λ h ≅
+      dualizingComplex Λ a) := by
   obtain ⟨e⟩ := nonempty_dualizingComplex_comp_iso_of_isIso Λ a b h w ha
   obtain ⟨e'⟩ := hωb
   exact ⟨e ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso
@@ -283,7 +283,7 @@ if `θ_a` is invertible at every object, `ω_b` is invertible and `θ_b` is inve
 theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
     (ha : ∀ P, IsIso (dualizingComplexTensorMap Λ a P))
-    (hω : DerivedCategory.isInvertible Λ Y (dualizingComplex (ModuleCat.{u + 1} Λ) b))
+    (hω : DerivedCategory.isInvertible Λ Y (dualizingComplex Λ b))
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hb : IsIso (dualizingComplexTensorMap Λ b K)) :
     IsIso (dualizingComplexTensorMap Λ h K) := by
@@ -301,7 +301,7 @@ theorem isIso_dualizingComplexTensorMap_of_jointlySurjective {ι : Type u} {U : 
     (hu : ∀ x : X, ∃ (i : ι) (y : U i), (u i).base y = x) [∀ i, HasCompactification (u i)]
     (f : X ⟶ Y) [HasCompactification f] [∀ i, HasCompactification (u i ≫ f)]
     (hθ : ∀ i P, IsIso (dualizingComplexTensorMap Λ (u i) P))
-    (hω : ∀ i, DerivedCategory.isInvertible Λ (U i) (dualizingComplex (ModuleCat.{u + 1} Λ) (u i)))
+    (hω : ∀ i, DerivedCategory.isInvertible Λ (U i) (dualizingComplex Λ (u i)))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : ∀ i, IsIso (dualizingComplexTensorMap Λ (u i ≫ f) K)) :
     IsIso (dualizingComplexTensorMap Λ f K) := by

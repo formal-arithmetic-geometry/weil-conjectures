@@ -56,7 +56,7 @@ isomorphism `γ : T[2d] ≅ ω_X`, a Weil datum `τ` on `T`, and the pairing
 `AlgebraicGeometry.Etale.poincarePairing`. -/
 theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h)
     {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a) {K : DerivedCategoryModule Λ X}
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (τ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj T ⟶ T)
     (ψ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor _ X).obj

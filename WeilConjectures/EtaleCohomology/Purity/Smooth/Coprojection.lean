@@ -58,12 +58,13 @@ universe u'
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- The co-projection `Rf^! (K ⊗ᴸ L) ≅ Rf^! K ⊗ᴸ Lf^* L`, natural in `K ∈ D(Y_ét)`, for an
 object `L` of `D(Y_ét)` with a two-sided tensor inverse `M` (`e : M ⊗ᴸ L ≅ 𝟙_`,
@@ -75,17 +76,22 @@ object `M` is dualizable, so the projection formula identifies these two left ad
 induced isomorphism of right adjoints
 (`CategoryTheory.Adjunction.tensorRightCompIsoOfTensorIso`). -/
 noncomputable def derivedTensorRightCompRightDerivedUpperShriekIsoOfTensorIso
-    (L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
-    (e : ((derivedTensor A Y).obj M).obj L ≅ 𝟙_ _)
-    (e' : ((derivedTensor A Y).obj L).obj M ≅ 𝟙_ _) :
-    derivedTensorRight A Y L ⋙ R(f)^![A] ≅
-      R(f)^![A] ⋙ derivedTensorRight A X ((L((f)^*[A])).obj L) :=
-  letI := leftDerivedUpperStarMonoidal A f
-  have : ∀ K, IsIso ((((flipFunctor _ _ _).map (projectionMap A f)).app M).app K) :=
-    fun K ↦ hasProjectionFormula_of_isDualizable A f K (isDualizable_of_tensorIso e e')
-  have := NatIso.isIso_of_isIso_app (((flipFunctor _ _ _).map (projectionMap A f)).app M)
-  (rightDerivedUpperShriekAdjunction A f).tensorRightCompIsoOfTensorIso (L((f)^*[A])) e e'
-    (asIso (((flipFunctor _ _ _).map (projectionMap A f)).app M))
+    (L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (e : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj L ≅ 𝟙_ _)
+    (e' : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj L).obj M ≅ 𝟙_ _) :
+    derivedTensorRight (ModuleCat.{u + 1} Λ) Y L ⋙ R(f)^![Λ] ≅
+      R(f)^![Λ] ⋙ derivedTensorRight (ModuleCat.{u + 1} Λ) X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L)
+          :=
+  letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) f
+  have : ∀ K, IsIso ((((flipFunctor _ _ _).map (projectionMap (ModuleCat.{u + 1} Λ) f)).app M).app
+      K) :=
+    fun K ↦ hasProjectionFormula_of_isDualizable (ModuleCat.{u + 1} Λ) f K
+        (isDualizable_of_tensorIso e e')
+  have := NatIso.isIso_of_isIso_app (((flipFunctor _ _ _).map (projectionMap (ModuleCat.{u + 1} Λ)
+      f)).app M)
+  (rightDerivedUpperShriekAdjunction Λ f).tensorRightCompIsoOfTensorIso (L((f)^*[ModuleCat.{u + 1}
+      Λ])) e e'
+    (asIso (((flipFunctor _ _ _).map (projectionMap (ModuleCat.{u + 1} Λ) f)).app M))
 
 end General
 

@@ -38,6 +38,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
@@ -282,11 +283,13 @@ finite type over `k`, this is `AlgebraicGeometry.Etale.constructibleFiniteTor_ve
 the restriction is an anti-equivalence is
 `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`. -/
 noncomputable def DerivedCategoryFiniteTor.verdierDual {S : Scheme.{u}} (a : X ⟶ S)
-    [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
-    (h : ∀ ⦃K⦄, constructibleFiniteTor A X K →
-      constructibleFiniteTor A X ((Etale.verdierDual A a).obj (op K))) :
-    (DerivedCategoryFiniteTor A X)ᵒᵖ ⥤ DerivedCategoryFiniteTor A X :=
-  ObjectProperty.lift _ ((DerivedCategoryFiniteTor.ι A X).op ⋙ Etale.verdierDual A a)
+    [HasCompactification a]
+    (h : ∀ ⦃K⦄, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((Etale.verdierDual Λ a).obj (op K))) :
+    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ⥤ DerivedCategoryFiniteTor (ModuleCat.{u +
+        1} Λ) X :=
+  ObjectProperty.lift _ ((DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X).op ⋙ Etale.verdierDual
+      Λ a)
     fun K ↦ h K.unop.property
 
 end Functors

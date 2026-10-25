@@ -44,6 +44,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {X U Z Z' V V' : Scheme.{u}}
 
@@ -68,58 +69,65 @@ of `L'` [BBD, 1.1.9]; its outer components are `ψ` and the base change map, bot
 by the commutation of the adjacent squares. -/
 theorem supportedLocalizationBoundary_baseChange (e : U ⟶ X) (i : Z ⟶ X) (j : V ⟶ X)
     (i' : Z' ⟶ U) (j' : V' ⟶ U) (g : Z' ⟶ Z) (e₁ : V' ⟶ V)
-    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
-    [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint] [IsOpenImmersion j']
+    [IsClosedImmersion i] [IsOpenImmersion j]
+    [IsClosedImmersion i'] [IsOpenImmersion j']
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (hij' : Set.range i'.base = (Set.range j'.base)ᶜ)
     (hg : IsPullback g i' i e) (sq : CommSq e₁ j' j e)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf U.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
-    (L((e)^*[A])).map (supportedLocalizationBoundary A i j hij L) ≫
-        ((L((e)^*[A])).commShiftIso (1 : ℤ)).hom.app _ ≫
-          (supportedRestriction A e i i' g hg L L' τ)⟦(1 : ℤ)⟧' =
-      (derivedBaseChangeMap A sq).app _ ≫
-        (R((j')_*[A])).map ((derivedSquareUpperStarIso A sq).inv.app L ≫
-          (L((j')^*[A])).map τ.hom) ≫
-          supportedLocalizationBoundary A i' j' hij' L' := by
-  set T₁ := (L((e)^*[A])).mapTriangle.obj
-    (supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L))
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (τ :
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :
+    (L((e)^*[ModuleCat.{u + 1} Λ])).map (supportedLocalizationBoundary Λ i j hij L) ≫
+        ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _ ≫
+          (supportedRestriction Λ e i i' g hg L L' τ)⟦(1 : ℤ)⟧' =
+      (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app _ ≫
+        (R((j')_*[ModuleCat.{u + 1} Λ])).map ((derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ)
+            sq).inv.app L ≫
+          (L((j')^*[ModuleCat.{u + 1} Λ])).map τ.hom) ≫
+          supportedLocalizationBoundary Λ i' j' hij' L' := by
+  set T₁ := (L((e)^*[ModuleCat.{u + 1} Λ])).mapTriangle.obj
+    (supportedLocalizationTriangle Λ i j L (supportedLocalizationBoundary Λ i j hij L))
   have hT₁ : T₁ ∈ distTriang _ :=
-    (L((e)^*[A])).map_distinguished _ (supportedLocalizationTriangle_mem_distTriang A i j hij L)
-  have hT₂ := supportedLocalizationTriangle_mem_distTriang A i' j' hij' L'
+    (L((e)^*[ModuleCat.{u + 1} Λ])).map_distinguished _
+        (supportedLocalizationTriangle_mem_distTriang Λ i j hij L)
+  have hT₂ := supportedLocalizationTriangle_mem_distTriang Λ i' j' hij' L'
   -- the pulled back supported term vanishes on `V'`
-  have hz : IsZero ((L((j')^*[A])).obj T₁.obj₁) :=
-    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i j
+  have hz : IsZero ((L((j')^*[ModuleCat.{u + 1} Λ])).obj T₁.obj₁) :=
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) i j
       (by rw [hij]; exact disjoint_compl_left) (j' ≫ e)
       (by rintro _ ⟨x, rfl⟩; exact ⟨e₁ x, by rw [← sq.w]; simp⟩) _).of_iso
-        ((leftDerivedUpperStarComp A j' e).app _).symm
-  have hz₁ (n : ℤ) : IsZero ((L((j')^*[A])).obj (T₁.obj₁⟦n⟧)) :=
-    ((shiftFunctor _ n).map_isZero hz).of_iso (((L((j')^*[A])).commShiftIso n).app _)
-  have : Subsingleton (T₁.obj₁⟦(1 : ℤ)⟧ ⟶ (supportedLocalizationTriangle A i' j' L'
-      (supportedLocalizationBoundary A i' j' hij' L')).obj₃) :=
-    subsingleton_hom_rightDerivedLowerStar_of_isZero A j' (hz₁ 1) _
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) j' e).app _).symm
+  have hz₁ (n : ℤ) : IsZero ((L((j')^*[ModuleCat.{u + 1} Λ])).obj (T₁.obj₁⟦n⟧)) :=
+    ((shiftFunctor _ n).map_isZero hz).of_iso (((L((j')^*[ModuleCat.{u + 1} Λ])).commShiftIso n).app
+        _)
+  have : Subsingleton (T₁.obj₁⟦(1 : ℤ)⟧ ⟶ (supportedLocalizationTriangle Λ i' j' L'
+      (supportedLocalizationBoundary Λ i' j' hij' L')).obj₃) :=
+    subsingleton_hom_rightDerivedLowerStar_of_isZero (ModuleCat.{u + 1} Λ) j' (hz₁ 1) _
   -- the middle component `τ` extends to a morphism of triangles
   obtain ⟨φ, hφ⟩ := exists_triangleHom_of_comp_eq_zero hT₁ hT₂ τ.hom
-    (@Subsingleton.elim _ (subsingleton_hom_rightDerivedLowerStar_of_isZero A j' hz _) _ _)
+    (@Subsingleton.elim _ (subsingleton_hom_rightDerivedLowerStar_of_isZero (ModuleCat.{u + 1} Λ) j'
+        hz _) _ _)
   -- its first component is the restriction of supports
-  have h₁ : φ.hom₁ = supportedRestriction A e i i' g hg L L' τ :=
-    (existsUnique_supportedRestriction A e i i' g hg L L' τ).unique
+  have h₁ : φ.hom₁ = supportedRestriction Λ e i i' g hg L L' τ :=
+    (existsUnique_supportedRestriction Λ e i i' g hg L L' τ).unique
       (by have h := φ.comm₁; rw [hφ] at h; exact h.symm)
-      (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec
+      (existsUnique_supportedRestriction Λ e i i' g hg L L' τ).exists.choose_spec
   -- its last component is the base change map
-  have h₃ : φ.hom₃ = (derivedBaseChangeMap A sq).app _ ≫
-      (R((j')_*[A])).map ((derivedSquareUpperStarIso A sq).inv.app L ≫
-        (L((j')^*[A])).map τ.hom) := by
+  have h₃ : φ.hom₃ = (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app _ ≫
+      (R((j')_*[ModuleCat.{u + 1} Λ])).map ((derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ)
+          sq).inv.app L ≫
+        (L((j')^*[ModuleCat.{u + 1} Λ])).map τ.hom) := by
     refine Triangle.cancel_mor₂_of_subsingleton hT₁ ?_
     rw [φ.comm₂, hφ]
-    change τ.hom ≫ (derivedUpperStarLowerStarAdjunction A j').unit.app L' =
-      (L((e)^*[A])).map ((derivedUpperStarLowerStarAdjunction A j).unit.app L) ≫ _
+    change τ.hom ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j').unit.app L' =
+      (L((e)^*[ModuleCat.{u + 1} Λ])).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1}
+          Λ) j).unit.app L) ≫ _
     erw [map_unit_derivedBaseChangeMap_app_assoc]
     simp only [Functor.id_obj, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
-    exact ((derivedUpperStarLowerStarAdjunction A j').unit.naturality τ.hom)
+    exact ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j').unit.naturality τ.hom)
   have h := φ.comm₃
   rw [h₁, h₃] at h
-  change ((L((e)^*[A])).map _ ≫ _) ≫ _ = _ at h
+  change ((L((e)^*[ModuleCat.{u + 1} Λ])).map _ ≫ _) ≫ _ = _ at h
   simp only [Category.assoc] at h
   exact h
 
@@ -203,14 +211,16 @@ Le^* (Ri_! Ri^! L) ──ψ──▶ Ri'_! Ri'^! L'
 -/
 @[reassoc]
 lemma supportedRestriction_comp_counit (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
-    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
-    [(R(i')_![A]).IsLeftAdjoint] (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
-    (L : DerivedCategory (Sheaf X₀.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf U₁.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
-    supportedRestriction A e i i' g hg L L' τ ≫
-        (rightDerivedUpperShriekAdjunction A i').counit.app L' =
-      (L((e)^*[A])).map ((rightDerivedUpperShriekAdjunction A i).counit.app L) ≫ τ.hom :=
-  (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec
+    [IsClosedImmersion i] [IsClosedImmersion i']
+ (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
+    (L : DerivedCategory (Sheaf X₀.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf U₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (τ :
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :
+    supportedRestriction Λ e i i' g hg L L' τ ≫
+        (rightDerivedUpperShriekAdjunction Λ i').counit.app L' =
+      (L((e)^*[ModuleCat.{u + 1} Λ])).map ((rightDerivedUpperShriekAdjunction Λ i).counit.app L) ≫
+          τ.hom :=
+  (existsUnique_supportedRestriction Λ e i i' g hg L L' τ).exists.choose_spec
 
 omit [HasSmallSiteSheafify A] in
 /-- The pullback along `e` of an object supported on `Z` is supported on the base change `Z'`:
@@ -231,45 +241,49 @@ lemma isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_rightDeriv
   rw [Scheme.range_snd_of_isPullback hg]
   exact ⟨z, hx.symm⟩
 
-omit [HasSmallSiteSheafify A] in
+omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- **Restriction of supports commutes with shifts.** Restricting the class
 `γ : K ⟶ Ri_! Ri^! (L[n])` read from a degree-`n` class `γ : K ⟶ (Ri_! Ri^! L)[n]`
 (`AlgebraicGeometry.Etale.shiftSupportedClass`) along `e` is the same as restricting `γ` in
 degree `n` and reading the result as a class with coefficients `L'[n]`. -/
 lemma restrictSupportedClass_shiftSupportedClass (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
-    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
-    [(R(i')_![A]).IsLeftAdjoint] (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
-    {K L : DerivedCategory (Sheaf X₀.smallEtaleTopology A)}
-    {K' L' : DerivedCategory (Sheaf U₁.smallEtaleTopology A)}
-    (σ : K' ⟶ (L((e)^*[A])).obj K) (τ : (L((e)^*[A])).obj L ≅ L') (n : ℤ)
-    (γ : K ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦n⟧) :
-    restrictSupportedClass A e i i' g hg σ
-        (((L((e)^*[A])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ)
-        (shiftSupportedClass A i n γ) =
-      shiftSupportedClass A i' n (σ ≫ (L((e)^*[A])).map γ ≫
-        ((L((e)^*[A])).commShiftIso n).hom.app _ ≫
-          (supportedRestriction A e i i' g hg L L' τ)⟦n⟧') := by
-  have := (rightDerivedUpperShriekAdjunction A i).commShift_of_leftAdjoint ℤ
-  have := (rightDerivedUpperShriekAdjunction A i').commShift_of_leftAdjoint ℤ
-  have hz : IsZero ((L((i'.openComplement.ι)^*[A])).obj ((L((e)^*[A])).obj
-      (((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦n⟧))) := by
+    [IsClosedImmersion i] [IsClosedImmersion i']
+ (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
+    {K L : DerivedCategory (Sheaf X₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {K' L' : DerivedCategory (Sheaf U₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K) (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅
+        L') (n : ℤ)
+    (γ : K ⟶ ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦n⟧) :
+    restrictSupportedClass Λ e i i' g hg σ
+        (((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ)
+        (shiftSupportedClass Λ i n γ) =
+      shiftSupportedClass Λ i' n (σ ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map γ ≫
+        ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso n).hom.app _ ≫
+          (supportedRestriction Λ e i i' g hg L L' τ)⟦n⟧') := by
+  have := (rightDerivedUpperShriekAdjunction Λ i).commShift_of_leftAdjoint ℤ
+  have := (rightDerivedUpperShriekAdjunction Λ i').commShift_of_leftAdjoint ℤ
+  have hz : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj ((L((e)^*[ModuleCat.{u +
+      1} Λ])).obj
+      (((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦n⟧))) := by
     refine ((shiftFunctor _ n).map_isZero
       (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_rightDerivedLowerShriek
-        A e i i' g hg ((R(i)^![A]).obj L))).of_iso ?_
-    exact (L((i'.openComplement.ι)^*[A])).mapIso (((L((e)^*[A])).commShiftIso n).app _) ≪≫
-      ((L((i'.openComplement.ι)^*[A])).commShiftIso n).app _
-  have key : (L((e)^*[A])).map (((R(i)_![A]).commShiftIso n).inv.app _ ≫
-        (R(i)_![A]).map (((R(i)^![A]).commShiftIso n).inv.app L)) ≫
-        supportedRestriction A e i i' g hg (L⟦n⟧) (L'⟦n⟧)
-          (((L((e)^*[A])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ) =
-      ((L((e)^*[A])).commShiftIso n).hom.app _ ≫
-        (supportedRestriction A e i i' g hg L L' τ)⟦n⟧' ≫
-          ((R(i')_![A]).commShiftIso n).inv.app _ ≫
-            (R(i')_![A]).map (((R(i')^![A]).commShiftIso n).inv.app L') := by
-    refine (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+        (ModuleCat.{u + 1} Λ) e i i' g hg ((R(i)^![Λ]).obj L))).of_iso ?_
+    exact (L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).mapIso (((L((e)^*[ModuleCat.{u + 1}
+        Λ])).commShiftIso n).app _) ≪≫
+      ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).commShiftIso n).app _
+  have key : (L((e)^*[ModuleCat.{u + 1} Λ])).map (((R(i)_![ModuleCat.{u + 1} Λ]).commShiftIso
+      n).inv.app _ ≫
+        (R(i)_![ModuleCat.{u + 1} Λ]).map (((R(i)^![Λ]).commShiftIso n).inv.app L)) ≫
+        supportedRestriction Λ e i i' g hg (L⟦n⟧) (L'⟦n⟧)
+          (((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ) =
+      ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso n).hom.app _ ≫
+        (supportedRestriction Λ e i i' g hg L L' τ)⟦n⟧' ≫
+          ((R(i')_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.app _ ≫
+            (R(i')_![ModuleCat.{u + 1} Λ]).map (((R(i')^![Λ]).commShiftIso n).inv.app L') := by
+    refine (existsUnique_comp_counit_of_isZero Λ i' i'.openComplement.ι
       i'.range_eq_compl_range_openComplement_ι hz _).unique ?_ rfl
-    have h₁ := (rightDerivedUpperShriekAdjunction A i).commShiftIso_inv_app_counit_app ℤ n L
-    have h₂ := (rightDerivedUpperShriekAdjunction A i').commShiftIso_inv_app_counit_app ℤ n L'
+    have h₁ := (rightDerivedUpperShriekAdjunction Λ i).commShiftIso_inv_app_counit_app ℤ n L
+    have h₂ := (rightDerivedUpperShriekAdjunction Λ i').commShiftIso_inv_app_counit_app ℤ n L'
     simp only [Functor.commShiftIso_comp_inv_app, Category.assoc] at h₁ h₂
     rw [Category.assoc, supportedRestriction_comp_counit, ← Functor.map_comp_assoc,
       Category.assoc, h₁, Category.assoc, Category.assoc, Category.assoc, h₂,

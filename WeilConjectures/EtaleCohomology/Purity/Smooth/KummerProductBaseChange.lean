@@ -301,10 +301,10 @@ lemma restrictSupportedClass_comp_eqToHom (e : U' ⟶ U) {Z Z' : Scheme.{u}} (i 
     (hg : IsPullback g i' i e) {k k' : ℤ} (h : k = k')
     (γ : constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj ((tateObject Λ U k)⟦2 * k⟧))) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e k')
         (γ ≫ eqToHom (by rw [h])) =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+      restrictSupportedClass Λ e i i' g hg
           (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e k)
           γ ≫ eqToHom (by rw [h]) := by
   subst h
@@ -340,7 +340,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct (e : U' ⟶ U) :
       (g : U'.zeroLocusSubscheme (Set.range f') ⟶ U.zeroLocusSubscheme (Set.range f))
       (hg : IsPullback g (U'.zeroLocusSubschemeι (Set.range f'))
         (U.zeroLocusSubschemeι (Set.range f)) e),
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) e _ _ g hg
+      restrictSupportedClass Λ e _ _ g hg
           (leftDerivedUpperStarConstantComplexIso Λ e).inv
           (leftDerivedUpperStarTateShiftIso Λ e n) (kummerBoundaryProduct Λ f) =
         kummerBoundaryProduct Λ f'

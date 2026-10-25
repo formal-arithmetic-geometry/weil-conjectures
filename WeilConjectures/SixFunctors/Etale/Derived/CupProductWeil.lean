@@ -35,6 +35,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [Etale.UpperStarPreservesFlat A]
@@ -131,35 +132,48 @@ lemma projectionMap_exchange (sq : CommSq g a a h)
 compatible with the projection maps (hypothesis `hEx`), the cup product intertwines
 `Ex ≫ Ra_!(φ ⊗ ψ)` and `(Ex ≫ Ra_! φ) ⊗ (Ex_* ≫ Ra_* ψ)`. -/
 theorem mixedSupportCupProduct_exchange (sq : CommSq g a a h)
-    (Ex : R(a)_![A] ⋙ L((h)^*[A]) ⟶ L((g)^*[A]) ⋙ R(a)_![A])
-    (hEx : ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
-      (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)),
-      L((h)^*[A]).map (((projectionMap A a).app K).app M) ≫
-          Ex.app (((derivedTensor A X).obj K).obj (L((a)^*[A]).obj M)) ≫
-          (R(a)_![A]).map (((leftDerivedUpperStarTensorComparison A g).app K).app
-            (L((a)^*[A]).obj M)) ≫
-          (R(a)_![A]).map (((derivedTensor A X).obj (L((g)^*[A]).obj K)).map
-            (derivedSquareUpperStarIsoInvApp A sq M)) =
-        ((leftDerivedUpperStarTensorComparison A h).app ((R(a)_![A]).obj K)).app M ≫
-          ((derivedTensor A Y).map (Ex.app K)).app (L((h)^*[A]).obj M) ≫
-          ((projectionMap A a).app (L((g)^*[A]).obj K)).app (L((h)^*[A]).obj M))
-    (K L : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (φ : (L((g)^*[A])).obj K ⟶ K) (ψ : (L((g)^*[A])).obj L ⟶ L) :
-    (L((h)^*[A])).map (mixedSupportCupProduct A a K L) ≫
-        (Ex.app (((derivedTensor A X).obj K).obj L) ≫
-          (R(a)_![A]).map ((leftDerivedUpperStarTensorIso A g K L).hom ≫
-            ((derivedTensor A X).map φ).app _ ≫ ((derivedTensor A X).obj K).map ψ)) =
-      ((leftDerivedUpperStarTensorIso A h ((R(a)_![A]).obj K) ((R((a)_*[A])).obj L)).hom ≫
-          ((derivedTensor A Y).map (Ex.app K ≫ (R(a)_![A]).map φ)).app _ ≫
-          ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map
-            ((derivedBaseChangeMap A sq).app L ≫ (R((a)_*[A])).map ψ)) ≫
-        mixedSupportCupProduct A a K L := by
+    (Ex : R(a)_![ModuleCat.{u + 1} Λ] ⋙ L((h)^*[ModuleCat.{u + 1} Λ]) ⟶ L((g)^*[ModuleCat.{u + 1}
+        Λ]) ⋙ R(a)_![ModuleCat.{u + 1} Λ])
+    (hEx : ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (M : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      L((h)^*[ModuleCat.{u + 1} Λ]).map (((projectionMap (ModuleCat.{u + 1} Λ) a).app K).app M) ≫
+          Ex.app (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj (L((a)^*[ModuleCat.{u + 1}
+              Λ]).obj M)) ≫
+          (R(a)_![ModuleCat.{u + 1} Λ]).map (((leftDerivedUpperStarTensorComparison (ModuleCat.{u +
+              1} Λ) g).app K).app
+            (L((a)^*[ModuleCat.{u + 1} Λ]).obj M)) ≫
+          (R(a)_![ModuleCat.{u + 1} Λ]).map (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+              (L((g)^*[ModuleCat.{u + 1} Λ]).obj K)).map
+            (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq M)) =
+        ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ) h).app ((R(a)_![ModuleCat.{u +
+            1} Λ]).obj K)).app M ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map (Ex.app K)).app (L((h)^*[ModuleCat.{u + 1}
+              Λ]).obj M) ≫
+          ((projectionMap (ModuleCat.{u + 1} Λ) a).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj K)).app
+              (L((h)^*[ModuleCat.{u + 1} Λ]).obj M))
+    (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) (ψ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj L ⟶ L)
+        :
+    (L((h)^*[ModuleCat.{u + 1} Λ])).map (mixedSupportCupProduct Λ a K L) ≫
+        (Ex.app (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) ≫
+          (R(a)_![ModuleCat.{u + 1} Λ]).map ((leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) g
+              K L).hom ≫
+            ((derivedTensor (ModuleCat.{u + 1} Λ) X).map φ).app _ ≫ ((derivedTensor (ModuleCat.{u +
+                1} Λ) X).obj K).map ψ)) =
+      ((leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) h ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)
+          ((R((a)_*[ModuleCat.{u + 1} Λ])).obj L)).hom ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) Y).map (Ex.app K ≫ (R(a)_![ModuleCat.{u + 1} Λ]).map
+              φ)).app _ ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).map
+            ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app L ≫ (R((a)_*[ModuleCat.{u + 1}
+                Λ])).map ψ)) ≫
+        mixedSupportCupProduct Λ a K L := by
   unfold mixedSupportCupProduct
-  exact projectionMap_exchange A sq Ex hEx K L _ _ _ φ ψ
+  exact projectionMap_exchange (ModuleCat.{u + 1} Λ) sq Ex hEx K L _ _ _ φ ψ
     (by
       simp only [Functor.map_comp, Category.assoc]
-      erw [(derivedUpperStarLowerStarAdjunction A a).counit.naturality ψ]
-      exact derivedUpperStar_map_derivedBaseChangeMap_app_counit_assoc A sq L ψ)
+      erw [(derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).counit.naturality ψ]
+      exact derivedUpperStar_map_derivedBaseChangeMap_app_counit_assoc (ModuleCat.{u + 1} Λ) sq L ψ)
 
 end Etale
 

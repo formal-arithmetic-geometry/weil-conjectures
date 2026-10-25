@@ -173,7 +173,7 @@ theorem exists_higherDirectImage_constantSheaf_of_isRegularImmersion (Λ : Type 
   have hij : Set.range (pullback.snd i W₀.ι) = (Set.range (pullback.snd j W₀.ι))ᶜ := by
     rw [Scheme.Pullback.range_snd, Scheme.Pullback.range_snd, ← Set.preimage_compl, hj,
       compl_compl]
-  let T := supportedLocalizationTriangle (ModuleCat.{u + 1} Λ) (pullback.snd i W₀.ι)
+  let T := supportedLocalizationTriangle Λ (pullback.snd i W₀.ι)
     (pullback.snd j W₀.ι) (constantComplex Λ W₀)
     (supportedLocalizationBoundary _ _ _ hij (constantComplex Λ W₀))
   have hT : T ∈ distTriang _ := supportedLocalizationTriangle_mem_distTriang _ _ _ hij _

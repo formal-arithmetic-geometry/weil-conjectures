@@ -228,7 +228,7 @@ lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
             kummerClass Λ (U.basicOpenUnit f) ≫
               (leftDerivedUpperStarTateObjectIso (U.basicOpen f).ι 1).inv⟦(1 : ℤ)⟧') ≫
         ((R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _) ≫
-      ((supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+      ((supportedLocalizationBoundary Λ _ _
           (range_zeroLocusSubschemeι_singleton f) (tateObject Λ U 1))⟦(1 : ℤ)⟧' ≫
         (shiftFunctorAdd' _ (1 : ℤ) 1 2 rfl).inv.app _) := by
   rw [kummerBoundary, Adjunction.homEquiv_unit]
@@ -260,7 +260,7 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
     (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
         (L((e)^*[ModuleCat.{u + 1} Λ])).map (kummerBoundary Λ f) ≫
         ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app _ ≫
-        (supportedRestriction (ModuleCat.{u + 1} Λ) e _ _ g hg _ _
+        (supportedRestriction Λ e _ _ g hg _ _
           (leftDerivedUpperStarTateObjectIso e 1))⟦(2 : ℤ)⟧' =
       kummerBoundary Λ (e.appTop f) := by
   let e₁ : (U'.basicOpen (e.appTop f) : Scheme.{u}) ⟶ U.basicOpen f :=
@@ -274,7 +274,7 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
     rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← sq.w, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
     rfl
-  have hG1 := supportedLocalizationBoundary_baseChange (ModuleCat.{u + 1} Λ) e
+  have hG1 := supportedLocalizationBoundary_baseChange Λ e
     (U.zeroLocusSubschemeι {f}) (U.basicOpen f).ι (U'.zeroLocusSubschemeι {e.appTop f})
     (U'.basicOpen (e.appTop f)).ι g e₁ (range_zeroLocusSubschemeι_singleton f)
     (range_zeroLocusSubschemeι_singleton _) hg sq (tateObject Λ U 1) (tateObject Λ U' 1)
@@ -305,7 +305,7 @@ theorem kummerBoundary_baseChange_of_eq (e : U' ⟶ U) (f : Γ(U, ⊤)) (f' : Γ
     (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
         (L((e)^*[ModuleCat.{u + 1} Λ])).map (kummerBoundary Λ f) ≫
         ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app _ ≫
-        (supportedRestriction (ModuleCat.{u + 1} Λ) e _ _ g hg _ _
+        (supportedRestriction Λ e _ _ g hg _ _
           (leftDerivedUpperStarTateObjectIso e 1))⟦(2 : ℤ)⟧' =
       kummerBoundary Λ f' := by
   subst hf
@@ -421,10 +421,10 @@ lemma restrictSupportedClass_comp (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [I
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
     (γ : constantComplex Λ X ⟶
       (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv τ (h ≫ γ) =
       constantComplexEndPullback Λ e h ≫
-        restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+        restrictSupportedClass Λ e i i' g hg
           (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ := by
   simp [restrictSupportedClass, constantComplexEndPullback]
 
@@ -460,7 +460,7 @@ noncomputable def restrictSupportedHom (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ 
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (φ : constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :
     constantComplex Λ Z' ⟶ (R(i')^![Λ]).obj L' :=
-  supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+  supportedClassMap Λ i' (restrictSupportedClass Λ e i i' g hg
     (leftDerivedUpperStarConstantComplexIso Λ e).inv τ ((supportedClassMapEquiv Λ i L).symm φ))
 
 /-- The restriction of `i^♯ h ≫ φ` along `e` is `i'^♯ (e^♯ h)` followed by the restriction of

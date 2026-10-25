@@ -65,7 +65,7 @@ theorem isIso_dualizingComplexTensorMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     (hf : ∀ P, DerivedCategory.boundedConstructibleFiniteTor Λ Y P →
       IsIso (dualizingComplexTensorMap Λ f P))
-    (hω : DerivedCategory.isInvertible Λ Y (dualizingComplex (ModuleCat.{u + 1} Λ) g))
+    (hω : DerivedCategory.isInvertible Λ Y (dualizingComplex Λ g))
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Z K)
     (hg : IsIso (dualizingComplexTensorMap Λ g K)) :
@@ -80,7 +80,7 @@ theorem isIso_dualizingComplexTensorMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
 isomorphisms along a surjective étale `u`. -/
 theorem isIso_of_isIso_rightDerivedUpperShriek_map {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [Surjective u] [HasCompactification u] (hu : ∀ P, IsIso (dualizingComplexTensorMap Λ u P))
-    (hω : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) u))
+    (hω : DerivedCategory.isInvertible Λ U (dualizingComplex Λ u))
     {P Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : P ⟶ Q) (h : IsIso ((R(u)^![Λ]).map φ)) : IsIso φ :=
   isIso_of_isIso_leftDerivedUpperStar_map_of_surjective Λ u φ
@@ -94,7 +94,7 @@ invertible, and `f : X ⟶ Y`: if `θ_{u ≫ f, K}` is an isomorphism, then so i
 theorem isIso_dualizingComplexTensorMap_of_comp {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [Surjective u] (f : X ⟶ Y) [HasCompactification u] [HasCompactification f]
     [HasCompactification (u ≫ f)] (hu : ∀ P, IsIso (dualizingComplexTensorMap Λ u P))
-    (hω : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) u))
+    (hω : DerivedCategory.isInvertible Λ U (dualizingComplex Λ u))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsIso (dualizingComplexTensorMap Λ (u ≫ f) K)) :
     IsIso (dualizingComplexTensorMap Λ f K) := by
@@ -150,13 +150,13 @@ theorem isInvertible_dualizingComplex_of_comp {U X Y : Scheme.{u}} (u : U ⟶ X)
     [Surjective u] (f : X ⟶ Y) [HasCompactification u] [HasCompactification f]
     [HasCompactification (u ≫ f)] [QuasiCompact (u ≫ f)]
     (hu : ∀ P, IsIso (dualizingComplexTensorMap Λ u P))
-    (hω : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) u))
-    (hωh : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) (u ≫ f))) :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
+    (hω : DerivedCategory.isInvertible Λ U (dualizingComplex Λ u))
+    (hωh : DerivedCategory.isInvertible Λ U (dualizingComplex Λ (u ≫ f))) :
+    DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) := by
   obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ u f
   refine isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale u
     (DerivedCategory.isInvertible.of_derivedTensor_left hω ?_)
-  have := hu (dualizingComplex (ModuleCat.{u + 1} Λ) f)
+  have := hu (dualizingComplex Λ f)
   exact DerivedCategory.isInvertible.of_iso
     (asIso (dualizingComplexTensorMap Λ u _) ≪≫ (c.app (𝟙_ _)).symm).symm hωh
 

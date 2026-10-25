@@ -129,7 +129,7 @@ section Adjoint
 variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ]
   {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [HasCompactification a]
   [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {d : ℕ} {T : DerivedCategoryModule Λ X}
-  (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a) (K : DerivedCategoryModule Λ X)
+  (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) (K : DerivedCategoryModule Λ X)
 
 /-- The second variable `K^∨ ⊗ᴸ T` of the derived Poincaré pairing (`K^∨(d)` for
 `T = Λ_X(d)`). -/
@@ -273,7 +273,7 @@ Let `k` be separably closed, `Λ = 𝒪_E` (any commutative ring), `ϖ` a nonzer
 is perfect, and so are the pairings `β_{K_n}` of the finite levels `K_n = K ⊗ᴸ (𝒪_E/ϖⁿ)_X`. -/
 theorem isPerfectPairing_poincarePairing_integral
     {V : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (γ : V⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a)
+    (γ : V⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) :
     IsPerfectPairing (poincarePairing a γ K) ∧

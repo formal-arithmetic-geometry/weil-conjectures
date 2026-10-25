@@ -63,7 +63,6 @@ lemma preservesColimitsOfShape_rightDerivedLowerStar_of_isZero_higherDirectImage
       (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ j F n)⟩) (ULift.{u + 1} ℕ)
   preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) _
 
-
 /-- The direct image along a quasi-compact open immersion `j` with `R^q j_* = 0` for `q > c`
 carries complexes of Tor amplitude in `[a, b]` to complexes of Tor amplitude in `[a, b + c]`.
 This is the argument of `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_finite`,
@@ -122,16 +121,16 @@ theorem torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1) ((R(i)^![Λ]).obj K) := by
-  let A := ModuleCat.{u + 1} Λ
+  let (ModuleCat.{u + 1} Λ) := ModuleCat.{u + 1} Λ
   have h₃ := torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage j hc
-    (torAmplitudeIn_leftDerivedUpperStar A j a b hta)
+    (torAmplitudeIn_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) j a b hta)
   have h₁ := torAmplitudeIn_obj₁_of_distTriang _
-    (supportedLocalizationTriangle_mem_distTriang A i j hij K) (le_add_of_nonneg_right
+    (supportedLocalizationTriangle_mem_distTriang Λ i j hij K) (le_add_of_nonneg_right
       (Int.natCast_nonneg c)) hta h₃
-  exact (torAmplitudeIn A Z a (b + c + 1)).prop_of_iso
-    (((leftDerivedUpperStarIsoMapDerivedCategory A i).app _) ≪≫
+  exact (torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1)).prop_of_iso
+    (((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) i).app _) ≪≫
       mapDerivedUpperStarRightDerivedLowerShriekIso i _)
-    (torAmplitudeIn_leftDerivedUpperStar A i a (b + c + 1) h₁)
+    (torAmplitudeIn_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) i a (b + c + 1) h₁)
 
 include hij in
 /-- Blueprint `prop-exc-closed-tor`: Finite Tor amplitude for closed support.

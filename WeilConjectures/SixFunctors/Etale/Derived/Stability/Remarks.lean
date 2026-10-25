@@ -369,9 +369,9 @@ theorem exceptionalInverseImage_coefficientStages [IsAlgClosed k] [IsSeparated a
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K) ∧
           Nonempty ((R(f)^![Λ]).obj K ≅
-            (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+            (verdierDual Λ aX).obj
               (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-                ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)))))) ∧
+                ((verdierDual Λ aY).obj (op K)))))) ∧
     Nonempty (DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
       DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f) :=
   ⟨fun _ hK ↦ ⟨constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK,

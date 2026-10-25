@@ -206,9 +206,9 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Sc
     have : IsIso ((D((j)^*[ModuleCat.{u + 1} Λ])).map f) :=
       (NatIso.isIso_map_iff (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j) f).1 hj
     exact (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory _ j) f).2 this
-  have hM := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i j hij M
-  have hN := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i j hij N
-  obtain ⟨τ, h₁, h₂, h₃⟩ := exists_triangleHom_supportedLocalization (ModuleCat.{u + 1} Λ) i j
+  have hM := supportedLocalizationTriangle_mem_distTriang Λ i j hij M
+  have hN := supportedLocalizationTriangle_mem_distTriang Λ i j hij N
+  obtain ⟨τ, h₁, h₂, h₃⟩ := exists_triangleHom_supportedLocalization Λ i j
     (hij ▸ disjoint_compl_left) f hM hN
   have := Pretriangulated.isIso₂_of_isIso₁₃ τ hM hN (by rw [h₁]; infer_instance)
     (by rw [h₃]; infer_instance)

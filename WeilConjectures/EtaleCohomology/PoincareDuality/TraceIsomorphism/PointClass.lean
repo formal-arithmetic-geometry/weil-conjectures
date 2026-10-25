@@ -105,7 +105,6 @@ lemma pullbackLiftSection_tateShiftIso [HasInvertibleExponent Λ X] [HasInvertib
   rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   simpa using U
 
-
 end Coherence
 
 /-- Forgetting the supports of a restricted class: the restriction of supports followed by the
@@ -117,11 +116,11 @@ lemma restrictSupportedClass_comp_counit {Λ : Type (u + 1)} [CommRing Λ] [Fini
     {K' L' : DerivedCategoryModule Λ U} (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K)
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (γ : K ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg σ τ γ ≫
+    restrictSupportedClass Λ e i i' g hg σ τ γ ≫
         (rightDerivedUpperShriekAdjunction _ i').counit.app L' =
       σ ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map
         (γ ≫ (rightDerivedUpperShriekAdjunction _ i).counit.app L) ≫ τ.hom := by
-  have h := (existsUnique_supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L'
+  have h := (existsUnique_supportedRestriction Λ e i i' g hg L L'
     τ).exists.choose_spec
   rw [restrictSupportedClass, Category.assoc, Category.assoc]
   erw [h]

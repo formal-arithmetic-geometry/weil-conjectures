@@ -71,7 +71,7 @@ local notation "𝐃(" X ", " A ")" =>
 
 namespace Etale
 
-variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
   [(R(a)_![A']).IsLeftAdjoint] {d : ℕ}
 
 /-- The derived Poincaré pairing before the trace,
@@ -79,42 +79,47 @@ variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).I
 product, the twisted evaluation and the shift compatibility of `Ra_!`. The derived Poincaré
 pairing is this map followed by the smooth trace
 (`AlgebraicGeometry.Etale.poincarePairing_eq`). -/
-noncomputable def poincarePairingUntraced (d : ℕ) (T K : 𝐃(X, A)) :
-    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj
-        (((R((a)_*[A])).obj (((derivedTensor A X).obj
-          ((DerivedCategory.coefficientDual A X).obj (op K))).obj T))⟦(2 * d : ℤ)⟧) ⟶
-      (R(a)_![A]).obj (T⟦(2 * d : ℤ)⟧) :=
-  (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
+noncomputable def poincarePairingUntraced (d : ℕ) (T K : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).obj
+        (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+          ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj T))⟦(2 * d :
+              ℤ)⟧) ⟶
+      (R(a)_![ModuleCat.{u + 1} Λ]).obj (T⟦(2 * d : ℤ)⟧) :=
+  (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).commShiftIso
+      (2 * d : ℤ)).hom.app _ ≫
     (poincarePairingEvaluation a T K)⟦(2 * d : ℤ)⟧' ≫
-      ((R(a)_![A]).commShiftIso (2 * d : ℤ)).inv.app _
+      ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _
 
 variable {A a}
 
 /-- The derived Poincaré pairing is the untraced pairing followed by the smooth trace. -/
-lemma poincarePairing_eq {T : 𝐃(X, A)} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
-    (K : 𝐃(X, A)) :
-    poincarePairing a γ K = poincarePairingUntraced A a d T K ≫ smoothTrace γ := by
+lemma poincarePairing_eq {T : 𝐃(X, (ModuleCat.{u + 1} Λ))} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ
+    a)
+    (K : 𝐃(X, (ModuleCat.{u + 1} Λ))) :
+    poincarePairing a γ K = poincarePairingUntraced Λ a d T K ≫ smoothTrace γ := by
   simp only [poincarePairing, poincarePairingUntraced, Category.assoc]
 
 variable {A'}
 
-omit [Etale.UpperStarPreservesFlat A] [Etale.UpperStarPreservesFlat A'] in
+omit [Etale.UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)] [Etale.UpperStarPreservesFlat A'] in
 /-- Blueprint `thm-pur-finite-reduction-of-purity` (the smooth trace): **the smooth trace
 reduces.** Let `G` be a change of coefficients on the base, `ψ : Ra_! ⋙ G ≅ Ψ_X ⋙ Ra_!` its
 commutation with `Ra_!`, `e : G Λ_Y ⟶ Λ'_Y`, `v₀ : Ψ_X(T[2d]) ≅ T'[2d]` and
 `vω : Ψ_X ω_X ≅ ω'_X`. If the orientations `γ : T[2d] ≅ ω_X`, `γ'` reduce (`hγ`) and the counit
 of `Ra_! ⊣ Ra^!` at `Λ_Y` reduces (`hS`), then `G(Tr_γ) = Tr_{γ'}` read through `ψ`, `v₀`
 and `e`. -/
-theorem map_smoothTrace (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ 𝐃(Y, A'))
-    (ψ : R(a)_![A] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_ _) {T : 𝐃(X, A)}
-    {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
-    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A' a)
+theorem map_smoothTrace (ΨX : 𝐃(X, (ModuleCat.{u + 1} Λ)) ⥤ 𝐃(X, A')) (G : 𝐃(Y, (ModuleCat.{u + 1}
+    Λ)) ⥤ 𝐃(Y, A'))
+    (ψ : R(a)_![ModuleCat.{u + 1} Λ] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_ _) {T : 𝐃(X,
+        (ModuleCat.{u + 1} Λ))}
+    {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
+    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ' a)
     (v₀ : ΨX.obj (T⟦(2 * d : ℤ)⟧) ≅ T'⟦(2 * d : ℤ)⟧)
-    (vω : ΨX.obj (dualizingComplex A a) ≅ dualizingComplex A' a)
+    (vω : ΨX.obj (dualizingComplex Λ a) ≅ dualizingComplex Λ' a)
     (hγ : ΨX.map γ.hom ≫ vω.hom = v₀.hom ≫ γ'.hom)
     (hS : ψ.hom.app _ ≫ (R(a)_![A']).map vω.hom ≫
-        (rightDerivedUpperShriekAdjunction A' a).counit.app (𝟙_ _) =
-      G.map ((rightDerivedUpperShriekAdjunction A a).counit.app (𝟙_ _)) ≫ e) :
+        (rightDerivedUpperShriekAdjunction Λ' a).counit.app (𝟙_ _) =
+      G.map ((rightDerivedUpperShriekAdjunction Λ a).counit.app (𝟙_ _)) ≫ e) :
     G.map (smoothTrace γ) ≫ e =
       ψ.hom.app _ ≫ (R(a)_![A']).map v₀.hom ≫ smoothTrace γ' := by
   have hψ := ψ.hom.naturality γ.hom
@@ -132,25 +137,28 @@ If the cup product, evaluation and shift part of the pairing reduces (`hE`,
 (`thm-pur-finite-reduction-of-purity`), then `G(β_K)` is `β_{K'}` read through `c_X`, `c_Y`
 and `e`. This is the hypothesis of the finite reduction
 `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`. -/
-theorem map_poincarePairing (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ 𝐃(Y, A'))
-    [G.LaxMonoidal] (ψ : R(a)_![A] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_ _)
-    {T : 𝐃(X, A)} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
-    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A' a)
+theorem map_poincarePairing (ΨX : 𝐃(X, (ModuleCat.{u + 1} Λ)) ⥤ 𝐃(X, A')) (G : 𝐃(Y, (ModuleCat.{u +
+    1} Λ)) ⥤ 𝐃(Y, A'))
+    [G.LaxMonoidal] (ψ : R(a)_![ModuleCat.{u + 1} Λ] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_
+        _)
+    {T : 𝐃(X, (ModuleCat.{u + 1} Λ))} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a)
+    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ' a)
     (v₀ : ΨX.obj (T⟦(2 * d : ℤ)⟧) ≅ T'⟦(2 * d : ℤ)⟧)
-    (vω : ΨX.obj (dualizingComplex A a) ≅ dualizingComplex A' a)
+    (vω : ΨX.obj (dualizingComplex Λ a) ≅ dualizingComplex Λ' a)
     (hγ : ΨX.map γ.hom ≫ vω.hom = v₀.hom ≫ γ'.hom)
     (hS : ψ.hom.app _ ≫ (R(a)_![A']).map vω.hom ≫
-        (rightDerivedUpperShriekAdjunction A' a).counit.app (𝟙_ _) =
-      G.map ((rightDerivedUpperShriekAdjunction A a).counit.app (𝟙_ _)) ≫ e)
-    {K : 𝐃(X, A)} {K' : 𝐃(X, A')}
-    (cX : (R(a)_![A']).obj K' ⟶ G.obj ((R(a)_![A]).obj K))
-    (cY : G.obj (((R((a)_*[A])).obj (((derivedTensor A X).obj
-        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T))⟦(2 * d : ℤ)⟧) ⟶
+        (rightDerivedUpperShriekAdjunction Λ' a).counit.app (𝟙_ _) =
+      G.map ((rightDerivedUpperShriekAdjunction Λ a).counit.app (𝟙_ _)) ≫ e)
+    {K : 𝐃(X, (ModuleCat.{u + 1} Λ))} {K' : 𝐃(X, A')}
+    (cX : (R(a)_![A']).obj K' ⟶ G.obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K))
+    (cY : G.obj (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj T))⟦(2 * d :
+            ℤ)⟧) ⟶
       ((R((a)_*[A'])).obj (((derivedTensor A' X).obj
         ((DerivedCategory.coefficientDual A' X).obj (op K'))).obj T'))⟦(2 * d : ℤ)⟧)
-    (hE : cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairingUntraced A a d T K) ≫ ψ.hom.app _ ≫
+    (hE : cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairingUntraced Λ a d T K) ≫ ψ.hom.app _ ≫
         (R(a)_![A']).map v₀.hom =
-      (R(a)_![A']).obj K' ◁ cY ≫ poincarePairingUntraced A' a d T' K') :
+      (R(a)_![A']).obj K' ◁ cY ≫ poincarePairingUntraced Λ' a d T' K') :
     (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing a γ' K' =
       cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing a γ K) ≫ e := by
   simp only [poincarePairing_eq, Functor.map_comp, Category.assoc]

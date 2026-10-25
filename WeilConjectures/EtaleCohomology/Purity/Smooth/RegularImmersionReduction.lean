@@ -167,7 +167,7 @@ lemma reductionModIdealUnit_app_comp_rightDerivedUpperShriekDerivedTensorMap
       rightDerivedUpperShriekDerivedTensorMap Λ i _ _ =
     (R(i)^![Λ]).map ((reductionModIdealUnit Λ X J).app K) :=
   have := isIso_projectionMap_of_finite Λ i
-  rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft (ModuleCat.{u + 1} Λ) i _ _ _
+  rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft Λ i _ _ _
     (leftDerivedUpperStar_map_constantComplexToQuotient Λ i J) K
 
 end ReductionComparison

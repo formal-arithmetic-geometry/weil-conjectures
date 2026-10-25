@@ -175,17 +175,17 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
             (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) ∧
     ∀ [HasCompactification aX] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) aX],
       Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
-          (Etale.dualizingComplex (ModuleCat.{u + 1} Λ) aX) ≅
-        ProEtale.dualizingComplex (ModuleCat.{u + 1} Λ) aX) ∧
+          (Etale.dualizingComplex Λ aX) ≅
+        ProEtale.dualizingComplex Λ aX) ∧
       ∀ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
         Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
-            ((Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ≅
-          (ProEtale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+            ((Etale.verdierDual Λ aX).obj (op K)) ≅
+          (ProEtale.verdierDual Λ aX).obj
             (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))) ∧
         Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K ≅
-          (ProEtale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
-            (op ((ProEtale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+          (ProEtale.verdierDual Λ aX).obj
+            (op ((ProEtale.verdierDual Λ aX).obj
               (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))))) :=
   sorry
 

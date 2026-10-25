@@ -83,13 +83,13 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
     Nonempty ((R(f)^![Λ]).obj K ≅
-      (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+      (verdierDual Λ aX).obj
         (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-          ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K))))) := by
+          ((verdierDual Λ aY).obj (op K))))) := by
   subst hf
   obtain ⟨b⟩ := nonempty_iso_verdierDual_verdierDual Λ aY hK
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_verdierDual Λ aY f
-    ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K))
+    ((verdierDual Λ aY).obj (op K))
   exact ⟨(R(f)^![Λ]).mapIso b ≪≫ e⟩
 
 /-- Blueprint `thm-sf-ctf-stability`: Preservation on the proved finite-Tor domains.
@@ -188,9 +188,9 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
     ((∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         Nonempty ((R(f)^![Λ]).obj K ≅
-          (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+          (verdierDual Λ aX).obj
             (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-              ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)))))) ∧
+              ((verdierDual Λ aY).obj (op K)))))) ∧
       (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
           constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -206,18 +206,18 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
     ((∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
-          Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
-            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)))) ∧
-          IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K)) ∧
+            ((verdierDual Λ aX).obj (op K)) ∧
+          Nonempty (K ≅ (verdierDual Λ aX).obj
+            (op ((verdierDual Λ aX).obj (op K)))) ∧
+          IsIso ((verdierDualDoubleDual Λ aX).app K)) ∧
       (∀ T ∈ distTriang (_root_.DerivedCategory (Sheaf X.smallEtaleTopology
           (ModuleCat.{u + 1} Λ))),
-        ∃ w, Triangle.mk ((verdierDual (ModuleCat.{u + 1} Λ) aX).map T.mor₂.op)
-          ((verdierDual (ModuleCat.{u + 1} Λ) aX).map T.mor₁.op) w ∈ distTriang _) ∧
+        ∃ w, Triangle.mk ((verdierDual Λ aX).map T.mor₂.op)
+          ((verdierDual Λ aX).map T.mor₁.op) w ∈ distTriang _) ∧
       Nonempty ((verdierDualEquivalence Λ aX).functor ⋙
           DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
         (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X).op ⋙
-          verdierDual (ModuleCat.{u + 1} Λ) aX)) ∧
+          verdierDual Λ aX)) ∧
     -- (vii)
     ∀ J : Ideal Λ,
       Nonempty (reductionModIdeal Λ Y J ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
