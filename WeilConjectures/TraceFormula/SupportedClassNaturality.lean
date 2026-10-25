@@ -346,7 +346,9 @@ lemma externalProductMap_comp_evaluationKernel
         evaluationKernel ℓ K' := by
   rw [evaluationKernel, evaluationKernel, ← Adjunction.homEquiv_naturality_left,
     ← Adjunction.homEquiv_naturality_left, diagUpperStarExternalProductIso_hom_naturality₂_assoc,
-    diagUpperStarExternalProductIso_hom_naturality₂_assoc, tensorHom_id_comp_ev_verdierDual]
+    diagUpperStarExternalProductIso_hom_naturality₂_assoc]
+  congr 2
+  exact tensorHom_id_comp_ev_verdierDual ℓ f
 
 end Evaluation
 

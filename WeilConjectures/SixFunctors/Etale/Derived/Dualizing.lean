@@ -85,11 +85,13 @@ namespace Etale
 variable [(R(a)_![A]).IsLeftAdjoint]
 
 /-- The dualizing complex `ω_X = Ra^! Λ_S` of a scheme `X` over a base `S`, the exceptional
-inverse image along the structure morphism `a : X ⟶ S` of the monoidal unit `Λ_S`. -/
+inverse image along the structure morphism `a : X ⟶ S` of the monoidal unit `Λ_S` (blueprint
+`def-trf-dualizing-complex`, with `S = Spec k` and finite coefficients `A = ModuleCat Λ`). -/
 noncomputable def dualizingComplex : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (R(a)^![A]).obj (𝟙_ _)
 
-/-- Blueprint `def-sf-pf`: Coefficient dual, Verdier dual, and the projection formula.
+/-- Blueprint `def-sf-pf`: Coefficient dual, Verdier dual, and the projection formula, and
+`def-trf-dualizing-complex` (the dualizing complex).
 
 The Verdier dual `𝔻_X = RHom_X(-, ω_X) : D(X_ét)ᵒᵖ ⥤ D(X_ét)`, the internal hom into the
 dualizing complex `AlgebraicGeometry.Etale.dualizingComplex`. The other two items of the

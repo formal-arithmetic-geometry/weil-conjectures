@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 
@@ -66,16 +67,6 @@ instance isIso_rightDerivedUpperShriekAdjunction_unit_of_isOpenImmersion {U X : 
     (Functor.isoWhiskerRight (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j) _ ≪≫
       Functor.isoWhiskerLeft _ (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j) ≪≫
       (asIso (derivedOpenImmersionLowerShriekUpperStarAdjunction _ j).unit).symm)
-
-/-- If the unit of an adjunction is an isomorphism, so is the right adjoint of the counit. -/
-lemma _root_.CategoryTheory.Adjunction.isIso_map_counit_app_of_isIso_unit {C D : Type*}
-    [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) [IsIso adj.unit] (Z : D) :
-    IsIso (R.map (adj.counit.app Z)) := by
-  have h := adj.right_triangle_components Z
-  have : IsIso (adj.unit.app (R.obj Z) ≫ R.map (adj.counit.app Z)) := by
-    rw [h]
-    exact (Iso.refl _).isIso_hom
-  exact IsIso.of_isIso_comp_left (adj.unit.app (R.obj Z)) _
 
 /-- Let `L' ⊣ R'` be an adjunction whose unit is an isomorphism. A morphism `β : A ⟶ R' Z` is an
 isomorphism as soon as `R'` of its transpose `L' β ≫ ε'_Z` is one: `R' ε'_Z` is invertible,

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
-public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.TraceFormula.KunnethVerdierTheorem
 public import WeilConjectures.TraceFormula.LocalTerm
 
 /-!

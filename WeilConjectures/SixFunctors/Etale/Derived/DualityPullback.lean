@@ -145,7 +145,6 @@ theorem nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite :
   nonempty_rightDerivedUpperShriek_derivedHom_iso _ f
 
 variable {S : Scheme.{u}} (aY : Y ⟶ S) [HasCompactification aY] [HasCompactification (f ≫ aY)]
-  [QuasiCompact (f ≫ aY)]
 
 /-- Blueprint `cor-sf-duality-pullback`: Duality against pullback.
 
@@ -179,39 +178,35 @@ end Finite
 
 section Orientation
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k : Type u} [Field k]
-  [PerfectField k]
-  [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}} {d : ℕ} {f : X ⟶ Y}
-  [HasCompactification f] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
-  [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
-  [HasCompactification (f ≫ aY)] [QuasiCompact (f ≫ aY)]
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y S : Scheme.{u}}
+  [HasInvertibleExponent Λ X] {d : ℕ} {f : X ⟶ Y} [HasCompactification f] (aY : Y ⟶ S)
+  [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
 /-- Blueprint `cor-sf-duality-pullback`: Duality against pullback, oriented smooth case.
 
-Let `Y` be separated of finite type over a perfect field `k`, let `Λ` be a finite coefficient ring
-whose exponent is invertible on `k`, and let `f : X ⟶ Y` be separated, smooth of pure relative
-dimension `d`, with an orientation `o`. Then for `K ∈ Dᵇctf(Y, Λ)`
+Let `Y` be a scheme over a base `S`, let `Λ` be a finite coefficient ring whose exponent is
+invertible on `X`, and let `f : X ⟶ Y` be smooth of pure relative dimension `d`, with an
+orientation `o`. Then for every `K ∈ D(Y_ét, Λ)` (the blueprint takes `K ∈ Dᵇctf(Y, Λ)` over a
+perfect field)
 
 `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]`.
 
 As in the blueprint, this substitutes the orientation into
 `𝔻_X Lf^* K ≅ Rf^! 𝔻_Y K` (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`):
-the smooth purity map `Rf^! L ≅ (Lf^* L)(d)[2d]` (`AlgebraicGeometry.Etale.smoothPurityIso`)
-is built from the orientation `ω_f ≅ Λ_X(d)[2d]` and the tensor formula
-`Rf^! L ≅ Lf^* L ⊗ᴸ ω_f` of `sk-prop-cohsm`, applied to `L = 𝔻_Y K`, which lies in
-`Dᵇctf(Y, Λ)` by `sk-prop-sf-biduality-general`. -/
+the tensor formula `Rf^! L ≅ Lf^* L ⊗ᴸ ω_f` of `sk-prop-cohsm`, applied to `L = 𝔻_Y K`, and the
+orientation `ω_f ≅ Λ_X(d)[2d]`. -/
 theorem Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar (o : Orientation Λ f d)
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((verdierDual _ (f ≫ aY)).obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
       (twistShift Λ X d).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual _ aY).obj (op K)))) := by
   have := o.smoothOfRelativeDimension
-  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
   obtain ⟨e⟩ := _root_.AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar Λ f aY
-  obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f
-    ((verdierDual _ aY).obj (op K)) (constructibleFiniteTor_verdierDual Λ aY hK)
-  exact ⟨e.app (op K) ≪≫ (smoothPurityIso Λ f _ o.twistShiftIso.symm φ).symm⟩
+  obtain ⟨φ⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d
+    ((verdierDual _ aY).obj (op K))
+  exact ⟨e.app (op K) ≪≫ φ.symm ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso o.twistShiftIso.symm ≪≫
+    (twistShiftObjIso Λ X d _).symm⟩
 
 end Orientation
 

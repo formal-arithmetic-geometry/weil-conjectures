@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.StrictLocalizationPoints
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
@@ -402,16 +403,6 @@ lemma fibreRank_upperStar {T' : Scheme.{u}} (p : T' ⟶ T) (s : Spec (.of Ω) �
     (WeilCoefficients.linearEquivOfIso ((fibreUpperStarIso (l := l) p s).app N).symm).injective _
     (WeilCoefficients.linearEquivOfIso ((fibreUpperStarIso (l := l) p s).app M)).surjective
 
-/-- Every point `v` of a scheme is the image of a geometric point. -/
-lemma exists_geometricPoint {V : Scheme.{u}} (v : V) :
-    ∃ (K : Type u) (_ : Field K) (_ : IsAlgClosed K) (s : Spec (.of K) ⟶ V),
-      s.base (IsLocalRing.closedPoint K) = v := by
-  refine ⟨AlgebraicClosure (V.residueField v), inferInstance, inferInstance,
-    Spec.map (CommRingCat.ofHom (algebraMap (V.residueField v)
-      (AlgebraicClosure (V.residueField v)))) ≫ V.fromSpecResidueField v, ?_⟩
-  rw [Scheme.Hom.comp_apply]
-  exact Scheme.fromSpecResidueField_apply v _
-
 /-- The pointwise rank of a morphism of finite free sheaves is the rank of its fibre at any
 geometric point over the point. -/
 lemma rank_unitMatrix_eq_fibreRank {a b : ℕ}
@@ -449,7 +440,7 @@ theorem isAdicLisseSheaf_homology_of_isLocallyConstant {a b c : ℕ}
       (fun t : T ↦ ((unitMatrix (e₂.inv ≫ S.g ≫ e₃.hom)).map
         (PadicAlgCl.locallyFiniteFunctionsEval t)).rank) ∘ p.base := by
     funext v
-    obtain ⟨K, _, _, s, hs⟩ := exists_geometricPoint v
+    obtain ⟨K, _, _, s, hs⟩ := Scheme.exists_isAlgClosed_apply_closedPoint_eq v
     have hsp : (s ≫ p).base (IsLocalRing.closedPoint _) = p.base v := by
       rw [Scheme.Hom.comp_apply, hs]
     rw [Function.comp_apply, ← hsp, ← hs, rank_unitMatrix_eq_fibreRank,
@@ -598,7 +589,7 @@ theorem isAdicLisseSheaf_of_isIso_homology_free {Y : Scheme.{u}} [IsLocallyNoeth
   have hdesc (i j : ι) (m : ℤ) (u : U i) (u' : U j) (h : g i u = g j u') :
       hdim i m u = hdim j m u' := by
     obtain ⟨w, hw, hw'⟩ := Scheme.Pullback.exists_preimage_pullback u u' h
-    obtain ⟨K, _, _, s, hs⟩ := exists_geometricPoint w
+    obtain ⟨K, _, _, s, hs⟩ := Scheme.exists_isAlgClosed_apply_closedPoint_eq w
     have h₁ : (s ≫ pullback.fst (g i) (g j)).base (IsLocalRing.closedPoint K) = u := by
       rw [Scheme.Hom.comp_apply, hs, hw]
     have h₂ : (s ≫ pullback.snd (g i) (g j)).base (IsLocalRing.closedPoint K) = u' := by
@@ -635,7 +626,7 @@ theorem isAdicLisseSheaf_of_isIso_homology_free {Y : Scheme.{u}} [IsLocallyNoeth
       have hform : rk i (m - 1) (m - 1 + 1) =
           fun u ↦ a i m - Hd m (g i u) - rk i m (m + 1) u := by
         funext u
-        obtain ⟨K, _, _, s, hs⟩ := exists_geometricPoint u
+        obtain ⟨K, _, _, s, hs⟩ := Scheme.exists_isAlgClosed_apply_closedPoint_eq u
         have h' := hD i m s
         rw [hs] at h'
         rw [sub_add_cancel, hHd]

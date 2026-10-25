@@ -117,6 +117,7 @@ theorem DerivedCategory.isInvertible.of_derivedTensor_left {X : Scheme.{u}}
   exact (derivedTensorAssociator _ X W' W P).symm ≪≫
     ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).mapIso e₂).app P ≪≫ derivedTensorLeftUnitor _ X P
 
+omit [Finite Λ] in
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (step 2).
 
 Invertibility descends along a surjective étale `u : U ⟶ X`: if `Lu^* L` is invertible, then so
