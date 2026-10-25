@@ -8122,6 +8122,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonIso
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.LeftProjectionComp
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
