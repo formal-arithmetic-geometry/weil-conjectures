@@ -5,11 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineDisjointSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineFiniteLimits
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficientsInjective
 public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficientsSheaf
 
@@ -249,25 +247,5 @@ theorem isZero_rightDerived_of_exactAt_overCechComplex (G : Sheaf (topology S) A
     IsZero (((sheafToPresheaf (topology S) A ⋙
       (CategoryTheory.evaluation _ A).obj (op (top S))).rightDerived (q + 1)).obj G) :=
   rightAcyclic_of_exactAt_overCechComplex G hG q
-
-end AlgebraicGeometry.Scheme.AffineProEt
-
-namespace AlgebraicGeometry.Scheme.AffineProEt
-
-variable {S : Scheme.{u}} [IsAffine S] {A : Type u'} [Category.{u + 1} A] [Abelian A]
-  [IsGrothendieckAbelian.{u + 1} A]
-
-/- The instances required by `isZero_rightDerived_of_exactAt_overCechComplex` can be supplied
-for a Grothendieck abelian category `A` with `Hom`-types in `Type (u + 1)`. -/
-example (G : Sheaf (topology S) A)
-    (hG : ∀ {V V' : S.AffineProEt} (f : V' ⟶ V), Surjective f.left → ∀ q : ℕ,
-      ((Presheaf.overCechComplex (CategoryTheory.Over.mk f)).obj G.obj).ExactAt (q + 1))
-    (q : ℕ) :
-    letI : LocallySmall.{u + 1} S.AffineProEt := ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
-    letI : EssentiallySmall.{u + 1} S.AffineProEt := essentiallySmall_of_small_of_locallySmall _
-    letI : HasInjectiveResolutions (Sheaf (topology S) A) := inferInstance
-    IsZero (((sheafToPresheaf (topology S) A ⋙
-      (CategoryTheory.evaluation _ A).obj (op (top S))).rightDerived (q + 1)).obj G) :=
-  isZero_rightDerived_of_exactAt_overCechComplex G hG q
 
 end AlgebraicGeometry.Scheme.AffineProEt
