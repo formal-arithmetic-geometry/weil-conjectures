@@ -114,6 +114,34 @@ noncomputable def leftDerivedUpperStarBoundaryComplexIso
         (asIso ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction _ C.i).unit.app
           E)).symm)
 
+lemma range_puncturedY_subset_W :
+    Set.range (C.puncturedY.ι ≫ C.iY) ⊆ (C.W : Set C.Z) := by
+  rintro _ ⟨y, rfl⟩ ⟨x, hx⟩
+  have hy : (C.puncturedY.ι ≫ C.iY) y ∈ Set.range C.iX ∩ Set.range C.iY :=
+    ⟨⟨x, hx⟩, ⟨_, rfl⟩⟩
+  rw [C.range_inter] at hy
+  exact y.2 (by simpa using hy)
+
+/-- The closed immersion `Y - z ⟶ Z - X`. -/
+noncomputable def puncturedYι : C.puncturedY.toScheme ⟶ C.W :=
+  IsOpenImmersion.lift C.W.ι (C.puncturedY.ι ≫ C.iY)
+    (by rw [Scheme.Opens.range_ι]; exact C.range_puncturedY_subset_W)
+
+@[reassoc (attr := simp)]
+lemma puncturedYι_ι : C.puncturedYι ≫ C.W.ι = C.puncturedY.ι ≫ C.iY :=
+  IsOpenImmersion.lift_fac _ _ _
+
+/-- The restriction of `M = Rj_* i_! E` to `Y - z` is the restriction of `R j_{W*} E`. -/
+noncomputable def leftDerivedUpperStarPuncturedYBoundaryComplexIso
+    (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ)
+    [E.IsGE a] :
+    (L((C.puncturedY.ι ≫ C.iY)^*[ModuleCat.{u + 1} Λ])).obj (C.boundaryComplex Λ E) ≅
+      (L((C.puncturedYι)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R((C.jW)_*[ModuleCat.{u + 1} Λ])).obj E) :=
+  (Etale.leftDerivedUpperStarComp _ C.puncturedYι C.W.ι _ C.puncturedYι_ι.symm).app _ ≪≫
+    (L((C.puncturedYι)^*[ModuleCat.{u + 1} Λ])).mapIso
+      (C.leftDerivedUpperStarBoundaryComplexIso Λ E a)
+
 end Scheme.TransverseCorner
 
 end AlgebraicGeometry

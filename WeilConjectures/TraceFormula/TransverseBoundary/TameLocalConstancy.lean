@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.TransverseBoundary.Basic
+public import WeilConjectures.ConstructibleSheaf.DistTriang
+public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisor
 
 /-!
 # Local constancy along the boundary divisor
@@ -39,14 +40,32 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {ℓ : 
   (hℓ : (ℓ : k) ≠ 0) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
 
 include hℓ hΛ in
+/-- Blueprint `det-tf-transverse-tame-local-constancy`, after the reduction to one divisor: for
+`j_W : Z - (X ∪ Y) ⟶ W = Z - X`, the restriction of `R j_{W*} E` to the regular divisor
+`Y - z ⊆ W` has finite locally constant cohomology sheaves (tameness along `Y` and Abhyankar's
+lemma, Stacks Tag 0EYG). -/
+theorem hasFiniteLocallyConstantHomology_puncturedYι_jW
+    (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hE : Etale.IsBoundedFiniteEllGroupMonodromy ℓ E) :
+    HasFiniteLocallyConstantHomology C.puncturedY
+      ((L((C.puncturedYι)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R((C.jW)_*[ModuleCat.{u + 1} Λ])).obj E)) := by
+  sorry
+
+include hℓ hΛ in
 /-- Blueprint `det-tf-transverse-tame-local-constancy`: Local constancy along the boundary
 divisor. The restriction of `M = Rj_* i_! E` to the punctured divisor `Y - z` has finite locally
-constant cohomology sheaves. -/
+constant cohomology sheaves. On `W = Z - X`, which contains `Y - z`, `M` is `R j_{W*} E`
+(`AlgebraicGeometry.Scheme.TransverseCorner.leftDerivedUpperStarPuncturedYBoundaryComplexIso`),
+and only the regular divisor `Y` remains
+(`AlgebraicGeometry.Scheme.TransverseCorner.hasFiniteLocallyConstantHomology_puncturedYι_jW`). -/
 theorem isFiniteLocallyConstantSheaf_homology_boundaryComplex
     (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hE : Etale.IsBoundedFiniteEllGroupMonodromy ℓ E) (n : ℤ) :
     IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ n).obj
       ((L((C.puncturedY.ι ≫ C.iY)^*[ModuleCat.{u + 1} Λ])).obj (C.boundaryComplex Λ E))) := by
-  sorry
+  obtain ⟨a, -, ha, -⟩ := hE.1
+  exact (C.hasFiniteLocallyConstantHomology_puncturedYι_jW hℓ Λ hΛ E hE).of_iso
+    (C.leftDerivedUpperStarPuncturedYBoundaryComplexIso Λ E a).symm n
 
 end AlgebraicGeometry.Scheme.TransverseCorner
