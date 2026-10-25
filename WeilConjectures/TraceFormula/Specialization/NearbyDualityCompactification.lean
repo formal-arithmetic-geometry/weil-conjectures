@@ -65,8 +65,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- **Compactification of trait models over the base** (blueprint
 `sk-prop-tf-nearby-duality-foundation`, "open locality allows a projective compactification"):
 a trait model `M` over the base with affine total space `𝒳` is an open sub-model of a trait model
-`M̄` over the base with proper total space, over open immersions `j : X ⟶ X̄` and
-`j' : X' ⟶ X̄'`, in the sense of `NearbyCyclesModel.isIso_nearbyDualityMap_of_openSubmodel`.
+`M̄` over the base with proper total space and proper `X̄`, `X̄'`, over open immersions
+`j : X ⟶ X̄` and `j' : X' ⟶ X̄'`, in the sense of
+`NearbyCyclesModel.isIso_nearbyDualityMap_of_openSubmodel`.
 
 Unfinished. Construction: let `X̄` be a Nagata compactification of `X` over `k`
 (`AlgebraicGeometry.NagataCompactification`) and `Z = X̄ ×_k S`, proper over `S`. The
@@ -78,12 +79,14 @@ Compactify `𝒴 ⟶ Z` (`AlgebraicGeometry.NagataCompactification`) and replace
 by the scheme-theoretic closure `𝒳̄` of `𝒴`. Then `𝒳̄` is proper over `S`, and its generic fibre is
 `Z_η` (the closure commutes with restriction to the open `𝒳̄_η`, in which `Z_η` is open and closed
 as `Z_η ⟶ Z_η` is proper), so the geometric generic fibre of `𝒳̄` is `X̄ ×_k Spec Ω`
-(`NearbyCyclesModel.IsTraitModelOfBase.of_isPullback`), with `𝒳 ⊆ 𝒴 ⊆ 𝒳̄` open. -/
+(`NearbyCyclesModel.IsTraitModelOfBase.of_isPullback`), with `𝒳 ⊆ 𝒴 ⊆ 𝒳̄` open; `X̄'` is the
+special fibre of `𝒳̄`, proper over `k'`. The `k`-linearity of `e` is used to map `𝒳` to `Z`. -/
 theorem exists_isProper_openSubmodel_of_isAffine (h : M.IsTraitModelOfBase k q g)
     [IsAffine M.total] :
     ∃ (Xc : Over (Spec (.of k))) (_ : LocallyOfFiniteType Xc.hom) (_ : QuasiCompact Xc.hom)
-      (_ : IsSeparated Xc.hom) (Xc' : Over (Spec (.of k'))) (_ : LocallyOfFiniteType Xc'.hom)
-      (_ : QuasiCompact Xc'.hom) (_ : IsSeparated Xc'.hom) (Mc : NearbyCyclesModel Xc.left Xc'.left)
+      (_ : IsSeparated Xc.hom) (_ : IsProper (toPoint Xc).left) (Xc' : Over (Spec (.of k')))
+      (_ : LocallyOfFiniteType Xc'.hom) (_ : QuasiCompact Xc'.hom) (_ : IsSeparated Xc'.hom)
+      (_ : IsProper (toPoint Xc').left) (Mc : NearbyCyclesModel Xc.left Xc'.left)
       (qc : Mc.total ⟶ trait k') (gc : Mc.generic ⟶ Spec (.of (traitGenericField k')))
       (_ : Mc.IsTraitModelOfBase k qc gc) (_ : IsProper qc) (j : X ⟶ Xc)
       (_ : IsOpenImmersion j.left) (j' : X' ⟶ Xc') (_ : IsOpenImmersion j'.left)
@@ -92,10 +95,10 @@ theorem exists_isProper_openSubmodel_of_isAffine (h : M.IsTraitModelOfBase k q g
   sorry
 
 /-- **Global sections of the duality map of a proper model** (blueprint
-`det-tf-nearby-duality-proper` (3)): if the total space of the trait model `M` over the base is
-proper over `S`, then `RΓ(X', δ_{M,K})` is an isomorphism; proper exchange for the structure
-morphism `a` (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchange`, invertible for proper
-`q`) and global Verdier duality identify it with the identity of
+`det-tf-nearby-duality-proper` (3)): if `X`, `X'` and the total space of the trait model `M`
+over the base are proper, then `RΓ(X', δ_{M,K})` is an isomorphism; proper exchange for the
+structure morphism `a` (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchange`, invertible
+for proper `q`) and global Verdier duality identify it with the identity of
 `RHom(RΓ(X ×_k Spec Ω, K), ℚ̄_ℓ)`.
 
 Unfinished. The formal part is `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper`
@@ -106,16 +109,17 @@ proper models (`NearbyCyclesModel.NearbyDualizingData`), and global Verdier dual
 (`ProEtale.CondensedRing.isIso_verdierExchange`) on both fibres together with the
 identification of the duality map of the trait model of the point with the identity. -/
 theorem isIso_lowerStar_nearbyDualityMap_of_isProper (D : NearbyDualizingData k k' ℓ)
-    (h : M.IsTraitModelOfBase k q g) [IsProper q]
+    (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
+    [IsProper q]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (toPoint X')).map (nearbyDualityMap ℓ D h K)) :=
   sorry
 
 /-- **Finite support of the cone of the duality map of a proper model** (blueprint
-`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if the total space of the trait
-model `M` over the base is proper over `S`, then the duality map `δ_{M,K}` is an isomorphism away
-from finitely many closed points of the special fibre.
+`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if `X`, `X'` and the total space
+of the trait model `M` over the base are proper, then the duality map `δ_{M,K}` is an isomorphism
+away from finitely many closed points of the special fibre.
 
 Unfinished. The blueprint proof covers the total space by neighbourhoods with quasi-finite
 coordinate maps to `𝔸^q_S` and, for each coordinate, identifies the restriction of `δ_{M,K}` to
@@ -125,7 +129,8 @@ finite-group core `CategoryTheory.invariantsDualIso`); the slice has smaller gen
 over the trait given by the strict localization of `𝔸¹_S` at a generic point of its special
 fibre, so the induction runs over all such traits. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
-    (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g) [IsProper q]
+    (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g)
+    [IsProper (toPoint X).left] [IsProper (toPoint X').left] [IsProper q]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -133,14 +138,15 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
   sorry
 
 /-- **Gabber's theorem for proper models** (Illusie, *Autour du théorème de monodromie locale*,
-Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`): if the total space of the trait
-model `M` over the base is proper over `S`, the duality map `δ_{M,K}` is an isomorphism for every
+Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`): if `X`, `X'` and the total space of
+the trait model `M` over the base are proper, the duality map `δ_{M,K}` is an isomorphism for every
 bounded constructible `K`. Its cone has no global sections
 (`NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isProper`) and finite support
 (`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper`), hence vanishes
 (`NearbyCyclesModel.isIso_nearbyDualityMap_of_isIso_lowerStar`). -/
 theorem isIso_nearbyDualityMap_of_isProper (D : NearbyDualizingData k k' ℓ)
-    (h : M.IsTraitModelOfBase k q g) [IsProper q]
+    (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
+    [IsProper q]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ D h K) := by
   obtain ⟨S, hS, hU⟩ := exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper ℓ D h K
   exact isIso_nearbyDualityMap_of_isIso_lowerStar ℓ D h K S hS hU
@@ -166,7 +172,7 @@ isomorphism at the extension by zero of `K`
 theorem isIso_nearbyDualityMap_of_isAffine (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsAffine M.total]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ D h K) := by
-  obtain ⟨Xc, _, _, _, Xc', _, _, _, Mc, qc, gc, hc, _, j, _, j', _, φ, _, hφ, hq, hg⟩ :=
+  obtain ⟨Xc, _, _, _, _, Xc', _, _, _, _, Mc, qc, gc, hc, _, j, _, j', _, φ, _, hφ, hq, hg⟩ :=
     exists_isProper_openSubmodel_of_isAffine h
   exact isIso_nearbyDualityMap_of_openSubmodel ℓ D h hc j j' φ hφ hq hg K
     (isIso_nearbyDualityMap_of_isProper ℓ D hc _)
