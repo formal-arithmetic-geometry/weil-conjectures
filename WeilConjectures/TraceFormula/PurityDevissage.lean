@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMap
+public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChange
 public import WeilConjectures.TraceFormula.ConstructibleGenerationLowerStar
 public import WeilConjectures.TraceFormula.PurityBaseChange
@@ -85,7 +86,8 @@ theorem isIso_upperShriekUnitTensorMap_of_isDualizable (f : X ⟶ Y)
   exact Adjunction.isIso_exceptionalTensorMap
     (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
     (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    sorry sorry Kᘁ K
+    (boundedConstructibleExceptionalProjection_unit (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleExceptionalProjection_tensor (Profinite.padicAlgClRingObj ℓ) ℓ f) Kᘁ K
 
 /-- The invertibility of the purity map `γ_{f,K}` only depends on `K` up to isomorphism. -/
 lemma isIso_upperShriekUnitTensorMap_of_iso (f : X ⟶ Y)
