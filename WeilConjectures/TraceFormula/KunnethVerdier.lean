@@ -107,15 +107,15 @@ Künneth map: the tensor symmetry, the inverse of the projection formula for `p_
 of compact-support base change in the product square, the counit of `Ra_Y! ⊣ Ra_Y^!` and the
 unit isomorphism of the monoidal functor `La_X^*`. -/
 noncomputable def exceptionalKunnethAdjoint (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
         (externalProduct ℓ M (dualizingComplex' ℓ Y)) ⟶ M :=
-  (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map (β_ _ _).hom ≫
-    inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+  (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map (β_ _ _).hom ≫
+    inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
         (dualizingComplex' ℓ Y))).app M) ≫
     ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ▷ M) ≫
     ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)) ▷ M) ≫
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ▷ M) ≫
     ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv ▷ M) ≫
     (λ_ M).hom
 
@@ -124,8 +124,8 @@ noncomputable def exceptionalKunnethAdjoint (M : Dᵇc(X.left)⟦Profinite.padic
 `exceptionalKunnethAdjoint`. -/
 noncomputable def exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ M (dualizingComplex' ℓ Y) ⟶
-      (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv _ _
+      (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
+  (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv _ _
     (exceptionalKunnethAdjoint ℓ M)
 
 /-- The pairing `Lp_Y^* N ⊗ (M ⊠ D_Y N) ⟶ Rp_X^! M` whose transpose is the Künneth–Verdier map:
@@ -135,7 +135,7 @@ noncomputable def kunnethVerdierPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgC
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N ⊗
         externalProduct ℓ M (verdierDual ℓ (toPoint Y) N) ⟶
-      (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
+      (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
   (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
     (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) _ _) ≫
     (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
@@ -149,7 +149,7 @@ noncomputable def kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRin
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ M (verdierDual ℓ (toPoint Y) N) ⟶
       (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).obj
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
   curry (kunnethVerdierPairing ℓ M N)
 
 /-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (blueprint `def-sf-kv-maps` (iv)): through
@@ -195,40 +195,40 @@ commutes. -/
 @[reassoc]
 lemma exceptionalKunnethAdjoint_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : M ⟶ M') :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _) ≫
       exceptionalKunnethAdjoint ℓ M' = exceptionalKunnethAdjoint ℓ M ≫ φ := by
-  have hPF := boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ
+  have hPF := boundedConstructibleExceptionalProjectionMorphism_natural_right ℓ
     (prod.fst : X ⨯ Y ⟶ X)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y)) φ
-  have hinv : (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+  have hinv : (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
       (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) ≫
-        inv (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Y ⟶ X)
+        inv (boundedConstructibleExceptionalProjectionMorphism ℓ (prod.fst : X ⨯ Y ⟶ X)
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y)) M') =
-      inv (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Y ⟶ X)
+      inv (boundedConstructibleExceptionalProjectionMorphism ℓ (prod.fst : X ⨯ Y ⟶ X)
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y)) M) ≫ (_ ◁ φ) := by
     rw [IsIso.comp_inv_eq, Category.assoc, hPF, IsIso.inv_hom_id_assoc]
-  have hinv' : (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+  have hinv' : (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
       (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) ≫
-        inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+        inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y))).app M') =
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y))).app M) ≫ (_ ◁ φ) := hinv
   unfold exceptionalKunnethAdjoint
   exact exceptionalKunnethAdjoint_naturality_aux
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y)) φ
-    (fun M ↦ inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+    (fun M ↦ inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
         (dualizingComplex' ℓ Y))).app M)) hinv'
     ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
     ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)))
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
 /-- Transposes along an adjunction of morphisms related by naturality squares are related by
@@ -267,7 +267,7 @@ lemma exceptionalKunnethMap_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAl
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _ ≫
         exceptionalKunnethMap ℓ M' =
       exceptionalKunnethMap ℓ M ≫
-        (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ := by
+        (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ := by
   exact homEquiv_naturality_aux _ _ _ (exceptionalKunnethAdjoint_naturality ℓ φ)
 
 /-- The Künneth–Verdier pairing is natural in `M`. -/
@@ -277,7 +277,7 @@ lemma kunnethVerdierPairing_naturality {M M' : Dᵇc(X.left)⟦Profinite.padicAl
     _ ◁ ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _) ≫
         kunnethVerdierPairing ℓ M' N =
       kunnethVerdierPairing ℓ M N ≫
-        (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ :=
+        (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ :=
   kunnethVerdierPairing_aux _ _ _ _ _ _ (exceptionalKunnethMap_naturality ℓ φ)
 
 /-- The Künneth–Verdier map `κ_{M,N}` is natural in `M`. -/
@@ -287,7 +287,7 @@ lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicA
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ ▷ _ ≫
         kunnethVerdierMap ℓ M' N =
       kunnethVerdierMap ℓ M N ≫
-        (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) := by
+        (ihom _).map ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) := by
   exact curry_naturality_aux _ _ _ (kunnethVerdierPairing_naturality ℓ φ N)
 
 /-- The objects `M` for which the Künneth–Verdier map `κ_{M,N}` is an isomorphism are closed under

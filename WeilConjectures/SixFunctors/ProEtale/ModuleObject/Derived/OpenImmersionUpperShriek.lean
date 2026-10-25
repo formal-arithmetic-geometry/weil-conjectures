@@ -94,7 +94,7 @@ noncomputable def boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_pad
   boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
       (compactificationOverField j) (.ofIsOpenImmersion j.left) ≪≫
     Functor.isoWhiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ j)
-      (boundedConstructibleLowerStarId _ ℓ X) ≪≫
+      (boundedConstructibleLowerStarId ℓ X) ≪≫
     Functor.rightUnitor _
 
 /-- The exceptional inverse image along an open immersion is the pullback, `Rj^! ≅ j^*`, on
@@ -104,7 +104,7 @@ bounded constructible `ℚ̄_ℓ`-complexes: the conjugate of
 noncomputable def boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl :
     boundedConstructibleUpperShriek ℓ j ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ j)
+  conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction ℓ j)
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).symm
 

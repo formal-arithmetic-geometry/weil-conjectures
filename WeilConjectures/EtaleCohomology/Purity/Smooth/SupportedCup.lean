@@ -132,12 +132,12 @@ lemma isZero_leftDerivedUpperStar_openComplement_lowerShriekConstantTensor :
   · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
     exact (isZero_derivedTensor_obj_obj_of_isZero_left
       (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
-        Λ i j _) _).of_iso
+        (ModuleCat.{u + 1} Λ) i j _) _).of_iso
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
   · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
     exact (isZero_derivedTensor_obj_obj_of_isZero_right _
       (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
-        Λ k j _)).of_iso
+        (ModuleCat.{u + 1} Λ) k j _)).of_iso
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
 
 omit [Finite Λ] in

@@ -55,9 +55,8 @@ open Scheme
 
 section Coherence
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k
-    ≠ ℓ)]
-
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
   {X Z Z₁ Z₂ Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
@@ -112,7 +111,7 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
     haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
       r.isPullback
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c =
-      boundedConstructibleLowerShriekRefinementIso' _ ℓ r.isPullback r.hom_overG :=
+      boundedConstructibleLowerShriekRefinementIso' ℓ r.isPullback r.hom_overG :=
   sorry
 
 end Coherence
@@ -167,9 +166,8 @@ end Abstract
 
 section LowerStarUnit
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k
-    ≠ ℓ)]
-
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -356,8 +354,8 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom =
       (Functor.rightUnitor _).inv ≫
-        Functor.whiskerLeft _ (boundedConstructibleLowerStarId _ ℓ X).inv ≫
-        (boundedConstructibleLowerShriekRefinementIso' _ ℓ
+        Functor.whiskerLeft _ (boundedConstructibleLowerStarId ℓ X).inv ≫
+        (boundedConstructibleLowerShriekRefinementIso' ℓ
           (isPullback_openImmersionProperRefinementHom j)
           (openImmersionProperRefinementHom_comp_id j)).hom ≫
         Functor.whiskerRight

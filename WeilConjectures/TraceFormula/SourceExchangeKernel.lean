@@ -43,34 +43,34 @@ set_option maxHeartbeats 6000000 in
 `lem-trf-trace-source-exchange`, identity (a)): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`. -/
 theorem kernelPushforward_comp_kunnethVerdierMap :
     kernelPushforward ℓ f K ≫
-        kunnethVerdierMap ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-          ((boundedConstructibleLowerStar _ ℓ f).obj K) =
-      (boundedConstructibleLowerStar _ ℓ (prod.map f f)).map (kunnethVerdierMap ℓ K K) ≫
+        kunnethVerdierMap ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+          ((boundedConstructibleLowerStar ℓ f).obj K) =
+      (boundedConstructibleLowerStar ℓ (prod.map f f)).map (kunnethVerdierMap ℓ K K) ≫
         classTransportMap ℓ f K := by
   rw [kernelPushforward, Category.assoc, IsIso.inv_comp_eq]
   apply classTest_injective
   rw [classTest_comp, classTest_comp, classTest_map_comp_classTransportMap,
     classTest_kunnethVerdierMap, classTest_kunnethVerdierMap]
   rewrite [← Functor.map_comp_assoc]
-  refine (congrArg (fun t ↦ (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map t ≫
-    exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K))
+  refine (congrArg (fun t ↦ (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map t ≫
+    exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar ℓ f).obj K))
     (MonoidalCategory.whiskerLeft_whiskerLeft_map_comp_evaluation
     (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-      ((boundedConstructibleLowerStar _ ℓ f).obj K))
-    ((boundedConstructibleLowerStar _ ℓ f).obj K) (lowerStarVerdierDualMap ℓ f K)
-    ((ihom.ev ((boundedConstructibleLowerStar _ ℓ f).obj K)).app (dualizingComplex' ℓ Y))
+      ((boundedConstructibleLowerStar ℓ f).obj K))
+    ((boundedConstructibleLowerStar ℓ f).obj K) (lowerStarVerdierDualMap ℓ f K)
+    ((ihom.ev ((boundedConstructibleLowerStar ℓ f).obj K)).app (dualizingComplex' ℓ Y))
     _ (MonoidalClosed.whiskerLeft_curry_ihom_ev_app (A :=
-        (boundedConstructibleLowerStar _ ℓ f).obj K) _ _))).trans ?_
+        (boundedConstructibleLowerStar ℓ f).obj K) _ _))).trans ?_
   refine (Functor.map_whiskerLeft_map_comp_eq
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y))
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-      ((boundedConstructibleLowerStar _ ℓ f).obj K)) _ _ _ _
+      ((boundedConstructibleLowerStar ℓ f).obj K)) _ _ _ _
     (lowerStarTensorMap ℓ f K (verdierDual ℓ (toPoint X) K))
-    ((boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)))
+    ((boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)))
     (lowerStarDualizingComplexTrace ℓ f)
-    (exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K))
+    (exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar ℓ f).obj K))
     (prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X))
     ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
       (externalProduct ℓ K (dualizingComplex' ℓ X))) _ _
@@ -83,8 +83,8 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
   refine whisker_eq _ (whisker_eq _ (whisker_eq _ ?_))
   dsimp only [verdierDual, dualizingComplex, Functor.comp_obj, curriedTensor_obj_obj]
   exact NatIso.map_map₆_comp_hom_app_comp_map_comp_hom_app
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y))
-    (boundedConstructibleLowerShriek _ ℓ (prod.map f f))
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)) _ _ _ _ _ _ _ _ _
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
+    (boundedConstructibleLowerShriek ℓ (prod.map f f))
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)) _ _ _ _ _ _ _ _ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -61,9 +61,9 @@ lemma counit_comp_unit_eq_zero_of_isCompl
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K = 0 :=
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K = 0 :=
   ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).homEquiv _ _).injective
-    ((isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hcompl.disjoint _).eq_of_tgt
+    ((isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hcompl.disjoint _).eq_of_tgt
       _ _)
 
 /-- The open–closed triangle `j_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶` with the extension by zero `j_!`:
@@ -77,7 +77,7 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)) δ ∈
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)) δ ∈
       distTriang _ := by
   have : QuasiCompact (j.left ≫ X.hom) := by
     rw [Over.w j]
@@ -89,7 +89,7 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
   have hzero : (boundedConstructible _).ι.map
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K) ≫
       (boundedConstructible _).ι.map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K) = 0 := by
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) = 0 := by
     rw [← Functor.map_comp, h₀, Functor.map_zero]
   have h₁ : IsIso ((boundedConstructibleUpperStar _ ℓ j).map
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)) :=
@@ -97,9 +97,9 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
         j).right_triangle_components K)
   have h₂ : IsIso ((boundedConstructibleUpperStar _ ℓ i).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)) :=
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)) :=
     IsIso.of_isIso_fac_right (hh := IsIso.id _)
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).left_triangle_components K)
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).left_triangle_components K)
   have h₁' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj ℓ) ℓ j)
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)).1
@@ -108,12 +108,12 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
         ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)))))
   have h₂' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj ℓ) ℓ i)
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)).1
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)).1
     (inferInstanceAs (IsIso ((boundedConstructible _).ι.map
       ((boundedConstructibleUpperStar _ ℓ i).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)))))
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)))))
   have hN := ((boundedConstructible _).ι.map_isZero
-    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hcompl.disjoint
+    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ i).obj K))).of_iso
     ((boundedConstructibleUpperStarCompatibility _ ℓ j).symm.app _)
   have hA := ((boundedConstructible _).ι.map_isZero

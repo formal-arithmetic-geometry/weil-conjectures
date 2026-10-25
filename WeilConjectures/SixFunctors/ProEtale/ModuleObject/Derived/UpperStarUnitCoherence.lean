@@ -236,8 +236,8 @@ lemma boundedConstructibleUpperStarId_hom_app_unit :
   rw [boundedConstructibleUpperStarId_hom_app_hom, boundedConstructibleUpperStar_εIso_inv_hom]
   exact leftDerivedUpperStarId_hom_app_unit (Profinite.padicAlgClRingObj ℓ) X.left
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom]
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
 private lemma leftDerivedUpperStarUnitIso_hom_comp_left (f : X ⟶ Y) (g : Y ⟶ Z) :

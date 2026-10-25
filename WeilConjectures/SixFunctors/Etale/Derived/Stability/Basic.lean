@@ -273,7 +273,6 @@ theorem nonempty_iso_mapDerivedCategory_upperStar_derivedHom {U X : Scheme.{u}} 
 
 end DerivedHomReductions
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- If `M` is reflexive for the Verdier dual, `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`: currying
 `RHom(𝔻M ⊗ᴸ K, ω) ≅ RHom(K, RHom(𝔻M, ω))`. -/
 theorem nonempty_iso_derivedHom_verdierDual {X S : Scheme.{u}} (a : X ⟶ S)
@@ -284,29 +283,29 @@ theorem nonempty_iso_derivedHom_verdierDual {X S : Scheme.{u}} (a : X ⟶ S)
       (verdierDual Λ a).obj (op ((verdierDual Λ a).obj (op M) ⊗ K))) := by
   let N := (verdierDual Λ a).obj (op M)
   exact ⟨(RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso e ≪≫
-    ((((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) (N ⊗ K)).ofNatIsoLeft (tensorLeftTensor N
-        K)).rightAdjointUniq
-      ((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K).comp (derivedTensorHomAdjunction
-          (ModuleCat.{u + 1} Λ) N))).app
+    ((((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) (N ⊗ K)).ofNatIsoLeft
+        (tensorLeftTensor N K)).rightAdjointUniq
+      ((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K).comp
+        (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) N))).app
         (dualizingComplex Λ a)).symm⟩
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
-/-- If the Verdier dual relative to `a` preserves `Dctf(X, A)` and is reflexive on it, and the
-derived tensor product preserves `Dctf(X, A)`, so does the internal hom. -/
+/-- If the Verdier dual relative to `a` preserves `Dctf(X, Λ)` and is reflexive on it, and the
+derived tensor product preserves `Dctf(X, Λ)`, so does the internal hom. -/
 theorem constructibleFiniteTor_derivedHom_of_verdierDual {X S : Scheme.{u}} (a : X ⟶ S)
     [HasCompactification a]
     (hD : ∀ {N}, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X N →
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((verdierDual Λ a).obj (op N)))
     (hbid : ∀ {N}, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X N →
       Nonempty (N ≅ (verdierDual Λ a).obj (op ((verdierDual Λ a).obj (op N)))))
-    (htens : ∀ {K M}, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K → constructibleFiniteTor
-        (ModuleCat.{u + 1} Λ) X M →
-      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M))
+    (htens : ∀ {K M}, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+        (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M))
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) (hM : constructibleFiniteTor
-        (ModuleCat.{u + 1} Λ) X M) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj M)
-        := by
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj M) := by
   obtain ⟨e⟩ := hbid hM
   obtain ⟨e'⟩ := nonempty_iso_derivedHom_verdierDual Λ a K M e
   obtain ⟨hbc, c, d, hcd⟩ := hD (htens (hD hM) hK)

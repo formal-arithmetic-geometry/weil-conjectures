@@ -79,12 +79,12 @@ noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.pa
         ((boundedConstructibleLowerStar ℓ j).obj B) ⟶
       (boundedConstructibleLowerStar ℓ
         (prod.map (𝟙 X) j)).obj (externalProduct ℓ M B) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map (𝟙 X) j)).homEquiv _ _
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 X) j)).homEquiv _ _
     ((Functor.Monoidal.μIso _ _ _).inv ≫
       ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
         ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ U ⟶ U)).map
-            ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ j).counit.app B))))
+            ((boundedConstructibleUpperStarLowerStarAdjunction ℓ j).counit.app B))))
 
 /-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
 (blueprint `lem-trf-ordinary-kunneth`, section `sec-six-functors`, states it for finite

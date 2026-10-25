@@ -53,7 +53,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 @[reassoc]
 lemma lowerShriek_map_eqToHom_comp_lowerShriekComp_inv_app' {u u' : C ⟶ D} (h : u = u')
     (z : D ⟶ W) (M : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ z).map (eqToHom (by rw [h])) ≫
+    (boundedConstructibleLowerShriek ℓ z).map (eqToHom (by rw [h])) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u' z).inv.app M =
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u z).inv.app M ≫ eqToHom (by rw [h]) := by
   subst h
@@ -66,24 +66,24 @@ lemma lowerShriekComp_pushforwardSquare (g : C ⟶ D) (b : D ⟶ W) (c : C ⟶ V
     (p : W ⟶ Y) (p' : V ⟶ X) (f : X ⟶ Y) (hgq : g ≫ b = c ≫ q) (hq : q ≫ p = p' ≫ f)
     (w : g ≫ b ≫ p = (c ≫ p') ≫ f) (M : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ b p).inv.app
-        ((boundedConstructibleLowerShriek _ ℓ g).obj M) ≫
+        ((boundedConstructibleLowerShriek ℓ g).obj M) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (b ≫ p)).inv.app M ≫
       eqToHom (by rw [w]) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (c ≫ p') f).hom.app M =
-    (boundedConstructibleLowerShriek _ ℓ p).map
+    (boundedConstructibleLowerShriek ℓ p).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app M) ≫
-      (boundedConstructibleLowerShriek _ ℓ p).map (eqToHom (by rw [hgq])) ≫
-      (boundedConstructibleLowerShriek _ ℓ p).map
+      (boundedConstructibleLowerShriek ℓ p).map (eqToHom (by rw [hgq])) ≫
+      (boundedConstructibleLowerShriek ℓ p).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ c q).hom.app M) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ hq).hom.app
-        ((boundedConstructibleLowerShriek _ ℓ c).obj M) ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map
+        ((boundedConstructibleLowerShriek ℓ c).obj M) ≫
+      (boundedConstructibleLowerShriek ℓ f).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ c p').inv.app M) := by
   have h₁ := lowerShriek_map_lowerShriekComp_inv_app_comp_inv_app ℓ g b p M
   have h₁' : (boundedConstructibleLowerShriekComp_padicAlgCl ℓ b p).inv.app
-        ((boundedConstructibleLowerShriek _ ℓ g).obj M) ≫
+        ((boundedConstructibleLowerShriek ℓ g).obj M) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (b ≫ p)).inv.app M =
-      (boundedConstructibleLowerShriek _ ℓ p).map
+      (boundedConstructibleLowerShriek ℓ p).map
           ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app M) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (g ≫ b) p).inv.app M ≫
         eqToHom (by rw [Category.assoc]) := by

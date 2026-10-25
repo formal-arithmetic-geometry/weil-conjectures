@@ -105,29 +105,29 @@ noncomputable def pointUpperShriekιΨ :
 
 lemma eqToHom_counit_point {u₁ u₂ : point k ⟶ point k} (h : u₁ = u₂)
     (d : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ u₁).map
+    (boundedConstructibleLowerShriek ℓ u₁).map
         ((eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleUpperShriek
           ℓ g) h)).hom.app d) ≫
       (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
           ℓ g) h)).hom.app _ ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ u₂).counit.app d =
-    (boundedConstructibleUpperShriekAdjunction _ ℓ u₁).counit.app d := by
+      (boundedConstructibleUpperShriekAdjunction ℓ u₂).counit.app d =
+    (boundedConstructibleUpperShriekAdjunction ℓ u₁).counit.app d := by
   subst h
   simp
 
 lemma pointUpperShriekιΨ_conj (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (pointLowerShriekιΦ ℓ k).inv.app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k))).counit.app
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K)) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ
+      (boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
+        ((boundedConstructibleUpperShriekAdjunction ℓ (diag (point k))).counit.app
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K)) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ
         (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K =
     (pointUpperShriekιΨ ℓ k).hom.app K := by
   have h := Verdier.conjugate_counit_aux
-    ((boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k))).comp
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k) ≫ prod.fst))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 (point k)))
+    ((boundedConstructibleUpperShriekAdjunction ℓ (diag (point k))).comp
+      (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : point k ⨯ point k ⟶ point k)))
+    (boundedConstructibleUpperShriekAdjunction ℓ (diag (point k) ≫ prod.fst))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst).symm
     (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
       ℓ g) diag_point_fst))
@@ -162,7 +162,7 @@ variable (K) in
 lemma pointClass_transport
     (hbraid : Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k)))
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj K)
-        ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) ≫
+        ((boundedConstructibleLowerShriek ℓ (diag (point k))).obj (𝟙_ _)) ≫
       (boundedConstructibleUpperStar _ ℓ (diag (point k))).map (β_ _ _).hom =
       (β_ _ _).hom ≫
         Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _) :
@@ -170,7 +170,7 @@ lemma pointClass_transport
       (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
         (uncurry (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm)) ≫
       Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k) _ ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ
+      (boundedConstructibleUpperShriekAdjunction ℓ
         (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K =
     _ ◁ (pointDiagAdj ℓ k).counit.app (𝟙_ _) ≫ (ρ_ _).hom ≫
       (diagUpperStarProjIso ℓ prod.snd (by simp) K).hom := by
@@ -178,15 +178,15 @@ lemma pointClass_transport
   have h := Verdier.transport_class (S := Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (P := Dᵇc((point k ⨯ point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (F := boundedConstructibleUpperStar _ ℓ (diag (point k)))
-    (G := boundedConstructibleLowerShriek _ ℓ (diag (point k)))
-    (S₁ := boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
-    (H := boundedConstructibleUpperShriek _ ℓ (diag (point k)))
-    (B₁ := boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (G := boundedConstructibleLowerShriek ℓ (diag (point k)))
+    (S₁ := boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (H := boundedConstructibleUpperShriek ℓ (diag (point k)))
+    (B₁ := boundedConstructibleUpperShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k))
     (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (diag (point k)))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (boundedConstructibleUpperShriekAdjunction ℓ (diag (point k)))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : point k ⨯ point k ⟶ point k))
     (pointUpperShriekιΨ ℓ k) (fun K ↦ by exact pointUpperShriekιΨ_conj K)
-    (fun T M ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ (diag (point k)) T M)
+    (fun T M ↦ boundedConstructibleExceptionalProjectionMorphism ℓ (diag (point k)) T M)
     (fun T M ↦ by exact upperStar_map_exceptionalProjection_comp_counit ℓ (diag (point k)) T M)
     (by exact hbraid)
     (diagUnitCoeff ℓ (K := K) diag_point_snd diag_point_fst.symm)

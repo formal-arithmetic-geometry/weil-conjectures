@@ -45,9 +45,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k
-    ≠ ℓ)]
-
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
 /-- **The exchange formalism of bounded constructible complexes**: the bounded constructible
 derived categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of the separated `k`-schemes of finite type, with the derived

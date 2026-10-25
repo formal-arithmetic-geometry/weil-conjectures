@@ -76,7 +76,7 @@ lemma isIso_kunnethVerdierMap_of_iso_right (M : Dᵇc(X.left)⟦Profinite.padicA
       ((pre e.hom).app (dualizingComplex' ℓ Y))
   have w : l ≫ kunnethVerdierMap ℓ M N = _ := kunnethVerdierMap_naturality_right_pre ℓ M e.hom
   have : IsIso ((pre ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map e.hom)).app
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)) :=
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)) :=
     isIso_pre_app_of_isIso _ _
   have : IsIso ((pre e.hom).app (dualizingComplex' ℓ Y)) := isIso_pre_app_of_isIso _ _
   have : IsIso l := by dsimp only [l]; infer_instance
@@ -155,7 +155,7 @@ theorem isIso_exceptionalKunnethMap_of_isAffine {X : Over (Spec (.of k))}
   have := isIso_kunnethVerdierMap_of_distinguished_right ℓ M _ hT' h₁ h₃ 0
   refine isIso_kunnethVerdierMap_of_iso_right ℓ M
     ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ e.i).app _ ≪≫
-      (boundedConstructibleLowerStar _ ℓ e.i).mapIso
+      (boundedConstructibleLowerStar ℓ e.i).mapIso
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ e.i)) ≪≫
       ((shiftFunctorZero _ ℤ).app _).symm) this
 

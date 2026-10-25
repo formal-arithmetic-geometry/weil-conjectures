@@ -70,7 +70,8 @@ theorem localizingClosure_boundedConstructible_openImmersionLowerShriek :
       (boundedConstructible (condensedRingObj Λ U.left)).localizingClosure ≤
         ((boundedConstructible (condensedRingObj Λ X.left)).localizingClosure
           ).inverseImage D((j.left)_!open⟦Λ⟧) :=
-  ⟨fun K hK ↦ boundedConstructible_openImmersionLowerShriek_obj Λ ℓ j ⟨K, hK⟩, fun _ ↦ inferInstance,
+  ⟨fun K hK ↦ boundedConstructible_openImmersionLowerShriek_obj Λ ℓ j ⟨K, hK⟩,
+    fun _ ↦ inferInstance,
     ObjectProperty.localizingClosure_le_inverseImage _ _ fun K hK ↦
       ObjectProperty.le_localizingClosure _ _
         (boundedConstructible_openImmersionLowerShriek_obj Λ ℓ j ⟨K, hK⟩)⟩

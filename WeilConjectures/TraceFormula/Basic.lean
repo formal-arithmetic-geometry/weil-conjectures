@@ -145,7 +145,7 @@ instance additive_upperStarFromPoint (X : Scheme.{u}) : (upperStarFromPoint X).A
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
   exact Functor.additive_of_preservesBinaryBiproducts _
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
@@ -177,7 +177,7 @@ multiplication by the constant global section `a` of `ℚ̲̄_ℓ`
 (`Profinite.PadicAlgCl.constRingHom`). -/
 noncomputable def padicAlgClUnitEndRingHom :
     PadicAlgCl ℓ →+* End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (boundedConstructibleUnitEndRingHom _ ℓ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
+  (boundedConstructibleUnitEndRingHom ℓ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
 
 end Scalars
 

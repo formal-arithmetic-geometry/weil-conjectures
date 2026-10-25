@@ -140,10 +140,10 @@ through `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleBaseChange_id_app (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleBaseChange ℓ
         (IsPullback.of_id_snd (f := g)).toCommSq).app M ≫
-      (boundedConstructibleLowerStarId _ ℓ Y').hom.app
+      (boundedConstructibleLowerStarId ℓ Y').hom.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M) =
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-      ((boundedConstructibleLowerStarId _ ℓ Y).hom.app M) := by
+      ((boundedConstructibleLowerStarId ℓ Y).hom.app M) := by
   rw [boundedConstructibleBaseChange_eq_pfBaseChange]
   exact (𝔽).pfBaseChange_id_vert_app (SepFinType.homMk g) _ M
 
@@ -153,8 +153,8 @@ lemma boundedConstructibleBaseChange_id :
     boundedConstructibleBaseChange ℓ
         (IsPullback.of_id_snd (f := g)).toCommSq ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
-        (boundedConstructibleLowerStarId _ ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
-    Functor.whiskerRight (boundedConstructibleLowerStarId _ ℓ Y).hom
+        (boundedConstructibleLowerStarId ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
+    Functor.whiskerRight (boundedConstructibleLowerStarId ℓ Y).hom
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
       (Functor.leftUnitor _).hom := by
   refine NatTrans.ext (funext fun M ↦ ?_)
@@ -172,8 +172,8 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
         (isPullback_ofIsOpenImmersion_overG (f := f) (f' := f') (g := g)).toCommSq ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (ofIsOpenImmersionBaseChangeHom (f := f) (f' := f') g))
-        (boundedConstructibleLowerStarId _ ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
-    Functor.whiskerRight (boundedConstructibleLowerStarId _ ℓ Y).hom
+        (boundedConstructibleLowerStarId ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
+    Functor.whiskerRight (boundedConstructibleLowerStarId ℓ Y).hom
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
       (Functor.leftUnitor _).hom := by
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
@@ -192,11 +192,11 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
         isPullback_ofIsOpenImmersion_overG ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
         (Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ f')
-          (boundedConstructibleLowerStarId _ ℓ Y').hom ≫ (Functor.rightUnitor _).hom) ≫
+          (boundedConstructibleLowerStarId ℓ Y').hom ≫ (Functor.rightUnitor _).hom) ≫
       boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
         sq.toCommSq =
     Functor.whiskerRight (Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ f)
-        (boundedConstructibleLowerStarId _ ℓ Y).hom ≫ (Functor.rightUnitor _).hom)
+        (boundedConstructibleLowerStarId ℓ Y).hom ≫ (Functor.rightUnitor _).hom)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) := by
   have hb : (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
       (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq)).hom ≫
@@ -216,7 +216,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
       (Compactification.ofIsOpenImmersion f'.left).overI)
     (P' := boundedConstructibleLowerStar ℓ
       (Compactification.ofIsOpenImmersion f'.left).overG)
-    (boundedConstructibleLowerStarId _ ℓ Y) (boundedConstructibleLowerStarId _ ℓ Y') _
+    (boundedConstructibleLowerStarId ℓ Y) (boundedConstructibleLowerStarId ℓ Y') _
     (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ) _ _ hb
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and

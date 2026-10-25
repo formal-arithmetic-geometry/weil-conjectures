@@ -73,13 +73,13 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
 noncomputable instance (c : Compactification f.left) :
-    (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).CommShift ℤ := by
+    (boundedConstructibleLowerShriekOfCompactification ℓ c).CommShift ℤ := by
   delta boundedConstructibleLowerShriekOfCompactification
   infer_instance
 
 instance (c : Compactification f.left) :
     NatTrans.CommShift
-      (boundedConstructibleLowerShriekOfCompactificationCompatibility Λ ℓ c).hom ℤ := by
+      (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c).hom ℤ := by
   unfold boundedConstructibleLowerShriekOfCompactificationCompatibility
     boundedConstructibleLowerShriekOfCompactification
   infer_instance
@@ -87,11 +87,11 @@ instance (c : Compactification f.left) :
 variable (f)
 
 /-- The derived lower shriek on bounded constructible complexes commutes with the shifts. -/
-noncomputable instance : (boundedConstructibleLowerShriek Λ ℓ f).CommShift ℤ := by
+noncomputable instance : (boundedConstructibleLowerShriek ℓ f).CommShift ℤ := by
   delta boundedConstructibleLowerShriek
   infer_instance
 
-instance : NatTrans.CommShift (boundedConstructibleLowerShriekCompatibility Λ ℓ f).hom ℤ := by
+instance : NatTrans.CommShift (boundedConstructibleLowerShriekCompatibility ℓ f).hom ℤ := by
   unfold boundedConstructibleLowerShriekCompatibility boundedConstructibleLowerShriek
   infer_instance
 

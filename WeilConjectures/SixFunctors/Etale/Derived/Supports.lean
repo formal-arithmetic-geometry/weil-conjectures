@@ -215,11 +215,10 @@ complement of `Z₁ ×_X U` in `U`. Then `L(a ≫ j)^* Ri₁_! M = 0`, the range
 disjoint from `Z₁`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
     (i₁ : Z₁ ⟶ X) [IsClosedImmersion i₁] (j : U ⟶ X)
-    (M : DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsZero ((L(((pullback.snd i₁ j).openComplement.ι ≫ j)^*[ModuleCat.{u + 1} Λ])).obj
-      ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj M)) := by
-  refine isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ)
-      i₁
+    (M : DerivedCategory (Sheaf Z₁.smallEtaleTopology A)) :
+    IsZero ((L(((pullback.snd i₁ j).openComplement.ι ≫ j)^*[A])).obj
+      ((R(i₁)_![A]).obj M)) := by
+  refine isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i₁
     i₁.openComplement.ι
     (by rw [i₁.range_eq_compl_range_openComplement_ι]; exact disjoint_compl_left)
     _ ?_ _
@@ -317,12 +316,14 @@ theorem existsUnique_supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i
     (Scheme.Hom.range_eq_compl_range_openComplement_ι _) hcd ?_ ?_
   · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
     exact (isZero_derivedTensor_obj_obj_of_isZero_left
-      (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ i₁ j _)
+      (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
+        (ModuleCat.{u + 1} Λ) i₁ j _)
         _).of_iso (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
   · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
     exact (isZero_derivedTensor_obj_obj_of_isZero_right _
-      (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ i₂ j
-        _)).of_iso (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
+      (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
+        (ModuleCat.{u + 1} Λ) i₂ j _)).of_iso
+        (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
 
 /-- The *product of supports* `Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)` for closed
 immersions with `Z = Z₁ ∩ Z₂`: the unique factorisation of the tensor product of the counits

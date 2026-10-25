@@ -294,7 +294,7 @@ lemma kunnethVerdierMap_naturality_right_pre (M : Dᵇc(X.left)⟦Profinite.padi
           ((pre g).app (dualizingComplex' ℓ Y)) ≫ kunnethVerdierMap ℓ M N =
       kunnethVerdierMap ℓ M N' ≫
         (pre ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map g)).app
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
   curry_dinaturality _ _ _ _ (pairing_dinaturality _ _ _ _ _ _ _
     (whiskerLeft_map_pre_comp_μ_comp_map_ev _ g _))
 
@@ -317,7 +317,7 @@ noncomputable def kunnethVerdierTarget (M : Dᵇc(X.left)⟦Profinite.padicAlgCl
     (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤
       Dᵇc((X ⨯ Y).left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).op ⋙
-    internalHom.flip.obj ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
+    internalHom.flip.obj ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
 
 variable (Y) in
 /-- The Künneth–Verdier map `κ_{M,N}`, as a natural transformation in `N ∈ Dᵇc(Y)⟦ℚ̄_ℓ⟧ᵒᵖ`. -/
@@ -358,7 +358,7 @@ adjunction `Lq^* ⊣ Rq_*` and biduality on `Y`. -/
 instance isHomExact_kunnethVerdierSource (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (kunnethVerdierSource ℓ Y M).IsHomExact :=
   Functor.isHomExact_of_biduality (dualizingComplex' ℓ Y) (𝟭 _)
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).comp
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.snd : X ⨯ Y ⟶ Y)).comp
       (boundedConstructibleTensorIhomAdjunction
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)))
     _ (fun _ ↦ Iso.refl _) (fun _ ↦ (Category.comp_id _).trans (Category.id_comp _).symm)
@@ -369,11 +369,11 @@ instance isHomExact_kunnethVerdierTarget (M : Dᵇc(X.left)⟦Profinite.padicAlg
     (kunnethVerdierTarget ℓ Y M).IsHomExact :=
   Functor.isHomExact_of_biduality (dualizingComplex' ℓ (X ⨯ Y))
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y) ⋙ (curriedTensor _).obj
-      ((ihom ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)).obj
+      ((ihom ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)).obj
         (dualizingComplex' ℓ (X ⨯ Y))))
     (Adjunction.id) _
     (fun _ ↦ (ihom _).mapIso (asIso (toIhomIhom (dualizingComplex' ℓ (X ⨯ Y))
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M))) ≪≫
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M))) ≪≫
         (ihomCurryIso _ _ _).symm)
     (fun _ ↦ ihom_map_comp_ihomUncurry_naturality _ _ _ _)
 

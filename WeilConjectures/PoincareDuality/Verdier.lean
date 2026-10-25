@@ -308,8 +308,8 @@ theorem isIso_map_verdierBiduality_iff_of_isOpenImmersion
   let : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).LaxBraided :=
     { (inferInstance : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         j).LaxMonoidal) with braided := hbr }
-  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion _ ℓ j K
-  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion _ ℓ j
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j K
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j
     ((ihom K).obj (dualizingComplex ℓ X))
   have : IsIso (MonoidalClosed.dualComparison (boundedConstructibleUpperStar _ ℓ j)
       (dualizingComplexIsoUpperStar ℓ j).inv K) := by

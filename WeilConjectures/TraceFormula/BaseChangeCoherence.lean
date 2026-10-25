@@ -98,7 +98,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz'
       ((compactificationOverField f).ofIsPullback sq₂.overLeft)]
   simp only [Iso.refl_hom, Functor.whiskerRight_id', Category.id_comp, Iso.symm_hom]
   exact TwoSquare.whiskerLeft_whiskerRight_vComp_conj _ _ _ _ _ _ _
-    (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz _ ℓ _ _ _ _ _
+    (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz ℓ _ _ _ _ _
       hi₂ hp₂ hi₁ hp₁)
 
 /-- **Horizontal pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian

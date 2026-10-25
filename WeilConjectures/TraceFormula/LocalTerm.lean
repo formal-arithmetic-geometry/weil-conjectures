@@ -200,7 +200,7 @@ theorem pushforward_comp (f : T ⟶ T') (g : T' ⟶ T'') [IsProper f.left] [IsPr
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g)))
-    (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ f g)
+    (boundedConstructibleUpperStarComp_hom_app_unit ℓ f g)
     (dualizingComplexComp ℓ f) (dualizingComplexComp ℓ g) (dualizingComplexComp ℓ (f ≫ g))
     (lowerShriekComp_dualizingComplexComp_counit_aux
       (boundedConstructibleUpperShriekAdjunction ℓ f)

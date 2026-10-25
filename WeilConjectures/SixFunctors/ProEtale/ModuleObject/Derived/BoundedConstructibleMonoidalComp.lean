@@ -50,9 +50,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme Functor
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k
-    ≠ ℓ)]
-
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
   {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -106,8 +105,7 @@ section Braided
 
 attribute [local instance] boundedConstructibleBraiding
 
-omit [Fact (ringChar k).Prime] [Fact ℓ.Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 lemma boundedConstructible_braiding_hom_hom (K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (β_ K M).hom.hom =
       (@BraidedCategory.braiding _ _ _ (DerivedCategory.braidedCategory' _) K.obj M.obj).hom :=

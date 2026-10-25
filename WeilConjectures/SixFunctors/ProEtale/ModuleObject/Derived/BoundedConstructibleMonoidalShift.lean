@@ -66,7 +66,7 @@ noncomputable abbrev commShiftTensorRightFamily (X : Scheme.{u}) :
           K).CommShift ℤ :=
   fun K ↦ DerivedCategory.commShiftTensorRight _ K
 
-variable {ℓ : ℕ} {k : Type u} [Field k]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))}
 
 instance commShift_boundedConstructible_curriedTensor_map {K K' :

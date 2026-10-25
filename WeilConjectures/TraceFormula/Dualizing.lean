@@ -115,7 +115,7 @@ noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
     boundedConstructibleLowerShriek ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X) ≪≫
-    boundedConstructibleLowerStarId _ ℓ X
+    boundedConstructibleLowerStarId ℓ X
 
 /-- The identity isomorphism `R(𝟙 X)^! ≅ 𝟭` of the exceptional inverse image: the conjugate of
 `boundedConstructibleLowerShriekId` for the adjunctions `R(𝟙 X)_! ⊣ R(𝟙 X)^!` and `𝟭 ⊣ 𝟭`. -/

@@ -81,29 +81,29 @@ is `Lx^* v`, by the triangle identity of `Lx^* ⊣ Rx_*`. -/
 lemma upperStar_map_unit_comp_comp_graphStalkMap :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)) ≫
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K)) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).inv.app
         (pointClosedPiece K x) ≫
       eqToHom (by rw [hx, Category.id_comp]) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))
         x).hom.app (pointClosedPiece K x) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).counit.app
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).counit.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) ≫
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).hom.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K) ≫
       graphStalkMap K h v x hx =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map v := by
   have h₁ := (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x
-    h).inv.naturality ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)
+    h).inv.naturality ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K)
   have h₂ := (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ
-    (point k)).hom.naturality ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).counit.app
+    (point k)).hom.naturality ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).counit.app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K))
   have h₃ := boundedConstructibleUpperStarComp_id_left_app (Profinite.padicAlgClRingObj ℓ) ℓ x
     (pointClosedPiece K x)
   have h₄ := upperStar_map_comp_eqToHom_congrArg ℓ _ hx
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)
-  have h₅ := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).left_triangle_components K
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K)
+  have h₅ := (boundedConstructibleUpperStarLowerStarAdjunction ℓ x).left_triangle_components K
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₂
   dsimp only [Functor.id_obj]
   rw [graphStalkMap, reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃, eqToHom_trans_assoc,
@@ -119,7 +119,7 @@ lemma ProperPushforwardDiagram.pushforwardCoeff_eq_homEquiv {S Y : Over (Spec (.
     {A : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ A}
     (P : c.ProperPushforwardDiagram Y) :
     P.pushforwardCoeff =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).homEquiv _ _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g).homEquiv _ _
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ P.g P.b₂).inv.app
               _ ≫
             eqToHom (by rw [P.w₂]) ≫
@@ -143,9 +143,9 @@ piece coefficient `u^Z = [x, x]_! v_x` satisfies `u^Z ∘ Lh^* η = η ∘ v` fo
 `η : K ⟶ Rx_* Lx^* K`, up to `R(𝟙)^! ≅ 𝟭`. -/
 theorem upperStar_map_unit_comp_graphClosedPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K) ≫
       graphClosedPieceCoeff K v hx =
-      v ≫ (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K ≫
+      v ≫ (boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K ≫
         (boundedConstructibleUpperShriekId ℓ X).inv.app _ := by
   have e₁ := ProperPushforwardDiagram.pushforwardCoeff_eq_homEquiv (graphClosedPieceDiagram K v hx)
   have e₂ : (lowerStarUpperShriekExchange ℓ (graphClosedPieceDiagram K v hx).w₁).app

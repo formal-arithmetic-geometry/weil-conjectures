@@ -187,12 +187,14 @@ lemma isZero_leftDerivedUpperStar_openComplement_supported_supported
   refine isZero_of_isZero_leftDerivedUpperStar_of_disjoint Λ (pullback.snd c ud)
     (pullback.snd b ud) _ _ (Scheme.Hom.range_eq_compl_range_openComplement_ι _)
     (Scheme.Hom.range_eq_compl_range_openComplement_ι _) hcd ?_ ?_
-  · exact (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ c ud
-      _).of_iso ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ ud).app _).symm
+  · exact (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
+      (ModuleCat.{u + 1} Λ) c ud _).of_iso
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ ud).app _).symm
   · set o := (pullback.snd b ud).openComplement.ι ≫ ud
     have hE : IsZero ((L((o)^*[ModuleCat.{u + 1} Λ])).obj ((R(b)_![ModuleCat.{u + 1} Λ]).obj
         ((R(b)^![Λ]).obj F))) :=
-      isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ b ud _
+      isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
+        (ModuleCat.{u + 1} Λ) b ud _
     have := isIso_supportedRestriction_of_isOpenImmersion Λ o c (pullback.snd c o)
       (pullback.fst c o) (IsPullback.of_hasPullback c o)
       ((R(b)_![ModuleCat.{u + 1} Λ]).obj ((R(b)^![Λ]).obj F)) _ (Iso.refl _)

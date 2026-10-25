@@ -56,8 +56,8 @@ instance isIso_projectionMorphism_boundedConstructible_padicAlgCl (p : X ⟶ Y) 
       p).projectionMorphism A B) := by
   have h := Adjunction.ι_map_projectionMorphism_restrictFullyFaithful
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p.left)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ p K.obj K.property) A B
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ p K) A B
   have : IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
       p.left).projectionMorphism A.obj B.obj) :=
     (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj ℓ (X' := X) (Y' := Y)

@@ -299,7 +299,7 @@ lemma boundedConstructibleUpperStarLowerShriekAdjunction_id_unit_app
     [IsProper (𝟙 X : X ⟶ X).left] (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (𝟙 X)).unit.app M ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X) ≪≫
-          boundedConstructibleLowerStarId _ ℓ X).hom.app
+          boundedConstructibleLowerStarId ℓ X).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj M) =
       (boundedConstructibleUpperStarId _ ℓ X).inv.app M := by
   have h := unit_conjugateEquiv
@@ -320,12 +320,12 @@ lemma boundedConstructibleLowerShriekSquareIso_toPoint_hom_app
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app N ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 (point k)) ≪≫
-          boundedConstructibleLowerStarId _ ℓ (point k)).hom.app
+          boundedConstructibleLowerStarId ℓ (point k)).hom.app
           ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
             N) =
       (boundedConstructibleLowerShriek ℓ (toPoint X)).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X) ≪≫
-          boundedConstructibleLowerStarId _ ℓ X).hom.app N) := by
+          boundedConstructibleLowerStarId ℓ X).hom.app N) := by
   rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 X) (toPoint X)).hom.app
     N)]
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, Iso.trans_hom, Iso.symm_hom,

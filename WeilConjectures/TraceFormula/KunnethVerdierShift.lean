@@ -83,12 +83,12 @@ noncomputable def exceptionalKunnethAdjointNatTrans :
 
 instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f) K).app B) :=
-  isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ f K B
+  isIso_boundedConstructibleExceptionalProjectionMorphism ℓ f K B
 
 instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f) K) :=
   NatIso.isIso_of_isIso_app _
 
@@ -97,12 +97,12 @@ variable (X Y) in
 map factors: compact-support base change, the counit of `Ra_Y! ⊣ Ra_Y^!` and the unit
 isomorphism of `La_X^*`. -/
 noncomputable def exceptionalKunnethCounit :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
           (dualizingComplex' ℓ Y)) ⟶ 𝟙_ _ :=
   (prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ≫
     (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
 lemma exceptionalKunnethAdjointNatTrans_eq :
@@ -112,8 +112,8 @@ lemma exceptionalKunnethAdjointNatTrans_eq :
           (boundedConstructibleBraidingNatTrans₁ _
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
               (dualizingComplex' ℓ Y))))
-          (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)) ≫
-        inv (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+          (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)) ≫
+        inv (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
           (compactificationOverField (prod.fst : X ⨯ Y ⟶ X))
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y))) ≫
@@ -130,7 +130,7 @@ lemma exceptionalKunnethAdjointNatTrans_eq :
 instance commShift_exceptionalKunnethAdjointNatTrans :
     NatTrans.CommShift (exceptionalKunnethAdjointNatTrans ℓ X Y) ℤ := by
   have := NatTrans.CommShift.of_isIso
-    (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField (prod.fst : X ⨯ Y ⟶ X))
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
         (dualizingComplex' ℓ Y))) ℤ
@@ -157,7 +157,7 @@ noncomputable def exceptionalKunnethMapNatTrans :
 instance commShift_exceptionalKunnethMapNatTrans :
     NatTrans.CommShift (exceptionalKunnethMapNatTrans ℓ X Y) ℤ :=
   NatTrans.CommShift.of_homEquiv
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X))
     (exceptionalKunnethAdjointNatTrans ℓ X Y) _ (fun _ ↦ rfl)
 
 

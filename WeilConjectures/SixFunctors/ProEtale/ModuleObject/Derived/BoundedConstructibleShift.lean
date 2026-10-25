@@ -69,14 +69,12 @@ instance commShift_boundedConstructibleUpperStarId_hom (X : Over (Spec (.of k)))
   unfold boundedConstructibleUpperStarId
   infer_instance
 
-
-
 /-- The derived pushforward on bounded constructible complexes commutes with the shifts. -/
-noncomputable instance : (boundedConstructibleLowerStar Λ ℓ f).CommShift ℤ := by
+noncomputable instance : (boundedConstructibleLowerStar ℓ f).CommShift ℤ := by
   delta boundedConstructibleLowerStar
   infer_instance
 
-instance : NatTrans.CommShift (boundedConstructibleLowerStarCompatibility Λ ℓ f).hom ℤ := by
+instance : NatTrans.CommShift (boundedConstructibleLowerStarCompatibility ℓ f).hom ℤ := by
   unfold boundedConstructibleLowerStarCompatibility boundedConstructibleLowerStar
   infer_instance
 

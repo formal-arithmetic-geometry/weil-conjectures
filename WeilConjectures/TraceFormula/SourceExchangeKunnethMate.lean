@@ -77,46 +77,46 @@ cartesian square `(1 × f) ≫ p_Y = p₂ ≫ f`) and `Rp_X! R(1 × f)_! ≅ Rp�
 theorem upperStar_map_unit_comp_squareIso_comp_counit_comp_prodUpperStarCounit
     (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ f).map
-        ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+        ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f)).unit.app
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj B)))) ≫
+              ((boundedConstructibleLowerStar ℓ f).obj B)))) ≫
       (boundedConstructibleUpperStar _ ℓ f).map
         ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
           ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj B))) :
-          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj
-            ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj
+              ((boundedConstructibleLowerStar ℓ f).obj B))) :
+          _ ⟶ (boundedConstructibleLowerShriek ℓ f).obj
+            ((boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj
               ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
                 ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-                  ((boundedConstructibleLowerStar _ ℓ f).obj B))))) ≫
+                  ((boundedConstructibleLowerStar ℓ f).obj B))))) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)).map
         (prodUpperStarCounit ℓ (prod.map_snd f f) B) =
     ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
         (IsPullback.of_prod_fst_with_id f Y).flip).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj B)) :
-        (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ
+          ((boundedConstructibleLowerStar ℓ f).obj B)) :
+        (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerShriek ℓ
           (prod.fst : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleUpperStar _ ℓ
-            (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar _ ℓ f).obj B))) ⟶
-        (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
+            (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar ℓ f).obj B))) ⟶
+        (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
           ((boundedConstructibleUpperStar _ ℓ (prod.map f (𝟙 Y))).obj
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj B)))) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+              ((boundedConstructibleLowerStar ℓ f).obj B)))) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStarComp _ ℓ (prod.map f (𝟙 Y)) prod.snd).inv.app
-            ((boundedConstructibleLowerStar _ ℓ f).obj B) ≫
+            ((boundedConstructibleLowerStar ℓ f).obj B) ≫
           eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
-            ((boundedConstructibleLowerStar _ ℓ f).obj B)) (by simp)) ≫
+            ((boundedConstructibleLowerStar ℓ f).obj B)) (by simp)) ≫
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
             ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B) ≫
           (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
             (IsPullback.of_prod_snd_with_id f X)).app B) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (prod.map (𝟙 X) f) prod.fst).inv.app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj B) ≫
-      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj B)) (by simp)) := by
   have : IsProper (prod.map f (𝟙 Y)).left :=
     MorphismProperty.of_isPullback ((IsPullback.of_prod_fst_with_id f Y).map (Over.forget _))
@@ -129,7 +129,7 @@ theorem upperStar_map_unit_comp_squareIso_comp_counit_comp_prodUpperStarCounit
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f)
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f))
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f (𝟙 Y)))
-    _ _ _ (boundedConstructibleLowerShriek _ ℓ (prod.map (𝟙 X) f))
+    _ _ _ (boundedConstructibleLowerShriek ℓ (prod.map (𝟙 X) f))
     _ _ _ (boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv ℓ
       (IsPullback.of_prod_fst_with_id f Y).flip)
   case h₁ =>

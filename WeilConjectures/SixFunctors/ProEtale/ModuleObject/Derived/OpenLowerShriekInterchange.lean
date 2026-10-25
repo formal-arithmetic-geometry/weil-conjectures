@@ -254,7 +254,6 @@ variable {X Z X' Z' : Over (Spec (.of k))}
 satisfying proper base change for the two cartesian squares involved: the square itself, and
 the base change of `p'` along the closed complement of `j`. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso
-
     (sq : IsPullback p i' j p')
     (h₁ : IsIso (boundedConstructibleBaseChange ℓ sq.flip.toCommSq))
     (h₂ : IsIso (boundedConstructibleBaseChange ℓ

@@ -240,14 +240,14 @@ lemma kunnethVerdierMap_naturality_left' {M M' : Dᵇc(X.left)⟦Profinite.padic
     (f : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProductMap ℓ f (𝟙 _) ≫ kunnethVerdierMap ℓ M' N =
       kunnethVerdierMap ℓ M N ≫
-        (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) := by
+        (ihom _).map ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) := by
   rw [externalProductMap_id_right, kunnethVerdierMap_naturality_left]
 
 /-- The inverse Künneth–Verdier map is natural in `M`. -/
 @[reassoc]
 lemma inv_kunnethVerdierMap_naturality_left' {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (f : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) ≫
+    (ihom _).map ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) ≫
         inv (kunnethVerdierMap ℓ M' N) =
       inv (kunnethVerdierMap ℓ M N) ≫ externalProductMap ℓ f (𝟙 _) := by
   rw [IsIso.eq_inv_comp, ← kunnethVerdierMap_naturality_left'_assoc, IsIso.hom_inv_id,
@@ -278,8 +278,8 @@ variable {X C : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 @[reassoc]
 lemma boundedConstructibleUpperShriek_map_comp_eqToHom {a b : C ⟶ X} (h : a = b)
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K ⟶ K') :
-    (boundedConstructibleUpperShriek _ ℓ a).map f ≫ eqToHom (by rw [h]) =
-      eqToHom (by rw [h]) ≫ (boundedConstructibleUpperShriek _ ℓ b).map f := by
+    (boundedConstructibleUpperShriek ℓ a).map f ≫ eqToHom (by rw [h]) =
+      eqToHom (by rw [h]) ≫ (boundedConstructibleUpperShriek ℓ b).map f := by
   subst h
   simp
 
@@ -365,8 +365,8 @@ variable {ℓ} {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompa
 `Lc₂^* = Lc^* Lp₂^*` and `Rc₁^! = Rc^! Rp₁^!`, followed by the inverse Künneth–Verdier map. -/
 noncomputable def supportedClassOfCoeff (K₁ K₂ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (w : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K₂ ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K₁) :
-    (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K₁) :
+    (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       externalProduct ℓ K₁ (verdierDual ℓ (toPoint X) K₂) :=
   (correspondenceClassEquiv ℓ c.support K₂ K₁).symm
       (eqToHom (by rw [support_snd]) ≫ w ≫ eqToHom (by rw [support_fst])) ≫
@@ -383,7 +383,7 @@ lemma supportedClassOfCoeff_u : c.supportedClassOfCoeff K K c.u = c.supportedCla
 `u'`. -/
 lemma supportedClass_withCoeff (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K') :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     (c.withCoeff K' u').supportedClass = c.supportedClassOfCoeff K' K' u' :=
   ((c.withCoeff K' u').supportedClassOfCoeff_u).symm
 
@@ -397,8 +397,8 @@ private lemma comp_eq_comp_comp_of_eq {𝒞 : Type*} [Category 𝒞] {A B B' C C
 lemma supportedClassOfCoeff_comp_upperShriek_map
     {K₁ K₁' K₂ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (w : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K₂ ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K₁) (f : K₁ ⟶ K₁') :
-    c.supportedClassOfCoeff K₁' K₂ (w ≫ (boundedConstructibleUpperShriek _ ℓ c.c₁).map f) =
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K₁) (f : K₁ ⟶ K₁') :
+    c.supportedClassOfCoeff K₁' K₂ (w ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map f) =
       c.supportedClassOfCoeff K₁ K₂ w ≫ externalProductMap ℓ f (𝟙 _) := by
   unfold supportedClassOfCoeff
   refine comp_eq_comp_comp_of_eq ?_ (inv_kunnethVerdierMap_naturality_left' ℓ f K₂)
@@ -410,7 +410,7 @@ lemma supportedClassOfCoeff_comp_upperShriek_map
 lemma supportedClassOfCoeff_upperStar_map_comp
     {K₁ K₂ K₂' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (w : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K₂ ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K₁) (g : K₂' ⟶ K₂) :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K₁) (g : K₂' ⟶ K₂) :
     c.supportedClassOfCoeff K₁ K₂' ((boundedConstructibleUpperStar _ ℓ c.c₂).map g ≫ w) =
       c.supportedClassOfCoeff K₁ K₂ w ≫
         externalProductMap ℓ (𝟙 K₁) (verdierDualMap ℓ (toPoint X) g) := by
@@ -431,13 +431,13 @@ trace class factors (blueprint `lem-trf-trace-class-diagonal-pairing`, Step 2): 
 `Rd_! Lι^* ℚ̄_ℓ,C ≅ LΔ^* Rc_! ℚ̄_ℓ,C ⟶ ω_X`, the inverse of base change in the fixed square
 followed by the adjoint of `φ`. -/
 noncomputable def traceClassOfKernel :
-    ((boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
-        (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) →+
+    ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
+        (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X)) →+
       BorelMooreSection ℓ F.F where
   toFun φ := (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d).homEquiv _ _
+    (boundedConstructibleUpperShriekAdjunction ℓ F.d).homEquiv _ _
       (F.lowerShriekBaseChangeIso.inv.app (𝟙_ _) ≫
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).homEquiv _ _).symm φ) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _).symm φ) ≫
     (dualizingComplexComp ℓ F.d).hom
   map_zero' := by
     simp [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit]
@@ -445,12 +445,12 @@ noncomputable def traceClassOfKernel :
     simp [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit]
 
 lemma traceClassOfKernel_apply
-    (φ : (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
-      (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) :
+    (φ : (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
+      (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X)) :
     F.traceClassOfKernel φ = (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ F.d).homEquiv _ _
+      (boundedConstructibleUpperShriekAdjunction ℓ F.d).homEquiv _ _
         (F.lowerShriekBaseChangeIso.inv.app (𝟙_ _) ≫
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).homEquiv _ _).symm φ) ≫
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _).symm φ) ≫
       (dualizingComplexComp ℓ F.d).hom :=
   rfl
 
@@ -469,7 +469,7 @@ theorem traceClass_eq_traceClassOfKernel (F : c.FixedLocus) :
 theorem FixedLocus.traceClassWithCoeff_eq {c : Correspondence ℓ K} (F : c.FixedLocus)
     (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K') :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     F.traceClassWithCoeff K' u' =
       F.traceClassOfKernel (c.supportedClassOfCoeff K' K' u' ≫ evaluationKernel ℓ K') := by
   rw [traceClassWithCoeff, traceClass_eq_traceClassOfKernel]

@@ -91,21 +91,21 @@ theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
     {K' K'' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {ε : K' ⟶ K} {η : K ⟶ K''}
     {δ : K'' ⟶ K'⟦(1 : ℤ)⟧} (hT : Triangle.mk ε η δ ∈ distTriang _)
     (u' : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K')
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K')
     (u'' : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K'' ⟶
-      (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K'')
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K'')
     (hu' : (boundedConstructibleUpperStar _ ℓ c.c₂).map ε ≫ c.u =
-      u' ≫ (boundedConstructibleUpperShriek _ ℓ c.c₁).map ε)
+      u' ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map ε)
     (hu'' : (boundedConstructibleUpperStar _ ℓ c.c₂).map η ≫ u'' =
-      c.u ≫ (boundedConstructibleUpperShriek _ ℓ c.c₁).map η)
-    (h₁ : ∀ φ : (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
+      c.u ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map η)
+    (h₁ : ∀ φ : (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       (externalProduct ℓ K'' (verdierDual ℓ (toPoint X) K')) ⟦(-1 : ℤ)⟧, φ = 0)
     (h₂ : ∀ φ : externalProduct ℓ K' (verdierDual ℓ (toPoint X) K) ⟶
       (externalProduct ℓ K'' (verdierDual ℓ (toPoint X) K')) ⟦(-1 : ℤ)⟧, φ = 0)
     (h₃ : ∀ φ : externalProduct ℓ K (verdierDual ℓ (toPoint X) K'') ⟶
       (externalProduct ℓ K'' (verdierDual ℓ (toPoint X) K')) ⟦(-1 : ℤ)⟧, φ = 0)
     (h₄ : ∀ φ : (externalProduct ℓ K' (verdierDual ℓ (toPoint X) K'')) ⟦(1 : ℤ)⟧ ⟶
-      (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X), φ = 0) :
+      (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X), φ = 0) :
     c.traceClass F = F.traceClassWithCoeff K' u' + F.traceClassWithCoeff K'' u'' := by
   rw [traceClass_eq_traceClassOfKernel, FixedLocus.traceClassWithCoeff_eq,
     FixedLocus.traceClassWithCoeff_eq]

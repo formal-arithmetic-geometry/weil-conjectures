@@ -115,6 +115,7 @@ lemma upperStarLowerStarAdjunction_homEquiv_upperStarFromPointModComp_hom_app_ho
   rw [upperStarLowerStarAdjunction_homEquiv_hom,
     extendUnitHom_comp_upperStarFromPointModComp_hom_app_hom]
 
+omit [IsCommMonObj Λ] in
 /-- On underlying sheaves, the inverse of the identity isomorphism of the pushforward of module
 objects is that of the pushforward of sheaves. -/
 lemma lowerStarId_inv_app_hom (X : Scheme.{u})

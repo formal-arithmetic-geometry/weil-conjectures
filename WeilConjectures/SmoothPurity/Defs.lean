@@ -177,7 +177,7 @@ theorem smoothPurityIso_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfF
     smoothPurityIso ℓ (f ≫ j) d =
       (ObjectProperty.ι _).mapIso
           ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).app _ ≪≫
-            (boundedConstructibleUpperShriek _ ℓ f).mapIso
+            (boundedConstructibleUpperShriek ℓ f).mapIso
               (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j)) ≪≫
         smoothPurityIso ℓ f d :=
   sorry

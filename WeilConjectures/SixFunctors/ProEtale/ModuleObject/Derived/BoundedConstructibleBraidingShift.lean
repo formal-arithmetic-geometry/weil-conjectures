@@ -32,7 +32,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable  {ℓ : ℕ} {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))}
 
 attribute [local instance] boundedConstructibleBraiding DerivedCategory.braidedCategory'

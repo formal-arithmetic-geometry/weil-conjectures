@@ -106,8 +106,8 @@ noncomputable def diagUpperStarExternalProductIso
 `LΔ^* ⊣ RΔ_*` adjoint of the evaluation `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K ⟶ ω_X`. -/
 noncomputable def evaluationKernel (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ K (verdierDual ℓ (toPoint X) K) ⟶
-      (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).homEquiv _ _
+      (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X) :=
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _
     ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X))
 
 end Evaluation
@@ -132,17 +132,17 @@ natural in `K` and `L` (`correspondenceClassEquiv_naturality_left`,
 inverse image, a class supported on `c`. -/
 noncomputable def correspondenceClassEquiv (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+    ((boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
         (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) ≃
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) ≃
       ((boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
-        (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).obj L) where
+        (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).obj L) where
   toFun g := (boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K ≫
-    Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-      (boundedConstructibleExceptionalProjection _ ℓ c) _ _ g ≫
+    Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction ℓ c)
+      (boundedConstructibleExceptionalProjection ℓ c) _ _ g ≫
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L
-  invFun f := (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-      (boundedConstructibleExceptionalProjection _ ℓ c) _ _).symm
+  invFun f := (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction ℓ c)
+      (boundedConstructibleExceptionalProjection ℓ c) _ _).symm
     ((boundedConstructibleUpperStarComp _ ℓ c prod.snd).inv.app K ≫ f ≫
       (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).hom.app L)
   left_inv g := by
@@ -154,13 +154,13 @@ noncomputable def correspondenceClassEquiv (K : Dᵇc(X.left)⟦Profinite.padicA
 
 lemma correspondenceClassEquiv_apply (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (g : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+    (g : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
         (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
     correspondenceClassEquiv ℓ c K L g =
       (boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K ≫
-        Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-          (boundedConstructibleExceptionalProjection _ ℓ c) _ _ g ≫
+        Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction ℓ c)
+          (boundedConstructibleExceptionalProjection ℓ c) _ _ g ≫
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L :=
   rfl
 
@@ -168,16 +168,16 @@ lemma correspondenceClassEquiv_apply (K : Dᵇc(X.left)⟦Profinite.padicAlgClRi
 lemma correspondenceClassEquiv_naturality_right
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {L L' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L')
-    (g : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+    (g : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
         (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
     correspondenceClassEquiv ℓ c K L'
-        (g ≫ (ihom _).map ((boundedConstructibleUpperShriek _ ℓ prod.fst).map b)) =
+        (g ≫ (ihom _).map ((boundedConstructibleUpperShriek ℓ prod.fst).map b)) =
       correspondenceClassEquiv ℓ c K L g ≫
-        (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).map b := by
+        (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).map b := by
   exact Verdier.correspondenceClassEquiv_naturality_right_conj
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-    (boundedConstructibleExceptionalProjection _ ℓ c) _
+    (boundedConstructibleUpperShriekAdjunction ℓ c)
+    (boundedConstructibleExceptionalProjection ℓ c) _
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst)
     ((boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K) b g
 
@@ -185,16 +185,16 @@ lemma correspondenceClassEquiv_naturality_right
 lemma correspondenceClassEquiv_naturality_left
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a : K' ⟶ K)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (g : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+    (g : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
         (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
     correspondenceClassEquiv ℓ c K' L
         (g ≫ (pre ((boundedConstructibleUpperStar _ ℓ prod.snd).map a)).app _) =
       (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).map a ≫
         correspondenceClassEquiv ℓ c K L g := by
   exact Verdier.correspondenceClassEquiv_naturality_left_conj
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-    (boundedConstructibleExceptionalProjection _ ℓ c) _
+    (boundedConstructibleUpperShriekAdjunction ℓ c)
+    (boundedConstructibleExceptionalProjection ℓ c) _
     (boundedConstructibleUpperStarComp _ ℓ c prod.snd)
     ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L) a g
 
@@ -213,7 +213,7 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 (blueprint `def-trf-trace-class-source`). -/
 noncomputable def traceClassSource : Dᵇc(c.C.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (ihom ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K)).obj
-    ((boundedConstructibleUpperShriek _ ℓ c.c₁).obj K)
+    ((boundedConstructibleUpperShriek ℓ c.c₁).obj K)
 
 /-- The *mate* `ũ : ℚ̄_ℓ,C ⟶ 𝓗_c(K)` of the coefficient map `u`, its transpose under the
 tensor–hom adjunction (blueprint `def-trf-trace-class-source`). -/
@@ -224,7 +224,7 @@ noncomputable def mate : 𝟙_ _ ⟶ c.traceClassSource :=
 trace-class source (blueprint `def-trf-trace-class-source`). -/
 noncomputable def mateEquiv :
     ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K ⟶
-        (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K) ≃
+        (boundedConstructibleUpperShriek ℓ c.c₁).obj K) ≃
       (𝟙_ _ ⟶ c.traceClassSource) :=
   curryHomEquiv'
 
@@ -237,13 +237,13 @@ lemma mateEquiv_apply_u : c.mateEquiv c.u = c.mate :=
 and the two adjunctions. -/
 noncomputable def exceptionalHomIso (M N : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (ihom ((boundedConstructibleUpperStar _ ℓ c.support).obj M)).obj
-        ((boundedConstructibleUpperShriek _ ℓ c.support).obj N) ≅
-      (boundedConstructibleUpperShriek _ ℓ c.support).obj ((ihom M).obj N) :=
+        ((boundedConstructibleUpperShriek ℓ c.support).obj N) ≅
+      (boundedConstructibleUpperShriek ℓ c.support).obj ((ihom M).obj N) :=
   haveI := Verdier.isIso_exceptionalHomMap_of_isIso
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleExceptionalProjection _ ℓ c.support) M N
-  asIso (Verdier.exceptionalHomMap (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleExceptionalProjection _ ℓ c.support) M N)
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleExceptionalProjection ℓ c.support) M N
+  asIso (Verdier.exceptionalHomMap (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleExceptionalProjection ℓ c.support) M N)
 
 /-- The trace-class source in terms of the support map:
 `RHom(Lc₂^* K, Rc₁^! K) ≅ RHom(Lc^* Lp₂^* K, Rc^! Rp₁^! K)`, by the composition isomorphisms
@@ -252,8 +252,8 @@ noncomputable def traceClassSourceIso :
     c.traceClassSource ≅
       (ihom ((boundedConstructibleUpperStar _ ℓ c.support).obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K))).obj
-        ((boundedConstructibleUpperShriek _ ℓ c.support).obj
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) :=
+        ((boundedConstructibleUpperShriek ℓ c.support).obj
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) :=
   ihomIsoOfIso
     (eqToIso (by rw [support_snd]) ≪≫
       (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).app K)
@@ -266,10 +266,10 @@ noncomputable def traceClassSourceIso :
 inverse Künneth–Verdier isomorphism `κ_{K,K}`. -/
 noncomputable def verdierDualityIso :
     c.traceClassSource ≅
-      (boundedConstructibleUpperShriek _ ℓ c.support).obj
+      (boundedConstructibleUpperShriek ℓ c.support).obj
         (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) :=
   c.traceClassSourceIso ≪≫ c.exceptionalHomIso _ _ ≪≫
-    (boundedConstructibleUpperShriek _ ℓ c.support).mapIso
+    (boundedConstructibleUpperShriek ℓ c.support).mapIso
       (asIso (kunnethVerdierMap ℓ K K)).symm
 
 namespace FixedLocus
@@ -296,10 +296,10 @@ noncomputable def upperShriekLowerStarIso :
       boundedConstructibleUpperShriek ℓ F.d ⋙
         boundedConstructibleLowerStar ℓ F.ι :=
   conjugateIsoEquiv
-    ((boundedConstructibleUpperShriekAdjunction _ ℓ c.support).comp
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)))
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).comp
-      (boundedConstructibleUpperShriekAdjunction _ ℓ F.d))
+    ((boundedConstructibleUpperShriekAdjunction ℓ c.support).comp
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)))
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).comp
+      (boundedConstructibleUpperShriekAdjunction ℓ F.d))
     F.lowerShriekBaseChangeIso.symm
 
 /-- **Pullback along the ordinary leg in the fixed square** (blueprint
@@ -320,11 +320,11 @@ end FixedLocus
 -/
 noncomputable def traceMap (F : c.FixedLocus) :
     c.traceClassSource ⟶
-      (boundedConstructibleLowerStar _ ℓ F.ι).obj (dualizingComplex' ℓ F.F) :=
+      (boundedConstructibleLowerStar ℓ F.ι).obj (dualizingComplex' ℓ F.F) :=
   c.verdierDualityIso.hom ≫
-    (boundedConstructibleUpperShriek _ ℓ c.support).map (evaluationKernel ℓ K) ≫
+    (boundedConstructibleUpperShriek ℓ c.support).map (evaluationKernel ℓ K) ≫
     (F.upperShriekLowerStarIso.app (dualizingComplex' ℓ X)).hom ≫
-    (boundedConstructibleLowerStar _ ℓ F.ι).map (dualizingComplexComp ℓ F.d).hom
+    (boundedConstructibleLowerStar ℓ F.ι).map (dualizingComplexComp ℓ F.d).hom
 
 /-- The *trace class* `Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)` of an endocorrespondence (blueprint
 `def-trf-trace-class`, `sk-d-trace-class`): the `Lι^* ⊣ Rι_*` adjoint of the composite
@@ -334,7 +334,7 @@ with no hypothesis beyond the finiteness conditions on the schemes (blueprint
 `prop-trf-trace-class-unconditional`). -/
 noncomputable def traceClass (F : c.FixedLocus) : BorelMooreSection ℓ F.F :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
       (c.mate ≫ c.traceMap F)
 
 /-- **The trace class is unconditionally defined** (blueprint
@@ -343,7 +343,7 @@ noncomputable def traceClass (F : c.FixedLocus) : BorelMooreSection ℓ F.F :=
 morphism, defined for every coefficient map `u`. -/
 lemma traceClass_eq (F : c.FixedLocus) :
     c.traceClass F = (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
         (c.mateEquiv c.u ≫ c.traceMap F) :=
   rfl
 

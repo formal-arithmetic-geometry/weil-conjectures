@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 /-!
 # Projection formula and proper base change with rational coefficients
 
-Let `Λ = E` (a finite extension of `ℚ_ℓ`) or `Λ = ℚ̄_ℓ`, with condensed ring `E̲`, resp.
-`ℚ̲̄_ℓ`, and let `Loc(Dctf(X, Λ)) = Loc(Dbc(X, Λ))` be the localizing closure of the bounded
+Let `Λ = E` (a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`) or `Λ = ℚ̄_ℓ`, with condensed ring `E̲`,
+resp. `ℚ̲̄_ℓ`, and let `Loc(Dctf(X, Λ)) = Loc(Dbc(X, Λ))` be the localizing closure of the bounded
 constructible complexes in `D(X_proét, Λ) = D(Mod_{Λ_X})`
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). This file proves
 blueprint `sk-thm-sf-pf-field`:
@@ -73,7 +73,7 @@ include ℓ k
 
 section Field
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 set_option hygiene false in
 /-- The condensed field `E̲`. -/

@@ -55,7 +55,7 @@ attribute [local instance] boundedConstructibleBraiding
 
 section Injective
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 

@@ -52,12 +52,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k
-    ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
-
-/-- The formalism `boundedConstructibleExchangeFormalism`, for the coefficient ring `Λ`. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism Λ ℓ k
+/-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 section Squares
 
@@ -113,7 +112,6 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_baseChange
     boundedConstructiblePullbackSquareComparison_eq_sqIso]
   rfl
 
-omit in
 /-- The two definitions of the extension-by-zero exchange morphism agree. -/
 lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq' (sq : CommSq g' f' f g) :
     boundedConstructibleOpenImmersionLowerShriekBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq =
@@ -270,7 +268,6 @@ lemma boundedConstructibleLowerShriekRefinementIso'_hom_eq (sq : IsPullback (�
     Category.assoc]
   rfl
 
-omit in
 /-- The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is the exchange morphism of the triangle
 comparison. -/
 lemma boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft (w : i ≫ h = i₁) :
@@ -351,7 +348,6 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
-omit in
 /-- The two comparison isomorphisms between the lower shrieks attached to two compactifications
 agree. -/
 lemma boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq'
@@ -378,7 +374,6 @@ variable {X Y Z : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
 
-omit in
 /-- The composition isomorphism `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero is the
 composition isomorphism of the extensions by zero of the exchange formalism. -/
 lemma boundedConstructibleOpenImmersionLowerShriekComp_eq_shComp' (j : X ⟶ Y) (j' : Y ⟶ Z)

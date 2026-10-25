@@ -49,12 +49,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k
-    ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
-
-/-- The formalism `boundedConstructibleExchangeFormalism`, for the coefficient ring `Λ`. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism Λ ℓ k
+/-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]

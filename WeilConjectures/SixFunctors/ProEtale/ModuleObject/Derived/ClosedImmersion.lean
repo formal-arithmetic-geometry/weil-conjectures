@@ -73,7 +73,7 @@ include ℓ k
 /-- The derived pushforward `Ri_*` along a closed immersion is fully faithful on bounded
 constructible complexes: the counit `Li^* Ri_* ⟶ 𝟭` is an isomorphism. -/
 instance isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit
- {Z X : Over (Spec (.of k))}
+    {Z X : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (i : Z ⟶ X) [IsClosedImmersion i.left] :

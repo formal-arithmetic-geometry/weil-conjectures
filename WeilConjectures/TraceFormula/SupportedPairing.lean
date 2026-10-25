@@ -108,8 +108,8 @@ variable {X Y C D : Over (Spec (.of k))}
 `def-trf-supported-class`, read through the inverse Künneth–Verdier isomorphism. -/
 noncomputable def supportedClass (c : C ⟶ Y ⨯ X)
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
-      (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).obj L) :
-    (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+      (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).obj L) :
+    (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
       externalProduct ℓ L (verdierDual ℓ (toPoint X) K) :=
   (correspondenceClassEquiv ℓ c K L).symm u ≫ inv (kunnethVerdierMap ℓ L K)
 
@@ -118,7 +118,7 @@ variable (X Y) in
 `Rτ_! (K ⊠ N) ≅ L(τ⁻¹)^* (Lq₁^* K ⊗ Lq₂^* N) ≅ Lp₂^* K ⊗ Lp₁^* N ≅ N ⊠ K`. -/
 noncomputable def externalProductBraidingIso (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ (prod.braiding X Y).hom).obj (externalProduct ℓ K N) ≅
+    (boundedConstructibleLowerShriek ℓ (prod.braiding X Y).hom).obj (externalProduct ℓ K N) ≅
       externalProduct ℓ N K :=
   (lowerShriekIsoUpperStarInv ℓ (prod.braiding X Y)).app _ ≪≫
     (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (prod.braiding X Y).inv) _ _).symm ≪≫
@@ -135,11 +135,11 @@ noncomputable def externalProductBraidingIso (K : Dᵇc(X.left)⟦Profinite.padi
 and the exchange of the factors `Rτ_! (K ⊠ D_Y L) ≅ D_Y L ⊠ K`. -/
 noncomputable def oppositeSupportedClass (d : D ⟶ X ⨯ Y)
     (v : (boundedConstructibleUpperStar _ ℓ (d ≫ prod.snd)).obj L ⟶
-      (boundedConstructibleUpperShriek _ ℓ (d ≫ prod.fst)).obj K) :
-    (boundedConstructibleLowerShriek _ ℓ (d ≫ (prod.braiding X Y).hom)).obj (𝟙_ _) ⟶
+      (boundedConstructibleUpperShriek ℓ (d ≫ prod.fst)).obj K) :
+    (boundedConstructibleLowerShriek ℓ (d ≫ (prod.braiding X Y).hom)).obj (𝟙_ _) ⟶
       externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K :=
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ d (prod.braiding X Y).hom).hom.app _ ≫
-    (boundedConstructibleLowerShriek _ ℓ (prod.braiding X Y).hom).map (supportedClass ℓ d v) ≫
+    (boundedConstructibleLowerShriek ℓ (prod.braiding X Y).hom).map (supportedClass ℓ d v) ≫
     (externalProductBraidingIso ℓ X Y K _).hom
 
 end Classes
@@ -165,13 +165,13 @@ of `a_Y`. It is the exceptional Künneth map `α` of blueprint `prop-trf-excepti
 noncomputable def dualizingComplexExternalProduct :
     externalProduct ℓ (dualizingComplex' ℓ Y) (dualizingComplex' ℓ X) ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (Y ⨯ X))).homEquiv _ _
+  (boundedConstructibleUpperShriekAdjunction ℓ (toPoint (Y ⨯ X))).homEquiv _ _
     (eqToHom (by rw [← comp_toPoint (prod.fst : Y ⨯ X ⟶ Y)]) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (prod.fst : Y ⨯ X ⟶ Y)
         (toPoint Y)).hom.app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint Y)).map
         (exceptionalKunnethAdjoint ℓ (dualizingComplex' ℓ Y)) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _))
+      (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _))
 
 end Exterior
 
@@ -197,17 +197,17 @@ the composition of the lower shrieks, compact-support base change and the projec
 for `c`. -/
 noncomputable def supportProductIso (hE : IsPullback eC eD c d') :
     (boundedConstructibleLowerShriek ℓ (eC ≫ c)).obj (𝟙_ _) ≅
-      (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⊗
-        (boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _) :=
+      (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⊗
+        (boundedConstructibleLowerShriek ℓ d').obj (𝟙_ _) :=
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hE.flip
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ eC c).app _ ≪≫
-    (boundedConstructibleLowerShriek _ ℓ c).mapIso
-      ((boundedConstructibleLowerShriek _ ℓ eC).mapIso
+    (boundedConstructibleLowerShriek ℓ c).mapIso
+      ((boundedConstructibleLowerShriek ℓ eC).mapIso
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ eD)) ≪≫
         ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hE.flip)).app _).symm ≪≫
         (λ_ ((boundedConstructibleUpperStar _ ℓ c).obj
-          ((boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _)))).symm) ≪≫
-    (asIso (((boundedConstructibleExceptionalProjection _ ℓ c).app (𝟙_ _)).app _)).symm
+          ((boundedConstructibleLowerShriek ℓ d').obj (𝟙_ _)))).symm) ≪≫
+    (asIso (((boundedConstructibleExceptionalProjection ℓ c).app (𝟙_ _)).app _)).symm
 
 variable (L K) in
 /-- The *contraction* of the kernels (blueprint `def-trf-supported-pairing`, Step 3):
@@ -237,9 +237,9 @@ variable (c d') in
 `def-trf-supported-pairing`, Step 3), for supported classes `uc : Rc_! ℚ̄_ℓ,C ⟶ L ⊠ D_X K` and
 `vc : Rd'_! ℚ̄_ℓ,D ⟶ D_Y L ⊠ K`. -/
 noncomputable def pairingMorphism (hE : IsPullback eC eD c d')
-    (uc : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+    (uc : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
       externalProduct ℓ L (verdierDual ℓ (toPoint X) K))
-    (vc : (boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _) ⟶
+    (vc : (boundedConstructibleLowerShriek ℓ d').obj (𝟙_ _) ⟶
       externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K) :
     (boundedConstructibleLowerShriek ℓ (eC ≫ c)).obj (𝟙_ _) ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=
@@ -250,12 +250,12 @@ variable (c d') in
 square `E = C ×_Z D`: the exceptional adjoint, along `e = eC ≫ c : E ⟶ Z`, of the pairing
 morphism, read through `Re^! ω_Z ≅ ω_E`. -/
 noncomputable def pairingOfClasses (hE : IsPullback eC eD c d')
-    (uc : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+    (uc : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
       externalProduct ℓ L (verdierDual ℓ (toPoint X) K))
-    (vc : (boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _) ⟶
+    (vc : (boundedConstructibleLowerShriek ℓ d').obj (𝟙_ _) ⟶
       externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K) :
     BorelMooreSection ℓ E :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ (eC ≫ c)).homEquiv _ _
+  (boundedConstructibleUpperShriekAdjunction ℓ (eC ≫ c)).homEquiv _ _
       (pairingMorphism ℓ c d' hE uc vc) ≫
     (dualizingComplexComp ℓ (eC ≫ c)).hom
 
@@ -268,9 +268,9 @@ and the cartesian square `E = C ×_{c, Y ⨯ X, d ≫ τ} D`, the Borel–Moore 
 `vc = oppositeSupportedClass v`. -/
 noncomputable def supportedPairing {d : D ⟶ X ⨯ Y}
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
-      (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).obj L)
+      (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).obj L)
     (v : (boundedConstructibleUpperStar _ ℓ (d ≫ prod.snd)).obj L ⟶
-      (boundedConstructibleUpperShriek _ ℓ (d ≫ prod.fst)).obj K)
+      (boundedConstructibleUpperShriek ℓ (d ≫ prod.fst)).obj K)
     (hE : IsPullback eC eD c (d ≫ (prod.braiding X Y).hom)) : BorelMooreSection ℓ E :=
   pairingOfClasses ℓ c _ hE (supportedClass ℓ c u) (oppositeSupportedClass ℓ d v)
 
@@ -279,9 +279,9 @@ over `s` (blueprint `def-trf-local-term-pair`): the local term `LT_B(u, v) = ∫
 of the supported pairing; the ambient `E` need not be proper. -/
 noncomputable def localTermPair {d : D ⟶ X ⨯ Y}
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
-      (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).obj L)
+      (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).obj L)
     (v : (boundedConstructibleUpperStar _ ℓ (d ≫ prod.snd)).obj L ⟶
-      (boundedConstructibleUpperShriek _ ℓ (d ≫ prod.fst)).obj K)
+      (boundedConstructibleUpperShriek ℓ (d ≫ prod.fst)).obj K)
     (hE : IsPullback eC eD c (d ≫ (prod.braiding X Y).hom)) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom]
     (j : B ⟶ E) [IsOpenImmersion j.left] [IsClosedImmersion j.left] :

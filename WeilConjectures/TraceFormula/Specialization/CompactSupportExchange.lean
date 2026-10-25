@@ -92,8 +92,8 @@ noncomputable def exceptionalExchange (f : X ⟶ Y) (f' : X' ⟶ Y')
       boundedConstructibleLowerShriek ℓ f ⋙ ΨY) :
     boundedConstructibleUpperShriek ℓ f ⋙ ΨX ⟶
       ΨY ⋙ boundedConstructibleUpperShriek ℓ f' :=
-  mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f') ν
+  mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f') ν
 
 /-- The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` of a compact-support exchange
 `ν : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}` for the structure maps (blueprint `det-nearby-exchange-maps`
@@ -296,15 +296,15 @@ c'^! Ψ_{X×X} RΔ_* M --c'^!(χ_Δ)--> c'^! RΔ'_* Ψ_X M --B'--> Rι'_* d'^! �
 commutes. -/
 theorem fixedSquare_of_compactSupportExchange_app
     (hι : ∀ Q, ΨC.map ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).hom.app Q) ≫
-      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) αι).app Q ≫
+      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι) αι).app Q ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F'.ι).inv.app (ΨF.obj Q) ≫
       νι.app Q =
         𝟙 (ΨC.obj ((boundedConstructibleLowerShriek ℓ F.ι).obj Q)))
     (hΔ : ∀ Q, νΔ.app Q ≫
       ΨXX.map ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (diag X)).hom.app Q) ≫
-      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X')) αΔ).app Q ≫
+      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X')) αΔ).app Q ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (diag X')).inv.app (ΨX.obj Q) =
         𝟙 ((boundedConstructibleLowerShriek ℓ (diag X')).obj
           (ΨX.obj Q)))
@@ -320,15 +320,15 @@ theorem fixedSquare_of_compactSupportExchange_app
         (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft _ νΔ ≫ (Functor.associator _ _ _).inv)
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ΨC.map (F.upperShriekLowerStarIso.app M).hom ≫
-        (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
-          (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) αι).app _ ≫
+        (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι) αι).app _ ≫
         (boundedConstructibleLowerStar ℓ F'.ι).map
           ((exceptionalExchange ℓ F.d F'.d νd).app M) =
       (exceptionalExchange ℓ c.support c'.support νc).app _ ≫
         (boundedConstructibleUpperShriek ℓ c'.support).map
           ((CategoryTheory.mateEquiv
-            (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-            (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X')) αΔ).app M) ≫
+            (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+            (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X')) αΔ).app M) ≫
         (F'.upperShriekLowerStarIso.app (ΨX.obj M)).hom := by
   have hBC := boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv ℓ F.isPullback
   have hBC' := boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv ℓ F'.isPullback
@@ -380,11 +380,11 @@ noncomputable def TraceSpecialization.ofCompactSupportExchange
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι ⋙ ΨF)
     (αΔ : ΨXX ⋙ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X') ⟶
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙ ΨX)
-    (hunit : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).unit.app
+    (hunit : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).unit.app
         (𝟙_ _)) ≫
-        (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
-          (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) αι).app _ =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.app (𝟙_ _) ≫
+        (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι) αι).app _ =
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).unit.app (𝟙_ _) ≫
         (boundedConstructibleLowerStar ℓ F'.ι).map
           ((Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).inv ≫ σF ≫
@@ -404,15 +404,15 @@ noncomputable def TraceSpecialization.ofCompactSupportExchange
         (toPoint F'.F) ⟶
       boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt)
     (hι : ∀ Q, ΨC.map ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).hom.app Q) ≫
-      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) αι).app Q ≫
+      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι) αι).app Q ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F'.ι).inv.app (ΨF.obj Q) ≫
       νι.app Q =
         𝟙 (ΨC.obj ((boundedConstructibleLowerShriek ℓ F.ι).obj Q)))
     (hΔ : ∀ Q, νΔ.app Q ≫
       ΨXX.map ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (diag X)).hom.app Q) ≫
-      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X')) αΔ).app Q ≫
+      (CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X')) αΔ).app Q ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (diag X')).inv.app (ΨX.obj Q) =
         𝟙 ((boundedConstructibleLowerShriek ℓ (diag X')).obj
           (ΨX.obj Q)))
@@ -441,10 +441,10 @@ noncomputable def TraceSpecialization.ofCompactSupportExchange
   σF := σF
   θX := dualizingExchange ℓ σpt νX
   θF := dualizingExchange ℓ σpt νF
-  χι := CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) αι
-  χΔ := CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X')) αΔ
+  χι := CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι) αι
+  χΔ := CategoryTheory.mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X')) αΔ
   βc := exceptionalExchange ℓ c.support c'.support νc
   βd := exceptionalExchange ℓ F.d F'.d νd
   unit_comp := hunit

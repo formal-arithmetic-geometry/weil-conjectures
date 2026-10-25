@@ -68,15 +68,15 @@ lemma lowerShriek_map_eqToHom_comp_counit {r r' : A ⟶ B} (h : r = r')
 lemma lowerShriek_map_lowerShriekDualizingComplexTrace_comp_counit (a : A ⟶ B) :
     (boundedConstructibleLowerShriek ℓ (toPoint B)).map
         (lowerShriekDualizingComplexTrace ℓ a) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint B)).counit.app (𝟙_ _) =
+      (boundedConstructibleUpperShriekAdjunction ℓ (toPoint B)).counit.app (𝟙_ _) =
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a (toPoint B)).inv.app
         (dualizingComplex' ℓ A) ≫
       eqToHom (by rw [comp_toPoint]; rfl) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint A)).counit.app (𝟙_ _) := by
+      (boundedConstructibleUpperShriekAdjunction ℓ (toPoint A)).counit.app (𝟙_ _) := by
   have hP := Adjunction.map_map_conjugateIsoEquiv_comp_counit
-    (boundedConstructibleUpperShriekAdjunction _ ℓ a)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint B))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (a ≫ toPoint B))
+    (boundedConstructibleUpperShriekAdjunction ℓ a)
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint B))
+    (boundedConstructibleUpperShriekAdjunction ℓ (a ≫ toPoint B))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a (toPoint B)) (𝟙_ _)
   have hn := (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a (toPoint B)).inv.naturality
     (eqToHom (congrArg (fun s ↦
@@ -117,7 +117,7 @@ theorem lowerShriekDualizingComplexTrace_comp (a : A ⟶ B) (b : B ⟶ C) :
         (boundedConstructibleLowerShriek ℓ b).map
           (lowerShriekDualizingComplexTrace ℓ a) ≫ lowerShriekDualizingComplexTrace ℓ b =
       lowerShriekDualizingComplexTrace ℓ (a ≫ b) := by
-  apply ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint C)).homEquiv _ _).symm.injective
+  apply ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint C)).homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   have pa := lowerShriek_map_lowerShriekDualizingComplexTrace_comp_counit ℓ a
   have pb := lowerShriek_map_lowerShriekDualizingComplexTrace_comp_counit ℓ b

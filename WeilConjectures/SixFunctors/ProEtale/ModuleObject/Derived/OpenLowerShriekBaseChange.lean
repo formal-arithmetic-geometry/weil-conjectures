@@ -232,7 +232,6 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeU
 the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the cartesian
 square, under `Rp_*` on the left and `Rp'_*` on the right. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep'
-
     (sq : IsPullback p i' j p') :
     (boundedConstructibleLowerStar ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek
         (Profinite.padicAlgClRingObj ℓ) ℓ j) ⋙
@@ -274,7 +273,6 @@ with `j` and `i'` open immersions: the mate, under the adjunctions `Lp^* ⊣ Rp_
 unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
-
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStar ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek
         (Profinite.padicAlgClRingObj ℓ) ℓ j ⟶
@@ -289,7 +287,6 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
 `CategoryTheory.Adjunction.exchangeRight` of the extension-by-zero base-change isomorphism under
 the adjunctions `Lp^* ⊣ Rp_*` and `Lp'^* ⊣ Rp'_*`. -/
 lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchangeRight
-
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq =
       Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)

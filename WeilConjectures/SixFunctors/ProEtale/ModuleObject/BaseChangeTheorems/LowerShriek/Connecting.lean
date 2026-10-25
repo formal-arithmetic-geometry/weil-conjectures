@@ -83,7 +83,7 @@ noncomputable instance shiftLift_boundedConstructibleOpenImmersionLowerShriek (j
 
 /-- The lower shriek `Rf_!^c = i_! ⋙ Rp_*` on `Dᵇc` lifts `Rf_!(c)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable instance shiftLift_boundedConstructibleLowerShriekOfCompactification
- {f : X ⟶ Y} (c : Compactification f.left) :
+    {f : X ⟶ Y} (c : Compactification f.left) :
     Functor.ShiftLift (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         X.left)).ι
       (boundedConstructibleLowerShriekOfCompactification ℓ c)
@@ -114,7 +114,7 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The unit of `Lf^* ⊣ Rf_*` on `Dᵇc` commutes with the connecting morphisms. -/
 instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_unit
- (f : X ⟶ Y) :
+    (f : X ⟶ Y) :
     NatTrans.CommConnecting (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         Y.left)).ι
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).unit := by
@@ -131,7 +131,7 @@ instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_unit
 
 /-- The counit of `Lf^* ⊣ Rf_*` on `Dᵇc` commutes with the connecting morphisms. -/
 instance commConnecting_boundedConstructibleUpperStarLowerStarAdjunction_counit
- (f : X ⟶ Y) :
+    (f : X ⟶ Y) :
     NatTrans.CommConnecting (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         X.left)).ι
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit := by
@@ -328,7 +328,7 @@ instance commConnecting_boundedConstructibleOpenImmersionLowerShriekRefinement
 
 /-- The pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` commutes with the connecting morphisms. -/
 instance commConnecting_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
- (sq : IsPullback (𝟙 X) i i₁ h) :
+    (sq : IsPullback (𝟙 X) i i₁ h) :
     NatTrans.CommConnecting (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         X.left)).ι
       (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq) := by
@@ -340,7 +340,7 @@ instance commConnecting_boundedConstructibleOpenImmersionLowerShriekRefinementPu
 /-- The isomorphism `Rf_!^{c₁} ≅ Rf_!^c` along a refinement
 commutes with the connecting morphisms. -/
 instance commConnecting_boundedConstructibleLowerShriekRefinementIso_hom
- (sq : IsPullback (𝟙 X) i i₁ h) {Y : Over (Spec (.of k))}
+    (sq : IsPullback (𝟙 X) i i₁ h) {Y : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq)] :
@@ -371,7 +371,7 @@ lemma commConnecting_boundedConstructibleLowerShriekRefinementIso_padicAlgCl_hom
       r.isPullback
     NatTrans.CommConnecting (boundedConstructible (condensedRingObj
         (Profinite.padicAlgClRingObj ℓ) X.left)).ι
-      (boundedConstructibleLowerShriekRefinementIso _ ℓ r.isPullback r.hom_overG).hom := by
+      (boundedConstructibleLowerShriekRefinementIso ℓ r.isPullback r.hom_overG).hom := by
   have := r.isProper
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
     r.isPullback
@@ -406,7 +406,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 /-- The compact-support base change for a compactification
 commutes with the connecting morphisms. -/
 instance commConnecting_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
- (c : Compactification f.left) (sq : IsPullback g' f' f g) :
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     NatTrans.CommConnecting (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         X.left)).ι
       (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ c sq) := by

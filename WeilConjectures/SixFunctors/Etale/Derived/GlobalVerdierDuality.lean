@@ -53,20 +53,12 @@ open Scheme
 
 namespace Etale
 
+@@@
 section General
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX]
-  [IsIso (projectionMap A aX)]
+  [IsIso (projectionMap (ModuleCat.{u + 1} Λ) aX)]
 
 /-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point.
 
@@ -79,40 +71,37 @@ the canonical isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, written in `D(
 the projection formula only) at `N = Λ_S`. -/
 noncomputable def globalVerdierDualityIso
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj (op ((R(aX)_![ModuleCat.{u + 1}
-        Λ]).obj K)) ≅
+    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
+        (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
       (R((aX)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ aX).obj (op K)) :=
-  (((derivedHomRightDerivedLowerShriekIso Λ aX).app (op K)).app (𝟙_ _)).symm
+  globalVerdierDualityIsoOfAdjunction (ModuleCat.{u + 1} Λ)
+    (rightDerivedUpperShriekAdjunction Λ aX) K
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 lemma globalVerdierDualityIso_eq
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     globalVerdierDualityIso Λ aX K =
       (((derivedHomRightDerivedLowerShriekIso Λ aX).app (op K)).app (𝟙_ _)).symm :=
   rfl
 
--- A proof by `rfl` (or by `simp`/`rw` closing with `rfl`) makes the kernel reduce the
--- projections of `derivedHomRightDerivedLowerShriekIso`, which times out.
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 lemma globalVerdierDualityIso_inv
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (globalVerdierDualityIso Λ aX K).inv =
       ((derivedHomRightDerivedLowerShriekIso Λ aX).app (op K)).hom.app (𝟙_ _) :=
-  (congrArg Iso.inv (globalVerdierDualityIso_eq Λ aX K)).trans
-    ((Iso.symm_inv _).trans (Iso.app_hom _ _))
+  globalVerdierDualityIsoOfAdjunction_inv (ModuleCat.{u + 1} Λ)
+    (rightDerivedUpperShriekAdjunction Λ aX) K
 
-omit [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)] in
 /-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point,
 naturality in `K`. -/
 lemma globalVerdierDualityIso_hom_naturality
-    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (g : K ⟶ K')
-        :
-    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).map ((R(aX)_![ModuleCat.{u + 1}
-        Λ]).map g).op ≫
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (g : K ⟶ K') :
+    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).map
+          ((R(aX)_![ModuleCat.{u + 1} Λ]).map g).op ≫
         (globalVerdierDualityIso Λ aX K).hom =
-      (globalVerdierDualityIso Λ aX K').hom ≫ (R((aX)_*[ModuleCat.{u + 1} Λ])).map ((verdierDual Λ
-          aX).map g.op) :=
-  NatTrans.congr_app ((derivedHomRightDerivedLowerShriekIso Λ aX).inv.naturality g.op) (𝟙_ _)
+      (globalVerdierDualityIso Λ aX K').hom ≫
+        (R((aX)_*[ModuleCat.{u + 1} Λ])).map ((verdierDual Λ aX).map g.op) :=
+  globalVerdierDualityIsoOfAdjunction_hom_naturality (ModuleCat.{u + 1} Λ)
+    (rightDerivedUpperShriekAdjunction Λ aX) g
 
 /-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point, natural
 form: `AlgebraicGeometry.Etale.globalVerdierDualityIso` as a natural isomorphism
@@ -130,12 +119,12 @@ At `K = Λ_X` global Verdier duality identifies `RΓ_c(X, Λ_X)^∨` with `RΓ(X
 `AlgebraicGeometry.Etale.globalVerdierDualityIso` followed by `𝔻_X Λ_X = RHom(Λ_X, ω_X) ≅ ω_X`,
 the evaluation at the unit object. -/
 noncomputable def globalVerdierDualityUnitIso :
-    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj (op ((R(aX)_![ModuleCat.{u + 1}
-        Λ]).obj (𝟙_ _))) ≅
+    (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
+        (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _))) ≅
       (R((aX)_*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ aX) :=
   globalVerdierDualityIso Λ aX (𝟙_ _) ≪≫
-    (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso (MonoidalClosed.unitNatIso.app (dualizingComplex Λ
-        aX)).symm
+    (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso
+      (MonoidalClosed.unitNatIso.app (dualizingComplex Λ aX)).symm
 
 section CoefficientChange
 
@@ -150,31 +139,34 @@ variable (A' : Type u'') [Category.{u + 1} A'] [Abelian A'] [IsGrothendieckAbeli
   [(CategoryTheory.forget A').ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A')]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A')]
-  [(R(aX)_![A']).IsLeftAdjoint] [IsIso (projectionMap A' aX)]
+  [IsIso (projectionMap A' aX)]
 
-omit [HasSmallSiteSheafify A] in
 /-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point,
 compatibility with finite coefficient reduction and scalar extension.
 
-(ModuleCat.{u + 1} Λ) change of coefficients `(ModuleCat.{u + 1} Λ) → A'` (the finite reduction
-`A_{E,n} → A_{E,m}`, or a scalar
-extension) is given by functors `T_X`, `T_S` on the derived categories and comparison maps
-`σ`, `μ`, `ρ`, `ν` for the left adjoints `La_X^*`, `K ⊗ᴸ -`, `Ra_{X!}` and `Ra_{X!} K ⊗ᴸ -`,
-as in `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`;
-the comparison maps of the right adjoints `Ra_{X*}`, `RHom(K, -)`, `Ra_X^!` and of the dual are
-their mates. If the change of coefficients is compatible with the projection map, then the
-inverse of the global Verdier-duality isomorphism is compatible with it: the square
+A change of coefficients `ModuleCat Λ → A'` (the finite reduction `A_{E,n} → A_{E,m}`, or a
+scalar extension) is given by functors `T_X`, `T_S` on the derived categories and comparison
+maps `σ`, `μ`, `ρ`, `ν` for the left adjoints `La_X^*`, `K ⊗ᴸ -`, `Ra_{X!}` and
+`Ra_{X!} K ⊗ᴸ -`, as in
+`AlgebraicGeometry.Etale.derivedHomLowerShriekIsoOfAdjunction_hom_app_comp_mateEquiv`;
+the comparison maps of the right adjoints `Ra_{X*}`, `RHom(K, -)`, `Ra_X^!` (over `A'`, any right
+adjoint `G'` of `Ra_{X!}`) and of the dual are their mates. If the change of coefficients is
+compatible with the projection map, then the inverse of the global Verdier-duality isomorphism
+is compatible with it: the square
 ```
 T_S Ra_{X*} 𝔻_X K ------ T_S(iso⁻¹) -----> T_S (Ra_{X!} K)^∨
        |                                         |
        | comparison                              | comparison
        v                                         v
-Ra_{X*} RHom(K', Ra_X^! T_S Λ) --- iso⁻¹ ---> RHom(Ra_{X!} K', T_S Λ)
+Ra_{X*} RHom(K', G' T_S Λ) ---- iso⁻¹ ----> RHom(Ra_{X!} K', T_S Λ)
 ```
 commutes. Composing with a comparison `T_S Λ_S ⟶ Λ'_S` of the units (and the compatibility of
 the dualizing complexes `T_X ω_X ≅ ω'_X` with the smooth orientation, blueprint
 `thm-pur-finite-reduction-of-purity`) gives the comparison with the duality over `A'`. -/
 theorem globalVerdierDualityIso_inv_comp_mateEquiv
+    {G' : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A') ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology A')}
+    (adj' : R(aX)_![A'] ⊣ G')
     (TX : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A'))
     (TS : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
@@ -189,20 +181,21 @@ theorem globalVerdierDualityIso_inv_comp_mateEquiv
     (h : ν.whiskerLeft ((projectionMap (ModuleCat.{u + 1} Λ) aX).app K) =
       (σ ≫ᵥ μ ≫ᵥ ρ).whiskerRight ((projectionMap A' aX).app K')) :
     TS.map (globalVerdierDualityIso Λ aX K).inv ≫
-        (mateEquiv (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) ((R(aX)_![ModuleCat.{u + 1}
-            Λ]).obj K))
+        (mateEquiv
+          (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)
+            ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))
           (derivedTensorHomAdjunction A' ((R(aX)_![A']).obj K')) ν).app (𝟙_ _) =
       (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) aX)
           (derivedUpperStarLowerStarAdjunction A' aX) σ).app _ ≫
         R((aX)_*[A']).map ((mateEquiv (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K)
           (derivedTensorHomAdjunction A' K') μ).app _) ≫
         R((aX)_*[A']).map (((RHom(X)[A']).obj (op K')).map
-          ((mateEquiv (rightDerivedUpperShriekAdjunction Λ aX)
-            (rightDerivedUpperShriekAdjunction Λ' aX) ρ).app (𝟙_ _))) ≫
-        ((derivedHomRightDerivedLowerShriekIso Λ' aX).app (op K')).hom.app (TS.obj (𝟙_ _)) := by
+          ((mateEquiv (rightDerivedUpperShriekAdjunction Λ aX) adj' ρ).app (𝟙_ _))) ≫
+        ((derivedHomLowerShriekIsoOfAdjunction A' aX adj').app (op K')).hom.app
+          (TS.obj (𝟙_ _)) := by
   rw [globalVerdierDualityIso_inv]
-  exact derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv Λ aX A' TX TS K K' σ μ ρ ν h
-    (𝟙_ _)
+  exact derivedHomLowerShriekIsoOfAdjunction_hom_app_comp_mateEquiv (ModuleCat.{u + 1} Λ) aX A'
+    (rightDerivedUpperShriekAdjunction Λ aX) adj' TX TS K K' σ μ ρ ν h (𝟙_ _)
 
 end CoefficientChange
 

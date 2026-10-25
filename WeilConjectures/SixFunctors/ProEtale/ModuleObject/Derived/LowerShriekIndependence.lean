@@ -12,14 +12,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowe
 
 /-!
 
-# Independence of the lower shriek of `E`- and `ℚ̄_ℓ`-sheaves from the compactification
+# Independence of the lower shriek of `ℚ̄_ℓ`-sheaves from the compactification
 
-Let `ℓ` be a prime and `E` a finite extension of `ℚ_ℓ`, with condensed ring `E̲ = C(-, E)`
-(`Profinite.continuousMapRingObj E`), and let `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. For a
+Let `ℓ` be a prime and `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. For a
 compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, the lower shriek on bounded constructible
 complexes is `Rf_!^c := i_! ⋙ Rp_*`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`). This file shows
-that, for the coefficient rings `E̲` and `ℚ̲̄_ℓ`, it does not depend on the compactification: for
+that, for the coefficient ring `ℚ̲̄_ℓ`, it does not depend on the compactification: for
 two compactifications `c₁` and `c₂` of `f`, `Rf_!^{c₁} ≅ Rf_!^{c₂}`.
 
 These isomorphisms identify the lower shriek attached to an arbitrary compactification with the
@@ -58,10 +57,9 @@ Any two compactifications `c₁` and `c₂` of `f` have a common refinement `c`
 ## Main definitions
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekRefinementIso'`: `Rf_!^{c₁} ≅ Rf_!^c`
-  along a refinement, for any `Λ` for which the exchange morphism is an isomorphism.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'` and
-  `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the
-  isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `E`- and `ℚ̄_ℓ`-sheaves.
+  along a refinement, whenever the exchange morphism is an isomorphism.
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the
+  isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `ℚ̄_ℓ`-sheaves.
 
 -/
 
@@ -81,8 +79,8 @@ open Scheme
 
 section Refinement
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
   {X Z Z₁ Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
@@ -100,7 +98,7 @@ composition isomorphism `boundedConstructibleLowerStarComp`. For compactificatio
 of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and `p₁ = c₁.overG`, it is an
 isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso'
- (sq : IsPullback (𝟙 X) i i₁ h)
+    (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i₁ ⋙
@@ -118,7 +116,6 @@ end Refinement
 /-! ### Independence of the compactification -/
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -126,30 +123,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   {f : X ⟶ Y}
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
-`E`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
-`Rf_!^{c₁} ≅ Rf_!^{c₂}` between `i₁_! ⋙ Rp₁_*` and `i₂_! ⋙ Rp₂_*` on `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧`:
-for a common refinement `c` of `c₁` and `c₂` (`Compactification.exists_overRefinement`), the
-composite `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}` of the isomorphisms
-`boundedConstructibleLowerShriekRefinementIso'` along the refinements. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'
-    (c₁ c₂ : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c₁ ≅
-      boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c₂ :=
-  have hc := Compactification.exists_overRefinement c₁ c₂
-  let r₁ := hc.choose_spec.1.some
-  let r₂ := hc.choose_spec.2.some
-  have := r₁.isProper
-  have := r₂.isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ E r₁.isPullback
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ E r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso' _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso' _ ℓ r₂.isPullback r₂.hom_overG).symm
-
-/-- The *independence of the lower shriek from the compactification* for bounded constructible
 `ℚ̄_ℓ`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
-`Rf_!^{c₁} ≅ Rf_!^{c₂}` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`, through a common refinement as in
-`boundedConstructibleLowerShriekOfCompactificationIso'`. -/
+`Rf_!^{c₁} ≅ Rf_!^{c₂}` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`: for a common refinement `c` of `c₁`
+and `c₂` (`Compactification.exists_overRefinement`), the composite `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}`
+of the isomorphisms `boundedConstructibleLowerShriekRefinementIso'` along the refinements. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
     (c₁ c₂ : Compactification f.left) :
@@ -164,8 +141,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlg
     r₁.isPullback
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso' _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso' _ ℓ r₂.isPullback r₂.hom_overG).symm
+  boundedConstructibleLowerShriekRefinementIso' ℓ r₁.isPullback r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIso' ℓ r₂.isPullback r₂.hom_overG).symm
 
 /-- Unfolding `boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the comparison
 through the chosen common refinement. -/
@@ -178,10 +155,10 @@ lemma boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refine
     haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
       (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ =
-      boundedConstructibleLowerShriekRefinementIso' _ ℓ
+      boundedConstructibleLowerShriekRefinementIso' ℓ
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.hom_overG ≪≫
-        (boundedConstructibleLowerShriekRefinementIso' _ ℓ
+        (boundedConstructibleLowerShriekRefinementIso' ℓ
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.hom_overG).symm := by
   unfold boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl

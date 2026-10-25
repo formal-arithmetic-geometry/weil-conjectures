@@ -89,7 +89,7 @@ lemma upperStarLowerShriekAdjunction_id_unit_app (x : Dᵇc(X.left)⟦Profinite.
 variable (X) in
 /-- The unit of `R(𝟙)_! ⊣ R(𝟙)^!` followed by `R(𝟙)^! ≅ 𝟭` is the inverse of `R(𝟙)_! ≅ 𝟭`. -/
 lemma upperShriekAdjunction_id_unit_app (x : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 X)).unit.app x ≫
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X)).unit.app x ≫
         (boundedConstructibleUpperShriekId ℓ X).hom.app _ =
       (boundedConstructibleLowerShriekId ℓ X).inv.app x := by
   have h := unit_conjugateEquiv
@@ -104,7 +104,7 @@ lemma tau_comp_counit_of_id (Δ : X ⟶ P) [IsProper Δ.left] {ι d : X ⟶ X} (
     [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)] :
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι)).hom ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ d).unit.app _ ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ d).unit.app _ ≫
       (eqToIso (congrArg (fun g : X ⟶ X ↦ boundedConstructibleUpperShriek
           ℓ g) hd) ≪≫
         boundedConstructibleUpperShriekId ℓ X).hom.app _ ≫

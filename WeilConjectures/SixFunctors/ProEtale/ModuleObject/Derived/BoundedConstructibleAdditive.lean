@@ -51,7 +51,7 @@ instance additive_boundedConstructibleOpenImmersionLowerShriek (j : X ⟶ Y)
 
 /-- The lower shriek `Rf_!^c` attached to a compactification is additive. -/
 instance additive_boundedConstructibleLowerShriekOfCompactification
- {f : X ⟶ Y}
+    {f : X ⟶ Y}
     (c : Compactification f.left) :
     (boundedConstructibleLowerShriekOfCompactification ℓ c).Additive := by
   unfold boundedConstructibleLowerShriekOfCompactification

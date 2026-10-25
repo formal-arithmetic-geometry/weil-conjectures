@@ -75,12 +75,14 @@ lemma isZero_leftDerivedUpperStar_derivedTensor_rightDerivedLowerShriek (i₁ : 
       (Scheme.Hom.range_eq_compl_range_openComplement_ι _) hcd ?_ ?_
     · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
       exact (isZero_derivedTensor_obj_obj_of_isZero_left
-        (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ i₁ j _)
+        (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
+          (ModuleCat.{u + 1} Λ) i₁ j _)
           _).of_iso (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
     · refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _).symm
       exact (isZero_derivedTensor_obj_obj_of_isZero_right _
-        (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek Λ i₂ j
-          _)).of_iso (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
+        (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
+          (ModuleCat.{u + 1} Λ) i₂ j _)).of_iso
+          (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
   rw [← IsOpenImmersion.lift_fac j w hw]
   exact ((L((IsOpenImmersion.lift j w hw)^*[ModuleCat.{u + 1} Λ])).map_isZero hj).of_iso
     ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ j).app _)

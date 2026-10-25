@@ -146,8 +146,8 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
         (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
         (isPullback_ofIsProper_overG sq) ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
-        (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f').hom =
-    Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f).hom
+        (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ f').hom =
+    Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ f).hom
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
       boundedConstructibleBaseChange ℓ sq.toCommSq := by
   have hw : SepFinType.homMk g' ≫ 𝟙 (SepFinType.mk X) =
@@ -156,7 +156,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g') (𝟙 (SepFinType.mk X'))
       (𝟙 (SepFinType.mk X)) (SepFinType.homMk g')
       hw).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_id_snd (f := g') : IsPullback g' (𝟙 X') (𝟙 X) g')
   have key := (𝔽).shriekBaseChange_id_left (SepFinType.homMk f) (SepFinType.homMk f')
     (SepFinType.homMk g') (SepFinType.homMk g)

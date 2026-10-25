@@ -142,6 +142,7 @@ section BoundedBelow
 
 variable {A} {Λ} [CompactSpace Y]
 
+omit [CompactSpace Y] in
 /-- The right derived comparison restriction `Rν_*` sends bounded below objects to bounded
 below objects. -/
 lemma plus_rightDerivedFunctor_comparisonLowerStar_obj

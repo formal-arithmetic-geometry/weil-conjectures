@@ -62,13 +62,13 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
       K ◁ pointPairing v ≫ (ρ_ K).hom = 𝟙 K := by
   rw [pointCoev_eq, pointPairing_eq]
   let χ : (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ⟶ K :=
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ⟶ K :=
     Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ
         (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K
   let τ' : (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
-      ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) ⟶ 𝟙_ _ :=
+      ((boundedConstructibleLowerShriek ℓ (diag (point k))).obj (𝟙_ _)) ⟶ 𝟙_ _ :=
     (pointDiagAdj ℓ k).counit.app (𝟙_ _)
   refine zigzag_of_transport (boundedConstructibleUpperStar _ ℓ (diag (point k)))
     (diagUnitClass ℓ (K := K) diag_point_snd diag_point_fst.symm ≫
@@ -87,14 +87,14 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
     _ _ χ (pointTau v) τ' ?hτ ?hbraid
     (diagUpperStarProjIso_μ_map ℓ prod.snd (by simp) K _ _ ((ihom.ev K).app _)) ?hK ?hC
   case hτ => exact pointTau_comp_counit v
-  case hbraid => exact boundedConstructibleUpperStar_μ_map_braiding_hom _ ℓ (diag (point k)) _ _
+  case hbraid => exact boundedConstructibleUpperStar_μ_map_braiding_hom ℓ (diag (point k)) _ _
   case hK =>
     exact pointKunneth_transport K
-      (boundedConstructibleUpperStar_μ_map_braiding_hom _ ℓ (diag (point k)) _ _)
+      (boundedConstructibleUpperStar_μ_map_braiding_hom ℓ (diag (point k)) _ _)
       (pointKunneth_baseChange ℓ rfl)
   case hC =>
     exact pointClass_transport K
-      (boundedConstructibleUpperStar_μ_map_braiding_hom _ ℓ (diag (point k)) _ _)
+      (boundedConstructibleUpperStar_μ_map_braiding_hom ℓ (diag (point k)) _ _)
 
 /-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
 `sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an

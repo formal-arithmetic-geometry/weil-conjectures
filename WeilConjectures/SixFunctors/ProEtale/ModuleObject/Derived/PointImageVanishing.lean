@@ -97,8 +97,7 @@ lemma exists_overReductionι_comp_eq_of_range_subset {X Y P : Over (Spec (.of k)
   rw [← Over.w e, ← Category.assoc, hl]
   simp [t, overReduction, overReductionι]
 
-variable  (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
+variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- Let `e : P ⟶ X` be a closed immersion (for instance a rational point) and `f : Y ⟶ X` a
 morphism with image in the image of `e`. If `Le^* M = 0`, then `Lf^* M = 0`: the restriction of

@@ -134,9 +134,9 @@ structure TraceSpecialization where
     ΨX ⋙ boundedConstructibleUpperShriek ℓ F'.d
   /-- the unit identity `χ_ι Ψ_C(η_ι) σ_C = Rι'_*(σ_F) η_ι'` (blueprint `det-tf-sp-trace-morphism`),
   read through the unit isomorphisms `Lι^* ℚ̄_ℓ ≅ ℚ̄_ℓ` of the monoidal pullbacks. -/
-  unit_comp : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).unit.app
+  unit_comp : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).unit.app
       (𝟙_ _)) ≫ χι.app _ =
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.app (𝟙_ _) ≫
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).unit.app (𝟙_ _) ≫
       (boundedConstructibleLowerStar ℓ F'.ι).map
         ((Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).inv ≫ σF ≫
@@ -186,14 +186,14 @@ lemma σF_comp_map_eq_homEquiv_symm (M : Dᵇc(F.F.left)⟦Profinite.padicAlgClR
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom ≫ g) =
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).hom ≫
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _).symm
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).homEquiv _ _).symm
           (T.σC ≫ T.ΨC.map
-            (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _) g) ≫
+            (((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _) g) ≫
             T.χι.app M) := by
   have key : T.σC ≫ T.ΨC.map
-      (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _) g) ≫
+      (((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _) g) ≫
         T.χι.app M =
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _)
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).homEquiv _ _)
         ((Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).inv ≫ T.σF ≫
           T.ΨF.map ((Functor.Monoidal.εIso
@@ -215,20 +215,20 @@ noncomputable def sp (z : BorelMooreSection ℓ F.F) : BorelMooreSection ℓ F'.
 lemma sp_traceClass : T.sp (c.traceClass F) =
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).hom ≫
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv _ _).symm
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).homEquiv _ _).symm
         (T.σC ≫ T.ΨC.map c.mate ≫ T.ΨC.map (c.traceMap F) ≫ T.χι.app _ ≫
           (boundedConstructibleLowerStar ℓ F'.ι).map T.θF) := by
   have h1 := T.σF_comp_map_eq_homEquiv_symm (dualizingComplex' ℓ F.F)
-    (((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
+    (((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
       (c.mate ≫ c.traceMap F))
   rw [Equiv.apply_symm_apply] at h1
   have h2 :=
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).homEquiv_naturality_right_symm
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).homEquiv_naturality_right_symm
     (T.σC ≫ T.ΨC.map (c.mate ≫ c.traceMap F) ≫ T.χι.app _) T.θF
   calc T.sp (c.traceClass F)
       _ = (T.σF ≫ T.ΨF.map ((Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).hom ≫
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
             (c.mate ≫ c.traceMap F))) ≫ T.θF := (Category.assoc _ _ _).symm
       _ = _ := by rw [h1, Category.assoc, ← h2, Functor.map_comp]; simp only [Category.assoc]
 
@@ -315,7 +315,7 @@ theorem sp_traceClass_eq_zero
       (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))))) :
     T.sp (c.traceClass F) = 0 := by
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).IsLeftAdjoint :=
-    ⟨_, ⟨boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι⟩⟩
+    ⟨_, ⟨boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι⟩⟩
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       F'.ι).PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_isLeftAdjoint _
