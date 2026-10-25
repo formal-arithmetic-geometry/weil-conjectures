@@ -37,20 +37,6 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
-/-- The conjugate `R₁ ⟶ R₂` of a natural transformation `α : L₂ ⟶ L₁` between left adjoints
-carries the adjoint `c ⟶ R₁ d` of `y : L₁ c ⟶ d` to the adjoint `c ⟶ R₂ d` of
-`α_c ≫ y : L₂ c ⟶ d`. This is `CategoryTheory.homEquiv_comp_conjugateEquiv_app` of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence`, restated here
-to avoid importing the pro-étale theory. -/
-private lemma homEquiv_comp_conjugateEquiv_app_aux {C D : Type*} [Category C]
-    [Category D] {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
-    (α : L₂ ⟶ L₁) {c : C} {d : D} (y : L₁.obj c ⟶ d) :
-    adj₁.homEquiv c d y ≫ (conjugateEquiv adj₁ adj₂ α).app d =
-      adj₂.homEquiv c d (α.app c ≫ y) := by
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Category.assoc,
-    (conjugateEquiv adj₁ adj₂ α).naturality, ← Category.assoc, unit_conjugateEquiv,
-    Category.assoc, Functor.map_comp]
-
 namespace AlgebraicGeometry
 
 open Scheme
@@ -157,7 +143,8 @@ theorem isIso_shiftMap_kummerClassAffineLineDirectImage_of_field :
       Functor.comp_map, Functor.map_comp, Category.assoc, hκ, y]
     erw [reassoc_of% hn]
   clear_value y
-  have h₁ := homEquiv_comp_conjugateEquiv_app_aux (adjp.comp adjj) adjπ e.hom y
+  have h₁ := AlgebraicGeometry.Etale.Adjunction.homEquiv_comp_conjugateEquiv_app
+    (adjp.comp adjj) adjπ e.hom y
   have hy : IsIso (H.map ((adjp.comp adjj).homEquiv _ _ y)) := by
     have : IsIso (H.map ((adjp.comp adjj).homEquiv _ _ y) ≫
         H.map ((conjugateEquiv (adjp.comp adjj) adjπ e.hom).app _)) := by

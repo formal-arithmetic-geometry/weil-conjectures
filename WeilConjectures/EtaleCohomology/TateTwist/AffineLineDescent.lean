@@ -97,6 +97,13 @@ lemma isIso_derivedBaseChangeMap_app_tateObject_of_fieldExtension {K L : Type u}
 
 end BaseChange
 
+/-- Every point of a scheme lies in the image of the inclusion of some affine open. -/
+theorem _root_.AlgebraicGeometry.Scheme.exists_affineOpens_ι_eq (Y : Scheme.{u}) (x : Y) :
+    ∃ (V : Y.affineOpens) (y : V.1), V.1.ι y = x := by
+  obtain ⟨_, ⟨V, hV, rfl⟩, hx, -⟩ :=
+    Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  exact ⟨⟨V, hV⟩, ⟨x, hx⟩, rfl⟩
+
 /-- The Tate twist `Λ_X(m)` is concentrated in degree zero, so it lies in `D^{≤ 0}`. -/
 instance isLE_tateObject (X : Scheme.{u}) [HasInvertibleExponent Λ X]
     (m : ℤ) : (tateObject Λ X m).IsLE 0 :=
@@ -120,10 +127,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_isAlgClos
         (tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1))) := by
   refine isZero_homology_of_jointlySurjective Λ (fun V : Y.affineOpens ↦ V.1.ι)
     (fun x ↦ ?_) _ n fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hx, -⟩ :=
-      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x)
-      isOpen_univ
-    exact ⟨⟨V, hV⟩, ⟨x, hx⟩, rfl⟩
+  · exact Y.exists_affineOpens_ι_eq x
   have : IsAffine V.1 := V.2
   have : QuasiCompact (V.1.ι ≫ aY) := inferInstance
   have : HasInvertibleExponent Λ V.1 := .of_hom V.1.ι
@@ -156,9 +160,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_
         (tateObject Λ G 1))) := by
   refine isZero_homology_of_jointlySurjective Λ (fun V : Y.affineOpens ↦ V.1.ι)
     (fun x ↦ ?_) _ n fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hx, -⟩ :=
-      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-    exact ⟨⟨V, hV⟩, ⟨x, hx⟩, rfl⟩
+  · exact Y.exists_affineOpens_ι_eq x
   have : IsAffine V.1 := V.2
   have : QuasiCompact (V.1.ι ≫ aY) := inferInstance
   have : HasInvertibleExponent Λ V.1 := .of_hom V.1.ι

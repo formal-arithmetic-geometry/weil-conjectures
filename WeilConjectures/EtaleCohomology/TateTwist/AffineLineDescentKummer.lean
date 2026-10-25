@@ -239,9 +239,7 @@ theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup_of_isAlgClosed :
         (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app (tateObject Λ Y 1))) := by
   refine isIso_homology_map_of_jointlySurjective Λ (fun V : Y.affineOpens ↦ V.1.ι)
     (fun x ↦ ?_) _ 0 fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hx, -⟩ :=
-      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-    exact ⟨⟨V, hV⟩, ⟨x, hx⟩, rfl⟩
+  · exact Y.exists_affineOpens_ι_eq x
   have : IsAffine V.1 := V.2
   have : QuasiCompact (V.1.ι ≫ aY) := inferInstance
   have : HasInvertibleExponent Λ V.1 := .of_hom V.1.ι
@@ -270,9 +268,7 @@ theorem isIso_homology_zero_homEquiv_kummerClass_of_isAlgClosed
           (β.hom ≫ kummerClass Λ (AffineSpace.unitLineCoord j hj)))) := by
   refine isIso_homology_map_of_jointlySurjective Λ (fun V : Y.affineOpens ↦ V.1.ι)
     (fun x ↦ ?_) _ 0 fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hx, -⟩ :=
-      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-    exact ⟨⟨V, hV⟩, ⟨x, hx⟩, rfl⟩
+  · exact Y.exists_affineOpens_ι_eq x
   have : IsAffine V.1 := V.2
   have : QuasiCompact (V.1.ι ≫ aY) := inferInstance
   have : HasInvertibleExponent Λ V.1 := .of_hom V.1.ι
@@ -299,9 +295,7 @@ theorem isIso_unit_tateObject_affineLine_of_isAlgClosed :
   intro n
   refine isIso_homology_map_of_jointlySurjective Λ (fun V : Y.affineOpens ↦ V.1.ι)
     (fun x ↦ ?_) _ n fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hx, -⟩ :=
-      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-    exact ⟨⟨V, hV⟩, ⟨x, hx⟩, rfl⟩
+  · exact Y.exists_affineOpens_ι_eq x
   have : IsAffine V.1 := V.2
   have : QuasiCompact (V.1.ι ≫ aY) := inferInstance
   have : HasInvertibleExponent Λ V.1 := .of_hom V.1.ι
