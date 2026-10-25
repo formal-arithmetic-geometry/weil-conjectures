@@ -69,12 +69,14 @@ lemma range_y : Set.range M.y.base = {M.y.base (default : Spec (.of k))} := by
   · rintro rfl
     exact ⟨_, rfl⟩
 
+omit [IsAlgClosed k] in
 lemma range_vertical :
     Set.range M.vertical.base = (pullback.fst M.f M.f).base ⁻¹' Set.range M.y.base := by
   rw [← M.isPullback_vertical.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp,
     Set.range_comp, Set.range_eq_univ.2 M.isPullback_vertical.isoPullback.hom.surjective,
     Set.image_univ, Scheme.Pullback.range_fst]
 
+omit [IsAlgClosed k] in
 lemma range_horizontal :
     Set.range M.horizontal.base = (pullback.snd M.f M.f).base ⁻¹' Set.range M.y.base := by
   rw [← M.isPullback_horizontal.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp,
