@@ -114,13 +114,13 @@ lemma map_comp_inv_projection_comp_eq_of_comp {𝒰 𝒲 𝒳 : Type*} [Category
         c.inv.app (T ⊗ Gr.obj (Gz.obj M)))
     (hnatz : ∀ {T T' : 𝒲} (t : T ⟶ T') (M : 𝒳),
       Lz.map t ▷ M ≫ pfz T' M = pfz T M ≫ Lz.map (t ▷ Gz.obj M))
-    {V₀ : 𝒲} {E₀ T : 𝒰} {K D₁ D₂ D₃ Z₀ : 𝒳} {B : 𝒲} (ψ : V₀ ⟶ Lr.obj E₀)
+    {V₀ V₁ : 𝒲} {E₀ T : 𝒰} {K D₁ D₂ D₃ Z₀ : 𝒳} {B : 𝒲} (ψ₁ : V₀ ⟶ V₁) (ψ : V₁ ⟶ Lr.obj E₀)
     (bE : E₀ ⟶ T ⊗ Grz.obj K) (exB : Lr.obj T ⟶ B) (exZ₁ : Lz.obj B ⟶ D₁) (exZ₂ : D₁ ⟶ D₂)
     (e₃ : D₂ ⟶ D₃) (e₂₃ : D₁ ⟶ D₃) (exX : Lrz.obj T ⟶ D₂) (rest : D₃ ⊗ K ⟶ Z₀)
     (h₂₃ : e₂₃ = exZ₂ ≫ e₃) (hX : exX = c.hom.app T ≫ Lz.map exB ≫ exZ₁ ≫ exZ₂) :
-    Lz.map (ψ ≫ Lr.map (bE ≫ (T ◁ uc.hom.app K)) ≫ inv (pfr T (Gz.obj K)) ≫
+    Lz.map (ψ₁ ≫ ψ ≫ Lr.map (bE ≫ (T ◁ uc.hom.app K)) ≫ inv (pfr T (Gz.obj K)) ≫
         (exB ▷ Gz.obj K)) ≫ inv (pfz B K) ≫ (exZ₁ ▷ K) ≫ (e₂₃ ▷ K) ≫ rest =
-      Lz.map ψ ≫ c.inv.app E₀ ≫ Lrz.map bE ≫ inv (pfrz T K) ≫ (exX ▷ K) ≫ (e₃ ▷ K) ≫ rest := by
+      Lz.map (ψ₁ ≫ ψ) ≫ c.inv.app E₀ ≫ Lrz.map bE ≫ inv (pfrz T K) ≫ (exX ▷ K) ≫ (e₃ ▷ K) ≫ rest := by
   have hinv : inv (pfrz T K) = Lrz.map (T ◁ uc.hom.app K) ≫ c.hom.app _ ≫
       Lz.map (inv (pfr T (Gz.obj K))) ≫ inv (pfz (Lr.obj T) K) ≫ (c.inv.app T ▷ K) := by
     apply IsIso.inv_eq_of_hom_inv_id
@@ -314,6 +314,86 @@ lemma sourceExchange_inv_baseChange_paste (sqY : IsPullback π₂ π₁ aY aY)
   rw [hP]
   simp [← Functor.map_comp_assoc, ← Functor.map_comp]
 
+
+set_option maxHeartbeats 2000000 in
+/-- The tail of the core identity: the left side through `Rh_*`, `Rr_!` and the projection
+formulas is the transported test map of the exceptional Künneth adjoint of `K`. -/
+theorem sourceExchange_coreTail (sqY : IsPullback π₂ π₁ aY aY)
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)]
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))]
+    [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+      (hB.paste_vert (hA.paste_horiz sqY)))]
+    [IsProper (r ≫ h).left] (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f)
+    (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f) :
+    (boundedConstructibleLowerShriek _ ℓ zX).map
+        ((boundedConstructibleUpperStar _ ℓ h).map
+          (β_ ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f).obj K))
+            ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).hom ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ h) _ _ ≫
+        (((boundedConstructibleUpperStarComp _ ℓ h π₂).inv.app
+            ((boundedConstructibleLowerStar _ ℓ f).obj
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+          (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
+            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ⊗ₘ
+          prodUpperStarCounit ℓ hA.w K)) ≫
+      inv (((boundedConstructibleExceptionalProjection _ ℓ zX).app
+        ((boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).obj ((boundedConstructibleLowerShriek _ ℓ f).obj
+          ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).app K) ≫
+      ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))).app
+          ((boundedConstructibleLowerShriek _ ℓ f).obj
+            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ▷ K) ≫
+      ((boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
+          ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) ≫
+            (boundedConstructibleUpperShriekAdjunction _ ℓ (f ≫ aY)).counit.app (𝟙_ _)) ▷ K) ≫
+      ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (f ≫ aY))).inv ▷ K) ≫
+      (λ_ K).hom =
+    (boundedConstructibleLowerShriek _ ℓ zX).map
+        ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app _ ≫
+          (boundedConstructibleLowerShriek _ ℓ r).map
+            ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app _ ≫
+              (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
+              (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
+                ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).inv.app _ ≫
+      (boundedConstructibleLowerShriek _ ℓ (r ≫ zX)).map (β_ _ _).hom ≫
+      inv (((boundedConstructibleExceptionalProjection _ ℓ (r ≫ zX)).app
+        ((boundedConstructibleUpperStar _ ℓ p₂).obj
+          ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))).app K) ≫
+      ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+          (hB.paste_vert (hA.paste_horiz sqY)))).app
+        ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) ▷ K) ≫
+      ((boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
+        ((boundedConstructibleUpperShriekAdjunction _ ℓ (f ≫ aY)).counit.app (𝟙_ _)) ▷ K) ≫
+      ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (f ≫ aY))).inv ▷ K) ≫
+      (λ_ K).hom := by
+  have hz := sourceExchange_coreZ ℓ aY f p₂ π₁ π₂ zX h r hA hB K wq₁ wq₂
+  have hz' : (boundedConstructibleLowerShriek _ ℓ zX).map
+        ((boundedConstructibleUpperStar _ ℓ h).map
+          (β_ ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f).obj K))
+            ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).hom ≫
+        Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ h) _ _ ≫
+        (((boundedConstructibleUpperStarComp _ ℓ h π₂).inv.app
+            ((boundedConstructibleLowerStar _ ℓ f).obj
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+          (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
+            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
+              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ⊗ₘ
+          prodUpperStarCounit ℓ hA.w K)) = _ := congrArg _ hz
+  simp only [hz']
+  exact map_comp_inv_projection_comp_eq_of_comp
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX)
+    (boundedConstructibleUpperStarComp _ ℓ r zX)
+    (fun T M ↦ ((boundedConstructibleExceptionalProjection _ ℓ r).app T).app M)
+    (fun T M ↦ ((boundedConstructibleExceptionalProjection _ ℓ zX).app T).app M)
+    (fun T M ↦ ((boundedConstructibleExceptionalProjection _ ℓ (r ≫ zX)).app T).app M)
+    (fun T M ↦ exceptionalProjection_comp ℓ r zX T M)
+    (fun t M ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ zX t M)
+    _ _ _ _ _ _ _ _ _ _ (Functor.map_comp _ _ _)
+    (sourceExchange_inv_baseChange_paste ℓ aY f p₂ π₁ π₂ zX h r hA hB sqY _)
 
 end Core
 
