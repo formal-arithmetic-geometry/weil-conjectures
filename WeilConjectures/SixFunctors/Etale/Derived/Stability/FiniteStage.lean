@@ -70,7 +70,7 @@ theorem torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual (f : X ⟶ Y) (hf 
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(f)^![Λ]).obj K) := by
   obtain ⟨e⟩ :=
     nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY f hf hK
   have hD := constructibleFiniteTor_verdierDual Λ aY hK

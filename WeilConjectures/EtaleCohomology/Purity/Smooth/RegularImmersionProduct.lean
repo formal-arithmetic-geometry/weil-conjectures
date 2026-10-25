@@ -120,9 +120,9 @@ theorem restrictSupportedClass_cupWithSupportsTateObject {U U' Z₁ Z₂ Z Z₁'
     (g₁ : Z₁' ⟶ Z₁) (g₂ : Z₂' ⟶ Z₂) (g : Z' ⟶ Z) (hg₁ : IsPullback g₁ i₁' i₁ e)
     (hg₂ : IsPullback g₂ i₂' i₂ e) (hg : IsPullback g i' i e) {m m' : ℤ}
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
     restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv
         (leftDerivedUpperStarTateShiftIso Λ e (m + m'))

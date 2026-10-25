@@ -142,7 +142,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
     [HasTateTwist.IsNormalized Λ]
     (Y : Scheme.{u}) {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
     [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y] (m : ℤ) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) (1 + m))⟦2 * (1 + m)⟧) ≅
       (tateObject Λ Y m)⟦2 * m⟧) := by
@@ -154,10 +154,10 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
     ((boundedConstructibleFiniteTor_tateObject Λ _ 1).shift _)
     ((boundedConstructibleFiniteTor_tateObject Λ _ m).shift _)
     ((isInvertible_tateObject Λ _ m).shift _)
-  exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)^![ModuleCat.{u + 1} Λ]).mapIso
+  exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)^![Λ]).mapIso
       (shiftTateObjectAddIso Λ _ 1 m).symm ≪≫ cop ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) Y).mapIso
-      ((R(AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)^![ModuleCat.{u + 1} Λ]).mapIso
+      ((R(AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)^![Λ]).mapIso
         (twistShiftConstantComplexIso Λ _ 1).symm ≪≫ a1)).app _ ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj _).mapIso
       (leftDerivedUpperStarTateShiftIso Λ _ m) ≪≫ derivedTensorLeftUnitor _ Y _⟩
@@ -190,12 +190,12 @@ after that of `B' = 𝔸^c_B`, so by the composition law
 `Rz_{c+1}^! Λ(c+1)[2(c+1)] ≅ Rz_c^! Rs'^! Λ(1 + c)[2(1 + c)]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B : Scheme.{u})
     [HasInvertibleExponent Λ B] :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B)).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin (c + 1)); B) ((c + 1 : ℕ) : ℤ))⟦2 * ((c + 1 : ℕ) : ℤ)⟧) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+      (rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
-        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+        ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) 𝔸(ULift.{u} (Fin c); B))).obj
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin c); B)) (1 + (c : ℤ)))⟦
             2 * (1 + (c : ℤ))⟧))) := by
@@ -207,12 +207,12 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
   obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)
     (AffineSpace.zeroSection (ULift.{u} (Fin 1)) 𝔸(ULift.{u} (Fin c); B))
-  exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B)^![ModuleCat.{u + 1} Λ]).mapIso
+  exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B)^![Λ]).mapIso
       ((leftDerivedUpperStarTateShiftIso Λ φ.hom _).symm ≪≫
         (rightDerivedUpperShriekIsoOfIso _ φ).symm.app _) ≪≫
     comp₁.symm.app _ ≪≫ heq.app _ ≪≫ comp₂.app _ ≪≫
-    (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![ModuleCat.{u + 1} Λ]).mapIso
-      ((R(AffineSpace.zeroSection (ULift.{u} (Fin 1)) _)^![ModuleCat.{u + 1} Λ]).mapIso
+    (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![Λ]).mapIso
+      ((R(AffineSpace.zeroSection (ULift.{u} (Fin 1)) _)^![Λ]).mapIso
         (eqToIso (congrArg (fun m : ℤ ↦ (tateObject Λ _ m)⟦2 * m⟧)
           (show ((c + 1 : ℕ) : ℤ) = 1 + c by push_cast; ring))))⟩
 
@@ -222,7 +222,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
     [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
     [HasInvertibleExponent Λ B] :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin c); B) c)⟦2 * (c : ℤ)⟧) ≅ constantComplex Λ B) := by
   induction c with
@@ -243,7 +243,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
       nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject Λ
         𝔸(ULift.{u} (Fin c); B) (𝔸(ULift.{u} (Fin c); B) ↘ B ≫ aB) c
     exact ⟨t ≪≫
-      (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![ModuleCat.{u + 1} Λ]).mapIso w ≪≫ ih⟩
+      (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![Λ]).mapIso w ≪≫ ih⟩
 
 /-- Blueprint `sk-prop-an`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity
 
@@ -263,13 +263,13 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero [HasTateTwist.IsNor
     {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
     [HasInvertibleExponent Λ B] :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
         ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj
           (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
       constantComplex Λ B) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject Λ c B aB
-  exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![ModuleCat.{u + 1} Λ]).mapIso
+  exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![Λ]).mapIso
     (twistShiftConstantComplexIso Λ _ c) ≪≫ e⟩
 
 /-! ### The `Rp^!`-form -/
@@ -297,7 +297,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormaliz
     [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).obj K ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj
         ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) := by
@@ -310,12 +310,12 @@ followed by that of `Y' = 𝔸^d_Y`, so by the composition law and `Re^! ≅ Le^
 isomorphism `e : 𝔸^{d+1}_Y ≅ 𝔸¹_{Y'}`, `Rp_{d+1}^! K ≅ Le^* Rp'^! Rp_d^! K`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpace_succ (d : ℕ) (Y : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (𝔸(ULift.{u} (Fin (d + 1)); Y) ↘ Y)).obj K ≅
       (L(((affineSpaceSuccIso d Y).hom)^*[ModuleCat.{u + 1} Λ])).obj
-        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+        ((rightDerivedUpperShriek Λ
           (𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); Y)) ↘ 𝔸(ULift.{u} (Fin d); Y))).obj
-          ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+          ((rightDerivedUpperShriek Λ
             (𝔸(ULift.{u} (Fin d); Y) ↘ Y)).obj K))) := by
   set φ := affineSpaceSuccIso d Y
   set q := 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); Y)) ↘ 𝔸(ULift.{u} (Fin d); Y)
@@ -389,7 +389,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace [HasTateTwist.IsNormali
     [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (𝔸(ULift.{u} (Fin d); Y) ↘ Y)).obj K ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj
         ((L(((𝔸(ULift.{u} (Fin d); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) := by
@@ -406,7 +406,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace [HasTateTwist.IsNormali
       (boundedConstructibleFiniteTor_twistShift_leftDerivedUpperStar Λ _ d hK)
     obtain ⟨s⟩ := nonempty_iso_leftDerivedUpperStar_affineSpaceSuccIso_twistShift Λ d Y K
     exact ⟨t ≪≫ (L(((affineSpaceSuccIso d Y).hom)^*[ModuleCat.{u + 1} Λ])).mapIso
-      ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin 1);
+      ((rightDerivedUpperShriek Λ (𝔸(ULift.{u} (Fin 1);
         𝔸(ULift.{u} (Fin d); Y)) ↘ 𝔸(ULift.{u} (Fin d); Y))).mapIso ih ≪≫ l) ≪≫ s⟩
 
 /-- Blueprint `cor-pur-affine-space-purity`: affine-space purity

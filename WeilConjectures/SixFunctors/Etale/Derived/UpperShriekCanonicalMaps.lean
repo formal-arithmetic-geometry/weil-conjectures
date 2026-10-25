@@ -104,7 +104,7 @@ noncomputable def dualizingComplexTensorMap
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K :=
+      (R(f)^![Λ]).obj K :=
   dualizingComplexTensorMapOfIsIso f K
 
 end Tensor
@@ -129,8 +129,8 @@ the mate, under the adjunctions `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, of the in
 compact-support base change isomorphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
 noncomputable def rightDerivedUpperShriekBaseChangeMap (sq : IsPullback g' f' f g) :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ] :=
+    R(f)^![Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
+      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![Λ] :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   mateEquiv (rightDerivedUpperShriekAdjunction _ f) (rightDerivedUpperShriekAdjunction _ f')
     (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
@@ -143,7 +143,7 @@ noncomputable def dualizingComplexBaseChangeMap (sq : IsPullback g' f' f g) :
     (L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ⟶
       dualizingComplex (ModuleCat.{u + 1} Λ) f' :=
   (rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _) ≫
-    (R(f')^![ModuleCat.{u + 1} Λ]).map (leftDerivedUpperStarUnitIso _ g).hom
+    (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom
 
 /-- The base change map of the dualizing complexes is an isomorphism as soon as the base change
 map of `R^!` is one at `Λ_Y`. -/

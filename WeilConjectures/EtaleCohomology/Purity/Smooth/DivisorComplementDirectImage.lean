@@ -164,10 +164,10 @@ theorem exists_higherDirectImage_constantSheaf_of_isRegularImmersion (Λ : Type 
       leftDerivedUpperStarConstantComplexIso Λ (W₀.ι ≫ aW)
   -- `Ri₀^! Λ ≅ Λ[-2]`
   let a : ℤ := 2 * ((1 : ℕ) : ℤ)
-  let K := (R(pullback.snd i W₀.ι)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ W₀)
+  let K := (R(pullback.snd i W₀.ι)^![Λ]).obj (constantComplex Λ W₀)
   let eK : K⟦a⟧ ≅ constantComplex Λ (pullback i W₀.ι) :=
-    (((R(pullback.snd i W₀.ι)^![ModuleCat.{u + 1} Λ]).commShiftIso a).app _).symm ≪≫
-      (R(pullback.snd i W₀.ι)^![ModuleCat.{u + 1} Λ]).mapIso ((shiftFunctor _ a).mapIso τ.symm) ≪≫
+    (((R(pullback.snd i W₀.ι)^![Λ]).commShiftIso a).app _).symm ≪≫
+      (R(pullback.snd i W₀.ι)^![Λ]).mapIso ((shiftFunctor _ a).mapIso τ.symm) ≪≫
       e₂
   -- the supported localization triangle of `Λ_{W₀}`
   have hij : Set.range (pullback.snd i W₀.ι) = (Set.range (pullback.snd j W₀.ι))ᶜ := by

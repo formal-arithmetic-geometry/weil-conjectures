@@ -202,6 +202,17 @@ end Adjunction
 
 section Plus
 
+/-- For a quasi-compact target `Y`, the exceptional inverse image `Rf^!` sends bounded below
+objects to bounded below objects. `Rf_!` has finite cohomological amplitude, bounded by twice the
+fibre dimension of the compactification, which is bounded as `Y` is quasi-compact: if `Rf_!`
+sends `D^{≤ 0}` into `D^{≤ N}` then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction
+[SGA 4, Exp. XVIII, 3.1.7]. -/
+theorem plus_rightDerivedUpperShriek_obj [CompactSpace Y]
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.TStructure.t.plus K) :
+    DerivedCategory.TStructure.t.plus ((R(f)^![Λ]).obj K) :=
+  plus_obj_of_rightDerivedLowerShriek_adjunction Λ f (rightDerivedUpperShriekAdjunction Λ f) K hK
+
 /-- Let `Λ` be a finite ring and `f : X ⟶ Y` a separated morphism, locally of finite type, of
 quasi-compact quasi-separated schemes. Then `Rf^! : D(Y_ét, Λ) ⥤ D(X_ét, Λ)` sends bounded below
 complexes to bounded below complexes.

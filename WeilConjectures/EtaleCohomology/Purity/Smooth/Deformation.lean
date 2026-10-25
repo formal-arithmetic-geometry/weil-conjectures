@@ -171,7 +171,7 @@ theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{
   exact ⟨((leftDerivedUpperStarComp _ g s).app _).symm ≪≫
     (leftDerivedUpperStarComp _ s' g' (g ≫ s) hs.symm).app _ ≪≫
     (L((s')^*[ModuleCat.{u + 1} Λ])).mapIso (e.app _ ≪≫
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').mapIso
+      (rightDerivedUpperShriek Λ f').mapIso
         (leftDerivedUpperStarConstantComplexIso Λ g))⟩
 
 /-- *Section invariants through an étale chart.* Let `g' : X ⟶ T` be compactifiable, `j : W ⟶ X`
@@ -210,7 +210,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
       ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app _ ≪≫
         ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app _).symm ≪≫
         (e₁.app _).symm ≪≫ e₂.app _ ≪≫ e₃.app _ ≪≫
-        (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) c).mapIso ω ≪≫ e₄ ≪≫
+        (rightDerivedUpperShriek Λ c).mapIso ω ≪≫ e₄ ≪≫
         (L((c)^*[ModuleCat.{u + 1} Λ])).mapIso ω.symm) ≪≫
     ((leftDerivedUpperStarComp _ σ c _ hσc.symm).app _).symm⟩
 

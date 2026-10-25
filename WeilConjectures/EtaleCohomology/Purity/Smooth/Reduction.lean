@@ -94,13 +94,13 @@ theorem map_smoothPurityIso_hom_comp (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY :
     (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+      (R(f)^![Λ]).obj K)
     (θ' : dualizingComplex (ModuleCat.{u + 1} Λ') f ≅
       (twistShift Λ' X d).obj (constantComplex Λ' X))
     (φ' : ((derivedTensor (ModuleCat.{u + 1} Λ') X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K))).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ') f) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ']).obj (ΨY.obj K))
+      (R(f)^![Λ']).obj (ΨY.obj K))
     (vP : ΨX.obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K))
     (μ : (derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ⋙
@@ -113,8 +113,8 @@ theorem map_smoothPurityIso_hom_comp (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY :
       dualizingComplex (ModuleCat.{u + 1} Λ') f)
     (v₀ : ΨX.obj ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
       (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K)))
-    (vS : ΨX.obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ']).obj (ΨY.obj K))
+    (vS : ΨX.obj ((R(f)^![Λ]).obj K) ≅
+      (R(f)^![Λ']).obj (ΨY.obj K))
     (htw : ΨX.map (twistShiftObjIso Λ X d _).hom ≫ μ.hom.app _ ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ') X).map vP.hom).app _ ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ') X).obj _).map vT.hom =
@@ -161,17 +161,17 @@ theorem map_smoothPurityTrace {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (Ψ
     (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])
     {K : 𝐃(Y, Λ)}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+      (R(f)^![Λ]).obj K)
     (γ' : (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K)) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ']).obj (ΨY.obj K))
+      (R(f)^![Λ']).obj (ΨY.obj K))
     (v₀ : ΨX.obj ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
       (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj (ΨY.obj K)))
-    (vS : ΨX.obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ']).obj (ΨY.obj K))
+    (vS : ΨX.obj ((R(f)^![Λ]).obj K) ≅
+      (R(f)^![Λ']).obj (ΨY.obj K))
     (hS : (R(f)_![ModuleCat.{u + 1} Λ']).map vS.hom ≫
-        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ') f).counit.app (ΨY.obj K) =
+        (rightDerivedUpperShriekAdjunction Λ' f).counit.app (ΨY.obj K) =
       ψ.inv.app _ ≫
-        ΨY.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K))
+        ΨY.map ((rightDerivedUpperShriekAdjunction Λ f).counit.app K))
     (hγ : ΨX.map γ.hom ≫ vS.hom = v₀.hom ≫ γ'.hom) :
     ΨY.map (smoothPurityTrace Λ d f γ) =
       ψ.hom.app _ ≫ (R(f)_![ModuleCat.{u + 1} Λ']).map v₀.hom ≫ smoothPurityTrace Λ' d f γ' := by
@@ -207,15 +207,15 @@ theorem smoothPurityTrace_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤
     (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])
     {K : 𝐃(Y, Λ)} {K' : 𝐃(Y, Λ')} (v : K' ⟶ ΨY.obj K)
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+      (R(f)^![Λ]).obj K)
     (γ' : (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj K') ≅
-      (R(f)^![ModuleCat.{u + 1} Λ']).obj K')
+      (R(f)^![Λ']).obj K')
     (v₀ : (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj K') ⟶
       ΨX.obj ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)))
-    (vS : (R(f)^![ModuleCat.{u + 1} Λ']).obj K' ⟶ ΨX.obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K))
+    (vS : (R(f)^![Λ']).obj K' ⟶ ΨX.obj ((R(f)^![Λ]).obj K))
     (hS : (R(f)_![ModuleCat.{u + 1} Λ']).map vS ≫ ψ.inv.app _ ≫
-        ΨY.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) =
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ') f).counit.app K' ≫ v)
+        ΨY.map ((rightDerivedUpperShriekAdjunction Λ f).counit.app K) =
+      (rightDerivedUpperShriekAdjunction Λ' f).counit.app K' ≫ v)
     (hγ : γ'.hom ≫ vS = v₀ ≫ ΨX.map γ.hom) :
     smoothPurityTrace Λ' d f γ' ≫ v =
       (R(f)_![ModuleCat.{u + 1} Λ']).map v₀ ≫ ψ.inv.app _ ≫ ΨY.map (smoothPurityTrace Λ d f γ) := by

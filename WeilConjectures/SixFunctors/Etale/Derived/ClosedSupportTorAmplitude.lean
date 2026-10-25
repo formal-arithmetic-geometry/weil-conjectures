@@ -121,7 +121,7 @@ theorem torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
       IsZero (higherDirectImage Λ j q M))
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1) ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1) ((R(i)^![Λ]).obj K) := by
   let A := ModuleCat.{u + 1} Λ
   have h₃ := torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage j hc
     (torAmplitudeIn_leftDerivedUpperStar A j a b hta)
@@ -152,9 +152,9 @@ theorem boundedConstructible_torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K)
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+        ((R(i)^![Λ]).obj K) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1)
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) :=
+        ((R(i)^![Λ]).obj K) :=
   ⟨(constructibleIn_rightDerivedUpperShriek i j hij h
       ⟨hK, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩).1,
     torAmplitudeIn_rightDerivedUpperShriek i j hij h.1 hta⟩

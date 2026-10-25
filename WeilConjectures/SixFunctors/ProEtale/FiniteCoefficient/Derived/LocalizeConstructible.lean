@@ -265,7 +265,7 @@ noncomputable def closedUpperShriekHomEquivRightDerivedUpperShriek [HasCompactif
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : _root_.DerivedCategory.TStructure.t.plus K) :
     (P ⟶ (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K) ≃
-      (P ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      (P ⟶ (R(i)^![Λ]).obj K) :=
   ((derivedLowerStarClosedUpperShriekAdjunction i j hij).homEquiv P K).symm.trans <|
     ((rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar _ i).app P).homFromEquiv.symm.trans
       (rightDerivedUpperShriekHomEquiv i hP hK)
@@ -303,7 +303,7 @@ theorem nonempty_iso_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedUpper
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     Nonempty ((closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K ≅
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      (R(i)^![Λ]).obj K) := by
   have hE := (boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj i j N hN hΛ s hij
     hK).plusEtaleOrigin
   have hE' := plusEtaleOrigin_rightDerivedUpperShriek_obj i hK.plusEtaleOrigin.plus

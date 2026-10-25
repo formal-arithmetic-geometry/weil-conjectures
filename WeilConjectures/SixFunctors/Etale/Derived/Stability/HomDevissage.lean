@@ -169,7 +169,7 @@ lemma constructibleFiniteTor_derivedHom_rightDerivedLowerStar_rightDerivedLowerS
   let P₀ := (_root_.DerivedCategory.singleFunctor
     (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj P
   let N := (R(j)_![ModuleCat.{u + 1} Λ]).obj P₀
-  let M := (R(g)^![ModuleCat.{u + 1} Λ]).obj L
+  let M := (R(g)^![Λ]).obj L
   have hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar M :=
     constructibleFiniteTor_rightDerivedUpperShriek Λ aX g hL
   have hjM := constructibleFiniteTor_rightDerivedUpperShriek Λ (g ≫ aX) j hM

@@ -120,8 +120,8 @@ the mate, along `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, of the inverse of the com
 change isomorphism `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
 noncomputable def upperShriekBaseChangeMap (sq : IsPullback g' f' f g) :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ] :=
+    R(f)^![Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
+      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![Λ] :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   Adjunction.rightAdjointExchange (rightDerivedUpperShriekAdjunction _ f)
     (rightDerivedUpperShriekAdjunction _ f') (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq))
@@ -143,9 +143,9 @@ Lg_X^* Rf^! K ──exceptional base change──▶ Rf^! Lg_Y^* K ──Rf^! φ
 -/
 noncomputable def upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
-    (L((gX)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ⟶
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K :=
-  (upperShriekBaseChangeMap Λ sq).app K ≫ (R(f)^![ModuleCat.{u + 1} Λ]).map φ
+    (L((gX)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![Λ]).obj K) ⟶
+      (R(f)^![Λ]).obj K :=
+  (upperShriekBaseChangeMap Λ sq).app K ≫ (R(f)^![Λ]).map φ
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **the exceptional counit is Weil
 equivariant**. For a Weil datum `φ` on `K`, the counit `Rf_! Rf^! K ⟶ K` is a morphism of Weil
@@ -154,7 +154,7 @@ objects from the compact-support transport of the exceptional datum on `Rf^! K`
 theorem isWeilMorphism_counit_upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     IsWeilMorphism gY (lowerShriekWeilDatum sq (upperShriekMateWeilDatum sq φ)) φ
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) :=
+      ((rightDerivedUpperShriekAdjunction Λ f).counit.app K) :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   Adjunction.isWeilEquivariant_counit (rightDerivedUpperShriekAdjunction _ f)
     (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)) φ
@@ -165,7 +165,7 @@ objects from `φ` to the exceptional datum of the compact-support transport of `
 theorem isWeilMorphism_unit_upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
     {M : DerivedCategoryModule Λ X} (φ : (L((gX)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
     IsWeilMorphism gX φ (upperShriekMateWeilDatum sq (lowerShriekWeilDatum sq φ))
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).unit.app M) :=
+      ((rightDerivedUpperShriekAdjunction Λ f).unit.app M) :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   Adjunction.isWeilEquivariant_unit (rightDerivedUpperShriekAdjunction _ f)
     (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)) φ

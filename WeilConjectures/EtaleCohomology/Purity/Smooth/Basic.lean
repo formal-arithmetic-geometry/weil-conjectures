@@ -234,9 +234,9 @@ noncomputable def smoothPurityIso
     (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :
+      (rightDerivedUpperShriek Λ f).obj K) :
     (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K :=
+      (rightDerivedUpperShriek Λ f).obj K :=
   twistShiftObjIso Λ X d _ ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).mapIso
       θ.symm ≪≫ φ
@@ -257,7 +257,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormaliz
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K ≅
+    Nonempty ((rightDerivedUpperShriek Λ f).obj K ≅
       (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
@@ -342,16 +342,16 @@ noncomputable def smoothPullbackExchange (sq : IsPullback g f' f v)
     (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
+      (rightDerivedUpperShriek Λ f).obj K)
     (θ' : dualizingComplex (ModuleCat.{u + 1} Λ) f' ≅
       (twistShift Λ X' d).obj (constantComplex Λ X'))
     (φ' : ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj
         ((L((f')^*[ModuleCat.{u + 1} Λ])).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f') ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
+      (rightDerivedUpperShriek Λ f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
+    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((rightDerivedUpperShriek Λ f).obj K) ≅
+      (rightDerivedUpperShriek Λ f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
   (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso (smoothPurityIso Λ f K θ φ).symm ≪≫
     leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K ≪≫
@@ -378,13 +378,13 @@ theorem leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom (sq : IsPullbac
     (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
+      (rightDerivedUpperShriek Λ f).obj K)
     (θ' : dualizingComplex (ModuleCat.{u + 1} Λ) f' ≅
       (twistShift Λ X' d).obj (constantComplex Λ X'))
     (φ' : ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj
         ((L((f')^*[ModuleCat.{u + 1} Λ])).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f') ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
+      (rightDerivedUpperShriek Λ f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map (smoothPurityIso Λ f K θ φ).hom ≫
         (smoothPullbackExchange Λ f sq K θ φ θ' φ').hom =

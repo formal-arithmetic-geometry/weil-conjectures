@@ -82,7 +82,7 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map {U X : Scheme.{u}} (u : U ⟶
     [Surjective u] [HasCompactification u] (hu : ∀ P, IsIso (dualizingComplexTensorMap Λ u P))
     (hω : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) u))
     {P Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (φ : P ⟶ Q) (h : IsIso ((R(u)^![ModuleCat.{u + 1} Λ]).map φ)) : IsIso φ :=
+    (φ : P ⟶ Q) (h : IsIso ((R(u)^![Λ]).map φ)) : IsIso φ :=
   isIso_of_isIso_leftDerivedUpperStar_map_of_surjective Λ u φ
     (isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map u hu
       ((isInvertible_iff_exists_derivedTensor _).2 hω) φ h)
@@ -178,9 +178,9 @@ and `Rf'^! β_g` is one at `K` as soon as `β_h` is one at `K` and `β_f` at `Rg
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hf : IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sqf).app
-      ((R(g)^![ModuleCat.{u + 1} Λ]).obj K))) :
+      ((R(g)^![Λ]).obj K))) :
     IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sqh).app K) ↔
-      IsIso ((R(f')^![ModuleCat.{u + 1} Λ]).map
+      IsIso ((R(f')^![Λ]).map
         ((rightDerivedUpperShriekBaseChangeMap Λ sqg).app K)) := by
   obtain ⟨E, -, hEx⟩ := exists_rightDerivedLowerShriekCompIso Λ
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sqf
@@ -194,10 +194,10 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff
     (rightDerivedLowerShriekBaseChangeMap Λ sqh) (E f g h w) (E f' g' h' w')
     (hEx sqf sqg sqh w w') K
   change IsIso ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqh))).natTrans.app K) ↔
-    IsIso ((R(f')^![ModuleCat.{u + 1} Λ]).map
+    IsIso ((R(f')^![Λ]).map
       ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqg))).natTrans.app K))
   change IsIso ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqf))).natTrans.app
-    ((R(g)^![ModuleCat.{u + 1} Λ]).obj K)) at hf
+    ((R(g)^![Λ]).obj K)) at hf
   rw [← isIso_comp_right_iff _ ((Adjunction.rightAdjointUniq
       ((rightDerivedUpperShriekAdjunction _ h').ofNatIsoLeft (E f' g' h' w'))
       ((rightDerivedUpperShriekAdjunction _ f').comp
@@ -237,8 +237,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isInvertible {X Y X' Y
   have hNi := (isInvertible_iff_exists_derivedTensor _).2 hN
   have hGN := isInvertible_leftDerivedUpperStar_obj g hNi
   exact Adjunction.isIso_mateEquiv_app_of_isInvertible
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f)
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f')
+    (rightDerivedUpperShriekAdjunction Λ f)
+    (rightDerivedUpperShriekAdjunction Λ f')
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f).app M).app N)
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f').app M).app N)
     (projectionMap_app_app_naturality_left f) (projectionMap_app_app_naturality_left f')

@@ -102,11 +102,11 @@ For a closed immersion `i : Z ⟶ X`, the cohomology with supports is
 noncomputable def supportCohomologyAddEquiv
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
     (derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a).obj K ≃+
-      (constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj (K⟦a⟧)) :=
+      (constantComplex Λ Z ⟶ (R(i)^![Λ]).obj (K⟦a⟧)) :=
   (derivedSupportCohomologyAddEquiv Λ i K a).trans
     ((AddEquiv.mk ((rightDerivedLowerShriekConstantComplexIso Λ i).homCongr
       (Iso.refl (K⟦a⟧))).symm (fun f g ↦ by simp [Iso.homCongr])).trans
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).homAddEquiv _ _))
+      ((rightDerivedUpperShriekAdjunction Λ i).homAddEquiv _ _))
 
 end SupportHom
 
@@ -165,7 +165,7 @@ For a closed immersion `i : Z ⟶ X`, the `Λ`-linear isomorphism
 noncomputable def supportCohomologyLinearEquiv [Finite Λ]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
     (derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a).obj K ≃ₗ[Λ]
-      (constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj (K⟦a⟧)) where
+      (constantComplex Λ Z ⟶ (R(i)^![Λ]).obj (K⟦a⟧)) where
   __ := supportCohomologyAddEquiv Λ i K a
   map_smul' c x := by
     simp [supportCohomologyAddEquiv, derivedSupportCohomologyAddEquiv_smul, Iso.homCongr,
@@ -187,7 +187,7 @@ lemma supportCohomologyLinearEquiv_apply [Finite Λ]
 @[simp]
 lemma supportCohomologyLinearEquiv_symm_apply [Finite Λ]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ)
-    (g : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj (K⟦a⟧)) :
+    (g : constantComplex Λ Z ⟶ (R(i)^![Λ]).obj (K⟦a⟧)) :
     (supportCohomologyLinearEquiv Λ i K a).symm g = (supportCohomologyAddEquiv Λ i K a).symm g :=
   rfl
 

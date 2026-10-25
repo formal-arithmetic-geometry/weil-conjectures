@@ -266,9 +266,9 @@ lemma derivedComplete_rightDerivedUpperShriek_obj (f : X ⟶ Y) [HasCompactifica
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {K : 𝐃(Y, Λ)}
     (hK : _root_.DerivedCategory.derivedComplete Y.smallEtaleTopology I K) :
     _root_.DerivedCategory.derivedComplete X.smallEtaleTopology I
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      ((R(f)^![Λ]).obj K) :=
   derivedComplete_obj_of_adjunction hϖ hI
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f) hK
+    (rightDerivedUpperShriekAdjunction Λ f) hK
 
 /-- For an open immersion `j`, the pullback `Lj^*` preserves derived completeness, being right
 adjoint to the `Λ`-linear extension by zero `D(j_!)`. -/
@@ -432,8 +432,8 @@ variable (Λ) in
 `Ri_! ⊣ Ri^!` transported along `Ri_! ≅ Ri_*`. -/
 noncomputable def rightDerivedLowerStarUpperShriekAdjunction (i : Z ⟶ X) [IsClosedImmersion i]
     [HasCompactification i] [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    R((i)_*[ModuleCat.{u + 1} Λ]) ⊣ R(i)^![ModuleCat.{u + 1} Λ] :=
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).ofNatIsoLeft
+    R((i)_*[ModuleCat.{u + 1} Λ]) ⊣ R(i)^![Λ] :=
+  (rightDerivedUpperShriekAdjunction Λ i).ofNatIsoLeft
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i)
 
 /-- Blueprint `lem-exc-open-fully-faithful`, second half: `j^* i_* = 0` for an open immersion `j`
@@ -495,13 +495,13 @@ theorem boundedConstructibleIntegral_rightDerivedUpperShriek
     (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L) :
-    DerivedCategory.boundedConstructibleIntegral I X ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) := by
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+    DerivedCategory.boundedConstructibleIntegral I X ((R(f)^![Λ]).obj L) := by
+  let adj := rightDerivedUpperShriekAdjunction Λ f
   have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
+  have : (R(f)^![Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![Λ]).Additive := adj.right_adjoint_additive
   exact (boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf hL
-    (hL.1.map (R(f)^![ModuleCat.{u + 1} Λ]))).1.1
+    (hL.1.map (R(f)^![Λ]))).1.1
 
 end UpperShriek
 
@@ -533,7 +533,7 @@ variable [HasCompactification i] [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 `D(X_ét, Λ)`, with third map `w`. -/
 noncomputable abbrev closedSupportTriangle (K : 𝐃(X, Λ))
     (w : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶
-      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))⟦(1 : ℤ)⟧) :
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj K))⟦(1 : ℤ)⟧) :
     Triangle 𝐃(X, Λ) :=
   Recollement.triangle (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
     (rightDerivedLowerStarUpperShriekAdjunction Λ i) K w
@@ -555,7 +555,7 @@ theorem exists_triangleHom_closedSupportTriangle (hij : Set.range i.base = (Set.
     {K K' : 𝐃(X, Λ)} (φ : K ⟶ K') {w w'} (hw : closedSupportTriangle i j K w ∈ distTriang _)
     (hw' : closedSupportTriangle i j K' w' ∈ distTriang _) :
     ∃ τ : closedSupportTriangle i j K w ⟶ closedSupportTriangle i j K' w',
-      τ.hom₁ = (R((i)_*[ModuleCat.{u + 1} Λ])).map ((R(i)^![ModuleCat.{u + 1} Λ]).map φ) ∧
+      τ.hom₁ = (R((i)_*[ModuleCat.{u + 1} Λ])).map ((R(i)^![Λ]).map φ) ∧
         τ.hom₂ = φ ∧
         τ.hom₃ = (R((j)_*[ModuleCat.{u + 1} Λ])).map ((L((j)^*[ModuleCat.{u + 1} Λ])).map φ) :=
   Recollement.exists_triangleHom _ _
@@ -578,7 +578,7 @@ theorem closedSupportTriangle_hom_ext (hij : Set.range i.base = (Set.range j.bas
 `Ri^! Rj_* G = 0`, as `Hom(Q, Ri^! Rj_* G) = Hom(Ri_* Q, Rj_* G) = 0`. -/
 theorem isZero_rightDerivedUpperShriek_obj_rightDerivedLowerStar_obj
     (hij : Set.range i.base = (Set.range j.base)ᶜ) (G : 𝐃(U, Λ)) :
-    IsZero ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G)) :=
+    IsZero ((R(i)^![Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G)) :=
   Recollement.isZero_obj_obj (derivedUpperStarLowerStarAdjunction _ j)
     (rightDerivedLowerStarUpperShriekAdjunction Λ i)
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
@@ -724,7 +724,7 @@ noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsAlgC
     (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleIntegral I Z).FullSubcategory :=
   ObjectProperty.liftFullSubcategory (DerivedCategory.boundedConstructibleIntegral I X) _
-    (R(i)^![ModuleCat.{u + 1} Λ]) fun _ hK ↦
+    (R(i)^![Λ]) fun _ hK ↦
       boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aZ aX i hi hK
 
 end BoundedConstructible
@@ -757,7 +757,7 @@ theorem boundedConstructibleIntegral_closedSupportTriangle (j : U ⟶ X) [IsOpen
     [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) {K : 𝐃(X, Λ)}
     (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
     DerivedCategory.boundedConstructibleIntegral I X
-        ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+        ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj K)) ∧
       DerivedCategory.boundedConstructibleIntegral I X
         ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
       ∃! w, closedSupportTriangle i j K w ∈ distTriang _ :=
@@ -780,7 +780,7 @@ theorem torAmplitudeIn_reductionModIdeal_rightDerivedUpperShriek (j : U ⟶ X)
     (hab : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
       ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) (n : ℕ) :
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + 2 * (d : ℤ) + 1)
-      ((reductionModIdeal Λ Z (I ^ (n + 1))).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+      ((reductionModIdeal Λ Z (I ^ (n + 1))).obj ((R(i)^![Λ]).obj K)) := by
   obtain ⟨hM, -, w, hw, -⟩ := boundedConstructibleIntegral_closedSupportTriangle hϖ hI aX aZ i hi
     j hij hK
   exact torAmplitudeIn_reductionModIdeal_of_distTriang hϖ hI aX i j hK hM hw (Iso.refl _)

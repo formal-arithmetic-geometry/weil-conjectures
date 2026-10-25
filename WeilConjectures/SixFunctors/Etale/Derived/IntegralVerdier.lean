@@ -102,9 +102,9 @@ limit cone `ω` of the tower `n ↦ Ra_X^!(Λ ⧸ Iⁿ)` (restriction of scalars
    `Ra_{X*} RHom(K, ω) ≅ RHom(Ra_{X!} K, Λ)`. -/
 theorem exists_isHomotopyLimit_dualizing :
     ∃ ω : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-        R(aX)^![ModuleCat.{u + 1} Λ]), Pretriangulated.IsHomotopyLimit ω ∧
+        R(aX)^![Λ]), Pretriangulated.IsHomotopyLimit ω ∧
       (∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj ω.pt ≅
-        (R(aX)^![ModuleCat.{u + 1} Λ]).obj
+        (R(aX)^![Λ]).obj
           ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n)))) ∧
       DerivedCategory.boundedConstructibleIntegral I X ω.pt ∧
       (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ n : ℕ,
@@ -119,7 +119,7 @@ theorem exists_isHomotopyLimit_dualizing :
 
 variable
   (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-    R(aX)^![ModuleCat.{u + 1} Λ]))
+    R(aX)^![Λ]))
   (hωX : Pretriangulated.IsHomotopyLimit ωX)
 
 include hϖ hI hωX in
@@ -141,7 +141,7 @@ theorem boundedConstructibleIntegral_derivedHom_dualizing {K : 𝐃(X, Λ)}
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt) ∧
       (∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
           (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt) ≅
-        ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ((R(aX)^![ModuleCat.{u + 1} Λ]).obj
+        ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ((R(aX)^![Λ]).obj
           ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n))))) ∧
       (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ a b : ℤ,
         (∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b

@@ -389,7 +389,7 @@ lemma supportedClassMap_comp (i : Z ⟶ X) [IsClosedImmersion i]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     supportedClassMap Λ i (h ≫ γ) =
       constantComplexEndPullback Λ i h ≫ supportedClassMap Λ i γ := by
   have hc := leftDerivedUpperStarConstantComplexIso_comp Λ
@@ -420,7 +420,7 @@ lemma restrictSupportedClass_comp (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [I
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv τ (h ≫ γ) =
       constantComplexEndPullback Λ e h ≫
@@ -434,15 +434,15 @@ variable (Λ) in
 noncomputable def supportedClassMapEquiv (i : Z ⟶ X) [IsClosedImmersion i]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (constantComplex Λ X ⟶
-        (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) ≃
-      (constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :=
+        (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) ≃
+      (constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :=
   Equiv.ofBijective _ (supportedClassMap_bijective Λ i L)
 
 @[simp]
 lemma supportedClassMapEquiv_apply (i : Z ⟶ X) [IsClosedImmersion i]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     supportedClassMapEquiv Λ i L γ = supportedClassMap Λ i γ :=
   rfl
 
@@ -458,8 +458,8 @@ noncomputable def restrictSupportedHom (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ 
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
-    (φ : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :
-    constantComplex Λ Z' ⟶ (R(i')^![ModuleCat.{u + 1} Λ]).obj L' :=
+    (φ : constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :
+    constantComplex Λ Z' ⟶ (R(i')^![Λ]).obj L' :=
   supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
     (leftDerivedUpperStarConstantComplexIso Λ e).inv τ ((supportedClassMapEquiv Λ i L).symm φ))
 
@@ -472,7 +472,7 @@ lemma restrictSupportedHom_constantComplexEndPullback_comp (e : U ⟶ X) (i : Z 
     {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
-    (φ : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :
+    (φ : constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :
     restrictSupportedHom Λ e i i' g hg τ (constantComplexEndPullback Λ i h ≫ φ) =
       constantComplexEndPullback Λ i' (constantComplexEndPullback Λ e h) ≫
         restrictSupportedHom Λ e i i' g hg τ φ := by

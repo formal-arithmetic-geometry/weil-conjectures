@@ -325,7 +325,7 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).obj
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj N)) ≅
+        ((R(f)^![Λ]).obj N)) ≅
       (RHom(Y)[ModuleCat.{u + 1} Λ].obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))).obj N) := by
   have := isIso_projectionMap_of_finite Λ f
   exact ⟨((derivedHomRightDerivedLowerShriekIso _ f).app (op M)).app N⟩
@@ -346,12 +346,12 @@ finite reduction and scalar extension, is
 `A = ModuleCat Λ` and `A' = ModuleCat Λ'`. -/
 theorem exists_iso_derivedHom_rightDerivedLowerShriek_commShift :
     ∃ e : RHom(X)[ModuleCat.{u + 1} Λ] ⋙
-        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(f)^![Λ] ⋙
           (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅
         (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ],
       ∀ M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         NatTrans.CommShift
-          (F₁ := (R(f)^![ModuleCat.{u + 1} Λ] ⋙ (RHom(X)[ModuleCat.{u + 1} Λ]).obj (op M)) ⋙
+          (F₁ := (R(f)^![Λ] ⋙ (RHom(X)[ModuleCat.{u + 1} Λ]).obj (op M)) ⋙
             R((f)_*[ModuleCat.{u + 1} Λ]))
           (F₂ := (RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)))
           (e.app (op M)).hom ℤ :=
@@ -373,7 +373,7 @@ that is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = M
 blueprint assumes Noetherian schemes; this is not needed here. -/
 noncomputable def derivedHomRightDerivedLowerShriekIsoOfFinite :
     RHom(X)[ModuleCat.{u + 1} Λ] ⋙
-        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(f)^![Λ] ⋙
           (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅
       (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ] :=
   have := isIso_projectionMap_of_finite Λ f
@@ -398,7 +398,7 @@ for `HasCompactification`), then for torsion coefficients the exceptional invers
 This is the mate, under the adjunctions `Rf_! ⊣ Rf^!`, of the composition isomorphism
 `R(a_Y ∘ f)_! ≅ R a_{Y!} ∘ Rf_!`, evaluated at the monoidal unit `Λ_S`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
-    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY) ≅
+    Nonempty ((R(f)^![Λ]).obj (dualizingComplex _ aY) ≅
       dualizingComplex _ (f ≫ aY)) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f aY
   exact ⟨((((rightDerivedUpperShriekAdjunction _ (f ≫ aY)).ofNatIsoLeft e).rightAdjointUniq

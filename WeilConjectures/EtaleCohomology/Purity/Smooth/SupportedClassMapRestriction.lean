@@ -116,7 +116,7 @@ noncomputable def supportedTranspose
 lemma supportedClassMap_eq_supportedTranspose [Finite Λ]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     supportedClassMap Λ i γ = supportedTranspose Λ i γ :=
   rfl
 
@@ -258,7 +258,7 @@ localization triangle. -/
 lemma isIso_counit_app_of_isZero [(R(i')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     (K : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj K)) :
-    IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i').counit.app K) :=
+    IsIso ((rightDerivedUpperShriekAdjunction Λ i').counit.app K) :=
   (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
     (supportedLocalizationTriangle_mem_distTriang _ i' i'.openComplement.ι
       i'.range_eq_compl_range_openComplement_ι K)).1
@@ -281,7 +281,7 @@ lemma isIso_of_isIso_leftDerivedUpperStar_map_of_isZero
     (hK₁ : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj K₁))
     (hK₂ : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj K₂)) (f : K₁ ⟶ K₂)
     (hf : IsIso ((L((i')^*[ModuleCat.{u + 1} Λ])).map f)) : IsIso f := by
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i'
+  let adj := rightDerivedUpperShriekAdjunction Λ i'
   have := isIso_counit_app_of_isZero Λ i' K₁ hK₁
   have := isIso_counit_app_of_isZero Λ i' K₂ hK₂
   have := isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion Λ i'
@@ -290,20 +290,20 @@ lemma isIso_of_isIso_leftDerivedUpperStar_map_of_isZero
   let E : R(i')_![ModuleCat.{u + 1} Λ] ⋙ L((i')^*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
     Functor.isoWhiskerRight c _ ≪≫
       asIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i').counit
-  have key : (R(i')_![ModuleCat.{u + 1} Λ]).map ((R(i')^![ModuleCat.{u + 1} Λ]).map f) ≫
+  have key : (R(i')_![ModuleCat.{u + 1} Λ]).map ((R(i')^![Λ]).map f) ≫
       adj.counit.app K₂ = adj.counit.app K₁ ≫ f := adj.counit_naturality f
   have h₁ : IsIso ((L((i')^*[ModuleCat.{u + 1} Λ])).map
-      ((R(i')_![ModuleCat.{u + 1} Λ]).map ((R(i')^![ModuleCat.{u + 1} Λ]).map f))) := by
+      ((R(i')_![ModuleCat.{u + 1} Λ]).map ((R(i')^![Λ]).map f))) := by
     have h := congrArg (L((i')^*[ModuleCat.{u + 1} Λ])).map key
     rw [Functor.map_comp, Functor.map_comp] at h
     have : IsIso ((L((i')^*[ModuleCat.{u + 1} Λ])).map
-        ((R(i')_![ModuleCat.{u + 1} Λ]).map ((R(i')^![ModuleCat.{u + 1} Λ]).map f)) ≫
+        ((R(i')_![ModuleCat.{u + 1} Λ]).map ((R(i')^![Λ]).map f)) ≫
           (L((i')^*[ModuleCat.{u + 1} Λ])).map (adj.counit.app K₂)) := by
       rw [h]
       infer_instance
     exact IsIso.of_isIso_comp_right _ ((L((i')^*[ModuleCat.{u + 1} Λ])).map (adj.counit.app K₂))
-  have h₂ : IsIso ((R(i')^![ModuleCat.{u + 1} Λ]).map f) :=
-    (NatIso.isIso_map_iff E ((R(i')^![ModuleCat.{u + 1} Λ]).map f)).1 h₁
+  have h₂ : IsIso ((R(i')^![Λ]).map f) :=
+    (NatIso.isIso_map_iff E ((R(i')^![Λ]).map f)).1 h₁
   have : IsIso (adj.counit.app K₁ ≫ f) := by
     rw [← key]
     infer_instance
@@ -358,7 +358,7 @@ theorem isIso_supportedClassMap_restrictSupportedClass_iff [Finite Λ]
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))
+      ((R(i)^![Λ]).obj L))
     (hψ : IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ)) :
     IsIso (supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ)) ↔
@@ -372,7 +372,7 @@ theorem isIso_supportedClassMap_restrictSupportedClass_iff [Finite Λ]
   set u' := supportedRestrictionMap Λ i'
   have := isIso_counit_app_of_isZero Λ i' _
     (isZero_leftDerivedUpperStar_openComplement_obj Λ e i i' g hg (constantComplex Λ Z))
-  let βP := (asIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i').counit.app
+  let βP := (asIso ((rightDerivedUpperShriekAdjunction Λ i').counit.app
     ((L((e)^*[ModuleCat.{u + 1} Λ])).obj
       ((R(i)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z))))).symm
   have hu' : ∀ {T} N, (T ≅ (R(i')_![ModuleCat.{u + 1} Λ]).obj N) →

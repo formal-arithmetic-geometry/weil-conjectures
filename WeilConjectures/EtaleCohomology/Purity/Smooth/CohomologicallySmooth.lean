@@ -129,7 +129,7 @@ theorem IsCohomologicallySmooth.nonempty_iso_rightDerivedUpperShriek_obj {X Y : 
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      (R(f)^![Λ]).obj K) :=
   have := hf.isIso_dualizingComplexTensorMap K hK
   ⟨asIso (dualizingComplexTensorMap Λ f K)⟩
 
@@ -159,7 +159,7 @@ theorem nonempty_iso_dualizingComplex_comp_of_isInvertible {X Y Z : Scheme.{u}} 
   subst w
   obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f g
   obtain ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hg
-  exact ⟨c.app _ ≪≫ (R(f)^![ModuleCat.{u + 1} Λ]).mapIso (derivedTensorLeftUnitor _ Y _).symm ≪≫
+  exact ⟨c.app _ ≪≫ (R(f)^![Λ]).mapIso (derivedTensorLeftUnitor _ Y _).symm ≪≫
     (derivedTensorRightCompRightDerivedUpperShriekIso Λ f _ M e e').app (𝟙_ _)⟩
 
 variable {Λ}
@@ -283,8 +283,8 @@ theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X
     {u : X' ⟶ X} (sq : IsPullback u f' f v) [HasCompactification f'] [QuasiCompact f']
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
-      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+    Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![Λ]).obj K) ≅
+      (R(f')^![Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
   exact ⟨e.app K⟩
 
@@ -331,7 +331,7 @@ exceptional inverse image is the pullback, `Ru^! ≅ Lu^*`: this is the étale l
 `Lu^* R(𝟙 X)^! ≅ Ru^!` of `lem-amb-etale-adjoint-locality`, with `R(𝟙 X)^! ≅ 𝟭`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [IsSeparated u] [QuasiCompact u] [HasCompactification u] :
-    Nonempty (R(u)^![ModuleCat.{u + 1} Λ] ≅ L((u)^*[ModuleCat.{u + 1} Λ])) := by
+    Nonempty (R(u)^![Λ] ≅ L((u)^*[ModuleCat.{u + 1} Λ])) := by
   obtain ⟨ι⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale Λ u
     (𝟙 X) u (Category.comp_id u)
   exact ⟨ι.symm ≪≫

@@ -366,9 +366,9 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     ((L((jU)^*[ModuleCat.{u + 1} Λ])).obj L)
   let sa := (shiftFunctorAdd' (_root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))) (1 : ℤ) 1 2 rfl).inv.app ((R(ι)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(ι)^![ModuleCat.{u + 1} Λ]).obj L))
+      ((R(ι)^![Λ]).obj L))
   let ss := ((R(ι)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).inv.app _ ≫
-    (R(ι)_![ModuleCat.{u + 1} Λ]).map (((R(ι)^![ModuleCat.{u + 1} Λ]).commShiftIso 2).inv.app L)
+    (R(ι)_![ModuleCat.{u + 1} Λ]).map (((R(ι)^![Λ]).commShiftIso 2).inv.app L)
   have hγ : shiftSupportedClass (ModuleCat.{u + 1} Λ) ι 2 (kummerBoundary Λ t) =
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU).homEquiv _ _ α ≫ cs ≫
         w⟦(1 : ℤ)⟧' ≫ sa ≫ ss := by
@@ -454,10 +454,10 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     rw [hw', hm₃, Functor.map_comp, Functor.map_comp, Functor.map_comp]
     infer_instance
   -- the target of the adjoint is concentrated in degree zero
-  let eT : Rp.obj ((R(ι)_![ModuleCat.{u + 1} Λ]).obj ((R(ι)^![ModuleCat.{u + 1} Λ]).obj
+  let eT : Rp.obj ((R(ι)_![ModuleCat.{u + 1} Λ]).obj ((R(ι)^![Λ]).obj
       (L⟦(2 : ℤ)⟧))) ≅ T.obj₁⟦(2 : ℤ)⟧ :=
     Rp.mapIso ((R(ι)_![ModuleCat.{u + 1} Λ]).mapIso
-        (((R(ι)^![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).app L) ≪≫
+        (((R(ι)^![Λ]).commShiftIso (2 : ℤ)).app L) ≪≫
       ((R(ι)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).app _) ≪≫
     (Rp.commShiftIso (2 : ℤ)).app _
   rw [hΨ, _root_.DerivedCategory.isIso_iff]

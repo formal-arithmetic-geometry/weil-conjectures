@@ -234,8 +234,8 @@ theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
 /-- For a quasi-compact open immersion `j`, the exceptional inverse image is the restriction,
 `Rj^! ≅ D(j^*)`: both are right adjoint to `Rj_! ≅ D(j_!)`. -/
 noncomputable def rightDerivedUpperShriekIsoOfIsOpenImmersion :
-    R(j)^![ModuleCat.{u + 1} Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]) :=
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) j).rightAdjointUniq
+    R(j)^![Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]) :=
+  (rightDerivedUpperShriekAdjunction Λ j).rightAdjointUniq
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).ofNatIsoLeft
       (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).symm)
 
@@ -249,7 +249,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion (
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b
-      ((R(j)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(j)^![Λ]).obj K) := by
   obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
   refine constructibleTorAmplitudeIn_of_iso _
     ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm ⟨⟨?_,

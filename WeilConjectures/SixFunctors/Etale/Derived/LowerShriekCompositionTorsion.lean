@@ -542,8 +542,8 @@ theorem nonempty_iso_comp_rightDerivedUpperShriek_comp {X Y : Scheme.{u}} (f : X
     (g : Y ⟶ S) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     [(R(f ≫ g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    Nonempty (P ⋙ R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
-      P ⋙ R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+    Nonempty (P ⋙ R(f ≫ g)^![Λ] ≅
+      P ⋙ R(g)^![Λ] ⋙ R(f)^![Λ]) := by
   obtain ⟨e⟩ := nonempty_homFunctorIso_rightDerivedLowerShriek_comp hϖ hP f g
   exact ⟨rightAdjointIsoOfHomFunctorIso P (rightDerivedUpperShriekAdjunction _ (f ≫ g))
     ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))

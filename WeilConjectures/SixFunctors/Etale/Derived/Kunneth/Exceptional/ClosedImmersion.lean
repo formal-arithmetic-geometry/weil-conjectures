@@ -250,14 +250,14 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isClosedImmersion
     rw [range_eq_compl_range_pullback_snd i sqZ]
     exact disjoint_compl_left
   have := isIso_rightDerivedUpperShriekAdjunction_unit_app (ModuleCat.{u + 1} Λ) iW
-  have : IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) iW).unit :=
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ iW).unit :=
     NatIso.isIso_of_isIso_app _
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sqZ
   have hT := (L((q)^*[ModuleCat.{u + 1} Λ])).map_distinguished _
     (supportedLocalizationTriangle_mem_distTriang _ i j hij N)
   let e : (R(iW)_![ModuleCat.{u + 1} Λ]).obj ((L((qZ)^*[ModuleCat.{u + 1} Λ])).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj N)) ≅ (L((q)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj N)) :=
+      ((R(i)^![Λ]).obj N)) ≅ (L((q)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj N)) :=
     (asIso ((rightDerivedLowerShriekBaseChangeMap Λ sqZ).app ((R(i)^![_]).obj N))).symm
   have he : e.hom ≫ (L((q)^*[ModuleCat.{u + 1} Λ])).map
       ((rightDerivedUpperShriekAdjunction _ i).counit.app N) =

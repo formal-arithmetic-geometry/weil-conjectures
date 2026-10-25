@@ -158,7 +158,7 @@ two and twist one, and their supports meet in `Z ∩ U`, giving degree `2c` and 
 noncomputable def cl (F : PurityFrame z c) [HasInvertibleExponent Λ V] :
     haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
     constantComplex Λ F.U ⟶ (R(pullback.snd z F.e)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(pullback.snd z F.e)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
+      ((R(pullback.snd z F.e)^![Λ]).obj ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
   haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
   kummerBoundaryProduct Λ F.f ≫ (supportedTransportIso (ModuleCat.{u + 1} Λ) _ _
     F.range_zeroLocusSubschemeι _).hom

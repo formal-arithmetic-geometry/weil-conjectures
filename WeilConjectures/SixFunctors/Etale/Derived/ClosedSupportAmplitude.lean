@@ -53,9 +53,9 @@ noncomputable def mapDerivedUpperStarRightDerivedLowerShriekIso (i : Z ⟶ T) [I
     (N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     D((i)^*[ModuleCat.{u + 1} Λ]).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj N) ≅ N :=
   have := isIso_rightDerivedUpperShriekAdjunction_unit_app (ModuleCat.{u + 1} Λ) i
-  have : IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).unit :=
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ i).unit :=
     NatIso.isIso_of_isIso_app _
-  let hff := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).fullyFaithfulLOfIsIsoUnit
+  let hff := (rightDerivedUpperShriekAdjunction Λ i).fullyFaithfulLOfIsIsoUnit
   have := hff.full
   have := hff.faithful
   let e := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i
@@ -79,7 +79,7 @@ lemma homologyConcentratedIn_rightDerivedLowerShriek_rightDerivedUpperShriek {c 
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : _root_.DerivedCategory.homologyConcentratedIn a b K) :
     _root_.DerivedCategory.homologyConcentratedIn a (b + c + 1)
-      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)) := by
   obtain ⟨hKa, hKb⟩ := hK
   let A := ModuleCat.{u + 1} Λ
   let T' := (supportedLocalizationTriangle A i j K (supportedLocalizationBoundary A i j hij K))
@@ -129,15 +129,15 @@ theorem homologyConcentratedIn_rightDerivedUpperShriek {c : ℕ}
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : _root_.DerivedCategory.homologyConcentratedIn a b K) :
     _root_.DerivedCategory.homologyConcentratedIn a (b + c + 1)
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(i)^![Λ]).obj K) := by
   obtain ⟨h₁, h₂⟩ :=
     homologyConcentratedIn_rightDerivedLowerShriek_rightDerivedUpperShriek i j hij hc hK
   have := h₁
   have := h₂
   have : (D((i)^*[ModuleCat.{u + 1} Λ]).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))).IsGE a := Functor.isGE_mapDerivedCategory_obj _ _ a
+      ((R(i)^![Λ]).obj K))).IsGE a := Functor.isGE_mapDerivedCategory_obj _ _ a
   have : (D((i)^*[ModuleCat.{u + 1} Λ]).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))).IsLE (b + c + 1) :=
+      ((R(i)^![Λ]).obj K))).IsLE (b + c + 1) :=
     Functor.isLE_mapDerivedCategory_obj _ _ _
   exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso
       (mapDerivedUpperStarRightDerivedLowerShriekIso i _) a,
@@ -154,7 +154,7 @@ lemma boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek {c : 
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T
-      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)) := by
   let A := ModuleCat.{u + 1} Λ
   let P := DerivedCategory.boundedConstructible A T
   have hjK : DerivedCategory.boundedConstructible A U ((L((j)^*[A])).obj K) :=
@@ -187,7 +187,7 @@ theorem constructibleIn_rightDerivedUpperShriek {c : ℕ} (h : OpenComplementCon
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) T a b K) :
     DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1)
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      ((R(i)^![Λ]).obj K) :=
   ⟨(DerivedCategory.boundedConstructible _ Z).prop_of_iso
       (mapDerivedUpperStarRightDerivedLowerShriekIso i _)
       ((boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek i j hij h

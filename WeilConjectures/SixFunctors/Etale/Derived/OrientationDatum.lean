@@ -91,21 +91,21 @@ structure OrientationComparisonData where
   /-- The composition law `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`. -/
   upperShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
     [HasCompactification g] [HasCompactification (f ≫ g)] :
-    R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅ R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]
+    R(f ≫ g)^![Λ] ≅ R(g)^![Λ] ⋙ R(f)^![Λ]
   /-- The base change `Rf^! ⋙ Lg^* ≅ Lv^* ⋙ Rf'^!` of `R^!` along a cartesian square
   `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`. -/
   upperShriekBaseChange {X Y X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
     {v : Y' ⟶ Y} (sq : IsPullback g f' f v) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
     [HasCompactification f'] :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
-      L((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ]
+    R(f)^![Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
+      L((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![Λ]
   /-- The tensor formula `Rf^!(Λ_Y(e)[2e]) ≅ Λ_X(e)[2e] ⊗ ω_f` for `f` smooth of relative
   dimension `d`. -/
   upperShriekTateShift {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
     [HasInvertibleExponent Λ Y] (e : ℤ) :
-    (R(f)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ Y e)⟦2 * e⟧) ≅
+    (R(f)^![Λ]).obj ((tateObject Λ Y e)⟦2 * e⟧) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X e)⟦2 * e⟧)).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f)
   /-- The canonical orientation `Λ(1)[2] ≅ Rπ^! Λ_Y` of the affine line `π : 𝔸¹_Y ⟶ Y`. -/
@@ -136,7 +136,7 @@ noncomputable def OrientationComparisonData.compIso (C : OrientationComparisonDa
       dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) :=
   eqToIso (by rw [Nat.cast_add, add_comm (d : ℤ)]) ≪≫ (shiftTateObjectAddIso Λ X e d).symm ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X e)⟦2 * (e : ℤ)⟧)).mapIso γf ≪≫
-    (C.upperShriekTateShift f d e).symm ≪≫ (R(f)^![ModuleCat.{u + 1} Λ]).mapIso γg ≪≫
+    (C.upperShriekTateShift f d e).symm ≪≫ (R(f)^![Λ]).mapIso γg ≪≫
     ((C.upperShriekComp f g).app (𝟙_ _)).symm
 
 variable {Λ} in
@@ -157,7 +157,7 @@ noncomputable def OrientationComparisonData.baseChangeIso (C : OrientationCompar
   haveI : HasInvertibleExponent Λ X' := .of_hom g
   (leftDerivedUpperStarTateShiftIso Λ g d).symm ≪≫ (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γf ≪≫
     (C.upperShriekBaseChange sq d).app (𝟙_ _) ≪≫
-    (R(f')^![ModuleCat.{u + 1} Λ]).mapIso (leftDerivedUpperStarUnitIso _ v)
+    (R(f')^![Λ]).mapIso (leftDerivedUpperStarUnitIso _ v)
 
 /-- Blueprint `def-sf-orientation`: Orientation datum.
 

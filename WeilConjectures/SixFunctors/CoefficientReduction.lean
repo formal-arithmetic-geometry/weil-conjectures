@@ -167,8 +167,8 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
     [(R(f)_![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).IsLeftAdjoint]
     (L : 𝐃(Y, Λ)) (Ln : 𝐃(Y, Λ ⧸ I ^ n)) (η : L ⟶ 𝐑𝐞𝐬[Y, I, n].obj Ln)
     (hη : IsDerivedBaseChange η) :
-    ∃ θ : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ⟶
-      𝐑𝐞𝐬[X, I, n].obj ((R(f)^![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).obj Ln),
+    ∃ θ : (R(f)^![Λ]).obj L ⟶
+      𝐑𝐞𝐬[X, I, n].obj ((R(f)^![(Λ ⧸ I ^ n)]).obj Ln),
       IsDerivedBaseChange θ
   /-- The reduction of the counit `Rf_! Rf^! L ⟶ L` of `Rf_! ⊣ Rf^!` is the counit over
   `Λ ⧸ Iⁿ` at the reduction `L_n`. -/
@@ -179,10 +179,10 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
     (hη : IsDerivedBaseChange η) :
     Nonempty (Arrow.mk ((reductionModIdeal Λ Y (I ^ n)).map
         ((rightDerivedUpperShriekAdjunction
-          (ModuleCat.{u + 1} Λ) f).counit.app L)) ≅
+          Λ f).counit.app L)) ≅
       Arrow.mk (𝐑𝐞𝐬[Y, I, n].map
         ((rightDerivedUpperShriekAdjunction
-          (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).counit.app Ln)))
+          (Λ ⧸ I ^ n) f).counit.app Ln)))
   /-- The reduction of the unit `K ⟶ Rf^! Rf_! K` of `Rf_! ⊣ Rf^!` is the unit over `Λ ⧸ Iⁿ`
   at the reduction `K_n`. -/
   upperShriekUnit {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
@@ -192,10 +192,10 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
     (hη : IsDerivedBaseChange η) :
     Nonempty (Arrow.mk ((reductionModIdeal Λ X (I ^ n)).map
         ((rightDerivedUpperShriekAdjunction
-          (ModuleCat.{u + 1} Λ) f).unit.app K)) ≅
+          Λ f).unit.app K)) ≅
       Arrow.mk (𝐑𝐞𝐬[X, I, n].map
         ((rightDerivedUpperShriekAdjunction
-          (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).unit.app Kn)))
+          (Λ ⧸ I ^ n) f).unit.app Kn)))
 
 /-- Compatibility of the derived base change along a ring morphism `φ : Λ →+* Λ'` with the basic
 operations of the étale derived categories, on the objects satisfying `P`: the derived pullback,
@@ -391,8 +391,8 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
     [(Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) f).IsLeftAdjoint]
     (L : 𝐃(Y, Λ)) (Ln : 𝐃(Y, Λ ⧸ I ^ n)) (η : L ⟶ 𝐑𝐞𝐬[Y, I, n].obj Ln)
     (hη : Sheaf.IsDerivedBaseChange η) :
-    ∃ θ : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ⟶
-      𝐑𝐞𝐬[X, I, n].obj ((R(f)^![ModuleCat.{u + 1} (Λ ⧸ I ^ n)]).obj Ln),
+    ∃ θ : (R(f)^![Λ]).obj L ⟶
+      𝐑𝐞𝐬[X, I, n].obj ((R(f)^![(Λ ⧸ I ^ n)]).obj Ln),
       Sheaf.IsDerivedBaseChange θ
 
 /-- Compatibility of the derived base change along a ring morphism `φ : Λ →+* Λ'` with the basic

@@ -376,7 +376,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
       ((leftDerivedUpperStarIsoMapDerivedCategory _ O'.ι).app _)
       (torAmplitudeIn_leftDerivedUpperStar _ O'.ι a b hQt))
   -- the pulled-back dualizing complex is `Λ[2n]`
-  let eω' : (R(p)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ (O'.ι ≫ aO)) ≅
+  let eω' : (R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO)) ≅
       ((_root_.DerivedCategory.singleFunctor _ 0).obj
         ((g)^*[ModuleCat.{u + 1} Λ].obj L))⟦(2 * n : ℤ)⟧ :=
     (rightDerivedUpperShriekIsoOfIsFiniteOfEtale _ p).app _ ≪≫
@@ -393,7 +393,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
           (_root_.DerivedCategory.singleFunctor _ 0).mapIso
             ((Etale.upperStarComp _ p O'.ι _ rfl).app L).symm)
   have hωt : torAmplitudeIn (ModuleCat.{u + 1} Λ) V (-(2 * n)) (-(2 * n))
-      ((R(p)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) := by
+      ((R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) := by
     have h := torAmplitudeIn_shift _ (torAmplitudeIn_singleFunctor_zero_of_flat _ _
       (Functor.PreservesFlat.flat_obj (F := (g)^*[ModuleCat.{u + 1} Λ]) hLf)) (2 * n : ℤ)
     exact (torAmplitudeIn _ V _ _).prop_of_iso eω'.symm (by simpa using h)
@@ -402,7 +402,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     (dualizingComplex _ (O'.ι ≫ aO))
   let eD : D((p)^*[ModuleCat.{u + 1} Λ]).obj D ≅
       ((RHom(V)[ModuleCat.{u + 1} Λ]).obj (op ((L((p)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(p)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) :=
+        ((R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) :=
     ((rightDerivedUpperShriekIsoOfIsFiniteOfEtale _ p).app _).symm ≪≫ eH
   -- the Tor amplitude
   have hDt : torAmplitudeIn (ModuleCat.{u + 1} Λ) O' (-b - 2 * n) (-a - 2 * n) D := by

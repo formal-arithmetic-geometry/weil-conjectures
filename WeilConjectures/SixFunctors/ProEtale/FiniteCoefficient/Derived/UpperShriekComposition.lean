@@ -194,11 +194,11 @@ variable (PX : ObjectProperty (_root_.DerivedCategory
   (hPX : PX ≤ DerivedCategory.plusEtaleOrigin _ X)
   (hPY : PY ≤ DerivedCategory.plusEtaleOrigin _ Y) (hPZ : PZ ≤ DerivedCategory.TStructure.t.plus)
   (hf₁ : ∀ K, PX K → PY ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))
-  (hf₂ : ∀ L, PY L → PX ((R(f)^![ModuleCat.{u + 1} Λ]).obj L))
+  (hf₂ : ∀ L, PY L → PX ((R(f)^![Λ]).obj L))
   (hg₁ : ∀ K, PY K → PZ ((R(g)_![ModuleCat.{u + 1} Λ]).obj K))
-  (hg₂ : ∀ L, PZ L → PY ((R(g)^![ModuleCat.{u + 1} Λ]).obj L))
+  (hg₂ : ∀ L, PZ L → PY ((R(g)^![Λ]).obj L))
   (hfg₁ : ∀ K, PX K → PZ ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
-  (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L))
+  (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![Λ]).obj L))
 
 omit [CompactSpace Y] [CompactSpace Z] in
 include hPX in
@@ -278,8 +278,8 @@ That it is the mate, with the pasted unit and counit, is
 `AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq` for the objects of
 étale origin over `X` and `Y` and the bounded below objects over `Z`. -/
 theorem nonempty_iso_rightDerivedUpperShriekPlus_comp :
-    Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ]+ ≅
-      R(g)^![ModuleCat.{u + 1} Λ]+ ⋙ R(f)^![ModuleCat.{u + 1} Λ]+) := by
+    Nonempty (R(f ≫ g)^![Λ]+ ≅
+      R(g)^![Λ]+ ⋙ R(f)^![Λ]+) := by
   have hle := DerivedCategory.plusEtaleOrigin_le_plus (ModuleCat.{u + 1} Λ)
   have hf₁ : ∀ K, DerivedCategory.plusEtaleOrigin _ X K →
       DerivedCategory.plusEtaleOrigin _ Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
@@ -310,15 +310,15 @@ theorem exists_rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor
     (hf₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       DerivedCategory.constructibleFiniteTor _ Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))
     (hf₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
-      DerivedCategory.constructibleFiniteTor _ X ((R(f)^![ModuleCat.{u + 1} Λ]).obj L))
+      DerivedCategory.constructibleFiniteTor _ X ((R(f)^![Λ]).obj L))
     (hg₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
       DerivedCategory.constructibleFiniteTor _ Z ((R(g)_![ModuleCat.{u + 1} Λ]).obj K))
     (hg₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z L →
-      DerivedCategory.constructibleFiniteTor _ Y ((R(g)^![ModuleCat.{u + 1} Λ]).obj L))
+      DerivedCategory.constructibleFiniteTor _ Y ((R(g)^![Λ]).obj L))
     (hfg₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       DerivedCategory.constructibleFiniteTor _ Z ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
     (hfg₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z L →
-      DerivedCategory.constructibleFiniteTor _ X ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      DerivedCategory.constructibleFiniteTor _ X ((R(f ≫ g)^![Λ]).obj L)) :
     ∃ e : (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z).lift
           ((DerivedCategory.constructibleFiniteTor _ X).ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ])
           (fun K ↦ hfg₁ _ K.property) ≅

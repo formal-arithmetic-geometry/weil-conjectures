@@ -116,7 +116,7 @@ lemma restrictSupportedClass_comp_counit {Λ : Type (u + 1)} [CommRing Λ] [Fini
     (g : Z' ⟶ Z) (hg : IsPullback g i' i e) {K L : DerivedCategoryModule Λ X}
     {K' L' : DerivedCategoryModule Λ U} (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K)
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
-    (γ : K ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+    (γ : K ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg σ τ γ ≫
         (rightDerivedUpperShriekAdjunction _ i').counit.app L' =
       σ ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map
@@ -138,7 +138,7 @@ lemma isIso_unit_comp_map_of_isIso_supportedClassMap {Λ : Type (u + 1)} [CommRi
     {L : DerivedCategoryModule Λ X} {U : DerivedCategoryModule Λ S}
     (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj U ≅ constantComplex Λ X)
     (γ : constantComplex Λ X ⟶
-      (R(x)_![ModuleCat.{u + 1} Λ]).obj ((R(x)^![ModuleCat.{u + 1} Λ]).obj L))
+      (R(x)_![ModuleCat.{u + 1} Λ]).obj ((R(x)^![Λ]).obj L))
     (h : IsIso (supportedClassMap Λ x γ)) :
     IsIso ((derivedUpperStarLowerStarAdjunction _ a).unit.app U ≫
       (R((a)_*[ModuleCat.{u + 1} Λ])).map (e.hom ≫ γ)) := by
@@ -150,7 +150,7 @@ lemma isIso_unit_comp_map_of_isIso_supportedClassMap {Λ : Type (u + 1)} [CommRi
     (Functor.isoWhiskerLeft _ (leftDerivedUpperStarComp _ c.i c.g x c.comm).symm ≪≫
       leftDerivedUpperStarCompSectionIso _ x a hx)
   let F := (rightDerivedLowerShriekToLowerStarComp (ModuleCat.{u + 1} Λ) x).app
-    ((R(x)^![ModuleCat.{u + 1} Λ]).obj L)
+    ((R(x)^![Λ]).obj L)
   have hfc : γ ≫ F = adjGI.unit.app _ ≫
       (R((c.i)_*[ModuleCat.{u + 1} Λ]) ⋙ R((c.g)_*[ModuleCat.{u + 1} Λ])).map
         ((compactificationConstantComplexIso Λ x).hom ≫ supportedClassMap Λ x γ) := by

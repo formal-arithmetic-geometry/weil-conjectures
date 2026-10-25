@@ -287,17 +287,17 @@ theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g
   · refine (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2 ?_
     have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 (H₂.2 N M)
     have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1
-      (H₁.2 ((R(g₂)^![ModuleCat.{u + 1} Λ]).obj N) M)
+      (H₁.2 ((R(g₂)^![Λ]).obj N) M)
     have := H₂.1 N
     let e₁ : (L((pullback.fst g₂ q)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(g₂)^![ModuleCat.{u + 1} Λ]).obj N) ≅ (R(pullback.snd g₂ q)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(g₂)^![Λ]).obj N) ≅ (R(pullback.snd g₂ q)^![Λ]).obj
           ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
       asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq₂).app N)
     have := isIso_rightDerivedUpperShriekTensorMap_of_iso_left h₁ e₁
       (N := (L((pullback.snd g₂ q ≫ r)^*[ModuleCat.{u + 1} Λ])).obj M)
     have := isIso_rightDerivedUpperShriekTensorMap_of_iso_right h₁
       ((leftDerivedUpperStarComp _ (pullback.snd g₂ q) r).app M)
-      (M := (R(pullback.snd g₂ q)^![ModuleCat.{u + 1} Λ]).obj
+      (M := (R(pullback.snd g₂ q)^![Λ]).obj
         ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N))
     exact isIso_rightDerivedUpperShriekTensorMap_comp h₁ (pullback.snd g₂ q) h hw (E _ _ _ hw)
       (hPF _ _ _ hw) _ _ ‹_› ‹_›

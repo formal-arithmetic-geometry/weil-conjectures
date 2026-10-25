@@ -300,7 +300,7 @@ lemma restrictSupportedClass_comp_eqToHom (e : U' ⟶ U) {Z Z' : Scheme.{u}} (i 
     (i' : Z' ⟶ U') [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z)
     (hg : IsPullback g i' i e) {k k' : ℤ} (h : k = k')
     (γ : constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U k)⟦2 * k⟧))) :
+      ((R(i)^![Λ]).obj ((tateObject Λ U k)⟦2 * k⟧))) :
     restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e k')
         (γ ≫ eqToHom (by rw [h])) =

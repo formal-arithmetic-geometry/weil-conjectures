@@ -164,7 +164,7 @@ structure SixOperationsPackage : Prop where
     Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]) ⊣ R((f)_*[ModuleCat.{u + 1} Λ]))
   /-- (1) The adjunction `Rf_! ⊣ Rf^!`. -/
   lowerShriekUpperShriekAdjunction :
-    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⊣ R(f)^![ModuleCat.{u + 1} Λ])
+    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⊣ R(f)^![Λ])
   /-- (2) Base change for `Rf_!`. -/
   baseChangeLowerShriek : ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
     IsPullback g' f' f g → ∀ [HasCompactification f'],
@@ -233,7 +233,7 @@ structure SixOperationsPackage : Prop where
   ctfRightDerivedUpperShriek : ∀ K,
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+        ((R(f)^![Λ]).obj K)
   /-- (8) `𝔻_X` carries `Dctf` into `Dctf`. -/
   ctfVerdierDual : ∀ K,
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
@@ -375,7 +375,7 @@ theorem functorPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
           Nonempty (T.obj₃ ≅ (R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj
             ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
     ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
-      Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅
+      Nonempty ((R(f)^![Λ]).obj L ≅
         (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
           (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
             ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) :=

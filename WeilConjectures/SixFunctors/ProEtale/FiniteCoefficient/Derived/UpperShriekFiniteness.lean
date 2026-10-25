@@ -70,10 +70,10 @@ image is `ν_X^* f^× G`: the unit `G ⟶ Rν_* ν^* G` is an isomorphism on bou
 noncomputable def rightDerivedUpperShriekComparisonIso
     (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hG : _root_.DerivedCategory.TStructure.t.plus G) :
-    (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
+    (rightDerivedUpperShriek Λ f).obj
         (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj G) ≅
       D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
-        ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj G) :=
+        ((Etale.rightDerivedUpperShriek Λ f).obj G) :=
   have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) Y G hG
   D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso ((Etale.rightDerivedUpperShriek _ f).mapIso
     (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).unit.app G)).symm)
@@ -134,7 +134,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_adjunction {X Y : Scheme.{u}} (f
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : _root_.DerivedCategory.TStructure.t.plus L)
     (hGL : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X (G.obj L)) :
-    Nonempty (G.obj L ≅ (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj L) := by
+    Nonempty (G.obj L ≅ (rightDerivedUpperShriek Λ f).obj L) := by
   have hR := plusEtaleOrigin_rightDerivedUpperShriek_obj f hL
   refine ⟨⟨rightDerivedUpperShriekHomEquiv f hGL hL (adj.counit.app L),
     adj.homEquiv _ _ (rightDerivedUpperShriekCounit f L hL), ?_, ?_⟩⟩
@@ -174,7 +174,7 @@ theorem boundedConstructible_rightDerivedUpperShriek
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y L) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-      ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj L) := by
+      ((rightDerivedUpperShriek Λ f).obj L) := by
   obtain ⟨G, hG, ⟨e⟩⟩ := hL
   exact (DerivedCategory.boundedConstructible _ X).prop_of_iso
     (((rightDerivedUpperShriek _ f).mapIso e).symm ≪≫ rightDerivedUpperShriekComparisonIso Λ f G
@@ -193,7 +193,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek :
       (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - c) (b + c)
-          ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj L) := by
+          ((rightDerivedUpperShriek Λ f).obj L) := by
   obtain ⟨c, hc⟩ := Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek Λ aY f
   refine ⟨c, fun a b L hL ↦ ?_⟩
   obtain ⟨G, hG, ⟨e⟩⟩ := hL.1.1
@@ -212,7 +212,7 @@ theorem constructibleFiniteTor_rightDerivedUpperShriek
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj L) := by
+      ((rightDerivedUpperShriek Λ f).obj L) := by
   obtain ⟨c, hc⟩ := exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek Λ aY f
   obtain ⟨a, b, hab⟩ :=
     (DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor L).2 hL
@@ -251,7 +251,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction :
         (fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property) ⊣
       (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).lift
         ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).ι ⋙
-          rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f)
+          rightDerivedUpperShriek Λ f)
         (fun L ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f L.property) :=
   rightDerivedUpperShriekAdjunction f _ _
     (fun _ hK ↦ DerivedCategory.constructibleFiniteTor.plusEtaleOrigin hK)

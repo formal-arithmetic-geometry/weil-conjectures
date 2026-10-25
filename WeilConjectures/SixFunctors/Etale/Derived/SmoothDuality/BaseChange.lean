@@ -130,8 +130,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso_tensorMap
       unfold derivedSquareUpperStarIsoInvApp
       infer_instance
   exact Adjunction.isIso_mateEquiv_app_of_isIso_projectionTensorMap
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f)
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f')
+    (rightDerivedUpperShriekAdjunction Λ f)
+    (rightDerivedUpperShriekAdjunction Λ f')
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f).app M).app N)
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f').app M).app N)
     (projectionMap_app_app_naturality_left f')

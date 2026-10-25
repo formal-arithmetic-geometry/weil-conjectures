@@ -61,18 +61,18 @@ right one to `Rf_!(Lf^* M ⊗ᴸ Z)`, and these agree by the projection formula
 theorem nonempty_iso_rightDerivedUpperShriek_derivedHom {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f]
     (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj
+    Nonempty ((R(f)^![Λ]).obj
         ((RHom(Y)[ModuleCat.{u + 1} Λ].obj (op M)).obj N) ≅
       (RHom(X)[ModuleCat.{u + 1} Λ].obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M))).obj
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj N)) := by
+        ((R(f)^![Λ]).obj N)) := by
   have := isIso_projectionMap_of_finite Λ f
   obtain ⟨βY⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) Y
   obtain ⟨βX⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
-  let adj₁ := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).comp
+  let adj₁ := (rightDerivedUpperShriekAdjunction Λ f).comp
     (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) M)
   let adj₂ := (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)
       ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)).comp
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f)
+    (rightDerivedUpperShriekAdjunction Λ f)
   let P : R(f)_![ModuleCat.{u + 1} Λ] ⋙ (derivedTensor (ModuleCat.{u + 1} Λ) Y).flip.obj M ≅
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M) ⋙
         R(f)_![ModuleCat.{u + 1} Λ] :=
@@ -96,7 +96,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual {Z T S : Scheme.{u}} (a
     [HasCompactification aT] (i : Z ⟶ T) [HasCompactification i] [HasCompactification (i ≫ aT)]
     [QuasiCompact (i ≫ aT)]
     (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+    Nonempty ((R(i)^![Λ]).obj
         ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op K)) ≅
       (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
         (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
@@ -121,7 +121,7 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
     Nonempty ((L((i)^*[ModuleCat.{u + 1} Λ])).obj
         ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L)) ≅
       (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
-        (op ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))) := by
+        (op ((R(i)^![Λ]).obj L))) := by
   -- `𝔻_Z (i^* K) ≅ Ri^! 𝔻_T K`, from `Ri^! RHom(K, ω_T) ≅ RHom(i^* K, Ri^! ω_T)` and
   -- `Ri^! ω_T ≅ ω_Z`
   have hex (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
@@ -138,8 +138,8 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
   -- `𝔻_Z (i^* 𝔻_T L) ≅ Ri^! L`, then dualize once more on `Z`
   let e : (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
       (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj
-        (op L)))) ≅ (R(i)^![ModuleCat.{u + 1} Λ]).obj L :=
-    e₁ ≪≫ (R(i)^![ModuleCat.{u + 1} Λ]).mapIso b₁.symm
+        (op L)))) ≅ (R(i)^![Λ]).obj L :=
+    e₁ ≪≫ (R(i)^![Λ]).mapIso b₁.symm
   exact ⟨b₂ ≪≫ (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).mapIso e.symm.op⟩
 
 /-- Blueprint `def-weil-boundary-duality-input`: The finite-stage boundary duality input.
@@ -172,7 +172,7 @@ def HasBoundaryDuality {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) : Prop :=
       Nonempty ((L((i)^*[ModuleCat.{u + 1} Λ])).obj
           ((verdierDual (ModuleCat.{u + 1} Λ) (s ≫ aY)).obj (op L)) ≅
         (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ s ≫ aY)).obj
-          (op ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)))
+          (op ((R(i)^![Λ]).obj L)))
 
 /-- Blueprint `cor-weil-boundary-duality-discharge`: The finite-stage boundary input is a
 consequence.

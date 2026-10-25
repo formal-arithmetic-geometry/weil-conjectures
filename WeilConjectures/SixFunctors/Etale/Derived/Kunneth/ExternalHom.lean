@@ -137,11 +137,11 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
     [QuasiCompact g]
     (E₁ L₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (E₂ L₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((R(g)^![ModuleCat.{u + 1} Λ]).map (MonoidalClosed.externalIhomMap
+    IsIso ((R(g)^![Λ]).map (MonoidalClosed.externalIhomMap
       (L((p₁)^*[ModuleCat.{u + 1} Λ])) (L((p₂)^*[ModuleCat.{u + 1} Λ])) E₁ L₁ E₂ L₂)) ↔
       IsIso (MonoidalClosed.externalIhomMap (L((p₁')^*[ModuleCat.{u + 1} Λ]))
         (L((g ≫ p₂)^*[ModuleCat.{u + 1} Λ])) ((L((g₁)^*[ModuleCat.{u + 1} Λ])).obj E₁)
-        ((R(g₁)^![ModuleCat.{u + 1} Λ]).obj L₁) E₂ L₂) := by
+        ((R(g₁)^![Λ]).obj L₁) E₂ L₂) := by
   obtain ⟨hBC, hτ⟩ := isExceptionalKunneth Λ k g₁ c₁ c₁ c₂ sqP sq
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   have hlib := projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq
@@ -151,20 +151,20 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
       unfold derivedSquareUpperStarIsoInvApp
       infer_instance
   have : ∀ M N, IsIso
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g).projectionTensorMap
+      ((rightDerivedUpperShriekAdjunction Λ g).projectionTensorMap
       (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
       ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj M) ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj N)) :=
     fun M N ↦ hτ M N
-  have : ∀ N, IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g₁)
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g)
+  have : ∀ N, IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction Λ g₁)
+      (rightDerivedUpperShriekAdjunction Λ g)
       (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).natTrans.app N) := hBC
   exact Adjunction.isIso_map_externalIhomMap_iff
     (F₁ := L((p₁)^*[ModuleCat.{u + 1} Λ])) (F₂ := L((p₂)^*[ModuleCat.{u + 1} Λ]))
     (F₁' := L((p₁')^*[ModuleCat.{u + 1} Λ])) (F₂' := L((g ≫ p₂)^*[ModuleCat.{u + 1} Λ]))
     (G := L((g)^*[ModuleCat.{u + 1} Λ])) (G₁ := L((g₁)^*[ModuleCat.{u + 1} Λ]))
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g)
+    (rightDerivedUpperShriekAdjunction Λ g)
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g₁)
+    (rightDerivedUpperShriekAdjunction Λ g₁)
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g₁).app M).app N)
     (projectionMap_app_app_naturality_left g) (projectionMap_app_app_naturality_left g₁)
     (rightDerivedLowerShriekBaseChangeMap Λ sq) (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
@@ -200,8 +200,8 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Sc
     [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (f : M ⟶ N)
-    (hj : IsIso ((R(j)^![ModuleCat.{u + 1} Λ]).map f))
-    (hi : IsIso ((R(i)^![ModuleCat.{u + 1} Λ]).map f)) : IsIso f := by
+    (hj : IsIso ((R(j)^![Λ]).map f))
+    (hi : IsIso ((R(i)^![Λ]).map f)) : IsIso f := by
   have : IsIso ((L((j)^*[ModuleCat.{u + 1} Λ])).map f) := by
     have : IsIso ((D((j)^*[ModuleCat.{u + 1} Λ])).map f) :=
       (NatIso.isIso_map_iff (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j) f).1 hj

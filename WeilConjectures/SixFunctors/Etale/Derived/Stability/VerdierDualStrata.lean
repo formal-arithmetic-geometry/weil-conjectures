@@ -95,12 +95,12 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek_dualizingComplex
     [HasCompactification i] [HasCompactification (i ≫ aY)] [QuasiCompact (i ≫ aY)]
     (K : DerivedCategoryModule Λ Y) :
     Nonempty (((RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op K)).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY))) ≅
+        ((R(i)^![Λ]).obj (dualizingComplex _ aY))) ≅
       (R(i)_![ModuleCat.{u + 1} Λ]).obj ((verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aY)).obj
         (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)))) := by
   obtain ⟨eω⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i aY
   let eS := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i
-  let N := (R(i)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY)
+  let N := (R(i)^![Λ]).obj (dualizingComplex _ aY)
   obtain ⟨eH⟩ := nonempty_iso_derivedHom_rightDerivedLowerStar Λ i K N
   exact ⟨((RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op K)).mapIso (eS.app N) ≪≫ eH ≪≫
     (eS.app _).symm ≪≫ (R(i)_![ModuleCat.{u + 1} Λ]).mapIso
@@ -169,10 +169,10 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization {k :
   let eS := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i
   have h₁ : boundedConstructible (ModuleCat.{u + 1} Λ) Y
       (F.obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY)))) ∧
+        ((R(i)^![Λ]).obj (dualizingComplex _ aY)))) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y α β
       (F.obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY)))) :=
+        ((R(i)^![Λ]).obj (dualizingComplex _ aY)))) :=
     ⟨(boundedConstructible _ Y).prop_of_iso (eZ ≪≫ eS.app _).symm
       (boundedConstructible_rightDerivedLowerStar_of_finite Λ (i ≫ aY) aY i rfl hZ.1),
     (torAmplitudeIn _ Y α β).prop_of_iso eZ.symm

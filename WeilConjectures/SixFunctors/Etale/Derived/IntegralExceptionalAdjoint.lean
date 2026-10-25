@@ -266,11 +266,11 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionMo
     (hωY : (_root_.DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ).rightOrthogonal ωY)
     (hL : IsIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) Y ωY L)) {ωX N : 𝐃(X, Λ)}
     (hωX : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal ωX)
-    (γ : (R(f)^![ModuleCat.{u + 1} Λ]).obj ωY ≅ ωX)
+    (γ : (R(f)^![Λ]).obj ωY ≅ ωX)
     (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
       (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY) ⟶ N)
     (hφ : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ})).map φ)) :
-    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅
+    Nonempty ((R(f)^![Λ]).obj L ≅
       ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX) :=
   nonempty_iso_rightDerivedUpperShriek_obj_derivedHom (ModuleCat.{u + 1} Λ) f
     (asIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) Y ωY L))
@@ -306,9 +306,9 @@ theorem nonempty_iso_quotPowFunctor_comp_rightDerivedUpperShriek_comp {X Y S : S
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     [(R(f ≫ g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
     Nonempty (_root_.DerivedCategory.quotPowFunctor S.smallEtaleTopology I ⋙
-        R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
+        R(f ≫ g)^![Λ] ≅
       _root_.DerivedCategory.quotPowFunctor S.smallEtaleTopology I ⋙
-        R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+        R(g)^![Λ] ⋙ R(f)^![Λ]) := by
   subst hI
   have hϖI : ϖ ∈ Ideal.span {ϖ} := Ideal.subset_span rfl
   exact nonempty_iso_comp_rightDerivedUpperShriek_comp hϖ (fun n _ a hZ ↦ hZ.hom_eq_zero
@@ -327,22 +327,22 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_dualizing {k : Type u} [Field k
     [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] (f : X ⟶ Y) (hf : f ≫ aY = aX)
     [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     (ωX : Cone (_root_.DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(aX)^![ModuleCat.{u + 1} Λ])) (hωX : IsHomotopyLimit ωX)
+      R(aX)^![Λ])) (hωX : IsHomotopyLimit ωX)
     (ωY : Cone (_root_.DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(aY)^![ModuleCat.{u + 1} Λ])) (hωY : IsHomotopyLimit ωY) :
-    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj ωY.pt ≅ ωX.pt) := by
+      R(aY)^![Λ])) (hωY : IsHomotopyLimit ωY) :
+    Nonempty ((R(f)^![Λ]).obj ωY.pt ≅ ωX.pt) := by
   subst hf
   obtain ⟨e⟩ := nonempty_iso_quotPowFunctor_comp_rightDerivedUpperShriek_comp I hϖ hI f aY
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  let adj := rightDerivedUpperShriekAdjunction Λ f
   have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
+  have : (R(f)^![Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![Λ]).Additive := adj.right_adjoint_additive
   let E := Functor.associator _ _ _ ≪≫ e.symm
-  let hc := hωY.map (R(f)^![ModuleCat.{u + 1} Λ])
+  let hc := hωY.map (R(f)^![Λ])
   let c : Cone (_root_.DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(f ≫ aY)^![ModuleCat.{u + 1} Λ]) :=
-    { pt := (R(f)^![ModuleCat.{u + 1} Λ]).obj ωY.pt
-      π := ((R(f)^![ModuleCat.{u + 1} Λ]).mapCone ωY).π ≫ E.hom }
+      R(f ≫ aY)^![Λ]) :=
+    { pt := (R(f)^![Λ]).obj ωY.pt
+      π := ((R(f)^![Λ]).mapCone ωY).π ≫ E.hom }
   obtain ⟨i, -⟩ := (hc.of_iso E c (Iso.refl _) fun n ↦ by simp [c]).exists_iso hωX
   exact ⟨i⟩
 
@@ -363,15 +363,15 @@ theorem exists_iso_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.derivedComplete Y.smallEtaleTopology I L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
-    ∃ e : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-      e.hom ≫ c.π.app (op n) = (R(f)^![ModuleCat.{u + 1} Λ]).map
+      R(f)^![Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+    ∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
+      e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
         ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n)) := by
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  let adj := rightDerivedUpperShriekAdjunction Λ f
   have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
-  exact (hL.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
+  have : (R(f)^![Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![Λ]).Additive := adj.right_adjoint_additive
+  exact (hL.map (R(f)^![Λ])).exists_iso hc
 
 end DerivedLimit
 
@@ -399,11 +399,11 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c)
+      R(f)^![Λ])} (hc : Pretriangulated.IsHomotopyLimit c)
     (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(aX)^![ModuleCat.{u + 1} Λ])) (hωX : IsHomotopyLimit ωX)
+      R(aX)^![Λ])) (hωX : IsHomotopyLimit ωX)
     (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-      R(aY)^![ModuleCat.{u + 1} Λ])) (hωY : IsHomotopyLimit ωY)
+      R(aY)^![Λ])) (hωY : IsHomotopyLimit ωY)
     (N : 𝐃(X, Λ)) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
       (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt) ⟶ N)
     (hφ : IsIso ((reductionModIdeal Λ X I).map φ)) :
@@ -412,9 +412,9 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
   have : Finite (Λ ⧸ Ideal.span {ϖ} ^ 1) := by rw [pow_one]; infer_instance
   have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
   have hϖI : ϖ ∈ Ideal.span {ϖ} := Ideal.mem_span_singleton_self ϖ
-  have : (R(aX)^![ModuleCat.{u + 1} Λ]).Additive :=
+  have : (R(aX)^![Λ]).Additive :=
     (rightDerivedUpperShriekAdjunction _ aX).right_adjoint_additive
-  have : (R(aY)^![ModuleCat.{u + 1} Λ]).Additive :=
+  have : (R(aY)^![Λ]).Additive :=
     (rightDerivedUpperShriekAdjunction _ aY).right_adjoint_additive
   obtain ⟨e, -⟩ := exists_iso_rightDerivedUpperShriek _ f hL.1 hc
   obtain ⟨γ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_dualizing (Ideal.span {ϖ}) hϖ rfl
@@ -443,7 +443,7 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+      R(f)^![Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
     DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
     ∀ dX dY : ℕ, topologicalKrullDim X ≤ (dX : WithBot ℕ∞) →
       topologicalKrullDim Y ≤ (dY : WithBot ℕ∞) → ∀ a b : ℤ,
@@ -516,17 +516,17 @@ theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShrie
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+      R(f)^![Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
     ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-        (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+        (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
+  let adj := rightDerivedUpperShriekAdjunction Λ f
   have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
-  obtain ⟨e, -⟩ := (hL.1.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
+  have : (R(f)^![Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![Λ]).Additive := adj.right_adjoint_additive
+  obtain ⟨e, -⟩ := (hL.1.map (R(f)^![Λ])).exists_iso hc
   intro n
   subst hI
-  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
+  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![Λ]) hϖ n L
   exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
 
 
@@ -542,11 +542,11 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit_of_derivedComplete {X Y : Sch
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+      R(f)^![Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
     ∀ (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-        R(aX)^![ModuleCat.{u + 1} Λ])) (_ : Pretriangulated.IsHomotopyLimit ωX)
+        R(aX)^![Λ])) (_ : Pretriangulated.IsHomotopyLimit ωX)
       (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-        R(aY)^![ModuleCat.{u + 1} Λ])) (_ : Pretriangulated.IsHomotopyLimit ωY)
+        R(aY)^![Λ])) (_ : Pretriangulated.IsHomotopyLimit ωY)
       (N : 𝐃(X, Λ)) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt) ⟶ N),
       DerivedCategory.derivedComplete X.smallEtaleTopology I N →
@@ -591,17 +591,17 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+      R(f)^![Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
     (DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
       ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-        (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
-    (∃ e : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-      e.hom ≫ c.π.app (op n) = (R(f)^![ModuleCat.{u + 1} Λ]).map
+        (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
+    (∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
+      e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
         ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n))) ∧
     (∀ (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-        R(aX)^![ModuleCat.{u + 1} Λ])) (_ : Pretriangulated.IsHomotopyLimit ωX)
+        R(aX)^![Λ])) (_ : Pretriangulated.IsHomotopyLimit ωX)
       (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-        R(aY)^![ModuleCat.{u + 1} Λ])) (_ : Pretriangulated.IsHomotopyLimit ωY)
+        R(aY)^![Λ])) (_ : Pretriangulated.IsHomotopyLimit ωY)
       (N : 𝐃(X, Λ)) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt) ⟶ N),
       DerivedCategory.derivedComplete X.smallEtaleTopology I N →
@@ -680,13 +680,13 @@ theorem preservationMatrix_integral {X Y : Scheme.{u}}
           (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) ∧
     (∀ L : 𝐃(Y, Λ), DerivedCategory.boundedConstructibleIntegral I Y L →
       ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-        R(f)^![ModuleCat.{u + 1} Λ]), Pretriangulated.IsHomotopyLimit c →
+        R(f)^![Λ]), Pretriangulated.IsHomotopyLimit c →
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
-          (∃ e : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-            e.hom ≫ c.π.app (op n) = (R(f)^![ModuleCat.{u + 1} Λ]).map
+          (∃ e : (R(f)^![Λ]).obj L ≅ c.pt, ∀ n : ℕ,
+            e.hom ≫ c.π.app (op n) = (R(f)^![Λ]).map
               ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n))) ∧
           ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-            (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
+            (R(f)^![Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L))) ∧
     (∀ (K : 𝐃(X, Λ)) (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
       (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n)),
       (∀ n : ℕ, IsDerivedBaseChange (η n)) → ∃ M : NormalizedTower I X, M.obj = Kn) ∧

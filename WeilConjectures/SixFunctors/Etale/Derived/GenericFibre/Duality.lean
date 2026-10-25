@@ -146,8 +146,8 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
       dualizingComplex _ (i' ≫ p') :=
     (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso e₂.symm ≪≫
       asIso ((rightDerivedUpperShriekBaseChangeMap Λ sqX).app (dualizingComplex _ p)) ≪≫
-      (R(i')^![ModuleCat.{u + 1} Λ]).mapIso
-        (e₄.app (𝟙_ _) ≪≫ (R(p')^![ModuleCat.{u + 1} Λ]).mapIso
+      (R(i')^![Λ]).mapIso
+        (e₄.app (𝟙_ _) ≪≫ (R(p')^![Λ]).mapIso
           (leftDerivedUpperStarUnitIso _ t)) ≪≫ e₃
   refine ⟨(L((g)^*[ModuleCat.{u + 1} Λ])).obj
       ((L((i ≫ p)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex _ aS)),

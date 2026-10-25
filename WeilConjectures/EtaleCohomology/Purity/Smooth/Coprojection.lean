@@ -117,8 +117,8 @@ noncomputable def derivedTensorRightCompRightDerivedUpperShriekIso (f : X ⟶ Y)
     (L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (e : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj L ≅ constantComplex Λ Y)
     (e' : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj L).obj M ≅ constantComplex Λ Y) :
-    derivedTensorRight (ModuleCat.{u + 1} Λ) Y L ⋙ R(f)^![ModuleCat.{u + 1} Λ] ≅
-      R(f)^![ModuleCat.{u + 1} Λ] ⋙
+    derivedTensorRight (ModuleCat.{u + 1} Λ) Y L ⋙ R(f)^![Λ] ≅
+      R(f)^![Λ] ⋙
         derivedTensorRight (ModuleCat.{u + 1} Λ) X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L) :=
   derivedTensorRightCompRightDerivedUpperShriekIsoOfTensorIso _ f L M e e'
 
@@ -155,10 +155,10 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
     (_hLctf : DerivedCategory.boundedConstructibleFiniteTor Λ X L)
     (hL : DerivedCategory.isInvertible Λ X L) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj
+    Nonempty ((rightDerivedUpperShriek Λ i).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
-          ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj K)).obj
+          ((rightDerivedUpperShriek Λ i).obj K)).obj
         ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
   have ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hL
   ⟨(derivedTensorRightCompRightDerivedUpperShriekIso Λ i L M e e').app K⟩
@@ -180,10 +180,10 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar 
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     {B : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hB : DerivedCategory.isInvertible Λ Y B) :
-    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+    Nonempty ((R(i)^![Λ]).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
           ((L((f)^*[ModuleCat.{u + 1} Λ])).obj B)) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)).obj
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![Λ]).obj K)).obj
         ((L((i ≫ f)^*[ModuleCat.{u + 1} Λ])).obj B)) :=
   have ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hB.leftDerivedUpperStar f
   ⟨(derivedTensorRightCompRightDerivedUpperShriekIso Λ i _ M e e').app K ≪≫
@@ -200,16 +200,16 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible_of_is
     (i : Z ⟶ W) [HasCompactification i]
     {L₁ L₂ : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (h₁ : DerivedCategory.isInvertible Λ W L₁) (h₂ : DerivedCategory.isInvertible Λ W L₂) :
-    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+    Nonempty ((R(i)^![Λ]).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj L₁).obj L₂) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
           (((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
-              ((R(i)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ W))).obj
+              ((R(i)^![Λ]).obj (constantComplex Λ W))).obj
             ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L₁))).obj
         ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L₂)) :=
   have ⟨M₁, ⟨e₁'⟩, ⟨e₁⟩⟩ := h₁
   have ⟨M₂, ⟨e₂'⟩, ⟨e₂⟩⟩ := h₂
-  ⟨(R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+  ⟨(R(i)^![Λ]).mapIso
       (((derivedTensor (ModuleCat.{u + 1} Λ) W).mapIso
         (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) W L₁).symm).app L₂) ≪≫
     (derivedTensorRightCompRightDerivedUpperShriekIso Λ i L₂ M₂ e₂ e₂').app _ ≪≫
@@ -228,13 +228,13 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar_
     (Δ : X ⟶ W) [HasCompactification Δ] (p₁ p₂ : W ⟶ X)
     {ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hω : DerivedCategory.isInvertible Λ X ω) :
-    Nonempty ((R(Δ)^![ModuleCat.{u + 1} Λ]).obj
+    Nonempty ((R(Δ)^![Λ]).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
             ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj ω)).obj
           ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj ω)) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
           (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-              ((R(Δ)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ W))).obj
+              ((R(Δ)^![Λ]).obj (constantComplex Λ W))).obj
             ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj ω)))).obj
         ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj ω))) :=
   nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible_of_isInvertible Λ Δ
@@ -255,9 +255,9 @@ identification `Li^* (Λ_X(m)[2m]) ≅ Λ_Z(m)[2m]` of the Tate twist datum. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject (i : Z ⟶ X)
     [HasCompactification i] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ) :
-    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+    Nonempty ((R(i)^![Λ]).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj ((tateObject Λ X m)⟦2 * m⟧)) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)).obj
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![Λ]).obj K)).obj
         ((tateObject Λ Z m)⟦2 * m⟧)) :=
   have ⟨M, ⟨e'⟩, ⟨e⟩⟩ := (isInvertible_tateObject Λ X m).shift (2 * m)
   ⟨(derivedTensorRightCompRightDerivedUpperShriekIso Λ i _ M e e').app K ≪≫

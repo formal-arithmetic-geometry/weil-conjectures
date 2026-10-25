@@ -211,14 +211,14 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     (N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
+      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := by
   have := isOpenImmersion_mapOverBase b₁ b₂ f₁ f₂
   let ψ := pullback.mapOverBase f₁ f₂ b₁ b₂
   let e (Z W : Scheme.{u}) (j : Z ⟶ W) [IsOpenImmersion j] [QuasiCompact j]
       [HasCompactification j] :
-      R(j)^![ModuleCat.{u + 1} Λ] ≅ L((j)^*[ModuleCat.{u + 1} Λ]) :=
+      R(j)^![Λ] ≅ L((j)^*[ModuleCat.{u + 1} Λ]) :=
     rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ j).symm
   obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp

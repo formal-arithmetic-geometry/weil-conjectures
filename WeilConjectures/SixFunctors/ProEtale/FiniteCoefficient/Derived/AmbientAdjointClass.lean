@@ -616,7 +616,7 @@ theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_nonempty_adjunction_constru
         (fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property) ⊣
       (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).lift
         ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).ι ⋙
-          rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f)
+          rightDerivedUpperShriek Λ f)
         (fun L ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f L.property)) :=
   ⟨(hasCohomologicalDimensionLEOnEtaleOrigin_and_bijective_classAdjunction Λ aY _ d hd).1,
     ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩⟩

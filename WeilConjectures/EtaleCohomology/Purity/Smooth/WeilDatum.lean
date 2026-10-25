@@ -259,17 +259,17 @@ noncomputable def upperShriekWeilDatum (sq : IsPullback gX f f gY)
     (φf : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
+      (rightDerivedUpperShriek Λ f).obj K)
     (φf' : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
+      (rightDerivedUpperShriek Λ f).obj
         ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     (L((gX)^*[ModuleCat.{u + 1} Λ])).obj
-        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) ⟶
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K :=
+        ((rightDerivedUpperShriek Λ f).obj K) ⟶
+      (rightDerivedUpperShriek Λ f).obj K :=
   (smoothPullbackExchange Λ f sq K θ φf θ φf').hom ≫
-    (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).map φ
+    (rightDerivedUpperShriek Λ f).map φ
 
 /-- The datum `φ^!_{f,K}` corresponds to the datum `φ^pur_{f,K}` under the smooth purity
 isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` (`AlgebraicGeometry.Etale.smoothPurityIso`) built
@@ -284,11 +284,11 @@ theorem smoothPurityIso_hom_comp_upperShriekWeilDatum (sq : IsPullback gX f f gY
     (φf : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
+      (rightDerivedUpperShriek Λ f).obj K)
     (φf' : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
+      (rightDerivedUpperShriek Λ f).obj
         ((L((gY)^*[ModuleCat.{u + 1} Λ])).obj K))
     (hφ : (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ) ≫
         (smoothPurityIso Λ f K θ φf).hom =

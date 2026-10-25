@@ -105,7 +105,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ (twistShift Λ X d).obj (constantComplex Λ X))
   (Φ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-    R(f)^![ModuleCat.{u + 1} Λ])
+    R(f)^![Λ])
 
 omit [HasInvertibleExponent Λ X] in
 /-- The smooth purity map `γ_{f,K}` built from a tensor formula `Φ` natural in `K` is natural
@@ -113,7 +113,7 @@ in `K`. -/
 lemma smoothPurityIso_hom_naturality {K K' : DerivedCategoryModule Λ Y} (v : K ⟶ K') :
     (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map v) ≫
         (smoothPurityIso Λ f K' θ (Φ.app K')).hom =
-      (smoothPurityIso Λ f K θ (Φ.app K)).hom ≫ (R(f)^![ModuleCat.{u + 1} Λ]).map v := by
+      (smoothPurityIso Λ f K θ (Φ.app K)).hom ≫ (R(f)^![Λ]).map v := by
   have h := Φ.hom.naturality v
   dsimp at h
   simp only [smoothPurityIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom,
@@ -151,11 +151,11 @@ noncomputable def smoothCoefficientTrace (K : DerivedCategoryModule Λ Y)
     (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :
+      (rightDerivedUpperShriek Λ f).obj K) :
     (R(f)_![ModuleCat.{u + 1} Λ]).obj
         ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ⟶ K :=
   (R(f)_![ModuleCat.{u + 1} Λ]).map (smoothPurityIso Λ f K θ φ).hom ≫
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K
+    (rightDerivedUpperShriekAdjunction Λ f).counit.app K
 
 variable [QuasiCompact f]
 
@@ -199,7 +199,7 @@ theorem isWeilMorphism_counit (sq : IsPullback gX f f gY)
       (upperShriekBaseChangeMap Λ sq).app K) :
     IsWeilMorphism gY
       (compactSupportWeilTransport sq (upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _))) φK
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) := by
+      ((rightDerivedUpperShriekAdjunction Λ f).counit.app K) := by
   rw [upperShriekWeilDatum_eq Λ f θ Φ sq φK hcoh]
   exact isWeilMorphism_counit_upperShriekMateWeilDatum Λ sq φK
 
@@ -265,7 +265,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k₀ :
   (Φ : L((Hom.geometricFiberMap f₀ hf₀)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) aX.geometricFiber).flip.obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) (Hom.geometricFiberMap f₀ hf₀)) ≅
-    R(Hom.geometricFiberMap f₀ hf₀)^![ModuleCat.{u + 1} Λ])
+    R(Hom.geometricFiberMap f₀ hf₀)^![Λ])
   {K : DerivedCategoryModule Λ aY.geometricFiber}
   (φK : (L((aY.geometricGaloisFrobenius.hom)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
 
@@ -306,7 +306,7 @@ theorem isWeilMorphism_schemeFrobenius_counit
           (Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap f₀ hf₀) φK θ (Φ.app K)
           (Φ.app _))))
       (schemeFrobeniusWeilDatum D.κY.hom φK)
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+      ((rightDerivedUpperShriekAdjunction Λ
         (Hom.geometricFiberMap f₀ hf₀)).counit.app K) :=
   (isWeilMorphism_counit Λ _ θ Φ _ φK hcoh).schemeFrobeniusWeilDatum D.κY.hom
 
@@ -340,7 +340,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ (twistShift Λ X d).obj (constantComplex Λ X))
   (Φ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-    R(f)^![ModuleCat.{u + 1} Λ])
+    R(f)^![Λ])
   {gX : X ⟶ X} {gY : Y ⟶ Y} (sq : IsPullback gX f f gY)
   {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
 
@@ -373,7 +373,7 @@ theorem isWeilEquivariant_map_counit {𝒟 : Type*} [Category* 𝒟] {G' : 𝒟 
       (transportWeilDatum T c
         (compactSupportWeilTransport sq (upperShriekWeilDatum Λ f sq φK θ (Φ.app K) (Φ.app _))))
       (transportWeilDatum T c φK)
-      (T.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K)) :=
+      (T.map ((rightDerivedUpperShriekAdjunction Λ f).counit.app K)) :=
   IsWeilEquivariant.map T c (isWeilMorphism_counit Λ f θ Φ sq φK hcoh)
 
 /-- Blueprint `prop-pur-weil-equivariance-compatibilities`: Compatibilities of Weil

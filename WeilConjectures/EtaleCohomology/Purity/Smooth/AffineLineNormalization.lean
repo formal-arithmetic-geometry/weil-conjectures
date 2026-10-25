@@ -126,7 +126,7 @@ variable {X Z B : Scheme.{u}}
 lemma eq_comp_rightDerivedLowerShriek_map_supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     γ = (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
           (HasCompactification.compactification i).g).comp
         (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -138,7 +138,7 @@ lemma eq_comp_rightDerivedLowerShriek_map_supportedClassMap (i : Z ⟶ X) [IsClo
           (constantComplex Λ Z))) ≫
       (R(i)_![ModuleCat.{u + 1} Λ]).map (supportedClassMap Λ i γ) := by
   let fs := rightDerivedLowerShriekToLowerStarComp (ModuleCat.{u + 1} Λ) i
-  rw [← cancel_mono (fs.app ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)), Category.assoc,
+  rw [← cancel_mono (fs.app ((R(i)^![Λ]).obj L)), Category.assoc,
     fs.naturality, Category.assoc, Category.assoc, IsIso.inv_hom_id_assoc, ← Functor.map_comp,
     supportedClassMap, Iso.hom_inv_id_assoc, rightDerivedLowerShriekTranspose,
     ← Adjunction.homEquiv_unit, Equiv.apply_symm_apply]

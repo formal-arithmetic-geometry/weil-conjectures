@@ -138,9 +138,9 @@ naturally in `K` and `N`. This is
 (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). -/
 theorem nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite :
     Nonempty (RHom(Y)[ModuleCat.{u + 1} Λ] ⋙
-        (Functor.whiskeringRight _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ≅
+        (Functor.whiskeringRight _ _ _).obj R(f)^![Λ] ≅
       L((f)^*[ModuleCat.{u + 1} Λ]).op ⋙ RHom(X)[ModuleCat.{u + 1} Λ] ⋙
-        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ]) :=
+        (Functor.whiskeringLeft _ _ _).obj R(f)^![Λ]) :=
   have := isIso_projectionMap_of_finite Λ f
   nonempty_rightDerivedUpperShriek_derivedHom_iso _ f
 
@@ -167,7 +167,7 @@ biduality; at `N = ω_Y`, with `Rf^! ω_Y ≅ ω_X`
 statement, on all of `D(Y_ét, Λ)`. -/
 theorem nonempty_iso_verdierDual_leftDerivedUpperStar :
     Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]).op ⋙ verdierDual _ (f ≫ aY) ≅
-      verdierDual _ aY ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+      verdierDual _ aY ⋙ R(f)^![Λ]) := by
   obtain ⟨e₁⟩ := nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite Λ f
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
   exact ⟨Functor.isoWhiskerLeft _ ((RHom(X)[ModuleCat.{u + 1} Λ]).flip.mapIso e₂.symm) ≪≫

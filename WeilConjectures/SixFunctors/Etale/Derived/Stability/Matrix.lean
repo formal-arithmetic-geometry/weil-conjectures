@@ -272,7 +272,7 @@ theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactificatio
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((R(f)^![Λ]).obj K)) ∧
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -353,7 +353,7 @@ theorem torAmplitudeIn_preservation [QuasiCompact f] [HasCompactification f]
       (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * d + 1)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((R(f)^![Λ]).obj K)) ∧
     (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ)
       (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       boundedConstructible (ModuleCat.{u + 1} Λ) X K →
@@ -501,7 +501,7 @@ theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fac
         Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).leftDerivedFunctor.obj
             ((Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op L)) ≅
           (Etale.verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aX)).obj
-            (op ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj L)))) ∧
+            (op ((Etale.rightDerivedUpperShriek Λ i).obj L)))) ∧
     ¬ ∀ (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
       (a b c d : ℤ)
       (K M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
