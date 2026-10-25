@@ -103,7 +103,7 @@ theorem map_supportedRestrictionIntegral_comp
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X))
     (boundedConstructibleLowerShriekBaseChange_extendScalars ℓ E F.isPullback) P
   simp only [supportedRestrictionIntegral, supportedRestrictionE,
-    boundedConstructibleUpperShriekExtendScalars_eq_mateEquiv]
+    boundedConstructibleUpperShriekExtendScalars]
   dsimp only [Functor.comp_obj] at h ⊢
   with_reducible exact h
 
