@@ -8919,9 +8919,13 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionRedu
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportReflection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedCup
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
