@@ -50,19 +50,22 @@ noncomputable abbrev overRestrictι : overRestrict S W ⟶ S :=
   Over.homMk W.ι rfl
 
 /-- The inclusion of an open subscheme is an open immersion. -/
-instance : IsOpenImmersion (overRestrictι S W).left :=
+instance isOpenImmersion_overRestrictι_left :
+    IsOpenImmersion (overRestrictι S W).left :=
   inferInstanceAs (IsOpenImmersion W.ι)
 
 /-- An open subscheme of a scheme locally of finite type is locally of finite type. -/
-instance [LocallyOfFiniteType S.hom] : LocallyOfFiniteType (overRestrict S W).hom :=
+instance locallyOfFiniteType_overRestrict_hom [LocallyOfFiniteType S.hom] :
+    LocallyOfFiniteType (overRestrict S W).hom :=
   inferInstanceAs (LocallyOfFiniteType (W.ι ≫ S.hom))
 
 /-- An open subscheme of a separated scheme is separated. -/
-instance [IsSeparated S.hom] : IsSeparated (overRestrict S W).hom :=
+instance isSeparated_overRestrict_hom [IsSeparated S.hom] :
+    IsSeparated (overRestrict S W).hom :=
   inferInstanceAs (IsSeparated (W.ι ≫ S.hom))
 
 /-- An open subscheme of a smooth scheme is smooth. -/
-instance [Smooth S.hom] : Smooth (overRestrict S W).hom :=
+instance smooth_overRestrict_hom [Smooth S.hom] : Smooth (overRestrict S W).hom :=
   inferInstanceAs (Smooth (W.ι ≫ S.hom))
 
 /-- The image of the open immersion of `W` is `W`. -/
@@ -103,19 +106,23 @@ noncomputable def affineSpaceOver (n : ℕ) : Over (Spec (.of k)) :=
   Over.mk (𝔸(ULift.{u} (Fin n); Spec (.of k)) ↘ Spec (.of k))
 
 /-- Affine space over a field is affine. -/
-instance (n : ℕ) : IsAffine (affineSpaceOver k n).left :=
+instance isAffine_affineSpaceOver_left (n : ℕ) :
+    IsAffine (affineSpaceOver k n).left :=
   inferInstanceAs (IsAffine 𝔸(ULift.{u} (Fin n); Spec (.of k)))
 
 /-- Affine space is of finite type over `k`. -/
-instance (n : ℕ) : LocallyOfFiniteType (affineSpaceOver k n).hom :=
+instance locallyOfFiniteType_affineSpaceOver_hom (n : ℕ) :
+    LocallyOfFiniteType (affineSpaceOver k n).hom :=
   inferInstanceAs (LocallyOfFiniteType (𝔸(ULift.{u} (Fin n); Spec (.of k)) ↘ Spec (.of k)))
 
 /-- Affine space is quasi-compact over `k`. -/
-instance (n : ℕ) : QuasiCompact (affineSpaceOver k n).hom :=
+instance quasiCompact_affineSpaceOver_hom (n : ℕ) :
+    QuasiCompact (affineSpaceOver k n).hom :=
   inferInstanceAs (QuasiCompact (𝔸(ULift.{u} (Fin n); Spec (.of k)) ↘ Spec (.of k)))
 
 /-- Affine space is separated over `k`. -/
-instance (n : ℕ) : IsSeparated (affineSpaceOver k n).hom :=
+instance isSeparated_affineSpaceOver_hom (n : ℕ) :
+    IsSeparated (affineSpaceOver k n).hom :=
   inferInstanceAs (IsSeparated (𝔸(ULift.{u} (Fin n); Spec (.of k)) ↘ Spec (.of k)))
 
 /-- `𝔸ⁿ_k` is smooth of relative dimension `n` over `k`. -/

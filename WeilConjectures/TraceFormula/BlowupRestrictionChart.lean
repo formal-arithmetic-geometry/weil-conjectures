@@ -8,7 +8,9 @@ module
 public import WeilConjectures.TraceFormula.BlowupRestriction
 public import WeilConjectures.TraceFormula.BlowupRestrictionCurve
 public import WeilConjectures.RingTheory.BlowupChartData
+public import WeilConjectures.RingTheory.BlowupChartRegularity
 public import WeilConjectures.AlgebraicGeometry.RegularDivisorSpec
+public import WeilConjectures.AlgebraicGeometry.RegularImmersionSpecQuotient
 public import WeilConjectures.RingTheory.FiniteOverStrictlyHenselian
 
 /-!
@@ -237,9 +239,11 @@ restriction vanishes by
 theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClosed k] {ℓ : ℕ}
     [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (hΛ : IsNilpotent (ℓ : Λ)) {R : Type u} [CommRing R] [HenselianLocalRing R]
-    [IsAlgClosed (ResidueField R)] [Algebra k R] {f g h x₀ y₀ : R} [Fact (g ∈ maximalIdeal R)]
+    [IsRegularLocalRing R] [IsAlgClosed (ResidueField R)] [Algebra k R] {f g h x₀ y₀ : R}
+    [Fact (g ∈ maximalIdeal R)]
     (hfg : maximalIdeal R ≤ (Ideal.span {f, g}).radical)
     (D : BlowupChartData f g h x₀ y₀ (algebraMap k R)) (hx : D.x ∈ maximalIdeal R)
+    (hm : maximalIdeal R = Ideal.span {D.x, y₀})
     (hlim : IsEtaleLimitOfSmoothSurfaces
       (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k D.Rx)))))
     (E : DerivedCategory (Sheaf
@@ -267,6 +271,12 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
   let z : Spec (.of D.Rx) :=
     ⟨Ideal.span {D.hh, D.xx}, (Ideal.Quotient.maximal_of_isField _ hfield).isPrime⟩
   have hz : MeetTransverselyAt iX iY z := meetTransverselyAt_specMap_quotient hfield z rfl
+  have : IsRegularRing D.Rx := D.isRegularRing_localization
+  have : IsRegular Z.left := isRegular_spec (S := D.Rx)
+  have : IsLocallyNoetherian Z.left :=
+    inferInstanceAs (IsLocallyNoetherian (Spec (.of D.Rx)))
+  have hXY : IsRegularImmersion 2 (pullback.fst iX iY ≫ iX) :=
+    isRegularImmersion_pullback_fst_specMap_quotient (D.isWeaklyRegular hm)
   have hUY : (D.UY : Set (Spec (.of D.Rx))) = (Set.range iY)ᶜ := by
     simp only [iY]
     erw [range_specMap_quotient]
@@ -368,7 +378,7 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
     congr 3
     ext r
     exact (hθρ r).symm
-  exact globalSectionsRestriction_eq_zero_of_transverse hℓ hΛ hlim hX hY z hz hUY hUXY
+  exact globalSectionsRestriction_eq_zero_of_transverse hℓ hΛ hlim hX hY z hz hXY hUY hUXY
     D.UXY_le_UY _ E hE D.φ D.φU D.isPullback_φ _ A c s hs hcs ι jW hι hψ
 
 end AlgebraicGeometry.Etale

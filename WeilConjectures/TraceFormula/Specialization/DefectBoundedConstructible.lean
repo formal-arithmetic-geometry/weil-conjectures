@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.TraceFormula.Specialization.Defect
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
-public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 
 /-!
