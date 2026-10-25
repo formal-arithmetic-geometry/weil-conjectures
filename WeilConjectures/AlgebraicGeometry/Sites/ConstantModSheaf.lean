@@ -21,16 +21,17 @@ commutative ring `Λ`. Then `M` is an `𝔽_p`-vector space, hence a direct sum 
 and the constant étale sheaf `M_X` on a scheme `X` is the filtered colimit of finite direct sums
 of copies of the constant sheaf `ℤ/p` (`AlgebraicGeometry.Scheme.constantZMod`); if `M` is
 finite, it is itself such a finite direct sum. We record the resulting transfer principle
-`AlgebraicGeometry.Scheme.constantSheaf_induction` and apply it to the cohomology of `M_X`: on a
-quasi-compact quasi-separated scheme, vanishing, finiteness and the bijectivity of pullback maps
-pass from `ℤ/p` to `M_X`, the cohomology commuting with finite direct sums and with filtered
-colimits (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`).
+`AlgebraicGeometry.Scheme.constantSheaf_induction_of_nsmul_eq_zero` and apply it to the
+cohomology of `M_X`: on a quasi-compact quasi-separated scheme, vanishing, finiteness and
+the bijectivity of pullback maps pass from `ℤ/p` to `M_X`, the cohomology commuting with
+finite direct sums and with filtered colimits
+(`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.constantModSheafForgetIso`: the underlying abelian sheaf of the
   constant sheaf `Λ/dΛ` of `Λ`-modules is the constant abelian sheaf `Λ/dΛ`.
-- `AlgebraicGeometry.Scheme.constantSheaf_induction`,
+- `AlgebraicGeometry.Scheme.constantSheaf_induction_of_nsmul_eq_zero`,
   `AlgebraicGeometry.Scheme.constantSheaf_induction_of_finite`: the transfer principle.
 - `AlgebraicGeometry.Etale.subsingleton_sheafH_constantModSheaf`,
   `AlgebraicGeometry.Etale.finite_sheafH_constantModSheaf`,
@@ -172,7 +173,7 @@ of abelian étale sheaves on `X` which is invariant under isomorphism, holds for
 direct sum of copies of `ℤ/p` and is stable under filtered colimits. Then `P` holds for the
 constant sheaf `M_X` of every abelian group `M` killed by `p`: `M` is an `𝔽_p`-vector space,
 the filtered colimit of its finite-dimensional subspaces spanned by parts of a basis. -/
-theorem Scheme.constantSheaf_induction
+theorem Scheme.constantSheaf_induction_of_nsmul_eq_zero
     (P : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} → Prop)
     (hiso : ∀ {G G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}, (G ≅ G') → P G → P G')
     (hsum : ∀ n : ℕ, P (⨁ fun _ : Fin n ↦ X.constantZMod p))
@@ -261,7 +262,7 @@ theorem subsingleton_sheafH_constantModSheaf [CompactSpace X] [QuasiSeparatedSpa
     Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
       AddCommGrpCat.{u + 1})).obj (constantModSheaf Λ X p)) q) := by
   have := h
-  have key := Scheme.constantSheaf_induction (X := X) (p := p)
+  have key := Scheme.constantSheaf_induction_of_nsmul_eq_zero (X := X) (p := p)
     (fun G ↦ Subsingleton (Sheaf.H G q))
     (fun e hG ↦ (Sheaf.H.map_bijective_of_iso e.symm q).1.subsingleton)
     (fun n ↦ (Abelian.Ext.addEquivBiproduct _
@@ -293,7 +294,7 @@ theorem bijective_cohomologyMap_constantModSheaf {X' : Scheme.{u}} (g : X' ⟶ X
     (h : Function.Bijective (cohomologyMap g (X.constantZMod p) q)) :
     Function.Bijective (cohomologyMap g ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
       AddCommGrpCat.{u + 1})).obj (constantModSheaf Λ X p)) q) := by
-  have key := Scheme.constantSheaf_induction (X := X) (p := p)
+  have key := Scheme.constantSheaf_induction_of_nsmul_eq_zero (X := X) (p := p)
     (fun G ↦ Function.Bijective (cohomologyMap g G q))
     (fun e hG ↦ (bijective_cohomologyMap_iff_of_iso g e q).1 hG)
     (fun n ↦ have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=

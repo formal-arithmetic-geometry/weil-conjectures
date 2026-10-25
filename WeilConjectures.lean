@@ -12094,8 +12094,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.DisjointUnion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange

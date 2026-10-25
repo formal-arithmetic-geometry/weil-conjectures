@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantSheafOfTypes
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.EtaleDescent
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentableGluing
 
@@ -39,45 +40,6 @@ universe u
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
-
-/-- **Affine étale neighbourhoods.** Let `f : T ⟶ Y` be étale and `y ∈ V` a point in the image
-of `f`. There are an affine open `y ∈ U ⊆ V` and a surjective morphism `p : W ⟶ U` from an
-affine scheme `W` which factors through `f` by an étale morphism `q : W ⟶ T`. -/
-lemma exists_isAffineOpen_surjective_etale {Y T : Scheme.{u}} (f : T ⟶ Y) [Etale f]
-    {V : Y.Opens} {y : Y} (hy : y ∈ V) (hyf : y ∈ Set.range f) :
-    ∃ U : Y.Opens, IsAffineOpen U ∧ y ∈ U ∧ U ≤ V ∧ ∃ (W : Scheme.{u}) (_ : IsAffine W)
-      (q : W ⟶ T) (_ : Etale q) (p : W ⟶ U.toScheme), p ≫ U.ι = q ≫ f ∧ Surjective p := by
-  classical
-  obtain ⟨_, ⟨U, hU, rfl⟩, hyU, hUV⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
-    (show y ∈ (V : Set Y) ∩ Set.range f from ⟨hy, hyf⟩) (V.2.inter f.isOpenMap.isOpen_range)
-  let 𝒱 := {A : T.affineOpens // (A : T.Opens) ≤ f ⁻¹ᵁ U}
-  obtain ⟨s, hs⟩ := hU.isCompact.elim_finite_subcover
-    (fun A : 𝒱 ↦ f.base '' (A.1 : Set T)) (fun A ↦ f.isOpenMap _ A.1.1.2) (fun z hz ↦ by
-      obtain ⟨x, rfl⟩ := (hUV hz).2
-      obtain ⟨_, ⟨A, hA, rfl⟩, hxA, hAsub⟩ :=
-        T.isBasis_affineOpens.exists_subset_of_mem_open (a := x) hz (f ⁻¹ᵁ U).2
-      exact Set.mem_iUnion.2 ⟨⟨⟨A, hA⟩, hAsub⟩, x, hxA, rfl⟩)
-  let g : s → Scheme.{u} := fun i ↦ ((i.1.1 : T.affineOpens) : T.Opens).toScheme
-  have : ∀ i, IsAffine (g i) := fun i ↦ i.1.1.2
-  let q : ∐ g ⟶ T := Sigma.desc fun i ↦ ((i.1.1 : T.affineOpens) : T.Opens).ι
-  have : Etale q := IsZariskiLocalAtSource.sigmaDesc fun i ↦ inferInstance
-  have hq (i : s) (a : g i) : q (Sigma.ι g i a) = a.1 := by
-    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
-    rfl
-  have hr : Set.range (q ≫ f) ⊆ Set.range (Scheme.Opens.ι (X := Y) U) := by
-    rintro _ ⟨w, rfl⟩
-    obtain ⟨⟨i, a⟩, rfl⟩ := (sigmaMk g).surjective w
-    rw [Scheme.Opens.range_ι, sigmaMk_mk, Scheme.Hom.comp_apply, hq]
-    exact i.1.2 a.2
-  let p := IsOpenImmersion.lift (Scheme.Opens.ι (X := Y) U) (q ≫ f) hr
-  have hp : p ≫ Scheme.Opens.ι (X := Y) U = q ≫ f := IsOpenImmersion.lift_fac _ _ _
-  refine ⟨U, hU, hyU, fun z hz ↦ (hUV hz).1, ∐ g, inferInstance, q, inferInstance, p, hp,
-    ⟨fun z ↦ ?_⟩⟩
-  obtain ⟨i, hz⟩ := Set.mem_iUnion.1 (hs z.2)
-  obtain ⟨hi, x, hx, hxz⟩ := Set.mem_iUnion.1 hz
-  refine ⟨Sigma.ι g ⟨i, hi⟩ ⟨x, hx⟩, Subtype.ext ?_⟩
-  rw [← Scheme.Opens.ι_apply, ← Scheme.Hom.comp_apply, hp, Scheme.Hom.comp_apply, hq]
-  exact hxz
 
 namespace Etale
 
