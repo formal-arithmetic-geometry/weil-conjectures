@@ -244,6 +244,48 @@ noncomputable def upperStarTensorTarget :
   curriedTensor _ ⋙ (whiskeringRight _ _ _).obj
     ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
 
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
+/-- The naturality square of the components of `upperStarTensorCounit`, on complexes. -/
+lemma upperStarTensorCounit_naturality_aux
+    {A A' B B' : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ}
+    (φ : A ⟶ A') (ψ : B ⟶ B') :
+    (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map φ)) ⊗ₘ
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map ψ))) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Qh
+        ((HomotopyCategory.quotient _ _).obj
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A'))
+        ((HomotopyCategory.quotient _ _).obj
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B')) ≫
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+        (upperStarTensorComplexHom Λ f A' B')) =
+    Functor.LaxMonoidal.μ DerivedCategory.Qh
+        ((HomotopyCategory.quotient _ _).obj
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A))
+        ((HomotopyCategory.quotient _ _).obj
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B)) ≫
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+        (upperStarTensorComplexHom Λ f A B)) ≫
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map (φ ⊗ₘ ψ))) := by
+  have key : ((HomotopyCategory.quotient _ _).map
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map φ) ⊗ₘ
+      (HomotopyCategory.quotient _ _).map
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map ψ)) =
+      (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map φ ⊗ₘ
+          ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map ψ) := by
+    rw [MonoidalCategory.tensorHom_def, MonoidalCategory.tensorHom_def, Functor.map_comp]
+    rfl
+  rw [Functor.LaxMonoidal.μ_natural_assoc, key, ← DerivedCategory.Qh.map_comp,
+    ← Functor.map_comp, upperStarTensorComplexHom_naturality, Functor.map_comp,
+    DerivedCategory.Qh.map_comp]
+
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
 /-- The transformation `Qh (f^* A) ⊗ᴸ Qh (f^* B) ⟶ Qh (f^* (A ⊗ B))` of bifunctors on the
 homotopy category of `Mod_{Λ_Y}`: the lax structure of `Qh` followed by `Qh` of the comparison
 `upperStarTensorComplexHom`. -/
@@ -259,8 +301,29 @@ noncomputable def upperStarTensorCounit :
           (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj B) ≫
         DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
           (upperStarTensorComplexHom Λ f A.as B.as))
-      naturality B B' ψ := sorry }
-  naturality A A' φ := sorry
+      naturality B B' ψ := by
+        obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
+        obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
+        obtain ⟨B', rfl⟩ := B'.quotient_obj_surjective
+        obtain ⟨ψ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective ψ
+        have h := upperStarTensorCounit_naturality_aux Λ f (𝟙 A) ψ
+        rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+          CategoryTheory.Functor.map_id, MonoidalCategory.id_tensorHom,
+          MonoidalCategory.id_tensorHom] at h
+        rw [Category.assoc]
+        exact h }
+  naturality A A' φ := by
+    ext B
+    obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
+    obtain ⟨A', rfl⟩ := A'.quotient_obj_surjective
+    obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
+    obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective φ
+    have h := upperStarTensorCounit_naturality_aux Λ f φ (𝟙 B)
+    rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+          CategoryTheory.Functor.map_id, MonoidalCategory.tensorHom_id,
+      MonoidalCategory.tensorHom_id] at h
+    rw [NatTrans.comp_app, NatTrans.comp_app, Category.assoc]
+    exact h
 
 /-! ### Derived categories -/
 
@@ -304,6 +367,8 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
   sorry
 
+set_option maxHeartbeats 1600000 in
+-- the instances on complexes of module objects make the elaboration slow
 /-- The counit of the bifunctor `Lf^* (- ⊗ᴸ -)`: `Lf^*` of the lax structure
 `Qh A ⊗ᴸ Qh B ⟶ Qh (A ⊗ B)` of the localization, followed by the counit
 `Lf^* (Qh (A ⊗ B)) ⟶ Qh (f^* (A ⊗ B))` of the derived pullback. -/
@@ -314,8 +379,25 @@ noncomputable def leftDerivedUpperStarTensorLeftCounit :
   app A :=
     { app B := L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫
         (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B)
-      naturality B B' ψ := sorry }
-  naturality A A' φ := sorry
+      naturality B B' ψ := by
+        have h₁ := Functor.LaxMonoidal.μ_natural_right DerivedCategory.Qh A ψ
+        have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (A ◁ ψ)
+        dsimp only [Functor.comp_map] at h₂
+        change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.obj A ◁ DerivedCategory.Qh.map ψ) ≫
+            L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B') ≫ _ =
+          (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫
+            DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (A ◁ ψ))
+        rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂] }
+  naturality A A' φ := by
+    ext B
+    have h₁ := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh φ B
+    have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (φ ▷ B)
+    dsimp only [Functor.comp_map] at h₂
+    change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.map φ ▷ DerivedCategory.Qh.obj B) ≫
+        L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A' B) ≫ _ =
+      (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫
+        DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (φ ▷ B))
+    rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂]
 
 /-- The comparison `m_{K,L} : Lf^* (K ⊗ᴸ L) ⟶ Lf^* K ⊗ᴸ Lf^* L` of the derived pullback with the
 derived tensor product, as a natural transformation of bifunctors on `D(Mod_{Λ_Y})`: the
