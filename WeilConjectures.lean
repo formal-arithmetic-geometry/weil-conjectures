@@ -13083,6 +13083,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
 public import WeilConjectures.TraceFormula.Specialization.ComponentClass
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.DeformationModel
