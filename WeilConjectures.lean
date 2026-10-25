@@ -12474,6 +12474,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding

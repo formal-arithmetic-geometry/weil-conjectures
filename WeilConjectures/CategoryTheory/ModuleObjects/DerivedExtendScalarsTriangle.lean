@@ -45,13 +45,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [Monoida
   [Abelian.HasFunctorialFlatResolution C]
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ]
 
-omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [IsCommMonObj S] in
-/-- The unit of the adjunction between extension and restriction of scalars is
-`Mod.extendUnit`. -/
-lemma extendRestrictAdjunction_unit_app (M : Mod C R) :
-    (extendRestrictAdjunction φ).unit.app M = extendUnit φ M :=
-  hom_ext _ _ (extendRestrictAdjunction_unit_app_hom φ M)
-
 omit [Abelian.HasFunctorialFlatResolution C] in
 /-- The unit `P ⟶ S ⊗_R P` on a complex of `R`-modules, as a morphism of complexes. -/
 @[simps]
