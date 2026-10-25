@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestriction
-public import WeilConjectures.TraceFormula.CurveLocal.Model
+public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverDatum
 
 /-!
 
@@ -58,6 +58,88 @@ namespace AlgebraicGeometry.Etale.CurveLocalModel
 open Scheme
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
+
+/-- **Flat constructible models** (blueprint `sk-lem-sf-flat-model`, used in
+`det-tf-restriction-zero-covers` (i)): an object of `D^b_{ctf}(X, Λ)` is represented by a bounded
+complex of flat constructible sheaves. -/
+theorem exists_flatConstructibleModel {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    (K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ M.X K) :
+    ∃ P : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
+      (∃ a b, IsBoundedFlatComplex Λ a b P) ∧ (∀ q : ℤ, IsConstructibleSheaf (P.X q)) ∧
+        Nonempty (K ≅ DerivedCategory.Q.obj P) :=
+  sorry
+
+/-- **Existence of the cover datum** (blueprint `det-tf-restriction-zero-covers` (i), first
+half): for bounded complexes `PL`, `PK` of flat constructible sheaves on `X` there is a cover
+datum: the terms are lisse on a punctured neighbourhood of `y`, a finite étale Galois cover
+trivializes them, its `ℓ`-Sylow quotient has degree prime to `ℓ`, and in its normalization `C` one
+of the points over `y` has ramification index prime to `ℓ`. -/
+theorem exists_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    (PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)
+    (hPL : ∃ a b, IsBoundedFlatComplex Λ a b PL) (hPK : ∃ a b, IsBoundedFlatComplex Λ a b PK)
+    (hcL : ∀ q : ℤ, IsConstructibleSheaf (PL.X q)) (hcK : ∀ q : ℤ, IsConstructibleSheaf (PK.X q)) :
+    Nonempty (M.CoverDatum ℓ PL PK) :=
+  sorry
+
+/-- **The covers from a cover datum** (blueprint `det-tf-restriction-zero-covers` (ii), (iii)
+and the pulled back identification of `det-tf-restriction-zero-localization` (i)): from a cover
+datum `p : C ⟶ X`, `c`, `e`, take `T'` the strict localization of `C ×_k C` at `(c, c)`, the
+reduced inverse images `D' = G' ∪ V'`, `H'`, `B'` of the curves, the finite étale map
+`B' ∖ y' ⟶ B ∖ y` of degree `e²`, and `E'` the restriction of `N ⊠ Q` to `T' ∖ (D' ∪ H')`. -/
+theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
+    (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hL : DerivedCategory.boundedConstructibleFiniteTor Λ M.X L)
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ M.X K)
+    (hKy : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))
+    (PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)
+    (hPL : ∃ a b, IsBoundedFlatComplex Λ a b PL) (hPK : ∃ a b, IsBoundedFlatComplex Λ a b PK)
+    (eL : L ≅ DerivedCategory.Q.obj PL) (eK : K ≅ DerivedCategory.Q.obj PK)
+    (D : M.CoverDatum ℓ PL PK)
+    (P : DerivedCategory (Sheaf M.T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (eP : P ≅ (L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj
+      (externalProduct (ModuleCat.{u + 1} Λ) M.f M.f L K))
+    (ψ : M.yB.openComplement.toScheme ⟶ M.O.toScheme)
+    (hψ : ψ ≫ M.O.ι = M.yB.openComplement.ι ≫ M.b) :
+    ∃ (S' : Scheme.{u}) (aS' : S' ⟶ Spec (.of k)) (_ : SmoothOfRelativeDimension 2 aS')
+      (s' : Spec (.of k) ⟶ S') (_ : s' ≫ aS' = 𝟙 _) (π : strictLocalization s' ⟶ M.T)
+      (D' H' B' : Scheme.{u}) (dD' : D' ⟶ strictLocalization s')
+      (dH' : H' ⟶ strictLocalization s') (dB' : B' ⟶ strictLocalization s')
+      (_ : IsClosedImmersion dD') (_ : IsClosedImmersion dH') (_ : IsClosedImmersion dB')
+      (_ : Nonempty D') (_ : Nonempty H') (_ : Nonempty B')
+      (_ : ∃ _ : IsDomain Γ(H', ⊤), IsDiscreteValuationRing Γ(H', ⊤))
+      (_ : IsReduced D' ∧ ringKrullDim Γ(D', ⊤) = 1)
+      (_ : IsReduced B' ∧ ringKrullDim Γ(B', ⊤) = 1)
+      (_ : IsLocalRing.TangentConesMeetAtOrigin (strictHenselization s') (specIdeal dD')
+        (specIdeal dB'))
+      (_ : IsLocalRing.TangentConesMeetAtOrigin (strictHenselization s') (specIdeal dD')
+        (specIdeal dH'))
+      (_ : dD'.openComplement ≤ π ⁻¹ᵁ M.O)
+      (πU : (dB' ⁻¹ᵁ dD'.openComplement).toScheme ⟶ M.yB.openComplement.toScheme)
+      (_ : IsFinite πU) (_ : Etale πU) (d : ℕ)
+      (_ : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
+        (s : Spec (.of Ω) ⟶ M.yB.openComplement.toScheme),
+        Nat.card (πU.GeometricFiber s) = d)
+      (_ : IsUnit (d : Λ))
+      (_ : πU ≫ ψ ≫ M.O.ι =
+        dB'.resLE dD'.openComplement (dB' ⁻¹ᵁ dD'.openComplement) le_rfl ≫
+          dD'.openComplement.ι ≫ π)
+      (E' : DerivedCategory (Sheaf (dD'.openComplement ⊓ dH'.openComplement).toScheme.smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)))
+      (_ : (∃ a b : ℤ, E'.IsGE a ∧ E'.IsLE b) ∧ ∀ n : ℤ,
+        ∃ (G : Type (u + 1)) (_ : Group G) (_ : Finite G) (_ : IsPGroup ℓ G)
+          (c : Scheme.GaloisCover G (dD'.openComplement ⊓ dH'.openComplement).toScheme)
+          (N : ModuleCat.{u + 1} Λ) (_ : Finite N),
+          Nonempty ((c.π)^*[ModuleCat.{u + 1} Λ].obj
+              ((DerivedCategory.homologyFunctor _ n).obj E') ≅
+            (constantSheaf c.P.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N)),
+      Nonempty ((dD'.openComplement.ι)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj
+          ((π)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj P) ≅
+        ((strictLocalization s').homOfLE (inf_le_left :
+          dD'.openComplement ⊓ dH'.openComplement ≤ dD'.openComplement))_!open[ModuleCat.{u + 1} Λ]
+          |>.mapDerivedCategory.obj E') :=
+  sorry
 
 /-- **Prime-to-`ℓ` covers separating the graph and the diagonal** (blueprint
 `det-tf-restriction-zero-covers`, with the identification of
@@ -119,7 +201,11 @@ theorem exists_restrictionZeroCover (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : 
           ((π)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj P) ≅
         ((strictLocalization s').homOfLE (inf_le_left :
           dD'.openComplement ⊓ dH'.openComplement ≤ dD'.openComplement))_!open[ModuleCat.{u + 1} Λ]
-          |>.mapDerivedCategory.obj E') :=
-  sorry
+          |>.mapDerivedCategory.obj E') := by
+  obtain ⟨PL, hPL, hcL, ⟨eL⟩⟩ := M.exists_flatConstructibleModel L hL
+  obtain ⟨PK, hPK, hcK, ⟨eK⟩⟩ := M.exists_flatConstructibleModel K hK
+  obtain ⟨D⟩ := M.exists_coverDatum ℓ PL PK hPL hPK hcL hcK
+  exact M.exists_restrictionZeroCover_of_coverDatum ℓ hℓ hΛ L K hL hK hKy PL PK hPL hPK eL eK D P eP
+    ψ hψ
 
 end AlgebraicGeometry.Etale.CurveLocalModel
