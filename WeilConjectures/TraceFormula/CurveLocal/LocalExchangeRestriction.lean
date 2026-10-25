@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 
 /-!
@@ -21,7 +22,8 @@ complex `Q` on `T`:
 * derived global sections over `Y` of the étale exchange restriction
   `Lι'^* Ra^! Q ⟶ Ry_B^! Lb^* Q` (`AlgebraicGeometry.Etale.exchangeRestriction`).
 
-Under the identification `RΓ(Y, Ry_B^! N) ≅ RΓ_Y(B, N)` the second factors through the first.
+Under the identifications `RΓ_G(T, Q) ≅ RΓ(G, Ra^! Q)` and `RΓ(Y, Ry_B^! N) ≅ RΓ_Y(B, N)`, the
+first is the restriction from `G` to `Y` followed by the second.
 
 -/
 
@@ -40,23 +42,26 @@ open Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
   (M : CurveLocalModel k)
 
-/-- **The exchange restriction on the strictly local model**: derived global sections over
-`Y = G ×_T B` of the étale exchange restriction of the square `ι' ≫ a = y_B ≫ b` factor, through
-the identification `RΓ(Y, Ry_B^! Lb^* Q) ≅ RΓ_Y(B, b^* Q)`, through the classical supported
-restriction `ρ_{a,b} : RΓ_G(T, Q) ⟶ RΓ_Y(B, b^* Q)`. -/
-theorem exists_rightDerivedGlobalSections_map_exchangeRestriction
+/-- **The supported restriction through the exchange restriction**: on the strictly local
+model, the classical supported restriction `ρ_{a,b} : RΓ_G(T, Q) ⟶ RΓ_Y(B, b^* Q)` is, through the
+identifications `RΓ_G(T, Q) ≅ RΓ(G, Ra^! Q)` and `RΓ(Y, Ry_B^! Lb^* Q) ≅ RΓ_Y(B, b^* Q)`, the
+restriction from `G` to `Y = G ×_T B` followed by derived global sections over `Y` of the étale
+exchange restriction of the square `ι' ≫ a = y_B ≫ b`. -/
+theorem exists_sectionsWithSupportRestriction_eq
     (Q : DerivedCategory.Plus (Sheaf M.T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ∃ (e : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).obj
+    ∃ (t : ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.a).obj Q).obj₁ ≅
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.G).obj
+          ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj))
+      (e : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).obj
         ((R(M.yB)^![ModuleCat.{u + 1} Λ]).obj ((L((M.b)^*[ModuleCat.{u + 1} Λ])).obj Q.obj)) ≅
         ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.yB).obj
-          ((Functor.mapDerivedCategoryPlus (M.b)^*[ModuleCat.{u + 1} Λ]).obj Q)).obj₁)
-      (s : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).obj
-        ((L((M.ιY)^*[ModuleCat.{u + 1} Λ])).obj ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj)) ⟶
-        ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.a).obj Q).obj₁),
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).map
-          (exchangeRestriction Λ M.isPullback_ιY Q.obj) ≫ e.hom =
-        s ≫ sectionsWithSupportRestriction (ModuleCat.{u + 1} Λ) M.b M.a M.yB
-          M.openComplement_yB_le Q :=
+          ((Functor.mapDerivedCategoryPlus (M.b)^*[ModuleCat.{u + 1} Λ]).obj Q)).obj₁),
+      sectionsWithSupportRestriction (ModuleCat.{u + 1} Λ) M.b M.a M.yB M.openComplement_yB_le Q =
+        t.hom ≫ globalSectionsRestriction (A := ModuleCat.{u + 1} Λ) M.ιY
+            ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj) ≫
+          (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).map
+            ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.ιY).inv.app _ ≫
+              exchangeRestriction Λ M.isPullback_ιY Q.obj) ≫ e.hom :=
   sorry
 
 end AlgebraicGeometry.Etale.CurveLocalModel
