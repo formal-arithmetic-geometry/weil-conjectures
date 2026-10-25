@@ -10,6 +10,9 @@ public import WeilConjectures.RingTheory.TangentCone
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestrictionPrincipal
+public import WeilConjectures.RingTheory.RegularLocalLocalization
+public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 
 /-!
 
@@ -93,7 +96,66 @@ theorem sectionsRestriction_app_eq_zero_of_tangentConesMeetAtOrigin
       ((Category.comp_id _).trans (Category.id_comp _).symm)).app
         (((strictLocalization s).homOfLE (inf_le_left :
           dD.openComplement ⊓ dH.openComplement ≤ dD.openComplement))_!open[ModuleCat.{u + 1} Λ]
-          |>.mapDerivedCategory.obj E) = 0 :=
-  sorry
+          |>.mapDerivedCategory.obj E) = 0 := by
+  have : SmoothOfRelativeDimension 2 (Over.mk aS).hom := ‹_›
+  have hreg := isRegularLocalRing_strictHenselization_of_smooth (Over.mk aS) s hs
+  have hdim := ringKrullDim_strictHenselization_of_smooth (Over.mk aS) s hs
+  have : IsRegularRing (strictHenselization s) :=
+    (IsRegularLocalRing.localization_at_prime_and_isRegularRing
+      (IsLocalRing.maximalIdeal (strictHenselization s))).2
+  have := IsRegularLocalRing.uniqueFactorizationMonoid (strictHenselization s)
+  -- the curves `D` and `B` are principal
+  obtain ⟨hDred, hDdim⟩ := hD
+  have hDsurj := dD.surjective_ΓSpecIso_inv_comp_appTop
+  have hDdim' : ringKrullDim (strictHenselization s ⧸ specIdeal dD) = 1 :=
+    (ringKrullDim_eq_of_ringEquiv (RingHom.quotientKerEquivOfSurjective hDsurj)).trans hDdim
+  obtain ⟨f, hfI⟩ : ∃ f, specIdeal dD = Ideal.span {f} :=
+    Ideal.exists_eq_span_singleton_of_isRadical_of_ringKrullDim_quotient_eq_one
+      hdim ((RingHom.ker_isRadical_iff_reduced_of_surjective hDsurj).2 inferInstance) hDdim'
+  obtain ⟨hfm, hf0⟩ :=
+    Ideal.mem_maximalIdeal_and_ne_zero_of_ringKrullDim_quotient_eq_one hdim (hfI ▸ hDdim')
+  obtain ⟨hBred, hBdim⟩ := hB
+  have hBsurj := dB.surjective_ΓSpecIso_inv_comp_appTop
+  have hBdim' : ringKrullDim (strictHenselization s ⧸ specIdeal dB) = 1 :=
+    (ringKrullDim_eq_of_ringEquiv (RingHom.quotientKerEquivOfSurjective hBsurj)).trans hBdim
+  obtain ⟨g, hgI⟩ : ∃ g, specIdeal dB = Ideal.span {g} :=
+    Ideal.exists_eq_span_singleton_of_isRadical_of_ringKrullDim_quotient_eq_one
+      hdim ((RingHom.ker_isRadical_iff_reduced_of_surjective hBsurj).2 inferInstance) hBdim'
+  obtain ⟨hgm, hg0⟩ :=
+    Ideal.mem_maximalIdeal_and_ne_zero_of_ringKrullDim_quotient_eq_one hdim (hgI ▸ hBdim')
+  -- the regular curve `H` is principal, given by an equation of order one
+  obtain ⟨_, _⟩ := hH
+  have hHsurj := dH.surjective_ΓSpecIso_inv_comp_appTop
+  have hHdim' : ringKrullDim (strictHenselization s ⧸ specIdeal dH) = 1 :=
+    (ringKrullDim_eq_of_ringEquiv (RingHom.quotientKerEquivOfSurjective hHsurj)).trans
+      (IsDiscreteValuationRing.ringKrullDim_eq_one Γ(H, ⊤))
+  obtain ⟨h, hhI⟩ : ∃ h, specIdeal dH = Ideal.span {h} :=
+    Ideal.exists_eq_span_singleton_of_isRadical_of_ringKrullDim_quotient_eq_one
+      hdim (RingHom.ker_isPrime _).isRadical hHdim'
+  have h2 : 2 ≤ (IsLocalRing.maximalIdeal (strictHenselization s)).spanFinrank := by
+    have h := hreg.spanFinrank_maximalIdeal.trans hdim
+    exact_mod_cast h.ge
+  have hh := IsLocalRing.hasOrder_one_of_ker_eq_span_singleton h2
+    (IsPrincipalIdealRing.principal _) _ hHsurj hhI
+  rw [hfI, hgI] at hDB
+  rw [hfI, hhI] at hDH
+  -- the complements of `D` and `D ∪ H` are the basic opens of `f` and `fh`
+  have hU := dD.openComplement_eq_basicOpen hfI
+  have hV : dD.openComplement ⊓ dH.openComplement = Scheme.basicOpenSpec (f * h) := by
+    rw [hU, dH.openComplement_eq_basicOpen hhI]
+    exact (PrimeSpectrum.basicOpen_mul f h).symm
+  -- `B - t` maps to the punctured spectrum of `R / (g)`
+  have : Fact (g ∈ IsLocalRing.maximalIdeal (strictHenselization s)) := ⟨hgm⟩
+  have hle : dB ⁻¹ᵁ dD.openComplement ≤
+      dB.toSpecQuotient hgI.ge ⁻¹ᵁ puncturedSpec (strictHenselization s ⧸ Ideal.span {g}) := by
+    intro x hx hx'
+    have hc := dB.apply_eq_closedPoint_of_toSpecQuotient hgI.ge hx'
+    have hx : dB x ∈ dD.openComplement := hx
+    rw [hU, hc] at hx
+    exact hx hfm
+  refine sectionsRestriction_app_eq_zero_of_globalSectionsRestriction_eq_zero _ _ _ _ ?_
+  refine globalSectionsRestriction_eq_zero_of_eq_basicOpen (Over.mk aS) s hℓ hΛ hs hf0 hg0 hh
+    hDB hDH hU hV _ _ ((dB.toSpecQuotient hgI.ge).resLE _ _ hle) ?_ E hE
+  rw [Scheme.Hom.resLE_comp_ι_assoc, Scheme.Hom.toSpecQuotient_comp, Scheme.Hom.resLE_comp_ι]
 
 end AlgebraicGeometry.Etale

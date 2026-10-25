@@ -12746,6 +12746,7 @@ public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestrictionPrincipal
 public import WeilConjectures.TraceFormula.CurveLocal.CoverComplexE
 public import WeilConjectures.TraceFormula.CurveLocal.CoverCurves
 public import WeilConjectures.TraceFormula.CurveLocal.CoverDatumExistence
@@ -12767,6 +12768,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroDescent
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTraceDescent
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
+public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionGlobal
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionOpen
 public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.TensorMonodromy
