@@ -37,7 +37,7 @@ universe u
 
 open CategoryTheory Limits Pretriangulated MonoidalCategory
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -60,14 +60,14 @@ lemma isSepClosed_of_locallyOfFiniteType [IsSepClosed k] (g : Spec (.of K) ⟶ S
       rw [Spec.map_preimage]
       infer_instance
     exact (HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)).1 this
-  letI := f.hom.toAlgebra
+  let := f.hom.toAlgebra
   have : Algebra.FiniteType k K := hf
   have := finite_of_finite_type_of_isJacobsonRing k K
   exact Algebra.IsAlgebraic.isSepClosed (F := k) (E := K)
 
 /-- A field receiving a morphism from `k` has the characteristic of `k`. -/
 lemma ringChar_eq_of_spec (g : Spec (.of K) ⟶ Spec (.of k)) : ringChar K = ringChar k := by
-  letI := (Spec.preimage g).hom.toAlgebra
+  let := (Spec.preimage g).hom.toAlgebra
   exact (Algebra.ringChar_eq k K).symm
 
 end ResidueField
@@ -386,5 +386,111 @@ theorem isZero_upperStar_opensOverι_of_isClosedImmersion {P : Over (Spec (.of k
     hC
 
 end Vanishing
+
+/-! ### Finitely many closed points -/
+
+section Points
+
+/-- The open complement of a finite set of closed points of a scheme. -/
+def finsetComplOpens {X : Scheme.{u}} (S : Finset X) (hS : ∀ x ∈ S, IsClosed {x}) : X.Opens :=
+  ⟨(↑S)ᶜ, by
+    rw [isOpen_compl_iff, ← Set.biUnion_of_singleton (↑S : Set X)]
+    exact S.finite_toSet.isClosed_biUnion fun x hx ↦ hS x hx⟩
+
+@[simp]
+lemma coe_finsetComplOpens {X : Scheme.{u}} (S : Finset X) (hS : ∀ x ∈ S, IsClosed {x}) :
+    (finsetComplOpens S hS : Set X) = (↑S)ᶜ :=
+  rfl
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- Global sections on a closed point of `X` detect vanishing: its residue field is separably
+closed. -/
+lemma isZero_of_isZero_lowerStar_closedPoint {z : X.left} (hz : IsClosed {z}) :
+    haveI := locallyOfFiniteType_closedPointOver hz
+    haveI := quasiCompact_closedPointOver hz
+    haveI := isSeparated_closedPointOver hz
+    ∀ E : Dᵇc((closedPointOver z).left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (toPoint (closedPointOver z))).obj E) → IsZero E := by
+  have := locallyOfFiniteType_closedPointOver hz
+  have := quasiCompact_closedPointOver hz
+  have := isSeparated_closedPointOver hz
+  have : IsSepClosed (X.left.residueField z) :=
+    isSepClosed_of_locallyOfFiniteType (X.left.residueField z) (closedPointOver z).hom
+  have hchar := ringChar_eq_of_spec (X.left.residueField z) (closedPointOver z).hom
+  have : Fact (ringChar (X.left.residueField z)).Prime := ⟨by rw [hchar]; exact Fact.out⟩
+  have : Fact (ringChar (X.left.residueField z) ≠ ℓ) := ⟨by rw [hchar]; exact Fact.out⟩
+  exact fun E hE ↦ isZero_of_isZero_lowerStar_toPoint_of_isSepClosed ℓ
+    (X.left.residueField z) rfl E hE
+
+/-- **Global sections detect complexes supported at finitely many closed points**, on bounded
+constructible complexes. -/
+theorem isZero_of_isZero_upperStar_finsetComplOpens_of_isZero_lowerStar (S : Finset X.left)
+    (hS : ∀ x ∈ S, IsClosed {x}) (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hU : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (opensOverι (finsetComplOpens S hS))).obj C))
+    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (toPoint X)).obj C)) : IsZero C := by
+  classical
+  induction S using Finset.induction_on with
+  | empty =>
+    exact (isZero_upperStar_of_range_subset _ ℓ _ (𝟙 X)
+      (fun y _ ↦ by simp) C hU).of_iso ((boundedConstructibleUpperStarId _ ℓ X).app C).symm
+  | insert z S hzS ih =>
+    have hz : IsClosed {z} := hS z (Finset.mem_insert_self _ _)
+    have hS' : ∀ x ∈ S, IsClosed {x} := fun x hx ↦ hS x (Finset.mem_insert_of_mem hx)
+    have hz' : ∀ x ∈ ({z} : Finset X.left), IsClosed {x} := by simpa using hz
+    have := locallyOfFiniteType_closedPointOver hz
+    have := quasiCompact_closedPointOver hz
+    have := isSeparated_closedPointOver hz
+    have := isClosedImmersion_closedPointι hz
+    refine ih hS' (isZero_upperStar_opensOverι_of_isClosedImmersion ℓ (closedPointι z)
+      (isZero_of_isZero_lowerStar_closedPoint ℓ hz) (finsetComplOpens {z} hz')
+      (finsetComplOpens (insert z S) hS) (finsetComplOpens S hS') ?_ ?_ ?_ ?_ ?_ ?_ C hU hΓ)
+    · rw [range_opensOverι, range_closedPointι, coe_finsetComplOpens, Finset.coe_singleton]
+      exact isCompl_compl.symm
+    · rw [range_closedPointι, Set.singleton_subset_iff, SetLike.mem_coe, ← SetLike.mem_coe,
+        coe_finsetComplOpens, Set.mem_compl_iff, Finset.mem_coe]
+      exact hzS
+    · intro y hy
+      simp only [coe_finsetComplOpens, Set.mem_compl_iff, Finset.mem_coe, Finset.mem_insert,
+        not_or, Finset.mem_singleton] at hy ⊢
+      exact hy.1
+    · intro y hy
+      simp only [coe_finsetComplOpens, Set.mem_compl_iff, Finset.mem_coe, Finset.mem_insert,
+        not_or] at hy ⊢
+      exact hy.2
+    · rw [range_closedPointι, Set.disjoint_singleton_left, coe_finsetComplOpens]
+      simp
+    · intro y hy
+      rw [range_closedPointι]
+      by_cases h : y = z
+      · exact Or.inl h
+      · right
+        simp only [coe_finsetComplOpens, Set.mem_compl_iff, Finset.mem_coe, Finset.mem_insert,
+          not_or] at hy ⊢
+        exact ⟨h, hy⟩
+
+/-- **Global sections detect complexes supported at finitely many closed points** (blueprint
+`det-nearby-kunneth-finite-support`): let `X` be a separated scheme of finite type over a
+separably closed field `k` and `S` a finite set of closed points of `X`. A bounded constructible
+complex `C` on `X` whose restriction to `X ∖ S` vanishes and whose global sections `RΓ(X, C)`
+vanish is zero. The points of `S` need not be rational. -/
+theorem isZero_of_isZero_upperStar_finsetComplOpens (S : Finset X.left)
+    (hS : ∀ x ∈ S, IsClosed {x})
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
+    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) C)
+    (hU : IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))
+    (hΓ : IsZero (R((X.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) : IsZero C := by
+  have h := isZero_of_isZero_upperStar_finsetComplOpens_of_isZero_lowerStar ℓ S hS ⟨C, hC⟩
+    (IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _ hU)
+    (IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _ hΓ)
+  exact (boundedConstructible _).ι.map_isZero h
+
+end Points
 
 end AlgebraicGeometry.ProEtale.CondensedRing
