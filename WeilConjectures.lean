@@ -8553,6 +8553,7 @@ public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Compactification.DenseCategory
 public import WeilConjectures.Compactification.DenseFinitePresentation
 public import WeilConjectures.Compactification.EliminationOfIndeterminacy
+public import WeilConjectures.Compactification.ExtensionOverOpen
 public import WeilConjectures.Compactification.FinitePresentation
 public import WeilConjectures.Compactification.FiniteTypeDirected
 public import WeilConjectures.Compactification.FiniteTypeExtension
@@ -13191,6 +13192,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
+public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 public import WeilConjectures.TraceFormula.Specialization.TraitModelEmbedding
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict

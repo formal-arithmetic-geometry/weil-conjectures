@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
+public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 
 /-!
 
@@ -62,6 +63,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [IsSepClosed k']
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- **Compactification of trait models over the base** (blueprint
 `sk-prop-tf-nearby-duality-foundation`, "open locality allows a projective compactification"):
 a trait model `M` over the base with affine total space `𝒳` is an open sub-model of a trait model
@@ -69,18 +72,12 @@ a trait model `M` over the base with affine total space `𝒳` is an open sub-mo
 `j : X ⟶ X̄` and `j' : X' ⟶ X̄'`, in the sense of
 `NearbyCyclesModel.isIso_nearbyDualityMap_of_openSubmodel`.
 
-Unfinished. Construction: let `X̄` be a Nagata compactification of `X` over `k`
-(`AlgebraicGeometry.NagataCompactification`) and `Z = X̄ ×_k S`, proper over `S`. The
-`k`-morphism `e : 𝒳 ⟶ X` of `NearbyCyclesModel.IsTraitModelOfBase` gives `(e, q) : 𝒳 ⟶ Z`, whose
-restriction `𝒳_η ⟶ Z_η` to the generic fibre (an open of `S`) is an open immersion, since its base
-change to `Spec Ω` is (fpqc descent of open immersions). Glue `𝒳` and `Z_η` along `𝒳_η`
-(`AlgebraicGeometry.Scheme.GlueData`); the result `𝒴` is separated and of finite type over `Z`.
-Compactify `𝒴 ⟶ Z` (`AlgebraicGeometry.NagataCompactification`) and replace the compactification
-by the scheme-theoretic closure `𝒳̄` of `𝒴`. Then `𝒳̄` is proper over `S`, and its generic fibre is
-`Z_η` (the closure commutes with restriction to the open `𝒳̄_η`, in which `Z_η` is open and closed
-as `Z_η ⟶ Z_η` is proper), so the geometric generic fibre of `𝒳̄` is `X̄ ×_k Spec Ω`
-(`NearbyCyclesModel.IsTraitModelOfBase.of_isPullback`), with `𝒳 ⊆ 𝒴 ⊆ 𝒳̄` open; `X̄'` is the
-special fibre of `𝒳̄`, proper over `k'`. The `k`-linearity of `e` is used to map `𝒳` to `Z`. -/
+This holds without the affineness assumption
+(`NearbyCyclesModel.IsTraitModelOfBase.exists_isProper_openSubmodel`): with `X̄` a Nagata
+compactification of `X` over `k` and `Z = X̄ ×_k S`, the morphism `(e, q) : 𝒳 ⟶ Z` is an open
+immersion over the generic point of `S` (fpqc descent), and a compactification of it which is an
+isomorphism over `Z_η` (`AlgebraicGeometry.exists_isProper_isPullback_of_isOpenImmersion`) is the
+required total space. -/
 theorem exists_isProper_openSubmodel_of_isAffine (h : M.IsTraitModelOfBase k q g)
     [IsAffine M.total] :
     ∃ (Xc : Over (Spec (.of k))) (_ : LocallyOfFiniteType Xc.hom) (_ : QuasiCompact Xc.hom)
@@ -92,7 +89,7 @@ theorem exists_isProper_openSubmodel_of_isAffine (h : M.IsTraitModelOfBase k q g
       (_ : IsOpenImmersion j.left) (j' : X' ⟶ Xc') (_ : IsOpenImmersion j'.left)
       (φ : M.Hom Mc j.left j'.left) (_ : IsOpenImmersion φ.total),
       IsPullback φ.generic M.j Mc.j φ.total ∧ q = φ.total ≫ qc ∧ g = φ.generic ≫ gc :=
-  sorry
+  h.exists_isProper_openSubmodel
 
 /-- **Global sections of the duality map of a proper model** (blueprint
 `det-tf-nearby-duality-proper` (3)): if `X`, `X'` and the total space of the trait model `M`
