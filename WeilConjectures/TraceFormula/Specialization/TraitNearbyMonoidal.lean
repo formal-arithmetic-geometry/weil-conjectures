@@ -144,5 +144,115 @@ lemma isIso_upperStar_traitClosedPoint_map_derivedUnit_app_shift (d : ℤ) :
 
 end Unit
 
+/-! ### The lax tensor map of the geometric generic point -/
+
+section TensorMap
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The shifts `𝟙⟦d⟧` of the unit of the derived category of module objects are dualizable: they
+are invertible, with inverse `𝟙⟦-d⟧`. -/
+lemma isDualizable_shift_unit (X : Scheme.{u}) (d : ℤ) :
+    IsDualizable ((shiftFunctor (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X)
+      Ab.{u + 1}) (condensedRingObj Λ X))) d).obj (𝟙_ _)) := by
+  let e : ∀ a b : ℤ, a + b = 0 →
+      ((shiftFunctor (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))) a).obj (𝟙_ _) ⊗ (shiftFunctor _ b).obj (𝟙_ _) ≅ 𝟙_ _) :=
+    fun a b h ↦ DerivedCategory.shiftTensorShiftIso _ (𝟙_ _) (𝟙_ _) a b ≪≫
+      (shiftFunctor _ _).mapIso (λ_ _) ≪≫ eqToIso (by rw [h]) ≪≫ (shiftFunctorZero _ ℤ).app _
+  exact isDualizable_of_tensorIso (e d (-d) (add_neg_cancel d)) (e (-d) d (neg_add_cancel d))
+
+variable (k' : Type u) [Field k'] [IsSepClosed k']
+
+set_option maxHeartbeats 1000000 in
+-- test
+/-- After restriction to the closed point of the trait, the lax tensor map
+`Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism for
+`U = Lη̄^* (𝟙⟦d⟧)`: precomposed with the unit, it is the left projection morphism of the
+invertible object `𝟙⟦d⟧`. -/
+lemma isIso_upperStar_map_lowerStarTensorMap'_upperStar_shift (d : ℤ)
+    (V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology
+      (NearbyCyclesModel.traitGenericModel k').generic) Ab.{u + 1})
+        (condensedRingObj Λ (NearbyCyclesModel.traitGenericModel k').generic))) :
+    IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
+      (lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j
+        (L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).obj
+          ((shiftFunctor _ d).obj (𝟙_ _))) V)) := by
+  have hp := (derivedUpperStarLowerStarAdjunction Λ
+    (NearbyCyclesModel.traitGenericModel k').j).isIso_leftProjectionMorphism_of_isDualizable
+      (isDualizable_shift_unit Λ (NearbyCyclesModel.traitGenericModel k').total d) V
+  have e : (derivedUpperStarLowerStarAdjunction Λ (NearbyCyclesModel.traitGenericModel k').j).unit.app
+        ((shiftFunctor _ d).obj (𝟙_ _)) ▷
+          R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).obj V ≫
+        lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j
+          (L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).obj
+            ((shiftFunctor _ d).obj (𝟙_ _))) V =
+      (derivedUpperStarLowerStarAdjunction Λ
+        (NearbyCyclesModel.traitGenericModel k').j).leftProjectionMorphism
+          ((shiftFunctor _ d).obj (𝟙_ _)) V :=
+    (derivedUpperStarLowerStarAdjunction Λ
+      (NearbyCyclesModel.traitGenericModel k').j).whiskerRight_unit_comp_homEquiv _ V
+  have hu := isIso_upperStar_traitClosedPoint_map_derivedUnit_app_shift Λ k' d
+  have h₁ : IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
+      ((derivedUpperStarLowerStarAdjunction Λ (NearbyCyclesModel.traitGenericModel k').j).unit.app
+        ((shiftFunctor _ d).obj (𝟙_ _)) ▷
+          R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).obj V)) := by
+    rw [Functor.Monoidal.map_whiskerRight]
+    infer_instance
+  have h₂ : IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
+      ((derivedUpperStarLowerStarAdjunction Λ
+        (NearbyCyclesModel.traitGenericModel k').j).leftProjectionMorphism
+          ((shiftFunctor _ d).obj (𝟙_ _)) V)) :=
+    Iso.isIso_hom (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).mapIso
+      (@asIso _ _ _ _ _ hp))
+  rw [← e, Functor.map_comp] at h₂
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ h₁ h₂
+
+/-- The lax tensor map `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)`, restricted to the closed point of the
+trait, as a natural transformation in `U`. -/
+@[simps]
+noncomputable def upperStarLowerStarTensorMapNatTrans
+    (V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology
+      (NearbyCyclesModel.traitGenericModel k').generic) Ab.{u + 1})
+        (condensedRingObj Λ (NearbyCyclesModel.traitGenericModel k').generic))) :
+    R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧) ⋙
+        tensorRight (R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).obj V) ⋙
+          L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧) ⟶
+      tensorRight V ⋙ R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧) ⋙
+        L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧) where
+  app U := L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
+    (lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j U V)
+  naturality U U' x := by
+    have h := lowerStarTensorMap'_natural Λ (NearbyCyclesModel.traitGenericModel k').j x (𝟙 V)
+    rw [CategoryTheory.Functor.map_id, tensorHom_id, tensorHom_id] at h
+    simp only [Functor.comp_map, ← Functor.map_comp]
+    exact congrArg _ h
+
+set_option maxHeartbeats 1000000 in
+-- test
+/-- After restriction to the closed point of the trait, the lax tensor map
+`Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism when `U` is a
+finite direct sum of shifts of the unit. -/
+lemma isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition
+    {U V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology
+      (NearbyCyclesModel.traitGenericModel k').generic) Ab.{u + 1})
+        (condensedRingObj Λ (NearbyCyclesModel.traitGenericModel k').generic))}
+    (hU : ShiftDecomposition (𝟙_ _) U) :
+    IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
+      (lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j U V)) := by
+  have : L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).Additive :=
+    Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ (NearbyCyclesModel.traitGenericModel k').j).symm
+  have : L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).Additive :=
+    Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ (NearbyCyclesModel.traitGenericModel k').i).symm
+  have : R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).Additive := (derivedUpperStarLowerStarAdjunction Λ (NearbyCyclesModel.traitGenericModel k').j).right_adjoint_additive
+  rw [← upperStarLowerStarTensorMapNatTrans_app]
+  refine ShiftDecomposition.isIso_app (upperStarLowerStarTensorMapNatTrans Λ k' V) hU fun j ↦ ?_
+  have := isIso_upperStar_map_lowerStarTensorMap'_upperStar_shift Λ k' (hU.deg j) V
+  exact @NatTrans.isIso_app_of_iso' _ _ _ _ _ _ (upperStarLowerStarTensorMapNatTrans Λ k' V) _ _
+    ((shiftFunctor _ (hU.deg j)).mapIso (leftDerivedUpperStarUnitIso Λ (NearbyCyclesModel.traitGenericModel k').j).symm ≪≫
+      ((L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).commShiftIso (hU.deg j)).app (𝟙_ _)).symm)
+    this
+
+end TensorMap
 
 end AlgebraicGeometry.ProEtale.CondensedRing
