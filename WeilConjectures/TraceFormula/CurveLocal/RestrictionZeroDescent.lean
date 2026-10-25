@@ -75,7 +75,7 @@ theorem sectionsRestriction_app_eq_zero_of_trace
       (by rw [hup, comp_zero])
     refine (sectionsRestriction_app_eq_zero_iff_of_eq _ ?_ ?_ _ _ _).1 h₂
     · simpa only [assoc] using hπ.symm
-    · show ψ' ≫ Scheme.Hom.resLE π w.openComplement w'.openComplement hw = πU ≫ ψ
+    · change ψ' ≫ Scheme.Hom.resLE π w.openComplement w'.openComplement hw = πU ≫ ψ
       rw [← cancel_mono w.openComplement.ι]
       simpa only [assoc, Scheme.Hom.resLE_comp_ι] using hπ.symm
   exact DerivedCategory.eq_zero_of_comp_trace_of_isUnit (p₁ := 𝟙 _) (r' := 0)

@@ -22,7 +22,8 @@ and the restriction
 ```
 RΓ(T ∖ W, P) ⟶ RΓ(U, P|_U)
 ```
-vanishes, then `ρ_{a,b} = 0` (`AlgebraicGeometry.Etale.supportedRestrictionMap_eq_zero_of_restriction`).
+vanishes, then `ρ_{a,b} = 0`
+(`AlgebraicGeometry.Etale.supportedRestrictionMap_eq_zero_of_restriction`).
 
 This is the reduction step of the proof of blueprint `sk-lem-tf-curve-restriction-zero`
 (`det-tf-restriction-zero-localization` (iii)): by the localization triangles `ρ_{a,b}` vanishes
@@ -91,10 +92,9 @@ include hw hψ in
 `det-tf-restriction-zero-localization` (iii), as used in the proof of
 `sk-lem-tf-curve-restriction-zero`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
 `RΓ(T ∖ W, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ T ∖ W` vanishes, where `G ⊆ W`, then the
-supported restriction `ρ_{a,b}` vanishes. Here `j_* ⊣`-type identification of the sections over
+supported restriction `ρ_{a,b}` vanishes. The identification of the sections over
 the open `B ∖ Y` of `B` with the global sections of the scheme `B ∖ Y` is the hypothesis
 `hU` (`AlgebraicGeometry.Etale.isIso_sectionsRestriction_of_isOpenImmersion`). -/
-
 theorem supportedRestrictionMap_eq_zero_of_restriction
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
     (hT : IsZero ((sectionsWithSupportTriangle A a).obj P).obj₂)
@@ -121,7 +121,7 @@ theorem supportedRestrictionMap_eq_zero_of_restriction
     (Category.id_comp _).symm P.obj).1
   refine (sectionsRestriction_app_eq_zero_iff_of_eq A ?_ ?_ _ _ _).1 (hfac ?_)
   · simp [hψ]
-  · show ψ ≫ Scheme.Hom.resLE (𝟙 T) a.openComplement w.openComplement hw =
+  · change ψ ≫ Scheme.Hom.resLE (𝟙 T) a.openComplement w.openComplement hw =
       𝟙 _ ≫ Scheme.Hom.resLE b _ _ h
     rw [← cancel_mono a.openComplement.ι]
     simp [hψ]

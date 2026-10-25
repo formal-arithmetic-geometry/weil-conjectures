@@ -75,7 +75,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 `det-tf-supported-restriction`, item 2) along `b : B ⟶ T`, for closed immersions `a : G ⟶ T` and
 `y : Y ⟶ B` with `b⁻¹(G) ⊆ Y`: the pullback of sections with supports, the first component of the
 morphism of localization triangles `sectionsWithSupportTrianglePullback`. -/
-noncomputable def supportedRestrictionMap (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A)) :
+noncomputable def supportedRestrictionMap
+    (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A)) :
     ((sectionsWithSupportTriangle A a).obj P).obj₁ ⟶
       ((sectionsWithSupportTriangle A y).obj
         ((Functor.mapDerivedCategoryPlus (b)^*[A]).obj P)).obj₁ :=
