@@ -5,44 +5,30 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.PoincareDuality.Verdier
-public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
-public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 
 /-!
 
 # Nearby cycles commute with Verdier duality
 
-Let `M` be a model of finite type over the strictly henselian trait `S = Spec k'⟦t⟧` of a
-separated `k`-scheme `X` of finite type, with special fibre the `k'`-scheme `X'`, whose geometric
-generic fibre is the base change `X_Ω` of `X` to `Ω` and whose identification `ε : X_Ω ⟶ X` factors
-through the total space. Its nearby cycles `Ψ = Li^* Rj_* Lε^*` carry the lax tensor map
+Let `M` be a trait model over the base (`NearbyCyclesModel.IsTraitModelOfBase`) of a separated
+`k`-scheme `X` of finite type, over the strictly henselian trait `S = Spec k'⟦t⟧`, with special
+fibre the `k'`-scheme `X'`. Its nearby cycles `Ψ = Li^* Rj_* Lε^*` carry the lax tensor map
 `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` (`NearbyCyclesModel.tensorMap`), which restricts to bounded
-constructible complexes (`NearbyCyclesModel.boundedConstructibleTensorMap`). For a dualizing map
-`θ : Ψ ω_X ⟶ ω_{X'}` the duality map
+constructible complexes (`NearbyCyclesModel.boundedConstructibleTensorMap`), and the dualizing map
+`θ_M = β_a(ℚ̄_ℓ) : Ψ ω_X ⟶ ω_{X'}` (`NearbyCyclesModel.nearbyDualizingData`, blueprint
+`det-nearby-exchange-maps`). The **duality map** (`NearbyCyclesModel.nearbyDualityMap`)
 ```
-δ_K : Ψ D_X K ⟶ D_{X'} Ψ K
+δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K
 ```
-is the adjoint of `θ ∘ Ψ(ev) ∘ μ_Ψ` (`CategoryTheory.Verdier.nearbyDualityMap`).
+is the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ` (`CategoryTheory.Verdier.nearbyDualityMap`).
 
 **Gabber's theorem** (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2; blueprint
-`sk-prop-tf-nearby-duality-foundation`) says that for the dualizing map `θ_X = β_{a_X}(ℚ̄_ℓ)` of the
-exceptional exchange, `δ_K` is an isomorphism for every bounded constructible `K`. Here `D_X` is
-relative to `k`; it is identified with the duality relative to `Ω` on the geometric generic fibre
-since `ε` is a base change of fields, and this identification is absorbed into `θ`.
-
-The exceptional exchange `β` is not available for nearby-cycles models: it requires the
-compact-support exchange `ν_f`, built from relative compactifications over the trait (blueprint
-`det-nearby-exchange-maps`). So the theorem is stated with the dualizing map existentially
-quantified (`NearbyCyclesModel.exists_isIso_nearbyDualityMap`), and it remains unproven; see its
-docstring. The formal parts of the blueprint proof (compatibility of `δ` with proper direct images
-and open restrictions, normalization on the trait, and the finite-group core of the invariants
-step) are `CategoryTheory.Verdier.nearbyDualityMap_proper`,
-`CategoryTheory.Verdier.nearbyDualityMap_restrict`,
-`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper` and
-`CategoryTheory.invariantsDualIso`.
+`sk-prop-tf-nearby-duality-foundation`) says that `δ_{M,K}` is an isomorphism for every bounded
+constructible `K` (`NearbyCyclesModel.isIso_nearbyDualityMap`). Here `D_X` is relative to `k`; it is
+identified with the duality relative to `Ω` on the geometric generic fibre since `ε` is a base
+change of fields, and this identification is part of `θ_M`.
 
 -/
 
@@ -76,66 +62,61 @@ noncomputable def boundedConstructibleTensorMap
       (boundedConstructibleNearbyCycles hP).obj (A ⊗ B) :=
   ObjectProperty.homMk (M.tensorMap (Profinite.padicAlgClRingObj ℓ) A.obj B.obj)
 
-variable (ℓ) [IsSepClosed k'] [Algebra k k']
+variable (ℓ) [IsSepClosed k'] [Algebra k k'] {q : M.total ⟶ trait k'}
+  {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+
+/-- The **duality map** `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` of a trait model `M` over the base
+(blueprint `sk-prop-tf-nearby-duality-foundation`): the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ`, with `θ_M`
+the dualizing map `β_a(ℚ̄_ℓ)` (`NearbyCyclesModel.nearbyDualizingData`). -/
+noncomputable def nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
+        (verdierDual ℓ (toPoint X) K) ⟶
+      verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
+        (h.preservesBoundedConstructible ℓ)).obj K) :=
+  Verdier.nearbyDualityMap (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ))
+    ((nearbyDualizingData k k' ℓ).θ h) K
 
 /-- **Gabber's theorem: nearby cycles commute with Verdier duality** (Illusie, *Autour du
 théorème de monodromie locale*, Thm. 4.2; SGA 7 XIII; blueprint
-`sk-prop-tf-nearby-duality-foundation`). Let `M` be a model of finite type over the strictly
-henselian trait `S = Spec k'⟦t⟧` (`k'` separably closed) of a separated `k`-scheme `X` of finite
-type, with special fibre `X'`, such that
-* the identification `ε : 𝒳_Ω ⟶ X` factors through the total space, `ε = j ≫ e` (so the complexes
-  `Lε^* K` come from the generic fibre `𝒳_η`, the setting of SGA 7 XIII);
-* the geometric generic fibre is the base change `X ×_k Spec Ω` along `Spec Ω ⟶ S ⟶ Spec k`, with
-  `ε` the first projection (so `Lε^* D_{X/k} ≅ D_{𝒳_Ω/Ω} Lε^*` on bounded constructible complexes,
-  Verdier duality commuting with extension of the base field).
+`sk-prop-tf-nearby-duality-foundation`). For a trait model `M` over the base of a separated
+`k`-scheme `X` of finite type, over the strictly henselian trait `S = Spec k'⟦t⟧` (`k'` separably
+closed), the duality map `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K`, adjoint to `θ_M ∘ Ψ(ev) ∘ μ_Ψ` with the
+dualizing map `θ_M = β_a(ℚ̄_ℓ)` of blueprint `det-nearby-exchange-maps`, is an isomorphism for
+every bounded constructible `K`. There is no Tate twist: the duality on the geometric generic fibre
+is relative to `Ω`, the one on the special fibre relative to `k'`. The blueprint node is stated for
+finite `ℓ`-primary coefficients and `D^b_ctf`; for bounded constructible `ℚ̄_ℓ`-complexes the
+canonical map is the limit of the finite ones (Bhatt–Scholze, §6.8).
 
-Then there is a dualizing map `θ : Ψ ω_{X/k} ⟶ ω_{X'/k'}` for which the duality map
-`δ_K : Ψ D_X K ⟶ D_{X'} Ψ K`, adjoint to `θ ∘ Ψ(ev) ∘ μ_Ψ`, is an isomorphism for every bounded
-constructible `K`: namely `θ = θ_𝒳 ∘ Ψ(Lε^* ω_X ≅ ω_{𝒳_Ω})` with `θ_𝒳 = β_{a_𝒳}(ℚ̄_ℓ)` the
-dualizing map of the exceptional exchange (blueprint `det-nearby-exchange-maps` (5)). There is no
-Tate twist: the duality on the geometric generic fibre is relative to `Ω`, the one on the special
-fibre relative to `k'`. The blueprint node is stated for finite `ℓ`-primary coefficients and
-`D^b_ctf`; for bounded constructible `ℚ̄_ℓ`-complexes the canonical map is the limit of the finite
-ones (Bhatt–Scholze, §6.8).
-
-Unfinished. The proof of the blueprint (open locality and compactification, compatibility of
-`δ` with proper direct image and global duality, generic slicing with the twist `ℚ̄_ℓ(1)[2]`,
-invariants under the wild inertia `P`, finite support and induction on the dimension) needs the
-compact-support exchange `ν_f` for nearby cycles over the trait, which is not formalised: it
-requires relative compactifications of the total spaces over the trait together with the proper
-and open exchanges, and the deformation to the normal cone of a point is not proper over the
-trait even for proper `X`. Its formal ingredients are proved:
-`CategoryTheory.Verdier.nearbyDualityMap_proper`,
+Unfinished. The blueprint proof reduces, by open restriction and compactification, to proper
+models, where global duality kills `RΓ` of the cone of `δ`, and concludes by generic slicing and
+finite support. Its formal ingredients are proved: `CategoryTheory.Verdier.nearbyDualityMap_proper`,
 `CategoryTheory.Verdier.nearbyDualityMap_restrict`,
 `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper` (blueprint
-`det-tf-nearby-duality-proper`) and `CategoryTheory.invariantsDualIso`,
-`CategoryTheory.uncurry_invariantsDualIso_hom` (blueprint `det-tf-invariants-duality`, finite
-group case). -/
-theorem exists_isIso_nearbyDualityMap {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g)
-    (hε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε)
-    (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
-    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) :
-    ∃ θ : (boundedConstructibleNearbyCycles hP).obj (dualizingComplex ℓ (toPoint X)) ⟶
-        dualizingComplex ℓ (toPoint X'),
-      ∀ K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
-        IsIso (Verdier.nearbyDualityMap (boundedConstructibleTensorMap hP) θ K) :=
+`det-tf-nearby-duality-proper`) and `CategoryTheory.invariantsDualIso` (blueprint
+`det-tf-invariants-duality`), and for open restriction the concrete inputs of
+`WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen`. Instantiating the abstract
+compatibilities on `Dᵇc` is blocked by an elaboration problem: the hypotheses stated for the
+concrete functors and those obtained by instantiating the abstract statements print identically
+but are only identified by unfolding the condensed coefficient rings and the schemes, which
+exceeds the heartbeat limits (elaborator and kernel).
+Compactification of trait models over `S`, generic slicing (`det-tf-nearby-duality-slice`) and
+finite support are not formalised. -/
+theorem isIso_nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ h K) :=
   sorry
 
-/-- **Nearby cycles commute with Verdier duality**: under the hypotheses of
-`NearbyCyclesModel.exists_isIso_nearbyDualityMap`, `Ψ(D_X K) ≅ D_{X'}(Ψ K)` for every bounded
-constructible `K`, the duality being relative to `k` on `X` and to `k'` on the special fibre. -/
-theorem nonempty_nearbyCycles_verdierDual_iso {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g)
-    (hε : ∃ e : M.total ⟶ X.left, M.j ≫ e = M.ε)
-    (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
-    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+/-- **Nearby cycles commute with Verdier duality**: for a trait model `M` over the base,
+`Ψ(D_X K) ≅ D_{X'}(Ψ K)` for every bounded constructible `K`, the duality being relative to `k` on
+`X` and to `k'` on the special fibre. -/
+theorem nonempty_nearbyCycles_verdierDual_iso (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((boundedConstructibleNearbyCycles hP).obj (verdierDual ℓ (toPoint X) K) ≅
-      verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles hP).obj K)) := by
-  obtain ⟨θ, hθ⟩ := exists_isIso_nearbyDualityMap ℓ hM hε hgen hP
-  have := hθ K
-  exact ⟨asIso (Verdier.nearbyDualityMap (boundedConstructibleTensorMap hP) θ K)⟩
+    Nonempty ((boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
+        (verdierDual ℓ (toPoint X) K) ≅
+      verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
+        (h.preservesBoundedConstructible ℓ)).obj K)) :=
+  have := isIso_nearbyDualityMap ℓ h K
+  ⟨asIso (nearbyDualityMap ℓ h K)⟩
 
 end NearbyCyclesModel
 
