@@ -91,10 +91,6 @@ lemma surjective_app_of_epi_of_isStrictlyHenselianLocalRing (e : T ≅ Spec (.of
     (Presheaf.imageSieve_mem T.smallEtaleTopology φ.hom (U := op (Scheme.Etale.mk (𝟙 T))) s)
   exact ⟨t, ht.trans (by simp)⟩
 
-/-- The identity of `T` is a terminal object of the small étale site of `T`. -/
-noncomputable def isTerminalEtaleMkId (X : Scheme.{u}) : IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
-  MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X
-
 /-- Over a scheme `T ≅ Spec R`, `R` strictly henselian local, the global sections functor on
 étale sheaves of `Λ`-modules is exact. -/
 lemma preservesFiniteColimits_Γ_of_iso_isStrictlyHenselianLocalRing (e : T ≅ Spec (.of R)) :
@@ -105,7 +101,8 @@ lemma preservesFiniteColimits_Γ_of_iso_isStrictlyHenselianLocalRing (e : T ≅ 
       (surjective_app_of_epi_of_isStrictlyHenselianLocalRing e φ)⟩
   have : (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesEpimorphisms :=
     Functor.PreservesEpimorphisms.of_iso
-      (Sheaf.ΓNatIsoSheafSections _ _ (isTerminalEtaleMkId T)).symm
+      (Sheaf.ΓNatIsoSheafSections _ _
+        (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T)).symm
   have : (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesHomology :=
     Functor.preservesHomology_of_preservesEpis_and_kernels _
   exact (Sheaf.Γ _ _).preservesFiniteColimits_of_preservesHomology
@@ -131,7 +128,8 @@ lemma isZero_obj_of_isZero_sheafFiber (e : T ≅ Spec (.of R)) {Ω : Type u} [Fi
     (y.left (IsLocalRing.closedPoint Ω))
     ((congrArg (fun g ↦ (g ≫ e.hom) (IsLocalRing.closedPoint Ω)) (Over.w y)).trans ht)
   let g' : Scheme.Etale.mk (𝟙 T) ⟶ Y := MorphismProperty.Over.homMk g hg
-  have hgf : g' ≫ f = 𝟙 _ := (isTerminalEtaleMkId T).hom_ext _ _
+  have hgf : g' ≫ f = 𝟙 _ :=
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T).hom_ext _ _
   have h := congrArg (H.obj.map g'.op) heq
   simpa [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hgf] using h
 
@@ -145,7 +143,8 @@ lemma isZero_Γ_homology_of_isZero_mapDerivedCategoryPlus_upperStar
     (hP : IsZero ((Functor.mapDerivedCategoryPlus (t)^*[ModuleCat.{u + 1} Λ]).obj P)) (q : ℤ) :
     IsZero ((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
       ((DerivedCategory.Plus.homologyFunctor _ q).obj P)) := by
-  refine IsZero.of_iso ?_ ((Sheaf.ΓNatIsoSheafSections _ _ (isTerminalEtaleMkId T)).app _)
+  refine IsZero.of_iso ?_ ((Sheaf.ΓNatIsoSheafSections _ _
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T)).app _)
   refine isZero_obj_of_isZero_sheafFiber e t ht _ (IsZero.of_iso ?_
     ((upperStarCompSectionsIsoSheafFiber Λ t).app _).symm)
   refine Functor.map_isZero ((sheafSections _ (ModuleCat.{u + 1} Λ)).obj _) (IsZero.of_iso ?_

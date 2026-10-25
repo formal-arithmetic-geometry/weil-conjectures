@@ -12,11 +12,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 # Additivity of the six functors on bounded constructible complexes
 
-The derived pushforward `Rf_*`, the extension by zero `j_!` along an open immersion and the
-derived lower shriek `Rf_!` on bounded constructible complexes `Dᵇc(-)⟦Λ⟧` are additive
-functors: they are restrictions (`ObjectProperty.lift`) of additive functors on the ambient
-derived categories, the right derived functor `R((f)_*⟦Λ⟧)` of an additive functor and the
-functor `D((j)_!open⟦Λ⟧)` induced by an exact functor.
+The derived pullback `Lf^*`, the derived pushforward `Rf_*`, the extension by zero `j_!` along an
+open immersion and the derived lower shriek `Rf_!` on bounded constructible complexes
+`Dᵇc(-)⟦Λ⟧` are additive functors. The pullback is a left adjoint; the other functors are
+restrictions (`ObjectProperty.lift`) of additive functors on the ambient derived categories, the
+right derived functor `R((f)_*⟦Λ⟧)` of an additive functor and the functor `D((j)_!open⟦Λ⟧)`
+induced by an exact functor.
 
 -/
 
@@ -41,6 +42,15 @@ instance additive_boundedConstructibleLowerStar [IsFinitenessCoefficient ℓ Λ]
     (boundedConstructibleLowerStar Λ ℓ f).Additive := by
   unfold boundedConstructibleLowerStar
   infer_instance
+
+/-- The derived pullback `Lf^*` on bounded constructible complexes is additive, for a coefficient
+ring of Deligne's finiteness theorems: it is a left adjoint. -/
+instance additive_boundedConstructibleUpperStar [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) :
+    (boundedConstructibleUpperStar Λ ℓ f).Additive := by
+  refine ⟨fun {_ _ g g'} ↦ ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).homEquiv
+    _ _).injective ?_⟩
+  simp only [Adjunction.homEquiv_unit, Functor.map_add, Preadditive.comp_add,
+    Adjunction.unit_naturality, Preadditive.add_comp]
 
 /-- The extension by zero along an open immersion on bounded constructible complexes is
 additive. -/

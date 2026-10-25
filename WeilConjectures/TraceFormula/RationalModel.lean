@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
-public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.CompactPullback
 
 /-!
 
@@ -25,15 +25,19 @@ bounded constructible `E`-complex `K_E` and every *Frobenius correspondence*
 `ψ : LΦ^* K_E ⟶ K_E` there are an integral model `K₀` of `K_E`, an integer `N ≥ 0` and an integral
 Frobenius correspondence `θ : LΦ^* K₀ ⟶ K₀` with `ℓ^N ψ = θ ⊗ E`
 (`ProEtale.CondensedRing.exists_integralModel_frobeniusCorrespondence`). The iterates then satisfy
-`ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m` (`ProEtale.CondensedRing.pow_smul_upperStarIterateMap_eq`),
-and so do their stalks (`ProEtale.CondensedRing.pow_smul_upperStar_map_upperStarIterateMap_eq`).
+`ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m`
+(`ProEtale.CondensedRing.pow_smul_frobeniusCoefficientIterate_eq`), and so do their stalks
+(`ProEtale.CondensedRing.pow_smul_upperStar_map_frobeniusCoefficientIterate_eq`): this is the
+second identity of part (1) of the blueprint lemma; the first one, for the operators `T_{c_m}`,
+is not formalized (see the implementation notes).
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.upperStarIterateMap`: the iterate
-  `ψ_m : LΦ_m^* K ⟶ K` of a Frobenius correspondence `ψ : LΦ^* K ⟶ K`, for any coefficient ring.
 - `ProEtale.CondensedRing.extendScalarsUpperStarIterateIso`: the comparison
   `LΦ_m^* (K_E) ≅ (LΦ_m^* K)_E` assembled from a comparison `σ` for `Φ`.
+
+The iterates `ψ_m` are `ProEtale.CondensedRing.frobeniusCoefficientIterate`, for any coefficient
+ring.
 
 ## Implementation notes
 
@@ -75,18 +79,6 @@ section Iterate
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (ℓ) (Φ : X ⟶ X)
 
-/-- The derived pullback on bounded constructible complexes is additive, for a coefficient ring of
-Deligne's finiteness theorems: it is a left adjoint. -/
-instance additive_boundedConstructibleUpperStar_of_isFinitenessCoefficient
-    [IsFinitenessCoefficient ℓ Λ] {Y Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
-    (boundedConstructibleUpperStar Λ ℓ g).Additive := by
-  refine ⟨fun {_ _ f f'} ↦ ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g).homEquiv
-    _ _).injective ?_⟩
-  simp only [Adjunction.homEquiv_unit, Functor.map_add, Preadditive.comp_add,
-    Adjunction.unit_naturality, Preadditive.add_comp]
-
 /-- The isomorphism `LΦ_0^* = L(𝟙 X)^* ≅ 𝟭`. -/
 noncomputable def upperStarIterateZeroIso :
     boundedConstructibleUpperStar Λ ℓ (frobeniusIterate Φ 0) ≅ 𝟭 (Dᵇc(X.left)⟦Λ⟧) :=
@@ -100,31 +92,17 @@ noncomputable def upperStarIterateSuccIso (m : ℕ) :
   eqToIso (by rw [frobeniusIterate_succ]) ≪≫
     boundedConstructibleUpperStarComp Λ ℓ Φ (frobeniusIterate Φ m)
 
-/-- The iterate `ψ_m : LΦ_m^* K ⟶ K` of a Frobenius correspondence `ψ : LΦ^* K ⟶ K`: `ψ_0` is the
-identity isomorphism `L(𝟙 X)^* K ≅ K` and `ψ_{m+1}` is the composite
-```
-LΦ_{m+1}^* K = L(Φ ≫ Φ_m)^* K ≅ LΦ^* LΦ_m^* K --LΦ^* ψ_m--> LΦ^* K --ψ--> K.
-```
--/
-noncomputable def upperStarIterateMap {K : Dᵇc(X.left)⟦Λ⟧}
+lemma frobeniusCoefficientIterate_zero {K : Dᵇc(X.left)⟦Λ⟧}
     (ψ : (boundedConstructibleUpperStar Λ ℓ Φ).obj K ⟶ K) :
-    (m : ℕ) → ((boundedConstructibleUpperStar Λ ℓ (frobeniusIterate Φ m)).obj K ⟶ K)
-  | 0 => (upperStarIterateZeroIso ℓ Λ Φ).hom.app K
-  | m + 1 =>
-    (upperStarIterateSuccIso ℓ Λ Φ m).hom.app K ≫
-      (boundedConstructibleUpperStar Λ ℓ Φ).map (upperStarIterateMap ψ m) ≫ ψ
+    frobeniusCoefficientIterate ψ 0 = (upperStarIterateZeroIso ℓ Λ Φ).hom.app K := by
+  simp [frobeniusCoefficientIterate, upperStarIterateZeroIso]
 
-lemma upperStarIterateMap_zero {K : Dᵇc(X.left)⟦Λ⟧}
-    (ψ : (boundedConstructibleUpperStar Λ ℓ Φ).obj K ⟶ K) :
-    upperStarIterateMap ℓ Λ Φ ψ 0 = (upperStarIterateZeroIso ℓ Λ Φ).hom.app K :=
-  rfl
-
-lemma upperStarIterateMap_succ {K : Dᵇc(X.left)⟦Λ⟧}
+lemma frobeniusCoefficientIterate_succ_eq {K : Dᵇc(X.left)⟦Λ⟧}
     (ψ : (boundedConstructibleUpperStar Λ ℓ Φ).obj K ⟶ K) (m : ℕ) :
-    upperStarIterateMap ℓ Λ Φ ψ (m + 1) =
+    frobeniusCoefficientIterate ψ (m + 1) =
       (upperStarIterateSuccIso ℓ Λ Φ m).hom.app K ≫
-        (boundedConstructibleUpperStar Λ ℓ Φ).map (upperStarIterateMap ℓ Λ Φ ψ m) ≫ ψ :=
-  rfl
+        (boundedConstructibleUpperStar Λ ℓ Φ).map (frobeniusCoefficientIterate ψ m) ≫ ψ := by
+  simp [frobeniusCoefficientIterate, upperStarIterateSuccIso]
 
 end Iterate
 
@@ -203,7 +181,6 @@ noncomputable def extendScalarsUpperStarIterateIso
   | m + 1 =>
     extendScalarsUpperStarIterateSuccIso ℓ E Φ σ m (extendScalarsUpperStarIterateIso σ m)
 
-
 lemma extendScalarsUpperStarIterateZeroIso_inv_app (K₀ : Dᵇc(X.left)⟦𝒪⟧) :
     (extendScalarsUpperStarIterateZeroIso ℓ E Φ).inv.app K₀ =
       (upperStarIterateZeroIso ℓ 𝔼 Φ).hom.app
@@ -229,13 +206,14 @@ lemma extendScalarsUpperStarIterateSuccIso_inv_app
           ((upperStarIterateSuccIso ℓ 𝒪 Φ m).inv.app K₀) := by
   simp [extendScalarsUpperStarIterateSuccIso]
 
-/-- **The iterates of a rational model** (blueprint `sk-lem-tf-rational-model`, (1)): if
+/-- **The iterates of a rational model** (blueprint `sk-lem-tf-rational-model`, (1), the step
+before taking stalks; the identity for the operators `T_{c_m}` is not formalized): if
 `ℓ^N ψ = θ ⊗ E` for a Frobenius correspondence `ψ : LΦ^* K ⟶ K` and an integral Frobenius
 correspondence `θ : LΦ^* K₀ ⟶ K₀`, read through `e : (K₀)_E ≅ K` and a comparison `σ`, then
 `ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m`, read through `e` and the comparison
 `extendScalarsUpperStarIterateIso σ m` for `Φ_m`: the inverse image is additive, so the iterate
 of `ℓ^N ψ` is `ℓ^{N m} ψ_m`. -/
-theorem pow_smul_upperStarIterateMap_eq
+theorem pow_smul_frobeniusCoefficientIterate_eq
     (σ : boundedConstructibleUpperStar 𝒪 ℓ Φ ⋙ boundedConstructibleExtendScalars X.left ℓ E ≅
       boundedConstructibleExtendScalars X.left ℓ E ⋙ boundedConstructibleUpperStar 𝔼 ℓ Φ)
     {K : Dᵇc(X.left)⟦𝔼⟧} {K₀ : Dᵇc(X.left)⟦𝒪⟧}
@@ -246,14 +224,14 @@ theorem pow_smul_upperStarIterateMap_eq
       (boundedConstructibleUpperStar 𝔼 ℓ Φ).map e.inv ≫ σ.inv.app K₀ ≫
         (boundedConstructibleExtendScalars X.left ℓ E).map θ ≫ e.hom)
     (m : ℕ) :
-    ((ℓ : ℤ) ^ (N * m)) • upperStarIterateMap ℓ 𝔼 Φ ψ m =
+    ((ℓ : ℤ) ^ (N * m)) • frobeniusCoefficientIterate ψ m =
       (boundedConstructibleUpperStar 𝔼 ℓ (frobeniusIterate Φ m)).map e.inv ≫
         (extendScalarsUpperStarIterateIso ℓ E Φ σ m).inv.app K₀ ≫
-        (boundedConstructibleExtendScalars X.left ℓ E).map (upperStarIterateMap ℓ 𝒪 Φ θ m) ≫
+        (boundedConstructibleExtendScalars X.left ℓ E).map (frobeniusCoefficientIterate θ m) ≫
           e.hom := by
   induction m with
   | zero =>
-    simp only [Nat.mul_zero, pow_zero, one_smul, upperStarIterateMap_zero]
+    simp only [Nat.mul_zero, pow_zero, one_smul, frobeniusCoefficientIterate_zero]
     change _ = _ ≫ (extendScalarsUpperStarIterateZeroIso ℓ E Φ).inv.app K₀ ≫ _
     simp only [extendScalarsUpperStarIterateZeroIso_inv_app]
     have h₁ := Iso.map_inv_hom_id_assoc ((upperStarIterateZeroIso ℓ 𝒪 Φ).app K₀)
@@ -264,30 +242,32 @@ theorem pow_smul_upperStarIterateMap_eq
     simp only [Functor.id_map, Iso.inv_hom_id, comp_id] at this
     exact this.symm
   | succ m ih =>
-    have hsmul : ((ℓ : ℤ) ^ (N * (m + 1))) • upperStarIterateMap ℓ 𝔼 Φ ψ (m + 1) =
+    have hsmul : ((ℓ : ℤ) ^ (N * (m + 1))) • frobeniusCoefficientIterate ψ (m + 1) =
         (upperStarIterateSuccIso ℓ 𝔼 Φ m).hom.app K ≫
           (boundedConstructibleUpperStar 𝔼 ℓ Φ).map
-            (((ℓ : ℤ) ^ (N * m)) • upperStarIterateMap ℓ 𝔼 Φ ψ m) ≫ (((ℓ : ℤ) ^ N) • ψ) := by
-      simp only [upperStarIterateMap_succ, Functor.map_smul, Linear.smul_comp, Linear.comp_smul,
-        Linear.comp_smul, smul_smul, ← pow_add, Nat.mul_succ, Nat.add_comm N]
+            (((ℓ : ℤ) ^ (N * m)) • frobeniusCoefficientIterate ψ m) ≫ (((ℓ : ℤ) ^ N) • ψ) := by
+      simp only [frobeniusCoefficientIterate_succ_eq, Functor.map_smul, Linear.smul_comp,
+        Linear.comp_smul, Linear.comp_smul, smul_smul, ← pow_add, Nat.mul_succ, Nat.add_comm N]
     simp only [hsmul, ih, h]
     change _ = _ ≫ (extendScalarsUpperStarIterateSuccIso ℓ E Φ σ m
       (extendScalarsUpperStarIterateIso ℓ E Φ σ m)).inv.app K₀ ≫ _
-    simp only [extendScalarsUpperStarIterateSuccIso_inv_app, upperStarIterateMap_succ]
+    simp only [extendScalarsUpperStarIterateSuccIso_inv_app, frobeniusCoefficientIterate_succ_eq]
     have h₁ := fun {Z} (g : _ ⟶ Z) ↦ Iso.map_inv_hom_id_assoc
       ((upperStarIterateSuccIso ℓ 𝒪 Φ m).app K₀) (boundedConstructibleExtendScalars X.left ℓ E) g
     simp only [Iso.app_inv, Iso.app_hom] at h₁
-    have h₂ := σ.inv.naturality (upperStarIterateMap ℓ 𝒪 Φ θ m)
+    have h₂ := σ.inv.naturality (frobeniusCoefficientIterate θ m)
     have h₃ := (upperStarIterateSuccIso ℓ 𝔼 Φ m).hom.naturality e.inv
     simp only [Functor.comp_map] at h₂ h₃
     simp only [Functor.map_comp, assoc, Iso.map_hom_inv_id_assoc, h₁, ← reassoc_of% h₂,
       reassoc_of% h₃]
 
 /-- **The stalks of the iterates of a rational model** (blueprint `sk-lem-tf-rational-model`,
-(1)): under the hypotheses of `pow_smul_upperStarIterateMap_eq`, for every morphism
-`y : T ⟶ X` (a geometric point in the blueprint) with a coefficient comparison `σ_y` for `Ly^*`,
-`ℓ^{N m} (ψ_m)_y = (θ_m)_y ⊗ E`, read through `e`, the comparison for `Φ_m` and `σ_y`. -/
-theorem pow_smul_upperStar_map_upperStarIterateMap_eq
+(1), second identity only; the identity for the operators `T_{c_m}` is not formalized,
+see the module docstring): under the hypotheses of `pow_smul_frobeniusCoefficientIterate_eq`,
+for every morphism `y : T ⟶ X` (a geometric point in the blueprint) with a coefficient comparison
+`σ_y` for `Ly^*`, `ℓ^{N m} (ψ_m)_y = (θ_m)_y ⊗ E`, read through `e`, the comparison for `Φ_m`
+and `σ_y`. -/
+theorem pow_smul_upperStar_map_frobeniusCoefficientIterate_eq
     (σ : boundedConstructibleUpperStar 𝒪 ℓ Φ ⋙ boundedConstructibleExtendScalars X.left ℓ E ≅
       boundedConstructibleExtendScalars X.left ℓ E ⋙ boundedConstructibleUpperStar 𝔼 ℓ Φ)
     {K : Dᵇc(X.left)⟦𝔼⟧} {K₀ : Dᵇc(X.left)⟦𝒪⟧}
@@ -303,20 +283,18 @@ theorem pow_smul_upperStar_map_upperStarIterateMap_eq
       boundedConstructibleExtendScalars X.left ℓ E ⋙ boundedConstructibleUpperStar 𝔼 ℓ y)
     (m : ℕ) :
     ((ℓ : ℤ) ^ (N * m)) • (boundedConstructibleUpperStar 𝔼 ℓ y).map
-        (upperStarIterateMap ℓ 𝔼 Φ ψ m) =
+        (frobeniusCoefficientIterate ψ m) =
       (boundedConstructibleUpperStar 𝔼 ℓ y).map
           ((boundedConstructibleUpperStar 𝔼 ℓ (frobeniusIterate Φ m)).map e.inv ≫
             (extendScalarsUpperStarIterateIso ℓ E Φ σ m).inv.app K₀) ≫
         σy.inv.app _ ≫
         (boundedConstructibleExtendScalars T.left ℓ E).map
-          ((boundedConstructibleUpperStar 𝒪 ℓ y).map (upperStarIterateMap ℓ 𝒪 Φ θ m)) ≫
+          ((boundedConstructibleUpperStar 𝒪 ℓ y).map (frobeniusCoefficientIterate θ m)) ≫
         σy.hom.app K₀ ≫ (boundedConstructibleUpperStar 𝔼 ℓ y).map e.hom := by
-  have h₁ := σy.inv.naturality (upperStarIterateMap ℓ 𝒪 Φ θ m)
+  have h₁ := σy.inv.naturality (frobeniusCoefficientIterate θ m)
   simp only [Functor.comp_map] at h₁
-  simp only [← Functor.map_smul, pow_smul_upperStarIterateMap_eq ℓ E Φ σ e h m,
+  simp only [← Functor.map_smul, pow_smul_frobeniusCoefficientIterate_eq ℓ E Φ σ e h m,
     Functor.map_comp, assoc, ← reassoc_of% h₁, Iso.inv_hom_id_app_assoc]
-
-variable [TopologicalSpace.NoetherianSpace X.left]
 
 /-- **Integral models for rational Frobenius correspondences** (blueprint
 `sk-lem-tf-rational-model`): for every bounded constructible
@@ -325,8 +303,10 @@ variable [TopologicalSpace.NoetherianSpace X.left]
 correspondence `θ : LΦ^* K₀ ⟶ K₀` such that `ℓ^N ψ = θ ⊗ E`, read through `e` and the canonical
 comparison `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*` (`boundedConstructibleUpperStarExtendScalarsIso`,
 blueprint `sk-prop-scalar-six`, which holds since `E_X` is flat over `𝒪_{E,X}`).
-The iterates and their stalks then satisfy `ℓ^{N m} ψ_m = θ_m ⊗ E`
-(`pow_smul_upperStarIterateMap_eq`, `pow_smul_upperStar_map_upperStarIterateMap_eq`).
+The iterates and their stalks then satisfy `ℓ^{N m} ψ_m = θ_m ⊗ E`, the second identity of
+part (1) of the blueprint lemma; its first identity, for the operators `T_{c_m}`, is not
+formalized (`pow_smul_frobeniusCoefficientIterate_eq`,
+`pow_smul_upperStar_map_frobeniusCoefficientIterate_eq`).
 
 The integral model `K₀` exists since `(-)_E` is a localization functor (blueprint
 `sk-thm-sfb-rationalization-comparison`), and the comparison identifies `LΦ^* K` with
@@ -339,6 +319,9 @@ theorem exists_integralModel_frobeniusCorrespondence
         (boundedConstructibleUpperStar 𝔼 ℓ Φ).map e.inv ≫
           (boundedConstructibleUpperStarExtendScalarsIso ℓ E Φ).inv.app K₀ ≫
           (boundedConstructibleExtendScalars X.left ℓ E).map θ ≫ e.hom := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
   have hK := ProEtale.exists_boundedConstructibleExtendScalars_obj_iso X.left ℓ E K
   let K₀ := hK.choose
   let e : (boundedConstructibleExtendScalars X.left ℓ E).obj K₀ ≅ K := hK.choose_spec.some
