@@ -53,7 +53,7 @@ different proofs of equalities of derived pullbacks (hence
 
 universe u
 
-open CategoryTheory MonoidalCategory
+open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
@@ -314,6 +314,12 @@ namespace NearbyCyclesModel
 
 variable {X X' Y Y' : Scheme.{u}}
 
+/-- Nearby cycles preserve zero objects. -/
+lemma isZero_nearbyCycles_obj (M : NearbyCyclesModel X X')
+    {E : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}
+    (hE : IsZero E) : IsZero ((M.nearbyCycles Λ).obj E) :=
+  Functor.map_isZero (L((M.ε)^*⟦Λ⟧) ⋙ R((M.j)_*⟦Λ⟧) ⋙ L((M.i)^*⟦Λ⟧)) hE
+
 /-- The *specialization unit* `σ : Λ_{X'} ⟶ Ψ(Λ_X)` of a model: the restriction
 `Li^* (Λ ⟶ Rj_* Lj^* Λ)` to the special fibre of the unit of `Lj^* ⊣ Rj_*`, combined with the
 unit comparisons `Λ_{X'} ≅ Li^* Λ` and `Lj^* Λ ≅ Λ ≅ Lε^* Λ`. -/
@@ -456,6 +462,14 @@ lemma unit_comp_map_unit_comp_pushforwardExchange_app :
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
     rfl (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
     (φ.map_unit_comp_pullbackExchange_app Λ)
+
+/-- If the pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is invertible at `K` and `Lf^* K`
+vanishes, then so does `Lf'^* Ψ_N K`. -/
+lemma isZero_upperStar_nearbyCycles_obj
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))}
+    [IsIso ((φ.pullbackExchange Λ).app K)] (hK : IsZero ((L((f)^*⟦Λ⟧)).obj K)) :
+    IsZero ((L((f')^*⟦Λ⟧)).obj ((N.nearbyCycles Λ).obj K)) :=
+  (M.isZero_nearbyCycles_obj Λ hK).of_iso (asIso ((φ.pullbackExchange Λ).app K))
 
 end Hom
 

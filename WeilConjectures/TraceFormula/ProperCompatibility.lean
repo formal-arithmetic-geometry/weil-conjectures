@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.ProperCompatibilityEvaluation
 public import WeilConjectures.TraceFormula.ProperCompatibilitySupport
+public import WeilConjectures.TraceFormula.SourceExchange
 
 /-!
 
