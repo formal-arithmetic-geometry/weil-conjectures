@@ -9,6 +9,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSquareCoherence
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.ProperKunneth
+public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 
 /-!
 
@@ -446,35 +447,6 @@ theorem sourceExchange_leftTranspose (sqY : IsPullback π₂ π₁ aY aY)
             (boundedConstructibleUpperShriekAdjunction _ ℓ (f ≫ aY)).counit.app (𝟙_ _)) ▷ K) ≫
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (f ≫ aY))).inv ▷ K) ≫
       (λ_ K).hom :=
-  sorry
-
-/-- The right side of the base-change core, transposed along `Lf^* ⊣ Rf_*`. -/
-theorem sourceExchange_rightTranspose [IsProper (r ≫ h).left]
-    (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f) (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f)
-    (e : (boundedConstructibleLowerShriek _ ℓ (r ≫ zX)).obj
-      ((boundedConstructibleUpperStar _ ℓ (r ≫ zX)).obj K ⊗ (boundedConstructibleUpperStar _ ℓ p₂).obj
-        ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ⟶ K) :
-    (boundedConstructibleUpperStar _ ℓ f).map
-        ((boundedConstructibleLowerShriek _ ℓ π₁).map
-            ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (r ≫ h)).homEquiv _ _
-              ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
-                (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
-                  ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
-          (boundedConstructibleLowerShriek _ ℓ π₁).map
-            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (r ≫ h)).inv.app _) ≫
-          (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wq₁).hom.app _ ≫
-          (boundedConstructibleLowerShriek _ ℓ f).map e ≫
-          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K =
-    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA).app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ zX).map
-        ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app _ ≫
-          (boundedConstructibleLowerShriek _ ℓ r).map
-            ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app _ ≫
-              (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
-              (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
-                ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).inv.app _ ≫ e :=
   sorry
 
 end Core
