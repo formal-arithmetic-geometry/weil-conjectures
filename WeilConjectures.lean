@@ -7807,6 +7807,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationLift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AcyclicResolution
@@ -8093,6 +8094,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsT
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsOfIsIso
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
@@ -8123,6 +8126,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonIso
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.LeftProjectionComp
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
@@ -12609,9 +12613,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
@@ -13012,6 +13019,8 @@ public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
+public import WeilConjectures.TraceFormula.ExternalProductCoefficients
+public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.FiniteEtaleStalkTrace
