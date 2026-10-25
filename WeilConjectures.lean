@@ -13104,6 +13104,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
