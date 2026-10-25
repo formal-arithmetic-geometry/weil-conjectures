@@ -12590,6 +12590,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.SectionsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance
 public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
+public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel.ConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
@@ -12698,6 +12699,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.FinitelyPresented
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.Regular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Profinite

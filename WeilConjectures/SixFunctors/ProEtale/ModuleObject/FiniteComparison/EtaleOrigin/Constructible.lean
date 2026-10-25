@@ -8,6 +8,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.FinitelyPresented
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.Regular
 
 /-!
 # Constructible module objects with finite coefficients are constructible sheaves
@@ -49,7 +51,23 @@ theorem isConstructible_finiteCoefficientModEquivalence_functor_obj
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T) X)}
     (hM : IsConstructibleModuleObject (condensedRingObj (Profinite.continuousMapRingObj T) X) M) :
-    IsConstructible (ULift.{u + 1} T) ((finiteCoefficientModEquivalence X T).functor.obj M) :=
-  sorry
+    IsConstructible (ULift.{u + 1} T) ((finiteCoefficientModEquivalence X T).functor.obj M) := by
+  obtain ⟨S, hS⟩ := hM
+  refine ⟨S, fun a ↦ ?_⟩
+  obtain ⟨𝒰, h𝒰⟩ := hS a
+  refine IsFiniteLocallyConstant.of_cover (fun i : ULift.{u + 1} 𝒰.I₀ ↦ 𝒰.f i.down) ?_
+    fun i ↦ ?_
+  · have h : Presieve.ofArrows (fun i : ULift.{u + 1} 𝒰.I₀ ↦ 𝒰.X i.down)
+        (fun i ↦ 𝒰.f i.down) = 𝒰.presieve₀ := by
+      refine le_antisymm (fun _ _ ⟨i⟩ ↦ ⟨i.down⟩) fun _ _ ⟨i⟩ ↦ ?_
+      exact Presieve.ofArrows.mk (⟨i⟩ : ULift.{u + 1} 𝒰.I₀)
+    rw [h]
+    exact 𝒰.mem₀
+  · exact isFiniteLocallyConstant_of_iso
+      ((finiteCoefficientModEquivalenceUpperStarIso T (𝒰.f i.down)).app _ ≪≫
+        ((𝒰.f i.down)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)]).mapIso
+          ((finiteCoefficientModEquivalenceUpperStarIso T (S.immersion a)).app M))
+      (isFiniteLocallyConstant_finiteCoefficientModEquivalence_obj T _
+        (isFinitelyPresented_upperStar_obj_upperStar_obj _ _ _ (h𝒰 i.down)))
 
 end AlgebraicGeometry.ProEtale
