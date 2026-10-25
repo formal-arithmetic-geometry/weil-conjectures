@@ -62,7 +62,7 @@ lemma eq_zero_of_lowerShriek_support_of_isPullback {y : RationalPoint c.C}
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (φ : (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       (externalProduct ℓ ((boundedConstructibleLowerStar ℓ (y ≫ c.c₁)).obj A)
-        (verdierDual ℓ (toPoint X)
+        (verdierDual ℓ
           ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B))) ⟦(-1 : ℤ)⟧) :
     φ = 0 := by
   refine eq_zero_of_lowerShriek_unit (y ≫ c.c₁) A _ _ ?_ φ
