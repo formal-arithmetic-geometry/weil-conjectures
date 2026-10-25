@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSquareCoherence
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.ProperKunneth
 
@@ -74,6 +75,30 @@ lemma Adjunction.comp_tensorHom_eq_unit_comp_map_comp_inv_projection
     ← h₂, MonoidalCategory.tensorHom_def]
   simp only [MonoidalCategory.comp_whiskerRight, Category.assoc]
 
+/-- The abstract form of the tensor part of the core identity. -/
+lemma Functor.OplaxMonoidal.comp_δ_tensorHom_comp_braiding {𝒱 𝒲 𝒰 : Type*} [Category 𝒱]
+    [Category 𝒲] [Category 𝒰] [MonoidalCategory 𝒱] [MonoidalCategory 𝒲] [MonoidalCategory 𝒰]
+    [BraidedCategory 𝒱] [BraidedCategory 𝒲] [BraidedCategory 𝒰] (H : 𝒱 ⥤ 𝒲) (R : 𝒲 ⥤ 𝒰)
+    (RH : 𝒱 ⥤ 𝒰) [H.OplaxMonoidal] [R.OplaxMonoidal] [RH.OplaxMonoidal]
+    (hbraidH : ∀ A B : 𝒱, H.map (β_ A B).hom ≫ Functor.OplaxMonoidal.δ H B A =
+      Functor.OplaxMonoidal.δ H A B ≫ (β_ (H.obj A) (H.obj B)).hom)
+    (hbraidR : ∀ A B : 𝒲, R.map (β_ A B).hom ≫ Functor.OplaxMonoidal.δ R B A =
+      Functor.OplaxMonoidal.δ R A B ≫ (β_ (R.obj A) (R.obj B)).hom)
+    (u : ∀ X : 𝒱, R.obj (H.obj X) ⟶ RH.obj X)
+    (hu : ∀ P Q : 𝒱, u (P ⊗ Q) ≫ Functor.OplaxMonoidal.δ RH P Q =
+      R.map (Functor.OplaxMonoidal.δ H P Q) ≫ Functor.OplaxMonoidal.δ R _ _ ≫ (u P ⊗ₘ u Q))
+    {P Q : 𝒱} {A₁ B₁ : 𝒰} {C : 𝒲} (a : RH.obj P ⟶ A₁) (b : RH.obj Q ⟶ B₁)
+    (c : A₁ ⟶ R.obj C) (y : H.obj P ⟶ C) (hc : u P ≫ a ≫ c = R.map y) :
+    (u (P ⊗ Q) ≫ Functor.OplaxMonoidal.δ RH P Q ≫ (a ⊗ₘ b)) ≫ ((β_ A₁ B₁).hom ≫ (B₁ ◁ c)) =
+      R.map (H.map (β_ P Q).hom ≫ Functor.OplaxMonoidal.δ H Q P) ≫
+        Functor.OplaxMonoidal.δ R _ _ ≫ ((u Q ≫ b) ⊗ₘ R.map y) := by
+  rw [hbraidH, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hbraidR _ _), reassoc_of% hu, ← hc]
+  simp only [Category.assoc, MonoidalCategory.tensorHom_comp_tensorHom_assoc]
+  rw [BraidedCategory.braiding_naturality_assoc]
+  simp only [MonoidalCategory.tensorHom_def, Category.assoc, MonoidalCategory.whiskerLeft_comp]
+
 end CoreAbstract
 
 end CategoryTheory
@@ -121,7 +146,18 @@ lemma sourceExchange_T1 [IsProper (r ≫ h).left] (wq₁ : (r ≫ h) ≫ π₁ =
             ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ≫
         prodUpperStarCounit ℓ wq₂ ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ⊗ₘ
         (boundedConstructibleUpperStar _ ℓ r).map (prodUpperStarCounit ℓ hA.w K)) :=
-  sorry
+  by
+  have hc : (boundedConstructibleUpperStarComp _ ℓ r h).inv.app _ ≫ prodUpperStarCounit ℓ wq₁ K ≫
+      (boundedConstructibleUpperStarComp _ ℓ r zX).hom.app K =
+      (boundedConstructibleUpperStar _ ℓ r).map (prodUpperStarCounit ℓ hA.w K) := by
+    rw [← Category.assoc, upperStarComp_inv_app_comp_prodUpperStarCounit_left ℓ wq₁ hA.w,
+      Category.assoc, Iso.inv_hom_id_app]
+    exact Category.comp_id _
+  simp only [Functor.Monoidal.μIso_inv]
+  exact Functor.OplaxMonoidal.comp_δ_tensorHom_comp_braiding _ _ _
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ h A B)
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ r A B) _
+    (fun P Q ↦ boundedConstructibleUpperStarComp_inv_app_tensor_δ _ ℓ r h P Q) _ _ _ _ hc
 
 /-- The unit part of the core identity: the compact-support base change of the square
 `r ≫ (h ≫ π₂) = p₂ ≫ f` read through the transported counit. -/
