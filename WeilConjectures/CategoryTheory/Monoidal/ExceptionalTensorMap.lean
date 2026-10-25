@@ -217,6 +217,34 @@ theorem isIso_exceptionalBaseChange [IsIso av.counit] [IsIso au.counit] (N : �
 
 end ExceptionalBaseChange
 
+section UnitIso
+
+variable {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C}
+
+/-- If the counit of `L ⊣ R` is an isomorphism at `Y`, then the unit is an isomorphism at `R Y`:
+by the triangle identity, `η_{R Y}` is a section of the invertible `R ε_Y`. -/
+lemma isIso_unit_app_obj_of_isIso_counit_app (adj : L ⊣ R) (Y : D)
+    [IsIso (adj.counit.app Y)] : IsIso (adj.unit.app (R.obj Y)) :=
+  isIso_of_comp_hom_eq_id _ (adj.right_triangle_components Y)
+
+/-- If the counit of `L ⊣ R` is an isomorphism at `Y`, then the unit is an isomorphism at every
+object isomorphic to `R Y`. -/
+lemma isIso_unit_app_of_iso_of_isIso_counit_app (adj : L ⊣ R) {X : C} {Y : D} (e : X ≅ R.obj Y)
+    [IsIso (adj.counit.app Y)] : IsIso (adj.unit.app X) := by
+  have := adj.isIso_unit_app_obj_of_isIso_counit_app Y
+  rw [NatTrans.isIso_app_iff_of_iso _ e]
+  infer_instance
+
+/-- **Detection of isomorphisms between objects with invertible unit**: if the unit of `L ⊣ R`
+is an isomorphism at `X` and at `X'`, then `f : X ⟶ X'` is an isomorphism as soon as `L f` is,
+since `f = η_X ≫ R (L f) ≫ η_{X'}⁻¹`. -/
+lemma isIso_of_isIso_map_of_isIso_unit_app (adj : L ⊣ R) {X X' : C} (f : X ⟶ X')
+    [IsIso (adj.unit.app X)] [IsIso (adj.unit.app X')] [IsIso (L.map f)] : IsIso f := by
+  rw [(IsIso.eq_comp_inv _).mpr (adj.unit_naturality f).symm]
+  infer_instance
+
+end UnitIso
+
 end Adjunction
 
 end CategoryTheory

@@ -5548,6 +5548,7 @@ public import WeilConjectures.AlgebraicGeometry.OriginalCounitAdjunctionTranspor
 public import WeilConjectures.AlgebraicGeometry.OverProduct
 public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 public import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
 public import WeilConjectures.AlgebraicGeometry.OverlapComparisonRefinement
 public import WeilConjectures.AlgebraicGeometry.OverlapConjugateRestriction
@@ -12582,6 +12583,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSquareCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
@@ -12983,6 +12985,8 @@ public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.TraceFormula.PuncturedRestriction
 public import WeilConjectures.TraceFormula.PurityBaseChange
 public import WeilConjectures.TraceFormula.PurityCompatibility
+public import WeilConjectures.TraceFormula.PurityDevissage
+public import WeilConjectures.TraceFormula.PurityOrientation
 public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.TraceFormula.PurityTensorMapShift
 public import WeilConjectures.TraceFormula.PushforwardFamily

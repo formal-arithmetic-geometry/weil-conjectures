@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.KunnethVerdier
-public import WeilConjectures.TraceFormula.PurityTensorMap
+public import WeilConjectures.TraceFormula.PurityDevissage
 
 /-!
 
@@ -25,15 +25,15 @@ The map `α` factors as the exceptional base change map of the product square at
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.upperShriekUnitTensorMap`: the purity map
-  `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K`.
-- `ProEtale.CondensedRing.upperShriekBaseChange`: the exceptional base change map
-  `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` of a cartesian square.
+- `ProEtale.CondensedRing.prodUpperShriekBaseChangeUnit`: the exceptional base change map of the
+  product square at the unit. The purity map `upperShriekUnitTensorMap` and the exceptional base
+  change map `upperShriekBaseChange` are defined in `WeilConjectures.TraceFormula.PurityTensorMap`.
 
-## Inputs from smooth purity
+## Smooth purity
 
 - `ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`: smooth purity for arbitrary
-  coefficients (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `sk-thm-sp-qbar`).
+  coefficients (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `sk-thm-sp-qbar`), proved in
+  `WeilConjectures.TraceFormula.PurityDevissage`.
 - `ProEtale.CondensedRing.isIso_upperShriekBaseChange_of_smooth`: `Rf^!` commutes with base
   change for `f` smooth (SGA 4, Exposé XVIII, Théorème 3.2.5 and Théorème 2.9 (Var 4); blueprint
   `sk-prop-sp-purity-bc`).
@@ -67,28 +67,27 @@ variable {X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
 
-/-- Compatibility required from the smooth purity section, to be proved there: **smooth purity
-for arbitrary coefficients** (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `sk-thm-sp-qbar`, in
-the form `Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`): for a smooth morphism `f`, the purity map
-`γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` is an isomorphism for every bounded constructible `K`.
-Together with `isIso_smoothPurityMap`, which identifies `Rf^! ℚ̄_ℓ` with `ℚ̄_ℓ(d)[2d]`, this is the
-adjunction `Rf_! ⊣ Lf^*(-)(d)[2d]` of `sk-thm-sp-qbar`. -/
-theorem isIso_upperShriekUnitTensorMap_of_smooth (f : X ⟶ Y) [Smooth f.left]
-    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekUnitTensorMap ℓ f K) :=
-  sorry
-
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- Compatibility required from the smooth purity section, to be proved there: **the exceptional
-inverse image along a smooth morphism commutes with base change** (SGA 4, Exposé XVIII,
-Théorème 3.2.5 together with the compatibility of the trace with base change, Théorème 2.9
-(Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square with `f` smooth, the
-exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism. -/
+/-- **The exceptional inverse image along a smooth morphism commutes with base change** (SGA 4,
+Exposé XVIII, Théorème 3.2.5 together with the compatibility of the trace with base change,
+Théorème 2.9 (Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square with `f` smooth,
+the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism. By the
+compatibility of the purity map with base change (`isIso_upperShriekBaseChange_of_isIso_unit`)
+this follows from smooth purity for `f` and its base change `f'`
+(`isIso_upperShriekUnitTensorMap_of_smooth`) and from the base change of the relative dualizing
+complex (`isIso_upperShriekBaseChange_unit_of_smooth`). -/
 theorem isIso_upperShriekBaseChange_of_smooth (sq : IsPullback g' f' f g) [Smooth f.left]
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekBaseChange ℓ sq L) :=
-  sorry
+    IsIso (upperShriekBaseChange ℓ sq L) := by
+  have hsq : IsPullback g'.left f'.left f.left g.left := by
+    simpa only [Over.forget_map] using sq.map (Over.forget _)
+  have : Smooth f'.left := MorphismProperty.of_isPullback hsq inferInstance
+  have := isIso_upperShriekUnitTensorMap_of_smooth ℓ f L
+  have := isIso_upperShriekUnitTensorMap_of_smooth ℓ f'
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj L)
+  have := isIso_upperShriekBaseChange_unit_of_smooth ℓ sq
+  exact isIso_upperShriekBaseChange_of_isIso_unit ℓ sq L
 
 end General
 
