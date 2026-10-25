@@ -391,7 +391,7 @@ theorem exists_isUniversalSection (hc : IsDescentCocycle f c) {S W : Scheme.{u}}
       ∀ {K : Type u} [Field K] (wk : Spec (.of K) ⟶ W) (a : Fin N),
         ∃ (nk : Spec (.of K) ⟶ Nsch) (h : (wk ≫ j) ≫ f = nk ≫ n ≫ s),
           ξ.1 ((pullback.lift (wk ≫ j) nk h).base (IsLocalRing.closedPoint K)) = a := by
-  obtain ⟨Nsch, n, q, hq, hγq⟩ := exists_isPullback_of_coaction p (trivπ N W) (coact hc hjp)
+  obtain ⟨Nsch, -, n, q, hq, hγq⟩ := exists_isPullback_of_coaction p (trivπ N W) (coact hc hjp)
     (coact_trivπ hc hjp) (coact_counit hc hjp) (coact_coassoc hc hjp)
   have hpq : (@Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme) p :=
     ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩

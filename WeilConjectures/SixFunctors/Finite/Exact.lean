@@ -121,8 +121,8 @@ instance Etale.preservesHomology_lowerStar_of_isFinite : (f)_*[A].PreservesHomol
   Functor.preservesHomology_of_preservesEpis_and_kernels _
 
 include hJ in
-/-- **The direct image along a finite morphism is exact** (blueprint:
-`lemma:weil-pbc-finite-direct-image-exact`): it preserves finite colimits, and it preserves
+/-- **The direct image along a finite morphism is exact** (blueprint
+`lemma-weil-pbc-finite-direct-image-exact`): it preserves finite colimits, and it preserves
 finite limits by `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`. -/
 instance Etale.preservesFiniteColimits_lowerStar_of_isFinite :
     PreservesFiniteColimits (f)_*[A] :=
@@ -141,7 +141,8 @@ include hJ in
 This is definitionally `CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory` for
 `f_*`; the content is that the exactness instance
 `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite` discharges its
-hypothesis, so that the general isomorphism is available for a finite `f`. -/
+hypothesis, so that the general isomorphism is available for a finite `f`
+(blueprint `lemma-weil-pbc-finite-direct-image-exact`). -/
 def Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory :
     (f)_*[A].rightDerivedFunctor ≅ (f)_*[A].mapDerivedCategory :=
   (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory
