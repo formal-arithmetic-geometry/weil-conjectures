@@ -109,7 +109,7 @@ instance isMonHom_continuousMapPullbackHom : IsMonHom (continuousMapPullbackHom 
     (continuousMapRingSheaf.{0} X' T)
   have : IsMonHom (continuousMapToPushforward g T) :=
     IsMonHom.of_eq _ rfl h₁.symm (hf := Sheaf.isMonHom_sheafCompose_map
-      (J := ProEt.topology X) (continuousMapRingSheafToPushforward g T))
+      (J := ProEt.topology X) (continuousMapRingSheafToPushforwardOfPoint g T))
   exact (upperStarLowerStarAdjunction Ab.{u + 1} g).isMonHom_homEquiv_symm _
 
 omit [TopologicalSpace T] [Ring T] [IsTopologicalRing T] in

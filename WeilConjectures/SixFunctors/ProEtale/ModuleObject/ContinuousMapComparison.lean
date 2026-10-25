@@ -301,7 +301,7 @@ variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
 
 /-- The morphism of sheaves of rings `C(-, T)_X ⟶ g_* C(-, T)_{X'}`: precomposition with the
 projections `V ×_X X' → V`. -/
-noncomputable def continuousMapRingSheafToPushforward :
+noncomputable def continuousMapRingSheafToPushforwardOfPoint :
     continuousMapRingSheaf X T ⟶
       ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).sheafPushforwardContinuous
         RingCat.{u + 1} (ProEt.topology X) (ProEt.topology X')).obj
@@ -328,7 +328,7 @@ noncomputable abbrev continuousMapToPushforward :
       (g)_*[Ab.{u + 1}].obj ((sheafCompose (ProEt.topology X')
         (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousMapRingSheaf X' T)) :=
   (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-    (continuousMapRingSheafToPushforward g T)
+    (continuousMapRingSheafToPushforwardOfPoint g T)
 
 /-- The comparison `g^* C(-, T)_X ⟶ C(-, T)_{X'}`, adjoint to the precomposition with the
 projections `V ×_X X' → V`. -/
