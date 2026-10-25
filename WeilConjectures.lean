@@ -8369,6 +8369,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.RecollementIsoAlgebra
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts
 public import WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
+public import WeilConjectures.CategoryTheory.Triangulated.RowAdditivity
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Adjunction
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
@@ -12648,6 +12649,8 @@ public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 public import WeilConjectures.TraceFormula.CategoricalTraceExact
 public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
+public import WeilConjectures.TraceFormula.ClosedPieceSquare
+public import WeilConjectures.TraceFormula.ClosedPieceTriangle
 public import WeilConjectures.TraceFormula.CoefficientMorphism
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
@@ -12683,7 +12686,10 @@ public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.OpenPieceFrobenius
+public import WeilConjectures.TraceFormula.OpenPieceTriangle
 public import WeilConjectures.TraceFormula.OpenSquare
+public import WeilConjectures.TraceFormula.PieceAdditivity
+public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.PointFiberFunctor
@@ -12708,10 +12714,12 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.StalkDualizable
 public import WeilConjectures.TraceFormula.Statement
+public import WeilConjectures.TraceFormula.SupportedClassNaturality
 public import WeilConjectures.TraceFormula.SupportedPairing
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
 public import WeilConjectures.TraceFormula.TraceClassDiagonal
+public import WeilConjectures.TraceFormula.TraceClassTriangle
 public import WeilConjectures.TraceFormula.UnitBasis
 public import WeilConjectures.TraceFormula.WeilBaseChange
 public import WeilConjectures.TraceFormula.WeilDistTriang

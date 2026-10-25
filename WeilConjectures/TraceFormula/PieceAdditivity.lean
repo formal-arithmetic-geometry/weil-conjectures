@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.ClosedPieceSquare
 public import WeilConjectures.TraceFormula.ClosedPieceTriangle
 public import WeilConjectures.TraceFormula.OpenPieceTriangle
 public import WeilConjectures.TraceFormula.PieceVanishing
@@ -45,6 +46,27 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+variable {D : Type*} [Category D] {R : D ⥤ D} (ι : R ≅ 𝟭 D)
+
+/-- Moving `ι⁻¹ : 𝟭 ≅ R` across a commutative square. -/
+lemma comp_inv_app_eq_of_comp_eq {T M K' K : D} {a₁ : T ⟶ M} {a₂ : M ⟶ K} {g : T ⟶ K'}
+    {ε : K' ⟶ K} (h : g ≫ ε = a₁ ≫ a₂) :
+    a₁ ≫ a₂ ≫ ι.inv.app K = (g ≫ ι.inv.app K') ≫ R.map ε := by
+  have hn := ι.inv.naturality ε
+  dsimp only [Functor.id_obj, Functor.id_map] at hn
+  rw [Category.assoc, ← hn, ← Category.assoc g, h, Category.assoc]
+
+/-- Moving `ι⁻¹ : 𝟭 ≅ R` across a morphism. -/
+lemma eq_comp_inv_app_comp_map {T K K'' : D} {p : T ⟶ R.obj K''} {v : T ⟶ K} {η : K ⟶ K''}
+    (h : p = v ≫ η ≫ ι.inv.app K'') : p = (v ≫ ι.inv.app K) ≫ R.map η := by
+  have hn := ι.inv.naturality η
+  dsimp only [Functor.id_obj, Functor.id_map] at hn
+  rw [h, Category.assoc, hn]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -81,14 +103,10 @@ theorem traceClass_ofGraph_eq_add (F : (ofGraph K h v).FixedLocus) :
     (eq_zero_of_externalProduct_openPiece (pointComplι x) x hjx _ _ K _)
     (eq_zero_of_externalProduct_closedPiece (pointComplι x) x hjx _ _ K _)
     (eq_zero_of_externalProduct_shift_to_diag (pointComplι x) x hjx _ _)
-  · change _ ≫ v ≫ _ = (_ ≫ _) ≫ _
-    rw [← (boundedConstructibleUpperShriekId ℓ X).inv.naturality, ← Category.assoc,
-      ← graphOpenPieceCoeff_comp_counit, Category.assoc, Category.assoc]
-    rfl
-  · change _ = (v ≫ _) ≫ _
-    rw [upperStar_map_unit_comp_graphClosedPieceCoeff, Category.assoc,
-      ← (boundedConstructibleUpperShriekId ℓ X).inv.naturality]
-    rfl
+  · exact comp_inv_app_eq_of_comp_eq (boundedConstructibleUpperShriekId ℓ X)
+      (graphOpenPieceCoeff_comp_counit K v hx)
+  · exact eq_comp_inv_app_comp_map (boundedConstructibleUpperShriekId ℓ X)
+      (upperStar_map_unit_comp_graphClosedPieceCoeff K v hx)
 
 end Correspondence
 
@@ -98,13 +116,15 @@ variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
   [IsOpenImmersion j.left]
 
+set_option maxHeartbeats 1000000 in
+-- unifying the curve pieces of `K` with the general open–closed triangle is expensive
 /-- **Additivity of trace classes along the curve pieces** (blueprint
 `prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the
 Frobenius graph; `sk-i-additivity`): for a rational point `x` fixed by `Φ_m`, `m ≥ 1`, with
 open complement `j : U ⟶ X` such that `Φ_{m,U} ≫ j = j ≫ Φ_m` is cartesian, the trace class of
 the graph correspondence `(𝟙, Φ_m)` with coefficient `φ_m` is the sum of the trace classes with
 the coefficients `u^Z` of `K^Z` and `u^U` of `K^U`. -/
-theorem traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
+theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) {ΦU : U ⟶ U}
     (sq : IsPullback ΦU j j (frobeniusIterate Φ m))
     (hcompl : IsCompl (Set.range j.left.base) (Set.range x.left.base))
@@ -120,14 +140,10 @@ theorem traceClass_graph_eq_add (m : ℕ) (hm : 1 ≤ m) (x : RationalPoint X)
     (eq_zero_of_externalProduct_openPiece j x hcompl.disjoint _ _ K.carrier _)
     (eq_zero_of_externalProduct_closedPiece j x hcompl.disjoint _ _ K.carrier _)
     (eq_zero_of_externalProduct_shift_to_diag j x hcompl.disjoint _ _)
-  · change _ ≫ (K.iterateStr m).hom ≫ _ = (_ ≫ _) ≫ _
-    rw [← (boundedConstructibleUpperShriekId ℓ X).inv.naturality, ← Category.assoc,
-      ← openPieceCoeff_comp_counit, Category.assoc, Category.assoc]
-    rfl
-  · change _ = ((K.iterateStr m).hom ≫ _) ≫ _
-    rw [upperStar_map_unit_comp_closedPieceCoeff, Category.assoc,
-      ← (boundedConstructibleUpperShriekId ℓ X).inv.naturality]
-    rfl
+  · exact comp_inv_app_eq_of_comp_eq (boundedConstructibleUpperShriekId ℓ X)
+      (K.openPieceCoeff_comp_counit j m sq)
+  · exact eq_comp_inv_app_comp_map (boundedConstructibleUpperShriekId ℓ X)
+      (K.upperStar_map_unit_comp_closedPieceCoeff m x hx)
 
 /-- **Additivity of local terms along the curve pieces** (blueprint
 `prop-trf-trace-class-additivity`, item 2): for every open and closed subscheme `B` of the fixed
