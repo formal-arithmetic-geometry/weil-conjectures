@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.TraceFormula.CurveLocal.CoverComplexE
+public import WeilConjectures.TraceFormula.CurveLocal.CoverCurves
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstruction
@@ -49,16 +51,16 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {M : CurveLocalModel k} {ℓ : �
 /-- The curves `D'`, `H'`, `B'` pass through the closed point of `T'`
 (blueprint `det-tf-restriction-zero-covers`). -/
 theorem nonempty_curves : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' :=
-  sorry
+  D.nonempty_curves'
 
 /-- The curve `H'` is regular: its ring is a discrete valuation ring (blueprint
 `det-tf-restriction-zero-covers` (ii): `H'` is the axis `η = 0` of `T'`). -/
 theorem isDiscreteValuationRing_H' : ∃ _ : IsDomain Γ(D.H', ⊤), IsDiscreteValuationRing Γ(D.H', ⊤) :=
-  sorry
+  D.isDiscreteValuationRing_H''
 
 /-- The curves `D'` and `B'` have dimension one (blueprint `det-tf-restriction-zero-covers`). -/
 theorem ringKrullDim_D'_B' : ringKrullDim Γ(D.D', ⊤) = 1 ∧ ringKrullDim Γ(D.B', ⊤) = 1 :=
-  sorry
+  D.ringKrullDim_D'_B''
 
 /-- **Tangent cones** (blueprint `det-tf-restriction-zero-covers` (iii)): the tangent cone of
 `G' ∪ V'` meets neither that of `B'` nor that of `H'` outside the origin. -/
@@ -111,6 +113,6 @@ theorem exists_E' (hℓ : (ℓ : k) ≠ 0) [Finite Λ]
         ((strictLocalization D.s').homOfLE (inf_le_left :
           D.dD'.openComplement ⊓ D.dH'.openComplement ≤ D.dD'.openComplement))_!open[ModuleCat.{u + 1} Λ]
           |>.mapDerivedCategory.obj E') :=
-  sorry
+  D.exists_complexE L K P hKy hPL hPK eL eK eP
 
 end AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum
