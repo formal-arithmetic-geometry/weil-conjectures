@@ -103,8 +103,8 @@ by `sorry` does not use it, so as a section variable it would be silently droppe
 /-- Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
 stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper morphism
 `g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded
-constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII, 3.1.4;
-Bhatt–Scholze, Section 6.8). -/
+constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image
+`Rg^!` along `g` (SGA 4 XVIII, 3.1.4; Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper g.left] :
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
   sorry

@@ -295,7 +295,7 @@ lemma isIso_leftProjectionMorphism_prodMap_lowerStar (g : Z ⟶ X) [IsProper g.l
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 Z) j))
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map g (𝟙 Y))) _
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ _ _)
-      (boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ _ _) _ _ _
+      (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ _ _) _ _ _
       ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.map (𝟙 Z) j) prod.fst).inv.app N)
       (upperStarComp_inv_app_comp_prodUpperStarCounit_left ℓ w₁' sqY.w.symm N)
@@ -320,7 +320,7 @@ lemma isIso_leftProjectionMorphism_prodMap_lowerStar (g : Z ⟶ X) [IsProper g.l
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map g (𝟙 U)))
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 X) j)) _
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ _ _)
-    (boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ _ _) _ _
+    (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ _ _) _ _
     (prodUpperStarCounit ℓ (prod.map_snd (𝟙 X) j) B)
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.map g (𝟙 U)) prod.snd).inv.app B)
