@@ -142,7 +142,7 @@ lemma powStr_hom_naturality {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
     rw [(comp _ _).hom.naturality_assoc, Functor.comp_map, ← Functor.map_comp_assoc, hu,
       Functor.map_comp_assoc, ih, Category.assoc, Category.assoc]
 
-/-- The iterated structure isomorphism `(P e^{n+1}) a ≅ a` of an object `a` with an isomorphism
+/-- The iterated structure isomorphism `(P eⁿ) a ≅ a` of an object `a` with an isomorphism
 `φ : P e a ≅ a`, for a family of endofunctors `P g` indexed by the endomorphisms `g` of `X`,
 contravariant up to the composition isomorphisms `P (f ≫ g) ≅ P g ⋙ P f`: it is `φ`, transported
 along `𝟙 ≫ e = e`, for `n = 0`, and the composite `P (e^{n+1} ≫ e) a ≅ P e^{n+1} (P e a) ≅

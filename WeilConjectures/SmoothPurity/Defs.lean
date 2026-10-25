@@ -125,7 +125,7 @@ morphism `f` smooth of pure relative dimension `d` (SGA 4, Exposé XVIII, Théor
 construction is not formalized: see the module docstring for the properties that are assumed. -/
 @[no_expose]
 noncomputable def smoothTrace :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    (boundedConstructibleLowerShriek ℓ f).obj
       (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
       𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   sorry
@@ -134,9 +134,9 @@ noncomputable def smoothTrace :
 `Rf_! ⊣ Rf^!`. -/
 noncomputable def smoothPurityMap :
     boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+      (boundedConstructibleUpperShriek ℓ f).obj
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
+  (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
 
 /-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
 adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism. -/
@@ -149,7 +149,7 @@ coefficient object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(
 the adjoint of the trace (`smoothPurityMap`), after the inclusion
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. -/
 noncomputable def smoothPurityIso :
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    ((boundedConstructibleUpperShriek ℓ f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   (ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ f d)).symm

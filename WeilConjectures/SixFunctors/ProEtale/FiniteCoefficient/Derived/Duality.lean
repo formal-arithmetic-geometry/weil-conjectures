@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 
 /-!
 

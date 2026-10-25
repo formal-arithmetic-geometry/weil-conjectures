@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
@@ -35,18 +35,19 @@ No derived completeness condition is imposed.
 
 ## Sorried input
 
-For the coefficient rings `Λ_X = p_X^* Λ` of Deligne's finiteness theorems
-(`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` or a finite `ℓ`-power torsion ring,
-`AlgebraicGeometry.ProEtale.CondensedRing.IsFinitenessCoefficient`), the bounded constructible
-complexes on a topologically noetherian scheme form a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible`). This rests on the fact that constructible
-sheaves of `Λ_X`-modules on such a scheme are closed under kernels, cokernels and extensions
-(Bhatt–Scholze, Section 6.8), which is not formalized; the instance is `sorry`ed. It is false
-for a general commutative ring object `R`: for `X = Spec k̄` and `R` the constant sheaf of the
-non-coherent ring `k[x₁, x₂, …]/(x₁xᵢ)ᵢ`, the cone of `x₁ : R ⟶ R` has `H⁻¹` the constant sheaf
-of the ideal `(x₂, x₃, …)`, which is not finitely generated. Noetherianity is assumed only there:
-the definition `ProEtale.boundedConstructible` makes sense on any scheme. The derived category
-itself uses the `sorry`ed instances of
+For the `ℓ`-adic coefficient rings `Λ_X = p_X^* Λ` with `Λ` one of `𝒪̲_E` or `E̲` for a finite
+extension `E` of `ℚ_ℓ`, or `ℚ̲̄_ℓ`, the bounded constructible complexes on a topologically
+noetherian scheme form a triangulated subcategory. This is stated separately for each of these
+coefficient rings (`ProEtale.isTriangulated_boundedConstructible_padicIntegersRingObj`,
+`ProEtale.isTriangulated_boundedConstructible_continuousMapRingObj`,
+`ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`). It rests on the fact that
+constructible sheaves of `Λ_X`-modules on such a scheme are closed under kernels, cokernels and
+extensions (Bhatt–Scholze, Section 6.8), which is not formalized; the instances are `sorry`ed.
+It is false for a general commutative ring object `R`: for `X = Spec k̄` and `R` the constant
+sheaf of the non-coherent ring `k[x₁, x₂, …]/(x₁xᵢ)ᵢ`, the cone of `x₁ : R ⟶ R` has `H⁻¹` the
+constant sheaf of the ideal `(x₂, x₃, …)`, which is not finitely generated. Noetherianity is
+assumed only there: the definition `ProEtale.boundedConstructible` makes sense on any scheme. The
+derived category itself uses the `sorry`ed instances of
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory`.
 
 -/
@@ -95,19 +96,60 @@ lemma mem_boundedConstructible_iff
 abbrev BoundedConstructible : Type _ :=
   (boundedConstructible R).FullSubcategory
 
-open CondensedRing in
-open scoped CategoryTheory.Obj in
--- The prime `ℓ` occurs only in the hypothesis `IsFinitenessCoefficient ℓ Λ`; it is found from
--- that instance, so the synthesis order is not the default one.
-set_option synthInstance.checkSynthOrder false in
-/-- For the coefficient rings `Λ_X` of Deligne's finiteness theorems (`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` or a
-finite `ℓ`-power torsion ring), the bounded constructible complexes on a topologically noetherian
-scheme form a triangulated subcategory. -/
-instance isTriangulated_boundedConstructible
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {ℓ : ℕ} [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] (X : Scheme.{u})
-    [TopologicalSpace.NoetherianSpace X] :
-    (boundedConstructible (condensedRingObj Λ X)).IsTriangulated :=
+/-- The zero complex is bounded constructible: it is bounded, and its cohomology
+sheaves are zero, which is constructible for the trivial stratification (the cokernel of `R⁰ ⟶ R⁰`).
+This makes `BoundedConstructible R` have a zero object without going through the triangulated
+structure. -/
+instance containsZero_boundedConstructible : (boundedConstructible R).ContainsZero :=
   sorry
+
+namespace CondensedRing
+
+/-- The bounded constructible derived category `D_cons(X_proét, Λ_X)` of module objects over
+`Λ_X = p_X^* Λ`, for a commutative condensed ring `Λ`. -/
+scoped notation "Dᵇc(" X ")⟦" Λ "⟧" =>
+  AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj Λ X)
+
+end CondensedRing
+
+section Triangulated
+
+open scoped CategoryTheory.Obj
+
+variable (X : Scheme.{u})
+
+variable (ℓ : ℕ) [Fact ℓ.Prime]
+
+/-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the bounded constructible complexes of
+`𝒪_{E,X}`-modules on a topologically noetherian scheme form a triangulated subcategory. -/
+instance isTriangulated_boundedConstructible_padicIntegersRingObj
+    [TopologicalSpace.NoetherianSpace X] (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] :
+    (boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)).IsTriangulated :=
+  sorry
+
+-- The prime `ℓ` of `E̲` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
+-- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
+set_option synthInstance.checkSynthOrder false in
+/-- For a finite extension `E` of `ℚ_ℓ`, the bounded constructible complexes of `E_X`-modules on a
+topologically noetherian scheme form a triangulated subcategory. -/
+instance isTriangulated_boundedConstructible_continuousMapRingObj
+    [TopologicalSpace.NoetherianSpace X] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (boundedConstructible
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)).IsTriangulated :=
+  sorry
+
+/-- The bounded constructible complexes of `ℚ̄_{ℓ,X}`-modules on a topologically noetherian scheme
+form a triangulated subcategory. -/
+instance isTriangulated_boundedConstructible_padicAlgClRingObj
+    [TopologicalSpace.NoetherianSpace X] :
+    (boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)).IsTriangulated :=
+  sorry
+
+end Triangulated
 
 end AlgebraicGeometry.ProEtale
