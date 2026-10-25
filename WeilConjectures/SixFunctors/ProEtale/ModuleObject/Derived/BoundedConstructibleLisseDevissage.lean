@@ -210,6 +210,95 @@ lemma boundedConstructible_lisse_open (hΦ : LisseHypothesis Λ Φ) {D : Scheme.
     (Φ.mapIso ((R((c)_*⟦Λ⟧)).mapIso (D((V.ι)_!open⟦Λ⟧).mapIso e))).symm
     (hΦ D c V E c' _ hL)
 
+/-- The induction step of the dévissage to lisse sheaves, for a constructible sheaf `G` on a
+closed subscheme `c : D ⟶ T` with image in the closed subset `Z`: split `G` along a nonempty open
+`V` of `D` contained in a stratum; the closed piece is supported on `c(D ∖ V) < Z`. -/
+lemma boundedConstructible_lisse_step (hΦ : LisseHypothesis Λ Φ)
+    (Z : TopologicalSpace.Closeds T)
+    (ih : ∀ Z' < Z, ∀ (D : Scheme.{u}) (c : D ⟶ T) [IsClosedImmersion c],
+      Set.range c.base ⊆ Z' →
+      ∀ M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1})
+        (condensedRingObj Λ D)), boundedConstructible _ M →
+        boundedConstructible (condensedRingObj Λ Y) (Φ.obj ((R((c)_*⟦Λ⟧)).obj M)))
+    {D : Scheme.{u}} (c : D ⟶ T) [IsClosedImmersion c] [TopologicalSpace.NoetherianSpace D]
+    (hcZ : Set.range c.base ⊆ Z)
+    (G : Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1}) (condensedRingObj Λ D))
+    (hG : IsConstructibleModuleObject (condensedRingObj Λ D) G) :
+    boundedConstructible (condensedRingObj Λ Y)
+      (Φ.obj ((R((c)_*⟦Λ⟧)).obj ((DerivedCategory.singleFunctor _ 0).obj G))) := by
+  rcases isEmpty_or_nonempty D with hD | hD
+  · exact boundedConstructible_of_isZero Λ (Φ.map_isZero ((R((c)_*⟦Λ⟧)).map_isZero
+      (isZero_derivedCategory_of_isEmpty' Λ _)))
+  have hGc := hG
+  obtain ⟨S, hS⟩ := hG
+  obtain ⟨a, V, ⟨v, hv⟩, hVS⟩ := exists_nonempty_opens_subset_stratum S
+  have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  obtain ⟨D'', i', _, hi'⟩ : ∃ (D'' : Scheme.{u}) (i' : D'' ⟶ D), IsClosedImmersion i' ∧
+      Set.range i'.base = (V : Set D)ᶜ :=
+    ⟨_, V.closedComplement, inferInstance, V.range_closedComplement⟩
+  have hc : IsCompl (Set.range i'.base) (Set.range V.ι.base) := by
+    rw [hi', Scheme.Opens.range_ι]
+    exact isCompl_compl.symm
+  obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_derived Λ V.ι i' hc
+    ((DerivedCategory.singleFunctor _ 0).obj G)
+  refine (boundedConstructible _).ext_of_isTriangulatedClosed₂ _
+    ((R((c)_*⟦Λ⟧) ⋙ Φ).map_distinguished _ hT) ?_ ?_
+  · exact boundedConstructible_lisse_open hΦ c S a V hVS G
+      ((isLocallyFinitelyPresented_mapMod_iff Λ _ _).1 (hS a))
+  · let Z' : TopologicalSpace.Closeds T := ⟨c.base '' Set.range i'.base,
+      c.isClosedEmbedding.isClosedMap _ i'.isClosedEmbedding.isClosed_range⟩
+    have hZ' : Z' < Z := by
+      refine SetLike.lt_iff_le_and_exists.2 ⟨fun x ⟨w, _, hw⟩ ↦ hcZ ⟨w, hw⟩,
+        c.base v, hcZ ⟨v, rfl⟩, fun ⟨w, hw, hwv⟩ ↦ ?_⟩
+      rw [c.isClosedEmbedding.injective hwv, hi'] at hw
+      exact hw hv
+    have hrange : Set.range (i' ≫ c).base ⊆ Z' := by
+      rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+      exact subset_rfl
+    exact (boundedConstructible _).prop_of_iso
+      (Φ.mapIso ((rightDerivedLowerStarComp Λ i' c).app _).symm)
+      (ih Z' hZ' D'' (i' ≫ c) hrange _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ
+        i' _ (boundedConstructible_singleFunctor_zero_obj Λ G hGc)))
+
+include Φ in
+/-- **Dévissage of bounded constructible complexes to lisse sheaves on locally closed
+subschemes**: on a scheme `T` with noetherian underlying space, a triangulated functor `Φ` which
+maps the extensions by zero `Rc_* j_! Rc'_* L` of the lisse sheaves `L` along the locally closed
+immersions `E ⟶ W ⊆ D ⟶ T` to bounded constructible complexes
+(`ProEtale.CondensedRing.LisseHypothesis`) maps all bounded constructible complexes to bounded
+constructible complexes. -/
+theorem boundedConstructible_obj_of_forall_lisse [TopologicalSpace.NoetherianSpace T]
+    (hΦ : LisseHypothesis Λ Φ)
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T))} (hK : boundedConstructible _ K) :
+    boundedConstructible (condensedRingObj Λ Y) (Φ.obj K) := by
+  have key : ∀ Z : TopologicalSpace.Closeds T, ∀ (D : Scheme.{u}) (c : D ⟶ T)
+      [IsClosedImmersion c], Set.range c.base ⊆ Z →
+      ∀ M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1})
+        (condensedRingObj Λ D)), boundedConstructible _ M →
+        boundedConstructible (condensedRingObj Λ Y) (Φ.obj ((R((c)_*⟦Λ⟧)).obj M)) := by
+    intro Z
+    induction Z using WellFoundedLT.induction with
+    | ind Z ih =>
+      intro D c _ hcZ M hM
+      have : TopologicalSpace.NoetherianSpace D :=
+        c.isClosedEmbedding.isInducing.noetherianSpace
+      exact boundedConstructible_obj_of_forall_singleFunctor (R((c)_*⟦Λ⟧) ⋙ Φ)
+        (fun G hG ↦ boundedConstructible_lisse_step hΦ Z ih c hcZ G hG) hM
+  have : IsEmpty (⊥ : T.Opens).toScheme := ⟨fun x ↦ by obtain ⟨x, hx⟩ := x; exact hx⟩
+  have : QuasiCompact (⊥ : T.Opens).ι := ⟨fun _ _ _ ↦ (Set.toFinite _).isCompact⟩
+  have hc : IsCompl (Set.range (𝟙 T : T ⟶ T).base) (Set.range (⊥ : T.Opens).ι.base) := by
+    rw [Scheme.Opens.range_ι]
+    exact ⟨Set.disjoint_iff.2 fun x ⟨_, hx⟩ ↦ hx,
+      codisjoint_iff.2 (Set.eq_univ_of_forall fun x ↦ Or.inl ⟨x, rfl⟩)⟩
+  have := isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero Λ (⊥ : T.Opens).ι (𝟙 T)
+    hc (K := K) (isZero_derivedCategory_of_isEmpty' Λ _)
+  exact (boundedConstructible _).prop_of_iso
+    (Φ.mapIso (asIso ((derivedUpperStarLowerStarAdjunction Λ (𝟙 T)).unit.app K)).symm)
+    (key ⊤ T (𝟙 T) (fun _ _ ↦ trivial) _
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ (𝟙 T) K hK))
+
 end Devissage
 
 end AlgebraicGeometry.ProEtale.CondensedRing
