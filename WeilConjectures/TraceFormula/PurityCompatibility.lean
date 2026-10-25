@@ -84,9 +84,10 @@ noncomputable def upperShriekUnitTensorMap (f : X ⟶ Y)
         ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))).app K) ≫
       ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app (𝟙_ _) ▷ K) ≫ (λ_ K).hom)
 
-/-- **Smooth purity for arbitrary coefficients** (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint
-`sk-thm-sp-qbar`, in the form `Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`): for a smooth morphism `f`, the purity
-map `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` is an isomorphism for every bounded constructible `K`.
+/-- Compatibility required from the smooth purity section, to be proved there: **smooth purity
+for arbitrary coefficients** (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `sk-thm-sp-qbar`, in
+the form `Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`): for a smooth morphism `f`, the purity map
+`γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` is an isomorphism for every bounded constructible `K`.
 Together with `isIso_smoothPurityMap`, which identifies `Rf^! ℚ̄_ℓ` with `ℚ̄_ℓ(d)[2d]`, this is the
 adjunction `Rf_! ⊣ Lf^*(-)(d)[2d]` of `sk-thm-sp-qbar`. -/
 theorem isIso_upperShriekUnitTensorMap_of_smooth (f : X ⟶ Y) [Smooth f.left]
@@ -119,10 +120,11 @@ noncomputable def upperShriekBaseChange (sq : IsPullback g' f' f g)
       (boundedConstructibleUpperStar _ ℓ g).map
         ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app L))
 
-/-- **The exceptional inverse image along a smooth morphism commutes with base change** (SGA 4,
-Exposé XVIII, Théorème 3.2.5 together with the compatibility of the trace with base change,
-Théorème 2.9 (Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square with `f` smooth,
-the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism. -/
+/-- Compatibility required from the smooth purity section, to be proved there: **the exceptional
+inverse image along a smooth morphism commutes with base change** (SGA 4, Exposé XVIII,
+Théorème 3.2.5 together with the compatibility of the trace with base change, Théorème 2.9
+(Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square with `f` smooth, the
+exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism. -/
 theorem isIso_upperShriekBaseChange_of_smooth (sq : IsPullback g' f' f g) [Smooth f.left]
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (upperShriekBaseChange ℓ sq L) :=
