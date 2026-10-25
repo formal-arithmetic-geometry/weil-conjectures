@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullback
+public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
@@ -271,5 +271,55 @@ lemma sectionsWithSupportTrianglePullback_app_hom₂
   rfl
 
 end Pair
+
+end AlgebraicGeometry.Etale
+
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] [HasDerivedCategory C]
+  [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
+
+lemma rightDerivedFunctorNatTrans_id (F : C ⥤ D) [F.Additive] :
+    rightDerivedFunctorNatTrans (𝟙 F) = 𝟙 _ := by
+  simp only [rightDerivedFunctorNatTrans, NatTrans.mapHomotopyCategory_id,
+    Functor.whiskerRight_id', rightDerivedNatTrans_id]
+
+
+end CategoryTheory.Functor
+
+namespace AlgebraicGeometry.Etale
+
+variable {Λ : Type (u + 1)} [CommRing Λ] {Y Y' : Scheme.{u}} (π : Y' ⟶ Y) [IsFinite π]
+  [Etale π] (d : ℕ)
+
+/-- **The finite étale trace on the restriction of derived sections** (blueprint
+`det-tf-restriction-zero-trace-descent`): for a finite étale `π : Y' ⟶ Y` all of whose geometric
+fibres have `d` points, the restriction `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived sections over the
+terminal étale schemes, followed by a trace, is multiplication by `d`. -/
+theorem exists_sectionsRestriction_app_comp_eq_smul
+    (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      Nat.card (π.GeometricFiber s) = d)
+    (M : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃ t, (sectionsRestriction _ π (V := Scheme.Etale.mk (𝟙 Y)) (W := Scheme.Etale.mk (𝟙 Y'))
+      π rfl).app M ≫ t = (d : ℤ) • 𝟙 _ := by
+  let A := ModuleCat.{u + 1} Λ
+  obtain ⟨t, ht⟩ := exists_rightDerivedPullback_app_comp_eq_smul π d hdeg M
+  let τ := Sheaf.natTransΓRes Y.smallEtaleTopology A (op (Scheme.Etale.mk (𝟙 Y)))
+  let τ' := Sheaf.natTransΓRes Y'.smallEtaleTopology A (op (Scheme.Etale.mk (𝟙 Y')))
+  have hc := congr_app (Functor.rightDerivedFunctorNatTrans_comp_rightDerivedPullback (π)^*[A]
+    τ τ' (ΓPullback A π) (sectionsPullback A π (V := Scheme.Etale.mk (𝟙 Y))
+      (W := Scheme.Etale.mk (𝟙 Y')) π rfl) (by
+        refine NatTrans.ext (funext fun F ↦ ?_)
+        exact (ΓPullback_app_comp_ΓRes A π (V := Scheme.Etale.mk (𝟙 Y))
+          (W := Scheme.Etale.mk (𝟙 Y')) π rfl F).symm)) M
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hc
+  refine ⟨inv ((Functor.rightDerivedFunctorNatTrans τ').app ((π)^*[A].mapDerivedCategory.obj M)) ≫
+    t ≫ (Functor.rightDerivedFunctorNatTrans τ).app M, ?_⟩
+  change (sectionsRestriction A π (V := Scheme.Etale.mk (𝟙 Y)) (W := Scheme.Etale.mk (𝟙 Y'))
+    π rfl).app M ≫ _ = _
+  rw [← cancel_epi ((Functor.rightDerivedFunctorNatTrans τ).app M)]
+  simp only [sectionsRestriction] at hc ⊢
+  rw [reassoc_of% hc, IsIso.hom_inv_id_assoc, reassoc_of% ht, Preadditive.comp_zsmul,
+    Preadditive.zsmul_comp, Category.id_comp, Category.comp_id]
 
 end AlgebraicGeometry.Etale

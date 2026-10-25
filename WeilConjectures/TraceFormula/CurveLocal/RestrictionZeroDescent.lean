@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroChain
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTraceDescent
+public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace
 
 /-!
 
@@ -80,5 +81,23 @@ theorem sectionsRestriction_app_eq_zero_of_trace
       simpa only [assoc, Scheme.Hom.resLE_comp_ι] using hπ.symm
   exact DerivedCategory.eq_zero_of_comp_trace_of_isUnit (p₁ := 𝟙 _) (r' := 0)
     (by rw [h₁, comp_zero]) ht hd rfl
+
+include hw hπ in
+/-- **Descent of the vanishing along a finite étale cover of invertible degree** (blueprint
+`det-tf-restriction-zero-trace-descent`): if `π_U : U' ⟶ U` is finite étale, all of its geometric
+fibres have `d` points and `d` is invertible in `Λ`, the vanishing of the upstairs restriction
+`RΓ(T' ∖ W', π^* P) ⟶ RΓ(U', ψ'^* π^* P)` implies that of the downstairs restriction
+`RΓ(T ∖ W, P) ⟶ RΓ(U, ψ^* P)`: trace after pullback along `π_U` is multiplication by `d`. -/
+theorem sectionsRestriction_app_eq_zero_of_finite_etale [IsFinite πU] [Etale πU]
+    (P : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (d : ℕ)
+    (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U),
+      Nat.card (πU.GeometricFiber s) = d) (hd : IsUnit (d : Λ))
+    (hup : (sectionsRestriction _ (ψ' ≫ w'.openComplement.ι)
+      (V := Scheme.Etale.mk w'.openComplement.ι) (W := Scheme.Etale.mk (𝟙 _)) ψ'
+      (Category.id_comp _).symm).app ((π)^*[ModuleCat.{u + 1} Λ].mapDerivedCategory.obj P) = 0) :
+    (sectionsRestriction _ (ψ ≫ w.openComplement.ι) (V := Scheme.Etale.mk w.openComplement.ι)
+      (W := Scheme.Etale.mk (𝟙 _)) ψ (Category.id_comp _).symm).app P = 0 :=
+  sectionsRestriction_app_eq_zero_of_trace π w w' hw ψ ψ' πU hπ P (d := d)
+    (by exact_mod_cast hd) (exists_sectionsRestriction_app_comp_eq_smul πU d hdeg _) hup
 
 end AlgebraicGeometry.Etale
