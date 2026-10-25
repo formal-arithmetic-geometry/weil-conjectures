@@ -65,7 +65,11 @@ section Oplax
 variable [F.OplaxMonoidal]
 
 /-- The transpose of the Künneth map, `F (P M ⊗ C₀) ⟶ Q M ⊗ D₀`, as a natural transformation in
-`M`: the oplax structure map of `F` followed by `e_M ⊗ c`. -/
+`M`: the oplax structure map of `F` followed by `e_M ⊗ c`,
+```
+F (P M ⊗ C₀) ──δ──▶ F (P M) ⊗ F C₀ ──e_M ⊗ c──▶ Q M ⊗ D₀.
+```
+-/
 def kunnethAdjointNatTrans :
     (P ⋙ (curriedTensor D).flip.obj C₀) ⋙ F ⟶ Q ⋙ (curriedTensor C).flip.obj D₀ :=
   (Functor.associator _ _ _).hom ≫
@@ -80,7 +84,11 @@ lemma kunnethAdjointNatTrans_app (M : 𝒳) :
   simp [kunnethAdjointNatTrans, tensorHom_def]
 
 /-- **The Künneth map** `P M ⊗ C₀ ⟶ G (Q M ⊗ D₀)`, as a natural transformation in `M`: the
-transpose along `F ⊣ G` of `kunnethAdjointNatTrans`. -/
+transpose along `F ⊣ G` of `kunnethAdjointNatTrans`, that is, the composite
+```
+P M ⊗ C₀ ──η──▶ G F (P M ⊗ C₀) ──G (δ ≫ (e_M ⊗ c))──▶ G (Q M ⊗ D₀).
+```
+-/
 def kunnethNatTrans :
     P ⋙ (curriedTensor D).flip.obj C₀ ⟶ (Q ⋙ (curriedTensor C).flip.obj D₀) ⋙ G :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ adj.unit ≫

@@ -244,37 +244,3 @@ instance [HasWeakSheafify J AddCommGrpCat.{w}]
 end Sheaf
 
 end CategoryTheory
-
-section
-
-open AlgebraicGeometry
-
-variable {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] (n : ℕ)
-  (hR : ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R,
-    (n : ℤ) • 𝟙 ((Mod.forget R).obj M) = 0)
-
-noncomputable example :
-    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
-      Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) :=
-  Sheaf.zmodModuleLift n (Mod.forget R) hR
-
-noncomputable example : Sheaf.zmodModuleLift n (Mod.forget R) hR ⋙
-    sheafCompose _ (forget₂ _ AddCommGrpCat.{u + 1}) ≅ Mod.forget R :=
-  Sheaf.zmodModuleLiftCompIso n (Mod.forget R) hR
-
-variable {𝒜 : Type*} [Category* 𝒜] [Preadditive 𝒜]
-  (P : 𝒜 ⥤ Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-  (hP : ∀ a, (n : ℤ) • 𝟙 (P.obj a) = 0)
-
-example [PreservesFiniteLimits P] : PreservesFiniteLimits (Sheaf.zmodModuleLift n P hP) :=
-  inferInstance
-
-example [PreservesFiniteColimits P] : PreservesFiniteColimits (Sheaf.zmodModuleLift n P hP) :=
-  inferInstance
-
-example [P.Additive] : (Sheaf.zmodModuleLift n P hP).Additive := inferInstance
-
-example [P.ReflectsIsomorphisms] : (Sheaf.zmodModuleLift n P hP).ReflectsIsomorphisms :=
-  inferInstance
-
-end
