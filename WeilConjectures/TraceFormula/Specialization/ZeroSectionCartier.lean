@@ -10,7 +10,7 @@ public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.TraceFormula.OpenClosedTriangle
-public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
+public import WeilConjectures.TraceFormula.Specialization.DefectLocal
 
 /-!
 
@@ -118,76 +118,15 @@ lemma isPullback_centreι_blowupOverHom :
 
 /-! ### The complement of the centre -/
 
-/-- The complement `X ∖ Z` of the centre, an open subset of `X`. -/
-noncomputable abbrev centreComplOpens : X.left.Opens :=
-  I.support.compl
-
-/-- The complement `U = X ∖ Z` of the centre, as a `k`-scheme. -/
-noncomputable abbrev centreCompl : Over (Spec (.of k)) :=
-  Over.mk ((centreComplOpens X I).ι ≫ X.hom)
-
-/-- The open immersion `j : U = X ∖ Z ⟶ X`. -/
-noncomputable abbrev centreComplι : centreCompl X I ⟶ X :=
-  Over.homMk (centreComplOpens X I).ι
-
-instance : IsOpenImmersion (centreComplι X I).left :=
-  inferInstanceAs (IsOpenImmersion (centreComplOpens X I).ι)
-
-instance [LocallyOfFiniteType X.hom] : LocallyOfFiniteType (centreCompl X I).hom :=
-  inferInstanceAs (LocallyOfFiniteType ((centreComplOpens X I).ι ≫ X.hom))
-
-instance [IsSeparated X.hom] : IsSeparated (centreCompl X I).hom :=
-  inferInstanceAs (IsSeparated ((centreComplOpens X I).ι ≫ X.hom))
-
-instance [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] : QuasiCompact (centreCompl X I).hom := by
-  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
-  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
-  have : IsNoetherian X.left := ⟨⟩
-  have : QuasiCompact (centreComplOpens X I).ι := inferInstance
-  exact inferInstanceAs (QuasiCompact ((centreComplOpens X I).ι ≫ X.hom))
-
-/-- The complement of the centre and the centre are complementary. -/
-lemma isCompl_range_centreComplι :
-    IsCompl (Set.range (centreComplι X I).left.base) (Set.range (centreι X I).left.base) := by
-  have h₁ : Set.range (centreComplι X I).left.base = centreComplOpens X I :=
-    Scheme.Opens.range_ι _
-  have h₂ : Set.range (centreι X I).left.base = I.support :=
-    IdealSheafData.range_subschemeι I
-  rw [h₁, h₂]
-  exact isCompl_compl.symm
-
-/-- The inverse image `b⁻¹ U` of the complement of the centre in the blow-up. -/
-noncomputable abbrev blowupCentreCompl : Over (Spec (.of k)) :=
-  Over.mk (((blowupOverHom X I).left ⁻¹ᵁ centreComplOpens X I).ι ≫ (blowupOver X I).hom)
-
-/-- The open immersion `j' : b⁻¹ U ⟶ X'`. -/
-noncomputable abbrev blowupCentreComplι : blowupCentreCompl X I ⟶ blowupOver X I :=
-  Over.homMk ((blowupOverHom X I).left ⁻¹ᵁ centreComplOpens X I).ι
-
-instance [LocallyOfFiniteType X.hom] : LocallyOfFiniteType (blowupCentreCompl X I).hom :=
-  inferInstanceAs (LocallyOfFiniteType (((blowupOverHom X I).left ⁻¹ᵁ centreComplOpens X I).ι ≫
-    (blowupOver X I).hom))
-
-instance [LocallyOfFiniteType X.hom] [IsSeparated X.hom] :
-    IsSeparated (blowupCentreCompl X I).hom :=
-  inferInstanceAs (IsSeparated (((blowupOverHom X I).left ⁻¹ᵁ centreComplOpens X I).ι ≫
-    (blowupOver X I).hom))
-
-instance [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] :
-    QuasiCompact (blowupCentreCompl X I).hom := by
-  have : IsLocallyNoetherian (blowupOver X I).left :=
-    LocallyOfFiniteType.isLocallyNoetherian (blowupOver X I).hom
-  have : CompactSpace (blowupOver X I).left :=
-    QuasiCompact.compactSpace_of_compactSpace (blowupOver X I).hom
-  have : IsNoetherian (blowupOver X I).left := ⟨⟩
-  have : QuasiCompact ((blowupOverHom X I).left ⁻¹ᵁ centreComplOpens X I).ι := inferInstance
-  exact inferInstanceAs (QuasiCompact (((blowupOverHom X I).left ⁻¹ᵁ centreComplOpens X I).ι ≫
-    (blowupOver X I).hom))
+/-- The inverse image `b⁻¹ U` of the complement `U = X ∖ Z` of the centre in the blow-up. -/
+noncomputable abbrev blowupCentreComplOpens : (blowupOver X I).left.Opens :=
+  (blowupOverHom X I).left ⁻¹ᵁ I.support.compl
 
 /-- The restriction `b_U : b⁻¹ U ⟶ U` of the blow-up morphism, an isomorphism. -/
-noncomputable def blowupCentreComplRestrict : blowupCentreCompl X I ⟶ centreCompl X I :=
-  Over.homMk ((blowupOverHom X I).left ∣_ centreComplOpens X I) (by
-    change _ ≫ (centreComplOpens X I).ι ≫ X.hom = _
+noncomputable def blowupCentreComplRestrict :
+    overRestrict (blowupOver X I) (blowupCentreComplOpens X I) ⟶ overRestrict X I.support.compl :=
+  Over.homMk ((blowupOverHom X I).left ∣_ I.support.compl) (by
+    change _ ≫ Scheme.Opens.ι I.support.compl ≫ X.hom = _
     rw [morphismRestrict_ι_assoc]
     rfl)
 
@@ -196,16 +135,22 @@ instance : IsIso (blowupCentreComplRestrict X I) := by
     I.isIso_blowupMap_restrict_support_compl
   exact isIso_of_reflects_iso _ (Over.forget _)
 
-/-- The blow-up restricted over the complement of the centre is a base change of the blow-up. -/
+/-- The blow-up restricted over the complement of the centre is a base change of the blow-up:
+```
+b⁻¹ U ⟶ X'
+  │      │
+  U  ⟶   X
+```
+-/
 lemma isPullback_blowupCentreComplRestrict :
-    IsPullback (blowupCentreComplι X I) (blowupCentreComplRestrict X I) (blowupOverHom X I)
-      (centreComplι X I) := by
-  have w : blowupCentreComplRestrict X I ≫ centreComplι X I =
-      blowupCentreComplι X I ≫ blowupOverHom X I := by
+    IsPullback (overRestrictι (blowupOver X I) (blowupCentreComplOpens X I))
+      (blowupCentreComplRestrict X I) (blowupOverHom X I) (overRestrictι X I.support.compl) := by
+  have w : blowupCentreComplRestrict X I ≫ overRestrictι X I.support.compl =
+      overRestrictι (blowupOver X I) (blowupCentreComplOpens X I) ≫ blowupOverHom X I := by
     ext1
     exact morphismRestrict_ι _ _
   exact (IsPullback.of_map (Over.forget _) w
-    (isPullback_morphismRestrict (blowupOverHom X I).left (centreComplOpens X I))).flip
+    (isPullback_morphismRestrict (blowupOverHom X I).left I.support.compl)).flip
 
 /-! ### The reduction -/
 
@@ -215,13 +160,13 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
 
 /-- A bounded constructible complex with `Li^* K = 0` is the extension by zero of its restriction
 to the complement of the centre: the counit `j_! j^* K ⟶ K` is an isomorphism. -/
-lemma isIso_counit_centreComplι_of_isZero (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+lemma isIso_counit_overRestrictι_of_isZero (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (centreι X I)).obj K)) :
     IsIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
-      (centreComplι X I)).counit.app K) := by
+      (overRestrictι X I.support.compl)).counit.app K) := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed_boundedConstructible ℓ
-    (isCompl_range_centreComplι X I) K
+    (isCompl_range_overRestrictι_centreι I) K
   have h : IsZero ((boundedConstructibleLowerStar _ ℓ (centreι X I)).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (centreι X I)).obj K)) :=
     Functor.map_isZero _ hK
@@ -251,25 +196,28 @@ lemma isZero_upperStar_centreι_lowerStar_blowupOverHom
 
 /-- The restrictions of `L` and `Rb_* Lb^* L` to the complement `U` of the centre agree, by proper
 base change, `b` being an isomorphism over `U`. -/
-noncomputable def upperStarCentreComplιLowerStarBlowupOverHomIso
+noncomputable def upperStarOverRestrictιLowerStarBlowupOverHomIso
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (centreComplι X I)).obj
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (overRestrictι X I.support.compl)).obj
         ((boundedConstructibleLowerStar _ ℓ (blowupOverHom X I)).obj
           ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L)) ≅
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (centreComplι X I)).obj L :=
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (overRestrictι X I.support.compl)).obj L :=
   haveI := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
     (isPullback_blowupCentreComplRestrict X I)
   (asIso (boundedConstructibleBaseChange _ ℓ
       (isPullback_blowupCentreComplRestrict X I).toCommSq)).app
       ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L) ≪≫
     (boundedConstructibleLowerStar _ ℓ (blowupCentreComplRestrict X I)).mapIso
-      (((boundedConstructibleUpperStarComp _ ℓ (blowupCentreComplι X I)
+      (((boundedConstructibleUpperStarComp _ ℓ
+          (overRestrictι (blowupOver X I) (blowupCentreComplOpens X I))
           (blowupOverHom X I)).app L).symm ≪≫
         eqToIso (by rw [(isPullback_blowupCentreComplRestrict X I).w]) ≪≫
         (boundedConstructibleUpperStarComp _ ℓ (blowupCentreComplRestrict X I)
-          (centreComplι X I)).app L) ≪≫
+          (overRestrictι X I.support.compl)).app L) ≪≫
     (boundedConstructibleUpperStarLowerStarIsoOfIsIso ℓ (blowupCentreComplRestrict X I)).app
-      ((boundedConstructibleUpperStar _ ℓ (centreComplι X I)).obj L)
+      ((boundedConstructibleUpperStar _ ℓ (overRestrictι X I.support.compl)).obj L)
 
 /-- If `Li^* L = 0`, then `L ≅ Rb_* Lb^* L`: both are the extension by zero of their (isomorphic)
 restrictions to the complement of the centre. -/
@@ -279,15 +227,15 @@ noncomputable def lowerStarUpperStarBlowupOverHomIso
       (centreι X I)).obj L)) :
     L ≅ (boundedConstructibleLowerStar _ ℓ (blowupOverHom X I)).obj
       ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L) :=
-  haveI := isIso_counit_centreComplι_of_isZero X I L hL
-  haveI := isIso_counit_centreComplι_of_isZero X I _
+  haveI := isIso_counit_overRestrictι_of_isZero X I L hL
+  haveI := isIso_counit_overRestrictι_of_isZero X I _
     (isZero_upperStar_centreι_lowerStar_blowupOverHom X I L hL)
   (asIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
-      (centreComplι X I)).counit.app L)).symm ≪≫
-    (boundedConstructibleLowerShriek _ ℓ (centreComplι X I)).mapIso
-      (upperStarCentreComplιLowerStarBlowupOverHomIso X I L).symm ≪≫
+      (overRestrictι X I.support.compl)).counit.app L)).symm ≪≫
+    (boundedConstructibleLowerShriek _ ℓ (overRestrictι X I.support.compl)).mapIso
+      (upperStarOverRestrictιLowerStarBlowupOverHomIso X I L).symm ≪≫
     asIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
-      (centreComplι X I)).counit.app _)
+      (overRestrictι X I.support.compl)).counit.app _)
 
 /-- **Reduction of the defect to a Cartier divisor** (blueprint `det-sp-zero-section-cartier`):
 for `L` bounded constructible on `X` with `Li^* L = 0` and `b : X' ⟶ X` the blow-up along `I`,

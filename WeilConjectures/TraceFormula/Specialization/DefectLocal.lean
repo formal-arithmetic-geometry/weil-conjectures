@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.AffineSpaceEmbedding
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
 
@@ -64,7 +66,13 @@ variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y)
 
 /-- Along an open immersion `f : X ⟶ Y` and for `J = f^* I`, the special fibre `𝒳_s` of the
 deformation of `J` is the base change `X ×_Y 𝒴_s` of the special fibre of the deformation of
-`I`. -/
+`I`:
+```
+𝒳_s ⟶ 𝒴_s
+ │      │
+ X  ⟶   Y
+```
+-/
 lemma isPullback_deformationSpecialFibreMap_toBase [IsOpenImmersion f.left]
     (hJI : J = I.comap f.left) :
     IsPullback (deformationSpecialFibreMap f hJ k').left
@@ -166,6 +174,83 @@ lemma exists_mem_range_centreSpecialFibreMap {ι : Type*} {V : ι → Over (Spec
 
 end Centre
 
+/-! ### The special fibre of a constant family is a base change -/
+
+section ConstantFamily
+
+variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k']
+
+/-- The projection `N_⊥ Z ⟶ Z` from the special fibre `N_⊥ Z ≅ Z ⊗ k'` of the constant family of
+a `k`-scheme `Z`. -/
+noncomputable abbrev constantSpecialFibreProj (Z : Over (Spec (.of k))) :
+    (deformationSpecialFibre Z ⊥ k').left ⟶ Z.left :=
+  deformationSpecialToTotal Z ⊥ k' ≫ deformationTotalToBase Z ⊥ k'
+
+variable {A B : Over (Spec (.of k))} (g : A ⟶ B)
+  (hg : ∀ ⦃U' : A.left.AffineZariskiSite⦄ ⦃U : B.left.AffineZariskiSite⦄
+    (hU : U'.1 ≤ g.left ⁻¹ᵁ U.1), ((⊥ : B.left.IdealSheafData).siteIdeal U).map
+      (g.left.appLE U.1 U'.1 hU).hom ≤ (⊥ : A.left.IdealSheafData).siteIdeal U')
+
+/-- The special fibre of the constant family is a base change: for `g : A ⟶ B`, the square
+```
+N_⊥ A ⟶ N_⊥ B
+  │        │
+  A   ⟶    B
+```
+is a pullback, that is, `A ⊗ k' = A ×_B (B ⊗ k')`. -/
+lemma isPullback_deformationSpecialFibreMap_bot :
+    IsPullback (deformationSpecialFibreMap g hg k').left (constantSpecialFibreProj k' A)
+      (constantSpecialFibreProj k' B) g.left :=
+  (isPullback_deformationSpecialFibreMap g hg k').paste_vert
+    ((isPullback_deformationTotalMap g hg k').paste_vert
+      (IdealSheafData.isPullback_deformationSpaceMap_bot g.left hg))
+
+variable {X X' : Over (Spec (.of k))} (f : X' ⟶ X) (I : X.left.IdealSheafData)
+
+/-- The map `N_⊥ Z' ⟶ N_⊥ Z` of special fibres of the constant families of the centres is the base
+change of the restriction `f_Z : Z' ⟶ Z`. -/
+lemma isPullback_centreSpecialFibreMap :
+    IsPullback (centreSpecialFibreMap f I k').left
+      (constantSpecialFibreProj k' (centre X' (I.comap f.left)))
+      (constantSpecialFibreProj k' (centre X I)) (centreMap f I).left :=
+  isPullback_deformationSpecialFibreMap_bot k' _ _
+
+@[reassoc]
+lemma centreSpecialFibreMap_constantSpecialFibreProj :
+    (centreSpecialFibreMap f I k').left ≫ constantSpecialFibreProj k' (centre X I) =
+      constantSpecialFibreProj k' (centre X' (I.comap f.left)) ≫ (centreMap f I).left :=
+  (isPullback_centreSpecialFibreMap k' f I).w
+
+/-- The image of `N_⊥ Z' ⟶ N_⊥ Z` is the inverse image of the image of `f_Z : Z' ⟶ Z`. -/
+lemma range_centreSpecialFibreMap_eq_preimage :
+    Set.range (centreSpecialFibreMap f I k').left =
+      constantSpecialFibreProj k' (centre X I) ⁻¹' Set.range (centreMap f I).left :=
+  Scheme.range_snd_of_isPullback (isPullback_centreSpecialFibreMap k' f I).flip
+
+/-- For `f₁ : X'' ⟶ X'` and `f₂ : X' ⟶ X` with `f₁ ≫ f₂` finite, the composite of the maps of
+special fibres of the constant families of the centres `N_⊥ Z'' ⟶ N_⊥ Z' ⟶ N_⊥ Z` is finite. -/
+lemma isFinite_centreSpecialFibreMap_comp {X'' : Over (Spec (.of k))} (f₁ : X'' ⟶ X')
+    [IsFinite (f₁ ≫ f).left] :
+    IsFinite ((centreSpecialFibreMap f₁ (I.comap f.left) k').left ≫
+      (centreSpecialFibreMap f I k').left) := by
+  have hc : (centreMap f₁ (I.comap f.left) ≫ centreMap f I) ≫ centreι X I =
+      centreι X'' ((I.comap f.left).comap f₁.left) ≫ f₁ ≫ f := by
+    simp [centreMap_centreι, centreMap_centreι_assoc]
+  have : IsFinite (f₁.left ≫ f.left) := ‹IsFinite (f₁ ≫ f).left›
+  have : IsFinite (((centreMap f₁ (I.comap f.left)).left ≫ (centreMap f I).left) ≫
+      (centreι X I).left) := by
+    have h := congrArg (fun φ ↦ φ.left) hc
+    simp only [Over.comp_left] at h
+    rw [h]
+    infer_instance
+  have : IsFinite ((centreMap f₁ (I.comap f.left)).left ≫ (centreMap f I).left) :=
+    IsFinite.of_comp _ (centreι X I).left
+  exact MorphismProperty.of_isPullback
+    ((isPullback_centreSpecialFibreMap k' f₁ (I.comap f.left)).paste_horiz
+      (isPullback_centreSpecialFibreMap k' f I)).flip this
+
+end ConstantFamily
+
 /-! ### Locality of the vanishing of the defect -/
 
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))} (I : X.left.IdealSheafData)
@@ -196,5 +281,33 @@ theorem isZero_specializationDefect_of_cover {ι : Type*} [Finite ι] {V : ι �
     exact ((h a).of_iso e.symm).isIso (Functor.map_isZero _ (isZero_zero _)) _
   exact ((isIsoZero_iff_source_target_isZero _ _).1 (hP.isIso
     (0 : specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj ⟶ 0))).1
+
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
+/-- The complement `X ∖ Z` of the centre and the centre are complementary. -/
+lemma isCompl_range_overRestrictι_centreι :
+    IsCompl (Set.range (overRestrictι X I.support.compl).left.base)
+      (Set.range (centreι X I).left.base) := by
+  have h : Set.range (centreι X I).left.base = I.support := IdealSheafData.range_subschemeι I
+  rw [range_overRestrictι, h]
+  exact isCompl_compl.symm
+
+variable (X) in
+/-- **Reduction to complexes vanishing on the centre** (blueprint
+`det-sp-defect-closed-vanishing`, last assertion): if `C_{X,Z}(L₀) = 0` for every bounded
+constructible `L₀` with `Li^* L₀ = 0`, then `C_{X,Z}(L) = 0` for every `L`. Indeed
+`C_{X,Z}(L) ≅ C_{X,Z}(j_! j^* L)` for the complement `j : X ∖ Z ⟶ X`, and `Li^* j_! = 0`. -/
+theorem isZero_specializationDefect_of_forall_isZero_upperStar
+    (h : ∀ L₀ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (centreι X I)).obj L₀) →
+      IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L₀.obj))
+    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
+  have hj := isCompl_range_overRestrictι_centreι I
+  obtain ⟨e⟩ := nonempty_specializationDefect_lowerShriek_upperStar_iso X I k'
+    (overRestrictι X I.support.compl) hj L
+  exact (h _ (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ _
+    (centreι X I) hj.disjoint _)).of_iso e.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

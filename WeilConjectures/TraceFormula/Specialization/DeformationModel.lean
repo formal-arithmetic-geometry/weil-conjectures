@@ -264,7 +264,13 @@ lemma deformationTotalMap_toTrait :
   (pullback.lift_snd _ _ _).trans (Category.comp_id _)
 
 /-- The total space `𝒳` of the deformation of `J` is the base change of the total space `𝒴` of
-the deformation of `I` along the morphism of deformation spaces `D_J X ⟶ D_I Y`. -/
+the deformation of `I` along the morphism of deformation spaces `D_J X ⟶ D_I Y`:
+```
+ 𝒳   ⟶   𝒴
+ │        │
+D_J X ⟶ D_I Y
+```
+-/
 lemma isPullback_deformationTotalMap :
     IsPullback (deformationTotalMap f hJ k') (deformationTotalToSpace X J k')
       (deformationTotalToSpace Y I k') (IdealSheafData.deformationSpaceMap f.left I J hJ) :=
@@ -307,7 +313,13 @@ lemma deformationSpecialFibreMap_toTotal :
   pullback.lift_fst _ _ _
 
 /-- The special fibre `𝒳_s` of the deformation of `J` is the base change of the special fibre
-`𝒴_s` of the deformation of `I` along the morphism of total spaces `𝒳 ⟶ 𝒴`. -/
+`𝒴_s` of the deformation of `I` along the morphism of total spaces `𝒳 ⟶ 𝒴`:
+```
+𝒳_s ⟶ 𝒴_s
+ │      │
+ 𝒳  ⟶  𝒴
+```
+-/
 lemma isPullback_deformationSpecialFibreMap :
     IsPullback (deformationSpecialFibreMap f hJ k').left (deformationSpecialToTotal X J k')
       (deformationSpecialToTotal Y I k') (deformationTotalMap f hJ k') :=

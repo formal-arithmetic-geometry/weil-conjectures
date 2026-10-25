@@ -293,6 +293,29 @@ lemma isClosedImmersion_deformationSpaceMap_bot [IsClosedImmersion h]
     (IsIso.eq_comp_inv _).mpr (polynomialSpecMap_polynomialSpecToAffineSpace h)]
   infer_instance
 
+/-- Along any morphism `h : X' ⟶ X`, the deformation space `D_⊥ X' ≅ 𝔸¹_{X'}` of the zero ideal
+is the base change of `D_⊥ X ≅ 𝔸¹_X` along `h`:
+```
+D_⊥ X' ⟶ D_⊥ X
+  │         │
+  X'   ⟶    X
+```
+-/
+lemma isPullback_deformationSpaceMap_bot
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      ((⊥ : X.IdealSheafData).siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤
+        (⊥ : X'.IdealSheafData).siteIdeal U') :
+    IsPullback (deformationSpaceMap h ⊥ ⊥ hJ) (⊥ : X'.IdealSheafData).deformationSpaceProj
+      (⊥ : X.IdealSheafData).deformationSpaceProj h := by
+  have e (Y : Scheme.{u}) : (⊥ : Y.IdealSheafData).deformationSpaceProj =
+      ((⊥ : Y.IdealSheafData).deformationSpaceToPolynomialSpec ≫ Y.polynomialSpecToAffineSpace) ≫
+        𝔸(ULift.{u} (Fin 1); Y) ↘ Y := by
+    simpa [AffineSpace.map_id] using (deformationSpaceProj_over' (⊥ : Y.IdealSheafData) (𝟙 Y)).symm
+  rw [e X, e X']
+  refine IsPullback.paste_vert (IsPullback.of_vert_isIso ⟨?_⟩) (AffineSpace.isPullback_map h)
+  rw [deformationSpaceMap_toPolynomialSpec_assoc, Category.assoc,
+    polynomialSpecMap_polynomialSpecToAffineSpace]
+
 section OpenImmersion
 
 variable [IsOpenImmersion h]

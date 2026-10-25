@@ -52,30 +52,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- An affine open `U` of a `k`-scheme `X`, as a `k`-scheme. -/
-noncomputable abbrev affineOpenOver (U : X.left.affineOpens) : Over (Spec (.of k)) :=
-  Over.mk (U.1.ι ≫ X.hom)
-
-/-- The open immersion of an affine open `U` of `X`. -/
-noncomputable abbrev affineOpenOverι (U : X.left.affineOpens) : affineOpenOver U ⟶ X :=
-  Over.homMk U.1.ι
-
-instance (U : X.left.affineOpens) : IsOpenImmersion (affineOpenOverι U).left :=
-  inferInstanceAs (IsOpenImmersion U.1.ι)
-
-instance (U : X.left.affineOpens) : IsAffine (affineOpenOver U).left :=
-  U.2
-
-instance (U : X.left.affineOpens) : LocallyOfFiniteType (affineOpenOver U).hom :=
-  inferInstanceAs (LocallyOfFiniteType (U.1.ι ≫ X.hom))
-
-instance (U : X.left.affineOpens) : IsSeparated (affineOpenOver U).hom :=
-  inferInstanceAs (IsSeparated (U.1.ι ≫ X.hom))
-
-instance (U : X.left.affineOpens) : QuasiCompact (affineOpenOver U).hom := by
-  have : IsAffine U.1.toScheme := U.2
-  exact inferInstanceAs (QuasiCompact (U.1.ι ≫ X.hom))
-
 /-- **The defect vanishes along an effective Cartier divisor** (proof of blueprint
 `det-sp-zero-section-vanishing`): if `I` is invertible, then `C_{X,Z}(L) = 0`. The assertion is
 local (`ProEtale.CondensedRing.isZero_specializationDefect_of_cover`), and on an affine open where
@@ -89,16 +65,16 @@ theorem isZero_specializationDefect_of_isInvertible (I : X.left.IdealSheafData)
   obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun x : X.left ↦ ((U x).1 : Set X.left))
     (fun x ↦ (U x).1.isOpen) (fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hxU x⟩)
   refine isZero_specializationDefect_of_cover (ℓ := ℓ) I k' (ι := t)
-    (fun a ↦ affineOpenOverι (U a.1)) ?_ L fun a ↦ ?_
+    (fun a ↦ overRestrictι X (U a.1).1) ?_ L fun a ↦ ?_
   · refine Set.eq_univ_of_forall fun y ↦ ?_
     obtain ⟨x, hx, hy⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ y))
     refine Set.mem_iUnion.mpr ⟨⟨x, hx⟩, ?_⟩
-    change y ∈ Set.range (U x).1.ι.base
-    rw [Scheme.Opens.range_ι]
+    rw [range_overRestrictι]
     exact hy
   · obtain ⟨b, -, hb⟩ := hU a.1
     have h := IdealSheafData.comap_ι_eq_ofIdealTop_span_singleton I (U a.1) hb
-    change IsZero (specializationDefect (affineOpenOver (U a.1)) (I.comap (U a.1).1.ι) k' _ _)
+    have : IsAffine (overRestrict X (U a.1).1).left := (U a.1).2
+    change IsZero (specializationDefect (overRestrict X (U a.1).1) (I.comap (U a.1).1.ι) k' _ _)
     rw [h]
     exact isZero_specializationDefect_ofIdealTop_span_singleton k' _ _
 
@@ -109,20 +85,13 @@ variable (X) in
 theorem isZero_specializationDefect (I : X.left.IdealSheafData)
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
-  set Λ := Profinite.padicAlgClRingObj ℓ
-  set L₀ := (boundedConstructibleOpenImmersionLowerShriek Λ ℓ (centreComplι X I)).obj
-    ((boundedConstructibleUpperStar Λ ℓ (centreComplι X I)).obj L)
-  have e := (nonempty_specializationDefect_lowerShriek_upperStar_iso X I k' (centreComplι X I)
-    (isCompl_range_centreComplι X I) L).some
-  have h₀ : IsZero ((boundedConstructibleUpperStar Λ ℓ (centreι X I)).obj L₀) :=
-    isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ (centreComplι X I)
-      (centreι X I) (isCompl_range_centreComplι X I).disjoint _
+  refine isZero_specializationDefect_of_forall_isZero_upperStar (k' := k') X I (fun L₀ h₀ ↦ ?_) L
   have e₂ := (nonempty_specializationDefect_iso_blowup X I k' L₀ h₀).some
   have h₃ := isZero_specializationDefect_of_isInvertible k' _
     (isInvertible_comap_blowupOverHom X I)
-    ((boundedConstructibleUpperStar Λ ℓ (blowupOverHom X I)).obj L₀)
-  exact ((R(((centreSpecialFibreMap (blowupOverHom X I) I k').left)_*⟦Λ⟧).map_isZero h₃).of_iso
-    e₂).of_iso e.symm
+    ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L₀)
+  exact (R(((centreSpecialFibreMap (blowupOverHom X I) I k').left)_*⟦
+    Profinite.padicAlgClRingObj ℓ⟧).map_isZero h₃).of_iso e₂
 
 variable (X) in
 /-- **The zero-section map is invertible** (blueprint `det-sp-zero-section-vanishing`, for

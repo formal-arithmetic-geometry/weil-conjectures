@@ -371,7 +371,14 @@ noncomputable def pullbackExchange :
 
 /-- If the morphisms of total spaces and of geometric generic fibres of a morphism of models are
 isomorphisms, its pullback exchange `α : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is an isomorphism: the base change
-morphism of the square of geometric generic fibres is invertible by weakly étale base change. -/
+morphism of the square of geometric generic fibres is invertible by weakly étale base change.
+The morphism of models is the commutative diagram
+```
+X ←─ε── M.generic ──j─→ M.total ←──i── X'
+│f      │φ.generic      │φ.total       │f'
+Y ←─ε── N.generic ──j─→ N.total ←──i── Y'
+```
+-/
 lemma isIso_pullbackExchange_of_isIso [IsIso φ.total] [IsIso φ.generic] :
     IsIso (φ.pullbackExchange Λ) := by
   have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)

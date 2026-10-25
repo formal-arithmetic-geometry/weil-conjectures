@@ -118,6 +118,7 @@ noncomputable def zeroSectionMap
         (L(((centreι X I).left)^*⟦Λ⟧).obj L) :=
   ((zeroSectionDeformationModelHom X I k').pullbackExchange Λ).app L
 
+/-- The zero-section map `ε_{X,Z}` is natural in `L`. -/
 lemma zeroSectionMap_naturality
     {L L' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))} (φ : L ⟶ L') :
@@ -127,6 +128,8 @@ lemma zeroSectionMap_naturality
         (L(((centreι X I).left)^*⟦Λ⟧).map φ) :=
   ((zeroSectionDeformationModelHom X I k').pullbackExchange Λ).naturality φ
 
+/-- The zero-section map `ε_{X,Z}(L)` has a cone: it is the first morphism of a distinguished
+triangle. -/
 lemma exists_distTriang_zeroSectionMap
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) :
@@ -146,6 +149,8 @@ noncomputable def specializationDefect
       (condensedRingObj Λ (deformationSpecialFibre (centre X I) ⊥ k').left)) :=
   (exists_distTriang_zeroSectionMap X I k' Λ L).choose
 
+/-- The defect `C_{X,Z}(L)` is the third object of a distinguished triangle on the zero-section map
+`ε_{X,Z}(L)`. -/
 lemma exists_distTriang_specializationDefect
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) :
