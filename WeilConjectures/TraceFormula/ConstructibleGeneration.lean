@@ -54,7 +54,9 @@ dualizable object of `Dᵇc(U)⟦ℚ̲̄_ℓ⟧` (for instance a lisse sheaf pla
 That a locally finitely presented `ℚ̲̄_ℓ`-module is locally free
 (`ProEtale.CondensedRing.isLocallyFree_of_isLocallyFinitelyPresented`) rests on the description
 of the sections of `ℚ̲̄_ℓ` over quasi-compact quasi-separated schemes
-(`ProEtale.CondensedRing.exists_endRegularRingEquiv`).
+(`ProEtale.CondensedRing.exists_endRegularRingEquiv`), itself proved from Bhatt–Scholze,
+Lemma 4.2.12
+(`ProEtale.isIso_continuousMapComparison`).
 
 -/
 

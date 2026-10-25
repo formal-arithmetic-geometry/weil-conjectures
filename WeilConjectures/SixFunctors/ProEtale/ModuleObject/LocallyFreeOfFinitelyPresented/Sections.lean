@@ -8,7 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
 public import WeilConjectures.Mathlib.CategoryTheory.Conj
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 
 /-!
 # Sections of `ℚ̲̄_ℓ,W` over a quasi-compact quasi-separated scheme
@@ -21,13 +23,14 @@ conjugate by `g^* Λ_W ≅ Λ_{W'}`.
 
 For `Λ = ℚ̲̄_ℓ` and `W` quasi-compact and quasi-separated, `Γ(W, ℚ̲̄_ℓ,W)` is the ring of continuous
 functions `W → ℚ̄_ℓ` with values in a finite subextension of `ℚ̄_ℓ / ℚ_ℓ`
-(`PadicAlgCl.finiteIntermediateFieldValued`), restriction being precomposition. This is
-Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12 and §6.8: for a locally compact
-Hausdorff space `T` the pullback of the condensed set `C(-, T)` to the pro-étale site is
-`U ↦ C(U, T)`, and for `U` quasi-compact and quasi-separated taking sections commutes with the
-filtered colimit `ℚ̲̄_ℓ = colim_E E̲` over the finite subextensions `E`. It is stated here as the
-single sorried input `ProEtale.CondensedRing.exists_endRegularRingEquiv`; all the consequences
-below are proved from it.
+(`PadicAlgCl.finiteIntermediateFieldValued`), restriction being precomposition
+(`ProEtale.CondensedRing.exists_endRegularRingEquiv`). This is Bhatt–Scholze, *The pro-étale
+topology for schemes*, Lemma 4.2.12 and §6.8: the pullback of the condensed ring `C(-, E)` to the
+pro-étale site is `U ↦ C(U, E)` for a finite subextension `E`
+(`ProEtale.isIso_continuousMapComparison`, the only sorried input), and for `W` quasi-compact and
+quasi-separated taking sections commutes with the filtered colimit `ℚ̲̄_ℓ = colim_E E̲`
+(`ProEtale.padicAlgClSectionRingEquiv`). On global sections, the restriction of endomorphisms is
+the pullback followed by `α_g` (`ProEtale.CondensedRing.restrictEnd_regularEndRingHom`).
 
 ## Main definitions
 
@@ -72,11 +75,50 @@ lemma restrictEnd_apply {W' W : Scheme.{u}} (g : W' ⟶ W)
       (upperStarObjRegularIso Λ g).inv ≫ (g)^*⟦Λ⟧.map t ≫ (upperStarObjRegularIso Λ g).hom :=
   rfl
 
+/-- On global sections, the restriction of endomorphisms of the regular module is the pullback
+`Γ(W, Λ_W) → Γ(W', g^* Λ_W)` followed by `α_g : g^* Λ_W ≅ Λ_{W'}`. -/
+lemma restrictEnd_regularEndRingHom {W' W : Scheme.{u}} (g : W' ⟶ W)
+    (s : Γ (condensedRingObj Λ W)) :
+    restrictEnd Λ g (Mod.regularEndRingHom s) =
+      Mod.regularEndRingHom
+        (Γ.map (condensedPullbackHom Λ g) (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) := by
+  rw [restrictEnd_apply]
+  have h₁ : (g)^*⟦Λ⟧.map (Mod.regularEndRingHom s) =
+      (Mod.extendScalars (condensedPullbackHom Λ g)).map
+        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) := by
+    rw [← Functor.mapMod_map_regularEndRingHom]
+    rfl
+  have nat : (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g)).inv.app
+        (((g)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ W)).obj
+          (Mod.regular (condensedRingObj Λ W))) ≫
+      (Mod.extendScalars (condensedPullbackHom Λ g)).map
+        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) ≫
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g)).hom.app
+        (((g)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ W)).obj
+          (Mod.regular (condensedRingObj Λ W))) =
+      (Mod.comap (asIso (condensedPullbackHom Λ g)).inv).map
+        (Mod.regularEndRingHom (Γ.mapFunctor (g)^*[Ab.{u + 1}] s)) :=
+    NatIso.naturality_1 _ _
+  rw [h₁, upperStarObjRegularIso, Iso.trans_inv, Iso.trans_hom, Iso.app_inv, Iso.app_hom]
+  simp only [Category.assoc]
+  rw [reassoc_of% nat]
+  refine Mod.regular_hom_ext ?_
+  rw [Mod.comp_hom', Mod.comp_hom', Mod.regularEndRingHom_apply, Mod.regularEndRingHom_apply]
+  have hR₁ : (Mod.regularIsoOfIsIso (condensedPullbackHom Λ g)).inv.hom =
+      inv (condensedPullbackHom Λ g) := rfl
+  have hR₂ : (Mod.regularIsoOfIsIso (condensedPullbackHom Λ g)).hom.hom =
+      condensedPullbackHom Λ g := rfl
+  rw [hR₁, hR₂, Mod.comap_map_hom, ← Category.assoc]
+  erw [IsMonHom.one_hom (inv (condensedPullbackHom Λ g))]
+  rw [← Category.assoc, Mod.one_comp_regularLift_regular, Γ.map_hom]
+  exact congrArg (· ≫ condensedPullbackHom Λ g)
+    (Mod.one_comp_regularLift_regular (Γ.mapFunctor (g)^*[Ab.{u + 1}] s).hom)
+
 end Restrict
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- **Sections of `ℚ̲̄_ℓ` over a quasi-compact quasi-separated scheme** (sorried input).
+/-- **Sections of `ℚ̲̄_ℓ` over a quasi-compact quasi-separated scheme.**
 
 For every quasi-compact quasi-separated scheme `W` there is a ring isomorphism from the
 endomorphisms of the regular module `ℚ̲̄_ℓ,W` (that is, from `Γ(W, ℚ̲̄_ℓ,W)`) onto the continuous
@@ -84,20 +126,13 @@ functions `W → ℚ̄_ℓ` with values in a finite subextension, compatible wit
 morphism `g : W' ⟶ W`, which on functions is precomposition with `g`.
 
 This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12 together with the
-description of `ℚ̄_ℓ,W = colim_E E_W` of §6.8: the pullback of `C(-, E)` from the point is the
-sheaf `U ↦ C(U, E)`, and sections over a quasi-compact quasi-separated object commute with the
-filtered colimit over the finite subextensions `E`.
-
-It is not yet available because the sections of the pullback `p_W^* = π_W^* ∘ p^*`
-(`ProEtale.upperStarFromPoint`) have not been computed. A proof would go as follows. For a
-profinite set `T`, `p^*` sends the representable condensed set `T` to the representable sheaf of
-`Spec LC(T, ℤ)` (left Kan extension of a representable, `p^*` being representably flat), and
-`π_W^*` to the representable sheaf of `W ×_ℤ Spec LC(T, ℤ)`, whose sections over `U` are the
-continuous maps `U → T` (`profiniteLocallyConstantHomEquiv` in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic`). A finite subextension `E` is the
-increasing union of the profinite sets `ϖ⁻ⁿ 𝒪_E`, and `ℚ̲̄_ℓ = colim_E E̲`
-(`isColimitPadicAlgClRingObjCocone`); `p_W^*` commutes with these colimits and, `U`
-being quasi-compact and quasi-separated, so do the sections over `U`. -/
+description of `ℚ̄_ℓ,W = colim_E E_W` of §6.8. The endomorphisms of the regular module are the
+global sections (`CategoryTheory.Mod.regularEndRingHom_bijective`), whose restriction is computed
+by `ProEtale.CondensedRing.restrictEnd_regularEndRingHom`; the global sections of `ℚ̲̄_ℓ,W` are
+computed by `ProEtale.padicAlgClSectionRingEquiv`, compatibly with pullback
+(`ProEtale.Γ_map_condensedPullbackHom_padicAlgClSectionRingHom`). The proof depends on the
+sorried input `ProEtale.isIso_continuousMapComparison`: the pullback of `C(-, E)` from the point
+is the sheaf `U ↦ C(U, E)`. -/
 theorem exists_endRegularRingEquiv :
     ∃ e : ∀ (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W],
         End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W)) ≃+*
@@ -107,7 +142,22 @@ theorem exists_endRegularRingEquiv :
         (t : End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W)))
         (x : W'),
         (e W' (restrictEnd _ g t) : C(W', PadicAlgCl ℓ)) x = (e W t : C(W, PadicAlgCl ℓ)) (g x) :=
-  sorry
+  by
+  have key (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W]
+      (f : PadicAlgCl.finiteIntermediateFieldValued ℓ W) :
+      ((RingEquiv.ofBijective _ Mod.regularEndRingHom_bijective).symm.trans
+        (padicAlgClSectionRingEquiv ℓ W).symm)
+        (Mod.regularEndRingHom (padicAlgClSectionRingHom ℓ W f)) = f := by
+    rw [RingEquiv.trans_apply, ← RingEquiv.ofBijective_apply _ Mod.regularEndRingHom_bijective,
+      RingEquiv.symm_apply_apply]
+    exact (padicAlgClSectionRingEquiv ℓ W).symm_apply_apply f
+  refine ⟨fun W _ _ ↦ (RingEquiv.ofBijective _ Mod.regularEndRingHom_bijective).symm.trans
+    (padicAlgClSectionRingEquiv ℓ W).symm, fun W' W _ _ _ _ g t x ↦ ?_⟩
+  obtain ⟨s, rfl⟩ := Mod.regularEndRingHom_bijective.2 t
+  obtain ⟨f, rfl⟩ := (padicAlgClSectionRingHom_bijective ℓ W).2 s
+  rw [restrictEnd_regularEndRingHom, Γ_map_condensedPullbackHom_padicAlgClSectionRingHom, key,
+    key]
+  rfl
 
 /-- The ring isomorphism `Γ(W, ℚ̲̄_ℓ,W) ≃+* {continuous finite-valued functions W → ℚ̄_ℓ}` for a
 quasi-compact quasi-separated scheme `W`. -/

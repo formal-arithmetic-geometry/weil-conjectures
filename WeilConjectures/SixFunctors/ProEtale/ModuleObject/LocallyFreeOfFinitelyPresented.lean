@@ -41,8 +41,10 @@ locally finitely presented ones. The statement fails on non-noetherian bases.
    a given point, `coker φ` has constant fibre rank, hence is free near that point by Gaussian
    elimination (`ProEtale.CondensedRing.exists_isOpenImmersion_cokernel_iso_finiteFree`).
 
-The only sorried input is the description of the sections of `ℚ̲̄_ℓ` over quasi-compact
-quasi-separated schemes (`ProEtale.CondensedRing.exists_endRegularRingEquiv`).
+The description of the sections of `ℚ̲̄_ℓ` over quasi-compact quasi-separated schemes
+(`ProEtale.CondensedRing.exists_endRegularRingEquiv`) rests on Bhatt–Scholze, Lemma 4.2.12
+(`ProEtale.isIso_continuousMapComparison`).
+
 -/
 
 @[expose] public section
@@ -268,12 +270,10 @@ lemma exists_isOpenImmersion_isFree
 end FiniteType
 
 /-- **A pro-étale locally finitely presented `ℚ̲̄_ℓ`-module on a separated `k`-scheme of finite type
-is locally free.** This is the statement of
-`ProEtale.CondensedRing.isLocallyFree_of_isLocallyFinitelyPresented`
-(`WeilConjectures.TraceFormula.ConstructibleGeneration`), proved from the description of the
-sections of `ℚ̲̄_ℓ` (`ProEtale.CondensedRing.exists_endRegularRingEquiv`). Refine a pro-étale cover
-over which `M` is finitely presented by the Zariski covers of its members given by
-`ProEtale.CondensedRing.exists_isOpenImmersion_isFree`. -/
+is locally free** (the lisse `ℚ̄_ℓ`-sheaves of Bhatt–Scholze, Definition 6.8.6), proved from the
+description of the sections of `ℚ̲̄_ℓ` (`ProEtale.CondensedRing.exists_endRegularRingEquiv`).
+Refine a pro-étale cover over which `M` is finitely presented by the Zariski covers of its
+members given by `ProEtale.CondensedRing.exists_isOpenImmersion_isFree`. -/
 theorem isLocallyFree_of_isLocallyFinitelyPresented (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u}
     [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (Z : Over (Spec (.of k)))
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
