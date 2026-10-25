@@ -8,8 +8,8 @@ module
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
-public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
 
 /-!
 # Compactly supported direct images in a compact support formalism
@@ -42,8 +42,9 @@ variable (F : CompactSupportFormalism.{w, v, u})
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The compactly supported direct image `i_! ⋙ g_*` attached to a compactification
-`c = (X ⟶[i] Z ⟶[g] Y)`. -/
-def shriek (c : Compactification f) : F.obj X ⥤ F.obj Y := F.sh c.i ⋙ F.pf c.g
+`c = (X ⟶[i] Z ⟶[g] Y)`: `CategoryTheory.ExchangeFormalism.shriek` of the factorization
+`X ⟶[c.i] c.Z ⟶[c.g] Y`. -/
+abbrev shriek (c : Compactification f) : F.obj X ⥤ F.obj Y := ExchangeFormalism.shriek F c.i c.g
 
 section Refinement
 
@@ -51,15 +52,12 @@ variable [F.HasBaseChange] {c d e : Compactification f}
 
 /-- **The comparison along a refinement** `r : c.Refinement d` whose square over `X` is
 cartesian: the map `F.shriek d ⟶ F.shriek c` given by the exchange map
-`(𝟙 X)_* ⋙ (d.i)_! ⟶ (c.i)_! ⋙ (r.hom)_*` followed by `(r.hom)_* ⋙ (d.g)_* ≅ (c.g)_*`. -/
+`(𝟙 X)_* ⋙ (d.i)_! ⟶ (c.i)_! ⋙ (r.hom)_*` followed by `(r.hom)_* ⋙ (d.g)_* ≅ (c.g)_*`
+(`CategoryTheory.ExchangeFormalism.refinementComparison`). -/
 noncomputable def refinementComparison (r : c.Refinement d)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) : F.shriek d ⟶ F.shriek c :=
   haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
-  (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pfId X).inv (F.shriek d) ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans (F.pf d.g) ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (F.sh c.i) (F.pfComp' r.hom d.g c.g r.hom_g).inv
+  ExchangeFormalism.refinementComparison F c.i c.g d.i d.g r.hom hr.flip.w r.hom_g
 
 lemma refinementComparison_app (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i)
     (K : F.obj X) :
@@ -67,9 +65,9 @@ lemma refinementComparison_app (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X
     (F.refinementComparison r hr).app K =
       (F.pf d.g).map ((F.sh d.i).map ((F.pfId X).inv.app K) ≫
           (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
-        (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) := by
-  simp [refinementComparison, shriek]
-
+        (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) :=
+  haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  ExchangeFormalism.refinementComparison_app F c.i c.g d.i d.g r.hom hr.flip.w r.hom_g K
 
 /-- **The identity law**: the comparison along a refinement whose map is the identity is the
 identity. -/
@@ -78,18 +76,7 @@ lemma refinementComparison_eq_id (r : c.Refinement c) (hr : IsPullback c.i (𝟙
   obtain ⟨hom, i_hom, hom_g⟩ := r
   subst h
   have := HasBaseChange.isIso_baseChange (F := F) hr.flip
-  ext K
-  have h₁ := congr_app (F.exchange_id_horiz c.i hr.flip.w) K
-  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_hom_app,
-    Functor.rightUnitor_inv_app, Category.id_comp, Functor.comp_obj, Functor.id_obj] at h₁
-  rw [refinementComparison_app, h₁, Category.comp_id, ← Category.assoc, ← Functor.map_comp,
-    Iso.inv_hom_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  rw [F.pfComp'_id_left_inv_app, ← Functor.map_comp, Iso.inv_hom_id_app]
-  erw [CategoryTheory.Functor.map_id]
-  rfl
-
+  exact ExchangeFormalism.refinementComparison_id F c.i c.g _ _
 
 /-- **The composition law**: the comparison along a composite of refinements is the composite of
 the comparisons, in the opposite order. -/
@@ -101,36 +88,8 @@ lemma refinementComparison_comp (r : c.Refinement d) (s : d.Refinement e)
   have := HasBaseChange.isIso_baseChange (F := F) hr.flip
   have := HasBaseChange.isIso_baseChange (F := F) hs.flip
   have := HasBaseChange.isIso_baseChange (F := F) hrs.flip
-  ext K
-  have hpaste := congr_app (F.exchange_paste_horiz (𝟙 X) (𝟙 X) c.i d.i e.i r.hom s.hom (𝟙 X)
-    (r.comp s).hom hr.flip.w hs.flip.w (Category.id_comp _) rfl hrs.flip.w) K
-  have hassoc := congr_app (F.pfComp'_assoc r.hom s.hom e.g (r.comp s).hom d.g c.g rfl s.hom_g
-    (r.comp s).hom_g) ((F.sh c.i).obj K)
-  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id, Functor.comp_obj]
-    at hpaste hassoc
-  have hnat := congrArg (F.pf e.g).map
-    ((F.exchange (𝟙 X) d.i e.i s.hom hs.flip.w).natTrans.naturality ((F.pfId X).inv.app K))
-  have hnat2 := (F.pfComp' s.hom e.g d.g s.hom_g).inv.naturality
-    ((F.sh d.i).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K)
-  have hassoc' : (F.pfComp' s.hom e.g d.g s.hom_g).inv.app ((F.pf r.hom).obj ((F.sh c.i).obj K)) ≫
-      (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) =
-      (F.pf e.g).map ((F.pfComp' r.hom s.hom (r.comp s).hom
-          (Compactification.Refinement.comp_hom r s).symm).inv.app ((F.sh c.i).obj K)) ≫
-        (F.pfComp' (r.comp s).hom e.g c.g (r.comp s).hom_g).inv.app ((F.sh c.i).obj K) := by
-    rw [← cancel_epi ((F.pfComp' s.hom e.g d.g s.hom_g).hom.app
-        ((F.pf r.hom).obj ((F.sh c.i).obj K))),
-      ← cancel_epi ((F.pfComp' r.hom d.g c.g r.hom_g).hom.app ((F.sh c.i).obj K))]
-    simp only [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
-    rw [← reassoc_of% hassoc]
-    simp [← Functor.map_comp_assoc]
-  simp only [Functor.comp_map, Functor.comp_obj, Functor.map_comp] at hnat hnat2
-  rw [NatTrans.comp_app, refinementComparison_app, refinementComparison_app,
-    refinementComparison_app, hpaste, F.pfComp'_id_left_hom_app]
-  simp only [Category.assoc, Functor.map_comp]
-  rw [← reassoc_of% hnat2, hassoc', reassoc_of% hnat]
+  exact ExchangeFormalism.refinementComparison_comp F c.i c.g d.i d.g e.i e.g r.hom s.hom _
+    (Compactification.Refinement.comp_hom r s).symm _ _ _ _ _ _
 
 /-- **The comparison along a refinement, through a base change isomorphism**: if the base change
 map of the square of `r` is `β : c.i_! ≅ d.i_! ⋙ r^*` up to `(𝟙 X)^* ≅ 𝟭`, then the comparison
@@ -142,35 +101,23 @@ lemma refinementComparison_eq_of_baseChange (r : c.Refinement d)
     F.refinementComparison r hr =
       Functor.whiskerRight (Functor.whiskerLeft (F.sh d.i) (F.adj r.hom).unit) (F.pf d.g) ≫
         Functor.whiskerRight β.inv (F.pf r.hom ⋙ F.pf d.g) ≫
-        Functor.whiskerLeft (F.sh c.i) (F.pfComp' r.hom d.g c.g r.hom_g).inv := by
-  have := HasBaseChange.isIso_baseChange (F := F) hr.flip
-  have hinv : inv (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
-      β.inv ≫ (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pbId X).inv (F.sh c.i) := by
-    rw [IsIso.inv_eq_of_hom_inv_id]
-    rw [hβ]
-    ext K
-    simp [← Functor.map_comp]
-  ext K
-  have key : (F.sh d.i).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K =
-      (F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫ (F.pf r.hom).map (β.inv.app K) := by
-    have hc := conjugateEquiv_counit Adjunction.id (F.adj (𝟙 X)) (F.pbId X).hom K
-    rw [← pfId_inv] at hc
-    simp only [exchange, mateEquiv_apply, hinv, NatTrans.comp_app]
-    dsimp [TwoSquare.natTrans]
-    simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
-    have hc' : (F.pbId X).inv.app ((F.pf (𝟙 X)).obj K) ≫ (F.adj (𝟙 X)).counit.app K =
-        (F.pfId X).hom.app K := by
-      rw [← cancel_epi ((F.pfId X).inv.app K)]
-      erw [(F.pbId X).inv.naturality_assoc, hc]
-      simp
-    simp only [← Functor.map_comp, hc']
-    rw [← β.inv.naturality, Functor.map_comp, Functor.comp_map, Adjunction.unit_naturality_assoc,
-      ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-    simp
-  rw [refinementComparison_app, key]
-  simp
+        Functor.whiskerLeft (F.sh c.i) (F.pfComp' r.hom d.g c.g r.hom_g).inv :=
+  haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  ExchangeFormalism.refinementComparison_eq_of_baseChange F c.i c.g d.i d.g r.hom hr.flip.w
+    r.hom_g β hβ
 
+/-- The comparison along a refinement `r`, in terms of the unit of `r^* ⊣ r_*` and the inverse
+of the base change map of the extension by zero of the square of `r`. -/
+lemma refinementComparison_app_eq (r : c.Refinement d)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (K : F.obj X) :
+    haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
+    (F.refinementComparison r hr).app K =
+      (F.pf d.g).map ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫
+        (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+          (F.sh c.i).map ((F.pbId X).hom.app K))) ≫
+        (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) :=
+  haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  ExchangeFormalism.refinementComparison_app_eq F c.i c.g d.i d.g r.hom hr.flip.w r.hom_g K
 
 end Refinement
 
@@ -183,7 +130,7 @@ instance isIso_refinementComparison (r : c.Refinement d)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) : IsIso (F.refinementComparison r hr) := by
   have := HasBaseChange.isIso_baseChange (F := F) hr.flip
   have := HasProperExchange.isIso_exchange (F := F) hr.flip
-  unfold refinementComparison
+  unfold refinementComparison ExchangeFormalism.refinementComparison
   infer_instance
 
 /-- Equal refinements give equal comparisons. -/
@@ -219,7 +166,11 @@ lemma refinementComparison_trans_eq_of_refinement {c d e e' : Compactification f
 variable [QuasiCompact f]
 
 /-- **The comparison of two compactifications**: the isomorphism `F.shriek c ≅ F.shriek d`
-obtained through the common refinement `Compactification.inf c d`. -/
+obtained through the common refinement `Compactification.inf c d`. It does not depend on the
+common refinement (`shriekIso_eq`) and satisfies the cocycle condition (`shriekIso_trans`); the
+comparisons along refinements are the identity for identity refinements
+(`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`). This is the abstract
+form of blueprint `prop-compactification-coherence-detailed`. -/
 noncomputable def shriekIso (c d : Compactification f) : F.shriek c ≅ F.shriek d :=
   asIso (F.refinementComparison (Compactification.infFst c d)
       (Compactification.isPullback_infFst c d)) ≪≫

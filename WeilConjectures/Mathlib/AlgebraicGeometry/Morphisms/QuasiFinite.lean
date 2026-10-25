@@ -18,6 +18,8 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 ## Main statements
 
 - `AlgebraicGeometry.LocallyQuasiFinite.of_etale`: an étale morphism is locally quasi-finite.
+- `AlgebraicGeometry.LocallyQuasiFinite.of_formallyUnramified`: a formally unramified morphism
+  locally of finite type is locally quasi-finite.
 - `AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_eq_of_surjective`: a universally closed,
   locally quasi-finite, surjective morphism of schemes (for instance a finite surjective one)
   preserves the dimension.
@@ -47,6 +49,17 @@ instance (priority := low) LocallyQuasiFinite.of_etale (f : X ⟶ Y) [Etale f] :
   rw [HasRingHomProperty.iff_appLE (P := @LocallyQuasiFinite)]
   intro U V e
   have := HasRingHomProperty.appLE (P := @Etale) f ‹_› U V e
+  algebraize [(f.appLE U V e).hom]
+  exact RingHom.quasiFinite_algebraMap.mpr inferInstance
+
+/-- A formally unramified morphism locally of finite type is locally quasi-finite: on affine
+opens, a formally unramified algebra of finite type is quasi-finite. -/
+instance (priority := low) LocallyQuasiFinite.of_formallyUnramified (f : X ⟶ Y)
+    [FormallyUnramified f] [LocallyOfFiniteType f] : LocallyQuasiFinite f := by
+  rw [HasRingHomProperty.iff_appLE (P := @LocallyQuasiFinite)]
+  intro U V e
+  have h₁ := f.formallyUnramified_appLE U.2 V.2 e
+  have h₂ := HasRingHomProperty.appLE @LocallyOfFiniteType f ‹_› U V e
   algebraize [(f.appLE U V e).hom]
   exact RingHom.quasiFinite_algebraMap.mpr inferInstance
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleVanishingLocus
+public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!

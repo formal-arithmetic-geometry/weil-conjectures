@@ -151,7 +151,10 @@ variable {X'' X' X Y'' Y' Y : Scheme.{u}} {g'' : X'' ⟶ X'} {g' : X' ⟶ X} {f'
   {f' : X' ⟶ Y'} {f : X ⟶ Y} {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
 
 open scoped TwoSquare in
-/-- **Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
+/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+identification, compatibility with horizontal pasting.
+
+**Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted horizontally is the horizontal composite of the two square isomorphisms, modulo the
 composition isomorphisms of the pullbacks along the horizontal maps. -/
 lemma Etale.squareUpperStarIso_paste_horiz_hom (sq₁ : CommSq g' f' f g)
@@ -237,7 +240,10 @@ variable {X' X Y' Y Z' Z : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X �
   {e' : Y' ⟶ Z'} {e : Y ⟶ Z} {k : Z' ⟶ Z}
 
 open scoped TwoSquare in
-/-- **Vertical pasting of the square isomorphisms**: the square isomorphism of two squares
+/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+identification, compatibility with vertical pasting.
+
+**Vertical pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted vertically is the vertical composite of the two square isomorphisms, modulo the
 composition isomorphisms of the pullbacks along the vertical maps. -/
 lemma Etale.squareUpperStarIso_paste_vert_hom (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g e' e k)

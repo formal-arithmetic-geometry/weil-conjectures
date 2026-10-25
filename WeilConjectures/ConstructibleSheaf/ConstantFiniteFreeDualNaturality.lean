@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
@@ -190,7 +191,7 @@ dual map has exactly the same coordinates, so its constant sheaf map commutes
 with e_n and e_m. Equality is detected by the finite product projections.
 For n = 0 or m = 0 these are empty products and the same equations hold;
 no noetherian hypothesis or assertion about an infinite product is used.
-(blueprint: `lem-constant-finite-free-dual-naturality`) -/
+(blueprint: lem-constant-finite-free-dual-naturality) -/
 theorem constantFiniteFreeDualNaturality
     (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] :
     ∃ e : ∀ n : ℕ,

@@ -1,57 +1,66 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
 public import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
-/-!
-# Finite models of finite constant sheaves
+/-! # Finite models for finite constant sheaves
 
-Let `Λ` be a commutative ring and `F` a constant sheaf of `Λ`-modules on the small étale site of
-a scheme `X`, `F ≅ M_X`. If the geometric stalks of `F` are finitely generated, then `F` is the
-constant sheaf at a finitely generated `Λ`-module: if `X` is nonempty, the stalk of `M_X` at a
-geometric point is `M` itself; if `X` is empty every sheaf is zero, hence constant at `0`.
-
-## Main results
-
-- `AlgebraicGeometry.Scheme.exists_finite_constant_model`
+Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`, coefficient dual argument.
+(blueprint: lem-weil-pbc-finite-constant-model)
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- **Finite models of finite constant sheaves**: a constant sheaf of `Λ`-modules on the small
-étale site of `X` with finitely generated geometric stalks is isomorphic to the constant sheaf
-`M_X` at a finitely generated `Λ`-module `M`. This includes the empty scheme.
-(blueprint: `lem-weil-pbc-finite-constant-model`) -/
-theorem exists_finite_constant_model (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [F.IsConstant X.smallEtaleTopology] [IsFiniteSheaf F] :
+/-- A constant sheaf with finite geometric stalks has a finitely generated constant model.
+
+Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`,
+`IsFiniteLocallyConstantSheaf.ihom_unit` docstring.
+
+Proof: On a nonempty scheme choose a point x and the geometric point with residue field
+SeparableClosure κ(x). A constant model exists by constancy, and its geometric stalk is
+that module. Transport finite generation from the stalk across this isomorphism.
+On the empty scheme every sheaf is zero, so use the zero module as its constant model.
+(blueprint: lem-weil-pbc-finite-constant-model) -/
+theorem exists_finite_constant_model
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hc : F.IsConstant X.smallEtaleTopology) (hf : IsFiniteSheaf F) :
     ∃ M : ModuleCat.{u + 1} Λ, Module.Finite Λ M ∧
       Nonempty (F ≅ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
-  obtain ⟨M, ⟨e⟩⟩ := Sheaf.mem_essImage_of_isConstant X.smallEtaleTopology F
+  classical
   by_cases hX : IsEmpty X
-  · exact ⟨ModuleCat.of Λ PUnit, inferInstance,
-      ⟨(Etale.isZero_sheaf_of_isEmpty F).iso (Etale.isZero_sheaf_of_isEmpty _)⟩⟩
-  obtain ⟨x⟩ := not_isEmpty_iff.1 hX
-  refine ⟨M, ?_, ⟨e.symm⟩⟩
-  let Φ := X.uliftPointSmallEtale x
-  have h : ConcreteCategory.IsFinitelyGenerated
-      ((Φ.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :=
-    (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (F := F) _ (X.algClosurePoint x)).of_iso
-      (((pointSmallEtale (X.algClosurePoint x)).uliftSheafFiberIso.{u + 1}
-        (ModuleCat.{u + 1} Λ)).app F).symm
-  exact (ModuleCat.isFinitelyGenerated_iff _).1
-    (h.of_iso (Φ.sheafFiber.mapIso e.symm ≪≫ Φ.sheafFiberConstantSheafIso M))
+  · let := hX
+    refine ⟨0, ?_, ⟨(Etale.isZero_sheaf_of_isEmpty F).iso
+      (Etale.isZero_sheaf_of_isEmpty _)⟩⟩
+    exact (ModuleCat.isFinitelyGenerated_iff _).mp
+      (ConcreteCategory.isFinitelyGenerated_of_isZero (isZero_zero _))
+  · have : Nonempty X := not_isEmpty_iff.mp hX
+    let x : X := Classical.choice inferInstance
+    let Ω := SeparableClosure (X.residueField x)
+    let s : Spec (.of Ω) ⟶ X := (SpecToEquivOfField Ω X).symm
+      ⟨x, CommRingCat.ofHom (algebraMap (X.residueField x) Ω)⟩
+    let := hc
+    have : PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    obtain ⟨M, ⟨e⟩⟩ := F.mem_essImage_of_isConstant
+    refine ⟨M, ?_, ⟨e.symm⟩⟩
+    exact (ModuleCat.isFinitelyGenerated_iff _).mp
+      ((hf.isFinitelyGenerated_sheafFiber Ω s).of_iso
+        ((pointSmallEtale s).sheafFiber.mapIso e.symm ≪≫
+          (pointSmallEtale s).sheafFiberConstantSheafIso M))
 
 end AlgebraicGeometry.Scheme

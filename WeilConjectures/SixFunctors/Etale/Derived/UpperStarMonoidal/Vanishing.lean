@@ -43,7 +43,7 @@ namespace Etale
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 section
 
-open DerivedCategory Functor.LaxMonoidal
+open _root_.DerivedCategory Functor.LaxMonoidal
 
 variable {A} in
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh M ⟶ Qh (K ⊗ M)` of `Qh : K(X_ét) ⥤ D(X_ét)` is an
@@ -62,7 +62,7 @@ lemma isIso_μNatTrans_Qh_app_app_of_kFlat {X : Scheme.{u}}
 
 section
 
-open DerivedCategory ZeroObject
+open _root_.DerivedCategory ZeroObject
 
 variable {A} in
 /-- The derived tensor product `K ⊗ᴸ M` vanishes when `K` does. -/

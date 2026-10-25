@@ -341,7 +341,9 @@ noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : 
       (R(i)_![A]).obj ((R(i)^![A]).obj (((derivedTensor A U).obj M).obj N)) :=
   (existsUnique_supportedProduct A i₁ i₂ i h M N).exists.choose
 
-/-- The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
+/-- Blueprint `def-pur-supported-cup`: Cup product with closed supports
+
+The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
 `β : K ⟶ Ri₂_! Ri₂^! N` supported on `Z₂`, a class supported on `Z = Z₁ ∩ Z₂`:
 
 `α ∪ β : K ⟶ K ⊗ K ⟶ Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)`,
@@ -349,7 +351,17 @@ noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : 
 where `Δ : K ⟶ K ⊗ K` is a diagonal and the last map is
 `AlgebraicGeometry.Etale.supportedProduct`. For cohomology classes `K` is the unit and `Δ` the
 inverse of the unitor. Degrees are carried by the coefficients: a class of degree `a` is a class
-with coefficients `M[a]`. -/
+with coefficients `M[a]`.
+
+This is the blueprint's supported cup product
+`H^a_{Z₁}(U, M) × H^b_{Z₂}(U, N) ⟶ H^{a+b}_{Z₁ ∩ Z₂}(U, M ⊗^L N)` in the model of classes with
+supports as maps `Λ_U ⟶ Ri_! Ri^!(M[a])`. The blueprint reads a class as a map `i_* Λ_Z ⟶ M[a]`
+(`lem-pur-supported-hom`), which corresponds to its adjoint, and multiplies through
+`i_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗^L i₂_* Λ_{Z₂}`; the product of supports
+`AlgebraicGeometry.Etale.supportedProduct` is the derived counterpart of this identification,
+characterised by its compatibility with the counits. The blueprint's construction itself, through
+`h_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗ᴸ i₂_* Λ_{Z₂}`, is
+`AlgebraicGeometry.Etale.cupSupportCohomology`. -/
 noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]

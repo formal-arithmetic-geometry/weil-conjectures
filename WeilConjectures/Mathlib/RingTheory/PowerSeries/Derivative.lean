@@ -17,10 +17,13 @@ public import Mathlib.Tactic.LinearCombination
 
 - `PowerSeries.map_derivative` — the formal derivative commutes with the coefficientwise map
   along a ring homomorphism.
+- `PowerSeries.X_mul_derivative_prod` — the logarithmic derivative of a finite product.
 - `PowerSeries.neg_X_mul_derivative_prod_one_sub_C_mul_X` — the logarithmic derivative of
   `∏ (1 - c X)` is the generating series of the power sums `∑ cⁿ`.
 - `PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg` — if all power sums of a multiset of
   complex numbers are nonnegative reals, so are all coefficients of `∏ (1 - c X)⁻¹`.
+- `PowerSeries.X_mul_derivative_inv` — the logarithmic derivative of an inverse is the negative
+  of the logarithmic derivative.
 -/
 
 @[expose] public section
@@ -34,6 +37,21 @@ theorem map_derivative (φ : R →+* S) (f : R⟦X⟧) :
     map φ (derivative R f) = derivative S (map φ f) := by
   ext n
   simp [coeff_derivative]
+
+/-- The logarithmic derivative of a finite product is the sum of the logarithmic derivatives of
+the factors: if `X fᵢ' = aᵢ fᵢ` for all `i ∈ s`, then `X (∏ fᵢ)' = (∑ aᵢ) ∏ fᵢ`. -/
+theorem X_mul_derivative_prod {R : Type*} [CommRing R] {ι : Type*} {f a : ι → R⟦X⟧}
+    (s : Finset ι) (h : ∀ i ∈ s, X * derivative R (f i) = a i * f i) :
+    X * derivative R (∏ i ∈ s, f i) = (∑ i ∈ s, a i) * ∏ i ∈ s, f i := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert b s hb ih =>
+    have hb' := h b (Finset.mem_insert_self b s)
+    have ihs := ih fun i hi ↦ h i (Finset.mem_insert_of_mem hi)
+    rw [Finset.prod_insert hb, Finset.sum_insert hb, Derivation.leibniz, smul_eq_mul,
+      smul_eq_mul]
+    linear_combination f b * ihs + (∏ i ∈ s, f i) * hb'
 
 /-- The logarithmic derivative of `P = ∏ (1 - c X)` is the generating series of the power sums:
 `-X P' = P ∑_{n ≥ 1} pₙ Xⁿ` with `pₙ = ∑ cⁿ`. -/
@@ -108,5 +126,14 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
       field_simp
     rw [hk]
     exact mul_nonneg (Complex.zero_le_real.2 (by positivity)) hsum
+
+/-- The logarithmic derivative of the inverse of an invertible power series over a field is the
+negative of its logarithmic derivative: if `X f' = a f`, then `X (f⁻¹)' = -a f⁻¹`. -/
+theorem X_mul_derivative_inv {K : Type*} [Field K] {f a : K⟦X⟧}
+    (h : X * d⁄dX K f = a * f) (hf : constantCoeff f ≠ 0) :
+    X * d⁄dX K f⁻¹ = -a * f⁻¹ := by
+  have hmul : f * f⁻¹ = 1 := PowerSeries.mul_inv_cancel _ hf
+  rw [derivative_inv']
+  linear_combination (-(f⁻¹ ^ 2)) * h + (-a * f⁻¹) * hmul
 
 end PowerSeries

@@ -32,6 +32,9 @@ A pairing `b : X ⊗ Y ⟶ 𝟙_ C` is *perfect* (`CategoryTheory.MonoidalClosed
 if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism. Perfectness is preserved by precomposition
 with an isomorphism in the first variable
 (`CategoryTheory.MonoidalClosed.IsPerfectPairing.whiskerRight_comp`).
+
+The isomorphism `X ≅ [𝟙_ C, X]` of `CategoryTheory.MonoidalClosed.unitNatIso` is the transpose
+of the left unitor (`CategoryTheory.MonoidalClosed.unitNatIso_hom_app`).
 -/
 
 @[expose] public section
@@ -238,6 +241,19 @@ lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     rw [← curry_pre_app]
     infer_instance⟩
 
+/-- The component at `X` of the isomorphism `𝟭 C ≅ ihom (𝟙_ C)` is the transpose of the left
+unitor of `X`. -/
+lemma unitNatIso_hom_app (X : C) : unitNatIso.hom.app X = curry (λ_ X).hom := by
+  rw [curry_eq, unitNatIso, conjugateIsoEquiv_apply_hom, conjugateEquiv_apply_app]
+  simp
+
+/-- Evaluating the transpose `X ⟶ RHom(𝟙_ C, X)` of the left unitor gives back the left
+unitor. -/
+@[reassoc (attr := simp)]
+lemma whiskerLeft_unitNatIso_hom_app_ihom_ev_app (X : C) :
+    𝟙_ C ◁ unitNatIso.hom.app X ≫ (ihom.ev (𝟙_ C)).app X = (λ_ X).hom := by
+  rw [unitNatIso_hom_app, whiskerLeft_curry_ihom_ev_app]
+
 end CategoryTheory.MonoidalClosed
 
 namespace CategoryTheory.Functor.LaxMonoidal
@@ -304,3 +320,17 @@ lemma isIso_ihomComparison_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoid
   exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))
 
 end CategoryTheory.Functor.LaxMonoidal
+
+namespace CategoryTheory.MonoidalClosed
+
+/-- The internal hom out of isomorphic objects: `[X, Y] ≅ [X', Y]` for `X ≅ X'`, given by
+precomposition (`MonoidalClosed.pre`). -/
+@[simps]
+noncomputable def ihomIsoOfIsoLeft {D : Type*} [Category D] [MonoidalCategory D]
+    [MonoidalClosed D] {X X' : D} (e : X ≅ X') (Y : D) : (ihom X).obj Y ≅ (ihom X').obj Y where
+  hom := (pre e.inv).app Y
+  inv := (pre e.hom).app Y
+  hom_inv_id := by rw [← NatTrans.comp_app, ← pre_map, e.hom_inv_id, pre_id]; rfl
+  inv_hom_id := by rw [← NatTrans.comp_app, ← pre_map, e.inv_hom_id, pre_id]; rfl
+
+end CategoryTheory.MonoidalClosed

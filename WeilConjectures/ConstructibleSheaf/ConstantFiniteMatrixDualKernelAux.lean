@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
@@ -24,7 +25,7 @@ Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`,
 description of free modules, the monoidal constant sheaf functor, and preservation of
 finite kernels. The remaining identification with `LinearMap.ker` is deliberately left
 to `ModuleCat.kernelIsoKer` in the parent theorem.
-(blueprint: `lem-weil-pbc-constant-finite-matrix-dual-kernel-aux`) -/
+(blueprint: lem-weil-pbc-constant-finite-matrix-dual-kernel-aux) -/
 theorem constantFiniteMatrixDualKernelIso_aux
     (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ]
     (n m : ℕ) (g : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) :

@@ -5,8 +5,14 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction
+
+
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
+
+import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltrationExtension
+import WeilConjectures.ConstructibleSheaf.LocallyConstantRetractionExtension
 
 /-!
 # Reduction of finite locally constant `𝔽_ℓ`-sheaves to constant ones
@@ -47,7 +53,9 @@ There is a connected finite étale `v : V ⟶ U` such that
 
 The coefficient field `𝔽_ℓ` is `ULift.{u + 1} (ZMod ℓ)`, following the convention that the
 coefficient ring of `ModuleCat.{u + 1} Λ`-valued étale sheaves lives in `Type (u + 1)`.
-(blueprint: `lemma-weil-pbc-curve-locally-constant-reduction`) -/
+(blueprint: `lemma-weil-pbc-curve-locally-constant-reduction`) 
+(blueprint: lemma-weil-pbc-curve-locally-constant-reduction)
+-/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : Scheme.{u}}
     [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
@@ -68,6 +76,10 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : S
           ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G,
         (Etale.upperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G := by
-  sorry
+  obtain ⟨V, v, hf, he, hc, d, hd, hdeg, hfil⟩ :=
+    Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf ℓ G
+  obtain ⟨r, hr⟩ := Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
+    ℓ G v d hd hdeg
+  exact ⟨V, v, hf, he, hc, d, hd, hdeg, hfil, r, hr⟩
 
 end AlgebraicGeometry

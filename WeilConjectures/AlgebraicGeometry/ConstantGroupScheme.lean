@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group F1
+Authors: Bin Wu
 -/
+
 module
 
 public import Mathlib.AlgebraicGeometry.Limits
@@ -66,7 +67,8 @@ noncomputable def constantGroupSchemeSquareProjection : constantGroupSchemeSquar
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- The pair components of the fibre square are clopen, disjoint and covering; the
+/-- (blueprint: lem-weil-pbc-constant-group-scheme-multiplication) The pair components of
+the fibre square are clopen, disjoint and covering; the
 componentwise maps glue uniquely to multiplication, with the stated properties.
 Source: Stacks Project, Groupoids, Example 39.5.6 (Tag 03YW), and Schemes,
 Section 26.14 (Tag 01JA) (Stacks, Tag 03YW).
@@ -96,7 +98,7 @@ of coproduct components forces the sum to equal `d`, proving the preimage formul
 The cover maps used below are open immersions with image exactly the pair components,
 so equality after their composition is equality of restrictions as scheme morphisms.
 -/
-theorem constantGroupSchemeMultiplication_properties :
+theorem exists_constantGroupSchemeMultiplication :
     (∀ ij : E × E,
       IsOpen (constantGroupSchemePairComponent T E ij.1 ij.2) ∧
         IsClosed (constantGroupSchemePairComponent T E ij.1 ij.2)) ∧
@@ -255,15 +257,15 @@ theorem constantGroupSchemeMultiplication_properties :
 /-- (blueprint: def-weil-pbc-constant-group-scheme) The multiplication `m` of the constant
 group scheme: the unique morphism `T_E ×_T T_E ⟶ T_E` whose restriction to the pair component
 indexed by `(e, e')` is the base projection followed by the coprojection indexed by `e + e'`
-(Stacks, Tag 03YW), given by `constantGroupSchemeMultiplication_properties`. -/
+(Stacks, Tag 03YW), given by `exists_constantGroupSchemeMultiplication`. -/
 noncomputable def constantGroupSchemeMultiplication :
     constantGroupSchemeSquare T E ⟶ constantGroupScheme T E :=
-  Classical.choose (constantGroupSchemeMultiplication_properties T E).2.2.2
+  Classical.choose (exists_constantGroupSchemeMultiplication T E).2.2.2
 
 lemma constantGroupSchemeMultiplication_comp_projection :
     constantGroupSchemeMultiplication T E ≫ constantGroupSchemeProjection T E =
       constantGroupSchemeSquareProjection T E :=
-  (Classical.choose_spec (constantGroupSchemeMultiplication_properties T E).2.2.2).2.2.1
+  (Classical.choose_spec (exists_constantGroupSchemeMultiplication T E).2.2.2).2.2.1
 /-- (blueprint: def-weil-pbc-constant-group-scheme) A point of the constant group scheme over
 the `T`-scheme `s : U ⟶ T` is a morphism commuting with the structure maps (Stacks, Tag 03YW). -/
 def ConstantGroupSchemePoint {U : Scheme.{u}} (s : U ⟶ T) : Type u :=

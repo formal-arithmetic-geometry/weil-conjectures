@@ -8,12 +8,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineGluing
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineInputs
 
 /-!
 # The affine line, `𝔾ₘ`, and the model purity
@@ -53,9 +56,12 @@ transported along the identification of the zero section with `V(t)`.
 
 Two clauses of the blueprint are stated only in part, and are TODOs.
 
-* `sk-prop-a1-kummer` is recorded as what the cohomology sheaves *are* rather than as a
-  statement about the generator `κ(t)` of `R¹π_*Λ(1)`. Here `sk-prop-a1` records that
-  `Rs^!Λ(1)[2] ≅ Λ_Y`; that the boundary `∂κ(t)` of the Kummer class
+* `sk-prop-a1-kummer` is recorded here as what the cohomology sheaves *are* rather than as a
+  statement about the generator `κ(t)` of `R¹π_*Λ(1)`; for the twist `Λ(1) = μₙ ⊗ Λ` the
+  generator, the unit `p^*` in degree zero and the compatibility with base change on `Y` are in
+  `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`
+  (`AlgebraicGeometry.Etale.isIso_homology_zero_kummerClassAdjoint` and its neighbours).
+  Here `sk-prop-a1` records that `Rs^!Λ(1)[2] ≅ Λ_Y`; that the boundary `∂κ(t)` of the Kummer class
   (`AlgebraicGeometry.Etale.kummerBoundary`) is this isomorphism is the orientation
   `AlgebraicGeometry.Etale.affineLineOrientation` of
   `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`.
@@ -73,7 +79,8 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
 - `AlgebraicGeometry.Etale.injective_upperStar_map_of_isFiniteLocallyConstantSheaf`,
   `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
-- `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`
+- `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`,
+  `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_oneSection_iff_of_etale`
 -/
 
 @[expose] public section
@@ -97,7 +104,8 @@ section
 variable {k : Type u} [Field k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
   [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y]
 
-omit [HasTateTwist Λ] in
+omit [HasTateTwist Λ] [HasInvertibleExponent Λ Y] in
+include aY in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *Acyclicity of the affine line*: for the projection `p : 𝔸¹_Y → Y` one has
@@ -105,49 +113,86 @@ omit [HasTateTwist Λ] in
 instance of smooth base change, it is compatible with base change on `Y`; on a geometric
 fibre it is the vanishing `H^q(𝔸¹_k, μ_{ℓ^N}) = 0` for `q > 0`, which follows from the
 Kummer sequence, the divisibility of `k^×` and `Pic(𝔸¹_k) = 0`. -/
-theorem nonempty_iso_rightDerivedLowerStar_affineLine :
+theorem nonempty_iso_rightDerivedLowerStar_affineLine [IsAlgClosed k] [QuasiCompact aY]
+    [HasInvertibleExponent Λ (Spec (.of k))] :
     Nonempty ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
-        (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y)) ≅ constantComplex Λ Y) :=
-  sorry
+        (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y)) ≅ constantComplex Λ Y) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_affineLine_of_cohomology Λ aY
+    (isZero_cohomology_affineLine Λ (k := k)) (cohomologyZeroConstantComplexIso Λ _)
+    (constructibleFiniteTor_constantComplex Λ Y)
+  exact ⟨(R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
+    (leftDerivedUpperStarConstantComplexIso Λ _).symm ≪≫ e⟩
+
+omit [HasTateTwist Λ] [HasInvertibleExponent Λ Y] in
+include aY in
+/-- Blueprint `lem-pur-a1-direct-image`: The affine line has no higher direct images
+
+For `B` separated of finite type over the algebraically closed field `k` and the projection
+`π : 𝔸¹_B ⟶ B`, the unit `Λ_B ⟶ Rπ_* Lπ^* Λ_B = Rπ_* Λ_{𝔸¹_B}` of `Lπ^* ⊣ Rπ_*` is an
+isomorphism: the affine line has no higher direct images for the constant coefficients, and its
+`H⁰` is the unit. The proof computes `Rπ_* Λ ≅ RΓ(𝔸¹_k, Λ)_B ≅ Λ_B` by the Künneth formula
+(in place of the stalk computation over strict henselizations by smooth base change of the
+blueprint), and then the unit, split by the zero section, is an isomorphism by counting
+geometric stalks. -/
+theorem isIso_unit_constantComplex_affineLine [IsAlgClosed k] [QuasiCompact aY]
+    [HasInvertibleExponent Λ (Spec (.of k))] :
+    IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app (constantComplex Λ Y)) :=
+  isIso_unit_affineLine_of_cohomology Λ aY (isZero_cohomology_affineLine Λ (k := k))
+    (cohomologyZeroConstantComplexIso Λ _)
+    (constructibleFiniteTor_constantComplex Λ Y) (constantComplexIsoSingleFunctor Λ Y)
+    (nonempty_sheafFiber_unit_iso Λ)
+
+include aY in
+/-- The twisted affine line is acyclic: `H^m(Rp_* Λ(1)) = 0` for `m ≠ 0`, `p : 𝔸¹_Y ⟶ Y`. -/
+theorem isZero_homology_rightDerivedLowerStar_tateTwist_affineLine [IsAlgClosed k]
+    [QuasiCompact aY] [HasInvertibleExponent Λ (Spec (.of k))] (m : ℤ) (hm : m ≠ 0) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
+      ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ _)))) := by
+  obtain ⟨LT, -, hLT, ⟨eTY⟩⟩ := HasTateTwist.exists_isLocallyConstantSheaf_twistObject
+    (Λ := Λ) Y 1
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_affineLine_of_cohomology Λ aY
+    (isZero_cohomology_affineLine Λ (k := k)) (cohomologyZeroConstantComplexIso Λ _)
+    (boundedConstructibleFiniteTor_tateObject Λ Y 1)
+  exact ((homology_props_of_iso_singleFunctor Λ eTY hLT).1 m hm).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ m).mapIso
+      ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
+        (derivedTensorLeftUnitor _ _ _ ≪≫
+          (leftDerivedUpperStarTateObjectIso (𝔸(ULift.{u} (Fin 1); Y) ↘ Y) 1).symm) ≪≫ e))
 
 variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Y)) [IsOpenImmersion j]
 
+include aY in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *Degree zero.* Let `j : G ↪ 𝔸¹_Y` be the open complement of the zero section — so
 `G = 𝔾_{m,Y}` — and let `π = p ∘ j`. Then `R⁰π_* Λ(1) ≅ Λ_Y(1)`; on a geometric fibre this is
 the Kummer computation `H⁰(𝔾_{m,k}, μ_n) = μ_n(k)`. -/
-theorem nonempty_iso_homology_zero_multiplicativeGroup
+theorem nonempty_iso_homology_zero_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
+    [HasInvertibleExponent Λ (Spec (.of k))]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
     Nonempty ((_root_.DerivedCategory.homologyFunctor _ 0).obj
         ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
           ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
-      (_root_.DerivedCategory.homologyFunctor _ 0).obj (tateObject Λ Y 1)) :=
-  sorry
-
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
-
-*Degree one.* In the situation above `R¹π_* Λ(1) ≅ Λ_Y`, free of rank one; on a geometric
-fibre this is `H¹(𝔾_{m,k}, μ_n) = ℤ/n`, generated by the class of the coordinate `t`. -/
-theorem nonempty_iso_homology_one_multiplicativeGroup [HasTateTwist.IsNormalized Λ]
-    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
-    Nonempty ((_root_.DerivedCategory.homologyFunctor _ 1).obj
-        ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
-          ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
-      (_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ Y)) :=
-  sorry
-
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
-
-*Vanishing above degree one.* In the situation above `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the
-cohomological dimension of an affine curve. -/
-theorem isZero_homology_multiplicativeGroup [HasTateTwist.IsNormalized Λ]
-    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
-    (m : ℤ) (hm : 2 ≤ m) :
-    IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
-      ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
-        ((tateTwist Λ G 1).obj (constantComplex Λ G)))) :=
-  sorry
+      (_root_.DerivedCategory.homologyFunctor _ 0).obj (tateObject Λ Y 1)) := by
+  have : HasInvertibleExponent Λ G := .of_hom (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
+  let j₀ := (multiplicativeGroupModel k).ι
+  have hj₀ := range_multiplicativeGroupModel_ι k
+  have : HasInvertibleExponent Λ (multiplicativeGroupModel k) := .of_hom j₀
+  have := connectedSpace_of_range_eq_compl_zeroSection j₀ hj₀
+  obtain ⟨eG₁⟩ := nonempty_iso_cohomology_one_multiplicativeGroup Λ j₀ hj₀
+  obtain ⟨LT, -, hLT, ⟨eTY⟩⟩ := HasTateTwist.exists_isLocallyConstantSheaf_twistObject
+    (Λ := Λ) Y 1
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_multiplicativeGroup_of_cohomology Λ aY j₀ hj₀
+    (isZero_cohomology_multiplicativeGroup Λ j₀ hj₀) (cohomologyZeroConstantComplexIso Λ _) eG₁
+    j hj
+    (boundedConstructibleFiniteTor_tateObject Λ Y 1)
+  exact ⟨(_root_.DerivedCategory.homologyFunctor _ 0).mapIso
+    ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
+      (derivedTensorLeftUnitor _ _ _ ≪≫
+        (leftDerivedUpperStarTateObjectIso (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y) 1).symm) ≪≫ e) ≪≫
+    homologyZeroBiprodShiftIso Λ _ (homology_props_of_iso_singleFunctor Λ eTY hLT).1⟩
 
 include aY in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
@@ -197,8 +242,90 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
         eqToIso (by rw [mul_one])) ≪≫ (@asIso _ _ _ _ _ hφ).symm) ≪≫
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
 
+include aY in
+/-- The degree-one part of `sk-prop-a1-kummer` for a normalized twist, from the localization
+triangle: in the direct image along `p : 𝔸¹_Y ⟶ Y` of the triangle
+`Rs_* Rs^! Λ(1) ⟶ Λ(1) ⟶ Rj_* Λ_G(1) ⟶` of the zero section `s` and its complement
+`j : G ⟶ 𝔸¹_Y`, if `H¹(Rp_* Λ(1))` and `H²(Rp_* Λ(1))` vanish, the boundary identifies
+`R¹π_* Λ(1)` with `H²(Rs^! Λ(1)) = H⁰(Rs^! Λ(1)[2]) ≅ H⁰(Λ_Y)`. -/
+theorem nonempty_iso_homology_multiplicativeGroup_of_isZero [HasTateTwist.IsNormalized Λ]
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
+    (n : ℤ) (h₁ : IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
+      ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ _)))))
+    (h₂ : IsZero ((_root_.DerivedCategory.homologyFunctor _ (n + 1)).obj
+      ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ _))))) :
+    Nonempty ((_root_.DerivedCategory.homologyFunctor _ n).obj
+        ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+          ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
+      (_root_.DerivedCategory.homologyFunctor _ (n - 1)).obj (constantComplex Λ Y)) := by
+  have : HasInvertibleExponent Λ G := .of_hom (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
+  let s := AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y
+  let p := 𝔸(ULift.{u} (Fin 1); Y) ↘ Y
+  let L := (tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y))
+  have hsj : Set.range s.base = (Set.range j.base)ᶜ := by rw [hj, compl_compl]
+  obtain ⟨e⟩ := nonempty_iso_homology_of_localizationTriangleLowerStar Λ p s j hsj L n h₁ h₂
+  obtain ⟨π₀⟩ := nonempty_iso_rightDerivedUpperShriek_affineLineZero Λ aY
+  -- `Lj^* Λ(1) ≅ Λ_G(1)`
+  let eJ : (L((j)^*[ModuleCat.{u + 1} Λ])).obj L ≅ (tateTwist Λ G 1).obj (constantComplex Λ G) :=
+    leftDerivedUpperStarTensorIso _ j _ _ ≪≫
+      ((derivedTensor _ G).mapIso (leftDerivedUpperStarConstantComplexIso Λ j)).app _ ≪≫
+        ((derivedTensor _ G).obj _).mapIso (leftDerivedUpperStarTateObjectIso j 1)
+  -- `R(s ≫ p)_* = R(𝟙)_*` is the identity
+  let eS : (R((s ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(s)^![ModuleCat.{u + 1} Λ]).obj L) ≅
+      (R(s)^![ModuleCat.{u + 1} Λ]).obj L :=
+    (rightDerivedLowerStarCongr _ (AffineSpace.zeroSection_comp_over _ Y)).app _ ≪≫
+      (rightDerivedLowerStarIdIso Λ Y).app _
+  exact ⟨(_root_.DerivedCategory.homologyFunctor _ n).mapIso
+      ((R((j ≫ p)_*[ModuleCat.{u + 1} Λ])).mapIso eJ.symm) ≪≫ e ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ (n + 1)).mapIso eS ≪≫
+    (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso (2 * 1 : ℤ) (n - 1) (n + 1)
+      (by ring)).app _).symm ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ (n - 1)).mapIso
+      (((R(s)^![ModuleCat.{u + 1} Λ]).commShiftIso (2 * 1 : ℤ)).app L).symm ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ (n - 1)).mapIso π₀⟩
+
+include aY in
+/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+
+*Degree one.* In the situation above `R¹π_* Λ(1) ≅ Λ_Y`, free of rank one; on a geometric
+fibre this is `H¹(𝔾_{m,k}, μ_n) = ℤ/n`, generated by the class of the coordinate `t`. For a
+normalized twist this is read off from the localization triangle of the zero section
+(`AlgebraicGeometry.Etale.nonempty_iso_homology_multiplicativeGroup_of_isZero`), the twisted
+affine line being acyclic. -/
+theorem nonempty_iso_homology_one_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
+    [HasInvertibleExponent Λ (Spec (.of k))] [HasTateTwist.IsNormalized Λ]
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
+    Nonempty ((_root_.DerivedCategory.homologyFunctor _ 1).obj
+        ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+          ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
+      (_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ Y)) :=
+  nonempty_iso_homology_multiplicativeGroup_of_isZero Λ aY j hj 1
+    (isZero_homology_rightDerivedLowerStar_tateTwist_affineLine Λ aY 1 one_ne_zero)
+    (isZero_homology_rightDerivedLowerStar_tateTwist_affineLine Λ aY (1 + 1) (by norm_num))
+
+include aY in
+/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+
+*Vanishing above degree one.* In the situation above `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the
+cohomological dimension of an affine curve. For a normalized twist this is read off from the
+localization triangle of the zero section: `R^m π_* Λ(1) ≅ H^{m+1}(Rs^! Λ(1)) = H^{m-1}(Λ_Y)`. -/
+theorem isZero_homology_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
+    [HasInvertibleExponent Λ (Spec (.of k))] [HasTateTwist.IsNormalized Λ]
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
+    (m : ℤ) (hm : 2 ≤ m) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
+      ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ G 1).obj (constantComplex Λ G)))) := by
+  obtain ⟨e⟩ := nonempty_iso_homology_multiplicativeGroup_of_isZero Λ aY j hj m
+    (isZero_homology_rightDerivedLowerStar_tateTwist_affineLine Λ aY m (by omega))
+    (isZero_homology_rightDerivedLowerStar_tateTwist_affineLine Λ aY (m + 1) (by omega))
+  exact (isZero_homology_constantComplex Λ Y (m - 1) (by omega)).of_iso e
+
 set_option linter.unusedSectionVars false in
-/-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
+/-- Blueprint `lem-pur-lisse-uniqueness`: Uniqueness for lisse sheaf maps (first assertion,
+for the base `B = Y`); also clause (i) of `sk-prop-a1-inv` (Weak `𝔸¹`-invariance).
 
 *Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
 sheaves on `𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the
@@ -216,7 +343,8 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
 
 set_option linter.unusedSectionVars false in
 set_option linter.unusedVariables false in
-/-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
+/-- Blueprint `lem-pur-lisse-uniqueness`: Uniqueness for lisse sheaf maps (second assertion,
+for the base `B = Y`); also clause (i) of `sk-prop-a1-inv` (Weak `𝔸¹`-invariance).
 
 *Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
 sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section `i₁ : Y ⟶ 𝔾_{m,Y}`
@@ -292,6 +420,7 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
     Category.id_comp])
 
 
+set_option linter.unusedSectionVars false in
 include aY in
 /-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
 
@@ -341,8 +470,173 @@ theorem existsUnique_iso_leftDerivedUpperStar_of_etale
             (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).inv.app C ≫
           (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
             (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).hom.app C =
-        κ'.hom :=
-  sorry
+        κ'.hom := by
+  obtain ⟨L, hL, hLs, m, n, ⟨e⟩⟩ := hF
+  have : HasInvertibleExponent Λ Y' := .of_hom v
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y') :=
+    .of_hom (𝔸(ULift.{u} (Fin 1); Y') ↘ Y')
+  have : _root_.AlgebraicGeometry.Etale (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale)
+      (AffineSpace.isPullback_map v).flip inferInstance
+  have : Surjective (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @Surjective) (AffineSpace.isPullback_map v).flip
+      inferInstance
+  have := hL
+  -- the local shape: `Lv₁^* F` is invertible and a sheaf placed in degree `-n`
+  obtain ⟨S, ⟨eS⟩⟩ := exists_iso_tateTwist_singleFunctor_obj L hLs m
+  have hFw : DerivedCategory.isInvertible Λ _
+      ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F) :=
+    ((isInvertible_tateTwist_singleFunctor_obj L hLs m).shift n).of_iso e.symm
+  -- the local comparison as a morphism `Lv₁^* F ≅ Lv₁^* La^* C`
+  let ψ : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+      (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C) :=
+    κ' ≪≫ ((leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+        (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).app C).symm ≪≫
+      (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+        (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).app C
+  -- invertibility and concentration in one degree descend along `v₁`
+  have hFinv := isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale _ hFw
+  have hGinv := isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale _ (hFw.of_iso ψ)
+  obtain ⟨SF, ⟨eK⟩⟩ := exists_iso_shift_singleFunctor_obj_of_leftDerivedUpperStar_iso
+    (AffineSpace.map (ULift.{u} (Fin 1)) v) n (e ≪≫ (shiftFunctor _ n).mapIso eS)
+  obtain ⟨SG, ⟨eM⟩⟩ := exists_iso_shift_singleFunctor_obj_of_leftDerivedUpperStar_iso
+    (AffineSpace.map (ULift.{u} (Fin 1)) v) n (ψ.symm ≪≫ e ≪≫ (shiftFunctor _ n).mapIso eS)
+  -- the overlap `𝔸¹_{Y' ×_Y Y'}`, on which the two pullbacks of `κ'` agree
+  have hY := IsPullback.of_hasPullback v v
+  have hZ := isPullback_affineSpace_map hY
+  have := isClosedImmersion_oneSection (pullback v v)
+  obtain ⟨κ, hκ⟩ := exists_iso_leftDerivedUpperStar_map_hom_eq_of_isPullback hFinv hGinv (-n)
+    eK eM (AffineSpace.map (ULift.{u} (Fin 1)) v) hZ ψ
+    (conj_leftDerivedUpperStar_eq_of_section (exists_isPreconnected_inter_range_oneSection _)
+      (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')
+      (AffineSpace.oneSection_comp_map v) (AffineSpace.oneSection_comp_map _)
+      (AffineSpace.oneSection_comp_map _) hY.w hZ.w hFinv θ κ' hκ')
+  refine ⟨κ, ?_, fun κ₂ hκ₂ ↦ ?_⟩
+  · beta_reduce
+    rw [hκ]
+    simp [ψ]
+  · -- uniqueness: comparisons out of the invertible `F` are detected after `Lv₁^*`
+    beta_reduce at hκ₂
+    have h₂ : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ₂.hom =
+        (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom := by
+      rw [hκ]
+      simp only [ψ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]
+      rw [← hκ₂]
+      simp
+    have h := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible_of_surjective
+      (AffineSpace.map (ULift.{u} (Fin 1)) v) hFinv (κ₂.hom ≫ κ.inv) (by
+        rw [Functor.map_comp, h₂, ← Functor.map_comp, Iso.hom_inv_id,
+          CategoryTheory.Functor.map_id])
+    ext
+    simpa using h =≫ κ.hom
+
+set_option maxHeartbeats 800000 in
+-- unifying the objects of the composition and section isomorphisms is expensive
+set_option linter.unusedSectionVars false in
+include aY in
+/-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
+
+*Uniqueness and normalization*, clauses (1) and (2). In the situation of
+`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`, the glued comparison
+`κ : F ≅ La^* C`, whose restriction to `𝔸¹_{Y'}` is `κ'`, restricts along the unit section
+`i₁` to `θ`, under `Li₁^* La^* ≅ 𝟭`; and it is the unique isomorphism `F ≅ La^* C` with this
+property, so that it depends neither on the cover nor on the local comparison `κ'`. Applying
+`Li₀^*` to `κ` then gives the canonical identification `Li₀^* F ≅ C` of clause (3). -/
+theorem exists_iso_leftDerivedUpperStar_oneSection_iff_of_etale
+    (F : _root_.DerivedCategory
+      (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).obj F ≅ C)
+    {Y' : Scheme.{u}} (v : Y' ⟶ Y) [Etale v] [Surjective v] [IsSeparated (v ≫ aY)]
+    (hF : ∃ L : Sheaf 𝔸(ULift.{u} (Fin 1); Y').smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsFiniteLocallyConstantSheaf L ∧
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ 𝔸(ULift.{u} (Fin 1); Y')),
+        Nonempty ((pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+      ∃ m n : ℤ, Nonempty
+        ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+          ((tateTwist Λ _ m).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))⟦n⟧))
+    (κ' : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+      (L((𝔸(ULift.{u} (Fin 1); Y') ↘ Y')^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj C))
+    (hκ' : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')^*[ModuleCat.{u + 1} Λ])).map
+          κ'.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+            (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')).hom.app _ =
+        ((leftDerivedUpperStarComp _ (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')
+            (AffineSpace.map (ULift.{u} (Fin 1)) v)).inv.app F ≫
+          (leftDerivedUpperStarComp _ v (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+            (AffineSpace.oneSection_comp_map v)).hom.app F) ≫
+        (L((v)^*[ModuleCat.{u + 1} Λ])).map θ.hom) :
+    ∃ κ : F ≅ (L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C,
+      (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫
+          (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+            (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).inv.app C ≫
+          (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+            (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).hom.app C = κ'.hom ∧
+      ∀ κ₂ : F ≅ (L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C,
+        (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map
+            κ₂.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+              (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)).hom.app C = θ.hom ↔
+          κ₂ = κ := by
+  obtain ⟨κ, hκ, -⟩ := existsUnique_iso_leftDerivedUpperStar_of_etale Λ aY F C θ v hF κ' hκ'
+  beta_reduce at hκ
+  obtain ⟨L, hL, hLs, m, n, ⟨e⟩⟩ := hF
+  have : HasInvertibleExponent Λ Y' := .of_hom v
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y') :=
+    .of_hom (𝔸(ULift.{u} (Fin 1); Y') ↘ Y')
+  have : _root_.AlgebraicGeometry.Etale (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale)
+      (AffineSpace.isPullback_map v).flip inferInstance
+  have : Surjective (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @Surjective) (AffineSpace.isPullback_map v).flip
+      inferInstance
+  have := hL
+  have hFinv := isInvertible_of_leftDerivedUpperStar_iso_tateTwist
+    (AffineSpace.map (ULift.{u} (Fin 1)) v) L hLs m n e
+  -- the restriction of `κ` to `𝔸¹_{Y'}` is `κ'`, whose restriction at `t = 1` is `Lv^* θ`
+  have hψ : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom =
+      κ'.hom ≫ (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+          (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).inv.app C ≫
+        (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+          (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).hom.app C := by
+    rw [← hκ]
+    simp
+  have hD := conj_leftDerivedUpperStar_section_eq
+    (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')
+    (AffineSpace.oneSection_comp_map v) θ κ' hκ'
+  rw [← hψ] at hD
+  have n₁ := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')
+    (AffineSpace.map (ULift.{u} (Fin 1)) v)).hom.naturality κ.hom
+  have n₂ := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+    (AffineSpace.oneSection_comp_map v)).hom.naturality κ.hom
+  simp only [Functor.comp_map] at n₁ n₂
+  rw [← reassoc_of% n₁, Iso.hom_inv_id_app, Category.comp_id] at hD
+  have h₁ : (L((v)^*[ModuleCat.{u + 1} Λ])).map
+      ((L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map κ.hom) =
+      (L((v)^*[ModuleCat.{u + 1} Λ])).map (θ.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)).inv.app C) := by
+    rw [← cancel_epi ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+      (AffineSpace.oneSection_comp_map v)).hom.app F), ← n₂, hD]
+    simp
+  -- hence `κ` is normalized at `t = 1`, comparisons out of `Li₁^* F` being detected after `Lv^*`
+  have hnorm : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map
+      κ.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)).hom.app C = θ.hom := by
+    refine eq_of_leftDerivedUpperStar_map_eq_of_isInvertible_of_surjective v
+      (hFinv.leftDerivedUpperStar (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)) _ _ ?_
+    rw [Functor.map_comp, h₁, ← Functor.map_comp, Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+  refine ⟨κ, hκ, fun κ₂ ↦ ⟨fun h₂ ↦ eq_of_leftDerivedUpperStar_oneSection_eq Λ F C hFinv κ₂ κ
+    ((cancel_mono _).1 (h₂.trans hnorm.symm)), ?_⟩⟩
+  rintro rfl
+  exact hnorm
 end
 
 end Etale

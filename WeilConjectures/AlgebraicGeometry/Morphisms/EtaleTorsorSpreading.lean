@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
+import WeilConjectures.AlgebraicGeometry.Morphisms.UnderlyingFiniteEtaleExtension
+import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
+
 /-!
 # Spreading a finite étale Galois cover out from the generic fibre
 
@@ -76,19 +79,23 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- **Spreading a finite étale Galois cover.** Let `S` be a qcqs integral normal scheme with
-generic point `η` and function field `κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth
-morphism with geometrically connected fibres, and let `σ` be a section of `c`. Let `G` be a
-finite group whose order is invertible on `S`, let `Cη` be the generic fibre of `c`, given by
-the cartesian square `hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G`
-carrying a `κ(η)`-rational point above the generic point `sη` of the section. Then there is a finite
+/-- Blueprint `sbc-thm-spreading-finite-etale-galois`: Spreading a finite étale Galois cover
+
+Let `S` be a qcqs integral normal scheme with generic point `η` and function field
+`κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
+connected fibres, and let `σ` be a section of `c`. Let `G` be a finite group whose order is
+invertible on `S`, let `Cη` be the generic fibre of `c`, given by the cartesian square
+`hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G` carrying a
+`κ(η)`-rational point above the generic point `sη` of the section. Then there is a finite
 étale Galois cover `T` of `C` with group `G` and a `G`-equivariant morphism `ψ : Z.P ⟶ T.P`
 making `Z` the restriction of `T` to `Cη`, that is, making the square over `j : Cη ⟶ C`
 cartesian.
 
 This is [Stacks 0EZJ], recorded as a classical input. Galois covers are taken in the sense
-of `AlgebraicGeometry.Scheme.GaloisCover`: their total space need not be connected.
-(blueprint: `sbc-thm-spreading-finite-etale-galois`) -/
+of `AlgebraicGeometry.Scheme.GaloisCover`, following the blueprint definition
+`def-sbc-normal-dominant-galois`: their total space need not be connected. 
+(blueprint: sbc-thm-spreading-finite-etale-galois)
+-/
 @[stacks 0EZJ]
 theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
@@ -103,8 +110,25 @@ theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [Compac
     (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) :
     ∃ (T : GaloisCover G C) (ψ : Z.P ⟶ T.P), IsPullback ψ Z.π T.π j ∧
-      ∀ g : G, Z.smul g ≫ ψ = ψ ≫ T.smul g :=
-  sorry
+      ∀ g : G, Z.smul g ≫ ψ = ψ ≫ T.smul g := by
+  obtain ⟨P, π, ψ, hfin, het, hsurj, hψ⟩ :=
+    GaloisCover.exists_finiteEtale_extension hS c σ hσ G hG q j hCη sη hsq hsj Z hZ
+  let := hfin
+  let := het
+  obtain ⟨a, ha, hunit, hmul, hequiv, htorsor⟩ :=
+    GaloisCover.exists_action_on_finiteEtale_extension hS c G q j hCη Z π ψ hψ
+  let T : GaloisCover G C :=
+    { P := P
+      π := π
+      isFinite := hfin
+      etale := het
+      surjective := hsurj
+      smul := a
+      smul_π := ha
+      one_smul := hunit
+      mul_smul := hmul
+      isIso_sigmaDesc := htorsor }
+  exact ⟨T, ψ, hψ, hequiv⟩
 
 end AlgebraicGeometry.Scheme
 

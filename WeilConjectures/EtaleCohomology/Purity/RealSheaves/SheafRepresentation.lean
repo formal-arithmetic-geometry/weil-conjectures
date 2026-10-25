@@ -7,6 +7,12 @@ module
 
 public import Mathlib.RepresentationTheory.Coinvariants
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationTensor
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 
 /-!
@@ -35,14 +41,22 @@ Frobenius induced by the degree-one lift `γ`
 - `AlgebraicGeometry.WeilGroup.exists_weilSheaf_of_isLisse`: the lisse Weil sheaf of a lisse
   representation, with its stalks and its geometric coinvariants.
 
+The natural forms of the identification of the equivalence with the Weil fundamental
+representation and of its tensor compatibility (an isomorphism of bifunctors, and the unit) are
+`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_of_lisseMonodromy` in
+`WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentationTensor`.
+
 ## Implementation notes
 
 The Weil fundamental representation of `def-wf-fundamental-representation` is the geometric
 generic stalk `ℱ_η̄` with the monodromy action of `π₁(C₀, η̄)` extended to the Weil group by the
-Weil structure. Neither the monodromy action of the étale fundamental group on a stalk of an
-`ℓ`-adic pro-étale sheaf nor the functor `ℱ ↦ ρ_ℱ` is available, so the equivalence is
-existentially quantified, and the fact that it *is* the Weil fundamental representation is
-recorded by the properties of it that the blueprint uses: at a closed point `x`, the stalk
+Weil structure. It is constructed in
+`WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation`
+(`AlgebraicGeometry.WeilGroup.fundamentalRep`) from a monodromy of lisse sheaves on the geometric
+curve (`AlgebraicGeometry.ProEtale.LisseMonodromy`, `cor-galois-lisse-representations`), at a
+base point which depends on choices; the equivalence is therefore existentially quantified,
+and the fact that it *is* the Weil fundamental representation is recorded by the properties of
+it that the blueprint uses: at a closed point `x`, the stalk
 `ℱ_x̄` with its local Frobenius `F_x` is `V` with `ρ (Frob_x)` (the stalk at `x̄` being
 transported to the base point along a path, which carries the geometric Frobenius of `κ(x)` to
 the Frobenius element `Frob_x` of `W(C₀)`); the equivalence is compatible with duals (it is a
@@ -112,7 +126,140 @@ representation:
   path);
 * it is compatible with duals: the representation of `ℱ^∨` is the contragredient of that of `ℱ`;
 * the global sections `H⁰(C̄, ℱ)` are the invariants `V ^ {π₁(C)}`, compatibly with the
-  Frobenius `ρ (γ)` of the degree-one lift `γ` (`p-real-sections`, for `U₀ = C₀`). -/
+  Frobenius `ρ (γ)` of the degree-one lift `γ` (`p-real-sections`, for `U₀ = C₀`; for a general
+  open `U₀ ⊆ C₀` see
+  `AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`);
+* it is compatible with tensor products: the representation of `ℱ ⊗ 𝒢` is the tensor product of
+  those of `ℱ` and `𝒢`.
+
+It is exact, as is any equivalence between these abelian categories
+(`AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`). -/
+theorem exists_equivalence_isLisse_of_lisseMonodromy
+    (M : ProEtale.LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K) (B : BasePointData W)
+    (hM : M.IsEquivalenceAt B.t) :
+    ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
+        ObjectProperty.FullSubcategory (W.isLisseRep l),
+      (∀ (F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse))
+          (x : C.finitePoints),
+        ∃ f : (F.obj.stalk x).carrier ≃ₗ[PadicAlgCl l] (e.functor.obj F).obj.V,
+          ∀ v, f ((F.obj.stalk x).frobenius v) = (e.functor.obj F).obj.ρ (W.frobenius x) (f v)) ∧
+      (∀ F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        Nonempty ((e.functor.obj ⟨F.obj.dual F.property, F.property.dual⟩).obj.ρ.Equiv
+          (e.functor.obj F).obj.ρ.dual)) ∧
+      (∀ F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        ∃ f : F.obj.globalSections.carrier ≃ₗ[PadicAlgCl l]
+            Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
+          ∀ v, (f (F.obj.globalSections.frobenius v) : (e.functor.obj F).obj.V) =
+            (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) ∧
+      (∀ F G : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        Nonempty ((e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
+            F.property.tensorObj G.property⟩).obj.ρ.Equiv
+          ((e.functor.obj F).obj.ρ.tprod (e.functor.obj G).obj.ρ))) ∧
+      ∀ F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        ∃ f : (e.functor.obj F).obj.V ≃ₗ[PadicAlgCl l]
+            ProEtale.LisseMonodromy.StalkSpace B.t (F.obj.toLisse F.property),
+          ∀ g v, f ((e.functor.obj F).obj.ρ g v) =
+            fundamentalRep M B.weilMonodromyData F.obj F.property g (f v) := by
+  have : ConnectedSpace (C ↘ Spec (.of K)).geometricFiber :=
+    GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (.of K))
+      (Scheme.specAlgebraicClosure K).hom (C ↘ Spec (.of K)).geometricFiberProj
+      (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure (IsPullback.of_hasPullback _ _)
+  have : Smooth (C ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
+  have : Smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (Smooth (Limits.pullback.snd _ _))
+  have := IsRegular.of_smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
+  have : CompactSpace (C ↘ Spec (.of K)).geometricFiber := inferInstance
+  obtain ⟨e, he⟩ := exists_equivalence_fundamentalRep M B.weilMonodromyData hM
+  choose f hf using he
+  set D := B.weilMonodromyData
+  have hf' (F : LisseWeilSheaf K l C) (g : W.carrier) (w) :
+      (f F).symm (fundamentalRep M D F.obj F.property g w) =
+        (e.functor.obj F).obj.ρ g ((f F).symm w) := by
+    rw [LinearEquiv.symm_apply_eq, hf, LinearEquiv.apply_symm_apply]
+  refine ⟨e, fun F x ↦ ?_, fun F ↦ ?_, fun F ↦ ?_, fun F G ↦ ?_, fun F ↦ ⟨f F, hf F⟩⟩
+  · -- the stalk at `x̄`, transported to the base point along a path `π`
+    obtain ⟨π⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor
+      (Scheme.FiniteEtale.fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
+      (Scheme.FiniteEtale.fiber B.t)
+    set h := B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm
+    set m := (C ↘ Spec (.of K)).degreeOver x.1
+    obtain ⟨c, hc⟩ := isConj_iff.mp (B.isConj_frobenius x π)
+    set ρ := (e.functor.obj F).obj.ρ
+    have key (v : (F.obj.stalk x).carrier) :
+        M.monoLinear π (F.obj.toLisse F.property) ((F.obj.stalk x).frobenius v) =
+          fundamentalRep M D F.obj F.property (B.frobLift ^ m * B.geomHom h)
+            (M.monoLinear π _ v) := by
+      rw [monoLinear_stalk_frobenius, map_mul, ← B.geomEquiv_apply h, Module.End.mul_apply,
+        fundamentalRep_geometric, show B.geomEquiv = D.geomEquiv from rfl,
+        ContinuousMulEquiv.symm_apply_apply, map_pow, show B.frobLift = D.frobLift from rfl,
+        fundamentalRep_frobLift]
+      rw [LinearEquiv.coe_pow, Module.End.pow_apply, LinearEquiv.coe_toLinearMap]
+      rfl
+    let r : (e.functor.obj F).obj.V ≃ₗ[PadicAlgCl l] (e.functor.obj F).obj.V :=
+      LinearEquiv.ofLinearMap (ρ c⁻¹) (ρ c)
+        (by rw [← Module.End.mul_eq_comp, ← map_mul, inv_mul_cancel, map_one]; rfl)
+        (by rw [← Module.End.mul_eq_comp, ← map_mul, mul_inv_cancel, map_one]; rfl)
+    refine ⟨(WeilCoefficients.linearEquivOfIso ((M.mono π).app (F.obj.toLisse F.property))).trans
+      ((f F).symm.trans r), fun v ↦ ?_⟩
+    change ρ c⁻¹ ((f F).symm (M.monoLinear π _ ((F.obj.stalk x).frobenius v))) =
+      ρ (W.frobenius x) (ρ c⁻¹ ((f F).symm (M.monoLinear π _ v)))
+    rw [key, hf', ← Module.End.mul_apply, ← Module.End.mul_apply, ← map_mul, ← map_mul, ← hc]
+    congr 2
+    group
+  · -- duals
+    obtain ⟨b⟩ := nonempty_equiv_fundamentalRep_dual (M := M) D F.obj F.property
+    let fF : (e.functor.obj F).obj.ρ.Equiv (fundamentalRep M D F.obj F.property) :=
+      .mk (f F) fun g ↦ LinearMap.ext (hf F g)
+    let fd : (e.functor.obj ⟨F.obj.dual F.property, F.property.dual⟩).obj.ρ.Equiv
+        (fundamentalRep M D (F.obj.dual F.property) F.property.dual) :=
+      .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
+    let dF : (fundamentalRep M D F.obj F.property).dual.Equiv (e.functor.obj F).obj.ρ.dual :=
+      .mk (f F).dualMap fun g ↦ LinearMap.ext fun φ ↦ LinearMap.ext fun w ↦ by
+        simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.dualMap_apply,
+          Representation.dual_apply, Module.Dual.transpose_apply, hf]
+    exact ⟨(fd.trans b).trans dF⟩
+  · -- global sections
+    obtain ⟨a, ha⟩ := exists_globalSections_linearEquiv_invariants (M := M) D hM F.obj
+      F.property
+      W.frobeniusLift W.deg_frobeniusLift
+    have hinv (w) : w ∈ Representation.invariants
+        ((fundamentalRep M D F.obj F.property).comp W.geometric.subtype) ↔
+        (f F).symm w ∈ Representation.invariants
+          ((e.functor.obj F).obj.ρ.comp W.geometric.subtype) := by
+      simp only [Representation.mem_invariants, MonoidHom.comp_apply, ← hf',
+        (f F).symm.injective.eq_iff]
+    let s := (f F).symm.ofSubmodules
+      (Representation.invariants ((fundamentalRep M D F.obj F.property).comp W.geometric.subtype))
+      (Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype)) (by
+        ext w
+        simp only [Submodule.mem_map, LinearEquiv.coe_coe]
+        constructor
+        · rintro ⟨w, hw, rfl⟩
+          exact (hinv w).1 hw
+        · intro hw
+          exact ⟨f F w, (hinv _).2 (by rwa [LinearEquiv.symm_apply_apply]),
+            LinearEquiv.symm_apply_apply _ _⟩)
+    refine ⟨a.trans s, fun v ↦ ?_⟩
+    change (f F).symm (a (F.obj.globalSections.frobenius v) : _) = _
+    rw [ha, hf']
+    rfl
+  · -- tensor products
+    obtain ⟨b⟩ := nonempty_equiv_fundamentalRep_tensorObj D F.obj G.obj F.property G.property
+    let fF : (e.functor.obj F).obj.ρ.Equiv (fundamentalRep M D F.obj F.property) :=
+      .mk (f F) fun g ↦ LinearMap.ext (hf F g)
+    let fG : (e.functor.obj G).obj.ρ.Equiv (fundamentalRep M D G.obj G.property) :=
+      .mk (f G) fun g ↦ LinearMap.ext (hf G g)
+    let fT : (e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
+        F.property.tensorObj G.property⟩).obj.ρ.Equiv
+        (fundamentalRep M D (F.obj.tensorObj G.obj F.property)
+          (F.property.tensorObj G.property)) :=
+      .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
+    exact ⟨(fT.trans b).trans (Representation.Equiv.tprodCongr fF.symm fG.symm)⟩
+
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
+The lisse sheaf–representation equivalence, for some monodromy of lisse sheaves on the geometric
+curve and some base point data; see
+`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy` for the properties. -/
 theorem exists_equivalence_isLisse :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory (W.isLisseRep l),
@@ -127,8 +274,24 @@ theorem exists_equivalence_isLisse :
         ∃ f : F.obj.globalSections.carrier ≃ₗ[PadicAlgCl l]
             Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
           ∀ v, (f (F.obj.globalSections.frobenius v) : (e.functor.obj F).obj.V) =
-            (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) := by
-  sorry
+            (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) ∧
+      (∀ F G : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        Nonempty ((e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
+            F.property.tensorObj G.property⟩).obj.ρ.Equiv
+          ((e.functor.obj F).obj.ρ.tprod (e.functor.obj G).obj.ρ))) := by
+  have : ConnectedSpace (C ↘ Spec (.of K)).geometricFiber :=
+    GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (.of K))
+      (Scheme.specAlgebraicClosure K).hom (C ↘ Spec (.of K)).geometricFiberProj
+      (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure (IsPullback.of_hasPullback _ _)
+  have : Smooth (C ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
+  have : Smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (Smooth (Limits.pullback.snd _ _))
+  have := IsRegular.of_smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
+  obtain ⟨M, hM⟩ := ProEtale.exists_lisseMonodromy (l := l)
+    (Y := (C ↘ Spec (.of K)).geometricFiber) (Ω := K)
+  obtain ⟨B⟩ := nonempty_basePointData W
+  obtain ⟨e, h₁, h₂, h₃, h₄, -⟩ := exists_equivalence_isLisse_of_lisseMonodromy W l M B (hM B.t)
+  exact ⟨e, h₁, h₂, h₃, h₄⟩
 
 /-- The linear isomorphism underlying an isomorphism of representations. -/
 private noncomputable def repLinearEquivOfIso {k G : Type*} [CommRing k] [Monoid G]
@@ -172,7 +335,7 @@ theorem exists_weilSheaf_of_isLisse {V : Type u} [AddCommGroup V] [Module (Padic
           Representation.Coinvariants (ρ.comp W.geometric.subtype),
         ∀ v, f ((F.geometricCoinvariants hF).frobenius v) =
           ρ.toCoinvariants W.geometric W.frobeniusLift (f v) := by
-  obtain ⟨e, hst, hdu, hse⟩ := W.exists_equivalence_isLisse l
+  obtain ⟨e, hst, hdu, hse, -⟩ := W.exists_equivalence_isLisse l
   let X : ObjectProperty.FullSubcategory (W.isLisseRep l) := ⟨Rep.of ρ, inferInstance, hρ⟩
   set F := e.inverse.obj X
   set ρF := (e.functor.obj F).obj.ρ

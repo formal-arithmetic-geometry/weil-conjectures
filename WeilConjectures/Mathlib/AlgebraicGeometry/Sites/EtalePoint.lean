@@ -142,7 +142,8 @@ lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ
   -- `pointSmallEtale`, and those of the morphisms, the objects and the index type of `S.Etale`
   (isConservative_pointSmallEtale s hs).ulift.{u + 1, u, u, u + 1, u} _
 
-/-- **The universe-lifted geometric points of `S` form a conservative family.** -/
+/-- **The universe-lifted geometric points of `S` form a conservative family**
+(blueprint `lemma-openclosed-point-ulift`). -/
 lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale :
     (ObjectProperty.ofObj S.uliftPointSmallEtale).IsConservativeFamilyOfPoints :=
   isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ S
@@ -169,7 +170,8 @@ variable {S A}
 
 include hJ in
 /-- A morphism of `A`-valued sheaves on the small étale site of `S` whose fibre at every
-geometric point of `S` is invertible is invertible. -/
+geometric point of `S` is invertible is invertible
+(blueprint `lemma-weil-pbc-geometric-stalk-conservative`). -/
 lemma isIso_of_isIso_sheafFiber_map {F G : Sheaf S.smallEtaleTopology A} (φ : F ⟶ G)
     (h : ∀ s : S, IsIso ((S.uliftPointSmallEtale s).sheafFiber.map φ)) :
     IsIso φ :=
@@ -416,7 +418,8 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
       (FormallyUnramified.eqLocus W.hom σ.val.left σ'.val.left hab).ι _ hmr,
       Category.assoc, Category.assoc, FormallyUnramified.eqLocus_ι_comp_eq]
 
-/-- **Base change along a closed immersion is initial on pointed étale neighbourhoods.** For
+/-- Blueprint `lemma-openclosed-stalk-lowerstar`, first assertion: **Base change along a closed
+immersion is initial on pointed étale neighbourhoods.** For
 a closed immersion `i : Z ⟶ X` and a geometric point `s` of `Z`, every pointed étale
 neighbourhood of `s` in `Z` is dominated by one of the form `V ×_X Z`, and two maps out of
 such a `V ×_X Z` are equalised after shrinking `V`; the categories of pointed étale

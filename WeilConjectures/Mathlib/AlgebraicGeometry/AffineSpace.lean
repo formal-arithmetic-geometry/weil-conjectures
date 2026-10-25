@@ -837,7 +837,16 @@ lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
-/-- The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
+/-- Blueprint `pur9-def-affine-line`: The affine line over a base.
+
+The affine line `𝔸¹_Y` over `Y` is `𝔸(ULift (Fin 1); Y)`, with coordinate
+`AffineSpace.coord Y 0`, projection `𝔸(ULift (Fin 1); Y) ↘ Y`, zero section
+`AffineSpace.zeroSection` (`t = 0`) and unit section `AffineSpace.oneSection` (`t = 1`, this
+declaration); the open complement `𝔾_{m,Y}` of the zero section is
+`AlgebraicGeometry.Scheme.Hom.puncturedLine Y`, through which the unit section factors
+(`AlgebraicGeometry.Scheme.Hom.oneSectionToPuncturedLine`).
+
+The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
 whose coordinates are `1`, i.e. the section `t = 1`. It is the normalization point of weak
 `𝔸¹`-invariance, where a comparison on `𝔸(n; S)` is pinned down by its restriction to
 `t = 1`; this is why it sits here alongside `AffineSpace.zeroSection`. -/
@@ -1121,3 +1130,44 @@ instance {S T : Scheme.{u}} (n : Type u) (f : S ⟶ T) [IsIso f] : IsIso (Affine
     AffineSpace.map_id], by rw [← AffineSpace.map_comp, IsIso.inv_hom_id, AffineSpace.map_id]⟩⟩
 
 end AlgebraicGeometry
+
+open CategoryTheory
+
+namespace AlgebraicGeometry.AffineSpace
+
+open MvPolynomial
+
+/-- The global sections of `𝔸(n; Spec R)` are the polynomial ring over `R`: evaluating
+polynomials at the coordinates is bijective. -/
+lemma bijective_eval₂Hom_coord {n : Type u} (R : CommRingCat.{u}) :
+    Function.Bijective (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+      (𝔸(n; Spec R) ↘ Spec R).appTop).hom (coord (Spec R))) := by
+  have : IsIso (CommRingCat.ofHom (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+      (𝔸(n; Spec R) ↘ Spec R).appTop).hom (coord (Spec R)))) := by
+    rw [← (Scheme.ΓSpecIso _).inv_hom_id_assoc (CommRingCat.ofHom _), ← SpecIso_hom_appTop]
+    infer_instance
+  exact ConcreteCategory.bijective_of_isIso (CommRingCat.ofHom (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+    (𝔸(n; Spec R) ↘ Spec R).appTop).hom (coord (Spec R))))
+
+/-- For `i : Z ⟶ 𝔸(n; Spec R)`, evaluating polynomials over `R` at the pulled back coordinates
+factors through the global sections of `𝔸(n; Spec R)`. -/
+lemma eval₂Hom_appTop_coord {n : Type u} {R : CommRingCat.{u}} {Z : Scheme.{u}}
+    (i : Z ⟶ 𝔸(n; Spec R)) :
+    eval₂Hom ((Scheme.ΓSpecIso R).inv ≫ (i ≫ 𝔸(n; Spec R) ↘ Spec R).appTop).hom
+        (fun j ↦ i.appTop (coord (Spec R) j)) =
+      i.appTop.hom.comp
+        (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫ (𝔸(n; Spec R) ↘ Spec R).appTop).hom
+          (coord (Spec R))) := by
+  ext <;> simp
+
+/-- For a closed immersion `i : Z ⟶ 𝔸(n; Spec R)`, the global sections of `Z` are generated
+over `R` by the pulled back coordinates. -/
+lemma surjective_eval₂Hom_appTop_coord {n : Type u} {R : CommRingCat.{u}} {Z : Scheme.{u}}
+    (i : Z ⟶ 𝔸(n; Spec R)) [IsClosedImmersion i] :
+    Function.Surjective (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+      (i ≫ 𝔸(n; Spec R) ↘ Spec R).appTop).hom fun j ↦ i.appTop (coord (Spec R) j)) := by
+  rw [eval₂Hom_appTop_coord, RingHom.coe_comp]
+  exact (IsClosedImmersion.isAffine_surjective_of_isAffine i).2.comp
+    (bijective_eval₂Hom_coord R).2
+
+end AlgebraicGeometry.AffineSpace

@@ -1,39 +1,39 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.FiniteType
 
 /-!
-# Ring maps quasi-finite at a prime
+# Quasi-finiteness of a ring map at a prime
 
-A ring map `R → S` is quasi-finite at a prime `𝔮` of `S` if the prime of the fibre ring
-`κ(𝔭) ⊗[R] S` (`𝔭 = 𝔮 ∩ R`) corresponding to `𝔮` is an isolated point of its spectrum
-(Stacks, Algebra, Definition 00PJ).
-
-Mathlib's `Algebra.QuasiFiniteAt` is defined differently (through the localization `S_𝔮`); the two
-agree for maps of finite type.
+Source: Stacks Project, Algebra, Definition 10.122.3 (Tag 00PL), using condition (1) of
+Lemma 10.122.2 (Tag 00PK) (blueprint: def-weil-pbc-ring-map-quasi-finite-at-prime).
 -/
 
 @[expose] public section
 
+universe u v
+
 namespace Algebra
 
-variable (R : Type*) [CommRing R] {S : Type*} [CommRing S] [Algebra R S]
+/-- (blueprint: def-weil-pbc-ring-map-quasi-finite-at-prime) For a finite-type map of
+commutative rings `R → S`, quasi-finiteness at a prime `q` means that the prime of the
+fibre ring `κ(p) ⊗[R] S` corresponding to `q`, where `p` is the contraction of `q`,
+is an isolated point of its spectrum (Stacks, Tags 00PL and 00PK).
 
-/-- The point of `Spec(κ(𝔭) ⊗[R] S)` corresponding to a prime `𝔮` of `S` lying over `𝔭`. -/
-noncomputable def fiberPoint (q : PrimeSpectrum S) :
-    PrimeSpectrum ((PrimeSpectrum.comap (algebraMap R S) q).asIdeal.Fiber S) :=
-  PrimeSpectrum.preimageEquivFiber R S _ ⟨q, rfl⟩
-
-/-- `R → S` is *quasi-finite at the prime `𝔮`* if the point of `Spec(κ(𝔭) ⊗[R] S)` corresponding
-to `𝔮` is isolated, i.e. `{𝔮̄}` is open. (Stacks writes the fibre ring as `S ⊗_R κ(𝔭)`; it is
-canonically isomorphic to `κ(𝔭) ⊗[R] S`.)
-(blueprint: `def-weil-pbc-ring-map-quasi-finite-at-prime`) -/
-def IsQuasiFiniteAtPrime (q : Ideal S) [q.IsPrime] : Prop :=
-  IsOpen ({fiberPoint R ⟨q, ‹_›⟩} : Set (PrimeSpectrum _))
+The fibre prime is supplied canonically by `PrimeSpectrum.preimageHomeomorphFiber`;
+its source point lies over `p` by the definition of `p`. The singleton is open in
+the Zariski topology of the fibre spectrum. -/
+def IsQuasiFiniteAtPrime (R : Type u) (S : Type v) [CommRing R] [CommRing S]
+    [Algebra R S] [Algebra.FiniteType R S] (q : PrimeSpectrum S) : Prop :=
+  let p := q.comap (algebraMap R S)
+  let e := PrimeSpectrum.preimageHomeomorphFiber R S p
+  IsOpen ({e ⟨q, rfl⟩} : Set (PrimeSpectrum (p.asIdeal.Fiber S)))
 
 end Algebra

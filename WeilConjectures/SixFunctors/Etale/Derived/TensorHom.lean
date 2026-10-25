@@ -359,6 +359,26 @@ theorem exists_iso_derivedHom_rightDerivedLowerShriek_commShift :
   ⟨derivedHomRightDerivedLowerShriekIso _ f,
     fun M ↦ commShift_derivedHomRightDerivedLowerShriekIso_app_hom _ f M⟩
 
+/-- Blueprint `prop-asd-internal-adjunction`: Internal ambient adjunction.
+
+For a morphism `f : X ⟶ Y` admitting a compactification and a finite coefficient ring `Λ`,
+there is a canonical isomorphism, natural in `M ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`,
+
+`Rf_* RHom_X(M, Rf^! K) ≅ RHom_Y(Rf_! M, K)`.
+
+It is the Yoneda transpose of the chain of adjunctions `Lf^* ⊣ Rf_*`, `- ⊗ᴸ - ⊣ RHom`,
+`Rf_! ⊣ Rf^!` and of the projection formula `Rf_!(M ⊗ᴸ Lf^* Q) ≅ Rf_! M ⊗ᴸ Q`
+(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, `lem-amb-proper-coproducts-projection`),
+that is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = ModuleCat Λ`. The
+blueprint assumes Noetherian schemes; this is not needed here. -/
+noncomputable def derivedHomRightDerivedLowerShriekIsoOfFinite :
+    RHom(X)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ⋙
+          (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅
+      (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ] :=
+  have := isIso_projectionMap_of_finite Λ f
+  derivedHomRightDerivedLowerShriekIso _ f
+
 end TensorHom
 
 section VerdierExchange
@@ -403,6 +423,30 @@ theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
   exact ⟨e₁.symm ≪≫ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
     ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).mapIso e₂)⟩
+
+/-- Blueprint `thm-sf-verdier-exchange`: Verdier-duality exchange.
+
+With `a_Y : Y ⟶ S` the structure morphism of `Y` and `a_X = f ≫ a_Y` that of `X`, for torsion
+coefficients there is an isomorphism
+
+`𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`
+
+natural in `M`, i.e. an isomorphism of functors `D(X_ét)ᵒᵖ ⥤ D(Y_ét)`; no constructibility
+hypothesis on `M` is needed. It is the tensor–Hom exchange
+`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIsoOfFinite` evaluated at
+`N = ω_Y`, followed by `Rf_* RHom_X(-, ε)` for an isomorphism `ε : Rf^! ω_Y ≅ ω_X`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`). The
+compatibilities with shifts and with changes of coefficients are those of the tensor–Hom
+exchange (`AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`,
+`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`). -/
+theorem nonempty_verdierDual_rightDerivedLowerShriek_natIso :
+    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ verdierDual _ aY ≅
+      verdierDual _ (f ≫ aY) ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) := by
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
+  exact ⟨(Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIsoOfFinite Λ f)
+      ((CategoryTheory.evaluation _ _).obj (dualizingComplex _ aY))).symm ≪≫
+    Functor.isoWhiskerRight ((RHom(X)[ModuleCat.{u + 1} Λ]).flip.mapIso e₂)
+      R((f)_*[ModuleCat.{u + 1} Λ])⟩
 
 end VerdierExchange
 

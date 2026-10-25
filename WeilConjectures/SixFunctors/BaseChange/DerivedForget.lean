@@ -225,31 +225,13 @@ lemma mapHomotopyCategoryPlus_baseChangeMap_forget₂ (sq : CommSq g' f' f g)
         ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq)).app K) := by
   apply (HomotopyCategory.Plus.ι _).map_injective
-  obtain ⟨⟨K⟩, hK⟩ := K
-  have e₁ : ∀ {M N : HomotopyCategory.Plus (Sheaf X'.smallEtaleTopology AddCommGrpCat.{u + 1})}
-      (ψ : M ⟶ N), (HomotopyCategory.Plus.ι _).map
-        (((f')_*[AddCommGrpCat.{u + 1}]).mapHomotopyCategoryPlus.map ψ) =
-      (((f')_*[AddCommGrpCat.{u + 1}]).mapHomotopyCategory (ComplexShape.up ℤ)).map
-        ((HomotopyCategory.Plus.ι _).map ψ) := fun _ ↦ rfl
-  have e₂ : ∀ {M N : HomotopyCategory.Plus (Sheaf Y'.smallEtaleTopology
-      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))}
-      (ψ : M ⟶ N), (HomotopyCategory.Plus.ι _).map
-        ((Φ Y').mapHomotopyCategoryPlus.map ψ) =
-      ((Φ Y').mapHomotopyCategory (ComplexShape.up ℤ)).map
-        ((HomotopyCategory.Plus.ι _).map ψ) := fun _ ↦ rfl
-  rw [Functor.map_comp, Functor.map_comp, e₁, e₂, NatTrans.ι_map_mapHomotopyCategoryPlus_app,
-    NatTrans.ι_map_mapHomotopyCategoryPlus_app, NatTrans.ι_map_mapHomotopyCategoryPlus_app,
-    NatTrans.ι_map_mapHomotopyCategoryPlus_app]
-  change (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map _ ≫
-      (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map _ =
-    (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map _ ≫
-      (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map _
-  rw [← Functor.map_comp, ← Functor.map_comp]
+  rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app_comp_map_mapHomotopyCategoryPlus_app,
+    NatTrans.ι_map_mapHomotopyCategoryPlus_app_comp_map_mapHomotopyCategoryPlus_app]
   congr 1
   refine HomologicalComplex.hom_ext _ _ fun n ↦ ?_
   simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
     Functor.mapHomologicalComplex_map_f, upperStarForget₂_natTrans_app]
-  exact (upperStarForget₂Comparison_comp_map_baseChangeMap_app _ sq (K.X n)).symm
+  exact (upperStarForget₂Comparison_comp_map_baseChangeMap_app _ sq (K.obj.as.X n)).symm
 
 /-- The underived part `g^* f_* K ⟶ f'_* g'^* K ⟶ R⁺f'_*(g'^* K)` of the derived base change
 map for abelian sheaves at `forget₂ K` is an isomorphism if and only if the one for sheaves of
@@ -267,30 +249,14 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_forget₂_iff (sq : CommSq g' f' f 
           (baseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq)).app K) ≫
         (f')_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)].rightDerivedFunctorPlusUnit.app
           (((g')^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).mapHomotopyCategoryPlus.obj K)) := by
-  rw [← isIso_forget₂_mapDerivedCategoryPlus_map_iff,
-    ← isIso_comp_right_iff _ ((rightDerivedLowerStarForget₂ f').app
-      (DerivedCategory.Plus.Qh.obj
-        (((g')^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).mapHomotopyCategoryPlus.obj K))),
-    Functor.map_comp, Category.assoc, forget₂_map_rightDerivedFunctorPlusUnit_app]
   have h₁ := (Φ Y').mapDerivedCategoryPlusFactorsh.hom.naturality
     ((NatTrans.mapHomotopyCategoryPlus
       (baseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq)).app K)
-  simp only [Functor.comp_map] at h₁
-  erw [reassoc_of% h₁]
-  conv_rhs => rw [isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff]
-  have h₂ := mapHomotopyCategoryPlus_baseChangeMap_forget₂ sq K
   have h₃ := ((f')_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnit.naturality
     ((NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g').natTrans).app K)
-  simp only [Functor.comp_map] at h₃
-  conv_rhs => rw [← isIso_comp_left_iff (DerivedCategory.Plus.Qh.map
-      ((NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g).natTrans).app
-        (((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).mapHomotopyCategoryPlus.obj K))),
-    ← Category.assoc, ← Functor.map_comp]
-  conv_rhs => erw [← h₂]
-  conv_rhs => rw [Functor.map_comp, Category.assoc]
-  conv_rhs => erw [h₃]
-  conv_rhs => rw [← Category.assoc]
-  exact (isIso_comp_right_iff _ _).symm
+  exact isIso_map_comp_iff_of_reflectsIsomorphisms _ isIso_forget₂_mapDerivedCategoryPlus_map_iff
+    _ _ _ _ _ _ _ _ _ (forget₂_map_rightDerivedFunctorPlusUnit_app f' _) _ _ h₁ _ _
+    (mapHomotopyCategoryPlus_baseChangeMap_forget₂ sq K) _ h₃
 
 /-- **The derived base change map and underlying abelian sheaves.** For a commutative square
 ```
@@ -308,45 +274,10 @@ theorem isIso_derivedBaseChangeMapPlus_app_forget₂_iff (sq : CommSq g' f' f g)
       (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) :
     IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq).app
         ((Φ X).mapDerivedCategoryPlus.obj K)) ↔
-      IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq).app K) := by
-  let C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
-  obtain ⟨K₀, ⟨eK⟩⟩ : ∃ K₀ : HomotopyCategory.Plus C,
-      Nonempty (DerivedCategory.Plus.Qh.obj K₀ ≅ K) :=
-    ⟨_, ⟨DerivedCategory.Plus.Qh.objObjPreimageIso K⟩⟩
-  obtain ⟨M, rfl⟩ := HomotopyCategory.Plus.quotient_obj_surjective K₀
-  obtain ⟨a, _⟩ := M.2
-  obtain ⟨T, _, i, hi⟩ := CochainComplex.Plus.exists_quasiIso_injective M a
-  let T' := (InjectiveObject.ι C).mapCochainComplexPlus.obj T
-  have : IsIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map i)) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hi)
-  let e : DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj T') ≅ K :=
-    (asIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map i))).symm ≪≫ eK
-  rw [← NatTrans.isIso_app_iff_of_iso _ e,
-    ← NatTrans.isIso_app_iff_of_iso _ ((Φ X).mapDerivedCategoryPlus.mapIso e),
-    NatTrans.isIso_app_iff_of_iso _
-      (show (Φ X).mapDerivedCategoryPlus.obj
-          (DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj T')) ≅
-          DerivedCategory.Plus.Qh.obj ((Φ X).mapHomotopyCategoryPlus.obj
-            ((HomotopyCategory.Plus.quotient C).obj T')) from
-        (Φ X).mapDerivedCategoryPlusFactorsh.app ((HomotopyCategory.Plus.quotient C).obj T'))]
-  set K' := (HomotopyCategory.Plus.quotient C).obj T'
-  have : IsIso (((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).rightDerivedFunctorPlusUnit.app
-      K') :=
-    Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic _ T'
-      fun n ↦ have : Injective (T'.obj.X n) := (T.obj.X n).2
-        Functor.rightAcyclic_of_injective _
-  let LT : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
-    ⟨((Φ X).mapHomotopyCategoryPlus.obj K').obj.as,
-      (HomotopyCategory.plus_quotient_obj_iff _).1
-        ((Φ X).mapHomotopyCategoryPlus.obj K').property⟩
-  have : IsIso (((f)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnit.app
-      ((Φ X).mapHomotopyCategoryPlus.obj K')) :=
-    ((f)_*[AddCommGrpCat.{u + 1}]).isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic LT
-      fun n ↦ have : Injective (T'.obj.X n) := (T.obj.X n).2
-        Functor.rightAcyclic_of_injective ((Φ X).obj (T'.obj.X n))
-  rw [isIso_derivedBaseChangeMapPlus_app_Qh_obj_iff, isIso_derivedBaseChangeMapPlus_app_Qh_obj_iff]
-  exact isIso_comp_rightDerivedFunctorPlusUnit_forget₂_iff sq K'
+      IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq).app K) :=
+  isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff _ sq
+    (fun _ _ ↦ Functor.rightAcyclic_of_injective _)
+    (isIso_comp_rightDerivedFunctorPlusUnit_forget₂_iff sq) K
 
 end BaseChange
 

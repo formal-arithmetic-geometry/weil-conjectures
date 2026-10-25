@@ -1,0 +1,69 @@
+name: Bump Blueprint
+
+# Keep the `blueprint` submodule pointing at the newest commit of
+# weil-conjectures-blueprint's `main`. When the pin is behind, the bump is
+# committed and pushed straight to each tracked branch (no PR to merge).
+#
+# Scheduled runs only fire from the workflow file on the default branch
+# (master), but each run updates every branch in the matrix.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *" # Every 6 hours
+  # Lets the blueprint repo trigger an immediate bump after a push, via
+  # `POST /repos/formal-arithmetic-geometry/weil-conjectures/dispatches`
+  # with `{"event_type": "blueprint-updated"}`.
+  repository_dispatch:
+    types: [blueprint-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: write # Push the submodule bump
+
+# Never run two bumps at once: they would race to push the same branches.
+concurrency:
+  group: ${{ github.repository }}-blueprint-bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: self-hosted
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        branch: [master, slopmaster]
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ matrix.branch }}
+          submodules: true
+
+      - name: Bump submodule to blueprint main
+        env:
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          set -euo pipefail
+          git -C blueprint fetch --depth=1 origin main
+          git -C blueprint checkout --detach FETCH_HEAD
+
+          if git diff --quiet -- blueprint; then
+            echo "blueprint is already up to date on $BRANCH"
+            exit 0
+          fi
+
+          sha=$(git -C blueprint rev-parse --short HEAD)
+          subject=$(git -C blueprint log -1 --format=%s)
+          git add blueprint
+          # `[skip ci]`: the bump touches no Lean code, so a rebuild is wasted.
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "chore(blueprint): bump submodule to $sha [skip ci]" \
+                     -m "Upstream: $subject"
+
+          # Retry once if someone pushed to the branch in the meantime.
+          git push origin "HEAD:$BRANCH" || {
+            git pull --rebase origin "$BRANCH"
+            git push origin "HEAD:$BRANCH"
+          }

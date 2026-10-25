@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Monoidal.Internal.Module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
 # The constant `ℓ`-adic sheaf is a sheaf of rings

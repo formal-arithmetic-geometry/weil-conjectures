@@ -66,4 +66,18 @@ lemma liftFullSubcategory_faithful (F : C ⥤ D) [F.Faithful] (h : ∀ X, P X �
 
 attribute [instance] liftFullSubcategory_full liftFullSubcategory_faithful
 
+section LiftCompι
+
+variable {E : Type*} [Category* E] (R : ObjectProperty D) (F : E ⥤ D) (hF : ∀ X, R (F.obj X))
+
+/-- The components of `R.liftCompιIso F hF` are identities. -/
+@[simp]
+lemma liftCompιIso_hom_app (X : E) : (R.liftCompιIso F hF).hom.app X = 𝟙 _ := rfl
+
+/-- The components of the inverse of `R.liftCompιIso F hF` are identities. -/
+@[simp]
+lemma liftCompιIso_inv_app (X : E) : (R.liftCompιIso F hF).inv.app X = 𝟙 _ := rfl
+
+end LiftCompι
+
 end CategoryTheory.ObjectProperty

@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.ShortComplex.Linear
-public import Mathlib.CategoryTheory.Localization.Linear
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.ConstructibleSheaf.RestrictScalars
 
@@ -31,34 +30,6 @@ over a finite coefficient ring, for the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` a
 universe w v u' u
 
 open CategoryTheory Limits Pretriangulated
-
-namespace HomologicalComplex
-
-variable {C : Type u'} [Category.{v} C] [Preadditive C] [CategoryWithHomology C]
-  (R : Type w) [Ring R] [Linear R C] {ι : Type*} (c : ComplexShape ι) (i : ι)
-
-/-- The homology functor of homological complexes in an `R`-linear category is `R`-linear. -/
-instance linear_homologyFunctor : (homologyFunctor C c i).Linear R where
-  map_smul φ r := ShortComplex.homologyMap_smul ((shortComplexFunctor C c i).map φ) r
-
-end HomologicalComplex
-
-namespace DerivedCategory
-
-variable {C : Type u'} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
-  (R : Type*) [Ring R] [Linear R C]
-
-/-- The homology functors of the derived category of an `R`-linear abelian category are
-`R`-linear: they are induced by the `R`-linear homology functors of complexes. -/
-instance linear_homologyFunctor (n : ℤ) : (homologyFunctor C n).Linear R := by
-  have : Localization.Lifting Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
-      (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n) (homologyFunctor C n) :=
-    ⟨homologyFunctorFactors C n⟩
-  rw [← Localization.functor_linear_iff Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) R
-    (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n) (homologyFunctor C n)]
-  infer_instance
-
-end DerivedCategory
 
 namespace CategoryTheory
 

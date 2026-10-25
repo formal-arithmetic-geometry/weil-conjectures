@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
+public import WeilConjectures.ZetaFunction.WeilObjectComparison
 public import WeilConjectures.ZetaSeries
 
 /-!
@@ -70,14 +71,16 @@ separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
 
 The inner sum on the right is the trace function `t_K(y)` of `K`; both sums are finite
 (`AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology`,
-`AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`). -/
+`AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`). It is deduced from the trace formula for
+Weil objects `ProEtale.CondensedRing.weilTraceFormula`
+(`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison`). -/
 theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq (K : WeilComplex k₀ l X)
     {m : ℕ} (hm : 1 ≤ m) :
     ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
         ((K.compactlySupportedCohomology i).frobeniusEnd ^ m) =
       ∑ᶠ y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
         K.traceFunction m y :=
-  sorry
+  K.finsum_trace_compactlySupportedCohomology_eq_of_comparison hm
 
 end Separated
 

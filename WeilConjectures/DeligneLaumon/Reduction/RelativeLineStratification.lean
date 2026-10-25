@@ -85,7 +85,7 @@ namespace WeilSheaf
 
 /-- A Weil sheaf punctually pure of weight `w` is mixed of weights at most `w`, through the
 filtration of length one. -/
-theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost {X : Scheme.{u}}
+theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost_stratification {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     {F : WeilSheaf k₀ l X} {w : ℝ} (hF : F.IsPunctuallyPureOfWeight ι w) :
     F.IsMixedOfWeightsAtMost ι w :=
@@ -172,7 +172,7 @@ theorem WeilSheaf.HasRelativeLineStratification.of_isEmpty {X : Scheme.{u}}
     (hF : F.IsPunctuallyPureOfWeight ι w) : F.HasRelativeLineStratification ι w h :=
   have : LocallyQuasiFinite h :=
     .of_finite_preimage_singleton _ fun _ ↦ Set.finite_empty.subset fun x _ ↦ isEmptyElim x
-  .quasiFinite h F hF.isMixedOfWeightsAtMost
+  .quasiFinite h F hF.isMixedOfWeightsAtMost_stratification
 variable [IsSeparated (S ↘ Spec (CommRingCat.of k₀))]
 
 /-- Let `W` be an affine open of a `k₀`-scheme `V`, with an immersion `c : W ⟶ S`, and `U` an open
@@ -243,7 +243,7 @@ theorem WeilSheaf.hasRelativeLineStratification_of_forall_exists_mem_and_finite
       rw [← hz, ← Scheme.Hom.comp_apply, hmo, Scheme.Hom.comp_apply, Scheme.Hom.comp_apply]
     have : LocallyQuasiFinite (i ≫ 𝔸(PUnit.{u + 1}; W) ↘ W ≫ c) := by
       rw [← Category.assoc]; infer_instance
-    exact .quasiFinite _ _ ((hG.upperStar _).upperStar _).isMixedOfWeightsAtMost
+    exact .quasiFinite _ _ ((hG.upperStar _).upperStar _).isMixedOfWeightsAtMost_stratification
 
 variable [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))]
 

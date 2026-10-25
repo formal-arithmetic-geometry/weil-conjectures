@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
@@ -72,6 +73,10 @@ points of the small étale site nevertheless have fibers in `ModuleCat.{u + 1} �
 universe w u
 
 open CategoryTheory Limits
+
+local instance (X : AlgebraicGeometry.Scheme.{u}) :
+    LocallySmall.{u} X.Etale :=
+  CategoryTheory.locallySmall_self _
 
 namespace AlgebraicGeometry
 
@@ -523,6 +528,22 @@ noncomputable def Etale.DerivedCategoryPlusTorsionOfPrimes.ι (P : Set ℕ) :
   (Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P).ι
 
 end TorsionHomology
+
+
+/-- This is for describing sheaves in smooth base change. -/
+class Scheme.OrderInvertibleOnSheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) : Prop where
+  isUnit_addOrderOf_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
+      (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
+    IsUnit ((addOrderOf x : ℕ) : Γ(Y, ⊤))
+
+
+/-- An object of `D+` with cohomologies `OrderInvertibleOnSheaf`. -/
+noncomputable def Etale.DerivedCategory.Plus.orderInvertibleOnHomology
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1})) :=
+  fun K ↦ ∀ n : ℤ, OrderInvertibleOnSheaf f
+    ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology Ab.{u + 1}) n).obj K)
 
 
 end AlgebraicGeometry

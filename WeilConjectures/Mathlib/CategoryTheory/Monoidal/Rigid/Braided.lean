@@ -28,7 +28,9 @@ and `End (𝟙_ C) = R`.
 ## Main definitions
 
 - `CategoryTheory.MonoidalCategory.trace`: the trace of an endomorphism of a dualizable
-  object.
+  object; it does not depend on the choice of the dual
+  (`CategoryTheory.MonoidalCategory.trace_eq_of_exactPairing`) and is preserved by braided
+  monoidal functors (`CategoryTheory.Functor.map_trace`).
 - `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
   category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
 
@@ -61,6 +63,8 @@ uses, the two agree.
 
 namespace CategoryTheory.MonoidalCategory
 
+open Functor.LaxMonoidal Functor.OplaxMonoidal
+
 variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
 
 /-- The trace of an endomorphism `f : X ⟶ X` of an object with a right dual `Xᘁ` is the
@@ -77,6 +81,116 @@ category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R
 (blueprint: `sk-d-trace`). -/
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
+
+/-- The trace does not depend on the choice of the right dual: it can be computed with any
+exact pairing `X ⊗ Y`. -/
+lemma trace_eq_of_exactPairing {X : C} [HasRightDual X] (Y : C) [ExactPairing X Y]
+    (f : X ⟶ X) :
+    trace f = η_ X Y ≫ f ▷ Y ≫ (β_ X Y).hom ≫ ε_ X Y := by
+  let e := rightDualIso (inferInstance : ExactPairing X Xᘁ) (inferInstance : ExactPairing X Y)
+  have h₁ : η_ X Xᘁ ≫ X ◁ e.hom = η_ X Y := by
+    have := @coevaluation_comp_rightAdjointMate C _ _ X X ⟨Y⟩ ⟨Xᘁ⟩ (𝟙 X)
+    rw [id_whiskerRight, Category.comp_id] at this
+    exact this
+  have h₂ : e.hom ▷ X ≫ ε_ X Y = ε_ X Xᘁ := by
+    have := @rightAdjointMate_comp_evaluation C _ _ X X ⟨Y⟩ ⟨Xᘁ⟩ (𝟙 X)
+    rw [whiskerLeft_id, Category.id_comp] at this
+    exact this
+  rw [trace, ← h₂, ← h₁]
+  simp only [Category.assoc]
+  congr 1
+  rw [BraidedCategory.braiding_naturality_left_assoc,
+    BraidedCategory.braiding_naturality_left_assoc,
+    BraidedCategory.braiding_naturality_right_assoc, whisker_exchange_assoc]
+
+/-- **Conjugacy invariance of the trace**: for an isomorphism `e : X ≅ Y` of dualizable objects
+and an endomorphism `f` of `Y`, `tr(e ≫ f ≫ e⁻¹) = tr(f)`. -/
+lemma trace_conj {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y) (f : Y ⟶ Y) :
+    trace (e.hom ≫ f ≫ e.inv) = trace f := by
+  let : ExactPairing X Yᘁ := exactPairingCongrLeft e
+  rw [trace_eq_of_exactPairing Yᘁ, trace]
+  change (η_ Y Yᘁ ≫ e.inv ▷ Yᘁ) ≫ (e.hom ≫ f ≫ e.inv) ▷ Yᘁ ≫ (β_ X Yᘁ).hom ≫
+    Yᘁ ◁ e.hom ≫ ε_ Y Yᘁ = _
+  rw [← BraidedCategory.braiding_naturality_left_assoc]
+  simp only [← comp_whiskerRight_assoc, Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+    Category.comp_id]
+
+section
+
+variable {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D]
+
+/-- **A braided monoidal functor preserves traces.** For a braided monoidal functor `F` and an
+endomorphism `f` of a dualizable object `X` such that `F X` is dualizable,
+`tr(F f) = ε⁻¹ ∘ F(tr f) ∘ ε`, where `ε : 𝟙_ ⟶ F 𝟙_` is the unit of `F`. -/
+lemma _root_.CategoryTheory.Functor.map_trace (F : C ⥤ D) [F.Braided] {X : C} [HasRightDual X]
+    [HasRightDual (F.obj X)] (f : X ⟶ X) :
+    trace (F.map f) = ε F ≫ F.map (trace f) ≫ η F := by
+  let := ExactPairing.map F X Xᘁ
+  rw [trace_eq_of_exactPairing (F.obj Xᘁ), trace]
+  change (ε F ≫ F.map (η_ X Xᘁ) ≫ δ F X Xᘁ) ≫ F.map f ▷ F.obj Xᘁ ≫ (β_ _ _).hom ≫
+    μ F Xᘁ X ≫ F.map (ε_ X Xᘁ) ≫ η F = _
+  simp only [Category.assoc, Functor.map_comp]
+  congr 2
+  rw [Functor.Monoidal.map_whiskerRight, Functor.map_braiding]
+  simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
+
+end
+/-- The trace is cyclic: `tr(g ≫ h) = tr(h ≫ g)` for `g : X ⟶ Y` and `h : Y ⟶ X`. -/
+theorem trace_comp_comm {X Y : C} [HasRightDual X] [HasRightDual Y] (g : X ⟶ Y) (h : Y ⟶ X) :
+    trace (g ≫ h) = trace (h ≫ g) := by
+  symm
+  simp only [trace, MonoidalCategory.comp_whiskerRight, Category.assoc]
+  rw [← coevaluation_comp_rightAdjointMate_assoc, whisker_exchange_assoc,
+    BraidedCategory.braiding_naturality_right_assoc, rightAdjointMate_comp_evaluation,
+    ← BraidedCategory.braiding_naturality_left_assoc]
+
+/-- Blueprint `prop-trf-trace-formal-laws` (1), conjugacy invariance of the trace: if
+`w : X ≅ X'` intertwines `f : X ⟶ X` and `f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
+theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅ X') (f : X ⟶ X)
+    (f' : X' ⟶ X') (h : f ≫ w.hom = w.hom ≫ f') : trace f = trace f' := by
+  have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]
+  rw [this, trace_comp_comm, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
+/-- Blueprint `def-trf-karoubi-trace`: the trace of an endomorphism `v` on a summand of a
+dualizable object depends only on the summand. If `e = π ≫ i` is an idempotent of `P` split by
+`i : Q ⟶ P`, `π : P ⟶ Q` with `i ≫ π = 𝟙 Q`, the summand trace `tr(v ∘ e ∣ P)` is the trace of
+the induced endomorphism `i ≫ v ≫ π` of the summand `Q = eP`. -/
+theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P ⟶ P)
+    (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
+  rw [← Category.assoc, trace_comp_comm]
+
+/-- Blueprint `prop-trf-karoubi-independence`, representative independence of the summand trace:
+if an isomorphism `w : P ≅ P'` transports the idempotent `e` to `e'` and the endomorphism `v`
+to `v'`, the summand traces `tr(v ∘ e ∣ P)` and `tr(v' ∘ e' ∣ P')` agree. -/
+theorem trace_comp_idempotent_eq_of_iso {P P' : C} [HasRightDual P] [HasRightDual P'] (w : P ≅ P')
+    (e : P ⟶ P) (e' : P' ⟶ P') (v : P ⟶ P) (v' : P' ⟶ P') (he : e ≫ w.hom = w.hom ≫ e')
+    (hv : v ≫ w.hom = w.hom ≫ v') : trace (v ≫ e) = trace (v' ≫ e') :=
+  trace_eq_of_iso w _ _ (by rw [Category.assoc, he, reassoc_of% hv])
+
+/-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
+unit. -/
+theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 𝟙 _ := by
+  have h := ExactPairing.evaluation_coevaluation (𝟙_ C) (𝟙_ C)ᘁ
+  rw [whiskerRight_id, id_whiskerLeft] at h
+  have hc : (ρ_ (𝟙_ C ⊗ (𝟙_ C)ᘁ)).inv ≫ (α_ _ _ _).hom ≫ (λ_ ((𝟙_ C)ᘁ ⊗ 𝟙_ C)).hom =
+      (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv := by
+    monoidal_coherence
+  have h' : (ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫
+      (λ_ (𝟙_ C)).inv = 𝟙 _ := by
+    rw [← reassoc_of% hc]
+    simpa [unitors_equal] using h
+  rw [trace, id_whiskerRight, Category.id_comp, braiding_tensorUnit_left]
+  calc _ = (ρ_ (𝟙_ C)).inv ≫ ((ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫
+        (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫ (λ_ (𝟙_ C)).inv) ≫ (λ_ (𝟙_ C)).hom := by simp
+    _ = 𝟙 _ := by rw [h']; simp [unitors_equal]
+
+/-- The trace of an endomorphism of the unit, for the canonical self-duality of the unit, is the
+endomorphism itself. -/
+theorem trace_tensorUnit (f : 𝟙_ C ⟶ 𝟙_ C) : trace f = f := by
+  change (ρ_ _).inv ≫ f ▷ 𝟙_ C ≫ (β_ (𝟙_ C) (𝟙_ C)).hom ≫ (ρ_ _).hom = f
+  simp only [braiding_tensorUnit_left, Category.assoc]
+  rw [unitors_equal, Iso.inv_hom_id, Category.comp_id, MonoidalCategory.rightUnitor_naturality,
+    Iso.inv_hom_id_assoc]
 
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right

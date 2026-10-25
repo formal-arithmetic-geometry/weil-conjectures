@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
@@ -17,7 +18,7 @@ import WeilConjectures.ConstructibleSheaf.ConstantFiniteMatrixDualKernel
 
 Source: the finite presentation argument in the docstring of
 `WeilConjectures/ConstructibleSheaf/Monoidal.lean`, `IsFiniteLocallyConstantSheaf.ihom_unit`.
-(blueprint: `lem-weil-pbc-constant-module-dual`)
+(blueprint: lem-weil-pbc-constant-module-dual)
 -/
 
 @[expose] public section
@@ -42,7 +43,7 @@ preserves kernels. In modules the kernel of this transpose is Hom_Λ(M, Λ), by
 applying Hom_Λ(-, Λ) to the presentation. Composing these kernel isomorphisms gives
 the claimed isomorphism. No projectivity of M is assumed; for M = 0 the same
 argument uses a zero presentation, and the empty scheme causes no exception.
-(blueprint: `lem-weil-pbc-constant-module-dual`) -/
+(blueprint: lem-weil-pbc-constant-module-dual) -/
 theorem nonempty_constantModuleDualIso
     (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
     (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :

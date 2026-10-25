@@ -646,7 +646,7 @@ theorem IsHilbertSubscheme.mul [SmoothOfRelativeDimension 1 f] {d₁ d₂ : ℕ}
     (J := I₂)
   refine ⟨inferInstance, inferInstance,
     ((Scheme.IdealSheafData.isRelativeEffectiveCartier_iff_locallyQuasiFinite _).mp
-      ⟨hI₁.mul hI₂, inferInstance⟩).2.2, fun t ↦ ?_⟩
+      ⟨hI₁.mul_effectiveCartier hI₂, inferInstance⟩).2.2, fun t ↦ ?_⟩
   rw [Scheme.IdealSheafData.finrank_subschemeι_mul_comp _ hI₁ hI₂, hr₁, hr₂]
 
 /-- **The addition morphism on Hilbert schemes.** Let `f : X ⟶ S` be separated and smooth of
@@ -1285,8 +1285,10 @@ theorem hilbertPresheaf_curve_representable [SmoothOfRelativeDimension 1 f] [IsP
 `X_{k'}`. Since both sides are described by ideal sheaves on `X_{k'}`, the bijection is the
 identity on underlying ideal sheaves, which is the naturality in `k'`.
 
-`Scheme.Hom.finrank` is junk-valued away from the finite flat case, so the right-hand side
-carries the finiteness and flatness of the projection explicitly.
+An effective Cartier divisor `D` on `X_{k'}` is finite over `k'`, since `X_{k'}` is a proper curve
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_and_locallyOfFinitePresentation`),
+and flat, since `k'` is a field; its degree is the rank `Scheme.Hom.finrank` of `D ⟶ Spec k'`,
+the dimension of `Γ(D, 𝒪_D)` over `k'`.
 
 (blueprint: `sk-thm-picard-hilb-curves`, part (2)) -/
 theorem hilbertPresheaf_curve_points [SmoothOfRelativeDimension 1 f] [IsProper f]
@@ -1295,21 +1297,20 @@ theorem hilbertPresheaf_curve_points [SmoothOfRelativeDimension 1 f] [IsProper f
     (I : (Limits.pullback f T.hom).IdealSheafData) :
     (∃ Z : (hilbertPresheaf f d).obj (op T), Z.1 = I) ↔
       IsEffectiveCartierCenter I.subschemeι ∧
-        IsFinite (I.subschemeι ≫ Limits.pullback.snd f T.hom) ∧
-        Flat (I.subschemeι ≫ Limits.pullback.snd f T.hom) ∧
         ∀ t, (I.subschemeι ≫ Limits.pullback.snd f T.hom).finrank t = d := by
   constructor
   · rintro ⟨⟨I, hfin, hflat, hlfp, hrank⟩, rfl⟩
     exact ⟨(Scheme.IdealSheafData.isRelativeEffectiveCartier_of_isFinite
-      (pullback.snd f T.hom)).1.isEffectiveCartierCenter, hfin, hflat, hrank⟩
-  · rintro ⟨-, hfin, hflat, hrank⟩
+      (pullback.snd f T.hom)).1.isEffectiveCartierCenter, hrank⟩
+  · rintro ⟨hI, hrank⟩
     subst hT
-    have hlfp : LocallyOfFinitePresentation
-        (I.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) := by
-      have : IsFinite
-          (I.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) :=
-        hfin
-      infer_instance
+    have hI : I.IsInvertible := by
+      rw [isEffectiveCartierCenter_iff_isInvertible_ker, Scheme.IdealSheafData.ker_subschemeι] at hI
+      exact hI
+    have hflat : Flat
+        (I.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) :=
+      Flat.of_field k' _
+    obtain ⟨hfin, hlfp⟩ := hI.isFinite_and_locallyOfFinitePresentation _ hflat
     exact ⟨⟨I, hfin, hflat, hlfp, hrank⟩, rfl⟩
 
 /-- For a geometrically integral smooth proper curve `X` over `k`, a scheme representing

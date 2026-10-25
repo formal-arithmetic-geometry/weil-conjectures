@@ -14,7 +14,8 @@ For an adjunction `adj : f ⊣ g` of exact functors between abelian categories, 
 levelwise derived adjunction `f.mapDerivedCategory ⊣ g.mapDerivedCategory`
 (`CategoryTheory.Adjunction.mapDerivedCategoryAdjunction`) is, on the image `Qh X` of an object
 of the homotopy category, the image of the unit of the adjunction induced on homotopy categories
-(`CategoryTheory.Adjunction.mapDerivedCategoryAdjunction_unit_app_Qh_obj`).
+(`CategoryTheory.Adjunction.mapDerivedCategoryAdjunction_unit_app_Qh_obj`), and likewise for the
+counit (`CategoryTheory.Adjunction.mapDerivedCategoryAdjunction_counit_app_Qh_obj`).
 -/
 
 @[expose] public section
@@ -69,5 +70,35 @@ lemma mapDerivedCategoryAdjunction_unit_app_Qh_obj (X : HomotopyCategory C (.up 
   erw [reassoc_of% h₁]
   rw [reassoc_of% h₃, Iso.inv_hom_id_app]
   exact Category.comp_id _
+
+/-- On the image `Qh X` of an object of the homotopy category, the counit of the levelwise
+derived adjunction `D(f) ⊣ D(g)` is the image of the counit of the adjunction induced on homotopy
+categories:
+```
+  D(f) D(g) (Qh X) ──D(f)(≅) ≫ ≅──▶ Qh (f (g X)) ──Qh(counit)──▶ Qh X
+```
+-/
+lemma mapDerivedCategoryAdjunction_counit_app_Qh_obj (X : HomotopyCategory D (.up ℤ)) :
+    adj.mapDerivedCategoryAdjunction.counit.app (DerivedCategory.Qh.obj X) =
+      f.mapDerivedCategory.map (g.mapDerivedCategoryFactorsh.hom.app X) ≫
+        f.mapDerivedCategoryFactorsh.hom.app ((g.mapHomotopyCategory (.up ℤ)).obj X) ≫
+        DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).counit.app X) := by
+  have h₁ := (adj.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
+    (HomotopyCategory.quasiIso D (.up ℤ)) f.leftDerivedFunctorCounit g.rightDerivedFunctorUnit X
+  have h₂ := NatTrans.congr_app f.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((g.mapHomotopyCategory (.up ℤ)).obj X)
+  have h₃ := NatTrans.congr_app g.rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  have h₄ := f.leftDerivedFunctorIsoMapDerivedCategory.inv.naturality
+    (g.rightDerivedFunctorUnit.app X)
+  dsimp at h₁ h₂ h₃ h₄
+  have h₃' : g.rightDerivedFunctorIsoMapDerivedCategory.inv.app (DerivedCategory.Qh.obj X) =
+      g.mapDerivedCategoryFactorsh.hom.app X ≫ g.rightDerivedFunctorUnit.app X := by
+    rw [← cancel_mono (g.rightDerivedFunctorIsoMapDerivedCategory.hom.app _),
+      Iso.inv_hom_id_app, Category.assoc, h₃, Iso.hom_inv_id_app]
+    rfl
+  simp only [mapDerivedCategoryAdjunction, ofNatIsoRight_counit, ofNatIsoLeft_counit,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [h₃', Functor.map_comp, Category.assoc, reassoc_of% h₄, derivedAdjunction, derived_counit,
+    h₁, ← reassoc_of% h₂, Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Adjunction

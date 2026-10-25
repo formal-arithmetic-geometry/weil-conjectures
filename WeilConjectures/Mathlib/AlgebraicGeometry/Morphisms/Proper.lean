@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Artinian.Algebra
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 
@@ -20,6 +21,11 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 The scheme-theoretic image of a proper morphism into a separated scheme of finite type is
 proper (`AlgebraicGeometry.isProper_imageι_comp`), and a proper affine scheme over a field is
 finite and of dimension zero (`AlgebraicGeometry.isFinite_of_isProper_of_isAffine`).
+
+## Base change
+
+Proper morphisms and smooth morphisms are stable under base change
+(`AlgebraicGeometry.isProper_and_smooth_of_isPullback`).
 
 ## Finite products
 
@@ -58,6 +64,17 @@ namespace AlgebraicGeometry
 theorem isProper_pi_hom {S : Scheme.{u}} {ι : Type*} [Finite ι] (F : ι → Over S)
     [HasProduct F] [∀ i, IsProper (F i).hom] : IsProper (∏ᶜ F).hom :=
   MorphismProperty.pi_hom _ F fun _ ↦ inferInstance
+
+/-- **Proper and smooth morphisms are stable under base change.** Let `f : X ⟶ S` be proper,
+`g : S' ⟶ S` arbitrary and `f' : X' ⟶ S'` the base change of `f` along `g`. Then `f'` is proper,
+and if `f` is smooth, then so is `f'`.
+
+(blueprint: `lem-pc-proper-base-change`) -/
+theorem isProper_and_smooth_of_isPullback {X S X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
+    {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) [IsProper f] :
+    IsProper f' ∧ (Smooth f → Smooth f') :=
+  ⟨IsProper.isStableUnderBaseChange.of_isPullback h ‹_›,
+    fun hf ↦ smooth_isStableUnderBaseChange.of_isPullback h hf⟩
 
 /-- An immersion `f : X ⟶ Y` whose composite with a separated morphism `g : Y ⟶ Z` is
 universally closed is a closed immersion: `f` is then itself universally closed, so its image is

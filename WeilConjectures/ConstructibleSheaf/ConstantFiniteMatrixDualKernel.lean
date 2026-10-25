@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
@@ -14,7 +15,7 @@ import WeilConjectures.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux
 
 Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`,
 `IsFiniteLocallyConstantSheaf.ihom_unit` docstring, finite free transpose argument.
-(blueprint: `lem-weil-pbc-constant-finite-matrix-dual-kernel`)
+(blueprint: lem-weil-pbc-constant-finite-matrix-dual-kernel)
 -/
 
 @[expose] public section
@@ -41,7 +42,7 @@ finite limits, so this kernel is the constant sheaf of the module kernel. The ca
 module kernel is isomorphic to the submodule ker(g.dualMap), giving the conclusion.
 The same argument allows either rank to be zero, the zero ring, and the empty scheme.
 No finite generation or presentation assertion about an arbitrary module is used here.
-(blueprint: `lem-weil-pbc-constant-finite-matrix-dual-kernel`) -/
+(blueprint: lem-weil-pbc-constant-finite-matrix-dual-kernel) -/
 theorem nonempty_constantFiniteMatrixDualKernelIso
     (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ]
     (n m : ℕ) (g : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) :

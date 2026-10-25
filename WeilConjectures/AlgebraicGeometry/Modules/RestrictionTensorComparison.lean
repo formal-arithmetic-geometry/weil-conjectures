@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group E3
+Authors: Bin Wu
 -/
+
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
@@ -150,7 +151,7 @@ private theorem exists_inverseTensorHom {X Y : Scheme.{u}} (j : Y ⟶ X)
 /-- Restriction along an open immersion commutes with the sheaf tensor product, compatibly
 with the canonical pure tensor sections. Source: Stacks Project, Modules, Lemma 01CD,
 label lemma-tensor-product-pullback
-(blueprint: `lem-weil-pbc-module-restriction-tensor-comparison`).
+(blueprint: lem-weil-pbc-module-restriction-tensor-comparison).
 
 Proof: write the tensor product as sheafification of the sectionwise tensor presheaf.
 Restriction of that presheaf is the tensor presheaf of the restrictions: the structure-ring

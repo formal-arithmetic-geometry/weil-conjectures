@@ -1,40 +1,55 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
 public import Mathlib.RingTheory.Length
 
 /-!
-# Filtrations with simple quotients of finite-length modules
+# Simple filtrations of finite-length modules
 
-A module of finite length `Module.length R M < ⊤` admits a finite chain of submodules
-`0 = M₀ < M₁ < ⋯ < M_r = M` whose successive quotients `M_i / M_{i-1}` are simple. This is a
-restatement of `isFiniteLength_iff_exists_compositionSeries` together with
-`covBy_iff_quot_is_simple`.
+Source: Stacks Project, Algebra, Tags 02LY, 00J1 and 00J3, part (2)
+(blueprint: lem-weil-pbc-finite-length-module-simple-filtration).
 -/
 
 @[expose] public section
 
+universe u v
+
 namespace Module
 
-variable {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+/-- A finite-length module admits a finite strictly increasing filtration with simple quotients.
 
-/-- **A finite-length module has a filtration with simple quotients.** If
-`Module.length R M < ⊤`, there are `r : ℕ` and submodules `0 = N 0 < N 1 < ⋯ < N r = M` such
-that each quotient `N (i + 1) / N i` (realised as `N (i + 1) ⧸ (N i).comap (N (i + 1)).subtype`)
-is a simple module. This follows from the existence of a composition series
-(`isFiniteLength_iff_exists_compositionSeries`) and `covBy_iff_quot_is_simple`.
-(blueprint: `lem-weil-pbc-finite-length-module-simple-filtration`) -/
-theorem exists_simple_filtration_of_length_lt_top (h : Module.length R M < ⊤) :
-    ∃ (r : ℕ) (N : Fin (r + 1) → Submodule R M), N 0 = ⊥ ∧ N (Fin.last r) = ⊤ ∧
-      ∀ i : Fin r, N i.castSucc < N i.succ ∧
-        IsSimpleModule R (N i.succ ⧸ (N i.castSucc).comap (N i.succ).subtype) := by
-  obtain ⟨s, hs₁, hs₂⟩ :=
-    isFiniteLength_iff_exists_compositionSeries.mp (length_ne_top_iff.mp h.ne)
-  refine ⟨s.length, s.toFun, hs₁, hs₂, fun i ↦ ⟨(s.step i).lt, ?_⟩⟩
-  exact (covBy_iff_quot_is_simple (s.step i).le).mp (s.step i)
+Source: Stacks Project, Algebra, Tags 02LY, 00J1 and 00J3, part (2)
+(blueprint: lem-weil-pbc-finite-length-module-simple-filtration).
+
+Proof: By `def-weil-pbc-module-length`, lengths of strict submodule chains are bounded by
+`length R M`. Chains from zero to the whole module exist: use the one-term chain for the
+zero module and the chain from zero to the whole module otherwise. Their lengths form a
+nonempty bounded set of natural numbers, so choose a chain of largest length.
+For each adjacent pair, its quotient is nonzero because the inclusion is strict. If the
+quotient had a nonzero proper submodule, its inverse image under the quotient projection
+would lie strictly between the adjacent terms. Inserting it would produce a longer chain,
+contradicting maximality. Thus each quotient is simple by `def-weil-pbc-simple-module`.
+-/
+theorem exists_simple_filtration_of_length_lt_top
+    (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M]
+    (hM : Module.length R M < ⊤) :
+    ∃ (r : ℕ) (F : Fin (r + 1) → Submodule R M),
+      F 0 = ⊥ ∧ F (Fin.last r) = ⊤ ∧
+        (∀ i : Fin r, F i.castSucc < F i.succ) ∧
+        (∀ i : Fin r,
+          IsSimpleModule R
+            (↥(F i.succ) ⧸ Submodule.comap (F i.succ).subtype (F i.castSucc))) := by
+  obtain ⟨s, hs₀, hs₁⟩ := isFiniteLength_iff_exists_compositionSeries.mp
+    (Module.length_ne_top_iff.mp hM.ne)
+  refine ⟨s.length, s, hs₀, hs₁, ?_, ?_⟩
+  · intro i
+    exact (s.step i).lt
+  · intro i
+    exact (covBy_iff_quot_is_simple (s.step i).le).mp (s.step i)
 
 end Module

@@ -45,7 +45,7 @@ namespace Scheme.Hom.DeformationToNormalConeData
 
 open _root_.AlgebraicGeometry.Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}} {d : ℕ}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : ℕ}
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
   [HasInvertibleExponent Λ B]
 
@@ -56,10 +56,12 @@ section,
 
 `Li₀^* ℱ ≃ 𝒞(π_N, 0_N)`. -/
 theorem nonempty_iso_leftDerivedUpperStar_zeroSection_familyObject
-    [HasCompactification N.proj] :
+    [HasCompactification N.proj] [QuasiSeparatedSpace B] [QuasiCompact N.proj] :
     Nonempty ((L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
         (D.familyObject Λ) ≅ sectionInvariant Λ N.proj N.zeroSection) :=
   have := D.hasInvertibleExponent_scheme Λ
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   nonempty_iso_leftDerivedUpperStar_sectionInvariant Λ (d := d) D.proj D.isPullback_zeroFibre
     D.sect N.zeroSection D.comp_zeroFibre
 
@@ -67,7 +69,7 @@ end Scheme.Hom.DeformationToNormalConeData
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}}
 
 section Construction
 
@@ -85,13 +87,15 @@ pulled back from the base,
 since over `𝔾_{m,B}` the deformation space is `V ×_B 𝔾_{m,B}` with `s̃ = s × 1`. -/
 theorem nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject (hs : s ≫ g = 𝟙 B)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
-    [HasInvertibleExponent Λ s.ker.deformationSpace] :
+    [HasInvertibleExponent Λ s.ker.deformationSpace] [QuasiSeparatedSpace B] [QuasiCompact g] :
     Nonempty ((L(((Scheme.Hom.puncturedLine B).ι)^*[ModuleCat.{u + 1} Λ])).obj
         (sectionInvariant Λ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection) ≅
       (L(((Scheme.Hom.puncturedLine B).ι)^*[ModuleCat.{u + 1} Λ])).obj
         ((L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj
           (sectionInvariant Λ g s))) := by
   have := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   set j := (Scheme.Hom.puncturedLine B).ι
   have PG := Scheme.Hom.isPullback_deformationSpaceGeneric g s
   have hm : (j ≫ s.deformationSpaceSection) ≫ Scheme.Hom.deformationSpaceProj g s = 𝟙 _ ≫ j := by
@@ -127,7 +131,8 @@ pulled back from the base,
 `ℱ ≃ a^* (0^* ω_{𝔸^n_B / B})`, `a : 𝔸¹_B ⟶ B`. -/
 theorem nonempty_iso_familyObject_standardPair
     [HasCompactification
-      (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))] :
+      (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))]
+    [QuasiSeparatedSpace B] :
     Nonempty (sectionInvariant Λ
         (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))
         (AffineSpace.zeroSection n B).deformationSpaceSection ≅
@@ -142,6 +147,9 @@ theorem nonempty_iso_familyObject_standardPair
       ⟨(Scheme.Hom.deformationSpaceToAffineSpace_over n B).trans
         (Category.comp_id _).symm⟩).paste_horiz (AffineSpace.isPullback_map (n := n) a)
     simpa using this
+  have : QuasiCompact
+      (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B)) :=
+    MorphismProperty.of_isPullback sq inferInstance
   have hm : (AffineSpace.zeroSection n B).deformationSpaceSection ≫ Φ ≫ AffineSpace.map n a =
       a ≫ AffineSpace.zeroSection n B := by
     rw [reassoc_of% Scheme.Hom.deformationSpaceSection_comp_deformationSpaceToAffineSpace,
@@ -159,7 +167,8 @@ family object is the constant Tate twist,
 
 where `0^* ω = Λ(c)[2c]` is vector-bundle purity for the trivial bundle
 (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`). -/
-theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist.IsNormalized Λ]
+theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist Λ]
+    [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (c : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
     [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
     [SmoothOfRelativeDimension c (𝔸(ULift.{u} (Fin c); B) ↘ B)]
@@ -172,6 +181,7 @@ theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist.IsNormal
         (AffineSpace.zeroSection (ULift.{u} (Fin c)) B).deformationSpaceSection ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin 1); B) c).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin 1); B))) := by
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
   obtain ⟨e₁⟩ := nonempty_iso_familyObject_standardPair Λ (ULift.{u} (Fin c)) B (d := c)
   obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_affineSpace Λ c B aB
   exact ⟨e₁ ≪≫ (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).mapIso
