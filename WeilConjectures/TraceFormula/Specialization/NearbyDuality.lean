@@ -88,12 +88,20 @@ is relative to `Ω`, the one on the special fibre relative to `k'`. The blueprin
 finite `ℓ`-primary coefficients and `D^b_ctf`; for bounded constructible `ℚ̄_ℓ`-complexes the
 canonical map is the limit of the finite ones (Bhatt–Scholze, §6.8).
 
-Unfinished: see the report of the duality foundation; the formal ingredients of the blueprint
-proof are `CategoryTheory.Verdier.nearbyDualityMap_proper`,
+Unfinished. The blueprint proof reduces, by open restriction and compactification, to proper
+models, where global duality kills `RΓ` of the cone of `δ`, and concludes by generic slicing and
+finite support. Its formal ingredients are proved: `CategoryTheory.Verdier.nearbyDualityMap_proper`,
 `CategoryTheory.Verdier.nearbyDualityMap_restrict`,
 `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper` (blueprint
 `det-tf-nearby-duality-proper`) and `CategoryTheory.invariantsDualIso` (blueprint
-`det-tf-invariants-duality`). -/
+`det-tf-invariants-duality`), and for open restriction the concrete inputs of
+`WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen`. Instantiating the abstract
+compatibilities on `Dᵇc` is blocked by an elaboration problem: the hypotheses stated for the
+concrete functors and those obtained by instantiating the abstract statements differ in instance
+terms (the monoidal structure of `Dᵇc(X)⟦ℚ̄_ℓ⟧` is reachable by two instance paths) and are only
+identified after unfolding the condensed coefficient rings, which exceeds the heartbeat limits.
+Compactification of trait models over `S`, generic slicing (`det-tf-nearby-duality-slice`) and
+finite support are not formalised. -/
 theorem isIso_nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ h K) :=
   sorry
