@@ -255,4 +255,52 @@ lemma isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition
 
 end TensorMap
 
+/-! ### The Künneth map of the trait -/
+
+namespace NearbyCyclesModel
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (k' : Type u) [Field k'] [IsSepClosed k']
+
+/-- The pullback exchange of the identity morphism of the trait (as a model of its geometric
+generic point) is invertible: its base change morphism is the mate of an isomorphism along
+`L(𝟙)^* ≅ 𝟭`. -/
+instance isIso_pullbackExchange_id_traitGenericModel :
+    IsIso ((Hom.id (traitGenericModel k')).pullbackExchange Λ) := by
+  have : L(((Hom.id (traitGenericModel k')).total)^*⟦Λ⟧).IsEquivalence :=
+    Functor.isEquivalence_of_iso (leftDerivedUpperStarId Λ _).symm
+  have : L(((Hom.id (traitGenericModel k')).generic)^*⟦Λ⟧).IsEquivalence :=
+    Functor.isEquivalence_of_iso (leftDerivedUpperStarId Λ _).symm
+  have := isIso_mateEquiv_of_isEquivalence (derivedUpperStarLowerStarAdjunction Λ
+    (traitGenericModel k').j) (derivedUpperStarLowerStarAdjunction Λ (traitGenericModel k').j)
+    (pullbackSquareComparison Λ (Hom.id (traitGenericModel k')).commSq_j).hom
+  unfold Hom.pullbackExchange
+  infer_instance
+
+set_option maxHeartbeats 1000000 in
+-- the Künneth map of the trait unfolds to large terms
+/-- **The nearby cycles of the trait are monoidal on the geometric generic point**: the Künneth
+map of the trait `T` (as a model of its geometric generic point) is an isomorphism at `(C, D)`
+if `C` is a finite direct sum of shifts of the unit. -/
+theorem isIso_kunnethMap_traitGenericModel_of_shiftDecomposition
+    (C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (traitGenericModel k').generic)
+      Ab.{u + 1}) (condensedRingObj Λ (traitGenericModel k').generic)))
+    (hC : Nonempty (ShiftDecomposition (𝟙_ _) C)) :
+    IsIso (kunnethMap Λ (Hom.id (traitGenericModel k')) (Hom.id (traitGenericModel k')) C D) := by
+  have hC' : ShiftDecomposition (𝟙_ _) (L(((traitGenericModel k').ε)^*⟦Λ⟧).obj
+      (L((𝟙 (Spec (.of (traitGenericField k'))))^*⟦Λ⟧).obj C)) :=
+    ((hC.some.ofIso ((leftDerivedUpperStarId Λ _).app C).symm).ofIso
+      ((leftDerivedUpperStarId Λ _).app _).symm)
+  have hμ := isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition Λ k'
+    (V := L(((traitGenericModel k').ε)^*⟦Λ⟧).obj
+      (L((𝟙 (Spec (.of (traitGenericField k'))))^*⟦Λ⟧).obj D)) hC'
+  have ha : IsIso (((Hom.id (traitGenericModel k')).pullbackExchange Λ).app C ⊗ₘ
+      ((Hom.id (traitGenericModel k')).pullbackExchange Λ).app D) := inferInstance
+  unfold kunnethMap tensorMap
+  rw [Functor.map_comp]
+  exact IsIso.comp_isIso' ha (IsIso.comp_isIso' inferInstance
+    (IsIso.comp_isIso' hμ inferInstance))
+
+end NearbyCyclesModel
+
 end AlgebraicGeometry.ProEtale.CondensedRing
