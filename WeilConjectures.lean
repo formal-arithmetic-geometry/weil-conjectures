@@ -13080,6 +13080,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.ConstantFamilyUnit
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.Defect
 public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
@@ -13104,6 +13105,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffinePullback
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionCartier
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionConstant
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
