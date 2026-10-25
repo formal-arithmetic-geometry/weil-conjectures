@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.GraphPieces
 
 /-!
@@ -18,8 +17,8 @@ coefficient `u^Z = [x, x]_! v_x` on `K^Z = Rx_* Lx^* K` is compatible with `v` a
 ```
 u^Z ∘ Lh^* η = η ∘ v        (up to R(𝟙)^! ≅ 𝟭),
 ```
-`Correspondence.upperStar_map_unit_comp_graphClosedPieceCoeff`, and similarly for the curve
-pieces of a Weil object (`WeilBoundedConstructible.upperStar_map_unit_comp_closedPieceCoeff`).
+`Correspondence.upperStar_map_unit_comp_graphClosedPieceCoeff` (the curve pieces of a Weil
+object are deduced in `WeilConjectures.TraceFormula.CurvePiecesAdditivity`).
 By the adjunction `Lx^* ⊣ Rx_*` it suffices to compare the adjoint maps `Lx^* Lh^* K ⟶ Lx^* K`,
 which the triangle identities reduce to `Lx^* v`.
 
@@ -195,35 +194,5 @@ lemma ProperPushforwardDiagram.pushforwardCoeff_congr {S Y C D : Over (Spec (.of
   rfl
 
 end Correspondence
-
-namespace WeilBoundedConstructible
-
-variable {Φ : X ⟶ X}
-
-/-- The closed piece coefficient of a Weil object is the closed piece coefficient of the graph
-correspondence of its Frobenius structure map. -/
-lemma closedPieceCoeff_eq_graphClosedPieceCoeff (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
-    (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
-    K.closedPieceCoeff m x hx =
-      Correspondence.graphClosedPieceCoeff K.carrier (K.iterateStr m).hom hx :=
-  Correspondence.ProperPushforwardDiagram.pushforwardCoeff_congr _ _
-    (by rw [stalkFrobenius_eq_graphStalkMap]; rfl) _ _ _ _ _ _
-
-/-- **The closed piece coefficient of a Weil object is compatible with the unit** (blueprint
-`prop-trf-trace-class-additivity`, proof of item 2, step (b)): for `x` fixed by `Φ_m`, the closed
-piece coefficient `u^Z = [x, x]_! F_{x,m}` satisfies `u^Z ∘ LΦ_m^* η = η ∘ φ_m` for the unit
-`η : K ⟶ Rx_* Lx^* K`, up to `R(𝟙)^! ≅ 𝟭`. -/
-theorem upperStar_map_unit_comp_closedPieceCoeff (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
-    (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ m)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K.carrier) ≫
-      K.closedPieceCoeff m x hx =
-      (K.iterateStr m).hom ≫
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K.carrier ≫
-        (boundedConstructibleUpperShriekId ℓ X).inv.app _ :=
-  (congrArg (_ ≫ ·) (K.closedPieceCoeff_eq_graphClosedPieceCoeff m x hx)).trans
-    (Correspondence.upperStar_map_unit_comp_graphClosedPieceCoeff K.carrier (K.iterateStr m).hom hx)
-
-end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing

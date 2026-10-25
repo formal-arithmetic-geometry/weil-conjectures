@@ -12694,6 +12694,7 @@ public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
+public import WeilConjectures.TraceFormula.CurvePiecesAdditivity
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FibreModel

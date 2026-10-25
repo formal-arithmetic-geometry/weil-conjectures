@@ -244,7 +244,7 @@ lemma kunnethVerdierMap_naturality_left' {M M' : Dᵇc(X.left)⟦Profinite.padic
 
 /-- The inverse Künneth–Verdier map is natural in `M`. -/
 @[reassoc]
-lemma inv_kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+lemma inv_kunnethVerdierMap_naturality_left' {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (f : M ⟶ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) ≫
         inv (kunnethVerdierMap ℓ M' N) =
@@ -274,7 +274,7 @@ variable {X C : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 
 /-- Pullback along equal morphisms commutes with the identification `eqToHom`. -/
 @[reassoc]
-lemma boundedConstructibleUpperStar_map_comp_eqToHom {a b : C ⟶ X} (h : a = b)
+lemma boundedConstructibleUpperStar_map_eqToHom_comm {a b : C ⟶ X} (h : a = b)
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K ⟶ K') :
     (boundedConstructibleUpperStar _ ℓ a).map f ≫ eqToHom (by rw [h]) =
       eqToHom (by rw [h]) ≫ (boundedConstructibleUpperStar _ ℓ b).map f := by
@@ -304,7 +304,7 @@ private lemma diag_upperStar_upperStar_naturality (p : X ⨯ X ⟶ X) (h : diag 
   rw [Functor.comp_map] at h1
   rw [Functor.id_map] at h3
   simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom, eqToIso.hom, Category.assoc]
-  rw [reassoc_of% h1, boundedConstructibleUpperStar_map_comp_eqToHom_assoc _ h, h3]
+  rw [reassoc_of% h1, boundedConstructibleUpperStar_map_eqToHom_comm_assoc _ h, h3]
 
 /-- The naturality of `G (A ⊗ B) ≅ G A ⊗ G B ≅ K ⊗ N` for a monoidal functor `G`, given the
 naturality of the identifications `G A ≅ K` and `G B ≅ N`. -/
@@ -321,7 +321,7 @@ private lemma map_tensorHom_comp_μIso_symm_trans_tensorIso {𝒞 𝒟 : Type*} 
 
 /-- The identification `LΔ^* (K ⊠ N) ≅ K ⊗ N` is natural in `K` and `N`. -/
 @[reassoc]
-lemma diagUpperStarExternalProductIso_hom_naturality
+lemma diagUpperStarExternalProductIso_hom_naturality₂
     {K K' N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K ⟶ K') (g : N ⟶ N') :
     (boundedConstructibleUpperStar _ ℓ (diag X)).map (externalProductMap ℓ f g) ≫
         (diagUpperStarExternalProductIso ℓ K' N').hom =
@@ -353,8 +353,8 @@ lemma externalProductMap_comp_evaluationKernel
       externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ (toPoint X) f) ≫
         evaluationKernel ℓ K' := by
   rw [evaluationKernel, evaluationKernel, ← Adjunction.homEquiv_naturality_left,
-    ← Adjunction.homEquiv_naturality_left, diagUpperStarExternalProductIso_hom_naturality_assoc,
-    diagUpperStarExternalProductIso_hom_naturality_assoc, tensorHom_id_comp_ev_verdierDual]
+    ← Adjunction.homEquiv_naturality_left, diagUpperStarExternalProductIso_hom_naturality₂_assoc,
+    diagUpperStarExternalProductIso_hom_naturality₂_assoc, tensorHom_id_comp_ev_verdierDual]
 
 end Evaluation
 
@@ -407,7 +407,7 @@ lemma supportedClassOfCoeff_comp_upperShriek_map
     c.supportedClassOfCoeff K₁' K₂ (w ≫ (boundedConstructibleUpperShriek _ ℓ c.c₁).map f) =
       c.supportedClassOfCoeff K₁ K₂ w ≫ externalProductMap ℓ f (𝟙 _) := by
   unfold supportedClassOfCoeff
-  refine comp_eq_comp_comp_of_eq ?_ (inv_kunnethVerdierMap_naturality_left ℓ f K₂)
+  refine comp_eq_comp_comp_of_eq ?_ (inv_kunnethVerdierMap_naturality_left' ℓ f K₂)
   rw [Equiv.symm_apply_eq, correspondenceClassEquiv_naturality_right, Equiv.apply_symm_apply,
     Category.assoc, Category.assoc, Category.assoc,
     boundedConstructibleUpperShriek_map_comp_eqToHom ℓ (support_fst c).symm]
@@ -423,7 +423,7 @@ lemma supportedClassOfCoeff_upperStar_map_comp
   unfold supportedClassOfCoeff
   refine comp_eq_comp_comp_of_eq ?_ (inv_kunnethVerdierMap_naturality_right ℓ K₁ g)
   rw [Equiv.symm_apply_eq, correspondenceClassEquiv_naturality_left, Equiv.apply_symm_apply,
-    Category.assoc, boundedConstructibleUpperStar_map_comp_eqToHom_assoc ℓ (support_snd c)]
+    Category.assoc, boundedConstructibleUpperStar_map_eqToHom_comm_assoc ℓ (support_snd c)]
 
 /-! ### The trace class through the evaluation kernel -/
 

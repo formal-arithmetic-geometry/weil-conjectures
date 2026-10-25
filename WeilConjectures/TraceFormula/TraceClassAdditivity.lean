@@ -18,7 +18,7 @@ correspondences `(𝟙, Φ_m)` with the curve pieces `K^Z = Rx_* Lx^* K` and `K^
 Weil object and their coefficient maps `u^Z`, `u^U` (blueprint `d-curve-pieces`). The additivity
 `Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U)` of blueprint `prop-trf-trace-class-additivity`,
 item 2, is `ProEtale.CondensedRing.WeilBoundedConstructible.traceClass_graph_eq_add` in
-`WeilConjectures.TraceFormula.PieceAdditivity`.
+`WeilConjectures.TraceFormula.CurvePiecesAdditivity`.
 
 ## Main definitions
 

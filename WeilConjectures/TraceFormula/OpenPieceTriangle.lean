@@ -158,12 +158,13 @@ theorem graphOpenPieceCoeff_comp_counit :
       (boundedConstructibleUpperStar _ ℓ h).map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
             (pointComplι x)).counit.app K) ≫ v := by
-  rw [map_counit_comp_eq_openSquareExchange_hom_comp ℓ (isPullback_pointComplRestrict hx) K v _ rfl,
+  rw [map_counit_comp_eq_openSquareExchange_hom_comp ℓ
+      (isPullback_preimagePointComplRestrict_of_comp_eq hx) K v _ rfl,
     graphOpenPieceCoeff, Category.assoc, Category.assoc]
   congr 1
   have e : graphOpenRestriction K v hx =
       ((boundedConstructiblePullbackSquareComparison _ ℓ
-          (isPullback_pointComplRestrict hx).toCommSq.flip).hom.app K ≫
+          (isPullback_preimagePointComplRestrict_of_comp_eq hx).toCommSq.flip).hom.app K ≫
         (boundedConstructibleUpperStar _ ℓ (pointComplPreimageι hx ≫ pointComplι x)).map v) ≫
       (boundedConstructibleUpperStarComp _ ℓ (pointComplPreimageι hx) (pointComplι x)).hom.app
         K := by
