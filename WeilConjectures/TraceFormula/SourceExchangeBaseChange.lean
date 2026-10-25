@@ -144,7 +144,36 @@ lemma sourceExchange_T2 [IsIso (boundedConstructibleLowerShriekBaseChange_padicA
       (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
           ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) :=
-  sorry
+  by
+  have hu := (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.naturality
+    ((boundedConstructibleUpperStarComp _ ℓ h π₂).inv.app ((boundedConstructibleLowerStar _ ℓ f).obj
+      ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))
+  simp only [Functor.id_map, Functor.comp_map] at hu
+  have hE := homEquiv_prodUpperStarCounit ℓ hB.w.symm
+    ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))
+  have hP := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper ℓ hB
+    ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))
+  rw [upperStarComp_inv_app_comp_prodUpperStarCounit_right ℓ wq₂ hB.w.symm, Functor.map_comp,
+    Category.assoc, ← reassoc_of% hu]
+  refine whisker_eq _ ?_
+  rw [Adjunction.homEquiv_unit] at hE
+  have hP' : (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB).app
+      ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) =
+      (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app _) ≫
+      (boundedConstructibleBaseChange _ ℓ hB.toCommSq).app _ ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app _ := by
+    rw [← reassoc_of% hP, Iso.hom_inv_id_app, Category.comp_id]
+  have hσ := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.naturality
+    (prodUpperStarCounit ℓ hB.w.symm ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))
+  rw [NatIso.isIso_inv_app, ← Category.assoc, IsIso.comp_inv_eq, hP',
+    ← (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map_comp_assoc, Iso.inv_hom_id_app]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl,
+    Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_hom,
+    Category.assoc]
+  exact (congrArg (_ ≫ ·) hσ.symm).trans ((Category.assoc _ _ _).symm.trans
+    (congrArg (· ≫ _) hE))
 
 /-- The core identity on `X × Y` of the base-change part of the source exchange. -/
 theorem sourceExchange_coreZ [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hB)]
