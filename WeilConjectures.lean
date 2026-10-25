@@ -8109,6 +8109,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Monoidal.DualizableDetection
 public import WeilConjectures.CategoryTheory.Monoidal.EndTensorUnit
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalProjection
+public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMap
+public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMapBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
@@ -9861,6 +9863,7 @@ public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.ProjectionFormulaBaseChange
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConstructible
@@ -12899,6 +12902,7 @@ public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
 public import WeilConjectures.TraceFormula.CompactTrace
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
+public import WeilConjectures.TraceFormula.ConstructibleGenerationLowerStar
 public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
@@ -12977,7 +12981,10 @@ public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.TraceFormula.PuncturedRestriction
+public import WeilConjectures.TraceFormula.PurityBaseChange
 public import WeilConjectures.TraceFormula.PurityCompatibility
+public import WeilConjectures.TraceFormula.PurityTensorMap
+public import WeilConjectures.TraceFormula.PurityTensorMapShift
 public import WeilConjectures.TraceFormula.PushforwardFamily
 public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
