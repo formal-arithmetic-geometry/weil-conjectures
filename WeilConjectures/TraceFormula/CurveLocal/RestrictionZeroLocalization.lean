@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullback
 
 /-!
@@ -36,32 +37,6 @@ restriction `r` (blueprint `det-tf-restriction-zero-localization`, item (iii)); 
 universe u' u
 
 open CategoryTheory Category Limits Pretriangulated
-
-namespace CategoryTheory.Pretriangulated
-
-variable {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
-  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-
-/-- For a morphism `φ : T ⟶ T'` of distinguished triangles whose second objects vanish, the
-first component of `φ` vanishes if and only if the third one does: the third morphisms of the
-triangles are isomorphisms, and they intertwine `φ.hom₃` with `φ.hom₁⟦1⟧'`. -/
-lemma hom₁_eq_zero_iff_hom₃_eq_zero {T T' : Triangle C} (φ : T ⟶ T')
-    (hT : T ∈ distTriang C) (hT' : T' ∈ distTriang C) (h₂ : IsZero T.obj₂)
-    (h₂' : IsZero T'.obj₂) : φ.hom₁ = 0 ↔ φ.hom₃ = 0 := by
-  have := (T.isZero₂_iff_isIso₃ hT).1 h₂
-  have := (T'.isZero₂_iff_isIso₃ hT').1 h₂'
-  have hc := φ.comm₃
-  constructor
-  · intro h
-    rw [h, Functor.map_zero, comp_zero] at hc
-    rw [← cancel_mono T'.mor₃, ← hc, zero_comp]
-  · intro h
-    rw [h, zero_comp] at hc
-    have : (shiftFunctor C (1 : ℤ)).map φ.hom₁ = 0 := by
-      rw [← cancel_epi T.mor₃, hc, comp_zero]
-    exact (shiftFunctor C (1 : ℤ)).map_injective (by rw [this, Functor.map_zero])
-
-end CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 

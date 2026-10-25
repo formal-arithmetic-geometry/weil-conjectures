@@ -12806,7 +12806,6 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCovers
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroDescent
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTraceDescent
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionGlobal
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionOpen

@@ -50,12 +50,6 @@ lemma Etale.comp_left {X Y Z : S.Etale} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (f ≫ g).left = f.left ≫ g.left :=
   rfl
 
-/-- The action of the fibre functor of `pointSmallEtale s` on morphisms is postcomposition. -/
-lemma pointSmallEtale_fiber_map_left (s : Spec (.of Ω) ⟶ S) {X Y : S.Etale} (f : X ⟶ Y)
-    (a : (pointSmallEtale s).fiber.obj X) :
-    ((pointSmallEtale s).fiber.map f a).left = a.left ≫ f.left :=
-  rfl
-
 namespace PointedEtaleNeighborhood
 
 variable (g : S' ⟶ S) (s' : Spec (.of Ω) ⟶ S')
@@ -80,11 +74,13 @@ noncomputable def pullback :
   map {x y} f := ⟨MorphismProperty.Over.homMk
       (pullback.map x.1.hom g y.1.hom g f.1.left (𝟙 _) (𝟙 _)
         (by simp) (by simp)) ((pullback.lift_snd _ _ _).trans (Category.comp_id _)), by
+      have e {T : Scheme.{u}} (t : Spec (.of Ω) ⟶ T) {X Y : T.Etale} (φ : X ⟶ Y)
+          (a : (pointSmallEtale t).fiber.obj X) :
+          ((pointSmallEtale t).fiber.map φ a).left = a.left ≫ φ.left := rfl
       refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
-      · have h := (pointSmallEtale_fiber_map_left _ _ _).symm.trans
-          (congrArg CommaMorphism.left f.2)
-        simp [pullbackObj, pointSmallEtale_fiber_map_left, h]
-      · simp [pullbackObj, pointSmallEtale_fiber_map_left]⟩
+      · have h := (e _ _ _).symm.trans (congrArg CommaMorphism.left f.2)
+        simp [pullbackObj, e, h]
+      · simp [pullbackObj, e]⟩
   map_id x := by
     apply Subtype.ext
     apply MorphismProperty.Over.Hom.ext
