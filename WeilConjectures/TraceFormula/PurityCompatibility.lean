@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.TraceFormula.PurityTensorMap
 
 /-!
 
@@ -66,24 +67,6 @@ variable {X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
 
-/-- The *purity map* `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` of a morphism `f : X ⟶ Y`: the
-exceptional adjoint of
-```
-Rf_! (Lf^* K ⊗ Rf^! ℚ̄_ℓ) ≅ Rf_! (Rf^! ℚ̄_ℓ ⊗ Lf^* K) ≅ Rf_! Rf^! ℚ̄_ℓ ⊗ K --ε ⊗ 1--> ℚ̄_ℓ ⊗ K ≅ K,
-```
-built from the tensor symmetry, the inverse of the projection formula for `f` and the counit of
-`Rf_! ⊣ Rf^!`. -/
-noncomputable def upperShriekUnitTensorMap (f : X ⟶ Y)
-    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ f).obj K ⊗
-        (boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _) ⟶
-      (boundedConstructibleUpperShriek _ ℓ f).obj K :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv _ _
-    ((boundedConstructibleLowerShriek _ ℓ f).map (β_ _ _).hom ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ f).app
-        ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))).app K) ≫
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app (𝟙_ _) ▷ K) ≫ (λ_ K).hom)
-
 /-- Compatibility required from the smooth purity section, to be proved there: **smooth purity
 for arbitrary coefficients** (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `sk-thm-sp-qbar`, in
 the form `Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`): for a smooth morphism `f`, the purity map
@@ -96,29 +79,6 @@ theorem isIso_upperShriekUnitTensorMap_of_smooth (f : X ⟶ Y) [Smooth f.left]
   sorry
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-- The *exceptional base change map* `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` of a cartesian square
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-(blueprint `sk-prop-cohsm`): the exceptional adjoint of
-`Rf'_! Lg'^* Rf^! L ≅ Lg^* Rf_! Rf^! L --Lg^* ε--> Lg^* L`, the inverse of compact-support base
-change followed by the pulled-back counit of `Rf_! ⊣ Rf^!`. -/
-noncomputable def upperShriekBaseChange (sq : IsPullback g' f' f g)
-    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ g').obj ((boundedConstructibleUpperShriek _ ℓ f).obj L) ⟶
-      (boundedConstructibleUpperShriek _ ℓ f').obj
-        ((boundedConstructibleUpperStar _ ℓ g).obj L) :=
-  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  (boundedConstructibleUpperShriekAdjunction _ ℓ f').homEquiv _ _
-    (inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
-        ((boundedConstructibleUpperShriek _ ℓ f).obj L)) ≫
-      (boundedConstructibleUpperStar _ ℓ g).map
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app L))
 
 /-- Compatibility required from the smooth purity section, to be proved there: **the exceptional
 inverse image along a smooth morphism commutes with base change** (SGA 4, Exposé XVIII,
