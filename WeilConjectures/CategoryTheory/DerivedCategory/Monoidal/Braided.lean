@@ -20,7 +20,7 @@ category `D(C)` is monoidal for the derived tensor product, i.e. those of
 product is the binary left derived functor of the tensor product on
 `K(C) := HomotopyCategory C (ComplexShape.up ℤ)`. This file constructs, for `C` braided, the
 braiding isomorphisms of `K(C)` and of `D(C)` as natural isomorphisms of bifunctors, and states
-that `D(C)` is symmetric if `C` is (the symmetry law is left as `sorry`).
+that `D(C)` is symmetric if `C` is.
 
 The construction follows the chain
 `C braided ⟹ Koszul braiding on CochainComplex C ℤ ⟹ K(C) braided ⟹ D(C) braided`:
@@ -305,7 +305,6 @@ identity law has to be proved. Being an identity in two variables, it follows fr
 @[instance_reducible]
 noncomputable def symmetricCategory : SymmetricCategory (DerivedCategory C) where
   __ := braidedCategory' C
-  symmetry X Y := by
-    exact braiding_hom_braiding_hom C (fun _ _ ↦ SymmetricCategory.symmetry _ _) X Y
+  symmetry X Y := braiding_hom_braiding_hom C (fun _ _ ↦ SymmetricCategory.symmetry _ _) X Y
 
 end DerivedCategory
