@@ -20,7 +20,11 @@ Let `M` be a model of finite type over the trait `S = Spec k'⟦t⟧`
 * The *geometric model* `M.geometric` of `𝒳` itself has the same total space, fibres and
   inclusions, and identification `ε = j`; its nearby cycles are the geometric nearby cycles
   `Li^* Rj_* Lj^*` (`NearbyCyclesModel.geometric`).
-* For an open `V ⊆ 𝒳`, the *restriction* `M.restrict V` is the geometric model of `V`, with
+* For an open `V ⊆ 𝒳`, the restriction `M.restrictOpen V` keeps the identification `ε`
+  (restricted to `j⁻¹ V`), and the inclusions form a morphism of models
+  `M.restrictOpenHom V : M.restrictOpen V ⟶ M` over `𝟙 X` and `i⁻¹ V ⟶ X'`
+  (`NearbyCyclesModel.restrictOpen`, `NearbyCyclesModel.restrictOpenHom`).
+* The *restriction* `M.restrict V` is the geometric model of `M.restrictOpen V`, with
   geometric generic fibre `j⁻¹ V` and special fibre `i⁻¹ V` (`NearbyCyclesModel.restrict`). It is
   again a model of finite type over the trait if `V ⟶ 𝒳` is quasi-compact
   (`NearbyCyclesModel.IsTraitModel.restrict`), and the inclusions form a morphism of models
@@ -67,16 +71,34 @@ noncomputable def restrictSpecialFibre (M : NearbyCyclesModel X X'.left) (V : M.
     Over (Spec (.of k')) :=
   Over.mk ((M.i ⁻¹ᵁ V).ι ≫ X'.hom)
 
-/-- The *restriction* of a model to an open `V` of its total space: the geometric model of `V`,
-with geometric generic fibre `j⁻¹ V` and special fibre `i⁻¹ V`. -/
+/-- The *restriction* of a model to an open `V` of its total space, keeping the identification
+`ε` (restricted to the geometric generic fibre `j⁻¹ V`), with special fibre `i⁻¹ V`. -/
 @[simps]
-noncomputable def restrict (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
-    NearbyCyclesModel V (M.restrictSpecialFibre V).left where
+noncomputable def restrictOpen (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
+    NearbyCyclesModel X (M.restrictSpecialFibre V).left where
   total := V
   generic := M.j ⁻¹ᵁ V
   j := M.j ∣_ V
   i := M.i ∣_ V
-  ε := M.j ∣_ V
+  ε := (M.j ⁻¹ᵁ V).ι ≫ M.ε
+
+/-- The inclusion of the restriction of a model to an open `V` of its total space, over `𝟙 X`
+and `i⁻¹ V ⟶ X'`. -/
+@[simps]
+noncomputable def restrictOpenHom (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
+    (M.restrictOpen V).Hom M (𝟙 X) (M.i ⁻¹ᵁ V).ι where
+  total := V.ι
+  generic := (M.j ⁻¹ᵁ V).ι
+  comm_j := (morphismRestrict_ι M.j V).symm
+  comm_i := (morphismRestrict_ι M.i V).symm
+  comm_ε := (Category.comp_id _).symm
+
+/-- The *restriction* of a model to an open `V` of its total space: the geometric model of `V`,
+with geometric generic fibre `j⁻¹ V` and special fibre `i⁻¹ V`. -/
+@[simps!]
+noncomputable def restrict (M : NearbyCyclesModel X X'.left) (V : M.total.Opens) :
+    NearbyCyclesModel V (M.restrictSpecialFibre V).left :=
+  (M.restrictOpen V).geometric
 
 /-- The inclusions of the restriction of a model to an open `V` of its total space into its
 geometric model, over the open immersions `V ⟶ 𝒳` and `i⁻¹ V ⟶ X'`. -/

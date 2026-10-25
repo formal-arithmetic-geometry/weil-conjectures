@@ -97,28 +97,29 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar 
 the base is an isomorphism as soon as every point of the special fibre lies in an open `V` of the
 total space with quasi-compact inclusion such that the duality maps of the restriction
 `M.restrictOpen V` are isomorphisms. -/
-theorem isIso_nearbyDualityMap_of_forall_exists_restrictOpen (h : M.IsTraitModelOfBase k q g)
+theorem isIso_nearbyDualityMap_of_forall_exists_restrictOpen (D : NearbyDualizingData k k' ℓ)
+    (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (H : ∀ x : X'.left, ∃ (V : M.total.Opens) (_ : QuasiCompact V.ι), M.i x ∈ V ∧
       ∀ K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
-        IsIso (nearbyDualityMap ℓ (h.restrictOpen V) K')) :
-    IsIso (nearbyDualityMap ℓ h K) := by
+        IsIso (nearbyDualityMap ℓ D (h.restrictOpen V) K')) :
+    IsIso (nearbyDualityMap ℓ D h K) := by
   have : IsLocallyNoetherian X'.left := LocallyOfFiniteType.isLocallyNoetherian X'.hom
   have : CompactSpace X'.left := QuasiCompact.compactSpace_of_compactSpace X'.hom
   have : IsNoetherian X'.left := ⟨⟩
-  suffices IsIso ((boundedConstructible _).ι.map (nearbyDualityMap ℓ h K)) from
+  suffices IsIso ((boundedConstructible _).ι.map (nearbyDualityMap ℓ D h K)) from
     isIso_of_fully_faithful (boundedConstructible _).ι _
   refine isIso_of_forall_exists_isIso_upperStar_map _ _ fun x ↦ ?_
   obtain ⟨V, _, hxV, hV⟩ := H x
   refine ⟨M.i ⁻¹ᵁ V, hxV, ?_⟩
   have : IsOpenImmersion (M.restrictOpenHom V).total := inferInstanceAs (IsOpenImmersion V.ι)
-  have hiff := isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (j := 𝟙 X)
+  have hiff := isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (j := 𝟙 X) (D := D)
     (j' := M.restrictSpecialFibreι V) ℓ (M.restrictOpenHom V) h (h.restrictOpen V)
     (isPullback_morphismRestrict M.j V).flip rfl rfl K
   have := hiff.2 (hV _)
   exact (boundedConstructible _).ι.map_isIso
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (M.restrictSpecialFibreι V)).map (nearbyDualityMap ℓ h K))
+      (M.restrictSpecialFibreι V)).map (nearbyDualityMap ℓ D h K))
 
 /-- **Gabber's theorem: nearby cycles commute with Verdier duality** (Illusie, *Autour du
 théorème de monodromie locale*, Thm. 4.2; SGA 7 XIII; blueprint
@@ -128,15 +129,16 @@ théorème de monodromie locale*, Thm. 4.2; SGA 7 XIII; blueprint
 `θ_M = β_a(ℚ̄_ℓ)`, is an isomorphism for every bounded constructible `K`. By open locality
 (`NearbyCyclesModel.isIso_nearbyDualityMap_of_forall_exists_restrictOpen`) this is the case of
 affine total spaces, `NearbyCyclesModel.isIso_nearbyDualityMap_of_isAffine`. -/
-theorem isIso_nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (nearbyDualityMap ℓ h K) := by
-  refine isIso_nearbyDualityMap_of_forall_exists_restrictOpen ℓ h K fun x ↦ ?_
+theorem isIso_nearbyDualityMap (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (nearbyDualityMap ℓ D h K) := by
+  refine isIso_nearbyDualityMap_of_forall_exists_restrictOpen ℓ D h K fun x ↦ ?_
   obtain ⟨V, hV, hxV, -⟩ := exists_isAffineOpen_mem_and_subset (x := M.i x) (U := ⊤) trivial
   have : IsAffine V := hV
   have hM := h.isTraitModelOver.isTraitModel.isNoetherian_total
   refine ⟨V, inferInstance, hxV, fun K' ↦ ?_⟩
   have : IsAffine (M.restrictOpen V).total := hV
-  exact isIso_nearbyDualityMap_of_isAffine ℓ (h.restrictOpen V) K'
+  exact isIso_nearbyDualityMap_of_isAffine ℓ D (h.restrictOpen V) K'
 
 /-- **Nearby cycles commute with Verdier duality**: for a trait model `M` over the base,
 `Ψ(D_X K) ≅ D_{X'}(Ψ K)` for every bounded constructible `K`, the duality being relative to `k` on
@@ -147,8 +149,9 @@ theorem nonempty_nearbyCycles_verdierDual_iso (h : M.IsTraitModelOfBase k q g)
         (verdierDual ℓ (toPoint X) K) ≅
       verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
         (h.preservesBoundedConstructible ℓ)).obj K)) :=
-  have := isIso_nearbyDualityMap ℓ h K
-  ⟨asIso (nearbyDualityMap ℓ h K)⟩
+  let ⟨D⟩ := nonempty_nearbyDualizingData k k' ℓ
+  have := isIso_nearbyDualityMap ℓ D h K
+  ⟨asIso (nearbyDualityMap ℓ D h K)⟩
 
 end NearbyCyclesModel
 

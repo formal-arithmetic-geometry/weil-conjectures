@@ -60,12 +60,6 @@ lemma nearbyDualityMap_eq_ihomComparison (G : C ⥤ D) [G.LaxMonoidal] {W : C} {
   rw [uncurry_nearbyDualityMap, uncurry_natural_right, uncurry_eq, Category.assoc,
     Functor.LaxMonoidal.ihomComparison_ev_assoc]
 
-/-- Precomposition with an isomorphism is an isomorphism of internal homs. -/
-instance isIso_pre_app {X Y : C} (f : X ⟶ Y) [IsIso f] (W : C) : IsIso ((pre f).app W) :=
-  ⟨(pre (inv f)).app W, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id,
-    NatTrans.id_app], by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id,
-    NatTrans.id_app]⟩
-
 omit [MonoidalClosed C] in
 /-- An exchange `α : F' Ψ_X ⟶ Ψ_U F` between strong monoidal functors which is monoidal in the
 oplax form `Ψ_U(δ_F) ∘ α ∘ F'(μ_X) = μ_U ∘ (α ⊗ α) ∘ δ_{F'}` is monoidal in the lax form. -/
@@ -301,19 +295,20 @@ morphisms and whose square of geometric generic fibres is cartesian, the restric
 of the duality map of `M` is an isomorphism if and only if the duality map `δ_{N, j^* K}` of `N`
 is: they are identified up to isomorphisms by `nearbyDualityMap_restrict_boundedConstructible`,
 since the pullback exchange is invertible and `j^*` commutes with internal homs. -/
-theorem isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (hM : M.IsTraitModelOfBase k q g)
+theorem isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (D : NearbyDualizingData k k' ℓ)
+    (hM : M.IsTraitModelOfBase k q g)
     (hN : N.IsTraitModelOfBase k qN gN) [IsOpenImmersion φ.total]
     (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : qN = φ.total ≫ q)
     (hg : gN = φ.generic ≫ g) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
-        (nearbyDualityMap ℓ hM K)) ↔
-      IsIso (nearbyDualityMap ℓ hN
+        (nearbyDualityMap ℓ D hM K)) ↔
+      IsIso (nearbyDualityMap ℓ D hN
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) := by
   have e := nearbyDualityMap_restrict_boundedConstructible φ (hN.preservesBoundedConstructible ℓ)
-    (hM.preservesBoundedConstructible ℓ) ((nearbyDualizingData k k' ℓ).θ hM)
-    ((nearbyDualizingData k k' ℓ).θ hN) (dualizingComplexUpperStarIso ℓ j).hom
+    (hM.preservesBoundedConstructible ℓ) (D.θ hM)
+    (D.θ hN) (dualizingComplexUpperStarIso ℓ j).hom
     (dualizingComplexUpperStarIso ℓ j').hom
-    ((nearbyDualizingData k k' ℓ).map_θ_comp_dualizingComplexUpperStarIso hM hN j j' φ hφ hq hg)
+    (D.map_θ_comp_dualizingComplexUpperStarIso hM hN j j' φ hφ hq hg)
     K
   have : IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) :=
     φ.isIso_pullbackExchange_of_isOpenImmersion _ hφ
