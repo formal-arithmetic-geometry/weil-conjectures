@@ -119,6 +119,40 @@ theorem Adjunction.map_exchangeRestriction_comp
   erw [Category.comp_id]
   exact hΔ.symm
 
+
+include τc in
+/-- **The exchange restriction under a change of coefficients, up to the source**: let `T` be a
+change of coefficients commuting with `c_!`, `d_!` and `Δ^*` (isomorphisms `τ`), with `d'_!`
+full. Then `T` of the exchange restriction, followed by the exchange `T ⋙ d'^! ⟵ d^! ⋙ T` (the
+mate of `τ_d⁻¹`) and `d'^!` of `τ_Δ`, factors through the exchange restriction for the new
+coefficients. No compatibility of `T` with the base change isomorphisms `σ`, `σ'` is needed:
+fullness of `d'_!` absorbs it into the factor on the source. -/
+theorem Adjunction.exists_map_exchangeRestriction_comp_eq [dL'.Full] (P : C₂) :
+    ∃ s : TF.obj (ι.obj (cR.obj P)) ⟶ ι'.obj (cR'.obj (T₂.obj P)),
+      TF.map (a.exchangeRestriction g ι Δ σ P) ≫
+          (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
+            dR'.map (τΔ.hom.app P) =
+        s ≫ a'.exchangeRestriction g' ι' Δ' σ' (T₂.obj P) := by
+  let m := (mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P
+  refine ⟨dL'.preimage (τd.inv.app _ ≫ TX.map (σ.inv.app _) ≫ τΔ.hom.app _ ≫
+    Δ'.map (τc.hom.app _) ≫ Δ'.map (cL'.map m) ≫ σ'.hom.app _), ?_⟩
+  apply (g'.homEquiv _ _).symm.injective
+  rw [← Category.assoc, Adjunction.homEquiv_naturality_right_symm,
+    Adjunction.homEquiv_symm_map_comp_mateEquiv_app, Adjunction.exchangeRestriction,
+    Equiv.symm_apply_apply, Adjunction.exchangeRestriction, Adjunction.homEquiv_naturality_left_symm]
+  erw [Equiv.symm_apply_apply]
+  rw [Functor.map_preimage]
+  have hc := Adjunction.homEquiv_symm_map_comp_mateEquiv_app a a' TC T₂ τc (𝟙 (cR.obj P))
+  simp only [Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit] at hc
+  have hΔ := τΔ.hom.naturality (a.counit.app P)
+  simp only [Functor.comp_map] at hΔ
+  simp only [Functor.map_comp, Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc, hΔ]
+  congr 3
+  simp only [← Functor.map_comp]
+  congr 1
+  rw [hc, Iso.hom_inv_id_app_assoc]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
