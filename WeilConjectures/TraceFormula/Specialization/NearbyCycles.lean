@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneric
-public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
@@ -222,9 +222,9 @@ theorem nonempty_specialization_verdierDual_iso
         ((specialization k' x).obj K)) :=
   NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
     (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
-    ⟨⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
-      isPullback_deformationSpecialFibre X _ k'⟩, deformationModel_exists_comp_ε X x.left.ker k',
-      isPullback_deformationModel_ε k' x⟩ K
+    (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+      isPullback_deformationSpecialFibre X _ k'⟩ (deformationModel_exists_comp_ε X x.left.ker k')
+      (isPullback_deformationModel_ε k' x)) K
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
 `K ⊠ D K` is the universal kernel of the specialization,

@@ -91,22 +91,29 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+-- `Dᵇc` is monoidal through `ObjectProperty.fullMonoidalSubcategory` everywhere, so that the
+-- monoidal structures of concrete statements and of instantiated abstract ones agree syntactically.
+attribute [-instance] monoidalCategory_boundedConstructible
+  ObjectProperty.instMonoidalCategoryStructFullSubcategory
+
 namespace NearbyCyclesModel
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+  [MonObj Λ] [IsCommMonObj Λ] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+  [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
+omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] in
 /-- The lax tensor map of nearby cycles on bounded constructible complexes is natural. -/
 lemma boundedConstructibleTensorMap_natural
-    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    {A A' B B' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (x : A ⟶ A') (y : B ⟶ B') :
+    (hP : M.PreservesBoundedConstructible Λ)
+    {A A' B B' : Dᵇc(X.left)⟦Λ⟧} (x : A ⟶ A') (y : B ⟶ B') :
     ((boundedConstructibleNearbyCycles hP).map x ⊗ₘ (boundedConstructibleNearbyCycles hP).map y) ≫
         boundedConstructibleTensorMap hP A' B' =
       boundedConstructibleTensorMap hP A B ≫ (boundedConstructibleNearbyCycles hP).map (x ⊗ₘ y) :=
@@ -117,9 +124,9 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
   [QuasiCompact Y'.hom] [IsSeparated Y'.hom] {N : NearbyCyclesModel Y.left Y'.left}
   {j : Y ⟶ X} {j' : Y' ⟶ X'} (φ : N.Hom M j.left j'.left)
 
+omit [IsEllAdicFinitenessCoefficient ℓ Λ] in
 /-- The restricted pullback exchange is `NearbyCyclesModel.liftExchange` of the ambient one. -/
 lemma Hom.boundedConstructiblePullbackExchange_eq_liftExchange'
-    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
     (hN : N.PreservesBoundedConstructible Λ) (hM : M.PreservesBoundedConstructible Λ) :
     φ.boundedConstructiblePullbackExchange ℓ hN hM =
       liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
@@ -133,41 +140,41 @@ lemma Hom.boundedConstructiblePullbackExchange_eq_liftExchange'
 lemma μ_boundedConstructibleUpperStar_hom {Z W : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom] (f : Z ⟶ W)
-    (A B : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f)
-      A B).hom = Functor.LaxMonoidal.μ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) A.obj B.obj :=
+    (A B : Dᵇc(W.left)⟦Λ⟧) :
+    (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ f)
+      A B).hom = Functor.LaxMonoidal.μ L((f.left)^*⟦Λ⟧) A.obj B.obj :=
   rfl
 
 /-- The monoidality of `NearbyCyclesModel.liftExchange` of an arbitrary transformation
 `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N`, deduced from that of `α`; the transformation is kept abstract so
 that the kernel never unfolds the pullback exchange. -/
 private lemma liftExchange_tensor_aux
-    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    (α : M.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
-        L((j'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
-      L((j.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ N.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
-    (hα : ∀ A B, L((j'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-        (M.tensorMap (Profinite.padicAlgClRingObj ℓ) A B) ≫ α.app (A ⊗ B) ≫
-          (N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
-            (Functor.OplaxMonoidal.δ L((j.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) A B) =
-      Functor.OplaxMonoidal.δ L((j'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _ ≫
-        (α.app A ⊗ₘ α.app B) ≫ N.tensorMap (Profinite.padicAlgClRingObj ℓ) _ _)
+    (hN : N.PreservesBoundedConstructible Λ)
+    (hM : M.PreservesBoundedConstructible Λ)
+    (α : M.nearbyCycles Λ ⋙
+        L((j'.left)^*⟦Λ⟧) ⟶
+      L((j.left)^*⟦Λ⟧) ⋙ N.nearbyCycles Λ)
+    (hα : ∀ A B, L((j'.left)^*⟦Λ⟧).map
+        (M.tensorMap Λ A B) ≫ α.app (A ⊗ B) ≫
+          (N.nearbyCycles Λ).map
+            (Functor.OplaxMonoidal.δ L((j.left)^*⟦Λ⟧) A B) =
+      Functor.OplaxMonoidal.δ L((j'.left)^*⟦Λ⟧) _ _ ≫
+        (α.app A ⊗ₘ α.app B) ≫ N.tensorMap Λ _ _)
     (β : boundedConstructibleNearbyCycles hM ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j' ⟶
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+        boundedConstructibleUpperStar Λ ℓ j' ⟶
+        boundedConstructibleUpperStar Λ ℓ j ⋙
           boundedConstructibleNearbyCycles hN)
     (hβ : β = liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
         (PY' := boundedConstructible _) (PX' := boundedConstructible _) α
         (fun K ↦ hM K.obj K.property) (fun K ↦ hN K.obj K.property)
         (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ j' K.obj K.property)
         (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ j K.obj K.property))
-    (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (A B : Dᵇc(X.left)⟦Λ⟧) :
     (β.app A ⊗ₘ β.app B) ≫ boundedConstructibleTensorMap hN _ _ ≫
         (boundedConstructibleNearbyCycles hN).map (Functor.LaxMonoidal.μ
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) A B) =
-      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j')
-          _ _ ≫ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
+          (boundedConstructibleUpperStar Λ ℓ j) A B) =
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ j')
+          _ _ ≫ (boundedConstructibleUpperStar Λ ℓ j').map
           (boundedConstructibleTensorMap hM A B) ≫ β.app (A ⊗ B) := by
   subst hβ
   apply ObjectProperty.hom_ext
@@ -179,21 +186,149 @@ private lemma liftExchange_tensor_aux
 /-- **The pullback exchange is monoidal on bounded constructible complexes**: the restriction of
 `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`, in the lax form. -/
 lemma Hom.boundedConstructiblePullbackExchange_tensor
-    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (hN : N.PreservesBoundedConstructible Λ)
+    (hM : M.PreservesBoundedConstructible Λ)
+    (A B : Dᵇc(X.left)⟦Λ⟧) :
     ((φ.boundedConstructiblePullbackExchange ℓ hN hM).app A ⊗ₘ
         (φ.boundedConstructiblePullbackExchange ℓ hN hM).app B) ≫
         boundedConstructibleTensorMap hN _ _ ≫
           (boundedConstructibleNearbyCycles hN).map (Functor.LaxMonoidal.μ
-            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) A B) =
-      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j')
-          _ _ ≫ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
+            (boundedConstructibleUpperStar Λ ℓ j) A B) =
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ j')
+          _ _ ≫ (boundedConstructibleUpperStar Λ ℓ j').map
           (boundedConstructibleTensorMap hM A B) ≫
         (φ.boundedConstructiblePullbackExchange ℓ hN hM).app (A ⊗ B) :=
   liftExchange_tensor_aux hN hM (φ.pullbackExchange _)
     (φ.map_tensorMap_comp_pullbackExchange_app _) _
     (φ.boundedConstructiblePullbackExchange_eq_liftExchange' hN hM) A B
+
+/-- **Nearby duality and open restriction, on bounded constructible complexes** (blueprint
+`det-tf-nearby-duality-proper` (2)): for a morphism of models `φ : N ⟶ M` over `j`, `j'` whose
+pullback exchange is given, dualizing maps `θ_M`, `θ_N` compatible with the identifications
+`ρ : j^* ω ⟶ ω_N`, `ρ' : j'^* ω' ⟶ ω'_N`, the restriction of the duality map of `M` is identified
+with the duality map of `N`. -/
+theorem nearbyDualityMap_restrict_boundedConstructible
+    (hN : N.PreservesBoundedConstructible Λ) (hM : M.PreservesBoundedConstructible Λ)
+    {ωX : Dᵇc(X.left)⟦Λ⟧} {ωX' : Dᵇc(X'.left)⟦Λ⟧} {ωY : Dᵇc(Y.left)⟦Λ⟧}
+    {ωY' : Dᵇc(Y'.left)⟦Λ⟧} (θX : (boundedConstructibleNearbyCycles hM).obj ωX ⟶ ωX')
+    (θY : (boundedConstructibleNearbyCycles hN).obj ωY ⟶ ωY')
+    (ρ : (boundedConstructibleUpperStar Λ ℓ j).obj ωX ⟶ ωY)
+    (ρ' : (boundedConstructibleUpperStar Λ ℓ j').obj ωX' ⟶ ωY')
+    (hθ : (boundedConstructibleUpperStar Λ ℓ j').map θX ≫ ρ' =
+      (φ.boundedConstructiblePullbackExchange ℓ hN hM).app ωX ≫
+        (boundedConstructibleNearbyCycles hN).map ρ ≫ θY)
+    (K : Dᵇc(X.left)⟦Λ⟧) :
+    (boundedConstructibleUpperStar Λ ℓ j').map
+        (Verdier.nearbyDualityMap (boundedConstructibleTensorMap hM) θX K) ≫
+        Verdier.nearbyDualityMap (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ j'))
+          ρ' ((boundedConstructibleNearbyCycles hM).obj K) =
+      (φ.boundedConstructiblePullbackExchange ℓ hN hM).app _ ≫
+        (boundedConstructibleNearbyCycles hN).map (Verdier.nearbyDualityMap
+          (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ j)) ρ K) ≫
+        Verdier.nearbyDualityMap (boundedConstructibleTensorMap hN) θY
+          ((boundedConstructibleUpperStar Λ ℓ j).obj K) ≫
+        (MonoidalClosed.pre ((φ.boundedConstructiblePullbackExchange ℓ hN hM).app K)).app ωY' :=
+  Verdier.nearbyDualityMap_restrict_natTrans _ _ θX θY ρ ρ'
+    (fun x y ↦ boundedConstructibleTensorMap_natural hN x y)
+    (φ.boundedConstructiblePullbackExchange ℓ hN hM)
+    (fun A B ↦ φ.boundedConstructiblePullbackExchange_tensor hN hM A B) hθ K
+
+section OpenIhom
+
+variable {V W : Over (Spec (.of k'))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
+  [IsSeparated V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
+  (i : V ⟶ W) [IsOpenImmersion i.left]
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
+/-- The projection map of `j_! ⊣ Lj^*` on `Dᵇc` is invertible
+(`isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction`),
+for the monoidal structure `ObjectProperty.fullMonoidalSubcategory` of `Dᵇc`. -/
+private lemma isIso_projectionMap_openImmersion_aux
+    (A : Dᵇc(W.left)⟦Λ⟧) :
+    IsIso (Functor.Monoidal.projectionMap
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i) A) := by
+  set adj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i
+  have hη (T : Dᵇc(V.left)⟦Λ⟧) : IsIso (adj.unit.app T) := by
+    have : IsIso ((boundedConstructible _).ι.map (adj.unit.app T)) := by
+      simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
+        Adjunction.map_restrictFullyFaithful_unit_app]
+      have := NatIso.isIso_app_of_isIso
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ i.left).unit
+        ((boundedConstructible _).ι.obj T)
+      exact IsIso.comp_isIso' this inferInstance
+    exact isIso_of_reflects_iso _ (boundedConstructible _).ι
+  refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun T ↦ ?_
+  have hε : IsIso (adj.counit.app (A ⊗ (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj
+      T)) := by
+    have : IsIso ((boundedConstructible _).ι.map (adj.counit.app
+        (A ⊗ (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj T))) := by
+      simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
+        Adjunction.map_restrictFullyFaithful_counit_app]
+      have :=
+        isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit_app_tensorObj
+          Λ i.left A.obj T.obj
+      exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance this)
+    exact isIso_of_reflects_iso _ (boundedConstructible _).ι
+  have := hη T
+  dsimp only [Functor.Monoidal.projectionMap]
+  infer_instance
+
+/-- The comparison `j^* D ⟶ D j^*` of the duality functors along an open immersion `j`, for an
+isomorphism `ρ : j^* ω ≅ ω'`, is an isomorphism: it is the internal-hom comparison of `j^*`, which
+is invertible, followed by `ρ`. -/
+lemma isIso_nearbyDualityMap_upperStar_of_isOpenImmersion {Ω : Dᵇc(W.left)⟦Λ⟧}
+    {Ω' : Dᵇc(V.left)⟦Λ⟧} (ρ : (boundedConstructibleUpperStar Λ ℓ i).obj Ω ≅ Ω')
+    (A : Dᵇc(W.left)⟦Λ⟧) :
+    IsIso (Verdier.nearbyDualityMap (Functor.LaxMonoidal.μ
+      (boundedConstructibleUpperStar Λ ℓ i)) ρ.hom A) := by
+  rw [Verdier.nearbyDualityMap_eq_ihomComparison]
+  have := isIso_projectionMap_openImmersion_aux (Λ := Λ) (ℓ := ℓ) i
+  have := Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i) A
+  infer_instance
+
+end OpenIhom
+
+variable (ℓ) [IsSepClosed k'] [Algebra k k'] [IsOpenImmersion j.left] [IsOpenImmersion j'.left]
+  {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+  {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
+
+/-- **Nearby duality and open restriction** (blueprint `det-tf-nearby-duality-proper` (2)): for a
+morphism `φ : N ⟶ M` of trait models over the base, over open immersions `j : Y ⟶ X` and
+`j' : Y' ⟶ X'`, whose map of total spaces is an open immersion compatible with the structure
+morphisms and whose square of geometric generic fibres is cartesian, the restriction `j'^* δ_{M,K}`
+of the duality map of `M` is an isomorphism if and only if the duality map `δ_{N, j^* K}` of `N`
+is: they are identified up to isomorphisms by `nearbyDualityMap_restrict_boundedConstructible`,
+since the pullback exchange is invertible and `j^*` commutes with internal homs. -/
+theorem isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (hM : M.IsTraitModelOfBase k q g)
+    (hN : N.IsTraitModelOfBase k qN gN) [IsOpenImmersion φ.total]
+    (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : qN = φ.total ≫ q)
+    (hg : gN = φ.generic ≫ g) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
+        (nearbyDualityMap ℓ hM K)) ↔
+      IsIso (nearbyDualityMap ℓ hN
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) := by
+  have e := nearbyDualityMap_restrict_boundedConstructible φ (hN.preservesBoundedConstructible ℓ)
+    (hM.preservesBoundedConstructible ℓ) ((nearbyDualizingData k k' ℓ).θ hM)
+    ((nearbyDualizingData k k' ℓ).θ hN) (dualizingComplexUpperStarIso ℓ j).hom
+    (dualizingComplexUpperStarIso ℓ j').hom
+    ((nearbyDualizingData k k' ℓ).map_θ_comp_dualizingComplexUpperStarIso hM hN j j' φ hφ hq hg)
+    K
+  have : IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) :=
+    φ.isIso_pullbackExchange_of_isOpenImmersion _ hφ
+  have : IsIso (φ.boundedConstructiblePullbackExchange ℓ (hN.preservesBoundedConstructible ℓ)
+      (hM.preservesBoundedConstructible ℓ)) :=
+    φ.isIso_boundedConstructiblePullbackExchange ℓ _ _
+  have := isIso_nearbyDualityMap_upperStar_of_isOpenImmersion j' (dualizingComplexUpperStarIso ℓ j')
+    ((boundedConstructibleNearbyCycles (hM.preservesBoundedConstructible ℓ)).obj K)
+  have := isIso_nearbyDualityMap_upperStar_of_isOpenImmersion j (dualizingComplexUpperStarIso ℓ j) K
+  rw [← isIso_comp_right_iff _ (Verdier.nearbyDualityMap (Functor.LaxMonoidal.μ
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j'))
+    (dualizingComplexUpperStarIso ℓ j').hom
+    ((boundedConstructibleNearbyCycles (hM.preservesBoundedConstructible ℓ)).obj K))]
+  unfold nearbyDualityMap
+  rw [e, isIso_comp_left_iff, isIso_comp_left_iff, isIso_comp_right_iff]
 
 end NearbyCyclesModel
 

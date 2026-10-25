@@ -13099,6 +13099,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduc
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityInvariants
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
