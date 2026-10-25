@@ -176,14 +176,23 @@ theorem isIso_curry_kunnethPairing_iff_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     (ag := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
     (agu := boundedConstructibleUpperShriekAdjunction ℓ g)
     (pfg := boundedConstructibleExceptionalProjection ℓ g)
-    (q := boundedConstructibleUpperStar _ ℓ qV) (qZ := boundedConstructibleUpperStar _ ℓ qW)
+    (q := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qV)
+    (qZ := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qW)
     (BC := boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
-    (θ := boundedConstructiblePullbackSquareComparison _ ℓ sq.toCommSq)
-    (hmate := ProjectionBaseChange.counit_mate_of_unit _ _ _ _ _ _
+    (θ := boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq)
+    (hmate := ProjectionBaseChange.counit_mate_of_unit
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ G)
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qV)
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qW)
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        sq.toCommSq)
       (fun M ↦ map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app ℓ sq M))
     (hPF2 := boundedConstructibleExceptionalProjectionMorphism_baseChange ℓ sq)
-    (hsymm := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom _ A B)
-    (hsymm' := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom _ A B)
+    (hsymm := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom A B)
+    (hsymm' := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom A B)
     (P := (boundedConstructibleUpperStar _ ℓ pV).obj M)
     (e := (boundedConstructibleUpperStarCompOfEq ℓ hp).hom.app M)
     (d := dualizingComplexComp ℓ g) (αY := αY) (αZ := αZ)

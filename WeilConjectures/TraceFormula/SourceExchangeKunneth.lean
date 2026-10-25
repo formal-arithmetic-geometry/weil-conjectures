@@ -94,7 +94,7 @@ lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOf
   Verdier.leftProjection_unit_app _ _ _ _
     (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
-    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _) M W
+    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M W
 
 lemma _root_.CategoryTheory.Functor.map_whiskerLeft_comp_braiding_comp {𝒞 𝒟 : Type*} [Category 𝒞]
     [Category 𝒟] [MonoidalCategory 𝒞] [MonoidalCategory 𝒟] [BraidedCategory 𝒟] (F : 𝒟 ⥤ 𝒞)
@@ -304,7 +304,7 @@ theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ f) _ hnat
     (fun M₁ M₂ ↦ by
       simp only [Category.assoc]
-      exact upperStarComp_square_tensor_δ ℓ _ (prod.map_snd f f) M₁ M₂) _
+      exact upperStarComp_square_tensor_δ ℓ (prod.map_snd f f) M₁ M₂) _
     (fun B ↦ by simp only [prodUpperStarCounit, Category.assoc]) B₁ B₂ B e
 
 /-- The evaluation part of identity (a) (blueprint `lem-trf-trace-source-exchange`, Step 3):

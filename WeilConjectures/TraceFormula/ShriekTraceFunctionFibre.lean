@@ -69,8 +69,7 @@ instance faithful_single_comp_quotient_comp_qh (C : Type*) [Category C] [Abelian
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
-omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- Placing an endomorphism of the unit module in degree `0` is injective. -/
 lemma homologyUnitEndRingHom_injective :
     Function.Injective (homologyUnitEndRingHom ℓ X) := by

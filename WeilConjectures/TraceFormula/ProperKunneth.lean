@@ -115,24 +115,33 @@ variable {P P' X Y R : Over (Spec (.of k))}
 `Lq^* Lp'^* Rf_* B ⟶ Lp^* B`. -/
 noncomputable def prodUpperStarCounit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     (w : q ≫ p' = p ≫ f) (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ q).obj ((boundedConstructibleUpperStar _ ℓ p').obj
-        ((boundedConstructibleLowerStar ℓ f).obj B)) ⟶
-      (boundedConstructibleUpperStar _ ℓ p).obj B :=
-  (boundedConstructibleUpperStarComp _ ℓ q p').inv.app _ ≫ eqToHom (by rw [w]) ≫
-    (boundedConstructibleUpperStarComp _ ℓ p f).hom.app _ ≫
-    (boundedConstructibleUpperStar _ ℓ p).map
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p').obj
+          ((boundedConstructibleLowerStar ℓ f).obj B)) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj B :=
+  (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ q p').inv.app _ ≫
+    eqToHom (by rw [w]) ≫
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ p f).hom.app _ ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).map
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app B)
 
 /-- The transpose of the transported counit of a commutative square is the base change morphism
 of the square. -/
 lemma homEquiv_prodUpperStarCounit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     (w : q ≫ p' = p ≫ f) (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p').obj
+          ((boundedConstructibleLowerStar ℓ f).obj B))
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj B)
         (prodUpperStarCounit ℓ w B) =
       (boundedConstructibleBaseChange ℓ (CommSq.mk w.symm)).app B := by
-  rw [boundedConstructibleBaseChange_eq_exchangeRight, Adjunction.exchangeRight_app,
-    Adjunction.homEquiv_unit, boundedConstructiblePullbackSquareComparison_hom_app,
-    prodUpperStarCounit]
+  rw [boundedConstructibleBaseChange_eq_exchangeRight,
+    Adjunction.exchangeRight_app (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ q)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        (CommSq.mk w.symm)) B,
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv_unit,
+    boundedConstructiblePullbackSquareComparison_hom_app, prodUpperStarCounit]
   simp only [Functor.map_comp, Category.assoc]
 
 /-- For a cartesian square `q ≫ p' = p ≫ f` with `f` proper, the transpose of the transported

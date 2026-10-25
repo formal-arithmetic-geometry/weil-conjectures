@@ -67,7 +67,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left]
+set_option hygiene false in
+/-- The coefficient ring `ℚ̲̄_ℓ`. -/
+local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
+set_option maxHeartbeats 1000000 in
+-- matching the mate square unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **The mate of the Künneth square** (blueprint `lem-trf-trace-source-exchange`, Step 3): for
 `T = Lp₂'^* Rf_* B`, the mate `Lf^* Rp₁'_! T ⟶ Rp₁_! Lq^* T` of the composition isomorphism of
 `q ≫ p₁' = p₁ ≫ f`, followed by the transported counit `Lq^* Lp₂'^* Rf_* B ⟶ Lp₂^* B`, is `Ex_!`
@@ -76,48 +81,48 @@ of the cartesian square `(f × 1) ≫ p₁' = p_X ≫ f`, followed by `Rp_X!` of
 cartesian square `(1 × f) ≫ p_Y = p₂ ≫ f`) and `Rp_X! R(1 × f)_! ≅ Rp₁_!`. -/
 theorem upperStar_map_unit_comp_squareIso_comp_counit_comp_prodUpperStarCounit
     (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ f).map
+    (boundedConstructibleUpperStar 𝐐 ℓ f).map
         ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f)).unit.app
-            ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+            ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
               ((boundedConstructibleLowerStar ℓ f).obj B)))) ≫
-      (boundedConstructibleUpperStar _ ℓ f).map
+      (boundedConstructibleUpperStar 𝐐 ℓ f).map
         ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
-          ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
-            ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleUpperStar 𝐐 ℓ (prod.map f f)).obj
+            ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
               ((boundedConstructibleLowerStar ℓ f).obj B))) :
           _ ⟶ (boundedConstructibleLowerShriek ℓ f).obj
             ((boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj
-              ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
-                ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+              ((boundedConstructibleUpperStar 𝐐 ℓ (prod.map f f)).obj
+                ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
                   ((boundedConstructibleLowerStar ℓ f).obj B))))) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app _ ≫
       (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)).map
         (prodUpperStarCounit ℓ (prod.map_snd f f) B) =
     ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
         (IsPullback.of_prod_fst_with_id f Y).flip).app
-        ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+        ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
           ((boundedConstructibleLowerStar ℓ f).obj B)) :
-        (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerShriek ℓ
-          (prod.fst : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleUpperStar _ ℓ
+        (boundedConstructibleUpperStar 𝐐 ℓ f).obj ((boundedConstructibleLowerShriek ℓ
+          (prod.fst : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleUpperStar 𝐐 ℓ
             (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar ℓ f).obj B))) ⟶
         (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
-          ((boundedConstructibleUpperStar _ ℓ (prod.map f (𝟙 Y))).obj
-            ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleUpperStar 𝐐 ℓ (prod.map f (𝟙 Y))).obj
+            ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
               ((boundedConstructibleLowerStar ℓ f).obj B)))) ≫
       (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
-        ((boundedConstructibleUpperStarComp _ ℓ (prod.map f (𝟙 Y)) prod.snd).inv.app
+        ((boundedConstructibleUpperStarComp 𝐐 ℓ (prod.map f (𝟙 Y)) prod.snd).inv.app
             ((boundedConstructibleLowerStar ℓ f).obj B) ≫
-          eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
+          eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar 𝐐 ℓ r).obj
             ((boundedConstructibleLowerStar ℓ f).obj B)) (by simp)) ≫
-          (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
+          (boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
             ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B) ≫
           (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
             (IsPullback.of_prod_snd_with_id f X)).app B) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (prod.map (𝟙 X) f) prod.fst).inv.app
-        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj B) ≫
+        ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : X ⨯ X ⟶ X)).obj B) ≫
       eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj
-        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj B)) (by simp)) := by
+        ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : X ⨯ X ⟶ X)).obj B)) (by simp)) := by
   have : IsProper (prod.map f (𝟙 Y)).left :=
     MorphismProperty.of_isPullback ((IsPullback.of_prod_fst_with_id f Y).map (Over.forget _))
       (inferInstanceAs (IsProper f.left))
@@ -136,7 +141,7 @@ theorem upperStar_map_unit_comp_squareIso_comp_counit_comp_prodUpperStarCounit
     exact boundedConstructibleLowerShriekSquareIso_padicAlgCl_hom_app_comp ℓ
       hq (by simp) (prod.map_fst f f)
       (IsPullback.of_prod_fst_with_id f Y).flip.w
-      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj B)
+      ((boundedConstructibleUpperStar 𝐐 ℓ (prod.snd : X ⨯ X ⟶ X)).obj B)
   case h₂ =>
     exact unit_comp_lowerShriek_map_prodUpperStarCounit ℓ hq
       (IsPullback.of_prod_snd_with_id f X) (by simp) (prod.map_snd f f) B

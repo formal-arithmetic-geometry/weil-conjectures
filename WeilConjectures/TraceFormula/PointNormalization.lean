@@ -103,7 +103,7 @@ endomorphism `v` of a perfect complex integrates to the categorical trace of `v`
 theorem integral_traceClass_ofEnd [HasRightDual K] (v : K ⟶ K) :
     ((ofEnd K v).traceClass (fixedLocusOfEnd v)).integral = trace v :=
   (integral_traceClass_ofEnd_eq v).trans (trace_eq_of_zigzag
-    (boundedConstructible_braiding_hom_braiding_hom _) _ _ (pointCoev_zigzag v) v)
+    (fun A B ↦ boundedConstructible_braiding_hom_braiding_hom A B) _ _ (pointCoev_zigzag v) v)
 
 end Correspondence
 

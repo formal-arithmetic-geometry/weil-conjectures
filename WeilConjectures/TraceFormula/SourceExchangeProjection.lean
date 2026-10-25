@@ -123,7 +123,7 @@ lemma leftProjection_lowerShriek_comp (x : C ⟶ Y) (y : Y ⟶ Z)
             ((boundedConstructibleUpperStar _ ℓ y).obj M) T) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app _ :=
   Verdier.leftProjection_comp _ _ _ _ _
-      (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _)
+      (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _)
     (fun T M ↦ exceptionalProjection_comp ℓ x y T M) M T
 
 set_option maxHeartbeats 2000000 in
@@ -143,7 +143,7 @@ lemma leftProjection_lowerShriek_unit (g : C ⟶ Y) [IsProper g.left]
   Verdier.leftProjection_unit _ _ _ _
     (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
-    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _) M
+    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M
 
 set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks

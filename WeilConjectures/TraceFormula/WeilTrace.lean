@@ -148,15 +148,6 @@ def frobeniusFixedPoints : Type u :=
     x ≫ X.hom = specAlgebraicClosure k ∧
       x ≫ (e.pow n).hom.left = ((geometricFrobeniusField k).pow n).hom ≫ x}
 
-/-- The points of degree `n ≠ 0` form a finite type, with the `Fintype` structure chosen from
-`finite_frobeniusFixedPoints`. It is not a global instance; enable it with
-`attribute [local instance] fintypeFrobeniusFixedPoints` where sums over points are taken. -/
-@[instance_reducible]
-noncomputable def fintypeFrobeniusFixedPoints [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-    [IsSeparated X.hom] [NeZero n] : Fintype (frobeniusFixedPoints e n) :=
-  have := finite_frobeniusFixedPoints e n
-  Fintype.ofFinite _
-
 end Points
 
 /-! ### The local trace -/
@@ -255,17 +246,6 @@ noncomputable def weilStalkTraceAlternatingSum (K : WeilBoundedConstructible ℓ
     End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
   ∑ᶠ j : ℤ, (j.negOnePow : ℤ) •
     weilSheafStalkTrace ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)
-
-/-- The local trace `tₙ(K; x̄) = ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n} | Hʲ(K)_x̄)` of a Weil object `K` of
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧` at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄`: the alternating sum of the
-traces of the `n`-th Frobenius on the stalks of the Weil homology sheaves. -/
-noncomputable def weilStalkTraceAlternatingSum (K : WeilBoundedConstructible ℓ e) :
-    End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
-  ∑ᶠ j : ℤ, (j.negOnePow : ℤ) •
-    categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx
-        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier)
-      (WeilSheaf.frobeniusStalk ℓ n x hx
-        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom
 
 /-- Only finitely many homology sheaves of a bounded complex contribute to the local trace, so
 that the `finsum` defining it is a finite sum. -/

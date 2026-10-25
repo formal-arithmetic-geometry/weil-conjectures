@@ -375,9 +375,8 @@ lemma pointProdUpperStarComparison_hom_app
     conv_lhs => rw [← h₁]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id]
-    simp
-  rw [h₂, reassoc_of% h₁']
-  simp only [eqToHom_trans]
+    rw [eqToHom_trans, eqToHom_refl]
+  rw [h₂, reassoc_of% h₁', eqToHom_trans, eqToHom_trans]
 
 /-- `LΔ^* Lp₁^* y ≅ y` is `LΔ^* Lp₂^* y ≅ y` read through `Lp₁^* y ≅ Lp₂^* y`. -/
 lemma diagUpperStarProjIso_fst_eq (y : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -485,8 +484,7 @@ lemma baseChange_app_comp_prodBaseChangeIso_hom_app
 lemma upperShriekIdOfEq_hom_app_unit :
     (upperShriekIdOfEq ℓ toPoint_point_eq).hom.app (𝟙_ _) = (dualizingComplexPointIso ℓ k).hom := by
   simp only [upperShriekIdOfEq, NatIso.ofComponents_hom_app, Iso.trans_hom, eqToIso.hom,
-    Iso.app_hom, dualizingComplexPointIso]
-  exact Category.id_comp _
+    Iso.app_hom, dualizingComplexPointIso, upperShriekUnitIsoOfEqId]
 
 /-- **The base change part of the transport of the exceptional Künneth map** over the base
 point: `ζ` at `Lp₂^* ω_s`, followed by the inverse of compact-support base change in the product

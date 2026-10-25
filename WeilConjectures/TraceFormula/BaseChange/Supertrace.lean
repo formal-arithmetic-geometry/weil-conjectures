@@ -81,8 +81,7 @@ noncomputable def homologyUnitEndRingHom :
       (F.mapEndRingHom (CategoryTheory.Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           X.left)))))
 
-omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- Through the inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{Λ_X})`, `homologyUnitEndRingHom` is the placement
 of endomorphisms of the unit in degree `0`, `DerivedCategory.singleFunctorUnitEndRingHom`. -/
 lemma ι_map_homologyUnitEndRingHom
