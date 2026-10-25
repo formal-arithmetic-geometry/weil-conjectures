@@ -13105,6 +13105,7 @@ public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionCartier
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionConstant
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
 public import WeilConjectures.TraceFormula.Stalk
