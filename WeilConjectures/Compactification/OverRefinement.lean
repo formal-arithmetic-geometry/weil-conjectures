@@ -63,11 +63,8 @@ and compatible with composition.
 Cartesian squares of schemes give cartesian squares in `Over S`, the forgetful functor
 reflecting pullbacks.
 
-
-The structure `OverRefinement` and the composite compactification `overComp` are those of
-`WeilConjectures.Compactification.Refinement`; the two existence theorems are proved here under
-the names `exists_overRefinement'` and `exists_isPullback_overG_overI'`, their statements in
-`WeilConjectures.Compactification.Refinement` being `sorry`ed.
+The structure `OverRefinement` and the composite compactification `overComp` are defined in
+`WeilConjectures.Compactification.Refinement`.
 -/
 
 @[expose] public section
@@ -142,7 +139,7 @@ scheme-theoretic closure `Z` of the image of `X` in `Z₁ ×_Y Z₂`, with the p
 and `Z₂`. The immersion `X ⟶ Z₁ ×_Y Z₂` is an open immersion into its scheme-theoretic closure,
 and the preimage of `X ⊆ Z₁` in `Z` is `X`, since `X` is closed in `X ×_Y Z₂` (`Z₂` is separated
 over `Y`). -/
-theorem exists_overRefinement' [QuasiCompact X.hom] [IsSeparated Y.hom]
+theorem exists_overRefinement [QuasiCompact X.hom] [IsSeparated Y.hom]
     (c₁ c₂ : Compactification f.left) :
     ∃ c : Compactification f.left, Nonempty (OverRefinement c c₁) ∧
       Nonempty (OverRefinement c c₂) := by
@@ -159,7 +156,7 @@ theorem exists_overRefinement' [QuasiCompact X.hom] [IsSeparated Y.hom]
 whose square with `p` and `j` is cartesian: the scheme-theoretic closure `W` of `Z` in any
 compactification of `p ≫ j`. Then `p'⁻¹(Y)` contains `Z` as an open subscheme which is proper,
 hence closed, over `Y`, and schematically dense, so that `p'⁻¹(Y) = Z`. -/
-theorem exists_isPullback_overG_overI' [CompactSpace S] [QuasiSeparatedSpace S]
+theorem exists_isPullback_overG_overI [CompactSpace S] [QuasiSeparatedSpace S]
     [QuasiCompact Y.hom] [QuasiCompact T.hom] [IsSeparated T.hom] (c : Compactification f.left)
     (c' : Compactification g.left) :
     ∃ d : Compactification (c.overG ≫ c'.overI).left,

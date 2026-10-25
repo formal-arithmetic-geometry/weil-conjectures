@@ -41,11 +41,7 @@ and compatible with composition.
   of `Z` in any compactification of `p ≫ j`. Then `X ⟶[i ≫ i'] W ⟶[p' ≫ q] T` is a
   compactification of `(f ≫ g).left` (`Compactification.overComp`).
 
-## Sorried input
-
-`Compactification.exists_overRefinement` and `Compactification.exists_isPullback_overG_overI`
-are `sorry`ed: both need the scheme-theoretic closure of a quasi-compact immersion and its
-compatibility with restriction to open subschemes.
+The two existence theorems are proved in `WeilConjectures.Compactification.OverRefinement`.
 
 -/
 
@@ -109,36 +105,5 @@ lemma overCompObjIso_hom_overG (c : Compactification f.left) (c' : Compactificat
     (overCompObjIso c c' d).hom ≫ d.overG ≫ c'.overG = (overComp c c' d).overG := by
   ext
   simp [overCompObjIso, overComp]
-
-section Existence
-
-variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [CompactSpace S] [QuasiSeparatedSpace S]
-
-/-- Any two compactifications `c₁` and `c₂` of `f.left` have a common refinement: the
-scheme-theoretic closure `Z` of the image of `X` in `Z₁ ×_Y Z₂`, with the projections to `Z₁`
-and `Z₂`. The immersion `X ⟶ Z₁ ×_Y Z₂` is an open immersion into its scheme-theoretic closure,
-and the preimage of `X ⊆ Z₁` in `Z` is `X`, since `X` is closed in `X ×_Y Z₂` (`Z₂` is separated
-over `Y`). -/
-theorem exists_overRefinement (c₁ c₂ : Compactification f.left) :
-    ∃ c : Compactification f.left, Nonempty (OverRefinement c c₁) ∧
-      Nonempty (OverRefinement c c₂) :=
-  sorry
-
-variable [QuasiCompact T.hom] [IsSeparated T.hom]
-
-/-- For compactifications `c = (X ⟶[i] Z ⟶[p] Y)` of `f.left` and `c' = (Y ⟶[j] Z' ⟶[q] T)` of
-`g.left`, the morphism `p ≫ j : Z ⟶ Z'` has a compactification `d = (Z ⟶[i'] W ⟶[p'] Z')`
-whose square with `p` and `j` is cartesian: the scheme-theoretic closure `W` of `Z` in any
-compactification of `p ≫ j`. Then `p'⁻¹(Y)` contains `Z` as an open subscheme which is proper,
-hence closed, over `Y`, and schematically dense, so that `p'⁻¹(Y) = Z`. -/
-theorem exists_isPullback_overG_overI (c : Compactification f.left)
-    (c' : Compactification g.left) :
-    ∃ d : Compactification (c.overG ≫ c'.overI).left,
-      IsPullback c.overG d.overI c'.overI d.overG :=
-  sorry
-
-end Existence
 
 end AlgebraicGeometry.Compactification
