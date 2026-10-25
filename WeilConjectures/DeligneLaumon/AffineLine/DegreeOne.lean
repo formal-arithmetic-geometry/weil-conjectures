@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity

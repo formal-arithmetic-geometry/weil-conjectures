@@ -8042,6 +8042,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
@@ -11991,6 +11992,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeGeneration
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseBidual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CompactOpenLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
@@ -12834,6 +12836,7 @@ public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
 public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
 public import WeilConjectures.WeilSheaf.BaseChangeField.GlobalSections
 public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
+public import WeilConjectures.WeilSheaf.Bidual
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.BoundaryStalkFrobenius
 public import WeilConjectures.WeilSheaf.BoundaryStalkGaloisInvariants

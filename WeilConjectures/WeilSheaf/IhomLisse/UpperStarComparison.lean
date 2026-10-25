@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso
@@ -39,15 +39,6 @@ namespace AlgebraicGeometry.ProEtale
 variable {l : ℕ} [Fact l.Prime] {Y' : Scheme.{u}}
 
 attribute [local instance] Sheaf.symmetricCategory
-
-/-- The internal hom out of an isomorphism is an isomorphism. -/
-lemma _root_.CategoryTheory.Mod.isIso_ihomMap_app {M M' : AdicSheaf l Y'} (f : M ⟶ M') [IsIso f]
-    (N : AdicSheaf l Y') : IsIso ((Mod.ihomMap f).app N) :=
-  ⟨(Mod.ihomMap (inv f)).app N, by
-    rw [← NatTrans.comp_app, ← Mod.ihomMap_comp, IsIso.inv_hom_id, Mod.ihomMap_id]
-    rfl, by
-    rw [← NatTrans.comp_app, ← Mod.ihomMap_comp, IsIso.hom_inv_id, Mod.ihomMap_id]
-    rfl⟩
 
 section Comparison
 
