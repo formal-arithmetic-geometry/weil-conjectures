@@ -221,10 +221,13 @@ its sections over the henselian lifts of all w-contractible ind-étale `k'⟦t�
 vanish. -/
 theorem isZero_upperStar_traitClosedPoint_obj_of_forall
     (F : Mod (Sheaf (ProEt.topology (trait k')) Ab.{u + 1}) (condensedRingObj Λ (trait k')))
-    (hF : ∀ (C : Type u) [CommRing C] [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    (hF : ∀ (C : Type u) [CommRing C]
+      [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
       [Algebra (PowerSeries k') C]
-      [IsScalarTower (PowerSeries k') (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
-      [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C], IsWContractibleRing C →
+      [IsScalarTower (PowerSeries k')
+        (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+      [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C],
+      IsWContractibleRing C →
         Subsingleton (F.X.obj.obj (op (traitClosedLift C)))) :
     Limits.IsZero ((traitClosedPoint k')^*⟦Λ⟧.obj F) := by
   have h := isIso_upperStar_traitClosedPoint_map_of_forall_ab (0 : F.X ⟶ F.X)
@@ -240,10 +243,13 @@ w-contractible ind-étale `k'⟦t⟧ ⧸ (t)`-algebras. -/
 theorem isIso_upperStar_traitClosedPoint_map_of_forall
     {F G : Mod (Sheaf (ProEt.topology (trait k')) Ab.{u + 1}) (condensedRingObj Λ (trait k'))}
     (φ : F ⟶ G)
-    (hφ : ∀ (C : Type u) [CommRing C] [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    (hφ : ∀ (C : Type u) [CommRing C]
+      [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
       [Algebra (PowerSeries k') C]
-      [IsScalarTower (PowerSeries k') (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
-      [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C], IsWContractibleRing C →
+      [IsScalarTower (PowerSeries k')
+        (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+      [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C],
+      IsWContractibleRing C →
         Function.Bijective (φ.hom.hom.app (op (traitClosedLift C)))) :
     IsIso ((traitClosedPoint k')^*⟦Λ⟧.map φ) := by
   have : IsIso ((Mod.forget _).map ((traitClosedPoint k')^*⟦Λ⟧.map φ)) :=

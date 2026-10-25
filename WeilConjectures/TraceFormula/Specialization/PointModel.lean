@@ -101,6 +101,11 @@ theorem isTraitModel_traitModel : (traitModel k k').IsTraitModel := by
     IsPullback.of_vert_isIso ⟨by simp [traitModel]⟩,
     IsPullback.of_vert_isIso ⟨by simp [traitModel]⟩⟩⟩
 
+/-- The generic identification of the trait model factors through the total space `S`. -/
+lemma traitModel_j_traitToBase : (traitModel k k').j ≫ traitToBase k k' = (traitModel k k').ε := by
+  change traitGenericPoint k' ≫ traitToBase k k' = Spec.map _
+  rw [traitGenericPoint, traitToBase, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
@@ -110,7 +115,8 @@ noncomputable def traitSpecialization :
       Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   NearbyCyclesModel.boundedConstructibleNearbyCycles
     ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
-      (isTraitModel_traitModel k k'))
+      (isTraitModel_traitModel k k')
+      ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)
 
 /-- The specialization unit `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ` of the trait. -/
 noncomputable def traitSpecializationUnit :
