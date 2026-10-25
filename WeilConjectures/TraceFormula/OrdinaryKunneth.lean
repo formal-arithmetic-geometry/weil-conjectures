@@ -102,13 +102,13 @@ noncomputable def openKunnethSecondFactor (j : U ⟶ Y)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B)) ⟶
+          ((boundedConstructibleLowerStar ℓ j).obj B)) ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.snd : X ⨯ U ⟶ U)).obj ((𝟭 _).obj B) :=
   (prodMapUpperStarSndIso ℓ j).hom.app _ ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.snd : X ⨯ U ⟶ U)).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         j).counit.app B)
 
 /-- The *Künneth map* `M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` for an open immersion `j : U ⟶ Y`: the
@@ -136,8 +136,8 @@ isomorphism: it is the base change morphism of the square `commSq_prodMap_snd`, 
 generic base change (`isIso_boundedConstructibleBaseChange_prodMap`). -/
 lemma isIso_exchangeRight_prodMapUpperStarSndIso (j : U ⟶ Y) :
     IsIso (Adjunction.exchangeRight
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (prod.map (𝟙 X) j))
       (prodMapUpperStarSndIso ℓ (X := X) j)) := by
   rw [prodMapUpperStarSndIso_eq_pullbackSquareComparison,
@@ -150,18 +150,18 @@ the exchange morphism of `prodMapUpperStarSndIso`
 (`isIso_exchangeRight_prodMapUpperStarSndIso`). -/
 lemma isIso_homEquiv_prodMapUpperStarSndIso_hom_app_comp_map_counit (j : U ⟶ Y)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (prod.map (𝟙 X) j)).homEquiv
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))
+          ((boundedConstructibleLowerStar ℓ j).obj B))
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ U ⟶ U)).obj B)
         ((prodMapUpperStarSndIso ℓ (X := X) j).hom.app
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B) ≫
+          ((boundedConstructibleLowerStar ℓ j).obj B) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ U ⟶ U)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             j).counit.app B))) := by
   have := isIso_exchangeRight_prodMapUpperStarSndIso ℓ (X := X) j
   rw [Adjunction.homEquiv_hom_app_comp_map_counit]

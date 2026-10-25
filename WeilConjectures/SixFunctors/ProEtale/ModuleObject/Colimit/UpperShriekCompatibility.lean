@@ -165,19 +165,19 @@ noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
     boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g ⋙
         constructibleToPadicAlgCl Y.left ℓ E ≅
       constructibleToPadicAlgCl Z.left ℓ E ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g :=
+        boundedConstructibleLowerStar ℓ g :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (constructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (boundedConstructibleLowerStarCompatibility _ ℓ g) _ ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleLowerStarCompatibility ℓ g) _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (asIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (constructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility _ ℓ g).symm ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ g).symm ≪≫
       (Functor.associator _ _ _).symm)
 
 end LowerStar
@@ -254,7 +254,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClI
     boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c ⋙
         constructibleToPadicAlgCl Y.left ℓ E ≅
       constructibleToPadicAlgCl X.left ℓ E ⋙
-        boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c :=
+        boundedConstructibleLowerShriekOfCompactification ℓ c :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG) ≪≫
     (Functor.associator _ _ _).symm ≪≫
@@ -268,7 +268,7 @@ noncomputable def boundedConstructibleProperUpperShriekToPadicAlgCl :
     (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ c.overG).rightAdjoint ⋙
         constructibleToPadicAlgCl c.overObj.left ℓ E ⟶
       constructibleToPadicAlgCl Y.left ℓ E ⋙
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overG).rightAdjoint :=
+        (boundedConstructibleLowerStar ℓ c.overG).rightAdjoint :=
   mateEquiv (Adjunction.ofIsLeftAdjoint _) (Adjunction.ofIsLeftAdjoint _)
     (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
 
@@ -278,9 +278,9 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl 
     boundedConstructibleUpperShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c ⋙
         constructibleToPadicAlgCl X.left ℓ E ⟶
       constructibleToPadicAlgCl Y.left ℓ E ⋙
-        boundedConstructibleUpperShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c :=
-  mateEquiv (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
-    (boundedConstructibleUpperShriekOfCompactificationAdjunction _ ℓ c)
+        boundedConstructibleUpperShriekOfCompactification ℓ c :=
+  mateEquiv (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
+    (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
     (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
 
 set_option maxHeartbeats 400000 in
@@ -306,7 +306,7 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
     (Adjunction.ofIsLeftAdjoint
       (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ c.overG))
     (Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overG))
+      (boundedConstructibleLowerStar ℓ c.overG))
     (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
     (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
 
@@ -329,7 +329,7 @@ noncomputable def boundedConstructibleLowerShriekToPadicAlgClIso :
     boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
         constructibleToPadicAlgCl Y.left ℓ E ≅
       constructibleToPadicAlgCl X.left ℓ E ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleLowerShriek ℓ f :=
   boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E (compactificationOverField f)
 
 /-- **The exchange for `f^!`**, for the inclusion `E ⟶ ℚ̄_ℓ`: the canonical natural transformation
@@ -339,9 +339,9 @@ noncomputable def boundedConstructibleUpperShriekToPadicAlgCl :
     boundedConstructibleUpperShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
         constructibleToPadicAlgCl X.left ℓ E ⟶
       constructibleToPadicAlgCl Y.left ℓ E ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
-  mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+        boundedConstructibleUpperShriek ℓ f :=
+  mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv
 
 /-- The exchange for `f^!` is an isomorphism as soon as the exchange for the proper part of the

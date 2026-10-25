@@ -137,8 +137,8 @@ compact-support base change in the fixed square. -/
 lemma Correspondence.FixedLocus.supportedRestriction_eq_mateEquiv (F : c.FixedLocus)
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     F.supportedRestriction P =
-      (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-        (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+      (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+        (boundedConstructibleUpperShriekAdjunction ℓ F.d)
         (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).natTrans.app P := by
   rw [Adjunction.mateEquiv_app_eq_homEquiv, ← F.homEquiv_symm_supportedRestriction]
   exact (Equiv.apply_symm_apply _ _).symm

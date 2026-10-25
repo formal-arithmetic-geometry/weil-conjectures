@@ -96,7 +96,7 @@ finite `ℓ`-primary coefficients; it is Deligne's generic base change theorem (
 `ℚ̄_ℓ`-coefficients follow by passage to the limit (Bhatt–Scholze, Section 6.8). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U ⟶ Y)
     [IsOpenImmersion j.left] :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) j)) :=
   sorry
 
@@ -104,7 +104,7 @@ theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U �
 `commSq_prodMap_snd p` is cartesian, so its base change morphism is an isomorphism by proper base
 change (`isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_of_isProper (p : U ⟶ Y) [IsProper p.left] :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) p)) :=
   isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
     (IsPullback.of_prod_snd_with_id p X)
@@ -118,11 +118,11 @@ squares `commSq_prodMap_snd i` and `commSq_prodMap_snd p` are isomorphisms, so i
 `det-tf-ibc-pasting`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_comp {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (i : U ⟶ Z) (p : Z ⟶ Y)
-    (hi : IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hi : IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) i)))
-    (hp : IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hp : IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) p))) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) (i ≫ p))) := by
   rw [boundedConstructibleBaseChange_eq_pfBaseChange] at hi hp
   have h := (𝔽).pfBaseChange_paste_vert (SepFinType.homMk (prod.snd : X ⨯ U ⟶ U))
@@ -156,7 +156,7 @@ to the open immersion `i`
 (`isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion`) and the proper morphism `p`
 (`isIso_boundedConstructibleBaseChange_prodMap_of_isProper`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap (f : U ⟶ Y) :
-    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso (boundedConstructibleBaseChange ℓ
       (commSq_prodMap_snd (X := X) f)) := by
   let c := compactificationOverField f
   have hf : c.overI ≫ c.overG = f := c.overI_overG

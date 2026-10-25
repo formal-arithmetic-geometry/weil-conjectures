@@ -163,8 +163,8 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicInte
     r₁.isPullback
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicIntegers ℓ E
     r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso _ ℓ r₂.isPullback r₂.hom_overG).symm
+  boundedConstructibleLowerShriekRefinementIso ℓ r₁.isPullback r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIso ℓ r₂.isPullback r₂.hom_overG).symm
 
 end Independence
 
@@ -192,14 +192,14 @@ noncomputable def boundedConstructibleLowerShriekBaseChange_padicIntegers
       boundedConstructibleUpperStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ g ⟶
       boundedConstructibleUpperStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ g' ⋙
         boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f' :=
-  boundedConstructibleLowerShriekOfCompactificationBaseChangePasting _ ℓ
+  boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ
       (compactificationOverField f) sq ≫
     Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers ℓ E
       ((compactificationOverField f).ofIsPullback sq.overLeft) (compactificationOverField f')).hom
 
 lemma boundedConstructibleLowerShriekBaseChange_padicIntegers_eq (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E sq =
-      boundedConstructibleLowerShriekOfCompactificationBaseChangePasting _ ℓ
+      boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ
           (compactificationOverField f) sq ≫
         Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers
           ℓ E ((compactificationOverField f).ofIsPullback sq.overLeft)

@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 # The tensor comparison of the bounded constructible pullback commutes with the shifts
 
 The oplax structure map `δ : Lf^*(A ⊗ C) ⟶ Lf^* A ⊗ Lf^* C` of the derived pullback
-`Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` commutes with the shifts in each variable
+`Lf^* : Dᵇc(Y)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` commutes with the shifts in each variable
 (`ProEtale.CondensedRing.commShift_boundedConstructibleUpperStarδFlip`,
 `ProEtale.CondensedRing.commShift_boundedConstructibleUpperStarδ`). Through the inclusions, `δ`
 is the tensor comparison of the ambient derived pullback, which commutes with the shifts
@@ -132,54 +132,64 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [IsEllAdicFinitenessCoefficient ℓ Λ]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
 /-- The oplax structure map `Lf^*(A ⊗ C) ⟶ Lf^* A ⊗ Lf^* C` for fixed `C`, natural in `A`. -/
 @[simps]
-noncomputable def boundedConstructibleUpperStarδFlip (C : Dᵇc(Y.left)⟦Λ⟧) :
-    (curriedTensor (Dᵇc(Y.left)⟦Λ⟧)).flip.obj C ⋙ boundedConstructibleUpperStar Λ ℓ f ⟶
-      boundedConstructibleUpperStar Λ ℓ f ⋙
-        (curriedTensor (Dᵇc(X.left)⟦Λ⟧)).flip.obj
-          ((boundedConstructibleUpperStar Λ ℓ f).obj C) where
-  app A := Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ f) A C
+noncomputable def boundedConstructibleUpperStarδFlip
+    (C : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (curriedTensor (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).flip.obj C ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⟶
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        (curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).flip.obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj C) where
+  app A :=
+    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) A C
   naturality _ _ g := by
     dsimp
-    exact (Functor.OplaxMonoidal.δ_natural_left (boundedConstructibleUpperStar Λ ℓ f) g C).symm
+    exact (Functor.OplaxMonoidal.δ_natural_left
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) g C).symm
 
 /-- The oplax structure map `Lf^*(C ⊗ A) ⟶ Lf^* C ⊗ Lf^* A` for fixed `C`, natural in `A`. -/
 @[simps]
-noncomputable def boundedConstructibleUpperStarδ (C : Dᵇc(Y.left)⟦Λ⟧) :
-    (curriedTensor (Dᵇc(Y.left)⟦Λ⟧)).obj C ⋙ boundedConstructibleUpperStar Λ ℓ f ⟶
-      boundedConstructibleUpperStar Λ ℓ f ⋙
-        (curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj ((boundedConstructibleUpperStar Λ ℓ f).obj C) where
-  app A := Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar Λ ℓ f) C A
+noncomputable def boundedConstructibleUpperStarδ (C : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (curriedTensor (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⟶
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        (curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj C) where
+  app A :=
+    Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) C A
   naturality _ _ g := by
     dsimp
-    exact (Functor.OplaxMonoidal.δ_natural_right (boundedConstructibleUpperStar Λ ℓ f) C g).symm
+    exact (Functor.OplaxMonoidal.δ_natural_right
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) C g).symm
 
 /-- The oplax structure map `Lf^*(A ⊗ C) ⟶ Lf^* A ⊗ Lf^* C` of the derived pullback on bounded
 constructible complexes commutes with the shifts in `A`. -/
-instance commShift_boundedConstructibleUpperStarδFlip (C : Dᵇc(Y.left)⟦Λ⟧) :
-    NatTrans.CommShift (boundedConstructibleUpperStarδFlip Λ ℓ f C) ℤ := by
-  let := commShiftTensorRightFamily Λ X.left
-  let := commShiftTensorRightFamily Λ Y.left
-  exact ObjectProperty.commShift_of_lift_flip_app L((f.left)^*⟦Λ⟧) _ C _
-    (Adjunction.comparisonFlipApp (leftDerivedUpperStarTensor Λ f.left) C.obj)
-    (fun A ↦ δ_boundedConstructibleUpperStar_hom Λ ℓ f A C)
+instance commShift_boundedConstructibleUpperStarδFlip
+    (C : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    NatTrans.CommShift (boundedConstructibleUpperStarδFlip ℓ f C) ℤ := by
+  let := commShiftTensorRightFamily (Profinite.padicAlgClRingObj ℓ) X.left
+  let := commShiftTensorRightFamily (Profinite.padicAlgClRingObj ℓ) Y.left
+  exact ObjectProperty.commShift_of_lift_flip_app L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _
+    C _ (Adjunction.comparisonFlipApp
+      (leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj ℓ) f.left) C.obj)
+    (fun A ↦ δ_boundedConstructibleUpperStar_hom ℓ f A C)
 
 /-- The oplax structure map `Lf^*(C ⊗ A) ⟶ Lf^* C ⊗ Lf^* A` of the derived pullback on bounded
 constructible complexes commutes with the shifts in `A`. -/
-instance commShift_boundedConstructibleUpperStarδ (C : Dᵇc(Y.left)⟦Λ⟧) :
-    NatTrans.CommShift (boundedConstructibleUpperStarδ Λ ℓ f C) ℤ := by
-  let := commShiftTensorLeftFamily Λ X.left
-  let := commShiftTensorLeftFamily Λ Y.left
-  exact ObjectProperty.commShift_of_lift_app L((f.left)^*⟦Λ⟧) _ C _
-    ((leftDerivedUpperStarTensor Λ f.left).app C.obj)
-    (fun A ↦ δ_boundedConstructibleUpperStar_hom Λ ℓ f C A)
+instance commShift_boundedConstructibleUpperStarδ
+    (C : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    NatTrans.CommShift (boundedConstructibleUpperStarδ ℓ f C) ℤ := by
+  let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) X.left
+  let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) Y.left
+  exact ObjectProperty.commShift_of_lift_app L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ C _
+    ((leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj ℓ) f.left).app C.obj)
+    (fun A ↦ δ_boundedConstructibleUpperStar_hom ℓ f C A)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

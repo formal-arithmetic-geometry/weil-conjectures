@@ -392,18 +392,18 @@ theorem triangEnvelope_lisseGenerator_lowerStar (C : TopologicalSpace.Closeds Y.
       [IsSeparated Z.hom] [IsReduced Z.left] (g : Z ⟶ Y) [IsClosedImmersion g.left],
       Set.range g.left.base ⊆ C → ∀ N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
         (lisseGenerator ℓ Y).triangEnvelope
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) by
+          ((boundedConstructibleLowerStar ℓ g).obj N) by
     intro Z _ _ _ g _ hg N
     let r := overReductionι Z
     have : IsClosedImmersion (r ≫ g).left := by rw [Over.comp_left]; infer_instance
     have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ r
     refine ObjectProperty.prop_of_iso _
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).mapIso
+      ((boundedConstructibleLowerStar ℓ g).mapIso
         (asIso ((boundedConstructibleUpperStarLowerStarAdjunction
-          (Profinite.padicAlgClRingObj ℓ) ℓ r).unit.app N)).symm) ?_
+          ℓ r).unit.app N)).symm) ?_
     exact ObjectProperty.prop_of_iso _
-      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r g).app _).symm
+      ((boundedConstructibleLowerStarComp ℓ r g).app _).symm
       (H _ (r ≫ g) (fun y ⟨z, hz⟩ ↦ hg ⟨r.left.base z, by simpa using hz⟩) _)
   intro Z _ _ _ _ g _ hg N
   rcases isEmpty_or_nonempty Z.left with hZ | hZ

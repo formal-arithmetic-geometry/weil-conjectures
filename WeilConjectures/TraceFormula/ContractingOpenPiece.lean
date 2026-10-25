@@ -135,18 +135,18 @@ lemma boundedConstructibleUpperShriekOpenRestrict_hom_app_comp_map_unit_comp_inv
     [IsOpenImmersion j.left] (w : gW ≫ j = jW ≫ g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleUpperShriekOpenRestrict ℓ w).hom.app K ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ gW).map
+        (boundedConstructibleUpperShriek ℓ gW).map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
             (Profinite.padicAlgClRingObj ℓ) ℓ j).unit.app _) ≫
         (boundedConstructibleUpperShriekOpenRestrict ℓ w).inv.app
           ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ jW).map
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+        ((boundedConstructibleUpperShriek ℓ g).map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
             (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app K)) =
       𝟙 ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ jW).obj
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K)) :=
+        ((boundedConstructibleUpperShriek ℓ g).obj K)) :=
   Adjunction.iso_hom_app_comp_map_unit_comp_iso_inv_app_comp_map_map_counit _
     (boundedConstructibleUpperShriekOpenRestrict ℓ w) K
 
@@ -172,7 +172,7 @@ the open complement `j : X ∖ {x} ⟶ X` of a rational point, when
 theorem pointOpenPieceCoeff_comp_map_counit
     (hle : c.c₂.left ⁻¹ᵁ pointComplOpens x ≤ c.c₁.left ⁻¹ᵁ pointComplOpens x) :
     c.pointOpenPieceCoeff x hle ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).map
+        (boundedConstructibleUpperShriek ℓ c.c₁).map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
             (pointComplι x)).counit.app K) =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map

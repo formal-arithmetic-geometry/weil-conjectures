@@ -102,7 +102,7 @@ theorem isIso_openKunnethMap_of_triangEnvelope
         rw [prod.map_fst, Category.comp_id])
     infer_instance
   have := Adjunction.commShift_kunnethNatTrans
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (prod.map (𝟙 X) j)) (prodMapUpperStarFstIso ℓ j) (openKunnethSecondFactor ℓ j B) ℤ
   exact NatTrans.isIso_app_of_triangEnvelope _ h hM
 
@@ -138,7 +138,7 @@ theorem isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable [IsOpenImmers
     (j' : V ⟶ X) [IsOpenImmersion j'.left]
     {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
     IsIso (openKunnethMap ℓ j
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj
+      ((boundedConstructibleLowerShriek ℓ j').obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').obj K)) B) := by
   obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_boundedConstructible ℓ (j := j')
     (i := overClosedComplement j') (isCompl_range_overClosedComplement j').symm K
@@ -159,7 +159,7 @@ theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left
     [IsAffine V.left] (j' : V ⟶ X) [IsOpenImmersion j'.left]
     {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
     IsIso (openKunnethMap ℓ j
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) :=
+      ((boundedConstructibleLowerShriek ℓ j').obj L) B) :=
   sorry
 
 omit j B in

@@ -137,10 +137,10 @@ noncomputable def boundedConstructibleIntegersToPadicAlgClDualizingIso :
   have := isIso_boundedConstructibleUpperShriekToPadicAlgCl ℓ E a
   (constructibleToPadicAlgCl X.left ℓ E).mapIso
       ((boundedConstructibleUpperShriekExtendScalarsIso ℓ E a).app (𝟙_ _) ≪≫
-        (boundedConstructibleUpperShriek _ ℓ a).mapIso
+        (boundedConstructibleUpperShriek ℓ a).mapIso
           (Functor.Monoidal.εIso (boundedConstructibleExtendScalars S.left ℓ E)).symm) ≪≫
     (asIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E a)).app (𝟙_ _) ≪≫
-    (boundedConstructibleUpperShriek _ ℓ a).mapIso
+    (boundedConstructibleUpperShriek ℓ a).mapIso
       (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
 
 variable {K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}

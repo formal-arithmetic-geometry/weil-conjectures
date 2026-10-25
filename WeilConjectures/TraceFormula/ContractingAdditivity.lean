@@ -60,8 +60,8 @@ lemma eq_zero_of_lowerShriek_support_of_isPullback {y : RationalPoint c.C}
     (hjx : Disjoint (Set.range j.left.base) (Set.range (y ≫ c.c₁).left.base))
     (A : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (φ : (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ (y ≫ c.c₁)).obj A)
+    (φ : (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ (y ≫ c.c₁)).obj A)
         (verdierDual ℓ (toPoint X)
           ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B))) ⟦(-1 : ℤ)⟧) :
     φ = 0 := by
@@ -71,7 +71,7 @@ lemma eq_zero_of_lowerShriek_support_of_isPullback {y : RationalPoint c.C}
   refine IsZero.of_iso ?_
     (asIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _))
   rw [hy] at hjx
-  exact (boundedConstructibleLowerShriek _ ℓ (𝟙 (point k))).map_isZero
+  exact (boundedConstructibleLowerShriek ℓ (𝟙 (point k))).map_isZero
     ((isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j (y ≫ c.c₂) hjx
       B).of_iso ((boundedConstructibleUpperStarComp _ ℓ y c.c₂).app _).symm)
 

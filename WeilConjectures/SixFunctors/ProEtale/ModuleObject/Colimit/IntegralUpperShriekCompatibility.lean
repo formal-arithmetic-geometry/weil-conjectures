@@ -90,8 +90,8 @@ noncomputable def boundedConstructibleLowerStarExtendScalars :
         boundedConstructibleExtendScalars Y.left ℓ E ⟶
       boundedConstructibleExtendScalars Z.left ℓ E ⋙
         boundedConstructibleLowerStar (Profinite.continuousMapRingObj E.1) ℓ g :=
-  mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
+  mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).inv
 
 /-- **(Push) is an isomorphism** for `𝒪_E ⟶ E` (blueprint `det-prop-scalar-six-direct-image`
@@ -103,8 +103,8 @@ theorem isIso_boundedConstructibleLowerStarExtendScalars :
   have := noetherianSpace_left_of_over Z
   exact Rationalization.isIso_mateEquiv_of_isLocalization (M := Submonoid.powers (ℓ : ℤ))
     (boundedConstructibleExtendScalars Y.left ℓ E) (boundedConstructibleExtendScalars Z.left ℓ E)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g)
 
 /-- **(Push)** on bounded constructible complexes, for the inclusion `𝒪_E ⟶ E`:
@@ -201,8 +201,8 @@ noncomputable def boundedConstructibleUpperShriekExtendScalars :
         boundedConstructibleExtendScalars X.left ℓ E ⟶
       boundedConstructibleExtendScalars Y.left ℓ E ⋙
         boundedConstructibleUpperShriek (Profinite.continuousMapRingObj E.1) ℓ f :=
-  mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+  mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv
 
 /-- **The exchange for `f^!` is an isomorphism** for `𝒪_E ⟶ E` (blueprint
@@ -214,8 +214,8 @@ theorem isIso_boundedConstructibleUpperShriekExtendScalars :
   have := noetherianSpace_left_of_over Y
   exact Rationalization.isIso_mateEquiv_of_isLocalization (M := Submonoid.powers (ℓ : ℤ))
     (boundedConstructibleExtendScalars X.left ℓ E) (boundedConstructibleExtendScalars Y.left ℓ E)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f)
 
 /-- The exchange for `f^!` as an isomorphism `Rf^!_{𝒪_E} ⋙ T_X ≅ T_Y ⋙ Rf^!_E`. -/
