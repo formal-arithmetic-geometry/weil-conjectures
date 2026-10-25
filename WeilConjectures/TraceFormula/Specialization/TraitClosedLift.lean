@@ -163,7 +163,6 @@ lemma isCompl_range_closedSpecι_span_singleton {A : CommRingCat.{u}} (f : A) :
   have h₂ : Set.range (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away f)))).base =
       (PrimeSpectrum.basicOpen f : Set (PrimeSpectrum A)) := by
     rw [← Scheme.Hom.coe_opensRange, Hom.opensRange_localizationAway]
-    rfl
   rw [h₁, h₂, PrimeSpectrum.basicOpen_eq_zeroLocus_compl]
   exact isCompl_compl
 

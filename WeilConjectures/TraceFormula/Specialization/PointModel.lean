@@ -27,9 +27,12 @@ Its nearby cycles `Ψ_s` on bounded constructible complexes
 Nothing uses these declarations yet. They are the base point of the compact-support exchange
 `ν_{a_X}` of the structure map `a_X : X ⟶ Spec k`, which builds the dualizing maps `θ_X` from the
 exceptional exchange `β_{a_X}` (`ProEtale.CondensedRing.dualizingExchange` takes `σ_s` as a
-parameter). Reading `θ_X` through `σ_s⁻¹` needs `σ_s` to be an isomorphism. This is the point
-case of blueprint `det-sp-constant-family-vanishing` and is not formalised: it needs the
-pro-étale computation `i^* Rj_* ℚ̄_ℓ ≅ ℚ̄_ℓ` over the strictly henselian trait.
+parameter). Reading `θ_X` through `σ_s⁻¹` needs `σ_s` to be an isomorphism
+(`ProEtale.CondensedRing.isIso_traitSpecializationUnit`), the point case of blueprint
+`det-sp-constant-family-vanishing`. It follows from the pro-étale computations over the strictly
+henselian trait that `i^*` inverts the unit `ℚ̄_ℓ ⟶ j_* ℚ̄_ℓ` and kills `Rⁿ j_* ℚ̄_ℓ` for `n > 0`
+(`WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit`,
+`WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage`).
 
 -/
 
@@ -39,11 +42,44 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+section Unit
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- For morphisms `j : G ⟶ T` and `i : X' ⟶ T`, the restriction `i^*` inverts the unit
+`Λ ⟶ j_* j^* Λ` and kills the higher direct images `Rⁿ j_* (j^* Λ)`, `n > 0`. These are the
+inputs of the computation of the specialization unit of a model with special fibre `i` and
+geometric generic fibre `j`
+(`ProEtale.CondensedRing.NearbyCyclesModel.isIso_unit_of_upperStarInvertsLowerStarUnit`).
+
+It is bundled as a definition so that the kernel compares instances of it argument by argument
+instead of unfolding the derived functors. -/
+def UpperStarInvertsLowerStarUnit {T G X' : Scheme.{u}} (j : G ⟶ T) (i : X' ⟶ T) : Prop :=
+  IsIso ((i)^*⟦Λ⟧.map ((upperStarLowerStarAdjunction Λ j).unit.app (𝟙_ _))) ∧
+    ∀ n : ℕ, 0 < n → IsZero ((i)^*⟦Λ⟧.obj (((j)_*⟦Λ⟧.rightDerived n).obj ((j)^*⟦Λ⟧.obj (𝟙_ _))))
+
+/-- The specialization unit `σ : Λ ⟶ i^* Rj_* j^* Λ` of a model is an isomorphism as soon as `i^*`
+inverts the unit `Λ ⟶ j_* j^* Λ` and kills the higher direct images `Rⁿ j_* (j^* Λ)`, `n > 0`:
+then `i^*` inverts the derived unit `Λ ⟶ Rj_* Lj^* Λ`
+(`CategoryTheory.Adjunction.isIso_mapDerivedCategory_map_derivedAdjunction_unit_app`). -/
+theorem NearbyCyclesModel.isIso_unit_of_upperStarInvertsLowerStarUnit {X X' : Scheme.{u}}
+    (M : NearbyCyclesModel X X') (h : UpperStarInvertsLowerStarUnit Λ M.j M.i) :
+    IsIso (M.unit Λ) := by
+  have hη := (upperStarLowerStarAdjunction Λ M.j)
+    |>.isIso_mapDerivedCategory_map_derivedAdjunction_unit_app (M.i)^*⟦Λ⟧ (𝟙_ _) h.1 h.2
+  have hL : IsIso (L((M.i)^*⟦Λ⟧).map
+      ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app (𝟙_ _))) :=
+    (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory Λ M.i) _).2 hη
+  rw [NearbyCyclesModel.unit, Functor.map_comp]
+  infer_instance
+
+end Unit
 
 variable (k : Type u) [Field k] (k' : Type u) [Field k'] [Algebra k k']
 
@@ -85,7 +121,13 @@ noncomputable def traitSpecializationUnit :
 `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ = i^* Rj_* ℚ̄_ℓ` is an isomorphism: the cohomology of the geometric
 generic point of `S` is that of its closed point. This is the case `Y = Spec k'`, `L = ℚ̄_ℓ` of
 blueprint `det-sp-constant-family-vanishing`. -/
-theorem isIso_traitSpecializationUnit : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) :=
-  sorry
+theorem isIso_traitSpecializationUnit : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) := by
+  have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ) (traitGenericPoint k')
+      (traitClosedPoint k') :=
+    ⟨isIso_upperStar_traitClosedPoint_map_unit_app _ k',
+      isZero_upperStar_traitClosedPoint_obj_rightDerived _ k'⟩
+  have : IsIso ((ObjectProperty.ι _).map (traitSpecializationUnit k k' (ℓ := ℓ))) :=
+    (traitModel k k').isIso_unit_of_upperStarInvertsLowerStarUnit _ h
+  exact isIso_of_fully_faithful (ObjectProperty.ι _) _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

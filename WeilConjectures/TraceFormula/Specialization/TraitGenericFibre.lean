@@ -45,9 +45,12 @@ attribute [local instance] Algebra.TensorProduct.rightAlgebra in
 `k'⟦t⟧ ⧸ (t)`-algebra `C̄` has a weakly contractible geometric generic fibre
 `W ×_S Spec Ω`. -/
 theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type u) [CommRing C]
-    [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C] [Algebra (PowerSeries k') C]
-    [IsScalarTower (PowerSeries k') (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
-    [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C] (hC : IsWContractibleRing C) :
+    [Algebra (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    [Algebra (PowerSeries k') C]
+    [IsScalarTower (PowerSeries k')
+      (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    [Algebra.IndEtale (PowerSeries k' ⧸ Ideal.span {(PowerSeries.X : PowerSeries k')}) C]
+    (hC : IsWContractibleRing C) :
     (ProEt.topology (Spec (.of (traitGenericField k')))).IsWeaklyContractible.{u + 1}
       ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (traitGenericPoint k')).obj
         (closedLiftSpec (.of (PowerSeries k')) C)) := by
