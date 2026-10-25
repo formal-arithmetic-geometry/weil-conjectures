@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
@@ -41,14 +42,12 @@ sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ
   `WeilConjectures.RepresentationTheory.ProfiniteInvariants`). None of strict localizations of
   `𝔸¹_S`, nearby cycles over a varying trait, or the action of inertia on nearby cycles is
   formalised.
-* `NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`: projective closures over the
-  trait of affine schemes of finite type (projective space over `k'⟦t⟧` and closures in it are
-  not formalised).
 
-The reduction to proper models is proved from these: locality on the special fibre reduces to
-affine total spaces (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), and for affine
-total spaces one passes to the models of the total spaces and to proper closures, extending the
-coefficients by zero (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine`,
+The reduction to proper models is proved: locality on the special fibre reduces to affine total
+spaces (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), and for affine total spaces one
+passes to the models of the total spaces and to proper closures
+(`NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`), extending the coefficients by
+zero (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine`,
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure`).
 
 -/
@@ -185,6 +184,8 @@ lemma boundedConstructible_kunnethMap_source
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
 
+set_option maxHeartbeats 800000 in
+-- instance search for the monoidal structure of bounded constructible complexes
 omit [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] [IsSepClosed k'] [Fact (ringChar k').Prime] in
 include hΛ φ₁ φ₂ in
 /-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
@@ -219,13 +220,16 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
-`S = Spec k'⟦t⟧` is an open subscheme of a proper `S`-scheme (its closure in `ℙⁿ_S` along a
-closed embedding into `𝔸ⁿ_S ⊆ ℙⁿ_S`). -/
+`S = Spec k'⟦t⟧` is an open subscheme of a proper `S`-scheme: its closure in `ℙⁿ_S` along an
+immersion into `𝔸ⁿ_S ⊆ ℙⁿ_S` (`AlgebraicGeometry.HasCompactification.of_isQuasiAffine`). -/
 theorem exists_isProper_openImmersion_of_isAffine {T : Scheme.{u}} (q : T ⟶ trait k')
     [IsAffine T] [LocallyOfFiniteType q] :
     ∃ (Tc : Scheme.{u}) (qc : Tc ⟶ trait k') (c : T ⟶ Tc), IsProper qc ∧ IsOpenImmersion c ∧
-      c ≫ qc = q :=
-  sorry
+      c ≫ qc = q := by
+  have : QuasiCompact q := inferInstance
+  have := HasCompactification.of_isQuasiAffine q
+  let c := HasCompactification.compactification q
+  exact ⟨c.Z, c.g, c.i, c.isProper, c.isOpenImmersion, c.comm.symm⟩
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- A proper scheme over the trait is noetherian. -/
