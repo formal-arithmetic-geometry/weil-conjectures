@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
 public import WeilConjectures.TraceFormula.Specialization.Basic
-public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
+public import WeilConjectures.TraceFormula.Specialization.DeformationExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 
 /-!
@@ -90,10 +90,10 @@ theorem exists_traceSpecialization (F : c.FixedLocus) {B : Over (Spec (.of k))}
     ∃ T : c.TraceSpecialization F (hc.specialCorrespondence k') (hc.specialFixedLocus k'),
       T.ΨXX = specializationProd k' (y ≫ c.c₁) ∧
       ∀ z : BorelMooreSection ℓ F.F, T.sp z = 0 → z.restrict j = 0 := by
-  have hex := exists_specializesComponentClass (ℓ := ℓ) (X := X) (c := c) (y := y) hc k' F j hB
-  obtain ⟨νc, νX, hS⟩ := hex
-  refine ⟨hc.deformationTraceSpecialization k' νc νX F, ?_, ?_⟩
-  · exact hc.deformationTraceSpecialization_ΨXX k' νc νX F
+  have hS := specializesComponentClass_deformation (ℓ := ℓ) (X := X) (c := c) (y := y) hc k' F j hB
+  refine ⟨hc.deformationTraceSpecialization k' (hc.supportCompactSupportExchange k')
+    (pointCompactSupportExchangeOfSeparated (y ≫ c.c₁) k') F, ?_, ?_⟩
+  · exact hc.deformationTraceSpecialization_ΨXX k' _ _ F
   · intro z hz
     exact hc.restrict_eq_zero_of_sp_eq_zero k' j hB hS z hz
 

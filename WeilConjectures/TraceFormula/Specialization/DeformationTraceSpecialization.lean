@@ -184,31 +184,6 @@ theorem restrict_eq_zero_of_sp_eq_zero {B : Over (Spec (.of k))} [QuasiCompact B
   exact BorelMooreSection.integral_injective b hb (((traitSpecialization_map_eq_zero_iff k k'
     _).mp h').trans BorelMooreSection.integral_zero.symm)
 
-
-variable (F) in
-/-- **Existence of the compact-support exchanges of the deformation** (Varshavsky,
-*Lefschetz–Verdier trace formula and a generalization of a theorem of Fujiwara*, §1.4–§2): the
-nearby cycles of the deformations to the normal cones over the trait `Spec k'⟦t⟧` have
-compact-support exchanges `ν_c` (for the support maps) and `ν_X` (for the structure maps) which
-specialize the class of the component `B ∋ y` of the fixed locus.
-
-This is not a single blueprint node, and it is not proved here. In the blueprint, `ν_f` is the
-exchange map of `det-nearby-exchange-maps` (3), built from a compactification of the deformed
-morphism over the trait as `χ_p⁻¹ ∘ Rp_{s*}(ν_h)`, with `χ_p` invertible by
-`det-sp-nearby-cycles-exchanges`. The class identity then comes from the constant fixed family:
-the deformed fixed locus is `B × S` near `y` up to nilpotents
-(`det-tf-fixed-deformation-points`), and on a constant family the dualizing map and the
-specialization unit are inverse (`det-tf-sp-theta-proper-constant`,
-`det-tf-sp-theta-open-constant`, `det-sp-constant-family-vanishing`). -/
-theorem exists_specializesComponentClass {B : Over (Spec (.of k))} [QuasiCompact B.hom]
-    [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
-    (hB : Set.range j.left.base =
-      {(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))}) :
-    ∃ (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
-      (νX : PointCompactSupportExchange (ℓ := ℓ) X k' (y ≫ c.c₁)),
-      hc.SpecializesComponentClass k' νc νX F j :=
-  sorry
-
 end IsContractingAt
 
 end Correspondence

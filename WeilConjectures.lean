@@ -13102,6 +13102,8 @@ public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
+public import WeilConjectures.TraceFormula.Specialization.SupportClosureProper
+public import WeilConjectures.TraceFormula.Specialization.SupportCompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.SupportExchange
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
