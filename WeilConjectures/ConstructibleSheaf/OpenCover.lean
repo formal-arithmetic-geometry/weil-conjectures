@@ -5,19 +5,23 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.ConstructibleSheaf.EtaleDescent
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.TorSheaf
 
 /-!
-# Constructibility is local on open covers
+# Finite local constancy is local for open covers
 
-A sheaf on the small étale site of a Noetherian scheme `X` is constructible as soon as its
-restrictions to the members of an open cover of `X` are
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_iSup_eq_top`). For a finite cover
-`U₀, …, Uₙ` this follows by induction from the open–closed dévissage
-`AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar` applied to `U₀` and its closed
-complement `Z`, which is covered by the traces of `U₁, …, Uₙ`; a general cover has a finite
-subcover, `X` being quasi-compact.
+A sheaf on the small étale site of a scheme `X` is finite locally constant as soon as its
+restrictions to the members of a family of open subschemes covering `X` are.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Cover.ofOpens`: the étale cover of `X` by a covering family of
+  open subschemes.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_opens`
 -/
 
 @[expose] public section
@@ -25,70 +29,35 @@ subcover, `X` being quasi-compact.
 universe u' u
 
 open CategoryTheory Limits
-open AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Scheme
 
+variable {X : Scheme.{u}}
+
+/-- The étale cover of `X` by a family of open subschemes covering `X`. -/
+def Cover.ofOpens {ι : Type u} (O : ι → X.Opens) (hO : ∀ x : X, ∃ i, x ∈ O i) :
+    Cover.{u} etalePrecoverage X where
+  I₀ := ι
+  X i := O i
+  f i := (O i).ι
+  mem₀ := by
+    refine (presieve₀_mem_precoverage_iff _).mpr ⟨fun x ↦ ?_, fun _ ↦ inferInstance⟩
+    obtain ⟨i, hi⟩ := hO x
+    exact ⟨i, ⟨x, hi⟩, rfl⟩
+
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [HasSmallSiteSheafify A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [HasSmallSiteSheafify A] {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- **Constructibility is local on finite open covers** of a Noetherian scheme: if
-`U₀, …, Uₙ₋₁` cover `X` and the restriction of `F` to each `Uᵢ` is constructible, then `F` is
-constructible. -/
-theorem IsConstructibleSheaf.of_iSup_eq_top_fin (n : ℕ) : ∀ {X : Scheme.{u}} [IsNoetherian X]
-    (U : Fin n → X.Opens) (_ : ⨆ i, U i = ⊤) (F : Sheaf X.smallEtaleTopology A)
-    (_ : ∀ i, IsConstructibleSheaf ((Etale.upperStar A (U i).ι).obj F)),
-    IsConstructibleSheaf F := by
-  induction n with
-  | zero =>
-    intro X _ U hU F _
-    have : IsEmpty X := by
-      refine ⟨fun x ↦ ?_⟩
-      have hx : x ∈ (⊤ : X.Opens) := trivial
-      rw [← hU] at hx
-      simp at hx
-    exact IsConstructibleSheaf.of_isZero (Etale.isZero_sheaf_of_isEmpty _)
-  | succ n ih =>
-    intro X _ U hU F hF
-    obtain ⟨Z, i, _, hi⟩ : ∃ (Z : Scheme.{u}) (i : Z ⟶ X), IsClosedImmersion i ∧
-        Set.range i.base = (Set.range (U 0).ι.base)ᶜ :=
-      ⟨_, _, inferInstance, (U 0).ι.range_closedComplement⟩
-    rw [isConstructibleSheaf_iff_upperStar (U 0).ι i hi]
-    refine ⟨hF 0, ?_⟩
-    have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i
-    have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace i
-    have : IsNoetherian Z := {}
-    refine ih (fun k ↦ i ⁻¹ᵁ U k.succ) ?_ _ fun k ↦ ?_
-    · refine top_le_iff.1 fun z _ ↦ ?_
-      obtain ⟨m, hm⟩ := TopologicalSpace.Opens.mem_iSup.1 (hU.ge (Set.mem_univ (i.base z)))
-      have hz : i.base z ∉ Set.range (U 0).ι.base := by
-        rw [← Set.mem_compl_iff, ← hi]
-        exact ⟨z, rfl⟩
-      obtain ⟨k, rfl⟩ := Fin.eq_succ_of_ne_zero (n := n) (i := m) (by
-        rintro rfl
-        exact hz (by simpa using hm))
-      exact TopologicalSpace.Opens.mem_iSup.2 ⟨k, hm⟩
-    · have := hF k.succ
-      have := IsConstructibleSheaf.upperStar (i ∣_ U k.succ)
-        ((Etale.upperStar A (U k.succ).ι).obj F)
-      exact IsConstructibleSheaf.of_iso (F := (Etale.upperStar A (i ∣_ U k.succ)).obj
-        ((Etale.upperStar A (U k.succ).ι).obj F)) (((Etale.upperStarComp A _ _ _
-        (morphismRestrict_ι _ _).symm).app F).symm ≪≫ (Etale.upperStarComp A _ _).app F)
-
-/-- **Constructibility is local on open covers** of a Noetherian scheme: if the opens `Uᵢ`
-cover `X` and the restriction of `F` to each `Uᵢ` is constructible, then `F` is
-constructible. -/
-theorem IsConstructibleSheaf.of_iSup_eq_top {X : Scheme.{u}} [IsNoetherian X] {ι : Type*}
-    (U : ι → X.Opens) (hU : ⨆ i, U i = ⊤) (F : Sheaf X.smallEtaleTopology A)
-    (hF : ∀ i, IsConstructibleSheaf ((Etale.upperStar A (U i).ι).obj F)) :
-    IsConstructibleSheaf F := by
-  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun i ↦ (U i : Set X))
-    (fun i ↦ (U i).isOpen) (by simp [← TopologicalSpace.Opens.coe_iSup, hU])
-  refine of_iSup_eq_top_fin t.card (fun k ↦ U (t.equivFin.symm k)) ?_ F fun k ↦ hF _
-  refine top_le_iff.1 fun x _ ↦ ?_
-  obtain ⟨i, hi, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
-  exact TopologicalSpace.Opens.mem_iSup.2 ⟨t.equivFin ⟨i, hi⟩, by simpa using hx⟩
+/-- **Finite local constancy is local for open covers**: a sheaf whose restrictions to a family
+of open subschemes covering `X` are finite locally constant is finite locally constant. -/
+theorem IsFiniteLocallyConstantSheaf.of_opens {ι : Type u} (O : ι → X.Opens)
+    (hO : ∀ x : X, ∃ i, x ∈ O i) (G : Sheaf X.smallEtaleTopology A)
+    (hG : ∀ i, IsFiniteLocallyConstantSheaf (FA := FA) (CA := CA)
+      ((Etale.upperStar A (O i).ι).obj G)) :
+    IsFiniteLocallyConstantSheaf (FA := FA) (CA := CA) G :=
+  have : ∀ i, IsFiniteLocallyConstantSheaf (FA := FA) (CA := CA)
+      ((Etale.upperStar A ((Cover.ofOpens O hO).f i)).obj G) := hG
+  IsFiniteLocallyConstantSheaf.of_cover (Cover.ofOpens O hO) G
 
 end AlgebraicGeometry.Scheme
