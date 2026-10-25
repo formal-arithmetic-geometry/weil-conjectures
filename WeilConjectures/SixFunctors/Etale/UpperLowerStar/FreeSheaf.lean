@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import
-  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 
 /-!
 # Pullback of free étale sheaves of modules
