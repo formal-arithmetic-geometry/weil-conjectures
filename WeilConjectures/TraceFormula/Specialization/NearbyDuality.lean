@@ -97,9 +97,9 @@ finite support. Its formal ingredients are proved: `CategoryTheory.Verdier.nearb
 `det-tf-invariants-duality`), and for open restriction the concrete inputs of
 `WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen`. Instantiating the abstract
 compatibilities on `Dᵇc` is blocked by an elaboration problem: the hypotheses stated for the
-concrete functors and those obtained by instantiating the abstract statements differ in instance
-terms (the monoidal structure of `Dᵇc(X)⟦ℚ̄_ℓ⟧` is reachable by two instance paths) and are only
-identified after unfolding the condensed coefficient rings, which exceeds the heartbeat limits.
+concrete functors and those obtained by instantiating the abstract statements print identically
+but are only identified by unfolding the condensed coefficient rings and the schemes, which
+exceeds the heartbeat limits (elaborator and kernel).
 Compactification of trait models over `S`, generic slicing (`det-tf-nearby-duality-slice`) and
 finite support are not formalised. -/
 theorem isIso_nearbyDualityMap (h : M.IsTraitModelOfBase k q g)
