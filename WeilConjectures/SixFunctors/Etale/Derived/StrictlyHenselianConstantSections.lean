@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianSections
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionStrictlyLocal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
@@ -68,36 +69,6 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (R : Type u) [CommRing R]
   [IsStrictlyHenselianLocalRing R]
-
-/-- Over a strictly henselian local ring `R`, the global sections functor on étale sheaves of
-`Λ`-modules on `Spec R` preserves epimorphisms: an epimorphism of sheaves is surjective on
-sections over `Spec R`, every covering sieve of which contains the identity. -/
-instance preservesEpimorphisms_Γ_of_isStrictlyHenselianLocalRing :
-    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesEpimorphisms where
-  preserves {F G} φ _ := by
-    let e := Sheaf.ΓNatIsoSheafSections (Spec (.of R)).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ) (Scheme.isTerminalEtaleTerminal R)
-    have h : (Sheaf.Γ _ _).map φ =
-        e.hom.app F ≫ ((sheafSections _ _).obj _).map φ ≫ e.inv.app G := by
-      rw [← reassoc_of% (e.hom.naturality φ)]
-      simp
-    have : Epi (((sheafSections (Spec (.of R)).smallEtaleTopology
-        (ModuleCat.{u + 1} Λ)).obj (op (Scheme.etaleTerminal R))).map φ) :=
-      (ModuleCat.epi_iff_surjective _).2
-        (surjective_app_of_epi_of_isStrictlyHenselianLocalRing R φ)
-    rw [h]
-    infer_instance
-
-/-- Over a strictly henselian local ring `R`, the global sections functor on étale sheaves of
-`Λ`-modules on `Spec R` is exact. -/
-instance preservesFiniteColimits_Γ_of_isStrictlyHenselianLocalRing :
-    PreservesFiniteColimits
-      (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
-  have h := (Functor.preservesFiniteLimits_tfae
-    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 3 0
-  have h' := (Functor.preservesFiniteColimits_tfae
-    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 0 3
-  exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
 
 variable {R}
 
