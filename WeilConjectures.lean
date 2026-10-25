@@ -12686,6 +12686,7 @@ public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.TraceFormula.CompactTrace
 public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.ContractingPieces
 public import WeilConjectures.TraceFormula.Correspondence
@@ -12784,6 +12785,7 @@ public import WeilConjectures.TraceFormula.StalkDualizable
 public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.SupportedClass
 public import WeilConjectures.TraceFormula.SupportedPairing
+public import WeilConjectures.TraceFormula.SupportedRestriction
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
 public import WeilConjectures.TraceFormula.TraceClassDiagonal
