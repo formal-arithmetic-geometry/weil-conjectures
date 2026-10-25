@@ -316,7 +316,7 @@ lemma tensorObjπ_projectionInvX (Q : Mod C S) (N : Mod C R) :
 
 omit [IsCommMonObj S] in
 @[reassoc]
-lemma tensorObjπ_tensorHom_hom {M M' N N' : Mod C R} (f : M ⟶ M') (g : N ⟶ N') :
+lemma tensorObjπ_tensorHom_hom_whisker {M M' N N' : Mod C R} (f : M ⟶ M') (g : N ⟶ N') :
     tensorObjπ M N ≫ (f ⊗ₘ g).hom = f.hom ▷ N.X ≫ M'.X ◁ g.hom ≫ tensorObjπ M' N' := by
   change tensorObjπ M N ≫ (f ▷ N ≫ M' ◁ g).hom = _
   rw [comp_hom', tensorObjπ_whiskerRight_assoc, tensorObjπ_whiskerLeft]
@@ -444,7 +444,7 @@ lemma whiskerLeft_tensorObjπ_extendπ_δ_hom (M N : Mod C R) :
         (extendScalarsObj φ M).X ◁ extendUnitHom φ N ≫
           tensorObjπ (extendScalarsObj φ M) (extendScalarsObj φ N) := by
   rw [extendScalarsOplaxMonoidal_δ, extendπ_extendHom,
-    ← MonoidalCategory.whiskerLeft_comp_assoc, comp_hom', tensorObjπ_tensorHom_hom_assoc,
+    ← MonoidalCategory.whiskerLeft_comp_assoc, comp_hom', tensorObjπ_tensorHom_hom_whisker_assoc,
     extendUnit_hom, extendUnit_hom]
   erw [tensorObjπ_comapTensorHom_hom]
   rw [MonoidalCategory.whiskerLeft_comp_assoc, MonoidalCategory.whiskerLeft_comp_assoc,

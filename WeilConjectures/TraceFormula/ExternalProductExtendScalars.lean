@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
@@ -39,7 +40,8 @@ It is assembled from the coefficient comparisons of blueprint `sk-prop-scalar-si
   (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism
   (`ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl`);
 * the dualizing complexes (`det-prop-scalar-six-exceptional`, applied to the unit):
-  `T_X ω_{X,𝒪_E} ≅ ω_X` (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgClDualizingIso`).
+  `T_X ω_{X,𝒪_E} ≅ ω_X`
+  (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgClDualizingIso`).
 
 The identification of the Verdier duals is compatible with the evaluation (trace) maps
 `K ⊗ 𝔻 K ⟶ ω`
@@ -104,7 +106,8 @@ monoidal structure of `T` and the pullback comparisons for the two projections. 
 noncomputable def boundedConstructibleIntegersToPadicAlgClExternalProductIso
     {M₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
     {N₀ : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
-    {M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (eM : (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj M₀ ≅ M)
     (eN : (boundedConstructibleIntegersToPadicAlgCl ℓ E Y).obj N₀ ≅ N) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E (X ⨯ Y)).obj
@@ -129,17 +132,6 @@ theorem isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl
     IsIso ((Functor.LaxMonoidal.ihomComparison
       (boundedConstructibleIntegersToPadicAlgCl ℓ E X) A).natTrans.app B) :=
   sorry
-
-/-- The internal Hom comparison `T RHom(A, B) ≅ RHom(T A, T B)` for `𝒪_E ⟶ ℚ̄_ℓ`
-(blueprint `det-prop-scalar-six-tensor-hom` (2)). -/
-noncomputable def boundedConstructibleIntegersToPadicAlgClIhomIso
-    (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
-    (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj ((ihom A).obj B) ≅
-      (ihom ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj A)).obj
-        ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj B) :=
-  have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E A B
-  asIso ((Functor.LaxMonoidal.ihomComparison
-    (boundedConstructibleIntegersToPadicAlgCl ℓ E X) A).natTrans.app B)
 
 /-! ### Dualizing complexes and Verdier duals -/
 
@@ -174,10 +166,9 @@ Hom clause of blueprint `sk-prop-scalar-six` and the comparison of the dualizing
 noncomputable def boundedConstructibleIntegersToPadicAlgClVerdierDualIso :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj
         (boundedConstructibleVerdierDual _ ℓ a K₀) ≅ verdierDual ℓ a K :=
-  boundedConstructibleIntegersToPadicAlgClIhomIso ℓ E K₀ _ ≪≫
-    (ihom ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K₀)).mapIso
-      (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a) ≪≫
-    (internalHom.mapIso e.op).symm.app (dualizingComplex ℓ a)
+  have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
+    (boundedConstructibleDualizingComplex _ ℓ a)
+  Functor.LaxMonoidal.mapIhomObjIso _ e (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a)
 
 /-- **The identification of the Verdier duals is compatible with the evaluation maps**: the
 extension of scalars of the integral evaluation `K₀ ⊗ 𝔻 K₀ ⟶ ω_{X,𝒪_E}` is, under the tensorator
@@ -191,7 +182,9 @@ lemma μ_comp_map_ev_comp_boundedConstructibleIntegersToPadicAlgClDualizingIso :
       (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a).hom =
     (e.hom ⊗ₘ (boundedConstructibleIntegersToPadicAlgClVerdierDualIso ℓ E a e).hom) ≫
       (ihom.ev K).app (dualizingComplex ℓ a) := by
-  sorry
+  have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
+    (boundedConstructibleDualizingComplex _ ℓ a)
+  exact Functor.LaxMonoidal.μ_comp_map_ev_comp_hom _ e _
 
 end Dualizing
 
