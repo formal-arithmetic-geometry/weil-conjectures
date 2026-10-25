@@ -8130,6 +8130,7 @@ public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendS
 public import WeilConjectures.CategoryTheory.Preadditive.EndModule
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
+public import WeilConjectures.CategoryTheory.Preadditive.NatTransIsIso
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 public import WeilConjectures.CategoryTheory.Pro.Basic
 public import WeilConjectures.CategoryTheory.Pro.Generating
@@ -9400,7 +9401,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.NatTransIsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal

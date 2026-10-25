@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryN
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
 public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendScalars
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.NatTransIsIso
+public import WeilConjectures.CategoryTheory.Preadditive.NatTransIsIso
 public import WeilConjectures.NumberTheory.Padics.IntegersToAlgCl
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
