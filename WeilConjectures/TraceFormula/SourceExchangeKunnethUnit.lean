@@ -78,7 +78,9 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
       (boundedConstructibleLowerShriek _ ℓ p').map ((boundedConstructibleLowerShriek _ ℓ q).map
         (S ◁ ((boundedConstructibleUpperStarComp _ ℓ q p').inv.app M ≫
           eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) w) ≫
-          ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M : _ ⟶ (boundedConstructibleUpperStar _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ f).obj M))))) ≫
+          ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M :
+            _ ⟶ (boundedConstructibleUpperStar _ ℓ p).obj
+              ((boundedConstructibleUpperStar _ ℓ f).obj M))))) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
         (S ⊗ (boundedConstructibleUpperStar _ ℓ p).obj
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) =
@@ -102,7 +104,7 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ q p').hom.app _ := by
     rw [reassoc_of% h₁]
     simp only [← comp_whiskerRight_assoc, Iso.inv_hom_id_app, id_whiskerRight,
-      Category.id_comp, Iso.inv_hom_id_app, Category.comp_id, Category.assoc]
+      Category.id_comp]
     simp
   have hn := (boundedConstructibleLowerShriekComp_padicAlgCl ℓ q p').hom.naturality
     (S ◁ ((boundedConstructibleUpperStarComp _ ℓ q p').inv.app M ≫
@@ -112,7 +114,7 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
   have h₂' := exceptionalProjection_eqToHom ℓ w S M
     (S ◁ (boundedConstructibleUpperStarComp _ ℓ p f).hom.app M)
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, Iso.trans_hom, Iso.symm_hom,
-    eqToIso.hom, NatTrans.comp_app, eqToHom_app, Category.assoc, reassoc_of% h₁']
+    eqToIso.hom, NatTrans.comp_app, eqToHom_app, reassoc_of% h₁']
   rw [← reassoc_of% hn]
   simp only [Iso.hom_inv_id_app_assoc]
   have hc : (boundedConstructibleLowerShriek _ ℓ (q ≫ p')).map
@@ -122,7 +124,7 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
     rw [← Functor.map_comp, ← MonoidalCategory.whiskerLeft_comp, Iso.hom_inv_id_app,
       MonoidalCategory.whiskerLeft_id, CategoryTheory.Functor.map_id]
   simp only [MonoidalCategory.whiskerLeft_comp, Functor.map_comp, Category.assoc,
-    reassoc_of% hc, Category.id_comp]
+    reassoc_of% hc]
   rw [reassoc_of% h₂', reassoc_of% h₂]
   simp only [Iso.inv_hom_id_app, Functor.comp_obj, Category.comp_id, comp_whiskerRight,
     Category.assoc]
@@ -140,7 +142,8 @@ lemma whiskerRight_unit_comp_exceptionalProjection
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app (T ⊗ N) ≫
       (boundedConstructibleLowerShriek _ ℓ q).map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ q) T N) := by
-  apply ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).homEquiv _ _).symm.injective
+  apply ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).homEquiv _
+    _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
     upperStar_map_exceptionalProjection_comp_counit, Adjunction.counit_naturality,
     Functor.id_obj, Functor.comp_obj, Adjunction.left_triangle_components_assoc]
@@ -166,7 +169,9 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
               ((boundedConstructibleUpperStar _ ℓ q).obj T ◁
                 ((boundedConstructibleUpperStarComp _ ℓ q p').inv.app M ≫
                   eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) w) ≫
-                  ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M : _ ⟶ (boundedConstructibleUpperStar _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ f).obj M)))))) ≫
+                  ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M :
+                    _ ⟶ (boundedConstructibleUpperStar _ ℓ p).obj
+                      ((boundedConstructibleUpperStar _ ℓ f).obj M)))))) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
         ((boundedConstructibleUpperStar _ ℓ q).obj T ⊗ (boundedConstructibleUpperStar _ ℓ p).obj
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) =
@@ -174,8 +179,9 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app T) ≫
         (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
           ((boundedConstructibleUpperStar _ ℓ q).obj T) :
-          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ p).obj
-            ((boundedConstructibleUpperStar _ ℓ q).obj T))) ▷ M) ≫
+          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj
+            ((boundedConstructibleLowerShriek _ ℓ p).obj
+              ((boundedConstructibleUpperStar _ ℓ q).obj T))) ▷ M) ≫
       boundedConstructibleExceptionalProjectionMorphism _ ℓ f
         ((boundedConstructibleLowerShriek _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ q).obj T))
         M ≫
@@ -203,7 +209,8 @@ theorem whiskerRight_unit_comp_exceptionalProjection_tensorUnit (f : X ⟶ Y) [I
             (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ f)).inv) ▷ M) ≫
       boundedConstructibleExceptionalProjectionMorphism _ ℓ f (𝟙_ _) M ≫
       (boundedConstructibleLowerShriek _ ℓ f).map (λ_ _).hom =
-    (λ_ M).hom ≫ (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).unit.app M := by
+    (λ_ M).hom ≫
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).unit.app M := by
   apply ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).homEquiv _
     _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
@@ -211,7 +218,7 @@ theorem whiskerRight_unit_comp_exceptionalProjection_tensorUnit (f : X ⟶ Y) [I
     Adjunction.left_triangle_components, Category.comp_id]
   rw [reassoc_of% (upperStar_map_exceptionalProjection_comp_counit ℓ f),
     ← Functor.OplaxMonoidal.δ_natural_left_assoc, ← comp_whiskerRight_assoc]
-  simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality, Functor.id_obj,
+  simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality,
     Adjunction.left_triangle_components_assoc, Functor.Monoidal.εIso_inv]
   exact Functor.OplaxMonoidal.left_unitality_hom _ _
 

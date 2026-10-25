@@ -19,7 +19,10 @@ through their test maps (`classTest`). The test map of `κ` is the evaluation fo
 adjoint of the exceptional Künneth map (`ProEtale.CondensedRing.classTest_kunnethVerdierMap`);
 the evaluation part is `ProEtale.CondensedRing.evaluation_comp_prodLowerStarExternalProduct`,
 and the exceptional Künneth part is
-`ProEtale.CondensedRing.lowerShriek_map_trace_comp_exceptionalKunnethAdjoint`.
+`ProEtale.CondensedRing.lowerShriek_map_trace_comp_exceptionalKunnethAdjoint`
+(`WeilConjectures.TraceFormula.SourceExchangeKunnethAdjoint`), whose first reductions
+(`ProEtale.CondensedRing.lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint`,
+`ProEtale.CondensedRing.lowerShriek_map_lowerStarDualizingComplexTrace_comp_counit`) are here.
 
 -/
 

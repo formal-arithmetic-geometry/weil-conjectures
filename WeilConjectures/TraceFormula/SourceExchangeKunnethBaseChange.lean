@@ -56,7 +56,8 @@ set_option maxHeartbeats 1000000 in
 cartesian squares over a base `S`) are compatible along a proper `f : X ⟶ Y`: pasting the
 cartesian squares `h ≫ p₁' = p_X ≫ f` and `g ≫ p_Y = p₂ ≫ f` with the product squares,
 `Ex_!` of the square of `X` is read off from `Ex_!` of the square of `Y`. -/
-theorem lowerShriekBaseChange_inv_app_paste (aX : X ⟶ S) (aY : Y ⟶ S) (hA : f ≫ aY = aX)
+theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_prod_paste (aX : X ⟶ S) (aY : Y ⟶ S)
+    (hA : f ≫ aY = aX)
     {pX : P ⟶ X} {pY : P ⟶ Y} {p₁ p₂ : W ⟶ X} {p₁' p₂' : V ⟶ Y} {g : W ⟶ P} {h : P ⟶ V}
     (hp : g ≫ pX = p₁) (hpY : h ≫ p₂' = pY) (sqY : IsPullback p₂' p₁' aY aY)
     (sqXY : IsPullback pY pX aY aX) (sqX : IsPullback p₂ p₁ aX aX) (s₁ : IsPullback h pX p₁' f)
@@ -68,11 +69,14 @@ theorem lowerShriekBaseChange_inv_app_paste (aX : X ⟶ S) (aY : Y ⟶ S) (hA : 
       boundedConstructibleLowerShriek _ ℓ aX ⋙ boundedConstructibleUpperStar _ ℓ aX)
     (hγX : γX.inv = boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX) :
     (((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁).app
-        ((boundedConstructibleUpperStar _ ℓ p₂').obj ((boundedConstructibleLowerStar _ ℓ f).obj B)) :
+        ((boundedConstructibleUpperStar _ ℓ p₂').obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj B)) :
       (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ p₁').obj
-        ((boundedConstructibleUpperStar _ ℓ p₂').obj ((boundedConstructibleLowerStar _ ℓ f).obj B))) ⟶
+        ((boundedConstructibleUpperStar _ ℓ p₂').obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj B))) ⟶
       (boundedConstructibleLowerShriek _ ℓ pX).obj ((boundedConstructibleUpperStar _ ℓ h).obj
-        ((boundedConstructibleUpperStar _ ℓ p₂').obj ((boundedConstructibleLowerStar _ ℓ f).obj B)))) ≫
+        ((boundedConstructibleUpperStar _ ℓ p₂').obj
+          ((boundedConstructibleLowerStar _ ℓ f).obj B)))) ≫
       (boundedConstructibleLowerShriek _ ℓ pX).map
         ((boundedConstructibleUpperStarComp _ ℓ h p₂').inv.app
             ((boundedConstructibleLowerStar _ ℓ f).obj B) ≫
@@ -107,7 +111,7 @@ theorem lowerShriekBaseChange_inv_app_paste (aX : X ⟶ S) (aY : Y ⟶ S) (hA : 
   have eY := γY.hom_inv_id_app ((boundedConstructibleLowerStar _ ℓ f).obj B)
   rw [hγX] at eX eX'
   rw [hγY] at eY
-  haveI : IsIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B) :=
+  have : IsIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B) :=
     ⟨⟨γX.hom.app B, eX', eX⟩⟩
   have hV : (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B = _ :=
     boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ s₃ sqXY B
@@ -129,7 +133,7 @@ theorem lowerShriekBaseChange_inv_app_paste (aX : X ⟶ S) (aY : Y ⟶ S) (hA : 
   rw [← cancel_mono ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B)]
   simp only [Category.assoc, eX, Functor.comp_obj, Category.comp_id]
   rw [hV, hH]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc]
   have c₁ : (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app B) ≫
       (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
@@ -164,7 +168,7 @@ theorem lowerShriekBaseChange_inv_app_paste (aX : X ⟶ S) (aY : Y ⟶ S) (hA : 
           ((boundedConstructibleUpperStar _ ℓ (h ≫ p₂')).map
             ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)) := by
     rw [← Functor.map_comp, ← Functor.map_comp, nC']
-  simp only [reassoc_of% c₁, Category.id_comp]
+  simp only [reassoc_of% c₁]
   rw [reassoc_of% nC, Iso.inv_hom_id_app_assoc, reassoc_of% c₂, reassoc_of% n₁, reassoc_of% c₃]
 
 end Pasting
@@ -177,7 +181,8 @@ lemma _root_.CategoryTheory.Adjunction.comp_map_eq_comp_unit_comp_map_of_mate {�
     (GX : ℰ ⥤ 𝒞) (GY : ℰ ⥤ 𝒟) {A A₁ O' : 𝒟} {Bo C₁ O I : 𝒞} {Q₀ Q₁ Q₂ Q₃ Q₄ : ℰ}
     {u₁ : A ⟶ A₁} {u₂ : A₁ ⟶ R.obj Bo} {c : Bo ⟶ C₁} {β : C₁ ⟶ GX.obj Q₃} {k : Q₃ ⟶ Q₄}
     {t₂ : GX.obj Q₄ ⟶ O} {φ₁ : A ⟶ GY.obj Q₀} {ρ₁ : Q₀ ⟶ Q₁} {ρ₂ : Q₁ ⟶ Q₂} {ρ₃ : Q₂ ⟶ Q₃}
-    {e' : GY.obj Q₄ ⟶ O'} {εf : L.obj O' ⟶ O} {m : L.obj A ⟶ C₁} {ι₁ : L.obj (GY.obj Q₀) ⟶ I} {ι₂ : I ⟶ GX.obj Q₀}
+    {e' : GY.obj Q₄ ⟶ O'} {εf : L.obj O' ⟶ O} {m : L.obj A ⟶ C₁} {ι₁ : L.obj (GY.obj Q₀) ⟶ I}
+    {ι₂ : I ⟶ GX.obj Q₀}
     (hM : L.map u₁ ≫ L.map u₂ ≫ adj.counit.app Bo ≫ c = m)
     (hP : m ≫ β = L.map φ₁ ≫ ι₁ ≫ ι₂ ≫ GX.map (ρ₁ ≫ ρ₂ ≫ ρ₃))
     (hU : L.map (GY.map (ρ₁ ≫ ρ₂ ≫ ρ₃ ≫ k)) ≫ L.map e' ≫ εf =
@@ -188,13 +193,13 @@ lemma _root_.CategoryTheory.Adjunction.comp_map_eq_comp_unit_comp_map_of_mate {�
   have hM' := hM =≫ (β ≫ GX.map k ≫ t₂)
   simp only [Category.assoc] at hM'
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
-    Adjunction.counit_naturality_assoc, Adjunction.counit_naturality, Functor.id_obj,
-    Functor.comp_obj, Adjunction.left_triangle_components_assoc,
-    Adjunction.left_triangle_components, Category.comp_id]
+    Adjunction.counit_naturality_assoc, Adjunction.counit_naturality, Functor.comp_obj,
+    Adjunction.left_triangle_components_assoc]
   rw [hM', reassoc_of% hP]
   simp only [Functor.map_comp, Category.assoc] at hU ⊢
   rw [hU]
 
+omit [IsProper f.left] in
 /-- The identification `Lf^* La_Y^* ≅ La_X^*` (for `f ≫ a_Y = a_X`) is compatible with the unit
 isomorphisms of the monoidal functors `La_Y^*`, `La_X^*` and `Lf^*`. -/
 lemma upperStar_map_upperStar_map_comp_εIso_inv {S : Over (Spec (.of k))}
@@ -226,7 +231,12 @@ theorem unit_comp_lowerShriek_map_prodBaseChangeIso :
         ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f)).unit.app
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
             ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)))) ≫
-      ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app _ : _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X))))))) ≫
+      ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app _ :
+        _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj
+          ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj
+            ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
+              ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+                ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X))))))) ≫
     (boundedConstructibleLowerShriek _ ℓ f).map
       ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
           (prodUpperStarCounit ℓ (prod.map_snd f f) (dualizingComplex' ℓ X)) ≫
@@ -256,7 +266,8 @@ theorem unit_comp_lowerShriek_map_prodBaseChangeIso :
       (dualizingComplex' ℓ X)
     convert h using 1
   case hP =>
-    have h := lowerShriekBaseChange_inv_app_paste ℓ f (toPoint X) (toPoint Y) (comp_toPoint f)
+    have h := boundedConstructibleLowerShriekBaseChange_padicAlgCl_prod_paste ℓ f (toPoint X)
+      (toPoint Y) (comp_toPoint f)
       (by simp) (by simp) (isPullback_prod_toPoint Y Y) (isPullback_prod_toPoint X Y)
       (isPullback_prod_toPoint X X) (IsPullback.of_prod_fst_with_id f Y).flip
       (IsPullback.of_prod_snd_with_id f X) (dualizingComplex' ℓ X) (prodBaseChangeIso ℓ Y Y) rfl
@@ -273,6 +284,7 @@ theorem unit_comp_lowerShriek_map_prodBaseChangeIso :
         eqToHom (by rw [comp_toPoint]; rfl) ≫
         (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint X)).counit.app (𝟙_ _))
     exact h
+
 /-- An abstract chain of identities in monoidal categories: through a functor `F`, a map
 `U ▷ M` followed by `P` and `F` of an evaluation `θ` is rewritten, given the naturality of `P`
 in `θ`, a factorization of `U ≫ F θ`, the unit compatibility of `P₁` and a triangle identity. -/
@@ -323,7 +335,12 @@ theorem whiskerRight_unit_square_comp_exceptionalProjection :
             (prod.map f f)).unit.app
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
               ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)))) ≫
-        ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app _ : _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X))))))) ▷
+        ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app _ :
+          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj
+            ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj
+              ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
+                ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
+                  ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X))))))) ▷
           (boundedConstructibleLowerStar _ ℓ f).obj K) ≫
       boundedConstructibleExceptionalProjectionMorphism _ ℓ f _ _ ≫
       (boundedConstructibleLowerShriek _ ℓ f).map
@@ -334,7 +351,8 @@ theorem whiskerRight_unit_square_comp_exceptionalProjection :
             ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint X)).counit.app (𝟙_ _)) ≫
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv) ▷ _) ≫
         (𝟙_ _ ◁ ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K :
-          (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerStar _ ℓ f).obj K) ⟶ K)) ≫
+          (boundedConstructibleUpperStar _ ℓ f).obj ((boundedConstructibleLowerStar _ ℓ f).obj K) ⟶
+            K)) ≫
         (λ_ K).hom) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K =
     (((prodBaseChangeIso ℓ Y Y).hom.app
