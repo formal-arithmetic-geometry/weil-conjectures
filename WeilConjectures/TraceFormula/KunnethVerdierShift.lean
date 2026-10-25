@@ -81,17 +81,6 @@ noncomputable def exceptionalKunnethAdjointNatTrans :
     exact exceptionalKunnethAdjoint_naturality ℓ (Y := Y) φ
 
 
-instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
-      (compactificationOverField f) K).app B) :=
-  isIso_boundedConstructibleExceptionalProjectionMorphism ℓ f K B
-
-instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
-      (compactificationOverField f) K) :=
-  NatIso.isIso_of_isIso_app _
-
 variable (X Y) in
 /-- The morphism `Rp_X! (Lp_Y^* ω_Y) ⟶ ℚ̄_ℓ` through which the adjoint of the exceptional Künneth
 map factors: compact-support base change, the counit of `Ra_Y! ⊣ Ra_Y^!` and the unit

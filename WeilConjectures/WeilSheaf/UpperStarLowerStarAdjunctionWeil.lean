@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
@@ -45,14 +46,6 @@ lemma isIso_unit_app_iff_of_iso_obj {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) 
   · intro
     have : IsIso (adj.unit.app X ≫ R.map (L.map e.hom)) := by rw [← h]; infer_instance
     exact IsIso.of_isIso_comp_right _ (R.map (L.map e.hom))
-
-/-- If the counit of an adjunction is invertible at `Y`, the unit is invertible at `R Y`. -/
-instance isIso_unit_app_obj_of_isIso_counit_app {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (Y : D)
-    [IsIso (adj.counit.app Y)] : IsIso (adj.unit.app (R.obj Y)) := by
-  have h : adj.unit.app (R.obj Y) ≫ R.map (adj.counit.app Y) = 𝟙 _ :=
-    adj.right_triangle_components Y
-  have : IsIso (adj.unit.app (R.obj Y) ≫ R.map (adj.counit.app Y)) := by rw [h]; infer_instance
-  exact IsIso.of_isIso_comp_right _ (R.map (adj.counit.app Y))
 
 /-- If the counit of an adjunction is invertible at `L X`, the image under `L` of the unit at `X`
 is invertible. -/

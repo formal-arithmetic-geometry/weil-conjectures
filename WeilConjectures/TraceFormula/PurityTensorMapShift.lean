@@ -61,23 +61,6 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The exceptional projection morphism of the canonical compactification of `f` is an
-isomorphism at every object. -/
-instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans_app
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
-      (compactificationOverField f) K).app B) :=
-  isIso_boundedConstructibleExceptionalProjectionMorphism _ ℓ f K B
-
-/-- The exceptional projection morphism of the canonical compactification of `f` is a natural
-isomorphism. -/
-instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
-      (compactificationOverField f) K) :=
-  NatIso.isIso_of_isIso_app _
-
 /-- The adjoint `Rf_! (Lf^* K ⊗ Rf^! ℚ̄_ℓ) ⟶ K` of the purity map, as a natural transformation in
 `K`: the braiding, the inverse of the exceptional projection formula, the counit of
 `Rf_! ⊣ Rf^!` at the unit and the left unitor. -/

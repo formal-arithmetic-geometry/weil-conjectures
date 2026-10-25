@@ -110,4 +110,25 @@ instance commShift_boundedConstructibleExceptionalProjectionOfCompactificationNa
   erw [Category.id_comp, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.comp_id]
 
+section PadicAlgCl
+
+/-- The exceptional projection morphism of the canonical compactification of `f` is an
+isomorphism at every object. -/
+instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans_app
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
+    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+      (compactificationOverField f) K).app B) :=
+  isIso_boundedConstructibleExceptionalProjectionMorphism ℓ f K B
+
+/-- The exceptional projection morphism of the canonical compactification of `f` is a natural
+isomorphism. -/
+instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
+    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+      (compactificationOverField f) K) :=
+  NatIso.isIso_of_isIso_app _
+
+end PadicAlgCl
+
 end AlgebraicGeometry.ProEtale.CondensedRing

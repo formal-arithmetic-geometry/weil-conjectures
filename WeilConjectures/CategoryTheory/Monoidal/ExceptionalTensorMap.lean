@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
@@ -220,12 +221,6 @@ end ExceptionalBaseChange
 section UnitIso
 
 variable {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C}
-
-/-- If the counit of `L ⊣ R` is an isomorphism at `Y`, then the unit is an isomorphism at `R Y`:
-by the triangle identity, `η_{R Y}` is a section of the invertible `R ε_Y`. -/
-lemma isIso_unit_app_obj_of_isIso_counit_app (adj : L ⊣ R) (Y : D)
-    [IsIso (adj.counit.app Y)] : IsIso (adj.unit.app (R.obj Y)) :=
-  isIso_of_comp_hom_eq_id _ (adj.right_triangle_components Y)
 
 /-- If the counit of `L ⊣ R` is an isomorphism at `Y`, then the unit is an isomorphism at every
 object isomorphic to `R Y`. -/
