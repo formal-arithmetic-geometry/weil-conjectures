@@ -12923,6 +12923,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
+public import WeilConjectures.Tactic.FirstOrderApply
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
@@ -13357,6 +13358,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnProperShape
