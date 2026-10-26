@@ -197,8 +197,7 @@ the deformation model, whose geometric generic fibre is the base change of `X`
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
-      verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-        ((specialization k' x).obj K)) :=
+      verdierDual ℓ ((specialization k' x).obj K)) :=
   NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
     (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
     (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
