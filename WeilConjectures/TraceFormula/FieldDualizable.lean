@@ -86,7 +86,6 @@ instance (X : Scheme.{u}) : (ambientDualizable ℓ X).IsTriangulated where
 
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
-omit [Fact (ringChar k).Prime] in
 attribute [local instance] DerivedCategory.braidedCategory' in
 /-- An object of `Dᵇc(Z)⟦ℚ̲̄_ℓ⟧` is dualizable if and only if it is dualizable in the ambient
 derived category. -/
@@ -129,7 +128,7 @@ theorem isDualizable_point (N : Dᵇc((point k).left)⟦𝐐⟧) : IsDualizable 
 (`ProEtale.CondensedRing.boundedConstructibleBraiding`). -/
 theorem nonempty_hasLeftDual_point (N : Dᵇc((point k).left)⟦𝐐⟧) : Nonempty (HasLeftDual N) := by
   obtain ⟨_⟩ := isDualizable_point ℓ N
-  let := boundedConstructibleBraiding 𝐐 (point k)
+  let := boundedConstructibleBraiding (X := point k) (ℓ := ℓ)
   exact ⟨{ leftDual := Nᘁ, exact := BraidedCategory.exactPairing_swap N Nᘁ }⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
