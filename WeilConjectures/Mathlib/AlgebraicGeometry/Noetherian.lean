@@ -23,6 +23,8 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
   locally connected.
 - `AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType`: a scheme quasi-compact and locally of
   finite type over a noetherian scheme is noetherian.
+- `AlgebraicGeometry.isNoetherian_left`: a scheme quasi-compact and locally of finite type over a
+  field is noetherian.
 - `AlgebraicGeometry.Scheme.exists_pow_eq_zero_of_isNilpotent`: on a quasi-compact locally
   noetherian scheme the nilpotency index of nilpotent sections is uniformly bounded.
 -/
@@ -96,6 +98,11 @@ theorem isNoetherian_of_locallyOfFiniteType {X Y : Scheme.{u}} (f : X ⟶ Y)
   have := LocallyOfFiniteType.isLocallyNoetherian f
   have := QuasiCompact.compactSpace_of_compactSpace f
   {}
+
+/-- A scheme quasi-compact and locally of finite type over a field is noetherian. -/
+theorem isNoetherian_left {k : Type u} [Field k] (Y : CategoryTheory.Over (Spec (.of k)))
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] : IsNoetherian Y.left :=
+  isNoetherian_of_locallyOfFiniteType Y.hom
 
 /-- On a quasi-compact locally noetherian scheme the nilpotency index of nilpotent sections is
 uniformly bounded: every local ring is a localization of a noetherian ring of sections over one
