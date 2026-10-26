@@ -16,8 +16,9 @@ public import WeilConjectures.Tactic.ExactModProofs
 # The proper exchange of nearby cycles
 
 For a morphism `φ : M ⟶ N` of nearby cycles models of finite type over the trait
-(`NearbyCyclesModel.IsTraitModel`) over a proper `f` whose morphism of total spaces is proper and whose squares of special fibres and of identifications `ε` are cartesian, the
-pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` (`NearbyCyclesModel.Hom.pushforwardExchange`) is
+(`NearbyCyclesModel.IsTraitModel`) over a proper `f` whose morphism of total spaces is proper and
+whose squares of special fibres and of identifications `ε` are cartesian, the pushforward exchange
+`χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` (`NearbyCyclesModel.Hom.pushforwardExchange`) is
 an isomorphism on bounded constructible complexes (blueprint `det-sp-nearby-cycles-exchanges` (2),
 "proper exchange", `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`). For the
 geometric models of models of finite type over the trait `Spec k'⟦t⟧`, whose identifications are
