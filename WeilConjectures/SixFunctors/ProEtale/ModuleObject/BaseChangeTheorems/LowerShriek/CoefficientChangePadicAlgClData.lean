@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePasting
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataRings
 
 /-!
 # The extension of scalars `E ⟶ ℚ̄_ℓ` is a coefficient change
@@ -38,9 +39,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) (k : Typ
 functors. -/
 noncomputable def toPadicAlgClCoefficientChange :
     BoundedConstructibleCoefficientChange (Profinite.continuousMapRingObj E)
-      (Profinite.padicAlgClRingObj ℓ) ℓ k where
-  T X _ _ _ := boundedConstructibleToPadicAlgCl X.left ℓ E
-  pull f := boundedConstructibleUpperStarToPadicAlgClIso ℓ E f
+      (Profinite.padicAlgClRingObj ℓ) ℓ (continuousMapPushforwardData ℓ k E)
+      (padicAlgClPushforwardData ℓ k)
+      (fun X _ _ _ ↦ boundedConstructibleToPadicAlgCl X.left ℓ E)
+      (fun f ↦ boundedConstructibleUpperStarToPadicAlgClIso ℓ E f) where
   pull_comp f g := by
     intro K
     ext1
@@ -80,14 +82,16 @@ noncomputable def toPadicAlgClCoefficientChange :
       Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
       Category.comp_id, Functor.comp_obj, Functor.comp_map, Functor.id_obj] at h
-    simp only [ObjectProperty.FullSubcategory.comp_hom,
+    simp only [continuousMapPushforwardData, padicAlgClPushforwardData,
+      ObjectProperty.FullSubcategory.comp_hom,
       boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom,
       boundedConstructibleUpperStarToPadicAlgClIso_inv_app_hom,
       boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom',
-      boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom',
+      ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom',
       boundedConstructibleLowerStar_map_hom, boundedConstructibleToPadicAlgCl_map_hom,
       boundedConstructibleToPadicAlgCl_obj_obj, boundedConstructibleUpperStar_obj_obj,
-      boundedConstructibleLowerStar_obj_obj]
+      boundedConstructibleLowerStar_obj_obj,
+      ContinuousMapRingObj.boundedConstructibleLowerStar_obj_obj]
     dsimp only [Functor.comp_obj] at h ⊢
     with_reducible exact h
 
@@ -101,14 +105,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) (k : Typ
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-lemma toPadicAlgClCoefficientChange_T :
-    (toPadicAlgClCoefficientChange ℓ E k).T Y = boundedConstructibleToPadicAlgCl Y.left ℓ E :=
-  rfl
-
-lemma toPadicAlgClCoefficientChange_pull (f : X ⟶ Y) :
-    (toPadicAlgClCoefficientChange ℓ E k).pull f = boundedConstructibleUpperStarToPadicAlgClIso ℓ E f :=
-  rfl
 
 set_option maxRecDepth 8000 in
 /-- (Shriek) along the chosen compactification is the comparison pasted from (Shriek) for the open

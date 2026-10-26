@@ -40,9 +40,16 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.BoundedConstructibleCoefficie
 open Scheme
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {ℓ : ℕ} [Fact ℓ.Prime]
-  [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ'] [IsFinitenessCoefficient ℓ Λ]
-  [IsFinitenessCoefficient ℓ Λ'] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] (C : BoundedConstructibleCoefficientChange Λ Λ' ℓ k)
+  [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ'] {k : Type u} [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {P : BoundedConstructiblePushforwardData Λ ℓ k}
+  {P' : BoundedConstructiblePushforwardData Λ' ℓ k}
+  {T : ∀ (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated X.hom], Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ'⟧}
+  {pull : ∀ {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y),
+    boundedConstructibleUpperStar Λ ℓ f ⋙ T X ≅ T Y ⋙ boundedConstructibleUpperStar Λ' ℓ f}
+  (C : BoundedConstructibleCoefficientChange Λ Λ' ℓ P P' T pull)
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
@@ -52,12 +59,10 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {ℓ : ℕ
 coefficient comparisons. -/
 lemma squareCompatible_baseChange {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
     [IsProper f.left] [IsProper f'.left] (sq : CommSq g' f' f g) :
-    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.push f) (C.pull g))
-      (Functor.pasteSquareIso (C.pull g') (C.push f'))
-      (boundedConstructibleBaseChange Λ ℓ sq) (boundedConstructibleBaseChange Λ' ℓ sq) := by
-  rw [boundedConstructibleBaseChange_eq_exchangeRight,
-    boundedConstructibleBaseChange_eq_exchangeRight]
-  exact NatTrans.SquareCompatible.exchangeRight (C.isMateSquare_pull_push f)
+    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.push f) (pull g))
+      (Functor.pasteSquareIso (pull g') (C.push f'))
+      (P.baseChange sq) (P'.baseChange sq) :=
+  NatTrans.SquareCompatible.exchangeRight (C.isMateSquare_pull_push f)
     (C.isMateSquare_pull_push f') (C.squareCompatible_pullbackSquareComparison sq)
 
 section OpenImmersion
@@ -68,8 +73,8 @@ variable {j : X ⟶ Y} {g : Y' ⟶ Y} {j' : X' ⟶ Y'} {g' : X' ⟶ X} [IsOpenIm
 /-- The exchange `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` for extension by zero is compatible with the
 coefficient comparisons. -/
 lemma squareCompatible_openImmersionLowerShriekBaseChange (sq : CommSq g' j' j g) :
-    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.pull g') (C.shriek j'))
-      (Functor.pasteSquareIso (C.shriek j) (C.pull g))
+    NatTrans.SquareCompatible (Functor.pasteSquareIso (pull g') (C.shriek j'))
+      (Functor.pasteSquareIso (C.shriek j) (pull g))
       (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq)
       (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ' ℓ sq) := by
   rw [boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft,
@@ -80,8 +85,8 @@ lemma squareCompatible_openImmersionLowerShriekBaseChange (sq : CommSq g' j' j g
 /-- The base change isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` for extension by zero is compatible
 with the coefficient comparisons. -/
 lemma squareCompatible_openImmersionLowerShriekBaseChangeIso (sq : IsPullback g' j' j g) :
-    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.shriek j) (C.pull g))
-      (Functor.pasteSquareIso (C.pull g') (C.shriek j'))
+    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.shriek j) (pull g))
+      (Functor.pasteSquareIso (pull g') (C.shriek j'))
       (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).hom
       (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ' ℓ sq).hom := by
   have := isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq
@@ -97,8 +102,7 @@ variable {f : X ⟶ Y}
 /-- **(Shriek)** along a compactification `c = (X ⟶[i] Z ⟶[p] Y)`: the commutation
 `Rf_!^c ⋙ T ≅ T ⋙ Rf_!^c` pasted from (Shriek) for `i` and (Push) for `p`. -/
 noncomputable def shriekOfCompactification (c : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactification Λ ℓ c ⋙ C.T Y ≅
-      C.T X ⋙ boundedConstructibleLowerShriekOfCompactification Λ' ℓ c :=
+    P.lowerShriekOfCompactification c ⋙ T Y ≅ T X ⋙ P'.lowerShriekOfCompactification c :=
   Functor.pasteSquareIso (C.shriek c.overI) (C.push c.overG)
 
 variable {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -108,14 +112,12 @@ compactification `c` of `f` and its base change `c'` is compatible with the coef
 comparisons. -/
 lemma squareCompatible_lowerShriekOfCompactificationBaseChangePasting
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
-    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.shriekOfCompactification c) (C.pull g))
-      (Functor.pasteSquareIso (C.pull g')
+    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.shriekOfCompactification c) (pull g))
+      (Functor.pasteSquareIso (pull g')
         (C.shriekOfCompactification (c.ofIsPullback sq.overLeft)))
-      (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ ℓ c sq)
-      (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ' ℓ c sq) := by
-  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq,
-    boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
-  exact (NatTrans.SquareCompatible.associator_hom _ _ _).comp
+      (P.lowerShriekOfCompactificationBaseChangePasting c sq)
+      (P'.lowerShriekOfCompactificationBaseChangePasting c sq) :=
+  (NatTrans.SquareCompatible.associator_hom _ _ _).comp
     ((NatTrans.SquareCompatible.whiskerLeft _
       (C.squareCompatible_baseChange (c.overBaseChange_isPullback_g sq).toCommSq)).comp
     ((NatTrans.SquareCompatible.associator_inv _ _ _).comp

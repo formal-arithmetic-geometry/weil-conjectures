@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeComponents
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePasting
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataRings
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 
@@ -106,9 +107,10 @@ variable (k) in
 functors. -/
 noncomputable def extendScalarsCoefficientChange :
     BoundedConstructibleCoefficientChange (Profinite.padicIntegersRingObj ℓ E.1)
-      (Profinite.continuousMapRingObj E.1) ℓ k where
-  T X _ _ _ := boundedConstructibleExtendScalars X.left ℓ E
-  pull f := boundedConstructibleUpperStarExtendScalarsIso ℓ E f
+      (Profinite.continuousMapRingObj E.1) ℓ (padicIntegersPushforwardData ℓ k E.1)
+      (continuousMapPushforwardData ℓ k E)
+      (fun X _ _ _ ↦ boundedConstructibleExtendScalars X.left ℓ E)
+      (fun f ↦ boundedConstructibleUpperStarExtendScalarsIso ℓ E f) where
   pull_comp f g := by
     intro K
     ext1
@@ -153,14 +155,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) (k : Typ
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-lemma extendScalarsCoefficientChange_T :
-    (extendScalarsCoefficientChange ℓ E k).T Y = boundedConstructibleExtendScalars Y.left ℓ E :=
-  rfl
-
-lemma extendScalarsCoefficientChange_pull (f : X ⟶ Y) :
-    (extendScalarsCoefficientChange ℓ E k).pull f = boundedConstructibleUpperStarExtendScalarsIso ℓ E f :=
-  rfl
 
 set_option maxRecDepth 8000 in
 /-- (Shriek) along the chosen compactification is the comparison pasted from (Shriek) for the open

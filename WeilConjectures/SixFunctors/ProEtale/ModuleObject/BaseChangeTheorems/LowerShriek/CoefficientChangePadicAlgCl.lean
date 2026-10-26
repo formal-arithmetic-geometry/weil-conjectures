@@ -109,8 +109,10 @@ lemma boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom
     ((boundedConstructibleLowerStarToPadicAlgClIso ℓ E p).hom.app K).hom =
       (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p.left).app K.obj := by
   simp [boundedConstructibleLowerStarToPadicAlgClIso, boundedConstructibleToPadicAlgClCompatibility,
-    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
-    boundedConstructibleToPadicAlgCl_obj_obj, boundedConstructibleLowerStar_obj_obj]
+    boundedConstructibleLowerStarCompatibility,
+    ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
+    boundedConstructibleToPadicAlgCl_obj_obj, boundedConstructibleLowerStar_obj_obj,
+    ContinuousMapRingObj.boundedConstructibleLowerStar_obj_obj]
 
 end Proper
 
