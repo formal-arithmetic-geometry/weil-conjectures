@@ -36,6 +36,78 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Gluing an identity `c ≫ L(s ≫ q) ≫ r = w ≫ v` to `w ≫ v ≫ ν = Z`: the composite
+`c ≫ L(s') ≫ (L(q) ≫ r) ≫ ν` is `Z` for any `s'` equal to `s`. -/
+lemma comp_map_comp_comp_eq_of_eq {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] {L : 𝒞 ⥤ 𝒟}
+    {u A₁ A₂ B₀ : 𝒟} {U₁ U₂ U₃ : 𝒞} (c : u ⟶ L.obj U₁) (s s' : U₁ ⟶ U₂) (q : U₂ ⟶ U₃)
+    (r : L.obj U₃ ⟶ A₁) (w : u ⟶ A₂) (v : A₂ ⟶ A₁) (ν : A₁ ⟶ B₀) (Z : u ⟶ B₀) (hs : s' = s)
+    (h : c ≫ L.map (s ≫ q) ≫ r = w ≫ v) (h' : w ≫ v ≫ ν = Z) :
+    c ≫ L.map s' ≫ (L.map q ≫ r) ≫ ν = Z := by
+  subst hs; rw [← h', ← reassoc_of% h, L.map_comp]; simp only [Category.assoc]
+
+end CategoryTheory
+
+/-- The two sides of an equation. -/
+meta def eqSidesOf (e : Lean.Expr) : Lean.MetaM (Lean.Expr × Lean.Expr) := do
+  let e ← Lean.Meta.whnfR (← Lean.instantiateMVars e)
+  let some (_, l, r) := e.eq? | throwError "not an equation"
+  return (l, r)
+
+/-- The two factors of a composite `f ≫ g`. -/
+meta def compFactors (e : Lean.Expr) : Lean.MetaM (Lean.Expr × Lean.Expr) := do
+  let e := e.consumeMData
+  unless e.isAppOfArity ``CategoryStruct.comp 7 do throwError "not a composite"
+  return (e.getArg! 5, e.getArg! 6)
+
+/-- `glue_unit_class h h'` closes a goal `c ≫ L(s') ≫ ?φ ≫ ν = Z` from
+`h : c ≫ L(s ≫ q) ≫ r = w ≫ v` and `h' : w ≫ v ≫ ν = Z`, where `s'` and `s` are definitionally
+equal: it assigns `?φ := L(q) ≫ r` and closes the goal with `comp_map_comp_comp_eq_of_eq`. The
+identifications `s' = s` and of the remaining terms (which agree up to their proof arguments) are
+left to the kernel: the elaborator, through proof irrelevance, infers the types of large proof terms
+and needs minutes for them. -/
+elab "glue_unit_class " h:ident h':ident : tactic => Lean.Elab.Tactic.withMainContext do
+  let he ← Lean.Elab.Tactic.elabTerm h none
+  let he' ← Lean.Elab.Tactic.elabTerm h' none
+  let (l, wv) ← eqSidesOf (← Lean.Meta.inferType he)
+  let (l', Z) ← eqSidesOf (← Lean.Meta.inferType he')
+  let (c, rest) ← compFactors l
+  let (m, r) ← compFactors rest
+  let (s, q) ← compFactors m.consumeMData.appArg!
+  let (w, v) ← compFactors wv
+  let (_, restD) ← compFactors l'
+  let (_, ν) ← compFactors restD
+  let (lG, _) ← eqSidesOf (← Lean.Elab.Tactic.getMainTarget)
+  let (_, restG) ← compFactors lG
+  let (mG, restG') ← compFactors restG
+  let (φG, _) ← compFactors restG'
+  let s' := mG.consumeMData.appArg!
+  -- `?φ := L(q) ≫ r`, with `L(q)` obtained from `L(s ≫ q)` by changing the morphism
+  let m := m.consumeMData
+  let some (_, _, X, Y) := (← Lean.Meta.whnfR (← Lean.Meta.inferType q)).app4? ``Quiver.Hom
+    | throwError "unexpected type"
+  let margs := m.getAppArgs
+  let n := margs.size
+  let mq := Lean.mkAppN m.getAppFn (((margs.set! (n - 3) X).set! (n - 2) Y).set! (n - 1) q)
+  let some (_, _, A, _) := (← Lean.Meta.whnfR (← Lean.Meta.inferType mq)).app4? ``Quiver.Hom
+    | throwError "unexpected type"
+  let rest := rest.consumeMData
+  let φ := Lean.mkAppN rest.getAppFn ((rest.getAppArgs.set! 2 A).set! 5 mq)
+  unless φG.consumeMData.isMVar do throwError "the middle factor is not a metavariable"
+  unless ← Lean.Meta.isDefEq (← Lean.Meta.inferType φG) (← Lean.Meta.inferType φ) do
+    throwError "the middle factor has the wrong type"
+  φG.consumeMData.mvarId!.assign φ
+  let hs ← Lean.Meta.mkExpectedTypeHint (← Lean.Meta.mkEqRefl s) (← Lean.Meta.mkEq s' s)
+  let pf ← Lean.Meta.mkAppM ``CategoryTheory.comp_map_comp_comp_eq_of_eq
+    #[c, s, s', q, r, w, v, ν, Z, hs, he, he']
+  let some (_, _, U₁, U₂) := (← Lean.Meta.whnfR (← Lean.Meta.inferType s')).app4? ``Quiver.Hom
+    | throwError "unexpected type"
+  let args := pf.getAppArgs
+  -- the objects of `s'`, so that the statement of the proof is the goal up to proof arguments
+  (← Lean.Elab.Tactic.getMainGoal).assign (Lean.mkAppN pf.getAppFn ((args.set! 9 U₁).set! 10 U₂))
+  Lean.Elab.Tactic.replaceMainGoal []
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -107,12 +179,11 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (hc.componentSpecialLift_ι k' j hb) hI
   have hD := unitClass_comp_map_comp_deformationCompactSupportExchange_app B b.left.ker k' (ℓ := ℓ)
   -- Facts (I) and (III) and the unit class identity of `ν_B` are `hI`, `h3` and `hD`; the
-  -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`. Still open: fact (II),
-  -- the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`, and gluing `h3` to `hD` in `h2` (matching the
-  -- statements of `h3` and of `hD` unfolds the derived categories, through the different instance
-  -- paths of their unit objects).
+  -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`, and `glue_unit_class`
+  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`.
   refine TraceSpecialization.specializesComponentClass_of_eq _ _ _ j hI
     (W := _) ?φ ((deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _)) ?h1 ?h2
+  case h2 => glue_unit_class h3 hD
   all_goals sorry
 
 end IsContractingAt
