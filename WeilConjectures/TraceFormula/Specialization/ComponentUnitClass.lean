@@ -97,10 +97,10 @@ variable {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
 `Lf^* ⊣ Rf_*` at `ℚ̄_ℓ`, read through `Lf^* ℚ̄_ℓ ≅ ℚ̄_ℓ` and `Rf_! ≅ Rf_*`. -/
 noncomputable def properUnitClass (f : X ⟶ Y) [IsProper f.left] :
     𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj (𝟙_ _) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f).unit.app
+      (boundedConstructibleLowerShriek ℓ f).obj (𝟙_ _) :=
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).unit.app
       (𝟙_ _) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+    (boundedConstructibleLowerStar ℓ f).map
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f)).inv ≫
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app (𝟙_ _)
@@ -110,19 +110,19 @@ noncomputable def properUnitClass (f : X ⟶ Y) [IsProper f.left] :
 theorem properUnitClass_comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f.left] [IsProper g.left]
     [IsProper (f ≫ g).left] :
     properUnitClass ℓ g ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+        (boundedConstructibleLowerShriek ℓ g).map
           (properUnitClass ℓ f) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app (𝟙_ _) =
       properUnitClass ℓ (f ≫ g) :=
   unitClass_comp_aux
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (f ≫ g))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (f ≫ g))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
+    (boundedConstructibleLowerStarComp ℓ f g)
     (by rw [boundedConstructibleLowerStarComp, Iso.symm_inv, conjugateIsoEquiv_apply_hom,
       Iso.symm_hom])
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g)
@@ -131,13 +131,13 @@ theorem properUnitClass_comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f.left] [IsPr
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g)))
-    (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ f g)
+    (boundedConstructibleUpperStarComp_hom_app_unit ℓ f g)
 
 /-- `properUnitClass_comp` for a morphism equal to `f ≫ g`, read through `lowerShriekCompOfEq`. -/
 theorem properUnitClass_comp_of_eq (f : X ⟶ Y) (g : Y ⟶ Z) {h : X ⟶ Z} (w : f ≫ g = h)
     [IsProper f.left] [IsProper g.left] [IsProper h.left] :
     properUnitClass ℓ g ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+        (boundedConstructibleLowerShriek ℓ g).map
           (properUnitClass ℓ f) ≫ (lowerShriekCompOfEq ℓ f g w).inv.app (𝟙_ _) =
       properUnitClass ℓ h := by
   subst w
@@ -157,12 +157,12 @@ lemma unitClass_eq_properUnitClass (X : Over (Spec (.of k))) [QuasiCompact X.hom
 theorem unitClass_comp_map_properUnitClass {B F : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] [QuasiCompact F.hom] [IsProper F.hom] (r : B ⟶ F) [IsProper r.left] :
     BorelMooreSection.unitClass ℓ F ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint F)).map
           (properUnitClass ℓ r) ≫
         (lowerShriekCompOfEq ℓ r (toPoint F) (comp_toPoint r)).inv.app (𝟙_ _) =
       BorelMooreSection.unitClass ℓ B :=
-  have : IsProper (toPoint B).left := ‹IsProper B.hom›
-  have : IsProper (toPoint F).left := ‹IsProper F.hom›
+  have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
+  have : IsProper (toPoint F).left := by rw [toPoint_left]; infer_instance
   properUnitClass_comp_of_eq ℓ r (toPoint F) (comp_toPoint r)
 
 /-- **The unit-class step (III) on a proper morphism `r : B ⟶ F` of proper schemes**: a map
@@ -175,22 +175,21 @@ theorem unitClass_comp_map_comp_lowerShriekCompOfEq_inv {B F : Over (Spec (.of k
     [QuasiCompact B.hom] [IsProper B.hom] [QuasiCompact F.hom] [IsProper F.hom] (r : B ⟶ F)
     [IsProper r.left] {P : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {Q : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (s : 𝟙_ _ ⟶ P)
-    (ψ : P ⟶ (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj Q)
+    (ψ : P ⟶ (boundedConstructibleLowerStar ℓ r).obj Q)
     (σ : 𝟙_ _ ⟶ Q)
-    (h : s ≫ ψ = (boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ r).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).map
+    (h : s ≫ ψ = (boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit.app (𝟙_ _) ≫
+      (boundedConstructibleLowerStar ℓ r).map
         ((Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r)).inv ≫ σ)) :
     BorelMooreSection.unitClass ℓ F ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint F)).map
           (s ≫ ψ ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app Q) ≫
         (lowerShriekCompOfEq ℓ r (toPoint F) (comp_toPoint r)).inv.app Q =
       BorelMooreSection.unitClass ℓ B ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint B)).map σ := by
+        (boundedConstructibleLowerShriek ℓ (toPoint B)).map σ := by
   have hr : s ≫ ψ ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app Q =
       properUnitClass ℓ r ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ r).map σ := by
+        (boundedConstructibleLowerShriek ℓ r).map σ := by
     rw [reassoc_of% h, properUnitClass, CategoryTheory.Functor.map_comp, Category.assoc,
       Category.assoc, Category.assoc,
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.naturality]

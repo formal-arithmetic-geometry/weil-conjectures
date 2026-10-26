@@ -129,8 +129,8 @@ variable {F} in
 /-- The adjoint `j_! ℚ̄_ℓ ⟶ ℚ̄_ℓ` of `ℚ̄_ℓ ≅ j^! ℚ̄_ℓ`, the last factor of the class of `B`
 (`BorelMooreSection.componentClass`). -/
 noncomputable abbrev componentCounit :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj (𝟙_ _) ⟶ 𝟙_ _ :=
-  ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).homEquiv
+    (boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _) ⟶ 𝟙_ _ :=
+  ((boundedConstructibleUpperShriekAdjunction ℓ j).homEquiv
     _ _).symm (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv
 
 /-- The specialization unit `σ_B : ℚ̄_ℓ ⟶ Ψ_B ℚ̄_ℓ` of the deformation of `B` along `ker b`. -/

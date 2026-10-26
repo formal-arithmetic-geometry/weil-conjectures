@@ -85,18 +85,18 @@ theorem isIso_map_of_isIso_upperStar_map {D : Type*} [Category D] [Preadditive D
     (G : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ D) [G.CommShift ℤ] [G.IsTriangulated]
     (j : U ⟶ F) [IsOpenImmersion j.left] [QuasiCompact j.left] (i : Z ⟶ F)
     [IsClosedImmersion i.left] (hij : IsCompl (Set.range i.left.base) (Set.range j.left.base))
-    (hG : ∀ N, IsZero (G.obj ((boundedConstructibleLowerStar _ ℓ i).obj N)))
+    (hG : ∀ N, IsZero (G.obj ((boundedConstructibleLowerStar ℓ i).obj N)))
     {P Q : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : P ⟶ Q)
     (he : IsIso ((boundedConstructibleUpperStar _ ℓ j).map e)) : IsIso (G.map e) := by
   obtain ⟨W, g, h, hT⟩ := distinguished_cocone_triangle e
   have hW : IsZero ((boundedConstructibleUpperStar _ ℓ j).obj W) :=
     (Triangle.isZero₃_iff_isIso₁ _
       ((boundedConstructibleUpperStar _ ℓ j).map_distinguished _ hT)).2 he
-  set adj := boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i
+  set adj := boundedConstructibleUpperStarLowerStarAdjunction ℓ i
   have hu : IsIso (adj.unit.app W) := by
     refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl _ ℓ i j hij _ ?_ ?_
     · exact isIso_of_source_target_iso_zero _ hW.isoZero
-        (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hij.symm.disjoint
+        (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hij.symm.disjoint
           _).isoZero
     · have := adj.left_triangle_components W
       have : IsIso ((boundedConstructibleUpperStar _ ℓ i).map (adj.unit.app W) ≫
@@ -119,22 +119,22 @@ isomorphism `M ≅ Rj^! N`: the unit of `Rj_! ⊣ Rj^!` is invertible (`Rj_! ≅
 faithful) and `Rj^! ≅ Lj^*`. -/
 theorem isIso_upperStar_map_homEquiv_symm {M : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {N : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (φ : M ⟶ (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N)
+    (φ : M ⟶ (boundedConstructibleUpperShriek ℓ j).obj N)
     [IsIso φ] : IsIso ((boundedConstructibleUpperStar _ ℓ j).map
-      (((boundedConstructibleUpperShriekAdjunction _ ℓ j).homEquiv _ _).symm φ)) := by
-  set adj := boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j
+      (((boundedConstructibleUpperShriekAdjunction ℓ j).homEquiv _ _).symm φ)) := by
+  set adj := boundedConstructibleUpperShriekAdjunction ℓ j
   have hff := (fullyFaithfulBoundedConstructibleOpenImmersionLowerShriek _ ℓ j).ofIso
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).symm
   have := hff.full
   have := hff.faithful
   have hφ : adj.unit.app M ≫
-      (boundedConstructibleUpperShriek _ ℓ j).map ((adj.homEquiv _ _).symm φ) = φ := by
+      (boundedConstructibleUpperShriek ℓ j).map ((adj.homEquiv _ _).symm φ) = φ := by
     have h := adj.homEquiv_unit M N ((adj.homEquiv _ _).symm φ)
     rw [Equiv.apply_symm_apply] at h
     exact h.symm
-  have : IsIso ((boundedConstructibleUpperShriek _ ℓ j).map ((adj.homEquiv _ _).symm φ)) := by
+  have : IsIso ((boundedConstructibleUpperShriek ℓ j).map ((adj.homEquiv _ _).symm φ)) := by
     have : IsIso (adj.unit.app M ≫
-        (boundedConstructibleUpperShriek _ ℓ j).map ((adj.homEquiv _ _).symm φ)) := by
+        (boundedConstructibleUpperShriek ℓ j).map ((adj.homEquiv _ _).symm φ)) := by
       rw [hφ]; infer_instance
     exact IsIso.of_isIso_comp_left (adj.unit.app M) _
   exact (NatIso.isIso_map_iff (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)
@@ -160,11 +160,11 @@ lemma isZero_upperStar_specialization_lowerStar_lowerStar (y : RationalPoint C) 
     (hd : Disjoint (Set.range (i ≫ ι).left.base) (Set.range y.left.base))
     (N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero ((boundedConstructibleUpperStar _ ℓ ι').obj ((specialization (ℓ := ℓ) k' y).obj
-      ((boundedConstructibleLowerStar _ ℓ ι).obj ((boundedConstructibleLowerStar _ ℓ i).obj
+      ((boundedConstructibleLowerStar ℓ ι).obj ((boundedConstructibleLowerStar ℓ i).obj
         N)))) := by
   have : IsClosedImmersion (i ≫ ι).left := by rw [Over.comp_left]; infer_instance
   exact Functor.map_isZero _ ((isZero_specialization_obj_lowerStar_obj k' y _ hd N).of_iso
-    ((specialization k' y).mapIso ((boundedConstructibleLowerStarComp _ ℓ i ι).app N)))
+    ((specialization k' y).mapIso ((boundedConstructibleLowerStarComp ℓ i ι).app N)))
 
 end Vanishing
 
@@ -188,7 +188,7 @@ theorem isIso_ΨF_map_componentCounit
     (hy : (F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k)) ∈
       Set.range j.left.base) :
     IsIso ((hc.deformationTraceSpecialization k' νc νX F).ΨF.map (componentCounit (ℓ := ℓ) j)) := by
-  change IsIso ((boundedConstructibleLowerStar _ ℓ F.ι ⋙ specialization (ℓ := ℓ) k' y ⋙
+  change IsIso ((boundedConstructibleLowerStar ℓ F.ι ⋙ specialization (ℓ := ℓ) k' y ⋙
     boundedConstructibleUpperStar _ ℓ (hc.specialFixedLocus k').ι).map _)
   refine isIso_map_of_isIso_upperStar_map _ j (overClosedComplement j)
     (isCompl_range_overClosedComplement j) (fun N ↦ ?_) _
