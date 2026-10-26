@@ -73,7 +73,7 @@ noncomputable def exceptionalKunnethAdjointNatTrans :
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y))) ⋙
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleLowerShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) ⟶ 𝟭 _ where
   app M := exceptionalKunnethAdjoint ℓ (Y := Y) M
   naturality _ _ φ := by
@@ -83,12 +83,12 @@ noncomputable def exceptionalKunnethAdjointNatTrans :
 
 instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f) K).app B) :=
   isIso_boundedConstructibleExceptionalProjectionMorphism ℓ f K B
 
 instance (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f) K) :=
   NatIso.isIso_of_isIso_app _
 
@@ -97,23 +97,23 @@ variable (X Y) in
 map factors: compact-support base change, the counit of `Ra_Y! ⊣ Ra_Y^!` and the unit
 isomorphism of `La_X^*`. -/
 noncomputable def exceptionalKunnethCounit :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
           (dualizingComplex' ℓ Y)) ⟶ 𝟙_ _ :=
   (prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ≫
     (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
 lemma exceptionalKunnethAdjointNatTrans_eq :
     exceptionalKunnethAdjointNatTrans ℓ X Y =
       Functor.whiskerRight (Functor.whiskerLeft
           (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X))
-          (boundedConstructibleBraidingNatTrans₁ _
+          (boundedConstructibleBraidingNatTrans₁
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
               (dualizingComplex' ℓ Y))))
-          (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)) ≫
-        inv (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+          (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)) ≫
+        inv (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
           (compactificationOverField (prod.fst : X ⨯ Y ⟶ X))
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y))) ≫
@@ -130,7 +130,7 @@ lemma exceptionalKunnethAdjointNatTrans_eq :
 instance commShift_exceptionalKunnethAdjointNatTrans :
     NatTrans.CommShift (exceptionalKunnethAdjointNatTrans ℓ X Y) ℤ := by
   have := NatTrans.CommShift.of_isIso
-    (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField (prod.fst : X ⨯ Y ⟶ X))
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
         (dualizingComplex' ℓ Y))) ℤ
@@ -147,7 +147,7 @@ noncomputable def exceptionalKunnethMapNatTrans :
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
             (dualizingComplex' ℓ Y)) ⟶
-      𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) where
   app M := exceptionalKunnethMap ℓ (Y := Y) M
   naturality _ _ φ := by
@@ -157,7 +157,7 @@ noncomputable def exceptionalKunnethMapNatTrans :
 instance commShift_exceptionalKunnethMapNatTrans :
     NatTrans.CommShift (exceptionalKunnethMapNatTrans ℓ X Y) ℤ :=
   NatTrans.CommShift.of_homEquiv
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X))
     (exceptionalKunnethAdjointNatTrans ℓ X Y) _ (fun _ ↦ rfl)
 
 
@@ -172,7 +172,7 @@ monoidal structure of `Lp_Y^*` followed by the evaluation `N ⊗ D_Y N ⟶ ω_Y`
 noncomputable def kunnethVerdierEvaluation :
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N ⊗
         (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (verdierDual ℓ (toPoint Y) N) ⟶
+          (verdierDual ℓ N) ⟶
       (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y) :=
   Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) _ _ ≫
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
@@ -186,9 +186,9 @@ noncomputable def kunnethVerdierPairingNatTrans :
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-            (verdierDual ℓ (toPoint Y) N))) ⋙
+            (verdierDual ℓ N))) ⋙
       (curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) ⟶
-      𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X) where
   app M := kunnethVerdierPairing ℓ M N
   naturality _ _ φ := by
@@ -203,7 +203,7 @@ Künneth–Verdier pairing: associators and the braiding of `Lp_Y^* N` past `Q`,
 noncomputable def kunnethVerdierRearrangement :
     (curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (verdierDual ℓ (toPoint Y) N)) ⋙
+          (verdierDual ℓ N)) ⋙
       (curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) ⟶
       (curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
@@ -211,12 +211,12 @@ noncomputable def kunnethVerdierRearrangement :
   inv (associatorNatTrans₂ _
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-        (verdierDual ℓ (toPoint Y) N))) ≫
-    Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂ _
+        (verdierDual ℓ N))) ≫
+    Functor.whiskerRight (boundedConstructibleBraidingNatTrans₂
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N))
       ((curriedTensor _).flip.obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (verdierDual ℓ (toPoint Y) N))) ≫
+          (verdierDual ℓ N))) ≫
     associatorNatTrans₁ _ _ _ ≫
     (curriedTensor _).flip.map (kunnethVerdierEvaluation ℓ (X := X) N)
 
@@ -225,7 +225,7 @@ instance commShift_kunnethVerdierRearrangement :
   have := NatTrans.CommShift.of_isIso (associatorNatTrans₂ _
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-      (verdierDual ℓ (toPoint Y) N))) ℤ
+      (verdierDual ℓ N))) ℤ
   dsimp only [kunnethVerdierRearrangement]
   infer_instance
 
@@ -257,8 +257,8 @@ noncomputable def kunnethVerdierNatTrans :
     boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-            (verdierDual ℓ (toPoint Y) N)) ⟶
-      (𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+            (verdierDual ℓ N)) ⟶
+      (𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)) ⋙
         ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N) where
   app M := kunnethVerdierMap ℓ M N
@@ -277,13 +277,13 @@ instance isTriangulated_isoLocus_kunnethVerdierNatTrans :
     (kunnethVerdierNatTrans ℓ X N).isoLocus.IsTriangulated := by
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.fst : X ⨯ Y ⟶ X)).IsTriangulated := inferInstance
-  have : (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have : (boundedConstructibleUpperShriek ℓ
       (prod.fst : X ⨯ Y ⟶ X)).IsTriangulated := inferInstance
   have : (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X) ⋙
         (curriedTensor _).flip.obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-            (verdierDual ℓ (toPoint Y) N))).IsTriangulated := inferInstance
-  have : ((𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+            (verdierDual ℓ N))).IsTriangulated := inferInstance
+  have : ((𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)) ⋙
         ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).IsTriangulated :=
     inferInstance

@@ -44,7 +44,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -120,7 +120,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper_eq
     (hw : SepFinType.homMk g' ≫ 𝟙 (SepFinType.mk X) = 𝟙 (SepFinType.mk X') ≫ SepFinType.homMk g')
     [IsIso ((𝔽).baseChange (SepFinType.homMk g') (𝟙 (SepFinType.mk X')) (𝟙 (SepFinType.mk X))
       (SepFinType.homMk g') hw).natTrans] :
-    boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
         (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
         (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
         (isPullback_ofIsProper_overG sq) =
@@ -141,22 +141,22 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper_eq
 is the base change `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*`, through `Rf_!^c ≅ Rf_*`. -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
     (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
         (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
         (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
         (isPullback_ofIsProper_overG sq) ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
-        (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f').hom =
-    Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f).hom
+        (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ f').hom =
+    Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ f).hom
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
-      boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq := by
+      boundedConstructibleBaseChange ℓ sq.toCommSq := by
   have hw : SepFinType.homMk g' ≫ 𝟙 (SepFinType.mk X) =
       𝟙 (SepFinType.mk X') ≫ SepFinType.homMk g' := by
     rw [Category.comp_id, Category.id_comp]
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g') (𝟙 (SepFinType.mk X'))
       (𝟙 (SepFinType.mk X)) (SepFinType.homMk g')
       hw).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_id_snd (f := g') : IsPullback g' (𝟙 X') (𝟙 X) g')
   have key := (𝔽).shriekBaseChange_id_left (SepFinType.homMk f) (SepFinType.homMk f')
     (SepFinType.homMk g') (SepFinType.homMk g)

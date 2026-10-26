@@ -146,7 +146,7 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingO
     fun _ _ hK hL ↦ isIso_projectionMap_of_localizingBoundedConstructible 𝐎 p.left
       (localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingObj ℓ E p).1
       (localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingObj ℓ E p).2
-      (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐎 ℓ p L hL)
+      (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐎 ℓ p ⟨L, hL⟩)
       (fun _ _ hK hL ↦ boundedConstructible_tensor_padicIntegersRingObj ℓ E hK hL)
       (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (X' := X) (Y' := Y) ℓ E
         p).2.2 hK hL⟩

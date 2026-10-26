@@ -106,7 +106,7 @@ theorem exists_reduction_stalk_integralSupportedRestriction [IsAlgClosed k]
           (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n)) (point k).left).obj
           ((etaleReduction ℓ E.1 n (point k)).obj
             ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ z).obj
-              ((boundedConstructibleUpperShriek _ ℓ F.d).obj
+              ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 F.d).obj
                 ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
                   (diag X)).obj
                   ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
@@ -119,7 +119,7 @@ theorem exists_reduction_stalk_integralSupportedRestriction [IsAlgClosed k]
           ((etaleReduction ℓ E.1 n (point k)).obj
             ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ z).obj
               ((boundedConstructibleUpperStar _ ℓ F.ι).obj
-                ((boundedConstructibleUpperShriek (Profinite.padicIntegersRingObj ℓ E.1) ℓ
+                ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1
                   (ofGraph K (frobeniusIterate Φ m) v).support).obj
                   ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
                       (prod.fst : X ⨯ X ⟶ X)).obj M ⊗

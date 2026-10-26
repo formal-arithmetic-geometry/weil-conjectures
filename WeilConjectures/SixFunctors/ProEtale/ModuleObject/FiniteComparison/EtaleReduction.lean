@@ -9,11 +9,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 
 /-!
 
@@ -90,13 +93,55 @@ variable {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z
 /-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
 `det-prop-scalar-six-pullback`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
 étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with pullback**:
-`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`. -/
+`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`.
+
+The reduction commutes with pullback on the condensed side
+(`boundedConstructibleUpperStarIntegersModPowReductionIso`), the comparison of the two
+finite-coefficient models commutes with pullback
+(`leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso`), and `Rν_*` commutes with
+pullback on complexes of étale origin (`isIso_rightDerivedComparisonBaseChange_app`), which the
+reductions of bounded constructible complexes are (`isEtaleOrigin_of_isConstructible`). -/
 theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
     Nonempty (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Z ≅
       etaleReduction ℓ E n Y ⋙
-        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left)) :=
-  sorry
+        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left)) := by
+  let T := PadicAlgCl.integersModPow ℓ E n
+  let A := ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)
+  let U := boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f
+  let UA := boundedConstructibleUpperStar (Profinite.integersModPowRingObj ℓ E n) ℓ f
+  let RY := boundedConstructibleIntegersModPowReduction Y.left ℓ E n
+  let RZ := boundedConstructibleIntegersModPowReduction Z.left ℓ E n
+  let ιY := (boundedConstructible (condensedRingObj (Profinite.integersModPowRingObj ℓ E n)
+    Y.left)).ι
+  let ιZ := (boundedConstructible (condensedRingObj (Profinite.integersModPowRingObj ℓ E n)
+    Z.left)).ι
+  let ΦY := (finiteCoefficientDerivedEquivalence Y.left T).functor
+  let ΦZ := (finiteCoefficientDerivedEquivalence Z.left T).functor
+  let νY := R(ν_*(Y.left)[A])
+  let νZ := R(ν_*(Z.left)[A])
+  let LMod := L((f.left)^*⟦Profinite.integersModPowRingObj ℓ E n⟧)
+  let LMC := L(ProEtale.upperStar A f.left)
+  let Let := L(Etale.upperStar A f.left)
+  -- the reduction, read on pro-étale sheaves of `𝒪_E ⧸ ℓⁿ`-modules
+  let P := RY ⋙ ιY ⋙ ΦY
+  have hP (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
+      DerivedCategory.plusEtaleOrigin A Y.left (P.obj K) :=
+    (isEtaleOrigin_of_isConstructible T (RY.obj K).property).plusEtaleOrigin
+  have : IsIso (Functor.whiskerLeft P (rightDerivedComparisonBaseChange A f.left)) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact fun K ↦ isIso_rightDerivedComparisonBaseChange_app A f.left _ (hP K)
+  let e₁ : (U ⋙ RZ) ⋙ ιZ ⋙ ΦZ ⋙ νZ ≅ (RY ⋙ UA) ⋙ ιZ ⋙ ΦZ ⋙ νZ :=
+    Functor.isoWhiskerRight (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f) _
+  let e₂ : RY ⋙ (UA ⋙ ιZ) ⋙ ΦZ ⋙ νZ ≅ RY ⋙ (ιY ⋙ LMod) ⋙ ΦZ ⋙ νZ :=
+    Functor.isoWhiskerLeft RY
+      (Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility _ ℓ f) _)
+  let e₃ : RY ⋙ ιY ⋙ (LMod ⋙ ΦZ) ⋙ νZ ≅ RY ⋙ ιY ⋙ (ΦY ⋙ LMC) ⋙ νZ :=
+    Functor.isoWhiskerLeft RY (Functor.isoWhiskerLeft ιY (Functor.isoWhiskerRight
+      (leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso f.left T) _))
+  let e₄ : P ⋙ LMC ⋙ νZ ≅ P ⋙ νY ⋙ Let :=
+    (asIso (Functor.whiskerLeft P (rightDerivedComparisonBaseChange A f.left))).symm
+  exact ⟨e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄⟩
 
 /-- Reduction modulo `ℓⁿ` commutes with pullback (`nonempty_etaleReductionUpperStarIso`). -/
 noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
@@ -119,11 +164,11 @@ only proper `f`, and it only asserts that some isomorphism `γ` with invertible 
 without identifying `γ` with the canonical `γ^!` of the blueprint (nor `β` with its canonical
 comparison). -/
 theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsProper f.left] :
-    ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+    ∃ γ : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,
-      IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+      IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
         (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv)) :=
   sorry
 

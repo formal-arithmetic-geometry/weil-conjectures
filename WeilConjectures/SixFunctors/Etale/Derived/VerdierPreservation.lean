@@ -114,10 +114,10 @@ theorem constructibleTorAmplitudeIn_verdierDual_rightDerivedLowerShriek_of_smoot
     (hPt : torAmplitudeIn (ModuleCat.{u + 1} Λ) S a b P)
     (hD : constructibleFiniteTor (ModuleCat.{u + 1} Λ) S D) [ExactPairing D P] :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+        ((verdierDual Λ aX).obj
           (op ((R(s)_![ModuleCat.{u + 1} Λ]).obj P))) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * r) (-a)
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+        ((verdierDual Λ aX).obj
           (op ((R(s)_![ModuleCat.{u + 1} Λ]).obj P))) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ X := .of_hom aX
@@ -142,7 +142,7 @@ theorem constructibleTorAmplitudeIn_verdierDual_rightDerivedLowerShriek_of_smoot
   obtain ⟨N, hN0, hNΛ, hNX⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := X)
   have : NeZero N := ⟨hN0.ne'⟩
   have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ
-    ((verdierDual (ModuleCat.{u + 1} Λ) (s ≫ aX)).obj (op P))
+    ((verdierDual Λ (s ≫ aX)).obj (op P))
   have h₁ := constructibleFiniteTor_rightDerivedLowerStar Λ (s ≫ aX) aX s rfl
     ⟨hSbc, _, _, hSt⟩
   have h₂ := torAmplitudeIn_rightDerivedLowerStar _ (s ≫ aX) aX s rfl r hr _ _ N hN hNX hSbc hSt
@@ -339,9 +339,9 @@ theorem constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField {X
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
+        ((verdierDual Λ aX).obj (op K)) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * d) (-a)
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) := by
+        ((verdierDual Λ aX).obj (op K)) := by
   -- `K ≅ Rr_* r^* K` for the reduced closed subscheme `r : X_red ⟶ X`
   let r := (⊥ : X.Opens).closedComplement
   have : IsEmpty ((⊥ : X.Opens) : Scheme.{u}) := ⟨fun ⟨_, hx⟩ ↦ hx⟩

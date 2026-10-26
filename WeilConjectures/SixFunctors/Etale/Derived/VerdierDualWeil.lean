@@ -120,8 +120,8 @@ the mate, along `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, of the inverse of the com
 change isomorphism `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
 noncomputable def upperShriekBaseChangeMap (sq : IsPullback g' f' f g) :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ] :=
+    R(f)^![Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
+      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![Λ] :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   Adjunction.rightAdjointExchange (rightDerivedUpperShriekAdjunction _ f)
     (rightDerivedUpperShriekAdjunction _ f') (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq))
@@ -143,9 +143,9 @@ Lg_X^* Rf^! K ──exceptional base change──▶ Rf^! Lg_Y^* K ──Rf^! φ
 -/
 noncomputable def upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
-    (L((gX)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ⟶
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K :=
-  (upperShriekBaseChangeMap Λ sq).app K ≫ (R(f)^![ModuleCat.{u + 1} Λ]).map φ
+    (L((gX)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![Λ]).obj K) ⟶
+      (R(f)^![Λ]).obj K :=
+  (upperShriekBaseChangeMap Λ sq).app K ≫ (R(f)^![Λ]).map φ
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **the exceptional counit is Weil
 equivariant**. For a Weil datum `φ` on `K`, the counit `Rf_! Rf^! K ⟶ K` is a morphism of Weil
@@ -154,7 +154,7 @@ objects from the compact-support transport of the exceptional datum on `Rf^! K`
 theorem isWeilMorphism_counit_upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     IsWeilMorphism gY (lowerShriekWeilDatum sq (upperShriekMateWeilDatum sq φ)) φ
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) :=
+      ((rightDerivedUpperShriekAdjunction Λ f).counit.app K) :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   Adjunction.isWeilEquivariant_counit (rightDerivedUpperShriekAdjunction _ f)
     (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)) φ
@@ -165,7 +165,7 @@ objects from `φ` to the exceptional datum of the compact-support transport of `
 theorem isWeilMorphism_unit_upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
     {M : DerivedCategoryModule Λ X} (φ : (L((gX)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
     IsWeilMorphism gX φ (upperShriekMateWeilDatum sq (lowerShriekWeilDatum sq φ))
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).unit.app M) :=
+      ((rightDerivedUpperShriekAdjunction Λ f).unit.app M) :=
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   Adjunction.isWeilEquivariant_unit (rightDerivedUpperShriekAdjunction _ f)
     (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)) φ
@@ -183,8 +183,8 @@ variable {Λ} in
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`) of the canonical datum
 `Lh^* Λ_S ≅ Λ_S`. -/
 noncomputable def dualizingComplexWeilDatum {g : X ⟶ X} (sq : IsPullback g a a h) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) a) ⟶
-      dualizingComplex (ModuleCat.{u + 1} Λ) a :=
+    (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ⟶
+      dualizingComplex Λ a :=
   upperShriekMateWeilDatum sq (leftDerivedUpperStarUnitIso _ h).hom
 
 end Duality
@@ -194,7 +194,8 @@ section DualWeilDatum
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-  {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+  {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
   {g : X ⟶ X} [(g)^*[A].PreservesFlat]
 
 attribute [local instance] leftDerivedUpperStarMonoidal
@@ -211,24 +212,27 @@ which for an automorphism `g` is `Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ⟶ RHom
 (`CategoryTheory.MonoidalClosed.dualWeilDatum`). Only `φ` and its inverse enter; no integral
 lattice is used.
 
-The statements are made for a general coefficient category `A`, in which the monoidal structure
-of `D(X_ét)` and of `Lg^*` are those of the generic constructions. -/
-noncomputable def verdierDualWeilDatum {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (φ : (L((g)^*[A])).obj K ≅ K)
-    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a) :
-    (L((g)^*[A])).obj ((verdierDual A a).obj (op K)) ⟶ (verdierDual A a).obj (op K) :=
-  MonoidalClosed.dualWeilDatum L((g)^*[A]) φ φω
+The statements are made for a finite coefficient ring `Λ`; the monoidal structures of `D(X_ét)`
+and of `Lg^*` are those of the generic constructions. -/
+noncomputable def verdierDualWeilDatum {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ))}
+    (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
+    (φω : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ⟶ dualizingComplex Λ a) :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ a).obj (op K)) ⟶ (verdierDual Λ a).obj (op
+        K) :=
+  MonoidalClosed.dualWeilDatum L((g)^*[ModuleCat.{u + 1} Λ]) φ φω
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **evaluation is Weil equivariant**. For a
 strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X`, the evaluation
 `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is equivariant for the tensor product of `φ` with the dual datum
 (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) and `φ_ω`. -/
 theorem isWeilEquivariant_verdierDual_evaluation
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : (L((g)^*[A])).obj K ≅ K)
-    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a) :
-    IsWeilEquivariant L((g)^*[A])
-      (MonoidalClosed.tensorWeilDatum _ φ.hom (verdierDualWeilDatum A a φ φω)) φω
-      ((ihom.ev K).app (dualizingComplex A a)) :=
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ :
+        (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
+    (φω : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ⟶ dualizingComplex Λ a) :
+    IsWeilEquivariant L((g)^*[ModuleCat.{u + 1} Λ])
+      (MonoidalClosed.tensorWeilDatum _ φ.hom (verdierDualWeilDatum Λ a φ φω)) φω
+      ((ihom.ev K).app (dualizingComplex Λ a)) :=
   MonoidalClosed.isWeilEquivariant_ev _ φ φω
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **the transpose of an equivariant pairing is
@@ -236,16 +240,18 @@ equivariant**. For a strict Weil datum `φ` on `K`, a Weil datum `ψ` on `M`, a 
 `ω_X` and a pairing `b : K ⊗ᴸ M ⟶ ω_X` equivariant for `φ ⊗ ψ` and `φ_ω`, the tensor–hom
 transpose `M ⟶ 𝔻_X K` is a morphism of Weil objects to the dual datum. -/
 theorem isWeilEquivariant_verdierDual_curry
-    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : (L((g)^*[A])).obj K ≅ K)
-    (ψ : (L((g)^*[A])).obj M ⟶ M)
-    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a)
-    {b : K ⊗ M ⟶ dualizingComplex A a}
-    (hb : IsWeilEquivariant L((g)^*[A]) (MonoidalClosed.tensorWeilDatum _ φ.hom ψ) φω b) :
-    IsWeilEquivariant L((g)^*[A]) ψ (verdierDualWeilDatum A a φ φω) (MonoidalClosed.curry b) :=
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ :
+        (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
+    (ψ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M)
+    (φω : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ⟶ dualizingComplex Λ a)
+    {b : K ⊗ M ⟶ dualizingComplex Λ a}
+    (hb : IsWeilEquivariant L((g)^*[ModuleCat.{u + 1} Λ]) (MonoidalClosed.tensorWeilDatum _ φ.hom ψ)
+        φω b) :
+    IsWeilEquivariant L((g)^*[ModuleCat.{u + 1} Λ]) ψ (verdierDualWeilDatum Λ a φ φω)
+        (MonoidalClosed.curry b) :=
   MonoidalClosed.isWeilEquivariant_curry _ φ ψ φω hb
 
-
-attribute [local instance] derivedBraidedCategory in
+attribute [local instance] _root_.DerivedCategory.braidedCategory' in
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **biduality is Weil equivariant**. For a
 strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X` such that the dual Weil datum on
 `𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) is invertible (for instance an
@@ -253,14 +259,17 @@ automorphism `g` and an invertible `φ_ω`), the double-dual map `δ_K : K ⟶ �
 morphism of Weil objects from `φ` to the dual of the dual datum. This uses that `Lg^*` is
 braided (`AlgebraicGeometry.Etale.leftDerivedUpperStar_μ_map_braiding_hom`). -/
 theorem isWeilEquivariant_verdierDualDoubleDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : (L((g)^*[A])).obj K ≅ K)
-    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a)
-    [IsIso (verdierDualWeilDatum A a φ φω)] :
-    IsWeilEquivariant L((g)^*[A]) φ.hom
-      (verdierDualWeilDatum A a (asIso (verdierDualWeilDatum A a φ φω)) φω)
-      ((verdierDualDoubleDual A a).app K) :=
-  letI : (L((g)^*[A])).Braided := { braided := leftDerivedUpperStar_μ_map_braiding_hom A g }
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ :
+        (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
+    (φω : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ⟶ dualizingComplex Λ a)
+    [IsIso (verdierDualWeilDatum Λ a φ φω)] :
+    IsWeilEquivariant L((g)^*[ModuleCat.{u + 1} Λ]) φ.hom
+      (verdierDualWeilDatum Λ a (asIso (verdierDualWeilDatum Λ a φ φω)) φω)
+      ((verdierDualDoubleDual Λ a).app K) :=
+  letI : (L((g)^*[ModuleCat.{u + 1} Λ])).Braided :=
+    { braided := leftDerivedUpperStar_μ_map_braiding_hom (ModuleCat.{u + 1} Λ) g }
   MonoidalClosed.isWeilEquivariant_toIhomIhom _ φ φω _ rfl
+
 end DualWeilDatum
 
 section Dualizing
@@ -275,7 +284,7 @@ variable {Λ} in
 `g ≫ a = a ≫ h`: `AlgebraicGeometry.Etale.verdierDualWeilDatum` at `φ_ω` the dualizing datum. -/
 noncomputable def verdierDualWeilDatumOfIsPullback {g : X ⟶ X} (sq : IsPullback g a a h)
     {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K) :=
-  verdierDualWeilDatum (ModuleCat.{u + 1} Λ) a φ (dualizingComplexWeilDatum sq)
+  verdierDualWeilDatum Λ a φ (dualizingComplexWeilDatum sq)
 
 end Dualizing
 

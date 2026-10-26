@@ -81,15 +81,15 @@ finite coefficient ring by `AlgebraicGeometry.Etale.isIso_projectionMap_of_finit
 counit of the adjunction. -/
 noncomputable def rightDerivedUpperShriekDerivedTensorMap
     (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)).obj
+    ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![Λ]).obj K)).obj
         ((L((i)^*[ModuleCat.{u + 1} Λ])).obj M) ⟶
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj M) :=
+      (R(i)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj M) :=
   haveI := isIso_projectionMap_of_finite Λ i
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).homEquiv _ _
+  (rightDerivedUpperShriekAdjunction Λ i).homEquiv _ _
     (inv (((projectionMap (ModuleCat.{u + 1} Λ) i).app
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)).app M) ≫
+        ((R(i)^![Λ]).obj K)).app M) ≫
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).map
-        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K)).app M)
+        ((rightDerivedUpperShriekAdjunction Λ i).counit.app K)).app M)
 
 end Comparison
 
@@ -131,10 +131,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Z : Scheme.{u}} (i : Z
 theorem supportedClassMap_comp_map_rightDerivedUpperShriek
     {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) (f : L ⟶ L') :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) (f : L ⟶ L') :
     supportedClassMap Λ i (γ ≫ (R(i)_![ModuleCat.{u + 1} Λ]).map
-      ((R(i)^![ModuleCat.{u + 1} Λ]).map f)) =
-      supportedClassMap Λ i γ ≫ (R(i)^![ModuleCat.{u + 1} Λ]).map f := by
+      ((R(i)^![Λ]).map f)) =
+      supportedClassMap Λ i γ ≫ (R(i)^![Λ]).map f := by
   rw [supportedClassMap_eq_supportedTranspose, supportedClassMap_eq_supportedTranspose,
     supportedTranspose_comp]
 
@@ -161,13 +161,13 @@ variable [Finite Λ] [HasCompactification i]
 map `ρ : K ⟶ K ⊗ᴸ (Λ/J)_X`. -/
 lemma reductionModIdealUnit_app_comp_rightDerivedUpperShriekDerivedTensorMap
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (reductionModIdealUnit Λ Z J).app ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) ≫
+    (reductionModIdealUnit Λ Z J).app ((R(i)^![Λ]).obj K) ≫
       ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).map
         (leftDerivedUpperStarSingleConstantSheafIso _ i (ModuleCat.of Λ (Λ ⧸ J))).inv ≫
       rightDerivedUpperShriekDerivedTensorMap Λ i _ _ =
-    (R(i)^![ModuleCat.{u + 1} Λ]).map ((reductionModIdealUnit Λ X J).app K) :=
+    (R(i)^![Λ]).map ((reductionModIdealUnit Λ X J).app K) :=
   have := isIso_projectionMap_of_finite Λ i
-  rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft (ModuleCat.{u + 1} Λ) i _ _ _
+  rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft Λ i _ _ _
     (leftDerivedUpperStar_map_constantComplexToQuotient Λ i J) K
 
 end ReductionComparison
@@ -187,7 +187,7 @@ comparison `Ri^! K ⊗ᴸ Li^* M ⟶ Ri^! (K ⊗ᴸ M)`
 noncomputable def fundamentalClassMapModIdeal (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (J : Ideal Λ) :
     (reductionModIdeal Λ Z J).obj (constantComplex Λ Z) ⟶
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj
+      (R(i)^![Λ]).obj
         ((reductionModIdeal Λ X J).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
   (reductionModIdeal Λ Z J).map (fundamentalClassMap Λ c i aX hZ) ≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).map
@@ -207,9 +207,9 @@ reduce compatibly. -/
 theorem supportedClassMap_fundamentalClass_reductionModIdealUnit (aX : X ⟶ Spec (.of k))
     [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (J : Ideal Λ) :
     supportedClassMap Λ i (fundamentalClass Λ c i aX hZ ≫
-      (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![ModuleCat.{u + 1} Λ]).map
+      (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![Λ]).map
         ((reductionModIdealUnit Λ X J).app ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)))) =
-      fundamentalClassMap Λ c i aX hZ ≫ (R(i)^![ModuleCat.{u + 1} Λ]).map
+      fundamentalClassMap Λ c i aX hZ ≫ (R(i)^![Λ]).map
         ((reductionModIdealUnit Λ X J).app ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
   supportedClassMap_comp_map_rightDerivedUpperShriek Λ i _ _
 
@@ -233,7 +233,7 @@ theorem reductionModIdealUnit_app_comp_fundamentalClassMapModIdeal (aX : X ⟶ S
     [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (J : Ideal Λ) :
     (reductionModIdealUnit Λ Z J).app (constantComplex Λ Z) ≫
         fundamentalClassMapModIdeal Λ c i aX hZ J =
-      fundamentalClassMap Λ c i aX hZ ≫ (R(i)^![ModuleCat.{u + 1} Λ]).map
+      fundamentalClassMap Λ c i aX hZ ≫ (R(i)^![Λ]).map
         ((reductionModIdealUnit Λ X J).app ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) := by
   rw [fundamentalClassMapModIdeal, ← Category.assoc,
     ← (reductionModIdealUnit Λ Z J).naturality, Category.assoc]

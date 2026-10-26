@@ -196,12 +196,12 @@ lemma isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_congr {P Q X₁ X₂ Y₁ 
     (w₁ : q ≫ π₁ = p₁ ≫ f₁) (w₂ : q ≫ π₂ = p₂ ≫ f₂) (w₁' : q' ≫ π₁ = p₁' ≫ f₁)
     (w₂' : q' ≫ π₂ = p₂' ≫ f₂) (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         q).homEquiv _ _
       (Functor.OplaxMonoidal.δ
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q) _ _ ≫
         (prodUpperStarCounit ℓ w₁ B₁ ⊗ₘ prodUpperStarCounit ℓ w₂ B₂))) ↔
-      IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         q').homEquiv _ _
       (Functor.OplaxMonoidal.δ
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q') _ _ ≫
@@ -223,7 +223,7 @@ second projection, is an isomorphism (generic base change). -/
 lemma isIso_homEquiv_prodUpperStarCounit_of_eq_snd (j : U ⟶ Y) {p' : X ⨯ Y ⟶ Y}
     (hp : p' = prod.snd) (w : prod.map (𝟙 X) j ≫ p' = prod.snd ≫ j)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (prod.map (𝟙 X) j)).homEquiv _ _ (prodUpperStarCounit ℓ w B)) := by
   subst hp
   rw [homEquiv_prodUpperStarCounit]
@@ -241,17 +241,17 @@ proper projection morphisms. -/
 lemma isIso_leftProjectionMorphism_prodMap_lowerStar (g : Z ⟶ X) [IsProper g.left] (j : U ⟶ Y)
     (N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (h : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
-      ℓ (prod.map (𝟙 Z) j)).leftProjectionMorphism
+    (h : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (prod.map (𝟙 Z) j)).leftProjectionMorphism
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.fst : Z ⨯ Y ⟶ Z)).obj N)
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : Z ⨯ U ⟶ U)).obj B))) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
-      ℓ (prod.map (𝟙 X) j)).leftProjectionMorphism
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (prod.map (𝟙 X) j)).leftProjectionMorphism
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.fst : X ⨯ Y ⟶ X)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N))
+          ((boundedConstructibleLowerStar ℓ g).obj N))
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ U ⟶ U)).obj B)) := by
   have := isProper_prodMap_id (W := U) g
@@ -277,52 +277,52 @@ lemma isIso_leftProjectionMorphism_prodMap_lowerStar (g : Z ⟶ X) [IsProper g.l
   have sqY := IsPullback.of_prod_fst_with_id g Y
   -- the Künneth map of `g × j` along `(𝟙 × j) ≫ (g × 𝟙)` is an isomorphism
   have hZ : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 Z) j ≫ prod.map g (𝟙 Y))).homEquiv _ _
+      ℓ (prod.map (𝟙 Z) j ≫ prod.map g (𝟙 Y))).homEquiv _ _
       (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.map (𝟙 Z) j ≫ prod.map g (𝟙 Y))) _ _ ≫
         (prodUpperStarCounit ℓ w₁' N ⊗ₘ prodUpperStarCounit ℓ w₂' B))) := by
     have := isIso_homEquiv_prodUpperStarCounit ℓ sqY N
     have : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 Z) j)).homEquiv _ _
+        ℓ (prod.map (𝟙 Z) j)).homEquiv _ _
         ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.map (𝟙 Z) j) (prod.map g (𝟙 Y))).inv.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ prod.snd).obj
-            ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B)) ≫
+            ((boundedConstructibleLowerStar ℓ j).obj B)) ≫
           prodUpperStarCounit ℓ w₂' B)) := by
       rw [upperStarComp_inv_app_comp_prodUpperStarCounit_right ℓ w₂' w₂'' B,
         Adjunction.homEquiv_naturality_left]
       have := isIso_homEquiv_prodUpperStarCounit_of_eq_snd ℓ (X := Z) j hsnd w₂'' B
       infer_instance
     exact Adjunction.isIso_homEquiv_δ_tensorHom_of_isIso_right
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map (𝟙 Z) j))
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map g (𝟙 Y))) _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 Z) j))
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map g (𝟙 Y))) _
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ _ _)
-      (boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ _ _) _ _ _
+      (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ _ _) _ _ _
       ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.map (𝟙 Z) j) prod.fst).inv.app N)
       (upperStarComp_inv_app_comp_prodUpperStarCounit_left ℓ w₁' sqY.w.symm N)
   have hX := (isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_congr ℓ hq hp₁ hp₂ w₁ w₂ w₁' w₂'
     N B).mpr hZ
   have : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map g (𝟙 U))).homEquiv _ _
+      ℓ (prod.map g (𝟙 U))).homEquiv _ _
       ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.map g (𝟙 U)) (prod.map (𝟙 X) j)).inv.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ prod.fst).obj
-            ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N)) ≫
+            ((boundedConstructibleLowerStar ℓ g).obj N)) ≫
         prodUpperStarCounit ℓ w₁ N)) := by
     rw [upperStarComp_inv_app_comp_prodUpperStarCounit_right ℓ w₁ sqU.w.symm N,
       Adjunction.homEquiv_naturality_left]
     have := isIso_homEquiv_prodUpperStarCounit ℓ sqU N
     infer_instance
   have : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).homEquiv _ _
+      ℓ (prod.map (𝟙 X) j)).homEquiv _ _
       (prodUpperStarCounit ℓ (prod.map_snd (𝟙 X) j) B)) := by
     exact isIso_homEquiv_prodUpperStarCounit_of_eq_snd ℓ j rfl _ B
   exact (Adjunction.isIso_homEquiv_δ_tensorHom_iff_of_isIso
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map g (𝟙 U)))
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map (𝟙 X) j)) _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map g (𝟙 U)))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 X) j)) _
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ _ _)
-    (boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ _ _) _ _
+    (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ _ _) _ _
     (prodUpperStarCounit ℓ (prod.map_snd (𝟙 X) j) B)
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.map g (𝟙 U)) prod.snd).inv.app B)
@@ -339,19 +339,15 @@ theorem isIso_openKunnethMap_lowerStar_of_isProper (g : Z ⟶ X) [IsProper g.lef
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (h : IsIso (openKunnethMap ℓ (X := Z) j N B)) :
     IsIso (openKunnethMap ℓ (X := X) j
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) B) := by
+      ((boundedConstructibleLowerStar ℓ g).obj N) B) := by
   unfold openKunnethMap at h ⊢
   rw [Adjunction.kunnethNatTrans_app] at h ⊢
   refine (Adjunction.isIso_homEquiv_δ_tensorHom_iff_isIso_leftProjectionMorphism _ _
     inferInstance _ ?_).mpr (isIso_leftProjectionMorphism_prodMap_lowerStar ℓ g j N B
       ((Adjunction.isIso_homEquiv_δ_tensorHom_iff_isIso_leftProjectionMorphism _ _
         inferInstance _ ?_).mp h))
-  · unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
-  · unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
+  · exact isIso_homEquiv_openKunnethSecondFactor ℓ j B
+  · exact isIso_homEquiv_openKunnethSecondFactor ℓ j B
 
 /-- **The ordinary Künneth map and closed pushforward in the first factor**: for a closed
 immersion `g : Z ⟶ X`, an open immersion `j : U ⟶ Y`, `N ∈ Dᵇc(Z)⟦ℚ̲̄_ℓ⟧` and
@@ -364,7 +360,7 @@ theorem isIso_openKunnethMap_lowerStar_of_isClosedImmersion {Z : Over (Spec (.of
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (h : IsIso (openKunnethMap ℓ (X := Z) j N B)) :
     IsIso (openKunnethMap ℓ (X := X) j
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) B) :=
+      ((boundedConstructibleLowerStar ℓ g).obj N) B) :=
   isIso_openKunnethMap_lowerStar_of_isProper ℓ g j N B h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -80,7 +80,7 @@ theorem verdierDual_obj {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
 /-- Blueprint `def-trf-dualizing-complex`: the dualizing complex of `a : X ⟶ S` is
 `ω_X = Ra^! Λ_S`. -/
 theorem dualizingComplex_eq {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
-    dualizingComplex (ModuleCat.{u + 1} Λ) a = (R(a)^![ModuleCat.{u + 1} Λ]).obj (𝟙_ _) :=
+    dualizingComplex Λ a = (R(a)^![Λ]).obj (𝟙_ _) :=
   rfl
 
 /-- The internal hom out of the unit is the identity, `RHom(Λ_X, -) ≅ 𝟭`: both are right
@@ -137,12 +137,12 @@ theorem nonempty_iso_rightDerivedUpperShriek_pullbackFst
     (b : Y ⟶ Spec (.of k)) [LocallyOfFiniteType a] [QuasiCompact a]
     [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M ≅
+    Nonempty ((R(pullback.fst a b)^![Λ]).obj M ≅
       externalProduct (ModuleCat.{u + 1} Λ) a b M (dualizingComplex _ b)) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_derivedTensor Λ (𝟙 (Spec (.of k))) a
     (IsPullback.id_vert a) b (IsPullback.of_hasPullback a b).flip (𝟙_ _) M
   obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback a b)
-  exact ⟨(R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).mapIso
+  exact ⟨(R(pullback.fst a b)^![Λ]).mapIso
       (((derivedTensor _ X).mapIso (leftDerivedUpperStarUnitIso _ a)).app _ ≪≫
         derivedTensorLeftUnitor _ _ _ ≪≫ (leftDerivedUpperStarId _ X).app M).symm ≪≫ e ≪≫
     ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [Category.comp_id])) ≪≫ (β.app _).app _⟩
@@ -167,10 +167,10 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
     (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
+        ((verdierDual Λ b).obj (op N)) ≅
       (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) := by
+        ((R(pullback.fst a b)^![Λ]).obj M)) := by
   have hω : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (dualizingComplex _ b) :=
     constructibleFiniteTor_dualizingComplex Λ (𝟙 _) b (constructibleFiniteTor_unit Λ)
   obtain ⟨β⟩ := nonempty_iso_externalHom Λ a b (constructibleFiniteTor_unit Λ (X := X)) hN hM hω
@@ -210,19 +210,19 @@ and `N` in `Dctf(Y, A)`,
 
 on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
 theorem hasKunnethComparisons [HasInvertibleExponent Λ (Spec (.of k))] :
-    HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) where
+    HasKunnethComparisons Λ (Spec (.of k)) where
   kunnethShriek := by
     intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
     exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
       hM₁ hM₂
   exceptional := by
-    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ _ _ _ hN₁ hN₂
+    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hN₁ hN₂
     exact nonempty_iso_externalProduct_rightDerivedUpperShriek Λ b₁ b₂ f₁ f₂ hN₁ hN₂
   externalHom := by
     intro _ _ c₁ c₂ _ _ _ _ _ _ _ _ _ _ hE₁ hE₂ hN₁ hN₂
     exact nonempty_iso_externalHom Λ c₁ c₂ hE₁ hE₂ hN₁ hN₂
   kunnethVerdier := by
-    intro _ _ a b _ _ _ _ _ _ _ _ _ _ hM hN
+    intro _ _ a b _ _ _ _ _ _ _ _ hM hN
     exact nonempty_iso_kunnethVerdier Λ a b hM hN
 
 end Etale

@@ -89,7 +89,7 @@ theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.h
     (hΦ : IsModelFrobenius Φ f₀ p) (K : WeilBoundedConstructible ℓ Φ) (hm : 1 ≤ m)
     [Fintype (FixedPoint Φ m)] [IsFinite (frobeniusIterate Φ m).left]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
         K.carrier)]
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
@@ -120,7 +120,7 @@ theorem WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelative
     [Fintype (FixedPoint Φ m)] [IsFinite (frobeniusIterate Φ m).left]
     [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
         K.carrier)]
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj

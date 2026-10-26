@@ -50,7 +50,7 @@ variable {S : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.h
 followed by the adjoint of the exceptional Künneth map. -/
 lemma classTest_kunnethVerdierMap :
     classTest ℓ M (kunnethVerdierMap ℓ M M) =
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).map
           ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
             (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ
               (prod.snd : S ⨯ S ⟶ S)) _ _) ≫
@@ -63,12 +63,12 @@ lemma classTest_kunnethVerdierMap :
           (prod.snd : S ⨯ S ⟶ S)) _ _) ≫
         (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : S ⨯ S ⟶ S)).map
           ((ihom.ev M).app (dualizingComplex' ℓ S)))) ≫
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : S ⨯ S ⟶ S)).homEquiv
+      ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : S ⨯ S ⟶ S)).homEquiv
         (externalProduct ℓ M (dualizingComplex' ℓ S)) M) (exceptionalKunnethAdjoint ℓ M) := by
     simp only [kunnethVerdierPairing, exceptionalKunnethMap, Category.assoc]
     rfl
   simp only [classTest, kunnethVerdierMap, uncurry_curry]
-  refine (congrArg ((boundedConstructibleUpperShriekAdjunction _ ℓ
+  refine (congrArg ((boundedConstructibleUpperShriekAdjunction ℓ
     (prod.fst : S ⨯ S ⟶ S)).homEquiv _ _).symm h).trans ?_
   exact Adjunction.homEquiv_symm_comp_homEquiv _ _ _
 
@@ -81,20 +81,20 @@ lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOf
     [QuasiCompact A.hom] [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
     [IsSeparated B.hom] (g : A ⟶ B) [IsProper g.left]
     (M W : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ◁ ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app W ≫
+    M ◁ ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app W ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
           ((boundedConstructibleUpperStar _ ℓ g).obj W)) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ g) M
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ g) M
         ((boundedConstructibleUpperStar _ ℓ g).obj W) =
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app (M ⊗ W) ≫
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app (M ⊗ W) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
         ((boundedConstructibleUpperStar _ ℓ g).obj (M ⊗ W)) ≫
-      (boundedConstructibleLowerShriek _ ℓ g).map
+      (boundedConstructibleLowerShriek ℓ g).map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g) M W) :=
   Verdier.leftProjection_unit_app _ _ _ _
     (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
-    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ g A B)
-    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _) M W
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
+    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M W
 
 lemma _root_.CategoryTheory.Functor.map_whiskerLeft_comp_braiding_comp {𝒞 𝒟 : Type*} [Category 𝒞]
     [Category 𝒟] [MonoidalCategory 𝒞] [MonoidalCategory 𝒟] [BraidedCategory 𝒟] (F : 𝒟 ⥤ 𝒞)
@@ -119,39 +119,39 @@ lemma lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj
         ℓ⟧}
     (t : N ⟶ dualizingComplex' ℓ Y) :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
           (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map t) ≫
       exceptionalKunnethAdjoint ℓ M =
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map (β_ _ _).hom ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map (β_ _ _).hom ≫
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).app M) ≫
       (((prodBaseChangeIso ℓ X Y).hom.app N ≫
         (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-          ((boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map t ≫
-            (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _))) ▷ M) ≫
+          ((boundedConstructibleLowerShriek ℓ (toPoint Y)).map t ≫
+            (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _))) ▷ M) ≫
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv ▷ M) ≫
       (λ_ M).hom := by
-  have hpf : (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+  have hpf : (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map t ▷
         (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
           (dualizingComplex' ℓ Y))).app M) =
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj N)).app M) ≫
-      ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+      ((boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map t) ▷ M) := by
     rw [IsIso.eq_inv_comp, ← Category.assoc, IsIso.comp_inv_eq]
-    exact (boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _ _ M).symm
+    exact (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _ _ M).symm
   have hbc := (prodBaseChangeIso ℓ X Y).hom.naturality t
   simp only [Functor.comp_map] at hbc
   unfold exceptionalKunnethAdjoint externalProduct
   refine (Functor.map_whiskerLeft_comp_braiding_comp
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X))
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map t) M
-    (fun V ↦ inv (((boundedConstructibleExceptionalProjection _ ℓ
+    (fun V ↦ inv (((boundedConstructibleExceptionalProjection ℓ
         (prod.fst : X ⨯ Y ⟶ X)).app V).app M))
     hpf _ _).trans ?_
   rw [hbc]
@@ -161,15 +161,15 @@ lemma lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint
 of `Ra_X! ⊣ Ra_X^!` through `Rf_* ≅ Rf_!` and `R(f ≫ a_Y)_! ≅ Ra_Y! Rf_!` (the pasted counit of
 `a_X = f ≫ a_Y`). -/
 lemma lowerShriek_map_lowerStarDualizingComplexTrace_comp_counit (f : X ⟶ Y) [IsProper f.left] :
-    (boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map (lowerStarDualizingComplexTrace ℓ f) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _) =
-    (boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint Y)).map (lowerStarDualizingComplexTrace ℓ f) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _) =
+    (boundedConstructibleLowerShriek ℓ (toPoint Y)).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
           (dualizingComplex' ℓ X)) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (toPoint Y)).inv.app
         (dualizingComplex' ℓ X) ≫
       eqToHom (by rw [comp_toPoint]; rfl) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint X)).counit.app (𝟙_ _) := by
+      (boundedConstructibleUpperShriekAdjunction ℓ (toPoint X)).counit.app (𝟙_ _) := by
   have h : lowerStarDualizingComplexTrace ℓ f =
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app _ ≫
         lowerShriekDualizingComplexTrace ℓ f := rfl
@@ -193,32 +193,32 @@ change in the product square of `Y` and the pasted counit of `a_X = f ≫ a_Y` a
 of the projection formula for `p₁`, base change in the product square of `X` and the counit of
 `a_X`. -/
 theorem lowerShriek_exceptionalKunneth_baseChange :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map (β_ _ _).hom ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).app
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map (β_ _ _).hom ≫
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : Y ⨯ Y ⟶ Y)).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)))).app
-        ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
+          ((boundedConstructibleLowerStar ℓ f).obj (dualizingComplex' ℓ X)))).app
+        ((boundedConstructibleLowerStar ℓ f).obj K)) ≫
       (((prodBaseChangeIso ℓ Y Y).hom.app
-          ((boundedConstructibleLowerStar _ ℓ f).obj (dualizingComplex' ℓ X)) ≫
+          ((boundedConstructibleLowerStar ℓ f).obj (dualizingComplex' ℓ X)) ≫
         (boundedConstructibleUpperStar _ ℓ (toPoint Y)).map
-          ((boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map
+          ((boundedConstructibleLowerShriek ℓ (toPoint Y)).map
               ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
                 (dualizingComplex' ℓ X)) ≫
             (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (toPoint Y)).inv.app
               (dualizingComplex' ℓ X) ≫
             eqToHom (by rw [comp_toPoint]; rfl) ≫
-            (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint X)).counit.app (𝟙_ _))) ▷
-        (boundedConstructibleLowerStar _ ℓ f).obj K) ≫
+            (boundedConstructibleUpperShriekAdjunction ℓ (toPoint X)).counit.app (𝟙_ _))) ▷
+        (boundedConstructibleLowerStar ℓ f).obj K) ≫
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint Y))).inv ▷ _) ≫
       (λ_ _).hom =
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         (prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X)) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
           (externalProduct ℓ K (dualizingComplex' ℓ X))) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
         (externalProduct ℓ K (dualizingComplex' ℓ X)) ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
+      (boundedConstructibleLowerShriek ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
   by
   have : IsProper (prod.map f (𝟙 Y)).left :=
@@ -245,20 +245,20 @@ theorem lowerShriek_exceptionalKunneth_baseChange :
 the square `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`, the adjoint of the exceptional Künneth map of
 `Rf_* K` precomposed with the trace `τ_f` is `Rf_*` of that of `K`. -/
 theorem lowerShriek_map_trace_comp_exceptionalKunnethAdjoint :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-            ((boundedConstructibleLowerStar _ ℓ f).obj K) ◁
+            ((boundedConstructibleLowerStar ℓ f).obj K) ◁
           (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
             (lowerStarDualizingComplexTrace ℓ f)) ≫
-      exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K) =
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+      exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar ℓ f).obj K) =
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         (prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X)) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
           (externalProduct ℓ K (dualizingComplex' ℓ X))) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom.app
         (externalProduct ℓ K (dualizingComplex' ℓ X)) ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
+      (boundedConstructibleLowerShriek ℓ f).map (exceptionalKunnethAdjoint ℓ K) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K :=
   by
   refine (lowerShriek_map_whiskerLeft_comp_exceptionalKunnethAdjoint ℓ _ _).trans ?_
@@ -271,10 +271,10 @@ theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
     (B₁ B₂ B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (e : B₁ ⊗ B₂ ⟶ B) :
     (boundedConstructibleUpperStar _ ℓ (prod.map f f)).map
         (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
-            ((boundedConstructibleLowerStar _ ℓ f).obj B₁)
-            ((boundedConstructibleLowerStar _ ℓ f).obj B₂) ≫
+            ((boundedConstructibleLowerStar ℓ f).obj B₁)
+            ((boundedConstructibleLowerStar ℓ f).obj B₂) ≫
           (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
-            (lowerStarTensorMap ℓ f B₁ B₂ ≫ (boundedConstructibleLowerStar _ ℓ f).map e)) ≫
+            (lowerStarTensorMap ℓ f B₁ B₂ ≫ (boundedConstructibleLowerStar ℓ f).map e)) ≫
       prodUpperStarCounit ℓ (prod.map_snd f f) B =
     Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (prod.map f f)) _ _ ≫
       (prodUpperStarCounit ℓ (prod.map_snd f f) B₁ ⊗ₘ prodUpperStarCounit ℓ (prod.map_snd f f) B₂) ≫
@@ -301,38 +301,38 @@ theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
     rw [reassoc_of% h₁, upperStar_map_comp_eqToHom_congrArg_assoc ℓ _ (prod.map_snd f f) g, h₃]
     simp only [Category.assoc]
   exact Adjunction.map_μ_comp_homEquiv_comp _ _ _ _
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f) _ hnat
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f) _ hnat
     (fun M₁ M₂ ↦ by
       simp only [Category.assoc]
-      exact upperStarComp_square_tensor_δ ℓ _ (prod.map_snd f f) M₁ M₂) _
+      exact upperStarComp_square_tensor_δ ℓ (prod.map_snd f f) M₁ M₂) _
     (fun B ↦ by simp only [prodUpperStarCounit, Category.assoc]) B₁ B₂ B e
 
 /-- The evaluation part of identity (a) (blueprint `lem-trf-trace-source-exchange`, Step 3):
 `Π_f` and `μ_f` are adjoint to the counits of `f`. -/
 theorem evaluation_comp_prodLowerStarExternalProduct :
     (α_ _ _ _).inv ≫ ((β_ ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K))
+          ((boundedConstructibleLowerStar ℓ f).obj K))
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K))).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+          ((boundedConstructibleLowerStar ℓ f).obj K))).hom ▷ _) ≫ (α_ _ _ _).hom ≫
       (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y))
-        ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        ((boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K))) ≫
+        ((boundedConstructibleLowerStar ℓ f).obj K)
+        ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K))) ≫
       (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
-        (lowerStarTensorMap ℓ f K (verdierDual ℓ (toPoint X) K) ≫
-          (boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)))) ≫
+        (lowerStarTensorMap ℓ f K (verdierDual ℓ K) ≫
+          (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)))) ≫
       prodLowerStarExternalProduct ℓ f f K (dualizingComplex' ℓ X) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
         (externalProduct ℓ K (dualizingComplex' ℓ X)) =
     (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-        ((boundedConstructibleLowerStar _ ℓ f).obj K) ◁
-      (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ (toPoint X) K) ≫
+        ((boundedConstructibleLowerStar ℓ f).obj K) ◁
+      (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ K) ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv.app
-          (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ (prod.map f f))
+          (externalProduct ℓ K (verdierDual ℓ K))) ≫
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ (prod.map f f))
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K))
-        (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.map f f)).map
+          ((boundedConstructibleLowerStar ℓ f).obj K))
+        (externalProduct ℓ K (verdierDual ℓ K)) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.map f f)).map
         ((prodUpperStarCounit ℓ (prod.map_snd f f) K ▷ _) ≫
           (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
           (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ
@@ -345,7 +345,7 @@ theorem evaluation_comp_prodLowerStarExternalProduct :
     (fun M W ↦ leftProjection_lowerShriek_unit_app ℓ (prod.map f f) M W) _ _ _ _ _ _ _ _ ?_
   simp only [Functor.Monoidal.μIso_inv]
   exact Functor.OplaxMonoidal.map_evaluation_comp_δ _
-    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ (prod.map f f) A B)
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ (prod.map f f) A B)
     _ _ _ _ _ _ _ _ (upperStar_map_tensorMap_comp_prodUpperStarCounit ℓ f _ _ _ _)
 
 end KernelPushforward

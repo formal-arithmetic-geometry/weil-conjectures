@@ -98,7 +98,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz'
       ((compactificationOverField f).ofIsPullback sq₂.overLeft)]
   simp only [Iso.refl_hom, Functor.whiskerRight_id', Category.id_comp, Iso.symm_hom]
   exact TwoSquare.whiskerLeft_whiskerRight_vComp_conj _ _ _ _ _ _ _
-    (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz _ ℓ _ _ _ _ _
+    (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz ℓ _ _ _ _ _
       hi₂ hp₂ hi₁ hp₁)
 
 /-- **Horizontal pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian
@@ -111,12 +111,12 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
     (K : Dᵇc(X₃.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (sq₁.paste_horiz sq₂)).app K =
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g₁ g₂).hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+          ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g₁).map
           ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app K) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'₂).obj K) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁).map
+        (boundedConstructibleLowerShriek ℓ f₁).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g'₁ g'₂).inv.app
             K) := by
   have h :=
@@ -138,8 +138,8 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ l).map
           ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₂ w₂).hom.app M) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ v₂).obj M) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ w₁).map
+          ((boundedConstructibleLowerShriek ℓ v₂).obj M) ≫
+        (boundedConstructibleLowerShriek ℓ w₁).map
           ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app M) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₁ w₁).inv.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj M) := by
@@ -168,7 +168,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper'
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f').hom =
       Functor.whiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
-        boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq := by
+        boundedConstructibleBaseChange ℓ sq.toCommSq := by
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq
       (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
       (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
@@ -201,7 +201,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj K) =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq).app K := by
+        (boundedConstructibleBaseChange ℓ sq.toCommSq).app K := by
   have h := congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper' ℓ sq) K
   simpa using h
 
@@ -223,6 +223,8 @@ lemma Adjunction.map_unit_app_comp_exchangeRight_app {A B A' B' : Type*} [Catego
   erw [af.left_triangle_components]
   simp
 
+set_option maxHeartbeats 1000000 in
+-- the `erw` steps unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **`Ex_!` is compatible with the units of `Lf^* ⊣ Rf_!`** for proper vertical maps:
 `Lg^*(η_f) ≫ Ex_! = η_{f'} ≫ Rf'_!(θ_sq)` with `θ_sq : Lg^* Lf'^* ≅ Lf^* Lg'^*`. -/
 lemma map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app
@@ -234,14 +236,14 @@ lemma map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M) =
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f').unit.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+      (boundedConstructibleLowerShriek ℓ f').map
         ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
           sq.toCommSq).hom.app M) := by
   have hP := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper ℓ sq
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M)
   have hU := Adjunction.map_unit_app_comp_exchangeRight_app
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f')
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq)
     M
   rw [← boundedConstructibleBaseChange_eq_exchangeRight] at hU

@@ -63,12 +63,12 @@ theorem compactPullback_comp_comp_compactPullback (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     ((compactPullback ℓ Φ).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ψ) ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map ψ) ≫
         (compactPullback ℓ i).app K =
       (compactPullback ℓ i).app K ≫
         ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+          (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
             ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K ≫
               (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map ψ)) := by
   have : IsProper (i ≫ Φ).left := by
@@ -93,17 +93,17 @@ of `ψ`, transported along `Ra_{X!} Rj_! ≅ Ra_{U!}`. -/
 noncomputable def openPieceOperator (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) :=
   (boundedConstructibleLowerShriekCompToPoint ℓ j).hom.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
     ((compactPullback ℓ ΦU).app ((boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint U)).map
         ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map ψ)) ≫
     (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
@@ -116,17 +116,17 @@ of `ψ`, transported along `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
 noncomputable def closedPieceOperator (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) :=
   (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) ≫
     ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
         ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map ψ)) ≫
     (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
@@ -141,29 +141,29 @@ theorem comp_map_unit_eq_map_unit_comp_closedPieceOperator (hi : ΦZ ≫ i = i �
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     ((compactPullback ℓ Φ).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ψ) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map ψ) ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K) ≫ closedPieceOperator ℓ hi K ψ := by
   have e := compactPullback_app_eq (ℓ := ℓ) i K
   have h : ((compactPullback ℓ Φ).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ψ) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map ψ) ≫
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K) ≫
         (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) =
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K) ≫
         (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ≫
         ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+          (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
             ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K ≫
               (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map ψ)) := by
     rw [← e]
@@ -183,18 +183,18 @@ theorem openPieceOperator_comp_map_counit (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     openPieceOperator ℓ hj K ψ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K) ≫
         ((compactPullback ℓ Φ).app K ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          (boundedConstructibleLowerShriek ℓ (toPoint X)).map
             ψ) := by
   have h := compToPoint_inv_app_comp_counit_comp_compactPullback ℓ j hj K
   have hn₁ := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map ψ)
   have hn₂ := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
     ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.naturality ψ)
   simp only [Functor.comp_map, Functor.comp_obj] at hn₁
   simp only [Functor.comp_map, Functor.id_map, Functor.map_comp, Functor.comp_obj,
@@ -217,13 +217,13 @@ noncomputable def openPieceCoefficient (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      (boundedConstructibleLowerShriek ℓ j).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) :=
   (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
       (isPullback_of_comp_eq_of_isOpenImmersion j hj)).app _ ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+    (boundedConstructibleLowerShriek ℓ j).map
       ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map ψ)
 
@@ -237,9 +237,9 @@ lemma openPieceOperator_eq (hj : ΦU ≫ j = j ≫ Φ)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     openPieceOperator ℓ hj K ψ =
       (compactPullback ℓ Φ).app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleLowerShriek ℓ j).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           (openPieceCoefficient ℓ hj K ψ) := by
   have h := openPiece_comp_eq_of_baseChange (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
     (boundedConstructibleLowerShriekCompToPoint ℓ j)
@@ -282,12 +282,12 @@ noncomputable def closedPieceCoefficient (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+      (boundedConstructibleLowerStar ℓ i).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) :=
   closedPieceCoeff
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi) _
     ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map ψ)
@@ -302,13 +302,13 @@ lemma closedPieceOperator_eq (hi : ΦZ ≫ i = i ≫ Φ)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     closedPieceOperator ℓ hi K ψ =
       (compactPullback ℓ Φ).app
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           (closedPieceCoefficient ℓ hi K ψ) := by
   rw [closedPieceOperator]
   exact closedPiece_conj_eq_closedPieceCoeff
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (compactPullback ℓ Φ) (compactPullback ℓ i) (compactPullback ℓ ΦZ)
     (boundedConstructibleLowerStarCompToPoint ℓ i) (compactPullback_app_eq (ℓ := ℓ) i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi)
@@ -325,12 +325,12 @@ lemma upperStar_map_unit_comp_closedPieceCoefficient (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K) ≫ closedPieceCoefficient ℓ hi K ψ =
       ψ ≫ (boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K :=
+        ℓ i).unit.app K :=
   closedPieceCoeff_unit_comm
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ i)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ i)
     (weilUpperStarComparison ℓ ΦZ Φ i hi) K ψ
 
 end CoefficientMorphism

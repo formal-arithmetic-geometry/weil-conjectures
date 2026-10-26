@@ -159,7 +159,7 @@ variable {h : X ⟶ X}
 /-- The *closed piece* `K^Z = Rx_* Lx^* K` of `K` at a rational point `x`. -/
 noncomputable abbrev pointClosedPiece (x : RationalPoint X) :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+  (boundedConstructibleLowerStar ℓ x).obj
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)
 
 /-- The proper pushforward diagram `(x, x)` from the point correspondence `(s, 𝟙, 𝟙)` of the
@@ -183,7 +183,7 @@ pushforward of the stalk map along the proper pushforward diagram `(x, x)`. -/
 noncomputable def graphClosedPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj
         (pointClosedPiece K x) ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj
+      (boundedConstructibleUpperShriek ℓ (𝟙 X)).obj
         (pointClosedPiece K x) :=
   (graphClosedPieceDiagram K v hx).pushforwardCoeff
 

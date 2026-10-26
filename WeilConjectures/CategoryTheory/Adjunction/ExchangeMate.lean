@@ -167,6 +167,25 @@ lemma exchangeLeft_app {jS : A ⥤ B} {jU : B ⥤ A} {jS' : A' ⥤ B'} {jU' : B'
       jS'.map (θ.hom.app (jS.obj K)) ≫ aj'.counit.app (H'.obj (jS.obj K)) := by
   simp [exchangeLeft]
 
+/-- **The restriction of the exchange morphism of left adjoints to the open part.** If the units
+of `jS ⊣ jU` and `jS' ⊣ jU'` are isomorphisms (the left adjoints are fully faithful, as the
+extensions by zero along open immersions), then `jU'` of every component of
+`exchangeLeft aj aj' θ` is an isomorphism: it is the composite of `jU' jS'` applied to the unit
+of `jS ⊣ jU` and to `θ`, and of `jU'` applied to the counit of `jS' ⊣ jU'`, which is inverse
+to the unit of `jS' ⊣ jU'` by the triangle identity. -/
+lemma isIso_map_exchangeLeft_app {jS : A ⥤ B} {jU : B ⥤ A} {jS' : A' ⥤ B'} {jU' : B' ⥤ A'}
+    {H : A ⥤ A'} {H' : B ⥤ B'} (aj : jS ⊣ jU) (aj' : jS' ⊣ jU') (θ : jU ⋙ H ≅ H' ⋙ jU')
+    [IsIso aj.unit] [IsIso aj'.unit] (K : A) :
+    IsIso (jU'.map ((exchangeLeft aj aj' θ).app K)) := by
+  rw [exchangeLeft_app, jU'.map_comp, jU'.map_comp]
+  have : IsIso (jU'.map (aj'.counit.app (H'.obj (jS.obj K)))) := by
+    have : IsIso (aj'.unit.app (jU'.obj (H'.obj (jS.obj K))) ≫
+        jU'.map (aj'.counit.app (H'.obj (jS.obj K)))) := by
+      rw [aj'.right_triangle_components]
+      exact IsIso.id _
+    exact IsIso.of_isIso_comp_left (aj'.unit.app _) _
+  infer_instance
+
 end Exchange
 
 /-- **The open restriction of the exchange morphism is an isomorphism.** Let

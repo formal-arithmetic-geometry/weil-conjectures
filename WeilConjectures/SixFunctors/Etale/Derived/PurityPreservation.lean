@@ -73,7 +73,7 @@ lemma constructibleIn_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b K) :
     DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) U a b
-      ((R(j)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      ((R(j)^![Λ]).obj K) :=
   ⟨(DerivedCategory.boundedConstructible _ U).prop_of_iso
       ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm
       (hK.1.mapDerivedCategory_upperStar j),
@@ -101,14 +101,14 @@ theorem smooth_preservationClauses {X Y : Scheme.{u}} [HasInvertibleExponent Λ 
     (∀ (a b : ℤ) (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+          ((R(f)^![Λ]).obj L)) ∧
     ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+            ((R(f)^![Λ]).obj K) ∧
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(f)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ X := .of_hom f
   refine ⟨fun a b K hK ↦ ?_, fun a b K hbc hta ↦ ?_⟩
@@ -131,7 +131,7 @@ theorem smooth_preservationClauses {X Y : Scheme.{u}} [HasInvertibleExponent Λ 
       exact h
     have hMbc := boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hbc)
       (DerivedCategory.boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩
-    let e : (R(f)^![ModuleCat.{u + 1} Λ]).obj K ≅
+    let e : (R(f)^![Λ]).obj K ≅
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M).obj L₀)⟦(2 * d : ℤ)⟧ :=
       et.symm ≪≫ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M).mapIso eω ≪≫
         ((((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M).commShiftIso (2 * d : ℤ)).app L₀)
@@ -160,14 +160,14 @@ theorem preservationClauses_closedChart {k : Type u} [Field k] {U V W Y : Scheme
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) U (a - 2 * n)
           (b - 2 * n + cU + 1)
-          ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+          ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj L)) ∧
     ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U
-            ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+            ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj K) ∧
           torAmplitudeIn (ModuleCat.{u + 1} Λ) U (a - 2 * n) (b - 2 * n + cU + 1)
-            ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   let π := 𝔸(ULift.{u} (Fin n); V) ↘ V
@@ -187,9 +187,9 @@ theorem preservationClauses_closedChart {k : Type u} [Field k] {U V W Y : Scheme
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ c (π ≫ v)
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ π v
   have e (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-      (R(c ≫ π ≫ v)^![ModuleCat.{u + 1} Λ]).obj K ≅ (R(c)^![ModuleCat.{u + 1} Λ]).obj
-        ((R(π)^![ModuleCat.{u + 1} Λ]).obj ((R(v)^![ModuleCat.{u + 1} Λ]).obj K)) :=
-    e₁.app K ≪≫ (R(c)^![ModuleCat.{u + 1} Λ]).mapIso (e₂.app K)
+      (R(c ≫ π ≫ v)^![Λ]).obj K ≅ (R(c)^![Λ]).obj
+        ((R(π)^![Λ]).obj ((R(v)^![Λ]).obj K)) :=
+    e₁.app K ≪≫ (R(c)^![Λ]).mapIso (e₂.app K)
   have hπ := smooth_preservationClauses Λ π n
   refine ⟨fun a b K hK ↦ ?_, fun a b K hbc hta ↦ ?_⟩
   · have h₁ := constructibleIn_rightDerivedUpperShriek_of_isOpenImmersion Λ v hK
@@ -240,14 +240,14 @@ theorem preservationClauses_of_charts {k : Type u} [Field k] {X Y : Scheme.{u}}
     (∀ (a b : ℤ) (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b - 2 * D + C)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+          ((R(f)^![Λ]).obj L)) ∧
     ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+            ((R(f)^![Λ]).obj K) ∧
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b - 2 * D + C)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(f)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
@@ -257,9 +257,9 @@ theorem preservationClauses_of_charts {k : Type u} [Field k] {X Y : Scheme.{u}}
   have hres (i : Fin m)
       (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
       Nonempty ((D(((U i : X.Opens).ι)^*[ModuleCat.{u + 1} Λ])).obj
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
+          ((R(f)^![Λ]).obj K) ≅
         (R(c i ≫ 𝔸(ULift.{u} (Fin (n i)); (V i : Y.Opens)) ↘ _ ≫
-          (V i : Y.Opens).ι)^![ModuleCat.{u + 1} Λ]).obj K) := by
+          (V i : Y.Opens).ι)^![Λ]).obj K) := by
     have : TopologicalSpace.NoetherianSpace (U i : X.Opens) :=
       (U i : X.Opens).ι.isOpenEmbedding.isInducing.noetherianSpace
     have : QuasiCompact (U i : X.Opens).ι :=
@@ -271,7 +271,7 @@ theorem preservationClauses_of_charts {k : Type u} [Field k] {X Y : Scheme.{u}}
     obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U i : X.Opens).ι f
     have heq : ∀ {g₁ g₂ : ((U i : X.Opens) : Scheme.{u}) ⟶ Y} [HasCompactification g₁]
         [HasCompactification g₂], g₁ = g₂ →
-        Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+        Nonempty (R(g₁)^![Λ] ≅ R(g₂)^![Λ]) := by
       intro g₁ g₂ _ _ h
       subst h
       exact ⟨Iso.refl _⟩
@@ -364,14 +364,14 @@ theorem preservationClauses_of_charts_of_topologicalKrullDim_le {k : Type u} [Fi
     (∀ (a b : ℤ) (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+          ((R(f)^![Λ]).obj L)) ∧
     ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+            ((R(f)^![Λ]).obj K) ∧
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(f)^![Λ]).obj K) := by
   have : HasInvertibleExponent Λ Y := .of_hom aY
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
@@ -405,14 +405,14 @@ theorem exists_preservationClauses {k : Type u} [Field k]
     (∀ (a b : ℤ) (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+          ((R(f)^![Λ]).obj L)) ∧
     ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+            ((R(f)^![Λ]).obj K) ∧
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(f)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   -- affine charts `U ⊆ f⁻¹ V`

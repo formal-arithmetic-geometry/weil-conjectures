@@ -144,20 +144,20 @@ theorem preservation_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{u
     (∀ (a b : ℤ) (K : DerivedCategoryModule Λ Y),
       boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
         _root_.DerivedCategory.homologyConcentratedIn a b K →
-          boundedConstructible (ModuleCat.{u + 1} Λ) U ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+          boundedConstructible (ModuleCat.{u + 1} Λ) U ((R(f)^![Λ]).obj K) ∧
             _root_.DerivedCategory.homologyConcentratedIn a b
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+              ((R(f)^![Λ]).obj K)) ∧
     (∀ (a b : ℤ) (K : DerivedCategoryModule Λ Y),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
-        torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b ((R(f)^![Λ]).obj K)) ∧
     (∀ K : DerivedCategoryModule Λ Y,
-      Nonempty ((reductionModIdeal Λ U J).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
-        (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y J).obj K))) ∧
+      Nonempty ((reductionModIdeal Λ U J).obj ((R(f)^![Λ]).obj K) ≅
+        (R(f)^![Λ]).obj ((reductionModIdeal Λ Y J).obj K))) ∧
     (∀ K : DerivedCategoryModule Λ Y, constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
       boundedConstructible (ModuleCat.{u + 1} Λ) U
-          ((reductionModIdeal Λ U J).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((reductionModIdeal Λ U J).obj ((R(f)^![Λ]).obj K)) ∧
         boundedConstructible (ModuleCat.{u + 1} Λ) U
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y J).obj K))) :=
+          ((R(f)^![Λ]).obj ((reductionModIdeal Λ Y J).obj K))) :=
   preservation_of_iso_leftDerivedUpperStar Λ f _
     (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ f ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ f).symm) J
@@ -175,20 +175,20 @@ theorem preservation_rightDerivedUpperShriek_of_isFinite_of_etale {V X : Scheme.
     (∀ (a b : ℤ) (K : DerivedCategoryModule Λ X),
       boundedConstructible (ModuleCat.{u + 1} Λ) X K →
         _root_.DerivedCategory.homologyConcentratedIn a b K →
-          boundedConstructible (ModuleCat.{u + 1} Λ) V ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+          boundedConstructible (ModuleCat.{u + 1} Λ) V ((R(f)^![Λ]).obj K) ∧
             _root_.DerivedCategory.homologyConcentratedIn a b
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+              ((R(f)^![Λ]).obj K)) ∧
     (∀ (a b : ℤ) (K : DerivedCategoryModule Λ X),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
-        torAmplitudeIn (ModuleCat.{u + 1} Λ) V a b ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) V a b ((R(f)^![Λ]).obj K)) ∧
     (∀ K : DerivedCategoryModule Λ X,
-      Nonempty ((reductionModIdeal Λ V J).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
-        (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ X J).obj K))) ∧
+      Nonempty ((reductionModIdeal Λ V J).obj ((R(f)^![Λ]).obj K) ≅
+        (R(f)^![Λ]).obj ((reductionModIdeal Λ X J).obj K))) ∧
     (∀ K : DerivedCategoryModule Λ X, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       boundedConstructible (ModuleCat.{u + 1} Λ) V
-          ((reductionModIdeal Λ V J).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((reductionModIdeal Λ V J).obj ((R(f)^![Λ]).obj K)) ∧
         boundedConstructible (ModuleCat.{u + 1} Λ) V
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ X J).obj K))) :=
+          ((R(f)^![Λ]).obj ((reductionModIdeal Λ X J).obj K))) :=
   preservation_of_iso_leftDerivedUpperStar Λ f _
     (rightDerivedUpperShriekIsoOfIsFiniteOfEtale _ f ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ f).symm) J
@@ -203,7 +203,7 @@ lemma exists_flat_rightDerivedUpperShriek_iso_tensor_shift {X Y : Scheme.{u}}
     [SmoothOfRelativeDimension d f] :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf L ∧
       ObjectProperty.flat L ∧ ∀ K : DerivedCategoryModule Λ Y,
-        Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj K ≅
+        Nonempty ((R(f)^![Λ]).obj K ≅
           (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
             ((_root_.DerivedCategory.singleFunctor _ 0).obj L))⟦(2 * d : ℤ)⟧) := by
   have : HasInvertibleExponent Λ X := .of_hom f
@@ -234,28 +234,28 @@ theorem preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension {X Y :
     (∀ (a b : ℤ) (K : DerivedCategoryModule Λ Y),
       boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
         _root_.DerivedCategory.homologyConcentratedIn a b K →
-          boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+          boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K) ∧
             _root_.DerivedCategory.homologyConcentratedIn (a - 2 * d) (b - 2 * d)
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+              ((R(f)^![Λ]).obj K)) ∧
     (∀ (a b : ℤ) (K : DerivedCategoryModule Λ Y),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((R(f)^![Λ]).obj K)) ∧
     (∀ K : DerivedCategoryModule Λ Y, constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
-      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K)) := by
   have : IsNoetherianRing Λ := inferInstance
   obtain ⟨L, hLc, hLf, e⟩ := exists_flat_rightDerivedUpperShriek_iso_tensor_shift Λ f d
   have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
   have hbc (K : DerivedCategoryModule Λ Y)
       (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
-      boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K) :=
     (boundedConstructible _ X).prop_of_iso (e K).some.symm ((boundedConstructible _ X).le_shift _ _
       (boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hK)
         (boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩))
   have hta (a b : ℤ) (K : DerivedCategoryModule Λ Y)
       (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+        ((R(f)^![Λ]).obj K) := by
     have h : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) := by

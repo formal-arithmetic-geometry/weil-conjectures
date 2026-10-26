@@ -97,7 +97,7 @@ noncomputable def rightDerivedLowerShriekOpenImmersionAdjunction :
 /-- The isomorphism `Rj^! ≅ Dj^*` for a quasi-compact open immersion `j`, compatible with the
 adjunctions `Rj_! ⊣ Rj^!` and `Rj_! ⊣ Dj^*`. -/
 noncomputable def rightDerivedUpperShriekOpenImmersionIso :
-    R(j)^![ModuleCat.{u + 1} Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]) :=
+    R(j)^![Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]) :=
   (rightDerivedUpperShriekAdjunction _ j).rightAdjointUniq
     (rightDerivedLowerShriekOpenImmersionAdjunction Λ j)
 
@@ -111,7 +111,7 @@ For a quasi-compact open immersion `j : U ⟶ X` and finite `Λ`, the extension 
 there is a unique isomorphism `Rj^! ≅ Dj^*` compatible with the adjunctions `Rj_! ⊣ Rj^!` and
 `Rj_! ⊣ Dj^*`, namely `AlgebraicGeometry.Etale.rightDerivedUpperShriekOpenImmersionIso`. -/
 theorem existsUnique_rightDerivedUpperShriekOpenImmersionIso :
-    ∃! e : R(j)^![ModuleCat.{u + 1} Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]),
+    ∃! e : R(j)^![Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]),
       (rightDerivedUpperShriekAdjunction _ j).ofNatIsoRight e =
         rightDerivedLowerShriekOpenImmersionAdjunction Λ j :=
   Adjunction.existsUnique_ofNatIsoRight_eq _ _
@@ -131,7 +131,7 @@ noncomputable def rightDerivedLowerShriekCongr {X Y : Scheme.{u}} {g g' : X ⟶ 
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekCongr`. -/
 noncomputable def rightDerivedUpperShriekCongr {X Y : Scheme.{u}} {g g' : X ⟶ Y}
     [HasCompactification g] [HasCompactification g'] [QuasiCompact g'] (h : g = g') :
-    R(g)^![ModuleCat.{u + 1} Λ] ≅ R(g')^![ModuleCat.{u + 1} Λ] :=
+    R(g)^![Λ] ≅ R(g')^![Λ] :=
   ((rightDerivedUpperShriekAdjunction _ g).ofNatIsoLeft
     (rightDerivedLowerShriekCongr Λ h)).rightAdjointUniq (rightDerivedUpperShriekAdjunction _ g')
 
@@ -147,8 +147,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_upperStar {X Y V XV : Scheme.{u}} (
     [HasCompactification u] [HasCompactification v] [HasCompactification (u ≫ f)]
     [HasCompactification (fV ≫ v)] [QuasiCompact u] [QuasiCompact v] [QuasiCompact (u ≫ f)]
     [QuasiCompact (fV ≫ v)] :
-    Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ D((u)^*[ModuleCat.{u + 1} Λ]) ≅
-      D((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(fV)^![ModuleCat.{u + 1} Λ]) := by
+    Nonempty (R(f)^![Λ] ⋙ D((u)^*[ModuleCat.{u + 1} Λ]) ≅
+      D((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(fV)^![Λ]) := by
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ u f
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ fV v
   exact ⟨Functor.isoWhiskerLeft _ (rightDerivedUpperShriekOpenImmersionIso Λ u).symm ≪≫
@@ -161,8 +161,8 @@ open of the source**: for a quasi-compact open immersion `j : U ⟶ X`,
 theorem nonempty_iso_rightDerivedUpperShriek_comp_openImmersion {U X Y : Scheme.{u}}
     (j : U ⟶ X) (f : X ⟶ Y) [IsOpenImmersion j] [HasCompactification j] [HasCompactification f]
     [HasCompactification (j ≫ f)] [QuasiCompact j] [QuasiCompact (j ≫ f)] :
-    Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ D((j)^*[ModuleCat.{u + 1} Λ]) ≅
-      R(j ≫ f)^![ModuleCat.{u + 1} Λ]) := by
+    Nonempty (R(f)^![Λ] ⋙ D((j)^*[ModuleCat.{u + 1} Λ]) ≅
+      R(j ≫ f)^![Λ]) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j f
   exact ⟨Functor.isoWhiskerLeft _ (rightDerivedUpperShriekOpenImmersionIso Λ j).symm ≪≫ e.symm⟩
 
@@ -175,7 +175,7 @@ variable {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p]
 /-- The adjunction `Rp_* ⊣ Rp^!` for a proper `p`: the adjunction `Rp_! ⊣ Rp^!` transported
 along `Rp_! ≅ Rp_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
 noncomputable def rightDerivedLowerStarUpperShriekAdjunctionOfIsProper :
-    R((p)_*[ModuleCat.{u + 1} Λ]) ⊣ R(p)^![ModuleCat.{u + 1} Λ] :=
+    R((p)_*[ModuleCat.{u + 1} Λ]) ⊣ R(p)^![Λ] :=
   (rightDerivedUpperShriekAdjunction _ p).ofNatIsoLeft
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) p)
 
@@ -188,7 +188,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 /-- The adjunction `Rf_!(c) = Di_! ⋙ Rp_* ⊣ Rp^! ⋙ Di^*` attached to a compactification
 `c = (X ⟶[i] Z ⟶[p] Y)`: the composite of the adjunctions `Di_! ⊣ Di^*` and `Rp_* ⊣ Rp^!`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction :
-    Rf_!(c)[ModuleCat.{u + 1} Λ] ⊣ R(c.g)^![ModuleCat.{u + 1} Λ] ⋙
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ⊣ R(c.g)^![Λ] ⋙
       D((c.i)^*[ModuleCat.{u + 1} Λ]) :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).comp
     (rightDerivedLowerStarUpperShriekAdjunctionOfIsProper Λ c.g)
@@ -201,7 +201,7 @@ lemma rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction_counit_app
     (rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction Λ c).counit.app N =
       R((c.g)_*[ModuleCat.{u + 1} Λ]).map
           ((derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).counit.app
-            (R(c.g)^![ModuleCat.{u + 1} Λ].obj N)) ≫
+            (R(c.g)^![Λ].obj N)) ≫
         (rightDerivedLowerStarUpperShriekAdjunctionOfIsProper Λ c.g).counit.app N := by
   simp [rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction]
 
@@ -217,8 +217,8 @@ For finite `Λ`, a quasi-compact `f : X ⟶ Y` and a compactification
 whose counit is the composite of the two counits), hence to `R(f)_! ≅ Rf_!(c)`, and there is a
 unique isomorphism `Rf^! ≅ Rp^! ⋙ Di^*` compatible with the adjunctions. -/
 theorem existsUnique_rightDerivedUpperShriekOfCompactificationIso :
-    ∃! e : R(f)^![ModuleCat.{u + 1} Λ] ≅
-        R(c.g)^![ModuleCat.{u + 1} Λ] ⋙ D((c.i)^*[ModuleCat.{u + 1} Λ]),
+    ∃! e : R(f)^![Λ] ≅
+        R(c.g)^![Λ] ⋙ D((c.i)^*[ModuleCat.{u + 1} Λ]),
       (rightDerivedUpperShriekAdjunction _ f).ofNatIsoRight e =
         (rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction Λ c).ofNatIsoLeft
           (rightDerivedLowerShriekIso Λ c) :=

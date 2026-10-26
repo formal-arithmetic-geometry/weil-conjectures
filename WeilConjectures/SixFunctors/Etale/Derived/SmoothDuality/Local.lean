@@ -238,10 +238,10 @@ variable [Finite Λ] {X Y Z : Scheme.{u}}
 (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`). -/
 theorem nonempty_dualizingComplex_comp_iso_of_isIso (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
-    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex (ModuleCat.{u + 1} Λ) b))) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) a)).obj
-        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) b))) := by
+    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b))) :
+    Nonempty (dualizingComplex Λ h ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ a)).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ b))) := by
   obtain ⟨E, -, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   exact ⟨(Adjunction.rightAdjointUniq
     ((rightDerivedUpperShriekAdjunction _ h).ofNatIsoLeft (E a b h w))
@@ -254,10 +254,10 @@ at `ω_b` and `ω_a ≅ Λ_X`, then `ω_h ≅ La^* ω_b`. -/
 theorem nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar (a : X ⟶ Y) (b : Y ⟶ Z)
     (h : X ⟶ Z) (w : a ≫ b = h) [HasCompactification a] [HasCompactification b]
     [HasCompactification h]
-    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex (ModuleCat.{u + 1} Λ) b)))
-    (hωa : Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) a ≅ 𝟙_ _)) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      (L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) b)) := by
+    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b)))
+    (hωa : Nonempty (dualizingComplex Λ a ≅ 𝟙_ _)) :
+    Nonempty (dualizingComplex Λ h ≅
+      (L((a)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ b)) := by
   obtain ⟨e⟩ := nonempty_dualizingComplex_comp_iso_of_isIso Λ a b h w ha
   obtain ⟨e'⟩ := hωa
   exact ⟨e ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e').app _ ≪≫
@@ -267,10 +267,10 @@ theorem nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar (a : X ⟶ Y) (b
 at `ω_b` and `ω_b ≅ Λ_Y`, then `ω_h ≅ ω_a`. -/
 theorem nonempty_dualizingComplex_comp_iso_of_unit (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
-    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex (ModuleCat.{u + 1} Λ) b)))
-    (hωb : Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) b ≅ 𝟙_ _)) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a) := by
+    (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b)))
+    (hωb : Nonempty (dualizingComplex Λ b ≅ 𝟙_ _)) :
+    Nonempty (dualizingComplex Λ h ≅
+      dualizingComplex Λ a) := by
   obtain ⟨e⟩ := nonempty_dualizingComplex_comp_iso_of_isIso Λ a b h w ha
   obtain ⟨e'⟩ := hωb
   exact ⟨e ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso
@@ -283,13 +283,15 @@ if `θ_a` is invertible at every object, `ω_b` is invertible and `θ_b` is inve
 theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
     (ha : ∀ P, IsIso (dualizingComplexTensorMap Λ a P))
-    (hω : DerivedCategory.isInvertible Λ Y (dualizingComplex (ModuleCat.{u + 1} Λ) b))
+    (hω : DerivedCategory.isInvertible Λ Y (dualizingComplex Λ b))
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hb : IsIso (dualizingComplexTensorMap Λ b K)) :
     IsIso (dualizingComplexTensorMap Λ h K) := by
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-  exact isIso_dualizingComplexTensorMapOfIsIso_comp a b h w (E a b h w) (hPF a b h w)
-    (projectionMapAssociativity Λ a) K (ha _) hb ((isInvertible_iff_exists_derivedTensor _).2 hω)
+  exact isIso_lowerShriekRightAdjointUnitTensorMap_comp w (rightDerivedUpperShriekAdjunction Λ a)
+    (rightDerivedUpperShriekAdjunction Λ b) (rightDerivedUpperShriekAdjunction Λ h) (E a b h w)
+    (hPF a b h w) (projectionMapAssociativity Λ a) K (ha _) hb
+    ((isInvertible_iff_exists_derivedTensor _).2 hω)
 
 /-- **Descent of the canonical tensor maps.** Let `u_i : U_i ⟶ X` be a jointly surjective family
 of étale morphisms with `θ_{u_i}` invertible at every object and `ω_{u_i}` invertible, and let
@@ -301,16 +303,19 @@ theorem isIso_dualizingComplexTensorMap_of_jointlySurjective {ι : Type u} {U : 
     (hu : ∀ x : X, ∃ (i : ι) (y : U i), (u i).base y = x) [∀ i, HasCompactification (u i)]
     (f : X ⟶ Y) [HasCompactification f] [∀ i, HasCompactification (u i ≫ f)]
     (hθ : ∀ i P, IsIso (dualizingComplexTensorMap Λ (u i) P))
-    (hω : ∀ i, DerivedCategory.isInvertible Λ (U i) (dualizingComplex (ModuleCat.{u + 1} Λ) (u i)))
+    (hω : ∀ i, DerivedCategory.isInvertible Λ (U i) (dualizingComplex Λ (u i)))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : ∀ i, IsIso (dualizingComplexTensorMap Λ (u i ≫ f) K)) :
     IsIso (dualizingComplexTensorMap Λ f K) := by
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ u hu _ fun i ↦ ?_
-  exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (u i) (hθ i)
+  exact isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
+    (rightDerivedUpperShriekAdjunction Λ (u i)) (hθ i)
     ((isInvertible_iff_exists_derivedTensor _).2 (hω i)) _
-    (isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (u i) f (u i ≫ f) rfl
-      (E (u i) f _ rfl) (hPF (u i) f _ rfl) (projectionMapAssociativity Λ (u i)) (hθ i) K (hK i))
+    (isIso_map_lowerShriekRightAdjointUnitTensorMap_of_comp rfl
+      (rightDerivedUpperShriekAdjunction Λ (u i)) (rightDerivedUpperShriekAdjunction Λ f)
+      (rightDerivedUpperShriekAdjunction Λ (u i ≫ f)) (E (u i) f _ rfl) (hPF (u i) f _ rfl)
+      (projectionMapAssociativity Λ (u i)) (hθ i) K (hK i))
 
 end Composition
 

@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.TraceFormula.Specialization.TraitModel
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
+public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
 
 /-!
 
@@ -25,17 +25,17 @@ blueprint `sk-prop-tf-nearby-external-kunneth`) says that the Künneth map of ne
 (`NearbyCyclesModel.kunnethMap`) is an isomorphism for bounded constructible `A` and `B`
 (`NearbyCyclesModel.isIso_kunnethMap`).
 
-## Models over the trait
+## Proof
 
-A model is *of finite type over the trait along `q : 𝒳 ⟶ S` and `g : 𝒳_η̄ ⟶ Spec Ω`*
-(`NearbyCyclesModel.IsTraitModelOver`) if `q` is separated and of finite type and `j`, `i` are the
-inclusions of the fibres of `q` over the geometric generic point and the closed point; this is
-`NearbyCyclesModel.IsTraitModel` with the structure morphisms made explicit.
-
-The identification `ε : 𝒳_η̄ ⟶ X` of a model is arbitrary. The nearby cycles of SGA 7 XIII are
-defined on complexes on the generic fibre `𝒳_η`, not on all complexes on the geometric generic
-fibre `𝒳_η̄`; so the finiteness and Künneth theorems are stated for models whose `ε` factors
-through the total space, `ε = j ≫ e` (then `Lε^* A = Lj^* Le^* A` comes from `𝒳_η`).
+After the reduction to proper models with compatible geometric generic fibres
+(`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), this is
+`NearbyCyclesModel.isIso_kunnethMap_of_isProper`, whose inputs are supplied here: Deligne's
+finiteness theorem for the nearby cycles
+(`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
+`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`) and the monoidality of the
+nearby cycles of the trait on the cohomology of the geometric generic fibres
+(`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`), the complexes
+on the geometric generic point being finite direct sums of shifts of the unit.
 
 -/
 
@@ -55,50 +55,14 @@ namespace NearbyCyclesModel
 
 variable {k' : Type u} [Field k']
 
-section TraitModel
-
-variable {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
-
-/-- A nearby-cycles model of `X` with special fibre `X'` is *of finite type over the trait*
-`S = Spec k'⟦t⟧` *along* `q : 𝒳 ⟶ S` and `g : 𝒳_η̄ ⟶ Spec Ω` if `q` is separated, quasi-compact
-and locally of finite type, `j` is the base change of `q` along the geometric generic point
-(with projection `g`) and `i` is the base change of `q` along the closed point. -/
-structure IsTraitModelOver (M : NearbyCyclesModel X X'.left) (q : M.total ⟶ trait k')
-    (g : M.generic ⟶ Spec (.of (traitGenericField k'))) : Prop where
-  locallyOfFiniteType : LocallyOfFiniteType q
-  quasiCompact : QuasiCompact q
-  isSeparated : IsSeparated q
-  isPullback_j : IsPullback M.j g q (traitGenericPoint k')
-  isPullback_i : IsPullback M.i X'.hom q (traitClosedPoint k')
-
-lemma IsTraitModelOver.isTraitModel {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (h : M.IsTraitModelOver q g) :
-    M.IsTraitModel :=
-  ⟨⟨q, g, h.locallyOfFiniteType, h.quasiCompact, h.isSeparated, h.isPullback_j, h.isPullback_i⟩⟩
-
-end TraitModel
-
 section Product
 
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {N : NearbyCyclesModel Y Y'.left} {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X}
   {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y} {f₂' : Z'.left ⟶ Y'.left}
 
-/-- Morphisms of models `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N` exhibit `P` as the *product over the trait*
-of the models `M` and `N` of finite type over `S = Spec k'⟦t⟧`: the total space of `P` is the
-fibre product `𝒳 ×_S 𝒴` of the total spaces (with the projections `φ₁.total`, `φ₂.total`), `P` is
-a model of finite type over the trait along the induced structure morphism, and the
-identifications `ε` of `M` and `N` factor through their total spaces. -/
-structure IsTraitProduct (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂') : Prop where
-  exists_isTraitModelOver : ∃ (qM : M.total ⟶ trait k')
-      (gM : M.generic ⟶ Spec (.of (traitGenericField k'))) (qN : N.total ⟶ trait k')
-      (gN : N.generic ⟶ Spec (.of (traitGenericField k'))),
-    M.IsTraitModelOver qM gM ∧ N.IsTraitModelOver qN gN ∧ IsPullback φ₁.total φ₂.total qM qN ∧
-      P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM)
-  exists_comp_ε_left : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε
-  exists_comp_ε_right : ∃ e : N.total ⟶ Y, N.j ≫ e = N.ε
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Gabber's Künneth formula for nearby cycles** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; SGA 7 XIII; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product
@@ -114,8 +78,39 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
-    IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) :=
-  sorry
+    IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
+  refine isIso_kunnethMap_of_forall_isProper
+    (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN
+      {eM} heM {eN} heN {A B} hA hB ↦ ?_) h hA hB
+  have : LocallyOfFiniteType (Over.mk gM).hom := MorphismProperty.of_isPullback
+    hM.isPullback_j hM.locallyOfFiniteType
+  have : QuasiCompact (Over.mk gM).hom := MorphismProperty.of_isPullback hM.isPullback_j
+    hM.quasiCompact
+  have : IsSeparated (Over.mk gM).hom := MorphismProperty.of_isPullback hM.isPullback_j
+    hM.isSeparated
+  have : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
+    inferInstanceAs (LocallyOfFiniteType (𝟙 _))
+  have : QuasiCompact (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
+    inferInstanceAs (QuasiCompact (𝟙 _))
+  have : IsSeparated (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
+    inferInstanceAs (IsSeparated (𝟙 _))
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
+  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
+  have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
+  have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
+  have hpush := boundedConstructible_rightDerivedLowerStar_obj ℓ
+    (Over.homMk (U := Over.mk gM) (V := Over.mk (𝟙 (Spec (.of (traitGenericField k'))))) gM
+      (Category.comp_id _)) ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA⟩
+  exact isIso_kunnethMap_of_isProper hM hN hpb hP hgen heM heN hA hB hΨA hΨB
+    (boundedConstructible_kunnethMap_source hΨA hΨB)
+    (boundedConstructible_kunnethMap_target (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
+      (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
+      heM heN hA hB)
+    (isIso_kunnethMap_traitGenericModel_of_shiftDecomposition _ k' _ _
+      (nonempty_shiftDecomposition_of_boundedConstructible ℓ _ hpush))
+    (fun S hS C hC hU hΓ ↦ isZero_of_isZero_upperStar_finsetComplOpens ℓ S hS C hC hU hΓ)
 
 end Product
 

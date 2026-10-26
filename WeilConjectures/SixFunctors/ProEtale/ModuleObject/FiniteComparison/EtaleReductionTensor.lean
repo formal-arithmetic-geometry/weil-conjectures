@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonTensorEtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
 
 /-!
@@ -25,7 +25,7 @@ named):
 * the comparison `Φ` of the two finite-coefficient models commutes with `⊗ᴸ`
   (`ProEtale.finiteCoefficientDerivedEquivalenceTensorIso`);
 * the images under `Φ` of bounded constructible complexes are bounded below of étale origin
-  (`ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_functor_obj`), and `Rν_*`
+  (`ProEtale.isEtaleOrigin_of_isConstructible`), and `Rν_*`
   commutes with `⊗ᴸ` on these when the tensor product is bounded below
   (`ProEtale.nonempty_rightDerivedComparisonLowerStarTensorIso`).
 -/
@@ -75,9 +75,9 @@ theorem nonempty_etaleReductionTensorIso_of_components
   let e := Φ.mapIso (boundedConstructibleIntegersModPowReductionTensorIso ℓ E n K M) ≪≫
     finiteCoefficientDerivedEquivalenceTensorIso Y.left (PadicAlgCl.integersModPow ℓ E n) _ _
   have hKM :=
-    plusEtaleOrigin_finiteCoefficientDerivedEquivalence_functor_obj (red.obj (K ⊗ M)).property
-  have hK := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_functor_obj (red.obj K).property
-  have hM := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_functor_obj (red.obj M).property
+    (isEtaleOrigin_of_isConstructible _ (red.obj (K ⊗ M)).property).plusEtaleOrigin
+  have hK := (isEtaleOrigin_of_isConstructible _ (red.obj K).property).plusEtaleOrigin
+  have hM := (isEtaleOrigin_of_isConstructible _ (red.obj M).property).plusEtaleOrigin
   obtain ⟨e'⟩ := nonempty_rightDerivedComparisonLowerStarTensorIso hK hM
     (DerivedCategory.TStructure.t.plus.prop_of_iso e hKM.plus)
   exact ⟨(R(ν_*(Y.left)[ModuleCat.{u + 1}

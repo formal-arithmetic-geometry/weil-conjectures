@@ -39,11 +39,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 instance commShift_boundedConstructibleLowerShriekCompToPoint_hom (h : Y ⟶ X) :
     NatTrans.CommShift (boundedConstructibleLowerShriekCompToPoint ℓ h).hom ℤ := by
   have : NatTrans.CommShift (eqToHom (show boundedConstructibleLowerShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ (h ≫ toPoint X) =
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y) by
+      ℓ (h ≫ toPoint X) =
+        boundedConstructibleLowerShriek ℓ (toPoint Y) by
       rw [comp_toPoint])) ℤ :=
     NatTrans.CommShift.eqToHom_congrArg
-      (fun m : Y ⟶ point k ↦ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
+      (fun m : Y ⟶ point k ↦ boundedConstructibleLowerShriek ℓ m)
       (comp_toPoint h)
   unfold boundedConstructibleLowerShriekCompToPoint
   dsimp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]

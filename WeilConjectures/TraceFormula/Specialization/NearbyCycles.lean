@@ -8,7 +8,10 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneric
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.KunnethVerdier
@@ -62,27 +65,6 @@ open Scheme
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
-
-/-- **Deligne's finiteness theorem for nearby cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for
-`ℚ̄_ℓ`-coefficients by passage to the limit, Bhatt–Scholze §6.8): over the strictly henselian
-trait `Spec k'⟦t⟧`, `k'` separably closed, the nearby cycles `Ψ = Li^* Rj_* Lε^*` of a model of
-finite type whose identification `ε = j ≫ e` factors through the total space preserve bounded
-constructible complexes. The pullback `Le^*` to the total space preserves them, the complex
-`Lj^* Le^* A` comes from the generic fibre, and `Li^* Rj_*` preserves such complexes by Deligne's
-theorem. (Without the factorization of `ε`, `Ψ` would have to be finite on all bounded
-constructible `ℚ̄_ℓ`-complexes on the geometric generic fibre, also those not defined over any
-finite extension of the generic point, which Deligne's theorem does not cover.)
-
-No blueprint node states this theorem; it is the analogue over the trait of
-`lem-sfb-dc-lower-star-preserves`
-(`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`, for morphisms of finite
-type over a field). -/
-theorem NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel {X : Scheme.{u}}
-    {X' : Over (Spec (.of k'))} (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel)
-    (hε : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε) :
-    M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) :=
-  sorry
-
 
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -176,7 +158,9 @@ theorem isTraitProduct_deformationProdModel (I : X.left.IdealSheafData) :
             (deformationProdTotalToTrait X I X I k') _
           rw [deformationProdFstGeneric, pullback.lift_snd, Category.comp_id]
           exact IsPullback.of_hasPullback _ _,
-        isPullback_deformationProdSpecialToTotal X I X I k'⟩⟩
+        isPullback_deformationProdSpecialToTotal X I X I k'⟩,
+      by simp [deformationProdSndModelHom, deformationProdFstModelHom, deformationProdFstGeneric,
+        deformationProdSndGeneric]⟩
   exists_comp_ε_left := deformationModel_exists_comp_ε X I k'
   exists_comp_ε_right := deformationModel_exists_comp_ε X I k'
 
@@ -207,13 +191,19 @@ generic point; the duality on the geometric generic fibre `X_Ω` is relative to 
 `Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
 fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
 asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
-isomorphism. -/
+isomorphism. It is the instance of `NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso` for
+the deformation model, whose geometric generic fibre is the base change of `X`
+(`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅
-      verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-        ((specialization k' x).obj K)) :=
-  sorry
+    Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
+      verdierDual ℓ ((specialization k' x).obj K)) :=
+  NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
+    (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
+    (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
+      isPullback_deformationSpecialFibre X _ k'⟩ ⟨deformationTotalToBase X _ k', rfl,
+        deformationTotalToBase_hom X _ k'⟩
+      (isPullback_deformationModel_ε k' x)) K
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
 `K ⊠ D K` is the universal kernel of the specialization,
@@ -224,10 +214,9 @@ theorem nonempty_specialization_verdierDual_iso
 `sk-prop-tf-nearby-duality-foundation`). -/
 theorem nonempty_specializationProd_externalProduct_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≅
+    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ≅
       externalProduct ℓ ((specialization k' x).obj K)
-        (verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-          ((specialization k' x).obj K))) :=
+        (verdierDual ℓ ((specialization k' x).obj K))) :=
   have e := nonempty_specialization_verdierDual_iso (ℓ := ℓ) k' x K
   ⟨(asIso (specializationKunnethMap (ℓ := ℓ) k' x K _)).symm ≪≫
     whiskerLeftIso _ ((boundedConstructibleUpperStar _ ℓ _).mapIso e.some)⟩

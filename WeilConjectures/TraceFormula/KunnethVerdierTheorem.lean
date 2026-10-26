@@ -76,7 +76,7 @@ lemma isIso_kunnethVerdierMap_of_iso_right (M : Dᵇc(X.left)⟦Profinite.padicA
       ((pre e.hom).app (dualizingComplex' ℓ Y))
   have w : l ≫ kunnethVerdierMap ℓ M N = _ := kunnethVerdierMap_naturality_right_pre ℓ M e.hom
   have : IsIso ((pre ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map e.hom)).app
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)) :=
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)) :=
     isIso_pre_app_of_isIso _ _
   have : IsIso ((pre e.hom).app (dualizingComplex' ℓ Y)) := isIso_pre_app_of_isIso _ _
   have : IsIso l := by dsimp only [l]; infer_instance
@@ -95,7 +95,7 @@ lemma isIso_kunnethVerdierMap_of_isDualizable (M : Dᵇc(X.left)⟦Profinite.pad
 noncomputable def upperStarLowerShriekIsoOfIsOpenImmersion (j : U ⟶ Y) [IsOpenImmersion j.left]
     (L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L) ≅ L :=
+      ((boundedConstructibleLowerShriek ℓ j).obj L) ≅ L :=
   (boundedConstructibleUpperStar _ ℓ j).mapIso
       ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app L) ≪≫
     (asIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).unit.app
@@ -108,7 +108,7 @@ lemma isIso_kunnethVerdierMap_lowerShriek_of_isDualizable (j : U ⟶ Y) [IsOpenI
     {L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L)
     [IsIso (exceptionalKunnethMap ℓ (Y := U) M)] :
     IsIso (kunnethVerdierMap ℓ (Y := Y) M
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)) :=
+      ((boundedConstructibleLowerShriek ℓ j).obj L)) :=
   isIso_kunnethVerdierMap_lowerShriek ℓ j M (exceptionalKunnethMapRestriction ℓ j M) L
     (isIso_kunnethVerdierMap_of_iso_right ℓ M (upperStarLowerShriekIsoOfIsOpenImmersion ℓ j L)
       (isIso_kunnethVerdierMap_of_isDualizable ℓ M hL))
@@ -138,11 +138,11 @@ theorem isIso_exceptionalKunnethMap_of_isAffine {X : Over (Spec (.of k))}
   have h₃ : ∀ n : ℤ, IsIso (kunnethVerdierMap ℓ M
       ((shiftFunctor (Dᵇc((affineSpaceOver k e.n).left)⟦Profinite.padicAlgClRingObj ℓ⟧) n).obj
         ((shiftFunctor _ (1 : ℤ)).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ e.complι).obj
+          ((boundedConstructibleLowerShriek ℓ e.complι).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.complι).obj
               (𝟙_ _)))))) := by
     intro n
-    let F := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ e.complι
+    let F := boundedConstructibleLowerShriek ℓ e.complι
     let L := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.complι).obj
       (𝟙_ _)
     have hL : IsDualizable L :=
@@ -155,7 +155,7 @@ theorem isIso_exceptionalKunnethMap_of_isAffine {X : Over (Spec (.of k))}
   have := isIso_kunnethVerdierMap_of_distinguished_right ℓ M _ hT' h₁ h₃ 0
   refine isIso_kunnethVerdierMap_of_iso_right ℓ M
     ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ e.i).app _ ≪≫
-      (boundedConstructibleLowerStar _ ℓ e.i).mapIso
+      (boundedConstructibleLowerStar ℓ e.i).mapIso
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ e.i)) ≪≫
       ((shiftFunctorZero _ ℤ).app _).symm) this
 
@@ -173,8 +173,8 @@ instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingOb
     (triangEnvelope_lisseGenerator ℓ Y N)
   rintro N ⟨Z, _, _, _, g, _, U, _, _, _, _, j, _, L, hL, ⟨eN⟩⟩ n
   have := isIso_exceptionalKunnethMap_of_isAffine ℓ U M
-  let F := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g
-  let G := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j
+  let F := boundedConstructibleLowerShriek ℓ g
+  let G := boundedConstructibleLowerShriek ℓ j
   refine isIso_kunnethVerdierMap_of_iso_right ℓ M
     ((shiftFunctor _ n).mapIso eN ≪≫ ((F.commShiftIso n).app _).symm ≪≫
       F.mapIso ((G.commShiftIso n).app L).symm) ?_

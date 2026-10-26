@@ -55,7 +55,7 @@ set_option hygiene false in
 local notation "𝐃(" X ", " Λ ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 section DoubleDual
 
@@ -102,9 +102,9 @@ limit cone `ω` of the tower `n ↦ Ra_X^!(Λ ⧸ Iⁿ)` (restriction of scalars
    `Ra_{X*} RHom(K, ω) ≅ RHom(Ra_{X!} K, Λ)`. -/
 theorem exists_isHomotopyLimit_dualizing :
     ∃ ω : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-        R(aX)^![ModuleCat.{u + 1} Λ]), Pretriangulated.IsHomotopyLimit ω ∧
+        (R(aX)_![ModuleCat.{u + 1} Λ]).rightAdjoint), Pretriangulated.IsHomotopyLimit ω ∧
       (∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj ω.pt ≅
-        (R(aX)^![ModuleCat.{u + 1} Λ]).obj
+        (R(aX)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
           ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n)))) ∧
       DerivedCategory.boundedConstructibleIntegral I X ω.pt ∧
       (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ n : ℕ,
@@ -119,7 +119,7 @@ theorem exists_isHomotopyLimit_dualizing :
 
 variable
   (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
-    R(aX)^![ModuleCat.{u + 1} Λ]))
+    (R(aX)_![ModuleCat.{u + 1} Λ]).rightAdjoint))
   (hωX : Pretriangulated.IsHomotopyLimit ωX)
 
 include hϖ hI hωX in
@@ -141,8 +141,9 @@ theorem boundedConstructibleIntegral_derivedHom_dualizing {K : 𝐃(X, Λ)}
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt) ∧
       (∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
           (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt) ≅
-        ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ((R(aX)^![ModuleCat.{u + 1} Λ]).obj
-          ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n))))) ∧
+        ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj
+          ((R(aX)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
+            ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n))))) ∧
       (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ a b : ℤ,
         (∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) →

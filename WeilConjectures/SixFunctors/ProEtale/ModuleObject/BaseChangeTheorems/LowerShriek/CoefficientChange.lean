@@ -63,10 +63,10 @@ comparisons. The two coefficient rings carry the topologies of `E` as a subspace
 a normed field, which agree only after unfolding. -/
 noncomputable def boundedConstructibleLowerShriekBaseChange_padicSubfield
     (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
       boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g ⟶
       boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g' ⋙
-        boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f' :=
+        ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f' :=
   boundedConstructibleLowerShriekBaseChange ℓ E sq
 
 instance isIso_boundedConstructibleLowerShriekBaseChange_padicSubfield
@@ -85,7 +85,7 @@ theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback 
     (boundedConstructibleToPadicAlgCl Y'.left ℓ E).map
         ((boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E sq).app M) ≫
       (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f').hom.app _ ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+      (boundedConstructibleLowerShriek ℓ f').map
         ((boundedConstructibleUpperStarToPadicAlgClIso ℓ E g').hom.app M) =
     (boundedConstructibleUpperStarToPadicAlgClIso ℓ E g).hom.app _ ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
@@ -104,7 +104,7 @@ theorem boundedConstructibleLowerShriekBaseChange_extendScalars (sq : IsPullback
     (boundedConstructibleExtendScalars Y'.left ℓ E).map
         ((boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 sq).app M) ≫
       (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f').hom.app _ ≫
-      (boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E.1) ℓ f').map
+      (ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f').map
         ((boundedConstructibleUpperStarExtendScalarsIso ℓ E g').hom.app M) =
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).hom.app _ ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E.1) ℓ g).map

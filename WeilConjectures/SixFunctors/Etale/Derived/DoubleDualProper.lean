@@ -75,7 +75,6 @@ def rightAdjointLaxBraidedOfδ
       congr 1
       rw [Category.assoc, BraidedCategory.braiding_naturality, reassoc_of% (h _ _)] }
 
-
 variable [MonoidalClosed C] [MonoidalClosed D]
 
 omit [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D] in
@@ -189,38 +188,43 @@ section Proper
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X Y S : Scheme.{u}} (aX : X ⟶ S) (aY : Y ⟶ S) [HasCompactification aX]
-  [HasCompactification aY] [(R(aX)_![A]).IsLeftAdjoint] [(R(aY)_![A]).IsLeftAdjoint]
-  (f : X ⟶ Y) [IsProper f] [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+  [HasCompactification aY]
+  (f : X ⟶ Y) [IsProper f] [HasCompactification f]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y`, `Rf_* δ_K` is an
 isomorphism if and only if `δ_{Rf_* K}` is. The hypotheses are the braided axiom for `Lf^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`), the projection formula for `Rf_*`, and
 `Rf^! ω_Y ≅ ω_X`. -/
 theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff
-    (hbr : LeftDerivedUpperStarBraided A f)
-    [IsIso (rightDerivedLowerStarProjectionMap A f)]
-    (γ : (R(f)^![A]).obj (dualizingComplex A aY) ≅ dualizingComplex A aX)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso ((R((f)_*[A])).map ((verdierDualDoubleDual A aX).app K)) ↔
-      IsIso ((verdierDualDoubleDual A aY).app ((R((f)_*[A])).obj K)) := by
-  let := leftDerivedUpperStarMonoidal A f
-  let p := derivedUpperStarLowerStarAdjunction A f
-  have h : ∀ M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A),
-      (L((f)^*[A])).map (β_ M N).hom ≫ δ (L((f)^*[A])) N M =
-        δ (L((f)^*[A])) M N ≫ (β_ ((L((f)^*[A])).obj M) ((L((f)^*[A])).obj N)).hom := by
+    (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) f)
+    [IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f)]
+    (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ aX).app K)) ↔
+      IsIso ((verdierDualDoubleDual Λ aY).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) f
+  let p := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
+  have h : ∀ M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      (L((f)^*[ModuleCat.{u + 1} Λ])).map (β_ M N).hom ≫ δ (L((f)^*[ModuleCat.{u + 1} Λ])) N M =
+        δ (L((f)^*[ModuleCat.{u + 1} Λ])) M N ≫ (β_ ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)
+            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N)).hom := by
     intro M N
-    rw [← cancel_epi (μ (L((f)^*[A])) M N), reassoc_of% (hbr M N), Functor.Monoidal.μ_δ,
+    rw [← cancel_epi (μ (L((f)^*[ModuleCat.{u + 1} Λ])) M N), reassoc_of% (hbr M N),
+        Functor.Monoidal.μ_δ,
       Functor.Monoidal.μ_δ_assoc, Category.comp_id]
-  let q := (rightDerivedUpperShriekAdjunction A f).ofNatIsoLeft
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar A f)
-  have hπ : ∀ (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-      (T : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
-      IsIso (p.homEquiv _ _ (δ (L((f)^*[A])) ((R((f)_*[A])).obj N) T ≫
-        p.counit.app N ▷ (L((f)^*[A])).obj T)) := fun N T ↦
-    inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap A f).app N).app T))
+  let q := (rightDerivedUpperShriekAdjunction Λ f).ofNatIsoLeft
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f)
+  have hπ : ∀ (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (T : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      IsIso (p.homEquiv _ _ (δ (L((f)^*[ModuleCat.{u + 1} Λ])) ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+          N) T ≫
+        p.counit.app N ▷ (L((f)^*[ModuleCat.{u + 1} Λ])).obj T)) := fun N T ↦
+    inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app N).app
+        T))
   rw [verdierDualDoubleDual_app, verdierDualDoubleDual_app]
   exact p.isIso_map_toIhomIhom_iff_of_isIso_projection h q γ.symm K hπ
 
@@ -230,27 +234,31 @@ hypotheses of
 `Rf_* δ_K` and `δ_{Rf_* K}` are isomorphic arrows, through the canonical comparison
 `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`. -/
 theorem nonempty_arrowIso_rightDerivedLowerStar_map_verdierDualDoubleDual
-    (hbr : LeftDerivedUpperStarBraided A f)
-    [IsIso (rightDerivedLowerStarProjectionMap A f)]
-    (γ : (R(f)^![A]).obj (dualizingComplex A aY) ≅ dualizingComplex A aX)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Nonempty (Arrow.mk ((R((f)_*[A])).map ((verdierDualDoubleDual A aX).app K)) ≅
-      Arrow.mk ((verdierDualDoubleDual A aY).app ((R((f)_*[A])).obj K))) := by
-  let := leftDerivedUpperStarMonoidal A f
-  let p := derivedUpperStarLowerStarAdjunction A f
-  have h : ∀ M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A),
-      (L((f)^*[A])).map (β_ M N).hom ≫ δ (L((f)^*[A])) N M =
-        δ (L((f)^*[A])) M N ≫ (β_ ((L((f)^*[A])).obj M) ((L((f)^*[A])).obj N)).hom := by
+    (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) f)
+    [IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f)]
+    (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (Arrow.mk ((R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ aX).app K)) ≅
+      Arrow.mk ((verdierDualDoubleDual Λ aY).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K))) := by
+  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) f
+  let p := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
+  have h : ∀ M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      (L((f)^*[ModuleCat.{u + 1} Λ])).map (β_ M N).hom ≫ δ (L((f)^*[ModuleCat.{u + 1} Λ])) N M =
+        δ (L((f)^*[ModuleCat.{u + 1} Λ])) M N ≫ (β_ ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)
+            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N)).hom := by
     intro M N
-    rw [← cancel_epi (μ (L((f)^*[A])) M N), reassoc_of% (hbr M N), Functor.Monoidal.μ_δ,
+    rw [← cancel_epi (μ (L((f)^*[ModuleCat.{u + 1} Λ])) M N), reassoc_of% (hbr M N),
+        Functor.Monoidal.μ_δ,
       Functor.Monoidal.μ_δ_assoc, Category.comp_id]
-  let q := (rightDerivedUpperShriekAdjunction A f).ofNatIsoLeft
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar A f)
-  have hπ : ∀ (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-      (T : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
-      IsIso (p.homEquiv _ _ (δ (L((f)^*[A])) ((R((f)_*[A])).obj N) T ≫
-        p.counit.app N ▷ (L((f)^*[A])).obj T)) := fun N T ↦
-    inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap A f).app N).app T))
+  let q := (rightDerivedUpperShriekAdjunction Λ f).ofNatIsoLeft
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f)
+  have hπ : ∀ (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (T : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      IsIso (p.homEquiv _ _ (δ (L((f)^*[ModuleCat.{u + 1} Λ])) ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+          N) T ≫
+        p.counit.app N ▷ (L((f)^*[ModuleCat.{u + 1} Λ])).obj T)) := fun N T ↦
+    inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app N).app
+        T))
   rw [verdierDualDoubleDual_app, verdierDualDoubleDual_app]
   exact p.nonempty_arrowIso_map_toIhomIhom_of_isIso_projection h q γ.symm K hπ
 

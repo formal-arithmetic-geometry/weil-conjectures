@@ -128,7 +128,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso {X X' Z Z' U U' 
     (hM : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sqU.toCommSq).app
       ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M))) :
     IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app M) := by
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i'
+  let adj := rightDerivedUpperShriekAdjunction Λ i'
   have : ∀ Q, IsIso (adj.unit.app Q) := fun Q ↦
     isIso_rightDerivedUpperShriekAdjunction_unit_app _ i' Q
   have : IsIso adj.unit := NatIso.isIso_of_isIso_app _

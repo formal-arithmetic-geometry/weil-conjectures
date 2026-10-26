@@ -139,8 +139,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion [HasCompac
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   set adjG' := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ g'
   set adjG := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ g
-  set adjf := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
-  set adjf' := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f'
+  set adjf := rightDerivedUpperShriekAdjunction Λ f
+  set adjf' := rightDerivedUpperShriekAdjunction Λ f'
   set Ex := rightDerivedLowerShriekBaseChangeMap Λ sq
   let γ := (mateEquiv adjG' adjG).symm (TwoSquare.mk _ _ _ _ (inv Ex))
   have hβ : rightDerivedUpperShriekBaseChangeMap Λ sq =
