@@ -292,8 +292,8 @@ theorem isIso_homEquiv_fundamentalClass_comp_smoothTrace (γ : TateOrientation �
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) x)
   let ψ := (adjS.ofNatIsoLeft (leftDerivedUpperStarCompSectionIso _ x a hx)).rightAdjointUniq
     Adjunction.id
-  let adjB := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) x).comp
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a)
+  let adjB := (rightDerivedUpperShriekAdjunction Λ x).comp
+    (rightDerivedUpperShriekAdjunction Λ a)
   have hC : IsIso adjB.counit := adjB.isIso_counit_of_iso_id
     (Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar _ x) _ ≪≫
       Functor.isoWhiskerLeft _ (rightDerivedLowerShriekIsoRightDerivedLowerStar _ a) ≪≫ ψ)
@@ -320,8 +320,8 @@ theorem isIso_homEquiv_fundamentalClass_comp_smoothTrace (γ : TateOrientation �
         γ.smoothTrace) := by
     unfold TateOrientation.smoothTrace Etale.smoothTrace
     exact Adjunction.isIso_map_counit_app_comp_map_comp_counit_app
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) x)
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a) hC _ _
+      (rightDerivedUpperShriekAdjunction Λ x)
+      (rightDerivedUpperShriekAdjunction Λ a) hC _ _
   rw [key]
   infer_instance
 
@@ -342,7 +342,7 @@ lemma TateOrientation.traceMap_trans_mapIso [HasTateTwist Λ] (γ : TateOrientat
     (φ : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ≅ 𝟙_ _)
     (c : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
       ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d))⟦(2 * d : ℤ)⟧) :
-    TateOrientation.traceMap (γ ≪≫ (R(a)^![ModuleCat.{u + 1} Λ]).mapIso φ) c =
+    TateOrientation.traceMap (γ ≪≫ (R(a)^![Λ]).mapIso φ) c =
       γ.traceMap c ≫ φ.hom := by
   have e (γ' : TateOrientation Λ a d) : γ'.traceMap c = c ≫
       ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ'.smoothTrace := rfl
@@ -376,7 +376,7 @@ theorem exists_tateOrientation_traceMap_pointClass [Module.Injective Λ Λ] :
   by_cases h : ∃ (x : Spec (.of k) ⟶ X) (_ : IsRegularImmersion d x), x ≫ a = 𝟙 _
   · obtain ⟨x₀, _, hx₀⟩ := h
     have := isIso_traceMap_pointClass a θ.symm x₀ hx₀
-    refine ⟨θ.symm ≪≫ (R(a)^![ModuleCat.{u + 1} Λ]).mapIso
+    refine ⟨θ.symm ≪≫ (R(a)^![Λ]).mapIso
       (asIso (TateOrientation.traceMap θ.symm (pointClass a x₀))).symm,
       fun x _ hx ↦ ?_⟩
     rw [TateOrientation.traceMap_trans_mapIso, pointClass_eq a x x₀ hx hx₀]

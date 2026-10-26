@@ -68,8 +68,8 @@ of the conjugate of `Ex_!` along the composite adjunctions `Lg^* ∘ Rf_! ⊣ Rf
 `Rf'_! ∘ Lg'^* ⊣ Rg'_* ∘ Rf'^!`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeMap`). -/
 noncomputable def rightDerivedUpperShriekLowerStarBaseChangeIso (sq : IsPullback g' f' f g) :
-    R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![ModuleCat.{u + 1} Λ] ≅
-      R(f')^![ModuleCat.{u + 1} Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
+    R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] ≅
+      R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
   have := isIso_rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq
   (asIso (rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq)).symm
 
@@ -85,8 +85,8 @@ dual base change isomorphism read through the proper coincidences `Rg_! ≅ Rg_*
 `Rf^! Rg_! ≅ Rg'_! Rf'^!`. -/
 noncomputable def rightDerivedUpperShriekLowerShriekBaseChangeIso [IsProper g] [IsProper g']
     (sq : IsPullback g' f' f g) :
-    R(g)_![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ] ≅
-      R(f')^![ModuleCat.{u + 1} Λ] ⋙ R(g')_![ModuleCat.{u + 1} Λ] :=
+    R(g)_![ModuleCat.{u + 1} Λ] ⋙ R(f)^![Λ] ≅
+      R(f')^![Λ] ⋙ R(g')_![ModuleCat.{u + 1} Λ] :=
   Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar _ g) _ ≪≫
     rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq ≪≫
       Functor.isoWhiskerLeft _ (rightDerivedLowerShriekIsoRightDerivedLowerStar _ g').symm

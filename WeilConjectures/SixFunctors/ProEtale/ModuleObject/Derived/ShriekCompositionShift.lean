@@ -77,7 +77,7 @@ instance commShift_boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_hom
 
 end BaseChange
 
-variable [IsFinitenessCoefficient ℓ Λ] {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
+variable {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
   [IsOpenImmersion j.left] [IsOpenImmersion i'.left]
 
 set_option synthInstance.maxSize 1024 in
@@ -86,7 +86,7 @@ shifts. -/
 instance commShift_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
     NatTrans.CommShift
-      (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq) ℤ := by
+      (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq) ℤ := by
   unfold boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
@@ -157,16 +157,18 @@ instance commShift_boundedConstructibleOpenImmersionLowerShriekRefinement (w : i
   unfold boundedConstructibleOpenImmersionLowerShriekRefinement
   infer_instance
 
-variable [IsFinitenessCoefficient ℓ Λ]
+
 
 /-- The pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` along a refinement commutes with the
 shifts. -/
 instance commShift_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
-    NatTrans.CommShift (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)
+    NatTrans.CommShift (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq)
       ℤ := by
-  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ sq
-  have : NatTrans.CommShift (inv (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement (Profinite.padicAlgClRingObj
+      ℓ) ℓ sq
+  have : NatTrans.CommShift (inv (boundedConstructibleOpenImmersionLowerShriekRefinement
+      (Profinite.padicAlgClRingObj ℓ) ℓ
       sq.toCommSq.snd_comp_eq_of_fst_eq_id)) ℤ := NatTrans.CommShift.of_isIso _ ℤ
   unfold boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
   infer_instance
@@ -174,11 +176,11 @@ instance commShift_boundedConstructibleOpenImmersionLowerShriekRefinementPushfor
 /-- The comparison `Rf_!^{c₁} ≅ Rf_!^c` along a refinement commutes with the shifts. -/
 instance commShift_boundedConstructibleLowerShriekRefinementIso_hom
     (sq : IsPullback (𝟙 X) i i₁ h) {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
-    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)] :
-    NatTrans.CommShift (boundedConstructibleLowerShriekRefinementIso Λ ℓ sq wp).hom ℤ := by
-  have : NatTrans.CommShift (eqToHom (show boundedConstructibleLowerStar Λ ℓ (h ≫ p₁) =
-      boundedConstructibleLowerStar Λ ℓ p by rw [wp])) ℤ :=
-    NatTrans.CommShift.eqToHom_congrArg (fun m : Z ⟶ Y ↦ boundedConstructibleLowerStar Λ ℓ m) wp
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq)] :
+    NatTrans.CommShift (boundedConstructibleLowerShriekRefinementIso ℓ sq wp).hom ℤ := by
+  have : NatTrans.CommShift (eqToHom (show boundedConstructibleLowerStar ℓ (h ≫ p₁) =
+      boundedConstructibleLowerStar ℓ p by rw [wp])) ℤ :=
+    NatTrans.CommShift.eqToHom_congrArg (fun m : Z ⟶ Y ↦ boundedConstructibleLowerStar ℓ m) wp
   unfold boundedConstructibleLowerShriekRefinementIso
   dsimp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     asIso_hom, eqToIso.hom]

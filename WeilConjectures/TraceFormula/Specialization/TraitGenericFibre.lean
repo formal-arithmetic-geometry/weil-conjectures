@@ -137,5 +137,4 @@ theorem isWeaklyContractible_pullback_traitGenericPoint_closedLiftSpec (C : Type
     (pullbackSpecIso (PowerSeries k') (Algebra.ClosedLift (PowerSeries k') C)
       (traitGenericField k'))
 
-
 end AlgebraicGeometry.ProEtale

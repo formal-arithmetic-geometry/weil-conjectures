@@ -75,7 +75,7 @@ instance commShift_δFlip_boundedConstructibleUpperStar {A B : Over (Spec (.of k
     NatTrans.CommShift (Functor.OplaxMonoidal.δFlip
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) C) ℤ :=
   inferInstanceAs (NatTrans.CommShift
-    (boundedConstructibleUpperStarδFlip (Profinite.padicAlgClRingObj ℓ) ℓ f C) ℤ)
+    (boundedConstructibleUpperStarδFlip ℓ f C) ℤ)
 
 /-- The identification `Lg^* = Lg'^*` along an equality `g = g'` commutes with the shifts. -/
 lemma commShift_eqToHom_boundedConstructibleUpperStar {A B : Over (Spec (.of k))}
@@ -112,7 +112,7 @@ theorem isIso_openKunnethMap_of_triangEnvelope
         rw [prod.map_fst, Category.comp_id])
     infer_instance
   have := Adjunction.commShift_kunnethNatTrans
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (prod.map (𝟙 X) j)) (prodMapUpperStarFstIso ℓ j) (openKunnethSecondFactor ℓ j B) ℤ
   exact NatTrans.isIso_app_of_triangEnvelope _ h hM
 
@@ -148,7 +148,7 @@ theorem isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable [IsOpenImmers
     (j' : V ⟶ X) [IsOpenImmersion j'.left]
     {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
     IsIso (openKunnethMap ℓ j
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj
+      ((boundedConstructibleLowerShriek ℓ j').obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').obj K)) B) := by
   obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_boundedConstructible ℓ (j := j')
     (i := overClosedComplement j') (isCompl_range_overClosedComplement j').symm K
@@ -185,11 +185,11 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
     {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L)
     (h₀ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.map (overClosedComplement j') (𝟙 Y))).obj
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
+      ((boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).obj
         (externalProduct ℓ
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B)))) :
+          ((boundedConstructibleLowerShriek ℓ j').obj L) B)))) :
     IsIso (openKunnethMap ℓ j
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) := by
+      ((boundedConstructibleLowerShriek ℓ j').obj L) B) := by
   have : QuasiCompact j'.left := by
     have : QuasiCompact (j'.left ≫ X.hom) := by rw [Over.w j']; infer_instance
     exact QuasiCompact.of_comp j'.left X.hom
@@ -205,7 +205,7 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
     (isCompl_range_prodMap_id _ _ (isCompl_range_overClosedComplement j')) _ ?_ ?_
   · refine isIso_upperStar_map_openKunnethMap_of_isOpenImmersion ℓ j' j _ B ?_
     have e : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) ≅ L :=
+        ((boundedConstructibleLowerShriek ℓ j').obj L) ≅ L :=
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').mapIso
           ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').app L) ≪≫
         (asIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
@@ -220,16 +220,16 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
         (prod.map (overClosedComplement j') (𝟙 Y))).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.fst : X ⨯ Y ⟶ X)).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L))) :=
+          ((boundedConstructibleLowerShriek ℓ j').obj L))) :=
       (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j' _ hg L).of_iso
         ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ _ _).symm.app _ ≪≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ _).mapIso
             ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').app L))
     have h₂ : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.map (overClosedComplement j') (𝟙 Y))).obj
-        (externalProduct ℓ ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        (externalProduct ℓ ((boundedConstructibleLowerShriek ℓ
           j').obj L)
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))) := by
+          ((boundedConstructibleLowerStar ℓ j).obj B))) := by
       refine IsZero.of_iso ?_ (Functor.Monoidal.μIso _ _ _).symm
       exact isZero_tensorObj_of_isZero_left h₁ _
     exact ⟨⟨0, h₂.eq_of_src _ _, h₀.eq_of_src _ _⟩⟩
@@ -246,9 +246,9 @@ theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek [IsOpenImmersion 
     {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.map (overClosedComplement j') (𝟙 Y))).obj
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
+      ((boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).obj
         (externalProduct ℓ
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B))) :=
+          ((boundedConstructibleLowerShriek ℓ j').obj L) B))) :=
   sorry
 
 /-- **The ordinary Künneth formula for the extension by zero of a dualizable object**: for an
@@ -262,7 +262,7 @@ theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left
     (j' : V ⟶ X) [IsOpenImmersion j'.left]
     {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
     IsIso (openKunnethMap ℓ j
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j').obj L) B) :=
+      ((boundedConstructibleLowerShriek ℓ j').obj L) B) :=
   isIso_openKunnethMap_lowerShriek_of_isZero ℓ j B j' hL
     (isZero_upperStar_lowerStar_externalProduct_lowerShriek ℓ j B j' hL)
 

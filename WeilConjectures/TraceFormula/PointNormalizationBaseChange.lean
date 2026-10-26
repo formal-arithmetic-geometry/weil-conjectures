@@ -88,16 +88,16 @@ lemma upperStarLowerShriekAdjunction_comp_unit_app (f : X ⟶ Y) (g : Y ⟶ Z) [
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (f ≫ g)).unit.app c ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.app
           ((boundedConstructibleUpperStar _ ℓ (f ≫ g)).obj c) ≫
-        (boundedConstructibleLowerShriek _ ℓ g).map ((boundedConstructibleLowerShriek _ ℓ f).map
+        (boundedConstructibleLowerShriek ℓ g).map ((boundedConstructibleLowerShriek ℓ f).map
           ((boundedConstructibleUpperStarComp _ ℓ f g).hom.app c)) =
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g).unit.app c ≫
-        (boundedConstructibleLowerShriek _ ℓ g).map
+        (boundedConstructibleLowerShriek ℓ g).map
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).unit.app
             ((boundedConstructibleUpperStar _ ℓ g).obj c)) :=
   Adjunction.ofNatIsoRight_comp_unit_app
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (f ≫ g))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (f ≫ g))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (f ≫ g))
@@ -108,11 +108,11 @@ lemma upperStarLowerShriekAdjunction_comp_unit_app (f : X ⟶ Y) (g : Y ⟶ Z) [
 variable (X) in
 /-- The counit of `R(𝟙)_! ⊣ R(𝟙)^!` is `R(𝟙)_! R(𝟙)^! ≅ R(𝟙)^! ≅ 𝟭`. -/
 lemma upperShriekAdjunction_id_counit_app (d : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 X)).counit.app d =
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X)).counit.app d =
       (boundedConstructibleLowerShriekId ℓ X).hom.app
-          ((boundedConstructibleUpperShriek _ ℓ (𝟙 X)).obj d) ≫
+          ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj d) ≫
         (boundedConstructibleUpperShriekId ℓ X).hom.app d := by
-  have h := conjugateEquiv_counit (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 X))
+  have h := conjugateEquiv_counit (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ X).inv d
   simp only [Functor.id_map, Adjunction.id_counit, NatTrans.id_app] at h
   erw [Category.comp_id] at h
@@ -125,13 +125,13 @@ lemma unit_map_comp_of_eq_id {r : X ⟶ X} (hr : r = 𝟙 X) [IsProper r.left]
     {y X' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (c : (boundedConstructibleUpperStar _ ℓ r).obj y ≅ X') :
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app X' ≫
-        (boundedConstructibleLowerShriek _ ℓ r).map ((boundedConstructibleUpperStar _ ℓ r).map
+        (boundedConstructibleLowerShriek ℓ r).map ((boundedConstructibleUpperStar _ ℓ r).map
           (c.inv ≫ eqToHom (congrArg (fun r : X ⟶ X ↦
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj y) hr) ≫
             (boundedConstructibleUpperStarId _ ℓ X).hom.app y) ≫ c.hom) =
       (boundedConstructibleLowerShriekId ℓ X).inv.app X' ≫
         eqToHom (congrArg (fun r : X ⟶ X ↦
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ r).obj X')
+          (boundedConstructibleLowerShriek ℓ r).obj X')
             hr.symm) := by
   subst hr
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
@@ -162,21 +162,21 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 
 lemma lowerShriek_map_comp_eqToHom_of_eq {f g : Y ⟶ Y} (h : f = g)
     {L L' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L') :
-    (boundedConstructibleLowerShriek _ ℓ f).map b ≫ eqToHom (congrArg (fun f : Y ⟶ Y ↦
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj L') h) =
+    (boundedConstructibleLowerShriek ℓ f).map b ≫ eqToHom (congrArg (fun f : Y ⟶ Y ↦
+      (boundedConstructibleLowerShriek ℓ f).obj L') h) =
       eqToHom (congrArg (fun f : Y ⟶ Y ↦
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj L) h) ≫
-        (boundedConstructibleLowerShriek _ ℓ g).map b := by
+        (boundedConstructibleLowerShriek ℓ f).obj L) h) ≫
+        (boundedConstructibleLowerShriek ℓ g).map b := by
   subst h
   simp
 
 lemma upperShriek_map_comp_eqToHom_of_eq {f g : Y ⟶ Y} (h : f = g)
     {L L' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L') :
-    (boundedConstructibleUpperShriek _ ℓ f).map b ≫ eqToHom (congrArg (fun f : Y ⟶ Y ↦
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj L') h) =
+    (boundedConstructibleUpperShriek ℓ f).map b ≫ eqToHom (congrArg (fun f : Y ⟶ Y ↦
+      (boundedConstructibleUpperShriek ℓ f).obj L') h) =
       eqToHom (congrArg (fun f : Y ⟶ Y ↦
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj L) h) ≫
-        (boundedConstructibleUpperShriek _ ℓ g).map b := by
+        (boundedConstructibleUpperShriek ℓ f).obj L) h) ≫
+        (boundedConstructibleUpperShriek ℓ g).map b := by
   subst h
   simp
 
@@ -195,9 +195,9 @@ noncomputable def upperStarIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) :
 
 /-- `Ra_! ≅ R(𝟙)_! ≅ 𝟭` for a morphism `a` equal to the identity. -/
 noncomputable def lowerShriekIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a ≅ 𝟭 _ :=
+    boundedConstructibleLowerShriek ℓ a ≅ 𝟭 _ :=
   NatIso.ofComponents (fun y ↦ eqToIso (congrArg (fun a : Y ⟶ Y ↦
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj y) ha) ≪≫
+      (boundedConstructibleLowerShriek ℓ a).obj y) ha) ≪≫
       (boundedConstructibleLowerShriekId ℓ Y).app y)
     (fun {y y'} b ↦ by
       simp only [Iso.trans_hom, eqToIso.hom, Iso.app_hom, Category.assoc]
@@ -208,9 +208,9 @@ noncomputable def lowerShriekIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) :
 
 /-- `Ra^! ≅ R(𝟙)^! ≅ 𝟭` for a morphism `a` equal to the identity. -/
 noncomputable def upperShriekIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a ≅ 𝟭 _ :=
+    boundedConstructibleUpperShriek ℓ a ≅ 𝟭 _ :=
   NatIso.ofComponents (fun y ↦ eqToIso (congrArg (fun a : Y ⟶ Y ↦
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj y) ha) ≪≫
+      (boundedConstructibleUpperShriek ℓ a).obj y) ha) ≪≫
       (boundedConstructibleUpperShriekId ℓ Y).app y)
     (fun {y y'} b ↦ by
       simp only [Iso.trans_hom, eqToIso.hom, Iso.app_hom, Category.assoc]
@@ -224,7 +224,7 @@ noncomputable def upperShriekIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) :
 lemma unit_map_upperStarIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) [IsProper a.left]
     (y : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ a).unit.app y ≫
-        (boundedConstructibleLowerShriek _ ℓ a).map ((upperStarIdOfEq ℓ ha).hom.app y) =
+        (boundedConstructibleLowerShriek ℓ a).map ((upperStarIdOfEq ℓ ha).hom.app y) =
       (lowerShriekIdOfEq ℓ ha).inv.app y := by
   subst ha
   simp only [upperStarIdOfEq, lowerShriekIdOfEq, NatIso.ofComponents_hom_app,
@@ -248,8 +248,8 @@ lemma unit_map_upperStarIdOfEq {a : Y ⟶ Y} (ha : a = 𝟙 Y) [IsProper a.left]
 /-- The counit of `Ra_! ⊣ Ra^!` for `a = 𝟙` is `Ra_! Ra^! ≅ Ra^! ≅ 𝟭`. -/
 lemma upperShriekAdjunction_counit_app_of_eq {a : Y ⟶ Y} (ha : a = 𝟙 Y)
     (d : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperShriekAdjunction _ ℓ a).counit.app d =
-      (lowerShriekIdOfEq ℓ ha).hom.app ((boundedConstructibleUpperShriek _ ℓ a).obj d) ≫
+    (boundedConstructibleUpperShriekAdjunction ℓ a).counit.app d =
+      (lowerShriekIdOfEq ℓ ha).hom.app ((boundedConstructibleUpperShriek ℓ a).obj d) ≫
         (upperShriekIdOfEq ℓ ha).hom.app d := by
   subst ha
   simp only [upperShriekIdOfEq, lowerShriekIdOfEq, NatIso.ofComponents_hom_app, Iso.trans_hom,
@@ -263,7 +263,7 @@ lemma εIso_inv_of_eq {a : Y ⟶ Y} (ha : a = 𝟙 Y) :
   subst ha
   simp only [upperStarIdOfEq, NatIso.ofComponents_hom_app, Iso.trans_hom, eqToIso_refl,
     Iso.refl_hom, Iso.app_hom, Category.id_comp]
-  exact (boundedConstructibleUpperStarId_hom_app_unit _ ℓ Y).symm
+  exact (boundedConstructibleUpperStarId_hom_app_unit ℓ Y).symm
 
 /-- The right unit law of the composition isomorphisms of the derived pullbacks, for a morphism
 `a` equal to the identity. -/
@@ -311,7 +311,7 @@ lemma transportζ_upperStar_fst (y : Dᵇc((point k).left)⟦Profinite.padicAlgC
       (diagUpperStarProjIso ℓ prod.fst (by simp) y).hom ≫
         (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ
           (prod.fst : point k ⨯ point k ⟶ point k)).unit.app y ≫
-        (boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
+        (boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
           ((pointDiagAdj ℓ k).unit.app ((boundedConstructibleUpperStar _ ℓ
             (prod.fst : point k ⨯ point k ⟶ point k)).obj y)) := by
     erw [← hCF]
@@ -375,9 +375,8 @@ lemma pointProdUpperStarComparison_hom_app
     conv_lhs => rw [← h₁]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id]
-    simp
-  rw [h₂, reassoc_of% h₁']
-  simp only [eqToHom_trans]
+    rw [eqToHom_trans, eqToHom_refl]
+  rw [h₂, reassoc_of% h₁', eqToHom_trans, eqToHom_trans]
 
 /-- `LΔ^* Lp₁^* y ≅ y` is `LΔ^* Lp₂^* y ≅ y` read through `Lp₁^* y ≅ Lp₂^* y`. -/
 lemma diagUpperStarProjIso_fst_eq (y : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -394,7 +393,7 @@ lemma unit_map_pointProdUpperStarComparison
     (y : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ
         (prod.fst : point k ⨯ point k ⟶ point k)).unit.app y ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
         ((Θpt).hom.app y) =
     (upperStarIdOfEq ℓ toPoint_point_eq).inv.app y ≫
       (boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
@@ -420,12 +419,12 @@ lemma conjugateIsoEquiv_eqToIso_hom_app {X Y : Over (Spec (.of k))} [LocallyOfFi
     [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] {p q : X ⟶ Y} (h : p = q)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ p)
-      (boundedConstructibleUpperShriekAdjunction _ ℓ q)
+    (conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction ℓ p)
+      (boundedConstructibleUpperShriekAdjunction ℓ q)
       (eqToIso (congrArg (fun p : X ⟶ Y ↦
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p) h)).symm).hom.app K =
+        boundedConstructibleLowerShriek ℓ p) h)).symm).hom.app K =
       eqToHom (congrArg (fun p : X ⟶ Y ↦
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K) h) := by
+        (boundedConstructibleUpperShriek ℓ p).obj K) h) := by
   subst h
   simp
 
@@ -437,19 +436,19 @@ lemma upperShriekComp_id_left_hom_app {X Y : Over (Spec (.of k))} [LocallyOfFini
     [IsSeparated Y.hom] (a : X ⟶ Y) (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ (𝟙 X) a).hom.app K ≫
         (boundedConstructibleUpperShriekId ℓ X).hom.app
-          ((boundedConstructibleUpperShriek _ ℓ a).obj K) =
+          ((boundedConstructibleUpperShriek ℓ a).obj K) =
       eqToHom (congrArg (fun p : X ⟶ Y ↦
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)
+        (boundedConstructibleUpperShriek ℓ p).obj K)
           (Category.id_comp a)) := by
   rw [← conjugateIsoEquiv_eqToIso_hom_app ℓ (Category.id_comp a) K]
   exact conjugateIsoEquiv_comp_left_hom_app
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 X ≫ a))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ a)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X ≫ a))
+    (boundedConstructibleUpperShriekAdjunction ℓ a)
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 X) a)
     (boundedConstructibleLowerShriekId ℓ X)
     (eqToIso (congrArg (fun p : X ⟶ Y ↦
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p) (Category.id_comp a)))
+      boundedConstructibleLowerShriek ℓ p) (Category.id_comp a)))
     (fun K ↦ by
       rw [boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
         eqToHom_app]
@@ -458,14 +457,14 @@ lemma upperShriekComp_id_left_hom_app {X Y : Over (Spec (.of k))} [LocallyOfFini
 /-- The identification `ω_s ≅ R(𝟙)^! ω_s = Rd^! ω_s ≅ ω_s` for `d = 𝟙` is the identity. -/
 lemma upperShriekIso_inv_comp_dualizingComplexComp {d : point k ⟶ point k} (hd : d = 𝟙 _) :
     (eqToIso (congrArg (fun d : point k ⟶ point k ↦
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ d) hd) ≪≫
+        boundedConstructibleUpperShriek ℓ d) hd) ≪≫
         boundedConstructibleUpperShriekId ℓ (point k)).inv.app (dualizingComplex' ℓ (point k)) ≫
       (dualizingComplexComp ℓ d).hom = 𝟙 _ := by
   subst hd
   have h := upperShriekComp_id_left_hom_app ℓ (toPoint (point k)) (𝟙_ _)
   have key : (boundedConstructibleUpperShriekComp_padicAlgCl ℓ (𝟙 _) (toPoint (point k))).inv.app
       (𝟙_ _) ≫ eqToHom (congrArg (fun p : point k ⟶ point k ↦
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _))
+        (boundedConstructibleUpperShriek ℓ p).obj (𝟙_ _))
           (Category.id_comp (toPoint (point k)))) =
       (boundedConstructibleUpperShriekId ℓ (point k)).hom.app (dualizingComplex' ℓ (point k)) := by
     rw [← cancel_epi ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ (𝟙 _)
@@ -485,8 +484,7 @@ lemma baseChange_app_comp_prodBaseChangeIso_hom_app
 lemma upperShriekIdOfEq_hom_app_unit :
     (upperShriekIdOfEq ℓ toPoint_point_eq).hom.app (𝟙_ _) = (dualizingComplexPointIso ℓ k).hom := by
   simp only [upperShriekIdOfEq, NatIso.ofComponents_hom_app, Iso.trans_hom, eqToIso.hom,
-    Iso.app_hom, dualizingComplexPointIso]
-  exact Category.id_comp _
+    Iso.app_hom, dualizingComplexPointIso, upperShriekUnitIsoOfEqId]
 
 /-- **The base change part of the transport of the exceptional Künneth map** over the base
 point: `ζ` at `Lp₂^* ω_s`, followed by the inverse of compact-support base change in the product
@@ -498,7 +496,7 @@ lemma pointKunneth_baseChange {φ : dualizingComplex' ℓ (point k) ⟶ 𝟙_ _}
           (dualizingComplex' ℓ (point k))) ≫
         (prodBaseChangeIso ℓ (point k) (point k)).hom.app (dualizingComplex' ℓ (point k)) ≫
         (boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
-          ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (point k))).counit.app
+          ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint (point k))).counit.app
             (𝟙_ _)) ≫
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint (point k)))).inv =
       (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom ≫ φ := by
@@ -513,7 +511,7 @@ lemma pointKunneth_baseChange {φ : dualizingComplex' ℓ (point k) ⟶ 𝟙_ _}
         Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
           ((boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj
             (dualizingComplex' ℓ (point k))) ≫
-        (boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
+        (boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).map
           ((Θpt).hom.app (dualizingComplex' ℓ (point k))) := by
     rw [← hζ, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
       Category.id_comp]

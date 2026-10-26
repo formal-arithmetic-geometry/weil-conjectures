@@ -92,7 +92,7 @@ theorem isIso_of_isIso_derivedReduction_map
     (φ : K ⟶ L)
     (h : IsIso ((derivedReduction X ℓ E).map ((boundedConstructible _).ι.map φ))) :
     IsIso φ := by
-  have := isTriangulated_boundedConstructible (ℓ := ℓ) (Profinite.padicIntegersRingObj ℓ E.1) X
+  have := isTriangulated_boundedConstructible_padicIntegersRingObj X ℓ E.1
   suffices IsIso ((boundedConstructible _).ι.map φ) from
     isIso_of_reflects_iso φ (boundedConstructible _).ι
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle ((boundedConstructible _).ι.map φ)

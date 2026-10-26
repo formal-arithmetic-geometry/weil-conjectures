@@ -56,7 +56,7 @@ isomorphism `γ : T[2d] ≅ ω_X`, a Weil datum `τ` on `T`, and the pairing
 `AlgebraicGeometry.Etale.poincarePairing`. -/
 theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h)
     {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a) {K : DerivedCategoryModule Λ X}
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (τ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj T ⟶ T)
     (ψ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor _ X).obj
@@ -64,10 +64,12 @@ theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h)
       ((derivedTensor _ X).obj ((DerivedCategory.coefficientDual _ X).obj (op K))).obj T)
     (hψ : IsWeilPairing g φ ψ τ (twistedEvaluation T K))
     (hTr : IsWeilMorphism h (lowerShriekWeilDatum sq (shiftWeilDatum g τ (2 * d)))
-      (leftDerivedUpperStarUnitIso _ h).hom (smoothTrace γ)) :
+      (leftDerivedUpperStarUnitIso _ h).hom
+        (smoothTrace (rightDerivedUpperShriekAdjunction Λ a) γ)) :
     IsWeilPairing h (lowerShriekWeilDatum sq φ)
       (shiftWeilDatum h (lowerStarWeilDatum sq.toCommSq ψ) (2 * d))
-      (leftDerivedUpperStarUnitIso _ h).hom (poincarePairing a γ K) := by
+      (leftDerivedUpperStarUnitIso _ h).hom
+      (poincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ K) := by
   have h1 := ((isWeilPairing_mixedSupportCupProduct sq φ ψ).comp
     (hψ.rightDerivedLowerShriek_map sq)).shift_right (2 * d)
   refine ((h1.comp (isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv sq τ

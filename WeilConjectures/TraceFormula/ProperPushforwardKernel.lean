@@ -69,10 +69,10 @@ Rf_* K ⊗ Rf_* D_X K --μ_f--> Rf_* (K ⊗ D_X K) --Rf_* ev--> Rf_* ω_X --τ_f
 -/
 noncomputable def lowerStarVerdierDualMap (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K) ⟶
-      verdierDual ℓ (toPoint Y) ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
+    (boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K) ⟶
+      verdierDual ℓ ((boundedConstructibleLowerStar ℓ f).obj K) :=
   curry (lowerStarTensorMap ℓ f K _ ≫
-    (boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
+    (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
     lowerStarDualizingComplexTrace ℓ f)
 
 /-- The *kernel pushforward* `ρ_f = (1 ⊠ χ_f) ∘ Π_f⁻¹ : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` along a
@@ -80,11 +80,11 @@ proper morphism `f`, `q = f × f`, `K' = Rf_* K` (blueprint `def-trf-kernel-push
 item 5). -/
 noncomputable def kernelPushforward (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar _ ℓ (prod.map f f)).obj
-        (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ⟶
-      externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        (verdierDual ℓ (toPoint Y) ((boundedConstructibleLowerStar _ ℓ f).obj K)) :=
-  inv (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ (toPoint X) K)) ≫
+    (boundedConstructibleLowerStar ℓ (prod.map f f)).obj
+        (externalProduct ℓ K (verdierDual ℓ K)) ⟶
+      externalProduct ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+        (verdierDual ℓ ((boundedConstructibleLowerStar ℓ f).obj K)) :=
+  inv (prodLowerStarExternalProduct ℓ f f K (verdierDual ℓ K)) ≫
     (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).map
       (lowerStarVerdierDualMap ℓ f K))
 
@@ -103,9 +103,9 @@ variable (c : Correspondence ℓ K)
 `def-trf-kernel-pushforward-maps`, item 7): the exceptional adjoint of
 `ℚ̄_ℓ,C --ũ--> 𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
 noncomputable def kernelClass :
-    (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
-      externalProduct ℓ K (verdierDual ℓ (toPoint X) K) :=
-  ((boundedConstructibleUpperShriekAdjunction _ ℓ c.support).homEquiv _ _).symm
+    (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
+      externalProduct ℓ K (verdierDual ℓ K) :=
+  ((boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _).symm
     (c.mate ≫ c.verdierDualityIso.hom)
 
 namespace FixedLocus
@@ -116,11 +116,11 @@ variable {c} (F : c.FixedLocus)
 `def-trf-kernel-pushforward-maps`, item 8): the inverse of the right-adjoint form of base change
 in the fixed square followed by `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportIso :
-    (boundedConstructibleLowerStar _ ℓ F.ι).obj (dualizingComplex' ℓ F.F) ≅
-      (boundedConstructibleUpperShriek _ ℓ c.support).obj
-        ((boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) :=
+    (boundedConstructibleLowerStar ℓ F.ι).obj (dualizingComplex' ℓ F.F) ≅
+      (boundedConstructibleUpperShriek ℓ c.support).obj
+        ((boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X)) :=
   (F.upperShriekLowerStarIso.app (dualizingComplex' ℓ X) ≪≫
-    (boundedConstructibleLowerStar _ ℓ F.ι).mapIso (dualizingComplexComp ℓ F.d)).symm
+    (boundedConstructibleLowerStar ℓ F.ι).mapIso (dualizingComplexComp ℓ F.d)).symm
 
 end FixedLocus
 
@@ -128,7 +128,7 @@ end FixedLocus
 `def-trf-kernel-pushforward-maps`, last paragraph). -/
 lemma traceMap_eq (F : c.FixedLocus) :
     c.traceMap F = c.verdierDualityIso.hom ≫
-      (boundedConstructibleUpperShriek _ ℓ c.support).map (evaluationKernel ℓ K) ≫
+      (boundedConstructibleUpperShriek ℓ c.support).map (evaluationKernel ℓ K) ≫
       F.supportIso.inv :=
   rfl
 

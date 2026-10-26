@@ -111,8 +111,8 @@ theorem upperStar_map_supportedRestriction_eq_zero_of_iso (F : c.FixedLocus)
       (F.supportedRestriction P) = 0) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
       (F.supportedRestriction Q) = 0 := by
-  have hn := (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+  have hn := (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ F.d)
     (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).natTrans.naturality e.hom
   rw [← F.supportedRestriction_eq_mateEquiv, ← F.supportedRestriction_eq_mateEquiv] at hn
   dsimp only [Functor.comp_map] at hn
@@ -230,17 +230,20 @@ theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (z ≫ F.ι)).obj K)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
-    (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0 := by
+    (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0 := by
   have hM := exists_integralModel_isZero_upperStar K (z ≫ F.ι) hK
   have h0 := pointIntegralSupportedRestriction_hom_eq_zero hΦ hm v F z hM.choose
     hM.choose_spec.choose
-    (boundedConstructibleVerdierDual _ ℓ (toPoint X) hM.choose_spec.choose)
+    (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ hM.choose.1 (toPoint X)
+        hM.choose_spec.choose)
     hM.choose_spec.choose_spec.2
   have hT := boundedConstructibleIntegersToPadicAlgCl_map_eq_zero ℓ k
     ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ hM.choose.1) ℓ z).map
       (F.supportedRestrictionIntegral hM.choose
-        (boundedConstructibleExternalProduct _ ℓ hM.choose_spec.choose
-          (boundedConstructibleVerdierDual _ ℓ (toPoint X) hM.choose_spec.choose)))) h0
+        (PadicIntegersRingObj.boundedConstructibleExternalProduct ℓ hM.choose.1
+            hM.choose_spec.choose
+          (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ hM.choose.1 (toPoint X)
+              hM.choose_spec.choose)))) h0
   have hz := NatIso.map_eq_zero_of_map_eq_zero
     (boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ hM.choose z) hT
   exact F.upperStar_map_supportedRestriction_eq_zero_of_iso z

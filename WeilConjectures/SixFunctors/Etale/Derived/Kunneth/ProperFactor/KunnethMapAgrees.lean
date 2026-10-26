@@ -127,7 +127,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_hom_app_congr {T S S' R : Scheme.{u}
   obtain rfl : c₁ = c₂ := h₁.trans h₂.symm
   rfl
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- The tensor comparison of `Lg^*` commutes with the derived braidings:
 `Lg^* β_{K, M} ≫ (Lg^* M ⊗ᴸ Lg^* K comparison) = comparison ≫ β_{Lg^* K, Lg^* M}`. -/

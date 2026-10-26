@@ -38,19 +38,18 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- The derived pushforward on bounded constructible complexes is additive. -/
-instance additive_boundedConstructibleLowerStar [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) :
-    (boundedConstructibleLowerStar Λ ℓ f).Additive := by
+instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
+    (boundedConstructibleLowerStar ℓ f).Additive := by
   unfold boundedConstructibleLowerStar
   infer_instance
 
-/-- The derived pullback `Lf^*` on bounded constructible complexes is additive, for a coefficient
-ring of Deligne's finiteness theorems: it is a left adjoint. -/
-instance additive_boundedConstructibleUpperStar [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) :
+/-- The derived pullback `Lf^*` on bounded constructible complexes is additive: it is the
+restriction of the left adjoint `L((f)^*⟦Λ⟧)` of the additive functor `R((f)_*⟦Λ⟧)`. -/
+instance additive_boundedConstructibleUpperStar (f : X ⟶ Y) :
     (boundedConstructibleUpperStar Λ ℓ f).Additive := by
-  refine ⟨fun {_ _ g g'} ↦ ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).homEquiv
-    _ _).injective ?_⟩
-  simp only [Adjunction.homEquiv_unit, Functor.map_add, Preadditive.comp_add,
-    Adjunction.unit_naturality, Preadditive.add_comp]
+  have := (derivedUpperStarLowerStarAdjunction Λ f.left).left_adjoint_additive
+  unfold boundedConstructibleUpperStar
+  infer_instance
 
 /-- The extension by zero along an open immersion on bounded constructible complexes is
 additive. -/
@@ -61,16 +60,69 @@ instance additive_boundedConstructibleOpenImmersionLowerShriek (j : X ⟶ Y)
 
 /-- The lower shriek `Rf_!^c` attached to a compactification is additive. -/
 instance additive_boundedConstructibleLowerShriekOfCompactification
-    [IsFinitenessCoefficient ℓ Λ] {f : X ⟶ Y}
+    {f : X ⟶ Y}
     (c : Compactification f.left) :
-    (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).Additive := by
+    (boundedConstructibleLowerShriekOfCompactification ℓ c).Additive := by
   unfold boundedConstructibleLowerShriekOfCompactification
   infer_instance
 
 /-- The derived lower shriek on bounded constructible complexes is additive. -/
-instance additive_boundedConstructibleLowerShriek [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) :
-    (boundedConstructibleLowerShriek Λ ℓ f).Additive := by
+instance additive_boundedConstructibleLowerShriek (f : X ⟶ Y) :
+    (boundedConstructibleLowerShriek ℓ f).Additive := by
   unfold boundedConstructibleLowerShriek
   infer_instance
+
+namespace ContinuousMapRingObj
+
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
+
+/-- The derived pushforward on bounded constructible `E`-complexes is additive. -/
+instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
+    (boundedConstructibleLowerStar ℓ E f).Additive := by
+  unfold boundedConstructibleLowerStar
+  infer_instance
+
+/-- The lower shriek `Rf_!^c` on bounded constructible `E`-complexes attached to a
+compactification is additive. -/
+instance additive_boundedConstructibleLowerShriekOfCompactification {f : X ⟶ Y}
+    (c : Compactification f.left) :
+    (boundedConstructibleLowerShriekOfCompactification ℓ E c).Additive := by
+  unfold boundedConstructibleLowerShriekOfCompactification
+  infer_instance
+
+/-- The derived lower shriek on bounded constructible `E`-complexes is additive. -/
+instance additive_boundedConstructibleLowerShriek (f : X ⟶ Y) :
+    (boundedConstructibleLowerShriek ℓ E f).Additive := by
+  unfold boundedConstructibleLowerShriek
+  infer_instance
+
+end ContinuousMapRingObj
+
+namespace PadicIntegersRingObj
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+
+/-- The derived pushforward on bounded constructible `𝒪_E`-complexes is additive. -/
+instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
+    (boundedConstructibleLowerStar ℓ E f).Additive := by
+  unfold boundedConstructibleLowerStar
+  infer_instance
+
+/-- The lower shriek `Rf_!^c` on bounded constructible `𝒪_E`-complexes attached to a
+compactification is additive. -/
+instance additive_boundedConstructibleLowerShriekOfCompactification {f : X ⟶ Y}
+    (c : Compactification f.left) :
+    (boundedConstructibleLowerShriekOfCompactification ℓ E c).Additive := by
+  unfold boundedConstructibleLowerShriekOfCompactification
+  infer_instance
+
+/-- The derived lower shriek on bounded constructible `𝒪_E`-complexes is additive. -/
+instance additive_boundedConstructibleLowerShriek (f : X ⟶ Y) :
+    (boundedConstructibleLowerShriek ℓ E f).Additive := by
+  unfold boundedConstructibleLowerShriek
+  infer_instance
+
+end PadicIntegersRingObj
 
 end AlgebraicGeometry.ProEtale.CondensedRing

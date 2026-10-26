@@ -187,7 +187,7 @@ lemma fixedLocusOfEnd_d (v : K ⟶ K) : (fixedLocusOfEnd v).d = 𝟙 (point k) :
 /-- The identification `Rd^! ≅ 𝟭` for the map `d = 𝟙` of the fixed square of a diagonal
 correspondence over the base point. -/
 noncomputable def fixedLocusOfEndUpperShriekIso (v : K ⟶ K) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (fixedLocusOfEnd v).d ≅
+    boundedConstructibleUpperShriek ℓ (fixedLocusOfEnd v).d ≅
       𝟭 _ :=
   eqToIso (by rw [fixedLocusOfEnd_d]) ≪≫ boundedConstructibleUpperShriekId ℓ (point k)
 
@@ -195,10 +195,10 @@ noncomputable def fixedLocusOfEndUpperShriekIso (v : K ⟶ K) :
 correspondence of `v` over the base point is computed: the adjoint along the fixed locus of
 `LΔ^*` of the class of the identity read through `κ⁻¹`. -/
 noncomputable def pointCoev (v : K ⟶ K) :
-    𝟙_ _ ⟶ K ⊗ verdierDual ℓ (toPoint (point k)) K :=
+    𝟙_ _ ⟶ K ⊗ verdierDual ℓ K :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom ≫
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
-    (boundedConstructibleUpperShriek _ ℓ (fixedLocusOfEnd v).d).map
+    (boundedConstructibleUpperShriekAdjunction ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
+    (boundedConstructibleUpperShriek ℓ (fixedLocusOfEnd v).d).map
       ((fixedLocusOfEnd v).lowerShriekBaseChangeIso.inv.app (𝟙_ _) ≫
         (boundedConstructibleUpperStar _ ℓ (diag (point k))).map
           (diagUnitClass ℓ (ofEnd K v).support_snd (ofEnd K v).support_fst.symm ≫
@@ -210,7 +210,7 @@ noncomputable def pointCoev (v : K ⟶ K) :
 correspondence of `v` over the base point is computed: the evaluation followed by
 `ω_s ≅ ℚ̄_ℓ`. -/
 noncomputable def pointPairing (v : K ⟶ K) :
-    K ⊗ verdierDual ℓ (toPoint (point k)) K ⟶ 𝟙_ _ :=
+    K ⊗ verdierDual ℓ K ⟶ 𝟙_ _ :=
   (ihom.ev K).app (dualizingComplex' ℓ (point k)) ≫
     (fixedLocusOfEndUpperShriekIso v).inv.app _ ≫
     (dualizingComplexComp ℓ (fixedLocusOfEnd v).d).hom ≫ (dualizingComplexPointIso ℓ k).hom
@@ -223,8 +223,8 @@ theorem integral_traceClass_ofEnd_eq (v : K ⟶ K) :
   rw [BorelMooreSection.integral_point, traceClass_eq_homEquiv]
   have h := Verdier.integral_traceClass_aux
     (G := boundedConstructibleUpperStar _ ℓ (diag (point k)))
-    (T := (boundedConstructibleLowerShriek _ ℓ (ofEnd K v).support).obj (𝟙_ _))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d)
+    (T := (boundedConstructibleLowerShriek ℓ (ofEnd K v).support).obj (𝟙_ _))
+    (boundedConstructibleUpperShriekAdjunction ℓ (fixedLocusOfEnd v).d)
     (fixedLocusOfEndUpperShriekIso v)
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom
     ((fixedLocusOfEnd v).lowerShriekBaseChangeIso.inv.app (𝟙_ _)) _ _ _
@@ -264,9 +264,9 @@ lemma diagUpperStarProjIso_tensor (p : point k ⨯ point k ⟶ point k)
       Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (diag (point k))) _ _ ≫
       ((diagUpperStarProjIso ℓ p hp M).hom ⊗ₘ (diagUpperStarProjIso ℓ p hp L).hom) =
     (diagUpperStarProjIso ℓ p hp (M ⊗ L)).hom := by
-  have h₁ := boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ (diag (point k)) p M L
+  have h₁ := boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ (diag (point k)) p M L
   have h₂ := upperStar_δ_eqToHom (ℓ := ℓ) hp M L
-  have h₃ := boundedConstructibleUpperStarId_hom_app_tensor_δ _ ℓ (point k) M L
+  have h₃ := boundedConstructibleUpperStarId_hom_app_tensor_δ ℓ (point k) M L
   refine Verdier.tensor_comp_iso_aux (C := Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app (M ⊗ L))
     ((boundedConstructibleUpperStarComp _ ℓ (diag (point k)) p).app M)
@@ -320,9 +320,9 @@ factors. -/
 noncomputable def pointTau (v : K ⟶ K) :
     𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
       (boundedConstructibleUpperStar _ ℓ (diag (point k))).obj
-      ((boundedConstructibleLowerShriek _ ℓ (diag (point k))).obj (𝟙_ _)) :=
+      ((boundedConstructibleLowerShriek ℓ (diag (point k))).obj (𝟙_ _)) :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (fixedLocusOfEnd v).ι)).hom ≫
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
+    (boundedConstructibleUpperShriekAdjunction ℓ (fixedLocusOfEnd v).d).unit.app _ ≫
     (fixedLocusOfEndUpperShriekIso v).hom.app _ ≫
     (fixedLocusOfEnd v).lowerShriekBaseChangeIso.inv.app (𝟙_ _)
 

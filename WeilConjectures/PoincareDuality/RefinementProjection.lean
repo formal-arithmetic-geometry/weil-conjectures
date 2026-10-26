@@ -56,22 +56,24 @@ lemma boundedConstructibleOpenImmersionLowerShriekRefinement_app (w : i ≫ h = 
     Adjunction.restrictionComparison, Functor.squareTransport]
 
 omit [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] in
-variable [IsEllAdicFinitenessCoefficient ℓ Λ] in
 /-- The triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*` is compatible with the multiplications of the
 monoidal derived pullbacks. -/
 lemma boundedConstructibleUpperStarTriangleComparison_μ (w : i ≫ h = i₁)
-    (K M : Dᵇc(Z₁.left)⟦Λ⟧) :
-    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ i₁) K M ≫
-        (boundedConstructibleUpperStarTriangleComparison Λ ℓ w).hom.app (K ⊗ M) =
-      ((boundedConstructibleUpperStarTriangleComparison Λ ℓ w).hom.app K ⊗ₘ
-          (boundedConstructibleUpperStarTriangleComparison Λ ℓ w).hom.app M) ≫
-        Functor.LaxMonoidal.μ (boundedConstructibleUpperStar Λ ℓ h ⋙
-          boundedConstructibleUpperStar Λ ℓ i) K M := by
+    (K M : Dᵇc(Z₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i₁) K M ≫
+        (boundedConstructibleUpperStarTriangleComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+            w).hom.app (K ⊗ M) =
+      ((boundedConstructibleUpperStarTriangleComparison (Profinite.padicAlgClRingObj ℓ) ℓ w).hom.app
+          K ⊗ₘ
+          (boundedConstructibleUpperStarTriangleComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+              w).hom.app M) ≫
+        Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h ⋙
+          boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i) K M := by
   subst w
   refine Adjunction.μ_comp_hom_app_eq_of_δ _ (fun K M ↦ ?_) K M
   simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom, eqToIso_refl,
     Iso.refl_hom, Category.id_comp,
     Functor.OplaxMonoidal.comp_δ]
-  exact boundedConstructibleUpperStarComp_hom_app_tensor_δ Λ ℓ i h K M
+  exact boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ i h K M
 
 end AlgebraicGeometry.ProEtale.CondensedRing

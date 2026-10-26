@@ -71,10 +71,10 @@ variable (ℓ) {W Y U : Over (Spec (.of k))} [LocallyOfFiniteType W.hom] [QuasiC
 noncomputable def boundedConstructibleUpperShriekOpenRestrict {jW : W ⟶ Y} {g : Y ⟶ X}
     {gW : W ⟶ U} {j : U ⟶ X} [IsOpenImmersion jW.left] [IsOpenImmersion j.left]
     (w : gW ≫ j = jW ≫ g) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
+    boundedConstructibleUpperShriek ℓ g ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ jW ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ gW :=
+        boundedConstructibleUpperShriek ℓ gW :=
   Functor.isoWhiskerLeft _ (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ jW).symm ≪≫
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ jW g).symm ≪≫
     eqToIso (by rw [w]) ≪≫
@@ -105,7 +105,7 @@ noncomputable def pointOpenRestriction
           K) ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (preimagePointComplι c.c₂ x)).obj
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj
+        ((boundedConstructibleUpperShriek ℓ c.c₁).obj
           (pointOpenPiece K x)) :=
   (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
       (preimagePointComplRestrict c.c₂ x) (pointComplι x)).inv.app K ≫
@@ -121,7 +121,7 @@ noncomputable def pointOpenRestriction
       (preimagePointComplHomOfLE hle)).map
       ((boundedConstructibleUpperShriekOpenRestrict ℓ
           (isPullback_preimagePointComplRestrict c.c₁ x).w).hom.app K ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleUpperShriek ℓ
           (preimagePointComplRestrict c.c₁ x)).map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
             (Profinite.padicAlgClRingObj ℓ) ℓ (pointComplι x)).unit.app _) ≫
@@ -139,7 +139,7 @@ noncomputable def pointOpenPieceCoeff
     (hle : c.c₂.left ⁻¹ᵁ pointComplOpens x ≤ c.c₁.left ⁻¹ᵁ pointComplOpens x) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
         (pointOpenPiece K x) ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj
         (pointOpenPiece K x) :=
   (openSquareExchange ℓ (isPullback_preimagePointComplRestrict c.c₂ x)).hom.app _ ≫
     ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction

@@ -80,16 +80,13 @@ variable (X : Scheme.{u})
 
 /-- The extension of scalars `T_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦E⟧` preserves zero morphisms, as the
 derived extension of scalars, a left adjoint, does. -/
-instance : (boundedConstructibleExtendScalars X ℓ E).PreservesZeroMorphisms where
-  map_zero A B := (boundedConstructible _).ι.map_injective (by
-    have := (Mod.derivedExtendMapDerivedCategoryAdjunction
-      (padicIntegersToPadicSubfield X ℓ E)).isLeftAdjoint
-    have := Functor.preservesZeroMorphisms_of_isLeftAdjoint
-      (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor
-    have h := (boundedConstructibleExtendScalarsCompatibility X ℓ E).hom.naturality (0 : A ⟶ B)
-    simp only [Functor.comp_map, Functor.map_zero, Limits.comp_zero] at h
-    rw [(boundedConstructible _).ι.map_zero]
-    exact (cancel_mono _).1 (h.trans (Limits.zero_comp).symm))
+instance : (boundedConstructibleExtendScalars X ℓ E).PreservesZeroMorphisms := by
+  have := (Mod.derivedExtendMapDerivedCategoryAdjunction
+    (padicIntegersToPadicSubfield X ℓ E)).left_adjoint_additive
+  have : (boundedConstructibleExtendScalars X ℓ E).Additive := by
+    unfold boundedConstructibleExtendScalars
+    infer_instance
+  exact Functor.preservesZeroMorphisms_of_additive _
 
 end Zero
 
@@ -107,12 +104,12 @@ variable {Z Y : Over (Spec (.of k))}
 mate of the inverse of the pullback comparison under the adjunctions `g^* ⊣ Rg_*`, that is, the
 unit of `g^* ⊣ Rg_*`, the pullback comparison and the counit. -/
 noncomputable def boundedConstructibleLowerStarExtendScalars :
-    boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ g ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 g ⋙
         boundedConstructibleExtendScalars Y.left ℓ E ⟶
       boundedConstructibleExtendScalars Z.left ℓ E ⋙
-        boundedConstructibleLowerStar (Profinite.continuousMapRingObj E.1) ℓ g :=
-  mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
+        ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g :=
+  mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E.1 g)
+    (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E g)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).inv
 
 /-- **(Push) is an isomorphism** for `𝒪_E ⟶ E` (blueprint `det-prop-scalar-six-direct-image`
@@ -124,17 +121,17 @@ theorem isIso_boundedConstructibleLowerStarExtendScalars :
   have := noetherianSpace_left_of_over Z
   exact Rationalization.isIso_mateEquiv_of_isLocalization (M := Submonoid.powers (ℓ : ℤ))
     (boundedConstructibleExtendScalars Y.left ℓ E) (boundedConstructibleExtendScalars Z.left ℓ E)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g)
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E.1 g)
+    (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E g)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g)
 
 /-- **(Push)** on bounded constructible complexes, for the inclusion `𝒪_E ⟶ E`:
 `Rg_*^{𝒪_E} ⋙ T_Y ≅ T_Z ⋙ Rg_*^E`. -/
 noncomputable def boundedConstructibleLowerStarExtendScalarsIso :
-    boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ g ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 g ⋙
         boundedConstructibleExtendScalars Y.left ℓ E ≅
       boundedConstructibleExtendScalars Z.left ℓ E ⋙
-        boundedConstructibleLowerStar (Profinite.continuousMapRingObj E.1) ℓ g :=
+        ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g :=
   haveI := isIso_boundedConstructibleLowerStarExtendScalars ℓ E g
   asIso (boundedConstructibleLowerStarExtendScalars ℓ E g)
 
@@ -188,10 +185,10 @@ variable {X Y : Over (Spec (.of k))}
 (Push) for the proper `g`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationExtendScalarsIso
     {f : X ⟶ Y} (c : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.padicIntegersRingObj ℓ E.1) ℓ c ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E.1 c ⋙
         boundedConstructibleExtendScalars Y.left ℓ E ≅
       boundedConstructibleExtendScalars X.left ℓ E ⋙
-        boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E.1) ℓ
+        ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
           c :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarExtendScalarsIso ℓ E c.overG) ≪≫
@@ -206,10 +203,10 @@ variable (f : X ⟶ Y)
 `det-prop-scalar-six-compact-support`): `Rf_!^{𝒪_E} ⋙ T_Y ≅ T_X ⋙ Rf_!^E`, along the chosen
 compactification. -/
 noncomputable def boundedConstructibleLowerShriekExtendScalarsIso :
-    boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E.1) ℓ f ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 f ⋙
         boundedConstructibleExtendScalars Y.left ℓ E ≅
       boundedConstructibleExtendScalars X.left ℓ E ⋙
-        boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E.1) ℓ f :=
+        ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E f :=
   boundedConstructibleLowerShriekOfCompactificationExtendScalarsIso ℓ E
     (compactificationOverField f)
 
@@ -218,19 +215,19 @@ noncomputable def boundedConstructibleLowerShriekExtendScalarsIso :
 `β : Rf^!_{𝒪_E} ⋙ T_X ⟶ T_Y ⋙ Rf^!_E`, the mate of the inverse of (Shriek)
 (`boundedConstructibleLowerShriekExtendScalarsIso`) under the adjunctions `Rf_! ⊣ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekExtendScalars :
-    boundedConstructibleUpperShriek (Profinite.padicIntegersRingObj ℓ E.1) ℓ f ⋙
+    PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f ⋙
         boundedConstructibleExtendScalars X.left ℓ E ⟶
       boundedConstructibleExtendScalars Y.left ℓ E ⋙
-        boundedConstructibleUpperShriek (Profinite.continuousMapRingObj E.1) ℓ f :=
-  mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+        ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E f :=
+  mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv
 
 /-- The exchange for `f^!` as the mate of a two-square. -/
 lemma boundedConstructibleUpperShriekExtendScalars_eq_mateEquiv :
     boundedConstructibleUpperShriekExtendScalars ℓ E f =
-      (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-        (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+      (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
+        (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
         (TwoSquare.mk _ _ _ _
           (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)).natTrans :=
   rfl
@@ -244,16 +241,16 @@ theorem isIso_boundedConstructibleUpperShriekExtendScalars :
   have := noetherianSpace_left_of_over Y
   exact Rationalization.isIso_mateEquiv_of_isLocalization (M := Submonoid.powers (ℓ : ℤ))
     (boundedConstructibleExtendScalars X.left ℓ E) (boundedConstructibleExtendScalars Y.left ℓ E)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f)
 
 /-- The exchange for `f^!` as an isomorphism `Rf^!_{𝒪_E} ⋙ T_X ≅ T_Y ⋙ Rf^!_E`. -/
 noncomputable def boundedConstructibleUpperShriekExtendScalarsIso :
-    boundedConstructibleUpperShriek (Profinite.padicIntegersRingObj ℓ E.1) ℓ f ⋙
+    PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f ⋙
         boundedConstructibleExtendScalars X.left ℓ E ≅
       boundedConstructibleExtendScalars Y.left ℓ E ⋙
-        boundedConstructibleUpperShriek (Profinite.continuousMapRingObj E.1) ℓ f :=
+        ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E f :=
   haveI := isIso_boundedConstructibleUpperShriekExtendScalars ℓ E f
   asIso (boundedConstructibleUpperShriekExtendScalars ℓ E f)
 

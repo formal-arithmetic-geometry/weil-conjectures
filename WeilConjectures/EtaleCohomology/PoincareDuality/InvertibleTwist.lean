@@ -78,8 +78,8 @@ local notation "𝐃(" X ", " A ")" =>
 
 namespace Etale
 
-variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
-  {d : ℕ}
+variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] {d : ℕ}
+  {G : 𝐃(Y, A) ⥤ 𝐃(X, A)} (adj : R(a)_![A] ⊣ G)
 
 section Perfectness
 
@@ -113,8 +113,7 @@ theorem bijective_derivedTensor_map_comp_twistedEvaluation_of_isIso
     fun g ↦ ⟨MonoidalClosed.curry g, MonoidalClosed.uncurry_curry g⟩⟩
     ((isIso_iff_yoneda_map_bijective _).1 hi _)
 
-omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] [HasCompactification a]
-  [(R(a)_![A]).IsLeftAdjoint] in
+omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] [HasCompactification a] in
 /-- The adjoint description of the evaluation part of the derived Poincaré pairing, when the
 comparison map `K^∨ ⊗ᴸ T ⟶ RHom(K, T)` is an isomorphism: maps `h : N ⟶ Ra_*(K^∨ ⊗ᴸ T)`
 correspond bijectively to maps `K ⊗ᴸ La^* N ⟶ T`. -/
@@ -147,29 +146,29 @@ objects detecting isomorphisms after the shift by `2d`. This is
 `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isDetecting` with the
 dualizability of `K` replaced by its only consequence used in the proof. -/
 theorem isPerfectPairing_poincarePairing_of_isDetecting_of_isIso {T : 𝐃(X, A)}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hi : IsIso (MonoidalClosed.ihomUnitTensorToIhom K T))
     (S : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) → Prop)
     (hS : ∀ ⦃P Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)⦄ (u : P ⟶ Q),
       (∀ N, S N → Function.Bijective (fun g : N⟦(2 * d : ℤ)⟧ ⟶ P ↦ g ≫ u)) → IsIso u)
     (hPF : ∀ N, S N → HasProjectionFormula A a K N) :
-    IsPerfectPairing (poincarePairing a γ K) := by
+    IsPerfectPairing (poincarePairing adj γ K) := by
   constructor
   rw [poincarePairing, poincarePairingEvaluation, mixedSupportCupProduct]
   exact MonoidalClosed.isIso_curry_of_projection _ _ _ _ _ _ _ _ _ S hS hPF
     (bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation_of_isIso A a hi)
-    (bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace A a γ)
+    (bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace A a adj γ)
 
 omit [HasSmallSiteSheafify A] in
 /-- The derived Poincaré pairing `β_K` is perfect for every `K` at which the projection formula
 holds against every object, as soon as the twist `T` is invertible. -/
 theorem isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula {T : 𝐃(X, A)}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a) (hT : IsInvertible T)
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _)) (hT : IsInvertible T)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hPF : ∀ N, HasProjectionFormula A a K N) :
-    IsPerfectPairing (poincarePairing a γ K) :=
-  isPerfectPairing_poincarePairing_of_isDetecting_of_isIso A a γ
+    IsPerfectPairing (poincarePairing adj γ K) :=
+  isPerfectPairing_poincarePairing_of_isDetecting_of_isIso A a adj γ
     (MonoidalClosed.isIso_ihomUnitTensorToIhom_of_isInvertible K hT) (fun _ ↦ True)
     (fun _ _ u hu ↦ isIso_of_bijective_comp_shift (2 * d : ℤ) u fun N ↦ hu N trivial)
     (fun N _ ↦ hPF N)
@@ -188,10 +187,10 @@ Indeed `K^∨ ⊗ᴸ T ≅ RHom(K, T)` for `T` invertible
 (`CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom_of_isInvertible`), which is the only
 use of the dualizability of `K` in `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`. -/
 theorem isPerfectPairing_poincarePairing_of_isInvertible {T : DerivedCategoryModule Λ X}
-    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a) (hT : IsInvertible T)
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) (hT : IsInvertible T)
     (K : DerivedCategoryModule Λ X) :
-    IsPerfectPairing (poincarePairing a γ K) :=
-  isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula _ a γ hT fun N ↦
+    IsPerfectPairing (poincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ K) :=
+  isPerfectPairing_poincarePairing_of_isInvertible_of_hasProjectionFormula _ a _ γ hT fun N ↦
     hasProjectionFormula_of_finite Λ a K N
 
 end ModuleCat

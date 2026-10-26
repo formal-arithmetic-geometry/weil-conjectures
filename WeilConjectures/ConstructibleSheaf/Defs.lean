@@ -39,11 +39,10 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
   constant and finite.
 - `F` is *constructible* (`IsConstructibleSheaf`) if there is a stratification of `X`
   (`Scheme.Stratification`: a stratification of the underlying topological space of `X` —
-  a finite partition into constructible locally closed subsets, `Topology.Stratification`,
-  following [Stacks 09XZ] and [Stacks 03RW] — together with schemes immersed in `X` realizing
-  the strata) such that the pullback of `F` to each stratum is finite locally constant. For
-  `X` quasi-compact and quasi-separated this is the affine-local notion of [Stacks 03RW]; in
-  general it is stronger, see `IsConstructibleSheaf`.
+  a finite partition into locally closed subsets, `Topology.Stratification`, following
+  [Stacks 09XZ], whose strata are constructible subsets — together with schemes immersed in
+  `X` realizing the strata) such that
+  the pullback of `F` to each stratum is finite locally constant.
 
 All four predicates are `Prop`-valued classes.
 
@@ -186,7 +185,10 @@ variable {A : Type u'} [Category.{u + 1} A]
 (`CategoryTheory.ConcreteCategory.IsFinitelyGenerated`): for sheaves of `Λ`-modules the stalks
 are finitely generated `Λ`-modules (`ModuleCat.isFinitelyGenerated_iff`), for sheaves of sets
 they are finite sets (`CategoryTheory.ConcreteCategory.isFinitelyGenerated_iff_finite`). Over a
-finite ring `Λ` this says that the stalks are finite. A geometric point `Spec Ω ⟶ X`, with `Ω` a
+finite ring `Λ` this says that the stalks are finite. For sheaves of `Λ`-modules it is
+equivalent to every stalk receiving an epimorphism `Λ^n ⟶ F_s̄` from a finite free module
+(`AlgebraicGeometry.Scheme.isFiniteSheaf_iff_exists_epi`), the element-free form to which this
+definition can be switched. A geometric point `Spec Ω ⟶ X`, with `Ω` a
 separably closed field, induces a point of the small étale site (`Scheme.pointSmallEtale`), and
 the stalk of `F` is its fiber `CategoryTheory.GrothendieckTopology.Point.sheafFiber` at this
 point. -/
@@ -194,6 +196,21 @@ class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   isFinitelyGenerated_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) :
     ConcreteCategory.IsFinitelyGenerated ((pointSmallEtale s).sheafFiber.obj F)
+
+/-- **Finite sheaves of modules via epimorphisms from finite free modules.** A sheaf of
+`Λ`-modules on the small étale site of `X` is finite if and only if each of its stalks at a
+geometric point receives an epimorphism `Λ^n ⟶ F_s̄` from a finite free `Λ`-module
+(`ModuleCat.isFinitelyGenerated_iff_exists_epi`). The right-hand side is a definition of
+finiteness that does not refer to elements of the stalks, to which `IsFiniteSheaf` can be
+switched. -/
+lemma isFiniteSheaf_iff_exists_epi {Λ : Type (u + 1)} [Ring Λ]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsFiniteSheaf F ↔ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+      ∃ (n : ℕ) (f : ModuleCat.of Λ (Fin n → Λ) ⟶ (pointSmallEtale s).sheafFiber.obj F),
+        Epi f :=
+  ⟨fun h Ω _ _ s ↦ (ModuleCat.isFinitelyGenerated_iff_exists_epi _).1
+      (h.isFinitelyGenerated_sheafFiber Ω s),
+    fun h ↦ ⟨fun Ω _ _ s ↦ (ModuleCat.isFinitelyGenerated_iff_exists_epi _).2 (h Ω s)⟩⟩
 
 end FiniteSheaf
 

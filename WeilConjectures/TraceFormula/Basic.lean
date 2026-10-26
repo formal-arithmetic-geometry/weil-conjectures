@@ -107,13 +107,14 @@ noncomputable def isTerminalPoint : IsTerminal (point k) :=
 
 variable {k}
 
-/-- The structure morphism `a_X : X ⟶ s` of a scheme over `Spec k`. -/
+/-- The structure morphism `a_X : X ⟶ s` of a scheme over `Spec k`: the morphism to the terminal
+object, as in `ProEtale.CondensedRing.dualizingComplex`. -/
 noncomputable def toPoint (X : Over (Spec (.of k))) : X ⟶ point k :=
-  Over.homMk X.hom (by simp)
+  Over.mkIdTerminal.from X
 
 @[simp]
 lemma toPoint_left (X : Over (Spec (.of k))) : (toPoint X).left = X.hom :=
-  rfl
+  Over.mkIdTerminal_from_left X
 
 /-- Two morphisms to the base point are equal. -/
 lemma toPoint_ext {X : Over (Spec (.of k))} (f g : X ⟶ point k) : f = g :=
@@ -145,28 +146,31 @@ instance additive_upperStarFromPoint (X : Scheme.{u}) : (upperStarFromPoint X).A
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
   exact Functor.additive_of_preservesBinaryBiproducts _
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- The global sections of the coefficient ring `Λ` act on the unit `Λ_X` of `Dᵇc(X)⟦Λ⟧`: a
-global section `s : 𝟙 ⟶ Λ` is sent to the multiplication by its pullback `p_X^* s` on `Λ_X`
+/-- The global sections of the coefficient ring `ℚ̲̄_ℓ` act on the unit `Λ_X` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: a
+global section `s : 𝟙 ⟶ ℚ̲̄_ℓ` is sent to the multiplication by its pullback `p_X^* s` on `Λ_X`
 (`Mod.regularEndRingHom`), placed in degree `0`. -/
 noncomputable def boundedConstructibleUnitEndRingHom :
-    Γ Λ →+* End (𝟙_ (Dᵇc(X.left)⟦Λ⟧)) :=
+    Γ (Profinite.padicAlgClRingObj ℓ) →+* End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   let F := HomologicalComplex.single
-      (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj Λ X.left))
+      (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj
+          (Profinite.padicAlgClRingObj ℓ) X.left))
       (ComplexShape.up ℤ) 0 ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙
     DerivedCategory.Qh
-  have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_ (Dᵇc(X.left)⟦Λ⟧))) :=
+  have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_
+      (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
     (ObjectProperty.fullyFaithfulι _).map_bijective _ _
   have : IsIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left)))) := inferInstanceAs (IsIso (𝟙 _))
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) := inferInstanceAs (IsIso (𝟙 _))
   ((RingEquiv.ofBijective _ hι).symm.toRingHom.comp
     ((asIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-        (condensedRingObj Λ X.left))))).symm.conjRingEquiv.toRingHom.comp
-      ((F.mapEndRingHom (Mod.regular (condensedRingObj Λ X.left))).comp
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+            X.left))))).symm.conjRingEquiv.toRingHom.comp
+      ((F.mapEndRingHom (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+          X.left))).comp
         (Mod.regularEndRingHom.comp (Γ.mapFunctor (upperStarFromPoint X.left))))))
 
 /-- The canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(X)⟦ℚ̲̄_ℓ⟧)`: a scalar `a` acts on `ℚ̄_ℓ,X` by
@@ -174,7 +178,7 @@ multiplication by the constant global section `a` of `ℚ̲̄_ℓ`
 (`Profinite.PadicAlgCl.constRingHom`). -/
 noncomputable def padicAlgClUnitEndRingHom :
     PadicAlgCl ℓ →+* End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (boundedConstructibleUnitEndRingHom _ ℓ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
+  (boundedConstructibleUnitEndRingHom ℓ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
 
 end Scalars
 

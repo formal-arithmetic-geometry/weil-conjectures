@@ -169,18 +169,18 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz_comp {f :
     {gX gX' : X ⟶ X} {gY gY' : Y ⟶ Y} (s : IsPullback gX f f gY) (s' : IsPullback gX' f f gY')
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (s.paste_horiz s')).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerShriek ℓ f).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ gX gX').hom.app
             K) =
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ gY gY').hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+          ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gY).map
           ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s').app K) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s).app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gX').obj K) := by
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ s s' K]
   exact Functor.comp_comp_comp_map_inv_app_comp_map_hom_app
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleLowerShriek ℓ f)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ gX gX') K _ _ _
 
 variable {eX : X ≅ X} {eY : Y ≅ Y} {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
@@ -197,7 +197,7 @@ noncomputable def weilLowerShriekPowSuccIso (K : WeilBoundedConstructible ℓ eX
     (fun g g' ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g g')
     (fun g ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     (fun g g' ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g g')
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleLowerShriek ℓ f)
     (fun s ↦
       have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s
       asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s))
@@ -208,7 +208,7 @@ noncomputable def weilLowerShriekPowSuccIso (K : WeilBoundedConstructible ℓ eX
 @[simp]
 lemma weilLowerShriekPowSuccIso_hom_hom_f (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) :
     (weilLowerShriekPowSuccIso ℓ hf K n).hom.hom.f =
-      𝟙 ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier) :=
+      𝟙 ((boundedConstructibleLowerShriek ℓ f).obj K.carrier) :=
   Iso.mapOfNatIsoPowSuccIsoOfIsPullback_hom_hom_f _ _ _ _ _ _ _ _ _ _ K n
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -64,7 +64,7 @@ finite locally constant, hence constructible, flat sheaf. -/
 theorem boundedConstructibleFiniteTor_dualizingComplex (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [HasCompactification g] [HasInvertibleExponent Λ V] :
     DerivedCategory.boundedConstructibleFiniteTor Λ V
-      (dualizingComplex (ModuleCat.{u + 1} Λ) g) := by
+      (dualizingComplex Λ g) := by
   obtain ⟨L, hL, hstalk, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ g d
   have : IsFiniteSheaf L := ⟨fun Ω _ _ s ↦ (ModuleCat.isFinitelyGenerated_iff _).2
     (Module.Finite.equiv (hstalk Ω s).some.toLinearEquiv.symm)⟩
@@ -115,7 +115,6 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_deformationFamilyObject
     .of_hom (Scheme.Hom.deformationSpaceProj g s ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)
   isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant Λ d _ _
 
-
 section Smooth
 
 /-! ### Smooth morphisms of varying relative dimension
@@ -140,8 +139,8 @@ variable (Λ) in
 theorem nonempty_iso_leftDerivedUpperStar_dualizingComplex_of_isOpenImmersion {U : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j] [QuasiCompact j] (g : V ⟶ B) [HasCompactification g]
     [HasCompactification (j ≫ g)] [QuasiCompact (j ≫ g)] :
-    Nonempty ((L((j)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (j ≫ g)) := by
+    Nonempty ((L((j)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g) ≅
+      dualizingComplex Λ (j ≫ g)) := by
   have := HasCompactification.comp_of_isOpenImmersion (𝟙 V) j
   have : HasCompactification j := .of_eq (Category.comp_id j)
   obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j g
@@ -166,9 +165,9 @@ are local on `V`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smooth (g : V ⟶ B)
     [Smooth g] [HasCompactification g] [HasInvertibleExponent Λ V]
     [TopologicalSpace.NoetherianSpace V] :
-    DerivedCategory.isInvertible Λ V (dualizingComplex (ModuleCat.{u + 1} Λ) g) ∧
+    DerivedCategory.isInvertible Λ V (dualizingComplex Λ g) ∧
       DerivedCategory.boundedConstructibleFiniteTor Λ V
-        (dualizingComplex (ModuleCat.{u + 1} Λ) g) := by
+        (dualizingComplex Λ g) := by
   -- an open cover of `V` on which `g` has constant relative dimension
   have hchart (x : V) : ∃ W : V.Opens, x ∈ W ∧ ∃ e, SmoothOfRelativeDimension e (W.ι ≫ g) := by
     obtain ⟨U, W, -, -, hx, e, n, hn⟩ := Smooth.exists_smoothOfRelativeDimension_resLE g x

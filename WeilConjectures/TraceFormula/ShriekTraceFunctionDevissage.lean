@@ -159,7 +159,7 @@ lemma map_counit_app_eq_weilLowerShriekComparison
         ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K) =
       (weilLowerShriekComparison ℓ eU eX hj).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+        (boundedConstructibleLowerShriek ℓ j).map
           ((weilUpperStarComparison ℓ eU.hom eX.hom j hj).hom.app K) ≫
         (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).obj K) := by
@@ -202,7 +202,7 @@ lemma counit_comm_weilStr (K : WeilBoundedConstructible ℓ eX.hom) :
     K.str.hom
   simp only [Functor.comp_map, Functor.id_map] at hn
   change _ = ((weilLowerShriekComparison ℓ eU eX hj).hom.app _ ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+      (boundedConstructibleLowerShriek ℓ j).map
         ((weilUpperStarComparison ℓ eU.hom eX.hom j hj).hom.app K.carrier ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)) ≫
       (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K.carrier
@@ -239,7 +239,7 @@ lemma unit_comm_weilStr (K : WeilBoundedConstructible ℓ eX.hom) :
             K.carrier := by
   rw [weilLowerShriek_obj_str, weilUpperStar_obj_str]
   change _ ≫ (weilLowerShriekComparison ℓ eZ eX hi).hom.app _ ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i).map
+      (boundedConstructibleLowerShriek ℓ i).map
         ((weilUpperStarComparison ℓ eZ.hom eX.hom i hi).hom.app K.carrier ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom) = _
   rw [weilLowerShriekComparison_hom, reassoc_of%
@@ -271,7 +271,7 @@ theorem exists_isDistTriang_openClosed
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
   have hunit : (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ i).unit.app
       K.carrier ≫ e.hom = (boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K.carrier := by
+        ℓ i).unit.app K.carrier := by
     simp [e, boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl]
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed ℓ j i hcompl K.carrier
   refine ⟨ObjectProperty.homMk ⟨_, (counit_comm_weilStr ℓ eX eU hj K).trans (by rfl)⟩,
@@ -292,13 +292,13 @@ theorem exists_isDistTriang_openClosed
           (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map e.hom ≫ δ) ≫ ·)
             ((shiftFunctor _ (1 : ℤ)).map_id _)).trans (Category.comp_id _)
   · have hb : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K.carrier) ≫
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).map e.inv ≫
           ((weilLowerShriek ℓ eZ eX hi).obj ((weilUpperStar ℓ eZ.hom eX.hom i hi).obj K)).str.hom ≫
             e.hom) =
         K.str.hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction
-          (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app K.carrier := by
+          ℓ i).unit.app K.carrier := by
       rw [← hunit]
       simp only [Functor.map_comp, Category.assoc]
       rw [← Functor.map_comp_assoc _ e.hom e.inv, e.hom_inv_id, CategoryTheory.Functor.map_id,

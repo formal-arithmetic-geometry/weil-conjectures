@@ -74,7 +74,7 @@ theorem localTerm_traceClass_frobeniusGraph_eq_zero_of_supportedRestriction {k�
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (hB : Set.range j.left.base = {z.left.base (default : Spec (.of k))})
     (h : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
-      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0) :
+      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0) :
     ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j = 0 := by
   refine localTerm_traceClass_eq_zero_of_supportedRestriction _ F j
     (upperStar_map_eq_zero_of_inv_comp (FixedLocus.isoPointOfRangeEq j hΦ hm hB) j ?_)

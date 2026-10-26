@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 
 /-!
 
@@ -91,32 +90,13 @@ theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` by writing a cons
 Currently `sorry`, as are its `E` and `ℚ̄_ℓ` versions. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange
-      (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ sq.toCommSq) :=
+    IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange
+      ℓ E sq.toCommSq) :=
   sorry
 
 end Proper
 
 /-! ### Independence of the compactification -/
-
-/-- **Interchanging proper direct image and extension by zero** for bounded constructible
-`𝒪_E`-sheaves: the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'`
-proper is an isomorphism, by proper base change for `𝒪_E`-sheaves. -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicIntegers
-    {X Z X' Z' : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
-    [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
-    {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
-    [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p'.left]
-    (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
-      (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ sq) :=
-  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso _ ℓ sq
-    (isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E sq.flip)
-    (isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E
-      (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)))
 
 section Pushforward
 
@@ -128,13 +108,16 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   [IsProper h.left]
 
 /-- For bounded constructible `𝒪_E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism. -/
+cartesian square `sq` with `h` proper is an isomorphism. Mathematically it follows from proper
+base change for `𝒪_E`-sheaves
+(`isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`) by the argument of the
+interchange lemma, which is formalised for `ℚ̲̄_ℓ` only
+(`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl`). -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicIntegers
     (sq : IsPullback (𝟙 X) i i₁ h) :
-    IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
-      (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ sq) :=
-  isIso_refinementPushforward_of_isIso_lowerStarOpenImmersionLowerShriekExchange _ ℓ sq
-    (isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicIntegers ℓ E sq)
+    IsIso (PadicIntegersRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
+      ℓ E sq) :=
+  sorry
 
 end Pushforward
 
@@ -152,10 +135,10 @@ variable {X Y : Over (Spec (.of k))}
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers
     (c₁ c₂ : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactification
-        (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ c₁ ≅
-      boundedConstructibleLowerShriekOfCompactification
-        (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ c₂ :=
+    PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification
+        ℓ E c₁ ≅
+      PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification
+        ℓ E c₂ :=
   have hc := Compactification.exists_overRefinement c₁ c₂
   let r₁ := hc.choose_spec.1.some
   let r₂ := hc.choose_spec.2.some
@@ -165,8 +148,10 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicInte
     r₁.isPullback
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicIntegers ℓ E
     r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso _ ℓ r₂.isPullback r₂.hom_overG).symm
+  PadicIntegersRingObj.boundedConstructibleLowerShriekRefinementIso ℓ E r₁.isPullback
+      r₁.hom_overG ≪≫
+    (PadicIntegersRingObj.boundedConstructibleLowerShriekRefinementIso ℓ E r₂.isPullback
+      r₂.hom_overG).symm
 
 end Independence
 
@@ -190,18 +175,18 @@ the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekBaseChange_padicIntegers
     (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
       boundedConstructibleUpperStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ g ⟶
       boundedConstructibleUpperStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ g' ⋙
-        boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f' :=
-  boundedConstructibleLowerShriekOfCompactificationBaseChangePasting _ ℓ
+        PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f' :=
+  PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E
       (compactificationOverField f) sq ≫
     Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers ℓ E
       ((compactificationOverField f).ofIsPullback sq.overLeft) (compactificationOverField f')).hom
 
 lemma boundedConstructibleLowerShriekBaseChange_padicIntegers_eq (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E sq =
-      boundedConstructibleLowerShriekOfCompactificationBaseChangePasting _ ℓ
+      PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E
           (compactificationOverField f) sq ≫
         Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers
           ℓ E ((compactificationOverField f).ofIsPullback sq.overLeft)
@@ -214,11 +199,11 @@ the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c
 an isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicIntegers
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-      (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ c sq) := by
+    IsIso (PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+      ℓ E c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E
     (c.overBaseChange_isPullback_g sq)
-  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
+  rw [PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
   infer_instance
 
 /-- **The base change theorem for the compactly supported direct image** of bounded

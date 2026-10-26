@@ -180,20 +180,20 @@ theorem exceptionalProjection_baseChange (sq : IsPullback g' f' f g)
     (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ g).map
-        (((boundedConstructibleExceptionalProjection _ ℓ f).app T).app M) ≫
+        (((boundedConstructibleExceptionalProjection ℓ f).app T).app M) ≫
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
         (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj M) ≫
-      (boundedConstructibleLowerShriek _ ℓ f').map
+      (boundedConstructibleLowerShriek ℓ f').map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g') T
             ((boundedConstructibleUpperStar _ ℓ f).obj M) ≫
           ((boundedConstructibleUpperStar _ ℓ g').obj T ◁
             ((boundedConstructibleUpperStarComp _ ℓ g' f).inv.app M ≫
               eqToHom (by rw [sq.w]) ≫ (boundedConstructibleUpperStarComp _ ℓ f' g).hom.app M))) =
     Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g)
-        ((boundedConstructibleLowerShriek _ ℓ f).obj T) M ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj T) M ≫
       ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app T ▷
         (boundedConstructibleUpperStar _ ℓ g).obj M) ≫
-      ((boundedConstructibleExceptionalProjection _ ℓ f').app
+      ((boundedConstructibleExceptionalProjection ℓ f').app
         ((boundedConstructibleUpperStar _ ℓ g').obj T)).app
         ((boundedConstructibleUpperStar _ ℓ g).obj M) :=
   sorry
@@ -217,65 +217,65 @@ theorem sourceExchange_leftTranspose (sqY : IsPullback π₂ π₁ aY aY)
     [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY)]
     [IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))] :
     (boundedConstructibleUpperStar _ ℓ f).map
-        ((boundedConstructibleLowerShriek _ ℓ π₁).map (β_ _ _).hom ≫
-          inv (((boundedConstructibleExceptionalProjection _ ℓ π₁).app
+        ((boundedConstructibleLowerShriek ℓ π₁).map (β_ _ _).hom ≫
+          inv (((boundedConstructibleExceptionalProjection ℓ π₁).app
             ((boundedConstructibleUpperStar _ ℓ π₂).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj
-                ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).app
-            ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
+              ((boundedConstructibleLowerStar ℓ f).obj
+                ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))))).app
+            ((boundedConstructibleLowerStar ℓ f).obj K)) ≫
           (((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY)).app
-              ((boundedConstructibleLowerStar _ ℓ f).obj
-                ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+              ((boundedConstructibleLowerStar ℓ f).obj
+                ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
             (boundedConstructibleUpperStar _ ℓ aY).map
-              ((boundedConstructibleLowerShriek _ ℓ aY).map
+              ((boundedConstructibleLowerShriek ℓ aY).map
                   ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
-                    ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+                    ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
                 (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app
-                  ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) ≫
-                (boundedConstructibleUpperShriekAdjunction _ ℓ (f ≫ aY)).counit.app (𝟙_ _))) ▷
-            (boundedConstructibleLowerStar _ ℓ f).obj K) ≫
+                  ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _)) ≫
+                (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ aY)).counit.app (𝟙_ _))) ▷
+            (boundedConstructibleLowerStar ℓ f).obj K) ≫
           ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ aY)).inv ▷ _) ≫
           (λ_ _).hom) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K =
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K =
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA).app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ zX).map
+      (boundedConstructibleLowerShriek ℓ zX).map
         ((boundedConstructibleUpperStar _ ℓ h).map
           (β_ ((boundedConstructibleUpperStar _ ℓ π₁).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj K))
-            ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar _ ℓ f).obj
-              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).hom ≫
+              ((boundedConstructibleLowerStar ℓ f).obj K))
+            ((boundedConstructibleUpperStar _ ℓ π₂).obj ((boundedConstructibleLowerStar ℓ f).obj
+              ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))))).hom ≫
         Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ h) _ _ ≫
         (((boundedConstructibleUpperStarComp _ ℓ h π₂).inv.app
-            ((boundedConstructibleLowerStar _ ℓ f).obj
-              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
+            ((boundedConstructibleLowerStar ℓ f).obj
+              ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))) ≫
           (boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).map
             ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app
-              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)))) ⊗ₘ
+              ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _)))) ⊗ₘ
           prodUpperStarCounit ℓ hA.w K)) ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ zX).app
+      inv (((boundedConstructibleExceptionalProjection ℓ zX).app
         ((boundedConstructibleUpperStar _ ℓ (h ≫ π₂)).obj
-          ((boundedConstructibleLowerShriek _ ℓ f).obj
-          ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))).app K) ≫
+          ((boundedConstructibleLowerShriek ℓ f).obj
+          ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))))).app K) ≫
       ((inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))).app
-          ((boundedConstructibleLowerShriek _ ℓ f).obj
-            ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ▷ K) ≫
+          ((boundedConstructibleLowerShriek ℓ f).obj
+            ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))) ▷ K) ≫
       ((boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
           ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app
-              ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _)) ≫
-            (boundedConstructibleUpperShriekAdjunction _ ℓ (f ≫ aY)).counit.app (𝟙_ _)) ▷ K) ≫
+              ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _)) ≫
+            (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ aY)).counit.app (𝟙_ _)) ▷ K) ≫
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (f ≫ aY))).inv ▷ K) ≫
       (λ_ K).hom :=
   by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA
   exact Adjunction.map_comp_counit_eq_of_projection_baseChange
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
-    (fun T M ↦ ((boundedConstructibleExceptionalProjection _ ℓ π₁).app T).app M)
-    (fun T M ↦ ((boundedConstructibleExceptionalProjection _ ℓ zX).app T).app M)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (fun T M ↦ ((boundedConstructibleExceptionalProjection ℓ π₁).app T).app M)
+    (fun T M ↦ ((boundedConstructibleExceptionalProjection ℓ zX).app T).app M)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA)
     (fun M ↦ (boundedConstructibleUpperStarComp _ ℓ h π₁).inv.app M ≫
       eqToHom (by rw [hA.w]) ≫ (boundedConstructibleUpperStarComp _ ℓ zX f).hom.app M)
-    (fun t M ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ zX t M)
-    (fun T _ _ y ↦ boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ zX T y)
+    (fun t M ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ zX t M)
+    (fun T _ _ y ↦ boundedConstructibleExceptionalProjectionMorphism_natural_right ℓ zX T y)
     (exceptionalProjection_baseChange ℓ hA _ _) _ _ _ _ _
     (by unfold prodUpperStarCounit; simp only [Category.assoc]) _ _ _
     (inv_app_comp_map_comp_eq_of_paste
@@ -284,7 +284,7 @@ theorem sourceExchange_leftTranspose (sqY : IsPullback π₂ π₁ aY aY)
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (hA.paste_horiz sqY))
       (boundedConstructibleUpperStarComp _ ℓ f aY) (boundedConstructibleUpperStarComp _ ℓ h π₂)
       (fun X ↦ boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hA sqY X)
-      _ _ _ (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ f aY) _ _)
+      _ _ _ (boundedConstructibleUpperStarComp_hom_app_unit ℓ f aY) _ _)
 
 end Transpose
 

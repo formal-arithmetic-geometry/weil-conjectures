@@ -118,7 +118,7 @@ trivialized (`AlgebraicGeometry.Etale.nonempty_iso_tateObject_constantComplex_of
 -/
 theorem nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed
     [HasTateTwist.IsNormalized Λ] :
-    Nonempty (((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty (((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k)))).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))))⟦(2 * 1 : ℤ)⟧ ≅
       constantComplex Λ (Spec (.of k))) := by
@@ -126,8 +126,8 @@ theorem nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed
   obtain ⟨t⟩ := nonempty_iso_tateObject_constantComplex_of_isSepClosed Λ k
     (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) 1
   let s := AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k))
-  exact ⟨(((R(s)^![ModuleCat.{u + 1} Λ]).commShiftIso (2 * 1 : ℤ)).app _).symm ≪≫
-    (R(s)^![ModuleCat.{u + 1} Λ]).mapIso ((shiftFunctor _ (2 * 1 : ℤ)).mapIso
+  exact ⟨(((R(s)^![Λ]).commShiftIso (2 * 1 : ℤ)).app _).symm ≪≫
+    (R(s)^![Λ]).mapIso ((shiftFunctor _ (2 * 1 : ℤ)).mapIso
       (t.symm ≪≫ (derivedTensorLeftUnitor _ _ _).symm)) ≪≫ e⟩
 
 /-- Blueprint `ex-exc-positive-degree`: Positive cohomology of a closed exceptional image.
@@ -147,7 +147,7 @@ Tate twist datum, unlike the blueprint proof via the closed support triangle and
 theorem not_isZero_homology_two_rightDerivedUpperShriek_affineLineZero
     [Nontrivial Λ] [HasTateTwist.IsNormalized Λ] :
     ¬ IsZero ((DerivedCategory.homologyFunctor _ 2).obj
-      ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+      ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k)))).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))))) := fun h ↦ by
   obtain ⟨e⟩ := nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed Λ k

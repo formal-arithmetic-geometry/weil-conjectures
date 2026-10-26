@@ -33,7 +33,8 @@ This part follows the definitions in **Section 6.8** of
 *Bhargav Bhatt and Peter Scholze, The pro-étale topology for schemes*
 
 Constructibility is defined with respect to a finite stratification `X = ∐ₐ Xₐ` by locally
-closed subschemes, using the existing notion `Scheme.Stratification` (`ConstructibleSheaf.Defs`);
+closed subschemes with constructible underlying subsets, using the existing notion
+`Scheme.Stratification` (`ConstructibleSheaf.Defs`);
 restriction to a stratum is the pullback along its immersion `Xₐ ⟶ X`. Restriction along a
 morphism `g` of schemes (to a stratum, or to a member of a pro-étale cover) uses only that the
 pullback `g^*` of pro-étale sheaves is lax monoidal (`ProEtale.monoidal_upperStar`): it
@@ -78,8 +79,8 @@ section Constructible
 variable {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) A) [MonObj R]
 
 /-- A sheaf of `R`-modules `C` on `X_proét` is *constructible* if there is a finite
-stratification `X = ∐ₐ Xₐ` such that for every stratum `Xₐ`, `C|_{Xₐ}` is pro-étale locally
-finitely presented over `R|_{Xₐ}`.
+stratification `X = ∐ₐ Xₐ` into constructible locally closed subsets such that for every
+stratum `Xₐ`, `C|_{Xₐ}` is pro-étale locally finitely presented over `R|_{Xₐ}`.
 
 For `R = 𝒪_{E,X}` these are the constructible `𝒪_E`-sheaves. For `R = E_X` these are the
 constructible `E`-sheaves, i.e. the sheaves whose restrictions to the strata of a

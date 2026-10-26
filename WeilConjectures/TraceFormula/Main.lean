@@ -83,13 +83,13 @@ theorem trace_compactFrobenius_eq_add [IsSepClosed k]
     [IsUniversalHomeomorphism ΦU.left] [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
     (K : WeilBoundedConstructible ℓ Φ)
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
         K.carrier)]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint U)).obj
         ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier)]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint Z)).obj
         ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier)] :
     trace K.compactFrobenius =
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +
@@ -445,7 +445,7 @@ lemma unit_iterateStr_hom (m : ℕ) :
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (frobeniusIterate Φ m))).inv := by
   induction m with
-  | zero => exact boundedConstructibleUpperStarId_hom_app_unit _ ℓ X
+  | zero => exact boundedConstructibleUpperStarId_hom_app_unit ℓ X
   | succ m ih =>
     simp only [iterateStr, Iso.trans_hom, eqToIso.hom, Iso.app_hom, Functor.mapIso_hom, ih]
     exact eqToHom_comp_upperStarComp_hom_app_unit _ _ (frobeniusIterate_succ Φ m) _
@@ -508,9 +508,9 @@ theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
     (fun a ↦ (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
-    (boundedConstructibleUpperStarId_hom_app_unit _ ℓ _)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b) hx (iterate_carrier _ m)
+    (boundedConstructibleUpperStarId_hom_app_unit ℓ _)
+    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
+    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit ℓ a b) hx (iterate_carrier _ m)
     _ _ _
 
 end WeilBoundedConstructible

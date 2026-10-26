@@ -93,7 +93,7 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
     {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasCompactification aS] [HasInvertibleExponent Λ S]
-    (hS : DerivedCategory.isInvertible Λ S (dualizingComplex (ModuleCat.{u + 1} Λ) aS))
+    (hS : DerivedCategory.isInvertible Λ S (dualizingComplex Λ aS))
     {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S) (ht : ∀ x, t.base x = genericPoint S)
     {P P' : Scheme.{u}} (p : P ⟶ S) (r : ℕ) [SmoothOfRelativeDimension r p]
     [LocallyOfFiniteType p] [QuasiCompact p] [HasCompactification p] {gP : P' ⟶ P}
@@ -146,8 +146,8 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
       dualizingComplex _ (i' ≫ p') :=
     (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso e₂.symm ≪≫
       asIso ((rightDerivedUpperShriekBaseChangeMap Λ sqX).app (dualizingComplex _ p)) ≪≫
-      (R(i')^![ModuleCat.{u + 1} Λ]).mapIso
-        (e₄.app (𝟙_ _) ≪≫ (R(p')^![ModuleCat.{u + 1} Λ]).mapIso
+      (R(i')^![Λ]).mapIso
+        (e₄.app (𝟙_ _) ≪≫ (R(p')^![Λ]).mapIso
           (leftDerivedUpperStarUnitIso _ t)) ≪≫ e₃
   refine ⟨(L((g)^*[ModuleCat.{u + 1} Λ])).obj
       ((L((i ≫ p)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex _ aS)),
@@ -175,7 +175,7 @@ theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic 
     {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasCompactification aS] [HasInvertibleExponent Λ S]
-    (hS : DerivedCategory.isInvertible Λ S (dualizingComplex (ModuleCat.{u + 1} Λ) aS))
+    (hS : DerivedCategory.isInvertible Λ S (dualizingComplex Λ aS))
     {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S) (ht : ∀ x, t.base x = genericPoint S)
     {P P' : Scheme.{u}} (p : P ⟶ S) (r : ℕ) [SmoothOfRelativeDimension r p]
     [LocallyOfFiniteType p] [QuasiCompact p] [HasCompactification p] {gP : P' ⟶ P}
@@ -190,8 +190,8 @@ theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic 
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map
-        ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K)) ↔
-      IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) fT).app
+        ((verdierDualDoubleDual Λ aX).app K)) ↔
+      IsIso ((verdierDualDoubleDual Λ fT).app
         ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
   obtain ⟨L, hL, ⟨e⟩⟩ := exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic Λ aS hS t ht
     p r sqP i sqX aX hX fT hT
@@ -209,7 +209,7 @@ theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic 
   have hD := (constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField Λ aX d hd a b
     hKbc hKt).1
   have h₂ := isIso_derivedHomUpperStarComparison_of_generic Λ aS t ht (i ≫ p) hXp hD hω
-  exact isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff (ModuleCat.{u + 1} Λ) aX fT g
+  exact isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff Λ aX fT g
     hbr ((isInvertible_iff_exists_derivedTensor _).2 hL) e K h₁ h₂
 
 end Etale

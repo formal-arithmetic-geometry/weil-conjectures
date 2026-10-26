@@ -60,7 +60,7 @@ theorem globalDuality_and_identification_and_degreewiseDuality [HasInvertibleExp
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
     Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
         (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
-      (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K))) ∧
+      (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ a).obj (op K))) ∧
     Nonempty (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧ ≅
       (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
         (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K))) ∧
@@ -94,7 +94,7 @@ theorem globalDuality_and_isPerfectPairing_and_degreewiseDuality [HasInvertibleE
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
     Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
         (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
-      (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K))) ∧
+      (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual Λ a).obj (op K))) ∧
     IsPerfectPairing (γ.poincarePairing K) ∧
     ∀ i : ℤ, Module.Finite Λ ((H_c(a)[ModuleCat.{u + 1} Λ](i)).obj K) ∧
       Module.Finite Λ ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (2 * d - i)).obj

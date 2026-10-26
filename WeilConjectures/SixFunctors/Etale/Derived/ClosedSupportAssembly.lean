@@ -95,14 +95,14 @@ theorem isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersio
       (∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) T a b K →
           DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Z a (b + (2 * d : ℕ) + 1)
-            ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+            ((R(i)^![Λ]).obj K)) ∧
       ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K →
           DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z
-              ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+              ((R(i)^![Λ]).obj K) ∧
             torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + (2 * d : ℕ) + 1)
-              ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+              ((R(i)^![Λ]).obj K) := by
   have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian aT
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace aT
   have : IsNoetherian T := ⟨⟩
@@ -162,15 +162,15 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
         (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
           DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+            ((R(f)^![Λ]).obj L)) ∧
       ∀ (a b : ℤ)
         (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+              ((R(f)^![Λ]).obj K) ∧
             torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+              ((R(f)^![Λ]).obj K)) ∧
     (∀ {Z T U : Scheme.{u}} (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT]
       (d : ℕ), topologicalKrullDim T ≤ (d : WithBot ℕ∞) → ∀ (i : Z ⟶ T) [IsClosedImmersion i]
       (j : U ⟶ T) [IsOpenImmersion j], Set.range i.base = (Set.range j.base)ᶜ →
@@ -178,15 +178,15 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
         (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) T a b K →
           DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Z a (b + (2 * d : ℕ) + 1)
-            ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+            ((R(i)^![Λ]).obj K)) ∧
       ∀ (a b : ℤ)
         (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K →
           DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z
-              ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+              ((R(i)^![Λ]).obj K) ∧
             torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + (2 * d : ℕ) + 1)
-              ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+              ((R(i)^![Λ]).obj K)) ∧
     ∀ {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
       (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f],
       ∃ D : ℕ, ∀ dY : ℕ, topologicalKrullDim Y ≤ (dY : WithBot ℕ∞) →
@@ -194,15 +194,15 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
         (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
           DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+            ((R(f)^![Λ]).obj L)) ∧
       ∀ (a b : ℤ)
         (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+              ((R(f)^![Λ]).obj K) ∧
             torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+              ((R(f)^![Λ]).obj K) := by
   refine ⟨⟨fun f _ ↦ inferInstance, fun _ X Y p _ aX aY _ _ hp d hd ↦ ?_⟩, fun aY f _ d _ ↦ ?_,
     fun aT _ _ d hT i _ j _ hij ↦
       (isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion aT d hT i j hij
@@ -243,15 +243,15 @@ theorem preservationClauses_assembly {k : Type u} [Field k] (Λ : Type (u + 1)) 
         (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
           DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+            ((R(f)^![Λ]).obj L)) ∧
       ∀ (a b : ℤ)
         (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+              ((R(f)^![Λ]).obj K) ∧
             torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+              ((R(f)^![Λ]).obj K) := by
   obtain ⟨D, hD⟩ := exists_preservationClauses Λ aY f
   exact ⟨fun V n _ j _ ↦ openComplementCondition_affineSpace Λ aY dY hY V n j, D, hD dY hY⟩
 
