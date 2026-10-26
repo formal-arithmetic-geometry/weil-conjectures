@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgCl
 
 /-!
 # The cocycle condition for (Push) along the finite subextensions
@@ -94,41 +95,6 @@ lemma boundedConstructibleCocone_iso_inv_app_hom {E F : FiniteIntermediateField 
   exact (boundedConstructible (padicAlgClRingObj X ℓ)).ι.map_preimage _
 
 end Cocone
-
-/-! ### The (Push) comparisons on the underlying complexes -/
-
-section LowerStar
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {Z Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  (g : Z ⟶ Y) [IsProper g.left]
-
-/-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and a proper `g`,
-is, on the underlying complexes, the (Push) comparison `ProEtale.CondensedRing.derivedPushHom`. -/
-lemma boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom
-    (K : Dᵇc(Z.left)⟦Profinite.continuousMapRingObj E⟧) :
-    ((boundedConstructibleLowerStarToPadicAlgClIso ℓ E g).hom.app K).hom =
-      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left).app K.obj := by
-  simp only [Functor.comp_obj, boundedConstructibleLowerStarToPadicAlgClIso,
-    boundedConstructibleToPadicAlgCl, constructibleToPadicAlgCl, boundedConstructibleLowerStar,
-    Functor.whiskeringRight_obj_obj, boundedConstructibleToPadicAlgClCompatibility,
-    ObjectProperty.liftCompιIso, boundedConstructibleLowerStarCompatibility,
-    ContinuousMapRingObj.boundedConstructibleLowerStar,
-    ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility,
-    Functor.FullyFaithful.preimageIso_hom, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom,
-    Iso.symm_hom, Functor.isoWhiskerRight_hom, asIso_hom, Iso.refl_inv,
-    Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, ObjectProperty.ι_obj,
-    Functor.associator_hom_app, Functor.whiskerLeft_app, NatTrans.id_app,
-    ObjectProperty.lift_obj_obj,
-    Functor.associator_inv_app, Functor.whiskerRight_app, CategoryTheory.Functor.map_id,
-    Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
-
-
-end LowerStar
-
 
 
 /-! ### The cocycle condition -/

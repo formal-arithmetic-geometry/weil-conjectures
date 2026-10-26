@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
 /-!
@@ -148,19 +149,7 @@ open Scheme
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-omit [IsCommMonObj Λ] in
-/-- The comparison `comapPullbackHomCompIso` is the identity on underlying sheaves. -/
-@[simp]
-lemma comapPullbackHomCompIso_hom_app_hom
-    (N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    ((comapPullbackHomCompIso Λ f).hom.app N).hom = 𝟙 _ := by
-  simp only [Functor.comp_obj, comapPullbackHomCompIso, Functor.isoWhiskerLeft_trans,
-    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    NatTrans.comp_app, Functor.associator_inv_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.whiskerLeft_app, Category.id_comp, Mod.comp_hom',
-    Mod.id_hom', Mod.comap_map_hom, Functor.mapModComapIso_hom_app_hom, Mod.comapComp_inv_app_hom,
-    Mod.comapCongr_hom_app_hom]
-  rfl
+attribute [simp] comapPullbackHomCompIso_hom_app_hom
 
 omit [IsCommMonObj Λ] in
 /-- The inverse of the comparison `comapPullbackHomCompIso` is the identity on underlying

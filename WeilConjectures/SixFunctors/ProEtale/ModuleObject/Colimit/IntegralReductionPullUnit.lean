@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 Let `a : Λ ⟶ Λ'` be a morphism of commutative condensed rings and `f : X ⟶ Y` a morphism of
 schemes. Write `η` for the units of the derived adjunctions `L(Ext_{a_Z}) ⊣ D(Res_{a_Z})`,
 `ι : D(Res_{a_Y}) ⋙ Lf^*_Λ ≅ Lf^*_Λ' ⋙ D(Res_{a_X})` for the commutation of the restriction of
-scalars with the derived pullbacks (`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso`)
+scalars with the derived pullbacks (`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIsoOfLevelwise`)
 and (Pull) for `ProEtale.CondensedRing.derivedUpperStarExtendScalarsIso a f`. This file proves
 that (Pull) is compatible with the units: `Lf^*(η_M) ≫ ι = η_{Lf^* M} ≫ Res((Pull)_M)` for every
 `M` (`upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app`).
@@ -57,7 +57,7 @@ the counits. -/
 lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
     (Z : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ' Y))
       (ComplexShape.up ℤ)) :
-    (derivedComapLeftDerivedUpperStarIso a f).hom.app (DerivedCategory.Qh.obj Z) ≫
+    (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.app (DerivedCategory.Qh.obj Z) ≫
         D(Mod.comap (coefficientMap a X)).map (((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app Z) ≫
         (Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.app
           ((((f)^*⟦Λ'⟧).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z) ≫
@@ -71,7 +71,7 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (comapUpperStarIso a f).inv (ComplexShape.up ℤ)).app Z) :
         (D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧)).obj (DerivedCategory.Qh.obj Z) ⟶ _) := by
-  simp only [derivedComapLeftDerivedUpperStarIso, derivedComapUpperStarIso, Iso.trans_hom,
+  simp only [derivedComapLeftDerivedUpperStarIsoOfLevelwise, derivedComapUpperStarIso, Iso.trans_hom,
     Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
@@ -148,7 +148,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :
     L((f)^*⟦Λ⟧).map ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
-      (derivedComapLeftDerivedUpperStarIso a f).hom.app
+      (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.app
         (L(Mod.extendScalars (coefficientMap a Y)).obj
           (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) =
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
@@ -199,7 +199,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   rw [← Functor.map_comp_assoc, r1]
   simp only [Functor.map_comp, Category.assoc] at r4 ⊢
   rw [← reassoc_of% r2, r4, reassoc_of% r3]
-  have l1 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
+  have l1 := (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.naturality
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
   have l2 := (Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.naturality
     ((Functor.mapHomotopyCategoryCompIso
@@ -231,7 +231,7 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
     L((f)^*⟦Λ⟧).map ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
         M) ≫
-      (derivedComapLeftDerivedUpperStarIso a f).hom.app
+      (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.app
         (L(Mod.extendScalars (coefficientMap a Y)).obj M) =
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
         (L((f)^*⟦Λ⟧).obj M) ≫
@@ -245,7 +245,7 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     (CochainComplex.kFlat_flatResolutionFunctor_obj _)
   have n1 := (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.naturality
     e.hom
-  have n2 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
+  have n2 := (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.naturality
     (L(Mod.extendScalars (coefficientMap a Y)).map e.hom)
   have n3 := (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.naturality
     (L((f)^*⟦Λ⟧).map e.hom)

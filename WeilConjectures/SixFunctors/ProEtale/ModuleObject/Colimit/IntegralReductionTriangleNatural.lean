@@ -63,7 +63,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
 /-- The restriction of scalars along `a` commutes with the derived pullbacks:
 `D(Res_{a_Y}) ⋙ Lf^*_Λ ≅ Lf^*_{Λ'} ⋙ D(Res_{a_X})`, from the levelwise commutation
 `ProEtale.CondensedRing.derivedComapUpperStarIso`. -/
-noncomputable def derivedComapLeftDerivedUpperStarIso :
+noncomputable def derivedComapLeftDerivedUpperStarIsoOfLevelwise :
     D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧) ≅
       L((f)^*⟦Λ'⟧) ⋙ D(Mod.comap (coefficientMap a X)) :=
   Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ f) ≪≫
@@ -111,7 +111,7 @@ def IntegersModPowPullUnitCompatible : Prop :=
   ∀ M, L((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).map
       ((Mod.derivedExtendMapDerivedCategoryAdjunction (integersModPowReduction Y ℓ E n)).unit.app
         M) ≫
-      (derivedComapLeftDerivedUpperStarIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      (derivedComapLeftDerivedUpperStarIsoOfLevelwise (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         f).hom.app (L(Mod.extendScalars (integersModPowReduction Y ℓ E n)).obj M) =
     (Mod.derivedExtendMapDerivedCategoryAdjunction (integersModPowReduction X ℓ E n)).unit.app
         (L((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).obj M) ≫
@@ -125,7 +125,7 @@ the commutation `ι` of `Res` with `Lf^*`, followed by `Res` of the inverse of (
 def IntegersModPowPullδCompatible : Prop :=
   ∀ M, L((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).map ((integersModPowReductionδ ℓ E n Y).app M) ≫
       (L((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).commShiftIso (1 : ℤ)).hom.app M =
-    (derivedComapLeftDerivedUpperStarIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+    (derivedComapLeftDerivedUpperStarIsoOfLevelwise (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         f).hom.app (L(Mod.extendScalars (integersModPowReduction Y ℓ E n)).obj M) ≫
       D(Mod.comap (integersModPowReduction X ℓ E n)).map
         ((integersModPowReductionUpperStarIso ℓ E n f).inv.app M) ≫
@@ -158,7 +158,7 @@ theorem isIso_derivedLowerStarIntegersModPowReduction_of_compatible
     (Mod.derivedExtendMapDerivedCategoryAdjunction (integersModPowReduction X ℓ E n))
     (derivedUpperStarLowerStarAdjunction _ f) (derivedUpperStarLowerStarAdjunction _ f)
     (integersModPowReductionUpperStarIso ℓ E n f)
-    (derivedComapLeftDerivedUpperStarIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) f)
+    (derivedComapLeftDerivedUpperStarIsoOfLevelwise (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) f)
     (integersModPowReductionδ ℓ E n Y) (integersModPowReductionδ ℓ E n X) ((ℓ : ℤ) ^ n)
     (integersModPowReduction_distinguished ℓ E n) (integersModPowReduction_distinguished ℓ E n)
     hη hδ

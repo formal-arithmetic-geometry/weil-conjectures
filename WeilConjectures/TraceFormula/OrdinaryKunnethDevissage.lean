@@ -10,6 +10,8 @@ public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarDeltaShift
+public import WeilConjectures.TraceFormula.IntegersToPadicAlgClLowerStar
+public import WeilConjectures.TraceFormula.OrdinaryKunnethIntegral
 
 /-!
 # Dévissage for the ordinary Künneth map
@@ -236,14 +238,21 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
 
 /-- **Vanishing on the boundary** (the remaining content of the ordinary Künneth formula, blueprint
 `lem-trf-ordinary-kunneth`; SGA 4½, [Th. finitude], Corollaire 1.11): for an open immersion
-`j' : V ⟶ X` with closed complement `i : Z ⟶ X` and a dualizable `L` on `V`, the complex
-`R(𝟙 × j)_* (Rj'_! L ⊠ B)` vanishes on `Z ⨯ Y`. Equivalently, its stalks at the geometric points of
-`Z ⨯ Y`, the cohomology of `(Rj'_! L ⊠ B)` on the punctured strict henselizations of `X ⨯ Y` along
-`Z ⨯ Y` intersected with `X ⨯ U`, vanish. -/
-theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek [IsOpenImmersion j.left]
+`j' : V ⟶ X` with closed complement `i : Z ⟶ X`, any morphism `j : U ⟶ Y` and any `L` on `V`, the
+complex `R(𝟙 × j)_* (Rj'_! L ⊠ B)` vanishes on `Z ⨯ Y`.
+
+Following the proof of blueprint `lem-trf-ordinary-kunneth`, `L` and `B` have integral models
+`L₀`, `B₀` over a common `𝒪_E` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`), the
+extension of scalars `𝒪_E ⟶ ℚ̄_ℓ` commutes with the operations involved
+(`boundedConstructibleUpperStarIntegersToPadicAlgClIso`,
+`boundedConstructibleLowerStarIntegersToPadicAlgClIso`,
+`boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`,
+`boundedConstructibleIntegersToPadicAlgClExternalProductIso`), and the integral statement
+(`PadicIntegersRingObj.isZero_upperStar_prodMap_lowerStar_prodMap_externalProduct`) is deduced
+from finite coefficients. -/
+theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek
     {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
-    (j' : V ⟶ X) [IsOpenImmersion j'.left]
-    {L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
+    (j' : V ⟶ X) [IsOpenImmersion j'.left] (L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.map (overClosedComplement j') (𝟙 Y))).obj
       ((boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).obj
@@ -264,7 +273,7 @@ theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left
     IsIso (openKunnethMap ℓ j
       ((boundedConstructibleLowerShriek ℓ j').obj L) B) :=
   isIso_openKunnethMap_lowerShriek_of_isZero ℓ j B j' hL
-    (isZero_upperStar_lowerStar_externalProduct_lowerShriek ℓ j B j' hL)
+    (isZero_upperStar_lowerStar_externalProduct_lowerShriek ℓ j B j' L)
 
 omit j B in
 /-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
