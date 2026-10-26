@@ -78,8 +78,8 @@ lemma isPullback_deformationSpecialFibreMap_toBase [IsOpenImmersion f.left]
     IsPullback (deformationSpecialFibreMap f hJ k').left
       (deformationSpecialToTotal X J k' ≫ deformationTotalToBase X J k')
       (deformationSpecialToTotal Y I k' ≫ deformationTotalToBase Y I k') f.left :=
-  (isPullback_deformationSpecialFibreMap f hJ k').paste_vert
-    ((isPullback_deformationTotalMap f hJ k').paste_vert
+  (isPullback_deformationSpecialFibreMap_toTotal f hJ k').paste_vert
+    ((isPullback_deformationTotalMap_toSpace f hJ k').paste_vert
       (IdealSheafData.isPullback_deformationSpaceMap_of_isOpenImmersion f.left I J hJ hJI))
 
 /-- Along an open immersion `f : X ⟶ Y` and for `J = f^* I`, the map of special fibres
@@ -133,8 +133,8 @@ lemma isClosedImmersion_centreSpecialFibreMap [IsClosedImmersion f.left] :
     (siteIdeal_map_appLE_le_bot_centreMap f I)
   have : IsClosedImmersion
       (deformationTotalMap (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I) k') :=
-    MorphismProperty.of_isPullback (isPullback_deformationTotalMap _ _ k').flip this
-  exact MorphismProperty.of_isPullback (isPullback_deformationSpecialFibreMap _ _ k').flip this
+    MorphismProperty.of_isPullback (isPullback_deformationTotalMap_toSpace _ _ k').flip this
+  exact MorphismProperty.of_isPullback (isPullback_deformationSpecialFibreMap_toTotal _ _ k').flip this
 
 instance [IsOpenImmersion f.left] : IsOpenImmersion (centreSpecialFibreMap f I k').left :=
   isOpenImmersion_deformationSpecialFibreMap_of_isOpenImmersion _ _ k'
@@ -201,8 +201,8 @@ is a pullback, that is, `A ⊗ k' = A ×_B (B ⊗ k')`. -/
 lemma isPullback_deformationSpecialFibreMap_bot :
     IsPullback (deformationSpecialFibreMap g hg k').left (constantSpecialFibreProj k' A)
       (constantSpecialFibreProj k' B) g.left :=
-  (isPullback_deformationSpecialFibreMap g hg k').paste_vert
-    ((isPullback_deformationTotalMap g hg k').paste_vert
+  (isPullback_deformationSpecialFibreMap_toTotal g hg k').paste_vert
+    ((isPullback_deformationTotalMap_toSpace g hg k').paste_vert
       (IdealSheafData.isPullback_deformationSpaceMap_bot g.left hg))
 
 variable {X X' : Over (Spec (.of k))} (f : X' ⟶ X) (I : X.left.IdealSheafData)

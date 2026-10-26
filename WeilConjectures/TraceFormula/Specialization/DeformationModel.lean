@@ -271,7 +271,7 @@ the deformation of `I` along the morphism of deformation spaces `D_J X ⟶ D_I Y
 D_J X ⟶ D_I Y
 ```
 -/
-lemma isPullback_deformationTotalMap :
+lemma isPullback_deformationTotalMap_toSpace :
     IsPullback (deformationTotalMap f hJ k') (deformationTotalToSpace X J k')
       (deformationTotalToSpace Y I k') (IdealSheafData.deformationSpaceMap f.left I J hJ) :=
   IsPullback.of_right (by
@@ -320,7 +320,7 @@ lemma deformationSpecialFibreMap_toTotal :
  𝒳  ⟶  𝒴
 ```
 -/
-lemma isPullback_deformationSpecialFibreMap :
+lemma isPullback_deformationSpecialFibreMap_toTotal :
     IsPullback (deformationSpecialFibreMap f hJ k').left (deformationSpecialToTotal X J k')
       (deformationSpecialToTotal Y I k') (deformationTotalMap f hJ k') :=
   IsPullback.of_right (by
