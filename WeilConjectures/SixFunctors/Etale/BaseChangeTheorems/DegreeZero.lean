@@ -252,9 +252,7 @@ geometric fibre `Z_s = Z ×_A κ̄` is an isomorphism.
 
 As `κ` is separably closed, `κ̄/κ` is purely inseparable, so `Z_s ⟶ Z₀ = Z ×_A κ` is a universal
 homeomorphism and induces an isomorphism on sections; the comparison for `Z₀` is
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`. The algebraic
-closure matters: a geometric point with a transcendental field of constants gives larger
-sections, e.g. for `𝔾_m` on a point.
+`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`.
 (blueprint: `lemma-weil-pbc-proper-strict-henselian-h0`) -/
 theorem Etale.isIso_globalSectionsUpperStarMap_geometricFibre (A : Type u) [CommRing A]
     [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] {Z : Scheme.{u}}

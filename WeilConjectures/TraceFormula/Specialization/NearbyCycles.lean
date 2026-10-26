@@ -13,7 +13,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
-public import WeilConjectures.TraceFormula.Specialization.ZeroSection
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
 public import WeilConjectures.TraceFormula.KunnethVerdier
 
 /-!
@@ -47,7 +48,9 @@ and states the two theorems on nearby cycles that Varshavsky's vanishing argumen
   (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`). It is deduced from its
   exchange form: the pullback exchange along the section `ẽ : S ⟶ 𝒳` of the deformation to the
   normal cone is invertible
-  (`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app`).
+  (`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app`), the case `Z = {x}` of
+  the invertibility of the zero-section map for all closed subschemes
+  (`ProEtale.CondensedRing.isIso_zeroSectionMap`).
 
 -/
 
@@ -96,8 +99,13 @@ blueprint node asserts to be an isomorphism. -/
 theorem isIso_pullbackExchange_zeroSectionModelHom_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (((zeroSectionModelHom X x k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
-      K.obj) :=
-  sorry
+      K.obj) := by
+  have h : IsIso (zeroSectionMap X x.left.ker k' (Profinite.padicAlgClRingObj ℓ) K.obj) :=
+    isIso_zeroSectionMap (ℓ := ℓ) k' X x.left.ker K
+  have h₁ := @isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap _ _ X x k'
+    _ _ (Profinite.padicAlgClRingObj ℓ) _ _
+  have h₂ := h₁ K.obj
+  exact h₂
 
 /-- **Verdier's zero-section theorem** (Verdier, *Spécialisation de faisceaux et monodromie
 modérée*, Prop. 8.(5); blueprint `det-sp-zero-section-vanishing`, `sk-thm-tf-sp-zero-section`):

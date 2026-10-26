@@ -242,6 +242,17 @@ lemma toPolynomialPresheaf_comp_polynomialToRees :
 noncomputable def deformationSpaceToPolynomialSpec : I.deformationSpace ⟶ X.polynomialSpec :=
   relativeGluingMap _ _ I.polynomialToRees
 
+/-- The deformation space `D_⊥ X` of the zero ideal is the relative affine line `𝔸¹_X`. -/
+instance isIso_deformationSpaceToPolynomialSpec_bot :
+    IsIso (⊥ : X.IdealSheafData).deformationSpaceToPolynomialSpec :=
+  relativeGluingMap_of_forall _ (MorphismProperty.isomorphisms _) _ _
+    (⊥ : X.IdealSheafData).toPolynomialPresheaf_comp_polynomialToRees fun U ↦ by
+      have : IsIso ((⊥ : X.IdealSheafData).polynomialToRees.app (Opposite.op U)) :=
+        (ConcreteCategory.isIso_iff_bijective _).mpr
+          (Ideal.bijective_toExtendedReesAlgebra_of_eq_bot rfl)
+      exact (inferInstance : IsIso (Spec.map
+        ((⊥ : X.IdealSheafData).polynomialToRees.app (Opposite.op U))))
+
 /-- The inclusion `𝒪_X[t, I t⁻¹] ⟶ 𝒪_X[t, t⁻¹]`. -/
 @[simps]
 noncomputable def reesToLaurent : I.reesPresheaf ⟶ X.laurentPresheaf where

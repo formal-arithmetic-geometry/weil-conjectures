@@ -470,7 +470,8 @@ theorem fixedSquareRoute_eq_normalForm (j : B ⟶ F) {ι : F ⟶ C} {c : C ⟶ Y
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ j ι).inv.app N =
       (boundedConstructibleLowerStarComp ℓ j ι).hom.app N ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (j ≫ ι)).inv.app N := by
-    sorry
+    rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ ι).inv.naturality_assoc]
+    exact lowerStarComp_hom_app_comp_isoLowerStar_inv ℓ j ι N
   have hf' := (boundedConstructibleLowerShriek ℓ c).congr_map hf
   simp only [Functor.map_comp] at hf'
   simp only [reassoc_of% hf']

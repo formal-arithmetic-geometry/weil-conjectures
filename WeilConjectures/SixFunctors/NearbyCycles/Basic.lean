@@ -84,6 +84,15 @@ structure Hom (M : NearbyCyclesModel X X') (N : NearbyCyclesModel Y Y') (f : X �
   comm_i : f' ≫ N.i = M.i ≫ total
   comm_ε : generic ≫ N.ε = M.ε ≫ f
 
+/-- The identity morphism of a model, over the identities. -/
+@[simps]
+def Hom.id (M : NearbyCyclesModel X X') : M.Hom M (𝟙 X) (𝟙 X') where
+  total := 𝟙 _
+  generic := 𝟙 _
+  comm_j := by rw [Category.id_comp, Category.comp_id]
+  comm_i := by rw [Category.id_comp, Category.comp_id]
+  comm_ε := by rw [Category.id_comp, Category.comp_id]
+
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing
