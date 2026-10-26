@@ -29,17 +29,13 @@ As for the comparisons of `Rf_*` and `Rf^!`, this holds because `T_X` is the rat
 `T (A ⊗ -) ≅ T A ⊗ T -` along the adjunctions `A ⊗ - ⊣ RHom(A, -)`
 (`CategoryTheory.Rationalization.isIso_mateEquiv_of_isLocalization`).
 
-For the inclusion `E ⟶ ℚ̄_ℓ`, which is not a localization, the clause is the compatibility
-`ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl` required from
-`sec-six-functors-basics`. Together they give the clause for the composite
+For the inclusion `E ⟶ ℚ̄_ℓ`, which is not a localization, the clause
+(`ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl`) follows from the
+finite subextensions `E ⊆ F`, where `F_X` is free over `E_X`, by the 2-colimit description of
+`Dᵇc(X)⟦ℚ̄_ℓ⟧`. Together they give the clause for the composite
 `𝒪_E ⟶ ℚ̄_ℓ`
 (`ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl`), the
 comparison of a composite being the composite of the comparisons.
-
-## Compatibilities required from other sections
-
-* `ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl`: blueprint
-  `det-prop-scalar-six-tensor-hom` (2), for `E ⟶ ℚ̄_ℓ`.
 
 -/
 
@@ -75,7 +71,7 @@ theorem isIso_ihomComparison_boundedConstructibleExtendScalars
   exact Rationalization.isIso_mateEquiv_of_isLocalization (M := Submonoid.powers (ℓ : ℤ)) T T
     (ihom.adjunction A) (ihom.adjunction (T.obj A)) τ
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
+/-- Blueprint
 `det-prop-scalar-six-tensor-hom` (2), for the coefficient map `E ⟶ ℚ̄_ℓ`. For bounded
 constructible `E`-complexes `A` and `B`, the comparison
 `v_{A,B} : (RHom(A, B))_{ℚ̄_ℓ} ⟶ RHom(A_{ℚ̄_ℓ}, B_{ℚ̄_ℓ})`, the transpose of

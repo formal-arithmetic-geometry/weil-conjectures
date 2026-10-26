@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.NatTransId
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Bases of the unit of a levelwise derived adjunction
@@ -39,17 +40,6 @@ lemma CategoryTheory.Limits.isIso_biproduct_desc_iff_of_iso {C : Type*} [Categor
     refine biproduct.hom_ext' _ _ (fun i ↦ ?_)
     simp [← reassoc_of% (h i)]
   rw [e, isIso_comp_left_iff, isIso_comp_right_iff]
-
-set_option backward.isDefEq.respectTransparency false in
-/-- An additive functor preserves the biproducts indexed by any finite type (in any universe). -/
-lemma CategoryTheory.Functor.preservesBiproductsOfShape_of_additive {C D : Type*} [Category* C]
-    [Category* D] [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive] (J : Type*)
-    [Finite J] : PreservesBiproductsOfShape J F where
-  preserves {_} := by
-    have := Fintype.ofFinite J
-    exact { preserves := fun hb ↦ ⟨isBilimitOfTotal _ (by
-      simp_rw [F.mapBicone_π, F.mapBicone_ι, ← F.map_comp]
-      erw [← F.map_sum, ← F.map_id, IsBilimit.total hb])⟩ }
 
 namespace CategoryTheory.Adjunction
 
@@ -157,11 +147,11 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type*} [Fini
       (adj.mapDerivedCategoryAdjunction_unit_app_comp_map_natTransId_app_Qh_obj_quotient_obj
         (τ i) Y).trans (Category.id_comp _).symm)).2 ?_
   have := (HomotopyCategory.quotient A (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
-    |>.preservesBiproductsOfShape_of_additive ι
+    |>.preservesBiproductsOfShape_of_additive (J := ι)
   rw [← biproduct.mapBiproduct_inv_map_desc, isIso_comp_left_iff]
   have h (n : ℤ) : IsIso ((biproduct.desc c).f n) := by
     have := (HomologicalComplex.eval A (ComplexShape.up ℤ) n)
-      |>.preservesBiproductsOfShape_of_additive ι
+      |>.preservesBiproductsOfShape_of_additive (J := ι)
     rw [← HomologicalComplex.eval_map,
       ← biproduct.mapBiproduct_hom_desc (HomologicalComplex.eval A (ComplexShape.up ℤ) n)]
     have : IsIso (biproduct.desc fun j ↦

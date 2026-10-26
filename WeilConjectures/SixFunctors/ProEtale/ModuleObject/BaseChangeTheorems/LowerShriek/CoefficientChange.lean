@@ -30,9 +30,11 @@ changes used to pass from integral to `ℚ̄_ℓ`-coefficients:
 * `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_extendScalars`, for the
   inclusion `𝒪_E ⟶ E`.
 
-Both are inputs from `sec-six-functors`, stated in the form needed by the coefficient
-compatibility of the supported restriction
-(`CategoryTheory.Adjunction.map_exchangeRestriction_comp`).
+Both are stated in the form needed by the coefficient compatibility of the supported restriction
+(`CategoryTheory.Adjunction.map_exchangeRestriction_comp`). They follow formally from the
+compatibility of the coefficient comparisons with the pullback composition isomorphisms and with
+the adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ Lj^*`
+(`BoundedConstructibleCoefficientChange.squareCompatible_lowerShriekBaseChange`).
 
 -/
 
@@ -74,7 +76,7 @@ instance isIso_boundedConstructibleLowerShriekBaseChange_padicSubfield
     IsIso (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E sq) :=
   isIso_boundedConstructibleLowerShriekBaseChange ℓ E sq
 
-/-- Compatibility required from `sec-six-functors` (to be proved there): blueprint
+/-- Blueprint
 `sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
 commutes with the coefficient comparisons of `sk-prop-scalar-six`. For a cartesian square and the
 extension of scalars `T : E ⟶ ℚ̄_ℓ`, the image under `T` of compact-support base change
@@ -105,7 +107,7 @@ theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback 
     padicAlgClPushforwardData_lowerShriekOfCompactification] at h' ⊢
   exact_mod_proof_irrel h'
 
-/-- Compatibility required from `sec-six-functors` (to be proved there): blueprint
+/-- Blueprint
 `sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
 commutes with the coefficient comparisons of `sk-prop-scalar-six`. For a cartesian square and the
 extension of scalars `T : 𝒪_E ⟶ E`, the image under `T` of compact-support base change
