@@ -61,14 +61,14 @@ Kummer boundary of the coordinate of `𝔸¹_Ω`
 theorem supportCohomologyAffineLineLinearEquiv_restrictSupportedClass_kummerBoundary :
     supportCohomologyAffineLineLinearEquiv Λ Ω ((supportCohomologyAddEquiv Λ _ _ 2).symm
       (supportedClassMap Λ _
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (AffineSpace.map (ULift.{u} (Fin 1)) y) _ _
+        (restrictSupportedClass Λ (AffineSpace.map (ULift.{u} (Fin 1)) y) _ _
           _ (isPullback_zeroLocusSubschemeι_coord y)
           (leftDerivedUpperStarConstantComplexIso Λ (AffineSpace.map (ULift.{u} (Fin 1)) y)).inv
           (((L((AffineSpace.map (ULift.{u} (Fin 1)) y)^*[ModuleCat.{u + 1} Λ])).commShiftIso
               (2 : ℤ)).app _ ≪≫
             (shiftFunctor _ (2 : ℤ)).mapIso
               (leftDerivedUpperStarTateObjectIso (AffineSpace.map (ULift.{u} (Fin 1)) y) 1))
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+          (shiftSupportedClass Λ _ 2
             (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))))) = 1 := by
   rw [supportedClassMap_restrictSupportedClass_affineLineOrientation Λ y]
   exact supportCohomologyAffineLineLinearEquiv_kummerBoundary Λ Ω

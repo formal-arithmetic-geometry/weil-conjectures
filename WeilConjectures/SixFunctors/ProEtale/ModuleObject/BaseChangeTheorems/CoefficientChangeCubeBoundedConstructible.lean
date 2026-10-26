@@ -56,7 +56,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
 section BoundedConstructible
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] [IsFinitenessCoefficient ℓ Λ] [IsFinitenessCoefficient ℓ Λ']
+  [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
@@ -77,13 +77,13 @@ private lemma pullbackSquareComparison_hom_app_hom_aux
     (sq : CommSq g' f' f g)
     (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
     ((Iso.hom (X := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ L((g.left)^*⟦Λ⟧))
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g K.obj K.property) ⋙
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g K) ⋙
        (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ L((f'.left)^*⟦Λ⟧))
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f' K.obj K.property))
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f' K))
       (Y := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ L((f.left)^*⟦Λ⟧))
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f K.obj K.property) ⋙
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f K) ⋙
        (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ L((g'.left)^*⟦Λ⟧))
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g' K.obj K.property))
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g' K))
       (boundedConstructiblePullbackSquareComparison Λ ℓ sq)).app K).hom =
       (pullbackSquareComparison Λ
         (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)).hom.app
@@ -110,19 +110,55 @@ compatible with the composition of derived pullbacks, and that the comparisons
 `T^X K₀` are isomorphic arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (H : DerivedPullIsoCompCoherence a) (sq : CommSq g' f' f g)
+    (hRf : ∀ K : Dᵇc(X.left)⟦Λ⟧, boundedConstructible (condensedRingObj Λ Y.left)
+      ((R((f.left)_*⟦Λ⟧)).obj K.obj))
+    (hRf' : ∀ K : Dᵇc(X'.left)⟦Λ⟧, boundedConstructible (condensedRingObj Λ Y'.left)
+      ((R((f'.left)_*⟦Λ⟧)).obj K.obj))
+    (hSf : ∀ K : Dᵇc(X.left)⟦Λ'⟧, boundedConstructible (condensedRingObj Λ' Y.left)
+      ((R((f.left)_*⟦Λ'⟧)).obj K.obj))
+    (hSf' : ∀ K : Dᵇc(X'.left)⟦Λ'⟧, boundedConstructible (condensedRingObj Λ' Y'.left)
+      ((R((f'.left)_*⟦Λ'⟧)).obj K.obj))
     (hX : ∀ K : Dᵇc(X.left)⟦Λ⟧, boundedConstructible (condensedRingObj Λ' X.left)
       (((boundedConstructible _).ι ⋙
         (Mod.extendScalars (coefficientMap a X.left)).leftDerivedFunctor).obj K))
     (hY' : ∀ K : Dᵇc(Y'.left)⟦Λ⟧, boundedConstructible (condensedRingObj Λ' Y'.left)
       (((boundedConstructible _).ι ⋙
         (Mod.extendScalars (coefficientMap a Y'.left)).leftDerivedFunctor).obj K))
+    (β : (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧)) hRf ⋙
+        boundedConstructibleUpperStar Λ ℓ g ⟶
+      boundedConstructibleUpperStar Λ ℓ g' ⋙
+        (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f'.left)_*⟦Λ⟧)) hRf')
+    (hβ : β = Adjunction.exchangeRight
+      ((derivedUpperStarLowerStarAdjunction Λ f.left).restrictFullyFaithful
+        (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+        (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm
+        (ObjectProperty.liftCompιIso _ _ hRf).symm)
+      ((derivedUpperStarLowerStarAdjunction Λ f'.left).restrictFullyFaithful
+        (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+        (boundedConstructibleUpperStarCompatibility Λ ℓ f').symm
+        (ObjectProperty.liftCompιIso _ _ hRf').symm)
+      (boundedConstructiblePullbackSquareComparison Λ ℓ sq))
+    (β' : (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ'⟧)) hSf ⋙
+        boundedConstructibleUpperStar Λ' ℓ g ⟶
+      boundedConstructibleUpperStar Λ' ℓ g' ⋙
+        (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f'.left)_*⟦Λ'⟧)) hSf')
+    (hβ' : β' = Adjunction.exchangeRight
+      ((derivedUpperStarLowerStarAdjunction Λ' f.left).restrictFullyFaithful
+        (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+        (boundedConstructibleUpperStarCompatibility Λ' ℓ f).symm
+        (ObjectProperty.liftCompιIso _ _ hSf).symm)
+      ((derivedUpperStarLowerStarAdjunction Λ' f'.left).restrictFullyFaithful
+        (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+        (boundedConstructibleUpperStarCompatibility Λ' ℓ f').symm
+        (ObjectProperty.liftCompιIso _ _ hSf').symm)
+      (boundedConstructiblePullbackSquareComparison Λ' ℓ sq))
     (K₀ : Dᵇc(X.left)⟦Λ⟧) (h₁ : IsIso ((derivedPushHom a f.left).app K₀.obj))
     (h₂ : IsIso ((derivedPushHom a f'.left).app
       ((g'.left)^*⟦Λ⟧.leftDerivedFunctor.obj K₀.obj))) :
     Nonempty (Arrow.mk (((boundedConstructible _).lift ((boundedConstructible _).ι ⋙
         (Mod.extendScalars (coefficientMap a Y'.left)).leftDerivedFunctor) hY').map
-          ((boundedConstructibleBaseChange Λ ℓ sq).app K₀)) ≅
-      Arrow.mk ((boundedConstructibleBaseChange Λ' ℓ sq).app
+          (β.app K₀)) ≅
+      Arrow.mk (β'.app
         (((boundedConstructible _).lift ((boundedConstructible _).ι ⋙
           (Mod.extendScalars (coefficientMap a X.left)).leftDerivedFunctor) hX).obj K₀))) := by
   have := Adjunction.nonempty_arrowIso_lift_map_app_of_eq_exchangeRight_restrictFullyFaithful
@@ -133,25 +169,18 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (derivedPullIso_cube a H ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)
     (derivedPushHom a f.left) (Adjunction.pushHomOfComapIso_eq_mateEquiv _ _ _ _ _)
     (derivedPushHom a f'.left) (Adjunction.pushHomOfComapIso_eq_mateEquiv _ _ _ _ _)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ ℓ f K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f' K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ ℓ f' K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g' K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ f K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ' ℓ f K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ f' K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ' ℓ f' K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ g K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ g' K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f K) hRf
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ f' K) hRf'
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ g' K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ f K) hSf
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ f' K) hSf'
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ g K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ' ℓ g' K)
     hX hY' (boundedConstructiblePullbackSquareComparison Λ ℓ sq)
     (pullbackSquareComparison_hom_app_hom_aux ℓ Λ sq)
     (boundedConstructiblePullbackSquareComparison Λ' ℓ sq)
-    (pullbackSquareComparison_hom_app_hom_aux ℓ Λ' sq)
-    (boundedConstructibleBaseChange Λ ℓ sq) (boundedConstructibleBaseChange_eq_exchangeRight Λ ℓ sq)
-    (boundedConstructibleBaseChange Λ' ℓ sq)
-    (boundedConstructibleBaseChange_eq_exchangeRight Λ' ℓ sq) K₀ h₁ h₂
+    (pullbackSquareComparison_hom_app_hom_aux ℓ Λ' sq) β hβ β' hβ' K₀ h₁ h₂
   exact this
 
 end BoundedConstructible

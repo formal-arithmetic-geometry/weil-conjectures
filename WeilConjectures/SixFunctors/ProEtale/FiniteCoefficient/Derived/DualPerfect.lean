@@ -17,7 +17,10 @@ identification of `ω_X` with an invertible complex `T`. For `X` smooth of pure 
 the smooth purity identification `ω_{X,Λ} ≅ Λ_X(d)[2d]` is such an `η`, at each of the
 coefficient stages `𝒪_E`, `E` and `Q̄_ℓ` of the Poincaré duality conventions; this file records
 what it gives for perfect complexes (blueprint `thm-sf-dual-perfect`), the finite stage being
-`WeilConjectures.SixFunctors.Etale.Derived.Orientation`.
+`WeilConjectures.SixFunctors.Etale.Derived.Orientation`. The statements are made for an arbitrary
+object `ω` in place of `ω_X` (at a finite coefficient ring `Λ`,
+`ω = AlgebraicGeometry.ProEtale.dualizingComplex Λ a` and `RHom(-, ω)` is
+`AlgebraicGeometry.ProEtale.verdierDual Λ a`).
 
 ## Main definitions
 
@@ -53,9 +56,8 @@ namespace ProEtale
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-  {X Y : Scheme.{u}} {a : X ⟶ Y} [HasCompactification a] [Etale.HasBoundedBelowUpperShriek A a]
-  {T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-  (η : T ≅ dualizingComplex A a) (hT : IsInvertible T)
+  {X : Scheme.{u}} {ω T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+  (η : T ≅ ω) (hT : IsInvertible T)
 
 /-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex.
 
@@ -67,7 +69,7 @@ complex `T` (for smooth `X` of pure dimension `d`, `T = Λ_X(d)[2d]`), the natur
 the composite of `RHom(K, η⁻¹)` and of the twist interchange
 (`CategoryTheory.MonoidalClosed.ihomIsoIhomUnitTensor`). -/
 noncomputable def verdierDualIsoDerivedDualTensor :
-    verdierDual A a ≅ derivedDual A X ⋙ tensorRight T :=
+    (RHom(X)[A]).flip.obj ω ≅ derivedDual A X ⋙ tensorRight T :=
   MonoidalClosed.ihomFlipIsoIhomUnitTensor η hT
 
 /-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with the
@@ -80,7 +82,7 @@ lemma whiskerLeft_verdierDualIsoDerivedDualTensor_hom_app_comp
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     K ◁ ((verdierDualIsoDerivedDualTensor η hT).hom.app (op K)) ≫ (α_ _ _ _).inv ≫
         derivedDualEval K ▷ T ≫ (λ_ T).hom =
-      (ihom.ev K).app (dualizingComplex A a) ≫ η.inv :=
+      (ihom.ev K).app (ω) ≫ η.inv :=
   MonoidalClosed.whiskerLeft_ihomIsoIhomUnitTensor_hom_comp η hT K
 
 include η hT in
@@ -90,7 +92,7 @@ Under an identification `ω_X ≅ T` with an invertible `T`, the Verdier dual of
 is perfect. -/
 theorem isDualizable_verdierDual
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsDualizable K) :
-    IsDualizable ((verdierDual A a).obj (op K)) := by
+    IsDualizable (((RHom(X)[A]).flip.obj ω).obj (op K)) := by
   obtain ⟨_⟩ :=
     _root_.DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology X) A)
   exact MonoidalClosed.isDualizable_ihom_obj η hT hK
@@ -109,7 +111,7 @@ theorem isIso_toIhomIhomUnit
 /-- The isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `𝔻_X K ≅ K^∨ ⊗ᴸ T`. -/
 noncomputable def verdierDualVerdierDualIso
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    (verdierDual A a).obj (op ((verdierDual A a).obj (op K))) ≅
+    ((RHom(X)[A]).flip.obj ω).obj (op (((RHom(X)[A]).flip.obj ω).obj (op K))) ≅
       (derivedDual A X).obj (op ((derivedDual A X).obj (op K))) :=
   MonoidalClosed.ihomIhomIsoIhomIhomUnit η hT K
 
@@ -120,7 +122,7 @@ Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `η`, the double
 @[reassoc]
 lemma toIhomIhom_comp_verdierDualVerdierDualIso_hom
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    MonoidalClosed.toIhomIhom (dualizingComplex A a) K ≫
+    MonoidalClosed.toIhomIhom (ω) K ≫
         (verdierDualVerdierDualIso η hT K).hom =
       MonoidalClosed.toIhomIhomUnit K :=
   MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom η hT K
@@ -131,7 +133,7 @@ include η hT in
 For a perfect `K` the double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
 theorem isIso_toIhomIhom_dualizingComplex
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsDualizable K) :
-    IsIso (MonoidalClosed.toIhomIhom (dualizingComplex A a) K) :=
+    IsIso (MonoidalClosed.toIhomIhom (ω) K) :=
   MonoidalClosed.isIso_toIhomIhom_of_isDualizable η hT hK
 
 /-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (anti-equivalence).
@@ -150,7 +152,7 @@ lemma verdierDualEquivalenceOfIso_functor_obj_obj
     (K : (ObjectProperty.FullSubcategory
       (IsDualizable (C := _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))))ᵒᵖ) :
     ((verdierDualEquivalenceOfIso η hT).functor.obj K).obj =
-      (verdierDual A a).obj (op K.unop.obj) :=
+      ((RHom(X)[A]).flip.obj ω).obj (op K.unop.obj) :=
   rfl
 
 end ProEtale

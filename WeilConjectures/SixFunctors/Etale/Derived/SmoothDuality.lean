@@ -78,7 +78,7 @@ theorem exists_dualizingComplex_iso_and_tensor :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
         Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
-      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      Nonempty (dualizingComplex Λ f ≅
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) :=
@@ -91,7 +91,7 @@ include d in
 theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-        (dualizingComplex _ f) ≅ (R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+        (dualizingComplex _ f) ≅ (R(f)^![Λ]).obj K) := by
   obtain ⟨-, -, -, -, h⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
   have := h K

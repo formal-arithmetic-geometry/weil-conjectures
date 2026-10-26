@@ -45,7 +45,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (k' : Type u) [Field k'] [IsSepClosed k']
 
-
 /-- After restriction to the closed point of the trait, the higher direct images
 `Rⁿ j_* (j^* Λ_S)`, `n > 0`, along the geometric generic point `j : Spec Ω ⟶ S` vanish. -/
 theorem isZero_upperStar_traitClosedPoint_obj_rightDerived (n : ℕ) (hn : 0 < n) :

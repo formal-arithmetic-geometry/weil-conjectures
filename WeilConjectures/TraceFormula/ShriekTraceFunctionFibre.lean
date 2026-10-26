@@ -55,8 +55,7 @@ attribute [local instance] boundedConstructibleBraiding
 
 section Injective
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
@@ -70,21 +69,20 @@ instance faithful_single_comp_quotient_comp_qh (C : Type*) [Category C] [Abelian
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
-omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- Placing an endomorphism of the unit module in degree `0` is injective. -/
 lemma homologyUnitEndRingHom_injective :
-    Function.Injective (homologyUnitEndRingHom Λ ℓ X) := by
+    Function.Injective (homologyUnitEndRingHom ℓ X) := by
   intro a b h
   simp only [homologyUnitEndRingHom, RingHom.coe_comp, Function.comp_apply,
     RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom] at h
   have h₁ := (RingEquiv.injective _) h
   have h₂ := (RingEquiv.injective (asIso (Functor.LaxMonoidal.ε
     (DerivedCategory.Qh (C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left))))).symm.conjRingEquiv) h₁
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))))).symm.conjRingEquiv) h₁
   exact Functor.map_injective (HomologicalComplex.single
     (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left))
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
       (ComplexShape.up ℤ) 0 ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙
         DerivedCategory.Qh) h₂
 
@@ -259,7 +257,7 @@ the iterate `(K, φ^{(n+1)})`, a Weil object for the model Frobenius
 `Φ_X = (e_X^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
 theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
-    homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point (AlgebraicClosure k))
+    homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
         (weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
       trace ((weilUpperStar ℓ ΦZ _ i hi).obj
         ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
@@ -330,7 +328,7 @@ theorem weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre [IsPrope
   classical
   let e := fibreFixedPointEquiv y hi hZ
   let _ : Fintype {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
-  refine homologyUnitEndRingHom_injective (Profinite.padicAlgClRingObj ℓ) ℓ
+  refine homologyUnitEndRingHom_injective ℓ
     (point (AlgebraicClosure k)) ?_
   rw [homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek ℓ hf y hi hZ K,
     ← WeilBoundedConstructible.globalOperator_one, htf, finsum_eq_sum_of_fintype, map_sum,

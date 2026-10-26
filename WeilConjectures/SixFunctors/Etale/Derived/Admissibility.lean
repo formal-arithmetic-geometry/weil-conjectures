@@ -76,7 +76,7 @@ structure IsExceptionallyAdmissible (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteTy
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - c) (b + c)
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+        ((R(f)^![Λ]).obj K)
   /-- The composition isomorphisms, compatible with the adjunctions. -/
   exists_comp : ∀ {Z : Scheme.{u}} (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ]
     [QuasiCompact aZ] [HasInvertibleExponent Λ Z] (g : Y ⟶ Z) [HasCompactification g]
@@ -123,7 +123,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek_uniform
       (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - c) (b + c)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+          ((R(f)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
@@ -179,7 +179,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek_uniform
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U x : X.Opens).ι f
   have heq : ∀ {g₁ g₂ : ((U x : X.Opens) : Scheme.{u}) ⟶ Y} [HasCompactification g₁]
       [HasCompactification g₂], g₁ = g₂ →
-      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+      Nonempty (R(g₁)^![Λ] ≅ R(g₂)^![Λ]) := by
     intro g₁ g₂ _ _ h
     subst h
     exact ⟨Iso.refl _⟩
@@ -202,7 +202,7 @@ def IsUniformlyExceptionallyAdmissible (aY : Y ⟶ Spec (.of k)) [LocallyOfFinit
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - c) (b + c)
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+        ((R(f)^![Λ]).obj K)
 
 /-- Every separated finite-type morphism admitting a compactification, over a finite-type
 `k`-scheme, is exceptionally admissible, with stage-independent constants. -/

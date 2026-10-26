@@ -79,7 +79,7 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  refine isIso_kunnethMap_of_forall_isProper (Profinite.padicAlgClRingObj ℓ)
+  refine isIso_kunnethMap_of_forall_isProper
     (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN
       {eM} heM {eN} heN {A B} hA hB ↦ ?_) h hA hB
   have : LocallyOfFiniteType (Over.mk gM).hom := MorphismProperty.of_isPullback
@@ -100,12 +100,12 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
   have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
   have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
   have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
-  have hpush := boundedConstructible_rightDerivedLowerStar_obj _ ℓ
+  have hpush := boundedConstructible_rightDerivedLowerStar_obj ℓ
     (Over.homMk (U := Over.mk gM) (V := Over.mk (𝟙 (Spec (.of (traitGenericField k'))))) gM
-      (Category.comp_id _)) _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)
-  exact isIso_kunnethMap_of_isProper _ hM hN hpb hP hgen heM heN hA hB hΨA hΨB
-    (boundedConstructible_kunnethMap_source _ hΨA hΨB)
-    (boundedConstructible_kunnethMap_target _ (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
+      (Category.comp_id _)) ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA⟩
+  exact isIso_kunnethMap_of_isProper hM hN hpb hP hgen heM heN hA hB hΨA hΨB
+    (boundedConstructible_kunnethMap_source hΨA hΨB)
+    (boundedConstructible_kunnethMap_target (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
     (isIso_kunnethMap_traitGenericModel_of_shiftDecomposition _ k' _ _

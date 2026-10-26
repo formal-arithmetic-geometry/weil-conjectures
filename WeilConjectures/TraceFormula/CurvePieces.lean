@@ -95,8 +95,8 @@ lemma lowerStarLowerShriekCompIso_hom_app_of_id (w : f ≫ 𝟙 X = 𝟙 P ≫ f
     (K : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (lowerStarLowerShriekCompIso ℓ w).hom.app K =
       (boundedConstructibleLowerShriekId ℓ X).hom.app
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+          ((boundedConstructibleLowerStar ℓ f).obj K) ≫
+        (boundedConstructibleLowerStar ℓ f).map
           ((boundedConstructibleLowerShriekId ℓ P).inv.app K) := by
   have h₁ : (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (𝟙 X)).inv.app K =
       (boundedConstructibleLowerShriekId ℓ X).hom.app _ ≫
@@ -107,9 +107,9 @@ lemma lowerStarLowerShriekCompIso_hom_app_of_id (w : f ≫ 𝟙 X = 𝟙 P ≫ f
       boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ f K, eqToHom_trans, eqToHom_refl]
   have h₂ : (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 P) f).hom.app K =
       eqToHom (by rw [Category.id_comp]; rfl) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerShriek ℓ f).map
           ((boundedConstructibleLowerShriekId ℓ P).inv.app K) := by
-    rw [← cancel_mono ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+    rw [← cancel_mono ((boundedConstructibleLowerShriek ℓ f).map
       ((boundedConstructibleLowerShriekId ℓ P).hom.app K)), Category.assoc, ← Functor.map_comp,
       Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.comp_id,
       boundedConstructibleLowerShriekId,
@@ -128,13 +128,13 @@ to the diagram `(x, x)` of `closedPieceDiagram` it gives `u^Z = Rx_* F_{x,m} ∘
 lemma lowerStarUpperShriekExchange_app_of_id (w : f ≫ 𝟙 X = 𝟙 P ≫ f)
     (K : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (lowerStarUpperShriekExchange ℓ w).app K =
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+      (boundedConstructibleLowerStar ℓ f).map
           ((boundedConstructibleUpperShriekId ℓ P).hom.app K) ≫
         (boundedConstructibleUpperShriekId ℓ X).inv.app
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) :=
+          ((boundedConstructibleLowerStar ℓ f).obj K) :=
   mateEquiv_app_eq_of_iso_id
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 P))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 P))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     (boundedConstructibleLowerShriekId ℓ P) (boundedConstructibleLowerShriekId ℓ X) _ _
     (lowerStarLowerShriekCompIso_hom_app_of_id ℓ f w) K
 
@@ -150,7 +150,7 @@ variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ)
 `d-curve-pieces`). -/
 noncomputable abbrev closedPiece (x : RationalPoint X) :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+  (boundedConstructibleLowerStar ℓ x).obj
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier)
 
 /-- The *point correspondence* `(s, 𝟙, 𝟙)` of the geometric stalk `K_x̄ = Lx^* K` at a rational
@@ -201,7 +201,7 @@ noncomputable def closedPieceCoeff (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ m)).obj
         (K.closedPiece x) ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj
+      (boundedConstructibleUpperShriek ℓ (𝟙 X)).obj
         (K.closedPiece x) :=
   (K.closedPieceDiagram m x hx).pushforwardCoeff
 

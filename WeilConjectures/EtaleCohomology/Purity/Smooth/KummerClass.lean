@@ -183,14 +183,14 @@ immersion `i` it is `Ri_*`. -/
 noncomputable def kummerBoundary :
     constantComplex Λ U ⟶
       ((R(U.zeroLocusSubschemeι {f})_![ModuleCat.{u + 1} Λ]).obj
-        ((R(U.zeroLocusSubschemeι {f})^![ModuleCat.{u + 1} Λ]).obj (tateObject Λ U 1)))⟦(2 : ℤ)⟧ :=
+        ((R(U.zeroLocusSubschemeι {f})^![Λ]).obj (tateObject Λ U 1)))⟦(2 : ℤ)⟧ :=
   haveI : HasInvertibleExponent Λ (U.basicOpen f) := .of_hom (U.basicOpen f).ι
   ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (U.basicOpen f).ι).homEquiv _ _
       ((leftDerivedUpperStarConstantComplexIso Λ (U.basicOpen f).ι).hom ≫
         kummerClass Λ (U.basicOpenUnit f) ≫
           (leftDerivedUpperStarTateObjectIso (U.basicOpen f).ι 1).inv⟦(1 : ℤ)⟧')) ≫
     ((R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _ ≫
-      (supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+      (supportedLocalizationBoundary Λ _ _
         (range_zeroLocusSubschemeι_singleton f) (tateObject Λ U 1))⟦(1 : ℤ)⟧' ≫
         (shiftFunctorAdd' _ (1 : ℤ) 1 2 rfl).inv.app _
 
@@ -209,8 +209,8 @@ For `γ` the fundamental class of `Z` it is the map `cl_i`, `1 ↦ [Z ⊂ X]`. -
 noncomputable def supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
-    constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L :=
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
+    constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L :=
   (compactificationConstantComplexIso Λ i).inv ≫
     rightDerivedLowerShriekTranspose (ModuleCat.{u + 1} Λ) i γ
 
@@ -230,7 +230,7 @@ theorem supportedClassMap_bijective (i : Z ⟶ X) [IsClosedImmersion i]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Function.Bijective (supportedClassMap Λ i (L := L)) := by
   let E := ((Iso.refl _).homCongr (asIso ((rightDerivedLowerShriekToLowerStarComp
-      (ModuleCat.{u + 1} Λ) i).app ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)))).trans
+      (ModuleCat.{u + 1} Λ) i).app ((R(i)^![Λ]).obj L)))).trans
     ((((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _).comp
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _)).homEquiv _ _).symm.trans
         ((compactificationConstantComplexIso Λ i).homCongr (Iso.refl _)))
@@ -265,7 +265,7 @@ class HasKummerClass.IsNormalized : Prop where
       [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0)))))
 
 end Normalization
@@ -301,13 +301,13 @@ noncomputable def cupWithSupportsTateObject (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base) {m m' : ℤ}
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
     constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U (m + m'))⟦2 * (m + m')⟧)) :=
-  cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h (constantComplexDiagonal Λ U) α β ≫
-    (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![ModuleCat.{u + 1} Λ]).map
+      ((R(i)^![Λ]).obj ((tateObject Λ U (m + m'))⟦2 * (m + m')⟧)) :=
+  cupWithSupports Λ i₁ i₂ i h (constantComplexDiagonal Λ U) α β ≫
+    (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![Λ]).map
       (shiftTateObjectAddIso Λ U m m').hom)
 
 /-- The *iterated cup product of Kummer boundaries* of a tuple `f = (f₁, …, f_n)` of global
@@ -324,9 +324,9 @@ the classes have even degree, so no sign is involved. -/
 noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤)) →
     constantComplex Λ U ⟶
       (R(U.zeroLocusSubschemeι (Set.range f))_![ModuleCat.{u + 1} Λ]).obj
-        ((R(U.zeroLocusSubschemeι (Set.range f))^![ModuleCat.{u + 1} Λ]).obj
+        ((R(U.zeroLocusSubschemeι (Set.range f))^![Λ]).obj
           ((tateObject Λ U n)⟦2 * (n : ℤ)⟧))
-  | 0, f => liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) _
+  | 0, f => liftCounitOfRangeEqUniv Λ _
       (by rw [Set.range_eq_empty f, range_zeroLocusSubschemeι_empty])
       ((HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫
         (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).inv.app _)
@@ -334,7 +334,7 @@ noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤
       cupWithSupportsTateObject Λ (U.zeroLocusSubschemeι {f 0})
           (U.zeroLocusSubschemeι (Set.range (Fin.tail f))) (U.zeroLocusSubschemeι (Set.range f))
           (by rw [Fin.range_fin_succ, range_zeroLocusSubschemeι_insert]) (m := 1)
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2 (kummerBoundary Λ (f 0)))
+          (shiftSupportedClass Λ _ 2 (kummerBoundary Λ (f 0)))
           (kummerBoundaryProduct (Fin.tail f)) ≫
         eqToHom (by rw [Nat.cast_succ, add_comm (1 : ℤ)])
 

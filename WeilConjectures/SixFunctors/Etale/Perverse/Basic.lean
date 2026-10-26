@@ -16,9 +16,9 @@ Let `a : X ⟶ S` be a morphism carrying a compactification, in the intended app
 structure morphism of a separated scheme of finite type over a field `k`, and let `A` be a
 coefficient category. For `K` in the derived category `D(X_ét, A)` the *support condition* asks
 that the support of the cohomology sheaf `𝓗⁻ⁱK` have dimension at most `i` for every `i`,
-and the *cosupport condition* is the support condition for the Verdier dual `𝔻_X K`. The
-perverse classes `ᵖD^{≤n}` and `ᵖD^{≥n}` are cut out by the two conditions after the shift
-by `n`.
+and, for finite coefficients `A = ModuleCat Λ`, the *cosupport condition* is the support
+condition for the Verdier dual `𝔻_X K`. The perverse classes `ᵖD^{≤n}` and `ᵖD^{≥n}` are
+cut out by the two conditions after the shift by `n`.
 
 ## Main definitions
 
@@ -36,9 +36,10 @@ by `n`.
 ## Implementation notes
 
 The blueprint works with `ℚ̄_ℓ`-coefficients, which are not available on the étale site; the
-conditions are stated here for an arbitrary coefficient category `A`, as in the rest of
+support condition is stated here for an arbitrary coefficient category `A`, as in the rest of
 `WeilConjectures.SixFunctors.Etale`, sheaves of modules over the finite stages `ℤ/ℓⁿ` being
-the intended ones. The support of a sheaf is taken closed: the complement
+the intended ones; the cosupport condition, which needs the exceptional inverse image, is stated
+for a finite coefficient ring `Λ`. The support of a sheaf is taken closed: the complement
 of the union of the opens on which the sheaf vanishes. For a constructible sheaf this is the
 closure of the set of points with nonzero stalk, which has the same dimension. The dimension
 is the Krull dimension of the subspace, so that the empty support has dimension `⊥ = -∞`.
@@ -151,42 +152,46 @@ lemma isPerverseLE_shift_iff (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopo
   ⟨fun h ↦ SupportCondition.of_iso ((shiftFunctorAdd _ m n).app K).symm h,
     fun h ↦ SupportCondition.of_iso ((shiftFunctorAdd _ m n).app K) h⟩
 
-variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-variable (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+variable (a : X ⟶ S) [HasCompactification a]
 
 /-- The *cosupport condition* `CosuppCon(K)`: the support condition for the Verdier dual
 `𝔻_X K = RHom(K, ω_X)`, the dualizing complex being taken relative to `a : X ⟶ S`.
 (blueprint: `def-per-support-condition`) -/
-def CosupportCondition (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
-  SupportCondition ((verdierDual _ a).obj (op K))
+def CosupportCondition
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
+  SupportCondition ((verdierDual Λ a).obj (op K))
 
 variable {a} in
-lemma CosupportCondition.of_iso {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+lemma CosupportCondition.of_iso
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (e : K ≅ L) (hK : CosupportCondition a K) :
     CosupportCondition a L :=
   SupportCondition.map_iso _ e.op.symm hK
 
 /-- The class `ᵖD^{≥n}(X) = ᵖD^{≥0}(X)[-n]`: `K` lies in it if `K[n]` satisfies the
 cosupport condition. (blueprint: `def-per-perverse-subcategories`) -/
-def IsPerverseGE (n : ℤ) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
+def IsPerverseGE (n : ℤ)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   CosupportCondition a (K⟦n⟧)
 
 /-- The *perverse heart candidate* `Perv^cand(X) = ᵖD^{≤0}(X) ∩ ᵖD^{≥0}(X)`.
 (blueprint: `def-per-perverse-subcategories`) -/
-def IsPerverseHeartCandidate (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
+def IsPerverseHeartCandidate
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   IsPerverseLE 0 K ∧ IsPerverseGE a 0 K
 
 variable {a}
 
 lemma IsPerverseGE.of_iso {n : ℤ}
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (e : K ≅ L)
-    (hK : IsPerverseGE a n K) : IsPerverseGE a n L :=
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : K ≅ L) (hK : IsPerverseGE a n K) : IsPerverseGE a n L :=
   CosupportCondition.of_iso ((shiftFunctor _ n).mapIso e) hK
 
 /-- The classes are compatible with shifts: `K[m] ∈ ᵖD^{≥n}` if and only if
 `K ∈ ᵖD^{≥m+n}`. -/
-lemma isPerverseGE_shift_iff (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+lemma isPerverseGE_shift_iff
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (m n : ℤ) : IsPerverseGE a n (K⟦m⟧) ↔ IsPerverseGE a (m + n) K :=
   ⟨fun h ↦ CosupportCondition.of_iso ((shiftFunctorAdd _ m n).app K).symm h,
     fun h ↦ CosupportCondition.of_iso ((shiftFunctorAdd _ m n).app K) h⟩
@@ -194,8 +199,8 @@ lemma isPerverseGE_shift_iff (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopo
 /-- The cosupport classes only depend on the structure morphism `a`, not on the proof that it
 carries a compactification; this lets one transport them along an equality `a = a'`. -/
 lemma IsPerverseGE.of_eq {a a' : X ⟶ S} [HasCompactification a] [HasCompactification a']
-    [(R(a)_![A]).IsLeftAdjoint] [(R(a')_![A]).IsLeftAdjoint]
-    (h : a = a') {n : ℤ} {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (h : a = a') {n : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseGE a n K) : IsPerverseGE a' n K := by
   subst h
   exact hK

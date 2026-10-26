@@ -57,12 +57,12 @@ def TraceFormulaHolds (Φ : X ⟶ X) [IsProper Φ.left] : Prop :=
   ∀ (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)]
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)]
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)]
     [Fintype {x : RationalPoint X // x ≫ Φ = x}],
     trace ((compactPullback ℓ Φ).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ψ) =
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map ψ) =
       ∑ x : {x : RationalPoint X // x ≫ Φ = x}, trace (Correspondence.graphStalkMap K Φ ψ x.1 x.2)
 
 variable {ℓ}
@@ -76,7 +76,7 @@ theorem TraceFormulaHolds.trace_frobeniusCompactOperator {Φ : X ⟶ X} [IsPrope
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
     [Fintype (FixedPoint Φ m)]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)]
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)]
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     trace (frobeniusCompactOperator ℓ ψ m) =

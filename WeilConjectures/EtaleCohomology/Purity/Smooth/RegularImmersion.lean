@@ -275,7 +275,7 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
     [QuasiCompact aX] [SmoothOfRelativeDimension n aX] [HasCompactification aX]
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) i ≅
+    Nonempty (dualizingComplex Λ i ≅
       (twistShift Λ Z (-c : ℤ)).obj (constantComplex Λ Z)) := by
   -- Step 1: `ω_Z ≅ Ri^! ω_X`, `ω_X ≅ Λ_X(n)[2n]` and `ω_Z ≅ Λ_Z(m)[2m]`.
   obtain ⟨eComp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ i aX
@@ -289,14 +289,14 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
     ((isInvertible_tateObject Λ X n).shift _)
   let T : ℤ → _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     fun a ↦ (tateObject Λ Z a)⟦2 * a⟧
-  let R := (R(i)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X)
+  let R := (R(i)^![Λ]).obj (constantComplex Λ X)
   let tens := derivedTensor (ModuleCat.{u + 1} Λ) Z
   -- `Ri^! Λ_X ⊗ Λ_Z(n)[2n] ≅ Λ_Z(m)[2m]`
   let E : (tens.obj R).obj (T n) ≅ T m :=
-    ((tens.mapIso ((R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+    ((tens.mapIso ((R(i)^![Λ]).mapIso
         (HasTateTwist.twistObjectZeroIso (Λ := Λ) X).symm)).app _ ≪≫
       (tens.obj _).mapIso (leftDerivedUpperStarTateShiftIso Λ i n).symm ≪≫ cop.symm ≪≫
-      (R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+      (R(i)^![Λ]).mapIso
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso
           (HasTateTwist.twistObjectZeroIso (Λ := Λ) X)).app _ ≪≫
           derivedTensorLeftUnitor _ X _ ≪≫ (twistShiftConstantComplexIso Λ X n).symm ≪≫
@@ -325,7 +325,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersi
     [QuasiCompact aX] [SmoothOfRelativeDimension n aX] [HasCompactification aX]
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
-    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) ≅
+    Nonempty ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) ≅
       constantComplex Λ Z) := by
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_of_isRegularImmersion Λ c n m hm i aX
   obtain ⟨cop⟩ := nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible Λ i
@@ -335,11 +335,11 @@ theorem nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersi
     ((isInvertible_tateObject Λ X c).shift _)
   let tens := derivedTensor (ModuleCat.{u + 1} Λ) Z
   have h0 : -(c : ℤ) + (c : ℤ) = 0 := by lia
-  exact ⟨(R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+  exact ⟨(R(i)^![Λ]).mapIso
       ((((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso
           (HasTateTwist.twistObjectZeroIso (Λ := Λ) X)).app _ ≪≫
         derivedTensorLeftUnitor _ X _).symm) ≪≫ cop ≪≫
-    (tens.mapIso ((R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+    (tens.mapIso ((R(i)^![Λ]).mapIso
         (HasTateTwist.twistObjectZeroIso (Λ := Λ) X) ≪≫ θ ≪≫
           twistShiftConstantComplexIso Λ Z _)).app _ ≪≫
     (tens.obj _).mapIso (leftDerivedUpperStarTateShiftIso Λ i c) ≪≫
@@ -364,7 +364,7 @@ theorem exists_nonempty_iso_upperStar_rightDerivedUpperShriek_of_isRegularImmers
     (z : Z) :
     ∃ (W : X.Opens) (_ : i.base z ∈ W),
       Nonempty ((((i ⁻¹ᵁ W).ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
-          ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ≅
+          ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ≅
         constantComplex Λ (i ⁻¹ᵁ W)) := by
   obtain ⟨W, hW, hzW, n, m, hmn, hn, hm⟩ :=
     IsRegularImmersion.exists_isAffineOpen_smoothOfRelativeDimension c i aX hZ z
@@ -385,7 +385,7 @@ theorem exists_nonempty_iso_upperStar_rightDerivedUpperShriek_of_isRegularImmers
   have : HasInvertibleExponent Λ (i ⁻¹ᵁ W) := .of_hom ((i ⁻¹ᵁ W).ι ≫ i)
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersion Λ c n
     m hmn (i ∣_ W) (W.ι ≫ aX)
-  exact ⟨W, hzW, ⟨e₁ ≪≫ (R(i ∣_ W)^![ModuleCat.{u + 1} Λ]).mapIso
+  exact ⟨W, hzW, ⟨e₁ ≪≫ (R(i ∣_ W)^![Λ]).mapIso
     ((leftDerivedUpperStarIsoMapDerivedCategory _ W.ι).symm.app _ ≪≫
       leftDerivedUpperStarTateShiftIso Λ W.ι c) ≪≫ e₂⟩⟩
 
@@ -412,7 +412,7 @@ the iterated cup product with supports of the Kummer boundaries
 noncomputable def frameClass [HasKummerClass Λ] [HasInvertibleExponent Λ X] (F : i.EtaleFrame c) :
     constantComplex Λ F.U ⟶
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
-        ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
+        ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
   kummerBoundaryProduct Λ F.f
 
@@ -423,12 +423,12 @@ noncomputable def frameClass [HasKummerClass Λ] [HasInvertibleExponent Λ X] (F
 noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i]
     [HasInvertibleExponent Λ X] (F : i.EtaleFrame c)
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :
     constantComplex Λ F.U ⟶
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
-        ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
+        ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
-  restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i _ F.toZ F.isPullback
+  restrictSupportedClass Λ F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 
 /-- A frame class restricts to the frame class of the pulled back functions. -/
@@ -458,19 +458,19 @@ lemma restrictSupportedClass_comp_tateShift [HasKummerClass Λ] {U U' U₂ Z Z' 
     [IsClosedImmersion i₂] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     (g₂ : Z₂ ⟶ Z') (hg₂ : IsPullback g₂ i₂ i' e₁) (g' : Z₂ ⟶ Z) (hg' : IsPullback g' i₂ i e')
     (γ : constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U c)⟦2 * (c : ℤ)⟧))) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e' i i₂ g' hg'
+      ((R(i)^![Λ]).obj ((tateObject Λ U c)⟦2 * (c : ℤ)⟧))) :
+    restrictSupportedClass Λ e' i i₂ g' hg'
         (leftDerivedUpperStarConstantComplexIso Λ e').inv
         (leftDerivedUpperStarTateShiftIso Λ e' c) γ =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) e₁ i' i₂ g₂ hg₂
+      restrictSupportedClass Λ e₁ i' i₂ g₂ hg₂
         (leftDerivedUpperStarConstantComplexIso Λ e₁).inv (leftDerivedUpperStarTateShiftIso Λ e₁ c)
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+        (restrictSupportedClass Λ e i i' g hg
           (leftDerivedUpperStarConstantComplexIso Λ e).inv
           (leftDerivedUpperStarTateShiftIso Λ e c) γ) := by
   rw [leftDerivedUpperStarConstantComplexIso_comp Λ e₁ e _ he,
     leftDerivedUpperStarTateShiftIso_comp Λ e₁ e _ he]
   simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Category.assoc]
-  exact restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) e e₁ e' he i
+  exact restrictSupportedClass_restrictSupportedClass Λ e e₁ e' he i
     i' i₂ g hg g₂ hg₂ g' hg' _ _ _ _ γ
 
 /-- A local class `δ : Le^* Λ_X ⟶ Le^* (Ri_! Ri^! Λ(c)[2c])` corresponding to the class `β` with
@@ -492,19 +492,19 @@ lemma constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestrict
     (hg₂ : IsPullback g₂ i' i₁ a) (g' : Z' ⟶ Z) (hg' : IsPullback g' i' i w)
     (δ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X) ⟶
       (L((e)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))))
+        ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))))
     (β : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U c)⟦2 * (c : ℤ)⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U c)⟦2 * (c : ℤ)⟧)))
     (hδ : δ ≫ supportedRestriction _ e i i₁ g₁ hg₁ _ _ (leftDerivedUpperStarTateShiftIso Λ e c) =
       (leftDerivedUpperStarConstantComplexIso Λ e).hom ≫ β) :
     (leftDerivedUpperStarConstantComplexIso Λ w).inv ≫
         (leftDerivedUpperStarComp _ a e w hw).hom.app _ ≫ (L((a)^*[_])).map δ ≫
           (leftDerivedUpperStarComp _ a e w hw).inv.app _ ≫
             supportedRestriction _ w i i' g' hg' _ _ (leftDerivedUpperStarTateShiftIso Λ w c) =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) a i₁ i' g₂ hg₂
+      restrictSupportedClass Λ a i₁ i' g₂ hg₂
         (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
         β := by
-  have ht := supportedRestriction_trans (ModuleCat.{u + 1} Λ) e a w hw i i₁ i' g₁ hg₁ g₂ hg₂
+  have ht := supportedRestriction_trans Λ e a w hw i i₁ i' g₁ hg₁ g₂ hg₂
     g' hg' _ _ _ (leftDerivedUpperStarTateShiftIso Λ e c) (leftDerivedUpperStarTateShiftIso Λ a c)
   rw [← leftDerivedUpperStarTateShiftIso_comp Λ a e w hw] at ht
   rw [ht, leftDerivedUpperStarConstantComplexIso_comp Λ a e w hw]
@@ -526,21 +526,21 @@ theorem isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion
     (aX : X ⟶ Spec (.of k)) [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     (n : ℤ) (hn : n ≠ 0) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) := by
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) := by
   choose W hzW e using
     exists_nonempty_iso_upperStar_rightDerivedUpperShriek_of_isRegularImmersion Λ c i aX hZ
   -- the restrictions to the neighbourhoods `Z ∩ W` are the cohomology sheaves of `Λ`
   have := Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
     (ι := Z) (fun z ↦ (i ⁻¹ᵁ W z).ι) (fun z ↦ ⟨z, ⟨z, hzW z⟩, rfl⟩)
     (0 : (_root_.DerivedCategory.homologyFunctor _ n).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ⟶ 0) (fun z ↦
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ⟶ 0) (fun z ↦
       isIso_of_source_target_iso_zero _
         ((isZero_homology_constantComplex Λ _ n hn).of_iso
           ((((i ⁻¹ᵁ W z).ι)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryHomologyFunctorIso n).app _ ≪≫
             (_root_.DerivedCategory.homologyFunctor _ n).mapIso (e z).some)).isoZero
         (Functor.map_isZero _ (isZero_zero _)).isoZero)
   exact (isZero_zero _).of_iso (asIso (0 : (_root_.DerivedCategory.homologyFunctor _ n).obj
-    ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ⟶ 0))
+    ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ⟶ 0))
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
@@ -554,7 +554,7 @@ theorem exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isReg
     ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage Z, ∀ a : 𝒰.I₀,
       Nonempty ((upperStar (ModuleCat.{u + 1} Λ) (𝒰.f a)).obj
           ((_root_.DerivedCategory.homologyFunctor _ 0).obj
-            ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) ≅
+            ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) ≅
         (constantSheaf (𝒰.X a).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
           (ModuleCat.of Λ Λ)) := by
   choose W hzW e using
@@ -575,7 +575,7 @@ theorem isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegula
     (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     Scheme.IsLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor _ 0).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) := by
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) := by
   obtain ⟨𝒰, h𝒰⟩ :=
     exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion Λ c i
       aX hZ
@@ -592,9 +592,9 @@ theorem exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion
     (aX : X ⟶ Spec (.of k)) [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
       Nonempty ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-          ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ≅
+          ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ≅
         (_root_.DerivedCategory.singleFunctor _ 0).obj G) := by
-  set K := (R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)
+  set K := (R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)
   have hK := isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion Λ c i aX hZ
   have : K.IsGE 0 := (_root_.DerivedCategory.isGE_iff K 0).2 fun n hn ↦ hK n hn.ne
   have : K.IsLE 0 := (_root_.DerivedCategory.isLE_iff K 0).2 fun n hn ↦ hK n hn.ne'
@@ -623,7 +623,7 @@ restriction of supports along an open immersion is invertible
 theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
     (h : ∀ z : Z, ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ ∧
       frameRestriction Λ F γ = frameRestriction Λ F γ') :
     γ = γ' := by
@@ -650,7 +650,7 @@ theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smoot
         Subsingleton.elim y' y]
     have he : (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ =
         (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ' := by
-      have hψ := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ) F.e i _ F.toZ
+      have hψ := isIso_supportedRestriction_of_isOpenImmersion Λ F.e i _ F.toZ
         F.isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ F.e c)
       have := hFγ
       simp only [frameRestriction, restrictSupportedClass] at this
@@ -670,7 +670,7 @@ Zariski frame (`AlgebraicGeometry.Scheme.Hom.exists_etaleFrame_isOpenImmersion`)
 theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
     (h : ∀ F : i.EtaleFrame c, IsOpenImmersion F.e →
       frameRestriction Λ F γ = frameRestriction Λ F γ') :
     γ = γ' :=
@@ -688,10 +688,10 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
     (i' : Z' ⟶ W) [IsClosedImmersion i']
     (g₁ : Z' ⟶ _) (hg₁ : IsPullback g₁ i' (F₁.U.zeroLocusSubschemeι (Set.range F₁.f)) a)
     (g₂ : Z' ⟶ _) (hg₂ : IsPullback g₂ i' (F₂.U.zeroLocusSubschemeι (Set.range F₂.f)) b) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) a _ i' g₁ hg₁
+    restrictSupportedClass Λ a _ i' g₁ hg₁
         (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
         (frameClass Λ F₁) =
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) b _ i' g₂ hg₂
+      restrictSupportedClass Λ b _ i' g₂ hg₂
         (leftDerivedUpperStarConstantComplexIso Λ b).inv (leftDerivedUpperStarTateShiftIso Λ b c)
         (frameClass Λ F₂) := by
   have hw := hg₁.paste_horiz F₁.isPullback
@@ -760,7 +760,7 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
       rw [Scheme.Hom.comp_apply, hpB, hp])
     exact ⟨z', hz'⟩
   -- the restriction of the class of `F₁` is the class of `v`
-  have h₁ : frameRestriction Λ H (restrictSupportedClass (ModuleCat.{u + 1} Λ) a _ i' g₁ hg₁
+  have h₁ : frameRestriction Λ H (restrictSupportedClass Λ a _ i' g₁ hg₁
       (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
       (frameClass Λ F₁)) = kummerBoundaryProduct Λ f := by
     rw [frameRestriction, ← restrictSupportedClass_comp_tateShift Λ H.e a _ rfl _ _ _ g₁ hg₁
@@ -787,13 +787,13 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
   have key : ∀ (w'' : Fin c → Γ(B.toScheme, ⊤)) (_ : w'' = M'.mulVec f) (g : _ ⟶ _)
       (hg : IsPullback g (B.toScheme.zeroLocusSubschemeι (Set.range f))
         (B.toScheme.zeroLocusSubschemeι (Set.range w'')) (𝟙 _)),
-      restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
+      restrictSupportedClass Λ (𝟙 _) _ _ g hg
         (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ w'') =
       kummerBoundaryProduct Λ f := by
     rintro _ rfl g hg
     exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ f M' hdet' g hg
-  have h₂ : frameRestriction Λ H (restrictSupportedClass (ModuleCat.{u + 1} Λ) b _ i' g₂ hg₂
+  have h₂ : frameRestriction Λ H (restrictSupportedClass Λ b _ i' g₂ hg₂
       (leftDerivedUpperStarConstantComplexIso Λ b).inv (leftDerivedUpperStarTateShiftIso Λ b c)
       (frameClass Λ F₂)) = kummerBoundaryProduct Λ f := by
     rw [frameRestriction, ← restrictSupportedClass_comp_tateShift Λ H.e b _ rfl _ _ _ g₂ hg₂
@@ -822,7 +822,7 @@ glue (`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). -/
 theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     ∃! γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)),
+        ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)),
       ∀ F : i.EtaleFrame c, frameRestriction Λ F γ = frameClass Λ F := by
   obtain ⟨G, ⟨eM⟩⟩ :=
     exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion Λ c i aX hZ
@@ -839,19 +839,19 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     rintro (_ | z)
     · exact inferInstanceAs (IsOpenImmersion i.openComplement.ι)
     · exact hFo z
-  have hΨ : ∀ z, IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) (F z).e i _ (F z).toZ
+  have hΨ : ∀ z, IsIso (supportedRestriction Λ (F z).e i _ (F z).toZ
       (F z).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (F z).e c)) := fun z ↦
     have := hFo z
     isIso_supportedRestriction_of_isOpenImmersion _ _ _ _ _ _ _ _ _
   let δ : ∀ j, (L((e j)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X) ⟶
       (L((e j)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :=
+        ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :=
     fun j ↦ match j with
     | none => 0
     | some z => (leftDerivedUpperStarConstantComplexIso Λ (F z).e).hom ≫ frameClass Λ (F z) ≫
-        inv (supportedRestriction (ModuleCat.{u + 1} Λ) (F z).e i _ (F z).toZ
+        inv (supportedRestriction Λ (F z).e i _ (F z).toZ
           (F z).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (F z).e c))
-  have hδ : ∀ z, δ (some z) ≫ supportedRestriction (ModuleCat.{u + 1} Λ) (F z).e i _ (F z).toZ
+  have hδ : ∀ z, δ (some z) ≫ supportedRestriction Λ (F z).e i _ (F z).toZ
       (F z).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (F z).e c) =
         (leftDerivedUpperStarConstantComplexIso Λ (F z).e).hom ≫ frameClass Λ (F z) := by
     intro z
@@ -860,7 +860,7 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
   have hzero : ∀ {W : Scheme.{u}} (w : W ⟶ X),
       Set.range w.base ⊆ Set.range i.openComplement.ι.base →
       IsZero ((L((w)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)))) :=
+        ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)))) :=
     fun w hw ↦ isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint _ i
       i.openComplement.ι hdisj w hw _
   have hcov : ∀ x : X, ∃ j, x ∈ Set.range (e j).base := by
@@ -902,10 +902,10 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
         IsPullback.of_right (by rw [IsPullback.lift_fst]; exact hout)
           ((F z').isPullback.lift_snd _ _ _)
           (F z').isPullback
-      have := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ) (a ≫ (F z).e) i
+      have := isIso_supportedRestriction_of_isOpenImmersion Λ (a ≫ (F z).e) i
         _ _ hg' _ _ (leftDerivedUpperStarTateShiftIso Λ (a ≫ (F z).e) c)
       rw [← cancel_epi (leftDerivedUpperStarConstantComplexIso Λ (a ≫ (F z).e)).inv,
-        ← cancel_mono (supportedRestriction (ModuleCat.{u + 1} Λ) (a ≫ (F z).e) i _ _ hg' _ _
+        ← cancel_mono (supportedRestriction Λ (a ≫ (F z).e) i _ _ hg' _ _
           (leftDerivedUpperStarTateShiftIso Λ (a ≫ (F z).e) c))]
       simp only [Category.assoc]
       exact (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
@@ -980,7 +980,7 @@ is what makes the choice canonical. -/
 noncomputable def fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
+      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
   (existsUnique_fundamentalClass Λ c i aX hZ).exists.choose
 
 /-- The fundamental class restricts to the frame class on every frame. -/
@@ -998,7 +998,7 @@ isomorphism as `i` is a closed immersion. -/
 noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     constantComplex Λ Z ⟶
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) :=
+      (R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) :=
   supportedClassMap Λ i (fundamentalClass Λ c i aX hZ)
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
@@ -1016,7 +1016,7 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
     [AlgebraicGeometry.Etale e] (i' : Z' ⟶ X') (g : Z' ⟶ Z) (hg : IsPullback g i' i e) :
     haveI := IsRegularImmersion.of_isPullback c hg
     haveI : HasInvertibleExponent Λ X' := .of_hom e
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e c)
         (fundamentalClass Λ c i aX hZ) =
       fundamentalClass Λ c i' (e ≫ aX)
@@ -1030,7 +1030,7 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
   refine eq_of_frameRestriction_eq Λ c i' (e ≫ aX) (isRegularLocalRing_stalk_of_etale g hZ)
     fun F _ ↦ ?_
   rw [frameRestriction_fundamentalClass]
-  have h : restrictSupportedClass (ModuleCat.{u + 1} Λ) (F.e ≫ e) i _ (F.toZ ≫ g)
+  have h : restrictSupportedClass Λ (F.e ≫ e) i _ (F.toZ ≫ g)
       (F.isPullback.paste_horiz hg) (leftDerivedUpperStarConstantComplexIso Λ (F.e ≫ e)).inv
       (leftDerivedUpperStarTateShiftIso Λ (F.e ≫ e) c) (fundamentalClass Λ c i aX hZ) =
         frameClass Λ F :=
@@ -1038,7 +1038,7 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
   rw [leftDerivedUpperStarConstantComplexIso_comp Λ F.e e _ rfl,
     leftDerivedUpperStarTateShiftIso_comp Λ F.e e _ rfl] at h
   simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Category.assoc] at h
-  rw [restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) e F.e (F.e ≫ e) rfl i
+  rw [restrictSupportedClass_restrictSupportedClass Λ e F.e (F.e ≫ e) rfl i
     i' _ g hg F.toZ F.isPullback (F.toZ ≫ g) (F.isPullback.paste_horiz hg)] at h
   exact h
 

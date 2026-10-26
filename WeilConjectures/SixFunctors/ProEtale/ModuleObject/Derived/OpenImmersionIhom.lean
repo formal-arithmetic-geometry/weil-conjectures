@@ -137,7 +137,7 @@ theorem isIso_ihomComparison_leftDerivedUpperStar_of_isOpenImmersion
 section BoundedConstructible
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] [IsEllAdicFinitenessCoefficient ℓ Λ] {V Y : Over (Spec (.of k))}
+  [Fact (ringChar k ≠ ℓ)] {V Y : Over (Spec (.of k))}
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (i : V ⟶ Y) [IsOpenImmersion i.left]
@@ -147,29 +147,34 @@ set_option synthInstance.maxHeartbeats 400000 in
 /-- The projection map `j_! (Lj^* M ⊗ᴸ T) ⟶ M ⊗ᴸ j_! T` of the adjunction `j_! ⊣ Lj^*` along an
 open immersion `j` on bounded constructible complexes is an isomorphism. -/
 instance isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-    (M : Dᵇc(Y.left)⟦Λ⟧) :
+    (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (Functor.Monoidal.projectionMap
-      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i) M) := by
-  set adj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i
-  have hη (T : Dᵇc(V.left)⟦Λ⟧) : IsIso (adj.unit.app T) := by
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj
+          ℓ) ℓ i) M) := by
+  set adj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ i
+  have hη (T : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsIso (adj.unit.app T) := by
     have : IsIso ((boundedConstructible _).ι.map (adj.unit.app T)) := by
       simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
         Adjunction.map_restrictFullyFaithful_unit_app]
       have := NatIso.isIso_app_of_isIso
-        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ i.left).unit
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' (Profinite.padicAlgClRingObj
+            ℓ) i.left).unit
         ((boundedConstructible _).ι.obj T)
       exact IsIso.comp_isIso' this inferInstance
     exact isIso_of_reflects_iso _ (boundedConstructible _).ι
   refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun T ↦ ?_
-  have hε : IsIso (adj.counit.app (M ⊗ (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj
+  have hε : IsIso (adj.counit.app (M ⊗ (boundedConstructibleOpenImmersionLowerShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
       T)) := by
     have : IsIso ((boundedConstructible _).ι.map (adj.counit.app
-        (M ⊗ (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj T))) := by
+        (M ⊗ (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+            T))) := by
       simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
         Adjunction.map_restrictFullyFaithful_counit_app]
       have :=
         isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit_app_tensorObj
-          Λ i.left M.obj T.obj
+          (Profinite.padicAlgClRingObj ℓ) i.left M.obj T.obj
       exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance this)
     exact isIso_of_reflects_iso _ (boundedConstructible _).ι
   have := hη T
@@ -181,10 +186,12 @@ complexes**: for an open immersion `j : U ⟶ X`, the comparison
 `Lj^* RHom(M, N) ⟶ RHom(Lj^* M, Lj^* N)` of the monoidal functor `Lj^* : Dᵇc(X) ⥤ Dᵇc(U)` is an
 isomorphism. -/
 theorem isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (M : Dᵇc(Y.left)⟦Λ⟧) :
-    IsIso (Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar Λ ℓ i) M).natTrans :=
+    (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar
+        (Profinite.padicAlgClRingObj ℓ) ℓ i) M).natTrans :=
   Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i) M
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ)
+        ℓ i) M
 
 end BoundedConstructible
 

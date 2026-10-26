@@ -85,7 +85,7 @@ def EtaleSmoothDuality : Prop :=
   ∀ ⦃V W : Scheme.{u}⦄ (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [HasCompactification e],
     (∀ K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsIso (dualizingComplexTensorMap Λ e K)) ∧
-      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ 𝟙_ _)
+      Nonempty (dualizingComplex Λ e ≅ 𝟙_ _)
 
 /-- *Smooth duality for affine-space projections*: for every affine scheme `S` on which the
 exponent of `Λ` is invertible and every `d`, the projection `p_d : 𝔸^d_S ⟶ S` has canonical
@@ -98,7 +98,7 @@ def AffineSpaceSmoothDuality : Prop :=
     (∀ K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsIso (dualizingComplexTensorMap Λ (𝔸(ULift.{u} (Fin d); S) ↘ S) K)) ∧
       IsShiftedRankOneLocalSystem
-        (dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); S) ↘ S)) (2 * d : ℤ)
+        (dualizingComplex Λ (𝔸(ULift.{u} (Fin d); S) ↘ S)) (2 * d : ℤ)
 
 /-- A morphism `g` admitting a compactification *satisfies smooth duality in degree `-n`* if its
 dualizing complex `ω_g` is a shifted rank-one local system in degree `-n`
@@ -107,7 +107,7 @@ dualizing complex `ω_g` is a shifted rank-one local system in degree `-n`
 quantified over, so that the property does not depend on how it is provided. -/
 def SatisfiesSmoothDuality {W Y : Scheme.{u}} (g : W ⟶ Y) (n : ℤ) : Prop :=
   ∀ [HasCompactification g],
-    IsShiftedRankOneLocalSystem (dualizingComplex (ModuleCat.{u + 1} Λ) g) n ∧
+    IsShiftedRankOneLocalSystem (dualizingComplex Λ g) n ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ g K)
 
@@ -115,7 +115,7 @@ variable {Λ}
 
 lemma EtaleSmoothDuality.isInvertible (hE : EtaleSmoothDuality Λ) {V W : Scheme.{u}}
     (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
-    DerivedCategory.isInvertible Λ V (dualizingComplex (ModuleCat.{u + 1} Λ) e) :=
+    DerivedCategory.isInvertible Λ V (dualizingComplex Λ e) :=
   DerivedCategory.isInvertible.of_iso (hE e).2.some.symm (DerivedCategory.isInvertible_unit Λ V)
 
 section Chart
@@ -179,7 +179,7 @@ theorem satisfiesSmoothDuality_chart {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) 
       (e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme)) K) :=
     isIso_dualizingComplexTensorMap_comp_of_forall Λ e
       (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) _ rfl hθe hωp.isInvertible K (hθp K)
-  have hωq : IsShiftedRankOneLocalSystem (dualizingComplex (ModuleCat.{u + 1} Λ)
+  have hωq : IsShiftedRankOneLocalSystem (dualizingComplex Λ
       (e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme))) (2 * d : ℤ) := by
     obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar Λ e
       (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) _ rfl (hθe _) hωe
@@ -263,7 +263,7 @@ theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineSpace {X Y : Sc
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
         Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
-      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      Nonempty (dualizingComplex Λ f ≅
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) := by

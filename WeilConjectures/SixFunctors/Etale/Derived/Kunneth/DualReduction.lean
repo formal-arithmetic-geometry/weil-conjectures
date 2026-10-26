@@ -74,6 +74,7 @@ section Generic
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {B X Y : Scheme.{u}}
 
@@ -88,12 +89,14 @@ noncomputable def externalProductMapIso (f : X ⟶ B) (g : Y ⟶ B)
 /-- The internal tensor–Hom adjunction against a Verdier dual:
 `RHom(K, 𝔻N) ≅ 𝔻(N ⊗ᴸ K)`, from `RHom(N ⊗ᴸ K, ω) ≅ RHom(K, RHom(N, ω))`. -/
 noncomputable def derivedHomVerdierDualIso {S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
-    [(R(a)_![A]).IsLeftAdjoint] (K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (RHom(X)[A].obj (op K)).obj ((verdierDual A a).obj (op N)) ≅
-      (verdierDual A a).obj (op (((-⊗ᴸ-(X)[A]).obj N).obj K)) :=
-  ((((derivedTensorHomAdjunction A (N ⊗ K)).ofNatIsoLeft (tensorLeftTensor N K)).rightAdjointUniq
-    ((derivedTensorHomAdjunction A K).comp (derivedTensorHomAdjunction A N))).app
-      (dualizingComplex A a)).symm
+ (K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj ((verdierDual Λ a).obj (op N)) ≅
+      (verdierDual Λ a).obj (op (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj N).obj K)) :=
+  ((((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) (N ⊗ K)).ofNatIsoLeft (tensorLeftTensor N
+      K)).rightAdjointUniq
+    ((derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K).comp (derivedTensorHomAdjunction
+        (ModuleCat.{u + 1} Λ) N))).app
+      (dualizingComplex Λ a)).symm
 
 variable [UpperStarPreservesFlat A]
 
@@ -156,9 +159,9 @@ theorem nonempty_iso_verdierDual_leftDerivedUpperStar_obj {X Y S : Scheme.{u}} (
     (aY : Y ⟶ S) (aX : X ⟶ S) (h : f ≫ aY = aX) [HasCompactification f]
     [HasCompactification aY] [HasCompactification aX] [QuasiCompact aX]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+    Nonempty ((verdierDual Λ aX).obj
         (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K))) := by
+      (R(f)^![Λ]).obj ((verdierDual Λ aY).obj (op K))) := by
   subst h
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ f K (dualizingComplex _ aY)
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
@@ -193,10 +196,10 @@ structure VerdierDualExternalProduct (k : Type u) [Field k] : Prop where
     ⦃Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))⦄,
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X P →
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y Q →
-    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+    Nonempty ((verdierDual Λ (pullback.fst a b ≫ a)).obj
         (op (externalProduct (ModuleCat.{u + 1} Λ) a b P Q)) ≅
-      externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op P))
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op Q)))
+      externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual Λ a).obj (op P))
+        ((verdierDual Λ b).obj (op Q)))
 
 /-- Blueprint `sk-rem-sf-kv-formal`, `rem-sf-kv-formal`: the formal rewriting of the target of
 `κ`. For separated finite-type `k`-schemes `X`, `Y`, `M ∈ Dctf(X, Λ)` and any `N` on `Y`,
@@ -218,15 +221,15 @@ theorem nonempty_iso_derivedHom_rightDerivedUpperShriek_fst {k : Type u} [Field 
     (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M) ≅
-      (verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+        ((R(pullback.fst a b)^![Λ]).obj M) ≅
+      (verdierDual Λ (pullback.fst a b ≫ a)).obj
         (op (externalProduct (ModuleCat.{u + 1} Λ) a b
-          ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M)) N))) := by
+          ((verdierDual Λ a).obj (op M)) N))) := by
   obtain ⟨e₁⟩ := nonempty_iso_verdierDual_verdierDual Λ a hM
   obtain ⟨e₂⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ (pullback.fst a b) a
-    (pullback.fst a b ≫ a) rfl ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
+    (pullback.fst a b ≫ a) rfl ((verdierDual Λ a).obj (op M))
   exact ⟨((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso
-      ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).mapIso e₁ ≪≫ e₂.symm) ≪≫
+      ((R(pullback.fst a b)^![Λ]).mapIso e₁ ≪≫ e₂.symm) ≪≫
     derivedHomVerdierDualIso _ (pullback.fst a b ≫ a) _ _⟩
 
 namespace VerdierDualExternalProduct
@@ -251,10 +254,10 @@ theorem nonempty_iso_kunnethVerdier {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
     (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
+        ((verdierDual Λ b).obj (op N)) ≅
       (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) := by
+        ((R(pullback.fst a b)^![Λ]).obj M)) := by
   obtain ⟨e₁⟩ := nonempty_iso_verdierDual_verdierDual Λ a hM
   obtain ⟨e₂⟩ := nonempty_iso_derivedHom_rightDerivedUpperShriek_fst Λ a b hM N
   obtain ⟨e₃⟩ := hδ.nonempty_iso a b (constructibleFiniteTor_verdierDual Λ a hM) hN
@@ -293,14 +296,14 @@ theorem nonempty_iso_externalHom {Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ Spec 
   obtain ⟨b₃⟩ := nonempty_iso_verdierDual_verdierDual Λ (pullback.fst c₁ c₂ ≫ c₁) hNN
   obtain ⟨e₃⟩ := hδ.nonempty_iso c₁ c₂ hT₁ hT₂
   obtain ⟨e₄⟩ := nonempty_iso_externalProduct_derivedTensor (ModuleCat.{u + 1} Λ) c₁ c₂
-    ((verdierDual (ModuleCat.{u + 1} Λ) c₁).obj (op N₁)) E₁
-    ((verdierDual (ModuleCat.{u + 1} Λ) c₂).obj (op N₂)) E₂
+    ((verdierDual Λ c₁).obj (op N₁)) E₁
+    ((verdierDual Λ c₂).obj (op N₂)) E₂
   obtain ⟨e₅⟩ := hδ.nonempty_iso c₁ c₂ hN₁ hN₂
   exact ⟨externalProductMapIso _ c₁ c₂
       (((RHom(Z₁)[ModuleCat.{u + 1} Λ]).obj _).mapIso b₁ ≪≫ derivedHomVerdierDualIso _ c₁ _ _)
       (((RHom(Z₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso b₂ ≪≫ derivedHomVerdierDualIso _ c₂ _ _) ≪≫
-    e₃.symm ≪≫ (verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst c₁ c₂ ≫ c₁)).mapIso e₄.symm.op ≪≫
-    (verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst c₁ c₂ ≫ c₁)).mapIso
+    e₃.symm ≪≫ (verdierDual Λ (pullback.fst c₁ c₂ ≫ c₁)).mapIso e₄.symm.op ≪≫
+    (verdierDual Λ (pullback.fst c₁ c₂ ≫ c₁)).mapIso
       (((-⊗ᴸ-(pullback c₁ c₂)[ModuleCat.{u + 1} Λ]).mapIso e₅).app _).op ≪≫
     (derivedHomVerdierDualIso _ (pullback.fst c₁ c₂ ≫ c₁) _ _).symm ≪≫
     ((RHom(pullback c₁ c₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso b₃.symm⟩
@@ -324,37 +327,37 @@ theorem nonempty_iso_exceptional {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁
     (hN₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₁ N₁)
     (hN₂ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₂ N₂) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
+      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := by
   obtain ⟨b₁'⟩ := nonempty_iso_verdierDual_verdierDual Λ b₁ hN₁
   obtain ⟨b₂'⟩ := nonempty_iso_verdierDual_verdierDual Λ b₂ hN₂
   have hDN₁ := constructibleFiniteTor_verdierDual Λ b₁ hN₁
   have hDN₂ := constructibleFiniteTor_verdierDual Λ b₂ hN₂
   obtain ⟨p₁⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ f₁ b₁ (f₁ ≫ b₁) rfl
-    ((verdierDual (ModuleCat.{u + 1} Λ) b₁).obj (op N₁))
+    ((verdierDual Λ b₁).obj (op N₁))
   obtain ⟨p₂⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ f₂ b₂ (f₂ ≫ b₂) rfl
-    ((verdierDual (ModuleCat.{u + 1} Λ) b₂).obj (op N₂))
+    ((verdierDual Λ b₂).obj (op N₂))
   have hP₁ := constructibleFiniteTor_leftDerivedUpperStar _ f₁ hDN₁
   have hP₂ := constructibleFiniteTor_leftDerivedUpperStar _ f₂ hDN₂
   obtain ⟨e₃⟩ := hδ.nonempty_iso (f₁ ≫ b₁) (f₂ ≫ b₂) hP₁ hP₂
   obtain ⟨e₄⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBase_externalProduct
-    (ModuleCat.{u + 1} Λ) b₁ b₂ f₁ f₂ ((verdierDual (ModuleCat.{u + 1} Λ) b₁).obj (op N₁))
-    ((verdierDual (ModuleCat.{u + 1} Λ) b₂).obj (op N₂))
+    (ModuleCat.{u + 1} Λ) b₁ b₂ f₁ f₂ ((verdierDual Λ b₁).obj (op N₁))
+    ((verdierDual Λ b₂).obj (op N₂))
   obtain ⟨e₅⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ
     (pullback.mapOverBase f₁ f₂ b₁ b₂) (pullback.fst b₁ b₂ ≫ b₁)
     (pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂) ≫ f₁ ≫ b₁)
     (by simp [-pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
     (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂
-      ((verdierDual (ModuleCat.{u + 1} Λ) b₁).obj (op N₁))
-      ((verdierDual (ModuleCat.{u + 1} Λ) b₂).obj (op N₂)))
+      ((verdierDual Λ b₁).obj (op N₁))
+      ((verdierDual Λ b₂).obj (op N₂)))
   obtain ⟨e₆⟩ := hδ.nonempty_iso b₁ b₂ hDN₁ hDN₂
   exact ⟨externalProductMapIso _ (f₁ ≫ b₁) (f₂ ≫ b₂)
-      ((R(f₁)^![ModuleCat.{u + 1} Λ]).mapIso b₁' ≪≫ p₁.symm)
-      ((R(f₂)^![ModuleCat.{u + 1} Λ]).mapIso b₂' ≪≫ p₂.symm) ≪≫ e₃.symm ≪≫
-    (verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂) ≫ f₁ ≫ b₁)).mapIso
+      ((R(f₁)^![Λ]).mapIso b₁' ≪≫ p₁.symm)
+      ((R(f₂)^![Λ]).mapIso b₂' ≪≫ p₂.symm) ≪≫ e₃.symm ≪≫
+    (verdierDual Λ (pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂) ≫ f₁ ≫ b₁)).mapIso
       e₄.op ≪≫ e₅ ≪≫
-    (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).mapIso
+    (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).mapIso
       (e₆ ≪≫ externalProductMapIso _ b₁ b₂ b₁'.symm b₂'.symm)⟩
 
 end VerdierDualExternalProduct
@@ -374,10 +377,10 @@ structure KunnethVerdier (k : Type u) [Field k] : Prop where
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N →
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
+        ((verdierDual Λ b).obj (op N)) ≅
       (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M))
+        ((R(pullback.fst a b)^![Λ]).obj M))
 
 variable {Λ} {k : Type u} [Field k]
 

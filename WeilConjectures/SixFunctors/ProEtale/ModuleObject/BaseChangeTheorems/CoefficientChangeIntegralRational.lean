@@ -71,8 +71,8 @@ arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational
     (sq : CommSq g' f' f g) (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     Nonempty (Arrow.mk ((boundedConstructibleExtendScalars Y'.left ℓ E).map
-        ((boundedConstructibleBaseChange (Profinite.padicIntegersRingObj ℓ E.1) ℓ sq).app K₀)) ≅
-      Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E.1) ℓ sq).app
+        ((PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq).app K₀)) ≅
+      Arrow.mk ((ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq).app
         ((boundedConstructibleExtendScalars X.left ℓ E).obj K₀))) := by
   have : QuasiCompact f.left := by
     have : QuasiCompact (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
@@ -99,8 +99,16 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational
   have h₁ := isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f.left K₀.obj a
   have key := nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E) ℓ H sq
-    (fun K ↦ boundedConstructible_derivedExtendScalars_obj X.left ℓ E K.obj K.property)
-    (fun K ↦ boundedConstructible_derivedExtendScalars_obj Y'.left ℓ E K.obj K.property) K₀ h₁ h₂
+    (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E.1 f K)
+    (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E.1 f' K)
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f' K)
+    (fun K ↦ boundedConstructible_derivedExtendScalars_obj X.left ℓ E K)
+    (fun K ↦ boundedConstructible_derivedExtendScalars_obj Y'.left ℓ E K)
+    (PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq)
+    (PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E.1 sq)
+    (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq)
+    (ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E sq) K₀ h₁ h₂
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing

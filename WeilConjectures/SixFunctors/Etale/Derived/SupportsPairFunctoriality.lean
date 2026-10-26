@@ -49,6 +49,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {X X' Z Z' U U' : Scheme.{u}}
 
@@ -64,33 +65,35 @@ triangles from `Le^*` of the supported localization triangle
 maps of long exact sequences are compatible with the connecting maps. -/
 theorem existsUnique_triangleHom_supportedLocalizationTriangle (e : X' ⟶ X) (i : Z ⟶ X)
     (j : U ⟶ X) (i' : Z' ⟶ X') (j' : U' ⟶ X')
-    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
-    [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint] [IsOpenImmersion j']
+    [IsClosedImmersion i] [IsOpenImmersion j]
+    [IsClosedImmersion i'] [IsOpenImmersion j']
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (hij' : Set.range i'.base = (Set.range j'.base)ᶜ)
     (he : Set.range (j' ≫ e).base ⊆ Set.range j.base)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf X'.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ⟶ L') :
-    ∃! φ : (L((e)^*[A])).mapTriangle.obj
-        (supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L)) ⟶
-      supportedLocalizationTriangle A i' j' L' (supportedLocalizationBoundary A i' j' hij' L'),
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (τ :
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ⟶ L') :
+    ∃! φ : (L((e)^*[ModuleCat.{u + 1} Λ])).mapTriangle.obj
+        (supportedLocalizationTriangle Λ i j L (supportedLocalizationBoundary Λ i j hij L)) ⟶
+      supportedLocalizationTriangle Λ i' j' L' (supportedLocalizationBoundary Λ i' j' hij' L'),
       φ.hom₂ = τ := by
-  set T := (L((e)^*[A])).mapTriangle.obj
-    (supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L))
-  set T' := supportedLocalizationTriangle A i' j' L' (supportedLocalizationBoundary A i' j' hij' L')
+  set T := (L((e)^*[ModuleCat.{u + 1} Λ])).mapTriangle.obj
+    (supportedLocalizationTriangle Λ i j L (supportedLocalizationBoundary Λ i j hij L))
+  set T' := supportedLocalizationTriangle Λ i' j' L' (supportedLocalizationBoundary Λ i' j' hij' L')
   have hT : T ∈ distTriang _ :=
-    (L((e)^*[A])).map_distinguished _ (supportedLocalizationTriangle_mem_distTriang A i j hij L)
-  have hT' : T' ∈ distTriang _ := supportedLocalizationTriangle_mem_distTriang A i' j' hij' L'
+    (L((e)^*[ModuleCat.{u + 1} Λ])).map_distinguished _
+        (supportedLocalizationTriangle_mem_distTriang Λ i j hij L)
+  have hT' : T' ∈ distTriang _ := supportedLocalizationTriangle_mem_distTriang Λ i' j' hij' L'
   -- the pullback of the supported term is supported on `e⁻¹(Z) ⊆ Z'`
-  have hZ : IsZero ((L((j')^*[A])).obj T.obj₁) :=
-    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i j
+  have hZ : IsZero ((L((j')^*[ModuleCat.{u + 1} Λ])).obj T.obj₁) :=
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) i j
       (by rw [hij]; exact disjoint_compl_left) (j' ≫ e) he _).of_iso
-        ((leftDerivedUpperStarComp A j' e).app _).symm
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) j' e).app _).symm
   have : Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ T'.obj₃) :=
-    subsingleton_hom_rightDerivedLowerStar_of_isZero A j'
+    subsingleton_hom_rightDerivedLowerStar_of_isZero (ModuleCat.{u + 1} Λ) j'
       (((shiftFunctor _ (1 : ℤ)).map_isZero hZ).of_iso
-        (((L((j')^*[A])).commShiftIso (1 : ℤ)).app _)) _
-  obtain ⟨a, ha, ha'⟩ := existsUnique_comp_counit_of_isZero A i' j' hij' hZ (T.mor₁ ≫ τ)
+        (((L((j')^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).app _)) _
+  obtain ⟨a, ha, ha'⟩ := existsUnique_comp_counit_of_isZero Λ i' j' hij' hZ (T.mor₁ ≫ τ)
   obtain ⟨c, hc₂, hc₃⟩ := Pretriangulated.complete_distinguished_triangle_morphism T T' hT hT'
     a τ ha.symm
   refine ⟨Triangle.homMk T T' a τ c ha.symm hc₂ hc₃, rfl, fun ψ hψ ↦ ?_⟩
@@ -109,22 +112,23 @@ component is the restriction of supports and whose third component is the derive
 map. -/
 theorem supportedLocalizationTriangleBaseChange_eq_of_hom₂_eq (e : X' ⟶ X) (i : Z ⟶ X)
     (j : U ⟶ X) (i' : Z' ⟶ X') (j' : U' ⟶ X') (g : Z' ⟶ Z) (e₁ : U' ⟶ U)
-    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
-    [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint] [IsOpenImmersion j']
+    [IsClosedImmersion i] [IsOpenImmersion j]
+    [IsClosedImmersion i'] [IsOpenImmersion j']
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (hij' : Set.range i'.base = (Set.range j'.base)ᶜ)
     (hg : IsPullback g i' i e) (sq : CommSq e₁ j' j e)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf X'.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L')
-    (φ : (L((e)^*[A])).mapTriangle.obj
-        (supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L)) ⟶
-      supportedLocalizationTriangle A i' j' L' (supportedLocalizationBoundary A i' j' hij' L'))
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (τ :
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
+    (φ : (L((e)^*[ModuleCat.{u + 1} Λ])).mapTriangle.obj
+        (supportedLocalizationTriangle Λ i j L (supportedLocalizationBoundary Λ i j hij L)) ⟶
+      supportedLocalizationTriangle Λ i' j' L' (supportedLocalizationBoundary Λ i' j' hij' L'))
     (hφ : φ.hom₂ = τ.hom) :
-    φ = supportedLocalizationTriangleBaseChange A e i j i' j' g e₁ hij hij' hg sq L L' τ := by
+    φ = supportedLocalizationTriangleBaseChange Λ e i j i' j' g e₁ hij hij' hg sq L L' τ := by
   have he : Set.range (j' ≫ e).base ⊆ Set.range j.base := by
     rintro _ ⟨x, rfl⟩
     exact ⟨e₁.base x, by rw [← sq.w]; simp⟩
-  exact (existsUnique_triangleHom_supportedLocalizationTriangle A e i j i' j' hij hij' he L L'
+  exact (existsUnique_triangleHom_supportedLocalizationTriangle Λ e i j i' j' hij hij' he L L'
     τ.hom).unique hφ rfl
 
 end Etale

@@ -210,17 +210,17 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion_of_ope
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) T K)
     (hab : _root_.DerivedCategory.homologyConcentratedIn a b K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) Z ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+    boundedConstructible (ModuleCat.{u + 1} Λ) Z ((R(i)^![Λ]).obj K) ∧
       _root_.DerivedCategory.homologyConcentratedIn a (b + e + 1)
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+        ((R(i)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
-  have hT := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i j hij K
+  have hT := supportedLocalizationTriangle_mem_distTriang Λ i j hij K
   obtain ⟨hMbc, hMc⟩ := boundedConstructible_rightDerivedLowerStar_of_openComplementBound Λ hj
     (boundedConstructible_leftDerivedUpperStar _ j hK)
     (homologyConcentratedIn_of_iso _ ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app K).symm
       (((j)^*[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj hab))
   have hNbc : boundedConstructible (ModuleCat.{u + 1} Λ) T
-      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) :=
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)) :=
     (boundedConstructible _ T).ext_of_isTriangulatedClosed₂ _ (inv_rot_of_distTriang _ hT)
       ((boundedConstructible _ T).le_shift (-1) _ hMbc) hK
   have hNc := homologyConcentratedIn_obj₁ _ _ hT (by lia : b ≤ b + e) hab hMc
@@ -243,7 +243,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + e + 1)
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(i)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   obtain ⟨⟨hbc, hc⟩, ht⟩ := hK
   have hbc' := boundedConstructible_leftDerivedUpperStar _ j hbc
@@ -255,7 +255,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
   obtain ⟨hMbc, hMc⟩ := boundedConstructible_rightDerivedLowerStar_of_openComplementBound Λ hj
     hbc' hc'
   exact constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
-    (ModuleCat.{u + 1} Λ) i j hij (by lia : b ≤ b + e) ⟨⟨hbc, hc⟩, ht⟩
+    Λ i j hij (by lia : b ≤ b + e) ⟨⟨hbc, hc⟩, ht⟩
     ⟨⟨hMbc, hMc⟩, hjt a b _ ⟨⟨hbc', hc'⟩, ht'⟩⟩ (fun L ↦ hasProjectionFormula_of_finite Λ i _ L)
 
 end ClosedImmersion
@@ -282,9 +282,9 @@ theorem preservation_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
       boundedConstructible (ModuleCat.{u + 1} Λ) Y L →
         _root_.DerivedCategory.homologyConcentratedIn a b L →
           boundedConstructible (ModuleCat.{u + 1} Λ) U
-              ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj L) ∧
+              ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj L) ∧
             _root_.DerivedCategory.homologyConcentratedIn (a - 2 * n) (b - 2 * n + e + 1)
-              ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+              ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj L)) ∧
     ((∀ (a b : ℤ) (M : DerivedCategoryModule Λ (openComplementOfIsClosedImmersion c)),
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) _ a b M →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin n); V) a (b + e)
@@ -292,7 +292,7 @@ theorem preservation_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
       ∀ (a b : ℤ) (K : DerivedCategoryModule Λ Y),
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U (a - 2 * n) (b - 2 * n + e + 1)
-            ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+            ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj K)) := by
   have : IsNoetherianRing Λ := inferInstance
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
@@ -358,9 +358,9 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     (∀ (a b : ℤ) (L : DerivedCategoryModule Λ Y),
       boundedConstructible (ModuleCat.{u + 1} Λ) Y L →
         _root_.DerivedCategory.homologyConcentratedIn a b L →
-          boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) ∧
+          boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj L) ∧
             _root_.DerivedCategory.homologyConcentratedIn (a - 2 * D) (b - 2 * D + C)
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+              ((R(f)^![Λ]).obj L)) ∧
     ((∀ i (a b : ℤ) (M : DerivedCategoryModule Λ (openComplementOfIsClosedImmersion (c i))),
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) _ a b M →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin (n i)); (V i : Y.Opens)) a
@@ -369,17 +369,17 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
       ∀ (a b : ℤ) (K : DerivedCategoryModule Λ Y),
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b - 2 * D + C)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+            ((R(f)^![Λ]).obj K)) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsNoetherian X := {}
   -- the restriction of `Rf^!` to a chart
-  have hres (i : ι) : Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙
+  have hres (i : ι) : Nonempty (R(f)^![Λ] ⋙
       D(((U i : X.Opens).ι)^*[ModuleCat.{u + 1} Λ]) ≅
         R(c i ≫ 𝔸(ULift.{u} (Fin (n i)); (V i : Y.Opens)) ↘ _ ≫
-          (V i : Y.Opens).ι)^![ModuleCat.{u + 1} Λ]) := by
+          (V i : Y.Opens).ι)^![Λ]) := by
     have : TopologicalSpace.NoetherianSpace (U i : X.Opens) :=
       (U i : X.Opens).ι.isOpenEmbedding.isInducing.noetherianSpace
     have : QuasiCompact (U i : X.Opens).ι :=
@@ -387,7 +387,7 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     have : HasCompactification (U i : X.Opens).ι :=
       (Compactification.ofIsOpenImmersion _).hasCompactification
     obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U i : X.Opens).ι f
-    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) (hc i)
+    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ (hc i)
     exact ⟨Functor.isoWhiskerLeft _
       (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ (U i : X.Opens).ι).symm ≪≫ e₁.symm ≪≫
         e₂.symm⟩

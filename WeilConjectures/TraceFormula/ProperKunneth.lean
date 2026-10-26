@@ -115,24 +115,33 @@ variable {P P' X Y R : Over (Spec (.of k))}
 `Lq^* Lp'^* Rf_* B ⟶ Lp^* B`. -/
 noncomputable def prodUpperStarCounit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     (w : q ≫ p' = p ≫ f) (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ q).obj ((boundedConstructibleUpperStar _ ℓ p').obj
-        ((boundedConstructibleLowerStar _ ℓ f).obj B)) ⟶
-      (boundedConstructibleUpperStar _ ℓ p).obj B :=
-  (boundedConstructibleUpperStarComp _ ℓ q p').inv.app _ ≫ eqToHom (by rw [w]) ≫
-    (boundedConstructibleUpperStarComp _ ℓ p f).hom.app _ ≫
-    (boundedConstructibleUpperStar _ ℓ p).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app B)
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p').obj
+          ((boundedConstructibleLowerStar ℓ f).obj B)) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj B :=
+  (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ q p').inv.app _ ≫
+    eqToHom (by rw [w]) ≫
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ p f).hom.app _ ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app B)
 
 /-- The transpose of the transported counit of a commutative square is the base change morphism
 of the square. -/
 lemma homEquiv_prodUpperStarCounit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     (w : q ≫ p' = p ≫ f) (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).homEquiv _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p').obj
+          ((boundedConstructibleLowerStar ℓ f).obj B))
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj B)
         (prodUpperStarCounit ℓ w B) =
-      (boundedConstructibleBaseChange _ ℓ (CommSq.mk w.symm)).app B := by
-  rw [boundedConstructibleBaseChange_eq_exchangeRight, Adjunction.exchangeRight_app,
-    Adjunction.homEquiv_unit, boundedConstructiblePullbackSquareComparison_hom_app,
-    prodUpperStarCounit]
+      (boundedConstructibleBaseChange ℓ (CommSq.mk w.symm)).app B := by
+  rw [boundedConstructibleBaseChange_eq_exchangeRight,
+    Adjunction.exchangeRight_app (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ q)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        (CommSq.mk w.symm)) B,
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv_unit,
+    boundedConstructiblePullbackSquareComparison_hom_app, prodUpperStarCounit]
   simp only [Functor.map_comp, Category.assoc]
 
 /-- For a cartesian square `q ≫ p' = p ≫ f` with `f` proper, the transpose of the transported
@@ -140,7 +149,7 @@ counit is an isomorphism: proper base change. -/
 lemma isIso_homEquiv_prodUpperStarCounit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     [IsProper f.left] (sq : IsPullback p q f p')
     (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).homEquiv _ _
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv _ _
         (prodUpperStarCounit ℓ sq.w.symm B)) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq
   rw [homEquiv_prodUpperStarCounit]
@@ -186,7 +195,7 @@ lemma upperStarComp_inv_app_comp_prodUpperStarCounit_right {P'' : Over (Spec (.o
     (w : (r ≫ s) ≫ g = p ≫ f) (w' : r ≫ s ≫ g = p ≫ f)
     (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarComp _ ℓ r s).inv.app
-        ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleLowerStar _ ℓ f).obj B)) ≫
+        ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleLowerStar ℓ f).obj B)) ≫
       prodUpperStarCounit ℓ w B =
     (boundedConstructibleUpperStar _ ℓ r).map
         ((boundedConstructibleUpperStarComp _ ℓ s g).inv.app _) ≫
@@ -204,7 +213,7 @@ lemma upperStarComp_inv_app_comp_prodUpperStarCounit_left {P'' : Over (Spec (.of
     (w : (r ≫ s) ≫ g = (r ≫ ρ) ≫ f) (w' : s ≫ g = ρ ≫ f)
     (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarComp _ ℓ r s).inv.app
-        ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleLowerStar _ ℓ f).obj B)) ≫
+        ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleLowerStar ℓ f).obj B)) ≫
       prodUpperStarCounit ℓ w B =
     (boundedConstructibleUpperStar _ ℓ r).map (prodUpperStarCounit ℓ w' B) ≫
       (boundedConstructibleUpperStarComp _ ℓ r ρ).inv.app B := by
@@ -212,7 +221,7 @@ lemma upperStarComp_inv_app_comp_prodUpperStarCounit_left {P'' : Over (Spec (.of
   rewrite [boundedConstructibleUpperStarComp_inv_app_comp_inv_app_assoc]
   exact map_comp_eqToHom_comp_aux (boundedConstructibleUpperStar _ ℓ r) _ _ _ _ _ _ _ _ _ _ _ _ _ _
     ((boundedConstructibleUpperStarComp _ ℓ r ρ).inv.naturality
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app B))
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app B))
     (map_upperStarComp_hom_app_comp_upperStarComp_inv_app ℓ r ρ f _)
     (map_eqToHom_comp_upperStarComp_inv_app ℓ r w' _)
 
@@ -247,27 +256,27 @@ theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit {q : P ⟶ Q} {p₁ : P 
     [IsProper f₁.left] [IsProper f₂.left] [IsProper r.left] [IsProper s.left]
     (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).homEquiv _ _
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv _ _
       (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ q) _ _ ≫
         (prodUpperStarCounit ℓ w₁ B₁ ⊗ₘ prodUpperStarCounit ℓ w₂ B₂))) := by
   subst hq hp₂
   have hc₁ := upperStarComp_inv_app_comp_prodUpperStarCounit_right ℓ w₁ sq₁.w.symm B₁
-  have : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ r).homEquiv _ _
+  have : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ r).homEquiv _ _
       ((boundedConstructibleUpperStarComp _ ℓ r s).inv.app _ ≫ prodUpperStarCounit ℓ w₁ B₁)) := by
     rw [hc₁, Adjunction.homEquiv_naturality_left]
     have := isIso_homEquiv_prodUpperStarCounit ℓ sq₁ B₁
     infer_instance
   have := isIso_homEquiv_prodUpperStarCounit ℓ sq₂ B₂
-  have := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ s).isIso_leftProjectionMorphism
-    (fun K M ↦ (boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ s K M).symm)
-    ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁))
+  have := (boundedConstructibleUpperStarLowerStarAdjunction ℓ s).isIso_leftProjectionMorphism
+    (fun K M ↦ (boundedConstructibleUpperStar_map_braiding_hom_δ ℓ s K M).symm)
+    ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar ℓ f₁).obj B₁))
     ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂)
   exact Adjunction.isIso_homEquiv_δ_tensorHom
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ r)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ s)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (r ≫ s))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ r)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ s)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ s))
     (boundedConstructibleUpperStarComp _ ℓ r s)
-    (boundedConstructibleUpperStarComp_hom_app_tensor_δ _ ℓ r s) _ _
+    (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ r s) _ _
     (prodUpperStarCounit ℓ sq₂.w.symm B₂) ((boundedConstructibleUpperStarComp _ ℓ r ρ₂).inv.app B₂)
     (upperStarComp_inv_app_comp_prodUpperStarCounit_left ℓ w₂ sq₂.w.symm B₂)
 
@@ -284,10 +293,10 @@ the `!`-Künneth isomorphism `Ku_!` of `def-sf-kv-maps` (i) under `Rq_* ≅ Rq_!
 noncomputable def prodLowerStarExternalProduct
     (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f₁).obj B₁)
-        ((boundedConstructibleLowerStar _ ℓ f₂).obj B₂) ⟶
-      (boundedConstructibleLowerStar _ ℓ (prod.map f₁ f₂)).obj (externalProduct ℓ B₁ B₂) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map f₁ f₂)).homEquiv _ _
+    externalProduct ℓ ((boundedConstructibleLowerStar ℓ f₁).obj B₁)
+        ((boundedConstructibleLowerStar ℓ f₂).obj B₂) ⟶
+      (boundedConstructibleLowerStar ℓ (prod.map f₁ f₂)).obj (externalProduct ℓ B₁ B₂) :=
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map f₁ f₂)).homEquiv _ _
     ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (prod.map f₁ f₂)) _ _).inv ≫
       (prodUpperStarCounit ℓ (prod.map_fst f₁ f₂) B₁ ⊗ₘ
         prodUpperStarCounit ℓ (prod.map_snd f₁ f₂) B₂))

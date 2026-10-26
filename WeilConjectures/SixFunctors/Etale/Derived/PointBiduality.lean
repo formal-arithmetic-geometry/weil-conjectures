@@ -37,13 +37,12 @@ namespace Etale
 /-- Blueprint `lem-weil-coefficient-frobenius` (the derived form): for the identity of a scheme
 `S`, whose dualizing complex is the unit, the double-dual map of a dualizable `K` is an
 isomorphism. -/
-theorem isIso_verdierDualDoubleDual_app_id_of_isDualizable {A : Type u'}
-    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
-    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-    [Abelian.HasFunctorialFlatResolution A] (S : Scheme.{u})
-    {K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A)} (hK : IsDualizable K) :
-    IsIso ((verdierDualDoubleDual A (𝟙 S)).app K) :=
-  isIso_verdierDualDoubleDual_app_of_isDualizable (dualizingComplexIdIso A S).symm
+theorem isIso_verdierDualDoubleDual_app_id_of_isDualizable {Λ : Type (u + 1)} [CommRing Λ]
+    [Finite Λ] (S : Scheme.{u})
+    {K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) :
+    IsIso ((verdierDualDoubleDual Λ (𝟙 S)).app K) :=
+  isIso_verdierDualDoubleDual_app_of_isDualizable (dualizingComplexIdIso Λ S).symm
     isInvertible_unit hK
 
 /-- Blueprint `lem-weil-coefficient-frobenius`, geometric form: on a nonempty noetherian scheme
@@ -55,7 +54,7 @@ theorem isIso_verdierDualDoubleDual_app_id_of_subsingleton (Λ : Type (u + 1)) [
     [Finite Λ] {S : Scheme.{u}} [IsNoetherian S] [Subsingleton S]
     {K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) S K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) (𝟙 S)).app K) :=
+    IsIso ((verdierDualDoubleDual Λ (𝟙 S)).app K) :=
   isIso_verdierDualDoubleDual_app_id_of_isDualizable S
     (isDualizable_of_constructibleFiniteTor_of_subsingleton Λ hK)
 

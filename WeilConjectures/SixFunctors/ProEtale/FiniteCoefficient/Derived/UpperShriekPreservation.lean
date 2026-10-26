@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.PurityPreservation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 
 /-!
 # The typing of the pro-étale exceptional inverse image at the finite stages
@@ -55,9 +55,9 @@ noncomputable def rightDerivedUpperShriekMapDerivedCategoryObjIso [Finite Λ] {X
     (f : X ⟶ Y) [HasCompactification f]
     (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hG : _root_.DerivedCategory.TStructure.t.plus G) :
-    (R(f)^![ModuleCat.{u + 1} Λ]).obj (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj G) ≅
+    (R(f)^![Λ]).obj (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj G) ≅
       D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
-        ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj G) :=
+        ((Etale.rightDerivedUpperShriek Λ f).obj G) :=
   have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) Y G hG
   D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso ((Etale.rightDerivedUpperShriek _ f).mapIso
     (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).unit.app G)).symm)
@@ -144,14 +144,14 @@ theorem exists_preservationClauses {k : Type u} [Field k] {X Y : Scheme.{u}}
       (L : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ))),
       DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a b L →
         DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj L)) ∧
+          ((R(f)^![Λ]).obj L)) ∧
     ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ))),
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ∧
+            ((R(f)^![Λ]).obj K) ∧
           DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * dY + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(f)^![Λ]).obj K) := by
   obtain ⟨m, U, hU, V, n, c, hcl, hc⟩ := exists_affineCharts aY f
   refine ⟨Finset.univ.sup n, fun Λ _ _ _ dY hY ↦ ?_⟩
   have : ∀ i, IsClosedImmersion (c i) := hcl
@@ -163,7 +163,7 @@ theorem exists_preservationClauses {k : Type u} [Field k] {X Y : Scheme.{u}}
       Functor.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
         ν^*(Y)[ModuleCat.{u + 1} Λ] (ObjectProperty.prop_of_iso _ e.symm hL.2)
     have h := h₁ a b G ⟨hG, hGab⟩
-    let E := (R(f)^![ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫
+    let E := (R(f)^![Λ]).mapIso e.symm ≪≫
       rightDerivedUpperShriekMapDerivedCategoryObjIso f G hG.1.1
     exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso E.symm
         (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj h.1),
@@ -174,7 +174,7 @@ theorem exists_preservationClauses {k : Type u} [Field k] {X Y : Scheme.{u}}
       (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b G).1
         ((DerivedCategory.torAmplitudeIn _ Y a b).prop_of_iso e.symm hta)
     have h := h₂ a b G hG hGt
-    let E := (R(f)^![ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫
+    let E := (R(f)^![Λ]).mapIso e.symm ≪≫
       rightDerivedUpperShriekMapDerivedCategoryObjIso f G hG.1.1
     exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso E.symm
         (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj h.1),

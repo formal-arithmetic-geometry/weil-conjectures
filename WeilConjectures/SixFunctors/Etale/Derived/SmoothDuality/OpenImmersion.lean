@@ -62,7 +62,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 `Rj_! ⋙ Rj^! ≅ D(j_!) ⋙ D(j^*) ≅ 𝟭`. -/
 instance isIso_rightDerivedUpperShriekAdjunction_unit_of_isOpenImmersion {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j] [QuasiCompact j] :
-    IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) j).unit :=
+    IsIso (rightDerivedUpperShriekAdjunction Λ j).unit :=
   (rightDerivedUpperShriekAdjunction _ j).isIso_unit_of_iso
     (Functor.isoWhiskerRight (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j) _ ≪≫
       Functor.isoWhiskerLeft _ (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j) ≪≫
@@ -93,8 +93,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right
     IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
   have : IsOpenImmersion f' := MorphismProperty.of_isPullback sq ‹IsOpenImmersion f›
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
-  let adj' := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f'
+  let adj := rightDerivedUpperShriekAdjunction Λ f
+  let adj' := rightDerivedUpperShriekAdjunction Λ f'
   rw [NatTrans.isIso_iff_isIso_app]
   intro K
   refine adj'.isIso_of_isIso_map_comp_counit _

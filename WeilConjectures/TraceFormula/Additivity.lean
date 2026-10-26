@@ -61,9 +61,9 @@ lemma counit_comp_unit_eq_zero_of_isCompl
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K = 0 :=
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K = 0 :=
   ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).homEquiv _ _).injective
-    ((isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hcompl.disjoint _).eq_of_tgt
+    ((isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hcompl.disjoint _).eq_of_tgt
       _ _)
 
 /-- The open–closed triangle `j_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶` with the extension by zero `j_!`:
@@ -77,7 +77,7 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)) δ ∈
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)) δ ∈
       distTriang _ := by
   have : QuasiCompact (j.left ≫ X.hom) := by
     rw [Over.w j]
@@ -89,7 +89,7 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
   have hzero : (boundedConstructible _).ι.map
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K) ≫
       (boundedConstructible _).ι.map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K) = 0 := by
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) = 0 := by
     rw [← Functor.map_comp, h₀, Functor.map_zero]
   have h₁ : IsIso ((boundedConstructibleUpperStar _ ℓ j).map
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)) :=
@@ -97,9 +97,9 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
         j).right_triangle_components K)
   have h₂ : IsIso ((boundedConstructibleUpperStar _ ℓ i).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)) :=
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)) :=
     IsIso.of_isIso_fac_right (hh := IsIso.id _)
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).left_triangle_components K)
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).left_triangle_components K)
   have h₁' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj ℓ) ℓ j)
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)).1
@@ -108,12 +108,12 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
         ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)))))
   have h₂' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj ℓ) ℓ i)
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)).1
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)).1
     (inferInstanceAs (IsIso ((boundedConstructible _).ι.map
       ((boundedConstructibleUpperStar _ ℓ i).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K)))))
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)))))
   have hN := ((boundedConstructible _).ι.map_isZero
-    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j i hcompl.disjoint
+    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ i).obj K))).of_iso
     ((boundedConstructibleUpperStarCompatibility _ ℓ j).symm.app _)
   have hA := ((boundedConstructible _).ι.map_isZero
@@ -134,17 +134,17 @@ theorem exists_distTriang_openClosed
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
         (shiftFunctor _ (1 : ℤ)).obj
           ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleLowerShriek ℓ j).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))),
       Triangle.mk
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K)) δ ∈ distTriang _ := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openImmersionLowerShriek_openClosed j i hcompl K
   let γ := (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app
@@ -322,28 +322,28 @@ ambient lower shriek, which is triangulated. -/
 noncomputable def compactLocalizationConnecting
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
         (shiftFunctor _ (1 : ℤ)).obj
           ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleLowerShriek ℓ j).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)))) :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)).ι.obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+        ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K))) ⟶
       (shiftFunctor _ (1 : ℤ)).obj
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           (point k).left)).ι.obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+            ((boundedConstructibleLowerShriek ℓ j).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)))) :=
   haveI := HasCompactification.of_over (toPoint X)
-  connectingOfIso (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
+  connectingOfIso (boundedConstructibleLowerShriek ℓ (toPoint X))
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left)).ι
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
     (R((toPoint X).left)_!⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (boundedConstructibleLowerShriekCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
+    (boundedConstructibleLowerShriekCompatibility ℓ (toPoint X))
     δ
 
 variable (ℓ) in
@@ -352,27 +352,27 @@ variable (ℓ) in
 theorem compactLocalizationTriangle_distinguished
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
         (shiftFunctor _ (1 : ℤ)).obj
           ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleLowerShriek ℓ j).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))))
     (hδ : Triangle.mk
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K)) δ ∈ distTriang _) :
     Triangle.mk
       ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (point k).left)).ι.map
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K)))
       ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (point k).left)).ι.map
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K)))
       (compactLocalizationConnecting ℓ j i K δ) ∈ distTriang _ :=
   haveI := HasCompactification.of_over (toPoint X)
@@ -402,9 +402,9 @@ lemma eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar
     (d : (shiftFunctor _ (1 : ℤ)).obj
       ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N))) ⟶
+          ((boundedConstructibleLowerShriek ℓ j).obj N))) ⟶
       (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj M)) :
+        ((boundedConstructibleLowerStar ℓ i).obj M)) :
     d = 0 := by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
     (isPullback_of_comp_eq_of_isOpenImmersion j hj)
@@ -413,7 +413,7 @@ lemma eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU).obj N)
   rw [← cancel_mono ((boundedConstructibleLowerStarCompatibility
-      (Profinite.padicAlgClRingObj ℓ) ℓ i).hom.app M),
+      ℓ i).hom.app M),
     ← cancel_epi ((shiftFunctor _ (1 : ℤ)).map
       ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
         e.inv)), zero_comp, comp_zero]
@@ -433,36 +433,36 @@ theorem map_comp_connecting_eq_of_isCompl
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base)) (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
         (shiftFunctor _ (1 : ℤ)).obj
           ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleLowerShriek ℓ j).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))))
     (hδ : Triangle.mk
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K)) δ ∈ distTriang _)
     (ψU : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      (boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))
     (φ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
     (ψZ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+      (boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K))
     (ha : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
         ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K) ≫ φ =
       ψU ≫ (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K)
     (hb : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K) ≫ ψZ =
-      φ ≫ (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      φ ≫ (boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K) :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map ψZ ≫
         δ =
@@ -477,10 +477,10 @@ theorem map_comp_connecting_eq_of_isCompl
   have hsub : Subsingleton ((shiftFunctor _ (1 : ℤ)).obj
       ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleLowerShriek ℓ j).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)))) ⟶
       (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K))) :=
     ⟨fun a b ↦ (eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar ℓ hcompl hj _ _ a).trans
       (eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar ℓ hcompl hj _ _ b).symm⟩
@@ -590,11 +590,11 @@ theorem compactFrobenius_connecting_compat
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
     (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleLowerStar ℓ i).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ⟶
         (shiftFunctor _ (1 : ℤ)).obj
           ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
-            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleLowerShriek ℓ j).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
                 K.carrier))))
     (hδ : Triangle.mk
@@ -602,7 +602,7 @@ theorem compactFrobenius_connecting_compat
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
             K.carrier))
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K.carrier)) δ ∈ distTriang _) :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (point k).left)).ι.map (compactFrobeniusClosedPiece ℓ hi K) ≫
@@ -620,7 +620,7 @@ theorem compactFrobenius_connecting_compat
   rw [connectingOfIso_map_comp_commShiftIso, ← Functor.map_comp_assoc] at hX
   have key₁ := eq_comp_shift_map_of_map_comp_commShiftIso _ _ _ _ hX
   have key₂ := comp_map_comp_commShiftIso_eq_of_commShift
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
+    (boundedConstructibleLowerShriek ℓ (toPoint X))
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ) (compactPullback ℓ Φ)
     (closedPieceFrobeniusCoeff ℓ hi K) (openPieceFrobeniusCoeff ℓ hj K) δ₀
     (key₁.trans (Category.assoc _ _ _))
@@ -638,13 +638,13 @@ theorem trace_compactFrobenius_eq_add_of_isCompl [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
         K.carrier)]
     [hU : HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint U)).obj
         ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier)]
     [hZ : HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint Z)).obj
         ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier)] :
     trace K.compactFrobenius =
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +
@@ -653,44 +653,44 @@ theorem trace_compactFrobenius_eq_add_of_isCompl [IsSepClosed k]
   have h₁ := compactFrobeniusOpenPiece_comp_counit hj K
   have h₃ := compactFrobenius_connecting_compat ℓ hcompl hj hi K δ hδ
   let : HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
             K.carrier))) :=
     @hasRightDualOfIso _ _ _ _ _ ((boundedConstructibleLowerShriekCompToPoint ℓ j).app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) hU
   let : HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
             K.carrier))) :=
     @hasRightDualOfIso _ _ _ _ _ ((boundedConstructibleLowerStarCompToPoint ℓ i).app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) hZ
   let : HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint U)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) := hU
   let : HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
+      ((boundedConstructibleLowerShriek ℓ (toPoint Z)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) := hZ
   have hT := compactLocalizationTriangle_distinguished ℓ j i K.carrier δ hδ
   have h₂ := compactFrobenius_comp_compactUnit hi K
   dsimp only [Functor.comp_obj, Functor.id_obj] at hT h₁ h₂ h₃
   rw [trace_eq_trace_add_trace_of_distTriang _ _ _ hT _ _ _ h₁ h₂ h₃]
   congr 1
-  · let w : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+  · let w : (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) ≅
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+        (boundedConstructibleLowerShriek ℓ (toPoint U)).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) :=
       (boundedConstructibleLowerShriekCompToPoint ℓ j).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)
     refine trace_eq_of_iso w _ _ ?_
     simp only [w, compactFrobeniusOpenPiece, Iso.app_hom, Category.assoc, Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  · let w : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+  · let w : (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ≅
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
+        (boundedConstructibleLowerShriek ℓ (toPoint Z)).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) :=
       (boundedConstructibleLowerStarCompToPoint ℓ i).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)

@@ -77,9 +77,9 @@ noncomputable def affineLineOrientation :
     constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧) :=
-  supportedClassMap Λ _ (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+  supportedClassMap Λ _ (shiftSupportedClass Λ _ 2
     (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))
 
 include aY in
@@ -115,7 +115,7 @@ theorem isZero_homology_rightDerivedUpperShriek_affineLineZeroLocus
     [HasKummerClass.IsNormalized Λ] (n : ℤ) (hn : n ≠ 0) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))) := by
   have := isIso_affineLineOrientation Λ Y aY
   refine IsZero.of_iso ?_ ((_root_.DerivedCategory.homologyFunctor _ n).mapIso
@@ -145,7 +145,7 @@ theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))
     (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
       (x : Spec (.of Ω) ⟶ 𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
@@ -172,7 +172,7 @@ theorem affineLineOrientation_hom_ext [HasKummerClass.IsNormalized Λ]
     {φ ψ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)}
     (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
       (x : Spec (.of Ω) ⟶ 𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
@@ -232,14 +232,14 @@ pullback, and so is the boundary of the supported localization triangle
 theorem supportedClassMap_restrictSupportedClass_affineLineOrientation
     [HasInvertibleExponent Λ Y'] (v : Y' ⟶ Y) :
     supportedClassMap Λ _
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _
+        (restrictSupportedClass Λ (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _
           _ (isPullback_zeroLocusSubschemeι_coord v)
           (leftDerivedUpperStarConstantComplexIso Λ (AffineSpace.map (ULift.{u} (Fin 1)) v)).inv
           (((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).commShiftIso
               (2 : ℤ)).app _ ≪≫
             (shiftFunctor _ (2 : ℤ)).mapIso
               (leftDerivedUpperStarTateObjectIso (AffineSpace.map (ULift.{u} (Fin 1)) v) 1))
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+          (shiftSupportedClass Λ _ 2
             (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))) =
       affineLineOrientation Λ Y' := by
   rw [restrictSupportedClass_shiftSupportedClass,
@@ -256,12 +256,12 @@ noncomputable def restrictAffineLineZeroLocusHom (v : Y' ⟶ Y)
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) :
     constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y').zeroLocusSubscheme
         {AffineSpace.coord Y' (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y').zeroLocusSubschemeι
-          {AffineSpace.coord Y' (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y' (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y') 1)⟦(2 : ℤ)⟧) :=
   haveI : HasInvertibleExponent Λ Y' := .of_hom v
   restrictSupportedHom Λ (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _ _
@@ -284,7 +284,7 @@ theorem restrictAffineLineZeroLocusHom_affineLineOrientation [HasInvertibleExpon
     restrictAffineLineZeroLocusHom Λ v (affineLineOrientation Λ Y) =
       affineLineOrientation Λ Y' := by
   have h : (supportedClassMapEquiv Λ _ _).symm (affineLineOrientation Λ Y) =
-      shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))) :=
     (Equiv.symm_apply_eq _).2 rfl
   rw [restrictAffineLineZeroLocusHom, restrictSupportedHom, h]
@@ -314,7 +314,7 @@ theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
     {φ ψ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)}
     (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ Y),
       restrictAffineLineZeroLocusHom Λ v φ = restrictAffineLineZeroLocusHom Λ v ψ) :
@@ -323,7 +323,7 @@ theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
   have key : ∀ φ' : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧),
       ∃ h : constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y) ⟶ constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y),
         φ' = constantComplexEndPullback Λ
@@ -376,7 +376,7 @@ theorem eq_affineLineOrientation_iff [HasKummerClass.IsNormalized Λ]
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) :
     φ = affineLineOrientation Λ Y ↔
       ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ Y),

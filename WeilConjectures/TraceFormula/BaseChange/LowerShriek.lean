@@ -292,14 +292,14 @@ variable (f) in
 square `f̄ ≫ π_Y = π_X ≫ f`: the exchange morphism of `θ_π` under the adjunctions
 `Lf^* ⊣ Rf_*` and `Lf̄^* ⊣ Rf̄_*`. -/
 noncomputable abbrev geometricBaseChangeLowerStarBaseChange :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+    boundedConstructibleLowerStar ℓ f ⋙
         geometricBaseChangeUpperStar Ω ℓ Y ⟶
       geometricBaseChangeUpperStar Ω ℓ X ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        boundedConstructibleLowerStar ℓ
           ((geometricBaseChange k Ω).map f) :=
   Adjunction.exchangeRight
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       ((geometricBaseChange k Ω).map f))
     (geometricBaseChangePullbackComparison ℓ Ω f)
 
@@ -340,12 +340,12 @@ theorem isIso_geometricBaseChangeLowerStarBaseChange [Algebra.IsSeparable k Ω] 
   unfold baseChangeMap at hamb
   rw [← leftDerivedUpperStarGeometricBaseChangeComparison_eq] at hamb
   exact Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ f K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ ((geometricBaseChange k Ω).map f)
-      K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ ((geometricBaseChange k Ω).map f)
-      K.obj K.property)
+      K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ ((geometricBaseChange k Ω).map f)
+      K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj ℓ Y K.obj
       K.property)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj ℓ X K.obj
@@ -425,7 +425,7 @@ twisted Weil lower shriek is the direct-image exchange morphism `Ex_e` of the sq
 (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`). -/
 lemma weilLowerShriekComparison_exchangeCompatible :
     Adjunction.ExchangeCompatible
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
         (weilFrobeniusSquare eX eY hf).toCommSq)
       (weilLowerShriekComparison ℓ eX eY hf)
@@ -443,7 +443,7 @@ direct-image exchange morphism `Ex_Φ` of the square of the model Frobenii
 (`weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq`). -/
 lemma weilLowerShriekFrobeniusComparison_exchangeCompatible :
     Adjunction.ExchangeCompatible
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         ((geometricBaseChange k Ω).map f))
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
         (commSq_baseChangeModelFrobenius Ω eX eY hf N))
@@ -500,8 +500,8 @@ theorem nonempty_weilGeometricBaseChange_weilLowerShriek_iso [IsProper f.left]
         ((weilGeometricBaseChange Ω ℓ X N eX.hom).obj K)) := by
   have := isIso_geometricBaseChangeLowerStarBaseChange ℓ Ω f
   have hc := Adjunction.nonempty_mapOfNatIso_obj_iso_of_cubeCondition
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       ((geometricBaseChange k Ω).map f))
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
       (weilFrobeniusSquare eX eY hf).toCommSq)

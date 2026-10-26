@@ -81,13 +81,13 @@ of the unit of `Li^* ⊣ Ri_*`, `Ri_*(a)`, the identification `Ri_! ≅ Ri_*` of
 `Ri_! ⊣ Ri^!`. For `a` the fundamental class of a closed subscheme it is the cycle class. -/
 noncomputable def gysinClass (i : Z ⟶ X) [IsProper i]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ)
-    (a : constantComplex Λ Z ⟶ ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)⟦n⟧) :
+    (a : constantComplex Λ Z ⟶ ((R(i)^![Λ]).obj L)⟦n⟧) :
     constantComplex Λ X ⟶ L⟦n⟧ :=
   (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app _ ≫
     (R((i)_*[ModuleCat.{u + 1} Λ])).map ((leftDerivedUpperStarConstantComplexIso Λ i).hom ≫ a) ≫
       (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i).inv.app _ ≫
         ((R(i)_![ModuleCat.{u + 1} Λ]).commShiftIso n).hom.app _ ≫
-          ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app L)⟦n⟧'
+          ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)⟦n⟧'
 
 end Gysin
 
@@ -108,8 +108,8 @@ change isomorphism of the exceptional inverse image along the open immersion `j`
 cartesian square `𝟙 ≫ (i ≫ j) = i ≫ j`, read through `L𝟙^* ≅ 𝟭`. -/
 noncomputable def rightDerivedUpperShriekCompOpenImmersionIso
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (R(i ≫ j)^![ModuleCat.{u + 1} Λ]).obj L ≅
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) :=
+    (R(i ≫ j)^![Λ]).obj L ≅
+      (R(i)^![Λ]).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) :=
   haveI := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion Λ
     (isPullback_id_comp_of_mono i j)
   ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) Z).app _).symm ≪≫
@@ -131,7 +131,7 @@ Under the rank-one normalisation it is the fundamental class of `Z` when `Z` is 
 of an affine line. -/
 noncomputable def kummerBoundaryAdjoint :
     constantComplex Λ (U.zeroLocusSubscheme {f}) ⟶
-      ((R(U.zeroLocusSubschemeι {f})^![ModuleCat.{u + 1} Λ]).obj (tateObject Λ U 1))⟦(2 : ℤ)⟧ :=
+      ((R(U.zeroLocusSubschemeι {f})^![Λ]).obj (tateObject Λ U 1))⟦(2 : ℤ)⟧ :=
   (compactificationConstantComplexIso Λ (U.zeroLocusSubschemeι {f})).inv ≫
     rightDerivedLowerShriekTranspose (ModuleCat.{u + 1} Λ) (U.zeroLocusSubschemeι {f})
       (kummerBoundary Λ f ≫
@@ -158,7 +158,7 @@ noncomputable def chartBoundaryClass : constantComplex Λ X ⟶ (tateObject Λ X
   haveI : HasInvertibleExponent Λ V := .of_hom V.ι
   gysinClass Λ (V.toScheme.zeroLocusSubschemeι {V.topIso.inv s} ≫ V.ι) _ 2
     (kummerBoundaryAdjoint Λ (V.topIso.inv s) ≫
-      ((R(V.toScheme.zeroLocusSubschemeι {V.topIso.inv s})^![ModuleCat.{u + 1} Λ]).map
+      ((R(V.toScheme.zeroLocusSubschemeι {V.topIso.inv s})^![Λ]).map
           (leftDerivedUpperStarTateObjectIso V.ι 1).inv ≫
         (rightDerivedUpperShriekCompOpenImmersionIso Λ _ V.ι _).inv)⟦(2 : ℤ)⟧')
 

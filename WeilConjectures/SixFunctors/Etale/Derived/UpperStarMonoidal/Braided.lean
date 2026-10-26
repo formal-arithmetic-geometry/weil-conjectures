@@ -227,7 +227,7 @@ lemma upperStar_map_braiding_hom_δ (F G : Sheaf Y.smallEtaleTopology A) :
 
 variable [Abelian.HasFunctorialFlatResolution A]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 open _root_.DerivedCategory
 

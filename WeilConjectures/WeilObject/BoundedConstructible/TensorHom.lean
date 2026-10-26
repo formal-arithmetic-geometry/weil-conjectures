@@ -87,11 +87,11 @@ faithful inclusion of `leftDerivedUpperStarTensorIso`, through the compatibility
 the restricted pullback (`boundedConstructibleUpperStarCompatibility`) and tensor product with
 the inclusions. -/
 noncomputable def weilTensorComparison :
-    Functor.uncurry.obj (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) X) ⋙
+    Functor.uncurry.obj (boundedConstructibleTensor ℓ X) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ ≅
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).prod
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ) ⋙
-        Functor.uncurry.obj (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) X) :=
+        Functor.uncurry.obj (boundedConstructibleTensor ℓ X) :=
   NatIso.ofComponents
     (fun KL ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
       ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -112,13 +112,14 @@ for `Φ` is sent to `K ⊗ᴸ L` with the structure isomorphism
 noncomputable def weilTensor :
     WeilBoundedConstructible ℓ Φ ⥤ WeilBoundedConstructible ℓ Φ ⥤
       WeilBoundedConstructible ℓ Φ :=
-  IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) X)
+  IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor ℓ X)
     (weilTensorComparison ℓ Φ)
 
+/-- The underlying complex of the image under `weilTensor` (`ℚ̄_ℓ`-coefficient). -/
 @[simp]
 lemma weilTensor_obj_obj_carrier (K L : WeilBoundedConstructible ℓ Φ) :
     (((weilTensor ℓ Φ).obj K).obj L).carrier =
-      ((boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) X).obj K.carrier).obj
+      ((boundedConstructibleTensor ℓ X).obj K.carrier).obj
         L.carrier :=
   rfl
 
@@ -139,17 +140,17 @@ noncomputable abbrev weilFrobenius :
 noncomputable abbrev weilRHom :
     (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
       Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleHom (Profinite.padicAlgClRingObj ℓ) X
+  boundedConstructibleHom ℓ X
 
-/-- The evaluation `K ⊗ᴸ RHom(K, L) ⟶ L` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the counit of the adjunction
-`K ⊗ᴸ - ⊣ RHom(K, -)`. -/
+/-- The evaluation `K ⊗ᴸ RHom(K, L) ⟶ L` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the counit of the
+adjunction `K ⊗ᴸ - ⊣ RHom(K, -)`. -/
 noncomputable def weilEv (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) X).obj K).obj
+    ((boundedConstructibleTensor ℓ X).obj K).obj
         (((weilRHom ℓ (X := X)).obj (Opposite.op K)).obj L) ⟶ L :=
-  (boundedConstructibleTensorHomAdjunction (Profinite.padicAlgClRingObj ℓ) K).counit.app L
+  (boundedConstructibleTensorHomAdjunction ℓ K).counit.app L
 
-/-- The comparison `h_{K,L} : Φ RHom(K, L) ⟶ RHom(Φ K, Φ L)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the adjoint, for
-`Φ K ⊗ᴸ - ⊣ RHom(Φ K, -)`, of the composite
+/-- The comparison `h_{K,L} : Φ RHom(K, L) ⟶ RHom(Φ K, Φ L)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`:
+the adjoint, for `Φ K ⊗ᴸ - ⊣ RHom(Φ K, -)`, of the composite
 ```
 Φ K ⊗ᴸ Φ RHom(K, L) --m⁻¹--> Φ (K ⊗ᴸ RHom(K, L)) --Φ ev--> Φ L.
 ```
@@ -158,7 +159,7 @@ noncomputable def weilHomComparisonApp (K L : Dᵇc(X.left)⟦Profinite.padicAlg
     (weilFrobenius ℓ e).obj (((weilRHom ℓ).obj (Opposite.op K)).obj L) ⟶
       ((weilRHom ℓ).obj (Opposite.op ((weilFrobenius ℓ e).obj K))).obj
         ((weilFrobenius ℓ e).obj L) :=
-  (boundedConstructibleTensorHomAdjunction (Profinite.padicAlgClRingObj ℓ)
+  (boundedConstructibleTensorHomAdjunction ℓ
       ((weilFrobenius ℓ e).obj K)).homEquiv _ _
     ((weilTensorComparison ℓ e.hom).inv.app (K, ((weilRHom ℓ).obj (Opposite.op K)).obj L) ≫
       (weilFrobenius ℓ e).map (weilEv ℓ K L))

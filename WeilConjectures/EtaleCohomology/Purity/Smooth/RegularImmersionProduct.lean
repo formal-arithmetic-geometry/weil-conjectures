@@ -120,18 +120,18 @@ theorem restrictSupportedClass_cupWithSupportsTateObject {U U' Z₁ Z₂ Z Z₁'
     (g₁ : Z₁' ⟶ Z₁) (g₂ : Z₂' ⟶ Z₂) (g : Z' ⟶ Z) (hg₁ : IsPullback g₁ i₁' i₁ e)
     (hg₂ : IsPullback g₂ i₂' i₂ e) (hg : IsPullback g i' i e) {m m' : ℤ}
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv
         (leftDerivedUpperStarTateShiftIso Λ e (m + m'))
         (cupWithSupportsTateObject Λ i₁ i₂ i h α β) =
       cupWithSupportsTateObject Λ i₁' i₂' i' h'
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i₁ i₁' g₁ hg₁
+        (restrictSupportedClass Λ e i₁ i₁' g₁ hg₁
           (leftDerivedUpperStarConstantComplexIso Λ e).inv
           (leftDerivedUpperStarTateShiftIso Λ e m) α)
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i₂ i₂' g₂ hg₂
+        (restrictSupportedClass Λ e i₂ i₂' g₂ hg₂
           (leftDerivedUpperStarConstantComplexIso Λ e).inv
           (leftDerivedUpperStarTateShiftIso Λ e m') β) := by
   simp only [cupWithSupportsTateObject]
@@ -206,7 +206,7 @@ theorem fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback [HasInvertib
   have hp₂ : IsPullback (g₂ ≫ F₂.toZ) (F.U.zeroLocusSubschemeι (Set.range f₂)) i₂ F.e :=
     ha₂ ▸ hg₂.paste_horiz F₂.isPullback
   -- the restrictions of the fundamental classes of `Y₁` and `Y₂` are the frame classes
-  have e₁ : restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i₁ _ _ hp₁
+  have e₁ : restrictSupportedClass Λ F.e i₁ _ _ hp₁
       (leftDerivedUpperStarConstantComplexIso Λ F.e).inv
       (leftDerivedUpperStarTateShiftIso Λ F.e c₁) (fundamentalClass Λ c₁ i₁ aX hY₁) =
         kummerBoundaryProduct Λ f₁ := by
@@ -216,7 +216,7 @@ theorem fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback [HasInvertib
     rw [frameRestriction] at h
     rw [h]
     exact restrictSupportedClass_kummerBoundaryProduct Λ a₁ F₁.f f₁ (fun _ ↦ rfl) g₁ hg₁
-  have e₂ : restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i₂ _ _ hp₂
+  have e₂ : restrictSupportedClass Λ F.e i₂ _ _ hp₂
       (leftDerivedUpperStarConstantComplexIso Λ F.e).inv
       (leftDerivedUpperStarTateShiftIso Λ F.e c₂) (fundamentalClass Λ c₂ i₂ aX hY₂) =
         kummerBoundaryProduct Λ f₂ := by
@@ -269,11 +269,11 @@ theorem fundamentalClass_eq_cupWithSupportsTateObject {X₁ X₂ Z₁ Z₂ : Sch
         (pullback.snd i₂ (pullback.snd a₁ a₂))
         (pullback.map (i₁ ≫ a₁) (i₂ ≫ a₂) a₁ a₂ i₁ i₂ (𝟙 _) (by simp) (by simp))
         (Scheme.Pullback.range_map_eq_inter _ _ _ _ _ _ _)
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (pullback.fst a₁ a₂) i₁ _ _
+        (restrictSupportedClass Λ (pullback.fst a₁ a₂) i₁ _ _
           (IsPullback.of_hasPullback _ _)
           (leftDerivedUpperStarConstantComplexIso Λ _).inv
           (leftDerivedUpperStarTateShiftIso Λ _ c₁) (fundamentalClass Λ c₁ i₁ a₁ hZ₁))
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (pullback.snd a₁ a₂) i₂ _ _
+        (restrictSupportedClass Λ (pullback.snd a₁ a₂) i₂ _ _
           (IsPullback.of_hasPullback _ _)
           (leftDerivedUpperStarConstantComplexIso Λ _).inv
           (leftDerivedUpperStarTateShiftIso Λ _ c₂) (fundamentalClass Λ c₂ i₂ a₂ hZ₂)) ≫

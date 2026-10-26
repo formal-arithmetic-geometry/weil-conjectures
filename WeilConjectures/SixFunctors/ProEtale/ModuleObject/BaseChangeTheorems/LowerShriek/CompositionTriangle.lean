@@ -123,7 +123,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X Y S : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -192,19 +192,19 @@ lemma isIso_baseChange_compShriekTriangle :
     IsIso ((𝔽).baseChange (compShriekTriangle c c' d hd).p₁ (compShriekTriangle c c' d hd).q
       (compShriekTriangle c c' d hd).i₂ (compShriekTriangle c c' d hd).r
       (compShriekTriangle c c' d hd).w).natTrans :=
-  isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ hd
+  isIso_baseChange_boundedConstructibleExchangeFormalism ℓ hd
 
 /-- The exchange map of the square of the triangle `compShriekTriangle` is an isomorphism when
 the exchange of `Rc'.overG_*` with the extension by zero along `d.overI` is. -/
 lemma isIso_exchange_compShriekTriangle
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ hd)] :
+      ℓ hd)] :
     haveI := isIso_baseChange_compShriekTriangle ℓ c c' d hd
     IsIso ((𝔽).exchange (compShriekTriangle c c' d hd).p₁ (compShriekTriangle c c' d hd).q
       (compShriekTriangle c c' d hd).i₂ (compShriekTriangle c c' d hd).r
       (compShriekTriangle c c' d hd).w).natTrans := by
   have h : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ hd) := inferInstance
+      ℓ hd) := inferInstance
   rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq_exchange] at h
   exact h
 
@@ -213,17 +213,17 @@ the composition isomorphism of the lower shriek is the inverse of the compositio
 the triangle of factorizations. -/
 lemma compShriekTriangle_compIso_symm
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ hd)] :
+      ℓ hd)] :
     haveI := isIso_baseChange_compShriekTriangle ℓ c c' d hd
     haveI := isIso_exchange_compShriekTriangle ℓ c c' d hd
     Functor.isoWhiskerRight
         (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
       Functor.isoWhiskerLeft _
-        (boundedConstructibleLowerStarComp _ ℓ d.overG c'.overG).symm ≪≫
+        (boundedConstructibleLowerStarComp ℓ d.overG c'.overG).symm ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerRight
-          (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange _ ℓ hd)).symm _ ≪≫
+          (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ hd)).symm _ ≪≫
         Functor.associator _ _ _) ≪≫
       (Functor.associator _ _ _).symm =
     ((𝔽).compIso (compShriekTriangle c c' d hd)).symm := by
@@ -270,7 +270,7 @@ lemma isIso_baseChange_triangleShriekTriangle
     IsIso ((𝔽).baseChange (triangleShriekTriangle T).p₁ (triangleShriekTriangle T).q
       (triangleShriekTriangle T).i₂ (triangleShriekTriangle T).r
       (triangleShriekTriangle T).w).natTrans :=
-  isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+  isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
     (Compactification.Triangle.isPullback_over T)
 
 /-- The exchange map of the square of a triangle of compactifications is an isomorphism
@@ -341,18 +341,18 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
   have h1 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk c.overI)
       (SepFinType.homMk c.overI) (𝟙 _)
       (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wf).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨by simp⟩ : IsPullback (𝟙 X) c.overI c.overI (𝟙 _))
   have h2 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk Y)) (SepFinType.homMk c'.overI)
       (SepFinType.homMk c'.overI) (𝟙 _)
       (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wg).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨by simp⟩ : IsPullback (𝟙 Y) c'.overI c'.overI (𝟙 _))
   have h3 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk (c.overComp c' d).overI)
       (SepFinType.homMk (c.overI ≫ d.overI))
       (SepFinType.homMk (AlgebraicGeometry.Compactification.overCompObjIso c c' d).hom)
       (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wfg).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨by simp⟩ : IsPullback (𝟙 X) (c.overComp c' d).overI
         (c.overI ≫ d.overI) (AlgebraicGeometry.Compactification.overCompObjIso c c' d).hom)
   have h4 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk c.overObj))
@@ -360,7 +360,7 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
       (SepFinType.homMk d.overI)
       (SepFinType.homMk (AlgebraicGeometry.Compactification.overCompObjIso c c' d).hom)
       (triangleShriekTriangleHomCompShriekTriangle c c' d hd).q_comm).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨Over.OverMorphism.ext (by
         simp [AlgebraicGeometry.Compactification.overCompObjIso,
           Compactification.Triangle.overQ])⟩ :
@@ -373,7 +373,7 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
       (SepFinType.homMk (Compactification.Triangle.overP (triangleOfCompactifications c c' d hd)) ≫
         𝟙 _)
       (triangleShriekTriangleHomCompShriekTriangle c c' d hd).big_w).natTrans :=
-    isIso_baseChange_boundedConstructibleExchangeFormalism _ ℓ
+    isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (by simpa using
         Compactification.Triangle.isPullback_over (triangleOfCompactifications c c' d hd))
   have nat := (𝔽).compIso_naturality (triangleShriekTriangleHomCompShriekTriangle c c' d hd)
@@ -389,11 +389,11 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
       Iso.refl_hom]
     infer_instance
   have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ sqe
-  have hρ := boundedConstructibleLowerShriekRefinementIso_hom_eq (Profinite.padicAlgClRingObj ℓ)
-    ℓ sqe (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d)
+  have hρ := boundedConstructibleLowerShriekRefinementIso_hom_eq ℓ sqe
+      (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d)
   have key : (𝔽).compIso (triangleShriekTriangle (triangleOfCompactifications c c' d hd)) =
       (𝔽).compIso (compShriekTriangle c c' d hd) ≪≫
-        boundedConstructibleLowerShriekRefinementIso (Profinite.padicAlgClRingObj ℓ) ℓ sqe
+        boundedConstructibleLowerShriekRefinementIso ℓ sqe
           (AlgebraicGeometry.Compactification.overCompObjIso_hom_overG c c' d) := by
     ext1
     rw [Iso.trans_hom, hρ]
@@ -488,19 +488,19 @@ lemma compIso_triangleShriekTriangle_naturality :
   have := (triangleHomOverRg φ).isProper
   have := (triangleHomOverRfg φ).isProper
   have := isIso_baseChange_boundedConstructibleExchangeFormalism_id
-    (Profinite.padicAlgClRingObj ℓ) ℓ (triangleHomOverRf φ).isPullback
+    ℓ (triangleHomOverRf φ).isPullback
   have := isIso_baseChange_boundedConstructibleExchangeFormalism_id
-    (Profinite.padicAlgClRingObj ℓ) ℓ (triangleHomOverRg φ).isPullback
+    ℓ (triangleHomOverRg φ).isPullback
   have := isIso_baseChange_boundedConstructibleExchangeFormalism_id
-    (Profinite.padicAlgClRingObj ℓ) ℓ (triangleHomOverRfg φ).isPullback
+    ℓ (triangleHomOverRfg φ).isPullback
   have := isIso_baseChange_boundedConstructibleExchangeFormalism
-    (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_triangleHom_q φ)
+    ℓ (isPullback_triangleHom_q φ)
   have : IsIso ((𝔽).baseChange (triangleShriekTriangle T').p₁ (triangleShriekTriangle T').q
       (triangleShriekTriangle T).i₂
       ((triangleShriekTriangle T').r ≫ (triangleShriekTriangleHom φ).rg)
       (triangleShriekTriangleHom φ).big_w).natTrans :=
     isIso_baseChange_boundedConstructibleExchangeFormalism
-      (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_triangleHom_big φ)
+      ℓ (isPullback_triangleHom_big φ)
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (triangleHomOverRf φ).isPullback
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ

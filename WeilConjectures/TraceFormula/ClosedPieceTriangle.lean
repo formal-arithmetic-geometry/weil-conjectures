@@ -56,7 +56,7 @@ theorem exists_distTriang_openImmersionLowerShriek_lowerStar
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ δ, Triangle.mk
         ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ i).unit.app K) δ ∈
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) δ ∈
       distTriang (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openImmersionLowerShriek_openClosed j i hcompl K
   obtain ⟨δ₀, rfl⟩ := WeilBoundedConstructible.exists_eq_map_comp_commShiftIso
@@ -72,7 +72,7 @@ theorem exists_distTriang_pointComplι_rationalPoint (x : RationalPoint X)
     ∃ δ, Triangle.mk
         ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
           (pointComplι x)).counit.app K)
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K) δ ∈
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K) δ ∈
       distTriang (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   exists_distTriang_openImmersionLowerShriek_lowerStar (pointComplι x) x
     (isCompl_range_pointComplι x) K

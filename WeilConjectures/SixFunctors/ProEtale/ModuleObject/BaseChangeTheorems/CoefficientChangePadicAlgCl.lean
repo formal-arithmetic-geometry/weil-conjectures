@@ -52,8 +52,8 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl
       IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p).app K))
     (sq : CommSq g' f' f g) (M : PadicSubfieldConstructible X.left ℓ E) :
     Nonempty (Arrow.mk ((constructibleToPadicAlgCl Y'.left ℓ E).map
-        ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E.1) ℓ sq).app M)) ≅
-      Arrow.mk ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq).app
+        ((ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq).app M)) ≅
+      Arrow.mk ((boundedConstructibleBaseChange ℓ sq).app
         ((constructibleToPadicAlgCl X.left ℓ E).obj M))) := by
   have : QuasiCompact f.left := by
     have : QuasiCompact (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
@@ -79,9 +79,16 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl
     M.obj) a
   have key := nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ℓ H sq
-    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E K.obj K.property)
-    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj Y'.left ℓ E K.obj
-      K.property) M h₁ h₂
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f' K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E K)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj Y'.left ℓ E K)
+    (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq)
+    (ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E sq)
+    (boundedConstructibleBaseChange ℓ sq) (boundedConstructibleBaseChange_eq_exchangeRight ℓ sq)
+    M h₁ h₂
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing

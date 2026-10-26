@@ -75,7 +75,7 @@ noncomputable abbrev twistShiftPullbackLevel (K : NormalizedTower I Y) (n : ℕ)
 normalized system `K = (K_n)_n` on `Y`. -/
 noncomputable abbrev upperShriekLevel (K : NormalizedTower I Y) (n : ℕ) :
     𝐃(X, R ⧸ I ^ (n + 1)) :=
-  (R(f)^![ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))]).obj (K.obj n)
+  (R(f)^![(R ⧸ I ^ (n + 1))]).obj (K.obj n)
 
 /-- Blueprint `thm-pur-adic-reconstruction`: Adic reconstruction (reconstruction step only)
 
