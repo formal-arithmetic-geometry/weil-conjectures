@@ -91,7 +91,8 @@ theorem homEquiv_symm_unitIso_inv_comp_unit (j : B ⟶ F) [IsOpenImmersion j.lef
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _) := by
   have h := Adjunction.homEquiv_symm_comp_conjugate_comp_unit
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j)
     (boundedConstructibleUpperShriekAdjunction ℓ j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j)
