@@ -25,7 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Quasi-compactness descends along a flat, surjective, quasi-compact morphism.
+/-- Quasi-compactness descends along a surjective, quasi-compact morphism (in particular along a
+flat, surjective, quasi-compact one; flatness is not needed).
 
 The proof follows Descent, Lemma Tag 02KQ
 (blueprint: lem-weil-pbc-fpqc-descend-quasi-compact).  For an affine open `U` of `S`,
@@ -35,13 +36,10 @@ quasi-compactness of `f'` and the quasi-compact-open preimage lemma make `W`
 quasi-compact.  The projection `X' ⟶ X` is surjective by base change of `g`,
 and its image of `W` is exactly `f ⁻¹' U`.  This image is quasi-compact by
 continuity of the projection and the continuous-image lemma.  Since this holds
-for every affine `U`, the definition of `QuasiCompact f` concludes.  The
-`Flat g` hypothesis is retained as part of the fpqc covering hypothesis, even
-though this final topological argument uses only surjectivity and
-quasi-compactness of `g`.
+for every affine `U`, the definition of `QuasiCompact f` concludes.
 -/
 theorem quasiCompact_of_fpqc_baseChange {S S' X : Scheme.{u}} (g : S' ⟶ S)
-    [Flat g] [Surjective g] [QuasiCompact g] (f : X ⟶ S)
+    [Surjective g] [QuasiCompact g] (f : X ⟶ S)
     [QuasiCompact (pullback.snd f g)] : QuasiCompact f := by
   apply quasiCompact_iff_forall_isAffineOpen.mpr
   intro U hU

@@ -297,7 +297,7 @@ lemma _root_.Submodule.restrictScalars_map_smul_top [Module R M] [IsScalarTower 
 /-- **Openness of the flat locus** (Stacks, Tag 00RC; Matsumura, Theorem 24.3). Let `R` be a
 noetherian ring, `S` a finite type `R`-algebra and `M` a finite `S`-module. If `M_P` is flat over
 `R` for a prime `P` of `S`, then there is `g ∉ P` such that `M_Q` is flat over `R` for every prime
-`Q` of `S` not containing `g`. -/
+`Q` of `S` not containing `g`. (blueprint: `lem-weil-pbc-noetherian-flat-locus-neighborhood`) -/
 theorem Flat.exists_notMem_forall_flat_localizedModule [IsNoetherianRing R]
     [Algebra.FiniteType R S] [Module.Finite S M] (P : Ideal S) [P.IsPrime]
     (hP : Flat R (LocalizedModule P.primeCompl M)) :

@@ -41,7 +41,7 @@ Finally, `AlgebraicGeometry.Etale.IsBaseChangeIso A f` is the property that the 
 change map is an isomorphism for every cartesian square on `f`, and
 `AlgebraicGeometry.Etale.IsBaseChangeIsoSheaf A f` the corresponding property of the underived
 map.
-(blueprint: `def:weil-pbc-derived-exchange`, `lemma:weil-pbc-derived-exchange-replacement`,
+(blueprint: `def-weil-pbc-derived-exchange`, `lemma-weil-pbc-derived-exchange-replacement`,
 `def:weil-pbc-property`)
 
 -/
@@ -130,7 +130,7 @@ lemma Etale.baseChangeMapHomotopyPlus_app (sq : CommSq g' f' f g)
 categories, as a natural transformation `R f_*⁺ ⋙ D g^*⁺ ⟶ D g'^*⁺ ⋙ R f'_*⁺`: the natural
 transformation out of the right derived functor `R f_*⁺ ⋙ D g^*⁺` of `f_* ⋙ Qh ⋙ D g^*⁺`
 induced by `AlgebraicGeometry.Etale.baseChangeMapHomotopyPlus`.
-(blueprint: `def:weil-pbc-derived-exchange`) -/
+(blueprint: `def-weil-pbc-derived-exchange`) -/
 noncomputable def Etale.derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶
       ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus :=
@@ -144,7 +144,7 @@ bounded below complex `K` of sheaves on `X`, the composite of `D g^*⁺` of the 
 map followed by the unit `f'_* g'^* K ⟶ R f'_*⁺ (g'^* K)`, modulo the isomorphisms
 `Functor.mapDerivedCategoryPlusFactorsh`. In particular, if `K` is a bounded below complex of
 injectives, this computes the derived base change map on `K`.
-(blueprint: `lemma:weil-pbc-derived-exchange-replacement`) -/
+(blueprint: `lemma-weil-pbc-derived-exchange-replacement`) -/
 @[reassoc]
 lemma Etale.derivedBaseChangeMapPlus_fac_app (sq : CommSq g' f' f g)
     (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A)) :
@@ -166,7 +166,8 @@ omit [HasSmallSiteSheafify A] in
 /-- **Uniqueness of the derived base change map**: a natural transformation
 `R f_*⁺ ⋙ D g^*⁺ ⟶ D g'^*⁺ ⋙ R f'_*⁺` satisfying the formula
 `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app` on every bounded below complex is
-the derived base change map. (blueprint: `lemma:weil-pbc-derived-exchange-coherence`) -/
+the derived base change map. (blueprint: `lemma-weil-pbc-derived-exchange-coherence`)
+(blueprint: `lemma-weil-pbc-derived-exchange-replacement`) -/
 lemma Etale.derivedBaseChangeMapPlus_ext (sq : CommSq g' f' f g)
     (δ : (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶
       ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus)

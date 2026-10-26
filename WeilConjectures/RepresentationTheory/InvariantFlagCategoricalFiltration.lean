@@ -83,9 +83,9 @@ theorem exists_categorical_filtration_of_invariant_flag
     (hstep : ∀ i < Module.finrank (ZMod ℓ) M.V,
       F i ≤ F (i + 1) ∧ Module.finrank (ZMod ℓ) (F (i + 1)) = i + 1 ∧
         ∀ g, ∀ x ∈ F (i + 1), M.ρ g x - x ∈ F i) :
-    ∃ (n : ℕ) (W : ℕ → Rep.{v} (ZMod ℓ) P) (ι : ∀ i, W i ⟶ W (i + 1)),
-      IsZero (W 0) ∧ Nonempty (W n ≅ M) ∧
-      ∀ i < n, Mono (ι i) ∧
+    ∃ (W : ℕ → Rep.{v} (ZMod ℓ) P) (ι : ∀ i, W i ⟶ W (i + 1)),
+      IsZero (W 0) ∧ Nonempty (W (Module.finrank (ZMod ℓ) M.V) ≅ M) ∧
+      ∀ i < Module.finrank (ZMod ℓ) M.V, Mono (ι i) ∧
         Nonempty (cokernel (ι i) ≅ Rep.trivial (ZMod ℓ) P (ULift.{v} (ZMod ℓ))) := by
   classical
   let n := Module.finrank (ZMod ℓ) M.V
@@ -115,8 +115,8 @@ theorem exists_categorical_filtration_of_invariant_flag
       exact ⟨⟨x, htop ▸ Submodule.mem_top⟩, rfl⟩)
     let : IsIso f := isIso_of_mono_of_epi f
     exact ⟨asIso f⟩
-  refine ⟨n, W, ι, hzero, hend, ?_⟩
-  intro i hi
+  refine ⟨W, ι, hzero, hend, ?_⟩
+  intro i (hi : i < n)
   have hmono : Mono (ι i) := (Rep.mono_iff_injective (ι i)).2 (by
     intro x y h
     change Submodule.inclusion (hle i) x = Submodule.inclusion (hle i) y at h

@@ -52,7 +52,8 @@ lemma Etale.comp_map_eq_of_disjoint [∀ i, Mono (π i)]
 
 /-- **A sheaf sends a disjoint cover to a product**: if the pairwise disjoint subobjects
 `π i : W i ⟶ V` cover `V` in the small étale topology, then the restriction maps exhibit
-`G V` as the product of the `G (W i)`. -/
+`G V` as the product of the `G (W i)`.
+(blueprint: `lem-weil-pbc-disjoint-etale-sections-product`) -/
 theorem Etale.isIso_piLift_of_disjoint [∀ i, Mono (π i)]
     (hcov : Sieve.ofArrows W π ∈ X.smallEtaleTopology V)
     (hdisj : ∀ i j, i ≠ j → Disjoint (Set.range (π i).left.base) (Set.range (π j).left.base))

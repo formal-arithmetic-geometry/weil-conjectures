@@ -45,7 +45,7 @@ satisfy `AlgebraicGeometry.Etale.IsBaseChangeIso`, so does `f ≫ e`
 (`AlgebraicGeometry.Etale.IsBaseChangeIso.comp`), since every cartesian square on `f ≫ e`
 is the vertical pasting of cartesian squares on `e` and on `f`
 (`CategoryTheory.IsPullback.paste_vert`).
-(blueprint: `lemma:weil-pbc-derived-exchange-coherence`, vertical pasting;
+(blueprint: `lemma-weil-pbc-derived-exchange-coherence`, vertical pasting;
 `lemma:weil-pbc-composition`, formal part)
 
 For the identity square on `f` the derived base change map is the identity, modulo the identity
