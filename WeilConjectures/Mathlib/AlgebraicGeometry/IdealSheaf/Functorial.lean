@@ -102,6 +102,11 @@ out: the inclusion is a monomorphism, so it is its own kernel pair. -/
 lemma comap_subschemeι (I : X.IdealSheafData) : I.comap I.subschemeι = ⊥ :=
   Scheme.Hom.ker_eq_bot_of_isIso (pullback.fst I.subschemeι I.subschemeι)
 
+/-- The ideal `I` is contained in the pushforward of the zero ideal along `V(I) ⟶ X`. -/
+lemma le_map_bot_subschemeι (I : X.IdealSheafData) :
+    I ≤ (⊥ : I.subscheme.IdealSheafData).map I.subschemeι := by
+  rw [map_bot, ker_subschemeι]
+
 /-- Every morphism is scheme-theoretically dense in its scheme-theoretic image: the ideal
 sheaf cutting the image out pulls back to zero. -/
 theorem _root_.AlgebraicGeometry.Scheme.Hom.comap_ker_self (j : X ⟶ Y) : j.ker.comap j = ⊥ := by

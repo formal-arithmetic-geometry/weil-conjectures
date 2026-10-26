@@ -117,15 +117,6 @@ noncomputable def traitGenericModel :
 
 variable {k'}
 
-/-- The identity morphism of a model. -/
-@[simps]
-def Hom.id {X X' : Scheme.{u}} (M : NearbyCyclesModel X X') : M.Hom M (𝟙 X) (𝟙 X') where
-  total := 𝟙 _
-  generic := 𝟙 _
-  comm_j := by simp
-  comm_i := by simp
-  comm_ε := by simp
-
 variable {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
