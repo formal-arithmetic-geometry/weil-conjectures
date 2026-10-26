@@ -10,7 +10,7 @@ public import Mathlib.Topology.Instances.Matrix
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCoefficientSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
@@ -307,38 +307,6 @@ end PadicAlgCl
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl CondensedRing
-
-/-! ### Global sections of coefficient rings of continuous functions -/
-
-section Sections
-
-variable (V : Scheme.{u}) (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
-  [T2Space T] [TotallyDisconnectedSpace T]
-
-instance : IsIso (continuousMapComparison V T) :=
-  isIso_continuousMapComparison V T
-
-/-- The global sections of `T_V = p_V^* T̲`, for a Hausdorff totally disconnected topological ring
-`T`, given by continuous maps `V → T`: the global section of `C(-, T)_V` given by a continuous map,
-transported along `ψ_V⁻¹ : C(-, T)_V ≅ T_V`. -/
-noncomputable def continuousMapCoefficientSectionRingHom :
-    C(V, T) →+* Γ (condensedRingObj (Profinite.continuousMapRingObj.{u} T) V) :=
-  (Γ.map (inv (continuousMapComparison V T))).comp (continuousMapSectionRingHom V T)
-
-/-- **The global sections of `T_V` are the continuous maps `V → T`.** -/
-lemma continuousMapCoefficientSectionRingHom_bijective :
-    Function.Bijective (continuousMapCoefficientSectionRingHom V T) := by
-  rw [continuousMapCoefficientSectionRingHom, RingHom.coe_comp]
-  refine Function.Bijective.comp ?_ (continuousMapSectionRingHom_bijective V T)
-  refine Function.bijective_iff_has_inverse.2 ⟨Γ.map (continuousMapComparison V T), fun s ↦ ?_,
-    fun s ↦ ?_⟩ <;> exact Γ.ext (by simp)
-
-lemma continuousMapCoefficientSectionRingHom_hom (f : C(V, T)) :
-    (continuousMapCoefficientSectionRingHom V T f).hom =
-      (continuousMapSectionRingHom V T f).hom ≫ inv (continuousMapComparison V T) :=
-  Γ.map_hom _ _
-
-end Sections
 
 /-! ### Nakayama's lemma for finitely presented `𝒪_{E,V}`-modules -/
 

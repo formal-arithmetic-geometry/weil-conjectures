@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsBiproductUnit
-public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsBasis
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsBasisSMulEnd
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapFiniteFreeSMul
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct

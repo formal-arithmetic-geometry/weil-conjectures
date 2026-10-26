@@ -5,24 +5,28 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
-public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.SMulNatTrans
 
 /-!
-# Bases of extensions of commutative algebra objects
+# Extension of scalars along a free extension with a basis
 
-Let `φ : R ⟶ S` be a morphism of commutative algebra objects and `s : Fin d → Γ S` global sections
-of `S` which form a basis of `S` over `R`, in the sense that the `R`-linear map `Rᵈ ⟶ φ^* S`,
-`(rᵢ) ↦ ∑ φ(rᵢ) sᵢ`, is an isomorphism. Then for every `R`-module `M` the maps
-`M ⟶ φ^* (S ⊗_R M)`, `m ↦ sᵢ ⊗ m` (the unit of extension and restriction of scalars followed by
-the action of `sᵢ`) exhibit `φ^* (S ⊗_R M)` as `Mᵈ`
-(`CategoryTheory.Mod.isIso_biproductDesc_unit_smulEnd`): by the projection formula
-`φ^* (S ⊗_R M) ≅ φ^* S ⊗_R M` they become the maps `M ≅ R ⊗_R M ⟶ φ^* S ⊗_R M` induced by
-`r ↦ φ(r) sᵢ`.
+Let `C` be a braided preadditive monoidal category with finite biproducts and coequalizers
+preserved by tensoring, `φ : R ⟶ S` a morphism of commutative algebra objects, and
+`t : ι → (𝟙 ⟶ S)` a finite family of global sections of `S` which is a *basis of `S` over `R`*:
+the map `⊞_i R ⟶ S`, `(r_i) ↦ Σ φ(r_i) t_i`, is an isomorphism in `C`.
 
-The action of a global section on a tensor product `M ⊗_S N` is its action on `M`
-(`CategoryTheory.Mod.globalSmul_tensorObj`).
+Then for every `R`-module object `M`, the map `M^{⊕ι} ⟶ S ⊗_R M`, `(m_i) ↦ Σ t_i ⊗ m_i`, is an
+isomorphism of `R`-module objects (`Mod.isIso_biproductDesc_extendUnit_smul`).
+
+The proof identifies this map with the composite of isomorphisms
+`⊞_i M ≅ ⊞_i (R ⊗_R M) ≅ (⊞_i R) ⊗_R M ≅ S ⊗_R M ≅ S ⊗_S (S ⊗_R M) ≅ S ⊗_R M`
+given by the left unitors, the distributivity of the relative tensor product over biproducts,
+the basis isomorphism (as a map of `R`-modules, `Mod.isIso_biproductDesc_basisHom`) and the
+projection formula `Mod.projectionIso`.
 -/
 
 @[expose] public section
@@ -36,86 +40,77 @@ namespace CategoryTheory.Mod
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C]
   [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
+  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ]
 
-section Tensor
-
-variable {S : C} [MonObj S] [IsCommMonObj S] (s : Γ S)
-
-/-- The action of a global section `s` on a relative tensor product `M ⊗_S N` is the action of
-`s` on `M`, tensored with `N`. -/
-lemma globalSmul_tensorObj (M N : Mod C S) :
-    globalSmul s.hom (M ⊗ N) = (smulEnd s M ▷ N).hom := by
-  rw [← cancel_epi (tensorObjπ M N), tensorObjπ_whiskerRight, smulEnd_hom, globalSmul, globalSmul,
-    leftUnitor_inv_naturality_assoc, whisker_exchange_assoc, whiskerLeft_tensorπ_smul]
-  simp only [comp_whiskerRight, Category.assoc]
-  rw [associator_inv_naturality_left_assoc]
+omit [IsCommMonObj S] in
+/-- Multiplication by a global section `t` on `S ⊗_R M` on generators: `s ⊗ m ↦ t s ⊗ m`. -/
+@[reassoc]
+lemma extendπ_smulHom (t : 𝟙_ C ⟶ S) (M : Mod C R) :
+    extendπ φ M ≫ smulHom t (extendScalarsObj φ M) =
+      ((λ_ S).inv ≫ t ▷ S ≫ μ[S]) ▷ M.X ≫ extendπ φ M := by
+  dsimp only [smulHom, act]
+  rw [leftUnitor_inv_naturality_assoc, whisker_exchange_assoc, whiskerLeft_extendπ_smul]
   monoidal
 
-/-- The action of a global section `s` commutes with the left unitor: on `𝟙 ⊗_S N` it is the
-action of `s` on the unit, tensored with `N`. -/
-@[reassoc]
-lemma smulEnd_comp_leftUnitor_inv (N : Mod C S) :
-    smulEnd s N ≫ (λ_ N).inv = (λ_ N).inv ≫ smulEnd s (𝟙_ (Mod C S)) ▷ N := by
+/-- The `R`-linear map `R ⟶ S`, `r ↦ φ(r) t`, for a global section `t : 𝟙 ⟶ S`. -/
+noncomputable def basisHom (t : 𝟙_ C ⟶ S) : 𝟙_ (Mod C R) ⟶ (comap φ).obj (𝟙_ (Mod C S)) :=
+  comapUnitHom φ ≫ (comap φ).map ((smulNatTrans t).app (𝟙_ (Mod C S)))
+
+/-- The underlying map of `basisHom φ t` is `r ↦ φ(r) t`. -/
+lemma basisHom_hom (t : 𝟙_ C ⟶ S) :
+    (basisHom φ t).hom = φ ≫ (λ_ S).inv ≫ t ▷ S ≫ μ[S] :=
+  rfl
+
+/-- The map `m ↦ t ⊗ m` into `S ⊗_R M` is obtained from `r ↦ φ(r) t` by tensoring with `M` and
+the projection formula. -/
+lemma extendUnit_comap_map_smulNatTrans_app (t : 𝟙_ C ⟶ S) (M : Mod C R) :
+    extendUnit φ M ≫ (comap φ).map ((smulNatTrans t).app ((extendScalars φ).obj M)) =
+      (λ_ M).inv ≫ basisHom φ t ▷ M ≫ projectionHom φ (𝟙_ (Mod C S)) M ≫
+        (comap φ).map (λ_ (extendScalarsObj φ M)).hom := by
+  rw [Iso.eq_inv_comp]
   refine Mod.hom_ext _ _ ?_
-  rw [comp_hom', comp_hom', ← globalSmul_tensorObj, smulEnd_hom]
-  exact globalSmul_naturality s.hom (λ_ N).inv
+  have hl : tensorObjπ (𝟙_ (Mod C R)) M ≫ (λ_ M).hom.hom = γ[R,M.X] :=
+    tensorObjπ_regular_leftUnitor_hom M
+  rw [← cancel_epi (tensorObjπ (𝟙_ (Mod C R)) M), comp_hom', comp_hom', comp_hom', comp_hom',
+    reassoc_of% hl, tensorObjπ_whiskerRight_assoc,
+    tensorObjπ_unit_projectionHom_hom_leftUnitor_hom, extendUnit_hom, comap_map_hom,
+    smul_extendUnitHom_assoc, smulNatTrans_app_hom, basisHom_hom]
+  erw [extendπ_smulHom]
+  rw [← comp_whiskerRight_assoc]
 
-end Tensor
+variable [Preadditive C] [MonoidalPreadditive C] [HasZeroObject C] [HasBinaryBiproducts C]
+  [HasFiniteBiproducts C]
+  {ι : Type} [Finite ι] (t : ι → (𝟙_ C ⟶ S))
 
-variable {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S)
-  [IsMonHom φ]
+/-- If `(r_i) ↦ Σ φ(r_i) t_i` is an isomorphism `⊞_i R ≅ S` in `C`, then it is an isomorphism of
+`R`-module objects. -/
+lemma isIso_biproductDesc_basisHom
+    (hb : IsIso (biproduct.desc fun i : ι ↦ φ ≫ (λ_ S).inv ≫ t i ▷ S ≫ μ[S])) :
+    IsIso (biproduct.desc fun i : ι ↦ basisHom φ (t i)) := by
+  rw [← isIso_iff_of_reflects_iso _ (forget R), ← biproduct.mapBiproduct_hom_desc]
+  exact IsIso.comp_isIso' inferInstance hb
 
-/-- Under the projection formula `φ^* (S ⊗_R M) ≅ φ^* S ⊗_R M`, the unit `M ⟶ φ^* (S ⊗_R M)`
-followed by the action of a global section `s` of `S` is the map `M ≅ R ⊗_R M ⟶ φ^* S ⊗_R M`
-induced by `r ↦ φ(r) s`. -/
-lemma unit_comp_map_smulEnd_comp_extendScalarsCompComapIso_hom (s : Γ S) (M : Mod C R) :
-    (extendRestrictAdjunction φ).unit.app M ≫
-        (comap φ).map (smulEnd s ((extendScalars φ).obj M)) ≫
-          (extendScalarsCompComapIso φ).hom.app M =
-      (λ_ M).inv ≫ (comapUnitHom φ ≫ (comap φ).map (smulEnd s (𝟙_ (Mod C S)))) ▷ M := by
-  let := comapLaxMonoidal φ
-  have he : (extendScalarsCompComapIso φ).hom.app M =
-      (comap φ).map (λ_ ((extendScalars φ).obj M)).inv ≫
-        (projectionIso φ (𝟙_ (Mod C S)) M).inv := rfl
-  rw [he, ← Functor.map_comp_assoc, smulEnd_comp_leftUnitor_inv,
-    ← cancel_mono (projectionIso φ (𝟙_ (Mod C S)) M).hom, Category.assoc, Category.assoc,
-    Iso.inv_hom_id, Category.comp_id, projectionIso_hom, projectionHom,
-    extendRestrictAdjunction_unit_app, Functor.map_comp,
-    ← Functor.LaxMonoidal.left_unitality_inv_assoc, ← Functor.LaxMonoidal.μ_natural_left,
-    comp_whiskerRight]
-  simp only [Category.assoc]
-  rw [← whisker_exchange_assoc, ← whisker_exchange_assoc]
-  exact leftUnitor_inv_naturality_assoc _ _
-
-variable [Abelian C] [MonoidalPreadditive C]
-
-/-- **Extension of scalars along a finite free morphism with a basis of global sections.** Let
-`s : Fin d → Γ S` be global sections of `S` such that the map `Rᵈ ⟶ S`,
-`(rᵢ) ↦ ∑ φ(rᵢ) sᵢ`, is an isomorphism. Then for every `R`-module `M`, the maps
-`M ⟶ φ^* (S ⊗_R M)`, `m ↦ sᵢ ⊗ m`, given by the unit followed by the action of `sᵢ`, exhibit
-`φ^* (S ⊗_R M)` as the direct sum of `d` copies of `M`. -/
-theorem isIso_biproductDesc_unit_smulEnd [HasFiniteBiproducts C] {d : ℕ} (s : Fin d → Γ S)
-    (hs : IsIso (biproduct.desc fun i : Fin d ↦ φ ≫ globalSmul (s i).hom (regular S)))
-    (M : Mod C R) :
-    IsIso (biproduct.desc fun i : Fin d ↦ (extendRestrictAdjunction φ).unit.app M ≫
-      (comap φ).map (smulEnd (s i) ((extendScalars φ).obj M))) := by
-  replace hs : IsIso (biproduct.desc fun i : Fin d ↦
-      comapUnitHom φ ≫ (comap φ).map (smulEnd (s i) (𝟙_ (Mod C S)))) := by
-    rw [← isIso_iff_of_reflects_iso _ (forget R), Functor.isIso_map_biproduct_desc_iff]
-    exact hs
-  have h : (biproduct.desc fun i : Fin d ↦ (extendRestrictAdjunction φ).unit.app M ≫
-        (comap φ).map (smulEnd (s i) ((extendScalars φ).obj M))) ≫
-        (extendScalarsCompComapIso φ).hom.app M =
-      (biproduct.mapIso fun _ ↦ (λ_ M).symm).hom ≫
-        (rightDistributor (fun _ : Fin d ↦ 𝟙_ (Mod C R)) M).inv ≫
-          (biproduct.desc fun i : Fin d ↦
-            comapUnitHom φ ≫ (comap φ).map (smulEnd (s i) (𝟙_ (Mod C S)))) ▷ M := by
+/-- **Extension of scalars along a free extension.** If `S` is free over `R` with basis
+`t : ι → (𝟙 ⟶ S)`, i.e. `(r_i) ↦ Σ φ(r_i) t_i` is an isomorphism `⊞_i R ≅ S`, then for every
+`R`-module object `M` the map `M^{⊕ι} ⟶ S ⊗_R M`, `(m_i) ↦ Σ t_i ⊗ m_i`, is an isomorphism. -/
+theorem isIso_biproductDesc_extendUnit_smul
+    (hb : IsIso (biproduct.desc fun i : ι ↦ φ ≫ (λ_ S).inv ≫ t i ▷ S ≫ μ[S])) (M : Mod C R) :
+    IsIso (biproduct.desc fun i : ι ↦ (extendRestrictAdjunction φ).unit.app M ≫
+      (comap φ).map ((smulNatTrans (t i)).app ((extendScalars φ).obj M))) := by
+  have := isIso_biproductDesc_basisHom φ t hb
+  have key : (biproduct.desc fun i : ι ↦ (extendRestrictAdjunction φ).unit.app M ≫
+      (comap φ).map ((smulNatTrans (t i)).app ((extendScalars φ).obj M))) =
+      (biproduct.mapIso fun _ : ι ↦ (λ_ M).symm).hom ≫
+        (rightDistributor (fun _ : ι ↦ 𝟙_ (Mod C R)) M).inv ≫
+          (biproduct.desc fun i : ι ↦ basisHom φ (t i)) ▷ M ≫
+            projectionHom φ (𝟙_ (Mod C S)) M ≫
+              (comap φ).map (λ_ (extendScalarsObj φ M)).hom := by
     refine biproduct.hom_ext' _ _ fun i ↦ ?_
-    rw [biproduct.ι_desc_assoc, Category.assoc,
-      unit_comp_map_smulEnd_comp_extendScalarsCompComapIso_hom, biproduct.mapIso_hom,
-      biproduct.ι_map_assoc, Iso.symm_hom,
-      biproduct_ι_comp_rightDistributor_inv_assoc, ← comp_whiskerRight, biproduct.ι_desc]
-  rw [← isIso_comp_right_iff _ ((extendScalarsCompComapIso φ).hom.app M), h]
+    rw [biproduct.ι_desc, biproduct.mapIso_hom, biproduct.ι_map_assoc,
+      biproduct_ι_comp_rightDistributor_inv_assoc, ← comp_whiskerRight_assoc, biproduct.ι_desc,
+      extendRestrictAdjunction_unit_app]
+    exact extendUnit_comap_map_smulNatTrans_app φ (t i) M
+  rw [key]
   infer_instance
 
 end CategoryTheory.Mod

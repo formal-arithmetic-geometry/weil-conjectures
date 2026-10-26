@@ -5,10 +5,14 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeIntegral
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgClData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeRefinement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
+public import WeilConjectures.Tactic.ExactModProofIrrel
 
 /-!
 
@@ -26,9 +30,11 @@ changes used to pass from integral to `ℚ̄_ℓ`-coefficients:
 * `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_extendScalars`, for the
   inclusion `𝒪_E ⟶ E`.
 
-Both are inputs from `sec-six-functors`, stated in the form needed by the coefficient
-compatibility of the supported restriction
-(`CategoryTheory.Adjunction.map_exchangeRestriction_comp`).
+Both are stated in the form needed by the coefficient compatibility of the supported restriction
+(`CategoryTheory.Adjunction.map_exchangeRestriction_comp`). They follow formally from the
+compatibility of the coefficient comparisons with the pullback composition isomorphisms and with
+the adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ Lj^*`
+(`BoundedConstructibleCoefficientChange.squareCompatible_lowerShriekBaseChange`).
 
 -/
 
@@ -70,7 +76,7 @@ instance isIso_boundedConstructibleLowerShriekBaseChange_padicSubfield
     IsIso (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E sq) :=
   isIso_boundedConstructibleLowerShriekBaseChange ℓ E sq
 
-/-- Compatibility required from `sec-six-functors` (to be proved there): blueprint
+/-- Blueprint
 `sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
 commutes with the coefficient comparisons of `sk-prop-scalar-six`. For a cartesian square and the
 extension of scalars `T : E ⟶ ℚ̄_ℓ`, the image under `T` of compact-support base change
@@ -86,10 +92,22 @@ theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback 
     (boundedConstructibleUpperStarToPadicAlgClIso ℓ E g).hom.app _ ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
         ((boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).hom.app M) ≫
-      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _ :=
-  sorry
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _ := by
+  have h := (toPadicAlgClCoefficientChange ℓ E k).squareCompatible_lowerShriekBaseChange
+    (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E)
+    (isIsoRefinementPushforward_padicAlgClPushforwardData ℓ k) sq
+  have h' : ∀ N : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧, _ := h
+  replace h' := h' M
+  simp only [Functor.pasteSquareIso_hom_app, Category.assoc] at h'
+  simp only [boundedConstructibleLowerShriekBaseChange_padicSubfield,
+    boundedConstructibleLowerShriekBaseChange_eq_pushforwardData,
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_pushforwardData,
+    boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k]
+  dsimp only [Functor.comp_obj, continuousMapPushforwardData_lowerShriekOfCompactification,
+    padicAlgClPushforwardData_lowerShriekOfCompactification] at h' ⊢
+  exact_mod_proof_irrel h'
 
-/-- Compatibility required from `sec-six-functors` (to be proved there): blueprint
+/-- Blueprint
 `sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
 commutes with the coefficient comparisons of `sk-prop-scalar-six`. For a cartesian square and the
 extension of scalars `T : 𝒪_E ⟶ E`, the image under `T` of compact-support base change
@@ -105,7 +123,19 @@ theorem boundedConstructibleLowerShriekBaseChange_extendScalars (sq : IsPullback
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).hom.app _ ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E.1) ℓ g).map
         ((boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).hom.app M) ≫
-      (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E sq).app _ :=
-  sorry
+      (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E sq).app _ := by
+  have h := (extendScalarsCoefficientChange ℓ E k).squareCompatible_lowerShriekBaseChange
+    (isIsoRefinementPushforward_padicIntegersPushforwardData ℓ k E.1)
+    (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E) sq
+  have h' : ∀ N : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧, _ := h
+  replace h' := h' M
+  simp only [Functor.pasteSquareIso_hom_app, Category.assoc] at h'
+  simp only [boundedConstructibleLowerShriekBaseChange_padicSubfield,
+    boundedConstructibleLowerShriekBaseChange_eq_pushforwardData,
+    boundedConstructibleLowerShriekBaseChange_padicIntegers_eq_pushforwardData,
+    boundedConstructibleLowerShriekExtendScalarsIso_eq_shriekOfCompactification ℓ E k]
+  dsimp only [Functor.comp_obj, continuousMapPushforwardData_lowerShriekOfCompactification,
+    padicIntegersPushforwardData_lowerShriekOfCompactification] at h' ⊢
+  exact_mod_proof_irrel h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing

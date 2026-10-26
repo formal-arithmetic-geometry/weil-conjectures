@@ -41,13 +41,9 @@ open Scheme PadicAlgCl
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
-instance : (residueFieldModuleSheaf X ℓ E).ReflectsIsomorphisms :=
-  inferInstanceAs (Sheaf.zmodModuleLift ℓ (Mod.forget _)
-    (zsmul_id_eq_zero_of_residueField X ℓ E)).ReflectsIsomorphisms
-
 /-- The derived extension of scalars along `𝒪_{E,X} ⟶ 𝔽_{E,X}` inverts every morphism which the
 derived reduction `ProEtale.derivedReduction` inverts: regarding an `𝔽_{E,X}`-module object as a
-sheaf of `ℤ/ℓ`-modules is exact and reflects isomorphisms. -/
+sheaf of `𝔽_E`-modules is exact and reflects isomorphisms. -/
 lemma isIso_leftDerivedFunctor_map_of_isIso_derivedReduction_map
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))} (f : K ⟶ L)
@@ -85,8 +81,7 @@ variable [IsNoetherian X]
 /-- Blueprint `sk-lem-pe-derived-nakayama` (section `sec-proetale-coefficients`): a morphism
 between derived complete `𝒪_{E,X}`-complexes is an isomorphism whenever its first derived
 reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is one. Here it is proved for bounded constructible
-`𝒪_E`-complexes on a noetherian scheme, the first derived reduction being regarded with
-coefficients `ℤ/ℓ`. -/
+`𝒪_E`-complexes on a noetherian scheme. -/
 theorem isIso_of_isIso_derivedReduction_map
     {K L : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
     (φ : K ⟶ L)
