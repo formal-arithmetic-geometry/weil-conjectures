@@ -30,11 +30,6 @@ of `𝔽_E`-modules (`ProEtale.residueFieldModuleSheaf`). The *first derived red
 `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of blueprint `sk-def-pe-derived-completion`, as a complex of
 pro-étale sheaves of `𝔽_E`-modules, is `ProEtale.derivedReduction`.
 
-## Inputs from other subsections
-
-- `ProEtale.boundedConstructible_derivedReduction_obj`: blueprint `sk-prop-integral-criterion`
-  (section `sec-proetale-coefficients`), implication (1) ⇒ (2), second half.
-
 -/
 @[expose] public section
 
@@ -145,25 +140,5 @@ noncomputable def derivedReduction :
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E))) :=
   (Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor ⋙
     (residueFieldModuleSheaf X ℓ E).mapDerivedCategory
-
-/-! ### Inputs from other subsections -/
-
-variable [IsNoetherian X]
-
-/-- Blueprint `sk-prop-integral-criterion` (section `sec-proetale-coefficients`), implication
-(1) ⇒ (2), its second half: on a noetherian scheme `X`, the first derived reduction
-`K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of a bounded constructible `𝒪_E`-complex `K` lies in
-`Dᵇc(X, 𝔽_E)`. The finite-coefficient `Dᵇc` is read as the complexes of étale origin
-(`ProEtale.DerivedCategory.boundedConstructible`), which for finite coefficients agrees with the
-intrinsic reading (`ProEtale.DerivedCategory.boundedConstructibleIntrinsic_eq`).
--/
-theorem boundedConstructible_derivedReduction_obj
-    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
-    ProEtale.DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) X
-      ((derivedReduction X ℓ E).obj K) :=
-  sorry
 
 end AlgebraicGeometry.ProEtale
