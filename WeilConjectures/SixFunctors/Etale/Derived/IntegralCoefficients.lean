@@ -256,9 +256,9 @@ end HomReduction
 `Rf_!`. -/
 lemma isTriangulated_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated :=
-  have := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).commShift_of_leftAdjoint ℤ
-  (rightDerivedUpperShriekAdjunction _ f).isTriangulated_rightAdjoint
+    (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.IsTriangulated :=
+  have := (Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).commShift_of_leftAdjoint ℤ
+  (Adjunction.ofIsLeftAdjoint _).isTriangulated_rightAdjoint
 
 section Constructible
 

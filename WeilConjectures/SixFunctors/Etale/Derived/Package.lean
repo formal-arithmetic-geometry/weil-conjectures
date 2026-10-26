@@ -164,7 +164,7 @@ structure SixOperationsPackage : Prop where
     Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]) ⊣ R((f)_*[ModuleCat.{u + 1} Λ]))
   /-- (1) The adjunction `Rf_! ⊣ Rf^!`. -/
   lowerShriekUpperShriekAdjunction :
-    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⊣ R(f)^![ModuleCat.{u + 1} Λ])
+    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⊣ R(f)^![Λ])
   /-- (2) Base change for `Rf_!`. -/
   baseChangeLowerShriek : ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
     IsPullback g' f' f g → ∀ [HasCompactification f'],
@@ -199,16 +199,16 @@ structure SixOperationsPackage : Prop where
   orientation : ∀ d : ℕ, SmoothOfRelativeDimension d f → Nonempty (Orientation Λ f d)
   /-- (6) Verdier biduality on `Dctf(X, Λ)`. -/
   biduality : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
-    Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
-      (op ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op K))))
+    Nonempty (K ≅ (verdierDual Λ (f ≫ aY)).obj
+      (op ((verdierDual Λ (f ≫ aY)).obj (op K))))
   /-- (6) The Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`. -/
   verdierExchange : ∀ M,
-    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj
+    Nonempty ((verdierDual Λ aY).obj
         (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) ≅
       (R((f)_*[ModuleCat.{u + 1} Λ])).obj
-        ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op M)))
+        ((verdierDual Λ (f ≫ aY)).obj (op M)))
   /-- (7) The four Künneth comparisons over `k` are isomorphisms. -/
-  kunneth : HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  kunneth : HasKunnethComparisons Λ (Spec (.of k))
   /-- (8) `Lf^*` carries `Dctf` into `Dctf`. -/
   ctfLeftDerivedUpperStar : ∀ K,
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
@@ -233,12 +233,12 @@ structure SixOperationsPackage : Prop where
   ctfRightDerivedUpperShriek : ∀ K,
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+        ((R(f)^![Λ]).obj K)
   /-- (8) `𝔻_X` carries `Dctf` into `Dctf`. -/
   ctfVerdierDual : ∀ K,
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op K))
+        ((verdierDual Λ (f ≫ aY)).obj (op K))
 
 /-- Blueprint `sk-thm-sf-package`: The six-operations package.
 
@@ -375,10 +375,10 @@ theorem functorPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
           Nonempty (T.obj₃ ≅ (R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj
             ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
     ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
-      Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅
-        (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
+      Nonempty ((R(f)^![Λ]).obj L ≅
+        (verdierDual Λ (f ≫ aY)).obj
           (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-            ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) :=
+            ((verdierDual Λ aY).obj (op L))))) :=
   ⟨sixOperationsPackage Λ k f aY,
     fun j _ _ i _ hij _ _ _ _ K ↦
       exists_distTriang_rightDerivedLowerShriek_openClosed Λ j i hij f K,

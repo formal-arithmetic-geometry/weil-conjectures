@@ -150,7 +150,7 @@ theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
     (cY := boundedConstructibleUpperStarCompatibility _ ℓ eY.hom)
     (μX := (eX.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
     (μY := (eY.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctorHomologyFunctorIso j)
-    (cR := boundedConstructibleLowerStarCompatibility _ ℓ f)
+    (cR := boundedConstructibleLowerStarCompatibility ℓ f)
     (ρ := (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.rightDerivedFunctorHomologyFunctorIso j)
     (cF := boundedConstructibleUpperStarCompatibility _ ℓ f)
     (θD := Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
@@ -166,7 +166,7 @@ theorem nonempty_homologyFunctor_weilLowerStar_iso [IsFinite f.left]
     (upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).derivedAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (map_boundedConstructiblePullbackSquareComparison_hom_app _ ℓ (CommSq.mk hf))
-    (boundedConstructibleBaseChange_eq_exchangeRight _ ℓ (CommSq.mk hf))
+    (boundedConstructibleBaseChange_eq_exchangeRight ℓ (CommSq.mk hf))
     ((weilSheafLowerStarComparison_hom ℓ eX eY hf).trans (lowerStarBaseChange_eq _ _))
     (fun M ↦
       Adjunction.homologyFunctor_map_exchangeRight_derivedAdjunction_leftDerivedFunctorSquareIso

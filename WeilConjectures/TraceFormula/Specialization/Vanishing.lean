@@ -106,10 +106,10 @@ theorem restrict_traceClass_eq_zero (F : c.FixedLocus) {B : Over (Spec (.of k))}
   refine hinj _ (T.sp_traceClass_eq_zero ?_)
   have he := nonempty_specializationProd_externalProduct_iso (ℓ := ℓ) k' (y ≫ c.c₁) K
   refine isZero_obj_obj_of_eq hXX _ _ (IsZero.of_iso ?_
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    ((boundedConstructibleUpperShriek ℓ
       (hc.specialCorrespondence k').support).mapIso he.some))
   refine isZero_upperShriek_externalProduct_of_isZero ?_
-  exact isZero_boundedConstructibleUpperStar_obj_of_range_subset (Profinite.padicAlgClRingObj ℓ) ℓ
+  exact isZero_boundedConstructibleUpperStar_obj_of_range_subset ℓ
     _ _
     (hc.range_specialLeg₂_subset k') _
     (isZero_upperStar_zeroSection_specialization (ℓ := ℓ) k' (y ≫ c.c₁) K hK)

@@ -210,7 +210,7 @@ Here `Rf^!` is the ambient right adjoint `AlgebraicGeometry.Etale.rightDerivedUp
 `Rf_!` on the unbounded derived categories; the blueprint's `Rf^!` on `D^b_ctf` is its
 restriction (blueprint `cor-sf-ambient-adjoint-discharge`). -/
 noncomputable def rightDerivedUpperShriekIso :
-    R(f)^![ModuleCat.{u + 1} Λ] ≅ d.functor :=
+    R(f)^![Λ] ≅ d.functor :=
   (rightDerivedUpperShriekAdjunction _ f).rightAdjointUniq (d.adjunction hl hr)
 
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
@@ -229,7 +229,7 @@ theorem rightDerivedUpperShriekIso_hom_counit (K : DerivedCategoryModule Λ Y) :
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
 
 The isomorphism `Rf^! ≅ G_L` compatible with the counits is unique. -/
-theorem rightDerivedUpperShriekIso_unique (e : R(f)^![ModuleCat.{u + 1} Λ] ≅ d.functor)
+theorem rightDerivedUpperShriekIso_unique (e : R(f)^![Λ] ≅ d.functor)
     (he : ∀ K, (R(f)_![ModuleCat.{u + 1} Λ]).map (e.hom.app K) ≫
       (d.adjunction hl hr).counit.app K = (rightDerivedUpperShriekAdjunction _ f).counit.app K) :
     e = d.rightDerivedUpperShriekIso hl hr := by
@@ -243,7 +243,7 @@ theorem rightDerivedUpperShriekIso_unique (e : R(f)^![ModuleCat.{u + 1} Λ] ≅ 
 If the two triangular composites are the identity, the dualizing complex of `f` is `L`:
 `ω_f = Rf^! Λ_Y ≅ Lf^* Λ_Y ⊗ᴸ L ≅ Λ_X ⊗ᴸ L ≅ L`. -/
 noncomputable def dualizingComplexIso :
-    (R(f)^![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ Y) ≅ L :=
+    (R(f)^![Λ]).obj (derivedTensorUnit _ Y) ≅ L :=
   (d.rightDerivedUpperShriekIso hl hr).app _ ≪≫
     (derivedTensorRight (ModuleCat.{u + 1} Λ) X L).mapIso
       (leftDerivedUpperStarDerivedTensorUnitIso f) ≪≫

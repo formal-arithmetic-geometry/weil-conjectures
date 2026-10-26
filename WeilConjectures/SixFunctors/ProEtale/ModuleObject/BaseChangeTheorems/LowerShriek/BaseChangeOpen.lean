@@ -67,7 +67,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The formalism `boundedConstructibleExchangeFormalism`, for `ℚ̄_ℓ`-sheaves. -/
-local notation "𝔽" => boundedConstructibleExchangeFormalism (Profinite.padicAlgClRingObj ℓ) ℓ k
+local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 
 variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -117,9 +117,9 @@ omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 /-- The base change of the pushforwards for the cartesian square of the trivial compactifications
 is that of the identity square. -/
 lemma boundedConstructibleBaseChange_ofIsOpenImmersion_eq :
-    boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleBaseChange ℓ
         (isPullback_ofIsOpenImmersion_overG (f := f) (f' := f') (g := g)).toCommSq =
-      boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleBaseChange ℓ
         (IsPullback.of_id_snd (f := g)).toCommSq := by
   rw [boundedConstructibleBaseChange_eq_exchangeRight]
 
@@ -138,23 +138,23 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_ofIsOpenImmersion_e
 /-- The base change of the pushforwards of the identity square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity,
 through `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleBaseChange_id_app (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleBaseChange ℓ
         (IsPullback.of_id_snd (f := g)).toCommSq).app M ≫
-      (boundedConstructibleLowerStarId _ ℓ Y').hom.app
+      (boundedConstructibleLowerStarId ℓ Y').hom.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M) =
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-      ((boundedConstructibleLowerStarId _ ℓ Y).hom.app M) := by
+      ((boundedConstructibleLowerStarId ℓ Y).hom.app M) := by
   rw [boundedConstructibleBaseChange_eq_pfBaseChange]
   exact (𝔽).pfBaseChange_id_vert_app (SepFinType.homMk g) _ M
 
 /-- The base change of the pushforwards of the identity square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity,
 through `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleBaseChange_id :
-    boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleBaseChange ℓ
         (IsPullback.of_id_snd (f := g)).toCommSq ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
-        (boundedConstructibleLowerStarId _ ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
-    Functor.whiskerRight (boundedConstructibleLowerStarId _ ℓ Y).hom
+        (boundedConstructibleLowerStarId ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
+    Functor.whiskerRight (boundedConstructibleLowerStarId ℓ Y).hom
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
       (Functor.leftUnitor _).hom := by
   refine NatTrans.ext (funext fun M ↦ ?_)
@@ -168,12 +168,12 @@ omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 /-- The base change of the pushforwards for the proper square of the trivial compactifications is
 the identity, through `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
-    boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    boundedConstructibleBaseChange ℓ
         (isPullback_ofIsOpenImmersion_overG (f := f) (f' := f') (g := g)).toCommSq ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (ofIsOpenImmersionBaseChangeHom (f := f) (f' := f') g))
-        (boundedConstructibleLowerStarId _ ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
-    Functor.whiskerRight (boundedConstructibleLowerStarId _ ℓ Y).hom
+        (boundedConstructibleLowerStarId ℓ Y').hom ≫ (Functor.rightUnitor _).hom =
+    Functor.whiskerRight (boundedConstructibleLowerStarId ℓ Y).hom
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) ≫
       (Functor.leftUnitor _).hom := by
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
@@ -186,17 +186,17 @@ map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R
 extension-by-zero exchange morphism, is `R(𝟙)_* ≅ 𝟭`. -/
 lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmersion
     (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekOfCompactificationBaseChange (Profinite.padicAlgClRingObj ℓ)
-        ℓ (Compactification.ofIsOpenImmersion f.left) (Compactification.ofIsOpenImmersion f'.left)
+    boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
+        (Compactification.ofIsOpenImmersion f.left) (Compactification.ofIsOpenImmersion f'.left)
         (ofIsOpenImmersionBaseChangeHom g) (isPullback_ofIsOpenImmersion_overI sq)
         isPullback_ofIsOpenImmersion_overG ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
         (Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ f')
-          (boundedConstructibleLowerStarId _ ℓ Y').hom ≫ (Functor.rightUnitor _).hom) ≫
+          (boundedConstructibleLowerStarId ℓ Y').hom ≫ (Functor.rightUnitor _).hom) ≫
       boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
         sq.toCommSq =
     Functor.whiskerRight (Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ f)
-        (boundedConstructibleLowerStarId _ ℓ Y).hom ≫ (Functor.rightUnitor _).hom)
+        (boundedConstructibleLowerStarId ℓ Y).hom ≫ (Functor.rightUnitor _).hom)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g) := by
   have hb : (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
       (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq)).hom ≫
@@ -208,15 +208,15 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
   exact Functor.whiskerLeft_comp_whiskerRight_comp_aux
     (jS := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
       (Compactification.ofIsOpenImmersion f.left).overI)
-    (P := boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (P := boundedConstructibleLowerStar ℓ
       (Compactification.ofIsOpenImmersion f.left).overG)
     (G := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     (G' := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
     (jS' := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
       (Compactification.ofIsOpenImmersion f'.left).overI)
-    (P' := boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (P' := boundedConstructibleLowerStar ℓ
       (Compactification.ofIsOpenImmersion f'.left).overG)
-    (boundedConstructibleLowerStarId _ ℓ Y) (boundedConstructibleLowerStarId _ ℓ Y') _
+    (boundedConstructibleLowerStarId ℓ Y) (boundedConstructibleLowerStarId ℓ Y') _
     (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ) _ _ hb
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and

@@ -91,28 +91,28 @@ structure OrientationComparisonData where
   /-- The composition law `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`. -/
   upperShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
     [HasCompactification g] [HasCompactification (f ≫ g)] :
-    R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅ R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]
+    R(f ≫ g)^![Λ] ≅ R(g)^![Λ] ⋙ R(f)^![Λ]
   /-- The base change `Rf^! ⋙ Lg^* ≅ Lv^* ⋙ Rf'^!` of `R^!` along a cartesian square
   `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`. -/
   upperShriekBaseChange {X Y X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
     {v : Y' ⟶ Y} (sq : IsPullback g f' f v) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
     [HasCompactification f'] :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
-      L((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ]
+    R(f)^![Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
+      L((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![Λ]
   /-- The tensor formula `Rf^!(Λ_Y(e)[2e]) ≅ Λ_X(e)[2e] ⊗ ω_f` for `f` smooth of relative
   dimension `d`. -/
   upperShriekTateShift {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
     [HasInvertibleExponent Λ Y] (e : ℤ) :
-    (R(f)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ Y e)⟦2 * e⟧) ≅
+    (R(f)^![Λ]).obj ((tateObject Λ Y e)⟦2 * e⟧) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X e)⟦2 * e⟧)).obj
-        (dualizingComplex (ModuleCat.{u + 1} Λ) f)
+        (dualizingComplex Λ f)
   /-- The canonical orientation `Λ(1)[2] ≅ Rπ^! Λ_Y` of the affine line `π : 𝔸¹_Y ⟶ Y`. -/
   affineLine (Y : Scheme.{u}) [HasCompactification (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)]
     [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y)] :
     (tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) (1 : ℕ))⟦(2 * (1 : ℕ) : ℤ)⟧ ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
+      dualizingComplex Λ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
 
 variable {Λ} in
 /-- Blueprint `def-sf-orientation`: Orientation datum.
@@ -130,13 +130,13 @@ noncomputable def OrientationComparisonData.compIso (C : OrientationComparisonDa
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
     [HasInvertibleExponent Λ Y] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f)
-    (γg : (tateObject Λ Y e)⟦(2 * e : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) g) :
+    (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ f)
+    (γg : (tateObject Λ Y e)⟦(2 * e : ℤ)⟧ ≅ dualizingComplex Λ g) :
     (tateObject Λ X (d + e : ℕ))⟦(2 * (d + e : ℕ) : ℤ)⟧ ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) :=
+      dualizingComplex Λ (f ≫ g) :=
   eqToIso (by rw [Nat.cast_add, add_comm (d : ℤ)]) ≪≫ (shiftTateObjectAddIso Λ X e d).symm ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X e)⟦2 * (e : ℤ)⟧)).mapIso γf ≪≫
-    (C.upperShriekTateShift f d e).symm ≪≫ (R(f)^![ModuleCat.{u + 1} Λ]).mapIso γg ≪≫
+    (C.upperShriekTateShift f d e).symm ≪≫ (R(f)^![Λ]).mapIso γg ≪≫
     ((C.upperShriekComp f g).app (𝟙_ _)).symm
 
 variable {Λ} in
@@ -152,12 +152,12 @@ noncomputable def OrientationComparisonData.baseChangeIso (C : OrientationCompar
     {X Y X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {v : Y' ⟶ Y}
     (sq : IsPullback g f' f v) (d : ℕ) [IsSeparated f] [SmoothOfRelativeDimension d f]
     [HasCompactification f] [HasInvertibleExponent Λ X] [HasCompactification f']
-    (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f) :
-    (tateObject Λ X' d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f' :=
+    (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ f) :
+    (tateObject Λ X' d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ f' :=
   haveI : HasInvertibleExponent Λ X' := .of_hom g
   (leftDerivedUpperStarTateShiftIso Λ g d).symm ≪≫ (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γf ≪≫
     (C.upperShriekBaseChange sq d).app (𝟙_ _) ≪≫
-    (R(f')^![ModuleCat.{u + 1} Λ]).mapIso (leftDerivedUpperStarUnitIso _ v)
+    (R(f')^![Λ]).mapIso (leftDerivedUpperStarUnitIso _ v)
 
 /-- Blueprint `def-sf-orientation`: Orientation datum.
 
@@ -217,7 +217,7 @@ theorem OrientationDatum.nonempty_iso_dualizingComplex {C : OrientationCompariso
     (o : OrientationDatum Λ C) {X S : Scheme.{u}} (a : X ⟶ S) (d : ℕ) [IsSeparated a]
     [QuasiCompact a] [SmoothOfRelativeDimension d a] [HasCompactification a]
     [HasInvertibleExponent Λ X] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) a ≅ (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
+    Nonempty (dualizingComplex Λ a ≅ (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
   (o.orientation a d).nonempty_iso_dualizingComplex
 
 variable (Λ' : Type (u + 1)) [CommRing Λ'] [Finite Λ'] [HasTateTwist Λ']
@@ -237,8 +237,8 @@ structure CoefficientChange where
     (functor X).obj ((tateObject Λ X d)⟦2 * d⟧) ≅ (tateObject Λ' X d)⟦2 * d⟧
   /-- The change of coefficients of the dualizing complexes. -/
   dualizingComplexIso {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
-    (functor X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ') f
+    (functor X).obj (dualizingComplex Λ f) ≅
+      dualizingComplex Λ' f
 
 variable {Λ Λ'} in
 /-- Blueprint `def-sf-orientation`: Orientation datum.
@@ -264,9 +264,9 @@ structure ProEtaleRealization where
   /-- The realization of the étale dualizing complex is the pro-étale one. -/
   dualizingComplexIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] :
-    D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      ProEtale.dualizingComplex (ModuleCat.{u + 1} Λ) f
+    [CompactSpace Y] :
+    D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj (dualizingComplex Λ f) ≅
+      ProEtale.dualizingComplex Λ f
 
 open scoped AlgebraicGeometry.ProEtale in
 variable {Λ} in
@@ -279,12 +279,12 @@ def OrientationDatum.IsCompatibleProEtaleRealization {C : OrientationComparisonD
     (o : OrientationDatum Λ C) (ν : ProEtaleRealization Λ)
     (γ : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f] [QuasiCompact f]
       [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-      [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f],
+      [CompactSpace Y],
       D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ≅
-        ProEtale.dualizingComplex (ModuleCat.{u + 1} Λ) f) : Prop :=
+        ProEtale.dualizingComplex Λ f) : Prop :=
   ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f] [QuasiCompact f]
     [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
-    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f],
+    [CompactSpace Y],
     γ f d = D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso (o.orientation f d).purity ≪≫
       ν.dualizingComplexIso f d
 

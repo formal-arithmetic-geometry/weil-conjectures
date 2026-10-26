@@ -37,17 +37,17 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 include ℓ in
 /-- A complex `E` on the base point with `R(𝟙)_* E = 0` vanishes. -/
-lemma isZero_of_isZero_boundedConstructibleLowerStar_id {E : Dᵇc((point k).left)⟦Λ⟧}
-    (h : IsZero ((boundedConstructibleLowerStar Λ ℓ (𝟙 (point k))).obj E)) : IsZero E := by
-  set adj := boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 (point k))
-  set u := (boundedConstructibleUpperStarId Λ ℓ (X := point k)).app E
+lemma isZero_of_isZero_boundedConstructibleLowerStar_id {E : Dᵇc((point
+    k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (h : IsZero ((boundedConstructibleLowerStar ℓ (𝟙 (point k))).obj E)) : IsZero E := by
+  set adj := boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 (point k))
+  set u := (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (X := point k)).app E
   have hu : u.hom = 0 := by
     rw [← (adj.homEquiv _ _).symm_apply_apply u.hom, ← (adj.homEquiv _ _).symm_apply_apply 0]
     congr 1
@@ -63,10 +63,11 @@ include ℓ in
 the open complement `X ∖ {x}` of a rational point `x` vanishes, and `RΓ(X, C) = 0`, then
 `C = 0`. -/
 theorem isZero_of_isZero_upperStar_pointComplι_of_isZero_lowerStar (x : RationalPoint X)
-    (C : Dᵇc(X.left)⟦Λ⟧)
-    (hU : IsZero ((boundedConstructibleUpperStar Λ ℓ (pointComplι x)).obj C))
-    (hΓ : IsZero ((boundedConstructibleLowerStar Λ ℓ (toPoint X)).obj C)) : IsZero C := by
-  set adj := boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ x
+    (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hU : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (pointComplι
+        x)).obj C))
+    (hΓ : IsZero ((boundedConstructibleLowerStar ℓ (toPoint X)).obj C)) : IsZero C := by
+  set adj := boundedConstructibleUpperStarLowerStarAdjunction ℓ x
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   have : IsNoetherian X.left := ⟨⟩
@@ -75,26 +76,29 @@ theorem isZero_of_isZero_upperStar_pointComplι_of_isZero_lowerStar (x : Rationa
     (isCompl_range_pointComplι x).disjoint
   -- the unit `C ⟶ Rx_* Lx^* C` is an isomorphism
   have hη : IsIso (adj.unit.app C) := by
-    refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl Λ ℓ x (pointComplι x)
+    refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl (Profinite.padicAlgClRingObj
+        ℓ) ℓ x (pointComplι x)
       (isCompl_range_pointComplι x).symm _ ?_ ?_
-    · have hT := isZero_boundedConstructibleUpperStar_obj_lowerStar_obj Λ ℓ (pointComplι x) x
-        hdisj ((boundedConstructibleUpperStar Λ ℓ x).obj C)
+    · have hT := isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ (pointComplι x) x
+        hdisj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C)
       exact ⟨⟨hT.to_ _, hU.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
     · have h := adj.left_triangle_components C
-      have : IsIso ((boundedConstructibleUpperStar Λ ℓ x).map (adj.unit.app C) ≫
-          adj.counit.app ((boundedConstructibleUpperStar Λ ℓ x).obj C)) := by
+      have : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
+          (adj.unit.app C) ≫
+          adj.counit.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+              C)) := by
         rw [h]; exact IsIso.id _
       exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
   -- `RΓ(X, C) ≅ R(x ≫ a)_* Lx^* C = R(𝟙)_* Lx^* C`
   have hxa : x ≫ toPoint X = 𝟙 (point k) := by
     ext1
     simp
-  have hE : IsZero ((boundedConstructibleUpperStar Λ ℓ x).obj C) := by
-    refine isZero_of_isZero_boundedConstructibleLowerStar_id Λ ℓ ?_
+  have hE : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C) := by
+    refine isZero_of_isZero_boundedConstructibleLowerStar_id ℓ ?_
     refine IsZero.of_iso hΓ ?_
     exact eqToIso (by rw [hxa]) ≪≫
-      ((boundedConstructibleLowerStarComp Λ ℓ x (toPoint X)).app _).symm ≪≫
-      (boundedConstructibleLowerStar Λ ℓ (toPoint X)).mapIso (asIso (adj.unit.app C)).symm
-  exact IsZero.of_iso ((boundedConstructibleLowerStar Λ ℓ x).map_isZero hE) (asIso (adj.unit.app C))
+      ((boundedConstructibleLowerStarComp ℓ x (toPoint X)).app _).symm ≪≫
+      (boundedConstructibleLowerStar ℓ (toPoint X)).mapIso (asIso (adj.unit.app C)).symm
+  exact IsZero.of_iso ((boundedConstructibleLowerStar ℓ x).map_isZero hE) (asIso (adj.unit.app C))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

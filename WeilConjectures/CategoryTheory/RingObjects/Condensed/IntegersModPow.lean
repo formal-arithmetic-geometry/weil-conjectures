@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 
@@ -23,9 +23,7 @@ Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a subfield with ring of integers `�
 rings `𝒪̲_E ⟶ (𝒪_E ⧸ ℓⁿ)̲` (`Profinite.padicIntegersRingObjToIntegersModPow`).
 
 For `E` finite over `ℚ_ℓ`, the ring `𝒪_E ⧸ ℓⁿ` is finite (`PadicAlgCl.finite_integersModPow`):
-it is the image of the compact space `𝒪_E` under a continuous map to a discrete space. Hence
-`(𝒪_E ⧸ ℓⁿ)̲` is a torsion coefficient ring of Deligne's finiteness theorems
-(`ProEtale.CondensedRing.isFinitenessCoefficient_integersModPowRingObj`).
+it is the image of the compact space `𝒪_E` under a continuous map to a discrete space.
 
 The sequence `0 ⟶ 𝒪̲_E --ℓⁿ--> 𝒪̲_E ⟶ (𝒪_E ⧸ ℓⁿ)̲ ⟶ 0` of condensed abelian groups is short exact
 (`Profinite.shortExact_padicIntegersRingObjToIntegersModPow`); this is checked on sections.
@@ -198,17 +196,3 @@ lemma shortExact_padicIntegersRingObjToIntegersModPow :
     (hpre.map (presheafToSheaf _ _))
 
 end Profinite
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
-  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-
-/-- For `E` finite over `ℚ_ℓ`, the condensed ring `(𝒪_E ⧸ ℓⁿ)̲` is a torsion coefficient ring of
-Deligne's finiteness theorems: `𝒪_E ⧸ ℓⁿ` is a finite discrete ring killed by `ℓⁿ`. -/
-instance isFinitenessCoefficient_integersModPowRingObj (n : ℕ) :
-    IsFinitenessCoefficient ℓ (Profinite.integersModPowRingObj.{u} ℓ E n) :=
-  .torsion (PadicAlgCl.integersModPow ℓ E n) n
-    (PadicAlgCl.natCast_pow_eq_zero_integersModPow ℓ E n)
-
-end AlgebraicGeometry.ProEtale.CondensedRing

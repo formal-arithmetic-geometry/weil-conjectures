@@ -241,11 +241,11 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
     (hbc : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sqU.toCommSq).app
       ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M)))
     (hW : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
-      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M))))
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj M))))
     (hU : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M)))) :
     IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K M) := by
-  obtain ⟨w, hw⟩ := (existsUnique_distTriang_supportedLocalization (ModuleCat.{u + 1} Λ) i j hij
+  obtain ⟨w, hw⟩ := (existsUnique_distTriang_supportedLocalization Λ i j hij
     M).exists
   obtain ⟨w₁, hw₁⟩ := exists_distTriang_derivedHom_right (op K) _ hw
   have hT₁ := (L((gZ)^*[ModuleCat.{u + 1} Λ])).map_distinguished _ hw₁
@@ -253,12 +253,12 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
     (op ((L((gZ)^*[ModuleCat.{u + 1} Λ])).obj K)) _
     ((L((gZ)^*[ModuleCat.{u + 1} Λ])).map_distinguished _ hw)
   let eX := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i).app
-    ((R(i)^![ModuleCat.{u + 1} Λ]).obj M)
+    ((R(i)^![Λ]).obj M)
   have hφ₁ : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
-      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M))) :=
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))) :=
     (isIso_derivedHomUpperStarComparison_iff_of_iso_right _ gZ K eX).2 hW
   have : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
-      (supportedLocalizationTriangle (ModuleCat.{u + 1} Λ) i j M w).obj₁) := hφ₁
+      (supportedLocalizationTriangle Λ i j M w).obj₁) := hφ₁
   refine Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton hT₁ hw₂ _ _
     (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M)))
@@ -273,7 +273,7 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
   have hdisj : Disjoint (Set.range i.base) (Set.range j.base) := hij ▸ disjoint_compl_left
   have hz₀ : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj
       ((RHom(Z)[ModuleCat.{u + 1} Λ].obj (op K)).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M)))) :=
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M)))) :=
     (isZero_upperStar_rightDerivedLowerShriek _ i j hdisj _).of_iso
       ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app _ ≪≫
         D((j)^*[ModuleCat.{u + 1} Λ]).mapIso ((RHom(Z)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso eX ≪≫
@@ -281,13 +281,13 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
           ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i).app _).symm))
   have hz : IsZero ((L((j')^*[ModuleCat.{u + 1} Λ])).obj ((L((gZ)^*[ModuleCat.{u + 1} Λ])).obj
       ((RHom(Z)[ModuleCat.{u + 1} Λ].obj (op K)).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M))))) :=
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))))) :=
     ((L((gU)^*[ModuleCat.{u + 1} Λ])).map_isZero hz₀).of_iso
       (((leftDerivedUpperStarComp _ j' gZ (j' ≫ gZ) rfl).app _).symm ≪≫
         (leftDerivedUpperStarComp _ gU j (j' ≫ gZ) sqU.w.symm).app _)
   have : Subsingleton (((L((j')^*[ModuleCat.{u + 1} Λ])).obj (((L((gZ)^*[ModuleCat.{u + 1} Λ])).obj
       ((RHom(Z)[ModuleCat.{u + 1} Λ].obj (op K)).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M))))⟦(1 : ℤ)⟧)) ⟶
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))))⟦(1 : ℤ)⟧)) ⟶
       (RHom(U')[ModuleCat.{u + 1} Λ].obj (op ((L((j')^*[ModuleCat.{u + 1} Λ])).obj
         ((L((gZ)^*[ModuleCat.{u + 1} Λ])).obj K)))).obj
           ((L((gU)^*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj M))) :=

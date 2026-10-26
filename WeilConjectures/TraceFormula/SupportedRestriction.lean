@@ -174,12 +174,12 @@ support `c` of the correspondence to the local cohomology of `LΔ^* P` with supp
 locus. -/
 noncomputable def supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ F.ι).obj
-        ((boundedConstructibleUpperShriek _ ℓ c.support).obj P) ⟶
-      (boundedConstructibleUpperShriek _ ℓ F.d).obj
+        ((boundedConstructibleUpperShriek ℓ c.support).obj P) ⟶
+      (boundedConstructibleUpperShriek ℓ F.d).obj
         ((boundedConstructibleUpperStar _ ℓ (diag X)).obj P) :=
-  ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _).symm
-    ((boundedConstructibleUpperShriek _ ℓ c.support).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).unit.app P) ≫
+  ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
+    ((boundedConstructibleUpperShriek ℓ c.support).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).unit.app P) ≫
       (F.upperShriekLowerStarIso.app _).hom)
 
 /-- The *evaluation* `Rd^! LΔ^* (K ⊠ D_X K) ⟶ ω_Fix(c)` (blueprint
@@ -187,21 +187,21 @@ noncomputable def supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.pa
 `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K` followed by the evaluation `K ⊗ D_X K ⟶ ω_X`, and the
 composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportedEvaluation :
-    (boundedConstructibleUpperShriek _ ℓ F.d).obj
+    (boundedConstructibleUpperShriek ℓ F.d).obj
         ((boundedConstructibleUpperStar _ ℓ (diag X)).obj
-          (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) ⟶
+          (externalProduct ℓ K (verdierDual ℓ K))) ⟶
       dualizingComplex' ℓ F.F :=
-  (boundedConstructibleUpperShriek _ ℓ F.d).map
+  (boundedConstructibleUpperShriek ℓ F.d).map
       ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) ≫
     (dualizingComplexComp ℓ F.d).hom
 
 /-- The adjoint of the supported restriction along `ι`: `Rc^! P ⟶ Rι_* Rd^! LΔ^* P` is the unit
 of `LΔ^* ⊣ RΔ_*` followed by base change in the fixed square. -/
 lemma homEquiv_supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).homEquiv _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _
         (F.supportedRestriction P) =
-      (boundedConstructibleUpperShriek _ ℓ c.support).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).unit.app P) ≫
+      (boundedConstructibleUpperShriek ℓ c.support).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).unit.app P) ≫
         (F.upperShriekLowerStarIso.app _).hom := by
   rw [supportedRestriction, Equiv.apply_symm_apply]
 
@@ -213,11 +213,11 @@ supported restriction `ρ_P` is the ordinary pullback along the diagonal of the 
 square. -/
 lemma homEquiv_symm_supportedRestriction
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleUpperShriekAdjunction _ ℓ F.d).homEquiv _ _).symm
+    ((boundedConstructibleUpperShriekAdjunction ℓ F.d).homEquiv _ _).symm
         (F.supportedRestriction P) =
       F.lowerShriekBaseChangeIso.inv.app _ ≫
         (boundedConstructibleUpperStar _ ℓ (diag X)).map
-          ((boundedConstructibleUpperShriekAdjunction _ ℓ c.support).counit.app P) := by
+          ((boundedConstructibleUpperShriekAdjunction ℓ c.support).counit.app P) := by
   unfold supportedRestriction upperShriekLowerStarIso
   exact Adjunction.homEquiv_symm_homEquiv_symm_map_unit_comp_conjugateIsoEquiv _ _ _ _
     F.lowerShriekBaseChangeIso P
@@ -305,7 +305,7 @@ zero. -/
 theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (h : (boundedConstructibleUpperStar _ ℓ j).map
-      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ (toPoint X) K))) = 0) :
+      (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0) :
     (c.traceClass F).localTerm j = 0 := by
   rw [localTerm_traceClass_eq_integral_supportedRestriction, h, Limits.zero_comp,
     Limits.comp_zero, Limits.comp_zero, BorelMooreSection.integral_zero]

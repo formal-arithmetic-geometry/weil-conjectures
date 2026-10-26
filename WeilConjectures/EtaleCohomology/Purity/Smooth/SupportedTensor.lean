@@ -62,6 +62,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section Ranges
 
@@ -160,54 +161,68 @@ lemma bijective_iso_hom_comp {C : Type*} [Category* C] {P Q T : C} (c : P ≅ Q)
     Function.Bijective (fun f : Q ⟶ T ↦ c.hom ≫ f) :=
   ⟨fun _ _ h ↦ (cancel_epi c.hom).1 h, fun f ↦ ⟨c.inv ≫ f, by simp⟩⟩
 
-variable {U Z : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint]
+variable {U Z : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i]
 
 /-- The lift of `ε ⊗ N : Ri_! Ri^! M ⊗ N ⟶ M ⊗ N` through the counit of `Ri_! ⊣ Ri^!` exists and
 is unique, since the source is supported on `Z`. -/
-theorem existsUnique_supportedTensorRight (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    ∃! π : ((derivedTensor A U).obj ((R(i)_![A]).obj ((R(i)^![A]).obj M))).obj N ⟶
-        (R(i)_![A]).obj ((R(i)^![A]).obj (((derivedTensor A U).obj M).obj N)),
-      π ≫ (rightDerivedUpperShriekAdjunction A i).counit.app (((derivedTensor A U).obj M).obj N) =
-        derivedTensorHom A ((rightDerivedUpperShriekAdjunction A i).counit.app M) (𝟙 N) :=
-  existsUnique_comp_counit_of_isZero A i i.openComplement.ι
+theorem existsUnique_supportedTensorRight
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃! π : ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))).obj N ⟶
+        (R(i)_![ModuleCat.{u + 1} Λ]).obj
+          ((R(i)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N)),
+      π ≫ (rightDerivedUpperShriekAdjunction Λ i).counit.app
+          (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N) =
+        derivedTensorHom (ModuleCat.{u + 1} Λ)
+          ((rightDerivedUpperShriekAdjunction Λ i).counit.app M) (𝟙 N) :=
+  existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
     i.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek A i _ N) _
+    (isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek
+      (ModuleCat.{u + 1} Λ) i _ N) _
 
 /-- The *product of a supported object with coefficients*
 `Ri_! Ri^! M ⊗ N ⟶ Ri_! Ri^! (M ⊗ N)`: the unique lift of `ε ⊗ N` through the counit. -/
-noncomputable def supportedTensorRight (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    ((derivedTensor A U).obj ((R(i)_![A]).obj ((R(i)^![A]).obj M))).obj N ⟶
-      (R(i)_![A]).obj ((R(i)^![A]).obj (((derivedTensor A U).obj M).obj N)) :=
-  (existsUnique_supportedTensorRight A i M N).exists.choose
+noncomputable def supportedTensorRight
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))).obj N ⟶
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(i)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N)) :=
+  (existsUnique_supportedTensorRight Λ i M N).exists.choose
 
 /-- The defining property of `AlgebraicGeometry.Etale.supportedTensorRight`. -/
 @[reassoc]
-lemma supportedTensorRight_comp_counit (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    supportedTensorRight A i M N ≫
-        (rightDerivedUpperShriekAdjunction A i).counit.app (((derivedTensor A U).obj M).obj N) =
-      derivedTensorHom A ((rightDerivedUpperShriekAdjunction A i).counit.app M) (𝟙 N) :=
-  (existsUnique_supportedTensorRight A i M N).exists.choose_spec
+lemma supportedTensorRight_comp_counit
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    supportedTensorRight Λ i M N ≫
+        (rightDerivedUpperShriekAdjunction Λ i).counit.app
+          (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N) =
+      derivedTensorHom (ModuleCat.{u + 1} Λ)
+        ((rightDerivedUpperShriekAdjunction Λ i).counit.app M) (𝟙 N) :=
+  (existsUnique_supportedTensorRight Λ i M N).exists.choose_spec
 
 /-- **Comparison of coreflections.** Let `q : T ⟶ L` be a morphism out of an object supported on
 `Z` through which every morphism from an object supported on `Z` to `L` factors uniquely. Then
 the lift `T ⟶ Ri_! Ri^! L` of `q` through the counit is an isomorphism. -/
-lemma isIso_of_comp_counit_of_bijective {T L : DerivedCategory (Sheaf U.smallEtaleTopology A)}
-    (hT : IsZero ((L((i.openComplement.ι)^*[A])).obj T)) (q : T ⟶ L)
-    (hq : ∀ S : DerivedCategory (Sheaf U.smallEtaleTopology A),
-      IsZero ((L((i.openComplement.ι)^*[A])).obj S) →
+lemma isIso_of_comp_counit_of_bijective
+    {T L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hT : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj T)) (q : T ⟶ L)
+    (hq : ∀ S : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj S) →
         Function.Bijective (fun f : S ⟶ T ↦ f ≫ q))
-    (π : T ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L))
-    (hπ : π ≫ (rightDerivedUpperShriekAdjunction A i).counit.app L = q) : IsIso π := by
-  set ε := (rightDerivedUpperShriekAdjunction A i).counit.app L
-  have hC : IsZero ((L((i.openComplement.ι)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L))) :=
-    isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint A i _ _
+    (π : T ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))
+    (hπ : π ≫ (rightDerivedUpperShriekAdjunction Λ i).counit.app L = q) : IsIso π := by
+  set ε := (rightDerivedUpperShriekAdjunction Λ i).counit.app L
+  have hC : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))) :=
+    isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) i _ _
       (disjoint_range_openComplement_ι i)
   obtain ⟨σ, hσ⟩ := (hq _ hC).2 ε
   dsimp only at hσ
   refine ⟨σ, (hq _ hT).1 ?_, ?_⟩
   · dsimp only
     rw [Category.assoc, hσ, hπ, Category.id_comp]
-  · refine (existsUnique_comp_counit_of_isZero A i i.openComplement.ι
+  · refine (existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
       i.range_eq_compl_range_openComplement_ι hC ε).unique ?_ (Category.id_comp _)
     rw [Category.assoc]
     exact (congrArg (σ ≫ ·) hπ).trans hσ
@@ -216,31 +231,35 @@ variable {i} in
 /-- Tensoring on the right with an object `N` with a tensor inverse `N'` preserves the
 coreflections into the objects supported on `Z`: every morphism `S ⟶ M ⊗ N` from an object
 supported on `Z` factors uniquely through `ε ⊗ N`. -/
-lemma bijective_comp_derivedTensorHom_counit {N N' : DerivedCategory (Sheaf U.smallEtaleTopology A)}
-    (e : ((derivedTensor A U).obj N).obj N' ≅ 𝟙_ _)
-    (e' : ((derivedTensor A U).obj N').obj N ≅ 𝟙_ _)
-    (M S : DerivedCategory (Sheaf U.smallEtaleTopology A))
-    (hS : IsZero ((L((i.openComplement.ι)^*[A])).obj S)) :
-    Function.Bijective (fun f : S ⟶ ((derivedTensor A U).obj ((R(i)_![A]).obj
-        ((R(i)^![A]).obj M))).obj N ↦
-      f ≫ derivedTensorHom A ((rightDerivedUpperShriekAdjunction A i).counit.app M) (𝟙 N)) := by
+lemma bijective_comp_derivedTensorHom_counit
+    {N N' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj N).obj N' ≅ 𝟙_ _)
+    (e' : ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj N').obj N ≅ 𝟙_ _)
+    (M S : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hS : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj S)) :
+    Function.Bijective (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))).obj N ↦
+      f ≫ derivedTensorHom (ModuleCat.{u + 1} Λ)
+        ((rightDerivedUpperShriekAdjunction Λ i).counit.app M) (𝟙 N)) := by
   let E := tensorRightEquivalenceOfTensorIso e e'
-  set ε := (rightDerivedUpperShriekAdjunction A i).counit.app M
-  have hε : derivedTensorHom A ε (𝟙 N) = E.functor.map ε := by
+  set ε := (rightDerivedUpperShriekAdjunction Λ i).counit.app M
+  have hε : derivedTensorHom (ModuleCat.{u + 1} Λ) ε (𝟙 N) = E.functor.map ε := by
     rw [derivedTensorHom_eq_tensorHom, tensorHom_id]
     rfl
-  set S' := ((derivedTensor A U).obj S).obj N'
-  have hS' : IsZero ((L((i.openComplement.ι)^*[A])).obj S') :=
-    isZero_leftDerivedUpperStar_openComplement_derivedTensor A i hS N'
+  set S' := ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj S).obj N'
+  have hS' : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj S') :=
+    isZero_leftDerivedUpperStar_openComplement_derivedTensor (ModuleCat.{u + 1} Λ) i hS N'
   -- `S ≅ F S'` with `F = - ⊗ N`
   let c : E.functor.obj S' ≅ S := E.counitIso.app S
-  have hF : Function.Bijective (fun f : S' ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj M) ↦ f ≫ ε) :=
-    ⟨fun f₁ f₂ hf ↦ (existsUnique_comp_counit_of_isZero A i i.openComplement.ι
+  have hF : Function.Bijective
+      (fun f : S' ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M) ↦ f ≫ ε) :=
+    ⟨fun f₁ f₂ hf ↦ (existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
         i.range_eq_compl_range_openComplement_ι hS' _).unique hf rfl,
-      fun g ↦ (existsUnique_comp_counit_of_isZero A i i.openComplement.ι
+      fun g ↦ (existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
         i.range_eq_compl_range_openComplement_ι hS' g).exists⟩
   have hF' : Function.Bijective (fun f : E.functor.obj S' ⟶
-      E.functor.obj ((R(i)_![A]).obj ((R(i)^![A]).obj M)) ↦ f ≫ E.functor.map ε) := by
+      E.functor.obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M)) ↦
+        f ≫ E.functor.map ε) := by
     constructor
     · intro f₁ f₂ hf
       obtain ⟨g₁, rfl⟩ := E.functor.map_surjective f₁
@@ -254,10 +273,12 @@ lemma bijective_comp_derivedTensorHom_counit {N N' : DerivedCategory (Sheaf U.sm
       refine ⟨E.functor.map h, ?_⟩
       dsimp only at hh ⊢
       rw [← Functor.map_comp, hh]
-  have key : (fun f : S ⟶ ((derivedTensor A U).obj ((R(i)_![A]).obj
-        ((R(i)^![A]).obj M))).obj N ↦ f ≫ derivedTensorHom A ε (𝟙 N)) =
+  have key : (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M))).obj N ↦
+          f ≫ derivedTensorHom (ModuleCat.{u + 1} Λ) ε (𝟙 N)) =
       (fun f ↦ c.inv ≫ f) ∘
-        (fun f : E.functor.obj S' ⟶ E.functor.obj ((R(i)_![A]).obj ((R(i)^![A]).obj M)) ↦
+        (fun f : E.functor.obj S' ⟶
+            E.functor.obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj M)) ↦
           f ≫ E.functor.map ε) ∘ (fun f ↦ c.hom ≫ f) := by
     funext f
     simp only [Function.comp_apply, Category.assoc, Iso.inv_hom_id_assoc, hε]
@@ -266,14 +287,16 @@ lemma bijective_comp_derivedTensorHom_counit {N N' : DerivedCategory (Sheaf U.sm
 
 /-- **The product with an invertible coefficient is an isomorphism**: for `N` with a tensor
 inverse, `Ri_! Ri^! M ⊗ N ⟶ Ri_! Ri^! (M ⊗ N)` is an isomorphism. -/
-theorem isIso_supportedTensorRight {N N' : DerivedCategory (Sheaf U.smallEtaleTopology A)}
-    (e : ((derivedTensor A U).obj N).obj N' ≅ 𝟙_ _)
-    (e' : ((derivedTensor A U).obj N').obj N ≅ 𝟙_ _)
-    (M : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    IsIso (supportedTensorRight A i M N) :=
-  isIso_of_comp_counit_of_bijective A i
-    (isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek A i _ N) _
-    (bijective_comp_derivedTensorHom_counit A e e' M) _ (supportedTensorRight_comp_counit A i M N)
+theorem isIso_supportedTensorRight
+    {N N' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj N).obj N' ≅ 𝟙_ _)
+    (e' : ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj N').obj N ≅ 𝟙_ _)
+    (M : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (supportedTensorRight Λ i M N) :=
+  isIso_of_comp_counit_of_bijective Λ i
+    (isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek
+      (ModuleCat.{u + 1} Λ) i _ N) _
+    (bijective_comp_derivedTensorHom_counit Λ e e' M) _ (supportedTensorRight_comp_counit Λ i M N)
 
 end TensorRight
 
@@ -281,73 +304,80 @@ end TensorRight
 section Forget
 
 variable {U Z Z₁ Z' : Scheme.{u}} (i : Z ⟶ U) (i₁ : Z₁ ⟶ U) [IsClosedImmersion i]
-  [IsClosedImmersion i₁] [(R(i)_![A]).IsLeftAdjoint] [(R(i₁)_![A]).IsLeftAdjoint]
+  [IsClosedImmersion i₁]
 
 /-- For `Z ⊆ Z₁`, the counit `Ri_! Ri^! L ⟶ L` lifts uniquely through the counit of
 `Ri₁_! ⊣ Ri₁^!`. -/
 theorem existsUnique_supportedForget (hi : Set.range i.base ⊆ Set.range i₁.base)
-    (L : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    ∃! κ : (R(i)_![A]).obj ((R(i)^![A]).obj L) ⟶ (R(i₁)_![A]).obj ((R(i₁)^![A]).obj L),
-      κ ≫ (rightDerivedUpperShriekAdjunction A i₁).counit.app L =
-        (rightDerivedUpperShriekAdjunction A i).counit.app L :=
-  existsUnique_comp_counit_of_isZero A i₁ i₁.openComplement.ι
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃! κ : (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ⟶
+        (R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj L),
+      κ ≫ (rightDerivedUpperShriekAdjunction Λ i₁).counit.app L =
+        (rightDerivedUpperShriekAdjunction Λ i).counit.app L :=
+  existsUnique_comp_counit_of_isZero Λ i₁ i₁.openComplement.ι
     i₁.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint A i _ _
+    (isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) i _ _
       ((disjoint_range_openComplement_ι i₁).mono_right hi)) _
 
 /-- The *forgetful map* `Ri_! Ri^! L ⟶ Ri₁_! Ri₁^! L` for `Z ⊆ Z₁`, forgetting that a class is
 supported on the smaller closed subset: the unique lift of the counit of `Ri_! ⊣ Ri^!` through
 that of `Ri₁_! ⊣ Ri₁^!`. -/
 noncomputable def supportedForget (hi : Set.range i.base ⊆ Set.range i₁.base)
-    (L : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    (R(i)_![A]).obj ((R(i)^![A]).obj L) ⟶ (R(i₁)_![A]).obj ((R(i₁)^![A]).obj L) :=
-  (existsUnique_supportedForget A i i₁ hi L).exists.choose
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ⟶
+      (R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj L) :=
+  (existsUnique_supportedForget Λ i i₁ hi L).exists.choose
 
 /-- The defining property of `AlgebraicGeometry.Etale.supportedForget`. -/
 @[reassoc]
 lemma supportedForget_comp_counit (hi : Set.range i.base ⊆ Set.range i₁.base)
-    (L : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    supportedForget A i i₁ hi L ≫ (rightDerivedUpperShriekAdjunction A i₁).counit.app L =
-      (rightDerivedUpperShriekAdjunction A i).counit.app L :=
-  (existsUnique_supportedForget A i i₁ hi L).exists.choose_spec
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    supportedForget Λ i i₁ hi L ≫ (rightDerivedUpperShriekAdjunction Λ i₁).counit.app L =
+      (rightDerivedUpperShriekAdjunction Λ i).counit.app L :=
+  (existsUnique_supportedForget Λ i i₁ hi L).exists.choose_spec
 
-variable (j : Z' ⟶ Z₁) [IsClosedImmersion j] [(R(j)_![A]).IsLeftAdjoint]
+variable (j : Z' ⟶ Z₁) [IsClosedImmersion j]
 
 /-- For `Z ⊆ Z₁` and a closed immersion `j : Z' ⟶ Z₁` whose open complement maps into the open
 complement of `Z`, the pullback `Li₁^* κ` of the forgetful map lifts uniquely through the counit
 of `Rj_! ⊣ Rj^!`. -/
 theorem existsUnique_supportedPullbackForget (hi : Set.range i.base ⊆ Set.range i₁.base)
     (hd : Disjoint (Set.range (j.openComplement.ι ≫ i₁).base) (Set.range i.base))
-    (L : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    ∃! ω : (L((i₁)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L)) ⟶
-        (R(j)_![A]).obj ((R(j)^![A]).obj
-          ((L((i₁)^*[A])).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj L)))),
-      ω ≫ (rightDerivedUpperShriekAdjunction A j).counit.app _ =
-        (L((i₁)^*[A])).map (supportedForget A i i₁ hi L) :=
-  existsUnique_comp_counit_of_isZero A j j.openComplement.ι
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃! ω : (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) ⟶
+        (R(j)_![ModuleCat.{u + 1} Λ]).obj ((R(j)^![Λ]).obj
+          ((L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+            ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj L)))),
+      ω ≫ (rightDerivedUpperShriekAdjunction Λ j).counit.app _ =
+        (L((i₁)^*[ModuleCat.{u + 1} Λ])).map (supportedForget Λ i i₁ hi L) :=
+  existsUnique_comp_counit_of_isZero Λ j j.openComplement.ι
     j.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_of_disjoint A i₁ i j hd _) _
+    (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_of_disjoint
+      (ModuleCat.{u + 1} Λ) i₁ i j hd _) _
 
 /-- The restriction to `Z₁` of the forgetful map `Ri_! Ri^! L ⟶ Ri₁_! Ri₁^! L`, read as a class
 supported on `Z'`: the map `Li₁^* Ri_! Ri^! L ⟶ Rj_! Rj^! (Li₁^* Ri₁_! Ri₁^! L)` lifting
 `Li₁^* κ` through the counit of `Rj_! ⊣ Rj^!`. -/
 noncomputable def supportedPullbackForget (hi : Set.range i.base ⊆ Set.range i₁.base)
     (hd : Disjoint (Set.range (j.openComplement.ι ≫ i₁).base) (Set.range i.base))
-    (L : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    (L((i₁)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L)) ⟶
-      (R(j)_![A]).obj ((R(j)^![A]).obj
-        ((L((i₁)^*[A])).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj L)))) :=
-  (existsUnique_supportedPullbackForget A i i₁ j hi hd L).exists.choose
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) ⟶
+      (R(j)_![ModuleCat.{u + 1} Λ]).obj ((R(j)^![Λ]).obj
+        ((L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+          ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj L)))) :=
+  (existsUnique_supportedPullbackForget Λ i i₁ j hi hd L).exists.choose
 
 /-- The defining property of `AlgebraicGeometry.Etale.supportedPullbackForget`. -/
 @[reassoc]
 lemma supportedPullbackForget_comp_counit (hi : Set.range i.base ⊆ Set.range i₁.base)
     (hd : Disjoint (Set.range (j.openComplement.ι ≫ i₁).base) (Set.range i.base))
-    (L : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    supportedPullbackForget A i i₁ j hi hd L ≫
-        (rightDerivedUpperShriekAdjunction A j).counit.app _ =
-      (L((i₁)^*[A])).map (supportedForget A i i₁ hi L) :=
-  (existsUnique_supportedPullbackForget A i i₁ j hi hd L).exists.choose_spec
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    supportedPullbackForget Λ i i₁ j hi hd L ≫
+        (rightDerivedUpperShriekAdjunction Λ j).counit.app _ =
+      (L((i₁)^*[ModuleCat.{u + 1} Λ])).map (supportedForget Λ i i₁ hi L) :=
+  (existsUnique_supportedPullbackForget Λ i i₁ j hi hd L).exists.choose_spec
 
 end Forget
 
@@ -365,54 +395,61 @@ lemma derivedTensorLeftUnitor_inv_comp_derivedTensorHom_id {X : Scheme.{u}}
 
 variable {U Z₁ Z₂ Z Z' : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
   [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
-  [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
-  [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
-  [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
   (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
 
 /-- Forgetting the support of a cup product down to `Z₁`: the product of supports followed by the
 forgetful map `Ri_! Ri^! ⟶ Ri₁_! Ri₁^!` is `1 ⊗ ε₂` followed by the product with coefficients. -/
 theorem supportedProduct_comp_supportedForget
-    (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    supportedProduct A i₁ i₂ i h M N ≫
-        supportedForget A i i₁ (h ▸ Set.inter_subset_left) (((derivedTensor A U).obj M).obj N) =
-      derivedTensorHom A (𝟙 _) ((rightDerivedUpperShriekAdjunction A i₂).counit.app N) ≫
-        supportedTensorRight A i₁ M N :=
-  (existsUnique_comp_counit_of_isZero A i₁ i₁.openComplement.ι
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    supportedProduct Λ i₁ i₂ i h M N ≫
+        supportedForget Λ i i₁ (h ▸ Set.inter_subset_left)
+          (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N) =
+      derivedTensorHom (ModuleCat.{u + 1} Λ) (𝟙 _)
+          ((rightDerivedUpperShriekAdjunction Λ i₂).counit.app N) ≫
+        supportedTensorRight Λ i₁ M N :=
+  (existsUnique_comp_counit_of_isZero Λ i₁ i₁.openComplement.ι
     i₁.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek A i₁ _ _)
-    (L := ((derivedTensor A U).obj M).obj N)
-    (derivedTensorHom A ((rightDerivedUpperShriekAdjunction A i₁).counit.app M)
-      ((rightDerivedUpperShriekAdjunction A i₂).counit.app N))).unique
+    (isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek
+      (ModuleCat.{u + 1} Λ) i₁ _ _)
+    (L := ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N)
+    (derivedTensorHom (ModuleCat.{u + 1} Λ)
+      ((rightDerivedUpperShriekAdjunction Λ i₁).counit.app M)
+      ((rightDerivedUpperShriekAdjunction Λ i₂).counit.app N))).unique
     (by rw [Category.assoc, supportedForget_comp_counit, supportedProduct_comp_counit])
     (by
       rw [Category.assoc, supportedTensorRight_comp_counit, derivedTensorHom_comp,
         Category.id_comp]
-      exact congrArg (derivedTensorHom A _) (Category.comp_id _))
+      exact congrArg (derivedTensorHom (ModuleCat.{u + 1} Λ) _) (Category.comp_id _))
 
 /-- The map `Ri₂_! Ri₂^! N ≅ 𝟙 ⊗ Ri₂_! Ri₂^! N ⟶ Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)`
 through which the cup product `α ∪ β` factors, followed by the forgetful map to `Z₁`, is the
 counit `ε₂` followed by `N ≅ 𝟙 ⊗ N ⟶ Ri₁_! Ri₁^! M ⊗ N ⟶ Ri₁_! Ri₁^! (M ⊗ N)`. -/
 theorem supportedProduct_comp_supportedForget_eq
-    (M N : DerivedCategory (Sheaf U.smallEtaleTopology A))
-    (α : 𝟙_ _ ⟶ (R(i₁)_![A]).obj ((R(i₁)^![A]).obj M)) :
-    (derivedTensorLeftUnitor A U _).inv ≫ derivedTensorHom A α (𝟙 _) ≫
-        supportedProduct A i₁ i₂ i h M N ≫
-          supportedForget A i i₁ (h ▸ Set.inter_subset_left) (((derivedTensor A U).obj M).obj N) =
-      (rightDerivedUpperShriekAdjunction A i₂).counit.app N ≫
-        (derivedTensorLeftUnitor A U N).inv ≫ derivedTensorHom A α (𝟙 N) ≫
-          supportedTensorRight A i₁ M N := by
-  have e : derivedTensorHom A α (𝟙 ((R(i₂)_![A]).obj ((R(i₂)^![A]).obj N))) ≫
-      derivedTensorHom A (𝟙 _) ((rightDerivedUpperShriekAdjunction A i₂).counit.app N) =
-        derivedTensorHom A (𝟙 (𝟙_ _)) ((rightDerivedUpperShriekAdjunction A i₂).counit.app N) ≫
-          derivedTensorHom A α (𝟙 N) := by
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (α : 𝟙_ _ ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj M)) :
+    (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U _).inv ≫
+        derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 _) ≫
+        supportedProduct Λ i₁ i₂ i h M N ≫
+          supportedForget Λ i i₁ (h ▸ Set.inter_subset_left)
+            (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N) =
+      (rightDerivedUpperShriekAdjunction Λ i₂).counit.app N ≫
+        (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U N).inv ≫
+          derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N) ≫
+          supportedTensorRight Λ i₁ M N := by
+  have e : derivedTensorHom (ModuleCat.{u + 1} Λ) α
+        (𝟙 ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj ((R(i₂)^![Λ]).obj N))) ≫
+      derivedTensorHom (ModuleCat.{u + 1} Λ) (𝟙 _)
+        ((rightDerivedUpperShriekAdjunction Λ i₂).counit.app N) =
+        derivedTensorHom (ModuleCat.{u + 1} Λ) (𝟙 (𝟙_ _))
+            ((rightDerivedUpperShriekAdjunction Λ i₂).counit.app N) ≫
+          derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N) := by
     rw [derivedTensorHom_comp, derivedTensorHom_comp]
     simp only [Category.id_comp, Category.comp_id]
-    exact congrArg (derivedTensorHom A α) (Category.comp_id _).symm
+    exact congrArg (derivedTensorHom (ModuleCat.{u + 1} Λ) α) (Category.comp_id _).symm
   rw [supportedProduct_comp_supportedForget, reassoc_of% e,
     derivedTensorLeftUnitor_inv_comp_derivedTensorHom_id_assoc]
 
-variable (j : Z' ⟶ Z₁) (g : Z' ⟶ Z₂) [IsClosedImmersion j] [(R(j)_![A]).IsLeftAdjoint]
+variable (j : Z' ⟶ Z₁) (g : Z' ⟶ Z₂) [IsClosedImmersion j]
   (hg : IsPullback g j i₂ i₁)
 
 /-- **The restriction of a cup product to `Z₁`.** Let `Z' = Z₁ ×_U Z₂` with `j : Z' ⟶ Z₁`, let
@@ -425,35 +462,44 @@ variable (j : Z' ⟶ Z₁) (g : Z' ⟶ Z₂) [IsClosedImmersion j] [(R(j)_![A]).
 
 where `ψ : Li₁^* Ri₂_! Ri₂^! N ⟶ Rj_! Rj^! L'` is the restriction of supports along `i₁`. -/
 theorem leftDerivedUpperStar_map_supportedProduct_comp
-    (M N : DerivedCategory (Sheaf U.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf Z₁.smallEtaleTopology A)) (τ : (L((i₁)^*[A])).obj N ≅ L')
-    (α : 𝟙_ _ ⟶ (R(i₁)_![A]).obj ((R(i₁)^![A]).obj M)) :
-    (L((i₁)^*[A])).map ((derivedTensorLeftUnitor A U _).inv ≫ derivedTensorHom A α (𝟙 _) ≫
-        supportedProduct A i₁ i₂ i h M N) ≫
-        supportedPullbackForget A i i₁ j (h ▸ Set.inter_subset_left)
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (τ : (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj N ≅ L')
+    (α : 𝟙_ _ ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj M)) :
+    (L((i₁)^*[ModuleCat.{u + 1} Λ])).map
+        ((derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U _).inv ≫
+          derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 _) ≫
+          supportedProduct Λ i₁ i₂ i h M N) ≫
+        supportedPullbackForget Λ i i₁ j (h ▸ Set.inter_subset_left)
           (disjoint_range_openComplement_ι_comp_of_isPullback_of_subset hg
             (h ▸ Set.inter_subset_right)) _ =
-      supportedRestriction A i₁ i₂ j g hg N L' τ ≫
-        (R(j)_![A]).map ((R(j)^![A]).map (τ.inv ≫ (L((i₁)^*[A])).map
-          ((derivedTensorLeftUnitor A U N).inv ≫ derivedTensorHom A α (𝟙 N) ≫
-            supportedTensorRight A i₁ M N))) := by
-  have hψ : supportedRestriction A i₁ i₂ j g hg N L' τ ≫
-      (rightDerivedUpperShriekAdjunction A j).counit.app L' =
-        (L((i₁)^*[A])).map ((rightDerivedUpperShriekAdjunction A i₂).counit.app N) ≫ τ.hom :=
-    (existsUnique_supportedRestriction A i₁ i₂ j g hg N L' τ).exists.choose_spec
-  refine (existsUnique_comp_counit_of_isZero A j j.openComplement.ι
+      supportedRestriction Λ i₁ i₂ j g hg N L' τ ≫
+        (R(j)_![ModuleCat.{u + 1} Λ]).map ((R(j)^![Λ]).map
+          (τ.inv ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map
+            ((derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U N).inv ≫
+              derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N) ≫
+              supportedTensorRight Λ i₁ M N))) := by
+  have hψ : supportedRestriction Λ i₁ i₂ j g hg N L' τ ≫
+      (rightDerivedUpperShriekAdjunction Λ j).counit.app L' =
+        (L((i₁)^*[ModuleCat.{u + 1} Λ])).map
+          ((rightDerivedUpperShriekAdjunction Λ i₂).counit.app N) ≫ τ.hom :=
+    (existsUnique_supportedRestriction Λ i₁ i₂ j g hg N L' τ).exists.choose_spec
+  refine (existsUnique_comp_counit_of_isZero Λ j j.openComplement.ι
     j.range_eq_compl_range_openComplement_ι
-    (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_of_disjoint A i₁ i₂ j
-      (disjoint_range_openComplement_ι_comp_of_isPullback hg) _)
-    (L := (L((i₁)^*[A])).obj
-      ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj (((derivedTensor A U).obj M).obj N))))
-    ((L((i₁)^*[A])).map ((rightDerivedUpperShriekAdjunction A i₂).counit.app N ≫
-      (derivedTensorLeftUnitor A U N).inv ≫ derivedTensorHom A α (𝟙 N) ≫
-        supportedTensorRight A i₁ M N))).unique ?_ ?_
+    (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_of_disjoint
+      (ModuleCat.{u + 1} Λ) i₁ i₂ j (disjoint_range_openComplement_ι_comp_of_isPullback hg) _)
+    (L := (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+      ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(i₁)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N))))
+    ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map
+      ((rightDerivedUpperShriekAdjunction Λ i₂).counit.app N ≫
+        (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U N).inv ≫
+        derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N) ≫
+        supportedTensorRight Λ i₁ M N))).unique ?_ ?_
   · rw [Category.assoc, supportedPullbackForget_comp_counit, ← Functor.map_comp,
       Category.assoc, Category.assoc, supportedProduct_comp_supportedForget_eq]
   · rw [Category.assoc]
-    erw [(rightDerivedUpperShriekAdjunction A j).counit.naturality]
+    erw [(rightDerivedUpperShriekAdjunction Λ j).counit.naturality]
     rw [Functor.id_map, reassoc_of% hψ, Iso.hom_inv_id_assoc, ← Functor.map_comp]
 
 end Product

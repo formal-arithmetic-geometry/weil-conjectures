@@ -46,57 +46,57 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 noncomputable def leftProjectionNatTrans {P Q : Over (Spec (.of k))} [LocallyOfFiniteType P.hom]
     [QuasiCompact P.hom] [IsSeparated P.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom]
     [IsSeparated Q.hom] (q : P ⟶ Q) (A : Dᵇc(Q.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleLowerShriek _ ℓ q ⋙ tensorLeft A ⟶
+    boundedConstructibleLowerShriek ℓ q ⋙ tensorLeft A ⟶
       tensorLeft ((boundedConstructibleUpperStar _ ℓ q).obj A) ⋙
-        boundedConstructibleLowerShriek _ ℓ q where
-  app T := Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ q) A T
+        boundedConstructibleLowerShriek ℓ q where
+  app T := Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ q) A T
   naturality _ _ u := Verdier.leftProjection_naturality _ A u
 
 /-- The *transport* `Rp₁'_! (Lp₂'^* K' ⊗ Rq_* Z) ⟶ Rf_* Rp₁_! (Lp₂^* K ⊗ Z)` along `q = f × f`,
 natural in `Z`: `Rq_* ≅ Rq_!`, the left projection morphism of `q`, the composition law for
 `q ≫ p₁' = p₁ ≫ f`, the transported counit `Lq^* Lp₂'^* Rf_* K ⟶ Lp₂^* K` and `Rf_! ≅ Rf_*`. -/
 noncomputable def classTransport :
-    boundedConstructibleLowerStar _ ℓ (prod.map f f) ⋙
+    boundedConstructibleLowerStar ℓ (prod.map f f) ⋙
         tensorLeft ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K)) ⋙
-        boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y) ⟶
+          ((boundedConstructibleLowerStar ℓ f).obj K)) ⋙
+        boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y) ⟶
       tensorLeft ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K) ⋙
-        boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X) ⋙
-        boundedConstructibleLowerStar _ ℓ f :=
+        boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X) ⋙
+        boundedConstructibleLowerStar ℓ f :=
   Functor.whiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f)).inv
       (tensorLeft ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K)) ⋙
-        boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)) ≫
+          ((boundedConstructibleLowerStar ℓ f).obj K)) ⋙
+        boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (leftProjectionNatTrans ℓ (prod.map f f) _)
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)) ≫
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (tensorLeft ((boundedConstructibleUpperStar _ ℓ (prod.map f f)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K))))
+          ((boundedConstructibleLowerStar ℓ f).obj K))))
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f)).hom ≫
     Functor.whiskerRight ((curriedTensor _).map (prodUpperStarCounit ℓ (prod.map_snd f f) K))
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X) ⋙
-        boundedConstructibleLowerShriek _ ℓ f) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X) ⋙
+        boundedConstructibleLowerShriek ℓ f) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerLeft (tensorLeft ((boundedConstructibleUpperStar _ ℓ
         (prod.snd : X ⨯ X ⟶ X)).obj K) ⋙
-        boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X))
+        boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom ≫
     (Functor.associator _ _ _).hom
 
 /-- The *transport map* `Φ : Rq_* RHom(Lp₂^* K, Rp₁^! K) ⟶ RHom(Lp₂'^* K', Rp₁'^! K')`
 (blueprint `lem-trf-trace-source-exchange`, Step 1). -/
 noncomputable def classTransportMap :
-    (boundedConstructibleLowerStar _ ℓ (prod.map f f)).obj
+    (boundedConstructibleLowerStar ℓ (prod.map f f)).obj
         ((ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
-          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) ⟶
+          ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) ⟶
       (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K))).obj
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar _ ℓ f).obj K)) :=
-  curry (((boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).homEquiv _ _)
-    ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar _ ℓ f).map (classTest ℓ K
+          ((boundedConstructibleLowerStar ℓ f).obj K))).obj
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleLowerStar ℓ f).obj K)) :=
+  curry (((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : Y ⨯ Y ⟶ Y)).homEquiv _ _)
+    ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K
         (𝟙 _))))
 
 set_option maxHeartbeats 1000000 in
@@ -105,16 +105,16 @@ set_option maxHeartbeats 1000000 in
 `test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read through the transport. -/
 lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (ψ : Z ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) :
-    classTest ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        ((boundedConstructibleLowerStar _ ℓ (prod.map f f)).map ψ ≫ classTransportMap ℓ f K) =
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) :
+    classTest ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+        ((boundedConstructibleLowerStar ℓ (prod.map f f)).map ψ ≫ classTransportMap ℓ f K) =
       (classTransport ℓ f K).app Z ≫
-        (boundedConstructibleLowerStar _ ℓ f).map (classTest ℓ K ψ) := by
+        (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K ψ) := by
   have hψ := classTest_comp ℓ ψ (𝟙 _)
   rw [Category.comp_id] at hψ
-  have hΦ : classTest ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K) (classTransportMap ℓ f K) =
+  have hΦ : classTest ℓ ((boundedConstructibleLowerStar ℓ f).obj K) (classTransportMap ℓ f K) =
       (classTransport ℓ f K).app _ ≫
-        (boundedConstructibleLowerStar _ ℓ f).map (classTest ℓ K (𝟙 _)) :=
+        (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K (𝟙 _)) :=
     by simp only [classTest, classTransportMap, uncurry_curry, Equiv.symm_apply_apply]
   rw [classTest_comp, hΦ, hψ, Functor.map_comp]
   exact (classTransport ℓ f K).naturality_assoc ψ _

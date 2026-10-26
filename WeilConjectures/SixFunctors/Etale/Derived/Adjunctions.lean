@@ -168,7 +168,7 @@ noncomputable def DerivedCategoryBoundedConstructible.rightDerivedUpperShriek
       DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) X :=
   ObjectProperty.lift _
     (DerivedCategoryBoundedConstructible.ι (ModuleCat.{u + 1} Λ) Y ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])
+      R(f)^![Λ])
     fun K ↦ boundedConstructible_rightDerivedUpperShriek Λ aY f K.property
 
 /-- Blueprint `fix-prop-adjunctions` (2): the exceptional adjunction `Rf_! ⊣ Rf^!` restricts to an
@@ -200,7 +200,7 @@ transported from `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction` alo
 compactification-independence isomorphism `Rf_!(c) ≅ Rf_!`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`). -/
 noncomputable def rightDerivedUpperShriekAdjunctionOfCompactification (c : Compactification f) :
-    Rf_!(c)[ModuleCat.{u + 1} Λ] ⊣ R(f)^![ModuleCat.{u + 1} Λ] :=
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ⊣ R(f)^![Λ] :=
   (rightDerivedUpperShriekAdjunction _ f).ofNatIsoLeft (rightDerivedLowerShriekIso Λ c).symm
 
 /-- Blueprint `fix-prop-adjunctions` (2): the units and counits of the exceptional adjunctions
@@ -338,8 +338,8 @@ the exceptional-inverse-image exchange `Rg'_* Rf'^! ⟶ Rf^! Rg_*`, the conjugat
 an isomorphism (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekLowerStarBaseChangeMap`). -/
 noncomputable def rightDerivedUpperShriekLowerStarBaseChangeMap [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    R(f')^![ModuleCat.{u + 1} Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) ⟶
-      R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![ModuleCat.{u + 1} Λ] :=
+    R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) ⟶
+      R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] :=
   conjugateEquiv
     ((derivedUpperStarLowerStarAdjunction _ g').comp (rightDerivedUpperShriekAdjunction _ f'))
     ((rightDerivedUpperShriekAdjunction _ f).comp (derivedUpperStarLowerStarAdjunction _ g))

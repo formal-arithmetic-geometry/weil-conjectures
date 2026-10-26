@@ -59,13 +59,13 @@ theorem nonempty_iso_verdierDual_externalProduct_of_isDualizable {S X Y : Scheme
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hM : IsDualizable M) (hN : IsDualizable N)
-    (hω : Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a) ≅
+    (hω : Nonempty (dualizingComplex Λ (pullback.fst a b ≫ a) ≅
       externalProduct (ModuleCat.{u + 1} Λ) a b (dualizingComplex _ a) (dualizingComplex _ b))) :
-    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+    Nonempty ((verdierDual Λ (pullback.fst a b ≫ a)).obj
         (op (externalProduct (ModuleCat.{u + 1} Λ) a b M N)) ≅
       externalProduct (ModuleCat.{u + 1} Λ) a b
-        ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N))) := by
+        ((verdierDual Λ a).obj (op M))
+        ((verdierDual Λ b).obj (op N))) := by
   obtain ⟨ω⟩ := hω
   obtain ⟨e⟩ := nonempty_iso_externalProduct_derivedHom_of_isDualizable (ModuleCat.{u + 1} Λ) a b
     (N₁ := dualizingComplex _ a) (N₂ := dualizingComplex _ b) hM hN

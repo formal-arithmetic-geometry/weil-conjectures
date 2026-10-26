@@ -64,19 +64,19 @@ noncomputable def lowerShriekBaseChangeIso (sq : IsPullback ι d c Δ) :
 the inverse of compact-support base change followed by `LΔ^*` of the counit of `Rc_! ⊣ Rc^!`. -/
 noncomputable def exchangeRestriction (sq : IsPullback ι d c Δ)
     (P : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (L((ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)^![ModuleCat.{u + 1} Λ]).obj P) ⟶
-      (R(d)^![ModuleCat.{u + 1} Λ]).obj ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj P) :=
-  (mateEquiv (rightDerivedUpperShriekAdjunction _ c) (rightDerivedUpperShriekAdjunction _ d)
+    (L((ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)^![Λ]).obj P) ⟶
+      (R(d)^![Λ]).obj ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj P) :=
+  (mateEquiv (rightDerivedUpperShriekAdjunction Λ c) (rightDerivedUpperShriekAdjunction Λ d)
     (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).natTrans.app P
 
 /-- The étale exchange restriction is the `Rd_! ⊣ Rd^!` adjoint of the inverse of compact-support
 base change followed by `LΔ^*` of the counit of `Rc_! ⊣ Rc^!`. -/
 lemma exchangeRestriction_eq_homEquiv (sq : IsPullback ι d c Δ)
     (P : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    exchangeRestriction Λ sq P = (rightDerivedUpperShriekAdjunction _ d).homEquiv _ _
+    exchangeRestriction Λ sq P = (rightDerivedUpperShriekAdjunction Λ d).homEquiv _ _
       ((lowerShriekBaseChangeIso Λ sq).inv.app _ ≫
         (L((Δ)^*[ModuleCat.{u + 1} Λ])).map
-          ((rightDerivedUpperShriekAdjunction _ c).counit.app P)) :=
+          ((rightDerivedUpperShriekAdjunction Λ c).counit.app P)) :=
   Adjunction.mateEquiv_app_eq_homEquiv _ _ _ _ _ P
 
 end ExchangeRestriction

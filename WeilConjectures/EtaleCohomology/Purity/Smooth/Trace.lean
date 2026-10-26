@@ -92,11 +92,11 @@ is the smooth trace `Tr^sm_f : Rf_! Λ_X(d)[2d] ⟶ Λ_Y` of `f`. -/
 noncomputable def smoothPurityTrace
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
+      (R(f)^![Λ]).obj K) :
     (R(f)_![ModuleCat.{u + 1} Λ]).obj
         ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ⟶ K :=
   (R(f)_![ModuleCat.{u + 1} Λ]).map γ.hom ≫
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K
+    (rightDerivedUpperShriekAdjunction Λ f).counit.app K
 
 variable {Λ d f}
 
@@ -104,9 +104,9 @@ variable {Λ d f}
 lemma smoothPurityTrace_eq_homEquiv_symm
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
+      (R(f)^![Λ]).obj K) :
     smoothPurityTrace Λ d f γ =
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _).symm γ.hom := by
+      ((rightDerivedUpperShriekAdjunction Λ f).homEquiv _ _).symm γ.hom := by
   rw [Adjunction.homEquiv_counit]
   rfl
 
@@ -117,8 +117,8 @@ The purity map is recovered from the smooth trace: it is the adjoint of `Tr^sm_{
 lemma homEquiv_smoothPurityTrace
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _
+      (R(f)^![Λ]).obj K) :
+    (rightDerivedUpperShriekAdjunction Λ f).homEquiv _ _
       (smoothPurityTrace Λ d f γ) = γ.hom := by
   rw [smoothPurityTrace_eq_homEquiv_symm, Equiv.apply_symm_apply]
 
@@ -127,8 +127,8 @@ isomorphism: `Tr_{f,K} = Tr^sm_{f,K} ∘ Rf_! γ_{f,K}⁻¹`. -/
 lemma rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTrace
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K =
+      (R(f)^![Λ]).obj K) :
+    (rightDerivedUpperShriekAdjunction Λ f).counit.app K =
       (R(f)_![ModuleCat.{u + 1} Λ]).map γ.inv ≫ smoothPurityTrace Λ d f γ := by
   rw [smoothPurityTrace, ← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id,
     CategoryTheory.Functor.map_id,
@@ -139,7 +139,7 @@ lemma rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTrace
 The smooth traces of a purity map natural in `K` are natural in `K`: for `u : K ⟶ K'`,
 `Tr^sm_{f,K'} ∘ Rf_! Lf^* u(d)[2d] = u ∘ Tr^sm_{f,K}`. -/
 lemma smoothPurityTrace_naturality
-    (Γ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![ModuleCat.{u + 1} Λ])
+    (Γ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![Λ])
     {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (v : K ⟶ K') :
     (R(f)_![ModuleCat.{u + 1} Λ]).map
@@ -166,11 +166,11 @@ of `R(f ≫ g)_! ⊣ R(f ≫ g)^!` with that of the composite adjunction
 noncomputable def rightDerivedUpperShriekCompIsoOfLowerShriek
     (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :
-    R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ] ≅
-      R(f ≫ g)^![ModuleCat.{u + 1} Λ] :=
-  conjugateIsoEquiv ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).comp
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g))
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (f ≫ g)) α
+    R(g)^![Λ] ⋙ R(f)^![Λ] ≅
+      R(f ≫ g)^![Λ] :=
+  conjugateIsoEquiv ((rightDerivedUpperShriekAdjunction Λ f).comp
+    (rightDerivedUpperShriekAdjunction Λ g))
+    (rightDerivedUpperShriekAdjunction Λ (f ≫ g)) α
 
 omit [HasTateTwist Λ] in
 /-- The counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^!`, read through the conjugate composition
@@ -182,11 +182,11 @@ lemma rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(f ≫ g)_![ModuleCat.{u + 1} Λ]).map
         ((rightDerivedUpperShriekCompIsoOfLowerShriek Λ f g α).hom.app K) ≫
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (f ≫ g)).counit.app K =
+      (rightDerivedUpperShriekAdjunction Λ (f ≫ g)).counit.app K =
     α.hom.app _ ≫ (R(g)_![ModuleCat.{u + 1} Λ]).map
-        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app
-          ((R(g)^![ModuleCat.{u + 1} Λ]).obj K)) ≫
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g).counit.app K := by
+        ((rightDerivedUpperShriekAdjunction Λ f).counit.app
+          ((R(g)^![Λ]).obj K)) ≫
+      (rightDerivedUpperShriekAdjunction Λ g).counit.app K := by
   rw [rightDerivedUpperShriekCompIsoOfLowerShriek, conjugateIsoEquiv_apply_hom,
     conjugateEquiv_counit, Adjunction.comp_counit_app]
   rfl
@@ -230,15 +230,15 @@ is the smooth trace `Tr^sm_{f ≫ g,K}`: the `f`-trace, with the twist `(e)[2e]`
 present, is applied before the `g`-trace. -/
 theorem smoothPurityTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ])
-    (Γf : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![ModuleCat.{u + 1} Λ])
+    (Γf : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![Λ])
     {K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γg : (twistShift Λ Y e).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(g)^![ModuleCat.{u + 1} Λ]).obj K)
+      (R(g)^![Λ]).obj K)
     (γfg : (twistShift Λ X (d + e)).obj ((L((f ≫ g)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj K)
+      (R(f ≫ g)^![Λ]).obj K)
     (hγ : γfg.hom = (twistShiftCompIso Λ f g d e K).hom ≫
       (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map γg.hom) ≫
-      Γf.hom.app ((R(g)^![ModuleCat.{u + 1} Λ]).obj K) ≫
+      Γf.hom.app ((R(g)^![Λ]).obj K) ≫
       (rightDerivedUpperShriekCompIsoOfLowerShriek Λ f g α).hom.app K) :
     smoothPurityTrace Λ (d + e) (f ≫ g) γfg =
       (R(f ≫ g)_![ModuleCat.{u + 1} Λ]).map (twistShiftCompIso Λ f g d e K).hom ≫
@@ -248,14 +248,14 @@ theorem smoothPurityTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} 
         smoothPurityTrace Λ e g γg := by
   have hΓ := Γf.hom.naturality γg.hom
   simp only [Functor.comp_obj, Functor.comp_map] at hΓ
-  have hε := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.naturality
+  have hε := (rightDerivedUpperShriekAdjunction Λ f).counit.naturality
     γg.hom
   simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hε
   have key : (R(f)_![ModuleCat.{u + 1} Λ]).map
         ((twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map γg.hom)) ≫
-      (R(f)_![ModuleCat.{u + 1} Λ]).map (Γf.hom.app ((R(g)^![ModuleCat.{u + 1} Λ]).obj K)) ≫
-        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app
-          ((R(g)^![ModuleCat.{u + 1} Λ]).obj K) =
+      (R(f)_![ModuleCat.{u + 1} Λ]).map (Γf.hom.app ((R(g)^![Λ]).obj K)) ≫
+        (rightDerivedUpperShriekAdjunction Λ f).counit.app
+          ((R(g)^![Λ]).obj K) =
       smoothPurityTrace Λ d f
         (Γf.app ((twistShift Λ Y e).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K))) ≫
         γg.hom := by
@@ -268,11 +268,11 @@ theorem smoothPurityTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} 
   congr 1
   have h₃ := α.hom.naturality_assoc ((twistShift Λ X d).map
       ((L((f)^*[ModuleCat.{u + 1} Λ])).map γg.hom) ≫
-    Γf.hom.app ((R(g)^![ModuleCat.{u + 1} Λ]).obj K))
+    Γf.hom.app ((R(g)^![Λ]).obj K))
     ((R(g)_![ModuleCat.{u + 1} Λ]).map
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app
-        ((R(g)^![ModuleCat.{u + 1} Λ]).obj K)) ≫
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g).counit.app K)
+      ((rightDerivedUpperShriekAdjunction Λ f).counit.app
+        ((R(g)^![Λ]).obj K)) ≫
+      (rightDerivedUpperShriekAdjunction Λ g).counit.app K)
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at h₃
   rw [h₃]
   congr 1
@@ -294,11 +294,11 @@ noncomputable def upperShriekBaseChangeOfLowerShriek
     (β : L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ⟶
-      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv _ _
+    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![Λ]).obj K) ⟶
+      (R(f')^![Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
+  (rightDerivedUpperShriekAdjunction Λ f').homEquiv _ _
     (β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K))
+      ((rightDerivedUpperShriekAdjunction Λ f).counit.app K))
 
 omit [HasTateTwist Λ] in
 /-- The defining property of the conjugate exchange: the counit of `Rf'_! ⊣ Rf'^!` after
@@ -308,10 +308,10 @@ lemma rightDerivedLowerShriek_map_upperShriekBaseChangeOfLowerShriek_comp_counit
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(f')_![ModuleCat.{u + 1} Λ]).map (upperShriekBaseChangeOfLowerShriek Λ β K) ≫
-        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').counit.app _ =
+        (rightDerivedUpperShriekAdjunction Λ f').counit.app _ =
       β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map
-        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) := by
-  have h := ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv_counit
+        ((rightDerivedUpperShriekAdjunction Λ f).counit.app K) := by
+  have h := ((rightDerivedUpperShriekAdjunction Λ f').homEquiv_counit
     (g := upperShriekBaseChangeOfLowerShriek Λ β K)).symm
   rwa [upperShriekBaseChangeOfLowerShriek, Equiv.symm_apply_apply] at h
 
@@ -340,10 +340,10 @@ theorem smoothPurityTrace_baseChange {d : ℕ} (sq : IsPullback g f' f v)
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+      (R(f)^![Λ]).obj K)
     (γ' : (twistShift Λ X' d).obj ((L((f')^*[ModuleCat.{u + 1} Λ])).obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
-      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))
+      (R(f')^![Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))
     (hγ : (L((g)^*[ModuleCat.{u + 1} Λ])).map γ.hom ≫
         upperShriekBaseChangeOfLowerShriek Λ β K =
       (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫ γ'.hom) :
@@ -374,8 +374,8 @@ theorem exists_counit_eq_smoothPurityTrace [HasTateTwist.IsNormalized Λ] {k : T
     [SmoothOfRelativeDimension d a] [HasCompactification a] [HasInvertibleExponent Λ X] :
     ∃ γ : (twistShift Λ X d).obj
         ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ (Spec (.of k)))) ≅
-      (R(a)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ (Spec (.of k))),
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a).counit.app
+      (R(a)^![Λ]).obj (constantComplex Λ (Spec (.of k))),
+      (rightDerivedUpperShriekAdjunction Λ a).counit.app
           (constantComplex Λ (Spec (.of k))) =
         (R(a)_![ModuleCat.{u + 1} Λ]).map γ.inv ≫ smoothPurityTrace Λ d a γ := by
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) a (𝟙 _)

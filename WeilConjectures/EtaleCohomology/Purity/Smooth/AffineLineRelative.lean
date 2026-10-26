@@ -360,7 +360,7 @@ end Unit
 section Localization
 
 variable {X Y Z U : Scheme.{u}} (p : X ⟶ Y) (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
-  [HasCompactification i] [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsOpenImmersion j]
+  [HasCompactification i] [Finite Λ] [IsOpenImmersion j]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
   (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
 
@@ -381,7 +381,7 @@ lemma localizationTriangleLowerStar_mem_distTriang :
 `R(i ≫ p)_* Ri^! L`. -/
 noncomputable def localizationTriangleLowerStarObj₁Iso :
     (localizationTriangleLowerStar Λ p i j hij L).obj₁ ≅
-      (R((i ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L) :=
+      (R((i ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj L) :=
   (R((p)_*[ModuleCat.{u + 1} Λ])).mapIso
       ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ i).app _) ≪≫
     (rightDerivedLowerStarComp _ i p).app _
@@ -405,7 +405,7 @@ theorem nonempty_iso_homology_of_localizationTriangleLowerStar (n : ℤ)
     Nonempty ((_root_.DerivedCategory.homologyFunctor _ n).obj
         ((R((j ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
       (_root_.DerivedCategory.homologyFunctor _ (n + 1)).obj
-        ((R((i ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))) := by
+        ((R((i ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj L))) := by
   let T := localizationTriangleLowerStar Λ p i j hij L
   have hT := localizationTriangleLowerStar_mem_distTriang Λ p i j hij L
   let δ := _root_.DerivedCategory.HomologySequence.δ T n (n + 1) rfl

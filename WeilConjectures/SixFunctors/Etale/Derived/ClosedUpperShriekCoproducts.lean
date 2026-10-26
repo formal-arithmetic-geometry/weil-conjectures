@@ -47,6 +47,20 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {Z U X : Scheme.{u}} (i : Z ⟶ X) [I
   [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
+/-- The closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` for an arbitrary coefficient
+ring `Λ`, as the supported localization triangle of the recollement
+(`CategoryTheory.Pretriangulated.Recollement.exists_distTriang_counit_unit`). For finite `Λ`
+this is `AlgebraicGeometry.Etale.exists_distTriang_closedSupport`. -/
+private lemma exists_distTriang_closedSupport_recollement
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃ w, Triangle.mk ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit.app K)
+      ((derivedUpperStarLowerStarAdjunction _ j).unit.app K) w ∈ distTriang _ :=
+  Recollement.exists_distTriang_counit_unit (derivedUpperStarLowerStarAdjunction _ j)
+    (derivedLowerStarClosedUpperShriekAdjunction i j hij)
+    (fullyFaithfulRightDerivedLowerStarOfIsClosedImmersion i)
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
+    (fun _ hK ↦ rightDerivedLowerStar_essImage_of_isZero i j hij hK) K
+
 variable [QuasiCompact j]
 
 include hij in
@@ -68,8 +82,8 @@ theorem isIso_sigmaComparison_rightDerivedFunctor_closedUpperShriek
   have : PreservesColimitsOfShape (Discrete J) F := adj.leftAdjoint_preservesColimits.1
   have hgi : Disjoint (Set.range j.base) (Set.range i.base) := hij ▸ disjoint_compl_right
   -- the closed-support triangles of the family and of its coproduct
-  choose w hw using fun t ↦ exists_distTriang_closedSupport i j hij (M t)
-  obtain ⟨w₀, hw₀⟩ := exists_distTriang_closedSupport i j hij (∐ M)
+  choose w hw using fun t ↦ exists_distTriang_closedSupport_recollement i j hij (M t)
+  obtain ⟨w₀, hw₀⟩ := exists_distTriang_closedSupport_recollement i j hij (∐ M)
   let T (t : J) := Triangle.mk (adj.counit.app (M t)) (adj'.unit.app (M t)) (w t)
   have hcp := coproductTriangle_distinguished T hw
   let c := sigmaComparison (L ⋙ R) M
@@ -150,7 +164,7 @@ theorem exists_isLE_rightDerivedFunctor_closedUpperShriek
   let F := ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor
   let G := (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor
   let adj : F ⊣ G := derivedLowerStarClosedUpperShriekAdjunction i j hij
-  obtain ⟨w, hw⟩ := exists_distTriang_closedSupport i j hij K
+  obtain ⟨w, hw⟩ := exists_distTriang_closedSupport_recollement i j hij K
   have := ((j)^*[ModuleCat.{u + 1} Λ]).isLE_mapDerivedCategory_obj K n
   have hL : ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K).IsLE n :=
     DerivedCategory.TStructure.t.isLE_of_iso

@@ -56,11 +56,11 @@ theorem upperStar_map_exceptionalProjection_comp_counit (f : X ⟶ Y) [IsProper 
     (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ f).map
-        (boundedConstructibleExceptionalProjectionMorphism _ ℓ f T M) ≫
+        (boundedConstructibleExceptionalProjectionMorphism ℓ f T M) ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app
         (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj M) =
     Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f)
-        ((boundedConstructibleLowerShriek _ ℓ f).obj T) M ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj T) M ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app T ▷
         (boundedConstructibleUpperStar _ ℓ f).obj M :=
   sorry
@@ -74,14 +74,14 @@ composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`). -/
 theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
     (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ (f ≫ g) T M ≫
-        (boundedConstructibleLowerShriek _ ℓ (f ≫ g)).map
+    boundedConstructibleExceptionalProjectionMorphism ℓ (f ≫ g) T M ≫
+        (boundedConstructibleLowerShriek ℓ (f ≫ g)).map
           (T ◁ (boundedConstructibleUpperStarComp _ ℓ f g).hom.app M) =
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.app T ▷ M ≫
-        boundedConstructibleExceptionalProjectionMorphism _ ℓ g
-          ((boundedConstructibleLowerShriek _ ℓ f).obj T) M ≫
-        (boundedConstructibleLowerShriek _ ℓ g).map
-          (boundedConstructibleExceptionalProjectionMorphism _ ℓ f T
+        boundedConstructibleExceptionalProjectionMorphism ℓ g
+          ((boundedConstructibleLowerShriek ℓ f).obj T) M ≫
+        (boundedConstructibleLowerShriek ℓ g).map
+          (boundedConstructibleExceptionalProjectionMorphism ℓ f T
             ((boundedConstructibleUpperStar _ ℓ g).obj M)) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app
           (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj
@@ -93,12 +93,12 @@ variable (X) in
 `prop-sf-pf-coherence`, the identity for `f = id`), read through the identity isomorphisms
 `R(𝟙)_! ≅ R(𝟙)_* ≅ 𝟭` and `L(𝟙)^* ≅ 𝟭`. -/
 theorem exceptionalProjection_id (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ (𝟙 X) T M ≫
+    boundedConstructibleExceptionalProjectionMorphism ℓ (𝟙 X) T M ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).hom.app _ ≫
-        (boundedConstructibleLowerStarId _ ℓ X).hom.app _ ≫
+        (boundedConstructibleLowerStarId ℓ X).hom.app _ ≫
         T ◁ (boundedConstructibleUpperStarId _ ℓ X).hom.app M =
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).hom.app T ≫
-        (boundedConstructibleLowerStarId _ ℓ X).hom.app T) ▷ M :=
+        (boundedConstructibleLowerStarId ℓ X).hom.app T) ▷ M :=
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

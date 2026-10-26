@@ -52,19 +52,19 @@ isomorphism. -/
 instance isIso_projectionMorphism_boundedConstructible_padicAlgCl (p : X ⟶ Y) [IsProper p.left]
     (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       p).projectionMorphism A B) := by
   have h := Adjunction.ι_map_projectionMorphism_restrictFullyFaithful
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p.left)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ p K.obj K.property) A B
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ p K) A B
   have : IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
       p.left).projectionMorphism A.obj B.obj) :=
     (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj ℓ (X' := X) (Y' := Y)
       p).2.2 A.obj B.obj
       A.property B.property
   have : IsIso ((boundedConstructible _).ι.map
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         p).projectionMorphism A B)) := by
     erw [h]
     infer_instance

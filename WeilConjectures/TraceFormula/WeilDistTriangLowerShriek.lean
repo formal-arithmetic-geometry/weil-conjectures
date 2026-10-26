@@ -49,15 +49,15 @@ lemma connectingOfIso_boundedConstructibleLowerShriek (f : X ⟶ Y)
         ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           X.left)).ι.obj a)) :
     haveI := HasCompactification.of_over f
-    connectingOfIso (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    connectingOfIso (boundedConstructibleLowerShriek ℓ f)
         (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
         (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
         (R(f.left)_!⟦Profinite.padicAlgClRingObj ℓ⟧)
-        (boundedConstructibleLowerShriekCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f) δ =
+        (boundedConstructibleLowerShriekCompatibility ℓ f) δ =
       Functor.ShiftLift.connecting
         (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
         (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) δ := by
+        (boundedConstructibleLowerShriek ℓ f) δ := by
   have := HasCompactification.of_over f
   unfold connectingOfIso Functor.ShiftLift.connecting
   -- the components agree definitionally; comparing them one by one avoids unfolding the functors
@@ -72,7 +72,7 @@ lemma weilLowerShriek_obj_str_hom {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.ho
     (K : WeilBoundedConstructible ℓ eX.hom) :
     ((weilLowerShriek ℓ eX eY hf).obj K).str.hom =
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (weilFrobeniusSquare eX eY hf)).app
-        K.carrier ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        K.carrier ≫ (boundedConstructibleLowerShriek ℓ f).map
           K.str.hom := by
   rw [weilLowerShriek_obj_str]
   rfl
@@ -98,11 +98,11 @@ lemma weilLowerShriek_str_comp_connecting {f : X ⟶ Y} (hf : eX.hom ≫ f = f �
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι.map
         ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (weilFrobeniusSquare eX eY hf)).app
           C.carrier ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map C.str.hom) ≫
+          (boundedConstructibleLowerShriek ℓ f).map C.str.hom) ≫
         Functor.ShiftLift.connecting
           (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
           (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) δ =
+          (boundedConstructibleLowerShriek ℓ f) δ =
       Functor.ShiftLift.connecting
           (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
           (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
@@ -110,12 +110,12 @@ lemma weilLowerShriek_str_comp_connecting {f : X ⟶ Y} (hf : eX.hom ≫ f = f �
           (Functor.ShiftLift.connecting
             (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
             (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
-            (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) δ) ≫
+            (boundedConstructibleLowerShriek ℓ f) δ) ≫
         (shiftFunctor _ (1 : ℤ)).map
           ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι.map
             ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
               (weilFrobeniusSquare eX eY hf)).app A.carrier ≫
-              (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+              (boundedConstructibleLowerShriek ℓ f).map
                 A.str.hom)) := by
   have hBC := (commConnecting_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
     (weilFrobeniusSquare eX eY hf)).comm δ
@@ -138,16 +138,16 @@ theorem WeilBoundedConstructible.IsDistTriang.weilLowerShriek_map {f : X ⟶ Y}
       ((weilLowerShriek ℓ eX eY hf).map b) := by
   obtain ⟨δ, hT, hφ⟩ := h
   have := HasCompactification.of_over f
-  refine ⟨connectingOfIso (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
+  refine ⟨connectingOfIso (boundedConstructibleLowerShriek ℓ f)
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
     (R(f.left)_!⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (boundedConstructibleLowerShriekCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f) δ,
-    distinguished_of_iso (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleLowerShriekCompatibility ℓ f) δ,
+    distinguished_of_iso (boundedConstructibleLowerShriek ℓ f)
       (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
       (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
       (R(f.left)_!⟦Profinite.padicAlgClRingObj ℓ⟧)
-      (boundedConstructibleLowerShriekCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f) hT, ?_⟩
+      (boundedConstructibleLowerShriekCompatibility ℓ f) hT, ?_⟩
   rw [weilLowerShriek_obj_str_hom, weilLowerShriek_obj_str_hom,
     connectingOfIso_boundedConstructibleLowerShriek]
   exact weilLowerShriek_str_comp_connecting ℓ eX eY hf δ hφ

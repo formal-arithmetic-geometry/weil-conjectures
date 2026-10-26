@@ -52,7 +52,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isOpenImmersion {U Y : S
     (j : U ⟶ Y) [IsOpenImmersion j] [QuasiCompact j] [HasCompactification j]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) U ((R(j)^![ModuleCat.{u + 1} Λ]).obj K) :=
+    boundedConstructible (ModuleCat.{u + 1} Λ) U ((R(j)^![Λ]).obj K) :=
   (boundedConstructible _ U).prop_of_iso
     ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm
     (hK.mapDerivedCategory_upperStar j)
@@ -65,7 +65,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_smoothOfRelativeDimensio
     [SmoothOfRelativeDimension d f]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+    boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ X := .of_hom f
   obtain ⟨L, _, hLs, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
@@ -89,7 +89,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion
     [HasInvertibleExponent Λ T] (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) T K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) Z ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+    boundedConstructible (ModuleCat.{u + 1} Λ) Z ((R(i)^![Λ]).obj K) := by
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace aT
   have : IsNoetherian T := { __ := LocallyOfFiniteType.isLocallyNoetherian aT }
   let V := openComplementOfIsClosedImmersion i
@@ -99,7 +99,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion
     simp [V, openComplementOfIsClosedImmersion]
   have hM := boundedConstructible_rightDerivedLowerStar_of_finite Λ (V.ι ≫ aT) aT V.ι rfl
     (boundedConstructible_leftDerivedUpperStar _ V.ι hK)
-  have hT := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i V.ι hij K
+  have hT := supportedLocalizationTriangle_mem_distTriang Λ i V.ι hij K
   have hNbc := (boundedConstructible (ModuleCat.{u + 1} Λ) T).ext_of_isTriangulatedClosed₂ _
     (Pretriangulated.inv_rot_of_distTriang _ hT) ((boundedConstructible _ T).le_shift (-1) _ hM) hK
   exact (boundedConstructible _ Z).prop_of_iso
@@ -116,7 +116,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
     boundedConstructible (ModuleCat.{u + 1} Λ) U
-      ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   let π := 𝔸(ULift.{u} (Fin n); V) ↘ V
@@ -147,7 +147,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
   have hc : c ≫ π ≫ v = ι ≫ W.ι ≫ π ≫ v := by
     rw [← Category.assoc ι, c.liftCoborder_ι]
   have heq : ∀ {g₁ g₂ : U ⟶ Y} [HasCompactification g₁] [HasCompactification g₂], g₁ = g₂ →
-      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+      Nonempty (R(g₁)^![Λ] ≅ R(g₂)^![Λ]) := by
     intro g₁ g₂ _ _ h
     subst h
     exact ⟨Iso.refl _⟩
@@ -168,7 +168,7 @@ theorem boundedConstructible_rightDerivedUpperShriek {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+    boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
@@ -219,7 +219,7 @@ theorem boundedConstructible_rightDerivedUpperShriek {X Y : Scheme.{u}}
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U x : X.Opens).ι f
   have heq : ∀ {g₁ g₂ : ((U x : X.Opens) : Scheme.{u}) ⟶ Y} [HasCompactification g₁]
       [HasCompactification g₂], g₁ = g₂ →
-      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+      Nonempty (R(g₁)^![Λ] ≅ R(g₂)^![Λ]) := by
     intro g₁ g₂ _ _ h
     subst h
     exact ⟨Iso.refl _⟩

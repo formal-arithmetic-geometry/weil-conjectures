@@ -75,15 +75,15 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_comp_map_eqToHom
     (sq₂ : IsPullback g'₂ f' f g₂) (h₁ : g'₁ = g'₂) (h₂ : g₁ = g₂)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+        (boundedConstructibleLowerShriek ℓ f').map
           (eqToHom (by rw [h₁]) :
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'₁).obj K ⟶
               (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'₂).obj K) =
       (eqToHom (by rw [h₂]) :
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g₁).obj
-              ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ⟶
+              ((boundedConstructibleLowerShriek ℓ f).obj K) ⟶
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g₂).obj
-              ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K)) ≫
+              ((boundedConstructibleLowerShriek ℓ f).obj K)) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app K := by
   subst h₁ h₂
   simp
@@ -100,10 +100,10 @@ lemma weilUpperStarLowerShriekIso_comm (M : Dᵇc(X.left)⟦Profinite.padicAlgCl
         ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app M) ≫
       (weilLowerShriekComparison ℓ eX' eY' hf').hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj M) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+        (boundedConstructibleLowerShriek ℓ f').map
           ((weilUpperStarComparison ℓ eX'.hom eX.hom g' hg').hom.app M) =
     (weilUpperStarComparison ℓ eY'.hom eY.hom g hg).hom.app
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M) ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj M) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
           ((weilLowerShriekComparison ℓ eX eY hf).hom.app M) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
@@ -118,16 +118,16 @@ lemma weilUpperStarLowerShriekIso_comm (M : Dᵇc(X.left)⟦Profinite.padicAlgCl
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
         (weilFrobeniusSquare eX' eY' hf')).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj M) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+      (boundedConstructibleLowerShriek ℓ f').map
         ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ eX'.hom g').inv.app
           M) =
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ eY'.hom g).inv.app
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M) ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj M) ≫
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
         ((weilFrobeniusSquare eX' eY' hf').paste_horiz sq)).app M := by
     rw [h₁, Iso.inv_hom_id_app_assoc]
   have e₂ : (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g eY.hom).hom.app
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M) ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj M) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
         ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
           (weilFrobeniusSquare eX eY hf)).app M) ≫
@@ -135,7 +135,7 @@ lemma weilUpperStarLowerShriekIso_comm (M : Dᵇc(X.left)⟦Profinite.padicAlgCl
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom).obj M) =
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
         (sq.paste_horiz (weilFrobeniusSquare eX eY hf))).app M ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+      (boundedConstructibleLowerShriek ℓ f').map
         ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g' eX.hom).hom.app
           M) := by
     rw [h₂]

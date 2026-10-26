@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible
 
 /-!
 # Constructible module objects with finite coefficients are of étale origin
@@ -22,6 +22,12 @@ bounded constructible complex `K` of module objects over `Λ_X = p_X^* T̲` on t
 This is the reading on the étale site of the finite coefficient categories of blueprint
 `sk-def-sf-categories`, in the form needed for blueprint `det-prop-scalar-six-pullback` (1) for
 `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
+
+The proof: the cohomology sheaves of `K` are constructible module objects, so the corresponding
+sheaves of `T`-modules are constructible in the intrinsic sense
+(`ProEtale.isConstructible_finiteCoefficientModEquivalence_functor_obj`), and an intrinsically
+bounded constructible pro-étale complex is of étale origin
+(`ProEtale.DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic`).
 
 ## Main statements
 
@@ -51,7 +57,7 @@ complex of étale origin: `D(ν^*) K'` for a bounded constructible complex `K'` 
 `T`-modules.
 
 This is blueprint `lem-sf-proetale-constructible-origin` (section `sec-proetale-coefficients`,
-`sk-prop-sf-comparison`), proved there; Bhatt–Scholze, *The pro-étale topology for schemes*,
+`sk-prop-sf-comparison`); Bhatt–Scholze, *The pro-étale topology for schemes*,
 Corollary 5.1.6 and Section 6.8. -/
 theorem isEtaleOrigin_of_isConstructible
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -59,6 +65,11 @@ theorem isEtaleOrigin_of_isConstructible
     (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) X) K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
       ((finiteCoefficientDerivedEquivalence X T).functor.obj K) :=
-  sorry
+  DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic
+    ⟨(finiteCoefficientModEquivalence X T).functor.bounded_mapDerivedCategory_obj hK.1, fun n ↦
+      isConstructible_of_iso
+        (((finiteCoefficientModEquivalence X T).functor.mapDerivedCategoryHomologyFunctorIso
+          n).app K)
+        (isConstructible_finiteCoefficientModEquivalence_functor_obj T (hK.2 n))⟩
 
 end AlgebraicGeometry.ProEtale

@@ -359,7 +359,7 @@ cone of the section reduces the general case to the standard pair `(𝔸^d_B →
 noncomputable def sectionInvariant [Finite Λ] {V B : Scheme.{u}} (g : V ⟶ B)
     [HasCompactification g]
     (s : B ⟶ V) : DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g)
+  (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g)
 
 end Etale
 

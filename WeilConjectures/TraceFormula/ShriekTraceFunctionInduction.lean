@@ -96,7 +96,7 @@ theorem shriekTraceFunctionAt_of_isEmpty [IsEmpty X.left] {f : X ⟶ Y}
   rw [finsum_of_isEmpty, weilStalkTraceAlternatingSum]
   refine finsum_eq_zero_of_forall_eq_zero fun j ↦ ?_
   have hK : IsZero ((weilLowerShriek ℓ eX eY hf).obj K).carrier :=
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map_isZero
+    (boundedConstructibleLowerShriek ℓ f).map_isZero
       (IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _
         (isZero_derivedCategory_proEt_of_isEmpty _ K.carrier.obj))
   suffices h : weilSheafStalkTrace ℓ (n + 1) y.1 y.2.2

@@ -72,8 +72,8 @@ is an isomorphism. It is the inverse of the exchange isomorphism
 `Ex_!`. In the diagrammatic order of composition of functors used here, it is
 `Rg_* ⋙ Rf^! ≅ Rf'^! ⋙ Rg'_*`. -/
 noncomputable def rightDerivedUpperShriekDualBaseChangeIso (sq : IsPullback g' f' f g) :
-    R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![ModuleCat.{u + 1} Λ] ≅
-      R(f')^![ModuleCat.{u + 1} Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
+    R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] ≅
+      R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
   have := isIso_rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq
   (asIso (rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq)).symm
 
