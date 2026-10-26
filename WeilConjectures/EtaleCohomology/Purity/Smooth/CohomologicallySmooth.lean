@@ -111,7 +111,7 @@ purity conventions (`AlgebraicGeometry.Etale.tateTwist`), the categories are tho
 structure IsCohomologicallySmooth {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     Prop where
   isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f)
+    DerivedCategory.isInvertible Λ X (dualizingComplex Λ f)
   isIso_dualizingComplexTensorMap
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
@@ -128,8 +128,8 @@ theorem IsCohomologicallySmooth.nonempty_iso_rightDerivedUpperShriek_obj {X Y : 
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
+        (dualizingComplex Λ f)).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+      (R(f)^![Λ]).obj K) :=
   have := hf.isIso_dualizingComplexTensorMap K hK
   ⟨asIso (dualizingComplexTensorMap Λ f K)⟩
 
@@ -152,14 +152,14 @@ composite is given as a morphism `h` with `f ≫ g = h`. -/
 theorem nonempty_iso_dualizingComplex_comp_of_isInvertible {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) [HasCompactification f] [HasCompactification g]
     [HasCompactification h] [QuasiCompact h]
-    (hg : DerivedCategory.isInvertible Λ Y (dualizingComplex (ModuleCat.{u + 1} Λ) g)) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g))) := by
+    (hg : DerivedCategory.isInvertible Λ Y (dualizingComplex Λ g)) :
+    Nonempty (dualizingComplex Λ h ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ f)).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g))) := by
   subst w
   obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f g
   obtain ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hg
-  exact ⟨c.app _ ≪≫ (R(f)^![ModuleCat.{u + 1} Λ]).mapIso (derivedTensorLeftUnitor _ Y _).symm ≪≫
+  exact ⟨c.app _ ≪≫ (R(f)^![Λ]).mapIso (derivedTensorLeftUnitor _ Y _).symm ≪≫
     (derivedTensorRightCompRightDerivedUpperShriekIso Λ f _ M e e').app (𝟙_ _)⟩
 
 variable {Λ}
@@ -171,9 +171,9 @@ For cohomologically smooth `g : Y ⟶ Z` and any `f : X ⟶ Y` admitting a compa
 theorem IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} [HasCompactification f] [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (hg : IsCohomologicallySmooth Λ g) :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g))) :=
+    Nonempty (dualizingComplex Λ (f ≫ g) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ f)).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g))) :=
   nonempty_iso_dualizingComplex_comp_of_isInvertible Λ f g _ rfl hg.isInvertible_dualizingComplex
 
 /-- Blueprint `lem-pur-co-smooth-composition`: Composition.
@@ -185,7 +185,7 @@ theorem IsCohomologicallySmooth.isInvertible_dualizingComplex_comp {X Y Z : Sche
     {f : X ⟶ Y} {g : Y ⟶ Z} [HasCompactification f] [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (hf : IsCohomologicallySmooth Λ f)
     (hg : IsCohomologicallySmooth Λ g) :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g)) := by
+    DerivedCategory.isInvertible Λ X (dualizingComplex Λ (f ≫ g)) := by
   obtain ⟨e⟩ := hg.nonempty_iso_dualizingComplex_comp (f := f)
   exact .of_iso e.symm (hf.isInvertible_dualizingComplex.derivedTensor
     (hg.isInvertible_dualizingComplex.leftDerivedUpperStar f))
@@ -283,8 +283,8 @@ theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X
     {u : X' ⟶ X} (sq : IsPullback u f' f v) [HasCompactification f'] [QuasiCompact f']
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
-      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+    Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![Λ]).obj K) ≅
+      (R(f')^![Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
   exact ⟨e.app K⟩
 
@@ -318,9 +318,9 @@ theorem nonempty_iso_dualizingComplex_comp_of_smoothOfRelativeDimension {X Y Z :
     (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (e : ℕ) [SmoothOfRelativeDimension e g]
     [HasInvertibleExponent Λ Y] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g))) :=
+    Nonempty (dualizingComplex Λ (f ≫ g) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex Λ f)).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g))) :=
   nonempty_iso_dualizingComplex_comp_of_isInvertible Λ f g _ rfl
     (isInvertible_dualizingComplex Λ (d := e) g)
 
@@ -331,11 +331,11 @@ exceptional inverse image is the pullback, `Ru^! ≅ Lu^*`: this is the étale l
 `Lu^* R(𝟙 X)^! ≅ Ru^!` of `lem-amb-etale-adjoint-locality`, with `R(𝟙 X)^! ≅ 𝟭`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [IsSeparated u] [QuasiCompact u] [HasCompactification u] :
-    Nonempty (R(u)^![ModuleCat.{u + 1} Λ] ≅ L((u)^*[ModuleCat.{u + 1} Λ])) := by
+    Nonempty (R(u)^![Λ] ≅ L((u)^*[ModuleCat.{u + 1} Λ])) := by
   obtain ⟨ι⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale Λ u
     (𝟙 X) u (Category.comp_id u)
   exact ⟨ι.symm ≪≫
-    Functor.isoWhiskerRight (rightDerivedUpperShriekIdIso (ModuleCat.{u + 1} Λ) X) _ ≪≫
+    Functor.isoWhiskerRight (rightDerivedUpperShriekIdIso Λ X) _ ≪≫
     Functor.leftUnitor _⟩
 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.

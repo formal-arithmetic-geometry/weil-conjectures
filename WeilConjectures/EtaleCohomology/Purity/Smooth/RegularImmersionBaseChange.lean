@@ -269,7 +269,7 @@ theorem restrictSupportedClass_fundamentalClass_of_flat (aX : X ⟶ Spec (.of k)
     (hZ' : ∀ z : Z', IsRegularLocalRing (Z'.presheaf.stalk z)) :
     haveI := IsRegularImmersion.of_isPullback c hg
     haveI : HasInvertibleExponent Λ X' := .of_hom e
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e c)
         (fundamentalClass Λ c i aX hZ) = fundamentalClass Λ c i' (e ≫ aX) hZ' := by
   have := IsRegularImmersion.of_isPullback c hg
@@ -333,7 +333,7 @@ theorem restrictSupportedClass_fundamentalClass_of_smooth (aX : X ⟶ Spec (.of 
     [Smooth e] (i' : Z' ⟶ X') (g : Z' ⟶ Z) (hg : IsPullback g i' i e) :
     haveI := IsRegularImmersion.of_isPullback c hg
     haveI : HasInvertibleExponent Λ X' := .of_hom e
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e c)
         (fundamentalClass Λ c i aX hZ) = fundamentalClass Λ c i' (e ≫ aX)
           (haveI := IsRegularImmersion.smooth_comp c i aX hZ

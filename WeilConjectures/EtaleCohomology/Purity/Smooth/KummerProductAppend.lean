@@ -265,24 +265,24 @@ theorem cupWithSupportsTateObject_assoc (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) 
     (h' : Set.range i.base = Set.range i₁.base ∩ Set.range i₂₃.base) {m₁ m₂ m₃ : ℤ}
     (hμ : ShiftTateObjectAddIsoAssoc Λ U m₁ m₂ m₃)
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m₁)⟦2 * m₁⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m₁)⟦2 * m₁⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m₂)⟦2 * m₂⟧)))
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m₂)⟦2 * m₂⟧)))
     (γ : constantComplex Λ U ⟶ (R(i₃)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₃)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m₃)⟦2 * m₃⟧))) :
+      ((R(i₃)^![Λ]).obj ((tateObject Λ U m₃)⟦2 * m₃⟧))) :
     cupWithSupportsTateObject Λ i₁₂ i₃ i h (cupWithSupportsTateObject Λ i₁ i₂ i₁₂ h₁₂ α β) γ =
       cupWithSupportsTateObject Λ i₁ i₂₃ i h' α (cupWithSupportsTateObject Λ i₂ i₃ i₂₃ h₂₃ β γ) ≫
         eqToHom (by rw [add_assoc]) := by
   unfold ShiftTateObjectAddIsoAssoc at hμ
-  have e₁ := cupWithSupports_comp_map (ModuleCat.{u + 1} Λ) i₁₂ i₃ i h
+  have e₁ := cupWithSupports_comp_map Λ i₁₂ i₃ i h
     (constantComplexDiagonal Λ U)
     (cupWithSupports _ i₁ i₂ i₁₂ h₁₂ (constantComplexDiagonal Λ U) α β) γ
     (shiftTateObjectAddIso Λ U m₁ m₂).hom (𝟙 _)
-  have e₂ := cupWithSupports_comp_map (ModuleCat.{u + 1} Λ) i₁ i₂₃ i h'
+  have e₂ := cupWithSupports_comp_map Λ i₁ i₂₃ i h'
     (constantComplexDiagonal Λ U) α
     (cupWithSupports _ i₂ i₃ i₂₃ h₂₃ (constantComplexDiagonal Λ U) β γ)
     (𝟙 _) (shiftTateObjectAddIso Λ U m₂ m₃).hom
-  have e₃ := cupWithSupports_assoc (ModuleCat.{u + 1} Λ) i₁ i₂ i₃ i₁₂ i₂₃ i h₁₂ h₂₃ h h'
+  have e₃ := cupWithSupports_assoc Λ i₁ i₂ i₃ i₁₂ i₂₃ i h₁₂ h₂₃ h h'
     (constantComplexDiagonal Λ U) (constantComplexDiagonal_coassoc Λ U) α β γ
   simp only [CategoryTheory.Functor.map_id, Category.comp_id] at e₁ e₂
   simp only [cupWithSupportsTateObject]
@@ -296,9 +296,9 @@ lemma cupWithSupportsTateObject_zeroLocusSubschemeι_congr (i₁ : Z₁ ⟶ U) (
     (h' : Set.range (U.zeroLocusSubschemeι t).base = Set.range i₁.base ∩ Set.range i₂.base)
     {m m' : ℤ}
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
     cupWithSupportsTateObject Λ i₁ i₂ (U.zeroLocusSubschemeι s) h α β =
       cupWithSupportsTateObject Λ i₁ i₂ (U.zeroLocusSubschemeι t) h' α β ≫
         eqToHom (by subst hst; rfl) := by
@@ -311,9 +311,9 @@ lemma cupWithSupportsTateObject_eqToHom_left (i₁ : Z₁ ⟶ U) (i₂ : Z₂ �
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base) {m₁ m₁' m' : ℤ}
     (hm : m₁ = m₁')
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m₁)⟦2 * m₁⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m₁)⟦2 * m₁⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m')⟦2 * m'⟧))) :
     cupWithSupportsTateObject Λ i₁ i₂ i h (m := m₁') (α ≫ eqToHom (by rw [hm])) β =
       cupWithSupportsTateObject Λ i₁ i₂ i h α β ≫ eqToHom (by rw [hm]) := by
   subst hm
@@ -325,9 +325,9 @@ lemma cupWithSupportsTateObject_eqToHom_right (i₁ : Z₁ ⟶ U) (i₂ : Z₂ �
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base) {m m₂ m₂' : ℤ}
     (hm : m₂ = m₂')
     (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
+      ((R(i₁)^![Λ]).obj ((tateObject Λ U m)⟦2 * m⟧)))
     (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m₂)⟦2 * m₂⟧))) :
+      ((R(i₂)^![Λ]).obj ((tateObject Λ U m₂)⟦2 * m₂⟧))) :
     cupWithSupportsTateObject Λ i₁ i₂ i h (m' := m₂') α (β ≫ eqToHom (by rw [hm])) =
       cupWithSupportsTateObject Λ i₁ i₂ i h α β ≫ eqToHom (by rw [hm]) := by
   subst hm
@@ -344,7 +344,7 @@ theorem cupWithSupportsTateObject_kummerBoundaryProduct_zero {Z : Scheme.{u}}
     (h : Set.range i.base =
       Set.range (U.zeroLocusSubschemeι (Set.range f)).base ∩ Set.range i.base) {m : ℤ}
     (β : constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * m⟧))) :
+      ((R(i)^![Λ]).obj ((tateObject Λ U m)⟦2 * m⟧))) :
     cupWithSupportsTateObject Λ (U.zeroLocusSubschemeι (Set.range f)) i i h
         (kummerBoundaryProduct Λ f) β =
       β ≫ eqToHom (by rw [Nat.cast_zero, zero_add]) := by
@@ -356,7 +356,7 @@ theorem cupWithSupportsTateObject_kummerBoundaryProduct_zero {Z : Scheme.{u}}
       eqToHom (by rw [Nat.cast_zero, zero_add]) :=
     shiftTateObjectAddIso_zero_left Λ U m
   rw [kummerBoundaryProduct, cupWithSupportsTateObject,
-    cupWithSupports_liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) _ i _ h
+    cupWithSupports_liftCounitOfRangeEqUniv Λ _ i _ h
       (constantComplexDiagonal Λ U) (constantComplexDiagonal_comp_derivedTensorLeftUnitor_hom Λ U),
     Category.assoc, ← Functor.map_comp, ← Functor.map_comp, Category.assoc, hunit]
   simp only [eqToHom_map]
@@ -368,7 +368,7 @@ lemma kummerBoundaryProduct_cons {n : ℕ} (x : Γ(U, ⊤)) (f : Fin n → Γ(U,
           (U.zeroLocusSubschemeι (Set.range f))
           (U.zeroLocusSubschemeι (Set.range (Fin.cons x f : Fin (n + 1) → Γ(U, ⊤))))
           (by rw [Fin.range_cons, range_zeroLocusSubschemeι_insert]) (m := 1)
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2 (kummerBoundary Λ x))
+          (shiftSupportedClass Λ _ 2 (kummerBoundary Λ x))
           (kummerBoundaryProduct Λ f) ≫
         eqToHom (by rw [Nat.cast_succ, add_comm (1 : ℤ)]) := by
   rw [kummerBoundaryProduct]

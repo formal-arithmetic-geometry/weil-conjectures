@@ -63,24 +63,27 @@ lemma isIso_sectionsWithSupportTriangle_obj_mor₁ {Z X : Scheme.{u}} (i : Z ⟶
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- For a closed immersion `i`, the exceptional inverse image `Ri^!` of the counit
 `Ri_! Ri^! L ⟶ L` is an isomorphism: by a triangle identity it is the inverse of the unit,
 which is an isomorphism as `Ri_!` is fully faithful. -/
 lemma isIso_rightDerivedUpperShriek_map_counit {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso ((R(i)^![A]).map ((rightDerivedUpperShriekAdjunction A i).counit.app L)) :=
-  have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i ((R(i)^![A]).obj L)
-  isIso_of_hom_comp_eq_id _ ((rightDerivedUpperShriekAdjunction A i).right_triangle_components L)
+    [IsClosedImmersion i]
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((R(i)^![Λ]).map ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)) :=
+  have := isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i ((R(i)^![Λ]).obj L)
+  isIso_of_hom_comp_eq_id _ ((rightDerivedUpperShriekAdjunction Λ i).right_triangle_components L)
 
 /-- For a closed immersion `i : Z ⟶ X`, the sections with support in `Z` of the counit
 `Ri_! Ri^! L ⟶ L` form an isomorphism `RΓ_Z(X, Ri_! Ri^! L) ≅ RΓ_Z(X, L)`. -/
 lemma isIso_rightDerivedSectionsWithSupport_map_counit {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso ((rightDerivedSectionsWithSupport A i).map
-      ((rightDerivedUpperShriekAdjunction A i).counit.app L)) := by
-  rw [NatIso.isIso_map_iff (rightDerivedSectionsWithSupportIso A i)]
-  have := isIso_rightDerivedUpperShriek_map_counit A i L
+    [IsClosedImmersion i]
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) i).map
+      ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)) := by
+  rw [NatIso.isIso_map_iff (rightDerivedSectionsWithSupportIso Λ i)]
+  have := isIso_rightDerivedUpperShriek_map_counit Λ i L
   dsimp
   infer_instance
 
@@ -89,15 +92,17 @@ lemma isIso_rightDerivedSectionsWithSupport_map_counit {Z X : Scheme.{u}} (i : Z
 `RΓ(X, Ri_! B) ≅ RΓ(Z, B)`. -/
 noncomputable def rightDerivedLowerShriekCompSectionsWithSupportIso {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
-    R(i)_![A] ⋙ rightDerivedSectionsWithSupport A i ≅ rightDerivedGlobalSections A Z :=
-  have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i
-  have : IsIso (rightDerivedUpperShriekAdjunction A i).unit := NatIso.isIso_of_isIso_app _
-  Functor.isoWhiskerLeft _ (rightDerivedSectionsWithSupportIso A i) ≪≫
+    R(i)_![ModuleCat.{u + 1} Λ] ⋙ rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) i ≅
+      rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Z :=
+  have := isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ i).unit := NatIso.isIso_of_isIso_app _
+  Functor.isoWhiskerLeft _ (rightDerivedSectionsWithSupportIso Λ i) ≪≫
     (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (asIso (rightDerivedUpperShriekAdjunction A i).unit).symm _ ≪≫
+    Functor.isoWhiskerRight (asIso (rightDerivedUpperShriekAdjunction Λ i).unit).symm _ ≪≫
     Functor.leftUnitor _ ≪≫
-    Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar A i) _ ≪≫
-    rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A i
+    Functor.isoWhiskerRight
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i) _ ≪≫
+    rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) i
 
 /-- For a closed immersion `i : Z ⟶ X` and a morphism `h : W ⟶ X` landing in the open complement
 of `Z`, the pullback `h^* Ri_! B` vanishes. -/

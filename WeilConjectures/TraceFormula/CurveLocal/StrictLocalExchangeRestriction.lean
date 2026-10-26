@@ -54,8 +54,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {S C X F : Scheme.{u}} {c
 lemma exchangeRestriction_naturality (sq : IsPullback ι d c Δ)
     {P P' : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (f : P ⟶ P') :
     exchangeRestriction Λ sq P ≫
-        (R(d)^![ModuleCat.{u + 1} Λ]).map ((L((Δ)^*[ModuleCat.{u + 1} Λ])).map f) =
-      (L((ι)^*[ModuleCat.{u + 1} Λ])).map ((R(c)^![ModuleCat.{u + 1} Λ]).map f) ≫
+        (R(d)^![Λ]).map ((L((Δ)^*[ModuleCat.{u + 1} Λ])).map f) =
+      (L((ι)^*[ModuleCat.{u + 1} Λ])).map ((R(c)^![Λ]).map f) ≫
         exchangeRestriction Λ sq P' :=
   ((mateEquiv _ _ (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).natTrans.naturality
     f).symm
@@ -102,11 +102,11 @@ noncomputable def diagonalPullbackIso :
 /-- The derived lower shriek `Ry_B_!` along the closed immersion `y_B : Y ⟶ B` is full. -/
 instance full_rightDerivedLowerShriek_yB : (R(M.yB)_![ModuleCat.{u + 1} Λ]).Full :=
   have (Q : DerivedCategory (Sheaf M.Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-      IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) M.yB).unit.app Q) :=
-    isIso_rightDerivedUpperShriekAdjunction_unit_app _ M.yB Q
-  have : IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) M.yB).unit :=
+      IsIso ((rightDerivedUpperShriekAdjunction Λ M.yB).unit.app Q) :=
+    isIso_rightDerivedUpperShriekAdjunction_unit_app Λ M.yB Q
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ M.yB).unit :=
     NatIso.isIso_of_isIso_app _
-  ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) M.yB).fullyFaithfulLOfIsIsoUnit).full
+  ((rightDerivedUpperShriekAdjunction Λ M.yB).fullyFaithfulLOfIsIsoUnit).full
 
 /-- **The exchange restriction pulled back to the strictly local model**: `Lτ_Y^*` of the étale
 exchange restriction `ρ_P` of the fixed square, followed by the base change map
@@ -116,19 +116,19 @@ exchange restriction of the square `Y = G ×_T B` at `Lτ^* P`
 theorem exists_map_exchangeRestriction_τY
     (P : DerivedCategory (Sheaf (pullback M.f M.f).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ∃ s : (L((M.τY hsq)^*[ModuleCat.{u + 1} Λ])).obj ((L((ι)^*[ModuleCat.{u + 1} Λ])).obj
-          ((R(M.graph)^![ModuleCat.{u + 1} Λ]).obj P)) ⟶
-        (L((M.ιY)^*[ModuleCat.{u + 1} Λ])).obj ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj
+          ((R(M.graph)^![Λ]).obj P)) ⟶
+        (L((M.ιY)^*[ModuleCat.{u + 1} Λ])).obj ((R(M.a)^![Λ]).obj
           ((L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj P)),
       (L((M.τY hsq)^*[ModuleCat.{u + 1} Λ])).map (exchangeRestriction Λ hsq P) ≫
           (rightDerivedUpperShriekBaseChangeMap Λ (M.isPullback_τY hsq)).app
             ((L((pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ])).obj P) ≫
-          (R(M.yB)^![ModuleCat.{u + 1} Λ]).map ((M.diagonalPullbackIso Λ).hom.app P) =
+          (R(M.yB)^![Λ]).map ((M.diagonalPullbackIso Λ).hom.app P) =
         s ≫ exchangeRestriction Λ M.isPullback_ιY ((L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj P) :=
   Adjunction.exists_map_mateEquiv_app_comp_eq
-    (a := rightDerivedUpperShriekAdjunction _ M.graph) (g := rightDerivedUpperShriekAdjunction _ d)
+    (a := rightDerivedUpperShriekAdjunction Λ M.graph) (g := rightDerivedUpperShriekAdjunction Λ d)
     (ι := L((ι)^*[ModuleCat.{u + 1} Λ])) (Δ := L((pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ]))
-    (σ := lowerShriekBaseChangeIso Λ hsq) (a' := rightDerivedUpperShriekAdjunction _ M.a)
-    (g' := rightDerivedUpperShriekAdjunction _ M.yB) (ι' := L((M.ιY)^*[ModuleCat.{u + 1} Λ]))
+    (σ := lowerShriekBaseChangeIso Λ hsq) (a' := rightDerivedUpperShriekAdjunction Λ M.a)
+    (g' := rightDerivedUpperShriekAdjunction Λ M.yB) (ι' := L((M.ιY)^*[ModuleCat.{u + 1} Λ]))
     (Δ' := L((M.b)^*[ModuleCat.{u + 1} Λ])) (σ' := lowerShriekBaseChangeIso Λ M.isPullback_ιY)
     (T₂ := L((M.τ)^*[ModuleCat.{u + 1} Λ])) (TC := L((M.τG)^*[ModuleCat.{u + 1} Λ]))
     (TF := L((M.τY hsq)^*[ModuleCat.{u + 1} Λ])) (TX := L((M.τB)^*[ModuleCat.{u + 1} Λ]))

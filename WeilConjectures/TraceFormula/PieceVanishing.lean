@@ -82,15 +82,15 @@ the adjunction `Rp₁_! ⊣ Rp₁^!`. -/
 lemma eq_zero_of_externalProduct {T : Dᵇc((Y ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (h : ∀ ψ : (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
+    (h : ∀ ψ : (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj N ⊗ T) ⟶ L, ψ = 0)
-    (φ : T ⟶ externalProduct ℓ L (verdierDual ℓ (toPoint X) N)) : φ = 0 := by
+    (φ : T ⟶ externalProduct ℓ L (verdierDual ℓ N)) : φ = 0 := by
   let e : (T ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj N)).obj
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) ≃
-      ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) ≃
+      ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj N ⊗ T) ⟶ L) :=
     ((ihom.adjunction _).homEquiv _ _).symm.trans
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).homEquiv _ _).symm
+      ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : Y ⨯ X ⟶ Y)).homEquiv _ _).symm
   have key : φ ≫ kunnethVerdierMap ℓ L N = 0 := e.injective ((h _).trans (h _).symm)
   rwa [← cancel_mono (kunnethVerdierMap ℓ L N), zero_comp]
 
@@ -100,8 +100,8 @@ lemma eq_zero_of_isZero_upperStar {P : Over (Spec (.of k))} [LocallyOfFiniteType
     {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (hM : IsZero ((boundedConstructibleUpperStar _ ℓ x).obj M))
     {A : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (ψ : M ⟶ (boundedConstructibleLowerStar _ ℓ x).obj A) : ψ = 0 := by
-  apply ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).homEquiv _ _).symm.injective
+    (ψ : M ⟶ (boundedConstructibleLowerStar ℓ x).obj A) : ψ = 0 := by
+  apply ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).homEquiv _ _).symm.injective
   exact hM.eq_of_src _ _
 
 /-- `Lx^* Rp₁_! (W ⊗ Lp₁^* M) = 0` if `Lx^* M = 0`: the projection formula for `p₁` and the
@@ -112,11 +112,11 @@ lemma isZero_upperStar_lowerShriek_tensor {P : Over (Spec (.of k))} [LocallyOfFi
     {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (hM : IsZero ((boundedConstructibleUpperStar _ ℓ x).obj M)) :
     IsZero ((boundedConstructibleUpperStar _ ℓ x).obj
-      ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
+      ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
         (W ⊗ (boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj M))) :=
   (isZero_tensorObj_of_isZero_right _ hM).of_iso
     ((boundedConstructibleUpperStar _ ℓ x).mapIso
-        (asIso (boundedConstructibleExceptionalProjectionMorphism _ ℓ
+        (asIso (boundedConstructibleExceptionalProjectionMorphism ℓ
           (prod.fst : Y ⨯ X ⟶ Y) W M)).symm ≪≫
       (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ x) _ _).symm)
 
@@ -126,17 +126,17 @@ lemma isZero_upperStar_lowerShriek_tensor_shift {P : Over (Spec (.of k))}
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {T : Dᵇc((Y ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (h : IsZero ((boundedConstructibleUpperStar _ ℓ x).obj
-      ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
+      ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj N ⊗ T)))) :
     IsZero ((boundedConstructibleUpperStar _ ℓ x).obj
-      ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
+      ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj N ⊗ T⟦(1 : ℤ)⟧))) :=
   ((shiftFunctor _ (1 : ℤ)).map_isZero h).of_iso
     ((boundedConstructibleUpperStar _ ℓ x).mapIso
-        ((boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).mapIso
+        ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ X ⟶ Y)).mapIso
           ((((curriedTensor _).obj ((boundedConstructibleUpperStar _ ℓ
             (prod.snd : Y ⨯ X ⟶ X)).obj N)).commShiftIso (1 : ℤ)).app T) ≪≫
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          ((boundedConstructibleLowerShriek ℓ
             (prod.fst : Y ⨯ X ⟶ Y)).commShiftIso
             (1 : ℤ)).app _) ≪≫
       ((boundedConstructibleUpperStar _ ℓ x).commShiftIso (1 : ℤ)).app _)
@@ -158,23 +158,23 @@ include hjx
 /-- The restriction to `U` of the dual of the closed piece vanishes: `Lj^* D_X (Rx_* A) = 0`. -/
 lemma isZero_upperStar_verdierDual_lowerStar :
     IsZero ((boundedConstructibleUpperStar _ ℓ j).obj
-      (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A))) := by
+      (verdierDual ℓ ((boundedConstructibleLowerStar ℓ x).obj A))) := by
   have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) ℓ j ((boundedConstructibleLowerStar _ ℓ x).obj A)
+    ℓ j ((boundedConstructibleLowerStar ℓ x).obj A)
   exact (isZero_ihom_obj_of_isZero
-    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ j x hjx A) _).of_iso
+    (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j x hjx A) _).of_iso
     (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)
-      ((boundedConstructibleLowerStar _ ℓ x).obj A)).natTrans.app _))
+      ((boundedConstructibleLowerStar ℓ x).obj A)).natTrans.app _))
 
 /-- The tensor product of the open piece with the dual of the closed piece vanishes:
 `j_! B ⊗ D_X (Rx_* A) = 0`, by the projection formula for `j_!` and
 `isZero_upperStar_verdierDual_lowerStar`. -/
 lemma isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar :
     IsZero ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B ⊗
-      verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A)) := by
+      verdierDual ℓ ((boundedConstructibleLowerStar ℓ x).obj A)) := by
   have := NatIso.isIso_app_of_isIso (Functor.Monoidal.projectionMap
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
-    (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A))) B
+    (verdierDual ℓ ((boundedConstructibleLowerStar ℓ x).obj A))) B
   exact ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).map_isZero
     (isZero_tensorObj_of_isZero_left (isZero_upperStar_verdierDual_lowerStar j x hjx A) B)).of_iso
     ((β_ _ _) ≪≫ (asIso ((Functor.Monoidal.projectionMap
@@ -185,8 +185,8 @@ lemma isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar :
 `RΔ_* ω_X`. -/
 lemma eq_zero_of_externalProduct_shift_to_diag
     (φ : (externalProduct ℓ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B)
-        (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A))) ⟦(1 : ℤ)⟧ ⟶
-      (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) :
+        (verdierDual ℓ ((boundedConstructibleLowerStar ℓ x).obj A))) ⟦(1 : ℤ)⟧ ⟶
+      (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X)) :
     φ = 0 :=
   eq_zero_of_isZero_upperStar (diag X) (((shiftFunctor _ (1 : ℤ)).map_isZero
     ((isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar j x hjx B A).of_iso
@@ -197,9 +197,9 @@ lemma eq_zero_of_externalProduct_shift_to_diag
 lemma eq_zero_of_externalProduct_openPiece (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B' : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (φ : externalProduct ℓ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B)
-        (verdierDual ℓ (toPoint X) K) ⟶
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ x).obj A)
-        (verdierDual ℓ (toPoint X)
+        (verdierDual ℓ K) ⟶
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ x).obj A)
+        (verdierDual ℓ
           ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B'))) ⟦(-1 : ℤ)⟧) :
     φ = 0 :=
   eq_zero_of_shift (fun _ ↦ eq_zero_of_externalProduct (fun _ ↦ eq_zero_of_isZero_upperStar x
@@ -207,22 +207,22 @@ lemma eq_zero_of_externalProduct_openPiece (K : Dᵇc(X.left)⟦Profinite.padicA
       ((isZero_upperStar_lowerShriek_tensor x _
         (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j x hjx B)).of_iso
         ((boundedConstructibleUpperStar _ ℓ x).mapIso
-          ((boundedConstructibleLowerShriek _ ℓ _).mapIso
+          ((boundedConstructibleLowerShriek ℓ _).mapIso
             (whiskerLeftIso _ (β_ _ _) ≪≫ (α_ _ _ _).symm))))) _) _) φ
 
 /-- There is no morphism of degree `-1` from `K ⊠ D_X (Rx_* A)` to `Rx_* A' ⊠ D_X (j_! B)`. -/
 lemma eq_zero_of_externalProduct_closedPiece (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (A' : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (φ : externalProduct ℓ K
-        (verdierDual ℓ (toPoint X) ((boundedConstructibleLowerStar _ ℓ x).obj A)) ⟶
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ x).obj A')
-        (verdierDual ℓ (toPoint X)
+        (verdierDual ℓ ((boundedConstructibleLowerStar ℓ x).obj A)) ⟶
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ x).obj A')
+        (verdierDual ℓ
           ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B))) ⟦(-1 : ℤ)⟧) :
     φ = 0 := by
   refine eq_zero_of_shift (fun _ ↦ eq_zero_of_externalProduct (fun _ ↦
     eq_zero_of_isZero_upperStar x (isZero_upperStar_lowerShriek_tensor_shift x _ ?_) _) _) φ
   exact (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map_isZero
-    ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ _).map_isZero
+    ((boundedConstructibleLowerShriek ℓ _).map_isZero
     ((isZero_tensorObj_of_isZero_right _ ((boundedConstructibleUpperStar _ ℓ _).map_isZero
       (isZero_openImmersionLowerShriek_tensor_verdierDual_lowerStar j x hjx B A))).of_iso
       ((α_ _ _ _).symm ≪≫ whiskerRightIso (β_ _ _) _ ≪≫ (α_ _ _ _) ≪≫
@@ -236,27 +236,27 @@ lemma eq_zero_of_lowerShriek_unit {C : Over (Spec (.of k))} [LocallyOfFiniteType
     [QuasiCompact C.hom] [IsSeparated C.hom] (s : C ⟶ X ⨯ X)
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hz : IsZero ((boundedConstructibleUpperStar _ ℓ x).obj
-      ((boundedConstructibleLowerShriek _ ℓ (s ≫ prod.fst)).obj
+      ((boundedConstructibleLowerShriek ℓ (s ≫ prod.fst)).obj
         ((boundedConstructibleUpperStar _ ℓ (s ≫ prod.snd)).obj N))))
-    (φ : (boundedConstructibleLowerShriek _ ℓ s).obj (𝟙_ _) ⟶
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ x).obj A)
-        (verdierDual ℓ (toPoint X) N)) ⟦(-1 : ℤ)⟧) :
+    (φ : (boundedConstructibleLowerShriek ℓ s).obj (𝟙_ _) ⟶
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ x).obj A)
+        (verdierDual ℓ N)) ⟦(-1 : ℤ)⟧) :
     φ = 0 :=
   eq_zero_of_shift (fun _ ↦ eq_zero_of_externalProduct (fun _ ↦ eq_zero_of_isZero_upperStar x
     (isZero_upperStar_lowerShriek_tensor_shift x N (hz.of_iso
       ((boundedConstructibleUpperStar _ ℓ x).mapIso
-        ((boundedConstructibleLowerShriek _ ℓ _).mapIso
-          ((β_ _ _) ≪≫ asIso (boundedConstructibleExceptionalProjectionMorphism _ ℓ s _ _) ≪≫
-            (boundedConstructibleLowerShriek _ ℓ s).mapIso ((λ_ _) ≪≫
+        ((boundedConstructibleLowerShriek ℓ _).mapIso
+          ((β_ _ _) ≪≫ asIso (boundedConstructibleExceptionalProjectionMorphism ℓ s _ _) ≪≫
+            (boundedConstructibleLowerShriek ℓ s).mapIso ((λ_ _) ≪≫
               ((boundedConstructibleUpperStarComp _ ℓ s prod.snd).app N).symm)) ≪≫
           ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ s prod.fst).app _).symm)))) _) _) φ
 
 /-- There is no morphism of degree `-1` from the class `R(𝟙, h)_! ℚ̄_ℓ` of the graph of an
 endomorphism `h` fixing `x` to `Rx_* A ⊠ D_X (j_! B)`. -/
 lemma eq_zero_of_lowerShriek_graph (h : X ⟶ X) (hx : x ≫ h = x)
-    (φ : (boundedConstructibleLowerShriek _ ℓ (prod.lift (𝟙 X) h)).obj (𝟙_ _) ⟶
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ x).obj A)
-        (verdierDual ℓ (toPoint X)
+    (φ : (boundedConstructibleLowerShriek ℓ (prod.lift (𝟙 X) h)).obj (𝟙_ _) ⟶
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ x).obj A)
+        (verdierDual ℓ
           ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B))) ⟦(-1 : ℤ)⟧) :
     φ = 0 := by
   refine eq_zero_of_lowerShriek_unit x A _ _ ?_ φ

@@ -159,14 +159,17 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- If `C` vanishes on the open `W`, then `Lg^* C = 0` for every `g` with range in `W`. -/
 lemma isZero_upperStar_of_range_subset (W : X.left.Opens) {Y : Over (Spec (.of k))}
-    [IsFinitenessCoefficient ℓ Λ] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] (g : Y ⟶ X)
-    (h : Set.range g.left.base ⊆ W) (C : Dᵇc(X.left)⟦Λ⟧)
-    (hW : IsZero ((boundedConstructibleUpperStar Λ ℓ (opensOverι W)).obj C)) :
-    IsZero ((boundedConstructibleUpperStar Λ ℓ g).obj C) :=
-  ((boundedConstructibleUpperStar Λ ℓ (opensOverLift W g h)).map_isZero hW).of_iso
+    (h : Set.range g.left.base ⊆ W) (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hW : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι
+        W)).obj C)) :
+    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj C) :=
+  ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverLift W g
+      h)).map_isZero hW).of_iso
     (eqToIso (by rw [opensOverLift_ι]) ≪≫
-      (boundedConstructibleUpperStarComp Λ ℓ (opensOverLift W g h) (opensOverι W)).app C)
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverLift W g h)
+          (opensOverι W)).app C)
 
 /-- **Open–closed detection of vanishing at a rational point**: if `x` is a rational point of
 `V` and `g : Y ⟶ V` a quasi-compact morphism with range the complement of `x`, then a complex `E`
@@ -221,7 +224,6 @@ theorem isZero_upperStar_opensOverι_of_isCompl (W' : X.left.Opens) (x : Rationa
   rw [Scheme.Opens.range_ι]
   exact hW'
 
-
 end Vanishing
 
 /-! ### The splitting at a rational point -/
@@ -239,15 +241,15 @@ lemma eq_zero_of_lowerStar_rationalPoint {V : Over (Spec (.of k))} [LocallyOfFin
     (E : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (D : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hD : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ jV).obj D))
-    (φ : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj E ⟶ D) :
+    (φ : (boundedConstructibleLowerStar ℓ x).obj E ⟶ D) :
     φ = 0 := by
   subst hx
-  have hZ : IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have hZ : IsZero ((boundedConstructibleUpperShriek ℓ
       (xV ≫ jV)).obj D) :=
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ xV).map_isZero
+    ((boundedConstructibleUpperShriek ℓ xV).map_isZero
       (hD.of_iso ((boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ jV).app D))).of_iso
       ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ xV jV).app D)
-  set adj := boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  set adj := boundedConstructibleUpperShriekAdjunction ℓ
     (xV ≫ jV)
   set e := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (xV ≫ jV)).app E
   have h : e.hom ≫ φ = 0 := by
@@ -259,25 +261,25 @@ lemma eq_zero_of_lowerStar_rationalPoint {V : Over (Spec (.of k))} [LocallyOfFin
 `Lx^* C = 0`: indeed `RΓ(X, Rx_* Lx^* C) = Lx^* C` is then a retract of `RΓ(X, C) = 0`. -/
 lemma isZero_upperStar_of_retract (x : RationalPoint X)
     (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hΓ : IsZero ((boundedConstructibleLowerStar ℓ
       (toPoint X)).obj C))
-    (s : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+    (s : (boundedConstructibleLowerStar ℓ x).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C) ⟶ C)
-    (hs : s ≫ (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hs : s ≫ (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       x).unit.app C = 𝟙 _) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C) := by
-  have hP : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (toPoint X)).obj ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+  have hP : IsZero ((boundedConstructibleLowerStar ℓ
+      (toPoint X)).obj ((boundedConstructibleLowerStar ℓ x).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C))) := by
     refine (IsZero.iff_id_eq_zero _).2 ?_
     rw [← CategoryTheory.Functor.map_id, ← hs, Functor.map_comp,
-      hΓ.eq_of_tgt ((boundedConstructibleLowerStar _ ℓ (toPoint X)).map s) 0, zero_comp]
+      hΓ.eq_of_tgt ((boundedConstructibleLowerStar ℓ (toPoint X)).map s) 0, zero_comp]
   have hxa : x ≫ toPoint X = 𝟙 (point k) := by
     ext1
     simp
-  exact isZero_of_isZero_boundedConstructibleLowerStar_id _ ℓ (hP.of_iso
+  exact isZero_of_isZero_boundedConstructibleLowerStar_id ℓ (hP.of_iso
     (eqToIso (by rw [hxa]) ≪≫
-      ((boundedConstructibleLowerStarComp _ ℓ x (toPoint X)).app _).symm))
+      ((boundedConstructibleLowerStarComp ℓ x (toPoint X)).app _).symm))
 
 variable {ℓ}
 
@@ -293,7 +295,7 @@ theorem isZero_upperStar_rationalPoint_of_isZero_lowerStar (x : RationalPoint X)
         (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι (pointComplOpens x))).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (opensOverι (pointComplOpens x))).obj C))))
-    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hΓ : IsZero ((boundedConstructibleLowerStar ℓ
       (toPoint X)).obj C)) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj C) := by
   obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_openClosed
@@ -338,7 +340,7 @@ theorem isZero_upperStar_pointsComplι_of_insert [DecidableEq (RationalPoint X)]
     (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hU : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (pointsComplι (insert x S))).obj C))
-    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hΓ : IsZero ((boundedConstructibleLowerStar ℓ
       (toPoint X)).obj C)) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (pointsComplι S)).obj C) := by
@@ -377,7 +379,7 @@ theorem isZero_upperStar_pointsComplι_of_insert [DecidableEq (RationalPoint X)]
     (by rwa [opensOverLift_ι]) _
     (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ
       (opensOverι (pointComplOpens x)) x (isCompl_range_pointComplι x).disjoint _)
-    ((isZero_upperStar_of_range_subset _ ℓ (pointsComplOpens (insert x S)) _
+    ((isZero_upperStar_of_range_subset ℓ (pointsComplOpens (insert x S)) _
       (by rw [opensOverLift_ι, range_opensOverι]) C hU).of_iso
       ((boundedConstructibleUpperStarComp _ ℓ _ _).app _ ≪≫
         (boundedConstructibleUpperStar _ ℓ _).mapIso (@asIso _ _ _ _ _ hε) ≪≫
@@ -400,18 +402,18 @@ theorem isZero_of_isZero_upperStar_pointsComplι_of_isZero_lowerStar
     (S : Finset (RationalPoint X)) (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hU : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (pointsComplι S)).obj C))
-    (hΓ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hΓ : IsZero ((boundedConstructibleLowerStar ℓ
       (toPoint X)).obj C)) : IsZero C := by
   classical
   induction S using Finset.induction_on generalizing C with
   | empty =>
-    exact (isZero_upperStar_of_range_subset _ ℓ _ (𝟙 X)
+    exact (isZero_upperStar_of_range_subset ℓ _ (𝟙 X)
       (fun y _ ↦ mem_pointsComplOpens.2 fun z hz ↦ absurd hz (Finset.notMem_empty z)) C
         hU).of_iso ((boundedConstructibleUpperStarId _ ℓ X).app C).symm
   | insert x S _ ih =>
     by_cases hx : Set.range x.left.base ⊆ pointsComplOpens S
     · exact ih C (isZero_upperStar_pointsComplι_of_insert x S hx C hU hΓ) hΓ
-    · exact ih C (isZero_upperStar_of_range_subset _ ℓ _ (pointsComplι S)
+    · exact ih C (isZero_upperStar_of_range_subset ℓ _ (pointsComplι S)
         ((range_opensOverι _).trans_subset (pointsComplOpens_subset_insert x S hx)) C hU) hΓ
 
 end Points

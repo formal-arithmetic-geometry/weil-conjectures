@@ -206,37 +206,37 @@ the coefficient pushforward along `(f, g)`. -/
 lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux (c₂ : C ⟶ X) (f : X ⟶ Y) (g : C ⟶ Y)
     [IsProper c₂.left] [IsProper f.left] [IsProper g.left] (hg : c₂ ≫ f = g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ c₂).unit.app K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+    (boundedConstructibleLowerShriek ℓ f).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ c₂).unit.app K) ≫
+      (boundedConstructibleLowerShriek ℓ f).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c₂).inv.app _) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₂ f).inv.app _ ≫
       eqToHom (by rw [hg]; rfl) =
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K ≫
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).inv.app _ ≫
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app _ ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app _ ≫
+        (boundedConstructibleLowerStar ℓ g).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g (𝟙 Y)).inv.app
               _ ≫
             eqToHom (by rw [Category.comp_id, hg]; rfl) ≫
             (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c₂ f).hom.app
               _ ≫
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).map
-              ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K))) ≫
+              ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K))) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app _ := by
   subst hg
   rw [boundedConstructibleUpperStarComp_id_right_inv_app_assoc]
   simp only [eqToHom_refl, Category.comp_id, Category.assoc]
   exact CategoryTheory.map_unit_comp_inv_eq_aux
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ c₂)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (c₂ ≫ f))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ c₂)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (c₂ ≫ f))
     (boundedConstructibleUpperStarComp _ ℓ c₂ f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c₂)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (c₂ ≫ f))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₂ f)
-    (boundedConstructibleLowerStarComp _ ℓ c₂ f)
+    (boundedConstructibleLowerStarComp ℓ c₂ f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp ℓ c₂ f)
     (CategoryTheory.map_unit_comp_conjugateIsoEquiv_inv_app _ _ _ _)
     (boundedConstructibleUpperStarId _ ℓ Y) K
@@ -255,33 +255,33 @@ lemma lowerStarUpperShriekExchange_app_id_aux (c₁ : C ⟶ X) (f : X ⟶ Y) (g 
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app K =
       eqToHom (by rw [← w, Category.comp_id]) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₁ f).hom.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
-          ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ f).map
+          ((boundedConstructibleUpperShriekAdjunction ℓ
             c₁).counit.app K) := by
   have e1 : boundedConstructibleUpperShriekId ℓ Y = conjugateIsoEquiv
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 Y)) Adjunction.id
+      (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 Y)) Adjunction.id
       (boundedConstructibleLowerShriekId ℓ Y).symm := rfl
   have e2 : lowerStarUpperShriekExchange ℓ w = CategoryTheory.mateEquiv
-      (boundedConstructibleUpperShriekAdjunction _ ℓ c₁)
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 Y))
+      (boundedConstructibleUpperShriekAdjunction ℓ c₁)
+      (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 Y))
       (lowerStarLowerShriekCompIso ℓ w).hom := rfl
   have e3 : lowerStarLowerShriekCompIso ℓ w =
       Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).symm _ ≪≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (𝟙 Y)).symm ≪≫
-      eqToIso (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ) w) ≪≫
+      eqToIso (congrArg (boundedConstructibleLowerShriek ℓ) w) ≪≫
       boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₁ f ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f) := rfl
   rw [e1, e2, e3]
   have h := CategoryTheory.mateEquiv_app_comp_eq_aux
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (𝟙 Y))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c₁)
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 Y))
+    (boundedConstructibleUpperShriekAdjunction ℓ c₁)
     (boundedConstructibleLowerShriekId ℓ Y)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g (𝟙 _))
     (eqToHom (by rw [Category.comp_id]))
     (fun M ↦ by rw [boundedConstructibleLowerShriekComp_padicAlgCl_id_right_inv_app, eqToHom_app])
-    (eqToIso (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ) w))
+    (eqToIso (congrArg (boundedConstructibleLowerShriek ℓ) w))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₁ f) K
   refine h.trans ?_
   simp only [eqToIso.hom, eqToHom_app, eqToHom_trans_assoc]
@@ -319,8 +319,8 @@ lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c�
         (boundedConstructibleUpperShriekId ℓ (point k)).hom.app c.toPointDiagram.coeff ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app K =
       (boundedConstructibleLowerShriekCompToPoint ℓ c.c₁).inv.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperShriekAdjunction ℓ
             c.c₁).counit.app K) := by
   rw [boundedConstructibleLowerShriekCompToPoint_inv_app, Category.assoc]
   have e1 : c.toPointDiagram.pushforwardCoeffCounit =
@@ -334,9 +334,9 @@ lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c�
 proof): the unit of `Lc₂^* ⊣ Rc₂_*` read on `Ra_{X!}` and `Ra_{C!}` is the ordinary half `γ` of
 the coefficient pushforward along `(a_X, a_C)`. -/
 lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ c.c₂).unit.app K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ c.c₂).unit.app K) ≫
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c.c₂).inv.app _) ≫
       (boundedConstructibleLowerShriekCompToPoint ℓ c.c₂).hom.app _ =
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).hom.app K ≫
@@ -346,15 +346,15 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).inv.app _ := by
   rw [boundedConstructibleLowerShriekCompToPoint_hom_app]
   have e : c.toPointDiagram.pushforwardCoeffUnit =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint c.C)).unit.app _ ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint c.C)).unit.app _ ≫
+        (boundedConstructibleLowerStar ℓ (toPoint c.C)).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)
               (𝟙 (point k))).inv.app _ ≫
             eqToHom (by rw [Category.comp_id, comp_toPoint]) ≫
             (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂
               (toPoint X)).hom.app _ ≫
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
-              ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint X)).counit.app K)) :=
+              ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint X)).counit.app K)) :=
     rfl
   rw [e]
   exact lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux ℓ c.c₂ (toPoint X) (toPoint c.C)
@@ -375,11 +375,11 @@ theorem globalOperator_eq_pushforwardCoeff [IsProper c.c₂.left] :
           (boundedConstructibleUpperShriekId ℓ (point k)).hom.app c.toPointDiagram.coeff) ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app K := by
   have e : c.toPointDiagram.pushforwardCoeff = c.toPointDiagram.pushforwardCoeffUnit ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map c.u ≫
+      (boundedConstructibleLowerStar ℓ (toPoint c.C)).map c.u ≫
       c.toPointDiagram.pushforwardCoeffCounit := rfl
-  have hu : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+  have hu : (boundedConstructibleLowerStar ℓ (toPoint c.C)).map
       c.u = (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).inv.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint c.C)).map
           c.u ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ := by
     simp
@@ -402,7 +402,7 @@ and the point normalization (`integral_traceClass_ofEnd`) gives its trace. -/
 theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     (F : c.FixedLocus) [IsProper F.F.hom]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)] :
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)] :
     trace c.globalOperator = (c.traceClass F).integral := by
   obtain ⟨T, hT⟩ : ∃ T : c.toPointDiagram.coeff ⟶ c.toPointDiagram.coeff, T =
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
@@ -411,7 +411,7 @@ theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     ⟨_, rfl⟩
   let : HasRightDual c.toPointDiagram.coeff :=
     @HasRightDual.mk _ _ _ _ (HasRightDual.rightDual ((boundedConstructibleLowerShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)) (exactPairingCongrLeft
+      ℓ (toPoint X)).obj K)) (exactPairingCongrLeft
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).app K).symm)
   have h₁ : trace c.globalOperator = trace T :=
     trace_eq_of_iso ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).app K)
@@ -445,7 +445,7 @@ into local terms (`BorelMooreSection.integral_eq_sum_localTerm`). -/
 theorem trace_globalOperator_eq_sum_localTerm [IsProper c.c₂.left]
     (F : c.FixedLocus) [IsProper F.F.hom]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)]
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)]
     {ι : Type*} [Fintype ι] (B : ι → Over (Spec (.of k))) [∀ i, QuasiCompact (B i).hom]
     [∀ i, IsProper (B i).hom] (j : ∀ i, B i ⟶ F.F) [∀ i, IsOpenImmersion (j i).left]
     [∀ i, IsClosedImmersion (j i).left]

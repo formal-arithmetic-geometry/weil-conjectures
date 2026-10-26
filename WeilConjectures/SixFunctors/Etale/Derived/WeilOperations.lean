@@ -121,7 +121,7 @@ lemma map_unit_rightDerivedUpperShriekBaseChangeMap_app [HasCompactification f]
     L((g')^*[ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekAdjunction _ f).unit.app K) ≫
         (rightDerivedUpperShriekBaseChangeMap Λ sq).app ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) =
       (rightDerivedUpperShriekAdjunction _ f').unit.app _ ≫
-        (R(f')^![ModuleCat.{u + 1} Λ]).map
+        (R(f')^![Λ]).map
           ((rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv.app K) :=
   unit_mateEquiv _ _ _ K
 
@@ -133,7 +133,7 @@ lemma map_rightDerivedUpperShriekBaseChangeMap_app_counit [HasCompactification f
     (R(f')_![ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekBaseChangeMap Λ sq).app M) ≫
         (rightDerivedUpperShriekAdjunction _ f').counit.app _ =
       (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv.app
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj M) ≫
+          ((R(f)^![Λ]).obj M) ≫
         L((g)^*[ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekAdjunction _ f).counit.app M) :=
   mateEquiv_counit _ _ _ M
 
@@ -292,9 +292,9 @@ with the exceptional-inverse-image exchange
 of `AlgebraicGeometry.Etale.weilUpperShriek`. -/
 noncomputable def upperShriekBaseChangeWeilDatum (sq : IsPullback g a a h)
     {M : DerivedCategoryModule Λ Y} (ψ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(a)^![ModuleCat.{u + 1} Λ]).obj M) ⟶
-      (R(a)^![ModuleCat.{u + 1} Λ]).obj M :=
-  (rightDerivedUpperShriekBaseChangeMap Λ sq).app M ≫ (R(a)^![ModuleCat.{u + 1} Λ]).map ψ
+    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(a)^![Λ]).obj M) ⟶
+      (R(a)^![Λ]).obj M :=
+  (rightDerivedUpperShriekBaseChangeMap Λ sq).app M ≫ (R(a)^![Λ]).map ψ
 
 /-- **The unit of `Ra_! ⊣ Ra^!` is equivariant**: for a Weil datum `φ` on `K`, the unit
 `K ⟶ Ra^! Ra_! K` is a morphism of Weil objects, `Ex^!` being the mate of `Ex_!⁻¹`. -/

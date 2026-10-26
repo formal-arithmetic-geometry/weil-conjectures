@@ -74,8 +74,8 @@ open Scheme
 
 section Triangle
 
-variable {R : Type (u + 1)} [CommRing R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
-  [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
+variable {R : Type (u + 1)} [CommRing R] [Finite R] {Z U X : Scheme.{u}} (i : Z ⟶ X)
+  [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- Blueprint `lem-exc-closed-support-triangle`: Closed-support triangle before restriction.
 

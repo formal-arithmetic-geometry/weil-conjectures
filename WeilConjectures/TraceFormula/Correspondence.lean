@@ -129,7 +129,7 @@ structure Correspondence (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧
   c₂ : C ⟶ X
   /-- the coefficient map `u : Lc₂^* K ⟶ Rc₁^! K`. -/
   u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K
+    (boundedConstructibleUpperShriek ℓ c₁).obj K
 
 namespace Correspondence
 
@@ -146,23 +146,23 @@ Ra_{X!} K ⟶ Ra_{X!} Rc₂_* Lc₂^* K ≅ Ra_{X!} Rc₂_! Lc₂^* K ≅ Ra_{C!
 ```
 -/
 noncomputable def globalOperator [IsProper c.c₂.left] :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K :=
-  (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj K ⟶
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj K :=
+  (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         c.c₂).unit.app K) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
         c.c₂).inv.app _) ≫
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.c₂
       (toPoint X)).inv.app _ ≫
     eqToHom (by rw [comp_toPoint]) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map c.u ≫
+    (boundedConstructibleLowerShriek ℓ (toPoint c.C)).map c.u ≫
     eqToHom (by rw [comp_toPoint]) ≫
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.c₁
       (toPoint X)).hom.app _ ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+      ((boundedConstructibleUpperShriekAdjunction ℓ
         c.c₁).counit.app K)
 
 /-- The global operator `T_c(u)` in terms of the composition isomorphisms
@@ -174,17 +174,17 @@ Ra_{X!} K ⟶ Ra_{X!} Rc₂_* Lc₂^* K ≅ Ra_{X!} Rc₂_! Lc₂^* K ≅ Ra_{C!
 -/
 lemma globalOperator_eq [IsProper c.c₂.left] :
     c.globalOperator =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             c.c₂).unit.app K) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c.c₂).inv.app _) ≫
         (boundedConstructibleLowerShriekCompToPoint ℓ c.c₂).hom.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint c.C)).map
           c.u ≫
         (boundedConstructibleLowerShriekCompToPoint ℓ c.c₁).inv.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperShriekAdjunction ℓ
             c.c₁).counit.app K) := by
   rw [globalOperator, boundedConstructibleLowerShriekCompToPoint_hom_app,
     boundedConstructibleLowerShriekCompToPoint_inv_app]
@@ -196,22 +196,22 @@ map `u`, as an explicit composite of its fields (see `globalOperator_eq_globalOp
 noncomputable def globalOperatorMk (C : Over (Spec (.of k))) [LocallyOfFiniteType C.hom]
     [QuasiCompact C.hom] [IsSeparated C.hom] (c₁ c₂ : C ⟶ X) [IsProper c₂.left]
     (u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K :=
-  (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperShriek ℓ c₁).obj K) :
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj K ⟶
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj K :=
+  (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         c₂).unit.app K) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c₂).inv.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K)) ≫
     (boundedConstructibleLowerShriekCompToPoint ℓ c₂).hom.app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint C)).map u ≫
+    (boundedConstructibleLowerShriek ℓ (toPoint C)).map u ≫
     (boundedConstructibleLowerShriekCompToPoint ℓ c₁).inv.app
-      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperShriek ℓ c₁).obj K) ≫
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+      ((boundedConstructibleUpperShriekAdjunction ℓ
         c₁).counit.app K)
 
 lemma globalOperator_eq_globalOperatorMk [IsProper c.c₂.left] :
@@ -222,7 +222,7 @@ lemma globalOperator_eq_globalOperatorMk [IsProper c.c₂.left] :
 lemma globalOperator_mk (C : Over (Spec (.of k))) [LocallyOfFiniteType C.hom]
     [QuasiCompact C.hom] [IsSeparated C.hom] (c₁ c₂ : C ⟶ X) [IsProper c₂.left]
     (u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K) :
+      (boundedConstructibleUpperShriek ℓ c₁).obj K) :
     (⟨C, c₁, c₂, u⟩ : Correspondence ℓ K).globalOperator = globalOperatorMk K C c₁ c₂ u :=
   globalOperator_eq_globalOperatorMk _
 
@@ -271,19 +271,19 @@ theorem globalOperator_naturality {K' : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     (C : Over (Spec (.of k))) [LocallyOfFiniteType C.hom] [QuasiCompact C.hom]
     [IsSeparated C.hom] (c₁ c₂ : C ⟶ X) [IsProper c₂.left]
     (u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K)
+      (boundedConstructibleUpperShriek ℓ c₁).obj K)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K')
-    (hu : u ≫ (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).map a =
+      (boundedConstructibleUpperShriek ℓ c₁).obj K')
+    (hu : u ≫ (boundedConstructibleUpperShriek ℓ c₁).map a =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).map a ≫ u') :
     (⟨C, c₁, c₂, u⟩ : Correspondence ℓ K).globalOperator ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map a =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map a ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map a =
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map a ≫
         (⟨C, c₁, c₂, u'⟩ : Correspondence ℓ K').globalOperator := by
   rw [globalOperator_mk, globalOperator_mk, globalOperatorMk, globalOperatorMk]
   have h := globalOperator_naturality_aux
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ c₂)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ c₁)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ c₂)
+    (boundedConstructibleUpperShriekAdjunction ℓ c₁)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c₂)
     (boundedConstructibleLowerShriekCompToPoint ℓ c₂)
     (boundedConstructibleLowerShriekCompToPoint ℓ c₁) a u u' hu
@@ -295,7 +295,7 @@ theorem globalOperator_naturality {K' : Dᵇc(X.left)⟦Profinite.padicAlgClRing
 theorem globalOperator_add (C : Over (Spec (.of k))) [LocallyOfFiniteType C.hom]
     [QuasiCompact C.hom] [IsSeparated C.hom] (c₁ c₂ : C ⟶ X) [IsProper c₂.left]
     (u u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K) :
+      (boundedConstructibleUpperShriek ℓ c₁).obj K) :
     (⟨C, c₁, c₂, u + u'⟩ : Correspondence ℓ K).globalOperator =
       (⟨C, c₁, c₂, u⟩ : Correspondence ℓ K).globalOperator +
         (⟨C, c₁, c₂, u'⟩ : Correspondence ℓ K).globalOperator := by
@@ -311,21 +311,21 @@ perfectness of compactly supported cohomology
 (`ProEtale.CondensedRing.WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology`). -/
 theorem nonempty_hasRightDual_globalOperator [IsSepClosed k] :
     Nonempty (HasRightDual
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)) ∧
+        ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)) ∧
       Nonempty (HasRightDual
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
+        ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+          ((boundedConstructibleLowerStar ℓ c.c₂).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K)))) ∧
       Nonempty (HasRightDual
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).obj
+        ((boundedConstructibleLowerShriek ℓ (toPoint c.C)).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K))) ∧
       Nonempty (HasRightDual
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).obj
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K))) ∧
+        ((boundedConstructibleLowerShriek ℓ (toPoint c.C)).obj
+          ((boundedConstructibleUpperShriek ℓ c.c₁).obj K))) ∧
       Nonempty (HasRightDual
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj
-            ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K)))) :=
+        ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+          ((boundedConstructibleLowerShriek ℓ c.c₁).obj
+            ((boundedConstructibleUpperShriek ℓ c.c₁).obj K)))) :=
   ⟨WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology _,
     WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology _,
     WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology _,
@@ -337,17 +337,17 @@ theorem nonempty_hasRightDual_globalOperator [IsSepClosed k] :
 /-- The counit of `R(𝟙 X)_! ⊣ R(𝟙 X)^!` is the identity, up to the identity isomorphisms. -/
 lemma boundedConstructibleUpperShriekAdjunction_id_counit_app
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).counit.app
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X)).counit.app
         M =
       (boundedConstructibleLowerShriekId ℓ X).hom.app
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj M) ≫
+          ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj M) ≫
         (boundedConstructibleUpperShriekId ℓ X).hom.app M := by
   have h := conjugateEquiv_counit
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ X).inv M
   rw [boundedConstructibleUpperShriekId, conjugateIsoEquiv_apply_hom, Iso.symm_hom,
     ← cancel_epi ((boundedConstructibleLowerShriekId ℓ X).inv.app
-      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj M)),
+      ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj M)),
     Iso.inv_hom_id_app_assoc]
   exact h.symm.trans (Category.comp_id _)
 
@@ -355,13 +355,13 @@ lemma boundedConstructibleUpperShriekAdjunction_id_counit_app
 `c = (𝟙 X, h)`: it is `RΓ_c(X, u) ∘ h^♯` after `R(𝟙 X)^! ≅ 𝟭`. -/
 theorem globalOperator_mk_id (h : X ⟶ X) [IsProper h.left]
     (u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K) :
+      (boundedConstructibleUpperShriek ℓ (𝟙 X)).obj K) :
     (⟨X, 𝟙 X, h, u⟩ : Correspondence ℓ K).globalOperator =
       (compactPullback ℓ h).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           (u ≫ (boundedConstructibleUpperShriekId ℓ X).hom.app K) := by
   have hl := boundedConstructibleLowerShriekComp_padicAlgCl_id_left ℓ (toPoint X)
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K)
+    ((boundedConstructibleUpperShriek ℓ (𝟙 X)).obj K)
   simp only [Functor.map_comp] at hl
   rw [globalOperator_mk, globalOperatorMk, boundedConstructibleUpperShriekAdjunction_id_counit_app,
     compactPullback_app, boundedConstructibleLowerShriekCompToPoint_inv_app]
@@ -398,7 +398,7 @@ theorem globalOperator_ofGraph (h : X ⟶ X) [IsProper h.left]
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K) :
     (ofGraph K h v).globalOperator =
       (compactPullback ℓ h).app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map v := by
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map v := by
   refine (globalOperator_mk_id h _).trans ?_
   simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]
 
@@ -411,8 +411,8 @@ theorem globalOperator_ofGraph_naturality {K' : Dᵇc(X.left)⟦Profinite.padicA
     (v' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K' ⟶ K')
     (hv : v ≫ a = (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map a ≫ v') :
     (ofGraph K h v).globalOperator ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map a =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map a ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map a =
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map a ≫
         (ofGraph K' h v').globalOperator := by
   rw [globalOperator_ofGraph, globalOperator_ofGraph, Category.assoc, ← Functor.map_comp, hv,
     Functor.map_comp, compactPullback_naturality_assoc]
@@ -475,7 +475,7 @@ instance (v : K ⟶ K) : IsProper (ofEnd K v).c₂.left :=
 /-- The global operator of the diagonal correspondence of `v` is `RΓ_c(X, v)`. -/
 theorem globalOperator_ofEnd (v : K ⟶ K) :
     (ofEnd K v).globalOperator =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map v := by
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map v := by
   have : IsProper (𝟙 X : X ⟶ X).left := inferInstanceAs (IsProper (𝟙 X.left))
   refine (globalOperator_mk_id (𝟙 X) _).trans ?_
   rw [compactPullback_id_app, ← Functor.map_comp]

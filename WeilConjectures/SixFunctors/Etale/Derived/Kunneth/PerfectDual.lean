@@ -116,10 +116,10 @@ theorem Orientation.nonempty_iso_verdierDual_externalProduct {X Y S : Scheme.{u}
     {P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hP : IsDualizable P) (hQ : IsDualizable Q) :
-    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+    Nonempty ((verdierDual Λ (pullback.fst a b ≫ a)).obj
         (op (externalProduct (ModuleCat.{u + 1} Λ) a b P Q)) ≅
-      externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op P))
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op Q))) := by
+      externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual Λ a).obj (op P))
+        ((verdierDual Λ b).obj (op Q))) := by
   have : HasInvertibleExponent Λ X := .of_hom a
   have : HasInvertibleExponent Λ Y := .of_hom b
   have : HasInvertibleExponent Λ (pullback a b) := .of_hom (pullback.fst a b ≫ a)

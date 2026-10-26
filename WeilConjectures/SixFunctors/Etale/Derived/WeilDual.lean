@@ -370,7 +370,8 @@ noncomputable def contragredientWeilDatumIso (φ : L((g)^*[A]).obj K ≅ K) (hK 
 (Step 4).
 
 Let `γ : T ≅ ω_X` be an isomorphism from an invertible complex `T` (for an orientation,
-`T = Λ_X(d)[2d]`) to the dualizing complex, which is a morphism of Weil objects for data
+`T = Λ_X(d)[2d]`) to an object `ω_X` (the dualizing complex; the statement holds for any
+object `ω_X`), which is a morphism of Weil objects for data
 `τ : Lg^* T ⟶ T` and `χ : Lg^* ω_X ⟶ ω_X` (for the purity isomorphism and the
 geometric-Frobenius data this is the Weil equivariance of purity,
 `thm-pur-weil-equivariance-of-purity-and-trace`). Then the identification
@@ -379,11 +380,10 @@ geometric-Frobenius data this is the Weil equivariance of purity,
 objects, for the datum on `𝔻_X K = RHom(K, ω_X)` induced by `φ_K` and `χ`
 (`AlgebraicGeometry.Etale.derivedHomWeilDatum`) and the twisted contragredient datum
 `φ_{K^∨} ⊗ τ` on `K^∨ ⊗ᴸ T`. -/
-theorem leftDerivedUpperStar_map_verdierDualIsoCoefficientDualTensor_comp {S : Scheme.{u}}
-    {a : X ⟶ S} [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
-    {T : DerivedCategory (Sheaf X.smallEtaleTopology A)} (γ : T ≅ dualizingComplex A a)
+theorem leftDerivedUpperStar_map_verdierDualIsoCoefficientDualTensor_comp
+    {ω T : DerivedCategory (Sheaf X.smallEtaleTopology A)} (γ : T ≅ ω)
     (hT : IsInvertible T) (φ : L((g)^*[A]).obj K ≅ K) (τ : L((g)^*[A]).obj T ⟶ T)
-    (χ : L((g)^*[A]).obj (dualizingComplex A a) ⟶ dualizingComplex A a)
+    (χ : L((g)^*[A]).obj ω ⟶ ω)
     (hγ : L((g)^*[A]).map γ.hom ≫ χ = τ ≫ γ.hom) :
     L((g)^*[A]).map ((verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K)) ≫
         ((leftDerivedUpperStarTensorIso A g _ T).hom ≫

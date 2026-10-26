@@ -129,14 +129,14 @@ dual Weil datum `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback` of `�
 dualizing Weil datum, invertible for the automorphism `g`, is a strict Weil complex. -/
 noncomputable def verdierDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     WeilComplex (ModuleCat.{u + 1} Λ) g where
-  obj := ⟨(Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K.obj.obj),
+  obj := ⟨(Etale.verdierDual Λ aX).obj (op K.obj.obj),
     constructibleFiniteTor_verdierDual Λ aX K.obj.property⟩
   frobenius := ObjectProperty.isoMk _ (asIso (verdierDualWeilDatumOfIsPullback sq
     ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius)))
 
 @[simp]
 lemma verdierDual_obj_obj (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
-    (verdierDual g aX sq K).obj.obj = (Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+    (verdierDual g aX sq K).obj.obj = (Etale.verdierDual Λ aX).obj
       (op K.obj.obj) :=
   rfl
 
@@ -152,13 +152,13 @@ is a morphism of strict Weil complexes: biduality is Weil equivariant
 noncomputable def verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     K ⟶ verdierDual g aX sq (verdierDual g aX sq K) where
   hom := ObjectProperty.homMk
-    ((Etale.verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K.obj.obj)
+    ((Etale.verdierDualDoubleDual Λ aX).app K.obj.obj)
   comm := by
-    have : IsIso (verdierDualWeilDatum (ModuleCat.{u + 1} Λ) aX
+    have : IsIso (verdierDualWeilDatum Λ aX
         ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) (dualizingComplexWeilDatum sq)) :=
       isIso_verdierDualWeilDatumOfIsPullback g aX sq K
     apply ObjectProperty.hom_ext
-    exact (isWeilEquivariant_verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX
+    exact (isWeilEquivariant_verdierDualDoubleDual Λ aX
       ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) (dualizingComplexWeilDatum sq)).symm
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **Verdier biduality for strict Weil

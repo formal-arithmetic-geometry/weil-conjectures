@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 The derived category `D(Mod_{Λ_X})` of module objects over a commutative condensed ring `Λ`
 carries the braiding `DerivedCategory.braidedCategory'` of the derived tensor product: the
 symmetry of `Mod_{Λ_X}`, with the Koszul sign rule on complexes, descended along K-flat
-resolutions. The bounded constructible complexes `Dᵇc(X)⟦Λ⟧` form a full monoidal subcategory
-(`ProEtale.CondensedRing.isMonoidal_boundedConstructible`), and the braiding restricts to it
-(`ObjectProperty.fullBraidedSubcategory`).
+resolutions. For `Λ = ℚ̲̄_ℓ`, the bounded constructible complexes `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` form a full
+monoidal subcategory (`ProEtale.CondensedRing.isMonoidal_boundedConstructible`), and the
+braiding restricts to it (`ObjectProperty.fullBraidedSubcategory`).
 
 Since other braidings of derived categories are assumed as instances elsewhere,
 `DerivedCategory.braidedCategory'` is not an instance, and neither is its restriction
@@ -26,7 +26,7 @@ instance.
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.boundedConstructibleBraiding`: the Koszul braiding of `Dᵇc(X)⟦Λ⟧`.
+- `ProEtale.CondensedRing.boundedConstructibleBraiding`: the Koszul braiding of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
 
 -/
 
@@ -42,28 +42,27 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {k : Type u} [Field k] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+variable {k : Type u} [Field k] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom]
 
 set_option synthInstance.maxHeartbeats 400000 in
 -- the generic search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
-/-- The monoidal structure of `Dᵇc(X)⟦Λ⟧`, the full monoidal subcategory of `D(Mod_{Λ_X})`
+/-- The monoidal structure of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the full monoidal subcategory of `D(Mod_{Λ_X})`
 (`isMonoidal_boundedConstructible`). Finding it from the generic instances exceeds the default
 heartbeat limit, so it is recorded once here. -/
 noncomputable instance monoidalCategory_boundedConstructible
-    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
-    MonoidalCategory (Dᵇc(X.left)⟦Λ⟧) :=
+    {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
+    MonoidalCategory (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   inferInstance
 
 attribute [local instance] DerivedCategory.braidedCategory' in
-/-- The Koszul braiding of the derived tensor product on `Dᵇc(X)⟦Λ⟧`: the restriction
+/-- The Koszul braiding of the derived tensor product on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the restriction
 (`ObjectProperty.fullBraidedSubcategory`) of the braiding `DerivedCategory.braidedCategory'` of
 `D(Mod_{Λ_X})`. It is not an instance, see the module docstring. -/
 @[instance_reducible]
 noncomputable def boundedConstructibleBraiding
-    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
-    BraidedCategory (Dᵇc(X.left)⟦Λ⟧) :=
+    {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
+    BraidedCategory (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   ObjectProperty.fullBraidedSubcategory _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

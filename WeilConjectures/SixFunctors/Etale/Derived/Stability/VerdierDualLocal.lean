@@ -321,10 +321,10 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     (hP : IsBoundedFlatComplex Λ a b P) (hPl : ∀ q, IsFiniteLocallyConstantSheaf (P.X q)) :
     ∃ (O' : O.Opens) (_ : QuasiCompact O'.ι), (O' : Set O).Nonempty ∧
       boundedConstructible (ModuleCat.{u + 1} Λ) O'
-        ((verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj
+        ((verdierDual Λ (O'.ι ≫ aO)).obj
           (op (D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)))) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) O' (-b - 2 * n) (-a - 2 * n)
-        ((verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj
+        ((verdierDual Λ (O'.ι ≫ aO)).obj
           (op (D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)))) := by
   have : IsLocallyNoetherian O := LocallyOfFiniteType.isLocallyNoetherian aO
   have : HasInvertibleExponent Λ O := .of_hom aO
@@ -349,7 +349,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     exact ⟨v⟩
   let g := p ≫ O'.ι
   let N := D((O'.ι)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.Q).obj P)
-  let D := (verdierDual (ModuleCat.{u + 1} Λ) (O'.ι ≫ aO)).obj (op N)
+  let D := (verdierDual Λ (O'.ι ≫ aO)).obj (op N)
   -- the pulled-back model `P'` on `V`
   let P' := (((g)^*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
   have : CochainComplex.IsStrictlyGE P' a := by
@@ -376,7 +376,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
       ((leftDerivedUpperStarIsoMapDerivedCategory _ O'.ι).app _)
       (torAmplitudeIn_leftDerivedUpperStar _ O'.ι a b hQt))
   -- the pulled-back dualizing complex is `Λ[2n]`
-  let eω' : (R(p)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ (O'.ι ≫ aO)) ≅
+  let eω' : (R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO)) ≅
       ((_root_.DerivedCategory.singleFunctor _ 0).obj
         ((g)^*[ModuleCat.{u + 1} Λ].obj L))⟦(2 * n : ℤ)⟧ :=
     (rightDerivedUpperShriekIsoOfIsFiniteOfEtale _ p).app _ ≪≫
@@ -393,7 +393,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
           (_root_.DerivedCategory.singleFunctor _ 0).mapIso
             ((Etale.upperStarComp _ p O'.ι _ rfl).app L).symm)
   have hωt : torAmplitudeIn (ModuleCat.{u + 1} Λ) V (-(2 * n)) (-(2 * n))
-      ((R(p)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) := by
+      ((R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) := by
     have h := torAmplitudeIn_shift _ (torAmplitudeIn_singleFunctor_zero_of_flat _ _
       (Functor.PreservesFlat.flat_obj (F := (g)^*[ModuleCat.{u + 1} Λ]) hLf)) (2 * n : ℤ)
     exact (torAmplitudeIn _ V _ _).prop_of_iso eω'.symm (by simpa using h)
@@ -402,7 +402,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     (dualizingComplex _ (O'.ι ≫ aO))
   let eD : D((p)^*[ModuleCat.{u + 1} Λ]).obj D ≅
       ((RHom(V)[ModuleCat.{u + 1} Λ]).obj (op ((L((p)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(p)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) :=
+        ((R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) :=
     ((rightDerivedUpperShriekIsoOfIsFiniteOfEtale _ p).app _).symm ≪≫ eH
   -- the Tor amplitude
   have hDt : torAmplitudeIn (ModuleCat.{u + 1} Λ) O' (-b - 2 * n) (-a - 2 * n) D := by

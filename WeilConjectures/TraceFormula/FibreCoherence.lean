@@ -130,12 +130,12 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     (hL : IsPullback j (toPoint Z) f' y) (hT : IsPullback (j ≫ p) ΦZ r j)
     (hi : ΦZ ≫ j ≫ p = (j ≫ p) ≫ r ≫ p) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleLowerShriek ℓ f').map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             r).unit.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
               K))) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+        ((boundedConstructibleLowerShriek ℓ f').map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
               ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))) ≫
@@ -144,17 +144,17 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).map
+        ((boundedConstructibleLowerShriek ℓ (r ≫ f')).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K)) ≫
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K) =
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hL).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
         ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ j p).inv.app K) ≫
       (compactPullback ℓ ΦZ).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
         ((weilUpperStarComparison ℓ ΦZ (r ≫ p) (j ≫ p) hi).hom.app K) := by
   have hn₁ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).naturality
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K)
@@ -166,7 +166,7 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))
   have hn₂ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hL).naturality
-    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       r).unit.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app _)
   have hU := map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app ℓ hT
@@ -175,7 +175,7 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_hom,
     Functor.map_comp, Category.assoc] at hU
   have hU' := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map hU
+    (boundedConstructibleLowerShriek ℓ (toPoint Z)).map hU
   have hn₃ := (boundedConstructibleLowerShriekCompToPoint ℓ ΦZ).hom.naturality
     ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
       hT.toCommSq).hom.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -183,7 +183,7 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
   have hn₄ := (compactPullback ℓ ΦZ).naturality
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ j p).inv.app K)
   have hPB := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
     (pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app ℓ hT.toCommSq hi K)
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn₁ hn₂ hn₃ hn₄ hU' hPB hV
   rw [hn₁]

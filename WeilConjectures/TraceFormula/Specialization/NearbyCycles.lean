@@ -204,13 +204,13 @@ the deformation model, whose geometric generic fibre is the base change of `X`
 (`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specialization k' x).obj (verdierDual ℓ (toPoint X) K) ≅
-      verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-        ((specialization k' x).obj K)) :=
+    Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
+      verdierDual ℓ ((specialization k' x).obj K)) :=
   NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
     (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
     (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
-      isPullback_deformationSpecialFibre X _ k'⟩ (deformationModel_exists_comp_ε X x.left.ker k')
+      isPullback_deformationSpecialFibre X _ k'⟩ ⟨deformationTotalToBase X _ k', rfl,
+        deformationTotalToBase_hom X _ k'⟩
       (isPullback_deformationModel_ε k' x)) K
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
@@ -222,10 +222,9 @@ theorem nonempty_specialization_verdierDual_iso
 `sk-prop-tf-nearby-duality-foundation`). -/
 theorem nonempty_specializationProd_externalProduct_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ (toPoint X) K)) ≅
+    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ≅
       externalProduct ℓ ((specialization k' x).obj K)
-        (verdierDual ℓ (toPoint (deformationSpecialFibre X x.left.ker k'))
-          ((specialization k' x).obj K))) :=
+        (verdierDual ℓ ((specialization k' x).obj K))) :=
   have e := nonempty_specialization_verdierDual_iso (ℓ := ℓ) k' x K
   ⟨(asIso (specializationKunnethMap (ℓ := ℓ) k' x K _)).symm ≪≫
     whiskerLeftIso _ ((boundedConstructibleUpperStar _ ℓ _).mapIso e.some)⟩

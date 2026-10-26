@@ -55,25 +55,25 @@ set_option maxHeartbeats 1000000 in
 `Rc_! Rι_* ω ≅ Rc_! Rι_! ω ≅ RΔ_! Rd_! ω ⟶ RΔ_! ω_X ≅ RΔ_* ω_X`, the composition law of the
 fixed square followed by the trace `t_d`. -/
 theorem homEquiv_symm_supportIso_hom :
-    ((boundedConstructibleUpperShriekAdjunction _ ℓ c.support).homEquiv _ _).symm
+    ((boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _).symm
         F.supportIso.hom =
-      (boundedConstructibleLowerShriek _ ℓ c.support).map
+      (boundedConstructibleLowerShriek ℓ c.support).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).inv.app
             (dualizingComplex' ℓ F.F)) ≫
         (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ F.ι_support).hom.app
           (dualizingComplex' ℓ F.F) ≫
-        (boundedConstructibleLowerShriek _ ℓ (diag X)).map
+        (boundedConstructibleLowerShriek ℓ (diag X)).map
           (lowerShriekDualizingComplexTrace ℓ F.d) ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (diag X)).hom.app
           (dualizingComplex' ℓ X) := by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ F.isPullback
   have hK := Adjunction.homEquiv_symm_conjugateIsoEquiv_inv_app
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (diag X))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ F.d)
     (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ F.ι_support)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ F.isPullback)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv ℓ F.isPullback)
@@ -126,30 +126,30 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     (wgb : g ≫ b = c ≫ q) (wq : Δc ≫ q = f ≫ Δb) (wh : ιc ≫ g = h ≫ ιb)
     (whd : dc ≫ f = h ≫ db) :
     (lowerStarLowerShriekCompIso ℓ wgb).hom.app
-        ((boundedConstructibleLowerStar _ ℓ ιc).obj (dualizingComplex' ℓ Fc)) ≫
-      (boundedConstructibleLowerStar _ ℓ q).map
-        ((boundedConstructibleLowerShriek _ ℓ c).map
+        ((boundedConstructibleLowerStar ℓ ιc).obj (dualizingComplex' ℓ Fc)) ≫
+      (boundedConstructibleLowerStar ℓ q).map
+        ((boundedConstructibleLowerShriek ℓ c).map
             ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ ιc).inv.app
               (dualizingComplex' ℓ Fc)) ≫
           (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wc).hom.app
             (dualizingComplex' ℓ Fc) ≫
-          (boundedConstructibleLowerShriek _ ℓ Δc).map (lowerShriekDualizingComplexTrace ℓ dc) ≫
+          (boundedConstructibleLowerShriek ℓ Δc).map (lowerShriekDualizingComplexTrace ℓ dc) ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δc).hom.app
             (dualizingComplex' ℓ Xc)) ≫
-      (boundedConstructibleLowerStarComp _ ℓ Δc q).hom.app (dualizingComplex' ℓ Xc) ≫
+      (boundedConstructibleLowerStarComp ℓ Δc q).hom.app (dualizingComplex' ℓ Xc) ≫
       eqToHom (by rw [wq]) ≫
-      (boundedConstructibleLowerStarComp _ ℓ f Δb).inv.app (dualizingComplex' ℓ Xc) ≫
-      (boundedConstructibleLowerStar _ ℓ Δb).map (lowerStarDualizingComplexTrace ℓ f) =
-    (boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleLowerStarComp _ ℓ ιc g).hom.app (dualizingComplex' ℓ Fc) ≫
+      (boundedConstructibleLowerStarComp ℓ f Δb).inv.app (dualizingComplex' ℓ Xc) ≫
+      (boundedConstructibleLowerStar ℓ Δb).map (lowerStarDualizingComplexTrace ℓ f) =
+    (boundedConstructibleLowerShriek ℓ b).map
+        ((boundedConstructibleLowerStarComp ℓ ιc g).hom.app (dualizingComplex' ℓ Fc) ≫
           eqToHom (by rw [wh]) ≫
-          (boundedConstructibleLowerStarComp _ ℓ h ιb).inv.app (dualizingComplex' ℓ Fc) ≫
-          (boundedConstructibleLowerStar _ ℓ ιb).map (lowerStarDualizingComplexTrace ℓ h)) ≫
-      (boundedConstructibleLowerShriek _ ℓ b).map
+          (boundedConstructibleLowerStarComp ℓ h ιb).inv.app (dualizingComplex' ℓ Fc) ≫
+          (boundedConstructibleLowerStar ℓ ιb).map (lowerStarDualizingComplexTrace ℓ h)) ≫
+      (boundedConstructibleLowerShriek ℓ b).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ ιb).inv.app
           (dualizingComplex' ℓ Fb)) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.app (dualizingComplex' ℓ Fb) ≫
-      (boundedConstructibleLowerShriek _ ℓ Δb).map (lowerShriekDualizingComplexTrace ℓ db) ≫
+      (boundedConstructibleLowerShriek ℓ Δb).map (lowerShriekDualizingComplexTrace ℓ db) ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δb).hom.app
         (dualizingComplex' ℓ Yb) := by
   simp only [lowerStarLowerShriekCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -157,29 +157,29 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     Functor.whiskerLeft_app, eqToIso.hom, eqToHom_app, lowerStarComp_hom_app_eq,
     lowerStarComp_inv_app_eq, lowerStarDualizingComplexTrace_eq, Functor.map_comp,
     Category.assoc]
-  rw [Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar _ ℓ q)
+  rw [Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar ℓ q)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δc),
-    Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar _ ℓ Δb)
+    Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar ℓ Δb)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f),
-    Functor.map_map_hom_app_comp_map_map_inv_app_assoc (boundedConstructibleLowerShriek _ ℓ b)
-      (boundedConstructibleLowerStar _ ℓ ιb)
+    Functor.map_map_hom_app_comp_map_map_inv_app_assoc (boundedConstructibleLowerShriek ℓ b)
+      (boundedConstructibleLowerStar ℓ ιb)
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h),
     lowerShriekIsoLowerStar_hom_app_comp_eqToHom_assoc ℓ wq, Iso.hom_inv_id_app_assoc,
     ← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δb).hom.naturality
       (lowerShriekDualizingComplexTrace ℓ f)]
   rw [Iso.hom_app_comp_map₃_comp_inv_app_assoc
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ q),
-    Functor.map_hom_app_comp_map_map_comp_map_inv_app_assoc (boundedConstructibleLowerShriek _ ℓ b)
+    Functor.map_hom_app_comp_map_map_comp_map_inv_app_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ ιb),
-    ← Functor.map_comp_assoc (boundedConstructibleLowerShriek _ ℓ b)
+    ← Functor.map_comp_assoc (boundedConstructibleLowerShriek ℓ b)
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (ιc ≫ g)).hom.app _),
     lowerShriekIsoLowerStar_hom_app_comp_eqToHom ℓ wh, Functor.map_comp_assoc,
-    Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerShriek _ ℓ b)
+    Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (h ≫ ιb)),
     NatTrans.app_comp_map_map_assoc (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c q).hom,
     ← lowerShriek_map_comp_eqToHom_assoc ℓ wgb,
     ← NatTrans.map_map_comp_app_assoc (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv,
-    Functor.map_app_comp_map_map_assoc (boundedConstructibleLowerShriek _ ℓ b)
+    Functor.map_app_comp_map_map_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv,
     lowerShriekSquareIso_trace_exchange_assoc ℓ wc wb wgb wq wh whd]
   simp only [Functor.map_comp, Category.assoc]
@@ -197,22 +197,22 @@ set_option maxHeartbeats 2000000 in
 /-- **Exchange of the support isomorphisms** (blueprint `lem-trf-trace-map-exchange`, (2)):
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`, read through `g ∘ i_c = i_b ∘ h`. -/
 theorem lowerStar_map_supportIso_comp_exchange :
-    (boundedConstructibleLowerStar _ ℓ P.g).map Fc.supportIso.hom ≫
+    (boundedConstructibleLowerStar ℓ P.g).map Fc.supportIso.hom ≫
         (lowerStarUpperShriekExchange ℓ P.g_comp_support).app
-          ((boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) ≫
-        (boundedConstructibleUpperShriek _ ℓ P.pushforward.support).map
-          ((boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map P.f P.f)).hom.app
+          ((boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X)) ≫
+        (boundedConstructibleUpperShriek ℓ P.pushforward.support).map
+          ((boundedConstructibleLowerStarComp ℓ (diag X) (prod.map P.f P.f)).hom.app
               (dualizingComplex' ℓ X) ≫
             eqToHom (by rw [P.diag_comp_prodMap]) ≫
-            (boundedConstructibleLowerStarComp _ ℓ P.f (diag Y)).inv.app
+            (boundedConstructibleLowerStarComp ℓ P.f (diag Y)).inv.app
               (dualizingComplex' ℓ X) ≫
-            (boundedConstructibleLowerStar _ ℓ (diag Y)).map
+            (boundedConstructibleLowerStar ℓ (diag Y)).map
               (lowerStarDualizingComplexTrace ℓ P.f)) =
-      (boundedConstructibleLowerStarComp _ ℓ Fc.ι P.g).hom.app (dualizingComplex' ℓ Fc.F) ≫
+      (boundedConstructibleLowerStarComp ℓ Fc.ι P.g).hom.app (dualizingComplex' ℓ Fc.F) ≫
         eqToHom (by rw [← P.fixMap_ι]) ≫
-        (boundedConstructibleLowerStarComp _ ℓ (P.fixMap Fc Fb) Fb.ι).inv.app
+        (boundedConstructibleLowerStarComp ℓ (P.fixMap Fc Fb) Fb.ι).inv.app
           (dualizingComplex' ℓ Fc.F) ≫
-        (boundedConstructibleLowerStar _ ℓ Fb.ι).map
+        (boundedConstructibleLowerStar ℓ Fb.ι).map
           (lowerStarDualizingComplexTrace ℓ (P.fixMap Fc Fb)) ≫
         Fb.supportIso.hom := by
   have whd : Fc.d ≫ P.f = P.fixMap Fc Fb ≫ Fb.d := by
@@ -224,17 +224,17 @@ theorem lowerStar_map_supportIso_comp_exchange :
   have : IsProper (diag X ≫ prod.map P.f P.f).left :=
     inferInstanceAs (IsProper ((diag X).left ≫ (prod.map P.f P.f).left))
   have : IsProper (P.f ≫ diag Y).left := inferInstanceAs (IsProper (P.f.left ≫ (diag Y).left))
-  apply ((boundedConstructibleUpperShriekAdjunction _ ℓ P.pushforward.support).homEquiv _
+  apply ((boundedConstructibleUpperShriekAdjunction ℓ P.pushforward.support).homEquiv _
     _).symm.injective
   have hm := Adjunction.homEquiv_comp_mateEquiv
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ P.pushforward.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ P.pushforward.support)
     (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom (𝟙 _) Fc.supportIso.hom
-    ((boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map P.f P.f)).hom.app
+    ((boundedConstructibleLowerStarComp ℓ (diag X) (prod.map P.f P.f)).hom.app
         (dualizingComplex' ℓ X) ≫
       eqToHom (by rw [P.diag_comp_prodMap]) ≫
-      (boundedConstructibleLowerStarComp _ ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
-      (boundedConstructibleLowerStar _ ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
+      (boundedConstructibleLowerStarComp ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
+      (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
   rw [Category.id_comp] at hm
   rw [lowerStarUpperShriekExchange, ← hm]
   rw [Equiv.symm_apply_apply]

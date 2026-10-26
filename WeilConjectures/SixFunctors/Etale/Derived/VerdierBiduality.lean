@@ -57,7 +57,7 @@ theorem constructibleFiniteTor_verdierDual [PerfectField k]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) := by
+      ((verdierDual Λ a).obj (op K)) := by
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le a
   obtain ⟨hKbc, c, e, hKt⟩ := hK
   exact (constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField Λ a d hd c e
@@ -74,7 +74,7 @@ every `K` in `Dctf(X, Λ)`. This is the finite-stage étale biduality
 theorem isIso_verdierDualDoubleDual_app [IsAlgClosed k]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
+    IsIso ((verdierDualDoubleDual Λ a).app K) :=
   isIso_verdierDualDoubleDual_app_of_isAlgClosed Λ a hK
 
 /-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
@@ -86,10 +86,10 @@ every object `K` of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.isIso_verdierDualDou
 theorem nonempty_iso_verdierDual_verdierDual [IsAlgClosed k]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) a).obj
-      (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)))) :=
+    Nonempty (K ≅ (verdierDual Λ a).obj
+      (op ((verdierDual Λ a).obj (op K)))) :=
   have := isIso_verdierDualDoubleDual_app Λ a hK
-  ⟨asIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)⟩
+  ⟨asIso ((verdierDualDoubleDual Λ a).app K)⟩
 
 /-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
 
@@ -104,8 +104,8 @@ noncomputable def verdierDualEquivalence [IsAlgClosed k] :
     (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ≌
       DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
   (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).liftDualEquivalence
-    (verdierDual (ModuleCat.{u + 1} Λ) a) (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ a hK)
-    (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a)
+    (verdierDual Λ a) (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ a hK)
+    (verdierDualDoubleDual Λ a)
     (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
 
 /-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
@@ -122,7 +122,7 @@ theorem torAmplitudeIn_verdierDual [PerfectField k] (aX : X ⟶ Spec (.of k)) [I
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-      ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
+      ((verdierDual Λ aX).obj (op K)) :=
   (constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField Λ aX d hd a b hK
     hKt).2
 

@@ -45,27 +45,30 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [IsFinitenessCoefficient ℓ Λ]
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
 /-- **The exchange formalism of bounded constructible complexes**: the bounded constructible
-derived categories `Dᵇc(X)⟦Λ⟧` of the separated `k`-schemes of finite type, with the derived
+derived categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of the separated `k`-schemes of finite type, with the derived
 pullbacks `Lf^*` (`boundedConstructibleUpperStar`), their composition and identity isomorphisms,
 the derived pushforwards `Rf_*` and the extensions by zero `j_!` along open immersions. -/
 noncomputable def boundedConstructibleExchangeFormalism :
     ExchangeFormalism (SepFinType k) SepFinType.openImmersion where
-  obj X := Dᵇc(X.obj.left)⟦Λ⟧
-  pb f := boundedConstructibleUpperStar Λ ℓ f.hom
-  pbId X := boundedConstructibleUpperStarId Λ ℓ X.obj
-  pbComp f g := boundedConstructibleUpperStarComp Λ ℓ f.hom g.hom
-  pbComp_assoc f g h M := boundedConstructibleUpperStarComp_assoc_app Λ ℓ f.hom g.hom h.hom M
-  pbId_comp f M := boundedConstructibleUpperStarComp_id_left_app Λ ℓ f.hom M
-  pbComp_id f M := boundedConstructibleUpperStarComp_id_right_app Λ ℓ f.hom M
-  pf f := boundedConstructibleLowerStar Λ ℓ f.hom
-  adj f := boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f.hom
-  sh j _ := boundedConstructibleOpenImmersionLowerShriek Λ ℓ j.hom
-  shAdj j _ := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j.hom
+  obj X := Dᵇc(X.obj.left)⟦Profinite.padicAlgClRingObj ℓ⟧
+  pb f := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f.hom
+  pbId X := boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X.obj
+  pbComp f g := boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f.hom g.hom
+  pbComp_assoc f g h M := boundedConstructibleUpperStarComp_assoc_app (Profinite.padicAlgClRingObj
+      ℓ) ℓ f.hom g.hom h.hom M
+  pbId_comp f M := boundedConstructibleUpperStarComp_id_left_app (Profinite.padicAlgClRingObj ℓ) ℓ
+      f.hom M
+  pbComp_id f M := boundedConstructibleUpperStarComp_id_right_app (Profinite.padicAlgClRingObj ℓ) ℓ
+      f.hom M
+  pf f := boundedConstructibleLowerStar ℓ f.hom
+  adj f := boundedConstructibleUpperStarLowerStarAdjunction ℓ f.hom
+  sh j _ := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j.hom
+  shAdj j _ := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j.hom
 
 section Fields
 
@@ -73,48 +76,51 @@ variable {k} {X Y Z : SepFinType k}
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_obj :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).obj X = Dᵇc(X.obj.left)⟦Λ⟧ :=
+    (boundedConstructibleExchangeFormalism ℓ k).obj X = Dᵇc(X.obj.left)⟦Profinite.padicAlgClRingObj
+        ℓ⟧ :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_pb (f : X ⟶ Y) :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).pb f = boundedConstructibleUpperStar Λ ℓ f.hom :=
+    (boundedConstructibleExchangeFormalism ℓ k).pb f = boundedConstructibleUpperStar
+        (Profinite.padicAlgClRingObj ℓ) ℓ f.hom :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_pbId :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).pbId X =
-      boundedConstructibleUpperStarId Λ ℓ X.obj :=
+    (boundedConstructibleExchangeFormalism ℓ k).pbId X =
+      boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X.obj :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_pbComp (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).pbComp f g =
-      boundedConstructibleUpperStarComp Λ ℓ f.hom g.hom :=
+    (boundedConstructibleExchangeFormalism ℓ k).pbComp f g =
+      boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f.hom g.hom :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_pf (f : X ⟶ Y) :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).pf f = boundedConstructibleLowerStar Λ ℓ f.hom :=
+    (boundedConstructibleExchangeFormalism ℓ k).pf f = boundedConstructibleLowerStar ℓ f.hom :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_adj (f : X ⟶ Y) :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).adj f =
-      boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f.hom :=
+    (boundedConstructibleExchangeFormalism ℓ k).adj f =
+      boundedConstructibleUpperStarLowerStarAdjunction ℓ f.hom :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_sh (j : X ⟶ Y) [Fact (SepFinType.openImmersion j)] :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).sh j =
-      boundedConstructibleOpenImmersionLowerShriek Λ ℓ j.hom :=
+    (boundedConstructibleExchangeFormalism ℓ k).sh j =
+      boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j.hom :=
   rfl
 
 @[simp]
 lemma boundedConstructibleExchangeFormalism_shAdj (j : X ⟶ Y)
     [Fact (SepFinType.openImmersion j)] :
-    (boundedConstructibleExchangeFormalism Λ ℓ k).shAdj j =
-      boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j.hom :=
+    (boundedConstructibleExchangeFormalism ℓ k).shAdj j =
+      boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj
+          ℓ) ℓ j.hom :=
   rfl
 
 end Fields

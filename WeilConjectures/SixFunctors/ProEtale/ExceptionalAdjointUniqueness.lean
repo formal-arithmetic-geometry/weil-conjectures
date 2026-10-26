@@ -48,13 +48,11 @@ namespace ProEtale
 
 section Uniqueness
 
-variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [Etale.HasBoundedBelowUpperShriek A f]
-  {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-    _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-  (adj : rightDerivedLowerShriek A f ⊣ G)
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+  {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
+    _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+  (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⊣ G)
 
 /-- Blueprint `sk-def-sf-admissible`: uniqueness of the exceptional adjoint.
 
@@ -63,10 +61,10 @@ bounded below and `G L` is bounded below of étale origin, then `G L ≅ Rf^! L`
 `K ↦ Hom(Rf_! K, L)` on the objects bounded below of étale origin. The isomorphism is the
 adjunct, under the constructible exceptional adjunction, of the counit `Rf_! G L ⟶ L` of `G`. -/
 noncomputable def rightAdjointObjIsoRightDerivedUpperShriekObj
-    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : _root_.DerivedCategory.TStructure.t.plus L)
-    (hGL : DerivedCategory.plusEtaleOrigin A X (G.obj L)) :
-    G.obj L ≅ (R(f)^![A]).obj L where
+    (hGL : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X (G.obj L)) :
+    G.obj L ≅ (R(f)^![Λ]).obj L where
   hom := rightDerivedUpperShriekHomEquiv f hGL hL (adj.counit.app L)
   inv := adj.homEquiv _ _ (rightDerivedUpperShriekCounit f L hL)
   hom_inv_id := by
@@ -85,10 +83,10 @@ noncomputable def rightAdjointObjIsoRightDerivedUpperShriekObj
 /-- The isomorphism `G L ≅ Rf^! L` is compatible with the counits: the counit of `G` at `L` is
 `Rf_!` of it followed by the counit `ε_L` of the constructible exceptional adjunction. -/
 lemma rightDerivedLowerShriek_map_rightAdjointObjIsoRightDerivedUpperShriekObj_hom_comp
-    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : _root_.DerivedCategory.TStructure.t.plus L)
-    (hGL : DerivedCategory.plusEtaleOrigin A X (G.obj L)) :
-    (rightDerivedLowerShriek A f).map
+    (hGL : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X (G.obj L)) :
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map
         (rightAdjointObjIsoRightDerivedUpperShriekObj f adj hL hGL).hom ≫
       rightDerivedUpperShriekCounit f L hL = adj.counit.app L := by
   rw [← rightDerivedUpperShriekHomEquiv_symm_apply f hGL hL]
@@ -96,13 +94,13 @@ lemma rightDerivedLowerShriek_map_rightAdjointObjIsoRightDerivedUpperShriekObj_h
 
 /-- The isomorphisms `G L ≅ Rf^! L` are natural in `L`. -/
 lemma rightAdjointObjIsoRightDerivedUpperShriekObj_hom_naturality
-    {L L' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {L L' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : _root_.DerivedCategory.TStructure.t.plus L)
-    (hGL : DerivedCategory.plusEtaleOrigin A X (G.obj L))
+    (hGL : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X (G.obj L))
     (hL' : _root_.DerivedCategory.TStructure.t.plus L')
-    (hGL' : DerivedCategory.plusEtaleOrigin A X (G.obj L')) (φ : L ⟶ L') :
+    (hGL' : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X (G.obj L')) (φ : L ⟶ L') :
     G.map φ ≫ (rightAdjointObjIsoRightDerivedUpperShriekObj f adj hL' hGL').hom =
-      (rightAdjointObjIsoRightDerivedUpperShriekObj f adj hL hGL).hom ≫ (R(f)^![A]).map φ := by
+      (rightAdjointObjIsoRightDerivedUpperShriekObj f adj hL hGL).hom ≫ (R(f)^![Λ]).map φ := by
   simp only [rightAdjointObjIsoRightDerivedUpperShriekObj]
   rw [← rightDerivedUpperShriekHomEquiv_naturality_left f hGL hGL' hL',
     Adjunction.counit_naturality, rightDerivedUpperShriekHomEquiv_naturality_right f hGL hL hL']
@@ -116,28 +114,29 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-  {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [Etale.HasBoundedBelowUpperShriek A f]
+  {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [CompactSpace Y]
+  {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 /-- Blueprint `sk-def-sf-admissible`: under the admissibility datum (1)–(3), the restriction of
-every right adjoint `Rf^×` of `Rf_!` to `Dctf(Y, A)` is the constructible exceptional inverse
-image `Rf^!` of `sk-def-sf-operations` (vi), by uniqueness of adjoints: clause (3) puts `Rf^× L`
-in `Dctf(X, A)`, which consists of objects bounded below of étale origin, and there `Rf^×` and
-`Rf^!` represent the same functor
+every right adjoint `Rf^×` of `Rf_!` to `Dctf(Y, Λ)`, for a finite coefficient ring `Λ`, is the
+constructible exceptional inverse image `Rf^!` of `sk-def-sf-operations` (vi), by uniqueness of
+adjoints: clause (3) puts `Rf^× L` in `Dctf(X, Λ)`, which consists of objects bounded below of
+étale origin, and there `Rf^×` and `Rf^!` represent the same functor
 (`AlgebraicGeometry.ProEtale.rightAdjointObjIsoRightDerivedUpperShriekObj`). -/
 noncomputable def IsExceptionalAdjointAdmissible.rightAdjointIsoRightDerivedUpperShriek
-    (h : IsExceptionalAdjointAdmissible A f)
-    {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (adj : rightDerivedLowerShriek A f ⊣ G) :
-    (DerivedCategory.constructibleFiniteTor A Y).ι ⋙ G ≅
-      (DerivedCategory.constructibleFiniteTor A Y).ι ⋙ R(f)^![A] :=
+    (h : IsExceptionalAdjointAdmissible (ModuleCat.{u + 1} Λ) f)
+    {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⊣ G) :
+    (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).ι ⋙ G ≅
+      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).ι ⋙ R(f)^![Λ] :=
   NatIso.ofComponents
     (fun L ↦ rightAdjointObjIsoRightDerivedUpperShriekObj f adj L.property.plus
       (h.constructibleFiniteTor_le_inverseImage adj _ L.property).plusEtaleOrigin)
     (fun φ ↦ rightAdjointObjIsoRightDerivedUpperShriekObj_hom_naturality f adj _ _ _ _
       φ.hom)
 
-omit [Etale.HasBoundedBelowUpperShriek A f] in
+omit [CompactSpace Y] in
 /-- Blueprint `sk-def-sf-admissible`: the admissibility datum contains the ambient datum (1). -/
 theorem IsExceptionalAdjointAdmissible.hasAmbientExceptionalRightAdjoint
     (h : IsExceptionalAdjointAdmissible A f) : HasAmbientExceptionalRightAdjoint A f :=

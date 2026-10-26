@@ -180,7 +180,7 @@ localization triangle identifies with the generator `κ(t)` of `R¹π_* Λ(1)`
 theorem isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))) := by
   let j₀ := (multiplicativeGroupModel k).ι
   have hj₀ := range_multiplicativeGroupModel_ι k
@@ -233,7 +233,7 @@ noncomputable def supportCohomologyAffineLineLinearEquiv :
     Linear.homCongr Λ (Iso.refl _) (asIso (supportedClassMap Λ
       (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
         {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))).symm ≪≫ₗ
     (LinearEquiv.ofBijective (LinearMap.toSpanSingleton Λ _ (𝟙 (constantComplex Λ
       (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubscheme
@@ -251,7 +251,7 @@ theorem supportCohomologyAffineLineLinearEquiv_kummerBoundary :
     supportCohomologyAffineLineLinearEquiv Λ Ω ((supportCohomologyAddEquiv Λ _ _ 2).symm
       (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
         {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)})
-        (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+        (shiftSupportedClass Λ _ 2
           (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) = 1 := by
   simp [supportCohomologyAffineLineLinearEquiv, LinearEquiv.symm_apply_eq, Linear.homCongr_apply]
 
@@ -277,19 +277,19 @@ theorem rankOne_supportCohomology_affineLine :
     supportCohomologyAffineLineLinearEquiv Λ Ω ((supportCohomologyAddEquiv Λ _ _ 2).symm
       (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
         {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)})
-        (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+        (shiftSupportedClass Λ _ 2
           (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) = 1 ∧
     Function.Bijective (fun c : Λ ↦ c • (supportCohomologyAddEquiv Λ _ _ 2).symm
       (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
         {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)})
-        (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+        (shiftSupportedClass Λ _ 2
           (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) := by
   let X := 𝔸(ULift.{u} (Fin 1); Spec (.of Ω))
   let t : Γ(X, ⊤) := AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)
   let ι := X.zeroLocusSubschemeι {t}
   let Z := X.zeroLocusSubscheme {t}
   let L := tateObject Λ X 1
-  let φ := supportedClassMap Λ ι (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+  let φ := supportedClassMap Λ ι (shiftSupportedClass Λ _ 2
     (kummerBoundary Λ t))
   have hφ : IsIso φ := isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed Λ
     (k := Ω) (𝟙 (Spec (.of Ω)))
@@ -299,9 +299,9 @@ theorem rankOne_supportCohomology_affineLine :
     projective_unit_of_iso Λ eZ.symm
   refine ⟨fun q hq ↦ ?_, supportCohomologyAffineLineLinearEquiv_kummerBoundary Λ Ω, ?_⟩
   · -- `Ri^!(Λ(1)[q]) ≅ Λ_Z[q - 2]`, and `Hom(Λ_Z, Λ_Z[n]) = 0` for `n ≠ 0`
-    let I : (R(ι)^![ModuleCat.{u + 1} Λ]).obj (L⟦q⟧) ≅ (constantComplex Λ Z)⟦q - 2⟧ :=
-      (R(ι)^![ModuleCat.{u + 1} Λ]).mapIso ((shiftFunctorAdd' _ 2 (q - 2) q (by ring)).app L) ≪≫
-        ((R(ι)^![ModuleCat.{u + 1} Λ]).commShiftIso (q - 2)).app (L⟦(2 : ℤ)⟧) ≪≫
+    let I : (R(ι)^![Λ]).obj (L⟦q⟧) ≅ (constantComplex Λ Z)⟦q - 2⟧ :=
+      (R(ι)^![Λ]).mapIso ((shiftFunctorAdd' _ 2 (q - 2) q (by ring)).app L) ≪≫
+        ((R(ι)^![Λ]).commShiftIso (q - 2)).app (L⟦(2 : ℤ)⟧) ≪≫
         (shiftFunctor _ (q - 2)).mapIso (asIso φ).symm
     let u := constantComplexIsoSingleFunctor Λ Z
     have hz : IsZero ((_root_.DerivedCategory.homologyFunctor _ 0).obj
@@ -344,7 +344,7 @@ noncomputable def supportCohomologyLinearEquivΓHomologyZero :
           (tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1) ≃ₗ[Λ]
         (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).obj ((_root_.DerivedCategory.homologyFunctor _ 0).obj
           ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-            {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+            {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
             ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))) :=
   haveI := isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed Λ aY
   supportCohomologyLinearEquiv Λ _ _ 2 ≪≫ₗ
@@ -352,7 +352,7 @@ noncomputable def supportCohomologyLinearEquivΓHomologyZero :
       (bijective_homConstantComplexLinearMapΓHomologyZero Λ
         ((asIso (supportedClassMap Λ
           (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
-          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+          (shiftSupportedClass Λ _ 2
             (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0)))))).symm ≪≫
           constantComplexIsoSingleFunctor Λ _))
 
@@ -389,40 +389,40 @@ theorem gysin_structure_zeroSection :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ)
         (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme {AffineSpace.coord Y (ULift.up 0)})
         ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) ∧
       (∀ n : ℤ, n ≠ 0 → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
         ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)))) ∧
       Nonempty ((_root_.DerivedCategory.homologyFunctor _ 0).obj
         ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) ≅
         (constantSheaf _ (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) ∧
       supportCohomologyLinearEquivΓHomologyZero Λ aY ((supportCohomologyAddEquiv Λ _ _ 2).symm
           (supportedClassMap Λ
             (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
-            (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+            (shiftSupportedClass Λ _ 2
               (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0)))))) =
         ((constantSheafΓAdj _ (ModuleCat.{u + 1} Λ)).homEquiv _ _
           ((homologyZeroConstantComplexIso Λ _).inv ≫
             (_root_.DerivedCategory.homologyFunctor _ 0).map (supportedClassMap Λ
               (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
-              (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+              (shiftSupportedClass Λ _ 2
                 (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))))).hom 1 := by
   let X := 𝔸(ULift.{u} (Fin 1); Y)
   let t : Γ(X, ⊤) := AffineSpace.coord Y (ULift.up 0)
   let ι := X.zeroLocusSubschemeι {t}
   let Z := X.zeroLocusSubscheme {t}
   let L := tateObject Λ X 1
-  let φ := supportedClassMap Λ ι (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+  let φ := supportedClassMap Λ ι (shiftSupportedClass Λ _ 2
     (kummerBoundary Λ t))
   have hφ : IsIso φ := isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed Λ aY
   let H := _root_.DerivedCategory.homologyFunctor (Sheaf Z.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))
   let P := (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)
-  let eH : (H 0).obj ((R(ι)^![ModuleCat.{u + 1} Λ]).obj (L⟦(2 : ℤ)⟧)) ≅ P :=
+  let eH : (H 0).obj ((R(ι)^![Λ]).obj (L⟦(2 : ℤ)⟧)) ≅ P :=
     (H 0).mapIso (asIso φ).symm ≪≫ homologyZeroConstantComplexIso Λ Z
   refine ⟨constructibleFiniteTor_of_iso Λ (asIso φ) (constructibleFiniteTor_constantComplex Λ Z),
     fun n hn ↦ (isZero_homology_constantComplex Λ Z n hn).of_iso ((H n).mapIso (asIso φ).symm),

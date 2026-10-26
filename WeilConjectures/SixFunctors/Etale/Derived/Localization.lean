@@ -62,7 +62,8 @@ open Scheme
 namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [HasSmallSiteSheafify A] {U Z X : Scheme.{u}}
+  [HasSmallSiteSheafify A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U Z X : Scheme.{u}}
 
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-prop-sf-closed-unit`: Closed-immersion unit
@@ -76,7 +77,8 @@ an isomorphism; since a closed immersion is proper, `Ri_!` is `Ri_*`, so this sa
 is fully faithful on the exceptional side. It is the derived counterpart of the full
 faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`.
 
-The unit is invertible for every `Q ∈ D(Z_ét, A)` because `Ri_!` is fully faithful. Write
+The unit is invertible for every `Q ∈ D(Z_ét, Λ)` because `Ri_!` is fully
+faithful. Write
 `Ri_! = D(k_!) ⋙ Rg_*` for the chosen compactification `Z ⟶[k] Z̄ ⟶[g] X` of `i`. As `i` is
 proper, `k` has closed range, so `k_! ≅ k_*`
 (`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range`); hence
@@ -87,26 +89,31 @@ derived functor of a fully faithful functor preserving K-injective complexes is 
 (`CategoryTheory.Functor.full_rightDerivedFunctor`). -/
 theorem isIso_rightDerivedUpperShriekAdjunction_unit_app (i : Z ⟶ X) [IsClosedImmersion i]
     [HasCompactification i]
-    [(R(i)_![A]).IsLeftAdjoint] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) := by
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((rightDerivedUpperShriekAdjunction Λ i).unit.app Q) := by
   let c := HasCompactification.compactification i
   -- `k_! ≅ k_*` for the open immersion `k` of the compactification, whose range is closed
-  have : IsIso (Etale.openImmersionLowerShriekToLowerStar A c.i) :=
-    Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A c.i
+  have : IsIso (Etale.openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) c.i) :=
+    Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range (ModuleCat.{u + 1} Λ) c.i
       (c.isClopen_range_openImmersion inferInstance).isClosed
-  have : ((c.i)_!open[A]).PreservesKInjectiveComplexes :=
+  have : ((c.i)_!open[ModuleCat.{u + 1} Λ]).PreservesKInjectiveComplexes :=
     Functor.preservesKInjectiveComplexes_of_iso
-      (asIso (Etale.openImmersionLowerShriekToLowerStar A c.i)).symm
+      (asIso (Etale.openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) c.i)).symm
   -- on sheaves, `k_! ⋙ g_* ≅ i_*` is fully faithful
-  let e : (c.i)_!open[A] ⋙ (c.g)_*[A] ≅ (i)_*[A] := asIso (Etale.lowerShriekToLowerStar A i)
-  have : ((c.i)_!open[A] ⋙ (c.g)_*[A]).Full := Functor.Full.of_iso e.symm
-  have : ((c.i)_!open[A] ⋙ (c.g)_*[A]).Faithful := Functor.Faithful.of_iso e.symm
+  let e : (c.i)_!open[ModuleCat.{u + 1} Λ] ⋙ (c.g)_*[ModuleCat.{u + 1} Λ] ≅ (i)_*[ModuleCat.{u + 1}
+      Λ] := asIso (Etale.lowerShriekToLowerStar (ModuleCat.{u + 1} Λ) i)
+  have : ((c.i)_!open[ModuleCat.{u + 1} Λ] ⋙ (c.g)_*[ModuleCat.{u + 1} Λ]).Full :=
+      Functor.Full.of_iso e.symm
+  have : ((c.i)_!open[ModuleCat.{u + 1} Λ] ⋙ (c.g)_*[ModuleCat.{u + 1} Λ]).Faithful :=
+      Functor.Faithful.of_iso e.symm
   -- hence so is `Ri_! = D(k_!) ⋙ Rg_* ≅ R(k_! ⋙ g_*)`
-  let e' : R(i)_![A] ≅ R((c.i)_!open[A] ⋙ (c.g)_*[A]) :=
-    Functor.isoWhiskerRight ((c.i)_!open[A]).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
+  let e' : R(i)_![ModuleCat.{u + 1} Λ] ≅ R((c.i)_!open[ModuleCat.{u + 1} Λ] ⋙ (c.g)_*[ModuleCat.{u +
+      1} Λ]) :=
+    Functor.isoWhiskerRight ((c.i)_!open[ModuleCat.{u + 1}
+        Λ]).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
       (Functor.rightDerivedFunctorCompIso _ _).symm
-  have : (R(i)_![A]).Full := Functor.Full.of_iso e'.symm
-  have : (R(i)_![A]).Faithful := Functor.Faithful.of_iso e'.symm
+  have : (R(i)_![ModuleCat.{u + 1} Λ]).Full := Functor.Full.of_iso e'.symm
+  have : (R(i)_![ModuleCat.{u + 1} Λ]).Faithful := Functor.Faithful.of_iso e'.symm
   infer_instance
 
 /-- **Étale base change kills what the pullback kills.** Let `g : W ⟶ X` be a morphism and
@@ -178,13 +185,12 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 where `ε` is the counit of `Ri_! ⊣ Ri^!` and `η` the unit of `Lj^* ⊣ Rj_*`. -/
 noncomputable abbrev supportedLocalizationTriangle (i : Z ⟶ X) [HasCompactification i]
-    [(R(i)_![A]).IsLeftAdjoint]
-    (j : U ⟶ X) (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
-      ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧) :
-    Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
-    ((derivedUpperStarLowerStarAdjunction A j).unit.app L) w
+    (j : U ⟶ X) (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (w : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) ⟶
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦(1 : ℤ)⟧) :
+    Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  Triangle.mk ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)
+    ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app L) w
 
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] in
@@ -250,47 +256,57 @@ Uniqueness is [BBD, 1.1.9] applied to two such triangles and the identity of `L`
 triangles extending `𝟙 L` (`CategoryTheory.Pretriangulated.exists_triangleHom_of_comp_eq_zero`)
 has components `(𝟙, 𝟙, 𝟙)`, so the two connecting maps agree. -/
 theorem existsUnique_distTriang_supportedLocalization (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ∃! w, supportedLocalizationTriangle A i j L w ∈ distTriang _ := by
-  obtain ⟨w, hw⟩ : ∃ w, supportedLocalizationTriangle A i j L w ∈ distTriang _ := by
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ∃! w, supportedLocalizationTriangle Λ i j L w ∈ distTriang _ := by
+  obtain ⟨w, hw⟩ : ∃ w, supportedLocalizationTriangle Λ i j L w ∈ distTriang _ := by
     obtain ⟨K, a, δ, hT⟩ :=
-      distinguished_cocone_triangle₁ ((derivedUpperStarLowerStarAdjunction A j).unit.app L)
+      distinguished_cocone_triangle₁ ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          j).unit.app L)
     -- `j^*` kills the fibre `K` of `η_L`, since `Rj_*` is fully faithful
-    have hK : IsZero (D((j)^*[A]).obj K) := by
-      have : IsIso (mapDerivedUpperStarLowerStarAdjunction A j).counit :=
-        (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
-          (mapDerivedUpperStarLowerStarAdjunction A j)).isIso_unit_iff_isIso_counit.1
+    have hK : IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj K) := by
+      have : IsIso (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit :=
+        (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1}
+            Λ) j)
+          (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+              j)).isIso_unit_iff_isIso_counit.1
           inferInstance
-      have hff := (mapDerivedUpperStarLowerStarAdjunction A j).fullyFaithfulROfIsIsoCounit
+      have hff := (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          j).fullyFaithfulROfIsIsoCounit
       have := hff.full
       have := hff.faithful
-      have : IsIso (derivedUpperStarLowerStarAdjunction A j).counit :=
-        (derivedUpperStarLowerStarAdjunction A j).counit_isIso_of_R_fully_faithful
-      have h := (derivedUpperStarLowerStarAdjunction A j).left_triangle_components L
-      have : IsIso (L((j)^*[A]).map ((derivedUpperStarLowerStarAdjunction A j).unit.app L)) := by
+      have : IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit :=
+        (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+            j).counit_isIso_of_R_fully_faithful
+      have h := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          j).left_triangle_components L
+      have : IsIso (L((j)^*[ModuleCat.{u + 1} Λ]).map ((derivedUpperStarLowerStarAdjunction
+          (ModuleCat.{u + 1} Λ) j).unit.app L)) := by
         rw [IsIso.eq_inv_of_inv_hom_id h]
         infer_instance
-      exact (Triangle.isZero₁_iff_isIso₂ _ (D((j)^*[A]).map_distinguished _ hT)).2
-        ((NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory A j) _).1 this)
+      exact (Triangle.isZero₁_iff_isIso₂ _ (D((j)^*[ModuleCat.{u + 1} Λ]).map_distinguished _ hT)).2
+        ((NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j)
+            _).1 this)
     -- so `K` is supported on `Z`, by the open–closed triangle of `K`
-    have hKi : (R(i)_![A]).essImage K := by
-      obtain ⟨w, hw⟩ := exists_distTriang_openClosed A j i hij K
-      have : IsIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app K) :=
-        (Triangle.isZero₁_iff_isIso₂ _ hw).1 (D((j)_!open[A]).map_isZero hK)
-      exact ⟨D((i)^*[A]).obj K, ⟨(rightDerivedLowerShriekIsoRightDerivedLowerStar A i).app _ ≪≫
-        (asIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app K)).symm⟩⟩
-    have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i
-    have : IsIso (rightDerivedUpperShriekAdjunction A i).unit := NatIso.isIso_of_isIso_app _
-    exact exists_distTriang_counit_of_subsingleton (rightDerivedUpperShriekAdjunction A i)
-      (rightDerivedUpperShriekAdjunction A i).fullyFaithfulLOfIsIsoUnit hT
-      (fun M n ↦ subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i j
+    have hKi : (R(i)_![ModuleCat.{u + 1} Λ]).essImage K := by
+      obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) j i hij K
+      have : IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app K) :=
+        (Triangle.isZero₁_iff_isIso₂ _ hw).1 (D((j)_!open[ModuleCat.{u + 1} Λ]).map_isZero hK)
+      exact ⟨D((i)^*[ModuleCat.{u + 1} Λ]).obj K, ⟨(rightDerivedLowerShriekIsoRightDerivedLowerStar
+          (ModuleCat.{u + 1} Λ) i).app _ ≪≫
+        (asIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app K)).symm⟩⟩
+    have := isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i
+    have : IsIso (rightDerivedUpperShriekAdjunction Λ i).unit := NatIso.isIso_of_isIso_app _
+    exact exists_distTriang_counit_of_subsingleton (rightDerivedUpperShriekAdjunction Λ i)
+      (rightDerivedUpperShriekAdjunction Λ i).fullyFaithfulLOfIsIsoUnit hT
+      (fun M n ↦ subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar (ModuleCat.{u
+          + 1} Λ) i j
         (hij ▸ disjoint_compl_left) M _ n) hKi
   refine ⟨w, hw, fun w' hw' ↦ ?_⟩
-  have : Subsingleton ((supportedLocalizationTriangle A i j L w').obj₁⟦(1 : ℤ)⟧ ⟶
-      (supportedLocalizationTriangle A i j L w).obj₃) :=
-    subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i j
+  have : Subsingleton ((supportedLocalizationTriangle Λ i j L w').obj₁⟦(1 : ℤ)⟧ ⟶
+      (supportedLocalizationTriangle Λ i j L w).obj₃) :=
+    subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) i j
       (hij ▸ disjoint_compl_left) _ _ 1
   obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hw' hw (𝟙 _)
     (by rw [Category.id_comp]; exact comp_distTriang_mor_zero₁₂ _ hw')
@@ -312,21 +328,22 @@ It is *defined* as `Classical.choose` of the existence half of
 the choice canonical. The supported term is
 `Ri_!`, which for a closed immersion is `Ri_*`. -/
 noncomputable def supportedLocalizationBoundary (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧ :=
-  (existsUnique_distTriang_supportedLocalization A i j hij L).exists.choose
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) ⟶
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦(1 : ℤ)⟧ :=
+  (existsUnique_distTriang_supportedLocalization Λ i j hij L).exists.choose
 
 /-- The supported localization triangle with its boundary
 `AlgebraicGeometry.Etale.supportedLocalizationBoundary` is distinguished. -/
 theorem supportedLocalizationTriangle_mem_distTriang (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L) ∈
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    supportedLocalizationTriangle Λ i j L (supportedLocalizationBoundary Λ i j hij L) ∈
       distTriang _ :=
-  (existsUnique_distTriang_supportedLocalization A i j hij L).exists.choose_spec
+  (existsUnique_distTriang_supportedLocalization Λ i j hij L).exists.choose_spec
 
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
@@ -349,57 +366,58 @@ The middle component extends to a morphism of triangles
 because `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L') = 0`
 (`subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`). -/
 theorem exists_triangleHom_supportedLocalization (i : Z ⟶ X) [HasCompactification i]
-    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
-    {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : L ⟶ L')
-    {w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
-      ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧}
-    {w' : (R((j)_*[A])).obj ((L((j)^*[A])).obj L') ⟶
-      ((R(i)_![A]).obj ((R(i)^![A]).obj L'))⟦(1 : ℤ)⟧}
-    (hw : supportedLocalizationTriangle A i j L w ∈ distTriang _)
-    (hw' : supportedLocalizationTriangle A i j L' w' ∈ distTriang _) :
-    ∃ τ : supportedLocalizationTriangle A i j L w ⟶ supportedLocalizationTriangle A i j L' w',
-      τ.hom₁ = (R(i)_![A]).map ((R(i)^![A]).map φ) ∧ τ.hom₂ = φ ∧
-        τ.hom₃ = (R((j)_*[A])).map ((L((j)^*[A])).map φ) := by
-  have : Subsingleton ((supportedLocalizationTriangle A i j L w).obj₁⟦(1 : ℤ)⟧ ⟶
-      (supportedLocalizationTriangle A i j L' w').obj₃) :=
-    subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i j hij _ _ 1
+    {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : L ⟶ L')
+    {w : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) ⟶
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦(1 : ℤ)⟧}
+    {w' : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L') ⟶
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L'))⟦(1 : ℤ)⟧}
+    (hw : supportedLocalizationTriangle Λ i j L w ∈ distTriang _)
+    (hw' : supportedLocalizationTriangle Λ i j L' w' ∈ distTriang _) :
+    ∃ τ : supportedLocalizationTriangle Λ i j L w ⟶ supportedLocalizationTriangle Λ i j L' w',
+      τ.hom₁ = (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![Λ]).map φ) ∧ τ.hom₂ = φ ∧
+        τ.hom₃ = (R((j)_*[ModuleCat.{u + 1} Λ])).map ((L((j)^*[ModuleCat.{u + 1} Λ])).map φ) := by
+  have : Subsingleton ((supportedLocalizationTriangle Λ i j L w).obj₁⟦(1 : ℤ)⟧ ⟶
+      (supportedLocalizationTriangle Λ i j L' w').obj₃) :=
+    subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) i j
+        hij _ _ 1
   obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hw hw' φ (by
     rw [← Category.assoc]
-    erw [← (rightDerivedUpperShriekAdjunction A i).counit_naturality]
+    erw [← (rightDerivedUpperShriekAdjunction Λ i).counit_naturality]
     rw [Category.assoc]
     erw [comp_distTriang_mor_zero₁₂ _ hw']
     rw [comp_zero])
   refine ⟨τ, Triangle.cancel_mor₁_of_subsingleton hw' ?_, hτ,
     Triangle.cancel_mor₂_of_subsingleton hw ?_⟩
   · rw [← τ.comm₁, hτ]
-    exact ((rightDerivedUpperShriekAdjunction A i).counit_naturality φ).symm
+    exact ((rightDerivedUpperShriekAdjunction Λ i).counit_naturality φ).symm
   · rw [τ.comm₂, hτ]
-    exact ((derivedUpperStarLowerStarAdjunction A j).unit_naturality φ).symm
+    exact ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit_naturality φ).symm
 
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
-**A morphism of supported localization triangles is determined by its middle component.** Let
+**A morphism of supported localization triangles is determined by its middle
+component.** Let
 `i : Z ⟶ X` be compactifiable and `j : U ⟶ X` an open immersion, with disjoint images. Two
 morphisms between distinguished supported localization triangles with the same middle component
 are equal (`CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`), because
 `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L') = 0`
 (`subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`) [BBD, 1.1.9]. -/
 theorem triangleHom_supportedLocalization_ext (i : Z ⟶ X) [HasCompactification i]
-    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
-    {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
-      ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧}
-    {w' : (R((j)_*[A])).obj ((L((j)^*[A])).obj L') ⟶
-      ((R(i)_![A]).obj ((R(i)^![A]).obj L'))⟦(1 : ℤ)⟧}
-    (hw : supportedLocalizationTriangle A i j L w ∈ distTriang _)
-    (hw' : supportedLocalizationTriangle A i j L' w' ∈ distTriang _)
-    {τ τ' : supportedLocalizationTriangle A i j L w ⟶ supportedLocalizationTriangle A i j L' w'}
+    {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {w : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) ⟶
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))⟦(1 : ℤ)⟧}
+    {w' : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L') ⟶
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L'))⟦(1 : ℤ)⟧}
+    (hw : supportedLocalizationTriangle Λ i j L w ∈ distTriang _)
+    (hw' : supportedLocalizationTriangle Λ i j L' w' ∈ distTriang _)
+    {τ τ' : supportedLocalizationTriangle Λ i j L w ⟶ supportedLocalizationTriangle Λ i j L' w'}
     (h : τ.hom₂ = τ'.hom₂) : τ = τ' :=
-  have : Subsingleton ((supportedLocalizationTriangle A i j L w).obj₁⟦(1 : ℤ)⟧ ⟶
-      (supportedLocalizationTriangle A i j L' w').obj₃) :=
-    subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i j hij _ _ 1
+  have : Subsingleton ((supportedLocalizationTriangle Λ i j L w).obj₁⟦(1 : ℤ)⟧ ⟶
+      (supportedLocalizationTriangle Λ i j L' w').obj₃) :=
+    subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) i j
+        hij _ _ 1
   triangleHom_ext_of_subsingleton hw hw' h
 
 end Localization

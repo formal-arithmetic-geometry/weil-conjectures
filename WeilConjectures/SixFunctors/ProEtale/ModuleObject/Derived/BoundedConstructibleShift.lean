@@ -69,26 +69,24 @@ instance commShift_boundedConstructibleUpperStarId_hom (X : Over (Spec (.of k)))
   unfold boundedConstructibleUpperStarId
   infer_instance
 
-variable [IsFinitenessCoefficient ℓ Λ]
-
 /-- The derived pushforward on bounded constructible complexes commutes with the shifts. -/
-noncomputable instance : (boundedConstructibleLowerStar Λ ℓ f).CommShift ℤ := by
+noncomputable instance : (boundedConstructibleLowerStar ℓ f).CommShift ℤ := by
   delta boundedConstructibleLowerStar
   infer_instance
 
-instance : NatTrans.CommShift (boundedConstructibleLowerStarCompatibility Λ ℓ f).hom ℤ := by
+instance : NatTrans.CommShift (boundedConstructibleLowerStarCompatibility ℓ f).hom ℤ := by
   unfold boundedConstructibleLowerStarCompatibility boundedConstructibleLowerStar
   infer_instance
 
 /-- The adjunction `Lf^* ⊣ Rf_*` on bounded constructible complexes commutes with the shifts. -/
 instance commShift_boundedConstructibleUpperStarLowerStarAdjunction :
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).CommShift ℤ :=
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).CommShift ℤ :=
   Adjunction.commShift_restrictFullyFaithful _ _ _ _ _
 
 /-- The composition isomorphism of the derived pushforward on bounded constructible complexes,
 a conjugate of that of the pullback, commutes with the shifts. -/
 instance commShift_boundedConstructibleLowerStarComp_hom (g : Y ⟶ Z) :
-    NatTrans.CommShift (boundedConstructibleLowerStarComp Λ ℓ f g).hom ℤ := by
+    NatTrans.CommShift (boundedConstructibleLowerStarComp ℓ f g).hom ℤ := by
   unfold boundedConstructibleLowerStarComp
   infer_instance
 
@@ -96,7 +94,7 @@ instance commShift_boundedConstructibleLowerStarComp_hom (g : Y ⟶ Z) :
 a conjugate of that of the pullback, commutes with the shifts. -/
 instance commShift_boundedConstructibleLowerStarId_hom (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
-    NatTrans.CommShift (boundedConstructibleLowerStarId Λ ℓ X).hom ℤ := by
+    NatTrans.CommShift (boundedConstructibleLowerStarId ℓ X).hom ℤ := by
   unfold boundedConstructibleLowerStarId
   infer_instance
 
