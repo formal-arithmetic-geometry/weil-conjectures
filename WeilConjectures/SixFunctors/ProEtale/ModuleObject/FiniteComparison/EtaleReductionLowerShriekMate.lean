@@ -48,8 +48,7 @@ only closed immersions `f` (the case used by the trace formula: the supports of 
 correspondences), and it only asserts that some isomorphism `γ` with invertible transpose
 exists, without identifying `γ` with the canonical `γ^!` of the blueprint (nor `β` with its
 canonical comparison). -/
-theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsProper f.left]
-    [IsClosedImmersion f.left] :
+theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsClosedImmersion f.left] :
     ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙

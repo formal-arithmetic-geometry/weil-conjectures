@@ -17,7 +17,14 @@ directed systems of categories (`CategoryTheory.CategoryCocone.IsFilteredTwoColi
 (`GΩ : D₁ ⥤ D₂`) an adjunction on the vertices. Suppose the left adjoints are compatible with
 the cocones, through isomorphisms `α i : G i ⋙ c₂.Φ i ≅ c₁.Φ i ⋙ GΩ` and
 `αT h : G i ⋙ c₂.T h ≅ c₁.T h ⋙ G j`, satisfying a cocycle condition relating `α i`, `α j`,
-`αT h` and the structure isomorphisms of the cocones.
+`αT h` and the structure isomorphisms of the cocones. The squares are
+```
+  C₁ i --G i--> C₂ i        C₁ i --G i--> C₂ i
+   |             |            |             |
+  c₁.Φ i       c₂.Φ i       c₁.T h        c₂.T h
+   v             v            v             v
+   D₁  --GΩ-->   D₂         C₁ j --G j--> C₂ j
+```
 
 The main result, `CategoryTheory.CategoryCocone.isIso_mateEquiv_of_isFilteredTwoColimit`, says
 that if the mates `R i ⋙ c₁.T h ⟶ c₂.T h ⋙ R j` of the transition squares `αT h` are

@@ -9483,7 +9483,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.RestrictBiproductDescUnit
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.CofilteredSystem
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
@@ -9591,13 +9590,11 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.LiftLinear
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Orthogonal
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.SmallSubobject
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.WeakSerreCoproductClosure
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor

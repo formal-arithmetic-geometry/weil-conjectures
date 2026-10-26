@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Projection
@@ -61,7 +62,6 @@ lemma upperStarRestrictScalarsMap_eq :
     (TwoSquare.mk _ _ _ _ (lowerStarCompSheafComposeCoextendScalarsIso R S g).inv)
   rw [mateEquiv_symm_lowerStarCompSheafComposeCoextendScalarsIso] at h
   exact ((Equiv.eq_symm_apply _).2 hA).trans (h.trans rfl)
-
 
 omit [IsNoetherianRing R] in
 /-- On the image of an object of the homotopy category, the commutation
@@ -124,17 +124,6 @@ lemma leftDerivedUpperStarRestrictScalarsIso_hom_app_Qh_obj
   erw [← reassoc_of% hn]
   erw [reassoc_of% hR]
 
-
-/-- The isomorphism `Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))` has identity inverse
-components. -/
-private lemma mapHomotopyCategoryCompIso_refl_inv_app {V W V' : Type*} [Category V] [Category W]
-    [Category V'] [Preadditive V] [Preadditive W] [Preadditive V'] (F : V ⥤ W) (G : W ⥤ V')
-    [F.Additive] [G.Additive] (K : HomotopyCategory V (.up ℤ)) :
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app K =
-      𝟙 ((F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ)).obj K) := by
-  obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  exact (HomotopyCategory.quotient _ _).map_id _
-
 omit [IsNoetherianRing R] in
 /-- The counit form of `upperStarRestrictScalarsMap_eq` on homotopy categories. -/
 lemma mapHomotopyCategory_upperStarRestrictScalarsIso_counit
@@ -168,7 +157,7 @@ lemma mapHomotopyCategory_upperStarRestrictScalarsIso_counit
       (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv d
   simp only [mapHomotopyCategorySheafExtendScalarsCompUpperStarIso, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    mapHomotopyCategoryCompIso_refl_inv_app]
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app]
   erw [Category.id_comp, Category.id_comp, Category.comp_id, Category.comp_id,
     Adjunction.mapHomotopyCategory_counit_app_quotient,
     Adjunction.mapHomotopyCategory_counit_app_quotient]

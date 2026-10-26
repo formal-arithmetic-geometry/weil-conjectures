@@ -11,9 +11,17 @@ public import Mathlib.CategoryTheory.Yoneda
 /-!
 # Invertibility of mates along adjunctions with invertible unit
 
-Let `L₁ ⊣ R₁` and `L₂ ⊣ R₂` be adjunctions and `α : G ⋙ L₂ ⟶ L₁ ⋙ H` an isomorphism. At `d`,
-the mate `R₁ ⋙ G ⟶ H ⋙ R₂` of `α` is the unit of `L₂ ⊣ R₂` at `G (R₁ d)`, followed by `R₂` of
-`α`, followed by `R₂ H` of the counit `ε_d` of `L₁ ⊣ R₁`. Hence, if the unit of `L₂ ⊣ R₂` is
+Let `L₁ ⊣ R₁` and `L₂ ⊣ R₂` be adjunctions and `α : G ⋙ L₂ ⟶ L₁ ⋙ H` an isomorphism
+filling the square
+```
+  C₁ --L₁--> D₁
+  |          |
+  G          H
+  v          v
+  C₂ --L₂--> D₂
+```
+At `d`, the mate `R₁ ⋙ G ⟶ H ⋙ R₂` of `α` is the unit of `L₂ ⊣ R₂` at `G (R₁ d)`, followed by
+`R₂` of `α`, followed by `R₂ H` of the counit `ε_d` of `L₁ ⊣ R₁`. Hence, if the unit of `L₂ ⊣ R₂` is
 invertible, the mate is invertible at `d` as soon as `R₂ (H ε_d)` is
 (`CategoryTheory.isIso_mateEquiv_app_of_isIso_map_counit`).
 

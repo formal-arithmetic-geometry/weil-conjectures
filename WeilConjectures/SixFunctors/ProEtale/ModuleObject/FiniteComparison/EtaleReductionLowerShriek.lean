@@ -122,7 +122,7 @@ shrieks are identified with `Rd_*` (`d` is proper:
 `Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and
 `etaleReductionLowerStarIsoOfIsClosedImmersion` identifies `Rd_* ⋙ red_Y` with `red_Z ⋙ Rd_*`. -/
 @[no_expose]
-noncomputable def etaleReductionLowerShriekIsoOfIsClosedImmersion (d : Z ⟶ Y) [IsProper d.left]
+noncomputable def etaleReductionLowerShriekIsoOfIsClosedImmersion (d : Z ⟶ Y)
     [IsClosedImmersion d.left] :
     boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
         etaleReduction ℓ E n Y ≅

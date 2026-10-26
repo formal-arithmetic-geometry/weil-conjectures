@@ -172,7 +172,8 @@ theorem isIso_unit_app_of_isIso_unit_app_map
       (adj'.isIso_map_unit_app_of_isIso_counit N)
   have hFT := F.map_distinguished _ hT
   have h₃ : IsIso (adj.unit.app (F.obj (R'.obj (L'.obj N)))) :=
-    (adj.isIso_unit_app_iff_of_iso_obj (e.app (L'.obj N))).2 (adj.isIso_unit_app_obj_of_isIso_counit_app _)
+    (adj.isIso_unit_app_iff_of_iso_obj (e.app (L'.obj N))).2
+      (adj.isIso_unit_app_obj_of_isIso_counit_app _)
   have h₁ := adj.isIso_unit_app_obj₁_of_distTriang _ hFT hN h₃
   have hG : IsZero G := hF G (adj.isZero_of_isIso_unit_app h₁ (hL G hLG))
   exact (Triangle.isZero₁_iff_isIso₂ _ hT).1 hG
