@@ -26,14 +26,30 @@ composition with `NearbyCyclesModel.Hom.compactSupportExchange_comp_app`
 (`map_comp_exchange_aux`). The description of the mate `ν_u` on bounded constructible complexes
 is `map_mateEquiv_inv_liftExchange`.
 
+The ambient identity `hC` itself, in the shape of `openPointExchangeAux_app_comp_aux_of_eq`, is
+`NearbyCyclesModel.Hom.pointExchange_comp_app` (generic coefficients `Λ`), deduced from its
+abstract form `pointExchange_comp_aux`.
+
 ## Implementation notes
 
-The statement is `∀ hC, type_of% (…)`. Discharging `hC` by
-`map_comp_exchange_aux _ _ (lowerShriekExchangeOfInv_comp_app …) (pointOpenExchange_app_eq …)
-(compactSupportExchange_comp_app … χ₀ hχ₀)` elaborates every piece except `hχ₀`: the right inverse
-property of `χ₀` produced by unfolding `pointCompactSupportExchange` and the one expected by
-`compactSupportExchange_comp_app` differ in instance terms of the ambient derived categories, and
-their definitional equality times out (also at `maxHeartbeats 1000000`).
+The statement is `∀ hC, type_of% (…)`. All identifications of `Rg_* ⋙ 𝟭` with `Rg_*` (from
+`h = 𝟙`) are made in `pointExchange_comp_aux`, on abstract categories, where they are cheap; on
+derived categories (`Functor.obj` with different source categories) both the elaborator and the
+kernel unfold instead of failing fast. The instance arguments of
+`NearbyCyclesModel.Hom.pointExchange_comp_app` are implicit, so that they are assigned by
+unification with the goal instead of being synthesized.
+
+`apply NearbyCyclesModel.Hom.pointExchange_comp_app` closes the `hC` of
+`pointCompactSupportExchangeOfSeparated_app_lowerStar_component` in the elaborator (in a few
+seconds), but the kernel check times out (and runs out of memory). The goal mixes two terms of
+`MonObj (Profinite.padicAlgClRingObj ℓ)`: the argument of `Functor.monObjObj` in the categories
+`Mod (condensedRingObj Λℓ X)` synthesized in the statements (with
+`ProEtale.pointLowerStar._proof_1` as `Precoherent Profinite`) and the direct `[MonObj Λ]`
+arguments of the six functors (with the synthesized `Precoherent` instance). A lemma generic in
+`Λ` uses one `MonObj Λ` everywhere, so one of the two families differs from the goal in a proof;
+each such pair is checked instantly in isolation, but under the projections
+`Quiver.Hom`/`Prefunctor.obj` (reducibility hint `abbrev`) the kernel unfolds instead of
+comparing arguments.
 
 -/
 
@@ -69,6 +85,71 @@ lemma map_comp_exchange_aux {C D E : Type*} [Category C] [Category D] [Category 
     Rp.map (Dh.map (a ≫ b)) ≫ Rp.map ν₁ ≫ χ₀ ≫ r = Rp.map (Dh.map (d ≫ e') ≫ eH) ≫ cj := by
   subst hν
   rw [k₂, ← Rp.map_comp_assoc, ← Dh.map_comp_assoc, Category.assoc, k₁]
+
+/-- **The ambient identity of `ν_X` on pushforwards**, in abstract categories: the composite of
+`ν_u` on pushforwards (`lowerShriekExchangeOfInv_app_comp_aux` for `u`) and of `ν_Y` on
+pushforwards (`compactSupportExchange_comp_aux` for `h = 𝟙`, written with `pointOpenExchange`). -/
+lemma pointExchange_comp_aux {DB DX DY SB SX SY SP DS SS : Type*} [Category DB] [Category DX]
+    [Category DY] [Category SB] [Category SX] [Category SY] [Category SP] [Category DS]
+    [Category SS] {Lg : DX ⥤ DB} {Rg : DB ⥤ DX} {Lu : DY ⥤ DX} {Lgu : DY ⥤ DB} {Rgu : DB ⥤ DY}
+    {Lg' : SX ⥤ SB} {Rg' : SB ⥤ SX} {Lu' : SY ⥤ SX} {Lgu' : SY ⥤ SB} {Rgu' : SB ⥤ SY}
+    (adjg : Lg ⊣ Rg) (adjgu : Lgu ⊣ Rgu) (adjg' : Lg' ⊣ Rg') (adjgu' : Lgu' ⊣ Rgu')
+    (cu : Lgu ≅ Lu ⋙ Lg) (cu' : Lgu' ≅ Lu' ⋙ Lg') {ΨB : DB ⥤ SB} {ΨX : DX ⥤ SX} {ΨY : DY ⥤ SY}
+    (αg : ΨX ⋙ Lg' ⟶ Lg ⋙ ΨB) (αu : ΨY ⋙ Lu' ⟶ Lu ⋙ ΨX) (αgu : ΨY ⋙ Lgu' ⟶ Lgu ⋙ ΨB)
+    (hαu : ∀ K, αgu.app K ≫ ΨB.map (cu.hom.app K) =
+      cu'.hom.app (ΨY.obj K) ≫ Lg'.map (αu.app K) ≫ αg.app (Lu.obj K))
+    (χg : Rg ⋙ ΨX ⟶ ΨB ⋙ Rg') (hχg : χg = (mateEquiv adjg adjg' αg).natTrans)
+    (χgu : Rgu ⋙ ΨY ⟶ ΨB ⋙ Rgu') (hχgu : χgu = (mateEquiv adjgu adjgu' αgu).natTrans)
+    (bu : Rgu ⋙ Lu ⟶ Rg)
+    (hbu : ∀ N, Lg.map (bu.app N) ≫ adjg.counit.app N =
+      cu.inv.app (Rgu.obj N) ≫ adjgu.counit.app N)
+    (bu' : Rgu' ⋙ Lu' ⟶ Rg')
+    (hbu' : ∀ N, Lg'.map (bu'.app N) ≫ adjg'.counit.app N =
+      cu'.inv.app (Rgu'.obj N) ≫ adjgu'.counit.app N)
+    {DuS : DX ⥤ DY} {DuS' : SX ⥤ SY} (adjU : DuS ⊣ Lu) (adjU' : DuS' ⊣ Lu') [IsIso αu]
+    (eU : Rg ⋙ DuS ⟶ Rgu)
+    (heU : ∀ N, adjU.unit.app (Rg.obj N) ≫ Lu.map (eU.app N) ≫ bu.app N = 𝟙 _)
+    (eU' : Rg' ⋙ DuS' ⟶ Rgu')
+    (heU' : ∀ N, adjU'.unit.app (Rg'.obj N) ≫ Lu'.map (eU'.app N) ≫ bu'.app N = 𝟙 _)
+    {L1 : DY ⥤ DY} {Lguh : DY ⥤ DB} {Rguh : DB ⥤ DY} {Lh' : SP ⥤ SY} {Lguh' : SP ⥤ SB}
+    {Rguh' : SB ⥤ SP} (adjguh : Lguh ⊣ Rguh) (adjguh' : Lguh' ⊣ Rguh') (c : Lguh ≅ L1 ⋙ Lgu)
+    (c' : Lguh' ≅ Lh' ⋙ Lgu') {ΨP : DY ⥤ SP} (αh : ΨP ⋙ Lh' ⟶ L1 ⋙ ΨY)
+    (αguh : ΨP ⋙ Lguh' ⟶ Lguh ⋙ ΨB)
+    (hαh : ∀ K, αguh.app K ≫ ΨB.map (c.hom.app K) =
+      c'.hom.app (ΨP.obj K) ≫ Lgu'.map (αh.app K) ≫ αgu.app (L1.obj K))
+    (χguh : Rguh ⋙ ΨP ⟶ ΨB ⋙ Rguh') (hχguh : χguh = (mateEquiv adjguh adjguh' αguh).natTrans)
+    (b : Rguh ⋙ L1 ⟶ Rgu)
+    (hb : ∀ N, Lgu.map (b.app N) ≫ adjgu.counit.app N =
+      c.inv.app (Rguh.obj N) ≫ adjguh.counit.app N)
+    (b' : Rguh' ⋙ Lh' ⟶ Rgu')
+    (hb' : ∀ N, Lgu'.map (b'.app N) ≫ adjgu'.counit.app N =
+      c'.inv.app (Rguh'.obj N) ≫ adjguh'.counit.app N)
+    {Dh : SY ⥤ SP} (e : 𝟭 DY ≅ L1) (adjH : Dh ⊣ Lh') [IsIso αh] (eh : Rgu ⋙ 𝟭 DY ⟶ Rguh)
+    (heh : ∀ N, (Adjunction.id.ofNatIsoRight e).unit.app (Rgu.obj N) ≫ L1.map (eh.app N) ≫
+      b.app N = 𝟙 _)
+    (eH' : Rgu' ⋙ Dh ⟶ Rguh')
+    (heH' : ∀ N, adjH.unit.app (Rgu'.obj N) ≫ Lh'.map (eH'.app N) ≫ b'.app N = 𝟙 _)
+    {Rp : DY ⥤ DS} {Rp' : SP ⥤ SS} {Rpall : DB ⥤ DS} {Rpall' : SB ⥤ SS} {ΨS : DS ⥤ SS}
+    (χp : Rp ⋙ ΨS ⟶ ΨP ⋙ Rp') (χpall : Rpall ⋙ ΨS ⟶ ΨB ⋙ Rpall')
+    (conj : Rpall ≅ Rguh ⋙ Rp) (conj' : Rpall' ≅ Rguh' ⋙ Rp')
+    (hcomp : ∀ E, χpall.app E ≫ conj'.hom.app (ΨB.obj E) =
+      ΨS.map (conj.hom.app E) ≫ χp.app (Rguh.obj E) ≫ Rp'.map (χguh.app E))
+    (N : DB) [Mono (bu'.app (ΨB.obj N))] [Mono (b'.app (ΨB.obj N))] :
+    ∀ χ₀ : (ΨP ⋙ Rp').obj (Rgu.obj N) ⟶ (Rp ⋙ ΨS).obj (Rgu.obj N),
+      χ₀ ≫ χp.app (Rgu.obj N) = 𝟙 _ →
+        Rp'.map (Dh.map ((lowerShriekExchangeOfInv adjU adjU' αu).app (Rg.obj N) ≫
+            ΨY.map (eU.app N))) ≫
+          Rp'.map ((pointOpenExchange adjH e αh).app (Rgu.obj N)) ≫ χ₀ ≫
+          ΨS.map (Rp.map ((eh : Rgu ⟶ Rguh).app N) ≫ conj.inv.app N) ≫ χpall.app N =
+        Rp'.map (Dh.map (DuS'.map (χg.app N) ≫ eU'.app (ΨB.obj N)) ≫ eH'.app (ΨB.obj N)) ≫
+          conj'.inv.app (ΨB.obj N) := fun χ₀ hχ₀ ↦
+  map_comp_exchange_aux Dh Rp'
+    (lowerShriekExchangeOfInv_app_comp_aux adjg adjgu adjg' adjgu' cu cu' αg αu αgu hαu χg hχg
+      χgu hχgu bu hbu bu' hbu' adjU adjU' eU heU eU' heU' N)
+    (pointOpenExchange_app_eq adjH e αh _)
+    (compactSupportExchange_comp_aux adjgu adjguh adjgu' adjguh' c c' αgu αh αguh hαh χgu hχgu
+      χguh hχguh b hb b' hb' (Adjunction.id.ofNatIsoRight e) adjH eh heh eH' heH' χp χpall conj
+      conj' hcomp N χ₀ hχ₀)
 
 end Abstract
 
@@ -109,6 +190,71 @@ theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app (φg : MB.Hom MC
     (unit_comp_closedExtension_app adj' w') N
 
 end ModelExchange
+
+section PointModelExchange
+
+/-- **The ambient identity of `ν_X` on pushforwards**, for morphisms of models
+`φ_g : M_B ⟶ 𝒳`, `φ_u : 𝒳 ⟶ 𝒴` (over an open immersion `u`), `φ_h : 𝒴 ⟶ 𝒫` (over `𝟙 Y`, with an
+open immersion `h'` of special fibres) and `φ_p : 𝒫 ⟶ 𝒮`: for every right inverse `χ₀` of the
+pushforward exchange of `φ_p` at `(gu)_* N`, `Rp'_* h'_!(ν_u) ∘ Rp'_*(ν_h) ∘ χ₀` read through
+`closedExtension` is the pushforward exchange of the composite after `Rp'_* h'_! u'_!(χ_g)`. -/
+theorem NearbyCyclesModel.Hom.pointExchange_comp_app
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {_ : MonObj Λ} {_ : IsCommMonObj Λ}
+    {B B' X X' Y Y' P' S S' : Scheme.{u}} {MB : NearbyCyclesModel B B'}
+    {MX : NearbyCyclesModel X X'} {MY : NearbyCyclesModel Y Y'} {MP : NearbyCyclesModel Y P'}
+    {MS : NearbyCyclesModel S S'} {g : B ⟶ X} {g' : B' ⟶ X'} {u : X ⟶ Y} {u' : X' ⟶ Y'}
+    {h' : Y' ⟶ P'} {p : Y ⟶ S} {p' : P' ⟶ S'} (φg : MB.Hom MX g g') (φu : MX.Hom MY u u')
+    (φh : MY.Hom MP (𝟙 Y) h') (φp : MP.Hom MS p p') {DuS : 𝔻(X) ⥤ 𝔻(Y)}
+    {DuS' : 𝔻(X') ⥤ 𝔻(Y')} {Dh : 𝔻(Y') ⥤ 𝔻(P')} (adjU : DuS ⊣ L((u)^*⟦Λ⟧))
+    (adjU' : DuS' ⊣ L((u')^*⟦Λ⟧)) (adjH : Dh ⊣ L((h')^*⟦Λ⟧)) (e : 𝟭 𝔻(Y) ≅ L((𝟙 Y)^*⟦Λ⟧))
+    {_ : IsIso (φu.pullbackExchange Λ)} {_ : IsIso (φh.pullbackExchange Λ)} {_ : Mono u}
+    {_ : WeaklyEtale u} {_ : Mono u'} {_ : WeaklyEtale u'} {_ : Mono h'} {_ : WeaklyEtale h'}
+    (N : 𝔻(B)) :
+    ∀ χ₀ : (MP.nearbyCycles Λ ⋙ R((p')_*⟦Λ⟧)).obj (R((g ≫ u)_*⟦Λ⟧).obj N) ⟶
+        (R((p)_*⟦Λ⟧) ⋙ MS.nearbyCycles Λ).obj (R((g ≫ u)_*⟦Λ⟧).obj N),
+      χ₀ ≫ (φp.pushforwardExchange Λ).app (R((g ≫ u)_*⟦Λ⟧).obj N) = 𝟙 _ →
+        R((p')_*⟦Λ⟧).map (Dh.map ((lowerShriekExchangeOfInv adjU adjU'
+            (φu.pullbackExchange Λ)).app (R((g)_*⟦Λ⟧).obj N) ≫
+            (MY.nearbyCycles Λ).map ((closedExtension adjU rfl).app N))) ≫
+          R((p')_*⟦Λ⟧).map ((pointOpenExchange adjH e (φh.pullbackExchange Λ)).app
+            (R((g ≫ u)_*⟦Λ⟧).obj N)) ≫ χ₀ ≫
+          (MS.nearbyCycles Λ).map (R((p)_*⟦Λ⟧).map
+              ((closedExtension (Adjunction.id.ofNatIsoRight e) rfl :
+                R((g ≫ u)_*⟦Λ⟧) ⟶ R(((g ≫ u) ≫ 𝟙 Y)_*⟦Λ⟧)).app N) ≫
+            (lowerStarCompOfEq (Λ := Λ) (rfl : ((g ≫ u) ≫ 𝟙 Y) ≫ p = _)).inv.app N) ≫
+          ((((φg.comp φu).comp φh).comp φp).pushforwardExchange Λ).app N =
+        R((p')_*⟦Λ⟧).map (Dh.map (DuS'.map ((φg.pushforwardExchange Λ).app N) ≫
+            (closedExtension adjU' rfl).app ((MB.nearbyCycles Λ).obj N)) ≫
+            (closedExtension adjH rfl).app ((MB.nearbyCycles Λ).obj N)) ≫
+          (lowerStarCompOfEq (Λ := Λ) (rfl : ((g' ≫ u') ≫ h') ≫ p' = _)).inv.app
+            ((MB.nearbyCycles Λ).obj N) :=
+  pointExchange_comp_aux (derivedUpperStarLowerStarAdjunction Λ g)
+    (derivedUpperStarLowerStarAdjunction Λ (g ≫ u)) (derivedUpperStarLowerStarAdjunction Λ g')
+    (derivedUpperStarLowerStarAdjunction Λ (g' ≫ u')) (leftDerivedUpperStarCompOfEq Λ rfl)
+    (leftDerivedUpperStarCompOfEq Λ rfl) (φg.pullbackExchange Λ) (φu.pullbackExchange Λ)
+    ((φg.comp φu).pullbackExchange Λ)
+    (φg.pullbackExchange_comp_app_of_eq Λ φu (φg.comp φu) rfl rfl rfl rfl)
+    (φg.pushforwardExchange Λ) rfl ((φg.comp φu).pushforwardExchange Λ) rfl
+    (closedBaseChange Λ rfl) (map_closedBaseChange_app_comp_counit Λ rfl)
+    (closedBaseChange Λ rfl) (map_closedBaseChange_app_comp_counit Λ rfl) adjU adjU'
+    (closedExtension adjU rfl) (unit_comp_closedExtension_app adjU rfl)
+    (closedExtension adjU' rfl) (unit_comp_closedExtension_app adjU' rfl)
+    (derivedUpperStarLowerStarAdjunction Λ ((g ≫ u) ≫ 𝟙 Y))
+    (derivedUpperStarLowerStarAdjunction Λ ((g' ≫ u') ≫ h'))
+    (leftDerivedUpperStarCompOfEq Λ rfl) (leftDerivedUpperStarCompOfEq Λ rfl)
+    (φh.pullbackExchange Λ) (((φg.comp φu).comp φh).pullbackExchange Λ)
+    ((φg.comp φu).pullbackExchange_comp_app_of_eq Λ φh ((φg.comp φu).comp φh) rfl rfl rfl rfl)
+    (((φg.comp φu).comp φh).pushforwardExchange Λ) rfl (closedBaseChange Λ rfl)
+    (map_closedBaseChange_app_comp_counit Λ rfl) (closedBaseChange Λ rfl)
+    (map_closedBaseChange_app_comp_counit Λ rfl) e adjH
+    (closedExtension (Adjunction.id.ofNatIsoRight e) rfl)
+    (unit_comp_closedExtension_app (Adjunction.id.ofNatIsoRight e) rfl)
+    (closedExtension adjH rfl) (unit_comp_closedExtension_app adjH rfl)
+    (φp.pushforwardExchange Λ) ((((φg.comp φu).comp φh).comp φp).pushforwardExchange Λ)
+    (lowerStarCompOfEq rfl) (lowerStarCompOfEq rfl)
+    (((φg.comp φu).comp φh).pushforwardExchange_comp_app_of_eq Λ φp _ rfl rfl rfl rfl) N
+
+end PointModelExchange
 
 section Lift
 

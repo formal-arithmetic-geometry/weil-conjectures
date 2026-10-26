@@ -34,7 +34,9 @@ terms coming from `Profinite.padicAlgClRingObj ℓ` and as the synthesized insta
 from the generic `Λ`. Both the elaborator and the kernel unfold the instances (e.g. the monoidal
 structure on condensed abelian groups) instead of using proof irrelevance, and time out (the kernel
 runs out of memory at `maxHeartbeats 3000000`), also when the identification is made by a
-congruence on the differing proofs.
+congruence on the differing proofs. `hC` is an instance of
+`NearbyCyclesModel.Hom.pointExchange_comp_app`, which `apply` accepts in the elaborator; the
+kernel check of the result times out (see the notes of `PointExchangeOnComponent`).
 
 -/
 
