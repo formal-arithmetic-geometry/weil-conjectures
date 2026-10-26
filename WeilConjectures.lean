@@ -8725,7 +8725,6 @@ public import WeilConjectures.ConstructibleSheaf.LisseLocus
 public import WeilConjectures.ConstructibleSheaf.LisseModuleTrivializingTorsor
 public import WeilConjectures.ConstructibleSheaf.LisseRankOne
 public import WeilConjectures.ConstructibleSheaf.LisseTrivialization
-public import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltration
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltrationExtension
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction
@@ -12935,6 +12934,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriekPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac

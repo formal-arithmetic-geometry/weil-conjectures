@@ -17,7 +17,7 @@ import WeilConjectures.ConstructibleSheaf.LocallyConstantRetractionExtension
 /-!
 # Reduction of finite locally constant `𝔽_ℓ`-sheaves to constant ones
 
-Let `U` be an irreducible scheme and `G` a finite locally constant sheaf of `𝔽_ℓ`-vector
+Let `U` be a connected scheme and `G` a finite locally constant sheaf of `𝔽_ℓ`-vector
 spaces on `U_ét`. The monodromy of `G` is a finite group `Q`; the cover attached to an
 `ℓ`-Sylow subgroup `H ⊆ Q` is a connected finite étale `v : V ⟶ U` of degree `[Q : H]`,
 prime to `ℓ`, over which the monodromy is the `ℓ`-group `H`. The flag of
@@ -41,8 +41,8 @@ namespace AlgebraicGeometry
 
 open Etale
 
-/-- **Reduction of a finite locally constant `𝔽_ℓ`-sheaf to constant sheaves.** Let `U` be an
-irreducible scheme and `G` a finite locally constant sheaf of `𝔽_ℓ`-vector spaces on `U_ét`.
+/-- **Reduction of a finite locally constant `𝔽_ℓ`-sheaf to constant sheaves.** Let `U` be a
+connected scheme and `G` a finite locally constant sheaf of `𝔽_ℓ`-vector spaces on `U_ét`.
 There is a connected finite étale `v : V ⟶ U` such that
 
 * every geometric fibre of `v` has the same cardinality `d`, prime to `ℓ`;
@@ -57,7 +57,7 @@ coefficient ring of `ModuleCat.{u + 1} Λ`-valued étale sheaves lives in `Type 
 (blueprint: lemma-weil-pbc-curve-locally-constant-reduction)
 -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : Scheme.{u}}
-    [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
+    [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] :
     ∃ (V : Scheme.{u}) (v : V ⟶ U) (_ : IsFinite v) (_ : Etale v) (_ : ConnectedSpace V)

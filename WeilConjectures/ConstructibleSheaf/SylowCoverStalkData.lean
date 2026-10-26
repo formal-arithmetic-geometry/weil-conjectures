@@ -48,7 +48,7 @@ comparisons. Thus M and v*G are related by their common descent datum.
 For G = 0 the monodromy torsor can be the identity with Q = 1 and A = 0.
 No preservation of global finite limits or colimits is asserted here. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data
-    {U : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
+    {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] :
     ∃ (V : Scheme.{u}) (v : V ⟶ U) (_ : IsFinite v) (_ : Etale v) (_ : ConnectedSpace V)
