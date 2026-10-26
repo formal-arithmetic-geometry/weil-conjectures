@@ -12757,6 +12757,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacConjugate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacGeneric
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyclic
@@ -12772,6 +12775,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClUn
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteCondensed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteExtend
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueShortExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldModuleSheafEquivalenceLift
