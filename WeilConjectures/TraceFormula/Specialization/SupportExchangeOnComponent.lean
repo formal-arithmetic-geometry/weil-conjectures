@@ -165,9 +165,26 @@ variable [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
 Varshavsky's argument): for `ν_c = supportCompactSupportExchange` and `N : Dᵇc(B)`, the identity of
 `compactSupportExchangeOfCompactification_app_lowerStar` for the morphism of models
 `componentModelHom` over `B ⊂ F ⊂ C`: on `(ι ∘ j)_* N`, `ν_c` read through the composition
-isomorphisms is the pushforward exchange of `(𝒟_B ⟶ 𝒞 ⟶ 𝒞̄) ⟶ 𝒳 ×_S 𝒳` after `c'_!(χ_{ι∘j})`. -/
+isomorphisms is the pushforward exchange of `(𝒟_B ⟶ 𝒞 ⟶ 𝒞̄) ⟶ 𝒳 ×_S 𝒳` after `c'_!(χ_{ι∘j})`, given
+the ambient identity `hC` of `compactSupportExchangeOfCompactification_app_lowerStar` at `N`. -/
 theorem supportCompactSupportExchange_app_lowerStar
-    (N : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (N : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hC : hypothesisOf (compactSupportExchangeOfCompactification_app_lowerStar ℓ
+      ((deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
+        (isTraitModel_deformationModel c.C y.left.ker k')
+        (deformationModel_exists_comp_ε c.C y.left.ker k'))
+      (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
+        (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+        (isTraitModel_deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+        (deformationProdModel_exists_comp_ε X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k'))
+      (f := c.support) (h := supportClosureι c)
+      (by rw [prodLift_supportClosureMap, supportClosureι_map])
+      (f' := (hc.specialCorrespondence k').support) (h' := hc.supportClosureSpecialι k')
+      (hc.supportClosureSpecialι_comp k') (supportClosureOpenModelHom c y hc k')
+      (supportClosureProperModelHom c y k')
+      (isIsoOn_supportClosureProperModelHom_pushforwardExchange k'
+        (isProper_deformationProdLiftTotal k' _ _ _ _))
+      (componentModelHom k' j hb) (hc.supportCompactSupportExchange k') rfl N)) :
     type_of% (compactSupportExchangeOfCompactification_app_lowerStar ℓ
       ((deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
         (isTraitModel_deformationModel c.C y.left.ker k')
@@ -183,7 +200,7 @@ theorem supportCompactSupportExchange_app_lowerStar
       (supportClosureProperModelHom c y k')
       (isIsoOn_supportClosureProperModelHom_pushforwardExchange k'
         (isProper_deformationProdLiftTotal k' _ _ _ _))
-      (componentModelHom k' j hb) (hc.supportCompactSupportExchange k') rfl N) := by
+      (componentModelHom k' j hb) (hc.supportCompactSupportExchange k') rfl N hC) := by
   exact compactSupportExchangeOfCompactification_app_lowerStar ℓ
       ((deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
         (isTraitModel_deformationModel c.C y.left.ker k')
@@ -199,7 +216,7 @@ theorem supportCompactSupportExchange_app_lowerStar
       (supportClosureProperModelHom c y k')
       (isIsoOn_supportClosureProperModelHom_pushforwardExchange k'
         (isProper_deformationProdLiftTotal k' _ _ _ _))
-      (componentModelHom k' j hb) (hc.supportCompactSupportExchange k') rfl N
+      (componentModelHom k' j hb) (hc.supportCompactSupportExchange k') rfl N hC
 
 end Correspondence.IsContractingAt
 

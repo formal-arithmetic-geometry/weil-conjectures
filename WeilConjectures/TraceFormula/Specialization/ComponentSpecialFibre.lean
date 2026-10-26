@@ -130,15 +130,13 @@ lemma isUniversalHomeomorphism_componentSpecialLift [IsClosedImmersion (j ≫ F.
 immersion, the factorization `r : B'' ⟶ F'` of `b''` through the special fixed locus is a finite
 universal homeomorphism, so the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of `Lr^* ⊣ Rr_*` is an isomorphism and
 `Lr^* : Dᵇc(F') ⥤ Dᵇc(B'')` is an equivalence. -/
-theorem isIso_unit_componentSpecialLift
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    [IsFinitenessCoefficient ℓ Λ] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
+theorem isIso_unit_componentSpecialLift [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
     [IsSeparated B.hom] [IsClosedImmersion (j ≫ F.ι).left] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (hc.componentSpecialLift k' j hb)).unit :=
   have := hc.isClosedImmersion_componentSpecialLift k' j hb
   have := hc.isUniversalHomeomorphism_componentSpecialLift k' j hb
-  isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ _
+  isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction ℓ _
 
 end Correspondence.IsContractingAt
 

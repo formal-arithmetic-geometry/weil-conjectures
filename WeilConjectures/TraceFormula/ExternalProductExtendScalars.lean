@@ -112,7 +112,8 @@ noncomputable def boundedConstructibleIntegersToPadicAlgClExternalProductIso
     (eM : (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj M₀ ≅ M)
     (eN : (boundedConstructibleIntegersToPadicAlgCl ℓ E Y).obj N₀ ≅ N) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E (X ⨯ Y)).obj
-        (boundedConstructibleExternalProduct _ ℓ M₀ N₀) ≅ externalProduct ℓ M N :=
+        (PadicIntegersRingObj.boundedConstructibleExternalProduct ℓ E.1 M₀ N₀) ≅
+      externalProduct ℓ M N :=
   (Functor.Monoidal.μIso (boundedConstructibleIntegersToPadicAlgCl ℓ E (X ⨯ Y)) _ _).symm ≪≫
     tensorIso
       ((boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E (prod.fst : X ⨯ Y ⟶ X)).app M₀ ≪≫
@@ -133,14 +134,15 @@ variable {S : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.h
 unit isomorphisms of the monoidal functors `E ⊗ᴸ_{𝒪_E} -` and `ℚ̄_ℓ ⊗ᴸ_E -`. -/
 noncomputable def boundedConstructibleIntegersToPadicAlgClDualizingIso :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj
-        (boundedConstructibleDualizingComplex _ ℓ a) ≅ dualizingComplex ℓ a :=
+        (PadicIntegersRingObj.boundedConstructibleDualizingComplex ℓ E.1 a) ≅
+      (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _) :=
   have := isIso_boundedConstructibleUpperShriekToPadicAlgCl ℓ E a
   (constructibleToPadicAlgCl X.left ℓ E).mapIso
       ((boundedConstructibleUpperShriekExtendScalarsIso ℓ E a).app (𝟙_ _) ≪≫
-        (boundedConstructibleUpperShriek _ ℓ a).mapIso
+        (ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E a).mapIso
           (Functor.Monoidal.εIso (boundedConstructibleExtendScalars S.left ℓ E)).symm) ≪≫
     (asIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E a)).app (𝟙_ _) ≪≫
-    (boundedConstructibleUpperShriek _ ℓ a).mapIso
+    (boundedConstructibleUpperShriek ℓ a).mapIso
       (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
 
 variable {K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
@@ -152,7 +154,8 @@ variable {K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
 Hom clause of blueprint `sk-prop-scalar-six` and the comparison of the dualizing complexes. -/
 noncomputable def boundedConstructibleIntegersToPadicAlgClVerdierDualIso :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj
-        (boundedConstructibleVerdierDual _ ℓ a K₀) ≅ verdierDual ℓ a K :=
+        (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 a K₀) ≅
+      (ihom K).obj ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)) :=
   have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
   Functor.LaxMonoidal.mapIhomObjIso _ e (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a)
 
@@ -162,12 +165,12 @@ of `T`, the isomorphisms `T K₀ ≅ K`, `T 𝔻 K₀ ≅ 𝔻 K` and `T ω_{X,�
 `K ⊗ 𝔻 K ⟶ ω_X`. -/
 lemma μ_comp_map_ev_comp_boundedConstructibleIntegersToPadicAlgClDualizingIso :
     Functor.LaxMonoidal.μ (boundedConstructibleIntegersToPadicAlgCl ℓ E X) K₀
-        (boundedConstructibleVerdierDual _ ℓ a K₀) ≫
+        (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 a K₀) ≫
       (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map
-        ((ihom.ev K₀).app (boundedConstructibleDualizingComplex _ ℓ a)) ≫
+        ((ihom.ev K₀).app (PadicIntegersRingObj.boundedConstructibleDualizingComplex ℓ E.1 a)) ≫
       (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a).hom =
     (e.hom ⊗ₘ (boundedConstructibleIntegersToPadicAlgClVerdierDualIso ℓ E a e).hom) ≫
-      (ihom.ev K).app (dualizingComplex ℓ a) := by
+      (ihom.ev K).app ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)) := by
   have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
   exact Functor.LaxMonoidal.μ_comp_map_ev_comp_hom _ e _
 
@@ -185,9 +188,9 @@ coefficients. -/
 noncomputable def boundedConstructibleIntegersToPadicAlgClExternalProductVerdierDualIso
     (e : (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K₀ ≅ K) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E (X ⨯ X)).obj
-        (boundedConstructibleExternalProduct _ ℓ K₀
-          (boundedConstructibleVerdierDual _ ℓ (toPoint X) K₀)) ≅
-      externalProduct ℓ K (verdierDual ℓ (toPoint X) K) :=
+        (PadicIntegersRingObj.boundedConstructibleExternalProduct ℓ E.1 K₀
+          (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 (toPoint X) K₀)) ≅
+      externalProduct ℓ K (verdierDual ℓ K) :=
   boundedConstructibleIntegersToPadicAlgClExternalProductIso ℓ E e
     (boundedConstructibleIntegersToPadicAlgClVerdierDualIso ℓ E (toPoint X) e)
 

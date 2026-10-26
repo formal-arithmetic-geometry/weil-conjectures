@@ -87,16 +87,16 @@ variable (c : Correspondence ℓ K)
 `lem-trf-trace-class-diagonal-pairing`, Step 1): the exceptional adjoint of the mate of `u`
 read through the external duality isomorphism `𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
 noncomputable def supportedClass :
-    (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
-      externalProduct ℓ K (verdierDual ℓ (toPoint X) K) :=
-  ((boundedConstructibleUpperShriekAdjunction _ ℓ c.support).homEquiv _ _).symm
+    (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
+      externalProduct ℓ K (verdierDual ℓ K) :=
+  ((boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _).symm
     (c.mate ≫ c.verdierDualityIso.hom)
 
 /-- The mate of `u`, read through the external duality isomorphism, is the exceptional adjoint
 of the supported class (blueprint `lem-trf-trace-class-diagonal-pairing`, Step 1). -/
 lemma mate_comp_verdierDualityIso_hom :
     c.mate ≫ c.verdierDualityIso.hom =
-      (boundedConstructibleUpperShriekAdjunction _ ℓ c.support).homEquiv _ _
+      (boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _
         c.supportedClass := by
   rw [supportedClass, Equiv.apply_symm_apply]
 
@@ -105,8 +105,8 @@ lemma mate_comp_verdierDualityIso_hom :
 `u` read through `Lc₂^* = Lc^* Lp₂^*` and `Rc₁^! = Rc^! Rp₁^!`. -/
 lemma supportedClass_eq :
     c.supportedClass =
-      (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-          (boundedConstructibleExceptionalProjection _ ℓ c.support) _ _).symm
+      (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+          (boundedConstructibleExceptionalProjection ℓ c.support) _ _).symm
           ((eqToIso (by rw [support_snd]) ≪≫
               (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).app K).inv ≫ c.u ≫
             (eqToIso (by rw [support_fst]) ≪≫
@@ -123,7 +123,7 @@ class (blueprint `lem-trf-trace-class-diagonal-pairing`, Step 2): the inverse of
 base change `LΔ^* Rc_! ≅ Rd_! Lι^*` in the fixed square, `LΔ^*` of the supported class, the
 identification `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K` and the evaluation. -/
 noncomputable def diagonalSpecialization :
-    (boundedConstructibleLowerShriek _ ℓ F.d).obj
+    (boundedConstructibleLowerShriek ℓ F.d).obj
         ((boundedConstructibleUpperStar _ ℓ F.ι).obj (𝟙_ _)) ⟶
       dualizingComplex' ℓ X :=
   F.lowerShriekBaseChangeIso.inv.app (𝟙_ _) ≫
@@ -140,7 +140,7 @@ composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
 theorem traceClass_eq_homEquiv :
     c.traceClass F =
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-        (boundedConstructibleUpperShriekAdjunction _ ℓ F.d).homEquiv _ _
+        (boundedConstructibleUpperShriekAdjunction ℓ F.d).homEquiv _ _
           (diagonalSpecialization F) ≫
         (dualizingComplexComp ℓ F.d).hom := by
   rw [traceClass]
@@ -150,19 +150,19 @@ theorem traceClass_eq_homEquiv :
   conv_rhs => rw [Adjunction.homEquiv_naturality_right]
   unfold evaluationKernel
   have e1 : c.supportedClass ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).homEquiv _ _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _
         ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).homEquiv _ _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).homEquiv _ _
         ((boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
           (diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) :=
     (Adjunction.homEquiv_naturality_left _ _ _).symm
   erw [e1]
   unfold FixedLocus.upperShriekLowerStarIso
   erw [reassoc_of% (Adjunction.homEquiv_homEquiv_comp_conjugateIsoEquiv_app
-      (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
-      (boundedConstructibleUpperShriekAdjunction _ ℓ F.d) F.lowerShriekBaseChangeIso
+      (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
+      (boundedConstructibleUpperShriekAdjunction ℓ F.d) F.lowerShriekBaseChangeIso
       ((boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
         (diagUpperStarExternalProductIso ℓ K _).hom ≫
         (ihom.ev K).app (dualizingComplex' ℓ X)))]

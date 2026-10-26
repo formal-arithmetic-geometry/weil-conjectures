@@ -147,8 +147,9 @@ lemma projectiveLineFibreToProjectiveLine_proj (x : Spec (.of Ω) ⟶ B.left)
 lemma projectiveLineFibreToProjectiveLine_map (x : Spec (.of Ω) ⟶ B.left)
     (hx : x ≫ B.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω))) :
     projectiveLineFibreToProjectiveLine x hx ≫ (overProjectiveLineMap (toPoint B)).left =
-      geometricBaseChangeProj (overProjectiveLine (point k)) :=
-  liftBaseChange_map _ _ _
+      geometricBaseChangeProj (overProjectiveLine (point k)) := by
+  rw [overProjectiveLineMap_left, toPoint_left]
+  exact liftBaseChange_map _ _ _
 
 /-- The embedding `ℙ¹_Ω ⟶ ℙ¹_B ×_k Ω`, `(t, ω) ↦ ((t, ȳ(ω)), ω)`, of the fibre of
 `ℙ¹_B ×_k Ω ⟶ B ×_k Ω` at the rational point attached to a geometric point `ȳ : Spec Ω ⟶ B`
@@ -223,7 +224,7 @@ lemma isPullback_projectiveLineFibreMap_left (x : Spec (.of Ω) ⟶ B.left)
       (overProjectiveLineProj B).left x := by
     refine IsPullback.of_right (h₁₂ := (overProjectiveLineMap (toPoint B)).left)
       (h₂₂ := B.hom) ?_ (projectiveLineFibreToProjectiveLine_proj x hx)
-      (isPullback_overProjectiveLineMap (toPoint B))
+      (by simpa only [toPoint_left] using isPullback_overProjectiveLineMap (toPoint B))
     rw [projectiveLineFibreToProjectiveLine_map, hx]
     exact isPullback_projectiveLineFibre_hom k Ω
   have hw : (projectiveLineFibreMap x hx).left ≫
@@ -256,8 +257,12 @@ theorem isPullback_projectiveLineFibreMap (x : Spec (.of Ω) ⟶ B.left)
     IsPullback (projectiveLineFibreMap x hx) (toPoint (projectiveLineFibre k Ω))
       ((geometricBaseChange k Ω).map (overProjectiveLineProj B))
       (geometricBaseChangePoint x hx) :=
-  IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext
-    (isPullback_projectiveLineFibreMap_left x hx).w) (isPullback_projectiveLineFibreMap_left x hx)
+  IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext (by
+      simpa only [Over.comp_left, toPoint_left] using
+        (isPullback_projectiveLineFibreMap_left x hx).w))
+    (by
+      simpa only [Over.forget_map, toPoint_left] using
+        isPullback_projectiveLineFibreMap_left x hx)
 
 variable [Finite k]
 

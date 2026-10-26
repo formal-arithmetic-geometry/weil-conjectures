@@ -54,13 +54,13 @@ local notation "𝐃(" X ", " A ")" =>
 
 namespace Etale
 
-variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
 
 omit [ConcreteCategory A FA] [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-  [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint] in
+  [HasCompactification a] in
 /-- The evaluation part of the pairing of a trace: maps `h : N ⟶ Ra_* K^∨` correspond
 bijectively to maps `K ⊗ᴸ La^* N ⟶ Λ_X`, through `K ⊗ᴸ La^* h`, `K ⊗ᴸ` the counit of
 `La^* ⊣ Ra_*` and the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`. -/
@@ -85,7 +85,6 @@ theorem bijective_derivedTensor_map_comp_counit_comp_coefficientEvaluation (K : 
   exact (Equiv.bijective _).comp (Equiv.bijective _)
 
 set_option maxRecDepth 4000 in
-omit [(R(a)_![A]).IsLeftAdjoint] in
 omit [HasSmallSiteSheafify A] in
 /-- **The pairing of a trace which is a counit is perfect** (form with the trace read on
 `Ra_!(Λ_X[n])`). -/

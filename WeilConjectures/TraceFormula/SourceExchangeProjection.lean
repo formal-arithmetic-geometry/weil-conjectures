@@ -81,27 +81,27 @@ variable {C Y : Over (Spec (.of k))} [LocallyOfFiniteType C.hom] [QuasiCompact C
 lemma lowerShriek_map_comp_eqToHom_comp_counit {s t : C ⟶ Y} (h : t = s)
     {N : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj
         ℓ⟧}
-    (w : N ⟶ (boundedConstructibleUpperShriek _ ℓ t).obj M) :
-    (boundedConstructibleLowerShriek _ ℓ s).map
-        (w ≫ eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperShriek _ ℓ r).obj M) h)) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ s).counit.app M =
-    eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj N) h.symm) ≫
-      (boundedConstructibleLowerShriek _ ℓ t).map w ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ t).counit.app M := by
+    (w : N ⟶ (boundedConstructibleUpperShriek ℓ t).obj M) :
+    (boundedConstructibleLowerShriek ℓ s).map
+        (w ≫ eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperShriek ℓ r).obj M) h)) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ s).counit.app M =
+    eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj N) h.symm) ≫
+      (boundedConstructibleLowerShriek ℓ t).map w ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ t).counit.app M := by
   subst h
   simp
 
 lemma lowerShriek_map_comp_comp_eqToHom_comp_counit {s t : C ⟶ Y} (h : t = s)
     {N N' : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (v : N' ⟶ N)
-    (w : N ⟶ (boundedConstructibleUpperShriek _ ℓ t).obj M) :
-    (boundedConstructibleLowerShriek _ ℓ s).map
-        (v ≫ w ≫ eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperShriek _ ℓ r).obj M) h)) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ s).counit.app M =
-    (boundedConstructibleLowerShriek _ ℓ s).map v ≫
-      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj N) h.symm) ≫
-      (boundedConstructibleLowerShriek _ ℓ t).map w ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ t).counit.app M := by
+    (w : N ⟶ (boundedConstructibleUpperShriek ℓ t).obj M) :
+    (boundedConstructibleLowerShriek ℓ s).map
+        (v ≫ w ≫ eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperShriek ℓ r).obj M) h)) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ s).counit.app M =
+    (boundedConstructibleLowerShriek ℓ s).map v ≫
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj N) h.symm) ≫
+      (boundedConstructibleLowerShriek ℓ t).map w ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ t).counit.app M := by
   subst h
   simp
 
@@ -112,18 +112,18 @@ variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.h
 lemma leftProjection_lowerShriek_comp (x : C ⟶ Y) (y : Y ⟶ Z)
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
         (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ (x ≫ y)) M T ≫
-        (boundedConstructibleLowerShriek _ ℓ (x ≫ y)).map
+    Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ (x ≫ y)) M T ≫
+        (boundedConstructibleLowerShriek ℓ (x ≫ y)).map
           ((boundedConstructibleUpperStarComp _ ℓ x y).hom.app M ▷ T) =
       M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).hom.app T ≫
-        Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ y) M
-          ((boundedConstructibleLowerShriek _ ℓ x).obj T) ≫
-        (boundedConstructibleLowerShriek _ ℓ y).map
-          (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ x)
+        Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ y) M
+          ((boundedConstructibleLowerShriek ℓ x).obj T) ≫
+        (boundedConstructibleLowerShriek ℓ y).map
+          (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ x)
             ((boundedConstructibleUpperStar _ ℓ y).obj M) T) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ x y).inv.app _ :=
   Verdier.leftProjection_comp _ _ _ _ _
-      (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _)
+      (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _)
     (fun T M ↦ exceptionalProjection_comp ℓ x y T M) M T
 
 set_option maxHeartbeats 2000000 in
@@ -132,64 +132,64 @@ set_option maxHeartbeats 2000000 in
 adjunction. -/
 lemma leftProjection_lowerShriek_unit (g : C ⟶ Y) [IsProper g.left]
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ◁ ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar _ ℓ g).map
+    M ◁ ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ g).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ g)).inv ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app (𝟙_ _)) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ g) M (𝟙_ _) =
-    (ρ_ M).hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app M ≫
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ g) M (𝟙_ _) =
+    (ρ_ M).hom ≫ (boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app M ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ g).map (ρ_ _).inv :=
+      (boundedConstructibleLowerShriek ℓ g).map (ρ_ _).inv :=
   Verdier.leftProjection_unit _ _ _ _
     (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
-    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ g A B)
-    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _ _) M
+    (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
+    (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M
 
 set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The left projection morphism of a composite `g ≫ b` with `g` proper at the unit point. -/
 lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : Y ⟶ Z)
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ◁ (boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app (𝟙_ _) ≫
-          (boundedConstructibleLowerStar _ ℓ g).map
+    M ◁ (boundedConstructibleLowerShriek ℓ b).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app (𝟙_ _) ≫
+          (boundedConstructibleLowerStar ℓ g).map
             (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ g)).inv ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app (𝟙_ _)) ≫
       M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app (𝟙_ _) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ (g ≫ b)) M (𝟙_ _) =
-    Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ b) M (𝟙_ _) ≫
-      (boundedConstructibleLowerShriek _ ℓ b).map
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ (g ≫ b)) M (𝟙_ _) =
+    Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ b) M (𝟙_ _) ≫
+      (boundedConstructibleLowerShriek ℓ b).map
         ((ρ_ ((boundedConstructibleUpperStar _ ℓ b).obj M)).hom ≫
-          (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app
             ((boundedConstructibleUpperStar _ ℓ b).obj M) ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
             ((boundedConstructibleUpperStar _ ℓ g).obj
                 ((boundedConstructibleUpperStar _ ℓ b).obj M)) ≫
-          (boundedConstructibleLowerShriek _ ℓ g).map (ρ_ ((boundedConstructibleUpperStar _ ℓ g).obj
+          (boundedConstructibleLowerShriek ℓ g).map (ρ_ ((boundedConstructibleUpperStar _ ℓ g).obj
             ((boundedConstructibleUpperStar _ ℓ b).obj M))).inv) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app
         ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj M) ⊗
           𝟙_ _) ≫
-      (boundedConstructibleLowerShriek _ ℓ (g ≫ b)).map
+      (boundedConstructibleLowerShriek ℓ (g ≫ b)).map
         ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app M ▷ _) := by
   have hc := leftProjection_lowerShriek_comp ℓ g b M (𝟙_ _)
-  have hc' : Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ (g ≫ b)) M
+  have hc' : Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ (g ≫ b)) M
       (𝟙_ _) =
       M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).hom.app (𝟙_ _) ≫
-        Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ b) M
-          ((boundedConstructibleLowerShriek _ ℓ g).obj (𝟙_ _)) ≫
-        (boundedConstructibleLowerShriek _ ℓ b).map
-          (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ g)
+        Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ b) M
+          ((boundedConstructibleLowerShriek ℓ g).obj (𝟙_ _)) ≫
+        (boundedConstructibleLowerShriek ℓ b).map
+          (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ g)
             ((boundedConstructibleUpperStar _ ℓ b).obj M) (𝟙_ _)) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app _ ≫
-        (boundedConstructibleLowerShriek _ ℓ (g ≫ b)).map
+        (boundedConstructibleLowerShriek ℓ (g ≫ b)).map
           ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app M ▷ _) := by
     simp only [← reassoc_of% hc, ← Functor.map_comp, ← comp_whiskerRight, Iso.hom_inv_id_app,
       id_whiskerRight]
     exact (Category.comp_id _).symm.trans (congrArg _ (CategoryTheory.Functor.map_id _ _).symm)
-  have hn := Verdier.leftProjection_naturality (boundedConstructibleExceptionalProjection _ ℓ b) M
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar _ ℓ g).map
+  have hn := Verdier.leftProjection_naturality (boundedConstructibleExceptionalProjection ℓ b) M
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app (𝟙_ _) ≫
+      (boundedConstructibleLowerStar ℓ g).map
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ g)).inv ≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app (𝟙_ _))
   have hu := leftProjection_lowerShriek_unit ℓ g ((boundedConstructibleUpperStar _ ℓ b).obj M)
@@ -207,36 +207,36 @@ set_option maxHeartbeats 1000000 in
 lemma map_leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : Y ⟶ Z)
     {s : C ⟶ Z} (h : g ≫ b = s) (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {D : Type*}
     [Category D] (F : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ D) {W : D}
-    (k : F.obj ((boundedConstructibleLowerShriek _ ℓ s).obj
+    (k : F.obj ((boundedConstructibleLowerShriek ℓ s).obj
       ((boundedConstructibleUpperStar _ ℓ s).obj M ⊗ 𝟙_ _)) ⟶ W) :
-    F.map (M ◁ (boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app (𝟙_ _))) ≫
-      F.map (M ◁ (boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleLowerStar _ ℓ g).map
+    F.map (M ◁ (boundedConstructibleLowerShriek ℓ b).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app (𝟙_ _))) ≫
+      F.map (M ◁ (boundedConstructibleLowerShriek ℓ b).map
+        ((boundedConstructibleLowerStar ℓ g).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ g)).inv)) ≫
-      F.map (M ◁ (boundedConstructibleLowerShriek _ ℓ b).map
+      F.map (M ◁ (boundedConstructibleLowerShriek ℓ b).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app (𝟙_ _))) ≫
       F.map (M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app (𝟙_ _)) ≫
       F.map (M ◁ eqToHom (by rw [h])) ≫
-      F.map (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ s) M (𝟙_ _)) ≫
+      F.map (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ s) M (𝟙_ _)) ≫
       k =
-    F.map (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ b) M (𝟙_ _)) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ b).map (ρ_
+    F.map (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ b) M (𝟙_ _)) ≫
+      F.map ((boundedConstructibleLowerShriek ℓ b).map (ρ_
           ((boundedConstructibleUpperStar _ ℓ b).obj M)).hom) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app
+      F.map ((boundedConstructibleLowerShriek ℓ b).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app
             ((boundedConstructibleUpperStar _ ℓ b).obj M))) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ b).map
+      F.map ((boundedConstructibleLowerShriek ℓ b).map
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
           ((boundedConstructibleUpperStar _ ℓ g).obj
               ((boundedConstructibleUpperStar _ ℓ b).obj M)))) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ b).map
-        ((boundedConstructibleLowerShriek _ ℓ g).map (ρ_ ((boundedConstructibleUpperStar _ ℓ g).obj
+      F.map ((boundedConstructibleLowerShriek ℓ b).map
+        ((boundedConstructibleLowerShriek ℓ g).map (ρ_ ((boundedConstructibleUpperStar _ ℓ g).obj
           ((boundedConstructibleUpperStar _ ℓ b).obj M))).inv)) ≫
       F.map ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app
         ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj M) ⊗
           𝟙_ _)) ≫
-      F.map ((boundedConstructibleLowerShriek _ ℓ (g ≫ b)).map
+      F.map ((boundedConstructibleLowerShriek ℓ (g ≫ b)).map
         ((boundedConstructibleUpperStarComp _ ℓ g b).inv.app M ▷ _)) ≫
       F.map (eqToHom (by rw [h])) ≫ k := by
   subst h
@@ -248,8 +248,8 @@ lemma map_leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (
 @[reassoc]
 lemma eqToHom_comp_lowerShriek_map {s t : C ⟶ Y} (h : s = t)
     {N N' : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : N ⟶ N') :
-    eqToHom (by rw [h]) ≫ (boundedConstructibleLowerShriek _ ℓ t).map φ =
-      (boundedConstructibleLowerShriek _ ℓ s).map φ ≫ eqToHom (by rw [h]) := by
+    eqToHom (by rw [h]) ≫ (boundedConstructibleLowerShriek ℓ t).map φ =
+      (boundedConstructibleLowerShriek ℓ s).map φ ≫ eqToHom (by rw [h]) := by
   subst h
   simp
 
@@ -257,10 +257,10 @@ lemma eqToHom_comp_lowerShriek_map {s t : C ⟶ Y} (h : s = t)
 lemma whiskerLeft_eqToHom_comp_leftProjection {u v : C ⟶ Y} (h : u = v)
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
         (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ◁ eqToHom (by rw [h] : (boundedConstructibleLowerShriek _ ℓ u).obj T =
-        (boundedConstructibleLowerShriek _ ℓ v).obj T) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ v) M T =
-    Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ u) M T ≫
+    M ◁ eqToHom (by rw [h] : (boundedConstructibleLowerShriek ℓ u).obj T =
+        (boundedConstructibleLowerShriek ℓ v).obj T) ≫
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ v) M T =
+    Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ u) M T ≫
       eqToHom (by rw [h]) := by
   subst h
   simp

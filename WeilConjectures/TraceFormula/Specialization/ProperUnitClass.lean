@@ -114,7 +114,7 @@ trait with cartesian squares of special and of generic fibres is invertible on b
 constructible complexes (blueprint `det-sp-nearby-cycles-exchanges` (2)). -/
 lemma isIso_boundedConstructiblePushforwardExchange_of_isProper :
     IsIso (φ.boundedConstructiblePushforwardExchange ℓ hM hN) := by
-  have : IsProper (toPoint B).left := ‹IsProper B.hom›
+  have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
   rw [boundedConstructiblePushforwardExchange_eq_liftExchange]
   exact isIso_liftExchange_of_isIso_app _ _ _ _ _
     fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper hi hε K.property
@@ -124,11 +124,11 @@ lemma isIso_boundedConstructiblePushforwardExchange_of_isProper :
 `χ_a`, read through `Ra_! ≅ Ra_*` and `Ra'_! ≅ Ra'_*`. -/
 noncomputable def properCompactSupportExchange :
     boundedConstructibleNearbyCycles hM ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint B') ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint B) ⋙
+        boundedConstructibleLowerShriek ℓ (toPoint B') ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint B) ⋙
         boundedConstructibleNearbyCycles hN :=
-  have : IsProper (toPoint B).left := ‹IsProper B.hom›
-  have : IsProper (toPoint B').left := ‹IsProper B'.hom›
+  have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
+  have : IsProper (toPoint B').left := by rw [toPoint_left]; infer_instance
   have := φ.isIso_boundedConstructiblePushforwardExchange_of_isProper hM hN hi hε
   invExchange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B'))
@@ -139,8 +139,8 @@ omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] in
 /-- The unit class, with the properness of `toPoint X` given as an instance. -/
 lemma unitClass_eq (X : Over (Spec (.of k))) [IsProper X.hom] [IsProper (toPoint X).left] :
     BorelMooreSection.unitClass ℓ X =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint X)).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint X)).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ (toPoint X)).map
           (Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app (𝟙_ _) :=
@@ -150,18 +150,18 @@ lemma unitClass_eq (X : Over (Spec (.of k))) [IsProper X.hom] [IsProper (toPoint
 `ν_a(ℚ̄_ℓ) ∘ Ra'_!(σ_M) ∘ [B'] = Ψ_s([B]) ∘ σ_s`, by the unit identity of `χ_a`. -/
 theorem unitClass_comp_map_comp_properCompactSupportExchange_app :
     BorelMooreSection.unitClass ℓ B' ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint B')).map
+        (boundedConstructibleLowerShriek ℓ (toPoint B')).map
           (boundedConstructibleUnit ℓ hM) ≫
         (φ.properCompactSupportExchange hM hN hi hε).app (𝟙_ _) =
       boundedConstructibleUnit ℓ hN ≫
         (boundedConstructibleNearbyCycles hN).map (BorelMooreSection.unitClass ℓ B) := by
-  have : IsProper (toPoint B).left := ‹IsProper B.hom›
-  have : IsProper (toPoint B').left := ‹IsProper B'.hom›
+  have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
+  have : IsProper (toPoint B').left := by rw [toPoint_left]; infer_instance
   have hu := φ.boundedConstructibleUnit_comp_map_unit_comp_pushforwardExchange_app ℓ hM hN
   have := φ.isIso_boundedConstructiblePushforwardExchange_of_isProper hM hN hi hε
   refine (fun h ↦ ?_) (unitClass_comp_invExchange_app
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint B))
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint B'))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint B))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint B'))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B'))
     (φ.boundedConstructiblePushforwardExchange ℓ hM hN) (u := 𝟙_ _) (u' := 𝟙_ _) (v := 𝟙_ _)

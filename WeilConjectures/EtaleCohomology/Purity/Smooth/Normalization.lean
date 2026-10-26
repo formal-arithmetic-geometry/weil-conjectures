@@ -90,7 +90,7 @@ noncomputable def affineLineFundamentalClass
     ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)})_![ModuleCat.{u + 1} Λ]).map
         (affineLineOrientation Λ Y) ≫
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+      (rightDerivedUpperShriekAdjunction Λ
         (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)})).counit.app
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))
@@ -130,7 +130,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
     (γ : (twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) ((1 : ℕ) : ℤ)).obj
         ((L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj
           (constantComplex Λ Y)) ≅
-      (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Y)) :
+      (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^![Λ]).obj (constantComplex Λ Y)) :
     IsIso (ψ.hom ≫ affineLineFundamentalClass Λ Y α ≫
       (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
         (affineLineTwistShiftIso Λ Y).inv ≫
@@ -140,14 +140,14 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)) :=
     inferInstanceAs (IsIso (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) Y
       (s := {AffineSpace.coord Y (ULift.up 0)}) Set.range_unique).inv)
-  have hb := isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso (ModuleCat.{u + 1} Λ)
+  have hb := isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso Λ
     (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))
-  set as := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+  set as := rightDerivedUpperShriekAdjunction Λ
     (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
-  set ap := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+  set ap := rightDerivedUpperShriekAdjunction Λ
     (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
-  set b := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+  set b := rightDerivedUpperShriekAdjunction Λ
     (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))
   have : IsIso (as.comp ap).counit := (as.comp ap).isIso_counit_of_iso
@@ -160,7 +160,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
         {AffineSpace.coord Y (ULift.up 0)})_![ModuleCat.{u + 1} Λ] ⋙
           R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
         (affineLineOrientation Λ Y ≫ (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).map
+          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).map
             ((affineLineTwistShiftIso Λ Y).inv ≫ γ.hom)) ≫
         (as.comp ap).counit.app _ := by
     have h := congrArg (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
@@ -200,7 +200,7 @@ theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [F
     ∃ γ : (twistShift Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ((1 : ℕ) : ℤ)).obj
         ((L((𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^*[ModuleCat.{u + 1} Λ])).obj
           (constantComplex Λ (Spec (.of k)))) ≅
-      (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![ModuleCat.{u + 1} Λ]).obj
+      (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![Λ]).obj
         (constantComplex Λ (Spec (.of k))),
       ψ.hom ≫ affineLineFundamentalClass Λ (Spec (.of k)) α ≫
         (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))_![ModuleCat.{u + 1} Λ]).map
@@ -216,7 +216,7 @@ theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [F
   let γ₀ : (twistShift Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ((1 : ℕ) : ℤ)).obj
         ((L((𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^*[ModuleCat.{u + 1} Λ])).obj
           (constantComplex Λ (Spec (.of k)))) ≅
-      (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![ModuleCat.{u + 1} Λ]).obj
+      (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![Λ]).obj
         (constantComplex Λ (Spec (.of k))) :=
     (twistShift Λ _ _).mapIso
       (leftDerivedUpperStarConstantComplexIso Λ (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)))
@@ -224,13 +224,13 @@ theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [F
   have hu :=
     isIso_affineLineFundamentalClass_comp_smoothPurityTrace Λ (Spec (.of k)) (𝟙 _) α ψ γ₀
   refine ⟨γ₀ ≪≫
-    (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![ModuleCat.{u + 1} Λ]).mapIso
+    (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![Λ]).mapIso
       (asIso (ψ.hom ≫ affineLineFundamentalClass Λ (Spec (.of k)) α ≫
         (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))_![ModuleCat.{u + 1} Λ]).map
           (affineLineTwistShiftIso Λ (Spec (.of k))).inv ≫
           smoothPurityTrace Λ ((1 : ℕ) : ℤ) _ γ₀)).symm, ?_⟩
   rw [smoothPurityTrace, Iso.trans_hom, Functor.map_comp, Category.assoc, Functor.mapIso_hom,
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) _).counit_naturality]
+    (rightDerivedUpperShriekAdjunction Λ _).counit_naturality]
   simp only [smoothPurityTrace, Iso.symm_hom, asIso_inv] at hu ⊢
   simp only [← Category.assoc] at hu ⊢
   exact IsIso.hom_inv_id _

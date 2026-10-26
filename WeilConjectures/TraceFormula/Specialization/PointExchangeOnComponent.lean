@@ -403,7 +403,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar
         (openImmersionAdjunction ℓ (pointSpecialMap x u k').left)
         ((pointModelHom x u k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)))
       (fun K ↦ map_mateEquiv_inv_liftExchange _ _ _ _ _ _ _ _ _ _ K)
-      (boundedConstructibleLowerStarCompatibility _ ℓ g)
+      (boundedConstructibleLowerStarCompatibility ℓ g)
       (closedExtension (openImmersionAdjunction ℓ u.left) (rfl : g.left ≫ u.left = _))
       (closedExtension
         (Adjunction.id.ofNatIsoRight
@@ -417,8 +417,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar
         k').left) rfl)
       (lowerStarCompOfEq rfl)
       ((pointCompModelHom x u k' φg).pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) N
-      ⟨_, boundedConstructible_rightDerivedLowerStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ (g ≫ u)
-        N.obj N.property⟩
+      ⟨_, boundedConstructible_rightDerivedLowerStar_obj ℓ (g ≫ u) N⟩
       (Iso.refl _)
       hC
       ) :=
@@ -432,7 +431,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar
         (openImmersionAdjunction ℓ (pointSpecialMap x u k').left)
         ((pointModelHom x u k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)))
       (fun K ↦ map_mateEquiv_inv_liftExchange _ _ _ _ _ _ _ _ _ _ K)
-      (boundedConstructibleLowerStarCompatibility _ ℓ g)
+      (boundedConstructibleLowerStarCompatibility ℓ g)
       (closedExtension (openImmersionAdjunction ℓ u.left) (rfl : g.left ≫ u.left = _))
       (closedExtension
         (Adjunction.id.ofNatIsoRight
@@ -446,8 +445,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar
         k').left) rfl)
       (lowerStarCompOfEq rfl)
       ((pointCompModelHom x u k' φg).pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) N
-      ⟨_, boundedConstructible_rightDerivedLowerStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ (g ≫ u)
-        N.obj N.property⟩
+      ⟨_, boundedConstructible_rightDerivedLowerStar_obj ℓ (g ≫ u) N⟩
       (Iso.refl _)
       hC
 

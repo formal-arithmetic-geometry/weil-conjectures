@@ -45,20 +45,25 @@ extensions by zero of lisse sheaves:
 * **dévissage**: along the truncation triangles, to constructible sheaves placed in degree `0`
   (`ProEtale.boundedConstructible_obj_of_forall_singleFunctor`), and by noetherian induction along
   the open–closed triangles, to the extensions by zero `v_! L` of lisse sheaves `L` along locally
-  closed immersions `v` (`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`).
+  closed immersions `v : E ⟶ 𝔸ⁿ_S` whose image lies either in the generic fibre `𝔸ⁿ_η` or in the
+  special fibre (`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse_along`);
+* **special fibre**: if the image of `v` misses the generic fibre, then `Lj^* v_! L = 0`, since
+  `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` factors through the open `𝔸ⁿ_η`, and the nearby cycles vanish
+  (`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`).
 
 ## Unfinished input
 
 The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally closed immersion
-into an affine space `𝔸ⁿ_S`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) is `sorry`ed: it is
+into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) is `sorry`ed:
+it is
 Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
 `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices, derived completeness and the Milnor sequence
 (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). The reductions also use the proper
 exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
 `WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`) and that bounded
 constructible complexes on the special fibre form a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible`, `sorry`ed on the branch).
+(`ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`, `sorry`ed on the branch).
 
 -/
 
@@ -99,21 +104,108 @@ noncomputable abbrev affineSpaceModel (k' : Type u) [Field k'] (n : ℕ) :=
 lemma isTraitModel_affineSpaceModel (n : ℕ) : (affineSpaceModel k' n).IsTraitModel :=
   isTraitModel_traitStdModel _
 
+/-- The derived pullbacks along equal morphisms agree on objects. -/
+lemma nonempty_leftDerivedUpperStar_obj_iso_of_eq (Λ : Sheaf (coherentTopology Profinite.{u})
+    Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {Y Z : Scheme.{u}} {a b : Y ⟶ Z} (h : a = b)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) :
+    Nonempty ((L((a)^*⟦Λ⟧)).obj K ≅ (L((b)^*⟦Λ⟧)).obj K) := by
+  subst h
+  exact ⟨Iso.refl _⟩
+
+variable (k') in
+/-- The generic fibre `S ∖ {s} = D(t)` of the trait `S = Spec k'⟦t⟧`, as an open subscheme. -/
+noncomputable def traitGenericOpen : (trait k').Opens :=
+  (trait k').basicOpen ((Scheme.ΓSpecIso (.of (PowerSeries k'))).inv PowerSeries.X)
+
+/-- The geometric generic point of the trait lies in its generic fibre `D(t)`: `t` is a nonzero
+element of the field `Ω`. -/
+lemma traitGenericPoint_preimage_traitGenericOpen :
+    traitGenericPoint k' ⁻¹ᵁ traitGenericOpen k' = ⊤ := by
+  rw [traitGenericOpen, Scheme.preimage_basicOpen_top, traitGenericPoint,
+    ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply,
+    Scheme.basicOpen_of_isUnit]
+  refine IsUnit.map _ (Ne.isUnit ?_)
+  change algebraMap (PowerSeries k') (traitGenericField k') PowerSeries.X ≠ 0
+  rw [IsScalarTower.algebraMap_apply (PowerSeries k') (FractionRing (PowerSeries k'))]
+  exact (map_ne_zero _).2 (IsFractionRing.to_map_ne_zero_of_mem_nonZeroDivisors
+    (mem_nonZeroDivisors_of_ne_zero PowerSeries.X_ne_zero))
+
+/-- The closed point of the trait does not lie in its generic fibre `D(t)`. -/
+lemma traitClosedPoint_preimage_traitGenericOpen :
+    traitClosedPoint k' ⁻¹ᵁ traitGenericOpen k' = ⊥ := by
+  rw [traitGenericOpen, Scheme.preimage_basicOpen_top, traitClosedPoint,
+    ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+  change Scheme.basicOpen _ ((Scheme.ΓSpecIso (.of k')).inv
+    (PowerSeries.constantCoeff PowerSeries.X)) = ⊥
+  rw [PowerSeries.constantCoeff_X, map_zero, Scheme.basicOpen_zero]
+
+variable (k') in
+/-- The generic fibre `𝔸ⁿ_η` of the affine space `𝔸ⁿ_S`, as an open subscheme: the preimage of
+the generic fibre `D(t)` of the trait. -/
+noncomputable def affineSpaceGenericOpen (n : ℕ) : (affineSpaceModel k' n).total.Opens :=
+  (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k') ⁻¹ᵁ traitGenericOpen k'
+
+/-- The geometric generic fibre `𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` lands in the generic fibre `𝔸ⁿ_η`. -/
+lemma range_j_affineSpaceModel_subset (n : ℕ) :
+    Set.range (affineSpaceModel k' n).j.base ⊆
+      Set.range (affineSpaceGenericOpen k' n).ι.base := by
+  rw [Scheme.Opens.range_ι]
+  rintro _ ⟨y, rfl⟩
+  change y ∈ (affineSpaceModel k' n).j ⁻¹ᵁ affineSpaceGenericOpen k' n
+  rw [affineSpaceGenericOpen, ← Scheme.Hom.comp_preimage]
+  simp only [affineSpaceModel, traitStdModel_j, pullback.condition, Scheme.Hom.comp_preimage,
+    traitGenericPoint_preimage_traitGenericOpen, Scheme.Hom.preimage_top]
+  trivial
+
+/-- **Nearby cycles of a complex supported on the special fibre vanish**: if `Rc_* K` is a
+complex on `𝔸ⁿ_S` pushed forward along a closed immersion `c : D ⟶ 𝔸ⁿ_S`, and the restriction of
+`K` to the generic fibre `c⁻¹ 𝔸ⁿ_η` vanishes, then `Lj^* Rc_* K = 0`, so the geometric nearby
+cycles `Li^* Rj_* Lj^* Rc_* K` vanish. -/
+lemma isZero_nearbyCycles_affineSpace_of_isZero (n : ℕ) {D : Scheme.{u}}
+    (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c]
+    [QuasiCompact (c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι]
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) D))}
+    (hK : IsZero ((L(((c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+      K)) :
+    IsZero (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+      ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)) := by
+  have h := isZero_leftDerivedUpperStar_ι_obj_rightDerivedLowerStar_obj
+    (Profinite.padicAlgClRingObj ℓ) (affineSpaceGenericOpen k' n) c hK
+  have hfac := IsOpenImmersion.lift_fac (affineSpaceGenericOpen k' n).ι
+    (affineSpaceModel k' n).j (range_j_affineSpaceModel_subset n)
+  have i₁ := (nonempty_leftDerivedUpperStar_obj_iso_of_eq (Profinite.padicAlgClRingObj ℓ)
+    hfac.symm ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)).some
+  have i₂ := (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
+    (IsOpenImmersion.lift (affineSpaceGenericOpen k' n).ι (affineSpaceModel k' n).j
+      (range_j_affineSpaceModel_subset n)) (affineSpaceGenericOpen k' n).ι).app
+    ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)
+  exact (L(((affineSpaceModel k' n).geometric.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
+    ((R(((affineSpaceModel k' n).geometric.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
+      (((L((IsOpenImmersion.lift (affineSpaceGenericOpen k' n).ι (affineSpaceModel k' n).j
+        (range_j_affineSpaceModel_subset n))^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
+          h).of_iso (i₁ ≪≫ i₂)))
+
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Deligne's finiteness theorem for nearby cycles, for the extension by zero of a lisse sheaf
-on a locally closed subscheme of an affine space** (SGA 4½, [Th. finitude], Thm. 3.2; for
-`ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and passage to the limit, Bhatt–Scholze, *The
-pro-étale topology for schemes*, §6.8): over the strictly henselian trait `S = Spec k'⟦t⟧`
-(`k'` separably closed, `ℓ ≠ char k'`), let `v : E ⟶ 𝔸ⁿ_S` be a locally closed immersion,
-factored as a closed immersion `c' : E ⟶ W` into an open `W` of a closed subscheme
-`c : D ⟶ 𝔸ⁿ_S`, and let `L` be a lisse (pro-étale locally finitely presented) sheaf of
-`ℚ̄_ℓ`-modules on `E`. Then the geometric nearby cycles `Li^* Rj_* Lj^*` of its extension by zero
-`v_! L = Rc_* j_{W!} Rc'_* L`, with `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded
-constructible complex on the special fibre `𝔸ⁿ_s`. -/
-theorem boundedConstructible_nearbyCycles_affineSpace_lisse (n : ℕ) (D : Scheme.{u})
-    (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens) (E : Scheme.{u})
-    (c' : E ⟶ W) [IsClosedImmersion c']
+on a locally closed subscheme of the generic fibre of an affine space** (SGA 4½, [Th. finitude],
+Thm. 3.2; for `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and passage to the limit, Bhatt–Scholze,
+*The pro-étale topology for schemes*, §6.8): over the strictly henselian trait
+`S = Spec k'⟦t⟧` (`k'` separably closed, `ℓ ≠ char k'`), let `v : E ⟶ 𝔸ⁿ_S` be a locally closed
+immersion, factored as a surjective closed immersion `c' : E ⟶ W` (so `E` is `W` up to
+nilpotents) onto an open `W` of a closed subscheme `c : D ⟶ 𝔸ⁿ_S`, with `W` contained in the
+preimage `c⁻¹ 𝔸ⁿ_η` of the generic fibre `𝔸ⁿ_η = 𝔸ⁿ_S ×_S D(t)`, and let `L` be a lisse
+(pro-étale locally finitely presented) sheaf of `ℚ̄_ℓ`-modules on `E`. Then the geometric nearby
+cycles `Li^* Rj_* Lj^*` of its extension by zero `v_! L = Rc_* j_{W!} Rc'_* L`, with
+`j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded constructible complex on the special
+fibre `𝔸ⁿ_s`. (When `W` misses the generic fibre, these nearby cycles vanish:
+`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`.) -/
+theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D : Scheme.{u})
+    (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens)
+    (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' n) (E : Scheme.{u})
+    (c' : E ⟶ W) [IsClosedImmersion c'] (hc' : Surjective c')
     (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E))
     (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E) L) :
@@ -127,10 +219,13 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse (n : ℕ) (D : Schem
   sorry
 
 /-- Deligne's finiteness theorem for nearby cycles on an affine space `𝔸ⁿ_S`: the geometric
-nearby cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes. This is
-reduced to the extensions by zero of lisse sheaves on locally closed subschemes
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse`) by the dévissage
-`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse`. -/
+nearby cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes. By the
+dévissage `ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse_along`, adapted to the
+generic fibre `𝔸ⁿ_η`, this is reduced to the extensions by zero `Rc_* j_{W!} Rc'_* L` of lisse
+sheaves with `W` either inside the generic fibre
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) or inside the
+special fibre, where the nearby cycles vanish
+(`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`). -/
 theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' n).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (affineSpaceModel k' n).total))}
@@ -144,13 +239,24 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
     (isTraitModel_affineSpaceModel (k' := k') n).isNoetherian_total
   have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)).IsTriangulated :=
-    isTriangulated_boundedConstructible (ℓ := ℓ) _ _
-  exact boundedConstructible_obj_of_forall_lisse
+    isTriangulated_boundedConstructible_padicAlgClRingObj _ ℓ
+  refine boundedConstructible_obj_of_forall_lisse_along
     (Φ := L(((affineSpaceModel k' n).geometric.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
       R(((affineSpaceModel k' n).geometric.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L(((affineSpaceModel k' n).geometric.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧))
-    (fun D c _ W E c' _ L hL ↦ by
-      exact boundedConstructible_nearbyCycles_affineSpace_lisse n D c W E c' L hL) hB
+    (U := affineSpaceGenericOpen k' n) (fun D c _ W hW E c' _ hc' L hL ↦ ?_) hB
+  rcases hW with hW | hW
+  · exact boundedConstructible_nearbyCycles_affineSpace_lisse_generic n D c W hW E c' hc'
+      L hL
+  · have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
+    have : TopologicalSpace.NoetherianSpace (c ⁻¹ᵁ affineSpaceGenericOpen k' n) :=
+      (c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι.isOpenEmbedding.isInducing.noetherianSpace
+    have : QuasiCompact (c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι :=
+      ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+    exact boundedConstructible_of_isZero _ (isZero_nearbyCycles_affineSpace_of_isZero n c
+      (isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint _ W.ι
+        (c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι (by rwa [Scheme.Opens.range_ι,
+          Scheme.Opens.range_ι]) _))
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction along a closed embedding**: let `φ : M.geometric ⟶ N.geometric` be a morphism of
@@ -244,15 +350,6 @@ theorem boundedConstructible_geometricNearbyCycles_obj
     (asIso (((M.restrictHom (V a)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B)).symm
     (boundedConstructible_geometricNearbyCycles_obj_of_isAffine _ (hM.restrict _)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB))
-
-/-- The derived pullbacks along equal morphisms agree on objects. -/
-lemma nonempty_leftDerivedUpperStar_obj_iso_of_eq (Λ : Sheaf (coherentTopology Profinite.{u})
-    Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {Y Z : Scheme.{u}} {a b : Y ⟶ Z} (h : a = b)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj Λ Z))) :
-    Nonempty ((L((a)^*⟦Λ⟧)).obj K ≅ (L((b)^*⟦Λ⟧)).obj K) := by
-  subst h
-  exact ⟨Iso.refl _⟩
 
 /-- **Deligne's finiteness theorem for the nearby cycles of a model** (SGA 4½, [Th. finitude],
 Thm. 3.2; for `ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): over the strictly henselian trait

@@ -70,9 +70,9 @@ variable (ℓ) (X) in
 /-- The proper exchange `χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X` of the diagonal of the deformation to the
 normal cone of a rational point `x`. -/
 noncomputable def diagPushforwardExchange (x : RationalPoint X) :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙
+    boundedConstructibleLowerStar ℓ (diag X) ⋙
         specializationProd k' x ⟶
-      specialization k' x ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      specialization k' x ⋙ boundedConstructibleLowerStar ℓ
         (diag (deformationSpecialFibre X x.left.ker k')) :=
   (deformationDiagModelHom X x.left.ker k').boundedConstructiblePushforwardExchange ℓ
     ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
@@ -96,9 +96,9 @@ noncomputable def supportSpecializationUnit :
 the specialized correspondence. -/
 abbrev SupportCompactSupportExchange :=
   specialization (ℓ := ℓ) k' y ⋙
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleLowerShriek ℓ
         (hc.specialCorrespondence k').support ⟶
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ⋙
+    boundedConstructibleLowerShriek ℓ c.support ⋙
       specializationProd k' (y ≫ c.c₁)
 
 variable (X) in
@@ -106,9 +106,9 @@ variable (X) in
 of the special fibre `X'` of its deformation to the normal cone of a rational point `x`. -/
 abbrev PointCompactSupportExchange (x : RationalPoint X) :=
   specialization (ℓ := ℓ) k' x ⋙
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleLowerShriek ℓ
         (toPoint (deformationSpecialFibre X x.left.ker k')) ⟶
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙
+    boundedConstructibleLowerShriek ℓ (toPoint X) ⋙
       traitSpecialization k k'
 
 variable (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')

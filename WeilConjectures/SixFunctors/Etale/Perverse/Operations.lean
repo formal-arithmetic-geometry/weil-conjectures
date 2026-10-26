@@ -76,6 +76,7 @@ section Tensor
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 variable {X S : Scheme.{u}}
 
@@ -85,7 +86,7 @@ noncomputable def shiftTensorIso
     (n : ℤ) : K⟦n⟧ ⊗ L ≅ (K ⊗ L)⟦n⟧ :=
   (((derivedTensor _ X).flip.obj L).commShiftIso n).app K
 
-variable (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+variable (a : X ⟶ S) [HasCompactification a]
 
 /-- **Dual of a lisse tensor.** For a dualizable complex `L`, with coefficient dual `L^∨`,
 the Verdier dual of `K ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻K`: the tensor–hom adjunction gives
@@ -93,17 +94,17 @@ the Verdier dual of `K ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻K`: the tensor–hom adjun
 tensor product with `L^∨`. The blueprint writes the factors in the other order.
 (blueprint: `lem-per-dual-lisse-tensor`) -/
 theorem nonempty_iso_verdierDual_tensor
-    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hL : IsDualizable L) :
-    Nonempty ((verdierDual A a).obj (op (K ⊗ L)) ≅
-      (coefficientDual A X).obj (op L) ⊗
-        (verdierDual A a).obj (op K)) := by
+    Nonempty ((verdierDual Λ a).obj (op (K ⊗ L)) ≅
+      (coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op L) ⊗
+        (verdierDual Λ a).obj (op K)) := by
   obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor hL
-    ((verdierDual A a).obj (op K))
+    ((verdierDual Λ a).obj (op K))
   have adj : tensorLeft (K ⊗ L) ⊣ ihom K ⋙ ihom L :=
     ((ihom.adjunction L).comp (ihom.adjunction K)).ofNatIsoLeft (tensorLeftTensor K L).symm
   exact ⟨((ihom.adjunction (K ⊗ L)).rightAdjointUniq adj).app
-    (dualizingComplex A a) ≪≫ e.symm⟩
+    (dualizingComplex Λ a) ≪≫ e.symm⟩
 
 variable {a}
 
@@ -179,13 +180,12 @@ theorem isPerverseLE_tensor {n : ℤ}
     (hK : IsPerverseLE n K) (hL : IsLisse L) : IsPerverseLE n (K ⊗ L) :=
   (SupportCondition.tensor hK hL.2.2.1).1.of_iso (shiftTensorIso K L n)
 
-omit [HasSmallSiteSheafify A] in
 /-- **Permanence under a lisse tensor**, cosupport side: `K ∈ ᵖD^{≥n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≥n}` for a lisse `L`: by `lem-per-dual-lisse-tensor` the Verdier dual of
 `K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` again has Tor amplitude in `[0, 0]`.
 (blueprint: `lem-per-lisse-tensor-permanence`) -/
 theorem isPerverseGE_tensor {n : ℤ}
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseGE a n K) (hL : IsLisse L) : IsPerverseGE a n (K ⊗ L) :=
   CosupportCondition.of_iso (shiftTensorIso K L n)
     ((SupportCondition.tensor hK (torAmplitudeIn_coefficientDual hL.1 hL.2.2.1)).2.of_iso
@@ -258,7 +258,7 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
   have : Smooth f := SmoothOfRelativeDimension.smooth d f
   have : HasCompactification f := inferInstance
   -- the support side for the dual
-  let DY := (verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)
+  let DY := (verdierDual Λ aY).obj (op K)
   have hDK : IsPerverseLE (-n) DY :=
     SupportCondition.of_iso (verdierDualShiftIso _ aY K n) hK
   have h₁ := isPerverseLE_upperStar aY d f hDK
@@ -269,12 +269,12 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
   -- the duality isomorphisms
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ f K
-    (dualizingComplex (ModuleCat.{u + 1} Λ) aY)
+    (dualizingComplex Λ aY)
   obtain ⟨e₃⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d DY
   let M := (L((f)^*[ModuleCat.{u + 1} Λ])).obj DY
   let T := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0).obj L₀
-  let G : (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
+  let G : (verdierDual Λ (f ≫ aY)).obj
       (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
       (((derivedTensor _ X).obj M).obj T)⟦(2 * d : ℤ)⟧ :=
     ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K))).mapIso
@@ -326,7 +326,7 @@ theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : 
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseGE (f ≫ aY) n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsPerverseGE aY (n - d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
-  let DK := (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op K)
+  let DK := (verdierDual Λ (f ≫ aY)).obj (op K)
   have h := hf DK (constructibleFiniteTor_verdierDual Λ (f ≫ aY) hK').1 (-n)
     (SupportCondition.of_iso (verdierDualShiftIso _ (f ≫ aY) K n) hK)
   obtain ⟨e⟩ := nonempty_iso_verdierDual_rightDerivedLowerShriek Λ f aY K

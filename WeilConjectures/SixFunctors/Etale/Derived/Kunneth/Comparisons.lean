@@ -55,6 +55,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 namespace Etale
 
@@ -100,54 +101,56 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
       (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
       [QuasiCompact f₁] [QuasiCompact f₂]
       [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-      {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A)}
-      {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology A)},
-      DerivedCategory.constructibleFiniteTor A X₁ M₁ →
-      DerivedCategory.constructibleFiniteTor A X₂ M₂ →
-      Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).obj
-          (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
-        externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂))
+      {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₁ M₁ →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₂ M₂ →
+      Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).obj
+          (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
+        externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁)
+            ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂))
   /-- The exceptional Künneth map `α` is an isomorphism. -/
   exceptional : ∀ {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
       [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
       (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
       [QuasiCompact f₁] [QuasiCompact f₂]
       [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-      [(R(f₁)_![A]).IsLeftAdjoint] [(R(f₂)_![A]).IsLeftAdjoint]
-      [(R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).IsLeftAdjoint]
-      {N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology A)}
-      {N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology A)},
-      DerivedCategory.constructibleFiniteTor A Y₁ N₁ →
-      DerivedCategory.constructibleFiniteTor A Y₂ N₂ →
-      Nonempty (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂)
-          ((R(f₁)^![A]).obj N₁) ((R(f₂)^![A]).obj N₂) ≅
-        (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![A]).obj (externalProduct A b₁ b₂ N₁ N₂))
+      {N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      {N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₁ N₁ →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₂ N₂ →
+      Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
+          ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
+        (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂
+            N₁ N₂))
   /-- The external Hom map `β` is an isomorphism. -/
   externalHom : ∀ {Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ S) (c₂ : Z₂ ⟶ S)
       [IsSeparated c₁] [LocallyOfFiniteType c₁] [QuasiCompact c₁]
       [IsSeparated c₂] [LocallyOfFiniteType c₂] [QuasiCompact c₂]
-      {E₁ N₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)}
-      {E₂ N₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A)},
-      DerivedCategory.constructibleFiniteTor A Z₁ E₁ →
-      DerivedCategory.constructibleFiniteTor A Z₂ E₂ →
-      DerivedCategory.constructibleFiniteTor A Z₁ N₁ →
-      DerivedCategory.constructibleFiniteTor A Z₂ N₂ →
-      Nonempty (externalProduct A c₁ c₂ ((RHom(Z₁)[A].obj (op E₁)).obj N₁)
-          ((RHom(Z₂)[A].obj (op E₂)).obj N₂) ≅
-        (RHom(pullback c₁ c₂)[A].obj (op (externalProduct A c₁ c₂ E₁ E₂))).obj
-          (externalProduct A c₁ c₂ N₁ N₂))
+      {E₁ N₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      {E₂ N₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ E₁ →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ E₂ →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ N₁ →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ N₂ →
+      Nonempty (externalProduct (ModuleCat.{u + 1} Λ) c₁ c₂ ((RHom(Z₁)[ModuleCat.{u + 1} Λ].obj (op
+          E₁)).obj N₁)
+          ((RHom(Z₂)[ModuleCat.{u + 1} Λ].obj (op E₂)).obj N₂) ≅
+        (RHom(pullback c₁ c₂)[ModuleCat.{u + 1} Λ].obj (op (externalProduct (ModuleCat.{u + 1} Λ) c₁
+            c₂ E₁ E₂))).obj
+          (externalProduct (ModuleCat.{u + 1} Λ) c₁ c₂ N₁ N₂))
   /-- The Künneth–Verdier map `κ` is an isomorphism. -/
   kunnethVerdier : ∀ {X Y : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S)
       [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
       [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
-      [(R(b)_![A]).IsLeftAdjoint] [(R(pullback.fst a b)_![A]).IsLeftAdjoint]
-      {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-      {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)},
-      DerivedCategory.constructibleFiniteTor A X M →
-      DerivedCategory.constructibleFiniteTor A Y N →
-      Nonempty (externalProduct A a b M ((verdierDual A b).obj (op N)) ≅
-        (RHom(pullback a b)[A].obj (op ((L((pullback.snd a b)^*[A])).obj N))).obj
-          ((R(pullback.fst a b)^![A]).obj M))
+      {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N →
+      Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M ((verdierDual Λ b).obj (op N)) ≅
+        (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1}
+            Λ])).obj N))).obj
+          ((R(pullback.fst a b)^![Λ]).obj M))
 
 omit [HasSmallSiteSheafify A] in
 /-- The external Hom map `β` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an isomorphism
@@ -211,14 +214,14 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     (N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
+      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := by
   have := isOpenImmersion_mapOverBase b₁ b₂ f₁ f₂
   let ψ := pullback.mapOverBase f₁ f₂ b₁ b₂
   let e (Z W : Scheme.{u}) (j : Z ⟶ W) [IsOpenImmersion j] [QuasiCompact j]
       [HasCompactification j] :
-      R(j)^![ModuleCat.{u + 1} Λ] ≅ L((j)^*[ModuleCat.{u + 1} Λ]) :=
+      R(j)^![Λ] ≅ L((j)^*[ModuleCat.{u + 1} Λ]) :=
     rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ j).symm
   obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp
@@ -228,34 +231,38 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     ((derivedTensor _ _).obj _).mapIso ((L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
       ((e _ _ f₂).app N₂)) ≪≫ p.symm ≪≫ ((e _ _ ψ).app _).symm⟩
 
-omit [HasSmallSiteSheafify A] in
 /-- The Künneth–Verdier map `κ` of `AlgebraicGeometry.Etale.HasKunnethComparisons` for a
 **dualizable** `N` reduces to the case `N = Λ_Y`: given `M ⊠ ω_Y ≅ Rp_X^! M`,
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. Indeed `𝔻_Y N = RHom(N, ω_Y) ≅ N^∨ ⊗ ω_Y` and
 `RHom(p_Y^* N, -) ≅ p_Y^* N^∨ ⊗ -` (`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj_right`).
 The remaining case `M ⊠ ω_Y ≅ Rp_X^! M` is the exceptional Künneth map for `𝟙_X × b`, which
 is how the blueprint proof of `thm-trf-kunneth-verdier` uses `prop-trf-exceptional-kunneth`. -/
-theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPreservesFlat A]
+theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPreservesFlat
+    (ModuleCat.{u + 1} Λ)]
     {S : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S) [HasCompactification b]
-    [(R(b)_![A]).IsLeftAdjoint] [HasCompactification (pullback.fst a b)]
-    [(R(pullback.fst a b)_![A]).IsLeftAdjoint]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hN : IsDualizable N)
-    (h : Nonempty (externalProduct A a b M (dualizingComplex A b) ≅
-      (R(pullback.fst a b)^![A]).obj M)) :
-    Nonempty (externalProduct A a b M ((verdierDual A b).obj (Opposite.op N)) ≅
-      (RHom(pullback a b)[A].obj (Opposite.op ((L((pullback.snd a b)^*[A])).obj N))).obj
-        ((R(pullback.fst a b)^![A]).obj M)) := by
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Y.smallEtaleTopology A)
+ [HasCompactification (pullback.fst a b)]
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hN :
+        IsDualizable N)
+    (h : Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M (dualizingComplex Λ b) ≅
+      (R(pullback.fst a b)^![Λ]).obj M)) :
+    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M ((verdierDual Λ b).obj (Opposite.op N)) ≅
+      (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj (Opposite.op ((L((pullback.snd a
+          b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
+        ((R(pullback.fst a b)^![Λ]).obj M)) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ))
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Y.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ))
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf (pullback a b).smallEtaleTopology A)
-  let _ := leftDerivedUpperStarMonoidal A (pullback.fst a b)
-  let _ := leftDerivedUpperStarMonoidal A (pullback.snd a b)
-  obtain ⟨e⟩ := nonempty_iso_tensorObj_map_ihom_obj_right (L((pullback.fst a b)^*[A]))
-    (L((pullback.snd a b)^*[A])) M (dualizingComplex A b) hN
+    (Sheaf (pullback a b).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  let _ := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) (pullback.fst a b)
+  let _ := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) (pullback.snd a b)
+  obtain ⟨e⟩ := nonempty_iso_tensorObj_map_ihom_obj_right (L((pullback.fst a b)^*[ModuleCat.{u + 1}
+      Λ]))
+    (L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])) M (dualizingComplex Λ b) hN
   obtain ⟨h⟩ := h
-  exact ⟨e ≪≫ (ihom ((L((pullback.snd a b)^*[A])).obj N)).mapIso h⟩
+  exact ⟨e ≪≫ (ihom ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N)).mapIso h⟩
 
 end Etale
 

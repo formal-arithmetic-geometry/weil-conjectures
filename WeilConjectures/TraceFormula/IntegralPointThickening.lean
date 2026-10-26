@@ -59,8 +59,7 @@ end RationalPoint
 
 section Unit
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {B : Over (Spec (.of k))}
   [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
 
@@ -70,18 +69,19 @@ finite universal homeomorphism, so the unit of `Lb^* ⊣ Rb_*` is an isomorphism
 invariance, and `La^* ⋙ Lb^* ≅ L(b ≫ a)^* = L(𝟙 s)^* ≅ 𝟭` is fully faithful. -/
 theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction_toPoint
     (b : RationalPoint B) (hb : Set.range b.left.base = Set.univ) :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (toPoint B)).unit := by
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint B)).unit := by
   have := isUniversalHomeomorphism_left_of_range_eq_univ b hb
-  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ b
+  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction ℓ b
   have h : b ≫ toPoint B = 𝟙 (point k) := toPoint_ext _ _
-  let e : boundedConstructibleUpperStar Λ ℓ (toPoint B) ⋙ boundedConstructibleUpperStar Λ ℓ b ≅
-      𝟭 _ :=
-    (boundedConstructibleUpperStarComp Λ ℓ b (toPoint B)).symm ≪≫ eqToIso (by rw [h]) ≪≫
-      boundedConstructibleUpperStarId Λ ℓ (point k)
+  let e : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint B) ⋙
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ b ≅ 𝟭 _ :=
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ b (toPoint B)).symm ≪≫
+      eqToIso (by rw [h]) ≪≫
+      boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)
   have := Functor.Full.of_iso e.symm
   have := Functor.Faithful.of_iso e.symm
   exact Adjunction.isIso_unit_of_fullyFaithful_comp _
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ b)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ b)
 
 end Unit
 
@@ -96,8 +96,7 @@ thickening of `s`, then the integral `α ↦ ∫_B α` of Borel–Moore sections
 theorem integral_injective (b : RationalPoint B) (hb : Set.range b.left.base = Set.univ) :
     Function.Injective (integral (ℓ := ℓ) (X := B)) := by
   intro α β h
-  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction_toPoint
-    (Profinite.padicAlgClRingObj ℓ) ℓ b hb
+  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction_toPoint ℓ b hb
   unfold integral at h
   rw [cancel_epi, cancel_epi, cancel_epi] at h
   exact Equiv.injective _ h

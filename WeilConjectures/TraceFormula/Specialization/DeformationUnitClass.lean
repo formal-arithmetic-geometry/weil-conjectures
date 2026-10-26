@@ -36,6 +36,24 @@ open Scheme
 variable {k : Type u} [Field k] (X : Over (Spec (.of k))) (I : X.left.IdealSheafData)
   (k' : Type u) [Field k'] [Algebra k k']
 
+/-- The special fibre square of the deformation model, with the structure map `toPoint`. -/
+lemma isPullback_deformationSpecialFibre_toPoint :
+    IsPullback (deformationModel X I k').i (toPoint (deformationSpecialFibre X I k')).left
+      (deformationTotalToTrait X I k') (traitClosedPoint k') := by
+  have h := isPullback_deformationSpecialFibre X I k'
+  rw [← toPoint_left (deformationSpecialFibre X I k')] at h
+  exact h
+
+/-- The geometric generic fibre square of the deformation model, with the structure map
+`toPoint`. -/
+lemma isPullback_deformationModel_ε_toPoint :
+    IsPullback (deformationModel X I k').ε
+      (pullback.snd (deformationTotalToTrait X I k') (traitGenericPoint k')) (toPoint X).left
+      (traitModel k k').ε := by
+  have h := isPullback_deformationModel_ε_traitModel (X := X) k' I
+  rw [← toPoint_left X] at h
+  exact h
+
 /-- The structure map `𝒳 ⟶ S` of the deformation to the normal cone over the trait, as a morphism
 of models over the structure maps of `X` and of the special fibre. -/
 noncomputable def deformationToTraitModelHom :
@@ -44,8 +62,8 @@ noncomputable def deformationToTraitModelHom :
   total := deformationTotalToTrait X I k'
   generic := pullback.snd (deformationTotalToTrait X I k') (traitGenericPoint k')
   comm_j := pullback.condition.symm
-  comm_i := (isPullback_deformationSpecialFibre X I k').w.symm
-  comm_ε := (isPullback_deformationModel_ε_traitModel (X := X) k' I).w.symm
+  comm_i := (isPullback_deformationSpecialFibre_toPoint X I k').w.symm
+  comm_ε := (isPullback_deformationModel_ε_toPoint X I k').w.symm
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [IsProper X.hom]
@@ -66,14 +84,14 @@ noncomputable def deformationCompactSupportExchange :=
       (isTraitModel_deformationModel X I k') (deformationModel_exists_comp_ε X I k'))
     ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
       (isTraitModel_traitModel k k') ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)
-    (isPullback_deformationSpecialFibre X I k')
-    (isPullback_deformationModel_ε_traitModel (X := X) k' I)
+    (isPullback_deformationSpecialFibre_toPoint X I k')
+    (isPullback_deformationModel_ε_toPoint X I k')
 
 /-- **The inverse proper exchange of a proper deformation specializes the unit class**:
 `ν_a(ℚ̄_ℓ) ∘ Ra'_!(σ_𝒳) ∘ [𝒳_s] = Ψ_s([X]) ∘ σ_s`. -/
 theorem unitClass_comp_map_comp_deformationCompactSupportExchange_app :
     BorelMooreSection.unitClass ℓ (deformationSpecialFibre X I k') ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ
           (toPoint (deformationSpecialFibre X I k'))).map
           (NearbyCyclesModel.boundedConstructibleUnit ℓ
             ((deformationModel X I k').preservesBoundedConstructible_of_isTraitModel
@@ -82,7 +100,7 @@ theorem unitClass_comp_map_comp_deformationCompactSupportExchange_app :
       traitSpecializationUnit k k' ≫
         (traitSpecialization k k').map (BorelMooreSection.unitClass ℓ X) :=
   (deformationToTraitModelHom X I k').unitClass_comp_map_comp_properCompactSupportExchange_app _ _
-    (isPullback_deformationSpecialFibre X I k')
-    (isPullback_deformationModel_ε_traitModel (X := X) k' I)
+    (isPullback_deformationSpecialFibre_toPoint X I k')
+    (isPullback_deformationModel_ε_toPoint X I k')
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -127,12 +127,16 @@ noncomputable abbrev compactificationLowerShriekIso {C P Y : Over (Spec (.of k))
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     {f : C ⟶ Y} (h : C ⟶ P) (p : P ⟶ Y) [IsOpenImmersion h.left] [IsProper p.left]
     (w : h ≫ p = f) :
-    boundedConstructibleLowerShriek Λℓ ℓ f ≅
-      boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h ⋙ boundedConstructibleLowerStar Λℓ ℓ p :=
+    boundedConstructibleLowerShriek ℓ f ≅
+      boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h ⋙ boundedConstructibleLowerStar ℓ p :=
   lowerShriekCompOfEq ℓ h p w ≪≫
     Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl
       ℓ h) _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ p)
+
+/-- The hypothesis of an implication, as written in its type. -/
+abbrev hypothesisOf {P Q : Prop} (_ : P → Q) : Prop :=
+  P
 
 /-- **The compact-support exchange of a compactification on pushforwards** (step (B) of
 Varshavsky's argument, on `Dᵇc`): for `ν = ν_f = compactSupportExchangeOfCompactification …` and
@@ -145,49 +149,65 @@ a morphism of models `φ_g` over `g : B ⟶ C`, at `G N = g_* N` (`N : Dᵇc(B)`
 with `i₁ : Rf'_! ≅ h'_! ⋙ Rp'_*`, `i₂ : Rf_! ≅ h_! ⋙ Rp_*` (`compactificationLowerShriekIso`),
 `e = closedExtension : h_! g_* ⟶ (hg)_*`, `conj = lowerStarCompOfEq : R(phg)_* ≅ R(hg)_* ⋙ Rp_*`
 and the (identity) compatibility isomorphisms `cT, cR, cO, cG, cSp, cO', cR'` of the restricted
-functors with the inclusions `ι` of `Dᵇc` (shape of `compactSupportExchangeAux_app_comp_aux`). -/
+functors with the inclusions `ι` of `Dᵇc` (shape of `compactSupportExchangeAux_app_comp_aux`).
+
+The ambient identity `hC` at `N₀` is a hypothesis: it is
+`NearbyCyclesModel.Hom.compactSupportExchange_comp_app` for `φ_g`, `φ_h`, `φ_p` at `N₀`, but on the
+per-ring `Dᵇc` operations the kernel cannot check this instance in reasonable time (the ambient
+functors of `Dᵇc` and of the ambient exchange maps are presented through different instance
+terms, and comparing them unfolds the coefficient rings). -/
 theorem compactSupportExchangeOfCompactification_app_lowerStar
     (ν : NearbyCyclesModel.boundedConstructibleNearbyCycles hMC ⋙
-        boundedConstructibleLowerShriek Λℓ ℓ f' ⟶
-      boundedConstructibleLowerShriek Λℓ ℓ f ⋙
+        boundedConstructibleLowerShriek ℓ f' ⟶
+      boundedConstructibleLowerShriek ℓ f ⋙
         NearbyCyclesModel.boundedConstructibleNearbyCycles hMY)
     (hν : ν = compactSupportExchangeOfCompactification ℓ hMC hMY w w' φh φp hφp)
-    (N : Dᵇc(B.left)⟦Λℓ⟧) :
+    (N : Dᵇc(B.left)⟦Λℓ⟧)
+    (hC : hypothesisOf (compactSupportExchangeAux_app_comp_aux_of_eq
+      (ObjectProperty.fullyFaithfulι _)
+      (compactificationLowerShriekIso ℓ h' p' w') (compactificationLowerShriekIso ℓ h p w)
+      (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMC)
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
+      (boundedConstructibleLowerStarCompatibility ℓ _)
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
+      (boundedConstructibleLowerStarCompatibility ℓ _)
+      (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMY)
+      (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ h.left)
+        (openImmersionAdjunction ℓ h'.left) (φh.pullbackExchange _))
+      (φp.pushforwardExchange _) hφp ν hν (boundedConstructibleLowerStarCompatibility ℓ g)
+      (closedExtension (openImmersionAdjunction ℓ h.left) rfl)
+      (closedExtension (openImmersionAdjunction ℓ h'.left) rfl)
+      (lowerStarCompOfEq rfl) (lowerStarCompOfEq rfl) (φg.pushforwardExchange _)
+      (((φg.comp φh).comp φp).pushforwardExchange _) N)) :
     type_of% (compactSupportExchangeAux_app_comp_aux_of_eq (ObjectProperty.fullyFaithfulι _)
       (compactificationLowerShriekIso ℓ h' p' w') (compactificationLowerShriekIso ℓ h p w)
       (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMC)
       (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-      (boundedConstructibleLowerStarCompatibility _ ℓ _)
+      (boundedConstructibleLowerStarCompatibility ℓ _)
       (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-      (boundedConstructibleLowerStarCompatibility _ ℓ _)
+      (boundedConstructibleLowerStarCompatibility ℓ _)
       (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMY)
       (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ h.left)
         (openImmersionAdjunction ℓ h'.left) (φh.pullbackExchange _))
-      (φp.pushforwardExchange _) hφp ν hν (boundedConstructibleLowerStarCompatibility _ ℓ g)
+      (φp.pushforwardExchange _) hφp ν hν (boundedConstructibleLowerStarCompatibility ℓ g)
       (closedExtension (openImmersionAdjunction ℓ h.left) rfl)
       (closedExtension (openImmersionAdjunction ℓ h'.left) rfl)
       (lowerStarCompOfEq rfl) (lowerStarCompOfEq rfl) (φg.pushforwardExchange _)
-      (((φg.comp φh).comp φp).pushforwardExchange _) N
-      (fun χ₀ hχ₀ ↦ NearbyCyclesModel.Hom.compactSupportExchange_comp_app φg φh (φg.comp φh) φp
-        ((φg.comp φh).comp φp) rfl rfl rfl rfl rfl rfl rfl rfl
-        (openImmersionAdjunction ℓ h.left) (openImmersionAdjunction ℓ h'.left) _ χ₀ hχ₀)) :=
+      (((φg.comp φh).comp φp).pushforwardExchange _) N hC) :=
   compactSupportExchangeAux_app_comp_aux_of_eq (ObjectProperty.fullyFaithfulι _)
-    (compactificationLowerShriekIso ℓ h' p' w') (compactificationLowerShriekIso ℓ h p w)
-    (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMC)
-    (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-    (boundedConstructibleLowerStarCompatibility _ ℓ _)
-    (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-    (boundedConstructibleLowerStarCompatibility _ ℓ _)
-    (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMY)
-    (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ h.left)
-      (openImmersionAdjunction ℓ h'.left) (φh.pullbackExchange _))
-    (φp.pushforwardExchange _) hφp ν hν (boundedConstructibleLowerStarCompatibility _ ℓ g)
-    (closedExtension (openImmersionAdjunction ℓ h.left) rfl)
-    (closedExtension (openImmersionAdjunction ℓ h'.left) rfl)
-    (lowerStarCompOfEq rfl) (lowerStarCompOfEq rfl) (φg.pushforwardExchange _)
-    (((φg.comp φh).comp φp).pushforwardExchange _) N
-    (fun χ₀ hχ₀ ↦ NearbyCyclesModel.Hom.compactSupportExchange_comp_app φg φh (φg.comp φh) φp
-      ((φg.comp φh).comp φp) rfl rfl rfl rfl rfl rfl rfl rfl
-      (openImmersionAdjunction ℓ h.left) (openImmersionAdjunction ℓ h'.left) _ χ₀ hχ₀)
+      (compactificationLowerShriekIso ℓ h' p' w') (compactificationLowerShriekIso ℓ h p w)
+      (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMC)
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
+      (boundedConstructibleLowerStarCompatibility ℓ _)
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
+      (boundedConstructibleLowerStarCompatibility ℓ _)
+      (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hMY)
+      (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ h.left)
+        (openImmersionAdjunction ℓ h'.left) (φh.pullbackExchange _))
+      (φp.pushforwardExchange _) hφp ν hν (boundedConstructibleLowerStarCompatibility ℓ g)
+      (closedExtension (openImmersionAdjunction ℓ h.left) rfl)
+      (closedExtension (openImmersionAdjunction ℓ h'.left) rfl)
+      (lowerStarCompOfEq rfl) (lowerStarCompOfEq rfl) (φg.pushforwardExchange _)
+      (((φg.comp φh).comp φp).pushforwardExchange _) N hC
 
 end AlgebraicGeometry.ProEtale.CondensedRing

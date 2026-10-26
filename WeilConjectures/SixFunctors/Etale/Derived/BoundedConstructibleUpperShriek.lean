@@ -93,13 +93,13 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ}
 
 instance {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated :=
+    (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.IsTriangulated :=
   isTriangulated_rightDerivedUpperShriek f
 
 instance {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    (R(f)^![ModuleCat.{u + 1} Λ]).Additive :=
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).right_adjoint_additive
+    (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.Additive :=
+  (Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).right_adjoint_additive
 
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
@@ -128,7 +128,7 @@ characterized by the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`
 noncomputable abbrev boundedConstructibleIntegralUpperShriek :
     (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory :=
-  ObjectProperty.liftFullSubcategory _ _ (R(f)^![ModuleCat.{u + 1} Λ]) fun _ hL ↦
+  ObjectProperty.liftFullSubcategory _ _ (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint fun _ hL ↦
     have ⟨_, hϖ, hI⟩ := hϖI.out
     boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aX aY f hf hL
 
@@ -141,7 +141,7 @@ noncomputable def boundedConstructibleIntegralUpperShriekHomEquiv
     (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory) :
     ((R(f)_![ModuleCat.{u + 1} Λ]).obj K.obj ⟶ L.obj) ≃ₗ[Λ]
       (K ⟶ (boundedConstructibleIntegralUpperShriek I aX aY f hf).obj L) :=
-  ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).homLinearEquiv K.obj L.obj).trans
+  ((Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).homLinearEquiv K.obj L.obj).trans
     { toFun g := ObjectProperty.homMk g
       invFun g := g.hom
       map_add' _ _ := by cat_disch
@@ -161,7 +161,7 @@ noncomputable def boundedConstructibleIntegralLowerStarUpperShriekAdjunction :
     boundedConstructibleIntegralRightDerivedLowerStar I aY f ⊣
       boundedConstructibleIntegralUpperShriek I aX aY f hf :=
   Adjunction.restrictFullyFaithful
-    ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).ofNatIsoLeft
+    ((Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).ofNatIsoLeft
       (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f))
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
 

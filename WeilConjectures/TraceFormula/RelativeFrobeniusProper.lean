@@ -196,12 +196,12 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_comp_upperStarComp (r
 /-- The composition isomorphism `Rr_* ⋙ Rf'_* ≅ R(r ≫ f')_*` is the conjugate of the composition
 isomorphism `L(r ≫ f')^* ≅ Lf'^* ⋙ Lr^*` of the pullbacks. -/
 lemma boundedConstructibleLowerStarComp_hom (r : X ⟶ X') (f' : X' ⟶ Y) :
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f').hom =
+    (boundedConstructibleLowerStarComp ℓ r f').hom =
       conjugateEquiv
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           f').comp
-          (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r))
-        (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ r))
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ
           (r ≫ f'))
         (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f').hom :=
   rfl
@@ -217,10 +217,10 @@ lemma relativePullback_app_comp_isoLowerStar (r : X ⟶ X') (f' : X' ⟶ Y) [IsP
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (r ≫ f')).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M) =
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f').hom.app M ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f').map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerStar ℓ f').map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             r).unit.app M) ≫
-        (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f').hom.app
+        (boundedConstructibleLowerStarComp ℓ r f').hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M) := by
   have hc := boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp ℓ r f'
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M)
@@ -229,9 +229,9 @@ lemma relativePullback_app_comp_isoLowerStar (r : X ⟶ X') (f' : X' ⟶ Y) [IsP
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (r ≫ f')).hom.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj M) =
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f').hom.app _ ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+        (boundedConstructibleLowerStar ℓ f').map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).hom.app _) ≫
-        (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f').hom.app _ := by
+        (boundedConstructibleLowerStarComp ℓ r f').hom.app _ := by
     rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').hom.app _),
       Iso.hom_inv_id_app_assoc, reassoc_of% hc, Iso.inv_hom_id_app, Category.comp_id]
   rw [relativePullback_app]
@@ -262,7 +262,7 @@ theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq [
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K) =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ W).app K := by
+        (boundedConstructibleBaseChange ℓ W).app K := by
   have : IsProper f'.left := MorphismProperty.of_isPullback sq.overLeft inferInstance
   rw [weilLowerShriekFrobeniusComparison_hom_app_eq]
   subst hrp hrf
@@ -274,9 +274,9 @@ theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq [
   rw [boundedConstructibleBaseChange_eq_exchangeRight,
     boundedConstructibleBaseChange_eq_exchangeRight, boundedConstructibleLowerStarComp_hom]
   exact Adjunction.exchangeRight_app_comp_unit_comp_conjugateEquiv
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f'))
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f')
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ f'))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ r)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f')
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ W)
@@ -296,7 +296,7 @@ theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar [IsProper f
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K) =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleBaseChange ℓ
           (⟨frobenius_comp_eq_comp_frobenius ΦX ΦY f sq r hrp hrf⟩ : CommSq ΦX f f ΦY)).app K :=
   weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq ℓ ΦX ΦY f sq r hrp hrf _ K
 

@@ -85,7 +85,7 @@ theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafD
     (hM : (deformationModel X I k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      ((boundedConstructibleLowerStar _ ℓ g).obj M)) := by
+      ((boundedConstructibleLowerStar ℓ g).obj M)) := by
   have hJ := IdealSheafData.map_siteIdeal_le_of_comap_le g.left (le_refl (I.comap g.left))
   have : IsEmpty (deformationSpecialFibre Z (I.comap g.left) k').left := by
     rw [hI]; exact isEmpty_deformationSpecialFibre_top k'
@@ -108,14 +108,14 @@ theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafD
         (((deformationModel Z (I.comap g.left) k').nearbyCycles _).obj M.obj)) :=
     Functor.map_isZero _ (isZero_derivedCategory_padicAlgCl_of_isEmpty _)
   have e1 := (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hM).app
-    ((boundedConstructibleLowerStar _ ℓ g).obj M)
+    ((boundedConstructibleLowerStar ℓ g).obj M)
   have e2 := ((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).mapIso
-    ((boundedConstructibleLowerStarCompatibility _ ℓ g).app M)
+    ((boundedConstructibleLowerStarCompatibility ℓ g).app M)
   have e3 := asIso (((deformationModelHom g hJ k').pushforwardExchange
       (Profinite.padicAlgClRingObj ℓ)).app M.obj)
   have h : IsZero ((boundedConstructible _).ι.obj
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-        ((boundedConstructibleLowerStar _ ℓ g).obj M))) := h3.of_iso (e1 ≪≫ e2 ≪≫ e3)
+        ((boundedConstructibleLowerStar ℓ g).obj M))) := h3.of_iso (e1 ≪≫ e2 ≪≫ e3)
   exact IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _ h
 
 /-- **Specialization kills complexes supported away from the point** (step (E) of Varshavsky's
@@ -125,7 +125,7 @@ theorem isZero_specialization_obj_lowerStar_obj [IsSepClosed k'] [Fact (ringChar
     [Fact (ringChar k' ≠ ℓ)] (x : RationalPoint X) (g : Z ⟶ X) [IsClosedImmersion g.left]
     (hx : Disjoint (Set.range g.left.base) (Set.range x.left.base))
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsZero ((specialization k' x).obj ((boundedConstructibleLowerStar _ ℓ g).obj M)) :=
+    IsZero ((specialization k' x).obj ((boundedConstructibleLowerStar ℓ g).obj M)) :=
   isZero_deformationNearbyCycles_obj_lowerStar_obj k' _ g (comap_ker_eq_top_of_disjoint x g hx) _ M
 
 end AlgebraicGeometry.ProEtale.CondensedRing

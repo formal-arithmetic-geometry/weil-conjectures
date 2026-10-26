@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialFibre
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
 
 /-!
@@ -78,13 +79,6 @@ variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (x : RationalPoint X
 instance isOpenImmersion_pointModelHom_total : IsOpenImmersion (pointModelHom x u k').total :=
   isOpenImmersion_deformationTotalMap u _ k' (ker_eq_comap_of_isOpenImmersion x u)
 
-/-- The structure map of a proper `k`-scheme is proper. -/
-lemma isProper_toPoint_left_of_isProper (Z : Over (Spec (.of k))) [IsProper Z.hom] :
-    IsProper (toPoint Z).left :=
-  ‹IsProper Z.hom›
-
-attribute [local instance] isProper_toPoint_left_of_isProper
-
 variable {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
@@ -95,13 +89,6 @@ lemma preservesBoundedConstructible_deformationModel (Z : Over (Spec (.of k)))
     (deformationModel Z z.left.ker k').PreservesBoundedConstructible Λℓ :=
   (deformationModel Z z.left.ker k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
     (isTraitModel_deformationModel Z _ k') (deformationModel_exists_comp_ε Z _ k')
-
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- The nearby cycles of the trait preserve `Dᵇc`. -/
-lemma preservesBoundedConstructible_traitModel :
-    (traitModel k k').PreservesBoundedConstructible Λℓ :=
-  (traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
-    (isTraitModel_traitModel k k') ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩
 
 set_option hygiene false in
 /-- `Dᵇc` is preserved by the nearby cycles of the deformation of `X` along `x`. -/
@@ -152,11 +139,11 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar_of_eq
       (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hPY)
       (boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ
         (deformationSpecialFibreToCompactified Y (x ≫ u) k'))
-      (boundedConstructibleLowerStarCompatibility Λℓ ℓ
+      (boundedConstructibleLowerStarCompatibility ℓ
         (toPoint (compactifiedSpecialFibre Y (x ≫ u) k')))
-      (boundedConstructibleLowerStarCompatibility Λℓ ℓ (toPoint Y))
+      (boundedConstructibleLowerStarCompatibility ℓ (toPoint Y))
       (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility
-        (preservesBoundedConstructible_traitModel (k := k) (ℓ := ℓ) k'))
+        (NearbyCyclesModel.preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))
       ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λℓ
         (deformationSpecialFibreToCompactified Y (x ≫ u) k').left).ofNatIsoRight
           (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λℓ _).symm)
@@ -172,7 +159,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar_of_eq
         (openImmersionAdjunction ℓ (pointSpecialMap x u k').left)
         ((pointModelHom x u k').pullbackExchange Λℓ))
       (fun K ↦ map_mateEquiv_inv_liftExchange _ _ _ _ _ _ _ _ _ _ K)
-      (boundedConstructibleLowerStarCompatibility Λℓ ℓ g)
+      (boundedConstructibleLowerStarCompatibility ℓ g)
       (closedExtension (openImmersionAdjunction ℓ u.left) (rfl : g.left ≫ u.left = _))
       (closedExtension (Adjunction.id.ofNatIsoRight (leftDerivedUpperStarId Λℓ Y.left).symm)
         (rfl : (g.left ≫ u.left) ≫ 𝟙 Y.left = _))
@@ -184,7 +171,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar_of_eq
         (deformationSpecialFibreToCompactified Y (x ≫ u) k').left) rfl)
       (lowerStarCompOfEq rfl)
       ((pointCompModelHom x u k' φg).pushforwardExchange Λℓ) N
-      ⟨_, boundedConstructible_rightDerivedLowerStar_obj Λℓ ℓ (g ≫ u) N.obj N.property⟩
+      ⟨_, boundedConstructible_rightDerivedLowerStar_obj ℓ (g ≫ u) N⟩
       (Iso.refl _) hC) :=
   fun hC ↦ openPointExchangeAux_app_comp_aux_of_eq
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λℓ ℓ u)
@@ -211,11 +198,11 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar_of_eq
     (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hPY)
     (boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ
       (deformationSpecialFibreToCompactified Y (x ≫ u) k'))
-    (boundedConstructibleLowerStarCompatibility Λℓ ℓ
+    (boundedConstructibleLowerStarCompatibility ℓ
       (toPoint (compactifiedSpecialFibre Y (x ≫ u) k')))
-    (boundedConstructibleLowerStarCompatibility Λℓ ℓ (toPoint Y))
+    (boundedConstructibleLowerStarCompatibility ℓ (toPoint Y))
     (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility
-      (preservesBoundedConstructible_traitModel (k := k) (ℓ := ℓ) k'))
+      (NearbyCyclesModel.preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λℓ
       (deformationSpecialFibreToCompactified Y (x ≫ u) k').left).ofNatIsoRight
         (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λℓ _).symm)
@@ -231,7 +218,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar_of_eq
       (openImmersionAdjunction ℓ (pointSpecialMap x u k').left)
       ((pointModelHom x u k').pullbackExchange Λℓ))
     (fun K ↦ map_mateEquiv_inv_liftExchange _ _ _ _ _ _ _ _ _ _ K)
-    (boundedConstructibleLowerStarCompatibility Λℓ ℓ g)
+    (boundedConstructibleLowerStarCompatibility ℓ g)
     (closedExtension (openImmersionAdjunction ℓ u.left) (rfl : g.left ≫ u.left = _))
     (closedExtension (Adjunction.id.ofNatIsoRight (leftDerivedUpperStarId Λℓ Y.left).symm)
       (rfl : (g.left ≫ u.left) ≫ 𝟙 Y.left = _))
@@ -243,7 +230,7 @@ theorem pointCompactSupportExchangeOfOpenImmersion_app_lowerStar_of_eq
       (deformationSpecialFibreToCompactified Y (x ≫ u) k').left) rfl)
     (lowerStarCompOfEq rfl)
     ((pointCompModelHom x u k' φg).pushforwardExchange Λℓ) N
-    ⟨_, boundedConstructible_rightDerivedLowerStar_obj Λℓ ℓ (g ≫ u) N.obj N.property⟩
+    ⟨_, boundedConstructible_rightDerivedLowerStar_obj ℓ (g ≫ u) N⟩
     (Iso.refl _) hC
 
 end Point

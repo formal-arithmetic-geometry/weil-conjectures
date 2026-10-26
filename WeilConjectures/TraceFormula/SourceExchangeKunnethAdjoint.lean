@@ -90,32 +90,32 @@ theorem exceptionalProjection_comp_exceptionalKunnethAdjoint
     {M' K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : M' ⟶ K)
     (c : S ⟶ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Z ⟶ Z)).obj
       (dualizingComplex' ℓ Z)) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Z ⟶ X) S M' ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Z ⟶ X)).map
+    boundedConstructibleExceptionalProjectionMorphism ℓ (prod.fst : X ⨯ Z ⟶ X) S M' ≫
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Z ⟶ X)).map
         ((S ◁ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Z ⟶ X)).map e) ≫
           (c ▷ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Z ⟶ X)).obj K) ≫
           (externalProductBraiding ℓ K (dualizingComplex' ℓ Z)).inv) ≫
       exceptionalKunnethAdjoint ℓ K =
-    (((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Z ⟶ X)).map c ≫
+    (((boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Z ⟶ X)).map c ≫
         (prodBaseChangeIso ℓ X Z).hom.app (dualizingComplex' ℓ Z) ≫
         (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-          ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)) ≫
+          ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z)).counit.app (𝟙_ _)) ≫
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv) ▷ M') ≫
       (𝟙_ _ ◁ e) ≫ (λ_ K).hom := by
   have h := MonoidalCategory.comp_map_comp_inv_comp_whiskerRight_eq
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Z ⟶ X))
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Z ⟶ X))
     (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Z ⟶ X)) e c
-    (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Z ⟶ X) S M')
-    (boundedConstructibleExceptionalProjectionMorphism _ ℓ (prod.fst : X ⨯ Z ⟶ X) S K)
-    (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Z ⟶ X)).app
+    (boundedConstructibleExceptionalProjectionMorphism ℓ (prod.fst : X ⨯ Z ⟶ X) S M')
+    (boundedConstructibleExceptionalProjectionMorphism ℓ (prod.fst : X ⨯ Z ⟶ X) S K)
+    (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Z ⟶ X)).app
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Z ⟶ Z)).obj
         (dualizingComplex' ℓ Z))).app K)
-    (boundedConstructibleExceptionalProjectionMorphism_natural_right _ ℓ _ S _)
-    (boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _ c _)
+    (boundedConstructibleExceptionalProjectionMorphism_natural_right ℓ _ S _)
+    (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _ c _)
     (externalProductBraiding ℓ K (dualizingComplex' ℓ Z))
     ((prodBaseChangeIso ℓ X Z).hom.app (dualizingComplex' ℓ Z))
     ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)))
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z)).counit.app (𝟙_ _)))
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
   exact h
 
@@ -162,48 +162,48 @@ theorem prodLowerStarExternalProduct_comp_inv_app (N : Dᵇc(X.left)⟦Profinite
     (externalProductBraiding ℓ _ _).hom ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f)).unit.app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-            ((boundedConstructibleLowerStar _ ℓ f).obj N) ⊗
+            ((boundedConstructibleLowerStar ℓ f).obj N) ⊗
           (boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-            ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.map f f)).map
+            ((boundedConstructibleLowerStar ℓ f).obj K)) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.map f f)).map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ (prod.map f f))
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj N))
+              ((boundedConstructibleLowerStar ℓ f).obj N))
             ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj K)) ≫
+              ((boundedConstructibleLowerStar ℓ f).obj K)) ≫
           (_ ◁ ((boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.fst).inv.app
-              ((boundedConstructibleLowerStar _ ℓ f).obj K) ≫
+              ((boundedConstructibleLowerStar ℓ f).obj K) ≫
             eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
-              ((boundedConstructibleLowerStar _ ℓ f).obj K)) (prod.map_fst f f)) ≫
+              ((boundedConstructibleLowerStar ℓ f).obj K)) (prod.map_fst f f)) ≫
             ((boundedConstructibleUpperStarComp _ ℓ (prod.fst : X ⨯ X ⟶ X) f).hom.app
-              ((boundedConstructibleLowerStar _ ℓ f).obj K) :
+              ((boundedConstructibleLowerStar ℓ f).obj K) :
                 _ ⟶ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj
                   ((boundedConstructibleUpperStar _ ℓ f).obj
-                    ((boundedConstructibleLowerStar _ ℓ f).obj K)))))) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.map f f)).map
+                    ((boundedConstructibleLowerStar ℓ f).obj K)))))) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.map f f)).map
         ((_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
-            ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K :
+            ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K :
               (boundedConstructibleUpperStar _ ℓ f).obj
-                ((boundedConstructibleLowerStar _ ℓ f).obj K) ⟶ K)) ≫
+                ((boundedConstructibleLowerStar ℓ f).obj K) ⟶ K)) ≫
           (prodUpperStarCounit ℓ (prod.map_snd f f) N ▷ _) ≫
           (externalProductBraiding ℓ K N).inv) := by
   have h := Adjunction.homEquiv_μIso_inv_tensorHom_comp_inv_app
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (prod.map f f))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map f f))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map f f))
-    (boundedConstructibleUpperStar_map_braiding_hom_δ _ ℓ (prod.map f f)
+    (boundedConstructibleUpperStar_map_braiding_hom_δ ℓ (prod.map f f)
       ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
-        ((boundedConstructibleLowerStar _ ℓ f).obj K))
+        ((boundedConstructibleLowerStar ℓ f).obj K))
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
-        ((boundedConstructibleLowerStar _ ℓ f).obj N)))
+        ((boundedConstructibleLowerStar ℓ f).obj N)))
     (prodUpperStarCounit ℓ (prod.map_fst f f) K) (prodUpperStarCounit ℓ (prod.map_snd f f) N)
     ((boundedConstructibleUpperStarComp _ ℓ (prod.map f f) prod.fst).inv.app
-      ((boundedConstructibleLowerStar _ ℓ f).obj K))
+      ((boundedConstructibleLowerStar ℓ f).obj K))
     (eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
-      ((boundedConstructibleLowerStar _ ℓ f).obj K)) (prod.map_fst f f)))
+      ((boundedConstructibleLowerStar ℓ f).obj K)) (prod.map_fst f f)))
     ((boundedConstructibleUpperStarComp _ ℓ (prod.fst : X ⨯ X ⟶ X) f).hom.app
-      ((boundedConstructibleLowerStar _ ℓ f).obj K))
+      ((boundedConstructibleLowerStar ℓ f).obj K))
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K)) rfl
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K)) rfl
   exact h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

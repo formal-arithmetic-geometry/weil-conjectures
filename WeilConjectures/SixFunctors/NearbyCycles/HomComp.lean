@@ -362,35 +362,38 @@ end NearbyCyclesModel
 
 section BoundedConstructible
 
-variable {Λ} (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+
+set_option hygiene false in
+local notation "Λℓ" => Profinite.padicAlgClRingObj ℓ
 
 /-- On the ambient derived category, the composition isomorphism `R(f ≫ g)_* ≅ Rf_* ⋙ Rg_*` on
 bounded constructible complexes is the conjugate of the composition isomorphism
 `ProEtale.CondensedRing.leftDerivedUpperStarComp` (transported along
 `f.left ≫ g.left = (f ≫ g).left`). -/
 lemma boundedConstructibleLowerStarComp_inv_app_hom (f : X ⟶ Y) (g : Y ⟶ Z)
-    (K : Dᵇc(X.left)⟦Λ⟧) :
-    ((boundedConstructibleLowerStarComp Λ ℓ f g).inv.app K).hom =
-      (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction Λ (f ≫ g).left)
-        ((derivedUpperStarLowerStarAdjunction Λ g.left).comp
-          (derivedUpperStarLowerStarAdjunction Λ f.left))
-        (leftDerivedUpperStarCompOfEq Λ (Over.comp_left _ _ _ f g).symm).symm).hom.app K.obj :=
-  conjugateIsoEquiv_lift_aux (derivedUpperStarLowerStarAdjunction Λ g.left)
-    (derivedUpperStarLowerStarAdjunction Λ f.left)
-    (derivedUpperStarLowerStarAdjunction Λ (f ≫ g).left)
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f ≫ g))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((boundedConstructibleLowerStarComp ℓ f g).inv.app K).hom =
+      (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction Λℓ (f ≫ g).left)
+        ((derivedUpperStarLowerStarAdjunction Λℓ g.left).comp
+          (derivedUpperStarLowerStarAdjunction Λℓ f.left))
+        (leftDerivedUpperStarCompOfEq Λℓ (Over.comp_left _ _ _ f g).symm).symm).hom.app K.obj :=
+  conjugateIsoEquiv_lift_aux (derivedUpperStarLowerStarAdjunction Λℓ g.left)
+    (derivedUpperStarLowerStarAdjunction Λℓ f.left)
+    (derivedUpperStarLowerStarAdjunction Λℓ (f ≫ g).left)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (f ≫ g))
     (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ g)
     (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ f)
     (boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom ℓ (f ≫ g))
-    (leftDerivedUpperStarCompOfEq Λ (Over.comp_left _ _ _ f g).symm)
-    (boundedConstructibleUpperStarComp Λ ℓ f g)
-    (fun K ↦ boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ f g K) K
+    (leftDerivedUpperStarCompOfEq Λℓ (Over.comp_left _ _ _ f g).symm)
+    (boundedConstructibleUpperStarComp Λℓ ℓ f g)
+    (fun K ↦ boundedConstructibleUpperStarComp_hom_app_hom Λℓ ℓ f g K) K
 
 end BoundedConstructible
 

@@ -389,7 +389,7 @@ noncomputable def compactifiedToTraitModelHom :
   generic := compactifiedGenericToPoint X x k'
   comm_j := (isPullback_compactifiedGeneric X x k').w.symm
   comm_i := (isPullback_compactifiedSpecialFibre X x k').w.symm
-  comm_ε := (compactifiedGenericToBase_hom X x k').symm
+  comm_ε := by rw [toPoint_left]; exact (compactifiedGenericToBase_hom X x k').symm
 
 @[simp]
 lemma compactifiedToTraitModelHom_total :

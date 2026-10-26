@@ -228,7 +228,7 @@ lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
             kummerClass Λ (U.basicOpenUnit f) ≫
               (leftDerivedUpperStarTateObjectIso (U.basicOpen f).ι 1).inv⟦(1 : ℤ)⟧') ≫
         ((R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _) ≫
-      ((supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) _ _
+      ((supportedLocalizationBoundary Λ _ _
           (range_zeroLocusSubschemeι_singleton f) (tateObject Λ U 1))⟦(1 : ℤ)⟧' ≫
         (shiftFunctorAdd' _ (1 : ℤ) 1 2 rfl).inv.app _) := by
   rw [kummerBoundary, Adjunction.homEquiv_unit]
@@ -260,7 +260,7 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
     (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
         (L((e)^*[ModuleCat.{u + 1} Λ])).map (kummerBoundary Λ f) ≫
         ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app _ ≫
-        (supportedRestriction (ModuleCat.{u + 1} Λ) e _ _ g hg _ _
+        (supportedRestriction Λ e _ _ g hg _ _
           (leftDerivedUpperStarTateObjectIso e 1))⟦(2 : ℤ)⟧' =
       kummerBoundary Λ (e.appTop f) := by
   let e₁ : (U'.basicOpen (e.appTop f) : Scheme.{u}) ⟶ U.basicOpen f :=
@@ -274,7 +274,7 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
     rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← sq.w, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
     rfl
-  have hG1 := supportedLocalizationBoundary_baseChange (ModuleCat.{u + 1} Λ) e
+  have hG1 := supportedLocalizationBoundary_baseChange Λ e
     (U.zeroLocusSubschemeι {f}) (U.basicOpen f).ι (U'.zeroLocusSubschemeι {e.appTop f})
     (U'.basicOpen (e.appTop f)).ι g e₁ (range_zeroLocusSubschemeι_singleton f)
     (range_zeroLocusSubschemeι_singleton _) hg sq (tateObject Λ U 1) (tateObject Λ U' 1)
@@ -305,7 +305,7 @@ theorem kummerBoundary_baseChange_of_eq (e : U' ⟶ U) (f : Γ(U, ⊤)) (f' : Γ
     (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
         (L((e)^*[ModuleCat.{u + 1} Λ])).map (kummerBoundary Λ f) ≫
         ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app _ ≫
-        (supportedRestriction (ModuleCat.{u + 1} Λ) e _ _ g hg _ _
+        (supportedRestriction Λ e _ _ g hg _ _
           (leftDerivedUpperStarTateObjectIso e 1))⟦(2 : ℤ)⟧' =
       kummerBoundary Λ f' := by
   subst hf
@@ -389,7 +389,7 @@ lemma supportedClassMap_comp (i : Z ⟶ X) [IsClosedImmersion i]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     supportedClassMap Λ i (h ≫ γ) =
       constantComplexEndPullback Λ i h ≫ supportedClassMap Λ i γ := by
   have hc := leftDerivedUpperStarConstantComplexIso_comp Λ
@@ -420,11 +420,11 @@ lemma restrictSupportedClass_comp (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [I
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv τ (h ≫ γ) =
       constantComplexEndPullback Λ e h ≫
-        restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+        restrictSupportedClass Λ e i i' g hg
           (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ := by
   simp [restrictSupportedClass, constantComplexEndPullback]
 
@@ -434,15 +434,15 @@ variable (Λ) in
 noncomputable def supportedClassMapEquiv (i : Z ⟶ X) [IsClosedImmersion i]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (constantComplex Λ X ⟶
-        (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) ≃
-      (constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :=
+        (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) ≃
+      (constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :=
   Equiv.ofBijective _ (supportedClassMap_bijective Λ i L)
 
 @[simp]
 lemma supportedClassMapEquiv_apply (i : Z ⟶ X) [IsClosedImmersion i]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (γ : constantComplex Λ X ⟶
-      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
     supportedClassMapEquiv Λ i L γ = supportedClassMap Λ i γ :=
   rfl
 
@@ -458,9 +458,9 @@ noncomputable def restrictSupportedHom (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ 
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
-    (φ : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :
-    constantComplex Λ Z' ⟶ (R(i')^![ModuleCat.{u + 1} Λ]).obj L' :=
-  supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    (φ : constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :
+    constantComplex Λ Z' ⟶ (R(i')^![Λ]).obj L' :=
+  supportedClassMap Λ i' (restrictSupportedClass Λ e i i' g hg
     (leftDerivedUpperStarConstantComplexIso Λ e).inv τ ((supportedClassMapEquiv Λ i L).symm φ))
 
 /-- The restriction of `i^♯ h ≫ φ` along `e` is `i'^♯ (e^♯ h)` followed by the restriction of
@@ -472,7 +472,7 @@ lemma restrictSupportedHom_constantComplexEndPullback_comp (e : U ⟶ X) (i : Z 
     {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
     (h : constantComplex Λ X ⟶ constantComplex Λ X)
-    (φ : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :
+    (φ : constantComplex Λ Z ⟶ (R(i)^![Λ]).obj L) :
     restrictSupportedHom Λ e i i' g hg τ (constantComplexEndPullback Λ i h ≫ φ) =
       constantComplexEndPullback Λ i' (constantComplexEndPullback Λ e h) ≫
         restrictSupportedHom Λ e i i' g hg τ φ := by

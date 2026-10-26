@@ -52,14 +52,14 @@ lemma exceptionalProjection_eqToHom {u u' : P ⟶ Y} (h : u = u')
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {W : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (z : S ⊗ (boundedConstructibleUpperStar _ ℓ u').obj M ⟶ W) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ u S M ≫
-        (boundedConstructibleLowerShriek _ ℓ u).map
+    boundedConstructibleExceptionalProjectionMorphism ℓ u S M ≫
+        (boundedConstructibleLowerShriek ℓ u).map
           (S ◁ eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) h)) ≫
-        (boundedConstructibleLowerShriek _ ℓ u).map z ≫
-        eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj W) h) =
-      (eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj S) h) ▷ M) ≫
-        boundedConstructibleExceptionalProjectionMorphism _ ℓ u' S M ≫
-        (boundedConstructibleLowerShriek _ ℓ u').map z := by
+        (boundedConstructibleLowerShriek ℓ u).map z ≫
+        eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj W) h) =
+      (eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj S) h) ▷ M) ≫
+        boundedConstructibleExceptionalProjectionMorphism ℓ u' S M ≫
+        (boundedConstructibleLowerShriek ℓ u').map z := by
   subst h
   simp
 
@@ -70,12 +70,12 @@ isomorphism `Rq_! ⋙ Rp'_! ≅ Rp_! ⋙ Rf_!` of the square. -/
 theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     (w : q ≫ p' = p ≫ f) (S : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ p'
-        ((boundedConstructibleLowerShriek _ ℓ q).obj S) M ≫
-      (boundedConstructibleLowerShriek _ ℓ p').map
-        (boundedConstructibleExceptionalProjectionMorphism _ ℓ q S
+    boundedConstructibleExceptionalProjectionMorphism ℓ p'
+        ((boundedConstructibleLowerShriek ℓ q).obj S) M ≫
+      (boundedConstructibleLowerShriek ℓ p').map
+        (boundedConstructibleExceptionalProjectionMorphism ℓ q S
           ((boundedConstructibleUpperStar _ ℓ p').obj M)) ≫
-      (boundedConstructibleLowerShriek _ ℓ p').map ((boundedConstructibleLowerShriek _ ℓ q).map
+      (boundedConstructibleLowerShriek ℓ p').map ((boundedConstructibleLowerShriek ℓ q).map
         (S ◁ ((boundedConstructibleUpperStarComp _ ℓ q p').inv.app M ≫
           eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) w) ≫
           ((boundedConstructibleUpperStarComp _ ℓ p f).hom.app M :
@@ -85,21 +85,21 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
         (S ⊗ (boundedConstructibleUpperStar _ ℓ p).obj
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) =
     ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app S ▷ M) ≫
-      boundedConstructibleExceptionalProjectionMorphism _ ℓ f
-        ((boundedConstructibleLowerShriek _ ℓ p).obj S) M ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map
-        (boundedConstructibleExceptionalProjectionMorphism _ ℓ p S
+      boundedConstructibleExceptionalProjectionMorphism ℓ f
+        ((boundedConstructibleLowerShriek ℓ p).obj S) M ≫
+      (boundedConstructibleLowerShriek ℓ f).map
+        (boundedConstructibleExceptionalProjectionMorphism ℓ p S
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) := by
   have h₁ := exceptionalProjection_comp ℓ q p' S M
   have h₂ := exceptionalProjection_comp ℓ p f S M
-  have h₁' : boundedConstructibleExceptionalProjectionMorphism _ ℓ p'
-        ((boundedConstructibleLowerShriek _ ℓ q).obj S) M ≫
-      (boundedConstructibleLowerShriek _ ℓ p').map
-        (boundedConstructibleExceptionalProjectionMorphism _ ℓ q S
+  have h₁' : boundedConstructibleExceptionalProjectionMorphism ℓ p'
+        ((boundedConstructibleLowerShriek ℓ q).obj S) M ≫
+      (boundedConstructibleLowerShriek ℓ p').map
+        (boundedConstructibleExceptionalProjectionMorphism ℓ q S
           ((boundedConstructibleUpperStar _ ℓ p').obj M)) =
       ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ q p').inv.app S ▷ M) ≫
-        boundedConstructibleExceptionalProjectionMorphism _ ℓ (q ≫ p') S M ≫
-        (boundedConstructibleLowerShriek _ ℓ (q ≫ p')).map
+        boundedConstructibleExceptionalProjectionMorphism ℓ (q ≫ p') S M ≫
+        (boundedConstructibleLowerShriek ℓ (q ≫ p')).map
           (S ◁ (boundedConstructibleUpperStarComp _ ℓ q p').hom.app M) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ q p').hom.app _ := by
     rw [reassoc_of% h₁]
@@ -117,9 +117,9 @@ theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' 
     eqToIso.hom, NatTrans.comp_app, eqToHom_app, reassoc_of% h₁']
   rw [← reassoc_of% hn]
   simp only [Iso.hom_inv_id_app_assoc]
-  have hc : (boundedConstructibleLowerShriek _ ℓ (q ≫ p')).map
+  have hc : (boundedConstructibleLowerShriek ℓ (q ≫ p')).map
         (S ◁ (boundedConstructibleUpperStarComp _ ℓ q p').hom.app M) ≫
-      (boundedConstructibleLowerShriek _ ℓ (q ≫ p')).map
+      (boundedConstructibleLowerShriek ℓ (q ≫ p')).map
         (S ◁ (boundedConstructibleUpperStarComp _ ℓ q p').inv.app M) = 𝟙 _ := by
     rw [← Functor.map_comp, ← MonoidalCategory.whiskerLeft_comp, Iso.hom_inv_id_app,
       MonoidalCategory.whiskerLeft_id, CategoryTheory.Functor.map_id]
@@ -137,10 +137,10 @@ variable (q : P ⟶ P') [IsProper q.left]
 lemma whiskerRight_unit_comp_exceptionalProjection
     (T N : Dᵇc(P'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app T ▷ N) ≫
-      boundedConstructibleExceptionalProjectionMorphism _ ℓ q
+      boundedConstructibleExceptionalProjectionMorphism ℓ q
         ((boundedConstructibleUpperStar _ ℓ q).obj T) N =
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app (T ⊗ N) ≫
-      (boundedConstructibleLowerShriek _ ℓ q).map
+      (boundedConstructibleLowerShriek ℓ q).map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ q) T N) := by
   apply ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).homEquiv _
     _).symm.injective
@@ -159,11 +159,11 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
     (w : q ≫ p' = p ≫ f)
     (T : Dᵇc(P'.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ p' T M ≫
-      (boundedConstructibleLowerShriek _ ℓ p').map
+    boundedConstructibleExceptionalProjectionMorphism ℓ p' T M ≫
+      (boundedConstructibleLowerShriek ℓ p').map
         ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app
             (T ⊗ (boundedConstructibleUpperStar _ ℓ p').obj M) ≫
-          (boundedConstructibleLowerShriek _ ℓ q).map
+          (boundedConstructibleLowerShriek ℓ q).map
             (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ q) T
                 ((boundedConstructibleUpperStar _ ℓ p').obj M) ≫
               ((boundedConstructibleUpperStar _ ℓ q).obj T ◁
@@ -175,26 +175,26 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
         ((boundedConstructibleUpperStar _ ℓ q).obj T ⊗ (boundedConstructibleUpperStar _ ℓ p).obj
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) =
-    (((boundedConstructibleLowerShriek _ ℓ p').map
+    (((boundedConstructibleLowerShriek ℓ p').map
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app T) ≫
         (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app
           ((boundedConstructibleUpperStar _ ℓ q).obj T) :
-          _ ⟶ (boundedConstructibleLowerShriek _ ℓ f).obj
-            ((boundedConstructibleLowerShriek _ ℓ p).obj
+          _ ⟶ (boundedConstructibleLowerShriek ℓ f).obj
+            ((boundedConstructibleLowerShriek ℓ p).obj
               ((boundedConstructibleUpperStar _ ℓ q).obj T))) ▷ M) ≫
-      boundedConstructibleExceptionalProjectionMorphism _ ℓ f
-        ((boundedConstructibleLowerShriek _ ℓ p).obj ((boundedConstructibleUpperStar _ ℓ q).obj T))
+      boundedConstructibleExceptionalProjectionMorphism ℓ f
+        ((boundedConstructibleLowerShriek ℓ p).obj ((boundedConstructibleUpperStar _ ℓ q).obj T))
         M ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map
-        (boundedConstructibleExceptionalProjectionMorphism _ ℓ p
+      (boundedConstructibleLowerShriek ℓ f).map
+        (boundedConstructibleExceptionalProjectionMorphism ℓ p
           ((boundedConstructibleUpperStar _ ℓ q).obj T)
           ((boundedConstructibleUpperStar _ ℓ f).obj M)) := by
   have hu := whiskerRight_unit_comp_exceptionalProjection ℓ q T
     ((boundedConstructibleUpperStar _ ℓ p').obj M)
-  have hn := boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ p'
+  have hn := boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ p'
     ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ q).unit.app T) M
   have hs := exceptionalProjection_comp_square ℓ w ((boundedConstructibleUpperStar _ ℓ q).obj T) M
-  have hu' := congrArg (boundedConstructibleLowerShriek _ ℓ p').map hu
+  have hu' := congrArg (boundedConstructibleLowerShriek ℓ p').map hu
   simp only [Functor.map_comp] at hu'
   simp only [Functor.map_comp, Category.assoc] at hs ⊢
   rw [← reassoc_of% hu', ← reassoc_of% hn, hs, comp_whiskerRight, Category.assoc]
@@ -205,10 +205,10 @@ theorem exceptionalProjection_comp_unit_square {p : P ⟶ X} {p' : P' ⟶ Y} {f 
 theorem whiskerRight_unit_comp_exceptionalProjection_tensorUnit (f : X ⟶ Y) [IsProper f.left]
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).unit.app (𝟙_ _) ≫
-          (boundedConstructibleLowerShriek _ ℓ f).map
+          (boundedConstructibleLowerShriek ℓ f).map
             (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ f)).inv) ▷ M) ≫
-      boundedConstructibleExceptionalProjectionMorphism _ ℓ f (𝟙_ _) M ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map (λ_ _).hom =
+      boundedConstructibleExceptionalProjectionMorphism ℓ f (𝟙_ _) M ≫
+      (boundedConstructibleLowerShriek ℓ f).map (λ_ _).hom =
     (λ_ M).hom ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).unit.app M := by
   apply ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).homEquiv _

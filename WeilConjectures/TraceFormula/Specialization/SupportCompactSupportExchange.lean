@@ -123,8 +123,8 @@ noncomputable abbrev openImmersionAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [I
 `Rf'_! ≅ Rp'_! h'_! ≅ Rp'_* h'_!` and `Rf_! ≅ Rp_* h_!`, with `ν_h` the adjoint of `α_h⁻¹`. -/
 noncomputable def compactSupportExchangeOfCompactification :
     NearbyCyclesModel.boundedConstructibleNearbyCycles hMC ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        boundedConstructibleLowerShriek ℓ f' ⟶
+      boundedConstructibleLowerShriek ℓ f ⋙
         NearbyCyclesModel.boundedConstructibleNearbyCycles hMY :=
   compactSupportExchangeAux (ObjectProperty.fullyFaithfulι _)
     (lowerShriekCompOfEq ℓ h' p' w' ≪≫
@@ -137,9 +137,9 @@ noncomputable def compactSupportExchangeOfCompactification :
       Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ p))
     (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility _)
     (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-    (boundedConstructibleLowerStarCompatibility _ ℓ _)
+    (boundedConstructibleLowerStarCompatibility ℓ _)
     (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-    (boundedConstructibleLowerStarCompatibility _ ℓ _)
+    (boundedConstructibleLowerStarCompatibility ℓ _)
     (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility _)
     (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ h.left)
       (openImmersionAdjunction ℓ h'.left) (φh.pullbackExchange _))

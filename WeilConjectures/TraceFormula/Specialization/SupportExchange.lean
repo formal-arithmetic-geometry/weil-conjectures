@@ -148,26 +148,26 @@ variable (ΨC : Dᵇc(c.C.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
   (ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   (ΨXX : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
     Dᵇc((X' ⨯ X').left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-  (χΔ : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙ ΨXX ⟶
-    ΨX ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X'))
-  (βc : boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ⋙ ΨC ⟶
-    ΨXX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support)
+  (χΔ : boundedConstructibleLowerStar ℓ (diag X) ⋙ ΨXX ⟶
+    ΨX ⋙ boundedConstructibleLowerStar ℓ (diag X'))
+  (βc : boundedConstructibleUpperShriek ℓ c.support ⋙ ΨC ⟶
+    ΨXX ⋙ boundedConstructibleUpperShriek ℓ c'.support)
 
 /-- The specialization `Ψ_F = Lι'^* Ψ_C Rι_*` of the fixed locus determined by the specialization
 `Ψ_C` of the support. -/
 noncomputable abbrev fixedLocusSpecialization :
     Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(F'.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι ⋙ ΨC ⋙
+  boundedConstructibleLowerStar ℓ F.ι ⋙ ΨC ⋙
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι
 
 /-- The composite `B' ∘ c'^!(χ_Δ) ∘ β_c(RΔ_*) ∘ Ψ_C(B⁻¹) : Ψ_C Rι_* Rd^! ⟶ Rι'_* Rd'^! Ψ_X` of the
 exchange maps of the support with the base change isomorphisms `B : c^! RΔ_* ≅ Rι_* d^!` of the
 fixed squares. -/
 noncomputable def fixedSquareExchange :
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι) ⋙ ΨC ⟶
-      (ΨX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d) ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι :=
+    (boundedConstructibleUpperShriek ℓ F.d ⋙
+        boundedConstructibleLowerStar ℓ F.ι) ⋙ ΨC ⟶
+      (ΨX ⋙ boundedConstructibleUpperShriek ℓ F'.d) ⋙
+        boundedConstructibleLowerStar ℓ F'.ι :=
   fourExchange F.upperShriekLowerStarIso.inv βc χΔ F'.upperShriekLowerStarIso.hom
 
 
@@ -175,14 +175,14 @@ noncomputable def fixedSquareExchange :
 `β_c` of the support: `Lι'^*` of `fixedSquareExchange`, followed by the counit of
 `Lι'^* ⊣ Rι'_*`. -/
 noncomputable def fixedLocusExceptionalExchange :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ⋙
+    boundedConstructibleUpperShriek ℓ F.d ⋙
         fixedLocusSpecialization (F := F) (F' := F') ΨC ⟶
-      ΨX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d where
+      ΨX ⋙ boundedConstructibleUpperShriek ℓ F'.d where
   app M := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
       ((fixedSquareExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc).app M) ≫
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).counit.app _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).counit.app _
   naturality _ _ g := map_comp_counit_naturality
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι)
     (fixedSquareExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) g
 
 variable (σC : 𝟙_ _ ⟶ ΨC.obj (𝟙_ _))
@@ -206,10 +206,10 @@ noncomputable def ofSupportExchange : c.TraceSpecialization F c' F' where
   σF := (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι)).hom ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
-      (σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι).unit.app
+      (σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).unit.app
         (𝟙_ _))) ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).map
-      (ΨC.map ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).map
+      (ΨC.map ((boundedConstructibleLowerStar ℓ F.ι).map
         (Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).inv))
   θX := θX
@@ -217,29 +217,29 @@ noncomputable def ofSupportExchange : c.TraceSpecialization F c' F' where
       (dualizingComplexComp ℓ F.d).inv ≫
     (fixedLocusExceptionalExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc).app
       (dualizingComplex' ℓ X) ≫
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d).map θX ≫
+    (boundedConstructibleUpperShriek ℓ F'.d).map θX ≫
     (dualizingComplexComp ℓ F'.d).hom
   χι :=
-    { app N := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.app
-        (ΨC.obj ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).obj N))
+    { app N := (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).unit.app
+        (ΨC.obj ((boundedConstructibleLowerStar ℓ F.ι).obj N))
       naturality _ _ g :=
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι).unit.naturality
-        (ΨC.map ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).map g)) }
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).unit.naturality
+        (ΨC.map ((boundedConstructibleLowerStar ℓ F.ι).map g)) }
   χΔ := χΔ
   βc := βc
   βd := fixedLocusExceptionalExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc
   unit_comp := (Category.assoc _ _ _).symm.trans
     (comp_unit_app_eq_unit_app_comp_map_conj
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι) _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι) _
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι))
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F'.ι).mapIso
-        (ΨC.mapIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι).mapIso
+        (ΨC.mapIso ((boundedConstructibleLowerStar ℓ F.ι).mapIso
           (Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ F.ι)).symm))))
   θF_eq := rfl
   fixedSquare M := hom_comp_unit_app_comp_map_counit
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι)
     (ΨC.mapIso (F.upperShriekLowerStarIso.app M)) _
 
 end TraceSpecialization

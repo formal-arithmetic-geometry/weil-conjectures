@@ -171,7 +171,7 @@ theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{
   exact ⟨((leftDerivedUpperStarComp _ g s).app _).symm ≪≫
     (leftDerivedUpperStarComp _ s' g' (g ≫ s) hs.symm).app _ ≪≫
     (L((s')^*[ModuleCat.{u + 1} Λ])).mapIso (e.app _ ≪≫
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').mapIso
+      (rightDerivedUpperShriek Λ f').mapIso
         (leftDerivedUpperStarConstantComplexIso Λ g))⟩
 
 /-- *Section invariants through an étale chart.* Let `g' : X ⟶ T` be compactifiable, `j : W ⟶ X`
@@ -193,7 +193,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
     {K : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin d); T).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ _ K)
-    (ω : dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); T) ↘ T) ≅ K) :
+    (ω : dualizingComplex Λ (𝔸(ULift.{u} (Fin d); T) ↘ T) ≅ K) :
     Nonempty (sectionInvariant Λ g' (σ ≫ j) ≅
       sectionInvariant Λ (𝔸(ULift.{u} (Fin d); T) ↘ T)
         (AffineSpace.zeroSection (ULift.{u} (Fin d)) T)) := by
@@ -202,7 +202,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
   have : HasCompactification (c ≫ 𝔸(ULift.{u} (Fin d); T) ↘ T) := .of_eq hjc
   have : QuasiCompact (j ≫ g') := hjc ▸ inferInstance
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j g'
-  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (A := ModuleCat.{u + 1} Λ) hjc
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ hjc
   obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ c (𝔸(ULift.{u} (Fin d); T) ↘ T)
   obtain ⟨e₄⟩ := nonempty_iso_rightDerivedUpperShriek_obj_of_etale Λ c K hK
   exact ⟨(leftDerivedUpperStarComp _ σ j).app _ ≪≫
@@ -210,7 +210,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
       ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app _ ≪≫
         ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app _).symm ≪≫
         (e₁.app _).symm ≪≫ e₂.app _ ≪≫ e₃.app _ ≪≫
-        (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) c).mapIso ω ≪≫ e₄ ≪≫
+        (rightDerivedUpperShriek Λ c).mapIso ω ≪≫ e₄ ≪≫
         (L((c)^*[ModuleCat.{u + 1} Λ])).mapIso ω.symm) ≪≫
     ((leftDerivedUpperStarComp _ σ c _ hσc.symm).app _).symm⟩
 
