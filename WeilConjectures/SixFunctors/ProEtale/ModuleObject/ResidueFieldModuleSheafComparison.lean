@@ -34,8 +34,9 @@ ring structure of `𝔽_E` coming from its field structure, while the constant s
 are definitionally equal, but kernel checks comparing the pullback of module objects
 (`ProEtale.CondensedRing.upperStar`) along the two forms time out. The comparisons for the
 pullback are therefore stated for the commutative-ring form, with a single instance of
-`IsTopologicalRing 𝔽_E` (`ProEtale.isTopologicalRing_integersResidueField`), and only the final
-isomorphism `ProEtale.residueFieldModuleSheafUpperStarIso` is restated for the usual form.
+`IsTopologicalRing 𝔽_E` (`ProEtale.isTopologicalRing_residueField`), and only the final
+isomorphism `ProEtale.residueFieldModuleSheafUpperStarIso` is restated for the usual form, with the
+global instance `PadicAlgCl.isTopologicalRing_integersResidueField` used everywhere else.
 -/
 
 @[expose] public section
@@ -182,14 +183,16 @@ lemma upperStarUnitHom_comp_sectionActRingHom_continuousMapCoefficientSectionRin
 
 end Sections
 
-/-- `𝔽_E` is a topological ring. This restatement of `instIsTopologicalRingIntegersResidueField`
-is used as a local instance so that all the instances of `IsTopologicalRing 𝔽_E` occurring below
-are syntactically equal, which avoids expensive kernel unfoldings. -/
-theorem isTopologicalRing_integersResidueField :
+/-- `𝔽_E` is a topological ring. This restatement of
+`PadicAlgCl.isTopologicalRing_integersResidueField` for `E : FiniteIntermediateField ℓ` is used as
+a local instance so that all the instances of `IsTopologicalRing 𝔽_E` occurring below are
+syntactically equal, which avoids expensive kernel unfoldings. The final isomorphism
+`ProEtale.residueFieldModuleSheafUpperStarIso` is stated with the global instance. -/
+theorem isTopologicalRing_residueField :
     IsTopologicalRing (integersResidueField ℓ E.1) :=
   inferInstance
 
-attribute [local instance high] isTopologicalRing_integersResidueField
+attribute [local instance high] isTopologicalRing_residueField
 
 /- The condensed ring `C(-, 𝔽_E)`, with its ring structure taken through the commutative ring
 structure of `𝔽_E` as in `ProEtale.continuousMapCoefficientSectionRingHom`; it is definitionally
@@ -342,7 +345,8 @@ pro-étale sheaves of `𝔽_E`-modules commutes with the pullback along `a : A �
 underlying abelian sheaves it is `residueFieldModuleSheafUpperStarForgetIso`
 (`ProEtale.sheafCompose_map_residueFieldModuleSheafUpperStarIsoAux_hom_app`). -/
 noncomputable def residueFieldModuleSheafUpperStarIso :
-    (a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧ ⋙
+    (a)^*⟦@Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1) _ _
+        (PadicAlgCl.isTopologicalRing_integersResidueField ℓ E.1)⟧ ⋙
         residueFieldModuleSheaf A ℓ E ≅
       residueFieldModuleSheaf B ℓ E ⋙ (a)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)] :=
   residueFieldModuleSheafUpperStarIsoAux ℓ E a
