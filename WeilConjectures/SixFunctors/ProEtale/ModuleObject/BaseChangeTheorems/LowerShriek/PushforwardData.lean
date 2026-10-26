@@ -16,8 +16,7 @@ the pushforwards `Rf_*` are defined separately for each of the `ℓ`-adic coeffi
 *pushforward datum* for `Λ` (`ProEtale.CondensedRing.BoundedConstructiblePushforwardData`) consists
 of functors `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` with adjunctions `Lf^* ⊣ Rf_*`. From such a datum, this
 file defines, by the same formulas as for the `ℓ`-adic coefficient rings
-(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs`,
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence`):
+(the files `MorphismDefs` and `CompactificationIndependence` of this directory):
 
 * the composition isomorphisms `Rh_* ⋙ Rp_* ≅ R(h ≫ p)_*`;
 * the base change morphism `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`;
