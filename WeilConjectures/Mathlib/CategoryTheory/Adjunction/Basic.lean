@@ -26,6 +26,8 @@ restriction `L.op ⋙ F` along a left adjoint `L ⊣ R` by `R.obj Y`.
 - `CategoryTheory.Functor.RepresentableBy.ofAdjunction`.
 - `CategoryTheory.Adjunction.comp_map_counit_eq_comp_homEquiv_symm`: composing with a counit
   read through an identification of a right adjoint with a left adjoint factors through a unit.
+- `CategoryTheory.Adjunction.isIso_unit_app_obj_of_isIso_counit_app`: the unit is invertible at
+  `R Y` when the counit is invertible at `Y`.
 
 -/
 
@@ -114,6 +116,20 @@ theorem comp_map_counit_eq_comp_homEquiv_symm {L : D ⥤ C} {R : C ⥤ D} {S : C
     Iso.hom_inv_id, Category.id_comp, Functor.map_comp_assoc, ← Category.assoc (adj₁.unit.app A),
     h₁]
   simp
+
+section UnitIso
+
+variable {C D : Type*} [Category* C] [Category* D]
+
+/-- If the counit of an adjunction is invertible at `Y`, the unit is invertible at `R Y`. -/
+instance isIso_unit_app_obj_of_isIso_counit_app {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (Y : D)
+    [IsIso (adj.counit.app Y)] : IsIso (adj.unit.app (R.obj Y)) := by
+  have h : adj.unit.app (R.obj Y) ≫ R.map (adj.counit.app Y) = 𝟙 _ :=
+    adj.right_triangle_components Y
+  have : IsIso (adj.unit.app (R.obj Y) ≫ R.map (adj.counit.app Y)) := by rw [h]; infer_instance
+  exact IsIso.of_isIso_comp_right _ (R.map (adj.counit.app Y))
+
+end UnitIso
 
 end CategoryTheory.Adjunction
 
