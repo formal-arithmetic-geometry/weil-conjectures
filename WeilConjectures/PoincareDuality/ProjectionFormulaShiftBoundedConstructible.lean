@@ -32,9 +32,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y : Over (Spec (.of k))}
@@ -47,17 +45,18 @@ bounded constructible complexes, as a natural transformation
 `Rf_!^c K ⊗ᴸ - ⟶ Rf_!^c (K ⊗ᴸ Lf^* -)`. -/
 @[simps]
 noncomputable def boundedConstructibleExceptionalProjectionOfCompactificationNatTrans
-    (c : Compactification f.left) (K : Dᵇc(X.left)⟦Λ⟧) :
-    (curriedTensor _).obj ((boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K) ⟶
-      (boundedConstructibleUpperStar Λ ℓ f ⋙ (curriedTensor _).obj K) ⋙
-        boundedConstructibleLowerShriekOfCompactification Λ ℓ c where
+    (c : Compactification f.left) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (curriedTensor _).obj ((boundedConstructibleLowerShriekOfCompactification ℓ c).obj K) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙ (curriedTensor _).obj K)
+          ⋙
+        boundedConstructibleLowerShriekOfCompactification ℓ c where
   app B := ObjectProperty.homMk
-    (X := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K ⊗ B)
-    (Y := (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj
-      (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B))
-    (exceptionalProjectionMorphismOfCompactification Λ c K.obj B.obj)
+    (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
+    (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
+      (K ⊗ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj B))
+    (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c K.obj B.obj)
   naturality _ _ h :=
-    boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right Λ ℓ f c K h
+    boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right ℓ f c K h
 
 set_option linter.flexible false in
 set_option synthInstance.maxSize 4096 in
@@ -68,28 +67,32 @@ set_option maxHeartbeats 1000000 in
 /-- The exceptional projection morphism of a compactification on bounded constructible complexes
 commutes with the shifts in its second variable. -/
 instance commShift_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans
-    (c : Compactification f.left) (K : Dᵇc(X.left)⟦Λ⟧) :
+    (c : Compactification f.left) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     NatTrans.CommShift
-      (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans Λ ℓ c K) ℤ := by
-  let := commShiftTensorLeftFamily Λ X.left
-  let := commShiftTensorLeftFamily Λ Y.left
-  let := commShiftTensorRightFamily Λ X.left
-  let := commShiftTensorRightFamily Λ Y.left
-  have : (boundedConstructible (condensedRingObj Λ Y.left)).ι.Faithful :=
+      (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ c K) ℤ := by
+  let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) X.left
+  let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) Y.left
+  let := commShiftTensorRightFamily (Profinite.padicAlgClRingObj ℓ) X.left
+  let := commShiftTensorRightFamily (Profinite.padicAlgClRingObj ℓ) Y.left
+  have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι.Faithful
+      :=
     ObjectProperty.faithful_ι _
-  let e₂ : ((boundedConstructibleUpperStar Λ ℓ f ⋙ (curriedTensor _).obj K) ⋙
-      boundedConstructibleLowerShriekOfCompactification Λ ℓ c) ⋙
-        (boundedConstructible (condensedRingObj Λ Y.left)).ι ≅
-      (boundedConstructible _).ι ⋙ ((L((f.left)^*⟦Λ⟧) ⋙ (curriedTensor _).obj K.obj) ⋙
-        Rf_!(c)⟦Λ⟧) :=
+  let e₂ : ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙ (curriedTensor
+      _).obj K) ⋙
+      boundedConstructibleLowerShriekOfCompactification ℓ c) ⋙
+        (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι ≅
+      (boundedConstructible _).ι ⋙ ((L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ (curriedTensor
+          _).obj K.obj) ⋙
+        Rf_!(c)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
     Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationCompatibility
-        Λ ℓ c) ≪≫
+        ℓ c) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (Functor.associator _ _ _ ≪≫
         Functor.isoWhiskerLeft _ (ObjectProperty.tensorLeftCompιIso _ K) ≪≫
         (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility Λ ℓ f) _ ≪≫
+        Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility
+            (Profinite.padicAlgClRingObj ℓ) ℓ f) _ ≪≫
         Functor.associator _ _ _) _ ≪≫
       Functor.associator _ _ _
   have : NatTrans.CommShift e₂.hom ℤ := by
@@ -98,9 +101,10 @@ instance commShift_boundedConstructibleExceptionalProjectionOfCompactificationNa
     infer_instance
   refine NatTrans.CommShift.of_whiskerRight_eq _ (boundedConstructible _).ι
     (ObjectProperty.tensorLeftCompιIso _
-      ((boundedConstructibleLowerShriekOfCompactification Λ ℓ c).obj K)) e₂
+      ((boundedConstructibleLowerShriekOfCompactification ℓ c).obj K)) e₂
     (Functor.whiskerLeft (boundedConstructible _).ι
-      (exceptionalProjectionMorphismOfCompactificationNatTrans Λ c K.obj)) ?_
+      (exceptionalProjectionMorphismOfCompactificationNatTrans (Profinite.padicAlgClRingObj ℓ) c
+          K.obj)) ?_
   refine NatTrans.ext (funext fun B ↦ ?_)
   simp [e₂, ObjectProperty.tensorLeftCompιIso, ObjectProperty.tensorLeftIsoLift,
     ObjectProperty.liftFullSubcategoryCompιIso, boundedConstructibleUpperStarCompatibility,

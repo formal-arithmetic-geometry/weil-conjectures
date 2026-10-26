@@ -43,8 +43,7 @@ are separated and of finite type over a field `k` of characteristic `p > 0` with
 (blueprint `sk-def-sfb-dc-setting`), and the functors are those of the underlying morphisms of
 schemes. The coefficient rings are the condensed rings `𝒪̲_E = Profinite.padicIntegersRingObj ℓ E`
 (for a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`), `E̲ = Profinite.continuousMapRingObj E` (for a finite
-extension `E` of `ℚ_ℓ`, as in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper`) and
+subextension `E` of `ℚ̄_ℓ / ℚ_ℓ`, `E : PadicAlgCl.FiniteIntermediateField ℓ`) and
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`.
 -/
 
@@ -173,7 +172,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicIntegersRi
     (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K) :
     boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left)
       ((R((j.left)_*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K) :=
-  boundedConstructible_rightDerivedLowerStar_obj _ ℓ j K hK
+  PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨K, hK⟩
 
 end Integers
 
@@ -182,7 +181,7 @@ end Integers
 
 section Field
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 set_option hygiene false in
 /-- The condensed field `E̲`. -/
@@ -272,7 +271,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersion_continuousMapRi
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
     {K : 𝔻[𝐄](X.left)} (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K) :
     boundedConstructible (condensedRingObj 𝐄 Y.left) ((R((j.left)_*⟦𝐄⟧)).obj K) :=
-  boundedConstructible_rightDerivedLowerStar_obj _ ℓ j K hK
+  ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨K, hK⟩
 
 end Field
 
@@ -368,7 +367,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicAlgClRingO
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
     {K : 𝔻[𝐐](X.left)} (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K) :
     boundedConstructible (condensedRingObj 𝐐 Y.left) ((R((j.left)_*⟦𝐐⟧)).obj K) :=
-  boundedConstructible_rightDerivedLowerStar_obj _ ℓ j K hK
+  boundedConstructible_rightDerivedLowerStar_obj ℓ j ⟨K, hK⟩
 
 end AlgCl
 

@@ -72,7 +72,8 @@ section UnitComparison
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {X Y : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
 
 open Functor.LaxMonoidal Functor.OplaxMonoidal Opposite
 
@@ -237,6 +238,7 @@ section ProjectionMap
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FA P Q) (CA P) (CA Q)] [ConcreteCategory.{u + 1} A FA]
   [Etale.UpperStarPreservesFlat A]
@@ -279,24 +281,29 @@ lemma rightDerivedLowerShriek_map_whiskerLeft_comp_inv_projectionMap [IsIso (pro
 
 /-- The adjoint form of
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft`. -/
-lemma rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (projectionMap A a)]
-    [(R(a)_![A]).IsLeftAdjoint] {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    {M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (q : 𝟙_ _ ⟶ M) (q' : 𝟙_ _ ⟶ M') (e : (L((a)^*[A])).obj M ≅ M')
-    (h : (L((a)^*[A])).map q ≫ e.hom = (leftDerivedUpperStarUnitIso A a).hom ≫ q')
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (R(a)_![A]).map (((ρ_ ((R(a)^![A]).obj K)).inv ≫ (R(a)^![A]).obj K ◁ q') ≫
-        (R(a)^![A]).obj K ◁ e.inv) ≫
-      inv (((projectionMap A a).app ((R(a)^![A]).obj K)).app M) ≫
-        (rightDerivedUpperShriekAdjunction A a).counit.app K ▷ M =
-    (rightDerivedUpperShriekAdjunction A a).counit.app K ≫ (ρ_ K).inv ≫ K ◁ q := by
-  set B := (R(a)^![A]).obj K
-  have h' : q' ≫ e.inv = (leftDerivedUpperStarUnitIso A a).inv ≫ (L((a)^*[A])).map q := by
+lemma rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (projectionMap
+    (ModuleCat.{u + 1} Λ) a)]
+ {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (q : 𝟙_ _ ⟶ M) (q' : 𝟙_ _ ⟶ M') (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj M ≅ M')
+    (h : (L((a)^*[ModuleCat.{u + 1} Λ])).map q ≫ e.hom = (leftDerivedUpperStarUnitIso (ModuleCat.{u
+        + 1} Λ) a).hom ≫ q')
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(a)_![ModuleCat.{u + 1} Λ]).map (((ρ_ ((R(a)^![Λ]).obj K)).inv ≫ (R(a)^![Λ]).obj K ◁ q') ≫
+        (R(a)^![Λ]).obj K ◁ e.inv) ≫
+      inv (((projectionMap (ModuleCat.{u + 1} Λ) a).app ((R(a)^![Λ]).obj K)).app M) ≫
+        (rightDerivedUpperShriekAdjunction Λ a).counit.app K ▷ M =
+    (rightDerivedUpperShriekAdjunction Λ a).counit.app K ≫ (ρ_ K).inv ≫ K ◁ q := by
+  set B := (R(a)^![Λ]).obj K
+  have h' : q' ≫ e.inv = (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) a).inv ≫
+      (L((a)^*[ModuleCat.{u + 1} Λ])).map q := by
     rw [Iso.comp_inv_eq, Category.assoc, h, Iso.inv_hom_id_assoc]
   rw [Category.assoc, ← whiskerLeft_comp, h', whiskerLeft_comp, ← Category.assoc
     ((ρ_ B).inv), Functor.map_comp, Category.assoc,
-    reassoc_of% (rightDerivedLowerShriek_map_whiskerLeft_comp_inv_projectionMap A a B q),
-    reassoc_of% (rightDerivedLowerShriek_map_rightUnitor_inv_comp_inv_projectionMap A a B),
+    reassoc_of% (rightDerivedLowerShriek_map_whiskerLeft_comp_inv_projectionMap (ModuleCat.{u + 1}
+        Λ) a B q),
+    reassoc_of% (rightDerivedLowerShriek_map_rightUnitor_inv_comp_inv_projectionMap (ModuleCat.{u +
+        1} Λ) a B),
     whisker_exchange]
   exact (rightUnitor_inv_naturality_assoc _ _).symm
 
@@ -305,21 +312,23 @@ lemma rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (proje
 `Ra^! K ⟶ Ra^! K ⊗ᴸ M'` induced by `q'`, followed by `e⁻¹` and the comparison
 `Ra^! K ⊗ᴸ La^* M ⟶ Ra^!(K ⊗ᴸ M)` (adjoint to the inverse of the projection map followed by the
 counit), is `Ra^!` of the map `K ⟶ K ⊗ᴸ M` induced by `q`. -/
-lemma rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (projectionMap A a)]
-    [(R(a)_![A]).IsLeftAdjoint] {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    {M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (q : 𝟙_ _ ⟶ M) (q' : 𝟙_ _ ⟶ M') (e : (L((a)^*[A])).obj M ≅ M')
-    (h : (L((a)^*[A])).map q ≫ e.hom = (leftDerivedUpperStarUnitIso A a).hom ≫ q')
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((ρ_ ((R(a)^![A]).obj K)).inv ≫ (R(a)^![A]).obj K ◁ q') ≫ (R(a)^![A]).obj K ◁ e.inv ≫
-      (rightDerivedUpperShriekAdjunction A a).homEquiv _ _
-        (inv (((projectionMap A a).app ((R(a)^![A]).obj K)).app M) ≫
-          (rightDerivedUpperShriekAdjunction A a).counit.app K ▷ M) =
-    (R(a)^![A]).map ((ρ_ K).inv ≫ K ◁ q) := by
-  apply ((rightDerivedUpperShriekAdjunction A a).homEquiv _ _).symm.injective
+lemma rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (projectionMap
+    (ModuleCat.{u + 1} Λ) a)]
+ {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (q : 𝟙_ _ ⟶ M) (q' : 𝟙_ _ ⟶ M') (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj M ≅ M')
+    (h : (L((a)^*[ModuleCat.{u + 1} Λ])).map q ≫ e.hom = (leftDerivedUpperStarUnitIso (ModuleCat.{u
+        + 1} Λ) a).hom ≫ q')
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((ρ_ ((R(a)^![Λ]).obj K)).inv ≫ (R(a)^![Λ]).obj K ◁ q') ≫ (R(a)^![Λ]).obj K ◁ e.inv ≫
+      (rightDerivedUpperShriekAdjunction Λ a).homEquiv _ _
+        (inv (((projectionMap (ModuleCat.{u + 1} Λ) a).app ((R(a)^![Λ]).obj K)).app M) ≫
+          (rightDerivedUpperShriekAdjunction Λ a).counit.app K ▷ M) =
+    (R(a)^![Λ]).map ((ρ_ K).inv ≫ K ◁ q) := by
+  apply ((rightDerivedUpperShriekAdjunction Λ a).homEquiv _ _).symm.injective
   rw [← Category.assoc, ← Adjunction.homEquiv_naturality_left, Equiv.symm_apply_apply,
     Adjunction.homEquiv_counit, Adjunction.counit_naturality]
-  exact rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft A a q q' e h K
+  exact rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft Λ a q q' e h K
 
 end ProjectionMap
 

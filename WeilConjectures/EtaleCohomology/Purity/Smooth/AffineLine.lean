@@ -217,7 +217,7 @@ identification of `Hom(Λ_Y, Rs^! Λ(1)[2])` with `H²_{s(Y)}(𝔸¹_Y, Λ(1))` 
 (`prop-pur-affine-line-orientation-uniqueness`) is
 `AlgebraicGeometry.Etale.eq_affineLineOrientation_iff`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNormalized Λ] :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
         ((twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj
           (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y))) ≅
@@ -234,10 +234,10 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
   have : HasCompactification (e.hom ≫ ι) := .of_eq he.symm
   -- the normalisation: the Kummer boundary of `t` is a fundamental class `Λ_{V(t)} ≅ Rι^! Λ(1)[2]`
   have hφ := hN.isIso_supportedClassMap_kummerBoundary_coord Y aY
-  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) he.symm
+  obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ he.symm
   obtain ⟨comp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ e.hom ι
   exact ⟨heq.app _ ≪≫ comp.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ e).app _ ≪≫
-    (L((e.hom)^*[ModuleCat.{u + 1} Λ])).mapIso ((R(ι)^![ModuleCat.{u + 1} Λ]).mapIso
+    (L((e.hom)^*[ModuleCat.{u + 1} Λ])).mapIso ((R(ι)^![Λ]).mapIso
       ((shiftFunctor _ (2 * 1 : ℤ)).mapIso (derivedTensorLeftUnitor _ _ _) ≪≫
         eqToIso (by rw [mul_one])) ≪≫ (@asIso _ _ _ _ _ hφ).symm) ≪≫
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
@@ -273,8 +273,8 @@ theorem nonempty_iso_homology_multiplicativeGroup_of_isZero [HasTateTwist.IsNorm
       ((derivedTensor _ G).mapIso (leftDerivedUpperStarConstantComplexIso Λ j)).app _ ≪≫
         ((derivedTensor _ G).obj _).mapIso (leftDerivedUpperStarTateObjectIso j 1)
   -- `R(s ≫ p)_* = R(𝟙)_*` is the identity
-  let eS : (R((s ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(s)^![ModuleCat.{u + 1} Λ]).obj L) ≅
-      (R(s)^![ModuleCat.{u + 1} Λ]).obj L :=
+  let eS : (R((s ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(s)^![Λ]).obj L) ≅
+      (R(s)^![Λ]).obj L :=
     (rightDerivedLowerStarCongr _ (AffineSpace.zeroSection_comp_over _ Y)).app _ ≪≫
       (rightDerivedLowerStarIdIso Λ Y).app _
   exact ⟨(_root_.DerivedCategory.homologyFunctor _ n).mapIso
@@ -283,7 +283,7 @@ theorem nonempty_iso_homology_multiplicativeGroup_of_isZero [HasTateTwist.IsNorm
     (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso (2 * 1 : ℤ) (n - 1) (n + 1)
       (by ring)).app _).symm ≪≫
     (_root_.DerivedCategory.homologyFunctor _ (n - 1)).mapIso
-      (((R(s)^![ModuleCat.{u + 1} Λ]).commShiftIso (2 * 1 : ℤ)).app L).symm ≪≫
+      (((R(s)^![Λ]).commShiftIso (2 * 1 : ℤ)).app L).symm ≪≫
     (_root_.DerivedCategory.homologyFunctor _ (n - 1)).mapIso π₀⟩
 
 include aY in
@@ -418,7 +418,6 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
   have := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible i₁ hi hF _ hγ
   exact Iso.ext (by rw [← Category.comp_id α.hom, ← β.inv_hom_id, ← Category.assoc, this,
     Category.id_comp])
-
 
 set_option linter.unusedSectionVars false in
 include aY in

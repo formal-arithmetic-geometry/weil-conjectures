@@ -136,7 +136,7 @@ noncomputable def DerivedCategoryFiniteTor.verdierDualEquivalenceFunctorIso :
 `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an equivalence, i.e. `𝔻_X` is a contravariant
 anti-equivalence of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.verdierDualEquivalence`). -/
 theorem DerivedCategoryFiniteTor.isEquivalence_verdierDual :
-    (DerivedCategoryFiniteTor.verdierDual (ModuleCat.{u + 1} Λ) aX
+    (DerivedCategoryFiniteTor.verdierDual Λ aX
       fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK).IsEquivalence :=
   Functor.isEquivalence_of_iso (DerivedCategoryFiniteTor.verdierDualEquivalenceFunctorIso Λ aX)
 
@@ -179,11 +179,11 @@ theorem typingRule (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
       DerivedCategoryFiniteTor.ι _ X ⋙ R(f)_![ModuleCat.{u + 1} Λ]) ∧
     Nonempty (DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f ⋙
         DerivedCategoryFiniteTor.ι _ X ≅
-      DerivedCategoryFiniteTor.ι _ Y ⋙ R(f)^![ModuleCat.{u + 1} Λ]) ∧
-    Nonempty (DerivedCategoryFiniteTor.verdierDual (ModuleCat.{u + 1} Λ) aX
+      DerivedCategoryFiniteTor.ι _ Y ⋙ R(f)^![Λ]) ∧
+    Nonempty (DerivedCategoryFiniteTor.verdierDual Λ aX
           (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK) ⋙
         DerivedCategoryFiniteTor.ι _ X ≅
-      (DerivedCategoryFiniteTor.ι _ X).op ⋙ verdierDual (ModuleCat.{u + 1} Λ) aX) ∧
+      (DerivedCategoryFiniteTor.ι _ X).op ⋙ verdierDual Λ aX) ∧
     Nonempty ((DerivedCategoryFiniteTor.derivedTensor Λ X).obj K ⋙
         DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
       DerivedCategoryFiniteTor.ι _ X ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K.obj) ∧
@@ -278,11 +278,11 @@ theorem sixOperations_typing [QuasiCompact f] [HasCompactification f]
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((R(f)^![Λ]).obj K)) ∧
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-          ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)))) ∧
+          ((verdierDual Λ aX).obj (op K)))) ∧
     ((∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
@@ -320,19 +320,19 @@ theorem sixOperations_typing [QuasiCompact f] [HasCompactification f]
       (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * d + 1)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((R(f)^![Λ]).obj K)) ∧
     (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ)
       (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       boundedConstructible (ModuleCat.{u + 1} Λ) X K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) ∧
+            ((verdierDual Λ aX).obj (op K))) ∧
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
-          Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
-            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)))))) ∧
+            ((verdierDual Λ aX).obj (op K)) ∧
+          Nonempty (K ≅ (verdierDual Λ aX).obj
+            (op ((verdierDual Λ aX).obj (op K)))))) ∧
     (∀ K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       boundedConstructible (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
@@ -343,13 +343,13 @@ theorem sixOperations_typing [QuasiCompact f] [HasCompactification f]
       (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X' (a - 2 * d) (b - 2 * d)
-          ((R(g)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+          ((R(g)^![Λ]).obj K)) ∧
     (∀ {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i] (d : ℕ),
       topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ)
       (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + 2 * d + 1)
-          ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+          ((R(i)^![Λ]).obj K)) := by
   have : HasInvertibleExponent Λ X := .of_hom aX
   have : HasInvertibleExponent Λ Y := .of_hom aY
   refine ⟨boundedConstructible_preservation Λ aX aY f hf,

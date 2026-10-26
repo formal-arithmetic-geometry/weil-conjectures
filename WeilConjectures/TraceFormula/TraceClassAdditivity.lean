@@ -73,7 +73,7 @@ variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspon
 and coefficient map `u' : Lc₂^* K' ⟶ Rc₁^! K'` (blueprint `def-trf-correspondence`). -/
 noncomputable def withCoeff (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K') :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     Correspondence ℓ K' where
   C := c.C
   c₁ := c.c₁
@@ -86,7 +86,7 @@ variable {c}
 noncomputable def FixedLocus.withCoeff (F : c.FixedLocus)
     (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K') :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     (c.withCoeff K' u').FixedLocus where
   F := F.F
   ι := F.ι
@@ -98,7 +98,7 @@ as a Borel–Moore section of the fixed locus `F` of `c`. -/
 noncomputable def FixedLocus.traceClassWithCoeff (F : c.FixedLocus)
     (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K') :
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     BorelMooreSection ℓ F.F :=
   (c.withCoeff K' u').traceClass (F.withCoeff K' u')
 

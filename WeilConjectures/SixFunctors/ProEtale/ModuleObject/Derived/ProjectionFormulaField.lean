@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 /-!
 # Projection formula and proper base change with rational coefficients
 
-Let `Λ = E` (a finite extension of `ℚ_ℓ`) or `Λ = ℚ̄_ℓ`, with condensed ring `E̲`, resp.
-`ℚ̲̄_ℓ`, and let `Loc(Dctf(X, Λ)) = Loc(Dbc(X, Λ))` be the localizing closure of the bounded
+Let `Λ = E` (a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`) or `Λ = ℚ̄_ℓ`, with condensed ring `E̲`,
+resp. `ℚ̲̄_ℓ`, and let `Loc(Dctf(X, Λ)) = Loc(Dbc(X, Λ))` be the localizing closure of the bounded
 constructible complexes in `D(X_proét, Λ) = D(Mod_{Λ_X})`
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). This file proves
 blueprint `sk-thm-sf-pf-field`:
@@ -73,7 +73,7 @@ include ℓ k
 
 section Field
 
-variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 set_option hygiene false in
 /-- The condensed field `E̲`. -/
@@ -119,7 +119,7 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_continuousMapRingO
       p).1
     ((localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj (X' := X) ℓ E).1
       p).2
-    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐄 ℓ p L hL)
+    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐄 ℓ p ⟨L, hL⟩)
     (fun _ _ hK hL ↦ boundedConstructible_tensor_continuousMapRingObj ℓ E hK hL)
     (properDirectImage_baseChange_projectionFormula_continuousMapRingObj (X' := X) (Y' := Y) ℓ E
       p).2.2 hA hB
@@ -196,7 +196,7 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicAlgClRingObj
   isIso_projectionMap_of_localizingBoundedConstructible 𝐐 p.left
     ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).1
     ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).2
-    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐐 ℓ p L hL)
+    (fun L hL ↦ boundedConstructible_leftDerivedUpperStar_obj 𝐐 ℓ p ⟨L, hL⟩)
     (fun _ _ hK hL ↦ boundedConstructible_tensor_padicAlgClRingObj ℓ hK hL)
     (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (X' := X) (Y' := Y) ℓ
       p).2.2 hA hB

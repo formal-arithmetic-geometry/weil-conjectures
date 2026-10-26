@@ -164,7 +164,8 @@ theorem weilTraceFormula (he : ∃ m > 0, e.pow m = Iso.refl X)
       ∑ x : frobeniusFixedPoints e n, weilStalkTraceAlternatingSum ℓ n x.1 x.2.2 K :=
   (weilShriekTraceFunction ℓ e (Iso.refl (point k)) (f := toPoint X) (toPoint_ext _ _) he K n
     default).trans
-      (Fintype.sum_equiv (Equiv.subtypeUnivEquiv fun x ↦ x.2.1) _ _ fun _ ↦ rfl)
+      (Fintype.sum_equiv (Equiv.subtypeUnivEquiv fun x ↦ by rw [toPoint_left]; exact x.2.1) _ _
+        fun _ ↦ rfl)
 
 /-- **Point counting.** For the canonical Weil unit `ℚ̲̄_ℓ,X`, the global trace in degree `n ≠ 0`
 is the number of points of degree `n`, that is `#X(𝔽_{qⁿ})` for `e = 𝟙`:

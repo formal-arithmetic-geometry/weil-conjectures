@@ -64,12 +64,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The lax tensor map `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` of nearby cycles
 (`NearbyCyclesModel.tensorMap`) on bounded constructible complexes. -/
 noncomputable def boundedConstructibleTensorMap
-    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-    [IsEllAdicFinitenessCoefficient ℓ Λ] (hP : M.PreservesBoundedConstructible Λ)
-    (A B : Dᵇc(X.left)⟦Λ⟧) :
+    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleNearbyCycles hP).obj A ⊗ (boundedConstructibleNearbyCycles hP).obj B ⟶
       (boundedConstructibleNearbyCycles hP).obj (A ⊗ B) :=
-  ObjectProperty.homMk (M.tensorMap Λ A.obj B.obj)
+  ObjectProperty.homMk (M.tensorMap (Profinite.padicAlgClRingObj ℓ) A.obj B.obj)
 
 variable (ℓ) [IsSepClosed k'] [Algebra k k'] {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -81,8 +80,8 @@ noncomputable def nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
-        (verdierDual ℓ (toPoint X) K) ⟶
-      verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
+        (verdierDual ℓ K) ⟶
+      verdierDual ℓ ((boundedConstructibleNearbyCycles
         (h.preservesBoundedConstructible ℓ)).obj K) :=
   Verdier.nearbyDualityMap (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ))
     (D.θ h) K

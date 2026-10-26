@@ -50,8 +50,8 @@ theorem nonempty_iso_mapDerivedCategory_upperStar_rightDerivedUpperShriek (i : Z
     [IsClosedImmersion i] (W : X.Opens) [IsLocallyNoetherian X] [IsLocallyNoetherian Z]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((((i ⁻¹ᵁ W).ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj M) ≅
-      (R(i ∣_ W)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(i)^![Λ]).obj M) ≅
+      (R(i ∣_ W)^![Λ]).obj
         (((W.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj M)) := by
   have : HasCompactification (i ⁻¹ᵁ W).ι :=
     (Compactification.ofIsOpenImmersion (i ⁻¹ᵁ W).ι).hasCompactification
@@ -64,11 +64,11 @@ theorem nonempty_iso_mapDerivedCategory_upperStar_rightDerivedUpperShriek (i : Z
     HasCompactification.of_eq (morphismRestrict_ι i W).symm
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (i ⁻¹ᵁ W).ι i
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (i ∣_ W) W.ι
-  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ)
+  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq Λ
     (morphismRestrict_ι i W)
   exact ⟨(rightDerivedUpperShriekIsoOfIsOpenImmersion Λ (i ⁻¹ᵁ W).ι).symm.app _ ≪≫
     (e₁.app M).symm ≪≫ (e₃.app M).symm ≪≫ e₂.app M ≪≫
-    (R(i ∣_ W)^![ModuleCat.{u + 1} Λ]).mapIso
+    (R(i ∣_ W)^![Λ]).mapIso
       ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ W.ι).app M)⟩
 
 end Etale

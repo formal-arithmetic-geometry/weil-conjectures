@@ -258,21 +258,21 @@ the exceptional inverse image `Rᵉˣi^!` of blueprint `sk-def-sf-operations` (v
 `K` bounded below: both are `Hom(Ri_! P, K)`, as `Ri_! = Ri_*` for a closed immersion
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar`). -/
 noncomputable def closedUpperShriekHomEquivRightDerivedUpperShriek [HasCompactification i]
-    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
+    [CompactSpace X]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {P : _root_.DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
     (hP : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Z P)
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : _root_.DerivedCategory.TStructure.t.plus K) :
     (P ⟶ (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K) ≃
-      (P ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj K) :=
+      (P ⟶ (R(i)^![Λ]).obj K) :=
   ((derivedLowerStarClosedUpperShriekAdjunction i j hij).homEquiv P K).symm.trans <|
     ((rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar _ i).app P).homFromEquiv.symm.trans
       (rightDerivedUpperShriekHomEquiv i hP hK)
 
 omit hN hΛ s in
 lemma closedUpperShriekHomEquivRightDerivedUpperShriek_naturality [HasCompactification i]
-    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
+    [CompactSpace X]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {P P' : _root_.DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
     (hP : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Z P)
@@ -298,12 +298,12 @@ represent `P ↦ Hom(Ri_* P, K)` on the complexes `P` bounded below of étale or
 (`AlgebraicGeometry.ProEtale.closedUpperShriekHomEquivRightDerivedUpperShriek`), and both objects
 are of this kind. -/
 theorem nonempty_iso_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedUpperShriek_obj
-    [HasCompactification i] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
+    [HasCompactification i] [CompactSpace X]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     Nonempty ((closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K ≅
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      (R(i)^![Λ]).obj K) := by
   have hE := (boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj i j N hN hΛ s hij
     hK).plusEtaleOrigin
   have hE' := plusEtaleOrigin_rightDerivedUpperShriek_obj i hK.plusEtaleOrigin.plus

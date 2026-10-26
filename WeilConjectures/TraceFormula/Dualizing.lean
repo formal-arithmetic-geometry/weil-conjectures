@@ -112,19 +112,19 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 with its pushforward, followed by `R(𝟙 X)_* ≅ 𝟭`. -/
 noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
+    boundedConstructibleLowerShriek ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X) ≪≫
-    boundedConstructibleLowerStarId _ ℓ X
+    boundedConstructibleLowerStarId ℓ X
 
 /-- The identity isomorphism `R(𝟙 X)^! ≅ 𝟭` of the exceptional inverse image: the conjugate of
 `boundedConstructibleLowerShriekId` for the adjunctions `R(𝟙 X)_! ⊣ R(𝟙 X)^!` and `𝟭 ⊣ 𝟭`. -/
 noncomputable def boundedConstructibleUpperShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
+    boundedConstructibleUpperShriek ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   conjugateIsoEquiv
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ X).symm
 
 end Comparison
@@ -140,7 +140,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 (blueprint `def-trf-dualizing-complex`). -/
 noncomputable abbrev dualizingComplex' (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj (𝟙_ _)
+  (boundedConstructibleUpperShriek ℓ (toPoint X)).obj (𝟙_ _)
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -149,7 +149,7 @@ variable {X Y : Over (Spec (.of k))}
 /-- The composition isomorphism `Rf^! ω_Y ≅ ω_X` of the dualizing complexes (blueprint
 `thm-trf-dualizing-complex-composition`). -/
 noncomputable def dualizingComplexComp (f : X ⟶ Y) :
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    (boundedConstructibleUpperShriek ℓ f).obj
         (dualizingComplex' ℓ Y) ≅ dualizingComplex' ℓ X :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
@@ -161,9 +161,16 @@ variable (X) in
 noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
     (dualizingComplex' ℓ X).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
-  haveI : SmoothOfRelativeDimension d (toPoint X).left :=
-    inferInstanceAs (SmoothOfRelativeDimension d X.hom)
+  haveI : SmoothOfRelativeDimension d (toPoint X).left := by
+    rw [toPoint_left]
+    infer_instance
   smoothPurityIso ℓ (toPoint X) d
+
+/-- The identity isomorphism `Ra^! ℚ̄_ℓ,s ≅ ℚ̄_ℓ,s` for an endomorphism `a = 𝟙` of `s`. -/
+noncomputable def upperShriekUnitIsoOfEqId (a : point k ⟶ point k) (ha : a = 𝟙 (point k)) :
+    (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _) ≅
+      𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  eqToIso (by rw [ha]) ≪≫ (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
 variable (k) in
 /-- The dualizing complex of the base point is the unit, `ω_s ≅ ℚ̄_ℓ,s`: the structure morphism
@@ -172,7 +179,7 @@ variable (k) in
 unit. -/
 noncomputable def dualizingComplexPointIso :
     dualizingComplex' ℓ (point k) ≅ 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
+  upperShriekUnitIsoOfEqId ℓ (toPoint (point k)) (toPoint_ext _ _)
 
 end Dualizing
 
@@ -205,7 +212,7 @@ through the canonical identification `Rj^! ℚ̄_ℓ,X ≅ j^* ℚ̄_ℓ,X ≅ �
 noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
     (α : BorelMooreSection ℓ X) : BorelMooreSection ℓ U :=
   (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map α ≫
+    (boundedConstructibleUpperShriek ℓ j).map α ≫
     (dualizingComplexComp ℓ j).hom
 
 /-- The *integral* `∫_X α ∈ End ℚ̄_ℓ,s` of a Borel–Moore section of a scheme proper over `s`:
@@ -217,15 +224,17 @@ identification `Ra_{X!} ≅ Ra_{X*}` for the proper `a_X`, and the adjoint `α^�
 `Ra_{X!} ⊣ Ra_X^!` (blueprint `def-trf-integration`). -/
 noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  haveI : IsProper (toPoint X).left := inferInstanceAs (IsProper X.hom)
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  haveI : IsProper (toPoint X).left := by
+    rw [toPoint_left]
+    infer_instance
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (toPoint X)).unit.app (𝟙_ _) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerStar ℓ (toPoint X)).map
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv ≫
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
       (toPoint X)).inv.app (𝟙_ _) ≫
-    ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    ((boundedConstructibleUpperShriekAdjunction ℓ
       (toPoint X)).homEquiv _ _).symm α
 
 /-- The integral is additive (blueprint `lem-trf-integration-linear`). -/
@@ -246,23 +255,36 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
-/-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
-(`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
-theorem integral_point (α : BorelMooreSection ℓ (point k)) :
-    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom := by
+set_option maxHeartbeats 1000000 in
+-- the `erw` step unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
+/-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
+its structure morphism. -/
+private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point k))
+    [IsProper a.left]
+    (α : 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
+      (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)) :
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ a).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ a).map
+          (Functor.Monoidal.εIso
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ a).inv.app (𝟙_ _) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ a).homEquiv _ _).symm α =
+      α ≫ (upperShriekUnitIsoOfEqId ℓ a ha).hom := by
+  subst ha
   have h := homEquiv_comp_conjugateEquiv_app
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k)))
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
-    (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (((boundedConstructibleUpperShriekAdjunction ℓ
       (𝟙 (point k))).homEquiv _ _).symm α)
   rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
     ← conjugateIsoEquiv_apply_hom] at h
-  rw [dualizingComplexPointIso, Iso.app_hom, boundedConstructibleUpperShriekId]
+  rw [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom,
+    boundedConstructibleUpperShriekId]
   erw [h]
   have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (𝟙 (point k))).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).map
+        (boundedConstructibleLowerStar ℓ (𝟙 (point k))).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (𝟙 (point k)))).inv ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 (point k))).inv.app
@@ -270,9 +292,17 @@ theorem integral_point (α : BorelMooreSection ℓ (point k)) :
     rw [boundedConstructibleLowerShriekId, Iso.trans_inv, NatTrans.comp_app,
       boundedConstructibleLowerStarId_inv_app_unit, Category.assoc]
   refine Eq.trans ?_ (congrArg (· ≫ ((boundedConstructibleUpperShriekAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
+    ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
   simp only [Category.assoc]
-  rfl
+
+/-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
+(`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
+theorem integral_point (α : BorelMooreSection ℓ (point k)) :
+    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom :=
+  haveI : IsProper (toPoint (point k)).left := by
+    rw [toPoint_left]
+    infer_instance
+  integral_point_aux (toPoint (point k)) (toPoint_ext _ _) α
 
 end BorelMooreSection
 

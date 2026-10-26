@@ -51,46 +51,46 @@ set_option maxHeartbeats 0 in
 /-- The core of `class_pushforward`: the two ways of transporting `Rp₁'_! (Lp₂'^* K' ⊗ Rb_! 𝟙)`
 to `Rf_* Rc₁_! Lc₂^* K` agree. -/
 theorem class_pushforward_core :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         (Verdier.leftProjection
-            (boundedConstructibleExceptionalProjection _ ℓ P.pushforward.support)
+            (boundedConstructibleExceptionalProjection ℓ P.pushforward.support)
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff) (𝟙_ _) ≫
-          (boundedConstructibleLowerShriek _ ℓ P.pushforward.support).map
+          (boundedConstructibleLowerShriek ℓ P.pushforward.support).map
             ((ρ_ _).hom ≫ (boundedConstructibleUpperStarComp _ ℓ P.pushforward.support
               prod.snd).inv.app P.coeff)) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ P.pushforward.support prod.fst).inv.app
         ((boundedConstructibleUpperStar _ ℓ (P.pushforward.support ≫ prod.snd)).obj P.coeff) ≫
-      (boundedConstructibleLowerShriek _ ℓ (P.pushforward.support ≫ prod.fst)).map
+      (boundedConstructibleLowerShriek ℓ (P.pushforward.support ≫ prod.fst)).map
         (eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj P.coeff)
           P.pushforward.support_snd)) ≫
-      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj
+      eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj
         ((boundedConstructibleUpperStar _ ℓ P.b₂).obj P.coeff)) P.pushforward.support_fst) ≫
-      (boundedConstructibleLowerShriek _ ℓ P.b₁).map P.pushforwardCoeffUnit ≫
+      (boundedConstructibleLowerShriek ℓ P.b₁).map P.pushforwardCoeffUnit ≫
       (lowerStarLowerShriekCompIso ℓ P.w₁).hom.app
         ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K) =
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff ◁
-          (boundedConstructibleLowerShriek _ ℓ P.pushforward.support).map
-            ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).unit.app (𝟙_ _) ≫
-              (boundedConstructibleLowerStar _ ℓ P.g).map
+          (boundedConstructibleLowerShriek ℓ P.pushforward.support).map
+            ((boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g).unit.app (𝟙_ _) ≫
+              (boundedConstructibleLowerStar ℓ P.g).map
                 (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ P.g)).inv)) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff ◁
           (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom.app (𝟙_ _)) ≫
-      (classTransport ℓ P.f K).app ((boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _)) ≫
-      (boundedConstructibleLowerStar _ ℓ P.f).map
-        ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).map
-            (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ c.support)
+      (classTransport ℓ P.f K).app ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _)) ≫
+      (boundedConstructibleLowerStar ℓ P.f).map
+        ((boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)).map
+            (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ c.support)
                 ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K) (𝟙_ _) ≫
-              (boundedConstructibleLowerShriek _ ℓ c.support).map
+              (boundedConstructibleLowerShriek ℓ c.support).map
                 ((ρ_ _).hom ≫
                     (boundedConstructibleUpperStarComp _ ℓ c.support prod.snd).inv.app K)) ≫
           (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support prod.fst).inv.app
             ((boundedConstructibleUpperStar _ ℓ (c.support ≫ prod.snd)).obj K) ≫
-          (boundedConstructibleLowerShriek _ ℓ (c.support ≫ prod.fst)).map
+          (boundedConstructibleLowerShriek ℓ (c.support ≫ prod.fst)).map
             (eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj K)
               c.support_snd)) ≫
-          eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek _ ℓ r).obj
+          eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj
             ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K)) c.support_fst)) := by
   simp only [classTransport, lowerStarLowerShriekCompIso, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
@@ -100,20 +100,20 @@ theorem class_pushforward_core :
   simp only [curriedTensor_obj_map, MonoidalCategory.whiskerLeft_comp, Functor.map_comp,
     Category.assoc]
   conv_rhs => rw [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc]
-  simp only [← Functor.map_comp (boundedConstructibleLowerStar _ ℓ P.f)]
+  simp only [← Functor.map_comp (boundedConstructibleLowerStar ℓ P.f)]
   conv_rhs => rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.naturality]
   simp only [← Category.assoc]
   refine congrArg (· ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.app _) ?_
   simp only [Category.assoc, Functor.map_comp, leftProjectionNatTrans, curriedTensor_map_app,
     curriedTensor_obj_obj]
-  conv_rhs => rw [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek _ ℓ P.f)
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ X ⟶ X))
+  conv_rhs => rw [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
     (Verdier.leftProjection_naturality_left
-        (boundedConstructibleExceptionalProjection _ ℓ c.support)
+        (boundedConstructibleExceptionalProjection ℓ c.support)
       (prodUpperStarCounit ℓ (prod.map_snd P.f P.f) K) (𝟙_ _))]
   have hsq := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ
       (prod.map_fst P.f P.f)).hom.naturality
-      (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ c.support)
+      (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ c.support)
         ((boundedConstructibleUpperStar _ ℓ (prod.map P.f P.f)).obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)) (𝟙_ _))
   simp only [Functor.comp_map] at hsq
@@ -123,24 +123,24 @@ theorem class_pushforward_core :
   have h₃ : (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff ◁
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support (prod.map P.f P.f)).hom.app
           (𝟙_ _) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ (prod.map P.f P.f))
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ (prod.map P.f P.f))
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)
-        ((boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _)) ≫
-      (boundedConstructibleLowerShriek _ ℓ (prod.map P.f P.f)).map
-        (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ c.support)
+        ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _)) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.map P.f P.f)).map
+        (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ c.support)
           ((boundedConstructibleUpperStar _ ℓ (prod.map P.f P.f)).obj
             ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)) (𝟙_ _)) =
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ
           (c.support ≫ prod.map P.f P.f))
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff) (𝟙_ _) ≫
-      (boundedConstructibleLowerShriek _ ℓ (c.support ≫ prod.map P.f P.f)).map
+      (boundedConstructibleLowerShriek ℓ (c.support ≫ prod.map P.f P.f)).map
         ((boundedConstructibleUpperStarComp _ ℓ c.support (prod.map P.f P.f)).hom.app _ ▷ _) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
           (prod.map P.f P.f)).hom.app _ := by
     rw [reassoc_of% hc]
     simp
   conv_rhs => rw [Functor.map_comp₃_assoc_of_eq
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]
+    (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]
   conv_rhs => rw [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support
       P.g_comp_support]
   refine whisker_eq _ (whisker_eq _ ?_)

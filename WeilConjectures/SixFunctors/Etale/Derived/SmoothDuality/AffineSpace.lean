@@ -181,7 +181,7 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
     have hθa (K) : IsIso (dualizingComplexTensorMap Λ (φ.hom ≫ q) K) :=
       isIso_dualizingComplexTensorMap_comp_of_forall Λ φ.hom q _ rfl hθφ hωq.isInvertible K
         (hθq K)
-    have hωa : IsShiftedRankOneLocalSystem (dualizingComplex (ModuleCat.{u + 1} Λ) (φ.hom ≫ q))
+    have hωa : IsShiftedRankOneLocalSystem (dualizingComplex Λ (φ.hom ≫ q))
         2 := by
       obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_of_isIso Λ φ.hom q _ rfl (hθφ _)
       have h0 := hωφ.tensor (hωq.leftDerivedUpperStar φ.hom)
@@ -211,7 +211,7 @@ theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
         Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
-      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      Nonempty (dualizingComplex Λ f ≅
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) :=

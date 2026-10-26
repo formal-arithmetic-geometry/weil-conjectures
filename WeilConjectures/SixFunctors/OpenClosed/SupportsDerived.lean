@@ -64,6 +64,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section Canonical
 
@@ -132,7 +133,6 @@ lemma subsingleton_hom_Q_obj_supportsShortComplex_X₃
     (DerivedCategory.Q.obj ((((j)^*[A]).mapHomologicalComplex _).obj I))
   exact ((Iso.refl T).homCongr (supportsShortComplexX₃Iso A j I)).subsingleton
 
-include hJX hJZ in
 /-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
 inverse image
 
@@ -147,51 +147,56 @@ term of either triangle receives no maps from objects supported on `Z`. So the i
 `s_* s^! I ⟶ I` factors uniquely through the counit `Rs_! Rs^! I ⟶ I`, the counit factors through
 `s_* s^! I ⟶ I`, and the two factorisations are inverse to each other. -/
 theorem exists_iso_supportLocalizationTriangle (hjs : Set.range s.base = (Set.range j.base)ᶜ)
-    [HasCompactification s] [(R(s)_![A]).IsLeftAdjoint]
-    (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)]
+    [HasCompactification s]
+    (I : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) [∀ n, Injective (I.X
+        n)]
     [I.IsKInjective] :
-    ∃ e : supportLocalizationTriangle A j s hjs I ≅
-        supportedLocalizationTriangle A s j (DerivedCategory.Q.obj I)
-          (supportedLocalizationBoundary A s j hjs (DerivedCategory.Q.obj I)),
+    ∃ e : supportLocalizationTriangle (ModuleCat.{u + 1} Λ) j s hjs I ≅
+        supportedLocalizationTriangle Λ s j (DerivedCategory.Q.obj I)
+          (supportedLocalizationBoundary Λ s j hjs (DerivedCategory.Q.obj I)),
       e.hom.hom₂ = 𝟙 _ := by
-  have hT₁ := supportLocalizationTriangle_distinguished A j s hjs I
-  have hT₂ := supportedLocalizationTriangle_mem_distTriang A s j hjs (DerivedCategory.Q.obj I)
-  let u : DerivedCategory.Q.obj (supportsShortComplex A j I).X₁ ⟶ DerivedCategory.Q.obj I :=
-    DerivedCategory.Q.map (supportsShortComplex A j I).f
-  let ε : (R(s)_![A]).obj ((R(s)^![A]).obj (DerivedCategory.Q.obj I)) ⟶
+  have hT₁ := supportLocalizationTriangle_distinguished (ModuleCat.{u + 1} Λ) j s hjs I
+  have hT₂ := supportedLocalizationTriangle_mem_distTriang Λ s j hjs (DerivedCategory.Q.obj I)
+  let u : DerivedCategory.Q.obj (supportsShortComplex (ModuleCat.{u + 1} Λ) j I).X₁ ⟶
       DerivedCategory.Q.obj I :=
-    (rightDerivedUpperShriekAdjunction A s).counit.app (DerivedCategory.Q.obj I)
-  have hA : IsZero ((L((j)^*[A])).obj (DerivedCategory.Q.obj (supportsShortComplex A j I).X₁)) :=
-    isZero_leftDerivedUpperStar_obj_supportsShortComplex_X₁ A j s hjs I
-  have hR : IsZero ((L((j)^*[A])).obj
-      ((R(s)_![A]).obj ((R(s)^![A]).obj (DerivedCategory.Q.obj I)))) :=
-    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A s j
+    DerivedCategory.Q.map (supportsShortComplex (ModuleCat.{u + 1} Λ) j I).f
+  let ε : (R(s)_![ModuleCat.{u + 1} Λ]).obj ((R(s)^![Λ]).obj (DerivedCategory.Q.obj I)) ⟶
+      DerivedCategory.Q.obj I :=
+    (rightDerivedUpperShriekAdjunction Λ s).counit.app (DerivedCategory.Q.obj I)
+  have hA : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj (DerivedCategory.Q.obj (supportsShortComplex
+      (ModuleCat.{u + 1} Λ) j I).X₁)) :=
+    isZero_leftDerivedUpperStar_obj_supportsShortComplex_X₁ (ModuleCat.{u + 1} Λ) j s hjs I
+  have hR : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj
+      ((R(s)_![ModuleCat.{u + 1} Λ]).obj ((R(s)^![Λ]).obj (DerivedCategory.Q.obj I)))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) s j
       (by rw [hjs]; exact disjoint_compl_left) j subset_rfl _
   -- the inclusion `s_* s^! I ⟶ I` lifts through the counit
-  obtain ⟨ψ, hψ, -⟩ := existsUnique_comp_counit_of_isZero A s j hjs hA u
+  obtain ⟨ψ, hψ, -⟩ := existsUnique_comp_counit_of_isZero Λ s j hjs hA u
   -- the counit lifts through the inclusion `s_* s^! I ⟶ I`
-  have : Subsingleton ((R(s)_![A]).obj ((R(s)^![A]).obj (DerivedCategory.Q.obj I)) ⟶
-      (supportLocalizationTriangle A j s hjs I).obj₃) :=
-    subsingleton_hom_Q_obj_supportsShortComplex_X₃ A j I hR
+  have : Subsingleton ((R(s)_![ModuleCat.{u + 1} Λ]).obj ((R(s)^![Λ]).obj (DerivedCategory.Q.obj I))
+      ⟶
+      (supportLocalizationTriangle (ModuleCat.{u + 1} Λ) j s hjs I).obj₃) :=
+    subsingleton_hom_Q_obj_supportsShortComplex_X₃ (ModuleCat.{u + 1} Λ) j I hR
   obtain ⟨φ, hφ⟩ := Triangle.coyoneda_exact₂ _ hT₁ ε (Subsingleton.elim _ _)
   replace hφ : ε = φ ≫ u := hφ
-  have : Subsingleton ((DerivedCategory.Q.obj (supportsShortComplex A j I).X₁)⟦(1 : ℤ)⟧ ⟶
-      (supportLocalizationTriangle A j s hjs I).obj₃) :=
-    subsingleton_hom_Q_obj_supportsShortComplex_X₃ A j I
+  have : Subsingleton ((DerivedCategory.Q.obj (supportsShortComplex (ModuleCat.{u + 1} Λ) j
+      I).X₁)⟦(1 : ℤ)⟧ ⟶
+      (supportLocalizationTriangle (ModuleCat.{u + 1} Λ) j s hjs I).obj₃) :=
+    subsingleton_hom_Q_obj_supportsShortComplex_X₃ (ModuleCat.{u + 1} Λ) j I
       (((shiftFunctor _ (1 : ℤ)).map_isZero hA).of_iso
-        (((L((j)^*[A])).commShiftIso (1 : ℤ)).app _))
+        (((L((j)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).app _))
   have h₁ : ψ ≫ φ = 𝟙 _ := Triangle.cancel_mor₁_of_subsingleton hT₁
     (by change (ψ ≫ φ) ≫ u = 𝟙 _ ≫ u; rw [assoc, ← hφ, hψ, id_comp])
   have h₂ : φ ≫ ψ = 𝟙 _ :=
-    (existsUnique_comp_counit_of_isZero A s j hjs hR ε).unique
+    (existsUnique_comp_counit_of_isZero Λ s j hjs hR ε).unique
       (by change (φ ≫ ψ) ≫ ε = ε; rw [assoc, hψ]; exact hφ.symm) (id_comp _)
-  let e₁ : DerivedCategory.Q.obj (supportsShortComplex A j I).X₁ ≅
-      (R(s)_![A]).obj ((R(s)^![A]).obj (DerivedCategory.Q.obj I)) := ⟨ψ, φ, h₁, h₂⟩
+  let e₁ : DerivedCategory.Q.obj (supportsShortComplex (ModuleCat.{u + 1} Λ) j I).X₁ ≅
+      (R(s)_![ModuleCat.{u + 1} Λ]).obj ((R(s)^![Λ]).obj (DerivedCategory.Q.obj I)) := ⟨ψ, φ, h₁,
+          h₂⟩
   obtain ⟨e, -, he₂⟩ := exists_iso_of_arrow_iso _ _ hT₁ hT₂
     (Arrow.isoMk e₁ (Iso.refl _) (by change ψ ≫ ε = u ≫ 𝟙 _; rw [comp_id]; exact hψ))
   exact ⟨e, he₂⟩
 
-include hJX hJZ in
 /-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
 inverse image
 
@@ -207,12 +212,13 @@ with the sequence of supported sections
 `AlgebraicGeometry.ProEtale.shortExact_supportsShortComplex`. -/
 theorem exists_supportLocalizationTriangle_iso_of_isGE
     (hjs : Set.range s.base = (Set.range j.base)ᶜ)
-    [HasCompactification s] [(R(s)_![A]).IsLeftAdjoint]
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) [K.IsGE n] :
-    ∃ (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) (_ : ∀ n, Injective (I.X n))
+    [HasCompactification s]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) [K.IsGE n] :
+    ∃ (I : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (_ : ∀ n, Injective
+        (I.X n))
       (_ : I.IsKInjective) (eK : DerivedCategory.Q.obj I ≅ K)
-      (e : supportLocalizationTriangle A j s hjs I ≅
-        supportedLocalizationTriangle A s j K (supportedLocalizationBoundary A s j hjs K)),
+      (e : supportLocalizationTriangle (ModuleCat.{u + 1} Λ) j s hjs I ≅
+        supportedLocalizationTriangle Λ s j K (supportedLocalizationBoundary Λ s j hjs K)),
       e.hom.hom₂ = eK.hom := by
   obtain ⟨L, _, ⟨eL⟩⟩ := K.exists_iso_Q_obj_of_isGE n
   obtain ⟨R, -, hR⟩ := CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE L n
@@ -220,12 +226,12 @@ theorem exists_supportLocalizationTriangle_iso_of_isGE
     rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
     infer_instance
   let eK : DerivedCategory.Q.obj R.I ≅ K := (asIso (DerivedCategory.Q.map R.ι)).symm ≪≫ eL.symm
-  obtain ⟨e₁, he₁⟩ := exists_iso_supportLocalizationTriangle A j s hjs R.I
+  obtain ⟨e₁, he₁⟩ := exists_iso_supportLocalizationTriangle Λ j s hjs R.I
   obtain ⟨e₂, -, he₂⟩ := exists_iso_of_arrow_iso _ _
-    (supportedLocalizationTriangle_mem_distTriang A s j hjs _)
-    (supportedLocalizationTriangle_mem_distTriang A s j hjs K)
-    (Arrow.isoMk ((R(s)_![A]).mapIso ((R(s)^![A]).mapIso eK)) eK
-      ((rightDerivedUpperShriekAdjunction A s).counit.naturality eK.hom))
+    (supportedLocalizationTriangle_mem_distTriang Λ s j hjs _)
+    (supportedLocalizationTriangle_mem_distTriang Λ s j hjs K)
+    (Arrow.isoMk ((R(s)_![ModuleCat.{u + 1} Λ]).mapIso ((R(s)^![Λ]).mapIso eK)) eK
+      ((rightDerivedUpperShriekAdjunction Λ s).counit.naturality eK.hom))
   refine ⟨R.I, hR, inferInstance, eK, e₁ ≪≫ e₂, ?_⟩
   simp [he₁, he₂]
 
@@ -238,21 +244,22 @@ variable {U Z X : Scheme.{u}}
 /-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
 inverse image
 
-**Functoriality.** A morphism `φ : L ⟶ L'` induces the morphism of supported localization
+**Functoriality.** A morphism `φ : L ⟶ L'` induces the morphism of supported
+localization
 triangles with components `(s_* Rs^! φ, φ, Rj_* Lj^* φ)`, in the sense of
 `def-pur-triangle-meaning`. -/
 theorem exists_triangleHom_supportedLocalizationTriangle
     (s : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion s] [HasCompactification s]
-    [(R(s)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
+ [IsOpenImmersion j]
     (hjs : Set.range s.base = (Set.range j.base)ᶜ)
-    {L L' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : L ⟶ L') :
-    ∃ τ : supportedLocalizationTriangle A s j L (supportedLocalizationBoundary A s j hjs L) ⟶
-        supportedLocalizationTriangle A s j L' (supportedLocalizationBoundary A s j hjs L'),
-      τ.hom₁ = (R(s)_![A]).map ((R(s)^![A]).map φ) ∧ τ.hom₂ = φ ∧
-        τ.hom₃ = (R((j)_*[A])).map ((L((j)^*[A])).map φ) :=
-  exists_triangleHom_supportedLocalization A s j (by rw [hjs]; exact disjoint_compl_left) φ
-    (supportedLocalizationTriangle_mem_distTriang A s j hjs L)
-    (supportedLocalizationTriangle_mem_distTriang A s j hjs L')
+    {L L' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : L ⟶ L') :
+    ∃ τ : supportedLocalizationTriangle Λ s j L (supportedLocalizationBoundary Λ s j hjs L) ⟶
+        supportedLocalizationTriangle Λ s j L' (supportedLocalizationBoundary Λ s j hjs L'),
+      τ.hom₁ = (R(s)_![ModuleCat.{u + 1} Λ]).map ((R(s)^![Λ]).map φ) ∧ τ.hom₂ = φ ∧
+        τ.hom₃ = (R((j)_*[ModuleCat.{u + 1} Λ])).map ((L((j)^*[ModuleCat.{u + 1} Λ])).map φ) :=
+  exists_triangleHom_supportedLocalization Λ s j (by rw [hjs]; exact disjoint_compl_left) φ
+    (supportedLocalizationTriangle_mem_distTriang Λ s j hjs L)
+    (supportedLocalizationTriangle_mem_distTriang Λ s j hjs L')
 
 end Functorial
 
@@ -269,28 +276,32 @@ localization triangle of `L'` (for the base changes `i'`, `j'`), given an identi
 `AlgebraicGeometry.Etale.supportedLocalizationBoundary_baseChange`. -/
 noncomputable def supportedLocalizationTriangleBaseChange (e : U ⟶ X) (i : Z ⟶ X) (j : V ⟶ X)
     (i' : Z' ⟶ U) (j' : V' ⟶ U) (g : Z' ⟶ Z) (e₁ : V' ⟶ V)
-    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
-    [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint] [IsOpenImmersion j']
+    [IsClosedImmersion i] [IsOpenImmersion j]
+    [IsClosedImmersion i'] [IsOpenImmersion j']
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (hij' : Set.range i'.base = (Set.range j'.base)ᶜ)
     (hg : IsPullback g i' i e) (sq : CommSq e₁ j' j e)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf U.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
-    (L((e)^*[A])).mapTriangle.obj
-        (supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L)) ⟶
-      supportedLocalizationTriangle A i' j' L' (supportedLocalizationBoundary A i' j' hij' L') :=
-  Triangle.homMk _ _ (supportedRestriction A e i i' g hg L L' τ) τ.hom
-    ((derivedBaseChangeMap A sq).app _ ≫
-      (R((j')_*[A])).map ((derivedSquareUpperStarIso A sq).inv.app L ≫
-        (L((j')^*[A])).map τ.hom))
-    (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec.symm
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (τ :
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :
+    (L((e)^*[ModuleCat.{u + 1} Λ])).mapTriangle.obj
+        (supportedLocalizationTriangle Λ i j L (supportedLocalizationBoundary Λ i j hij L)) ⟶
+      supportedLocalizationTriangle Λ i' j' L' (supportedLocalizationBoundary Λ i' j' hij' L') :=
+  Triangle.homMk _ _ (supportedRestriction Λ e i i' g hg L L' τ) τ.hom
+    ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app _ ≫
+      (R((j')_*[ModuleCat.{u + 1} Λ])).map ((derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ)
+          sq).inv.app L ≫
+        (L((j')^*[ModuleCat.{u + 1} Λ])).map τ.hom))
+    (existsUnique_supportedRestriction Λ e i i' g hg L L' τ).exists.choose_spec.symm
     (by
-      change (L((e)^*[A])).map ((derivedUpperStarLowerStarAdjunction A j).unit.app L) ≫ _ =
-        τ.hom ≫ (derivedUpperStarLowerStarAdjunction A j').unit.app L'
+      change (L((e)^*[ModuleCat.{u + 1} Λ])).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u
+          + 1} Λ) j).unit.app L) ≫ _ =
+        τ.hom ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j').unit.app L'
       erw [map_unit_derivedBaseChangeMap_app_assoc]
       simp only [Functor.id_obj, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
-      exact ((derivedUpperStarLowerStarAdjunction A j').unit.naturality τ.hom).symm)
-    ((assoc _ _ _).trans ((supportedLocalizationBoundary_baseChange A e i j i' j' g e₁ hij hij' hg
+      exact ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j').unit.naturality
+          τ.hom).symm)
+    ((assoc _ _ _).trans ((supportedLocalizationBoundary_baseChange Λ e i j i' j' g e₁ hij hij' hg
       sq L L' τ).trans (assoc _ _ _).symm))
 
 /-- Blueprint `def-pur-triangle-meaning`: Canonicality, functoriality and etale base change of the
@@ -313,10 +324,10 @@ The first component is the restriction of supports, an isomorphism along an éta
 (`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`); the second is `τ`; so the third,
 the base change map `Lv^* Rj_* ⟶ Rj'_* Lv₁^*`, is an isomorphism as well. -/
 noncomputable def supportedLocalizationTriangleBaseChangeIso (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ]
     (v : U ⟶ X) [AlgebraicGeometry.Etale v] (s : Z ⟶ X) (j : V ⟶ X)
     (s' : Z' ⟶ U) (j' : V' ⟶ U) (g : Z' ⟶ Z) (v₁ : V' ⟶ V)
-    [IsClosedImmersion s] [(R(s)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsOpenImmersion j]
-    [IsClosedImmersion s'] [(R(s')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsOpenImmersion j']
+    [IsClosedImmersion s] [IsOpenImmersion j] [IsClosedImmersion s'] [IsOpenImmersion j']
     (hsj : Set.range s.base = (Set.range j.base)ᶜ)
     (hsj' : Set.range s'.base = (Set.range j'.base)ᶜ)
     (hg : IsPullback g s' s v) (sq : CommSq v₁ j' j v)

@@ -248,11 +248,14 @@ theorem IsTraitModelOfBase.exists_isProper_openSubmodel {X : Over (Spec (.of k))
         change φgen ≫ pullback.fst z γ ≫ pullback.fst c₀.g tb = M.ε ≫ c₀.i
         rw [reassoc_of% hφgen_fst, hFfst, ← Category.assoc, he] }
   refine ⟨Xc, inferInstanceAs (LocallyOfFiniteType c₀.g), inferInstanceAs (QuasiCompact c₀.g),
-    inferInstanceAs (IsSeparated c₀.g), inferInstanceAs (IsProper c₀.g), Xc',
+    inferInstanceAs (IsSeparated c₀.g),
+    by simp only [toPoint_left]; exact inferInstanceAs (IsProper c₀.g), Xc',
     inferInstanceAs (LocallyOfFiniteType (pullback.snd qc (traitClosedPoint k'))),
     inferInstanceAs (QuasiCompact (pullback.snd qc (traitClosedPoint k'))),
     inferInstanceAs (IsSeparated (pullback.snd qc (traitClosedPoint k'))),
-    inferInstanceAs (IsProper (pullback.snd qc (traitClosedPoint k'))), Mc, qc,
+    by simp only [toPoint_left]
+       exact inferInstanceAs (IsProper (pullback.snd qc (traitClosedPoint k'))),
+    Mc, qc,
     pullback.snd z γ, hMc, hZΩ, inferInstanceAs (IsProper (p ≫ z)), j,
     inferInstanceAs (IsOpenImmersion c₀.i), j', inferInstanceAs (IsOpenImmersion j'l), φ, hc,
     ?_, hqc, hφgen_snd.symm⟩

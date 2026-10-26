@@ -112,10 +112,10 @@ theorem isIso_lowerStar_nearbyDualityMap_of_isProper (D : NearbyDualizingData k 
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
     [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleLowerStar ℓ
       (toPoint X')).map (nearbyDualityMap ℓ D h K)) := by
   have := isIso_nearbyDualityMap_traitModel ℓ (k := k) (k' := k')
-    ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)
+    ((boundedConstructibleLowerStar ℓ (toPoint X)).obj K)
   exact isIso_lowerStar_nearbyDualityMap_of_isIso ℓ D h hgen K
     (fun A ↦ h.isIso_pushforwardExchange_app ℓ hgen A)
 

@@ -185,13 +185,13 @@ theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k�
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K)
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))]
+      ((boundedConstructibleLowerShriek ℓ f).obj K))]
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)]
     [Fintype {z : RationalPoint (pullback f y) //
       z ≫ fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy) = z}] :
     trace (Correspondence.graphStalkMap
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ΦY
+        ((boundedConstructibleLowerShriek ℓ f).obj K) ΦY
         (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) y hy) =
       ∑ z : {z : RationalPoint (pullback f y) //
           z ≫ fibreFrobenius f hf 1 y (comp_frobeniusIterate_one_of_comp_eq hy) = z},
@@ -209,7 +209,7 @@ theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k�
   have hZ := isPullback_pullbackFst_toPoint f y
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ
   obtain ⟨_⟩ := nonempty_hasRightDual_point ℓ k
-    ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    ((boundedConstructibleLowerShriek ℓ
       (toPoint (pullback f y))).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (pullback.fst f y)).obj K))
@@ -221,8 +221,8 @@ theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k�
   rw [Correspondence.graphStalkMap, lowerShriekFrobeniusCoefficient]
   rw [trace_eq_of_iso
     (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
-    (X' := (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleLowerShriek ℓ f).obj K))
+    (X' := (boundedConstructibleLowerShriek ℓ
       (toPoint (pullback f y))).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (pullback.fst f y)).obj K))
@@ -273,16 +273,16 @@ theorem traceFormulaHolds_of_fibres [IsAlgClosed k] {k₀ : Type u} [Field k₀]
   simp only [FixedPoint, frobeniusIterate_one] at hfin
   let := Fintype.ofFinite {y : RationalPoint Y // y ≫ ΦY = y}
   obtain ⟨_⟩ := nonempty_hasRightDual_point ℓ k
-    ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+    ((boundedConstructibleLowerShriek ℓ (toPoint Y)).obj
+      ((boundedConstructibleLowerShriek ℓ f).obj K))
   have : ∀ y : RationalPoint Y,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K)) :=
+        ((boundedConstructibleLowerShriek ℓ f).obj K)) :=
     fun y ↦ (nonempty_hasRightDual_point ℓ k _).some
   rw [← frobeniusCompactOperator_one, ← trace_eq_of_iso
-    (X := (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
-    (X' := (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)
+    (X := (boundedConstructibleLowerShriek ℓ (toPoint Y)).obj
+      ((boundedConstructibleLowerShriek ℓ f).obj K))
+    (X' := (boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)
     ((boundedConstructibleLowerShriekCompToPoint ℓ f).app K) _ _
     (frobeniusCompactOperator_lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ 1),
     frobeniusCompactOperator_one, hYtf, ← Fintype.sum_fiberwise (fixedPointComp hf)]

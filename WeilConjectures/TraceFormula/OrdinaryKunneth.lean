@@ -58,7 +58,6 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -102,13 +101,13 @@ noncomputable def openKunnethSecondFactor (j : U ⟶ Y)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B)) ⟶
+          ((boundedConstructibleLowerStar ℓ j).obj B)) ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (prod.snd : X ⨯ U ⟶ U)).obj ((𝟭 _).obj B) :=
   (prodMapUpperStarSndIso ℓ j).hom.app _ ≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (prod.snd : X ⨯ U ⟶ U)).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         j).counit.app B)
 
 /-- The *Künneth map* `M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` for an open immersion `j : U ⟶ Y`: the
@@ -118,13 +117,11 @@ composition isomorphisms of the pullbacks and the counit `Lj^* Rj_* B ⟶ B`. It
 noncomputable def openKunnethMap (j : U ⟶ Y) (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ (Y := Y) M
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        ((boundedConstructibleLowerStar ℓ j).obj B) ⟶
+      (boundedConstructibleLowerStar ℓ
         (prod.map (𝟙 X) j)).obj (externalProduct ℓ M B) :=
-  ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-      (prod.map (𝟙 X) j)).kunnethNatTrans (prodMapUpperStarFstIso ℓ j)
-      (openKunnethSecondFactor ℓ j B)).app M
-
+  ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map (𝟙 X) j)).kunnethNatTrans
+      (prodMapUpperStarFstIso ℓ j) (openKunnethSecondFactor ℓ j B)).app M
 
 /-- `prodMapUpperStarSndIso` is the pullback comparison of the square `commSq_prodMap_snd`. -/
 lemma prodMapUpperStarSndIso_eq_pullbackSquareComparison (j : U ⟶ Y) :
@@ -138,13 +135,41 @@ isomorphism: it is the base change morphism of the square `commSq_prodMap_snd`, 
 generic base change (`isIso_boundedConstructibleBaseChange_prodMap`). -/
 lemma isIso_exchangeRight_prodMapUpperStarSndIso (j : U ⟶ Y) :
     IsIso (Adjunction.exchangeRight
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (prod.map (𝟙 X) j))
       (prodMapUpperStarSndIso ℓ (X := X) j)) := by
   rw [prodMapUpperStarSndIso_eq_pullbackSquareComparison,
     ← boundedConstructibleBaseChange_eq_exchangeRight]
   exact isIso_boundedConstructibleBaseChange_prodMap ℓ j
+
+/-- `isIso_homEquiv_prodMapUpperStarSndIso_hom_app_comp_map_counit` for an abstract
+isomorphism `θ` in place of `prodMapUpperStarSndIso`, so that neither the elaborator nor the
+kernel unfolds `prodMapUpperStarSndIso`. -/
+lemma isIso_homEquiv_hom_app_comp_map_counit_aux (j : U ⟶ Y)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (θ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y) ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j) ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
+    (hθ : IsIso (Adjunction.exchangeRight
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (prod.map (𝟙 X) j)) θ)) :
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+      (prod.map (𝟙 X) j)).homEquiv
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.snd : X ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleLowerStar ℓ j).obj B))
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.snd : X ⨯ U ⟶ U)).obj B)
+        (θ.hom.app
+          ((boundedConstructibleLowerStar ℓ j).obj B) ≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.snd : X ⨯ U ⟶ U)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+            j).counit.app B))) :=
+  Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ θ B hθ
 
 /-- The transpose `Lp_Y^* Rj_* B ⟶ R(𝟙 × j)_* Lp_U^* B` of the second factor of the Künneth map,
 the counit of `Lj^* ⊣ Rj_*` transported along `prodMapUpperStarSndIso`, is an isomorphism: it is
@@ -152,22 +177,73 @@ the exchange morphism of `prodMapUpperStarSndIso`
 (`isIso_exchangeRight_prodMapUpperStarSndIso`). -/
 lemma isIso_homEquiv_prodMapUpperStarSndIso_hom_app_comp_map_counit (j : U ⟶ Y)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (prod.map (𝟙 X) j)).homEquiv
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B))
+          ((boundedConstructibleLowerStar ℓ j).obj B))
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ U ⟶ U)).obj B)
         ((prodMapUpperStarSndIso ℓ (X := X) j).hom.app
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj B) ≫
+          ((boundedConstructibleLowerStar ℓ j).obj B) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ U ⟶ U)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-            j).counit.app B))) := by
-  have := isIso_exchangeRight_prodMapUpperStarSndIso ℓ (X := X) j
-  rw [Adjunction.homEquiv_hom_app_comp_map_counit]
-  exact NatIso.isIso_app_of_isIso _ B
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+            j).counit.app B))) :=
+  isIso_homEquiv_hom_app_comp_map_counit_aux ℓ j B _
+    (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
+
+/-- `openKunnethSecondFactor` for an abstract isomorphism `θ` in place of
+`prodMapUpperStarSndIso`. As a definition in this file, its body is elaborated with the same
+auxiliary proof constants as that of `openKunnethSecondFactor`, so that
+`openKunnethSecondFactor_eq_secondFactorOf` is checked syntactically by the kernel. -/
+noncomputable def secondFactorOf (j : U ⟶ Y)
+    (θ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y) ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j) ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.snd : X ⨯ Y ⟶ Y)).obj
+          ((boundedConstructibleLowerStar ℓ j).obj B)) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (prod.snd : X ⨯ U ⟶ U)).obj ((𝟭 _).obj B) :=
+  θ.hom.app _ ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.snd : X ⨯ U ⟶ U)).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        j).counit.app B)
+
+lemma openKunnethSecondFactor_eq_secondFactorOf (j : U ⟶ Y)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    openKunnethSecondFactor ℓ (X := X) j B = secondFactorOf ℓ j (prodMapUpperStarSndIso ℓ j) B :=
+  rfl
+
+/-- The transpose of `secondFactorOf θ B` is an isomorphism if the exchange morphism of `θ` is. -/
+lemma isIso_homEquiv_secondFactorOf (j : U ⟶ Y)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (θ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y) ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j) ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
+    (hθ : IsIso (Adjunction.exchangeRight
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (prod.map (𝟙 X) j)) θ)) :
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+      (prod.map (𝟙 X) j)).homEquiv _ _ (secondFactorOf ℓ j θ B)) := by
+  unfold secondFactorOf
+  exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ θ _ hθ
+
+/-- The transpose of `openKunnethSecondFactor` along `L(𝟙 × j)^* ⊣ R(𝟙 × j)_*` is an
+isomorphism. -/
+lemma isIso_homEquiv_openKunnethSecondFactor (j : U ⟶ Y)
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+      (prod.map (𝟙 X) j)).homEquiv _ _ (openKunnethSecondFactor ℓ j B)) := by
+  rw [openKunnethSecondFactor_eq_secondFactorOf]
+  exact isIso_homEquiv_secondFactorOf ℓ j B _ (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
 
 /-- **The ordinary Künneth formula for a dualizable first factor**: for an open immersion
 `j : U ⟶ Y`, a dualizable `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and any `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
@@ -184,8 +260,6 @@ theorem isIso_openKunnethMap_of_isDualizable (j : U ⟶ Y)
   refine Adjunction.isIso_kunnethNatTrans_app_of_isDualizable _ _ _ ?_ ?_
   · obtain ⟨_⟩ := hM
     exact ⟨@HasRightDual.mk _ _ _ _ _ (ExactPairing.map _ M Mᘁ)⟩
-  · unfold openKunnethSecondFactor
-    exact Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ _ _
-      (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
+  · exact isIso_homEquiv_openKunnethSecondFactor ℓ j B
 
 end AlgebraicGeometry.ProEtale.CondensedRing

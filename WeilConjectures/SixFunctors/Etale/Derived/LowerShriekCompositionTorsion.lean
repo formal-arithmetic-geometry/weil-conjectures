@@ -536,17 +536,19 @@ theorem nonempty_homFunctorIso_rightDerivedLowerShriek_comp {X Y : Scheme.{u}} (
 `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications, with `Rf_!` left adjoints, and a
 functor `P : J ⥤ D(S_ét, Λ)` whose values receive no nonzero map from `ϖ`-invertible objects
 (for instance the tower `n ↦ Λ ⧸ (ϖ)ⁿ`), the exceptional inverse images satisfy
-`P ⋙ R(f ≫ g)^! ≅ P ⋙ Rg^! ⋙ Rf^!`: by the Yoneda lemma, from
+`P ⋙ R(f ≫ g)^! ≅ P ⋙ Rg^! ⋙ Rf^!` for the chosen right adjoints `Rf^!` of `Rf_!`: by the
+Yoneda lemma, from
 `AlgebraicGeometry.Etale.nonempty_homFunctorIso_rightDerivedLowerShriek_comp`. -/
 theorem nonempty_iso_comp_rightDerivedUpperShriek_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ S) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     [(R(f ≫ g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    Nonempty (P ⋙ R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
-      P ⋙ R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+    Nonempty (P ⋙ (R(f ≫ g)_![ModuleCat.{u + 1} Λ]).rightAdjoint ≅
+      P ⋙ (R(g)_![ModuleCat.{u + 1} Λ]).rightAdjoint ⋙
+        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint) := by
   obtain ⟨e⟩ := nonempty_homFunctorIso_rightDerivedLowerShriek_comp hϖ hP f g
-  exact ⟨rightAdjointIsoOfHomFunctorIso P (rightDerivedUpperShriekAdjunction _ (f ≫ g))
-    ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))
+  exact ⟨rightAdjointIsoOfHomFunctorIso P (Adjunction.ofIsLeftAdjoint _)
+    ((Adjunction.ofIsLeftAdjoint _).comp (Adjunction.ofIsLeftAdjoint _))
     e.symm⟩
 
 end Composition

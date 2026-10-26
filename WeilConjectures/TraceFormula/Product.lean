@@ -198,9 +198,9 @@ instance isClosedImmersion_ι : IsClosedImmersion F.ι.left :=
 `prop-trf-fixed-square-cartesian`): `Rd^! ≅ Rc₁^! ⋙ Rι^!`, from `d = ι ≫ c₁`, the only
 unconditional `!`-transport of the two legs in the fixed square. -/
 noncomputable def upperShriekDIso :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ≅
-      boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁ ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.ι :=
+    boundedConstructibleUpperShriek ℓ F.d ≅
+      boundedConstructibleUpperShriek ℓ c.c₁ ⋙
+        boundedConstructibleUpperShriek ℓ F.ι :=
   boundedConstructibleUpperShriekComp_padicAlgCl ℓ F.ι c.c₁
 
 end FixedLocus

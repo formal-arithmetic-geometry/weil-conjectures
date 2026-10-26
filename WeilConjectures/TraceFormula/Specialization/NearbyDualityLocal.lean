@@ -148,8 +148,8 @@ theorem isIso_nearbyDualityMap (D : NearbyDualizingData k k' ℓ) (h : M.IsTrait
 theorem nonempty_nearbyCycles_verdierDual_iso (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
-        (verdierDual ℓ (toPoint X) K) ≅
-      verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
+        (verdierDual ℓ K) ≅
+      verdierDual ℓ ((boundedConstructibleNearbyCycles
         (h.preservesBoundedConstructible ℓ)).obj K)) :=
   let ⟨D⟩ := nonempty_nearbyDualizingData k k' ℓ
   have := isIso_nearbyDualityMap ℓ D h K
