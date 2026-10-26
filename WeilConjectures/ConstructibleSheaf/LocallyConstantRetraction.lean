@@ -53,7 +53,7 @@ invertible in ℤ/ℓℤ and in its universe lift. Multiply the trace by its inv
 Coefficient-linearity gives unit ≫ r = d⁻¹d times the identity, which is the identity.
 This construction applies also to the zero sheaf and to the degree-one cover. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
-    {U V : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
+    {U V : Scheme.{u}} (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v]
     [ConnectedSpace V] (d : ℕ) (hd : ¬ ℓ ∣ d)
