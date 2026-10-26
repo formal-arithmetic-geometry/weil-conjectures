@@ -78,7 +78,7 @@ lemma exists_finset_isZero_opens_of_isZero_pullback (Y : Over (Spec (.of k)))
         (L((U.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) := by
   obtain ⟨K, _, ξ, t, ht, hz⟩ := h
   have := isNoetherian_left Y
-  have := noetherianSpace_of_isImmersion U.ι
+  have := IsImmersion.noetherianSpace U.ι
   have := locallyOfFiniteType_overMk_of_isImmersion Y U.ι
   have := quasiCompact_overMk_of_isImmersion Y U.ι
   exact exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback
@@ -124,7 +124,7 @@ theorem exists_finset_isZero_of_forall_exists_coordinates (Y : Over (Spec (.of k
     hcl y v fun i ↦ hFc y i _ (hv i)
   have hsuppfin : ∀ y, (supp y).Finite := by
     intro y
-    have := noetherianSpace_of_isImmersion (U y).ι
+    have := IsImmersion.noetherianSpace (U y).ι
     have := locallyOfFiniteType_overMk_of_isImmersion Y (U y).ι
     have := quasiCompact_overMk_of_isImmersion Y (U y).ι
     have := hι y
@@ -152,7 +152,7 @@ theorem exists_finset_isZero_of_forall_exists_coordinates (Y : Over (Spec (.of k
   refine ⟨S, hS, ?_⟩
   -- vanishing on the complement, locally
   have : TopologicalSpace.NoetherianSpace (finsetComplOpens S hS) :=
-    noetherianSpace_of_isImmersion (finsetComplOpens S hS).ι
+    IsImmersion.noetherianSpace (finsetComplOpens S hS).ι
   refine isZero_of_forall_exists_isZero_upperStar (Profinite.padicAlgClRingObj ℓ) _ fun w ↦ ?_
   obtain ⟨y, hyt, hwy⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ w.1))
   have hnot : (⟨w.1, hwy⟩ : U y) ∉ supp y := by

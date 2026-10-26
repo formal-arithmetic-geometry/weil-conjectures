@@ -83,12 +83,16 @@ lemma specialCoordinate_over (hM : M.IsTraitModelOver q g) {n : Type u}
     specialCoordinate hM b hb ≫ 𝔸(n; Spec (.of k')) ↘ Spec (.of k') = X'.hom :=
   (AffineSpace.isPullback_map (n := n) (traitClosedPoint k')).lift_snd _ _ _
 
-/-- The inclusion of the special fibre of a model of finite type over the trait is injective: it
-is a base change of the closed immersion of the closed point of the trait. -/
-lemma injective_i (hM : M.IsTraitModelOver q g) : Function.Injective M.i := by
-  have : IsClosedImmersion M.i :=
-    MorphismProperty.of_isPullback (P := @IsClosedImmersion) hM.isPullback_i.flip inferInstance
-  exact M.i.isClosedEmbedding.injective
+/-- The inclusion of the special fibre of a model of finite type over the trait is a closed
+immersion: it is a base change of the closed immersion of the closed point of the trait. -/
+lemma IsTraitModelOver.isClosedImmersion_i (hM : M.IsTraitModelOver q g) :
+    IsClosedImmersion M.i :=
+  MorphismProperty.of_isPullback (P := @IsClosedImmersion) hM.isPullback_i.flip inferInstance
+
+/-- The special fibre of a model of finite type over the trait is injective into its total space. -/
+lemma IsTraitModelOver.injective_i (hM : M.IsTraitModelOver q g) : Function.Injective M.i :=
+  have := hM.isClosedImmersion_i
+  M.i.isClosedEmbedding.injective
 
 /-- **The special fibre of a generic slice covers the generic fibre of the coordinate**: for a
 coordinate `b : 𝒳 ⟶ 𝔸¹_S` of a model of finite type over the trait and `x ∈ K` transcendental over
@@ -111,7 +115,7 @@ lemma mem_range_sliceSpecialMap (x : K) (hx : Transcendental k' x) (hM : M.IsTra
   obtain ⟨w, hw₁, hw₂⟩ := Scheme.Pullback.exists_preimage_pullback _ _ h₂
   obtain ⟨w', hw'₁, hw'₂⟩ := Scheme.Pullback.exists_preimage_pullback
     (f := pullback.snd b (traitSlice x)) (g := traitClosedPoint K) w pt hw₂
-  refine ⟨w', injective_i hM ?_⟩
+  refine ⟨w', hM.injective_i ?_⟩
   rw [← Scheme.Hom.comp_apply, sliceSpecialMap, hM.isPullback_i.lift_fst, Scheme.Hom.comp_apply,
     hw'₁, hw₁]
 

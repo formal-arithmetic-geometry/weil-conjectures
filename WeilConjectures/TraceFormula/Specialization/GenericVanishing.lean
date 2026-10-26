@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.AffineLineConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
@@ -216,11 +218,6 @@ section Support
 
 variable {k : Type u} [Field k]
 
-/-- A scheme immersed into a noetherian scheme has a noetherian underlying space. -/
-lemma noetherianSpace_of_isImmersion {D X : Scheme.{u}} (i : D ⟶ X) [IsImmersion i]
-    [TopologicalSpace.NoetherianSpace X] : TopologicalSpace.NoetherianSpace D :=
-  i.isEmbedding.isInducing.noetherianSpace
-
 /-- A scheme immersed into a scheme of finite type over `k` is of finite type over `k`. -/
 lemma locallyOfFiniteType_overMk_of_isImmersion (Y : Over (Spec (.of k)))
     [LocallyOfFiniteType Y.hom] {D : Scheme.{u}} (i : D ⟶ Y.left) [IsImmersion i] :
@@ -235,12 +232,6 @@ lemma quasiCompact_overMk_of_isImmersion (Y : Over (Spec (.of k)))
 
 variable (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
 
-/-- A scheme of finite type over a field is noetherian. -/
-lemma isNoetherian_left : IsNoetherian Y.left := by
-  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
-  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
-  exact ⟨⟩
-
 /-- The locus where the rank function of a lisse `ℚ̄_ℓ`-sheaf on a scheme immersed into `Y` does
 not vanish is clopen: the rank function is locally constant. -/
 lemma isClopen_setOf_fiberRankFun_ne_zero {D : Scheme.{u}} (ι : D ⟶ Y.left) [IsImmersion ι]
@@ -249,7 +240,7 @@ lemma isClopen_setOf_fiberRankFun_ne_zero {D : Scheme.{u}} (ι : D ⟶ Y.left) [
     (hN : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) D) N) :
     IsClopen {d | fiberRankFun ℓ N d ≠ 0} := by
   have := isNoetherian_left Y
-  have := noetherianSpace_of_isImmersion ι
+  have := IsImmersion.noetherianSpace ι
   have := locallyOfFiniteType_overMk_of_isImmersion Y ι
   have := quasiCompact_overMk_of_isImmersion Y ι
   exact ((isLocallyConstant_fiberRankFun (Over.mk (ι ≫ Y.hom)) hN).isClopen_fiber 0).compl
@@ -263,7 +254,7 @@ lemma isConstructible_image_setOf_fiberRankFun_ne_zero {D : Scheme.{u}} (ι : D 
     (hN : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) D) N) :
     IsConstructible (ι '' {d | fiberRankFun ℓ N d ≠ 0}) := by
   have := isNoetherian_left Y
-  have := noetherianSpace_of_isImmersion ι
+  have := IsImmersion.noetherianSpace ι
   have : LocallyOfFinitePresentation ι :=
     LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance
   exact ι.isConstructible_image
@@ -288,14 +279,14 @@ lemma isZero_upperStar_of_forall_fiberRankFun_eq_zero
     IsZero ((U.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj G) := by
   have := isNoetherian_left Y
   have (i : Fin S.n) : TopologicalSpace.NoetherianSpace (S.domain i) :=
-    noetherianSpace_of_isImmersion (S.immersion i)
+    IsImmersion.noetherianSpace (S.immersion i)
   have hz (i : Fin S.n) : IsZero ((S.immersion i ∣_ U)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj
       ((U.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj G)) := by
     refine IsZero.of_iso ?_
       (upperStarRestrictIso (Profinite.padicAlgClRingObj ℓ) (S.immersion i) U G).symm
     have := locallyOfFiniteType_overMk_of_isImmersion Y ((S.immersion i ⁻¹ᵁ U).ι ≫ S.immersion i)
     have : TopologicalSpace.NoetherianSpace (S.immersion i ⁻¹ᵁ U) :=
-      noetherianSpace_of_isImmersion ((S.immersion i ⁻¹ᵁ U).ι ≫ S.immersion i)
+      IsImmersion.noetherianSpace ((S.immersion i ⁻¹ᵁ U).ι ≫ S.immersion i)
     have := quasiCompact_overMk_of_isImmersion Y ((S.immersion i ⁻¹ᵁ U).ι ≫ S.immersion i)
     exact isZero_of_forall_fiberRankFun_eq_zero
       (Over.mk (((S.immersion i ⁻¹ᵁ U).ι ≫ S.immersion i) ≫ Y.hom))
