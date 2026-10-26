@@ -9618,6 +9618,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.TripleProj
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
@@ -13414,6 +13415,7 @@ public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchangeRefinement
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteClosedExtension
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteCoherence
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
@@ -13442,6 +13444,7 @@ public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
+public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
@@ -13487,8 +13490,10 @@ public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 public import WeilConjectures.TraceFormula.Specialization.TraitModelEmbedding
+public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericSpec
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
+public import WeilConjectures.TraceFormula.Specialization.TraitModelRefinement
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
