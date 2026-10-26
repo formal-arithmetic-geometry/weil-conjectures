@@ -12953,6 +12953,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClUn
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteCondensed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteExtend
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueInputs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueInputsAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoComplex
