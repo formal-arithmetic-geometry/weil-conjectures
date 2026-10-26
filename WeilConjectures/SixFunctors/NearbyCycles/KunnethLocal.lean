@@ -143,6 +143,41 @@ structure IsKunnethRestriction (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f�
 
 set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
+/-- **Pullback of the Künneth map along morphisms of models with invertible exchanges**: for
+morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` compatible with
+`φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` and `φ₁' : P' ⟶ M'`, `φ₂' : P' ⟶ N'`, whose pullback exchanges
+`α_{ρ_M}`, `α_{ρ_N}`, `α_{ρ_P}` are invertible at `A`, `B` and `A ⊠ B`, the pullback
+`Lρ'^* Π_{A,B}` of the Künneth map is invertible if and only if the Künneth map
+`Π_{Lρ_M^* A, Lρ_N^* B}` is.
+
+Besides restrictions to opens
+(`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`),
+this is the formal part of the generic-slicing step of Gabber's Künneth formula (blueprint
+`sk-prop-tf-nearby-external-kunneth`, "the composition compatibility in (2)"), where `ρ` is the
+base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
+(SGA 4½, [Th. finitude], §3). -/
+theorem isIso_map_kunnethMap_iff_of_isIso_pullbackExchange {φ₁ : P.Hom M f₁ f₁'}
+    {φ₂ : P.Hom N f₂ f₂'} {φ₁U : PU.Hom MU e₁ e₁'} {φ₂U : PU.Hom NU e₂ e₂'}
+    {ρM : MU.Hom M r₁ r₁'} {ρN : NU.Hom N r₂ r₂'} {ρP : PU.Hom P r r'}
+    (htot₁ : φ₁U.total ≫ ρM.total = ρP.total ≫ φ₁.total)
+    (hgen₁ : φ₁U.generic ≫ ρM.generic = ρP.generic ≫ φ₁.generic)
+    (htot₂ : φ₂U.total ≫ ρN.total = ρP.total ≫ φ₂.total)
+    (hgen₂ : φ₂U.generic ≫ ρN.generic = ρP.generic ≫ φ₂.generic)
+    (hb₁ : e₁ ≫ r₁ = r ≫ f₁) (hs₁ : e₁' ≫ r₁' = r' ≫ f₁') (hb₂ : e₂ ≫ r₂ = r ≫ f₂)
+    (hs₂ : e₂' ≫ r₂' = r' ≫ f₂')
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)))
+    [IsIso ((ρM.pullbackExchange Λ).app A)] [IsIso ((ρN.pullbackExchange Λ).app B)]
+    [IsIso ((ρP.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))] :
+    IsIso (L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) ↔
+      IsIso (kunnethMap Λ φ₁U φ₂U (L((r₁)^*⟦Λ⟧).obj A) (L((r₂)^*⟦Λ⟧).obj B)) :=
+  isIso_iff_of_comp_eq (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP
+    htot₁ hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B)
+
+set_option maxHeartbeats 800000 in
+-- the Künneth maps of the two products are large terms
 /-- **Restriction of the Künneth map**: for a restriction of the product along open immersions,
 the pullback `Lρ'^* Π_{A,B}` of the Künneth map to the special fibre of the restriction is
 invertible if and only if the Künneth map `Π_{Lρ_M^* A, Lρ_N^* B}` of the restriction is. -/
@@ -162,8 +197,8 @@ theorem isIso_map_kunnethMap_iff_of_isKunnethRestriction {φ₁ : P.Hom M f₁ f
   have := ρM.isIso_pullbackExchange_of_isOpenImmersion Λ h.isPullback_M
   have := ρN.isIso_pullbackExchange_of_isOpenImmersion Λ h.isPullback_N
   have := ρP.isIso_pullbackExchange_of_isOpenImmersion Λ h.isPullback_P
-  exact isIso_iff_of_comp_eq (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP
-    h.htot₁ h.hgen₁ h.htot₂ h.hgen₂ h.hb₁ h.hs₁ h.hb₂ h.hs₂ A B)
+  exact isIso_map_kunnethMap_iff_of_isIso_pullbackExchange Λ h.htot₁ h.hgen₁ h.htot₂ h.hgen₂
+    h.hb₁ h.hs₁ h.hb₂ h.hs₂ A B
 
 /-- **The invertibility of the Künneth map is local on the special fibre**: if every point of the
 special fibre `Z'` of `P` lies in an open `W` over which `φ₁`, `φ₂` restrict

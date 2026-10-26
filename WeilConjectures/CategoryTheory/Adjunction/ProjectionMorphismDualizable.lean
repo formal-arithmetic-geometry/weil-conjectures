@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 public import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-!
@@ -24,6 +26,10 @@ it is the conjugate of the isomorphism `F (Bᘁ ⊗ -) ≅ F Bᘁ ⊗ F -` under
 
 - `CategoryTheory.Adjunction.isIso_leftProjectionMorphism_of_isDualizable`: the left projection
   morphism is an isomorphism at a dualizable object.
+- `CategoryTheory.Adjunction.isIso_projectionMorphism_of_exactPairing`,
+  `CategoryTheory.Adjunction.isIso_projectionMorphism_of_isDualizable`: the projection morphism
+  `G A ⊗ B ⟶ G (A ⊗ F B)` is an isomorphism at an object with a left dual (at a dualizable
+  object, for braided `D`).
 - `CategoryTheory.Adjunction.isIso_homEquiv_δ_tensorHom_of_isDualizable`: the transpose of
   `F (B ⊗ X) ⟶ F B ⊗ F X ⟶ A₁ ⊗ A₂` is an isomorphism for dualizable `B`, `a : F B ⟶ A₁` an
   isomorphism and `c : F X ⟶ A₂` with invertible transpose.
@@ -129,5 +135,35 @@ lemma isIso_homEquiv_δ_tensorHom_exchangeRight_of_isDualizable {D₂ D₂' : Ty
   refine adj.isIso_homEquiv_δ_tensorHom_of_isDualizable hE a ha _ ?_
   have := homEquiv_hom_app_comp_map_counit adjj adj θ K
   exact this ▸ NatIso.isIso_app_of_isIso _ K
+
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.Monoidal]
+
+/-- The projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` is the component of the right adjoint
+projection map attached to the comonoidal structure `δ` of `F`. -/
+lemma projectionMorphism_eq_rightAdjointProjectionMap (A : C) (B : D) :
+    adj.projectionMorphism A B =
+      ((adj.rightAdjointProjectionMap (Functor.OplaxMonoidal.δNatTrans F)).app A).app B :=
+  rfl
+
+/-- For a strong monoidal left adjoint `F ⊣ G` and an object `B` with a left dual `B'`, the
+projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` is an isomorphism. -/
+lemma isIso_projectionMorphism_of_exactPairing (B' B : D) [ExactPairing B' B] (A : C) :
+    IsIso (adj.projectionMorphism A B) := by
+  rw [projectionMorphism_eq_rightAdjointProjectionMap]
+  exact adj.isIso_rightAdjointProjectionMap_app_app_of_exactPairing _ (fun _ _ ↦ rfl) A B' B
+
+/-- For a strong monoidal left adjoint `F ⊣ G` and a dualizable object `B` of a braided
+category, the projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` is an isomorphism. -/
+lemma isIso_projectionMorphism_of_isDualizable [BraidedCategory D] {B : D}
+    (hB : IsDualizable B) (A : C) :
+    IsIso (adj.projectionMorphism A B) := by
+  rw [projectionMorphism_eq_rightAdjointProjectionMap]
+  exact adj.isIso_rightAdjointProjectionMap_app_app_of_isDualizable _ (fun _ _ ↦ rfl) A hB
 
 end CategoryTheory.Adjunction

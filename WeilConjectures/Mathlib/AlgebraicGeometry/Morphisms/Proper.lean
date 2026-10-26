@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Artinian.Algebra
@@ -50,6 +51,11 @@ density is supplied by a quasi-compact scheme-theoretically dense open contained
 An immersion `f` whose composite with a separated morphism `g` is universally closed is a closed
 immersion (`AlgebraicGeometry.IsClosedImmersion.of_comp_of_isSeparated`); for instance, an
 immersion of a proper `S`-scheme into a separated `S`-scheme is closed.
+
+## Schemes with at most one point
+
+A separated morphism locally of finite type from a scheme with at most one point to a Jacobson
+scheme is proper (`AlgebraicGeometry.isProper_of_subsingleton`).
 -/
 
 @[expose] public section
@@ -232,5 +238,30 @@ theorem IsOpenImmersion.locallyOfFiniteType (f : X ⟶ Y) [IsOpenImmersion f] :
   inferInstance
 
 end Basic
+
+section Subsingleton
+
+/-- A morphism of finite type from a scheme with at most one point to a Jacobson scheme
+(e.g. the spectrum of a field) is proper. -/
+lemma isProper_of_subsingleton {X Y : Scheme.{u}} (f : X ⟶ Y) [Subsingleton X]
+    [LocallyOfFiniteType f] [IsSeparated f] [JacobsonSpace Y] : IsProper f := by
+  cases isEmpty_or_nonempty X
+  · have : IsClosedImmersion f := .of_isPreimmersion _ (by
+      rw [Set.range_eq_empty]
+      exact isClosed_empty)
+    infer_instance
+  obtain ⟨p⟩ := ‹Nonempty X›
+  have : IsClosedImmersion (X.fromSpecResidueField p) := by
+    rw [← isClosed_singleton_iff_isClosedImmersion, Set.Subsingleton.eq_singleton_of_mem
+      (s := Set.univ) Set.subsingleton_of_subsingleton (Set.mem_univ p) |>.symm]
+    exact isClosed_univ
+  have : Surjective (X.fromSpecResidueField p) :=
+    ⟨fun q ↦ ⟨default, (Subsingleton.elim _ _)⟩⟩
+  have : IsFinite (X.fromSpecResidueField p ≫ f) :=
+    isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.mpr inferInstance
+  have := UniversallyClosed.of_comp_surjective (X.fromSpecResidueField p) f
+  exact ⟨⟩
+
+end Subsingleton
 
 end AlgebraicGeometry

@@ -80,25 +80,6 @@ variable {Z Y : Over (Spec (.of k))}
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType Z.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] in
-/-- The derived comparison **(Push)** `ℚ̄_ℓ ⊗ᴸ_E Rg_* K ⟶ Rg_* (ℚ̄_ℓ ⊗ᴸ_E K)` is an isomorphism on
-bounded constructible complexes, these being bounded below
-(`isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`). -/
-lemma isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl (g : Z ⟶ Y) :
-    IsIso (Functor.whiskerLeft (boundedConstructible (padicSubfieldRingObj Z.left ℓ E)).ι
-      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) := by
-  have : QuasiCompact g.left := by
-    have : QuasiCompact (g.left ≫ Y.hom) := by rw [Over.w g]; infer_instance
-    exact QuasiCompact.of_comp g.left Y.hom
-  have : QuasiSeparated g.left := by
-    have : QuasiSeparated (g.left ≫ Y.hom) := by rw [Over.w g]; infer_instance
-    exact QuasiSeparated.of_comp g.left Y.hom
-  refine (NatTrans.isIso_iff_isIso_app _).2 fun K ↦ ?_
-  have : K.obj.IsGE K.property.1.1.choose := K.property.1.1.choose_spec
-  exact isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E g.left K.obj
-    K.property.1.1.choose
-
 /-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and any morphism
 `g` of separated `k`-schemes of finite type: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
 `ProEtale.CondensedRing.derivedPushHom`, which is an isomorphism on bounded constructible complexes
@@ -109,7 +90,12 @@ noncomputable def boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs (g : Z ⟶ 
         boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
       boundedConstructibleToPadicAlgCl Z.left ℓ E ⋙
         boundedConstructibleLowerStar ℓ g :=
-  have := isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl ℓ E g
+  have : QuasiCompact g.left :=
+    have : QuasiCompact (g.left ≫ Y.hom) := by rw [Over.w g]; infer_instance
+    QuasiCompact.of_comp g.left Y.hom
+  have : QuasiSeparated g.left :=
+    have : QuasiSeparated (g.left ≫ Y.hom) := by rw [Over.w g]; infer_instance
+    QuasiSeparated.of_comp g.left Y.hom
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫

@@ -12,7 +12,7 @@ import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 import WeilConjectures.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer
 
-/-! # Eight assertions for constructible prime coefficients on reduced proper curves
+/-! # Eight assertions for constructible prime coefficients on reduced curves
 
 Source: Stacks Project, 03SC (theorem-vanishing-affine-curves),
 03SD (lemma-vanishing-easier), 0A3Q (lemma-somewhat-easier), 03SG (lemma-even-easier).
@@ -27,7 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- All eight assertions for a constructible prime-field sheaf on a reduced proper curve.
+/-- All eight assertions for a constructible prime-field sheaf on a reduced curve.
 
 Source: Stacks Project, 03SC (theorem-vanishing-affine-curves), constructible prime-field
 case; 03SD (lemma-vanishing-easier), 0A3Q (lemma-somewhat-easier), 03SG (lemma-even-easier).
@@ -220,7 +220,7 @@ def-weil-pbc-eight-curve-assertions, def-weil-pbc-etale-constructible-sheaf,
 def-weil-pbc-extension-by-zero, def-weil-pbc-direct-image.
 -/
 theorem primeCoefficientCurveAssertions {k : Type u} [Field k] [IsAlgClosed k]
-    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] [IsReduced C]
+    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
     {r : ℕ} [Fact r.Prime]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
     [Scheme.IsConstructibleSheaf F] :
