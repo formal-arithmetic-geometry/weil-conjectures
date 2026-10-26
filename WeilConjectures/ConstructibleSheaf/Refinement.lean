@@ -21,7 +21,7 @@ Consequently constructibility passes from a stratification to any refinement
 (`AlgebraicGeometry.Scheme.Stratification.Refines`,
 `Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar`), and two stratifications have
 a common refinement by intersecting the strata (`Stratification.inter`).
-(blueprint: `lemma:constructible-immersion-independence`, `def:constructible-refines`,
+(blueprint: `lemma-constructible-immersion-independence`, `def:constructible-refines`,
 `lemma:constructible-common-refinement`, `lemma:constructible-of-refines`)
 
 -/
@@ -67,7 +67,7 @@ variable [IsImmersion b]
 `b : Z' ⟶ X` is an immersion, `a : Z ⟶ X` is any morphism with `range a ⊆ range b` and
 `b^* F` is finite locally constant, so is `a^* F`. The projection `p : Z ×_X Z' ⟶ Z` is a
 surjective closed immersion, `p^* a^* F ≅ q^* b^* F` is finite locally constant, and finite
-local constancy descends along `p`. (blueprint: `lemma:constructible-immersion-independence`) -/
+local constancy descends along `p`. (blueprint: `lemma-constructible-immersion-independence`) -/
 theorem IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (h : Set.range a ⊆ Set.range b)
     (F : Sheaf X.smallEtaleTopology A)
     [IsFiniteLocallyConstantSheaf ((Etale.upperStar A b).obj F)] :
@@ -88,7 +88,7 @@ theorem IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (h : Set.range a 
 
 /-- **Independence of the scheme structure**: for immersions `a`, `b` with the same image,
 `a^* F` is finite locally constant if and only if `b^* F` is.
-(blueprint: `lemma:constructible-immersion-independence`) -/
+(blueprint: `lemma-constructible-immersion-independence`) -/
 theorem isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq [IsImmersion a]
     (h : Set.range a = Set.range b)
     (F : Sheaf X.smallEtaleTopology A) :

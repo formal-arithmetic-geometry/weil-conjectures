@@ -86,3 +86,31 @@ lemma sheafificationHomEquiv_symm_comp {P : PresheafOfModules.{v} R₀}
   rfl
 
 end PresheafOfModules
+
+namespace PresheafOfModules
+
+variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
+  {R₀ : Cᵒᵖ ⥤ RingCat.{u}} {R : Sheaf J RingCat.{u}} (α : R₀ ⟶ R.obj)
+  [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{v}] [HasWeakSheafify J AddCommGrpCat.{v}]
+
+/-- **Universal property of the sheafification of a presheaf of modules.** Every morphism `f`
+from a presheaf of modules `P` to (the restriction of scalars of) a sheaf of modules `F` factors
+uniquely through the unit `P ⟶ P^#` of the sheafification adjunction
+`PresheafOfModules.sheafificationAdjunction`: the sheafification functor is left adjoint to the
+inclusion of sheaves of modules into presheaves of modules. On underlying abelian presheaves,
+`P^#` is the sheafification of `P` (`PresheafOfModules.sheafificationCompToSheaf`).
+(blueprint: `def-weil-presheaf-modules-sheafification`) -/
+theorem existsUnique_sheafification_unit_comp (P : PresheafOfModules.{v} R₀)
+    (F : SheafOfModules.{v} R)
+    (f : P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F)) :
+    ∃! g : (sheafification α).obj P ⟶ F,
+      (sheafificationAdjunction α).unit.app P ≫
+        (restrictScalars α).map ((SheafOfModules.forget _).map g) = f := by
+  refine ⟨((sheafificationAdjunction α).homEquiv _ _).symm f, ?_, fun g hg ↦ ?_⟩
+  · have := ((sheafificationAdjunction α).homEquiv _ _).apply_symm_apply f
+    rwa [Adjunction.homEquiv_unit] at this
+  · rw [Equiv.eq_symm_apply, Adjunction.homEquiv_unit]
+    exact hg
+
+end PresheafOfModules

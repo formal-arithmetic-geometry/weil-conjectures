@@ -180,7 +180,8 @@ noncomputable def Etale.localizationRestrictionLowerStarAdjunction :
 
 /-- For an étale `f`, the pullback `f^*` is computed by restriction along the localization
 functor: both are left adjoint to `f_*`. In particular `f^*` needs no sheafification in this
-case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`. -/
+case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`.
+(blueprint: `lem-weil-pbc-etale-inverse-image-restriction`) -/
 noncomputable def Etale.upperStarIsoLocalizationRestriction :
     (f)^*[A] ≅ Etale.localizationRestriction A f h :=
   (Etale.upperStarLowerStarAdjunction A f).leftAdjointUniq
@@ -337,7 +338,8 @@ are left exact: the first by
 the left exactness of sheafification, which is the content of `HasSheafify` beyond the
 `HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
 coefficient category `A`, the second by the sorried instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`.
+(blueprint: `lem-weil-pbc-extension-by-zero-exact`) -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =
@@ -364,7 +366,7 @@ noncomputable def Etale.upperStarIsoOpenImmersionRestriction :
   Etale.upperStarIsoLocalizationRestriction A j inferInstance
 
 /-- The adjunction `j_! ⊣ j^*` between the lower shriek along an open immersion and the
-pullback `Etale.upperStar`. -/
+pullback `Etale.upperStar`. (blueprint: `lem-weil-pbc-extension-by-zero-adjunction`) -/
 noncomputable def Etale.openImmersionLowerShriekUpperStarAdjunction :
     (j)_!open[A] ⊣ (j)^*[A] :=
   Etale.localizationLowerShriekUpperStarAdjunction A j inferInstance

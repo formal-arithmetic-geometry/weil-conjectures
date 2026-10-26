@@ -46,3 +46,16 @@ theorem isReduced [IsReduced R] [Etale R A] : IsReduced A := by
   exact hfQ (hQ.isPrime.mem_of_pow_mem n (hle (by simpa using hn)))
 
 end Algebra.Etale
+
+/-- **Étale algebras are Zariski locally standard étale.** Let `B` be an étale `S`-algebra and
+`q` a prime of `B`. Then there are `g ∉ q`, a standard étale pair `P = (f, h)` over `S` and an
+isomorphism of `S`-algebras `B[1/g] ≃ P.Ring = S[t][Y] ⧸ (f, Yh - 1)`. This is mathlib's
+`Algebra.IsEtaleAt.exists_isStandardEtale`.
+(blueprint: `lem-weil-pbc-etale-locally-standard`) -/
+@[stacks 00UE]
+theorem Algebra.Etale.exists_algEquiv_standardEtalePair_ring (S B : Type*) [CommRing S]
+    [CommRing B] [Algebra S B] [Algebra.Etale S B] (q : Ideal B) [q.IsPrime] :
+    ∃ g ∉ q, ∃ P : StandardEtalePair S, Nonempty (Localization.Away g ≃ₐ[S] P.Ring) := by
+  obtain ⟨g, hg, h⟩ := Algebra.IsEtaleAt.exists_isStandardEtale (R := S) q
+  obtain ⟨P⟩ := h.nonempty_standardEtalePresentation
+  exact ⟨g, hg, P.P, ⟨P.equivRing⟩⟩

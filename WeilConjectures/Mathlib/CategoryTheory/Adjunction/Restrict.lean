@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
@@ -21,6 +23,16 @@ For an adjunction `L ⊣ R` between `k`-linear categories restricted to full sub
 maps `K ⟶ R (L K)` given by the unit followed by the multiplication by scalars `bᵢ` exhibit
 `R (L K)` as `Kᵈ` in the full subcategory if and only if they do so in the ambient category
 (`CategoryTheory.Adjunction.isIso_biproductDesc_restrictFullyFaithful_unit_smul_iff`).
+
+## Left adjoints commuting with fully faithful functors
+
+Let `iC : C ⥤ C'` and `iD : D ⥤ D'` be fully faithful, and let `L' ⊣ R'` and `L ⊣ R` be
+adjunctions `C' ⇄ D'` and `C ⇄ D` such that `iD ⋙ R' ≅ R ⋙ iC`. If `L'` maps the image of `iC`
+into the essential image of `iD`, then `iC ⋙ L' ≅ L ⋙ iD`: lifting `iC ⋙ L'` along `iD` gives a
+functor `C ⥤ D` which is left adjoint to `R` by `CategoryTheory.Adjunction.restrictFullyFaithful`,
+hence isomorphic to `L`.
+
+The left adjoints are then isomorphic: `CategoryTheory.Adjunction.compIsoOfForallMemEssImage`.
 -/
 
 @[expose] public section
@@ -101,5 +113,26 @@ lemma isIso_biproductDesc_restrictFullyFaithful_unit_smul_iff (K : PA.FullSubcat
   simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom, hu,
     ObjectProperty.lift_map, ObjectProperty.homMk_hom, Functor.comp_map]
   rfl
+
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+
+variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Category* D']
+  {iC : C ⥤ C'} {iD : D ⥤ D'} (hiC : iC.FullyFaithful) (hiD : iD.FullyFaithful)
+  {L' : C' ⥤ D'} {R' : D' ⥤ C'} (adj' : L' ⊣ R') {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+  (comm : iD ⋙ R' ≅ R ⋙ iC) (h : ∀ X, iD.essImage (L'.obj (iC.obj X)))
+
+/-- **Left adjoints commute with fully faithful functors preserved by them.** If the right
+adjoints commute with the fully faithful functors `iC`, `iD`, and the left adjoint `L'` maps the
+image of `iC` into the essential image of `iD`, then the left adjoints commute with `iC`, `iD`:
+`iC ⋙ L' ≅ L ⋙ iD`. -/
+noncomputable def compIsoOfForallMemEssImage : iC ⋙ L' ≅ L ⋙ iD :=
+  have := hiD.full
+  have := hiD.faithful
+  (Functor.essImage.liftFunctorCompIso (iC ⋙ L') iD h).symm ≪≫
+    Functor.isoWhiskerRight
+      ((adj'.restrictFullyFaithful hiC hiD
+        (Functor.essImage.liftFunctorCompIso (iC ⋙ L') iD h).symm comm).leftAdjointUniq adj) iD
 
 end CategoryTheory.Adjunction

@@ -270,7 +270,7 @@ preimage of `⋂ i, R.U i` and proper over it, hence all of it); step 7 is the c
 of the graph into a single projective space over `S`. These steps are carried out in
 `AlgebraicGeometry.exists_chowModification_of_finite_irreducibleComponents`, which applies since
 `X` is Noetherian.
-(blueprint: `thm:chow-lemma`) -/
+(blueprint: `thm:chow-lemma`, `lem-weil-pbc-chow-noetherian`) -/
 @[stacks 0200]
 theorem nonempty_data : Nonempty (Data f) := by
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f

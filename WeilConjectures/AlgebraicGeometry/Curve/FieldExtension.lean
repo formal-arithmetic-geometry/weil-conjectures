@@ -62,8 +62,6 @@ is that of the underlying sheaf of abelian groups.
   passage from algebraically closed to separably closed fields.
 - `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed`: the separably closed
   case.
-- `AlgebraicGeometry.Etale.bijective_cohomologyMap_comp_iff`: pulling back in two steps is
-  bijective on étale cohomology exactly when pulling back along the composite is.
 
 ## References
 
@@ -249,59 +247,5 @@ theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepC
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed Λ
     (fun f _ _ _ _ _ h F _ q ↦ bijective_cohomologyMap_of_isAlgClosed Λ f h F q) f h F q
-
-end AlgebraicGeometry.IsCurve
-
-namespace AlgebraicGeometry.Etale
-
-open Abelian Limits
-
-/-- Pulling étale cohomology back along `b` and then along `a` is bijective exactly when pulling
-it back along the composite `c = a ≫ b` is: the two maps differ by the isomorphisms
-`(a ≫ b)^* ≅ b^* ⋙ a^*` of pullback functors and of constant sheaves `ℤ`. -/
-theorem bijective_cohomologyMap_comp_iff {W Z Y : Scheme.{u}} (a : W ⟶ Z) (b : Z ⟶ Y)
-    (c : W ⟶ Y) (hc : a ≫ b = c) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (n : ℕ) :
-    Function.Bijective (cohomologyMap a _ n ∘ cohomologyMap b F n) ↔
-      Function.Bijective (cohomologyMap c F n) := by
-  subst hc
-  let τ := Etale.upperStarComp AddCommGrpCat.{u + 1} a b
-  let ℤY := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-    (AddCommGrpCat.of (ULift ℤ))
-  let eA := (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} a).symm.app
-    (AddCommGrpCat.of (ULift ℤ))
-  let eB := (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} b).symm.app
-    (AddCommGrpCat.of (ULift ℤ))
-  let eC := (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (a ≫ b)).symm.app
-    (AddCommGrpCat.of (ULift ℤ))
-  let v := eA ≪≫ ((a)^*[AddCommGrpCat.{u + 1}]).mapIso eB ≪≫ τ.symm.app ℤY ≪≫ eC.symm
-  have key : cohomologyMap a _ n ∘ cohomologyMap b F n =
-      (Ext.precompAddEquiv v _ n) ∘ Sheaf.H.map (τ.hom.app F) n ∘ cohomologyMap (a ≫ b) F n := by
-    funext x
-    have := comp_preservesFiniteLimits ((b)^*[AddCommGrpCat.{u + 1}])
-      ((a)^*[AddCommGrpCat.{u + 1}])
-    have := comp_preservesFiniteColimits ((b)^*[AddCommGrpCat.{u + 1}])
-      ((a)^*[AddCommGrpCat.{u + 1}])
-    rw [Function.comp_apply, cohomologyMap_cohomologyMap, Ext.mapExactFunctor_eq_of_iso τ x]
-    simp only [Function.comp_apply, cohomologyMap_apply, Sheaf.H.map_apply]
-    change _ = (Ext.mk₀ v.hom).comp _ (zero_add n)
-    rw [Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀_assoc, Ext.mk₀_comp_mk₀_assoc]
-    congr 2
-    simp [v, eA, eB, eC, ℤY]
-  rw [key]
-  exact Function.Bijective.of_comp_iff' ((AddEquiv.bijective _).comp
-    (bijective_sheafHMap_hom (τ.app F) n)) _
-
-end AlgebraicGeometry.Etale
-
-namespace AlgebraicGeometry.IsCurve
-
-variable (Λ : Type (u + 1)) [CommRing Λ]
-
-
-
-
-
-
 
 end AlgebraicGeometry.IsCurve
