@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperGeneralBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
@@ -132,30 +133,6 @@ lemma Hom.isIso_boundedConstructiblePushforwardExchange_app (φ : M.Hom N f.left
 end Restricted
 
 end NearbyCyclesModel
-
-/-! ### Proper base change -/
-
-section ProperBaseChange
-
-variable (ℓ : ℕ) [Fact ℓ.Prime]
-
-/-- **Proper base change** (blueprint `sk-thm-sfb-proper-base-change`) on the ambient derived
-categories of `ℚ̄_ℓ`-modules: for a cartesian square `g' ≫ p = p' ≫ g` of schemes with `p`
-proper, the base change morphism `Lg^* Rp_* K ⟶ Rp'_* Lg'^* K` is an isomorphism for bounded
-constructible `K`. The base `g` is arbitrary (here: the geometric generic point
-`Spec Ω ⟶ Spec k`), unlike
-`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`,
-whose squares are of finite type over a field. -/
-theorem isIso_baseChangeMap_app_of_isProper_padicAlgCl {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y}
-    {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p] (sq : CommSq g' p' p g)
-    (hsq : IsPullback g' p' p g)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) K) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq).app K) :=
-  sorry
-
-end ProperBaseChange
 
 /-! ### The proper exchange of a proper trait model -/
 

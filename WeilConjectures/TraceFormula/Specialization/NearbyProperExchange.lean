@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
+public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperGeneralBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -22,13 +24,24 @@ geometric models of models of finite type over the trait `Spec k'⟦t⟧`, whose
 the inclusions of the geometric generic fibres, this is
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`.
 
+The proof follows the blueprint. The component of `χ_f` at `K` is
+`Li_N^* Rj_{N*}` of the base change morphism of the square of identifications, followed by the
+composition of direct images `Rj_{N*} Rg_* ≅ Rt_* Rj_{M*}` and by the base change morphism of the
+square of special fibres at `Rj_{M*} Lε_M^* K`
+(`NearbyCyclesModel.Hom.pushforwardExchange_app`). The first is invertible by proper base change
+for `f` (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`), the last by
+proper base change for the morphism of total spaces
+(`NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_of_isProper`).
+
 ## Sorried input
 
-`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper` is the blueprint node
-`det-sp-nearby-cycles-exchanges` (2) of the subsection `sk-lem-tf-sp-constant-family`, stated here
-for `ℚ̄_ℓ`-coefficients; it is `sorry`ed, to be proved with that node (proper base change along the
-inclusions of the geometric generic fibre and of the special fibre, and the composition of direct
-images).
+`NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_of_isProper` is the proper base change
+step `ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `det-sp-nearby-cycles-exchanges` (2),
+applied to the generic direct image `Rj_{M*} Lε_M^* K`, which is not bounded constructible. The
+blueprint applies proper base change for bounded below complexes with torsion coefficients
+(blueprint `thm-weil-pbc-bounded-below`); for `ℚ̄_ℓ`-coefficients the base change morphism is
+only known to be invertible after derived completion, and the comparison with the ordinary
+pullback uses the finiteness of nearby cycles (SGA 4½, [Th. finitude]). It is `sorry`ed.
 
 -/
 
@@ -38,7 +51,7 @@ universe u
 
 open CategoryTheory Limits
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -48,12 +61,31 @@ namespace NearbyCyclesModel.Hom
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
+/-- **Proper base change along the special fibre for the generic direct image** (the step
+`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `det-sp-nearby-cycles-exchanges` (2); there
+by blueprint `thm-weil-pbc-bounded-below` for torsion coefficients; SGA 7 XIII 2.1.7): if the
+morphism `t` of total spaces of a morphism of models is proper and the square of special fibres is
+cartesian, the base change morphism `Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the generic
+direct image `Rj_{M*} Lε_M^* K` of a bounded constructible `ℚ̄_ℓ`-complex `K`. -/
+theorem isIso_baseChangeMap_commSq_i_app_of_isProper
+    {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f') [IsProper φ.total]
+    (hi : IsPullback M.i f' φ.total N.i)
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hK : boundedConstructible _ K) :
+    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) φ.commSq_i).app
+      (R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K))) :=
+  sorry
+
 /-- **Proper base change for nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (2),
 proper half; SGA 7 XIII 2.1.7): if the morphism of total spaces and `f` are proper and the squares
 of special fibres and of identifications `ε` are cartesian, the pushforward exchange
 `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` is invertible on bounded constructible complexes: by proper base change
-along `j_N` and `i_N`, both sides are `i_N^* Rt_* Rj_{M*} Lε_M^*`. (The `ε`-square cannot be
-dropped: `Rf_*` must commute with the base change to the geometric generic fibre.) -/
+along `ε_N` and `i_N`, both sides are `i_N^* Rt_* Rj_{M*} Lε_M^*`
+(`NearbyCyclesModel.Hom.pushforwardExchange_app`). (The `ε`-square cannot be dropped: `Rf_*` must
+commute with the base change to the geometric generic fibre.) -/
 theorem isIso_pushforwardExchange_app_of_isProper
     {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
     {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f') [IsProper φ.total] [IsProper f]
@@ -61,9 +93,12 @@ theorem isIso_pushforwardExchange_app_of_isProper
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
     (hK : boundedConstructible _ K) :
-    IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
-  sorry
-
+    IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) := by
+  have h₁ := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ φ.commSq_ε hε K hK
+  have h₂ := φ.isIso_baseChangeMap_commSq_i_app_of_isProper hi hK
+  have h₃ := φ.isIso_pushforwardExchange_app_of_isIso_baseChangeMap
+    (Profinite.padicAlgClRingObj ℓ) K (by exact_mod_proofs h₁) (by exact_mod_proofs h₂)
+  exact_mod_proofs h₃
 /-- **The proper exchange for geometric models** (blueprint `det-sp-nearby-cycles-exchanges` (2)):
 let `M` and `N` be models over `Spec k'⟦t⟧`, and `φ : M.geometric ⟶ N.geometric` a morphism of
 their geometric models whose morphism of total spaces `t` is proper and whose squares of geometric
