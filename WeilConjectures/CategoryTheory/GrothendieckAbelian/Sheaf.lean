@@ -61,7 +61,9 @@ instance isGrothendieckAbelian_sheaf_smallGrothendieckTopology (A : Type u')
   Sheaf.isGrothendieckAbelian_of_hasSmallSiteSheafify A _
 
 /-- The category of `A`-valued sheaves on the small étale site is Grothendieck abelian:
-the instance above applied to the essentially small small étale site. -/
+the instance above applied to the essentially small small étale site. For `A = Ab` the abelian
+sheaves on the small étale site form an abelian category (`CategoryTheory.sheafIsAbelian`) with
+all small colimits. (blueprint: `def-weil-pbc-abelian-etale-sheaves`) -/
 instance (priority := high) isGrothendieckAbelian_sheaf_smallEtaleTopology (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (Sheaf X.smallEtaleTopology A) :=

@@ -187,3 +187,16 @@ end CategoryTheory.GrothendieckTopology
 end
 
 end
+
+namespace CategoryTheory
+
+/-- **Sheafification of presheaves of sets commutes with finite limits.** For a site `C`, the
+sheafification functor from presheaves of sets to sheaves of sets preserves finite limits; in
+particular it sends the terminal presheaf to the terminal sheaf and binary products (computed
+sectionwise) to binary products. (blueprint: `lem-weil-pbc-sheafification-sets-exact`) -/
+theorem preservesFiniteLimits_presheafToSheaf_type {C : Type u} [Category.{v} C]
+    (J : GrothendieckTopology C) :
+    Limits.PreservesFiniteLimits (presheafToSheaf J (Type (max u v))) :=
+  inferInstance
+
+end CategoryTheory

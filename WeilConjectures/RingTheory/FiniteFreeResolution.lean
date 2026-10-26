@@ -23,7 +23,7 @@ universe u v
 
 namespace Module
 
-/-- Every finite module over a Noetherian commutative ring admits an infinite resolution
+/-- Every finite module over a (left) Noetherian ring admits an infinite resolution
 by finite free modules. Source: Stacks Project, Algebra, Lemma 10.71.1 (Tag 00LP), part (2)
 (blueprint: lem-weil-pbc-finite-free-resolution-noetherian).
 
@@ -42,7 +42,7 @@ Proof plan, following the four steps of the node:
 The finite function module `Fin (n i) → R` represents `R^{⊕ nᵢ}`. The map `d i` is the
 node's `d_{i+1}`, so its target is the free term of degree `i`. -/
 theorem exists_finite_free_resolution
-    (R : Type u) [CommRing R] [IsNoetherianRing R]
+    (R : Type u) [Ring R] [IsNoetherianRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] :
     ∃ (n : ℕ → ℕ) (ε : (Fin (n 0) → R) →ₗ[R] M)
       (d : ∀ i : ℕ, (Fin (n (i + 1)) → R) →ₗ[R] (Fin (n i) → R)),

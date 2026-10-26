@@ -214,7 +214,8 @@ quasi-isomorphism `F(φ) : F(K) ⟶ F(L)`:
      ▼              ▼
     F Lᵃ ──F d──▶ F Lᵃ⁺¹ ──F d──▶ ⋯
 ```
-The proof applies `HomologicalComplex.Acyclic.map_of_rightAcyclic` to the mapping cone. -/
+The proof applies `HomologicalComplex.Acyclic.map_of_rightAcyclic` to the mapping cone.
+(blueprint: `lem-weil-pbc-leray-acyclicity-quasi-iso`) -/
 theorem quasiIso_map_of_rightAcyclic {K L : CochainComplex C ℤ} (φ : K ⟶ L) [QuasiIso φ]
     (a : ℤ) [K.IsStrictlyGE a] [L.IsStrictlyGE a] (hK : ∀ n, F.rightAcyclic (K.X n))
     (hL : ∀ n, F.rightAcyclic (L.X n)) :

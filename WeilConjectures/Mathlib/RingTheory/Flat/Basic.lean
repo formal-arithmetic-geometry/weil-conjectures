@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.LinearAlgebra.TensorProduct.Prod
 public import Mathlib.RingTheory.Flat.Basic
 
@@ -12,7 +13,7 @@ public import Mathlib.RingTheory.Flat.Basic
 # Products of flat modules
 
 The product `M × N` of two flat modules is flat: tensoring with it is the product of tensoring
-with `M` and with `N` (`TensorProduct.prodRight`).
+with `M` and with `N` (`TensorProduct.prodRight`). A finite product of flat modules is flat.
 -/
 
 @[expose] public section
@@ -38,5 +39,12 @@ instance prod [Flat R M] [Flat R N] : Flat R (M × N) := by
   simp only [LinearMap.coe_comp, LinearEquiv.coe_coe] at this
   rw [← (TensorProduct.prodRight R R P' M N).injective.of_comp_iff, this]
   exact hinj.comp (TensorProduct.prodRight R R P M N).injective
+
+/-- A finite product of flat modules is flat. -/
+instance pi {ι : Type*} [Finite ι] (P : ι → Type*) [∀ i, AddCommGroup (P i)]
+    [∀ i, Module R (P i)] [∀ i, Flat R (P i)] : Flat R (∀ i, P i) := by
+  classical
+  have := Fintype.ofFinite ι
+  exact of_linearEquiv (DirectSum.linearEquivFunOnFintype R ι P).symm
 
 end Module.Flat

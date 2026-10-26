@@ -28,7 +28,8 @@ universe u
 namespace AlgebraicGeometry
 
 /-- The projective line over a field has dimension at most one: it is covered by two
-affine lines, each the spectrum of a polynomial ring in one variable. -/
+affine lines, each the spectrum of a polynomial ring in one variable.
+(blueprint: `lem-weil-pbc-p1-field-dimension-one`) -/
 theorem topologicalKrullDim_projectiveLine_le_one (k : Type u) [Field k] :
     topologicalKrullDim (ProjectiveLine (Spec (.of k))) ≤ 1 := by
   refine topologicalKrullDim_le_of_iSup_eq_top _ (ProjectiveSpace.iSup_standardOpen _ _) _

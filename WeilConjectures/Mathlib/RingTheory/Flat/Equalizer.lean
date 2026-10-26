@@ -121,7 +121,8 @@ lemma Module.Flat.of_exact_of_flat_of_flat {R M' M M'' : Type*} [CommRing R]
   rw [h3, map_zero]
 
 /-- **Kernels of surjections of flat modules are flat.** In a short exact sequence
-`0 ⟶ M' ⟶ M ⟶ M'' ⟶ 0` of `R`-modules with `M` and `M''` flat, `M'` is flat. -/
+`0 ⟶ M' ⟶ M ⟶ M'' ⟶ 0` of `R`-modules with `M` and `M''` flat, `M'` is flat.
+(blueprint: `lem-weil-pbc-flat-ses-kernel-flat`) -/
 lemma Module.Flat.of_exact_of_flat_of_flat_right {R M' M M'' : Type*} [CommRing R]
     [AddCommGroup M'] [AddCommGroup M] [AddCommGroup M''] [Module R M'] [Module R M]
     [Module R M''] [Module.Flat R M] [Module.Flat R M''] (f : M' →ₗ[R] M) (g : M →ₗ[R] M'')

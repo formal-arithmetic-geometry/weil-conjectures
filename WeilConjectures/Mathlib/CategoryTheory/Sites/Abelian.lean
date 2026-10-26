@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
@@ -17,6 +18,9 @@ holds by instances, as sheaves form a full subcategory of presheaves), and the
 sheafification functor `presheafToSheaf J D` is `R`-linear, being the left adjoint of the
 (componentwise, hence `R`-linear) inclusion `sheafToPresheaf J D`. This is the `R`-linear
 analogue of `CategoryTheory.presheafToSheaf_additive`.
+
+Kernels in the abelian category `Sheaf J D` are computed sectionwise
+(`CategoryTheory.Sheaf.kernelObjIso`).
 -/
 
 @[expose] public section
@@ -44,5 +48,30 @@ instance constantSheaf_linear : (constantSheaf J D).Linear R where
       r • (presheafToSheaf J D).map ((Functor.const _).map f)
     rw [← Functor.map_smul]
     rfl
+
+section Kernel
+
+open Limits
+
+variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+  {D : Type w} [Category.{w'} D] [Abelian D] [HasSheafify J D]
+
+/-- The kernel of a morphism `φ : F ⟶ G` in the abelian category of `D`-valued sheaves
+(`CategoryTheory.sheafIsAbelian`) is computed sectionwise: its sections over `U` are the
+kernel of `φ` on sections over `U`, since the inclusion of sheaves into presheaves and the
+evaluations preserve limits. (blueprint: `def-pur-abelian-sheaf-kernel`) -/
+noncomputable def Sheaf.kernelObjIso {F G : Sheaf J D} (φ : F ⟶ G) (U : Cᵒᵖ) :
+    (kernel φ).obj.obj U ≅ kernel (φ.hom.app U) :=
+  PreservesKernel.iso (sheafToPresheaf J D ⋙ (evaluation Cᵒᵖ D).obj U) φ
+
+/-- Under `CategoryTheory.Sheaf.kernelObjIso`, the inclusion of the kernel is sectionwise the
+inclusion of the kernel. -/
+@[reassoc (attr := simp)]
+lemma Sheaf.kernelObjIso_hom_comp_ι {F G : Sheaf J D} (φ : F ⟶ G) (U : Cᵒᵖ) :
+    (Sheaf.kernelObjIso φ U).hom ≫ kernel.ι (φ.hom.app U) = (kernel.ι φ).hom.app U := by
+  rw [Sheaf.kernelObjIso, PreservesKernel.iso_hom]
+  exact kernelComparison_comp_ι _ _
+
+end Kernel
 
 end CategoryTheory
