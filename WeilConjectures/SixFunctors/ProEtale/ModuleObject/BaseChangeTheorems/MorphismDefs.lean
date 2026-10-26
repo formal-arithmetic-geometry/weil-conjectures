@@ -344,6 +344,21 @@ noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     (boundedConstructibleBaseChangeSquareStep ℓ E sq).hom ≫
       boundedConstructibleBaseChangeCounitStep ℓ E f f' g'
 
+variable {f g f' g'} in
+/-- The base-change morphism `BC_sq` is the exchange morphism
+`CategoryTheory.Adjunction.exchangeRight` of the pullback comparison `θ_sq` under the
+adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*` (`𝒪_E`-coefficient). -/
+lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
+    boundedConstructibleBaseChange ℓ E sq =
+      Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
+        (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
+          sq) := by
+  unfold boundedConstructibleBaseChange boundedConstructibleBaseChangeUnitStep
+    boundedConstructibleBaseChangeSquareStep boundedConstructibleBaseChangeCounitStep
+    Adjunction.exchangeRight
+  rfl
+
 end BaseChange
 
 end PadicIntegersRingObj

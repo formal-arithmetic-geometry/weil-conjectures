@@ -95,7 +95,9 @@ theorem rightAcyclic_lowerStar_of_isZero_rightDerived {U V : Scheme.{u}} (f : U 
 
 section Acyclicity
 
-/-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
+blueprint `prop-weil-pbc-site-comparison-finite-level`.
+Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
 finite level
 
 *Acyclicity.* For every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is acyclic for
