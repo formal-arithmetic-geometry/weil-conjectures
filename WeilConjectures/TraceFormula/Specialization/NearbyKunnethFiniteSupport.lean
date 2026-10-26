@@ -23,17 +23,17 @@ finite type, and let `C` be the cone of the Künneth map `Π_{A,B} : Ψ_M A ⊠ 
 for bounded constructible `A`, `B`. This file proves that `C` is supported on finitely many closed
 points of the special fibre `X_s × Y_s`
 (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`), given
-that its source and target are bounded constructible and given the generic-slicing step
-(`NearbyCyclesModel.isIso_map_kunnethMap_sliceSpecialMap`, blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"): `C` vanishes on the special fibre
-`(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every coordinate `𝒵 ⟶ 𝔸¹_S` pulled back
-from one of the factors.
+that its source and target are bounded constructible, that the total spaces locally embed into
+`𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the Künneth formula holds in chart dimension `m + m' - 1` over the
+trait of the generic slices: by the generic-slicing step
+(`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst`, blueprint
+`sk-prop-tf-nearby-external-kunneth`, "Finite support"), `C` vanishes on the special fibre
+`(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
 
 ## Proof
 
-Around a point of `X_s × Y_s`, choose affine opens `V`, `W` of the total spaces of `M`, `N` and
-closed immersions `V ⟶ 𝔸ⁿ_S`, `W ⟶ 𝔸ᵐ_S` over `S`
-(`AlgebraicGeometry.exists_isClosedImmersion_affineSpace_of_isAffine`). Their coordinates, pulled
+Around a point of `X_s × Y_s`, choose charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` (immersions over
+`S` of opens of the total spaces of `M`, `N`). Their coordinates, pulled
 back to `V ×_S W`, are coordinates of the restriction of the product to `V ×_S W`; on the special
 fibre they detect closed points (`AlgebraicGeometry.AffineSpace`
 `.isClosed_singleton_of_forall_isClosed_singleton_reindex` and
@@ -273,14 +273,17 @@ set_option maxHeartbeats 1600000 in
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
 `N` of finite type and bounded constructible `A`, `B` such that the source and the target of the
-Künneth map `Π_{A,B}` are bounded constructible, `Π_{A,B}` is an isomorphism away from finitely
-many closed points of the special fibre `X_s × Y_s`.
+Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed into `𝔸ᵐ_S`,
+`𝔸^{m'}_S`, if the Künneth formula holds in chart dimension `m + m' - 1` over the trait of the
+generic slices, then `Π_{A,B}` is an isomorphism away from finitely many closed points of the
+special fibre `X_s × Y_s`.
 
-Around every point, the coordinates of closed immersions `V ⟶ 𝔸ⁿ_S`, `W ⟶ 𝔸ᵐ_S` of affine opens
-of the total spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
+Around every point, the coordinates of charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` of the total
+spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
 `Π_{A,B}` vanishes over the generic point of each coordinate line
-(`NearbyCyclesModel.isIso_map_kunnethMap_sliceSpecialMap` for the restriction of the product to
-`V ×_S W`); conclude by `ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
+(`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst` and its mirror, for the
+restriction of the product to `V ×_S W`); conclude by
+`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
 -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
@@ -422,14 +425,16 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
       rcases i with a | a
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
           (traitSlice (sliceCoord k'))
-        have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV := Finite.card_subtype_lt (x := a) (by simp)
+        have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
+          Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_fst hMV hNW hpbU hPU hgenU
           (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
           (hIH (by omega)) (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
           (hm'.restrict W) heMV heNW hA' hB'
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cW a
           (traitSlice (sliceCoord k'))
-        have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW := Finite.card_subtype_lt (x := a) (by simp)
+        have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
+          Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
           (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW])
           (hIH (by omega)) (by omega) (hm.restrict V)

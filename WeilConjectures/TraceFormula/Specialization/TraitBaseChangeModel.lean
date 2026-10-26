@@ -213,6 +213,7 @@ variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
 noncomputable abbrev Hom.baseChangeTotal : pullback bP vP ⟶ pullback bM vM :=
   pullback.map bP vP bM vM φ.total (𝟙 _) κ hκb (by rw [Category.id_comp, hκv])
 
+omit [Algebra k' K] in
 @[reassoc (attr := simp)]
 lemma Hom.baseChangeTotal_snd :
     φ.baseChangeTotal κ hκb hκv ≫ pullback.snd bM vM = pullback.snd bP vP := by
@@ -229,7 +230,7 @@ include hκb hκv in
 compatible with the structure morphisms to `Spec Ω`, and a compatible map `κ : Y_P ⟶ Y_M` of the
 schemes along which the base changes are taken, induce a morphism of the base changes. -/
 @[simps]
-noncomputable def Hom.baseChange (hqP : qP = φ.total ≫ qM) (hgP : gP = φ.generic ≫ gM) :
+noncomputable def Hom.baseChange (hgP : gP = φ.generic ≫ gM) :
     (baseChange hP bP hbP vP hvP).Hom (baseChange hM bM hbM vM hvM) f
       (φ.baseChangeSpecial κ hκb hκv) where
   total := φ.baseChangeTotal κ hκb hκv

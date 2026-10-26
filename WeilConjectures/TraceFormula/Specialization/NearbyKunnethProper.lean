@@ -33,28 +33,21 @@ following Illusie's argument (*Autour du théorème de monodromie locale*, Thm. 
 
 and a bounded constructible complex supported on finitely many closed points without global
 sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ`-coefficients
-`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`, a hypothesis here).
+`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`).
 
-## Unfinished inputs
+The finite-support step is proved in chart dimension `n` (charts `V ⟶ 𝔸ᵐ_S` with `m` summed over
+the two factors, `AlgebraicGeometry.Scheme.Hom.LocallyEmbedsInAffineSpace`), given Gabber's
+Künneth formula in chart dimension `n - 1` over the trait `Spec K⟦t⟧` of the generic slices
+(`NearbyCyclesModel.KunnethFormula`); its only unfinished input is the generic-slicing
+identification `NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst` (and its mirror for the
+second factor), see `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep`.
 
-* `NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`: the finite-support step, by
-  generic slicing and induction on the dimension (SGA 4½, [Th. finitude], §§3.4, 3.7, the inertia
-  sequence `1 ⟶ P ⟶ I' ⟶ I ⟶ 1`, and the invariants under the pro-`p` group `P`,
-  blueprint `det-nearby-kunneth-invariants`, proved in
-  `WeilConjectures.RepresentationTheory.ProfiniteInvariants`). None of strict localizations of
-  `𝔸¹_S`, nearby cycles over a varying trait, or the action of inertia on nearby cycles is
-  formalised. The slices may be taken of the form `Spec K⟦t⟧` (with `K` a separable closure of
-  `k'(x)`, through `k'⟦t⟧[x] ⟶ K⟦t⟧`, the completion of the strict localization), so that the
-  induction stays within the traits `trait K`; the identification (2) is then the invertibility
-  of the pullback exchange `α` along the slice, for the model whose generic fibre lies over the
-  fixed field of `P`, and the restriction of `Π` to the slice is reduced to the Künneth map of the
-  sliced models by `NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isIso_pullbackExchange`.
-
-The reduction to proper models is proved: locality on the special fibre reduces to affine total
-spaces (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), and for affine total spaces one
-passes to the models of the total spaces and to proper closures
-(`NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`), extending the coefficients by
-zero (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine`,
+The reduction to proper models in chart dimension `n` (`NearbyCyclesModel.ProperKunnethFormula`)
+is proved: locality on the special fibre reduces to products of charts
+(`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula`), and for a chart one passes to the
+models of the total spaces and to their closures in projective spaces, whose charts have the same
+dimension, extending the coefficients by zero
+(`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula_of_isImmersion`,
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure`).
 
 -/
@@ -155,16 +148,17 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
 `N` of finite type and bounded constructible `A`, `B`, the Künneth map `Π_{A,B}` is an
-isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`.
+isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`, given that the
+total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S` and that the Künneth formula holds in chart
+dimension `m + m' - 1` over the trait of the generic slices.
 
 The source and target of `Π_{A,B}` are bounded constructible by Deligne's finiteness theorem
 (`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
 `NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`), so this is
 `NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`: around
-every point, the coordinates of closed immersions of affine opens of the total spaces into affine
-spaces over the trait detect closed points of the special fibre, and the cone of `Π_{A,B}`
-vanishes over the generic point of each coordinate line by generic slicing
-(`NearbyCyclesModel.isIso_map_kunnethMap_sliceSpecialMap`). -/
+every point, the coordinates of local charts of the total spaces detect closed points of the
+special fibre, and the cone of `Π_{A,B}` vanishes over the generic point of each coordinate line
+by generic slicing (`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst`). -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
@@ -187,8 +181,8 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM
   have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
   have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
   have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
-  exact exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible hM hN hpb hP hgen hm hm'
-    hIH heM heN
+  exact exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible hM hN hpb hP hgen hm
+    hm' hIH heM heN
     hA hB (boundedConstructible_kunnethMap_source hΨA hΨB)
     (boundedConstructible_kunnethMap_target (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
@@ -358,7 +352,8 @@ The Künneth map is that of the models of the total spaces
 (`NearbyCyclesModel.isIso_kunnethMap_of_toGeometricGeneric`); these are restrictions of the
 standard models of the closures of the total spaces in the projective spaces
 (`AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`), whose charts have the same
-dimension (`AlgebraicGeometry.Compactification.locallyEmbedsInAffineSpace_ofIsImmersionAffineSpace`),
+dimension
+(`AlgebraicGeometry.Compactification.locallyEmbedsInAffineSpace_ofIsImmersionAffineSpace`),
 and the coefficients are extended by zero
 (`NearbyCyclesModel.isIso_kunnethMap_toGeometricGeneric_of_closure`). -/
 theorem isIso_kunnethMap_of_properKunnethFormula_of_isImmersion {n : ℕ}

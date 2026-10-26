@@ -111,7 +111,7 @@ lemma comp_coordinate_fst :
 factor: the slice of `P` along `φ₁ ≫ b` maps to the slice of `M` along `b`. -/
 noncomputable abbrev sliceFst :=
   φ₁.baseChange hM hP hb (traitSlice_over (sliceCoord k')) (comp_coordinate_fst hb)
-    (traitSlice_over (sliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _) rfl rfl
+    (traitSlice_over (sliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _) rfl
 
 include hpb hb in
 lemma comp_coordinate_fst_eq :
@@ -124,7 +124,7 @@ noncomputable abbrev sliceSnd :=
   φ₂.baseChange hN hP (Category.comp_id qN) (Category.comp_id (traitMap k' (sliceField k')))
     (comp_coordinate_fst hb) (traitSlice_over (sliceCoord k'))
     (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k') (comp_coordinate_fst_eq hpb hb)
-    (traitSlice_over (sliceCoord k')) hpb.w hgen.symm
+    (traitSlice_over (sliceCoord k')) hgen.symm
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
@@ -218,13 +218,13 @@ noncomputable abbrev sliceFst' :=
   φ₁.baseChange hM hP (Category.comp_id qM) (Category.comp_id (traitMap k' (sliceField k')))
     (comp_coordinate_snd hpb hb) (traitSlice_over (sliceCoord k'))
     (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k') (comp_coordinate_snd hpb hb)
-    (traitSlice_over (sliceCoord k')) rfl rfl
+    (traitSlice_over (sliceCoord k')) rfl
 
 /-- The second projection of the geometric slice of a product along a coordinate `b` of the
 second factor: the slice of `P` along `φ₂ ≫ b` maps to the slice of `N` along `b`. -/
 noncomputable abbrev sliceSnd' :=
   φ₂.baseChange hN hP hb (traitSlice_over (sliceCoord k')) (comp_coordinate_snd hpb hb)
-    (traitSlice_over (sliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _) hpb.w
+    (traitSlice_over (sliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _)
     hgen.symm
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]

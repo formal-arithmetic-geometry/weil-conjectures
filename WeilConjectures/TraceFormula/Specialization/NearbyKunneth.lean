@@ -27,15 +27,17 @@ blueprint `sk-prop-tf-nearby-external-kunneth`) says that the Künneth map of ne
 
 ## Proof
 
-After the reduction to proper models with compatible geometric generic fibres
-(`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), this is
+By induction on the chart dimension, simultaneously for all separably closed fields `k'`
+(`NearbyCyclesModel.kunnethFormula`), and after the reduction to proper models with compatible
+geometric generic fibres (`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula`), this is
 `NearbyCyclesModel.isIso_kunnethMap_of_isProper`, whose inputs are supplied here: Deligne's
 finiteness theorem for the nearby cycles
 (`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
 `NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`) and the monoidality of the
 nearby cycles of the trait on the cohomology of the geometric generic fibres
 (`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`), the complexes
-on the geometric generic point being finite direct sums of shifts of the unit.
+on the geometric generic point being finite direct sums of shifts of the unit, and Gabber's formula
+in smaller chart dimension over the traits of the generic slices.
 
 -/
 
