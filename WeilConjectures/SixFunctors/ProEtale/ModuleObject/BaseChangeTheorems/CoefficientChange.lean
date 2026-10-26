@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangePadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 
 /-!
 
@@ -32,14 +34,14 @@ finite coefficients at the first derived reduction of `K₀`; by derived Nakayam
 base-change morphism to finite coefficients
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_integral_app_of_reduction`).
 
+The first identification is proved
+(`ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl`).
+
 ## Inputs from other subsections
 
-- `ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl`:
-  blueprint `sk-lem-sbc-exchange-compatibility` (subsection
-  `sk-lem-sbc-exchange-compatibility` of `sec-smooth-base-change`), its last assertion for the
-  coefficient map `𝒪_E ⟶ ℚ̄_ℓ` of `sk-prop-scalar-six`.
 - `ProEtale.CondensedRing.nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange`:
-  the same assertion for the coefficient map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring.
+  blueprint `sk-lem-sbc-exchange-compatibility` (section `sec-smooth-base-change`), its last
+  assertion for the coefficient map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring.
 
 -/
 
@@ -79,10 +81,15 @@ Y' --g---> Y
 and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar comparisons identify the extension of scalars
 `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral base-change morphism
 `BC_sq(K₀) : Lg^* Rf_* K₀ ⟶ Rf'_* Lg'^* K₀` with the base-change morphism
-`BC_sq(ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀)` of `Dᵇc(-)⟦ℚ̄_ℓ⟧`. Here we only record that the two morphisms are
-isomorphic as arrows. -/
+`BC_sq(ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀)` of `Dᵇc(-)⟦ℚ̄_ℓ⟧`, as arrows. This holds for every commutative square.
+It is the composite of the integral stage `𝒪_E ⟶ E`
+(`nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational`) and the rational stage
+`E ⟶ ℚ̄_ℓ` (`nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl`), whose (Push)
+comparisons are invertible on bounded below complexes
+(`isIso_derivedPushHom_app_padicIntegers_of_isGE`,
+`isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`). -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
-    (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
+    (sq : CommSq g' f' f g) (_hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     Nonempty (Arrow.mk ((constructibleToPadicAlgCl Y'.left ℓ E).map
         ((boundedConstructibleExtendScalars Y'.left ℓ E).map
@@ -91,7 +98,12 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
       Arrow.mk ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq).app
         ((constructibleToPadicAlgCl X.left ℓ E).obj
           ((boundedConstructibleExtendScalars X.left ℓ E).obj K₀)))) :=
-  sorry
+  ⟨(constructibleToPadicAlgCl Y'.left ℓ E).mapArrow.mapIso
+      (nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational ℓ E sq K₀).some ≪≫
+    (nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl ℓ E
+      (fun p _ _ K n _ ↦
+        isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
+      sq _).some⟩
 
 /-- The invertibility of a `ℚ̄_ℓ`-base-change morphism reduces to the integral one: if the
 base-change morphism `BC_sq` of a cartesian square is invertible on `Dᵇc(-)⟦𝒪_E⟧` for every finite

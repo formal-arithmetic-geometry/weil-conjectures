@@ -1,0 +1,87 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClDerivedIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+
+/-!
+# The base-change morphism and the coefficient change `E ⟶ ℚ̄_ℓ`
+
+For a commutative square of schemes separated and of finite type over `k` and a bounded
+constructible `E`-complex `M`, the extension of scalars `ℚ̄_ℓ ⊗ᴸ_E BC_sq(M)` and the base-change
+morphism of `Dᵇc(-)⟦ℚ̄_ℓ⟧` at `ℚ̄_ℓ ⊗ᴸ_E M` are isomorphic arrows
+(`ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl`),
+given that (Push) for `E ⟶ ℚ̄_ℓ` is invertible on bounded below complexes.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits
+
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme PadicAlgCl
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] (E : FiniteIntermediateField ℓ)
+  {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+set_option maxHeartbeats 1000000 in
+-- the instances of the transfer theorem are unified with the concrete coefficient rings
+/-- The rational stage of blueprint `sk-lem-sbc-exchange-compatibility`, for the inclusion
+`E ⟶ ℚ̄_ℓ`: given that (Push) for `E ⟶ ℚ̄_ℓ` is invertible on bounded below complexes along
+quasi-compact quasi-separated morphisms, the extension of scalars `ℚ̄_ℓ ⊗ᴸ_E BC_sq(M)` and the
+base-change morphism of `Dᵇc(-)⟦ℚ̄_ℓ⟧` at `ℚ̄_ℓ ⊗ᴸ_E M` are isomorphic arrows. -/
+theorem nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl
+    (hP : ∀ {A B : Scheme.{u}} (p : A ⟶ B) [QuasiCompact p] [QuasiSeparated p]
+      (K : DerivedCategory (Mod (Sheaf (ProEt.topology A) Ab.{u + 1})
+        (padicSubfieldRingObj A ℓ E))) (n : ℤ) [K.IsGE n],
+      IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p).app K))
+    (sq : CommSq g' f' f g) (M : PadicSubfieldConstructible X.left ℓ E) :
+    Nonempty (Arrow.mk ((constructibleToPadicAlgCl Y'.left ℓ E).map
+        ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E.1) ℓ sq).app M)) ≅
+      Arrow.mk ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ sq).app
+        ((constructibleToPadicAlgCl X.left ℓ E).obj M))) := by
+  have : QuasiCompact f.left := by
+    have : QuasiCompact (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+    exact QuasiCompact.of_comp f.left Y.hom
+  have : QuasiCompact f'.left := by
+    have : QuasiCompact (f'.left ≫ Y'.hom) := by rw [Over.w f']; infer_instance
+    exact QuasiCompact.of_comp f'.left Y'.hom
+  have : QuasiSeparated f.left := by
+    have : QuasiSeparated (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+    exact QuasiSeparated.of_comp f.left Y.hom
+  have : QuasiSeparated f'.left := by
+    have : QuasiSeparated (f'.left ≫ Y'.hom) := by rw [Over.w f']; infer_instance
+    exact QuasiSeparated.of_comp f'.left Y'.hom
+  have ha := M.property.1.1.choose_spec
+  set a := M.property.1.1.choose
+  have : M.obj.IsGE a := ha
+  have : ((g'.left)^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj
+      M.obj).IsGE a := isGE_leftDerivedUpperStar_obj _ g'.left M.obj a
+  have H : DerivedPullIsoCompCoherence (Profinite.padicSubfieldRingObjToPadicAlgCl.{u} ℓ E) :=
+    derivedPullIsoCompCoherence _
+  have h₁ := hP f.left M.obj a
+  have h₂ := hP f'.left ((g'.left)^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj
+    M.obj) a
+  have key := nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ℓ H sq
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E K.obj K.property)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj Y'.left ℓ E K.obj
+      K.property) M h₁ h₂
+  exact key
+
+end AlgebraicGeometry.ProEtale.CondensedRing
