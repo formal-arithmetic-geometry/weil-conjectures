@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 
@@ -171,15 +172,16 @@ theorem exists_etaleReductionLowerShriekIso (f : Z ⟶ Y) [IsProper f.left] :
         (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv)) :=
   sorry
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
-`det-prop-scalar-six-tensor-hom`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with the tensor
-product**: `(K ⊗ᴸ M)_{𝒪_E ⧸ ℓⁿ} ≅ K_{𝒪_E ⧸ ℓⁿ} ⊗ᴸ M_{𝒪_E ⧸ ℓⁿ}`. -/
+omit [Fact (ringChar k).Prime] in
+/-- Blueprint `det-prop-scalar-six-tensor-hom`, (1), for the coefficient map
+`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ`
+commutes with the tensor product**: `(K ⊗ᴸ M)_{𝒪_E ⧸ ℓⁿ} ≅ K_{𝒪_E ⧸ ℓⁿ} ⊗ᴸ M_{𝒪_E ⧸ ℓⁿ}` (proved in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor`). -/
 theorem nonempty_etaleReductionTensorIso (K M : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     Nonempty ((etaleReduction ℓ E n Y).obj (K ⊗ M) ≅
       ((Etale.derivedTensor (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left).obj
         ((etaleReduction ℓ E n Y).obj K)).obj ((etaleReduction ℓ E n Y).obj M)) :=
-  sorry
+  nonempty_etaleReductionTensorIso_of_components ℓ E n K M
 
 /-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
 `det-prop-scalar-six-ctf`, (3), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
