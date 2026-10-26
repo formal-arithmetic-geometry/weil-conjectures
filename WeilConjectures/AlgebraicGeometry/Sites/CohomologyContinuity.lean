@@ -10,7 +10,10 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
+import WeilConjectures.AlgebraicGeometry.GrothendieckHypercoverComparison
+import WeilConjectures.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
 import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 
@@ -26,7 +29,8 @@ specialising `nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vani
 follows (`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`). The vanishing
 form for a general Grothendieck abelian coefficient category
 (`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`), which goes beyond the abelian
-sheaves of [Stacks, Tag 09YQ], is not formalised here.
+sheaves of [Stacks, Tag 09YQ], is proved through finite split étale hypercovers: the derived
+functors of sections are computed by hypercover cohomology, which commutes with the limit.
 
 ## Main definitions
 
@@ -68,8 +72,40 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     (h : ∀ i, IsZero (((sectionsFunctor A (D.obj i).left).rightDerived q).obj
       ((Etale.upperStar A (D.obj i).hom).obj F))) :
     IsZero (((sectionsFunctor A c.pt.left).rightDerived q).obj
-      ((Etale.upperStar A c.pt.hom).obj F)) :=
-  sorry
+      ((Etale.upperStar A c.pt.hom).obj F)) := by
+  classical
+  let D' := D ⋙ Over.forget S
+  let c' := (Over.forget S).mapCone c
+  have (i : I) : CompactSpace (D'.obj i) :=
+    inferInstanceAs (CompactSpace (D.obj i).left)
+  have (i : I) : QuasiSeparatedSpace (D'.obj i) :=
+    inferInstanceAs (QuasiSeparatedSpace (D.obj i).left)
+  have {i j : I} (g : i ⟶ j) : IsAffineHom (D'.map g) :=
+    inferInstanceAs (IsAffineHom (D.map g).left)
+  have : CompactSpace c.pt.left := Scheme.compactSpace_of_isLimit D' c' hc
+  obtain ⟨i⟩ := IsCofiltered.nonempty (C := I)
+  have : IsAffineHom (c'.π.app i) := isAffineHom_π_app D' c' hc i
+  have : QuasiSeparatedSpace c.pt.left :=
+    quasiSeparatedSpace_of_quasiSeparated (c'.π.app i)
+  have hstage (j : I) :
+      IsZero (FiniteSplitEtaleHypercover.hypercoverCohomology A
+        ((Etale.upperStar A (D.obj j).hom).obj F) q) := by
+    obtain ⟨e⟩ := FiniteSplitEtaleHypercover.nonempty_hypercoverCohomology_iso A q
+      ((sectionsFunctor A (D.obj j).left).rightDerived q)
+      (FiniteSplitEtaleHypercover.isCohomologyColimit_rightDerived_sections A
+        (D.obj j).left q) ((Etale.upperStar A (D.obj j).hom).obj F)
+    exact (h j).of_iso e
+  obtain ⟨e⟩ := FiniteSplitEtaleHypercover.nonempty_hypercoverCohomology_iso A q
+    ((sectionsFunctor A c.pt.left).rightDerived q)
+    (FiniteSplitEtaleHypercover.isCohomologyColimit_rightDerived_sections A c.pt.left q)
+    ((Etale.upperStar A c.pt.hom).obj F)
+  have hlimit : IsZero (FiniteSplitEtaleHypercover.hypercoverCohomology A
+      ((Etale.upperStar A c.pt.hom).obj F) q) := by
+    apply (IsZero.iff_id_eq_zero _).2
+    apply FiniteSplitEtaleHypercover.hypercoverCohomology_limit_hom_ext A F D c hc q
+    intro j a
+    exact (hstage j).eq_of_src _ _
+  exact hlimit.of_iso e.symm
 
 /-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
 form of an elementwise colimit statement for the pullback maps.
