@@ -203,7 +203,7 @@ theorem nonempty_specialization_verdierDual_iso
     (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
       isPullback_deformationSpecialFibre X _ k'⟩ ⟨deformationTotalToBase X _ k', rfl,
         deformationTotalToBase_hom X _ k'⟩
-      (isPullback_deformationModel_ε k' x)) K
+      (isPullback_deformationModel_ε k' x.left.ker)) K
 
 /-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
 `K ⊠ D K` is the universal kernel of the specialization,

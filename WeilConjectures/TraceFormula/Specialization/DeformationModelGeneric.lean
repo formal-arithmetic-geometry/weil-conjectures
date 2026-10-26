@@ -10,15 +10,15 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 
 /-!
 
-# The geometric generic fibre of the deformation to the normal cone of a point
+# The geometric generic fibre of the deformation to the normal cone
 
-Let `x` be a rational point of a `k`-scheme `X` and let `𝒳 = D_x X ×_{𝔸¹_k} Spec k'⟦t⟧` be the
-deformation to the normal cone of `x` over the trait (`ProEtale.CondensedRing.deformationModel`).
-Over the punctured line `𝔾_m ⊆ 𝔸¹_k` the deformation space is `X × 𝔾_m`
-(`Scheme.Hom.isPullback_deformationSpaceGeneric`), and the geometric generic point
-`Spec Ω ⟶ Spec k'⟦t⟧ ⟶ 𝔸¹_k` lands in `𝔾_m`, since `t` is invertible in `Ω`. Hence the geometric
-generic fibre of `𝒳` is the base change `X_Ω = X ×_k Spec Ω` of `X` along `Spec Ω ⟶ Spec k`, with
-`ε : 𝒳_Ω ⟶ X` the first projection
+Let `I` be an ideal sheaf on a `k`-scheme `X` and let `𝒳 = D_I X ×_{𝔸¹_k} Spec k'⟦t⟧` be the
+deformation to the normal cone of `V(I)` over the trait
+(`ProEtale.CondensedRing.deformationModel`). Over the punctured line `𝔾_m ⊆ 𝔸¹_k` the deformation
+space is `X × 𝔾_m` (`IdealSheafData.isPullback_laurentSpecToDeformationSpace`), and the geometric
+generic point `Spec Ω ⟶ Spec k'⟦t⟧ ⟶ 𝔸¹_k` lands in `𝔾_m`, since `t` is invertible in `Ω`. Hence
+the geometric generic fibre of `𝒳` is the base change `X_Ω = X ×_k Spec Ω` of `X` along
+`Spec Ω ⟶ Spec k`, with `ε : 𝒳_Ω ⟶ X` the first projection
 (`ProEtale.CondensedRing.isPullback_deformationModel_ε`).
 
 -/
@@ -63,7 +63,9 @@ lemma traitGenericPointToPuncturedLine_ι :
 
 namespace ProEtale.CondensedRing
 
-variable {k} {X : Over (Spec (.of k))} (x : RationalPoint X)
+open Scheme
+
+variable {k} {X : Over (Spec (.of k))}
 
 /-- The structure morphism `𝒳_Ω ⟶ Spec Ω` of the geometric generic fibre of the deformation to
 the normal cone over the trait. -/
@@ -72,46 +74,39 @@ noncomputable def deformationGenericToPoint (X : Over (Spec (.of k))) (I : X.lef
     deformationGeneric X I k' ⟶ Spec (.of (traitGenericField k')) :=
   pullback.snd _ _
 
-/-- **The geometric generic fibre of the deformation to the normal cone of a point is the base
-change of `X`**: the square formed by `ε : 𝒳_Ω ⟶ X`, the structure morphisms `𝒳_Ω ⟶ Spec Ω` and
-`X ⟶ Spec k`, and `Spec Ω ⟶ Spec k'⟦t⟧ ⟶ Spec k`, is a pullback. -/
-theorem isPullback_deformationModel_ε :
-    IsPullback (deformationModel X x.left.ker k').ε
-      (deformationGenericToPoint X x.left.ker k') X.hom
+/-- Over the punctured line, `D_I X ⟶ X` is the projection `𝔾_{m,X} ⟶ X`. -/
+lemma laurentSpecToDeformationSpace_deformationSpaceProj (I : X.left.IdealSheafData) :
+    I.laurentSpecToDeformationSpace ≫ I.deformationSpaceProj =
+      X.left.laurentSpecToPolynomialSpec ≫ X.left.polynomialSpecProj := by
+  rw [IdealSheafData.laurentSpecToDeformationSpace,
+    AffineZariskiSite.relativeGluingMap_toBase _ _ _ I.toReesPresheaf_comp_reesToLaurent,
+    Scheme.laurentSpecToPolynomialSpec, AffineZariskiSite.relativeGluingMap_toBase _ _ _
+      IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
+
+/-- **The geometric generic fibre of the deformation to the normal cone is the base change of
+`X`**: for any ideal sheaf `I`, the square formed by `ε : 𝒳_Ω ⟶ X`, the structure morphisms
+`𝒳_Ω ⟶ Spec Ω` and `X ⟶ Spec k`, and `Spec Ω ⟶ Spec k'⟦t⟧ ⟶ Spec k`, is a pullback. Over the
+punctured line the deformation space is `𝔾_{m,X}`, and the geometric generic point of the trait
+lies over the punctured line. -/
+theorem isPullback_deformationModel_ε (I : X.left.IdealSheafData) :
+    IsPullback (deformationModel X I k').ε (deformationGenericToPoint X I k') X.hom
       (traitGenericPoint k' ≫ traitToBase k k') := by
-  -- the generic fibre is the pullback of `D_x X ⟶ 𝔸¹_k` along `Spec Ω ⟶ 𝔸¹_k`
-  have h₁ : IsPullback (deformationGenericToTotal X x.left.ker k' ≫
-      deformationTotalToSpace X x.left.ker k')
-      (deformationGenericToPoint X x.left.ker k')
-      (Scheme.Hom.deformationSpaceProj X.hom x.left)
-      (traitGenericPoint k' ≫ traitToAffineLine k k') :=
-    (IsPullback.of_hasPullback _ _).paste_horiz (isPullback_deformationTotal X x.left.ker k')
-  have h₂ := Scheme.Hom.isPullback_deformationSpaceGeneric X.hom x.left
-  -- it factors through the punctured trivialisation `X × 𝔾_m`
-  have h₃ : IsPullback (h₂.lift (deformationGenericToTotal X x.left.ker k' ≫
-      deformationTotalToSpace X x.left.ker k')
-      (deformationGenericToPoint X x.left.ker k' ≫
-        traitGenericPointToPuncturedLine k k') (by
-          simpa using h₁.w))
-      (deformationGenericToPoint X x.left.ker k')
-      (pullback.snd _ _) (traitGenericPointToPuncturedLine k k') := by
-    refine IsPullback.of_right ?_ (h₂.lift_snd _ _ _) h₂
-    rw [h₂.lift_fst, traitGenericPointToPuncturedLine_ι]
-    exact h₁
-  have h₄ := h₃.paste_horiz (IsPullback.of_hasPullback X.hom
-    ((Scheme.Hom.puncturedLine (Spec (.of k))).ι ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘
-      Spec (.of k)))
-  have key : ∀ {a a' : deformationGeneric X x.left.ker k' ⟶ X.left}
-      {b b' : Spec (.of (traitGenericField k')) ⟶ Spec (.of k)}, a = a' → b = b' →
-      IsPullback a (deformationGenericToPoint X x.left.ker k') X.hom b →
-      IsPullback a' (deformationGenericToPoint X x.left.ker k') X.hom b' := by
-    rintro _ _ _ _ rfl rfl h
-    exact h
-  refine key ?_ ?_ h₄
-  · change _ = deformationGenericToTotal X x.left.ker k' ≫ deformationTotalToBase X x.left.ker k'
-    rw [← Scheme.Hom.deformationSpaceGeneric_toBase, h₂.lift_fst_assoc, deformationTotalToBase,
-      Category.assoc]
-  · rw [traitGenericPointToPuncturedLine_ι_assoc, traitToAffineLine_over]
+  have hL : IsPullback I.laurentSpecToDeformationSpace
+      (Scheme.Hom.laurentSpecToPuncturedLine X.hom) (deformationSpaceToAffineLine X I)
+      (Scheme.Hom.puncturedLine _).ι := by
+    have := I.isPullback_laurentSpecToDeformationSpace.paste_vert
+      (Scheme.Hom.isPullback_laurentSpecToPuncturedLine X.hom)
+    rwa [Category.id_comp] at this
+  have hG := (IsPullback.of_hasPullback (deformationTotalToTrait X I k')
+    (traitGenericPoint k')).paste_horiz (isPullback_deformationTotal X I k')
+  rw [← traitGenericPointToPuncturedLine_ι] at hG
+  have h := (IsPullback.of_right' hG hL).paste_horiz (Scheme.Hom.isPullback_laurentSpec X.hom)
+  have e : traitGenericPointToPuncturedLine k k' ≫ (Scheme.Hom.puncturedLine _).ι ≫
+      𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k) = traitGenericPoint k' ≫ traitToBase k k' :=
+    by rw [traitGenericPointToPuncturedLine_ι_assoc, traitToAffineLine_over]
+  rw [e, ← laurentSpecToDeformationSpace_deformationSpaceProj, ← Category.assoc,
+    IsPullback.lift_fst, Category.assoc] at h
+  exact h
 
 end ProEtale.CondensedRing
 

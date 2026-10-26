@@ -247,9 +247,10 @@ generic fibre, as in the blueprint node, and `Ψ_S Rg_*` is the nearby cycles of
 
 This is the node for the morphism `(q, g)` from the model of the geometric generic fibre to the
 trait as a model of its geometric generic point. The version for geometric models
-(`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`) is the same statement for
-`(q, q) : M.geometric ⟶ S.geometric`; the two exchanges differ by `Ψ_S` of the base change
-morphism `Lη̄^* Rq_* ⟶ Rg_* Lj^*`, which is invertible by proper base change for `q`. -/
+(`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`) is the same
+statement for `(q, q) : M.geometric ⟶ S.geometric`; the two exchanges differ by `Ψ_S` of the
+base change morphism `Lη̄^* Rq_* ⟶ Rg_* Lj^*`, which is invertible by proper base change for
+`q`. -/
 theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app
     (h : M.IsTraitModelOver q g) [IsProper q]
     (C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
