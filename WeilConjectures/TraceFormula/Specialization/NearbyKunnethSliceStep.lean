@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
-public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
@@ -21,8 +21,8 @@ finite type, and let `b : 𝒳 ⟶ 𝔸¹_S` be a coordinate of the total space 
 product along `b` is the product over the trait `Spec K⟦t⟧` of the slice `𝒳 ×_{𝔸¹_S} Spec K⟦t⟧` of
 `M` and of the change of trait `𝒴 ×_S Spec K⟦t⟧` of `N`, with total space the slice
 `𝒵 ×_{𝔸¹_S} Spec K⟦t⟧` of `P` (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`); the
-case of a coordinate of `N` is symmetric (`NearbyCyclesModel.sliceFst'`,
-`NearbyCyclesModel.sliceSnd'`).
+case of a coordinate of `N` follows by exchanging the factors, the Künneth map being symmetric
+(`NearbyCyclesModel.isIso_map_kunnethMap_iff_swap`).
 
 The blueprint proof (`sk-prop-tf-nearby-external-kunneth`, "Finite support") identifies the
 restriction of the Künneth map `Π_{A,B}` to the special fibre of the slice of `P` with the
@@ -212,51 +212,13 @@ lemma comp_coordinate_snd :
     (φ₂.total ≫ b) ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = φ₁.total ≫ qM := by
   rw [Category.assoc, hb, hpb.w]
 
-/-- The first projection of the geometric slice of a product along a coordinate `b` of the
-second factor: the slice of `P` along `φ₂ ≫ b` maps to the change of trait of `M`. -/
-noncomputable abbrev sliceFst' :=
-  φ₁.baseChange hM hP (Category.comp_id qM) (Category.comp_id (traitMap k' (sliceField k')))
-    (comp_coordinate_snd hpb hb) (traitSlice_over (sliceCoord k'))
-    (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k') (comp_coordinate_snd hpb hb)
-    (traitSlice_over (sliceCoord k')) rfl
-
-/-- The second projection of the geometric slice of a product along a coordinate `b` of the
-second factor: the slice of `P` along `φ₂ ≫ b` maps to the slice of `N` along `b`. -/
-noncomputable abbrev sliceSnd' :=
-  φ₂.baseChange hN hP hb (traitSlice_over (sliceCoord k')) (comp_coordinate_snd hpb hb)
-    (traitSlice_over (sliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _)
-    hgen.symm
-
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
-
-/-- **The generic-slicing identification for the Künneth map, coordinate of the second factor**
-(blueprint `sk-prop-tf-nearby-external-kunneth`, "Facts about traits" and "Finite support"): the
-analogue of `NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst` for a coordinate
-`b : 𝒴 ⟶ 𝔸¹_S` of `N`, with the geometric slice `NearbyCyclesModel.sliceFst'`,
-`NearbyCyclesModel.sliceSnd'`.
-
-Unfinished, for the same reason as `NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst`:
-the generic-slicing description of nearby cycles (SGA 4½, [Th. finitude], §§3.4, 3.7) and the
-action of inertia on nearby cycles are not formalised. -/
-theorem isIso_map_kunnethMap_of_isIso_sliceSnd'
-    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
-    (h : IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) (sliceFst' hM hpb hP hb)
-      (sliceSnd' hN hpb hP hgen hb) A B)) :
-    IsIso (L((baseChangeSpecialMap hP (φ₂.total ≫ b) (comp_coordinate_snd hpb hb)
-        (traitSlice (sliceCoord k')) (traitSlice_over (sliceCoord k')))^*⟦
-          Profinite.padicAlgClRingObj ℓ⟧).map
-      (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) :=
-  sorry
 
 include hM hN hpb hP hgen in
 /-- **The generic-slicing step, coordinate of the second factor**: the analogue of
-`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst` for a coordinate of `N`. -/
+`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst` for a coordinate of `N`. It is
+that lemma for the product with the two factors exchanged, by the symmetry of the Künneth map
+(`NearbyCyclesModel.isIso_map_kunnethMap_iff_swap`). -/
 theorem isIso_map_kunnethMap_baseChangeSpecialMap_snd {n : ℕ}
     (hIH : KunnethFormula ℓ (sliceField k') n) {m₁ m₂ : ℕ} (hle : m₁ + m₂ ≤ n)
     (h₁ : qM.LocallyEmbedsInAffineSpace m₁)
@@ -272,17 +234,20 @@ theorem isIso_map_kunnethMap_baseChangeSpecialMap_snd {n : ℕ}
         (traitSlice (sliceCoord k')) (traitSlice_over (sliceCoord k')))^*⟦
           Profinite.padicAlgClRingObj ℓ⟧).map
       (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
-  refine isIso_map_kunnethMap_of_isIso_sliceSnd' hM hN hpb hP hgen hb heM heN hA hB ?_
-  have hP'' := IsTraitModelOver.baseChange hP (φ₂.total ≫ b) (comp_coordinate_snd hpb hb)
-    (traitSlice (sliceCoord k')) (traitSlice_over (sliceCoord k'))
-  refine hIH (sliceFst' hM hpb hP hb) (sliceSnd' hN hpb hP hgen hb)
-    (IsTraitModelOver.baseChange hM qM (Category.comp_id qM) _ (Category.comp_id _))
-    (IsTraitModelOver.baseChange hN b hb _ (traitSlice_over (sliceCoord k')))
-    (isPullback_baseChange_product hpb.flip b hb _ (traitSlice_over (sliceCoord k'))).flip
-    (by convert hP'' using 1 <;> simp) (by simp) hle
-    (h₁.of_isPullback (IsPullback.of_hasPullback qM (traitMap k' (sliceField k')))) h₂
-    (eM := pullback.fst _ _ ≫ eM) (by simp [← heM]) (eN := pullback.fst _ _ ≫ eN)
-    (by simp [← heN]) hA hB
+  have hP' : P.IsTraitModelOver (φ₂.total ≫ qN) (φ₂.generic ≫ gN) := by
+    rw [← hpb.w, hgen]
+    exact hP
+  have h := isIso_map_kunnethMap_baseChangeSpecialMap_fst hN hM hpb.flip hP' hgen.symm hb hIH
+    (m₁ := m₂) (m₂ := m₁) (by omega) h₂ h₁ heN heM hB hA
+  have e : baseChangeSpecialMap hP' (φ₂.total ≫ b) (comp_coordinate_fst hb)
+      (traitSlice (sliceCoord k')) (traitSlice_over (sliceCoord k')) =
+      baseChangeSpecialMap hP (φ₂.total ≫ b) (comp_coordinate_snd hpb hb)
+        (traitSlice (sliceCoord k')) (traitSlice_over (sliceCoord k')) := by
+    refine hP.isPullback_i.hom_ext ?_ ?_
+    · simp
+    · simp [baseChangeSpecialMap]
+  rw [e] at h
+  exact (isIso_map_kunnethMap_iff_swap _ _ φ₁ φ₂ A B).1 h
 
 end Snd
 
