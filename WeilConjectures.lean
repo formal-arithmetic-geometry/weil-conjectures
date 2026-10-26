@@ -7499,6 +7499,7 @@ public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.AdicImageTower
 public import WeilConjectures.CategoryTheory.Abelian.AdicTowerStructure
 public import WeilConjectures.CategoryTheory.Abelian.CokernelNSMul
+public import WeilConjectures.CategoryTheory.Abelian.CokernelPowTower
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomComparison
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomInclusion
@@ -8219,9 +8220,12 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.CategoryTheory.ModuleObjects.FreeCokernelPowTower
+public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMapMod
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModIhom
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapModLimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
@@ -8270,6 +8274,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryS
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
+public import WeilConjectures.CategoryTheory.Monoidal.MapIsoUnit
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
@@ -12998,6 +13003,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacGeneric
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicIntCokernelPowTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIdentify
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
@@ -13057,6 +13063,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.S
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UpperStarIsoId
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEtaleBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarMapModLimits
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.WeaklyContractibleSections
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
@@ -13082,6 +13089,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjection
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionIso
+public import WeilConjectures.SixFunctors.ProEtale.SeparableClosureCover
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianNeighbourhood
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianStalk
 public import WeilConjectures.SixFunctors.ProEtale.SupportCohomologyTrianglePullback
@@ -13094,8 +13102,11 @@ public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactModProofIrrel
+public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
+public import WeilConjectures.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
 public import WeilConjectures.Topology.AbelianIntegerExtensionMono
 public import WeilConjectures.Topology.AbelianIntegerExtensionSections
