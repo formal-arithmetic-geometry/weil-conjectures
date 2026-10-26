@@ -56,8 +56,10 @@ extensions by zero of lisse sheaves:
 
 The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally closed immersion
 into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) is `sorry`ed:
-it is
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) is `sorry`ed
+for `n ≥ 1`. For `n = 0` it is proved: `𝔸⁰_S ⟶ S` is an isomorphism, and the nearby cycles of
+the trait itself are computed directly on the pro-étale site
+(`NearbyCyclesModel.preservesBoundedConstructible_traitSelfModel`). For `n ≥ 1` it is
 Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
 `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices, derived completeness and the Milnor sequence
 (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). No blueprint node states this
@@ -313,7 +315,9 @@ preimage `c⁻¹ 𝔸ⁿ_η` of the generic fibre `𝔸ⁿ_η = 𝔸ⁿ_S ×_S D
 cycles `Li^* Rj_* Lj^*` of its extension by zero `v_! L = Rc_* j_{W!} Rc'_* L`, with
 `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded constructible complex on the special
 fibre `𝔸ⁿ_s`. (When `W` misses the generic fibre, these nearby cycles vanish:
-`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`.) -/
+`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`.) The case `n = 0` is
+`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`; the case `n ≥ 1` is
+`sorry`ed. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D : Scheme.{u})
     (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens)
     (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' n) (E : Scheme.{u})
