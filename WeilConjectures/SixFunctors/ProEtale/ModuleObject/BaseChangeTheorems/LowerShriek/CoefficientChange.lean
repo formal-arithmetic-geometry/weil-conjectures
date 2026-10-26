@@ -5,6 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeIntegral
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgClData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeRefinement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
@@ -86,7 +90,7 @@ theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback 
     (boundedConstructibleUpperStarToPadicAlgClIso ℓ E g).hom.app _ ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
         ((boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).hom.app M) ≫
-      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _ :=
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _ := by
   sorry
 
 /-- Compatibility required from `sec-six-functors` (to be proved there): blueprint

@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
 
 /-!
 
@@ -134,7 +135,7 @@ theorem nonempty_etaleReductionTensorIso (K M : Dᵇc(Y.left)⟦Profinite.padicI
     Nonempty ((etaleReduction ℓ E n Y).obj (K ⊗ M) ≅
       ((Etale.derivedTensor (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left).obj
         ((etaleReduction ℓ E n Y).obj K)).obj ((etaleReduction ℓ E n Y).obj M)) :=
-  sorry
+  nonempty_etaleReductionTensorIso_of_components ℓ E n K M
 
 /-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
 `det-prop-scalar-six-ctf`, (3), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale

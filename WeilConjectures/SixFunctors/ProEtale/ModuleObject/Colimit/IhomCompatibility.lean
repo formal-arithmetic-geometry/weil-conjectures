@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibilityFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 
 /-!
@@ -83,7 +84,7 @@ constructible `E`-complexes `A` and `B`, the comparison
 theorem isIso_ihomComparison_constructibleToPadicAlgCl
     (A : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧) :
     IsIso (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A).natTrans :=
-  sorry
+  isIso_ihomComparison_constructibleToPadicAlgCl_of_twoColimit ℓ X E A
 
 /-- **The internal Hom comparison for `𝒪_E ⟶ ℚ̄_ℓ` is an isomorphism** (blueprint
 `det-prop-scalar-six-tensor-hom` (2)): the comparison of the composite extension of scalars
