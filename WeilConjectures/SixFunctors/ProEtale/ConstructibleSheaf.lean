@@ -166,7 +166,9 @@ theorem isConstructible_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
     (isFiniteLocallyConstant_comparisonUpperStar_obj _)
 
 variable (Λ) in
-/-- Blueprint `lem-sf-proetale-constructible-origin`: Constructible pro-étale coefficients are
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
+blueprint `lem-sf-proetale-constructible-origin`.
+Blueprint `lem-sf-proetale-constructible-origin`: Constructible pro-étale coefficients are
 of étale origin, clause (i).
 
 At a finite coefficient ring `Λ`, the comparison pullback `ν^*` induces an equivalence between

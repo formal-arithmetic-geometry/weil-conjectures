@@ -195,7 +195,9 @@ variable {Z Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y) [IsProper g.left]
 
-/-- Blueprint `lem-coef-rational-operations` (the constructible adjunction `Rf_{!,E} ⊣ Rf_E^!`,
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `sk-def-sfb-dc-upper-shriek`.
+Blueprint `lem-coef-rational-operations` (the constructible adjunction `Rf_{!,E} ⊣ Rf_E^!`,
 for a proper morphism `g`, where `Rg_! = Rg_*`; this is the module-object proper-adjoint input of
 blueprint `pur713-def-upper-shriek-module`). For a proper morphism `g : Z ⟶ Y` and a finite
 extension `E` of `ℚ_ℓ`, the derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded
@@ -206,7 +208,9 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g).IsLeftAdjoint :=
   sorry
 
-/-- Blueprint `prop-coef-integral-exceptional-adjoint` (the integral `Rf_!` on constructible
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `sk-def-sfb-dc-upper-shriek`.
+Blueprint `prop-coef-integral-exceptional-adjoint` (the integral `Rf_!` on constructible
 complexes has a right adjoint, for a proper morphism `g`, where `Rg_! = Rg_*`; this is the
 module-object proper-adjoint input of blueprint `pur713-def-upper-shriek-module`). For a proper
 morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
@@ -218,7 +222,9 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).IsLeftAdjoint :=
   sorry
 
-/-- Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `sk-def-sfb-dc-upper-shriek`.
+Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
 stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper morphism
 `g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image

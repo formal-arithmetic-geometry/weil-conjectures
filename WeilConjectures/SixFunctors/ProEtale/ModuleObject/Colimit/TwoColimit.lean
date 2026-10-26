@@ -160,7 +160,9 @@ noncomputable abbrev PadicSubfieldConstructible (E : FiniteIntermediateField ℓ
 noncomputable abbrev PadicAlgClConstructible : Type _ :=
   BoundedConstructible (padicAlgClRingObj X ℓ)
 
-/-- Extension of scalars along `E_X ⟶ F_X` preserves bounded constructible complexes. See the
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-extend-subfield-constructible`.
+Extension of scalars along `E_X ⟶ F_X` preserves bounded constructible complexes. See the
 module docstring. -/
 lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F)
@@ -170,7 +172,9 @@ lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteInterme
       ((derivedExtendScalarsSubfield X ℓ h).obj K) :=
   sorry
 
-/-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes. See the
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-extend-to-qlbar-constructible`.
+Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes. See the
 module docstring. -/
 lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
@@ -231,20 +235,26 @@ section TwoColimit
 
 variable [TopologicalSpace.NoetherianSpace X]
 
-/-- **(Obj)**: every bounded constructible `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-constructible-cocone-obj`.
+**(Obj)**: every bounded constructible `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
 scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/
 theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj :=
   sorry
 
-/-- **(Hom), surjectivity**: every morphism `T^X_{E,Ω} K_E ⟶ T^X_{F,Ω} L_F` between extensions of
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-constructible-cocone-hom-surj`.
+**(Hom), surjectivity**: every morphism `T^X_{E,Ω} K_E ⟶ T^X_{F,Ω} L_F` between extensions of
 scalars of bounded constructible complexes is the extension of scalars of a morphism
 `T^X_{E,H} K_E ⟶ T^X_{F,H} L_F` for some finite subextension `H ⊇ E, F`. See the module
 docstring. -/
 theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj :=
   sorry
 
-/-- **(Hom), injectivity**: two morphisms of bounded constructible `H_X`-complexes with the same
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-constructible-cocone-hom-inj`.
+**(Hom), injectivity**: two morphisms of bounded constructible `H_X`-complexes with the same
 extension of scalars to `ℚ̄_ℓ,X` have the same extension of scalars to `H'_X` for some finite
 subextension `H' ⊇ H`. See the module docstring. -/
 theorem constructibleCocone_homInj : (constructibleCocone X ℓ).HomInj :=

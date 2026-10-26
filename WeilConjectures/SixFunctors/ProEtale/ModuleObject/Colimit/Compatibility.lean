@@ -140,7 +140,9 @@ section Flat
 
 variable (X : Scheme.{u})
 
-/-- **(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
+blueprint `lem-sfb-subfield-flat`.
+**(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
 exact: `F_X` is finite free, in particular flat, over `E_X`. See the module docstring. -/
 instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
     {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
@@ -148,7 +150,9 @@ instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
       (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
   sorry
 
-/-- **(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-qlbar-flat`.
+**(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
 exact: `ℚ̄_ℓ,X` is flat over `E_X`, being a filtered colimit of finite free `E_X`-modules. See
 the module docstring. -/
 instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
@@ -165,14 +169,18 @@ section Push
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- **(Push)** is an isomorphism for a finite extension `F/E`, on all unbounded objects: `F_X`
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `det-prop-scalar-six-direct-image`.
+**(Push)** is an isomorphism for a finite extension `F/E`, on all unbounded objects: `F_X`
 is finite free over `E_X`, so both sides are finite direct sums of copies of `Rf_*^E`. See the
 module docstring. -/
 instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
   sorry
 
-/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `det-prop-scalar-six-direct-image`.
+**(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
 then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
 extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
 instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]

@@ -193,7 +193,9 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-/-- The derived pushforward `Rf_*` on module objects over a coefficient ring `Λ` of Deligne's
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `sk-def-sfb-dc-restricted-functors`.
+The derived pushforward `Rf_*` on module objects over a coefficient ring `Λ` of Deligne's
 finiteness theorems preserves bounded constructible complexes (part of blueprint
 `sk-def-sfb-dc-restricted-functors`). For a general `Λ` this is false:
 for the constant discrete ring `𝔽_p` and the affine line over an algebraically closed field of

@@ -100,7 +100,9 @@ open scoped CategoryTheory.Obj in
 -- The prime `ℓ` occurs only in the hypothesis `IsFinitenessCoefficient ℓ Λ`; it is found from
 -- that instance, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`: for the coefficient rings `Λ_X` of
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
+blueprint `prop-sfb-bounded-constructible-triangulated`.
+Blueprint `prop-sfb-bounded-constructible-triangulated`: for the coefficient rings `Λ_X` of
 Deligne's finiteness theorems (`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` or a finite `ℓ`-power torsion ring), the
 bounded constructible complexes on a topologically noetherian scheme form a triangulated
 subcategory. -/
