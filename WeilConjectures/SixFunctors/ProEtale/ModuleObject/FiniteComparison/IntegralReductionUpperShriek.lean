@@ -161,7 +161,7 @@ lemma boundedConstructibleδCompatible (hδ : IntegersModPowPullδCompatible ℓ
           ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ p).obj M) := by
     have := ObjectProperty.ι_map_lift_commShiftIso_hom_app _
       ((boundedConstructible _).ι ⋙ L((p.left)^*⟦Profinite.padicIntegersRingObj ℓ E⟧))
-      (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K.obj K.property) (1 : ℤ) M
+      (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K) (1 : ℤ) M
     rw [Functor.commShiftIso_comp_hom_app] at this
     exact this
   have e₂ : ((boundedConstructibleIntegersModPowRestriction hX).map
@@ -196,18 +196,19 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarIntegersModPowReduction [Is
     (hδ : IntegersModPowPullδCompatible ℓ E n p.left)
     {H' : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧ ⥤
       Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧}
-    (adjH' : boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p ⊣ H')
-    (γ : boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ p ⋙
+    (adjH' : IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⊣ H')
+    (γ : PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E p ⋙
         boundedConstructibleIntegersModPowReduction Y.left ℓ E n ≅
       boundedConstructibleIntegersModPowReduction X.left ℓ E n ⋙
-        boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p)
+        IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p)
     (hγ : γ.hom = boundedConstructibleLowerStarIntegersModPowReduction ℓ E n p) :
-    IsIso (mateEquiv ((boundedConstructibleUpperShriekAdjunction _ ℓ p).ofNatIsoLeft
+    IsIso (mateEquiv
+      ((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p).ofNatIsoLeft
         (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E p)) adjH' γ.inv) :=
   isIso_mateEquiv_mateEquiv_of_reductionTriangle' (boundedConstructibleIntegersModPowAdjunction hY)
     (boundedConstructibleIntegersModPowAdjunction hX)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
+    (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n p)
     (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n p)
     (boundedConstructibleRestrictionUpperStarIso hX hY p)
     (boundedConstructibleIntegersModPowReductionδ hY)

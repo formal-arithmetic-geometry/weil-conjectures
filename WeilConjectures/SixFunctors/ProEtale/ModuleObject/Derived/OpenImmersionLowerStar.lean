@@ -20,7 +20,9 @@ the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism
 (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion`).
 Indeed `Lj^* ≅ D(j^*)` sits in an adjoint triple `D(j_!) ⊣ D(j^*) ⊣ Rj_*`, and the unit of the
 first adjunction is invertible because `j_!` is fully faithful on module objects. The same holds
-on bounded constructible complexes
+on bounded constructible complexes, for every restriction of `Rj_*` to them
+(`isIso_counit_of_isOpenImmersion_of_lowerStarCompatibility`), in particular for the `ℓ`-adic
+coefficient rings
 (`isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion`).
 
 -/
@@ -31,7 +33,7 @@ universe u
 
 open CategoryTheory Limits
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -61,25 +63,57 @@ instance isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion {U 
 
 section BoundedConstructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
-
-/-- For an open immersion `j`, the derived pushforward `Rj_*` is fully faithful on bounded
-constructible complexes: the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism. -/
-instance isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion
-    [IsFinitenessCoefficient ℓ Λ] {U X : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    (j : U ⟶ X) [IsOpenImmersion j.left] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ j).counit := by
-  have hR := (derivedUpperStarLowerStarAdjunction Λ j.left).fullyFaithfulROfIsIsoCounit
-  have h : (boundedConstructibleLowerStar Λ ℓ j ⋙ (boundedConstructible _).ι).FullyFaithful :=
-    ((ObjectProperty.fullyFaithfulι _).comp hR).ofIso
-      (boundedConstructibleLowerStarCompatibility Λ ℓ j).symm
+/-- For an open immersion `j`, every restriction `F : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` of the derived
+pushforward `Rj_*` is fully faithful: the counit of an adjunction `G ⊣ F` is an isomorphism. -/
+lemma isIso_counit_of_isOpenImmersion_of_lowerStarCompatibility {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] {G : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(U)⟦Λ⟧} {F : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧} (adj : G ⊣ F)
+    (e : F ⋙ (boundedConstructible _).ι ≅ (boundedConstructible _).ι ⋙ R((j)_*⟦Λ⟧)) :
+    IsIso adj.counit := by
+  have hR := (derivedUpperStarLowerStarAdjunction Λ j).fullyFaithfulROfIsIsoCounit
+  have h : (F ⋙ (boundedConstructible _).ι).FullyFaithful :=
+    ((ObjectProperty.fullyFaithfulι _).comp hR).ofIso e.symm
   have h' := h.ofCompFaithful
   have := h'.full
   have := h'.faithful
-  exact (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ j).counit_isIso_of_R_fully_faithful
+  exact adj.counit_isIso_of_R_fully_faithful
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {U X : Over (Spec (.of k))}
+  [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  (j : U ⟶ X) [IsOpenImmersion j.left]
+
+/-- For an open immersion `j`, the derived pushforward `Rj_*` is fully faithful on bounded
+constructible complexes: the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism (`ℚ̄_ℓ`-coefficient). -/
+instance isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion :
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ j).counit :=
+  isIso_counit_of_isOpenImmersion_of_lowerStarCompatibility _ j.left _
+    (boundedConstructibleLowerStarCompatibility ℓ j)
+
+namespace ContinuousMapRingObj
+
+/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` on bounded constructible complexes is
+an isomorphism (`E`-coefficient). -/
+instance isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ E j).counit :=
+  isIso_counit_of_isOpenImmersion_of_lowerStarCompatibility _ j.left _
+    (boundedConstructibleLowerStarCompatibility ℓ E j)
+
+end ContinuousMapRingObj
+
+namespace PadicIntegersRingObj
+
+/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` on bounded constructible complexes is
+an isomorphism (`𝒪_E`-coefficient). -/
+instance isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ E j).counit :=
+  isIso_counit_of_isOpenImmersion_of_lowerStarCompatibility _ j.left _
+    (boundedConstructibleLowerStarCompatibility ℓ E j)
+
+end PadicIntegersRingObj
 
 end BoundedConstructible
 

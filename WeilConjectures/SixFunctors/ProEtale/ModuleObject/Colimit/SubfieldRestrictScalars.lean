@@ -277,10 +277,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {E F : FiniteIntermediateField ℓ} (h : E
 constructible complexes: `Rg_*^F ⋙ D(Res_Y) ≅ D(Res_Z) ⋙ Rg_*^E`, the restriction of
 `ProEtale.CondensedRing.derivedComapLowerStarIso` along the fully faithful inclusions. -/
 noncomputable def boundedConstructibleLowerStarRestrictScalarsSubfieldIso :
-    boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g ⋙
         boundedConstructibleRestrictScalarsSubfield Y.left ℓ h ≅
       boundedConstructibleRestrictScalarsSubfield Z.left ℓ h ⋙
-        boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g :=
+        ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g :=
   NatIso.ofComponents
     (fun K ↦ ObjectProperty.isoMk _
       ((derivedComapLowerStarIso (Profinite.padicSubfieldRingObjMap ℓ h) g.left).app K.obj))
@@ -301,10 +301,10 @@ canonical comparison `Rg_*^E ⋙ T_Y ⟶ T_Z ⋙ Rg_*^F`, the mate of
 `boundedConstructibleLowerStarRestrictScalarsSubfieldIso` along the adjunctions
 `T ⊣ D(Res)`. -/
 noncomputable def boundedConstructibleLowerStarExtendScalarsSubfield :
-    boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g ⋙
+    ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g ⋙
         boundedConstructibleExtendScalarsSubfield Y.left ℓ h ⟶
       boundedConstructibleExtendScalarsSubfield Z.left ℓ h ⋙
-        boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g :=
+        ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g :=
   Adjunction.pushHomOfComapIso
     (boundedConstructibleExtendRestrictScalarsSubfieldAdjunction Z.left ℓ h)
     (boundedConstructibleExtendRestrictScalarsSubfieldAdjunction Y.left ℓ h)
@@ -324,12 +324,12 @@ lemma boundedConstructibleLowerStarExtendScalarsSubfield_app_hom
     (Mod.derivedExtendMapDerivedCategoryAdjunction (padicSubfieldRingObjMap Z.left ℓ h))
     (Mod.derivedExtendMapDerivedCategoryAdjunction (padicSubfieldRingObjMap Y.left ℓ h))
     (derivedComapLowerStarIso (Profinite.padicSubfieldRingObjMap ℓ h) g.left)
-    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj Z.left ℓ h K.obj K.property)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj Z.left ℓ h K)
     (fun K ↦ boundedConstructible_restrictScalarsSubfield_obj Z.left ℓ h K.obj K.property)
-    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj Y.left ℓ h K.obj K.property)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj Y.left ℓ h K)
     (fun K ↦ boundedConstructible_restrictScalarsSubfield_obj Y.left ℓ h K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ g K.obj K.property)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ g K.obj K.property)
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E g K)
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ F g K)
     (boundedConstructibleLowerStarRestrictScalarsSubfieldIso ℓ h g)
     (boundedConstructibleLowerStarRestrictScalarsSubfieldIso_hom_app_hom ℓ h g) K
   unfold boundedConstructibleLowerStarExtendScalarsSubfield
@@ -337,7 +337,7 @@ lemma boundedConstructibleLowerStarExtendScalarsSubfield_app_hom
     boundedConstructibleExtendScalarsSubfieldCompatibility
     boundedConstructibleRestrictScalarsSubfieldCompatibility
     boundedConstructibleExtendScalarsSubfield constructibleExtendScalars
-    boundedConstructibleRestrictScalarsSubfield boundedConstructibleLowerStar
+    boundedConstructibleRestrictScalarsSubfield ContinuousMapRingObj.boundedConstructibleLowerStar
     derivedPushHom
   with_reducible_and_instances exact H
 

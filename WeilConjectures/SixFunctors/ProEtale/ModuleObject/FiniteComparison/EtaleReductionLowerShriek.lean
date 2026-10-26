@@ -31,7 +31,7 @@ by chaining the following isomorphisms, with `Rd_! ≅ Rd_*` on both sides (`d` 
 * reduction modulo `ℓⁿ` commutes with `Rd_*` for a closed immersion
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarIntegersModPowReductionIso`);
 * the inclusion of bounded constructible complexes commutes with `Rd_*`
-  (`ProEtale.CondensedRing.boundedConstructibleLowerStarCompatibility`);
+  (`ProEtale.CondensedRing.IntegersModPowRingObj.boundedConstructibleLowerStarCompatibility`);
 * the finite-coefficient comparison commutes with `Rd_*`
   (`ProEtale.finiteCoefficientDerivedLowerStarIso`);
 * `Rν_*` commutes with `Rd_*` (`ProEtale.rightDerivedLowerStarCompComparisonLowerStarIso`);
@@ -72,11 +72,12 @@ independence of the compactification, `Rf_!` is `Rf_!^c` for the trivial compact
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicIntegers (f : Z ⟶ Y)
     [IsProper f.left] :
-    boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f ≅
-      boundedConstructibleLowerStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f :=
+    PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ≅
+      PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E f :=
   boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers ℓ E
       (compactificationOverField f) (.ofIsProper f.left) ≪≫
-    boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f
+    (Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso
+      (Profinite.padicIntegersRingObj ℓ E) ℓ f) _ ≪≫ Functor.leftUnitor _)
 
 /-- **Reduction modulo `ℓⁿ`, read on the étale site, commutes with `Rd_*` for a closed
 immersion `d`**: `Rd_* ⋙ red_Y ≅ red_Z ⋙ Rd_*`, where `red = etaleReduction`. It chains the
@@ -88,7 +89,7 @@ constructible complexes, with the finite-coefficient comparison
 @[no_expose]
 noncomputable def etaleReductionLowerStarIsoOfIsClosedImmersion (d : Z ⟶ Y)
     [IsClosedImmersion d.left] :
-    boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E d ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         R(Etale.lowerStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left) :=
@@ -99,8 +100,7 @@ noncomputable def etaleReductionLowerStarIsoOfIsClosedImmersion (d : Z ⟶ Y)
     Functor.isoWhiskerLeft _
       ((Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerRight
-          (boundedConstructibleLowerStarCompatibility
-            (Profinite.integersModPowRingObj ℓ E n) ℓ d) _ ≪≫
+          (IntegersModPowRingObj.boundedConstructibleLowerStarCompatibility ℓ E n d) _ ≪≫
         Functor.associator _ _ _ ≪≫
         Functor.isoWhiskerLeft _
           ((Functor.associator _ _ _).symm ≪≫
@@ -124,7 +124,7 @@ shrieks are identified with `Rd_*` (`d` is proper:
 @[no_expose]
 noncomputable def etaleReductionLowerShriekIsoOfIsClosedImmersion (d : Z ⟶ Y)
     [IsClosedImmersion d.left] :
-    boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E d ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))

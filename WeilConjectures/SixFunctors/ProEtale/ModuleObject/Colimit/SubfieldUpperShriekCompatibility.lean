@@ -53,12 +53,12 @@ mate `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_F` of the inverse of (Push) under the adju
 theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsProper g.left] :
     IsIso (mateEquiv
       (Adjunction.ofIsLeftAdjoint
-        (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g))
+        (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g))
       (Adjunction.ofIsLeftAdjoint
-        (boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g))
+        (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g))
       (TwoSquare.mk (boundedConstructibleExtendScalarsSubfield Z.left ℓ h)
-        (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g)
-        (boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g)
+        (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g)
+        (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g)
         (boundedConstructibleExtendScalarsSubfield Y.left ℓ h)
         (inv (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g)))).natTrans := by
   have := noetherianSpace_left_of_over Z
@@ -67,7 +67,7 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
   obtain ⟨d, hex⟩ := hex
   obtain ⟨b, hb⟩ := hex
   have := (Adjunction.ofIsLeftAdjoint
-    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g)).right_adjoint_additive
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g)).right_adjoint_additive
   have hμ (i : Fin d) (K : Dᵇc(Z.left)⟦Profinite.continuousMapRingObj F⟧) :=
     boundedConstructibleLowerStar_map_smul_id ℓ F g (b i) K
   have hZ (K : Dᵇc(Z.left)⟦Profinite.continuousMapRingObj E⟧) := hb Z.left K
@@ -76,9 +76,9 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
     (boundedConstructibleExtendRestrictScalarsSubfieldAdjunction Z.left ℓ h)
     (boundedConstructibleExtendRestrictScalarsSubfieldAdjunction Y.left ℓ h)
     (Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g))
+      (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g))
     (Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g))
+      (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g))
     (boundedConstructibleLowerStarRestrictScalarsSubfieldIso ℓ h g)
     (TwoSquare.mk _ _ _ _ (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g))
     (Equiv.apply_symm_apply _ _)

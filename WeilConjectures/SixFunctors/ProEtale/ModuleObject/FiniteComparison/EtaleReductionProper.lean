@@ -55,11 +55,11 @@ def HasEtaleReductionLowerShriekIso {Z Y : Over (Spec (.of k))} [LocallyOfFinite
     [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] (f : Z ⟶ Y) : Prop :=
   have := HasCompactification.of_over f
-  ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+  ∃ γ : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
       etaleReduction ℓ E n Y ≅
     etaleReduction ℓ E n Z ⋙
       Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,
-    IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+    IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
       (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv))
 
 variable {X Y S : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -101,11 +101,11 @@ theorem HasEtaleReductionLowerShriekIso.comp {f : X ⟶ Y} {g : Y ⟶ S}
     exact ((sqf.vComp sqg).whiskerLeft c.inv).isIso_whiskerRight e'.hom
   refine ⟨(asIso sq.natTrans).symm, ?_⟩
   exact isIso_mateEquiv_vComp_whiskerLeft_whiskerRight
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (Etale.rightDerivedUpperShriekAdjunction _ f.left)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ g)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E g)
     (Etale.rightDerivedUpperShriekAdjunction _ g.left)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (f ≫ g))
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E (f ≫ g))
     (Etale.rightDerivedUpperShriekAdjunction _ (f ≫ g).left)
     (boundedConstructibleLowerShriekComp_padicIntegers ℓ E f g) e' _ _
 

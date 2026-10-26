@@ -41,11 +41,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 `γ` whose transpose under `Rf_! ⊣ Rf^!` is an isomorphism. -/
 theorem exists_etaleReductionLowerShriekIso_of_isClosedImmersion (f : Z ⟶ Y)
     [IsClosedImmersion f.left] :
-    ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+    ∃ γ : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,
-      IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+      IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
         (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv)) :=
   ⟨etaleReductionLowerShriekIsoOfIsClosedImmersion ℓ E n f,
     isIso_mateEquiv_etaleReduction_of_isClosedImmersion ℓ E n f _⟩

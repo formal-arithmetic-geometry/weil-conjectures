@@ -64,13 +64,13 @@ compatibility of the inclusion of bounded constructible complexes, of the finite
 comparison `Φ` (`ProEtale.finiteCoefficientDerivedLowerStarIso`) and of `Rν_*`
 (`ProEtale.rightDerivedLowerStarCompComparisonLowerStarIso`) with `Rp_*`. -/
 noncomputable def finiteEtaleReadingLowerStarIso (p : X ⟶ Y) :
-    boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p ⋙
+    IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⋙
         finiteEtaleReading ℓ E n Y ≅
       finiteEtaleReading ℓ E n X ⋙
         R(Etale.lowerStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left) :=
   (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
-      (boundedConstructibleLowerStarCompatibility (Profinite.integersModPowRingObj ℓ E n) ℓ p) _ ≪≫
+      (IntegersModPowRingObj.boundedConstructibleLowerStarCompatibility ℓ E n p) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _
       ((Functor.associator _ _ _).symm ≪≫
@@ -88,7 +88,7 @@ noncomputable def finiteEtaleReadingLowerStarIso (p : X ⟶ Y) :
 (`Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
 noncomputable def finiteEtaleReadingLowerShriekIso (p : X ⟶ Y) [IsProper p.left] :
     have := HasCompactification.of_over p
-    boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p ⋙
+    IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⋙
         finiteEtaleReading ℓ E n Y ≅
       finiteEtaleReading ℓ E n X ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
@@ -153,7 +153,7 @@ theorem hasEtaleReadingUpperShriekComparison_of_essImage (p : X ⟶ Y) [IsProper
     (hX : EtaleOriginReading ℓ E n X) (hY : EtaleOriginReading ℓ E n Y)
     (hp : ∀ M : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧,
       (finiteEtaleReading ℓ E n X).essImage
-        ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
+        ((Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n)
           p.left).obj
             ((finiteEtaleReading ℓ E n Y).obj M))) :
     HasEtaleReadingUpperShriekComparison ℓ E n p := by
@@ -164,20 +164,20 @@ theorem hasEtaleReadingUpperShriekComparison_of_essImage (p : X ⟶ Y) [IsProper
   have := hρX.faithful
   let H' := Functor.essImage.liftFunctor
     (finiteEtaleReading ℓ E n Y ⋙
-      Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left)
+      Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n) p.left)
     (finiteEtaleReading ℓ E n X) hp
   let comm2 := (Functor.essImage.liftFunctorCompIso
     (finiteEtaleReading ℓ E n Y ⋙
-      Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left)
+      Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n) p.left)
     (finiteEtaleReading ℓ E n X) hp).symm
   let γ := finiteEtaleReadingLowerShriekIso ℓ E n p
   let adjH' := (Etale.rightDerivedUpperShriekAdjunction
-    (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left).restrictFullyFaithful hρX hρY
+    (integersModPowCoeff.{u} ℓ E n) p.left).restrictFullyFaithful hρX hρY
       γ.symm comm2
   refine ⟨H', adjH', γ, ?_⟩
   have h := mateEquiv_restrictFullyFaithful
     (Etale.rightDerivedUpperShriekAdjunction
-      (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left) hρX hρY γ.symm comm2
+      (integersModPowCoeff.{u} ℓ E n) p.left) hρX hρY γ.symm comm2
   rw [Iso.symm_hom] at h
   rw [h]
   exact inferInstanceAs (IsIso comm2.inv)
@@ -223,7 +223,7 @@ lemma essImage_finiteEtaleReading_rightDerivedUpperShriek (p : X ⟶ Y)
     (hX : BoundedConstructibleOfEtale ℓ E n X)
     (M : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     (finiteEtaleReading ℓ E n X).essImage
-      ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
+      ((Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n)
         p.left).obj ((finiteEtaleReading ℓ E n Y).obj M)) := by
   obtain ⟨M₀, hM₀, ⟨e⟩⟩ := hY M
   have := isIso_derivedComparisonAdjunction_unit_app _ Y.left M₀ hM₀.1.1
@@ -235,7 +235,7 @@ lemma essImage_finiteEtaleReading_rightDerivedUpperShriek (p : X ⟶ Y)
   obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hM₀.1
   have hN := ((hD dY (hdY k (𝟙 _) (𝟙 _) Y.hom (IsPullback.id_horiz Y.hom))).1 a b M₀
     ⟨hM₀, ha, hb⟩).1
-  let N := (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
+  let N := (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n)
     p.left).obj M₀
   have := isIso_derivedComparisonAdjunction_unit_app _ X.left N hN.1.1
   refine ⟨⟨_, hX N hN⟩, ⟨?_⟩⟩

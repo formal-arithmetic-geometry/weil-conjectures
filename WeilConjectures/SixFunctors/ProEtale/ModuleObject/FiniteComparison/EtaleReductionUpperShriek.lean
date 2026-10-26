@@ -103,25 +103,27 @@ theorem exists_distTriang_boundedConstructibleUpperShriekAdjunction_counit (d : 
     [IsClosedImmersion d.left]
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     ∃ w, Triangle.mk
-      ((boundedConstructibleUpperShriekAdjunction (Profinite.padicIntegersRingObj ℓ E) ℓ
-        d).counit.app K)
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) ℓ
+      ((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d).counit.app K)
+      ((PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E
         (overOpenComplement d)).unit.app K) w ∈ distTriang _ := by
   let e := boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E d
   have hdj := isCompl_range_overOpenComplement d
-  let adjd := boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.padicIntegersRingObj ℓ E) ℓ d
+  let adjd := PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E d
+  have := isIso_counit_of_isClosedImmersion_of_lowerStarCompatibility _ d.left adjd
+    (PadicIntegersRingObj.boundedConstructibleLowerStarCompatibility ℓ E d)
   refine Recollement.exists_distTriang_counit_unit
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (overOpenComplement d))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ d)
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E
+      (overOpenComplement d))
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d)
     (adjd.fullyFaithfulROfIsIsoCounit.ofIso e.symm) (fun M ↦ ?_) (fun L hL ↦ ?_) K
-  · exact (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ (overOpenComplement d) d
-      hdj.disjoint.symm M).of_iso ((boundedConstructibleUpperStar _ ℓ _).mapIso (e.app M))
+  · exact (isZero_boundedConstructibleUpperStar_obj_of_upperStarAdjunction _ ℓ
+      (overOpenComplement d) d adjd hdj.disjoint.symm M).of_iso
+      ((boundedConstructibleUpperStar _ ℓ _).mapIso (e.app M))
   · have : IsIso (adjd.unit.app L) := by
       refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl _ ℓ d
         (overOpenComplement d) hdj _ ?_ (adjd.isIso_map_unit_app_of_isIso_counit L)
-      exact ⟨0, hL.eq_of_src _ _, (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ
-        (overOpenComplement d) d hdj.disjoint.symm _).eq_of_src _ _⟩
+      exact ⟨0, hL.eq_of_src _ _, (isZero_boundedConstructibleUpperStar_obj_of_upperStarAdjunction
+        _ ℓ (overOpenComplement d) d adjd hdj.disjoint.symm _).eq_of_src _ _⟩
     exact ⟨_, ⟨e.app _ ≪≫ (asIso (adjd.unit.app L)).symm⟩⟩
 
 end Triangle
@@ -229,22 +231,24 @@ the shifts of `Rd_! B`, so composition with `red_Y (ε_K)` is bijective on morph
 theorem isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit (d : Z ⟶ Y)
     [IsClosedImmersion d.left]
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    IsIso ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
-      d.left).map ((etaleReduction ℓ E n Y).map
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ d).counit.app K))) := by
+    IsIso ((Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n) d.left).map
+      ((etaleReduction ℓ E n Y).map
+        ((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d).counit.app
+          K))) := by
   obtain ⟨w, hT⟩ := exists_distTriang_boundedConstructibleUpperShriekAdjunction_counit ℓ E d K
   have hT' := ((boundedConstructible _).ι ⋙ derivedEtaleReduction ℓ E n Y.left).map_distinguished
     _ hT
   have hN := ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E)
     (overOpenComplement d).left).isIso_unit_app_iff_of_iso_obj
-      ((boundedConstructibleLowerStarCompatibility _ ℓ (overOpenComplement d)).app
+      ((PadicIntegersRingObj.boundedConstructibleLowerStarCompatibility ℓ E
+        (overOpenComplement d)).app
         ((boundedConstructibleUpperStar _ ℓ (overOpenComplement d)).obj K)).symm).2
       ((derivedUpperStarLowerStarAdjunction _
         (overOpenComplement d).left).isIso_unit_app_obj_of_isIso_counit_app _)
   have h := (NatIso.isIso_map_iff (Functor.isoWhiskerRight
     (etaleReductionIsoDerivedEtaleReduction ℓ E n Y)
-    (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left))
-    ((boundedConstructibleUpperShriekAdjunction _ ℓ d).counit.app K)).2
+    (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n) d.left))
+    ((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d).counit.app K)).2
   refine h ((Etale.rightDerivedUpperShriekAdjunction _ d.left).isIso_map_of_bijective_comp _
     fun B ↦ bijective_comp_mor₁_of_subsingleton_shift hT' _ ?_ ?_)
   · have := subsingleton_hom_shift_rightDerivedLowerShriek_derivedEtaleReduction_obj ℓ E n d B _
@@ -262,21 +266,22 @@ immersion `d`**: for *any* isomorphism `γ : Rd_! ⋙ red_Y ≅ red_Z ⋙ Rd_!`,
 `Rd^! red_Y (ε_K)` (`isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit`). -/
 theorem isIso_mateEquiv_etaleReduction_of_isClosedImmersion (d : Z ⟶ Y)
     [IsClosedImmersion d.left]
-    (γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
+    (γ : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E d ⋙
         etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left) :
-    IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ d)
+    IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d)
       (Etale.rightDerivedUpperShriekAdjunction _ d.left) (TwoSquare.mk _ _ _ _ γ.inv)) := by
   have (Q : DerivedCategory (Sheaf Z.left.smallEtaleTopology
       (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)))) :=
     Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app _ d.left Q
   have : IsIso (Etale.rightDerivedUpperShriekAdjunction
-      (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left).unit :=
+      (integersModPowCoeff.{u} ℓ E n) d.left).unit :=
     NatIso.isIso_of_isIso_app _
   have : IsIso (TwoSquare.mk _ _ _ _ γ.inv).natTrans := inferInstanceAs (IsIso γ.inv)
   have (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :=
-    isIso_mateEquiv_app_of_isIso_map_counit (boundedConstructibleUpperShriekAdjunction _ ℓ d)
+    isIso_mateEquiv_app_of_isIso_map_counit
+      (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d)
       (Etale.rightDerivedUpperShriekAdjunction _ d.left) (TwoSquare.mk _ _ _ _ γ.inv) K
       (isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit ℓ E n d K)
   exact NatIso.isIso_of_isIso_app _

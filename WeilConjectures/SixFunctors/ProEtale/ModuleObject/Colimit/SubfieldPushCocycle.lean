@@ -116,6 +116,8 @@ lemma boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom
     boundedConstructibleToPadicAlgCl, constructibleToPadicAlgCl, boundedConstructibleLowerStar,
     Functor.whiskeringRight_obj_obj, boundedConstructibleToPadicAlgClCompatibility,
     ObjectProperty.liftCompιIso, boundedConstructibleLowerStarCompatibility,
+    ContinuousMapRingObj.boundedConstructibleLowerStar,
+    ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility,
     Functor.FullyFaithful.preimageIso_hom, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom,
     Iso.symm_hom, Functor.isoWhiskerRight_hom, asIso_hom, Iso.refl_inv,
     Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, ObjectProperty.ι_obj,
@@ -204,21 +206,21 @@ theorem boundedConstructibleLowerStarToPadicAlgClIso_hom_app_eq
     (X : Dᵇc(Z.left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleLowerStarToPadicAlgClIso ℓ E g).hom.app X =
       ((boundedConstructibleCocone Y.left ℓ).iso h).inv.app
-          ((boundedConstructibleLowerStar _ ℓ g).obj X) ≫
+          ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).obj X) ≫
         (boundedConstructibleToPadicAlgCl Y.left ℓ F).map
           ((asIso (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g)).hom.app X) ≫
         (boundedConstructibleLowerStarToPadicAlgClIso ℓ F g).hom.app
           ((boundedConstructibleExtendScalarsSubfield Z.left ℓ h).obj X) ≫
-        (boundedConstructibleLowerStar _ ℓ g).map
+        (boundedConstructibleLowerStar ℓ g).map
           (((boundedConstructibleCocone Z.left ℓ).iso h).hom.app X) := by
   have h₁ := boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom ℓ E g X
   have h₂ := derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app ℓ h g.left X.obj
   have hA : (((boundedConstructibleCocone Y.left ℓ).iso h).inv.app
-      ((boundedConstructibleLowerStar _ ℓ g).obj X)).hom =
+      ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).obj X)).hom =
         (derivedExtendScalarsCompIso Y.left ℓ h).inv.app
           (R((g.left)_*⟦Profinite.continuousMapRingObj E⟧).obj X.obj) :=
     boundedConstructibleCocone_iso_inv_app_hom Y.left ℓ h
-      ((boundedConstructibleLowerStar _ ℓ g).obj X)
+      ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).obj X)
   have hB := boundedConstructibleLowerStarExtendScalarsSubfield_app_hom ℓ h g X
   have hC : ((boundedConstructibleLowerStarToPadicAlgClIso ℓ F g).hom.app
       ((boundedConstructibleExtendScalarsSubfield Z.left ℓ h).obj X)).hom =
@@ -232,7 +234,7 @@ theorem boundedConstructibleLowerStarToPadicAlgClIso_hom_app_eq
         (derivedExtendScalarsToPadicAlgCl Y.left ℓ F).map
           ((derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) g.left).app X.obj) := by
     exact congrArg (derivedExtendScalarsToPadicAlgCl Y.left ℓ F).map hB
-  have hG : ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+  have hG : ((boundedConstructibleLowerStar ℓ g).map
       (((boundedConstructibleCocone Z.left ℓ).iso h).hom.app X)).hom =
         R((g.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
           ((derivedExtendScalarsCompIso Z.left ℓ h).hom.app X.obj) := by

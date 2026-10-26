@@ -81,8 +81,8 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isIso
   have := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction _ d.left) (derivedUpperStarLowerStarAdjunction _ d.left)
     (integersModPowReductionUpperStarIso ℓ E n d.left).symm _
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ d K.obj K.property) _
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj _ ℓ d K.obj K.property) _ _
+    (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E d K) _
+    (fun K ↦ IntegersModPowRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E n d K) _ _
     (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n d).symm
     (boundedConstructibleUpperStarIntegersModPowReductionIso_inv_app_hom ℓ E n d) K hK
   rw [boundedConstructibleLowerStarIntegersModPowReduction, ← Iso.symm_hom,

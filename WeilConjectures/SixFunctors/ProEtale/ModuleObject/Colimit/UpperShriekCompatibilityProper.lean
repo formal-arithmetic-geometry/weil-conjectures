@@ -64,9 +64,9 @@ instance isIso_boundedConstructibleProperUpperShriekToPadicAlgCl {f : X ⟶ Y}
     isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield ℓ h c.overG
   have H := CategoryCocone.isIso_mateEquiv_of_isFilteredTwoColimit
     (fun F : PadicAlgCl.FiniteIntermediateField ℓ ↦ Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ c.overG))
+      (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F c.overG))
     (Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overG))
+      (boundedConstructibleLowerStar ℓ c.overG))
     (fun F : PadicAlgCl.FiniteIntermediateField ℓ ↦
       boundedConstructibleLowerStarToPadicAlgClIso ℓ F c.overG)
     (fun _ _ h ↦ asIso (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h c.overG))

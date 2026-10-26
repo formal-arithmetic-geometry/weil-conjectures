@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 
 /-!
@@ -42,7 +42,7 @@ universe u
 
 open CategoryTheory Limits
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -121,6 +121,49 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+section ClosedImmersion
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- For a closed immersion `i`, every restriction `F : Dᵇc(Z)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` of the derived
+pushforward `Ri_*` is fully faithful: the counit of an adjunction `G ⊣ F` is an isomorphism. -/
+lemma isIso_counit_of_isClosedImmersion_of_lowerStarCompatibility {Z X : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] {G : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Z)⟦Λ⟧} {F : Dᵇc(Z)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧} (adj : G ⊣ F)
+    (e : F ⋙ (boundedConstructible _).ι ≅ (boundedConstructible _).ι ⋙ R((i)_*⟦Λ⟧)) :
+    IsIso adj.counit := by
+  have h : (F ⋙ (boundedConstructible _).ι).FullyFaithful :=
+    ((ObjectProperty.fullyFaithfulι _).comp (Functor.FullyFaithful.ofFullyFaithful _)).ofIso
+      e.symm
+  have h' := h.ofCompFaithful
+  have := h'.full
+  have := h'.faithful
+  exact adj.counit_isIso_of_R_fully_faithful
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+/-- **`Lj^* Ri_*` vanishes on bounded constructible complexes** when the ranges of the open
+immersion `j` and of `i` are disjoint, for every right adjoint `F` of `Li^*` on bounded
+constructible complexes: by the adjunctions `j_! ⊣ Lj^*` and `Li^* ⊣ F`, a morphism
+`M ⟶ Lj^* F N` is a morphism `Li^* j_! M ⟶ N`, and `Li^* j_! = 0`
+(`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek`). -/
+lemma isZero_boundedConstructibleUpperStar_obj_of_upperStarAdjunction
+    {Z U X : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    (j : U ⟶ X) [IsOpenImmersion j.left] (i : Z ⟶ X) {F : Dᵇc(Z.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧}
+    (adj : boundedConstructibleUpperStar Λ ℓ i ⊣ F)
+    (hji : Disjoint (Set.range j.left.base) (Set.range i.left.base)) (N : Dᵇc(Z.left)⟦Λ⟧) :
+    IsZero ((boundedConstructibleUpperStar Λ ℓ j).obj (F.obj N)) := by
+  rw [IsZero.iff_id_eq_zero]
+  refine ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).homEquiv _
+    _).symm.injective ((adj.homEquiv _ _).symm.injective ?_)
+  exact (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ j i hji _).eq_of_src
+    _ _
+
+end ClosedImmersion
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
 
@@ -152,12 +195,12 @@ comparison `γ : Rd_*^{𝒪_E} ⋙ red_Y ⟶ red_Z ⋙ Rd_*^{𝒪_E ⧸ ℓⁿ}`
 pullback comparison `boundedConstructibleUpperStarIntegersModPowReductionIso` under the
 adjunctions `d^* ⊣ Rd_*`. -/
 noncomputable def boundedConstructibleLowerStarIntegersModPowReduction :
-    boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E d ⋙
         boundedConstructibleIntegersModPowReduction Y.left ℓ E n ⟶
       boundedConstructibleIntegersModPowReduction Z.left ℓ E n ⋙
-        boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ d :=
-  mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ d)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ d)
+        IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n d :=
+  mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E d)
+    (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n d)
     (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n d).inv
 
 /-- **Reduction modulo `ℓⁿ` commutes with the pushforward along a closed immersion**: the
@@ -175,25 +218,34 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction [IsClosedImme
       TopologicalSpace.NoetherianSpace.set (α := Y.left) _
     have hd := (isCompl_range_overOpenComplement d).disjoint.symm
     have hsrc := (isZero_boundedConstructibleIntegersModPowReduction_obj ℓ E n _
-      (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ (overOpenComplement d) d hd
+      (isZero_boundedConstructibleUpperStar_obj_of_upperStarAdjunction _ ℓ (overOpenComplement d)
+        d (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E d) hd
         K)).of_iso ((boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n
           (overOpenComplement d)).app _).symm
-    have htgt := isZero_boundedConstructibleUpperStar_obj_lowerStar_obj _ ℓ
-      (overOpenComplement d) d hd ((boundedConstructibleIntegersModPowReduction Z.left ℓ E n).obj K)
+    have htgt := isZero_boundedConstructibleUpperStar_obj_of_upperStarAdjunction _ ℓ
+      (overOpenComplement d) d
+      (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n d) hd
+      ((boundedConstructibleIntegersModPowReduction Z.left ℓ E n).obj K)
     exact ⟨0, hsrc.eq_of_src _ _, htgt.eq_of_src _ _⟩
-  · exact IsIso.of_isIso_fac_right (mateEquiv_counit
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ d)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ d)
+  · have := isIso_counit_of_isClosedImmersion_of_lowerStarCompatibility _ d.left
+      (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E d)
+      (PadicIntegersRingObj.boundedConstructibleLowerStarCompatibility ℓ E d)
+    have := isIso_counit_of_isClosedImmersion_of_lowerStarCompatibility _ d.left
+      (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n d)
+      (IntegersModPowRingObj.boundedConstructibleLowerStarCompatibility ℓ E n d)
+    exact IsIso.of_isIso_fac_right (mateEquiv_counit
+      (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E d)
+      (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n d)
       (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n d).inv K)
 
 /-- Reduction modulo `ℓⁿ` commutes with the pushforward along a closed immersion:
 `Rd_*^{𝒪_E} ⋙ red_Y ≅ red_Z ⋙ Rd_*^{𝒪_E ⧸ ℓⁿ}`. -/
 noncomputable def boundedConstructibleLowerStarIntegersModPowReductionIso
     [IsClosedImmersion d.left] :
-    boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
+    PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E d ⋙
         boundedConstructibleIntegersModPowReduction Y.left ℓ E n ≅
       boundedConstructibleIntegersModPowReduction Z.left ℓ E n ⋙
-        boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ d :=
+        IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n d :=
   haveI := isIso_boundedConstructibleLowerStarIntegersModPowReduction ℓ E n d
   asIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n d)
 

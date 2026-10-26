@@ -83,8 +83,8 @@ def HasEtaleReadingUpperShriekComparison (p : X ⟶ Y) : Prop :=
   have := HasCompactification.of_over p
   ∃ (H' : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧ ⥤
       Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧)
-    (adjH' : boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p ⊣ H')
-    (γ : boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p ⋙
+    (adjH' : IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⊣ H')
+    (γ : IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⋙
         finiteEtaleReading ℓ E n Y ≅
       finiteEtaleReading ℓ E n X ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left),
@@ -109,25 +109,26 @@ theorem hasEtaleReductionLowerShriekIso_of_isProper_of_compatible (p : X ⟶ Y) 
     adjH' γB rfl
   rw [mateEquiv_ofNatIsoLeft] at hB
   let α : TwoSquare (boundedConstructibleIntegersModPowReduction X.left ℓ E n)
-      (boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ p)
-      (boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p)
+      (PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E p)
+      (IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p)
       (boundedConstructibleIntegersModPowReduction Y.left ℓ E n) :=
     TwoSquare.mk _ _ _ _ (γB.inv ≫ Functor.whiskerRight
       (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E p).inv _)
   let β : TwoSquare (finiteEtaleReading ℓ E n X)
-      (boundedConstructibleLowerStar (Profinite.integersModPowRingObj ℓ E n) ℓ p)
+      (IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p)
       (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left)
       (finiteEtaleReading ℓ E n Y) :=
     TwoSquare.mk _ _ _ _ γC.inv
   have : IsIso α.natTrans := inferInstanceAs (IsIso (γB.inv ≫ _))
   have : IsIso β.natTrans := inferInstanceAs (IsIso γC.inv)
   have := TwoSquare.isIso_hComp α β
-  have : IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ p) adjH' α).natTrans :=
+  have : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
+      adjH' α).natTrans :=
     hB
   have : IsIso (mateEquiv adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left) β).natTrans :=
     hγC
   refine ⟨(asIso (α.hComp β).natTrans).symm, ?_⟩
-  exact isIso_mateEquiv_hComp (boundedConstructibleUpperShriekAdjunction _ ℓ p) adjH'
-    (Etale.rightDerivedUpperShriekAdjunction _ p.left) α β
+  exact isIso_mateEquiv_hComp (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
+    adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left) α β
 
 end AlgebraicGeometry.ProEtale.CondensedRing

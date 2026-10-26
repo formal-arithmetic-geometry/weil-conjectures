@@ -150,7 +150,7 @@ theorem isIso_biproductDesc_boundedConstructibleExtendRestrictScalarsSubfield_un
           (b i • 𝟙 ((boundedConstructibleExtendScalarsSubfield X ℓ h).obj K))) := by
   have G := Adjunction.isIso_biproductDesc_restrictFullyFaithful_unit_smul_iff
     (Mod.derivedExtendMapDerivedCategoryAdjunction (padicSubfieldRingObjMap X ℓ h))
-    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K.obj K.property)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K)
     (fun K ↦ boundedConstructible_restrictScalarsSubfield_obj X ℓ h K.obj K.property) b K
   unfold boundedConstructibleExtendRestrictScalarsSubfieldAdjunction
     boundedConstructibleExtendScalarsSubfieldCompatibility

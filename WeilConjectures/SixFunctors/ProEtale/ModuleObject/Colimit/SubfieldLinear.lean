@@ -121,22 +121,6 @@ lemma smul_id_Q_obj {X : Scheme.{u}}
   rw [← DerivedCategory.Q.map_id, ← Functor.map_smul]
   congr 1
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
-  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {Z Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] (g : Z ⟶ Y)
-
-/-- The derived pushforward `Rg_* : Dᵇc(Z)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes is
-`K`-linear. -/
-lemma linear_boundedConstructibleLowerStar :
-    letI := modLinear Λ φ Z.left
-    letI := modLinear Λ φ Y.left
-    (boundedConstructibleLowerStar Λ ℓ g).Linear K :=
-  letI := modLinear Λ φ Z.left
-  letI := modLinear Λ φ Y.left
-  haveI := linear_rightDerivedLowerStar Λ φ g.left
-  ObjectProperty.lift_linear K _ _ _
-
 end General
 
 /-! ### Finite subextensions `F ⊆ ℚ̄_ℓ` -/
@@ -183,6 +167,18 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (g : Z ⟶ Y)
 
+/-- The derived pushforward `Rg_* : Dᵇc(Z)⟦F̲⟧ ⥤ Dᵇc(Y)⟦F̲⟧` on bounded constructible complexes
+is `K`-linear, for any ring homomorphism `φ : K →+* Γ F̲`. -/
+lemma linear_boundedConstructibleLowerStar {K : Type*} [Ring K]
+    (φ : K →+* Γ (Profinite.continuousMapRingObj.{u} F)) :
+    letI := modLinear _ φ Z.left
+    letI := modLinear _ φ Y.left
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g).Linear K :=
+  letI := modLinear _ φ Z.left
+  letI := modLinear _ φ Y.left
+  haveI := linear_rightDerivedLowerStar _ φ g.left
+  ObjectProperty.lift_linear K _ _ _
+
 /-- The pushforward `g_*` of `F_X`-module objects is `F`-linear. -/
 instance linear_lowerStar_padicSubfield :
     ((g.left)_*⟦Profinite.continuousMapRingObj F⟧).Linear F :=
@@ -196,17 +192,17 @@ instance linear_rightDerivedLowerStar_padicSubfield :
 /-- The derived pushforward `Rg_* : Dᵇc(Z)⟦F⟧ ⥤ Dᵇc(Y)⟦F⟧` on bounded constructible complexes is
 `F`-linear. -/
 instance linear_boundedConstructibleLowerStar_padicSubfield :
-    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g).Linear F :=
-  linear_boundedConstructibleLowerStar _ (Profinite.continuousMapConstRingHom.{u} F) ℓ g
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g).Linear F :=
+  linear_boundedConstructibleLowerStar ℓ F g (Profinite.continuousMapConstRingHom.{u} F)
 
 /-- The derived pushforward `Rg_*` on bounded constructible complexes commutes with the
 multiplication by a scalar `b ∈ F`. -/
 lemma boundedConstructibleLowerStar_map_smul_id (b : F)
     (K : Dᵇc(Z.left)⟦Profinite.continuousMapRingObj F⟧) :
-    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj F) ℓ g).map (b • 𝟙 K) =
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g).map (b • 𝟙 K) =
       b • 𝟙 _ :=
-  ((boundedConstructibleLowerStar _ ℓ g).map_smul b (𝟙 K)).trans
-    (congrArg (b • ·) ((boundedConstructibleLowerStar _ ℓ g).map_id K))
+  ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g).map_smul b (𝟙 K)).trans
+    (congrArg (b • ·) ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g).map_id K))
 
 end Subfield
 
