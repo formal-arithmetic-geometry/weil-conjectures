@@ -329,7 +329,7 @@ change map `g^* f_* ⟶ f'_* g'^*` is an isomorphism. The geometric points of `Y
 algebraically closed residue field jointly reflect isomorphisms, and the base change map is
 an isomorphism on each of these stalks by
 `AlgebraicGeometry.Etale.isIso_sheafFiber_map_baseChangeMap_app`.
-(blueprint: `lemma:weil-pbc-finite-exchange`) -/
+(blueprint: `lemma:weil-pbc-finite-exchange`, `lemma-weil-pbc-finite-exchange`) -/
 lemma Etale.isIso_baseChangeMap_of_isFinite
     [hJ : Y'.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
     (sq : IsPullback g' f' f g) : IsIso (Etale.baseChangeMap A sq.toCommSq) := by
@@ -355,7 +355,7 @@ instance Etale.isBaseChangeIsoSheaf_of_isFinite : Etale.IsBaseChangeIsoSheaf A f
 morphism `f`, the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism.
 The pushforwards along `f` and its base change `f'` are exact, so this follows from the
 sheaf-level statement without any resolutions.
-(blueprint: `prop:weil-pbc-finite-morphism`) -/
+(blueprint: `prop:weil-pbc-finite-morphism`, `lemma-weil-pbc-finite-exchange`, derived part) -/
 instance Etale.isBaseChangeIso_of_isFinite : Etale.IsBaseChangeIso A f where
   isIso _ _ _ sq := by
     have : IsFinite _ := isFinite_of_isPullback sq

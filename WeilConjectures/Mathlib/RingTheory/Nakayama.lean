@@ -111,3 +111,39 @@ theorem surjective_of_finite_of_forall_isMaximal {ψ : A →+* B} (hψ : ψ.Fini
   exact ⟨a, ha⟩
 
 end RingHom
+
+section Nilpotent
+
+variable {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M] {I : Ideal R}
+
+/-- **Nakayama's lemma for a nilpotent ideal**, without finiteness: if `I` is nilpotent and
+`M = N + I N'` for submodules `N, N'` of `M`, then `M = N`. -/
+theorem Submodule.eq_top_of_top_le_sup_smul_of_isNilpotent (hI : IsNilpotent I)
+    {N N' : Submodule R M} (h : ⊤ ≤ N ⊔ I • N') : N = ⊤ := by
+  have h₁ : ⊤ ≤ N ⊔ I • ⊤ := h.trans (sup_le_sup_left (smul_mono_right _ le_top) _)
+  have key : ∀ n : ℕ, ⊤ ≤ N ⊔ I ^ n • (⊤ : Submodule R M) := by
+    intro n
+    induction n with
+    | zero => simp
+    | succ n ih =>
+      calc (⊤ : Submodule R M) ≤ N ⊔ I ^ n • ⊤ := ih
+        _ ≤ N ⊔ I ^ n • (N ⊔ I • ⊤) := sup_le_sup_left (smul_mono_right _ h₁) _
+        _ = N ⊔ (I ^ n • N ⊔ I ^ (n + 1) • ⊤) := by
+          rw [Submodule.smul_sup, pow_succ, Submodule.mul_smul]
+        _ ≤ N ⊔ I ^ (n + 1) • ⊤ := by
+          exact sup_le le_sup_left (sup_le (le_sup_of_le_left Submodule.smul_le_right) le_sup_right)
+  obtain ⟨k, hk⟩ := hI
+  have := key k
+  rw [hk, Submodule.zero_eq_bot, Submodule.bot_smul, sup_bot_eq] at this
+  exact top_le_iff.mp this
+
+/-- **Nakayama's lemma for a nilpotent ideal**: a linear map `u : N → M` which is surjective
+modulo a nilpotent ideal `I` (i.e. `M = u(N) + I M`) is surjective. No finiteness is assumed.
+(blueprint: `lem-weil-pbc-nakayama-nilpotent`) -/
+theorem LinearMap.surjective_of_isNilpotent_of_range_sup_smul {N : Type*} [AddCommGroup N]
+    [Module R N] (hI : IsNilpotent I) (u : N →ₗ[R] M)
+    (h : LinearMap.range u ⊔ I • ⊤ = ⊤) : Function.Surjective u :=
+  LinearMap.range_eq_top.mp
+    (Submodule.eq_top_of_top_le_sup_smul_of_isNilpotent hI (N' := ⊤) h.ge)
+
+end Nilpotent
