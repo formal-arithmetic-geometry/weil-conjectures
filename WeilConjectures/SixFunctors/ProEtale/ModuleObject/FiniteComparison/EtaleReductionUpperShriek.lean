@@ -246,7 +246,7 @@ theorem isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit (d : Z ⟶ Y
   have hT' := ((boundedConstructible _).ι ⋙ derivedEtaleReduction ℓ E n Y.left).map_distinguished
     _ hT
   have hN := ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E)
-    (overOpenComplement d).left).isIso_unit_app_iff_of_iso_obj
+    (overOpenComplement d).left).isIso_unit_app_iff_isIso_unit_app_of_iso
       ((boundedConstructibleLowerStarCompatibility _ ℓ (overOpenComplement d)).app
         ((boundedConstructibleUpperStar _ ℓ (overOpenComplement d)).obj K)).symm).2
       ((derivedUpperStarLowerStarAdjunction _ (overOpenComplement d).left).isIso_unit_app_obj _)

@@ -42,7 +42,7 @@ section Basic
 variable {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
 
 /-- Locality is invariant under isomorphism: the unit at `X` is invertible iff it is at `Y`. -/
-lemma isIso_unit_app_iff_of_iso_obj {X Y : C} (e : X ≅ Y) :
+lemma isIso_unit_app_iff_isIso_unit_app_of_iso {X Y : C} (e : X ≅ Y) :
     IsIso (adj.unit.app X) ↔ IsIso (adj.unit.app Y) := by
   have h := adj.unit.naturality e.hom
   dsimp at h
@@ -164,7 +164,7 @@ theorem isIso_unit_app_of_isIso_unit_app_map
       (adj'.isIso_map_unit_app_of_isIso_counit N)
   have hFT := F.map_distinguished _ hT
   have h₃ : IsIso (adj.unit.app (F.obj (R'.obj (L'.obj N)))) :=
-    (adj.isIso_unit_app_iff_of_iso_obj (e.app (L'.obj N))).2 (adj.isIso_unit_app_obj _)
+    (adj.isIso_unit_app_iff_isIso_unit_app_of_iso (e.app (L'.obj N))).2 (adj.isIso_unit_app_obj _)
   have h₁ := adj.isIso_unit_app_obj₁_of_distTriang _ hFT hN h₃
   have hG : IsZero G := hF G (adj.isZero_of_isIso_unit_app h₁ (hL G hLG))
   exact (Triangle.isZero₁_iff_isIso₂ _ hT).1 hG

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekMate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekIso
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
 
@@ -111,14 +111,13 @@ noncomputable def etaleReductionUpperStarIsoOfComp (Δ : Z ⟶ Y) {W : Scheme.{u
       (Etale.leftDerivedUpperStarComp _ Δ' φ Δ.left hΔ.symm) ≪≫ (Functor.associator _ _ _).symm
 
 /-- **The integral exchange restriction modulo `ℓⁿ`**: for a cartesian square `ι ≫ c = d ≫ Δ`
-with `c` and `d` closed immersions, and a cartesian square `ι ≫ g = d ≫ Δ'` of
+with `c`, `d` proper and `d` a closed immersion, and a cartesian square `ι ≫ g = d ≫ Δ'` of
 schemes identified with the underlying square through an isomorphism `φ` (`g ≫ φ = c`,
 `Δ' ≫ φ = Δ`), the reduction modulo `ℓⁿ` of the exchange restriction `ρ_P`, followed by an
 isomorphism, factors through the étale exchange restriction of `ι ≫ g = d ≫ Δ'` at
 `Lφ^* (P_{𝒪_E ⧸ ℓⁿ})`. -/
 theorem exists_etaleReduction_map_exchangeRestriction_comp_eq {c : C ⟶ Y} {ι : F ⟶ C}
-    {d : F ⟶ Z} {Δ : Z ⟶ Y} [IsProper c.left] [IsClosedImmersion c.left] [IsProper d.left]
-    [IsClosedImmersion d.left]
+    {d : F ⟶ Z} {Δ : Z ⟶ Y} [IsProper c.left] [IsProper d.left] [IsClosedImmersion d.left]
     (σ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ c ⋙
         boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ Δ ≅
       boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ ι ⋙

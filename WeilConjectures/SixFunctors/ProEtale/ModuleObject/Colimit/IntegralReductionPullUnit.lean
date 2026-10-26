@@ -124,7 +124,7 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app]
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app_eq_id]
   erw [Category.id_comp, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.comp_id, Category.id_comp]
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K

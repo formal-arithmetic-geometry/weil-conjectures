@@ -20,7 +20,7 @@ Write `red_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ)` for the red
 reduction comparison* if there is an isomorphism `γ : Rf_! ⋙ red_Y ≅ red_Z ⋙ Rf_!` whose
 transpose `Rf^! ⋙ red_Z ⟶ red_Y ⋙ Rf^!` under the adjunctions `Rf_! ⊣ Rf^!` is an isomorphism
 (`ProEtale.CondensedRing.HasEtaleReductionLowerShriekIso`). Closed immersions have one
-(`ProEtale.CondensedRing.exists_etaleReductionLowerShriekIso`).
+(`ProEtale.CondensedRing.exists_etaleReductionLowerShriekIso_of_isClosedImmersion`).
 
 This file shows that the property is stable under composition
 (`ProEtale.CondensedRing.HasEtaleReductionLowerShriekIso.comp`): with the composition
@@ -28,7 +28,8 @@ isomorphisms `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on both sides, the stacked square 
 has invertible transpose (`CategoryTheory.isIso_mateEquiv_vComp_whiskerLeft_whiskerRight`).
 This is the composition step of blueprint `det-prop-scalar-six-exceptional` ("compatibility
 with composition"), in the weak form of `exists_etaleReductionLowerShriekIso` (no identification
-of `γ` with the canonical comparison).
+of `γ` with the canonical comparison). Every proper morphism is a closed immersion followed
+by a projection `P ×_k Y ⟶ Y` (`exists_isClosedImmersion_comp_overProdSnd`).
 -/
 
 @[expose] public section
@@ -66,10 +67,10 @@ variable {X Y S : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
 /-- Closed immersions have a reduction comparison for `Rf_!` and `Rf^!`
-(`exists_etaleReductionLowerShriekIso`). -/
+(`exists_etaleReductionLowerShriekIso_of_isClosedImmersion`). -/
 theorem hasEtaleReductionLowerShriekIso_of_isClosedImmersion (f : X ⟶ Y) [IsProper f.left]
     [IsClosedImmersion f.left] : HasEtaleReductionLowerShriekIso ℓ E n f :=
-  exists_etaleReductionLowerShriekIso ℓ E n f
+  exists_etaleReductionLowerShriekIso_of_isClosedImmersion ℓ E n f
 
 /-- **Reduction comparisons compose**: if `f` and `g` have a reduction comparison for the
 lower and upper shrieks, so does `f ≫ g`. The comparison for `f ≫ g` is the stacked square of
@@ -108,7 +109,7 @@ theorem HasEtaleReductionLowerShriekIso.comp {f : X ⟶ Y} {g : Y ⟶ S}
     (Etale.rightDerivedUpperShriekAdjunction _ (f ≫ g).left)
     (boundedConstructibleLowerShriekComp_padicIntegers ℓ E f g) e' _ _
 
-/-! ### Reduction of the proper case to projections -/
+/-! ### Factorization of proper morphisms -/
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom] in
@@ -140,35 +141,5 @@ theorem exists_isClosedImmersion_comp_overProdSnd (f : X ⟶ Y) [IsProper f.left
     exact mono_of_mono _ (pullback.fst c.g Y.hom)
   · ext1
     simpa [overProdSnd] using hi₂
-
-/-- **Reduction of the proper case to projections**: if the second projections
-`P ×_k Y ⟶ Y`, for `P` proper over `k`, have a reduction comparison for the lower and upper
-shrieks, so does every proper `f : X ⟶ Y`. Indeed `f` is a closed immersion followed by such a
-projection (`exists_isClosedImmersion_comp_overProdSnd`), closed immersions have a reduction
-comparison (`exists_etaleReductionLowerShriekIso`), and reduction comparisons compose
-(`HasEtaleReductionLowerShriekIso.comp`). -/
-theorem hasEtaleReductionLowerShriekIso_of_isProper
-    (hpr : ∀ (P : Over (Spec (.of k))) [IsProper P.hom],
-      HasEtaleReductionLowerShriekIso ℓ E n (overProdSnd P Y))
-    (f : X ⟶ Y) [IsProper f.left] : HasEtaleReductionLowerShriekIso ℓ E n f := by
-  obtain ⟨P, _, i, hi, rfl⟩ := exists_isClosedImmersion_comp_overProdSnd f
-  have : IsProper i.left := ((IsClosedImmersion.iff_isProper_and_mono i.left).1 hi).1
-  exact (hasEtaleReductionLowerShriekIso_of_isClosedImmersion ℓ E n i).comp ℓ E n (hpr P)
-
-
-/-- `exists_etaleReductionLowerShriekIso` for a proper `f`, assuming it for the second
-projections `P ×_k Y ⟶ Y` with `P` proper over `k`
-(`hasEtaleReductionLowerShriekIso_of_isProper`). -/
-theorem exists_etaleReductionLowerShriekIso_of_isProper
-    (hpr : ∀ (P : Over (Spec (.of k))) [IsProper P.hom],
-      HasEtaleReductionLowerShriekIso ℓ E n (overProdSnd P Y))
-    (f : X ⟶ Y) [IsProper f.left] :
-    ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
-        etaleReduction ℓ E n Y ≅
-      etaleReduction ℓ E n X ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,
-      IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-        (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv)) :=
-  hasEtaleReductionLowerShriekIso_of_isProper ℓ E n hpr f
 
 end AlgebraicGeometry.ProEtale.CondensedRing

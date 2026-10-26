@@ -39,10 +39,10 @@ finite coefficients (blueprint `sk-lem-tf-curve-restriction-zero`, last step). T
 compatibilities required from section `sec-six-functors-basics`, each exactly one blueprint node:
 
 * `nonempty_etaleReductionUpperStarIso`: pullback (`det-prop-scalar-six-pullback`, (1));
-* compactly supported direct image and exceptional inverse image, for closed immersions
+* compactly supported direct image and exceptional inverse image, for proper morphisms
   (`det-prop-scalar-six-exceptional`, with the comparison `γ^!` of
   `det-prop-scalar-six-compact-support`): proved as `exists_etaleReductionLowerShriekIso` in
-  the file `FiniteComparison/EtaleReductionLowerShriekMate.lean`;
+  the file `FiniteComparison/EtaleReductionLowerShriekIso.lean`;
 * `nonempty_etaleReductionTensorIso`: tensor product (`det-prop-scalar-six-tensor-hom`, (1));
 * `boundedConstructibleFiniteTor_etaleReduction`: preservation of `Dctf`
   (`det-prop-scalar-six-ctf`, (3)).

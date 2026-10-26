@@ -285,7 +285,7 @@ lemma mapHomotopyCategoryCompIso_inv_app_quotient_obj {F : V ⥤ W} {G : W ⥤ V
 
 /-- The isomorphism `Functor.mapHomotopyCategoryCompIso` attached to `Iso.refl (F ⋙ G)` is the
 identity, for the inverse. -/
-lemma mapHomotopyCategoryCompIso_refl_inv_app (F : V ⥤ W) (G : W ⥤ V') [F.Additive]
+lemma mapHomotopyCategoryCompIso_refl_inv_app_eq_id (F : V ⥤ W) (G : W ⥤ V') [F.Additive]
     [G.Additive] (Y : HomotopyCategory V c) :
     (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).inv.app Y = 𝟙 _ := by
   have h := (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom_inv_id_app Y
