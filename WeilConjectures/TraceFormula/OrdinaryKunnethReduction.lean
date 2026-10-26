@@ -49,13 +49,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-- A scheme of finite type over a field is noetherian. -/
-lemma isNoetherian_left_of_over {k : Type u} [Field k] (X : Over (Spec (.of k)))
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] : IsNoetherian X.left :=
-  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
-  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
-  ⟨⟩
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
@@ -76,8 +69,8 @@ noncomputable def etaleReductionLowerStarIso (d : Z ⟶ Y) :
     PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E d ⋙ etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         R(Etale.lowerStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left) :=
-  have := isNoetherian_left_of_over Z
-  have := isNoetherian_left_of_over Y
+  have := isNoetherian_of_locallyOfFiniteType Z.hom
+  have := isNoetherian_of_locallyOfFiniteType Y.hom
   have := isIso_boundedConstructibleLowerStarIntegersModPowReduction' ℓ E n d
   (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n d))
@@ -104,7 +97,7 @@ first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
 theorem isZero_of_isZero_etaleReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) {n : ℕ}
     (hn : n ≠ 0) {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
     (h : IsZero ((etaleReduction ℓ E.1 n X).obj K)) : IsZero K := by
-  have := isNoetherian_left_of_over X
+  have := isNoetherian_of_locallyOfFiniteType X.hom
   -- the étale reading is fully faithful, so the condensed reduction of `K` vanishes
   have hred : IsZero ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj K) := by
     rw [IsZero.iff_id_eq_zero]
