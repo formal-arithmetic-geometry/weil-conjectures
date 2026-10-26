@@ -10,6 +10,8 @@ public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
+import WeilConjectures.WeilSheaf.Bidual
+import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -262,8 +264,14 @@ a lisse Weil sheaf `P`, a locally free `ℚ̄_ℓ,X̄`-module of finite rank, an
 theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : P.IsLisse)
     (N : WeilComplex k₀ l X) :
     Nonempty (((tensorLisse (P.dual hP) hP.dual).obj N).obj ≅
-      (ProEtaleWeilSheaf.derivedHom k₀ l X N.obj).obj (op (WeilSheaf.toComplex.obj P).obj)) :=
-  sorry
+      (ProEtaleWeilSheaf.derivedHom k₀ l X N.obj).obj (op (WeilSheaf.toComplex.obj P).obj)) := by
+  obtain ⟨e⟩ := WeilSheaf.nonempty_iso_dual_dual P hP
+  obtain ⟨c, _, _, _, hc⟩ :=
+    ProEtaleWeilSheaf.derivedHom_single_resolution (k₀ := k₀) (l := l) (X := X)
+  obtain ⟨d, _⟩ := hc P.obj N.obj N.property.1.1
+  let e' := (WeilSheaf.objectProperty k₀ l X).ι.mapIso e
+  let h := (ProEtaleWeilSheaf.ihomBifunctor k₀ l X).mapIso e'.op
+  exact ⟨(Functor.rightDerivedFunctorNatIso h).app N.obj ≪≫ d.symm⟩
 
 end Lisse
 
