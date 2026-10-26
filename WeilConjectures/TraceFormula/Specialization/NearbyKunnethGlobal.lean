@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.Tactic.ExactModProofs
 
@@ -238,8 +239,8 @@ end Product
 
 section Exchange
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
-  [Fact (ringChar k' ≠ ℓ)] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] {X : Scheme.{u}}
+  {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
@@ -265,8 +266,14 @@ theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total)))
     (hC₀ : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C₀) :
     IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app
-        (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) :=
-  sorry
+        (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) := by
+  have : IsProper h.toTraitGeneric.total := ‹IsProper q›
+  have : IsProper g := MorphismProperty.of_isPullback h.isPullback_j ‹IsProper q›
+  have : IsIso (traitGenericModel k').ε :=
+    inferInstanceAs (IsIso (𝟙 (Spec (.of (traitGenericField k')))))
+  exact h.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper h.isPullback_i
+    (IsPullback.of_horiz_isIso ⟨rfl⟩)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.j C₀ hC₀)
 
 end Exchange
 
