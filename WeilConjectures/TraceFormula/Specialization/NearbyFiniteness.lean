@@ -59,8 +59,17 @@ into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
 it is
 Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
 `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices, derived completeness and the Milnor sequence
-(Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). The reductions also use the proper
-exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
+(Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8). No blueprint node states this
+theorem: the blueprint uses it without a node in the proofs of
+`sk-prop-tf-nearby-duality-foundation` ("bounded constructible by the finiteness theorem for
+nearby cycles") and `det-sp-constant-family-vanishing` ("an exact functor with bounded
+constructible values"). It does not follow from the finiteness of direct images available in
+`sec-six-functors`: those nodes concern morphisms of finite type over a field, or proper
+morphisms, while `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` is neither. Writing `Ψ` as the colimit of the
+`i^* Rj'_*` over the finite extensions `η'` of `η` is only valid for torsion coefficients, and
+there the system does not stabilise: already on `𝔸⁰_S` with `Λ = ℤ/ℓ`, the transition maps on
+`H¹ = Hom(I_t, Λ)` are multiplication by the ramification indices. The reductions also use the
+proper exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
 `WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`) and that bounded
 constructible complexes on the special fibre form a triangulated subcategory
 (`ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`, `sorry`ed on the branch).
