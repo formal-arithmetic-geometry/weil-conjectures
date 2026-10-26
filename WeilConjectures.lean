@@ -13102,11 +13102,14 @@ public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactModProofIrrel
+public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
+public import WeilConjectures.TateTwist.TateModuleTrivialization
+public import WeilConjectures.TateTwist.UpperStarExtendScalars
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
 public import WeilConjectures.Topology.AbelianIntegerExtensionMono
 public import WeilConjectures.Topology.AbelianIntegerExtensionSections
