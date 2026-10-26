@@ -269,7 +269,7 @@ of `Rt_{s*}` and the proper exchange
 bounded constructible. -/
 theorem boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding {Y : Scheme.{u}}
     {Y' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
-    {N : NearbyCyclesModel Y Y'.left} (hN : N.IsTraitModel)
+    {N : NearbyCyclesModel Y Y'.left} (hM : M.IsTraitModel) (hN : N.IsTraitModel)
     {t : M.total ⟶ N.total} {f' : X'.left ⟶ Y'.left} (φ : M.geometric.Hom N.geometric t f')
     (ht : φ.total = t) [IsClosedImmersion t] (hj : IsPullback φ.generic M.j N.j t)
     (hi : IsPullback M.i f' t N.i)
@@ -287,7 +287,7 @@ theorem boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding {Y : S
   have : IsClosedImmersion f' := MorphismProperty.of_isPullback (P := @IsClosedImmersion) hi ‹_›
   have : IsProper t := inferInstance
   have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app B) :=
-    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ ht hj hi B hB
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ hM hN ht hj hi B hB
   have h₁ : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
       ((N.geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
         ((R((t)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj B)) :=
@@ -316,7 +316,7 @@ theorem boundedConstructible_geometricNearbyCycles_obj_of_isAffine
   obtain ⟨q, g, _, _, _, hj, hi⟩ := hM.exists_isPullback
   obtain ⟨n, c, hc, _⟩ := exists_isClosedImmersion_affineSpace_of_isAffine q
   exact boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding
-    (N := affineSpaceModel k' n) (isTraitModel_affineSpaceModel n) (traitStdHom _ hj hi c hc)
+    (N := affineSpaceModel k' n) hM (isTraitModel_affineSpaceModel n) (traitStdHom _ hj hi c hc)
     rfl (isPullback_traitStdHom_generic _ hj hi c hc) (isPullback_traitStdHom_special _ hi c hc)
     (fun hB' ↦ boundedConstructible_nearbyCycles_affineSpace_obj n hB') hB
 

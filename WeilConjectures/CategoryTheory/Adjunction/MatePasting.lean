@@ -30,8 +30,18 @@ variable {DY DGN DTN DY' DX DGM DTM DX' : Type*} [Category* DY] [Category* DGN] 
 /-- **The mate of a pasting of three squares.** Let
 `α : (EN ⋙ JN ⋙ IN) ⋙ Lf' ⟶ Lf ⋙ EM ⋙ JM ⋙ IM` be the horizontal pasting of three 2-squares
 `γ₁ : EN ⋙ Lg ⟶ Lf ⋙ EM`, `γ₂ : JN ⋙ Lt ⟶ Lg ⋙ JM` and `γ₃ : IN ⋙ Lf' ⟶ Lt ⋙ IM` with left
-adjoint vertical functors. Then the component at `K` of the mate of `α` is the composite of the
-mates of `γ₁`, `γ₂` and `γ₃`. -/
+adjoint vertical functors:
+```
+     EN       JN       IN
+ DY ---> DGN ---> DTN ---> DY'
+ |        |        |        |
+ Lf  γ₁   Lg  γ₂   Lt  γ₃   Lf'
+ v        v        v        v
+ DX ---> DGM ---> DTM ---> DX'
+     EM       JM       IM
+```
+Then the component at `K` of the mate `Rf ⋙ EN ⋙ JN ⋙ IN ⟶ (EM ⋙ JM ⋙ IM) ⋙ Rf'` of `α` is the
+composite of the mates of `γ₁`, `γ₂` and `γ₃`. -/
 lemma mateEquiv_app_eq_comp_of_eq_pasting (adjf : Lf ⊣ Rf) (adjg : Lg ⊣ Rg) (adjt : Lt ⊣ Rt)
     (adjf' : Lf' ⊣ Rf') (γ₁ : EN ⋙ Lg ⟶ Lf ⋙ EM) (γ₂ : JN ⋙ Lt ⟶ Lg ⋙ JM)
     (γ₃ : IN ⋙ Lf' ⟶ Lt ⋙ IM) (α : (EN ⋙ JN ⋙ IN) ⋙ Lf' ⟶ Lf ⋙ EM ⋙ JM ⋙ IM)

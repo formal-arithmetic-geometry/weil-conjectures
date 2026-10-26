@@ -134,6 +134,7 @@ lemma isIsoOn_compactifiedToPointModelHom_pushforwardExchange :
   have : IsProper (compactifiedToPointModelHom X x k').total :=
     inferInstanceAs (IsProper (compactifiedTotalToTrait X x k'))
   (compactifiedToPointModelHom X x k').isIso_pushforwardExchange_app_of_isProper
+    (isTraitModel_compactifiedDeformationModel X x k') (isTraitModel_traitModel k k')
     (by
       have h := isPullback_compactifiedSpecialFibre X x k'
       rw [← toPoint_left (compactifiedSpecialFibre X x k')] at h

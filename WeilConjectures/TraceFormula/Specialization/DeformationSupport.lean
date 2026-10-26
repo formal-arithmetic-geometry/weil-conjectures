@@ -102,6 +102,7 @@ theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafD
       (pullback.lift_snd _ _ _).trans (Category.comp_id _)]
     exact isPullback_deformationModel_ε k' (X := Z) _
   have := (deformationModelHom g hJ k').isIso_pushforwardExchange_app_of_isProper
+    (isTraitModel_deformationModel Z _ k') (isTraitModel_deformationModel X I k')
     (isPullback_deformationSpecialFibreMap k' g hJ) hε M.property
   have h3 : IsZero
       (R(((deformationSpecialFibreMap g hJ k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
