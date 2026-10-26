@@ -45,7 +45,8 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- **Proper base change** (blueprint `sk-thm-sfb-proper-base-change`) on the ambient derived
+/-- **Proper base change**, node-level compatibility required from section
+`sec-six-functors-basics` (blueprint `sk-thm-sfb-proper-base-change`), on the ambient derived
 categories of `ℚ̄_ℓ`-modules: for a cartesian square `g' ≫ p = p' ≫ g` of schemes with `p`
 proper, the base change morphism `Lg^* Rp_* K ⟶ Rp'_* Lg'^* K` is an isomorphism for bounded
 constructible `K`. The base `g` is arbitrary (here: the geometric generic point
