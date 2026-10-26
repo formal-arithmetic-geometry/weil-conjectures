@@ -5921,6 +5921,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineCechCriterion
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineDisjointSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineFiniteLimits
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.AffineLift
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
@@ -8351,6 +8353,10 @@ public import WeilConjectures.CategoryTheory.SiteSystemStrictificationObstructio
 public import WeilConjectures.CategoryTheory.SiteSystemStrictificationRefuted
 public import WeilConjectures.CategoryTheory.Sites.CechBaseChange
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
+public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficients
+public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficientsInjective
+public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficientsRelativeLimit
+public import WeilConjectures.CategoryTheory.Sites.CechComplexCoefficientsSheaf
 public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
 public import WeilConjectures.CategoryTheory.Sites.CechComplexModule
 public import WeilConjectures.CategoryTheory.Sites.CechComplexRelativeLimit
@@ -12509,6 +12515,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleDerived
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleProjection
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.CechComparisonUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
@@ -12526,6 +12533,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverConstant
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverIntegralIdentification
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverMilnor
