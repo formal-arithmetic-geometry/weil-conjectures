@@ -11,14 +11,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 /-!
 # Coefficient changes of the bounded constructible six functors
 
-Let `Λ` and `Λ'` be coefficient rings for which the bounded constructible six functors
-`Dᵇc(-)⟦Λ⟧` are defined. A *coefficient change* `Λ ⟶ Λ'`
+Let `Λ` and `Λ'` be coefficient rings with pushforward data `P` and `P'`
+(`ProEtale.CondensedRing.BoundedConstructiblePushforwardData`: the functors `Rf_*` and the
+adjunctions `Lf^* ⊣ Rf_*`). A *coefficient change* `Λ ⟶ Λ'`
 (`ProEtale.CondensedRing.BoundedConstructibleCoefficientChange`) packages the data entering the
 coefficient compatibilities of blueprint `sk-thm-sf-compatibility` (7):
 
-* functors `T_X : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧` (extension of scalars);
-* commutation squares **(Pull)** `Lf^* ⋙ T_X ≅ T_Y ⋙ Lf^*`, compatible with the composition
-  isomorphisms of the pullbacks;
+* functors `T_X : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧` (extension of scalars) and commutation squares
+  **(Pull)** `Lf^* ⋙ T_X ≅ T_Y ⋙ Lf^*`, given as parameters, so that they appear unfolded in the
+  statements of the compatibilities;
+* the compatibility of (Pull) with the composition isomorphisms of the pullbacks;
 * commutation squares **(Shriek)** `j_! ⋙ T_X ≅ T_U ⋙ j_!` for open immersions `j`, whose mates
   for `j_! ⊣ Lj^*` are (Pull) for `j`;
 * commutation squares **(Push)** `Rp_* ⋙ T_Y ≅ T_Z ⋙ Rp_*` for proper `p`, the mates of (Pull)
@@ -27,7 +29,7 @@ coefficient compatibilities of blueprint `sk-thm-sf-compatibility` (7):
 From these, the formal compatibilities follow
 (`WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate`); this file proves the one with
 the pullback comparisons `Lg^* ⋙ Lf'^* ≅ Lf^* ⋙ Lg'^*` of commutative squares
-(`ProEtale.CondensedRing.BoundedConstructibleCoefficientChange.squareCompatible_pullbackSquareComparison`).
+(`BoundedConstructibleCoefficientChange.squareCompatible_pullbackSquareComparison`).
 -/
 
 @[expose] public section
@@ -53,9 +55,10 @@ variable (Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (ℓ : ℕ
     (f : X ⟶ Y),
     boundedConstructibleUpperStar Λ ℓ f ⋙ T X ≅ T Y ⋙ boundedConstructibleUpperStar Λ' ℓ f)
 
-/-- A *coefficient change* `Λ ⟶ Λ'` of the bounded constructible six functors: functors
-`T_X : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧` with commutation squares (Pull) with the pullbacks, compatible with
-their composition isomorphisms, (Shriek) with the extensions by zero along open immersions, mated
+/-- A *coefficient change* `Λ ⟶ Λ'` of the bounded constructible six functors, for pushforward
+data `P` and `P'`, along the functors `T_X : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧` with the commutation squares
+(Pull) `pull` with the pullbacks: (Pull) is compatible with the composition isomorphisms, and
+there are commutation squares (Shriek) with the extensions by zero along open immersions, mated
 with (Pull), and (Push) with the pushforwards along proper morphisms, mated with (Pull). -/
 structure BoundedConstructibleCoefficientChange where
   /-- (Pull) is compatible with the composition isomorphisms `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`. -/

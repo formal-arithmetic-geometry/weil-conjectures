@@ -62,7 +62,8 @@ lemma boundedConstructibleUpperStarExtendScalarsIso_hom_app_hom
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     ((boundedConstructibleUpperStarExtendScalarsIso ℓ E f).hom.app K).hom =
       (derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) f.left).hom.app K.obj := by
-  simp [boundedConstructibleUpperStarExtendScalarsIso, boundedConstructibleExtendScalarsCompatibility,
+  simp [boundedConstructibleUpperStarExtendScalarsIso,
+    boundedConstructibleExtendScalarsCompatibility,
     boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
     boundedConstructibleExtendScalars_obj_obj]
 
@@ -70,7 +71,8 @@ lemma boundedConstructibleUpperStarExtendScalarsIso_inv_app_hom
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     ((boundedConstructibleUpperStarExtendScalarsIso ℓ E f).inv.app K).hom =
       (derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) f.left).inv.app K.obj := by
-  simp [boundedConstructibleUpperStarExtendScalarsIso, boundedConstructibleExtendScalarsCompatibility,
+  simp [boundedConstructibleUpperStarExtendScalarsIso,
+    boundedConstructibleExtendScalarsCompatibility,
     boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
     boundedConstructibleExtendScalars_obj_obj]
 

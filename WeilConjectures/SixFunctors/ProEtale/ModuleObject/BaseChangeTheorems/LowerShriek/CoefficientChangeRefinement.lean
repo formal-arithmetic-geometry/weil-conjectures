@@ -46,12 +46,13 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {ℓ : ℕ} [F
   [IsSeparated Z₁.hom]
   {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
 
-/-- The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` along a refinement is the exchange morphism of
-the triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*` for the adjunctions `i₁_! ⊣ Li₁^*` and
-`i_! ⊣ Li^*`. -/
-lemma boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft (w : i ≫ h = i₁) :
+/-- For any coefficient ring `Λ`, the restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` along a refinement
+is the exchange morphism of the triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*` for the adjunctions
+`i₁_! ⊣ Li₁^*` and `i_! ⊣ Li^*`. -/
+lemma boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft' (w : i ≫ h = i₁) :
     boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ w =
-      Adjunction.exchangeLeft (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁)
+      Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁)
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i)
         (Functor.rightUnitor _ ≪≫ boundedConstructibleUpperStarTriangleComparison Λ ℓ w) := by
   unfold boundedConstructibleOpenImmersionLowerShriekRefinement
@@ -89,8 +90,8 @@ lemma squareCompatible_openImmersionLowerShriekRefinement (w : i ≫ h = i₁) :
       using hθ
   have h := NatTrans.SquareCompatible.exchangeLeft (ιH := Functor.idSquareIso (T X))
     (C.isMateSquare_shriek_pull i₁) (C.isMateSquare_shriek_pull i) hθ'
-  rw [boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft,
-    boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft]
+  rw [boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft',
+    boundedConstructibleOpenImmersionLowerShriekRefinement_eq_exchangeLeft']
   exact NatTrans.SquareCompatible.of_pasteSquareIso_idSquareIso h
 
 /-- The pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` along a refinement with cartesian square is

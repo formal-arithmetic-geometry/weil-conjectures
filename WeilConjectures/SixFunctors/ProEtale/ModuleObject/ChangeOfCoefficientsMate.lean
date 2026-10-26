@@ -148,7 +148,8 @@ variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
 lemma derivedComapLowerStarIso_hom_eq_mateEquiv :
     (derivedComapLowerStarIso a f).hom =
       mateEquiv (derivedUpperStarLowerStarAdjunction Λ' f)
-        (derivedUpperStarLowerStarAdjunction Λ f) (derivedComapLeftDerivedUpperStarIso a f).hom := by
+        (derivedUpperStarLowerStarAdjunction Λ f)
+        (derivedComapLeftDerivedUpperStarIso a f).hom := by
   have hunit (N : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ' Y)) :
       (Mod.comap (coefficientMap a Y)).map ((upperStarLowerStarAdjunction Λ' f).unit.app N) ≫
         (comapLowerStarIso a f).hom.app ((f)^*⟦Λ'⟧.obj N) =
@@ -186,7 +187,8 @@ lemma mateEquiv_derivedPullIso_hom :
 `Lf^* ⊣ Rf_*`. -/
 lemma derivedPushHom_eq_mateEquiv :
     derivedPushHom a f = mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-      (derivedUpperStarLowerStarAdjunction Λ' f) (TwoSquare.mk _ _ _ _ (derivedPullIso a f).inv) := by
+      (derivedUpperStarLowerStarAdjunction Λ' f)
+      (TwoSquare.mk _ _ _ _ (derivedPullIso a f).inv) := by
   have h := conjugateEquiv_comp_eq_mateEquiv_mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))

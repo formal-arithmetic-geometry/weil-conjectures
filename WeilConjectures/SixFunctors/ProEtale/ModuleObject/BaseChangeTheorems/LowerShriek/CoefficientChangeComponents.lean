@@ -91,23 +91,28 @@ lemma boundedConstructibleLowerStar_obj_obj (K : Dᵇc(X.left)⟦Profinite.padic
       (lowerStar (Profinite.padicAlgClRingObj ℓ) f.left).rightDerivedFunctor.obj K.obj :=
   rfl
 
-lemma boundedConstructibleLowerStar_map_hom {K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : K ⟶ L) :
+lemma boundedConstructibleLowerStar_map_hom
+    {K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : K ⟶ L) :
     ((boundedConstructibleLowerStar ℓ f).map φ).hom =
       (lowerStar (Profinite.padicAlgClRingObj ℓ) f.left).rightDerivedFunctor.map φ.hom :=
   rfl
 
 /-- On the ambient derived category, the unit of `Lf^* ⊣ Rf_*` on bounded constructible complexes
 is the unit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
-lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom' (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom'
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).unit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).unit.app K.obj :=
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).unit.app
+        K.obj :=
   restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_unit_app_hom ℓ f _ K
 
 /-- On the ambient derived category, the counit of `Lf^* ⊣ Rf_*` on bounded constructible
 complexes is the counit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
-lemma boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom' (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+lemma boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom'
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).counit.app K.obj :=
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).counit.app
+        K.obj :=
   restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_counit_app_hom ℓ f _ K
 
 end PadicAlgCl
@@ -121,23 +126,28 @@ lemma boundedConstructibleLowerStar_obj_obj (K : Dᵇc(X.left)⟦Profinite.conti
       (lowerStar (Profinite.continuousMapRingObj E) f.left).rightDerivedFunctor.obj K.obj :=
   rfl
 
-lemma boundedConstructibleLowerStar_map_hom {K L : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧} (φ : K ⟶ L) :
+lemma boundedConstructibleLowerStar_map_hom
+    {K L : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧} (φ : K ⟶ L) :
     ((boundedConstructibleLowerStar ℓ E f).map φ).hom =
       (lowerStar (Profinite.continuousMapRingObj E) f.left).rightDerivedFunctor.map φ.hom :=
   rfl
 
 /-- On the ambient derived category, the unit of `Lf^* ⊣ Rf_*` on bounded constructible complexes
 is the unit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
-lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom' (K : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
+lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom'
+    (K : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ E f).unit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) f.left).unit.app K.obj :=
+      (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) f.left).unit.app
+        K.obj :=
   restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_unit_app_hom ℓ f _ K
 
 /-- On the ambient derived category, the counit of `Lf^* ⊣ Rf_*` on bounded constructible
 complexes is the counit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
-lemma boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom' (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
+lemma boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom'
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ E f).counit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) f.left).counit.app K.obj :=
+      (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) f.left).counit.app
+        K.obj :=
   restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_counit_app_hom ℓ f _ K
 
 end ContinuousMapRingObj
