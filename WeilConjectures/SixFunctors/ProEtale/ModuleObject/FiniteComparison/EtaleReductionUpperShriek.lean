@@ -16,6 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionOpenLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
 
 /-!
@@ -91,17 +92,6 @@ section Triangle
 variable {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- `Rf_! ≅ Rf_*` on bounded constructible `𝒪_E`-sheaves for a proper `f`: by independence of
-the compactification, `Rf_!` is `Rf_!^c` for the trivial compactification
-`c = (X ⟶[𝟙] X ⟶[f] Y)`, which is `Rf_*`. -/
-theorem nonempty_boundedConstructibleLowerShriekIsoLowerStar_padicIntegers (f : Z ⟶ Y)
-    [IsProper f.left] :
-    Nonempty (boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f ≅
-      boundedConstructibleLowerStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ f) :=
-  ⟨boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers ℓ E
-      (compactificationOverField f) (.ofIsProper f.left) ≪≫
-    boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f⟩
-
 /-- **The supported localization triangle** on bounded constructible `𝒪_E`-complexes: for a
 closed immersion `d : Z ⟶ Y` with open complement `j : U ⟶ Y`, the counit
 `Rd_! Rd^! K ⟶ K` of `Rd_! ⊣ Rd^!` and the unit `K ⟶ Rj_* j^* K` of `j^* ⊣ Rj_*` extend to a
@@ -110,14 +100,14 @@ distinguished triangle. This is the formal recollement argument
 fully faithful, `j^* Rd_* = 0`, `Rj_*` is fully faithful, and a complex `K` killed by `j^*` is
 `Rd_* d^* K` by open–closed detection. -/
 theorem exists_distTriang_boundedConstructibleUpperShriekAdjunction_counit (d : Z ⟶ Y)
-    [IsProper d.left] [IsClosedImmersion d.left]
+    [IsClosedImmersion d.left]
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     ∃ w, Triangle.mk
       ((boundedConstructibleUpperShriekAdjunction (Profinite.padicIntegersRingObj ℓ E) ℓ
         d).counit.app K)
       ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) ℓ
         (overOpenComplement d)).unit.app K) w ∈ distTriang _ := by
-  obtain ⟨e⟩ := nonempty_boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E d
+  let e := boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E d
   have hdj := isCompl_range_overOpenComplement d
   let adjd := boundedConstructibleUpperStarLowerStarAdjunction
     (Profinite.padicIntegersRingObj ℓ E) ℓ d
@@ -237,7 +227,7 @@ The reduction `red_Y` of the supported localization triangle
 the shifts of `Rd_! B`, so composition with `red_Y (ε_K)` is bijective on morphisms out of
 `Rd_! B`; conclude by the Yoneda lemma along the étale `Rd_! ⊣ Rd^!`. -/
 theorem isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit (d : Z ⟶ Y)
-    [IsProper d.left] [IsClosedImmersion d.left]
+    [IsClosedImmersion d.left]
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     IsIso ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
       d.left).map ((etaleReduction ℓ E n Y).map
@@ -246,10 +236,11 @@ theorem isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit (d : Z ⟶ Y
   have hT' := ((boundedConstructible _).ι ⋙ derivedEtaleReduction ℓ E n Y.left).map_distinguished
     _ hT
   have hN := ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E)
-    (overOpenComplement d).left).isIso_unit_app_iff_isIso_unit_app_of_iso
+    (overOpenComplement d).left).isIso_unit_app_iff_of_iso_obj
       ((boundedConstructibleLowerStarCompatibility _ ℓ (overOpenComplement d)).app
         ((boundedConstructibleUpperStar _ ℓ (overOpenComplement d)).obj K)).symm).2
-      ((derivedUpperStarLowerStarAdjunction _ (overOpenComplement d).left).isIso_unit_app_obj _)
+      ((derivedUpperStarLowerStarAdjunction _
+        (overOpenComplement d).left).isIso_unit_app_obj_of_isIso_counit_app _)
   have h := (NatIso.isIso_map_iff (Functor.isoWhiskerRight
     (etaleReductionIsoDerivedEtaleReduction ℓ E n Y)
     (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left))
@@ -269,7 +260,7 @@ immersion `d`**: for *any* isomorphism `γ : Rd_! ⋙ red_Y ≅ red_Z ⋙ Rd_!`,
 `β : Rd^! ⋙ red_Z ⟶ red_Y ⋙ Rd^!` under the adjunctions `Rd_! ⊣ Rd^!` is an isomorphism. At `K`,
 `β_K` is the étale unit (invertible, `Rd_!` being fully faithful), then `Rd^!` of `γ⁻¹`, then
 `Rd^! red_Y (ε_K)` (`isIso_rightDerivedUpperShriek_map_etaleReduction_map_counit`). -/
-theorem isIso_mateEquiv_etaleReduction_of_isClosedImmersion (d : Z ⟶ Y) [IsProper d.left]
+theorem isIso_mateEquiv_etaleReduction_of_isClosedImmersion (d : Z ⟶ Y)
     [IsClosedImmersion d.left]
     (γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ d ⋙
         etaleReduction ℓ E n Y ≅

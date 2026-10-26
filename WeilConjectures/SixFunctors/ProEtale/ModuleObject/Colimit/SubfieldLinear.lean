@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
-public import WeilConjectures.CategoryTheory.ObjectProperty.LiftLinear
+public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
@@ -116,7 +116,7 @@ lemma smul_id_Q_obj {X : Scheme.{u}}
     letI := modLinear Λ φ X
     a • 𝟙 (DerivedCategory.Q.obj M) = DerivedCategory.Q.map
       ((HomologicalComplex.Hom.mk (fun n ↦ Mod.smulEnd (constRingHom Λ φ X a) (M.X n))
-        fun _ _ _ ↦ Mod.hom_ext _ _ (Mod.smulHom_naturality _ _)) : M ⟶ M) := by
+        fun _ _ _ ↦ Mod.hom_ext _ _ (Mod.globalSmul_naturality _ _)) : M ⟶ M) := by
   let _ := modLinear Λ φ X
   rw [← DerivedCategory.Q.map_id, ← Functor.map_smul]
   congr 1
@@ -163,7 +163,7 @@ attribute [scoped instance] padicSubfieldModLinear
 multiplication by the constant global section `b`. -/
 lemma padicSubfield_smul_hom (X : Scheme.{u}) (b : F)
     {M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)} (f : M ⟶ N) :
-    (b • f).hom = f.hom ≫ Mod.smulHom (padicSubfieldConstRingHom ℓ F X b) N :=
+    (b • f).hom = f.hom ≫ Mod.globalSmul (padicSubfieldConstRingHom ℓ F X b).hom N :=
   Mod.linearOfRingHom_smul_hom _ b f
 
 /-- On the derived category of `F_X`-module objects, the action of `b ∈ F` on (the image of) a
@@ -175,7 +175,7 @@ lemma padicSubfield_smul_id_Q_obj {X : Scheme.{u}}
     b • 𝟙 (DerivedCategory.Q.obj M) = DerivedCategory.Q.map
       ((HomologicalComplex.Hom.mk
         (fun n ↦ Mod.smulEnd (padicSubfieldConstRingHom ℓ F X b) (M.X n))
-        fun _ _ _ ↦ Mod.hom_ext _ _ (Mod.smulHom_naturality _ _)) : M ⟶ M) :=
+        fun _ _ _ ↦ Mod.hom_ext _ _ (Mod.globalSmul_naturality _ _)) : M ⟶ M) :=
   smul_id_Q_obj _ (Profinite.continuousMapConstRingHom.{u} F) M b
 
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

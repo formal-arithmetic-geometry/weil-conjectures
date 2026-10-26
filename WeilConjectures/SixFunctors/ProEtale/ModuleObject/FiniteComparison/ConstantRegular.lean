@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationCokernel
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.Regular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 
 /-!
@@ -18,9 +19,8 @@ Let `T` be a finite discrete commutative ring, `X` a scheme and
 `Λ_X = p_X^* T̲` and sheaves of `T`-modules on `X_proét`.
 
 * `Φ⁻¹` of the constant sheaf `T` is the free module `Λ_X`
-  (`ProEtale.finiteCoefficientModEquivalence_inverse_obj_constantSheaf_iso_regular`): both
-  corepresent the global sections, `Φ⁻¹ ∘ const` being left adjoint to `Γ ∘ Φ`
-  (`ProEtale.constantSheafCompInverseAdjunction`) and `Λ_X` corepresenting `M ↦ Γ(X, M)`.
+  (`ProEtale.regularIsoInverseConstant`), and `Φ⁻¹ ∘ const` is left adjoint to `Γ ∘ Φ`
+  (`ProEtale.constantSheafCompInverseAdjunction`).
 * Hence `Φ⁻¹` of the constant sheaf of a finite `T`-module is finitely presented
   (`ProEtale.isFinitelyPresented_finiteCoefficientModEquivalence_inverse_obj_constantSheaf`):
   `T` is noetherian, so a finite `T`-module is the cokernel of a morphism `Tᵐ ⟶ Tⁿ`, and
@@ -78,86 +78,6 @@ noncomputable def constantSheafCompInverseAdjunction :
   (constantSheafAdj _ _ (Scheme.ProEt.isTerminalMkId X)).comp
     (finiteCoefficientModEquivalence X T).symm.toAdjunction
 
-/-- Morphisms out of `Φ⁻¹` of the constant sheaf `T` are the global sections. -/
-noncomputable def constantSheafCompInverseHomEquiv
-    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)) :
-    ((finiteCoefficientModEquivalence X T).inverse.obj
-        ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T))).obj
-          (ModuleCat.of _ (ULift.{u + 1} T))) ⟶ N) ≃
-      N.X.obj.obj (op (Scheme.ProEt.mk (𝟙 X))) :=
-  ((constantSheafCompInverseAdjunction X T).homEquiv _ N).trans
-    (ModuleCat.homEquiv.trans (LinearMap.ringLmapEquivSelf _ (ULift.{u + 1} T) _).toEquiv)
-
-/-- Morphisms out of the free module `Λ_X` are the global sections. -/
-noncomputable def regularHomEquiv
-    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)) :
-    (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj T) X) ⟶ N) ≃
-      N.X.obj.obj (op (Scheme.ProEt.mk (𝟙 X))) :=
-  (Mod.regularHomAddEquiv N).toEquiv.trans
-    (Sheaf.unitHomEvalAddEquiv (Scheme.ProEt.isTerminalMkId X) N.X).toEquiv
-
-lemma constantSheafCompInverseHomEquiv_apply
-    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)}
-    (x : (finiteCoefficientModEquivalence X T).inverse.obj
-        ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T))).obj
-          (ModuleCat.of _ (ULift.{u + 1} T))) ⟶ N) :
-    constantSheafCompInverseHomEquiv X T N x =
-      ((constantSheafCompInverseAdjunction X T).homEquiv _ N x).hom (1 : ULift.{u + 1} T) :=
-  rfl
-
-/-- `constantSheafCompInverseHomEquiv` is natural. -/
-lemma constantSheafCompInverseHomEquiv_comp
-    {N N' : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)}
-    (x : (finiteCoefficientModEquivalence X T).inverse.obj
-        ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T))).obj
-          (ModuleCat.of _ (ULift.{u + 1} T))) ⟶ N) (f : N ⟶ N') :
-    constantSheafCompInverseHomEquiv X T N' (x ≫ f) =
-      f.hom.hom.app _ (constantSheafCompInverseHomEquiv X T N x) := by
-  rw [constantSheafCompInverseHomEquiv_apply, constantSheafCompInverseHomEquiv_apply,
-    Adjunction.homEquiv_naturality_right]
-  rfl
-
-omit [DiscreteTopology T] [Finite T] in
-/-- `regularHomEquiv` is natural. -/
-lemma regularHomEquiv_comp
-    {N N' : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)}
-    (x : Mod.regular (condensedRingObj (Profinite.continuousMapRingObj T) X) ⟶ N)
-    (f : N ⟶ N') :
-    regularHomEquiv X T N' (x ≫ f) = f.hom.hom.app _ (regularHomEquiv X T N x) :=
-  rfl
-
-/-- The identification of the morphisms out of `Φ⁻¹ T` and out of `Λ_X` is natural. -/
-lemma constantSheafCompInverseHomEquiv_trans_symm_comp
-    {N N' : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)}
-    (x : (finiteCoefficientModEquivalence X T).inverse.obj
-        ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T))).obj
-          (ModuleCat.of _ (ULift.{u + 1} T))) ⟶ N) (f : N ⟶ N') :
-    ((constantSheafCompInverseHomEquiv X T N').trans (regularHomEquiv X T N').symm) (x ≫ f) =
-      ((constantSheafCompInverseHomEquiv X T N).trans (regularHomEquiv X T N).symm) x ≫ f := by
-  refine (regularHomEquiv X T N').injective ?_
-  rw [Equiv.trans_apply, Equiv.apply_symm_apply, regularHomEquiv_comp, Equiv.trans_apply,
-    Equiv.apply_symm_apply, constantSheafCompInverseHomEquiv_comp]
-
-/-- **`Φ⁻¹` of the constant sheaf `T` is the free module `Λ_X`**: both corepresent the global
-sections. -/
-noncomputable def finiteCoefficientModEquivalenceInverseObjConstantSheafIso :
-    (finiteCoefficientModEquivalence X T).inverse.obj
-        ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T))).obj
-          (ModuleCat.of _ (ULift.{u + 1} T))) ≅
-      Mod.regular (condensedRingObj (Profinite.continuousMapRingObj T) X) :=
-  (Coyoneda.fullyFaithful.preimageIso (NatIso.ofComponents
-    (fun N ↦ ((constantSheafCompInverseHomEquiv X T N).trans
-      (regularHomEquiv X T N).symm).toIso) fun {N N'} f ↦ by
-        ext x
-        exact constantSheafCompInverseHomEquiv_trans_symm_comp X T x f)).unop.symm
-
-
 instance additive_constantSheafCompInverse :
     (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T)) ⋙
       (finiteCoefficientModEquivalence X T).inverse).Additive :=
@@ -180,7 +100,7 @@ lemma isFinitelyPresented_finiteCoefficientModEquivalence_inverse_obj_constantSh
   exact Mod.IsFinitelyPresented.of_iso_obj_cokernel
     (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T)) ⋙
       (finiteCoefficientModEquivalence X T).inverse)
-    (finiteCoefficientModEquivalenceInverseObjConstantSheafIso X T) f
+    (regularIsoInverseConstant T X).symm f
     ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} T)) ⋙
       (finiteCoefficientModEquivalence X T).inverse).mapIso e)
 

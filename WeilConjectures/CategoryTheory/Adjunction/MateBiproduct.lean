@@ -22,6 +22,14 @@ For a preadditive category `C` with finite biproducts and `d : ℕ`, the *biprod
   by `e : V ≅ finBiproductPow C d` and `e' : V' ≅ finBiproductPow C' d`. If `α` is compatible with
   the biproduct projections (i.e. after transport along `e`, `e'` it is the canonical comparison
   `G (c ^ d) ≅ (G c) ^ d`), then the mate `R ⋙ V ⟶ V' ⋙ R` of `α` is an isomorphism.
+  The square is
+  ```
+  C --G--> C'
+  |        |
+  V        V'
+  v        v
+  C --G--> C'
+  ```
 * `Adjunction.isIso_mateEquiv_inv_of_biproductPow`: for a square of adjunctions in which the
   monads `E₁ ⋙ Res₁` and `E₂ ⋙ Res₂` are biproduct powers compatibly with the coefficient
   comparison, the mate `R₁ ⋙ E₁ ⟶ E₂ ⋙ R₂` of the inverse of the comparison

@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantRegular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-!
@@ -66,7 +67,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
   [Finite T]
 
 /-- **`Φ⁻¹` commutes with pullback**: `g^*⟦T̲⟧ (Φ_Y⁻¹ P) ≅ Φ_X⁻¹ (g^* P)`, for
-`Φ = finiteCoefficientModEquivalence` (`finiteCoefficientModUpperStarIso`). -/
+`Φ = finiteCoefficientModEquivalence` (`upperStarFiniteCoefficientModEquivalenceIso`). -/
 noncomputable def finiteCoefficientModUpperStarInverseIso {X Y : Scheme.{u}} (g : X ⟶ Y)
     (P : Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} T))) :
     (g)^*⟦Profinite.continuousMapRingObj T⟧.obj
@@ -75,7 +76,7 @@ noncomputable def finiteCoefficientModUpperStarInverseIso {X Y : Scheme.{u}} (g 
         ((g)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)].obj P) :=
   (finiteCoefficientModEquivalence X T).unitIso.app _ ≪≫
     (finiteCoefficientModEquivalence X T).inverse.mapIso
-      (((finiteCoefficientModUpperStarIso T g).app _).symm ≪≫
+      ((upperStarFiniteCoefficientModEquivalenceIso g T).app _ ≪≫
         (g)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)].mapIso
           ((finiteCoefficientModEquivalence Y T).counitIso.app P))
 

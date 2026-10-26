@@ -68,7 +68,7 @@ variable {X Y S : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
 
 /-- Closed immersions have a reduction comparison for `Rf_!` and `Rf^!`
 (`exists_etaleReductionLowerShriekIso_of_isClosedImmersion`). -/
-theorem hasEtaleReductionLowerShriekIso_of_isClosedImmersion (f : X ⟶ Y) [IsProper f.left]
+theorem hasEtaleReductionLowerShriekIso_of_isClosedImmersion (f : X ⟶ Y)
     [IsClosedImmersion f.left] : HasEtaleReductionLowerShriekIso ℓ E n f :=
   exists_etaleReductionLowerShriekIso_of_isClosedImmersion ℓ E n f
 

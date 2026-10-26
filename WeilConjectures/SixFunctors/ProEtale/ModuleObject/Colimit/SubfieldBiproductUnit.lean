@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsBiproductUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsBasis
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapFiniteFreeSMul
-public import WeilConjectures.CategoryTheory.Adjunction.RestrictBiproductDescUnit
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
@@ -22,9 +22,9 @@ multiplication by `bᵢ`) exhibit `Res (F_X ⊗ᴸ K)` as the direct sum of `d` 
 
 The proof goes in three steps:
 * on the condensed rings, the map `E̲ᵈ ⟶ F̲`, `(xᵢ) ↦ ∑ xᵢ bᵢ`, is an isomorphism
-  (`ProEtale.CondensedRing.exists_isIso_biproductDesc_padicSubfieldRingObjMap_smulHom`), and so
+  (`ProEtale.CondensedRing.exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul`), and so
   is its pullback `E_Xᵈ ⟶ F_X` along `p_X^*`
-  (`ProEtale.CondensedRing.isIso_biproductDesc_padicSubfieldRingObjMap_smulHom`);
+  (`ProEtale.CondensedRing.isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul`);
 * hence the maps `M ⟶ Res (F_X ⊗ M)`, `m ↦ bᵢ ⊗ m`, decompose `Res (F_X ⊗ M)` for every
   `E_X`-module `M` (`CategoryTheory.Mod.isIso_biproductDesc_unit_smulEnd`), and the same holds
   on the derived category, extension of scalars being exact
@@ -54,10 +54,10 @@ attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 /-- For finite subextensions `E ≤ F`, there is an `E`-basis `b` of `F` such that the map of
 condensed abelian groups `E̲ᵈ ⟶ F̲`, `(xᵢ) ↦ ∑ xᵢ bᵢ`, is an isomorphism: the coordinates of `b`
 are continuous. -/
-theorem exists_isIso_biproductDesc_padicSubfieldRingObjMap_smulHom :
+theorem exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul :
     ∃ (d : ℕ) (b : Fin d → F), IsIso (biproduct.desc fun i : Fin d ↦
       Profinite.padicSubfieldRingObjMap.{u} ℓ h ≫
-        Mod.smulHom (Profinite.continuousMapConstRingHom F (b i)) (Mod.regular _)) := by
+        Mod.globalSmul (Profinite.continuousMapConstRingHom F (b i)).hom (Mod.regular _)) := by
   let : Algebra E F := (IntermediateField.inclusion h).toRingHom.toAlgebra
   have : IsScalarTower ℚ_[ℓ] E F := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have : FiniteDimensional E F := Module.Finite.of_restrictScalars_finite ℚ_[ℓ] E F
@@ -66,7 +66,7 @@ theorem exists_isIso_biproductDesc_padicSubfieldRingObjMap_smulHom :
     (((Module.finBasis E F).coord i).restrictScalars ℚ_[ℓ]).continuous_of_finiteDimensional
   refine ⟨Module.finrank E F, Module.finBasis E F, ?_⟩
   have key : (biproduct.desc fun i ↦ Profinite.padicSubfieldRingObjMap.{u} ℓ h ≫
-      Mod.smulHom (Profinite.continuousMapConstRingHom F (Module.finBasis E F i))
+      Mod.globalSmul (Profinite.continuousMapConstRingHom F (Module.finBasis E F i)).hom
         (Mod.regular _)) = biproduct.desc fun i ↦
       (Mod.forget _).map (Profinite.continuousMapSMulRightHom.{u} hφ (Module.finBasis E F i)) :=
     biproduct.hom_ext' _ _ fun i ↦ by
@@ -78,20 +78,20 @@ theorem exists_isIso_biproductDesc_padicSubfieldRingObjMap_smulHom :
 
 /-- If the map of condensed abelian groups `E̲ᵈ ⟶ F̲`, `(xᵢ) ↦ ∑ xᵢ bᵢ`, is an isomorphism, then
 so is its pullback `E_Xᵈ ⟶ F_X` along `p_X^*`, for every scheme `X`. -/
-theorem isIso_biproductDesc_padicSubfieldRingObjMap_smulHom {d : ℕ} (b : Fin d → F)
+theorem isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul {d : ℕ} (b : Fin d → F)
     (hb : IsIso (biproduct.desc fun i : Fin d ↦ Profinite.padicSubfieldRingObjMap.{u} ℓ h ≫
-      Mod.smulHom (Profinite.continuousMapConstRingHom F (b i)) (Mod.regular _)))
+      Mod.globalSmul (Profinite.continuousMapConstRingHom F (b i)).hom (Mod.regular _)))
     (X : Scheme.{u}) :
     IsIso (biproduct.desc fun i : Fin d ↦ padicSubfieldRingObjMap X ℓ h ≫
-      Mod.smulHom (padicSubfieldConstRingHom ℓ F X (b i)) (Mod.regular _)) := by
+      Mod.globalSmul (padicSubfieldConstRingHom ℓ F X (b i)).hom (Mod.regular _)) := by
   have := upperStarFromPoint_additive X
   have key : (biproduct.desc fun i : Fin d ↦ padicSubfieldRingObjMap X ℓ h ≫
-      Mod.smulHom (padicSubfieldConstRingHom ℓ F X (b i)) (Mod.regular _)) =
+      Mod.globalSmul (padicSubfieldConstRingHom ℓ F X (b i)).hom (Mod.regular _)) =
       biproduct.desc fun i ↦ (upperStarFromPoint X).map
         (Profinite.padicSubfieldRingObjMap.{u} ℓ h ≫
-          Mod.smulHom (Profinite.continuousMapConstRingHom F (b i)) (Mod.regular _)) :=
+          Mod.globalSmul (Profinite.continuousMapConstRingHom F (b i)).hom (Mod.regular _)) :=
     biproduct.hom_ext' _ _ fun i ↦ by
-      rw [biproduct.ι_desc, biproduct.ι_desc, Functor.map_comp, ← Mod.smulHom_mapMod_obj]
+      rw [biproduct.ι_desc, biproduct.ι_desc, Functor.map_comp, ← Mod.globalSmul_mapMod]
       rfl
   rw [key, ← Functor.isIso_map_biproduct_desc_iff]
   infer_instance
@@ -101,7 +101,7 @@ maps `M ⟶ Res (F_X ⊗ M)`, `m ↦ bᵢ ⊗ m`, exhibit `Res (F_X ⊗ M)` as `
 theorem isIso_biproductDesc_extendRestrictScalarsSubfield_unit_smul (X : Scheme.{u}) {d : ℕ}
     (b : Fin d → F)
     (hb : IsIso (biproduct.desc fun i : Fin d ↦ padicSubfieldRingObjMap X ℓ h ≫
-      Mod.smulHom (padicSubfieldConstRingHom ℓ F X (b i)) (Mod.regular _)))
+      Mod.globalSmul (padicSubfieldConstRingHom ℓ F X (b i)).hom (Mod.regular _)))
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :
     IsIso (biproduct.desc fun i : Fin d ↦
       (Mod.extendRestrictAdjunction (padicSubfieldRingObjMap X ℓ h)).unit.app M ≫
@@ -119,7 +119,7 @@ derived category of `E_X`-modules, the maps `K ⟶ Res (F_X ⊗ᴸ K)`, `m ↦ b
 theorem isIso_biproductDesc_derivedExtendRestrictScalarsSubfield_unit_smul (X : Scheme.{u})
     {d : ℕ} (b : Fin d → F)
     (hb : IsIso (biproduct.desc fun i : Fin d ↦ padicSubfieldRingObjMap X ℓ h ≫
-      Mod.smulHom (padicSubfieldConstRingHom ℓ F X (b i)) (Mod.regular _)))
+      Mod.globalSmul (padicSubfieldConstRingHom ℓ F X (b i)).hom (Mod.regular _)))
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (padicSubfieldRingObj X ℓ E))) :
     IsIso (biproduct.desc fun i : Fin d ↦
@@ -170,10 +170,10 @@ theorem exists_isIso_biproductDesc_unit_smul :
         (boundedConstructibleExtendRestrictScalarsSubfieldAdjunction X ℓ h).unit.app K ≫
           (boundedConstructibleRestrictScalarsSubfield X ℓ h).map
             (b i • 𝟙 ((boundedConstructibleExtendScalarsSubfield X ℓ h).obj K))) := by
-  have H := exists_isIso_biproductDesc_padicSubfieldRingObjMap_smulHom.{u} ℓ h
+  have H := exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul.{u} ℓ h
   obtain ⟨d, b, hb⟩ := H
   refine ⟨d, b, fun X _ K ↦ ?_⟩
-  have h₁ := isIso_biproductDesc_padicSubfieldRingObjMap_smulHom ℓ h b hb X
+  have h₁ := isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul ℓ h b hb X
   have h₂ := isIso_biproductDesc_derivedExtendRestrictScalarsSubfield_unit_smul ℓ h X b h₁ K.obj
   have h₃ :=
     isIso_biproductDesc_boundedConstructibleExtendRestrictScalarsSubfield_unit_smul ℓ h X b K h₂

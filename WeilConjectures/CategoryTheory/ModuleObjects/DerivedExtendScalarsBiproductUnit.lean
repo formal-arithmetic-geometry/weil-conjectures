@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Center.Linear
 public import WeilConjectures.CategoryTheory.Adjunction.MateBiproduct
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleUnit
-public import WeilConjectures.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Biproduct decompositions by the unit of the derived extension of scalars

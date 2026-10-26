@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
-public import WeilConjectures.CategoryTheory.Preadditive.AdditiveFunctorBiproductDesc
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Bases of extensions of commutative algebra objects
@@ -22,7 +22,7 @@ the action of `sᵢ`) exhibit `φ^* (S ⊗_R M)` as `Mᵈ`
 `r ↦ φ(r) sᵢ`.
 
 The action of a global section on a tensor product `M ⊗_S N` is its action on `M`
-(`CategoryTheory.Mod.smulHom_tensorObj`).
+(`CategoryTheory.Mod.globalSmul_tensorObj`).
 -/
 
 @[expose] public section
@@ -43,8 +43,9 @@ variable {S : C} [MonObj S] [IsCommMonObj S] (s : Γ S)
 
 /-- The action of a global section `s` on a relative tensor product `M ⊗_S N` is the action of
 `s` on `M`, tensored with `N`. -/
-lemma smulHom_tensorObj (M N : Mod C S) : smulHom s (M ⊗ N) = (smulEnd s M ▷ N).hom := by
-  rw [← cancel_epi (tensorObjπ M N), tensorObjπ_whiskerRight, smulEnd_hom, smulHom, smulHom,
+lemma globalSmul_tensorObj (M N : Mod C S) :
+    globalSmul s.hom (M ⊗ N) = (smulEnd s M ▷ N).hom := by
+  rw [← cancel_epi (tensorObjπ M N), tensorObjπ_whiskerRight, smulEnd_hom, globalSmul, globalSmul,
     leftUnitor_inv_naturality_assoc, whisker_exchange_assoc, whiskerLeft_tensorπ_smul]
   simp only [comp_whiskerRight, Category.assoc]
   rw [associator_inv_naturality_left_assoc]
@@ -56,8 +57,8 @@ action of `s` on the unit, tensored with `N`. -/
 lemma smulEnd_comp_leftUnitor_inv (N : Mod C S) :
     smulEnd s N ≫ (λ_ N).inv = (λ_ N).inv ≫ smulEnd s (𝟙_ (Mod C S)) ▷ N := by
   refine Mod.hom_ext _ _ ?_
-  rw [comp_hom', comp_hom', ← smulHom_tensorObj, smulEnd_hom]
-  exact smulHom_naturality s (λ_ N).inv
+  rw [comp_hom', comp_hom', ← globalSmul_tensorObj, smulEnd_hom]
+  exact globalSmul_naturality s.hom (λ_ N).inv
 
 end Tensor
 
@@ -94,7 +95,7 @@ variable [Abelian C] [MonoidalPreadditive C]
 `M ⟶ φ^* (S ⊗_R M)`, `m ↦ sᵢ ⊗ m`, given by the unit followed by the action of `sᵢ`, exhibit
 `φ^* (S ⊗_R M)` as the direct sum of `d` copies of `M`. -/
 theorem isIso_biproductDesc_unit_smulEnd [HasFiniteBiproducts C] {d : ℕ} (s : Fin d → Γ S)
-    (hs : IsIso (biproduct.desc fun i : Fin d ↦ φ ≫ smulHom (s i) (regular S)))
+    (hs : IsIso (biproduct.desc fun i : Fin d ↦ φ ≫ globalSmul (s i).hom (regular S)))
     (M : Mod C R) :
     IsIso (biproduct.desc fun i : Fin d ↦ (extendRestrictAdjunction φ).unit.app M ≫
       (comap φ).map (smulEnd (s i) ((extendScalars φ).obj M))) := by

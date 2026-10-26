@@ -39,7 +39,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The closed-immersion case of `exists_etaleReductionLowerShriekIso`: for a closed immersion
 `f`, reduction modulo `ℓⁿ` read on the étale site commutes with `Rf_!` through an isomorphism
 `γ` whose transpose under `Rf_! ⊣ Rf^!` is an isomorphism. -/
-theorem exists_etaleReductionLowerShriekIso_of_isClosedImmersion (f : Z ⟶ Y) [IsProper f.left]
+theorem exists_etaleReductionLowerShriekIso_of_isClosedImmersion (f : Z ⟶ Y)
     [IsClosedImmersion f.left] :
     ∃ γ : boundedConstructibleLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Y ≅
