@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Abelian.Pseudoelements
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Finite
 
 /-!
 # Pulling back and comparing short exact sequences
@@ -18,6 +19,12 @@ is (`CategoryTheory.ShortComplex.ShortExact.pullback`), and comes with a morphis
 
 Two short exact sequences whose middle terms are identified by an isomorphism compatible with
 the maps are isomorphic (`CategoryTheory.ShortComplex.ShortExact.isoOfCompEqZero`).
+
+We also show that a product of short exact sequences is exact
+(`CategoryTheory.ShortComplex.exact_mk_piMap`), that a short exact sequence in a functor category is
+short exact objectwise (`CategoryTheory.ShortComplex.ShortExact.map_evaluation`), and a
+five-lemma style criterion for the third component of a morphism of short complexes to be an
+isomorphism (`CategoryTheory.ShortComplex.isIso_τ₃_of_exact`).
 -/
 
 @[expose] public section
@@ -124,5 +131,47 @@ lemma ShortExact.isoOfCompEqZero_hom_τ₂ {S S' : ShortComplex C} (hS : S.Short
     (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
     (hS.isoOfCompEqZero hS' e h₁ h₂).hom.τ₂ = e.hom :=
   rfl
+
+/-- Let `φ : S₁ ⟶ S₂` be a morphism of short complexes such that `S₁.g` is an epimorphism and
+`S₂` is exact with `S₂.g` an epimorphism. If `φ.τ₁` and `φ.τ₂` are isomorphisms, then so is
+`φ.τ₃`:
+```
+S₁.X₁ ⟶ S₁.X₂ ⟶ S₁.X₃ ⟶ 0
+  |≅       |≅       |φ.τ₃
+  v        v        v
+S₂.X₁ ⟶ S₂.X₂ ⟶ S₂.X₃ ⟶ 0
+```
+-/
+lemma isIso_τ₃_of_exact {S₁ S₂ : ShortComplex C} (φ : S₁ ⟶ S₂) [Epi S₁.g] (h₂ : S₂.Exact)
+    [Epi S₂.g] [IsIso φ.τ₁] [IsIso φ.τ₂] : IsIso φ.τ₃ := by
+  refine ⟨h₂.desc (inv φ.τ₂ ≫ S₁.g) ?_, ?_, ?_⟩
+  · rw [← cancel_epi φ.τ₁, Limits.comp_zero, ← Category.assoc, φ.comm₁₂, Category.assoc,
+      IsIso.hom_inv_id_assoc, S₁.zero]
+  · rw [← cancel_epi S₁.g, ← Category.assoc, ← φ.comm₂₃, Category.assoc, h₂.g_desc,
+      IsIso.hom_inv_id_assoc, Category.comp_id]
+  · rw [← cancel_epi S₂.g, ← Category.assoc, h₂.g_desc, Category.assoc, ← φ.comm₂₃,
+      IsIso.inv_hom_id_assoc, Category.comp_id]
+
+/-- A product of short exact short complexes is exact. -/
+lemma exact_mk_piMap {ι : Type*} (S : ι → ShortComplex C) [HasProduct fun i ↦ (S i).X₁]
+    [HasProduct fun i ↦ (S i).X₂] [HasProduct fun i ↦ (S i).X₃] (hS : ∀ i, (S i).ShortExact)
+    (w : Limits.Pi.map (fun i ↦ (S i).f) ≫ Limits.Pi.map (fun i ↦ (S i).g) = 0) :
+    (ShortComplex.mk _ _ w).Exact := by
+  have (i : ι) : Mono (S i).f := (hS i).mono_f
+  refine ShortComplex.exact_of_f_is_kernel _ (KernelFork.IsLimit.ofι _ _
+    (fun z hz ↦ Pi.lift fun i ↦ (hS i).exact.lift (z ≫ Pi.π (fun i ↦ (S i).X₂) i) ?_)
+      (fun z hz ↦ ?_) (fun z hz m hm ↦ ?_))
+  · simpa using congrArg (· ≫ Pi.π (fun i ↦ (S i).X₃) i) hz
+  · refine Pi.hom_ext _ _ fun i ↦ ?_
+    rw [Category.assoc, Pi.map_π, Pi.lift_π_assoc, Exact.lift_f]
+  · refine Pi.hom_ext _ _ fun i ↦ ?_
+    rw [Pi.lift_π, ← cancel_mono (S i).f, Exact.lift_f, ← hm, Category.assoc, Category.assoc,
+      Pi.map_π]
+
+/-- A short exact sequence in a functor category with values in an abelian category is short
+exact objectwise. -/
+lemma ShortExact.map_evaluation {J : Type*} [Category* J] {S : ShortComplex (J ⥤ C)}
+    (hS : S.ShortExact) (X : J) : (S.map ((evaluation J C).obj X)).ShortExact :=
+  hS.map_of_exact _
 
 end CategoryTheory.ShortComplex

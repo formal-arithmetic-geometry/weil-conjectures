@@ -259,7 +259,8 @@ lemma mapDerivedCategoryCompIso_fach (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G
 /-- An exact functor commutes with the homology functors of the derived categories:
 the canonical isomorphism
 `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` of functors
-`DerivedCategory C ⥤ D`, induced by the commutation of `F` with homology of complexes. -/
+`DerivedCategory C ⥤ D`, induced by the commutation of `F` with homology of complexes.
+(blueprint: `lem-weil-pbc-exact-functor-bounded-below`) -/
 noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) :
     DerivedCategory.homologyFunctor C n ⋙ F ≅
@@ -539,7 +540,7 @@ variable (F : C ⥤ D) [F.Additive]
 
 /-- An exact functor between abelian categories preserves bounded below objects of the
 derived categories: an object isomorphic to a complex concentrated in degrees `≥ n` is
-sent to an object with the same property. -/
+sent to an object with the same property. (blueprint: `lem-weil-pbc-exact-functor-bounded-below`) -/
 lemma isGE_mapDerivedCategory_obj (X : DerivedCategory C) (n : ℤ) [X.IsGE n] :
     (F.mapDerivedCategory.obj X).IsGE n := by
   obtain ⟨K, hK, ⟨e⟩⟩ := X.exists_iso_Q_obj_of_isGE n
@@ -619,7 +620,7 @@ lemma bounded_of_bounded_mapDerivedCategory_obj [F.Faithful] {X : DerivedCategor
 /-- The functor induced on the bounded below derived categories by an exact functor
 between abelian categories: the restriction of `F.mapDerivedCategory` to
 `DerivedCategory.Plus`, which is well defined since an exact functor preserves bounded
-below objects. -/
+below objects. (blueprint: `def-weil-pbc-derived-inverse-image`) -/
 noncomputable def mapDerivedCategoryPlus :
     DerivedCategory.Plus C ⥤ DerivedCategory.Plus D :=
   DerivedCategory.TStructure.t.plus.lift
@@ -631,7 +632,8 @@ noncomputable def mapDerivedCategoryPlus :
 scoped notation "D+(" F ")" => mapDerivedCategoryPlus F
 
 /-- The restriction `F.mapDerivedCategoryPlus` of `F.mapDerivedCategory` to the bounded
-below derived categories is compatible with the inclusions. -/
+below derived categories is compatible with the inclusions.
+(blueprint: `def-weil-pbc-derived-inverse-image`) -/
 noncomputable def mapDerivedCategoryPlusCompatibility :
     F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ≅
       DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory :=
@@ -664,7 +666,7 @@ instance : F.mapDerivedCategoryPlus.IsTExact DerivedCategory.Plus.TStructure.t
 /-- The functor `F.mapDerivedCategoryPlus` induced on the bounded below derived categories
 by an exact functor `F` factors the functor `F.mapHomotopyCategoryPlus` on the bounded
 below homotopy categories through the localization functors: the bounded below counterpart
-of `Functor.mapDerivedCategoryFactorsh`. -/
+of `Functor.mapDerivedCategoryFactorsh`. (blueprint: `def-weil-pbc-derived-inverse-image`) -/
 noncomputable def mapDerivedCategoryPlusFactorsh :
     DerivedCategory.Plus.Qh ⋙ F.mapDerivedCategoryPlus ≅
       F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh :=
@@ -1590,5 +1592,40 @@ noncomputable def mapDerivedCategoryTruncGEIso (n : ℤ) :
       simp only [Functor.comp_obj, Functor.comp_map, asIso_hom]
       rw [reassoc_of% hX, ← reassoc_of% nat₂, hY, ← Functor.map_comp, ← Functor.map_comp,
         nat₁])).symm
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor
+
+open Limits
+
+variable {C₁ C₂ : Type*} [Category* C₁] [Category* C₂] [Abelian C₁] [Abelian C₂]
+  [HasDerivedCategory C₁] [HasDerivedCategory C₂] (F : C₁ ⥤ C₂) [F.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+/-- **An exact functor induces a triangulated functor on derived categories.** For an exact
+functor `F` of abelian categories, the functor `F.mapDerivedCategory : D(C₁) ⥤ D(C₂)` obtained by
+applying `F` termwise is triangulated, and it carries a complex `A[n]` concentrated in one
+degree to `F(A)[n]` (`Functor.mapDerivedCategorySingleFunctor`).
+(blueprint: `lem-sf-exact-functor-derived-triangulated`) -/
+theorem mapDerivedCategory_isTriangulated_and_singleFunctor :
+    F.mapDerivedCategory.IsTriangulated ∧ ∀ n : ℤ,
+      Nonempty (DerivedCategory.singleFunctor C₁ n ⋙ F.mapDerivedCategory ≅
+        F ⋙ DerivedCategory.singleFunctor C₂ n) :=
+  ⟨inferInstance, fun n ↦ ⟨F.mapDerivedCategorySingleFunctor n⟩⟩
+
+/-- **The derived functor of an exact functor and its factorization.** For an exact functor `F`
+of abelian categories, applying `F` termwise to cochain complexes preserves
+quasi-isomorphisms; the induced functor `F.mapDerivedCategory` commutes with the shifts and is
+triangulated; and the isomorphism `F.mapDerivedCategoryFactors :
+Q ⋙ F.mapDerivedCategory ≅ F.mapHomologicalComplex _ ⋙ Q` is compatible with the shifts. In
+particular `F` applied termwise to a complex `K` represents `F.mapDerivedCategory (Q K)`.
+(blueprint: `lem-weil-pbc-exact-functor-derived-factorization`) -/
+theorem mapDerivedCategoryFactors_commShift :
+    (∀ {K L : CochainComplex C₁ ℤ} (f : K ⟶ L), QuasiIso f →
+      QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧
+    F.mapDerivedCategory.IsTriangulated ∧
+    NatTrans.CommShift F.mapDerivedCategoryFactors.hom ℤ :=
+  ⟨fun _ _ ↦ inferInstance, inferInstance, inferInstance⟩
 
 end CategoryTheory.Functor

@@ -407,7 +407,8 @@ pullback `g^*` on étale sheaves is exact, its derived functor on the bounded be
 derived categories is the restriction `D+((g)^*[A])` of the functor induced by `g^*`,
 and it is left adjoint to the right derived functor `R+((g)_*[A])` of the pushforward on
 the bounded below derived categories. The right adjoint is derived via injective
-resolutions, which exist since the étale sheaf category is Grothendieck abelian. -/
+resolutions, which exist since the étale sheaf category is Grothendieck abelian.
+(blueprint: `prop-weil-pbc-derived-inverse-image-adjunction`) -/
 noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
     D+((g)^*[A]) ⊣ R+((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus

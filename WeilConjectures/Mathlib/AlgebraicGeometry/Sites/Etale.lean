@@ -57,12 +57,16 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
 
 variable (X) in
+/-- The small étale site of a scheme `X : Scheme.{u}` has morphisms in `Type u`, so it is locally
+small with respect to `u + 1`. Instance search does not derive this from
+`locallySmall_of_univLE`, since it cannot solve the universe constraint `UnivLE.{u, u + 1}`. -/
+instance Etale.locallySmall : LocallySmall.{u + 1} X.Etale :=
+  @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+
+variable (X) in
 /-- The small étale site of a scheme `X : Scheme.{u}` is essentially small in the universe
-`u + 1` of its objects. Instance search does not always find this, so it is used as a local
-instance where needed. -/
-theorem Etale.essentiallySmall : EssentiallySmall.{u + 1} X.Etale :=
-  have : LocallySmall.{u + 1} X.Etale :=
-    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+`u + 1` of its objects. -/
+instance Etale.essentiallySmall : EssentiallySmall.{u + 1} X.Etale :=
   essentiallySmall_of_small_of_locallySmall _
 
 section Functoriality
@@ -74,8 +78,13 @@ pushforward `AlgebraicGeometry.Etale.lowerStar` and the pullback
 def Hom.Etale (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
   MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f
 
-instance (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
-  inferInstanceAs <| PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f)
+/-- The base change functor `f.Etale : Y.Etale ⥤ X.Etale`, `W ↦ W ×_Y X`, preserves finite
+limits. The small étale sites have finite limits (`MorphismProperty.Over.hasFiniteLimits`):
+the identity is a terminal object and fibre products are computed in schemes.
+(blueprint: `lem-weil-pbc-etale-base-change-finite-limits`) -/
+instance Hom.preservesFiniteLimits_etale (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
+  inferInstanceAs <|
+    PreservesFiniteLimits (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f)
 
 /-- The base change functor `f.Etale` is representably flat: the small étale site of `Y`
 has finite limits and base change preserves them. -/
@@ -271,3 +280,40 @@ end Sheafify
 end Scheme
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry.Scheme
+
+/-- **Sheaves of sets on the small étale site.** A presheaf of sets `P` on the small étale site
+`X.Etale` is a sheaf (an object of `Sheaf X.smallEtaleTopology (Type w)`) if and only if for
+every étale `U` over `X` and every family `gᵢ : Vᵢ ⟶ U` of étale `X`-morphisms that is jointly
+surjective, the diagram `P(U) → ∏ᵢ P(Vᵢ) ⇉ ∏ᵢⱼ P(Vᵢ ×_U Vⱼ)` is an equalizer: every family of
+sections agreeing on the fibre products `Vᵢ ×_U Vⱼ` glues to a unique section on `U`.
+(blueprint: `def-weil-pbc-etale-sheaf-of-sets`) -/
+theorem isSheaf_smallEtaleTopology_iff {X : Scheme.{u}} (P : X.Etaleᵒᵖ ⥤ Type v) :
+    Presheaf.IsSheaf X.smallEtaleTopology P ↔
+      ∀ (U : X.Etale) (ι : Type (u + 1)) (V : ι → X.Etale) (g : ∀ i, V i ⟶ U),
+        ⋃ i, Set.range (g i).left = Set.univ →
+        ∀ x : ∀ i, P.obj (op (V i)),
+          (∀ i j, P.map (pullback.fst (g i) (g j)).op (x i) =
+            P.map (pullback.snd (g i) (g j)).op (x j)) →
+          ∃! s : P.obj (op U), ∀ i, P.map (g i).op s = x i := by
+  rw [isSheaf_iff_isSheaf_of_type]
+  constructor
+  · intro h U ι V g hg x hx
+    have hS := (ofArrows_mem_smallEtaleTopology_iff g).2 hg
+    exact (Presieve.isSheafFor_arrows_iff_pullbacks _ _).1
+      ((Presieve.isSheafFor_iff_generate _).2 (h _ hS)) x hx
+  · intro h U S hS
+    let ι := Σ V : X.Etale, { g : V ⟶ U // S g }
+    have hS' : Sieve.ofArrows (fun i : ι ↦ i.1) (fun i ↦ i.2.1) = S := by
+      apply le_antisymm
+      · rw [Sieve.ofArrows, Sieve.generate_le_iff]
+        rintro V g ⟨i⟩
+        exact i.2.2
+      · intro V g hg
+        exact ⟨V, 𝟙 V, g, Presieve.ofArrows.mk (⟨V, g, hg⟩ : ι), by simp⟩
+    rw [← hS'] at hS ⊢
+    rw [← Presieve.isSheafFor_iff_generate, Presieve.isSheafFor_arrows_iff_pullbacks]
+    exact h U ι _ _ ((ofArrows_mem_smallEtaleTopology_iff _).1 hS)
+
+end AlgebraicGeometry.Scheme

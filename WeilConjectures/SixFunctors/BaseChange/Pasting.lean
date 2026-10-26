@@ -56,7 +56,7 @@ isomorphisms of the pullbacks. Since the mates correspondence is taken with resp
 vertical adjunctions `f^* ⊣ f_*`, the vertical pasting law also involves the change of
 adjunction `(f ≫ e)^* ⊣ (f ≫ e)_*` versus `f^* ⋙ e^* ⊣ …`, i.e. the conjugation lemma
 `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`.
-(blueprint: `lemma:weil-pbc-derived-exchange-coherence`, underived pasting bullets)
+(blueprint: `lemma-weil-pbc-derived-exchange-coherence`, underived pasting bullets)
 
 -/
 
