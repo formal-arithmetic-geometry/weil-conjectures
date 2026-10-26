@@ -79,7 +79,7 @@ theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  refine isIso_kunnethMap_of_forall_isProper (Profinite.padicAlgClRingObj ℓ)
+  refine isIso_kunnethMap_of_forall_isProper
     (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN
       {eM} heM {eN} heN {A B} hA hB ↦ ?_) h hA hB
   have : LocallyOfFiniteType (Over.mk gM).hom := MorphismProperty.of_isPullback

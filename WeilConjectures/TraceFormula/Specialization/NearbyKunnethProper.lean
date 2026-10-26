@@ -64,7 +64,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-  {ℓ : ℕ} [Fact ℓ.Prime]
+variable {ℓ : ℕ} [Fact ℓ.Prime]
 
 namespace NearbyCyclesModel
 
@@ -153,9 +153,9 @@ theorem isIso_kunnethMap_of_isProper (hM : M.IsTraitModelOver qM gM)
       IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
         IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap (Profinite.padicAlgClRingObj ℓ)
+  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
       hM hN hpb hP heM heN hA hB
-  have hR := isIso_lowerStar_kunnethMap (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP hgen heM heN hA
+  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA
       hB hΨA hΨB hT
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle (kunnethMap (Profinite.padicAlgClRingObj ℓ)
       φ₁ φ₂ A B)
@@ -176,7 +176,7 @@ theorem isIso_kunnethMap_of_isProper (hM : M.IsTraitModelOver qM gM)
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
     (hdetect S hS C hC h₂ h₁)
 
-omit [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- The source `Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B` of the Künneth map is bounded constructible if the
 nearby cycles `Ψ_M A`, `Ψ_N B` are. -/
 lemma boundedConstructible_kunnethMap_source
@@ -195,14 +195,14 @@ lemma boundedConstructible_kunnethMap_source
             ℓ)).obj B)) := by
   have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       Z'.left)).IsMonoidal :=
-    isMonoidal_boundedConstructible (Profinite.padicAlgClRingObj ℓ) (X := Z') (ℓ := ℓ)
+    isMonoidal_boundedConstructible (X := Z') (ℓ := ℓ)
   exact CategoryTheory.ObjectProperty.prop_tensor
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
 
 set_option maxHeartbeats 800000 in
 -- instance search for the monoidal structure of bounded constructible complexes
-omit [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 include φ₁ φ₂ in
 /-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
 geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
@@ -232,7 +232,7 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
               by
     have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         P.total)).IsMonoidal :=
-      isMonoidal_boundedConstructible (Profinite.padicAlgClRingObj ℓ) (X := Over.mk (qP ≫
+      isMonoidal_boundedConstructible (X := Over.mk (qP ≫
           traitToBase k' k')) (ℓ := ℓ)
     exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
   obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso (Profinite.padicAlgClRingObj ℓ) φ₁
@@ -266,7 +266,7 @@ lemma noetherianSpace_of_isProper {T : Scheme.{u}} (q : T ⟶ trait k') [IsPrope
   have : IsNoetherian T := ⟨⟩
   infer_instance
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- The Künneth formula for products over the trait of proper models with compatible projections
 applies to the product `X̄ ×_S Ȳ` of the standard models of proper schemes over the trait. -/
 theorem isIso_kunnethMap_closure_of_forall_isProper
@@ -317,7 +317,7 @@ theorem isIso_kunnethMap_closure_of_forall_isProper
   rw [e]
   exact IsPullback.of_hasPullback _ _
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction of Gabber's Künneth formula to proper models, affine case** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
@@ -371,13 +371,13 @@ theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
   refine isIso_kunnethMap_of_toGeometricGeneric (Profinite.padicAlgClRingObj ℓ) _ _ heM heN A B ?_
   exact isIso_kunnethMap_toGeometricGeneric_of_closure (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
       hc uM uN hcM hcN
-    (fun A' B' hA' hB' ↦ isIso_kunnethMap_closure_of_forall_isProper (Profinite.padicAlgClRingObj ℓ)
+    (fun A' B' hA' hB' ↦ isIso_kunnethMap_closure_of_forall_isProper
         hproper qcM qcN A' B' hA'
       hB')
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
@@ -441,7 +441,7 @@ theorem isIso_kunnethMap_of_forall_isProper
     φ₁.restrictOpen _ V inf_le_left, φ₂.restrictOpen _ W inf_le_right, M.restrictOpenHom V,
     N.restrictOpenHom W, P.restrictOpenHom _, ⟨hzV, hzW⟩,
     isKunnethRestriction_restrictOpen φ₁ φ₂ V W, ?_⟩
-  exact isIso_kunnethMap_of_forall_isProper_of_isAffine (Profinite.padicAlgClRingObj ℓ) hproper
+  exact isIso_kunnethMap_of_forall_isProper_of_isAffine hproper
       (h.restrictOpen V W) hV hW
     ((boundedConstructible _).prop_of_iso ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ)
         X).app A).symm hA)
