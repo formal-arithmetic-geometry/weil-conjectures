@@ -13,10 +13,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
 # The hyperplane class of the projective line
 
-The class `h = c₁(𝒪(1)) ∈ H²(ℙ¹_S, Λ(1))` of the projective line, defined without excision
+The hyperplane class `h ∈ H²(ℙ¹_S, Λ(1))` of the projective line, defined without excision
 isomorphisms: it is the Gysin image of the fundamental class of the section at infinity, and
 this fundamental class is the Kummer boundary `∂κ(s)` of the coordinate `s = T_∞ / T₀` of the
 chart `D₊(T₀) ≅ 𝔸¹_S` at infinity.
+
+*Sign.* Forgetting supports, the Kummer boundary `∂κ(f)` of a local equation `f` of a divisor
+`D` is `c₁(𝒪(-D)) = -c₁(𝒪(D))`, not `c₁(𝒪(D))`: the Kummer and the support connecting maps
+anticommute (blueprint `lem-pur-divisor-class` (b); the blueprint's class `c_D` of
+`lem-amb-cartier-kummer-map` is `-∂κ(f)`). Hence `h = -c₁(𝒪(1))`, and the trace
+`AlgebraicGeometry.Etale.projectiveLineTrace`, normalized by `Tr_q ∘ h♭ = 1`, is `-t_q` for
+the trace `t_q` of blueprint `def-amb-p1-trace`, normalized by `t_q(c₁(𝒪(1))) = 1`. The
+definitions here use `h` consistently, so nothing below depends on the sign; it matters only
+when comparing with the blueprint's normalization.
 
 More precisely, let `V ⊆ X` be an open, `s` a function on `V` and `i : Z ⟶ V` the zero locus of
 `s`, and assume that `i' = i ≫ (V ⊆ X)` is a closed immersion (`Z` is closed in `X`). The Kummer
@@ -41,7 +50,7 @@ isomorphism is made.
   Kummer boundary.
 - `AlgebraicGeometry.Etale.chartBoundaryClass`: the class `Λ_X ⟶ Λ_X(1)[2]` of the zero locus
   of a function on an open, when this zero locus is closed in `X`.
-- `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`: `h = c₁(𝒪(1))` on `ℙ¹_S`.
+- `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`: `h = -c₁(𝒪(1))` on `ℙ¹_S`.
 - `AlgebraicGeometry.Etale.projectiveLineDecompositionMap`:
   `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`.
 - `AlgebraicGeometry.Etale.projectiveLineTrace`: the trace `Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, given
@@ -152,8 +161,9 @@ immersion `i' = i ≫ (V ⊆ X)` of the adjoint `Λ_Z ⟶ Ri^! Λ_V(1)[2]` of th
 
 `Λ_X ⟶ Λ_X(1)[2]`.
 
-It is the first Chern class of the line bundle `𝒪_X(Z)` of the Cartier divisor `Z`, the
-blueprint's class of a divisor; no excision isomorphism is chosen. -/
+No excision isomorphism is chosen. It is the blueprint's class `cl(Z)` of a divisor
+(`lem-pur-divisor-class`), which forgets supports to `c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`
+(`lem-pur-divisor-class` (b)), not to `c₁(𝒪_X(Z))`. -/
 noncomputable def chartBoundaryClass : constantComplex Λ X ⟶ (tateObject Λ X 1)⟦(2 : ℤ)⟧ :=
   haveI : HasInvertibleExponent Λ V := .of_hom V.ι
   gysinClass Λ (V.toScheme.zeroLocusSubschemeι {V.topIso.inv s} ≫ V.ι) _ 2
@@ -175,15 +185,17 @@ section ProjectiveLine
 variable (S : Scheme.{u}) [HasInvertibleExponent Λ S]
 
 /-- *The hyperplane class of the projective line*, the class `h` of blueprint
-`thm-amb-p1-decomposition`:
+`thm-amb-p1-decomposition` up to sign:
 
-`h = c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
+`h = -c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
 
 on `ℙ¹_S = ℙ(Option (ULift (Fin 1)); S)`, the class of the section at infinity
 (`AlgebraicGeometry.Etale.chartBoundaryClass`): the zero locus of the coordinate
 `s = T_∞ / T₀` of the chart `D₊(T₀)` at infinity, which is closed in `ℙ¹_S`, the complement of
 the standard chart `D₊(T_∞) ≅ 𝔸¹_S` (`AlgebraicGeometry.ProjectiveSpace.range_chartBoundaryι`).
--/
+The sign comes from `AlgebraicGeometry.Etale.chartBoundaryClass`, which forgets supports to
+`c₁(𝒪(-Z))` (blueprint `lem-pur-divisor-class` (b)); the decomposition
+`thm-amb-p1-decomposition` holds for `h` and `-h` alike. -/
 noncomputable def projectiveLineHyperplaneClass :
     constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
       (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=
@@ -228,7 +240,9 @@ theorem isIso_projectiveLineDecompositionMap [HasKummerClass.IsNormalized Λ] :
 /-- Blueprint `def-amb-p1-trace`: *the trace of the projective line*
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
 isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`); it is
-characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`. The decomposition is an explicit hypothesis
+characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`. As `h = -c₁(𝒪(1))`
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`), this is `-t_q` for the blueprint's
+trace `t_q`, normalized by `t_q(c₁(𝒪(1))) = 1`. The decomposition is an explicit hypothesis
 (`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`). -/
 noncomputable def projectiveLineTrace (hdec : IsIso (projectiveLineDecompositionMap Λ S)) :
     (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
