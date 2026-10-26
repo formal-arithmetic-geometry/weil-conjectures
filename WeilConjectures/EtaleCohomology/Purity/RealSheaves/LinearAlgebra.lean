@@ -59,16 +59,14 @@ section EigenvalueWeight
 
 variable {E : Type*} [Field E] (ι : E →+* ℂ) (q : ℕ)
 
-/-- Blueprint `def-tw-eigenvalue`: Eigenvalues and q-adic absolute values.
+/-- Blueprint `def-tw-eigenvalue`: weights of eigenvalues.
 
 An element `α` (typically an eigenvalue of a Frobenius operator) has *weight* `w` relative to
-the prime power `q` if its absolute value in the weight normalization is `q ^ (w / 2)`. The
-absolute value is read through the fixed embedding `ι` into `ℂ`: the weight condition is
-`|ι α| = q ^ (w / 2)`, so that `|q| = q` and `q` itself has weight `2`. (For `ℓ ≠ p` the
-`ℓ`-adic valuation of `q` vanishes, so the normalization `v(q) = 1` of the blueprint can only
-be realised archimedeanly; this is the convention of `sk-d-real-weights`, and it is related to
-the `ι`-weight `AlgebraicGeometry.WeilGroup.frobeniusWeight` by
-`AlgebraicGeometry.WeilGroup.isOfWeight_iff_frobeniusWeight_eq`.) The weight `w` is allowed
+the prime power `q` if `|ι α| = q ^ (w / 2)`, the absolute value being read through the fixed
+embedding `ι` into `ℂ`; so `|q| = q` and `q` itself has weight `2`. This is the convention of
+`sk-d-real-weights`; it is related to the `ι`-weight
+`AlgebraicGeometry.WeilGroup.frobeniusWeight` by
+`AlgebraicGeometry.WeilGroup.isOfWeight_iff_frobeniusWeight_eq`. The weight `w` is allowed
 to be any real number. -/
 def IsOfWeight (w : ℝ) (α : E) : Prop :=
   ‖ι α‖ = (q : ℝ) ^ (w / 2)
