@@ -221,6 +221,18 @@ lemma nonempty_iso_cone_of_distTriang_aux {D : Type*} [Category D] [Preadditive 
       simp [← reassoc_of% hnat]))
   exact ⟨Triangle.π₃.mapIso φ₁ ≪≫ (Triangle.π₃.mapIso φ₂).symm⟩
 
+/-- Cones of morphisms identified through a square of composites of isomorphisms are isomorphic:
+the transport of `Pretriangulated.exists_iso_of_arrow_iso` used for the exchanges of the defect. -/
+lemma nonempty_iso_obj₃_of_comp_aux {D : Type*} [Category D] [Preadditive D] [HasZeroObject D]
+    [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (T₁ T₂ : Triangle D) (h₁ : T₁ ∈ distTriang D) (h₂ : T₂ ∈ distTriang D) {P R : D}
+    (a : T₁.obj₁ ⟶ P) (b : P ⟶ T₂.obj₁) (c : T₁.obj₂ ⟶ R) (d : R ⟶ T₂.obj₂) [IsIso a] [IsIso b]
+    [IsIso c] [IsIso d] (w : a ≫ b ≫ T₂.mor₁ = T₁.mor₁ ≫ c ≫ d) :
+    Nonempty (T₁.obj₃ ≅ T₂.obj₃) := by
+  obtain ⟨φ, -, -⟩ := exists_iso_of_arrow_iso _ _ h₁ h₂
+    (Arrow.isoMk (asIso (a ≫ b)) (asIso (c ≫ d)) (by simpa using w))
+  exact ⟨Triangle.π₃.mapIso φ⟩
+
 /-- **The defect along a triangle whose first term is killed by `Ψ_Z Li^*`** (the triangulated step
 of blueprint `det-sp-defect-closed-vanishing`): for a distinguished triangle `A ⟶ B ⟶ D ⟶ A[1]`
 with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible, `C_{X,Z}(A) ≅ C_{X,Z}(B)`. Indeed both are
@@ -242,5 +254,56 @@ theorem nonempty_specializationDefect_iso_of_distTriang
   exact nonempty_iso_cone_of_distTriang_aux _ _ hF hG h₁ (zeroSectionMap X I k' Λ T.obj₁)
     (zeroSectionMap X I k' Λ T.obj₂) (zeroSectionMap X I k' Λ T.obj₃)
     (zeroSectionMap_naturality X I k' Λ T.mor₂) g₁ k₁ g₂ k₂ hT₁ hT₂
+
+/-! ### The exchanges of the defect -/
+
+-- The defeq checks of `Functor.mapTriangle` on the derived categories exceed the default limit.
+set_option maxHeartbeats 2000000 in
+/-- **Smooth exchange for the defect, given the smooth exchanges of nearby cycles**: if the
+pullback exchanges of `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` at `L` and of `f̃_Z : Z' × S ⟶ Z × S` at `Li^* L` are
+invertible, then `C_{X',Z'}(Lf^* L) ≅ Lg_s^* C_{X,Z}(L)`: these exchanges carry
+`Lg_s^* ε_{X,Z}(L)` to `ε_{X',Z'}(Lf^* L)` (`zeroSectionMap_upperStar_square`). -/
+theorem nonempty_specializationDefect_upperStar_iso_of_isIso
+    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left)))
+    (hf : IsIso (((comapDeformationModelHom f I k').pullbackExchange Λ).app L))
+    (hg : IsIso (((centreDeformationModelHom f I k').pullbackExchange Λ).app
+      (L(((centreι X I).left)^*⟦Λ⟧).obj L))) :
+    Nonempty (specializationDefect X' (I.comap f.left) k' Λ (L((f.left)^*⟦Λ⟧).obj L) ≅
+      L(((centreSpecialFibreMap f I k').left)^*⟦Λ⟧).obj (specializationDefect X I k' Λ L)) := by
+  have hw := zeroSectionMap_upperStar_square f I k' Λ L
+  obtain ⟨g, h, hT⟩ := exists_distTriang_specializationDefect X I k' Λ L
+  have hT₂ := (L(((centreSpecialFibreMap f I k').left)^*⟦Λ⟧)).map_distinguished _ hT
+  have hT' := (exists_distTriang_specializationDefect X' (I.comap f.left) k' Λ
+    (L((f.left)^*⟦Λ⟧).obj L)).choose_spec.choose_spec
+  exact (nonempty_iso_obj₃_of_comp_aux _ _ hT₂ hT' _ _ _ _ hw).map Iso.symm
+
+/-- **Proper exchange for the defect, given the proper exchanges**: if the pushforward exchanges
+of `f̃` at `L'` and of `f̃_Z` at `Li'^* L'` and the base change morphisms of the squares
+`i' ≫ f = f_Z ≫ i` at `L'` and `e' ≫ f_s = g_s ≫ e` at `Ψ_{X'}(L')` are invertible, then
+`C_{X,Z}(Rf_* L') ≅ Rg_{s*} C_{X',Z'}(L')`: these maps carry `ε_{X,Z}(Rf_* L')` to
+`Rg_{s*} ε_{X',Z'}(L')` (`zeroSectionMap_lowerStar_square`). -/
+theorem nonempty_specializationDefect_lowerStar_iso_of_isIso
+    (L' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X'.left) Ab.{u + 1})
+      (condensedRingObj Λ X'.left)))
+    [IsIso (((comapDeformationModelHom f I k').pushforwardExchange Λ).app L')]
+    [IsIso (((centreDeformationModelHom f I k').pushforwardExchange Λ).app
+      (L(((centreι X' (I.comap f.left)).left)^*⟦Λ⟧).obj L'))]
+    [IsIso ((baseChangeMap Λ (⟨centreι_comp_eq_centreMap_comp f I⟩ :
+      CommSq (centreι X' (I.comap f.left)).left (centreMap f I).left f.left
+        (centreι X I).left)).app L')]
+    [IsIso ((baseChangeMap Λ (⟨zeroSectionSpecialFibreMap_comp_eq f I k'⟩ :
+      CommSq (zeroSectionSpecialFibreMap X' (I.comap f.left) k').left
+        (centreSpecialFibreMap f I k').left (comapSpecialFibreMap f I k').left
+        (zeroSectionSpecialFibreMap X I k').left)).app
+      (((deformationModel X' (I.comap f.left) k').nearbyCycles Λ).obj L'))] :
+    Nonempty (specializationDefect X I k' Λ (R((f.left)_*⟦Λ⟧).obj L') ≅
+      R(((centreSpecialFibreMap f I k').left)_*⟦Λ⟧).obj
+        (specializationDefect X' (I.comap f.left) k' Λ L')) := by
+  obtain ⟨g, h, hT⟩ := exists_distTriang_specializationDefect X I k' Λ (R((f.left)_*⟦Λ⟧).obj L')
+  obtain ⟨g', h', hT'⟩ := exists_distTriang_specializationDefect X' (I.comap f.left) k' Λ L'
+  exact nonempty_iso_obj₃_of_comp_aux _ _ hT
+    ((R(((centreSpecialFibreMap f I k').left)_*⟦Λ⟧)).map_distinguished _ hT') _ _ _ _
+    (zeroSectionMap_lowerStar_square f I k' Λ L').symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

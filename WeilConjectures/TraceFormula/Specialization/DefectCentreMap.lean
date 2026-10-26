@@ -74,13 +74,13 @@ lemma siteIdeal_map_appLE_le_bot_centreMap
 
 /-- The map `N_⊥ Z' ⟶ N_⊥ Z` of special fibres of the constant families, the deformation of
 `f_Z`; under `N_⊥ Z ≅ Z ⊗ k'` it is `f_Z ⊗ k'`. -/
-noncomputable def centreSpecialFibreMap :
+noncomputable abbrev centreSpecialFibreMap :
     deformationSpecialFibre (centre X' (I.comap f.left)) ⊥ k' ⟶
       deformationSpecialFibre (centre X I) ⊥ k' :=
   deformationSpecialFibreMap (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I) k'
 
 /-- The morphism of constant families `Z' × S ⟶ Z × S` induced by `f_Z : Z' ⟶ Z`. -/
-noncomputable def centreDeformationModelHom :
+noncomputable abbrev centreDeformationModelHom :
     (deformationModel (centre X' (I.comap f.left)) ⊥ k').Hom
       (deformationModel (centre X I) ⊥ k') (centreMap f I).left
       (centreSpecialFibreMap f I k').left :=
@@ -96,13 +96,13 @@ lemma siteIdeal_map_appLE_le_comap ⦃U' : X'.left.AffineZariskiSite⦄
 
 /-- The map `N_{Z'} X' ⟶ N_Z X` of special fibres of the deformations to the normal cones induced
 by `f`, for `Z' = f⁻¹ Z`. -/
-noncomputable def comapSpecialFibreMap :
+noncomputable abbrev comapSpecialFibreMap :
     deformationSpecialFibre X' (I.comap f.left) k' ⟶ deformationSpecialFibre X I k' :=
   deformationSpecialFibreMap f (siteIdeal_map_appLE_le_comap f I) k'
 
 /-- The morphism of deformation models `𝒟_{Z'} X' ⟶ 𝒟_Z X` induced by `f`, for `Z' = f⁻¹ Z`
 (blueprint `det-sp-dnc-base-change` (1)). -/
-noncomputable def comapDeformationModelHom :
+noncomputable abbrev comapDeformationModelHom :
     (deformationModel X' (I.comap f.left) k').Hom (deformationModel X I k') f.left
       (comapSpecialFibreMap f I k').left :=
   deformationModelHom f (siteIdeal_map_appLE_le_comap f I) k'

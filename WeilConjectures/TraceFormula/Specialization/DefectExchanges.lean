@@ -6,7 +6,15 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
-public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
+public import WeilConjectures.TraceFormula.Additivity
+public import WeilConjectures.TraceFormula.Specialization.DefectExchangeSquares
+public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
+public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 
 /-!
 
@@ -38,7 +46,7 @@ The coefficients are `ℚ̄_ℓ`, and the complexes are bounded constructible.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Pretriangulated
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
@@ -54,55 +62,35 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-/-- **Proper exchange for the defect** (blueprint `det-sp-defect-proper-smooth`, proper case; a
-node of the subsection `sk-lem-tf-sp-defect-exchanges`): for `f : X' ⟶ X` proper and `L'` bounded
-constructible on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. Here the isomorphism is only
-asserted to exist. -/
-theorem nonempty_specializationDefect_lowerStar_iso [IsProper f.left]
-    (L' : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ)
-        (R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj L'.obj) ≅
-      R(((centreSpecialFibreMap f I k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-        (specializationDefect X' (I.comap f.left) k' (Profinite.padicAlgClRingObj ℓ) L'.obj)) :=
-  sorry
+
 
 /-- **Smooth exchange for the defect** (blueprint `det-sp-defect-proper-smooth`, smooth case; a
 node of the subsection `sk-lem-tf-sp-defect-exchanges`): for `f : X' ⟶ X` smooth and `L` bounded
-constructible on `X`, `C_{X',Z'}(Lf^* L) ≅ Lf_Z^* C_{X,Z}(L)`. Here the isomorphism is only
-asserted to exist. -/
+constructible on `X`, `C_{X',Z'}(Lf^* L) ≅ Lf_Z^* C_{X,Z}(L)`. The pullback exchanges of the
+deformations `f̃` and `f̃_Z` of `f` and `f_Z` are invertible by the smooth exchange of nearby cycles
+(`isIso_pullbackExchange_deformationModel_app_of_smooth`), and they carry `Lf_Z^* ε_{X,Z}(L)` to
+`ε_{X',Z'}(Lf^* L)` (`nonempty_specializationDefect_upperStar_iso_of_isIso`). -/
 theorem nonempty_specializationDefect_upperStar_iso [Smooth f.left]
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty (specializationDefect X' (I.comap f.left) k' (Profinite.padicAlgClRingObj ℓ)
         (L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj L.obj) ≅
       L(((centreSpecialFibreMap f I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-        (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj)) :=
-  sorry
-
-variable (X) in
-/-- **The defect kills complexes supported on the centre** (blueprint
-`det-sp-defect-closed-vanishing`, first and second assertions; a node of the subsection
-`sk-lem-tf-sp-defect-exchanges`): `C_{X,Z}(i_* M) = 0` for `M` bounded constructible on `Z`. -/
-theorem isZero_specializationDefect_lowerStar_centreι
-    (M : Dᵇc((centre X I).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ)
-      (R(((centreι X I).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj M.obj)) :=
-  sorry
-
-variable (X) in
-/-- **The defect is unchanged by extension by zero from the complement** (blueprint
-`det-sp-defect-closed-vanishing`, last assertion; a node of the subsection
-`sk-lem-tf-sp-defect-exchanges`): for the open immersion `j : U ⟶ X` of the complement of the
-centre, the counit `j_! j^* L ⟶ L` induces `C_{X,Z}(j_! j^* L) ≅ C_{X,Z}(L)`. Here the isomorphism
-is only asserted to exist. -/
-theorem nonempty_specializationDefect_lowerShriek_upperStar_iso {U : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
-    [IsOpenImmersion j.left]
-    (hj : IsCompl (Set.range j.left.base) (Set.range (centreι X I).left.base))
-    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ)
-        ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)).obj ≅
-      specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) :=
-  sorry
+        (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj)) := by
+  have : Smooth (comapDeformationModelHom f I k').total :=
+    smooth_deformationTotalMap k' f (siteIdeal_map_appLE_le_comap f I) rfl
+  have : Smooth (centreDeformationModelHom f I k').total :=
+    smooth_deformationTotalMap k' (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I)
+      (IdealSheafData.comap_bot _).symm
+  have hf := isIso_pullbackExchange_deformationModel_app_of_smooth k'
+    (comapDeformationModelHom f I k') (isPullback_deformationGenericMap _ _ k') L.property
+  have hg := isIso_pullbackExchange_deformationModel_app_of_smooth k'
+    (centreDeformationModelHom f I k') (isPullback_deformationGenericMap _ _ k')
+    (boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ (centreι X I) L)
+  have h₁ := nonempty_specializationDefect_upperStar_iso_of_isIso f I k'
+    (Profinite.padicAlgClRingObj ℓ) L.obj
+  revert h₁ hf hg
+  normalize_precoherent
+  intro hf hg h₁
+  exact h₁ hf hg
 
 end AlgebraicGeometry.ProEtale.CondensedRing
