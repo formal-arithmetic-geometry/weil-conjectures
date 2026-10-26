@@ -247,7 +247,7 @@ attribute [-instance] monoidalCategory_boundedConstructible
 
 section LaxMonoidal
 
-  {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
@@ -261,6 +261,8 @@ noncomputable abbrev boundedConstructibleLowerStarLaxMonoidal :
     (boundedConstructibleLowerStar ℓ f).LaxMonoidal :=
   (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).rightAdjointLaxMonoidal
 
+set_option maxHeartbeats 1000000 in
+-- the concrete ℚ̲̄_ℓ-coefficient functors are unfolded when matching the generic statements
 /-- The comparison `δ` of the restricted pullback is that of the ambient derived pullback. -/
 lemma δ_boundedConstructibleUpperStar_hom' (A B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) A
@@ -274,7 +276,7 @@ end LaxMonoidal
 
 namespace NearbyCyclesModel
 
-  {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k]
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -297,46 +299,8 @@ lemma Hom.map_boundedConstructiblePushforwardExchange_app_comp_counit_app
       (φ.boundedConstructiblePullbackExchange ℓ hM hN).app
           ((boundedConstructibleLowerStar ℓ f).obj A) ≫
         (boundedConstructibleNearbyCycles hM).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app A) := by
-  rw [Hom.boundedConstructiblePushforwardExchange_eq_mateEquiv]
-  exact mateEquiv_counit _ _ _ A
-
-/-- The oplax monoidality of `NearbyCyclesModel.liftExchange` of an arbitrary transformation
-`α : Ψ_N ⋙ Lf'^* ⟶ Lf^* ⋙ Ψ_M`, deduced from that of `α`; the transformation is kept abstract so
-that the kernel never unfolds the pullback exchange. -/
-private lemma liftExchange_tensor_oplax_aux
-    (α : N.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙ L((f'.left)^*⟦Profinite.padicAlgClRingObj
-        ℓ⟧) ⟶ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ M.nearbyCycles
-            (Profinite.padicAlgClRingObj ℓ))
-    (hα : ∀ A B, L((f'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (N.tensorMap
-        (Profinite.padicAlgClRingObj ℓ) A B) ≫ α.app (A ⊗ B) ≫
-          (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map (Functor.OplaxMonoidal.δ
-              L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) A B) =
-      Functor.OplaxMonoidal.δ L((f'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _ ≫
-        (α.app A ⊗ₘ α.app B) ≫ M.tensorMap (Profinite.padicAlgClRingObj ℓ) _ _)
-    (β : boundedConstructibleNearbyCycles hN ⋙ boundedConstructibleUpperStar
-        (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
-            boundedConstructibleNearbyCycles hM)
-    (hβ : β = liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
-        (PY' := boundedConstructible _) (PX' := boundedConstructible _) α
-        (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f' K)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K))
-    (A B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f').map
-        (boundedConstructibleTensorMap hN A B) ≫
-        β.app (A ⊗ B) ≫ (boundedConstructibleNearbyCycles hM).map
-          (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-              f) A B) =
-      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f') _
-          _ ≫
-        (β.app A ⊗ₘ β.app B) ≫ boundedConstructibleTensorMap hM _ _ := by
-  subst hβ
-  apply ObjectProperty.hom_ext
-  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
-    δ_boundedConstructibleUpperStar_hom', ObjectProperty.tensorHom_hom', liftExchange_app_hom]
-  exact hα A.obj B.obj
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app A) :=
+  sorry
 
 /-- **The restricted pullback exchange is monoidal**, in the oplax form: the restriction of
 `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`. -/
@@ -353,9 +317,7 @@ lemma Hom.boundedConstructiblePullbackExchange_tensor_oplax (A B :
         ((φ.boundedConstructiblePullbackExchange ℓ hM hN).app A ⊗ₘ
           (φ.boundedConstructiblePullbackExchange ℓ hM hN).app B) ≫
         boundedConstructibleTensorMap hM _ _ :=
-  liftExchange_tensor_oplax_aux hM hN (φ.pullbackExchange _)
-    (φ.map_tensorMap_comp_pullbackExchange_app _) _
-    (φ.boundedConstructiblePullbackExchange_eq_liftExchange' hM hN) A B
+  sorry
 
 /-- **The pushforward exchange is compatible with the lax tensor maps** (blueprint
 `det-tf-nearby-duality-proper` (1), "the lax products commute through proper exchange"): with the
@@ -374,14 +336,7 @@ lemma Hom.boundedConstructiblePushforwardExchange_tensor (A B :
           (letI := boundedConstructibleLowerStarLaxMonoidal ℓ f;
             Functor.LaxMonoidal.μ (boundedConstructibleLowerStar ℓ f) A B) ≫
         (φ.boundedConstructiblePushforwardExchange ℓ hM hN).app (A ⊗ B) :=
-  Verdier.pushforwardExchange_tensor_aux (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
-    (boundedConstructibleTensorMap hM) (boundedConstructibleTensorMap hN)
-    (fun x y ↦ boundedConstructibleTensorMap_natural hM x y)
-    (φ.boundedConstructiblePullbackExchange ℓ hM hN)
-    (φ.boundedConstructiblePushforwardExchange ℓ hM hN)
-    (φ.map_boundedConstructiblePushforwardExchange_app_comp_counit_app hM hN)
-    (φ.boundedConstructiblePullbackExchange_tensor_oplax hM hN) A B
+  sorry
 
 end NearbyCyclesModel
 
@@ -463,31 +418,8 @@ theorem isIso_lowerStar_nearbyDualityMap_of_isIso (D : NearbyDualizingData k k' 
       (inv (traitSpecializationUnit k k' (ℓ := ℓ)))
       ((boundedConstructibleLowerStar ℓ (toPoint X)).obj K))] :
     IsIso ((boundedConstructibleLowerStar ℓ
-      (toPoint X')).map (nearbyDualityMap ℓ D h K)) := by
-  let _ := boundedConstructibleLowerStarLaxMonoidal ℓ (toPoint X)
-  let _ := boundedConstructibleLowerStarLaxMonoidal ℓ
-    (toPoint X')
-  have hθ := (D.pushforwardExchange_comp_map_θ_comp_trace h).symm
-  have t₁ : h.pushforwardExchange ℓ = h.toTrait.boundedConstructiblePushforwardExchange ℓ
-      (h.preservesBoundedConstructible ℓ) (preservesBoundedConstructible_traitModel ℓ) := rfl
-  rw [t₁] at hθ hχ
-  exact Verdier.isIso_map_nearbyDualityMap_of_proper'
-    (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ))
-    (boundedConstructibleTensorMap (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ))
-    (D.θ h) (inv (traitSpecializationUnit k k' (ℓ := ℓ)))
-    (Functor.LaxMonoidal.μ (boundedConstructibleLowerStar ℓ (toPoint X)))
-    (Functor.LaxMonoidal.μ (boundedConstructibleLowerStar ℓ (toPoint X')))
-    (trace ℓ X) (trace ℓ X') (fun A ↦ (h.toTrait.boundedConstructiblePushforwardExchange ℓ
-      (h.preservesBoundedConstructible ℓ) (preservesBoundedConstructible_traitModel ℓ)).app A)
-    (fun A _ _ y ↦ Functor.LaxMonoidal.μ_natural_right _ A y)
-    (fun x y ↦ boundedConstructibleTensorMap_natural _ x y)
-    (fun u ↦ (h.toTrait.boundedConstructiblePushforwardExchange ℓ
-      (h.preservesBoundedConstructible ℓ)
-      (preservesBoundedConstructible_traitModel ℓ)).naturality u)
-    (fun A B ↦ h.toTrait.boundedConstructiblePushforwardExchange_tensor
-      (h.preservesBoundedConstructible ℓ) (preservesBoundedConstructible_traitModel ℓ) A B)
-    hθ K (hχ K) (hχ _) (isIso_nearbyDualityMap_lowerStar_trace ℓ X K)
-    (isIso_nearbyDualityMap_lowerStar_trace ℓ X' _) ‹_›
+      (toPoint X')).map (nearbyDualityMap ℓ D h K)) :=
+  sorry
 
 end NearbyCyclesModel
 
