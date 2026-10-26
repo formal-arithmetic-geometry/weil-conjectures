@@ -126,15 +126,15 @@ variable (ℓ) {F X : Over (Spec (.of k))} [LocallyOfFiniteType F.hom] [QuasiCom
 /-- The composition law `θ_F = d'^! θ_X ∘ β_d(ω_X)` (`dualizingExchange_eq_comp`) for the
 composite `compExchange` of the compact-support exchanges `ν_d` and `ν_X`. -/
 theorem dualizingExchange_compExchange (d : F ⟶ X) (d' : F' ⟶ X')
-    (νd : ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d' ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ d ⋙ ΨX)
-    (νX : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙ Ψpt) :
+    (νd : ΨF ⋙ boundedConstructibleLowerShriek ℓ d' ⟶
+      boundedConstructibleLowerShriek ℓ d ⋙ ΨX)
+    (νX : ΨX ⋙ boundedConstructibleLowerShriek ℓ (toPoint X') ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint X) ⋙ Ψpt) :
     dualizingExchange ℓ σpt (compExchange (lowerShriekCompOfEq ℓ d (toPoint X) (comp_toPoint d))
         (lowerShriekCompOfEq ℓ d' (toPoint X') (comp_toPoint d')) νd νX) =
       ΨF.map (dualizingComplexComp ℓ d).inv ≫
       (exceptionalExchange ℓ d d' νd).app (dualizingComplex' ℓ X) ≫
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ d').map
+      (boundedConstructibleUpperShriek ℓ d').map
         (dualizingExchange ℓ σpt νX) ≫ (dualizingComplexComp ℓ d').hom :=
   dualizingExchange_eq_comp ℓ σpt d d' νd νX _ (compExchange_app_comp _ _ νd νX)
 
@@ -151,12 +151,12 @@ adjoint `α^♭ : Ra_{X!} ℚ̄_ℓ ⟶ ℚ̄_ℓ` of `α` precomposed with the 
 (`ProEtale.CondensedRing.BorelMooreSection.integral_eq`). -/
 noncomputable def unitClass :
     𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
         (𝟙_ _) :=
-  haveI : IsProper (toPoint X).left := inferInstanceAs (IsProper X.hom)
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  haveI : IsProper (toPoint X).left := by rw [toPoint_left]; infer_instance
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (toPoint X)).unit.app (𝟙_ _) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerStar ℓ (toPoint X)).map
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv ≫
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app (𝟙_ _)
@@ -165,7 +165,7 @@ variable {ℓ X}
 
 lemma integral_eq (α : BorelMooreSection ℓ X) :
     α.integral = unitClass ℓ X ≫
-      ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperShriekAdjunction ℓ
         (toPoint X)).homEquiv _ _).symm α := by
   simp only [integral, unitClass, Category.assoc]
 
@@ -192,19 +192,19 @@ variable (T : c.TraceSpecialization F c' F')
 exchange `ν_F` and `F'` is proper, then
 `∫_{F'} sp_F(z) = σ_s⁻¹ ∘ Ψ_s(z^♭) ∘ ν_F(ℚ̄_ℓ) ∘ Ra_{F'!}(σ_F) ∘ [F']`. -/
 theorem integral_sp_eq [IsProper F'.F.hom]
-    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek ℓ
         (toPoint F'.F) ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F.F) ⋙ Ψpt)
+      boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt)
     (hθ : T.θF = dualizingExchange ℓ σpt νF) (z : BorelMooreSection ℓ F.F) :
     (T.sp z).integral = BorelMooreSection.unitClass ℓ F'.F ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F'.F)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint F'.F)).map
         T.σF ≫ νF.app (𝟙_ (Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≫
-      Ψpt.map (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      Ψpt.map (((boundedConstructibleUpperShriekAdjunction ℓ
         (toPoint F.F)).homEquiv _ _).symm z) ≫ inv σpt := by
   rw [BorelMooreSection.integral_eq, sp, hθ]
   exact congrArg _ (homEquiv_symm_comp_map_comp_mateEquiv
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F.F))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F'.F))
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint F.F))
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint F'.F))
     νF σpt T.σF z)
 
 
@@ -215,22 +215,22 @@ variable (ΨC : Dᵇc(c.C.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
   (ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   (ΨXX : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
     Dᵇc((X' ⨯ X').left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-  (χΔ : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙ ΨXX ⟶
-    ΨX ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X'))
-  (βc : boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ⋙ ΨC ⟶
-    ΨXX ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support)
+  (χΔ : boundedConstructibleLowerStar ℓ (diag X) ⋙ ΨXX ⟶
+    ΨX ⋙ boundedConstructibleLowerStar ℓ (diag X'))
+  (βc : boundedConstructibleUpperShriek ℓ c.support ⋙ ΨC ⟶
+    ΨXX ⋙ boundedConstructibleUpperShriek ℓ c'.support)
   (σC : 𝟙_ _ ⟶ ΨC.obj (𝟙_ _))
-  (νX : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') ⟶
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙ Ψpt)
+  (νX : ΨX ⋙ boundedConstructibleLowerShriek ℓ (toPoint X') ⟶
+    boundedConstructibleLowerShriek ℓ (toPoint X) ⋙ Ψpt)
 
 /-- The compact-support exchange `ν_d : Rd'_! Ψ_F ⟶ Ψ_X Rd_!` whose mate is the exceptional
 exchange `β_d` determined by the support (`fixedLocusExceptionalExchange`). -/
 noncomputable def fixedLocusCompactSupportExchange :
     fixedLocusSpecialization (F := F) (F' := F') ΨC ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ F'.d ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ F.d ⋙ ΨX :=
-  (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F'.d)).symm
+        boundedConstructibleLowerShriek ℓ F'.d ⟶
+      boundedConstructibleLowerShriek ℓ F.d ⋙ ΨX :=
+  (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ F.d)
+    (boundedConstructibleUpperShriekAdjunction ℓ F'.d)).symm
     (fixedLocusExceptionalExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc)
 
 lemma exceptionalExchange_fixedLocusCompactSupportExchange :
@@ -244,8 +244,8 @@ fixed loci: the composite of `ν_d` (`fixedLocusCompactSupportExchange`) and `ν
 the composition isomorphisms `Ra_{F!} ≅ Ra_{X!} Rd_!`. -/
 noncomputable abbrev fixedLocusToPointCompactSupportExchange :
     fixedLocusSpecialization (F := F) (F' := F') ΨC ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F'.F) ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F.F) ⋙ Ψpt :=
+        boundedConstructibleLowerShriek ℓ (toPoint F'.F) ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt :=
   compExchange (lowerShriekCompOfEq ℓ F.d (toPoint X) (comp_toPoint F.d))
     (lowerShriekCompOfEq ℓ F'.d (toPoint X') (comp_toPoint F'.d))
     (fixedLocusCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) νX

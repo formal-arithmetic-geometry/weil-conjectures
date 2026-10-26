@@ -85,7 +85,7 @@ theorem restrictSupportedClass_fundamentalClass_of_isPullback (aX : X ⟶ Spec (
     (e : X' ⟶ X) [Smooth (e ≫ aX)] (i' : Z' ⟶ X') [IsRegularImmersion c i'] (g : Z' ⟶ Z)
     (hg : IsPullback g i' i e) (hZ' : ∀ z : Z', IsRegularLocalRing (Z'.presheaf.stalk z)) :
     haveI : HasInvertibleExponent Λ X' := .of_hom e
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e c)
         (fundamentalClass Λ c i aX hZ) = fundamentalClass Λ c i' (e ≫ aX) hZ' := by
   have : HasInvertibleExponent Λ X' := .of_hom e

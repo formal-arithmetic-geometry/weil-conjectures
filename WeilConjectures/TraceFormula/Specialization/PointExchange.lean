@@ -117,8 +117,12 @@ lemma isIso_deformationToCompactifiedModelHom_pullbackExchange :
 /-- `compactifiedToTraitModelHom` over the structure map `toPoint` of the special fibre. -/
 noncomputable def compactifiedToPointModelHom :
     (compactifiedDeformationModel X x k').Hom (traitModel k k') (toPoint X).left
-      (toPoint (compactifiedSpecialFibre X x k')).left :=
-  compactifiedToTraitModelHom X x k'
+      (toPoint (compactifiedSpecialFibre X x k')).left where
+  total := compactifiedTotalToTrait X x k'
+  generic := compactifiedGenericToPoint X x k'
+  comm_j := (isPullback_compactifiedGeneric X x k').w.symm
+  comm_i := by rw [toPoint_left]; exact (isPullback_compactifiedSpecialFibre X x k').w.symm
+  comm_ε := by rw [toPoint_left]; exact (compactifiedGenericToBase_hom X x k').symm
 
 omit [IsSepClosed k'] [Fact (ringChar k).Prime] [Fact (ringChar k').Prime]
   [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k' ≠ ℓ)] in
@@ -126,20 +130,26 @@ lemma isIsoOn_compactifiedToPointModelHom_pushforwardExchange :
     IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
       ((compactifiedToPointModelHom X x k').pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) :=
   fun K ↦
-  have : IsProper (toPoint X).left := ‹IsProper X.hom›
+  have : IsProper (toPoint X).left := by rw [toPoint_left]; infer_instance
   have : IsProper (compactifiedToPointModelHom X x k').total :=
     inferInstanceAs (IsProper (compactifiedTotalToTrait X x k'))
   (compactifiedToPointModelHom X x k').isIso_pushforwardExchange_app_of_isProper
-    (isPullback_compactifiedSpecialFibre X x k') (isPullback_compactifiedGenericToBase X x k')
-    K.property
+    (by
+      have h := isPullback_compactifiedSpecialFibre X x k'
+      rw [← toPoint_left (compactifiedSpecialFibre X x k')] at h
+      exact h)
+    (by
+      have h := isPullback_compactifiedGenericToBase X x k'
+      rw [← toPoint_left X] at h
+      exact h) K.property
 
 /-- **The compact-support exchange `ν_X` of a proper `X`** (blueprint `det-nearby-exchange-maps`
 (3)): `ν_X = χ_p⁻¹ ∘ Rp'_*(ν_h)`, through `Ra'_! ≅ Rp'_! h'_! ≅ Rp'_* h'_!` and `Ra_* ≅ Ra_!`. -/
 noncomputable def pointCompactSupportExchange :
     Correspondence.IsContractingAt.PointCompactSupportExchange (ℓ := ℓ) X k' x :=
-  have : IsProper (toPoint X).left := ‹IsProper X.hom›
-  have : IsProper (toPoint (compactifiedSpecialFibre X x k')).left :=
-    inferInstanceAs (IsProper (compactifiedSpecialFibre X x k').hom)
+  have : IsProper (toPoint X).left := by rw [toPoint_left]; infer_instance
+  have : IsProper (toPoint (compactifiedSpecialFibre X x k')).left := by
+    rw [toPoint_left]; infer_instance
   pointExchangeAux (ObjectProperty.fullyFaithfulι _)
     (lowerShriekCompOfEq ℓ (deformationSpecialFibreToCompactified X x k') (toPoint _)
       (comp_toPoint _))
@@ -148,8 +158,8 @@ noncomputable def pointCompactSupportExchange :
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X))
     (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility _)
     (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ _)
-    (boundedConstructibleLowerStarCompatibility _ ℓ _)
-    (boundedConstructibleLowerStarCompatibility _ ℓ _)
+    (boundedConstructibleLowerStarCompatibility ℓ _)
+    (boundedConstructibleLowerStarCompatibility ℓ _)
     (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility _)
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction _
       (deformationSpecialFibreToCompactified X x k').left).ofNatIsoRight

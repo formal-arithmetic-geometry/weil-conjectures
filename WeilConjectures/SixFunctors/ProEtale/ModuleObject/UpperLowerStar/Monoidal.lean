@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
@@ -39,6 +40,11 @@ module-object six functors need in order to transport ring objects and module ob
   (`Functor.isMonoidal_sheafPushforwardContinuousComp'_hom`). It is the input making the
   composition isomorphism of pushforwards of module objects
   (`ProEtale.CondensedRing.lowerStarComp`) available.
+* `ProEtale.isMonoidal_lowerStarId`: the identity isomorphism `(𝟙 X)_* ≅ 𝟭` of
+  `ProEtale.lowerStarId` is monoidal. It is induced by the identification of the base change
+  along `𝟙 X` with the identity of the site, which is compatible with the objectwise tensor
+  products. It is the input making the identity isomorphism of pushforwards of module objects
+  (`ProEtale.CondensedRing.lowerStarId`) available.
 
 -/
 
@@ -118,5 +124,21 @@ instance ProEtale.isMonoidal_lowerStarComp :
     (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm
 
 end LowerStarComp
+
+/-! ### The identity isomorphism of pushforwards is monoidal -/
+
+section LowerStarId
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
+
+/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of pushforwards on pro-étale sheaves is a monoidal
+natural isomorphism. See the module docstring. -/
+instance ProEtale.isMonoidal_lowerStarId (X : Scheme.{u}) :
+    NatTrans.IsMonoidal (ProEtale.lowerStarId A X).hom :=
+  inferInstanceAs (NatTrans.IsMonoidal (Functor.sheafPushforwardContinuousId'
+    (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) A (Scheme.ProEt.topology X)).hom)
+
+end LowerStarId
 
 end AlgebraicGeometry

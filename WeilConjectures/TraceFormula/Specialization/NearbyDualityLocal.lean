@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityCompactification
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 
 /-!
@@ -76,12 +76,14 @@ lemma IsTraitModelOfBase.restrictOpen (h : M.IsTraitModelOfBase k q g) (V : M.to
     [QuasiCompact V.ι] :
     (M.restrictOpen V).IsTraitModelOfBase (X' := M.restrictSpecialFibre V) k (V.ι ≫ q)
       ((M.j ⁻¹ᵁ V).ι ≫ g) := by
-  obtain ⟨e, he⟩ := h.exists_comp_ε
+  obtain ⟨e, he, he'⟩ := h.exists_comp_ε
   obtain ⟨u, _, hu₁, hu₂⟩ := h.exists_openImmersion
-  refine ⟨h.isTraitModelOver.restrictOpen V, ⟨V.ι ≫ e, ?_⟩, (M.j ⁻¹ᵁ V).ι ≫ u, inferInstance,
-    ?_, ?_⟩
+  refine ⟨h.isTraitModelOver.restrictOpen V, ⟨V.ι ≫ e, ?_, ?_⟩, (M.j ⁻¹ᵁ V).ι ≫ u,
+    inferInstance, ?_, ?_⟩
   · change (M.j ∣_ V) ≫ V.ι ≫ e = (M.j ⁻¹ᵁ V).ι ≫ M.ε
     rw [morphismRestrict_ι_assoc, he]
+  · change V.ι ≫ e ≫ X.hom = (V.ι ≫ q) ≫ traitToBase k k'
+    rw [he', Category.assoc]
   · rw [Category.assoc, hu₁]
     rfl
   · rw [Category.assoc, hu₂]
@@ -146,8 +148,8 @@ theorem isIso_nearbyDualityMap (D : NearbyDualizingData k k' ℓ) (h : M.IsTrait
 theorem nonempty_nearbyCycles_verdierDual_iso (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
-        (verdierDual ℓ (toPoint X) K) ≅
-      verdierDual ℓ (toPoint X') ((boundedConstructibleNearbyCycles
+        (verdierDual ℓ K) ≅
+      verdierDual ℓ ((boundedConstructibleNearbyCycles
         (h.preservesBoundedConstructible ℓ)).obj K)) :=
   let ⟨D⟩ := nonempty_nearbyDualizingData k k' ℓ
   have := isIso_nearbyDualityMap ℓ D h K

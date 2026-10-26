@@ -86,29 +86,29 @@ theorem exists_sectionsWithSupportRestriction_eq
     (Q : DerivedCategory.Plus (Sheaf M.T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ∃ (t : ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.a).obj Q).obj₁ ≅
         (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.G).obj
-          ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj))
+          ((R(M.a)^![Λ]).obj Q.obj))
       (e : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).obj
-        ((R(M.yB)^![ModuleCat.{u + 1} Λ]).obj ((L((M.b)^*[ModuleCat.{u + 1} Λ])).obj Q.obj)) ≅
+        ((R(M.yB)^![Λ]).obj ((L((M.b)^*[ModuleCat.{u + 1} Λ])).obj Q.obj)) ≅
         ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.yB).obj
           ((Functor.mapDerivedCategoryPlus (M.b)^*[ModuleCat.{u + 1} Λ]).obj Q)).obj₁),
       sectionsWithSupportRestriction (ModuleCat.{u + 1} Λ) M.b M.a M.yB M.openComplement_yB_le Q =
         t.hom ≫ globalSectionsRestriction (A := ModuleCat.{u + 1} Λ) M.ιY
-            ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj) ≫
+            ((R(M.a)^![Λ]).obj Q.obj) ≫
           (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) M.Y).map
             ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.ιY).inv.app _ ≫
               exchangeRestriction Λ M.isPullback_ιY Q.obj) ≫ e.hom := by
   -- the source `E = Ra_! Ra^! Q` of the counit `ε : E ⟶ Q` is bounded below
-  obtain ⟨n, hn⟩ := plus_rightDerivedUpperShriek_obj (ModuleCat.{u + 1} Λ) M.a Q.obj Q.property
+  obtain ⟨n, hn⟩ := plus_rightDerivedUpperShriek_obj Λ M.a Q.obj Q.property
   have hE : DerivedCategory.TStructure.t.plus ((R(M.a)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj)) := by
-    have : ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj).IsGE n := hn
+      ((R(M.a)^![Λ]).obj Q.obj)) := by
+    have : ((R(M.a)^![Λ]).obj Q.obj).IsGE n := hn
     have := ((M.a)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj
-      ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj) n
+      ((R(M.a)^![Λ]).obj Q.obj) n
     exact ⟨n, DerivedCategory.TStructure.t.isGE_of_iso
       ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ M.a).app _).symm n⟩
   let E : DerivedCategory.Plus (Sheaf M.T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := ⟨_, hE⟩
   let ε : E ⟶ Q := ObjectProperty.homMk
-    ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) M.a).counit.app Q.obj)
+    ((rightDerivedUpperShriekAdjunction Λ M.a).counit.app Q.obj)
   let φ := sectionsWithSupportTrianglePullback (ModuleCat.{u + 1} Λ) M.b M.a M.yB
     M.openComplement_yB_le
   -- naturality of the supported restriction along `ε`
@@ -118,7 +118,7 @@ theorem exists_sectionsWithSupportRestriction_eq
           ((Functor.mapDerivedCategoryPlus (M.b)^*[ModuleCat.{u + 1} Λ]).map ε)).hom₁ :=
     congrArg TriangleMorphism.hom₁ (φ.naturality ε)
   have hg : IsIso ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.a).map ε).hom₁ :=
-    isIso_rightDerivedSectionsWithSupport_map_counit _ M.a Q.obj
+    isIso_rightDerivedSectionsWithSupport_map_counit Λ M.a Q.obj
   -- `E` is supported on `G`, and its pullback to `B` on `Y`
   have hEs : IsZero (((M.a.openComplement.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
       E.obj) :=
@@ -139,9 +139,9 @@ theorem exists_sectionsWithSupportRestriction_eq
     rw [← rightDerivedPullback_ΓPullback_app] at this
     exact this
   -- `b^* ε` factors through the exchange restriction and the counit of `Ry_! ⊣ Ry^!`
-  let K := (R(M.a)^![ModuleCat.{u + 1} Λ]).obj Q.obj
+  let K := (R(M.a)^![Λ]).obj Q.obj
   let NL := (L((M.b)^*[ModuleCat.{u + 1} Λ])).obj Q.obj
-  let adjy := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) M.yB
+  let adjy := rightDerivedUpperShriekAdjunction Λ M.yB
   let lb := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.b
   let lι := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.ιY
   let σ := lowerShriekBaseChangeIso Λ M.isPullback_ιY
@@ -167,9 +167,9 @@ theorem exists_sectionsWithSupportRestriction_eq
     simp only [c₁, Category.assoc]
     rw [reassoc_of% e₁, reassoc_of% e₂, Iso.hom_inv_id_app_assoc, e₃, Iso.inv_hom_id_app_assoc]
   -- sections with support of `Ry_! f` are sections of `f` over `Y`
-  let ν := rightDerivedLowerShriekCompSectionsWithSupportIso (ModuleCat.{u + 1} Λ) M.yB
+  let ν := rightDerivedLowerShriekCompSectionsWithSupportIso Λ M.yB
   let RΓY := rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) M.yB
-  let c₃ := ν.inv.app ((R(M.yB)^![ModuleCat.{u + 1} Λ]).obj
+  let c₃ := ν.inv.app ((R(M.yB)^![Λ]).obj
       ((L((M.b)^*[ModuleCat.{u + 1} Λ])).obj Q.obj)) ≫
     RΓY.map (adjy.counit.app NL) ≫ RΓY.map (lb.hom.app Q.obj)
   have hc : ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.yB).map
@@ -181,8 +181,8 @@ theorem exists_sectionsWithSupportRestriction_eq
     refine (congrArg RΓY.map h₃).trans ?_
     simp only [c₃, Functor.map_comp, Category.assoc, e₄]
   have hc₃₁ : IsIso (RΓY.map (adjy.counit.app NL)) :=
-    isIso_rightDerivedSectionsWithSupport_map_counit (ModuleCat.{u + 1} Λ) M.yB NL
-  have hc₃₂ : IsIso (ν.inv.app ((R(M.yB)^![ModuleCat.{u + 1} Λ]).obj
+    isIso_rightDerivedSectionsWithSupport_map_counit Λ M.yB NL
+  have hc₃₂ : IsIso (ν.inv.app ((R(M.yB)^![Λ]).obj
       ((L((M.b)^*[ModuleCat.{u + 1} Λ])).obj Q.obj))) :=
     (ν.app _).isIso_inv
   have hc₃ : IsIso c₃ :=

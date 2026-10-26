@@ -34,6 +34,7 @@ namespace AlgebraicGeometry.Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {X : Scheme.{u}}
 
@@ -61,13 +62,13 @@ noncomputable def derivedHomShiftIso
     (((shiftEquiv _ a).toAdjunction.comp (derivedTensorHomAdjunction A K)).ofNatIsoLeft
       (((derivedTensor A X).obj K).commShiftIso a ≪≫ (derivedTensorObjShiftIso A K a).symm))
 
-variable {S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+variable {S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
 
 /-- The Verdier dual of a shift is the opposite shift of the Verdier dual,
 `𝔻(K⟦m⟧) ≅ (𝔻K)⟦-m⟧`. -/
 noncomputable def verdierDualShiftIso
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (m : ℤ) :
-    (verdierDual A a).obj (op (K⟦m⟧)) ≅ ((verdierDual A a).obj (op K))⟦-m⟧ :=
-  (derivedHomShiftIso A K m).app (dualizingComplex A a)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ) :
+    (verdierDual Λ a).obj (op (K⟦m⟧)) ≅ ((verdierDual Λ a).obj (op K))⟦-m⟧ :=
+  (derivedHomShiftIso (ModuleCat.{u + 1} Λ) K m).app (dualizingComplex Λ a)
 
 end AlgebraicGeometry.Etale

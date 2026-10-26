@@ -44,32 +44,32 @@ variable {S : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.h
 uncurried form `Rp₁_! (Lp₂^* M ⊗ Z) ⟶ M`. -/
 noncomputable def classTest {Z : Dᵇc((S ⨯ S).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : Z ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : S ⨯ S ⟶ S)).obj M)).obj
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).obj M)) :
-    (boundedConstructibleLowerShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).obj
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : S ⨯ S ⟶ S)).obj M)) :
+    (boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : S ⨯ S ⟶ S)).obj M ⊗ Z) ⟶ M :=
-  ((boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : S ⨯ S ⟶ S)).homEquiv _ _).symm
+  ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : S ⨯ S ⟶ S)).homEquiv _ _).symm
     (uncurry φ)
 
 variable {M}
 
 lemma classTest_injective {Z : Dᵇc((S ⨯ S).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {φ φ' : Z ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : S ⨯ S ⟶ S)).obj M)).obj
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).obj M)}
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : S ⨯ S ⟶ S)).obj M)}
     (h : classTest ℓ M φ = classTest ℓ M φ') : φ = φ' :=
   uncurry_injective (Equiv.injective _ h)
 
 lemma classTest_comp {Z Z' : Dᵇc((S ⨯ S).left)⟦Profinite.padicAlgClRingObj ℓ⟧} (ψ : Z' ⟶ Z)
     (φ : Z ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : S ⨯ S ⟶ S)).obj M)).obj
-      ((boundedConstructibleUpperShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).obj M)) :
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : S ⨯ S ⟶ S)).obj M)) :
     classTest ℓ M (ψ ≫ φ) =
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).map (_ ◁ ψ) ≫
+      (boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).map (_ ◁ ψ) ≫
         classTest ℓ M φ := by
   rw [classTest, classTest, uncurry_natural_left, Adjunction.homEquiv_naturality_left_symm]
 
 lemma classTest_curry {Z : Dᵇc((S ⨯ S).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (ψ : (boundedConstructibleLowerShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).obj
+    (ψ : (boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : S ⨯ S ⟶ S)).obj M ⊗ Z) ⟶ M) :
-    classTest ℓ M (curry (((boundedConstructibleUpperShriekAdjunction _ ℓ
+    classTest ℓ M (curry (((boundedConstructibleUpperShriekAdjunction ℓ
       (prod.fst : S ⨯ S ⟶ S)).homEquiv _ _) ψ)) = ψ := by
   rw [classTest, uncurry_curry, Equiv.symm_apply_apply]
 
@@ -80,19 +80,19 @@ and the exceptional adjoint of the coefficient map. -/
 lemma classTest_correspondenceClassEquiv_symm {C : Over (Spec (.of k))} [LocallyOfFiniteType C.hom]
     [QuasiCompact C.hom] [IsSeparated C.hom] (s : C ⟶ S ⨯ S)
     (w : (boundedConstructibleUpperStar _ ℓ (s ≫ prod.snd)).obj M ⟶
-      (boundedConstructibleUpperShriek _ ℓ (s ≫ prod.fst)).obj M) :
+      (boundedConstructibleUpperShriek ℓ (s ≫ prod.fst)).obj M) :
     classTest ℓ M ((correspondenceClassEquiv ℓ s M M).symm w) =
-      (boundedConstructibleLowerShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).map
-          (Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ s) _ (𝟙_ _) ≫
-            (boundedConstructibleLowerShriek _ ℓ s).map
+      (boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).map
+          (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ s) _ (𝟙_ _) ≫
+            (boundedConstructibleLowerShriek ℓ s).map
               ((ρ_ _).hom ≫ (boundedConstructibleUpperStarComp _ ℓ s prod.snd).inv.app M)) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ s prod.fst).inv.app _ ≫
-        (boundedConstructibleLowerShriek _ ℓ (s ≫ prod.fst)).map w ≫
-        (boundedConstructibleUpperShriekAdjunction _ ℓ (s ≫ prod.fst)).counit.app M := by
+        (boundedConstructibleLowerShriek ℓ (s ≫ prod.fst)).map w ≫
+        (boundedConstructibleUpperShriekAdjunction ℓ (s ≫ prod.fst)).counit.app M := by
   have hP := Adjunction.map_map_conjugateIsoEquiv_comp_counit
-    (boundedConstructibleUpperShriekAdjunction _ ℓ s)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : S ⨯ S ⟶ S))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (s ≫ prod.fst))
+    (boundedConstructibleUpperShriekAdjunction ℓ s)
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : S ⨯ S ⟶ S))
+    (boundedConstructibleUpperShriekAdjunction ℓ (s ≫ prod.fst))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ s prod.fst) M
   simp only [classTest, correspondenceClassEquiv, Equiv.coe_fn_symm_mk,
     Verdier.uncurry_correspondenceClassEquiv_symm, Adjunction.homEquiv_counit,
@@ -100,7 +100,7 @@ lemma classTest_correspondenceClassEquiv_symm {C : Over (Spec (.of k))} [Locally
     Functor.map_comp, Category.assoc] at hP ⊢
   have hn := (boundedConstructibleLowerShriekComp_padicAlgCl ℓ s prod.fst).inv.naturality w
   simp only [Functor.comp_map] at hn
-  rw [hP, ← Category.assoc ((boundedConstructibleLowerShriek _ ℓ (prod.fst : S ⨯ S ⟶ S)).map
-    ((boundedConstructibleLowerShriek _ ℓ s).map w)), hn, Category.assoc]
+  rw [hP, ← Category.assoc ((boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).map
+    ((boundedConstructibleLowerShriek ℓ s).map w)), hn, Category.assoc]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

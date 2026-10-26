@@ -77,13 +77,13 @@ variable {W V : Over (Spec (.of k))}
 compact-support base change in the cartesian square `𝟙 ≫ G = 𝟙 ≫ G`, `LG^* RG_! ≅ R𝟙_! L𝟙^*`. -/
 lemma isIso_of_isIso_lowerShriek_map_of_mono (G : W ⟶ V) [Mono G]
     {A B : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : A ⟶ B)
-    [IsIso ((boundedConstructibleLowerShriek _ ℓ G).map φ)] : IsIso φ := by
+    [IsIso ((boundedConstructibleLowerShriek ℓ G).map φ)] : IsIso φ := by
   have sq : IsPullback (𝟙 W) (𝟙 W) G G := IsKernelPair.id_of_mono G
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have hn := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).naturality φ
-  have : IsIso ((boundedConstructibleLowerShriek _ ℓ (𝟙 W)).map
+  have : IsIso ((boundedConstructibleLowerShriek ℓ (𝟙 W)).map
       ((boundedConstructibleUpperStar _ ℓ (𝟙 W)).map φ)) := by
-    have : IsIso (((boundedConstructibleLowerShriek _ ℓ G ⋙
+    have : IsIso (((boundedConstructibleLowerShriek ℓ G ⋙
         boundedConstructibleUpperStar _ ℓ G).map φ ≫
           (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app B)) := by
       dsimp only [Functor.comp_map]
@@ -124,23 +124,23 @@ theorem isIso_curry_kunnethPairing_iff_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (αY : (boundedConstructibleUpperStar _ ℓ pV).obj M ⊗
         (boundedConstructibleUpperStar _ ℓ qV).obj (dualizingComplex' ℓ Y) ⟶
-      (boundedConstructibleUpperShriek _ ℓ pV).obj M)
+      (boundedConstructibleUpperShriek ℓ pV).obj M)
     (αZ : (boundedConstructibleUpperStar _ ℓ pW).obj M ⊗
         (boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z) ⟶
-      (boundedConstructibleUpperShriek _ ℓ pW).obj M)
-    (hstar : αZ = (boundedConstructibleUpperShriekAdjunction _ ℓ G).homEquiv _ _
+      (boundedConstructibleUpperShriek ℓ pW).obj M)
+    (hstar : αZ = (boundedConstructibleUpperShriekAdjunction ℓ G).homEquiv _ _
         (exceptionalKunnethTraceOfSquare ℓ pW qW pV qV G g sq hp M ≫ αY) ≫
       (boundedConstructibleUpperShriekCompOfEq ℓ hp).inv.app M)
     (N' : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (curry ((α_ _ _ _).inv ≫
         ((β_ ((boundedConstructibleUpperStar _ ℓ qV).obj
-          ((boundedConstructibleLowerShriek _ ℓ g).obj N'))
+          ((boundedConstructibleLowerShriek ℓ g).obj N'))
           ((boundedConstructibleUpperStar _ ℓ pV).obj M)).hom ▷ _) ≫ (α_ _ _ _).hom ≫
         (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ qV)
-          ((boundedConstructibleLowerShriek _ ℓ g).obj N')
-          ((ihom ((boundedConstructibleLowerShriek _ ℓ g).obj N')).obj (dualizingComplex' ℓ Y))) ≫
+          ((boundedConstructibleLowerShriek ℓ g).obj N')
+          ((ihom ((boundedConstructibleLowerShriek ℓ g).obj N')).obj (dualizingComplex' ℓ Y))) ≫
         (_ ◁ (boundedConstructibleUpperStar _ ℓ qV).map
-          ((ihom.ev ((boundedConstructibleLowerShriek _ ℓ g).obj N')).app
+          ((ihom.ev ((boundedConstructibleLowerShriek ℓ g).obj N')).app
             (dualizingComplex' ℓ Y))) ≫ αY)) ↔
       IsIso (curry ((α_ _ _ _).inv ≫
         ((β_ ((boundedConstructibleUpperStar _ ℓ qW).obj N')
@@ -150,41 +150,50 @@ theorem isIso_curry_kunnethPairing_iff_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
         (_ ◁ (boundedConstructibleUpperStar _ ℓ qW).map
           ((ihom.ev N').app (dualizingComplex' ℓ Z))) ≫ αZ)) := by
   have ibs := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  have hstar' : (boundedConstructibleLowerShriek _ ℓ G).map
+  have hstar' : (boundedConstructibleLowerShriek ℓ G).map
       (αZ ≫ (boundedConstructibleUpperShriekCompOfEq ℓ hp).hom.app M) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ G).counit.app
-        ((boundedConstructibleUpperShriek _ ℓ pV).obj M) =
+      (boundedConstructibleUpperShriekAdjunction ℓ G).counit.app
+        ((boundedConstructibleUpperShriek ℓ pV).obj M) =
       ProjectionBaseChange.trace
-        (fun A B ↦ ((boundedConstructibleExceptionalProjection _ ℓ G).app A).app B)
+        (fun A B ↦ ((boundedConstructibleExceptionalProjection ℓ G).app A).app B)
         (boundedConstructibleUpperStar _ ℓ qV) (boundedConstructibleUpperStar _ ℓ qW)
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
         ((boundedConstructibleUpperStar _ ℓ pV).obj M)
         ((boundedConstructibleUpperStarCompOfEq ℓ hp).hom.app M) (dualizingComplex' ℓ Z)
         (dualizingComplex' ℓ Y)
-        ((boundedConstructibleLowerShriek _ ℓ g).map (dualizingComplexComp ℓ g).inv ≫
-          (boundedConstructibleUpperShriekAdjunction _ ℓ g).counit.app (dualizingComplex' ℓ Y)) ≫
+        ((boundedConstructibleLowerShriek ℓ g).map (dualizingComplexComp ℓ g).inv ≫
+          (boundedConstructibleUpperShriekAdjunction ℓ g).counit.app (dualizingComplex' ℓ Y)) ≫
         αY := by
     rw [hstar, Category.assoc, Iso.inv_hom_id_app]
     dsimp only [Functor.comp_obj]
     rw [Category.comp_id]
-    refine ((boundedConstructibleUpperShriekAdjunction _ ℓ G).homEquiv_counit _ _ _).symm.trans ?_
+    refine ((boundedConstructibleUpperShriekAdjunction ℓ G).homEquiv_counit _ _ _).symm.trans ?_
     exact Equiv.symm_apply_apply _ _
   refine (ProjectionBaseChange.isIso_curry_iff
     (aG := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ G)
-    (aGu := boundedConstructibleUpperShriekAdjunction _ ℓ G)
-    (pfG := boundedConstructibleExceptionalProjection _ ℓ G)
+    (aGu := boundedConstructibleUpperShriekAdjunction ℓ G)
+    (pfG := boundedConstructibleExceptionalProjection ℓ G)
     (hcG := fun A B ↦ upperStar_map_exceptionalProjection_comp_counit ℓ G A B)
     (ag := boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
-    (agu := boundedConstructibleUpperShriekAdjunction _ ℓ g)
-    (pfg := boundedConstructibleExceptionalProjection _ ℓ g)
-    (q := boundedConstructibleUpperStar _ ℓ qV) (qZ := boundedConstructibleUpperStar _ ℓ qW)
+    (agu := boundedConstructibleUpperShriekAdjunction ℓ g)
+    (pfg := boundedConstructibleExceptionalProjection ℓ g)
+    (q := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qV)
+    (qZ := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qW)
     (BC := boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
-    (θ := boundedConstructiblePullbackSquareComparison _ ℓ sq.toCommSq)
-    (hmate := ProjectionBaseChange.counit_mate_of_unit _ _ _ _ _ _
+    (θ := boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq)
+    (hmate := ProjectionBaseChange.counit_mate_of_unit
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ G)
+      (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qV)
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qW)
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        sq.toCommSq)
       (fun M ↦ map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app ℓ sq M))
     (hPF2 := boundedConstructibleExceptionalProjectionMorphism_baseChange ℓ sq)
-    (hsymm := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom _ A B)
-    (hsymm' := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom _ A B)
+    (hsymm := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom A B)
+    (hsymm' := fun A B ↦ boundedConstructible_braiding_hom_braiding_hom A B)
     (P := (boundedConstructibleUpperStar _ ℓ pV).obj M)
     (e := (boundedConstructibleUpperStarCompOfEq ℓ hp).hom.app M)
     (d := dualizingComplexComp ℓ g) (αY := αY) (αZ := αZ)
@@ -216,7 +225,7 @@ theorem isIso_kunnethVerdierMap_lowerShriek_iff_of_isClosedImmersion (g : Z ⟶ 
     [IsClosedImmersion g.left] (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N' : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (kunnethVerdierMap ℓ (Y := Y) M
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N')) ↔
+      ((boundedConstructibleLowerShriek ℓ g).obj N')) ↔
       IsIso (kunnethVerdierMap ℓ (Y := Z) M N') := by
   have : Mono g := Over.mono_of_mono_left g
   unfold kunnethVerdierMap kunnethVerdierPairing

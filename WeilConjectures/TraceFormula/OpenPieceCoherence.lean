@@ -103,7 +103,7 @@ variable {X U : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 `Rj^! ≅ Lj^*`) is the counit of `j_! ⊣ Lj^*` through `Rj_! ≅ j_!`. -/
 lemma counit_app_ofNatIsoRight_upperShriekIsoUpperStar
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).ofNatIsoRight
+    ((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
         (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app M =
       (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj M) ≫
@@ -112,7 +112,7 @@ lemma counit_app_ofNatIsoRight_upperShriekIsoUpperStar
   have h := conjugateEquiv_counit
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ j)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperShriekAdjunction ℓ j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom M
   simp only [Adjunction.ofNatIsoRight_counit, NatTrans.comp_app, Functor.whiskerRight_app]
   rw [boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl,
@@ -162,25 +162,25 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        (((boundedConstructibleUpperShriekAdjunction ℓ
           j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
             K) ≫
       (compactPullback ℓ Φ).app K =
     (compactPullback ℓ ΦU).app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint U)).map
         ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K) ≫
       (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K)) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        (((boundedConstructibleUpperShriekAdjunction ℓ
           j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K)) := by
   have sq := isPullback_of_comp_eq_of_isOpenImmersion j hj
   have hcp := (compactPullback ℓ Φ).naturality
-    (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (((boundedConstructibleUpperShriekAdjunction ℓ
       j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app K)
   have hC1 := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
@@ -196,9 +196,9 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
   have hB := compactPullback_app_comp_baseChange ℓ sq
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
   have hB' : (compactPullback ℓ Φ).app ((boundedConstructibleLowerShriek
-        (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+        ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
         ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) =
       (boundedConstructibleLowerShriekCompToPoint ℓ j).hom.app
@@ -212,14 +212,14 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
     ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
       sq.toCommSq.flip).hom.app K)
   have hn₂ := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
     ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ
       j).hom.naturality ((boundedConstructiblePullbackSquareComparison
         (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq.flip).hom.app K))
   have hEx' := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map hEx
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map hEx
   have hC1' := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map hC1
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map hC1
   simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hcp hn₁
   simp only [Functor.map_comp, Functor.comp_obj, Functor.id_obj] at hn₂ hEx' hC1'
   rw [hcp, counit_app_ofNatIsoRight_upperShriekIsoUpperStar,

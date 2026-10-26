@@ -68,11 +68,11 @@ followed by `Ra_{B!} ℚ̄_ℓ ≅ Ra_{F!} j_! ℚ̄_ℓ` and `Ra_{F!}` of the a
 identification `ℚ̄_ℓ ≅ Rj^! ℚ̄_ℓ`. -/
 noncomputable def componentClass :
     𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F)).obj
+      (boundedConstructibleLowerShriek ℓ (toPoint F)).obj
         (𝟙_ _) :=
   unitClass ℓ B ≫ (lowerShriekCompOfEq ℓ j (toPoint F) (comp_toPoint j)).hom.app (𝟙_ _) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F)).map
-      (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).homEquiv
+    (boundedConstructibleLowerShriek ℓ (toPoint F)).map
+      (((boundedConstructibleUpperShriekAdjunction ℓ j).homEquiv
         _ _).symm (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv)
 
 variable {ℓ j}
@@ -84,29 +84,29 @@ omit [IsOpenImmersion j.left] in
 lemma homEquiv_symm_comp_map_comp_upperShriekUnitCompOfEq {aB : B ⟶ point k}
     (w : j ≫ toPoint F = aB)
     (s : 𝟙_ (Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj (𝟙_ _))
+      (boundedConstructibleUpperShriek ℓ j).obj (𝟙_ _))
     (z : BorelMooreSection ℓ F) :
-    ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ aB).homEquiv
+    ((boundedConstructibleUpperShriekAdjunction ℓ aB).homEquiv
         _ _).symm
-        (s ≫ (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map z ≫
+        (s ≫ (boundedConstructibleUpperShriek ℓ j).map z ≫
           (upperShriekUnitCompOfEq ℓ j (toPoint F) w).hom) =
       (lowerShriekCompOfEq ℓ j (toPoint F) w).hom.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F)).map
-          (((boundedConstructibleUpperShriekAdjunction _ ℓ j).homEquiv _ _).symm s) ≫
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint F)).homEquiv _ _).symm z := by
+        (boundedConstructibleLowerShriek ℓ (toPoint F)).map
+          (((boundedConstructibleUpperShriekAdjunction ℓ j).homEquiv _ _).symm s) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint F)).homEquiv _ _).symm z := by
   subst w
   simp only [upperShriekUnitCompOfEq_rfl, lowerShriekCompOfEq_rfl, Iso.symm_hom, Iso.app_inv]
   exact homEquiv_symm_comp_map_comp_conjugateIsoEquiv_inv
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (j ≫ toPoint F))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ j)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint F))
+    (boundedConstructibleUpperShriekAdjunction ℓ (j ≫ toPoint F))
+    (boundedConstructibleUpperShriekAdjunction ℓ j)
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint F))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ j (toPoint F)) s z
 
 /-- The restriction of a Borel–Moore section, with the composition isomorphism of the dualizing
 complexes written as `upperShriekUnitCompOfEq`. -/
 lemma restrict_eq_upperShriekUnitCompOfEq (z : BorelMooreSection ℓ F) :
     z.restrict j = (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map z ≫
+      (boundedConstructibleUpperShriek ℓ j).map z ≫
       (upperShriekUnitCompOfEq ℓ j (toPoint F) (comp_toPoint j)).hom :=
   rfl
 
@@ -114,7 +114,7 @@ lemma restrict_eq_upperShriekUnitCompOfEq (z : BorelMooreSection ℓ F) :
 section `z` of `F` is `z^♭ : Ra_{F!} ℚ̄_ℓ ⟶ ℚ̄_ℓ` precomposed with the class of `B`. -/
 theorem integral_restrict (z : BorelMooreSection ℓ F) :
     (z.restrict j).integral = componentClass ℓ j ≫
-      ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperShriekAdjunction ℓ
         (toPoint F)).homEquiv _ _).symm z := by
   rw [integral_eq, componentClass, restrict_eq_upperShriekUnitCompOfEq, Category.assoc,
     Category.assoc]
@@ -191,13 +191,13 @@ subscheme `j : B ⟶ F`: it maps the specialization `Ra_{F'!}(σ_F) [F']` of the
 proper special fixed locus `F'` to the specialization of the class of `B` in `Ra_{F!} ℚ̄_ℓ`
 (`BorelMooreSection.componentClass`), through the unit `σ_s` of the point. -/
 def SpecializesComponentClass [IsProper F'.F.hom]
-    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek ℓ
         (toPoint F'.F) ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F.F) ⋙ Ψpt)
+      boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt)
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] : Prop :=
   BorelMooreSection.unitClass ℓ F'.F ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F'.F)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint F'.F)).map
         T.σF ≫ νF.app (𝟙_ _) = σpt ≫ Ψpt.map (BorelMooreSection.componentClass ℓ j)
 
 /-- If the specialization data `T` has `θ_F` the dualizing map of `ν_F`, and `ν_F` maps the
@@ -205,9 +205,9 @@ specialization of the unit class of the proper `F'` to the specialization of the
 open subscheme `j : B ⟶ F`, then `sp(z) = 0` implies that the specialization of `∫_B z|_B`
 vanishes: `∫_{F'} sp(z) = σ_s⁻¹ Ψ_s(∫_B z|_B) σ_s`. -/
 theorem map_integral_restrict_eq_zero_of_sp_eq_zero [IsProper F'.F.hom]
-    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek ℓ
         (toPoint F'.F) ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint F.F) ⋙ Ψpt)
+      boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt)
     (hθ : T.θF = dualizingExchange ℓ σpt νF) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hS : T.SpecializesComponentClass σpt νF j)

@@ -73,29 +73,29 @@ transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
 `T_b = Ri_{b*} τ_h ∘ Rg_* T_c ∘ η_g`. -/
 lemma mate_comp_traceMap_pushforward :
     P.pushforward.mate ≫ P.pushforward.traceMap Fb =
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).unit.app (𝟙_ _) ≫
-          (boundedConstructibleLowerStar _ ℓ P.g).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g).unit.app (𝟙_ _) ≫
+          (boundedConstructibleLowerStar ℓ P.g).map
             (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ P.g)).inv) ≫
-        (boundedConstructibleLowerStar _ ℓ P.g).map (c.mate ≫ c.traceMap Fc) ≫
-        (boundedConstructibleLowerStarComp _ ℓ Fc.ι P.g).hom.app (dualizingComplex' ℓ Fc.F) ≫
+        (boundedConstructibleLowerStar ℓ P.g).map (c.mate ≫ c.traceMap Fc) ≫
+        (boundedConstructibleLowerStarComp ℓ Fc.ι P.g).hom.app (dualizingComplex' ℓ Fc.F) ≫
         eqToHom (by rw [← P.fixMap_ι]) ≫
-        (boundedConstructibleLowerStarComp _ ℓ (P.fixMap Fc Fb) Fb.ι).inv.app
+        (boundedConstructibleLowerStarComp ℓ (P.fixMap Fc Fb) Fb.ι).inv.app
           (dualizingComplex' ℓ Fc.F) ≫
-        (boundedConstructibleLowerStar _ ℓ Fb.ι).map
+        (boundedConstructibleLowerStar ℓ Fb.ι).map
           (lowerStarDualizingComplexTrace ℓ (P.fixMap Fc Fb)) := by
   have e4 := Adjunction.homEquiv_comp_mateEquiv_of_eq
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ P.pushforward.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ P.pushforward.support)
     (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar _ ℓ P.g).map
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g).unit.app (𝟙_ _) ≫
+      (boundedConstructibleLowerStar ℓ P.g).map
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ P.g)).inv)
     c.kernelClass (evaluationKernel ℓ K)
-    ((boundedConstructibleLowerStarComp _ ℓ (diag X) (prod.map P.f P.f)).hom.app
+    ((boundedConstructibleLowerStarComp ℓ (diag X) (prod.map P.f P.f)).hom.app
           (dualizingComplex' ℓ X) ≫
         eqToHom (by rw [P.diag_comp_prodMap]) ≫
-        (boundedConstructibleLowerStarComp _ ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
-        (boundedConstructibleLowerStar _ ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
+        (boundedConstructibleLowerStarComp ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
+        (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
     (c.mate ≫ c.traceMap Fc) Fc.supportIso.hom
     (by rw [Category.assoc]; exact (mate_comp_traceMap_comp_supportIso c Fc).symm) _
     (lowerStarUpperShriekExchange ℓ P.g_comp_support)
@@ -120,55 +120,55 @@ sources (`lem-trf-trace-source-exchange`). -/
 theorem traceClassPushforward_eq :
     P.traceClassPushforward Fc Fb = P.pushforward.traceClass Fb := by
   have hTc : c.mate ≫ c.traceMap Fc =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ Fc.ι).homEquiv _ _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fc.ι).homEquiv _ _
         ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ Fc.ι)).inv ≫
           c.traceClass Fc) := by
     rw [traceClass, Iso.inv_hom_id_assoc, Equiv.apply_symm_apply]
-  have key : (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ Fb.ι).homEquiv _ _
+  have key : (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fb.ι).homEquiv _ _
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ Fb.ι)).inv ≫
         P.traceClassPushforward Fc Fb) = P.pushforward.mate ≫ P.pushforward.traceMap Fb := by
     rw [P.mate_comp_traceMap_pushforward Fc Fb, hTc]
     simp only [Adjunction.homEquiv_unit, traceClassPushforward, BorelMooreSection.pushforward,
       lowerStarDualizingComplexTrace, Functor.map_comp, Category.assoc]
     have hpg := Adjunction.unit_map_comp_unit_map
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ P.g)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fc.ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (Fc.ι ≫ P.g))
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι P.g)
-      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Fc.ι P.g)
-      rfl _ _ _ (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ Fc.ι P.g)
+      (boundedConstructibleLowerStarComp ℓ Fc.ι P.g)
+      rfl _ _ _ (boundedConstructibleUpperStarComp_hom_app_unit ℓ Fc.ι P.g)
     have hhb := Adjunction.unit_map_comp_unit_map
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (P.fixMap Fc Fb))
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Fb.ι)
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fb.ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (P.fixMap Fc Fb ≫ Fb.ι))
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (P.fixMap Fc Fb) Fb.ι)
-      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerStarComp ℓ
         (P.fixMap Fc Fb) Fb.ι)
       rfl _ _ _
-      (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ (P.fixMap Fc Fb) Fb.ι)
+      (boundedConstructibleUpperStarComp_hom_app_unit ℓ (P.fixMap Fc Fb) Fb.ι)
     have htr := unit_comp_map_εIso_inv_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
-    have n1 := (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+    have n1 := (boundedConstructibleLowerStarComp ℓ
       Fc.ι P.g).hom.naturality (c.traceClass Fc)
     have n2 := lowerStar_map_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
       (c.traceClass Fc)
-    have n3 := (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+    have n3 := (boundedConstructibleLowerStarComp ℓ
       (P.fixMap Fc Fb) Fb.ι).inv.naturality (c.traceClass Fc)
     simp only [Functor.comp_map] at n1 n3
     refine comp_eq_comp_of_points _ _ _ _ _ _ _ _ _ _ _ _ _
-      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleLowerStarComp ℓ
         Fc.ι P.g).hom.app (𝟙_ _))
       (eqToHom (congrArg (fun r : Fc.F ⟶ P.D ↦
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj (𝟙_ _))
+        (boundedConstructibleLowerStar ℓ r).obj (𝟙_ _))
           (P.fixMap_ι Fc Fb).symm))
-      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (P.fixMap Fc Fb)
+      ((boundedConstructibleLowerStarComp ℓ (P.fixMap Fc Fb)
         Fb.ι).inv.app (𝟙_ _))
-      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           (Fc.ι ≫ P.g)).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (Fc.ι ≫ P.g)).map
+        (boundedConstructibleLowerStar ℓ (Fc.ι ≫ P.g)).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (Fc.ι ≫ P.g))).inv) _ _
       ?_ ?_ htr ?_

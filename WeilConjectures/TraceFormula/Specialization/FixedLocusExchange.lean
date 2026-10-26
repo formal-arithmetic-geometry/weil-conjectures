@@ -143,10 +143,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
   (ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   (ΨXX : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
     Dᵇc((X' ⨯ X').left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-  (χΔ : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X) ⋙ ΨXX ⟶
-    ΨX ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (diag X'))
-  (νc : ΨC ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c'.support ⟶
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.support ⋙ ΨXX)
+  (χΔ : boundedConstructibleLowerStar ℓ (diag X) ⋙ ΨXX ⟶
+    ΨX ⋙ boundedConstructibleLowerStar ℓ (diag X'))
+  (νc : ΨC ⋙ boundedConstructibleLowerShriek ℓ c'.support ⟶
+    boundedConstructibleLowerShriek ℓ c.support ⋙ ΨXX)
 
 /-- **The compact-support exchange `ν_d` of the fixed locus** determined by the support, for
 `β_c` the mate of `ν_c`: `ν_d(N)` is
@@ -156,19 +156,19 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
 theorem fixedLocusCompactSupportExchange_eq :
     fixedLocusCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ
         (exceptionalExchange ℓ c.support c'.support νc) =
-      fixedSquareCompactSupportExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
+      fixedSquareCompactSupportExchange (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
         F.lowerShriekBaseChangeIso F'.lowerShriekBaseChangeIso νc
         ((CategoryTheory.mateEquiv
-          (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-          (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X'))).symm χΔ) :=
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X'))).symm χΔ) :=
   mateEquiv_symm_eq_fixedSquareCompactSupportExchange
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d) _
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c'.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F'.d)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F'.ι)
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X')) _ _ _ _ _ fun M => by
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ F.d) _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+    (boundedConstructibleUpperShriekAdjunction ℓ c'.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ F'.d)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X')) _ _ _ _ _ fun M => by
       simp only [fixedLocusExceptionalExchange, fixedSquareExchange, fourExchange_app,
         Equiv.apply_symm_apply]
       rfl
@@ -179,19 +179,19 @@ compact-support exchange `ν_F` of the structure maps of the fixed loci, for `β
 theorem fixedLocusToPointCompactSupportExchange_app
     {Ψpt : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
       Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (νX : ΨX ⋙ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') ⟶
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙ Ψpt)
+    (νX : ΨX ⋙ boundedConstructibleLowerShriek ℓ (toPoint X') ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint X) ⋙ Ψpt)
     (N : Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (fixedLocusToPointCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ
         (exceptionalExchange ℓ c.support c'.support νc) νX).app N =
       (lowerShriekCompOfEq ℓ F'.d (toPoint X') (comp_toPoint F'.d)).hom.app _ ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X')).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X')).map
           ((fixedSquareCompactSupportExchange
-            (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ F.ι)
+            (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι)
             F.lowerShriekBaseChangeIso F'.lowerShriekBaseChangeIso νc
             ((CategoryTheory.mateEquiv
-              (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X))
-              (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X'))).symm χΔ)).app
+              (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+              (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X'))).symm χΔ)).app
             N) ≫
           νX.app _ ≫
             Ψpt.map ((lowerShriekCompOfEq ℓ F.d (toPoint X) (comp_toPoint F.d)).inv.app N) := by

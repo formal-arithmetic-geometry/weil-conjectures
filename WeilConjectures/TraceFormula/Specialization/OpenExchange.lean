@@ -49,8 +49,7 @@ open Scheme
 
 namespace NearbyCyclesModel.Hom
 
-variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -59,8 +58,9 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [I
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
-  (φ : M.Hom N f.left f'.left) (hM : M.PreservesBoundedConstructible Λ)
-  (hN : N.PreservesBoundedConstructible Λ)
+  (φ : M.Hom N f.left f'.left)
+  (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 /-- **The pullback exchange along an open immersion of models, on bounded constructible
 complexes**: if the morphism of total spaces is an open immersion and the square of geometric

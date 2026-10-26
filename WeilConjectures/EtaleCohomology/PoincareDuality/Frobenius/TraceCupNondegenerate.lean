@@ -100,9 +100,9 @@ theorem exists_nondegenerate_traceCup
     (leftDerivedUpperStarTateObjectIso a (d : ℤ)).symm ≪≫
       (L((a)^*[ModuleCat.{u + 1} Λ])).mapIso eT ≪≫ leftDerivedUpperStarConstantComplexIso Λ a
   let γ' : (𝟙_ (DerivedCategoryModule Λ X))⟦(2 * d : ℤ)⟧ ≅
-      (R(a)^![ModuleCat.{u + 1} Λ]).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) :=
+      (R(a)^![Λ]).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) :=
     (shiftFunctor _ (2 * d : ℤ)).mapIso eX.symm ≪≫ γ.dualizingComplexIso
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a
+  let adj := rightDerivedUpperShriekAdjunction Λ a
   let α := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a
   let e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) ≅
       𝟙_ (DerivedCategoryModule Λ X) := leftDerivedUpperStarConstantComplexIso Λ a
@@ -126,7 +126,7 @@ theorem exists_nondegenerate_traceCup
         (R(a)_![ModuleCat.{u + 1} Λ]).obj ((𝟙_ (DerivedCategoryModule Λ X))⟦i⟧)) :=
     fun x ↦ u ≫ (R(a)_![ModuleCat.{u + 1} Λ]).map x
   let Φ : ((𝟙_ (DerivedCategoryModule Λ X))⟦j⟧)⟦i⟧ ≅
-      (R(a)^![ModuleCat.{u + 1} Λ]).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) :=
+      (R(a)^![Λ]).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) :=
     (shiftFunctorAdd' _ j i (i + j) (add_comm j i)).symm.app _ ≪≫
       eqToIso (by rw [hij]) ≪≫ γ'
   let q : ((𝟙_ (DerivedCategoryModule Λ X)) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦j⟧) →

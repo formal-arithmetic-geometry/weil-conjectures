@@ -81,29 +81,29 @@ is `Lx^* v`, by the triangle identity of `Lx^* ⊣ Rx_*`. -/
 lemma upperStar_map_unit_comp_comp_graphStalkMap :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)) ≫
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K)) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x h).inv.app
         (pointClosedPiece K x) ≫
       eqToHom (by rw [hx, Category.id_comp]) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))
         x).hom.app (pointClosedPiece K x) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).counit.app
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).counit.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) ≫
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).hom.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K) ≫
       graphStalkMap K h v x hx =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map v := by
   have h₁ := (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x
-    h).inv.naturality ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)
+    h).inv.naturality ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K)
   have h₂ := (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ
-    (point k)).hom.naturality ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).counit.app
+    (point k)).hom.naturality ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).counit.app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K))
   have h₃ := boundedConstructibleUpperStarComp_id_left_app (Profinite.padicAlgClRingObj ℓ) ℓ x
     (pointClosedPiece K x)
   have h₄ := upperStar_map_comp_eqToHom_congrArg ℓ _ hx
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K)
-  have h₅ := (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).left_triangle_components K
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K)
+  have h₅ := (boundedConstructibleUpperStarLowerStarAdjunction ℓ x).left_triangle_components K
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₂
   dsimp only [Functor.id_obj]
   rw [graphStalkMap, reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃, eqToHom_trans_assoc,
@@ -119,16 +119,16 @@ lemma ProperPushforwardDiagram.pushforwardCoeff_eq_homEquiv {S Y : Over (Spec (.
     {A : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ A}
     (P : c.ProperPushforwardDiagram Y) :
     P.pushforwardCoeff =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ P.g).homEquiv _ _
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g).homEquiv _ _
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ P.g P.b₂).inv.app
               _ ≫
             eqToHom (by rw [P.w₂]) ≫
             (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂ P.f).hom.app
               _ ≫
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
-              ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+              ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
                 P.f).counit.app A)) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).map c.u ≫
+        (boundedConstructibleLowerStar ℓ P.g).map c.u ≫
         (lowerStarUpperShriekExchange ℓ P.w₁).app A := by
   rw [Adjunction.homEquiv_unit]
   rfl
@@ -143,14 +143,14 @@ piece coefficient `u^Z = [x, x]_! v_x` satisfies `u^Z ∘ Lh^* η = η ∘ v` fo
 `η : K ⟶ Rx_* Lx^* K`, up to `R(𝟙)^! ≅ 𝟭`. -/
 theorem upperStar_map_unit_comp_graphClosedPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K) ≫
       graphClosedPieceCoeff K v hx =
-      v ≫ (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K ≫
+      v ≫ (boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K ≫
         (boundedConstructibleUpperShriekId ℓ X).inv.app _ := by
   have e₁ := ProperPushforwardDiagram.pushforwardCoeff_eq_homEquiv (graphClosedPieceDiagram K v hx)
   have e₂ : (lowerStarUpperShriekExchange ℓ (graphClosedPieceDiagram K v hx).w₁).app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K) =
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).map
+      (boundedConstructibleLowerStar ℓ x).map
           ((boundedConstructibleUpperShriekId ℓ (point k)).hom.app
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) ≫
         (boundedConstructibleUpperShriekId ℓ X).inv.app (pointClosedPiece K x) :=
@@ -180,7 +180,7 @@ lemma ProperPushforwardDiagram.pushforwardCoeff_congr {S Y C D : Over (Spec (.of
     [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
     {A : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c₁ c₂ : C ⟶ S)
     {u u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj A ⟶
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj A}
+      (boundedConstructibleUpperShriek ℓ c₁).obj A}
     (hu : u = u') (f : S ⟶ Y) [IsProper f.left] (b₁ b₂ : D ⟶ Y) (g : C ⟶ D) [IsProper g.left]
     (w₁ : g ≫ b₁ = c₁ ≫ f) (w₂ : g ≫ b₂ = c₂ ≫ f) :
     (ProperPushforwardDiagram.mk (c := ⟨C, c₁, c₂, u⟩) f D b₁ b₂ g w₁ w₂).pushforwardCoeff =

@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 /-!
 # The exceptional inverse image on bounded constructible complexes commutes with the shifts
 
-The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` is the right adjoint of
+The exceptional inverse image `Rf^! : Dᵇc(Y)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` is the right adjoint of
 `Rf_!`, which commutes with the shifts. It therefore carries the unique compatible `CommShift`
 structure (`CategoryTheory.Adjunction.rightAdjointCommShift`), for which the adjunction
 `Rf_! ⊣ Rf^!` commutes with the shifts.
@@ -28,20 +28,18 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [IsFinitenessCoefficient ℓ Λ] {X Y : Over (Spec (.of k))}
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
-  [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint]
 
 /-- The exceptional inverse image on bounded constructible complexes commutes with the shifts:
 the `CommShift` structure of the right adjoint of `Rf_!`. -/
-noncomputable instance : (boundedConstructibleUpperShriek Λ ℓ f).CommShift ℤ :=
-  (boundedConstructibleUpperShriekAdjunction Λ ℓ f).rightAdjointCommShift ℤ
+noncomputable instance : (boundedConstructibleUpperShriek ℓ f).CommShift ℤ :=
+  (boundedConstructibleUpperShriekAdjunction ℓ f).rightAdjointCommShift ℤ
 
 /-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes commutes with the shifts. -/
-instance : (boundedConstructibleUpperShriekAdjunction Λ ℓ f).CommShift ℤ :=
-  (boundedConstructibleUpperShriekAdjunction Λ ℓ f).commShift_of_leftAdjoint ℤ
+instance : (boundedConstructibleUpperShriekAdjunction ℓ f).CommShift ℤ :=
+  (boundedConstructibleUpperShriekAdjunction ℓ f).commShift_of_leftAdjoint ℤ
 
 end AlgebraicGeometry.ProEtale.CondensedRing

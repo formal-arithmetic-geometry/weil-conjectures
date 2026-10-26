@@ -53,78 +53,83 @@ namespace ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [IsFinitenessCoefficient ℓ Λ]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 instance isTriangulated_boundedConstructibleUpperStar (f : X ⟶ Y) :
-    (boundedConstructibleUpperStar Λ ℓ f).IsTriangulated := by
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).IsTriangulated := by
   delta boundedConstructibleUpperStar
   infer_instance
 
 instance isTriangulated_boundedConstructibleLowerStar (f : X ⟶ Y) :
-    (boundedConstructibleLowerStar Λ ℓ f).IsTriangulated := by
+    (boundedConstructibleLowerStar ℓ f).IsTriangulated := by
   delta boundedConstructibleLowerStar
   infer_instance
 
 instance isTriangulated_boundedConstructibleOpenImmersionLowerShriek {U : Over (Spec (.of k))}
     [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
     [IsOpenImmersion j.left] :
-    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).IsTriangulated := by
+    (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        j).IsTriangulated := by
   delta boundedConstructibleOpenImmersionLowerShriek
   infer_instance
 
 instance isTriangulated_boundedConstructibleLowerShriekOfCompactification {f : X ⟶ Y}
     (c : Compactification f.left) :
-    (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).IsTriangulated := by
+    (boundedConstructibleLowerShriekOfCompactification ℓ c).IsTriangulated := by
   delta boundedConstructibleLowerShriekOfCompactification
   infer_instance
 
 instance isTriangulated_boundedConstructibleLowerShriek (f : X ⟶ Y) :
-    (boundedConstructibleLowerShriek Λ ℓ f).IsTriangulated := by
+    (boundedConstructibleLowerShriek ℓ f).IsTriangulated := by
   delta boundedConstructibleLowerShriek
   infer_instance
 
-instance isTriangulated_boundedConstructibleUpperShriek (f : X ⟶ Y)
-    [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint] :
-    (boundedConstructibleUpperShriek Λ ℓ f).IsTriangulated :=
-  (boundedConstructibleUpperShriekAdjunction Λ ℓ f).isTriangulated_rightAdjoint
+instance isTriangulated_boundedConstructibleUpperShriek (f : X ⟶ Y) :
+    (boundedConstructibleUpperShriek ℓ f).IsTriangulated :=
+  (boundedConstructibleUpperShriekAdjunction ℓ f).isTriangulated_rightAdjoint
 
 section Tensor
 
-variable {Λ ℓ} [IsEllAdicFinitenessCoefficient ℓ Λ]
+variable {ℓ}
 
-instance isTriangulated_boundedConstructible_tensorRight (K : Dᵇc(X.left)⟦Λ⟧) :
-    ((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).flip.obj K).IsTriangulated := by
+instance isTriangulated_boundedConstructible_tensorRight (K :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).flip.obj K).IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility (ObjectProperty.tensorRightIsoLift _ K) ℤ
   exact Functor.isTriangulated_of_iso (ObjectProperty.tensorRightIsoLift _ K)
 
-instance isTriangulated_boundedConstructible_tensorLeft (K : Dᵇc(X.left)⟦Λ⟧) :
-    ((curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj K).IsTriangulated := by
+instance isTriangulated_boundedConstructible_tensorLeft (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj
+    ℓ⟧) :
+    ((curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K).IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility (ObjectProperty.tensorLeftIsoLift _ K) ℤ
   exact Functor.isTriangulated_of_iso (ObjectProperty.tensorLeftIsoLift _ K)
 
-/-- The tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` of `Dᵇc(X)⟦Λ⟧`, with left adjoint written as
+/-- The tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, with left adjoint written as
 `(curriedTensor _).obj K`. -/
-noncomputable def boundedConstructibleTensorIhomAdjunction (K : Dᵇc(X.left)⟦Λ⟧) :
-    (curriedTensor (Dᵇc(X.left)⟦Λ⟧)).obj K ⊣ ihom K :=
+noncomputable def boundedConstructibleTensorIhomAdjunction (K :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (curriedTensor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K ⊣ ihom K :=
   ihom.adjunction K
 
-/-- The derived internal hom `RHom(K, -)` on `Dᵇc(X)⟦Λ⟧` commutes with the shifts: the commutation
+/-- The derived internal hom `RHom(K, -)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` commutes with the shifts: the
+commutation
 of the right adjoint of `K ⊗ᴸ -`. -/
-noncomputable instance commShift_boundedConstructible_ihom (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable instance commShift_boundedConstructible_ihom (K :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (ihom K).CommShift ℤ :=
   (boundedConstructibleTensorIhomAdjunction K).rightAdjointCommShift ℤ
 
-instance commShift_boundedConstructibleTensorIhomAdjunction (K : Dᵇc(X.left)⟦Λ⟧) :
+instance commShift_boundedConstructibleTensorIhomAdjunction (K :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleTensorIhomAdjunction K).CommShift ℤ :=
   (boundedConstructibleTensorIhomAdjunction K).commShift_of_leftAdjoint ℤ
 
-instance isTriangulated_boundedConstructible_ihom (K : Dᵇc(X.left)⟦Λ⟧) :
+instance isTriangulated_boundedConstructible_ihom (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (ihom K).IsTriangulated :=
   (boundedConstructibleTensorIhomAdjunction K).isTriangulated_rightAdjoint
 

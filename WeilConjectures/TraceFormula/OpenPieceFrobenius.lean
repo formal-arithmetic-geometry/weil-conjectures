@@ -104,13 +104,13 @@ compact-support base change `LΦ^* Rj_! ⟶ Rj_! LΦ_U^*` along the cartesian sq
 noncomputable def openPieceFrobeniusCoeff (hj : ΦU ≫ j = j ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      (boundedConstructibleLowerShriek ℓ j).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) :=
   (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
       (isPullback_of_comp_eq_of_isOpenImmersion j hj)).app _ ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+    (boundedConstructibleLowerShriek ℓ j).map
       ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K.carrier ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)
 
@@ -121,10 +121,10 @@ omit [IsClosedImmersion i.left] in
 lemma compactFrobeniusOpenPiece_eq (hj : ΦU ≫ j = j ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) :
     compactFrobeniusOpenPiece ℓ hj K =
       (compactPullback ℓ Φ).app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleLowerShriek ℓ j).obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
               K.carrier)) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           (openPieceFrobeniusCoeff ℓ hj K) := by
   have h := openPiece_comp_eq_of_baseChange (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
     (boundedConstructibleLowerShriekCompToPoint ℓ j)
@@ -153,7 +153,7 @@ lemma upperStar_map_counit_eq (hj : ΦU ≫ j = j ≫ Φ)
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
           (isPullback_of_comp_eq_of_isOpenImmersion j hj)).app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+        (boundedConstructibleLowerShriek ℓ j).map
           ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K) ≫
         (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K) := by

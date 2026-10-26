@@ -82,15 +82,15 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
     (hf : f ≫ aY = aX) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
-    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj K ≅
-      (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+    Nonempty ((R(f)^![Λ]).obj K ≅
+      (verdierDual Λ aX).obj
         (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-          ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K))))) := by
+          ((verdierDual Λ aY).obj (op K))))) := by
   subst hf
   obtain ⟨b⟩ := nonempty_iso_verdierDual_verdierDual Λ aY hK
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_verdierDual Λ aY f
-    ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K))
-  exact ⟨(R(f)^![ModuleCat.{u + 1} Λ]).mapIso b ≪≫ e⟩
+    ((verdierDual Λ aY).obj (op K))
+  exact ⟨(R(f)^![Λ]).mapIso b ≪≫ e⟩
 
 /-- Blueprint `thm-sf-ctf-stability`: Preservation on the proved finite-Tor domains.
 
@@ -187,37 +187,37 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
     -- (v)
     ((∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
-        Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj K ≅
-          (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+        Nonempty ((R(f)^![Λ]).obj K ≅
+          (verdierDual Λ aX).obj
             (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-              ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)))))) ∧
+              ((verdierDual Λ aY).obj (op K)))))) ∧
       (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
           constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+            ((R(f)^![Λ]).obj K)) ∧
       ∀ dX dY : ℕ, topologicalKrullDim X ≤ (dX : WithBot ℕ∞) →
         topologicalKrullDim Y ≤ (dY : WithBot ℕ∞) → ∀ (a b : ℤ)
         (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
           torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
             torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))
-              ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+              ((R(f)^![Λ]).obj K)) ∧
     -- (vi)
     ((∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
-          Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
-            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)))) ∧
-          IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K)) ∧
+            ((verdierDual Λ aX).obj (op K)) ∧
+          Nonempty (K ≅ (verdierDual Λ aX).obj
+            (op ((verdierDual Λ aX).obj (op K)))) ∧
+          IsIso ((verdierDualDoubleDual Λ aX).app K)) ∧
       (∀ T ∈ distTriang (_root_.DerivedCategory (Sheaf X.smallEtaleTopology
           (ModuleCat.{u + 1} Λ))),
-        ∃ w, Triangle.mk ((verdierDual (ModuleCat.{u + 1} Λ) aX).map T.mor₂.op)
-          ((verdierDual (ModuleCat.{u + 1} Λ) aX).map T.mor₁.op) w ∈ distTriang _) ∧
+        ∃ w, Triangle.mk ((verdierDual Λ aX).map T.mor₂.op)
+          ((verdierDual Λ aX).map T.mor₁.op) w ∈ distTriang _) ∧
       Nonempty ((verdierDualEquivalence Λ aX).functor ⋙
           DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
         (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X).op ⋙
-          verdierDual (ModuleCat.{u + 1} Λ) aX)) ∧
+          verdierDual Λ aX)) ∧
     -- (vii)
     ∀ J : Ideal Λ,
       Nonempty (reductionModIdeal Λ Y J ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
@@ -328,13 +328,14 @@ theorem boundedConstructibleIntegral_stability {X Y : Scheme.{u}}
     ∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
       ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-        R(f)^![ModuleCat.{u + 1} Λ]), Pretriangulated.IsHomotopyLimit c →
+        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint), Pretriangulated.IsHomotopyLimit c →
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
-          (∃ e : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-            e.hom ≫ c.π.app (op n) = (R(f)^![ModuleCat.{u + 1} Λ]).map
+          (∃ e : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L ≅ c.pt, ∀ n : ℕ,
+            e.hom ≫ c.π.app (op n) = (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.map
               ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n))) ∧
           ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-            (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
+            (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
+              ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
   obtain ⟨-, hhom, -, hhomc, hexc, -, -⟩ := preservationMatrix_integral I hϖ hI aX aY f hf
   exact ⟨(exists_normalizedTower_and_boundedConstructibleIntegral_iff (I := I) (X := X)).2,
     hhomc, hhom, hexc⟩

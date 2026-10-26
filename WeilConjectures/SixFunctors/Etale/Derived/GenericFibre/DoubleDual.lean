@@ -113,12 +113,14 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-attribute [local instance] derivedBraidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
 /-- The braided axiom for the monoidal structure
 `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal` of the derived pullback `Lg^*`, for the
-derived braidings `AlgebraicGeometry.Etale.derivedBraidedCategory`:
+derived braidings `CategoryTheory.DerivedCategory.braidedCategory'` (at `A = ModuleCat Λ`,
+`AlgebraicGeometry.Etale.derivedBraidedCategory`):
 `μ_{K, M} ≫ Lg^* β_{K, M} = β_{Lg^* K, Lg^* M} ≫ μ_{M, K}`. -/
 def LeftDerivedUpperStarBraided {X Y : Scheme.{u}} (g : Y ⟶ X) : Prop :=
   letI := leftDerivedUpperStarMonoidal A g
@@ -135,6 +137,29 @@ noncomputable def leftDerivedUpperStarLaxBraided {X Y : Scheme.{u}} (g : Y ⟶ X
   letI := leftDerivedUpperStarMonoidal A g
   { braided := hbr }
 
+/-- **The double dual along a derived pullback, up to an invertible twist**, for arbitrary
+objects `ω_X`, `ω_{X'}` in place of the dualizing complexes: if `Lg^* ω_X ≅ ω_{X'} ⊗ᴸ L` with `L`
+invertible and the internal-hom comparisons
+`Lg^* RHom(K, ω_X) ⟶ RHom(Lg^* K, Lg^* ω_X)` and
+`Lg^* RHom(RHom(K, ω_X), ω_X) ⟶ RHom(Lg^* RHom(K, ω_X), Lg^* ω_X)` are isomorphisms, then
+`Lg^*` of the double-dual map `K ⟶ RHom(RHom(K, ω_X), ω_X)` is an isomorphism if and only if the
+double-dual map of `Lg^* K` into `ω_{X'}` is. It is stated for a general coefficient category
+`A`, where the kernel checks it without unfolding the derived categories of `ModuleCat Λ`; see
+`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff`. -/
+theorem isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff
+    {X X' : Scheme.{u}} (ωX : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (ωX' : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology A)) (g : X' ⟶ X)
+    (hbr : LeftDerivedUpperStarBraided A g)
+    {L : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology A)} (hL : IsInvertible L)
+    (e : (L((g)^*[A])).obj ωX ≅ ((derivedTensor A X').obj ωX').obj L)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (h₁ : IsIso (derivedHomUpperStarComparison A g K ωX))
+    (h₂ : IsIso (derivedHomUpperStarComparison A g (((RHom(X)[A]).flip.obj ωX).obj (op K)) ωX)) :
+    IsIso ((L((g)^*[A])).map ((derivedHomToIhomIhomNatTrans A X ωX).app K)) ↔
+      IsIso ((derivedHomToIhomIhomNatTrans A X' ωX').app ((L((g)^*[A])).obj K)) := by
+  let := leftDerivedUpperStarLaxBraided A g hbr
+  exact isIso_map_toIhomIhom_iff_of_iso_tensor L((g)^*[A]) hL e K h₁ h₂
+
 /-- Blueprint `lem-weil-geometric-generic-duality`, formal part: **the double dual along a
 derived pullback, up to an invertible twist.**
 
@@ -144,24 +169,25 @@ complexes `ω_X`, `ω_{X'}` and Verdier double-dual maps `δ`, and let
 `Lg^* RHom(K, ω_X) ⟶ RHom(Lg^* K, Lg^* ω_X)` and
 `Lg^* RHom(𝔻_X K, ω_X) ⟶ RHom(Lg^* 𝔻_X K, Lg^* ω_X)`
 (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison`) are isomorphisms, then
-`Lg^* δ_K` is an isomorphism if and only if `δ_{Lg^* K}` is.
+`Lg^* δ_K` is an isomorphism if and only if `δ_{Lg^* K}` is
+(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff`).
 
 The hypothesis `hbr` (the braided axiom for `Lg^*`) is not yet available in the repository. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff {X X' S S' : Scheme.{u}}
-    (a : X ⟶ S) (a' : X' ⟶ S') [HasCompactification a] [HasCompactification a']
-    [(R(a)_![A]).IsLeftAdjoint] [(R(a')_![A]).IsLeftAdjoint] (g : X' ⟶ X)
-    (hbr : LeftDerivedUpperStarBraided A g)
-    {L : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology A)} (hL : IsInvertible L)
-    (e : (L((g)^*[A])).obj (dualizingComplex A a) ≅
-      ((derivedTensor A X').obj (dualizingComplex A a')).obj L)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (h₁ : IsIso (derivedHomUpperStarComparison A g K (dualizingComplex A a)))
-    (h₂ : IsIso (derivedHomUpperStarComparison A g ((verdierDual A a).obj (op K))
-      (dualizingComplex A a))) :
-    IsIso ((L((g)^*[A])).map ((verdierDualDoubleDual A a).app K)) ↔
-      IsIso ((verdierDualDoubleDual A a').app ((L((g)^*[A])).obj K)) := by
-  let := leftDerivedUpperStarLaxBraided A g hbr
-  exact isIso_map_toIhomIhom_iff_of_iso_tensor L((g)^*[A]) hL e K h₁ h₂
+    (a : X ⟶ S) (a' : X' ⟶ S') [HasCompactification a] [HasCompactification a'] (g : X' ⟶ X)
+    (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) g)
+    {L : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hL : IsInvertible L)
+    (e : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ a) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj (dualizingComplex Λ a')).obj L)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (h₁ : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) g K (dualizingComplex Λ a)))
+    (h₂ : IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) g
+      ((verdierDual Λ a).obj (op K)) (dualizingComplex Λ a))) :
+    IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ a).app K)) ↔
+      IsIso ((verdierDualDoubleDual Λ a').app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)) :=
+  isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff (ModuleCat.{u + 1} Λ)
+    (dualizingComplex Λ a) (dualizingComplex Λ a') g hbr hL e K h₁ h₂
 
 end Etale
 

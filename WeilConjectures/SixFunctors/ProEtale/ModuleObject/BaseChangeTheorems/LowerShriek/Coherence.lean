@@ -72,12 +72,12 @@ variable {W X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType W.hom] [QuasiCompa
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_assoc (f : W ⟶ X) (g : X ⟶ Y)
     (h : Y ⟶ Z) (K : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (f ≫ g) h).hom.app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ h).map
+        (boundedConstructibleLowerShriek ℓ h).map
           ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.app K) =
       eqToHom (by rw [Category.assoc]) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (g ≫ h)).hom.app K ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g h).hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) :=
+          ((boundedConstructibleLowerShriek ℓ f).obj K) :=
   sorry
 
 /-- **Left identity equation of the composition isomorphisms of the lower shriek** (blueprint
@@ -86,9 +86,9 @@ the identity. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_left (f : X ⟶ Y)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 X) f).hom.app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerShriek ℓ f).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).hom.app K ≫
-            (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app K) =
+            (boundedConstructibleLowerStarId ℓ X).hom.app K) =
       eqToHom (by rw [Category.id_comp]; rfl) :=
   sorry
 
@@ -99,9 +99,9 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_right (f : X ⟶ Y)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (𝟙 Y)).hom.app K ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 Y)).hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
-        (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) =
+          ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
+        (boundedConstructibleLowerStarId ℓ Y).hom.app
+          ((boundedConstructibleLowerShriek ℓ f).obj K) =
       eqToHom (by rw [Category.comp_id]; rfl) :=
   sorry
 
@@ -113,11 +113,11 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp (f : X ⟶ Y
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.app K ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+          ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
+        (boundedConstructibleLowerStar ℓ g).map
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) =
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (f ≫ g)).hom.app K ≫
-        (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).inv.app K :=
+        (boundedConstructibleLowerStarComp ℓ f g).inv.app K :=
   sorry
 
 end Composition
@@ -132,8 +132,8 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 noncomputable def boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl (f : X ⟶ Y)
     [IsProper f.left] :
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⊣
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      boundedConstructibleLowerShriek ℓ f :=
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ
     f).ofNatIsoRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).symm
 
 end Adjunction
@@ -149,10 +149,10 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 /-- The composition isomorphism `Rg'_! ⋙ Rf_! ≅ R(g' ≫ f)_! = R(f' ≫ g)_! ≅ Rf'_! ⋙ Rg_!` of a
 commutative square `g' ≫ f = f' ≫ g`, as a 2-square. -/
 noncomputable def boundedConstructibleLowerShriekSquareIso_padicAlgCl (w : g' ≫ f = f' ≫ g) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g' ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f' ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g :=
+    boundedConstructibleLowerShriek ℓ g' ⋙
+        boundedConstructibleLowerShriek ℓ f ≅
+      boundedConstructibleLowerShriek ℓ f' ⋙
+        boundedConstructibleLowerShriek ℓ g :=
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g' f).symm ≪≫ eqToIso (by rw [w]) ≪≫
     boundedConstructibleLowerShriekComp_padicAlgCl ℓ f' g
 

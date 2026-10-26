@@ -250,7 +250,7 @@ theorem trace_frobeniusCompactOperator_eq_sum [IsAlgClosed k] {k₀ : Type u} [F
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
     {m : ℕ} (hm : 1 ≤ m) [Fintype (FixedPoint Φ m)]
     [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)]
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)]
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     trace (frobeniusCompactOperator ℓ ψ m) =

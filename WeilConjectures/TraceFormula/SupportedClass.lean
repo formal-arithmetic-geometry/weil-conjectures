@@ -96,7 +96,7 @@ variable (ℓ) {X Y : Over (Spec (.of k))}
 lemma inv_kunnethVerdierMap_naturality_left
     {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : M ⟶ M')
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (ihom _).map ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) ≫
+    (ihom _).map ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map f) ≫
         inv (kunnethVerdierMap ℓ M' N) =
       inv (kunnethVerdierMap ℓ M N) ≫
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map f ▷ _) := by
@@ -125,9 +125,9 @@ variable (c : Correspondence ℓ K)
 endocorrespondence (blueprint `lem-trf-correspondence-class`): the inverse image of `u` under the
 class bijection `correspondenceClassEquiv` for the support map. -/
 noncomputable def «class» :
-    (boundedConstructibleLowerShriek _ ℓ c.support).obj (𝟙_ _) ⟶
+    (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
   (correspondenceClassEquiv ℓ c.support K K).symm
     (eqToHom (by rw [support_snd]) ≫ c.u ≫ eqToHom (by rw [support_fst]))
 
@@ -151,11 +151,11 @@ lemma correspondenceClassEquiv_symm_comp_map {C : Over (Spec (.of k))} [LocallyO
     [QuasiCompact C.hom] [IsSeparated C.hom] (s : C ⟶ X ⨯ X)
     {L L' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L')
     (f : (boundedConstructibleUpperStar _ ℓ (s ≫ prod.snd)).obj K ⟶
-      (boundedConstructibleUpperShriek _ ℓ (s ≫ prod.fst)).obj L) :
+      (boundedConstructibleUpperShriek ℓ (s ≫ prod.fst)).obj L) :
     (correspondenceClassEquiv ℓ s K L').symm
-        (f ≫ (boundedConstructibleUpperShriek _ ℓ (s ≫ prod.fst)).map b) =
+        (f ≫ (boundedConstructibleUpperShriek ℓ (s ≫ prod.fst)).map b) =
       (correspondenceClassEquiv ℓ s K L).symm f ≫
-        (ihom _).map ((boundedConstructibleUpperShriek _ ℓ prod.fst).map b) := by
+        (ihom _).map ((boundedConstructibleUpperShriek ℓ prod.fst).map b) := by
   rw [Equiv.symm_apply_eq, correspondenceClassEquiv_naturality_right, Equiv.apply_symm_apply]
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -171,9 +171,9 @@ lemma map_comp_eqToHom_of_eq {A : Type*} (Φ : A → (Dᵇc(X.left)⟦Profinite.
 of the identity, for a support map `s` of the diagonal correspondence. -/
 noncomputable def diagUnitClass {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = 𝟙 X)
     (h₁ : 𝟙 X = s ≫ prod.fst) :
-    (boundedConstructibleLowerShriek _ ℓ s).obj (𝟙_ _) ⟶
+    (boundedConstructibleLowerShriek ℓ s).obj (𝟙_ _) ⟶
       (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
   (correspondenceClassEquiv ℓ s K K).symm
     (eqToHom (by rw [h₂]) ≫ ((boundedConstructibleUpperStarId _ ℓ X).hom.app K ≫
       (boundedConstructibleUpperShriekId ℓ X).inv.app K) ≫ eqToHom (by rw [← h₁]))
@@ -184,8 +184,8 @@ noncomputable def diagUnitCoeff {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = �
     (h₁ : 𝟙 X = s ≫ prod.fst) :
     (boundedConstructibleUpperStar _ ℓ s).obj
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K) ⟶
-      (boundedConstructibleUpperShriek _ ℓ s).obj
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
+      (boundedConstructibleUpperShriek ℓ s).obj
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) :=
   (boundedConstructibleUpperStarComp _ ℓ s prod.snd).inv.app K ≫
     (eqToHom (by rw [h₂]) ≫ ((boundedConstructibleUpperStarId _ ℓ X).hom.app K ≫
       (boundedConstructibleUpperShriekId ℓ X).inv.app K) ≫ eqToHom (by rw [← h₁])) ≫
@@ -195,9 +195,9 @@ noncomputable def diagUnitCoeff {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = �
 adjoint of `diagUnitCoeff`. -/
 lemma uncurry_diagUnitClass {s : X ⟶ X ⨯ X} (h₂ : s ≫ prod.snd = 𝟙 X) (h₁ : 𝟙 X = s ≫ prod.fst) :
     uncurry (diagUnitClass ℓ (K := K) h₂ h₁) =
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection _ ℓ s) _ (𝟙_ _) ≫
-        (boundedConstructibleLowerShriek _ ℓ s).map (ρ_ _).hom ≫
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ s).homEquiv _ _).symm
+      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ s) _ (𝟙_ _) ≫
+        (boundedConstructibleLowerShriek ℓ s).map (ρ_ _).hom ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ s).homEquiv _ _).symm
           (diagUnitCoeff ℓ h₂ h₁) :=
   Verdier.uncurry_correspondenceClassEquiv_symm _ _ _ _ _
 
@@ -207,10 +207,10 @@ lemma class_ofEnd (v : K ⟶ K) :
     (Correspondence.ofEnd K v).class =
       diagUnitClass ℓ (Correspondence.ofEnd K v).support_snd
           (Correspondence.ofEnd K v).support_fst.symm ≫
-        (ihom _).map ((boundedConstructibleUpperShriek _ ℓ prod.fst).map v) := by
+        (ihom _).map ((boundedConstructibleUpperShriek ℓ prod.fst).map v) := by
   have hv := (boundedConstructibleUpperShriekId ℓ X).inv.naturality v
   have he := map_comp_eqToHom_of_eq ℓ (fun g : X ⟶ X ↦ boundedConstructibleUpperShriek
-    (Profinite.padicAlgClRingObj ℓ) ℓ g) (Correspondence.ofEnd K v).support_fst.symm v
+    ℓ g) (Correspondence.ofEnd K v).support_fst.symm v
   have key := Verdier.comp_comp_eq_of_naturality
     (eqToHom (by rw [Correspondence.support_snd]) :
       (boundedConstructibleUpperStar _ ℓ ((Correspondence.ofEnd K v).support ≫ prod.snd)).obj K ⟶

@@ -76,20 +76,22 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor {T S W P Q : Scheme.{
     (sq : IsPullback q' h g q) [HasCompactification h] [QuasiCompact h]
     (N : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(h)^![ModuleCat.{u + 1} Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) P).obj
+    Nonempty ((R(h)^![Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) P).obj
         ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N)).obj ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M)) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) Q).obj ((L((q')^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(g)^![ModuleCat.{u + 1} Λ]).obj N))).obj
+        ((R(g)^![Λ]).obj N))).obj
           ((L((h ≫ r)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
   obtain ⟨hBC, hτ⟩ := isExceptionalKunneth Λ k g b b c sqP sq
-  have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 (hτ N M)
-  have := (isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff h
+  have := (isIsoLowerShriekRightAdjointTensorMap_iff _ _ _).1 (hτ N M)
+  have := (isIso_lowerShriekRightAdjointTensorMapOfDerivedTensor_iff
+    (rightDerivedUpperShriekAdjunction Λ h)
     ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M)).2 this
   have := hBC N
-  let e : (L((q')^*[ModuleCat.{u + 1} Λ])).obj ((R(g)^![ModuleCat.{u + 1} Λ]).obj N) ≅
-      (R(h)^![ModuleCat.{u + 1} Λ]).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
+  let e : (L((q')^*[ModuleCat.{u + 1} Λ])).obj ((R(g)^![Λ]).obj N) ≅
+      (R(h)^![Λ]).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
     asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app N)
-  exact ⟨(asIso (rightDerivedUpperShriekTensorMapOfDerivedTensor h _ _)).symm ≪≫
+  exact ⟨(asIso (lowerShriekRightAdjointTensorMapOfDerivedTensor
+      (rightDerivedUpperShriekAdjunction Λ h) _ _)).symm ≪≫
     ((derivedTensor _ Q).mapIso e.symm).app _ ≪≫
     ((derivedTensor _ Q).obj _).mapIso ((leftDerivedUpperStarComp _ h r).app M).symm⟩
 
@@ -118,8 +120,8 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall
     (N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
+      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := by
   let φ₁ := pullback.mapOverBaseRight f₁ b₁ b₂
   let φ₂ := pullbackMapOverBaseLeft (f₁ ≫ b₁) f₂ b₂
@@ -135,8 +137,8 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall
   have hcomp : ∀ (m : pullback (f₁ ≫ b₁) (f₂ ≫ b₂) ⟶ pullback b₁ b₂) (_ : φ₂ ≫ φ₁ = m)
       [HasCompactification m] (K : _root_.DerivedCategory
         (Sheaf (pullback b₁ b₂).smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      Nonempty ((R(m)^![ModuleCat.{u + 1} Λ]).obj K ≅
-        (R(φ₂)^![ModuleCat.{u + 1} Λ]).obj ((R(φ₁)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+      Nonempty ((R(m)^![Λ]).obj K ≅
+        (R(φ₂)^![Λ]).obj ((R(φ₁)^![Λ]).obj K)) := by
     intro m hm _ K
     subst hm
     obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ φ₂ φ₁
@@ -155,20 +157,20 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall
   obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback (f₁ ≫ b₁) b₂)
   obtain ⟨β'⟩ :=
     nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback (f₁ ≫ b₁) (f₂ ≫ b₂))
-  let e₁' : (R(φ₁)^![ModuleCat.{u + 1} Λ]).obj (externalProduct _ b₁ b₂ N₁ N₂) ≅
+  let e₁' : (R(φ₁)^![Λ]).obj (externalProduct _ b₁ b₂ N₁ N₂) ≅
       ((derivedTensor _ (pullback (f₁ ≫ b₁) b₂)).obj
         ((L((pullback.snd (f₁ ≫ b₁) b₂)^*[ModuleCat.{u + 1} Λ])).obj N₂)).obj
           ((L((pullback.fst (f₁ ≫ b₁) b₂)^*[ModuleCat.{u + 1} Λ])).obj
-            ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁)) :=
+            ((R(f₁)^![Λ]).obj N₁)) :=
     e₁ ≪≫ ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [h₁])) ≪≫ (β.app _).app _
-  let e₂' : (R(φ₂)^![ModuleCat.{u + 1} Λ]).obj (((derivedTensor _ (pullback (f₁ ≫ b₁) b₂)).obj
+  let e₂' : (R(φ₂)^![Λ]).obj (((derivedTensor _ (pullback (f₁ ≫ b₁) b₂)).obj
         ((L((pullback.snd (f₁ ≫ b₁) b₂)^*[ModuleCat.{u + 1} Λ])).obj N₂)).obj
           ((L((pullback.fst (f₁ ≫ b₁) b₂)^*[ModuleCat.{u + 1} Λ])).obj
-            ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁))) ≅
-      externalProduct _ (f₁ ≫ b₁) (f₂ ≫ b₂) ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁)
-        ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) :=
+            ((R(f₁)^![Λ]).obj N₁))) ≅
+      externalProduct _ (f₁ ≫ b₁) (f₂ ≫ b₂) ((R(f₁)^![Λ]).obj N₁)
+        ((R(f₂)^![Λ]).obj N₂) :=
     e₂ ≪≫ ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [h₂])) ≪≫ (β'.app _).app _
-  exact ⟨(e₀ ≪≫ (R(φ₂)^![ModuleCat.{u + 1} Λ]).mapIso e₁' ≪≫ e₂').symm⟩
+  exact ⟨(e₀ ≪≫ (R(φ₂)^![Λ]).mapIso e₁' ≪≫ e₂').symm⟩
 
 /-- Blueprint `prop-trf-exceptional-kunneth`: Exceptional Künneth; the `α` map.
 
@@ -188,15 +190,13 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek
     (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
     [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    [(R(f₁)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(f₂)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    [(R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
     {N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))} :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₁ N₁ →
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₂ N₂ →
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
+        ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
+      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := fun _ _ ↦
   nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall Λ b₁ b₂ f₁ f₂ N₁ N₂
 

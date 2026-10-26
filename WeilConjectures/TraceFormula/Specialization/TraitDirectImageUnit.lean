@@ -168,7 +168,6 @@ lemma bijective_unit_app_hom_app_of_bijective {X Y : Scheme.{u}} (f : X ⟶ Y) (
     (((f)_*[Ab.{u + 1}].map (Functor.OplaxMonoidal.η (f)^*⟦Λ⟧).hom).hom.app (op V))
   exact ConcreteCategory.bijective_of_isIso _
 
-
 omit [MonObj Λ] [IsCommMonObj Λ] in
 /-- The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X` is the morphism adjoint to the
 composition isomorphism of the pullbacks, followed by `f_*` of `f ≫ π_Y = π_X`. -/

@@ -61,12 +61,20 @@ equivalence (`ProEtale.rationalizationQCompEquivalenceIso`), and an equivalence 
 hence additive, categories preserves binary products. -/
 instance additive_boundedConstructibleExtendScalars (E : FiniteIntermediateField ℓ) :
     (boundedConstructibleExtendScalars X ℓ E).Additive := by
-  let R := Rationalization (Submonoid.powers (ℓ : ℤ))
-    (BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
-  have : HasBinaryBiproducts R := Pretriangulated.instHasBinaryBiproducts
-  have : HasBinaryProducts R := hasBinaryProducts_of_hasBinaryBiproducts
+  -- the instances on the rationalization and the equivalence are given explicitly: searching
+  -- for them unfolds `rationalizationEquivalence` against the instances of the six functors
+  have : HasBinaryBiproducts (Rationalization (Submonoid.powers (ℓ : ℤ))
+      (BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :=
+    Pretriangulated.instHasBinaryBiproducts
+  have : HasBinaryProducts (Rationalization (Submonoid.powers (ℓ : ℤ))
+      (BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :=
+    hasBinaryProducts_of_hasBinaryBiproducts
+  have := (rationalizationEquivalence X ℓ E).toAdjunction.isLeftAdjoint
   have : (rationalizationEquivalence X ℓ E).functor.PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_isLeftAdjoint _
+  have : PreservesLimitsOfShape (Discrete WalkingPair) (rationalizationEquivalence X ℓ E).functor :=
+    (rationalizationEquivalence X ℓ E).symm.toAdjunction.rightAdjoint_preservesLimits
+      |>.preservesLimitsOfShape
   have : (rationalizationEquivalence X ℓ E).functor.Additive :=
     Functor.additive_of_preserves_binary_products _
   exact Functor.additive_of_iso (rationalizationQCompEquivalenceIso X ℓ E)
@@ -93,6 +101,7 @@ lemma exists_pow_smul_eq_boundedConstructibleExtendScalars_map (E : FiniteInterm
       (boundedConstructibleExtendScalars X ℓ E).obj L₀) :
     ∃ (N : ℕ) (θ : K₀ ⟶ L₀),
       ((ℓ : ℤ) ^ N) • ψ = (boundedConstructibleExtendScalars X ℓ E).map θ := by
+  have : (boundedConstructibleExtendScalars X ℓ E).Linear ℤ := Functor.intLinear _
   obtain ⟨m, ⟨N, rfl⟩, θ, h⟩ :=
     Rationalization.exists_smul_eq_map_of_isLocalization (M := Submonoid.powers (ℓ : ℤ))
       (boundedConstructibleExtendScalars X ℓ E) ψ

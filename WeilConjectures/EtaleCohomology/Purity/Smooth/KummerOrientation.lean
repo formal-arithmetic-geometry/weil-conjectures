@@ -265,7 +265,7 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     [HasInvertibleExponent Λ Y] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))) := by
   let X := 𝔸(ULift.{u} (Fin 1); Y)
   let t : Γ(X, ⊤) := AffineSpace.coord Y (ULift.up 0)
@@ -361,15 +361,15 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
   let tU := leftDerivedUpperStarTateObjectIso (Λ := Λ) jU 1
   let κU := kummerClass Λ (X.basicOpenUnit t)
   let α := θj.hom ≫ κU ≫ tU.inv⟦(1 : ℤ)⟧'
-  let w := supportedLocalizationBoundary (ModuleCat.{u + 1} Λ) ι jU hij L
+  let w := supportedLocalizationBoundary Λ ι jU hij L
   let cs := ((R((jU)_*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app
     ((L((jU)^*[ModuleCat.{u + 1} Λ])).obj L)
   let sa := (shiftFunctorAdd' (_root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))) (1 : ℤ) 1 2 rfl).inv.app ((R(ι)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(ι)^![ModuleCat.{u + 1} Λ]).obj L))
+      ((R(ι)^![Λ]).obj L))
   let ss := ((R(ι)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).inv.app _ ≫
-    (R(ι)_![ModuleCat.{u + 1} Λ]).map (((R(ι)^![ModuleCat.{u + 1} Λ]).commShiftIso 2).inv.app L)
-  have hγ : shiftSupportedClass (ModuleCat.{u + 1} Λ) ι 2 (kummerBoundary Λ t) =
+    (R(ι)_![ModuleCat.{u + 1} Λ]).map (((R(ι)^![Λ]).commShiftIso 2).inv.app L)
+  have hγ : shiftSupportedClass Λ ι 2 (kummerBoundary Λ t) =
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU).homEquiv _ _ α ≫ cs ≫
         w⟦(1 : ℤ)⟧' ≫ sa ≫ ss := by
     rw [shiftSupportedClass, kummerBoundary_eq, Adjunction.homEquiv_unit]
@@ -381,7 +381,7 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
   let Ψ₁ := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).homEquiv _ _
     (θp.hom ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU).homEquiv _ _ α)
   have hΨ : (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).homEquiv _ _
-      (θp.hom ≫ shiftSupportedClass (ModuleCat.{u + 1} Λ) ι 2 (kummerBoundary Λ t)) =
+      (θp.hom ≫ shiftSupportedClass Λ ι 2 (kummerBoundary Λ t)) =
       Ψ₁ ≫ Rp.map cs ≫ Rp.map (w⟦(1 : ℤ)⟧') ≫ Rp.map (sa ≫ ss) := by
     rw [hγ]
     simp only [Ψ₁, Rp, Adjunction.homEquiv_unit, Category.assoc, Functor.map_comp]
@@ -454,10 +454,10 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     rw [hw', hm₃, Functor.map_comp, Functor.map_comp, Functor.map_comp]
     infer_instance
   -- the target of the adjoint is concentrated in degree zero
-  let eT : Rp.obj ((R(ι)_![ModuleCat.{u + 1} Λ]).obj ((R(ι)^![ModuleCat.{u + 1} Λ]).obj
+  let eT : Rp.obj ((R(ι)_![ModuleCat.{u + 1} Λ]).obj ((R(ι)^![Λ]).obj
       (L⟦(2 : ℤ)⟧))) ≅ T.obj₁⟦(2 : ℤ)⟧ :=
     Rp.mapIso ((R(ι)_![ModuleCat.{u + 1} Λ]).mapIso
-        (((R(ι)^![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).app L) ≪≫
+        (((R(ι)^![Λ]).commShiftIso (2 : ℤ)).app L) ≪≫
       ((R(ι)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).app _) ≪≫
     (Rp.commShiftIso (2 : ℤ)).app _
   rw [hΨ, _root_.DerivedCategory.isIso_iff]
