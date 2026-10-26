@@ -106,13 +106,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) (k : Typ
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxRecDepth 8000 in
 /-- (Shriek) along the chosen compactification is the comparison pasted from (Shriek) for the open
 immersion and (Push) for the proper morphism of the coefficient change `E ⟶ ℚ̄_ℓ`. -/
 lemma boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification (f : X ⟶ Y) :
     boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f =
       (toPadicAlgClCoefficientChange ℓ E k).shriekOfCompactification
-        (compactificationOverField f) :=
-  rfl
+        (compactificationOverField f) := by
+  dsimp only [boundedConstructibleLowerShriekToPadicAlgClIso,
+    boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso,
+    BoundedConstructibleCoefficientChange.shriekOfCompactification, Functor.pasteSquareIso,
+    toPadicAlgClCoefficientChange, continuousMapPushforwardData, padicAlgClPushforwardData]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
