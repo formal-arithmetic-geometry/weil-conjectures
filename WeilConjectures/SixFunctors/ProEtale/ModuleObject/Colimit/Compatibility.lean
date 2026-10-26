@@ -25,10 +25,15 @@ T^X_{E,F} = F_X ⊗ᴸ_{E_X} - ,   T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} - .
 The comparisons (Pull), (Push) and (Shriek) between these and the derived functors `Lf^*`,
 `Rf_*`, `Rf_!` on module objects are the ones of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients`, for these two
-coefficient changes. This file supplies the coefficient-specific input:
+coefficient changes. This file defines the coefficient rings `E_X`, `ℚ̄_ℓ,X` and their
+inclusions, and proves `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClRingObjCocone`), the
+pullback along the left adjoint `p_X^*` of `ℚ̲̄_ℓ = colim_E E̲`
+(`Profinite.isColimitPadicAlgClRingObjCocone`).
 
-* `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClRingObjCocone`), the pullback along the
-  left adjoint `p_X^*` of `ℚ̲̄_ℓ = colim_E E̲` (`Profinite.isColimitPadicAlgClRingObjCocone`);
+The coefficient-specific input on the comparisons is in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFlat` and the files it
+points to:
+
 * both coefficient changes are flat, so that (Pull) and (Push) are defined on the unbounded
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
@@ -40,22 +45,6 @@ coefficient changes. This file supplies the coefficient-specific input:
   (Shriek) (`ProEtale.CondensedRing.isIso_derivedLowerShriekHom_app_padicAlgCl_of_isGE`). It is
   not an isomorphism on all unbounded objects, even for proper `f`: `Rf_*` need not commute
   with direct sums (blueprint `sk-rem-sf-fullcd-scope`), while `ℚ̄_ℓ ≅ ⨁_ℕ E` as `E`-modules.
-
-## Sorried input
-
-* **(A0.2)** `ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap`:
-  for finite subextensions `E ≤ F`, the extension of scalars `F_X ⊗_{E_X} -` is exact, i.e.
-  `F_X` is flat over `E_X`. Indeed `F_X` is finite free over `E_X`: an `E`-basis `b₁, …, bₙ` of
-  `F` gives `C(-, F) ≅ C(-, E)^n`, `h ↦ (hᵢ)` with `h = ∑ hᵢ bᵢ`, on the point, and `p_X^*`
-  preserves finite direct sums.
-* **(A0.2)**
-  `ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl`:
-  for a finite subextension `E`, the extension of scalars `ℚ̄_ℓ,X ⊗_{E_X} -` is exact, i.e.
-  `ℚ̄_ℓ,X` is flat over `E_X`: it is the filtered colimit of the `F_X`, `F ≥ E`
-  (`ProEtale.isColimitPadicAlgClRingObjCocone`), each of which is finite free over `E_X`.
-* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
-  `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
-  the compatibility of `Rf_*` with finite direct sums.
 
 -/
 
@@ -113,6 +102,17 @@ instance isLeftAdjoint_upperStarFromPoint : (upperStarFromPoint X).IsLeftAdjoint
   (pointUpperStarLowerStarAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
 
+/-- The inverse image `p_X^*` is additive, being a left adjoint. -/
+instance additive_upperStarFromPoint : (upperStarFromPoint X).Additive :=
+  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
+  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    adj.leftAdjoint_preservesColimits
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
+  Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
+
 /-- The cocone over the diagram `E ↦ E_X` with vertex `ℚ̄_ℓ,X`, given by the inclusions
 `E_X ⟶ ℚ̄_ℓ,X`: the image under `p_X^*` of `Profinite.padicAlgClRingObjCocone`. -/
 noncomputable abbrev padicAlgClRingObjCocone :
@@ -127,56 +127,5 @@ noncomputable def isColimitPadicAlgClRingObjCocone : IsColimit (padicAlgClRingOb
   isColimitOfPreserves (upperStarFromPoint X) (Profinite.isColimitPadicAlgClRingObjCocone ℓ)
 
 end RingObj
-
-namespace CondensedRing
-
-variable (ℓ : ℕ) [Fact ℓ.Prime]
-
-/-! ### Flatness of the coefficient inclusions -/
-
-section Flat
-
-variable (X : Scheme.{u})
-
-/-- **(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
-exact: `F_X` is finite free, in particular flat, over `E_X`. See the module docstring. -/
-instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
-    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    PreservesFiniteLimits
-      (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
-  sorry
-
-/-- **(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
-exact: `ℚ̄_ℓ,X` is flat over `E_X`, being a filtered colimit of finite free `E_X`-modules. See
-the module docstring. -/
-instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
-    (E : FiniteIntermediateField ℓ) :
-    PreservesFiniteLimits
-      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)) :=
-  sorry
-
-end Flat
-
-/-! ### (Push) and (Shriek) -/
-
-section Push
-
-variable {X Y : Scheme.{u}} (f : X ⟶ Y)
-
-/-- **(Push)** is an isomorphism for a finite extension `F/E`, on all unbounded objects: `F_X`
-is finite free over `E_X`, so both sides are finite direct sums of copies of `Rf_*^E`. See the
-module docstring. -/
-instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
-    (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  sorry
-
-/-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
-example [HasCompactification f] {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  inferInstance
-
-end Push
-
-end CondensedRing
 
 end AlgebraicGeometry.ProEtale

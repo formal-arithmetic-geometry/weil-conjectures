@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-!
 # Extension of scalars to a colimit of algebras
@@ -22,7 +24,9 @@ compatible with the units (`CategoryTheory.Mod.extendUnitHom_extendChangeHom`), 
 If `T = colim_j S_j` is a colimit of `R`-algebras (in `C`, the transition maps and cocone maps
 being morphisms of algebras under `R`), then `T ⊗_R M = colim_j (S_j ⊗_R M)` in `C`
 (`CategoryTheory.Mod.isColimitExtendScalarsColimitCocone`): the tensor product commutes with
-colimits, and colimits commute with the coequalizers defining `- ⊗_R M`.
+colimits, and colimits commute with the coequalizers defining `- ⊗_R M`. Consequently, in an
+abelian category in which colimits of this shape are exact, `T` is flat over `R` as soon as all
+the `S_j` are (`CategoryTheory.Mod.preservesFiniteLimits_extendScalars_of_isColimit_algCocone`).
 -/
 
 @[expose] public section
@@ -109,6 +113,14 @@ lemma extendChangeHom_id :
     extendChangeHom (𝟙 S) (Category.comp_id φ) M = 𝟙 _ := by
   rw [← cancel_epi (extendπ φ M), extendπ_extendChangeHom, id_whiskerRight, Category.id_comp,
     Category.comp_id]
+
+/-- The maps `S ⊗_R M ⟶ S' ⊗_R M` are natural in `M`. -/
+@[reassoc]
+lemma extendChangeHom_extendScalarsMap {N : Mod C R} (f : M ⟶ N) :
+    extendChangeHom s h M ≫ (extendScalarsMap φ' f).hom =
+      (extendScalarsMap φ f).hom ≫ extendChangeHom s h N := by
+  rw [← cancel_epi (extendπ φ M), extendπ_extendChangeHom_assoc, extendπ_extendScalarsMap,
+    extendπ_extendScalarsMap_assoc, extendπ_extendChangeHom, whisker_exchange_assoc]
 
 end Change
 
@@ -203,5 +215,55 @@ noncomputable def isColimitExtendScalarsColimitCocone (hc : IsColimit (algCocone
         rw [hd, ← hm j, extendScalarsColimitCocone_ι_app, extendπ_extendChangeHom_assoc] }
 
 end Colimit
+
+end CategoryTheory.Mod
+
+/-! ### Exactness -/
+
+namespace CategoryTheory.Mod
+
+variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [MonoidalCategory C]
+  [MonoidalPreadditive C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
+  {R : C} [MonObj R] [IsCommMonObj R]
+  {J : Type} [SmallCategory J] [HasColimitsOfShape J C] [HasExactColimitsOfShape J C]
+  (S : J ⥤ C) [∀ j, MonObj (S.obj j)] [∀ {j k : J} (g : j ⟶ k), IsMonHom (S.map g)]
+  (φ : ∀ j, R ⟶ S.obj j) [∀ j, IsMonHom (φ j)]
+  {T : C} [MonObj T] (ι : ∀ j, S.obj j ⟶ T) (hι : ∀ {j k : J} (g : j ⟶ k), S.map g ≫ ι k = ι j)
+  [∀ j, IsMonHom (ι j)] (ψ : R ⟶ T) [IsMonHom ψ]
+
+/-- **Flatness of a colimit of flat algebras**: if `T = colim_j S_j` is a colimit of
+`R`-algebras along which colimits are exact, and the extensions of scalars along all the
+`R ⟶ S_j` preserve monomorphisms, then so does the extension of scalars along `R ⟶ T`: the
+functor `T ⊗_R -` is the colimit of the functors `S_j ⊗_R -`. -/
+lemma preservesMonomorphisms_extendScalars_of_isColimit_algCocone
+    (hφ : ∀ {j k : J} (g : j ⟶ k), φ j ≫ S.map g = φ k) (hψ : ∀ j, φ j ≫ ι j = ψ)
+    (hc : IsColimit (algCocone S ι hι))
+    (h : ∀ j, (extendScalars (φ j)).PreservesMonomorphisms) :
+    (extendScalars ψ).PreservesMonomorphisms where
+  preserves {M N} f _ := by
+    let τ : extendScalarsColimitDiagram S φ hφ M ⟶ extendScalarsColimitDiagram S φ hφ N :=
+      { app j := (extendScalarsMap (φ j) f).hom
+        naturality _ _ g := extendChangeHom_extendScalarsMap (S.map g) (hφ g) M f }
+    have (j : J) : Mono (τ.app j) := (forget (S.obj j)).map_mono ((extendScalars (φ j)).map f)
+    have : Mono τ := NatTrans.mono_of_mono_app τ
+    have := colim.map_mono' τ (isColimitExtendScalarsColimitCocone S φ hφ M ι hι ψ hψ hc)
+      (isColimitExtendScalarsColimitCocone S φ hφ N ι hι ψ hψ hc) (extendScalarsMap ψ f).hom
+      fun j ↦ extendChangeHom_extendScalarsMap (ι j) (hψ j) M f
+    exact (forget T).mono_of_mono_map this
+
+/-- **Flatness of a colimit of flat algebras**: if `T = colim_j S_j` is a colimit of
+`R`-algebras along which colimits are exact, and the extensions of scalars along all the
+`R ⟶ S_j` are exact, then so is the extension of scalars along `R ⟶ T`. -/
+lemma preservesFiniteLimits_extendScalars_of_isColimit_algCocone
+    (hφ : ∀ {j k : J} (g : j ⟶ k), φ j ≫ S.map g = φ k) (hψ : ∀ j, φ j ≫ ι j = ψ)
+    (hc : IsColimit (algCocone S ι hι))
+    (h : ∀ j, PreservesFiniteLimits (extendScalars (φ j))) :
+    PreservesFiniteLimits (extendScalars ψ) := by
+  have := preservesMonomorphisms_extendScalars_of_isColimit_algCocone S φ ι hι ψ hφ hψ hc
+    fun j ↦ preservesMonomorphisms_of_preservesLimitsOfShape _
+  have : (extendScalars ψ).PreservesHomology :=
+    Functor.preservesHomology_of_preservesMonos_and_cokernels _
+  exact (extendScalars ψ).preservesFiniteLimits_of_preservesHomology
 
 end CategoryTheory.Mod

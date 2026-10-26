@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+public import WeilConjectures.CategoryTheory.ModuleObjects.SectionAction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 
 /-!
@@ -19,6 +21,8 @@ isomorphism. Then for every `R`-module object `M`, the map `Mⁿ ⟶ S ⊗_R M`,
 
 Indeed the underlying object of `S ⊗_R M` is that of `S ⊗_R M` with `S` regarded as an
 `R`-module (`Mod.extendForgetTensorObjIso`), and the relative tensor product is additive.
+These isomorphisms are natural in `M`, so the extension of scalars along `φ` is exact
+(`Mod.preservesFiniteLimits_extendScalars_of_isIso_biproductDesc`).
 -/
 
 @[expose] public section
@@ -28,6 +32,18 @@ universe v u
 open CategoryTheory MonoidalCategory MonObj Limits
 
 namespace CategoryTheory.Mod
+
+section GlobalSmul
+
+variable {C : Type*} [Category* C] [MonoidalCategory C] {A : C} [MonObj A]
+
+/-- The action of a global section commutes with morphisms of module objects. -/
+@[reassoc]
+lemma globalSmul_comp_hom {M N : Mod C A} (g : M ⟶ N) (σ : 𝟙_ C ⟶ A) :
+    globalSmul σ M ≫ g.hom = g.hom ≫ globalSmul σ N :=
+  sectionAct_comp g.hom σ
+
+end GlobalSmul
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
@@ -122,5 +138,36 @@ theorem isIso_biproductDesc_extendUnitHom_globalSmul {n : ℕ} (s : Fin n → (�
     rfl
   rw [he]
   infer_instance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+/-- **Flatness of a finite free algebra**: if global sections `s₁, …, sₙ` of `S` form a basis
+of `S` over `R`, then the extension of scalars along `φ` is exact. Indeed `S ⊗_R M ≅ Mⁿ`
+naturally in `M` (`Mod.isIso_biproductDesc_extendUnitHom_globalSmul`), so it preserves
+monomorphisms, and it is right exact, being a left adjoint. -/
+theorem preservesFiniteLimits_extendScalars_of_isIso_biproductDesc {n : ℕ}
+    (s : Fin n → (𝟙_ C ⟶ S))
+    (hs : IsIso (biproduct.desc fun i ↦ φ ≫ globalSmul (s i) (regular S) :
+      ⨁ (fun _ : Fin n ↦ R) ⟶ S)) :
+    PreservesFiniteLimits (extendScalars φ) := by
+  have : (extendScalars φ).PreservesMonomorphisms := ⟨fun {M N} f _ ↦ by
+    have : (forget R).IsRightAdjoint := (freeForgetAdjunction R).isRightAdjoint
+    have : Mono f.hom := (forget R).map_mono f
+    have := isIso_biproductDesc_extendUnitHom_globalSmul φ s hs M
+    have := isIso_biproductDesc_extendUnitHom_globalSmul φ s hs N
+    have h : (extendScalarsMap φ f).hom = inv (biproduct.desc fun i ↦
+        extendUnitHom φ M ≫ globalSmul (s i) (extendScalarsObj φ M)) ≫
+          biproduct.map (fun _ ↦ f.hom) ≫ biproduct.desc fun i ↦
+            extendUnitHom φ N ≫ globalSmul (s i) (extendScalarsObj φ N) := by
+      rw [IsIso.eq_inv_comp]
+      refine biproduct.hom_ext' _ _ fun i ↦ ?_
+      rw [biproduct.ι_desc_assoc, biproduct.ι_map_assoc, biproduct.ι_desc, Category.assoc,
+        globalSmul_comp_hom (extendScalarsMap φ f), extendUnitHom_extendScalarsMap_assoc]
+    have : Mono (extendScalarsMap φ f).hom := by
+      rw [h]
+      infer_instance
+    exact (forget S).mono_of_mono_map this⟩
+  have : (extendScalars φ).PreservesHomology :=
+    Functor.preservesHomology_of_preservesMonos_and_cokernels _
+  exact (extendScalars φ).preservesFiniteLimits_of_preservesHomology
 
 end CategoryTheory.Mod

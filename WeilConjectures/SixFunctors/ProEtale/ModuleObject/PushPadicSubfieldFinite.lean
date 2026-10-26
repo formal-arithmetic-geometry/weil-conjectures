@@ -42,18 +42,6 @@ open CategoryTheory Limits MonoidalCategory MonObj Functor.LaxMonoidal
 
 open scoped CategoryTheory.Obj
 
-namespace CategoryTheory.Mod
-
-variable {C : Type*} [Category* C] [MonoidalCategory C] {A : C} [MonObj A]
-
-/-- The action of a global section commutes with morphisms of module objects. -/
-@[reassoc]
-lemma globalSmul_comp_hom {M N : Mod C A} (g : M ⟶ N) (σ : 𝟙_ C ⟶ A) :
-    globalSmul σ M ≫ g.hom = g.hom ≫ globalSmul σ N :=
-  sectionAct_comp g.hom σ
-
-end CategoryTheory.Mod
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme

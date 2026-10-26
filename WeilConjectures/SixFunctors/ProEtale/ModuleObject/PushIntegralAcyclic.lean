@@ -35,17 +35,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u})
 
-/-- The inverse image `p_X^*` is additive, being a left adjoint. -/
-instance additive_upperStarFromPoint : (upperStarFromPoint X).Additive :=
-  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
-    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
-  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
-  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
-  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
-    adj.leftAdjoint_preservesColimits
-  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
-  Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
-
 /-- The map `p_X^*(ℓ⁻ᵏ φ) : 𝒪_{E,X} ⟶ E_X`. -/
 noncomputable abbrev padicIntegersToPadicSubfieldInvPow (k : ℕ) :
     condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X ⟶

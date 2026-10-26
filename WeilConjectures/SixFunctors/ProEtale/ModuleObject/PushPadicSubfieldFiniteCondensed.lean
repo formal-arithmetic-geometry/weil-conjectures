@@ -6,9 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyclic
 
 /-!
 # `F_X` is a finite free `E_X`-module
@@ -17,8 +16,9 @@ Let `ℓ` be a prime and `E ≤ F` finite subextensions of `ℚ̄_ℓ / ℚ_ℓ`
 `F` over `E`, the map `E̲ⁿ ⟶ F̲`, `(xᵢ) ↦ ∑ xᵢ bᵢ`, is an isomorphism of condensed abelian groups
 (`Profinite.exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul`): its inverse is given
 by the coordinates, which are continuous since `F` is a finite-dimensional `ℚ_ℓ`-vector space.
-Here the multiplication by `bᵢ` is the action of the constant global section `bᵢ` of `F̲` on the
-regular module (`Profinite.globalSmul_continuousMapConstRingHom`). Pulling back along `p_X`, the
+Here the multiplication by `bᵢ` (`Profinite.continuousMapRingObjMulLeft`) is the action of the
+constant global section `bᵢ` of `F̲` on the regular module
+(`Profinite.globalSmul_continuousMapConstRingHom`). Pulling back along `p_X`, the
 same holds for `E_X ⟶ F_X` on any scheme `X`
 (`AlgebraicGeometry.ProEtale.exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul`).
 -/
@@ -58,6 +58,44 @@ lemma globalSmul_regular_obj {C D : Type*} [Category* C] [MonoidalCategory C] [C
 end CategoryTheory.Mod
 
 namespace Profinite
+
+section MulLeft
+
+variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+
+/-- The multiplication by a constant `t : T` on the condensed abelian group `C(-, T)`. -/
+noncomputable def continuousMapRingObjMulLeft (t : T) :
+    continuousMapRingObj.{u} T ⟶ continuousMapRingObj T :=
+  ⟨{ app _ := AddCommGrpCat.ofHom
+        { toFun a := ULift.up (ContinuousMap.const _ t * a.down)
+          map_zero' := ULift.ext _ _ (mul_zero _)
+          map_add' a b := ULift.ext _ _ (mul_add _ a.down b.down) }
+     naturality _ _ _ := rfl }⟩
+
+lemma continuousMapRingObjMulLeft_app_apply (t : T) (S : Profinite.{u}ᵒᵖ)
+    (a : ULift.{u + 1} C(S.unop, T)) :
+    (continuousMapRingObjMulLeft T t).hom.app S a = ULift.up (ContinuousMap.const _ t * a.down) :=
+  rfl
+
+lemma continuousMapRingObjMulLeft_one :
+    continuousMapRingObjMulLeft.{u} T 1 = 𝟙 _ := by
+  ext S a
+  exact ULift.ext _ _ (one_mul _)
+
+lemma nsmul_continuousMapRingObjMulLeft (n : ℕ) (t : T) :
+    n • continuousMapRingObjMulLeft.{u} T t = continuousMapRingObjMulLeft T (n * t) := by
+  ext S a
+  have h : (n • continuousMapRingObjMulLeft.{u} T t).hom.app S =
+      n • (continuousMapRingObjMulLeft T t).hom.app S :=
+    (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙
+      (evaluation _ _).obj S).map_nsmul
+  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  have hn (v : ULift.{u + 1} C(S.unop, T)) : (n • v).down s = n • v.down s := rfl
+  rw [h]
+  refine (hn _).trans ?_
+  simp [continuousMapRingObjMulLeft_app_apply, nsmul_eq_mul, _root_.mul_assoc]
+
+end MulLeft
 
 section GlobalSmul
 

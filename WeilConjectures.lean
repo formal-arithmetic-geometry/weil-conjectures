@@ -12765,6 +12765,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
@@ -12878,6 +12879,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClFl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClUnderived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteCondensed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteExtend
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
