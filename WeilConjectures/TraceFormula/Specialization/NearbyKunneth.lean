@@ -87,11 +87,13 @@ theorem kunnethFormula (n : ℕ) :
     (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN
       {m₁ m₂} hle h₁ h₂ {eM} heM {eN} heN {A B} hA hB ↦ ?_) hM hN hpb hP hgen hle h₁ h₂ heM heN
     hA hB
-  have hIH : 0 < m₁ + m₂ → KunnethFormula ℓ (sliceField k') (m₁ + m₂ - 1) := fun hpos ↦ by
-    have : Fact (ringChar (sliceField k')).Prime := ⟨by rw [ringChar_sliceField]; exact Fact.out⟩
-    have : Fact (ringChar (sliceField k') ≠ ℓ) := ⟨by rw [ringChar_sliceField]; exact Fact.out⟩
+  have hIH : 0 < m₁ + m₂ → KunnethFormula ℓ (traitSliceField k') (m₁ + m₂ - 1) := fun hpos ↦ by
+    have : Fact (ringChar (traitSliceField k')).Prime :=
+      ⟨by rw [ringChar_traitSliceField]; exact Fact.out⟩
+    have : Fact (ringChar (traitSliceField k') ≠ ℓ) :=
+      ⟨by rw [ringChar_traitSliceField]; exact Fact.out⟩
     have h := ih (m₁ + m₂ - 1) (by omega)
-    exact @h (sliceField k') _ _ _ _
+    exact @h (traitSliceField k') _ _ _ _
   have := hqM
   have := hqN
   have : LocallyOfFiniteType (Over.mk gM).hom := MorphismProperty.of_isPullback

@@ -291,7 +291,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
     (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
-    (hIH : 0 < m + m' → KunnethFormula ℓ (sliceField k') (m + m' - 1))
+    (hIH : 0 < m + m' → KunnethFormula ℓ (traitSliceField k') (m + m' - 1))
     {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -414,17 +414,18 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     exact (P.i ⁻¹ᵁ U).ι.isClosed_singleton_of_isClosed_singleton
       (isClosed_singleton_special hM hN hpb hP _ hx'' hy'')
   · -- the cone vanishes over the generic point of each coordinate line
-    refine ⟨sliceField k', inferInstance, traitSlicePoint (sliceCoord k'), ⟨⊥, Ideal.isPrime_bot⟩,
-      isGenericPoint_traitSlicePoint_sliceCoord k' _, ?_⟩
+    refine ⟨traitSliceField k', inferInstance, traitSlicePoint (traitSliceCoord k'),
+      ⟨⊥, Ideal.isPrime_bot⟩,
+      isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
     have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
     have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-    have hslice : IsIso (L((sliceSpecialMap (sliceCoord k') hPU (hcoord i))^*⟦
+    have hslice : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
         Profinite.padicAlgClRingObj ℓ⟧).map (kunnethMap (Profinite.padicAlgClRingObj ℓ) ψ₁ ψ₂
           (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
           (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))) := by
       rcases i with a | a
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
-          (traitSlice (sliceCoord k'))
+          (traitSlice (traitSliceCoord k'))
         have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_fst hMV hNW hpbU hPU hgenU
@@ -432,7 +433,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
           (hIH (by omega)) (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
           (hm'.restrict W) heMV heNW hA' hB'
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cW a
-          (traitSlice (sliceCoord k'))
+          (traitSlice (traitSliceCoord k'))
         have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
@@ -442,14 +443,15 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     rw [← isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR] at hslice
     let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι
     have hT₁ := L((r')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT
-    have hT₂ := L((sliceSpecialMap (sliceCoord k') hPU (hcoord i))^*⟦Profinite.padicAlgClRingObj
+    have hT₂ := L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
+      Profinite.padicAlgClRingObj
       ℓ⟧).map_distinguished _ hT₁
-    have hslice' : IsIso (L((sliceSpecialMap (sliceCoord k') hPU (hcoord i))^*⟦
+    have hslice' : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
         Profinite.padicAlgClRingObj ℓ⟧).map (L((r')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
           (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B))) := by
       exact_mod_proofs hslice
     have hz := Triangle.isZero₃_of_isIso₁ _ hT₂ hslice'
-    obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (sliceCoord k') hPU (hcoord i)
+    obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)
     rw [← hl]
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
       ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)

@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 The lax tensor map `μ_j : Rj_* A ⊗ Rj_* B ⟶ Rj_* (A ⊗ B)` of the derived pushforward commutes with
 the braidings (`ProEtale.CondensedRing.lowerStarTensorMap'_braiding`), since the monoidal
-structure of the derived pullback does (`ProEtale.CondensedRing.leftDerivedUpperStarTensor_braiding`).
+structure of the derived pullback does
+(`ProEtale.CondensedRing.leftDerivedUpperStarTensor_braiding`).
 Hence so does the lax tensor map of nearby cycles
 (`ProEtale.CondensedRing.NearbyCyclesModel.tensorMap_braiding`), and the Künneth map of nearby
 cycles is symmetric: exchanging the two factors of a product exchanges the Künneth maps up to the
