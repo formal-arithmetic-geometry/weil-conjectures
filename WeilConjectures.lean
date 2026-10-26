@@ -7746,6 +7746,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopyColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopyLimitExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopySquareRectification
 public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparator
+public import WeilConjectures.CategoryTheory.DerivedCategory.IsZeroOfIsIsoZSMul
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsoOfSyzygies
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatShortExact
@@ -8458,6 +8459,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafComposeForgetModule
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
+public import WeilConjectures.CategoryTheory.Sites.SheafModuleZSMul
 public import WeilConjectures.CategoryTheory.Sites.SheafSmul
 public import WeilConjectures.CategoryTheory.Sites.SheafifyAddAction
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
