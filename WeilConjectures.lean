@@ -13429,6 +13429,8 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.Defect
 public import WeilConjectures.TraceFormula.Specialization.DefectBoundedConstructible
+public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
+public import WeilConjectures.TraceFormula.Specialization.DefectExchangeSquares
 public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
 public import WeilConjectures.TraceFormula.Specialization.DefectGenericDivisor
 public import WeilConjectures.TraceFormula.Specialization.DefectLocal
@@ -13475,6 +13477,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent

@@ -22,7 +22,8 @@ This file proves, for arbitrary coefficients, the commutative squares of the pro
 `det-sp-defect-proper-smooth`:
 
 * the *pullback square* (`ProEtale.CondensedRing.zeroSectionMap_upperStar_square`): through the
-  pullback exchanges `α_{f̃}` and `α_{f̃_Z}`, `Lg_s^* ε_{X,Z}(L)` corresponds to `ε_{X',Z'}(Lf^* L)`;
+  pullback exchanges `α_{f̃}` and `α_{f̃_Z}`, `Lg_s^* ε_{X,Z}(L)` corresponds to
+  `ε_{X',Z'}(Lf^* L)`;
   it is the square law of the pullback exchanges
   (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.pullbackExchange_square`) for
   `f̃ ∘ ẽ' = ẽ ∘ f̃_Z`;
@@ -144,7 +145,7 @@ lemma zeroSectionMap_lowerStar_square_aux {DX DX' DZ DZ' SX SX' SZ SZ' : Type*} 
   simp only [Functor.id_obj, Functor.comp_obj] at hε
   rw [reassoc_of% hθ, ← eu'.map_comp_assoc, hχf, eu'.map_comp, Category.assoc, hε,
     reassoc_of% (hsq (fl.obj L'))]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
 
 /-- **The pushforward square of the zero-section maps**: through the pushforward exchanges `χ` of
 `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` and `f̃_Z : Z' × S ⟶ Z × S` and the base change morphisms `β` of the
@@ -257,8 +258,8 @@ theorem nonempty_specializationDefect_iso_of_distTriang
 
 /-! ### The exchanges of the defect -/
 
--- The defeq checks of `Functor.mapTriangle` on the derived categories exceed the default limit.
 set_option maxHeartbeats 2000000 in
+-- The defeq checks of `Functor.mapTriangle` on the derived categories exceed the default limit.
 /-- **Smooth exchange for the defect, given the smooth exchanges of nearby cycles**: if the
 pullback exchanges of `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` at `L` and of `f̃_Z : Z' × S ⟶ Z × S` at `Li^* L` are
 invertible, then `C_{X',Z'}(Lf^* L) ≅ Lg_s^* C_{X,Z}(L)`: these exchanges carry

@@ -27,7 +27,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open CategoryTheory
 
 /-- Replace, inside the `MonObj` instances `Sheaf.monObj_sheafCompose_obj` of the goal, every
-`Precoherent Profinite` proof by the first one found (the normalizer of the module `PointExchangeOnComponentBdc`). -/
+`Precoherent Profinite` proof by the first one found (the normalizer of the module
+`PointExchangeOnComponentBdc`). -/
 elab "normalize_precoherent" : tactic => do
     let goal ← Lean.Elab.Tactic.getMainGoal
     let target ← Lean.Meta.whnfR (← Lean.instantiateMVars (← goal.getType))

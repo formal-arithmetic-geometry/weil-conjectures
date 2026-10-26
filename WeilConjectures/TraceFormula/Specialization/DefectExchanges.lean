@@ -85,7 +85,8 @@ theorem nonempty_specializationDefect_upperStar_iso [Smooth f.left]
     (comapDeformationModelHom f I k') (isPullback_deformationGenericMap _ _ k') L.property
   have hg := isIso_pullbackExchange_deformationModel_app_of_smooth k'
     (centreDeformationModelHom f I k') (isPullback_deformationGenericMap _ _ k')
-    (boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ (centreι X I) L)
+    (boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ
+      (centreι X I) L)
   have h₁ := nonempty_specializationDefect_upperStar_iso_of_isIso f I k'
     (Profinite.padicAlgClRingObj ℓ) L.obj
   revert h₁ hf hg
@@ -93,6 +94,7 @@ theorem nonempty_specializationDefect_upperStar_iso [Smooth f.left]
   intro hf hg h₁
   exact h₁ hf hg
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- **Proper exchange for the defect** (blueprint `det-sp-defect-proper-smooth`, proper case; a
 node of the subsection `sk-lem-tf-sp-defect-exchanges`): for `f : X' ⟶ X` proper and `L'` bounded
 constructible on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. The pushforward exchanges of the
