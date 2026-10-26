@@ -7540,6 +7540,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateComp
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
+public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
@@ -12270,6 +12271,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
 public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
+public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchange
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.CohomologyVanishing
@@ -12806,6 +12808,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataRings
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperGeneralBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
