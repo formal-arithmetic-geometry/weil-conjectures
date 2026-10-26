@@ -63,7 +63,33 @@ theorem isZero_upperStar_prodMap_lowerStar_prodMap_tensor (f : U ⟶ Y) (i : Z �
       (R(((prod.map (𝟙 X) f).left)_*[ModuleCat.{u + 1} Λ]).obj
         (((-⊗ᴸ-((X ⨯ U).left)[ModuleCat.{u + 1} Λ]).obj
           (L(((prod.fst : X ⨯ U ⟶ X).left)^*[ModuleCat.{u + 1} Λ]).obj M)).obj
-          (L(((prod.snd : X ⨯ U ⟶ U).left)^*[ModuleCat.{u + 1} Λ]).obj G)))) :=
-  sorry
+          (L(((prod.snd : X ⨯ U ⟶ U).left)^*[ModuleCat.{u + 1} Λ]).obj G)))) := by
+  have hsq : IsPullback (prod.snd : X ⨯ U ⟶ U).left (prod.map (𝟙 X) f).left f.left
+      (prod.snd : X ⨯ Y ⟶ Y).left := by
+    refine IsPullback.of_bot ?_ (congrArg CommaMorphism.left (prod.map_snd (𝟙 X) f).symm)
+      (ProEtale.CondensedRing.isPullback_prod_left X Y).flip
+    rw [← Over.comp_left, prod.map_fst, Category.comp_id, Over.w f]
+    exact (ProEtale.CondensedRing.isPullback_prod_left X U).flip
+  have := isIso_tensorBaseChangeMap Λ X.hom Y.hom U.hom (prod.fst : X ⨯ Y ⟶ X).left
+    (prod.snd : X ⨯ Y ⟶ Y).left (prod.map (𝟙 X) f).left (prod.snd : X ⨯ U ⟶ U).left
+    f.left (Over.w f) (ProEtale.CondensedRing.isPullback_prod_left X Y) hsq.flip M G
+  -- `L(i × 𝟙)^* Lp_X^* M ≅ Lp_Z^* Li^* M` vanishes
+  have hZ : IsZero (L(((prod.map i (𝟙 Y)).left)^*[ModuleCat.{u + 1} Λ]).obj
+      (L(((prod.fst : X ⨯ Y ⟶ X).left)^*[ModuleCat.{u + 1} Λ]).obj M)) :=
+    ((L(((prod.fst : Z ⨯ Y ⟶ Z).left)^*[ModuleCat.{u + 1} Λ])).map_isZero hM).of_iso
+      (((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ _ (prod.fst ≫ i : Z ⨯ Y ⟶ X).left
+        (by rw [← Over.comp_left, prod.map_fst])).app M).symm ≪≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ _ _ (Over.comp_left _ _ _ _ _)).app M)
+  refine (isZero_derivedTensor_obj_obj_of_isZero_left hZ
+    (L(((prod.map i (𝟙 Y)).left)^*[ModuleCat.{u + 1} Λ]).obj
+      (L(((prod.snd : X ⨯ Y ⟶ Y).left)^*[ModuleCat.{u + 1} Λ]).obj
+        (R((f.left)_*[ModuleCat.{u + 1} Λ]).obj G)))).of_iso
+    ((L(((prod.map i (𝟙 Y)).left)^*[ModuleCat.{u + 1} Λ])).mapIso ?_ ≪≫
+      leftDerivedUpperStarTensorIso _ (prod.map i (𝟙 Y)).left _ _)
+  exact (R(((prod.map (𝟙 X) f).left)_*[ModuleCat.{u + 1} Λ])).mapIso
+    (((-⊗ᴸ-((X ⨯ U).left)[ModuleCat.{u + 1} Λ]).mapIso
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) _ _ _
+        (by rw [← Over.comp_left, prod.map_fst, Category.comp_id])).app M)).app _) ≪≫
+    (asIso (tensorBaseChangeMap _ _ _ _ _ _ _ _)).symm
 
 end AlgebraicGeometry.Etale

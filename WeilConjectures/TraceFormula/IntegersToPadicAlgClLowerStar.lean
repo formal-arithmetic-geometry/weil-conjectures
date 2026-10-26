@@ -15,8 +15,9 @@ Write `T_X = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦�
 (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`). This file proves that `T`
 commutes with the pushforward along any morphism of separated `k`-schemes of finite type
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarIntegersToPadicAlgClIso`, blueprint
-`det-prop-scalar-six-direct-image` for `𝒪_E ⟶ ℚ̄_ℓ`) and with the extension by zero along an open
-immersion (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`),
+`det-prop-scalar-six-direct-image` for `𝒪_E ⟶ ℚ̄_ℓ`) and with the extension by zero along an
+open immersion
+(`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`),
 and that bounded constructible `ℚ̄_ℓ`-complexes on two schemes have integral models over a common
 `𝒪_E` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`).
 
@@ -54,8 +55,19 @@ lemma exists_padicAlgCl_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ) [
       Nonempty ((constructibleToPadicAlgCl X ℓ E).obj
         ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K) ∧
       Nonempty ((constructibleToPadicAlgCl X' ℓ E).obj
-        ((boundedConstructibleExtendScalars X' ℓ E).obj K₀') ≅ K') :=
-  sorry
+        ((boundedConstructibleExtendScalars X' ℓ E).obj K₀') ≅ K') := by
+  obtain ⟨E₁, K₁, ⟨e₁⟩⟩ := constructibleCocone_essSurjObj X ℓ K
+  obtain ⟨E₂, K₂, ⟨e₂⟩⟩ := constructibleCocone_essSurjObj X' ℓ K'
+  obtain ⟨F, h₁, h₂⟩ := exists_ge_ge E₁ E₂
+  obtain ⟨K₀, ⟨e₀⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X ℓ F
+    ((constructibleExtendScalars X ℓ h₁).obj K₁)
+  obtain ⟨K₀', ⟨e₀'⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X' ℓ F
+    ((constructibleExtendScalars X' ℓ h₂).obj K₂)
+  exact ⟨F, K₀, K₀',
+    ⟨(constructibleToPadicAlgCl X ℓ F).mapIso e₀ ≪≫
+      (constructibleToPadicAlgClCompIso X ℓ h₁).app K₁ ≪≫ e₁⟩,
+    ⟨(constructibleToPadicAlgCl X' ℓ F).mapIso e₀' ≪≫
+      (constructibleToPadicAlgClCompIso X' ℓ h₂).app K₂ ≪≫ e₂⟩⟩
 
 namespace CondensedRing
 
@@ -68,6 +80,51 @@ variable {Z Y : Over (Spec (.of k))}
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType Z.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] in
+/-- The derived comparison **(Push)** `ℚ̄_ℓ ⊗ᴸ_E Rg_* K ⟶ Rg_* (ℚ̄_ℓ ⊗ᴸ_E K)` is an isomorphism on
+bounded constructible complexes, these being bounded below
+(`isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`). -/
+lemma isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl (g : Z ⟶ Y) :
+    IsIso (Functor.whiskerLeft (boundedConstructible (padicSubfieldRingObj Z.left ℓ E)).ι
+      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) := by
+  have : QuasiCompact g.left := by
+    have : QuasiCompact (g.left ≫ Y.hom) := by rw [Over.w g]; infer_instance
+    exact QuasiCompact.of_comp g.left Y.hom
+  have : QuasiSeparated g.left := by
+    have : QuasiSeparated (g.left ≫ Y.hom) := by rw [Over.w g]; infer_instance
+    exact QuasiSeparated.of_comp g.left Y.hom
+  refine (NatTrans.isIso_iff_isIso_app _).2 fun K ↦ ?_
+  have : K.obj.IsGE K.property.1.1.choose := K.property.1.1.choose_spec
+  exact isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E g.left K.obj
+    K.property.1.1.choose
+
+/-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and any morphism
+`g` of separated `k`-schemes of finite type: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
+`ProEtale.CondensedRing.derivedPushHom`, which is an isomorphism on bounded constructible complexes
+(`isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl`). Unlike
+`boundedConstructibleLowerStarToPadicAlgClIso`, `g` need not be proper. -/
+noncomputable def boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs (g : Z ⟶ Y) :
+    ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g ⋙
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl Z.left ℓ E ⋙
+        boundedConstructibleLowerStar ℓ g :=
+  have := isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl ℓ E g
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility ℓ E g) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      asIso (Functor.whiskerLeft (boundedConstructible (padicSubfieldRingObj Z.left ℓ E)).ι
+        (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ g).symm ≪≫
+      (Functor.associator _ _ _).symm)
+
 /-- **(Push)** on bounded constructible complexes for `𝒪_E ⟶ ℚ̄_ℓ` (blueprint
 `det-prop-scalar-six-direct-image`), for any morphism `g` of separated `k`-schemes of finite type:
 `Rg_*^{𝒪_E} ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`. It is the comparison for `𝒪_E ⟶ E`
@@ -78,7 +135,13 @@ noncomputable def boundedConstructibleLowerStarIntegersToPadicAlgClIso (g : Z �
     PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 g ⋙
         boundedConstructibleIntegersToPadicAlgCl ℓ E Y ≅
       boundedConstructibleIntegersToPadicAlgCl ℓ E Z ⋙ boundedConstructibleLowerStar ℓ g :=
-  sorry
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (boundedConstructibleLowerStarExtendScalarsIso ℓ E g)
+      (constructibleToPadicAlgCl Y.left ℓ E) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (boundedConstructibleExtendScalars Z.left ℓ E)
+      (boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs ℓ E g) ≪≫
+    (Functor.associator _ _ _).symm
 
 end LowerStar
 
@@ -98,7 +161,13 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlg
         boundedConstructibleIntegersToPadicAlgCl ℓ E X ≅
       boundedConstructibleIntegersToPadicAlgCl ℓ E U ⋙
         boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  sorry
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekExtendScalarsIso ℓ E j)
+      (constructibleToPadicAlgCl X.left ℓ E) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (boundedConstructibleExtendScalars U.left ℓ E)
+      (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E j) ≪≫
+    (Functor.associator _ _ _).symm
 
 end OpenImmersion
 

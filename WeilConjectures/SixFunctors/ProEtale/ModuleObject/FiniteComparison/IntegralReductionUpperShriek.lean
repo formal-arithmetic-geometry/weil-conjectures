@@ -83,10 +83,12 @@ noncomputable def boundedConstructibleRestrictionUpperStarIso :
         boundedConstructibleIntegersModPowRestriction hX :=
   NatIso.ofComponents
     (fun K ↦ ObjectProperty.isoMk _
-      ((derivedComapLeftDerivedUpperStarIsoOfLevelwise (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      ((derivedComapLeftDerivedUpperStarIsoOfLevelwise
+           (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         p.left).app K.obj))
     (fun f ↦ (ObjectProperty.fullyFaithfulι _).map_injective
-      ((derivedComapLeftDerivedUpperStarIsoOfLevelwise (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      ((derivedComapLeftDerivedUpperStarIsoOfLevelwise
+           (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         p.left).hom.naturality f.hom))
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
@@ -95,7 +97,8 @@ omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteD
 lemma boundedConstructibleRestrictionUpperStarIso_hom_app_hom
     (K : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     ((boundedConstructibleRestrictionUpperStarIso hX hY p).hom.app K).hom =
-      (derivedComapLeftDerivedUpperStarIsoOfLevelwise (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      (derivedComapLeftDerivedUpperStarIsoOfLevelwise
+          (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         p.left).hom.app K.obj :=
   rfl
 

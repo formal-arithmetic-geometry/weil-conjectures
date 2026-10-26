@@ -27,28 +27,14 @@ immersion, `j'` an open immersion and `L` dualizable. The closed pushforward `Rg
 Künneth map restricts over `V ⨯ Y` to the dualizable case
 (`ProEtale.CondensedRing.isIso_upperStar_map_openKunnethMap_of_isOpenImmersion`), and over the
 closed complement `Z ⨯ Y` its source vanishes, so that it remains to show that its target
-vanishes there.
+vanishes there (`ProEtale.CondensedRing.isZero_upperStar_lowerStar_externalProduct_lowerShriek`).
+This vanishing is transported to integral models of `L` and `B` over a common `𝒪_E`, along the
+compatibilities of the extension of scalars `𝒪_E ⟶ ℚ̄_ℓ` with the operations involved, and the
+integral statement is reduced to the Künneth formula with finite coefficients.
 
 The extension by zero `Rj'_! Lj'^* K` of the restriction of a dualizable `K` on `X` is formal
 (`ProEtale.CondensedRing.isIso_openKunnethMap_lowerShriek_upperStar_of_isDualizable`, by the
 open–closed triangle).
-
-## Unfinished
-
-- `ProEtale.CondensedRing.isZero_upperStar_lowerStar_externalProduct_lowerShriek`: the vanishing
-  of `R(𝟙 × j)_* (Rj'_! L ⊠ B)` on `Z ⨯ Y`, the remaining content of blueprint
-  `lem-trf-ordinary-kunneth`. It is not formal in `ℚ̄_ℓ`: a dualizable `L` on `V` need not
-  extend to `X`, and every dévissage meets the exchange `R(j' × 𝟙)_! R(𝟙 × j)_* ≅
-  R(𝟙 × j)_* R(j' × 𝟙)_!`, itself a Künneth statement. The blueprint proves it with finite
-  coefficients (`lem-kun-0f1n`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`). Its
-  transport to `ℚ̄_ℓ` along the coefficient passage of
-  `WeilConjectures.TraceFormula.GenericBaseChange` needs the compatibility of the coefficient
-  changes `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` and of `ProEtale.derivedReduction` with the tensor product, which is
-  not in the repository. Moreover `ProEtale.derivedReduction` lands in sheaves of
-  `ℤ/ℓ`-modules, where the reduction of `A ⊗_{𝒪_E} B` is a tensor product over the residue
-  field `𝔽_E`, not over `ℤ/ℓ`. The transport therefore needs a finite-coefficient stage over
-  `𝔽_E` as well.
-
 -/
 
 @[expose] public section
@@ -257,8 +243,39 @@ theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek
       (prod.map (overClosedComplement j') (𝟙 Y))).obj
       ((boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).obj
         (externalProduct ℓ
-          ((boundedConstructibleLowerShriek ℓ j').obj L) B))) :=
-  sorry
+          ((boundedConstructibleLowerShriek ℓ j').obj L) B))) := by
+  have := noetherianSpace_left_of_over V
+  have := noetherianSpace_left_of_over U
+  obtain ⟨E, L₀, B₀, ⟨eL⟩, ⟨eB⟩⟩ := ProEtale.exists_padicAlgCl_iso_integralModel_pair V.left
+    U.left ℓ L B
+  let N₀ := (boundedConstructibleOpenImmersionLowerShriek
+    (Profinite.padicIntegersRingObj ℓ E.1) ℓ j').obj L₀
+  have hN : IsZero ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ
+      (overClosedComplement j')).obj N₀) :=
+    isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j' _
+      (isCompl_range_overClosedComplement j').disjoint.symm L₀
+  have : (boundedConstructibleExtendScalars (overClosedComplementObj j' ⨯ Y).left ℓ
+      E).PreservesZeroMorphisms := inferInstance
+  have : (constructibleToPadicAlgCl (overClosedComplementObj j' ⨯ Y).left ℓ
+      E).PreservesZeroMorphisms :=
+    inferInstanceAs (boundedConstructibleToPadicAlgCl _ ℓ E).PreservesZeroMorphisms
+  have h₀ := Functor.map_isZero
+    (boundedConstructibleIntegersToPadicAlgCl ℓ E (overClosedComplementObj j' ⨯ Y))
+    (PadicIntegersRingObj.isZero_upperStar_prodMap_lowerStar_prodMap_externalProduct
+      ℓ E (overClosedComplement j') j hN B₀)
+  let eM : (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj N₀ ≅
+      (boundedConstructibleLowerShriek ℓ j').obj L :=
+    (boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso ℓ E j').app L₀ ≪≫
+      (boundedConstructibleOpenImmersionLowerShriek _ ℓ j').mapIso eL ≪≫
+      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').symm.app L
+  refine h₀.of_iso ?_
+  exact ((boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E
+      (prod.map (overClosedComplement j') (𝟙 Y))).app _ ≪≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.map (overClosedComplement j') (𝟙 Y))).mapIso
+      ((boundedConstructibleLowerStarIntegersToPadicAlgClIso ℓ E (prod.map (𝟙 X) j)).app _ ≪≫
+        (boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).mapIso
+          (boundedConstructibleIntegersToPadicAlgClExternalProductIso ℓ E eM eB))).symm
 
 /-- **The ordinary Künneth formula for the extension by zero of a dualizable object**: for an
 open immersion `j' : V ⟶ X` and a dualizable `L ∈ Dᵇc(V)⟦ℚ̲̄_ℓ⟧`, the Künneth map

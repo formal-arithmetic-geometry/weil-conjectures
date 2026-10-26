@@ -43,9 +43,39 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+/-- In the derived category of an abelian category on which an integer `m` acts by zero, an object
+on which `m` acts invertibly is zero: so are all its homology objects. -/
+lemma DerivedCategory.isZero_of_isIso_zsmul_id {A : Type*} [Category A] [Abelian A]
+    [HasDerivedCategory A] {m : ℤ} (hm : ∀ M : A, m • 𝟙 M = 0) {K : DerivedCategory A}
+    (h : IsIso (m • 𝟙 K)) : IsZero K := by
+  suffices IsIso (0 : K ⟶ K) from IsZero.of_mono_zero K K
+  rw [DerivedCategory.isIso_iff]
+  intro i
+  have : IsIso ((DerivedCategory.homologyFunctor A i).map (m • 𝟙 K)) := inferInstance
+  rw [Functor.map_zsmul, CategoryTheory.Functor.map_id, hm] at this
+  have hz : IsZero ((DerivedCategory.homologyFunctor A i).obj K) :=
+    IsZero.of_mono_zero _ ((DerivedCategory.homologyFunctor A i).obj K)
+  exact hz.isIso hz _
+
+/-- An integer `m` which vanishes in `R` acts by zero on every sheaf of `R`-modules. -/
+lemma Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero {C : Type*} [Category C]
+    {J : GrothendieckTopology C} {R : Type*} [Ring R] {m : ℤ} (hm : (m : R) = 0)
+    (M : Sheaf J (ModuleCat R)) : m • 𝟙 M = 0 := by
+  ext U x
+  have h := congr_arg (fun f ↦ (f.app U).hom x)
+    ((sheafToPresheaf J (ModuleCat R)).map_zsmul (f := 𝟙 M) (r := m))
+  simpa [← Int.cast_smul_eq_zsmul R, hm] using h
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+/-- A scheme of finite type over a field is noetherian. -/
+lemma isNoetherian_left_of_over {k : Type u} [Field k] (X : Over (Spec (.of k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] : IsNoetherian X.left :=
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  ⟨⟩
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
@@ -67,7 +97,16 @@ noncomputable def etaleReductionLowerStarIso (d : Z ⟶ Y) :
     PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E d ⋙ etaleReduction ℓ E n Y ≅
       etaleReduction ℓ E n Z ⋙
         R(Etale.lowerStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) d.left) :=
-  sorry
+  have := isNoetherian_left_of_over Z
+  have := isNoetherian_left_of_over Y
+  have := isIso_boundedConstructibleLowerStarIntegersModPowReduction' ℓ E n d
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n d))
+      (finiteEtaleReading ℓ E n Y) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (boundedConstructibleIntegersModPowReduction Z.left ℓ E n)
+      (finiteEtaleReadingLowerStarIso ℓ E n d) ≪≫
+    (Functor.associator _ _ _).symm
 
 end LowerStar
 
@@ -76,6 +115,7 @@ section Conservative
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **Reduction modulo `ℓⁿ`, read on the étale site, detects zero objects** (`n ≠ 0`): a bounded
 constructible `𝒪_E`-complex `K` whose reduction `red_X K` vanishes is zero. The étale reading is
 fully faithful, so the condensed reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes; by the reduction triangle
@@ -84,8 +124,31 @@ first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
 `sk-lem-pe-derived-nakayama`). -/
 theorem isZero_of_isZero_etaleReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) {n : ℕ}
     (hn : n ≠ 0) {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
-    (h : IsZero ((etaleReduction ℓ E.1 n X).obj K)) : IsZero K :=
-  sorry
+    (h : IsZero ((etaleReduction ℓ E.1 n X).obj K)) : IsZero K := by
+  have := isNoetherian_left_of_over X
+  -- the étale reading is fully faithful, so the condensed reduction of `K` vanishes
+  have hred : IsZero ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj K) := by
+    rw [IsZero.iff_id_eq_zero]
+    exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).map_injective
+      (h.eq_of_src _ _)
+  have hext : IsZero (L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).obj K.obj) :=
+    Functor.map_isZero (boundedConstructible _).ι hred
+  -- by the reduction triangle, `ℓⁿ` acts invertibly on `K`
+  obtain ⟨g, δ, hT⟩ := exists_distinguished_integersModPowReduction X.left ℓ E.1 n K.obj
+  have hK : IsIso ((ℓ : ℤ) ^ n • 𝟙 K.obj) :=
+    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1 (Functor.map_isZero _ hext)
+  -- hence on the first derived reduction of `K`, where `ℓ` acts by zero
+  have hK₁ : IsZero ((derivedReduction X.left ℓ E).obj K.obj) := by
+    refine DerivedCategory.isZero_of_isIso_zsmul_id
+      (Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero ?_) (m := (ℓ : ℤ) ^ n) ?_
+    · rw [Int.cast_pow, Int.cast_natCast, natCast_eq_zero_residueFieldCoeff, zero_pow hn]
+    · have : (derivedReduction X.left ℓ E).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
+      rw [← (derivedReduction X.left ℓ E).map_id, ← Functor.map_zsmul]
+      infer_instance
+  -- derived Nakayama
+  have := isIso_of_isIso_derivedReduction_map X.left ℓ E (0 : K ⟶ K)
+    (hK₁.isIso hK₁ _)
+  exact IsZero.of_mono_zero K K
 
 end Conservative
 
