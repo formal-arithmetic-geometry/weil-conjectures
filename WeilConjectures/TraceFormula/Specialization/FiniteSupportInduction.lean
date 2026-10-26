@@ -236,8 +236,8 @@ theorem isZero_lowerStar_preimageOverMap (O : B.left.Opens)
     (F : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hFO : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (opensOverι (f.left ⁻¹ᵁ O))).obj F))
-    (hF : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj F)) :
-    IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (hF : IsZero ((boundedConstructibleLowerStar ℓ f).obj F)) :
+    IsZero ((boundedConstructibleLowerStar ℓ
       (preimageOverMap (complClosed O) f)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (preimageOverι (complClosed O) f)).obj F)) := by
@@ -246,31 +246,31 @@ theorem isZero_lowerStar_preimageOverMap (O : B.left.Opens)
     rw [range_opensOverι, range_preimageOverι]
     exact isCompl_compl.preimage _
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed_boundedConstructible ℓ hcompl F
-  have h₁ : IsZero ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have h₁ : IsZero ((boundedConstructibleLowerShriek ℓ
       (opensOverι (f.left ⁻¹ᵁ O))).obj ((boundedConstructibleUpperStar
         (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι (f.left ⁻¹ᵁ O))).obj F)) :=
     Functor.map_isZero _ hFO
   have hunit : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ (preimageOverι (complClosed O) f)).unit.app F) :=
+      ℓ (preimageOverι (complClosed O) f)).unit.app F) :=
     (Triangle.isZero₁_iff_isIso₂ _ hδ).1 h₁
   have key (q : preimageOver (complClosed O) f ⟶ B) (hq : preimageOverι (complClosed O) f ≫ f = q)
-      (h : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (h : IsZero ((boundedConstructibleLowerStar ℓ
         (preimageOverι (complClosed O) f ≫ f)).obj ((boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ (preimageOverι (complClosed O) f)).obj F))) :
-      IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ q).obj
+      IsZero ((boundedConstructibleLowerStar ℓ q).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (preimageOverι (complClosed O) f)).obj F)) := by
     subst hq
     exact h
   have hS := (key _ (preimageOverι_comp (complClosed O) f)
-    ((hF.of_iso ((boundedConstructibleLowerStar _ ℓ f).mapIso
-      (asIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ
+    ((hF.of_iso ((boundedConstructibleLowerStar ℓ f).mapIso
+      (asIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (preimageOverι (complClosed O) f)).unit.app F))).symm).of_iso
-      ((boundedConstructibleLowerStarComp _ ℓ _ _).app _).symm)).of_iso
-      ((boundedConstructibleLowerStarComp _ ℓ (preimageOverMap (complClosed O) f)
+      ((boundedConstructibleLowerStarComp ℓ _ _).app _).symm)).of_iso
+      ((boundedConstructibleLowerStarComp ℓ (preimageOverMap (complClosed O) f)
         (closedOverι (complClosed O))).app _)
   exact ((boundedConstructibleUpperStar _ ℓ (closedOverι (complClosed O))).map_isZero hS).of_iso
-    (asIso ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ
+    (asIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (closedOverι (complClosed O))).counit.app _)).symm
 
 
@@ -296,7 +296,7 @@ theorem exists_gt_isZero_upperStar_of_isZero_lowerStar (O : B.left.Opens)
     (hO : (O : Set B.left) ≠ Set.univ) (F : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hFO : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (opensOverι (f.left ⁻¹ᵁ O))).obj F))
-    (hF : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj F)) :
+    (hF : IsZero ((boundedConstructibleLowerStar ℓ f).obj F)) :
     ∃ O' : B.left.Opens, O < O' ∧ IsZero ((boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι (f.left ⁻¹ᵁ O'))).obj F) := by
   have hG := isZero_lowerStar_preimageOverMap f O F hFO hF
@@ -395,7 +395,7 @@ theorem exists_gt_isZero_upperStar_of_isZero_lowerStar (O : B.left.Opens)
 vanishes. This is a noetherian induction on the open of `B` over which `F` vanishes, by
 `exists_gt_isZero_upperStar_of_isZero_lowerStar`. -/
 theorem isZero_of_isZero_lowerStar_of_isFinite (F : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hF : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj F)) :
+    (hF : IsZero ((boundedConstructibleLowerStar ℓ f).obj F)) :
     IsZero F := by
   have := isNoetherian_left B
   have hbot : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ

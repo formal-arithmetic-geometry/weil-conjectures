@@ -55,15 +55,15 @@ lemma eq_zero_of_lowerStar_of_isZero_upperStar {X V Z : Over (Spec (.of k))}
     (hx : xV ≫ jV = x) (E : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (D : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hD : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ jV).obj D))
-    (φ : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj E ⟶ D) :
+    (φ : (boundedConstructibleLowerStar ℓ x).obj E ⟶ D) :
     φ = 0 := by
   subst hx
-  have hZ : IsZero ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have hZ : IsZero ((boundedConstructibleUpperShriek ℓ
       (xV ≫ jV)).obj D) :=
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ xV).map_isZero
+    ((boundedConstructibleUpperShriek ℓ xV).map_isZero
       (hD.of_iso ((boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ jV).app D))).of_iso
       ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ xV jV).app D)
-  set adj := boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  set adj := boundedConstructibleUpperShriekAdjunction ℓ
     (xV ≫ jV)
   set e := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (xV ≫ jV)).app E
   have h : e.hom ≫ φ = 0 := by
@@ -84,6 +84,8 @@ lemma isClosedImmersion_left_of_comp_eq_id {W Y : Over (Spec (.of k))} [IsSepara
     infer_instance
   exact IsClosedImmersion.of_comp σ.left p.left
 
+-- The last step identifies `Rp_* Rσ_*` with `R(σ ≫ p)_*`, which unfolds the pro-étale pullback.
+set_option maxHeartbeats 400000 in -- see the comment above
 /-- **Sections with open image split off**: let `σ` be a section of `p : W ⟶ Y` whose image is
 open. If `Rp_* G = 0`, then `Lσ^* G = 0`. Indeed the connecting morphism of the open–closed
 triangle `j_! Lj^* G ⟶ G ⟶ Rσ_* Lσ^* G ⟶` of `σ` vanishes, since `j_! Lj^* G` vanishes on the
@@ -94,7 +96,7 @@ theorem isZero_upperStar_of_isZero_lowerStar_of_isOpen_range {W Y : Over (Spec (
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (p : W ⟶ Y) (σ : Y ⟶ W) (hσ : σ ≫ p = 𝟙 Y) (hopen : IsOpen (Set.range σ.left.base))
     (G : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hG : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj G)) :
+    (hG : IsZero ((boundedConstructibleLowerStar ℓ p).obj G)) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ σ).obj G) := by
   have := isClosedImmersion_left_of_comp_eq_id p σ hσ
   let A : W.left.Opens := ⟨Set.range σ.left.base, hopen⟩
@@ -128,24 +130,24 @@ theorem isZero_upperStar_of_isZero_lowerStar_of_isOpen_range {W Y : Over (Spec (
     rw [Triangle.mk_mor₃, hδ]
     exact comp_zero)
   have hs' : (ObjectProperty.fullyFaithfulι _).preimage s ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         σ).unit.app G = 𝟙 _ :=
     (boundedConstructible _).ι.map_injective (by
       rw [Functor.map_comp, Functor.FullyFaithful.map_preimage, CategoryTheory.Functor.map_id]
       exact hs.symm)
-  have hP : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ σ).obj
+  have hP : IsZero ((boundedConstructibleLowerStar ℓ p).obj
+      ((boundedConstructibleLowerStar ℓ σ).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ σ).obj G))) := by
-    have h := congrArg (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).map hs'
+    have h := congrArg (boundedConstructibleLowerStar ℓ p).map hs'
     rw [Functor.map_comp, CategoryTheory.Functor.map_id,
-      hG.eq_of_tgt ((boundedConstructibleLowerStar _ ℓ p).map _) 0, zero_comp] at h
+      hG.eq_of_tgt ((boundedConstructibleLowerStar ℓ p).map _) 0, zero_comp] at h
     exact (IsZero.iff_id_eq_zero _).2 h.symm
   have key (q : Y ⟶ Y) (hq : q = 𝟙 Y) (X : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-      (h : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ q).obj X)) :
+      (h : IsZero ((boundedConstructibleLowerStar ℓ q).obj X)) :
       IsZero X := by
     subst hq
-    exact h.of_iso ((boundedConstructibleLowerStarId _ ℓ Y).app X).symm
-  exact key _ hσ _ (hP.of_iso ((boundedConstructibleLowerStarComp _ ℓ σ p).app _).symm)
+    exact h.of_iso ((boundedConstructibleLowerStarId ℓ Y).app X).symm
+  exact key _ hσ _ (hP.of_iso ((boundedConstructibleLowerStarComp ℓ σ p).app _).symm)
 
 end Section
 
@@ -203,7 +205,7 @@ vanishes on `f⁻¹ V`. By proper base change, `Rp₁_* Lp₂^* F = 0`, also aft
 `isZero_upperStar_of_isZero_lowerStar_of_isOpen_range`. -/
 theorem isZero_upperStar_opensOverι_of_isOpen_range_diagonal
     (F : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hF : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj F))
+    (hF : IsZero ((boundedConstructibleLowerStar ℓ f).obj F))
     (V : B.left.Opens)
     (hV : IsOpen (Set.range (pullback.diagonal f.left).base ∩
       (pullback.fst f.left f.left ≫ f.left).base ⁻¹' V)) :
@@ -212,12 +214,12 @@ theorem isZero_upperStar_opensOverι_of_isOpen_range_diagonal
   set O := f.left ⁻¹ᵁ V
   set U : (fibreSquare f).left.Opens := pullback.fst f.left f.left ⁻¹ᵁ O
   -- proper base change along `f`
-  have h₁ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+  have h₁ : IsZero ((boundedConstructibleLowerStar ℓ
       (fibreSquareFst f)).obj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (fibreSquareSnd f)).obj F)) := by
     have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ (isPullback_fibreSquare f)
     exact ((boundedConstructibleUpperStar _ ℓ f).map_isZero hF).of_iso
-      ((asIso (boundedConstructibleBaseChange _ ℓ (isPullback_fibreSquare f).toCommSq)).app F).symm
+      ((asIso (boundedConstructibleBaseChange ℓ (isPullback_fibreSquare f).toCommSq)).app F).symm
   -- restriction to `f⁻¹ V`
   let p' : opensOver U ⟶ opensOver O :=
     Over.homMk (pullback.fst f.left f.left ∣_ O) (by
@@ -229,13 +231,13 @@ theorem isZero_upperStar_opensOverι_of_isOpen_range_diagonal
   have sq : IsPullback (opensOverι U) p' (fibreSquareFst f) (opensOverι O) :=
     (IsPullback.of_map (Over.forget _) w
       (isPullback_morphismRestrict (pullback.fst f.left f.left) O)).flip
-  have h₂ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p').obj
+  have h₂ : IsZero ((boundedConstructibleLowerStar ℓ p').obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (opensOverι U)).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (fibreSquareSnd f)).obj F))) := by
     have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq
     exact ((boundedConstructibleUpperStar _ ℓ (opensOverι O)).map_isZero h₁).of_iso
-      ((asIso (boundedConstructibleBaseChange _ ℓ sq.toCommSq)).app _).symm
+      ((asIso (boundedConstructibleBaseChange ℓ sq.toCommSq)).app _).symm
   -- the restricted diagonal
   have hΔ (x : Z.left) : (pullback.fst f.left f.left) ((pullback.diagonal f.left) x) = x := by
     rw [← Scheme.Hom.comp_apply, pullback.diagonal_fst]

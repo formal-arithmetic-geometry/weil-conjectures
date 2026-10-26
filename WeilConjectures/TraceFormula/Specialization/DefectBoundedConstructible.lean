@@ -48,15 +48,15 @@ theorem boundedConstructible_specializationDefect
       (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
   set Λ := Profinite.padicAlgClRingObj ℓ
   obtain ⟨g, h, hT⟩ := exists_distTriang_specializationDefect X I k' Λ L.obj
-  have h₁ := boundedConstructible_leftDerivedUpperStar_obj Λ ℓ
-    (zeroSectionSpecialFibreMap X I k')
+  have h₁ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ
+    (zeroSectionSpecialFibreMap X I k').left
     _ ((deformationModel X I k').preservesBoundedConstructible_of_isTraitModel
       (isTraitModel_deformationModel X I k') (deformationModel_exists_comp_ε X I k')
       L.obj L.property)
   have h₂ := (deformationModel (centre X I) ⊥ k').preservesBoundedConstructible_of_isTraitModel
     (isTraitModel_deformationModel (centre X I) ⊥ k')
     (deformationModel_exists_comp_ε (centre X I) ⊥ k') _
-    (boundedConstructible_leftDerivedUpperStar_obj Λ ℓ (centreι X I) L.obj L.property)
+    (boundedConstructible_leftDerivedUpperStar_obj Λ ℓ (centreι X I) L)
   have : TopologicalSpace.NoetherianSpace (deformationSpecialFibre (centre X I) ⊥ k').left :=
     inferInstance
   exact (boundedConstructible _).ext_of_isTriangulatedClosed₃ _ hT h₁ h₂

@@ -152,8 +152,8 @@ theorem isZero_specializationDefect_of_isFinite (N : ℕ)
   have hq : IsZero ((R(((centreSpecialFibreMap p H' k').left)_*⟦Λ⟧)).obj C) := by
     obtain ⟨e⟩ := nonempty_specializationDefect_lowerStar_iso p H' k' L
     obtain ⟨e'⟩ := nonempty_specializationDefect_iso (polyAffine k (N + 1)) H' k' Λ
-      ((boundedConstructibleLowerStarCompatibility Λ ℓ p).app L)
-    exact ((ih ((boundedConstructibleLowerStar Λ ℓ p).obj L)).of_iso e'.symm).of_iso e.symm
+      ((boundedConstructibleLowerStarCompatibility ℓ p).app L)
+    exact ((ih ((boundedConstructibleLowerStar ℓ p).obj L)).of_iso e'.symm).of_iso e.symm
   -- the smooth exchange along `v`: `C_{X, Z}(L₀) ≅ Lv_Z^* C`
   obtain ⟨e₁⟩ : Nonempty (specializationDefect (polyAffine k (N + 2)) (H.comap v.left) k' Λ L₀.obj ≅
       (L(((centreSpecialFibreMap v H k').left)^*⟦Λ⟧)).obj C) := by
@@ -302,11 +302,11 @@ theorem isZero_specializationDefect_comap_polyAffineHyperplane {V : Over (Spec (
   have e := (nonempty_specializationDefect_lowerStar_iso (ℓ := ℓ) a (polyAffineHyperplane k n)
     k' L).some
   have e' := (nonempty_specializationDefect_iso (polyAffine k (n + 1)) (polyAffineHyperplane k n)
-    k' Λ ((boundedConstructibleLowerStarCompatibility Λ ℓ a).app L)).some
+    k' Λ ((boundedConstructibleLowerStarCompatibility ℓ a).app L)).some
   have h₀ : IsZero (R((aZ)_*⟦Λ⟧).obj
       (specializationDefect V ((polyAffineHyperplane k n).comap a.left) k' Λ L.obj)) :=
     ((isZero_specializationDefect_polyAffine (ℓ := ℓ) k' n
-      ((boundedConstructibleLowerStar Λ ℓ a).obj L)).of_iso e'.symm).of_iso e.symm
+      ((boundedConstructibleLowerStar ℓ a).obj L)).of_iso e'.symm).of_iso e.symm
   have : IsClosedImmersion aZ :=
     isClosedImmersion_centreSpecialFibreMap (k' := k') a (polyAffineHyperplane k n)
   have h₁ := L((aZ)^*⟦Λ⟧).map_isZero h₀

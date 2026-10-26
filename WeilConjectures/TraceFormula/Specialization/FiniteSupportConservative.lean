@@ -169,24 +169,24 @@ theorem isZero_of_isZero_rightDerivedLowerStar_of_isFinite {Y B : Over (Spec (.o
     rw [hrange]
     exact isCompl_compl.symm
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed_boundedConstructible ℓ hcompl E
-  have h₁ : IsZero ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have h₁ : IsZero ((boundedConstructibleLowerShriek ℓ
       (opensOverι U)).obj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (opensOverι U)).obj E)) :=
     Functor.map_isZero _ hEU
   have hunit : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ u).unit.app E) :=
+      ℓ u).unit.app E) :=
     (Triangle.isZero₁_iff_isIso₂ _ hδ).1 h₁
   -- conclusion by conservativity of the finite direct image along `u ≫ q`
-  have hq' : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ q).obj E) :=
+  have hq' : IsZero ((boundedConstructibleLowerStar ℓ q).obj E) :=
     IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _ hq
-  have h₂ : IsZero ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (u ≫ q)).obj
+  have h₂ : IsZero ((boundedConstructibleLowerStar ℓ (u ≫ q)).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ u).obj E)) :=
-    (hq'.of_iso ((boundedConstructibleLowerStar _ ℓ q).mapIso (asIso
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ u).unit.app E))).symm).of_iso
-      ((boundedConstructibleLowerStarComp _ ℓ u q).app _).symm
+    (hq'.of_iso ((boundedConstructibleLowerStar ℓ q).mapIso (asIso
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ u).unit.app E))).symm).of_iso
+      ((boundedConstructibleLowerStarComp ℓ u q).app _).symm
   have h₃ := isZero_of_isZero_lowerStar_of_isFinite (u ≫ q) _ h₂
   exact (boundedConstructible _).ι.map_isZero
-    (((boundedConstructibleLowerStar _ ℓ u).map_isZero h₃).of_iso (asIso
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ u).unit.app E)))
+    (((boundedConstructibleLowerStar ℓ u).map_isZero h₃).of_iso (asIso
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ u).unit.app E)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

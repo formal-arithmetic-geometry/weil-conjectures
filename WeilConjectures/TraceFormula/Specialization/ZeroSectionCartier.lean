@@ -60,9 +60,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 adjoint of the equivalence `Le^*`, hence isomorphic to its inverse. -/
 noncomputable def boundedConstructibleUpperStarLowerStarIsoOfIsIso (e : A ⟶ B) [IsIso e] :
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ e ≅ 𝟭 _ :=
+        boundedConstructibleLowerStar ℓ e ≅ 𝟭 _ :=
   Functor.isoWhiskerLeft _
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ e).rightAdjointUniq
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ e).rightAdjointUniq
       (boundedConstructibleUpperStarEquivalenceOfIsIso ℓ e).toAdjunction) ≪≫
     (boundedConstructibleUpperStarEquivalenceOfIsIso ℓ e).unitIso.symm
 
@@ -167,7 +167,7 @@ lemma isIso_counit_overRestrictι_of_isZero (K : Dᵇc(X.left)⟦Profinite.padic
       (overRestrictι X I.support.compl)).counit.app K) := by
   obtain ⟨δ, hδ⟩ := exists_distTriang_openClosed_boundedConstructible ℓ
     (isCompl_range_overRestrictι_centreι I) K
-  have h : IsZero ((boundedConstructibleLowerStar _ ℓ (centreι X I)).obj
+  have h : IsZero ((boundedConstructibleLowerStar ℓ (centreι X I)).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (centreι X I)).obj K)) :=
     Functor.map_isZero _ hK
   exact (Triangle.isZero₃_iff_isIso₁ _ hδ).1 h
@@ -179,14 +179,14 @@ lemma isZero_upperStar_centreι_lowerStar_blowupOverHom
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (centreι X I)).obj L)) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (centreι X I)).obj
-      ((boundedConstructibleLowerStar _ ℓ (blowupOverHom X I)).obj
+      ((boundedConstructibleLowerStar ℓ (blowupOverHom X I)).obj
         ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L))) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
     (isPullback_centreι_blowupOverHom X I)
-  refine IsZero.of_iso ?_ ((asIso (boundedConstructibleBaseChange _ ℓ
+  refine IsZero.of_iso ?_ ((asIso (boundedConstructibleBaseChange ℓ
     (isPullback_centreι_blowupOverHom X I).toCommSq)).app
       ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L))
-  refine Functor.map_isZero (boundedConstructibleLowerStar _ ℓ (centreMap (blowupOverHom X I) I)) ?_
+  refine Functor.map_isZero (boundedConstructibleLowerStar ℓ (centreMap (blowupOverHom X I) I)) ?_
   refine IsZero.of_iso ?_ ((boundedConstructibleUpperStarComp _ ℓ
     (centreι (blowupOver X I) (I.comap (blowupOverHom X I).left)) (blowupOverHom X I)).app L).symm
   rw [← centreMap_centreι]
@@ -200,16 +200,16 @@ noncomputable def upperStarOverRestrictιLowerStarBlowupOverHomIso
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (overRestrictι X I.support.compl)).obj
-        ((boundedConstructibleLowerStar _ ℓ (blowupOverHom X I)).obj
+        ((boundedConstructibleLowerStar ℓ (blowupOverHom X I)).obj
           ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L)) ≅
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (overRestrictι X I.support.compl)).obj L :=
   haveI := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
     (isPullback_blowupCentreComplRestrict X I)
-  (asIso (boundedConstructibleBaseChange _ ℓ
+  (asIso (boundedConstructibleBaseChange ℓ
       (isPullback_blowupCentreComplRestrict X I).toCommSq)).app
       ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L) ≪≫
-    (boundedConstructibleLowerStar _ ℓ (blowupCentreComplRestrict X I)).mapIso
+    (boundedConstructibleLowerStar ℓ (blowupCentreComplRestrict X I)).mapIso
       (((boundedConstructibleUpperStarComp _ ℓ
           (overRestrictι (blowupOver X I) (blowupCentreComplOpens X I))
           (blowupOverHom X I)).app L).symm ≪≫
@@ -225,14 +225,14 @@ noncomputable def lowerStarUpperStarBlowupOverHomIso
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (centreι X I)).obj L)) :
-    L ≅ (boundedConstructibleLowerStar _ ℓ (blowupOverHom X I)).obj
+    L ≅ (boundedConstructibleLowerStar ℓ (blowupOverHom X I)).obj
       ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L) :=
   haveI := isIso_counit_overRestrictι_of_isZero X I L hL
   haveI := isIso_counit_overRestrictι_of_isZero X I _
     (isZero_upperStar_centreι_lowerStar_blowupOverHom X I L hL)
   (asIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
       (overRestrictι X I.support.compl)).counit.app L)).symm ≪≫
-    (boundedConstructibleLowerShriek _ ℓ (overRestrictι X I.support.compl)).mapIso
+    (boundedConstructibleLowerShriek ℓ (overRestrictι X I.support.compl)).mapIso
       (upperStarOverRestrictιLowerStarBlowupOverHomIso X I L).symm ≪≫
     asIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
       (overRestrictι X I.support.compl)).counit.app _)
@@ -254,7 +254,7 @@ theorem nonempty_specializationDefect_iso_blowup
           ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L).obj)) := by
   obtain ⟨e⟩ := nonempty_specializationDefect_iso X I k' (Profinite.padicAlgClRingObj ℓ)
     ((boundedConstructible _).ι.mapIso (lowerStarUpperStarBlowupOverHomIso X I L hL) ≪≫
-      (boundedConstructibleLowerStarCompatibility _ ℓ (blowupOverHom X I)).app
+      (boundedConstructibleLowerStarCompatibility ℓ (blowupOverHom X I)).app
         ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L))
   obtain ⟨e'⟩ := nonempty_specializationDefect_lowerStar_iso (blowupOverHom X I) I k'
     ((boundedConstructibleUpperStar _ ℓ (blowupOverHom X I)).obj L)
