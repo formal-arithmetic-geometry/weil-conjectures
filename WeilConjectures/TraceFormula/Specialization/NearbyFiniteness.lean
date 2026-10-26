@@ -355,6 +355,54 @@ lemma isZero_nearbyCycles_affineSpace_of_disjoint (n : ℕ) {D : Scheme.{u}}
   exact (R((traitStdSpecialHom q hi c rfl)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
     (isZero_derivedCategory_of_isEmpty' _ _)
 
+omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- **Nearby cycles of a complex supported on a closed subscheme embedded in the trait**: if the
+closed subscheme `c : D ⟶ 𝔸ⁿ_S` maps by a closed immersion to the trait `S` (for instance the
+closure of an `S`-integral point of the generic fibre), then `Ψ (Rc_* K)` is bounded constructible
+for every bounded constructible `K` on `D`. By the closed-embedding reduction along `D ⟶ S`, the
+nearby cycles of `D` preserve bounded constructible complexes, the trait's do
+(`NearbyCyclesModel.preservesBoundedConstructible_traitSelfModel`); and by the proper exchange,
+`Ψ_{𝔸ⁿ} (Rc_* K) ≅ Rc_{s*} Ψ_D K`. -/
+theorem boundedConstructible_nearbyCycles_affineSpace_of_isClosedImmersion_comp (n : ℕ)
+    {D : Scheme.{u}} (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c]
+    (hcq : IsClosedImmersion (c ≫ (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')))
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) D))}
+    (hK : boundedConstructible _ K) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)
+      (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+        ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)) := by
+  let q := 𝔸(ULift.{u} (Fin n); trait k') ↘ trait k'
+  let M := traitStdModel (c ≫ q)
+  have hj : IsPullback M.j (pullback.snd (c ≫ q) (traitGenericPoint k')) (c ≫ q)
+      (traitGenericPoint k') := IsPullback.of_hasPullback _ _
+  have hi : IsPullback M.i (traitStdSpecialFibre (c ≫ q)).hom (c ≫ q) (traitClosedPoint k') :=
+    IsPullback.of_hasPullback _ _
+  let ψ : M.geometric.Hom (traitSelfModel k').geometric (c ≫ q)
+      (pullback.snd (c ≫ q) (traitClosedPoint k')) :=
+    { total := c ≫ q
+      generic := pullback.snd (c ≫ q) (traitGenericPoint k')
+      comm_j := pullback.condition.symm
+      comm_i := pullback.condition.symm
+      comm_ε := pullback.condition.symm }
+  have hΨ : boundedConstructible _ ((M.geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+      K) :=
+    boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding
+      (Y' := Over.mk (𝟙 (Spec (.of k')))) (N := traitSelfModel k')
+      (isTraitModel_traitSelfModel k') ψ rfl hj.flip hi
+      (fun hB' ↦ preservesBoundedConstructible_traitSelfModel k' _ hB') hK
+  let φ := traitStdHom q hj hi c rfl
+  have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ rfl
+      (isPullback_traitStdHom_generic q hj hi c rfl) (isPullback_traitStdHom_special q hi c rfl)
+      K hK
+  have := isNoetherian_of_isTraitModel (isTraitModel_affineSpaceModel (k' := k') n)
+  have := isClosedImmersion_traitStdSpecialHom q hi c rfl
+  exact (boundedConstructible _).prop_of_iso
+    (asIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K)).symm
+    (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ _ hΨ)
+
 /-- **Deligne's finiteness theorem for nearby cycles, for the extension by zero of a lisse sheaf
 on a locally closed subscheme of the generic fibre of an affine space** (SGA 4½, [Th. finitude],
 Thm. 3.2; for `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and passage to the limit, Bhatt–Scholze,
@@ -393,7 +441,10 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D
     by_cases hc : Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' (n + 1)).i.base)
     · exact boundedConstructible_of_isZero _ (isZero_nearbyCycles_affineSpace_of_disjoint _ c hc
         (boundedConstructible_lisseExtension_closed _ D c W E c' L hL))
-    · sorry
+    by_cases hcq : IsClosedImmersion (c ≫ (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k'))
+    · exact boundedConstructible_nearbyCycles_affineSpace_of_isClosedImmersion_comp _ c hcq
+        (boundedConstructible_lisseExtension_closed _ D c W E c' L hL)
+    sorry
 
 /-- Deligne's finiteness theorem for nearby cycles on an affine space `𝔸ⁿ_S`: the geometric
 nearby cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes. By the
