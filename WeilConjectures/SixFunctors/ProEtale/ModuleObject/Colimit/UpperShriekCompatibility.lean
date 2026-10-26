@@ -188,10 +188,13 @@ instance isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl {Z
     IsIso (Functor.whiskerLeft
       (boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Z)).ι
       (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g)) := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro K
-  obtain ⟨n, _⟩ := K.property.1.1
-  exact isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E g K.obj n
+  have (K : Dᵇc(Z)⟦Profinite.continuousMapRingObj E⟧) : IsIso ((Functor.whiskerLeft
+      (boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Z)).ι
+      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g)).app K) :=
+    have := K.property.1.1.choose_spec
+    isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E g K.obj
+      K.property.1.1.choose
+  exact NatIso.isIso_of_isIso_app _
 
 section LowerStar
 

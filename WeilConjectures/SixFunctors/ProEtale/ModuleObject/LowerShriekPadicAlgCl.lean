@@ -27,7 +27,9 @@ This is the (Shriek) part of item 3 of blueprint `sk-prop-sfb-finite-extension-c
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits MonoidalCategory MonObj
+
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -43,15 +45,15 @@ theorem isIso_derivedLowerShriekHom_app_padicAlgCl_of_isGE
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (padicSubfieldRingObj X ℓ E))) (n : ℤ) [K.IsGE n] :
     IsIso ((derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f).app K) := by
-  have : (D(((HasCompactification.compactification f).i)_!open⟦Profinite.continuousMapRingObj
-      E⟧).obj K).IsGE n :=
-    Functor.isGE_mapDerivedCategory_obj _ K n
-  have := isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E
+  have := Functor.isGE_mapDerivedCategory_obj (openImmersionLowerShriek
+    (Profinite.continuousMapRingObj E) (HasCompactification.compactification f).i) K n
+  have h := isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E
     (HasCompactification.compactification f).g
-    (D(((HasCompactification.compactification f).i)_!open⟦Profinite.continuousMapRingObj
-      E⟧).obj K) n
+    ((openImmersionLowerShriek (Profinite.continuousMapRingObj E)
+      (HasCompactification.compactification f).i).mapDerivedCategory.obj K) n
   simp only [derivedLowerShriekHom, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
-  infer_instance
+    Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.id_comp, Category.comp_id]
+  exact IsIso.comp_isIso' (IsIso.id _) (IsIso.comp_isIso' h inferInstance)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
