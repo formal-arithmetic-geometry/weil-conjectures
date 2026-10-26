@@ -12750,6 +12750,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Weak
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIdentify
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedPlus
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralUnderived
