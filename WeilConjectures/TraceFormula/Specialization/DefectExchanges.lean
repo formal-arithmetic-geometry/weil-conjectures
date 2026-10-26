@@ -93,4 +93,59 @@ theorem nonempty_specializationDefect_upperStar_iso [Smooth f.left]
   intro hf hg h₁
   exact h₁ hf hg
 
+/-- **Proper exchange for the defect** (blueprint `det-sp-defect-proper-smooth`, proper case; a
+node of the subsection `sk-lem-tf-sp-defect-exchanges`): for `f : X' ⟶ X` proper and `L'` bounded
+constructible on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. The pushforward exchanges of the
+proper deformations `f̃` and `f̃_Z` are invertible (proper exchange of nearby cycles), and so are
+the base change morphisms of the cartesian squares `i' ≫ f = f_Z ≫ i` and `e' ≫ f_s = g_s ≫ e`
+(proper base change); they carry `ε_{X,Z}(Rf_* L')` to `Rf_{Z*} ε_{X',Z'}(L')`
+(`nonempty_specializationDefect_lowerStar_iso_of_isIso`). -/
+theorem nonempty_specializationDefect_lowerStar_iso [IsProper f.left]
+    (L' : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ)
+        (R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj L'.obj) ≅
+      R(((centreSpecialFibreMap f I k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (specializationDefect X' (I.comap f.left) k' (Profinite.padicAlgClRingObj ℓ) L'.obj)) := by
+  have : IsProper (comapDeformationModelHom f I k').total :=
+    isProper_deformationTotalMap k' f (siteIdeal_map_appLE_le_comap f I) rfl
+  have : IsProper (centreDeformationModelHom f I k').total :=
+    isProper_deformationTotalMap k' (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I)
+      (IdealSheafData.comap_bot _).symm
+  have : IsProper (comapSpecialFibreMap f I k').left :=
+    MorphismProperty.of_isPullback
+      (isPullback_deformationSpecialFibreMap_toTotal f (siteIdeal_map_appLE_le_comap f I) k').flip
+      ‹IsProper (comapDeformationModelHom f I k').total›
+  have h₁ := (comapDeformationModelHom f I k').isIso_pushforwardExchange_app_of_isProper
+    (isPullback_deformationSpecialFibreMap_toTotal f (siteIdeal_map_appLE_le_comap f I) k').flip
+    (isPullback_deformationModel_ε_deformationGenericMap k' f (siteIdeal_map_appLE_le_comap f I))
+    L'.property
+  have h₂ := (centreDeformationModelHom f I k').isIso_pushforwardExchange_app_of_isProper
+    (isPullback_deformationSpecialFibreMap_toTotal (centreMap f I)
+      (siteIdeal_map_appLE_le_bot_centreMap f I) k').flip
+    (isPullback_deformationModel_ε_deformationGenericMap k' (centreMap f I)
+      (siteIdeal_map_appLE_le_bot_centreMap f I))
+    (boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ
+      (centreι X' (I.comap f.left)) L')
+  have h₃ := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ
+    (⟨centreι_comp_eq_centreMap_comp f I⟩ : CommSq (centreι X' (I.comap f.left)).left
+      (centreMap f I).left f.left (centreι X I).left)
+    (isPullback_centreMap f I).flip L'.obj L'.property
+  have h₄ := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ
+    (⟨zeroSectionSpecialFibreMap_comp_eq f I k'⟩ :
+      CommSq (zeroSectionSpecialFibreMap X' (I.comap f.left) k').left
+        (centreSpecialFibreMap f I k').left (comapSpecialFibreMap f I k').left
+        (zeroSectionSpecialFibreMap X I k').left)
+    (isPullback_zeroSectionSpecialFibreMap f I k')
+    (((deformationModel X' (I.comap f.left) k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+      L'.obj)
+    ((deformationModel X' (I.comap f.left) k').preservesBoundedConstructible_of_isTraitModel
+      (isTraitModel_deformationModel X' (I.comap f.left) k')
+      (deformationModel_exists_comp_ε X' (I.comap f.left) k') L'.obj L'.property)
+  have h := nonempty_specializationDefect_lowerStar_iso_of_isIso f I k'
+    (Profinite.padicAlgClRingObj ℓ) L'.obj
+  revert h₁ h₂ h₃ h₄ h
+  normalize_precoherent
+  intro h₁ h₂ h₃ h₄ h
+  exact h h₁ h₂ h₃ h₄
+
 end AlgebraicGeometry.ProEtale.CondensedRing

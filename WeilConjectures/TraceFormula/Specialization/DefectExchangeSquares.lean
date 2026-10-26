@@ -286,17 +286,17 @@ of `f̃` at `L'` and of `f̃_Z` at `Li'^* L'` and the base change morphisms of t
 theorem nonempty_specializationDefect_lowerStar_iso_of_isIso
     (L' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X'.left) Ab.{u + 1})
       (condensedRingObj Λ X'.left)))
-    [IsIso (((comapDeformationModelHom f I k').pushforwardExchange Λ).app L')]
-    [IsIso (((centreDeformationModelHom f I k').pushforwardExchange Λ).app
-      (L(((centreι X' (I.comap f.left)).left)^*⟦Λ⟧).obj L'))]
-    [IsIso ((baseChangeMap Λ (⟨centreι_comp_eq_centreMap_comp f I⟩ :
+    (h₁ : IsIso (((comapDeformationModelHom f I k').pushforwardExchange Λ).app L'))
+    (h₂ : IsIso (((centreDeformationModelHom f I k').pushforwardExchange Λ).app
+      (L(((centreι X' (I.comap f.left)).left)^*⟦Λ⟧).obj L')))
+    (h₃ : IsIso ((baseChangeMap Λ (⟨centreι_comp_eq_centreMap_comp f I⟩ :
       CommSq (centreι X' (I.comap f.left)).left (centreMap f I).left f.left
-        (centreι X I).left)).app L')]
-    [IsIso ((baseChangeMap Λ (⟨zeroSectionSpecialFibreMap_comp_eq f I k'⟩ :
+        (centreι X I).left)).app L'))
+    (h₄ : IsIso ((baseChangeMap Λ (⟨zeroSectionSpecialFibreMap_comp_eq f I k'⟩ :
       CommSq (zeroSectionSpecialFibreMap X' (I.comap f.left) k').left
         (centreSpecialFibreMap f I k').left (comapSpecialFibreMap f I k').left
         (zeroSectionSpecialFibreMap X I k').left)).app
-      (((deformationModel X' (I.comap f.left) k').nearbyCycles Λ).obj L'))] :
+      (((deformationModel X' (I.comap f.left) k').nearbyCycles Λ).obj L'))) :
     Nonempty (specializationDefect X I k' Λ (R((f.left)_*⟦Λ⟧).obj L') ≅
       R(((centreSpecialFibreMap f I k').left)_*⟦Λ⟧).obj
         (specializationDefect X' (I.comap f.left) k' Λ L')) := by
