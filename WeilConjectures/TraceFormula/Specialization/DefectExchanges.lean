@@ -148,4 +148,47 @@ theorem nonempty_specializationDefect_lowerStar_iso [IsProper f.left]
   intro h₁ h₂ h₃ h₄ h
   exact h h₁ h₂ h₃ h₄
 
+variable (X) in
+/-- **The defect kills complexes supported on the centre** (blueprint
+`det-sp-defect-closed-vanishing`, first and second assertions; a node of the subsection
+`sk-lem-tf-sp-defect-exchanges`): `C_{X,Z}(i_* M) = 0` for `M` bounded constructible on `Z`. By
+the proper exchange for the closed immersion `i`, `C_{X,Z}(i_* M) ≅ Ri_{Z*} C_{Z, i^* Z}(M)`, and
+`i^* Z = Z` is the zero ideal of `Z`, whose defect vanishes. -/
+theorem isZero_specializationDefect_lowerStar_centreι
+    (M : Dᵇc((centre X I).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ)
+      (R(((centreι X I).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj M.obj)) := by
+  have e := (nonempty_specializationDefect_lowerStar_iso (centreι X I) I k' M).some
+  refine (Functor.map_isZero _ ?_).of_iso e
+  exact isZero_specializationDefect_of_eq_bot k' (Profinite.padicAlgClRingObj ℓ) (centre X I)
+    (I.comap (centreι X I).left) (IdealSheafData.comap_subschemeι I) M.obj
+
+variable (X) in
+/-- **The defect is unchanged by extension by zero from the complement** (blueprint
+`det-sp-defect-closed-vanishing`, last assertion; a node of the subsection
+`sk-lem-tf-sp-defect-exchanges`): for the open immersion `j : U ⟶ X` of the complement of the
+centre, `C_{X,Z}(j_! j^* L) ≅ C_{X,Z}(L)`. Apply `nonempty_specializationDefect_iso_of_distTriang`
+to the open–closed triangle `j_! j^* L ⟶ L ⟶ i_* i^* L`: `Li^* j_! = 0`, and the defect of
+`i_* i^* L` vanishes. Here the isomorphism is only asserted to exist. -/
+theorem nonempty_specializationDefect_lowerShriek_upperStar_iso {U : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
+    [IsOpenImmersion j.left]
+    (hj : IsCompl (Set.range j.left.base) (Set.range (centreι X I).left.base))
+    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Nonempty (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ)
+        ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)).obj ≅
+      specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
+  obtain ⟨δ, hδ⟩ := exists_distTriang_openImmersionLowerShriek_openClosed j (centreι X I) hj L
+  have h₁ := NearbyCyclesModel.isZero_nearbyCycles_obj (Profinite.padicAlgClRingObj ℓ)
+    (deformationModel (centre X I) ⊥ k')
+    (((boundedConstructible _).ι.map_isZero
+      (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j (centreι X I)
+        hj.disjoint ((boundedConstructibleUpperStar _ ℓ j).obj L))).of_iso
+      ((boundedConstructibleUpperStarCompatibility _ ℓ (centreι X I)).symm.app _))
+  have h₃ := (isZero_specializationDefect_iff X I k' (Profinite.padicAlgClRingObj ℓ) _).1
+    (isZero_specializationDefect_lowerStar_centreι X I k'
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (centreι X I)).obj L))
+  exact nonempty_specializationDefect_iso_of_distTriang I k' _ hδ h₁ h₃
+
 end AlgebraicGeometry.ProEtale.CondensedRing

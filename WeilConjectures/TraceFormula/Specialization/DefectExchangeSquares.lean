@@ -306,4 +306,19 @@ theorem nonempty_specializationDefect_lowerStar_iso_of_isIso
     ((R(((centreSpecialFibreMap f I k').left)_*⟦Λ⟧)).map_distinguished _ hT') _ _ _ _
     (zeroSectionMap_lowerStar_square f I k' Λ L').symm
 
+
+omit [Algebra k k'] in
+/-- **The defect of the zero ideal vanishes** (blueprint `det-sp-defect-closed-vanishing`, first
+assertion): for `J = ⊥`, the zero section `Y × S ⟶ 𝒟_⊥ Y` is an isomorphism of models, so the
+zero-section map is invertible and `C_{Y,Y} = 0`. -/
+theorem isZero_specializationDefect_of_eq_bot [Algebra k k'] (Y : Over (Spec (.of k)))
+    (J : Y.left.IdealSheafData) (hJ : J = ⊥)
+    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj Λ Y.left))) :
+    IsZero (specializationDefect Y J k' Λ L) := by
+  subst hJ
+  rw [isZero_specializationDefect_iff]
+  have := (zeroSectionDeformationModelHom Y ⊥ k').isIso_pullbackExchange_of_isIso Λ
+  exact NatIso.isIso_app_of_isIso _ L
+
 end AlgebraicGeometry.ProEtale.CondensedRing
