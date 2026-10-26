@@ -47,12 +47,10 @@ private theorem section_d_map (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology A) (n : ℕ) :
     (preadditiveCoyonedaObj (separator A)).map
       (((sectionComplexFunctor A U).obj F).d n (n + 1)) =
-      ((AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionComplexFunctor
-        (End (separator A))ᵐᵒᵖ U).obj
+      ((sectionComplexFunctor (ModuleCat.{u + 1} (End (separator A))ᵐᵒᵖ) U).obj
           ((sheafCompose X.smallEtaleTopology
             (preadditiveCoyonedaObj (separator A))).obj F)).d n (n + 1) := by
   simp only [sectionComplexFunctor,
-    AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionComplexFunctor,
     Functor.comp_obj, whiskeringLeft_obj_obj, alternatingCofaceMapComplex,
     AlternatingCofaceMapComplex.obj, CochainComplex.of_d,
     AlternatingCofaceMapComplex.objD, Functor.map_sum, Functor.map_zsmul]
@@ -62,12 +60,10 @@ private theorem section_a0_map (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology A) :
     (preadditiveCoyonedaObj (separator A)).map
       ((sectionAugmentation A U F).f 0) =
-      (AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionAugmentation
-        (End (separator A))ᵐᵒᵖ U
+      (sectionAugmentation (ModuleCat.{u + 1} (End (separator A))ᵐᵒᵖ) U
           ((sheafCompose X.smallEtaleTopology
             (preadditiveCoyonedaObj (separator A))).obj F)).f 0 := by
   simp only [sectionAugmentation,
-    AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionAugmentation,
     CochainComplex.fromSingle₀Equiv_symm_apply_f_zero]
   rfl
 
@@ -93,11 +89,9 @@ theorem injective_row_quasiIso (U : FiniteSplitEtaleHypercover X)
   let F' := (sheafCompose X.smallEtaleTopology R).obj F
   have : Injective F' := injective_sheafCompose A F
   let K := (sectionComplexFunctor A U).obj F
-  let K' := (AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionComplexFunctor
-    (End (separator A))ᵐᵒᵖ U).obj F'
+  let K' := (sectionComplexFunctor (ModuleCat.{u + 1} (End (separator A))ᵐᵒᵖ) U).obj F'
   let a := sectionAugmentation A U F
-  let a' := AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionAugmentation
-    (End (separator A))ᵐᵒᵖ U F'
+  let a' := sectionAugmentation (ModuleCat.{u + 1} (End (separator A))ᵐᵒᵖ) U F'
   have : QuasiIso a' :=
     AlgebraicGeometry.FiniteSplitEtaleHypercover.injective_module_row_quasiIso U _ F'
   have ha₀ : QuasiIsoAt a' 0 := inferInstance

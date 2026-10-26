@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GrothendieckHypercoverCohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.GrothendieckHypercoverStageMaps
 import WeilConjectures.AlgebraicGeometry.GrothendieckHypercoverSectionColimit
 import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverSkeletonDescent
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
@@ -62,9 +63,9 @@ formula applies to the finitely many terms and differentials of the truncation.
 AB5 again identifies their cohomology with the filtered colimit of the cohomologies.
 Consequently the canonical stage-to-limit maps are jointly epic on every summand
 of the hypercover colimit. The colimit injections are jointly epic, so these maps
-are jointly epic on the whole limit object. The displayed family contains those
-canonical maps, proving the claimed cancellation. This works also at q = 0;
-cofilteredness supplies a stage, and the empty scheme has zero section objects. -/
+are jointly epic on the whole limit object, proving the claimed cancellation.
+This works also at q = 0; cofilteredness supplies a stage, and the empty scheme has
+zero section objects. -/
 theorem hypercoverCohomology_limit_hom_ext
     {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
@@ -75,10 +76,9 @@ theorem hypercoverCohomology_limit_hom_ext
     (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ)
     (B : A)
     (f g : hypercoverCohomology A ((Etale.upperStar A c.pt.hom).obj F) q ⟶ B)
-    (h : ∀ (i : I)
-      (a : hypercoverCohomology A ((Etale.upperStar A (D.obj i).hom).obj F) q ⟶
-        hypercoverCohomology A ((Etale.upperStar A c.pt.hom).obj F) q),
-      a ≫ f = a ≫ g) : f = g := by
+    (h : ∀ i : I,
+      coneHypercoverMap A D c F q i ≫ f = coneHypercoverMap A D c F q i ≫ g) :
+    f = g := by
   let : HasColimitsOfSize.{u, u + 1} A :=
     hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
   have hstage (i : I) (V : FiniteSplitEtaleHypercover (D.obj i).left) :
@@ -103,7 +103,7 @@ theorem hypercoverCohomology_limit_hom_ext
       congrArg (fun t ↦ ShortComplex.homologyMap (e j).hom ≫
         hypercoverCohomologyι A ((Etale.upperStar A (D.obj j.unop.left).hom).obj F) q
           (tailHypercover D i V j.unop) ≫ t)
-        (h j.unop.left (coneHypercoverMap A D c F q j.unop.left))
+        (h j.unop.left)
   apply colimit.hom_ext
   intro U
   let E := (opOpEquivalence I).functor

@@ -103,7 +103,7 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
       ((Etale.upperStar A c.pt.hom).obj F) q) := by
     apply (IsZero.iff_id_eq_zero _).2
     apply FiniteSplitEtaleHypercover.hypercoverCohomology_limit_hom_ext A F D c hc q
-    intro j a
+    intro j
     exact (hstage j).eq_of_src _ _
   exact hlimit.of_iso e.symm
 

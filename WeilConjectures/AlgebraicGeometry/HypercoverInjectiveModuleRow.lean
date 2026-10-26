@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HypercoverResolutionModel
+public import WeilConjectures.AlgebraicGeometry.GrothendieckHypercoverResolution
+public import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.CategoryTheory.RingedHypercoverInjectiveAugmentationRing
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -252,7 +253,7 @@ No commutativity of the coefficient ring is used; free modules are left modules.
 theorem injective_module_row_quasiIso (U : FiniteSplitEtaleHypercover X)
     (R : Type (u + 1)) [Ring R]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) [Injective F] :
-    QuasiIso (sectionAugmentation R U F) := by
+    QuasiIso (Grothendieck.sectionAugmentation (ModuleCat.{u + 1} R) U F) := by
   let C' := ULiftHom.{u + 1} X.Etale
   let up : X.Etale ⥤ C' := ULiftHom.up
   let down : C' ⥤ X.Etale := ULiftHom.down
@@ -315,8 +316,8 @@ theorem injective_module_row_quasiIso (U : FiniteSplitEtaleHypercover X)
         refine ⟨ULift.up t, ?_, fun Δ h θ ↦ congrArg ULift.up (ht Δ h θ)⟩
         apply ULift.ext
         exact terminal.hom_ext _ _)
-  let K := (sectionComplexFunctor R U).obj F
-  let a := sectionAugmentation R U F
+  let K := (Grothendieck.sectionComplexFunctor (ModuleCat.{u + 1} R) U).obj F
+  let a := Grothendieck.sectionAugmentation (ModuleCat.{u + 1} R) U F
   have hd (n : ℕ) (s : K.X n) :
       K.d n (n + 1) s =
         ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • F.obj.map (U.simplicial.δ j).op s := by

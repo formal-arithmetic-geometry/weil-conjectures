@@ -39,6 +39,7 @@ variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
 
+/-- The alternating coface section complex `F(U₀) → F(U₁) → ⋯` of a sheaf on a hypercover. -/
 noncomputable def sectionComplexFunctor (U : FiniteSplitEtaleHypercover X) :
     Sheaf X.smallEtaleTopology A ⥤
       CochainComplex A ℕ :=
@@ -52,11 +53,14 @@ instance (U : FiniteSplitEtaleHypercover X) : (sectionComplexFunctor A U).Additi
     ext n
     rfl
 
+/-- The double complex obtained by applying the hypercover section complex to every term of a
+cochain complex of sheaves. -/
 noncomputable def resolutionDoubleComplex (U : FiniteSplitEtaleHypercover X)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) :
     HomologicalComplex₂ A (.up ℕ) (.up ℕ) :=
   HomologicalComplex₂.flip (((sectionComplexFunctor A U).mapHomologicalComplex (.up ℕ)).obj I)
 
+/-- Sections over the terminal object of the small étale site. -/
 noncomputable def terminalSections :
     Sheaf X.smallEtaleTopology A ⥤ A :=
   sheafToPresheaf X.smallEtaleTopology A ⋙
@@ -67,6 +71,8 @@ instance : (terminalSections (X := X) A).Additive where
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- The augmentation of the hypercover section complex by the terminal sections, given in
+degree zero by restriction along `U₀ ⟶ ⊤`. -/
 noncomputable def sectionAugmentation (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology A) :
     (CochainComplex.single₀ A).obj ((terminalSections A).obj F) ⟶
@@ -85,12 +91,14 @@ noncomputable def sectionAugmentation (U : FiniteSplitEtaleHypercover X)
         ← Functor.map_comp, ← op_comp, terminal.comp_from]
       exact add_neg_cancel _⟩
 
+/-- Terminal sections of a cochain complex of sheaves. -/
 noncomputable def sectionResolution
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) :
     CochainComplex A ℕ :=
   ((terminalSections A).mapHomologicalComplex (.up ℕ)).obj I
 
 set_option backward.isDefEq.respectTransparency false in
+/-- Restriction from terminal sections to the degree-zero column of the double complex. -/
 noncomputable def restrictionToZero (U : FiniteSplitEtaleHypercover X)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) :
     sectionResolution A I ⟶ (resolutionDoubleComplex A U I).X 0 where
@@ -111,6 +119,7 @@ lemma restrictionToZero_d (U : FiniteSplitEtaleHypercover X)
       (sectionAugmentation A U (I.X q)).comm 0 1
 
 set_option backward.isDefEq.respectTransparency false in
+/-- The augmentation of the total complex by the terminal sections of the resolution. -/
 noncomputable def resolutionAugmentation (U : FiniteSplitEtaleHypercover X)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) :
     sectionResolution A I ⟶ (resolutionDoubleComplex A U I).total (.up ℕ) where
@@ -137,6 +146,8 @@ noncomputable def resolutionAugmentation (U : FiniteSplitEtaleHypercover X)
     rw [a.comm q (q + 1)]
 
 set_option backward.isDefEq.respectTransparency false in
+/-- The inclusion of the hypercover section complex of `F` into the total complex, induced by
+the coaugmentation `F ⟶ I⁰` of an injective resolution. -/
 noncomputable def bottomInclusion (U : FiniteSplitEtaleHypercover X)
     {F : Sheaf X.smallEtaleTopology A} (I : InjectiveResolution F) :
     (sectionComplexFunctor A U).obj F ⟶
@@ -177,6 +188,8 @@ noncomputable def bottomInclusion (U : FiniteSplitEtaleHypercover X)
       D.ιTotal (.up ℕ) (p + 1) 0 (p + 1) (by simp)) (a.comm p (p + 1))
 
 
+/-- If injective sheaves have acyclic augmented hypercover rows, the total-complex augmentation
+of an injective resolution is a quasi-isomorphism. -/
 lemma resolutionAugmentation_quasiIso
     (hrow : ∀ (U : FiniteSplitEtaleHypercover X)
       (F : Sheaf X.smallEtaleTopology A),
@@ -191,6 +204,7 @@ lemma resolutionAugmentation_quasiIso
   intro n
   exact hrow U (I.cocomplex.X n) inferInstance
 
+/-- The map of total complexes induced by a map of cochain complexes of sheaves. -/
 noncomputable def resolutionMap (U : FiniteSplitEtaleHypercover X)
     {I J : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ}
     (φ : I ⟶ J) :
@@ -234,12 +248,14 @@ lemma bottomInclusion_naturality (U : FiniteSplitEtaleHypercover X)
   simp only [Functor.map_comp, HomologicalComplex.comp_f, Category.assoc] at hh
   convert hh using 1 <;> rfl
 
+/-- The map of hypercover section complexes induced by a refinement `U ⟶ V`. -/
 noncomputable def sectionRefinement {U V : FiniteSplitEtaleHypercover X}
     (f : U.Refinement V) : sectionComplexFunctor A V ⟶ sectionComplexFunctor A U :=
   whiskerRight (whiskerLeft (sheafToPresheaf X.smallEtaleTopology A)
     ((whiskeringLeft SimplexCategory X.Etaleᵒᵖ A).map f.rightOp))
     (alternatingCofaceMapComplex A)
 
+/-- The map of total complexes induced by a refinement `U ⟶ V`. -/
 noncomputable def totalRefinement {U V : FiniteSplitEtaleHypercover X}
     (f : U.Refinement V)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ) :
@@ -279,6 +295,7 @@ lemma bottomInclusion_refinement {U V : FiniteSplitEtaleHypercover X}
   simp only [Category.assoc] at hh
   convert hh using 1 <;> rfl
 
+/-- The identification of the cohomology of the total complex with derived terminal sections. -/
 noncomputable def totalComparisonAt (U : FiniteSplitEtaleHypercover X)
     {F : Sheaf X.smallEtaleTopology A} (I : InjectiveResolution F)
     [QuasiIso (resolutionAugmentation A U I.cocomplex)] (q : ℕ) :
@@ -317,6 +334,8 @@ lemma totalComparisonAt_refinement {U V : FiniteSplitEtaleHypercover X}
   rw [← Category.assoc, ← Category.assoc, ha]
   simp only [Category.assoc, IsIso.hom_inv_id_assoc]
 
+/-- The comparison map from hypercover cohomology to derived terminal sections in degree `q`,
+through the total complex of an injective resolution. -/
 noncomputable def comparisonAt (U : FiniteSplitEtaleHypercover X)
     {F : Sheaf X.smallEtaleTopology A} (I : InjectiveResolution F)
     [QuasiIso (resolutionAugmentation A U I.cocomplex)] (q : ℕ) :
@@ -373,6 +392,8 @@ lemma comparisonAt_naturality (U : FiniteSplitEtaleHypercover X)
     (fun k ↦ H.map (bottomInclusion A U I) ≫ k ≫
       (J.isoRightDerivedObj (terminalSections A) q).inv) hi
 
+/-- The comparison from hypercover cohomology to derived terminal sections, natural in the
+sheaf, assuming acyclicity of injective hypercover rows. -/
 noncomputable def comparisonNat
     (hrow : ∀ (U : FiniteSplitEtaleHypercover X)
       (F : Sheaf X.smallEtaleTopology A),
@@ -389,6 +410,7 @@ noncomputable def comparisonNat
       (InjectiveResolution.desc f _ _) (InjectiveResolution.desc_commutes_zero f _ _) q
 
 set_option backward.isDefEq.respectTransparency false in
+/-- The comparison maps are compatible with refinement maps of hypercovers. -/
 lemma comparisonNat_refinement
     (hrow : ∀ (U : FiniteSplitEtaleHypercover X)
       (F : Sheaf X.smallEtaleTopology A),

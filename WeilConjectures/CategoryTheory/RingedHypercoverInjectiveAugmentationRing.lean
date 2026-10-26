@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.Subcanonical
@@ -687,7 +687,7 @@ theorem ringedHypercover_injective_augmentation_exact_ring
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks] [J.toGrothendieck.Subcanonical]
     (R : Sheaf J.toGrothendieck RingCat.{r})
-    (I : ringedSiteModules.{max u v r} R) [Injective I]
+    (I : SheafOfModules.{max u v r} R) [Injective I]
     (W : C) (U : SimplicialObject C)
     (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W)
     (hcover : ∀ (n : ℕ) (T : C) (w : T ⟶ W)
