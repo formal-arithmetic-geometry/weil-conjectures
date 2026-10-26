@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullCounit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionTriangleNatural
@@ -49,6 +50,22 @@ section Comap
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
+/-- The commutation `derivedComapLeftDerivedUpperStarIso` is obtained from the levelwise
+commutation `derivedComapUpperStarIso` and the identifications of the derived pullbacks with the
+levelwise pullbacks. -/
+lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
+    (derivedComapLeftDerivedUpperStarIso a f).hom =
+      (Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ f) ≪≫
+        (derivedComapUpperStarIso a f).symm ≪≫
+        Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm _).hom := by
+  ext K
+  rw [derivedComapLeftDerivedUpperStarIso_hom_app]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    derivedComapUpperStarIso, Iso.trans_inv, Iso.symm_inv, Category.assoc,
+    leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategorySquareIso]
+  rfl
+
 set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
@@ -71,7 +88,8 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (comapUpperStarIso a f).inv (ComplexShape.up ℤ)).app Z) :
         (D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧)).obj (DerivedCategory.Qh.obj Z) ⟶ _) := by
-  simp only [derivedComapLeftDerivedUpperStarIso, derivedComapUpperStarIso, Iso.trans_hom,
+  rw [derivedComapLeftDerivedUpperStarIso_hom_eq]
+  simp only [derivedComapUpperStarIso, Iso.trans_hom,
     Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
@@ -124,7 +142,7 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app_eq_id]
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app]
   erw [Category.id_comp, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.comp_id, Category.id_comp]
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K

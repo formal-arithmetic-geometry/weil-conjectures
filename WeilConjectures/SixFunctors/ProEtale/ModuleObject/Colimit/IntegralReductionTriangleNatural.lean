@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleNatural
 public import WeilConjectures.CategoryTheory.Triangulated.ReductionTriangleMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionOpenLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
 
 /-!
 
@@ -54,23 +55,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-section Comap
-
-variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-  [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
-
-/-- The restriction of scalars along `a` commutes with the derived pullbacks:
-`D(Res_{a_Y}) ⋙ Lf^*_Λ ≅ Lf^*_{Λ'} ⋙ D(Res_{a_X})`, from the levelwise commutation
-`ProEtale.CondensedRing.derivedComapUpperStarIso`. -/
-noncomputable def derivedComapLeftDerivedUpperStarIso :
-    D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧) ≅
-      L((f)^*⟦Λ'⟧) ⋙ D(Mod.comap (coefficientMap a X)) :=
-  Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ f) ≪≫
-    (derivedComapUpperStarIso a f).symm ≪≫
-    Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm _
-
-end Comap
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] (n : ℕ)
 

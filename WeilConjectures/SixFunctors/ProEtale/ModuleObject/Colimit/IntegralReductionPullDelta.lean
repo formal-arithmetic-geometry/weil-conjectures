@@ -239,8 +239,8 @@ lemma upperStarExtendComapComplexIso_quotient_map
     (HomotopyCategory.quotient _ _).map (upperStarExtendComapComplexIso a f P).hom := by
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app_eq_id,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app_eq_id]
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app,
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app]
   erw [Category.id_comp, Category.id_comp, Category.comp_id]
   simp only [NatTrans.mapHomotopyCategory_app]
   erw [Functor.mapHomotopyCategory_map, ← Functor.map_comp]
