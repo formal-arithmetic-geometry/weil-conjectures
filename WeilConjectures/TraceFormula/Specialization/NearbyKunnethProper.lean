@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
+public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
@@ -81,21 +83,88 @@ variable {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- The source `Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B` of the Künneth map is bounded constructible if the
+nearby cycles `Ψ_M A`, `Ψ_N B` are. -/
+lemma boundedConstructible_kunnethMap_source
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
+    (hΨA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
+        ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj A))
+    (hΨB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
+        ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B)) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
+      (L((f₁')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((M.nearbyCycles (Profinite.padicAlgClRingObj
+          ℓ)).obj A) ⊗
+        L((f₂')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((N.nearbyCycles (Profinite.padicAlgClRingObj
+            ℓ)).obj B)) := by
+  have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      Z'.left)).IsMonoidal :=
+    isMonoidal_boundedConstructible (X := Z') (ℓ := ℓ)
+  exact CategoryTheory.ObjectProperty.prop_tensor
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
+
+set_option maxHeartbeats 800000 in
+-- instance search for the monoidal structure of bounded constructible complexes
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+include φ₁ φ₂ in
+/-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
+geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
+`ε_M` and `ε_N` factor through the total spaces, `Lε_P^* (Lf₁^* A ⊗ Lf₂^* B)` is the pullback
+`Lj^* C₀` of a bounded constructible complex on the total space of `P`. -/
+lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
+    (hgeom : ∀ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)), boundedConstructible
+            (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C₀ →
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
+          ((P.geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj C₀))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
+      ((P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj (L((f₁)^*⟦Profinite.padicAlgClRingObj
+          ℓ⟧).obj A ⊗ L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
+  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)), boundedConstructible
+          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C →
+        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
+          boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) (C ⊗ D) :=
+              by
+    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        P.total)).IsMonoidal :=
+      isMonoidal_boundedConstructible (X := Over.mk (qP ≫
+          traitToBase k' k')) (ℓ := ℓ)
+    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso (Profinite.padicAlgClRingObj ℓ) φ₁
+      φ₂ heM heN hA hB htensor
+  exact (boundedConstructible _).prop_of_iso (L((P.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
+      (R((P.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
+    ((Functor.Monoidal.μIso L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _).symm ≪≫
+      (((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₁.commSq_ε).app A).symm ⊗ᵢ
+        ((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₂.commSq_ε).app B).symm) ≪≫
+            e).symm)) (hgeom C₀ hC₀)
+
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
 `N` of finite type and bounded constructible `A`, `B`, the Künneth map `Π_{A,B}` is an
 isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`.
 
-The proof is by induction on the dimension of `X_η̄ × Y_η̄`: on small neighbourhoods with
-quasi-finite coordinates `X ⟶ 𝔸^q_S`, `Y ⟶ 𝔸^r_S`, the restriction of `Π_{A,B}` to the generic
-slice `S' = (𝔸¹_S)_{(s')}` of a coordinate is, by the generic-slicing description of nearby
-cycles (SGA 4½, [Th. finitude], §§3.4, 3.7), the invariants under the pro-`p` kernel `P` of
-`I' ⟶ I` of the Künneth map of the sliced models, of smaller dimension; invariants under `P`
-commute with tensor products with complexes with trivial `P`-action (blueprint
-`det-nearby-kunneth-invariants`). Hence the cone of `Π_{A,B}` lies over finitely many points of
-each coordinate line, and is supported on finitely many points since the coordinates are
-quasi-finite. -/
+The source and target of `Π_{A,B}` are bounded constructible by Deligne's finiteness theorem
+(`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
+`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`), so this is
+`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`: around
+every point, the coordinates of closed immersions of affine opens of the total spaces into affine
+spaces over the trait detect closed points of the special fibre, and the cone of `Π_{A,B}`
+vanishes over the generic point of each coordinate line by generic slicing
+(`NearbyCyclesModel.isIso_map_kunnethMap_sliceSpecialMap`). -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
@@ -108,8 +177,18 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
     ∃ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (kunnethMap
-          (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) :=
-  sorry
+          (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
+  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
+  have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
+  have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
+  exact exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible hM hN hpb hP heM heN
+    hA hB (boundedConstructible_kunnethMap_source hΨA hΨB)
+    (boundedConstructible_kunnethMap_target (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
+      (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
+      heM heN hA hB)
 
 set_option maxHeartbeats 1600000 in
 -- the triangle of the Künneth map has large terms
@@ -180,74 +259,6 @@ theorem isIso_kunnethMap_of_isProper (hM : M.IsTraitModelOver qM gM)
     (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hU
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
     (hdetect S hS C hC h₂ h₁)
-
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
-/-- The source `Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B` of the Künneth map is bounded constructible if the
-nearby cycles `Ψ_M A`, `Ψ_N B` are. -/
-lemma boundedConstructible_kunnethMap_source
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hΨA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
-        ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj A))
-    (hΨB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
-        ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B)) :
-    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-      (L((f₁')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((M.nearbyCycles (Profinite.padicAlgClRingObj
-          ℓ)).obj A) ⊗
-        L((f₂')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj ((N.nearbyCycles (Profinite.padicAlgClRingObj
-            ℓ)).obj B)) := by
-  have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      Z'.left)).IsMonoidal :=
-    isMonoidal_boundedConstructible (X := Z') (ℓ := ℓ)
-  exact CategoryTheory.ObjectProperty.prop_tensor
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
-
-set_option maxHeartbeats 800000 in
--- instance search for the monoidal structure of bounded constructible complexes
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
-include φ₁ φ₂ in
-/-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
-geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
-`ε_M` and `ε_N` factor through the total spaces, `Lε_P^* (Lf₁^* A ⊗ Lf₂^* B)` is the pullback
-`Lj^* C₀` of a bounded constructible complex on the total space of `P`. -/
-lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
-    (hgeom : ∀ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)), boundedConstructible
-            (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C₀ →
-      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-          ((P.geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj C₀))
-    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
-    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-      ((P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj (L((f₁)^*⟦Profinite.padicAlgClRingObj
-          ℓ⟧).obj A ⊗ L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
-  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)), boundedConstructible
-          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C →
-        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
-          boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) (C ⊗ D) :=
-              by
-    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        P.total)).IsMonoidal :=
-      isMonoidal_boundedConstructible (X := Over.mk (qP ≫
-          traitToBase k' k')) (ℓ := ℓ)
-    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
-  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso (Profinite.padicAlgClRingObj ℓ) φ₁
-      φ₂ heM heN hA hB htensor
-  exact (boundedConstructible _).prop_of_iso (L((P.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-      (R((P.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-    ((Functor.Monoidal.μIso L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _).symm ≪≫
-      (((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₁.commSq_ε).app A).symm ⊗ᵢ
-        ((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₂.commSq_ε).app B).symm) ≪≫
-            e).symm)) (hgeom C₀ hC₀)
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
