@@ -41,7 +41,11 @@ than 5 minutes. The composition isomorphism `Rb''_* ≅ Rr_* ⋙ Rι'_*` must be
 `boundedConstructibleLowerStarCompOfEq`: with an inline `eqToHom (by rw [w]) ≫ …` in both the
 data and the lemma, the kernel times out comparing the two `eqToHom` terms. With the objects of
 the units `eB, …` left implicit (determined by `Functor.Monoidal.εIso`), the kernel times out on
-the unit identity of `χ`, so they are passed as `𝟙_ _`.
+the unit identity of `χ`, so they are passed as `𝟙_ _`. These units then use the monoidal structure
+of the full subcategory, while the objects of `εIso` use the projection of
+`monoidalCategory_boundedConstructible`; the kernel does not finish comparing the statement of
+`lowerStarUnit_comp_of_eq` with the hypothesis `hc'` (it does for `lowerStarUnit_comp` and `hc`),
+so `hc'` is proved in place by the proof of `lowerStarUnit_comp_of_eq`.
 
 -/
 
@@ -133,69 +137,69 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- The units `ℚ̄_ℓ ⟶ Rf_* Lf^* ℚ̄_ℓ ≅ Rf_* ℚ̄_ℓ` compose along `R(f ≫ g)_* ≅ Rg_* Rf_*`. -/
 lemma lowerStarUnit_comp (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         g).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+      (boundedConstructibleLowerStar ℓ g).map
         (Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)).inv ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerStar ℓ g).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           f).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerStar ℓ f).map
           (Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f)).inv) ≫
-      (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).hom.app (𝟙_ _) =
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerStarComp ℓ f g).hom.app (𝟙_ _) =
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         (f ≫ g)).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g)).map
+      (boundedConstructibleLowerStar ℓ (f ≫ g)).map
         (Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))).inv := by
   have h := unitClass_comp_aux
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
     (Iso.refl _)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
     (Iso.refl _)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (f ≫ g))
     (Iso.refl _)
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
+    (boundedConstructibleLowerStarComp ℓ f g)
     (by rw [boundedConstructibleLowerStarComp, Iso.symm_inv, conjugateIsoEquiv_apply_hom,
       Iso.symm_hom])
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).symm
+    (boundedConstructibleLowerStarComp ℓ f g).symm
     (fun K ↦ by simp)
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f))
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g)))
-    (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ f g)
+    (boundedConstructibleUpperStarComp_hom_app_unit ℓ f g)
   simpa using h
 
 /-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ Rh_*` for a morphism `h` equal to `f ≫ g`. -/
 noncomputable def boundedConstructibleLowerStarCompOfEq (f : X ⟶ Y) (g : Y ⟶ Z) {h : X ⟶ Z}
     (w : f ≫ g = h) :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g ≅
-      boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ h :=
-  boundedConstructibleLowerStarComp _ ℓ f g ≪≫ eqToIso (by rw [w])
+    boundedConstructibleLowerStar ℓ f ⋙
+        boundedConstructibleLowerStar ℓ g ≅
+      boundedConstructibleLowerStar ℓ h :=
+  boundedConstructibleLowerStarComp ℓ f g ≪≫ eqToIso (by rw [w])
 
 /-- `lowerStarUnit_comp` for a morphism `h` equal to `f ≫ g`, in the form of the hypothesis `hc'`
 of `specializationUnit_comp_inv_map_comp_eq_aux`. -/
 lemma lowerStarUnit_comp_of_eq (f : X ⟶ Y) (g : Y ⟶ Z) {h : X ⟶ Z} (w : f ≫ g = h) :
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         h).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map
+      (boundedConstructibleLowerStar ℓ h).map
         (Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h)).inv ≫
       (boundedConstructibleLowerStarCompOfEq ℓ f g w).inv.app (𝟙_ _) =
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         g).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+      (boundedConstructibleLowerStar ℓ g).map
         (Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)).inv ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerStar ℓ g).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           f).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerStar ℓ f).map
           (Functor.Monoidal.εIso
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f)).inv) := by
   subst w
@@ -229,27 +233,28 @@ models over `ι ∘ j` with morphism of special fibres `g' = ι' ∘ r`, with
 `Lι'^*(Ψ_N(Rι_* Rj_! ≅ R(ιj)_*) ≫ χ_φ ≫ (Rg'_* ≅ Rι'_* Rr_*))` and the counit of
 `Lι'^* ⊣ Rι'_*` is `η_r ≫ Rr_*(ε⁻¹ ≫ σ_M)`. -/
 theorem specializationUnit_comp_inv_map_comp_exchange_eq
-    (hI : IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ ι ⋙
+    (hI : IsIso ((boundedConstructibleLowerStar ℓ ι ⋙
       NearbyCyclesModel.boundedConstructibleNearbyCycles hN ⋙
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι').map
-        (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (((boundedConstructibleUpperShriekAdjunction ℓ
           j).homEquiv _ _).symm (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv))) :
     type_of% (specializationUnit_comp_inv_map_comp_eq_aux
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ j)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ ι)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (j ≫ ι))
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ r)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ ι')
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g')
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (j ≫ ι))
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ r)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ ι')
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ g')
       (φ.boundedConstructiblePushforwardExchange ℓ hM hN)
       (eB := 𝟙_ _) (eF := 𝟙_ _) (eC := 𝟙_ _) (eB' := 𝟙_ _) (eF' := 𝟙_ _) (eC' := 𝟙_ _)
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ j))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ ι))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (j ≫ ι)))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ r))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ ι'))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ g'))
-      (boundedConstructibleLowerStarComp _ ℓ j ι).hom
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι))
+      (Functor.Monoidal.εIso
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ ι)))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι'))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'))
+      (boundedConstructibleLowerStarComp ℓ j ι).hom
       (boundedConstructibleLowerStarCompOfEq ℓ r ι' w).inv
       (lowerStarUnit_comp ℓ j ι) (lowerStarUnit_comp_of_eq ℓ r ι' w)
       (NearbyCyclesModel.boundedConstructibleUnit ℓ hN)
@@ -258,29 +263,37 @@ theorem specializationUnit_comp_inv_map_comp_exchange_eq
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j) _
       (homEquiv_symm_unitIso_inv_comp_unit ℓ j) hI) := by
   have h := specializationUnit_comp_inv_map_comp_eq_aux
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ j)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ ι)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (j ≫ ι))
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ r)
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ ι')
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g')
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ ι)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (j ≫ ι))
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ r)
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ ι')
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ g')
       (φ.boundedConstructiblePushforwardExchange ℓ hM hN)
       (eB := 𝟙_ _) (eF := 𝟙_ _) (eC := 𝟙_ _) (eB' := 𝟙_ _) (eF' := 𝟙_ _) (eC' := 𝟙_ _)
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ j))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ ι))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (j ≫ ι)))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ r))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ ι'))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ g'))
-      (boundedConstructibleLowerStarComp _ ℓ j ι).hom
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι))
+      (Functor.Monoidal.εIso
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ ι)))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι'))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'))
+      (boundedConstructibleLowerStarComp ℓ j ι).hom
       (boundedConstructibleLowerStarCompOfEq ℓ r ι' w).inv
-      (lowerStarUnit_comp ℓ j ι) (lowerStarUnit_comp_of_eq ℓ r ι' w)
+      (lowerStarUnit_comp ℓ j ι) ?hc'
       (NearbyCyclesModel.boundedConstructibleUnit ℓ hN)
       (NearbyCyclesModel.boundedConstructibleUnit ℓ hM)
       (φ.boundedConstructibleUnit_comp_map_unit_comp_pushforwardExchange_app ℓ hM hN)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j) _
       (homEquiv_symm_unitIso_inv_comp_unit ℓ j) hI
-  exact h
+  · exact h
+  -- `lowerStarUnit_comp_of_eq ℓ r ι' w` has the right type up to the instance path of the unit
+  -- objects, but the kernel does not finish comparing it with the hypothesis; its proof, run on
+  -- the hypothesis itself, is checked at once.
+  case hc' =>
+    subst w
+    rw [← reassoc_of% (lowerStarUnit_comp ℓ r ι')]
+    simp [boundedConstructibleLowerStarCompOfEq]
 
 set_option linter.overlappingInstances false in
 /-- **Fact (III) for a morphism of models over a clopen component**: with the data of
@@ -290,10 +303,10 @@ set_option linter.overlappingInstances false in
 (`unitClass_comp_map_comp_lowerShriekCompOfEq_inv`). -/
 theorem unitClass_comp_map_comp_exchange_eq [IsProper B'.hom] [IsProper F'.hom]
     [IsProper r.left]
-    (hI : IsIso ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ ι ⋙
+    (hI : IsIso ((boundedConstructibleLowerStar ℓ ι ⋙
       NearbyCyclesModel.boundedConstructibleNearbyCycles hN ⋙
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ι').map
-        (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (((boundedConstructibleUpperShriekAdjunction ℓ
           j).homEquiv _ _).symm (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv))) :
     type_of% (unitClass_comp_map_comp_lowerShriekCompOfEq_inv ℓ r _ _ _
       (specializationUnit_comp_inv_map_comp_exchange_eq ℓ j ι φ hM hN r ι' w hI)) := by

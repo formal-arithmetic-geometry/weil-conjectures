@@ -81,19 +81,18 @@ and closed immersion `j`, the adjoint `e : Rj_! ℚ̄_ℓ ⟶ ℚ̄_ℓ` of `ℚ
 `ℚ̄_ℓ ⟶ Rj_* Lj^* ℚ̄_ℓ ≅ Rj_* ℚ̄_ℓ`, is `Rj_! ℚ̄_ℓ ≅ Rj_* ℚ̄_ℓ`. -/
 theorem homEquiv_symm_unitIso_inv_comp_unit (j : B ⟶ F) [IsOpenImmersion j.left]
     [IsProper j.left] :
-    ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).homEquiv
+    ((boundedConstructibleUpperShriekAdjunction ℓ j).homEquiv
         _ _).symm (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         j).unit.app (𝟙_ _) ≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+      (boundedConstructibleLowerStar ℓ j).map
         (Functor.Monoidal.εIso
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).inv =
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _) := by
   have h := Adjunction.homEquiv_symm_comp_conjugate_comp_unit
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ j)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperShriekAdjunction ℓ j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen ℓ j)
