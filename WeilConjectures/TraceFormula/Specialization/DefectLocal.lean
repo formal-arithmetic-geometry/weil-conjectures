@@ -134,7 +134,8 @@ lemma isClosedImmersion_centreSpecialFibreMap [IsClosedImmersion f.left] :
   have : IsClosedImmersion
       (deformationTotalMap (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I) k') :=
     MorphismProperty.of_isPullback (isPullback_deformationTotalMap_toSpace _ _ k').flip this
-  exact MorphismProperty.of_isPullback (isPullback_deformationSpecialFibreMap_toTotal _ _ k').flip this
+  exact MorphismProperty.of_isPullback
+    (isPullback_deformationSpecialFibreMap_toTotal _ _ k').flip this
 
 instance [IsOpenImmersion f.left] : IsOpenImmersion (centreSpecialFibreMap f I k').left :=
   isOpenImmersion_deformationSpecialFibreMap_of_isOpenImmersion _ _ k'
