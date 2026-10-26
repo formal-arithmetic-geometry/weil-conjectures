@@ -42,15 +42,17 @@ namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] (S : Scheme.{u})
+  [Abelian.HasFunctorialFlatResolution A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (S : Scheme.{u})
 
 /-- Blueprint `lem-pod-point-dualizing-complex`: Dualizing complex of the point.
 
 The exceptional inverse image of the identity is the identity, so `ω_S = R(𝟙 S)^! Λ_S ≅ Λ_S`
 (`AlgebraicGeometry.Etale.dualizingComplexIdIso`), and the Verdier dual relative to the identity
 of `S` is the coefficient dual: `𝔻_S C = RHom(C, ω_S) ≅ RHom(C, Λ_S) = C^∨`, naturally in `C`. -/
-noncomputable def verdierDualIdIso : verdierDual A (𝟙 S) ≅ DerivedCategory.coefficientDual A S :=
-  (RHom(S)[A]).flip.mapIso (dualizingComplexIdIso A S)
+noncomputable def verdierDualIdIso : verdierDual Λ (𝟙 S) ≅ DerivedCategory.coefficientDual
+    (ModuleCat.{u + 1} Λ) S :=
+  (RHom(S)[ModuleCat.{u + 1} Λ]).flip.mapIso (dualizingComplexIdIso Λ S)
 
 end Etale
 

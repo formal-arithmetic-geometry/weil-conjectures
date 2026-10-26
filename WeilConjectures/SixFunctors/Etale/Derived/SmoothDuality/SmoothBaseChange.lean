@@ -147,8 +147,8 @@ morphism is constructed and shown to be an isomorphism. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar {X' Y' : Scheme.{u}}
     {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] [QuasiCompact f'] :
-    Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ≅
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ]) :=
+    Nonempty (R(f)^![Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ≅
+      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![Λ]) :=
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq
   ⟨asIso (rightDerivedUpperShriekBaseChangeMap Λ sq)⟩
 

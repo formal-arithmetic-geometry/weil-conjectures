@@ -52,23 +52,23 @@ variable {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A
 /-- `Rp_*` and `Rq_*` agree on morphisms for `p = q`, through the casts. -/
 lemma lowerStar_map_comp_eqToHom_of_eq {p q : A ⟶ B} (h : p = q)
     {a b : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (x : a ⟶ b) :
-    (boundedConstructibleLowerStar _ ℓ p).map x ≫ eqToHom (congrArg (fun r : A ⟶ B ↦
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj b) h) =
+    (boundedConstructibleLowerStar ℓ p).map x ≫ eqToHom (congrArg (fun r : A ⟶ B ↦
+      (boundedConstructibleLowerStar ℓ r).obj b) h) =
       eqToHom (congrArg (fun r : A ⟶ B ↦
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj a) h) ≫
-        (boundedConstructibleLowerStar _ ℓ q).map x := by
+        (boundedConstructibleLowerStar ℓ r).obj a) h) ≫
+        (boundedConstructibleLowerStar ℓ q).map x := by
   subst h
   simp
 
 /-- The points `𝟙 ⟶ Rp_* 𝟙` of `p = q` agree through the cast. -/
 lemma unit_comp_map_εIso_inv_comp_eqToHom_of_eq {p q : A ⟶ B} (h : p = q) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar _ ℓ p).map
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ p).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ p).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ p)).inv) ≫
       eqToHom (congrArg (fun r : A ⟶ B ↦
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj (𝟙_ _)) h) =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ q).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar _ ℓ q).map
+        (boundedConstructibleLowerStar ℓ r).obj (𝟙_ _)) h) =
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ q).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar ℓ q).map
           (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ q)).inv := by
   subst h
   simp
@@ -82,7 +82,7 @@ kernel class followed by the evaluation kernel (blueprint `thm-trf-trace-proper-
 Step 1). -/
 lemma mate_comp_traceMap_comp_supportIso (c : Correspondence ℓ K) (F : c.FixedLocus) :
     c.mate ≫ c.traceMap F ≫ F.supportIso.hom =
-      (boundedConstructibleUpperShriekAdjunction _ ℓ c.support).homEquiv _ _
+      (boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _
         (c.kernelClass ≫ evaluationKernel ℓ K) := by
   rw [traceMap_eq, Adjunction.homEquiv_naturality_right, kernelClass,
     Equiv.apply_symm_apply]

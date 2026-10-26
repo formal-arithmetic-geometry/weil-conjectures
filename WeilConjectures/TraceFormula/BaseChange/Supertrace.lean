@@ -49,52 +49,58 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
-/-- The endomorphisms of the unit module `Λ_X` act on the unit of `Dᵇc(X)⟦Λ⟧`: an endomorphism
+/-- The endomorphisms of the unit module `Λ_X` act on the unit of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: an endomorphism
 of `Λ_X` is placed in degree `0`. -/
 noncomputable def homologyUnitEndRingHom :
     End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left))) →+* End (𝟙_ (Dᵇc(X.left)⟦Λ⟧)) :=
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))) →+* End (𝟙_
+          (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   let F := HomologicalComplex.single
       (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-        (condensedRingObj Λ X.left))
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
       (ComplexShape.up ℤ) 0 ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙
     DerivedCategory.Qh
-  have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_ (Dᵇc(X.left)⟦Λ⟧))) :=
+  have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_
+      (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
     (ObjectProperty.fullyFaithfulι _).map_bijective _ _
   have : IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := CategoryTheory.Mod (Sheaf
-      (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj Λ X.left)))) :=
+      (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+          X.left)))) :=
     inferInstanceAs (IsIso (𝟙 _))
   ((RingEquiv.ofBijective _ hι).symm.toRingHom.comp
     ((asIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := CategoryTheory.Mod (Sheaf
         (Scheme.ProEt.topology X.left) Ab.{u + 1})
-          (condensedRingObj Λ X.left))))).symm.conjRingEquiv.toRingHom.comp
-      (F.mapEndRingHom (CategoryTheory.Mod.regular (condensedRingObj Λ X.left)))))
+          (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+              X.left))))).symm.conjRingEquiv.toRingHom.comp
+      (F.mapEndRingHom (CategoryTheory.Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+          X.left)))))
 
-omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
-/-- Through the inclusion `Dᵇc(X)⟦Λ⟧ ⥤ D(Mod_{Λ_X})`, `homologyUnitEndRingHom` is the placement
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- Through the inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{Λ_X})`, `homologyUnitEndRingHom` is the placement
 of endomorphisms of the unit in degree `0`, `DerivedCategory.singleFunctorUnitEndRingHom`. -/
 lemma ι_map_homologyUnitEndRingHom
     (x : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left)))) :
-    (boundedConstructible (condensedRingObj Λ X.left)).ι.map (homologyUnitEndRingHom Λ ℓ X x) =
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) :
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+        (homologyUnitEndRingHom ℓ X x) =
       DerivedCategory.singleFunctorUnitEndRingHom _ x := by
   unfold homologyUnitEndRingHom
   simp only [RingHom.coe_comp, Function.comp_apply, RingEquiv.toRingHom_eq_coe,
     RingEquiv.coe_toRingHom]
   have hb : Function.Bijective ((ObjectProperty.ι (boundedConstructible
-      (condensedRingObj Λ X.left))).mapEndRingHom (𝟙_ (Dᵇc(X.left)⟦Λ⟧))) :=
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))).mapEndRingHom (𝟙_
+          (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
     (ObjectProperty.fullyFaithfulι _).map_bijective _ _
   refine ((RingEquiv.ofBijective _ hb).apply_symm_apply _).trans ?_
   have hε : Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := CategoryTheory.Mod
-      (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj Λ X.left))) = 𝟙 _ :=
+      (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj
+          (Profinite.padicAlgClRingObj ℓ) X.left))) = 𝟙 _ :=
     rfl
   erw [RingHom.comp_apply]
   erw [Iso.conjRingEquiv_apply]
@@ -117,7 +123,7 @@ are `(-1)ⁿ r` for the endomorphism `r` of the unit inducing the block
 theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)]
     (P : Dᵇc((point Ω).left)⟦Profinite.padicAlgClRingObj ℓ⟧) [HasRightDual P] (v : P ⟶ P) :
-    trace v = homologyUnitEndRingHom (Profinite.padicAlgClRingObj ℓ) ℓ (point Ω)
+    trace v = homologyUnitEndRingHom ℓ (point Ω)
       (superTrace
         (fun j ↦ (DerivedCategory.homologyFunctor _ j).obj P.obj)
         (fun j ↦ (DerivedCategory.homologyFunctor _ j).map v.hom)) := by

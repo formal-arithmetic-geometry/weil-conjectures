@@ -144,8 +144,8 @@ quasi-separated base, by Nagata's theorem; it is kept because no composition ins
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] :
-    Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
-      R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+    Nonempty (R(f ≫ g)^![Λ] ≅
+      R(g)^![Λ] ⋙ R(f)^![Λ]) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g
   exact ⟨Adjunction.rightAdjointUniq
     ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft e)

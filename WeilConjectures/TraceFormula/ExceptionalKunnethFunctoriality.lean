@@ -88,9 +88,9 @@ variable {X Y S : Over (Spec (.of k))}
 
 /-- The composition isomorphism `Rf_! ≅ Rf₁_! ⋙ Rf₂_!` for a factorisation `f₁ ≫ f₂ = f`. -/
 noncomputable def boundedConstructibleLowerShriekCompOfEq (h : f₁ ≫ f₂ = f) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁ ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₂ :=
+    boundedConstructibleLowerShriek ℓ f ≅
+      boundedConstructibleLowerShriek ℓ f₁ ⋙
+        boundedConstructibleLowerShriek ℓ f₂ :=
   eqToIso (by rw [h]) ≪≫ boundedConstructibleLowerShriekComp_padicAlgCl ℓ f₁ f₂
 
 /-- The composition isomorphism `Lf^* ≅ Lf₂^* ⋙ Lf₁^*` for a factorisation `f₁ ≫ f₂ = f`. -/
@@ -102,18 +102,18 @@ noncomputable def boundedConstructibleUpperStarCompOfEq (h : f₁ ≫ f₂ = f) 
 
 /-- The composition isomorphism `Rf^! ≅ Rf₂^! ⋙ Rf₁^!` for a factorisation `f₁ ≫ f₂ = f`. -/
 noncomputable def boundedConstructibleUpperShriekCompOfEq (h : f₁ ≫ f₂ = f) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ≅
-      boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₂ ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f₁ :=
+    boundedConstructibleUpperShriek ℓ f ≅
+      boundedConstructibleUpperShriek ℓ f₂ ⋙
+        boundedConstructibleUpperShriek ℓ f₁ :=
   eqToIso (by rw [h]) ≪≫ boundedConstructibleUpperShriekComp_padicAlgCl ℓ f₁ f₂
 
 /-- The composition isomorphism of the exceptional inverse images along a factorisation is the
 conjugate of that of the lower shrieks. -/
 lemma boundedConstructibleUpperShriekCompOfEq_eq (h : f₁ ≫ f₂ = f) :
     boundedConstructibleUpperShriekCompOfEq ℓ h =
-      conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ f₁).comp
-          (boundedConstructibleUpperShriekAdjunction _ ℓ f₂))
+      conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
+        ((boundedConstructibleUpperShriekAdjunction ℓ f₁).comp
+          (boundedConstructibleUpperShriekAdjunction ℓ f₂))
         (boundedConstructibleLowerShriekCompOfEq ℓ h).symm := by
   subst h
   ext : 1
@@ -125,16 +125,16 @@ lemma boundedConstructibleUpperShriekCompOfEq_eq (h : f₁ ≫ f₂ = f) :
 lemma boundedConstructibleExceptionalProjectionMorphism_comp_of_eq (h : f₁ ≫ f₂ = f)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ f K B ≫
+    boundedConstructibleExceptionalProjectionMorphism ℓ f K B ≫
         (boundedConstructibleLowerShriekCompOfEq ℓ h).hom.app
           (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) ≫
-        (boundedConstructibleLowerShriek _ ℓ f₂).map ((boundedConstructibleLowerShriek _ ℓ f₁).map
+        (boundedConstructibleLowerShriek ℓ f₂).map ((boundedConstructibleLowerShriek ℓ f₁).map
           (K ◁ (boundedConstructibleUpperStarCompOfEq ℓ h).hom.app B)) =
       (boundedConstructibleLowerShriekCompOfEq ℓ h).hom.app K ▷ B ≫
-        boundedConstructibleExceptionalProjectionMorphism _ ℓ f₂
-          ((boundedConstructibleLowerShriek _ ℓ f₁).obj K) B ≫
-        (boundedConstructibleLowerShriek _ ℓ f₂).map
-          (boundedConstructibleExceptionalProjectionMorphism _ ℓ f₁ K
+        boundedConstructibleExceptionalProjectionMorphism ℓ f₂
+          ((boundedConstructibleLowerShriek ℓ f₁).obj K) B ≫
+        (boundedConstructibleLowerShriek ℓ f₂).map
+          (boundedConstructibleExceptionalProjectionMorphism ℓ f₁ K
             ((boundedConstructibleUpperStar _ ℓ f₂).obj B)) := by
   subst h
   simpa [boundedConstructibleLowerShriekCompOfEq, boundedConstructibleUpperStarCompOfEq] using
@@ -144,20 +144,20 @@ lemma boundedConstructibleExceptionalProjectionMorphism_comp_of_eq (h : f₁ ≫
 composite adjunction `Rf₁_! ⋙ Rf₂_! ⊣ Rf₂^! ⋙ Rf₁^!`, through the composition isomorphisms. -/
 lemma boundedConstructibleUpperShriekAdjunction_counit_app_of_eq (h : f₁ ≫ f₂ = f)
     (B : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (d : (boundedConstructibleUpperShriek _ ℓ f₁).obj
-        ((boundedConstructibleUpperShriek _ ℓ f₂).obj B) ≅
-      (boundedConstructibleUpperShriek _ ℓ f).obj B)
-    (hB : (boundedConstructibleUpperShriek _ ℓ (f₁ ≫ f₂)).obj B =
-      (boundedConstructibleUpperShriek _ ℓ f).obj B)
+    (d : (boundedConstructibleUpperShriek ℓ f₁).obj
+        ((boundedConstructibleUpperShriek ℓ f₂).obj B) ≅
+      (boundedConstructibleUpperShriek ℓ f).obj B)
+    (hB : (boundedConstructibleUpperShriek ℓ (f₁ ≫ f₂)).obj B =
+      (boundedConstructibleUpperShriek ℓ f).obj B)
     (hd : d = ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f₁ f₂).app B).symm ≪≫
       eqToIso hB) :
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app B =
+    (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app B =
       (boundedConstructibleLowerShriekCompOfEq ℓ h).hom.app _ ≫
-        (boundedConstructibleLowerShriek _ ℓ f₂).map
-          ((boundedConstructibleLowerShriek _ ℓ f₁).map d.inv ≫
-            (boundedConstructibleUpperShriekAdjunction _ ℓ f₁).counit.app
-              ((boundedConstructibleUpperShriek _ ℓ f₂).obj B)) ≫
-        (boundedConstructibleUpperShriekAdjunction _ ℓ f₂).counit.app B := by
+        (boundedConstructibleLowerShriek ℓ f₂).map
+          ((boundedConstructibleLowerShriek ℓ f₁).map d.inv ≫
+            (boundedConstructibleUpperShriekAdjunction ℓ f₁).counit.app
+              ((boundedConstructibleUpperShriek ℓ f₂).obj B)) ≫
+        (boundedConstructibleUpperShriekAdjunction ℓ f₂).counit.app B := by
   subst h hd
   simp [boundedConstructibleLowerShriekCompOfEq, boundedConstructibleUpperShriekComp_padicAlgCl]
 
@@ -186,8 +186,8 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert_of_eq
       (boundedConstructibleUpperStar _ ℓ l).map
           ((boundedConstructibleLowerShriekCompOfEq ℓ hf).hom.app M) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app
-          ((boundedConstructibleLowerShriek _ ℓ v₂).obj M) ≫
-        (boundedConstructibleLowerShriek _ ℓ w₁).map
+          ((boundedConstructibleLowerShriek ℓ v₂).obj M) ≫
+        (boundedConstructibleLowerShriek ℓ w₁).map
           ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app M) := by
   subst hf' hf
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ sq₁ sq₂ M]
@@ -350,13 +350,13 @@ noncomputable def exceptionalKunnethTraceOfSquare (pW : W ⟶ X) (qW : W ⟶ Z) 
   exceptionalKunnethProdMapTraceAux
     (B := (boundedConstructibleUpperStar _ ℓ pW).obj M)
     (B' := (boundedConstructibleUpperStar _ ℓ G).obj ((boundedConstructibleUpperStar _ ℓ pV).obj M))
-    (boundedConstructibleLowerShriek _ ℓ G) (boundedConstructibleUpperStar _ ℓ qV)
-    (boundedConstructibleUpperStar _ ℓ qW) (boundedConstructibleUpperShriekAdjunction _ ℓ g) _
+    (boundedConstructibleLowerShriek ℓ G) (boundedConstructibleUpperStar _ ℓ qV)
+    (boundedConstructibleUpperStar _ ℓ qW) (boundedConstructibleUpperShriekAdjunction ℓ g) _
     (dualizingComplexComp ℓ g) (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     ((boundedConstructibleUpperStarCompOfEq ℓ hp).hom.app M)
     ((boundedConstructibleUpperStar _ ℓ pV).obj M)
-    (boundedConstructibleExceptionalProjectionMorphism _ ℓ G
+    (boundedConstructibleExceptionalProjectionMorphism ℓ G
       ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z))
       ((boundedConstructibleUpperStar _ ℓ pV).obj M))
     (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _)
@@ -374,40 +374,40 @@ theorem exceptionalKunnethAdjoint_comp_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
     (sqZ : IsPullback qW pW (toPoint Z) (toPoint X))
     (sqY : IsPullback qV pV (toPoint Y) (toPoint X))
     (bcZ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qW ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ pW ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z) ⋙
+        boundedConstructibleLowerShriek ℓ pW ≅
+      boundedConstructibleLowerShriek ℓ (toPoint Z) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
     (hbcZ : ∀ K, bcZ.inv.app K = (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqZ).app K)
     (bcY : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ qV ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ pV ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y) ⋙
+        boundedConstructibleLowerShriek ℓ pV ≅
+      boundedConstructibleLowerShriek ℓ (toPoint Y) ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
     (hbcY : ∀ K, bcY.inv.app K = (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app K)
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (aZ : (boundedConstructibleLowerShriek _ ℓ pW).obj
+    (aZ : (boundedConstructibleLowerShriek ℓ pW).obj
       ((boundedConstructibleUpperStar _ ℓ pW).obj M ⊗
         (boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z)) ⟶ M)
-    (haZ : aZ = (boundedConstructibleLowerShriek _ ℓ pW).map (β_ _ _).hom ≫
-      inv (boundedConstructibleExceptionalProjectionMorphism _ ℓ pW
+    (haZ : aZ = (boundedConstructibleLowerShriek ℓ pW).map (β_ _ _).hom ≫
+      inv (boundedConstructibleExceptionalProjectionMorphism ℓ pW
         ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z)) M) ≫
       (bcZ.hom.app (dualizingComplex' ℓ Z) ▷ M) ≫
       ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)) ▷ M) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z)).counit.app (𝟙_ _)) ▷ M) ≫
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv ▷ M) ≫
       (λ_ M).hom)
-    (aY : (boundedConstructibleLowerShriek _ ℓ pV).obj
+    (aY : (boundedConstructibleLowerShriek ℓ pV).obj
       ((boundedConstructibleUpperStar _ ℓ pV).obj M ⊗
         (boundedConstructibleUpperStar _ ℓ qV).obj (dualizingComplex' ℓ Y)) ⟶ M)
-    (haY : aY = (boundedConstructibleLowerShriek _ ℓ pV).map (β_ _ _).hom ≫
-      inv (boundedConstructibleExceptionalProjectionMorphism _ ℓ pV
+    (haY : aY = (boundedConstructibleLowerShriek ℓ pV).map (β_ _ _).hom ≫
+      inv (boundedConstructibleExceptionalProjectionMorphism ℓ pV
         ((boundedConstructibleUpperStar _ ℓ qV).obj (dualizingComplex' ℓ Y)) M) ≫
       (bcY.hom.app (dualizingComplex' ℓ Y) ▷ M) ≫
       ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)) ▷ M) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ▷ M) ≫
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv ▷ M) ≫
       (λ_ M).hom) :
     aZ = (boundedConstructibleLowerShriekCompOfEq ℓ hp).hom.app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ pV).map
+      (boundedConstructibleLowerShriek ℓ pV).map
         (exceptionalKunnethTraceOfSquare ℓ pW qW pV qV G g sq hp M) ≫ aY := by
   have ibs := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have h₁ := boundedConstructibleExceptionalProjectionMorphism_comp_of_eq ℓ hp
@@ -421,24 +421,24 @@ theorem exceptionalKunnethAdjoint_comp_of_isPullback (pW : W ⟶ X) (qW : W ⟶ 
   exact exceptionalKunnethAdjoint_comp_prodMap_aux'
     (B := (boundedConstructibleUpperStar _ ℓ pW).obj M)
     (B' := (boundedConstructibleUpperStar _ ℓ G).obj ((boundedConstructibleUpperStar _ ℓ pV).obj M))
-    (boundedConstructibleLowerShriek _ ℓ pW) (boundedConstructibleLowerShriek _ ℓ G)
-    (boundedConstructibleLowerShriek _ ℓ pV) (boundedConstructibleLowerShriekCompOfEq ℓ hp)
+    (boundedConstructibleLowerShriek ℓ pW) (boundedConstructibleLowerShriek ℓ G)
+    (boundedConstructibleLowerShriek ℓ pV) (boundedConstructibleLowerShriekCompOfEq ℓ hp)
     (boundedConstructibleUpperStar _ ℓ (toPoint X))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ g)
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y))
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z))
+    (boundedConstructibleUpperShriekAdjunction ℓ g)
     (boundedConstructibleUpperStar _ ℓ qV) (boundedConstructibleUpperStar _ ℓ qW) bcY bcZ
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq) ibs
     (boundedConstructibleLowerShriekCompOfEq ℓ (comp_toPoint g)) _ (dualizingComplexComp ℓ g) h₃ M
     ((boundedConstructibleUpperStarCompOfEq ℓ hp).hom.app M)
     ((boundedConstructibleUpperStar _ ℓ pV).obj M)
-    (boundedConstructibleExceptionalProjectionMorphism _ ℓ pW
+    (boundedConstructibleExceptionalProjectionMorphism ℓ pW
       ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z)) M)
     (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _)
-    (fun W ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ pV W M)
+    (fun W ↦ boundedConstructibleExceptionalProjectionMorphism ℓ pV W M)
     (fun W ↦ isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ W M)
-    (fun f ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _ f M)
-    (boundedConstructibleExceptionalProjectionMorphism _ ℓ G
+    (fun f ↦ boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _ f M)
+    (boundedConstructibleExceptionalProjectionMorphism ℓ G
       ((boundedConstructibleUpperStar _ ℓ qW).obj (dualizingComplex' ℓ Z))
       ((boundedConstructibleUpperStar _ ℓ pV).obj M))
     (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _) h₁ h₂
@@ -513,7 +513,7 @@ theorem exceptionalKunnethAdjoint_comp_prodMap (M : Dᵇc(X.left)⟦Profinite.pa
     (g : Z ⟶ Y) :
     exceptionalKunnethAdjoint ℓ (Y := Z) M =
       (boundedConstructibleLowerShriekCompOfEq ℓ (prodMap_id_fst X g)).hom.app _ ≫
-        (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+        (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
           (exceptionalKunnethProdMapTrace ℓ M g) ≫
         exceptionalKunnethAdjoint ℓ (Y := Y) M := by
   rw [exceptionalKunnethProdMapTrace_eq]
@@ -533,15 +533,15 @@ theorem exceptionalKunnethAdjoint_comp_prodMap (M : Dᵇc(X.left)⟦Profinite.pa
 theorem exceptionalKunnethMap_comp_prodMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (g : Z ⟶ Y) :
     exceptionalKunnethMap ℓ (Y := Z) M =
-      (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.map (𝟙 X) g)).homEquiv _ _
+      (boundedConstructibleUpperShriekAdjunction ℓ (prod.map (𝟙 X) g)).homEquiv _ _
           (exceptionalKunnethProdMapTrace ℓ M g ≫ exceptionalKunnethMap ℓ (Y := Y) M) ≫
         (boundedConstructibleUpperShriekCompOfEq ℓ (prodMap_id_fst X g)).inv.app M := by
   rw [boundedConstructibleUpperShriekCompOfEq_eq]
   unfold exceptionalKunnethMap
   exact homEquiv_comp_of_eq_aux
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Z ⟶ X))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.map (𝟙 X) g))
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Z ⟶ X))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.map (𝟙 X) g))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleLowerShriekCompOfEq ℓ (prodMap_id_fst X g))
     (exceptionalKunnethProdMapTrace ℓ M g) (exceptionalKunnethAdjoint ℓ (Y := Y) M)
     (exceptionalKunnethAdjoint ℓ (Y := Z) M) (exceptionalKunnethAdjoint_comp_prodMap ℓ M g)

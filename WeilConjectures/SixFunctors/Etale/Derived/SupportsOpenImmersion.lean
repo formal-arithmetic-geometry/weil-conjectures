@@ -46,6 +46,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
+  (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {U X Z Z' : Scheme.{u}}
 
@@ -99,28 +100,31 @@ counit of `Ri_! ⊣ Ri^!`, which exist uniquely since `e_! T` is supported on `Z
 (`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_openComplement_obj_openImmersionLowerShriek`).
 -/
 theorem isIso_supportedRestriction_of_isOpenImmersion (e : U ⟶ X) [IsOpenImmersion e]
-    (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint]
-    [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
-    (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L' : DerivedCategory (Sheaf U.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
-    IsIso (supportedRestriction A e i i' g hg L L' τ) := by
-  set ψ := supportedRestriction A e i i' g hg L L' τ
-  set ε := (rightDerivedUpperShriekAdjunction A i).counit.app L
-  set ε' := (rightDerivedUpperShriekAdjunction A i').counit.app L'
-  have hψ : ψ ≫ ε' = (L((e)^*[A])).map ε ≫ τ.hom :=
-    (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec
-  let adj : D((e)_!open[A]) ⊣ L((e)^*[A]) :=
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction A e).ofNatIsoRight
-      (leftDerivedUpperStarIsoMapDerivedCategory A e).symm
+    (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i]
+    [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (τ :
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :
+    IsIso (supportedRestriction Λ e i i' g hg L L' τ) := by
+  set ψ := supportedRestriction Λ e i i' g hg L L' τ
+  set ε := (rightDerivedUpperShriekAdjunction Λ i).counit.app L
+  set ε' := (rightDerivedUpperShriekAdjunction Λ i').counit.app L'
+  have hψ : ψ ≫ ε' = (L((e)^*[ModuleCat.{u + 1} Λ])).map ε ≫ τ.hom :=
+    (existsUnique_supportedRestriction Λ e i i' g hg L L' τ).exists.choose_spec
+  let adj : D((e)_!open[ModuleCat.{u + 1} Λ]) ⊣ L((e)^*[ModuleCat.{u + 1} Λ]) :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) e).ofNatIsoRight
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) e).symm
   -- lifts of maps out of objects supported on `Z'` through `Le^* ε ≫ τ`
-  have key : ∀ (T : DerivedCategory (Sheaf U.smallEtaleTopology A))
-      (_ : IsZero ((L((i'.openComplement.ι)^*[A])).obj T)) (β : T ⟶ L'),
-      ∃! φ : T ⟶ (L((e)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L)),
-        φ ≫ (L((e)^*[A])).map ε ≫ τ.hom = β := by
+  have key : ∀ (T : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (_ : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj T)) (β : T ⟶ L'),
+      ∃! φ : T ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj
+          ((R(i)^![Λ]).obj L)),
+        φ ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map ε ≫ τ.hom = β := by
     intro T hT β
-    have hT' := isZero_leftDerivedUpperStar_openComplement_obj_openImmersionLowerShriek A e i i'
+    have hT' := isZero_leftDerivedUpperStar_openComplement_obj_openImmersionLowerShriek
+        (ModuleCat.{u + 1} Λ) e i i'
       g hg hT
-    obtain ⟨b, hb, hb'⟩ := existsUnique_comp_counit_of_isZero A i i.openComplement.ι
+    obtain ⟨b, hb, hb'⟩ := existsUnique_comp_counit_of_isZero Λ i i.openComplement.ι
       i.range_eq_compl_range_openComplement_ι hT' ((adj.homEquiv _ _).symm (β ≫ τ.inv))
     refine ⟨adj.homEquiv _ _ b, ?_, fun φ hφ ↦ ?_⟩
     · dsimp only
@@ -137,8 +141,9 @@ theorem isIso_supportedRestriction_of_isOpenImmersion (e : U ⟶ X) [IsOpenImmer
   have hdisj : Disjoint (Set.range i.base) (Set.range i.openComplement.ι.base) := by
     rw [i.range_eq_compl_range_openComplement_ι]
     exact disjoint_compl_left
-  have hS : IsZero ((L((i'.openComplement.ι)^*[A])).obj
-      ((L((e)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L)))) := by
+  have hS : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj
+      ((L((e)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L))))
+          := by
     let k := i'.openComplement.ι ≫ e
     have hk : Set.range k.base ⊆ Set.range i.openComplement.ι.base := by
       rw [← compl_compl (Set.range i.openComplement.ι.base),
@@ -148,21 +153,22 @@ theorem isIso_supportedRestriction_of_isOpenImmersion (e : U ⟶ X) [IsOpenImmer
       apply x.2
       rw [Scheme.range_snd_of_isPullback hg]
       exact ⟨z, hx.symm⟩
-    exact (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i
+    exact (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ)
+        i
       i.openComplement.ι hdisj k hk _).of_iso
-        ((leftDerivedUpperStarComp A i'.openComplement.ι e).app _).symm
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) i'.openComplement.ι e).app _).symm
   have hdisj' : Disjoint (Set.range i'.base) (Set.range i'.openComplement.ι.base) := by
     rw [i'.range_eq_compl_range_openComplement_ι]
     exact disjoint_compl_left
-  have hB : IsZero ((L((i'.openComplement.ι)^*[A])).obj
-      ((R(i')_![A]).obj ((R(i')^![A]).obj L'))) :=
-    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i'
+  have hB : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj
+      ((R(i')_![ModuleCat.{u + 1} Λ]).obj ((R(i')^![Λ]).obj L'))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ) i'
       i'.openComplement.ι hdisj' i'.openComplement.ι subset_rfl _
   obtain ⟨χ, hχ, -⟩ := key _ hB ε'
   refine ⟨χ, ?_, ?_⟩
   · refine (key _ hS _).unique ?_ (Category.id_comp _)
     rw [Category.assoc, hχ, hψ]
-  · refine (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+  · refine (existsUnique_comp_counit_of_isZero Λ i' i'.openComplement.ι
       i'.range_eq_compl_range_openComplement_ι hB ε').unique ?_ (Category.id_comp _)
     erw [Category.assoc, hψ]
     exact hχ

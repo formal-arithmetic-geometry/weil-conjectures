@@ -71,9 +71,9 @@ lemma isZero_leftDerivedUpperStar_openComplement_rightDerivedLowerStar_of_isZero
   obtain ⟨e'⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar
     (ModuleCat.{u + 1} Λ) (j ≫ i₁)
   let φ : (R((i₁)_*[ModuleCat.{u + 1} Λ])).obj S ≅
-      (R(j ≫ i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(j)^![ModuleCat.{u + 1} Λ]).obj S) :=
+      (R(j ≫ i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(j)^![Λ]).obj S) :=
     (R((i₁)_*[ModuleCat.{u + 1} Λ])).mapIso
-        ((asIso ((rightDerivedUpperShriekAdjunction _ j).counit.app S)).symm ≪≫ e.app _) ≪≫
+        ((asIso ((rightDerivedUpperShriekAdjunction Λ j).counit.app S)).symm ≪≫ e.app _) ≪≫
       (rightDerivedLowerStarComp _ j i₁).app _ ≪≫ (e'.app _).symm
   exact (isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint _ (j ≫ i₁) _ _
     ((disjoint_range_openComplement_ι i).mono_right hji)).of_iso
@@ -87,12 +87,12 @@ theorem isIso_supportedPullbackForget (hsub : Set.range i.base ⊆ Set.range i�
     (hd : Disjoint (Set.range (j.openComplement.ι ≫ i₁).base) (Set.range i.base))
     (hji : Set.range (j ≫ i₁).base ⊆ Set.range i.base)
     (L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (supportedPullbackForget (ModuleCat.{u + 1} Λ) i i₁ j hsub hd L) := by
-  set κ := supportedForget (ModuleCat.{u + 1} Λ) i i₁ hsub L
+    IsIso (supportedPullbackForget Λ i i₁ j hsub hd L) := by
+  set κ := supportedForget Λ i i₁ hsub L
   refine isIso_of_comp_counit_of_bijective _ j
     (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_of_disjoint _ i₁ i j hd _)
     ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map κ) ?_ _
-    (supportedPullbackForget_comp_counit _ i i₁ j hsub hd L)
+    (supportedPullbackForget_comp_counit Λ i i₁ j hsub hd L)
   intro S hS
   let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i₁
   have := isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion Λ i₁
@@ -101,17 +101,17 @@ theorem isIso_supportedPullbackForget (hsub : Set.range i.base ⊆ Set.range i�
     hji S hS
   have hS₁' := isZero_leftDerivedUpperStar_openComplement_rightDerivedLowerStar Λ i₁ S
   have hW := isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint
-    (ModuleCat.{u + 1} Λ) i ((R(i)^![ModuleCat.{u + 1} Λ]).obj L) _
+    (ModuleCat.{u + 1} Λ) i ((R(i)^![Λ]).obj L) _
     ((disjoint_range_openComplement_ι i₁).mono_right hsub)
   have hC := isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint
-    (ModuleCat.{u + 1} Λ) i₁ ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj L) _
+    (ModuleCat.{u + 1} Λ) i₁ ((R(i₁)^![Λ]).obj L) _
     (disjoint_range_openComplement_ι i₁)
   let c : (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj S₁ ≅ S := asIso (adj.counit.app S)
   have hκ : Function.Bijective (fun f : S₁ ⟶ _ ↦ f ≫ κ) := by
     have key : (fun f : S₁ ⟶ _ ↦
-        f ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i₁).counit.app L) ∘
+        f ≫ (rightDerivedUpperShriekAdjunction Λ i₁).counit.app L) ∘
           (fun f : S₁ ⟶ _ ↦ f ≫ κ) =
-        (fun f ↦ f ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app L) := by
+        (fun f ↦ f ≫ (rightDerivedUpperShriekAdjunction Λ i).counit.app L) := by
       funext f
       simp only [Function.comp_apply, Category.assoc, κ, supportedForget_comp_counit]
     exact ((bijective_comp_counit_of_isZero Λ i₁ S₁ hS₁' L).of_comp_iff' _).1
@@ -166,13 +166,13 @@ theorem isIso_supportedClassMap_cupWithSupports
         (constantComplex Λ U))
     (hΔ : Δ ≫ (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U _).hom = 𝟙 _)
     (α : constantComplex Λ U ⟶
-      (R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj M))
+      (R(i₁)_![ModuleCat.{u + 1} Λ]).obj ((R(i₁)^![Λ]).obj M))
     (β : constantComplex Λ U ⟶
-      (R(i₂)_![ModuleCat.{u + 1} Λ]).obj ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj N))
+      (R(i₂)_![ModuleCat.{u + 1} Λ]).obj ((R(i₂)^![Λ]).obj N))
     (hα : IsIso (supportedClassMap Λ i₁ α))
-    (hβ : IsIso (supportedClassMap Λ j (restrictSupportedClass (ModuleCat.{u + 1} Λ) i₁ i₂ j g hg
+    (hβ : IsIso (supportedClassMap Λ j (restrictSupportedClass Λ i₁ i₂ j g hg
       (leftDerivedUpperStarConstantComplexIso Λ i₁).inv τ β))) :
-    IsIso (supportedClassMap Λ i (cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h Δ α β)) := by
+    IsIso (supportedClassMap Λ i (cupWithSupports Λ i₁ i₂ i h Δ α β)) := by
   have hsub : Set.range i.base ⊆ Set.range i₁.base := h ▸ Set.inter_subset_left
   have hd := disjoint_range_openComplement_ι_comp_of_isPullback_of_subset hg
     (h ▸ Set.inter_subset_right)
@@ -184,10 +184,10 @@ theorem isIso_supportedClassMap_cupWithSupports
   have hΔ' : Δ = (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U _).inv :=
     (Iso.comp_hom_eq_id _).1 hΔ
   -- `α ∪ β = β ≫ Q`
-  have hcup : cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h Δ α β =
+  have hcup : cupWithSupports Λ i₁ i₂ i h Δ α β =
       β ≫ (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U _).inv ≫
         derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 _) ≫
-          supportedProduct (ModuleCat.{u + 1} Λ) i₁ i₂ i h M N := by
+          supportedProduct Λ i₁ i₂ i h M N := by
     have : derivedTensorHom (ModuleCat.{u + 1} Λ) α β =
         derivedTensorHom (ModuleCat.{u + 1} Λ) (𝟙 _) β ≫
           derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 _) := by
@@ -200,7 +200,7 @@ theorem isIso_supportedClassMap_cupWithSupports
     hαr.isIso_leftDerivedUpperStar_map
       (isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint _ i₁ _ _
         (disjoint_range_openComplement_ι i₁))
-  have hPi := isIso_supportedTensorRight (ModuleCat.{u + 1} Λ) i₁ e e' M
+  have hPi := isIso_supportedTensorRight Λ i₁ e e' M
   have hαN : IsIso ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map
       (derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N))) := by
     have hn := leftDerivedUpperStarTensorIso_hom_naturality_left i₁ α N
@@ -217,7 +217,7 @@ theorem isIso_supportedClassMap_cupWithSupports
   have hc : IsIso (τ.inv ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map
       ((derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U N).inv ≫
         derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N) ≫
-          supportedTensorRight (ModuleCat.{u + 1} Λ) i₁ M N)) := by
+          supportedTensorRight Λ i₁ M N)) := by
     rw [Functor.map_comp, Functor.map_comp]
     infer_instance
   -- reduce to the restriction to `Z₁`
@@ -227,16 +227,16 @@ theorem isIso_supportedClassMap_cupWithSupports
   have := isIso_supportedPullbackForget Λ i₁ i j hsub hd hji
     (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj M).obj N)
   refine IsSupportReflection.of_comp_iso
-    (asIso (supportedPullbackForget (ModuleCat.{u + 1} Λ) i i₁ j hsub hd _)) ?_
+    (asIso (supportedPullbackForget Λ i i₁ j hsub hd _)) ?_
   rw [asIso_hom, Functor.map_comp, Category.assoc, Category.assoc,
-    leftDerivedUpperStar_map_supportedProduct_comp (ModuleCat.{u + 1} Λ) i₁ i₂ i h j g hg M N L' τ
+    leftDerivedUpperStar_map_supportedProduct_comp Λ i₁ i₂ i h j g hg M N L' τ
       α]
   have hβr := (isIso_supportedClassMap_iff_isSupportReflection Λ _).1 hβ
   have := hβr.comp_iso ((R(j)_![ModuleCat.{u + 1} Λ]).mapIso
-    ((R(j)^![ModuleCat.{u + 1} Λ]).mapIso (asIso (τ.inv ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map
+    ((R(j)^![Λ]).mapIso (asIso (τ.inv ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map
       ((derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) U N).inv ≫
         derivedTensorHom (ModuleCat.{u + 1} Λ) α (𝟙 N) ≫
-          supportedTensorRight (ModuleCat.{u + 1} Λ) i₁ M N)))))
+          supportedTensorRight Λ i₁ M N)))))
   simpa only [restrictSupportedClass, Category.assoc, Functor.mapIso_hom, asIso_hom] using this
 
 end Cup

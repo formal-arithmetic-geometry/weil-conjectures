@@ -66,9 +66,9 @@ lemma homEquiv_comp_eqToHom_of_eq {p p' : A ⟶ B} (h : p = p')
     {M : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {N : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : (boundedConstructibleUpperStar _ ℓ p).obj M ⟶ N) :
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p).homEquiv _ _ φ ≫
-        eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerStar _ ℓ r).obj N) h) =
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p').homEquiv _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ p).homEquiv _ _ φ ≫
+        eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerStar ℓ r).obj N) h) =
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ p').homEquiv _ _
         (eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj M) h.symm) ≫ φ) := by
   subst h
   simp
@@ -81,10 +81,10 @@ lemma homEquiv_comp_lowerStarComp_hom_app {Z : Over (Spec (.of k))} [LocallyOfFi
     {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : (boundedConstructibleUpperStar _ ℓ a).obj ((boundedConstructibleUpperStar _ ℓ b).obj M) ⟶
       N) :
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ b).homEquiv _ _
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ a).homEquiv _ _ φ) ≫
-      (boundedConstructibleLowerStarComp _ ℓ a b).hom.app N =
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (a ≫ b)).homEquiv _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ b).homEquiv _ _
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ a).homEquiv _ _ φ) ≫
+      (boundedConstructibleLowerStarComp ℓ a b).hom.app N =
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (a ≫ b)).homEquiv _ _
       ((boundedConstructibleUpperStarComp _ ℓ a b).hom.app M ≫ φ) :=
   Adjunction.homEquiv_homEquiv_comp_hom_app _ _ _ _ _ rfl φ
 
@@ -95,12 +95,12 @@ lemma homEquiv_comp_lowerStarComp_inv_app {Z : Over (Spec (.of k))} [LocallyOfFi
     {M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : (boundedConstructibleUpperStar _ ℓ (a ≫ b)).obj M ⟶ N) :
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (a ≫ b)).homEquiv _ _ φ ≫
-      (boundedConstructibleLowerStarComp _ ℓ a b).inv.app N =
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ b).homEquiv _ _
-      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ a).homEquiv _ _
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (a ≫ b)).homEquiv _ _ φ ≫
+      (boundedConstructibleLowerStarComp ℓ a b).inv.app N =
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ b).homEquiv _ _
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ a).homEquiv _ _
         ((boundedConstructibleUpperStarComp _ ℓ a b).inv.app M ≫ φ)) := by
-  rw [← cancel_mono ((boundedConstructibleLowerStarComp _ ℓ a b).hom.app N), Category.assoc,
+  rw [← cancel_mono ((boundedConstructibleLowerStarComp ℓ a b).hom.app N), Category.assoc,
     Iso.inv_hom_id_app, Category.comp_id, homEquiv_comp_lowerStarComp_hom_app,
     Iso.hom_inv_id_app_assoc]
 
@@ -151,30 +151,30 @@ along `ΔX ≫ q = f ≫ ΔY` and the identifications `LΔ^* (M ⊠ M') ≅ M �
 lemma upperStarComp_inv_app_comp_prodUpperStarCounit (f : X ⟶ Y)
     (K N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (hΔ : diag X ≫ prod.map f f = f ≫ diag Y) :
     (boundedConstructibleUpperStarComp _ ℓ f (diag Y)).inv.app
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        ((boundedConstructibleLowerStar _ ℓ f).obj N)) ≫
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+        ((boundedConstructibleLowerStar ℓ f).obj N)) ≫
     eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperStar _ ℓ r).obj
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        ((boundedConstructibleLowerStar _ ℓ f).obj N))) hΔ.symm) ≫
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+        ((boundedConstructibleLowerStar ℓ f).obj N))) hΔ.symm) ≫
     (boundedConstructibleUpperStarComp _ ℓ (diag X) (prod.map f f)).hom.app
-      (externalProduct ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        ((boundedConstructibleLowerStar _ ℓ f).obj N)) ≫
+      (externalProduct ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+        ((boundedConstructibleLowerStar ℓ f).obj N)) ≫
     (boundedConstructibleUpperStar _ ℓ (diag X)).map
       ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (prod.map f f)) _ _).inv ≫
         (prodUpperStarCounit ℓ (prod.map_fst f f) K ⊗ₘ
           prodUpperStarCounit ℓ (prod.map_snd f f) N)) ≫
     (diagUpperStarExternalProductIso ℓ K N).hom =
   (boundedConstructibleUpperStar _ ℓ f).map
-      (diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar _ ℓ f).obj K)
-        ((boundedConstructibleLowerStar _ ℓ f).obj N)).hom ≫
+      (diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
+        ((boundedConstructibleLowerStar ℓ f).obj N)).hom ≫
     Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ f) _ _ ≫
-    ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K ⊗ₘ
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K ⊗ₘ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app
         N) := by
   simp only [diagUpperStarExternalProductIso, prodUpperStarCounit, Iso.trans_hom, Iso.symm_hom,
     tensorIso_hom, Iso.app_inv, Iso.app_hom, eqToIso.hom, Functor.Monoidal.μIso_inv,
     Functor.map_comp, Category.assoc]
-  exact boundedConstructibleUpperStarComp_square_coherence_tensor _ ℓ f (diag X) (diag Y)
+  exact boundedConstructibleUpperStarComp_square_coherence_tensor ℓ f (diag X) (diag Y)
     (prod.map f f) prod.fst prod.snd prod.fst prod.snd hΔ.symm (prod.map_fst f f)
     (prod.map_snd f f) (by simp [diag]) (by simp [diag]) (by simp [diag]) (by simp [diag]) _ _
 

@@ -74,7 +74,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + 2 * d + 1)
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(i)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace aT
   have : IsNoetherian T := { __ := LocallyOfFiniteType.isLocallyNoetherian aT }
@@ -99,7 +99,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     ⟨⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ (V.ι ≫ aT) aT V.ι rfl hbc',
       _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hMt⟩, hMt⟩
   have := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
-    (ModuleCat.{u + 1} Λ) i V.ι hij (by omega : b ≤ b + 2 * d) ⟨⟨hbc, hc⟩, ht⟩ hM
+    Λ i V.ι hij (by omega : b ≤ b + 2 * d) ⟨⟨hbc, hc⟩, ht⟩ hM
     (fun L ↦ hasProjectionFormula_of_finite Λ i _ L)
   rwa [show b + 2 * (d : ℤ) + 1 = b + 2 * d + 1 by ring] at this
 
@@ -136,7 +136,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeD
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(f)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ X := .of_hom f
   obtain ⟨L, _, hLs, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
@@ -175,7 +175,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_chart {U V Y : Schem
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U (a - 2 * n) (b + 2 * d + 1)
-      ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj K) := by
+      ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
@@ -214,7 +214,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_chart {U V Y : Schem
   have hc : c ≫ π ≫ v = ι ≫ W.ι ≫ π ≫ v := by
     rw [← Category.assoc ι, c.liftCoborder_ι]
   have heq : ∀ {g₁ g₂ : U ⟶ Y} [HasCompactification g₁] [HasCompactification g₂], g₁ = g₂ →
-      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+      Nonempty (R(g₁)^![Λ] ≅ R(g₂)^![Λ]) := by
     intro g₁ g₂ _ _ h
     subst h
     exact ⟨Iso.refl _⟩
@@ -252,7 +252,7 @@ theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologica
       ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * d + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+            ((R(f)^![Λ]).obj K) := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
@@ -306,7 +306,7 @@ theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologica
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U x : X.Opens).ι f
   have heq : ∀ {g₁ g₂ : ((U x : X.Opens) : Scheme.{u}) ⟶ Y} [HasCompactification g₁]
       [HasCompactification g₂], g₁ = g₂ →
-      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+      Nonempty (R(g₁)^![Λ] ≅ R(g₂)^![Λ]) := by
     intro g₁ g₂ _ _ h
     subst h
     exact ⟨Iso.refl _⟩
@@ -334,7 +334,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek {X Y : 
       (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - c) (b + c)
-          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+          ((R(f)^![Λ]).obj K) := by
   obtain ⟨D, hD⟩ :=
     exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le Λ aY f
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aY
@@ -355,7 +355,7 @@ theorem constructibleFiniteTor_rightDerivedUpperShriek {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R(f)^![Λ]).obj K) := by
   obtain ⟨c, hc⟩ := exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek Λ aY f
   obtain ⟨a, b, hab⟩ :=
     (exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor K).2 hK
@@ -416,7 +416,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriek (aY : Y ⟶ S
     DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y ⥤
       DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
   ObjectProperty.lift _
-    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) Y ⋙ R(f)^![ModuleCat.{u + 1} Λ])
+    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) Y ⋙ R(f)^![Λ])
     fun K ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f K.property
 
 end Functors

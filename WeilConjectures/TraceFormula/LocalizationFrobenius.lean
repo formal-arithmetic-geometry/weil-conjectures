@@ -60,9 +60,9 @@ variable (ℓ) in
 /-- The adjunction `Rj_! ⊣ Lj^*` of an open immersion: the adjunction `Rj_! ⊣ Rj^!` transported
 along `Rj^! ≅ Lj^*`. -/
 noncomputable def boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⊣
+    boundedConstructibleLowerShriek ℓ j ⊣
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).ofNatIsoRight
+  (boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
     (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)
 
 end Adjunction
@@ -128,9 +128,9 @@ variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
 variable (ℓ) in
 /-- The isomorphism `Ra_{X!} Ri_* ≅ Ra_{X!} Ri_! ≅ Ra_{Z!}` for a proper `i : Z ⟶ X`. -/
 noncomputable def boundedConstructibleLowerStarCompToPoint (i : Z ⟶ X) [IsProper i.left] :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ≅
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z) :=
+    boundedConstructibleLowerStar ℓ i ⋙
+        boundedConstructibleLowerShriek ℓ (toPoint X) ≅
+      boundedConstructibleLowerShriek ℓ (toPoint Z) :=
   Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i).symm _ ≪≫
     boundedConstructibleLowerShriekCompToPoint ℓ i
 
@@ -139,8 +139,8 @@ noncomputable def boundedConstructibleLowerStarCompToPoint (i : Z ⟶ X) [IsProp
 lemma compactPullback_app_eq (i : Z ⟶ X) [IsProper i.left]
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (compactPullback ℓ i).app N =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app N) ≫
         (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj N) := by
@@ -170,7 +170,7 @@ lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
     ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius =
       (compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         i).obj K.carrier) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
           ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom) := by
   rw [compactFrobenius_eq (X := Z) (Φ := ΦZ) ((weilUpperStar ℓ ΦZ Φ i hi).obj K),
@@ -190,7 +190,7 @@ theorem compactFrobenius_comp_compactPullback (hi : ΦZ ≫ i = i ≫ Φ)
       (compactPullback ℓ i).app K.carrier ≫
         ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+          (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
             ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
               (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
                 K.str.hom)) := by
@@ -215,11 +215,11 @@ variable (ℓ) in
 restriction `K|_U`, transported along `Ra_{X!} Rj_! ≅ Ra_{U!}`. -/
 noncomputable def compactFrobeniusOpenPiece (hj : ΦU ≫ j = j ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerShriek ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)) :=
   (boundedConstructibleLowerShriekCompToPoint ℓ j).hom.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) ≫
@@ -232,17 +232,17 @@ variable (ℓ) in
 restriction `K|_Z`, transported along `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
 noncomputable def compactFrobeniusClosedPiece (hi : ΦZ ≫ i = i ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) :=
   (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
     ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
         ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom)) ≫
     (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
@@ -256,27 +256,27 @@ omit [IsUniversalHomeomorphism ΦZ.left] in
 theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
     K.compactFrobenius ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K.carrier) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             i).unit.app K.carrier) ≫ compactFrobeniusClosedPiece ℓ hi K := by
   have e := compactPullback_app_eq (ℓ := ℓ) i K.carrier
   have h : K.compactFrobenius ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K.carrier) ≫
         (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) =
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
           i).unit.app K.carrier) ≫
         (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ≫
         ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+          (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
             ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
               (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
                 K.str.hom)) := by
@@ -298,17 +298,17 @@ the Frobenii, `compToPoint_inv_app_comp_counit_comp_compactPullback`. -/
 theorem compactFrobeniusOpenPiece_comp_counit (hj : ΦU ≫ j = j ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) :
     compactFrobeniusOpenPiece ℓ hj K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
             K.carrier) =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
           ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app
             K.carrier) ≫ K.compactFrobenius := by
   have h := compToPoint_inv_app_comp_counit_comp_compactPullback ℓ j hj K.carrier
   have hn₁ := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)
   have hn₂ := congrArg
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
     ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.naturality
       K.str.hom)
   simp only [Functor.comp_map, Functor.comp_obj] at hn₁
@@ -323,8 +323,8 @@ theorem compactFrobeniusOpenPiece_comp_counit (hj : ΦU ≫ j = j ≫ Φ)
   refine Eq.trans (congrArg (fun f ↦ f ≫
     (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+      (((boundedConstructibleUpperShriekAdjunction ℓ
         j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
           K.carrier)) (compactFrobenius_weilUpperStar hj K)) ?_
   simp only [Functor.map_comp, Category.assoc]

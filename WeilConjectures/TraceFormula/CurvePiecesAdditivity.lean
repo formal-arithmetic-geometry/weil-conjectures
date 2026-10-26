@@ -73,10 +73,10 @@ piece coefficient `u^Z = [x, x]_! F_{x,m}` satisfies `u^Z ∘ LΦ_m^* η = η �
 theorem upperStar_map_unit_comp_closedPieceCoeff (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ m)).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K.carrier) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K.carrier) ≫
       K.closedPieceCoeff m x hx =
       (K.iterateStr m).hom ≫
-        (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ x).unit.app K.carrier ≫
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ x).unit.app K.carrier ≫
         (boundedConstructibleUpperShriekId ℓ X).inv.app _ :=
   (congrArg (_ ≫ ·) (K.closedPieceCoeff_eq_graphClosedPieceCoeff m x hx)).trans
     (Correspondence.upperStar_map_unit_comp_graphClosedPieceCoeff K.carrier (K.iterateStr m).hom hx)

@@ -57,13 +57,13 @@ supported restriction `ρ_{a,b}` of `P|_T` on the strictly local model. -/
 theorem exists_geometricStalk_map_exchangeRestriction (z : Spec (.of k) ⟶ F) (hz : z ≫ d = M.y)
     (P : DerivedCategory.Plus
       (Sheaf (pullback M.f M.f).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ∃ (e : (geometricStalk Λ z).obj ((R(d)^![ModuleCat.{u + 1} Λ]).obj
+    ∃ (e : (geometricStalk Λ z).obj ((R(d)^![Λ]).obj
           ((L((pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ])).obj P.obj)) ≅
         ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.yB).obj
           ((Functor.mapDerivedCategoryPlus (M.b)^*[ModuleCat.{u + 1} Λ]).obj
             ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P))).obj₁)
       (s : (geometricStalk Λ z).obj ((L((ι)^*[ModuleCat.{u + 1} Λ])).obj
-          ((R(M.graph)^![ModuleCat.{u + 1} Λ]).obj P.obj)) ⟶
+          ((R(M.graph)^![Λ]).obj P.obj)) ⟶
         ((sectionsWithSupportTriangle (ModuleCat.{u + 1} Λ) M.a).obj
           ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P)).obj₁),
       (geometricStalk Λ z).map (exchangeRestriction Λ hsq P.obj) ≫ e.hom =
@@ -80,13 +80,13 @@ theorem exists_geometricStalk_map_exchangeRestriction (z : Spec (.of k) ⟶ F) (
         ((Functor.mapDerivedCategoryPlus
           (pullback.diagonal M.f)^*[ModuleCat.{u + 1} Λ]).obj P).property⟩
   have := M.isIso_rightDerivedGlobalSections_map_rightDerivedUpperShriekBaseChangeMap Λ hsq N
-  have := M.isIso_globalSectionsRestriction_ιY ((R(M.a)^![ModuleCat.{u + 1} Λ]).obj
+  have := M.isIso_globalSectionsRestriction_ιY ((R(M.a)^![Λ]).obj
     ((Functor.mapDerivedCategoryPlus (M.τ)^*[ModuleCat.{u + 1} Λ]).obj P).obj)
   let φ := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.τ).app P.obj
   exact exists_map_comp_eq_of_factorization _ _ _ (M.geometricStalkIso Λ hsq z hz) _ _
-    ((R(M.yB)^![ModuleCat.{u + 1} Λ]).map ((M.diagonalPullbackIso Λ).hom.app P.obj)) s₁ _ h₁
-    ((R(M.yB)^![ModuleCat.{u + 1} Λ]).map ((L((M.b)^*[ModuleCat.{u + 1} Λ])).map φ.hom))
-    ((L((M.ιY)^*[ModuleCat.{u + 1} Λ])).map ((R(M.a)^![ModuleCat.{u + 1} Λ]).map φ.hom)) _
+    ((R(M.yB)^![Λ]).map ((M.diagonalPullbackIso Λ).hom.app P.obj)) s₁ _ h₁
+    ((R(M.yB)^![Λ]).map ((L((M.b)^*[ModuleCat.{u + 1} Λ])).map φ.hom))
+    ((L((M.ιY)^*[ModuleCat.{u + 1} Λ])).map ((R(M.a)^![Λ]).map φ.hom)) _
     (exchangeRestriction_naturality Λ M.isPullback_ιY φ.hom)
     ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) M.ιY).inv.app _) t
     (globalSectionsRestriction M.ιY _) e₂ _ h₃

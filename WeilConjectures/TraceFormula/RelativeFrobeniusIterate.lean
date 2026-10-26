@@ -80,10 +80,10 @@ of compact-support base change for `X'_m = Y ×_{Φ_Y^m, Y, f} X`, the unit of `
 (invertible by topological invariance, `r_m` being a finite universal homeomorphism), the
 identification `Rr_{m*} ≅ Rr_{m!}` and the composition isomorphisms. -/
 noncomputable def lowerShriekFrobeniusComparison (m : ℕ) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+    boundedConstructibleLowerShriek ℓ f ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate ΦY m) ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate ΦX m) ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+        boundedConstructibleLowerShriek ℓ f :=
   weilLowerShriekFrobeniusComparison ℓ (frobeniusIterate ΦX m) (frobeniusIterate ΦY m) f
     (isPullback_frobeniusIterate ΦY m)
     (relativeFrobenius f (frobeniusIterate ΦX m) (frobeniusIterate ΦY m)
@@ -98,18 +98,18 @@ theorem lowerShriekFrobeniusComparison_add (m n : ℕ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (lowerShriekFrobeniusComparison ℓ ΦX ΦY hf (m + n)).hom.app K =
       eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
-          ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+          ℓ g).obj ((boundedConstructibleLowerShriek ℓ f).obj K))
           (frobeniusIterate_add ΦY m n)) ≫
         (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
           (frobeniusIterate ΦY n) (frobeniusIterate ΦY m)).hom.app
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+          ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (frobeniusIterate ΦY n)).map
           ((lowerShriekFrobeniusComparison ℓ ΦX ΦY hf m).hom.app K) ≫
         (lowerShriekFrobeniusComparison ℓ ΦX ΦY hf n).hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (frobeniusIterate ΦX m)).obj K) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerShriek ℓ f).map
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
             (frobeniusIterate ΦX n) (frobeniusIterate ΦX m)).inv.app K ≫
             eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar
@@ -162,12 +162,12 @@ noncomputable def lowerShriekFrobeniusCoefficient
     {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY).obj
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K :=
+        ((boundedConstructibleLowerShriek ℓ f).obj K) ⟶
+      (boundedConstructibleLowerShriek ℓ f).obj K :=
   (weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f (IsPullback.of_hasPullback ΦY f).flip
       (relativeFrobenius f ΦX ΦY hf) (relativeFrobenius_snd ..) (relativeFrobenius_fst ..)).hom.app
       K ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map ψ
+    (boundedConstructibleLowerShriek ℓ f).map ψ
 
 /-- The Frobenius comparisons for equal endomorphisms agree up to the casts. -/
 lemma weilLowerShriekFrobeniusComparison_hom_app_congr {aX aX' : X ⟶ X} {aY aY' : Y ⟶ Y}
@@ -180,12 +180,12 @@ lemma weilLowerShriekFrobeniusComparison_hom_app_congr {aX aX' : X ⟶ X} {aY aY
         (relativeFrobenius f aX aY h) (relativeFrobenius_snd ..) (relativeFrobenius_fst ..)).hom.app
         K =
       eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
-          ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+          ℓ g).obj ((boundedConstructibleLowerShriek ℓ f).obj K))
           eY) ≫
         (weilLowerShriekFrobeniusComparison ℓ aX' aY' f (IsPullback.of_hasPullback aY' f).flip
           (relativeFrobenius f aX' aY' h') (relativeFrobenius_snd ..)
           (relativeFrobenius_fst ..)).hom.app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerShriek ℓ f).map
           (eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar
             (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K) eX.symm)) := by
   subst eX eY
@@ -203,7 +203,7 @@ theorem frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient
     {m : ℕ} (hm : 1 ≤ m) :
     frobeniusCoefficientIterate (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) m =
       (lowerShriekFrobeniusComparison ℓ ΦX ΦY hf m).hom.app K ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleLowerShriek ℓ f).map
           (frobeniusCoefficientIterate ψ m) := by
   induction m, hm using Nat.le_induction with
   | base =>
@@ -229,7 +229,7 @@ theorem frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient
       frobeniusCoefficientIterate_succ ℓ ψ m,
       lowerShriekFrobeniusCoefficient]
     refine frobeniusCoefficient_iterate_aux
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f)
+      (boundedConstructibleLowerShriek ℓ f)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY)
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX) _ _ _
       (frobeniusCoefficientIterate ψ m) _ ψ _ _ _ _ _ ?_ ?_ ?_ ?_
@@ -298,13 +298,13 @@ lemma stalk_weilLowerShriekFrobeniusComparison_comp {X' : Over (Spec (.of k))}
     {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K ⟶ K) :
     (eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
-        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+        ℓ g).obj ((boundedConstructibleLowerShriek ℓ f).obj K))
         hy.symm) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y ΦY).hom.app
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
         ((weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).hom.app K ≫
-          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map v)) ≫
+          (boundedConstructibleLowerShriek ℓ f).map v)) ≫
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K =
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K ≫
       frobeniusCompactOperator ℓ (Φ := ΦZ)
@@ -343,11 +343,11 @@ theorem stalk_lowerShriekFrobeniusCoefficient_iterate
     (hi : ΦZ ≫ i = i ≫ frobeniusIterate ΦX m) {y : RationalPoint Y}
     (hy : y ≫ frobeniusIterate ΦY m = y) (hZ : IsPullback i (toPoint Z) f y) :
     (eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
-        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K))
+        ℓ g).obj ((boundedConstructibleLowerShriek ℓ f).obj K))
         hy.symm) ≫
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y
         (frobeniusIterate ΦY m)).hom.app
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+        ((boundedConstructibleLowerShriek ℓ f).obj K) ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
         (frobeniusCoefficientIterate (lowerShriekFrobeniusCoefficient ℓ ΦX ΦY hf ψ) m)) ≫
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K =

@@ -48,7 +48,7 @@ theorem isIso_supportedClassMap_kummerBoundary_coord {k : Type u} [Field k] (B :
     [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
-      (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+      (shiftSupportedClass Λ _ 2
         (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0))))) :=
   isIso_supportedClassMap_kummerBoundary_coord_of_affineLine Λ B
     (isZero_homology_rightDerivedLowerStar_tateObject_affineLine Λ B aB)

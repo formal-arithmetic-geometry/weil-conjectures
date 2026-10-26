@@ -44,7 +44,7 @@ variable (X) in
 /-- The identity clause of the coherence of the projection formula, through
 `R(𝟙)_! ≅ 𝟭`. -/
 lemma exceptionalProjection_id' (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ (𝟙 X) T M ≫
+    boundedConstructibleExceptionalProjectionMorphism ℓ (𝟙 X) T M ≫
         (boundedConstructibleLowerShriekId ℓ X).hom.app _ ≫
         T ◁ (boundedConstructibleUpperStarId _ ℓ X).hom.app M =
       (boundedConstructibleLowerShriekId ℓ X).hom.app T ▷ M := by
@@ -55,16 +55,16 @@ lemma exceptionalProjection_id' (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRingO
 the identity. -/
 lemma exceptionalProjection_of_eq_id {g : X ⟶ X} (hg : g = 𝟙 X)
     (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ g T M ≫
+    boundedConstructibleExceptionalProjectionMorphism ℓ g T M ≫
         eqToHom (congrArg (fun g' : X ⟶ X ↦ (boundedConstructibleLowerShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g').obj
+          ℓ g').obj
             (T ⊗ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M)) hg) ≫
         (boundedConstructibleLowerShriekId ℓ X).hom.app _ ≫
         T ◁ (eqToHom (congrArg (fun g : X ⟶ X ↦ (boundedConstructibleUpperStar
           (Profinite.padicAlgClRingObj ℓ) ℓ g).obj M) hg) ≫
             (boundedConstructibleUpperStarId _ ℓ X).hom.app M) =
       (eqToHom (congrArg (fun g : X ⟶ X ↦ (boundedConstructibleLowerShriek
-          (Profinite.padicAlgClRingObj ℓ) ℓ g).obj T) hg) ≫
+          ℓ g).obj T) hg) ≫
             (boundedConstructibleLowerShriekId ℓ X).hom.app T) ▷ M := by
   -- `subst` on the statement with `eqToIso` of functors makes the kernel time out
   subst hg
@@ -99,13 +99,13 @@ lemma pointDiag_μ_transportζ (W : Dᵇc((point k ⨯ point k).left)⟦Profinit
       Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k) _ =
     (Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k) W ⊗ₘ
         (diagUpperStarProjIso ℓ prod.fst (by simp) M).hom) ≫
-      boundedConstructibleExceptionalProjectionMorphism _ ℓ
+      boundedConstructibleExceptionalProjectionMorphism ℓ
         (prod.fst : point k ⨯ point k ⟶ point k) W M := by
   have h := Verdier.transportζ_projection
     (F := boundedConstructibleUpperStar _ ℓ (diag (point k)))
-    (G := boundedConstructibleLowerShriek _ ℓ (diag (point k)))
-    (S₁ := boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
-    (L := boundedConstructibleLowerShriek _ ℓ
+    (G := boundedConstructibleLowerShriek ℓ (diag (point k)))
+    (S₁ := boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (L := boundedConstructibleLowerShriek ℓ
       (diag (point k) ≫ (prod.fst : point k ⨯ point k ⟶ point k)))
     (I := boundedConstructibleUpperStar _ ℓ
       (diag (point k) ≫ (prod.fst : point k ⨯ point k ⟶ point k)))
@@ -113,16 +113,16 @@ lemma pointDiag_μ_transportζ (W : Dᵇc((point k ⨯ point k).left)⟦Profinit
     (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (diag (point k)) prod.fst)
     (eqToIso (congrArg (fun g : point k ⟶ point k ↦ boundedConstructibleLowerShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ g) diag_point_fst) ≪≫
+      ℓ g) diag_point_fst) ≪≫
         boundedConstructibleLowerShriekId ℓ (point k))
     (boundedConstructibleUpperStarComp _ ℓ (diag (point k)) prod.fst)
     (pointDiagFstUpperStarIso ℓ k)
     (by simp only [pointLowerShriekιΦ])
-    (fun T M ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ
+    (fun T M ↦ boundedConstructibleExceptionalProjectionMorphism ℓ
       (diag (point k) ≫ (prod.fst : point k ⨯ point k ⟶ point k)) T M)
-    (fun W M ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ
+    (fun W M ↦ boundedConstructibleExceptionalProjectionMorphism ℓ
       (prod.fst : point k ⨯ point k ⟶ point k) W M)
-    (fun T N ↦ boundedConstructibleExceptionalProjectionMorphism _ ℓ (diag (point k)) T N)
+    (fun T N ↦ boundedConstructibleExceptionalProjectionMorphism ℓ (diag (point k)) T N)
     (fun T N ↦ by exact upperStar_map_exceptionalProjection_comp_counit ℓ (diag (point k)) T N)
     (fun T M ↦ by exact exceptionalProjection_comp ℓ (diag (point k)) prod.fst T M)
     (fun T M ↦ by
@@ -130,7 +130,7 @@ lemma pointDiag_μ_transportζ (W : Dᵇc((point k ⨯ point k).left)⟦Profinit
         pointDiagFstUpperStarIso, NatIso.ofComponents_hom_app, Iso.app_hom, Category.assoc]
       exact exceptionalProjection_of_eq_id diag_point_fst T M)
     (fun f M ↦ by
-      exact boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _ f M)
+      exact boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _ f M)
     W M
   convert h using 2 <;> rfl
 
@@ -151,7 +151,7 @@ lemma pointKunneth_transport (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRi
           (dualizingComplex' ℓ (point k))) ≫
         (prodBaseChangeIso ℓ (point k) (point k)).hom.app (dualizingComplex' ℓ (point k)) ≫
         (boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
-          ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (point k))).counit.app
+          ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint (point k))).counit.app
             (𝟙_ _)) ≫
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint (point k)))).inv =
       (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom ≫ φ) :
@@ -161,26 +161,26 @@ lemma pointKunneth_transport (K : Dᵇc((point k).left)⟦Profinite.padicAlgClRi
           (dualizingComplex' ℓ (point k))) ≫
       (boundedConstructibleUpperStar _ ℓ (diag (point k))).map (exceptionalKunnethMap ℓ K) ≫
       Verdier.transportζ (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
-      (boundedConstructibleUpperShriekAdjunction _ ℓ
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k)).obj K) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ
         (prod.fst : point k ⨯ point k ⟶ point k)).counit.app K =
     ((diagUpperStarProjIso ℓ prod.fst (by simp) K).hom ⊗ₘ
       (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom) ≫ K ◁ φ ≫ (ρ_ K).hom := by
   have h := Verdier.transport_kunneth
     (F := boundedConstructibleUpperStar _ ℓ (diag (point k)))
-    (G := boundedConstructibleLowerShriek _ ℓ (diag (point k)))
-    (S₁ := boundedConstructibleLowerShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
-    (B₁ := boundedConstructibleUpperShriek _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (G := boundedConstructibleLowerShriek ℓ (diag (point k)))
+    (S₁ := boundedConstructibleLowerShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (B₁ := boundedConstructibleUpperShriek ℓ (prod.fst : point k ⨯ point k ⟶ point k))
     (A₁ := boundedConstructibleUpperStar _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
     (pointDiagAdj ℓ k) (pointLowerShriekιΦ ℓ k)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : point k ⨯ point k ⟶ point k))
-    (boundedConstructibleExceptionalProjectionMorphism _ ℓ
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : point k ⨯ point k ⟶ point k))
+    (boundedConstructibleExceptionalProjectionMorphism ℓ
       (prod.fst : point k ⨯ point k ⟶ point k)
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : point k ⨯ point k ⟶ point k)).obj
         (dualizingComplex' ℓ (point k))) K)
     ((prodBaseChangeIso ℓ (point k) (point k)).hom.app (dualizingComplex' ℓ (point k)))
     ((boundedConstructibleUpperStar _ ℓ (toPoint (point k))).map
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (point k))).counit.app (𝟙_ _)))
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint (point k))).counit.app (𝟙_ _)))
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint (point k)))).inv
     (diagUpperStarProjIso ℓ prod.fst (by simp) K).hom
     (diagUpperStarProjIso ℓ prod.snd (by simp) _).hom φ hbraid

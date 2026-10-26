@@ -66,9 +66,9 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : 
     {K : DerivedCategoryModule Λ X} (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
     boundedConstructible (ModuleCat.{u + 1} Λ) X
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
+        ((verdierDual Λ aX).obj (op K)) ∧
       torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-        ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) := by
+        ((verdierDual Λ aX).obj (op K)) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
   have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian aX }
   suffices key : ∀ (T : TopologicalSpace.Closeds X) {Z : Scheme.{u}} (aZ : Z ⟶ Spec (.of k))
@@ -77,9 +77,9 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : 
         boundedConstructible (ModuleCat.{u + 1} Λ) Z K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a b K →
         boundedConstructible (ModuleCat.{u + 1} Λ) Z
-            ((verdierDual (ModuleCat.{u + 1} Λ) aZ).obj (op K)) ∧
+            ((verdierDual Λ aZ).obj (op K)) ∧
           torAmplitudeIn (ModuleCat.{u + 1} Λ) Z (-b - 2 * (d : ℤ)) (-a)
-            ((verdierDual (ModuleCat.{u + 1} Λ) aZ).obj (op K)) from
+            ((verdierDual Λ aZ).obj (op K)) from
     key ⊤ aX (𝟙 X) (Category.id_comp _) (Set.subset_univ _) a b K hK hKt
   intro T
   induction T using WellFoundedLT.induction with
@@ -90,9 +90,9 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : 
       (K : DerivedCategoryModule Λ Z) (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Z K)
       (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a b K) :
       boundedConstructible (ModuleCat.{u + 1} Λ) Z
-          ((verdierDual (ModuleCat.{u + 1} Λ) (ι ≫ aX)).obj (op K)) ∧
+          ((verdierDual Λ (ι ≫ aX)).obj (op K)) ∧
         torAmplitudeIn (ModuleCat.{u + 1} Λ) Z (-b - 2 * (d : ℤ)) (-a)
-          ((verdierDual (ModuleCat.{u + 1} Λ) (ι ≫ aX)).obj (op K)) := by
+          ((verdierDual Λ (ι ≫ aX)).obj (op K)) := by
     by_cases hab : b < a
     · exact boundedConstructible_and_torAmplitudeIn_of_isZero
         (isZero_derivedHom_obj_of_isZero _ (isZero_of_torAmplitudeIn_of_lt hKt hab) _) _ _
@@ -150,7 +150,7 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : 
         (L((O'.ι)^*[ModuleCat.{u + 1} Λ])).mapIso eK ≪≫
         (leftDerivedUpperStarIsoMapDerivedCategory _ O'.ι).app _
     have hjc : j ≫ ι ≫ aX = O'.ι ≫ O.ι ≫ ι ≫ aX := Category.assoc _ _ _
-    let e' := (verdierDual (ModuleCat.{u + 1} Λ) (j ≫ ι ≫ aX)).mapIso e.op
+    let e' := (verdierDual Λ (j ≫ ι ≫ aX)).mapIso e.op
     rw [← verdierDual_obj_congr hjc] at hloc
     refine boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization Λ (ι ≫ aX) j i
       hij n (by rw [hdimO']) K hZ'

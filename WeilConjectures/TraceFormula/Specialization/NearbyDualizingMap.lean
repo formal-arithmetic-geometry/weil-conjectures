@@ -102,8 +102,9 @@ noncomputable def toTrait (h : M.IsTraitModelOfBase k q g) :
   total := q
   generic := g
   comm_j := h.isTraitModelOver.isPullback_j.w.symm
-  comm_i := h.isTraitModelOver.isPullback_i.w.symm
+  comm_i := by rw [toPoint_left]; exact h.isTraitModelOver.isPullback_i.w.symm
   comm_ε := by
+    rw [toPoint_left]
     obtain ⟨u, -, hu₁, hu₂⟩ := h.exists_openImmersion
     rw [← traitModel_j_traitToBase]
     change g ≫ traitGenericPoint k' ≫ traitToBase k k' = M.ε ≫ X.hom
@@ -136,10 +137,10 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 /-- The proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_X` of the structure morphism of a trait model
 of `X` over the base. -/
 noncomputable def IsTraitModelOfBase.pushforwardExchange (h : M.IsTraitModelOfBase k q g) :
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙
+    boundedConstructibleLowerStar ℓ (toPoint X) ⋙
         traitSpecialization k k' (ℓ := ℓ) ⟶
       boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ) ⋙
-        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X') :=
+        boundedConstructibleLowerStar ℓ (toPoint X') :=
   h.toTrait.boundedConstructiblePushforwardExchange ℓ (h.preservesBoundedConstructible ℓ)
     (preservesBoundedConstructible_traitModel ℓ)
 
@@ -147,10 +148,10 @@ noncomputable def IsTraitModelOfBase.pushforwardExchange (h : M.IsTraitModelOfBa
 `Ra_! ⊣ Ra^!` read through `Ra_! ≅ Ra_*`. -/
 noncomputable def trace (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom]
     [QuasiCompact Z.hom] [IsSeparated Z.hom] [IsProper (toPoint Z).left] :
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
-        (dualizingComplex ℓ (toPoint Z)) ⟶ 𝟙_ _ :=
+    (boundedConstructibleLowerStar ℓ (toPoint Z)).obj
+        (dualizingComplex ℓ Z) ⟶ 𝟙_ _ :=
   (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint Z)).inv.app _ ≫
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Z)).counit.app (𝟙_ _)
+    (boundedConstructibleUpperShriekAdjunction ℓ (toPoint Z)).counit.app (𝟙_ _)
 
 instance : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) :=
   isIso_traitSpecializationUnit k k'
@@ -162,8 +163,8 @@ noncomputable def dualizingComplexUpperStarIso {Y : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (j : Y ⟶ X)
     [IsOpenImmersion j.left] :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-        (dualizingComplex ℓ (toPoint X)) ≅ dualizingComplex ℓ (toPoint Y) :=
-  (dualizingComplexIsoUpperStar ℓ j (toPoint X)).symm ≪≫ eqToIso (by rw [comp_toPoint])
+        (dualizingComplex ℓ X) ≅ dualizingComplex ℓ Y :=
+  (dualizingComplexIsoUpperStar ℓ j).symm
 
 variable (k k')
 
@@ -179,7 +180,7 @@ structure NearbyDualizingData where
     {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
     (h : M.IsTraitModelOfBase k q g) :
     (boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
-      (dualizingComplex ℓ (toPoint X)) ⟶ dualizingComplex ℓ (toPoint X')
+      (dualizingComplex ℓ X) ⟶ dualizingComplex ℓ X'
   /-- proper models: `tr_{X'} ∘ Ra'_*(θ_M) ∘ χ_a(ω_X) = σ⁻¹ ∘ Ψ_S(tr_X)`. -/
   pushforwardExchange_comp_map_θ_comp_trace {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -188,8 +189,8 @@ structure NearbyDualizingData where
     {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
     {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (h : M.IsTraitModelOfBase k q g)
     [IsProper q] :
-    (h.pushforwardExchange ℓ).app (dualizingComplex ℓ (toPoint X)) ≫
-        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X')).map
+    (h.pushforwardExchange ℓ).app (dualizingComplex ℓ X) ≫
+        (boundedConstructibleLowerStar ℓ (toPoint X')).map
           (θ h) ≫ trace ℓ X' =
       (traitSpecialization k k' (ℓ := ℓ)).map (trace ℓ X) ≫
         inv (traitSpecializationUnit k k' (ℓ := ℓ))
@@ -212,7 +213,7 @@ structure NearbyDualizingData where
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map (θ hM) ≫
         (dualizingComplexUpperStarIso ℓ j').hom =
       (φ.boundedConstructiblePullbackExchange ℓ (hN.preservesBoundedConstructible ℓ)
-          (hM.preservesBoundedConstructible ℓ)).app (dualizingComplex ℓ (toPoint X)) ≫
+          (hM.preservesBoundedConstructible ℓ)).app (dualizingComplex ℓ X) ≫
         (boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible ℓ)).map
           (dualizingComplexUpperStarIso ℓ j).hom ≫ θ hN
 

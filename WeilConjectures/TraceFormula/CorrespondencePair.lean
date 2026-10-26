@@ -55,7 +55,7 @@ immersion. -/
 abbrev SupportedClass {T Z : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
     [IsSeparated T.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     (i : T ⟶ Z) (P : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : Type _ :=
-  (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i).obj (𝟙_ _) ⟶ P
+  (boundedConstructibleLowerShriek ℓ i).obj (𝟙_ _) ⟶ P
 
 /-! ### Correspondences between pairs -/
 
@@ -81,7 +81,7 @@ structure CorrespondenceBetween (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj
   c₂ : C ⟶ X
   /-- the coefficient map `u : Lc₂^* K ⟶ Rc₁^! L`. -/
   u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj L
+    (boundedConstructibleUpperShriek ℓ c₁).obj L
 
 namespace CorrespondenceBetween
 

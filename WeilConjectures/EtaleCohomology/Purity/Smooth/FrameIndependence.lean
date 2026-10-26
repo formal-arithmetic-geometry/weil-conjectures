@@ -236,7 +236,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
     (hg : IsPullback g ((glAffine c S).zeroLocusSubschemeι (Set.range (glCoord c S)))
       ((glAffine c S).zeroLocusSubschemeι (Set.range ((glMatrix c S).mulVec (glCoord c S))))
       (𝟙 _)) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
+    restrictSupportedClass Λ (𝟙 _) _ _ g hg
         (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c)
         (kummerBoundaryProduct Λ ((glMatrix c S).mulVec (glCoord c S))) =
@@ -247,7 +247,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
   have ha : IsIso (supportedClassMap Λ ι (kummerBoundaryProduct Λ (glCoord c S))) :=
     isIso_supportedClassMap_kummerBoundaryProduct_coord Λ c _
   have haS := isIso_supportedClassMap_kummerBoundaryProduct_coord Λ c S
-  set y := restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
+  set y := restrictSupportedClass Λ (𝟙 _) _ _ g hg
     (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
     (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c)
     (kummerBoundaryProduct Λ ((glMatrix c S).mulVec (glCoord c S)))
@@ -284,7 +284,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
     rw [restrictSupportedHom, show (supportedClassMapEquiv Λ ι _).symm b = y from
       (supportedClassMapEquiv Λ ι _).symm_apply_apply _]
     congr 1
-    have := restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _)
+    have := restrictSupportedClass_restrictSupportedClass Λ (𝟙 _)
       glOneAffine glOneAffine (by simp) _ ι ιS g hg gε hgε g' hg'
       (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
       (leftDerivedUpperStarConstantComplexIso Λ glOneAffine).inv
@@ -394,7 +394,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
     (g : U.zeroLocusSubscheme (Set.range f) ⟶ U.zeroLocusSubscheme (Set.range (M.mulVec f)))
     (hg : IsPullback g (U.zeroLocusSubschemeι (Set.range f))
       (U.zeroLocusSubschemeι (Set.range (M.mulVec f))) (𝟙 _)) :
-    restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
+    restrictSupportedClass Λ (𝟙 _) _ _ g hg
         (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ (M.mulVec f)) =
       kummerBoundaryProduct Λ f := by
@@ -411,14 +411,14 @@ theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
     (Ideal.span_range_mulVec_of_isUnit_det _ (isUnit_det_glMatrix c U) (glCoord c U))
   have hcomp₁ : Φ = 𝟙 U ≫ Φ := by simp
   have hcomp₂ : Φ = Φ ≫ 𝟙 _ := by simp
-  have e₁ := restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) Φ (𝟙 U) Φ
+  have e₁ := restrictSupportedClass_restrictSupportedClass Λ Φ (𝟙 U) Φ
     hcomp₁ _ _ _ g₁ hg₁ g hg (g ≫ g₁) ((Category.id_comp Φ) ▸ hg.paste_horiz hg₁)
     (leftDerivedUpperStarConstantComplexIso Λ Φ).inv
     (leftDerivedUpperStarConstantComplexIso Λ (𝟙 U)).inv
     (leftDerivedUpperStarTateShiftIso Λ Φ c) (leftDerivedUpperStarTateShiftIso Λ (𝟙 U) c)
     (kummerBoundaryProduct Λ ((glMatrix c U).mulVec (glCoord c U)))
   rw [restrictSupportedClass_kummerBoundaryProduct Λ Φ _ _ hΦA g₁ hg₁] at e₁
-  have e₂ := restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) Φ Φ
+  have e₂ := restrictSupportedClass_restrictSupportedClass Λ (𝟙 _) Φ Φ
     hcomp₂ _ _ _ gE hgE g₂ hg₂ (g₂ ≫ gE) ((Category.comp_id Φ) ▸ hg₂.paste_horiz hgE)
     (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
     (leftDerivedUpperStarConstantComplexIso Λ Φ).inv

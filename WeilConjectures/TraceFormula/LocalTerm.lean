@@ -92,23 +92,23 @@ lemma boundedConstructibleUpperShriekComp_padicAlgCl_assoc {S : Over (Spec (.of 
     (f : T ⟶ T') (g : T' ⟶ T'') (h : T'' ⟶ S) (K : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ (f ≫ g) h).hom.app K ≫
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f g).hom.app
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K) =
+          ((boundedConstructibleUpperShriek ℓ h).obj K) =
       eqToHom (congrArg (fun m ↦
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ m).obj K)
+        (boundedConstructibleUpperShriek ℓ m).obj K)
           (Category.assoc f g h)) ≫
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (g ≫ h)).hom.app K ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleUpperShriek ℓ f).map
           ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ g h).hom.app K) :=
   conjugateIsoEquiv_assoc_aux
-    (fun m ↦ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
-    (fun m ↦ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
-    (fun m ↦ boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ m)
+    (fun m ↦ boundedConstructibleLowerShriek ℓ m)
+    (fun m ↦ boundedConstructibleUpperShriek ℓ m)
+    (fun m ↦ boundedConstructibleUpperShriekAdjunction ℓ m)
     (Category.assoc f g h)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (g ≫ h))
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ g)
+    (boundedConstructibleUpperShriekAdjunction ℓ h)
+    (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ g))
+    (boundedConstructibleUpperShriekAdjunction ℓ (g ≫ h))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g h)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (f ≫ g) h)
@@ -120,14 +120,14 @@ structure morphism `a'`, transported along `f ≫ a' = a`. -/
 noncomputable def dualizingComplexCompAux {S : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] (f : T ⟶ T')
     (a' : T' ⟶ S) (a : T ⟶ S) (h : f ≫ a' = a) :
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a').obj
+    (boundedConstructibleUpperShriek ℓ f).obj
+        ((boundedConstructibleUpperShriek ℓ a').obj
           (𝟙_ (Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) ≅
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj
+      (boundedConstructibleUpperShriek ℓ a).obj
         (𝟙_ (Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f a').app _).symm ≪≫
     eqToIso (congrArg (fun m ↦
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ m).obj
+      (boundedConstructibleUpperShriek ℓ m).obj
         (𝟙_ (Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) h)
 
 lemma dualizingComplexCompAux_comp {S : Over (Spec (.of k))}
@@ -135,11 +135,11 @@ lemma dualizingComplexCompAux_comp {S : Over (Spec (.of k))}
     (g : T' ⟶ T'') (a'' : T'' ⟶ S) (a' : T' ⟶ S) (a : T ⟶ S) (h' : g ≫ a'' = a')
     (h : f ≫ a' = a) (hF : (f ≫ g) ≫ a'' = a) :
     (dualizingComplexCompAux (ℓ := ℓ) f a' a h).inv ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleUpperShriek ℓ f).map
           (dualizingComplexCompAux (ℓ := ℓ) g a'' a' h').inv =
       (dualizingComplexCompAux (ℓ := ℓ) (f ≫ g) a'' a hF).inv ≫
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f g).hom.app
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a'').obj
+          ((boundedConstructibleUpperShriek ℓ a'').obj
             (𝟙_ (Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) := by
   subst h' h
   simp only [dualizingComplexCompAux, Iso.trans_inv, eqToIso.inv, Iso.symm_inv, Iso.app_hom,
@@ -149,7 +149,7 @@ lemma dualizingComplexCompAux_comp {S : Over (Spec (.of k))}
 `Rf^! Rg^! ω_{T''} ≅ Rf^! ω_{T'} ≅ ω_T` is `Rf^! Rg^! ω_{T''} ≅ R(f ≫ g)^! ω_{T''} ≅ ω_T`. -/
 lemma dualizingComplexComp_inv_comp (f : T ⟶ T') (g : T' ⟶ T'') :
     (dualizingComplexComp ℓ f).inv ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        (boundedConstructibleUpperShriek ℓ f).map
           (dualizingComplexComp ℓ g).inv =
       (dualizingComplexComp ℓ (f ≫ g)).inv ≫
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f g).hom.app
@@ -181,17 +181,17 @@ theorem pushforward_comp (f : T ⟶ T') (g : T' ⟶ T'') [IsProper f.left] [IsPr
     [IsProper (f ≫ g).left] (γ : BorelMooreSection ℓ T) :
     pushforward g (pushforward f γ) = pushforward (f ≫ g) γ :=
   pushforward_comp_aux
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleUpperShriekAdjunction ℓ g)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (f ≫ g))
+    (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ g))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (f ≫ g))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g)
+    (boundedConstructibleLowerStarComp ℓ f g)
     (by rw [boundedConstructibleLowerStarComp, Iso.symm_inv, conjugateIsoEquiv_apply_hom,
       Iso.symm_hom])
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g)
@@ -200,12 +200,12 @@ theorem pushforward_comp (f : T ⟶ T') (g : T' ⟶ T'') [IsProper f.left] [IsPr
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g)))
-    (boundedConstructibleUpperStarComp_hom_app_unit _ ℓ f g)
+    (boundedConstructibleUpperStarComp_hom_app_unit ℓ f g)
     (dualizingComplexComp ℓ f) (dualizingComplexComp ℓ g) (dualizingComplexComp ℓ (f ≫ g))
     (lowerShriekComp_dualizingComplexComp_counit_aux
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g)
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
+      (boundedConstructibleUpperShriekAdjunction ℓ f)
+      (boundedConstructibleUpperShriekAdjunction ℓ g)
+      (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ g))
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g)
       (dualizingComplexComp ℓ f) (dualizingComplexComp ℓ g) (dualizingComplexComp ℓ (f ≫ g))
       (dualizingComplexComp_inv_comp f g))
@@ -273,24 +273,24 @@ of the identity functor of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the unit of `Lj^* ⊣ Rj
 noncomputable def clopenIdempotent (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left] :
     𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).unit ≫
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ j).unit ≫
     Functor.whiskerRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).inv
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j) ≫
-    Functor.whiskerLeft (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j)
+      (boundedConstructibleLowerStar ℓ j) ≫
+    Functor.whiskerLeft (boundedConstructibleUpperShriek ℓ j)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).inv ≫
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).counit
+    (boundedConstructibleUpperShriekAdjunction ℓ j).counit
 
 lemma clopenIdempotent_app (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (clopenIdempotent ℓ j).app K =
       Adjunction.clopenSection
-        (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
           (Profinite.padicAlgClRingObj ℓ) ℓ j)
-        (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+        (boundedConstructibleUpperShriekAdjunction ℓ j)
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j)
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j) K ≫
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app
+      (boundedConstructibleUpperShriekAdjunction ℓ j).counit.app
         K := by
   rw [clopenIdempotent, NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
@@ -313,7 +313,7 @@ lemma BorelMooreSection.pushforward_restrict (j : B ⟶ X) [IsOpenImmersion j.le
   rw [(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).inv.naturality_assoc
       (dualizingComplexComp ℓ j).hom]
   simp only [Iso.map_hom_inv_id_assoc]
-  exact (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  exact (boundedConstructibleUpperStarLowerStarAdjunction ℓ
     j).unit_naturality_assoc α _
 
 end Clopen
@@ -360,7 +360,7 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen (j : B ⟶
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
         ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app M ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app M) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
         j).counit.app M = 𝟙 M :=
   boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of j ℓ
     (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_inv_app_comp_counit j ℓ) M
@@ -373,7 +373,7 @@ lemma isZero_boundedConstructibleUpperStar_obj_lowerShriek {W : Over (Spec (.of 
     (hjg : Disjoint (Set.range j.left.base) (Set.range g.left.base))
     (M : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj M)) :=
+      ((boundedConstructibleLowerShriek ℓ j).obj M)) :=
   (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j g hjg M).of_iso
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).mapIso
       ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app M))
@@ -393,14 +393,14 @@ theorem sum_clopenIdempotent_app {ι : Type*} [Fintype ι] (B : ι → Over (Spe
   classical
   simp_rw [clopenIdempotent_app]
   set S := fun i ↦ Adjunction.clopenSection
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (j i))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (j i))
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ (j i))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (j i))
+    (boundedConstructibleUpperShriekAdjunction ℓ (j i))
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ (j i))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (j i)) K with hS
   set R := fun i ↦
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (j i)).counit.app
+    (boundedConstructibleUpperShriekAdjunction ℓ (j i)).counit.app
       K with hR
   have hid (i : ι) : R i ≫ S i = 𝟙 _ :=
     Adjunction.clopenCounit_comp_clopenSection _ _ _ _ _
@@ -410,7 +410,7 @@ theorem sum_clopenIdempotent_app {ι : Type*} [Fintype ι] (B : ι → Over (Spe
     (isZero_boundedConstructibleUpperStar_obj_lowerShriek (j i) (j k) (hdisj hik) _).eq_of_src
       _ _
   have horth (i k : ι) (hik : i ≠ k) : R i ≫ S k = 0 := by
-    have hn := (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    have hn := (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (j k)).unit.naturality (R i)
     have hz := hzero i k hik
     simp only [Functor.id_map, Functor.comp_map, hR] at hn hz
@@ -426,7 +426,7 @@ theorem sum_clopenIdempotent_app {ι : Type*} [Fintype ι] (B : ι → Over (Spe
       Adjunction.isIso_map_clopenCounit
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
           (Profinite.padicAlgClRingObj ℓ) ℓ (j k))
-        (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (j k))
+        (boundedConstructibleUpperShriekAdjunction ℓ (j k))
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ (j k)) K
     have hSk : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j k)).map
         (S k) = inv ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -518,10 +518,10 @@ a Borel–Moore section of `B` is the section itself. -/
 lemma restrict_pushforward_self (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left]
     (γ : BorelMooreSection ℓ B) : (pushforward j γ).restrict j = γ := by
   have key := Adjunction.conjugateIsoEquiv_inv_app_comp_map_clopenPush
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ j)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperShriekAdjunction ℓ j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen ℓ j)

@@ -138,27 +138,27 @@ lemma upperStarLowerShriekAdjunction_unit_app_comp (r : U ⟶ W) (h : W ⟶ V) [
     [IsProper h.left] [IsProper (r ≫ h).left] (D : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (r ≫ h)).unit.app D =
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ h).unit.app D ≫
-        (boundedConstructibleLowerShriek _ ℓ h).map
+        (boundedConstructibleLowerShriek ℓ h).map
           ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app
             ((boundedConstructibleUpperStar _ ℓ h).obj D)) ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r h).inv.app _ ≫
-        (boundedConstructibleLowerShriek _ ℓ (r ≫ h)).map
+        (boundedConstructibleLowerShriek ℓ (r ≫ h)).map
           ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app D) := by
   have hu := unit_conjugateEquiv
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ h))
-    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h).comp
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h))
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ h).comp
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ r))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r h).inv D
   rw [Adjunction.comp_unit_app, Category.assoc] at hu
   have key := Adjunction.unit_app_comp_inv_app_of_comp
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ r)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ h))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ h)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ r)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (r ≫ h))
     (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r h)
-    (boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r h)
+    (boundedConstructibleLowerStarComp ℓ r h)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r h) D hu
     (fun P ↦ boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp ℓ r h P)
   simp only [boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl,
@@ -171,12 +171,12 @@ squares `h ≫ π = z ≫ f` and `(r ≫ h) ≫ π = (r ≫ z) ≫ f`. -/
 lemma lowerShriek_map_lowerShriekComp_inv_app_comp_squareIso (r : U ⟶ W) (h : W ⟶ V)
     (π : V ⟶ Y) (z : W ⟶ X) (f : X ⟶ Y) (hw : h ≫ π = z ≫ f)
     (w : (r ≫ h) ≫ π = (r ≫ z) ≫ f) (E : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ π).map
+    (boundedConstructibleLowerShriek ℓ π).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r h).inv.app E) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app E =
     (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ hw).hom.app
-        ((boundedConstructibleLowerShriek _ ℓ r).obj E) ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map
+        ((boundedConstructibleLowerShriek ℓ r).obj E) ≫
+      (boundedConstructibleLowerShriek ℓ f).map
         ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r z).inv.app E) := by
   have hp := lowerShriekComp_pushforwardSquare ℓ r h r h π z f rfl hw
     (by rw [← Category.assoc, w]) E
@@ -193,11 +193,11 @@ proper, read through the units of `Lh^* ⊣ Rh_!` and `Lf^* ⊣ Rf_!`. -/
 lemma lowerShriek_map_unit_comp_squareIso_hom_app {f : X ⟶ Y} {π : V ⟶ Y} {z : W ⟶ X}
     {h : W ⟶ V} [IsProper f.left] [IsProper h.left] (hA : IsPullback h z π f)
     (D : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ π).map
+    (boundedConstructibleLowerShriek ℓ π).map
         ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ h).unit.app D) ≫
       (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ hA.w).hom.app _ =
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).unit.app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ f).map
+      (boundedConstructibleLowerShriek ℓ f).map
         ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA).app D) := by
   have hm := unit_mateEquiv_symm
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ h)
@@ -216,34 +216,34 @@ set_option maxHeartbeats 2000000 in
 /-- The right side of the base-change core, transposed along `Lf^* ⊣ Rf_*`. -/
 theorem sourceExchange_rightTranspose [IsProper (r ≫ h).left]
     (wq₁ : (r ≫ h) ≫ π₁ = (r ≫ zX) ≫ f) (wq₂ : (r ≫ h) ≫ π₂ = p₂ ≫ f)
-    (e : (boundedConstructibleLowerShriek _ ℓ (r ≫ zX)).obj
+    (e : (boundedConstructibleLowerShriek ℓ (r ≫ zX)).obj
       ((boundedConstructibleUpperStar _ ℓ (r ≫ zX)).obj K ⊗
         (boundedConstructibleUpperStar _ ℓ p₂).obj
-        ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))) ⟶ K) :
+        ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))) ⟶ K) :
     (boundedConstructibleUpperStar _ ℓ f).map
-        ((boundedConstructibleLowerShriek _ ℓ π₁).map
-            ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (r ≫ h)).homEquiv _ _
+        ((boundedConstructibleLowerShriek ℓ π₁).map
+            ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h)).homEquiv _ _
               ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
                 (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
-                  ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
-          (boundedConstructibleLowerShriek _ ℓ π₁).map
+                  ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
+          (boundedConstructibleLowerShriek ℓ π₁).map
             ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (r ≫ h)).inv.app _) ≫
           (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wq₁).hom.app _ ≫
-          (boundedConstructibleLowerShriek _ ℓ f).map e ≫
+          (boundedConstructibleLowerShriek ℓ f).map e ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K =
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K =
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA).app _ ≫
-      (boundedConstructibleLowerShriek _ ℓ zX).map
+      (boundedConstructibleLowerShriek ℓ zX).map
         ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app _ ≫
-          (boundedConstructibleLowerShriek _ ℓ r).map
+          (boundedConstructibleLowerShriek ℓ r).map
             ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app _ ≫
               (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
               (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
-                ((boundedConstructibleUpperShriek _ ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
+                ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).inv.app _ ≫ e :=
   Adjunction.map_comp_counit_eq_of_mate
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (r ≫ h))
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (r ≫ h))
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ h)
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r)

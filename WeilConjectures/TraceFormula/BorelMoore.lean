@@ -61,15 +61,15 @@ variable {T T' : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact 
 ```
 -/
 noncomputable def pushforward (α : BorelMooreSection ℓ T) : BorelMooreSection ℓ T' :=
-  (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h).unit.app
+  (boundedConstructibleUpperStarLowerStarAdjunction ℓ h).unit.app
       (𝟙_ _) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map
+    (boundedConstructibleLowerStar ℓ h).map
       ((Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h)).inv ≫ α) ≫
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h).inv.app _ ≫
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ h).map
+    (boundedConstructibleLowerShriek ℓ h).map
       (dualizingComplexComp ℓ h).inv ≫
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ h).counit.app _
+    (boundedConstructibleUpperShriekAdjunction ℓ h).counit.app _
 
 /-- The pushforward of Borel–Moore sections is additive. -/
 lemma pushforward_add (α β : BorelMooreSection ℓ T) :
@@ -102,8 +102,10 @@ lemma integral_scalar_comp [IsProper X.hom]
     (t : End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
     (α : BorelMooreSection ℓ X) :
     integral (scalar t ≫ α : BorelMooreSection ℓ X) = t ≫ α.integral := by
-  have : IsProper (toPoint X).left := inferInstanceAs (IsProper X.hom)
-  have hn := (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  have : IsProper (toPoint X).left := by
+    rw [toPoint_left]
+    infer_instance
+  have hn := (boundedConstructibleUpperStarLowerStarAdjunction ℓ
     (toPoint X)).unit.naturality t
   simp only [Functor.id_map, Functor.comp_map] at hn
   simp only [integral, scalar, Adjunction.homEquiv_counit, Category.assoc, Functor.map_comp]
@@ -130,6 +132,47 @@ namespace BorelMooreSection
 
 variable {X : Over (Spec (.of k))} [QuasiCompact X.hom]
 
+set_option maxHeartbeats 1000000 in
+-- the conjugation steps unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
+variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
+/-- The counit coherence of `lowerShriek_map_dualizingComplexComp_inv_counit`, for a morphism
+`f : X ⟶ s` and an endomorphism `b = 𝟙` of the base point in place of the structure
+morphisms. -/
+private lemma lowerShriek_map_upperShriekComp_counit_aux (f : X ⟶ point k)
+    (b : point k ⟶ point k) (hb : b = 𝟙 (point k)) :
+    (boundedConstructibleLowerShriek ℓ f).map
+        ((((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f b).app (𝟙_ _)).symm ≪≫
+          eqToIso (by rw [hb, Category.comp_id])).inv) ≫
+      (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app _ ≫
+        (upperShriekUnitIsoOfEqId ℓ b hb).hom =
+    (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app _ := by
+  subst hb
+  have e : (upperShriekUnitIsoOfEqId ℓ (𝟙 (point k)) rfl).hom =
+      ((boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)).hom := by
+    simp [upperShriekUnitIsoOfEqId]
+  rw [e]
+  have h := conjugateIsoEquiv_comp_unit_counit
+    (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ 𝟙 (point k)))
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (𝟙 (point k)))
+    (boundedConstructibleLowerShriekId ℓ (point k))
+    (eqToIso (congrArg (boundedConstructibleLowerShriek ℓ) (Category.comp_id f)))
+    (fun K ↦ by
+      rw [boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
+        eqToHom_app]
+      exact boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ f K)
+    (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+  rw [← boundedConstructibleUpperShriekComp_padicAlgCl.eq_1] at h
+  rw [Iso.trans_inv, eqToIso.inv, Iso.symm_inv, Iso.app_hom, Functor.map_comp, Category.assoc]
+  refine Eq.trans (congrArg (_ ≫ ·) h) ?_
+  rw [eqToIso.inv, eqToHom_app]
+  exact Adjunction.counit_eqToHom_family
+    (fun m ↦ boundedConstructibleLowerShriek ℓ m)
+    (fun m ↦ boundedConstructibleUpperShriek ℓ m)
+    (fun m ↦ boundedConstructibleUpperShriekAdjunction ℓ m)
+    (Category.comp_id f) _
+
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
 /-- The composition isomorphism `R(a_X)^! ω_s ≅ ω_X` of the dualizing complexes, followed by
 `ω_X = Ra_X^! ℚ̄_ℓ,s ≅ Ra_X^! ω_s` through `ω_s ≅ ℚ̄_ℓ,s`, is compatible with the counits:
@@ -137,40 +180,17 @@ the counit of `Ra_{X!} ⊣ Ra_X^!` at `ω_s`, read through `ω_s ≅ ℚ̄_ℓ,s
 `ℚ̄_ℓ,s`. This is the unit coherence of the composition isomorphisms of the exceptional
 functors, by conjugation from `boundedConstructibleLowerShriekComp_padicAlgCl_id_right`. -/
 lemma lowerShriek_map_dualizingComplexComp_inv_counit :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
         (dualizingComplexComp ℓ (toPoint X)).inv ≫
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleUpperShriekAdjunction ℓ
         (toPoint X)).counit.app _ ≫ (dualizingComplexPointIso ℓ k).hom =
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-        (toPoint X)).counit.app _ := by
-  have h := conjugateIsoEquiv_comp_unit_counit
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-      (toPoint X ≫ toPoint (point k)))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-      (toPoint (point k)))
-    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (toPoint X) (toPoint (point k)))
-    (boundedConstructibleLowerShriekId ℓ (point k))
-    (eqToIso (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ)
-      (comp_toPoint (toPoint X))))
-    (fun K ↦ by
-      rw [boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
-        eqToHom_app]
-      exact boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ (toPoint X) K)
-    (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))
-  rw [← boundedConstructibleUpperShriekComp_padicAlgCl.eq_1] at h
-  rw [dualizingComplexComp, Iso.trans_inv, eqToIso.inv, Iso.symm_inv, Iso.app_hom,
-    Functor.map_comp, Category.assoc]
-  refine Eq.trans (congrArg (_ ≫ ·) h) ?_
-  rw [eqToIso.inv, eqToHom_app]
-  exact Adjunction.counit_eqToHom_family
-    (fun m ↦ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
-    (fun m ↦ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
-    (fun m ↦ boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ m)
-    (comp_toPoint _) _
+    (boundedConstructibleUpperShriekAdjunction ℓ
+        (toPoint X)).counit.app _ :=
+  lowerShriek_map_upperShriekComp_counit_aux (toPoint X) (toPoint (point k)) (toPoint_ext _ _)
 
-instance isProper_toPoint_left [IsProper X.hom] : IsProper (toPoint X).left :=
-  inferInstanceAs (IsProper X.hom)
+instance isProper_toPoint_left [IsProper X.hom] : IsProper (toPoint X).left := by
+  rw [toPoint_left]
+  infer_instance
 
 /-- **Integration is pushforward to the point** (blueprint
 `lem-trf-integration-as-pushforward`): for `X` proper over `s`, the integral `∫_X α` is the

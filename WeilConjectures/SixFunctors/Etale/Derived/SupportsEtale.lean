@@ -98,16 +98,15 @@ target: a map `T ⟶ L'` out of an object `T` supported on `Z'` lifts uniquely t
 counit of `Ri_! ⊣ Ri^!`, which exist uniquely since `e_! T` is supported on `Z`
 (`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek`). -/
 theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Etale e]
-    (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i]
-    [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [IsClosedImmersion i']
-    [(R(i')_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i'] [Finite Λ]
+    (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L') :
-    IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ) := by
-  set ψ := supportedRestriction (ModuleCat.{u + 1} Λ) e i i' g hg L L' τ
-  set ε := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app L
-  set ε' := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i').counit.app L'
+    IsIso (supportedRestriction Λ e i i' g hg L L' τ) := by
+  set ψ := supportedRestriction Λ e i i' g hg L L' τ
+  set ε := (rightDerivedUpperShriekAdjunction Λ i).counit.app L
+  set ε' := (rightDerivedUpperShriekAdjunction Λ i').counit.app L'
   have hψ : ψ ≫ ε' = (L((e)^*[ModuleCat.{u + 1} Λ])).map ε ≫ τ.hom :=
     (existsUnique_supportedRestriction _ e i i' g hg L L' τ).exists.choose_spec
   let adj : (etaleLowerShriek (ModuleCat.{u + 1} Λ) e inferInstance).mapDerivedCategory ⊣
@@ -118,7 +117,7 @@ theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Eta
   have key : ∀ (T : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
       (_ : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj T)) (β : T ⟶ L'),
       ∃! φ : T ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)),
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)),
         φ ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map ε ≫ τ.hom = β := by
     intro T hT β
     have hT' := isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek Λ e i i' g hg hT
@@ -141,7 +140,7 @@ theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Eta
     exact disjoint_compl_left
   have hS : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj
       ((L((e)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)))) := by
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)))) := by
     let k := i'.openComplement.ι ≫ e
     have hk : Set.range k.base ⊆ Set.range i.openComplement.ι.base := by
       rw [← compl_compl (Set.range i.openComplement.ι.base),
@@ -158,7 +157,7 @@ theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Eta
     rw [i'.range_eq_compl_range_openComplement_ι]
     exact disjoint_compl_left
   have hB : IsZero ((L((i'.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj
-      ((R(i')_![ModuleCat.{u + 1} Λ]).obj ((R(i')^![ModuleCat.{u + 1} Λ]).obj L'))) :=
+      ((R(i')_![ModuleCat.{u + 1} Λ]).obj ((R(i')^![Λ]).obj L'))) :=
     isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint _ i'
       i'.openComplement.ι hdisj' i'.openComplement.ι subset_rfl _
   obtain ⟨χ, hχ, -⟩ := key _ hB ε'

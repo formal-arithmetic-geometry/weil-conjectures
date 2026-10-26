@@ -76,10 +76,11 @@ variable {A' : Type u''} [Category.{u + 1} A'] [Abelian A'] [IsGrothendieckAbeli
 local notation "𝐃(" X ", " A ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) A)
 
-variable {X Y : Scheme.{u}} {a : X ⟶ Y} [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
-  [(R(a)_![A']).IsLeftAdjoint] (G : 𝐃(Y, A) ⥤ 𝐃(Y, A')) [G.LaxMonoidal] {d : ℕ}
-  {T : 𝐃(X, A)} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
-  (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A' a) {K : 𝐃(X, A)} {K' : 𝐃(X, A')}
+variable {X Y : Scheme.{u}} {a : X ⟶ Y} [HasCompactification a] {P : 𝐃(Y, A) ⥤ 𝐃(X, A)}
+  (adj : R(a)_![A] ⊣ P) {P' : 𝐃(Y, A') ⥤ 𝐃(X, A')} (adj' : R(a)_![A'] ⊣ P')
+  (G : 𝐃(Y, A) ⥤ 𝐃(Y, A')) [G.LaxMonoidal] {d : ℕ}
+  {T : 𝐃(X, A)} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ P.obj (𝟙_ _))
+  (γ' : T'⟦(2 * d : ℤ)⟧ ≅ P'.obj (𝟙_ _)) {K : 𝐃(X, A)} {K' : 𝐃(X, A')}
 
 /-- Blueprint `thm-pod-finite-reduction`: Finite reduction of the Poincaré pairing.
 
@@ -106,11 +107,11 @@ theorem map_inv_curry_poincarePairing_comp (hK : IsDualizable K) (hK' : IsDualiz
       ((R((a)_*[A'])).obj (((derivedTensor A' X).obj
         ((DerivedCategory.coefficientDual A' X).obj (op K'))).obj T'))⟦(2 * d : ℤ)⟧)
     (e : G.obj (𝟙_ _) ⟶ 𝟙_ _)
-    (h : (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing a γ' K' =
-      cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing a γ K) ≫ e) :
-    G.map (isPerfectPairing_poincarePairing_of_hasProjectionFormula A a γ hK hPF).iso.inv ≫ cY =
+    (h : (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing adj' γ' K' =
+      cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing adj γ K) ≫ e) :
+    G.map (isPerfectPairing_poincarePairing_of_hasProjectionFormula A a adj γ hK hPF).iso.inv ≫ cY =
       unitDualComparison G cX e ≫
-        (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a γ' hK' hPF').iso.inv :=
+        (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a adj' γ' hK' hPF').iso.inv :=
   map_inv_curry_comp G _ _ cX cY e h
 
 /-- Blueprint `thm-pod-finite-reduction`: Finite reduction of the Poincaré pairing, the
@@ -129,12 +130,12 @@ theorem isIso_of_map_poincarePairing (hK : IsDualizable K) (hK' : IsDualizable K
       ((R((a)_*[A'])).obj (((derivedTensor A' X).obj
         ((DerivedCategory.coefficientDual A' X).obj (op K'))).obj T'))⟦(2 * d : ℤ)⟧)
     (e : G.obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso (unitDualComparison G cX e)]
-    (h : (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing a γ' K' =
-      cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing a γ K) ≫ e) :
+    (h : (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing adj' γ' K' =
+      cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing adj γ K) ≫ e) :
     IsIso cY :=
   isIso_of_map_curry_comp_unitDualComparison G
-    (isPerfectPairing_poincarePairing_of_hasProjectionFormula A a γ hK hPF)
-    (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a γ' hK' hPF') cX cY e h
+    (isPerfectPairing_poincarePairing_of_hasProjectionFormula A a adj γ hK hPF)
+    (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a adj' γ' hK' hPF') cX cY e h
 
 end Etale
 

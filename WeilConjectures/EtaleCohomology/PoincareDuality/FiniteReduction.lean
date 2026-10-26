@@ -71,8 +71,9 @@ local notation "𝐃(" X ", " A ")" =>
 
 namespace Etale
 
-variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
-  [(R(a)_![A']).IsLeftAdjoint] {d : ℕ}
+variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] {d : ℕ}
+  {P : 𝐃(Y, A) ⥤ 𝐃(X, A)} (adj : R(a)_![A] ⊣ P) {P' : 𝐃(Y, A') ⥤ 𝐃(X, A')}
+  (adj' : R(a)_![A'] ⊣ P')
 
 /-- The derived Poincaré pairing before the trace,
 `Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Ra_!(T[2d])`: the shift moved out, the mixed-support cup
@@ -91,9 +92,9 @@ noncomputable def poincarePairingUntraced (d : ℕ) (T K : 𝐃(X, A)) :
 variable {A a}
 
 /-- The derived Poincaré pairing is the untraced pairing followed by the smooth trace. -/
-lemma poincarePairing_eq {T : 𝐃(X, A)} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
+lemma poincarePairing_eq {T : 𝐃(X, A)} (γ : T⟦(2 * d : ℤ)⟧ ≅ P.obj (𝟙_ _))
     (K : 𝐃(X, A)) :
-    poincarePairing a γ K = poincarePairingUntraced A a d T K ≫ smoothTrace γ := by
+    poincarePairing adj γ K = poincarePairingUntraced A a d T K ≫ smoothTrace adj γ := by
   simp only [poincarePairing, poincarePairingUntraced, Category.assoc]
 
 variable {A'}
@@ -102,21 +103,22 @@ omit [Etale.UpperStarPreservesFlat A] [Etale.UpperStarPreservesFlat A'] in
 /-- Blueprint `thm-pur-finite-reduction-of-purity` (the smooth trace): **the smooth trace
 reduces.** Let `G` be a change of coefficients on the base, `ψ : Ra_! ⋙ G ≅ Ψ_X ⋙ Ra_!` its
 commutation with `Ra_!`, `e : G Λ_Y ⟶ Λ'_Y`, `v₀ : Ψ_X(T[2d]) ≅ T'[2d]` and
-`vω : Ψ_X ω_X ≅ ω'_X`. If the orientations `γ : T[2d] ≅ ω_X`, `γ'` reduce (`hγ`) and the counit
-of `Ra_! ⊣ Ra^!` at `Λ_Y` reduces (`hS`), then `G(Tr_γ) = Tr_{γ'}` read through `ψ`, `v₀`
+`vω : Ψ_X ω_X ≅ ω'_X`, where `ω_X = P Λ_Y` for the right adjoint `P` of `Ra_!` (for finite
+coefficients, `P = Ra^!`). If the orientations `γ : T[2d] ≅ ω_X`, `γ'` reduce (`hγ`) and the
+counit of `Ra_! ⊣ P` at `Λ_Y` reduces (`hS`), then `G(Tr_γ) = Tr_{γ'}` read through `ψ`, `v₀`
 and `e`. -/
 theorem map_smoothTrace (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ 𝐃(Y, A'))
     (ψ : R(a)_![A] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_ _) {T : 𝐃(X, A)}
-    {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
-    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A' a)
+    {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ P.obj (𝟙_ _))
+    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ P'.obj (𝟙_ _))
     (v₀ : ΨX.obj (T⟦(2 * d : ℤ)⟧) ≅ T'⟦(2 * d : ℤ)⟧)
-    (vω : ΨX.obj (dualizingComplex A a) ≅ dualizingComplex A' a)
+    (vω : ΨX.obj (P.obj (𝟙_ _)) ≅ P'.obj (𝟙_ _))
     (hγ : ΨX.map γ.hom ≫ vω.hom = v₀.hom ≫ γ'.hom)
     (hS : ψ.hom.app _ ≫ (R(a)_![A']).map vω.hom ≫
-        (rightDerivedUpperShriekAdjunction A' a).counit.app (𝟙_ _) =
-      G.map ((rightDerivedUpperShriekAdjunction A a).counit.app (𝟙_ _)) ≫ e) :
-    G.map (smoothTrace γ) ≫ e =
-      ψ.hom.app _ ≫ (R(a)_![A']).map v₀.hom ≫ smoothTrace γ' := by
+        adj'.counit.app (𝟙_ _) =
+      G.map (adj.counit.app (𝟙_ _)) ≫ e) :
+    G.map (smoothTrace adj γ) ≫ e =
+      ψ.hom.app _ ≫ (R(a)_![A']).map v₀.hom ≫ smoothTrace adj' γ' := by
   have hψ := ψ.hom.naturality γ.hom
   simp only [Functor.comp_obj, Functor.comp_map] at hψ
   simp only [smoothTrace, Functor.map_comp, Category.assoc, ← hS]
@@ -134,14 +136,14 @@ and `e`. This is the hypothesis of the finite reduction
 `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`. -/
 theorem map_poincarePairing (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ 𝐃(Y, A'))
     [G.LaxMonoidal] (ψ : R(a)_![A] ⋙ G ≅ ΨX ⋙ R(a)_![A']) (e : G.obj (𝟙_ _) ⟶ 𝟙_ _)
-    {T : 𝐃(X, A)} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a)
-    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A' a)
+    {T : 𝐃(X, A)} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ P.obj (𝟙_ _))
+    (γ' : T'⟦(2 * d : ℤ)⟧ ≅ P'.obj (𝟙_ _))
     (v₀ : ΨX.obj (T⟦(2 * d : ℤ)⟧) ≅ T'⟦(2 * d : ℤ)⟧)
-    (vω : ΨX.obj (dualizingComplex A a) ≅ dualizingComplex A' a)
+    (vω : ΨX.obj (P.obj (𝟙_ _)) ≅ P'.obj (𝟙_ _))
     (hγ : ΨX.map γ.hom ≫ vω.hom = v₀.hom ≫ γ'.hom)
     (hS : ψ.hom.app _ ≫ (R(a)_![A']).map vω.hom ≫
-        (rightDerivedUpperShriekAdjunction A' a).counit.app (𝟙_ _) =
-      G.map ((rightDerivedUpperShriekAdjunction A a).counit.app (𝟙_ _)) ≫ e)
+        adj'.counit.app (𝟙_ _) =
+      G.map (adj.counit.app (𝟙_ _)) ≫ e)
     {K : 𝐃(X, A)} {K' : 𝐃(X, A')}
     (cX : (R(a)_![A']).obj K' ⟶ G.obj ((R(a)_![A]).obj K))
     (cY : G.obj (((R((a)_*[A])).obj (((derivedTensor A X).obj
@@ -151,10 +153,10 @@ theorem map_poincarePairing (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) �
     (hE : cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairingUntraced A a d T K) ≫ ψ.hom.app _ ≫
         (R(a)_![A']).map v₀.hom =
       (R(a)_![A']).obj K' ◁ cY ≫ poincarePairingUntraced A' a d T' K') :
-    (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing a γ' K' =
-      cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing a γ K) ≫ e := by
+    (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing adj' γ' K' =
+      cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing adj γ K) ≫ e := by
   simp only [poincarePairing_eq, Functor.map_comp, Category.assoc]
-  rw [map_smoothTrace ΨX G ψ e γ γ' v₀ vω hγ hS, ← reassoc_of% hE]
+  rw [map_smoothTrace adj adj' ΨX G ψ e γ γ' v₀ vω hγ hS, ← reassoc_of% hE]
 
 end Etale
 

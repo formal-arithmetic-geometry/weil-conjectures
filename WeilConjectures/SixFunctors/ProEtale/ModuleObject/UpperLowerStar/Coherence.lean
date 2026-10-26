@@ -18,7 +18,8 @@ The composition isomorphisms `f_* ⋙ g_* ≅ (f ≫ g)_*`
 (`ProEtale.CondensedRing.lowerStarComp`) and `(f ≫ g)^* ≅ g^* ⋙ f^*`
 (`ProEtale.CondensedRing.upperStarComp`) of the pushforwards and pullbacks of module objects over
 a commutative condensed ring `Λ` satisfy, together with the identity isomorphisms
-`(𝟙 X)_* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭` defined here, the associativity and unit laws.
+`(𝟙 X)_* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭` (`ProEtale.CondensedRing.lowerStarId`,
+`ProEtale.CondensedRing.upperStarId`), the associativity and unit laws.
 
 On underlying sheaves, the composition and identity isomorphisms of the pushforwards are those of
 the pushforwards of sheaves (`ProEtale.lowerStarComp`, `ProEtale.lowerStarId`), so that their
@@ -28,8 +29,6 @@ of the pushforwards, and their laws follow by conjugation.
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.lowerStarId`: the identity isomorphism `(𝟙 X)_* ≅ 𝟭`.
-- `ProEtale.CondensedRing.upperStarId`: the identity isomorphism `(𝟙 X)^* ≅ 𝟭`, its conjugate.
 - `ProEtale.CondensedRing.lowerStarCongr`, `ProEtale.CondensedRing.upperStarCongr`: transport
   along an equality of morphisms.
 
@@ -52,14 +51,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry
 
-/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of the pushforward of abelian pro-étale sheaves is
-monoidal. -/
-instance ProEtale.isMonoidal_lowerStarId_hom (X : Scheme.{u}) :
-    NatTrans.IsMonoidal (ProEtale.lowerStarId Ab.{u + 1} X).hom :=
-  inferInstanceAs (NatTrans.IsMonoidal (Functor.sheafPushforwardContinuousId'
-    (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) Ab.{u + 1}
-    (Scheme.ProEt.topology X)).hom)
-
 namespace ProEtale.CondensedRing
 
 open Scheme
@@ -72,29 +63,13 @@ section LowerStar
 
 variable (X : Scheme.{u})
 
-/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of the pushforward of module objects over `Λ`: on
-underlying sheaves it is the identity isomorphism `ProEtale.lowerStarId` of the pushforward of
-sheaves, which is linear since it is monoidal and `η_{𝟙 X}` is its inverse at `Λ_X`
-(`ProEtale.condensedPushforwardHom_id`). -/
-noncomputable def lowerStarId : (𝟙 X)_*⟦Λ⟧ ≅ 𝟭 _ :=
-  NatIso.ofComponents
-    (fun M ↦ Mod.isoMk (M := (𝟙 X)_*⟦Λ⟧.obj M)
-      (N := (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (𝟙 (condensedRingObj Λ X))).obj M)
-      ((ProEtale.lowerStarId Ab.{u + 1} X).app M.X)
-      (Functor.act_comp_app_of_isMonoidal_id (ProEtale.lowerStarId Ab.{u + 1} X).hom
-        (condensedPushforwardHom Λ (𝟙 X)) (𝟙 _)
-        (by rw [condensedPushforwardHom_id, Iso.inv_hom_id_app]; rfl) M))
-    (fun g ↦ Mod.hom_ext _ _ ((ProEtale.lowerStarId Ab.{u + 1} X).hom.naturality g.hom)) ≪≫
-  Mod.comapId _
-
 /-- On underlying sheaves, the identity isomorphism of the pushforward of module objects is that
 of the pushforward of sheaves. -/
 @[simp]
-lemma lowerStarId_hom_app_hom
+lemma lowerStarId_hom_app_hom [IsCommMonObj Λ]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     ((lowerStarId Λ X).hom.app M).hom = (ProEtale.lowerStarId Ab.{u + 1} X).hom.app M.X :=
-  Category.comp_id _
+  rfl
 
 variable {X} {Y Z V : Scheme.{u}}
 
@@ -156,7 +131,7 @@ lemma lowerStarComp_id_left (t : X ⟶ Y) :
   have := congrArg (fun e ↦ e.hom.app M.X) (ProEtale.legacy_lowerStarComp_id_left Ab.{u + 1} t)
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Mod.comp_hom',
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, lowerStarComp_hom_app_hom,
-    lowerStar_map_hom, lowerStarCongr_hom_app_hom, lowerStarId_hom_app_hom,
+    lowerStar_map_hom, lowerStarCongr_hom_app_hom,
     Functor.leftUnitor_hom_app, Mod.id_hom'] at this ⊢
   exact this
 
@@ -169,7 +144,7 @@ lemma lowerStarComp_id_right (t : X ⟶ Y) :
   have := congrArg (fun e ↦ e.hom.app M.X) (ProEtale.lowerStarComp_id_right Ab.{u + 1} t)
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Mod.comp_hom',
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, lowerStarComp_hom_app_hom,
-    lowerStarCongr_hom_app_hom, lowerStarId_hom_app_hom, Functor.rightUnitor_hom_app,
+    lowerStarCongr_hom_app_hom, Functor.rightUnitor_hom_app,
     Mod.id_hom'] at this ⊢
   exact this
 
@@ -181,19 +156,12 @@ section UpperStar
 
 variable [IsCommMonObj Λ] (X : Scheme.{u})
 
-/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback of module objects over `Λ`, obtained
-from `ProEtale.CondensedRing.lowerStarId` by uniqueness of left adjoints: both sides are left
-adjoint to `(𝟙 X)_*`. -/
-noncomputable def upperStarId : (𝟙 X)^*⟦Λ⟧ ≅ 𝟭 _ :=
-  (conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction Λ (𝟙 X))).symm
-    (lowerStarId Λ X).symm
-
 /-- The identity isomorphism of the pullback is conjugate to the inverse of that of the
 pushforward. -/
 lemma conjugateIsoEquiv_upperStarId :
     conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction Λ (𝟙 X)) (upperStarId Λ X) =
       (lowerStarId Λ X).symm :=
-  Equiv.apply_symm_apply _ _
+  Iso.ext (Equiv.apply_symm_apply _ _)
 
 variable {X} {Y Z V : Scheme.{u}}
 

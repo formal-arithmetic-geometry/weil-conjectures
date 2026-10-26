@@ -261,7 +261,7 @@ structure of `Lf^*`. -/
 theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison
     (f : V ⟶ W) [IsOpenImmersion f.left] (K : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism _ ℓ f K B ≫
+    boundedConstructibleExceptionalProjectionMorphism ℓ f K B ≫
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app
           (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) ≫
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
@@ -337,7 +337,7 @@ lemma boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl_eq_conjugate
     [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom] (f : V ⟶ W)
     [IsOpenImmersion f.left] :
     boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ f =
-      conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+      conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ f)
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).symm := by
   unfold boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl
@@ -355,7 +355,7 @@ theorem exceptionalKunnethMapRestriction (j : U ⟶ Y) [IsOpenImmersion j.left]
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ExceptionalKunnethMapRestriction ℓ j M := by
   refine map_comp_restriction_eq_of_trace
-    (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.map (𝟙 X) j))
+    (boundedConstructibleUpperShriekAdjunction ℓ (prod.map (𝟙 X) j))
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ (prod.map (𝟙 X) j))
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ (prod.map (𝟙 X) j))
     (exceptionalKunnethProdMapTrace ℓ M j) (exceptionalKunnethSourceRestrictionIso ℓ j M)
