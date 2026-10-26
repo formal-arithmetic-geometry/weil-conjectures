@@ -75,8 +75,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 by blueprint `thm-weil-pbc-bounded-below` for torsion coefficients; SGA 7 XIII 2.1.7): if `M`
 and `N` are models of finite type over the trait, the morphism `t` of total spaces of a morphism
 of models is proper and the square of special fibres is cartesian, the base change morphism
-`Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the generic direct image `Rj_{M*} Lε_M^* K` of a bounded
-constructible `ℚ̄_ℓ`-complex `K`. -/
+`Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the generic direct image
+`Rj_{M*} Lε_M^* K` of a bounded constructible `ℚ̄_ℓ`-complex `K`. -/
 theorem isIso_baseChangeMap_commSq_i_app_of_isProper {X Y : Scheme.{u}}
     {X' Y' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
     {N : NearbyCyclesModel Y Y'.left} {f : X ⟶ Y} {f' : X'.left ⟶ Y'.left} (φ : M.Hom N f f')
