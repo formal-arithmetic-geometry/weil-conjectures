@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -45,6 +46,13 @@ geometric generic point; this last input is a hypothesis of
 `NearbyCyclesModel.isIso_lowerStar_kunnethMap`, supplied for `ℚ̄_ℓ`-coefficients by
 `NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`
 (`WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal`).
+
+## Implementation notes
+
+The statements of the `ℚ̄_ℓ` inputs carry different `Precoherent Profinite` proofs (auxiliary proof
+constants and the synthesized instance) inside the `MonObj` instances of `ℚ̄_ℓ`; comparing them
+makes the unifier and the kernel unfold the derived categories. The inputs are therefore applied
+with `exact_mod_proofs`, which identifies these proofs by casts.
 
 -/
 
@@ -484,8 +492,110 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
           A)) (R((gN)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj (L((N.ε)^*⟦Profinite.padicAlgClRingObj
               ℓ⟧).obj B)))) :
     IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-      (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) :=
-  sorry
+      (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+  -- the structure morphisms and their properties
+  have hqP : IsProper (φ₁.total ≫ qM) := by
+    have : IsProper φ₁.total := MorphismProperty.of_isPullback hpb.flip inferInstance
+    infer_instance
+  have hs₁ := special_comp_hom_fst hM hP
+  have hs₂ := special_comp_hom_snd hN hpb hP
+  have : LocallyOfFiniteType X'.hom := MorphismProperty.of_isPullback hM.isPullback_i
+    hM.locallyOfFiniteType
+  have : QuasiCompact X'.hom := MorphismProperty.of_isPullback hM.isPullback_i
+    hM.quasiCompact
+  have : IsSeparated X'.hom := MorphismProperty.of_isPullback hM.isPullback_i
+    hM.isSeparated
+  have : LocallyOfFiniteType Y'.hom := MorphismProperty.of_isPullback hN.isPullback_i
+    hN.locallyOfFiniteType
+  have : QuasiCompact Y'.hom := MorphismProperty.of_isPullback hN.isPullback_i
+    hN.quasiCompact
+  have : IsSeparated Y'.hom := MorphismProperty.of_isPullback hN.isPullback_i
+    hN.isSeparated
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.quasiCompact
+  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.isSeparated
+  have : LocallyOfFiniteType (Over.mk gM).hom := MorphismProperty.of_isPullback
+    hM.isPullback_j hM.locallyOfFiniteType
+  have : QuasiCompact (Over.mk gM).hom := MorphismProperty.of_isPullback hM.isPullback_j
+    hM.quasiCompact
+  have : IsSeparated (Over.mk gM).hom := MorphismProperty.of_isPullback hM.isPullback_j
+    hM.isSeparated
+  have : LocallyOfFiniteType (Over.mk gN).hom := MorphismProperty.of_isPullback
+    hN.isPullback_j hN.locallyOfFiniteType
+  have : QuasiCompact (Over.mk gN).hom := MorphismProperty.of_isPullback hN.isPullback_j
+    hN.quasiCompact
+  have : IsSeparated (Over.mk gN).hom := MorphismProperty.of_isPullback hN.isPullback_j
+    hN.isSeparated
+  have : LocallyOfFiniteType (Over.mk (φ₁.generic ≫ gM)).hom := MorphismProperty.of_isPullback
+    hP.isPullback_j hP.locallyOfFiniteType
+  have : QuasiCompact (Over.mk (φ₁.generic ≫ gM)).hom := MorphismProperty.of_isPullback
+    hP.isPullback_j hP.quasiCompact
+  have : IsSeparated (Over.mk (φ₁.generic ≫ gM)).hom := MorphismProperty.of_isPullback
+    hP.isPullback_j hP.isSeparated
+  -- the complexes on the geometric generic fibres
+  have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA
+  have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB
+  have hΨA' : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
+      ((M.toGeneric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)) :=
+    (boundedConstructible _).prop_of_iso (L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
+      (R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
+        ((leftDerivedUpperStarId _ M.generic).app _))).symm hΨA
+  have hΨB' : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
+      ((N.toGeneric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
+    (boundedConstructible _).prop_of_iso (L((N.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
+      (R((N.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
+        ((leftDerivedUpperStarId _ N.generic).app _))).symm hΨB
+  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C →
+        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
+          boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
+            (C ⊗ D) := by
+    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        P.total)).IsMonoidal := isMonoidal_boundedConstructible
+      (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k')) (ℓ := ℓ)
+    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+  refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
+    hgen A B ?_ ?_ ?_ ?_ ?_ hT
+  -- the proper exchanges
+  · have h₁ := fun C₀ hC₀ ↦
+      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hM C₀ hC₀
+    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
+    have h₃ := h₂ (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+      ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
+        nonempty_upperStar_obj_iso_comp _ heM A⟩
+    exact_mod_proofs h₃
+  · have h₁ := fun C₀ hC₀ ↦
+      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hN C₀ hC₀
+    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
+    have h₃ := h₂ (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
+      ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
+        nonempty_upperStar_obj_iso_comp _ heN B⟩
+    exact_mod_proofs h₃
+  · have hqP' : IsProper (φ₁.total ≫ qM) := hqP
+    have h₁ := fun C₀ hC₀ ↦
+      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hP C₀ hC₀
+    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
+    have h₃ := h₂
+      (L((φ₁.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) ⊗
+        L((φ₂.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))
+      (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
+    exact_mod_proofs h₃
+  -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
+      (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
+      (isPullback_special hM hN hpb hP) _ hΨA' _ hΨB'
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
+      (Y := Over.mk gN)
+      (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
+      (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen) _ hA' _ hB'
 
 end Global
 

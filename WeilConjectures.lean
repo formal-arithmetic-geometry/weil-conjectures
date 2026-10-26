@@ -13014,6 +13014,7 @@ public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactModProofIrrel
+public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
