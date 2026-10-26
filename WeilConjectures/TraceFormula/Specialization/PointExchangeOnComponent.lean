@@ -28,7 +28,8 @@ is `map_mateEquiv_inv_liftExchange`.
 
 The ambient identity `hC` itself, in the shape of `openPointExchangeAux_app_comp_aux_of_eq`, is
 `NearbyCyclesModel.Hom.pointExchange_comp_app` (generic coefficients `Λ`), deduced from its
-abstract form `pointExchange_comp_aux`.
+abstract form `pointExchange_comp_aux`; `NearbyCyclesModel.Hom.pointExchange_comp_app_of_eq` is
+the form of it matching the instances syntactically (used in `PointExchangeOnComponentBdc`).
 
 ## Implementation notes
 
@@ -40,16 +41,12 @@ kernel unfold instead of failing fast. The instance arguments of
 unification with the goal instead of being synthesized.
 
 `apply NearbyCyclesModel.Hom.pointExchange_comp_app` closes the `hC` of
-`pointCompactSupportExchangeOfSeparated_app_lowerStar_component` in the elaborator (in a few
-seconds), but the kernel check times out (and runs out of memory). The goal mixes two terms of
-`MonObj (Profinite.padicAlgClRingObj ℓ)`: the argument of `Functor.monObjObj` in the categories
-`Mod (condensedRingObj Λℓ X)` synthesized in the statements (with
-`ProEtale.pointLowerStar._proof_1` as `Precoherent Profinite`) and the direct `[MonObj Λ]`
-arguments of the six functors (with the synthesized `Precoherent` instance). A lemma generic in
-`Λ` uses one `MonObj Λ` everywhere, so one of the two families differs from the goal in a proof;
-each such pair is checked instantly in isolation, but under the projections
-`Quiver.Hom`/`Prefunctor.obj` (reducibility hint `abbrev`) the kernel unfolds instead of
-comparing arguments.
+`pointCompactSupportExchangeOfSeparated_app_lowerStar_component` in the elaborator, but the kernel
+check runs out of memory: under the projections `Quiver.Hom`/`Prefunctor.obj` (reducibility hint
+`abbrev`) the kernel unfolds instead of comparing arguments, so every subterm on which the goal and
+the instance of the lemma differ (although each such pair is checked instantly in isolation) is
+fatal. How these differences are removed is explained in the notes of
+`PointExchangeOnComponentBdc`.
 
 -/
 
@@ -254,6 +251,47 @@ theorem NearbyCyclesModel.Hom.pointExchange_comp_app
     (lowerStarCompOfEq rfl) (lowerStarCompOfEq rfl)
     (((φg.comp φu).comp φh).pushforwardExchange_comp_app_of_eq Λ φp _ rfl rfl rfl rfl) N
 
+/-- `NearbyCyclesModel.Hom.pointExchange_comp_app` with the composite morphism of models `φ`, the
+second occurrence `adjH'` of the adjunction of `h'` and the source `R(gu)_*` of the component of
+`closedExtension` at `𝟙 Y` given separately, so that its statement can be matched syntactically
+with the instances of `openPointExchangeAux_app_comp_aux_of_eq` (see the implementation notes of
+`PointExchangeOnComponentBdc`). -/
+theorem NearbyCyclesModel.Hom.pointExchange_comp_app_of_eq
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {_ : MonObj Λ} {_ : IsCommMonObj Λ}
+    {B B' X X' Y Y' P' S S' : Scheme.{u}} {MB : NearbyCyclesModel B B'}
+    {MX : NearbyCyclesModel X X'} {MY : NearbyCyclesModel Y Y'} {MP : NearbyCyclesModel Y P'}
+    {MS : NearbyCyclesModel S S'} {g : B ⟶ X} {g' : B' ⟶ X'} {u : X ⟶ Y} {u' : X' ⟶ Y'}
+    {h' : Y' ⟶ P'} {p : Y ⟶ S} {p' : P' ⟶ S'} (φg : MB.Hom MX g g') (φu : MX.Hom MY u u')
+    (φh : MY.Hom MP (𝟙 Y) h') (φp : MP.Hom MS p p')
+    (φ : MB.Hom MS (((g ≫ u) ≫ 𝟙 Y) ≫ p) (((g' ≫ u') ≫ h') ≫ p'))
+    (hφ : φ = ((φg.comp φu).comp φh).comp φp) {DuS : 𝔻(X) ⥤ 𝔻(Y)}
+    {DuS' : 𝔻(X') ⥤ 𝔻(Y')} {Dh : 𝔻(Y') ⥤ 𝔻(P')} (adjU : DuS ⊣ L((u)^*⟦Λ⟧))
+    (adjU' : DuS' ⊣ L((u')^*⟦Λ⟧)) (adjH adjH' : Dh ⊣ L((h')^*⟦Λ⟧)) (hH : adjH = adjH')
+    (e : 𝟭 𝔻(Y) ≅ L((𝟙 Y)^*⟦Λ⟧))
+    {_ : IsIso (φu.pullbackExchange Λ)} {_ : IsIso (φh.pullbackExchange Λ)} {_ : Mono u}
+    {_ : WeaklyEtale u} {_ : Mono u'} {_ : WeaklyEtale u'} {_ : Mono h'} {_ : WeaklyEtale h'}
+    (N : 𝔻(B)) :
+    ∀ χ₀ : (MP.nearbyCycles Λ ⋙ R((p')_*⟦Λ⟧)).obj (R((g ≫ u)_*⟦Λ⟧).obj N) ⟶
+        (R((p)_*⟦Λ⟧) ⋙ MS.nearbyCycles Λ).obj (R((g ≫ u)_*⟦Λ⟧).obj N),
+      χ₀ ≫ (φp.pushforwardExchange Λ).app (R((g ≫ u)_*⟦Λ⟧).obj N) = 𝟙 _ →
+        R((p')_*⟦Λ⟧).map (Dh.map ((lowerShriekExchangeOfInv adjU adjU'
+            (φu.pullbackExchange Λ)).app (R((g)_*⟦Λ⟧).obj N) ≫
+            (MY.nearbyCycles Λ).map ((closedExtension adjU rfl).app N))) ≫
+          R((p')_*⟦Λ⟧).map ((pointOpenExchange adjH e (φh.pullbackExchange Λ)).app
+            (R((g ≫ u)_*⟦Λ⟧).obj N)) ≫ χ₀ ≫
+          (MS.nearbyCycles Λ).map (R((p)_*⟦Λ⟧).map
+              (@NatTrans.app _ _ _ _ R((g ≫ u)_*⟦Λ⟧) R(((g ≫ u) ≫ 𝟙 Y)_*⟦Λ⟧)
+                (closedExtension (Adjunction.id.ofNatIsoRight e) rfl) N) ≫
+            (lowerStarCompOfEq (Λ := Λ) (rfl : ((g ≫ u) ≫ 𝟙 Y) ≫ p = _)).inv.app N) ≫
+          (φ.pushforwardExchange Λ).app N =
+        R((p')_*⟦Λ⟧).map (Dh.map (DuS'.map ((φg.pushforwardExchange Λ).app N) ≫
+            (closedExtension adjU' rfl).app ((MB.nearbyCycles Λ).obj N)) ≫
+            (closedExtension adjH' rfl).app ((MB.nearbyCycles Λ).obj N)) ≫
+          (lowerStarCompOfEq (Λ := Λ) (rfl : ((g' ≫ u') ≫ h') ≫ p' = _)).inv.app
+            ((MB.nearbyCycles Λ).obj N) := by
+  subst hφ hH
+  exact pointExchange_comp_app φg φu φh φp adjU adjU' adjH e N
+
 end PointModelExchange
 
 section Lift
@@ -309,8 +347,13 @@ variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (x : RationalPoint X
 noncomputable abbrev pointSpecialMap :=
   deformationSpecialFibreMap u (ker_compatible_of_isOpenImmersion x u) k'
 
-/-- The open immersion of deformation models along `u : X ⊂ Y` (ideals of `x` and `x ≫ u`). -/
-noncomputable abbrev pointModelHom :=
+/-- The open immersion of deformation models along `u : X ⊂ Y` (ideals of `x` and `x ≫ u`). Its
+type is written with `pointSpecialMap`, so that all the terms built from it carry the same form of
+the morphism of special fibres (see the implementation notes of `PointExchangeOnComponentBdc`).
+-/
+noncomputable abbrev pointModelHom :
+    (deformationModel X x.left.ker k').Hom (deformationModel Y (x ≫ u).left.ker k') u.left
+      (pointSpecialMap x u k').left :=
   deformationModelHom u (ker_compatible_of_isOpenImmersion x u) k'
 
 instance isIso_pointModelHom_pullbackExchange
