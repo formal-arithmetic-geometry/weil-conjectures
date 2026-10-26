@@ -95,9 +95,9 @@ end General
 `Lp_Y^* ω_Y = Lp_Y^* Ra_Y^! ℚ̄_ℓ ⟶ Rp_X^! La_X^* ℚ̄_ℓ ≅ Rp_X^! ℚ̄_ℓ`. -/
 noncomputable def prodUpperShriekBaseChangeUnit :
     (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj (dualizingComplex' ℓ Y) ⟶
-      (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _) :=
+      (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _) :=
   upperShriekBaseChange ℓ (isPullback_prod_toPoint X Y) (𝟙_ _) ≫
-    (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+    (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
 set_option maxHeartbeats 1000000 in
@@ -113,40 +113,40 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
     (isPullback_prod_toPoint X Y)
   -- the projection formula is natural in its first variable
-  have hPF : (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+  have hPF : (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
       (prodUpperShriekBaseChangeUnit ℓ ▷
         (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
-        ((boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M) =
-      inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M) =
+      inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
         ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
           (dualizingComplex' ℓ Y))).app M) ≫
-        ((boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+        ((boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
           (prodUpperShriekBaseChangeUnit ℓ) ▷ M) := by
     rw [IsIso.comp_inv_eq, Category.assoc, IsIso.eq_inv_comp]
-    exact (boundedConstructibleExceptionalProjectionMorphism_natural_left _ ℓ _
+    exact (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _
       (prodUpperShriekBaseChangeUnit ℓ) M).symm
   -- the adjoint of the base change map
-  have hx : ((boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv
+  have hx : ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv
       _ _).symm
       (prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y)) =
       (prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ≫
         (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-          ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
+          ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
         (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv := by
     rw [prodUpperShriekBaseChangeUnit, upperShriekBaseChange,
       Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Category.assoc]
     congr 1
     simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
-  have hx' := ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+  have hx' := ((boundedConstructibleUpperShriekAdjunction ℓ
     (prod.fst : X ⨯ Y ⟶ X)).homEquiv_counit
       (g := prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y))).symm.trans hx
   have key : exceptionalKunnethAdjoint ℓ (Y := Y) M =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      (boundedConstructibleLowerShriek ℓ
         (prod.fst : X ⨯ Y ⟶ X)).map
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.fst : X ⨯ Y ⟶ X)).obj M ◁ prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y)) ≫
-      ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleUpperShriekAdjunction ℓ
         (prod.fst : X ⨯ Y ⟶ X)).homEquiv _ _).symm
         (upperShriekUnitTensorMap ℓ (prod.fst : X ⨯ Y ⟶ X) M) := by
     rw [upperShriekUnitTensorMap, Equiv.symm_apply_apply, exceptionalKunnethAdjoint,

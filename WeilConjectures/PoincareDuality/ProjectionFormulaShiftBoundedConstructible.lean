@@ -121,7 +121,7 @@ isomorphism at every object. -/
 instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    IsIso ((boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f) K).app B) :=
   isIso_boundedConstructibleExceptionalProjectionMorphism ℓ f K B
 
@@ -129,7 +129,7 @@ instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTra
 isomorphism. -/
 instance isIso_boundedConstructibleExceptionalProjectionOfCompactificationNatTrans
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (f : X ⟶ Y) :
-    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    IsIso (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f) K) :=
   NatIso.isIso_of_isIso_app _
 

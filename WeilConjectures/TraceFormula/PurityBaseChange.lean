@@ -71,13 +71,13 @@ theorem map_upperShriekUnitTensorMap_comp_upperShriekBaseChange (sq : IsPullback
         (upperShriekUnitTensorMap ℓ f K) ≫ upperShriekBaseChange ℓ sq K =
       δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K)
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj (𝟙_ _)) ≫
+          ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _)) ≫
         ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
           sq.toCommSq).inv.app K ▷ _) ≫
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f').obj
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K) ◁
           (upperShriekBaseChange ℓ sq (𝟙_ _) ≫
-            (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+            (boundedConstructibleUpperShriek ℓ f').map
               (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)))) ≫
         upperShriekUnitTensorMap ℓ f'
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj K) :=
@@ -85,17 +85,17 @@ theorem map_upperShriekUnitTensorMap_comp_upperShriekBaseChange (sq : IsPullback
   -- (propositionally equal) instances, and comparing the two statements then times out
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have h := ProjectionBaseChange.map_tensorMap_comp_baseChange
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f')
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ f')
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq)
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f')
+    (boundedConstructibleExceptionalProjection ℓ f)
+    (boundedConstructibleExceptionalProjection ℓ f')
     (pfBaseChange_boundedConstructibleExceptionalProjection ℓ sq)
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ
-      (Profinite.padicAlgClRingObj ℓ) ℓ g' A B) K
+      ℓ g' A B) K
     (upperShriekUnitTensorMap ℓ f K) (Equiv.symm_apply_apply _ _)
     (upperShriekUnitTensorMap ℓ f' _) (Equiv.symm_apply_apply _ _)
     (upperShriekBaseChange ℓ sq K) (Equiv.symm_apply_apply _ _)

@@ -58,19 +58,21 @@ namespace CategoryTheory.Adjunction
 
 /-- **The exceptional base change of transported adjunctions**: let `L ⊣ R` and `L_o ⊣ L_s` with
 `λ : L ≅ L_o` (so that `R ≅ L_s`, the conjugate isomorphism), and similarly for `L' ⊣ R'`. If
-the base change `bc : L ⋙ v ⟶ u ⋙ L'` is, through `λ` and `λ'`, the inverse of the exchange
-`u ⋙ L_o' ⟶ L_o ⋙ v` of an isomorphism `θ : L_s ⋙ u ≅ v ⋙ L_s'`, then the exceptional
-base change `u R N ⟶ R' v N` is `θ` through `R ≅ L_s` and `R' ≅ L_s'`. -/
+the base change `bc : L ⋙ v ⟶ u ⋙ L'` is, through `λ` and `λ'`, the inverse of a morphism
+`e : u ⋙ L_o' ⟶ L_o ⋙ v` which is the exchange of an isomorphism
+`θ : L_s ⋙ u ≅ v ⋙ L_s'`, then the exceptional base change `u R N ⟶ R' v N` is `θ` through
+`R ≅ L_s` and `R' ≅ L_s'`. -/
 lemma exceptionalBaseChange_eq_of_exchangeLeft {C D C' D' : Type*} [Category* C]
     [Category* D] [Category* C'] [Category* D'] {L Lo : C ⥤ D} {R Ls : D ⥤ C}
     {L' Lo' : C' ⥤ D'} {R' Ls' : D' ⥤ C'} {v : D ⥤ D'} {u : C ⥤ C'} (a : L ⊣ R)
     (a' : L' ⊣ R') (b : Lo ⊣ Ls) (b' : Lo' ⊣ Ls') (lam : L ≅ Lo) (lam' : L' ≅ Lo')
     (bc : L ⋙ v ⟶ u ⋙ L') [IsIso bc] (θ : Ls ⋙ u ≅ v ⋙ Ls')
-    (hbc : ∀ K, bc.app K ≫ lam'.hom.app (u.obj K) ≫ (exchangeLeft b b' θ).app K =
-      v.map (lam.hom.app K)) (N : D) :
+    (e : u ⋙ Lo' ⟶ Lo ⋙ v) (he : e = exchangeLeft b b' θ)
+    (hbc : ∀ K, bc.app K ≫ lam'.hom.app (u.obj K) ≫ e.app K = v.map (lam.hom.app K)) (N : D) :
     exceptionalBaseChange a a' bc N =
       u.map ((conjugateIsoEquiv a b lam.symm).hom.app N) ≫ θ.hom.app N ≫
         (conjugateIsoEquiv a' b' lam'.symm).inv.app (v.obj N) := by
+  subst he
   apply (a'.homEquiv _ _).symm.injective
   have hι := conjugateEquiv_counit a b lam.inv N
   have hι' := conjugateEquiv_counit b' a' lam'.hom (v.obj N)
@@ -174,8 +176,8 @@ lemma upperShriekBaseChange_eq_exceptionalBaseChange {f : X ⟶ Y} {g : Y' ⟶ Y
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
     upperShriekBaseChange ℓ sq L = Adjunction.exceptionalBaseChange
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f')
+      (boundedConstructibleUpperShriekAdjunction ℓ f)
+      (boundedConstructibleUpperShriekAdjunction ℓ f')
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq) L :=
   rfl
 
@@ -188,8 +190,8 @@ theorem isIso_upperShriekBaseChange_of_isOpenImmersion {o : U ⟶ X} {g : X' ⟶
     IsIso (upperShriekBaseChange ℓ sq M) := by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have h := Adjunction.exceptionalBaseChange_eq_of_exchangeLeft
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ o)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ o')
+    (boundedConstructibleUpperShriekAdjunction ℓ o)
+    (boundedConstructibleUpperShriekAdjunction ℓ o')
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ o)
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
@@ -198,9 +200,11 @@ theorem isIso_upperShriekBaseChange_of_isOpenImmersion {o : U ⟶ X} {g : X' ⟶
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ o')
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-      sq.toCommSq.flip) (fun K ↦ by
-        rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft]
-        exact boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq K) M
+      sq.toCommSq.flip)
+    (boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq)
+    (boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft _ ℓ sq.toCommSq)
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq) M
   rw [upperShriekBaseChange_eq_exceptionalBaseChange, h]
   infer_instance
 
@@ -229,19 +233,19 @@ theorem upperShriekBaseChange_paste_vert {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' �
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gU).map
           ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ o f).hom.app L) ≫
         upperShriekBaseChange ℓ sqo
-          ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj L) ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ o').map
+          ((boundedConstructibleUpperShriek ℓ f).obj L) ≫
+        (boundedConstructibleUpperShriek ℓ o').map
           (upperShriekBaseChange ℓ sq L) := by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqo
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (sqo.paste_vert sq)
   exact Adjunction.exceptionalBaseChange_paste
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ o)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (o ≫ f))
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ o')
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f')
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (o' ≫ f'))
+    (boundedConstructibleUpperShriekAdjunction ℓ o)
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleUpperShriekAdjunction ℓ (o ≫ f))
+    (boundedConstructibleUpperShriekAdjunction ℓ o')
+    (boundedConstructibleUpperShriekAdjunction ℓ f')
+    (boundedConstructibleUpperShriekAdjunction ℓ (o' ≫ f'))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ o f)
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ o' f')
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqo)
@@ -259,11 +263,11 @@ theorem isIso_upperShriek_map_upperShriekBaseChange_iff {f : X ⟶ Y} {g : Y' �
     {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g) {o : U ⟶ X} {o' : U' ⟶ X'}
     {gU : U' ⟶ U} (sqo : IsPullback gU o' o g') [IsOpenImmersion o.left]
     [IsOpenImmersion o'.left] (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ o').map
+    IsIso ((boundedConstructibleUpperShriek ℓ o').map
         (upperShriekBaseChange ℓ sq L)) ↔
       IsIso (upperShriekBaseChange ℓ (sqo.paste_vert sq) L) := by
   have := isIso_upperShriekBaseChange_of_isOpenImmersion ℓ sqo
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj L)
+    ((boundedConstructibleUpperShriek ℓ f).obj L)
   rw [← isIso_comp_right_iff (upperShriekBaseChange ℓ (sqo.paste_vert sq) L)
     ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ o' f').hom.app
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj L)),

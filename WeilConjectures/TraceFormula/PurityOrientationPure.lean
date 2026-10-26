@@ -87,7 +87,7 @@ dualizable**: `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` by the trace (`isIso_smoothP
 are invertible. -/
 theorem isDualizable_upperShriek_unit_of_smoothOfRelativeDimension (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f.left] :
-    IsDualizable ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
   (isDualizable_boundedConstructibleTateTwist_shift ℓ d (2 * d)).of_iso
     (asIso (smoothPurityMap ℓ f d))
@@ -108,7 +108,7 @@ theorem exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange (sq : IsPullba
           boundedConstructibleTateTwist ℓ X' d (2 * d),
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
           (smoothPurityMap ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
-          (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+          (boundedConstructibleUpperShriek ℓ f').map
             (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)) =
         τ.hom ≫ smoothPurityMap ℓ f' d :=
   sorry
@@ -123,17 +123,17 @@ theorem isIso_upperShriekBaseChange_unit_of_smoothOfRelativeDimension (sq : IsPu
   obtain ⟨τ, hτ⟩ := exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange ℓ sq d
   have h : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
       (smoothPurityMap ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+        (boundedConstructibleUpperShriek ℓ f').map
           (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))) := by
     rw [hτ]
     infer_instance
   have h' := IsIso.of_isIso_comp_left ((boundedConstructibleUpperStar
     (Profinite.padicAlgClRingObj ℓ) ℓ g').map (smoothPurityMap ℓ f d))
     (upperShriekBaseChange ℓ sq (𝟙_ _) ≫
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+      (boundedConstructibleUpperShriek ℓ f').map
         (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)))
   exact IsIso.of_isIso_comp_right _ ((boundedConstructibleUpperShriek
-    (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+    ℓ f').map
       (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

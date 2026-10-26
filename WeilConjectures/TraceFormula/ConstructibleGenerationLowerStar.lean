@@ -61,8 +61,8 @@ def lisseLowerStarGenerator : ObjectProperty (Dᵇc(Y.left)⟦Profinite.padicAlg
     (U : Over (Spec (.of k))) (_ : LocallyOfFiniteType U.hom) (_ : QuasiCompact U.hom)
     (_ : IsSeparated U.hom) (_ : IsAffine U.left) (j : U ⟶ Z) (_ : IsOpenImmersion j.left)
     (L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (_ : IsDualizable L),
-    Nonempty (N ≅ (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L))
+    Nonempty (N ≅ (boundedConstructibleLowerStar ℓ g).obj
+      ((boundedConstructibleLowerStar ℓ j).obj L))
 
 /-- The lower-star lisse generators form a nonempty family: `Rj_* 𝟙` for the empty open
 subscheme `j` of `Y` is one. -/
@@ -87,10 +87,10 @@ lemma triangEnvelope_lisseLowerStarGenerator_lowerStar_lowerStar {Z U : Over (Sp
     (hL : ObjectProperty.triangEnvelope (C := Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
       IsDualizable L) :
     (lisseLowerStarGenerator ℓ Y).triangEnvelope
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)) := by
-  let F := boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
-    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g
+      ((boundedConstructibleLowerStar ℓ g).obj
+        ((boundedConstructibleLowerStar ℓ j).obj L)) := by
+  let F := boundedConstructibleLowerStar ℓ j ⋙
+    boundedConstructibleLowerStar ℓ g
   have : ((lisseLowerStarGenerator ℓ Y).triangEnvelope.inverseImage F).IsStableUnderRetracts :=
     ⟨fun r h ↦ ObjectProperty.IsStableUnderRetracts.of_retract
       (P := (lisseLowerStarGenerator ℓ Y).triangEnvelope) (r.map F) h⟩
@@ -108,12 +108,12 @@ lemma isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImm
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ Z)
     [IsOpenImmersion j.left] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       j).counit :=
   (Adjunction.Triple.mk
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ j)
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       j)).isIso_unit_iff_isIso_counit.1 inferInstance
 
 /-- For an open immersion `j : U ⟶ Z` and a distinguished triangle `F ⟶ N ⟶ Rj_* Lj^* N ⟶ F[1]`
@@ -123,13 +123,13 @@ lemma isZero_upperStar_of_distTriang_unit {Z U : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ Z)
     [IsOpenImmersion j.left] {F N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a : F ⟶ N)
-    (c : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+    (c : (boundedConstructibleLowerStar ℓ j).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N) ⟶
       (shiftFunctor _ (1 : ℤ)).obj F)
     (hT : Triangle.mk a ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ j).unit.app N) c ∈ distTriang _) :
+      ℓ j).unit.app N) c ∈ distTriang _) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj F) := by
-  let adj := boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j
+  let adj := boundedConstructibleUpperStarLowerStarAdjunction ℓ j
   have := isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion ℓ j
   have h : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
       (adj.unit.app N)) := isIso_of_comp_hom_eq_id _ (adj.left_triangle_components N)
@@ -148,11 +148,11 @@ lemma isIso_unit_upperStarLowerStar_of_isZero_upperStar {X Z U : Over (Spec (.of
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     {F : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (hF : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj F)) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       i).unit.app F) := by
   obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_boundedConstructible ℓ hcompl F
   exact (Triangle.isZero₁_iff_isIso₂ _ hT).1
-    ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map_isZero hF)
+    ((boundedConstructibleLowerShriek ℓ j).map_isZero hF)
 
 /-- The lower-star dévissage, by noetherian induction on the support: for a closed immersion
 `g : Z ⟶ Y` with image in the closed subset `C` of `Y` and `N ∈ Dᵇc(Z)⟦ℚ̲̄_ℓ⟧`, `Rg_* N` lies in
@@ -168,7 +168,7 @@ theorem triangEnvelope_lisseLowerStarGenerator_lowerStar (C : TopologicalSpace.C
       [IsSeparated Z.hom] (g : Z ⟶ Y) [IsClosedImmersion g.left],
       Set.range g.left.base ⊆ C → ∀ N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
         (lisseLowerStarGenerator ℓ Y).triangEnvelope
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) := by
+          ((boundedConstructibleLowerStar ℓ g).obj N) := by
   induction C using WellFoundedLT.induction with
   | _ C ih =>
   -- by topological invariance, we may replace `Z` by its reduction
@@ -176,18 +176,18 @@ theorem triangEnvelope_lisseLowerStarGenerator_lowerStar (C : TopologicalSpace.C
       [IsSeparated Z.hom] [IsReduced Z.left] (g : Z ⟶ Y) [IsClosedImmersion g.left],
       Set.range g.left.base ⊆ C → ∀ N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
         (lisseLowerStarGenerator ℓ Y).triangEnvelope
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) by
+          ((boundedConstructibleLowerStar ℓ g).obj N) by
     intro Z _ _ _ g _ hg N
     let r := overReductionι Z
     have : IsClosedImmersion (r ≫ g).left := by rw [Over.comp_left]; infer_instance
     have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ r
+      ℓ r
     refine ObjectProperty.prop_of_iso _
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).mapIso
+      ((boundedConstructibleLowerStar ℓ g).mapIso
         (asIso ((boundedConstructibleUpperStarLowerStarAdjunction
-          (Profinite.padicAlgClRingObj ℓ) ℓ r).unit.app N)).symm) ?_
+          ℓ r).unit.app N)).symm) ?_
     exact ObjectProperty.prop_of_iso _
-      ((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r g).app _).symm
+      ((boundedConstructibleLowerStarComp ℓ r g).app _).symm
       (H _ (r ≫ g) (fun y ⟨z, hz⟩ ↦ hg ⟨r.left.base z, by simpa using hz⟩) _)
   intro Z _ _ _ _ g _ hg N
   rcases isEmpty_or_nonempty Z.left with hZ | hZ
@@ -197,7 +197,7 @@ theorem triangEnvelope_lisseLowerStarGenerator_lowerStar (C : TopologicalSpace.C
   let i := overClosedComplement j
   have hcompl := isCompl_range_overClosedComplement j
   obtain ⟨F, a, c, hT⟩ := distinguished_cocone_triangle₁
-    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       j).unit.app N)
   have := isIso_unit_upperStarLowerStar_of_isZero_upperStar ℓ hcompl.symm
     (isZero_upperStar_of_distTriang_unit ℓ j a c hT)
@@ -212,13 +212,13 @@ theorem triangEnvelope_lisseLowerStarGenerator_lowerStar (C : TopologicalSpace.C
       g.left.isClosedEmbedding.injective (by simpa using hz)
     exact Set.disjoint_left.1 hcompl.disjoint ⟨z, hz'⟩ ⟨u, rfl⟩
   refine ObjectProperty.ext_of_isTriangulatedClosed₂ _ _
-    ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map_distinguished _ hT)
+    ((boundedConstructibleLowerStar ℓ g).map_distinguished _ hT)
     ?_ (triangEnvelope_lisseLowerStarGenerator_lowerStar_lowerStar ℓ g j hN)
   exact ObjectProperty.prop_of_iso _
-    (((boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ i g).app _).symm ≪≫
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).mapIso
+    (((boundedConstructibleLowerStarComp ℓ i g).app _).symm ≪≫
+      (boundedConstructibleLowerStar ℓ g).mapIso
         (asIso ((boundedConstructibleUpperStarLowerStarAdjunction
-          (Profinite.padicAlgClRingObj ℓ) ℓ i).unit.app F)).symm)
+          ℓ i).unit.app F)).symm)
     (ih _ hlt _ (i ≫ g) subset_rfl _)
 
 variable (Y) in
@@ -230,7 +230,7 @@ theorem triangEnvelope_lisseLowerStarGenerator
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (lisseLowerStarGenerator ℓ Y).triangEnvelope N :=
   have : IsClosedImmersion (𝟙 Y : Y ⟶ Y).left := inferInstanceAs (IsClosedImmersion (𝟙 Y.left))
-  ObjectProperty.prop_of_iso _ ((boundedConstructibleLowerStarId _ ℓ Y).app N)
+  ObjectProperty.prop_of_iso _ ((boundedConstructibleLowerStarId ℓ Y).app N)
     (triangEnvelope_lisseLowerStarGenerator_lowerStar ℓ ⊤ Y (𝟙 Y) (Set.subset_univ _) N)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

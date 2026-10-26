@@ -85,8 +85,7 @@ theorem isIso_map_ihomUnitTensorToIhom_of_isDualizable (j : U ⟶ X) [IsOpenImme
       L)) :
     IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
       (ihomUnitTensorToIhom L L)) := by
-  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) ℓ j L
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j L
   rw [Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_iff,
     ← isDualizable_iff_isIso_ihomUnitTensorToIhom]
   exact hL
@@ -99,14 +98,12 @@ theorem isDualizable_obj_of_isIso_map_ihomUnitTensorToIhom (j : U ⟶ X) [IsOpen
     (hL : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
       (ihomUnitTensorToIhom L L))) :
     IsDualizable ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L) := by
-  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) ℓ j L
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j L
   rw [isDualizable_iff_isIso_ihomUnitTensorToIhom,
     ← Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_iff]
   exact hL
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- A bounded constructible `ℚ̄_ℓ`-complex `L` whose comparison map `[L, 𝟙] ⊗ L ⟶ [L, L]` is an
 isomorphism is dualizable: `[L, 𝟙]` is a left dual of `L`
 (`CategoryTheory.MonoidalClosed.exactPairingOfIsIso`), hence a right dual by the braiding. -/

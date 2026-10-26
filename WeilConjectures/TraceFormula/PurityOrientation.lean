@@ -63,7 +63,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 and closed subscheme where `f` has relative dimension `d` it is `ℚ̄_ℓ(d)[2d]` by the trace
 (`isIso_smoothPurityMap`), and the Tate twist `ℚ̄_ℓ(d)` is invertible. -/
 theorem isDualizable_upperShriek_unit_of_smooth (f : X ⟶ Y) [Smooth f.left] :
-    IsDualizable ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+    IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) := by
   obtain ⟨ι, _, U, hU, hd⟩ := exists_finite_openCover_smoothOfRelativeDimension f
   refine isDualizable_of_isIso_ihomUnitTensorToIhom ℓ _

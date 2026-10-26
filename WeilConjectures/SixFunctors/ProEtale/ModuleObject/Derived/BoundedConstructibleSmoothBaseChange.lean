@@ -60,7 +60,7 @@ for a cartesian square with `v` smooth, the base change map `Lv^* Rp_* K ⟶ Rp'
 isomorphism for every bounded constructible `K`. -/
 theorem isIso_boundedConstructibleBaseChange_of_smooth (sq : IsPullback u p' p v)
     [Smooth v.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    IsIso ((boundedConstructibleBaseChange ℓ
       sq.toCommSq).app K) :=
   sorry
 

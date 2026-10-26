@@ -57,13 +57,13 @@ built from the tensor symmetry, the inverse of the projection formula for `f` an
 noncomputable def upperShriekUnitTensorMap (f : X ⟶ Y)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ f).obj K ⊗
-        (boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _) ⟶
-      (boundedConstructibleUpperShriek _ ℓ f).obj K :=
-  (boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv _ _
-    ((boundedConstructibleLowerShriek _ ℓ f).map (β_ _ _).hom ≫
-      inv (((boundedConstructibleExceptionalProjection _ ℓ f).app
-        ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))).app K) ≫
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app (𝟙_ _) ▷ K) ≫ (λ_ K).hom)
+        (boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _) ⟶
+      (boundedConstructibleUpperShriek ℓ f).obj K :=
+  (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _
+    ((boundedConstructibleLowerShriek ℓ f).map (β_ _ _).hom ≫
+      inv (((boundedConstructibleExceptionalProjection ℓ f).app
+        ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _))).app K) ≫
+      ((boundedConstructibleUpperShriekAdjunction ℓ f).counit.app (𝟙_ _) ▷ K) ≫ (λ_ K).hom)
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
@@ -80,14 +80,14 @@ Y' --g---> Y
 change followed by the pulled-back counit of `Rf_! ⊣ Rf^!`. -/
 noncomputable def upperShriekBaseChange (sq : IsPullback g' f' f g)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ g').obj ((boundedConstructibleUpperShriek _ ℓ f).obj L) ⟶
-      (boundedConstructibleUpperShriek _ ℓ f').obj
+    (boundedConstructibleUpperStar _ ℓ g').obj ((boundedConstructibleUpperShriek ℓ f).obj L) ⟶
+      (boundedConstructibleUpperShriek ℓ f').obj
         ((boundedConstructibleUpperStar _ ℓ g).obj L) :=
   haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  (boundedConstructibleUpperShriekAdjunction _ ℓ f').homEquiv _ _
+  (boundedConstructibleUpperShriekAdjunction ℓ f').homEquiv _ _
     (inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
-        ((boundedConstructibleUpperShriek _ ℓ f).obj L)) ≫
+        ((boundedConstructibleUpperShriek ℓ f).obj L)) ≫
       (boundedConstructibleUpperStar _ ℓ g).map
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app L))
+        ((boundedConstructibleUpperShriekAdjunction ℓ f).counit.app L))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

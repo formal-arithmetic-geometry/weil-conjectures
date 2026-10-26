@@ -84,10 +84,10 @@ theorem isIso_upperShriekUnitTensorMap_of_isDualizable (f : X ⟶ Y)
   obtain ⟨_⟩ := hK
   let := BraidedCategory.exactPairing_swap K Kᘁ
   exact Adjunction.isIso_exceptionalTensorMap
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleExceptionalProjection_unit (Profinite.padicAlgClRingObj ℓ) ℓ f)
-    (boundedConstructibleExceptionalProjection_tensor (Profinite.padicAlgClRingObj ℓ) ℓ f) Kᘁ K
+    (boundedConstructibleUpperShriekAdjunction ℓ f)
+    (boundedConstructibleExceptionalProjection ℓ f)
+    (boundedConstructibleExceptionalProjection_unit ℓ f)
+    (boundedConstructibleExceptionalProjection_tensor ℓ f) Kᘁ K
 
 /-- The invertibility of the purity map `γ_{f,K}` only depends on `K` up to isomorphism. -/
 lemma isIso_upperShriekUnitTensorMap_of_iso (f : X ⟶ Y)
@@ -95,11 +95,11 @@ lemma isIso_upperShriekUnitTensorMap_of_iso (f : X ⟶ Y)
     [IsIso (upperShriekUnitTensorMap ℓ f K')] : IsIso (upperShriekUnitTensorMap ℓ f K) := by
   have hn := upperShriekUnitTensorMap_naturality ℓ f e.hom
   have : IsIso (upperShriekUnitTensorMap ℓ f K ≫
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map e.hom) := by
+      (boundedConstructibleUpperShriek ℓ f).map e.hom) := by
     rw [← hn]
     infer_instance
   exact IsIso.of_isIso_comp_right _
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map e.hom)
+    ((boundedConstructibleUpperShriek ℓ f).map e.hom)
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
@@ -117,64 +117,64 @@ map is an isomorphism at the unit, if `Lf^* Rg_* N ≅ Rg'_* M` for some `M` and
 isomorphism, then so is `γ_{f, Rg_* N}`. -/
 theorem isIso_upperShriekUnitTensorMap_lowerStar (sq : IsPullback g' f' f g)
     [IsIso (boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ g).counit]
+      ℓ g).counit]
     [IsIso (boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ g').counit]
-    (hω : IsDualizable ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+      ℓ g').counit]
+    (hω : IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))))
     [IsIso (upperShriekBaseChange ℓ sq (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))]
     (N : Dᵇc(Y'.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (e : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) ≅
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj M)
+        ((boundedConstructibleLowerStar ℓ g).obj N) ≅
+      (boundedConstructibleLowerStar ℓ g').obj M)
     [IsIso (upperShriekUnitTensorMap ℓ f' N)] :
     IsIso (upperShriekUnitTensorMap ℓ f
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N)) := by
-  let ag := boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g
-  let ag' := boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g'
+      ((boundedConstructibleLowerStar ℓ g).obj N)) := by
+  let ag := boundedConstructibleUpperStarLowerStarAdjunction ℓ g
+  let ag' := boundedConstructibleUpperStarLowerStarAdjunction ℓ g'
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   -- `γ_{f'}` at `Lg^* Rg_* N ≅ N`
   have h₁ : IsIso (upperShriekUnitTensorMap ℓ f'
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N))) := by
+        ((boundedConstructibleLowerStar ℓ g).obj N))) := by
     have : IsIso (upperShriekUnitTensorMap ℓ f' ((𝟭 _).obj N)) :=
       inferInstanceAs (IsIso (upperShriekUnitTensorMap ℓ f' N))
     exact isIso_upperShriekUnitTensorMap_of_iso ℓ f' (asIso (ag.counit.app N))
   -- the exceptional base change map at `Rg_* N`
   have hβ : IsIso (upperShriekBaseChange ℓ sq
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N)) :=
+      ((boundedConstructibleLowerStar ℓ g).obj N)) :=
     Adjunction.isIso_exceptionalBaseChange
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f') ag ag'
+      (boundedConstructibleUpperShriekAdjunction ℓ f)
+      (boundedConstructibleUpperShriekAdjunction ℓ f') ag ag'
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq) N
   -- `Lg'^* γ_{f, Rg_* N}` is an isomorphism
   have hmap : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
       (upperShriekUnitTensorMap ℓ f
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N))) := by
+        ((boundedConstructibleLowerStar ℓ g).obj N))) := by
     have : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
         (upperShriekUnitTensorMap ℓ f
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N)) ≫
+          ((boundedConstructibleLowerStar ℓ g).obj N)) ≫
         upperShriekBaseChange ℓ sq
-          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N)) := by
+          ((boundedConstructibleLowerStar ℓ g).obj N)) := by
       rw [map_upperShriekUnitTensorMap_comp_upperShriekBaseChange]
       infer_instance
     exact IsIso.of_isIso_comp_right _ (upperShriekBaseChange ℓ sq
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N))
+      ((boundedConstructibleLowerStar ℓ g).obj N))
   -- the target lies in the essential image of `Rg'_*`
   have ht : IsIso (ag'.unit.app ((boundedConstructibleUpperShriek
-      (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N))) :=
+      ℓ f).obj
+        ((boundedConstructibleLowerStar ℓ g).obj N))) :=
     Adjunction.isIso_unit_app_of_iso_of_isIso_counit_app ag'
       (asIso ((conjugateEquiv
-        ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f).comp ag)
-        (ag'.comp (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f'))
+        ((boundedConstructibleUpperShriekAdjunction ℓ f).comp ag)
+        (ag'.comp (boundedConstructibleUpperShriekAdjunction ℓ f'))
         (inv (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq))).app N))
   -- the source lies in the essential image of `Rg'_*`
   have hs : IsIso (ag'.unit.app ((boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj N) ⊗
-      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+        ((boundedConstructibleLowerStar ℓ g).obj N) ⊗
+      (boundedConstructibleUpperShriek ℓ f).obj
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))) := by
     have := ag'.isIso_projectionMorphism_of_isDualizable hω M
     exact Adjunction.isIso_unit_app_of_iso_of_isIso_counit_app ag'
@@ -198,8 +198,8 @@ theorem isIso_upperShriekUnitTensorMap_lowerStar_lowerStar (f : X ⟶ Y) [Smooth
     (g : Z ⟶ Y) [IsClosedImmersion g.left] (j : U ⟶ Z) [IsOpenImmersion j.left]
     {L : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hL : IsDualizable L) :
     IsIso (upperShriekUnitTensorMap ℓ f
-      ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L))) := by
+      ((boundedConstructibleLowerStar ℓ g).obj
+        ((boundedConstructibleLowerStar ℓ j).obj L))) := by
   -- the base change `f_Z : X ⨯_Y Z ⟶ Z` of `f` along `g`, and `f_U` of `f_Z` along `j`
   have sq₁ := IsPullback.of_hasPullback f g
   have sq₂ := IsPullback.of_hasPullback (pullback.snd f g) j
@@ -212,7 +212,7 @@ theorem isIso_upperShriekUnitTensorMap_lowerStar_lowerStar (f : X ⟶ Y) [Smooth
   have := isIso_boundedConstructibleBaseChange_of_smooth ℓ sq₂.flip L
   have := isIso_upperShriekUnitTensorMap_lowerStar ℓ sq₂
     (isDualizable_upperShriek_unit_of_smooth ℓ (pullback.snd f g)) L _
-    (asIso ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+    (asIso ((boundedConstructibleBaseChange ℓ
       sq₂.flip.toCommSq).app L))
   -- the closed step
   have := isIso_upperShriekBaseChange_unit_of_smooth ℓ sq₁

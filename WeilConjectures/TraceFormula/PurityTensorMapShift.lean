@@ -66,15 +66,15 @@ variable {X Y : Over (Spec (.of k))}
 `Rf_! ⊣ Rf^!` at the unit and the left unitor. -/
 noncomputable def upperShriekUnitTensorAdjointNatTrans (f : X ⟶ Y) :
     (boundedConstructibleUpperStar _ ℓ f ⋙
-        (curriedTensor _).flip.obj ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))) ⋙
-      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ⟶ 𝟭 _ :=
+        (curriedTensor _).flip.obj ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _))) ⋙
+      boundedConstructibleLowerShriek ℓ f ⟶ 𝟭 _ :=
   Functor.whiskerRight (Functor.whiskerLeft (boundedConstructibleUpperStar _ ℓ f)
-      (boundedConstructibleBraidingNatTrans₁ _
-        ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))))
-      (boundedConstructibleLowerShriek _ ℓ f) ≫
-    inv (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
-      (compactificationOverField f) ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))) ≫
-    (curriedTensor _).map ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app (𝟙_ _)) ≫
+      (boundedConstructibleBraidingNatTrans₁
+        ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _))))
+      (boundedConstructibleLowerShriek ℓ f) ≫
+    inv (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
+      (compactificationOverField f) ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _))) ≫
+    (curriedTensor _).map ((boundedConstructibleUpperShriekAdjunction ℓ f).counit.app (𝟙_ _)) ≫
     leftUnitorNatTrans _
 
 /-- The components of `upperShriekUnitTensorAdjointNatTrans` are the adjoints of the purity
@@ -82,10 +82,10 @@ maps. -/
 lemma upperShriekUnitTensorAdjointNatTrans_app (f : X ⟶ Y)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (upperShriekUnitTensorAdjointNatTrans ℓ f).app K =
-      (boundedConstructibleLowerShriek _ ℓ f).map (β_ _ _).hom ≫
-        inv (((boundedConstructibleExceptionalProjection _ ℓ f).app
-          ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _))).app K) ≫
-        ((boundedConstructibleUpperShriekAdjunction _ ℓ f).counit.app (𝟙_ _) ▷ K) ≫
+      (boundedConstructibleLowerShriek ℓ f).map (β_ _ _).hom ≫
+        inv (((boundedConstructibleExceptionalProjection ℓ f).app
+          ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _))).app K) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ f).counit.app (𝟙_ _) ▷ K) ≫
         (λ_ K).hom := by
   simp only [upperShriekUnitTensorAdjointNatTrans, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, boundedConstructibleBraidingNatTrans₁_app, NatIso.isIso_inv_app,
@@ -97,7 +97,7 @@ lemma upperShriekUnitTensorAdjointNatTrans_app (f : X ⟶ Y)
 lemma upperShriekUnitTensorMap_eq_homEquiv (f : X ⟶ Y)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     upperShriekUnitTensorMap ℓ f K =
-      (boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv _ _
+      (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _
         ((upperShriekUnitTensorAdjointNatTrans ℓ f).app K) := by
   rw [upperShriekUnitTensorAdjointNatTrans_app]
   rfl
@@ -107,20 +107,20 @@ lemma upperShriekUnitTensorMap_eq_homEquiv (f : X ⟶ Y)
 lemma upperShriekUnitTensorMap_naturality (f : X ⟶ Y)
     {K K' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : K ⟶ K') :
     (boundedConstructibleUpperStar _ ℓ f).map φ ▷ _ ≫ upperShriekUnitTensorMap ℓ f K' =
-      upperShriekUnitTensorMap ℓ f K ≫ (boundedConstructibleUpperShriek _ ℓ f).map φ := by
+      upperShriekUnitTensorMap ℓ f K ≫ (boundedConstructibleUpperShriek ℓ f).map φ := by
   rw [upperShriekUnitTensorMap_eq_homEquiv, upperShriekUnitTensorMap_eq_homEquiv]
-  exact ((boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv_naturality_left _ _).symm.trans
+  exact ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_naturality_left _ _).symm.trans
     ((congrArg _ ((upperShriekUnitTensorAdjointNatTrans ℓ f).naturality φ)).trans
-      ((boundedConstructibleUpperShriekAdjunction _ ℓ f).homEquiv_naturality_right _ _))
+      ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_naturality_right _ _))
 
 /-- The adjoint of the purity map commutes with the shifts, being a composite of natural
 transformations which do. -/
 instance commShift_upperShriekUnitTensorAdjointNatTrans (f : X ⟶ Y) :
     NatTrans.CommShift (upperShriekUnitTensorAdjointNatTrans ℓ f) ℤ := by
   have := NatTrans.CommShift.of_isIso
-    (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans _ ℓ
+    (boundedConstructibleExceptionalProjectionOfCompactificationNatTrans ℓ
       (compactificationOverField f)
-      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj (𝟙_ _))) ℤ
+      ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _))) ℤ
   dsimp only [upperShriekUnitTensorAdjointNatTrans]
   infer_instance
 
@@ -129,15 +129,15 @@ instance commShift_upperShriekUnitTensorAdjointNatTrans (f : X ⟶ Y) :
 @[simps]
 noncomputable def upperShriekUnitTensorMapNatTrans (f : X ⟶ Y) :
     boundedConstructibleUpperStar _ ℓ f ⋙
-        (curriedTensor _).flip.obj ((boundedConstructibleUpperShriek _ ℓ f).obj (𝟙_ _)) ⟶
-      𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f where
+        (curriedTensor _).flip.obj ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _)) ⟶
+      𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ f where
   app K := upperShriekUnitTensorMap ℓ f K
   naturality _ _ φ := upperShriekUnitTensorMap_naturality ℓ f φ
 
 /-- The purity map commutes with the shifts. -/
 instance commShift_upperShriekUnitTensorMapNatTrans (f : X ⟶ Y) :
     NatTrans.CommShift (upperShriekUnitTensorMapNatTrans ℓ f) ℤ :=
-  NatTrans.CommShift.of_homEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ f)
+  NatTrans.CommShift.of_homEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
     (upperShriekUnitTensorAdjointNatTrans ℓ f) _
     (upperShriekUnitTensorMap_eq_homEquiv ℓ f)
 
@@ -147,13 +147,13 @@ instance isTriangulated_isoLocus_upperShriekUnitTensorMapNatTrans (f : X ⟶ Y) 
     (upperShriekUnitTensorMapNatTrans ℓ f).isoLocus.IsTriangulated := by
   have : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).IsTriangulated :=
     inferInstance
-  have : (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).IsTriangulated :=
+  have : (boundedConstructibleUpperShriek ℓ f).IsTriangulated :=
     inferInstance
   have : (boundedConstructibleUpperStar _ ℓ f ⋙
       (curriedTensor _).flip.obj
-        ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
+        ((boundedConstructibleUpperShriek ℓ f).obj
           (𝟙_ _))).IsTriangulated := inferInstance
-  have : (𝟭 _ ⋙ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+  have : (𝟭 _ ⋙ boundedConstructibleUpperShriek ℓ
       f).IsTriangulated := inferInstance
   infer_instance
 

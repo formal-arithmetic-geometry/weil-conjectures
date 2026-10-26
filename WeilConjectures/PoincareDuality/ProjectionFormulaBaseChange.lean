@@ -113,21 +113,23 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_isOpenImmersio
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
         sq.toCommSq)
-      (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f)
-      (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f') := by
+      (boundedConstructibleExceptionalProjection ℓ f)
+      (boundedConstructibleExceptionalProjection ℓ f') := by
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   refine ProjectionBaseChange.pfBaseChange_of_projectionComparison
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ f)
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ f')
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ f')
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f') _ _ _ _ _ _
     (fun A B ↦ boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison ℓ f A B)
     (fun A B ↦ boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison ℓ f' A B)
-    (fun K ↦ ?_)
-    (fun A B ↦ boundedConstructiblePullbackSquareComparison_hom_app_δ ℓ sq.toCommSq A B)
-  rw [← boundedConstructiblePullbackSquareComparison_flip,
-    ← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft]
-  exact boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq K
+    (fun K ↦ ?_) ?_
+  · rw [← boundedConstructiblePullbackSquareComparison_flip,
+      ← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft]
+    exact boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq K
+  · exact fun A B ↦ boundedConstructiblePullbackSquareComparison_hom_app_δ ℓ sq.toCommSq A B
 
 section Paste
 
@@ -146,17 +148,17 @@ the monoidal category instance as tensor structure. -/
 lemma boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' {i : X ⟶ Z} {p : Z ⟶ Y}
     (hf : i ≫ p = f) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism (Profinite.padicAlgClRingObj ℓ) ℓ f K B ≫
+    boundedConstructibleExceptionalProjectionMorphism ℓ f K B ≫
         (boundedConstructibleLowerShriekCompOfEq ℓ hf).hom.app
           (K ⊗ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj B) ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).map
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i).map
+        (boundedConstructibleLowerShriek ℓ p).map
+          ((boundedConstructibleLowerShriek ℓ i).map
           (K ◁ (boundedConstructibleUpperStarCompOfEq ℓ hf).hom.app B)) =
       (boundedConstructibleLowerShriekCompOfEq ℓ hf).hom.app K ▷ B ≫
-        boundedConstructibleExceptionalProjectionMorphism (Profinite.padicAlgClRingObj ℓ) ℓ p
-          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K) B ≫
-        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).map
-          (boundedConstructibleExceptionalProjectionMorphism (Profinite.padicAlgClRingObj ℓ) ℓ i K
+        boundedConstructibleExceptionalProjectionMorphism ℓ p
+          ((boundedConstructibleLowerShriek ℓ i).obj K) B ≫
+        (boundedConstructibleLowerShriek ℓ p).map
+          (boundedConstructibleExceptionalProjectionMorphism ℓ i K
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj B)) := by
   subst hf
   simpa [boundedConstructibleLowerShriekCompOfEq, boundedConstructibleUpperStarCompOfEq] using
@@ -280,19 +282,24 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
         sq.toCommSq)
-      (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f)
-      (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ f') := by
-  refine ProjectionBaseChange.pfBaseChange_comp _
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gZ) _
+      (boundedConstructibleExceptionalProjection ℓ f)
+      (boundedConstructibleExceptionalProjection ℓ f') := by
+  refine ProjectionBaseChange.pfBaseChange_comp
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gZ)
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₂)
-    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁) _
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁)
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ s₂.toCommSq)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ s₁.toCommSq)
-    _
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ p)
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ i) _
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ p')
-    (boundedConstructibleExceptionalProjection (Profinite.padicAlgClRingObj ℓ) ℓ i') _
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq)
+    (boundedConstructibleExceptionalProjection ℓ p)
+    (boundedConstructibleExceptionalProjection ℓ i)
+    (boundedConstructibleExceptionalProjection ℓ f)
+    (boundedConstructibleExceptionalProjection ℓ p')
+    (boundedConstructibleExceptionalProjection ℓ i')
+    (boundedConstructibleExceptionalProjection ℓ f')
     (boundedConstructibleLowerShriekCompOfEq ℓ hf) (boundedConstructibleLowerShriekCompOfEq ℓ hf')
     (boundedConstructibleUpperStarCompOfEq ℓ hf) (boundedConstructibleUpperStarCompOfEq ℓ hf')
     ?_ ?_ ?_ ?_ ?_ ?_
@@ -325,8 +332,8 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection (sq : IsPullback 
       (boundedConstructibleUpperStar _ ℓ g')
       (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
       (boundedConstructiblePullbackSquareComparison _ ℓ sq.toCommSq)
-      (boundedConstructibleExceptionalProjection _ ℓ f)
-      (boundedConstructibleExceptionalProjection _ ℓ f') :=
+      (boundedConstructibleExceptionalProjection ℓ f)
+      (boundedConstructibleExceptionalProjection ℓ f') :=
   pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation ℓ sq
     ((compactificationOverField f).overBaseChange_isPullback_i sq)
     ((compactificationOverField f).overBaseChange_isPullback_g sq)
