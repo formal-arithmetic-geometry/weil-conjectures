@@ -33,9 +33,13 @@ coefficient changes. This file supplies the coefficient-specific input:
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
   (Shriek);
-* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects when `f` is proper, but not
-  for an arbitrary `f`. Since the proper part of a compactification is proper, (Shriek) is an
-  isomorphism on all unbounded objects for every `f` with a compactification.
+* for `E ⊆ Ω`, (Push) is an isomorphism at bounded below objects for every quasi-compact
+  quasi-separated `f`, by the continuity of `Rf_*` on bounded below complexes
+  (`ProEtale.CondensedRing.isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`,
+  in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite`), hence so is
+  (Shriek) (`ProEtale.CondensedRing.isIso_derivedLowerShriekHom_app_padicAlgCl_of_isGE`). It is
+  not an isomorphism on all unbounded objects, even for proper `f`: `Rf_*` need not commute
+  with direct sums (blueprint `sk-rem-sf-fullcd-scope`), while `ℚ̄_ℓ ≅ ⨁_ℕ E` as `E`-modules.
 
 ## Sorried input
 
@@ -52,12 +56,6 @@ coefficient changes. This file supplies the coefficient-specific input:
 * `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
   `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
   the compatibility of `Rf_*` with finite direct sums.
-* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`:
-  for `E ⊆ Ω` and `f` proper, (Push) is an isomorphism on all unbounded objects: `Rf_*` has a
-  right adjoint `Rf^!`, hence commutes with the coproducts through which `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` is
-  computed from the finite stages. For a general `f` this fails, and (Push) is an isomorphism
-  only at objects at which `Rf_*` commutes with the relevant coproducts; no such statement is
-  made here.
 
 -/
 
@@ -140,9 +138,7 @@ section Flat
 
 variable (X : Scheme.{u})
 
-/-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
-blueprint `lem-sfb-subfield-flat`.
-**(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
+/-- **(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
 exact: `F_X` is finite free, in particular flat, over `E_X`. See the module docstring. -/
 instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
     {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
@@ -150,9 +146,7 @@ instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
       (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
   sorry
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
-blueprint `lem-sfb-qlbar-flat`.
-**(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
+/-- **(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
 exact: `ℚ̄_ℓ,X` is flat over `E_X`, being a filtered colimit of finite free `E_X`-modules. See
 the module docstring. -/
 instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
@@ -169,36 +163,16 @@ section Push
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
-blueprint `det-prop-scalar-six-direct-image`.
-**(Push)** is an isomorphism for a finite extension `F/E`, on all unbounded objects: `F_X`
+/-- **(Push)** is an isomorphism for a finite extension `F/E`, on all unbounded objects: `F_X`
 is finite free over `E_X`, so both sides are finite direct sums of copies of `Rf_*^E`. See the
 module docstring. -/
 instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
   sorry
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
-blueprint `det-prop-scalar-six-direct-image`.
-**(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
-then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
-extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
-instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
-    (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
-  sorry
-
-variable [HasCompactification f]
-
 /-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
-example {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+example [HasCompactification f] {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  inferInstance
-
-/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ`, on all unbounded objects: the proper part of
-the compactification contributes (Push) for a proper morphism, which is an isomorphism. -/
-example (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
   inferInstance
 
 end Push

@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 
 /-!
 
@@ -27,7 +28,7 @@ clause on `f^!` of blueprint `sk-prop-scalar-six` for the coefficient change `E 
   `ProEtale.CondensedRing.derivedPullIso`.
 * **(Push)** for a proper `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClIso`), the restriction of
-  `ProEtale.CondensedRing.derivedPushHom`, an isomorphism for proper `g`.
+  `ProEtale.CondensedRing.derivedPushHom`, an isomorphism at bounded below complexes.
 * **(Shriek)** for an open immersion `j`: `j_!^E ⋙ T_X ≅ T_U ⋙ j_!^{ℚ̄_ℓ}`
   (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso`), and for
   every `f`: `Rf_!^E ⋙ T_Y ≅ T_X ⋙ Rf_!^{ℚ̄_ℓ}`
@@ -181,6 +182,22 @@ end UpperStar
 
 /-! ### (Push) for a proper morphism -/
 
+/-- **(Push)** for the inclusion `E ⟶ ℚ̄_ℓ` is an isomorphism at bounded constructible complexes,
+for a quasi-compact quasi-separated `g`: these are bounded below
+(`ProEtale.CondensedRing.isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`). -/
+instance isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl {Z Y : Scheme.{u}}
+    (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g] :
+    IsIso (Functor.whiskerLeft
+      (boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Z)).ι
+      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g)) := by
+  have (K : Dᵇc(Z)⟦Profinite.continuousMapRingObj E⟧) : IsIso ((Functor.whiskerLeft
+      (boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Z)).ι
+      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g)).app K) :=
+    have := K.property.1.1.choose_spec
+    isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E g K.obj
+      K.property.1.1.choose
+  exact NatIso.isIso_of_isIso_app _
+
 section LowerStar
 
 variable {Z Y : Over (Spec (.of k))}
@@ -190,8 +207,8 @@ variable {Z Y : Over (Spec (.of k))}
 
 /-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and a proper
 morphism `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
-`ProEtale.CondensedRing.derivedPushHom`, which is an isomorphism for proper `g`
-(`ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`). -/
+`ProEtale.CondensedRing.derivedPushHom`, which is an isomorphism at bounded below complexes
+(`ProEtale.CondensedRing.isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl`). -/
 noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
     ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g ⋙
         boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
@@ -204,8 +221,8 @@ noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
       Functor.isoWhiskerRight
         (ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility ℓ E g) _ ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _
-        (asIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) ≪≫
+      asIso (Functor.whiskerLeft _
+        (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
