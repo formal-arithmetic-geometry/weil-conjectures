@@ -64,8 +64,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The lax tensor map `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` of nearby cycles
 (`NearbyCyclesModel.tensorMap`) on bounded constructible complexes. -/
 noncomputable def boundedConstructibleTensorMap
-
- (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleNearbyCycles hP).obj A ⊗ (boundedConstructibleNearbyCycles hP).obj B ⟶
       (boundedConstructibleNearbyCycles hP).obj (A ⊗ B) :=

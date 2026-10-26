@@ -100,7 +100,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k]
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
-omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
+omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] in
 /-- The lax tensor map of nearby cycles on bounded constructible complexes is natural. -/
@@ -117,7 +117,6 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
   [QuasiCompact Y'.hom] [IsSeparated Y'.hom] {N : NearbyCyclesModel Y.left Y'.left}
   {j : Y ⟶ X} {j' : Y' ⟶ X'} (φ : N.Hom M j.left j'.left)
 
-omit in
 /-- The restricted pullback exchange is `NearbyCyclesModel.liftExchange` of the ambient one. -/
 lemma Hom.boundedConstructiblePullbackExchange_eq_liftExchange'
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) (hM :
@@ -127,10 +126,10 @@ lemma Hom.boundedConstructiblePullbackExchange_eq_liftExchange'
         (PY' := boundedConstructible _) (PX' := boundedConstructible _) (φ.pullbackExchange
             (Profinite.padicAlgClRingObj ℓ))
         (fun K ↦ hM K.obj K.property) (fun K ↦ hN K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ j'
-            K.obj K.property)
-        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ j
-            K.obj K.property) :=
+        (fun K ↦
+          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ j' K)
+        (fun K ↦
+          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ j K) :=
   rfl
 
 /-- The comparison `μ` of the restricted pullback is that of the ambient derived pullback. -/
@@ -293,8 +292,7 @@ lemma isIso_nearbyDualityMap_upperStar_of_isOpenImmersion {Ω :
     IsIso (Verdier.nearbyDualityMap (Functor.LaxMonoidal.μ
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i)) ρ.hom A) := by
   rw [Verdier.nearbyDualityMap_eq_ihomComparison]
-  have := isIso_projectionMap_openImmersion_aux ((Profinite.padicAlgClRingObj ℓ) :=
-      (Profinite.padicAlgClRingObj ℓ)) (ℓ := ℓ) i
+  have := isIso_projectionMap_openImmersion_aux (ℓ := ℓ) i
   have := Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ)
         ℓ i) A

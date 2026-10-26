@@ -67,9 +67,11 @@ theorem isIso_of_isIso_upperStar_finsetComplOpens_of_isIso_lowerStar (S : Finset
   have hU' : IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f.hom) :=
     (boundedConstructible _).ι.map_isIso ((boundedConstructibleUpperStar _ ℓ
       (opensOverι (finsetComplOpens S hS))).map f)
-  have hΓ' : IsIso (R((X.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f.hom) :=
-    (boundedConstructible _).ι.map_isIso
+  have hΓ' : IsIso (R((X.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f.hom) := by
+    have h := (boundedConstructible _).ι.map_isIso
       ((boundedConstructibleLowerStar ℓ (toPoint X)).map f)
+    change IsIso (R(((toPoint X).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f.hom) at h
+    rwa [toPoint_left] at h
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f.hom
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
