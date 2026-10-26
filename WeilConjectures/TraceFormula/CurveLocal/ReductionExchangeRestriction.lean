@@ -49,11 +49,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 theorem full_rightDerivedLowerShriek_of_isClosedImmersion {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] : (R(i)_![ModuleCat.{u + 1} Λ]).Full :=
   have (Q : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-      IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).unit.app Q) :=
-    isIso_rightDerivedUpperShriekAdjunction_unit_app _ i Q
-  have : IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).unit :=
+      IsIso ((rightDerivedUpperShriekAdjunction Λ i).unit.app Q) :=
+    isIso_rightDerivedUpperShriekAdjunction_unit_app Λ i Q
+  have : IsIso (rightDerivedUpperShriekAdjunction Λ i).unit :=
     NatIso.isIso_of_isIso_app _
-  ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).fullyFaithfulLOfIsIsoUnit).full
+  ((rightDerivedUpperShriekAdjunction Λ i).fullyFaithfulLOfIsIsoUnit).full
 
 /-- For `g ≫ φ = c` with `φ` an isomorphism, `Rc_! ⋙ Lφ^* ≅ Rg_!`: compact-support base change
 along the cartesian square `𝟙 ≫ c = g ≫ φ`, followed by `L(𝟙)^* ≅ 𝟭`. -/
@@ -128,21 +128,21 @@ theorem exists_etaleReduction_map_exchangeRestriction_comp_eq {c : C ⟶ Y} {ι 
           ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ ι).obj
             ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E c).obj P)) ⟶
         (L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) ι.left)).obj
-          ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).obj
+          ((Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n) g).obj
             ((L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) φ)).obj
               ((etaleReduction ℓ E n Y).obj P))))
       (β : (etaleReduction ℓ E n F).obj
           ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E d).obj
             ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ Δ).obj P)) ⟶
-        (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
+        (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n)
             d.left).obj
           ((L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Δ')).obj
             ((L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) φ)).obj
               ((etaleReduction ℓ E n Y).obj P)))),
       IsIso β ∧
       (etaleReduction ℓ E n F).map
-          ((mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-            (boundedConstructibleUpperShriekAdjunction _ ℓ d)
+          ((mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c)
+            (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d)
             (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫ β =
         s ≫ Etale.exchangeRestriction (integersModPowCoeff.{u} ℓ E n) hsq
           ((L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) φ)).obj
@@ -153,8 +153,8 @@ theorem exists_etaleReduction_map_exchangeRestriction_comp_eq {c : C ⟶ Y} {ι 
     (integersModPowCoeff.{u} ℓ E n) d.left
   have := hd.choose_spec
   have h := Adjunction.exists_map_mateEquiv_app_comp_eq
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ d) _ _ σ
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d) _ _ σ
     (Etale.rightDerivedUpperShriekAdjunction _ g)
     (Etale.rightDerivedUpperShriekAdjunction _ d.left) _ _
     (Etale.lowerShriekBaseChangeIso _ hsq)

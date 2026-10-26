@@ -102,8 +102,9 @@ noncomputable def toTrait (h : M.IsTraitModelOfBase k q g) :
   total := q
   generic := g
   comm_j := h.isTraitModelOver.isPullback_j.w.symm
-  comm_i := h.isTraitModelOver.isPullback_i.w.symm
+  comm_i := by rw [toPoint_left]; exact h.isTraitModelOver.isPullback_i.w.symm
   comm_ε := by
+    rw [toPoint_left]
     obtain ⟨u, -, hu₁, hu₂⟩ := h.exists_openImmersion
     rw [← traitModel_j_traitToBase]
     change g ≫ traitGenericPoint k' ≫ traitToBase k k' = M.ε ≫ X.hom
@@ -163,7 +164,7 @@ noncomputable def dualizingComplexUpperStarIso {Y : Over (Spec (.of k))}
     [IsOpenImmersion j.left] :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
         (dualizingComplex ℓ X) ≅ dualizingComplex ℓ Y :=
-  (dualizingComplexIsoUpperStar ℓ j (toPoint X)).symm ≪≫ eqToIso (by rw [comp_toPoint])
+  (dualizingComplexIsoUpperStar ℓ j).symm
 
 variable (k k')
 
