@@ -95,7 +95,10 @@ for `K` bounded constructible on `X`, the pullback exchange
 normal cone (`ProEtale.CondensedRing.zeroSectionModelHom`) is an isomorphism. Followed by the
 inverse of the (invertible) specialization unit of the constant family `S`, it is the zero-section
 map `ε_{X,x}(K) : e^* Sp_{X,x}(K) ⟶ x^* K` of blueprint `det-sp-defect-definition`, which the
-blueprint node asserts to be an isomorphism. -/
+blueprint node asserts to be an isomorphism. The section `ẽ` is a closed immersion, so the smooth
+pullback exchange of blueprint `det-sp-nearby-cycles-exchanges` does not apply to it; instead this
+is the case `I = ker x` of `ProEtale.CondensedRing.isIso_zeroSectionMap`, transported along
+`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap`. -/
 theorem isIso_pullbackExchange_zeroSectionModelHom_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (((zeroSectionModelHom X x k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
