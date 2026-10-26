@@ -63,13 +63,16 @@ noncomputable def lowerShriekBaseChangeIsoE :
 noncomputable def supportedRestrictionE
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleUpperStar _ ℓ F.ι).obj
-        ((boundedConstructibleUpperShriek _ ℓ c.support).obj P) ⟶
-      (boundedConstructibleUpperShriek _ ℓ F.d).obj
+        ((ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E c.support).obj P) ⟶
+      (ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E F.d).obj
         ((boundedConstructibleUpperStar _ ℓ (diag X)).obj P) :=
-  (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+  (CategoryTheory.mateEquiv
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E F.d)
     (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoE E).inv)).natTrans.app P
 
+set_option maxRecDepth 8000 in
+-- matching the coefficient compatibility `hσ` unfolds the concrete coefficient rings
 /-- **The supported restriction under `E ⟶ ℚ̄_ℓ`**: the extension of scalars `T` of the
 `E`-supported restriction of `P`, followed by the `f^!`-exchange for `d` and the pullback
 comparison for `Δ`, is the pullback comparison for `ι`, then `Lι^*` of the `f^!`-exchange for `c`,
@@ -78,15 +81,15 @@ theorem map_supportedRestrictionE_comp
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleToPadicAlgCl F.F.left ℓ E).map (F.supportedRestrictionE E P) ≫
         (boundedConstructibleUpperShriekToPadicAlgCl ℓ E F.d).app _ ≫
-        (boundedConstructibleUpperShriek _ ℓ F.d).map
+        (boundedConstructibleUpperShriek ℓ F.d).map
           ((boundedConstructibleUpperStarToPadicAlgClIso ℓ E (diag X)).hom.app P) =
       (boundedConstructibleUpperStarToPadicAlgClIso ℓ E F.ι).hom.app _ ≫
         (boundedConstructibleUpperStar _ ℓ F.ι).map
           ((boundedConstructibleUpperShriekToPadicAlgCl ℓ E c.support).app P) ≫
         F.supportedRestriction ((boundedConstructibleToPadicAlgCl (X ⨯ X).left ℓ E).obj P) := by
   have h := Adjunction.map_mateEquiv_app_comp
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E F.d)
     (boundedConstructibleUpperStar _ ℓ F.ι) (boundedConstructibleUpperStar _ ℓ (diag X))
     (F.lowerShriekBaseChangeIsoE E)
     (boundedConstructibleUpperShriekAdjunction ℓ c.support)
@@ -105,9 +108,10 @@ theorem map_supportedRestrictionE_comp
     (boundedConstructibleLowerShriekBaseChange_toPadicAlgCl ℓ E F.isPullback) P
   have e := F.supportedRestriction_eq_mateEquiv
     ((boundedConstructibleToPadicAlgCl (X ⨯ X).left ℓ E).obj P)
-  simp only [supportedRestrictionE, boundedConstructibleUpperShriekToPadicAlgCl_eq_mateEquiv, e]
-  dsimp only [Functor.comp_obj] at h ⊢
-  with_reducible exact h
+  exact h.trans (congrArg
+    (fun x ↦ (boundedConstructibleUpperStarToPadicAlgClIso ℓ E F.ι).hom.app _ ≫
+      (boundedConstructibleUpperStar _ ℓ F.ι).map
+        ((boundedConstructibleUpperShriekToPadicAlgCl ℓ E c.support).app P) ≫ x) e.symm)
 
 /-- **Transport of the vanishing of the supported restriction from `E` to `ℚ̄_ℓ`**: if the stalk
 along `z : T ⟶ Fix(c)` of the extension of scalars to `ℚ̄_ℓ` of the `E`-supported restriction of
