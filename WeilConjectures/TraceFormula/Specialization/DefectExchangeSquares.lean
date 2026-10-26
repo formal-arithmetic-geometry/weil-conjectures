@@ -199,4 +199,48 @@ lemma zeroSectionMap_lowerStar_square
     ((centreDeformationModelHom f I k').map_pushforwardExchange_app_comp_counit_app Λ)
     (zeroSectionMap_upperStar_square f I k' Λ) L'
 
+/-! ### The defect along a distinguished triangle -/
+
+/-- The abstract shape of `nonempty_specializationDefect_iso_of_distTriang`: in a pretriangulated
+category, let `ε : TF ⟶ TG` be maps between the terms of distinguished triangles, natural on the
+second morphisms, with `TG.obj₁ = 0` and `ε₃` invertible. Then the cones of `ε₁` and `ε₂` are
+isomorphic: both are `TF.obj₁[1]`. -/
+lemma nonempty_iso_cone_of_distTriang_aux {D : Type*} [Category D] [Preadditive D]
+    [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (TF TG : Triangle D) (hF : TF ∈ distTriang D) (hG : TG ∈ distTriang D)
+    (hGA : IsZero TG.obj₁) (ε₁ : TF.obj₁ ⟶ TG.obj₁) (ε₂ : TF.obj₂ ⟶ TG.obj₂)
+    (ε₃ : TF.obj₃ ⟶ TG.obj₃) [IsIso ε₃] (hnat : TF.mor₂ ≫ ε₃ = ε₂ ≫ TG.mor₂)
+    {CA CB : D} (uA : TG.obj₁ ⟶ CA) (vA : CA ⟶ TF.obj₁⟦(1 : ℤ)⟧) (uB : TG.obj₂ ⟶ CB)
+    (vB : CB ⟶ TF.obj₂⟦(1 : ℤ)⟧) (hA : Triangle.mk ε₁ uA vA ∈ distTriang D)
+    (hB : Triangle.mk ε₂ uB vB ∈ distTriang D) : Nonempty (CA ≅ CB) := by
+  obtain ⟨φ₁, -, -⟩ := exists_iso_of_arrow_iso _ _ hA (contractible_distinguished₂ TF.obj₁)
+    (Arrow.isoMk (Iso.refl _) (hGA.iso (isZero_zero _)) ((isZero_zero _).eq_of_tgt _ _))
+  have : IsIso TG.mor₂ := (Triangle.isZero₁_iff_isIso₂ _ hG).1 hGA
+  obtain ⟨φ₂, -, -⟩ := exists_iso_of_arrow_iso _ _ hB (rot_of_distTriang _ hF)
+    (Arrow.isoMk (Iso.refl _) (asIso TG.mor₂ ≪≫ (asIso ε₃).symm) (by
+      simp [← reassoc_of% hnat]))
+  exact ⟨Triangle.π₃.mapIso φ₁ ≪≫ (Triangle.π₃.mapIso φ₂).symm⟩
+
+/-- **The defect along a triangle whose first term is killed by `Ψ_Z Li^*`** (the triangulated step
+of blueprint `det-sp-defect-closed-vanishing`): for a distinguished triangle `A ⟶ B ⟶ D ⟶ A[1]`
+with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible, `C_{X,Z}(A) ≅ C_{X,Z}(B)`. Indeed both are
+`Le^* Ψ_X(A)[1]`: the first since `ε_{X,Z}(A)` has target zero, the second since `ε_{X,Z}(B)` is
+`Le^* Ψ_X(B ⟶ D)` up to the isomorphisms `Ψ_Z Li^*(B) ≅ Ψ_Z Li^*(D)` and `ε_{X,Z}(D)`. -/
+theorem nonempty_specializationDefect_iso_of_distTriang
+    {T : Triangle (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left)))} (hT : T ∈ distTriang _)
+    (h₁ : IsZero (((deformationModel (centre X I) ⊥ k').nearbyCycles Λ).obj
+      (L(((centreι X I).left)^*⟦Λ⟧).obj T.obj₁)))
+    (h₃ : IsIso (zeroSectionMap X I k' Λ T.obj₃)) :
+    Nonempty (specializationDefect X I k' Λ T.obj₁ ≅ specializationDefect X I k' Λ T.obj₂) := by
+  have hF := ((deformationModel X I k').nearbyCycles Λ ⋙
+    L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Λ⟧)).map_distinguished T hT
+  have hG := (L(((centreι X I).left)^*⟦Λ⟧) ⋙
+    (deformationModel (centre X I) ⊥ k').nearbyCycles Λ).map_distinguished T hT
+  obtain ⟨g₁, k₁, hT₁⟩ := exists_distTriang_specializationDefect X I k' Λ T.obj₁
+  obtain ⟨g₂, k₂, hT₂⟩ := exists_distTriang_specializationDefect X I k' Λ T.obj₂
+  exact nonempty_iso_cone_of_distTriang_aux _ _ hF hG h₁ (zeroSectionMap X I k' Λ T.obj₁)
+    (zeroSectionMap X I k' Λ T.obj₂) (zeroSectionMap X I k' Λ T.obj₃)
+    (zeroSectionMap_naturality X I k' Λ T.mor₂) g₁ k₁ g₂ k₂ hT₁ hT₂
+
 end AlgebraicGeometry.ProEtale.CondensedRing
