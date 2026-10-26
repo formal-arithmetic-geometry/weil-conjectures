@@ -27,7 +27,8 @@ variable {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
 
 /-- The functor induced on derived categories by a faithful exact functor between abelian
 categories reflects isomorphisms. -/
-instance CategoryTheory.Functor.reflectsIsomorphisms_mapDerivedCategory (g : B ⥤ A) [g.Additive]
+instance CategoryTheory.Functor.reflectsIsomorphisms_mapDerivedCategory_of_faithful (g : B ⥤ A)
+    [g.Additive]
     [PreservesFiniteLimits g] [PreservesFiniteColimits g] [g.Faithful] :
     g.mapDerivedCategory.ReflectsIsomorphisms where
   reflects {K L} φ h := by
