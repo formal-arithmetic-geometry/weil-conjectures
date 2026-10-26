@@ -13212,6 +13212,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
+public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
