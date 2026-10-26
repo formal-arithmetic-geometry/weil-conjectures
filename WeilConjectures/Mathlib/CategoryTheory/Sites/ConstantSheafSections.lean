@@ -65,7 +65,8 @@ variable {A : Type u'} [Category.{v'} A] {FA : A → A → Type*} {CA : A → Ty
 
 /-- **Finitely many sections of a constant sheaf are locally constant**: for finitely many
 sections `x i` of the constant sheaf at `N` over `U`, there is a covering sieve of `U` on
-whose members every `x i` is the image of an element of `N`. -/
+whose members every `x i` is the image of an element of `N`.
+(blueprint: `lem-weil-pbc-finite-constant-set-sections-cover`) -/
 lemma GrothendieckTopology.exists_mem_forall_exists_toSheafify_const_app_eq (N : A) {U : C}
     {ι : Type*} [Finite ι]
     (x : ι → ToType ((CategoryTheory.sheafify J ((Functor.const Cᵒᵖ).obj N)).obj (op U))) :

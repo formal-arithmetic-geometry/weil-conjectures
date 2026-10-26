@@ -81,7 +81,8 @@ The three steps are the comparison
 the abstract sheaf pullback along base change, the isomorphism
 `CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso` of the sheaf pullback with
 the fibre functor of the point obtained from `s` by `Point.comap`, and the identification
-`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with `s ≫ f`. -/
+`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with `s ≫ f`.
+(blueprint: `lemma-openclosed-stalk-upperstar`) -/
 noncomputable def Etale.upperStarCompSheafFiberIso :
     (f)^*[A] ⋙ (pointSmallEtale s).sheafFiber ≅ (pointSmallEtale (s ≫ f)).sheafFiber :=
   Functor.isoWhiskerRight
@@ -95,7 +96,8 @@ noncomputable def Etale.upperStarCompSheafFiberIso :
 stalk of `f^* F` at the geometric point `s`, taken at the universe of the coefficients, is
 the stalk of `F` at `s ≫ f`. This is the form in which the comparison is used, since the
 coefficient categories of the six functor formalism are concrete over `Type (u + 1)` and the
-fibre functor of `pointSmallEtale s` takes values in `Type u`. -/
+fibre functor of `pointSmallEtale s` takes values in `Type u`.
+(blueprint: `lemma-openclosed-stalk-upperstar`) -/
 noncomputable def Etale.upperStarCompUliftSheafFiberIso :
     (f)^*[A] ⋙ ((pointSmallEtale s).ulift.{u + 1}).sheafFiber ≅
       ((pointSmallEtale (s ≫ f)).ulift.{u + 1}).sheafFiber :=

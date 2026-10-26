@@ -88,10 +88,10 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration
   let := hTcolim
   obtain ⟨F, h0, hn, hstable, hstep⟩ :=
     (M.ρ.invariants_ne_bot_and_exists_filtration_of_isPGroup hP).2
-  obtain ⟨n, W, ι, hzero, ⟨eW⟩, hquot⟩ :=
+  obtain ⟨W, ι, hzero, ⟨eW⟩, hquot⟩ :=
     Rep.exists_categorical_filtration_of_invariant_flag ℓ P M F h0 hn hstable hstep
-  refine ⟨V, v, hvfin, hvet, hV, d, hd, hfib, n, fun i ↦ T.obj (W i),
-    fun i ↦ T.map (ι i), T.map_isZero hzero, ⟨T.mapIso eW ≪≫ eM⟩, ?_⟩
+  refine ⟨V, v, hvfin, hvet, hV, d, hd, hfib, Module.finrank (ZMod ℓ) M.V,
+    fun i ↦ T.obj (W i), fun i ↦ T.map (ι i), T.map_isZero hzero, ⟨T.mapIso eW ≪≫ eM⟩, ?_⟩
   intro i hi
   obtain ⟨hmono, ⟨equot⟩⟩ := hquot i hi
   let := hmono

@@ -82,3 +82,22 @@ lemma isIso_app_obj₁_of_isIso_app_obj₂₃ (h₂ : IsIso (τ.app T.obj₂)) (
 end TwoOutOfThree
 
 end CategoryTheory.NatTrans
+
+namespace CategoryTheory.Functor
+
+open Limits Pretriangulated
+
+variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObject D]
+  [Preadditive C] [Preadditive D] [HasShift C ℤ] [HasShift D ℤ]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
+  [Pretriangulated C] [Pretriangulated D]
+
+/-- **Exact functors of pre-triangulated categories.** A functor `F` equipped with a
+commutation with the shifts (`F.CommShift ℤ`) is exact (triangulated) if and only if it carries
+distinguished triangles to distinguished triangles. (blueprint: `def-weil-triangulated-category`)
+-/
+theorem isTriangulated_iff_map_distinguished (F : C ⥤ D) [F.CommShift ℤ] :
+    F.IsTriangulated ↔ ∀ T ∈ distTriang C, F.mapTriangle.obj T ∈ distTriang D :=
+  ⟨fun h ↦ h.map_distinguished, fun h ↦ ⟨h⟩⟩
+
+end CategoryTheory.Functor

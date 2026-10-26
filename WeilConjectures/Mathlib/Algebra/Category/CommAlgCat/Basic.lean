@@ -290,6 +290,18 @@ def isLimitPiFan : IsLimit (piFan S) where
 
 end Pi
 
+/-- **Elements of a filtered colimit of commutative algebras come from a stage.** For a filtered
+diagram `F` of commutative `R`-algebras with colimit cocone `c`, the image of `c` in commutative
+rings is still a colimit cocone, and every element of the colimit is `ι_j(a)` for some stage `j`
+and some `a ∈ F(j)`.
+
+(blueprint: `lem-weil-pbc-filtered-colimit-algebras-elementwise`) -/
+theorem isColimit_forget₂_and_exists_rep {J : Type u} [SmallCategory J] [IsFiltered J]
+    {F : J ⥤ CommAlgCat.{u} R} {c : Cocone F} (hc : IsColimit c) :
+    Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) CommRingCat.{u}).mapCocone c)) ∧
+      ∀ x : c.pt, ∃ (j : J) (a : F.obj j), c.ι.app j a = x :=
+  ⟨⟨isColimitOfPreserves _ hc⟩, fun x ↦ Concrete.isColimit_exists_rep F hc x⟩
+
 end CommAlgCat
 
 instance AlgCat.preservesFilteredColimitsOfSize_forget_moduleCat (R : Type u) [CommRing R] :

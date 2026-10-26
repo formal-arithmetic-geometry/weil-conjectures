@@ -59,16 +59,6 @@ lemma baseChangeSectionMap_snd {W : Y.Etale} {V : Y'.Etale} (φ : V.left ⟶ W.l
     baseChangeSectionMap sq φ hφ ≫ pullback.snd W.hom f = pullback.snd V.hom f' ≫ g' :=
   pullback.lift_snd _ _ _
 
-/-- The components of the inverse of the composition isomorphism `h₁_* ⋙ h₂_* ≅ (h₁ ≫ h₂)_*` are
-the restriction maps along the inverse pasting isomorphisms of base changes. -/
-lemma lowerStarComp_inv_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-    (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂) (M : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (W : R.Etale) :
-    ((lowerStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).inv.app M).hom.app (op W) =
-      M.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂ h₁₂ hh₁₂).inv.app W).op := by
-  simp only [lowerStarComp, Functor.sheafPushforwardContinuousComp']
-  exact Category.comp_id _
-
 set_option backward.isDefEq.respectTransparency false in
 /-- **The base change map on pulled back sections.** The base change map sends the pullback
 `φ^* s` of a section `s` of `f_* F` over `W` to the pullback of `s` along

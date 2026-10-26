@@ -21,6 +21,8 @@ A natural endomorphism of the identity functor induces itself on homology
 
 For a projective object `P`, there are no nonzero morphisms `P ⟶ H_j(K)` if and only if every
 cycle `P ⟶ K_j` is a boundary (`HomologicalComplex.subsingleton_hom_homology_iff_of_projective`).
+
+A retract of a complex exact at `i` is exact at `i` (`HomologicalComplex.ExactAt.of_retraction`).
 -/
 
 @[expose] public section
@@ -118,5 +120,20 @@ lemma subsingleton_hom_homology_iff_of_projective (K : HomologicalComplex C c) {
       rw [← cancel_mono (K.iCycles j), liftCycles_i]
     rw [← Projective.factorThru_comp φ (K.homologyπ j), this]
     exact K.liftCycles_homologyπ_eq_zero_of_boundary _ k hk g hg.symm
+
+end HomologicalComplex
+
+namespace HomologicalComplex
+
+variable {B : Type*} [Category* B] [HasZeroMorphisms B] [CategoryWithHomology B] {ι : Type*}
+  {c : ComplexShape ι}
+
+/-- A retract of a complex which is exact at `i` is exact at `i`. -/
+lemma ExactAt.of_retraction {K L : HomologicalComplex B c} (f : K ⟶ L) (g : L ⟶ K)
+    (hfg : f ≫ g = 𝟙 K) {i : ι} (hL : L.ExactAt i) : K.ExactAt i := by
+  rw [exactAt_iff_isZero_homology] at hL ⊢
+  have : IsSplitMono (homologyMap f i) :=
+    IsSplitMono.mk' ⟨homologyMap g i, by rw [← homologyMap_comp, hfg, homologyMap_id]⟩
+  exact hL.of_mono (homologyMap f i)
 
 end HomologicalComplex

@@ -528,7 +528,8 @@ theorem of_lTensor_injective_of_forall {S : Type*} [CommRing S] [Algebra R S]
 /-- **The local criterion for flatness** (Stacks, Tags 00MK and 0AS8; Matsumura, Theorem 22.3).
 Let `R → S` be a map of noetherian rings, `I` an ideal of `R` with `I S` contained in the
 Jacobson radical of `S`, and `M` a finite `S`-module. If `M ⧸ I M` is flat over `R ⧸ I` and
-`M ⊗ I → M` is injective, then `M` is flat over `R`. -/
+`M ⊗ I → M` is injective, then `M` is flat over `R`.
+(blueprint: `lem-weil-pbc-flat-variant-local-criterion`) -/
 theorem of_flat_quotient_of_lTensor_injective {S : Type*} [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [IsNoetherianRing S] [Module S M] [IsScalarTower R S M]
     [Module.Finite S M] [Flat (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M))]
