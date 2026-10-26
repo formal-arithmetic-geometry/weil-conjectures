@@ -57,7 +57,9 @@ extensions by zero of lisse sheaves:
 The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally closed immersion
 into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) is `sorry`ed
-for `n ≥ 1`. For `n = 0` it is proved: `𝔸⁰_S ⟶ S` is an isomorphism, and the nearby cycles of
+for `n ≥ 1` when `D` meets the special fibre. If `D` misses the special fibre, the nearby cycles
+vanish by the proper exchange (`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`).
+For `n = 0` the theorem is proved: `𝔸⁰_S ⟶ S` is an isomorphism, and the nearby cycles of
 the trait itself are computed directly on the pro-étale site
 (`NearbyCyclesModel.preservesBoundedConstructible_traitSelfModel`). For `n ≥ 1` it is
 Deligne's theorem for torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), passed to
@@ -245,6 +247,31 @@ theorem boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding {Y : S
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f' _ h₂)
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- The extension by zero `j_{W!} Rc'_* L` of a lisse sheaf `L` on `E` along a closed immersion
+`c' : E ⟶ W` into an open `W` of a closed subscheme `c : D ⟶ 𝔸ⁿ_S` is a bounded constructible
+complex on `D`. -/
+lemma boundedConstructible_lisseExtension_closed (n : ℕ) (D : Scheme.{u})
+    (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens) (E : Scheme.{u})
+    (c' : E ⟶ W) [IsClosedImmersion c']
+    (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E))
+    (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E) L) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) D)
+      (D((W.ι)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        ((R((c')_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+          ((DerivedCategory.singleFunctor _ 0).obj L))) := by
+  have : IsNoetherian (affineSpaceModel k' n).total :=
+    (isTraitModel_affineSpaceModel (k' := k') n).isNoetherian_total
+  have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace W := W.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have hL' : IsConstructibleModuleObject _ L :=
+    ⟨Scheme.Stratification.trivial E, fun _ ↦ (isLocallyFinitelyPresented_mapMod_iff _ _ _).2
+      (IsLocallyFinitelyPresented.upperStar _ _ hL)⟩
+  exact boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj _ W.ι _
+    (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c'
+      (boundedConstructible_singleFunctor_zero_obj _ L hL'))
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- The extension by zero `v_! L = Rc_* j_{W!} Rc'_* L` of a lisse sheaf `L` along a locally closed
 immersion `v : E ⟶ 𝔸ⁿ_S`, factored through a closed immersion `c' : E ⟶ W` into an open `W` of a
 closed subscheme `c : D ⟶ 𝔸ⁿ_S`, is a bounded constructible complex on `𝔸ⁿ_S`. -/
@@ -262,15 +289,8 @@ lemma boundedConstructible_lisseExtension (n : ℕ) (D : Scheme.{u})
             ((DerivedCategory.singleFunctor _ 0).obj L)))) := by
   have : IsNoetherian (affineSpaceModel k' n).total :=
     (isTraitModel_affineSpaceModel (k' := k') n).isNoetherian_total
-  have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
-  have : TopologicalSpace.NoetherianSpace W := W.ι.isOpenEmbedding.isInducing.noetherianSpace
-  have hL' : IsConstructibleModuleObject _ L :=
-    ⟨Scheme.Stratification.trivial E, fun _ ↦ (isLocallyFinitelyPresented_mapMod_iff _ _ _).2
-      (IsLocallyFinitelyPresented.upperStar _ _ hL)⟩
   exact boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c
-    (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj _ W.ι _
-      (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c'
-        (boundedConstructible_singleFunctor_zero_obj _ L hL')))
+    (boundedConstructible_lisseExtension_closed n D c W E c' L hL)
 
 omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Deligne's finiteness theorem for nearby cycles on `𝔸⁰_S`**: the geometric nearby cycles of
@@ -303,6 +323,38 @@ theorem boundedConstructible_nearbyCycles_affineSpaceModel_zero
     (IsPullback.of_hasPullback q (traitClosedPoint k'))
     (fun hB' ↦ preservesBoundedConstructible_traitSelfModel k' _ hB') hB
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- **Nearby cycles of a complex supported away from the special fibre vanish**: if the closed
+subscheme `c : D ⟶ 𝔸ⁿ_S` misses the special fibre `𝔸ⁿ_s`, then `Ψ (Rc_* K) = 0` for every bounded
+constructible `K` on `D`. By the proper exchange, `Ψ_{𝔸ⁿ} (Rc_* K) ≅ Rc_{s*} Ψ_D K`, and the
+special fibre `D_s` of `D` is empty. -/
+lemma isZero_nearbyCycles_affineSpace_of_disjoint (n : ℕ) {D : Scheme.{u}}
+    (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c]
+    (hc : Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' n).i.base))
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) D))}
+    (hK : boundedConstructible _ K) :
+    IsZero (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+      ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)) := by
+  let q := 𝔸(ULift.{u} (Fin n); trait k') ↘ trait k'
+  let M := traitStdModel (c ≫ q)
+  have hj : IsPullback M.j (pullback.snd (c ≫ q) (traitGenericPoint k')) (c ≫ q)
+      (traitGenericPoint k') := IsPullback.of_hasPullback _ _
+  have hi : IsPullback M.i (traitStdSpecialFibre (c ≫ q)).hom (c ≫ q) (traitClosedPoint k') :=
+    IsPullback.of_hasPullback _ _
+  let φ := traitStdHom q hj hi c rfl
+  have : IsEmpty (traitStdSpecialFibre (c ≫ q)).left := by
+    refine ⟨fun x ↦ Set.disjoint_left.1 hc ⟨M.i.base x, rfl⟩
+      ⟨(traitStdSpecialHom q hi c rfl).base x, ?_⟩⟩
+    exact congrArg (fun g ↦ g.base x) φ.comm_i
+  have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ rfl
+      (isPullback_traitStdHom_generic q hj hi c rfl) (isPullback_traitStdHom_special q hi c rfl)
+      K hK
+  refine IsZero.of_iso ?_ (asIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K))
+  exact (R((traitStdSpecialHom q hi c rfl)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
+    (isZero_derivedCategory_of_isEmpty' _ _)
+
 /-- **Deligne's finiteness theorem for nearby cycles, for the extension by zero of a lisse sheaf
 on a locally closed subscheme of the generic fibre of an affine space** (SGA 4½, [Th. finitude],
 Thm. 3.2; for `ℚ̄_ℓ`-coefficients through `𝒪_E`-lattices and passage to the limit, Bhatt–Scholze,
@@ -316,8 +368,9 @@ cycles `Li^* Rj_* Lj^*` of its extension by zero `v_! L = Rc_* j_{W!} Rc'_* L`, 
 `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` and `i : 𝔸ⁿ_s ⟶ 𝔸ⁿ_S`, are a bounded constructible complex on the special
 fibre `𝔸ⁿ_s`. (When `W` misses the generic fibre, these nearby cycles vanish:
 `NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`.) The case `n = 0` is
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`; the case `n ≥ 1` is
-`sorry`ed. -/
+`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`, and the case where `D`
+misses the special fibre is `NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`; the
+remaining case, `n ≥ 1` with `D` meeting the special fibre, is `sorry`ed. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D : Scheme.{u})
     (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c] (W : D.Opens)
     (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' n) (E : Scheme.{u})
@@ -336,7 +389,11 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D
   | zero =>
     exact boundedConstructible_nearbyCycles_affineSpaceModel_zero
       (boundedConstructible_lisseExtension 0 D c W E c' L hL)
-  | succ n => sorry
+  | succ n =>
+    by_cases hc : Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' (n + 1)).i.base)
+    · exact boundedConstructible_of_isZero _ (isZero_nearbyCycles_affineSpace_of_disjoint _ c hc
+        (boundedConstructible_lisseExtension_closed _ D c W E c' L hL))
+    · sorry
 
 /-- Deligne's finiteness theorem for nearby cycles on an affine space `𝔸ⁿ_S`: the geometric
 nearby cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes. By the
