@@ -13233,6 +13233,7 @@ public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.HomologyUnit
 public import WeilConjectures.TraceFormula.HomologyWeilLowerShriek
 public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
+public import WeilConjectures.TraceFormula.IntegersToPadicAlgClLowerStar
 public import WeilConjectures.TraceFormula.KernelPushforwardCoherence
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.KunnethVerdierClosed
@@ -13260,7 +13261,10 @@ public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.OrdinaryKunneth
 public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
+public import WeilConjectures.TraceFormula.OrdinaryKunnethFinite
+public import WeilConjectures.TraceFormula.OrdinaryKunnethIntegral
 public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
+public import WeilConjectures.TraceFormula.OrdinaryKunnethReduction
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement

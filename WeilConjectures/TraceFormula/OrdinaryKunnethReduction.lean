@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
+public import WeilConjectures.CategoryTheory.DerivedCategory.IsZeroOfIsIsoZSMul
+public import WeilConjectures.CategoryTheory.Sites.SheafModuleZSMul
 
 /-!
 # Reduction modulo `ℓⁿ`, read on the étale site: pushforward and conservativity
@@ -42,29 +44,6 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-
-/-- In the derived category of an abelian category on which an integer `m` acts by zero, an object
-on which `m` acts invertibly is zero: so are all its homology objects. -/
-lemma DerivedCategory.isZero_of_isIso_zsmul_id {A : Type*} [Category A] [Abelian A]
-    [HasDerivedCategory A] {m : ℤ} (hm : ∀ M : A, m • 𝟙 M = 0) {K : DerivedCategory A}
-    (h : IsIso (m • 𝟙 K)) : IsZero K := by
-  suffices IsIso (0 : K ⟶ K) from IsZero.of_mono_zero K K
-  rw [DerivedCategory.isIso_iff]
-  intro i
-  have : IsIso ((DerivedCategory.homologyFunctor A i).map (m • 𝟙 K)) := inferInstance
-  rw [Functor.map_zsmul, CategoryTheory.Functor.map_id, hm] at this
-  have hz : IsZero ((DerivedCategory.homologyFunctor A i).obj K) :=
-    IsZero.of_mono_zero _ ((DerivedCategory.homologyFunctor A i).obj K)
-  exact hz.isIso hz _
-
-/-- An integer `m` which vanishes in `R` acts by zero on every sheaf of `R`-modules. -/
-lemma Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero {C : Type*} [Category C]
-    {J : GrothendieckTopology C} {R : Type*} [Ring R] {m : ℤ} (hm : (m : R) = 0)
-    (M : Sheaf J (ModuleCat R)) : m • 𝟙 M = 0 := by
-  ext U x
-  have h := congr_arg (fun f ↦ (f.app U).hom x)
-    ((sheafToPresheaf J (ModuleCat R)).map_zsmul (f := 𝟙 M) (r := m))
-  simpa [← Int.cast_smul_eq_zsmul R, hm] using h
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
