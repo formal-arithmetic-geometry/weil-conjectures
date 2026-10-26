@@ -62,13 +62,16 @@ noncomputable def lowerShriekBaseChangeIsoIntegral :
 noncomputable def supportedRestrictionIntegral
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     (boundedConstructibleUpperStar _ ℓ F.ι).obj
-        ((boundedConstructibleUpperShriek _ ℓ c.support).obj P) ⟶
-      (boundedConstructibleUpperShriek _ ℓ F.d).obj
+        ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 c.support).obj P) ⟶
+      (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 F.d).obj
         ((boundedConstructibleUpperStar _ ℓ (diag X)).obj P) :=
-  (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+  (CategoryTheory.mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1
+      c.support)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
     (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoIntegral E).inv)).natTrans.app P
 
+set_option maxRecDepth 8000 in
+-- matching the coefficient compatibility unfolds the concrete coefficient rings
 /-- **The supported restriction under `𝒪_E ⟶ E`**: the extension of scalars `T` of the
 `𝒪_E`-supported restriction of `P`, followed by the `f^!`-exchange for `d` and the pullback
 comparison for `Δ`, is the pullback comparison for `ι`, then `Lι^*` of the `f^!`-exchange for `c`,
@@ -77,15 +80,15 @@ theorem map_supportedRestrictionIntegral_comp
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     (boundedConstructibleExtendScalars F.F.left ℓ E).map (F.supportedRestrictionIntegral E P) ≫
         (boundedConstructibleUpperShriekExtendScalars ℓ E F.d).app _ ≫
-        (boundedConstructibleUpperShriek _ ℓ F.d).map
+        (ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E F.d).map
           ((boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X)).hom.app P) =
       (boundedConstructibleUpperStarExtendScalarsIso ℓ E F.ι).hom.app _ ≫
         (boundedConstructibleUpperStar _ ℓ F.ι).map
           ((boundedConstructibleUpperShriekExtendScalars ℓ E c.support).app P) ≫
         F.supportedRestrictionE E ((boundedConstructibleExtendScalars (X ⨯ X).left ℓ E).obj P) := by
   have h := Adjunction.map_mateEquiv_app_comp
-    (boundedConstructibleUpperShriekAdjunction _ ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ F.d)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 c.support)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
     (boundedConstructibleUpperStar _ ℓ F.ι) (boundedConstructibleUpperStar _ ℓ (diag X))
     (F.lowerShriekBaseChangeIsoIntegral E)
     (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
@@ -102,10 +105,7 @@ theorem map_supportedRestrictionIntegral_comp
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E F.ι)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X))
     (boundedConstructibleLowerShriekBaseChange_extendScalars ℓ E F.isPullback) P
-  simp only [supportedRestrictionIntegral, supportedRestrictionE,
-    boundedConstructibleUpperShriekExtendScalars]
-  dsimp only [Functor.comp_obj] at h ⊢
-  with_reducible exact h
+  exact h
 
 /-- **Transport of the vanishing of the supported restriction from `𝒪_E` to `E`**: if the stalk
 along `z : T ⟶ Fix(c)` of the extension of scalars to `E` of the `𝒪_E`-supported restriction of
