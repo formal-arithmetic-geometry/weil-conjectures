@@ -41,7 +41,12 @@ sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ
   blueprint `det-nearby-kunneth-invariants`, proved in
   `WeilConjectures.RepresentationTheory.ProfiniteInvariants`). None of strict localizations of
   `𝔸¹_S`, nearby cycles over a varying trait, or the action of inertia on nearby cycles is
-  formalised.
+  formalised. The slices may be taken of the form `Spec K⟦t⟧` (with `K` a separable closure of
+  `k'(x)`, through `k'⟦t⟧[x] ⟶ K⟦t⟧`, the completion of the strict localization), so that the
+  induction stays within the traits `trait K`; the identification (2) is then the invertibility
+  of the pullback exchange `α` along the slice, for the model whose generic fibre lies over the
+  fixed field of `P`, and the restriction of `Π` to the slice is reduced to the Künneth map of the
+  sliced models by `NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isIso_pullbackExchange`.
 
 The reduction to proper models is proved: locality on the special fibre reduces to affine total
 spaces (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper`), and for affine total spaces one
