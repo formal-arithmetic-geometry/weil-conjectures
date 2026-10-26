@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralUnderived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEtaleBaseChange
 
 /-!
 # Bounded below derived pushforward commutes with `E ⊗_{𝒪_E} -`
@@ -45,12 +46,6 @@ section Forget
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [PreservesFiniteLimits (tensorLeft (condensedRingObj Λ X))]
 
-/-- The pushforward of module objects is the pushforward of the underlying abelian sheaves. -/
-noncomputable abbrev lowerStarForgetIso :
-    (f)_*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ Y) ≅
-      Mod.forget (condensedRingObj Λ X) ⋙ (f)_*[Ab.{u + 1}] :=
-  Iso.refl _
-
 omit [IsCommMonObj Λ] in
 /-- If `Λ_X` is flat, a `Λ_X`-module object is `f_*`-acyclic as soon as its underlying abelian
 sheaf is. -/
@@ -58,7 +53,10 @@ lemma rightAcyclic_lowerStar_of_rightAcyclic_forget
     {M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (h : ((f)_*[Ab.{u + 1}]).rightAcyclic M.X) :
     ((f)_*⟦Λ⟧).rightAcyclic M := fun q ↦ by
-  have : IsIso (Functor.rightDerivedBaseChange (lowerStarForgetIso Λ f).hom (q + 1)) := by
+  have : IsIso (Functor.rightDerivedBaseChange (lowerStarForgetIso Λ f).inv (q + 1)) := by
+    rw [show (lowerStarForgetIso Λ f).inv = (Iso.refl _ :
+      (f)_*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ Y) ≅
+        Mod.forget (condensedRingObj Λ X) ⋙ (f)_*[Ab.{u + 1}]).hom from rfl]
     rw [NatTrans.isIso_iff_isIso_app]
     intro G
     rw [Functor.rightDerivedBaseChange_app]
@@ -70,7 +68,7 @@ lemma rightAcyclic_lowerStar_of_rightAcyclic_forget
   have hz : IsZero ((Mod.forget (condensedRingObj Λ Y)).obj
       ((((f)_*⟦Λ⟧).rightDerived (q + 1)).obj M)) :=
     (h q).of_iso
-      ((asIso (Functor.rightDerivedBaseChange (lowerStarForgetIso Λ f).hom (q + 1))).app M)
+      ((asIso (Functor.rightDerivedBaseChange (lowerStarForgetIso Λ f).inv (q + 1))).app M)
   rw [IsZero.iff_id_eq_zero] at hz ⊢
   exact (Mod.forget (condensedRingObj Λ Y)).map_injective
     (by rw [CategoryTheory.Functor.map_id, Functor.map_zero, hz])
