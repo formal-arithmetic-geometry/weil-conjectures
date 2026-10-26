@@ -11,6 +11,7 @@ public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnCompo
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
+public import WeilConjectures.TraceFormula.Specialization.MatchTactic
 
 /-!
 
@@ -36,78 +37,6 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace CategoryTheory
-
-/-- Gluing an identity `c ≫ L(s ≫ q) ≫ r = w ≫ v` to `w ≫ v ≫ ν = Z`: the composite
-`c ≫ L(s') ≫ (L(q) ≫ r) ≫ ν` is `Z` for any `s'` equal to `s`. -/
-lemma comp_map_comp_comp_eq_of_eq {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] {L : 𝒞 ⥤ 𝒟}
-    {u A₁ A₂ B₀ : 𝒟} {U₁ U₂ U₃ : 𝒞} (c : u ⟶ L.obj U₁) (s s' : U₁ ⟶ U₂) (q : U₂ ⟶ U₃)
-    (r : L.obj U₃ ⟶ A₁) (w : u ⟶ A₂) (v : A₂ ⟶ A₁) (ν : A₁ ⟶ B₀) (Z : u ⟶ B₀) (hs : s' = s)
-    (h : c ≫ L.map (s ≫ q) ≫ r = w ≫ v) (h' : w ≫ v ≫ ν = Z) :
-    c ≫ L.map s' ≫ (L.map q ≫ r) ≫ ν = Z := by
-  subst hs; rw [← h', ← reassoc_of% h, L.map_comp]; simp only [Category.assoc]
-
-end CategoryTheory
-
-/-- The two sides of an equation. -/
-meta def eqSidesOf (e : Lean.Expr) : Lean.MetaM (Lean.Expr × Lean.Expr) := do
-  let e ← Lean.Meta.whnfR (← Lean.instantiateMVars e)
-  let some (_, l, r) := e.eq? | throwError "not an equation"
-  return (l, r)
-
-/-- The two factors of a composite `f ≫ g`. -/
-meta def compFactors (e : Lean.Expr) : Lean.MetaM (Lean.Expr × Lean.Expr) := do
-  let e := e.consumeMData
-  unless e.isAppOfArity ``CategoryStruct.comp 7 do throwError "not a composite"
-  return (e.getArg! 5, e.getArg! 6)
-
-/-- `glue_unit_class h h'` closes a goal `c ≫ L(s') ≫ ?φ ≫ ν = Z` from
-`h : c ≫ L(s ≫ q) ≫ r = w ≫ v` and `h' : w ≫ v ≫ ν = Z`, where `s'` and `s` are definitionally
-equal: it assigns `?φ := L(q) ≫ r` and closes the goal with `comp_map_comp_comp_eq_of_eq`. The
-identifications `s' = s` and of the remaining terms (which agree up to their proof arguments) are
-left to the kernel: the elaborator, through proof irrelevance, infers the types of large proof terms
-and needs minutes for them. -/
-elab "glue_unit_class " h:ident h':ident : tactic => Lean.Elab.Tactic.withMainContext do
-  let he ← Lean.Elab.Tactic.elabTerm h none
-  let he' ← Lean.Elab.Tactic.elabTerm h' none
-  let (l, wv) ← eqSidesOf (← Lean.Meta.inferType he)
-  let (l', Z) ← eqSidesOf (← Lean.Meta.inferType he')
-  let (c, rest) ← compFactors l
-  let (m, r) ← compFactors rest
-  let (s, q) ← compFactors m.consumeMData.appArg!
-  let (w, v) ← compFactors wv
-  let (_, restD) ← compFactors l'
-  let (_, ν) ← compFactors restD
-  let (lG, _) ← eqSidesOf (← Lean.Elab.Tactic.getMainTarget)
-  let (_, restG) ← compFactors lG
-  let (mG, restG') ← compFactors restG
-  let (φG, _) ← compFactors restG'
-  let s' := mG.consumeMData.appArg!
-  -- `?φ := L(q) ≫ r`, with `L(q)` obtained from `L(s ≫ q)` by changing the morphism
-  let m := m.consumeMData
-  let some (_, _, X, Y) := (← Lean.Meta.whnfR (← Lean.Meta.inferType q)).app4? ``Quiver.Hom
-    | throwError "unexpected type"
-  let margs := m.getAppArgs
-  let n := margs.size
-  let mq := Lean.mkAppN m.getAppFn (((margs.set! (n - 3) X).set! (n - 2) Y).set! (n - 1) q)
-  let some (_, _, A, _) := (← Lean.Meta.whnfR (← Lean.Meta.inferType mq)).app4? ``Quiver.Hom
-    | throwError "unexpected type"
-  let rest := rest.consumeMData
-  let φ := Lean.mkAppN rest.getAppFn ((rest.getAppArgs.set! 2 A).set! 5 mq)
-  unless φG.consumeMData.isMVar do throwError "the middle factor is not a metavariable"
-  unless ← Lean.Meta.isDefEq (← Lean.Meta.inferType φG) (← Lean.Meta.inferType φ) do
-    throwError "the middle factor has the wrong type"
-  φG.consumeMData.mvarId!.assign φ
-  let hs ← Lean.Meta.mkExpectedTypeHint (← Lean.Meta.mkEqRefl s) (← Lean.Meta.mkEq s' s)
-  let pf ← Lean.Meta.mkAppM ``CategoryTheory.comp_map_comp_comp_eq_of_eq
-    #[c, s, s', q, r, w, v, ν, Z, hs, he, he']
-  let some (_, _, U₁, U₂) := (← Lean.Meta.whnfR (← Lean.Meta.inferType s')).app4? ``Quiver.Hom
-    | throwError "unexpected type"
-  let args := pf.getAppArgs
-  -- the objects of `s'`, so that the statement of the proof is the goal up to proof arguments
-  (← Lean.Elab.Tactic.getMainGoal).assign (Lean.mkAppN pf.getAppFn ((args.set! 9 U₁).set! 10 U₂))
-  Lean.Elab.Tactic.replaceMainGoal []
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -122,6 +51,13 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
   {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- A morphism from a proper `k`-scheme to a separated one is proper. -/
+private lemma isProper_left_of_isProper_hom {B Y : Over (Spec (.of k))} [IsProper B.hom]
+    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
+  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+  exact IsProper.of_comp _ Y.hom
 
 set_option maxHeartbeats 2000000 in
 -- instantiating fact (III) and the reduction at the concrete data is slow
@@ -178,6 +114,112 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').ι
     (hc.componentSpecialLift_ι k' j hb) hI
   have hD := unitClass_comp_map_comp_deformationCompactSupportExchange_app B b.left.ker k' (ℓ := ℓ)
+  have hF1 := supportCompactSupportExchange_app_lowerStar_eq hc k' j hb
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+  have hF3 := componentSupportModelHom_pushforwardExchange_app hc k' j hb
+  have : IsProper (j ≫ F.d).left := by
+    have : IsProper ((j ≫ F.d).left ≫ X.hom) := by rw [Over.w (j ≫ F.d)]; infer_instance
+    exact IsProper.of_comp _ X.hom
+  have : IsProper ((j ≫ F.d) ≫ diag X).left := by rw [Over.comp_left]; infer_instance
+  have hphg : ((j ≫ F.ι).left ≫ (supportClosureι c).left) ≫
+      (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
+        (supportClosureMap c ≫ Limits.prod.snd)).left = ((j ≫ F.d) ≫ diag X).left := by
+    rw [Category.assoc, ← Over.comp_left, ← Over.comp_left,
+      show supportClosureι c ≫ Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
+        (supportClosureMap c ≫ Limits.prod.snd) = c.support by
+          rw [prodLift_supportClosureMap, supportClosureι_map],
+      Category.assoc, F.isPullback.w, ← Category.assoc]
+  have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_hom _
+  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_hom _
+  have : IsProper (((j ≫ F.ι) ≫ supportClosureι c) ≫ Limits.prod.lift
+    (supportClosureMap c ≫ Limits.prod.fst) (supportClosureMap c ≫ Limits.prod.snd)).left :=
+    isProper_left_of_isProper_hom _
+  have hF2 := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ j (rfl : j ≫ F.ι = _)
+    F.isPullback.w (supportClosureι c)
+    (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
+      (supportClosureMap c ≫ Limits.prod.snd))
+    (by rw [prodLift_supportClosureMap, supportClosureι_map])
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (by rw [hphg]; rfl)
+  have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
+    isProper_left_of_isProper_hom _
+  have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
+    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := isProper_left_of_isProper_hom _
+  have : IsProper (componentSpecialFibreMap k' j hb).left := isProper_left_of_isProper_hom _
+  have : IsProper (componentSpecialFibreMap k' j hb ≫
+    (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_hom _
+  have : IsProper (componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k').left :=
+    isProper_left_of_isProper_hom _
+  have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
+    supportClosureSpecialMap c y k').left := isProper_left_of_isProper_hom _
+  have : IsProper (hc.componentSpecialLift k' j hb).left := isProper_left_of_isProper_hom _
+  have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
+      (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
+        (hc.specialFixedLocus k').d) ≫
+          diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := by
+    rw [Category.assoc, ← Over.comp_left, ← Over.comp_left, hc.supportClosureSpecialι_comp k',
+      ← hc.componentSpecialLift_ι k' j hb, Category.assoc, (hc.specialFixedLocus k').isPullback.w,
+      ← Category.assoc]
+  have hF2' := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ
+    (hc.componentSpecialLift k' j hb) (hc.componentSpecialLift_ι k' j hb)
+    (hc.specialFixedLocus k').isPullback.w (hc.supportClosureSpecialι k')
+    (supportClosureSpecialMap c y k') (hc.supportClosureSpecialι_comp k')
+    ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (by rw [hphg']; rfl)
+  have hfsp : hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d =
+      deformationSpecialFibreMap (j ≫ F.d)
+        (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k' := by
+    rw [← (hc.specialFixedLocus k').ι_c₁, hc.componentSpecialLift_ι_assoc]
+    change componentSpecialFibreMap k' j hb ≫ hc.specialLeg₁ k' = _
+    rw [      deformationSpecialFibreMap_comp k' _ _ _ _
+        (map_siteIdeal_ker_le_of_comp_eq _ (by rw [← Category.assoc, hb]))]
+    exact deformationSpecialFibreMap_eq_of_eq k' _ _ (by simp only [Category.assoc, F.ι_c₁]) _
+  have hXm := (deformationModel X (y ≫ c.c₁).left.ker k')
+    |>.preservesBoundedConstructible_of_isTraitModel
+    (ℓ := ℓ) (isTraitModel_deformationModel X _ k') (deformationModel_exists_comp_ε X _ k')
+  have hXXm := NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
+      (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+      (isTraitModel_deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+      (deformationProdModel_exists_comp_ε X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+  have hL := eqToHom_comp_map_lowerStarComp_inv ℓ (j ≫ F.d) (j ≫ F.d) rfl (diag X)
+    (componentPointModelHom_comp_diag_left j) (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (by rw [hphg]; rfl)
+  have hL' := eqToHom_comp_map_lowerStarComp_inv ℓ
+    (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) _ hfsp
+    (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))
+    (componentPointModelHom_comp_diag_special hc k' j hb)
+    ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (by rw [hphg']; rfl)
+  have hχg := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
+      (componentModelHom k' j hb) hM hN
+  have hχΔ := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
+      (deformationDiagModelHom X (y ≫ c.c₁).left.ker k') hXm hXXm
+  have hχdj := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
+      (componentPointModelHom k' j hb) hM hXm
+  instantiate_by_match CategoryTheory.supportIdentity_aux [hF1 := hF1, hF3 := hF3, hF2 := hF2,
+    hF2' := hF2', hL := hL, hL' := hL', hχΔ := hχΔ, hχdj := hχdj, hχg := hχg,
+    t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
+    hι := (ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (deformationSpecialFibre X (y ≫ c.c₁).left.ker k' ⨯
+        deformationSpecialFibre X (y ≫ c.c₁).left.ker k').left))).faithful,
+    hback := NatIso.hom_app_comp_inv_app_comp_map_eqToHom
+      (boundedConstructibleLowerStarComp ℓ (j ≫ F.d) (diag X)) (𝟙_ _) rfl,
+    cinv := (boundedConstructibleLowerStarCompOfEq ℓ (hc.componentSpecialLift k' j hb)
+      (hc.specialFixedLocus k').ι (hc.componentSpecialLift_ι k' j hb)).inv.app
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
+    hcinv := Iso.inv_hom_id_app (boundedConstructibleLowerStarCompOfEq ℓ
+      (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').ι
+        (hc.componentSpecialLift_ι k' j hb))
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
+    tr := eqToHom (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp),
+    hback' := NatIso.hom_app_comp_inv_app_comp_map_eqToHom_eq (boundedConstructibleLowerStarComp ℓ
+      (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)
+      (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')))
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))
+      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
+      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as _hSI
   -- Facts (I) and (III) and the unit class identity of `ν_B` are `hI`, `h3` and `hD`; the
   -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`, and `glue_unit_class`
   -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`.
