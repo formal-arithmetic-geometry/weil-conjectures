@@ -33,9 +33,9 @@ import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
-# The projective line over a strictly henselian local ring
+# The projective line over a henselian local ring
 
-Let `A` be a strictly henselian local ring with residue field `κ`, let `X = ℙ¹_A` and let
+Let `A` be a henselian local ring with residue field `κ`, let `X = ℙ¹_A` and let
 `X₀ = ℙ¹_κ` be its closed fibre, with closed immersion `ι : X₀ ⟶ X` (the base change of
 `Spec κ ⟶ Spec A`). For a sheaf `F` on `X_ét` write `F₀ = ι⁻¹ F`. This file records the
 comparison between the cohomology of `X` and of `X₀`:
@@ -67,8 +67,8 @@ the `SixFunctors` folder.
   acyclicity of `I₀` on `ℙ¹_κ`.
 - `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_residueField_of_injective`: an alias
   of the previous statement, recording the `Γ(X₀, -)`-acyclicity of `I₀`.
-- `AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField`: the strictly
-  henselian comparison `Hᵠ(ℙ¹_A, F) ≅ Hᵠ(ℙ¹_κ, F₀)`.
+- `AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField`: the henselian
+  comparison `Hᵠ(ℙ¹_A, F) ≅ Hᵠ(ℙ¹_κ, F₀)`.
 - `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal`: the
   strict-local exchange, and
   `AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal`: its stalk is an
@@ -122,14 +122,12 @@ theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
   exact Etale.subsingleton_H_affine_closed_of_injective Λ (pullback.fst W.ι i)
     ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J) k hk
 
-section StrictlyHenselian
+section HenselianLocal
 
 variable (A : Type u) [CommRing A] [HenselianLocalRing A]
-  [IsSepClosed (IsLocalRing.ResidueField A)]
 
-set_option linter.unusedSectionVars false in
-/-- **Representation of an `H¹`-class of a restricted injective.** Let `A` be strictly
-henselian, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre, `r` a prime and `I` an injective
+/-- **Representation of an `H¹`-class of a restricted injective.** Let `A` be henselian
+local, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre, `r` a prime and `I` an injective
 sheaf of `𝔽_r`-modules on `X`. Every class `c ∈ H¹(X₀, I₀)` is a finite sum
 `c = ∑ⱼ ψⱼ(xⱼ)` of images of classes `xⱼ ∈ H¹(X₀, ((hⱼ)_* Mⱼ)₀)`, where `hⱼ : Vⱼ ⟶ X` is finite
 and of finite presentation, `Mⱼ` is a finite `𝔽_r`-module with constant sheaf `Mⱼ` on `Vⱼ`,
@@ -210,9 +208,8 @@ theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
   rw [← Sheaf.H.map_comp_apply, ← T.map_comp, Injective.comp_factorThru]
   exact hz
 
-omit [IsSepClosed (IsLocalRing.ResidueField A)] in
-/-- **Acyclicity on the closed projective line in degrees at least two.** Let `A` be strictly
-henselian, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective
+/-- **Acyclicity on the closed projective line in degrees at least two.** Let `A` be henselian
+local, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective
 sheaf `I` of `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q ≥ 2`: this is the acyclicity bound
 `AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top` for the cover of
 `ℙ¹_A` by its two standard affine opens. This is the first step of the proof of the blueprint
@@ -237,7 +234,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt (
       exact Equiv.ulift.symm.iSup_comp (g := ProjectiveSpace.standardOpen _ _))
     I q hq
 
-/-- **Acyclicity on the closed projective line.** Let `A` be strictly henselian, `X = ℙ¹_A`,
+/-- **Acyclicity on the closed projective line.** Let `A` be henselian local, `X = ℙ¹_A`,
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective sheaf `I` of
 `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q > 0`. Degrees `q ≥ 2` are
 `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt`. In
@@ -305,7 +302,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
       map_zero, map_zero]
   exact Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt A r I q hq
 
-/-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be strictly henselian, `X = ℙ¹_A` and
+/-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be henselian local, `X = ℙ¹_A` and
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre. For a prime `ℓ` and an injective sheaf `I` of
 `𝔽_ℓ`-modules on `X`, the restriction `I₀` is `Γ(X₀, -)`-acyclic: `Hᵠ(X₀, I₀) = 0` for all
 `q > 0`. In Lean this is the same statement as
@@ -314,7 +311,6 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
 alias Etale.subsingleton_H_projectiveLine_residueField_of_injective :=
   Etale.subsingleton_H_projectiveLine_closedFibre_of_injective
 
-omit [IsSepClosed (IsLocalRing.ResidueField A)] in
 /-- **The comparison for `ℙ¹` in degree zero.** For every étale sheaf `F` of `Λ`-modules on
 `ℙ¹_A`, restriction `Γ(ℙ¹_A, F) ⟶ Γ(ℙ¹_κ, F₀)` is bijective: `ℙ¹_A` is proper over the
 henselian local ring `A`, so this is
@@ -388,7 +384,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
       obtain ⟨z, rfl⟩ := (ih (cokernel i)).2 y
       exact ⟨z.comp hS.extClass rfl, (cohomologyMap_comp_extClass _ hS z).trans hy⟩
 
-/-- **The strictly henselian comparison for `ℙ¹`.** Let `A` be strictly henselian with
+/-- **The henselian comparison for `ℙ¹`.** Let `A` be henselian local with
 residue field `κ` and `ι : ℙ¹_κ ⟶ ℙ¹_A` the closed fibre. For every torsion sheaf `F` of
 `Λ`-modules on `ℙ¹_A` and every `q ≥ 0`, restriction `Hᵠ(ℙ¹_A, F) ⟶ Hᵠ(ℙ¹_κ, F₀)` is
 bijective.
@@ -435,7 +431,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
   exact bijective_cohomologyMap_of_iso _ (asIso (CategoryTheory.Sheaf.coindCounit _ r G)) q
     (Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod A r _ q)
 
-end StrictlyHenselian
+end HenselianLocal
 
 section StrictLocalExchange
 

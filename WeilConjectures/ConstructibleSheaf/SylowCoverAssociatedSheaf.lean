@@ -57,7 +57,7 @@ representation descends to the constant coefficient sheaf. Functoriality of the
 monodromy correspondence identifies the image of the restricted representation M
 with v*G. If G is zero, Q and P are trivial and M is zero; V can be U. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_associated_sheaf
-    {U : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
+    {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] :
     ∃ (V : Scheme.{u}) (v : V ⟶ U) (_ : IsFinite v) (_ : Etale v) (_ : ConnectedSpace V)

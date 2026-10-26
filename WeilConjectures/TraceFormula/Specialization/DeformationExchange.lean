@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOpen
 public import WeilConjectures.TraceFormula.Specialization.SupportClosureProper
+public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
 
 /-!
 

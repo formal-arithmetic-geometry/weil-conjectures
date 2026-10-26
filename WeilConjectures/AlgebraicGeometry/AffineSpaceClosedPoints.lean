@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.RingTheory.Jacobson.Ring
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinate
 
 /-!
 # Closed points of affine space are detected by the coordinates
@@ -85,23 +86,6 @@ end MvPolynomial
 namespace AlgebraicGeometry.AffineSpace
 
 variable {n m : Type u}
-
-/-- Reindexing the affine space over an affine base is the map of spectra of the renaming of the
-variables. -/
-lemma SpecIso_inv_reindex (i : m → n) (R : CommRingCat.{u}) :
-    (SpecIso n R).inv ≫ reindex i (Spec R) =
-      Spec.map (CommRingCat.ofHom (MvPolynomial.rename (R := R) i).toRingHom) ≫
-        (SpecIso m R).inv := by
-  refine hom_ext ?_ fun j ↦ ?_
-  · simp only [Category.assoc, reindex_over, SpecIso_inv_over, ← Spec.map_comp,
-      ← CommRingCat.ofHom_comp]
-    congr 2
-    ext a : 1
-    simp
-  · simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, reindex_appTop_coord,
-      SpecIso_inv_appTop_coord]
-    rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
-    simp
 
 /-- **Closed points of affine space are detected by the coordinates.** A point of `𝔸ⁿ_k` whose
 images under all coordinate projections `𝔸ⁿ_k ⟶ 𝔸¹_k` are closed points is a closed point. -/
