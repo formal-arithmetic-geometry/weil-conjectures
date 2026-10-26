@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
-public import WeilConjectures.TraceFormula.Specialization.Defect
+public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
 
 /-!
 
@@ -48,33 +48,6 @@ open Scheme
 
 variable {k : Type u} [Field k] {X X' : Over (Spec (.of k))} (f : X' ⟶ X)
   (I : X.left.IdealSheafData) (k' : Type u) [Field k'] [Algebra k k']
-
-/-- The restriction `f_Z : Z' = V(f^* I) ⟶ Z = V(I)` of `f : X' ⟶ X` to the inverse image of the
-centre. -/
-noncomputable def centreMap : centre X' (I.comap f.left) ⟶ centre X I :=
-  Over.homMk (IdealSheafData.subschemeMap _ _ f.left (I.le_map_comap f.left)) (by
-    change _ ≫ I.subschemeι ≫ X.hom = (I.comap f.left).subschemeι ≫ X'.hom
-    rw [IdealSheafData.subschemeMap_subschemeι_assoc, Over.w f])
-
-@[reassoc (attr := simp)]
-lemma centreMap_centreι : centreMap f I ≫ centreι X I = centreι X' (I.comap f.left) ≫ f :=
-  Over.OverMorphism.ext (IdealSheafData.subschemeMap_subschemeι _ _ _ (I.le_map_comap f.left))
-
-/-- The zero ideal of `Z'` contains the pullback of the zero ideal of `Z`. -/
-lemma siteIdeal_map_appLE_le_bot_centreMap
-    ⦃U' : (centre X' (I.comap f.left)).left.AffineZariskiSite⦄
-    ⦃U : (centre X I).left.AffineZariskiSite⦄ (hU : U'.1 ≤ (centreMap f I).left ⁻¹ᵁ U.1) :
-    ((⊥ : (centre X I).left.IdealSheafData).siteIdeal U).map
-        ((centreMap f I).left.appLE U.1 U'.1 hU).hom ≤
-      (⊥ : (centre X' (I.comap f.left)).left.IdealSheafData).siteIdeal U' :=
-  IdealSheafData.siteIdeal_map_appLE_le_of_le_map bot_le hU
-
-/-- The map `N_⊥ Z' ⟶ N_⊥ Z` of special fibres of the constant families, the deformation of
-`f_Z`; under `N_⊥ Z ≅ Z ⊗ k'` it is `f_Z ⊗ k'`. -/
-noncomputable def centreSpecialFibreMap :
-    deformationSpecialFibre (centre X' (I.comap f.left)) ⊥ k' ⟶
-      deformationSpecialFibre (centre X I) ⊥ k' :=
-  deformationSpecialFibreMap (centreMap f I) (siteIdeal_map_appLE_le_bot_centreMap f I) k'
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
