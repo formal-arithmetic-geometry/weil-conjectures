@@ -15,22 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Expand both sides using the canonical etale inverse-image coefficient mate. Naturality of that mate and functoriality of etale inverse image give the same composite before derived localization.",
+   "text": "The canonical etaleNormalizationCoefficients is definitionally Functor.mapDerivedCategorySquareIso of Etale.upperStarRestrictScalarsIso. Apply the source-library theorem Etale.upperStarRestrictScalarsIso_comp_hom to the two successive inverse images, substituting the named composite U.hom using f.w.symm. Then apply Functor.mapDerivedCategorySquareIso_hom_app_comp to transport this coefficient-mate composition equation to the derived categories.",
    "uses": [
     "def-weil-pbc-derived-normalization-arrows",
-    "lem-weil-pbc-derived-scalar-extension-local-systems"
+    "def-weil-pbc-etale-universal-normalization"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Expand each etaleIsomorphismNormalizationArrow as the image of the specified transition followed by its canonical coefficient mate. Postcompose by coefficient restriction of the hom of localIsomorphismRestrictionComp at the lower level; this is a monomorphism since it is invertible. The inverse/hom composite cancels on the right. Apply the derived coefficient-mate composition equation on the left, use naturality of the inverse of localIsomorphismRestrictionComp at the specified transition, and cancel its inverse/hom composite. This proves the original equation for every etale arrow, without using universality, finite generation, stalks, or the adic normalization hypothesis.",
+   "uses": [
+    "def-weil-pbc-derived-local-isomorphism-sheaf",
+    "def-weil-pbc-etale-universal-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-normalization-arrows",
-  "lem-weil-pbc-derived-scalar-extension-local-systems"
+  "def-weil-pbc-etale-universal-normalization",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
  ],
  "proof_origin": {
-  "by": "J8 stage 3",
+  "by": "T2 stage 3, 2026-10-28",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6 normalized finite quotient diagram"
+  "place": "Tag 09C6 normalized finite quotient diagram; canonical inverse-image mate composition from the existing source-library Etale.upperStarRestrictScalarsIso_comp_hom and exact-localization pasting theorem Functor.mapDerivedCategorySquareIso_hom_app_comp"
  },
  "mathlib_searches": [
   {
@@ -96,10 +105,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J8",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261027T180656-L-3889595",
-  "kind": "interface",
+  "landing": "20261027T210235-L-1678292",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
