@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.FiniteRingSectionDeformation
 public import Sheaf.SecSmoothPurity.DncCoefficientTransportData
+import Sheaf.Paper.FiniteSectionSpecializationScalarCanonical
+import Sheaf.SecSmoothPurity.FiniteSectionFamilyConstancy
 
 /-! # Scalar compatibility of normalized zero-fibre specialization
 
@@ -68,6 +70,13 @@ theorem finiteSectionSpecialization_scalar
         WeilConjectures.DncCoefficientTransport.sectionMap φ
           (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection =
       WeilConjectures.DncCoefficientTransport.sectionMap φ g s ≫
-        NoetherianSectionSpecialization.specialization B g s κ' := by sorry
+        NoetherianSectionSpecialization.specialization B g s κ' := by
+  obtain ⟨κB, hκB, htransport⟩ :=
+    finiteSectionSpecialization_scalar_canonical φ N hN hA d g s hs hS κ hκ
+  have huniq :=
+    (NoetherianSectionSpecialization.finite_family_constancy B N hN
+      (by rw [← map_natCast φ, hA, map_zero]) hS d g s hs).2.2
+  have heq : κB = κ' := huniq.unique hκB hκ'
+  simpa [heq] using htransport.symm
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

@@ -1,0 +1,130 @@
+{
+ "id": "new-lem-sp-finite-section-specialization-scalar-canonical",
+ "kind": "statement",
+ "title": "Canonical normalized finite-section scalar transport",
+ "statement": "For finite commutative rings A and B, a unital map φ:A→B, an annihilator N>0 of A which is invertible on S, and the actual smooth Rees section geometry, every normalized A-family comparison κ induces a normalized B-family comparison κB such that sectionMap φ g s ≫ specialization B g s κB = scalarExtension φ S (specialization A g s κ) ≫ sectionMap φ (normalConeProj g s) s.normalConeZeroSection.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation: canonical normalized family comparison and restriction at zero"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the section scalar/base-change theorem to the actual Rees projection and its one and zero fibre squares; construct the canonical B comparison by scalar extension of κ and the coefficient maps.",
+   "uses": [
+    "lem-pur-section-scalar-base-change",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite-family constancy, local dualizing comparisons, shifted-line normalized descent and affine-line rigidity to prove normalization and identify the canonical comparison globally.",
+   "uses": [
+    "lem-pur-finite-section-family-constancy",
+    "lem-trf-section-local-dualizing-comparisons",
+    "lem-trf-etale-shifted-line-normalized-descent",
+    "new-lem-pur-etale-a1-pullback-full",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the canonical family identity to zero and cancel the scalar/pullback section compositors; the zero-fibre coefficient square gives the stated specialization equation.",
+   "uses": [
+    "lem-pur-section-scalar-base-change",
+    "lem-pur-scalar-section-compositor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-section-scalar-base-change",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-finite-section-family-constancy",
+  "lem-trf-section-local-dualizing-comparisons",
+  "lem-trf-etale-shifted-line-normalized-descent",
+  "new-lem-pur-etale-a1-pullback-full",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-scalar-section-compositor"
+ ],
+ "proof_origin": {
+  "by": "G2 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation: canonical normalized family comparison and restriction at zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized finite section specialization commutes with scalar extension",
+   "results": "No exact theorem for the specified ordinary etale Rees specialization square.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived scalar extension normalized affine line family specialization zero section",
+   "results": "No exact theorem for the specified ordinary etale Rees specialization square.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSectionSpecialization_scalar; specialization scalar sectionMap",
+   "results": "Existing declarations provide only the coefficient base-change, family constancy, and compositor ingredients; no complete theorem.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionSpecializationScalar",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-section-specialization-scalar",
+   "place": "canonical normalized family transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSectionSpecializationScalarCanonical",
+  "file": "lean/Sheaf/Paper/FiniteSectionSpecializationScalarCanonical.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSectionSpecialization_scalar_canonical",
+  "statement": "theorem finiteSectionSpecialization_scalar_canonical {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [HasCompactification g] [IsSeparated g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s] [FiniteRingSectionDeformation.Geometry d g s] (hs : s ≫ g = 𝟙 S) (hS : IsUnit (N : Γ(S, ⊤))) (κ : NoetherianSectionSpecialization.family A g s ≅ (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj (sectionInvariant A g s)) (hκ : NoetherianSectionSpecialization.Normalized A g s hs κ) : ∃ κB : NoetherianSectionSpecialization.family B g s ≅ (ordinaryFinitePullback B (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj (sectionInvariant B g s), NoetherianSectionSpecialization.Normalized B g s hs κB ∧ WeilConjectures.DncCoefficientTransport.sectionMap φ g s ≫ NoetherianSectionSpecialization.specialization B g s κB = (scalarExtension φ S).map (NoetherianSectionSpecialization.specialization A g s κ) ≫ WeilConjectures.DncCoefficientTransport.sectionMap φ (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T180610-L-3880276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T180610-L-3880276",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
