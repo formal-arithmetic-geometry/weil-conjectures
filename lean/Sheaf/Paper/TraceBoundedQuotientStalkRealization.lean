@@ -452,12 +452,16 @@ theorem trfBoundedQuotientStalkRealization (D : FiniteFieldDatum.{u}) (hl : l �
       exact ⟨hz, trfStalkRoosZigzag l E D v _ p r hz⟩
     · have := PointQuotientAugmentation.sectionsProducts l E D.k
       rw [trfScalarRoos_eq]
-      exact NatIso.hom_app_isIso _ _
+      exact NatIso.hom_app_isIso
+        (PointQuotientAugmentation.roosComparison
+          (pointIntegralSections l E D.k)) _
     · have := PointQuotientAugmentation.sectionsProducts l E D.k
       have hscalar : IsIso (scalarRoosMap (pointIntegralSections l E D.k)
           ((integralOperationsPullbackTowerFunctor l E v).obj P.obj)) := by
         rw [trfScalarRoos_eq]
-        exact NatIso.hom_app_isIso _ _
+        exact NatIso.hom_app_isIso
+          (PointQuotientAugmentation.roosComparison
+            (pointIntegralSections l E D.k)) _
       refine ⟨(pointFibreIntegralAmbient D l E).mapIso
           ((integralDerivedPullback l E v).mapIso q.symm ≪≫
             (integralDerivedPullbackComparison l E v).app P) ≪≫
