@@ -15,6 +15,7 @@ import Sheaf.Paper.CondensedTateIntegralTower
 import Sheaf.Paper.FinitePuritySourceUnitReduction
 import Sheaf.SmoothPurity.OpenDimensionObstruction
 import Sheaf.SmoothPurity.PointUnitNonzero
+import Sheaf.SmoothPurity.TraceExistence
 
 /-!
 
@@ -150,8 +151,15 @@ construction is not formalized: see the module docstring for the properties that
 noncomputable def smoothTrace :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
       (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
-      𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  sorry
+      𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) := by
+  classical
+  exact if h : Nonempty (SmoothOfRelativeDimension d f.left) then
+    (existsUnique_smoothTrace ℓ f d h.some
+      (boundedConstructibleTateTwist ℓ X d (2 * d)) (Iso.refl _)
+      (MonoidalCategoryStruct.tensorUnit
+        (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) rfl).choose
+  else
+    0
 
 /-- The **purity map** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`: the adjoint of the trace `Tr_f` for
 `Rf_! ⊣ Rf^!`. -/
