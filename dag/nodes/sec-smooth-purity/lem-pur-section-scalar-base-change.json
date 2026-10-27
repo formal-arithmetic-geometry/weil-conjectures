@@ -15,22 +15,76 @@
  },
  "proof": [
   {
-   "text": "transpose the two paths under the primed B compact-support adjunction.\nThe compact-support coefficient comparison is the composite of the ordinary open\ncomparison and proper scalar mate. Their base-change cube commutes on K-flat\nrepresentatives, with the same inverse-image balancing. The counit equations of\nthe exceptional coefficient map and base-change mate identify the transposes.\nThis proves the square at the unit, after its canonical scalar and pullback unit\nidentifications. Whisker by the primed section pullback; inverse-image composition\nand scalar balancing identify s' followed by v with b followed by s, giving the\nsecond equation. These are identities of the specified maps, not choices of\nisomorphisms. For a merely locally Noetherian primed base, restrict to its affine\nopen cover and use canonical inverse-image coherence. This proves the section\nidentity without imposing quasi-compactness on an etale localization.",
+   "text": "The proper scalar mate is invertible on every unbounded input by the finite-coefficient proper tensor-unit result; composing it with the canonical open coefficient isomorphism gives invertibility of the compact-support coefficient map on any compactification.",
    "uses": [
-    "det-sp-mixed-base-change",
-    "lem-sf-scalar-pullback-composition"
+    "lem-fix-etale-proper-coefficient-tensor-unit",
+    "lem-pur-etale-compact-scalar-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a proper refinement, transpose the raw refinement arrow under the exact open adjunction. The coefficient unit and restriction-mate equations identify its two transposes. Cancel the invertible restriction comparison to obtain coefficient compatibility of the refinement arrow, then of the compactification comparisons. This argument needs neither boundedness nor Noetherian hypotheses.",
+   "uses": [
+    "lem-sf-proper-open-coefficient-refinement",
+    "lem-pur-etale-compact-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the chosen-compactification exchange as proper exact exchange followed by inverse open exchange. Paste the proper scalar exchange square with the open scalar square. Use the preceding refinement compatibility to pass from the pullback compactification to the chosen primed compactification, and transport exact inverse images to left-derived inverse images.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-pur-etale-direct-image-scalar-exchange",
+    "lem-pur-open-scalar-exchange-square",
+    "lem-pur-compact-scalar-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take inverses of the compact-support scalar/exchange cube and apply the coefficient-exchange counit-mate identity. The resulting exceptional square holds for every input and every Cartesian square with compactifiable vertical maps and quasi-compact primed vertical map. Identify the smoothExceptionalBaseChangeMap with that same counit mate on the canonical pullback square.",
+   "uses": [
+    "lem-weil-pbc-coefficient-exchange-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the exceptional square at the coefficient unit. Naturality of the exceptional coefficient mate, naturality of exceptional base change, and scalar/pullback unit coherence identify the resulting square with compatibility of the specified dualizingComplexBaseChangeMap and dualizingMap.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-unit-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport scalar/pullback composition coherence from exact pullbacks to left-derived pullbacks through their natural isomorphisms. Apply it to b followed by s and s-prime followed by v, both with composite b followed by s. Invert and paste the two equalities to obtain the scalar square for the exact composition arrows used by sectionMap.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition",
+    "lem-pur-etale-scalar-pullback-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the dualizing square by the primed section. Naturality of scalarPullbackIso and of the two composition isomorphisms, together with the preceding scalar square, gives the displayed section equation. The argument is global and makes no Noetherian or section-identity assumption, so in particular applies to the locally Noetherian base in the statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-sp-mixed-base-change",
-  "lem-sf-scalar-pullback-composition"
+  "lem-fix-etale-proper-coefficient-tensor-unit",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-etale-direct-image-scalar-exchange",
+  "lem-pur-open-scalar-exchange-square",
+  "lem-pur-compact-scalar-base-change",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-pur-etale-scalar-pullback-unit-coherence",
+  "lem-sf-scalar-pullback-composition",
+  "lem-pur-etale-scalar-pullback-compactification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-  "place": "Detailed specialization of the cited blueprint argument, with explicit canonical ordinary maps."
+  "place": "G4: global proper/open scalar cube, proper refinement cancellation, exceptional counit transposition, unit and section composition coherence. Reuses proved unrestricted internal components rather than the restricted mixed pro-etale theorem."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -112,13 +166,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-b6d7e",
-  "group": "P2",
-  "result": "fix",
-  "landing": "20261026T002119-L-58326",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T180615-L-3881623",
   "kind": "interface",
-  "note": "independent cc review: b6d7 delivered files vs prior reviewed head 54acf (diff -r: only warn.sorry option line + report/change-record text); item proof vs node proof_deps; 4 direct importers compiled against delivered modules (all OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
