@@ -13527,6 +13527,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibr
 public import WeilConjectures.TraceFormula.Specialization.DeformationSupport
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
+public import WeilConjectures.TraceFormula.Specialization.ExceptionalTensor
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
@@ -13543,6 +13544,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangul
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
+public import WeilConjectures.TraceFormula.Specialization.KernelPullback
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
