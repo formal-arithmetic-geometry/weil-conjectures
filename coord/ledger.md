@@ -20158,3 +20158,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 06:34 L: batch 20261027T222751 dependency take-out
 - 22:37 L: merged deliver/B3/Sheaf.Paper.NativeCompactSupportGeometry (stage 3; reviewer PASS; first push; landing 20261027T223738-L-3051537 (proof); batch 20261027T223736; modules 1; new nodes 0)
+- 22:42 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: I read the item, all three new nodes, every cited statement and the Lean sources (DerivedPullbackTensorConstraints 152-1)
