@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-ambient-normalized-tensor-composition",
+ "kind": "statement",
+ "title": "Composition of normalized tensor comparisons and their models",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, f:X→Y and g:Y→Z arbitrary scheme maps, and s a finite exponent or the whole ringed sequence site. Fix closed derived tensor structures A,B,C and representative models TA,TB,TC, and three BundledTensorComparisons Kf,Kg,Kh for f,g,fg [lem-sf-ambient-tensor-data-exists-unique]. Assume their ordinary generator formulas, naturality, chain invertibility and preservation of flat-term K-flat representatives (Normalized), and the scalar generator composition equation for the specified module compositor. Then the ordinary tensor square for Kf,Kg,Kh commutes, the displayed inverse total-chain square commutes on flat-term K-flat pairs, and the derived tensor square commutes for all unbounded inputs. Explicitly the derived equation is P_f(mu_g);mu_f;(d tensor d)=d;mu_fg. All three equations are on the original ringed site, including arbitrary semilinear horizontal transitions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03EL; sites.tex 03CB; sites-cohomology.tex 06YN, 06YS, 07A4, 0G7E and 0G7D. Specialized construction and proof from the ambient coherence argument."
+ },
+ "stmt_deps": [
+  "lem-sf-ambient-tensor-data-exists-unique"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the ordinary tensor square under the composite module adjunction and test on pure tensors. The normalization hypotheses insert the scalar in the first tensor factor. The supplied generator-composition equation identifies both composite generators with the same generator, with intermediate scalars multiplied through the structural ring map. The second factor carries the unit scalar. Balancing and sheafification uniqueness identify the entire module maps.",
+   "uses": [
+    "lem-sf-ambient-tensor-data-exists-unique",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the ordinary square. In degree n precompose the asserted chain equality with each summand indexed by p+q=n. The three model.summand equations and termwise components of chainComp reduce it to the inverse ordinary square; functoriality of tensor and naturality of comp handle the inclusions. Direct-sum universality identifies the chain maps; ordinary naturality commutes with both signed differentials.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions of both entire inputs on the ringed site. Normalization preserves that class under both pullbacks. Substitute the three model.derived equations into localization of the chain equality and use mapDerivedCategoryCompNatIso_hom_app_Q. Naturality of the tensor model isomorphisms cancels the intermediate representative comparisons. After cancelling all invertible factors the equality is exactly the displayed derived square on resolving pairs. Full faithfulness of restriction to those pairs extends equality to arbitrary unbounded inputs.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-tensor-data-exists-unique",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for exact module pullbacks is compatible with composition and uniquely determined by its equations on ordinary tensors and K-flat complex representatives",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; no simultaneous ringed-site or representative-normalized comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified ambient constructions or bundle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "leftAdjointCompIso, leftAdjointCompIso_assoc, leftAdjointCompIso_comp_id, leftAdjointCompIso_id_comp and component/mate equations.",
+   "date": "2026-10-26",
+   "verdict": "Supplies abstract mate coherence; the section comparisons must still be checked on the actual finite/sequence site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the canonical tensor comparison for composition of module inverse image functors and localization to derived categories",
+   "results": "Localization.Monoidal.tensor_comp, tensorBifunctorIso and lifting/curriedTensor comparison lemmas.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the specified TensorComparisonModel and chosen ambient adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*comp|comp.*tensor; ringMap.*isIso; cochain_tensor_model_rigidity",
+   "results": "Mathlib tensor algebra, Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence, Sheaf.Algebra.Homology.CochainTensorModelRigidity and the existing bundle uniqueness; no existing theorem about these ambient composites.",
+   "date": "2026-10-26",
+   "verdict": "Existing general tools inform the proofs; no duplicate ambient construction or theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ambient pullback tensor coherence, proof steps 4–6.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientTensorComposition",
+  "file": "lean/Sheaf/Paper/AmbientTensorComposition.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.normalizedTensor_composition",
+  "statement": "theorem normalizedTensor_composition {X Y Z : Scheme.{t}}\n    (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ)\n    (A : Tensor ell E Z s) (B : Tensor ell E Y s) (C : Tensor ell E X s)\n    (TA : TensorModels ell E Z s A) (TB : TensorModels ell E Y s B)\n    (TC : TensorModels ell E X s C)\n    (Kf : TensorData ell E f s B C TB TC) (Kg : TensorData ell E g s A B TA TB)\n    (Kh : TensorData ell E (f ≫ g) s A C TA TC)\n    (_hKf : Kf.Normalized ell E f s B C TB TC)\n    (_hKg : Kg.Normalized ell E g s A B TA TB)\n    (_hKh : Kh.Normalized ell E (f ≫ g) s A C TA TC)\n    (_hgen : (∀ (M : Modules ell E Z s) (U : Site Z s) (V : Site Y s) (W : Site X s)\n      (p : V ⟶ (base g s).obj U) (q : W ⟶ (base f s).obj V)\n      (m : M.val.obj (op U)) (a : (coefficients ell E Y s).obj.obj (op V))\n      (b : (coefficients ell E X s).obj.obj (op W)),\n      ((comp ell E f g s).hom.app M).val.app (op W)\n          (generator ell E f s ((pull ell E g s).obj M) V W q\n            (generator ell E g s M U V p m a) b) =\n        generator ell E (f ≫ g) s M U W\n          (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U) m\n          (scalar ell E f s V W q a * b))) :\n    (∀ (M N : Modules ell E Z s),\n      (pull ell E f s).map (Kg.model.ordinary M N).hom ≫\n          (Kf.model.ordinary\n            ((pull ell E g s).obj M) ((pull ell E g s).obj N)).hom ≫\n          tensorHom ell E X s ((comp ell E f g s).hom.app M)\n            ((comp ell E f g s).hom.app N) =\n        (comp ell E f g s).hom.app (tensor ell E Z s M N) ≫\n          (Kh.model.ordinary M N).hom) ∧\n    (∀ P Q : CochainComplex (Modules ell E Z s) ℤ,\n      FlatRepresentative ell E Z s P → FlatRepresentative ell E Z s Q →\n      (total ell E X s).map (Prod.mkHom (chainComp ell E f g s P)\n          (chainComp ell E f g s Q)) ≫\n          Kh.model.chain P Q =\n        Kf.model.chain\n            (((pull ell E g s).mapHomologicalComplex (.up ℤ)).obj P)\n            (((pull ell E g s).mapHomologicalComplex (.up ℤ)).obj Q) ≫\n          ((pull ell E f s).mapHomologicalComplex (.up ℤ)).map\n            (Kg.model.chain P Q) ≫\n          chainComp ell E f g s ((total ell E Z s).obj (P, Q))) ∧\n    ∀ F G : Derived ell E Z s,\n      (derivedPull ell E f s).map (Kg.mu.hom.app (F, G)) ≫\n          Kf.mu.hom.app\n            ((derivedPull ell E g s).obj F, (derivedPull ell E g s).obj G) ≫\n          C.tensor.map (Prod.mkHom ((derivedComp ell E f g s).hom.app F)\n            ((derivedComp ell E f g s).hom.app G)) =\n        (derivedComp ell E f g s).hom.app (A.tensor.obj (F, G)) ≫\n          Kh.mu.hom.app (F, G)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

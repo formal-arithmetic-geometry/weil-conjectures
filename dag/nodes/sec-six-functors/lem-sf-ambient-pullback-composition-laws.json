@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-ambient-pullback-composition-laws",
+ "kind": "statement",
+ "title": "Associativity and identity laws for ambient pullback mates",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, K an arbitrary base scheme and s a positive finite coefficient exponent or the whole ringed sequence site. The specified pullback comparisons and identity comparisons of [lem-sf-ambient-tensor-data-exists-unique] satisfy CompositionLaws(K,s): ordinary associativity and both unit equations, and the corresponding three exact-localization equations, for all finite-type schemes over K and all compatible scheme maps. The endpoint identifications are transports by the actual associativity and identity equalities. The definitions and hypotheses are as in [lem-sf-ambient-pullback-site-constructions].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03EL; sites.tex 03CB; sites-cohomology.tex 06YN, 06YS, 07A4, 0G7E and 0G7D. Specialized construction and proof from the ambient coherence argument."
+ },
+ "stmt_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
+  "lem-sf-ambient-tensor-data-exists-unique"
+ ],
+ "proof": [
+  {
+   "text": "The section-normalized pushComp and pushId act by restriction along the canonical base-change comparisons. Under a triple composition both maps preserve each of the three fiber-product projections. Uniqueness of the fiber product identifies them; apply the same argument to both identity cases, including transport along associativity and identity equalities of scheme maps.",
+   "uses": [
+    "lem-sf-ambient-pullback-site-constructions",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply leftAdjointCompIso_assoc and the two identity lemmas to these right-adjoint equations and the specified module adjunctions. Their mates are exactly comp and identity by definition, so evaluating at a module proves the ordinary three clauses of CompositionLaws.",
+   "uses": [
+    "lem-trf-adjoint-composition-coherence",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass the three equations to termwise complex functors. The exact localization universal property preserves compositions, identities and natural isomorphisms; its full faithfulness identifies the two natural transformations. The mapDerivedCategory factorization equations identify the localized comparators with derivedComp and derivedIdentity, including all endpoint transports.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
+  "def-pc-fibre-product",
+  "lem-trf-adjoint-composition-coherence",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for exact module pullbacks is compatible with composition and uniquely determined by its equations on ordinary tensors and K-flat complex representatives",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; no simultaneous ringed-site or representative-normalized comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified ambient constructions or bundle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "leftAdjointCompIso, leftAdjointCompIso_assoc, leftAdjointCompIso_comp_id, leftAdjointCompIso_id_comp and component/mate equations.",
+   "date": "2026-10-26",
+   "verdict": "Supplies abstract mate coherence; the section comparisons must still be checked on the actual finite/sequence site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the canonical tensor comparison for composition of module inverse image functors and localization to derived categories",
+   "results": "Localization.Monoidal.tensor_comp, tensorBifunctorIso and lifting/curriedTensor comparison lemmas.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the specified TensorComparisonModel and chosen ambient adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*comp|comp.*tensor; ringMap.*isIso; cochain_tensor_model_rigidity",
+   "results": "Mathlib tensor algebra, Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence, Sheaf.Algebra.Homology.CochainTensorModelRigidity and the existing bundle uniqueness; no existing theorem about these ambient composites.",
+   "date": "2026-10-26",
+   "verdict": "Existing general tools inform the proofs; no duplicate ambient construction or theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ambient pullback tensor coherence, proof steps 3 and 7.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientPullbackCompositionLaws",
+  "file": "lean/Sheaf/Paper/AmbientPullbackCompositionLaws.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.pullback_compositionLaws",
+  "statement": "theorem pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :\n    CompositionLaws ell E K s",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

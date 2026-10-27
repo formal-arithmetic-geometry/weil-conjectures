@@ -1,274 +1,260 @@
 {
-  "id": "lem-pur-quotient-expression-strict-kflat-towers",
-  "kind": "statement",
-  "title": "Prescribed strict quotient-expression towers, cocycles and system K-flatness",
-  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi$, and scheme morphisms $Z\\xrightarrow hX\\xrightarrow fY$ with $\\ell$ invertible on all three schemes [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties]. On compatible small pro-etale sites use the specified inverse images [def-weil-proetale-inverse-image]. Put $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$, $R_W=\\lim_nB_{W,n}$, and let $q^W_{m,n}$ and $\\pi^W_n$ be the actual quotient and limit maps for $m\\ge n\\ge1$ [def-weil-completed-integral-coefficients]. Let $P_1,\\ldots,P_r$ be a finite, possibly empty, list of integer-indexed K-flat $R_Y$-complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Form finite syntactic expressions from $P_i\\otimes_{R_Y}B_{Y,n}$ at $Y$ and $B_{W,n}[0]$ at $W=Y,X,Z$, by direct-sum total tensor on a common scheme and termwise module pullback along $f,h,f\\circ h$ [def-pc-tensor-complex-sheaves, def-pur-sheaf-tensor-product, def-pur-strict-quotient-expressions]. Distinct syntactic expressions are not identified.\n\nThe canonical constant-ring maps $c^g_n:g^{-1}B_{W,n}\\xrightarrow\\sim B_{W',n}$ satisfy $c^g_n\\,g^{-1}q^W_{m,n}=q^{W'}_{m,n}\\,c^g_m$ for every permitted $g:W'\\to W$. Fixed-level pullback is exact inverse image with its action transported by $c^g_n$.\n\nEvery expression has its prescribed complex $K_n$, with flat terms and K-flat over $B_{W,n}$. Its localization computes the corresponding finite expression of derived reduction, derived tensor and derived pullback [lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. These comparisons use the prescribed complexes at every intermediate constructor, without replacing them by new resolutions.\n\nThe following formulas define compatible semilinear chain maps $t^K_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$ [def-pc-sheaf-restrict-scalars]: on a generator $x\\otimes b\\mapsto x\\otimes q_{m,n}(b)$; on a unit, $b\\mapsto q_{m,n}(b)$; on a total-tensor summand, $u\\otimes v\\mapsto t^U_{m,n}(u)\\otimes t^V_{m,n}(v)$; on a pullback scalar generator, $s\\otimes u\\mapsto q^{W'}_{m,n}(s)\\otimes g^{-1}t^U_{m,n}(u)$, using $c^g_m,c^g_n$ for the balancing rings. They commute with all site restrictions and with the total differential $d(u\\otimes v)=du\\otimes v+(-1)^{\\deg u}u\\otimes dv$. They satisfy $t^K_{n,n}=1$ and the strict quotient cocycle $t^K_{k,n}=\\operatorname{Res}_{k,m}(t^K_{m,n})\\,t^K_{k,m}$ for $k\\ge m\\ge n$, under identity-on-sections scalar restriction composition.\n\nThus these particular complexes and maps form a complex $K_\\bullet$ of strict semilinear systems on the vertical sequence site [def-coef-semilinear-system-models]. This complex has flat terms and is K-flat in the module category of that sequence site, with its ordinary total tensor; this assertion concerns system flatness, not flatness after restriction to $R_W$. Its derived evaluations and the evaluations of its system tensor and geometric pullback are computed by the displayed level complexes and constructor comparisons. Restricting each level along $\\pi^W_n$ makes every transition $R_W$-linear, giving a complex in $\\operatorname{Tow}_{R_W}=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{\\mathrm{op}},\\operatorname{Mod}(R_W))$. Its localization has evaluations $\\operatorname{Res}_n QK_n$ and precisely the localized actual transitions, hence supplies the coherent derived-tower datum (without yet asserting normalization) of [def-coef-normalized-dvr-tower]. No boundedness, constructibility, inverse-limit preservation by inverse image, or flatness of a quotient map is assumed.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (label lemma-pullback-K-flat); also Tag 07A2 (label lemma-tensor-product-K-flat). Agent-formulated extraction of original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization."
-  },
-  "stmt_deps": [
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-proetale-inverse-image",
-    "def-weil-completed-integral-coefficients",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-strict-quotient-expressions",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-sheaf-restrict-scalars",
-    "def-coef-semilinear-system-models",
-    "def-coef-normalized-dvr-tower"
-  ],
-  "proof": [
-    {
-      "text": "Apply the three component theorems to the three conjuncts of the conclusion.",
-      "uses": [
-        "lem-pur-quotient-expression-strict-kflat-towers-constant-maps",
-        "lem-pur-quotient-expression-strict-kflat-towers-unit-transitions",
-        "lem-pur-quotient-expression-strict-kflat-towers-tower-data"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pur-quotient-expression-strict-kflat-towers",
+ "kind": "statement",
+ "title": "Prescribed strict quotient-expression towers, cocycles and system K-flatness",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi$, and scheme morphisms $Z\\xrightarrow hX\\xrightarrow fY$ with $\\ell$ invertible on all three schemes [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties]. On compatible small pro-etale sites use the specified inverse images [def-weil-proetale-inverse-image]. Put $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$, $R_W=\\lim_nB_{W,n}$, and let $q^W_{m,n}$ and $\\pi^W_n$ be the actual quotient and limit maps for $m\\ge n\\ge1$ [def-weil-completed-integral-coefficients]. Let $P_1,\\ldots,P_r$ be a finite, possibly empty, list of integer-indexed K-flat $R_Y$-complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Form finite syntactic expressions from $P_i\\otimes_{R_Y}B_{Y,n}$ at $Y$ and $B_{W,n}[0]$ at $W=Y,X,Z$, by direct-sum total tensor on a common scheme and termwise module pullback along $f,h,f\\circ h$ [def-pc-tensor-complex-sheaves, def-pur-sheaf-tensor-product, def-pur-strict-quotient-expressions]. Distinct syntactic expressions are not identified.\n\nThe canonical constant-ring maps $c^g_n:g^{-1}B_{W,n}\\xrightarrow\\sim B_{W',n}$ satisfy $c^g_n\\,g^{-1}q^W_{m,n}=q^{W'}_{m,n}\\,c^g_m$ for every permitted $g:W'\\to W$. Fixed-level pullback is exact inverse image with its action transported by $c^g_n$.\n\nEvery expression has its prescribed complex $K_n$, with flat terms and K-flat over $B_{W,n}$. Its localization computes the corresponding finite expression of derived reduction, derived tensor and derived pullback [lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. These comparisons use the prescribed complexes at every intermediate constructor, without replacing them by new resolutions.\n\nThe following formulas define compatible semilinear chain maps $t^K_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$ [def-pc-sheaf-restrict-scalars]: on a generator $x\\otimes b\\mapsto x\\otimes q_{m,n}(b)$; on a unit, $b\\mapsto q_{m,n}(b)$; on a total-tensor summand, $u\\otimes v\\mapsto t^U_{m,n}(u)\\otimes t^V_{m,n}(v)$; on a pullback scalar generator, $s\\otimes u\\mapsto q^{W'}_{m,n}(s)\\otimes g^{-1}t^U_{m,n}(u)$, using $c^g_m,c^g_n$ for the balancing rings. They commute with all site restrictions and with the total differential $d(u\\otimes v)=du\\otimes v+(-1)^{\\deg u}u\\otimes dv$. They satisfy $t^K_{n,n}=1$ and the strict quotient cocycle $t^K_{k,n}=\\operatorname{Res}_{k,m}(t^K_{m,n})\\,t^K_{k,m}$ for $k\\ge m\\ge n$, under identity-on-sections scalar restriction composition.\n\nThus these particular complexes and maps form a complex $K_\\bullet$ of strict semilinear systems on the vertical sequence site [def-coef-semilinear-system-models]. This complex has flat terms and is K-flat in the module category of that sequence site, with its ordinary total tensor; this assertion concerns system flatness, not flatness after restriction to $R_W$. Its derived evaluations and the evaluations of its system tensor and geometric pullback are computed by the displayed level complexes and constructor comparisons. Restricting each level along $\\pi^W_n$ makes every transition $R_W$-linear, giving a complex in $\\operatorname{Tow}_{R_W}=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{\\mathrm{op}},\\operatorname{Mod}(R_W))$. Its localization has evaluations $\\operatorname{Res}_n QK_n$ and precisely the localized actual transitions, hence supplies the coherent derived-tower datum (without yet asserting normalization) of [def-coef-normalized-dvr-tower]. No boundedness, constructibility, inverse-limit preservation by inverse image, or flatness of a quotient map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (label lemma-pullback-K-flat); also Tag 07A2 (label lemma-tensor-product-K-flat). Agent-formulated extraction of original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-strict-quotient-expressions",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-sheaf-restrict-scalars",
+  "def-coef-semilinear-system-models",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Apply the three component theorems to the three conjuncts of the conclusion.",
+   "uses": [
     "lem-pur-quotient-expression-strict-kflat-towers-constant-maps",
     "lem-pur-quotient-expression-strict-kflat-towers-unit-transitions",
     "lem-pur-quotient-expression-strict-kflat-towers-tower-data"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "The conjunction is assembled from the three extracted component statements in the delivered Lean proof."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Prescribed finite tensor and inverse image expressions of K-flat quotient sheaf complexes form strict semilinear towers with flat terms and K-flatness on the sequence site",
-      "results": "[leanfinder] OK 8 hit(s); Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_shortComplex_exact, LinearMap.lTensor_injective_of_exact_of_flat",
-      "date": "2026-10-22",
-      "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"CochainComplex\", \"Flat\"",
-      "results": "[loogle] OK 0 hit(s); No hits.",
-      "date": "2026-10-22",
-      "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|K.flat|semilinear.*tower|sequence.*site",
-      "results": "[grep] OK 3 hit(s); Mathlib/Computability/TuringMachine/Tape.lean:377, Mathlib/Computability/TuringMachine/Tape.lean:389, Mathlib/Computability/TuringMachine/Tape.lean:398",
-      "date": "2026-10-22",
-      "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Complexes of sheaves over an inverse sequence of ring sheaves are K-flat when every level is K-flat and tensor and exactness are levelwise",
-      "results": "[leansearch] OK 8 hit(s); Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
-      "date": "2026-10-22",
-      "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Build a strict inverse tower from quotient complexes and termwise geometric inverse images with strictly commuting differentials and quotient cocycles",
-      "results": "[leanfinder] OK 8 hit(s); DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b, CochainComplex.cm5b.I, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
-      "date": "2026-10-22",
-      "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|K.flat|semilinear.*system",
-      "results": "OK 4 hits: Mathlib/Algebra/Ring/CompTypeclasses.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
-      "date": "2026-10-22",
-      "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
-    },
-    {
-      "tool": "leansearch",
-      "query": "An unbounded complex of inverse systems of modules is K-flat if its levels are K-flat and tensor and exactness are componentwise",
-      "results": "OK 8 hits: Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
-      "date": "2026-10-22",
-      "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"CochainComplex\", \"Flat\"",
-      "results": "OK 0 hits: ",
-      "date": "2026-10-22",
-      "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Finite tensor and pullback expressions of quotient sheaf complexes give strict semilinear inverse systems of K-flat complexes",
-      "results": "OK 8 hits: localCohomology.diagram, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, AdicCompletion.tensor_map_id_left_eq_map, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
-      "date": "2026-10-22",
-      "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Canonical quotient transition maps on tensor and inverse image complexes obey strict composition cocycles and give coherent derived towers",
-      "results": "OK 8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, lTensor.inverse_comp_lTensor, rTensor.inverse_comp_rTensor, rTensor.inverse_apply, lTensor.inverse_apply",
-      "date": "2026-10-22",
-      "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pur-quotient-expression-kflat-normalization",
-    "date": "2026-10-22",
-    "group": "Q18"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-purity-conv",
-  "blueprint": {
-    "from": {
-      "node": "def-weil-frobenius-coefficient-twists",
-      "place": "Former coefficient-twists proof step 5, as extracted in lem-pur-derived-pullback-tensor-iso: constructing the quotient tensor/pullback towers before their coherence equations; lem-pur-integral-coherence-tower former step 1, from actual quotient transitions through K-flat models and normalized transition-adjoints. Extraction: extraction of original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization.",
-      "via": [
-        "lem-pur-quotient-expression-kflat-normalization",
-        "lem-pur-integral-coherence-tower",
-        "lem-pur-derived-pullback-tensor-iso"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-22",
-    "item": "lem-pur-quotient-expression-strict-kflat-towers",
-    "worker": "stage1",
-    "group": "Q28",
-    "summary": "Unchanged statement; ten explicit steps construct transitions and prove strict cocycles by structural induction, reuse ringed pullback and total-tensor preservation, and test system flatness/K-flatness componentwise. No new nodes, no Lean edits or compilation. Exact statement-level citations checked against every used node.",
-    "blueprint": "Realizes the tower-construction part of former coefficient-twists step 5 through lem-pur-derived-pullback-tensor-iso and lem-pur-integral-coherence-tower, specifically original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization; no normalization claimed.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-proetale-constant-coefficient-comparison",
-        "why": "The canonical constant-ring map is invertible for these pro-etale inverse images; this is a generic coefficient tool, not a change of the unit route."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-exact",
-        "why": "Exactness for each finite constant coefficient module pullback; the unit has no alternative exactness theorem."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-ring-map",
-        "why": "Identifies the structure map c_u used by the fixed-level exactness theorem with the inverse-image definition's c^g_n; a generic coefficient tool."
-      },
-      {
-        "node": "def-weil-proetale-inverse-image",
-        "why": "The specified inverse image and constant-section structural map."
-      },
-      {
-        "node": "def-weil-completed-integral-coefficients",
-        "why": "The actual quotient maps and limit cone equations."
-      },
-      {
-        "node": "def-pc-tensor-complex-sheaves",
-        "why": "The prescribed direct-sum total and its signs."
-      },
-      {
-        "node": "def-pc-sheaf-restrict-scalars",
-        "why": "Identity-on-sections scalar restriction."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-        "why": "Generic preservation of K-flat flat-term representatives under ringed pullback, both coefficient change and geometry."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Generic computation of derived module pullback on the given K-flat flat-term representatives."
-      },
-      {
-        "node": "def-pc-flat-sheaf-modules",
-        "why": "Definition of tensor-exact flatness used on the sequence site."
-      },
-      {
-        "node": "def-pc-kflat-complex",
-        "why": "Definition of K-flatness as acyclicity of total tensor with every acyclic test complex."
-      },
-      {
-        "node": "lem-pur-system-ringed-sequence-site",
-        "why": "Realizes actual strict systems as modules on their vertical sequence site, a generic coefficient construction."
-      },
-      {
-        "node": "def-coef-ringed-sequence-site",
-        "why": "The vertical covering description used to evaluate ordinary tensor and direct sums."
-      },
-      {
-        "node": "lem-coef-semilinear-derived-sections",
-        "why": "Generic componentwise exactness and evaluated derived operations for varying-ring systems, without a normalization hypothesis."
-      },
-      {
-        "node": "lem-weil-pbc-exact-functor-derived-functor",
-        "why": "Generic fact that exact inverse image computes its derived functor on every prescribed complex."
-      },
-      {
-        "node": "def-coef-normalized-dvr-tower",
-        "why": "The coherent derived-tower datum, without asserting normalization."
-      },
-      {
-        "node": "lem-sf-exact-functor-derived-triangulated",
-        "why": "Generic localization of exact evaluation and scalar restriction."
-      }
-    ]
-  },
-  "tool_uses": [],
-  "reviewed": {
-    "date": "2026-10-22",
-    "by": "L",
-    "reviewer": "NT-cc-Q28-f3948e746",
-    "group": "Q28",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-f3948e746 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and Stacks 0G7E/07A2 (labels lemma-pullback-K-flat and lemma-tensor-product-K-flat, sites-cohomology lines 3508 and 3060). The item's statement, stmt_deps and blueprint equal live, where the item is still unsplit, so the delivery is not superseded. There are 0 new nodes, and no repair note exists for this item. The proof keeps every argument of the parent's old Steps 1-5 and 10. It also proves something the old proof never argued: system flatness and K-flatness on the vertical sequence site (Steps 7-8). The sequence-site tensor is componentwise because the sieve generated by the n-slice is cofinal, so sheafification is computed level by level. Checks: the coefficient square c_n g^-1 q = q' c_m, by adjoints on constant sections; generator, tensor and pullback balancing, using q pi_m = pi_n and the Step 1 square; the sign (-1)^p in the differential; the strict cocycle by induction; K-flatness at generators via ringed-pullback-preserves-kflat with u=id and c=pi_n, with no flatness of c needed; the tensor case via the total-tensor model; the pullback case via the ringed-topoi derived pullback; R_W-linearity and the Tow_R datum of def-coef-normalized-dvr-tower, with no normalization claimed. Edge cases: r=0, zero complexes, m=n, empty schemes, doubly unbounded complexes, nonflat Z/l^2 -> Z/l. The proof is acyclic and cites no SGA. The off-route tool uses are generic and I accept them. Fault (C4/C1), fixed: Step 1 applied prop-weil-pbc-proetale-constant-exact, whose u^* is built on c_u of prop-weil-pbc-proetale-constant-ring-map, without citing that node, which alone identifies c_u with the inverse-image definition's c^g_n. The fix adds that citation, writes out the unitor identification of the module pullback with the transported inverse image, and updates proof_deps and tool_uses. Advisory: a dangling base id, def-weil-pbc-localization-universal-property, lies deep in the closure and is not this delivery's fault.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.Paper.QuotientExpressionStrictKFlatTowers",
-    "declaration": "WeilConjectures.StrictQuotient.quotientExpressionStrictKFlatTowers",
-    "declarations": [
-      "WeilConjectures.StrictQuotient.Expression",
-      "WeilConjectures.StrictQuotient.Expression.interpret",
-      "WeilConjectures.StrictQuotient.coefficientInverseImage",
-      "WeilConjectures.StrictQuotient.coefficientToModel",
-      "WeilConjectures.StrictQuotient.constantCoefficientMap",
-      "WeilConjectures.StrictQuotient.completedTower",
-      "WeilConjectures.StrictQuotient.unitSection",
-      "WeilConjectures.StrictQuotient.completedTowerDerivedTransition",
-      "WeilConjectures.StrictQuotient.completedTowerLevelIso",
-      "WeilConjectures.StrictQuotient.SystemGood",
-      "WeilConjectures.StrictQuotient.quotientExpressionStrictKFlatTowers"
-    ],
-    "file": "lean/Sheaf/Paper/QuotientExpressionStrictKFlatTowers.lean",
-    "statement": "theorem quotientExpressionStrictKFlatTowers {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x)) (_hlX : ∀ x : X, IsUnit (l : X.residueField x)) (_hlY : ∀ x : Y, IsUnit (l : Y.residueField x)) (r : ℕ) (P : Fin r → CochainComplex (scalarReductionSource l E Y) ℤ) (hP : ∀ i : Fin r, CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E Y) (P i)) (_hflat : ∀ (i : Fin r) (k : ℤ), SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheafUnrestricted l E Y) ((P i).X k)) : (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g → (∀ n : ℕ, IsIso (constantCoefficientMap l E g n) ∧ PreservesFiniteLimits (integralOperationsLevelPullback l E g n) ∧ PreservesFiniteColimits (integralOperationsLevelPullback l E g n)) ∧ (∀ {m n : ℕ} (hmn : n ≤ m), (coefficientInverseImage.{t, u} g).map ((coefficientToModel.{t, u} W).map (coefficientFiniteQuotient l E W hmn)) ≫ constantCoefficientMap l E g n = constantCoefficientMap l E g m ≫ (coefficientToModel.{t, u} V).map (coefficientFiniteQuotient l E V hmn))) ∧ (∀ (W : Scheme.{t}) {m n : ℕ} (hmn : n ≤ m) (U : W.ProEt) (b : (integralCoefficientCommRingSheaf l E W m).obj.obj (op U)), horizontal l E ((𝟙_ (Complex l E W)).X 0) hmn U (unitSection l E W m U b) = unitSection l E W n U ((coefficientFiniteQuotient l E W hmn).hom.app (op U) b)) ∧ ∃ (N : Fin r → Complex l E Y) (κ : ∀ (i : Fin r) (n : ℕ), level l E (N i) n ≅ ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj (P i)), (∀ (i : Fin r) {m n : ℕ} (hmn : n ≤ m), transition l E (N i) hmn ≫ ((normalizedDVRModuleRes l E Y hmn).mapHomologicalComplex (.up ℤ)).map (κ i n).hom = (κ i m).hom ≫ (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E Y hmn) (.up ℤ)).app (P i)) ∧ (∀ (i : Fin r) (n : ℕ), ∃ e : (coefficientFiniteDerivedExtension l E Y n).obj (DerivedCategory.Q.obj (P i)) ≅ DerivedCategory.Q.obj (level l E (N i) n), e.hom = (coefficientFiniteReductionModel l E Y (P i) (hP i) n).hom ≫ DerivedCategory.Q.map (κ i n).inv) ∧ (∀ (W : Scheme.{t}) (A : Expression h f r W), SystemGood l E (A.interpret l E N) ∧ (∀ n : ℕ, Good l E (A.interpret l E N) n) ∧ (∀ (k : ℤ) (U : W.ProEt) (n : ℕ) (x : ((A.interpret l E N).X k).val.obj (op (n, U))), horizontal l E ((A.interpret l E N).X k) (Nat.le_refl n) U x = x) ∧ (∀ (k : ℤ) (U : W.ProEt) {a m n : ℕ} (ham : m ≤ a) (hmn : n ≤ m) (x : ((A.interpret l E N).X k).val.obj (op (a, U))), horizontal l E ((A.interpret l E N).X k) (le_trans hmn ham) U x = horizontal l E ((A.interpret l E N).X k) hmn U (horizontal l E ((A.interpret l E N).X k) ham U x)) ∧ (∀ n : ℕ, ∃ e : (coefficientSequenceDerivedEvaluation l E W n).obj (DerivedCategory.Q.obj (A.interpret l E N)) ≅ DerivedCategory.Q.obj (level l E (A.interpret l E N) n), e.hom = (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app (A.interpret l E N)) ∧ (∃ e : (coefficientSequenceDerivedRestriction l E W).obj (DerivedCategory.Q.obj (A.interpret l E N)) ≅ DerivedCategory.Q.obj (completedTower l E (A.interpret l E N)), e.hom = (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.hom.app (A.interpret l E N)) ∧ (∀ n : ℕ, ∃ e : (coefficientConstantTowerEvaluation l E W n).obj (DerivedCategory.Q.obj (completedTower l E (A.interpret l E N))) ≅ (coefficientFiniteDerivedRestriction l E W n).obj (DerivedCategory.Q.obj (level l E (A.interpret l E N) n)), e.hom = (completedTowerLevelIso l E (A.interpret l E N) n).hom) ∧ (∀ (k : ℤ) {m n : ℕ} (hmn : n ≤ m) (U : W.ProEtᵒᵖ), HEq (fun x ↦ (((((completedTower l E (A.interpret l E N)).X k).map (homOfLE hmn).op).val.app U) x)) (fun x : ((A.interpret l E N).X k).val.obj (op (m, U.unop)) ↦ horizontal l E ((A.interpret l E N).X k) hmn U.unop x)) ∧ (∀ {m n : ℕ} (hmn : n ≤ m), (completedTowerDerivedTransition l E W hmn).app (DerivedCategory.Q.obj (completedTower l E (A.interpret l E N))) ≫ (coefficientConstantTowerEvaluationFactors l E W n).hom.app (completedTower l E (A.interpret l E N)) = (coefficientConstantTowerEvaluationFactors l E W m).hom.app (completedTower l E (A.interpret l E N)) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).map (homOfLE hmn).op) (.up ℤ)).app (completedTower l E (A.interpret l E N))))) ∧ (∀ (W : Scheme.{t}) (A B : Expression h f r W), TensorTransitions l E (A.interpret l E N) (B.interpret l E N) ∧ (∀ S : CoefficientDerivedSystemTensors l E W, ∃ (hA : SystemGood l E (A.interpret l E N)) (hB : SystemGood l E (B.interpret l E N)) (e : DerivedCategory.Q.obj (total l E (A.interpret l E N) (B.interpret l E N)) ≅ S.systemClosed.tensor.obj (DerivedCategory.Q.obj (A.interpret l E N), DerivedCategory.Q.obj (B.interpret l E N))), e.hom = (CoefficientTensorModels.iso.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W) S.systemClosed S.systemTensorModel (A.interpret l E N) (B.interpret l E N) hA.1 hB.1).hom) ∧ (∀ (n : ℕ) (S : CoefficientDerivedSystemTensors l E W), ∃ (hA : Good l E (A.interpret l E N) n) (hB : Good l E (B.interpret l E N) n) (e : DerivedCategory.Q.obj (level l E (total l E (A.interpret l E N) (B.interpret l E N)) n) ≅ (S.finiteClosed n).tensor.obj (DerivedCategory.Q.obj (level l E (A.interpret l E N) n), DerivedCategory.Q.obj (level l E (B.interpret l E N) n))), e.hom = (tensorComparison l E (A.interpret l E N) (B.interpret l E N) n S hA hB).hom)) ∧ (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g → ∀ A : Expression h f r W, PullbackTransitions l E g (A.interpret l E N) ∧ (∀ n : ℕ, PullbackModel l E g (A.interpret l E N) n ∧ PullbackComputes l E g (A.interpret l E N) n) ∧ ∃ e : (integralComparisonDerivedSequencePullback l E g).obj (DerivedCategory.Q.obj (A.interpret l E N)) ≅ DerivedCategory.Q.obj (pull l E g (A.interpret l E N)), e.hom = (integralComparisonSequencePullback l E g).mapDerivedCategoryFactors.hom.app (A.interpret l E N))",
-    "branch": "sheaf-dag",
-    "by": "Q120",
-    "date": "2026-10-22",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-22",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-73f241deb",
-    "group": "Q120",
-    "result": "pass",
-    "note": "I read the item node, all 14 stmt_deps, StrictQuotientExpressions, IntegralOperationsWellDefined, ProEtaleCoefficientPullbackUniverses, CoefDerivedSystemEvaluationCalculus, NormalizedDVRTower and CoefficientRingedSequenceSite, plus Stacks 0G7E (line 3508) and 07A2 (line 3060). The node differs from live only in lean; no live module exists, so not superseded; the statement is verbatim; no line over 100 chars; one sorry. Every clause is rendered: (1) constantCoefficientMap is the adjunct of the same constant-section map that integralOperationsLevelPullback uses as its ring map, with IsIso, finite-limit/colimit exactness and the square c_n g^-1 q = q' c_m for f, h and h then f; (2) the Expression inductive is a Type refinement of Generated, interpreted by the recorded total/pull/unit; (3) the input levels are pinned via kappa to scalarReductionExtension P_i and coefficientOrdinaryQuotient (x tensor b to x tensor q b); (4) Good and SystemGood (the sequence ring, not R_W); (5) unit, TensorTransitions, PullbackTransitions, and horizontal identity/cocycle; (6) tensorComparison, CoefficientTensorModels.iso, PullbackModel, PullbackComputes and exact-evaluation factors on the prescribed complexes; (7) completedTower via the pinned coefficientSequenceRestriction, the HEq arrow identification, completedTowerLevelIso to Res_n QK_n, and the liftNatTrans derived transition; no normalization asserted. The D-free sequence-site tower functors are a justified adaptation of the D-dependent normalizedDVR* functors. Edge cases: r=0, zero/unbounded complexes, empty schemes, m=n, non-flat Z/l^2 to Z/l, independent universes t and u; no extra hypotheses. Advisories: declarations owned outside stmt_deps (def-coef-ringed-sequence-site, lem-coef-derived-system-evaluation-calculus, def-coef-ringed-tensor-hom-model, def-trf-integral-comparison-sequence-systems, def-pur-integral-finite-pullback), which S2 cannot add, same as the Q95 sibling; some pinned clauses tautological given canonical isos; private imports are the proof-dep modules; the second reading is an author self-check; worker compile 59.0 s is close to the 60 s limit. No compile reproduced, no fixes."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-26",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "N3",
-    "result": "pass",
-    "landing": "20261026T130555-L-3477889",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "WeilConjectures.StrictQuotient.quotientExpressionStrictKFlatTowers_towerData"
-    ],
-    "sorry_after": []
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-pur-quotient-expression-strict-kflat-towers-constant-maps",
+  "lem-pur-quotient-expression-strict-kflat-towers-unit-transitions",
+  "lem-pur-quotient-expression-strict-kflat-towers-tower-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The conjunction is assembled from the three extracted component statements in the delivered Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Prescribed finite tensor and inverse image expressions of K-flat quotient sheaf complexes form strict semilinear towers with flat terms and K-flatness on the sequence site",
+   "results": "[leanfinder] OK 8 hit(s); Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_shortComplex_exact, LinearMap.lTensor_injective_of_exact_of_flat",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s); No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|semilinear.*tower|sequence.*site",
+   "results": "[grep] OK 3 hit(s); Mathlib/Computability/TuringMachine/Tape.lean:377, Mathlib/Computability/TuringMachine/Tape.lean:389, Mathlib/Computability/TuringMachine/Tape.lean:398",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complexes of sheaves over an inverse sequence of ring sheaves are K-flat when every level is K-flat and tensor and exactness are levelwise",
+   "results": "[leansearch] OK 8 hit(s); Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Build a strict inverse tower from quotient complexes and termwise geometric inverse images with strictly commuting differentials and quotient cocycles",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b, CochainComplex.cm5b.I, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic complex factorizations do not construct the prescribed finite expression towers with strict transitions and system K-flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|semilinear.*system",
+   "results": "OK 4 hits: Mathlib/Algebra/Ring/CompTypeclasses.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unbounded complex of inverse systems of modules is K-flat if its levels are K-flat and tensor and exactness are componentwise",
+   "results": "OK 8 hits: Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Flat\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite tensor and pullback expressions of quotient sheaf complexes give strict semilinear inverse systems of K-flat complexes",
+   "results": "OK 8 hits: localCohomology.diagram, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, AdicCompletion.tensor_map_id_left_eq_map, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical quotient transition maps on tensor and inverse image complexes obey strict composition cocycles and give coherent derived towers",
+   "results": "OK 8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, lTensor.inverse_comp_lTensor, rTensor.inverse_comp_rTensor, rTensor.inverse_apply, lTensor.inverse_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module flatness, generic total tensor associators, or adic completion; none constructs these prescribed sheaf-complex expression towers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-quotient-expression-kflat-normalization",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former coefficient-twists proof step 5, as extracted in lem-pur-derived-pullback-tensor-iso: constructing the quotient tensor/pullback towers before their coherence equations; lem-pur-integral-coherence-tower former step 1, from actual quotient transitions through K-flat models and normalized transition-adjoints. Extraction: extraction of original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization.",
+   "via": [
+    "lem-pur-quotient-expression-kflat-normalization",
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-quotient-expression-strict-kflat-towers",
+  "worker": "stage1",
+  "group": "Q28",
+  "summary": "Unchanged statement; ten explicit steps construct transitions and prove strict cocycles by structural induction, reuse ringed pullback and total-tensor preservation, and test system flatness/K-flatness componentwise. No new nodes, no Lean edits or compilation. Exact statement-level citations checked against every used node.",
+  "blueprint": "Realizes the tower-construction part of former coefficient-twists step 5 through lem-pur-derived-pullback-tensor-iso and lem-pur-integral-coherence-tower, specifically original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization; no normalization claimed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-constant-coefficient-comparison",
+    "why": "The canonical constant-ring map is invertible for these pro-etale inverse images; this is a generic coefficient tool, not a change of the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness for each finite constant coefficient module pullback; the unit has no alternative exactness theorem."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the structure map c_u used by the fixed-level exactness theorem with the inverse-image definition's c^g_n; a generic coefficient tool."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "The specified inverse image and constant-section structural map."
+   },
+   {
+    "node": "def-weil-completed-integral-coefficients",
+    "why": "The actual quotient maps and limit cone equations."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "The prescribed direct-sum total and its signs."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Identity-on-sections scalar restriction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic preservation of K-flat flat-term representatives under ringed pullback, both coefficient change and geometry."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic computation of derived module pullback on the given K-flat flat-term representatives."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Definition of tensor-exact flatness used on the sequence site."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Definition of K-flatness as acyclicity of total tensor with every acyclic test complex."
+   },
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Realizes actual strict systems as modules on their vertical sequence site, a generic coefficient construction."
+   },
+   {
+    "node": "def-coef-ringed-sequence-site",
+    "why": "The vertical covering description used to evaluate ordinary tensor and direct sums."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic componentwise exactness and evaluated derived operations for varying-ring systems, without a normalization hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic fact that exact inverse image computes its derived functor on every prescribed complex."
+   },
+   {
+    "node": "def-coef-normalized-dvr-tower",
+    "why": "The coherent derived-tower datum, without asserting normalization."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic localization of exact evaluation and scalar restriction."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-f3948e746",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-f3948e746 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and Stacks 0G7E/07A2 (labels lemma-pullback-K-flat and lemma-tensor-product-K-flat, sites-cohomology lines 3508 and 3060). The item's statement, stmt_deps and blueprint equal live, where the item is still unsplit, so the delivery is not superseded. There are 0 new nodes, and no repair note exists for this item. The proof keeps every argument of the parent's old Steps 1-5 and 10. It also proves something the old proof never argued: system flatness and K-flatness on the vertical sequence site (Steps 7-8). The sequence-site tensor is componentwise because the sieve generated by the n-slice is cofinal, so sheafification is computed level by level. Checks: the coefficient square c_n g^-1 q = q' c_m, by adjoints on constant sections; generator, tensor and pullback balancing, using q pi_m = pi_n and the Step 1 square; the sign (-1)^p in the differential; the strict cocycle by induction; K-flatness at generators via ringed-pullback-preserves-kflat with u=id and c=pi_n, with no flatness of c needed; the tensor case via the total-tensor model; the pullback case via the ringed-topoi derived pullback; R_W-linearity and the Tow_R datum of def-coef-normalized-dvr-tower, with no normalization claimed. Edge cases: r=0, zero complexes, m=n, empty schemes, doubly unbounded complexes, nonflat Z/l^2 -> Z/l. The proof is acyclic and cites no SGA. The off-route tool uses are generic and I accept them. Fault (C4/C1), fixed: Step 1 applied prop-weil-pbc-proetale-constant-exact, whose u^* is built on c_u of prop-weil-pbc-proetale-constant-ring-map, without citing that node, which alone identifies c_u with the inverse-image definition's c^g_n. The fix adds that citation, writes out the unitor identification of the module pullback with the transported inverse image, and updates proof_deps and tool_uses. Advisory: a dangling base id, def-weil-pbc-localization-universal-property, lies deep in the closure and is not this delivery's fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientExpressionStrictKFlatTowers",
+  "declaration": "WeilConjectures.StrictQuotient.quotientExpressionStrictKFlatTowers",
+  "declarations": [
+   "WeilConjectures.StrictQuotient.quotientExpressionStrictKFlatTowers"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientExpressionStrictKFlatTowers.lean",
+  "statement": "theorem quotientExpressionStrictKFlatTowers {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x)) (_hlX : ∀ x : X, IsUnit (l : X.residueField x)) (_hlY : ∀ x : Y, IsUnit (l : Y.residueField x)) (r : ℕ) (P : Fin r → CochainComplex (scalarReductionSource l E Y) ℤ) (hP : ∀ i : Fin r, CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E Y) (P i)) (_hflat : ∀ (i : Fin r) (k : ℤ), SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheafUnrestricted l E Y) ((P i).X k)) : (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g → (∀ n : ℕ, IsIso (constantCoefficientMap l E g n) ∧ PreservesFiniteLimits (integralOperationsLevelPullback l E g n) ∧ PreservesFiniteColimits (integralOperationsLevelPullback l E g n)) ∧ (∀ {m n : ℕ} (hmn : n ≤ m), (coefficientInverseImage.{t, u} g).map ((coefficientToModel.{t, u} W).map (coefficientFiniteQuotient l E W hmn)) ≫ constantCoefficientMap l E g n = constantCoefficientMap l E g m ≫ (coefficientToModel.{t, u} V).map (coefficientFiniteQuotient l E V hmn))) ∧ (∀ (W : Scheme.{t}) {m n : ℕ} (hmn : n ≤ m) (U : W.ProEt) (b : (integralCoefficientCommRingSheaf l E W m).obj.obj (op U)), horizontal l E ((𝟙_ (Complex l E W)).X 0) hmn U (unitSection l E W m U b) = unitSection l E W n U ((coefficientFiniteQuotient l E W hmn).hom.app (op U) b)) ∧ ∃ (N : Fin r → Complex l E Y) (κ : ∀ (i : Fin r) (n : ℕ), level l E (N i) n ≅ ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj (P i)), (∀ (i : Fin r) {m n : ℕ} (hmn : n ≤ m), transition l E (N i) hmn ≫ ((normalizedDVRModuleRes l E Y hmn).mapHomologicalComplex (.up ℤ)).map (κ i n).hom = (κ i m).hom ≫ (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E Y hmn) (.up ℤ)).app (P i)) ∧ (∀ (i : Fin r) (n : ℕ), ∃ e : (coefficientFiniteDerivedExtension l E Y n).obj (DerivedCategory.Q.obj (P i)) ≅ DerivedCategory.Q.obj (level l E (N i) n), e.hom = (coefficientFiniteReductionModel l E Y (P i) (hP i) n).hom ≫ DerivedCategory.Q.map (κ i n).inv) ∧ (∀ (W : Scheme.{t}) (A : Expression h f r W), SystemGood l E (A.interpret l E N) ∧ (∀ n : ℕ, Good l E (A.interpret l E N) n) ∧ (∀ (k : ℤ) (U : W.ProEt) (n : ℕ) (x : ((A.interpret l E N).X k).val.obj (op (n, U))), horizontal l E ((A.interpret l E N).X k) (Nat.le_refl n) U x = x) ∧ (∀ (k : ℤ) (U : W.ProEt) {a m n : ℕ} (ham : m ≤ a) (hmn : n ≤ m) (x : ((A.interpret l E N).X k).val.obj (op (a, U))), horizontal l E ((A.interpret l E N).X k) (le_trans hmn ham) U x = horizontal l E ((A.interpret l E N).X k) hmn U (horizontal l E ((A.interpret l E N).X k) ham U x)) ∧ (∀ n : ℕ, ∃ e : (coefficientSequenceDerivedEvaluation l E W n).obj (DerivedCategory.Q.obj (A.interpret l E N)) ≅ DerivedCategory.Q.obj (level l E (A.interpret l E N) n), e.hom = (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app (A.interpret l E N)) ∧ (∃ e : (coefficientSequenceDerivedRestriction l E W).obj (DerivedCategory.Q.obj (A.interpret l E N)) ≅ DerivedCategory.Q.obj (completedTower l E (A.interpret l E N)), e.hom = (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.hom.app (A.interpret l E N)) ∧ (∀ n : ℕ, ∃ e : (coefficientConstantTowerEvaluation l E W n).obj (DerivedCategory.Q.obj (completedTower l E (A.interpret l E N))) ≅ (coefficientFiniteDerivedRestriction l E W n).obj (DerivedCategory.Q.obj (level l E (A.interpret l E N) n)), e.hom = (completedTowerLevelIso l E (A.interpret l E N) n).hom) ∧ (∀ (k : ℤ) {m n : ℕ} (hmn : n ≤ m) (U : W.ProEtᵒᵖ), HEq (fun x ↦ (((((completedTower l E (A.interpret l E N)).X k).map (homOfLE hmn).op).val.app U) x)) (fun x : ((A.interpret l E N).X k).val.obj (op (m, U.unop)) ↦ horizontal l E ((A.interpret l E N).X k) hmn U.unop x)) ∧ (∀ {m n : ℕ} (hmn : n ≤ m), (completedTowerDerivedTransition l E W hmn).app (DerivedCategory.Q.obj (completedTower l E (A.interpret l E N))) ≫ (coefficientConstantTowerEvaluationFactors l E W n).hom.app (completedTower l E (A.interpret l E N)) = (coefficientConstantTowerEvaluationFactors l E W m).hom.app (completedTower l E (A.interpret l E N)) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).map (homOfLE hmn).op) (.up ℤ)).app (completedTower l E (A.interpret l E N))))) ∧ (∀ (W : Scheme.{t}) (A B : Expression h f r W), TensorTransitions l E (A.interpret l E N) (B.interpret l E N) ∧ (∀ S : CoefficientDerivedSystemTensors l E W, ∃ (hA : SystemGood l E (A.interpret l E N)) (hB : SystemGood l E (B.interpret l E N)) (e : DerivedCategory.Q.obj (total l E (A.interpret l E N) (B.interpret l E N)) ≅ S.systemClosed.tensor.obj (DerivedCategory.Q.obj (A.interpret l E N), DerivedCategory.Q.obj (B.interpret l E N))), e.hom = (CoefficientTensorModels.iso.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W) S.systemClosed S.systemTensorModel (A.interpret l E N) (B.interpret l E N) hA.1 hB.1).hom) ∧ (∀ (n : ℕ) (S : CoefficientDerivedSystemTensors l E W), ∃ (hA : Good l E (A.interpret l E N) n) (hB : Good l E (B.interpret l E N) n) (e : DerivedCategory.Q.obj (level l E (total l E (A.interpret l E N) (B.interpret l E N)) n) ≅ (S.finiteClosed n).tensor.obj (DerivedCategory.Q.obj (level l E (A.interpret l E N) n), DerivedCategory.Q.obj (level l E (B.interpret l E N) n))), e.hom = (tensorComparison l E (A.interpret l E N) (B.interpret l E N) n S hA hB).hom)) ∧ (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g → ∀ A : Expression h f r W, PullbackTransitions l E g (A.interpret l E N) ∧ (∀ n : ℕ, PullbackModel l E g (A.interpret l E N) n ∧ PullbackComputes l E g (A.interpret l E N) n) ∧ ∃ e : (integralComparisonDerivedSequencePullback l E g).obj (DerivedCategory.Q.obj (A.interpret l E N)) ≅ DerivedCategory.Q.obj (pull l E g (A.interpret l E N)), e.hom = (integralComparisonSequencePullback l E g).mapDerivedCategoryFactors.hom.app (A.interpret l E N))",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73f241deb",
+  "group": "Q120",
+  "result": "pass",
+  "note": "I read the item node, all 14 stmt_deps, StrictQuotientExpressions, IntegralOperationsWellDefined, ProEtaleCoefficientPullbackUniverses, CoefDerivedSystemEvaluationCalculus, NormalizedDVRTower and CoefficientRingedSequenceSite, plus Stacks 0G7E (line 3508) and 07A2 (line 3060). The node differs from live only in lean; no live module exists, so not superseded; the statement is verbatim; no line over 100 chars; one sorry. Every clause is rendered: (1) constantCoefficientMap is the adjunct of the same constant-section map that integralOperationsLevelPullback uses as its ring map, with IsIso, finite-limit/colimit exactness and the square c_n g^-1 q = q' c_m for f, h and h then f; (2) the Expression inductive is a Type refinement of Generated, interpreted by the recorded total/pull/unit; (3) the input levels are pinned via kappa to scalarReductionExtension P_i and coefficientOrdinaryQuotient (x tensor b to x tensor q b); (4) Good and SystemGood (the sequence ring, not R_W); (5) unit, TensorTransitions, PullbackTransitions, and horizontal identity/cocycle; (6) tensorComparison, CoefficientTensorModels.iso, PullbackModel, PullbackComputes and exact-evaluation factors on the prescribed complexes; (7) completedTower via the pinned coefficientSequenceRestriction, the HEq arrow identification, completedTowerLevelIso to Res_n QK_n, and the liftNatTrans derived transition; no normalization asserted. The D-free sequence-site tower functors are a justified adaptation of the D-dependent normalizedDVR* functors. Edge cases: r=0, zero/unbounded complexes, empty schemes, m=n, non-flat Z/l^2 to Z/l, independent universes t and u; no extra hypotheses. Advisories: declarations owned outside stmt_deps (def-coef-ringed-sequence-site, lem-coef-derived-system-evaluation-calculus, def-coef-ringed-tensor-hom-model, def-trf-integral-comparison-sequence-systems, def-pur-integral-finite-pullback), which S2 cannot add, same as the Q95 sibling; some pinned clauses tautological given canonical isos; private imports are the proof-dep modules; the second reading is an author self-check; worker compile 59.0 s is close to the 60 s limit. No compile reproduced, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
 }

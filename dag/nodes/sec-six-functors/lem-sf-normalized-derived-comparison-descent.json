@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-normalized-derived-comparison-descent",
+ "kind": "statement",
+ "title": "Descent of normalized derived comparison from resolving representatives",
+ "statement": "Let A, B, C and D be abelian categories with chosen derived categories, allowing independent object, morphism and derived universes. Let p:A→B and q:C→D be exact additive functors, s:A→C and t:B→D additive functors, and c:p⋙t≅s⋙q. Let LS and LT be functors on the respective derived categories equipped with natural maps epsilonS:Q⋙LS→s(complexes)⋙Q and epsilonT:Q⋙LT→t(complexes)⋙Q. Let R and good be object properties on cochain complexes over A. Assume good implies R, every R-complex receives a quasi-isomorphism from a good complex, restriction along R↪complexes→derived(A) is fully faithful for functors to derived(D), epsilonS is invertible on R, and epsilonT after p is invertible on good. Then there exists a unique isomorphism p(derived)⋙LT≅LS⋙q(derived) whose component on QX, for each R-complex X, satisfies the equality formed by the two supplied counits, c and the canonical exact-functor factorization isomorphisms. The definitions and hypotheses are as in [def-weil-abstract-derived-category], [lem-weil-pbc-exact-functor-derived-functor].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06YY and 0D6D; complete generic proof previously private in IntegralComparisonSequenceSystems."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "form alpha and beta into the same cochain target using the exact functor\nfactorizations and the ordinary comparison. The first counit makes beta invertible\non the resolving class. The second makes alpha invertible on the good subclass.\nResolve an arbitrary member of the resolving class by a good member; naturality\nand inversion of quasi-isomorphisms give invertibility of alpha there. Their\nratio is an isomorphism after restriction to the resolving subcategory. Lift it\nby fully faithful restriction. The lifted hom satisfies the normalization by\nmap_preimage and cancellation with beta. Injectivity of restriction and the same\ncancellation prove uniqueness.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06YY and 0D6D; complete generic proof previously private in IntegralComparisonSequenceSystems.",
+  "note": "Existing complete argument extracted, with the same assumptions and conclusion; no new hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized isomorphism between derived functors descends uniquely from a fully faithful resolving subcategory",
+   "results": "leftDerivedUnique, rightDerivedUnique, derivedNatIso and degree-zero derived comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison with these two counits and the resolving subclass."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "preimageIso and its hom/inv lemmas, used in the existing argument.",
+   "date": "2026-10-27",
+   "verdict": "Provides the lifting step, with normalization and resolution extension proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedComparisonDescent|derivedComparison",
+   "results": "No Mathlib hit.",
+   "date": "2026-10-27",
+   "verdict": "Extract the complete existing project proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compilation of the ambient construction consumer: normalized derived comparison descent.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedDerivedComparisonDescent",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedDerivedComparisonDescent.lean",
+  "declaration": "SequenceComparisonConstruction.derivedComparison",
+  "statement": "theorem derivedComparison\n    {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory.{wA} A]\n    {B : Type c} [Category.{d} B] [Abelian B] [HasDerivedCategory.{wB} B]\n    {C : Type e} [Category.{f} C] [Abelian C] [HasDerivedCategory.{wC} C]\n    {D : Type g} [Category.{h} D] [Abelian D] [HasDerivedCategory.{wD} D]\n    (p : A ⥤ B) [p.Additive] [PreservesFiniteLimits p] [PreservesFiniteColimits p]\n    (q : C ⥤ D) [q.Additive] [PreservesFiniteLimits q] [PreservesFiniteColimits q]\n    (s : A ⥤ C) [s.Additive] (t : B ⥤ D) [t.Additive]\n    (LS : DerivedCategory A ⥤ DerivedCategory C)\n    (LT : DerivedCategory B ⥤ DerivedCategory D)\n    (εS : DerivedCategory.Q ⋙ LS ⟶ s.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (εT : DerivedCategory.Q ⋙ LT ⟶ t.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (c : p ⋙ t ≅ s ⋙ q) (R good : ObjectProperty (CochainComplex A ℤ))\n    (ff : ((whiskeringLeft R.FullSubcategory (DerivedCategory A) (DerivedCategory D)).obj\n      (R.ι ⋙ DerivedCategory.Q)).FullyFaithful)\n    (hgood : ∀ X, good X → R X)\n    (hres : ∀ X, R X → ∃ (Y : CochainComplex A ℤ) (r : Y ⟶ X), good Y ∧ QuasiIso r)\n    (hS : ∀ X, R X → IsIso (εS.app X))\n    (hT : ∀ X, good X → IsIso (εT.app ((p.mapHomologicalComplex (.up ℤ)).obj X))) :\n    ∃! a : p.mapDerivedCategory ⋙ LT ≅ LS ⋙ q.mapDerivedCategory,\n      ∀ X, R X →\n        LT.map (p.mapDerivedCategoryFactors.hom.app X) ≫\n          εT.app ((p.mapHomologicalComplex (.up ℤ)).obj X) ≫\n            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app X) =\n        a.hom.app (DerivedCategory.Q.obj X) ≫ q.mapDerivedCategory.map (εS.app X) ≫\n          q.mapDerivedCategoryFactors.hom.app ((s.mapHomologicalComplex (.up ℤ)).obj X)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

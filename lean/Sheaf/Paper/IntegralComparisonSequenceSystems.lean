@@ -23,19 +23,24 @@ public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Paper.CoefficientRingedSequenceSite
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
-import Sheaf.CategoryTheory.SystemScalarCoherence
-import Sheaf.CategoryTheory.SystemScalarGenerators
-import Sheaf.CategoryTheory.DerivedCategory.CochainHomotopyComparison
-import Sheaf.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
-import Sheaf.Algebra.Homology.SheafRingDerivedHomComparison
-import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Paper.ResolvingRepresentativeWhiskering
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Paper.AmbientPullbackTensorCoherence
+import all Sheaf.Paper.AmbientPullbackSiteData
+import Sheaf.Paper.AmbientPushforwardCompositionSections
+import Sheaf.Paper.AmbientPushforwardIdentitySections
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Sheaf.CategoryTheory.KFlatUnaryWhiskering
+import Sheaf.CategoryTheory.NormalizedDerivedComparisonDescent
+import Sheaf.CategoryTheory.SystemScalarTensorSection
+import Sheaf.CategoryTheory.FixedScalarUnitUnique
+import Sheaf.CategoryTheory.SystemScalarCompositionUnique
+import Sheaf.CategoryTheory.SystemScalarUnitUnique
+import Sheaf.CategoryTheory.FixedScalarCompositionUnique
+import Sheaf.CategoryTheory.SystemScalarPackageExists
+import Sheaf.CategoryTheory.SystemScalarOrdinaryAdjunction
 /-!
 # Realization of integral pullback comparisons
 
@@ -73,28 +78,7 @@ private theorem scalarPackageExists
     {R S : Sheaf J CommRingCat.{sw}} (φ : R ⟶ S)
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel φ) :
     ∃ A : SheafOfModules.SystemScalarModel φ, A.model = D := by
-  obtain ⟨ε, hε, hεP⟩ :=
-    exists_homotopy_leftDerived_comparison D.E D.T D.ε D.universal
-  obtain ⟨_, _, ho⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
-  obtain ⟨a, ha⟩ := ho D.E D.obj_eq D.map_eq
-  obtain ⟨d, hd⟩ := SheafOfModules.sheafRingDerivedHomComparison φ
-    D.E D.obj_eq D.map_eq a D.T ε hε
-  refine ⟨{ model := D
-            ordinaryAdj := a
-            unit_normalized := ?_
-            adjunction := d
-            transpose := adjunction_cochain_transpose D.E _ a D.T D.ε ε hεP d hd }, rfl⟩
-  intro P U x
-  have hu := ha P (D.E.obj P) (eqToHom (D.obj_eq P).symm) U x
-  dsimp only [SheafOfModules.systemModelTmul]
-  rw [one_smul]
-  have ht : ((ModuleCat.extendRestrictScalarsAdj (φ.hom.app U).hom).unit.app
-      (P.val.obj U)) x =
-        (1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x := rfl
-  rw [ht]
-  simp only [eqToHom_trans, eqToHom_refl, Adjunction.homEquiv_id] at hu
-  exact hu
-
+  exact SequenceScalarConstruction.scalarPackageExists φ D
 
 private theorem scalarCompositionUnique
     {R S T : Sheaf J CommRingCat.{sw}} {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T}
@@ -107,25 +91,7 @@ private theorem scalarCompositionUnique
           (SheafOfModules.systemModelTmul B.model (A.model.E.obj P) U c
             (SheafOfModules.systemModelTmul A.model P U b x)) =
           SheafOfModules.systemModelTmul D.model P U (c * (ψ.hom.app U) b) x := by
-  let a := SheafOfModules.systemScalarModelComposition hγ A B D
-  have ha := SheafOfModules.systemScalarModelComposition_tmul hγ A B D
-  refine ⟨a, ha, ?_⟩
-  intro b hb
-  apply Iso.ext
-  apply NatTrans.ext
-  funext P
-  apply (B.ordinaryAdj.homEquiv _ _).injective
-  apply SheafOfModules.systemScalarModel_hom_ext A P _
-  intro V y
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  change (b.hom.app P).val.app V
-      ((B.ordinaryAdj.unit.app (A.model.E.obj P)).val.app V
-        (SheafOfModules.systemModelTmul A.model P V 1 y)) =
-    (a.hom.app P).val.app V
-      ((B.ordinaryAdj.unit.app (A.model.E.obj P)).val.app V
-        (SheafOfModules.systemModelTmul A.model P V 1 y))
-  rw [B.unit_normalized]
-  exact (hb P V 1 1 y).trans (ha P V 1 1 y).symm
+  exact SequenceScalarConstruction.scalarCompositionUnique hγ A B D
 
 private theorem scalarUnitUnique
     {R : Sheaf J CommRingCat.{sw}} {φ : R ⟶ R} (hφ : φ = 𝟙 R)
@@ -133,17 +99,7 @@ private theorem scalarUnitUnique
     ∃! a : A.model.E ≅ 𝟭 _, ∀ P U (s : R.obj.obj U) (x : P.val.obj U),
       (a.hom.app P).val.app U (SheafOfModules.systemModelTmul A.model P U s x) =
         s • x := by
-  let a := SheafOfModules.systemScalarModelUnit hφ A
-  have ha := SheafOfModules.systemScalarModelUnit_tmul hφ A
-  refine ⟨a, ha, ?_⟩
-  intro b hb
-  apply Iso.ext
-  apply NatTrans.ext
-  funext P
-  apply SheafOfModules.systemScalarModel_hom_ext A P P
-  intro U x
-  exact (hb P U 1 x).trans (ha P U 1 x).symm
-
+  exact SequenceScalarConstruction.scalarUnitUnique hφ A
 
 private theorem modelTmul_eq
     {R S : Sheaf J CommRingCat.{sw}} (φ : R ⟶ S)
@@ -154,20 +110,7 @@ private theorem modelTmul_eq
       ((toSheafify J (SheafOfModules.changeOfRingsPresheaf φ N).presheaf).app U
         (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
       SheafOfModules.systemModelTmul D N U s x := by
-  let η := (PresheafOfModules.sheafificationAdjunction.{sw}
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).unit.app
-      (SheafOfModules.changeOfRingsPresheaf φ N)
-  change (eqToHom (D.obj_eq N).symm).val.app U
-      (η.app U (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
-    s • (eqToHom (D.obj_eq N).symm).val.app U
-      (η.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
-  rw [← ((eqToHom (D.obj_eq N).symm).val.app U).hom.map_smul]
-  rw [← (η.app U).hom.map_smul]
-  congr 2
-  change (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) =
-    ((s * 1) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
-  rw [mul_one]
-
+  exact SequenceScalarConstruction.modelTmul_eq φ D N U s x
 
 end SequenceScalarProof
 
@@ -240,21 +183,8 @@ private theorem sequenceConstantMap_naturality {X Y : Scheme.{t}} (f : X ⟶ Y)
       ((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
         (ProEt.topology Y) (ProEt.topology X)).map
           ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map a) := by
-  apply (sheafificationAdjunction (ProEt.topology Y)
-      CommRingCat.{max u (t + 1)}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
-        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
-          (ProEt.topology Y) (ProEt.topology X)).obj
-            ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj B)) |>.injective
-  apply NatTrans.ext
-  funext U
-  change _ ≫ (_ ≫ _) = _ ≫ (_ ≫ _)
-  have hY := congrArg (fun α ↦ α.app U)
-    (toSheafify_naturality (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).map a))
-  change a ≫ _ = _ ≫ _ at hY
-  erw [← Category.assoc, ← hY, Category.assoc, sequenceConstantUnit,
-    ← Category.assoc, sequenceConstantUnit]
-  exact congrArg (fun α ↦ α.app ((proEtaleBaseChange f).op.obj U))
-    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map a))
+  exact AmbientPullbackTensor.constantMap_naturality f a
+
 
 /-- The constant-section coefficient maps commute with horizontal quotients and
 vertical restrictions. Source: Stacks 03D2, 0941
@@ -449,16 +379,10 @@ private theorem sequenceScalarAdjunction (X : Scheme.{t}) :
                   ((1 : (coefficientSequenceCommRingSheaf l L X).obj.obj U)
                     ⊗ₜ[(coefficientSequenceCommRingSheaf l E X).obj.obj U,
                       ((integralComparisonSequenceScalarMap l E L ι X).hom.app U).hom] x)) := by
-  obtain ⟨A, hA⟩ := SequenceScalarProof.scalarPackageExists
+  exact SequenceScalarConstruction.scalarOrdinaryAdjunction
     (integralComparisonSequenceScalarMap l E L ι X)
     (integralComparisonSequenceScalarModel l E L ι X)
-  rw [← hA]
-  refine ⟨A.ordinaryAdj, ?_⟩
-  intro N U x
-  have h := A.unit_normalized N U x
-  dsimp only [SheafOfModules.systemModelTmul] at h
-  rw [one_smul] at h
-  exact h
+
 
 /-- The system pullback generator is the actual adjunction unit on sections.
 Source: Stacks 03D2, 0941
@@ -491,21 +415,8 @@ private theorem sequenceDirectComp_apply {V W Z : Scheme.{t}}
     ((sequenceDirectComp l E h k).hom.app M).val.app U x =
       M.val.map (Prod.mkHom (𝟙 U.unop.1)
         ((MorphismProperty.Over.pullbackComp h k).hom.app U.unop.2)).op x := by
-  let e := (AmbientPullbackTensor.pushComp_existsUnique l E h k none).exists.choose
-  have he := (AmbientPullbackTensor.pushComp_existsUnique l E h k none).exists.choose_spec
-  have hh := he M U.unop ((e.inv.app M).val.app U x)
-  have hi := congrArg (fun z ↦ z.val.app U x) (e.inv_hom_id_app M)
-  change (e.hom.app M).val.app U ((e.inv.app M).val.app U x) = x at hi
-  change (e.hom.app M).val.app U ((e.inv.app M).val.app U x) =
-    M.val.map ((AmbientPullbackTensor.baseComp h k none).inv.app U.unop).op
-      ((e.inv.app M).val.app U x) at hh
-  rw [hi] at hh
-  have hr := congrArg (fun z ↦ M.val.map
-    ((AmbientPullbackTensor.baseComp h k none).hom.app U.unop).op z) hh
-  have hc := moduleRestriction_inverse M.val
-    ((AmbientPullbackTensor.baseComp h k none).app U.unop)
-      ((e.inv.app M).val.app U x)
-  exact hc.symm.trans hr.symm
+  exact AmbientPullbackTensor.pushComp_inverse_sections l E h k none M U.unop x
+
 
 attribute [local irreducible] sequenceDirectComp
 
@@ -587,7 +498,7 @@ private theorem sequenceTensorSection_eq (Y : Scheme.{t})
     integralComparisonSequenceTensorSection l E L ι Y N U s x =
       SheafOfModules.systemModelTmul (integralComparisonSequenceScalarModel l E L ι Y)
         N U s x :=
-  SequenceScalarProof.modelTmul_eq (integralComparisonSequenceScalarMap l E L ι Y)
+  SequenceScalarConstruction.modelTmul_eq (integralComparisonSequenceScalarMap l E L ι Y)
     (integralComparisonSequenceScalarModel l E L ι Y) N U s x
 
 private theorem sequenceScalarPullbackRing {Y Z : Scheme.{t}} (f : Z ⟶ Y) :
@@ -747,33 +658,6 @@ set_option backward.isDefEq.respectTransparency.types true
 universe a b c d e f
 open CategoryTheory.Functor
 
-private noncomputable def unaryWhiskering
-    {C : Type a} [Category.{b} C] {D : Type c} [Category.{d} D]
-    (E : Type e) [Category.{f} E] (L : C ⥤ D)
-    (ff : ((whiskeringLeft (C × C) (D × D) E).obj (L.prod L)).FullyFaithful) :
-    ((whiskeringLeft C D E).obj L).FullyFaithful := by
-  let W := (whiskeringLeft C D E).obj L
-  let diag : D ⥤ D × D := { obj := fun X ↦ (X, X), map := fun f ↦ Prod.mkHom f f }
-  have : W.Faithful := ⟨by
-    intro F G α β h
-    have h' : Functor.whiskerLeft (CategoryTheory.Prod.fst D D) α =
-        Functor.whiskerLeft (CategoryTheory.Prod.fst D D) β := by
-      apply ff.map_injective
-      ext X
-      exact congrArg (fun t ↦ t.app X.1) h
-    ext X
-    exact congrArg (fun t ↦ t.app (X, X)) h'⟩
-  have : W.Full := ⟨by
-    intro F G α
-    let α' : (L.prod L) ⋙ CategoryTheory.Prod.fst D D ⋙ F ⟶
-        (L.prod L) ⋙ CategoryTheory.Prod.fst D D ⋙ G :=
-      { app := fun X ↦ α.app X.1
-        naturality := fun _ _ g ↦ α.naturality g.1 }
-    let β := ff.preimage α'
-    refine ⟨show F ⟶ G from Functor.whiskerLeft diag β, ?_⟩
-    ext X
-    exact congrArg (fun t ↦ t.app (X, X)) (ff.map_preimage α')⟩
-  exact Functor.FullyFaithful.ofFullyFaithful W
 
 private theorem normalizedComparisonDescent
     {C : Type a} [Category.{b} C] {D : Type c} [Category.{d} D]
@@ -805,6 +689,7 @@ private theorem normalizedComparisonDescent
   apply (cancel_mono (β.app X.obj)).1
   exact (ha' X.obj X.property).symm.trans (ha X.obj X.property)
 
+
 private theorem kflatWhiskering
     {D : Type e} [Category.{f} D]
     {C : Type a} [Category.{b} C] [EssentiallySmall.{c} C]
@@ -821,39 +706,8 @@ private theorem kflatWhiskering
       CochainComplex.IsKFlatIndependentCoefficients (R := R)
     Nonempty (((whiskeringLeft P.FullSubcategory (DerivedCategory A) D).obj
       (P.ι ⋙ DerivedCategory.Q)).FullyFaithful) := by
-  intro A P
-  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ P X.as
-  have hres : ∀ X : HomotopyCategory A (.up ℤ),
-      ∃ (Y : H.FullSubcategory) (s : Y.obj ⟶ X),
-        HomotopyCategory.quasiIso A (.up ℤ) s := by
-    intro X
-    obtain ⟨K, q, hK, _, hq, _⟩ :=
-      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X.as
-    exact ⟨⟨(HomotopyCategory.quotient A (.up ℤ)).obj K, hK⟩,
-      (HomotopyCategory.quotient A (.up ℤ)).map q,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff q).2 hq⟩
-  obtain ⟨ff⟩ := resolvingRepresentativesFullyFaithfulWhiskering
-    (K := CochainComplex A ℤ) (H := HomotopyCategory A (.up ℤ))
-    (D := DerivedCategory A) D
-    (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
-    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh P H (fun _ ↦ Iff.rfl) hres
-  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ D).mapIso
-    (NatIso.prod (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))
-      (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))))
-  exact ⟨unaryWhiskering D (P.ι ⋙ DerivedCategory.Q) ff'⟩
+  exact SequenceComparisonConstruction.kflatWhiskering R
 
-
-private theorem isIso_on_resolution
-    {C : Type a} [Category.{b} C] {D : Type c} [Category.{d} D]
-    {E : Type e} [Category.{f} E]
-    (L : C ⥤ D) (F G : D ⥤ E) (H : C ⥤ E)
-    (α : L ⋙ F ⟶ H) (β : L ⋙ G ⟶ H)
-    {X Y : C} (q : X ⟶ Y) [IsIso (L.map q)]
-    [IsIso (α.app X)] [IsIso (β.app X)] [IsIso (β.app Y)] : IsIso (α.app Y) := by
-  have : IsIso ((L ⋙ G).map q) := inferInstanceAs (IsIso (G.map (L.map q)))
-  have : IsIso (H.map q) := IsIso.of_isIso_fac_left (β.naturality q).symm
-  have : IsIso ((L ⋙ F).map q) := inferInstanceAs (IsIso (F.map (L.map q)))
-  exact IsIso.of_isIso_fac_left (α.naturality q)
 
 universe g h wA wB wC wD
 
@@ -883,39 +737,8 @@ private theorem derivedComparison
             DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app X) =
         a.hom.app (DerivedCategory.Q.obj X) ≫ q.mapDerivedCategory.map (εS.app X) ≫
           q.mapDerivedCategoryFactors.hom.app ((s.mapHomologicalComplex (.up ℤ)).obj X) := by
-  let F := p.mapDerivedCategory ⋙ LT
-  let G := LS ⋙ q.mapDerivedCategory
-  let H := s.mapHomologicalComplex (.up ℤ) ⋙ q.mapHomologicalComplex (.up ℤ) ⋙
-    DerivedCategory.Q
-  let α : DerivedCategory.Q ⋙ F ⟶ H :=
-    whiskerRight p.mapDerivedCategoryFactors.hom LT ≫
-      whiskerLeft (p.mapHomologicalComplex (.up ℤ)) εT ≫
-        whiskerRight (NatIso.mapHomologicalComplex c (.up ℤ)).hom DerivedCategory.Q
-  let β : DerivedCategory.Q ⋙ G ⟶ H :=
-    whiskerRight εS q.mapDerivedCategory ≫
-      whiskerLeft (s.mapHomologicalComplex (.up ℤ)) q.mapDerivedCategoryFactors.hom
-  have hβ (X) (hX : R X) : IsIso (β.app X) := by
-    let : IsIso (εS.app X) := hS X hX
-    change IsIso (q.mapDerivedCategory.map (εS.app X) ≫
-      q.mapDerivedCategoryFactors.hom.app ((s.mapHomologicalComplex (.up ℤ)).obj X))
-    infer_instance
-  have hαgood (X) (hX : good X) : IsIso (α.app X) := by
-    let : IsIso (εT.app ((p.mapHomologicalComplex (.up ℤ)).obj X)) := hT X hX
-    change IsIso (LT.map (p.mapDerivedCategoryFactors.hom.app X) ≫
-      εT.app ((p.mapHomologicalComplex (.up ℤ)).obj X) ≫
-        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app X))
-    exact IsIso.comp_isIso' (by infer_instance)
-      (IsIso.comp_isIso' (hT X hX)
-        (Iso.isIso_hom (DerivedCategory.Q.mapIso
-          ((NatIso.mapHomologicalComplex c (.up ℤ)).app X))))
-  have hα (X) (hX : R X) : IsIso (α.app X) := by
-    obtain ⟨Y, r, hY, hr⟩ := hres X hX
-    have := hαgood Y hY
-    have := hβ Y (hgood Y hY)
-    have := hβ X hX
-    have : QuasiIso r := hr
-    exact isIso_on_resolution DerivedCategory.Q F G H α β r
-  exact normalizedComparisonDescent DerivedCategory.Q R ff F G H α β hα hβ
+  exact SequenceComparisonConstruction.derivedComparison p q s t LS LT εS εT c R good
+    ff hgood hres hS hT
 
 end SequenceDerivedProof
 set_option backward.isDefEq.respectTransparency false
@@ -984,11 +807,15 @@ theorem integralComparisonSystemScalarPullback_existsUnique
     intro X _
     obtain ⟨K, r, hK, hf, hr, _⟩ :=
       CochainComplex.exists_isKFlatResolutionIndependentCoefficients X
-    refine ⟨K, r, ⟨hK, ?_⟩, hr⟩
-    intro n
-    exact (exactFunctor _ _).prop_of_iso
-      (SheafOfModules.siteSheafTensorRightIso
-        (coefficientSequenceCommRingSheaf l E Y) (K.X n)).symm (hf n)
+    have hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite
+        (J := coefficientSequenceTopology (ProEt.topology Y))
+        (R := coefficientSequenceCommRingSheaf l E Y) (K.X n) := by
+      intro n
+      exact (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso
+          (coefficientSequenceCommRingSheaf l E Y) (K.X n)).symm (hf n)
+    have hgood : good K := ⟨hK, hflat⟩
+    exact ⟨K, r, hgood, hr⟩
   obtain ⟨ff⟩ := SequenceDerivedProof.kflatWhiskering (D := DerivedCategory B)
     (coefficientSequenceCommRingSheaf l E Y)
   exact SequenceDerivedProof.derivedComparison
@@ -1023,23 +850,8 @@ private theorem sequenceDirectId_apply (Y : Scheme.{t})
     ((sequenceDirectId l E Y).hom.app M).val.app (op (n, U)) x =
       M.val.map (Prod.mkHom (𝟙 n)
         ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ Y).hom.app U)).op x := by
-  let e := (AmbientPullbackTensor.pushId_existsUnique l E Y none).exists.choose
-  have he := (AmbientPullbackTensor.pushId_existsUnique l E Y none).exists.choose_spec
-  have hh := he M (n, U) ((e.inv.app M).val.app (op (n, U)) x)
-  have hi := congrArg (fun z ↦ z.val.app (op (n, U)) x) (e.inv_hom_id_app M)
-  change (e.hom.app M).val.app (op (n, U))
-    ((e.inv.app M).val.app (op (n, U)) x) = x at hi
-  change (e.hom.app M).val.app (op (n, U))
-    ((e.inv.app M).val.app (op (n, U)) x) =
-    M.val.map ((AmbientPullbackTensor.baseId Y none).inv.app (n, U)).op
-      ((e.inv.app M).val.app (op (n, U)) x) at hh
-  rw [hi] at hh
-  have hr := congrArg (fun z ↦ M.val.map
-    ((AmbientPullbackTensor.baseId Y none).hom.app (n, U)).op z) hh
-  have hc := moduleRestriction_inverse M.val
-    ((AmbientPullbackTensor.baseId Y none).app (n, U))
-      ((e.inv.app M).val.app (op (n, U)) x)
-  exact hc.symm.trans hr.symm
+  exact AmbientPullbackTensor.pushId_inverse_sections l E Y none M (n, U) x
+
 
 attribute [local irreducible] sequenceDirectId
 
@@ -1134,19 +946,13 @@ theorem integralComparisonSequenceScalarComposition_existsUnique (Y : Scheme.{t}
             (integralComparisonSequenceTensorSection l E L ι Y N U b x)) =
           integralComparisonSequenceTensorSection l E M (j.comp ι) Y N U
             (c * (integralComparisonSequenceScalarMap l L M j Y).hom.app U b) x := by
-  obtain ⟨A, hA⟩ := SequenceScalarProof.scalarPackageExists
-    (integralComparisonSequenceScalarMap l E L ι Y)
+  simp only [sequenceTensorSection_eq]
+  exact SequenceScalarConstruction.fixedScalarCompositionUnique
+    (sequenceScalarMapComp l E L ι M j Y).symm
     (integralComparisonSequenceScalarModel l E L ι Y)
-  obtain ⟨B, hB⟩ := SequenceScalarProof.scalarPackageExists
-    (integralComparisonSequenceScalarMap l L M j Y)
     (integralComparisonSequenceScalarModel l L M j Y)
-  obtain ⟨D, hD⟩ := SequenceScalarProof.scalarPackageExists
-    (integralComparisonSequenceScalarMap l E M (j.comp ι) Y)
     (integralComparisonSequenceScalarModel l E M (j.comp ι) Y)
-  have h := SequenceScalarProof.scalarCompositionUnique
-    (sequenceScalarMapComp l E L ι M j Y).symm A B D
-  rw [hA, hB, hD] at h
-  simpa only [sequenceTensorSection_eq] using h
+
 
 /-- The strict scalar associator used before realization.
 Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/
@@ -1206,12 +1012,11 @@ theorem integralComparisonSequenceScalarUnit_existsUnique (l : ℕ) [Fact l.Prim
         (a.hom.app N).val.app U
           (integralComparisonSequenceTensorSection l E E (AlgHom.id ℚ_[l] E) X N U s x) =
             s • x := by
-  obtain ⟨A, hA⟩ := SequenceScalarProof.scalarPackageExists
-    (integralComparisonSequenceScalarMap l E E (AlgHom.id ℚ_[l] E) X)
+  simp only [sequenceTensorSection_eq]
+  exact SequenceScalarConstruction.fixedScalarUnitUnique
+    (sequenceScalarMapId l E X)
     (integralComparisonSequenceScalarModel l E E (AlgHom.id ℚ_[l] E) X)
-  have h := SequenceScalarProof.scalarUnitUnique (sequenceScalarMapId l E X) A
-  rw [hA] at h
-  simpa only [sequenceTensorSection_eq] using h
+
 
 /-- Multiplication on the actual quotient systems is the scalar unit.
 Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/

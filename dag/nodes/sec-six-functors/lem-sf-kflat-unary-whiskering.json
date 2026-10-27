@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-kflat-unary-whiskering",
+ "kind": "statement",
+ "title": "Fully faithful restriction to K-flat representatives",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a topology with the module-sheafification assumptions, and R a commutative ring sheaf. Let A be its category of module sheaves with an existing derived category. For any target category D, restriction along the inclusion of independent-coefficient K-flat cochain complexes followed by the actual derived localization Q is fully faithful on functor categories, with independent object and Hom universes. The definitions and hypotheses are as in [def-pc-kflat-complex], [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0G7E; exact proof previously private in IntegralComparisonSequenceSystems."
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "every homotopy object has a K-flat resolution, giving the hypotheses of\nresolvingRepresentativesFullyFaithfulWhiskering on the K-flat full subcategory.\nTransport its product restriction comparison by quotientCompQhIso. Apply the\nprojection/diagonal construction unaryWhiskeringOfProduct to obtain unary full\nfaithfulness for the actual derived localization on cochain complexes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-sf-unary-whiskering-from-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-sf-unary-whiskering-from-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0G7E; exact proof previously private in IntegralComparisonSequenceSystems.",
+  "note": "Complete existing project proof extracted without adding a hypothesis or a hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to K flat cochain representatives is fully faithful on functor categories by resolving representatives",
+   "results": "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, right-exact functor full faithfulness and generic flat/localization results.",
+   "date": "2026-10-27",
+   "verdict": "No restriction to these independent-coefficient K-flat representatives."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "The fully faithful restriction along a localization functor, Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-27",
+   "verdict": "The resolving-subcategory restriction is not simply the localization functor; the project resolving-representative comparison is used."
+  },
+  {
+   "tool": "grep",
+   "query": "FullyFaithfulWhiskering|fullyFaithfulWhiskering|resolvingRepresentatives",
+   "results": "Five Mathlib hits for localization and Serre-class localization; no resolving-representative comparison.",
+   "date": "2026-10-27",
+   "verdict": "The existing project proof is the exact implementation to extract."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compilation of the ambient construction consumer: Fully faithful restriction to K-flat representatives.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.KFlatUnaryWhiskering",
+  "file": "lean/Sheaf/CategoryTheory/KFlatUnaryWhiskering.lean",
+  "declaration": "SequenceComparisonConstruction.kflatWhiskering",
+  "statement": "theorem kflatWhiskering\n    {D : Type e} [Category.{f} D]\n    {C : Type a} [Category.{b} C] [EssentiallySmall.{c} C]\n    {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{c} RingCat.{c})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{c}]\n    [HasSheafify J AddCommGrpCat.{c}]\n    (R : Sheaf J CommRingCat.{c})\n    [HasDerivedCategory.{d} (SheafOfModules.{c}\n      ((sheafCompose J (forget₂ CommRingCat.{c} RingCat.{c})).obj R))] :\n    let A := SheafOfModules.{c}\n      ((sheafCompose J (forget₂ CommRingCat.{c} RingCat.{c})).obj R)\n    let P : ObjectProperty (CochainComplex A ℤ) :=\n      CochainComplex.IsKFlatIndependentCoefficients (R := R)\n    Nonempty (((whiskeringLeft P.FullSubcategory (DerivedCategory A) D).obj\n      (P.ι ⋙ DerivedCategory.Q)).FullyFaithful)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

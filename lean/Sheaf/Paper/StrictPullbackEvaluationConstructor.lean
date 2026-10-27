@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.StrictQuotientExpressions
-import all Sheaf.Paper.AmbientPullbackTensorCoherence
+import all Sheaf.Paper.AmbientPullbackSiteData
+import Sheaf.CategoryTheory.SequenceModulePullbackEvaluation
 import Sheaf.AlgebraicGeometry.ProEtaleCoefficientPullbackExact
 
 /-! # Evaluation and exactness of strict sequence inverse image -/

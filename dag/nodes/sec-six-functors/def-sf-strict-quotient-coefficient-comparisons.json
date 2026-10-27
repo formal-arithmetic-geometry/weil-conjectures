@@ -1,0 +1,129 @@
+{
+ "id": "def-sf-strict-quotient-coefficient-comparisons",
+ "kind": "definition",
+ "title": "Canonical strict quotient coefficient comparisons",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, W a scheme and g:V→W a scheme map. The recorded small-model ring inverse image and transport to that small model define the coefficient comparison as the adjunct of the constant-section map, at every positive exponent n+1. Restriction of a sequence complex gives its actual completed-coefficient tower. The unitSection is the degree-zero coefficient section transported by the single-object unit isomorphism. completedTowerDerivedTransition is obtained by localization of the actual evaluation transition. completedTowerLevelIso is the composite of the exact restriction/evaluation factor isomorphisms. All are explicit constructions on the original sites and retain every quotient transition. The definitions and hypotheses are as in [def-pur-strict-quotient-expressions], [def-weil-proetale-inverse-image], [def-coef-normalized-dvr-tower].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 05RU, and sites.tex 00VC, 03D2. Existing concrete definitions in QuotientExpressionStrictKFlatTowers, moved verbatim."
+ },
+ "stmt_deps": [
+  "def-pur-strict-quotient-expressions",
+  "def-weil-proetale-inverse-image",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified small-model site inverse image and constant-section unit to form the actual ring adjunct. Restrict scalars along the completed coefficient projections to retain the given sequence tower. The single-object unit comparison gives the specified degree-zero unit section.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip both derived evaluation functors with their exact-localization factor isomorphisms, and lift the natural transformation obtained from the actual ordinary evaluation transition. Compose restriction and evaluation factor isomorphisms to form completedTowerLevelIso. These are the original definition bodies verbatim; they assert no new invertibility or cartesian-transition condition.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 05RU, and sites.tex 00VC, 03D2. Existing concrete definitions in QuotientExpressionStrictKFlatTowers, moved verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of constant coefficient rings on a pro etale site and quotient transitions of the degree zero tensor unit of cochain complexes",
+   "results": "Generic cochain single-object and degree-zero maps, tensor algebra and shifts. No actual pro-etale quotient coefficient maps.",
+   "date": "2026-10-27",
+   "verdict": "The concrete constructions are project-specific and are moved verbatim."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic hom-equivalence naturality.",
+   "date": "2026-10-27",
+   "verdict": "An API used by the existing coefficient-composition proof, not a duplicate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "modelCommRingMapAdjunct_isIso|quotientExpressionStrictKFlatTowers|coefficientFiniteQuotient",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "Existing project constructions are retained, with their original statements and definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility of the existing strict quotient consumer: canonical coefficient, unit and localized tower constructions.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientExpressionCoefficientData",
+  "file": "lean/Sheaf/Paper/QuotientExpressionCoefficientData.lean",
+  "declaration": "WeilConjectures.StrictQuotient.constantCoefficientMap",
+  "declarations": [
+   "WeilConjectures.StrictQuotient.coefficientInverseImage",
+   "WeilConjectures.StrictQuotient.coefficientToModel",
+   "WeilConjectures.StrictQuotient.constantCoefficientMap",
+   "WeilConjectures.StrictQuotient.completedTower",
+   "WeilConjectures.StrictQuotient.unitSection",
+   "WeilConjectures.StrictQuotient.completedTowerDerivedTransition",
+   "WeilConjectures.StrictQuotient.completedTowerLevelIso"
+  ],
+  "statement": "def constantCoefficientMap {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :\n    (coefficientInverseImage.{t, u} g).obj\n        ((coefficientToModel.{t, u} W).obj (integralCoefficientCommRingSheaf l E W n)) ⟶\n      (coefficientToModel.{t, u} V).obj (integralCoefficientCommRingSheaf l E V n)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

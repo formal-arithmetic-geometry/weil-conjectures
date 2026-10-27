@@ -1,0 +1,198 @@
+{
+ "id": "lem-sf-ambient-pullback-site-constructions",
+ "kind": "statement",
+ "title": "Canonical ambient ringed-site pullbacks and section-normalized comparators",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, f:X→Y and g:Y→Z arbitrary scheme maps, and s a positive finite coefficient exponent or the entire ringed sequence site [def-coef-ringed-sequence-site]. The sectionwise module direct image for the actual structural constant-section ring map has an exact ordinary left adjoint. There exists a unique direct-image comparison push(fg)≅push(f);push(g) whose value at any module section is restriction along baseComp(f,g).inv. There is likewise a unique identity direct-image comparison given by baseId.inv. The specified adjunction mates define comp and identity; their exact termwise localizations define derivedComp and derivedIdentity. These use the original sites and coefficient sheaves [def-coef-semilinear-system-models], with coefficients in max u (t+1) and independent site object and Hom universes. The definitions and hypotheses are as in [def-weil-l-adic-coefficient-extension], [def-weil-scheme-morphism-properties], [def-weil-pbc-proetale-site], [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category], [def-weil-pbc-proetale-operations], [lem-coef-semilinear-derived-sections], [lem-weil-pbc-site-morphism-composition], [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], [def-pc-kflat-complex], [def-pc-sheaf-restrict-scalars], [lem-pur-site-restriction-module-adjunction-exact], [def-weil-pbc-composite-adjunction], [def-pc-tensor-complex-sheaves].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03EL; sites.tex 03CB; sites-cohomology.tex 06YN, 06YS, 07A4, 0G7E and 0G7D. Specialized construction and proof from the ambient coherence argument."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-composite-adjunction",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual coefficient ring sheaf and direct structural maps on the finite or product sequence site. Sheafification naturality gives vertical compatibility, and naturality in the quotient ring maps gives all horizontal compatibility.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary module pullback existence theorem at independent universes. Additivity follows from the additive right adjoint, and finite colimits from left adjointness. Compare finite pullback with coefficientProEtaleModulePullback to obtain finite limits. For the sequence site construct the direct-image/evaluation comparison sectionwise and apply sequenceModulePullbackEvaluation_isIso to its inverse mate. Underlying section evaluations preserve finite limits at every index and reflect them jointly; this proves simultaneous exactness.",
+   "uses": [
+    "lem-pur-coefficient-pullback-exact",
+    "lem-sf-sequence-module-pullback-evaluation",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the direct-image composite, extend equality of the constant-section maps by sheafification. This verifies the coefficient linearity of restriction along the canonical fibre-product comparison, including the same-index vertical comparison in the sequence case. Restriction by the inverse comparison gives the inverse module map; sectionwise equality proves uniqueness. The identity proof uses the same constant-section test and the base-change identity restriction. Form the specified left mates and exact derived functor images; no new assertion of their coherence is made here.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-sf-sequence-module-pullback-evaluation",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-fibre-product",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for exact module pullbacks is compatible with composition and uniquely determined by its equations on ordinary tensors and K-flat complex representatives",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; no simultaneous ringed-site or representative-normalized comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified ambient constructions or bundle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "leftAdjointCompIso, leftAdjointCompIso_assoc, leftAdjointCompIso_comp_id, leftAdjointCompIso_id_comp and component/mate equations.",
+   "date": "2026-10-26",
+   "verdict": "Supplies abstract mate coherence; the section comparisons must still be checked on the actual finite/sequence site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the canonical tensor comparison for composition of module inverse image functors and localization to derived categories",
+   "results": "Localization.Monoidal.tensor_comp, tensorBifunctorIso and lifting/curriedTensor comparison lemmas.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the specified TensorComparisonModel and chosen ambient adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*comp|comp.*tensor; ringMap.*isIso; cochain_tensor_model_rigidity",
+   "results": "Mathlib tensor algebra, Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence, Sheaf.Algebra.Homology.CochainTensorModelRigidity and the existing bundle uniqueness; no existing theorem about these ambient composites.",
+   "date": "2026-10-26",
+   "verdict": "Existing general tools inform the proofs; no duplicate ambient construction or theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ambient pullback tensor coherence, proof steps 1, 2 and 8.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientPullbackSiteData",
+  "file": "lean/Sheaf/Paper/AmbientPullbackSiteData.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.pushComp_existsUnique",
+  "statement": "theorem pushComp_existsUnique {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (s : Option ℕ) :\n    ∃! e : push ell E (f ≫ g) s ≅ push ell E f s ⋙ push ell E g s,\n      ∀ (M : Modules ell E X s) (U : Site Z s)\n        (m : M.val.obj (op ((base (f ≫ g) s).obj U))),\n        (e.hom.app M).val.app (op U) m =\n          M.val.map ((baseComp f g s).inv.app U).op m",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.AmbientPullbackTensor.Site",
+   "WeilConjectures.AmbientPullbackTensor.siteCategory",
+   "WeilConjectures.AmbientPullbackTensor.topology",
+   "WeilConjectures.AmbientPullbackTensor.siteSmall",
+   "WeilConjectures.AmbientPullbackTensor.coefficients",
+   "WeilConjectures.AmbientPullbackTensor.Modules",
+   "WeilConjectures.AmbientPullbackTensor.Derived",
+   "WeilConjectures.AmbientPullbackTensor.base",
+   "WeilConjectures.AmbientPullbackTensor.baseContinuous",
+   "WeilConjectures.AmbientPullbackTensor.ringComponent",
+   "WeilConjectures.AmbientPullbackTensor.ringComponent_naturality",
+   "WeilConjectures.AmbientPullbackTensor.ringUnit",
+   "WeilConjectures.AmbientPullbackTensor.ringPush",
+   "WeilConjectures.AmbientPullbackTensor.ringPushRightAdjoint",
+   "WeilConjectures.AmbientPullbackTensor.ringPull",
+   "WeilConjectures.AmbientPullbackTensor.ringMap",
+   "WeilConjectures.AmbientPullbackTensor.moduleRingUnit",
+   "WeilConjectures.AmbientPullbackTensor.push",
+   "WeilConjectures.AmbientPullbackTensor.pushRightAdjoint",
+   "WeilConjectures.AmbientPullbackTensor.pull",
+   "WeilConjectures.AmbientPullbackTensor.adjunction",
+   "WeilConjectures.AmbientPullbackTensor.pullExact",
+   "WeilConjectures.AmbientPullbackTensor.pullAdditive",
+   "WeilConjectures.AmbientPullbackTensor.pullLimits",
+   "WeilConjectures.AmbientPullbackTensor.pullColimits",
+   "WeilConjectures.AmbientPullbackTensor.derivedPull",
+   "WeilConjectures.AmbientPullbackTensor.baseComp",
+   "WeilConjectures.AmbientPullbackTensor.ringPushComp",
+   "WeilConjectures.AmbientPullbackTensor.ringComp",
+   "WeilConjectures.AmbientPullbackTensor.pushComp_existsUnique",
+   "WeilConjectures.AmbientPullbackTensor.pushComp",
+   "WeilConjectures.AmbientPullbackTensor.comp",
+   "WeilConjectures.AmbientPullbackTensor.baseId",
+   "WeilConjectures.AmbientPullbackTensor.pushId_existsUnique",
+   "WeilConjectures.AmbientPullbackTensor.pushId",
+   "WeilConjectures.AmbientPullbackTensor.identity",
+   "WeilConjectures.AmbientPullbackTensor.derivedComp",
+   "WeilConjectures.AmbientPullbackTensor.derivedIdentity",
+   "WeilConjectures.AmbientPullbackTensor.generator",
+   "WeilConjectures.AmbientPullbackTensor.scalar"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

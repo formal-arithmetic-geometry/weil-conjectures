@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-fixed-scalar-composition-unique",
+ "kind": "statement",
+ "title": "Normalized scalar composition for fixed cochain models",
+ "statement": "For three composable commutative ring sheaves and their ring map composition equality, fix a derived cochain scalar model for each of the three maps. There exists a unique scalar extension composition isomorphism carrying c tensor (b tensor x) to c psi(b) tensor x in every section. Models, site hypotheses and tensor generators are those of [def-weil-pbc-system-scalar-model] and [lem-pur-derived-change-of-rings]; independent universes are retained.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK; sites-cohomology.tex 06YY. Exact proof previously private in IntegralComparisonSequenceSystems."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-system-scalar-model",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Construct normalized scalar packages whose models are exactly the supplied models. Apply the package-level normalized composition comparison and its uniqueness. Transport the result through the model equalities in the generic context. This proves the comparison for the fixed models without unfolding any particular coefficient sequence.",
+   "uses": [
+    "lem-sf-system-scalar-package-exists",
+    "lem-sf-system-scalar-composition-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-scalar-package-exists",
+  "lem-sf-system-scalar-composition-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK; sites-cohomology.tex 06YY. Exact proof previously private in IntegralComparisonSequenceSystems.",
+  "note": "Complete generic transport of existing comparison; no new hole or hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of scalar extension models with a fixed cochain model, normalized tensor units and scalar composition isomorphisms",
+   "results": "ModuleCat.ExtendScalars.hom_ext, ModuleCat.restrictCoextendScalarsAdj and ordinary algebra scalar-extension results. No SystemScalarModel result.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific normalized cochain-model package is not in Mathlib; the exact private project proof is extracted."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.SystemScalarModel",
+   "results": "No hits; unknown identifier in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific notion."
+  },
+  {
+   "tool": "grep",
+   "query": "SystemScalarModel|systemModelTmul",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project implementation with its complete proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compilation of the ambient consumer: fixed cochain scalar composition comparison.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FixedScalarCompositionUnique",
+  "file": "lean/Sheaf/CategoryTheory/FixedScalarCompositionUnique.lean",
+  "declaration": "SequenceScalarConstruction.fixedScalarCompositionUnique",
+  "statement": "theorem fixedScalarCompositionUnique\n    {R S T : Sheaf J CommRingCat.{sw}} {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T}\n    (hγ : γ = φ ≫ ψ)\n    (D1 : SheafOfModules.DerivedChangeOfRingsCochainModel φ)\n    (D2 : SheafOfModules.DerivedChangeOfRingsCochainModel ψ)\n    (D3 : SheafOfModules.DerivedChangeOfRingsCochainModel γ) :\n    ∃! a : D1.E ⋙ D2.E ≅ D3.E,\n      ∀ P U (c : T.obj.obj U) (b : S.obj.obj U) (x : P.val.obj U),\n        (a.hom.app P).val.app U\n          (SheafOfModules.systemModelTmul D2 (D1.E.obj P) U c\n            (SheafOfModules.systemModelTmul D1 P U b x)) =\n          SheafOfModules.systemModelTmul D3 P U (c * (ψ.hom.app U) b) x",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

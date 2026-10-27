@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-ambient-tensor-data-exists-unique",
+ "kind": "statement",
+ "title": "Unique normalized ambient tensor comparison",
+ "statement": "Let ell be prime and E a finite extension of Q_ell. For any scheme map f:X→Y, choose a positive finite coefficient level or the whole ringed sequence site, and the exact module inverse image constructed in [lem-sf-ambient-pullback-site-constructions]. Fix closed derived tensor structures A,B with representative models TA,TB [def-coef-semilinear-system-models]. There exists a unique BundledTensorComparison K for this inverse image [def-sf-bundled-tensor-comparison] satisfying TensorData.Normalized: the pure scalar-generator formula, naturality in both ordinary module arguments, invertibility of each total-complex comparison and preservation of flat-term K-flat representatives. All coefficient, object and Hom universes remain independent as in the constructions. The definitions and hypotheses are as in [def-sf-ordinary-tensor-pullback-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03EL; sites.tex 03CB; sites-cohomology.tex 06YN, 06YS, 07A4, 0G7E and 0G7D. Specialized construction and proof from the ambient coherence argument."
+ },
+ "stmt_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
+  "def-coef-semilinear-system-models",
+  "def-sf-bundled-tensor-comparison",
+  "def-sf-ordinary-tensor-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply sitePullbackTensorGenerators on the chosen site, using representable flatness of base change. In the sequence case the relevant structured-arrow category is a product with the identity-index structured-arrow category, hence cofiltered. Totalize and descend with IndependentTensorModel.modelOfOrdinary, then bundle the resulting comparison and its model. Transport the pure-section normalization by one_smul. Ordinary uniqueness and TensorModelUniqueness.bundled_unique identify all normalized bundles.",
+   "uses": [
+    "lem-sf-ambient-pullback-site-constructions",
+    "lem-sf-site-pullback-tensor-generators",
+    "lem-sf-exact-tensor-model-construction-independent",
+    "lem-sf-tensor-comparison-model-uniqueness",
+    "def-sf-bundled-tensor-comparison",
+    "def-sf-ordinary-tensor-pullback-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
+  "lem-sf-site-pullback-tensor-generators",
+  "lem-sf-exact-tensor-model-construction-independent",
+  "lem-sf-tensor-comparison-model-uniqueness",
+  "def-sf-bundled-tensor-comparison",
+  "def-sf-ordinary-tensor-pullback-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for exact module pullbacks is compatible with composition and uniquely determined by its equations on ordinary tensors and K-flat complex representatives",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; no simultaneous ringed-site or representative-normalized comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified ambient constructions or bundle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "leftAdjointCompIso, leftAdjointCompIso_assoc, leftAdjointCompIso_comp_id, leftAdjointCompIso_id_comp and component/mate equations.",
+   "date": "2026-10-26",
+   "verdict": "Supplies abstract mate coherence; the section comparisons must still be checked on the actual finite/sequence site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the canonical tensor comparison for composition of module inverse image functors and localization to derived categories",
+   "results": "Localization.Monoidal.tensor_comp, tensorBifunctorIso and lifting/curriedTensor comparison lemmas.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the specified TensorComparisonModel and chosen ambient adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*comp|comp.*tensor; ringMap.*isIso; cochain_tensor_model_rigidity",
+   "results": "Mathlib tensor algebra, Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence, Sheaf.Algebra.Homology.CochainTensorModelRigidity and the existing bundle uniqueness; no existing theorem about these ambient composites.",
+   "date": "2026-10-26",
+   "verdict": "Existing general tools inform the proofs; no duplicate ambient construction or theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ambient pullback tensor coherence, proof steps 1, 2 and 8.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientPullbackTensorData",
+  "file": "lean/Sheaf/Paper/AmbientPullbackTensorData.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.tensorData_existsUnique",
+  "statement": "theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)\n    (A : Tensor ell E Y s) (B : Tensor ell E X s)\n    (TA : TensorModels ell E Y s A) (TB : TensorModels ell E X s B) :\n    ∃! K : TensorData ell E f s A B TA TB, K.Normalized ell E f s A B TA TB",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.AmbientPullbackTensor.Tensor",
+   "WeilConjectures.AmbientPullbackTensor.TensorModels",
+   "WeilConjectures.AmbientPullbackTensor.tensor",
+   "WeilConjectures.AmbientPullbackTensor.tensorHom",
+   "WeilConjectures.AmbientPullbackTensor.pure",
+   "WeilConjectures.AmbientPullbackTensor.total",
+   "WeilConjectures.AmbientPullbackTensor.FlatRepresentative",
+   "WeilConjectures.AmbientPullbackTensor.TensorData",
+   "WeilConjectures.AmbientPullbackTensor.TensorData.Normalized",
+   "WeilConjectures.AmbientPullbackTensor.tensorData_existsUnique",
+   "WeilConjectures.AmbientPullbackTensor.tensorData",
+   "WeilConjectures.AmbientPullbackTensor.chainComp",
+   "WeilConjectures.AmbientPullbackTensor.CompositionLaws"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

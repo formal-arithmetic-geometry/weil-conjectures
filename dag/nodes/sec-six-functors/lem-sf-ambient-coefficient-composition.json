@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-ambient-coefficient-composition",
+ "kind": "statement",
+ "title": "Composition of the actual ambient coefficient maps",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, f:X→Y and g:Y→Z arbitrary scheme maps, and s a finite exponent or the entire ringed sequence site [lem-sf-ambient-pullback-site-constructions]. For the actual coefficient adjunction maps c_f=ringMap(f), the mate alpha=ringComp(f,g) of the canonical direct-image comparison satisfies c_fg=alpha;ringPull(f)(c_g);c_f. The equation is on the whole ringed site before evaluation.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03EL; sites.tex 03CB; sites-cohomology.tex 06YN, 06YS, 07A4, 0G7E and 0G7D. Specialized construction and proof from the ambient coherence argument."
+ },
+ "stmt_deps": [
+  "lem-sf-ambient-pullback-site-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Check that ringUnit(g) followed by g_* ringUnit(f) and ringPushComp(f,g) equals ringUnit(fg). At a finite level this follows by testing on the constant presheaf sheafification unit and its naturality at the fibre-product comparison. At sequence level the comparison is vertical at the same index, so its restriction is exactly the corresponding finite coefficient restriction.",
+   "uses": [
+    "lem-sf-ambient-pullback-site-constructions",
+    "def-weil-pbc-constant-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For abstract adjunctions, rewrite the hom bijection of the inverse compositor using unit_conjugateEquiv_symm and naturality. Apply comp_homEquiv and the two naturality equations for adjuncts. The adjunct of the asserted composite is precisely the direct-image composite from the first step; injectivity proves the coefficient equation.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for exact module pullbacks is compatible with composition and uniquely determined by its equations on ordinary tensors and K-flat complex representatives",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; no simultaneous ringed-site or representative-normalized comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified ambient constructions or bundle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "leftAdjointCompIso, leftAdjointCompIso_assoc, leftAdjointCompIso_comp_id, leftAdjointCompIso_id_comp and component/mate equations.",
+   "date": "2026-10-26",
+   "verdict": "Supplies abstract mate coherence; the section comparisons must still be checked on the actual finite/sequence site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the canonical tensor comparison for composition of module inverse image functors and localization to derived categories",
+   "results": "Localization.Monoidal.tensor_comp, tensorBifunctorIso and lifting/curriedTensor comparison lemmas.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the specified TensorComparisonModel and chosen ambient adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*comp|comp.*tensor; ringMap.*isIso; cochain_tensor_model_rigidity",
+   "results": "Mathlib tensor algebra, Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence, Sheaf.Algebra.Homology.CochainTensorModelRigidity and the existing bundle uniqueness; no existing theorem about these ambient composites.",
+   "date": "2026-10-26",
+   "verdict": "Existing general tools inform the proofs; no duplicate ambient construction or theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ambient pullback tensor coherence, proof steps 1.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientCoefficientComposition",
+  "file": "lean/Sheaf/Paper/AmbientCoefficientComposition.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.ringMap_composition",
+  "statement": "theorem ringMap_composition {X Y Z : Scheme.{t}}\n    (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :\n    ringMap ell E (f ≫ g) s =\n      (ringComp f g s).hom.app (coefficients ell E Z s) ≫\n        (ringPull f s).map (ringMap ell E g s) ≫ ringMap ell E f s",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

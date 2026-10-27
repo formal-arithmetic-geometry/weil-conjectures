@@ -1,0 +1,109 @@
+{
+ "id": "lem-sf-system-scalar-composition-unique",
+ "kind": "statement",
+ "title": "Unique generator-normalized scalar composition",
+ "statement": "On a site satisfying the SystemScalarModel sheafification and smallness assumptions, let phi:R→S, psi:S→T and gamma:R→T satisfy gamma=phi≫psi. For SystemScalarModels A,B,D for these maps, there is a unique isomorphism A.model.E⋙B.model.E≅D.model.E which sends the iterated tensor c tensor (b tensor x) to (c*psi(b)) tensor x on every section. The definitions and hypotheses are as in [def-weil-pbc-system-scalar-model].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK; sites-cohomology.tex 06YY. Exact proof previously private in IntegralComparisonSequenceSystems."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-system-scalar-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing scalar composition isomorphism and its pure tensor equation for\nexistence. For uniqueness transpose under the second ordinary adjunction, then use local unit\ntensor generators for the first model. Both transposes agree on these generators by the two\nspecified tensor formulas and the normalized unit equation.",
+   "uses": [
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-system-scalar-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-scalar-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK; sites-cohomology.tex 06YY. Exact proof previously private in IntegralComparisonSequenceSystems.",
+  "note": "Complete existing project proof extracted without adding a hypothesis or a hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of scalar extension models with a fixed cochain model, normalized tensor units and scalar composition isomorphisms",
+   "results": "ModuleCat.ExtendScalars.hom_ext, ModuleCat.restrictCoextendScalarsAdj and ordinary algebra scalar-extension results. No SystemScalarModel result.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific normalized cochain-model package is not in Mathlib; the exact private project proof is extracted."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.SystemScalarModel",
+   "results": "No hits; unknown identifier in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific notion."
+  },
+  {
+   "tool": "grep",
+   "query": "SystemScalarModel|systemModelTmul",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project implementation with its complete proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compilation of the ambient construction consumer: Unique generator-normalized scalar composition.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemScalarCompositionUnique",
+  "file": "lean/Sheaf/CategoryTheory/SystemScalarCompositionUnique.lean",
+  "declaration": "SequenceScalarConstruction.scalarCompositionUnique",
+  "statement": "theorem scalarCompositionUnique\n    {R S T : Sheaf J CommRingCat.{sw}} {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T}\n    (hγ : γ = φ ≫ ψ)\n    (A : SheafOfModules.SystemScalarModel φ) (B : SheafOfModules.SystemScalarModel ψ)\n    (D : SheafOfModules.SystemScalarModel γ) :\n    ∃! a : A.model.E ⋙ B.model.E ≅ D.model.E,\n      ∀ P U (c : T.obj.obj U) (b : S.obj.obj U) (x : P.val.obj U),\n        (a.hom.app P).val.app U\n          (SheafOfModules.systemModelTmul B.model (A.model.E.obj P) U c\n            (SheafOfModules.systemModelTmul A.model P U b x)) =\n          SheafOfModules.systemModelTmul D.model P U (c * (ψ.hom.app U) b) x",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "id": "lem-sf-ambient-pushforward-composition-inverse-sections",
+ "kind": "statement",
+ "title": "Inverse section formula for ambient pushforward composition",
+ "statement": "Fix the prime and finite coefficient field and a finite or whole-sequence ambient site. For the selected pushforward composition comparison, the inverse component on every module section is restriction along the forward canonical fibre-product composition comparison. This includes horizontal sequence arrows. The actual functors, selected isomorphism, site size and independent coefficient universe are those of [lem-sf-ambient-pullback-site-constructions].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03D3 and 0941; inverse cancellation of the specified fibre-product-pasting section formula."
+ },
+ "stmt_deps": [
+  "lem-sf-ambient-pullback-site-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the forward comparison formula on the inverse image of the section. The isomorphism inverse law identifies its left side with the section. Restrict by the forward fibre-product comparison. Functoriality of the module presheaf and the fibre-product inverse law cancel the composite with its inverse restriction. Reverse the resulting equality to obtain the inverse section formula.",
+   "uses": [
+    "lem-sf-ambient-pullback-site-constructions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-pullback-site-constructions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03D3 and 0941; existing IntegralComparisonSequenceSystems inverse section calculation, generalized to either ambient site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse of a natural isomorphism of module sheaf pushforwards acts by restriction along the forward base change comparison",
+   "results": "pushforwardNatIso_inv, sheafPushforwardContinuousComp_inv_app_val_app, and pushforwardComp_inv_app_val_app.",
+   "date": "2026-10-27",
+   "verdict": "These concern constructed Mathlib comparisons; the selected project comparison is determined by its section formula, so inverse cancellation identifies its inverse."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp_inv_app_val_app",
+   "results": "One exact generic Mathlib pushforward composition inverse equation.",
+   "date": "2026-10-27",
+   "verdict": "The chosen project comparison also includes fibre-product pasting; derive its inverse from its specification."
+  },
+  {
+   "tool": "grep",
+   "query": "pushComp_inverse_sections|pushId_inverse_sections",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "Complete inverse-cancellation proof supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compilation of the ambient consumer: inverse section formula for composition.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientPushforwardCompositionSections",
+  "file": "lean/Sheaf/Paper/AmbientPushforwardCompositionSections.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.pushComp_inverse_sections",
+  "statement": "theorem pushComp_inverse_sections {V W Z : Scheme.{t}}\n    (h : Z ⟶ W) (k : W ⟶ V) (s : Option ℕ) (M : Modules ell E Z s)\n    (U : Site V s) (x : ((push ell E h s ⋙ push ell E k s).obj M).val.obj (op U)) :\n    (((pushComp_existsUnique ell E h k s).exists.choose.inv.app M).val.app (op U)) x =\n      M.val.map ((baseComp h k s).hom.app U).op x",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c03e3",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T205959-L-1641374",
+  "kind": "interface",
+  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+ }
+}
