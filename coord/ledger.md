@@ -19975,3 +19975,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/F3/Sheaf.Paper.FiniteSectionIntegratedSpecializationIntegrationBaseChange (stage 3; reviewer FIX; first push; landing 20261027T205942-L-1636873 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:59 L: merged deliver/F3/Sheaf.Paper.RingEndpointScalarRestrictions (stage 3; reviewer PASS; first push; landing 20261027T205944-L-1637097 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:59 L: merged deliver/F5/Sheaf.Paper.EtaleCofinalExtensionExistence (stage 3; reviewer PASS; first push; landing 20261027T205945-L-1637494 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:59 L: merged deliver/F6/Sheaf.Paper.ExceptionalProScalarActions (stage 3; reviewer PASS; first push; landing 20261027T205946-L-1637809 (interface); batch 20261027T205736; modules 1; new nodes 0)
