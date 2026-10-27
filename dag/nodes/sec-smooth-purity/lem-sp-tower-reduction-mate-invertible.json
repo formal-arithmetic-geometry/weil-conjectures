@@ -15,9 +15,24 @@
  ],
  "proof": [
   {
-   "text": "Realize integer towers and quotient module systems on the sequence site. The section-normalized forgetful square identifies the given module inverse image with geometric inverse image: at each level the normalized constant Z/ell^(n+1) action is unique, and all maps of the underlying torsion sheaves are linear. Retain the actual quotient transitions.",
+   "text": "The ordinary reduction unit is the cokernel of the variable-prime-power multiplication map on the power-twisted tower. Evaluate at each level and apply exact inverse image to the source cokernel. Additivity preserves prime-power multiplication. The ordinary mate, after forgetting and composing with the inverse of the forgetful-square isomorphism, commutes with these cokernel projections by the unit-mate equation. Uniqueness of cokernels makes each component invertible. The faithful exact forgetful functor reflects invertibility back to systems.",
    "uses": [
-    "lem-pur-torsion-sheaf-constant-module",
+    "lem-sfb-power-system-ordinary-cokernel",
+    "lem-sp-tower-integral-class-pullback",
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Use the torsion-free power-system resolutions. Ordinary reduction preserves quasi-isomorphisms between regular complexes, so its resolving-class derived computation makes the supplied universal-derived counit invertible on every regular complex. Exact inverse image preserves monic prime-power multiplication, hence the same resolution computes both source and target reduction.",
+   "uses": [
+    "lem-sfb-power-system-acyclic-resolution",
+    "lem-sp-tower-integral-class-pullback",
+    "def-sp-tower-class-reduction",
     "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
@@ -27,20 +42,10 @@
    }
   },
   {
-   "text": "Apply algebra-diagram extension/pullback coherence with constant base Z and the quotient diagram R. Balanced association on flat-term K-flat representatives gives an invertible comparison between exact inverse image after derived reduction and derived reduction after exact inverse image, on whole strict systems.",
+   "text": "Compare the specified derived mate on a cochain representative with the ordinary mate by applying the target adjunction hom equivalence. The unit-mate equation, naturality of the localized forgetful square, the localization composition factors, and the two recorded representative transpose equations identify the two composites. On a regular resolution all other factors are invertible, so the derived mate is invertible. Every derived object is isomorphic to the localization of such a resolution; naturality transports invertibility.",
    "uses": [
-    "lem-pur-algebra-diagram-pullback-extension-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
-   }
-  },
-  {
-   "text": "Transport this comparison to the specified reduction functors using their universal derived counits. Their representative transpose equations identify its inverse as the canonical adjunction mate: its transpose is inverse image of the source adjunction unit followed by the derived forgetful square. Equality on representatives extends by localization, and injectivity of the target hom equivalence identifies the components. Hence the specified mate is invertible.",
-   "uses": [
-    "def-sp-tower-class-reduction"
+    "def-sp-tower-class-reduction",
+    "lem-sfb-power-system-acyclic-resolution"
    ],
    "elementary": false,
    "source": {
@@ -50,15 +55,18 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-torsion-sheaf-constant-module",
-  "def-weil-proetale-inverse-image",
-  "lem-pur-algebra-diagram-pullback-extension-coherence",
-  "def-sp-tower-class-reduction"
+  "lem-sfb-power-system-ordinary-cokernel",
+  "lem-sp-tower-integral-class-pullback",
+  "def-sp-tower-class-reduction",
+  "lem-sfb-power-system-acyclic-resolution",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C5",
+  "date": "2026-10-27",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+  "place": "Classes proof (2), integral quotient reduction. Shorter route using the existing power-system ordinary cokernel and regular resolving-class calculation instead of general algebra-diagram extension coherence."
  },
  "mathlib_searches": [
   {
@@ -135,9 +143,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "C5",
   "result": "pass",
-  "landing": "20261027T151745-L-1203932",
+  "landing": "20261027T180512-L-3867950",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
