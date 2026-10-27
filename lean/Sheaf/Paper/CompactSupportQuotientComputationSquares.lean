@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CompactSupportQuotientCocycleData
+import Sheaf.Paper.CompactSupportQuotientComputationSquareLeft
+import Sheaf.Paper.CompactSupportQuotientComputationSquareRight
 
 /-! # Universal comparison squares for quotient chain maps
 
@@ -91,6 +93,7 @@ theorem compactSupportQuotient_computation_squares (W : Scheme.{u})
             (compactSupportQuotientComputation l E W m P) ≫
           pbcComplexCounit.{u} (compactSupportLevelSheafQuotient l E W m n h)
             ((compactSupportQuotientComplex l E W m).obj P) ≫ DerivedCategory.Q.map b) := by
-  sorry
+  exact ⟨compactSupportQuotient_computation_square_left l E W m n h P _hP _hf a b hdata,
+    compactSupportQuotient_computation_square_right l E W m n h P _hP _hf a b hdata⟩
 
 end WeilConjectures
