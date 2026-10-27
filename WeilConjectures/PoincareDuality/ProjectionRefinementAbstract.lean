@@ -149,4 +149,58 @@ lemma whiskerRight_refinement_comp_exceptionalProjection
   simp only [P₁.map_comp, Category.assoc]
   rfl
 
+section Trivial
+
+open Functor.OplaxMonoidal
+
+variable {C : Type*} [Category C] [MonoidalCategory C]
+
+lemma id_projectionMorphism (A B : C) :
+    (Adjunction.id (C := C)).projectionMorphism A B = 𝟙 _ := by
+  simp only [projectionMorphism, id_δ, Category.id_comp, homEquiv_unit]
+  simp
+
+variable {Gs G : C ⥤ C} [Gs.OplaxMonoidal] (ag : Gs ⊣ G) (ηs : Gs ≅ 𝟭 C)
+
+lemma projectionMorphism_comp_conjugate_id
+    (hηs : ∀ X Y, δ Gs X Y ≫ (ηs.hom.app X ⊗ₘ ηs.hom.app Y) = ηs.hom.app (X ⊗ Y)) (A B : C) :
+    ag.projectionMorphism A B ≫
+        (conjugateIsoEquiv ag Adjunction.id ηs.symm).hom.app (A ⊗ Gs.obj B) =
+      (conjugateIsoEquiv ag Adjunction.id ηs.symm).hom.app A ▷ B ≫ A ◁ ηs.inv.app B := by
+  rw [projectionMorphism_eq_of_iso ag Adjunction.id ηs (fun X Y ↦ by simpa using hηs X Y),
+    id_projectionMorphism]
+  have h := (conjugateIsoEquiv ag Adjunction.id ηs.symm).hom.naturality (A ◁ ηs.inv.app B)
+  simp only [Functor.id_map] at h
+  simp only [Category.id_comp, Category.assoc, h]
+  rw [← Category.assoc ((conjugateIsoEquiv Adjunction.id ag ηs).hom.app _)]
+  erw [(conjugateIsoEquiv ag Adjunction.id ηs.symm).inv_hom_id_app]
+  simp
+
+
+open Functor.LaxMonoidal in
+/-- **The exceptional projection morphism of the trivial compactification** `(j, 𝟙)`, for
+abstract adjunctions: through the identification `G ≅ 𝟭` conjugate to `ηs : Gs ≅ 𝟭`, the composite
+of the projection morphism of `Gs ⊣ G`, the inverse projection comparison of `I ⊣ Is` and
+`Is ηs`, followed by the projection comparison of `I ⊣ Is`, is the identification. -/
+lemma trivial_exceptionalProjection_comp_projectionComparison {D : Type*} [Category D]
+    [MonoidalCategory D] {I : D ⥤ C} {Is : C ⥤ D} [Is.LaxMonoidal] (bi : I ⊣ Is)
+    (hηs : ∀ X Y, δ Gs X Y ≫ (ηs.hom.app X ⊗ₘ ηs.hom.app Y) = ηs.hom.app (X ⊗ Y)) (K : D) (B : C)
+    [IsIso (bi.projectionComparison K (Gs.obj B))] :
+    (ag.projectionMorphism (I.obj K) B ≫
+        G.map (inv (bi.projectionComparison K (Gs.obj B)) ≫ I.map (K ◁ Is.map (ηs.hom.app B)))) ≫
+      (conjugateIsoEquiv ag Adjunction.id ηs.symm).hom.app (I.obj (K ⊗ Is.obj B)) ≫
+        bi.projectionComparison K B =
+      (conjugateIsoEquiv ag Adjunction.id ηs.symm).hom.app (I.obj K) ▷ B := by
+  have hn := (conjugateIsoEquiv ag Adjunction.id ηs.symm).hom.naturality
+    (inv (bi.projectionComparison K (Gs.obj B)) ≫ I.map (K ◁ Is.map (ηs.hom.app B)))
+  simp only [Functor.id_map] at hn
+  have hq := bi.projectionComparison_natural_right K (ηs.hom.app B)
+  simp only [Functor.id_obj] at hq
+  rw [Category.assoc, reassoc_of% hn, hq, IsIso.inv_hom_id_assoc,
+    reassoc_of% (projectionMorphism_comp_conjugate_id ag ηs hηs (I.obj K) B),
+    ← whiskerLeft_comp, Iso.inv_hom_id_app]
+  erw [whiskerLeft_id, Category.comp_id]
+
+end Trivial
+
 end CategoryTheory.Adjunction
