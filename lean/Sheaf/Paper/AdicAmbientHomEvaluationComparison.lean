@@ -473,23 +473,23 @@ theorem adic_ambient_hom_evaluation_comparison
       (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
     (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
     Laws l T.left R A source := by
-  let c := adic_ambient_hom_evaluation_comparison_core D l hl T R presentation A source
+  have hc := adic_ambient_hom_evaluation_comparison_core D l hl T R presentation A source
     source_normalized
-  let h := adic_ambient_hom_evaluation_comparison_coherence D l hl T R presentation A source
+  have hh := adic_ambient_hom_evaluation_comparison_coherence D l hl T R presentation A source
     source_normalized
   exact
-    { bounded := c.bounded
-      isIso := c.isIso
-      postcomposition := c.postcomposition
-      transpose := c.transpose
-      naturality := c.naturality
-      evaluation := c.evaluation
-      signed_symmetry := h.signed_symmetry
-      finite_evaluation := h.finite_evaluation
-      finite_comparison := h.finite_comparison
-      extension := h.extension
-      tower := h.tower
-      identity := h.identity }
+    { bounded := hc.bounded
+      isIso := hc.isIso
+      postcomposition := hc.postcomposition
+      transpose := hc.transpose
+      naturality := hc.naturality
+      evaluation := hc.evaluation
+      signed_symmetry := hh.signed_symmetry
+      finite_evaluation := hh.finite_evaluation
+      finite_comparison := hh.finite_comparison
+      extension := hh.extension
+      tower := hh.tower
+      identity := hh.identity }
 
 end AmbientHomEvaluation
 end WeilConjectures.AdicQbarRealization
