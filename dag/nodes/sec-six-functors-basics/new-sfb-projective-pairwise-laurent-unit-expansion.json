@@ -42,28 +42,39 @@
  "statement": "Let k be a field and r>=3. Every family of units on standard projective-space chart overlaps admits, on each pair of distinct indices, a scalar unit on the first chart and an integer Laurent exponent expressing the overlap unit as the scalar restriction times the standard transition unit.",
  "proof": [
   {
-   "text": "Identify each distinct double-overlap ring with a polynomial ring in the remaining affine coordinates and one invertible ratio. Degree comparison forces a unit to have degree zero in the remaining variables. Extremal Laurent exponents add under multiplication, so the unit is a scalar times one Laurent monomial; the scalar is nonzero.",
+   "text": "Use chartRingEquiv to identify the j-th chart section ring R with k[X_l : l != j]. The coordinate p = x_i/x_j corresponds to X_i and is prime by MvPolynomial.X_prime. By basicOpen_coordRatio and IsAffineOpen.isLocalization_of_eq_basicOpen, the section ring on U_i intersect U_j is the localization of R away from p.",
    "uses": [
     "def-pc-projective-space-twist",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-laurent-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double-overlap Laurent calculation."
-   }
+   "elementary": true
+  },
+  {
+   "text": "For a unit t in this localization clear a denominator: t*q^n = image(a), where q is ratioUnit i j. The image of a is a unit, so a divides p^N by IsLocalization.Away.algebraMap_isUnit_iff. Apply dvd_prime_pow to write a = p^m*v for a unit v of R, and cancel q^n in the unit group. Thus t = image(v)*q^(m-n). This is the proved private helper exists_unit_zpow_of_localization.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map v back through chartRingEquiv. MvPolynomial.isUnit_iff_eq_C_of_isReduced says that it is a nonzero scalar c. Use chartRingEquiv_C and functoriality of restriction to identify its restriction with standardOpenConstUnit on the i-th chart. Apply choice to the resulting pairwise expansions, assigning arbitrary exponent zero and coefficient one on the unused diagonal.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-projective-space-twist",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-laurent-polynomial-ring"
+  "def-weil-pbc-mv-polynomial-ring"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "W3",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0BXJ, double-overlap Laurent calculation."
+  "place": "Tag 0BXJ, double-overlap calculation; polynomial-chart localization and prime-power divisor proof."
  },
  "lean": {
   "existing": false,
@@ -112,10 +123,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X9",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261027T181012-L-3921196",
-  "kind": "interface",
+  "landing": "20261027T210305-L-1684544",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
