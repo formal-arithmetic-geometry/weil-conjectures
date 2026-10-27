@@ -6,12 +6,15 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.SixFunctors.AffineRestrictionMapIso
 
 /-! # Affine restrictions of the dualizing coefficient mate -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -46,6 +49,13 @@ quotient coherence is asserted here. -/
 theorem finiteDualizing_affineRestriction_isIso (hl : l ≠ D.p)
     {m n : ℕ} (h : n ≤ m) (V : X.Opens) (hV : IsAffineOpen V) :
     IsIso (((Etale.upperStar (ModuleCat.{u + 1} (finiteDualizingCoeff l E n))
-      V.ι).mapDerivedCategory).map (finiteDualizingEtaleComparison l E D X h)) := by sorry
+      V.ι).mapDerivedCategory).map (finiteDualizingEtaleComparison l E D X h)) := by
+  obtain ⟨Z, g, k, hg, hk, he⟩ :=
+    finiteDualizing_etaleComparison_factorization l E D X hl h
+  have _ := hV
+  letI : IsIso g := hg
+  letI : IsIso k := hk
+  rw [he]
+  infer_instance
 
 end WeilConjectures

@@ -1,0 +1,99 @@
+{
+ "id": "affine-restriction-map-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-dualizing-affine-restriction",
+   "place": "final transport step"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Global factorization of the finite dualizing mate",
+ "statement": "The global finite dualizing comparison factors as a composite of two invertible maps through an intermediate derived object.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "final transport step"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The closed-chart descent and affine-space comparison give two invertible factors; their composite is the specified global mate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib",
+    "place": "Functor.map"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib",
+  "place": "Functor.map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "factorization of finite dualizing affine mate through closed chart and affine space",
+   "results": "No exact Mathlib declaration; geometric factorization is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso ?f → IsIso ?g → ?f ≫ ?g",
+   "results": "CategoryTheory.IsIso.comp_isIso",
+   "date": "2026-10-28",
+   "verdict": "generic composition only"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizingEtaleComparison factorization",
+   "results": "No prior declaration.",
+   "date": "2026-10-28",
+   "verdict": "new project statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteDualizingAffineRestriction",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AffineRestrictionMapIso",
+  "file": "lean/Sheaf/SixFunctors/AffineRestrictionMapIso.lean",
+  "declaration": "WeilConjectures.finiteDualizing_etaleComparison_factorization",
+  "statement": "theorem finiteDualizing_etaleComparison_factorization (hl : l ≠ D.p)\n    {m n : ℕ} (h : n ≤ m) :\n    ∃ (Z : Etale.DerivedCategoryModule (finiteDualizingCoeff l E n) X)\n      (g : (Etale.scalarExtension (finiteDualizingQuotient l E h) X).obj\n        (finiteDualizingEtaleTerm l E D X m) ⟶ Z)\n      (k : Z ⟶ finiteDualizingEtaleTerm l E D X n),\n      IsIso g ∧ IsIso k ∧\n        finiteDualizingEtaleComparison l E D X h = g ≫ k",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234255-L-84454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234255-L-84454",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
