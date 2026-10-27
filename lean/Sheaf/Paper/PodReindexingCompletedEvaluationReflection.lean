@@ -700,6 +700,37 @@ Transport through reindex_eq, which fixes the same coefficient maps, to obtain
 the two equations below. Precomposition of the corresponding completed evaluation
 squares gives precisely these ordinary equations by reindexing_laws. Reflector
 injectivity makes their completed extensions unique, hence coherent. -/
+/- The identity part of the ambient Hom coherence. -/
+theorem identity_composition_identity (A : PodReindexFamily l E)
+    (hA : A.Relabelling l E) :
+    (∀ (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+      (c : Comparison l E (𝟙 W)) (M N : D l E W),
+      (homComparison l E (𝟙 W) c M N).hom ≫
+        (podReindexingDerivedHom l E W none).map
+          (Prod.mkHom ((A.identityDerived l E W).inv.app M).op
+            ((A.identityDerived l E W).hom.app N)) =
+      (A.identityDerived l E W).hom.app (hom l E W M N)) := by
+  sorry
+
+/- The successive-composition part of the ambient Hom coherence. -/
+theorem identity_composition_composition (A : PodReindexFamily l E)
+    (hA : A.Relabelling l E) :
+    (∀ {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
+      [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)]
+      [∀ z : Z, Invertible (l : Z.residueField z)]
+      (cg : Comparison l E g) (ch : Comparison l E h) (chg : Comparison l E (h ≫ g))
+      (M N : D l E Y),
+      (homComparison l E (h ≫ g) chg M N).hom ≫
+        (podReindexingDerivedHom l E Z none).map
+          (Prod.mkHom ((A.compositionDerived l E h g).inv.app M).op
+            ((A.compositionDerived l E h g).hom.app N)) =
+      (A.compositionDerived l E h g).hom.app (hom l E Y M N) ≫
+        (podOrdinaryReindex l E h).map (homComparison l E g cg M N).hom ≫
+        (homComparison l E h ch ((podOrdinaryReindex l E g).obj M)
+          ((podOrdinaryReindex l E g).obj N)).hom) := by
+  sorry
+
 theorem identity_composition (A : PodReindexFamily l E) (hA : A.Relabelling l E) :
     (∀ (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
       (c : Comparison l E (𝟙 W)) (M N : D l E W),
@@ -722,7 +753,8 @@ theorem identity_composition (A : PodReindexFamily l E) (hA : A.Relabelling l E)
         (podOrdinaryReindex l E h).map (homComparison l E g cg M N).hom ≫
         (homComparison l E h ch ((podOrdinaryReindex l E g).obj M)
           ((podOrdinaryReindex l E g).obj N)).hom) := by
-  sorry
+  exact ⟨identity_composition_identity l E A hA,
+    identity_composition_composition l E A hA⟩
 
 /-- A single normalized completion family supplies the stated reflection transport
 for every scheme isomorphism, with no additional geometric or perfection hypotheses.

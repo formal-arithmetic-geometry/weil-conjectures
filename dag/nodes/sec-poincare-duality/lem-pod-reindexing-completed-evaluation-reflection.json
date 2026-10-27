@@ -37,7 +37,9 @@
   {
    "text": "Use the ordinary closed adjunction recorded in the coefficient calculus and its fixed signed braiding, then compose with step 1. Naturality of the actual reduction unit, reductionTensor and tensor model makes precomposition natural. The counit naturality equations for the closed adjunction give ordinary currying naturality in all three variables; braiding naturality changes to the required M-first order. Applying ordinary currying to the inverse image of the identity under completed currying gives the evaluation extension equation. Injectivity from step 1 gives uniqueness and coherence_iff.",
    "uses": [
-    "def-coef-derived-system-calculus-data"
+    "def-coef-derived-system-calculus-data",
+    "lem-pod-reindexing-completed-evaluation-reflection-identity",
+    "lem-pod-reindexing-completed-evaluation-reflection-composition"
    ],
    "elementary": false,
    "source": {
@@ -62,7 +64,9 @@
    "text": "Use the tensor-augmentation square to identify F(unit) followed by the completed tensor comparison with the ordinary tensor comparison followed by unit. This turns precomposition with F(unit), through the two tensor isomorphisms, into precompose_bijective at X. Compose its bijectivity with the two isomorphism-induced Hom equivalences. For the transpose formula, use the augmentation square to rewrite unit followed by the inverse completed tensor comparison, then apply ambient ordinary M-first currying to unit followed by b. For evaluation, apply completed currying injectivity after the inverse completed tensor comparison. Naturality of completed currying in its second input takes the Hom comparison to itself, since the transpose of evaluation is the identity; the transpose transport formula makes the other side the same Hom comparison. Finally the ambient Hom comparison is the component of the composite natural isomorphism obtained by whiskering reindexIso, the ordinary comparison, and the opposite/product reindexIso transport. Its naturality proves both Hom variances directly.",
    "uses": [
     "lem-pod-reindexing-tensor-augmentation-square",
-    "lem-pod-reindexing-ordinary-currying"
+    "lem-pod-reindexing-ordinary-currying",
+    "lem-pod-reindexing-completed-evaluation-reflection-identity",
+    "lem-pod-reindexing-completed-evaluation-reflection-composition"
    ],
    "elementary": false,
    "source": {
@@ -88,7 +92,9 @@
     "lem-pod-reindexing-evaluation-shift-composition",
     "lem-pod-reindexing-completion-unit-tensor",
     "lem-pod-reindexing-hom-resolution-model",
-    "lem-pod-normalized-tensor-signed-shifts"
+    "lem-pod-normalized-tensor-signed-shifts",
+    "lem-pod-reindexing-completed-evaluation-reflection-identity",
+    "lem-pod-reindexing-completed-evaluation-reflection-composition"
    ],
    "elementary": false,
    "source": {
@@ -107,7 +113,9 @@
   "lem-pod-reindexing-tensor-augmentation-square",
   "lem-pod-reindexing-ordinary-currying",
   "lem-pod-reindexing-evaluation-shift-composition",
-  "lem-pod-normalized-tensor-signed-shifts"
+  "lem-pod-normalized-tensor-signed-shifts",
+  "lem-pod-reindexing-completed-evaluation-reflection-identity",
+  "lem-pod-reindexing-completed-evaluation-reflection-composition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -278,7 +286,9 @@
    "WeilConjectures.PodCompletedReflection.coherence_iff",
    "WeilConjectures.PodCompletedReflection.signed_shifts",
    "WeilConjectures.PodCompletedReflection.identity_composition",
-   "WeilConjectures.PodCompletedReflection.podReindexingCompletedEvaluationReflection"
+   "WeilConjectures.PodCompletedReflection.podReindexingCompletedEvaluationReflection",
+   "WeilConjectures.PodCompletedReflection.identity_composition_identity",
+   "WeilConjectures.PodCompletedReflection.identity_composition_composition"
   ],
   "file": "lean/Sheaf/Paper/PodReindexingCompletedEvaluationReflection.lean",
   "statement": "theorem podReindexingCompletedEvaluationReflection : ∃ A : PodReindexFamily l E, A.Relabelling l E ∧ A.Identity l E ∧ A.Composition l E ∧ ∀ {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)], PodCompletionReindex.Laws l E g (A.completion g) ∧ PodCompletedTensorReindex.Laws l E g (A.completion g) (A.tensor g) ∧ A.TensorConstraints l E g ∧ (∀ M : sfIntegralConstructibleCategory l E Y, IsIso ((podOrdinaryToCompleted l E g (A.completion g)).app M.obj)) ∧ ∃ c : Comparison l E g, ReindexingLaws l E g (A.completion g) (A.tensor g) c ∧ (∃ (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X), PodReindexSignedShifts l E g (A.completion g) (A.tensor g) SY SX) ∧ (∃ (sX : PodReindexingCoherence.ChainShift l E X none) (sY : PodReindexingCoherence.ChainShift l E Y none), PodReindexingCoherence.ShiftLaws l E g none (closed l E X) (closed l E Y) (models l E X) (models l E Y) c sX sY)",
@@ -300,10 +310,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K6",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261027T180703-L-3891229",
-  "kind": "interface",
+  "landing": "20261027T210221-L-1672619",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
