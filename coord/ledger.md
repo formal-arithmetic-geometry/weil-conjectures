@@ -19690,3 +19690,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:05 L: merged deliver/C7/Sheaf.Paper.SystemOperationExchangeRealization (stage 3; reviewer PASS; first push; landing 20261027T180517-L-3868593 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:05 L: merged deliver/C8/Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleDiagonal (stage 3; reviewer PASS; first push; landing 20261027T180518-L-3869151 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:05 L: merged deliver/C8/Sheaf.SixFunctors.CoefQbarVerdierInternalHomComparison (stage 3; reviewer PASS; first push; landing 20261027T180520-L-3869565 (interface); batch 20261027T180444; modules 3; new nodes 2)
+- 18:05 L: merged deliver/D4/Sheaf.Paper.FiniteProperProjectionFixedRealization (stage 3; reviewer PASS; first push; landing 20261027T180521-L-3870080 (proof); batch 20261027T180444; modules 1; new nodes 1)
