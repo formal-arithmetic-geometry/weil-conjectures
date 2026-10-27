@@ -4,6 +4,7 @@ Authors: SHEAF group U2 -/
 module
 
 public import Sheaf.SixFunctors.PublishedSystemAmbientPresentation
+import Sheaf.SixFunctors.PublishedSystemTensorRepresentativeNormalization
 
 /-! # Normalization of the published system presentation
 
@@ -46,6 +47,19 @@ theorem publishedSystemTensorIdentification {X Y : Scheme.{u}} (f : X ⟶ Y)
     (pullbackTensorSystemComparison l E f).hom.app (M, N) ≫
       (pullbackTensorCalculus l E X).systemClosed.tensor.map
         (Prod.mkHom ((WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app M)
-          ((WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app N)) := by sorry
+          ((WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app N)) := by
+  have heq : publishedSystemTransportedTensor l E f =
+      pullbackTensorSystemComparison l E f :=
+    publishedSystemTransportedTensor_eq l E f
+      (fun P Q hP hQ ↦ publishedSystemTransportedTensor_normalized l E f P Q hP hQ)
+  let G := (publishedSystemAmbientData l E).pull f
+  apply tensor_comparison_transport_hom_eq
+    (pullbackTensorCalculus l E Y).systemClosed.tensor
+    (pullbackTensorCalculus l E X).systemClosed.tensor
+    (pullbackTensorSequenceDerived l E f) G
+    (publishedSystemAmbientPullIso l E f)
+    (pullbackTensorSystemComparison l E f)
+    ((publishedSystemAmbientData l E).tensor f)
+  · simpa only [publishedSystemTransportedTensor] using heq
 
 end WeilConjectures
