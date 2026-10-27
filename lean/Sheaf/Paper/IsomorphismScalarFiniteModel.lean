@@ -6,6 +6,8 @@ Authors: SHEAF group R7
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModel
+import Sheaf.Paper.IsomorphismScalarFiniteCore
+import Sheaf.Paper.IsomorphismScalarFiniteSquares
 
 /-! # Finite scalar tensor comparisons in the specified cochain presentations
 
@@ -83,6 +85,11 @@ theorem scalar_finite_model
     QuotientSquare l E L ι g b bfin vleft vright ∧
     LeftTransitionFormula l E L ι g tleft ∧
     RightTransitionFormula l E L ι g tright ∧
-    TransitionSquare l E L ι g bfin tleft tright := by sorry
+    TransitionSquare l E L ι g bfin tleft tright := by
+  obtain ⟨bfin, vleft, vright, tleft, tright, hF, hL, hR, hTL, hTR⟩ :=
+    scalar_finite_core l E L ι g b hb
+  obtain ⟨hQ, hT⟩ := scalar_finite_squares l E L ι g b bfin vleft vright tleft tright
+    hF hL hR hTL hTR
+  exact ⟨bfin, vleft, vright, tleft, tright, hF, hL, hR, hQ, hTL, hTR, hT⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor

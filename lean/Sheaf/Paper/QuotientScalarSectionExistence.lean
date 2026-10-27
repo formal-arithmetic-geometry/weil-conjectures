@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientScalarSectionModelExistence
+import Sheaf.Paper.QuotientScalarSectionComparisonExistence
 
 /-! # A step of the normalized quotient section comparison -/
 
@@ -63,6 +65,10 @@ is exactly the second normalization equation, for every complex. This constructi
 uses no exactness of scalar extension and works for zero modules, zero target rings,
 empty schemes, and arbitrary unbounded complexes. -/
 theorem scalar_section_exists (T : Scheme.{u}) :
-    ∃ c : ScalarSectionData a T, ScalarSectionNormalized a T c := by sorry
+    ∃ c : ScalarSectionData a T, ScalarSectionNormalized a T c := by
+  obtain ⟨model⟩ := scalar_section_model_exists a T
+  obtain ⟨ordinary, derived, hnormalized⟩ :=
+    scalar_section_comparisons_exists a T model
+  exact ⟨{ model := model, ordinary := ordinary, derived := derived }, hnormalized⟩
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

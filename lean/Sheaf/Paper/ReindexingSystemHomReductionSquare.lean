@@ -586,7 +586,20 @@ to the counit equality gives the realized counit square.  No equality reflection
 finite evaluations and no invertibility assumption on an arbitrary beta map is used. -/
 theorem podReindexingSystemHomReductionSquare_realization :
     PodSystemReindexedRealization l E g := by
-  sorry
+  let h := podReindexingSystemHomReductionSquare_laws l E g
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro M N
+    apply congrArg ((coefficientSequenceLimit l E X).map)
+    exact h.evaluation M N
+  · intro T M N f
+    apply congrArg ((coefficientSequenceLimit l E X).map)
+    exact h.compatible.transpose T M N f
+  · intro M N
+    apply congrArg ((coefficientSequenceLimit l E X).map)
+    exact h.beta M N
+  · intro N
+    apply congrArg ((coefficientSequenceLimit l E X).map)
+    exact h.adjunction.counit N
 
 theorem podReindexingSystemHomReductionSquare :
     PodSystemReindexingLaws l E g ∧ PodSystemReindexedRealization l E g := by

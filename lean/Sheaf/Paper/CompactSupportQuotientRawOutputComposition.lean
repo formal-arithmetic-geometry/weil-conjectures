@@ -5,8 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CompactSupportQuotientNative
-import Sheaf.Paper.CompactSupportQuotientOutputTransport
-import all Sheaf.Paper.CompactSupportCoefficientPresentation
+import Sheaf.Paper.CompactSupportQuotientOutputComposition
 
 /-! # Original presentation of the output quotient cocycle
 
@@ -22,11 +21,65 @@ attribute [local irreducible] Padic.coefficientExtensionIdeal
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   WeilConjectures.scalarReductionExistence WeilConjectures.scalarReductionDerivedExistence
   WeilConjectures.scalarReductionDerivedExtension WeilConjectures.compactSupportReductionMap
+attribute [local implicit_reducible] WeilConjectures.integralCoefficientSheaf
+  WeilConjectures.scalarReductionTargetDerived
+  AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport
+  AlgebraicGeometry.Scheme.sfAmbientCompactSupportCandidate
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+private theorem rawOutput_map {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
+    (m n : ℕ) (h : n ≤ m) :
+    (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map
+        (compactSupportReductionMap l E X m n h K) =
+      (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (m + 1)) c).map
+        (compactSupportQuotientNativeMap l E X m n h K) := by
+  rfl
+
+private theorem rawOutput_comparison {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
+    (m n : ℕ) (h : n ≤ m) :
+    (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n h)).hom.app
+        ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) =
+      (compactSupportQuotientNativeComparison l E c m n h).hom.app
+        ((compactSupportQuotientNativeLevel l E X n).obj K) := by
+  rfl
+
+private theorem rawOutput_restriction (Y : Scheme.{u}) (r m : ℕ) (hrm : m ≤ r)
+    {H J : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (m + 1))}
+    (g : H ⟶ J) :
+    (proEtaleCoefficientRestrictScalars Y
+        (compactSupportLevelQuotient l E r m hrm)).mapDerivedCategory.map g =
+      (compactSupportQuotientNativeRestriction l E Y r m hrm).map g := by
+  rfl
+
+private theorem rawOutput_app_heq {C D : Type*} [Category C] [Category D]
+    {F G : C ⥤ D} (α : F ⟶ G) {H J : C} (e : H = J) :
+    HEq (α.app H) (α.app J) := by
+  cases e
+  rfl
+
+private theorem rawOutput_resComp {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
+    (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m) :
+    (compactSupportQuotientResComp l E Y r m n hrm hmn).hom.app
+        ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj
+          ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) =
+      (compactSupportQuotientNativeResComp l E Y r m n hrm hmn).hom.app
+        ((sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).obj
+          ((compactSupportQuotientNativeLevel l E X n).obj K)) := by
+  have he := congrArg
+    (fun F : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (n + 1)) ⥤
+        proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (n + 1)) ↦
+      F.obj ((compactSupportQuotientNativeLevel l E X n).obj K))
+    (compactSupportQuotient_intrinsic_eq_ambient c
+      (Padic.coefficientExtensionRing l E (n + 1)))
+  exact eq_of_heq (rawOutput_app_heq
+    (compactSupportQuotientResComp l E Y r m n hrm hmn).hom he)
 
 /-- The transported composition with exactly the original compact-support expressions.
 Source: the normalized coefficient square and naturality
@@ -71,6 +124,9 @@ theorem compactSupportQuotient_raw_output_composition
         (compactSupportReductionMap l E X r n (hmn.trans hrm) K) ≫
       (sfCompactSupportRestriction c (compactSupportLevelQuotient l E r n (hmn.trans hrm))).hom.app
         ((scalarReductionDerivedExtension.{u, u} l E X n).obj K))) := by
-  sorry
+  intro r m n hrm hmn
+  -- Convert components separately to avoid unfolding the large composition comparison.
+  simp only [rawOutput_map, rawOutput_comparison, rawOutput_restriction, rawOutput_resComp]
+  exact compactSupportQuotient_output_composition l E k _hl c K hi.2 r m n hrm hmn
 
 end WeilConjectures

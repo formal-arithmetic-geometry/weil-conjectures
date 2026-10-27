@@ -10,6 +10,9 @@ Source: blueprint thm-amb-p1-adjunction.proof.md, selected projection chart. -/
 @[expose] public noncomputable section
 set_option Elab.async false
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
@@ -18,6 +21,20 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor upperStar
   AlgebraicGeometry.ProjectiveSpace derivedUpperStarLowerStarAdjunction
   rightDerivedLowerStarComp rightDerivedLowerStarCongr
+  DerivedCategory HasDerivedCategory.ofIsGrothendieckAbelian
+  HasDerivedCategory.ofHasKInjectiveResolutions Functor.mapDerivedCategory
+
+/-- Generic identification of the recorded chart transport with the canonical derived chart map.
+Source: blueprint thm-amb-p1-adjunction.proof.md.
+(blueprint: lem-z8-ordinary-finite-chart-transport-generic). -/
+theorem ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap
+    (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}
+    (e : X ⟶ Y) (p : Y ⟶ Z) (r : X ⟶ Z) (hr : e ≫ p = r)
+    (L : DerivedCategoryModule A Y) (L' : DerivedCategoryModule A X)
+    (v : (ordinaryFinitePullback A e).obj L ⟶ L') :
+    ordinaryFiniteChartTransport A e p r hr L L' v =
+      derivedChartCoefficientMap (ModuleCat.{u + 1} A) e p r hr L L' v := by
+  sorry
 
 /-- Expand the recorded diagonal chart map and its chart transport. The resulting four factors are
 direct image of the adjunction unit, the direct-image composition comparison, the equality
@@ -46,6 +63,12 @@ theorem ordinaryFiniteDiagonalChartMap_eq_generic (A : Type (u + 1)) [CommRing A
           ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
             (ProjectiveLine S ↘ S)).appTop.hom N) ▸
           hS.map ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
-            (ProjectiveLine S ↘ S)).appTop.hom)).hom  := by sorry
+            (ProjectiveLine S ↘ S)).appTop.hom)).hom   := by
+  unfold ordinaryFiniteP1DiagonalChartMap
+  exact ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap A
+    (projectiveLineDiagonalChart S a).val.hom
+    (projectiveLineDiagonalProjection S a)
+    (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)
+    (projectiveLineDiagonalChart S a).property _ _ _
 
 end AlgebraicGeometry.Etale

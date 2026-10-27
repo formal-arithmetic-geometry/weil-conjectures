@@ -23,6 +23,8 @@ public import Sheaf.Paper.IntegralOperationsScalarComparisons
 public import Sheaf.Paper.CompletedOperationTowerSubstitution
 public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
 import all Sheaf.Paper.ScalarExtensionTensorUnit
+import Sheaf.Paper.ScalarExtensionQuotientAssociation
+import all Sheaf.Paper.CoefficientExtensionOrdinaryStrictTensor
 import Sheaf.Paper.TensorPullbackRepresentativeDescent
 import Sheaf.Paper.ResolvingRepresentativeWhiskering
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
@@ -545,6 +547,33 @@ def modelSection (W : Scheme.{u})
     ((((d.directEvaluation n).inv.app P).f i).val.app U
       (integralScalarTensorSection.{u, u} l E L ι W n (P.obj.X i) U b x))
 
+private theorem modelSection_hom_ext (W : Scheme.{u})
+    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
+    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
+    (A : CoefficientExtensionSystems.{u, u} l E L ι W)
+    (d : CoefficientExtensionReductionData.{u, u} l E L ι W SE SL A)
+    (K : (integralOperationsGoodComplex.{u, u} l E W).FullSubcategory) (i : ℤ)
+    {T : coefficientSequenceModules.{u, u} l L W}
+    (f g : (d.direct.obj K).X i ⟶ T)
+    (h : ∀ (n : ℕ) (U : W.ProEtᵒᵖ)
+      (b : (coefficientSequenceCommRingSheaf l L W).obj.obj (op (n, U.unop)))
+      (x : (K.obj.X i).val.obj U),
+      f.val.app (op (n, U.unop)) (modelSection l E L ι W SE SL A d K n i U b x) =
+        g.val.app (op (n, U.unop)) (modelSection l E L ι W SE SL A d K n i U b x)) :
+    f = g := by
+  have he (n : ℕ) : (coefficientSequenceEvaluation l L W n).map f =
+      (coefficientSequenceEvaluation l L W n).map g := by
+    apply (cancel_epi (((d.directEvaluation n).inv.app K).f i)).mp
+    apply (SheafOfModules.toSheaf _).map_injective
+    apply WeilConjectures.scalarTensor_ab_hom_ext l E L ι W n (K.obj.X i)
+    intro U b x
+    exact h n U b x
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact congrArg (fun k ↦ k.val.app (op U.unop.2) x) (he U.unop.1)
+
 /-- Scalar extension of the actual E quotient complex is the actual B quotient complex,
 with the balanced association formula and all quotient transitions retained.
 Source: node proof steps 1--2, 5--6; Stacks 03EL, 0G7E
@@ -585,6 +614,22 @@ theorem quotientModels {X Y : Scheme.{u}} (f : X ⟶ Y)
               (op (n, U.unop))) a * b) x) ∧
     (leftRoute l E L ι f).app (d0.direct.obj P, d0.direct.obj Q) =
       (rightRoute l E L ι f).app (d0.direct.obj P, d0.direct.obj Q) := by
-  sorry
+  obtain ⟨d⟩ := coefficientExtensionReductionModel l E L ι Y SE SL A _hY
+  obtain ⟨d0⟩ := coefficientExtensionReductionModel l E E (AlgHom.id ℚ_[l] E) Y
+    SE SE A0 _hY
+  refine ⟨d, d0, ?_, ?_⟩
+  · intro K
+    obtain ⟨δ, hδ⟩ := quotientAssociation_exists l E L ι Y SE SL A A0 d d0 K
+    refine ⟨δ, hδ, ?_⟩
+    intro δ' hδ'
+    apply Iso.ext
+    apply HomologicalComplex.hom_ext
+    intro i
+    apply ((scalar_adj l E L ι Y).homEquiv _ _).injective
+    apply modelSection_hom_ext l E E (AlgHom.id ℚ_[l] E) Y SE SE A0 d0 K i
+    intro n U a x
+    rw [scalar_transpose_section, scalar_transpose_section]
+    exact (hδ' n i U 1 a x).trans (hδ n i U 1 a x).symm
+  · exact congrArg (fun e ↦ e.app (d0.direct.obj P, d0.direct.obj Q)) (square l E L ι f)
 
 end WeilConjectures.ScalarExtensionTower

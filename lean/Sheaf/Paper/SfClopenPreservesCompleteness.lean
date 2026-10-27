@@ -28,6 +28,7 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
 
 universe t u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
@@ -505,8 +506,8 @@ theorem sf_clopen_preserves_completeness
       DerivedCategory.Q.map (integralTowerUnit l E U.toScheme D hl (Ψ.obj P) n) =
         e'.inv ≫ DerivedCategory.Q.map (integralTowerUnit l E U.toScheme D hl (Ψ.obj P) n)
     have hid : inv (DerivedCategory.Q.map (𝟙 (Ψ.obj P))) = 𝟙 _ := by
-      apply (cancel_mono (DerivedCategory.Q.map (𝟙 (Ψ.obj P)))).mp
-      erw [IsIso.inv_hom_id, Category.id_comp, DerivedCategory.Q.map_id]
+      apply IsIso.inv_eq_of_hom_inv_id
+      erw [Category.comp_id, DerivedCategory.Q.map_id]
     erw [hid, Category.id_comp]
   rw [hf]
   exact hδ'
