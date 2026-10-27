@@ -114,6 +114,51 @@ def prune(mod,old,new,index):
         finally:sys.argv=argv;li.scan=scan;li.library_statements=stmts
         if rc:raise md.Fail(out.getvalue())
 
+
+def overlay_index(base, modules):
+    """Return a source index for the complete replacement overlay in ``modules``.
+
+    The cached index describes the current tree.  A delivery can move a declaration
+    between modules, so unioning new origins with that cache leaves the deleted origin
+    visible and produces a false duplicate.  Build copy-on-write maps that replace all
+    origins owned by touched modules while retaining origins from untouched modules.
+    """
+    candidate=copy.copy(base)
+    touched={m['module'] for m in modules}
+    local_names=collections.defaultdict(set)
+    local_statements=collections.defaultdict(set)
+    affected_names=set()
+    affected_statements=set()
+    candidate.imports=dict(base.imports)
+    candidate.by_module=dict(base.by_module)
+    for m in modules:
+        mod=m['module'];text=m['text']
+        old_names,old_statements=base.by_module.get(mod,(set(),set()))
+        affected_names.update(old_names)
+        affected_statements.update(statement for statement,_ in old_statements)
+        if mod in ('Challenge','TargetsCheck'):
+            names=set();statements=set()
+        else:
+            names=li.decls_in_text(text)
+            statements={(statement,q) for q,statement in li.statements_in_text(text).items() if statement}
+        candidate.by_module[mod]=[names,statements]
+        for q in names:local_names[q].add(mod)
+        for statement,q in statements:local_statements[statement].add((q,mod))
+        candidate.imports[mod]=li.imports_of(text)
+    affected_names.update(local_names)
+    affected_statements.update(local_statements)
+    candidate.decls=collections.ChainMap({
+        q:(base.decls.get(q,set())-touched)|local_names[q]
+        for q in affected_names
+    },base.decls)
+    candidate.statements=collections.ChainMap({
+        statement:{(q,mod) for q,mod in base.statements.get(statement,set()) if mod not in touched}
+                    |local_statements[statement]
+        for statement in affected_statements
+    },base.statements)
+    return candidate
+
+
 class Preparation:
     preparing=True
     def __init__(self,row):self.row=row;self.result=None
@@ -141,17 +186,7 @@ class Preparation:
         before=run_split(NODES,FILES,[o.item]);after=run_split(view,files,[o.item])
         bad=[o.item+': '+f for f in after.get(o.item,set())-before.get(o.item,set())]
         if bad:raise md.Fail('review_split.py: '+' | '.join(sorted(bad)))
-        index=copy.copy(INDEX)
-        local_names=collections.defaultdict(set);local_stmts=collections.defaultdict(set)
-        index.imports=dict(INDEX.imports)
-        for m in D['modules']:
-            mod=m['module']
-            for q in li.decls_in_text(m['text']):local_names[q].add(mod)
-            for q,st in li.statements_in_text(m['text']).items():
-                if st:local_stmts[st].add((q,mod))
-            index.imports[mod]=li.imports_of(m['text'])
-        index.decls=collections.ChainMap({q:INDEX.decls.get(q,set())|mods for q,mods in local_names.items()},INDEX.decls)
-        index.statements=collections.ChainMap({st:INDEX.statements.get(st,set())|vals for st,vals in local_stmts.items()},INDEX.statements)
+        index=overlay_index(INDEX,D['modules'])
         expected={p:read(p) for p in paths.values()}
         writes={paths[nid]:md.dump(nd) for nid,nd in docs.items()}
         for m in D['modules']:
@@ -326,6 +361,13 @@ def commit(plans,receipts,promote,bulk=False):
         if receipt.get('rc',1):
             returns.append((row,'file-only compilation failed: '+receipt.get('out','')[-5000:]));continue
         ready.append(plan)
+    # Choose and validate the final plan set before constructing any source-index
+    # overlay. A plan rejected here must never contribute declaration origins to a
+    # later plan's checks.
+    if ready:
+        ready=ordered_plans(ready,results)
+    if ready and not bulk:
+        ready=validated_survivors(ready,returns)
     if ready:
         # Baseline before the transaction. Full validation once after bulk writes.
         freeze_config();index=cached_index();accepted=[]
@@ -336,18 +378,17 @@ def commit(plans,receipts,promote,bulk=False):
             # matter. Plans are prepared ahead of the landing now, and stage-3 landings change imports all the time.
             if changed:
                 results[p['row']['head']]={'result':'retry','note':'delivery or compile dependency changed: '+', '.join(changed)};continue
+            candidate=overlay_index(index,p['modules'])
             try:
-                for m in p['modules']:prune(m['module'],p['expected'][m['file']],m['text'],index)
+                for m in p['modules']:
+                    prune(m['module'],p['expected'][m['file']],m['text'],candidate)
             except md.Fail as exc:
                 returns.append((p['row'],'current source index: '+str(exc)));continue
-            for m in p['modules']:
-                mod=m['module']
-                for q in li.decls_in_text(m['text']):index.decls[q].add(mod)
-                for q,st in li.statements_in_text(m['text']).items():
-                    if st:index.statements[st].add((q,mod))
-                index.imports[mod]=li.imports_of(m['text'])
+            # Adopt only a fully checked candidate. Rejected and later-filtered plans
+            # therefore cannot leak origins into subsequent checks.
+            index=candidate
             accepted.append(p)
-        ready=ordered_plans(accepted,results);base_guard=token()
+        ready=accepted;base_guard=token()
     if ready:
         freeze_config()
         baseline=full() if bulk else None
