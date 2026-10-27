@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityE
 
 /-! Identity equation for the L-side integral finite-extension comparison.
 
@@ -38,6 +39,6 @@ theorem comparison_identity_L
             (Prod.mkHom f.op (𝟙 M)))) ≫ (b.adjunction K').counit.app M =
         b.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (b.adjunction K).counit.app M) :
     IdentityConclusion l L X D hl wL b := by
-  sorry
+  exact comparison_identity_E l L X D hl wL b _hevalL
 
 end WeilConjectures.IntegralFiniteExtension
