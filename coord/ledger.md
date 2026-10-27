@@ -20135,3 +20135,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:02 L: returned deliver/A2/WeilConjectures.SmoothPurity.Defs (reviewer RETURN: (the landing tools, head 83a4f8788) the delivery did not land: missing import source modules: WeilConjectures.SmoothPuri)
 - 22:02 L: returned deliver/A7/Sheaf.Paper.NativeProperScalarMateBoundedBelow (reviewer RETURN: (the landing tools, head 491210d7f) the delivery did not land: missing import source modules: Sheaf.Paper.NativeProperSc)
 - 22:02 L: returned deliver/B7/Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismExistence (reviewer RETURN: (the landing tools, head 2ec4fc061) the delivery did not land: missing import source modules: Sheaf.Paper.NativeCompactS)
+- 22:02 L: returned deliver/C3/Sheaf.Paper.FiniteIntrinsicProjectionCompatibility (reviewer RETURN: (the landing tools, head 7e2b8bc1f) the delivery did not land: missing import source modules: Sheaf.Paper.FiniteIntrinsi)
