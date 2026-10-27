@@ -31,7 +31,8 @@ Source: Stacks Project, 03SC (theorem-vanishing-affine-curves), item (7).
 (blueprint: e1-algebraically-closed-cohomology-invariant)
 
 1. Apply `primeCoefficientCurveAssertions` to `f` and `F`. Its hypotheses are the existing
-algebraically closed base field, reduced proper curve, prime `r`, and constructible sheaf.
+algebraically closed base field, reduced curve, prime `r`, and constructible sheaf; properness
+is only needed in step 2.
 It gives `IsCurve.Assertions (ULift (ZMod r)) f F`, uniformly in extensions and degrees.
 2. Apply the C7 projection `Assertions.bijective_cohomologyMap_of_isProper` to this package,
 `k'`, the pullback square `h`, and `q`. Properness is already an instance. The projection

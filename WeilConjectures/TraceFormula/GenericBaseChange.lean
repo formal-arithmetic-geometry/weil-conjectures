@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.OpenImmersionFieldBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 
 /-!
 
@@ -47,7 +48,7 @@ morphism at `ℚ̄_ℓ ⊗ᴸ K₀` with the extension of scalars of the integra
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), derived
 Nakayama reduces the integral one to its first derived reduction `K₀ ⊗ᴸ 𝔽_E`
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_integral_app_of_reduction`), which
-is the pro-étale base change morphism with coefficients `ℤ/ℓ` at a complex of étale origin, an
+is the pro-étale base change morphism with coefficients `𝔽_E` at a complex of étale origin, an
 isomorphism by the étale theorem
 (`ProEtale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_field`).
 
@@ -116,7 +117,7 @@ The finite-coefficient statement is
 `sk-thm-sbc-coefficients`, a bounded constructible `ℚ̄_ℓ`-complex has an integral model `K₀` over
 some `𝒪_E`, the scalar comparisons reduce to the integral base change morphism at `K₀`
 (`isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), and derived Nakayama to its
-first derived reduction, the pro-étale base change morphism with coefficients `ℤ/ℓ` at a complex
+first derived reduction, the pro-étale base change morphism with coefficients `𝔽_E` at a complex
 of étale origin (`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U ⟶ Y)
     [IsOpenImmersion j.left] :
@@ -143,8 +144,8 @@ theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U �
     refine IsUnit.mk0 _ fun h ↦ (Fact.out : ringChar k ≠ ℓ) ?_
     exact (Nat.prime_dvd_prime_iff_eq (Fact.out : (ringChar k).Prime) Fact.out).1
       ((ringChar.spec k ℓ).1 h)
-  have hΛ : ((ℓ : ℕ) : ULift.{u + 1} (ZMod ℓ)) = 0 := ULift.ext _ _ (ZMod.natCast_self ℓ)
   refine isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral ℓ _ hsq fun E K₀ ↦ ?_
+  have hΛ := ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E
   refine isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E _ hsq K₀ ?_
   exact ProEtale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_field _ Y.hom X.hom j.left
     hW hsq ℓ hℓ hΛ _ (ProEtale.boundedConstructible_derivedReduction_obj U.left ℓ E _ K₀.property)

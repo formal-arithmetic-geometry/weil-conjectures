@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibilityFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 
 /-!
@@ -28,17 +29,13 @@ As for the comparisons of `Rf_*` and `Rf^!`, this holds because `T_X` is the rat
 `T (A ⊗ -) ≅ T A ⊗ T -` along the adjunctions `A ⊗ - ⊣ RHom(A, -)`
 (`CategoryTheory.Rationalization.isIso_mateEquiv_of_isLocalization`).
 
-For the inclusion `E ⟶ ℚ̄_ℓ`, which is not a localization, the clause is the compatibility
-`ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl` required from
-`sec-six-functors-basics`. Together they give the clause for the composite
+For the inclusion `E ⟶ ℚ̄_ℓ`, which is not a localization, the clause
+(`ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl`) follows from the
+finite subextensions `E ⊆ F`, where `F_X` is free over `E_X`, by the 2-colimit description of
+`Dᵇc(X)⟦ℚ̄_ℓ⟧`. Together they give the clause for the composite
 `𝒪_E ⟶ ℚ̄_ℓ`
 (`ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl`), the
 comparison of a composite being the composite of the comparisons.
-
-## Compatibilities required from other sections
-
-* `ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl`: blueprint
-  `det-prop-scalar-six-tensor-hom` (2), for `E ⟶ ℚ̄_ℓ`.
 
 -/
 
@@ -74,7 +71,7 @@ theorem isIso_ihomComparison_boundedConstructibleExtendScalars
   exact Rationalization.isIso_mateEquiv_of_isLocalization (M := Submonoid.powers (ℓ : ℤ)) T T
     (ihom.adjunction A) (ihom.adjunction (T.obj A)) τ
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
+/-- Blueprint
 `det-prop-scalar-six-tensor-hom` (2), for the coefficient map `E ⟶ ℚ̄_ℓ`. For bounded
 constructible `E`-complexes `A` and `B`, the comparison
 `v_{A,B} : (RHom(A, B))_{ℚ̄_ℓ} ⟶ RHom(A_{ℚ̄_ℓ}, B_{ℚ̄_ℓ})`, the transpose of
@@ -83,7 +80,7 @@ constructible `E`-complexes `A` and `B`, the comparison
 theorem isIso_ihomComparison_constructibleToPadicAlgCl
     (A : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧) :
     IsIso (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A).natTrans :=
-  sorry
+  isIso_ihomComparison_constructibleToPadicAlgCl_of_twoColimit ℓ X E A
 
 /-- **The internal Hom comparison for `𝒪_E ⟶ ℚ̄_ℓ` is an isomorphism** (blueprint
 `det-prop-scalar-six-tensor-hom` (2)): the comparison of the composite extension of scalars

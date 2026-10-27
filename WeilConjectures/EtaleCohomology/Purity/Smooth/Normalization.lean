@@ -18,8 +18,11 @@ under `Rp_!` and the counit of `Rs_! ⊣ Rs^!`:
 
 `cl : Λ ≅ R(s ≫ p)_! Λ ≅ Rp_! Rs_! Λ ⟶ Rp_! Rs_! Rs^! Λ(1)[2] ⟶ Rp_! Λ(1)[2]`.
 
-The normalization of the smooth trace (blueprint `thm-pur-trace-normalization-transitivity`,
-Step 2) is that `Tr^sm_p(cl) = 1`.
+The statement proved here is that *some* purity isomorphism `γ` has `Tr^sm_p(cl) = 1`. It does
+not single out the canonical `γ` of blueprint `thm-pur-trace-normalization-transitivity`
+(normalized on the projective line): the orientation `pur_s` is the Kummer boundary `∂κ(t)`,
+which forgets supports to `-c₁(𝒪(V(t)))` (blueprint `lem-pur-divisor-class` (b)), so for the
+canonical `γ` the trace of `cl` is `-1`, and `(-1)^d` for the ordered fundamental class of `𝔸^d`.
 
 ## Main definitions
 
@@ -31,8 +34,8 @@ Step 2) is that `Tr^sm_p(cl) = 1`.
   purity isomorphism, the trace of the fundamental class is invertible. It is the adjoint of the
   orientation, which is an isomorphism, and the counit of `R(s ≫ p)_! ⊣ R(s ≫ p)^!` is an
   isomorphism since `s ≫ p` is.
-- `AlgebraicGeometry.Etale.exists_affineLineFundamentalClass_comp_smoothPurityTrace`: the trace of
-  the fundamental class is `1`.
+- `AlgebraicGeometry.Etale.exists_affineLineFundamentalClass_comp_smoothPurityTrace`: for some
+  purity isomorphism, the trace of the fundamental class is `1`.
 
 ## Implementation notes
 
@@ -174,12 +177,13 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
 
 /-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
 
-**Normalization on the affine line.** Over a separably closed field `k`, the smooth trace of
-the affine line `p : 𝔸¹_k ⟶ Spec k` sends the fundamental class of `𝔸¹` to `1`: for every
+**Normalization on the affine line.** Over a separably closed field `k`: for every
 composition isomorphism `α` and identification `ψ : Λ_k ≅ R(s ≫ p)_! Λ_{V(t)}` there is a
-purity isomorphism `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` with `Tr^sm_{p,Λ} ∘ cl ∘ ψ = 1`. Together
-with the transitivity `AlgebraicGeometry.Etale.smoothPurityTrace_comp` this gives the
-normalization of `Tr^sm_{p_d}` on the ordered fundamental class of `𝔸^d` by induction on `d`. -/
+purity isomorphism `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` of the affine line `p : 𝔸¹_k ⟶ Spec k`
+with `Tr^sm_{p,Λ} ∘ cl ∘ ψ = 1`. This `γ` is not the canonical one of the blueprint (normalized
+on the projective line): `cl` is built from the Kummer boundary `∂κ(t)`, which forgets supports
+to `-c₁(𝒪(V(t)))` (blueprint `lem-pur-divisor-class` (b)), so the canonical `γ` gives
+`Tr^sm_{p,Λ} ∘ cl ∘ ψ = -1`, and `(-1)^d` on the ordered fundamental class of `𝔸^d`. -/
 theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [Field k]
     [IsSepClosed k] [HasKummerClass.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))]

@@ -41,7 +41,7 @@ Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
 (`remark-functorial-locally-constant-on-connected`).
 (blueprint: split-locally-constant-cover-filtration)
 
-Proof: Irreducibility makes U nonempty and connected. Choose a geometric point of U.
+Proof: A connected space is nonempty. Choose a geometric point of U.
 The exact equivalence between finite locally constant module sheaves and finite continuous
 representations identifies G with a finite-dimensional vector space M over ℤ/ℓℤ with
 continuous fundamental-group action. Its image Q in GL(M) is finite. A Sylow ℓ-subgroup
@@ -63,7 +63,7 @@ constant coefficient sheaf. For M = 0 the flag has length zero. Extend the finit
 W to all natural indices by its final object, with identity maps after the last index;
 only maps before that index occur in the conclusion. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf
-    {U : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
+    {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] :
     ∃ (V : Scheme.{u}) (v : V ⟶ U) (_ : IsFinite v) (_ : Etale v) (_ : ConnectedSpace V)
