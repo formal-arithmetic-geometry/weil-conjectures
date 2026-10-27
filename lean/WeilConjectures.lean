@@ -12754,6 +12754,7 @@ public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
 public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.CompactCohomology
+public import WeilConjectures.TraceFormula.CompactCohomologyFibres
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
