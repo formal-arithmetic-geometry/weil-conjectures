@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralOrdinaryExpressionReduction
+import Sheaf.SixFunctors.IntegralOrdinaryExchangeSquare
+import Sheaf.SixFunctors.IntegralOrdinaryProjectionSquare
 
 /-! # Ordinary coefficient squares for exchange and projection
 
@@ -62,7 +64,10 @@ theorem ordinaryExchangeProjectionSquares
       (calculus l E V.left).reduction.map
           (((ringedProperProjection l E a.ringedModels f.left).app
             (e.ringedObj l E a.ringedModels K)).app (t.ringedObj l E a.ringedModels K)) ≫
-        (Expression.push f hf (.tensor e (.pull f t))).ordinaryReduction l E o a K) := by sorry
+        (Expression.push f hf (.tensor e (.pull f t))).ordinaryReduction l E o a K) := by
+  constructor
+  · exact ordinaryExchangeSquare l E o a K
+  · exact ordinaryProjectionSquare l E o a K
 
 
 end WeilConjectures.IntegralSystemRealization
