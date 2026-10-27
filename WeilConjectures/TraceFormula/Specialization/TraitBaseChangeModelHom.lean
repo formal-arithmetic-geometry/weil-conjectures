@@ -45,7 +45,8 @@ variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
 
 /-- The morphism of base changes commutes with the projections on total spaces. -/
 lemma Hom.baseChange_total_comp (hgP : gP = φ.generic ≫ gM) :
-    (φ.baseChange hM hP hbM hvM hbP hvP κ hκb hκv hgP).total ≫ (baseChangeHom hM bM hbM vM hvM).total =
+    (φ.baseChange hM hP hbM hvM hbP hvP κ hκb hκv hgP).total ≫
+        (baseChangeHom hM bM hbM vM hvM).total =
       (baseChangeHom hP bP hbP vP hvP).total ≫ φ.total :=
   pullback.lift_fst _ _ _
 

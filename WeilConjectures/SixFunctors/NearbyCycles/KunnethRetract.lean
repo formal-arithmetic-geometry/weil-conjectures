@@ -20,19 +20,25 @@ pullback exchanges `α_{ρ_M}`, `α_{ρ_N}`, `α_{ρ_P}`.
 When the exchanges are not invertible, but `α_{ρ_N}` is and `α_{ρ_M}`, `α_{ρ_P}` are split
 monomorphisms whose retractions are compatible with `Π'`, the map `Lρ'^* Π_{A,B}` is still a
 retract of `Π'`, hence invertible if `Π'` is
-(`NearbyCyclesModel.isIso_map_kunnethMap_of_isKunnethRetract`). This is the shape of the
+(`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`). This is the shape of the
 generic-slicing step of Gabber's Künneth formula (blueprint `sk-prop-tf-nearby-external-kunneth`,
 "Finite support"): there `α_{ρ_M}` and `α_{ρ_P}` are the inclusions of the invariants under a
 pro-`p` group `P` acting trivially on the nearby cycles of `N'`, the retractions are the averaging
 projections, and their compatibility with `Π'` is the projection formula for invariants (blueprint
 `det-nearby-kunneth-invariants`).
 
+The retraction data are predicates on the equation of the square
+(`CategoryTheory.IsSquareRetract`, `CategoryTheory.IsTensorRetract`), so that the vertical maps are
+read off the square instead of being restated.
+
 ## Main statements
 
-* `CategoryTheory.isIso_of_comp_eq_tensorHom_of_retraction`: the abstract retract argument.
-* `NearbyCyclesModel.IsKunnethRetract`: the retraction data.
-* `NearbyCyclesModel.isIso_map_kunnethMap_of_isKunnethRetract`: the pullback of the Künneth map
-  is invertible if `Π'` and `α_{ρ_N}` are and the retraction data exist.
+* `CategoryTheory.isIso_of_comp_eq_of_retraction`: the abstract retract argument.
+* `CategoryTheory.IsSquareRetract.isIso`, `CategoryTheory.IsTensorRetract.isSquareRetract`: the
+  retract argument for a square `x ≫ a = δ ≫ (u₁ ⊗ u₂) ≫ π`.
+* `NearbyCyclesModel.isIso_map_kunnethMap_of_isSquareRetract`,
+  `NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`: the pullback of the Künneth map is
+  invertible if the Künneth map of the pullback models is and the retraction data exist.
 
 -/
 

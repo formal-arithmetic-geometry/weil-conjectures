@@ -33,11 +33,17 @@ invariants of the Künneth map of the geometric slice under the pro-`p` kernel o
 inertia groups, by the generic-slicing description of nearby cycles (SGA 4½, [Th. finitude],
 §§3.4, 3.7) and the projection formula for invariants (blueprint `det-nearby-kunneth-invariants`):
 if the Künneth map of the geometric slice is an isomorphism, so is the restriction of `Π_{A,B}`
-(`NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst`, unfinished). Since the slice of a
-local chart `V ⟶ 𝔸ᵐ_S` along one of its coordinates is a local chart of dimension `m - 1` over
-`Spec K⟦t⟧` (`AlgebraicGeometry.exists_isImmersion_pullback_reindex`), the Künneth formula for
-charts of smaller dimension over `Spec K⟦t⟧` (`NearbyCyclesModel.KunnethFormula`) makes the
-restriction of `Π_{A,B}` to the slice an isomorphism
+(`NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst`). Formally, the pullback of
+`Π_{A,B}` is a retract of the Künneth map of the geometric slice
+(`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`), given the two facts on traits:
+the invariance of nearby cycles under change of trait
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, unfinished) and the
+generic-slicing identification with invariants, compatibly with the Künneth maps
+(`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`, unfinished).
+Since the slice of a local chart `V ⟶ 𝔸ᵐ_S` along one of its coordinates is a local chart of
+dimension `m - 1` over `Spec K⟦t⟧` (`AlgebraicGeometry.exists_isImmersion_pullback_reindex`),
+the Künneth formula for charts of smaller dimension over `Spec K⟦t⟧`
+(`NearbyCyclesModel.KunnethFormula`) makes the restriction of `Π_{A,B}` to the slice an isomorphism
 (`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst`).
 
 -/
@@ -232,7 +238,8 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
     isIso_kunnethMap_of_iso _ _ _ ((leftDerivedUpperStarId _ X).app A)
       ((leftDerivedUpperStarId _ Y).app B) h
   have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN hB
-  have hT := isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB
+  have hT :=
+    isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB
   exact isIso_map_kunnethMap_of_isTensorRetract (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
     (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
