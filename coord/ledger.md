@@ -20421,3 +20421,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/U3/Sheaf.Paper.FiniteScalarTensorPullbackChainSquare (stage 3; reviewer PASS; first push; landing 20261027T234328-L-101782 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/U4/Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility (stage 3; reviewer PASS; after a return; landing 20261027T234329-L-102458 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:43 L: merged deliver/U4/Sheaf.SixFunctors.FiniteDualizingRealizationRestrictionUnit (stage 3; reviewer PASS; first push; landing 20261027T234330-L-103179 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:43 L: merged deliver/V1/Sheaf.Paper.IntegralOrdinaryProjectionEndpointIsoData (stage 3; reviewer PASS; first push; landing 20261027T234331-L-103621 (proof); batch 20261027T233735; modules 1; new nodes 0)

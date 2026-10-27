@@ -16,23 +16,46 @@
  ],
  "proof": [
   {
-   "text": "This is the corresponding endpoint construction/pasting step from the ordinary projection reduction proof, retained as an independently provable statement for arbitrary inputs.",
+   "text": "Identify the ordinary completed pushforward with the ringed pushforward in the projection definition: its coefficient map is the adjoint of completedPullMap, so the adjunction triangle identity gives equality. Use the already proved sf_projection_formula auxiliary theorem of SfCompleteDirectImageReduction on arbitrary unbounded inputs. This theorem transports the perfect finite-quotient projection isomorphism to the actual scalarReductionDerivedExtension and sfCompletedDerivedDirectImage presentations; no completeness hypothesis is used in that auxiliary theorem.",
    "uses": [
-    "lem-pbc-completed-scalar-projection-perfect-iso",
     "def-pur-integral-compact-support-coefficient-data",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-sf-open-projection-factor-coefficient-change",
-    "lem-sf-projection-scalar-square",
-    "lem-sf-finite-scalar-proper-projection-presentation",
-    "def-sp-finite-ring-compact-support-projection-map"
+    "lem-pbc-completed-scalar-projection-perfect-iso",
+    "lem-sf-complete-direct-image-reduction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose the direct-image reduction isomorphism with the exact open scalar comparison, the finiteReductionIso identifications, and finiteImageIso. This constructs reductionImageIso from the reduced completed proper/open image to the intrinsic constant-coefficient compact-support candidate. Its finiteSupportIso presentation is obtained by the realization counit and sfIntrinsicCompactSupportComparison.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "cor-exc-base-change-open-immersion-general"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite derived tensor models. For the source endpoint, apply scalarTensor, reductionImageIso, finiteSupportIso, the realization counit in the second variable, and the inverse finiteScalarTensorRealization. For the target endpoint first apply scalarTensor and scalarPull to K tensor pull(L). Apply the realization counit to K and finiteScalarPullbackComparison to pull(L), then inverse finiteScalarTensorRealization. Apply the finite compact-support candidate to this isomorphism and finish with sfIntrinsicCompactSupportComparison. The private fixedPull abbreviation fixes the same small derived-category universe as the published projection; it changes no operation.",
+   "uses": [
+    "def-sf-compact-support-scalar-tensor-balancing",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-sf-finite-scalar-tensor-realization",
+    "def-sf-finite-scalar-pullback-comparison",
+    "cor-exc-base-change-open-immersion-general"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source and target objects of both projection arrows are definitionally their tensor and compact-support expressions. Insert the two constructed isomorphisms into IntegralOrdinaryProjectionEndpointData. This asserts no compatibility equation between the arrows.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data",
+    "def-sp-finite-ring-compact-support-projection-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
-  "place": "Endpoint comparison decomposition."
+  "place": "Endpoint object comparisons only, using the existing arbitrary-input perfect-quotient direct-image proof, exact open scalar comparison, scalar tensor/pullback comparisons, and finite coefficient realization; V1, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -84,12 +107,14 @@
   "statement": "theorem integralOrdinaryProjection_endpointIsoData\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (aX : ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X))\n    (aZ : ProEtaleTensorModel c.Z ((PurCompactSupport.completed l E).ring c.Z))\n    (aY : ProEtaleTensorModel Y ((PurCompactSupport.completed l E).ring Y))\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (L : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ) :\n    Nonempty (IntegralOrdinaryProjectionEndpointData l E c aX aZ aY K L n)"
  },
  "proof_deps": [
-  "lem-pbc-completed-scalar-projection-perfect-iso",
   "def-pur-integral-compact-support-coefficient-data",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-sf-open-projection-factor-coefficient-change",
-  "lem-sf-projection-scalar-square",
-  "lem-sf-finite-scalar-proper-projection-presentation",
+  "lem-pbc-completed-scalar-projection-perfect-iso",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "cor-exc-base-change-open-immersion-general",
+  "def-sf-compact-support-scalar-tensor-balancing",
+  "lem-sf-finite-scalar-tensor-realization",
+  "def-sf-finite-scalar-pullback-comparison",
   "def-sp-finite-ring-compact-support-projection-map"
  ],
  "reviewed": {
@@ -106,10 +131,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261027T210201-L-1668698",
-  "kind": "interface",
+  "landing": "20261027T234331-L-103621",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
