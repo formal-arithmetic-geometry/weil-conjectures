@@ -19,40 +19,25 @@
  ],
  "proof": [
   {
-   "text": "write A = Sym(E), A' = Sym(g*E). On a pair of affine base charts W, U with W contained in g inverse U, the map of graded rings is the specified b.map. On D_+(iota(m)), the normalized twist has the free frame iota(m). Pull back this frame to the chart D_+(b.map(iota(m))) of Proj A'(W), and send it to the frame b.map(iota(m)). This gives an isomorphism of free rank-one modules: its inverse sends the new frame to the pulled frame. All degree-one elements of A(U) are inclusion generators, and their charts cover. On an overlap the old transition is the degree-zero fraction iota(m)/iota(n); its pullback is exactly b.map(iota(m))/b.map(iota(n)), the new transition. Hence these local isomorphisms and their inverses agree and glue. Refining overlaps of affine base opens by affine opens gives the same calculation, so the isomorphisms glue over the relative Proj. The chosen charts of D and D' identify their quotients with the same inclusion sections. By the generator equation for b, the glued isomorphism therefore preserves the quotient on every pulled section 1 tensor m. These sections generate the pullback module locally; equality extends by linearity and the sheaf axiom. The pullback composition isomorphisms used here are the ones fixed by those sections, giving the displayed equation with the equality proof induced by b.isPullback. Proof irrelevance gives the same equation with any supplied proof e of that equality of module objects. Empty charts, the zero module, and zero coefficient rings give zero localizations and the same equations. No finite-generation or flatness hypothesis is used.",
+   "text": "Obtain a common local frame atlas for the pulled quotient line and the new quotient line, with equal transition relations and matching local coefficients for q and q prime.",
    "uses": [
-    "lem-nagata-affine-proj-scalar-extension",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "lem-weil-pbc-symmetric-algebra-graded",
-    "prop-nagata-proj-standard-open",
-    "lem-weil-pbc-proj-basic-open-intersection",
-    "lem-weil-pbc-affine-opens-basis",
-    "def-per-projective-bundle-quotient-data",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-trf-symmetric-proj-quotient-pullback-comparison-local"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the proved source-library Scheme.Modules.isoOfIsFreeGenerator to the cover, free frames and common transition relations. This constructs an isomorphism w sending each restricted frame s_i to t_i. For any section m on an open V, restrict to U_i intersect V. The common coefficient c supplied by the atlas gives w(q(m))=w(c s_i)=c t_i=q prime(m). Naturality of the module morphisms and sheaf uniqueness yield equality on V. Scheme.Modules.hom_ext then proves the required equality of morphisms. These steps are implemented in the proved private helper iso_of_common_frame_coefficients.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-nagata-affine-proj-scalar-extension",
-  "def-weil-pbc-proj-twisting-sheaf",
-  "def-nagata-homogeneous-localization-degree-zero",
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "lem-weil-pbc-symmetric-algebra-graded",
-  "prop-nagata-proj-standard-open",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-affine-opens-basis",
-  "def-per-projective-bundle-quotient-data",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-trf-symmetric-proj-quotient-pullback-comparison-local"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01NQ (lemma-relative-proj-base-change), degree-one theta; Tag 01NR (lemma-glue-relative-proj-twists), uniqueness; Tag 01OB (definition-projective-bundle), normalization. Affine calculation: Tag 01N2 (lemma-base-change-map-proj)."
+  "place": "Tag 01NQ (lemma-relative-proj-base-change), degree-one theta; Tag 01NR (lemma-glue-relative-proj-twists), uniqueness; Tag 01OB (definition-projective-bundle), normalization. Affine calculation: Tag 01N2 (lemma-base-change-map-proj). Local frame calculation isolated; global gluing uses WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso and sheaf uniqueness."
  },
  "mathlib_searches": [
   {
@@ -134,9 +119,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "P6",
   "result": "pass",
-  "landing": "20261027T123534-L-2318696",
+  "landing": "20261027T151731-L-1199869",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
