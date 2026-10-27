@@ -5,76 +5,173 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
-import Sheaf.Paper.CoefficientExtensionReductionModel
-import Sheaf.Paper.TransportedReductionScalarNormalized
+import Sheaf.Paper.CoherentQuotientReductionComparison
+import Sheaf.Paper.OrdinaryQuotientScalarTowerComparison
+import Sheaf.Paper.SemilinearDerivedSections
+import all Sheaf.Paper.KFlatRingedToposPullback
 
 /-! # Primitive quotient scalar model existence
 
-This is the scalar conjunct split from
-`primitiveQuotientRealizationComparisons`.
-(blueprint: lem-trf-primitive-quotient-realization-comparisons)
+Construct the scalar realization by descent from its actual ordinary quotient tower.
+Normalization tests whole-system coherent simultaneous quotient presentations.
+Source: Stacks 03EK, 03D7, 06YY and 0941.
+(blueprint: lem-trf-primitive-quotient-scalar-model-existence)
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 
-universe t u c v r w₁ w₂
+universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
-open scoped ChangeOfRings
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-  (L : Type u) [Field L] [Algebra ℚ_[l] L]
-  [FiniteDimensional ℚ_[l] L]
+  (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The balanced finite-level association and the normalized Roos comparison
-produce the required scalar realization. Source: Stacks 03EK, 06YY and 0941.
-Proof: choose the flat-term K-flat representative supplied by the reduction
-calculus. At each quotient level, use the balanced association
-`(x tensor a) tensor b ↦ x tensor (a*b)` and its unit-inserting inverse. These
-maps form a strict system map because the quotient transitions reduce the same
-product. The system is K-flat by component evaluation, so ordinary scalar change
-computes derived scalar change. Apply the fixed normalized Roos comparison and
-descend the construction from K-flat representatives to the ambient derived
-category. The generator and transition equations give the required normalization.
-This theorem is the scalar conjunct split from
-`primitiveQuotientRealizationComparisons`.
-(blueprint: lem-trf-primitive-quotient-scalar-model-existence) -/
-private theorem globalUnit_of_residueUnits (l : ℕ) {W : Scheme.{t}}
-    (hl : ∀ x : W, IsUnit (l : W.residueField x)) : IsUnit (l : Γ(W, ⊤)) := by
-  apply W.toRingedSpace.isUnit_of_isUnit_germ
-  intro x hx
-  have h : IsUnit (l : W.presheaf.stalk x) := by
-    apply (IsLocalRing.residue_ne_zero_iff_isUnit _).1
-    simpa only [map_natCast] using (hl x).ne_zero
-  simpa only [map_natCast] using h
+private theorem sequenceKFlat_of_evaluations (W : Scheme.{t})
+    (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (hC : ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+      (R := integralCoefficientCommRingSheaf l E W n)
+      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C)) :
+    CochainComplex.IsKFlatIndependentCoefficients
+      (R := coefficientSequenceCommRingSheaf l E W) C := by
+  let D := (SemilinearSections.semilinearDerivedSections.{t + 1, t, u}
+    (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W)
+    (coefficientSequenceCommRingTransition l E W)).some.systems
+  let R := coefficientSequenceCommRingSheaf l E W
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  intro Z hZ i
+  apply (D.componentwise _).2
+  intro n
+  have hZn : (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex
+      (.up ℤ)).obj Z).Acyclic := by
+    intro j
+    exact (hZ j).map (coefficientSequenceEvaluation l E W n)
+  have ht := hC n _ hZn
+  exact (ht i).of_iso (coefficientEvaluationTensorIso l E W n Z C).symm
 
-private noncomputable def scalarModelIso'
-    {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
-    {J : GrothendieckTopology C}
-    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-    [HasSheafify J AddCommGrpCat.{r}]
-    {R S : Sheaf J CommRingCat.{r}} {φ ψ : R ⟶ S}
-    [HasDerivedCategory.{w₁}
-      (SheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]
-    [HasDerivedCategory.{w₂}
-      (SheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J S))]
-    (h : φ = ψ) (A : SheafOfModules.DerivedChangeOfRingsCochainModel φ)
-    (B : SheafOfModules.DerivedChangeOfRingsCochainModel ψ) : A.T ≅ B.T := by
-  subst ψ
-  let a : A.E ≅ B.E := NatIso.ofComponents
-    (fun M ↦ eqToIso ((A.obj_eq M).trans (B.obj_eq M).symm)) (by
-      intro M N f
-      simp only [eqToIso.hom, A.map_eq, B.map_eq, Category.assoc,
-        eqToHom_trans_assoc, eqToHom_trans])
-  letI := A.universal
-  letI := B.universal
-  exact Functor.leftDerivedNatIso A.T B.T A.ε B.ε
-    (HomologicalComplex.quasiIso _ (.up ℤ))
-    (Functor.isoWhiskerRight (NatIso.mapHomologicalComplex a (.up ℤ)) DerivedCategory.Q)
+/- STATEMENT-DISPUTED: the retired primitiveQuotientScalarModelNormalization
+quantified over an arbitrary realization. Unit twisting contradicts that assertion;
+the construction below chooses the realization together with its normalization. -/
+
+/-- The scalar realization is obtained by descending its strict tensor comparison.
+Source: Stacks 03EK, 03D7, 06YY and 0941.
+(blueprint: lem-trf-primitive-quotient-scalar-model-existence).
+Proof: choose the actual ordinary quotient model and its derived comparison with
+SW. Each evaluated quotient of a good complex is K-flat, hence so is its whole
+sequence complex by componentwise tensor and exactness. The scalar cochain counit
+therefore computes on these complexes. Combine this counit with the fixed normalized
+Roos comparison and the ordinary balanced scalar tower isomorphism. Descend the
+resulting natural isomorphism along the good-complex localization. For another
+coherent presentation, use its unique strict quotient isomorphism. Naturality of
+the cochain counit and Roos comparison and cancellation of this strict isomorphism
+give the normalization equation. -/
+theorem primitiveQuotientScalarModelExistence
+    (W : Scheme.{t})
+    (_hlW : ∀ x : W, IsUnit (l : W.residueField x))
+    (SW : CoefficientDerivedSystemCalculus l E W)
+    (ρW : IntegralComparisonRoosModel l L W) :
+    Nonempty (IntegralComparisonScalarModel l E L ι W SW ρW) := by
+  obtain ⟨M, D, hD⟩ := coherentQuotientReductionComparison l E W _hlW SW
+  obtain ⟨θ, hθ⟩ := ordinaryQuotientScalarTowerComparison l E L ι W M
+  let A := (integralOperationsGoodComplex l E W).ι
+  let R := M.quotient l E W
+  let F := (integralComparisonSequenceScalarModel l E L ι W).E
+  let U := coefficientSequenceRestriction l L W
+  let H : (ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l L W) ℤ) ⥤
+      DerivedCategory (scalarReductionSource l L W) :=
+    integralOperationsRoosFunctor ⋙ DerivedCategory.Q
+  let T := F.mapHomologicalComplex (.up ℤ) ⋙ U.mapHomologicalComplex (.up ℤ) ⋙
+    HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  let LL := coefficientSequenceLimit l L W
+  let V := integralComparisonDerivedSequenceScalar l E L ι W ⋙ LL
+  let η : DerivedCategory.Q ⋙ V ⟶ T ⋙ H :=
+    Functor.whiskerRight (integralComparisonSequenceScalarModel l E L ι W).ε LL ≫
+      Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+        (Functor.isoWhiskerRight U.mapDerivedCategoryFactors
+            (coefficientConstantTowerLimit l L W) ≪≫
+          Functor.isoWhiskerLeft (U.mapHomologicalComplex (.up ℤ)) ρW.comparison).hom
+  have hη (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
+      IsIso (η.app (R.obj P.obj)) := by
+    have hk : CochainComplex.IsKFlatIndependentCoefficients
+        (R := coefficientSequenceCommRingSheaf l E W) (R.obj P.obj) := by
+      apply sequenceKFlat_of_evaluations l E W
+      intro n
+      exact SheafOfModules.kFlat_iso_independent (integralCoefficientCommRingSheaf l E W n)
+        ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P.obj).symm
+        ((coefficientTensorModelPreservation l E W).1 P.obj P.property.1 n)
+    have := (integralComparisonSequenceScalarModel l E L ι W).computes _ hk
+    dsimp only [η, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  let d : integralOperationsGoodLocalization l E W ⋙ SW.reduction ≅
+      A ⋙ R ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun P ↦ by
+      haveI := D.reduction_isIso P.obj P.property.1 P.property.2
+      exact asIso (D.reductionComparison.app P.obj)) (by
+        intro P Q a
+        exact D.reductionComparison.naturality a.hom)
+  have : IsIso (Functor.whiskerLeft (A ⋙ R) η) :=
+    (NatTrans.isIso_iff_isIso_app _).2 hη
+  let δ : integralOperationsGoodLocalization l E W ⋙ (SW.reduction ⋙ V) ≅
+      integralScalarOnGood l E L ι W :=
+    Functor.isoWhiskerRight d V ≪≫ asIso (Functor.whiskerLeft (A ⋙ R) η) ≪≫
+      Functor.isoWhiskerLeft A (Functor.isoWhiskerRight θ H)
+  obtain ⟨r, hr, _⟩ :=
+    (integralScalarExtensionWellDefined l E L ι W).2.choose_spec.choose_spec.2.2.1
+      (SW.reduction ⋙ V) δ
+  change Functor.isoWhiskerLeft (integralOperationsGoodLocalization l E W) r ≪≫ δ =
+    integralScalarExtensionComparisonOfUniverses l E L ι W at hr
+  refine ⟨⟨r, ?_⟩⟩
+  intro P C e κ hp hc
+  obtain ⟨a, ha, hκ⟩ := hD P C e κ hp hc
+  let q := T.mapIso a.symm ≪≫ θ.app P.obj
+  refine ⟨q, hθ P.obj C a κ hκ, ?_⟩
+  have he := congrArg (fun z ↦ z.hom.app P) hr
+  change r.hom.app (DerivedCategory.Q.obj P.obj) ≫
+      (V.map (D.reductionComparison.app P.obj) ≫ η.app (R.obj P.obj) ≫
+        H.map (θ.hom.app P.obj)) =
+    (integralScalarExtensionComparisonOfUniverses l E L ι W).hom.app P at he
+  have hn := η.naturality a.hom
+  change V.map (DerivedCategory.Q.map a.hom) ≫ η.app C =
+    η.app (R.obj P.obj) ≫ H.map (T.map a.hom) at hn
+  have hq : T.map a.hom ≫ q.hom = θ.hom.app P.obj := by
+    dsimp only [q]
+    change T.map a.hom ≫ (T.map a.inv ≫ θ.hom.app P.obj) = _
+    rw [← Category.assoc, ← T.map_comp, a.hom_inv_id, T.map_id, Category.id_comp]
+  have hcancel : H.map (T.map a.hom) ≫ H.map q.hom = H.map (θ.hom.app P.obj) := by
+    rw [← H.map_comp, hq]
+  have hcomp : V.map e.hom ≫ η.app C ≫ H.map q.hom =
+      V.map (D.reductionComparison.app P.obj) ≫ η.app (R.obj P.obj) ≫
+        H.map (θ.hom.app P.obj) := by
+    rw [← ha, V.map_comp]
+    simp only [Category.assoc]
+    rw [← Category.assoc (V.map (DerivedCategory.Q.map a.hom)), hn]
+    simp only [Category.assoc]
+    rw [hcancel]
+  have hηC : LL.map ((integralComparisonSequenceScalarModel l E L ι W).ε.app C) ≫
+      (integralComparisonRoosBridge l L W ρW _).hom = η.app C := by
+    rfl
+  have hfirst :
+      LL.map ((integralComparisonDerivedSequenceScalar l E L ι W).map e.hom) ≫
+        LL.map ((integralComparisonSequenceScalarModel l E L ι W).ε.app C) ≫
+          (integralComparisonRoosBridge l L W ρW _).hom ≫ H.map q.hom =
+      V.map e.hom ≫ η.app C ≫ H.map q.hom := by
+    simpa only [V, Functor.comp_map, Category.assoc] using
+      congrArg (fun g ↦ V.map e.hom ≫ g ≫ H.map q.hom) hηC
+  change r.hom.app (DerivedCategory.Q.obj P.obj) ≫
+      (LL.map ((integralComparisonDerivedSequenceScalar l E L ι W).map e.hom) ≫
+        LL.map ((integralComparisonSequenceScalarModel l E L ι W).ε.app C) ≫
+          (integralComparisonRoosBridge l L W ρW _).hom ≫ H.map q.hom) = _
+  rw [hfirst, hcomp]
+  exact he
 
 /-- The scalar realization iso exists before imposing the quotient-generator
 normalization. Source: Stacks 06YY and 0941; this is the realization portion
@@ -88,84 +185,7 @@ theorem primitiveQuotientScalarModelRealization
     Nonempty (integralScalarExtensionOfUniverses l E L ι W ≅
       SW.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι W ⋙
         coefficientSequenceLimit l L W) := by
-  obtain ⟨SL, _⟩ := coefficientDerivedSystemEvaluationCalculus l L W
-  obtain ⟨D⟩ := SemilinearSections.semilinearDerivedSections.{t + 1, t, u}
-    (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W)
-    (coefficientSequenceCommRingTransition l E W)
-  let A : CoefficientExtensionSystems l E L ι W :=
-    D.coefficientExtension (integralCoefficientCommRingSheaf l L W)
-      (coefficientSequenceCommRingTransition l L W)
-      (integralScalarQuotientSheafMap l E L ι W)
-      (coefficientExtensionQuotient_naturality l E L ι W)
-  have hφ : SemilinearSections.systemMap.{t + 1, t, max u (t + 1)}
-      (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W)
-      (coefficientSequenceCommRingTransition l E W)
-      (integralCoefficientCommRingSheaf l L W)
-      (coefficientSequenceCommRingTransition l L W)
-      (integralScalarQuotientSheafMap l E L ι W)
-      (coefficientExtensionQuotient_naturality l E L ι W) =
-        integralComparisonSequenceScalarMap l E L ι W := by
-    apply Sheaf.hom_ext
-    apply NatTrans.ext
-    funext U
-    exact (SemilinearSections.systemMap_existsUnique.{t + 1, t, max u (t + 1)}
-      (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W)
-      (coefficientSequenceCommRingTransition l E W)
-      (integralCoefficientCommRingSheaf l L W)
-      (coefficientSequenceCommRingTransition l L W)
-      (integralScalarQuotientSheafMap l E L ι W)
-      (coefficientExtensionQuotient_naturality l E L ι W)).exists.choose_spec
-        U.unop.1 (Opposite.op U.unop.2)
-  let : HasSheafify (coefficientSequenceTopology (Scheme.ProEt.topology W))
-      AddCommGrpCat.{max u (t + 1)} :=
-    SemilinearSections.abelianSheafify.{t + 1, t, max u (t + 1)}
-      (coefficientSequenceTopology (Scheme.ProEt.topology W))
-  let : (coefficientSequenceTopology (Scheme.ProEt.topology W)).WEqualsLocallyBijective
-      AddCommGrpCat.{max u (t + 1)} :=
-    SemilinearSections.locallyBijective.{t + 1, t, max u (t + 1)}
-      (coefficientSequenceTopology (Scheme.ProEt.topology W))
-  let a : A.scalar.T ≅ integralComparisonDerivedSequenceScalar l E L ι W :=
-    scalarModelIso' hφ A.scalar.model
-      (integralComparisonSequenceScalarModel l E L ι W)
-  have hl : IsUnit (l : Γ(W, ⊤)) := globalUnit_of_residueUnits l _hlW
-  obtain ⟨d⟩ := coefficientExtensionReductionModel l E L ι W SW SL A hl
-  let e : integralScalarExtensionOfUniverses l E L ι W ≅
-      SW.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι W ⋙
-        coefficientSequenceLimit l L W :=
-    d.completion.symm ≪≫
-      Functor.isoWhiskerLeft SW.reduction
-        (Functor.isoWhiskerRight a (coefficientSequenceLimit l L W))
-  exact ⟨e⟩
-
-/-- The canonical realization satisfies the quotient-generator normalization.
-Source: Stacks 06YY and 0941; the balanced quotient association and normalized
-Roos comparison on simultaneous flat-term K-flat presentations.
-(blueprint: lem-trf-primitive-quotient-scalar-model-normalization)
-Proof: on each finite quotient, transpose the balanced map through the
-scalar-extension adjunction. Its value on 1 tensor x is the prescribed tensor
-section. The maps commute with quotient transitions and cochain differentials;
-the strict Roos comparison then gives the displayed derived equation. Descent
-from K-flat representatives and naturality extend the equation to every
-coherent presentation. -/
-theorem primitiveQuotientScalarModelNormalization
-    (W : Scheme.{t})
-    (_hlW : ∀ x : W, IsUnit (l : W.residueField x))
-    (SW : CoefficientDerivedSystemCalculus l E W)
-    (ρW : IntegralComparisonRoosModel l L W)
-    (realization : integralScalarExtensionOfUniverses l E L ι W ≅
-      SW.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι W ⋙
-        coefficientSequenceLimit l L W) :
-    IsIntegralComparisonScalarNormalized l E L ι W SW ρW realization := by
-  sorry
-
-theorem primitiveQuotientScalarModelExistence
-    (W : Scheme.{t})
-    (_hlW : ∀ x : W, IsUnit (l : W.residueField x))
-    (SW : CoefficientDerivedSystemCalculus l E W)
-    (ρW : IntegralComparisonRoosModel l L W) :
-    Nonempty (IntegralComparisonScalarModel l E L ι W SW ρW) := by
-  obtain ⟨realization⟩ := primitiveQuotientScalarModelRealization l E L ι W _hlW SW ρW
-  exact ⟨⟨realization, primitiveQuotientScalarModelNormalization l E L ι W _hlW SW ρW
-    realization⟩⟩
+  obtain ⟨M⟩ := primitiveQuotientScalarModelExistence l E L ι W _hlW SW _ρW
+  exact ⟨M.realization⟩
 
 end WeilConjectures

@@ -1,0 +1,79 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Sheaf.Paper.IntegralComparisonRealizationModels
+public import Sheaf.Paper.CompletionUnitModels
+
+/-! # Ordinary quotient scalar tower comparison
+
+Source: Stacks 03EK, 03D7, 06YY and 0941, balanced tensor association.
+(blueprint: lem-trf-ordinary-quotient-scalar-tower-comparison)
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
+
+universe t u
+open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+namespace WeilConjectures
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+  (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
+  (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{t})
+
+/-- Ordinary scalar extension of the strict quotient system is the direct scalar tower.
+Source: Stacks 03EK, 03D7 and 0941, balanced association for quotient tensors.
+(blueprint: lem-trf-ordinary-quotient-scalar-tower-comparison).
+
+Proof: evaluate at each quotient. The ordinary extension/restriction adjunction
+identifies evaluation of sequence scalar extension with scalar extension of the
+evaluated module. If chosen cochain models differ, their obj_eq and map_eq
+formulas identify the ordinary extension functors; equality of the actual ring
+maps identifies their tensor sections. The ordinary unit formulas ensure these
+identifications preserve unit tensors. Compose with M.evaluation and the
+balanced associator
+b tensor (a tensor x) to (b times iota(a)) tensor x. Its inverse inserts 1.
+Both maps commute with quotient reduction because reduction preserves products,
+so they assemble to an isomorphism of whole strict towers. Apply the construction
+degreewise; naturality gives compatibility with differentials and chain maps.
+For a presentation a, precompose this comparison with scalar extension of a inverse.
+The evaluation equation cancels a against kappa. On the sections 1 tensor x this
+gives exactly s tensor x in the target. Linearity gives all s, and sheafification
+extends the formula to arbitrary local sections. This is an ordinary tensor and
+strict tower statement; it asserts no faithfulness of derived evaluations. -/
+theorem ordinaryQuotientScalarTowerComparison
+    (M : CompletionUnit.OrdinaryModel l E W) :
+    let F := (integralComparisonSequenceScalarModel l E L ι W).E
+    let T := F.mapHomologicalComplex (.up ℤ) ⋙
+      (coefficientSequenceRestriction l L W).mapHomologicalComplex (.up ℤ) ⋙
+      HomologicalComplex.complexOfFunctorsToFunctorToComplex
+    ∃ θ : M.quotient l E W ⋙ T ≅ integralScalarTowerFunctor l E L ι W,
+      ∀ (P : CochainComplex (scalarReductionSource l E W) ℤ)
+        (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
+        (a : (M.quotient l E W).obj P ≅ C)
+        (κ : ∀ n : ℕ,
+          ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
+            (unrestrictedIntegralFiniteComplex l E W n).obj P),
+        (∀ n : ℕ,
+          ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).mapIso a ≪≫
+            κ n = (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P) →
+        ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ)
+          (s : (coefficientSequenceCommRingSheaf l L W).obj.obj (op (n, U.unop)))
+          (x : (P.X i).val.obj U),
+          (((T.mapIso a.symm ≪≫ θ.app P).hom.app (op n)).f i).val.app U
+            (integralComparisonRestrictedSection l L W (F.obj (C.X i)) n U
+              (integralComparisonSequenceTensorSection l E L ι W (C.X i)
+                (op (n, U.unop)) s
+                (integralComparisonSequenceSection l E W (C.X i) n U
+                  (((κ n).inv.f i).val.app U
+                    (unrestrictedIntegralTensorSection l E W n (P.X i) U 1 x))))) =
+            integralScalarTensorSection l E L ι W n (P.X i) U s x := by
+  sorry
+
+end WeilConjectures
