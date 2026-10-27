@@ -585,7 +585,9 @@ def importer_recheck(plan: dict) -> None:
         return
     try:
         import importer_compile as ic
-        if auto and not ic.plan(plan["D"])["compile"]:
+        # 2026-10-27 22:40 (the owner): the related set (direct importers and the transitive importers that mention a
+        # changed name or an affected class: importer_compile.related_plan), not only the direct importers
+        if auto and not ic.related_plan(plan["D"])["compile"]:
             return
         r = ic.recheck(plan["D"], plan["head"])
     except Exception as e:  # noqa: BLE001   the global build still verifies the landing
@@ -597,7 +599,8 @@ def importer_recheck(plan: dict) -> None:
         return
     if r["compiled"]:
         plan["D"].setdefault("notes", []).append(
-            f"importer recheck at landing: {len(r['compiled'])} direct importer(s) compiled again"
+            f"importer recheck at landing: {len(r['compiled'])} related module(s) compiled again"
+            + (f" ({len(r['worker_reused'])} reused from the worker's compile)" if r.get("worker_reused") else "")
             + (f", pre-existing failures {', '.join(r['pre_existing'])}" if r["pre_existing"] else "")
             + (f", not decided: {', '.join(f'{u} {s}' for u, s in r['other'].items())}" if r["other"] else "")
             + (f", not compiled: {len(r['not_run'])}" if r["not_run"] else ""))
@@ -611,7 +614,7 @@ def importer_recheck(plan: dict) -> None:
     if r["not_run"] and time.time() - r["first"] < wait_max:
         # busy compile slots: the delivery waits for the next step, which compiles the rest (results are kept); after
         # SHEAF_S3_RECHECK_WAIT (3 h) of waiting it lands and the global build decides
-        raise Wait(f"importer recheck: {len(r['not_run'])} of {len(r['compiled'])} direct importer(s) not compiled yet "
+        raise Wait(f"importer recheck: {len(r['not_run'])} of {len(r['compiled'])} related module(s) not compiled yet "
                    f"(compile slots busy), e.g. {', '.join(r['not_run'][:3])}")
 
 

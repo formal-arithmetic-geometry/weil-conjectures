@@ -31,7 +31,11 @@ A second packet of the same head reuses a result only when the importer's source
 
 Recheck at landing (tools/batch_land.py _check -> importer_recheck, a reader-passed stage-3 delivery only): every
 direct importer whose source hash differs from the evidence, that is not in it, or whose evidence is not OK, is
-compiled again against the texts that will land. An importer that FAILS with the delivery and compiles on main without
+compiled again against the texts that will land. 2026-10-27 22:40 (the owner): the recheck covers the RELATED set
+(related_plan: tools/related_modules.py, direct importers plus the transitive importers that mention a changed name or
+an affected class), and reuses the worker's own related compile recorded in the delivered report (section
+"## Related modules compiled before delivery", written by Codex deliver3.py): an importer the worker found OK against
+the same delivered texts, whose source is unchanged, is not compiled again. An importer that FAILS with the delivery and compiles on main without
 it refuses the landing (the delivery goes back to its writer with the compiler message); one that fails on main too is
 pre-existing, and INFRA/SLOW/NOT RUN do not refuse. Record: local/importer-checks/<head>.recheck.json.
 """
@@ -115,6 +119,53 @@ def plan(D: dict, cap: int = NOCAP) -> dict:
             cand.setdefault(u, []).append(m["module"])
     order = sorted(cand, key=lambda u: (u not in users, u))
     return {"changed": changed, "compile": order[:cap], "skipped": order[cap:], "via": cand, "proof_only": proof_only}
+
+
+WORKER_SECTION = "## Related modules compiled before delivery"
+
+
+def worker_evidence(D: dict) -> dict:
+    """The related-module compile the worker's delivery tool recorded in the delivered report (Codex deliver3.py,
+    2026-10-27): {"own": {module: blob hash of the delivered text}, "results": {module: {"hash", "status"}}}, or {}."""
+    t = D.get("report") or ""
+    m = re.search(r"^" + re.escape(WORKER_SECTION) + r"\b.*?```json\n(.*?)\n```", t, re.S | re.M)
+    if not m:
+        return {}
+    try:
+        d = json.loads(m.group(1))
+    except ValueError:
+        return {}
+    return d if isinstance(d, dict) and isinstance(d.get("results"), dict) and isinstance(d.get("own"), dict) else {}
+
+
+_RELATED: dict = {}
+
+
+def related_plan(D: dict) -> dict:
+    """plan(D) widened to the related set of tools/related_modules.py (the owner, 2026-10-27 22:40: a change is compiled
+    with the related modules, not only the direct importers): besides every direct importer of an interface-changed
+    module, the transitive importers that mention a declaration the delivery added, removed or restated, or a class
+    whose instances/attributes it changed (nearest first, capped: SHEAF_RELATED_CAP). A failure of the related-set
+    computation leaves plan(D) (direct importers) and is noted in "related_error"."""
+    hit = _RELATED.get(id(D))
+    if hit is not None and hit[0] is D:
+        return hit[1]
+    P = plan(D)
+    try:
+        import related_modules as rm
+        r = rm.for_delivery(D)
+        delivered = {m["module"] for m in D["modules"]}
+        mention = {x["module"]: x["mentions"] for x in r["transitive"]}
+        extra = [u for u in r["related"] if u not in P["via"] and u not in delivered and u not in P["compile"]]
+        P["compile"] = P["compile"] + extra
+        for u in extra:
+            P["via"][u] = ["mentions " + ", ".join(mention.get(u, [])[:4])] if u in mention else list(r["direct"].get(u, []))
+        P["related"] = {"added": len(extra), "transitive": len(r["transitive"]), "capped": r["capped"],
+                        "left_out": len(r["left_out"])}
+    except Exception as e:  # noqa: BLE001   the direct importers are still compiled
+        P["related_error"] = repr(e)[:300]
+    _RELATED.clear(); _RELATED[id(D)] = (D, P)
+    return P
 
 
 def _call(jobs_src: list[tuple[str, str, bool]], timeout: int, deadline: float) -> list[dict]:
@@ -367,14 +418,14 @@ def evidence(D: dict, item: str, head: str, cap: int = NOCAP) -> str:
     return "\n".join(o) + "\n"
 
 
-def recheck(D: dict, head: str, total: int = RECHECK_TOTAL, write: bool = True) -> dict:
+def recheck(D: dict, head: str, total: int = RECHECK_TOTAL, write: bool = True, related: bool = True) -> dict:
     """The landing's recheck. Returns {"compiled": {mod: why}, "new_fail": {mod: out}, "pre_existing": [...],
     "other": {mod: status}, "not_run": [...], "first": t, "seconds": n}; refusing or waiting is the caller's
     (tools/batch_land.py importer_recheck). Incremental: the results of earlier rechecks of the same head and delivered
     texts are kept in local/importer-checks/<head>.recheck.json and reused for an importer whose source is unchanged, so
     a recheck cut short by busy compile slots goes on where it stopped."""
     t0 = time.time(); deadline = t0 + total
-    P = plan(D)
+    P = related_plan(D) if related else plan(D)
     ev = load_evidence(head) or {}
     evres = (ev.get("results") or {}) if ev.get("version") == 2 else {}
     own = own_hashes(D)
@@ -388,9 +439,18 @@ def recheck(D: dict, head: str, total: int = RECHECK_TOTAL, write: bool = True) 
     done = prev.get("results") or {}
     why = {}
     moved = [m for m, h in own.items() if evres and (ev.get("own") or {}).get(m, h) != h]
+    # 2026-10-27: the worker's delivery tool compiled the related modules against these same delivered texts; an
+    # importer it found OK whose source is unchanged since is not compiled again
+    wev = worker_evidence(D)
+    wres = (wev.get("results") or {}) if wev and all((wev.get("own") or {}).get(m) == h for m, h in own.items()) else {}
+    reused = []
     for u in P["compile"]:
         r = evres.get(u)
         cur = blob_hash(source(u))
+        w = wres.get(u)
+        if w and w.get("status") == "OK" and w.get("hash") == cur:
+            reused.append(u)
+            continue
         if moved:
             why[u] = "the delivered text of " + ", ".join(moved[:3]) + " differs from the one reviewed (a reviewer's fix or a merge)"
         elif r is None:
@@ -401,7 +461,7 @@ def recheck(D: dict, head: str, total: int = RECHECK_TOTAL, write: bool = True) 
             why[u] = f"{r.get('status')} at review"
     out = {"head": head, "time": time.strftime("%FT%T%z"), "first": prev.get("first") or t0, "own": own,
            "compiled": why, "new_fail": {}, "pre_existing": [], "other": {}, "not_run": [], "own_failed": None,
-           "results": {}}
+           "results": {}, "worker_reused": reused, "related": P.get("related") or {"error": P.get("related_error")}}
     todo = []
     for u in why:
         d0 = done.get(u)
