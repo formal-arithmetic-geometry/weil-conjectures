@@ -1,0 +1,125 @@
+{
+ "id": "stage3-pur-scalar-pullback-right-roos",
+ "kind": "statement",
+ "title": "Right scalar/pullback route in fixed ordinary Roos coordinates",
+ "statement": "Fix l,E,L,iota,W,f, normalized completed operations ME with coefficients E, an L Roos model rho at X, and a normalized scalar model SX at X [def-trf-integral-comparison-realization-models]. Let K be integral constructible, eP:Q(P) iso K a good presentation, (C,eC,kappa) a coherent quotient presentation of P, and q a nested strict quotient comparison with its tensor-unit formula [stage3-pur-scalar-pullback-roos-coordinates]. Assume l invertible on X,Y and E-pullback of K complete. The composite SX.realization at E-pullback(K), total L-limit of scalar_E_to_L(pullbackReduction(ME,f,K)), and scalarPullbackRoosCoordinate is exactly scalarPullbackRoosChain on (P,K,eP). This is an equation with the explicit ordinary chain map and inverse scalar-completion map, using no scalar realization at Y or L-pullback realization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); scalar/pullback realization calculation, step 8 of lem-pur-scalar-extension-tower-coherence. Specialized coordinate formulas are the agent's expansion using the project normalization definitions."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "stage3-pur-scalar-pullback-roos-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use ME.pullback normalization on (P,C,eC,kappa). Transpose through the coherent reduction adjunction: its counit is pullbackReduction. Choose a flat-term K-flat representative of E-pullback(P), and compare its coherent quotient presentation with the pulled presentation by their whole-system tensor-unit transposes. Apply SX.normalization on the new representative, then use naturality of the scalar cochain counit and Roos bridge to cancel the resolution comparison.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-coherent-primitive-reduction-presentation",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar/pullback system isomorphism is localized from the strict scalar/pullback association with its scalar cochain counits. Its cochain equation identifies the normalized result with the pulled scalar tower. Apply q: its nested unit formula identifies this strict map with scalarPullbackLevel, respecting every quotient transition. The scalar completion normalization has tensor-unit unshifted coordinate and zero shifted coordinate, so the Roos image is scalarPullbackChain preceded by inverse scalar completion. Naturality along eP gives the exact stated chain formula.",
+   "uses": [
+    "stage3-pur-scalar-pullback-roos-coordinates",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-pod-scalar-completion-tensor-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-coherent-primitive-reduction-presentation",
+  "lem-pc-kflat-resolution",
+  "stage3-pur-scalar-pullback-roos-coordinates",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pod-scalar-completion-tensor-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); scalar/pullback realization calculation, step 8 of lem-pur-scalar-extension-tower-coherence. Specialized coordinate formulas are the agent's expansion using the project normalization definitions."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension and pullback quotient comparison is natural on tensor unit generators and commutes with the Roos inverse limit",
+   "results": "8 hits: Algebra.Generators.extendScalars_val, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, TensorProduct.directLimitLeft, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, TensorProduct.directLimitRight, TensorProduct.directLimitRight_symm_of_tmul, Algebra.Generators.toExtendScalars, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-28",
+   "verdict": "No theorem about the normalized coefficient-sequence/Roos route. Use project normalization and strict quotient constructions; generic tensor/adjunction lemmas support their formalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized scalar extension realization and a normalized pullback realization compute the canonical scalar pullback chain map in Roos coordinates",
+   "results": "8 hits: KaehlerDifferential.moduleBaseChange', AlgebraicGeometry.pullbackSpecIso_hom_base, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd",
+   "date": "2026-10-28",
+   "verdict": "No theorem about the normalized coefficient-sequence/Roos route. Use project normalization and strict quotient constructions; generic tensor/adjunction lemmas support their formalization."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]ullback|[Rr]oos.*[Ss]calar",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-28",
+   "verdict": "No theorem about the normalized coefficient-sequence/Roos route. Use project normalization and strict quotient constructions; generic tensor/adjunction lemmas support their formalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarTowerPullbackLimitBridge",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-pur-scalar-pullback-limit-bridge",
+   "place": "right one-sided normalization computation",
+   "via": [
+    "stage3-pur-scalar-pullback-limit-bridge",
+    "stage3-pur-scalar-pullback-limit-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullbackRightRoos",
+  "file": "lean/Sheaf/Paper/ScalarPullbackRightRoos.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.scalarPullbackRightRoos",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.scalarPullbackRightRoos"
+  ],
+  "statement": "theorem scalarPullbackRightRoos (W : Bool → Scheme.{u}) (ME : CompletedOperations.Models.{u, u} l E W) (ρ : IntegralComparisonRoosModel.{u, u} l L (W true)) (SX : IntegralComparisonScalarModel.{u, u} l E L ι (W true) (ME.calculus true) ρ) (f : W true ⟶ W false) (_hX : IsUnit (l : Γ(W true, ⊤))) (_hY : IsUnit (l : Γ(W false, ⊤))) (P : (integralOperationsGoodComplex.{u, u} l E (W false)).FullSubcategory) (K : sfIntegralConstructibleCategory l E (W false)) (eP : DerivedCategory.Q.obj P.obj ≅ K.obj) (C : CochainComplex (coefficientSequenceModules.{u, u} l E (W false)) ℤ) (eC : (ME.calculus false).reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C) (κ : ∀ n : ℕ, ((coefficientSequenceEvaluation.{u, u} l E (W false) n).mapHomologicalComplex (.up ℤ)).obj C ≅ (unrestrictedIntegralFiniteComplex.{u, u} l E (W false) n).obj P.obj) (hp : CoefficientReductionPresentation.{u, u} l E (W false) (ME.calculus false).toCoefficientDerivedSystemReduction P.obj P.property.1 C eC κ) (hc : IsIntegralComparisonPresentationCoherent.{u, u} l E (W false) (ME.calculus false) P.obj C eC κ) (q : (((coefficientSequenceRestriction.{u, u} l L (W true)).mapHomologicalComplex (.up ℤ)).obj ((((integralComparisonSequencePullback.{u, u} l L f).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).E.mapHomologicalComplex (.up ℤ)).obj C)))).asFunctor ≅ (integralOperationsPullbackTowerFunctor.{u, u} l L f).obj (((integralOrdinaryScalar l E L ι (W false)).mapHomologicalComplex (.up ℤ)).obj P.obj)) (hq : ScalarPullbackQuotientFormula l E L ι f P C κ q) (hF : IsSfDerivedComplete l E (W true) ((integralDerivedPullback.{u, u} l E f).obj K.obj)) : (SX.realization.hom.app ((integralDerivedPullback.{u, u} l E f).obj K.obj) ≫ (coefficientSequenceLimit.{u, u} l L (W true)).map ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map (pullbackReduction l E W ME f K.obj))) ≫ scalarPullbackRoosCoordinate l E L ι f P C (ME.calculus false) ρ K.obj eP eC q = scalarPullbackRoosChain l E L ι f P K.obj eP hF",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234253-L-83762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234253-L-83762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

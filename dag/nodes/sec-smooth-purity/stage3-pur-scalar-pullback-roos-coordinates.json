@@ -1,0 +1,126 @@
+{
+ "id": "stage3-pur-scalar-pullback-roos-coordinates",
+ "kind": "statement",
+ "title": "Nested scalar/pullback quotient Roos coordinates",
+ "statement": "Fix a prime l, finite coefficient fields E and L over Q_l and an embedding iota, a scheme morphism f:X to Y, a flat-term K-flat completed E-coefficient complex P, and a coherent simultaneous strict quotient presentation (C,eC,kappa) in a derived system calculus SE [def-trf-integral-comparison-realization-models]. There is an isomorphism q from the strict restricted L-coefficient tower pull_L(scalar(C)) to the actual finite pullback tower of ordinary completed-ring scalar extension of P. For every n, degree i and local section x of P, q sends the nested scalar unit and pullback unit applied to kappa_n inverse(1 tensor x) to the finite pullback of 1 tensor (1 tensor x). The source is a whole sequence-site complex: q commutes with all quotient transitions and differentials. Moreover derived sequence scalar extension computes on pull_E(C), as proved in scalarPullbackQuotient_computes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); scalar/pullback realization calculation, step 8 of lem-pur-scalar-extension-tower-coherence. Specialized coordinate formulas are the agent's expansion using the project normalization definitions."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary quotient model and whole-system coherent presentation to identify C with the strict ordinary quotient system, retaining the actual transition maps. Ordinary quotient scalar comparison associates B_n tensor over A_n (A_n tensor P) with B_n tensor P, and the inverse ordinary B quotient association identifies this with B_n tensor over completed B (completed B tensor P). Pull back that comparison and apply ordinary quotient pullback comparison for the resulting L-complex. These functorial identifications assemble to q; both associations and their inverses preserve tensor-unit sections, proving the displayed generator formula.",
+   "uses": [
+    "lem-trf-ordinary-quotient-scalar-tower-comparison",
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the separately proved computability assertion, transport K-flatness and termwise flatness across kappa at each level. The sequence-site detection lemmas give the two properties on C. Sequence inverse image preserves this resolving class, so the derived scalar cochain model computes on the pulled complex. This uses only existing proved flatness/detection helpers.",
+   "uses": [
+    "stage3-pur-good-quotient-presentation",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ordinary-quotient-scalar-tower-comparison",
+  "lem-trf-ordinary-quotient-pullback-tower-comparison",
+  "def-trf-integral-comparison-realization-models",
+  "stage3-pur-good-quotient-presentation",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); scalar/pullback realization calculation, step 8 of lem-pur-scalar-extension-tower-coherence. Specialized coordinate formulas are the agent's expansion using the project normalization definitions."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension and pullback quotient comparison is natural on tensor unit generators and commutes with the Roos inverse limit",
+   "results": "8 hits: Algebra.Generators.extendScalars_val, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, TensorProduct.directLimitLeft, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, TensorProduct.directLimitRight, TensorProduct.directLimitRight_symm_of_tmul, Algebra.Generators.toExtendScalars, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-28",
+   "verdict": "No theorem about the normalized coefficient-sequence/Roos route. Use project normalization and strict quotient constructions; generic tensor/adjunction lemmas support their formalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized scalar extension realization and a normalized pullback realization compute the canonical scalar pullback chain map in Roos coordinates",
+   "results": "8 hits: KaehlerDifferential.moduleBaseChange', AlgebraicGeometry.pullbackSpecIso_hom_base, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd",
+   "date": "2026-10-28",
+   "verdict": "No theorem about the normalized coefficient-sequence/Roos route. Use project normalization and strict quotient constructions; generic tensor/adjunction lemmas support their formalization."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]ullback|[Rr]oos.*[Ss]calar",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-28",
+   "verdict": "No theorem about the normalized coefficient-sequence/Roos route. Use project normalization and strict quotient constructions; generic tensor/adjunction lemmas support their formalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarTowerPullbackLimitBridge",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-pur-scalar-pullback-limit-bridge",
+   "place": "strict quotient coordinates used by both normalization calculations",
+   "via": [
+    "stage3-pur-scalar-pullback-limit-bridge",
+    "stage3-pur-scalar-pullback-limit-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullbackRoosCoordinates",
+  "file": "lean/Sheaf/Paper/ScalarPullbackRoosCoordinates.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.scalarPullbackRoosCoordinates_exists",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.ScalarPullbackQuotientFormula",
+   "WeilConjectures.ScalarExtensionTower.scalarPullbackRoosCoordinate",
+   "WeilConjectures.ScalarExtensionTower.scalarPullbackRoosChain",
+   "WeilConjectures.ScalarExtensionTower.scalarPullbackRoosCoordinates_exists",
+   "WeilConjectures.ScalarExtensionTower.scalarPullbackQuotient_computes"
+  ],
+  "statement": "theorem scalarPullbackRoosCoordinates_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory) (C : CochainComplex (coefficientSequenceModules.{u, u} l E Y) ℤ) (SE : CoefficientDerivedSystemCalculus.{u, u} l E Y) (eC : SE.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C) (κ : ∀ n : ℕ, ((coefficientSequenceEvaluation.{u, u} l E Y n).mapHomologicalComplex (.up ℤ)).obj C ≅ (unrestrictedIntegralFiniteComplex.{u, u} l E Y n).obj P.obj) (hp : CoefficientReductionPresentation.{u, u} l E Y SE.toCoefficientDerivedSystemReduction P.obj P.property.1 C eC κ) (hc : IsIntegralComparisonPresentationCoherent.{u, u} l E Y SE P.obj C eC κ) : ∃ q : (((coefficientSequenceRestriction.{u, u} l L X).mapHomologicalComplex (.up ℤ)).obj ((((integralComparisonSequencePullback.{u, u} l L f).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel.{u, u} l E L ι Y).E.mapHomologicalComplex (.up ℤ)).obj C)))).asFunctor ≅ (integralOperationsPullbackTowerFunctor.{u, u} l L f).obj (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P.obj), ScalarPullbackQuotientFormula l E L ι f P C κ q",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234253-L-83762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234253-L-83762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

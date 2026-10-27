@@ -5,9 +5,12 @@ Released under Apache 2.0 license as described in the LICENSE file.
 module
 
 public import Sheaf.Paper.ScalarExtensionTowerRealizationData
-import Sheaf.Paper.ScalarTowerPullbackStrictSquare
+import Sheaf.Paper.ScalarPullbackLeftRoos
+import Sheaf.Paper.ScalarPullbackRightRoos
+import Sheaf.Paper.CoherentPrimitiveReductionPresentation
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
-/-! # From the strict square to normalized total-limit coordinates
+/-! # Scalar/pullback normalization in fixed Roos coordinates
 
 Source: Stacks 07A4 and 0941; realization step 8 of
 lem-pur-scalar-extension-tower-coherence.
@@ -27,16 +30,17 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The normalized representative and Roos-limit assembly.
-Assuming the strict quotient square, the normalization fields of `SX` and `SY`
-identify its two strict routes with the displayed realization maps.  Naturality
-of the normalized Roos bridge then gives the target equation.  This is the
-remaining assembly step after `scalarTowerPullbackStrictSquare`; its proof is
-independent of the generator calculation.
-Source: Stacks 07A4 and 0941
+/-- The scalar/pullback mate equation in fixed Roos coordinates.
+Source: Stacks 06YY, 07A4 and 0941
 (blueprint: stage3-pur-scalar-pullback-limit-bridge).
-Proof: choose a coherent K-flat quotient presentation, apply both normalization
-fields, use Roos naturality, and cancel the inverse system isomorphism.
+
+Proof: represent M by a good complex P and choose its coherent strict quotient
+presentation C. The nested quotient coordinate t is invertible: the scalar
+cochain counit computes on pull_E(C), as shown by levelwise K-flatness and
+termwise flatness. The left and right normalization calculations identify both
+maps, after t, with the same explicit ordinary scalarPullbackChain. Cancel t,
+and use the system isomorphism's hom-inverse identity on the right. The original
+strict tensor/pullback-square hypothesis is retained but not used.
 -/
 theorem scalarTowerPullbackLimitSquare_mate (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W)
@@ -70,6 +74,54 @@ theorem scalarTowerPullbackLimitSquare_mate (W : Bool → Scheme.{u})
       (coefficientSequenceLimit.{u, u} l L (W true)).map
         ((integralComparisonSystemScalarPullback.{u, u} l E L ι f).inv.app
           ((ME.calculus false).reduction.obj M.obj)) := by
-  sorry
+  let Q := integralOperationsGoodLocalization.{u, u} l E (W false)
+  let V := (HomologicalComplex.quasiIso (scalarReductionSource.{u, u} l E (W false))
+    (.up ℤ)).inverseImage (integralOperationsGoodComplex.{u, u} l E (W false)).ι
+  have : Q.IsLocalization V := integralOperationsGoodLocalization_isLocalization l E (W false)
+  have : Q.EssSurj := Localization.essSurj Q V
+  let P := Q.objPreimage M.obj
+  let eP : DerivedCategory.Q.obj P.obj ≅ M.obj := Q.objObjPreimageIso M.obj
+  obtain ⟨C, eC, κ, hp, hc⟩ :=
+    coherentPrimitiveReductionPresentation l E (ME.calculus false) P
+  obtain ⟨q, hq⟩ :=
+    scalarPullbackRoosCoordinates_exists l E L ι f P C (ME.calculus false) eC κ hp hc
+  let t := scalarPullbackRoosCoordinate l E L ι f P C
+    (ME.calculus false) (ML.roos true) M.obj eP eC q
+  have : IsIso ((integralComparisonSequenceScalarModel.{u, u} l E L ι (W true)).ε.app
+      (((integralComparisonSequencePullback.{u, u} l E f).mapHomologicalComplex (.up ℤ)).obj
+        C)) := scalarPullbackQuotient_computes l E L ι f P C κ
+  have : IsIso t := by
+    dsimp only [t, scalarPullbackRoosCoordinate]
+    infer_instance
+  have hleft := scalarPullbackLeftRoos l E L ι W (ME.calculus false) ML SY f
+    _hX _hY P M eP C eC κ hp hc q hq hF
+  have hright := scalarPullbackRightRoos l E L ι W ME (ML.roos true) SX f
+    _hX _hY P M eP C eC κ hp hc q hq hF
+  apply (cancel_mono t).1
+  simp only [Category.assoc] at hleft hright ⊢
+  refine hleft.trans ?_
+  symm
+  have hcancel := (integralComparisonSystemScalarPullback.{u, u} l E L ι f).hom_inv_id_app
+    ((ME.calculus false).reduction.obj M.obj)
+  simp only [Functor.comp_obj] at hcancel
+  have hm :
+      (coefficientSequenceLimit.{u, u} l L (W true)).map
+          ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map
+              (pullbackReduction l E W ME f M.obj) ≫
+            (integralComparisonSystemScalarPullback.{u, u} l E L ι f).hom.app
+              ((ME.calculus false).reduction.obj M.obj)) ≫
+        (coefficientSequenceLimit.{u, u} l L (W true)).map
+          ((integralComparisonSystemScalarPullback.{u, u} l E L ι f).inv.app
+            ((ME.calculus false).reduction.obj M.obj)) =
+      (coefficientSequenceLimit.{u, u} l L (W true)).map
+        ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map
+          (pullbackReduction l E W ME f M.obj)) := by
+    rw [← Functor.map_comp, Category.assoc, hcancel]
+    congr 1
+    exact Category.comp_id _
+  have hmt := congrArg (fun z ↦
+    SX.realization.hom.app ((integralDerivedPullback.{u, u} l E f).obj M.obj) ≫ z ≫ t) hm
+  simp only [Category.assoc] at hmt
+  exact hmt.trans hright
 
 end WeilConjectures.ScalarExtensionTower
