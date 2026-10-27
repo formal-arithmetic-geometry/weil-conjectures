@@ -11893,6 +11893,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DualBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.DualityPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalizationUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationBaseChange
