@@ -1,0 +1,113 @@
+{
+ "id": "lem-diagonal-completed-supported-transport-normalization",
+ "kind": "statement",
+ "title": "Ordinary normalization for supported coefficient transport",
+ "statement": "For prime l, a scheme Y, a projection f from the diagonal surface, a normalized supported source a, completed realizations eP and eW, an ordinary completed coefficient square s, and a coefficient isomorphism i whose underlying map has the prescribed diagonal coefficient normalization, the composite eP.unitIso.symm followed by eP.F.mapIso a.iso, the ordinary square at the completed source, and the direct image of i satisfies SupportNormalization for the condensed supported source.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-diagonal-completed-push-square"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1); initial coefficient and supported-source identification, expanded in lem-diagonal-completed-frame proof"
+ },
+ "proof": [
+  {
+   "text": "Expand the composite ordinary isomorphism and use naturality of the completed realization underlying comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the regular-unit comparison in the ordinary square normalization, then compose the input supported-source normalization with the direct-image composition map for the diagonal immersion followed by f=id and the identity direct-image map.",
+   "uses": [
+    "lem-diagonal-completed-push-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-completed-push-square"
+ ],
+ "proof_origin": {
+  "by": "worker E1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), ordinary supported-source normalization step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "support normalization of a composite ordinary direct-image isomorphism",
+   "results": "No existing declaration combines SupportNormalization with CompletedOrdinarySquare and coefficient realization comparisons.",
+   "date": "2026-10-28",
+   "verdict": "The new statement is the ordinary transport substep."
+  },
+  {
+   "tool": "loogle",
+   "query": "SupportNormalization lowerStar mapIso",
+   "results": "No matching theorem in the adopted source or Sheaf library.",
+   "date": "2026-10-28",
+   "verdict": "Use the named ordinary normalization statement."
+  },
+  {
+   "tool": "grep",
+   "query": "completedSupportedCoefficient_transport_normalization|SupportNormalization.*CompletedOrdinarySquare",
+   "results": "No duplicate theorem was found in lean/WeilConjectures or lean/Sheaf.",
+   "date": "2026-10-28",
+   "verdict": "The split statement is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedSupportedCoefficientTransport",
+  "date": "2026-10-28",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-completed-supported-transport",
+   "place": "ordinary normalization substep",
+   "via": [
+    "lem-diagonal-completed-supported-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedSupportedCoefficientTransportNormalization",
+  "file": "lean/Sheaf/Paper/CompletedSupportedCoefficientTransportNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedSupportedCoefficient_transport_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedSupportedCoefficient_transport_normalization"
+  ],
+  "statement": "theorem completedSupportedCoefficient_transport_normalization\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (R : DiagonalRightDerived (diagonalTracePush l f))\n    (a : DiagonalTrace.SupportedSource l Y f R)\n    (eP : CompletedRealization l (ProjectiveLine Y))\n    (eW : CompletedRealization l (diagonalSurface Y))\n    (s : CompletedOrdinarySquare l f eW eP)\n    (i : eW.F.obj (diagonalCompletedSource l Y) ≅\n      source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y)\n    (hi : HEq (eW.underlying.inv.app (diagonalCompletedSource l Y) ≫ i.hom.hom)\n      ((lowerStar Ab.{u + 1} (diagonalImmersion Y)).map\n        (eP.underlying.inv.app (SheafOfModules.unit\n          (Scheme.purTwistRing (ProjectiveLine Y)\n            (Scheme.purTwistZlCompletion (ProjectiveLine Y) l))) ≫\n          eP.unitIso.hom.hom))) :\n    SupportNormalization (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y f\n      (eP.unitIso.symm ≪≫ (eP.F.mapIso a.iso) ≪≫\n        (s.ordinary.app (diagonalCompletedSource l Y)) ≪≫\n        ((CondensedRing.lowerStar\n          (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).mapIso i)) a.over_eq",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T205914-L-1632575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T205914-L-1632575",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
