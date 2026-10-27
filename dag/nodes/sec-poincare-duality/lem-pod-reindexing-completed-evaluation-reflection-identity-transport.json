@@ -1,0 +1,114 @@
+{
+ "id": "lem-pod-reindexing-completed-evaluation-reflection-identity-transport",
+ "kind": "statement",
+ "title": "Identity derived transport for section-normalized relabelling",
+ "statement": "For a section-normalized identity relabelling A and an ambient identity comparison c, the induced derived identity transport equals the canonical transport of the ordinary identity coherence k, and the corresponding transported Hom equation holds componentwise.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 6 identity specialization; transport of the canonical identity Hom square through the section-normalized relabelling."
+ },
+ "stmt_deps": [
+  "lem-pod-reindexing-evaluation-shift-composition",
+  "lem-pod-reindexing-hom-resolution-model"
+ ],
+ "proof": [
+  {
+   "text": "Compare the raw section maps of A.identity with the canonical site identity using Relabelling. Apply localization to obtain equality of the derived identity isomorphisms, then expand homComparison and use functoriality and the product identity to obtain the transported Hom equation.",
+   "uses": [
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 6 identity transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-evaluation-shift-composition",
+  "lem-pod-reindexing-hom-resolution-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 6 identity transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport derived identity natural isomorphism through equality of exact functors",
+   "results": "Generic derived-category transport lemmas; no match for this normalized pro-etale identity datum.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryNatIso naturality identity",
+   "results": "Generic mapDerivedCategoryNatIso declarations; no theorem for this relabelling datum.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "identity_hom_transport|identityDerived relabelling",
+   "results": "No existing declaration matching this transport statement.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletedEvaluationReflection",
+  "date": "2026-10-28",
+  "group": "N1"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completed-evaluation-reflection",
+   "place": "Step 6 identity transport",
+   "via": [
+    "lem-pod-reindexing-completed-evaluation-reflection-identity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingCompletedEvaluationReflection",
+  "declaration": "WeilConjectures.PodCompletedReflection.identity_transport_data",
+  "declarations": [
+   "WeilConjectures.PodCompletedReflection.identity_transport_data"
+  ],
+  "file": "lean/Sheaf/Paper/PodReindexingCompletedEvaluationReflection.lean",
+  "statement": "theorem identity_transport_data (A : PodReindexFamily l E) (hA : A.Relabelling l E)\n    (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n    (c : Comparison l E (𝟙 W))\n    (k : PodReindexingCoherence.Identity l E W none)\n    (M N : D l E W) :\n    A.identityDerived l E W = (reindexIso l E (𝟙 W)).symm ≪≫ k.derived ∧\n    (homComparison l E (𝟙 W) c M N).hom ≫\n        (podReindexingDerivedHom l E W none).map\n          (Prod.mkHom ((A.identityDerived l E W).inv.app M).op\n            ((A.identityDerived l E W).hom.app N)) =\n      (reindexIso l E (𝟙 W)).symm.hom.app (hom l E W M N) ≫\n        c.derived.hom.app (op M, N) ≫\n        (podReindexingDerivedHom l E W none).map\n          (Prod.mkHom (k.derived.inv.app M).op (k.derived.hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T234112-L-4192240",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T234112-L-4192240",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -687,20 +687,32 @@ theorem signed_shifts {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   exact ⟨podNormalized_tensor_signed_shifts l E g A T hA hT, hs c,
     hA.2.2.2.2.2.2.2.2.2.2.1, hA.2.2.2.2.2.2.2.2.2.2.2.1⟩
 
-/-- Identity and successive-isomorphism equations for the same ambient c⁰, using
-exactly the section-normalized compositors of the completed tensor family.
-These equations do not require constructible internal Hom.
-Source: blueprint dual-Tate compatibility, Steps 1, 4--5; Stacks 09A5, 099B
+/-- Transport the canonical identity Hom equation through a relabelling datum.
+Source: Stacks 09A5, 0GMX; blueprint dual-Tate compatibility, Step 6
 (blueprint: lem-pod-reindexing-completed-evaluation-reflection).
 
-Proof (node Step 6): site identity and composition act by literal relabelling,
-and coefficient actions agree by every quotient projection. The ordinary Hom
-lemma gives its identity and composition squares with those compositors.
-Transport through reindex_eq, which fixes the same coefficient maps, to obtain
-the two equations below. Precomposition of the corresponding completed evaluation
-squares gives precisely these ordinary equations by reindexing_laws. Reflector
-injectivity makes their completed extensions unique, hence coherent. -/
-/- The identity part of the ambient Hom coherence. -/
+The section-normalized raw identity relabelling determines the induced derived identity
+transport. Expanding `homComparison` and the derived map of the transported identity
+reduces the displayed equations to the naturality square of the ambient comparison.
+-/
+theorem identity_transport_data
+    (A : PodReindexFamily l E) (hA : A.Relabelling l E)
+    (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+    (c : Comparison l E (𝟙 W))
+    (k : PodReindexingCoherence.Identity l E W none)
+    (M N : D l E W) :
+    A.identityDerived l E W = (reindexIso l E (𝟙 W)).symm ≪≫ k.derived ∧
+    (homComparison l E (𝟙 W) c M N).hom ≫
+        (podReindexingDerivedHom l E W none).map
+          (Prod.mkHom ((A.identityDerived l E W).inv.app M).op
+            ((A.identityDerived l E W).hom.app N)) =
+      (reindexIso l E (𝟙 W)).symm.hom.app (hom l E W M N) ≫
+        c.derived.hom.app (op M, N) ≫
+        (podReindexingDerivedHom l E W none).map
+          (Prod.mkHom (k.derived.inv.app M).op (k.derived.hom.app N)) := by
+  sorry
+
+/-- The identity part of the ambient Hom coherence. -/
 theorem identity_composition_identity (A : PodReindexFamily l E)
     (hA : A.Relabelling l E) :
     (∀ (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
@@ -710,7 +722,18 @@ theorem identity_composition_identity (A : PodReindexFamily l E)
           (Prod.mkHom ((A.identityDerived l E W).inv.app M).op
             ((A.identityDerived l E W).hom.app N)) =
       (A.identityDerived l E W).hom.app (hom l E W M N)) := by
-  sorry
+  intro W _ c M N
+  obtain ⟨k, _, hk⟩ := PodReindexingCoherence.identity l E W none
+    (closed l E W) (models l E W) c
+  obtain ⟨hiso, hmap⟩ := identity_transport_data l E A hA W c k M N
+  have hlast := congr_app (congr_arg Iso.hom hiso.symm) (hom l E W M N)
+  have hmid : (reindexIso l E (𝟙 W)).symm.hom.app (hom l E W M N) ≫
+      k.derived.hom.app (hom l E W M N) =
+      (A.identityDerived l E W).hom.app (hom l E W M N) := by
+    simpa only [Iso.trans_hom, Iso.app_hom, NatTrans.comp_app, Category.assoc] using hlast
+  have hkh := congrArg
+    (fun z ↦ (reindexIso l E (𝟙 W)).symm.hom.app (hom l E W M N) ≫ z) (hk M N)
+  exact hmap.trans (hkh.trans hmid)
 
 /- The successive-composition part of the ambient Hom coherence. -/
 theorem identity_composition_composition (A : PodReindexFamily l E)
