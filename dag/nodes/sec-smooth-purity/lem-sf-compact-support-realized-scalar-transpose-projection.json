@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-compact-support-realized-scalar-transpose-projection",
+ "kind": "statement",
+ "title": "Projection-normalized realized scalar transpose before target reduction",
+ "statement": "Let the data and explicit map q be as in lem-sf-compact-support-realized-scalar-transpose. After postcomposition of the displayed finite-stage transpose equation with the inverse of the chosen L-coefficient compact-support reduction isomorphism, the two composites are equal. This is the pre-projection transpose step; the original equation follows by cancellation because that inverse is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph and final paragraph; projection-normalized transpose before the final target reduction projection"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compact-support-finite-action",
+  "def-weil-integral-scalar-extension",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-mixed-reduction-unit",
+  "def-weil-system-operation-exchange-realization"
+ ],
+ "proof": [
+  {
+   "text": "Expand the realized proper/open scalar word and transport its mixed completed unit through the reduction and restriction functors. Naturality of the whole-system counits and the projection equation for the E compact-realization identify the source composite.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "def-weil-mixed-reduction-unit",
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite proper/open scalar mate calculation and retain the target projection inverse on the right. The resulting equation is exactly the postcomposed transpose stated here; no cancellation or uniqueness of the target reduction projection is used in this intermediate step.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "def-weil-mixed-reduction-unit",
+  "def-weil-compact-support-finite-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Projection-normalized form of the compact-support transpose calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact support scalar transpose projection finite reduction isomorphism",
+   "results": "Eight hits, all unrelated topology or finitely supported function equivalences; no exact compact-support derived comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp CategoryTheory.Iso.inv_hom_id",
+   "results": "Five generic map-composition hits; no project-specific transpose theorem.",
+   "date": "2026-10-28",
+   "verdict": "generic lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*Realized.*Transpose",
+   "results": "msearch grep returned 0 hits before this new node; project search found only the assigned theorem and this intermediate.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportRealizedScalarTranspose",
+  "date": "2026-10-28",
+  "group": "D8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-compact-support-realized-scalar-transpose",
+   "place": "The final reduction projection cancellation in the transpose proof",
+   "via": [
+    "lem-sf-compact-support-realized-scalar-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportRealizedScalarTransposeProjection",
+  "file": "lean/Sheaf/Paper/CompactSupportRealizedScalarTransposeProjection.lean",
+  "declaration": "WeilConjectures.sfCompactSupportRealizedScalarTransposeProjection",
+  "statement": "theorem sfCompactSupportRealizedScalarTransposeProjection\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (K : sfIntegralConstructibleCategory l E X) (n : ℕ) :\n    let FX := sfCompactSupportFiniteIntegralFunctor l K₀ hl c E\n    let TX := sfConstructibleIntegralScalarExtension 0 l\n      (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X\n    let q := (integralScalarExtension l E L ι Y).map\n        ((FrobeniusExchange.compactRealization l E K₀ hl f c).hom.app K) ≫\n      (FrobeniusExchange.coefficientExchange l E L ι\n        (FrobeniusExchange.systemDerivedOpen l E c.i ⋙ FrobeniusExchange.systemDirect l E c.g)\n        (FrobeniusExchange.systemDerivedOpen l L c.i ⋙ FrobeniusExchange.systemDirect l L c.g)\n        (FrobeniusExchange.systemCompactScalar l E L ι c)).app K ≫\n      (FrobeniusExchange.compactRealization l L K₀ hl f c).inv.app (TX.obj K)\n    let R := (proEtaleCoefficientRestrictScalars Y\n      (integralScalarQuotientMap l E L ι n)).mapDerivedCategory\n    (sfMixedCompletedReductionUnit l E L ι Y n (FX.obj K).obj ≫\n        R.map ((scalarReductionDerivedExtension l L Y n).map q ≫\n          (sfCompactSupportFiniteReductionIso l K₀ hl c L (TX.obj K) n).hom)) ≫\n      R.map ((sfCompactSupportFiniteReductionIso l K₀ hl c L (TX.obj K) n).inv) =\n      ((sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom ≫\n        (sfAmbientCompactSupportCandidate\n          (Padic.coefficientExtensionRing l E (n + 1)) c).map\n          (sfMixedCompletedReductionUnit l E L ι X n K.obj) ≫\n        (sfCompactSupportRestriction c\n          (integralScalarQuotientMap l E L ι n)).hom.app\n          ((scalarReductionDerivedExtension l L X n).obj (TX.obj K).obj)) ≫\n      R.map ((sfCompactSupportFiniteReductionIso l K₀ hl c L (TX.obj K) n).inv)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T180528-L-3871384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T180528-L-3871384",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

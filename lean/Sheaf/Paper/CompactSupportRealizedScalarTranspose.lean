@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CompactSupportCoefficientAction
 public import Sheaf.Paper.SystemOperationExchangeRealization
+import Sheaf.Paper.CompactSupportRealizedScalarTransposeProjection
 
 /-! # The transpose of the realized compact-support scalar map
 
@@ -78,6 +79,14 @@ theorem sfCompactSupportRealizedScalarTranspose
           (sfMixedCompletedReductionUnit l E L ι X n K.obj) ≫
         (sfCompactSupportRestriction c
           (integralScalarQuotientMap l E L ι n)).hom.app
-          ((scalarReductionDerivedExtension l L X n).obj (TX.obj K).obj) := by sorry
+          ((scalarReductionDerivedExtension l L X n).obj (TX.obj K).obj)  := by
+  let TX := sfConstructibleIntegralScalarExtension 0 l
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X
+  let R := (proEtaleCoefficientRestrictScalars Y
+    (integralScalarQuotientMap l E L ι n)).mapDerivedCategory
+  let r := sfCompactSupportFiniteReductionIso l K₀ hl c L (TX.obj K) n
+  apply (cancel_mono (R.map r.inv)).1
+  simpa only [TX, R, r] using
+    sfCompactSupportRealizedScalarTransposeProjection l K₀ hl c E L ι K n
 
 end WeilConjectures
