@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates
 public import Sheaf.Paper.TowerClassFinite
-import Sheaf.Paper.FiniteP1KummerComparisonIso
 import Sheaf.Paper.FiniteP1KummerBoundaryTransport
 
 /-! # Scalar realization of the finite Kummer Chern class
@@ -158,11 +157,11 @@ theorem finiteP1_kummer_chern_realization
           (firstChern l E cX (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom =
         (finiteOverUnitCoordinate l E n e c).hom ≫
           (finiteOverRealization l E n e).map (finiteP1PositiveClass l E S hS n) := by
-  obtain ⟨t⟩ := finiteP1_kummer_comparison_iso l E e cX hS n c
+  let t := finiteP1KummerCoordinate l E n e cX hS c
   have hb : FiniteP1BoundaryData l E e cX n := by
-    simpa only [FiniteP1BoundaryData] using
-      hc (Scheme.Pic.mapHom e.hom (hyperplanePic S)) n
-  have h := finiteP1_kummer_chern_realization_of_boundary l E e cX hS n c t hb
+    exact hc (Scheme.Pic.mapHom e.hom (hyperplanePic S)) n
+  have h := finiteP1_kummer_chern_realization_of_boundary l E e cX hS n c t rfl hb
   exact ⟨t, by simpa only [finiteP1PositiveClass] using h⟩
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
+

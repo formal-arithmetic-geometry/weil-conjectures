@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-finite-p1-ordinary-kummer-boundary",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-kummer-boundary-transport",
+    "lem-sfb-finite-p1-kummer-chern-realization",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral boundary of the ordinary positive finite Kummer arrow",
+ "statement": "Let l be prime, E/Q_l finite, X,S Noetherian, e:X≅P¹_S, l invertible on S, n a finite coefficient level, k the specified Kummer sequence on X, and c section-normalized coefficient coordinates. The independently defined ordinary arrow finiteP1OrdinaryKummerArrow of [def-sfb-finite-p1-kummer-coordinates] satisfies FiniteKummerBoundary of [def-sfb-finite-kummer-boundary-equation] for k and e*O(1). There is no tower Chern arrow, no FiniteChernNormalization hypothesis, no arbitrary target isomorphism, and no requested realization equality in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+ },
+ "stmt_deps": [
+  "def-sfb-finite-p1-kummer-coordinates",
+  "def-sfb-finite-kummer-boundary-equation"
+ ],
+ "proof": [
+  {
+   "text": "The scalar ordinary finite Chern arrow is characterized by evaluation on the integral generator as the positive scalar Kummer class. Naturality of the Picard frame torsor and Kummer exact sequence identifies its pullback along e with the Kummer boundary of e*O(1).",
+   "uses": [
+    "def-sp-ordinary-finite-first-chern",
+    "def-asd-ordinary-finite-p1-kummer-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact etale-to-pro-etale comparison preserves the connecting arrow. The coefficient source formula on constant sections identifies the integral generator with finiteQuotient; the line formula on pure root tensors identifies the scalar insertion with finiteRootMap. These formulas determine the sheaf maps by the constant-sheaf and tensor universal properties.",
+   "uses": [
+    "def-sp-p1-coefficient-coordinates",
+    "def-sp-tower-class-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inclusion_eq and power_eq fields of k identify its evaluated sequence with the ordinary Kummer sequence. Naturality of singleδ and the exact single/shift comparisons yield the asserted positive boundary equation in the stated finite coordinates.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sfb-finite-p1-kummer-coordinates",
+    "def-sfb-finite-kummer-boundary-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-ordinary-finite-first-chern",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sfb-finite-p1-kummer-coordinates",
+  "def-sfb-finite-kummer-boundary-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport connecting homomorphism in derived category along a natural isomorphism of exact functors",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor and module-section APIs; no matching concrete normalized finite Kummer assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exact site comparison preserves the scalar Kummer connecting class and sends a root tensor one to the same root tensor",
+   "results": "RootPairing.restrictScalars_coe_root, RootPairing.restrictScalars_pairing, RootPairing.restrictScalars_coe_coroot, adjoinRootXPowSubCEquiv_root, RootPairing.restrictScalars', RootPairing.instIsRootSystemMap, autAdjoinRootXPowSubCEquiv_symm_smul, RootPairing.restrictScalars",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor and module-section APIs; no matching concrete normalized finite Kummer assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "singleδ.*map|map.*singleδ",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean, Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor and module-section APIs; no matching concrete normalized finite Kummer assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1OrdinaryKummerBoundary",
+  "file": "lean/Sheaf/Paper/FiniteP1OrdinaryKummerBoundary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_ordinary_kummer_boundary",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_ordinary_kummer_boundary"
+  ],
+  "statement": "theorem finiteP1_ordinary_kummer_boundary\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (e : X ≅ ProjectiveLine S) (k : Kummer l X)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)]\n    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}\n    (c : SpTowerP1.CoefficientCoordinates l E n X hX) :\n    FiniteKummerBoundary l E X n k\n      (Scheme.Pic.mapHom e.hom (hyperplanePic S))\n      (finiteP1OrdinaryKummerArrow l E n e hS c)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-finite-derived-restriction-bijective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-kummer-boundary-transport",
+    "lem-sfb-finite-p1-kummer-chern-realization",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ext comparison along an exact functor from a degree-zero generator",
+ "statement": "Let U:A→B be an exact additive functor of abelian categories, A with enough injectives, and η:F→U(P). Let restrictionClass send x∈Ext^n_A(P,M) to η composed with U(x) in Ext^n_B(F,U(M)). If η∘U(-):Hom(P,M)→Hom(F,U(M)) is bijective for every M, and Ext^{n+1}_B(F,U(I)) vanishes for every injective I and every n, then restrictionClass is bijective in every degree n and for every M. The compatibility of restrictionClass with Yoneda composition is recorded alongside.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar coefficient detection (dimension shifting)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Degree zero: Ext^0 is Hom by mk₀, and restrictionClass is the given bijection. Successor degree: embed M into an injective I with cokernel Q. The short exact sequence and its exact image under U give long exact Ext sequences; restrictionClass commutes with postcomposition by mk₀ and by the extension classes, by compatibility with composition and mapExactFunctor. Ext^{n+1}(P,I)=0 and Ext^{n+1}(F,U I)=0, so the cokernel form of the five lemma and induction give bijectivity.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar coefficient detection (dimension shifting)"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDerivedRestrictionBijective",
+  "file": "lean/Sheaf/Paper/FiniteDerivedRestrictionBijective.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.restrictionClass_bijective",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.restrictionClass_bijective"
+  ],
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28",
+  "statement": "theorem restrictionClass_bijective [EnoughInjectives A]\n    (hzero : ∀ M : A, Function.Bijective (fun f : P ⟶ M ↦ η ≫ U.map f))\n    (hacyc : ∀ (I : A) [Injective I] (n : ℕ),\n      Subsingleton (Ext.{wB} F (U.obj I) (n + 1)))\n    (n : ℕ) (M : A) : Function.Bijective (restrictionClass U η M n)"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-finite-quotient-derived-detection",
+  "worker": "stage3",
+  "summary": "Proved by the degree-zero generator bijection and dimension shifting, using the existing general ringed-site theorems with the specified independent universe sizes.",
+  "blueprint": "diagonal-tower trace (1), scalar coefficient detection",
+  "tool_uses": [
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic ringed-site acyclicity of forgotten injective module sheaves; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic mixed-universe enough-injectives machinery for the same intrinsic coefficient module category."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ }
+}

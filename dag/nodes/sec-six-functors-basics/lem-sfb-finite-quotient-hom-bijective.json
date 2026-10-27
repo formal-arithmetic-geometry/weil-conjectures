@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-finite-quotient-hom-bijective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-kummer-boundary-transport",
+    "lem-sfb-finite-p1-kummer-chern-realization",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral generator bijection on finite coefficient homomorphisms",
+ "statement": "For a scheme T, level n and any module sheaf M over the intrinsic finite coefficient ring sheaf, precomposition with finiteQuotient after forgetting coefficients, f ↦ finiteQuotient ≫ forget(f), is a bijection from module maps out of the evaluated regular coefficient module to maps of abelian sheaves out of the constant sheaf ℤ into forget(M).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar coefficient detection (degree zero)"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-finite"
+ ],
+ "proof": [
+  {
+   "text": "Module maps out of the regular module are global sections of M by evaluation at one (after the coefficient evaluation unit identification); maps out of the constant sheaf ℤ are global sections of forget(M) by the constant-sheaf adjunction at the terminal object. The section formula of finiteQuotient sends 1 to 1 and the evaluation unit sends 1 to 1, so the displayed map is the composite of these two bijections.",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "lem-sfb-tower-class-finite-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-finite",
+  "lem-sfb-tower-class-finite-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar coefficient detection (degree zero)"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientHomBijective",
+  "file": "lean/Sheaf/Paper/FiniteQuotientHomBijective.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteQuotient_hom_bijective",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteQuotient_hom_bijective"
+  ],
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28",
+  "statement": "theorem finiteQuotient_hom_bijective (T : Scheme.{u}) (n : ℕ)\n    (M : SheafOfModules.{u + 1}\n      (SemilinearSections.ring.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (SpTowerShriek.B l E T n))) :\n    Function.Bijective (fun f :\n      (SpTowerShriek.ev l E T n).obj (coefficient T (Arings l E T)) ⟶ M ↦\n        finiteQuotient l E T n ≫ (finiteForget l E T n).map f)"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-finite-quotient-derived-detection",
+  "worker": "stage3",
+  "summary": "Proved by the degree-zero generator bijection and dimension shifting, using the existing general ringed-site theorems with the specified independent universe sizes.",
+  "blueprint": "diagonal-tower trace (1), scalar coefficient detection",
+  "tool_uses": [
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic ringed-site acyclicity of forgotten injective module sheaves; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic mixed-universe enough-injectives machinery for the same intrinsic coefficient module category."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ }
+}

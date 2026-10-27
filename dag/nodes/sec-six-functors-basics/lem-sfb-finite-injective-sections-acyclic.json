@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-finite-injective-sections-acyclic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-kummer-boundary-transport",
+    "lem-sfb-finite-p1-kummer-chern-realization",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Forgotten injective finite-coefficient module sheaves are acyclic for global sections",
+ "statement": "For a scheme T and level m, and an injective sheaf of modules I over the intrinsic finite coefficient ring sheaf on the pro-etale site of T, the underlying abelian sheaf of I is right acyclic for the global-sections functor (evaluation at the terminal object T).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), injective-module argument"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-finite"
+ ],
+ "proof": [
+  {
+   "text": "Lift the hom universe of the site by ULiftHom; the induced equivalence of ringed sites preserves injective module sheaves and evaluation at the terminal object. On the lifted site, injective module sheaves have vanishing higher abelian cohomology on every object; identify that cohomology with the right-derived evaluation functor and transport the vanishing back along the sheaf-category equivalence and the derived-functor comparison for an equivalence followed by evaluation.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), injective-module argument"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteInjectiveSectionsAcyclic",
+  "file": "lean/Sheaf/Paper/FiniteInjectiveSectionsAcyclic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteInjective_sections_acyclic",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteInjective_sections_acyclic"
+  ],
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28",
+  "statement": "theorem finiteInjective_sections_acyclic (T : Scheme.{u}) (m : ℕ)\n    (I : SheafOfModules.{u + 1}\n      (SemilinearSections.ring.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (SpTowerShriek.B l E T m))) [Injective I] :\n    (sheafToPresheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} ⋙\n      (evaluation T.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj\n        (op (Scheme.ProEt.mk (𝟙 T)))).rightAcyclic ((finiteForget l E T m).obj I)"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-finite-quotient-derived-detection",
+  "worker": "stage3",
+  "summary": "Proved by the degree-zero generator bijection and dimension shifting, using the existing general ringed-site theorems with the specified independent universe sizes.",
+  "blueprint": "diagonal-tower trace (1), scalar coefficient detection",
+  "tool_uses": [
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic ringed-site acyclicity of forgotten injective module sheaves; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic mixed-universe enough-injectives machinery for the same intrinsic coefficient module category."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ }
+}

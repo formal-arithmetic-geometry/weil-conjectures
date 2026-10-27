@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-finite-quotient-derived-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-kummer-boundary-transport",
+    "lem-sfb-finite-p1-kummer-chern-realization",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Detection on the finite integral generator",
+ "statement": "For prime l, finite E/Q_l, a scheme T and level n with finite quotient coefficient ring, and ANY module sheaf M over the intrinsic finite ring sheaf, precomposition by single(finiteQuotient), after exact forgetting of coefficients, is injective on Hom(single(evaluated regular coefficient),single(M)[2]). All maps are the concrete maps of [def-sp-tower-class-finite]. No projective-line structure, Chern data, finite generation of M, or invertibility on T is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second equality and injective-module argument"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-finite"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at one identifies maps out of the regular coefficient module with global sections. The evaluation/regular-module identification is identity on every section. The unique generator formula for finiteQuotient makes the degree-zero integral comparison exactly this bijection.",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "lem-sfb-tower-class-finite-unit",
+    "lem-sfb-finite-quotient-hom-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift hom universes using ULiftHom. The induced equivalences of ringed sites preserve injectivity and evaluation. Apply the injective-module abelian acyclicity theorem on the lifted site, then transfer its right-derived evaluation vanishing back. The mixed-universe Grothendieck theorem supplies enough injectives without changing the abelian structure.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-finite-injective-sections-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a general exact additive functor with this degree-zero generator bijection and these acyclic images of injectives, embed the target into an injective and take its cokernel. Naturality of Ext composition and of exact-functor connecting classes gives the square of two right-exact sequences. Induction and the cokernel form of the five lemma prove the comparison bijective in every degree.",
+   "uses": [
+    "lem-sfb-finite-derived-restriction-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Ext.homEquiv and the explicit exact-functor single/shift formula to identify the degree-two comparison with the displayed function. Its injectivity is the claim.",
+   "uses": [
+    "def-sp-tower-class-finite"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-finite",
+  "lem-sfb-tower-class-finite-unit",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-finite-quotient-hom-bijective",
+  "lem-sfb-finite-injective-sections-acyclic",
+  "lem-sfb-finite-derived-restriction-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second equality and injective-module argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*injective|injective.*mapExactFunctor",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor and module-section APIs; no matching concrete normalized finite Kummer assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived arrows from the regular constant module sheaf are determined after forgetting scalars by precomposition with the integral generator",
+   "results": "SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.mapGenerators, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.freeFunctor, SheafOfModules.unitHomEquiv, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.freeHomEquiv, SheafOfModules.Presentation",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor and module-section APIs; no matching concrete normalized finite Kummer assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map from Ext out of a regular ring sheaf to abelian sheaf cohomology induced by the integral generator is injective",
+   "results": "SheafOfModules.GeneratingSections.mk.inj, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.germ_injective_of_isIntegral, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, Algebra.Extension.cotangentComplex_injective_iff",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor and module-section APIs; no matching concrete normalized finite Kummer assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientDerivedDetection",
+  "file": "lean/Sheaf/Paper/FiniteQuotientDerivedDetection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteQuotient_detects_derived_arrows",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteQuotient_detects_derived_arrows"
+  ],
+  "statement": "theorem finiteQuotient_detects_derived_arrows (T : Scheme.{u}) (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)]\n    (M : SheafOfModules.{u + 1}\n      (SemilinearSections.ring.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (SpTowerShriek.B l E T n))) :\n    Function.Injective (fun a :\n      (DerivedCategory.singleFunctor _ 0).obj\n          ((SpTowerShriek.ev l E T n).obj (coefficient T (Arings l E T))) ⟶\n        ((DerivedCategory.singleFunctor _ 0).obj M)⟦(2 : ℤ)⟧ ↦\n      (DerivedCategory.singleFunctor (DiagonalAb T) 0).map (finiteQuotient l E T n) ≫\n        mapSingleArrow (finiteForget l E T n) (2 : ℤ) a)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-finite-quotient-derived-detection",
+  "worker": "stage3",
+  "summary": "Proved by the degree-zero generator bijection and dimension shifting, using the existing general ringed-site theorems with the specified independent universe sizes.",
+  "blueprint": "diagonal-tower trace (1), scalar coefficient detection",
+  "tool_uses": [
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic ringed-site acyclicity of forgotten injective module sheaves; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic mixed-universe enough-injectives machinery for the same intrinsic coefficient module category."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ }
+}

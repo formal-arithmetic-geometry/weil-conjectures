@@ -2,7 +2,7 @@
  "id": "lem-sfb-finite-p1-kummer-boundary-transport",
  "kind": "statement",
  "title": "Transport of the finite Kummer boundary comparison",
- "statement": "theorem finiteP1_kummer_chern_realization_of_boundary {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] (e : X ≅ ProjectiveLine S) (cX : Chern l E X) (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))} (c : SpTowerP1.CoefficientCoordinates l E n X hX) (t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅ (finiteOverRealization l E n e).obj (geoP1Twist (FiniteRing l E n) (l ^ (n + 1)) (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2)) (hb : FiniteP1BoundaryData l E e cX n) : (SpTowerShriek.Ev l E X n).map (firstChern l E cX (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom = (finiteOverUnitCoordinate l E n e c).hom ≫ (finiteOverRealization l E n e).map ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) (ULift.ext _ _ (coefficient_annihilates l E n)) S (by simpa only [Nat.cast_pow] using hS.pow (n + 1))))",
+ "statement": "theorem finiteP1_kummer_chern_realization_of_boundary\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (e : X ≅ ProjectiveLine S) (cX : Chern l E X)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)]\n    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}\n    (c : SpTowerP1.CoefficientCoordinates l E n X hX)\n    (t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅\n      (finiteOverRealization l E n e).obj\n        (geoP1Twist (FiniteRing l E n) (l ^ (n + 1))\n          (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2))\n    (ht : t = finiteP1KummerCoordinate l E n e cX hS c)\n    (hb : FiniteP1BoundaryData l E e cX n) :\n    (SpTowerShriek.Ev l E X n).map\n        (firstChern l E cX\n          (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom =\n      (finiteOverUnitCoordinate l E n e c).hom ≫\n        (finiteOverRealization l E n e).map\n          ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map\n            (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))\n              (pow_pos (Fact.out : l.Prime).pos _)\n              (ULift.ext _ _ (coefficient_annihilates l E n)) S\n              (by simpa only [Nat.cast_pow] using hS.pow (n + 1))))",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
   "place": "paragraph (1), finite coefficient comparison before the system splitting"
@@ -12,30 +12,45 @@
   "def-sp-tower-class-diagonal",
   "def-sp-p1-coefficient-coordinates",
   "sk-lem-geo-p1-cohomology",
-  "lem-asd-ordinary-finite-class-comparison"
+  "def-sfb-finite-p1-kummer-coordinates",
+  "def-sfb-finite-kummer-boundary-equation"
  ],
  "proof": [
   {
-   "text": "This is the strictly lower line-comparison or boundary-transport step described in the source proof.",
+   "text": "For the normalized canonical comparison, both evaluated tower c1 (by hb) and the ordinary finite Kummer arrow (by the ordinary boundary lemma) have the same integral boundary after forgetting coefficients. The finite integral-generator detection theorem therefore makes these two coefficient arrows equal.",
    "uses": [
-    "lem-sfb-finite-p1-kummer-comparison-iso",
-    "def-sp-tower-class-finite",
-    "def-sp-p1-coefficient-coordinates",
-    "lem-asd-ordinary-finite-class-comparison"
+    "lem-sfb-finite-quotient-derived-detection",
+    "lem-sfb-finite-p1-ordinary-kummer-boundary",
+    "def-sfb-finite-kummer-boundary-equation"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand evaluatedChern through its single and shift comparisons [lem-sfb-finite-p1-kummer-evaluated]. Precompose the equality by the source single isomorphism and postcompose by the finite line coordinate. Cancel inverse isomorphisms. The source coordinate is finiteOverUnitCoordinate [lem-sfb-finite-p1-kummer-unit-equation], and ht identifies the target coordinate with t.",
+   "uses": [
+    "def-sfb-finite-p1-kummer-coordinates",
+    "lem-sfb-finite-p1-kummer-evaluated",
+    "lem-sfb-finite-p1-kummer-unit-equation",
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "def-sp-tower-class-finite"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-p1-kummer-comparison-iso",
-  "def-sp-tower-class-finite",
-  "def-sp-p1-coefficient-coordinates",
-  "lem-asd-ordinary-finite-class-comparison"
+  "lem-sfb-finite-quotient-derived-detection",
+  "lem-sfb-finite-p1-ordinary-kummer-boundary",
+  "def-sfb-finite-kummer-boundary-equation",
+  "def-sfb-finite-p1-kummer-coordinates",
+  "lem-sfb-finite-p1-kummer-evaluated",
+  "lem-sfb-finite-p1-kummer-unit-equation",
+  "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+  "def-sp-tower-class-finite"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
-  "place": "paragraph (1), split into line construction and boundary transport"
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
  },
  "mathlib_searches": [
   {
@@ -92,9 +107,9 @@
   "module": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
   "file": "lean/Sheaf/Paper/FiniteP1KummerBoundaryTransport.lean",
   "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_kummer_chern_realization_of_boundary",
-  "statement": "theorem finiteP1_kummer_chern_realization_of_boundary\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (e : X ≅ ProjectiveLine S) (cX : Chern l E X)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)]\n    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}\n    (c : SpTowerP1.CoefficientCoordinates l E n X hX)\n    (t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅\n      (finiteOverRealization l E n e).obj\n        (geoP1Twist (FiniteRing l E n) (l ^ (n + 1))\n          (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2))\n    (hb : FiniteP1BoundaryData l E e cX n) :\n    (SpTowerShriek.Ev l E X n).map\n        (firstChern l E cX\n          (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom =\n      (finiteOverUnitCoordinate l E n e c).hom ≫\n        (finiteOverRealization l E n e).map\n          ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map\n            (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))\n              (pow_pos (Fact.out : l.Prime).pos _)\n              (ULift.ext _ _ (coefficient_annihilates l E n)) S\n              (by simpa only [Nat.cast_pow] using hS.pow (n + 1))))",
+  "statement": "theorem finiteP1_kummer_chern_realization_of_boundary\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (e : X ≅ ProjectiveLine S) (cX : Chern l E X)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)]\n    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}\n    (c : SpTowerP1.CoefficientCoordinates l E n X hX)\n    (t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅\n      (finiteOverRealization l E n e).obj\n        (geoP1Twist (FiniteRing l E n) (l ^ (n + 1))\n          (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2))\n    (ht : t = finiteP1KummerCoordinate l E n e cX hS c)\n    (hb : FiniteP1BoundaryData l E e cX n) :\n    (SpTowerShriek.Ev l E X n).map\n        (firstChern l E cX\n          (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom =\n      (finiteOverUnitCoordinate l E n e c).hom ≫\n        (finiteOverRealization l E n e).map\n          ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map\n            (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))\n              (pow_pos (Fact.out : l.Prime).pos _)\n              (ULift.ext _ _ (coefficient_annihilates l E n)) S\n              (by simpa only [Nat.cast_pow] using hS.pow (n + 1))))",
   "branch": "sheaf-dag",
-  "by": "C7",
+  "by": "D3",
   "date": "2026-10-27",
   "declarations": [
    "AlgebraicGeometry.ProEtale.DiagonalTrace.FiniteP1BoundaryData",
@@ -114,11 +129,53 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C7",
-  "result": "pass",
-  "landing": "20261027T050544-L-237195",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "D3 stage 2",
+  "old_statement": "theorem finiteP1_kummer_chern_realization_of_boundary {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] (e : X ≅ ProjectiveLine S) (cX : Chern l E X) (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))} (c : SpTowerP1.CoefficientCoordinates l E n X hX) (t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅ (finiteOverRealization l E n e).obj (geoP1Twist (FiniteRing l E n) (l ^ (n + 1)) (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2)) (hb : FiniteP1BoundaryData l E e cX n) : (SpTowerShriek.Ev l E X n).map (firstChern l E cX (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom = (finiteOverUnitCoordinate l E n e c).hom ≫ (finiteOverRealization l E n e).map ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) (ULift.ext _ _ (coefficient_annihilates l E n)) S (by simpa only [Nat.cast_pow] using hS.pow (n + 1))))",
+  "what": "STATEMENT-DISPUTED: the old theorem quantified over arbitrary target isomorphisms t while hb was independent of t. On P¹ over an algebraically closed field of characteristic zero, with l=3, E=Q_3, n=0 and the canonical nonzero positive Kummer class, replacing t by -t negates the left side but leaves the nonzero right side fixed. Require t to be the explicit normalized comparison. The only caller needs existence and now constructs this comparison directly.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-finite-p1-kummer-chern-realization",
+    "holds": true,
+    "note": "The existential realization statement is unchanged. Its proof now selects the explicit canonical comparison and supplies ht by reflexivity."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sp-tower-class-finite",
+   "def-sp-tower-class-diagonal",
+   "def-sp-p1-coefficient-coordinates",
+   "sk-lem-geo-p1-cohomology",
+   "lem-asd-ordinary-finite-class-comparison"
+  ],
+  "old_proof": [
+   {
+    "text": "This is the strictly lower line-comparison or boundary-transport step described in the source proof.",
+    "uses": [
+     "lem-sfb-finite-p1-kummer-comparison-iso",
+     "def-sp-tower-class-finite",
+     "def-sp-p1-coefficient-coordinates",
+     "lem-asd-ordinary-finite-class-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sfb-finite-p1-kummer-comparison-iso",
+   "def-sp-tower-class-finite",
+   "def-sp-p1-coefficient-coordinates",
+   "lem-asd-ordinary-finite-class-comparison"
+  ]
  }
 }

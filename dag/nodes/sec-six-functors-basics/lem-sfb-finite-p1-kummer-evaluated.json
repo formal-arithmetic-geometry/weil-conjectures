@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-finite-p1-kummer-evaluated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-kummer-boundary-transport",
+    "lem-sfb-finite-p1-kummer-chern-realization",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Evaluated Chern arrow through the finite evaluation coordinate",
+ "statement": "For tower Chern data cX on X, L in Pic(X) and a level n, evaluatedChern(cX,L,n) of [def-sp-tower-class-finite] equals the inverse single comparison of evaluation, followed by the evaluated tower first Chern arrow of L and the finite evaluation coordinate finiteKummerEvaluation of [def-sfb-finite-p1-kummer-coordinates].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-finite",
+  "def-sfb-finite-p1-kummer-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Unfold evaluatedChern, mapSingleArrow and finiteKummerEvaluation; both sides are the same composite of exact single and shift comparisons and the shifted line evaluation, up to reassociation.",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "def-sfb-finite-p1-kummer-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-finite",
+  "def-sfb-finite-p1-kummer-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1KummerBoundaryTransport",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1KummerEvaluated",
+  "file": "lean/Sheaf/Paper/FiniteP1KummerEvaluated.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_evaluatedChern_eq",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_evaluatedChern_eq"
+  ],
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28",
+  "statement": "theorem finiteP1_evaluatedChern_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X : Scheme.{u}} (cX : Chern l E X) (L : Scheme.Pic X) (n : ℕ) :\n    evaluatedChern l E cX L n =\n      ((SpTowerShriek.ev l E X n).mapDerivedCategorySingleFunctor 0).inv.app _ ≫\n        (SpTowerShriek.Ev l E X n).map (firstChern l E cX L) ≫\n        (finiteKummerEvaluation l E cX n).hom"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-finite-quotient-derived-detection",
+  "worker": "stage3",
+  "summary": "Proved by the degree-zero generator bijection and dimension shifting, using the existing general ringed-site theorems with the specified independent universe sizes.",
+  "blueprint": "diagonal-tower trace (1), scalar coefficient detection",
+  "tool_uses": [
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic ringed-site acyclicity of forgotten injective module sheaves; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic mixed-universe enough-injectives machinery for the same intrinsic coefficient module category."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5e0be",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233846-L-4124344",
+  "kind": "interface",
+  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+ }
+}
