@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-finite-vector-integration-scalar",
+ "kind": "statement",
+ "title": "Scalar and annihilator compatibility of vector integration before adjunction",
+ "statement": "Let A,B be finite commutative rings, φ:A→B unital, and N,M positive annihilators of A,B with M dividing N. Let S be Noetherian with N and M invertible and E locally free of constant rank d. For a root-power, generator and derived-single normalized CoefficientLineComparison t [def-pur-finite-smooth-coefficient-arrows], the compact-support scalar map [lem-pur-etale-compact-scalar-coherence] followed by compact support of inverse scalar/pullback and pullback of (t.tensorPower d).hom, then vectorBundleIntegration at M, equals scalar extension of vectorBundleIntegration at N followed by ExceptionalCoefficients.unitIso. The compactification, coefficients and integrations are those of [thm-amb-vector-bundle-purity, def-amb-vector-integration]. This is a trace equation before exceptional adjunction or zero-section pullback.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2, coefficient compatibility of vector integration; reduction compatibilities (3), Orientation."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows",
+  "lem-pur-etale-compact-scalar-coherence",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration"
+ ],
+ "proof": [
+  {
+   "text": "Apply finiteCoefficientTensor_factor to the canonical generator-normalized exponent-change root map and line isomorphism at B supplied by etaleFiniteTwistPullback. N annihilates B by applying φ to its vanishing in A. This factors t.tensorPower into the scalar tensor map at N followed by the fixed-ring exponent-change tensor.",
+   "uses": [
+    "lem-sp-finite-coefficient-tensor-factorization",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map this factorization through inverse image and compact support. The general-ring integration exponent theorem cancels its last factor against integration at M, giving integration at N over B. VectorTraceScalarDescent gives the remaining common-exponent scalar equation. The single/unit iso has identity inverse (and hence identity hom), so its transported scalar unit equals ExceptionalCoefficients.unitIso.hom. CompactScalarChosenMap unfolds to the same canonical bundle compactification scalar map. All steps apply at rank zero, on an empty scheme, and for zero coefficient rings, and require no flatness of B over A.",
+   "uses": [
+    "lem-sp-general-ring-integration-exponent",
+    "lem-pur-vector-trace-scalar-descent",
+    "lem-sp-finite-scalar-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2, coefficient compatibility of vector integration; reduction compatibilities (3), Orientation.",
+  "note": "Factor the trace through the common exponent N, apply the existing scalar and exponent integration equations, and normalize the unit."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension compatibility of adjunction transpose and pullback along a section for etale vector bundle integration changing torsion exponent",
+   "results": "Eight unrelated results; no etale vector trace coefficient/exponent theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vector bundle integration trace commutes with coefficient extension and change of Kummer exponent",
+   "results": "Eight unrelated algebraic integer-trace and topological vector-bundle results; no etale vector integration coefficient equation.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Adjunction naturality in Mathlib.CategoryTheory.Adjunction.Basic supports transposition in the parent, not the geometric trace equation.",
+   "date": "2026-10-28",
+   "verdict": "Categorical component only."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundleIntegration|integration.*exponent|VectorTraceScalar",
+   "results": "msearch grep returned zero Mathlib hits. Local project search found VectorTraceScalarDescent for common exponent and FiniteGeneralRingIntegrationExponent for fixed-ring exponent change; use those declarations.",
+   "date": "2026-10-28",
+   "verdict": "Use these two existing declarations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteBundleSectionAdjointScalar",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "(3), Orientation, vector integration before transposition; cor-pur-vector-bundle-purity proof paragraph 2.",
+   "via": [
+    "lem-sp-finite-bundle-section-adjoint-scalar",
+    "lem-sp-finite-section-integrated-scalar",
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteVectorIntegrationScalar",
+  "file": "lean/Sheaf/Paper/FiniteVectorIntegrationScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteVectorIntegration_scalar",
+  "statement": "theorem finiteVectorIntegration_scalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (hMN : M ∣ N)\n    (hA : (N : A) = 0) (hB : (M : B) = 0)\n    (S : Scheme.{u}) [IsNoetherian S]\n    (d : ℕ) (E : S.Modules) [E.IsFiniteLocallyFreeOfRank d]\n    (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (M : Γ(S, ⊤)))\n    (t : CoefficientLineComparison φ N M hA hB S) :\n    (compactScalarMap φ (vectorBundlePurityCompactification S d E)).app\n        (vectorIntegrationCoefficient A N hA S d E) ≫\n      (vectorBundlePurityLower B S d E).map\n        ((scalarPullbackIso φ (VectorBundleZeroSection.π S d E)).inv.app\n            (line A N hA S d) ≫\n          (ordinaryFinitePullback B (VectorBundleZeroSection.π S d E)).map\n            (t.tensorPower d).hom) ≫\n      vectorBundleIntegration M hM B hB S hS' d E =\n    (ordinaryScalar φ S).map (vectorBundleIntegration N hN A hA S hS d E) ≫\n      (ExceptionalCoefficients.unitIso φ S).hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "lem-sp-finite-coefficient-tensor-factorization",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sp-general-ring-integration-exponent",
+  "lem-pur-vector-trace-scalar-descent",
+  "lem-sp-finite-scalar-unit-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T180608-L-3879782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T180608-L-3879782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

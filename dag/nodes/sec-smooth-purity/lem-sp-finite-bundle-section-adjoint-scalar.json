@@ -15,26 +15,24 @@
  ],
  "proof": [
   {
-   "text": "The root-power map N/M fits the Kummer diagram: the map on the first units sheaf is power N/M and the map on the second is identity. Thus the N-boundary of O(1) maps to its M-boundary. The root-power and generator equations of t identify this map after balancing with t.sheafIso, and derived normalization identifies its single-complex map with t.derivedIso. Transposition through the projective-line adjunction gives the normalized decomposition and trace square. This extends the common-exponent Kummer scalar argument to this change of exponent.",
+   "text": "Use the trace equation finiteVectorIntegration_scalar, which factors the coefficient comparison through the common exponent N and uses the existing vector scalar-descent and general-ring integration exponent theorems.",
    "uses": [
-    "lem-sp-p1-kummer-derived-scalar",
-    "def-pur-finite-smooth-coefficient-arrows"
+    "lem-sp-finite-vector-integration-scalar"
    ],
    "elementary": false
   },
   {
-   "text": "The vector trace scalar-descent theorem gives the common-annihilator scalar square. Apply the preceding Kummer exponent diagram in each ordered affine-line factor and iterate the actual compact-support counits, using the scalar composition and projection squares. The scalar unit is multiplication at rank zero. At each successor the tensor and shift comparisons are exactly those defining t.tensorPower. Restriction to bundle frames computes the global vector integration by those coordinate traces; the open-restriction and refinement squares make the resulting equations agree on all frame overlaps and descend.",
+   "text": "The compact-support coefficient natural transformation is componentwise invertible by etaleCompactScalarCoherence. Assemble its component inverses into the isomorphism q. Apply adjunction naturality and the triangle identity (private scalar_adjunct) to the trace equation. The inverse component is exactly ExceptionalCoefficients.comparisonInverse. Unfolding the specified mate yields the scalar equation for the actual bundle integration adjunct.",
    "uses": [
-    "lem-pur-vector-trace-scalar-descent",
     "lem-pur-etale-compact-scalar-coherence",
-    "def-amb-vector-integration"
+    "lem-trf-finite-ring-section-deformation",
+    "def-pur-dnc-coefficient-section-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the resulting integration trace equation through the specified compact-support adjunctions. The integration-transpose scalar-mate theorem gives the actual exceptional coefficient map, with its coefficient-unit multiplication. Pull the equation back to z and cancel the scalar/pullback section compositors. The left and right adjuncts are precisely bundleSectionAdjoint at N and M. This proves the displayed square, before taking inverses. Rank zero is the identity adjunction and scalar unit; empty bases and zero rings have unique maps. All scalar and tensor operations are derived and there is no scalar-flatness assumption.",
+   "text": "Apply the zero-section pullback functor. Naturality moves the bundle adjunct past the scalar/pullback comparison. The scalar_section_compositor identity identifies the remaining section-compositor factors. The private section_square proves this categorical calculation explicitly and gives the two bundleSectionAdjoint maps. The statement and coefficient tensor order are unchanged.",
    "uses": [
-    "lem-pur-integration-transpose-scalar-mate",
     "lem-pur-scalar-section-compositor",
     "lem-trf-finite-ring-section-deformation"
    ],
@@ -42,20 +40,18 @@
   }
  ],
  "proof_deps": [
-  "lem-sp-p1-kummer-derived-scalar",
-  "def-pur-finite-smooth-coefficient-arrows",
-  "lem-pur-vector-trace-scalar-descent",
+  "lem-sp-finite-vector-integration-scalar",
   "lem-pur-etale-compact-scalar-coherence",
-  "def-amb-vector-integration",
-  "lem-pur-integration-transpose-scalar-mate",
-  "lem-pur-scalar-section-compositor",
-  "lem-trf-finite-ring-section-deformation"
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-dnc-coefficient-section-maps",
+  "lem-pur-scalar-section-compositor"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "P1",
+  "group": "G1",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "(3), Orientation, vector integration factor; cor-pur-vector-bundle-purity proof paragraph 2"
+  "place": "(3), Orientation, vector integration factor; cor-pur-vector-bundle-purity proof paragraph 2",
+  "note": "Factor through common exponent N, then transpose and cancel the section compositor; no new unproved obligation."
  },
  "mathlib_searches": [
   {
@@ -127,9 +123,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261027T103455-L-1086018",
+  "landing": "20261027T180608-L-3879782",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

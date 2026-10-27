@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2, coefficient compatibility of vector integration; reduction compatibilities (3), Orientation."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "G1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2, coefficient compatibility of vector integration; reduction compatibilities (3), Orientation.",
+  "note": "Extract the coefficient-only factorization, before inverse image or integration."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension compatibility of adjunction transpose and pullback along a section for etale vector bundle integration changing torsion exponent",
+   "results": "Eight unrelated results; no etale vector trace coefficient/exponent theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vector bundle integration trace commutes with coefficient extension and change of Kummer exponent",
+   "results": "Eight unrelated algebraic integer-trace and topological vector-bundle results; no etale vector integration coefficient equation.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Adjunction naturality in Mathlib.CategoryTheory.Adjunction.Basic supports transposition in the parent, not the geometric trace equation.",
+   "date": "2026-10-28",
+   "verdict": "Categorical component only."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundleIntegration|integration.*exponent|VectorTraceScalar",
+   "results": "msearch grep returned zero Mathlib hits. Local project search found VectorTraceScalarDescent for common exponent and FiniteGeneralRingIntegrationExponent for fixed-ring exponent change; use those declarations.",
+   "date": "2026-10-28",
+   "verdict": "Use these two existing declarations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteBundleSectionAdjointScalar",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "(3), Orientation, identification of the scalar/root-normalized coefficient tensor; vector-bundle purity proof paragraph 2.",
+   "via": [
+    "lem-sp-finite-vector-integration-scalar",
+    "lem-sp-finite-bundle-section-adjoint-scalar",
+    "lem-sp-finite-section-integrated-scalar",
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sp-finite-coefficient-tensor-factorization",
+ "title": "Factorization of normalized scalar and exponent coefficient tensors",
+ "statement": "Let A,B be finite commutative rings, φ:A→B unital, and N>0 annihilate both A and B. Let M annihilate B, and let T be a scheme on which N is invertible. Let t be a root-power, scalar/root-generator and derived-single normalized CoefficientLineComparison from (A,N) to (B,M) [def-pur-finite-smooth-coefficient-arrows]. Let q:mu_N -> mu_M and b:B_T(1;N) ~= B_T(1;M) satisfy FiniteGeneralRingKummerComparison [def-sp-general-ring-canonical-data]. For every d, (t.tensorPower d).hom equals the ordered scalar tensor map VectorTraceScalar.base at exponent N [def-pur-vector-trace-scalar-coefficient-data], followed by finiteGeneralRingLevelPower of b. This includes d=0, empty schemes and zero rings and imposes no flatness hypothesis.",
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-sp-general-ring-canonical-data",
+  "def-pur-vector-trace-scalar-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "N annihilates B by applying φ to its vanishing in A. Take the canonical normalized exponent-change root map q and sheaf line isomorphism b for N to M from etaleFiniteTwistPullback. Its normalization uniquely fixes both maps. The monic root-kernel inclusion identifies q with t.roots. Adjunction injectivity and lineHomEquiv identify t.sheafIso with the common-exponent scalar balancing followed by b, by evaluating the two maps on every scalar/root generator.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-finite-tate-scalar-source-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use t.derived_normalization to obtain the same factorization in derived degree zero and after shift. Induct on d: rank zero is the published scalar unit map, and the successor follows by naturality of the tensor bifunctor and functoriality of its two arguments. Thus t.tensorPower is exactly VectorTraceScalar.base at N followed by finiteGeneralRingLevelPower of b. This preserves the ordered shifted tensor presentation without permuting factors.",
+   "uses": [
+    "def-pur-finite-smooth-coefficient-arrows",
+    "def-sp-general-ring-canonical-data",
+    "def-pur-vector-trace-scalar-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-finite-tate-scalar-source-normalization",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-sp-general-ring-canonical-data",
+  "def-pur-vector-trace-scalar-coefficient-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientTensorFactorization",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientTensorFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteCoefficientTensor_factor",
+  "statement": "theorem finiteCoefficientTensor_factor\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N M : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (hBN : (N : B) = 0) (hB : (M : B) = 0)\n    (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤)))\n    (t : CoefficientLineComparison φ N M hA hB T)\n    (q : T.rootsOfUnitySheaf N ⟶ T.rootsOfUnitySheaf M)\n    (b : Scheme.finiteEtaleTateLine T N B hBN ≅ Scheme.finiteEtaleTateLine T M B hB)\n    (hb : ProEtale.FiniteGeneralRingKummerComparison B N M hBN hB T q b) (d : ℕ) :\n    (t.tensorPower d).hom = VectorTraceScalar.base φ N hN hA hBN T hT d ≫\n      (ProEtale.finiteGeneralRingLevelPower B N M hBN hB T b d).hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T180608-L-3879782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T180608-L-3879782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
