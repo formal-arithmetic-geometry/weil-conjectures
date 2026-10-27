@@ -8,6 +8,9 @@ module
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
 public import WeilConjectures.Tactic.MatchTactic
+public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
 
 /-!
 
@@ -66,6 +69,177 @@ theorem comp_homEquiv_eq_map_homEquiv_comp_exchange {U : CP ⥤ CX} {R : CX ⥤ 
     simp [Adjunction.homEquiv_unit]
   rw [Category.assoc, reassoc_of% hn, ← SX.map_comp_assoc, he]
 
+/-- The cancellation of the identity isomorphisms `I : E ≅ 𝟭`, `I' : F ≅ 𝟭` around
+`a = I'(Ψ C) ≫ Ψ(I⁻¹ C)` and `b = I'(Ψ E C) ≫ Ψ(I⁻¹(E C))` (the pullback exchanges of identity
+morphisms of models). -/
+lemma map_comp_comp_map_of_isoId {C D : Type*} [Category C] [Category D] (Ψ : C ⥤ D) {F : D ⥤ D}
+    (I' : F ≅ 𝟭 D) {E : C ⥤ C} (I : E ≅ 𝟭 C) (C₀ : C) {a : F.obj (Ψ.obj C₀) ⟶ Ψ.obj (E.obj C₀)}
+    {b : F.obj (Ψ.obj (E.obj C₀)) ⟶ Ψ.obj (E.obj (E.obj C₀))}
+    (ha : a = I'.hom.app (Ψ.obj C₀) ≫ Ψ.map (I.inv.app C₀))
+    (hb : b = I'.hom.app (Ψ.obj (E.obj C₀)) ≫ Ψ.map (I.inv.app (E.obj C₀))) :
+    F.map a ≫ b ≫ Ψ.map (I.hom.app (E.obj C₀) ≫ I.hom.app C₀) =
+      I'.hom.app (F.obj (Ψ.obj C₀)) ≫ I'.hom.app (Ψ.obj C₀) := by
+  subst ha hb
+  have hn := I'.hom.naturality (I'.hom.app (Ψ.obj C₀) ≫ Ψ.map (I.inv.app C₀))
+  simp only [Functor.id_map, Functor.id_obj] at hn
+  rw [Category.assoc, reassoc_of% hn]
+  simp only [← Ψ.map_comp, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Functor.id_obj,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+
+/-- The algebra of `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange_of_retraction`: from
+the compatibility `h` of the Künneth map with pullbacks along the identity morphisms of models,
+the naturality of the lax tensor maps and the cancellations `hcA`, `hcB` of the identity
+isomorphisms. -/
+lemma kunneth_retraction_aux {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
+    [MonoidalCategory D] (Ψ : C ⥤ D) {S X₁ eA eB fA fB gA gB hA hB : D}
+    {c₀ cA cB A₂ B₂ A₁ B₁ A B : C} (P₁ : S ⟶ X₁) (P₂ : X₁ ⟶ Ψ.obj c₀) (δ : c₀ ⟶ cA ⊗ cB)
+    (θA : cA ⟶ A₂) (θB : cB ⟶ B₂) (iA₁ : A₂ ⟶ A₁) (iA : A₁ ⟶ A) (iB₁ : B₂ ⟶ B₁) (iB : B₁ ⟶ B)
+    (δ' : S ⟶ eA ⊗ eB) (θ'A : eA ⟶ fA) (θ'B : eB ⟶ fB) (La : fA ⟶ gA) (Lb : fB ⟶ gB)
+    (a₁ : gA ⟶ Ψ.obj A₂) (b₁ : gB ⟶ Ψ.obj B₂) (μ₁ : Ψ.obj A₂ ⊗ Ψ.obj B₂ ⟶ Ψ.obj (A₂ ⊗ B₂))
+    (μ : Ψ.obj A ⊗ Ψ.obj B ⟶ Ψ.obj (A ⊗ B))
+    (hnat : (Ψ.map (iA₁ ≫ iA) ⊗ₘ Ψ.map (iB₁ ≫ iB)) ≫ μ = μ₁ ≫ Ψ.map ((iA₁ ≫ iA) ⊗ₘ (iB₁ ≫ iB)))
+    (jA₁ : fA ⟶ hA) (jA : hA ⟶ Ψ.obj A) (jB₁ : fB ⟶ hB) (jB : hB ⟶ Ψ.obj B)
+    (hcA : La ≫ a₁ ≫ Ψ.map (iA₁ ≫ iA) = jA₁ ≫ jA) (hcB : Lb ≫ b₁ ≫ Ψ.map (iB₁ ≫ iB) = jB₁ ≫ jB)
+    (h : P₁ ≫ P₂ ≫ Ψ.map (δ ≫ (θA ⊗ₘ θB)) =
+      δ' ≫ ((θ'A ≫ La) ⊗ₘ (θ'B ≫ Lb)) ≫ (a₁ ⊗ₘ b₁) ≫ μ₁)
+    {mA : C} {mB : C} {mA' mB' : D} {gA₁ : cA ⟶ mA} {gA₂ : mA ⟶ A₁} {gB₁ : cB ⟶ mB}
+    {gB₂ : mB ⟶ B₁} {g'A₁ : eA ⟶ mA'} {g'A₂ : mA' ⟶ hA} {g'B₁ : eB ⟶ mB'}
+    {g'B₂ : mB' ⟶ hB}
+    (ecA : θA ≫ iA₁ = gA₁ ≫ gA₂) (ecB : θB ≫ iB₁ = gB₁ ≫ gB₂)
+    (ec'A : θ'A ≫ jA₁ = g'A₁ ≫ g'A₂) (ec'B : θ'B ≫ jB₁ = g'B₁ ≫ g'B₂) :
+    P₁ ≫ P₂ ≫ Ψ.map (δ ≫ ((gA₁ ≫ gA₂ ≫ iA) ⊗ₘ (gB₁ ≫ gB₂ ≫ iB))) =
+      δ' ≫ ((g'A₁ ≫ g'A₂ ≫ jA) ⊗ₘ (g'B₁ ≫ g'B₂ ≫ jB)) ≫ μ := by
+  simp only [← Category.assoc gA₁, ← Category.assoc gB₁, ← Category.assoc g'A₁,
+    ← Category.assoc g'B₁, ← ecA, ← ecB, ← ec'A, ← ec'B]
+  have e : δ ≫ (((θA ≫ iA₁) ≫ iA) ⊗ₘ ((θB ≫ iB₁) ≫ iB)) =
+      (δ ≫ (θA ⊗ₘ θB)) ≫ ((iA₁ ≫ iA) ⊗ₘ (iB₁ ≫ iB)) := by
+    simp only [Category.assoc, tensorHom_comp_tensorHom]
+  rw [e, Ψ.map_comp, reassoc_of% h, ← hnat]
+  simp only [Category.assoc, tensorHom_comp_tensorHom_assoc, hcA, hcB]
+
+/-- Naturality of `(α_ _ _ _).inv ≫ (β ▷ _) ≫ (α_ _ _ _).hom : A ⊗ (B ⊗ C) ⟶ B ⊗ (A ⊗ C)`. -/
+@[reassoc]
+theorem whiskerRight_whiskerLeft_braiding_comp {C : Type*} [Category C] [MonoidalCategory C]
+    [BraidedCategory C] {A A' B B' Z Z' E : C} (a : A' ⟶ A) (b : B' ⟶ B) (c : Z' ⟶ Z)
+    (f : A ⊗ Z ⟶ E) :
+    a ▷ (B' ⊗ Z') ≫ A ◁ (b ⊗ₘ c) ≫ (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+        B ◁ f =
+      (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (b ⊗ₘ ((a ⊗ₘ c) ≫ f)) := by
+  rw [← tensorHom_def_assoc, associator_inv_naturality_assoc, ← tensorHom_id, ← tensorHom_id,
+    tensorHom_comp_tensorHom_assoc, BraidedCategory.braiding_naturality, Category.comp_id,
+    ← Category.id_comp c, ← tensorHom_comp_tensorHom_assoc, associator_naturality_assoc,
+    Category.id_comp, tensorHom_id, tensorHom_comp_whiskerLeft]
+
+/-- For a lax monoidal functor `F` compatible with the braidings, the lax tensor maps
+`F X ⊗ (F Y ⊗ F Z) ⟶ F (X ⊗ (Y ⊗ Z))` commute with the exchange of the first two factors
+`(α_ _ _ _).inv ≫ (β ▷ _) ≫ (α_ _ _ _).hom`. -/
+theorem Functor.LaxMonoidal.μ_comp_map_braiding_exchange {CP CP' : Type*}
+    [Category CP] [Category CP']
+    [MonoidalCategory CP] [MonoidalCategory CP'] [BraidedCategory CP] [BraidedCategory CP']
+    {SP : CP ⥤ CP'} [SP.LaxMonoidal]
+    (hbr : ∀ X Y : CP, Functor.LaxMonoidal.μ SP X Y ≫ SP.map (β_ X Y).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ SP Y X) (X Y Z : CP) :
+    SP.obj X ◁ Functor.LaxMonoidal.μ SP Y Z ≫ Functor.LaxMonoidal.μ SP X (Y ⊗ Z) ≫
+        SP.map ((α_ _ _ _).inv ≫ ((β_ X Y).hom ▷ Z) ≫ (α_ _ _ _).hom) =
+      (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+        SP.obj Y ◁ Functor.LaxMonoidal.μ SP X Z ≫ Functor.LaxMonoidal.μ SP Y (X ⊗ Z) := by
+  have h1 := Functor.LaxMonoidal.associativity SP X Y Z
+  have h2 := Functor.LaxMonoidal.associativity SP Y X Z
+  rw [← cancel_epi (α_ (SP.obj X) (SP.obj Y) (SP.obj Z)).hom, ← reassoc_of% h1, SP.map_comp,
+    SP.map_comp, ← SP.map_comp_assoc, Iso.hom_inv_id, SP.map_id, Category.id_comp,
+    ← Functor.LaxMonoidal.μ_natural_left_assoc, ← comp_whiskerRight_assoc, hbr,
+    comp_whiskerRight_assoc, h2, Iso.hom_inv_id_assoc]
+
+/-- **The first identity of the universal kernel, reduced to a pairing** (blueprint
+`det-tf-sp-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): for a lax monoidal `S_P`, the map
+`𝔥 : S_P RHom(A, B) ⟶ RHom(A', B')` adjoint to `(a ⊗ 1) ≫ μ ≫ S_P(ev) ≫ b` and
+`λ_K : P ⟶ RHom(A, B)`, `λ_{K'} : P' ⟶ RHom(A', B')`, the identity holds as soon as the adjoint
+pairings agree: `(a ⊗ 1) ≫ μ ≫ S_P(λ_K^♭) ≫ b = (1 ⊗ ρ) ≫ λ_{K'}^♭`. -/
+theorem map_comp_eq_comp_of_pairing {CP CP' : Type*} [Category CP] [Category CP']
+    [MonoidalCategory CP] [MonoidalCategory CP'] [MonoidalClosed CP] [MonoidalClosed CP']
+    {SP : CP ⥤ CP'} [SP.LaxMonoidal] {A B P : CP} {A' B' P' : CP'} (a : A' ⟶ SP.obj A)
+    (b : SP.obj B ⟶ B') (lamK : P ⟶ (ihom A).obj B) (lamK' : P' ⟶ (ihom A').obj B')
+    (h : SP.obj ((ihom A).obj B) ⟶ (ihom A').obj B')
+    (hh : MonoidalClosed.uncurry h = a ▷ SP.obj ((ihom A).obj B) ≫
+      Functor.LaxMonoidal.μ SP A ((ihom A).obj B) ≫ SP.map ((ihom.ev A).app B) ≫ b)
+    (ρ : SP.obj P ⟶ P')
+    (hpair : a ▷ SP.obj P ≫ Functor.LaxMonoidal.μ SP A P ≫
+      SP.map (MonoidalClosed.uncurry lamK) ≫ b =
+      A' ◁ ρ ≫ MonoidalClosed.uncurry lamK') :
+    SP.map lamK ≫ h = ρ ≫ lamK' := by
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_natural_left, MonoidalClosed.uncurry_natural_left, hh, ← hpair,
+    whisker_exchange_assoc, Functor.LaxMonoidal.μ_natural_right_assoc, ← SP.map_comp_assoc,
+    ← MonoidalClosed.uncurry_eq]
+
+/-- **The pairing identity of the universal kernel**, abstractly (the computation behind the first
+identity of blueprint `det-tf-sp-universal-kernel`): for the Künneth–Verdier pairings
+`p_K : p₂^* K ⊗ (p₁^* K ⊗ p₂^* D K) ⟶ p₁^! K` (the symmetry, `μ` of `p₂^*`, `p₂^*(ev)` and the
+exceptional Künneth map `κ`) and its special analogue, `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ` and
+`ρ = Π⁻¹ ≫ (1 ⊠ δ_K)`, the pairing is specialized:
+`(α_{p₂} ⊗ 1) ≫ μ ≫ S_P(p_K) ≫ β_{p₁} = (1 ⊗ ρ) ≫ p_{K'}`, given the definition of `δ_K`,
+the monoidality of `α_{p₂}`, the compatibility `hκ` of `κ` with the exchanges and the symmetry
+of `S_P`. -/
+theorem pairing_specialization_eq {CX CX' CP CP' : Type*} [Category CX] [Category CX']
+    [Category CP] [Category CP'] [MonoidalCategory CX] [MonoidalCategory CX']
+    [MonoidalClosed CX'] [MonoidalCategory CP] [MonoidalCategory CP'] [BraidedCategory CP]
+    [BraidedCategory CP'] {SX : CX ⥤ CX'} [SX.LaxMonoidal] {SP : CP ⥤ CP'} [SP.LaxMonoidal]
+    {L₁ L₂ R₁ : CX ⥤ CP} {L₁' L₂' R₁' : CX' ⥤ CP'}
+    (α₁ : SX ⋙ L₁' ⟶ L₁ ⋙ SP) (α₂ : SX ⋙ L₂' ⟶ L₂ ⋙ SP) (β₁ : R₁ ⋙ SP ⟶ SX ⋙ R₁')
+    {K DK ω : CX} {ω' : CX'} (ev : K ⊗ DK ⟶ ω) (θ : SX.obj ω ⟶ ω')
+    (μ₂ : L₂.obj K ⊗ L₂.obj DK ⟶ L₂.obj (K ⊗ DK))
+    (μ₂' : ∀ X Y : CX', L₂'.obj X ⊗ L₂'.obj Y ⟶ L₂'.obj (X ⊗ Y))
+    (hμ₂' : ∀ {Y Y' : CX'} (g : Y ⟶ Y'), L₂'.obj (SX.obj K) ◁ L₂'.map g ≫
+      μ₂' (SX.obj K) Y' = μ₂' (SX.obj K) Y ≫ L₂'.map (SX.obj K ◁ g))
+    (κ : L₁.obj K ⊗ L₂.obj ω ⟶ R₁.obj K)
+    (κ' : L₁'.obj (SX.obj K) ⊗ L₂'.obj ω' ⟶ R₁'.obj (SX.obj K))
+    (δ : SX.obj DK ⟶ (ihom (SX.obj K)).obj ω')
+    (hδ : SX.obj K ◁ δ ≫ (ihom.ev (SX.obj K)).app ω' =
+      Functor.LaxMonoidal.μ SX K DK ≫ SX.map ev ≫ θ)
+    (hα₂ : (α₂.app K ⊗ₘ α₂.app DK) ≫ Functor.LaxMonoidal.μ SP _ _ ≫ SP.map μ₂ =
+      μ₂' _ _ ≫ L₂'.map (Functor.LaxMonoidal.μ SX K DK) ≫ α₂.app (K ⊗ DK))
+    (hκ : (α₁.app K ⊗ₘ α₂.app ω) ≫ Functor.LaxMonoidal.μ SP _ _ ≫ SP.map κ ≫ β₁.app K =
+      L₁'.obj (SX.obj K) ◁ L₂'.map θ ≫ κ')
+    (hbr : ∀ X Y : CP, Functor.LaxMonoidal.μ SP X Y ≫ SP.map (β_ X Y).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ SP Y X)
+    (Km : L₁'.obj (SX.obj K) ⊗ L₂'.obj (SX.obj DK) ⟶ SP.obj (L₁.obj K ⊗ L₂.obj DK))
+    (hKm : Km = (α₁.app K ⊗ₘ α₂.app DK) ≫ Functor.LaxMonoidal.μ SP _ _) [IsIso Km] :
+    α₂.app K ▷ SP.obj (L₁.obj K ⊗ L₂.obj DK) ≫ Functor.LaxMonoidal.μ SP _ _ ≫
+        SP.map ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (_ ◁ μ₂) ≫
+          (_ ◁ L₂.map ev) ≫ κ) ≫ β₁.app K =
+      L₂'.obj (SX.obj K) ◁ (inv Km ≫ L₁'.obj (SX.obj K) ◁ L₂'.map δ) ≫
+        ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (_ ◁ μ₂' _ _) ≫
+          (_ ◁ L₂'.map ((ihom.ev (SX.obj K)).app ω')) ≫ κ') := by
+  rw [← cancel_epi (L₂'.obj (SX.obj K) ◁ Km), ← whiskerLeft_comp_assoc _ Km,
+    IsIso.hom_inv_id_assoc]
+  have hR : L₂'.obj (SX.obj K) ◁ L₁'.obj (SX.obj K) ◁ L₂'.map δ ≫ (α_ _ _ _).inv ≫
+      ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (_ ◁ μ₂' _ _) ≫
+      (_ ◁ L₂'.map ((ihom.ev (SX.obj K)).app ω')) ≫ κ' =
+      (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+      L₁'.obj (SX.obj K) ◁ (μ₂' _ _ ≫ L₂'.map (Functor.LaxMonoidal.μ SX K DK) ≫
+        L₂'.map (SX.map ev)) ≫ L₁'.obj (SX.obj K) ◁ L₂'.map θ ≫ κ' := by
+    rw [associator_inv_naturality_right_assoc, whisker_exchange_assoc,
+      associator_naturality_right_assoc, ← whiskerLeft_comp_assoc, ← whiskerLeft_comp_assoc,
+      ← whiskerLeft_comp_assoc, hμ₂' δ, Category.assoc, ← L₂'.map_comp, hδ]
+    simp
+  rw [hR, ← hκ]
+  subst hKm
+  have hn := α₂.naturality ev
+  dsimp at hn
+  rw [← whiskerLeft_comp_assoc, whiskerLeft_comp_tensorHom_assoc, Category.assoc, Category.assoc,
+    hn, ← reassoc_of% hα₂]
+  simp only [Functor.map_comp, Category.assoc, whiskerLeft_comp]
+  rw [whisker_exchange_assoc, whisker_exchange_assoc]
+  dsimp only [Functor.comp_obj]
+  have hc :=
+    Functor.LaxMonoidal.μ_comp_map_braiding_exchange hbr (L₂.obj K) (L₁.obj K) (L₂.obj DK)
+  simp only [Functor.map_comp] at hc
+  rw [reassoc_of% hc, ← Functor.LaxMonoidal.μ_natural_right_assoc,
+    ← Functor.LaxMonoidal.μ_natural_right_assoc, ← whiskerLeft_comp_assoc,
+    ← whiskerLeft_comp_assoc,
+    whiskerRight_whiskerLeft_braiding_comp_assoc]
+  simp
+
 variable [MonoidalCategory CX] [MonoidalCategory CX'] [MonoidalClosed CX']
 
 /-- **The restriction of `ρ` to the diagonal**, abstractly: let `Km = Π : Q' ⟶ S_P P` be invertible,
@@ -101,6 +275,82 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+section KunnethRetraction
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {X X' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {P : NearbyCyclesModel Z Z'}
+  {f₁ f₂ : Z ⟶ X} {f₁' f₂' : Z' ⟶ X'} {d : X ⟶ Z} {d' : X' ⟶ Z'}
+
+/-- `leftDerivedUpperStarCompOfEq` is `leftDerivedUpperStarComp` up to `eqToHom`, inverse form. -/
+lemma leftDerivedUpperStarCompOfEq_inv_app_eq {B₀ B₁ B₂ : Scheme.{u}} (p : B₀ ⟶ B₁) (q : B₁ ⟶ B₂)
+    {pq : B₀ ⟶ B₂} (w : p ≫ q = pq)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology B₂) Ab.{u + 1}) (condensedRingObj Λ B₂))) :
+    (leftDerivedUpperStarCompOfEq Λ w).inv.app K =
+      (leftDerivedUpperStarComp Λ p q).inv.app K ≫ eqToHom (by rw [w]) := by
+  subst w
+  simp only [eqToHom_refl, Category.comp_id]
+  rfl
+
+set_option maxHeartbeats 1000000 in
+-- the instance of the abstract computation is matched against the unfolded Künneth maps
+/-- **The Künneth map along a common section of the two projections**: for morphisms of models
+`φ₁ φ₂ : P ⟶ M` and `ρ : M ⟶ P` with `ρ ≫ φ₁ = ρ ≫ φ₂ = 𝟙`, the pullback of the Künneth map
+`Π_{A,B}` along `ρ`, followed by the pullback exchange `α_ρ`, is the lax tensor map `μ_M`, through
+the identifications `L(d)^* L(f_i)^* ≅ L(𝟙)^* ≅ 𝟭`. -/
+lemma NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange_of_retraction
+    (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom M f₂ f₂') (ρ : M.Hom P d d')
+    (htot₁ : ρ.total ≫ φ₁.total = 𝟙 _) (hgen₁ : ρ.generic ≫ φ₁.generic = 𝟙 _)
+    (htot₂ : ρ.total ≫ φ₂.total = 𝟙 _) (hgen₂ : ρ.generic ≫ φ₂.generic = 𝟙 _)
+    (hb₁ : d ≫ f₁ = 𝟙 X) (hs₁ : d' ≫ f₁' = 𝟙 X') (hb₂ : d ≫ f₂ = 𝟙 X) (hs₂ : d' ≫ f₂' = 𝟙 X')
+    (A B : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    L((d')^*⟦Λ⟧).map (NearbyCyclesModel.kunnethMap Λ φ₁ φ₂ A B) ≫
+        (ρ.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) ≫
+        (M.nearbyCycles Λ).map (Functor.OplaxMonoidal.δ L((d)^*⟦Λ⟧) _ _ ≫
+          (((leftDerivedUpperStarComp Λ d f₁).inv.app A ≫ eqToHom (by rw [hb₁]) ≫
+              (leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
+            ((leftDerivedUpperStarComp Λ d f₂).inv.app B ≫ eqToHom (by rw [hb₂]) ≫
+              (leftDerivedUpperStarId Λ X).hom.app B))) =
+      Functor.OplaxMonoidal.δ L((d')^*⟦Λ⟧) _ _ ≫
+        (((leftDerivedUpperStarComp Λ d' f₁').inv.app _ ≫ eqToHom (by rw [hs₁]) ≫
+            (leftDerivedUpperStarId Λ X').hom.app ((M.nearbyCycles Λ).obj A)) ⊗ₘ
+          ((leftDerivedUpperStarComp Λ d' f₂').inv.app _ ≫ eqToHom (by rw [hs₂]) ≫
+            (leftDerivedUpperStarId Λ X').hom.app ((M.nearbyCycles Λ).obj B))) ≫
+        M.tensorMap Λ A B := by
+  have h := NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂
+    (NearbyCyclesModel.Hom.id M) (NearbyCyclesModel.Hom.id M) (NearbyCyclesModel.Hom.id M)
+    (NearbyCyclesModel.Hom.id M) ρ
+    (by rw [NearbyCyclesModel.Hom.id_total, Category.comp_id, htot₁])
+    (by rw [NearbyCyclesModel.Hom.id_generic, Category.comp_id, hgen₁])
+    (by rw [NearbyCyclesModel.Hom.id_total, Category.comp_id, htot₂])
+    (by rw [NearbyCyclesModel.Hom.id_generic, Category.comp_id, hgen₂])
+    (by rw [Category.comp_id, hb₁]) (by rw [Category.comp_id, hs₁])
+    (by rw [Category.comp_id, hb₂]) (by rw [Category.comp_id, hs₂]) A B
+  -- the identity components
+  have hc := fun C ↦ CategoryTheory.map_comp_comp_map_of_isoId (M.nearbyCycles Λ)
+    (leftDerivedUpperStarId Λ X') (leftDerivedUpperStarId Λ X) C
+    (NearbyCyclesModel.Hom.id_pullbackExchange_app Λ M C)
+    (NearbyCyclesModel.Hom.id_pullbackExchange_app Λ M _)
+  simp only [NearbyCyclesModel.kunnethMap] at h ⊢
+  have hnat := NearbyCyclesModel.tensorMap_natural Λ M
+    ((leftDerivedUpperStarId Λ X).hom.app (L((𝟙 X)^*⟦Λ⟧).obj A) ≫
+      (leftDerivedUpperStarId Λ X).hom.app A)
+    ((leftDerivedUpperStarId Λ X).hom.app (L((𝟙 X)^*⟦Λ⟧).obj B) ≫
+      (leftDerivedUpperStarId Λ X).hom.app B)
+  have hcA := hc A
+  have hcB := hc B
+  have ecA := (pullbackSquareComparison_hom_app_comp_leftDerivedUpperStarId Λ hb₁ A).trans
+    (leftDerivedUpperStarCompOfEq_inv_app_eq Λ d f₁ hb₁ A)
+  have ecB := (pullbackSquareComparison_hom_app_comp_leftDerivedUpperStarId Λ hb₂ B).trans
+    (leftDerivedUpperStarCompOfEq_inv_app_eq Λ d f₂ hb₂ B)
+  have ec'A := (pullbackSquareComparison_hom_app_comp_leftDerivedUpperStarId Λ hs₁
+    ((M.nearbyCycles Λ).obj A)).trans (leftDerivedUpperStarCompOfEq_inv_app_eq Λ d' f₁' hs₁ _)
+  have ec'B := (pullbackSquareComparison_hom_app_comp_leftDerivedUpperStarId Λ hs₂
+    ((M.nearbyCycles Λ).obj B)).trans (leftDerivedUpperStarCompOfEq_inv_app_eq Λ d' f₂' hs₂ _)
+  apply_by_match CategoryTheory.kunneth_retraction_aux [h := h, hnat := hnat, hcA := hcA,
+    hcB := hcB, ecA := ecA, ecB := ecB, ec'A := ec'A, ec'B := ec'B]
+
+end KunnethRetraction
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
@@ -159,6 +409,13 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
         ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
           (isTraitModel_deformationModel X x.left.ker k')
           (deformationModel_exists_comp_ε X x.left.ker k')) K L := by
+  -- The ambient content of this identity is
+  -- `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange_of_retraction`, at the projections
+  -- and the diagonal of the deformation models. What is missing is its transport to bounded
+  -- constructible complexes: after `ObjectProperty.hom_ext` and the ambient forms of the
+  -- comparison isomorphisms, the two sides differ only in the spelling of objects (e.g.
+  -- `(externalProduct ℓ K L).obj` and `Lp₁^* K.obj ⊗ Lp₂^* L.obj`), but neither the unifier nor
+  -- the kernel identifies them within the heartbeat budget.
   sorry
 
 set_option maxHeartbeats 1000000 in
