@@ -1224,6 +1224,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceCharts
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedChart
+public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedPoints
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceEmbedding
 public import WeilConjectures.AlgebraicGeometry.AffineSpecifiedModelChainComparison
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumBaseChangeComparison
@@ -4586,6 +4587,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalizingPrincipalCoverGluing
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType
 public import WeilConjectures.AlgebraicGeometry.LocallyConstantNonzeroGerms
+public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import WeilConjectures.AlgebraicGeometry.LocallyFiniteTorDimension
 public import WeilConjectures.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
 public import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
@@ -8742,6 +8744,7 @@ public import WeilConjectures.CategoryTheory.WeilEquivariance
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Combinatorics.SignedFacePermutation
 public import WeilConjectures.Compactification.Affine
+public import WeilConjectures.Compactification.AffineCharts
 public import WeilConjectures.Compactification.AffineProjective
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
@@ -12390,6 +12393,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
@@ -13665,9 +13669,11 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
@@ -13693,6 +13699,7 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginBaseChange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
 public import WeilConjectures.TraceFormula.Specialization.Trait
+public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
