@@ -127,7 +127,9 @@ theorem localChern
         (SpTowerClasses.hyperplanePic Y)) z) : s.LocalChernNormalized l Y z := by
   obtain ⟨k, hk⟩ := localChern_transport_exists l Y s z hz
   unfold UniformizerChernNormalizationData.LocalChernNormalized
-  exact hk.trans (localChern_transport_identification l Y s z hz hk)
+  calc
+    LocalComposite l Y s z = FiniteComparison l Y s k := hk
+    _ = _ := localChern_transport_identification l Y s z hz hk
 
 end UniformizerChernNormalizationData
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
