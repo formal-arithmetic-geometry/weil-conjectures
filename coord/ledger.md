@@ -20097,3 +20097,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:02 L: merged deliver/U4/Sheaf.Paper.ScalarTowerPullbackLimitSquare (stage 3; reviewer PASS; first push; landing 20261027T210250-L-1681480 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:02 L: merged deliver/U4/Sheaf.Paper.WfTensorCompletionFrobenius (stage 3; reviewer PASS; first push; landing 20261027T210251-L-1681701 (proof); batch 20261027T205736; modules 1; new nodes 2)
 - 21:02 L: merged deliver/U4/Sheaf.SixFunctors.CoefQbarVerdierCore (stage 3; reviewer FIX; first push; landing 20261027T210253-L-1681976 (interface); batch 20261027T205736; modules 6; new nodes 5; change records: coord/changes/U4-qbar-verdier-explicit-descent.md)
+- 21:02 L: merged deliver/U4/Sheaf.TraceFormula.ScalarModelRoosZeroLiftExistence (stage 3; reviewer PASS; first push; landing 20261027T210254-L-1682244 (interface); batch 20261027T205736; modules 3; new nodes 2)

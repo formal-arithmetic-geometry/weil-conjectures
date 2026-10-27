@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-scalar-model-roos-zero-lift-core",
+ "kind": "statement",
+ "title": "Construction data for the normalized scalar Roos lift",
+ "statement": "For a coefficient-derived scalar model and a strict Roos map f with zero shifted coordinate, there exists a scalar-extended strict Roos map h with zero shifted coordinate and the normalized quotient-coordinate formula.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Proposition 3.5.1"
+ },
+ "proof": [
+  {
+   "text": "Choose the simultaneous strict quotient presentation and K-injective tower resolution, then transpose the compatible quotient family.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Expansion of scalar-model Roos lift steps 1--2"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelRoosZeroLiftCore.lean",
+  "declaration": "WeilConjectures.scalarModelRoosZeroLift_core",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28",
+  "statement": "theorem scalarModelRoosZeroLift_core\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)\n    (hf : ∀ i : ℤ, f.f i ≫\n      (CochainComplex.mappingCocone.snd (scalarRoosBoundary\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex\n          (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0) :\n    ∃ h : scalarModelRoosZeroLiftType l E L F ι j X SL P D,\n      scalarModelRoosZeroLiftZero l E L F ι j X SL P D h ∧\n      scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarModelRoosZeroLift",
+   "results": "No prior construction theorem.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  },
+  {
+   "tool": "loogle",
+   "query": "Roos map zero shifted coordinate",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized scalar Roos lift",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftExistence",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-scalar-model-roos-zero-lift-existence",
+   "place": "Expansion of scalar-model Roos lift proof steps",
+   "via": [
+    "lem-trf-scalar-model-roos-zero-lift-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T210254-L-1682244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T210254-L-1682244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

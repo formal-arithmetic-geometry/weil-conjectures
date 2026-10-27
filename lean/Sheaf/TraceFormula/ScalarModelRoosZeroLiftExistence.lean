@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorization
 
 /-! # Existence of the normalized scalar Roos lift
 
@@ -116,6 +118,11 @@ theorem scalarModelRoosZeroLift_existence
         (integralComparisonRoosBridge l F X ρF _).hom =
       completedScalarCounit l L F j X
         ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫ DerivedCategory.Q.map h := by
-  sorry
+  simp only
+  obtain ⟨h, hh, hcoord⟩ := scalarModelRoosZeroLift_core
+    l E L F ι j X SL ρL ρF b P D f hf
+  refine ⟨h, hh, hcoord, ?_⟩
+  exact scalarModelRoosZeroLift_factorization
+    l E L F ι j X SL ρL ρF b P D f h hh hcoord
 
 end WeilConjectures

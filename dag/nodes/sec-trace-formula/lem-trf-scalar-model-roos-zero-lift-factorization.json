@@ -1,0 +1,107 @@
+{
+ "id": "lem-trf-scalar-model-roos-zero-lift-factorization",
+ "kind": "statement",
+ "title": "Factorization of the normalized scalar Roos lift",
+ "statement": "A scalar-extended strict Roos map satisfying the zero-shift and normalized quotient-coordinate identities satisfies the displayed factorization through the completed scalar counit.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Stacks 0941"
+ },
+ "proof": [
+  {
+   "text": "Apply the universal cochain counit to the normalized quotient coordinates and extend the generator equality by tensor balancing and sheafification.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-scalar-model-roos-zero-lift-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-scalar-model-roos-zero-lift-core"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Expansion of scalar-model Roos lift factorization"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorization",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelRoosZeroLiftFactorization.lean",
+  "declaration": "WeilConjectures.scalarModelRoosZeroLift_factorization",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28",
+  "statement": "theorem scalarModelRoosZeroLift_factorization\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)\n    (h : scalarModelRoosZeroLiftType l E L F ι j X SL P D)\n    (hh : scalarModelRoosZeroLiftZero l E L F ι j X SL P D h)\n    (hcoord : scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h) :\n    scalarModelRoosZeroLiftFactorization l E L F ι j X SL ρL ρF b P D f h"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-scalar-model-roos-zero-lift-core"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedScalarCounit scalarModelRoos",
+   "results": "No prior factorization theorem.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  },
+  {
+   "tool": "loogle",
+   "query": "universal cochain counit Roos factorization",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalar Roos counit factorization",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftExistence",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-scalar-model-roos-zero-lift-existence",
+   "place": "Expansion of scalar-model Roos lift proof steps",
+   "via": [
+    "lem-trf-scalar-model-roos-zero-lift-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T210254-L-1682244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T210254-L-1682244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
