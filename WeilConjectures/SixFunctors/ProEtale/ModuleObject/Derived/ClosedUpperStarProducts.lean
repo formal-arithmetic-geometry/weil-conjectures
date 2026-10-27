@@ -79,4 +79,16 @@ theorem preservesLimit_leftDerivedUpperStar_of_isCompl
   have := preservesLimitsOfShape_leftDerivedUpperStar_of_isCompl Λ i j hij
   inferInstance
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
+/-- On a noetherian scheme, the derived pullback `Li^*` along a closed immersion preserves
+countable products: the open complement of `i` is quasi-compact. -/
+theorem preservesLimitsOfShape_leftDerivedUpperStar_of_isClosedImmersion [IsNoetherian X] :
+    PreservesLimitsOfShape (Discrete ℕ) L((i)^*⟦Λ⟧) := by
+  let V : X.Opens := ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  exact preservesLimitsOfShape_leftDerivedUpperStar_of_isCompl Λ i V.ι (by
+    rw [Scheme.Opens.range_ι]
+    exact isCompl_compl)
+
 end AlgebraicGeometry.ProEtale.CondensedRing
