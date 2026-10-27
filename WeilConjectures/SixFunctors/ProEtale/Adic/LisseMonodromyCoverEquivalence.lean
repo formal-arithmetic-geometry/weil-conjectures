@@ -13,13 +13,16 @@ public import WeilConjectures.WeilSheaf.LisseDuality
 /-!
 # The monodromy from universal covers is an equivalence
 
-Let `Y` be a connected regular Noetherian scheme with universal profinite étale covers `Ỹ_y`
-on which lisse sheaves are free, and let `M` be the monodromy of lisse sheaves obtained from them
+Let `Y` be an irreducible scheme (e.g. a connected normal or regular Noetherian scheme) with
+universal profinite étale covers `Ỹ_y` on which lisse sheaves are free, and let `M` be the
+monodromy of lisse sheaves obtained from them
 (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy`). At every base point `t`, the stalk
 functor identifies lisse sheaves with continuous finite-dimensional representations of
-`π₁(Y, t)` (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt`):
+`π₁(Y, t)`
+(`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt_of_irreducibleSpace`):
 
-- the stalk functor is faithful (`AlgebraicGeometry.Scheme.UniversalCovers.lisseStalk_faithful`):
+- the stalk functor is faithful
+  (`AlgebraicGeometry.Scheme.UniversalCovers.lisseStalk_faithful_of_irreducibleSpace`):
   on the irreducible scheme `Y` a morphism of lisse sheaves vanishing on one stalk vanishes;
 - it is full onto equivariant maps
   (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_full`): an equivariant map is an
@@ -144,12 +147,12 @@ lemma exists_stalkFunctor_map_kernel_ι_eq {K : Type u} [Field K] {Z : Scheme.{u
   rw [PreservesKernel.iso_inv_ι, ← ModuleCat.comp_apply, ModuleCat.kernelIsoKer_inv_kernel_ι]
   rfl
 
-omit [CompactSpace Y] in
-/-- **The stalk functor is faithful** on lisse sheaves on a connected regular Noetherian
-scheme. -/
-theorem lisseStalk_faithful (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y}
-    (f g : G ⟶ H) (h : (lisseStalk l t).map f = (lisseStalk l t).map g) : f = g := by
-  have := IsRegular.irreducibleSpace Y
+omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
+/-- **The stalk functor is faithful** on lisse sheaves on an irreducible scheme, e.g. a
+connected normal locally Noetherian scheme. -/
+theorem lisseStalk_faithful_of_irreducibleSpace [IrreducibleSpace Y]
+    (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y} (f g : G ⟶ H)
+    (h : (lisseStalk l t).map f = (lisseStalk l t).map g) : f = g := by
   let φ : G.obj ⟶ H.obj := f.hom - g.hom
   have hφ : (stalkFunctor l t).map φ.hom = 0 := by
     have e : (stalkFunctor l t).map φ.hom =
@@ -164,6 +167,14 @@ theorem lisseStalk_faithful (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : 
   have h0 : φ = 0 := by
     rw [← cancel_epi (kernel.ι φ), kernel.condition, comp_zero]
   exact ObjectProperty.hom_ext _ (sub_eq_zero.1 h0)
+
+omit [CompactSpace Y] in
+/-- **The stalk functor is faithful** on lisse sheaves on a connected regular Noetherian
+scheme, which is irreducible (`AlgebraicGeometry.IsRegular.irreducibleSpace`). -/
+theorem lisseStalk_faithful (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y}
+    (f g : G ⟶ H) (h : (lisseStalk l t).map f = (lisseStalk l t).map g) : f = g :=
+  have := IsRegular.irreducibleSpace Y
+  lisseStalk_faithful_of_irreducibleSpace t f g h
 
 include hU in
 omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
@@ -253,14 +264,24 @@ theorem lisseMonodromy_essSurj (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
       ∀ g v, e ((U.lisseMonodromy hU).rep t G g v) = ρ g (e v) :=
   exists_lisseSheaf_rep hU t V ρ hρ
 
-omit [CompactSpace Y] in
+omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
 /-- **The monodromy from universal covers is an equivalence at every base point** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). -/
-theorem lisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
-    (U.lisseMonodromy hU).IsEquivalenceAt t where
+`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`), on an irreducible scheme, e.g. a
+connected normal locally Noetherian scheme. -/
+theorem lisseMonodromy_isEquivalenceAt_of_irreducibleSpace [IrreducibleSpace Y]
+    (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : (U.lisseMonodromy hU).IsEquivalenceAt t where
   continuous_rep := lisseMonodromy_continuous_rep hU t
-  faithful := lisseStalk_faithful t
+  faithful := lisseStalk_faithful_of_irreducibleSpace t
   full := lisseMonodromy_full hU t
   essSurj := lisseMonodromy_essSurj hU t
+
+omit [CompactSpace Y] in
+/-- **The monodromy from universal covers is an equivalence at every base point** (blueprint:
+`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`), on a connected regular Noetherian
+scheme, which is irreducible (`AlgebraicGeometry.IsRegular.irreducibleSpace`). -/
+theorem lisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    (U.lisseMonodromy hU).IsEquivalenceAt t :=
+  have := IsRegular.irreducibleSpace Y
+  lisseMonodromy_isEquivalenceAt_of_irreducibleSpace hU t
 
 end AlgebraicGeometry.Scheme.UniversalCovers

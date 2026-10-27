@@ -42,7 +42,8 @@ This file defines
 and states the two theorems on nearby cycles that Varshavsky's vanishing argument uses:
 * Gabber's Künneth formula and the commutation of nearby cycles with Verdier duality, in the form
   `Ψ_{X×X}(K ⊠ D K) ≅ Ψ_X K ⊠ D Ψ_X K`
-  (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`);
+  (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`, proved downstream
+  once the dualizing maps of nearby cycles are constructed);
 * Verdier's zero-section theorem: the specialization `Sp_{X,x}(K) = Ψ_X K` restricted to the zero
   section vanishes if `K_x` does
   (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`). It is deduced from its
@@ -193,44 +194,6 @@ instance isIso_specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAl
   have h := NearbyCyclesModel.isIso_kunnethMap ℓ
     (isTraitProduct_deformationProdModel k' x.left.ker) K.property L.property
   exact isIso_homMk_aux _
-
-/-- **Nearby cycles commute with Verdier duality** (Gabber; Illusie, *Autour du théorème de
-monodromie locale*, Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`), for the
-specialization to the normal cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here
-`Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric
-generic point; the duality on the geometric generic fibre `X_Ω` is relative to `Ω`, and
-`Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
-fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
-asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
-isomorphism. It is the instance of `NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso` for
-the deformation model, whose geometric generic fibre is the base change of `X`
-(`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
-theorem nonempty_specialization_verdierDual_iso
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
-      verdierDual ℓ ((specialization k' x).obj K)) :=
-  NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
-    (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
-    (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
-      isPullback_deformationSpecialFibre X _ k'⟩ ⟨deformationTotalToBase X _ k', rfl,
-        deformationTotalToBase_hom X _ k'⟩
-      (isPullback_deformationModel_ε k' x.left.ker)) K
-
-/-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
-`K ⊠ D K` is the universal kernel of the specialization,
-`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ Ψ_X D_X K ≅ Ψ_X K ⊠ D Ψ_X K`, by Gabber's Künneth formula
-(`ProEtale.CondensedRing.isIso_specializationKunnethMap`, blueprint
-`sk-prop-tf-nearby-external-kunneth`) and the commutation of nearby cycles with Verdier duality
-(`ProEtale.CondensedRing.nonempty_specialization_verdierDual_iso`, blueprint
-`sk-prop-tf-nearby-duality-foundation`). -/
-theorem nonempty_specializationProd_externalProduct_iso
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ≅
-      externalProduct ℓ ((specialization k' x).obj K)
-        (verdierDual ℓ ((specialization k' x).obj K))) :=
-  have e := nonempty_specialization_verdierDual_iso (ℓ := ℓ) k' x K
-  ⟨(asIso (specializationKunnethMap (ℓ := ℓ) k' x K _)).symm ≪≫
-    whiskerLeftIso _ ((boundedConstructibleUpperStar _ ℓ _).mapIso e.some)⟩
 
 end ZeroSection
 

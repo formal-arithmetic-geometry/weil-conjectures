@@ -283,14 +283,6 @@ lemma mapHomotopyCategoryCompIso_inv_app_quotient_obj {F : V ⥤ W} {G : W ⥤ V
       (HomotopyCategory.quotient V' c).map ((mapHomologicalComplexCompIso e c).inv.app K) :=
   rfl
 
-/-- The isomorphism `Functor.mapHomotopyCategoryCompIso` attached to `Iso.refl (F ⋙ G)` is the
-identity, for the inverse. -/
-lemma mapHomotopyCategoryCompIso_refl_inv_app_eq_id (F : V ⥤ W) (G : W ⥤ V') [F.Additive]
-    [G.Additive] (Y : HomotopyCategory V c) :
-    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).inv.app Y = 𝟙 _ := by
-  have h := (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom_inv_id_app Y
-  rwa [mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
-
 /-- The functor induced on homotopy categories, on the image of a complex. -/
 lemma mapHomotopyCategory_obj_quotient_obj (F : V ⥤ W) [F.Additive] (K : HomologicalComplex V c) :
     (F.mapHomotopyCategory c).obj ((HomotopyCategory.quotient V c).obj K) =

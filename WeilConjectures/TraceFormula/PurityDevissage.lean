@@ -205,9 +205,16 @@ theorem isIso_upperShriekUnitTensorMap_lowerStar_lowerStar (f : X ⟶ Y) [Smooth
   have sq₂ := IsPullback.of_hasPullback (pullback.snd f g) j
   -- the open step
   have := isIso_upperShriekUnitTensorMap_of_isDualizable ℓ (pullback.snd (pullback.snd f g) j) hL
-  have := isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion ℓ j
-  have := isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion ℓ
-    (pullback.fst (pullback.snd f g) j)
+  have := (Adjunction.Triple.mk
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)).isIso_unit_iff_isIso_counit.1
+      inferInstance
+  have := (Adjunction.Triple.mk
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ (pullback.fst (pullback.snd f g) j))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+      (pullback.fst (pullback.snd f g) j))).isIso_unit_iff_isIso_counit.1 inferInstance
   have := isIso_upperShriekBaseChange_unit_of_smooth ℓ sq₂
   have := isIso_boundedConstructibleBaseChange_of_smooth ℓ sq₂.flip L
   have := isIso_upperShriekUnitTensorMap_lowerStar ℓ sq₂
