@@ -7,8 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
 public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
-import Sheaf.AlgebraicGeometry.VectorIntegrationTensorCounit
-import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import Sheaf.AlgebraicGeometry.AffineTraceLinePurity
+import Sheaf.AlgebraicGeometry.AffineTraceRightNormalForm
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 
 
@@ -398,6 +400,42 @@ private theorem coefficient_projection_naturality
     three_squares _ _ _ _ _ _ _ _ _ _ hτ hp hσ
 
 
+private theorem affine_counit_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t T hT)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (K : DerivedCategoryModule A S) :
+    IsIso ((affineTraceAdjunction A N hA t D S hS d).counit.app K) := by
+  unfold affineTraceAdjunction
+  apply affineTraceAdjunctionTower_counit_isIso
+  intro e M
+  let := affineTraceNoetherian S e
+  exact affineTraceLineCounit_isIso A N hN hA t (affineTraceTower S e)
+    (affineTraceInvertible N S hS e) (D _ _) M
+
+@[irreducible]
+private def affine_right_tensor_unit (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (K : DerivedCategoryModule A S) :
+    ((ordinaryFinitePullback A (affineTraceProjection S d)).obj K) ⊗
+        (affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S) ≅
+      (affineTraceRight A N hA S d).obj K := by
+  let X := affineTraceTower S d
+  let P := ordinaryFinitePullback A (affineTraceProjection S d)
+  let L := (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat A)) 0).obj
+    (Scheme.finiteEtaleTateSheaf A N X hA (d : ℤ))
+  let n : ℤ := 2 * (d : ℤ)
+  let e := (affineTraceRight_normalForm A N hN hA S hS d).1.some
+  let z : (affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S) ≅ L⟦n⟧ :=
+    e.app _ ≪≫ (shiftFunctor _ n).mapIso
+      ((tensorRight L).mapIso
+        (leftDerivedUpperStarUnitIso (ModuleCat A) (affineTraceProjection S d)) ≪≫ λ_ L)
+  exact (tensorLeft (P.obj K)).mapIso z ≪≫
+    ((tensorLeft (P.obj K)).commShiftIso n).app L ≪≫ (e.app K).symm
+
 attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
   VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
 set_option backward.isDefEq.respectTransparency true
@@ -409,23 +447,20 @@ parent thm-amb-vector-bundle-purity, proof Steps 4--9.
 
 Proof: compare the ordered affine-space compact-support functor with the ambient one
 by induction using compactification independence and composition, starting with the
-identity compactification in rank zero. The affine-space trace theorem supplies the
-normalized affine adjunction and an invertible counit at the unit. On each bundle frame,
-normalization identifies the actual integration map with the affine trace; exact inverse
-image and cohomology detection first prove that the integration map itself is invertible.
-For the unit adjunct, use the canonical exceptional open-base-change mate. The naturality
-identity for the two adjunction Hom equivalences identifies the pullback of the global
-adjunct with the affine unit adjunct, up to that invertible exchange. The affine
-coefficient comparison and uniqueness of right adjoints make this local adjunct invertible.
-Detect global invertibility on the frame cover using all cohomology sheaves.
+identity compactification in rank zero. The affine-space trace and frame normalization
+first show that the actual vector integration is invertible. Consequently its tensor
+with any K, after inverse projection and the unitor, is an invertible counit candidate.
 
-For arbitrary K, projection naturality factors the actual integration adjunct as tensor
-with the just-proved unit adjunct followed by the tensor-counit adjunct at the dualizing
-object. Bundle charts prove smoothness of relative dimension d. The source library's
-orientation-free smooth tensor theorem gives invertibility of its canonical tensor map.
-The separate lem-amb-vector-integration-tensor-counit then gives invertibility of the
-second factor. Thus the displayed, specified integration adjunct is invertible. No
-boundedness or gluing of arbitrary derived morphisms is asserted.
+Restrict its Brown adjunct to each frame. The actual exceptional base-change mate
+against the open immersion is invertible, and mate naturality identifies this restriction
+with the local adjunct of inverse compact-support exchange followed by the pulled-back
+counit candidate. The affine right-functor Tate normal form, its value on the unit,
+and the chart coefficient isomorphism identify the source with the affine right adjoint
+at the pulled-back K. The affine counit is invertible for every K by the coordinate-tower
+induction from affineTraceLineCounit_isIso. An invertible map with this source has invertible
+Brown adjunct: compare right adjoints and factor off an automorphism of K. Finally detect
+invertibility on the jointly surjective frame charts using derived cohomology. This proof
+uses the affine adjunction and open base change, without general smooth tensor duality.
 -/
 theorem vectorIntegrationMate_isIso (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
@@ -450,26 +485,85 @@ theorem vectorIntegrationMate_isIso (N : ℕ) (hN : 0 < N)
   let := (vectorIntegration_geometry S d M).1
   let := (vectorIntegration_geometry S d M).2.1
   let := (vectorIntegration_geometry S d M).2.2
-  let := bundle_smooth S d M
-  let : HasInvertibleExponent A S := ⟨N, hN, hA, hS⟩
-  let : HasInvertibleExponent A (VectorBundleZeroSection.scheme S d M) :=
-    HasInvertibleExponent.of_hom (VectorBundleZeroSection.π S d M)
-  have hθ : IsIso (dualizingComplexTensorMap A (VectorBundleZeroSection.π S d M) K) :=
-    (exists_dualizingComplex_iso_and_tensor A
-      (VectorBundleZeroSection.π S d M) d).choose_spec.2.2.2 K
-  let := integration_unit_adjunct_isIso N hN A hA S hS d M
-  erw [tensor_adjunct_transport
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A)
-      (VectorBundleZeroSection.π S d M))
-    ((derivedTensor (ModuleCat.{u + 1} A) (VectorBundleZeroSection.scheme S d M)).obj
-      ((ordinaryFinitePullback A (VectorBundleZeroSection.π S d M)).obj K))
-    ((derivedTensor (ModuleCat.{u + 1} A) S).obj K)
-    (fun C ↦ compactProjectionMapCoeffFirst A (VectorBundleZeroSection.π S d M) K C)
-    (coefficient_projection_naturality A (VectorBundleZeroSection.π S d M) K)]
-  exact IsIso.comp_isIso'
-    (Functor.map_isIso
-      ((derivedTensor (ModuleCat.{u + 1} A) (VectorBundleZeroSection.scheme S d M)).obj
-        ((ordinaryFinitePullback A (VectorBundleZeroSection.π S d M)).obj K)) _)
-    (tensor_counit_adjunct_isIso A (VectorBundleZeroSection.π S d M) K hθ)
+  let W := vectorIntegrationCoefficient A N hA S d M
+  let f := VectorBundleZeroSection.π S d M
+  let c := inv (compactProjectionMapCoeffFirst A f K W) ≫
+    ((derivedTensor (ModuleCat A) S).obj K).map
+      (vectorBundleIntegration N hN A hA S hS d M) ≫
+    (derivedTensorRightUnitor (ModuleCat A) S K).hom
+  let ht : IsIso (vectorBundleIntegration N hN A hA S hS d M) :=
+    integration_isIso N hN A hA S hS d M
+  let : IsIso (compactProjectionMapCoeffFirst A f K W) := hp
+  have hm : IsIso (((derivedTensor (ModuleCat A) S).obj K).map
+      (vectorBundleIntegration N hN A hA S hS d M)) := Functor.map_isIso _ _
+  have hu := (derivedTensorRightUnitor (ModuleCat A) S K).isIso_hom
+  let : IsIso c := IsIso.comp_isIso' (inferInstance : IsIso
+    (inv (compactProjectionMapCoeffFirst A f K W))) (IsIso.comp_isIso' hm hu)
+  obtain ⟨t, D, htD⟩ := exists_ordinaryFiniteP1Adjunction N hN A hA
+  obtain ⟨I, V, hV, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free M (r := d)
+  apply derived_isIso_of_cover A
+    (fun i : I ↦ vectorIntegrationChart S d M (V i) (e i).some) ?_
+  · intro i
+    let : TopologicalSpace.NoetherianSpace (V i).toScheme :=
+      (V i).ι.isOpenEmbedding.isInducing.noetherianSpace
+    let : IsNoetherian (V i).toScheme :=
+      { toIsLocallyNoetherian := inferInstance
+        isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }
+    let T := (V i).toScheme
+    let hT := affineTracePullbackInvertible N (V i).ι hS
+    let sq := vectorIntegrationChart_isPullback S d M (V i) (e i).some
+    let := isIso_rightDerivedLowerShriekBaseChangeMap A sq
+    have hbiso : IsIso (rightDerivedUpperShriekBaseChangeMap A sq) :=
+      isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion A sq
+    let a := rightDerivedUpperShriekAdjunction (ModuleCat A) f
+    let b := (affineTraceAdjunction A N hA t D T hT d).ofNatIsoLeft
+      (affineLeftIso A T d
+        (HasCompactification.compactification (affineTraceProjection T d)))
+    let J := ordinaryFinitePullback A (vectorIntegrationChart S d M (V i) (e i).some)
+    let H := ordinaryFinitePullback A (V i).ι
+    let P := ordinaryFinitePullback A (affineTraceProjection T d)
+    let z : J.obj (((derivedTensor (ModuleCat A)
+        (VectorBundleZeroSection.scheme S d M)).obj
+          ((ordinaryFinitePullback A f).obj K)).obj W) ≅
+        (affineTraceRight A N hA T d).obj (H.obj K) :=
+      leftDerivedUpperStarTensorIso (ModuleCat A) _ _ _ ≪≫
+        tensorIso
+          ((derivedSquareUpperStarIso (ModuleCat A) sq.toCommSq).symm.app K)
+          (vectorIntegrationChartCoefficient A N hA t S hS d M (V i) (e i).some) ≪≫
+        affine_right_tensor_unit A N hN hA T hT d (H.obj K)
+    let c' := (inv (rightDerivedLowerShriekBaseChangeMap A sq)).app
+        (((derivedTensor (ModuleCat A) (VectorBundleZeroSection.scheme S d M)).obj
+          ((ordinaryFinitePullback A f).obj K)).obj W) ≫ H.map c
+    let : IsIso c' := by dsimp only [c']; infer_instance
+    have hb : IsIso (b.counit.app (H.obj K)) := by
+      dsimp only [b]
+      rw [Adjunction.ofNatIsoLeft_counit]
+      dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+      let := affine_counit_isIso A N hN hA t D T hT d (H.obj K)
+      exact IsIso.comp_isIso' inferInstance inferInstance
+    have hm := @adjunct_isIso_of_iso _ _ _ _ _ _ _
+      (rightDerivedUpperShriekAdjunction (ModuleCat A) (affineTraceProjection T d))
+      b (H.obj K) _ z c' inferInstance hb
+    have he := mate_naturality a
+      (rightDerivedUpperShriekAdjunction (ModuleCat A) (affineTraceProjection T d))
+      (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap A sq))) _ K c
+    change _ ≫ (rightDerivedUpperShriekBaseChangeMap A sq).app K =
+      (rightDerivedUpperShriekAdjunction (ModuleCat A) (affineTraceProjection T d)).homEquiv
+        _ _ c' at he
+    apply (NatIso.isIso_map_iff
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat A)
+        (vectorIntegrationChart S d M (V i) (e i).some)) _).1
+    apply (isIso_comp_right_iff _ ((rightDerivedUpperShriekBaseChangeMap A sq).app K)).1
+    rw [he]
+    exact hm
+  · intro x
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      (hV.ge (Set.mem_univ ((VectorBundleZeroSection.π S d M).base x)) :
+        (VectorBundleZeroSection.π S d M).base x ∈ ⨆ i, V i)
+    obtain ⟨y, hy, _⟩ := Scheme.exists_preimage_of_isPullback
+      (vectorIntegrationChart_isPullback S d M (V i) (e i).some) x
+      ⟨(VectorBundleZeroSection.π S d M).base x, hi⟩ rfl
+    exact ⟨i, y, hy⟩
 
 end AlgebraicGeometry.Etale

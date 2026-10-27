@@ -14,77 +14,80 @@
  ],
  "proof": [
   {
-   "text": "Use the specified affine-space top trace and vector integration normalization. On every trivializing open, compact-support exchange, the coefficient comparison and the affine trace are isomorphisms. Exact inverse image and cohomology conservativity on a jointly surjective cover show that the actual global integration map is an isomorphism.",
+   "text": "The actual vector integration is invertible: on a frame chart compact-support exchange identifies it with the affine-space top trace. Detect invertibility on the jointly surjective open cover using exact inverse image and derived cohomology. Tensoring the trace with K and composing inverse coefficient-first projection and the right unitor gives an invertible counit candidate c for every unbounded K.",
    "uses": [
     "def-amb-vector-integration",
     "lem-amb-affine-space-top-trace",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Induct on the affine coordinate tower to identify its ordered left functor with the chosen ambient compact support. The zero step uses the identity compactification; the successor uses compactification independence and composition. Transport the normalized affine adjunction through this isomorphism. Its counit at the unit is invertible by the existing affine-space trace theorem. The coefficient comparison identifies the pulled-back bundle coefficient with the right adjoint of the unit. For an adjunction with invertible counit at the unit, any isomorphism from that left-adjoint image to the unit has invertible adjunct: transport the other counit and factor off the resulting automorphism of the unit.",
-   "uses": [
-    "lem-amb-affine-space-top-trace",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-asd-ordinary-finite-p1-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the preceding unit argument in each bundle frame. The existing upstream isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion theorem gives invertibility of the canonical exceptional base-change mate against the open base immersion. Naturality of the adjunction Hom equivalences identifies the pullback of the actual global unit adjunct, followed by this base-change mate, with the local adjunct of the inverse compact-support exchange followed by the actual integration map. The unit pullback isomorphism reduces it to the affine unit calculation. The frame charts jointly cover the bundle, so exact inverse image and the derived cohomology criterion prove that the actual global unit adjunct is invertible.",
-   "uses": [
-    "def-amb-vector-integration",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a general adjunction F adjoint to G and a natural invertible projection pi_X: T_Y(F X) -> F(T_X X), use projection naturality at the adjunct of c and the counit equation to factor the adjunct of pi_X inverse followed by T_Y(c) and the unit constraint. It is T_X applied to the unit adjunct followed by the analogous adjunct with X replaced by G of the unit. Prove the coefficient-first projection naturality by naturality of signed symmetry and the existing projection natural transformation.",
-   "uses": [
-    "lem-asd-compact-projection-exchange",
-    "lem-kun-tensor-unit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The bundle projection is smooth of relative dimension d: on a trivializing open it is an isomorphism followed by the d-dimensional affine-space projection, and smooth relative dimension is Zariski local on the target. Package the positive annihilator and its unit as HasInvertibleExponent, and pull it to the bundle. Reuse the source-library theorem exists_dualizingComplex_iso_and_tensor in WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality, the upstream result also used by thm-asd-smooth-tensor. Only its assertion that the canonical tensor mate is invertible is used; no Tate orientation is chosen from it. Braiding naturality and the unit constraints identify this mate with the coefficient-first tensor-counit adjunct. Thus the second factor from the preceding step is invertible for every unbounded K. The first is a functor image of the already proved unit adjunct. Their composite is exactly the required integration mate. The coefficient-first tensor-counit specialization is isolated as lem-amb-vector-integration-tensor-counit; that separate generic mate lemma is fully proved in this delivery.",
-   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "def-asd-vector-bundle-zero-section",
-    "thm-asd-smooth-tensor",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the ordered affine-space left functor with the ambient compact-support functor by induction on the coordinate tower, using the identity compactification at zero and compactification independence/composition at successors. Transport the affine adjunction along this comparison. Its counit at every K is invertible by induction from affineTraceLineCounit_isIso.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-affine-trace-line-counit-iso",
+    "def-amb-affine-trace-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural Tate normal form of the affine right functor, its component at the unit, the pullback unit comparison, and tensor-shift comparison identify pullback K tensor right-adjoint-of-unit with the right adjoint at K. The vector chart coefficient comparison and pullback composition therefore identify the pulled-back source of the global adjunct with that right adjoint.",
+   "uses": [
+    "lem-amb-affine-trace-right-normal-form",
+    "def-amb-vector-integration",
     "lem-kun-tensor-unit",
-    "lem-weil-finite-compact-projection-formula",
-    "lem-amb-vector-integration-tensor-counit"
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under any two adjunctions with the same left functor, the adjunct of the second counit is the canonical right-adjoint comparison. Transport by the preceding source isomorphism. Because that counit and any invertible candidate c are invertible, c differs from the transported counit by an automorphism of K. Naturality of the hom equivalence now makes its Brown adjunct invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the global adjunct to every frame. Invertible compact-support exchange gives an invertible local candidate c prime. Naturality of adjunction hom equivalences identifies the restricted global adjunct followed by the actual exceptional open base-change mate with the local adjunct. The latter is invertible by the preceding affine argument; the exceptional open mate is invertible by the existing theorem. Cancel it and detect invertibility on the frame cover. This proves the original all-complex statement without smooth duality.",
+   "uses": [
+    "lem-sf-etale-exceptional-open-base-change",
+    "thm-amb-etale-exceptional-adjoint",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-asd-compact-projection-exchange",
+    "def-amb-vector-integration-charts"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-amb-vector-integration",
-  "def-asd-vector-bundle-zero-section",
   "lem-amb-affine-space-top-trace",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-amb-unbounded-compact-support-comparisons",
-  "lem-amb-vector-integration-tensor-counit",
-  "lem-asd-compact-projection-exchange",
   "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-affine-trace-line-counit-iso",
+  "lem-amb-affine-trace-right-normal-form",
+  "lem-sf-etale-exceptional-open-base-change",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-asd-vector-bundle-zero-section",
+  "lem-asd-compact-projection-exchange",
   "lem-kun-tensor-unit",
   "lem-weil-finite-compact-projection-formula",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-amb-etale-exceptional-adjoint",
-  "thm-asd-smooth-tensor"
+  "def-amb-affine-trace-construction",
+  "def-amb-vector-integration-charts"
  ],
  "proof_origin": {
-  "by": "F6 stage 3",
+  "by": "H4 stage 3",
   "document": "dag/units/sk-prop-an.json",
-  "place": "Steps 5(c), 6 and 7 at the coefficient unit, plus explicit naturality factorization for arbitrary K and the existing upstream orientation-free canonical tensor theorem. The affine adjunction and bundle-frame route are retained."
+  "place": "Steps 5(c), 6, 7: affine adjunction on all complexes and frame descent. Replaces general smooth tensor duality by the affine counit and right-functor normal form."
  },
  "mathlib_searches": [
   {
@@ -170,13 +173,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F6",
-  "result": "pass",
-  "landing": "20261020T051251-L-1615201",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof, 4 new modules and the VectorIntegrationMate reproof against their nodes, the unit sk-prop-an route, axioms (scratch #print axioms), the 9/9 OK importers in packet 3b and the change record"
  }
 }

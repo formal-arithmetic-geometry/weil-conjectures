@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.VectorPurityBaseChange
+import Sheaf.Paper.NormalizedVectorPurityBundle
+import Sheaf.Paper.NormalizedVectorPurityBaseChangeComponent
 
 /-! # Base change of the independently integration-normalized vector purity family. -/
 
@@ -14,6 +16,9 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
+
+attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
+  VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
 
 /-- The specified compatibility law for independently integration-normalized purity.
 Source: current blueprint sec-smooth-purity/sk-prop-an,
@@ -37,6 +42,11 @@ theorem vectorIntegrationCounit_baseChange
     (γ : VectorPurityGamma A N hA B d F)
     (hn : VectorPurityGammaNormalized A N hN hA B hB d F γ)
     (hi : ∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K)) :
-    PurityBaseChangeEquation A N hN hA B hB d F γ := by sorry
+    PurityBaseChangeEquation A N hN hA B hB d F γ := by
+  intro B' _ g hB' F' _ _ _ g' sq
+  obtain ⟨γ', hn', hi'⟩ := (vectorBundleNormalized A N hN hA B' hB' d F').2
+  refine ⟨γ', hn', fun K ↦ ?_⟩
+  exact vectorIntegrationCounit_baseChange_component A N hN hA hB hB' d F F' sq
+    γ γ' hn hn' hi hi' K.obj
 
 end WeilConjectures.PurityFiniteSetting

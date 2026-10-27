@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-normalized-base-change-calculus",
+ "kind": "statement",
+ "title": "Projection exchange and scalar trace determine the normalized exceptional mate",
+ "statement": "For ordinary derived sheaves with arbitrary Grothendieck abelian symmetric monoidal coefficients, fix a Cartesian square, compact-support functors L and L prime, pullbacks H and J, and right adjoints R and R prime with adjunctions. Let P and P prime be natural projection transformations, with P invertible, and b:L;H isomorphic to J;L prime. Let W and W prime be coefficients with l:J W isomorphic to W prime and scalar traces t:L W to the unit and t prime:L prime W prime to the unit. Suppose gamma and gamma prime are invertible natural transformations from twisted pullback to R and R prime, normalized by P,t and P prime,t prime. Assume the scalar trace square for b,l,t,t prime and the raw projection exchange equation for b,P,P prime and the canonical pullback tensor and square comparisons. Then the mate of b inverse is invertible at every input K, and J gamma_K followed by that mate equals the canonical tensor-pullback comparison followed by l tensor the square comparison, followed by gamma prime at H K.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: projection exchange, tensor compatibility and transposition"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-normalization",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Projection naturality in l extends the supplied raw projection-exchange square to the coefficient comparison. Tensor-pullback naturality and the left-unitor comparison tensor the scalar trace equation with any K.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extract the two homogeneous counit equations from IntegrationGammaNormalized. Paste the preceding two squares. The projection P at W,K is invertible, as is its pullback; cancel it and b to obtain the counit square. Supply epimorphism instances directly from the known isomorphisms.",
+   "uses": [
+    "def-pur-vector-purity-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse adjunction Hom equivalence. The mate-counit identity and naturality of b identify the two transposes, proving the desired equality. The two gamma components and the source comparison are invertible, so the equality and cancellation imply invertibility of the mate.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent H4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: complete categorical calculation, extracted to keep each compilation small"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of adjunction transposes counit compatibility exceptional pullback vector bundle purity",
+   "results": "Generic sheaf counit and Over adjunction tools, no normalized vector trace equation.",
+   "date": "2026-10-27",
+   "verdict": "Tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv",
+   "results": "Generic hom-equivalence, counit and naturality lemmas; used the adjunction mate-counit API rather than an existing whole normalized base-change theorem.",
+   "date": "2026-10-27",
+   "verdict": "Proof tools."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegrationGammaNormalized|integrationTranspose",
+   "results": "No Mathlib normalized-family result. The project IntegrationTransposeBaseChange theorem uses the coefficient-first convention; the present completed calculation uses the published right-coefficient normalization directly.",
+   "date": "2026-10-27",
+   "verdict": "Related theorem, different interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale vector bundle integration trace invariant under cartesian presentation isomorphism base change",
+   "results": "Returned etale base-change and vector-bundle trivialization declarations, but no integration-normalization or adjunction-mate compatibility theorem. The complete categorical calculation is proved here.",
+   "date": "2026-10-27",
+   "verdict": "No existing complete theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedVectorPurityBaseChange",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: categorical transposition of trace compatibility",
+   "via": [
+    "lem-pur-normalized-vector-purity-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedVectorPurityBaseChangeCalculus",
+  "file": "lean/Sheaf/Paper/NormalizedVectorPurityBaseChangeCalculus.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.integrationNormalized_baseChange_calculus",
+  "statement": "theorem integrationNormalized_baseChange_calculus\n    (C : Type v₁) [Category.{u + 1} C] [Abelian C]\n    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]\n    [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]\n    [Etale.UpperStarPreservesFlat C]\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X}\n    [HasCompactification f] [HasCompactification f']\n    (sq : IsPullback g' f' f g)\n    (P : Etale.derivedTensorRightDerivedLowerShriek C\n        (HasCompactification.compactification f) ⟶\n      Etale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar C\n        (HasCompactification.compactification f))\n    (P' : Etale.derivedTensorRightDerivedLowerShriek C\n        (HasCompactification.compactification f') ⟶\n      Etale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar C\n        (HasCompactification.compactification f'))\n    (R : DerivedCategory (Sheaf Y.smallEtaleTopology C) ⥤\n      DerivedCategory (Sheaf X.smallEtaleTopology C))\n    (R' : DerivedCategory (Sheaf Y'.smallEtaleTopology C) ⥤\n      DerivedCategory (Sheaf X'.smallEtaleTopology C))\n    (adj : Etale.rightDerivedLowerShriek C f ⊣ R)\n    (adj' : Etale.rightDerivedLowerShriek C f' ⊣ R')\n    (b : Etale.rightDerivedLowerShriek C f ⋙ (Etale.upperStar C g).leftDerivedFunctor ≅\n      (Etale.upperStar C g').leftDerivedFunctor ⋙ Etale.rightDerivedLowerShriek C f')\n    (W : DerivedCategory (Sheaf X.smallEtaleTopology C))\n    (W' : DerivedCategory (Sheaf X'.smallEtaleTopology C))\n    (l : (Etale.upperStar C g').leftDerivedFunctor.obj W ≅ W')\n    (t : (Etale.rightDerivedLowerShriek C f).obj W ⟶ 𝟙_ _)\n    (t' : (Etale.rightDerivedLowerShriek C f').obj W' ⟶ 𝟙_ _)\n    (γ : (Etale.upperStar C f).leftDerivedFunctor ⋙ tensorLeft W ⟶ R)\n    (γ' : (Etale.upperStar C f').leftDerivedFunctor ⋙ tensorLeft W' ⟶ R')\n    (hn : IntegrationGammaNormalized (Etale.rightDerivedLowerShriek C f) R\n      (Etale.upperStar C f).leftDerivedFunctor adj W t (P.app W) γ)\n    (hn' : IntegrationGammaNormalized (Etale.rightDerivedLowerShriek C f') R'\n      (Etale.upperStar C f').leftDerivedFunctor adj' W' t' (P'.app W') γ')\n    [IsIso P] (hi : ∀ K, IsIso (γ.app K)) (hi' : ∀ K, IsIso (γ'.app K))\n    (ht : b.hom.app W ≫ (Etale.rightDerivedLowerShriek C f').map l.hom ≫ t' =\n      (Etale.upperStar C g).leftDerivedFunctor.map t ≫\n        (Etale.leftDerivedUpperStarUnitIso C g).hom)\n    (hβ : ∀ K : DerivedCategory (Sheaf Y.smallEtaleTopology C),\n      (Etale.upperStar C g).leftDerivedFunctor.map\n        ((P.app W).app K) ≫\n      b.hom.app (((Etale.derivedTensor C X).obj W).obj\n        ((Etale.upperStar C f).leftDerivedFunctor.obj K)) ≫\n      (Etale.rightDerivedLowerShriek C f').map\n        (((Etale.leftDerivedUpperStarTensorComparison C g').app W).app\n          ((Etale.upperStar C f).leftDerivedFunctor.obj K)) ≫\n      (Etale.rightDerivedLowerShriek C f').map\n        (((Etale.derivedTensor C X').obj\n          ((Etale.upperStar C g').leftDerivedFunctor.obj W)).map\n            (Etale.derivedSquareUpperStarIsoInvApp C sq.toCommSq K)) =\n      ((Etale.leftDerivedUpperStarTensorComparison C g).app\n        ((Etale.rightDerivedLowerShriek C f).obj W)).app K ≫\n      ((Etale.derivedTensor C Y').map (b.hom.app W)).app\n        ((Etale.upperStar C g).leftDerivedFunctor.obj K) ≫\n      (P'.app\n        ((Etale.upperStar C g').leftDerivedFunctor.obj W)).app\n          ((Etale.upperStar C g).leftDerivedFunctor.obj K))\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology C)) :\n    let e := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ b.inv)).app K\n    let a := Etale.leftDerivedUpperStarTensorIso C g' W\n      ((Etale.upperStar C f).leftDerivedFunctor.obj K) ≪≫\n        (l ⊗ᵢ ((Etale.derivedSquareUpperStarIso C sq.toCommSq).symm.app K))\n    IsIso e ∧ (Etale.upperStar C g').leftDerivedFunctor.map (γ.app K) ≫ e =\n      a.hom ≫ γ'.app ((Etale.upperStar C g).leftDerivedFunctor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "def-pur-vector-purity-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 4 new modules and the VectorIntegrationMate reproof against their nodes, the unit sk-prop-an route, axioms (scratch #print axioms), the 9/9 OK importers in packet 3b and the change record"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-vector-integration-cartesian-trace",
+ "kind": "statement",
+ "title": "Scalar vector integration in arbitrary Cartesian presentations",
+ "statement": "Let A be a finite commutative ring, N a positive integer with N A=0, and B and B prime Noetherian schemes on which N is invertible. Let F and F prime be locally free modules of rank d on B and B prime. Write f:E(F)->B and f prime:E(F prime)->B prime for their vector-bundle projections, both admitting compactifications, with f prime quasi-compact. Let g:B prime->B and g prime:E(F prime)->E(F) form a Cartesian square g prime;f=f prime;g. Write Q_B=A_B(d)[2d], W=f^*Q_B, and W prime=f prime^*Q_Bprime. Let l:g prime^*W ~= W prime be the composite of the ordinary pullback square comparison g prime^*f^* ~= f prime^*g^* and f prime^* applied to the normalized finite Tate pullback comparison g^*Q_B ~= Q_Bprime. Let t_f:Rf_! W -> 1_B and t_fprime:Rfprime_! W prime -> 1_Bprime be the specified vector integrations followed by the degree-zero constant-to-tensor-unit isomorphisms. Let beta:g^*Rf_! -> Rfprime_!g prime^* be actual compact-support exchange and epsilon:g^*1_B ~=1_Bprime the pullback-unit comparison. Then beta_W followed by Rfprime_!(l), followed by t_fprime, equals g^*(t_f) followed by epsilon. No exceptional inverse image or purity-family hypothesis occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: equality of scalar integrations before transposition; arbitrary presentation made explicit"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-base-change",
+  "def-amb-vector-integration",
+  "def-pur-vector-purity-normalization",
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof": [
+  {
+   "text": "First use vectorBundleIntegration_baseChange for the canonical tensor-pullback bundle, including its normalized Tate coefficient map. The universal property of the two Cartesian squares gives a unique isomorphism from any given presentation to the canonical one over the new base.",
+   "uses": [
+    "lem-pur-vector-trace-geometric-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each geometric fibre, scalar integration on the shifted top Tate coefficient is the degree map on top compact-support cohomology. This follows from the normalized projective-line trace and iteration on affine coordinates. An isomorphism of affine-space fibres has degree one, so it preserves this map. This applies to the presentation isomorphism even if it is not linear or does not fix zero. The trace sources are concentrated in degree zero, and geometric stalks of sheaf maps are conservative, hence the two scalar traces agree globally.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste compact-support exchange for the canonical square with exchange for the presentation isomorphism. Functoriality of ordinary pullback composition and of Tate pullback identifies the coefficient comparison with purityPullbackSquare followed by pulled-back vectorIntegrationBaseCoefficientPullback. Finally the single-constant-to-unit comparison commutes with pullback. This is precisely the stated equation. At d=0 the maps are unit comparisons; over an empty base equality is unique.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent H4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2; geometric degree invariance extends the canonical-presentation base-change formula to an arbitrary Cartesian presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale vector bundle integration trace invariant under cartesian presentation isomorphism base change",
+   "results": "Ring etale base-change results, topological trivializations and LinearMap.traceAux_eq; no scalar compact-support trace equation.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of adjunction transposes counit compatibility exceptional pullback vector bundle purity",
+   "results": "Generic sheaf counit and Over adjunction tools, no normalized vector trace equation.",
+   "date": "2026-10-27",
+   "verdict": "Tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegration|vectorBundleIntegration|cartesianTrace",
+   "results": "No Mathlib source matches. Project canonical-presentation theorem exists; VectorNormalizedTraceCartesian uses the present parent theorem and would give a cycle. Blueprint search for integration trace base change found no exact node.",
+   "date": "2026-10-27",
+   "verdict": "No independent duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedVectorPurityBaseChange",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: scalar integration base change before transposition",
+   "via": [
+    "lem-pur-normalized-vector-purity-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorIntegrationCartesianTrace",
+  "file": "lean/Sheaf/Paper/VectorIntegrationCartesianTrace.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorIntegration_cartesianTrace",
+  "statement": "theorem vectorIntegration_cartesianTrace\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {B B' : Scheme.{u}} [IsNoetherian B] [IsNoetherian B']\n    (hB : IsUnit (N : Γ(B, ⊤))) (hB' : IsUnit (N : Γ(B', ⊤)))\n    (d : ℕ) (F : B.Modules) (F' : B'.Modules)\n    [F.IsFiniteLocallyFreeOfRank d] [F'.IsFiniteLocallyFreeOfRank d]\n    [HasCompactification (VectorBundleZeroSection.π B d F)]\n    [HasCompactification (VectorBundleZeroSection.π B' d F')]\n    [QuasiCompact (VectorBundleZeroSection.π B' d F')]\n    {g : B' ⟶ B}\n    {g' : VectorBundleZeroSection.scheme B' d F' ⟶ VectorBundleZeroSection.scheme B d F}\n    (sq : IsPullback g' (VectorBundleZeroSection.π B' d F')\n      (VectorBundleZeroSection.π B d F) g) :\n    let l := purityPullbackSquare A sq (Etale.affineLinearBaseCoefficient A N hA B d) ≪≫\n      (RfPullback A (VectorBundleZeroSection.π B' d F')).mapIso\n        (Etale.vectorIntegrationBaseCoefficientPullback A N hA\n          (purityTwistTransport A N hN hA) g hB d)\n    (Etale.rightDerivedLowerShriekBaseChangeMap A sq).app\n        (Etale.vectorIntegrationCoefficient A N hA B d F) ≫\n      (RfShriek A (VectorBundleZeroSection.π B' d F')).map l.hom ≫\n      (Etale.vectorBundleIntegration N hN A hA B' hB' d F' ≫\n        (Etale.singleFunctorObjUnitIso (ModuleCat A) B').hom) =\n    (RfPullback A g).map (Etale.vectorBundleIntegration N hN A hA B hB d F ≫\n      (Etale.singleFunctorObjUnitIso (ModuleCat A) B).hom) ≫\n        (Etale.leftDerivedUpperStarUnitIso (ModuleCat A) g).hom",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-pur-vector-trace-geometric-descent",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 4 new modules and the VectorIntegrationMate reproof against their nodes, the unit sk-prop-an route, axioms (scratch #print axioms), the 9/9 OK importers in packet 3b and the change record"
+ }
+}

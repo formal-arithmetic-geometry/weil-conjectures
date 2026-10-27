@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-normalized-vector-purity-base-change-component",
+ "kind": "statement",
+ "title": "Component compatibility for two supplied normalized vector purity families",
+ "statement": "For an arbitrary Cartesian square of rank-d vector bundles over Noetherian bases and two supplied integration-normalized purity transformations, both invertible on every input, the actual exceptional base-change transformation is invertible on every input and commutes with these families through the canonical bundle coefficient/tensor comparison. The independently normalized primed family is supplied, not chosen by this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: projection exchange, tensor compatibility and transposition"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-normalization",
+  "def-pur-vector-purity-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Cache the actual coefficient comparison with its vector integration coefficient type. Unfold the normalization condition once. Apply the proved finite-coefficient projection/mate calculation, using scalar Cartesian trace compatibility and the defining formula of the bundle base-change associator.",
+   "uses": [
+    "lem-pur-finite-normalized-base-change",
+    "lem-pur-vector-integration-cartesian-trace",
+    "def-pur-vector-purity-base-change",
+    "def-pur-vector-purity-normalization",
+    "def-amb-vector-integration",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent H4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: concrete vector-bundle component specialization, before choosing the normalized primed family"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of adjunction transposes counit compatibility exceptional pullback vector bundle purity",
+   "results": "Generic sheaf counit and Over adjunction tools, no normalized vector trace equation.",
+   "date": "2026-10-27",
+   "verdict": "Tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv",
+   "results": "Generic hom-equivalence, counit and naturality lemmas; used the adjunction mate-counit API rather than an existing whole normalized base-change theorem.",
+   "date": "2026-10-27",
+   "verdict": "Proof tools."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegrationGammaNormalized|integrationTranspose",
+   "results": "No Mathlib normalized-family result. The project IntegrationTransposeBaseChange theorem uses the coefficient-first convention; the present completed calculation uses the published right-coefficient normalization directly.",
+   "date": "2026-10-27",
+   "verdict": "Related theorem, different interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale vector bundle integration trace invariant under cartesian presentation isomorphism base change",
+   "results": "Returned etale base-change and vector-bundle trivialization declarations, but no integration-normalization or adjunction-mate compatibility theorem. The complete categorical calculation is proved here.",
+   "date": "2026-10-27",
+   "verdict": "No existing complete theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedVectorPurityBaseChange",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: component equation before choosing the primed family",
+   "via": [
+    "lem-pur-normalized-vector-purity-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedVectorPurityBaseChangeComponent",
+  "file": "lean/Sheaf/Paper/NormalizedVectorPurityBaseChangeComponent.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorIntegrationCounit_baseChange_component",
+  "statement": "theorem vectorIntegrationCounit_baseChange_component\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {B B' : Scheme.{u}} [IsNoetherian B] [IsNoetherian B']\n    (hB : IsUnit (N : Γ(B, ⊤))) (hB' : IsUnit (N : Γ(B', ⊤)))\n    (d : ℕ) (F : B.Modules) (F' : B'.Modules)\n    [F.IsFiniteLocallyFreeOfRank d] [F'.IsFiniteLocallyFreeOfRank d]\n    [HasCompactification (VectorBundleZeroSection.π B d F)]\n    [HasCompactification (VectorBundleZeroSection.π B' d F')]\n    [QuasiCompact (VectorBundleZeroSection.π B' d F')]\n    {g : B' ⟶ B}\n    {g' : VectorBundleZeroSection.scheme B' d F' ⟶ VectorBundleZeroSection.scheme B d F}\n    (sq : IsPullback g' (VectorBundleZeroSection.π B' d F')\n      (VectorBundleZeroSection.π B d F) g)\n    (γ : VectorPurityGamma A N hA B d F) (γ' : VectorPurityGamma A N hA B' d F')\n    (hn : VectorPurityGammaNormalized A N hN hA B hB d F γ)\n    (hn' : VectorPurityGammaNormalized A N hN hA B' hB' d F' γ')\n    (hi : ∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K))\n    (hi' : ∀ K : Etale.DerivedCategoryModule A B', IsIso (γ'.app K))\n    (K : Etale.DerivedCategoryModule A B) :\n    IsIso ((Etale.rightDerivedUpperShriekBaseChangeMap A sq).app K) ∧\n      (RfPullback A g').map (γ.app K) ≫\n        (Etale.rightDerivedUpperShriekBaseChangeMap A sq).app K =\n      (purityBundleBaseChangeAssociator A N hN hA hB d F F' sq K).hom ≫\n        γ'.app ((RfPullback A g).obj K)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-pur-finite-normalized-base-change",
+  "lem-pur-vector-integration-cartesian-trace",
+  "def-pur-vector-purity-base-change",
+  "def-pur-vector-purity-normalization",
+  "def-amb-vector-integration",
+  "def-amb-vector-integration-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 4 new modules and the VectorIntegrationMate reproof against their nodes, the unit sk-prop-an route, axioms (scratch #print axioms), the 9/9 OK importers in packet 3b and the change record"
+ }
+}

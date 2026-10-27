@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-finite-normalized-base-change",
+ "kind": "statement",
+ "title": "Finite-coefficient specialization of normalized exceptional base-change mates",
+ "statement": "For a Cartesian square of schemes, finite commutative coefficient ring, compactifiable vertical maps and quasi-compact primed vertical map, let W and W prime be coefficients identified by pullback. Let gamma and gamma prime be everywhere invertible integration-normalized natural transformations from twisted ordinary pullback to the Brown exceptional pullbacks. If their scalar integration traces satisfy compact-support base change under the coefficient comparison, then the actual exceptional base-change map is invertible on every input K and commutes with gamma and gamma prime through the canonical tensor-pullback and square comparisons. The source associator may be supplied as a family of isomorphisms with a heterogeneous equality to the displayed canonical comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: projection exchange, tensor compatibility and transposition"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-normalization",
+  "def-pur-vector-purity-base-change",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "At finite coefficients the projection transformation and compact-support exchange are invertible. Build the exchange isomorphism with the actual compact-support map as its hom. Supply its published raw projection-exchange equation to the completed generic normalization calculus.",
+   "uses": [
+    "lem-pur-normalized-base-change-calculus",
+    "lem-asd-compact-projection-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exceptional exchange is defined to be the mate of inverse compact-support exchange. The inverse derived pullback-square comparison is purityPullbackSquare by definition. Thus the resulting generic equality and invertibility are precisely the claimed finite-coefficient conclusion. Keeping the schemes abstract separates this conversion from substituting vector-bundle constructions.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "def-pur-vector-purity-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent H4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: finite-coefficient specialization before substituting bundle schemes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of adjunction transposes counit compatibility exceptional pullback vector bundle purity",
+   "results": "Generic sheaf counit and Over adjunction tools, no normalized vector trace equation.",
+   "date": "2026-10-27",
+   "verdict": "Tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv",
+   "results": "Generic hom-equivalence, counit and naturality lemmas; used the adjunction mate-counit API rather than an existing whole normalized base-change theorem.",
+   "date": "2026-10-27",
+   "verdict": "Proof tools."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegrationGammaNormalized|integrationTranspose",
+   "results": "No Mathlib normalized-family result. The project IntegrationTransposeBaseChange theorem uses the coefficient-first convention; the present completed calculation uses the published right-coefficient normalization directly.",
+   "date": "2026-10-27",
+   "verdict": "Related theorem, different interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale vector bundle integration trace invariant under cartesian presentation isomorphism base change",
+   "results": "Returned etale base-change and vector-bundle trivialization declarations, but no integration-normalization or adjunction-mate compatibility theorem. The complete categorical calculation is proved here.",
+   "date": "2026-10-27",
+   "verdict": "No existing complete theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedVectorPurityBaseChange",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: exceptional exchange as the mate of compact exchange",
+   "via": [
+    "lem-pur-normalized-vector-purity-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteNormalizedBaseChange",
+  "file": "lean/Sheaf/Paper/FiniteNormalizedBaseChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteIntegrationNormalized_baseChange",
+  "statement": "theorem finiteIntegrationNormalized_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X}\n    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']\n    (sq : IsPullback g' f' f g)\n    (W : Etale.DerivedCategoryModule A X) (W' : Etale.DerivedCategoryModule A X')\n    (l : (RfPullback A g').obj W ≅ W')\n    (t : (RfShriek A f).obj W ⟶ 𝟙_ _) (t' : (RfShriek A f').obj W' ⟶ 𝟙_ _)\n    (a : ∀ K : Etale.DerivedCategoryModule A Y,\n      (RfPullback A g').obj (W ⊗ (RfPullback A f).obj K) ≅\n        W' ⊗ (RfPullback A f').obj ((RfPullback A g).obj K))\n    (ha : ∀ K : Etale.DerivedCategoryModule A Y,\n      HEq ((Etale.leftDerivedUpperStarTensorIso (ModuleCat A) g' W\n        ((RfPullback A f).obj K) ≪≫ (l ⊗ᵢ purityPullbackSquare A sq K)).hom)\n        (a K).hom)\n    (γ : RfPullback A f ⋙ tensorLeft W ⟶ RfUpper A f)\n    (γ' : RfPullback A f' ⋙ tensorLeft W' ⟶ RfUpper A f')\n    (hn : IntegrationGammaNormalized (RfShriek A f) (RfUpper A f) (RfPullback A f)\n      (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)\n      W t ((Etale.projectionMap (ModuleCat.{u + 1} A) f).app W) γ)\n    (hn' : IntegrationGammaNormalized (RfShriek A f') (RfUpper A f') (RfPullback A f')\n      (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f')\n      W' t' ((Etale.projectionMap (ModuleCat.{u + 1} A) f').app W') γ')\n    (hi : ∀ K, IsIso (γ.app K)) (hi' : ∀ K, IsIso (γ'.app K))\n    (ht : (Etale.rightDerivedLowerShriekBaseChangeMap A sq).app W ≫\n      (RfShriek A f').map l.hom ≫ t' =\n      (RfPullback A g).map t ≫ (Etale.leftDerivedUpperStarUnitIso (ModuleCat A) g).hom)\n    (K : Etale.DerivedCategoryModule A Y) :\n    IsIso ((Etale.rightDerivedUpperShriekBaseChangeMap A sq).app K) ∧\n      (RfPullback A g').map (γ.app K) ≫\n        (Etale.rightDerivedUpperShriekBaseChangeMap A sq).app K =\n      (a K).hom ≫ γ'.app ((RfPullback A g).obj K)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-pur-normalized-base-change-calculus",
+  "lem-asd-compact-projection-exchange",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-vector-purity-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-66f85",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180636-L-3885298",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 4 new modules and the VectorIntegrationMate reproof against their nodes, the unit sk-prop-an route, axioms (scratch #print axioms), the 9/9 OK importers in packet 3b and the change record"
+ }
+}
