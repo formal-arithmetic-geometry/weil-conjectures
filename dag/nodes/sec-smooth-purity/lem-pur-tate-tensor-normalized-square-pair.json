@@ -13,22 +13,28 @@
  ],
  "proof": [
   {
-   "text": "Evaluate both maps on the selected ordinary root-tensor models. ProjectionBalanced gives the scalar and root generator formula, while the two evaluation normalization clauses transport it through exact single/evaluation comparisons. The scalar adjunction mate and strict tower transition identify the result with M.normalization; generator equality extends by sheafification, including zero tensors, equal indices and empty schemes.",
+   "text": "Apply finiteTateTensor_transition_model to express the actual finite scalar mate in the single ordinary models and obtain its root-generator formula. Apply tateTensor_balanced_transition to that ordinary map and the two given balanced identifications. Exact single/evaluation naturality identifies the ordinary strict-tower transition with pbcTowerTransition of strictDerivedTower.",
    "uses": [
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-tate-tensor-pair-finite-square"
    ],
    "elementary": false
+  },
+  {
+   "text": "Convert the two normalizedAt evaluation equations into the finite evaluation-model isomorphisms. Transpose the desired equality along the scalar adjunction. Restriction to the completed coefficient ring is faithful on these Hom sets: both endpoints are isomorphic to single sheaves in the same degree, and ordinary restriction is faithful. Postcompose with the invertible restriction-composition and finite evaluation-model comparisons. Naturality and M.transition identify the second composite; the preceding single-model square identifies the first. Cancel the isomorphisms and apply adjunction injectivity.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-roots-of-unity-sheaf",
-  "def-pur-sheaf-tensor-product"
+  "lem-pur-tate-tensor-pair-finite-square",
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-  "place": "Step 4: equality of normalization squares for a fixed comparable pair"
+  "place": "Adic-stage compatibility with finite coefficient reductions; the ordinary root-tensor and scalar-mate computation in the proof of lem-pur-tate-tensor-normalized-square-pair. F1 categorical assembly by exact single/evaluation naturality, faithfulness on fixed-degree single models and scalar adjunction injectivity."
  },
  "mathlib_searches": [
   {
@@ -100,9 +106,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261027T205844-L-1624259",
+  "landing": "20261027T233922-L-4136776",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

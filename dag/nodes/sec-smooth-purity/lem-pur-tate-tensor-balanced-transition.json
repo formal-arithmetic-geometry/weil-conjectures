@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-tate-tensor-balanced-transition",
+ "kind": "statement",
+ "title": "Ordinary root-power map agrees with the integral quotient-tower transition",
+ "statement": "For T Noetherian and prime ell invertible, d>=0 and a<=b, let f be a completed-coefficient linear map between the ordinary realized finite Tate tensor sheaves, satisfying FiniteRootTransition for a normalized root comparison r. If cb and ca are isomorphisms to the actual quotientLine sheaves satisfying ProjectionBalanced at b and a, then f followed by restriction of ca equals restriction of cb followed by the actual ordinary strictTower transition b->a. This is an equality of ordinary sheaf maps, with no derived normalization or AdicTower.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Adic-stage compatibility with finite coefficient reductions; the ordinary root-tensor and scalar-mate computation in the proof of lem-pur-tate-tensor-normalized-square-pair."
+ },
+ "stmt_deps": [
+  "def-pur-tate-tensor-finite-transition",
+  "def-pur-condensed-tate-integral-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the adjacent quotient transition formula of localReductionStep_exists and the quotient cocycle to obtain t tensor x maps to q(t) tensor x for the actual strict tower at every a<=b, with identity at a=b.",
+   "uses": [
+    "lem-weil-pbc-reconstruction-uniform-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift each finite root tuple locally to the actual inverse-limit root sheaf using local surjectivity of rootTowerProjection; take the intersection of the finitely many covering sieves. The two projections of a compatible family are related by the same power map as r.roots, by roots_power and monicity of the root inclusion.",
+   "uses": [
+    "lem-amb-root-tower-finite-tensor",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On these generators apply the equation for f and both ProjectionBalanced equations. The quotient transition and scalars_comp identify both values with q(t) times scalars_a(phi(s)) tensor the integral generator. Local tensor generation and sheafification imply equality of ordinary maps. The unit calculation covers d=0 and the empty scheme.",
+   "uses": [
+    "lem-pur-finite-tate-etale-power-generation",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "lem-amb-root-tower-finite-tensor",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-pur-finite-tate-etale-power-generation",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Adic-stage compatibility with finite coefficient reductions; the ordinary root-tensor and scalar-mate computation in the proof of lem-pur-tate-tensor-normalized-square-pair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension mate on shifted finite Tate tensors is represented by the ordinary root power map on tensor generators",
+   "results": "ModuleCat.ExtendScalars.map_tmul, ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj' and general algebra generators; no sheaf or derived Tate transition.",
+   "date": "2026-10-28",
+   "verdict": "No matching statement; the module-category tensor formula is only local algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "The exact-functor/single comparison and, in online Mathlib, naturality formulas for derived natural transformations. These are categorical transport, not the root-power formula or the integral quotient square.",
+   "date": "2026-10-28",
+   "verdict": "Use exact-functor/single comparisons in the assembly; no match for the two root calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity.*(tensor|transition)|tensor.*rootsOfUnity",
+   "results": "No Mathlib hits. Project search found finiteTateEtalePowerGenerator_locally_span, rootTower_finite_tensor, finite_tate_normalized_coherence and the parent TateTensorNormalizedSquare; none states the two-completed-presentation transition identity.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate; reuse local root lifting, generation and the existing quotient-tower definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTensorNormalizedSquarePair",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Adic-stage comparison of normalized finite reductions, via the fixed-pair tensor square",
+   "via": [
+    "lem-pur-tate-tensor-normalized-square-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TateTensorBalancedTransition",
+  "file": "lean/Sheaf/Paper/TateTensorBalancedTransition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.tateTensor_balanced_transition",
+  "statement": "theorem tateTensor_balanced_transition\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (d b a : ℕ) (hab : a ≤ b)\n    (r : CoefficientLineComparison\n      (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n      (ell ^ (b + 1)) (ell ^ (a + 1))\n      (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)\n    (f : (pbcRestrict (pbcAdicProjection T (datum.{u} ell) b)).obj\n        ((realization T ell b).obj (finiteSheaf T ell b d)) ⟶\n      (pbcRestrict (pbcAdicProjection T (datum.{u} ell) a)).obj\n        ((realization T ell a).obj (finiteSheaf T ell a d)))\n    (hf : FiniteRootTransition T ell d b a hab r f)\n    (cb : (realization T ell b).obj (finiteSheaf T ell b d) ≅ quotientLine T ell b d)\n    (ca : (realization T ell a).obj (finiteSheaf T ell a d) ≅ quotientLine T ell a d)\n    (hb : ProjectionBalanced T ell b d cb) (ha : ProjectionBalanced T ell a d ca) :\n    f ≫ (pbcRestrict (pbcAdicProjection T (datum.{u} ell) a)).map ca.hom =\n      (pbcRestrict (pbcAdicProjection T (datum.{u} ell) b)).map cb.hom ≫\n        (strictTower T ell d).map (homOfLE hab).op",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233922-L-4136776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233922-L-4136776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

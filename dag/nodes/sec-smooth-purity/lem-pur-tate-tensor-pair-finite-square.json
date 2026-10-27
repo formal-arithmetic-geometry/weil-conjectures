@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-tate-tensor-pair-finite-square",
+ "kind": "statement",
+ "title": "Finite transition square on the chosen single models",
+ "statement": "For T Noetherian, ell invertible, d and a<=b, a normalized finite coefficient comparison r and ProjectionBalanced ordinary isomorphisms cb,ca, the adjunct of the finite scalar comparison, after completed restriction and the restriction-composition comparison, commutes with the two finiteEvaluationModel isomorphisms and the transition of strictDerivedTower. No abstract AdicTower or normalizedAt hypotheses occur.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Adic-stage compatibility with finite coefficient reductions; the ordinary root-tensor and scalar-mate computation in the proof of lem-pur-tate-tensor-normalized-square-pair."
+ },
+ "stmt_deps": [
+  "def-pur-tate-tensor-pair-evaluation-model",
+  "def-pur-condensed-tate-integral-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Use finiteTateTensor_transition_model to express the finite adjunct in the single embedding by an ordinary map f. Apply tateTensor_balanced_transition to get its ordinary square. The localized strict-tower transition on a single is the single of the ordinary transition by exactSingle_transformation. Compose these three identities and cancel the exact evaluation/single isomorphisms.",
+   "uses": [
+    "lem-pur-tate-tensor-finite-transition",
+    "lem-pur-tate-tensor-balanced-transition",
+    "lem-pur-exact-single-transformation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-tate-tensor-finite-transition",
+  "lem-pur-tate-tensor-balanced-transition",
+  "lem-pur-exact-single-transformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Adic-stage compatibility with finite coefficient reductions; the ordinary root-tensor and scalar-mate computation in the proof of lem-pur-tate-tensor-normalized-square-pair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension mate on shifted finite Tate tensors is represented by the ordinary root power map on tensor generators",
+   "results": "ModuleCat.ExtendScalars.map_tmul, ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj' and general algebra generators; no sheaf or derived Tate transition.",
+   "date": "2026-10-28",
+   "verdict": "No matching statement; the module-category tensor formula is only local algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "The exact-functor/single comparison and, in online Mathlib, naturality formulas for derived natural transformations. These are categorical transport, not the root-power formula or the integral quotient square.",
+   "date": "2026-10-28",
+   "verdict": "Use exact-functor/single comparisons in the assembly; no match for the two root calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity.*(tensor|transition)|tensor.*rootsOfUnity",
+   "results": "No Mathlib hits. Project search found finiteTateEtalePowerGenerator_locally_span, rootTower_finite_tensor, finite_tate_normalized_coherence and the parent TateTensorNormalizedSquare; none states the two-completed-presentation transition identity.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate; reuse local root lifting, generation and the existing quotient-tower definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTensorNormalizedSquarePair",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Adic-stage comparison of normalized finite reductions, via the fixed-pair tensor square",
+   "via": [
+    "lem-pur-tate-tensor-normalized-square-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TateTensorPairFiniteSquare",
+  "file": "lean/Sheaf/Paper/TateTensorPairFiniteSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.finite_transition_square",
+  "statement": "theorem finite_transition_square\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (d b a : ℕ) (hab : a ≤ b)\n    (r : CoefficientLineComparison\n      (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n      (ell ^ (b + 1)) (ell ^ (a + 1))\n      (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)\n    (cb : (realization T ell b).obj (finiteSheaf T ell b d) ≅ quotientLine T ell b d)\n    (ca : (realization T ell a).obj (finiteSheaf T ell a d) ≅ quotientLine T ell a d)\n    (hb : ProjectionBalanced T ell b d cb) (ha : ProjectionBalanced T ell a d ca) :\n    (pbcDerivedRestrict (pbcAdicProjection T (datum.{u} ell) b)).map\n        ((pbcDerivedScalarAdjunction (pbcAdicQuotient T (datum.{u} ell) b a hab)).homEquiv\n          _ _ ((scalarComparison T ell b a hab).hom.app (finiteTwist T ell b d) ≫\n            (derivedRealization T ell a).map (proTwistMap d r))) ≫\n      (pbcDerivedRestrictComp (pbcAdicProjection T (datum.{u} ell) b)\n        (pbcAdicQuotient T (datum.{u} ell) b a hab)\n        (pbcAdicProjection T (datum.{u} ell) a)\n        (pbcAdicProjection_comp T (datum.{u} ell) b a hab)).hom.app _ ≫\n      (finiteEvaluationModel T ell hT d a ca).hom =\n    (finiteEvaluationModel T ell hT d b cb).hom ≫\n      (pbcTowerTransition T (pbcAdicCompletion T (datum.{u} ell)) b a hab).app\n        (strictDerivedTower T ell d)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233922-L-4136776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233922-L-4136776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

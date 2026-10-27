@@ -1,0 +1,98 @@
+{
+ "id": "lem-pur-exact-single-transformation",
+ "kind": "statement",
+ "title": "Localized exact transformations on single complexes",
+ "statement": "For exact additive functors F,G between abelian categories with derived categories, a natural transformation alpha, an integer n and object X, the localized cochain natural transformation at single_n(X), followed by the G exact/single comparison, equals the F exact/single comparison followed by single_n(alpha_X).",
+ "source": {
+  "document": "Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "place": "mapDerivedCategoryFactors and mapDerivedCategorySingleFunctor; Localization.liftNatTrans_app"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Evaluate liftNatTrans at the cochain single, unfold the canonical exact/single comparisons and cancel mapDerivedCategoryFactors for G. Combine Q maps. In the support degree the singleMapHomologicalComplex comparisons are the canonical singleObjXSelf maps, which cancel by naturality; in every other degree the target is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "place": "mapDerivedCategoryFactors and mapDerivedCategorySingleFunctor; Localization.liftNatTrans_app"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact natural transformation on derived categories evaluated at a single complex is the single of the original component",
+   "results": "mapDerivedCategorySingleFunctor, singleFunctors, mapDerivedCategoryFactorsh_hom_app, singleMapHomologicalComplex_hom_app_self. No statement of the localized natural transformation component in the installed version.",
+   "date": "2026-10-28",
+   "verdict": "Use exact/single comparisons and prove the component identity by localization and cochain components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans_app",
+   "results": "One matching theorem in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-28",
+   "verdict": "Use for the localized transformation component."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory_app_singleFunctor_obj|singleMapHomologicalComplex_hom_app_self",
+   "results": "One installed match: singleMapHomologicalComplex_hom_app_self in Mathlib/Algebra/Homology/Additive.lean.",
+   "date": "2026-10-28",
+   "verdict": "Use for the support-degree component; no installed derived natural transformation single formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTensorNormalizedSquarePair",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Adic-stage comparison of normalized finite reductions, via the fixed-pair tensor square",
+   "via": [
+    "lem-pur-tate-tensor-normalized-square-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactSingleTransformation",
+  "file": "lean/Sheaf/CategoryTheory/ExactSingleTransformation.lean",
+  "declaration": "SheafProject.exactSingle_transformation",
+  "statement": "theorem exactSingle_transformation\n    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    (F G : A ⥤ B) [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (α : F ⟶ G) (n : ℤ) (X : A) :\n    (Localization.liftNatTrans _root_.DerivedCategory.Q\n      (HomologicalComplex.quasiIso A (.up ℤ)) _ _\n      F.mapDerivedCategory G.mapDerivedCategory\n      (Functor.whiskerRight (NatTrans.mapHomologicalComplex α (.up ℤ))\n        _root_.DerivedCategory.Q)).app\n        ((_root_.DerivedCategory.singleFunctor A n).obj X) ≫\n      (G.mapDerivedCategorySingleFunctor n).hom.app X =\n    (F.mapDerivedCategorySingleFunctor n).hom.app X ≫\n      (_root_.DerivedCategory.singleFunctor B n).map (α.app X)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233922-L-4136776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233922-L-4136776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
