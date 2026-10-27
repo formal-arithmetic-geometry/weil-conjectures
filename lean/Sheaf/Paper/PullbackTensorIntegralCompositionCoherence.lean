@@ -6,9 +6,8 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
-import Sheaf.Paper.CompletedComparisonQuotientRealization
 import Sheaf.Paper.IntegralSystemReductionFullyFaithful
-import Sheaf.Paper.IntegralPullbackComposition
+import Sheaf.Paper.IntegralPullbackTensorCompositionReduced
 
 /-! Integral coefficient component of pullback/tensor composition coherence.
 
@@ -48,6 +47,11 @@ theorem pullbackTensorIntegralCompositionCoherence {X Y Z : Scheme.{u}}
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
     [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] :
     ∀ M N : sfIntegralConstructibleCategory l E Y,
-      canonicalIntegralPullbackTensor_composition l E f h M N := by sorry
+      canonicalIntegralPullbackTensor_composition l E f h M N := by
+  intro M N
+  change _ = _
+  have hfaithful := (integralSystemReduction_fullyFaithful l E Z).2
+  apply hfaithful.map_injective
+  exact integralPullbackTensorCompositionReduced l E f h M N
 
 end WeilConjectures
