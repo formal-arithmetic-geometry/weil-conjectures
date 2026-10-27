@@ -29,6 +29,35 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
   [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
 
+private theorem scalar_evaluation_transport
+    {C : Type u} [Category.{v} C] {D' : Type u} [Category.{v} D']
+    (T : C × C ⥤ C) (U : D' × D' ⥤ D') (F : C ⥤ D')
+    (d : Cᵒᵖ ⥤ C) (e : D'ᵒᵖ ⥤ D') (w : C) (z : D')
+    (ev : ∀ K, T.obj (K, d.obj (op K)) ⟶ w)
+    (ew : ∀ K, U.obj (K, e.obj (op K)) ⟶ z)
+    (t : T ⋙ F ≅ F.prod F ⋙ U)
+    (β : ∀ K, F.obj (d.obj (op K)) ≅ e.obj (op (F.obj K)))
+    (ω : F.obj w ≅ z)
+    (he : ∀ K,
+      U.map (Prod.mkHom (𝟙 (F.obj K)) ((β K).hom)) ≫ ew (F.obj K) =
+        t.inv.app (K, d.obj (op K)) ≫ F.map (ev K) ≫ ω.hom)
+    (K P : C) (h : P ⟶ d.obj (op K)) :
+    U.map (Prod.mkHom (𝟙 (F.obj K)) (F.map h ≫ (β K).hom)) ≫ ew (F.obj K) =
+      t.inv.app (K, P) ≫ F.map (T.map (Prod.mkHom (𝟙 K) h) ≫ ev K) ≫ ω.hom := by
+  calc
+    _ = U.map (Prod.mkHom (𝟙 (F.obj K)) (F.map h)) ≫
+        (U.map (Prod.mkHom (𝟙 (F.obj K)) ((β K).hom)) ≫ ew (F.obj K)) := by
+      rw [← U.map_comp_assoc]
+      congr 2
+      simp
+    _ = _ := by
+      rw [he]
+      have ht := t.inv.naturality (Prod.mkHom (𝟙 K) h)
+      simp only [Functor.comp_map, Functor.prod_map] at ht
+      rw [F.map_id] at ht
+      rw [reassoc_of% ht]
+      simp only [Functor.map_comp, Category.assoc]
+
 /-- Pasting lemma for the specified finite Hom scalar comparison.
 Source: coefficient-transport paragraph of blueprint thm-coef-qbar-verdier,
 retained thm-coef-qbar-verdier step 5.
