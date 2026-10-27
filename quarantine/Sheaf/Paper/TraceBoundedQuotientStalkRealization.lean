@@ -39,6 +39,11 @@ universe u a b c d
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
+-- Keep the sheaf-of-modules abelian structure on `integralTowerModules`: since
+-- `QcqsCompactSupportRealization` publicly imports `QcqsCompactSupportStrictReductionComparison`,
+-- `SemilinearSections.moduleAbelian` is visible here and its site bound leaves a free universe.
+attribute [local instance 5000] SheafOfModules.instAbelian
+
 /-- Upper good truncation of a strict tower, using induced maps on kernels.
 Source: Stacks 0118 (blueprint: lem-trf-bounded-quotient-stalk-realization). -/
 def trfUpperTower {A : Type a} [Category.{b} A] [Abelian A]
