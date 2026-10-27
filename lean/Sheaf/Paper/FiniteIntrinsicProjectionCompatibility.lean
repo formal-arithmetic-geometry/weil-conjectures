@@ -32,6 +32,10 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
 
 /-- The projection compatibility equation for a supplied finite tensor realization.
 
+STATEMENT-DISPUTED: the family `e` has no naturality or compatibility hypothesis across
+`SixFunctorSpace` morphisms, so twisting `e Y` by an automorphism changes the right side
+without changing the left-side comparison at `X`.
+
 (blueprint: new-sf-finite-intrinsic-projection-compatibility).
 
 Proof: transpose the proper and open projection factors through their actual adjunctions,
