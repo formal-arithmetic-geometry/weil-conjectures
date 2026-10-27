@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-finite-model-derived-change-bridge",
+ "kind": "statement",
+ "title": "Completed derived change bridge for finite constant models",
+ "statement": "For a scheme X, commutative rings B and C, a ring map q : B → C, and a cochain complex P of B-modules, the selected completed derived change along the constant coefficient map applied to the finite constant model of P is isomorphic to the derived constant-realization extension along the lifted ring map applied to the lifted constant realization of P. The constant functors preserve zero morphisms.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-complete-coefficient-datum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0G7E; uniqueness of the derived change-of-rings pair"
+ },
+ "proof": [
+  {
+   "text": "Identify the ordinary completed tensor functor with the sheafified tensor defining constant realization, including the coefficient-universe lift.",
+   "uses": [
+    "def-weil-pbc-complete-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply uniqueness of left derived functors to the selected completed derived change and the derived constant-realization extension, then evaluate the resulting natural isomorphism on the lifted constant model.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-sfb-constant-realization-derived-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "P1 stage-3 worker",
+  "document": "Stacks Project, sites-cohomology.tex",
+  "place": "Tags 06YY and 0G7E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived change of rings uniqueness left derived functor constant realization",
+   "results": "No exact finite-model theorem; generic left-derived uniqueness is available.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedUnique",
+   "results": "Generic uniqueness theorem found; no finite-model specialization.",
+   "date": "2026-10-28",
+   "verdict": "Used in proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "completedAdicDerivedChange constant realization derivedExtension",
+   "results": "No existing combined theorem.",
+   "date": "2026-10-28",
+   "verdict": "New interface required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelConstantScalarExtensionCore",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-model-derived-scalar-comparison-core",
+   "place": "Proof step 1 and the derived-change identification"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelConstantScalarExtensionDerivedChangeBridge",
+  "file": "lean/Sheaf/Paper/FiniteModelConstantScalarExtensionDerivedChangeBridge.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteModel_constantScalarExtension_derivedChangeBridge",
+  "statement": "theorem finiteModel_constantScalarExtension_derivedChangeBridge\n    (X : Scheme.{t}) {B C : Type t} [CommRing B] [CommRing C]\n    (q : B →+* C)\n    [(koszulConstantFunctor X B).PreservesZeroMorphisms]\n    [(koszulConstantFunctor X C).PreservesZeroMorphisms]\n    (P : CochainComplex (ModuleCat.{t} B) ℤ) :\n    Nonempty\n      ((completedAdicDerivedChange X (adicConstantMap X q)).obj\n          (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)) ≅\n        (ConstantScalarRealization.derivedExtension (ProEt.topology X)\n          (RingHom.ulift.{t + 1, t + 1} q)).obj\n          ((commutativeSiteDerivedConstantModuleFunctor (ProEt.topology X)\n            (ULift.{t + 1} B)).obj\n            (DerivedCategory.Q.obj\n              (((ModuleCat.uliftFunctor.{t + 1, t} B ⋙\n                ModuleCat.restrictScalars.{t + 1}\n                  (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom).mapHomologicalComplex\n                    (.up ℤ)).obj P))))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T210152-L-1666318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T210152-L-1666318",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

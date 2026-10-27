@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FinitePerfectQuotientModelData
+import Sheaf.Paper.FiniteModelConstantScalarExtensionDerivedChangeBridge
+import Sheaf.Paper.FiniteModelConstantScalarExtensionLiftComparison
 
 /-! The derived scalar comparison for the lifted constant model.
 
@@ -41,6 +43,8 @@ theorem finiteModel_constantScalarExtension_core
         DerivedCategory.Q.obj
           (finiteModelConstantComplex X C
             (((ModuleCat.extendScalars q).mapHomologicalComplex (.up ℤ)).obj P))) := by
-  sorry
+  obtain ⟨e₁⟩ := finiteModel_constantScalarExtension_derivedChangeBridge X q P
+  obtain ⟨e₂⟩ := finiteModel_constantScalarExtension_liftComparison X q P
+  exact ⟨e₁ ≪≫ e₂⟩
 
 end AlgebraicGeometry.Scheme
