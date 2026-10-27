@@ -9,7 +9,6 @@ public import Sheaf.AlgebraicGeometry.FiniteP1DiagonalKummerComponentFormula
 public import Sheaf.AlgebraicGeometry.FiniteP1KummerNaturality
 public import Sheaf.AlgebraicGeometry.FiniteP1UnitOnPullback
 public import Sheaf.AlgebraicGeometry.SfDiagonalKernelIntegrals
-public import Sheaf.AlgebraicGeometry.OrdinaryProperForgetComparison
 public import Sheaf.AlgebraicGeometry.SfP1SupportedExtMapData
 
 /-! # Explicit maps for projective-line integral transport
@@ -23,7 +22,6 @@ Source: blueprint latest, thm-amb-p1-adjunction.proof.md, coordinate comparisons
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option Elab.async false
 
 universe u
 
@@ -178,10 +176,6 @@ def coefficientComparison (hS : IsUnit (N : Γ(S, ⊤))) :
     (ordinaryFiniteShiftedLinePullback A N hA t (pullback.snd f f)
       (finiteP1_unitOnPullback N f hS)).symm
 
-section
-
-attribute [local irreducible] ordinaryFinitePushforward
-
 /-- Transport of the supported source, before applying any Ext representative.
 Source: blueprint thm-amb-p1-adjunction.proof.md, the supported diagonal morphism.
 (blueprint: def-sf-p1-integral-transport-data). -/
@@ -192,10 +186,11 @@ def diagonalLift :
     (ordinaryFinitePullback A (productMap f i hi)).obj
       ((ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj
         (ordinaryFiniteUnit A (ProjectiveLine S))) :=
-  (ordinaryProperForgetComparison A (TraceDiagonalDatum.diagonal f)).hom.app
-      (derivedTensorUnit (ModuleCat.{u + 1} A) X) ≫
+  (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A)
+      (TraceDiagonalDatum.diagonal f)).hom.app
+        (derivedTensorUnit (ModuleCat.{u + 1} A) X) ≫
     (ordinaryFinitePushforward A (TraceDiagonalDatum.diagonal f)).map
-      (constantComparison A i).inv ≫
+      ((constantUnit A X).inv ≫ (ordinaryFiniteUnitPullback A i.hom).inv) ≫
     (properExchange A (diagonalSquare f i hi)).inv.app
       (ordinaryFiniteUnit A (ProjectiveLine S))
 
@@ -206,10 +201,10 @@ def projectionComparison (a : Bool) :
       rightDerivedLowerShriek (ModuleCat.{u + 1} A) (projection f a) ≅
     ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a) ⋙
       ordinaryFinitePullback A i.hom :=
-  Functor.isoWhiskerLeft _ (ordinaryProperForgetComparison A (projection f a)) ≪≫
+  Functor.isoWhiskerLeft _
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A)
+        (projection f a)) ≪≫
     (properExchange A (projectionSquare f i hi a)).symm
-
-end
 
 /-- Pull an arbitrary supported Ext representative across the diagonal square. -/
 @[irreducible]
