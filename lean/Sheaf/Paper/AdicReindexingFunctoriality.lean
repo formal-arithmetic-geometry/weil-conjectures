@@ -6,6 +6,8 @@ Authors: SHEAF group B9
 module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
+import Sheaf.Paper.AdicReindexingIdentity
+import Sheaf.Paper.AdicReindexingComposition
 
 /-! # Identity and composition of normalized reindexing
 
@@ -92,7 +94,10 @@ theorem normalized_reindexing_functoriality
         (pullbackTensorCommonComposition l (PadicAlgCl l) h.hom g.hom M).hom ≫
       (C.comparison T U g).hom.app
         ((commonStageDerivedPullback l (PadicAlgCl l) h.hom).obj M) ≫
-      (derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.comparison U V h).hom.app M)) := by
-  sorry
+      (derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.comparison U V h).hom.app M))  := by
+  constructor
+  · exact normalized_reindexing_identity l D C h_moduleId_sections
+      h_integral_normalization h_sourceId_unit
+  · exact normalized_reindexing_composition l D C h_moduleComp_sections h_integral_normalization
 
 end WeilConjectures.AdicQbarRealization

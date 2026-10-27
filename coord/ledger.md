@@ -19939,3 +19939,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/C8/Sheaf.Paper.DiagonalTraceFiniteAdjunctionGeometric (stage 3; reviewer FIX; first push; landing 20261027T205852-L-1626047 (interface); batch 20261027T205736; modules 7; new nodes 5; change records: coord/changes/C8-diagonal-finite-operation.md)
 - 20:58 L: merged deliver/C9/Sheaf.Paper.DiagonalTraceFiniteAdjunctionSupported (stage 3; reviewer PASS; first push; landing 20261027T205854-L-1627011 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:58 L: merged deliver/C9/Sheaf.Paper.IntegralTensorReductionAugmentation (stage 3; reviewer PASS; first push; landing 20261027T205855-L-1627574 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:58 L: merged deliver/D2/Sheaf.Paper.AdicReindexingFunctoriality (stage 3; reviewer PASS; first push; landing 20261027T205857-L-1627883 (interface); batch 20261027T205736; modules 3; new nodes 2)
