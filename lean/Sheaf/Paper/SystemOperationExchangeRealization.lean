@@ -746,8 +746,9 @@ Source: Zheng 4.1, 4.10; Stacks 03DI
 Proof: apply the componentwise invertibility result to the natural transformation. -/
 theorem systemOpenScalarInv_isIso {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     IsIso (systemOpenScalarInv l E L ι j) := by
-  exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun K ↦
-    systemOpenScalarInv_app_isIso l E L ι j K)
+  refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ ?_
+  intro K
+  exact systemOpenScalarInv_app_isIso l E L ι j K
 
 /-- The forward open scalar comparison is the inverse of that specified mate.
 Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
