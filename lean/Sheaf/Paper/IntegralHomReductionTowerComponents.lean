@@ -6,8 +6,8 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
-import Sheaf.Paper.IntegralHomModelsExist
-import Sheaf.Paper.IntegralHomComparisonIsIso
+import Sheaf.Paper.IntegralHomReductionTowerTransition
+import Sheaf.Paper.IntegralHomReductionTowerAugmentation
 
 /-! # Component comparisons for the integral Hom reduction tower
 
@@ -76,6 +76,10 @@ theorem reductionTower_components
             (integralReductionTower l E Y D hl P').map (homOfLE n.le_succ).op) ∧
       ∀ n : ℕ, e.inv ≫ (integralReductionTowerCone l E Y D hl q' hq').π.app (op n) =
         H.map ((integralReductionTowerCone l E Y D hl q hq).π.app (op n)) ≫
-          (θ n).hom := by sorry
+          (θ n).hom := by
+  dsimp
+  obtain ⟨θ, hθ⟩ := reductionTower_components_transition l E Y D hl K P G P' G' q q' hq hq' e
+  refine ⟨θ, hθ, ?_⟩
+  exact reductionTower_components_augmentation l E Y D hl K P G P' G' q q' hq hq' e θ hθ
 
 end WeilConjectures.IntegralHom
