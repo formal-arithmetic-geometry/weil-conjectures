@@ -6,7 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
-public import Sheaf.CategoryTheory.ConstantRealizationReflectsIsomorphism
+import Sheaf.Paper.ConstantAdicQuotientRealizationHomologyLift
 
 /-! # Conservativity of a nonempty constant quotient realization -/
 
@@ -38,6 +38,11 @@ theorem constantAdicQuotientRealization_reflects_iso
     (h : Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅
       (constantAdicQuotientRealization (W.hom ≫ g) d n).obj F)) :
     Nonempty (E ≅ F) := by
-  sorry
+  obtain ⟨f, hf⟩ := constantAdicQuotientRealization_homology_lift
+    X Y g d n W _w E F h
+  have hi : IsIso f := (DerivedCategory.isIso_iff
+    (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸
+      (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))) f).2 hf
+  exact ⟨asIso f⟩
 
 end AlgebraicGeometry.Scheme

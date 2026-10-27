@@ -1,0 +1,90 @@
+{
+ "id": "lem-weil-pbc-constant-adic-quotient-realization-homology-lift",
+ "kind": "statement",
+ "title": "Homology-level lift from a constant adic quotient realization",
+ "statement": "Under the same hypotheses as the constant quotient realization reflection statement, a realized isomorphism admits an algebraic morphism whose maps on every cohomology object are isomorphisms.",
+ "stmt_deps": [
+  "lem-sfb-constant-realization-reflects-isomorphism",
+  "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 093J and 03Q3, the nonempty-chart stalk detection part"
+ },
+ "proof": [
+  {
+   "text": "Transport the realized isomorphism through the canonical quotient comparison and inverse-image constant-section comparison. Apply the exact geometric stalk at the supplied point; constant-section detection identifies the stalked cohomology maps with algebraic cohomology maps, all of which are invertible. Naturality through the localization gives one algebraic morphism with invertible maps on every cohomology object.",
+   "uses": [
+    "lem-sfb-constant-realization-reflects-isomorphism",
+    "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-realization-reflects-isomorphism",
+  "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 093J and 03Q3, the nonempty-chart stalk detection part"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant quotient realization homology lift nonempty chart stalk",
+   "results": "No existing declaration has this exact quotient and coefficient interface.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantAdicQuotientRealizationReflectsIso",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-adic-quotient-realization-reflects-iso",
+   "place": "The nonempty-chart stalk detection step"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantAdicQuotientRealizationHomologyLift",
+  "file": "lean/Sheaf/Paper/ConstantAdicQuotientRealizationHomologyLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantAdicQuotientRealization_homology_lift",
+  "statement": "theorem constantAdicQuotientRealization_homology_lift\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)\n    (W : Y.Etale) (_w : W.left)\n    (E F : DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n      (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))))\n    (h : Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅\n      (constantAdicQuotientRealization (W.hom ≫ g) d n).obj F)) :\n    ∃ f : E ⟶ F, ∀ i : ℤ,\n      IsIso ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))) i).map f)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234103-L-4187533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234103-L-4187533",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
