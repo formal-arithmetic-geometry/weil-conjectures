@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.SystemOperationExchangeRealization
 public import Sheaf.Paper.SystemScalarFiniteEvaluation
+import Sheaf.Paper.SystemProperScalarEvaluationCompatibility
 
 /-! # Evaluation of the proper scalar mate
 
@@ -16,10 +17,12 @@ Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A6 and 0941.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.FrobeniusExchange
 open AlgebraicGeometry.Scheme.FiniteCompactScalar
+open WeilConjectures.SemilinearSections
 
 /-- The finite scalar transpose of the specified direct-image restriction comparison.
 Source: Stacks 0D6E and 07A6 (blueprint: lem-sf-system-proper-scalar-evaluation). -/
@@ -42,6 +45,29 @@ def systemDirectFiniteEvaluation
         proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) :=
   letI := systemDirectEvaluation_isIso l E f n
   asIso (systemDirectEvaluation l E f n)
+
+private def evaluationOfMate
+    {X Y x y : Type u} [Category.{u} X] [Category.{u} Y]
+    [Category.{u} x] [Category.{u} y]
+    (E : X ⥤ x) (F : Y ⥤ y)
+    {L : X ⥤ Y} {P : Y ⥤ X} {l : x ⥤ y} {p : y ⥤ x}
+    (a : L ⊣ P) (b : l ⊣ p) (e : L ⋙ F ≅ E ⋙ l)
+    (v : P ⋙ E ≅ F ⋙ p)
+    (hv : v.hom = (mateEquiv a b e.inv).natTrans) :
+    SemilinearSections.AdjunctionEvaluation E F a b where
+  left := e
+  right := v
+  unit A := by
+    rw [hv]
+    have hh := congrArg (fun z ↦ z ≫ p.map (e.hom.app A))
+      (unit_mateEquiv a b e.inv A)
+    simp only [Functor.id_obj, Category.assoc] at hh
+    rw [← p.map_comp, Iso.inv_hom_id_app] at hh
+    erw [p.map_id, Category.comp_id] at hh
+    exact hh
+  counit B := by
+    rw [hv]
+    exact mateEquiv_counit a b e.inv B
 
 /-- Evaluation takes the system direct-image scalar mate to the finite scalar transpose.
 This concerns arbitrary unbounded systems; it asserts no invertibility of the scalar mate.
@@ -85,7 +111,36 @@ theorem systemDirectScalar_finiteEvaluation
       (systemScalarFiniteEvaluation l E L ι Y n).hom.app ((systemDirect l E f).obj N) ≫
         (pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) Y)).map
           ((systemDirectFiniteEvaluation l E f n).hom.app N) ≫
-        (finiteDirectScalar (integralScalarQuotientMap l E L ι n) f).app
-          ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by sorry
+    (finiteDirectScalar (integralScalarQuotientMap l E L ι n) f).app
+          ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
+  letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+  let adjE := systemAdjunction l E f
+  let adjL := systemAdjunction l L f
+  let levelE := (sfIntrinsicConstantModuleAdjunction f
+    (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategoryRightDerivedAdjunction
+  let levelL := (sfIntrinsicConstantModuleAdjunction f
+    (Padic.coefficientExtensionRing l L (n + 1))).mapDerivedCategoryRightDerivedAdjunction
+  let eE := (systemPullEvaluation l E f n).symm
+  let eL := (systemPullEvaluation l L f n).symm
+  let vE := systemDirectFiniteEvaluation l E f n
+  let vL := systemDirectFiniteEvaluation l L f n
+  let A := integralScalarQuotientMap l E L ι n
+  let a := (mateEquiv levelE levelL).symm (finiteDirectScalar A f)
+  let evE := evaluationOfMate
+    (coefficientSequenceDerivedEvaluation l E Y n)
+    (coefficientSequenceDerivedEvaluation l E X n)
+    adjE levelE eE vE (by rfl)
+  let evL := evaluationOfMate
+    (coefficientSequenceDerivedEvaluation l L Y n)
+    (coefficientSequenceDerivedEvaluation l L X n)
+    adjL levelL eL vL (by rfl)
+  have h := evaluation_mate adjE adjL levelE levelL evE evL
+    (systemScalarFiniteEvaluation l E L ι Y n)
+    (systemScalarFiniteEvaluation l E L ι X n)
+    (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι f).inv)
+    a (systemProperScalarEvaluation_compatibility l E L ι f n a) N
+  simpa only [evE, evL, evaluationOfMate, systemDirectScalar,
+    systemDirectFiniteEvaluation, a, A, vE, vL, Equiv.apply_symm_apply] using h
 
 end WeilConjectures.FrobeniusExchange

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-system-proper-scalar-evaluation-compatibility",
+ "kind": "statement",
+ "title": "The evaluated scalar pullback square is compatible",
+ "statement": "For the fixed finite scalar extension and proper morphism, the system scalar evaluation comparisons commute with the scalar pullback square; explicitly, the evaluation of the system scalar/pullback comparison equals the finite scalar mate square at every system object. This is the compatibility clause used by the mate-pasting argument.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+ },
+ "stmt_deps": [
+  "lem-sf-system-scalar-finite-evaluation",
+  "def-weil-system-operation-exchange-realization",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Expand the normalized scalar evaluation isomorphisms and the chosen scalar/pullback square. Naturality of the system pullback evaluations transports the square to the finite coefficient categories. The scalar mate definition and the unit/counit triangle identities then give the displayed component equality.",
+   "uses": [
+    "lem-sf-system-scalar-finite-evaluation",
+    "def-weil-system-operation-exchange-realization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-scalar-finite-evaluation",
+  "def-weil-system-operation-exchange-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Step 2: direct-image scalar evaluation",
+  "note": "J8: specialization and assembly of existing normalized constructions; no faithfulness of derived evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a square of functors commutes with composition and evaluation under normalized adjunction comparisons",
+   "results": "Eight hits include CategoryTheory.mateEquiv_square, mateEquiv_vcomp and mateEquiv_apply in Mathlib.CategoryTheory.Adjunction.Mates. These prove categorical pasting, not compatibility of the fixed ringed-system scalar and geometric models.",
+   "date": "2026-10-28",
+   "verdict": "generic mate tools only; no specialized normalized system evaluation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve hits include mateEquiv, unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp, mateEquiv_hcomp and iterated_mateEquiv_conjugateEquiv. Their signatures were read; no theorem for the project fixed scalar models.",
+   "date": "2026-10-28",
+   "verdict": "generic mate tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Ss]calar|[Ss]calar.*evaluation|mateEquiv_vcomp|mateEquiv_hcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Only generic categorical mate-pasting theorems in Mates.lean. Project searches find semilinearScalarOperations and scalar-model adjunctions, reused in SystemScalarFiniteEvaluation. No proper/open scalar evaluation square for the fixed models. Blueprint searches for scalar evaluation, proper scalar and open scalar find no matching system theorem: the finite compact scalar transport node concerns bounded-below etale-origin inputs.",
+   "date": "2026-10-28",
+   "verdict": "reuse generic constructions; specialize the fixed models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemProperScalarEvaluation",
+  "date": "2026-10-28",
+  "group": "A8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Compact-support and final paragraphs: The proper/open scalar word commutes with finite evaluation on arbitrary systems; Step 2: direct-image scalar evaluation",
+   "via": [
+    "lem-sf-compact-scalar-evaluation-square",
+    "lem-sf-compact-support-system-scalar-finite-invertible",
+    "lem-sf-compact-support-coefficient-exchange-invertible",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemProperScalarEvaluationCompatibility",
+  "file": "lean/Sheaf/Paper/SystemProperScalarEvaluationCompatibility.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.systemProperScalarEvaluation_compatibility",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.systemProperScalarEvaluation_compatibility"
+  ],
+  "statement": "theorem systemProperScalarEvaluation_compatibility\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (a : TwoSquare\n      (pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) Y))\n      (sfIntrinsicDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f)\n      (sfIntrinsicDerivedPullback (Padic.coefficientExtensionRing l L (n + 1)) f)\n      (pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) X))) :\n    letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)\n    ∀ A : coefficientSequenceDerived l E Y,\n      (coefficientSequenceDerivedEvaluation l L X n).map\n          ((integralComparisonSystemScalarPullback l E L ι f).inv.app A) ≫\n        (systemScalarFiniteEvaluation l E L ι X n).hom.app\n          ((integralComparisonDerivedSequencePullback l E f).obj A) ≫\n        (pbcDerivedExtend\n            (scalarRingMap (integralScalarQuotientMap l E L ι n) X)).map\n          ((systemPullEvaluation l E f n).inv.app A) =\n      (systemPullEvaluation l L f n).inv.app\n          ((integralComparisonDerivedSequenceScalar l E L ι Y).obj A) ≫\n        (sfIntrinsicDerivedPullback (Padic.coefficientExtensionRing l L (n + 1)) f).map\n          ((systemScalarFiniteEvaluation l E L ι Y n).hom.app A) ≫\n        a.app ((coefficientSequenceDerivedEvaluation l E Y n).obj A)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T205747-L-1611604",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T205747-L-1611604",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
