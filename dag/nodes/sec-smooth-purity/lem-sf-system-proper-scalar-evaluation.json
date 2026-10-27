@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-system-proper-scalar-evaluation",
+ "kind": "statement",
+ "title": "The proper system scalar mate evaluates to the finite scalar transpose",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l, an embedding iota:E to L, n>=0, schemes X and Y, and a morphism f:X to Y. For every arbitrary unbounded derived E-system N on X, evaluation of the specified direct-image scalar mate, followed by its geometric evaluation comparison and the direct-image of the normalized scalar evaluation on X, equals scalar evaluation on Y followed by finite scalar extension of the geometric evaluation comparison and the finite scalar transpose of the specified direct-image restriction comparison. The geometric evaluation is systemDirectEvaluation, made an isomorphism. The scalar evaluation is exactly systemScalarFiniteEvaluation. No boundedness, constructibility, Noetherian, cartesian-system or quotient-flatness hypothesis is imposed. The finite comparison is an actual scalar-adjunction mate; invertibility is not an extra hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+ },
+ "stmt_deps": [
+  "lem-sf-system-scalar-finite-evaluation",
+  "def-weil-system-operation-exchange-realization",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "on the vertical sequence site, evaluate the ordinary inverse-image unit and\ncounit against the identity-on-sections direct-image comparison. The scalar/pullback\ncomparison sends 1 tensor gamma(x) to gamma(1 tensor x). Use the universal cochain\ncounits to transport this equality to the fixed derived scalar models. The normalized\nscalar evaluation isomorphism is the transpose of the restriction/evaluation identity;\nthe two adjoint-uniqueness comparisons in its definition preserve that transpose.\nExpand systemDirectScalar as unit, inverse scalar/pullback comparison and counit.\nThe evaluated unit and counit equations, followed by evaluation_mate, give the finite\ngeometric scalar mate. Iterated mate interchange identifies its scalar transpose with\nthe normalized direct-image restriction comparison: on a K-injective target, resolve\nits scalar restriction and use the geometric triangle identity; the resulting map is\nthe inverse of direct image of the resolution, which specifies sfDerivedImageRestriction.\nThe finite scalar Hom bijection identifies the maps. Naturality carries the two scalar\nevaluation comparisons to the ends, giving the displayed equation. This is an equation\nof localized, normalized mate words; no faithfulness of derived evaluation or preservation\nof K-injectives by scalar restriction is used. The argument includes n=0, the zero\ncomplex, empty schemes and identity embeddings, without quotient-flatness hypotheses.",
+   "uses": [
+    "lem-sf-system-scalar-finite-evaluation",
+    "def-weil-system-operation-exchange-realization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-scalar-finite-evaluation",
+  "def-weil-system-operation-exchange-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Step 2: direct-image scalar evaluation",
+  "note": "J8: specialization and assembly of existing normalized constructions; no faithfulness of derived evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a square of functors commutes with composition and evaluation under normalized adjunction comparisons",
+   "results": "Eight hits include CategoryTheory.mateEquiv_square, mateEquiv_vcomp and mateEquiv_apply in Mathlib.CategoryTheory.Adjunction.Mates. These prove categorical pasting, not compatibility of the fixed ringed-system scalar and geometric models.",
+   "date": "2026-10-28",
+   "verdict": "generic mate tools only; no specialized normalized system evaluation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve hits include mateEquiv, unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp, mateEquiv_hcomp and iterated_mateEquiv_conjugateEquiv. Their signatures were read; no theorem for the project fixed scalar models.",
+   "date": "2026-10-28",
+   "verdict": "generic mate tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Ss]calar|[Ss]calar.*evaluation|mateEquiv_vcomp|mateEquiv_hcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Only generic categorical mate-pasting theorems in Mates.lean. Project searches find semilinearScalarOperations and scalar-model adjunctions, reused in SystemScalarFiniteEvaluation. No proper/open scalar evaluation square for the fixed models. Blueprint searches for scalar evaluation, proper scalar and open scalar find no matching system theorem: the finite compact scalar transport node concerns bounded-below etale-origin inputs.",
+   "date": "2026-10-28",
+   "verdict": "reuse generic constructions; specialize the fixed models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarEvaluationSquare",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Compact-support and final paragraphs: The proper/open scalar word commutes with finite evaluation on arbitrary systems; Step 2: direct-image scalar evaluation",
+   "via": [
+    "lem-sf-compact-scalar-evaluation-square",
+    "lem-sf-compact-support-system-scalar-finite-invertible",
+    "lem-sf-compact-support-coefficient-exchange-invertible",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemProperScalarEvaluation",
+  "file": "lean/Sheaf/Paper/SystemProperScalarEvaluation.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.systemDirectScalar_finiteEvaluation",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.finiteDirectScalar",
+   "WeilConjectures.FrobeniusExchange.systemDirectFiniteEvaluation",
+   "WeilConjectures.FrobeniusExchange.systemDirectScalar_finiteEvaluation"
+  ],
+  "statement": "theorem systemDirectScalar_finiteEvaluation\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (N : coefficientSequenceDerived l E X) :\n    letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)\n    (coefficientSequenceDerivedEvaluation l L Y n).map\n          ((systemDirectScalar l E L ι f).app N) ≫\n        (systemDirectFiniteEvaluation l L f n).hom.app\n          ((integralComparisonDerivedSequenceScalar l E L ι X).obj N) ≫\n        (proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l L (n + 1))).map\n          ((systemScalarFiniteEvaluation l E L ι X n).hom.app N) =\n      (systemScalarFiniteEvaluation l E L ι Y n).hom.app ((systemDirect l E f).obj N) ≫\n        (pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) Y)).map\n          ((systemDirectFiniteEvaluation l E f n).hom.app N) ≫\n        (finiteDirectScalar (integralScalarQuotientMap l E L ι n) f).app\n          ((coefficientSequenceDerivedEvaluation l E X n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T180654-L-3889265",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T180654-L-3889265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

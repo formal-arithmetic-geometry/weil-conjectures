@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-system-scalar-finite-evaluation",
+ "kind": "definition",
+ "title": "Normalized scalar evaluation for the fixed universal cochain system model",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l and an embedding iota:E to L. For each scheme W and n>=0, construct a natural isomorphism from integralComparisonDerivedSequenceScalar followed by finite L-evaluation to finite E-evaluation followed by pbcDerivedExtend along the recorded quotient sheaf map. It is the scalar-adjunction transpose of identity-on-sections restriction evaluation, transported to the fixed system model and fixed finite pbc model. The actual system adjunction is normalized by its ordinary tensor unit and universal cochain transpose. There are no boundedness, constructibility, completeness, or flatness hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-system-scalar-model",
+  "lem-coef-semilinear-scalar-operations"
+ ],
+ "proof": [
+  {
+   "text": "Consecutive quotient compatibility is the recorded integralScalarQuotientMap_transition transported through constant sheafification. The component uniqueness of systemMap identifies the generic coefficient-system map with integralComparisonSequenceScalarMap.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Apply the proved scalarPackageExists construction to the fixed universal cochain scalar model. Its model equality and the SystemScalarModel unit and transpose fields fix the normalized actual scalar adjunction.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Specialize semilinearScalarOperations to the coefficient sheaves and compatible quotient maps. Compose actual-to-generic leftAdjointUniq, generic scalar evaluation, and generic-to-fixed-finite leftAdjointUniq. These maps preserve the normalized transposes, so they give the stated canonical comparison.",
+   "uses": [
+    "lem-coef-semilinear-scalar-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-system-scalar-model",
+  "lem-coef-semilinear-scalar-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Step 1: construct the normalized scalar evaluation isomorphisms",
+  "note": "J8: specialization and assembly of existing normalized constructions; no faithfulness of derived evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a square of functors commutes with composition and evaluation under normalized adjunction comparisons",
+   "results": "Eight hits include CategoryTheory.mateEquiv_square, mateEquiv_vcomp and mateEquiv_apply in Mathlib.CategoryTheory.Adjunction.Mates. These prove categorical pasting, not compatibility of the fixed ringed-system scalar and geometric models.",
+   "date": "2026-10-28",
+   "verdict": "generic mate tools only; no specialized normalized system evaluation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve hits include mateEquiv, unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp, mateEquiv_hcomp and iterated_mateEquiv_conjugateEquiv. Their signatures were read; no theorem for the project fixed scalar models.",
+   "date": "2026-10-28",
+   "verdict": "generic mate tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Ss]calar|[Ss]calar.*evaluation|mateEquiv_vcomp|mateEquiv_hcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Only generic categorical mate-pasting theorems in Mates.lean. Project searches find semilinearScalarOperations and scalar-model adjunctions, reused in SystemScalarFiniteEvaluation. No proper/open scalar evaluation square for the fixed models. Blueprint searches for scalar evaluation, proper scalar and open scalar find no matching system theorem: the finite compact scalar transport node concerns bounded-below etale-origin inputs.",
+   "date": "2026-10-28",
+   "verdict": "reuse generic constructions; specialize the fixed models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarEvaluationSquare",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Compact-support and final paragraphs: The proper/open scalar word commutes with finite evaluation on arbitrary systems; Step 1: construct the normalized scalar evaluation isomorphisms",
+   "via": [
+    "lem-sf-compact-scalar-evaluation-square",
+    "lem-sf-compact-support-system-scalar-finite-invertible",
+    "lem-sf-compact-support-coefficient-exchange-invertible",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemScalarFiniteEvaluation",
+  "file": "lean/Sheaf/Paper/SystemScalarFiniteEvaluation.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.systemScalarFiniteEvaluation",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.scalarQuotient_compatible",
+   "WeilConjectures.FrobeniusExchange.scalarSystemMap_eq",
+   "WeilConjectures.FrobeniusExchange.finiteEvaluationSystemScalarModel_exists",
+   "WeilConjectures.FrobeniusExchange.finiteEvaluationSystemScalarAdjunction",
+   "WeilConjectures.FrobeniusExchange.systemScalarFiniteEvaluation"
+  ],
+  "statement": "def systemScalarFiniteEvaluation (n : ℕ) :\n    integralComparisonDerivedSequenceScalar l E L ι W ⋙\n        coefficientSequenceDerivedEvaluation l L W n ≅\n      coefficientSequenceDerivedEvaluation l E W n ⋙\n        pbcDerivedExtend (FiniteCompactScalar.scalarRingMap\n          (integralScalarQuotientMap l E L ι n) W)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T180654-L-3889265",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T180654-L-3889265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
