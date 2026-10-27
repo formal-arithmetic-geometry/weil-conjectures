@@ -1,0 +1,93 @@
+{
+ "id": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+ "kind": "lemma",
+ "title": "Completed tensor square for the normalized scalar transition",
+ "status": "split",
+ "statement": "Given a normalized PodReindexCoefficientTransition satisfying its pure-tensor, reduction, and limit clauses, the scalar/reindexing paths commute with the specified completed tensor comparison on every constructible pair.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-coefficient-transition",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-scalar-completion-tensor-comparisons",
+  "lem-pod-reindexing-tensor-coefficient-transition-core"
+ ],
+ "proof": [
+  {
+   "text": "On simultaneous flat quotient resolutions both routes send every homogeneous pure tensor to the same scalar tensor by balanced associativity. The formula commutes with quotient transitions and the signed total differential. Applying the full Roos realization and the normalized tensor comparisons gives the displayed derived equality.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pod-reindexing-tensor-coefficient-transition-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pod-reindexing-tensor-coefficient-transition-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; completed tensor clause"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransition",
+  "date": "2026-10-28",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition",
+   "place": "completed tensor clause"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionTensor.lean",
+  "declaration": "WeilConjectures.podReindexingTensorCoefficientTransition_tensor",
+  "declarations": [
+   "WeilConjectures.podReindexingTensorCoefficientTransition_tensor"
+  ],
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-28",
+  "statement": "theorem podReindexingTensorCoefficientTransition_tensor\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hT : PodCompletedTensorReindex.Laws l E g D T)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (D' : PodCompletionReindex l L g) (hD' : PodCompletionReindex.Laws l L g D')\n    (T' : PodCompletedTensorReindex l L g D')\n    (hT' : PodCompletedTensorReindex.Laws l L g D' T')\n    (S : PodReindexCoefficientTransition l E L ι g D D')\n    (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S) :\n    ∀ M N : sfIntegralConstructibleCategory l E Y,\n      (integralOrdinaryDerivedScalar l E L ι X).map (T.tensor M N).hom ≫\n        (scalarTensorOrdinary l E L ι X).hom.app\n          ((podOrdinaryReindex l E g).obj M.obj, (podOrdinaryReindex l E g).obj N.obj) ≫\n        (integralCompletedTensor l L X).map\n          (Prod.mkHom ((S.derived l E L ι g D D').hom.app M.obj)\n            ((S.derived l E L ι g D D').hom.app N.obj)) =\n      (S.derived l E L ι g D D').hom.app\n          ((integralCompletedTensor l E Y).obj (M.obj, N.obj)) ≫\n        (podOrdinaryReindex l L g).map\n          ((scalarTensorOrdinary l E L ι Y).hom.app (M.obj, N.obj)) ≫\n        (T'.tensor ⟨_, S.sourceConstructible M⟩ ⟨_, S.sourceConstructible N⟩).hom"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T234134-L-10909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T234134-L-10909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded scalar compatibility proof"
+ }
+}

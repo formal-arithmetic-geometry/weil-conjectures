@@ -6,6 +6,8 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.Paper.PodCompletionReindexCoefficientTransition
+import Sheaf.Paper.PodReindexingTensorCoefficientTransitionCore
+import Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor
 
 /-! # Scalar compatibility of fixed normalized tensor reindexing
 
@@ -73,6 +75,12 @@ theorem podReindexingTensorCoefficientTransition
     (T' : PodCompletedTensorReindex l L g D')
     (hT' : PodCompletedTensorReindex.Laws l L g D' T') :
     ∃ S : PodReindexCoefficientTransition l E L ι g D D',
-      S.Laws l E L ι g D D' T T' := by sorry
+      S.Laws l E L ι g D D' T T' := by
+  obtain ⟨S, hS⟩ := podReindexingTensorCoefficientTransition_core l E g D hD T hT L ι D' hD' T' hT'
+  refine ⟨S, ?_⟩
+  rcases hS with ⟨hpure, hred, hlim⟩
+  have hten := podReindexingTensorCoefficientTransition_tensor l E g D hD T hT L ι D' hD' T' hT' S
+    ⟨hpure, hred, hlim⟩
+  exact ⟨hpure, hred, hlim, hten⟩
 
 end WeilConjectures
