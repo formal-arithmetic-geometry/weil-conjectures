@@ -16,7 +16,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 public import Sheaf.Paper.SfIntegralReductionTower
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-public import Sheaf.Paper.QcqsCompactSupportRealization
+public import Sheaf.Paper.CompactSupportFiniteAction
 public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import Sheaf.Paper.IntegralPullbackComparisonRealization
 public import Sheaf.Paper.SfIntegralDirectImageConstructible
